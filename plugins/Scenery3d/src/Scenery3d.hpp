@@ -78,14 +78,17 @@ private:
 
     void drawCubeTestScene(StelCore* core);
     void drawObjModel(StelCore* core);
+	 void generateShadowMap(StelCore* core);
     void generateCubeMap(StelCore* core);
-    void generateCubeMap_drawScene(StelPainter& painter);
+	 void generateCubeMap_drawScene(StelPainter& painter, float lightBrightness);
+	 void generateCubeMap_drawSceneWithShadows(StelPainter& painter, float lightBrightness);
     void drawFromCubeMap(StelCore* core);
 
 	 float minObserverHeight ();
 
     StelCore* core;
     int cubemapSize;
+	static const int SHADOWMAP_SIZE;
 
     Mat4f projectionMatrix;
     Vec3d absolutePosition;
@@ -94,8 +97,12 @@ private:
     float movement_z;
 
     OBJ* objModel;
-    OBJ* groundModel;
-    QGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
+	 OBJ* groundModel;
+	 GLuint shadowMapTexture;
+	 Mat4f lightViewMatrix;
+	 Mat4f lightProjectionMatrix;
+	 QGLFramebufferObject* shadowMapFbo;
+	 QGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
     StelVertexArray cubePlane, cubePlaneBack,
                     cubePlaneLeft, cubePlaneRight,
                     cubePlaneTop, cubePlaneBottom;

@@ -39,9 +39,12 @@
 #include <stdexcept>
 #include <cmath>
 
+#define SHADOW_DEBUG 0
+
 float Scenery3d::EYE_LEVEL = 1.0;
 //const float Scenery3d::MOVE_SPEED = 4.0;
 const float Scenery3d::MAX_SLOPE = 1.1;
+const int Scenery3d::SHADOWMAP_SIZE = 1024;
 
 Scenery3d::Scenery3d(int cbmSize)
     :core(NULL),
@@ -54,9 +57,11 @@ Scenery3d::Scenery3d(int cbmSize)
     groundModel = new OBJ();
     heightmap = NULL;
     zRotateMatrix = Mat4d::identity();
+	 shadowMapTexture = 0;
     for (int i=0; i<6; i++) {
         cubeMap[i] = NULL;
     }
+	 shadowMapFbo = NULL;
     int sub = 20;
     double d_sub_v = 2.0 / sub;
     double d_sub_tex = 1.0 / sub;
@@ -109,6 +114,12 @@ Scenery3d::~Scenery3d()
     }
     delete objModel;
     delete groundModel;
+	 if (shadowMapTexture != 0)
+	 {
+		 glDeleteTextures(1, &shadowMapTexture);
+		 shadowMapTexture = 0;
+		 delete shadowMapFbo;
+	 }
     for (int i=0; i<6; i++) {
         if (cubeMap[i] != NULL) {
             delete cubeMap[i];
@@ -137,28 +148,30 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
 
 void Scenery3d::loadModel()
 {
-    QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
-    qDebug() << "Trying to load OBJ model: " << modelFile;
-    objModel->load(modelFile.toAscii());
-    objModelArrays = objModel->getStelArrays();
+	QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
+	qDebug() << "Trying to load OBJ model: " << modelFile;
+	objModel->load(modelFile.toAscii());
+	objModelArrays = objModel->getStelArrays();
 
-    modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelGroundFile);
-    qDebug() << "Trying to load ground OBJ model: " << modelFile;
-    groundModel->load(modelFile.toAscii());
-    heightmap = new Heightmap(*groundModel);
+	modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelGroundFile);
+	qDebug() << "Trying to load ground OBJ model: " << modelFile;
+	groundModel->load(modelFile.toAscii());
 
-    // Rotate vertices around z axis
-    for (unsigned int i=0; i<objModelArrays.size(); i++)
-    {
-            OBJ::StelModel& stelModel = objModelArrays[i];
-            for (int v=0; v<stelModel.triangleCount*3; v++)
-            {
-                    zRotateMatrix.transfo(stelModel.vertices[v]);
-            }
-    }
-    groundModel->transform(zRotateMatrix);
 
-    absolutePosition[2] = minObserverHeight();
+	// Rotate vertices around z axis
+	for (unsigned int i=0; i<objModelArrays.size(); i++)
+	{
+		OBJ::StelModel& stelModel = objModelArrays[i];
+		for (int v=0; v<stelModel.triangleCount*3; v++)
+		{
+			zRotateMatrix.transfo(stelModel.vertices[v]);
+		}
+	}
+	groundModel->transform(zRotateMatrix);
+
+	heightmap = new Heightmap(*groundModel);
+
+	absolutePosition[2] = minObserverHeight();
 }
 
 void Scenery3d::handleKeys(QKeyEvent* e)
@@ -255,159 +268,351 @@ float Scenery3d::minObserverHeight()
 	}
 }
 
-void Scenery3d::generateCubeMap_drawScene(StelPainter& painter)
+void Scenery3d::generateCubeMap_drawScene(StelPainter& painter, float lightBrightness)
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    for (unsigned int i=0; i<objModelArrays.size(); i++) {
-        OBJ::StelModel& stelModel = objModelArrays[i];
-        if (stelModel.texture.data()) {
-            stelModel.texture.data()->bind();
-        } else {
-            glBindTexture(GL_TEXTURE_2D, 0);
-        }
-        glColor3fv(stelModel.color.v);
-        painter.setArrays(stelModel.vertices, stelModel.texcoords, __null, stelModel.normals);
-        painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);
-    }
+	const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
+	const GLfloat LightDiffuse[] = {lightBrightness, lightBrightness, lightBrightness, 1.0f};
+	glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
+	 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	 for (unsigned int i=0; i<objModelArrays.size(); i++) {
+		  OBJ::StelModel& stelModel = objModelArrays[i];
+		  if (stelModel.texture.data()) {
+				stelModel.texture.data()->bind();
+		  } else {
+				glBindTexture(GL_TEXTURE_2D, 0);
+		  }
+		  glColor3fv(stelModel.color.v);
+		  painter.setArrays(stelModel.vertices, stelModel.texcoords, __null, stelModel.normals);
+		  painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);
+	 }
+}
+
+void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float lightBrightness)
+{
+	const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
+	const GLfloat LightDiffuse[] = {lightBrightness, lightBrightness, lightBrightness, 1.0f};
+	const GLfloat LightAmbientShadow[] = {0.2f, 0.2f, 0.2f, 1.0f}; //
+	const GLfloat LightDiffuseShadow[] = {0.2f, 0.2f, 0.2f, 1.0f}; //
+
+	 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	 glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbientShadow); //
+	 glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuseShadow); //
+	 for (unsigned int i=0; i<objModelArrays.size(); i++) {
+		  OBJ::StelModel& stelModel = objModelArrays[i];
+		  if (stelModel.texture.data()) {
+				stelModel.texture.data()->bind();
+		  } else {
+				glBindTexture(GL_TEXTURE_2D, 0);
+		  }
+		  glColor3fv(stelModel.color.v);
+		  painter.setArrays(stelModel.vertices, stelModel.texcoords, __null, stelModel.normals);
+		  painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);
+	 }
+
+	 glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient);
+	 glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
+	 //Calculate texture matrix for projection
+	 //This matrix takes us from eye space to the light's clip space
+	 //It is postmultiplied by the inverse of the current view matrix when specifying texgen
+	 static Mat4f biasMatrix(0.5f, 0.0f, 0.0f, 0.0f,
+								 0.0f, 0.5f, 0.0f, 0.0f,
+								 0.0f, 0.0f, 0.5f, 0.0f,
+								 0.5f, 0.5f, 0.5f, 1.0f);	//bias from [-1, 1] to [0, 1]
+	 Mat4f textureMatrix = biasMatrix * lightProjectionMatrix * lightViewMatrix;
+
+	 Vec4f matrixRow[4];
+	 for (int i = 0; i < 4; i++)
+	 {
+		matrixRow[i].set(textureMatrix[i+0], textureMatrix[i+4], textureMatrix[i+8], textureMatrix[i+12]);
+	 }
+
+	 //Set up texture coordinate generation.
+	 glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+	 glTexGenfv(GL_S, GL_EYE_PLANE, matrixRow[0]);
+	 glEnable(GL_TEXTURE_GEN_S);
+
+	 glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+	 glTexGenfv(GL_T, GL_EYE_PLANE, matrixRow[1]);
+	 glEnable(GL_TEXTURE_GEN_T);
+
+	 glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+	 glTexGenfv(GL_R, GL_EYE_PLANE, matrixRow[2]);
+	 glEnable(GL_TEXTURE_GEN_R);
+
+	 glTexGeni(GL_Q, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+	 glTexGenfv(GL_Q, GL_EYE_PLANE, matrixRow[3]);
+	 glEnable(GL_TEXTURE_GEN_Q);
+
+	 //Bind & enable shadow map texture
+	 glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
+
+	 //Enable shadow comparison
+	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
+
+	 //Shadow comparison should be true (ie not in shadow) if r<=texture
+	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+
+	 //Shadow comparison should generate an INTENSITY result
+	 glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_INTENSITY);
+
+	 //Set alpha test to discard false comparisons
+	 glAlphaFunc(GL_GEQUAL, 0.99f);
+	 glEnable(GL_ALPHA_TEST);
+	 for (unsigned int i=0; i<objModelArrays.size(); i++) {
+		  OBJ::StelModel& stelModel = objModelArrays[i];
+		  if (stelModel.texture.data()) {
+				stelModel.texture.data()->bind();
+		  } else {
+				glBindTexture(GL_TEXTURE_2D, 0);
+		  }
+		  glColor3fv(stelModel.color.v);
+		  painter.setArrays(stelModel.vertices, stelModel.texcoords, __null, stelModel.normals);
+		  painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);
+	 }
+
+	 // reset shadowmap texture parameters
+	 glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
+	 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_NONE);
+	 glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_LUMINANCE);
+
+	 glDisable(GL_TEXTURE_GEN_S);
+	 glDisable(GL_TEXTURE_GEN_T);
+	 glDisable(GL_TEXTURE_GEN_R);
+	 glDisable(GL_TEXTURE_GEN_Q);
+
+	 glDisable(GL_ALPHA_TEST);
+}
+
+void Scenery3d::generateShadowMap(StelCore* core)
+{
+	if (objModelArrays.empty()) {
+		return;
+	}
+
+	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, core->getCurrentProjectionType());
+	StelPainter painter(prj);
+
+	if (shadowMapTexture == 0) {
+		shadowMapFbo = new QGLFramebufferObject(SHADOWMAP_SIZE, SHADOWMAP_SIZE, QGLFramebufferObject::Depth, GL_TEXTURE_2D);
+		//Create the shadow map texture
+		glGenTextures(1, &shadowMapTexture);
+		glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
+		glTexImage2D(	GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOWMAP_SIZE, SHADOWMAP_SIZE, 0,
+						GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+	}
+
+	glEnable(GL_TEXTURE_2D);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+	glDepthMask(GL_TRUE);
+
+	glEnable(GL_LIGHTING); //
+	glEnable(GL_LIGHT0); //
+
+	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	Vec3d sunPosition = ssystem->getSun()->getAltAzPos(core->getNavigator());
+	//zRotateMatrix.transfo(sunPosition);
+	sunPosition.normalize();
+
+	// We define the brigthness zero when the sun is 8 degrees below the horizon.
+	float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+8.*M_PI/180.));
+	float lightBrightness;
+	if(sinSunAngleRad < -0.1/1.5 )
+		lightBrightness = 0.01;
+	else
+		lightBrightness = (0.01 + 1.5*(sinSunAngleRad+0.1/1.5));
+
+	const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f}; //
+	const GLfloat LightDiffuse[] = {lightBrightness, lightBrightness, lightBrightness, 1.0f}; //
+	const GLfloat LightPosition[] = {-sunPosition.v[0], -sunPosition.v[1], sunPosition.v[2], 0.0f}; // signs determined by experiment
+
+	glPushAttrib(GL_VIEWPORT_BIT);
+	glViewport(0, 0, SHADOWMAP_SIZE, SHADOWMAP_SIZE);
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	//glMultMatrixd(projMatd);
+	const GLdouble orthoLeft = -50;
+	const GLdouble orthoRight = 50;
+	const GLdouble orthoBottom = -50;
+	const GLdouble orthoTop = 50;
+	glOrtho(orthoLeft, orthoRight, orthoBottom, orthoTop, -100, 100);
+	glGetFloatv(GL_PROJECTION_MATRIX, lightProjectionMatrix);
+
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+	glRotated(90.0f, -1.0f, 0.0f, 0.0f);
+
+	glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient); //
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse); //
+
+	//front
+	glPushMatrix();
+	glLoadIdentity();
+	gluLookAt (sunPosition[0], sunPosition[1], sunPosition[2], 0, 0, 0, 0, 0, 1);
+	/* eyeX,eyeY,eyeZ,centerX,centerY,centerZ,upX,upY,upZ)*/
+	glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix);
+
+	glLightfv(GL_LIGHT0, GL_POSITION, LightPosition); //
+	shadowMapFbo->bind();
+	generateCubeMap_drawScene(painter, lightBrightness);
+	glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
+	glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, SHADOWMAP_SIZE, SHADOWMAP_SIZE);
+	shadowMapFbo->release();
+	glPopMatrix();
+
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glPopAttrib();
+
+	glDisable(GL_LIGHT0); //
+	glDisable(GL_LIGHTING); //
+	glDepthMask(GL_FALSE);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_TEXTURE_2D);
 }
 
 void Scenery3d::generateCubeMap(StelCore* core)
 {
-    if (objModelArrays.empty()) {
-        return;
-    }
+	if (objModelArrays.empty()) {
+		return;
+	}
 
-    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, core->getCurrentProjectionType());
-    StelPainter painter(prj);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, core->getCurrentProjectionType());
+	StelPainter painter(prj);
 
-    for (int i=0; i<6; i++) {
-        if (cubeMap[i] == NULL) {
-            cubeMap[i] = new QGLFramebufferObject(cubemapSize, cubemapSize, QGLFramebufferObject::Depth, GL_TEXTURE_2D);
-            glBindTexture(GL_TEXTURE_2D, cubeMap[i]->texture());
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        }
-    }
+	for (int i=0; i<6; i++) {
+		if (cubeMap[i] == NULL) {
+			cubeMap[i] = new QGLFramebufferObject(cubemapSize, cubemapSize, QGLFramebufferObject::Depth, GL_TEXTURE_2D);
+			glBindTexture(GL_TEXTURE_2D, cubeMap[i]->texture());
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		}
+	}
 
-    glEnable(GL_TEXTURE_2D);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
-    glDepthMask(GL_TRUE);
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
+	glEnable(GL_TEXTURE_2D);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+	glDepthMask(GL_TRUE);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 
-    SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-    Vec3d sunPosition = ssystem->getSun()->getAltAzPos(core->getNavigator());
-    zRotateMatrix.transfo(sunPosition);
-    sunPosition.normalize();
+	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	Vec3d sunPosition = ssystem->getSun()->getAltAzPos(core->getNavigator());
+	zRotateMatrix.transfo(sunPosition);
+	sunPosition.normalize();
 
-    // We define the brigthness zero when the sun is 8 degrees below the horizon.
-    float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+8.*M_PI/180.));
-    float lightBrightness;
-    if(sinSunAngleRad < -0.1/1.5 )
-            lightBrightness = 0.01;
-    else
-            lightBrightness = (0.01 + 1.5*(sinSunAngleRad+0.1/1.5));
-    const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
-    const GLfloat LightDiffuse[] = {lightBrightness, lightBrightness, lightBrightness, 1.0f};
-    const GLfloat LightPosition[] = {-sunPosition.v[0], -sunPosition.v[1], sunPosition.v[2], 0.0f}; // signs determined by experiment
+	// We define the brigthness zero when the sun is 8 degrees below the horizon.
+	float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+8.*M_PI/180.));
+	float lightBrightness;
+	if(sinSunAngleRad < -0.1/1.5 )
+		lightBrightness = 0.01;
+	else
+		lightBrightness = (0.01 + 1.5*(sinSunAngleRad+0.1/1.5));
 
-    float fov = 90.0f;
-    float aspect = 1.0f;
-    float zNear = 1.0f;
-    float zFar = 10000.0f;
-    float f = 2.0 / tan(fov * M_PI / 360.0);
-    Mat4d projMatd(f / aspect, 0, 0, 0,
-                   0, f, 0, 0,
-                   0, 0, (zFar + zNear) / (zNear - zFar), 2.0 * zFar * zNear / (zNear - zFar),
-                   0, 0, -1, 0);
+	const GLfloat LightPosition[] = {-sunPosition.v[0], -sunPosition.v[1], sunPosition.v[2], 0.0f}; // signs determined by experiment
 
+	float fov = 90.0f;
+	float aspect = 1.0f;
+	float zNear = 1.0f;
+	float zFar = 10000.0f;
+	float f = 2.0 / tan(fov * M_PI / 360.0);
+	Mat4d projMatd(f / aspect, 0, 0, 0,
+						0, f, 0, 0,
+						0, 0, (zFar + zNear) / (zNear - zFar), 2.0 * zFar * zNear / (zNear - zFar),
+						0, 0, -1, 0);
 
-    glPushAttrib(GL_VIEWPORT_BIT);
-    glViewport(0, 0, cubemapSize, cubemapSize);
-    glMatrixMode(GL_PROJECTION);
-    glPushMatrix();
-    glLoadIdentity();
-    glMultMatrixd(projMatd);
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glLoadIdentity();
-    glRotated(90.0f, -1.0f, 0.0f, 0.0f);
+	glPushAttrib(GL_VIEWPORT_BIT);
+	glViewport(0, 0, cubemapSize, cubemapSize);
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glMultMatrixd(projMatd);
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+	glRotated(90.0f, -1.0f, 0.0f, 0.0f);
 
-    glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
+	//front
+	glPushMatrix();
+	glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+	cubeMap[0]->bind();
+	glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
+	generateCubeMap_drawScene(painter, lightBrightness);
+	cubeMap[0]->release();
+	glPopMatrix();
 
-    //front
-    glPushMatrix();
-    glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
-    cubeMap[0]->bind();
-    glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
-    generateCubeMap_drawScene(painter);
-    cubeMap[0]->release();
-    glPopMatrix();
+	//right
+	glPushMatrix();
+	glRotated(90.0f, 0.0f, 0.0f, 1.0f);
+	glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+	cubeMap[1]->bind();
+	glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
+	generateCubeMap_drawScene(painter, lightBrightness);
+	cubeMap[1]->release();
+	glPopMatrix();
 
-    //right
-    glPushMatrix();
-    glRotated(90.0f, 0.0f, 0.0f, 1.0f);
-    glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
-    cubeMap[1]->bind();
-    glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
-    generateCubeMap_drawScene(painter);
-    cubeMap[1]->release();
-    glPopMatrix();
+	//left
+	glPushMatrix();
+	glRotated(90.0f, 0.0f, 0.0f, -1.0f);
+	glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+	cubeMap[2]->bind();
+	glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
+	generateCubeMap_drawScene(painter, lightBrightness);
+	cubeMap[2]->release();
+	glPopMatrix();
 
-    //left
-    glPushMatrix();
-    glRotated(90.0f, 0.0f, 0.0f, -1.0f);
-    glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
-    cubeMap[2]->bind();
-    glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
-    generateCubeMap_drawScene(painter);
-    cubeMap[2]->release();
-    glPopMatrix();
+	//back
+	glPushMatrix();
+	glRotated(180.0f, 0.0f, 0.0f, 1.0f);
+	glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+	cubeMap[3]->bind();
+	glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
+	generateCubeMap_drawScene(painter, lightBrightness);
+	cubeMap[3]->release();
+	glPopMatrix();
 
-    //back
-    glPushMatrix();
-    glRotated(180.0f, 0.0f, 0.0f, 1.0f);
-    glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
-    cubeMap[3]->bind();
-    glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
-    generateCubeMap_drawScene(painter);
-    cubeMap[3]->release();
-    glPopMatrix();
+	//top
+	glPushMatrix();
+	glRotated(90.0f, 1.0f, 0.0f, 0.0f);
+	glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+	cubeMap[4]->bind();
+	glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
+	generateCubeMap_drawScene(painter, lightBrightness);
+	cubeMap[4]->release();
+	glPopMatrix();
 
-    //top
-    glPushMatrix();
-    glRotated(90.0f, 1.0f, 0.0f, 0.0f);
-    glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
-    cubeMap[4]->bind();
-    glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
-    generateCubeMap_drawScene(painter);
-    cubeMap[4]->release();
-    glPopMatrix();
+	//bottom
+	glPushMatrix();
+	glRotated(90.0f, -1.0f, 0.0f, 0.0f);
+	glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+	cubeMap[5]->bind();
+	glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
+	generateCubeMap_drawScene(painter, lightBrightness);
+	cubeMap[5]->release();
+	glPopMatrix();
 
-    //bottom
-    glPushMatrix();
-    glRotated(90.0f, -1.0f, 0.0f, 0.0f);
-    glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
-    cubeMap[5]->bind();
-    glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
-    generateCubeMap_drawScene(painter);
-    cubeMap[5]->release();
-    glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glPopAttrib();
 
-    glMatrixMode(GL_MODELVIEW);
-    glPopMatrix();
-    glMatrixMode(GL_PROJECTION);
-    glPopMatrix();
-    glPopAttrib();
-
-    glDisable(GL_LIGHT0);
-    glDisable(GL_LIGHTING);
-    glDepthMask(GL_FALSE);
-    glDisable(GL_DEPTH_TEST);
-    glDisable(GL_TEXTURE_2D);
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHTING);
+	glDepthMask(GL_FALSE);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_TEXTURE_2D);
 }
 
 void Scenery3d::drawFromCubeMap(StelCore* core)
@@ -430,7 +635,11 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
     glClear(GL_DEPTH_BUFFER_BIT);
 
     //front
-    glBindTexture(GL_TEXTURE_2D, cubeMap[0]->texture());
+#if SHADOW_DEBUG
+	glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
+#else
+	 glBindTexture(GL_TEXTURE_2D, cubeMap[0]->texture());
+#endif
     painter.drawSphericalTriangles(cubePlane, true, __null, false);
 
     //right
@@ -569,24 +778,18 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
 	
 void Scenery3d::draw(StelCore* core, bool useCubeMap)
 {
+	(void)useCubeMap;
+
     this->core = core;
 
-    /*
-    if (useCubeMap) // GZ: this should be decided by its necessity. User should not bother...
-    {
-        generateCubeMap(core);
-        drawFromCubeMap(core);
-    } else {
-        drawObjModel(core);
-    }
-    */
     if (core->getCurrentProjectionType() == StelCore::ProjectionPerspective)
     {
         drawObjModel(core);
     }
     else
-    {
-        generateCubeMap(core);
-        drawFromCubeMap(core);
+    {   
+		generateShadowMap(core);
+		generateCubeMap(core);
+		drawFromCubeMap(core);
     }
 }

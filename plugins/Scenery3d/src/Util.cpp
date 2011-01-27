@@ -26,7 +26,7 @@ void trim_right(string& source)
 
 vector<string> splitStr(const string& line, char delim)
 {
-    int cutAt;
+	 size_t cutAt;
     string str(line);
     vector<string> results;
     while ((cutAt = str.find_first_of(delim)) != str.npos)
