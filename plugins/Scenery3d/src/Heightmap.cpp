@@ -7,8 +7,6 @@
 #define INF (std::numeric_limits<float>::max())
 #define NO_HEIGHT (-INF)
 
-#define HMDEBUG(S) qDebug() << S;
-
 Heightmap::Heightmap(const OBJ& obj) : obj(obj)
 {
    this->xMin = INF;
@@ -102,9 +100,9 @@ void Heightmap::initGrid()
 		{
 			for (OBJ::FaceList::const_iterator face = m->faces.begin(); face != m->faces.end(); face++)
 			{
-				if (face_in_area (&*face, xmin, ymin, xmax, ymax))
+				if (face_in_area (&(*face), xmin, ymin, xmax, ymax))
 				{
-					faces->push_back(&*face);
+					faces->push_back(&(*face));
 				}
 			}
 		}
@@ -118,10 +116,9 @@ Heightmap::GridSpace* Heightmap::getSpace(float x, float y)
 {
    int ix = (x - xMin) / (xMax - xMin) * GRID_LENGTH;
    int iy = (y - yMin) / (yMax - yMin) * GRID_LENGTH;
-   
+
    if ((ix < 0) || (ix >= GRID_LENGTH) || (iy < 0) || (iy >= GRID_LENGTH))
-   {
-		 HMDEBUG("OUT OF GRID (" << x << "," << y << ") (" << ix << "," << iy << ")");
+	{
       return NULL;
    }
    else
@@ -150,13 +147,6 @@ float Heightmap::GridSpace::face_height_at(const OBJ& obj, const OBJ::Face* face
 		i++;
 	}
 
-	/*
-	{ // HMDEBUG
-		p[0].x = -30; p[0].y = -30; p[0].z = 2;
-		p[1].x = 30; p[1].y = -30; p[1].z = 2;
-		p[2].x = 0.; p[2].y = 30; p[2].z = 7;
-	} */
-
 	// Weight of those vertices is used to calculate exact height at (x,y), using barycentric coordinates, see also
 	// http://en.wikipedia.org/wiki/Barycentric_coordinate_system_(mathematics)#Converting_to_barycentric_coordinates
 	float det_T = (p[1].y - p[2].y) * (p[0].x - p[2].x) + (p[2].x - p[1].x) * (p[0].y - p[2].y);
@@ -170,13 +160,8 @@ float Heightmap::GridSpace::face_height_at(const OBJ& obj, const OBJ::Face* face
 	}
 	else
 	{
-		//float h = l1 * p[0].z + l2 * p[1].z + l3 * p[2].z;
-		//HMDEBUG("x,y=" << x << "," << y << "; det_T=" << det_T << ", l1=" << l1 << ", l2=" << l2 << ", l3=" << l3 << ", h=" << h);
 		return l1 * p[0].z + l2 * p[1].z + l3 * p[2].z;
 	}
-
-	// temporary implementation: use z coord of first vertex found in face
-	// return obj.vertices[face->refs.front().v].z;
 }
 
 /**
@@ -191,8 +176,8 @@ bool Heightmap::face_in_area (const OBJ::Face* face, float xmin, float ymin, flo
    float f_ymax = ymin;
    
    for (OBJ::RefList::const_iterator r = face->refs.begin(); r != face->refs.end(); r++)
-   {
-      OBJ::Vertex vertex = obj.vertices[r->v];
+	{
+		OBJ::Vertex vertex = obj.vertices[r->v];
       if (vertex.x < f_xmin) f_xmin = vertex.x;
       if (vertex.y < f_ymin) f_ymin = vertex.y;
       if (vertex.x > f_xmax) f_xmax = vertex.x;
