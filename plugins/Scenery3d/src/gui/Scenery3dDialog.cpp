@@ -22,7 +22,7 @@ void Scenery3dDialog::createDialogContent()
     connect(ui->scenery3dListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this,
             SLOT(scenery3dChanged(QListWidgetItem*)));
 
-    connect(ui->checkBoxRenderCubemap, SIGNAL(stateChanged(int)), this,
+    connect(ui->checkBoxEnableShadows, SIGNAL(stateChanged(int)), this,
             SLOT(renderingOptionsChanged()));
 
     // Fill the scenery list
@@ -57,5 +57,5 @@ void Scenery3dDialog::scenery3dChanged(QListWidgetItem* item)
 void Scenery3dDialog::renderingOptionsChanged(void)
 {
     Scenery3dMgr* smgr = GETSTELMODULE(Scenery3dMgr);
-    smgr->setUseCubeMap(ui->checkBoxRenderCubemap->isChecked());
+    smgr->setEnableShadows(ui->checkBoxEnableShadows->isChecked());
 }
