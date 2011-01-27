@@ -58,7 +58,7 @@ Scenery3d::Scenery3d(int cbmSize)
     groundModel = new OBJ();
     heightmap = NULL;
     zRotateMatrix = Mat4d::identity();
-	 shadowMapTexture = 0;
+    shadowMapTexture = 0;
     for (int i=0; i<6; i++) {
         cubeMap[i] = NULL;
     }
