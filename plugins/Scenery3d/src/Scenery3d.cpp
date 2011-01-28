@@ -186,6 +186,7 @@ void Scenery3d::handleKeys(QKeyEvent* e)
         speedup *= ((e->modifiers() & Qt::AltModifier)? 5.0f : 1.0f);
         switch (e->key())
         {
+            case Qt::Key_Space: shadowsEnabled = !shadowsEnabled; e->accept(); break;
             case Qt::Key_PageUp:    movement_z = -1.0f * speedup; e->accept(); break;
             case Qt::Key_PageDown:  movement_z =  1.0f * speedup; e->accept(); break;
             case Qt::Key_Up:        movement_x = -1.0f * speedup; e->accept(); break;
