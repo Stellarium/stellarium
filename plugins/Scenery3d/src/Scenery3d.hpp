@@ -40,7 +40,7 @@ class Scenery3d
 public:
     //! Initializes an empty Scenery3d object.
     //! @param cbmSize Size of the cubemap to use for indirect rendering.
-    Scenery3d(int cbmSize=1024);
+    Scenery3d(int cubemapSize=1024);
     virtual ~Scenery3d();
 
     //! Loads configuration values from a scenery3d.ini file.
@@ -74,6 +74,8 @@ public:
     //! @return Name of the landscape associated with the scenery.
     QString getLandscapeName() const { return landscapeName; }
 	
+    enum shadowCaster { None, Sun, Moon };
+
 private:
     static float EYE_LEVEL;
     // static const float MOVE_SPEED; // GZ: not needed.
@@ -91,6 +93,7 @@ private:
     float minObserverHeight ();
 
     bool shadowsEnabled;
+    bool textEnabled;
 
     StelCore* core;
     int cubemapSize;
