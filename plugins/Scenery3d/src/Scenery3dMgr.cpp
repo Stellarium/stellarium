@@ -80,9 +80,8 @@ void Scenery3dMgr::init()
 
     QSettings* conf = StelApp::getInstance().getSettings();
     Q_ASSERT(conf);
-    if (conf->contains("Scenery3d/cubemapSize"))
-        cubemapSize=conf->value("Scenery3d/cubemapSize").toInt();
-    else cubemapSize=1024;
+    cubemapSize=conf->value("Scenery3d/cubemapSize", 1024).toInt();
+    shadowmapSize=conf->value("Scenery3d/shadowmapSize", 1024).toInt();
 
     // create action for enable/disable & hook up signals
     StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -132,7 +131,7 @@ void Scenery3dMgr::init()
     qDebug() << "past exception.\n";
 
 
-    scenery3d = new Scenery3d(cubemapSize);
+    scenery3d = new Scenery3d(cubemapSize, shadowmapSize);
     scenery3d->setShadowsEnabled(enableShadows);
 }
 
@@ -252,7 +251,7 @@ Scenery3d* Scenery3dMgr::createFromFile(const QString& scenery3dFile, const QStr
 {
     QSettings scenery3dIni(scenery3dFile, StelIniFormat);
     QString s;
-    Scenery3d* newScenery3d = new Scenery3d(cubemapSize);
+    Scenery3d* newScenery3d = new Scenery3d(cubemapSize, shadowmapSize);
     newScenery3d->setShadowsEnabled(enableShadows);
     if (scenery3dIni.status() != QSettings::NoError)
     {

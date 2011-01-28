@@ -40,7 +40,7 @@ class Scenery3d
 public:
     //! Initializes an empty Scenery3d object.
     //! @param cbmSize Size of the cubemap to use for indirect rendering.
-    Scenery3d(int cubemapSize=1024);
+    Scenery3d(int cubemapSize=1024, int shadowmapSize=1024);
     virtual ~Scenery3d();
 
     //! Loads configuration values from a scenery3d.ini file.
@@ -97,7 +97,7 @@ private:
 
     StelCore* core;
     int cubemapSize;
-    static const int SHADOWMAP_SIZE;
+    int shadowmapSize;
 
     Mat4f projectionMatrix;
     Vec3d absolutePosition;
