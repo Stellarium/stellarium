@@ -42,18 +42,18 @@
 
 #define SHADOW_DEBUG 0
 
-float Scenery3d::EYE_LEVEL = 1.0;
+float Scenery3d::EYE_LEVEL = 1.65;
 //const float Scenery3d::MOVE_SPEED = 4.0;
 const float Scenery3d::MAX_SLOPE = 1.1;
-const int Scenery3d::SHADOWMAP_SIZE = 4096;
 
-Scenery3d::Scenery3d(int cubemapSize)
+Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
     :core(NULL),
     absolutePosition(0.0, 0.0, 0.0),
     movement_x(0.0f), movement_y(0.0f), movement_z(0.0f),
     objModel(NULL)
 {
     this->cubemapSize=cubemapSize;
+    this->shadowmapSize=shadowmapSize;
     textEnabled=false;
     objModel = new OBJ();
     groundModel = new OBJ();
@@ -389,7 +389,7 @@ void Scenery3d::generateShadowMap(StelCore* core)
 	StelPainter painter(prj);
 
 	if (shadowMapTexture == 0) {
-            shadowMapFbo = new QGLFramebufferObject(SHADOWMAP_SIZE, SHADOWMAP_SIZE, QGLFramebufferObject::Depth, GL_TEXTURE_2D);
+            shadowMapFbo = new QGLFramebufferObject(shadowmapSize, shadowmapSize, QGLFramebufferObject::Depth, GL_TEXTURE_2D);
             //Create the shadow map texture
             glGenTextures(1, &shadowMapTexture);
             glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
@@ -397,7 +397,7 @@ void Scenery3d::generateShadowMap(StelCore* core)
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, SHADOWMAP_SIZE, SHADOWMAP_SIZE, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
 	}
 
         // Determine sun position
@@ -419,7 +419,7 @@ void Scenery3d::generateShadowMap(StelCore* core)
         glColorMask(0, 0, 0, 0); // disable color writes (increase performance?)
 
 	glPushAttrib(GL_VIEWPORT_BIT);
-	glViewport(0, 0, SHADOWMAP_SIZE, SHADOWMAP_SIZE);
+        glViewport(0, 0, shadowmapSize, shadowmapSize);
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
@@ -453,7 +453,7 @@ void Scenery3d::generateShadowMap(StelCore* core)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         drawArrays(painter);
 	glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
-	glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, SHADOWMAP_SIZE, SHADOWMAP_SIZE);
+        glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, shadowmapSize, shadowmapSize);
         glDisable(GL_POLYGON_OFFSET_FILL);
 	shadowMapFbo->release();
 	glPopMatrix();
