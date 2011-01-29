@@ -467,25 +467,13 @@ void StelApp::handleKeys(QKeyEvent* event)
 }
 
 
-// Set the colorscheme for all the modules
-void StelApp::setColorScheme(const QString& section)
-{
-	if (getGui())
-		getGui()->setStelStyle(section);
-	// Send the event to every StelModule
-	foreach (StelModule* iter, moduleMgr->getAllModules())
-	{
-		iter->setStelStyle(section);
-	}
-}
-
 //! Set flag for activating night vision mode
 void StelApp::setVisionModeNight(bool b)
 {
 	if (flagNightVision!=b)
 	{
 		flagNightVision=b;
-		setColorScheme(b ? "night_color" : "color");
+		emit(colorSchemeChanged(b ? "night_color" : "color"));
 	}
 }
 

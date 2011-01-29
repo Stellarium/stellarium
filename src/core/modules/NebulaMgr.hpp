@@ -65,10 +65,6 @@ public:
 	//! Update state which is time dependent.
 	virtual void update(double deltaTime) {hintsFader.update((int)(deltaTime*1000)); flagShow.update((int)(deltaTime*1000));}
 
-	//! Sets the colors of the Nebula labels and markers according to the
-	//! values in a configuration object
-	virtual void setStelStyle(const QString& section);
-
 	//! Determines the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
@@ -149,6 +145,10 @@ public slots:
 	float getHintsAmount(void) const {return hintsAmount;}
 
 private slots:
+	//! Sets the colors of the Nebula labels and markers according to the
+	//! values in a configuration object
+	void setStelStyle(const QString& section);
+
 	//! Update i18 names from English names according to passed translator.
 	//! The translation is done using gettext with translated strings defined
 	//! in translations.h

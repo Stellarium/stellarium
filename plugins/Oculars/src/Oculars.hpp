@@ -66,7 +66,6 @@ public:
 	//! while flagShowOculars or flagShowCCD == true.
 	virtual void handleKeys(class QKeyEvent* event);
 	virtual void handleMouseClicks(class QMouseEvent* event);
-	virtual void setStelStyle(const QString& style);
 	virtual void update(double) {;}
 
 public slots:
@@ -100,6 +99,7 @@ private slots:
 	void determineMaxEyepieceAngle();
 	void setScaleImageCircle(bool state);
 	void setScreenFOVForCCD();
+	void setStelStyle(const QString& style);
 
 private:
 	//! Set up the Qt actions needed to activate the plugin.

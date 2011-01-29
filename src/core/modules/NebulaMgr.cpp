@@ -100,7 +100,9 @@ void NebulaMgr::init()
 
 	updateI18n();
 	
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	StelApp *app = &StelApp::getInstance();
+	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
 

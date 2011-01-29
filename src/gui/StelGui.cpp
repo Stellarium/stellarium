@@ -483,7 +483,9 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	skyGui->setGeometry(stelAppGraphicsWidget->geometry());
 	skyGui->updateBarsPos();
 	
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	StelApp *app = &StelApp::getInstance();
+	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 	initDone = true;
 }
 
@@ -532,7 +534,6 @@ void StelGui::setStelStyle(const QString& section)
 	}
 	qApp->setStyleSheet(currentStelStyle.qtStyleSheet);
 
-	skyGui->setStelStyle(currentStelStyle);
 	locationDialog.styleChanged();
 	dateTimeDialog.styleChanged();
 	configurationDialog->styleChanged();

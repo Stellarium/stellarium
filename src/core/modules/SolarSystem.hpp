@@ -70,9 +70,6 @@ public:
 	//! This includes planet motion trails.
 	virtual void update(double deltaTime);
 
-	//! Load a color scheme
-	virtual void setStelStyle(const QString& section);
-
 	//! Used to determine what order to draw the various StelModules.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
@@ -229,7 +226,11 @@ public:
 private slots:
 	//! Called when a new object is selected.
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
-	
+
+	//! Load a color scheme
+	void setStelStyle(const QString& section);
+
+
 private:
 	//! Search for SolarSystem objects which are close to the position given
 	//! in earth equatorial position.
