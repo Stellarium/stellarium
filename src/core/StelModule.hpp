@@ -42,6 +42,8 @@ class QSettings;
 //!	Update i18n strings from english names according to current global sky and application language.
 //!	This method also reload the proper fonts depending on the language.
 //!	The translation shall be done using the StelTranslator provided by the StelApp singleton instance.
+//! skyCultureChanged(const QString&)
+//!	Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.
 class StelModule : public QObject
 {
 	// Do not add Q_OBJECT here!!
@@ -73,10 +75,6 @@ public:
 	//! Update the module with respect to the time.
 	//! @param deltaTime the time increment in second since last call.
 	virtual void update(double deltaTime) = 0;
-
-	//! Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.
-	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	virtual void updateSkyCulture(const QString& skyCultureDir) {Q_UNUSED(skyCultureDir);}
 
 	//! Get the version of the module, default is stellarium main version
 	virtual QString getModuleVersion() const;

@@ -501,11 +501,7 @@ void StelApp::updateI18n()
 void StelApp::updateSkyCulture()
 {
 	QString skyCultureDir = getSkyCultureMgr().getCurrentSkyCultureID();
-	// Send the event to every StelModule
-	foreach (StelModule* iter, moduleMgr->getAllModules())
-	{
-		iter->updateSkyCulture(skyCultureDir);
-	}
+	emit(skyCultureChanged(skyCultureDir));
 }
 
 // Return the time since when stellarium is running in second.
