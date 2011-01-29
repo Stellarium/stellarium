@@ -113,6 +113,7 @@ void SolarSystemEditor::init()
 		return;
 	}
 
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	isInitialized = true;
 }
 

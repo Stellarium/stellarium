@@ -64,9 +64,6 @@ public:
 	//! - updates adaptation lumenescence lased on visible bright objects.
 	virtual void update(double deltaTime);
 
-	//! Translate labels to new language settings.
-	virtual void updateI18n();
-
 	//! Load a color scheme from a configuration object
 	virtual void setStelStyle(const QString& section);
 
@@ -279,6 +276,10 @@ signals:
 	//! (A way of moving the need for translatable error messages to the GUI.)
 	//! \param path the path to the landscape's directory
 	void errorRemoveManually(QString path);
+
+private slots:
+	//! Translate labels to new language settings.
+	void updateI18n();	
 
 private:
 	//! Get light pollution luminance level.

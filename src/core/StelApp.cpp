@@ -493,13 +493,7 @@ void StelApp::setVisionModeNight(bool b)
 void StelApp::updateI18n()
 {
 #ifdef ENABLE_NLS
-	// Send the event to every StelModule
-	foreach (StelModule* iter, moduleMgr->getAllModules())
-	{
-		iter->updateI18n();
-	}
-	if (getGui())
-		getGui()->updateI18n();
+	emit(languageChanged());
 #endif
 }
 
