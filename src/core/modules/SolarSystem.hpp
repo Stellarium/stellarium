@@ -70,9 +70,6 @@ public:
 	//! This includes planet motion trails.
 	virtual void update(double deltaTime);
 
-	//! Translate names.
-	virtual void updateI18n();
-
 	//! Load a color scheme
 	virtual void setStelStyle(const QString& section);
 
@@ -179,6 +176,9 @@ public slots:
 	void setMoonScale(float f);
 	//! Get the display scaling factor for Earth's oon.
 	float getMoonScale(void) const {return moonScale;}
+
+	//! Translate names. (public so that SolarSystemEditor can call it).
+	void updateI18n();
 
 public:
 	///////////////////////////////////////////////////////////////////////////

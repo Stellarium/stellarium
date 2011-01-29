@@ -99,7 +99,8 @@ void NebulaMgr::init()
 	setFlagDisplayNoTexture(conf->value("astro/flag_nebula_display_no_texture", false).toBool());
 
 	updateI18n();
-
+	
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
 

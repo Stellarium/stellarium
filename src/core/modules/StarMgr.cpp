@@ -236,6 +236,7 @@ void StarMgr::init()
 	{
 		it.value()->scaleAxis();
 	}
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 }
 
 
