@@ -206,6 +206,7 @@ void Satellites::init()
 	}
 	styleSheetFile.close();
 
+	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 }
 
 bool Satellites::backupJsonFile(bool deleteOriginal)

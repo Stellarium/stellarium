@@ -44,6 +44,8 @@ class QSettings;
 //!	The translation shall be done using the StelTranslator provided by the StelApp singleton instance.
 //! skyCultureChanged(const QString&)
 //!	Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.
+//! colorSchemeChanged(const QString&)
+//!	Load the given color style
 class StelModule : public QObject
 {
 	// Do not add Q_OBJECT here!!
@@ -109,10 +111,6 @@ public:
 		ReplaceSelection,	//!< Set the StelObject as the new list of selected ones.
 		RemoveFromSelection //!< Subtract the StelObject from the current list of selected ones.
 	};
-
-	//! Load the given color style
-	//! @param section the name of the config section containing all necessary information on how to style widgets and text
-	virtual void setStelStyle(const QString& section) {Q_UNUSED(section);}
 
 	//! Define the possible action for which an order is defined
 	enum StelModuleActionName

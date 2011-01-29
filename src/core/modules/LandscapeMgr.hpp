@@ -64,9 +64,6 @@ public:
 	//! - updates adaptation lumenescence lased on visible bright objects.
 	virtual void update(double deltaTime);
 
-	//! Load a color scheme from a configuration object
-	virtual void setStelStyle(const QString& section);
-
 	//! Get the order in which this module will draw it's objects relative to other modules.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
@@ -278,6 +275,9 @@ signals:
 	void errorRemoveManually(QString path);
 
 private slots:
+	//! Load a color scheme from a configuration object
+	void setStelStyle(const QString& section);
+
 	//! Translate labels to new language settings.
 	void updateI18n();	
 
