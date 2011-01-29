@@ -63,10 +63,6 @@ public:
 	//! Updates time-varying state for each Constellation.
 	virtual void update(double deltaTime);
 
-	//! Loads new constellation data and art if the SkyCulture has changed.
-	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	virtual void updateSkyCulture(const QString& skyCultureDir);
-
 	//! Load a color scheme
 	virtual void setStelStyle(const QString& section);
 
@@ -157,6 +153,10 @@ private slots:
 	//! matching constellations if isolateSelected mode is activated.
 	//! @param action define whether to add to, replace, or remove from the existing selection
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
+
+	//! Loads new constellation data and art if the SkyCulture has changed.
+	//! @param skyCultureDir the name of the directory containing the sky culture to use.
+	void updateSkyCulture(const QString& skyCultureDir);
 
 	//! Update i18n names from English names according to current
 	//! locale, and update font for locale.

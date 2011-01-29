@@ -179,6 +179,7 @@ public slots:
 	
 signals:
 	void languageChanged();
+	void skyCultureChanged(const QString&);
 
 private:
 

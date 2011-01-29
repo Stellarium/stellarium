@@ -88,11 +88,6 @@ public:
 	//! Includes fading in and out stars and labels when they are turned on and off.
 	virtual void update(double deltaTime) {labelsFader.update((int)(deltaTime*1000)); starsFader.update((int)(deltaTime*1000));}
 
-	//! Called when the sky culture is updated.
-	//! Loads common and scientific names of stars for a given sky culture.
-	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	virtual void updateSkyCulture(const QString& skyCultureDir);
-
 	//! Load a color scheme
 	virtual void setStelStyle(const QString& section);
 
@@ -182,6 +177,11 @@ public:
 private slots:
 	//! Translate text.
 	void updateI18n();
+
+	//! Called when the sky culture is updated.
+	//! Loads common and scientific names of stars for a given sky culture.
+	//! @param skyCultureDir the name of the directory containing the sky culture to use.
+	void updateSkyCulture(const QString& skyCultureDir);
 
 private:
 
