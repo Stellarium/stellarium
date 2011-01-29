@@ -290,6 +290,7 @@ void LandscapeMgr::init()
 		setAtmosphereBortleLightPollution(3);
 		ok = true;
 	}
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 }
 
 void LandscapeMgr::setStelStyle(const QString& section)

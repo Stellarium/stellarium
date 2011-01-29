@@ -81,7 +81,6 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	//! called when the "configure" button in the "Plugins" tab is pressed
 	virtual bool configureGui(bool show);
-	virtual void updateI18n();
 	
 	//! Reads a single comet's orbital elements from a string.
 	//! This function converts a line of comet orbital elements in MPC format
@@ -226,6 +225,9 @@ public slots:
 signals:
 	//TODO: This should be part of SolarSystem::reloadPlanets()
 	void solarSystemChanged();
+
+private slots:
+	void updateI18n();
 
 private:
 	bool isInitialized;

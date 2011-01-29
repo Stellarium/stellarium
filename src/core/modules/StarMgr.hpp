@@ -88,9 +88,6 @@ public:
 	//! Includes fading in and out stars and labels when they are turned on and off.
 	virtual void update(double deltaTime) {labelsFader.update((int)(deltaTime*1000)); starsFader.update((int)(deltaTime*1000));}
 
-	//! Translate text.
-	virtual void updateI18n();
-
 	//! Called when the sky culture is updated.
 	//! Loads common and scientific names of stars for a given sky culture.
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
@@ -181,6 +178,10 @@ public:
 	//! Mark it as checked if checksum is correct.
 	//! @return false in case of failure.
 	bool checkAndLoadCatalog(QVariantMap m);
+
+private slots:
+	//! Translate text.
+	void updateI18n();
 
 private:
 

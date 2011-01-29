@@ -65,11 +65,6 @@ public:
 	//! Update state which is time dependent.
 	virtual void update(double deltaTime) {hintsFader.update((int)(deltaTime*1000)); flagShow.update((int)(deltaTime*1000));}
 
-	//! Update i18 names from English names according to passed translator.
-	//! The translation is done using gettext with translated strings defined
-	//! in translations.h
-	virtual void updateI18n();
-
 	//! Sets the colors of the Nebula labels and markers according to the
 	//! values in a configuration object
 	virtual void setStelStyle(const QString& section);
@@ -152,6 +147,13 @@ public slots:
 	//! Get the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
 	float getHintsAmount(void) const {return hintsAmount;}
+
+private slots:
+	//! Update i18 names from English names according to passed translator.
+	//! The translation is done using gettext with translated strings defined
+	//! in translations.h
+	void updateI18n();
+	
 
 private:
 	//! Search for a nebula object by name. e.g. M83, NGC 1123, IC 1234.
