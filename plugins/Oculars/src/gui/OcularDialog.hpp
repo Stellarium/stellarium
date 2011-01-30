@@ -46,7 +46,6 @@ class OcularDialog : public StelDialog
 public:
 	OcularDialog(QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes);
 	virtual ~OcularDialog();
-	void languageChanged();
 	//! Notify that the application style changed
 	void styleChanged();
 	void setOculars(QList<Ocular*> theOculars);
@@ -60,6 +59,7 @@ public slots:
 	void insertNewCCD();
 	void insertNewOcular();
 	void insertNewTelescope();
+	void languageChanged();
 
 signals:
 	void scaleImageCircleChanged(bool state);

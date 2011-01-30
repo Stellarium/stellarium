@@ -206,6 +206,7 @@ void OcularDialog::scaleImageCircleStateChanged(int state)
 void OcularDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
 	ui->ccdListView->setModel(ccdTableModel);
 	ui->ocularListView->setModel(ocularTableModel);
 	ui->telescopeListView->setModel(telescopeTableModel);
