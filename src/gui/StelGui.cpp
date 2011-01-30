@@ -548,14 +548,6 @@ void StelGui::setStelStyle(const QString& section)
 void StelGui::updateI18n()
 {
 	StelGuiBase::updateI18n();
-
-	// Update the dialogs
-	configurationDialog->languageChanged();
-	dateTimeDialog.languageChanged();
-	helpDialog.languageChanged();
-	locationDialog.languageChanged();
-	searchDialog.languageChanged();
-	viewDialog.languageChanged();
 }
 
 void StelGui::update()

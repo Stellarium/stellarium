@@ -94,6 +94,7 @@ void ConfigurationDialog::createDialogContent()
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 
 	ui->setupUi(dialog);
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
 
 	// Set the main tab activated by default
 	ui->configurationStackedWidget->setCurrentIndex(0);
