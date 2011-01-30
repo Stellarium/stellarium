@@ -35,13 +35,13 @@ class SatellitesDialog : public StelDialog
 public:
 	SatellitesDialog();
 	~SatellitesDialog();
-	void languageChanged();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	void createDialogContent();
 
 public slots:
+	void languageChanged();
 	void refreshUpdateValues(void);
 
 private slots:
