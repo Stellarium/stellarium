@@ -67,13 +67,13 @@ class SearchDialog : public StelDialog
 public:
 	SearchDialog();
 	virtual ~SearchDialog();
-	void languageChanged();
 	//! Notify that the application style changed
 	void styleChanged();
 	bool eventFilter(QObject *object, QEvent *event);
 	void setSimpleStyle(bool b);
 	
 public slots:
+	void languageChanged();
 	//! Add auto focus of the edit line
 	void setVisible(bool);
 

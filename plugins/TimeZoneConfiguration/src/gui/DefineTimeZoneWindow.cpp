@@ -20,6 +20,7 @@
 #include "TimeZoneConfigurationWindow.hpp"
 #include "DefineTimeZoneWindow.hpp"
 #include "ui_defineTimeZone.h"
+#include "StelApp.hpp"
 
 #include <QRegExpValidator>
 
@@ -44,6 +45,7 @@ void DefineTimeZoneWindow::languageChanged()
 void DefineTimeZoneWindow::createDialogContent()
 {
 	ui->setupUi(dialog);
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->pushButtonUseDefinition, SIGNAL(clicked()), this, SLOT(useDefinition()));

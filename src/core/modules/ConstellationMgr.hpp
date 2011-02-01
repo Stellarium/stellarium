@@ -63,19 +63,6 @@ public:
 	//! Updates time-varying state for each Constellation.
 	virtual void update(double deltaTime);
 
-	//! Update i18n names from English names according to current
-	//! locale, and update font for locale.
-	//! The translation is done using gettext with translated strings defined
-	//! in translations.h
-	virtual void updateI18n();
-
-	//! Loads new constellation data and art if the SkyCulture has changed.
-	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	virtual void updateSkyCulture(const QString& skyCultureDir);
-
-	//! Load a color scheme
-	virtual void setStelStyle(const QString& section);
-
 	//! Return the value defining the order of call for the given action
 	//! @param actionName the name of the action for which we want the call order
 	//! @return the value defining the order. The closer to 0 the earlier the module's action will be called
@@ -163,7 +150,20 @@ private slots:
 	//! matching constellations if isolateSelected mode is activated.
 	//! @param action define whether to add to, replace, or remove from the existing selection
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
-	
+
+	//! Load a color scheme
+	void setStelStyle(const QString& section);
+
+	//! Loads new constellation data and art if the SkyCulture has changed.
+	//! @param skyCultureDir the name of the directory containing the sky culture to use.
+	void updateSkyCulture(const QString& skyCultureDir);
+
+	//! Update i18n names from English names according to current
+	//! locale, and update font for locale.
+	//! The translation is done using gettext with translated strings defined
+	//! in translations.h
+	void updateI18n();
+
 private:
 	//! Read constellation names from the given file.
 	//! @param namesFile Name of the file containing the constellation names in english

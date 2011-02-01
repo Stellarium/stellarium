@@ -50,9 +50,6 @@ public:
 	//! Update state which is time dependent.
 	virtual void update(double) {;}
 
-	//! Update i18
-	virtual void updateI18n() {;}
-
 	//! Determines the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
