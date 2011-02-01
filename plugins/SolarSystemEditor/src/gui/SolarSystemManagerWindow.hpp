@@ -42,6 +42,8 @@ class SolarSystemManagerWindow : public StelDialog
 public:
 	SolarSystemManagerWindow();
 	virtual ~SolarSystemManagerWindow();
+
+public slots:
 	void languageChanged();
 
 protected:

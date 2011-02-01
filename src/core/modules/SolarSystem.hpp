@@ -70,12 +70,6 @@ public:
 	//! This includes planet motion trails.
 	virtual void update(double deltaTime);
 
-	//! Translate names.
-	virtual void updateI18n();
-
-	//! Load a color scheme
-	virtual void setStelStyle(const QString& section);
-
 	//! Used to determine what order to draw the various StelModules.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
@@ -180,6 +174,9 @@ public slots:
 	//! Get the display scaling factor for Earth's oon.
 	float getMoonScale(void) const {return moonScale;}
 
+	//! Translate names. (public so that SolarSystemEditor can call it).
+	void updateI18n();
+
 public:
 	///////////////////////////////////////////////////////////////////////////
 	// Other public methods
@@ -229,7 +226,11 @@ public:
 private slots:
 	//! Called when a new object is selected.
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
-	
+
+	//! Load a color scheme
+	void setStelStyle(const QString& section);
+
+
 private:
 	//! Search for SolarSystem objects which are close to the position given
 	//! in earth equatorial position.

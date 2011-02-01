@@ -60,6 +60,7 @@ void SlewDialog::createDialogContent()
 	ui->setupUi(dialog);
 	
 	//Inherited connect
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	connect(ui->radioButtonHMS, SIGNAL(toggled(bool)), this, SLOT(setFormatHMS(bool)));

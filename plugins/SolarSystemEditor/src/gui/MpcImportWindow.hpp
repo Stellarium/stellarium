@@ -45,6 +45,8 @@ public:
 
 	MpcImportWindow();
 	virtual ~MpcImportWindow();
+
+public slots:
 	void languageChanged();
 
 signals:

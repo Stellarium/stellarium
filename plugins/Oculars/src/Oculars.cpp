@@ -469,6 +469,7 @@ void Oculars::init()
 		nightStyleSheet = styleSheetFile.readAll();
 	}
 	styleSheetFile.close();
+	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 }
 
 void Oculars::setStelStyle(const QString&)

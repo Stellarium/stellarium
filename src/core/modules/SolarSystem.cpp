@@ -134,6 +134,10 @@ void SolarSystem::init()
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur4.png");
 	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture("textures/planet-indicator.png");
+
+	StelApp *app = &StelApp::getInstance();
+	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 }
 
 void SolarSystem::recreateTrails()
