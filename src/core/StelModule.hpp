@@ -36,6 +36,16 @@ class QSettings;
 //! thus enabling creation of external plug-ins for stellarium.
 //! @sa StelObjectModule for StelModule managing collections of StelObject.
 //! @sa @ref plugins for documentation on how to develop external plugins.
+//!
+//! There are several signals that StelApp emits that subclasses may be interested in:
+//! laguageChanged()
+//!	Update i18n strings from english names according to current global sky and application language.
+//!	This method also reload the proper fonts depending on the language.
+//!	The translation shall be done using the StelTranslator provided by the StelApp singleton instance.
+//! skyCultureChanged(const QString&)
+//!	Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.
+//! colorSchemeChanged(const QString&)
+//!	Load the given color style
 class StelModule : public QObject
 {
 	// Do not add Q_OBJECT here!!
@@ -67,15 +77,6 @@ public:
 	//! Update the module with respect to the time.
 	//! @param deltaTime the time increment in second since last call.
 	virtual void update(double deltaTime) = 0;
-
-	//! Update i18n strings from english names according to current global sky and application language.
-	//! This method also reload the proper fonts depending on the language.
-	//! The translation shall be done using the StelTranslator provided by the StelApp singleton instance.
-	virtual void updateI18n() {;}
-
-	//! Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.
-	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	virtual void updateSkyCulture(const QString& skyCultureDir) {Q_UNUSED(skyCultureDir);}
 
 	//! Get the version of the module, default is stellarium main version
 	virtual QString getModuleVersion() const;
@@ -110,10 +111,6 @@ public:
 		ReplaceSelection,	//!< Set the StelObject as the new list of selected ones.
 		RemoveFromSelection //!< Subtract the StelObject from the current list of selected ones.
 	};
-
-	//! Load the given color style
-	//! @param section the name of the config section containing all necessary information on how to style widgets and text
-	virtual void setStelStyle(const QString& section) {Q_UNUSED(section);}
 
 	//! Define the possible action for which an order is defined
 	enum StelModuleActionName

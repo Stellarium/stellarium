@@ -30,12 +30,12 @@ class StelDialog : public QObject
 public:
 	StelDialog(QObject* parent=NULL);
 	virtual ~StelDialog();
-	//! Retranslate the content of the dialog
-	virtual void languageChanged()=0;
 
 	bool visible() const;
 
 public slots:
+	//! Retranslate the content of the dialog
+	void languageChanged();
 	void setVisible(bool);
 	void close();
 signals:

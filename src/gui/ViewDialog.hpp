@@ -34,9 +34,12 @@ Q_OBJECT
 public:
 	ViewDialog();
 	virtual ~ViewDialog();
-	void languageChanged();
 	//! Notify that the application style changed
 	void styleChanged();
+
+public slots:
+	void languageChanged();
+
 protected:
 	Ui_viewDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
