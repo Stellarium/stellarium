@@ -70,8 +70,10 @@ ConfigurationDialog::~ConfigurationDialog()
 
 void ConfigurationDialog::languageChanged()
 {
-	if (dialog)
+	if (dialog) {
 		ui->retranslateUi(dialog);
+		ui->stackListWidget->repaint();
+	}
 
 	//Script information
 	//(trigger re-displaying the description of the current item)
