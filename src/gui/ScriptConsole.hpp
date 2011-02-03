@@ -32,11 +32,11 @@ class ScriptConsole : public StelDialog
 public:
 	ScriptConsole();
 	virtual ~ScriptConsole();
-	void languageChanged();
 	//! Notify that the application style changed
 	void styleChanged();
 
 public slots:
+	void languageChanged();
 	void runScript();
 	void loadScript();
 	void saveScript();
