@@ -127,9 +127,17 @@ void SolarSystem::init()
 
 	setFlagTrails(conf->value("astro/flag_object_trails", false).toBool());
 
-	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
+	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
+	objectManager->registerStelObjectMgr(this);
+	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), 
+			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
+
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur4.png");
 	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture("textures/planet-indicator.png");
+
+	StelApp *app = &StelApp::getInstance();
+	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 }
 
 void SolarSystem::recreateTrails()
@@ -1212,7 +1220,7 @@ QStringList SolarSystem::listMatchingObjectsI18n(const QString& objPrefix, int m
 	return result;
 }
 
-void SolarSystem::selectedObjectChangeCallBack(StelModuleSelectAction)
+void SolarSystem::selectedObjectChange(StelModule::StelModuleSelectAction)
 {
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Planet");
 	if (!newSelected.empty())

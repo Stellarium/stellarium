@@ -39,9 +39,12 @@ class ConfigurationDialog : public StelDialog
 public:
 	ConfigurationDialog(StelGui* agui);
 	virtual ~ConfigurationDialog();
-	void languageChanged();
 	//! Notify that the application style changed
 	void styleChanged();
+
+public slots:
+	void languageChanged();
+
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();

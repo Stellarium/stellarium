@@ -45,6 +45,8 @@ QMutex* StelPainter::globalMutex = new QMutex();
 QPainter* StelPainter::qPainter = NULL;
 QGLContext* StelPainter::glContext = NULL;
 
+bool StelPainter::isNoPowerOfTwoAllowed;
+
 #ifdef STELPAINTER_GL2
  QGLShaderProgram* StelPainter::colorShaderProgram=NULL;
  QGLShaderProgram* StelPainter::texturesShaderProgram=NULL;
@@ -646,6 +648,8 @@ struct StringTexture
 	GLuint texture;
 	int width;
 	int height;
+	int subTexWidth;
+	int subTexHeight;
 
 	StringTexture() : texture(0) {;}
 	~StringTexture()
@@ -673,9 +677,20 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		const StringTexture* cachedTex = texCache.object(hash);
 		if (cachedTex == NULL)	// need to create texture
 		{
+			StringTexture* newTex = new StringTexture();
+
 			// Create temp image and render text into it
 			QRect strRect = getFontMetrics().boundingRect(str);
-                        QPixmap strImage(strRect.width()+1+(int)(0.02f*strRect.width()), strRect.height());
+			newTex->subTexWidth = strRect.width()+1+(int)(0.02f*strRect.width());
+			newTex->subTexHeight = strRect.height();
+			QPixmap strImage;
+			if (isNoPowerOfTwoAllowed)
+				strImage = QPixmap(newTex->subTexWidth, newTex->subTexHeight);
+			else
+				strImage = QPixmap(StelUtils::getBiggerPowerOfTwo(newTex->subTexWidth), StelUtils::getBiggerPowerOfTwo(newTex->subTexHeight));
+			newTex->width = strImage.width();
+			newTex->height = strImage.height();
+
 			strImage.fill(Qt::transparent);
 
 			QPainter painter(&strImage);
@@ -685,10 +700,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			painter.drawText(-strRect.x(), -strRect.y(), str);
 
 			// Create and bind texture, and add it to the list of cached textures
-			StringTexture* newTex = new StringTexture();
 			newTex->texture = StelPainter::glContext->bindTexture(strImage, GL_TEXTURE_2D, GL_RGBA, QGLContext::NoBindOption);
-			newTex->width = strImage.width();
-			newTex->height = strImage.height();
 			texCache.insert(hash, newTex, 3*newTex->width*newTex->height);
 			cachedTex=newTex;
 		}
@@ -715,8 +727,8 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			const float sinr = std::sin(angleDeg * M_PI/180.);
 			for (int i = 0; i < 8; i+=2)
 			{
-				vertexData[i] = int(x + (cachedTex->width*vertexBase[i]+xshift) * cosr - (cachedTex->height*vertexBase[i+1]+yshift) * sinr);
-				vertexData[i+1] = int(y  + (cachedTex->width*vertexBase[i]+xshift) * sinr + (cachedTex->height*vertexBase[i+1]+yshift) * cosr);
+				vertexData[i] = int(x + (cachedTex->subTexWidth*vertexBase[i]+xshift) * cosr - (cachedTex->subTexHeight*vertexBase[i+1]+yshift) * sinr);
+				vertexData[i+1] = int(y  + (cachedTex->subTexWidth*vertexBase[i]+xshift) * sinr + (cachedTex->subTexHeight*vertexBase[i+1]+yshift) * cosr);
 			}
 		}
 		else
@@ -725,18 +737,36 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			for (int i = 0; i < 8; i+=2)
 			{
-				vertexData[i] = int(x + cachedTex->width*vertexBase[i]+xshift);
-				vertexData[i+1] = int(y  + cachedTex->height*vertexBase[i+1]+yshift);
+				vertexData[i] = int(x + cachedTex->subTexWidth*vertexBase[i]+xshift);
+				vertexData[i+1] = int(y  + cachedTex->subTexHeight*vertexBase[i+1]+yshift);
 			}
 		}
+
 
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);		
 		enableClientStates(true, true);
 		setVertexPointer(2, GL_FLOAT, vertexData);
-		setTexCoordPointer(2, GL_FLOAT, texCoordData);
+
+		float* texCoords = NULL;
+		if (isNoPowerOfTwoAllowed)
+			setTexCoordPointer(2, GL_FLOAT, texCoordData);
+		else
+		{
+			texCoords = new float[8];
+			for (int i=0;i<8;i+=2)
+			{
+				texCoords[i] = texCoordData[i]*(float)cachedTex->subTexWidth/cachedTex->width;
+				texCoords[i+1] = texCoordData[i+1]*(float)cachedTex->subTexHeight/cachedTex->height;
+			}
+			setTexCoordPointer(2, GL_FLOAT, texCoords);
+		}
+
 		drawFromArray(TriangleStrip, 4, 0, false);
 		enableClientStates(false);
+
+		if (!isNoPowerOfTwoAllowed)
+			delete[] texCoords;
 	}
 }
 
@@ -1780,6 +1810,9 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 {
 	Q_ASSERT(glContext==NULL);
 	glContext = ctx;
+
+	makeMainGLContextCurrent();
+	isNoPowerOfTwoAllowed = QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0);
 
 #ifdef STELPAINTER_GL2
 	// Basic shader: just vertex filled with plain color

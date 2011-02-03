@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2003 Fabien Chereau
+ * Copyright (C) 2011 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -141,7 +142,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 {
 	// TODO: put values into hash and call create method to consolidate code
 	loadCommon(landscapeIni, landscapeId);
-	// Patch GZ:
+
 	if (landscapeIni.contains("landscape/tesselate_rows"))
 		rows = landscapeIni.value("landscape/tesselate_rows").toInt();
 	else rows=8;
@@ -161,29 +162,34 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	// Load sides textures
 	nbSideTexs = landscapeIni.value("landscape/nbsidetex", 0).toInt();
 	sideTexs = new StelTextureSP[nbSideTexs];
-	for (int i=0;i<nbSideTexs;++i)
+	for (int i=0; i<nbSideTexs; ++i)
 	{
-		QString tmp = QString("tex%1").arg(i);
-		sideTexs[i] = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(landscapeIni.value(QString("landscape/")+tmp).toString(), landscapeId));
+		QString textureKey = QString("landscape/tex%1").arg(i);
+		QString textureName = landscapeIni.value(textureKey).toString();
+		const QString texturePath = getTexturePath(textureName, landscapeId);
+		sideTexs[i] = StelApp::getInstance().getTextureManager().createTexture(texturePath);
 	}
 
 	QMap<int, int> texToSide;
 	// Init sides parameters
 	nbSide = landscapeIni.value("landscape/nbside", 0).toInt();
 	sides = new landscapeTexCoord[nbSide];
-	QString s;
 	int texnum;
-	float a,b,c,d;
 	for (int i=0;i<nbSide;++i)
 	{
-		QString tmp = QString("side%1").arg(i);
-		s = landscapeIni.value(QString("landscape/")+tmp).toString();
-		sscanf(s.toLocal8Bit(),"tex%d:%f:%f:%f:%f",&texnum,&a,&b,&c,&d);
+		QString key = QString("landscape/side%1").arg(i);
+		QString description = landscapeIni.value(key).toString();
+		//sscanf(s.toLocal8Bit(),"tex%d:%f:%f:%f:%f",&texnum,&a,&b,&c,&d);
+		QStringList parameters = description.split(':');
+		//TODO: How should be handled an invalid texture description?
+		QString textureName = parameters.value(0);
+		texnum = textureName.right(textureName.length() - 3).toInt();
 		sides[i].tex = sideTexs[texnum];
-		sides[i].texCoords[0] = a;
-		sides[i].texCoords[1] = b;
-		sides[i].texCoords[2] = c;
-		sides[i].texCoords[3] = d;
+		sides[i].texCoords[0] = parameters.at(1).toFloat();
+		sides[i].texCoords[1] = parameters.at(2).toFloat();
+		sides[i].texCoords[2] = parameters.at(3).toFloat();
+		sides[i].texCoords[3] = parameters.at(4).toFloat();
+		//qDebug() << i << texnum << sides[i].texCoords[0] << sides[i].texCoords[1] << sides[i].texCoords[2] << sides[i].texCoords[3];
 
 		// Prior to precomputing the sides, we used to match E to side0
 		// in r4598 the precomputing was put in place and caused a problem for
@@ -195,23 +201,29 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 	nbDecorRepeat = landscapeIni.value("landscape/nb_decor_repeat", 1).toInt();
 
-	groundTex = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(landscapeIni.value("landscape/groundtex").toString(), landscapeId), StelTexture::StelTextureParams(true));
-	s = landscapeIni.value("landscape/ground").toString();
-	sscanf(s.toLocal8Bit(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
+	QString groundTexName = landscapeIni.value("landscape/groundtex").toString();
+	QString groundTexPath = getTexturePath(groundTexName, landscapeId);
+	groundTex = StelApp::getInstance().getTextureManager().createTexture(groundTexPath, StelTexture::StelTextureParams(true));
+	QString description = landscapeIni.value("landscape/ground").toString();
+	//sscanf(description.toLocal8Bit(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
+	QStringList parameters = description.split(':');
 	groundTexCoord.tex = groundTex;
-	groundTexCoord.texCoords[0] = a;
-	groundTexCoord.texCoords[1] = b;
-	groundTexCoord.texCoords[2] = c;
-	groundTexCoord.texCoords[3] = d;
+	groundTexCoord.texCoords[0] = parameters.at(1).toFloat();
+	groundTexCoord.texCoords[1] = parameters.at(2).toFloat();
+	groundTexCoord.texCoords[2] = parameters.at(3).toFloat();
+	groundTexCoord.texCoords[3] = parameters.at(4).toFloat();
 
-	fogTex = StelApp::getInstance().getTextureManager().createTexture(getTexturePath(landscapeIni.value("landscape/fogtex").toString(), landscapeId), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
-	s = landscapeIni.value("landscape/fog").toString();
-	sscanf(s.toLocal8Bit(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
+	QString fogTexName = landscapeIni.value("landscape/fogtex").toString();
+	QString fogTexPath = getTexturePath(fogTexName, landscapeId);
+	fogTex = StelApp::getInstance().getTextureManager().createTexture(fogTexPath, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	description = landscapeIni.value("landscape/fog").toString();
+	//sscanf(description.toLocal8Bit(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
+	parameters = description.split(':');
 	fogTexCoord.tex = fogTex;
-	fogTexCoord.texCoords[0] = a;
-	fogTexCoord.texCoords[1] = b;
-	fogTexCoord.texCoords[2] = c;
-	fogTexCoord.texCoords[3] = d;
+	fogTexCoord.texCoords[0] = parameters.at(1).toFloat();
+	fogTexCoord.texCoords[1] = parameters.at(2).toFloat();
+	fogTexCoord.texCoords[2] = parameters.at(3).toFloat();
+	fogTexCoord.texCoords[3] = parameters.at(4).toFloat();
 
 	fogAltAngle        = landscapeIni.value("landscape/fog_alt_angle", 0.).toFloat();
 	fogAngleShift      = landscapeIni.value("landscape/fog_angle_shift", 0.).toFloat();
