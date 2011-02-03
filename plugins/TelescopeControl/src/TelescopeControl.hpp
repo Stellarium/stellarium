@@ -81,7 +81,6 @@ public:
 	virtual void deinit();
 	virtual void update(double deltaTime);
 	virtual void draw(StelCore * core);
-	virtual void setStelStyle(const QString& section);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -199,7 +198,10 @@ public slots:
 signals:
 	void clientConnected(int slot, QString name);
 	void clientDisconnected(int slot);
-	
+
+private slots:
+	void setStelStyle(const QString& section);
+
 private:
 	//! Draw a nice animated pointer around the object if it's selected
 	void drawPointer(const StelProjectorP& prj, const StelNavigator* nav, StelPainter& sPainter);

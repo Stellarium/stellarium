@@ -33,6 +33,8 @@ class DefineTimeZoneWindow : public StelDialog
 public:
 	DefineTimeZoneWindow();
 	~DefineTimeZoneWindow();
+
+public slots:
 	void languageChanged();
 
 signals:

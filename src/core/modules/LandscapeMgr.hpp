@@ -64,12 +64,6 @@ public:
 	//! - updates adaptation lumenescence lased on visible bright objects.
 	virtual void update(double deltaTime);
 
-	//! Translate labels to new language settings.
-	virtual void updateI18n();
-
-	//! Load a color scheme from a configuration object
-	virtual void setStelStyle(const QString& section);
-
 	//! Get the order in which this module will draw it's objects relative to other modules.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
@@ -279,6 +273,13 @@ signals:
 	//! (A way of moving the need for translatable error messages to the GUI.)
 	//! \param path the path to the landscape's directory
 	void errorRemoveManually(QString path);
+
+private slots:
+	//! Load a color scheme from a configuration object
+	void setStelStyle(const QString& section);
+
+	//! Translate labels to new language settings.
+	void updateI18n();	
 
 private:
 	//! Get light pollution luminance level.
