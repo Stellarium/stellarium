@@ -139,11 +139,8 @@ QSettings* Oculars::appSettings()
 /* ********************************************************************* */
 bool Oculars::configureGui(bool show)
 {
-	if (show)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		Q_ASSERT(gui);
-		gui->getGuiActions("actionShow_Ocular_Window")->setChecked(true);
+	if (show) {
+		ocularDialog->setVisible(true);
 	}
 
 	return ready;
