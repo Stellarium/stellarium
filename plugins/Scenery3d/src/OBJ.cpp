@@ -22,7 +22,7 @@ OBJ::~OBJ( void )
 {
 }
 
-void OBJ::load( const char* filename )
+void OBJ::load( const char* filename, const enum vertexOrder order )
 {
     basePath = string(PathInfo::getDirectory(filename));
     ifstream file(filename);
@@ -38,9 +38,40 @@ void OBJ::load( const char* filename )
                 if (parts[0] == "v") { // vertex (x,y,z)
                     if (parts.size() >= 4) {
                         Vertex v;
-                        v.x = parseFloat(parts[1]);
-                        v.y = parseFloat(parts[2]);
-                        v.z = parseFloat(parts[3]);
+                        switch (order) {
+                        case XYZ:
+                            v.x = parseFloat(parts[1]);
+                            v.y = parseFloat(parts[2]);
+                            v.z = parseFloat(parts[3]);
+                            break;
+                        case XZY:
+                            v.x = parseFloat(parts[1]);
+                            v.z = parseFloat(parts[2]);
+                            v.y = parseFloat(parts[3]);
+                            break;
+                        case YXZ:
+                            v.y = parseFloat(parts[1]);
+                            v.x = parseFloat(parts[2]);
+                            v.z = parseFloat(parts[3]);
+                            break;
+                        case YZX:
+                            v.y = parseFloat(parts[1]);
+                            v.z = parseFloat(parts[2]);
+                            v.x = parseFloat(parts[3]);
+                            break;
+                        case ZXY:
+                            v.z = parseFloat(parts[1]);
+                            v.x = parseFloat(parts[2]);
+                            v.y = parseFloat(parts[3]);
+                            break;
+                        case ZYX:
+                            v.z = parseFloat(parts[1]);
+                            v.y = parseFloat(parts[2]);
+                            v.x = parseFloat(parts[3]);
+                            break;
+                        default:
+                            qDebug() << "Scenery3d plugin - Invalid vertex order, Programming bug!";
+                        }
                         minX = min(v.x, minX);
                         minY = min(v.y, minY);
                         minZ = min(v.z, minZ);
@@ -59,9 +90,40 @@ void OBJ::load( const char* filename )
                 } else if (parts[0] == "vn") { // normal (x,y,z)
                     if (parts.size() >= 4) {
                         Vertex vn;
-                        vn.x = parseFloat(parts[1]);
-                        vn.y = parseFloat(parts[2]);
-                        vn.z = parseFloat(parts[3]);
+                        switch (order) {
+                        case XYZ:
+                            vn.x = parseFloat(parts[1]);
+                            vn.y = parseFloat(parts[2]);
+                            vn.z = parseFloat(parts[3]);
+                            break;
+                        case XZY:
+                            vn.x = parseFloat(parts[1]);
+                            vn.z = parseFloat(parts[2]);
+                            vn.y = parseFloat(parts[3]);
+                            break;
+                        case YXZ:
+                            vn.y = parseFloat(parts[1]);
+                            vn.x = parseFloat(parts[2]);
+                            vn.z = parseFloat(parts[3]);
+                            break;
+                        case YZX:
+                            vn.y = parseFloat(parts[1]);
+                            vn.z = parseFloat(parts[2]);
+                            vn.x = parseFloat(parts[3]);
+                            break;
+                        case ZXY:
+                            vn.z = parseFloat(parts[1]);
+                            vn.x = parseFloat(parts[2]);
+                            vn.y = parseFloat(parts[3]);
+                            break;
+                        case ZYX:
+                            vn.z = parseFloat(parts[1]);
+                            vn.y = parseFloat(parts[2]);
+                            vn.x = parseFloat(parts[3]);
+                            break;
+                        default:
+                            qDebug() << "Scenery3d plugin - Invalid vertex order at v normals, Programming bug!";
+                    }
                         normals.push_back(vn);
                     }
                 } else if (parts[0] == "g") { // polygon group
@@ -116,16 +178,16 @@ void OBJ::load( const char* filename )
             model = Model();
         }
         loaded = true;
-        cout << vertices.size() << " vertices." << endl;
-        cout << normals.size() << " normals." << endl;
-        cout << texcoords.size() << " texture coordinates." << endl;
-        cout << models.size() << " models." << endl;
-        cout << filename << " loaded." << endl;
-        cout << "X: [" << minX << ", " << maxX << "] ";
-        cout << "Y: [" << minY << ", " << maxY << "] ";
-        cout << "Z: [" << minZ << ", " << maxZ << "]" << endl;
+        qDebug() << vertices.size() << " vertices.";
+        qDebug() << normals.size() << " normals.";
+        qDebug() << texcoords.size() << " texture coordinates.";
+        qDebug() << models.size() << " models.";
+        qDebug() << filename << " loaded.";
+        qDebug() << "X: [" << minX << ", " << maxX << "] ";
+        qDebug() << "Y: [" << minY << ", " << maxY << "] ";
+        qDebug() << "Z: [" << minZ << ", " << maxZ << "]";
     } else {
-        cerr << "Couldn't open " << filename << endl;
+        qDebug() << "Couldn't open " << filename;
     }
 }
 
