@@ -32,7 +32,7 @@
 #include "StelSphereGeometry.hpp"
 
 #include "StelPainter.hpp"
-#include "gSatStelWrapper.hpp"
+#include "gSatWrapper.hpp"
 
 
 class StelPainter;
@@ -147,7 +147,7 @@ private:
 
 	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
 
-	gSatStelWrapper *pSatWrapper;
+        gSatWrapper *pSatWrapper;
 	Vec3d Position;
 	Vec3d Vel;
 	Vec3d LatLong;
