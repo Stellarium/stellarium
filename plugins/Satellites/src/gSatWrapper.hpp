@@ -26,8 +26,8 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifndef _GSATSTELWRAPPER_HPP_
-#define _GSATSTELWRAPPER_HPP_ 1
+#ifndef _GSATWRAPPER_HPP_
+#define _GSATWRAPPER_HPP_ 1
 
 #include <QString>
 
@@ -37,12 +37,12 @@
 #include "gsatellite/gSatTEME.hpp"
 #include "gsatellite/gTime.hpp"
 
-class gSatStelWrapper
+class gSatWrapper
 {
 
 public:
-	gSatStelWrapper(QString designation, QString tle1,QString tle2);
-	~gSatStelWrapper();
+        gSatWrapper(QString designation, QString tle1,QString tle2);
+        ~gSatWrapper();
 
 	// Operation updateEpoch
 	//! @brief This operation update Epoch timestamp for gSatTEME object

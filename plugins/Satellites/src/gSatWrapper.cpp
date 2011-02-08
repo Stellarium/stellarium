@@ -1,5 +1,5 @@
 /***************************************************************************
- * Name: gSatStelWrapper.hpp
+ * Name: gSatWrapper.hpp
  *
  * Description: Wrapper over gSatTEME class.
  *              This class allow use Satellite orbit calculation module (gSAt) in
@@ -31,7 +31,7 @@
 #include "gsatellite/stdsat.h"
 #include "gsatellite/mathUtils.hpp"
 
-#include "gSatStelWrapper.hpp"
+#include "gSatWrapper.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
@@ -40,7 +40,7 @@
 #include <QByteArray>
 
 
-gSatStelWrapper::gSatStelWrapper(QString designation, QString tle1,QString tle2)
+gSatWrapper::gSatWrapper(QString designation, QString tle1,QString tle2)
 {
 	// The TLE library actually modifies the TLE strings, which is annoying (because
 	// when we get updates, we want to check if there has been a change by using ==
@@ -60,14 +60,14 @@ gSatStelWrapper::gSatStelWrapper(QString designation, QString tle1,QString tle2)
 }
 
 
-gSatStelWrapper::~gSatStelWrapper()
+gSatWrapper::~gSatWrapper()
 {
 	if (pSatellite != NULL)
 		delete pSatellite;
 }
 
 
-Vec3d gSatStelWrapper::getTEMEPos()
+Vec3d gSatWrapper::getTEMEPos()
 {
 	gVector tempPos;
 	Vec3d returnedVector;
@@ -77,14 +77,14 @@ Vec3d gSatStelWrapper::getTEMEPos()
 		returnedVector.set(tempPos[0], tempPos[1], tempPos[2]);
 	}
 	else
-		qWarning() << "gSatStelWrapper::getTEMEPos Method called without pSatellite initialized";
+                qWarning() << "gSatWrapper::getTEMEPos Method called without pSatellite initialized";
 
 	return returnedVector;
 
 }
 
 
-Vec3d gSatStelWrapper::getTEMEVel()
+Vec3d gSatWrapper::getTEMEVel()
 {
 	gVector tempVel;
 	Vec3d returnedVector;
@@ -94,14 +94,14 @@ Vec3d gSatStelWrapper::getTEMEVel()
 		returnedVector.set(tempVel[0], tempVel[1], tempVel[2]);
 	}
 	else
-		qWarning() << "gSatStelWrapper::getTEMEVel Method called without pSatellite initialized";
+                qWarning() << "gSatWrapper::getTEMEVel Method called without pSatellite initialized";
 
 	return returnedVector;
 
 }
 
 
-Vec3d gSatStelWrapper::getSubPoint()
+Vec3d gSatWrapper::getSubPoint()
 {
 	gVector tempSubPoint;
 	Vec3d returnedVector;
@@ -111,13 +111,13 @@ Vec3d gSatStelWrapper::getSubPoint()
 		returnedVector.set(tempSubPoint[0], tempSubPoint[1], tempSubPoint[2]);
 	}
 	else
-		qWarning() << "gSatStelWrapper::getTEMEVel Method called without pSatellite initialized";
+                qWarning() << "gSatWrapper::getTEMEVel Method called without pSatellite initialized";
 
 	return returnedVector;
 }
 
 
-void gSatStelWrapper::updateEpoch()
+void gSatWrapper::updateEpoch()
 {
 	double jul_utc = StelApp::getInstance().getCore()->getNavigator()->getJDay();
 	Epoch = jul_utc;
@@ -126,14 +126,14 @@ void gSatStelWrapper::updateEpoch()
 		pSatellite->setEpoch(Epoch);
 }
 
-void gSatStelWrapper::setEpoch(double ai_julianDaysEpoch)
+void gSatWrapper::setEpoch(double ai_julianDaysEpoch)
 {
 	if (pSatellite)
 		pSatellite->setEpoch(ai_julianDaysEpoch);
 }
 
 
-void gSatStelWrapper::calcObserverTEMEPosition(Vec3d& ao_position, Vec3d& ao_vel)
+void gSatWrapper::calcObserverTEMEPosition(Vec3d& ao_position, Vec3d& ao_vel)
 {
 
 	StelLocation loc   = StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation();
@@ -159,7 +159,7 @@ void gSatStelWrapper::calcObserverTEMEPosition(Vec3d& ao_position, Vec3d& ao_vel
 
 
 
-Vec3d gSatStelWrapper::getAltAz()
+Vec3d gSatWrapper::getAltAz()
 {
 
 	StelLocation loc   = StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation();
@@ -191,7 +191,7 @@ Vec3d gSatStelWrapper::getAltAz()
 	return topoSatPos;
 }
 
-void  gSatStelWrapper::getSlantRange(double &ao_slantRange, double &ao_slantRangeRate)
+void  gSatWrapper::getSlantRange(double &ao_slantRange, double &ao_slantRangeRate)
 {
 
 	Vec3d observerECIPos;
