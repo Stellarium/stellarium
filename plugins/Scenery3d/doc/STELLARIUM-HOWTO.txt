@@ -15,8 +15,6 @@ excellent representation of a sky simulation. You can walk around,
 check for (or demonstrate) possible astronomical alignments of ancient
 architecture, see sundials in action, etc.
 
-TBD/SP+PN: ShadowMap!
-
 You activate the plugin with the "circular enclosure" button at screen
 bottom or by pressing [Ctrl+3]. The other button with circular
 enclosure and tool icon (or [Ctrl+Shift+3]) opens the settings
@@ -25,6 +23,13 @@ plus cursor keys. Change eye height with [Ctrl]+[PgUp]/[PgDn]
 keys. Adding [Shift] key increases speed by 10, [Alt] by 5 (both:
 50!). If you release [Ctrl] before the cursor key, animation will
 continue. (Press [Ctrl]+any cursor key to stop.)
+
+Press [Ctrl+Space] to toggle shadow display. Note that currently
+textures are not displayed when shadow map is active.
+
+TBD: Improve ShadowMap (MW?)
+
+
 
 Getting your Google Sketchup models into Stellarium
 ====================================================
@@ -35,29 +40,43 @@ supported in Scenery3d is OBJ, which is not a native export format
 for the standard version of Google Sketchup. If you are not willing to
 afford Sketchup Pro, you have to find another way to export a textured
 OBJ model. One good exporter is available in the Kerkythea renderer
-project available at <http://www.kerkythea.net/joomla/>. Download the 
-Export your model to the Kerkythea XML format with settings
-Yes-Yes-No-No-No.  You do not have to launch Kerkythea. Then, use the
-KT2OBJ converter to create an OBJ.  You can delete the XML after the
-conversion.  Note that some texture coordinates may not be exported 
-correctly.
+project available at <http://www.kerkythea.net/joomla/>. 
 
-Alternative: ObjExporter.rb, export with settings 0xxx00. This will not
-create a TX... folder but dump all textures in the same directory as
-the OBJ and MTL files. Also, it swaps X/Z coordinates and is thus currently 
-not able to provide the correct format!
+Deselect any selection, then export your model to the Kerkythea XML
+format with settings Yes-Yes-No-No-No (Or, with selection enabled,
+make sure settings are No-Yes-Yes-No-No-No).  You do not have to
+launch Kerkythea. Then, use the KT2OBJ converter to create an OBJ.
+You can delete the XML after the conversion.  Note that some texture
+coordinates may not be exported correctly.
 
-TBD/GZ: Add SWAP mechanism in scenery3d.ini for those models?
+Unfortunately, the OBJ and Material loader does not support texture
+filenames with spaces and special characters.  You may have to rename
+the materials (also "Google Earth Snapshot", e.g. into
+Google_Earth_Snapshot") and edit the MTL file to reflect those
+changes.
 
-The walkaround in your scene requires a ground (piece of terrain)
+Working alternative: ObjExporter.rb, export with settings 0xxx00. This
+will not create a TX... folder but dump all textures in the same
+directory as the OBJ and MTL files. Unfortunately, again some texture
+coordinates seem to be bad. Also, it swaps Y/Z coordinates, therefore
+you will have to add a key to the config file, see below. Other
+exporters may also provide coordinates in any order of X, Y, Z - all
+those can be properly configured.
+
+The walkaround in your scene can use a ground level (piece of terrain)
 without overlap. The observer eye will always stay "eye height" above
-ground. Currently, there is no collision detection implemented, so you
-can easily walk through walls.
+ground. Currently, there is no collision detection with walls
+implemented, so you can easily walk through walls, or jump on high
+towers, if their platform or roof is exported in the ground layer. If
+your model has no ground, walk will be above a zero-height level.
 
 Technically, you have to export your model twice. Once, just the
 ground plane, i.e. where you will walk. Of course, for a temple or
 other building, this includes its socket above soil, and any steps.
-This plane is required to compute eye position above ground.
+This plane is required to compute eye position above ground. Note that
+it is not possible to walk in several floors of a building, or in a
+multi-plane staircase. You may have to export several "ground" planes
+and configure several scenery directories for those rare cases.
 
 The second export includes all model parts, and will be used for
 rendering. Of course, this requires the ground plane again, but also
@@ -95,6 +114,8 @@ author=<Your Name yourname@yourplace.com>
 copyright=<Copyright Info>
 description=<Description>    What you can see in this scenery, what to 
                              look for, historical context, etc.
+obj_order=XZY                If you have used an exporter which swaps Y/Z coordinates, use this key. 
+                             Default: XYZ, options: XZY, YZX, YXZ, ZXY, ZYX
 [coord]
 orig_x=<double> /* East-West-distance to zone central meridian, Meter */
 orig_y=<double> /* North distance from Equator, Meter */

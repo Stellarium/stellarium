@@ -107,6 +107,7 @@ private:
 
     OBJ* objModel;
     OBJ* groundModel;
+    OBJ::vertexOrder objVertexOrder;
     GLuint shadowMapTexture;
     Mat4f lightViewMatrix;
     Mat4f lightProjectionMatrix;
