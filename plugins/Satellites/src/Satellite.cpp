@@ -276,12 +276,12 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 {
 	if (pSatWrapper)
 	{
-		gSatStelWrapper *old = pSatWrapper;
+                gSatWrapper *old = pSatWrapper;
 		pSatWrapper = NULL;
 		delete old;
 	}
 
-	pSatWrapper = new gSatStelWrapper(designation, tle1, tle2);
+        pSatWrapper = new gSatWrapper(designation, tle1, tle2);
 }
 
 void Satellite::update(double)
