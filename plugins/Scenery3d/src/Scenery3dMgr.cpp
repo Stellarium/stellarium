@@ -407,7 +407,6 @@ StelModule* Scenery3dStelPluginInterface::getStelModule() const
 StelPluginInfo Scenery3dStelPluginInterface::getPluginInfo() const
 {
 	// Allow to load the resources when used as a static plugin
-    // GZ: re-activated this, it loads the QRC file with buttons!
         Q_INIT_RESOURCE(Scenery3d);
 	
 	StelPluginInfo info;

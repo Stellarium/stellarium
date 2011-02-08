@@ -141,6 +141,14 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
     modelSceneryFile = scenery3dIni.value("model/scenery").toString();
     modelGroundFile = scenery3dIni.value("model/ground").toString();
 
+    QString objVertexOrderString=scenery3dIni.value("model/obj_order", "XYZ").toString();
+    objVertexOrder=OBJ::XYZ;
+    if (objVertexOrderString.compare("XZY") == 0) objVertexOrder=OBJ::XZY;
+    if (objVertexOrderString.compare("YXZ") == 0) objVertexOrder=OBJ::YXZ;
+    if (objVertexOrderString.compare("YZX") == 0) objVertexOrder=OBJ::YZX;
+    if (objVertexOrderString.compare("ZXY") == 0) objVertexOrder=OBJ::ZXY;
+    if (objVertexOrderString.compare("ZYX") == 0) objVertexOrder=OBJ::ZYX;
+
     orig_x = scenery3dIni.value("coord/orig_x").toReal();
     orig_y = scenery3dIni.value("coord/orig_y").toReal();
     orig_z = scenery3dIni.value("coord/orig_z").toReal();
@@ -153,13 +161,13 @@ void Scenery3d::loadModel()
 {
 	QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
 	qDebug() << "Trying to load OBJ model: " << modelFile;
-	objModel->load(modelFile.toAscii());
+        objModel->load(modelFile.toAscii(), objVertexOrder);
         objModel->transform(zRotateMatrix);
 	objModelArrays = objModel->getStelArrays();
 
 	modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelGroundFile);
 	qDebug() << "Trying to load ground OBJ model: " << modelFile;
-	groundModel->load(modelFile.toAscii());
+        groundModel->load(modelFile.toAscii(), objVertexOrder);
         groundModel->transform(zRotateMatrix);
 
 
