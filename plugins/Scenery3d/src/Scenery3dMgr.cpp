@@ -171,6 +171,7 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
         return false;
 
     LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+    lmgr->setFlagLandscapeSetsLocation(true);
     lmgr->setCurrentLandscapeName(newScenery3d->getLandscapeName());
 
     if (scenery3d)
@@ -180,6 +181,13 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
     }
 
     newScenery3d->loadModel();
+    if (newScenery3d->hasLocation())
+    {
+        qDebug() << "Re-Setting location to given coordinates.";
+        StelApp::getInstance().getCore()->getNavigator()->moveObserverTo(newScenery3d->getLocation());
+    }
+    else qDebug() << "No coordinates given in scenery3d.";
+
 
     scenery3d = newScenery3d;
     currentScenery3dID = id;
