@@ -73,7 +73,12 @@ public:
     QString getDescription() const { return description; }
     //! @return Name of the landscape associated with the scenery.
     QString getLandscapeName() const { return landscapeName; }
-	
+    //! @return Flag, whether scenery provides location data or only inherits from its linked Landscape.
+    bool hasLocation() const { return (location != NULL); }
+    //! @return Location data. These are valid only if written in the @file scenery3d.ini, section location.
+    //! Else, returns NULL. Check with .hasLocation() before calling.
+    const StelLocation& getLocation() const {return *location; }
+
     enum shadowCaster { None, Sun, Moon };
 
 private:
@@ -127,6 +132,7 @@ private:
     QString landscapeName;
     QString modelSceneryFile;
     QString modelGroundFile;
+    StelLocation* location;
 
     qreal orig_x;
     qreal orig_y;

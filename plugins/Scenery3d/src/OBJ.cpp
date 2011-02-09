@@ -136,9 +136,11 @@ void OBJ::load( const char* filename, const enum vertexOrder order )
                     }
                 } else if (parts[0] == "usemtl") { // use material
                     if (parts.size() > 1) {
-                        model.material = parts[1];
+                        //model.material = parts[1];// GZ: fails for spaces in material names!
+                        model.material = line.substr(line.find(parts[1]));
                         trim_right(model.material);
-                        printf("usemtl %s.\n", model.material.c_str());
+                        //printf("usemtl %s.\n", model.material.c_str());
+                        qDebug() << "OBJ: usemtl " << model.material.c_str();
                     }
                 } else if (parts[0] == "f") { // face
                     Face face;
@@ -165,8 +167,10 @@ void OBJ::load( const char* filename, const enum vertexOrder order )
                     }
                 } else if (parts[0] == "mtllib") {
                     if (parts.size() > 1) {
-                        string path = basePath + parts[1];
+                        //string path = basePath + parts[1];// GZ: fails for spaces in file names!
+                        string path = basePath + line.substr(line.find(parts[1]));
                         trim_right(path);
+                        qDebug() << "OBJ: mtllib " << path.c_str();
                         mtlLib.load(path.c_str());
                         mtlLib.uploadTexturesGL();
                     }
@@ -183,6 +187,7 @@ void OBJ::load( const char* filename, const enum vertexOrder order )
         qDebug() << texcoords.size() << " texture coordinates.";
         qDebug() << models.size() << " models.";
         qDebug() << filename << " loaded.";
+        qDebug() << mtlLib.size() << " materials.";
         qDebug() << "X: [" << minX << ", " << maxX << "] ";
         qDebug() << "Y: [" << minY << ", " << maxY << "] ";
         qDebug() << "Z: [" << minZ << ", " << maxZ << "]";

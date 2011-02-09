@@ -50,14 +50,13 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
     :core(NULL),
     absolutePosition(0.0, 0.0, 0.0),
     movement_x(0.0f), movement_y(0.0f), movement_z(0.0f),
-    objModel(NULL)
+    objModel(NULL), groundModel(NULL), heightmap(NULL), location(NULL)
 {
     this->cubemapSize=cubemapSize;
     this->shadowmapSize=shadowmapSize;
     textEnabled=false;
     objModel = new OBJ();
     groundModel = new OBJ();
-    heightmap = NULL;
     zRotateMatrix = Mat4d::identity();
     shadowMapTexture = 0;
     for (int i=0; i<6; i++) {
@@ -111,12 +110,11 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
 
 Scenery3d::~Scenery3d()
 {
-    if (heightmap != NULL) {
+    if (heightmap) {
         delete heightmap;
         heightmap = NULL;
     }
-    delete objModel;
-    delete groundModel;
+    if (location) delete location;
 	 if (shadowMapTexture != 0)
 	 {
 		 glDeleteTextures(1, &shadowMapTexture);
@@ -129,6 +127,8 @@ Scenery3d::~Scenery3d()
             cubeMap[i] = NULL;
         }
     }
+    if (groundModel != objModel) delete groundModel;
+    delete objModel;
 }
 
 void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery3dID)
@@ -139,7 +139,8 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
     description = scenery3dIni.value("model/description").toString();
     landscapeName = scenery3dIni.value("model/landscape").toString();
     modelSceneryFile = scenery3dIni.value("model/scenery").toString();
-    modelGroundFile = scenery3dIni.value("model/ground").toString();
+    if (scenery3dIni.contains("model/ground"))
+        modelGroundFile = scenery3dIni.value("model/ground").toString();
 
     QString objVertexOrderString=scenery3dIni.value("model/obj_order", "XYZ").toString();
     objVertexOrder=OBJ::XYZ;
@@ -148,6 +149,26 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
     if (objVertexOrderString.compare("YZX") == 0) objVertexOrder=OBJ::YZX;
     if (objVertexOrderString.compare("ZXY") == 0) objVertexOrder=OBJ::ZXY;
     if (objVertexOrderString.compare("ZYX") == 0) objVertexOrder=OBJ::ZYX;
+
+    if (scenery3dIni.contains("location/latitude"))
+    {
+        location=new StelLocation();
+        location->planetName = scenery3dIni.value("location/planet", "Earth").toString();
+        location->altitude = scenery3dIni.value("location/altitude", 0).toInt();
+        if (scenery3dIni.contains("location/latitude"))
+           location->latitude = StelUtils::getDecAngle(scenery3dIni.value("location/latitude").toString())*180./M_PI;
+        if (scenery3dIni.contains("location/longitude"))
+           location->longitude = StelUtils::getDecAngle(scenery3dIni.value("location/longitude").toString())*180./M_PI;
+        if (scenery3dIni.contains("location/country"))
+           location->country = scenery3dIni.value("location/country").toString();
+        if (scenery3dIni.contains("location/state"))
+           location->state = scenery3dIni.value("location/state").toString();
+        if (scenery3dIni.contains("location/name"))
+           location->name = scenery3dIni.value("location/name").toString();
+           else
+           location->name = name;
+        location->landscapeKey = landscapeName;
+    }
 
     orig_x = scenery3dIni.value("coord/orig_x").toReal();
     orig_y = scenery3dIni.value("coord/orig_y").toReal();
@@ -165,11 +186,17 @@ void Scenery3d::loadModel()
         objModel->transform(zRotateMatrix);
 	objModelArrays = objModel->getStelArrays();
 
-	modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelGroundFile);
-	qDebug() << "Trying to load ground OBJ model: " << modelFile;
-        groundModel->load(modelFile.toAscii(), objVertexOrder);
-        groundModel->transform(zRotateMatrix);
-
+        if (modelGroundFile.isEmpty())
+            groundModel=objModel;
+        else if (!modelGroundFile.compare("NULL"))
+            groundModel=NULL;
+        else
+        {
+            modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelGroundFile);
+            qDebug() << "Trying to load ground OBJ model: " << modelFile;
+            groundModel->load(modelFile.toAscii(), objVertexOrder);
+            groundModel->transform(zRotateMatrix);
+        }
 
 	// Rotate vertices around z axis
         /*for (unsigned int i=0; i<objModelArrays.size(); i++)

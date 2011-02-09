@@ -13,10 +13,13 @@ MTL::MTL(void)
 
 MTL::~MTL(void)
 {
+    mtlMap.clear();
 }
 
 void MTL::load(const char* filename)
 {
+    qDebug() << "MTL: loading " << filename;
+    //qDebug() << "MTL: basepath " << PathInfo::getDirectory(filename);
     basePath = string(PathInfo::getDirectory(filename));
     ifstream file(filename);
     string line;
@@ -30,11 +33,13 @@ void MTL::load(const char* filename)
                 if (parts[0] == "newmtl") {
                     if (parts.size() > 1) {
                         if (!entryStr.empty())
-                        {
-                            printf("newmtl %s.\n", entryStr.c_str());
+                        { // GZ: this feeds the old material at last into the map. What happens to the last? See below.
+                            //qDebug() << "MTL: newmtl " << entryStr.c_str();
                             mtlMap[entryStr] = material;
                         }
-                        entryStr = parts[1];
+                        // GZ: allow spaces in material names:
+                        //entryStr = parts[1];
+                        entryStr = line.substr(line.find(parts[1]));
                         trim_right(entryStr);
                     }
                 } else if (parts[0] == "Kd") {
@@ -43,9 +48,25 @@ void MTL::load(const char* filename)
                         material.color.g = parseFloat(parts[2]);
                         material.color.b = parseFloat(parts[3]);
                     }
+                } else if (parts[0] == "Ka") {
+                    if (parts.size() > 4) {
+                        material.ambient.r = parseFloat(parts[1]);
+                        material.ambient.g = parseFloat(parts[2]);
+                        material.ambient.b = parseFloat(parts[3]);
+                    }
+                } else if (parts[0] == "Ks") {
+                    if (parts.size() > 4) {
+                        material.specular.r = parseFloat(parts[1]);
+                        material.specular.g = parseFloat(parts[2]);
+                        material.specular.b = parseFloat(parts[3]);
+                    }
                 } else if (parts[0] == "map_Kd") {
                     if (parts.size() > 1) {
-                        material.texture = parts[1];
+                        //material.texture = parts[1]; // GZ: fails for spaces in texture names!
+                        material.texture = line.substr(line.find(parts[1]));
+                        //qDebug() << "MTL: From Line: " << line.c_str() << "we derive";
+                        //qDebug() << "MTL: map_Kd " << material.texture.c_str();
+
                         trim_right(material.texture);
                         size_t position = material.texture.find("\\");
                         while (position != string::npos)
@@ -61,8 +82,15 @@ void MTL::load(const char* filename)
                 }
             }
         }
-    } else {
-        fprintf(stderr, "ERROR: Couldn't load %s.\n", filename);
+        // GZ bugfix: We may have a material description open. Store it into the map.
+        if (!entryStr.empty())
+        {
+            //qDebug() << "MTL: newmtl " << entryStr.c_str();
+            mtlMap[entryStr] = material;
+        }
+    }
+    else {
+        qDebug() << "MTL ERROR: Couldn't load " <<  filename;
     }
 }
 
