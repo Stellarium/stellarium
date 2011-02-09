@@ -64,13 +64,14 @@ exporters may also provide coordinates in any order of X, Y, Z - all
 those can be properly configured.
 
 The walkaround in your scene can use a ground level (piece of terrain)
-without overlap. The observer eye will always stay "eye height" above
+on which the observer can walk. The observer eye will always stay "eye height" above
 ground. Currently, there is no collision detection with walls
 implemented, so you can easily walk through walls, or jump on high
 towers, if their platform or roof is exported in the ground layer. If
-your model has no ground, walk will be above a zero-height level.
+your model has no ground, walk will be on the highest surface of the scenery layer.
+If you use the special name NULL as ground layer, walk will be above a zero-height level.
 
-Technically, you have to export your model twice. Once, just the
+Technically, you should export your model twice. Once, just the
 ground plane, i.e. where you will walk. Of course, for a temple or
 other building, this includes its socket above soil, and any steps.
 This plane is required to compute eye position above ground. Note that
@@ -108,7 +109,7 @@ landscape=<landscapename>    Name of an available Stellarium landscape.
                              includes geographical coordinates.
                              The landscape also provides the background 
                              image of your scenery.
-ground=<Temple>_ground.obj   Ground plane.
+ground=<Temple>_ground.obj   Optional: Ground plane. (NULL for zero altitude.)
 scenery=<Temple>.obj         The complete model, including visible ground.
 author=<Your Name yourname@yourplace.com>
 copyright=<Copyright Info>

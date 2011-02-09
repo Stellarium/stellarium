@@ -21,8 +21,9 @@ class OBJ
         OBJ( void );
         virtual ~OBJ( void );
 
- 	      //! OBJ files can have vertices encoded in different order. 
-          enum vertexOrder { XYZ, XZY, YXZ, YZX, ZXY, ZYX };
+        //! OBJ files can have vertices encoded in different order.
+        //! Only XYZ and XZY may occur in real life, but we can cope with all...
+        enum vertexOrder { XYZ, XZY, YXZ, YZX, ZXY, ZYX };
 
 
         //! Structure for holding vertex arrays for use with Stellarium.

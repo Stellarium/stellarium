@@ -16,13 +16,16 @@ class MTL
         //! Struct for holding a single RGB color.
         struct Color {
             Color() : r(1.0f), g(1.0f), b(1.0f) {}
+            Color(float nr, float ng, float nb):  r(nr), g(ng), b(nb){}
             float r, g, b;
         };
 
         //! Struct for holding a material definition.
         struct Material {
-            Material() : color(), texture(), shininess(0) {}
-            Color color; //!< Material color.
+            Material() : color(), ambient(0.f,0.f,0.f), specular(0.f,0.f,0.f), texture(), shininess(0) {}
+            Color color; //!< Material diffuse color.
+            Color ambient; //!< Ambient color.
+            Color specular; //!< Specular color.
             std::string texture; //!< Filename of the texture file.
             int shininess; //!< Material shininess factor.
         };
@@ -44,6 +47,8 @@ class MTL
         //! Make sure to call uploadTexturesGL() before using this.
         //! @param texName File name of the texture as defined in the .mtl file.
         StelTextureSP getTexture(std::string texName);
+        //! @return number of materials in map.
+        int size() { return mtlMap.size(); }
     private:
         std::string absolutePath(std::string path);
 
