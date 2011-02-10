@@ -226,6 +226,27 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << QString("<b>Y:</b> %1 ").arg(Vel[1], 5, 'f', 2);
 		oss << QString("<b>Z:</b> %1 ").arg(Vel[2], 5, 'f', 2) << "<br>";
 
+                oss << "Visibility:  ";
+                switch(Visibility)
+                {
+                case 1:
+                    oss << "Radar Sun" << "<br>";
+                    break;
+                case 2:
+                    oss << "Visible" << "<br>";
+                    break;
+                case 3:
+                    oss << "Radar Night (eclipsed)" << "<br>";
+                    break;
+                case 4:
+                    oss << "Not Visible" << "<br>";
+                    break;
+                default:
+                    break;
+
+                }
+
+
 	}
 
 	if (flags&Extra2 && comms.size() > 0)
@@ -298,6 +319,7 @@ void Satellite::update(double)
 		ElAzPos  = pSatWrapper->getAltAz();
 
 		pSatWrapper->getSlantRange(range, rangeRate);
+                Visibility = pSatWrapper->getVisibilityPredict();
 
 		// Compute orbit points to draw orbit line.
 		if (orbitVisible) computeOrbitPoints();
