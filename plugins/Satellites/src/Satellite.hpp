@@ -152,6 +152,7 @@ private:
 	Vec3d Vel;
 	Vec3d LatLong;
 	Vec3d ElAzPos;
+        int   Visibility;
 
 	//Satellite Orbit Draw
 	QFont     font;

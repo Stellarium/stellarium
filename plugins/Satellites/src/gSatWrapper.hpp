@@ -37,6 +37,12 @@
 #include "gsatellite/gSatTEME.hpp"
 #include "gsatellite/gTime.hpp"
 
+//constants for predict visibility
+#define  RADAR_SUN   1
+#define  VISIBLE     2
+#define  RADAR_NIGHT 3
+#define  NOT_VISIBLE 4
+
 class gSatWrapper
 {
 
@@ -73,29 +79,54 @@ public:
 	// Operation calculateLook
 	//! @brief This operation compute the coordinates in StelCore::FrameAltAz
 	//! @return Vect3d Vector with coordinates
-	//! References:
+        //! @ref
 	//!  Orbital Coordinate Systems, Part II
 	//!   Dr. T.S. Kelso
 	//!   http://www.celestrak.com/columns/v02n02/
 	Vec3d getAltAz();
 
-
+        // Operation getSlantRange
+        //! @brief This operation compute the slant range (distance between the
+        //! satellite and the observer) and its variation/seg
+        //! @param &ao_slantRange Reference to a output variable where the method store the slant range measured in Km
+        //! @param &ao_slantRangeRate Reference to a output variable where the method store the slant range variation in Km/s
+        //! @return void
 	void  getSlantRange(double &ao_slantRange, double &ao_slantRangeRate); //meassured in km and km/s
 
 
+        // Operation getVisibilityPredict
+        //! @brief This operation predicts the satellite visibility contidions.
+        //! This prediction can return 3 different states
+        //!   RADAR_SUN when satellite an observer are in the sunlit
+        //!   VISIBLE   when satellite is in sunlit and observer is in the dark. Satellite could be visible in the sky.
+        //!   RADAR_NIGHT when satellite is eclipsed by the earth shadow.
+        //!   NOT_VISIBLE The satellite is under the observer horizon
+        //! @return
+        //!     1 if RADAR_SUN
+        //!     2 if VISIBLE
+        //!     3 if RADAR_NIGHt
+        //!     3 if NOT_VISIBLE
+        //! @ref
+        //!   Fundamentals of Astrodynamis and Applications (Third Edition) pg 898
+        //!   David A. Vallado
+        int getVisibilityPredict();
+
 
 private:
-	// Operation calcObserverTEMEPosition
-	//! @brief This operation compute the observer ECI coordinates in TEME framework
-	//! for the ai_epoch time
+        // Operation calcObserverECIPosition
+        //! @brief This operation compute the observer ECI coordinates in Geocentric
+        //! Ecuatorial Coordinate System (IJK) for the ai_epoch time.
+        //! This position can be asumed as observer position in TEME framework without an appreciable error.
+        //! ECI axis (IJK) are parallel to StelCore::EquinoxEQ Framework but centered in the earth centre
+        //! instead the observer position.
 	//! @details
 	//! References:
 	//!  Orbital Coordinate Systems, Part II
 	//!   Dr. T.S. Kelso
 	//!   http://www.celestrak.com/columns/v02n02/
-	//! @param[out] ao_position Observer TEME position vector measured in Km
-	//! @param[out] ao_vel Observer TEME velocity vector measured in Km/s
-	void calcObserverTEMEPosition(Vec3d& ao_position, Vec3d& ao_vel);
+        //! @param[out] ao_position Observer ECI position vector measured in Km
+        //! @param[out] ao_vel Observer ECI velocity vector measured in Km/s
+        void calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_vel);
 
 
 private:
@@ -103,9 +134,5 @@ private:
 	gTime	 Epoch;
 
 };
-
-
-
-
 
 #endif
