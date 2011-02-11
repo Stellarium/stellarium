@@ -229,23 +229,26 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
                 oss << "Visibility:  ";
                 switch(Visibility)
                 {
-                case 1:
-                    oss << "Radar Sun" << "<br>";
+                case RADAR_SUN:
+                    oss << "Sat&Observer in Sunlit" << "<br>";
                     break;
-                case 2:
+                case VISIBLE:
                     oss << "Visible" << "<br>";
                     break;
-                case 3:
-                    oss << "Radar Night (eclipsed)" << "<br>";
+                case RADAR_NIGHT:
+                    oss << "Sat. Eclipsed" << "<br>";
                     break;
-                case 4:
-                    oss << "Not Visible" << "<br>";
+                case NOT_VISIBLE:
+                    oss << "Sat. Not Visible" << "<br>";
                     break;
                 default:
                     break;
 
                 }
-
+#define  RADAR_SUN   1
+#define  VISIBLE     2
+#define  RADAR_NIGHT 3
+#define  NOT_VISIBLE 4
 
 	}
 
@@ -301,6 +304,11 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 		pSatWrapper = NULL;
 		delete old;
 	}
+
+        tleElements.first.clear();
+        tleElements.first.append(tle1);
+        tleElements.second.clear();
+        tleElements.second.append(tle2);
 
         pSatWrapper = new gSatWrapper(designation, tle1, tle2);
         orbitPoints.clear();
