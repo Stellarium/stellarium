@@ -303,6 +303,7 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 	}
 
         pSatWrapper = new gSatWrapper(designation, tle1, tle2);
+        orbitPoints.clear();
 }
 
 void Satellite::update(double)
