@@ -45,7 +45,12 @@
 
 gSatWrapper::gSatWrapper(QString designation, QString tle1,QString tle2)
 {
-	// The TLE library actually modifies the TLE strings, which is annoying (because
+        if(tle1.compare("")|tle2.compare(""))
+        {
+           qWarning() << "gSatWrapper::Constructor called without tle data";
+        }
+
+        // The TLE library actually modifies the TLE strings, which is annoying (because
 	// when we get updates, we want to check if there has been a change by using ==
 	// with the original.  Thus we make a copy to send to the TLE library.
 	QByteArray t1(tle1.toAscii().data()), t2(tle2.toAscii().data());
