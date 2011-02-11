@@ -1,6 +1,5 @@
 /*
- * portions Copyright (C) 2010 Bernhard Reutner-Fischer
- * portions Copyright (C) 2010 Timothy Reaves
+ * Copyright (C) 2010 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +23,8 @@
 #include <QSettings>
 
 #include <math.h>
+
+#define RADIAN_TO_DEGREES 57.2957795131
 
 CCD::CCD()
 {
@@ -141,13 +142,13 @@ void CCD::setPixelHeight(double height)
 
 double CCD::getActualFOVx(Telescope *telescope) const
 {
-	double FOVx = 57.2957795131 * this->chipHeight() / telescope->focalLength();
+	double FOVx = RADIAN_TO_DEGREES * this->chipHeight() / telescope->focalLength();
 	return FOVx;
 }
 
 double CCD::getActualFOVy(Telescope *telescope) const
 {
-	double FOVy = 57.2957795131 * this->chipWidth() / telescope->focalLength();
+	double FOVy = RADIAN_TO_DEGREES * this->chipWidth() / telescope->focalLength();
 	return FOVy;
 }
 

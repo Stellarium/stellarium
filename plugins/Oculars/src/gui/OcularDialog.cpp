@@ -67,46 +67,8 @@ OcularDialog::OcularDialog(QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<T
 
 OcularDialog::~OcularDialog()
 {
-	//These exist only if the window has been shown once:
-	if (dialog)
-	{
-		ui->ocularAFov->setValidator(0);
-		ui->ocularFL->setValidator(0);
-		ui->telescopeFL->setValidator(0);
-		ui->telescopeDiameter->setValidator(0);
-		ui->ocularName->setValidator(0);
-		ui->telescopeName->setValidator(0);
-		ui->ocularName->setValidator(0);
-		ui->ccdName->setValidator(0);
-		ui->ccdResX->setValidator(0);
-		ui->ccdResY->setValidator(0);
-		ui->ccdChipX->setValidator(0);
-		ui->ccdChipY->setValidator(0);
-		ui->ccdPixelX->setValidator(0);
-		ui->ccdPixelX->setValidator(0);
-		delete ccdMapper;
-		ccdMapper = NULL;
-		delete ocularMapper;
-		ocularMapper = NULL;
-		delete telescopeMapper;
-		telescopeMapper = NULL;
-	}
 	delete ui;
 	ui = NULL;
-	delete validatorPositiveInt;
-	validatorPositiveInt = NULL;
-	delete validatorPositiveDouble;
-	validatorPositiveDouble = NULL;
-	delete validatorOcularAFOV;
-	validatorOcularAFOV = NULL;
-	delete validatorOcularEFL;
-	validatorOcularEFL = NULL;
-	delete validatorTelescopeDiameter;
-	validatorTelescopeDiameter = NULL;
-	delete validatorTelescopeFL;
-	validatorTelescopeFL = NULL;
-	delete validatorName;
-	validatorName = NULL;
 }
 
 /* ********************************************************************* */
@@ -156,17 +118,24 @@ void OcularDialog::deleteSelectedCCD()
 	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
 }
 
-
 void OcularDialog::deleteSelectedOcular()
 {
-	ocularTableModel->removeRows(ui->ocularListView->currentIndex().row(), 1);
-	ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
+	if (ocularTableModel->rowCount() == 1) {
+		qDebug() << "Can not delete the last entry.";
+	} else {
+		ocularTableModel->removeRows(ui->ocularListView->currentIndex().row(), 1);
+		ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
+	}
 }
 
 void OcularDialog::deleteSelectedTelescope()
 {
-	telescopeTableModel->removeRows(ui->telescopeListView->currentIndex().row(), 1);
-	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
+	if (telescopeTableModel->rowCount() == 1) {
+		qDebug() << "Can not delete the last entry.";
+	} else {
+		telescopeTableModel->removeRows(ui->telescopeListView->currentIndex().row(), 1);
+		ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
+	}
 }
 
 void OcularDialog::insertNewCCD()
@@ -193,64 +162,26 @@ void OcularDialog::insertNewTelescope()
 #pragma mark Private Slot Methods
 #endif
 /* ********************************************************************* */
-void OcularDialog::keyBindingTextTogglePluginChanged(const QString& newString)
+void OcularDialog::keyBindingTogglePluginChanged(const QString& newString)
 {
 	Oculars::appSettings()->setValue("bindings/toggle_oculars", newString);
-	this->updateActionMapping("toggle_oculars", newString);
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	Q_ASSERT(gui);
+	QAction* action = gui->getGuiActions("toggle_oculars");
+	if (action != NULL) {
+		action->setShortcut(QKeySequence(newString.trimmed()));
+	}
 }
 
-void OcularDialog::keyBindingTextTogglePluginConfigChanged(const QString& newString)
+void OcularDialog::keyBindingPopupNavigatorConfigChanged(const QString& newString)
 {
-	Oculars::appSettings()->setValue("bindings/toggle_config_dialog", newString);
-	this->updateActionMapping("actionShow_Ocular_Window", newString);
-}
-
-void OcularDialog::keyBindingTextToggleCrosshairChanged(const QString& newString)
-{
-	Oculars::appSettings()->setValue("bindings/toggle_crosshair", newString);
-	this->updateActionMapping("toggle_crosshair", newString);
-}
-
-void OcularDialog::keyBindingTextToggleTelradChanged(const QString& newString)
-{
-	Oculars::appSettings()->setValue("bindings/toggle_telrad", newString);
-	this->updateActionMapping("actionShow_Ocular_Telrad", newString);
-}
-
-void OcularDialog::keyBindingTextNextCCDChanged(const QString& newString)
-{
-	Oculars::appSettings()->setValue("bindings/next_ccd", newString);
-	this->updateActionMapping("next_ccd", newString);
-}
-
-void OcularDialog::keyBindingTextNextOcularChanged(const QString& newString)
-{
-	Oculars::appSettings()->setValue("bindings/next_ocular", newString);
-	this->updateActionMapping("next_ocular", newString);
-}
-
-void OcularDialog::keyBindingTextNextTelescopeChanged(const QString& newString)
-{
-	Oculars::appSettings()->setValue("bindings/next_telescope", newString);
-	this->updateActionMapping("next_telescope", newString);
-}
-
-void OcularDialog::keyBindingTextPreviousCCDChanged(const QString& newString)
-{
-	Oculars::appSettings()->setValue("bindings/prev_ccd", newString);
-	this->updateActionMapping("perv_ccd", newString);
-}
-
-void OcularDialog::keyBindingTextPreviousOcularChanged(const QString& newString)
-{
-	Oculars::appSettings()->setValue("bindings/prev_ocular", newString);
-	this->updateActionMapping("perv_ocular", newString);
-}
-
-void OcularDialog::keyBindingTextPreviousTelescopeChanged(const QString& newString)
-{
-	Oculars::appSettings()->setValue("bindings/prev_telescope", newString);
-	this->updateActionMapping("perv_telescope", newString);
+	Oculars::appSettings()->setValue("bindings/popup_navigator", newString);
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	Q_ASSERT(gui);
+	QAction* action = gui->getGuiActions("actionShow_Ocular_Menu");
+	if (action != NULL) {
+		action->setShortcut(QKeySequence(newString.trimmed()));
+	}
 }
 					  
 void OcularDialog::scaleImageCircleStateChanged(int state)
@@ -275,6 +206,7 @@ void OcularDialog::scaleImageCircleStateChanged(int state)
 void OcularDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
 	ui->ccdListView->setModel(ccdTableModel);
 	ui->ocularListView->setModel(ocularTableModel);
 	ui->telescopeListView->setModel(telescopeTableModel);
@@ -307,36 +239,14 @@ void OcularDialog::createDialogContent()
 	ui->telescopeName->setValidator(validatorName);
 	
 	// The key bindings
-	ui->togglePluginLineEdit->setText(Oculars::appSettings()->value("bindings/toggle_oculars").toString());
-	ui->toggleConfigWindowLineEdit->setText(Oculars::appSettings()->value("bindings/toggle_config_dialog").toString());
-	ui->toggleCrosshairLineEdit->setText(Oculars::appSettings()->value("bindings/toggle_crosshair").toString());
-	ui->toggleTelradLineEdit->setText(Oculars::appSettings()->value("bindings/toggle_telrad").toString());
-	ui->nextCCDLineEdit->setText(Oculars::appSettings()->value("bindings/next_ccd").toString());
-	ui->nextOcularLineEdit->setText(Oculars::appSettings()->value("bindings/next_ocular").toString());
-	ui->nextTelescopeLineEdit->setText(Oculars::appSettings()->value("bindings/next_telescope").toString());
-	ui->previousCCDLineEdit->setText(Oculars::appSettings()->value("bindings/prev_ccd").toString());
-	ui->previousOcularLineEdit->setText(Oculars::appSettings()->value("bindings/prev_ocular").toString());
-	ui->previousTelescopeLineEdit->setText(Oculars::appSettings()->value("bindings/prev_telescope").toString());
+	QString bindingString = Oculars::appSettings()->value("bindings/toggle_oculars", "Ctrl+O").toString();
+	ui->togglePluginLineEdit->setText(bindingString);
+	bindingString = Oculars::appSettings()->value("bindings/popup_navigator", "Alt+O").toString();
+	ui->togglePopupNavigatorWindowLineEdit->setText(bindingString);
 	connect(ui->togglePluginLineEdit, SIGNAL(textEdited(const QString&)), 
-			this, SLOT(keyBindingTextTogglePluginChanged(const QString&)));
-	connect(ui->toggleConfigWindowLineEdit, SIGNAL(textEdited(const QString&)), 
-			this, SLOT(keyBindingTextTogglePluginConfigChanged(const QString&)));
-	connect(ui->toggleCrosshairLineEdit, SIGNAL(textEdited(const QString&)), 
-			this, SLOT(keyBindingTextToggleCrosshairChanged(const QString&)));
-	connect(ui->toggleTelradLineEdit, SIGNAL(textEdited(const QString&)), 
-			this, SLOT(keyBindingTextToggleTelradChanged(const QString&)));
-	connect(ui->nextCCDLineEdit, SIGNAL(textEdited(const QString&)), 
-			this, SLOT(keyBindingTextNextCCDChanged(const QString&)));
-	connect(ui->nextOcularLineEdit, SIGNAL(textEdited(const QString&)), 
-			this, SLOT(keyBindingTextNextOcularChanged(const QString&)));
-	connect(ui->nextTelescopeLineEdit, SIGNAL(textEdited(const QString&)), 
-			this, SLOT(keyBindingTextNextTelescopeChanged(const QString&)));
-	connect(ui->previousCCDLineEdit, SIGNAL(textEdited(const QString&)), 
-			this, SLOT(keyBindingTextPreviousCCDChanged(const QString&)));
-	connect(ui->previousOcularLineEdit, SIGNAL(textEdited(const QString&)), 
-			this, SLOT(keyBindingTextPreviousOcularChanged(const QString&)));
-	connect(ui->previousTelescopeLineEdit, SIGNAL(textEdited(const QString&)), 
-			this, SLOT(keyBindingTextPreviousTelescopeChanged(const QString&)));
+			this, SLOT(keyBindingTogglePluginChanged(const QString&)));
+	connect(ui->togglePopupNavigatorWindowLineEdit, SIGNAL(textEdited(const QString&)), 
+			this, SLOT(keyBindingPopupNavigatorConfigChanged(const QString&)));
 						  
 	// The CCD mapper
 	ccdMapper = new QDataWidgetMapper();
@@ -362,6 +272,7 @@ void OcularDialog::createDialogContent()
 	ocularMapper->addMapping(ui->ocularAFov, 1);
 	ocularMapper->addMapping(ui->ocularFL, 2);
 	ocularMapper->addMapping(ui->ocularFieldStop, 3);
+	ocularMapper->addMapping(ui->binocularsCheckBox, 4, "checked");
 	ocularMapper->toFirst();
 	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 			  ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
@@ -388,14 +299,4 @@ void OcularDialog::createDialogContent()
 
 	//Initialize the style
 	updateStyle();
-}
-
-void OcularDialog::updateActionMapping(const QString& actionName, const QString& newMapping)
-{
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	QAction* action = gui->getGuiActions(actionName);
-	if (action != NULL) {
-		action->setShortcut(QKeySequence(newMapping.trimmed()));
-	}
 }
