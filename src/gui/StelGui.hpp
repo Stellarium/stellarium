@@ -60,10 +60,7 @@ public:
 	//! Initialize the StelGui object.
 	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, StelAppGraphicsWidget* stelAppGraphicsWidget);
 	void update();
-	virtual void updateI18n();
 
-	//! Load color scheme from the given ini file and section name
-	virtual void setStelStyle(const QString& section);
 	StelStyle getStelStyle() const {return currentStelStyle;}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -147,7 +144,10 @@ private slots:
 	void reloadStyle();
 	void scriptStarted();
 	void scriptStopped();
+	//! Load color scheme from the given ini file and section name
+	void setStelStyle(const QString& section);
 	void quit();
+	void updateI18n();
 	
 private:
 	QGraphicsWidget* topLevelGraphicsWidget;

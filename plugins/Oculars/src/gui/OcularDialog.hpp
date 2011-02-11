@@ -23,7 +23,7 @@
 #include "CCD.hpp"
 #include "Ocular.hpp"
 #include "PropertyBasedTableModel.hpp"
-#include "StelDialogOculars.hpp"
+#include "StelDialog.hpp"
 #include "StelStyle.hpp"
 #include "Telescope.hpp"
 
@@ -39,14 +39,13 @@ class QStandardItemModel;
 QT_END_NAMESPACE
 
 
-class OcularDialog : public StelDialogOculars
+class OcularDialog : public StelDialog
 {
 	Q_OBJECT
 
 public:
 	OcularDialog(QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes);
 	virtual ~OcularDialog();
-	void languageChanged();
 	//! Notify that the application style changed
 	void styleChanged();
 	void setOculars(QList<Ocular*> theOculars);
@@ -60,6 +59,7 @@ public slots:
 	void insertNewCCD();
 	void insertNewOcular();
 	void insertNewTelescope();
+	void languageChanged();
 
 signals:
 	void scaleImageCircleChanged(bool state);
@@ -67,20 +67,11 @@ signals:
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
-	void updateActionMapping(const QString& actionName, const QString& newMapping);
 	Ui_ocularDialogForm* ui;
 
 private slots:
-	void keyBindingTextTogglePluginChanged(const QString& newString);
-	void keyBindingTextTogglePluginConfigChanged(const QString& newString);
-	void keyBindingTextToggleCrosshairChanged(const QString& newString);
-	void keyBindingTextToggleTelradChanged(const QString& newString);
-	void keyBindingTextNextCCDChanged(const QString& newString);
-	void keyBindingTextNextOcularChanged(const QString& newString);
-	void keyBindingTextNextTelescopeChanged(const QString& newString);
-	void keyBindingTextPreviousCCDChanged(const QString& newString);
-	void keyBindingTextPreviousOcularChanged(const QString& newString);
-	void keyBindingTextPreviousTelescopeChanged(const QString& newString);
+	void keyBindingTogglePluginChanged(const QString& newString);
+	void keyBindingPopupNavigatorConfigChanged(const QString& newString);
 	void scaleImageCircleStateChanged(int state);
 
 private:

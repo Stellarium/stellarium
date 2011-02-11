@@ -43,11 +43,43 @@ sub recurse {
 
 	## leave sys libraries alone and dont include them
 	if ( $name =~ m,^(/System/Library|/usr/lib|\@executable_name), &&
-	     $name !~ m,^(/usr/lib/libiconv), ){ 
+	     $name !~ m,^(/usr/lib/libiconv), && $name !~ m,^(/usr/lib/libintl),){ 
 	    next NAME_LOOP; 
 	}
 
 	## a rooted Framework
+	if ( $name =~ m,([^/]+\.framework)/(\S+)$, ) {
+	    my $fwname = $1;
+	    my $binary = $2;
+
+	    my $absname = &locateFramework($fwname);
+	    my $arch = &architecture("$absname/$binary");
+
+	    if ( $arch eq $current_arch || $arch eq 'fat' ) {
+		my $relPath = "\@executable_path/../Frameworks/$fwname/$binary";
+		my $fwPath = "$frameworks_dir/$fwname/$binary";
+
+		my $not_existed = 1;
+		if ( ! -e $fwPath ) {
+		    my $c = "cp -RP -p $absname $frameworks_dir/$fwname";
+		    `$c`;
+		} else {
+		    $not_existed = 0;
+		}
+
+		my $c = sprintf($id_inmt, $relPath, $fwPath);
+		`$c`;
+		$c = sprintf($ch_inmt, $name, $relPath, $main_executable);
+		`$c`;
+
+		if ( $not_existed ) {
+		    &recurse($fwPath, $frameworks_dir, $current_arch);
+		}
+	    } else {
+		warn qq{$0: [1] for $main_executable: what to do about $absname being $arch!!!!!\n};
+	    }
+	    next NAME_LOOP;
+	}
 
 	## an unrooted Framework
 	if ( $name =~ m,^([^/]+\.framework)/(\S+)$, ) {
@@ -189,7 +221,7 @@ sub architecture {
 sub locateFramework {
     my $fname = shift;
     my $lib;
-    foreach $lib ( '~/Library/Frameworks', '/Library/Frameworks', '/usr/local/Trolltech/Qt-4.5.0/lib' ) {
+    foreach $lib ( '~/Library/Frameworks', '/Library/Frameworks', '/usr/local/Trolltech/Qt-4.7.1/lib' ) {
 	if ( -e "$lib/$fname" ) {
 	    return "$lib/$fname";
 	}
