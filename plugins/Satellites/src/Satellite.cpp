@@ -245,11 +245,6 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
                     break;
 
                 }
-#define  RADAR_SUN   1
-#define  VISIBLE     2
-#define  RADAR_NIGHT 3
-#define  NOT_VISIBLE 4
-
 	}
 
 	if (flags&Extra2 && comms.size() > 0)
