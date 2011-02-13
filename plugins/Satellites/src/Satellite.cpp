@@ -226,25 +226,25 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << QString("<b>Y:</b> %1 ").arg(Vel[1], 5, 'f', 2);
 		oss << QString("<b>Z:</b> %1 ").arg(Vel[2], 5, 'f', 2) << "<br>";
 
-                oss << "Visibility:  ";
-                switch(Visibility)
-                {
-                case RADAR_SUN:
-                    oss << "Sat&Observer in Sunlit" << "<br>";
-                    break;
-                case VISIBLE:
-                    oss << "Visible" << "<br>";
-                    break;
-                case RADAR_NIGHT:
-                    oss << "Sat. Eclipsed" << "<br>";
-                    break;
-                case NOT_VISIBLE:
-                    oss << "Sat. Not Visible" << "<br>";
-                    break;
-                default:
-                    break;
+		oss << "Visibility:  ";
+		switch (Visibility)
+		{
+		case RADAR_SUN:
+			oss << "Sat&Observer in Sunlit" << "<br>";
+			break;
+		case VISIBLE:
+			oss << "Visible" << "<br>";
+			break;
+		case RADAR_NIGHT:
+			oss << "Sat. Eclipsed" << "<br>";
+			break;
+		case NOT_VISIBLE:
+			oss << "Sat. Not Visible" << "<br>";
+			break;
+		default:
+			break;
 
-                }
+		}
 	}
 
 	if (flags&Extra2 && comms.size() > 0)
@@ -295,18 +295,18 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 {
 	if (pSatWrapper)
 	{
-                gSatWrapper *old = pSatWrapper;
+		gSatWrapper *old = pSatWrapper;
 		pSatWrapper = NULL;
 		delete old;
 	}
 
-        tleElements.first.clear();
-        tleElements.first.append(tle1);
-        tleElements.second.clear();
-        tleElements.second.append(tle2);
+	tleElements.first.clear();
+	tleElements.first.append(tle1);
+	tleElements.second.clear();
+	tleElements.second.append(tle2);
 
-        pSatWrapper = new gSatWrapper(designation, tle1, tle2);
-        orbitPoints.clear();
+	pSatWrapper = new gSatWrapper(designation, tle1, tle2);
+	orbitPoints.clear();
 }
 
 void Satellite::update(double)
@@ -323,7 +323,7 @@ void Satellite::update(double)
 		ElAzPos  = pSatWrapper->getAltAz();
 
 		pSatWrapper->getSlantRange(range, rangeRate);
-                Visibility = pSatWrapper->getVisibilityPredict();
+		Visibility = pSatWrapper->getVisibilityPredict();
 
 		// Compute orbit points to draw orbit line.
 		if (orbitVisible) computeOrbitPoints();
