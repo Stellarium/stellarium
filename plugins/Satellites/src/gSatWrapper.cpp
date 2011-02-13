@@ -45,7 +45,7 @@
 
 gSatWrapper::gSatWrapper(QString designation, QString tle1,QString tle2)
 {
-        // The TLE library actually modifies the TLE strings, which is annoying (because
+	// The TLE library actually modifies the TLE strings, which is annoying (because
 	// when we get updates, we want to check if there has been a change by using ==
 	// with the original.  Thus we make a copy to send to the TLE library.
 	QByteArray t1(tle1.toAscii().data()), t2(tle2.toAscii().data());
@@ -74,13 +74,13 @@ Vec3d gSatWrapper::getTEMEPos()
 {
 	gVector tempPos;
 	Vec3d returnedVector;
-        if (pSatellite != NULL)
+	if (pSatellite != NULL)
 	{
 		tempPos = pSatellite->getPos();
 		returnedVector.set(tempPos[0], tempPos[1], tempPos[2]);
 	}
 	else
-                qWarning() << "gSatWrapper::getTEMEPos Method called without pSatellite initialized";
+		qWarning() << "gSatWrapper::getTEMEPos Method called without pSatellite initialized";
 
 	return returnedVector;
 
@@ -97,7 +97,7 @@ Vec3d gSatWrapper::getTEMEVel()
 		returnedVector.set(tempVel[0], tempVel[1], tempVel[2]);
 	}
 	else
-                qWarning() << "gSatWrapper::getTEMEVel Method called without pSatellite initialized";
+		qWarning() << "gSatWrapper::getTEMEVel Method called without pSatellite initialized";
 
 	return returnedVector;
 
@@ -114,7 +114,7 @@ Vec3d gSatWrapper::getSubPoint()
 		returnedVector.set(tempSubPoint[0], tempSubPoint[1], tempSubPoint[2]);
 	}
 	else
-                qWarning() << "gSatWrapper::getTEMEVel Method called without pSatellite initialized";
+		qWarning() << "gSatWrapper::getTEMEVel Method called without pSatellite initialized";
 
 	return returnedVector;
 }
@@ -173,7 +173,7 @@ Vec3d gSatWrapper::getAltAz()
 	double  radLatitude    = loc.latitude * KDEG2RAD;
 	double  theta          = Epoch.toThetaLMST(loc.longitude * KDEG2RAD);
 
-        calcObserverECIPosition(observerECIPos, observerECIVel);
+	calcObserverECIPosition(observerECIPos, observerECIVel);
 
 	Vec3d satECIPos  = getTEMEPos();
 	Vec3d slantRange = satECIPos - observerECIPos;
@@ -200,7 +200,7 @@ void  gSatWrapper::getSlantRange(double &ao_slantRange, double &ao_slantRangeRat
 	Vec3d observerECIPos;
 	Vec3d observerECIVel;
 
-        calcObserverECIPosition(observerECIPos, observerECIVel);
+	calcObserverECIPosition(observerECIPos, observerECIVel);
 
 
 	Vec3d satECIPos = getTEMEPos();
@@ -218,54 +218,58 @@ int gSatWrapper::getVisibilityPredict()
 {
 
 
-    // All positions in ECI system are positions referenced in a StelCore::EquinoxEq system centered in the earth centre
-    Vec3d observerECIPos;
-    Vec3d observerECIVel;
-    Vec3d satECIPos;
-    Vec3d satAlAzPos;
-    Vec3d sunECIPos;
-    Vec3d sunEquinoxEqPos;
+	// All positions in ECI system are positions referenced in a StelCore::EquinoxEq system centered in the earth centre
+	Vec3d observerECIPos;
+	Vec3d observerECIVel;
+	Vec3d satECIPos;
+	Vec3d satAltAzPos;
+	Vec3d sunECIPos;
+	Vec3d sunEquinoxEqPos;
+	Vec3d sunAltAzPos;
 
-    double sunSatAngle, Dist;
-    int   visibility;
 
-    satAlAzPos = getAltAz();
+	double sunSatAngle, Dist;
+	int   visibility;
 
-    if( satAlAzPos[2] > 0)
-    {
-        calcObserverECIPosition(observerECIPos, observerECIVel);
+	satAltAzPos = getAltAz();
 
-        satECIPos = getTEMEPos();
-        SolarSystem *solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
-        sunEquinoxEqPos        = solsystem->getSun()->getEquinoxEquatorialPos(StelApp::getInstance().getCore()->getNavigator());
+	if (satAltAzPos[2] > 0)
+	{
+		calcObserverECIPosition(observerECIPos, observerECIVel);
 
-        //sunEquinoxEqPos is measured in AU. we need meassure it in Km
-        sunECIPos.set( sunEquinoxEqPos[0]*AU, sunEquinoxEqPos[1]*AU, sunEquinoxEqPos[2]*AU);
-        sunECIPos = sunECIPos + observerECIPos; //Change ref system centre
+		satECIPos = getTEMEPos();
+		SolarSystem *solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+		sunEquinoxEqPos        = solsystem->getSun()->getEquinoxEquatorialPos(StelApp::getInstance().getCore()->getNavigator());
+		sunAltAzPos        = solsystem->getSun()->getAltAzPos(StelApp::getInstance().getCore()->getNavigator());
 
-        if(sunECIPos.dot(observerECIPos)>0)
-        {
-            visibility = RADAR_SUN;
-        }
-        else
-        {
-            sunSatAngle = sunECIPos.angle(satECIPos);
-            Dist = satECIPos.length()*cos(sunSatAngle - (M_PI/2));
+		//sunEquinoxEqPos is measured in AU. we need meassure it in Km
+		sunECIPos.set(sunEquinoxEqPos[0]*AU, sunEquinoxEqPos[1]*AU, sunEquinoxEqPos[2]*AU);
+		sunECIPos = sunECIPos + observerECIPos; //Change ref system centre
 
-            if( Dist > KEARTHRADIUS)
-            {
-                visibility = VISIBLE;
-            }
-            else
-            {
-                visibility = RADAR_NIGHT;
-            }
-        }
-    }
-    else
-        visibility = NOT_VISIBLE;
 
-    return visibility; //TODO: put correct return
+		if (sunAltAzPos[2] > 0.0)
+		{
+			visibility = RADAR_SUN;
+		}
+		else
+		{
+			sunSatAngle = sunECIPos.angle(satECIPos);
+			Dist = satECIPos.length()*cos(sunSatAngle - (M_PI/2));
+
+			if (Dist > KEARTHRADIUS)
+			{
+				visibility = VISIBLE;
+			}
+			else
+			{
+				visibility = RADAR_NIGHT;
+			}
+		}
+	}
+	else
+		visibility = NOT_VISIBLE;
+
+	return visibility; //TODO: put correct return
 }
 
 
