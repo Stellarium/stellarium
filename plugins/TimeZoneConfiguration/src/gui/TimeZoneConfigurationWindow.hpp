@@ -29,6 +29,7 @@ class Ui_timeZoneConfigurationWindowForm;
 class TimeZoneConfiguration;
 class DefineTimeZoneWindow;
 
+//! Main window of the Time Zone configuration plug-in.
 class TimeZoneConfigurationWindow : public StelDialog
 {
 	Q_OBJECT
@@ -36,6 +37,16 @@ class TimeZoneConfigurationWindow : public StelDialog
 public:
 	TimeZoneConfigurationWindow();
 	~TimeZoneConfigurationWindow();
+
+	//! Parses an offset string in the format [+|-]hh[:mm[:ss]].
+	//! \returns a fraction of hours. The sign is inverted,
+	//! as in the TZ format offset = (UTC - local time),
+	//! and the traditional offset = (local time - UTC).
+	static double readTzOffsetString(const QString& string);
+
+	//! Parses a time string in the format hh[:mm[:ss]] to separate values.
+	//! Used both by readTzOffsetString() and in DefineTimeZoneWindow.
+	static void readTzTimeString(const QString& string, int& hour, int& minutes, int& seconds);
 
 	//! Converts a decimal fraction of hours to a string containing a signed
 	//! offset in the format used in the TZ variable.

@@ -34,6 +34,10 @@ public:
 	DefineTimeZoneWindow();
 	~DefineTimeZoneWindow();
 
+	//! Fills the fields of the form with the time zone described in the string.
+	//! Call after createDialogContent() or setVisible() to avoid a crash.
+	void setTimeZone(QString timeZoneString);
+
 public slots:
 	void languageChanged();
 
@@ -52,6 +56,11 @@ private:
 	void populateDateLists();
 
 	void updateDayNumberMaximum(int monthIndex, QSpinBox * spinBoxDay);
+
+	enum DstEndpoint {DstStart, DstEnd};
+	//! \returns false if #string is not a valid TZ DST end point description.
+	bool readDstEndpoint(const QString& string, DstEndpoint endpoint);
+	void setEndPointDate(int ordinalDate, bool leapYear, DstEndpoint endpoint);
 
 private slots:
 	void useDefinition();
