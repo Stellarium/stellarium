@@ -1,7 +1,7 @@
 /*
  * Stellarium Scenery3d Plug-in
  * 
- * Copyright (C) 2011 Simon Parzer, Peter Neubauer
+ * Copyright (C) 2011 Simon Parzer, Peter Neubauer, Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,8 +56,9 @@ public:
     void handleKeys(QKeyEvent* e);
 
     //! Update method, called by Scenery3dMgr.
+    //! Shifts observer position due to movement through the landscape.
     void update(double deltaTime);
-    //! Draw viewer coordinates as text, called by Scenery3dMgr.
+    //! Draw observer grid coordinates as text, called by Scenery3dMgr.
     void drawCoordinatesText(StelCore* core);
     //! Draw scenery, called by Scenery3dMgr.
     void draw(StelCore* core);
@@ -76,15 +77,13 @@ public:
     //! @return Flag, whether scenery provides location data or only inherits from its linked Landscape.
     bool hasLocation() const { return (location != NULL); }
     //! @return Location data. These are valid only if written in the @file scenery3d.ini, section location.
-    //! Else, returns NULL. Check with .hasLocation() before calling.
+    //! Else, returns NULL. You can also check with .hasLocation() before calling.
     const StelLocation& getLocation() const {return *location; }
 
     enum shadowCaster { None, Sun, Moon };
 
 private:
-    static float EYE_LEVEL;
-    // static const float MOVE_SPEED; // GZ: not needed.
-    static const float MAX_SLOPE;
+    double eyeLevel;
 
     void drawCubeTestScene(StelCore* core);
     void drawObjModel(StelCore* core);
@@ -95,7 +94,8 @@ private:
     void drawArrays(StelPainter& painter, bool textures=true);
     void drawFromCubeMap(StelCore* core);
 
-    float minObserverHeight ();
+    //! @return height at -absolutePosition, which is the current eye point.
+    float groundHeight();
 
     bool shadowsEnabled;
     bool textEnabled;
@@ -134,11 +134,13 @@ private:
     QString modelGroundFile;
     StelLocation* location;
 
-    qreal orig_x;
-    qreal orig_y;
-    qreal orig_z;
-    qreal rot_z;
+    Vec3d modelWorldOffset; // required for coordinate display
+    QString gridName;
+    double gridCentralMeridian;
+    double groundNullHeight; // Used as height value outside the model ground
 
+    // used to apply the rotation from model/grid coordinates to Stellarium coordinates.
+    // In the OBJ files, X=Grid-East, Y=Grid-North, Z=height.
     Mat4d zRotateMatrix;
 };
 

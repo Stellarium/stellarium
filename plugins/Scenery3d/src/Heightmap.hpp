@@ -22,6 +22,10 @@ public:
 	//! @return z-Value at position given by x and y
 	float getHeight(float x, float y);
 
+        //! set/retrieve default height
+        void setNullHeight(float h){nullHeight=h;}
+        float getNullHeight(){return nullHeight;}
+
 private:
 
 	static const int GRID_LENGTH = 60; // # of grid spaces is GRID_LENGTH^2
@@ -39,6 +43,7 @@ private:
 	GridSpace* grid;
 	float xMin, yMin;
 	float xMax, yMax;
+        float nullHeight; // return value for areas outside grid
 
 	void initGrid();
 	GridSpace* getSpace(float x, float y);

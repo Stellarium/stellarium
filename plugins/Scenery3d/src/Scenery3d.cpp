@@ -1,7 +1,7 @@
 /*
  * Stellarium Scenery3d Plug-in
  *
- * Copyright (C) 2011 Simon Parzer, Peter Neubauer
+ * Copyright (C) 2011 Simon Parzer, Peter Neubauer, Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,18 +42,23 @@
 
 #define SHADOW_DEBUG 0
 
-float Scenery3d::EYE_LEVEL = 1.65;
+#define MEANINGLESS 1.E34
+#define MEANINGLESS_INT -32767
+
+
+//float Scenery3d::EYE_LEVEL = 1.65;
 //const float Scenery3d::MOVE_SPEED = 4.0;
-const float Scenery3d::MAX_SLOPE = 1.1;
+//const float Scenery3d::MAX_SLOPE = 1.1;
 
 Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
     :core(NULL),
-    absolutePosition(0.0, 0.0, 0.0),
+    absolutePosition(0.0, 0.0, 0.0), // 1.E-12, 1.E-12, 1.E-12), // these values signify "set default values"
     movement_x(0.0f), movement_y(0.0f), movement_z(0.0f),
     objModel(NULL), groundModel(NULL), heightmap(NULL), location(NULL)
 {
     this->cubemapSize=cubemapSize;
     this->shadowmapSize=shadowmapSize;
+    eyeLevel=1.5;
     textEnabled=false;
     objModel = new OBJ();
     groundModel = new OBJ();
@@ -145,16 +150,22 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
     QString objVertexOrderString=scenery3dIni.value("model/obj_order", "XYZ").toString();
     objVertexOrder=OBJ::XYZ;
     if (objVertexOrderString.compare("XZY") == 0) objVertexOrder=OBJ::XZY;
-    if (objVertexOrderString.compare("YXZ") == 0) objVertexOrder=OBJ::YXZ;
-    if (objVertexOrderString.compare("YZX") == 0) objVertexOrder=OBJ::YZX;
-    if (objVertexOrderString.compare("ZXY") == 0) objVertexOrder=OBJ::ZXY;
-    if (objVertexOrderString.compare("ZYX") == 0) objVertexOrder=OBJ::ZYX;
+    else if (objVertexOrderString.compare("YXZ") == 0) objVertexOrder=OBJ::YXZ;
+    else if (objVertexOrderString.compare("YZX") == 0) objVertexOrder=OBJ::YZX;
+    else if (objVertexOrderString.compare("ZXY") == 0) objVertexOrder=OBJ::ZXY;
+    else if (objVertexOrderString.compare("ZYX") == 0) objVertexOrder=OBJ::ZYX;
 
     if (scenery3dIni.contains("location/latitude"))
     {
         location=new StelLocation();
         location->planetName = scenery3dIni.value("location/planet", "Earth").toString();
-        location->altitude = scenery3dIni.value("location/altitude", 0).toInt();
+        if (scenery3dIni.contains("location/altitude"))
+        {
+            if (scenery3dIni.value("location/altitude") == "from_model")
+                location->altitude=MEANINGLESS_INT;
+            else
+                location->altitude = scenery3dIni.value("location/altitude", 0).toInt();
+        }
         if (scenery3dIni.contains("location/latitude"))
            location->latitude = StelUtils::getDecAngle(scenery3dIni.value("location/latitude").toString())*180./M_PI;
         if (scenery3dIni.contains("location/longitude"))
@@ -170,12 +181,68 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
         location->landscapeKey = landscapeName;
     }
 
-    orig_x = scenery3dIni.value("coord/orig_x").toReal();
-    orig_y = scenery3dIni.value("coord/orig_y").toReal();
-    orig_z = scenery3dIni.value("coord/orig_z").toReal();
-    rot_z = scenery3dIni.value("coord/rot_z").toReal();
+    gridName=scenery3dIni.value("coord/grid_name", "Unspecified Coordinate Frame").toString();
+    double orig_x = scenery3dIni.value("coord/orig_E", 0.0).toDouble();
+    double orig_y = scenery3dIni.value("coord/orig_N", 0.0).toDouble();
+    double orig_z = scenery3dIni.value("coord/orig_H", 0.0).toDouble();
+    modelWorldOffset=Vec3d(orig_x, orig_y, orig_z); // RealworldGridCoords=objCoords+modelWorldOffset
 
-    zRotateMatrix = Mat4d::rotation(Vec3d(0.0, 0.0, 1.0), (90.0 + rot_z) * M_PI / 180.0);
+    // Find a rotation around vertical axis, most likely required by meridian convergence.
+    double rot_z=0.0;
+    if (!scenery3dIni.value("coord/convergence_angle").toString().compare("from_grid"))
+    { // compute rot_z from grid_meridian and location. Check their existence!
+        if (scenery3dIni.contains("coord/grid_meridian"))
+        {
+            gridCentralMeridian=StelUtils::getDecAngle(scenery3dIni.value("coord/grid_meridian").toString())*180./M_PI;
+            if (location)
+            {
+                // Formula from: http://en.wikipedia.org/wiki/Transverse_Mercator_projection, Convergence
+                //rot_z=std::atan(std::tan((lng-gridCentralMeridian)*M_PI/180.)*std::sin(lat*M_PI/180.));
+                // or from http://de.wikipedia.org/wiki/Meridiankonvergenz
+                rot_z=(location->longitude - gridCentralMeridian)*M_PI/180.*std::sin(location->latitude*M_PI/180.);
+
+                qDebug() << "With Longitude " << location->longitude
+                        << ", Latitude " << location->latitude << " and CM="
+                        << gridCentralMeridian << ", ";
+                qDebug() << "--> setting meridian convergence to " << rot_z*180./M_PI << "degrees";
+            }
+            else
+            {
+                qDebug() << "scenery3d.ini: Convergence angle \"from_grid\" requires location section!";
+            }
+        }
+        else
+        {
+            qDebug() << "scenery3d.ini: Convergence angle \"from_grid\": cannot compute without grid_meridian!";
+        }
+
+
+    } else {
+        rot_z = scenery3dIni.value("coord/convergence_angle", 0.0).toDouble() * M_PI / 180.0;
+    }
+    // We do not do the 90deg now, just rot_z
+    zRotateMatrix = Mat4d::zrotation(M_PI/2.0 + rot_z);
+    //zRotateMatrix = Mat4d::zrotation( rot_z);
+
+    // At last, find start points.
+    Vec3d worldPosition;
+    worldPosition[0]=scenery3dIni.value("coord/start_E", MEANINGLESS).toDouble();
+    worldPosition[1]=scenery3dIni.value("coord/start_N", MEANINGLESS).toDouble();
+    worldPosition[2]=scenery3dIni.value("coord/start_H", MEANINGLESS).toDouble();
+
+    Vec3d modelPosition=worldPosition-modelWorldOffset; // eye point in coords of model
+    modelPosition[1]*=-1.0;
+
+    absolutePosition = zRotateMatrix.inverse()*modelPosition;
+    absolutePosition[0]*=-1.0;
+    absolutePosition[2]*=-1.0;
+
+    // TODO: If worldPosition was invalid, re-mark absolutePosition as invalid. Typically, they are rotZ(90) apart, so swap axes.
+    if (worldPosition[0]==MEANINGLESS) absolutePosition[1]=MEANINGLESS;
+    if (worldPosition[1]==MEANINGLESS) absolutePosition[0]=MEANINGLESS;
+    if (worldPosition[2]==MEANINGLESS) absolutePosition[2]=MEANINGLESS;
+
+    groundNullHeight=scenery3dIni.value("coord/zero_ground_height", MEANINGLESS).toDouble();
 }
 
 void Scenery3d::loadModel()
@@ -185,6 +252,16 @@ void Scenery3d::loadModel()
         objModel->load(modelFile.toAscii(), objVertexOrder);
         objModel->transform(zRotateMatrix);
 	objModelArrays = objModel->getStelArrays();
+
+        /* We could re-create zRotateMatrix here if needed: We may have "default" conditions with landscape coordinates
+        // inherited from a landscape, or loaded from scenery3d.ini. In any case, at this point they should have been valid.
+        // But it turned out that loading/setting the landscape works with a smooth transition, therefore at this point,
+        // current location might still be the old location, before the location set in the landscape background takes over.
+        // So, computing rot_z and zRotateMatrix absolutely requires a location section in our scenery3d.ini and our own location.
+        //if (rot_z==-360.0){ // signal value indicating "recompute zRotateMatrix from new coordinates"
+            //double lng =StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().longitude;
+            //double lat =StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().latitude;
+        //} */
 
         if (modelGroundFile.isEmpty())
             groundModel=objModel;
@@ -198,19 +275,34 @@ void Scenery3d::loadModel()
             groundModel->transform(zRotateMatrix);
         }
 
-	// Rotate vertices around z axis
-        /*for (unsigned int i=0; i<objModelArrays.size(); i++)
-	{
-		OBJ::StelModel& stelModel = objModelArrays[i];
-		for (int v=0; v<stelModel.triangleCount*3; v++)
-		{
-			zRotateMatrix.transfo(stelModel.vertices[v]);
-		}
-        }*/
+        if (this->hasLocation())
+        { if (location->altitude==MEANINGLESS_INT) // previouslay marked meaningless
+            location->altitude=0.5*(objModel->getMinZ()+objModel->getMaxZ())+modelWorldOffset[2];
+        }
 
-	heightmap = new Heightmap(*groundModel);
+        if (groundNullHeight==MEANINGLESS)
+        {
+            groundNullHeight=(this->hasLocation() ? location->altitude : objModel->getMinZ());
+            qDebug() << "Ground outside model is " << groundNullHeight  << "m high";
+        }
+        else             qDebug() << "Ground outside model stays " << groundNullHeight  << "m high";
 
-	absolutePosition[2] = minObserverHeight();
+        heightmap = new Heightmap(*groundModel);
+        heightmap->setNullHeight(groundNullHeight);
+
+        if (absolutePosition.v[0]==MEANINGLESS) {
+            absolutePosition.v[0] = -(objModel->getMaxX()+objModel->getMinX())/2.0;
+            qDebug() << "Setting Easting  to BBX center: " << objModel->getMinX() << ".." << objModel->getMaxX() << ": " << absolutePosition.v[1];
+        }
+        if (absolutePosition.v[1]==MEANINGLESS) {
+            absolutePosition.v[1] = -(objModel->getMaxY()+objModel->getMinY())/2.0;
+            qDebug() << "Setting Northing to BBX center: " << objModel->getMinY() << ".." << objModel->getMaxY() << ": " << -absolutePosition.v[0];
+        }
+
+
+
+        absolutePosition[2] = -groundHeight()-eyeLevel;
+        //absolutePosition.transfo4d(zRotateMatrix); // bring this position into rotated space.
 }
 
 void Scenery3d::handleKeys(QKeyEvent* e)
@@ -238,9 +330,7 @@ void Scenery3d::handleKeys(QKeyEvent* e)
             e->key() == Qt::Key_Up     || e->key() == Qt::Key_Down     ||
             e->key() == Qt::Key_Left   || e->key() == Qt::Key_Right     )
             {
-                movement_x = 0.0f;
-                movement_y = 0.0f;
-                movement_z = 0.0f;
+                movement_x = movement_y = movement_z = 0.0f;
                 e->accept();
             }
     }
@@ -257,16 +347,6 @@ void Scenery3d::update(double deltaTime)
         double alt, az;
         StelUtils::rectToSphe(&az, &alt, viewDirectionAltAz);
 
-        // GZ: Those are not needed, unless code below is activated.
-        //Vec3d prevPosition = absolutePosition;
-        // float prevHeight = prevPosition[2];
-
-        // PN: (this was the old code)
-        //Vec3d move(movement_x * deltaTime * MOVE_SPEED,
-        //           movement_y * deltaTime * MOVE_SPEED,
-        //           movement_z * deltaTime * MOVE_SPEED);
-
-        // GZ:
         Vec3d move(( movement_x * std::cos(az) + movement_y * std::sin(az)),
                    ( movement_x * std::sin(az) - movement_y * std::cos(az)),
                    movement_z);
@@ -274,38 +354,20 @@ void Scenery3d::update(double deltaTime)
 
         absolutePosition.v[0] += move.v[0];
         absolutePosition.v[1] += move.v[1];
-        EYE_LEVEL -= move.v[2];
-        // GZ: This is enough.
-        absolutePosition.v[2] = minObserverHeight();
+        eyeLevel -= move.v[2];
+        absolutePosition.v[2] = -groundHeight()-eyeLevel;
 
-        /*
-        // PN: This is to prevent climbing too steep.
-        // GZ: I commented this out for now, but leave as optional code, maybe reactivate later.
-        float nextHeight = minObserverHeight();
-        if ((prevHeight - nextHeight) > (deltaTime * MAX_SLOPE))
-            {
-                absolutePosition = prevPosition; // prevent climbing too high
-            }
-        else
-            {
-                absolutePosition.v[2] = minObserverHeight();
-            }
-        */
+
     }
 }
 
-float Scenery3d::minObserverHeight()
+float Scenery3d::groundHeight()
 {
-	if (heightmap == NULL)
-	{
-                return -EYE_LEVEL;
-	}
-	else
-	{
-		float x = -absolutePosition.v[0];
-		float y = -absolutePosition.v[1];
-		return -(heightmap->getHeight(x,y) + EYE_LEVEL);
-	}
+    if (heightmap == NULL) {
+        return groundNullHeight;
+    } else {
+        return heightmap->getHeight(-absolutePosition.v[0],-absolutePosition.v[1]);
+    }
 }
 
 void Scenery3d::drawArrays(StelPainter& painter, bool textures)
@@ -508,9 +570,7 @@ void Scenery3d::generateShadowMap(StelCore* core)
 
 void Scenery3d::generateCubeMap(StelCore* core)
 {
-    if (objModelArrays.empty()) {
-            return;
-    }
+    if (objModelArrays.empty()) return;
 
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, core->getCurrentProjectionType());
     StelPainter painter(prj);
@@ -712,9 +772,7 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
 
 void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
 {
-    if (objModelArrays.empty()) {
-        return;
-    }
+    if (objModelArrays.empty()) return;
 
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, core->getCurrentProjectionType());
     StelPainter painter(prj);
@@ -813,22 +871,47 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
     }
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, core->getCurrentProjectionType());
     StelPainter painter(prj);
-    const QFont font("sans-serif", 12);
+    const QFont font("Courier", 12);
     painter.setFont(font);
-    float x = prj->getViewportWidth() - 250.0f;
-    float y = prj->getViewportHeight() - 30.0f;
-    QString s;
-    s = QString("X:   %1m").arg(orig_x - absolutePosition.v[1], 10, 'f', 2);
-    painter.drawText(x, y, s);
-    y -= 15.0f;
-    s = QString("Y:   %1m").arg(orig_y + absolutePosition.v[0], 10, 'f', 2);
-    painter.drawText(x, y, s);
-    y -= 15.0f;
-    s = QString("Z:   %1m").arg(orig_z - absolutePosition.v[2], 10, 'f', 2);
-    painter.drawText(x, y, s);
-    y -= 15.0f;
-    s = QString("Eye: %1m").arg(EYE_LEVEL, 10, 'f', 2);
-    painter.drawText(x, y, s);
+    float screen_x = prj->getViewportWidth() - 250.0f;
+    float screen_y = prj->getViewportHeight() - 40.0f;
+    QString str;
+
+    // model_pos is the observer position (camera eye position) in model-grid coordinates
+    Vec3d model_pos=zRotateMatrix*Vec3d(-absolutePosition.v[0], absolutePosition.v[1], -absolutePosition.v[2]);
+    model_pos[1] *= -1.0;
+
+    // world_pos is the observer position (camera eye position) in grid coordinates, e.g. Gauss-Krueger or UTM.
+    Vec3d world_pos= model_pos+modelWorldOffset;
+    painter.drawText(screen_x, screen_y, gridName);
+    screen_y -= 17.0f;
+    str = QString("East:   %1m").arg(world_pos[0], 10, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);
+    screen_y -= 15.0f;
+    str = QString("North:  %1m").arg(world_pos[1], 10, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);
+    screen_y -= 15.0f;
+    str = QString("Height: %1m").arg(world_pos[2]-eyeLevel, 10, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);
+    screen_y -= 15.0f;
+    str = QString("Eye:    %1m").arg(eyeLevel, 10, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);
+    /*// DEBUG AIDS:
+    screen_y -= 15.0f;
+    str = QString("model_X:%1m").arg(model_pos[0], 10, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+    str = QString("model_Y:%1m").arg(model_pos[1], 10, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+    str = QString("model_Z:%1m").arg(model_pos[2], 10, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);
+    screen_y -= 15.0f;
+    str = QString("abs_X:  %1m").arg(absolutePosition.v[0], 10, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+    str = QString("abs_Y:  %1m").arg(absolutePosition.v[1], 10, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+    str = QString("abs_Z:  %1m").arg(absolutePosition.v[2], 10, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);
+    */
 }
 	
 void Scenery3d::draw(StelCore* core)
