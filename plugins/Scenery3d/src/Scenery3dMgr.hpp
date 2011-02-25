@@ -4,6 +4,7 @@
 #include "StelModule.hpp"
 #include "StelUtils.hpp"
 #include "gui/Scenery3dDialog.hpp"
+#include "StelCore.hpp"
 
 #include <QMap>
 #include <QStringList>
@@ -74,6 +75,7 @@ private:
     bool enableShadows;
     StelButton* toolbarEnableButton;
     StelButton* toolbarSettingsButton;
+    StelCore::ProjectionType oldProjectionType;
 };
 
 

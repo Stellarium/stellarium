@@ -6,6 +6,8 @@
 
 #include <stdexcept>
 
+#include <GLee.h>
+
 #include "Scenery3dMgr.hpp"
 #include "Scenery3d.hpp"
 #include "StelApp.hpp"
@@ -37,7 +39,16 @@ Scenery3dMgr::~Scenery3dMgr()
 void Scenery3dMgr::enableScenery3d(bool enable)
 {
     flagEnabled=enable;
-
+    if (cubemapSize==0)
+    {
+        if (flagEnabled)
+        {
+            oldProjectionType= StelApp::getInstance().getCore()->getCurrentProjectionType();
+            StelApp::getInstance().getCore()->setCurrentProjectionType(StelCore::ProjectionPerspective);
+        }
+        else
+            StelApp::getInstance().getCore()->setCurrentProjectionType(oldProjectionType);
+     }
 }
 
 
@@ -83,6 +94,10 @@ void Scenery3dMgr::init()
     cubemapSize=conf->value("Scenery3d/cubemapSize", 1024).toInt();
     shadowmapSize=conf->value("Scenery3d/shadowmapSize", 1024).toInt();
 
+    // graphics hardware without FrameBufferObj extension cannot use the cubemap rendering.
+    // In this case, set cubemapSize to 0 to signal auto-switch to perspective projection.
+    if (! GLEE_EXT_framebuffer_object) cubemapSize=0;
+
     // create action for enable/disable & hook up signals
     StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
     Q_ASSERT(gui);
@@ -107,7 +122,7 @@ void Scenery3dMgr::init()
     // GZ: Add 2 toolbar buttons (copy/paste widely from AngleMeasure): activate, and settings.
     try
     {
-        qDebug() << "trying buttons\n";
+        //qDebug() << "trying buttons\n";
         toolbarEnableButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_on.png"),
                                       QPixmap(":/Scenery3d/bt_scenery3d_off.png"),
                                       QPixmap(":/graphicGui/glow32x32.png"),
@@ -117,7 +132,7 @@ void Scenery3dMgr::init()
                                       QPixmap(":/graphicGui/glow32x32.png"),
                                       gui->getGuiActions("actionShow_Scenery3d_window"));
 
-       qDebug() << "call getButtonBar etc.\n";
+       //qDebug() << "call getButtonBar etc.\n";
 
        gui->getButtonBar()->addButton(toolbarEnableButton, "065-pluginsGroup");
        gui->getButtonBar()->addButton(toolbarSettingsButton, "065-pluginsGroup");
@@ -128,7 +143,7 @@ void Scenery3dMgr::init()
             qWarning() << "WARNING: unable to create toolbar buttons for Scenery3d plugin: " << e.what();
     }
 
-    qDebug() << "past exception.\n";
+    //qDebug() << "past exception.\n";
 
 
     scenery3d = new Scenery3d(cubemapSize, shadowmapSize);
@@ -171,23 +186,30 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
         return false;
 
     LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+    bool landscapeSetsLocation=lmgr->getFlagLandscapeSetsLocation();
     lmgr->setFlagLandscapeSetsLocation(true);
-    lmgr->setCurrentLandscapeName(newScenery3d->getLandscapeName());
+    lmgr->setCurrentLandscapeName(newScenery3d->getLandscapeName()); // takes a second, implicitly.
+    // Landscape and Navigator at this time has old coordinates! Else it would have been possible to
+    // delay rot_z computation up to this point and live without location section even
+    // with meridian_convergence=from_grid.
+    lmgr->setFlagLandscapeSetsLocation(landscapeSetsLocation); // restore
 
     if (scenery3d)
     {
         delete scenery3d;
         scenery3d = NULL;
     }
-
+    // Loading may take a while...
+    QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
     newScenery3d->loadModel();
+    QApplication::restoreOverrideCursor();
+
     if (newScenery3d->hasLocation())
     {
         qDebug() << "Re-Setting location to given coordinates.";
-        StelApp::getInstance().getCore()->getNavigator()->moveObserverTo(newScenery3d->getLocation());
+        StelApp::getInstance().getCore()->getNavigator()->moveObserverTo(newScenery3d->getLocation(), 0., 0.);
     }
     else qDebug() << "No coordinates given in scenery3d.";
-
 
     scenery3d = newScenery3d;
     currentScenery3dID = id;
@@ -290,7 +312,7 @@ QString Scenery3dMgr::nameToID(const QString& name)
 
 QMap<QString, QString> Scenery3dMgr::getNameToDirMap() const
 {
-    qDebug() << "Scenery3dMgr::getNameToDirMap()";
+    qDebug() << "Scenery3dMgr::getNameToDirMap(): ";
     QSet<QString> scenery3dDirs;
     QMap<QString, QString> result;
     try
@@ -420,8 +442,8 @@ StelPluginInfo Scenery3dStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "Scenery3dMgr";
 	info.displayedName = "Scenery3d";
-	info.authors = "Simon Parzer, Peter Neubauer";
-	info.contact = "/dev/null";
+        info.authors = "Simon Parzer, Peter Neubauer, Georg Zotti";
+        info.contact = "Georg.Zotti@univie.ac.at";
         info.description = "OBJ landscape renderer.";
 	return info;
 }
