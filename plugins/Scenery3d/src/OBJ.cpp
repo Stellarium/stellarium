@@ -6,7 +6,7 @@
 #include <limits>
 
 #include "Util.hpp"
-#include "PathInfo.hpp"
+#include "StelFileMgr.hpp"
 
 using namespace std;
 
@@ -24,11 +24,13 @@ OBJ::~OBJ( void )
 
 void OBJ::load( const char* filename, const enum vertexOrder order )
 {
-    basePath = string(PathInfo::getDirectory(filename));
+    basePath = string(StelFileMgr::dirName(filename).toAscii() + "/");
+
+    long totalFaces=0;
     ifstream file(filename);
     string line;
-    minX = minY = minZ = numeric_limits<float>::max();
-    maxX = maxY = maxZ = numeric_limits<float>::min();
+    minX = minY = minZ =  numeric_limits<float>::max();
+    maxX = maxY = maxZ = -numeric_limits<float>::max();
     if (file.is_open()) {
         Model model;
         while (!file.eof()) {
@@ -164,6 +166,7 @@ void OBJ::load( const char* filename, const enum vertexOrder order )
                     }
                     if (face.refs.size() >= 3) {
                         model.faces.push_back(face);
+                        totalFaces++;
                     }
                 } else if (parts[0] == "mtllib") {
                     if (parts.size() > 1) {
@@ -184,6 +187,7 @@ void OBJ::load( const char* filename, const enum vertexOrder order )
         loaded = true;
         qDebug() << vertices.size() << " vertices.";
         qDebug() << normals.size() << " normals.";
+        qDebug() << totalFaces << " faces";
         qDebug() << texcoords.size() << " texture coordinates.";
         qDebug() << models.size() << " models.";
         qDebug() << filename << " loaded.";
@@ -289,8 +293,8 @@ vector<OBJ::StelModel> OBJ::getStelArrays()
 
 void OBJ::transform(Mat4d mat)
 {
-    minX = minY = minZ = numeric_limits<float>::max();
-    maxX = maxY = maxZ = numeric_limits<float>::min();
+    minX = minY = minZ =  numeric_limits<float>::max();
+    maxX = maxY = maxZ = -numeric_limits<float>::max();
     for (std::vector<Vertex>::iterator it = vertices.begin(); it != vertices.end(); it++)
     {
         Vec3d v = Vec3d(it->x, it->y, it->z);
