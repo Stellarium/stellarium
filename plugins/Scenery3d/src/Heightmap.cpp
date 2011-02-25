@@ -7,7 +7,7 @@
 #define INF (std::numeric_limits<float>::max())
 #define NO_HEIGHT (-INF)
 
-Heightmap::Heightmap(const OBJ& obj) : obj(obj)
+Heightmap::Heightmap(const OBJ& obj) : obj(obj), nullHeight(0)
 {
    this->xMin = INF;
    this->xMax = -INF;
@@ -40,14 +40,14 @@ float Heightmap::getHeight(float x, float y)
    Heightmap::GridSpace* space = getSpace(x, y);
    if (space == NULL) 
    {
-      return 0;
+      return nullHeight;
    }
    else
    {
       float h = space->getHeight(obj, x, y);
       if (h == NO_HEIGHT)
       {
-			return 0;
+                        return nullHeight;
       }
       else
 		{
