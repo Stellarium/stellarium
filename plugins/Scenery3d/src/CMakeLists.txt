@@ -17,8 +17,6 @@ SET(Scenery3d_SRCS
     OBJ.cpp
     MTL.hpp
     MTL.cpp
-    PathInfo.hpp
-    PathInfo.cpp
     Util.hpp
     Util.cpp
     Heightmap.hpp

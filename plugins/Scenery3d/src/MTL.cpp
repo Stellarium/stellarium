@@ -1,6 +1,6 @@
 #include "MTL.hpp"
 #include "Util.hpp"
-#include "PathInfo.hpp"
+#include "StelFileMgr.hpp"
 #include <cstdio>
 #include <fstream>
 
@@ -19,8 +19,8 @@ MTL::~MTL(void)
 void MTL::load(const char* filename)
 {
     qDebug() << "MTL: loading " << filename;
-    //qDebug() << "MTL: basepath " << PathInfo::getDirectory(filename);
-    basePath = string(PathInfo::getDirectory(filename));
+    basePath = string(StelFileMgr::dirName(filename).toAscii() + "/");
+
     ifstream file(filename);
     string line;
     if (file.is_open()) {
