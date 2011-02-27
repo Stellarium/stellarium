@@ -321,6 +321,7 @@ void Satellite::update(double)
 		LatLong  = pSatWrapper->getSubPoint();
 		height   = LatLong[2];
 		ElAzPos  = pSatWrapper->getAltAz();
+                ElAzPos.normalize();
 
 		pSatWrapper->getSlantRange(range, rangeRate);
 		Visibility = pSatWrapper->getVisibilityPredict();
