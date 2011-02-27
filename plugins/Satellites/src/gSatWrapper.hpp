@@ -76,9 +76,9 @@ public:
 	//!	   Altitude:  Coord[2]  measured in Km.\n
 	Vec3d getSubPoint();
 
-	// Operation calculateLook
+        // Operation getAltAz
 	//! @brief This operation compute the coordinates in StelCore::FrameAltAz
-	//! @return Vect3d Vector with coordinates
+        //! @return Vect3d Vector with coordinates (Meassured in Km)
         //! @ref
 	//!  Orbital Coordinate Systems, Part II
 	//!   Dr. T.S. Kelso
@@ -96,7 +96,7 @@ public:
 
         // Operation getVisibilityPredict
         //! @brief This operation predicts the satellite visibility contidions.
-        //! This prediction can return 3 different states
+        //! This prediction can return 4 different states
         //!   RADAR_SUN when satellite an observer are in the sunlit
         //!   VISIBLE   when satellite is in sunlit and observer is in the dark. Satellite could be visible in the sky.
         //!   RADAR_NIGHT when satellite is eclipsed by the earth shadow.
