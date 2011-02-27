@@ -131,7 +131,8 @@ void gSatWrapper::updateEpoch()
 
 void gSatWrapper::setEpoch(double ai_julianDaysEpoch)
 {
-	if (pSatellite)
+    Epoch = ai_julianDaysEpoch;
+    if (pSatellite)
 		pSatellite->setEpoch(ai_julianDaysEpoch);
 }
 
@@ -140,6 +141,7 @@ void gSatWrapper::calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_vel)
 {
 
 	StelLocation loc   = StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation();
+
 	double radLatitude = loc.latitude * KDEG2RAD;
 	double theta       = Epoch.toThetaLMST(loc.longitude * KDEG2RAD);
 	double r;
@@ -181,15 +183,15 @@ Vec3d gSatWrapper::getAltAz()
 	//top_s
 	topoSatPos[0] = (sin(radLatitude) * cos(theta)*slantRange[0]
 	                 + sin(radLatitude)* sin(theta)*slantRange[1]
-	                 - cos(radLatitude)* slantRange[2])/AU;
+                         - cos(radLatitude)* slantRange[2]);
 	//top_e
 	topoSatPos[1] = ((-1.0)* sin(theta)*slantRange[0]
-	                 + cos(theta)*slantRange[1])/AU;
+                         + cos(theta)*slantRange[1]);
 
 	//top_z
 	topoSatPos[2] = (cos(radLatitude) * cos(theta)*slantRange[0]
 	                 + cos(radLatitude) * sin(theta)*slantRange[1]
-	                 + sin(radLatitude) *slantRange[2])/AU;
+                         + sin(radLatitude) *slantRange[2]);
 
 	return topoSatPos;
 }
