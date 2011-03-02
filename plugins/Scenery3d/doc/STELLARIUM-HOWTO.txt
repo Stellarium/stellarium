@@ -194,7 +194,7 @@ zero_ground_height=<double> /* height of terrain outside OBJ, or if ground=NULL.
 start_E=<double> /* Coordinates to be set after loading the scenery.  */
 start_N=<double> /* default->center of boundingbox. */
 start_H=<double> /* only meaningful if ground==NULL, else H is derived from ground */
-start_Eye=<double> /* default: 1.7m */
+start_Eye=<double> /* default: 1.65m */
 
 ; It is advisable to use the grid coordinates of the location of the panoramic photo ("landscape") as start_.. coordinates.
 

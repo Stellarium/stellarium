@@ -58,7 +58,7 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
 {
     this->cubemapSize=cubemapSize;
     this->shadowmapSize=shadowmapSize;
-    eyeLevel=1.5;
+    eyeLevel=1.65;
     textEnabled=false;
     objModel = new OBJ();
     groundModel = new OBJ();
@@ -229,6 +229,7 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
     worldPosition[0]=scenery3dIni.value("coord/start_E", MEANINGLESS).toDouble();
     worldPosition[1]=scenery3dIni.value("coord/start_N", MEANINGLESS).toDouble();
     worldPosition[2]=scenery3dIni.value("coord/start_H", MEANINGLESS).toDouble();
+    eyeLevel=scenery3dIni.value("coord/start_Eye", 1.65).toDouble();
 
     Vec3d modelPosition=worldPosition-modelWorldOffset; // eye point in coords of model
     modelPosition[1]*=-1.0;
