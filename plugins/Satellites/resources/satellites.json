@@ -861,7 +861,17 @@
 		},
 		"GPS BIIA-10 (PRN 32)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -871,7 +881,17 @@
 		},
 		"GPS BIIA-11 (PRN 24)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -881,7 +901,17 @@
 		},
 		"GPS BIIA-14 (PRN 26)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -891,7 +921,17 @@
 		},
 		"GPS BIIA-15 (PRN 27)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -901,7 +941,17 @@
 		},
 		"GPS BIIA-21 (PRN 09)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -911,7 +961,17 @@
 		},
 		"GPS BIIA-23 (PRN 04)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -921,7 +981,17 @@
 		},
 		"GPS BIIA-24 (PRN 06)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -931,7 +1001,17 @@
 		},
 		"GPS BIIA-25 (PRN 03)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -941,7 +1021,17 @@
 		},
 		"GPS BIIA-26 (PRN 10)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -951,7 +1041,17 @@
 		},
 		"GPS BIIA-27 (PRN 30)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -961,7 +1061,17 @@
 		},
 		"GPS BIIA-28 (PRN 08)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -971,7 +1081,17 @@
 		},
 		"GPS BIIF-1  (PRN 25)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps", "navigation"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -981,7 +1101,17 @@
 		},
 		"GPS BIIR-02 (PRN 13)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -991,7 +1121,17 @@
 		},
 		"GPS BIIR-03 (PRN 11)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -1001,7 +1141,17 @@
 		},
 		"GPS BIIR-04 (PRN 20)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -1011,7 +1161,17 @@
 		},
 		"GPS BIIR-05 (PRN 28)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -1021,7 +1181,17 @@
 		},
 		"GPS BIIR-06 (PRN 14)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -1031,7 +1201,17 @@
 		},
 		"GPS BIIR-07 (PRN 18)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -1041,7 +1221,17 @@
 		},
 		"GPS BIIR-08 (PRN 16)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -1051,7 +1241,17 @@
 		},
 		"GPS BIIR-09 (PRN 21)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -1061,7 +1261,17 @@
 		},
 		"GPS BIIR-10 (PRN 22)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -1071,7 +1281,17 @@
 		},
 		"GPS BIIR-11 (PRN 19)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -1081,8 +1301,18 @@
 		},
 		"GPS BIIR-12 (PRN 23)": 
 		{
-			"comms": [],
-			"groups": ["gps"],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
+                        "groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
 			"tle1": "1 28361U 04023A   11073.88834028 -.00000030  00000-0  10000-3 0  7156",
@@ -1091,7 +1321,17 @@
 		},
 		"GPS BIIR-13 (PRN 02)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -1101,7 +1341,17 @@
 		},
 		"GPS BIIRM-1 (PRN 17)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -1111,7 +1361,17 @@
 		},
 		"GPS BIIRM-2 (PRN 31)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -1121,7 +1381,17 @@
 		},
 		"GPS BIIRM-3 (PRN 12)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -1131,7 +1401,17 @@
 		},
 		"GPS BIIRM-4 (PRN 15)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -1141,7 +1421,17 @@
 		},
 		"GPS BIIRM-5 (PRN 29)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -1151,7 +1441,17 @@
 		},
 		"GPS BIIRM-6 (PRN 07)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -1161,7 +1461,17 @@
 		},
 		"GPS BIIRM-7 (PRN 01)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps", "navigation"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
@@ -1171,7 +1481,17 @@
 		},
 		"GPS BIIRM-8 (PRN 05)": 
 		{
-			"comms": [],
+                        "comms": [
+                        {
+                                "description": "L1",
+                                "frequency": 1575.42,
+                                "modulation": "QPSK"
+                        },
+                        {
+                                "description": "L2",
+                                "frequency": 1227.60,
+                                "modulation": "BPSK"
+                        }],
 			"groups": ["gps", "navigation"],
 			"lastUpdated": 2011-03-16T22:42:29,
 			"orbitVisible": false,
