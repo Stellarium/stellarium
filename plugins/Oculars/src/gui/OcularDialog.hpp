@@ -62,8 +62,9 @@ public slots:
 	void languageChanged();
 
 signals:
+	void requireSelectionChanged(bool state);
 	void scaleImageCircleChanged(bool state);
-	
+
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
@@ -72,6 +73,7 @@ protected:
 private slots:
 	void keyBindingTogglePluginChanged(const QString& newString);
 	void keyBindingPopupNavigatorConfigChanged(const QString& newString);
+	void requireSelectionStateChanged(int state);
 	void scaleImageCircleStateChanged(int state);
 
 private:

@@ -97,6 +97,7 @@ private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
 	void instrumentChanged();
 	void determineMaxEyepieceAngle();
+	void setRequireSelection(bool state);
 	void setScaleImageCircle(bool state);
 	void setScreenFOVForCCD();
 	void setStelStyle(const QString& style);
@@ -165,8 +166,9 @@ private:
 
 	double ccdRotationAngle;	//<! The angle to rotate the CCD bounding box. */
 	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
+	bool requireSelection;		//!< Read from the ini file, whether an object is required to be selected to zoom in.
 	bool useMaxEyepieceAngle;	//!< Read from the ini file, whether to scale the mask based aFOV.
-	
+
 	QSignalMapper* ccdRotationSignalMapper;  //<! Used to rotate the CCD. */
 	QSignalMapper* ccdsSignalMapper; //<! Used to determine which CCD was selected from the popup navigator. */
 	QSignalMapper* ocularsSignalMapper; //<! Used to determine which ocular was selected from the popup navigator. */
