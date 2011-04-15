@@ -623,7 +623,14 @@
          </widget>
         </item>
         <item>
-         <widget class="AngleSpinBox" name="RAAngleSpinBox"/>
+         <widget class="AngleSpinBox" name="RAAngleSpinBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
         </item>
         <item>
          <spacer name="horizontalSpacer">
@@ -642,7 +649,14 @@
          </spacer>
         </item>
         <item>
-         <widget class="AngleSpinBox" name="DEAngleSpinBox"/>
+         <widget class="AngleSpinBox" name="DEAngleSpinBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
