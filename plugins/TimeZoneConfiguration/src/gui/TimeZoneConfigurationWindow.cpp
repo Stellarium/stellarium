@@ -71,23 +71,18 @@ void TimeZoneConfigurationWindow::createDialogContent()
 	ui->lineEditUserDefined->setText(currentTimeZoneString);
 	ui->frameUserDefined->setEnabled(false);
 
-	QRegExp tzTimeZoneDescription("^SCT([+-])(\\d\\d):(\\d\\d):(\\d\\d)$");
-	if (tzTimeZoneDescription.indexIn(currentTimeZoneString) == 0)
+	if (currentTimeZoneString.startsWith("SCT"))
 	{
-		ui->radioButtonOffset->setChecked(true);
-
-		//Offset is POSIX style: UTF - local time = offset,
-		//so invert the sign:
-		const int sign = (tzTimeZoneDescription.cap(1).at(0).toAscii() == '-') ? 1 : -1;
-		const int hours = tzTimeZoneDescription.cap(2).toInt();
-		const int minutes = tzTimeZoneDescription.cap(3).toInt();
-		const int seconds = tzTimeZoneDescription.cap(4).toInt();
-		const double offset = sign * (hours + floor(((minutes * 60 + seconds)/3600.0) * 100) / 100.0);//Round to the second digit
-		ui->doubleSpinBoxOffset->setValue(offset);
-	}
-	else if (currentTimeZoneString == "SCT+0")
-	{
-		ui->radioButtonUtc->setChecked(true);
+		if (currentTimeZoneString == "SCT+0")
+		{
+			ui->radioButtonUtc->setChecked(true);
+		}
+		else
+		{
+			ui->radioButtonOffset->setChecked(true);
+			double offset = readTzOffsetString(currentTimeZoneString.mid(3));
+			ui->doubleSpinBoxOffset->setValue(offset);
+		}
 	}
 	else if (currentTimeZoneString == "system_default")
 	{
@@ -98,7 +93,8 @@ void TimeZoneConfigurationWindow::createDialogContent()
 		ui->radioButtonUserDefined->setChecked(true);
 	}
 
-	ui->labelTitle->setText(QString("Time Zone plug-in (version %1)").arg(PLUGIN_VERSION));
+	QString version = QString("Time Zone plug-in (version %1)").arg(TIME_ZONE_CONFIGURATION_VERSION);
+	ui->labelTitle->setText(version);
 }
 
 void TimeZoneConfigurationWindow::saveTimeZoneSettings()
@@ -111,6 +107,10 @@ void TimeZoneConfigurationWindow::saveTimeZoneSettings()
 	else if (ui->radioButtonOffset->isChecked())
 	{
 		timeZoneString = QString("SCT").append(getTzOffsetStringFrom(ui->doubleSpinBoxOffset));
+	}
+	else if (ui->radioButtonUserDefined->isChecked())
+	{
+		timeZoneString = ui->lineEditUserDefined->text();
 	}
 	else
 	{
@@ -132,6 +132,7 @@ void TimeZoneConfigurationWindow::openDefineTimeZoneWindow()
 	}
 
 	defineTimeZoneWindow->setVisible(true);
+	defineTimeZoneWindow->setTimeZone(ui->lineEditUserDefined->text());
 }
 
 void TimeZoneConfigurationWindow::closeDefineTimeZoneWindow(bool show)
@@ -150,6 +151,47 @@ void TimeZoneConfigurationWindow::closeDefineTimeZoneWindow(bool show)
 void TimeZoneConfigurationWindow::timeZoneDefined(QString timeZoneDefinition)
 {
 	ui->lineEditUserDefined->setText(timeZoneDefinition);
+}
+
+double TimeZoneConfigurationWindow::readTzOffsetString(const QString& string)
+{
+	const QChar signChar = string.at(0);
+	//Offset is POSIX style: UTF - local time = offset,
+	//so invert the sign:
+	const int sign = (signChar == '-') ? 1 : -1;
+	int hours, minutes, seconds;
+	readTzTimeString((signChar.isDigit()) ? string : string.mid(1),
+	                 hours, minutes, seconds);
+	const double offset = sign * (hours + floor(((minutes * 60 + seconds)/3600.0) * 100) / 100.0);//Round to the second digit
+	return offset;
+}
+
+void TimeZoneConfigurationWindow::readTzTimeString(const QString& string,
+                                                   int& hours,
+                                                   int& minutes,
+                                                   int& seconds)
+{
+	hours = 0;
+	minutes = 0;
+	seconds = 0;
+
+	QRegExp tzTimeFormat("(\\d{1,2})(?:\\:(\\d{1,2})(?:\\:(\\d{1,2}))?)?");
+	if (!tzTimeFormat.exactMatch(string))
+		return;
+
+	int count = tzTimeFormat.captureCount();
+	switch (count)
+	{
+		case 3:
+			seconds = tzTimeFormat.cap(3).toInt();
+			//Fallthrough!
+		case 2:
+			minutes = tzTimeFormat.cap(2).toInt();
+			//Fallthrough!
+		case 1:
+		default:
+			hours = tzTimeFormat.cap(1).toInt();
+	}
 }
 
 QString TimeZoneConfigurationWindow::getTzOffsetStringFrom(QDoubleSpinBox * spinBox)
