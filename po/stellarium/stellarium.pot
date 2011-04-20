@@ -1,18 +1,21 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Stellarium's team
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-19 19:55+0200\n"
+"POT-Creation-Date: 2011-04-20 11:52-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-05 08:52+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
 "Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: src/core/modules/GridLinesMgr.cpp:516
 msgid "Meridian"
@@ -26,20 +29,20 @@ msgstr ""
 msgid "Equator"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:447
+#: src/core/modules/LandscapeMgr.cpp:450
 msgid "Author: "
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:450
+#: src/core/modules/LandscapeMgr.cpp:453
 msgid "Location: "
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:455
+#: src/core/modules/LandscapeMgr.cpp:458
 #, qt-format
 msgid ", %1 m"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:458
+#: src/core/modules/LandscapeMgr.cpp:461
 msgid "Planet: "
 msgstr ""
 
@@ -48,7 +51,7 @@ msgstr ""
 msgid "Type: <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:95 src/core/modules/Planet.cpp:119
+#: src/core/modules/Nebula.cpp:95 src/core/modules/Planet.cpp:122
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr ""
@@ -90,17 +93,17 @@ msgstr ""
 msgid "Undocumented type"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:122 src/core/modules/StarWrapper.cpp:114
+#: src/core/modules/Planet.cpp:125 src/core/modules/StarWrapper.cpp:114
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:129
+#: src/core/modules/Planet.cpp:132
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:133
+#: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr ""
@@ -233,54 +236,54 @@ msgstr ""
 msgid "Az/Alt: %1/%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:294
+#: src/gui/ConfigurationDialog.cpp:297
 msgid "Select screenshot directory"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:460
+#: src/gui/ConfigurationDialog.cpp:463
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:468
+#: src/gui/ConfigurationDialog.cpp:471
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:508
+#: src/gui/ConfigurationDialog.cpp:511
 msgid "Authors"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:512 src/gui/ViewDialog.cpp:345
+#: src/gui/ConfigurationDialog.cpp:515 src/gui/ViewDialog.cpp:347
 msgid "Contact"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:584
+#: src/gui/ConfigurationDialog.cpp:587
 msgid "Author"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:585
+#: src/gui/ConfigurationDialog.cpp:588
 msgid "License"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:614
+#: src/gui/ConfigurationDialog.cpp:617
 msgid "Running script: "
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:621
+#: src/gui/ConfigurationDialog.cpp:624
 msgid "Running script: [none]"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:664
+#: src/gui/ConfigurationDialog.cpp:667
 msgid "Finished downloading all star catalogs!"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:673
+#: src/gui/ConfigurationDialog.cpp:676
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:675
+#: src/gui/ConfigurationDialog.cpp:678
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -288,31 +291,31 @@ msgid ""
 "Magnitude range: %3 - %4"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:684
+#: src/gui/ConfigurationDialog.cpp:687
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:722 src/gui/ConfigurationDialog.cpp:756
+#: src/gui/ConfigurationDialog.cpp:725 src/gui/ConfigurationDialog.cpp:759
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
 "%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:727
+#: src/gui/ConfigurationDialog.cpp:730
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:807
+#: src/gui/ConfigurationDialog.cpp:810
 msgid "Verifying file integrity..."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:811
+#: src/gui/ConfigurationDialog.cpp:814
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -384,49 +387,49 @@ msgstr ""
 msgid "Set the normal script execution rate"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:162
+#: src/gui/HelpDialog.cpp:163
 msgid "Stellarium Help"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:163
+#: src/gui/HelpDialog.cpp:164
 msgid "Keys"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:171
+#: src/gui/HelpDialog.cpp:172
 msgid "Further Reading"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:172
+#: src/gui/HelpDialog.cpp:173
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:173
+#: src/gui/HelpDialog.cpp:174
 msgid "The Stellarium User Guide"
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:177
+#: src/gui/HelpDialog.cpp:178
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:182
+#: src/gui/HelpDialog.cpp:183
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:187
+#: src/gui/HelpDialog.cpp:188
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:192
+#: src/gui/HelpDialog.cpp:193
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -434,41 +437,41 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:197
+#: src/gui/HelpDialog.cpp:198
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:233 src/gui/HelpDialog.cpp:325
-#: src/gui/HelpDialog.cpp:327 src/gui/StelGui.cpp:169
+#: src/gui/HelpDialog.cpp:234 src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:328 src/gui/StelGui.cpp:169
 msgid "Miscellaneous"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:293
-msgid "Developers"
-msgstr ""
-
 #: src/gui/HelpDialog.cpp:294
-#, qt-format
-msgid "Project coordinator & lead developer: %1"
+msgid "Developers"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:295
 #, qt-format
-msgid "Doc author/developer: %1"
+msgid "Project coordinator & lead developer: %1"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:296
 #, qt-format
+msgid "Doc author/developer: %1"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:297
+#, qt-format
 msgid "Graphic/other designer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:297 src/gui/HelpDialog.cpp:298
-#: src/gui/HelpDialog.cpp:300 src/gui/HelpDialog.cpp:301
+#: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
+#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
 #, qt-format
 msgid "Developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:299
+#: src/gui/HelpDialog.cpp:300
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr ""
@@ -730,105 +733,105 @@ msgstr ""
 msgid "%1m"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:399
+#: src/gui/ViewDialog.cpp:401
 msgid "No description"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:467
+#: src/gui/ViewDialog.cpp:469
 msgid "No shooting stars"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:470
+#: src/gui/ViewDialog.cpp:472
 msgid "Normal rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:473
+#: src/gui/ViewDialog.cpp:475
 msgid "Standard Perseids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:476
+#: src/gui/ViewDialog.cpp:478
 msgid "Exceptional Leonid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:479
+#: src/gui/ViewDialog.cpp:481
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:331
+#: src/gui/LocationDialog.cpp:332
 msgid "New Location"
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:113
+#: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
 msgstr ""
 
 #. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
-#: src/gui/AddRemoveLandscapesDialog.cpp:115
+#: src/gui/AddRemoveLandscapesDialog.cpp:114
 msgid "ZIP archives"
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:128
+#: src/gui/AddRemoveLandscapesDialog.cpp:127
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:129
-#: src/gui/AddRemoveLandscapesDialog.cpp:156
+#: src/gui/AddRemoveLandscapesDialog.cpp:128
+#: src/gui/AddRemoveLandscapesDialog.cpp:155
 msgid "Success"
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:142
-#: src/gui/AddRemoveLandscapesDialog.cpp:212
-#: src/gui/AddRemoveLandscapesDialog.cpp:221
-#: src/gui/AddRemoveLandscapesDialog.cpp:229
+#: src/gui/AddRemoveLandscapesDialog.cpp:141
+#: src/gui/AddRemoveLandscapesDialog.cpp:211
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:228
 msgid "No landscape was installed."
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:143
-#: src/gui/AddRemoveLandscapesDialog.cpp:167
-#: src/gui/AddRemoveLandscapesDialog.cpp:216
-#: src/gui/AddRemoveLandscapesDialog.cpp:222
-#: src/gui/AddRemoveLandscapesDialog.cpp:230
-#: src/gui/AddRemoveLandscapesDialog.cpp:240
+#: src/gui/AddRemoveLandscapesDialog.cpp:142
+#: src/gui/AddRemoveLandscapesDialog.cpp:166
+#: src/gui/AddRemoveLandscapesDialog.cpp:215
+#: src/gui/AddRemoveLandscapesDialog.cpp:221
+#: src/gui/AddRemoveLandscapesDialog.cpp:229
+#: src/gui/AddRemoveLandscapesDialog.cpp:239
 msgid "Error!"
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:155
+#: src/gui/AddRemoveLandscapesDialog.cpp:154
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:166
-#: src/gui/AddRemoveLandscapesDialog.cpp:236
+#: src/gui/AddRemoveLandscapesDialog.cpp:165
+#: src/gui/AddRemoveLandscapesDialog.cpp:235
 msgid "The selected landscape could not be (completely) removed."
 msgstr ""
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:189
+#: src/gui/AddRemoveLandscapesDialog.cpp:188
 #, qt-format
 msgid "Size on disk: %1 MiB"
 msgstr ""
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:215
+#: src/gui/AddRemoveLandscapesDialog.cpp:214
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:221
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
 msgstr ""
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:228
+#: src/gui/AddRemoveLandscapesDialog.cpp:227
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr ""
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:239
+#: src/gui/AddRemoveLandscapesDialog.cpp:238
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr ""
@@ -1458,11 +1461,111 @@ msgstr ""
 msgid "Planet:"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:227 src/ui_searchDialogGui.h:228
+#: src/ui_searchDialogGui.h:440 src/ui_searchDialogGui.h:441
 msgid "Find Object"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:233
+#: src/ui_searchDialogGui.h:446
+msgid "Keyboard for Greek input"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:449
+msgid "alpha"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:452
+msgid "beta"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:455
+msgid "gamma"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:458
+msgid "delta"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:461
+msgid "epsilon"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:464
+msgid "zeta"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:467
+msgid "eta"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:470
+msgid "theta"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:473
+msgid "iota"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:476
+msgid "kappa"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:479
+msgid "lambda"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:482
+msgid "mu"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:485
+msgid "nu"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:488
+msgid "xi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:491
+msgid "omicron"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:494
+msgid "pi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:497
+msgid "rho"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:500
+msgid "sigma"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:503
+msgid "tau"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:506
+msgid "upsilon"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:509
+msgid "phi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:512
+msgid "chi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:515
+msgid "psi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:518
+msgid "omega"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:520
 msgid "RA/Dec (J2000):"
 msgstr ""
 
@@ -1975,7 +2078,7 @@ msgstr ""
 #. TRANSLATORS: Title of a group of key bindings in the Help window
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:121
 #: plugins/CompassMarks/src/CompassMarks.cpp:121
-#: plugins/Oculars/src/Oculars.cpp:565 plugins/Oculars/src/Oculars.cpp:575
+#: plugins/Oculars/src/Oculars.cpp:931 plugins/Oculars/src/Oculars.cpp:945
 #: plugins/Satellites/src/Satellites.cpp:124
 msgid "Plugin Key Bindings"
 msgstr ""
@@ -1992,24 +2095,20 @@ msgstr ""
 msgid "Compass marks"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:74
+#: plugins/Oculars/src/Oculars.cpp:76
 msgid "Oculars"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:77
+#: plugins/Oculars/src/Oculars.cpp:79
 msgid "Shows the sky as if looking through a telescope eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:573
+#: plugins/Oculars/src/Oculars.cpp:943
 msgid "Ocular view"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:580
-msgid "Oculars configuration window"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:587
-msgid "Telrad circles"
+#: plugins/Oculars/src/Oculars.cpp:965
+msgid "Oculars popup menu"
 msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:68
@@ -2040,7 +2139,7 @@ msgid ""
 msgstr ""
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:165
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:150
 msgid "Telescope Control"
 msgstr ""
 
@@ -2050,17 +2149,17 @@ msgid ""
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:170
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:155
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr ""
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:177
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:162
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr ""
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:188
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:173
 msgid "Move a telescope to a given set of coordinates"
 msgstr ""
 
