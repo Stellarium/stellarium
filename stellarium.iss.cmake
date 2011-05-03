@@ -40,7 +40,7 @@ Source: "@QT_BINARY_DIR@\QtOpenGL4.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\QtNetwork4.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\QtScript4.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\QtXml4.dll"; DestDir: "{app}";
-Source: "@QT_PLUGINS_DIR@\sqldrivers\qsqlite4.dll"; DestDir: "{app}\sqldrivers\";
+;Source: "@QT_PLUGINS_DIR@\sqldrivers\qsqlite4.dll"; DestDir: "{app}\sqldrivers\";
 Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
 ; Locales
 Source: "@CMAKE_INSTALL_PREFIX@\share\locale\*"; DestDir: "{app}\locale\"; Flags: recursesubdirs

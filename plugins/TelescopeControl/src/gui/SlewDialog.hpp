@@ -38,6 +38,8 @@ class SlewDialog : public StelDialogTelescopeControl
 public:
 	SlewDialog();
 	virtual ~SlewDialog();
+
+public slots:
 	void languageChanged();
 	
 protected:

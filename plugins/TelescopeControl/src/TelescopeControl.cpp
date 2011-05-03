@@ -102,7 +102,7 @@ TelescopeControl::~TelescopeControl()
 
 ////////////////////////////////////////////////////////////////////////////////
 // Methods inherited from the StelModule class
-// init(), update(), draw(), setStelStyle(), getCallOrder()
+// init(), update(), draw(),  getCallOrder()
 void TelescopeControl::init()
 {
 	//TODO: I think I've overdone the try/catch...
@@ -192,6 +192,7 @@ void TelescopeControl::init()
 	//Initialize style, as it is not called at startup:
 	//(necessary to initialize the reticle/label/circle colors)
 	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
+	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 }
 
 void TelescopeControl::deinit()
@@ -1253,7 +1254,7 @@ bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connecti
 	switch (connectionType)
 	{
 	case ConnectionVirtual:
-		initString = QString("%1:%2").arg(name, "TelescopeServerDummy");
+		initString = QString("%1:%2:%3").arg(name, "TelescopeServerDummy", "J2000");
 		break;
 
 	case ConnectionInternal:

@@ -382,6 +382,9 @@ private:
 	//! The main GL Context used by Stellarium.
 	static QGLContext* glContext;
 
+	//! Whether ARB_texture_non_power_of_two is supported on this card
+	static bool isNoPowerOfTwoAllowed;
+
 #ifdef STELPAINTER_GL2
 	Vec4f currentColor;
 	bool texture2dEnabled;

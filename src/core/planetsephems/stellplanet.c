@@ -7,7 +7,7 @@
 
 /* Chapter 31 Pg 206-207 Equ 31.1 31.2 , 31.3 using VSOP 87
  * Calculate planets rectangular heliocentric ecliptical coordinates
- * for given julian day. Values are in UA.
+ * for given julian day. Values are in AU.
  * params : Julian day, rect coords */
 void get_pluto_helio_coords(double jd, double * X, double * Y, double * Z);
 
@@ -66,7 +66,7 @@ void get_neptune_helio_osculating_coords(double jd0,double jd,double xyz[3])
 
 /* Calculate the rectangular geocentric lunar coordinates to the inertial mean
  * ecliptic and equinox of J2000.
- * The geocentric coordinates returned are in units of UA.
+ * The geocentric coordinates returned are in units of AU.
  * This function is based upon the Lunar Solution ELP2000-82B by
  * Michelle Chapront-Touze and Jean Chapront of the Bureau des Longitudes,
  * Paris. ELP 2000-82B theory

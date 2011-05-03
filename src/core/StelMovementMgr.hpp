@@ -62,8 +62,6 @@ public:
 	virtual void handleMouseWheel(class QWheelEvent* event);
 	//! Handle mouse click events.
 	virtual void handleMouseClicks(class QMouseEvent* event);
-	//! Called then the selected object changes.
-	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to StelMovementMgr
@@ -200,6 +198,10 @@ public slots:
 	void setDragTimeMode(bool b) {dragTimeMode=b;}
 	bool getDragTimeMode() const {return dragTimeMode;}
 
+private slots:
+	//! Called when the selected object changes.
+	void selectedObjectChange(StelModule::StelModuleSelectAction action);
+	
 private:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
 	Vec3d mountFrameToJ2000(const Vec3d& v) const;
