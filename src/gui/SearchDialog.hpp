@@ -67,15 +67,16 @@ class SearchDialog : public StelDialog
 public:
 	SearchDialog();
 	virtual ~SearchDialog();
-	void languageChanged();
 	//! Notify that the application style changed
 	void styleChanged();
 	bool eventFilter(QObject *object, QEvent *event);
-	void setSimpleStyle(bool b);
 	
 public slots:
+	void languageChanged();
 	//! Add auto focus of the edit line
 	void setVisible(bool);
+    //! This style only displays the text search field and the search button
+	void setSimpleStyle();
 
 protected:
 	Ui_searchDialogForm* ui;
@@ -83,10 +84,11 @@ protected:
 	virtual void createDialogContent();
 
 private slots:
+    void greekLetterClicked();
 	//! Called when the current simbad query status changes
 	void onSimbadStatusChanged();
 	//! Called when the user changed the input text
-	void onTextChanged(const QString& text);
+	void onSearchTextChanged(const QString& text);
 	
 	void gotoObject();
 	

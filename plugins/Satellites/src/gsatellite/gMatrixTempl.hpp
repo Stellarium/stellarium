@@ -50,7 +50,7 @@ public:
 
 		for(size_type i = 0; i < rows; ++i)
 			for(size_type j = 0; j < columns ; ++j)
-				operator[](i)[j] = right[ i][ j];
+				this->operator[](i)[j] = right[ i][ j];
 	}
 
 	size_type Rows() const

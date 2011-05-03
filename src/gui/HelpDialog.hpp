@@ -51,10 +51,12 @@ public:
 	//! @param description is a short description of what the key does
 	void setKey(QString group, QString oldKey, QString newKey, QString description);
 
-	void languageChanged();
 
 	//! Notify that the application style changed
 	void styleChanged();
+
+public slots:
+	void languageChanged();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots

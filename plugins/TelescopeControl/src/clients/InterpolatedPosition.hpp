@@ -26,7 +26,9 @@
 #ifndef _INTERPOLATED_POSITION_HPP_
 #define _INTERPOLATED_POSITION_HPP_
 
+#ifndef INT64_MAX
 #define INT64_MAX 0x7FFFFFFFFFFFFFFFLL
+#endif
 
 #include "VecMath.hpp"
 
