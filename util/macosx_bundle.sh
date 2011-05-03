@@ -20,9 +20,7 @@ rmdir ${CMAKE_INSTALL_PREFIX}/Resources/stellarium
 mkdir ${CMAKE_INSTALL_PREFIX}/Frameworks
 /usr/bin/perl util/pkgApp.pl ${CMAKE_INSTALL_PREFIX} MacOS/stellarium Frameworks 
 cp -pr /Developer/Applications/Qt/plugins/{imageformats,iconengines} ${CMAKE_INSTALL_PREFIX}/MacOS
-mkdir ${CMAKE_INSTALL_PREFIX}/MacOS/sqldrivers/
-cp -pr /Developer/Applications/Qt/plugins/sqldrivers/libqsqlite.dylib  ${CMAKE_INSTALL_PREFIX}/MacOS/sqldrivers/
-for f in ${CMAKE_INSTALL_PREFIX}/MacOS/{imageformats,iconengines,sqldrivers}/*.dylib; do
+for f in ${CMAKE_INSTALL_PREFIX}/MacOS/{imageformats,iconengines}/*.dylib; do
     fdir=`dirname $f`
     dir=`basename $fdir`
     base=`basename $f`

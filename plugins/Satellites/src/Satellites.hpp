@@ -78,7 +78,6 @@ public:
 	virtual void update(double deltaTime);
 	virtual void draw(StelCore* core);
 	virtual void drawPointer(StelCore* core, StelPainter& painter);
-	virtual void setStelStyle(const QString& section);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -224,6 +223,9 @@ public slots:
 
 	//! Save the current TLE data to the default json file location.
 	void saveTleData(QString path=QString());
+
+private slots:
+	void setStelStyle(const QString& section);
 
 private:
 	// if existing, delete Satellites section in main config.ini, then create with default values

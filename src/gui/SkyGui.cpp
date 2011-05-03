@@ -138,6 +138,7 @@ void SkyGui::init(StelGui* astelGui)
 
 	buttonBarPath->setZValue(-0.1);
 	updateBarsPos();
+	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 }
 
 void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
@@ -227,9 +228,9 @@ void SkyGui::updateBarsPos()
 	autoHidebts->setOpacity(opacity < 0.01 ? 0.01 : opacity);	// Work around a qt bug
 }
 
-void SkyGui::setStelStyle(const StelStyle& style)
+void SkyGui::setStelStyle(const QString& style)
 {
-	if (style.confSectionName=="night_color")
+	if (style == "night_color")
 	{
 		buttonBarPath->setPen(QColor::fromRgbF(0.7,0.2,0.2,0.5));
 		buttonBarPath->setBrush(QColor::fromRgbF(0.23, 0.13, 0.03, 0.2));
