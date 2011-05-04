@@ -83,7 +83,8 @@ void LocationDialog::createDialogContent()
 	ui->citiesListView->setModel(proxyModel);
 
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-	ui->planetNameComboBox->insertItems(0, ssystem->getAllPlanetEnglishNames());
+//	ui->planetNameComboBox->insertItems(0, ssystem->getAllPlanetEnglishNames());
+	ui->planetNameComboBox->insertItems(0, ssystem->getAllPlanetLocalizedNames());
 
 	ui->countryNameComboBox->insertItems(0, StelLocaleMgr::getAllCountryNames());
 
@@ -181,11 +182,11 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	ui->longitudeSpinBox->setDegrees(loc.longitude);
 	ui->latitudeSpinBox->setDegrees(loc.latitude);
 	ui->altitudeSpinBox->setValue(loc.altitude);
-	idx = ui->planetNameComboBox->findText(loc.planetName, Qt::MatchCaseSensitive);
+	idx = ui->planetNameComboBox->findText(q_(loc.planetName), Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
 		// Use Earth as default
-		ui->planetNameComboBox->findText("Earth");
+		ui->planetNameComboBox->findText(q_("Earth"));
 	}
 	ui->planetNameComboBox->setCurrentIndex(idx);
 	setMapForLocation(loc);
@@ -203,12 +204,12 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 void LocationDialog::setMapForLocation(const StelLocation& loc)
 {
 	// Avoids usless processing
-	if (lastPlanet==loc.planetName && lastVisionMode==StelApp::getInstance().getVisionModeNight())
+	if (lastPlanet==q_(loc.planetName) && lastVisionMode==StelApp::getInstance().getVisionModeNight())
 		return;
 
 	QPixmap pixmap;
 	// Try to set the proper planet map image
-	if (loc.planetName=="Earth")
+	if (q_(loc.planetName)==q_("Earth"))
 	{
 		// Special case for earth, we don't want to see the clouds
 		pixmap = QPixmap(":/graphicGui/world.png");
@@ -216,7 +217,7 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 	else
 	{
 		SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-		PlanetP p = ssm->searchByEnglishName(loc.planetName);
+		PlanetP p = ssm->searchByEnglishName(q_(loc.planetName));
 		QString path;
 		if (p)
 		{
@@ -230,7 +231,7 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 				return;
 			}
 			pixmap = QPixmap(path);
-		}
+		}                      
 	}
 
 	if (StelApp::getInstance().getVisionModeNight())
@@ -243,7 +244,7 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 	}
 
 	// For caching
-	lastPlanet = loc.planetName;
+	lastPlanet = q_(loc.planetName);
 	lastVisionMode = StelApp::getInstance().getVisionModeNight();
 }
 
