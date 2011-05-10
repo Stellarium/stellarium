@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-20 11:50-0400\n"
+"POT-Creation-Date: 2011-05-10 14:10+0700\n"
 "PO-Revision-Date: 2010-10-20 18:56+0000\n"
 "Last-Translator: Shushi Kurose <md81bird@hitaki.net>\n"
 "Language-Team: Japanese <ja@li.org>\n"
-"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
 "X-Launchpad-Export-Date: 2010-12-05 08:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
@@ -86,7 +86,7 @@ msgstr "絶対等級: %1"
 msgid "Absolute scale:"
 msgstr "絶対等級:"
 
-#: src/translations.h:140
+#: src/translations.h:165
 msgid "Actual Time"
 msgstr "現在の時刻"
 
@@ -126,9 +126,13 @@ msgstr "背景の追加/削除"
 msgid "Add/remove landscapes..."
 msgstr "背景の追加/削除..."
 
-#: src/translations.h:126
+#: src/translations.h:151
 msgid "Administration "
 msgstr "管理 "
+
+#: src/translations.h:60
+msgid "Adrastea"
+msgstr ""
 
 #: src/ui_configurationDialog.h:820
 msgid "Align labels with the horizon"
@@ -146,7 +150,7 @@ msgstr "矢印キーで視点の移動とズーム"
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "マウスのドラッグで視点の移動、ホイールでズーム"
 
-#: src/translations.h:130
+#: src/translations.h:155
 msgid "Altitude (m): "
 msgstr "標高(m): "
 
@@ -154,8 +158,12 @@ msgstr "標高(m): "
 msgid "Altitude:"
 msgstr "高度:"
 
+#: src/translations.h:50
+msgid "Amalthea"
+msgstr ""
+
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:85
+#: src/translations.h:110
 msgid "Amor"
 msgstr ""
 
@@ -164,6 +172,10 @@ msgid ""
 "An interface for adding asteroids and comets to Stellarium. It can download "
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
+msgstr ""
+
+#: src/translations.h:57
+msgid "Ananke"
 msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
@@ -175,7 +187,7 @@ msgid "Angle measure"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:87
+#: src/translations.h:112
 msgid "Apophis"
 msgstr ""
 
@@ -184,11 +196,11 @@ msgstr ""
 msgid "Apparent diameter: %1"
 msgstr "見かけの直径: %1"
 
-#: src/translations.h:63
+#: src/translations.h:75
 msgid "Ariel"
 msgstr ""
 
-#: src/translations.h:185
+#: src/translations.h:210
 msgid "Arrow down to load list."
 msgstr "下矢印キーで一覧を表示します。"
 
@@ -201,7 +213,7 @@ msgid "Art brightness: "
 msgstr "星座絵の明るさ: "
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:73
+#: src/translations.h:98
 msgid "Astraea"
 msgstr ""
 
@@ -238,7 +250,7 @@ msgstr "自動視点、元の方位に戻す"
 msgid "Az/Alt: %1/%2"
 msgstr "方位角/高度: %1/%2"
 
-#: src/translations.h:164
+#: src/translations.h:189
 msgid "Azimuthal Grid"
 msgstr "地平座標"
 
@@ -246,11 +258,11 @@ msgstr "地平座標"
 msgid "Azimuthal grid"
 msgstr "方位角の表示"
 
-#: src/translations.h:103
+#: src/translations.h:128
 msgid "Aztec"
 msgstr "アズテック"
 
-#: src/translations.h:183
+#: src/translations.h:208
 msgid "CD/DVD Script: "
 msgstr "CD/DVD スクリプト: "
 
@@ -262,7 +274,7 @@ msgstr "CTRL + 左クリック"
 msgid "CTRL + Up/Down"
 msgstr "CTRL + ↑/↓"
 
-#: src/translations.h:136
+#: src/translations.h:161
 msgid "Calendar"
 msgstr "カレンダー"
 
@@ -274,13 +286,17 @@ msgstr "カリスト"
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: src/translations.h:159
+#: src/translations.h:184
 msgid "Cardinal Points"
 msgstr "方位"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1037
 msgid "Cardinal points"
 msgstr "方位"
+
+#: src/translations.h:56
+msgid "Carme"
+msgstr ""
 
 #: src/ui_viewDialog.h:1030
 msgid "Celestial Sphere"
@@ -294,16 +310,16 @@ msgstr "対象を画面中心へ"
 msgid "Ceres"
 msgstr ""
 
-#: src/translations.h:68
+#: src/translations.h:80
 msgid "Charon"
 msgstr "カロン"
 
-#: src/translations.h:104
+#: src/translations.h:129
 msgid "Chinese"
 msgstr "中国"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:89
+#: src/translations.h:114
 msgid "Chiron"
 msgstr ""
 
@@ -323,7 +339,7 @@ msgstr "スクリプトの実行時にウィンドウを閉じる"
 msgid "Cluster associated with nebulosity"
 msgstr "星雲を伴う星団"
 
-#: src/translations.h:123
+#: src/translations.h:148
 msgid "Colors "
 msgstr "色 "
 
@@ -343,19 +359,19 @@ msgstr "環境設定"
 msgid "Configuration window"
 msgstr "設定画面"
 
-#: src/translations.h:157
+#: src/translations.h:182
 msgid "Constellation Art Intensity"
 msgstr "星座絵の明るさ"
 
-#: src/translations.h:158
+#: src/translations.h:183
 msgid "Constellation Boundaries"
 msgstr "星座の境界線"
 
-#: src/translations.h:155
+#: src/translations.h:180
 msgid "Constellation Lines"
 msgstr "星座線"
 
-#: src/translations.h:156
+#: src/translations.h:181
 msgid "Constellation Names"
 msgstr "星座名"
 
@@ -387,7 +403,7 @@ msgstr "連絡先"
 msgid "Control"
 msgstr "Control"
 
-#: src/translations.h:180
+#: src/translations.h:205
 msgid "Correct for light travel time: "
 msgstr "光の到達時間を補正する: "
 
@@ -399,7 +415,7 @@ msgstr "国:"
 msgid "Current location information"
 msgstr "現在位置の情報"
 
-#: src/translations.h:179
+#: src/translations.h:204
 msgid "Cursor Timeout: "
 msgstr "カーソル表示時間: "
 
@@ -407,7 +423,7 @@ msgstr "カーソル表示時間: "
 msgid "Cylinder"
 msgstr "円筒"
 
-#: src/translations.h:143
+#: src/translations.h:168
 msgid "Date Display Format: "
 msgstr "日付の表示形式: "
 
@@ -419,7 +435,7 @@ msgstr "日付と時刻"
 msgid "Date/time window"
 msgstr "日付/時刻"
 
-#: src/translations.h:135
+#: src/translations.h:160
 msgid "Day keys: "
 msgstr "日付キー: "
 
@@ -443,6 +459,10 @@ msgstr "ダイモス"
 msgid "Delete"
 msgstr "削除"
 
+#: src/translations.h:86
+msgid "Despina"
+msgstr ""
+
 #: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
 #: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
 #, qt-format
@@ -457,7 +477,7 @@ msgstr "開発者"
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "非常に明るい天体がある場合、暗い天体を見えにくくする"
 
-#: src/translations.h:54
+#: src/translations.h:66
 msgid "Dione"
 msgstr "ディオーネ"
 
@@ -528,7 +548,7 @@ msgstr ""
 msgid "Dynamic eye adaptation"
 msgstr "明暗の再現"
 
-#: src/translations.h:99
+#: src/translations.h:124
 msgid "E"
 msgstr "東"
 
@@ -540,7 +560,7 @@ msgstr "地球"
 msgid "Ecliptic"
 msgstr ""
 
-#: src/translations.h:167
+#: src/translations.h:192
 msgid "Ecliptic Line"
 msgstr "黄道線"
 
@@ -548,13 +568,18 @@ msgstr "黄道線"
 msgid "Ecliptic line"
 msgstr "黄道線"
 
-#: src/translations.h:124
+#: src/translations.h:149
 msgid "Effects "
 msgstr "効果 "
 
-#: src/translations.h:105
+#: src/translations.h:130
 msgid "Egyptian"
 msgstr "エジプト"
+
+#: src/translations.h:52
+#, fuzzy
+msgid "Elara"
+msgstr "地球"
 
 #: src/ui_configurationDialog.h:786
 msgid "Enable keyboard navigation"
@@ -564,7 +589,7 @@ msgstr "キーボード操作を有効にする"
 msgid "Enable mouse navigation"
 msgstr "マウス操作を有効にする"
 
-#: src/translations.h:52
+#: src/translations.h:64
 msgid "Enceladus"
 msgstr "エンケラドス"
 
@@ -580,7 +605,7 @@ msgstr "正積"
 msgid "Equator"
 msgstr ""
 
-#: src/translations.h:166
+#: src/translations.h:191
 msgid "Equator Line"
 msgstr "赤道線"
 
@@ -588,7 +613,7 @@ msgstr "赤道線"
 msgid "Equator line"
 msgstr "天の赤道"
 
-#: src/translations.h:165
+#: src/translations.h:190
 msgid "Equatorial Grid"
 msgstr "赤道座標"
 
@@ -600,12 +625,12 @@ msgstr "赤経/赤緯 (J2000)"
 msgid "Equatorial grid"
 msgstr "赤経/赤緯"
 
-#: src/translations.h:69
+#: src/translations.h:81
 msgid "Eris"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:91
+#: src/translations.h:116
 msgid "Eros"
 msgstr ""
 
@@ -673,7 +698,7 @@ msgid "Flip scene vertically"
 msgstr "上下の切り替え"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:79
+#: src/translations.h:104
 msgid "Flora"
 msgstr ""
 
@@ -693,6 +718,11 @@ msgstr "さらに詳しく知るには"
 msgid "Galactic grid"
 msgstr "銀河角"
 
+#: src/translations.h:87
+#, fuzzy
+msgid "Galatea"
+msgstr "銀河系"
+
 #: src/core/modules/Nebula.cpp:269
 msgid "Galaxy"
 msgstr "銀河系"
@@ -701,7 +731,7 @@ msgstr "銀河系"
 msgid "Ganymede"
 msgstr "ガニメデ"
 
-#: src/translations.h:121
+#: src/translations.h:146
 msgid "General "
 msgstr "一般 "
 
@@ -731,17 +761,22 @@ msgstr "重力表示"
 msgid "Ground"
 msgstr "地表"
 
+#: src/translations.h:90
+#, fuzzy
+msgid "Halimede"
+msgstr "ガニメデ"
+
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
 msgstr "ハンメル図法"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:75
+#: src/translations.h:100
 msgid "Hebe"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:93
+#: src/translations.h:118
 msgid "Hektor"
 msgstr ""
 
@@ -765,6 +800,10 @@ msgstr "マウスカーソルを時間と共に消す"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "1966年のしし座流星群"
 
+#: src/translations.h:51
+msgid "Himalia"
+msgstr ""
+
 #: src/core/StelObject.cpp:80
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
@@ -775,15 +814,15 @@ msgid "Hourly zenith rate:"
 msgstr "1時間あたりの流星の数:"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:83
+#: src/translations.h:108
 msgid "Hygiea"
 msgstr ""
 
-#: src/translations.h:57
+#: src/translations.h:69
 msgid "Hyperion"
 msgstr "ヒペリオン"
 
-#: src/translations.h:58
+#: src/translations.h:70
 msgid "Iapetus"
 msgstr "イアペトゥス"
 
@@ -809,7 +848,7 @@ msgstr "時間を進める (少し)"
 msgid "Install a new landscape from a ZIP archive..."
 msgstr "ZIP アーカイブから新しい背景をインストール..."
 
-#: src/translations.h:106
+#: src/translations.h:131
 msgid "Inuit"
 msgstr "イヌイット"
 
@@ -822,7 +861,7 @@ msgid "Io"
 msgstr "イオ"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:77
+#: src/translations.h:102
 msgid "Iris"
 msgstr ""
 
@@ -842,7 +881,7 @@ msgstr ""
 msgid "Keys"
 msgstr "キー"
 
-#: src/translations.h:107
+#: src/translations.h:132
 msgid "Korean"
 msgstr "韓国"
 
@@ -850,7 +889,7 @@ msgstr "韓国"
 msgid "Labels and Markers"
 msgstr "名前とマーカー"
 
-#: src/translations.h:108
+#: src/translations.h:133
 msgid "Lakota"
 msgstr "ラコタ"
 
@@ -868,17 +907,29 @@ msgstr "背景 \"%1\" のインストールに成功しました。"
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "背景 \"%1\" の削除に成功しました。"
 
-#: src/translations.h:172
+#: src/translations.h:197
 msgid "Landscape: "
 msgstr "背景: "
+
+#: src/translations.h:93
+msgid "Laomedeia"
+msgstr ""
+
+#: src/translations.h:88
+msgid "Larissa"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:395
 msgid "Latitude:"
 msgstr "緯度:"
 
-#: src/translations.h:128
+#: src/translations.h:153
 msgid "Latitude: "
 msgstr "緯度: "
+
+#: src/translations.h:58
+msgid "Leda"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:56
 msgid "Left click"
@@ -888,7 +939,7 @@ msgstr "左クリック"
 msgid "License"
 msgstr "ライセンス"
 
-#: src/translations.h:171
+#: src/translations.h:196
 msgid "Light Pollution Luminance: "
 msgstr "光害の明るさ: "
 
@@ -896,11 +947,11 @@ msgstr "光害の明るさ: "
 msgid "Light pollution: "
 msgstr "光害: "
 
-#: src/translations.h:153
+#: src/translations.h:178
 msgid "Limiting Magnitude: "
 msgstr "限界等級: "
 
-#: src/translations.h:188
+#: src/translations.h:213
 msgid "Load Default Configuration: "
 msgstr "デフォルトの設定を読み込む: "
 
@@ -908,7 +959,7 @@ msgstr "デフォルトの設定を読み込む: "
 msgid "Load at startup"
 msgstr "起動時に実行"
 
-#: src/translations.h:182
+#: src/translations.h:207
 msgid "Local Script: "
 msgstr "ローカルスクリプト: "
 
@@ -932,15 +983,19 @@ msgstr "ログ"
 msgid "Longitude:"
 msgstr "経度:"
 
-#: src/translations.h:129
+#: src/translations.h:154
 msgid "Longitude: "
 msgstr "経度: "
 
-#: src/translations.h:175
+#: src/translations.h:55
+msgid "Lysithea"
+msgstr ""
+
+#: src/translations.h:200
 msgid "Magnitude Scaling Multiplier: "
 msgstr "等級による倍率: "
 
-#: src/translations.h:150
+#: src/translations.h:175
 msgid "Magnitude Sizing Multiplier: "
 msgstr "等級による倍率 : "
 
@@ -958,11 +1013,11 @@ msgstr "等級: <b>%1</b> (B-V: %2)"
 msgid "Main"
 msgstr "メイン"
 
-#: src/translations.h:173
+#: src/translations.h:198
 msgid "Manual zoom: "
 msgstr "手動ズーム: "
 
-#: src/translations.h:109
+#: src/translations.h:134
 msgid "Maori"
 msgstr "マオリ"
 
@@ -982,11 +1037,11 @@ msgstr "望遠鏡などで覗いたときのように円形の縁を表示する
 msgid "Maximum FOV: "
 msgstr "最大視野: "
 
-#: src/translations.h:151
+#: src/translations.h:176
 msgid "Maximum Magnitude to Label: "
 msgstr "名前を表示する最大等級: "
 
-#: src/translations.h:177
+#: src/translations.h:202
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "名前を表示する星雲・星団の最大等級: "
 
@@ -1002,7 +1057,7 @@ msgstr "水星"
 msgid "Meridian"
 msgstr ""
 
-#: src/translations.h:163
+#: src/translations.h:188
 msgid "Meridian Line"
 msgstr "子午線"
 
@@ -1011,19 +1066,19 @@ msgid "Meridian line"
 msgstr "子午線"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:81
+#: src/translations.h:61 src/translations.h:106
 msgid "Metis"
 msgstr ""
 
-#: src/translations.h:176
+#: src/translations.h:201
 msgid "Milky Way intensity: "
 msgstr "天の川の明るさ: "
 
-#: src/translations.h:51
+#: src/translations.h:63
 msgid "Mimas"
 msgstr "ミマス"
 
-#: src/translations.h:62
+#: src/translations.h:74
 msgid "Miranda"
 msgstr ""
 
@@ -1058,15 +1113,19 @@ msgstr ""
 msgid "Movement and Selection"
 msgstr "動きと選択"
 
-#: src/translations.h:97
+#: src/translations.h:122
 msgid "N"
 msgstr "北"
+
+#: src/translations.h:84
+msgid "Naiad"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:408
 msgid "Name/City:"
 msgstr "都市名:"
 
-#: src/translations.h:110
+#: src/translations.h:135
 msgid "Navajo"
 msgstr "ナバホ"
 
@@ -1078,11 +1137,11 @@ msgstr "ナビゲーション"
 msgid "Nebula"
 msgstr "星雲"
 
-#: src/translations.h:169
+#: src/translations.h:194
 msgid "Nebula Circles"
 msgstr "星雲の円"
 
-#: src/translations.h:168
+#: src/translations.h:193
 msgid "Nebula Names"
 msgstr "星雲の名前"
 
@@ -1094,9 +1153,17 @@ msgstr "星雲"
 msgid "Nebulas background images"
 msgstr "星雲の背景"
 
-#: src/translations.h:60
+#: src/translations.h:72
 msgid "Neptune"
 msgstr "海王星"
+
+#: src/translations.h:83
+msgid "Nereid"
+msgstr ""
+
+#: src/translations.h:94
+msgid "Neso"
+msgstr ""
 
 #: src/gui/LocationDialog.cpp:332
 msgid "New Location"
@@ -1129,7 +1196,7 @@ msgstr "なし"
 msgid "Normal rate"
 msgstr "通常"
 
-#: src/translations.h:111
+#: src/translations.h:136
 msgid "Norse"
 msgstr "北欧"
 
@@ -1138,11 +1205,11 @@ msgstr "北欧"
 msgid "OSX Developer: %1"
 msgstr "OSX 開発者: %1"
 
-#: src/translations.h:66
+#: src/translations.h:78
 msgid "Oberon"
 msgstr ""
 
-#: src/translations.h:174
+#: src/translations.h:199
 msgid "Object Sizing Rule: "
 msgstr "天体の大きさの設定: "
 
@@ -1202,6 +1269,10 @@ msgstr "全天で視点を移動する"
 msgid "Parallax: %1\""
 msgstr "両眼視差: %1\""
 
+#: src/translations.h:53
+msgid "Pasiphae"
+msgstr ""
+
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
 msgstr "遠近"
@@ -1221,19 +1292,19 @@ msgstr ""
 msgid "Phobos"
 msgstr "フォボス"
 
-#: src/translations.h:59
+#: src/translations.h:71
 msgid "Phoebe"
 msgstr "フェーベ"
 
-#: src/translations.h:160
+#: src/translations.h:185
 msgid "Planet Names"
 msgstr "惑星の名前"
 
-#: src/translations.h:161
+#: src/translations.h:186
 msgid "Planet Orbits"
 msgstr "惑星の軌道"
 
-#: src/translations.h:162
+#: src/translations.h:187
 msgid "Planet Trails"
 msgstr "惑星の通った跡"
 
@@ -1291,11 +1362,11 @@ msgstr ""
 msgid "Plugins"
 msgstr "プラグイン"
 
-#: src/translations.h:67
+#: src/translations.h:79
 msgid "Pluto"
 msgstr "冥王星"
 
-#: src/translations.h:112
+#: src/translations.h:137
 msgid "Polynesian"
 msgstr "ポリネシア"
 
@@ -1305,11 +1376,11 @@ msgid ""
 "TLE data"
 msgstr ""
 
-#: src/translations.h:138
+#: src/translations.h:163
 msgid "Preset Sky Time: "
 msgstr "天の時間の設定: "
 
-#: src/translations.h:141
+#: src/translations.h:166
 msgid "Preset Time"
 msgstr "設定された時刻"
 
@@ -1326,8 +1397,16 @@ msgstr "プロジェクトコーディネーターと開発リーダー: %1"
 msgid "Projection"
 msgstr "投影法"
 
+#: src/translations.h:89
+msgid "Proteus"
+msgstr ""
+
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
+msgstr ""
+
+#: src/translations.h:91
+msgid "Psamathe"
 msgstr ""
 
 #: src/gui/StelGui.cpp:171
@@ -1389,7 +1468,7 @@ msgstr ""
 msgid "Retry"
 msgstr "再試行"
 
-#: src/translations.h:55
+#: src/translations.h:67
 msgid "Rhea"
 msgstr "レア"
 
@@ -1409,13 +1488,17 @@ msgstr "実行中のスクリプト: "
 msgid "Running script: [none]"
 msgstr "実行中のスクリプト: [なし]"
 
-#: src/translations.h:98
+#: src/translations.h:123
 msgid "S"
 msgstr "南"
 
-#: src/translations.h:113
+#: src/translations.h:138
 msgid "Sami"
 msgstr "サーミ"
+
+#: src/translations.h:92
+msgid "Sao"
+msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:127
 msgid "Satellite hints"
@@ -1433,11 +1516,11 @@ msgstr ""
 msgid "Satellites configuration window"
 msgstr ""
 
-#: src/translations.h:50
+#: src/translations.h:62
 msgid "Saturn"
 msgstr "土星"
 
-#: src/translations.h:189
+#: src/translations.h:214
 msgid "Save Current Configuration as Default: "
 msgstr "現在の設定をデフォルトとして保存 : "
 
@@ -1475,7 +1558,7 @@ msgstr "スクリプトコンソール画面"
 msgid "Scripts"
 msgstr "スクリプト"
 
-#: src/translations.h:125
+#: src/translations.h:150
 msgid "Scripts "
 msgstr "スクリプト "
 
@@ -1487,7 +1570,7 @@ msgstr "検索画面"
 msgid "Select a ZIP archive that contains a Stellarium landscape"
 msgstr "Stellarium の背景を含む ZIP アーカイブを選択"
 
-#: src/translations.h:186
+#: src/translations.h:211
 msgid "Select and exit to run."
 msgstr "選択しメニューを抜けるとスタートします。"
 
@@ -1507,19 +1590,19 @@ msgstr "一つの星座を選択"
 msgid "Selected object information"
 msgstr "選択された天体の情報"
 
-#: src/translations.h:119
+#: src/translations.h:144
 msgid "Set Location "
 msgstr "場所の設定 "
 
-#: src/translations.h:120
+#: src/translations.h:145
 msgid "Set Time "
 msgstr "時刻の設定 "
 
-#: src/translations.h:134
+#: src/translations.h:159
 msgid "Set Time Zone: "
 msgstr "タイムゾーンの設定: "
 
-#: src/translations.h:192
+#: src/translations.h:217
 msgid "Set UI Locale: "
 msgstr "操作パネルの言語: "
 
@@ -1601,7 +1684,7 @@ msgstr "惑星の軌道を表示"
 msgid "Show planets"
 msgstr "惑星を表示"
 
-#: src/translations.h:148
+#: src/translations.h:173
 msgid "Show: "
 msgstr "表示: "
 
@@ -1609,17 +1692,21 @@ msgstr "表示: "
 msgid "Shows the sky as if looking through a telescope eyepiece"
 msgstr ""
 
-#: src/translations.h:190
+#: src/translations.h:215
 msgid "Shut Down: "
 msgstr "終了: "
 
-#: src/translations.h:137
+#: src/translations.h:162
 msgid "Sidereal"
 msgstr "恒星時"
 
 #: src/ui_viewDialog.h:1013
 msgid "Simulate light speed"
 msgstr "光の到達時間の予測"
+
+#: src/translations.h:54
+msgid "Sinope"
+msgstr ""
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
@@ -1636,19 +1723,19 @@ msgstr "大きさ: %1"
 msgid "Sky"
 msgstr "天空"
 
-#: src/translations.h:145
+#: src/translations.h:170
 msgid "Sky Culture: "
 msgstr "星座の地域: "
 
-#: src/translations.h:146
+#: src/translations.h:171
 msgid "Sky Language: "
 msgstr "天体名の言語: "
 
-#: src/translations.h:139
+#: src/translations.h:164
 msgid "Sky Time At Start-up: "
 msgstr "起動時の天の時間: "
 
-#: src/translations.h:133
+#: src/translations.h:158
 msgid "Sky Time: "
 msgstr "天の時間 : "
 
@@ -1660,7 +1747,7 @@ msgstr "空と見た目の設定"
 msgid "Slow down the script execution rate"
 msgstr "スクリプトの実行レートを遅める"
 
-#: src/translations.h:131
+#: src/translations.h:156
 msgid "Solar System Body: "
 msgstr "太陽系惑星・天体: "
 
@@ -1668,7 +1755,7 @@ msgstr "太陽系惑星・天体: "
 msgid "Solar System Editor"
 msgstr ""
 
-#: src/translations.h:70
+#: src/translations.h:95
 msgid "Solar System Observer"
 msgstr "太陽系の外から"
 
@@ -1700,7 +1787,7 @@ msgstr "球面へ投影する時に球面効果を出す。"
 msgid "Standard Perseids rate"
 msgstr "通常のペルセウス流星群"
 
-#: src/translations.h:149
+#: src/translations.h:174
 msgid "Star Value Multiplier: "
 msgstr "星の明るさの倍率: "
 
@@ -1716,7 +1803,7 @@ msgstr "星の文化"
 msgid "Stars"
 msgstr "恒星"
 
-#: src/translations.h:122
+#: src/translations.h:147
 msgid "Stars "
 msgstr "恒星 "
 
@@ -1827,12 +1914,16 @@ msgstr "システムの日付:"
 msgid "Telescope Control"
 msgstr "望遠鏡のガイド"
 
-#: src/translations.h:53
+#: src/translations.h:65
 msgid "Tethys"
 msgstr "テティス"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:79
 msgid "Text User Interface"
+msgstr ""
+
+#: src/translations.h:85
+msgid "Thalassa"
 msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:187
@@ -1907,6 +1998,11 @@ msgstr "選択された背景は (完全には) 削除できませんでした�
 msgid "The width of your view when Stellarium starts"
 msgstr "Stellarium 起動時の視界の幅"
 
+#: src/translations.h:59
+#, fuzzy
+msgid "Thebe"
+msgstr "フェーベ"
+
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
@@ -1917,7 +2013,7 @@ msgstr ""
 msgid "This system does not support OpenGL."
 msgstr "このシステムは Open GL に対応していません."
 
-#: src/translations.h:142
+#: src/translations.h:167
 msgid "Time Display Format: "
 msgstr "時間の表示形式: "
 
@@ -1925,11 +2021,11 @@ msgstr "時間の表示形式: "
 msgid "Time Zone"
 msgstr ""
 
-#: src/translations.h:56
+#: src/translations.h:68
 msgid "Titan"
 msgstr "タイタン"
 
-#: src/translations.h:65
+#: src/translations.h:77
 msgid "Titania"
 msgstr ""
 
@@ -1949,7 +2045,12 @@ msgstr "ツール"
 msgid "Track object"
 msgstr "対象を追尾"
 
-#: src/translations.h:114
+#: src/translations.h:82
+#, fuzzy
+msgid "Triton"
+msgstr "タイタン"
+
+#: src/translations.h:139
 msgid "Tupi-Guarani"
 msgstr "トゥピ・グアラニー語"
 
@@ -1957,7 +2058,7 @@ msgstr "トゥピ・グアラニー語"
 msgid "Twinkle:"
 msgstr "またたき:"
 
-#: src/translations.h:152
+#: src/translations.h:177
 msgid "Twinkling: "
 msgstr "またたき: "
 
@@ -1966,11 +2067,11 @@ msgstr "またたき: "
 msgid "Type: <b>%1</b>"
 msgstr "種類: <b>%1</b>"
 
-#: src/translations.h:184
+#: src/translations.h:209
 msgid "USB Script: "
 msgstr "USBスクリプト: "
 
-#: src/translations.h:64
+#: src/translations.h:76
 msgid "Umbriel"
 msgstr ""
 
@@ -1982,11 +2083,11 @@ msgstr "未登録"
 msgid "Unknown"
 msgstr "不明"
 
-#: src/translations.h:191
+#: src/translations.h:216
 msgid "Update me via Internet: "
 msgstr "インターネット経由で更新: "
 
-#: src/translations.h:61
+#: src/translations.h:73
 msgid "Uranus"
 msgstr "天王星"
 
@@ -2030,7 +2131,7 @@ msgstr "表示"
 msgid "Visible"
 msgstr "表示"
 
-#: src/translations.h:100
+#: src/translations.h:125
 msgid "W"
 msgstr "西"
 
@@ -2042,7 +2143,7 @@ msgstr ""
 "警告: 選択された背景を削除するとファイルは削除されます。この操作は元に戻せま"
 "せん。"
 
-#: src/translations.h:115
+#: src/translations.h:140
 msgid "Western"
 msgstr "西洋"
 
@@ -2079,7 +2180,7 @@ msgstr "以下のディレクトリを削除することで手動で削除でき
 msgid "ZIP archives"
 msgstr "ZIP アーカイブ"
 
-#: src/translations.h:178
+#: src/translations.h:203
 msgid "Zoom Duration: "
 msgstr "ズーム時間: "
 
