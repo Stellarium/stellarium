@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-20 11:50-0400\n"
+"POT-Creation-Date: 2011-05-10 14:10+0700\n"
 "PO-Revision-Date: 2010-12-02 16:55+0000\n"
 "Last-Translator: Jan Chajecki <Unknown>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "X-Launchpad-Export-Date: 2010-12-05 08:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
@@ -93,7 +93,7 @@ msgstr "Absolutna  wielkość gwiazdowa: %1"
 msgid "Absolute scale:"
 msgstr "Skala bezwzględna:"
 
-#: src/translations.h:140
+#: src/translations.h:165
 msgid "Actual Time"
 msgstr "Bieżący czas"
 
@@ -133,9 +133,14 @@ msgstr "Dodawanie/usuwanie krajobrazów"
 msgid "Add/remove landscapes..."
 msgstr "Dodaj/usuń krajobrazy..."
 
-#: src/translations.h:126
+#: src/translations.h:151
 msgid "Administration "
 msgstr "Administracja "
+
+#: src/translations.h:60
+#, fuzzy
+msgid "Adrastea"
+msgstr "Astreja"
 
 #: src/ui_configurationDialog.h:820
 msgid "Align labels with the horizon"
@@ -155,7 +160,7 @@ msgstr ""
 "Zezwól na użycie myszy do przesuwania (przeciąganie) i zoomowania widoku "
 "(kółko)"
 
-#: src/translations.h:130
+#: src/translations.h:155
 msgid "Altitude (m): "
 msgstr "Wysokość (m): "
 
@@ -163,8 +168,12 @@ msgstr "Wysokość (m): "
 msgid "Altitude:"
 msgstr "Wysokość:"
 
+#: src/translations.h:50
+msgid "Amalthea"
+msgstr ""
+
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:85
+#: src/translations.h:110
 msgid "Amor"
 msgstr "Amor"
 
@@ -178,6 +187,10 @@ msgstr ""
 "objektów z strony internetowej Minor Planet Center i pszeszukiwanie jej bazy "
 "danych. Tymczasowo praca w toku."
 
+#: src/translations.h:57
+msgid "Ananke"
+msgstr ""
+
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
 msgstr "Miara Katu"
@@ -187,7 +200,7 @@ msgid "Angle measure"
 msgstr "miara kątu"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:87
+#: src/translations.h:112
 msgid "Apophis"
 msgstr "Apophis"
 
@@ -196,11 +209,11 @@ msgstr "Apophis"
 msgid "Apparent diameter: %1"
 msgstr "Średnica widoma: %1"
 
-#: src/translations.h:63
+#: src/translations.h:75
 msgid "Ariel"
 msgstr "Ariel"
 
-#: src/translations.h:185
+#: src/translations.h:210
 msgid "Arrow down to load list."
 msgstr "Strzałka w dół - wczytanie listy."
 
@@ -213,7 +226,7 @@ msgid "Art brightness: "
 msgstr "Jasność rysunków: "
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:73
+#: src/translations.h:98
 msgid "Astraea"
 msgstr "Astreja"
 
@@ -250,7 +263,7 @@ msgstr "Automatyczne oddalanie przywraca początkowy kierunek patrzenia"
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Wys: %1/%2"
 
-#: src/translations.h:164
+#: src/translations.h:189
 msgid "Azimuthal Grid"
 msgstr "Siatka Azymutalna"
 
@@ -258,11 +271,11 @@ msgstr "Siatka Azymutalna"
 msgid "Azimuthal grid"
 msgstr "Siatka azymutalna"
 
-#: src/translations.h:103
+#: src/translations.h:128
 msgid "Aztec"
 msgstr "Aztek"
 
-#: src/translations.h:183
+#: src/translations.h:208
 msgid "CD/DVD Script: "
 msgstr "Skrypt CD/DVD: "
 
@@ -274,7 +287,7 @@ msgstr "CTRL + LPM"
 msgid "CTRL + Up/Down"
 msgstr "CTRL + góra/dół"
 
-#: src/translations.h:136
+#: src/translations.h:161
 msgid "Calendar"
 msgstr "Kalendarz"
 
@@ -286,13 +299,18 @@ msgstr "Callisto"
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: src/translations.h:159
+#: src/translations.h:184
 msgid "Cardinal Points"
 msgstr "Punkty kardynalne"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1037
 msgid "Cardinal points"
 msgstr "Punkty kardynalne"
+
+#: src/translations.h:56
+#, fuzzy
+msgid "Carme"
+msgstr "Ceres"
 
 #: src/ui_viewDialog.h:1030
 msgid "Celestial Sphere"
@@ -306,16 +324,16 @@ msgstr "Ustaw kierunek widzenia na wybrany obiekt [Spacja]"
 msgid "Ceres"
 msgstr "Ceres"
 
-#: src/translations.h:68
+#: src/translations.h:80
 msgid "Charon"
 msgstr "Charon"
 
-#: src/translations.h:104
+#: src/translations.h:129
 msgid "Chinese"
 msgstr "chińska"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:89
+#: src/translations.h:114
 msgid "Chiron"
 msgstr "Chiron"
 
@@ -335,7 +353,7 @@ msgstr "Zamknij okno podczas działania skryptu"
 msgid "Cluster associated with nebulosity"
 msgstr "Gromada powiązana z mgławicowością"
 
-#: src/translations.h:123
+#: src/translations.h:148
 msgid "Colors "
 msgstr "Kolory "
 
@@ -355,19 +373,19 @@ msgstr "Konfiguracja"
 msgid "Configuration window"
 msgstr "Okno konfiguracji"
 
-#: src/translations.h:157
+#: src/translations.h:182
 msgid "Constellation Art Intensity"
 msgstr "Jasność rysunków gwiazdozbiorów"
 
-#: src/translations.h:158
+#: src/translations.h:183
 msgid "Constellation Boundaries"
 msgstr "Granice gwiazdozbiorów"
 
-#: src/translations.h:155
+#: src/translations.h:180
 msgid "Constellation Lines"
 msgstr "Linie gwiazdozbiorów"
 
-#: src/translations.h:156
+#: src/translations.h:181
 msgid "Constellation Names"
 msgstr "Nazwy gwiazdozbiorów"
 
@@ -399,7 +417,7 @@ msgstr "Kontakt"
 msgid "Control"
 msgstr "Sterowanie"
 
-#: src/translations.h:180
+#: src/translations.h:205
 msgid "Correct for light travel time: "
 msgstr "Uwzględnienie Prędkości Światła: "
 
@@ -411,7 +429,7 @@ msgstr "Kraj:"
 msgid "Current location information"
 msgstr "Aktualne położenie"
 
-#: src/translations.h:179
+#: src/translations.h:204
 msgid "Cursor Timeout: "
 msgstr "Wygaszanie Kursora: "
 
@@ -419,7 +437,7 @@ msgstr "Wygaszanie Kursora: "
 msgid "Cylinder"
 msgstr "Cylinder"
 
-#: src/translations.h:143
+#: src/translations.h:168
 msgid "Date Display Format: "
 msgstr "Format Wyświetlania Daty: "
 
@@ -431,7 +449,7 @@ msgstr "Data i godzina"
 msgid "Date/time window"
 msgstr "Okno daty/czasu"
 
-#: src/translations.h:135
+#: src/translations.h:160
 msgid "Day keys: "
 msgstr "Klawisze w trybie dziennym: "
 
@@ -455,6 +473,10 @@ msgstr "Deimos"
 msgid "Delete"
 msgstr "Usuń"
 
+#: src/translations.h:86
+msgid "Despina"
+msgstr ""
+
 #: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
 #: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
 #, qt-format
@@ -469,7 +491,7 @@ msgstr "Programiści"
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Przygaszaj słabe gwiazdy, jeśli widać bardzo jasny obiekt"
 
-#: src/translations.h:54
+#: src/translations.h:66
 msgid "Dione"
 msgstr "Dione"
 
@@ -541,7 +563,7 @@ msgid "Dynamic eye adaptation"
 msgstr "Dynamiczna adaptacja oka"
 
 # Este
-#: src/translations.h:99
+#: src/translations.h:124
 msgid "E"
 msgstr "E"
 
@@ -553,7 +575,7 @@ msgstr "Ziemia"
 msgid "Ecliptic"
 msgstr "Ekliptyka"
 
-#: src/translations.h:167
+#: src/translations.h:192
 msgid "Ecliptic Line"
 msgstr "Ekliptyka"
 
@@ -561,13 +583,18 @@ msgstr "Ekliptyka"
 msgid "Ecliptic line"
 msgstr "Ekliptyka"
 
-#: src/translations.h:124
+#: src/translations.h:149
 msgid "Effects "
 msgstr "Efekty "
 
-#: src/translations.h:105
+#: src/translations.h:130
 msgid "Egyptian"
 msgstr "egipska"
+
+#: src/translations.h:52
+#, fuzzy
+msgid "Elara"
+msgstr "Ziemia"
 
 #: src/ui_configurationDialog.h:786
 msgid "Enable keyboard navigation"
@@ -577,7 +604,7 @@ msgstr "Zezwól na nawigację klawiaturą"
 msgid "Enable mouse navigation"
 msgstr "Zezwól na nawigację myszą"
 
-#: src/translations.h:52
+#: src/translations.h:64
 msgid "Enceladus"
 msgstr "Enceladus"
 
@@ -593,7 +620,7 @@ msgstr "Równopolowe"
 msgid "Equator"
 msgstr "Równik"
 
-#: src/translations.h:166
+#: src/translations.h:191
 msgid "Equator Line"
 msgstr "Równik Niebieski"
 
@@ -601,7 +628,7 @@ msgstr "Równik Niebieski"
 msgid "Equator line"
 msgstr "Równik niebieski"
 
-#: src/translations.h:165
+#: src/translations.h:190
 msgid "Equatorial Grid"
 msgstr "Siatka Równikowa"
 
@@ -613,12 +640,12 @@ msgstr "Siatka równikowa J2000"
 msgid "Equatorial grid"
 msgstr "Siatka równikowa"
 
-#: src/translations.h:69
+#: src/translations.h:81
 msgid "Eris"
 msgstr "Erys"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:91
+#: src/translations.h:116
 msgid "Eros"
 msgstr "Eros"
 
@@ -686,7 +713,7 @@ msgid "Flip scene vertically"
 msgstr "Przerzuć obraz w pionie"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:79
+#: src/translations.h:104
 msgid "Flora"
 msgstr "Flora"
 
@@ -706,6 +733,11 @@ msgstr "Dalsza lektura"
 msgid "Galactic grid"
 msgstr "Siatka współrzędnych galaktycznych"
 
+#: src/translations.h:87
+#, fuzzy
+msgid "Galatea"
+msgstr "Galaktyka"
+
 #: src/core/modules/Nebula.cpp:269
 msgid "Galaxy"
 msgstr "Galaktyka"
@@ -714,7 +746,7 @@ msgstr "Galaktyka"
 msgid "Ganymede"
 msgstr "Ganimedes"
 
-#: src/translations.h:121
+#: src/translations.h:146
 msgid "General "
 msgstr "Ogólne "
 
@@ -744,17 +776,22 @@ msgstr "Opisy grawitacji"
 msgid "Ground"
 msgstr "Ziemia"
 
+#: src/translations.h:90
+#, fuzzy
+msgid "Halimede"
+msgstr "Ganimedes"
+
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
 msgstr "Hammer-Aitoff"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:75
+#: src/translations.h:100
 msgid "Hebe"
 msgstr "Hebe"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:93
+#: src/translations.h:118
 msgid "Hektor"
 msgstr "Hektor"
 
@@ -778,6 +815,10 @@ msgstr "Ukrywaj nieruchomy kursor myszy"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Najwyższa zarejestr. aktywność (Leonidy, 1966r.)"
 
+#: src/translations.h:51
+msgid "Himalia"
+msgstr ""
+
 #: src/core/StelObject.cpp:80
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
@@ -788,15 +829,15 @@ msgid "Hourly zenith rate:"
 msgstr "Zenitalna liczba godzinna:"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:83
+#: src/translations.h:108
 msgid "Hygiea"
 msgstr ""
 
-#: src/translations.h:57
+#: src/translations.h:69
 msgid "Hyperion"
 msgstr "Hyperion"
 
-#: src/translations.h:58
+#: src/translations.h:70
 msgid "Iapetus"
 msgstr "Japetus"
 
@@ -824,7 +865,7 @@ msgstr "Zwiększ tempo upływu czasu (nieznacznie)"
 msgid "Install a new landscape from a ZIP archive..."
 msgstr "Zainstaluj nowy krajobraz z archiwum ZIP..."
 
-#: src/translations.h:106
+#: src/translations.h:131
 msgid "Inuit"
 msgstr "Eskimos"
 
@@ -837,7 +878,7 @@ msgid "Io"
 msgstr "Io"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:77
+#: src/translations.h:102
 msgid "Iris"
 msgstr "Irys"
 
@@ -857,7 +898,7 @@ msgstr ""
 msgid "Keys"
 msgstr "Klawisze"
 
-#: src/translations.h:107
+#: src/translations.h:132
 msgid "Korean"
 msgstr "koreańska"
 
@@ -865,7 +906,7 @@ msgstr "koreańska"
 msgid "Labels and Markers"
 msgstr "Etykiety i znaczniki"
 
-#: src/translations.h:108
+#: src/translations.h:133
 msgid "Lakota"
 msgstr "Lakota"
 
@@ -883,17 +924,29 @@ msgstr "Krajobraz \"%1\" został pomyślnie zainstalowany."
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "Krajobraz \"%1\" został pomyślnie usunięty."
 
-#: src/translations.h:172
+#: src/translations.h:197
 msgid "Landscape: "
 msgstr "Krajobraz: "
+
+#: src/translations.h:93
+msgid "Laomedeia"
+msgstr ""
+
+#: src/translations.h:88
+msgid "Larissa"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:395
 msgid "Latitude:"
 msgstr "Szerokość geograficzna:"
 
-#: src/translations.h:128
+#: src/translations.h:153
 msgid "Latitude: "
 msgstr "Szerokość: "
+
+#: src/translations.h:58
+msgid "Leda"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:56
 msgid "Left click"
@@ -903,7 +956,7 @@ msgstr "Lewy klik"
 msgid "License"
 msgstr "Licencja"
 
-#: src/translations.h:171
+#: src/translations.h:196
 msgid "Light Pollution Luminance: "
 msgstr "Zaświetlenie Nieba: "
 
@@ -911,11 +964,11 @@ msgstr "Zaświetlenie Nieba: "
 msgid "Light pollution: "
 msgstr "Zaświetlenie nieba: "
 
-#: src/translations.h:153
+#: src/translations.h:178
 msgid "Limiting Magnitude: "
 msgstr "Graniczna Magnituda "
 
-#: src/translations.h:188
+#: src/translations.h:213
 msgid "Load Default Configuration: "
 msgstr "Wczytaj Ustawienia Domyślne: "
 
@@ -923,7 +976,7 @@ msgstr "Wczytaj Ustawienia Domyślne: "
 msgid "Load at startup"
 msgstr "Załaduj po uruchomieniu programu"
 
-#: src/translations.h:182
+#: src/translations.h:207
 msgid "Local Script: "
 msgstr "Skrypr Lokalny: "
 
@@ -947,15 +1000,19 @@ msgstr "Dziennik"
 msgid "Longitude:"
 msgstr "Długość geograficzna:"
 
-#: src/translations.h:129
+#: src/translations.h:154
 msgid "Longitude: "
 msgstr "Długość: "
 
-#: src/translations.h:175
+#: src/translations.h:55
+msgid "Lysithea"
+msgstr ""
+
+#: src/translations.h:200
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Mnoznik Skalowania Magnitudy: "
 
-#: src/translations.h:150
+#: src/translations.h:175
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Mnożnik wielkości gwiazdowej: "
 
@@ -973,11 +1030,11 @@ msgstr "Magnituda: <b>%1</b> (B-V: %2)"
 msgid "Main"
 msgstr "Główne"
 
-#: src/translations.h:173
+#: src/translations.h:198
 msgid "Manual zoom: "
 msgstr "Zoom Ręczny: "
 
-#: src/translations.h:109
+#: src/translations.h:134
 msgid "Maori"
 msgstr "Maoryjski"
 
@@ -997,11 +1054,11 @@ msgstr "Zakryj wszystko poza kołem w centrum widoku"
 msgid "Maximum FOV: "
 msgstr "Maksymalny Kąt Widzenia: "
 
-#: src/translations.h:151
+#: src/translations.h:176
 msgid "Maximum Magnitude to Label: "
 msgstr "Podpisy maksymalnie do wielkości gwiazdowej: "
 
-#: src/translations.h:177
+#: src/translations.h:202
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Podpisy mgławic maksymalnie do wielkości gwiazdowej: "
 
@@ -1017,7 +1074,7 @@ msgstr "Merkury"
 msgid "Meridian"
 msgstr "Meridian"
 
-#: src/translations.h:163
+#: src/translations.h:188
 msgid "Meridian Line"
 msgstr "Południk"
 
@@ -1026,19 +1083,19 @@ msgid "Meridian line"
 msgstr "Południk niebieski"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:81
+#: src/translations.h:61 src/translations.h:106
 msgid "Metis"
 msgstr "Metys"
 
-#: src/translations.h:176
+#: src/translations.h:201
 msgid "Milky Way intensity: "
 msgstr "Jasność Drogi Mlecznej: "
 
-#: src/translations.h:51
+#: src/translations.h:63
 msgid "Mimas"
 msgstr "Mimas"
 
-#: src/translations.h:62
+#: src/translations.h:74
 msgid "Miranda"
 msgstr "Miranda"
 
@@ -1074,15 +1131,19 @@ msgid "Movement and Selection"
 msgstr "Przesuwanie i wybór"
 
 # Norte
-#: src/translations.h:97
+#: src/translations.h:122
 msgid "N"
 msgstr "N"
+
+#: src/translations.h:84
+msgid "Naiad"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:408
 msgid "Name/City:"
 msgstr "Nazwa/Miasto:"
 
-#: src/translations.h:110
+#: src/translations.h:135
 msgid "Navajo"
 msgstr "Nawaho"
 
@@ -1094,11 +1155,11 @@ msgstr "Nawigacja"
 msgid "Nebula"
 msgstr "Mgławica"
 
-#: src/translations.h:169
+#: src/translations.h:194
 msgid "Nebula Circles"
 msgstr "Mgławice Jako Koła"
 
-#: src/translations.h:168
+#: src/translations.h:193
 msgid "Nebula Names"
 msgstr "Nazwy Mgławic"
 
@@ -1110,9 +1171,17 @@ msgstr "Mgławice"
 msgid "Nebulas background images"
 msgstr "Obrazy tła mgławic"
 
-#: src/translations.h:60
+#: src/translations.h:72
 msgid "Neptune"
 msgstr "Neptun"
+
+#: src/translations.h:83
+msgid "Nereid"
+msgstr ""
+
+#: src/translations.h:94
+msgid "Neso"
+msgstr ""
 
 #: src/gui/LocationDialog.cpp:332
 msgid "New Location"
@@ -1145,7 +1214,7 @@ msgstr "Brak"
 msgid "Normal rate"
 msgstr "Normalna intensywność"
 
-#: src/translations.h:111
+#: src/translations.h:136
 msgid "Norse"
 msgstr "nordycka"
 
@@ -1154,11 +1223,11 @@ msgstr "nordycka"
 msgid "OSX Developer: %1"
 msgstr "Wykonawca OSX: %1"
 
-#: src/translations.h:66
+#: src/translations.h:78
 msgid "Oberon"
 msgstr "Oberon"
 
-#: src/translations.h:174
+#: src/translations.h:199
 msgid "Object Sizing Rule: "
 msgstr "Miara Skalowania Obiektów: "
 
@@ -1220,6 +1289,10 @@ msgstr "Panoramowanie po niebie"
 msgid "Parallax: %1\""
 msgstr "Paralaksa: %1\""
 
+#: src/translations.h:53
+msgid "Pasiphae"
+msgstr ""
+
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
 msgstr "Perspektywa"
@@ -1236,19 +1309,19 @@ msgstr ""
 msgid "Phobos"
 msgstr "Phobos"
 
-#: src/translations.h:59
+#: src/translations.h:71
 msgid "Phoebe"
 msgstr "Phoebe"
 
-#: src/translations.h:160
+#: src/translations.h:185
 msgid "Planet Names"
 msgstr "Nazwy Planet"
 
-#: src/translations.h:161
+#: src/translations.h:186
 msgid "Planet Orbits"
 msgstr "Orbity Planet"
 
-#: src/translations.h:162
+#: src/translations.h:187
 msgid "Planet Trails"
 msgstr "Ślady Planet"
 
@@ -1308,11 +1381,11 @@ msgstr ""
 msgid "Plugins"
 msgstr "Wtyczki"
 
-#: src/translations.h:67
+#: src/translations.h:79
 msgid "Pluto"
 msgstr "Pluton"
 
-#: src/translations.h:112
+#: src/translations.h:137
 msgid "Polynesian"
 msgstr "polinezyjska"
 
@@ -1322,11 +1395,11 @@ msgid ""
 "TLE data"
 msgstr ""
 
-#: src/translations.h:138
+#: src/translations.h:163
 msgid "Preset Sky Time: "
 msgstr "Domyślny Czas Gwiezdny "
 
-#: src/translations.h:141
+#: src/translations.h:166
 msgid "Preset Time"
 msgstr "Ustawiony Czas"
 
@@ -1343,9 +1416,17 @@ msgstr "Koorydantor projektu i główny programista: %1"
 msgid "Projection"
 msgstr "Odwzorowanie"
 
+#: src/translations.h:89
+msgid "Proteus"
+msgstr ""
+
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
 msgstr "Pozwala pomiary kątow"
+
+#: src/translations.h:91
+msgid "Psamathe"
+msgstr ""
 
 #: src/gui/StelGui.cpp:171
 msgid "Quit"
@@ -1407,7 +1488,7 @@ msgstr ""
 msgid "Retry"
 msgstr "Spróbuj ponownie"
 
-#: src/translations.h:55
+#: src/translations.h:67
 msgid "Rhea"
 msgstr "Rhea"
 
@@ -1428,13 +1509,17 @@ msgid "Running script: [none]"
 msgstr "Uruchomiony skrypt: [brak]"
 
 # Sur
-#: src/translations.h:98
+#: src/translations.h:123
 msgid "S"
 msgstr "S"
 
-#: src/translations.h:113
+#: src/translations.h:138
 msgid "Sami"
 msgstr "Samowy"
+
+#: src/translations.h:92
+msgid "Sao"
+msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:127
 msgid "Satellite hints"
@@ -1452,11 +1537,11 @@ msgstr "Satelity"
 msgid "Satellites configuration window"
 msgstr "Okno konfiguracji satelitów"
 
-#: src/translations.h:50
+#: src/translations.h:62
 msgid "Saturn"
 msgstr "Saturn"
 
-#: src/translations.h:189
+#: src/translations.h:214
 msgid "Save Current Configuration as Default: "
 msgstr "Zapisz Bieżące Ustawienia jako Domyślne: "
 
@@ -1496,7 +1581,7 @@ msgstr "Okno konsoli skryptu"
 msgid "Scripts"
 msgstr "Skrypty"
 
-#: src/translations.h:125
+#: src/translations.h:150
 msgid "Scripts "
 msgstr "Skrypty "
 
@@ -1508,7 +1593,7 @@ msgstr "Okno wyszukiwania"
 msgid "Select a ZIP archive that contains a Stellarium landscape"
 msgstr "Wybierz archiwum ZIP zawierające krajobraz Stellarium"
 
-#: src/translations.h:186
+#: src/translations.h:211
 msgid "Select and exit to run."
 msgstr "Wybierz tę opcję i wyjdź z menu aby uruchomić."
 
@@ -1528,19 +1613,19 @@ msgstr "Wybierz pojedynczy gwiazdozbiór"
 msgid "Selected object information"
 msgstr "Informacje o wybranym obiekcie"
 
-#: src/translations.h:119
+#: src/translations.h:144
 msgid "Set Location "
 msgstr "Ustaw lokalizację "
 
-#: src/translations.h:120
+#: src/translations.h:145
 msgid "Set Time "
 msgstr "Ustaw czas "
 
-#: src/translations.h:134
+#: src/translations.h:159
 msgid "Set Time Zone: "
 msgstr "Ustaw strefę czasową: "
 
-#: src/translations.h:192
+#: src/translations.h:217
 msgid "Set UI Locale: "
 msgstr "Ustaw Lokalny Interfejs Użytkownika: "
 
@@ -1622,7 +1707,7 @@ msgstr "Pokaż orbity planet"
 msgid "Show planets"
 msgstr "Pokaż planety"
 
-#: src/translations.h:148
+#: src/translations.h:173
 msgid "Show: "
 msgstr "Pokaż: "
 
@@ -1630,17 +1715,21 @@ msgstr "Pokaż: "
 msgid "Shows the sky as if looking through a telescope eyepiece"
 msgstr "Przedstawia niebo podobnie do widoku w teleskopie"
 
-#: src/translations.h:190
+#: src/translations.h:215
 msgid "Shut Down: "
 msgstr "Wyłącz Komputer: "
 
-#: src/translations.h:137
+#: src/translations.h:162
 msgid "Sidereal"
 msgstr "Syderyczny (gwiazdowy)"
 
 #: src/ui_viewDialog.h:1013
 msgid "Simulate light speed"
 msgstr "Symuluj prędkość światła"
+
+#: src/translations.h:54
+msgid "Sinope"
+msgstr ""
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
@@ -1657,19 +1746,19 @@ msgstr "Rozmiar: %1"
 msgid "Sky"
 msgstr "Niebo"
 
-#: src/translations.h:145
+#: src/translations.h:170
 msgid "Sky Culture: "
 msgstr "Kultura Nieba: "
 
-#: src/translations.h:146
+#: src/translations.h:171
 msgid "Sky Language: "
 msgstr "Język Mapy Nieba "
 
-#: src/translations.h:139
+#: src/translations.h:164
 msgid "Sky Time At Start-up: "
 msgstr "Czas Gwiezdny Po Uruchomieniu "
 
-#: src/translations.h:133
+#: src/translations.h:158
 msgid "Sky Time: "
 msgstr "Czas gwiezdny: "
 
@@ -1681,7 +1770,7 @@ msgstr "Okno ustawień widoku i nieba"
 msgid "Slow down the script execution rate"
 msgstr "Spowolnij uruchamianie skryptu"
 
-#: src/translations.h:131
+#: src/translations.h:156
 msgid "Solar System Body: "
 msgstr "Ciało Układu Słonecznego: "
 
@@ -1689,7 +1778,7 @@ msgstr "Ciało Układu Słonecznego: "
 msgid "Solar System Editor"
 msgstr "Edytor Układu Słonecznego"
 
-#: src/translations.h:70
+#: src/translations.h:95
 msgid "Solar System Observer"
 msgstr "Obserwator Układu Słonecznego"
 
@@ -1723,7 +1812,7 @@ msgstr ""
 msgid "Standard Perseids rate"
 msgstr "Typowa aktywność Perseidów"
 
-#: src/translations.h:149
+#: src/translations.h:174
 msgid "Star Value Multiplier: "
 msgstr "Wartość Mnoznika Liczby Gwiazd: "
 
@@ -1739,7 +1828,7 @@ msgstr "Historie gwiazdozbiorów"
 msgid "Stars"
 msgstr "Gwiazdy"
 
-#: src/translations.h:122
+#: src/translations.h:147
 msgid "Stars "
 msgstr "Gwiazdy "
 
@@ -1852,13 +1941,17 @@ msgstr "Data systemowa:"
 msgid "Telescope Control"
 msgstr "Sterowanie teleskopem"
 
-#: src/translations.h:53
+#: src/translations.h:65
 msgid "Tethys"
 msgstr "Tethys"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:79
 msgid "Text User Interface"
 msgstr "Interfejs Użytkownika Tekstowy"
+
+#: src/translations.h:85
+msgid "Thalassa"
+msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:187
 msgid ""
@@ -1935,6 +2028,11 @@ msgstr "Usunięcie (całkowite) krajobrazu nie powiodło się."
 msgid "The width of your view when Stellarium starts"
 msgstr "Szerokość pola widzenia po uruchomieniu Stellarium"
 
+#: src/translations.h:59
+#, fuzzy
+msgid "Thebe"
+msgstr "Phoebe"
+
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
@@ -1947,7 +2045,7 @@ msgstr ""
 msgid "This system does not support OpenGL."
 msgstr "Ten system nie obsługuje OpenGL."
 
-#: src/translations.h:142
+#: src/translations.h:167
 msgid "Time Display Format: "
 msgstr "Format Wyświetlania Czasu: "
 
@@ -1955,11 +2053,11 @@ msgstr "Format Wyświetlania Czasu: "
 msgid "Time Zone"
 msgstr "Strefa Czasowa"
 
-#: src/translations.h:56
+#: src/translations.h:68
 msgid "Titan"
 msgstr "Tytan"
 
-#: src/translations.h:65
+#: src/translations.h:77
 msgid "Titania"
 msgstr "Titania"
 
@@ -1980,7 +2078,12 @@ msgstr "Narzędzia"
 msgid "Track object"
 msgstr "Śledź obiekt"
 
-#: src/translations.h:114
+#: src/translations.h:82
+#, fuzzy
+msgid "Triton"
+msgstr "Tytan"
+
+#: src/translations.h:139
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
@@ -1988,7 +2091,7 @@ msgstr "Tupi-Guarani"
 msgid "Twinkle:"
 msgstr "Migotanie:"
 
-#: src/translations.h:152
+#: src/translations.h:177
 msgid "Twinkling: "
 msgstr "Migotanie: "
 
@@ -1997,11 +2100,11 @@ msgstr "Migotanie: "
 msgid "Type: <b>%1</b>"
 msgstr "Typ: <b>%1</b>"
 
-#: src/translations.h:184
+#: src/translations.h:209
 msgid "USB Script: "
 msgstr "Skrypt USB: "
 
-#: src/translations.h:64
+#: src/translations.h:76
 msgid "Umbriel"
 msgstr "Umbryjel"
 
@@ -2013,11 +2116,11 @@ msgstr "Typ nieudokumentowany"
 msgid "Unknown"
 msgstr "Nieznane"
 
-#: src/translations.h:191
+#: src/translations.h:216
 msgid "Update me via Internet: "
 msgstr "Aktualizuj przez Internet: "
 
-#: src/translations.h:61
+#: src/translations.h:73
 msgid "Uranus"
 msgstr "Uran"
 
@@ -2061,7 +2164,7 @@ msgstr "Widok"
 msgid "Visible"
 msgstr "Widoczny"
 
-#: src/translations.h:100
+#: src/translations.h:125
 msgid "W"
 msgstr "W"
 
@@ -2073,7 +2176,7 @@ msgstr ""
 "OSTRZEŻENIE: Usunięcie zainstalowanego krajobrazu oznacza skasowanie "
 "odpowiednich plików. Operacji tej nie można cofnąć."
 
-#: src/translations.h:115
+#: src/translations.h:140
 msgid "Western"
 msgstr "zachodnia"
 
@@ -2112,7 +2215,7 @@ msgstr "Można usunąć go ręcznie przez skasowanie katalogu %1"
 msgid "ZIP archives"
 msgstr "Archiwa ZIP"
 
-#: src/translations.h:178
+#: src/translations.h:203
 msgid "Zoom Duration: "
 msgstr "Czas Przybliżenia: "
 
