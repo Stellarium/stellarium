@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-10 14:10+0700\n"
+"POT-Creation-Date: 2011-04-20 11:50-0400\n"
 "PO-Revision-Date: 2010-05-07 20:24+0000\n"
 "Last-Translator: Delta <deltazzx@gmail.com>\n"
 "Language-Team: Latvian <lv@li.org>\n"
+"Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: lv\n"
 "X-Launchpad-Export-Date: 2010-12-05 08:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
@@ -86,7 +86,7 @@ msgstr "Absolūtais zvaigžņlielums: %1"
 msgid "Absolute scale:"
 msgstr ""
 
-#: src/translations.h:165
+#: src/translations.h:140
 msgid "Actual Time"
 msgstr "Reālais Laiks"
 
@@ -126,13 +126,9 @@ msgstr ""
 msgid "Add/remove landscapes..."
 msgstr ""
 
-#: src/translations.h:151
+#: src/translations.h:126
 msgid "Administration "
 msgstr "Administrācija "
-
-#: src/translations.h:60
-msgid "Adrastea"
-msgstr ""
 
 #: src/ui_configurationDialog.h:820
 msgid "Align labels with the horizon"
@@ -150,7 +146,7 @@ msgstr ""
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 
-#: src/translations.h:155
+#: src/translations.h:130
 msgid "Altitude (m): "
 msgstr "Augst.vjl.(m): "
 
@@ -158,12 +154,8 @@ msgstr "Augst.vjl.(m): "
 msgid "Altitude:"
 msgstr ""
 
-#: src/translations.h:50
-msgid "Amalthea"
-msgstr ""
-
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:110
+#: src/translations.h:85
 msgid "Amor"
 msgstr ""
 
@@ -172,10 +164,6 @@ msgid ""
 "An interface for adding asteroids and comets to Stellarium. It can download "
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
-msgstr ""
-
-#: src/translations.h:57
-msgid "Ananke"
 msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
@@ -187,7 +175,7 @@ msgid "Angle measure"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:112
+#: src/translations.h:87
 msgid "Apophis"
 msgstr ""
 
@@ -196,11 +184,11 @@ msgstr ""
 msgid "Apparent diameter: %1"
 msgstr "Redzamais diametrs: %1"
 
-#: src/translations.h:75
+#: src/translations.h:63
 msgid "Ariel"
 msgstr ""
 
-#: src/translations.h:210
+#: src/translations.h:185
 msgid "Arrow down to load list."
 msgstr "Bultiņa uz leju ielādē sarakstu."
 
@@ -213,7 +201,7 @@ msgid "Art brightness: "
 msgstr ""
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:98
+#: src/translations.h:73
 msgid "Astraea"
 msgstr ""
 
@@ -250,7 +238,7 @@ msgstr ""
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Augst: %1/%2"
 
-#: src/translations.h:189
+#: src/translations.h:164
 msgid "Azimuthal Grid"
 msgstr "Azimutālais tīkls"
 
@@ -258,11 +246,11 @@ msgstr "Azimutālais tīkls"
 msgid "Azimuthal grid"
 msgstr ""
 
-#: src/translations.h:128
+#: src/translations.h:103
 msgid "Aztec"
 msgstr ""
 
-#: src/translations.h:208
+#: src/translations.h:183
 msgid "CD/DVD Script: "
 msgstr "CD/DVD scenārijs: "
 
@@ -274,7 +262,7 @@ msgstr ""
 msgid "CTRL + Up/Down"
 msgstr ""
 
-#: src/translations.h:161
+#: src/translations.h:136
 msgid "Calendar"
 msgstr "Kalendārs"
 
@@ -286,16 +274,12 @@ msgstr "Kalisto"
 msgid "Cancel"
 msgstr "Atcelt"
 
-#: src/translations.h:184
+#: src/translations.h:159
 msgid "Cardinal Points"
 msgstr "Debess puses"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1037
 msgid "Cardinal points"
-msgstr ""
-
-#: src/translations.h:56
-msgid "Carme"
 msgstr ""
 
 #: src/ui_viewDialog.h:1030
@@ -310,16 +294,16 @@ msgstr ""
 msgid "Ceres"
 msgstr ""
 
-#: src/translations.h:80
+#: src/translations.h:68
 msgid "Charon"
 msgstr "Šarons"
 
-#: src/translations.h:129
+#: src/translations.h:104
 msgid "Chinese"
 msgstr "Ķīniešu"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:114
+#: src/translations.h:89
 msgid "Chiron"
 msgstr ""
 
@@ -339,7 +323,7 @@ msgstr ""
 msgid "Cluster associated with nebulosity"
 msgstr "Cluster associated with nebulosity"
 
-#: src/translations.h:148
+#: src/translations.h:123
 msgid "Colors "
 msgstr "Krāsas "
 
@@ -359,19 +343,19 @@ msgstr "Konfigurācija"
 msgid "Configuration window"
 msgstr "Konfigurācijas logs"
 
-#: src/translations.h:182
+#: src/translations.h:157
 msgid "Constellation Art Intensity"
 msgstr "Zvaigznāju mākslas intensitāte"
 
-#: src/translations.h:183
+#: src/translations.h:158
 msgid "Constellation Boundaries"
 msgstr "Zvaigznāju robežas"
 
-#: src/translations.h:180
+#: src/translations.h:155
 msgid "Constellation Lines"
 msgstr "Zvaigznāju līnijas"
 
-#: src/translations.h:181
+#: src/translations.h:156
 msgid "Constellation Names"
 msgstr "Zvaigznāju nosaukumi"
 
@@ -403,7 +387,7 @@ msgstr ""
 msgid "Control"
 msgstr ""
 
-#: src/translations.h:205
+#: src/translations.h:180
 msgid "Correct for light travel time: "
 msgstr "Koriģēt atbilstoši gaismas ceļošanas ilgumam: "
 
@@ -415,7 +399,7 @@ msgstr ""
 msgid "Current location information"
 msgstr ""
 
-#: src/translations.h:204
+#: src/translations.h:179
 msgid "Cursor Timeout: "
 msgstr "Kursora taimauts: "
 
@@ -423,7 +407,7 @@ msgstr "Kursora taimauts: "
 msgid "Cylinder"
 msgstr "Cilindriskā"
 
-#: src/translations.h:168
+#: src/translations.h:143
 msgid "Date Display Format: "
 msgstr "Datuma formāts: "
 
@@ -435,7 +419,7 @@ msgstr ""
 msgid "Date/time window"
 msgstr ""
 
-#: src/translations.h:160
+#: src/translations.h:135
 msgid "Day keys: "
 msgstr "Dienu atslēgtas: "
 
@@ -459,10 +443,6 @@ msgstr "Deimoss"
 msgid "Delete"
 msgstr ""
 
-#: src/translations.h:86
-msgid "Despina"
-msgstr ""
-
 #: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
 #: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
 #, qt-format
@@ -477,7 +457,7 @@ msgstr ""
 msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
 
-#: src/translations.h:66
+#: src/translations.h:54
 msgid "Dione"
 msgstr "Diona"
 
@@ -543,7 +523,7 @@ msgstr ""
 msgid "Dynamic eye adaptation"
 msgstr ""
 
-#: src/translations.h:124
+#: src/translations.h:99
 msgid "E"
 msgstr "A"
 
@@ -555,7 +535,7 @@ msgstr "Zeme"
 msgid "Ecliptic"
 msgstr ""
 
-#: src/translations.h:192
+#: src/translations.h:167
 msgid "Ecliptic Line"
 msgstr "Ekliptikas plakne"
 
@@ -563,18 +543,13 @@ msgstr "Ekliptikas plakne"
 msgid "Ecliptic line"
 msgstr "Ekliptikas plakne"
 
-#: src/translations.h:149
+#: src/translations.h:124
 msgid "Effects "
 msgstr "Efekti "
 
-#: src/translations.h:130
+#: src/translations.h:105
 msgid "Egyptian"
 msgstr "Ēģiptiešu"
-
-#: src/translations.h:52
-#, fuzzy
-msgid "Elara"
-msgstr "Zeme"
 
 #: src/ui_configurationDialog.h:786
 msgid "Enable keyboard navigation"
@@ -584,7 +559,7 @@ msgstr ""
 msgid "Enable mouse navigation"
 msgstr ""
 
-#: src/translations.h:64
+#: src/translations.h:52
 msgid "Enceladus"
 msgstr "Encelads"
 
@@ -600,7 +575,7 @@ msgstr "Vienāda lauka"
 msgid "Equator"
 msgstr ""
 
-#: src/translations.h:191
+#: src/translations.h:166
 msgid "Equator Line"
 msgstr "Ekvatora plakne"
 
@@ -608,7 +583,7 @@ msgstr "Ekvatora plakne"
 msgid "Equator line"
 msgstr "Ekvatoriālā plakne"
 
-#: src/translations.h:190
+#: src/translations.h:165
 msgid "Equatorial Grid"
 msgstr "Ekvatoriālais tīkls"
 
@@ -620,12 +595,12 @@ msgstr "Ekvatoriālais tīkls J2000"
 msgid "Equatorial grid"
 msgstr "Ekvatoriālais tīkls"
 
-#: src/translations.h:81
+#: src/translations.h:69
 msgid "Eris"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:116
+#: src/translations.h:91
 msgid "Eros"
 msgstr ""
 
@@ -687,7 +662,7 @@ msgid "Flip scene vertically"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:104
+#: src/translations.h:79
 msgid "Flora"
 msgstr ""
 
@@ -707,11 +682,6 @@ msgstr ""
 msgid "Galactic grid"
 msgstr ""
 
-#: src/translations.h:87
-#, fuzzy
-msgid "Galatea"
-msgstr "Galaktika"
-
 #: src/core/modules/Nebula.cpp:269
 msgid "Galaxy"
 msgstr "Galaktika"
@@ -720,7 +690,7 @@ msgstr "Galaktika"
 msgid "Ganymede"
 msgstr "Ganimēds"
 
-#: src/translations.h:146
+#: src/translations.h:121
 msgid "General "
 msgstr "Vispārīgi "
 
@@ -750,22 +720,17 @@ msgstr ""
 msgid "Ground"
 msgstr "Apvārsnis"
 
-#: src/translations.h:90
-#, fuzzy
-msgid "Halimede"
-msgstr "Ganimēds"
-
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:100
+#: src/translations.h:75
 msgid "Hebe"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:118
+#: src/translations.h:93
 msgid "Hektor"
 msgstr ""
 
@@ -789,10 +754,6 @@ msgstr ""
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ""
 
-#: src/translations.h:51
-msgid "Himalia"
-msgstr ""
-
 #: src/core/StelObject.cpp:80
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
@@ -803,15 +764,15 @@ msgid "Hourly zenith rate:"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:108
+#: src/translations.h:83
 msgid "Hygiea"
 msgstr ""
 
-#: src/translations.h:69
+#: src/translations.h:57
 msgid "Hyperion"
 msgstr "Hiperions"
 
-#: src/translations.h:70
+#: src/translations.h:58
 msgid "Iapetus"
 msgstr "Japets"
 
@@ -838,7 +799,7 @@ msgstr ""
 msgid "Install a new landscape from a ZIP archive..."
 msgstr ""
 
-#: src/translations.h:131
+#: src/translations.h:106
 msgid "Inuit"
 msgstr "Inuitu"
 
@@ -851,7 +812,7 @@ msgid "Io"
 msgstr "Jo"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:102
+#: src/translations.h:77
 msgid "Iris"
 msgstr ""
 
@@ -871,7 +832,7 @@ msgstr ""
 msgid "Keys"
 msgstr ""
 
-#: src/translations.h:132
+#: src/translations.h:107
 msgid "Korean"
 msgstr "Korejiešu"
 
@@ -879,7 +840,7 @@ msgstr "Korejiešu"
 msgid "Labels and Markers"
 msgstr ""
 
-#: src/translations.h:133
+#: src/translations.h:108
 msgid "Lakota"
 msgstr "Lakota"
 
@@ -897,29 +858,17 @@ msgstr ""
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr ""
 
-#: src/translations.h:197
+#: src/translations.h:172
 msgid "Landscape: "
 msgstr "Ainava: "
-
-#: src/translations.h:93
-msgid "Laomedeia"
-msgstr ""
-
-#: src/translations.h:88
-msgid "Larissa"
-msgstr ""
 
 #: src/ui_locationDialogGui.h:395
 msgid "Latitude:"
 msgstr ""
 
-#: src/translations.h:153
+#: src/translations.h:128
 msgid "Latitude: "
 msgstr "Ģeog.plat.: "
-
-#: src/translations.h:58
-msgid "Leda"
-msgstr ""
 
 #: src/gui/HelpDialog.cpp:56
 msgid "Left click"
@@ -929,7 +878,7 @@ msgstr ""
 msgid "License"
 msgstr ""
 
-#: src/translations.h:196
+#: src/translations.h:171
 msgid "Light Pollution Luminance: "
 msgstr "Gaismas piesārņojuma apjoms: "
 
@@ -937,11 +886,11 @@ msgstr "Gaismas piesārņojuma apjoms: "
 msgid "Light pollution: "
 msgstr ""
 
-#: src/translations.h:178
+#: src/translations.h:153
 msgid "Limiting Magnitude: "
 msgstr "Limitējošais zvaigžņlielums: "
 
-#: src/translations.h:213
+#: src/translations.h:188
 msgid "Load Default Configuration: "
 msgstr "Ielādēt noklusējuma konfigurāciju: "
 
@@ -949,7 +898,7 @@ msgstr "Ielādēt noklusējuma konfigurāciju: "
 msgid "Load at startup"
 msgstr ""
 
-#: src/translations.h:207
+#: src/translations.h:182
 msgid "Local Script: "
 msgstr "Lokālais scenārijs: "
 
@@ -973,19 +922,15 @@ msgstr ""
 msgid "Longitude:"
 msgstr ""
 
-#: src/translations.h:154
+#: src/translations.h:129
 msgid "Longitude: "
 msgstr "Ģeog.gar.: "
 
-#: src/translations.h:55
-msgid "Lysithea"
-msgstr ""
-
-#: src/translations.h:200
+#: src/translations.h:175
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Zvaigžņlieluma mērogošanas reizinātājs: "
 
-#: src/translations.h:175
+#: src/translations.h:150
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Zvaigžņlieluma mērogošanas reizinātājs: "
 
@@ -1003,11 +948,11 @@ msgstr "Zvigžņlielums: <b>%1</b> (B-V: %2)"
 msgid "Main"
 msgstr ""
 
-#: src/translations.h:198
+#: src/translations.h:173
 msgid "Manual zoom: "
 msgstr "Manuālā tuvināšana: "
 
-#: src/translations.h:134
+#: src/translations.h:109
 msgid "Maori"
 msgstr ""
 
@@ -1027,11 +972,11 @@ msgstr ""
 msgid "Maximum FOV: "
 msgstr ""
 
-#: src/translations.h:176
+#: src/translations.h:151
 msgid "Maximum Magnitude to Label: "
 msgstr "Nosaukumi līdz zvaigžņlielumam: "
 
-#: src/translations.h:202
+#: src/translations.h:177
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Nosaukt miglājus līdz zvaigžņliel.: "
 
@@ -1047,7 +992,7 @@ msgstr "Merkurs"
 msgid "Meridian"
 msgstr ""
 
-#: src/translations.h:188
+#: src/translations.h:163
 msgid "Meridian Line"
 msgstr "Meridiāna līnija"
 
@@ -1056,19 +1001,19 @@ msgid "Meridian line"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:106
+#: src/translations.h:81
 msgid "Metis"
 msgstr ""
 
-#: src/translations.h:201
+#: src/translations.h:176
 msgid "Milky Way intensity: "
 msgstr "Piena Ceļa intensitāte: "
 
-#: src/translations.h:63
+#: src/translations.h:51
 msgid "Mimas"
 msgstr "Mimass"
 
-#: src/translations.h:74
+#: src/translations.h:62
 msgid "Miranda"
 msgstr ""
 
@@ -1103,19 +1048,15 @@ msgstr ""
 msgid "Movement and Selection"
 msgstr ""
 
-#: src/translations.h:122
+#: src/translations.h:97
 msgid "N"
 msgstr "Z"
-
-#: src/translations.h:84
-msgid "Naiad"
-msgstr ""
 
 #: src/ui_locationDialogGui.h:408
 msgid "Name/City:"
 msgstr ""
 
-#: src/translations.h:135
+#: src/translations.h:110
 msgid "Navajo"
 msgstr "Navajo"
 
@@ -1127,11 +1068,11 @@ msgstr ""
 msgid "Nebula"
 msgstr "Miglājs"
 
-#: src/translations.h:194
+#: src/translations.h:169
 msgid "Nebula Circles"
 msgstr "Miglāju apļi"
 
-#: src/translations.h:193
+#: src/translations.h:168
 msgid "Nebula Names"
 msgstr "Miglāju nosaukumi"
 
@@ -1143,17 +1084,9 @@ msgstr ""
 msgid "Nebulas background images"
 msgstr ""
 
-#: src/translations.h:72
+#: src/translations.h:60
 msgid "Neptune"
 msgstr "Neptūns"
-
-#: src/translations.h:83
-msgid "Nereid"
-msgstr ""
-
-#: src/translations.h:94
-msgid "Neso"
-msgstr ""
 
 #: src/gui/LocationDialog.cpp:332
 msgid "New Location"
@@ -1186,7 +1119,7 @@ msgstr ""
 msgid "Normal rate"
 msgstr ""
 
-#: src/translations.h:136
+#: src/translations.h:111
 msgid "Norse"
 msgstr "Skandināvu"
 
@@ -1195,11 +1128,11 @@ msgstr "Skandināvu"
 msgid "OSX Developer: %1"
 msgstr ""
 
-#: src/translations.h:78
+#: src/translations.h:66
 msgid "Oberon"
 msgstr ""
 
-#: src/translations.h:199
+#: src/translations.h:174
 msgid "Object Sizing Rule: "
 msgstr "Objekta izmēri pēc: "
 
@@ -1261,10 +1194,6 @@ msgstr ""
 msgid "Parallax: %1\""
 msgstr "Paralakse: %1\""
 
-#: src/translations.h:53
-msgid "Pasiphae"
-msgstr ""
-
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
 msgstr "Perspektīvas"
@@ -1281,19 +1210,19 @@ msgstr ""
 msgid "Phobos"
 msgstr "Foboss"
 
-#: src/translations.h:71
+#: src/translations.h:59
 msgid "Phoebe"
 msgstr "Fēbs"
 
-#: src/translations.h:185
+#: src/translations.h:160
 msgid "Planet Names"
 msgstr "Planētu nosaukumi"
 
-#: src/translations.h:186
+#: src/translations.h:161
 msgid "Planet Orbits"
 msgstr "Planētu orbītas"
 
-#: src/translations.h:187
+#: src/translations.h:162
 msgid "Planet Trails"
 msgstr "Planētu ceļi"
 
@@ -1351,11 +1280,11 @@ msgstr ""
 msgid "Plugins"
 msgstr ""
 
-#: src/translations.h:79
+#: src/translations.h:67
 msgid "Pluto"
 msgstr "Plutons"
 
-#: src/translations.h:137
+#: src/translations.h:112
 msgid "Polynesian"
 msgstr "Polinēziešu"
 
@@ -1365,11 +1294,11 @@ msgid ""
 "TLE data"
 msgstr ""
 
-#: src/translations.h:163
+#: src/translations.h:138
 msgid "Preset Sky Time: "
 msgstr "Šobrīdējais debess laiks: "
 
-#: src/translations.h:166
+#: src/translations.h:141
 msgid "Preset Time"
 msgstr "Iestatītais Laiks"
 
@@ -1386,16 +1315,8 @@ msgstr ""
 msgid "Projection"
 msgstr ""
 
-#: src/translations.h:89
-msgid "Proteus"
-msgstr ""
-
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
-msgstr ""
-
-#: src/translations.h:91
-msgid "Psamathe"
 msgstr ""
 
 #: src/gui/StelGui.cpp:171
@@ -1455,7 +1376,7 @@ msgstr ""
 msgid "Retry"
 msgstr ""
 
-#: src/translations.h:67
+#: src/translations.h:55
 msgid "Rhea"
 msgstr "Reja"
 
@@ -1475,16 +1396,12 @@ msgstr ""
 msgid "Running script: [none]"
 msgstr ""
 
-#: src/translations.h:123
+#: src/translations.h:98
 msgid "S"
 msgstr "D"
 
-#: src/translations.h:138
+#: src/translations.h:113
 msgid "Sami"
-msgstr ""
-
-#: src/translations.h:92
-msgid "Sao"
 msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:127
@@ -1503,11 +1420,11 @@ msgstr ""
 msgid "Satellites configuration window"
 msgstr ""
 
-#: src/translations.h:62
+#: src/translations.h:50
 msgid "Saturn"
 msgstr "Saturns"
 
-#: src/translations.h:214
+#: src/translations.h:189
 msgid "Save Current Configuration as Default: "
 msgstr "Saglabāt šo konfigurāciju kā noklusējuma: "
 
@@ -1545,7 +1462,7 @@ msgstr ""
 msgid "Scripts"
 msgstr ""
 
-#: src/translations.h:150
+#: src/translations.h:125
 msgid "Scripts "
 msgstr "Scenāriji "
 
@@ -1557,7 +1474,7 @@ msgstr ""
 msgid "Select a ZIP archive that contains a Stellarium landscape"
 msgstr ""
 
-#: src/translations.h:211
+#: src/translations.h:186
 msgid "Select and exit to run."
 msgstr "Izvēlieties un izejiet lai palaistu."
 
@@ -1577,19 +1494,19 @@ msgstr ""
 msgid "Selected object information"
 msgstr ""
 
-#: src/translations.h:144
+#: src/translations.h:119
 msgid "Set Location "
 msgstr "Norādīt vietu "
 
-#: src/translations.h:145
+#: src/translations.h:120
 msgid "Set Time "
 msgstr "Iestatīt laiku "
 
-#: src/translations.h:159
+#: src/translations.h:134
 msgid "Set Time Zone: "
 msgstr "Iestatīt laika zonu: "
 
-#: src/translations.h:217
+#: src/translations.h:192
 msgid "Set UI Locale: "
 msgstr "Iestatīt interfeisa valodu: "
 
@@ -1671,7 +1588,7 @@ msgstr ""
 msgid "Show planets"
 msgstr ""
 
-#: src/translations.h:173
+#: src/translations.h:148
 msgid "Show: "
 msgstr "Parādīt: "
 
@@ -1679,20 +1596,16 @@ msgstr "Parādīt: "
 msgid "Shows the sky as if looking through a telescope eyepiece"
 msgstr ""
 
-#: src/translations.h:215
+#: src/translations.h:190
 msgid "Shut Down: "
 msgstr "Izslēgt: "
 
-#: src/translations.h:162
+#: src/translations.h:137
 msgid "Sidereal"
 msgstr "Zvaigžņu laiks"
 
 #: src/ui_viewDialog.h:1013
 msgid "Simulate light speed"
-msgstr ""
-
-#: src/translations.h:54
-msgid "Sinope"
 msgstr ""
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
@@ -1710,19 +1623,19 @@ msgstr "Izmērs: %1"
 msgid "Sky"
 msgstr ""
 
-#: src/translations.h:170
+#: src/translations.h:145
 msgid "Sky Culture: "
 msgstr "Debesu kultūra: "
 
-#: src/translations.h:171
+#: src/translations.h:146
 msgid "Sky Language: "
 msgstr "Debesu valoda: "
 
-#: src/translations.h:164
+#: src/translations.h:139
 msgid "Sky Time At Start-up: "
 msgstr "Debess laiks sākumā: "
 
-#: src/translations.h:158
+#: src/translations.h:133
 msgid "Sky Time: "
 msgstr "Debesu laiks: "
 
@@ -1734,7 +1647,7 @@ msgstr ""
 msgid "Slow down the script execution rate"
 msgstr ""
 
-#: src/translations.h:156
+#: src/translations.h:131
 msgid "Solar System Body: "
 msgstr "Saules sistēmas objekts: "
 
@@ -1742,7 +1655,7 @@ msgstr "Saules sistēmas objekts: "
 msgid "Solar System Editor"
 msgstr ""
 
-#: src/translations.h:95
+#: src/translations.h:70
 msgid "Solar System Observer"
 msgstr "Saules sistēmas novērtotājs"
 
@@ -1774,7 +1687,7 @@ msgstr ""
 msgid "Standard Perseids rate"
 msgstr ""
 
-#: src/translations.h:174
+#: src/translations.h:149
 msgid "Star Value Multiplier: "
 msgstr "Zvaigžņu vērtības reizinātājs: "
 
@@ -1790,7 +1703,7 @@ msgstr ""
 msgid "Stars"
 msgstr "Zvaigznes"
 
-#: src/translations.h:147
+#: src/translations.h:122
 msgid "Stars "
 msgstr "Zvaigznes "
 
@@ -1902,16 +1815,12 @@ msgstr ""
 msgid "Telescope Control"
 msgstr ""
 
-#: src/translations.h:65
+#: src/translations.h:53
 msgid "Tethys"
 msgstr "Tētija"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:79
 msgid "Text User Interface"
-msgstr ""
-
-#: src/translations.h:85
-msgid "Thalassa"
 msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:187
@@ -1980,11 +1889,6 @@ msgstr ""
 msgid "The width of your view when Stellarium starts"
 msgstr ""
 
-#: src/translations.h:59
-#, fuzzy
-msgid "Thebe"
-msgstr "Fēbs"
-
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
@@ -1995,7 +1899,7 @@ msgstr ""
 msgid "This system does not support OpenGL."
 msgstr ""
 
-#: src/translations.h:167
+#: src/translations.h:142
 msgid "Time Display Format: "
 msgstr "Laika formāts: "
 
@@ -2003,11 +1907,11 @@ msgstr "Laika formāts: "
 msgid "Time Zone"
 msgstr ""
 
-#: src/translations.h:68
+#: src/translations.h:56
 msgid "Titan"
 msgstr "Titāns"
 
-#: src/translations.h:77
+#: src/translations.h:65
 msgid "Titania"
 msgstr ""
 
@@ -2027,12 +1931,7 @@ msgstr ""
 msgid "Track object"
 msgstr ""
 
-#: src/translations.h:82
-#, fuzzy
-msgid "Triton"
-msgstr "Titāns"
-
-#: src/translations.h:139
+#: src/translations.h:114
 msgid "Tupi-Guarani"
 msgstr ""
 
@@ -2040,7 +1939,7 @@ msgstr ""
 msgid "Twinkle:"
 msgstr ""
 
-#: src/translations.h:177
+#: src/translations.h:152
 msgid "Twinkling: "
 msgstr "Mirgošana: "
 
@@ -2049,11 +1948,11 @@ msgstr "Mirgošana: "
 msgid "Type: <b>%1</b>"
 msgstr "Tips: <b>%1</b>"
 
-#: src/translations.h:209
+#: src/translations.h:184
 msgid "USB Script: "
 msgstr "USB scenārijs: "
 
-#: src/translations.h:76
+#: src/translations.h:64
 msgid "Umbriel"
 msgstr ""
 
@@ -2065,11 +1964,11 @@ msgstr "Nedokumentēts tips"
 msgid "Unknown"
 msgstr "Nezināms"
 
-#: src/translations.h:216
+#: src/translations.h:191
 msgid "Update me via Internet: "
 msgstr "Atjaunot no interneta: "
 
-#: src/translations.h:73
+#: src/translations.h:61
 msgid "Uranus"
 msgstr "Urāns"
 
@@ -2113,7 +2012,7 @@ msgstr ""
 msgid "Visible"
 msgstr ""
 
-#: src/translations.h:125
+#: src/translations.h:100
 msgid "W"
 msgstr "R"
 
@@ -2123,7 +2022,7 @@ msgid ""
 "operation is irreversible."
 msgstr ""
 
-#: src/translations.h:140
+#: src/translations.h:115
 msgid "Western"
 msgstr "Rietumu"
 
@@ -2158,7 +2057,7 @@ msgstr ""
 msgid "ZIP archives"
 msgstr ""
 
-#: src/translations.h:203
+#: src/translations.h:178
 msgid "Zoom Duration: "
 msgstr "Tuvināšanas ilgums: "
 
