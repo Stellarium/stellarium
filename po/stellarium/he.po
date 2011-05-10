@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-20 11:50-0400\n"
+"POT-Creation-Date: 2011-05-10 14:10+0700\n"
 "PO-Revision-Date: 2010-11-26 21:55+0000\n"
 "Last-Translator: Bernd Saering <Unknown>\n"
 "Language-Team: Hebrew <he@li.org>\n"
-"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: he\n"
 "X-Launchpad-Export-Date: 2010-12-05 08:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
@@ -86,7 +86,7 @@ msgstr "מגניטודה(בהירות) מוחלטת: %1"
 msgid "Absolute scale:"
 msgstr "קנה מידה מוחלט:"
 
-#: src/translations.h:140
+#: src/translations.h:165
 msgid "Actual Time"
 msgstr "זמן נוכחי"
 
@@ -126,9 +126,13 @@ msgstr "הוספה / הסרה של נוף"
 msgid "Add/remove landscapes..."
 msgstr "הוספה / הסרה של נוף"
 
-#: src/translations.h:126
+#: src/translations.h:151
 msgid "Administration "
 msgstr "ניהול "
+
+#: src/translations.h:60
+msgid "Adrastea"
+msgstr ""
 
 #: src/ui_configurationDialog.h:820
 msgid "Align labels with the horizon"
@@ -146,7 +150,7 @@ msgstr "אפשר סריקה והתמקדות באמצעות המקלדת"
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "אפשר סריקה והתמקדות באמצעות העכבר"
 
-#: src/translations.h:130
+#: src/translations.h:155
 msgid "Altitude (m): "
 msgstr "גובה (מטרים): "
 
@@ -154,8 +158,12 @@ msgstr "גובה (מטרים): "
 msgid "Altitude:"
 msgstr "גובה:"
 
+#: src/translations.h:50
+msgid "Amalthea"
+msgstr ""
+
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:85
+#: src/translations.h:110
 msgid "Amor"
 msgstr "אמור"
 
@@ -164,6 +172,10 @@ msgid ""
 "An interface for adding asteroids and comets to Stellarium. It can download "
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
+msgstr ""
+
+#: src/translations.h:57
+msgid "Ananke"
 msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
@@ -175,7 +187,7 @@ msgid "Angle measure"
 msgstr "מדידת זווית"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:87
+#: src/translations.h:112
 msgid "Apophis"
 msgstr "אפופיס"
 
@@ -184,11 +196,11 @@ msgstr "אפופיס"
 msgid "Apparent diameter: %1"
 msgstr "קוטר נראה: %1"
 
-#: src/translations.h:63
+#: src/translations.h:75
 msgid "Ariel"
 msgstr "אריאל"
 
-#: src/translations.h:185
+#: src/translations.h:210
 msgid "Arrow down to load list."
 msgstr "לחץ על חץ למטה כדי לטעון רשימה."
 
@@ -201,7 +213,7 @@ msgid "Art brightness: "
 msgstr "בהירות האומנות "
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:73
+#: src/translations.h:98
 msgid "Astraea"
 msgstr ""
 
@@ -238,7 +250,7 @@ msgstr "התרחקות אוטומטית תחזיר את כיוון ההסתכל�
 msgid "Az/Alt: %1/%2"
 msgstr "אזימוט/גובה: %1/%2"
 
-#: src/translations.h:164
+#: src/translations.h:189
 msgid "Azimuthal Grid"
 msgstr "רשת אזימוטלית"
 
@@ -246,11 +258,11 @@ msgstr "רשת אזימוטלית"
 msgid "Azimuthal grid"
 msgstr "רשת אזימוטלית"
 
-#: src/translations.h:103
+#: src/translations.h:128
 msgid "Aztec"
 msgstr "אצטקית"
 
-#: src/translations.h:183
+#: src/translations.h:208
 msgid "CD/DVD Script: "
 msgstr "סקריפט CD/DVD : "
 
@@ -262,7 +274,7 @@ msgstr "קונטרול + לחיצה על כפתור שמאלי"
 msgid "CTRL + Up/Down"
 msgstr "קונטרול + למעלה/למטה"
 
-#: src/translations.h:136
+#: src/translations.h:161
 msgid "Calendar"
 msgstr "לוח שנה"
 
@@ -274,13 +286,18 @@ msgstr "קליסטו"
 msgid "Cancel"
 msgstr "ביטול"
 
-#: src/translations.h:159
+#: src/translations.h:184
 msgid "Cardinal Points"
 msgstr "נקודות חשובות"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1037
 msgid "Cardinal points"
 msgstr "נקודות חשובות"
+
+#: src/translations.h:56
+#, fuzzy
+msgid "Carme"
+msgstr "קרס"
 
 #: src/ui_viewDialog.h:1030
 msgid "Celestial Sphere"
@@ -294,16 +311,16 @@ msgstr "התמקד על העצם הנבחר"
 msgid "Ceres"
 msgstr "קרס"
 
-#: src/translations.h:68
+#: src/translations.h:80
 msgid "Charon"
 msgstr "כארון"
 
-#: src/translations.h:104
+#: src/translations.h:129
 msgid "Chinese"
 msgstr "סינית"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:89
+#: src/translations.h:114
 msgid "Chiron"
 msgstr ""
 
@@ -323,7 +340,7 @@ msgstr "סגור חלון בעת ריצת סקריפט"
 msgid "Cluster associated with nebulosity"
 msgstr "צבירים הקשורים לעירפול"
 
-#: src/translations.h:123
+#: src/translations.h:148
 msgid "Colors "
 msgstr "צבעים "
 
@@ -343,19 +360,19 @@ msgstr "קונפיגורציה"
 msgid "Configuration window"
 msgstr "חלון קונפיגורציה"
 
-#: src/translations.h:157
+#: src/translations.h:182
 msgid "Constellation Art Intensity"
 msgstr "עוצמת הגרפיקה של קבוצות כוכבים"
 
-#: src/translations.h:158
+#: src/translations.h:183
 msgid "Constellation Boundaries"
 msgstr "גבולות קבוצות כוכבים"
 
-#: src/translations.h:155
+#: src/translations.h:180
 msgid "Constellation Lines"
 msgstr "קווי קבוצות כוכבים"
 
-#: src/translations.h:156
+#: src/translations.h:181
 msgid "Constellation Names"
 msgstr "שמות קבוצות כוכבים"
 
@@ -387,7 +404,7 @@ msgstr "צור קשר"
 msgid "Control"
 msgstr "בקרה"
 
-#: src/translations.h:180
+#: src/translations.h:205
 msgid "Correct for light travel time: "
 msgstr "תיקון עבור זמן מסע של אור: "
 
@@ -399,7 +416,7 @@ msgstr "ארץ:"
 msgid "Current location information"
 msgstr "מידע על המיקום הנוכחי"
 
-#: src/translations.h:179
+#: src/translations.h:204
 msgid "Cursor Timeout: "
 msgstr "גבול זמן לסמן: "
 
@@ -407,7 +424,7 @@ msgstr "גבול זמן לסמן: "
 msgid "Cylinder"
 msgstr "גליל"
 
-#: src/translations.h:143
+#: src/translations.h:168
 msgid "Date Display Format: "
 msgstr "פורמט תאריך: "
 
@@ -419,7 +436,7 @@ msgstr "תאריך ושעה"
 msgid "Date/time window"
 msgstr "חלון תאריך/זמן"
 
-#: src/translations.h:135
+#: src/translations.h:160
 msgid "Day keys: "
 msgstr "מקשי יום: "
 
@@ -443,6 +460,10 @@ msgstr "דיימוס"
 msgid "Delete"
 msgstr "מחק"
 
+#: src/translations.h:86
+msgid "Despina"
+msgstr ""
+
 #: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
 #: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
 #, qt-format
@@ -457,7 +478,7 @@ msgstr "מפתחים"
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "עמעם כוכבים קלושים כאשר עצם בהיר במיוחד ניראה"
 
-#: src/translations.h:54
+#: src/translations.h:66
 msgid "Dione"
 msgstr "דיון"
 
@@ -528,7 +549,7 @@ msgstr ""
 msgid "Dynamic eye adaptation"
 msgstr "הסתגלות עין דינמית"
 
-#: src/translations.h:99
+#: src/translations.h:124
 msgid "E"
 msgstr "מז'"
 
@@ -540,7 +561,7 @@ msgstr "ארץ"
 msgid "Ecliptic"
 msgstr "קו המלקה"
 
-#: src/translations.h:167
+#: src/translations.h:192
 msgid "Ecliptic Line"
 msgstr "קו המילקה"
 
@@ -548,13 +569,18 @@ msgstr "קו המילקה"
 msgid "Ecliptic line"
 msgstr "קו המילקה"
 
-#: src/translations.h:124
+#: src/translations.h:149
 msgid "Effects "
 msgstr "אפקטים "
 
-#: src/translations.h:105
+#: src/translations.h:130
 msgid "Egyptian"
 msgstr "מצרית"
+
+#: src/translations.h:52
+#, fuzzy
+msgid "Elara"
+msgstr "ארץ"
 
 #: src/ui_configurationDialog.h:786
 msgid "Enable keyboard navigation"
@@ -564,7 +590,7 @@ msgstr "אפשר ניווט באמצעות מקלדת"
 msgid "Enable mouse navigation"
 msgstr "אפשר ניווט באמצעות עכבר"
 
-#: src/translations.h:52
+#: src/translations.h:64
 msgid "Enceladus"
 msgstr "אנקלדוס"
 
@@ -580,7 +606,7 @@ msgstr "שוות שטח"
 msgid "Equator"
 msgstr "קו המשווה"
 
-#: src/translations.h:166
+#: src/translations.h:191
 msgid "Equator Line"
 msgstr "קו המשווה"
 
@@ -588,7 +614,7 @@ msgstr "קו המשווה"
 msgid "Equator line"
 msgstr "קו המשווה"
 
-#: src/translations.h:165
+#: src/translations.h:190
 msgid "Equatorial Grid"
 msgstr "רשת משוונית"
 
@@ -600,12 +626,12 @@ msgstr "רשת משוונית J2000"
 msgid "Equatorial grid"
 msgstr "רשת משוונית"
 
-#: src/translations.h:69
+#: src/translations.h:81
 msgid "Eris"
 msgstr "אריס"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:91
+#: src/translations.h:116
 msgid "Eros"
 msgstr "ארוס"
 
@@ -673,7 +699,7 @@ msgid "Flip scene vertically"
 msgstr "הפוך סצנה אנכית"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:79
+#: src/translations.h:104
 msgid "Flora"
 msgstr "פלורה"
 
@@ -693,6 +719,11 @@ msgstr "קריאה נוספת"
 msgid "Galactic grid"
 msgstr "רשת גלקטית"
 
+#: src/translations.h:87
+#, fuzzy
+msgid "Galatea"
+msgstr "גלקסיה"
+
 #: src/core/modules/Nebula.cpp:269
 msgid "Galaxy"
 msgstr "גלקסיה"
@@ -701,7 +732,7 @@ msgstr "גלקסיה"
 msgid "Ganymede"
 msgstr "גנימד"
 
-#: src/translations.h:121
+#: src/translations.h:146
 msgid "General "
 msgstr "כללי "
 
@@ -731,17 +762,22 @@ msgstr "תוויות גרביטציה"
 msgid "Ground"
 msgstr "אדמה"
 
+#: src/translations.h:90
+#, fuzzy
+msgid "Halimede"
+msgstr "גנימד"
+
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
 msgstr "האמר-אייטוף"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:75
+#: src/translations.h:100
 msgid "Hebe"
 msgstr "הבי"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:93
+#: src/translations.h:118
 msgid "Hektor"
 msgstr "הקטור"
 
@@ -765,6 +801,10 @@ msgstr "הסתר את סמן העכבר כאשר הוא לא פעיל"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "הקצב הגבוה ביותר אי פעם (הליאונידים של 1966)"
 
+#: src/translations.h:51
+msgid "Himalia"
+msgstr ""
+
 #: src/core/StelObject.cpp:80
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
@@ -775,15 +815,15 @@ msgid "Hourly zenith rate:"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:83
+#: src/translations.h:108
 msgid "Hygiea"
 msgstr ""
 
-#: src/translations.h:57
+#: src/translations.h:69
 msgid "Hyperion"
 msgstr "היפריון"
 
-#: src/translations.h:58
+#: src/translations.h:70
 msgid "Iapetus"
 msgstr "יאפטוס"
 
@@ -810,7 +850,7 @@ msgstr "האץ את מהירות הזמן (מעט)"
 msgid "Install a new landscape from a ZIP archive..."
 msgstr "התקת נוף חדש מקובץ ZIP"
 
-#: src/translations.h:106
+#: src/translations.h:131
 msgid "Inuit"
 msgstr "אינואטים"
 
@@ -823,7 +863,7 @@ msgid "Io"
 msgstr "איו"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:77
+#: src/translations.h:102
 msgid "Iris"
 msgstr "איריס"
 
@@ -843,7 +883,7 @@ msgstr ""
 msgid "Keys"
 msgstr "מקשים"
 
-#: src/translations.h:107
+#: src/translations.h:132
 msgid "Korean"
 msgstr "קוראנית"
 
@@ -851,7 +891,7 @@ msgstr "קוראנית"
 msgid "Labels and Markers"
 msgstr "תוויות וסימונים"
 
-#: src/translations.h:108
+#: src/translations.h:133
 msgid "Lakota"
 msgstr "לקוטה"
 
@@ -869,17 +909,29 @@ msgstr ""
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr ""
 
-#: src/translations.h:172
+#: src/translations.h:197
 msgid "Landscape: "
 msgstr "נוף: "
+
+#: src/translations.h:93
+msgid "Laomedeia"
+msgstr ""
+
+#: src/translations.h:88
+msgid "Larissa"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:395
 msgid "Latitude:"
 msgstr "קו רוחב:"
 
-#: src/translations.h:128
+#: src/translations.h:153
 msgid "Latitude: "
 msgstr "קו רוחב: "
+
+#: src/translations.h:58
+msgid "Leda"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:56
 msgid "Left click"
@@ -889,7 +941,7 @@ msgstr "לחיצה על כפתור שמאלי"
 msgid "License"
 msgstr "רשיון"
 
-#: src/translations.h:171
+#: src/translations.h:196
 msgid "Light Pollution Luminance: "
 msgstr "עוצמת זיהום אור: "
 
@@ -897,11 +949,11 @@ msgstr "עוצמת זיהום אור: "
 msgid "Light pollution: "
 msgstr "זיהום אור: "
 
-#: src/translations.h:153
+#: src/translations.h:178
 msgid "Limiting Magnitude: "
 msgstr "בהירות מגבילה: "
 
-#: src/translations.h:188
+#: src/translations.h:213
 msgid "Load Default Configuration: "
 msgstr "טען קונפיגורציית ברירת מחדל: "
 
@@ -909,7 +961,7 @@ msgstr "טען קונפיגורציית ברירת מחדל: "
 msgid "Load at startup"
 msgstr "טען בעליית התוכנה"
 
-#: src/translations.h:182
+#: src/translations.h:207
 msgid "Local Script: "
 msgstr "סקריפט מקומי: "
 
@@ -933,15 +985,19 @@ msgstr "יומן"
 msgid "Longitude:"
 msgstr "קו אורך:"
 
-#: src/translations.h:129
+#: src/translations.h:154
 msgid "Longitude: "
 msgstr "קו אורך: "
 
-#: src/translations.h:175
+#: src/translations.h:55
+msgid "Lysithea"
+msgstr ""
+
+#: src/translations.h:200
 msgid "Magnitude Scaling Multiplier: "
 msgstr "מכפיל סקאלת בהירות "
 
-#: src/translations.h:150
+#: src/translations.h:175
 msgid "Magnitude Sizing Multiplier: "
 msgstr "מכפיל מגניטודה: "
 
@@ -959,11 +1015,11 @@ msgstr "מגניטודה (בהירות): <b>%1</b> (B-V: %2)"
 msgid "Main"
 msgstr "ראשי"
 
-#: src/translations.h:173
+#: src/translations.h:198
 msgid "Manual zoom: "
 msgstr "זום ידני: "
 
-#: src/translations.h:109
+#: src/translations.h:134
 msgid "Maori"
 msgstr "מאורית"
 
@@ -983,11 +1039,11 @@ msgstr "הסתר כל מה שמחוץ למעגל המרכזי בתצוגה הר�
 msgid "Maximum FOV: "
 msgstr "שדה ראייה מקסימילי: "
 
-#: src/translations.h:151
+#: src/translations.h:176
 msgid "Maximum Magnitude to Label: "
 msgstr "מגניטודת כוכב מירבית לסימון: "
 
-#: src/translations.h:177
+#: src/translations.h:202
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "עוצמת ערפילית מירבית לסימון: "
 
@@ -1003,7 +1059,7 @@ msgstr "כוכב חמה"
 msgid "Meridian"
 msgstr "מרידיאן"
 
-#: src/translations.h:163
+#: src/translations.h:188
 msgid "Meridian Line"
 msgstr "קו המרידיאן"
 
@@ -1012,19 +1068,19 @@ msgid "Meridian line"
 msgstr "קו המרידיאן"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:81
+#: src/translations.h:61 src/translations.h:106
 msgid "Metis"
 msgstr "מטיס"
 
-#: src/translations.h:176
+#: src/translations.h:201
 msgid "Milky Way intensity: "
 msgstr "עוצמת הארה של שביל החלב: "
 
-#: src/translations.h:51
+#: src/translations.h:63
 msgid "Mimas"
 msgstr "מימס"
 
-#: src/translations.h:62
+#: src/translations.h:74
 msgid "Miranda"
 msgstr "מירנדה"
 
@@ -1059,15 +1115,19 @@ msgstr ""
 msgid "Movement and Selection"
 msgstr "תנועה ובחירה"
 
-#: src/translations.h:97
+#: src/translations.h:122
 msgid "N"
 msgstr "צ'"
+
+#: src/translations.h:84
+msgid "Naiad"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:408
 msgid "Name/City:"
 msgstr "שם/עיר:"
 
-#: src/translations.h:110
+#: src/translations.h:135
 msgid "Navajo"
 msgstr "נבאחו"
 
@@ -1079,11 +1139,11 @@ msgstr "ניווט"
 msgid "Nebula"
 msgstr "ערפילית"
 
-#: src/translations.h:169
+#: src/translations.h:194
 msgid "Nebula Circles"
 msgstr "מעגלי ערפיליות"
 
-#: src/translations.h:168
+#: src/translations.h:193
 msgid "Nebula Names"
 msgstr "שמות ערפיליות"
 
@@ -1095,9 +1155,17 @@ msgstr "ערפיליות"
 msgid "Nebulas background images"
 msgstr "תמונות רקע של ערפיליות"
 
-#: src/translations.h:60
+#: src/translations.h:72
 msgid "Neptune"
 msgstr "נפטון"
+
+#: src/translations.h:83
+msgid "Nereid"
+msgstr ""
+
+#: src/translations.h:94
+msgid "Neso"
+msgstr ""
 
 #: src/gui/LocationDialog.cpp:332
 msgid "New Location"
@@ -1130,7 +1198,7 @@ msgstr "אף אחד"
 msgid "Normal rate"
 msgstr "קצב נורמלי"
 
-#: src/translations.h:111
+#: src/translations.h:136
 msgid "Norse"
 msgstr "נורדית"
 
@@ -1139,11 +1207,11 @@ msgstr "נורדית"
 msgid "OSX Developer: %1"
 msgstr "מפתח OSX: %1"
 
-#: src/translations.h:66
+#: src/translations.h:78
 msgid "Oberon"
 msgstr "אוברון"
 
-#: src/translations.h:174
+#: src/translations.h:199
 msgid "Object Sizing Rule: "
 msgstr "כלל להגדלת עצם: "
 
@@ -1205,6 +1273,10 @@ msgstr "סרוק לאורך השמיים"
 msgid "Parallax: %1\""
 msgstr "פרלקסה: \"%1"
 
+#: src/translations.h:53
+msgid "Pasiphae"
+msgstr ""
+
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
 msgstr "פרספקטיבה"
@@ -1221,19 +1293,19 @@ msgstr ""
 msgid "Phobos"
 msgstr "פובוס"
 
-#: src/translations.h:59
+#: src/translations.h:71
 msgid "Phoebe"
 msgstr "פיבי"
 
-#: src/translations.h:160
+#: src/translations.h:185
 msgid "Planet Names"
 msgstr "שמות כוכבי לכת"
 
-#: src/translations.h:161
+#: src/translations.h:186
 msgid "Planet Orbits"
 msgstr "מסלולי כוכבי לכת"
 
-#: src/translations.h:162
+#: src/translations.h:187
 msgid "Planet Trails"
 msgstr "עקבות כוכבי לכת"
 
@@ -1291,11 +1363,11 @@ msgstr ""
 msgid "Plugins"
 msgstr "תוספים"
 
-#: src/translations.h:67
+#: src/translations.h:79
 msgid "Pluto"
 msgstr "פלוטו"
 
-#: src/translations.h:112
+#: src/translations.h:137
 msgid "Polynesian"
 msgstr "פולינזית"
 
@@ -1305,11 +1377,11 @@ msgid ""
 "TLE data"
 msgstr ""
 
-#: src/translations.h:138
+#: src/translations.h:163
 msgid "Preset Sky Time: "
 msgstr "זמן שמיים קבוע מראש: "
 
-#: src/translations.h:141
+#: src/translations.h:166
 msgid "Preset Time"
 msgstr "זמן קבוע מראש"
 
@@ -1326,8 +1398,16 @@ msgstr "מתאם פרויקט ומפתח ראשי: %1"
 msgid "Projection"
 msgstr "היטל"
 
+#: src/translations.h:89
+msgid "Proteus"
+msgstr ""
+
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
+msgstr ""
+
+#: src/translations.h:91
+msgid "Psamathe"
 msgstr ""
 
 #: src/gui/StelGui.cpp:171
@@ -1389,7 +1469,7 @@ msgstr ""
 msgid "Retry"
 msgstr "נסה שנית"
 
-#: src/translations.h:55
+#: src/translations.h:67
 msgid "Rhea"
 msgstr "ריאה"
 
@@ -1409,12 +1489,16 @@ msgstr "סקריפט פעיל: "
 msgid "Running script: [none]"
 msgstr "סקריפט רץ: [אין]"
 
-#: src/translations.h:98
+#: src/translations.h:123
 msgid "S"
 msgstr "ד'"
 
-#: src/translations.h:113
+#: src/translations.h:138
 msgid "Sami"
+msgstr ""
+
+#: src/translations.h:92
+msgid "Sao"
 msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:127
@@ -1433,11 +1517,11 @@ msgstr "לווינים"
 msgid "Satellites configuration window"
 msgstr ""
 
-#: src/translations.h:50
+#: src/translations.h:62
 msgid "Saturn"
 msgstr "שבתאי"
 
-#: src/translations.h:189
+#: src/translations.h:214
 msgid "Save Current Configuration as Default: "
 msgstr "שמור קונפיגורציה נוכחית כברירת מחדל: "
 
@@ -1476,7 +1560,7 @@ msgstr "חלון קונסולת סקריפט"
 msgid "Scripts"
 msgstr "סקריפטים"
 
-#: src/translations.h:125
+#: src/translations.h:150
 msgid "Scripts "
 msgstr "סקריפטים "
 
@@ -1488,7 +1572,7 @@ msgstr "חלון חיפוש"
 msgid "Select a ZIP archive that contains a Stellarium landscape"
 msgstr "בחר קובץ ZIP שמכיל את הנוף עבור סטלריום"
 
-#: src/translations.h:186
+#: src/translations.h:211
 msgid "Select and exit to run."
 msgstr "בחר וצא להרצה"
 
@@ -1508,19 +1592,19 @@ msgstr "בחר קבוצת כוכבים יחידה"
 msgid "Selected object information"
 msgstr "מידע על העצם הנבחר"
 
-#: src/translations.h:119
+#: src/translations.h:144
 msgid "Set Location "
 msgstr "קבע מיקום "
 
-#: src/translations.h:120
+#: src/translations.h:145
 msgid "Set Time "
 msgstr "קבע זמן "
 
-#: src/translations.h:134
+#: src/translations.h:159
 msgid "Set Time Zone: "
 msgstr "קבע אזור זמן: "
 
-#: src/translations.h:192
+#: src/translations.h:217
 msgid "Set UI Locale: "
 msgstr "קבע שפת ממשק: "
 
@@ -1602,7 +1686,7 @@ msgstr "הצג מסלולי כוכבי לכת"
 msgid "Show planets"
 msgstr "הצג כוכבי לכת"
 
-#: src/translations.h:148
+#: src/translations.h:173
 msgid "Show: "
 msgstr "הצג: "
 
@@ -1610,17 +1694,21 @@ msgstr "הצג: "
 msgid "Shows the sky as if looking through a telescope eyepiece"
 msgstr ""
 
-#: src/translations.h:190
+#: src/translations.h:215
 msgid "Shut Down: "
 msgstr "כיבוי: "
 
-#: src/translations.h:137
+#: src/translations.h:162
 msgid "Sidereal"
 msgstr "סידרי"
 
 #: src/ui_viewDialog.h:1013
 msgid "Simulate light speed"
 msgstr "דמה את מהירות האור"
+
+#: src/translations.h:54
+msgid "Sinope"
+msgstr ""
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
@@ -1637,19 +1725,19 @@ msgstr "גודל: %1"
 msgid "Sky"
 msgstr "שמיים"
 
-#: src/translations.h:145
+#: src/translations.h:170
 msgid "Sky Culture: "
 msgstr "שמיים לפי תרבות: "
 
-#: src/translations.h:146
+#: src/translations.h:171
 msgid "Sky Language: "
 msgstr "שפת שמיים: "
 
-#: src/translations.h:139
+#: src/translations.h:164
 msgid "Sky Time At Start-up: "
 msgstr "זמן שמיים באתחול: "
 
-#: src/translations.h:133
+#: src/translations.h:158
 msgid "Sky Time: "
 msgstr "זמן שמיים: "
 
@@ -1661,7 +1749,7 @@ msgstr "חלון אפשרויות שמיים ותצוגה"
 msgid "Slow down the script execution rate"
 msgstr "מאיט את קצב ביצוע הסקריפט"
 
-#: src/translations.h:131
+#: src/translations.h:156
 msgid "Solar System Body: "
 msgstr "עצם במערכת שמש: "
 
@@ -1669,7 +1757,7 @@ msgstr "עצם במערכת שמש: "
 msgid "Solar System Editor"
 msgstr "עורך מערכת השמש"
 
-#: src/translations.h:70
+#: src/translations.h:95
 msgid "Solar System Observer"
 msgstr "צופה מערכת השמש"
 
@@ -1703,7 +1791,7 @@ msgstr ""
 msgid "Standard Perseids rate"
 msgstr "קצב פרסאידים סטנדרטי"
 
-#: src/translations.h:149
+#: src/translations.h:174
 msgid "Star Value Multiplier: "
 msgstr "מכפיל ערך כוכב: "
 
@@ -1719,7 +1807,7 @@ msgstr "מורשת כוכבים"
 msgid "Stars"
 msgstr "כוכבים"
 
-#: src/translations.h:122
+#: src/translations.h:147
 msgid "Stars "
 msgstr "כוכבים "
 
@@ -1831,13 +1919,17 @@ msgstr "תאריך מערכת ב:"
 msgid "Telescope Control"
 msgstr "שליטה על הטלסקופ"
 
-#: src/translations.h:53
+#: src/translations.h:65
 msgid "Tethys"
 msgstr "תטיס"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:79
 msgid "Text User Interface"
 msgstr "ממשק טקסט"
+
+#: src/translations.h:85
+msgid "Thalassa"
+msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:187
 msgid ""
@@ -1906,6 +1998,11 @@ msgstr ""
 msgid "The width of your view when Stellarium starts"
 msgstr "רוחב התצוגה כאשר סטלריום עולה"
 
+#: src/translations.h:59
+#, fuzzy
+msgid "Thebe"
+msgstr "פיבי"
+
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
@@ -1916,7 +2013,7 @@ msgstr ""
 msgid "This system does not support OpenGL."
 msgstr "מערכת זו אינו תומכת בOpenGL."
 
-#: src/translations.h:142
+#: src/translations.h:167
 msgid "Time Display Format: "
 msgstr "פורמט זמן: "
 
@@ -1924,11 +2021,11 @@ msgstr "פורמט זמן: "
 msgid "Time Zone"
 msgstr "אזור זמן"
 
-#: src/translations.h:56
+#: src/translations.h:68
 msgid "Titan"
 msgstr "טיטן"
 
-#: src/translations.h:65
+#: src/translations.h:77
 msgid "Titania"
 msgstr "טיטניה"
 
@@ -1948,7 +2045,12 @@ msgstr "כלים"
 msgid "Track object"
 msgstr "עקוב אחרי העצם"
 
-#: src/translations.h:114
+#: src/translations.h:82
+#, fuzzy
+msgid "Triton"
+msgstr "טיטן"
+
+#: src/translations.h:139
 msgid "Tupi-Guarani"
 msgstr "טופי-גוארני"
 
@@ -1956,7 +2058,7 @@ msgstr "טופי-גוארני"
 msgid "Twinkle:"
 msgstr "ניצנוץ:"
 
-#: src/translations.h:152
+#: src/translations.h:177
 msgid "Twinkling: "
 msgstr "ניצנוץ: "
 
@@ -1965,11 +2067,11 @@ msgstr "ניצנוץ: "
 msgid "Type: <b>%1</b>"
 msgstr "סוג: <b>%1</b>"
 
-#: src/translations.h:184
+#: src/translations.h:209
 msgid "USB Script: "
 msgstr "סקריפט USB "
 
-#: src/translations.h:64
+#: src/translations.h:76
 msgid "Umbriel"
 msgstr "אומבריאל"
 
@@ -1981,11 +2083,11 @@ msgstr "סוג לא מתועד"
 msgid "Unknown"
 msgstr "לא ידוע"
 
-#: src/translations.h:191
+#: src/translations.h:216
 msgid "Update me via Internet: "
 msgstr "עדכן אותי דרך אינטרנט: "
 
-#: src/translations.h:61
+#: src/translations.h:73
 msgid "Uranus"
 msgstr "אוראנוס"
 
@@ -2029,7 +2131,7 @@ msgstr "תצוגה"
 msgid "Visible"
 msgstr "נראה"
 
-#: src/translations.h:100
+#: src/translations.h:125
 msgid "W"
 msgstr "מע'"
 
@@ -2039,7 +2141,7 @@ msgid ""
 "operation is irreversible."
 msgstr ""
 
-#: src/translations.h:115
+#: src/translations.h:140
 msgid "Western"
 msgstr "מערבית"
 
@@ -2075,7 +2177,7 @@ msgstr ""
 msgid "ZIP archives"
 msgstr "קובץ ZIP"
 
-#: src/translations.h:178
+#: src/translations.h:203
 msgid "Zoom Duration: "
 msgstr "משך זמן לזום: "
 

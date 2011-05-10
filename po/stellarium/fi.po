@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-20 11:50-0400\n"
+"POT-Creation-Date: 2011-05-10 14:10+0700\n"
 "PO-Revision-Date: 2010-11-28 17:36+0000\n"
 "Last-Translator: VeikkoM <veikko.makela@ursa.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
-"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fi\n"
 "X-Launchpad-Export-Date: 2010-12-05 08:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
@@ -87,7 +87,7 @@ msgstr "Absoluuttinen magnitudi: %1"
 msgid "Absolute scale:"
 msgstr "Absoluuttinen mittakaava:"
 
-#: src/translations.h:140
+#: src/translations.h:165
 msgid "Actual Time"
 msgstr "Nykyinen aika"
 
@@ -127,9 +127,14 @@ msgstr "Lisää/poista maisemia"
 msgid "Add/remove landscapes..."
 msgstr "Lisää/poista maisemia..."
 
-#: src/translations.h:126
+#: src/translations.h:151
 msgid "Administration "
 msgstr "Hallinta "
+
+#: src/translations.h:60
+#, fuzzy
+msgid "Adrastea"
+msgstr "Astraea"
 
 #: src/ui_configurationDialog.h:820
 msgid "Align labels with the horizon"
@@ -148,7 +153,7 @@ msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "Salli hiirellä liikkuminen (vetämällä) ja suurennus/loitonnus (rullalla)"
 
-#: src/translations.h:130
+#: src/translations.h:155
 msgid "Altitude (m): "
 msgstr "Korkeus (m): "
 
@@ -156,8 +161,12 @@ msgstr "Korkeus (m): "
 msgid "Altitude:"
 msgstr "Korkeus:"
 
+#: src/translations.h:50
+msgid "Amalthea"
+msgstr ""
+
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:85
+#: src/translations.h:110
 msgid "Amor"
 msgstr "Amor"
 
@@ -166,6 +175,10 @@ msgid ""
 "An interface for adding asteroids and comets to Stellarium. It can download "
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
+msgstr ""
+
+#: src/translations.h:57
+msgid "Ananke"
 msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
@@ -177,7 +190,7 @@ msgid "Angle measure"
 msgstr "Kulman mittaus"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:87
+#: src/translations.h:112
 msgid "Apophis"
 msgstr "Apophis"
 
@@ -186,11 +199,11 @@ msgstr "Apophis"
 msgid "Apparent diameter: %1"
 msgstr "Näennäinen läpimitta: %1"
 
-#: src/translations.h:63
+#: src/translations.h:75
 msgid "Ariel"
 msgstr "Ariel"
 
-#: src/translations.h:185
+#: src/translations.h:210
 msgid "Arrow down to load list."
 msgstr "Hae lista alanuolella."
 
@@ -203,7 +216,7 @@ msgid "Art brightness: "
 msgstr "Kuvien voimakkuus: "
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:73
+#: src/translations.h:98
 msgid "Astraea"
 msgstr "Astraea"
 
@@ -240,7 +253,7 @@ msgstr "Automaattinen loitonnus palauttaa aloituskatselusuunnan"
 msgid "Az/Alt: %1/%2"
 msgstr "Atsim./Kork.: %1/%2"
 
-#: src/translations.h:164
+#: src/translations.h:189
 msgid "Azimuthal Grid"
 msgstr "Atsimuuttiasteikko"
 
@@ -248,11 +261,11 @@ msgstr "Atsimuuttiasteikko"
 msgid "Azimuthal grid"
 msgstr "Atsimutaaliasteikko"
 
-#: src/translations.h:103
+#: src/translations.h:128
 msgid "Aztec"
 msgstr "Asteekkien"
 
-#: src/translations.h:183
+#: src/translations.h:208
 msgid "CD/DVD Script: "
 msgstr "CD/DVD-komentosarja: "
 
@@ -264,7 +277,7 @@ msgstr "CTRL + napsauta vasemmalla"
 msgid "CTRL + Up/Down"
 msgstr "CTRL + Ylös/alas"
 
-#: src/translations.h:136
+#: src/translations.h:161
 msgid "Calendar"
 msgstr "Kalenteri"
 
@@ -276,13 +289,18 @@ msgstr "Kallisto"
 msgid "Cancel"
 msgstr "Hylkää"
 
-#: src/translations.h:159
+#: src/translations.h:184
 msgid "Cardinal Points"
 msgstr "Ilmansuunnat"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1037
 msgid "Cardinal points"
 msgstr "Ilmansuunnat"
+
+#: src/translations.h:56
+#, fuzzy
+msgid "Carme"
+msgstr "Ceres"
 
 #: src/ui_viewDialog.h:1030
 msgid "Celestial Sphere"
@@ -296,16 +314,16 @@ msgstr "Keskitä valittuun kohteeseen"
 msgid "Ceres"
 msgstr "Ceres"
 
-#: src/translations.h:68
+#: src/translations.h:80
 msgid "Charon"
 msgstr "Kharon"
 
-#: src/translations.h:104
+#: src/translations.h:129
 msgid "Chinese"
 msgstr "Kiinalainen"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:89
+#: src/translations.h:114
 msgid "Chiron"
 msgstr "Chiron"
 
@@ -325,7 +343,7 @@ msgstr "Sulje ikkuna komentosarjaa suoritettaessa"
 msgid "Cluster associated with nebulosity"
 msgstr "Tähtijoukko ja -sumu"
 
-#: src/translations.h:123
+#: src/translations.h:148
 msgid "Colors "
 msgstr "Värit "
 
@@ -345,19 +363,19 @@ msgstr "Asetukset"
 msgid "Configuration window"
 msgstr "Asetusikkuna"
 
-#: src/translations.h:157
+#: src/translations.h:182
 msgid "Constellation Art Intensity"
 msgstr "Tähdistökuvien voimakkuus"
 
-#: src/translations.h:158
+#: src/translations.h:183
 msgid "Constellation Boundaries"
 msgstr "Tähdistöjen rajat"
 
-#: src/translations.h:155
+#: src/translations.h:180
 msgid "Constellation Lines"
 msgstr "Tähtikuvioviivat"
 
-#: src/translations.h:156
+#: src/translations.h:181
 msgid "Constellation Names"
 msgstr "Tähdistöjen nimet"
 
@@ -389,7 +407,7 @@ msgstr "Yhteystieto"
 msgid "Control"
 msgstr "Hallinta"
 
-#: src/translations.h:180
+#: src/translations.h:205
 msgid "Correct for light travel time: "
 msgstr "Korjaa valon matka-aika: "
 
@@ -401,7 +419,7 @@ msgstr "Maa:"
 msgid "Current location information"
 msgstr "Nykyisen paikkakunnan tiedot"
 
-#: src/translations.h:179
+#: src/translations.h:204
 msgid "Cursor Timeout: "
 msgstr "Kohdistimen aikakatkaisu: "
 
@@ -409,7 +427,7 @@ msgstr "Kohdistimen aikakatkaisu: "
 msgid "Cylinder"
 msgstr "Lieriö"
 
-#: src/translations.h:143
+#: src/translations.h:168
 msgid "Date Display Format: "
 msgstr "Päiväyksen muoto: "
 
@@ -421,7 +439,7 @@ msgstr "Päivays ja aika"
 msgid "Date/time window"
 msgstr "Päiväys/aika-ikkuna"
 
-#: src/translations.h:135
+#: src/translations.h:160
 msgid "Day keys: "
 msgstr "Päivänäppäimet: "
 
@@ -445,6 +463,10 @@ msgstr "Deimos"
 msgid "Delete"
 msgstr "Poista"
 
+#: src/translations.h:86
+msgid "Despina"
+msgstr ""
+
 #: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
 #: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
 #, qt-format
@@ -459,7 +481,7 @@ msgstr "Kehittäjät"
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Heikennä himmeitä tähtiä, jos hyvin kirkas kohde on näkyvissä"
 
-#: src/translations.h:54
+#: src/translations.h:66
 msgid "Dione"
 msgstr "Dione"
 
@@ -530,7 +552,7 @@ msgstr ""
 msgid "Dynamic eye adaptation"
 msgstr "Dynaaminen silmän sopeutuminen"
 
-#: src/translations.h:99
+#: src/translations.h:124
 msgid "E"
 msgstr "I"
 
@@ -542,7 +564,7 @@ msgstr "Maa"
 msgid "Ecliptic"
 msgstr "Ekliptika"
 
-#: src/translations.h:167
+#: src/translations.h:192
 msgid "Ecliptic Line"
 msgstr "Ekliptika"
 
@@ -550,13 +572,18 @@ msgstr "Ekliptika"
 msgid "Ecliptic line"
 msgstr "Ekliptika"
 
-#: src/translations.h:124
+#: src/translations.h:149
 msgid "Effects "
 msgstr "Tehosteet "
 
-#: src/translations.h:105
+#: src/translations.h:130
 msgid "Egyptian"
 msgstr "Egyptiläinen"
+
+#: src/translations.h:52
+#, fuzzy
+msgid "Elara"
+msgstr "Maa"
 
 #: src/ui_configurationDialog.h:786
 msgid "Enable keyboard navigation"
@@ -566,7 +593,7 @@ msgstr "Salli liikkuminen näppäimistöllä"
 msgid "Enable mouse navigation"
 msgstr "Salli hiirellä liikkuminen"
 
-#: src/translations.h:52
+#: src/translations.h:64
 msgid "Enceladus"
 msgstr "Enceladus"
 
@@ -582,7 +609,7 @@ msgstr "Oikeapintainen"
 msgid "Equator"
 msgstr "Ekvaattori"
 
-#: src/translations.h:166
+#: src/translations.h:191
 msgid "Equator Line"
 msgstr "Ekvaattori"
 
@@ -590,7 +617,7 @@ msgstr "Ekvaattori"
 msgid "Equator line"
 msgstr "Ekvaattori"
 
-#: src/translations.h:165
+#: src/translations.h:190
 msgid "Equatorial Grid"
 msgstr "Ekvatoriaaliasteikko"
 
@@ -602,12 +629,12 @@ msgstr "Ekvatoriaaliasteikko (J2000)"
 msgid "Equatorial grid"
 msgstr "Ekvatoriaaliasteikko"
 
-#: src/translations.h:69
+#: src/translations.h:81
 msgid "Eris"
 msgstr "Eris"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:91
+#: src/translations.h:116
 msgid "Eros"
 msgstr "Eros"
 
@@ -675,7 +702,7 @@ msgid "Flip scene vertically"
 msgstr "Peilaa pystysuunnassa"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:79
+#: src/translations.h:104
 msgid "Flora"
 msgstr "Flora"
 
@@ -695,6 +722,11 @@ msgstr "Lisälukemista"
 msgid "Galactic grid"
 msgstr "Galaktinen asteikko"
 
+#: src/translations.h:87
+#, fuzzy
+msgid "Galatea"
+msgstr "Galaksi"
+
 #: src/core/modules/Nebula.cpp:269
 msgid "Galaxy"
 msgstr "Galaksi"
@@ -703,7 +735,7 @@ msgstr "Galaksi"
 msgid "Ganymede"
 msgstr "Ganymedes"
 
-#: src/translations.h:121
+#: src/translations.h:146
 msgid "General "
 msgstr "Yleistä "
 
@@ -733,17 +765,22 @@ msgstr "\"Gravitaatio\"nimet"
 msgid "Ground"
 msgstr "Maanpinta"
 
+#: src/translations.h:90
+#, fuzzy
+msgid "Halimede"
+msgstr "Ganymedes"
+
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
 msgstr "Hammer-Aitoff"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:75
+#: src/translations.h:100
 msgid "Hebe"
 msgstr "Hebe"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:93
+#: src/translations.h:118
 msgid "Hektor"
 msgstr "Hektor"
 
@@ -767,6 +804,10 @@ msgstr "Piilota hiiren osoitin ei-aktiivisessa tilassa"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Suurin tunnettu aktiivisuus (1966 leonidit)"
 
+#: src/translations.h:51
+msgid "Himalia"
+msgstr ""
+
 #: src/core/StelObject.cpp:80
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
@@ -777,15 +818,15 @@ msgid "Hourly zenith rate:"
 msgstr "Aktiivisuus tunnissa zeniitissä:"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:83
+#: src/translations.h:108
 msgid "Hygiea"
 msgstr "Hygiea"
 
-#: src/translations.h:57
+#: src/translations.h:69
 msgid "Hyperion"
 msgstr "Hyperion"
 
-#: src/translations.h:58
+#: src/translations.h:70
 msgid "Iapetus"
 msgstr "Japetus"
 
@@ -813,7 +854,7 @@ msgstr "Nopeuta aikaa (hiukan)"
 msgid "Install a new landscape from a ZIP archive..."
 msgstr "Asenna uusi maisema ZIP-arkistosta..."
 
-#: src/translations.h:106
+#: src/translations.h:131
 msgid "Inuit"
 msgstr "Inuiittien"
 
@@ -826,7 +867,7 @@ msgid "Io"
 msgstr "Io"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:77
+#: src/translations.h:102
 msgid "Iris"
 msgstr "Iris"
 
@@ -846,7 +887,7 @@ msgstr ""
 msgid "Keys"
 msgstr "Näppäimet"
 
-#: src/translations.h:107
+#: src/translations.h:132
 msgid "Korean"
 msgstr "Korealainen"
 
@@ -854,7 +895,7 @@ msgstr "Korealainen"
 msgid "Labels and Markers"
 msgstr "Nimet ja osoittimet"
 
-#: src/translations.h:108
+#: src/translations.h:133
 msgid "Lakota"
 msgstr "Lakotien"
 
@@ -872,17 +913,29 @@ msgstr "Maisema \"%1\" on asennettu onnistuneesti."
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "Maisema \"%1\" on poistettu onnistuneesti."
 
-#: src/translations.h:172
+#: src/translations.h:197
 msgid "Landscape: "
 msgstr "Maisema: "
+
+#: src/translations.h:93
+msgid "Laomedeia"
+msgstr ""
+
+#: src/translations.h:88
+msgid "Larissa"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:395
 msgid "Latitude:"
 msgstr "Leveys:"
 
-#: src/translations.h:128
+#: src/translations.h:153
 msgid "Latitude: "
 msgstr "Leveys: "
+
+#: src/translations.h:58
+msgid "Leda"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:56
 msgid "Left click"
@@ -892,7 +945,7 @@ msgstr "Napsauta vasemmalla"
 msgid "License"
 msgstr "Lisenssi"
 
-#: src/translations.h:171
+#: src/translations.h:196
 msgid "Light Pollution Luminance: "
 msgstr "Valosaasteen voimakkuus: "
 
@@ -900,11 +953,11 @@ msgstr "Valosaasteen voimakkuus: "
 msgid "Light pollution: "
 msgstr "Valosaaste: "
 
-#: src/translations.h:153
+#: src/translations.h:178
 msgid "Limiting Magnitude: "
 msgstr "Rajamagnitudi: "
 
-#: src/translations.h:188
+#: src/translations.h:213
 msgid "Load Default Configuration: "
 msgstr "Hae oletusasetukset: "
 
@@ -912,7 +965,7 @@ msgstr "Hae oletusasetukset: "
 msgid "Load at startup"
 msgstr "Lataa käynnistettäessä"
 
-#: src/translations.h:182
+#: src/translations.h:207
 msgid "Local Script: "
 msgstr "Paikallinen komentosarja: "
 
@@ -936,15 +989,19 @@ msgstr "Loki"
 msgid "Longitude:"
 msgstr "Pituus:"
 
-#: src/translations.h:129
+#: src/translations.h:154
 msgid "Longitude: "
 msgstr "Pituus: "
 
-#: src/translations.h:175
+#: src/translations.h:55
+msgid "Lysithea"
+msgstr ""
+
+#: src/translations.h:200
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Magnitudimittakaavan kerroin: "
 
-#: src/translations.h:150
+#: src/translations.h:175
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Magnitudin kokokerroin: "
 
@@ -962,11 +1019,11 @@ msgstr "Magnitudi: <b>%1</b> (B-V: %2)"
 msgid "Main"
 msgstr "Pää"
 
-#: src/translations.h:173
+#: src/translations.h:198
 msgid "Manual zoom: "
 msgstr "Käsisuurennus: "
 
-#: src/translations.h:109
+#: src/translations.h:134
 msgid "Maori"
 msgstr "Maorien"
 
@@ -986,11 +1043,11 @@ msgstr "Peitä päänäkymästä kaikki keskusympyrän ulkopuolinen"
 msgid "Maximum FOV: "
 msgstr "Maksiminäköknettä: "
 
-#: src/translations.h:151
+#: src/translations.h:176
 msgid "Maximum Magnitude to Label: "
 msgstr "Maksimimagnitudi nimelle: "
 
-#: src/translations.h:177
+#: src/translations.h:202
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Maksimimagnitudi tähtisumujen nimille: "
 
@@ -1006,7 +1063,7 @@ msgstr "Merkurius"
 msgid "Meridian"
 msgstr "Meridiaani"
 
-#: src/translations.h:163
+#: src/translations.h:188
 msgid "Meridian Line"
 msgstr "Meridiaaniviiva"
 
@@ -1015,19 +1072,19 @@ msgid "Meridian line"
 msgstr "Meridiaaniviiva"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:81
+#: src/translations.h:61 src/translations.h:106
 msgid "Metis"
 msgstr "Metis"
 
-#: src/translations.h:176
+#: src/translations.h:201
 msgid "Milky Way intensity: "
 msgstr "Linnunradan voimakkuus: "
 
-#: src/translations.h:51
+#: src/translations.h:63
 msgid "Mimas"
 msgstr "Mimas"
 
-#: src/translations.h:62
+#: src/translations.h:74
 msgid "Miranda"
 msgstr "Miranda"
 
@@ -1062,15 +1119,19 @@ msgstr ""
 msgid "Movement and Selection"
 msgstr "Liikkuminen ja valinta"
 
-#: src/translations.h:97
+#: src/translations.h:122
 msgid "N"
 msgstr "P"
+
+#: src/translations.h:84
+msgid "Naiad"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:408
 msgid "Name/City:"
 msgstr "Nimi/kaupunki:"
 
-#: src/translations.h:110
+#: src/translations.h:135
 msgid "Navajo"
 msgstr "Navajojen"
 
@@ -1082,11 +1143,11 @@ msgstr "Siirtyminen"
 msgid "Nebula"
 msgstr "Tähtisumu"
 
-#: src/translations.h:169
+#: src/translations.h:194
 msgid "Nebula Circles"
 msgstr "Tähtisumujen ympyrät"
 
-#: src/translations.h:168
+#: src/translations.h:193
 msgid "Nebula Names"
 msgstr "Tähtisumujen nimet"
 
@@ -1098,9 +1159,17 @@ msgstr "Tähtisumut"
 msgid "Nebulas background images"
 msgstr "Tähtisumujen taustakuvat"
 
-#: src/translations.h:60
+#: src/translations.h:72
 msgid "Neptune"
 msgstr "Neptunus"
+
+#: src/translations.h:83
+msgid "Nereid"
+msgstr ""
+
+#: src/translations.h:94
+msgid "Neso"
+msgstr ""
 
 #: src/gui/LocationDialog.cpp:332
 msgid "New Location"
@@ -1133,7 +1202,7 @@ msgstr "Ei tietoja"
 msgid "Normal rate"
 msgstr "Normaali aktiivisuus"
 
-#: src/translations.h:111
+#: src/translations.h:136
 msgid "Norse"
 msgstr "Muinaisnorjalainen"
 
@@ -1142,11 +1211,11 @@ msgstr "Muinaisnorjalainen"
 msgid "OSX Developer: %1"
 msgstr "OSX-kehittäjä: %1"
 
-#: src/translations.h:66
+#: src/translations.h:78
 msgid "Oberon"
 msgstr "Oberon"
 
-#: src/translations.h:174
+#: src/translations.h:199
 msgid "Object Sizing Rule: "
 msgstr "Kohteen koon sääntö: "
 
@@ -1208,6 +1277,10 @@ msgstr "Pyöritä näkymää taivaan ympäri"
 msgid "Parallax: %1\""
 msgstr "Parallaksi: %1\""
 
+#: src/translations.h:53
+msgid "Pasiphae"
+msgstr ""
+
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
 msgstr "Perspektiivi"
@@ -1224,19 +1297,19 @@ msgstr ""
 msgid "Phobos"
 msgstr "Phobos"
 
-#: src/translations.h:59
+#: src/translations.h:71
 msgid "Phoebe"
 msgstr "Phoebe"
 
-#: src/translations.h:160
+#: src/translations.h:185
 msgid "Planet Names"
 msgstr "Planeettojen nimet"
 
-#: src/translations.h:161
+#: src/translations.h:186
 msgid "Planet Orbits"
 msgstr "Planeettojen radat"
 
-#: src/translations.h:162
+#: src/translations.h:187
 msgid "Planet Trails"
 msgstr "Planeettojen reitit"
 
@@ -1294,11 +1367,11 @@ msgstr ""
 msgid "Plugins"
 msgstr "Lisäosat"
 
-#: src/translations.h:67
+#: src/translations.h:79
 msgid "Pluto"
 msgstr "Pluto"
 
-#: src/translations.h:112
+#: src/translations.h:137
 msgid "Polynesian"
 msgstr "Polynesialainen"
 
@@ -1310,11 +1383,11 @@ msgstr ""
 "Ennuste tekokuiden paikoista Maan keirtoradalla pohjautuen NORAD TLE -"
 "tiedoihin"
 
-#: src/translations.h:138
+#: src/translations.h:163
 msgid "Preset Sky Time: "
 msgstr "Esiasetettu taivaan aika: "
 
-#: src/translations.h:141
+#: src/translations.h:166
 msgid "Preset Time"
 msgstr "Esiasetettu aika"
 
@@ -1331,9 +1404,17 @@ msgstr "Projektikoordinaattori ja johtava kehittäjä: %1"
 msgid "Projection"
 msgstr "Projektio"
 
+#: src/translations.h:89
+msgid "Proteus"
+msgstr ""
+
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
 msgstr "Tarjoaa kulmanmittaustyökalun"
+
+#: src/translations.h:91
+msgid "Psamathe"
+msgstr ""
 
 #: src/gui/StelGui.cpp:171
 msgid "Quit"
@@ -1395,7 +1476,7 @@ msgstr ""
 msgid "Retry"
 msgstr "Yritä uudelleen"
 
-#: src/translations.h:55
+#: src/translations.h:67
 msgid "Rhea"
 msgstr "Rhea"
 
@@ -1415,13 +1496,17 @@ msgstr "Suorittaa komentosarjaa: "
 msgid "Running script: [none]"
 msgstr "Suorittaa komentosarjaa: [ei mitään]"
 
-#: src/translations.h:98
+#: src/translations.h:123
 msgid "S"
 msgstr "E"
 
-#: src/translations.h:113
+#: src/translations.h:138
 msgid "Sami"
 msgstr "Saame"
+
+#: src/translations.h:92
+msgid "Sao"
+msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:127
 msgid "Satellite hints"
@@ -1439,11 +1524,11 @@ msgstr "Satelliitit"
 msgid "Satellites configuration window"
 msgstr "Satelliittien asetusikkuna"
 
-#: src/translations.h:50
+#: src/translations.h:62
 msgid "Saturn"
 msgstr "Saturnus"
 
-#: src/translations.h:189
+#: src/translations.h:214
 msgid "Save Current Configuration as Default: "
 msgstr "Tallenna nykyiset asetukset oletukseksi: "
 
@@ -1483,7 +1568,7 @@ msgstr "Komentosarjan hallintaikkuna"
 msgid "Scripts"
 msgstr "Komentojonot"
 
-#: src/translations.h:125
+#: src/translations.h:150
 msgid "Scripts "
 msgstr "Komentosarjat "
 
@@ -1495,7 +1580,7 @@ msgstr "Etsintäikkuna"
 msgid "Select a ZIP archive that contains a Stellarium landscape"
 msgstr ""
 
-#: src/translations.h:186
+#: src/translations.h:211
 msgid "Select and exit to run."
 msgstr "Valitse ja poistu käynnistääksesi."
 
@@ -1515,19 +1600,19 @@ msgstr "Valitse yksittäinen tähdistö"
 msgid "Selected object information"
 msgstr "Valitun kohteen tiedot"
 
-#: src/translations.h:119
+#: src/translations.h:144
 msgid "Set Location "
 msgstr "Aseta paikkakunta "
 
-#: src/translations.h:120
+#: src/translations.h:145
 msgid "Set Time "
 msgstr "Aseta aika "
 
-#: src/translations.h:134
+#: src/translations.h:159
 msgid "Set Time Zone: "
 msgstr "Aseta aikavyöhyke: "
 
-#: src/translations.h:192
+#: src/translations.h:217
 msgid "Set UI Locale: "
 msgstr "Aseta käyttöliittymän kieli: "
 
@@ -1610,7 +1695,7 @@ msgstr "Näytä planeettojen radat"
 msgid "Show planets"
 msgstr "Näytä planeetat"
 
-#: src/translations.h:148
+#: src/translations.h:173
 msgid "Show: "
 msgstr "Näytä: "
 
@@ -1618,17 +1703,21 @@ msgstr "Näytä: "
 msgid "Shows the sky as if looking through a telescope eyepiece"
 msgstr "Näyttää taivaan kuten katsottuna kaukoputken okulaarilla"
 
-#: src/translations.h:190
+#: src/translations.h:215
 msgid "Shut Down: "
 msgstr "Sulje tietokone: "
 
-#: src/translations.h:137
+#: src/translations.h:162
 msgid "Sidereal"
 msgstr "Tähtiaika"
 
 #: src/ui_viewDialog.h:1013
 msgid "Simulate light speed"
 msgstr "Jäljittele valonnopeutta"
+
+#: src/translations.h:54
+msgid "Sinope"
+msgstr ""
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
@@ -1645,19 +1734,19 @@ msgstr "Koko: %1"
 msgid "Sky"
 msgstr "Taivas"
 
-#: src/translations.h:145
+#: src/translations.h:170
 msgid "Sky Culture: "
 msgstr "Tähtitaivaskulttuuri: "
 
-#: src/translations.h:146
+#: src/translations.h:171
 msgid "Sky Language: "
 msgstr "Tähtitaivaskieli: "
 
-#: src/translations.h:139
+#: src/translations.h:164
 msgid "Sky Time At Start-up: "
 msgstr "Taivaan aika aloitettaessa: "
 
-#: src/translations.h:133
+#: src/translations.h:158
 msgid "Sky Time: "
 msgstr "Taivaan aika: "
 
@@ -1669,7 +1758,7 @@ msgstr "Taivas- ja näyttöasetusten ikkuna"
 msgid "Slow down the script execution rate"
 msgstr "Hidasta komentosarjan suoritusnopeutta"
 
-#: src/translations.h:131
+#: src/translations.h:156
 msgid "Solar System Body: "
 msgstr "Aurinkokunnan kohde: "
 
@@ -1677,7 +1766,7 @@ msgstr "Aurinkokunnan kohde: "
 msgid "Solar System Editor"
 msgstr ""
 
-#: src/translations.h:70
+#: src/translations.h:95
 msgid "Solar System Observer"
 msgstr "Aurinkokunnan havaitsija"
 
@@ -1711,7 +1800,7 @@ msgstr ""
 msgid "Standard Perseids rate"
 msgstr "Perseidien normaaliaktiivisuus"
 
-#: src/translations.h:149
+#: src/translations.h:174
 msgid "Star Value Multiplier: "
 msgstr "Tähtien määrän kerroin: "
 
@@ -1727,7 +1816,7 @@ msgstr "Tähtitarusto"
 msgid "Stars"
 msgstr "Tähdet"
 
-#: src/translations.h:122
+#: src/translations.h:147
 msgid "Stars "
 msgstr "Tähdet "
 
@@ -1840,12 +1929,16 @@ msgstr "Järjestelmän päiväys:"
 msgid "Telescope Control"
 msgstr "Kaukoputken ohjaus"
 
-#: src/translations.h:53
+#: src/translations.h:65
 msgid "Tethys"
 msgstr "Tethys"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:79
 msgid "Text User Interface"
+msgstr ""
+
+#: src/translations.h:85
+msgid "Thalassa"
 msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:187
@@ -1920,6 +2013,11 @@ msgstr "Valittua maisemaa ei voida (täydellisesti) poistaa."
 msgid "The width of your view when Stellarium starts"
 msgstr "Näkymän leveys Stellariumin käynnistyessä"
 
+#: src/translations.h:59
+#, fuzzy
+msgid "Thebe"
+msgstr "Phoebe"
+
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
@@ -1932,7 +2030,7 @@ msgstr ""
 msgid "This system does not support OpenGL."
 msgstr "Tämä järjestelmä ei tue OpenGL-ominaisuutta."
 
-#: src/translations.h:142
+#: src/translations.h:167
 msgid "Time Display Format: "
 msgstr "Kellonajan muoto: "
 
@@ -1940,11 +2038,11 @@ msgstr "Kellonajan muoto: "
 msgid "Time Zone"
 msgstr ""
 
-#: src/translations.h:56
+#: src/translations.h:68
 msgid "Titan"
 msgstr "Titan"
 
-#: src/translations.h:65
+#: src/translations.h:77
 msgid "Titania"
 msgstr "Titania"
 
@@ -1964,7 +2062,12 @@ msgstr "Työkalut"
 msgid "Track object"
 msgstr "Seuraa kohdetta"
 
-#: src/translations.h:114
+#: src/translations.h:82
+#, fuzzy
+msgid "Triton"
+msgstr "Titan"
+
+#: src/translations.h:139
 msgid "Tupi-Guarani"
 msgstr "Tupi-guaranilainen"
 
@@ -1972,7 +2075,7 @@ msgstr "Tupi-guaranilainen"
 msgid "Twinkle:"
 msgstr "Tuikkiminen:"
 
-#: src/translations.h:152
+#: src/translations.h:177
 msgid "Twinkling: "
 msgstr "Tuikkiminen: "
 
@@ -1981,11 +2084,11 @@ msgstr "Tuikkiminen: "
 msgid "Type: <b>%1</b>"
 msgstr "Tyyppi: <b>%1</b>"
 
-#: src/translations.h:184
+#: src/translations.h:209
 msgid "USB Script: "
 msgstr "USB-komentosarja: "
 
-#: src/translations.h:64
+#: src/translations.h:76
 msgid "Umbriel"
 msgstr "Umbriel"
 
@@ -1997,11 +2100,11 @@ msgstr "Dokumentoimaton tyyppi"
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: src/translations.h:191
+#: src/translations.h:216
 msgid "Update me via Internet: "
 msgstr "Päivitä Internetin kautta: "
 
-#: src/translations.h:61
+#: src/translations.h:73
 msgid "Uranus"
 msgstr "Uranus"
 
@@ -2045,7 +2148,7 @@ msgstr "Näytä"
 msgid "Visible"
 msgstr "Näkyvä"
 
-#: src/translations.h:100
+#: src/translations.h:125
 msgid "W"
 msgstr "L"
 
@@ -2057,7 +2160,7 @@ msgstr ""
 "VAROITUS: VAlitus maiseman poistaminen tarkoittaa sen tiedostojen "
 "poistamista. Toimenpidettä ei voi peruuttaa."
 
-#: src/translations.h:115
+#: src/translations.h:140
 msgid "Western"
 msgstr "Länsimainen"
 
@@ -2096,7 +2199,7 @@ msgstr "Voit poistaa sen käsin poistamalla seuraavan hakemiston: %1"
 msgid "ZIP archives"
 msgstr "ZIP-arkisto"
 
-#: src/translations.h:178
+#: src/translations.h:203
 msgid "Zoom Duration: "
 msgstr "Suurennuksen kesto: "
 

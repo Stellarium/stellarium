@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-20 11:50-0400\n"
+"POT-Creation-Date: 2011-05-10 14:10+0700\n"
 "PO-Revision-Date: 2010-11-30 12:58+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
-"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: sk\n"
 "X-Launchpad-Export-Date: 2010-12-05 08:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
@@ -86,7 +86,7 @@ msgstr "Absolútna magnitúda: %1"
 msgid "Absolute scale:"
 msgstr "Absolútna stupnica:"
 
-#: src/translations.h:140
+#: src/translations.h:165
 msgid "Actual Time"
 msgstr "Aktuálny čas"
 
@@ -126,9 +126,14 @@ msgstr "Pridať/odstrániť terény"
 msgid "Add/remove landscapes..."
 msgstr "Pridať/odstrániť terény..."
 
-#: src/translations.h:126
+#: src/translations.h:151
 msgid "Administration "
 msgstr "Administrácia "
+
+#: src/translations.h:60
+#, fuzzy
+msgid "Adrastea"
+msgstr "Astraea"
 
 #: src/ui_configurationDialog.h:820
 msgid "Align labels with the horizon"
@@ -146,7 +151,7 @@ msgstr "Povoliť otáčanie a približovanie klávesnicou"
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "Povoliť otáčanie (ťahanie) a približovanie (kolieskom) myšou"
 
-#: src/translations.h:130
+#: src/translations.h:155
 msgid "Altitude (m): "
 msgstr "Výška (m): "
 
@@ -154,8 +159,12 @@ msgstr "Výška (m): "
 msgid "Altitude:"
 msgstr "Nadmorská výška:"
 
+#: src/translations.h:50
+msgid "Amalthea"
+msgstr ""
+
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:85
+#: src/translations.h:110
 msgid "Amor"
 msgstr ""
 
@@ -164,6 +173,10 @@ msgid ""
 "An interface for adding asteroids and comets to Stellarium. It can download "
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
+msgstr ""
+
+#: src/translations.h:57
+msgid "Ananke"
 msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
@@ -175,7 +188,7 @@ msgid "Angle measure"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:87
+#: src/translations.h:112
 msgid "Apophis"
 msgstr "Apophis"
 
@@ -184,11 +197,11 @@ msgstr "Apophis"
 msgid "Apparent diameter: %1"
 msgstr "Uhlový priemer: %1"
 
-#: src/translations.h:63
+#: src/translations.h:75
 msgid "Ariel"
 msgstr "Ariel"
 
-#: src/translations.h:185
+#: src/translations.h:210
 msgid "Arrow down to load list."
 msgstr "Zoznam sa nahrá šípkou dolu."
 
@@ -201,7 +214,7 @@ msgid "Art brightness: "
 msgstr "Jas kresieb: "
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:73
+#: src/translations.h:98
 msgid "Astraea"
 msgstr "Astraea"
 
@@ -238,7 +251,7 @@ msgstr "Automatické oddialenie nastaví počiatočný smer pohľadu"
 msgid "Az/Alt: %1/%2"
 msgstr "Azimut/výška: %1/%2"
 
-#: src/translations.h:164
+#: src/translations.h:189
 msgid "Azimuthal Grid"
 msgstr "Azimutálna sieť"
 
@@ -246,11 +259,11 @@ msgstr "Azimutálna sieť"
 msgid "Azimuthal grid"
 msgstr "Azimutálna mriežka"
 
-#: src/translations.h:103
+#: src/translations.h:128
 msgid "Aztec"
 msgstr "Aztécka"
 
-#: src/translations.h:183
+#: src/translations.h:208
 msgid "CD/DVD Script: "
 msgstr "Skript z CD/DVD: "
 
@@ -262,7 +275,7 @@ msgstr "CTRL + ľavé tlačidlo myši"
 msgid "CTRL + Up/Down"
 msgstr "CTRL + Up/Down"
 
-#: src/translations.h:136
+#: src/translations.h:161
 msgid "Calendar"
 msgstr "Kalendár"
 
@@ -274,13 +287,18 @@ msgstr "Callisto"
 msgid "Cancel"
 msgstr "Zrušiť"
 
-#: src/translations.h:159
+#: src/translations.h:184
 msgid "Cardinal Points"
 msgstr "Svetové strany"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1037
 msgid "Cardinal points"
 msgstr "Svetové strany"
+
+#: src/translations.h:56
+#, fuzzy
+msgid "Carme"
+msgstr "Ceres"
 
 #: src/ui_viewDialog.h:1030
 msgid "Celestial Sphere"
@@ -294,16 +312,16 @@ msgstr "Zacieliť na označený objekt"
 msgid "Ceres"
 msgstr "Ceres"
 
-#: src/translations.h:68
+#: src/translations.h:80
 msgid "Charon"
 msgstr "Cháron"
 
-#: src/translations.h:104
+#: src/translations.h:129
 msgid "Chinese"
 msgstr "Čínska"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:89
+#: src/translations.h:114
 msgid "Chiron"
 msgstr ""
 
@@ -323,7 +341,7 @@ msgstr "Zatvoriť okno keď je skript spustený"
 msgid "Cluster associated with nebulosity"
 msgstr "Hviezdokopa súvisiaca s hmlovinou"
 
-#: src/translations.h:123
+#: src/translations.h:148
 msgid "Colors "
 msgstr "Farby "
 
@@ -343,19 +361,19 @@ msgstr "Nastavenia"
 msgid "Configuration window"
 msgstr "Nastavenia"
 
-#: src/translations.h:157
+#: src/translations.h:182
 msgid "Constellation Art Intensity"
 msgstr "Intenzita kresieb súhvezdí"
 
-#: src/translations.h:158
+#: src/translations.h:183
 msgid "Constellation Boundaries"
 msgstr "Hranice súhvezdí"
 
-#: src/translations.h:155
+#: src/translations.h:180
 msgid "Constellation Lines"
 msgstr "Spojnice súhvezdí"
 
-#: src/translations.h:156
+#: src/translations.h:181
 msgid "Constellation Names"
 msgstr "Názvy súhvezdí"
 
@@ -387,7 +405,7 @@ msgstr "Kontakt"
 msgid "Control"
 msgstr "Ovládanie"
 
-#: src/translations.h:180
+#: src/translations.h:205
 msgid "Correct for light travel time: "
 msgstr "Oprava na rýchlosť svetla: "
 
@@ -399,7 +417,7 @@ msgstr "Štát:"
 msgid "Current location information"
 msgstr "Informácie o súčasnej zemepisnej polohe"
 
-#: src/translations.h:179
+#: src/translations.h:204
 msgid "Cursor Timeout: "
 msgstr "Miznutie kurzora (sekundy): "
 
@@ -407,7 +425,7 @@ msgstr "Miznutie kurzora (sekundy): "
 msgid "Cylinder"
 msgstr "Valcová"
 
-#: src/translations.h:143
+#: src/translations.h:168
 msgid "Date Display Format: "
 msgstr "Formát zobrazovania dátumu: "
 
@@ -419,7 +437,7 @@ msgstr "Dátum a čas"
 msgid "Date/time window"
 msgstr "Dátum a čas"
 
-#: src/translations.h:135
+#: src/translations.h:160
 msgid "Day keys: "
 msgstr "Kľúče dní: "
 
@@ -443,6 +461,10 @@ msgstr "Deimos"
 msgid "Delete"
 msgstr "Vymazať"
 
+#: src/translations.h:86
+msgid "Despina"
+msgstr ""
+
 #: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
 #: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
 #, qt-format
@@ -457,7 +479,7 @@ msgstr "Vývojári"
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Zoslabiť slabé hviezdy ak je viditeľný veľmi jasný objekt"
 
-#: src/translations.h:54
+#: src/translations.h:66
 msgid "Dione"
 msgstr "Dione"
 
@@ -528,7 +550,7 @@ msgstr ""
 msgid "Dynamic eye adaptation"
 msgstr "Adaptácia očí"
 
-#: src/translations.h:99
+#: src/translations.h:124
 msgid "E"
 msgstr "Východ"
 
@@ -540,7 +562,7 @@ msgstr "Zem"
 msgid "Ecliptic"
 msgstr "Ekliptika"
 
-#: src/translations.h:167
+#: src/translations.h:192
 msgid "Ecliptic Line"
 msgstr "Ekliptika"
 
@@ -548,13 +570,18 @@ msgstr "Ekliptika"
 msgid "Ecliptic line"
 msgstr "Ekliptika"
 
-#: src/translations.h:124
+#: src/translations.h:149
 msgid "Effects "
 msgstr "Efekty "
 
-#: src/translations.h:105
+#: src/translations.h:130
 msgid "Egyptian"
 msgstr "Egyptská"
+
+#: src/translations.h:52
+#, fuzzy
+msgid "Elara"
+msgstr "Zem"
 
 #: src/ui_configurationDialog.h:786
 msgid "Enable keyboard navigation"
@@ -564,7 +591,7 @@ msgstr "Povoliť navigáciu klávesnicou"
 msgid "Enable mouse navigation"
 msgstr "Povoliť navigáciu myšou"
 
-#: src/translations.h:52
+#: src/translations.h:64
 msgid "Enceladus"
 msgstr "Enceladus"
 
@@ -580,7 +607,7 @@ msgstr "Rovnoplošná"
 msgid "Equator"
 msgstr "Rovník"
 
-#: src/translations.h:166
+#: src/translations.h:191
 msgid "Equator Line"
 msgstr "Rovník"
 
@@ -588,7 +615,7 @@ msgstr "Rovník"
 msgid "Equator line"
 msgstr "Rovník"
 
-#: src/translations.h:165
+#: src/translations.h:190
 msgid "Equatorial Grid"
 msgstr "Ekvatoriálna sieť"
 
@@ -600,12 +627,12 @@ msgstr "Ekvatoriálna sieť (epocha J2000)"
 msgid "Equatorial grid"
 msgstr "Ekvatoriálna sieť"
 
-#: src/translations.h:69
+#: src/translations.h:81
 msgid "Eris"
 msgstr "Eris"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:91
+#: src/translations.h:116
 msgid "Eros"
 msgstr "Eros"
 
@@ -673,7 +700,7 @@ msgid "Flip scene vertically"
 msgstr "Zrkadliť vertikálne"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:79
+#: src/translations.h:104
 msgid "Flora"
 msgstr "Flora"
 
@@ -693,6 +720,11 @@ msgstr "Doplňujúce čítanie"
 msgid "Galactic grid"
 msgstr "Galaktická mriežka"
 
+#: src/translations.h:87
+#, fuzzy
+msgid "Galatea"
+msgstr "Galaxia"
+
 #: src/core/modules/Nebula.cpp:269
 msgid "Galaxy"
 msgstr "Galaxia"
@@ -701,7 +733,7 @@ msgstr "Galaxia"
 msgid "Ganymede"
 msgstr "Ganymedes"
 
-#: src/translations.h:121
+#: src/translations.h:146
 msgid "General "
 msgstr "Hlavné "
 
@@ -731,17 +763,22 @@ msgstr "Orientovať názvy"
 msgid "Ground"
 msgstr "Terén"
 
+#: src/translations.h:90
+#, fuzzy
+msgid "Halimede"
+msgstr "Ganymedes"
+
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
 msgstr "Hammer-Aitoff"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:75
+#: src/translations.h:100
 msgid "Hebe"
 msgstr "Hebe"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:93
+#: src/translations.h:118
 msgid "Hektor"
 msgstr ""
 
@@ -765,6 +802,10 @@ msgstr "Skrýva kurzor myši pri jeho nevyužití"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Najvyššia zaznamenaná aktivita (Leonidy 1966)"
 
+#: src/translations.h:51
+msgid "Himalia"
+msgstr ""
+
 #: src/core/StelObject.cpp:80
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
@@ -775,15 +816,15 @@ msgid "Hourly zenith rate:"
 msgstr "Zenitová hodinová frekvencia (ZHR):"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:83
+#: src/translations.h:108
 msgid "Hygiea"
 msgstr "Hygiea"
 
-#: src/translations.h:57
+#: src/translations.h:69
 msgid "Hyperion"
 msgstr "Hyperion"
 
-#: src/translations.h:58
+#: src/translations.h:70
 msgid "Iapetus"
 msgstr "Iapetus"
 
@@ -811,7 +852,7 @@ msgstr "Mierne zvýšiť rýchlosť plynutia času"
 msgid "Install a new landscape from a ZIP archive..."
 msgstr "Nainštalovať nový terén z archívu ZIP..."
 
-#: src/translations.h:106
+#: src/translations.h:131
 msgid "Inuit"
 msgstr "Inuitská"
 
@@ -824,7 +865,7 @@ msgid "Io"
 msgstr "Io"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:77
+#: src/translations.h:102
 msgid "Iris"
 msgstr "Iris"
 
@@ -844,7 +885,7 @@ msgstr ""
 msgid "Keys"
 msgstr "Klávesy"
 
-#: src/translations.h:107
+#: src/translations.h:132
 msgid "Korean"
 msgstr "Kórejská"
 
@@ -852,7 +893,7 @@ msgstr "Kórejská"
 msgid "Labels and Markers"
 msgstr "Názvy a značky"
 
-#: src/translations.h:108
+#: src/translations.h:133
 msgid "Lakota"
 msgstr "Indiánska - kmeň Lakota"
 
@@ -870,17 +911,29 @@ msgstr "Terén \"%1\" bol úspešne nainštalovaný."
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "Terén \"%1\" bol úspešne odstránený."
 
-#: src/translations.h:172
+#: src/translations.h:197
 msgid "Landscape: "
 msgstr "Terén: "
+
+#: src/translations.h:93
+msgid "Laomedeia"
+msgstr ""
+
+#: src/translations.h:88
+msgid "Larissa"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:395
 msgid "Latitude:"
 msgstr "Zemepisná šírka:"
 
-#: src/translations.h:128
+#: src/translations.h:153
 msgid "Latitude: "
 msgstr "Zemepisná šírka: "
+
+#: src/translations.h:58
+msgid "Leda"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:56
 msgid "Left click"
@@ -890,7 +943,7 @@ msgstr "Ľavé tlačidlo myši"
 msgid "License"
 msgstr "Licencia"
 
-#: src/translations.h:171
+#: src/translations.h:196
 msgid "Light Pollution Luminance: "
 msgstr "Jas svetelneho znečistenia: "
 
@@ -898,11 +951,11 @@ msgstr "Jas svetelneho znečistenia: "
 msgid "Light pollution: "
 msgstr "Svetelné znečistenie: "
 
-#: src/translations.h:153
+#: src/translations.h:178
 msgid "Limiting Magnitude: "
 msgstr "Limitná magnitúda: "
 
-#: src/translations.h:188
+#: src/translations.h:213
 msgid "Load Default Configuration: "
 msgstr "Nahrať predvolené nastavenie: "
 
@@ -910,7 +963,7 @@ msgstr "Nahrať predvolené nastavenie: "
 msgid "Load at startup"
 msgstr "Nahrať pri spustení"
 
-#: src/translations.h:182
+#: src/translations.h:207
 msgid "Local Script: "
 msgstr "Miestny skript: "
 
@@ -934,15 +987,19 @@ msgstr "Záznam"
 msgid "Longitude:"
 msgstr "Zemepisná dĺžka:"
 
-#: src/translations.h:129
+#: src/translations.h:154
 msgid "Longitude: "
 msgstr "Zemepisná dĺžka: "
 
-#: src/translations.h:175
+#: src/translations.h:55
+msgid "Lysithea"
+msgstr ""
+
+#: src/translations.h:200
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Faktor hviezdnej veľkosti: "
 
-#: src/translations.h:150
+#: src/translations.h:175
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Faktor hviezdnych veľkostí "
 
@@ -960,11 +1017,11 @@ msgstr "Jasnosť: <b>%1 m</b> (B-V index: %2)"
 msgid "Main"
 msgstr "Hlavné"
 
-#: src/translations.h:173
+#: src/translations.h:198
 msgid "Manual zoom: "
 msgstr "Ručné zväčšenie: "
 
-#: src/translations.h:109
+#: src/translations.h:134
 msgid "Maori"
 msgstr "Maorská"
 
@@ -984,11 +1041,11 @@ msgstr "Schová všetko mimo stredného okrúhleho zorného poľa."
 msgid "Maximum FOV: "
 msgstr "Maximálne zorné pole: "
 
-#: src/translations.h:151
+#: src/translations.h:176
 msgid "Maximum Magnitude to Label: "
 msgstr "Popisky iba do magnitúdy: "
 
-#: src/translations.h:177
+#: src/translations.h:202
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Popisky Deep-Sky objektov do magnitúdy: "
 
@@ -1004,7 +1061,7 @@ msgstr "Merkúr"
 msgid "Meridian"
 msgstr "Meridian"
 
-#: src/translations.h:163
+#: src/translations.h:188
 msgid "Meridian Line"
 msgstr "Miestny poludník"
 
@@ -1013,19 +1070,19 @@ msgid "Meridian line"
 msgstr "MIestny poludník"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:81
+#: src/translations.h:61 src/translations.h:106
 msgid "Metis"
 msgstr "Metis"
 
-#: src/translations.h:176
+#: src/translations.h:201
 msgid "Milky Way intensity: "
 msgstr "Jas Mliečnej dráhy "
 
-#: src/translations.h:51
+#: src/translations.h:63
 msgid "Mimas"
 msgstr "Mimas"
 
-#: src/translations.h:62
+#: src/translations.h:74
 msgid "Miranda"
 msgstr "Miranda"
 
@@ -1060,15 +1117,19 @@ msgstr ""
 msgid "Movement and Selection"
 msgstr "Pohyb a výber"
 
-#: src/translations.h:97
+#: src/translations.h:122
 msgid "N"
 msgstr "Sever"
+
+#: src/translations.h:84
+msgid "Naiad"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:408
 msgid "Name/City:"
 msgstr "Názov miesta:"
 
-#: src/translations.h:110
+#: src/translations.h:135
 msgid "Navajo"
 msgstr "Navaho"
 
@@ -1080,11 +1141,11 @@ msgstr "Navigácia"
 msgid "Nebula"
 msgstr "Hmlovina"
 
-#: src/translations.h:169
+#: src/translations.h:194
 msgid "Nebula Circles"
 msgstr "Značky Deep-Sky objektov"
 
-#: src/translations.h:168
+#: src/translations.h:193
 msgid "Nebula Names"
 msgstr "Názvy Deep-Sky objektov"
 
@@ -1096,9 +1157,17 @@ msgstr "Deep-Sky objekty"
 msgid "Nebulas background images"
 msgstr "Obrázky Deep-Sky objektov"
 
-#: src/translations.h:60
+#: src/translations.h:72
 msgid "Neptune"
 msgstr "Neptún"
+
+#: src/translations.h:83
+msgid "Nereid"
+msgstr ""
+
+#: src/translations.h:94
+msgid "Neso"
+msgstr ""
 
 #: src/gui/LocationDialog.cpp:332
 msgid "New Location"
@@ -1131,7 +1200,7 @@ msgstr "Žiadne"
 msgid "Normal rate"
 msgstr "Normálna frekvencia"
 
-#: src/translations.h:111
+#: src/translations.h:136
 msgid "Norse"
 msgstr "Škandinávska"
 
@@ -1140,11 +1209,11 @@ msgstr "Škandinávska"
 msgid "OSX Developer: %1"
 msgstr "Vývoj pre OSX: %1"
 
-#: src/translations.h:66
+#: src/translations.h:78
 msgid "Oberon"
 msgstr "Oberon"
 
-#: src/translations.h:174
+#: src/translations.h:199
 msgid "Object Sizing Rule: "
 msgstr "Pravidlo pre zmenu veľkosti objektu: "
 
@@ -1206,6 +1275,10 @@ msgstr "Pohyb zorného poľa po oblohe"
 msgid "Parallax: %1\""
 msgstr "Paralaxa: %1\""
 
+#: src/translations.h:53
+msgid "Pasiphae"
+msgstr ""
+
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
 msgstr "Perspektívna"
@@ -1222,19 +1295,19 @@ msgstr ""
 msgid "Phobos"
 msgstr "Fobos"
 
-#: src/translations.h:59
+#: src/translations.h:71
 msgid "Phoebe"
 msgstr "Phoebe"
 
-#: src/translations.h:160
+#: src/translations.h:185
 msgid "Planet Names"
 msgstr "Názvy planét"
 
-#: src/translations.h:161
+#: src/translations.h:186
 msgid "Planet Orbits"
 msgstr "Dráhy planét"
 
-#: src/translations.h:162
+#: src/translations.h:187
 msgid "Planet Trails"
 msgstr "Stopy planét"
 
@@ -1292,11 +1365,11 @@ msgstr ""
 msgid "Plugins"
 msgstr "Moduly"
 
-#: src/translations.h:67
+#: src/translations.h:79
 msgid "Pluto"
 msgstr "Pluto"
 
-#: src/translations.h:112
+#: src/translations.h:137
 msgid "Polynesian"
 msgstr "Polynézska"
 
@@ -1306,11 +1379,11 @@ msgid ""
 "TLE data"
 msgstr ""
 
-#: src/translations.h:138
+#: src/translations.h:163
 msgid "Preset Sky Time: "
 msgstr "Prednastavený čas oblohy: "
 
-#: src/translations.h:141
+#: src/translations.h:166
 msgid "Preset Time"
 msgstr "Prednastaviť čas"
 
@@ -1327,8 +1400,16 @@ msgstr "Koordinátor projektu a vedúci vývojár: %1"
 msgid "Projection"
 msgstr "Projekcia"
 
+#: src/translations.h:89
+msgid "Proteus"
+msgstr ""
+
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
+msgstr ""
+
+#: src/translations.h:91
+msgid "Psamathe"
 msgstr ""
 
 #: src/gui/StelGui.cpp:171
@@ -1390,7 +1471,7 @@ msgstr ""
 msgid "Retry"
 msgstr "Skúsiť znovu"
 
-#: src/translations.h:55
+#: src/translations.h:67
 msgid "Rhea"
 msgstr "Rhea"
 
@@ -1410,13 +1491,17 @@ msgstr "Spustený skript: "
 msgid "Running script: [none]"
 msgstr "Spustený skript: [žiadny]"
 
-#: src/translations.h:98
+#: src/translations.h:123
 msgid "S"
 msgstr "Juh"
 
-#: src/translations.h:113
+#: src/translations.h:138
 msgid "Sami"
 msgstr "Laponská (Saami)"
+
+#: src/translations.h:92
+msgid "Sao"
+msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:127
 msgid "Satellite hints"
@@ -1434,11 +1519,11 @@ msgstr ""
 msgid "Satellites configuration window"
 msgstr ""
 
-#: src/translations.h:50
+#: src/translations.h:62
 msgid "Saturn"
 msgstr "Saturn"
 
-#: src/translations.h:189
+#: src/translations.h:214
 msgid "Save Current Configuration as Default: "
 msgstr "Uložiť aktuálne nastavenie ako predvolené: "
 
@@ -1478,7 +1563,7 @@ msgstr "Konzolové okno skriptu"
 msgid "Scripts"
 msgstr "Skripty"
 
-#: src/translations.h:125
+#: src/translations.h:150
 msgid "Scripts "
 msgstr "Skripty "
 
@@ -1490,7 +1575,7 @@ msgstr "Vyhľadávanie"
 msgid "Select a ZIP archive that contains a Stellarium landscape"
 msgstr "Vyberte archív ZIP, v ktorom sa nachádza terén"
 
-#: src/translations.h:186
+#: src/translations.h:211
 msgid "Select and exit to run."
 msgstr "Spustíte vybratím a ukončením."
 
@@ -1510,19 +1595,19 @@ msgstr "Vybrať jediné súhvezdie"
 msgid "Selected object information"
 msgstr "Informácie o vybranom objekte"
 
-#: src/translations.h:119
+#: src/translations.h:144
 msgid "Set Location "
 msgstr "Zadajte polohu "
 
-#: src/translations.h:120
+#: src/translations.h:145
 msgid "Set Time "
 msgstr "Nastavte čas "
 
-#: src/translations.h:134
+#: src/translations.h:159
 msgid "Set Time Zone: "
 msgstr "Nastaviť časové pásmo: "
 
-#: src/translations.h:192
+#: src/translations.h:217
 msgid "Set UI Locale: "
 msgstr "Nastavenie jazyka aplikácie: "
 
@@ -1606,7 +1691,7 @@ msgstr "Zobraziť dráhy planét"
 msgid "Show planets"
 msgstr "Zobraziť planéty"
 
-#: src/translations.h:148
+#: src/translations.h:173
 msgid "Show: "
 msgstr "Ukázať: "
 
@@ -1614,17 +1699,21 @@ msgstr "Ukázať: "
 msgid "Shows the sky as if looking through a telescope eyepiece"
 msgstr ""
 
-#: src/translations.h:190
+#: src/translations.h:215
 msgid "Shut Down: "
 msgstr "Vypnúť: "
 
-#: src/translations.h:137
+#: src/translations.h:162
 msgid "Sidereal"
 msgstr "Siderický"
 
 #: src/ui_viewDialog.h:1013
 msgid "Simulate light speed"
 msgstr "Simulovať rýchlosť svetla"
+
+#: src/translations.h:54
+msgid "Sinope"
+msgstr ""
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
@@ -1641,19 +1730,19 @@ msgstr "Uhlový priemer: %1"
 msgid "Sky"
 msgstr "Obloha"
 
-#: src/translations.h:145
+#: src/translations.h:170
 msgid "Sky Culture: "
 msgstr "Kultúra (týka sa súhvezdí): "
 
-#: src/translations.h:146
+#: src/translations.h:171
 msgid "Sky Language: "
 msgstr "Jazyk popisu oblohy: "
 
-#: src/translations.h:139
+#: src/translations.h:164
 msgid "Sky Time At Start-up: "
 msgstr "Čas oblohy pri spustení: "
 
-#: src/translations.h:133
+#: src/translations.h:158
 msgid "Sky Time: "
 msgstr "Čas na oblohe: "
 
@@ -1665,7 +1754,7 @@ msgstr "Zobrazovanie objektov, a vlastnosti zobrazovania"
 msgid "Slow down the script execution rate"
 msgstr "Znížiť rýchlosť behu skriptu"
 
-#: src/translations.h:131
+#: src/translations.h:156
 msgid "Solar System Body: "
 msgstr "Teleso Slnečnej sústavy: "
 
@@ -1673,7 +1762,7 @@ msgstr "Teleso Slnečnej sústavy: "
 msgid "Solar System Editor"
 msgstr ""
 
-#: src/translations.h:70
+#: src/translations.h:95
 msgid "Solar System Observer"
 msgstr "Pozorovateľ Slnečnej sústavy"
 
@@ -1707,7 +1796,7 @@ msgstr ""
 msgid "Standard Perseids rate"
 msgstr "Bežná frekvencia Perzeíd"
 
-#: src/translations.h:149
+#: src/translations.h:174
 msgid "Star Value Multiplier: "
 msgstr "Faktor jasu hviezd "
 
@@ -1723,7 +1812,7 @@ msgstr "Mytológia"
 msgid "Stars"
 msgstr "Hviezdy"
 
-#: src/translations.h:122
+#: src/translations.h:147
 msgid "Stars "
 msgstr "Hviezdy "
 
@@ -1835,12 +1924,16 @@ msgstr "Systémový dátum o:"
 msgid "Telescope Control"
 msgstr "Ovládanie teleskopu"
 
-#: src/translations.h:53
+#: src/translations.h:65
 msgid "Tethys"
 msgstr "Tethys"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:79
 msgid "Text User Interface"
+msgstr ""
+
+#: src/translations.h:85
+msgid "Thalassa"
 msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:187
@@ -1914,6 +2007,11 @@ msgstr "Vybraný terén nie je možné (úplne) odstrániť."
 msgid "The width of your view when Stellarium starts"
 msgstr "Šírka vášho pohľadu pri spustení Stellaria"
 
+#: src/translations.h:59
+#, fuzzy
+msgid "Thebe"
+msgstr "Phoebe"
+
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
@@ -1924,7 +2022,7 @@ msgstr ""
 msgid "This system does not support OpenGL."
 msgstr "Tento systém nepodporuje OpenGL."
 
-#: src/translations.h:142
+#: src/translations.h:167
 msgid "Time Display Format: "
 msgstr "Formát zobrazovania času: "
 
@@ -1932,11 +2030,11 @@ msgstr "Formát zobrazovania času: "
 msgid "Time Zone"
 msgstr ""
 
-#: src/translations.h:56
+#: src/translations.h:68
 msgid "Titan"
 msgstr "Titan"
 
-#: src/translations.h:65
+#: src/translations.h:77
 msgid "Titania"
 msgstr "Titania"
 
@@ -1956,7 +2054,12 @@ msgstr "Ostatné"
 msgid "Track object"
 msgstr "Sledovať objekt"
 
-#: src/translations.h:114
+#: src/translations.h:82
+#, fuzzy
+msgid "Triton"
+msgstr "Titan"
+
+#: src/translations.h:139
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
@@ -1964,7 +2067,7 @@ msgstr "Tupi-Guarani"
 msgid "Twinkle:"
 msgstr "Mihotanie:"
 
-#: src/translations.h:152
+#: src/translations.h:177
 msgid "Twinkling: "
 msgstr "Mihotanie: "
 
@@ -1973,11 +2076,11 @@ msgstr "Mihotanie: "
 msgid "Type: <b>%1</b>"
 msgstr "Druh: <b>%1</b>"
 
-#: src/translations.h:184
+#: src/translations.h:209
 msgid "USB Script: "
 msgstr "Skript z USB: "
 
-#: src/translations.h:64
+#: src/translations.h:76
 msgid "Umbriel"
 msgstr "Umbriel"
 
@@ -1989,11 +2092,11 @@ msgstr "Nedokumentovaný typ"
 msgid "Unknown"
 msgstr "Neznámy"
 
-#: src/translations.h:191
+#: src/translations.h:216
 msgid "Update me via Internet: "
 msgstr "Aktualizovať cez internet: "
 
-#: src/translations.h:61
+#: src/translations.h:73
 msgid "Uranus"
 msgstr "Urán"
 
@@ -2037,7 +2140,7 @@ msgstr "Zobrazovanie"
 msgid "Visible"
 msgstr "Viditeľný"
 
-#: src/translations.h:100
+#: src/translations.h:125
 msgid "W"
 msgstr "Západ"
 
@@ -2049,7 +2152,7 @@ msgstr ""
 "VAROVANIE: Odstránenie vybraného terénu znamená vymazanie zdrojových "
 "súborov. Táto operácia je nevratná."
 
-#: src/translations.h:115
+#: src/translations.h:140
 msgid "Western"
 msgstr "Západná"
 
@@ -2087,7 +2190,7 @@ msgstr "Môžete ho odstrániť manuálne vymazaním adresára: %1"
 msgid "ZIP archives"
 msgstr "archívy ZIP"
 
-#: src/translations.h:178
+#: src/translations.h:203
 msgid "Zoom Duration: "
 msgstr "Čas potrebný na zväčšenie: "
 
