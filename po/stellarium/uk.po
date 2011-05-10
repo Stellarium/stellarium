@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-10 14:10+0700\n"
+"POT-Creation-Date: 2011-04-20 11:50-0400\n"
 "PO-Revision-Date: 2010-11-20 06:11+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: uk\n"
 "X-Launchpad-Export-Date: 2010-12-05 08:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: UKRAINE\n"
@@ -94,7 +94,7 @@ msgstr "Абсолютна зіркова величина: %1"
 msgid "Absolute scale:"
 msgstr "Абсолютна шкала:"
 
-#: src/translations.h:165
+#: src/translations.h:140
 msgid "Actual Time"
 msgstr "Поточний час"
 
@@ -134,14 +134,9 @@ msgstr "Додавання/Вилучення ландшафтів"
 msgid "Add/remove landscapes..."
 msgstr "Додати/Вилучити ландшафти…"
 
-#: src/translations.h:151
+#: src/translations.h:126
 msgid "Administration "
 msgstr "Управління "
-
-#: src/translations.h:60
-#, fuzzy
-msgid "Adrastea"
-msgstr "Астрея"
 
 #: src/ui_configurationDialog.h:820
 msgid "Align labels with the horizon"
@@ -159,7 +154,7 @@ msgstr "Дозволити використовувати клавіатуру �
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "Дозволити перетягування та масштабування з допомогою мишки"
 
-#: src/translations.h:155
+#: src/translations.h:130
 msgid "Altitude (m): "
 msgstr "Висота (у м): "
 
@@ -167,12 +162,8 @@ msgstr "Висота (у м): "
 msgid "Altitude:"
 msgstr "Висота:"
 
-#: src/translations.h:50
-msgid "Amalthea"
-msgstr ""
-
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:110
+#: src/translations.h:85
 msgid "Amor"
 msgstr "Амур"
 
@@ -187,10 +178,6 @@ msgstr ""
 "дослідження малих планет та виконання пошуку у базі даних цього центру. "
 "Розробку додатка ще не завершено."
 
-#: src/translations.h:57
-msgid "Ananke"
-msgstr ""
-
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
 msgstr "Вимірювання кутів"
@@ -200,7 +187,7 @@ msgid "Angle measure"
 msgstr "Вимірювання кутів"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:112
+#: src/translations.h:87
 msgid "Apophis"
 msgstr "Апофіс"
 
@@ -209,11 +196,11 @@ msgstr "Апофіс"
 msgid "Apparent diameter: %1"
 msgstr "Видимий діаметр: %1"
 
-#: src/translations.h:75
+#: src/translations.h:63
 msgid "Ariel"
 msgstr "Аріель"
 
-#: src/translations.h:210
+#: src/translations.h:185
 msgid "Arrow down to load list."
 msgstr "Натисніть стрілку донизу для завантаження списку."
 
@@ -226,7 +213,7 @@ msgid "Art brightness: "
 msgstr "Яскравість малюнків: "
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:98
+#: src/translations.h:73
 msgid "Astraea"
 msgstr "Астрея"
 
@@ -263,7 +250,7 @@ msgstr "Автоматичне зменшення повертає початк�
 msgid "Az/Alt: %1/%2"
 msgstr "Аз/Висота: %1/%2"
 
-#: src/translations.h:189
+#: src/translations.h:164
 msgid "Azimuthal Grid"
 msgstr "Азимутальна сітка"
 
@@ -271,11 +258,11 @@ msgstr "Азимутальна сітка"
 msgid "Azimuthal grid"
 msgstr "Азимутальна сітка"
 
-#: src/translations.h:128
+#: src/translations.h:103
 msgid "Aztec"
 msgstr "Ацтецька"
 
-#: src/translations.h:208
+#: src/translations.h:183
 msgid "CD/DVD Script: "
 msgstr "Скрипт CD/DVD: "
 
@@ -287,7 +274,7 @@ msgstr "CTRL + клацання лівою кнопкою мишки"
 msgid "CTRL + Up/Down"
 msgstr "CTRL + Вверх/Вниз"
 
-#: src/translations.h:161
+#: src/translations.h:136
 msgid "Calendar"
 msgstr "Календар"
 
@@ -299,18 +286,13 @@ msgstr "Каллісто"
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: src/translations.h:184
+#: src/translations.h:159
 msgid "Cardinal Points"
 msgstr "Сторони світу"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1037
 msgid "Cardinal points"
 msgstr "Частини світу"
-
-#: src/translations.h:56
-#, fuzzy
-msgid "Carme"
-msgstr "Церера"
 
 #: src/ui_viewDialog.h:1030
 msgid "Celestial Sphere"
@@ -324,16 +306,16 @@ msgstr "Центрувати за позначеним об’єктом"
 msgid "Ceres"
 msgstr "Церера"
 
-#: src/translations.h:80
+#: src/translations.h:68
 msgid "Charon"
 msgstr "Харон"
 
-#: src/translations.h:129
+#: src/translations.h:104
 msgid "Chinese"
 msgstr "Китайська"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:114
+#: src/translations.h:89
 msgid "Chiron"
 msgstr "Хірон"
 
@@ -353,7 +335,7 @@ msgstr "Закрити вікно, коли працює скрипт"
 msgid "Cluster associated with nebulosity"
 msgstr "Зоряне скупчення, пов'язане з туманністю"
 
-#: src/translations.h:148
+#: src/translations.h:123
 msgid "Colors "
 msgstr "Кольори "
 
@@ -373,19 +355,19 @@ msgstr "Налаштування"
 msgid "Configuration window"
 msgstr "Вікно налаштування"
 
-#: src/translations.h:182
+#: src/translations.h:157
 msgid "Constellation Art Intensity"
 msgstr "Яскравість зображень сузір'їв"
 
-#: src/translations.h:183
+#: src/translations.h:158
 msgid "Constellation Boundaries"
 msgstr "Межі сузір'їв"
 
-#: src/translations.h:180
+#: src/translations.h:155
 msgid "Constellation Lines"
 msgstr "Лінії сузір'їв"
 
-#: src/translations.h:181
+#: src/translations.h:156
 msgid "Constellation Names"
 msgstr "Назви сузір'їв"
 
@@ -417,7 +399,7 @@ msgstr "Контакти"
 msgid "Control"
 msgstr "Керування"
 
-#: src/translations.h:205
+#: src/translations.h:180
 msgid "Correct for light travel time: "
 msgstr "Корекція на час поширення світла: "
 
@@ -429,7 +411,7 @@ msgstr "Країна:"
 msgid "Current location information"
 msgstr "Інформація про поточне розташування"
 
-#: src/translations.h:204
+#: src/translations.h:179
 msgid "Cursor Timeout: "
 msgstr "Затримка курсора: "
 
@@ -437,7 +419,7 @@ msgstr "Затримка курсора: "
 msgid "Cylinder"
 msgstr "Циліндр"
 
-#: src/translations.h:168
+#: src/translations.h:143
 msgid "Date Display Format: "
 msgstr "Формат показу дати: "
 
@@ -449,7 +431,7 @@ msgstr "Дата і час"
 msgid "Date/time window"
 msgstr "Вікно встановлення дати і часу"
 
-#: src/translations.h:160
+#: src/translations.h:135
 msgid "Day keys: "
 msgstr "Клавіші днів: "
 
@@ -473,10 +455,6 @@ msgstr "Деймос"
 msgid "Delete"
 msgstr "Стерти"
 
-#: src/translations.h:86
-msgid "Despina"
-msgstr ""
-
 #: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
 #: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
 #, qt-format
@@ -491,7 +469,7 @@ msgstr "Розробники"
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Робити слабкі зірки тьмянішими, якщо видимим є дуже яскравий об’єкт"
 
-#: src/translations.h:66
+#: src/translations.h:54
 msgid "Dione"
 msgstr "Діона"
 
@@ -562,7 +540,7 @@ msgstr ""
 msgid "Dynamic eye adaptation"
 msgstr "Динамічна зорова адаптація"
 
-#: src/translations.h:124
+#: src/translations.h:99
 msgid "E"
 msgstr "Сх"
 
@@ -574,7 +552,7 @@ msgstr "Земля"
 msgid "Ecliptic"
 msgstr "Екліптика"
 
-#: src/translations.h:192
+#: src/translations.h:167
 msgid "Ecliptic Line"
 msgstr "Лінія екліптики"
 
@@ -582,18 +560,13 @@ msgstr "Лінія екліптики"
 msgid "Ecliptic line"
 msgstr "Лінія екліптики"
 
-#: src/translations.h:149
+#: src/translations.h:124
 msgid "Effects "
 msgstr "Ефекти "
 
-#: src/translations.h:130
+#: src/translations.h:105
 msgid "Egyptian"
 msgstr "Єгипетська"
-
-#: src/translations.h:52
-#, fuzzy
-msgid "Elara"
-msgstr "Земля"
 
 #: src/ui_configurationDialog.h:786
 msgid "Enable keyboard navigation"
@@ -603,7 +576,7 @@ msgstr "Увімкнути навігацію з клавіатури"
 msgid "Enable mouse navigation"
 msgstr "Увімкнути навігацію мишею"
 
-#: src/translations.h:64
+#: src/translations.h:52
 msgid "Enceladus"
 msgstr "Енцелад"
 
@@ -619,7 +592,7 @@ msgstr "Рівновелика"
 msgid "Equator"
 msgstr "Екватор"
 
-#: src/translations.h:191
+#: src/translations.h:166
 msgid "Equator Line"
 msgstr "Лінія екватора"
 
@@ -627,7 +600,7 @@ msgstr "Лінія екватора"
 msgid "Equator line"
 msgstr "Лінія екватора"
 
-#: src/translations.h:190
+#: src/translations.h:165
 msgid "Equatorial Grid"
 msgstr "Екваторіальна сітка"
 
@@ -639,12 +612,12 @@ msgstr "Екваторіальна сітка J2000"
 msgid "Equatorial grid"
 msgstr "Екваторіальна сітка"
 
-#: src/translations.h:81
+#: src/translations.h:69
 msgid "Eris"
 msgstr "Ерида"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:116
+#: src/translations.h:91
 msgid "Eros"
 msgstr "Ерос"
 
@@ -712,7 +685,7 @@ msgid "Flip scene vertically"
 msgstr "Повернути вертикально"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:104
+#: src/translations.h:79
 msgid "Flora"
 msgstr "Флора"
 
@@ -732,11 +705,6 @@ msgstr "Подальше читання"
 msgid "Galactic grid"
 msgstr "Галактична сітка"
 
-#: src/translations.h:87
-#, fuzzy
-msgid "Galatea"
-msgstr "Галактика"
-
 #: src/core/modules/Nebula.cpp:269
 msgid "Galaxy"
 msgstr "Галактика"
@@ -745,7 +713,7 @@ msgstr "Галактика"
 msgid "Ganymede"
 msgstr "Ганімед"
 
-#: src/translations.h:146
+#: src/translations.h:121
 msgid "General "
 msgstr "Загальне "
 
@@ -775,22 +743,17 @@ msgstr "Позначки з тяжінням"
 msgid "Ground"
 msgstr "Земля"
 
-#: src/translations.h:90
-#, fuzzy
-msgid "Halimede"
-msgstr "Ганімед"
-
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
 msgstr "Гаммера-Аїтова"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:100
+#: src/translations.h:75
 msgid "Hebe"
 msgstr "Геба"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:118
+#: src/translations.h:93
 msgid "Hektor"
 msgstr "Гектор"
 
@@ -814,10 +777,6 @@ msgstr "Приховує вказівник миші, коли він неакт
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Найбільша частота (1966, Леоніди)"
 
-#: src/translations.h:51
-msgid "Himalia"
-msgstr ""
-
 #: src/core/StelObject.cpp:80
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
@@ -828,15 +787,15 @@ msgid "Hourly zenith rate:"
 msgstr "Інтенсивність метеорного потоку:"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:108
+#: src/translations.h:83
 msgid "Hygiea"
 msgstr "Гігіея"
 
-#: src/translations.h:69
+#: src/translations.h:57
 msgid "Hyperion"
 msgstr "Гіперіон"
 
-#: src/translations.h:70
+#: src/translations.h:58
 msgid "Iapetus"
 msgstr "Япет"
 
@@ -863,7 +822,7 @@ msgstr "Пришвидшити плин часу (трошки)"
 msgid "Install a new landscape from a ZIP archive..."
 msgstr "Встановити новий ландшафт з архіву ZIP…"
 
-#: src/translations.h:131
+#: src/translations.h:106
 msgid "Inuit"
 msgstr "Ескімоська"
 
@@ -876,7 +835,7 @@ msgid "Io"
 msgstr "Іо"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:102
+#: src/translations.h:77
 msgid "Iris"
 msgstr "Ірида"
 
@@ -896,7 +855,7 @@ msgstr ""
 msgid "Keys"
 msgstr "Клавіші"
 
-#: src/translations.h:132
+#: src/translations.h:107
 msgid "Korean"
 msgstr "Корейська"
 
@@ -904,7 +863,7 @@ msgstr "Корейська"
 msgid "Labels and Markers"
 msgstr "Мітки і позначки"
 
-#: src/translations.h:133
+#: src/translations.h:108
 msgid "Lakota"
 msgstr "Лакота"
 
@@ -922,29 +881,17 @@ msgstr "Ландшафт «%1» було успішно встановлено."
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "Ландшафт «%1» успішно вилучено."
 
-#: src/translations.h:197
+#: src/translations.h:172
 msgid "Landscape: "
 msgstr "Ландшафт: "
-
-#: src/translations.h:93
-msgid "Laomedeia"
-msgstr ""
-
-#: src/translations.h:88
-msgid "Larissa"
-msgstr ""
 
 #: src/ui_locationDialogGui.h:395
 msgid "Latitude:"
 msgstr "Широта:"
 
-#: src/translations.h:153
+#: src/translations.h:128
 msgid "Latitude: "
 msgstr "Широта: "
-
-#: src/translations.h:58
-msgid "Leda"
-msgstr ""
 
 #: src/gui/HelpDialog.cpp:56
 msgid "Left click"
@@ -954,7 +901,7 @@ msgstr "клацнути лівою кнопкою мишки"
 msgid "License"
 msgstr "Ліцензія"
 
-#: src/translations.h:196
+#: src/translations.h:171
 msgid "Light Pollution Luminance: "
 msgstr "Яскравість світлового забруднення: "
 
@@ -962,11 +909,11 @@ msgstr "Яскравість світлового забруднення: "
 msgid "Light pollution: "
 msgstr "Забруднення світлом: "
 
-#: src/translations.h:178
+#: src/translations.h:153
 msgid "Limiting Magnitude: "
 msgstr "Максимальна величина: "
 
-#: src/translations.h:213
+#: src/translations.h:188
 msgid "Load Default Configuration: "
 msgstr "Завантажити типові налаштування: "
 
@@ -974,7 +921,7 @@ msgstr "Завантажити типові налаштування: "
 msgid "Load at startup"
 msgstr "Завантажувати при запуску"
 
-#: src/translations.h:207
+#: src/translations.h:182
 msgid "Local Script: "
 msgstr "Локальний скрипт: "
 
@@ -998,19 +945,15 @@ msgstr "Журнал"
 msgid "Longitude:"
 msgstr "Довгота:"
 
-#: src/translations.h:154
+#: src/translations.h:129
 msgid "Longitude: "
 msgstr "Довгота: "
 
-#: src/translations.h:55
-msgid "Lysithea"
-msgstr ""
-
-#: src/translations.h:200
+#: src/translations.h:175
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Множник масштабування величин: "
 
-#: src/translations.h:175
+#: src/translations.h:150
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Множник зміни величини: "
 
@@ -1028,11 +971,11 @@ msgstr "Зоряна величина: <b>%1</b> (B-V: %2)"
 msgid "Main"
 msgstr "Основне"
 
-#: src/translations.h:198
+#: src/translations.h:173
 msgid "Manual zoom: "
 msgstr "Ручний масштаб: "
 
-#: src/translations.h:134
+#: src/translations.h:109
 msgid "Maori"
 msgstr "Маорійська"
 
@@ -1052,11 +995,11 @@ msgstr "Маскувати все поза центральним колом о�
 msgid "Maximum FOV: "
 msgstr "Максимальне поле зору: "
 
-#: src/translations.h:176
+#: src/translations.h:151
 msgid "Maximum Magnitude to Label: "
 msgstr "Максимальна величина для напису: "
 
-#: src/translations.h:202
+#: src/translations.h:177
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Максимальна величина туманності для напису: "
 
@@ -1072,7 +1015,7 @@ msgstr "Меркурій"
 msgid "Meridian"
 msgstr "Меридіан"
 
-#: src/translations.h:188
+#: src/translations.h:163
 msgid "Meridian Line"
 msgstr "Лінія меридіана"
 
@@ -1081,19 +1024,19 @@ msgid "Meridian line"
 msgstr "Лінія меридіана"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:106
+#: src/translations.h:81
 msgid "Metis"
 msgstr "Метида"
 
-#: src/translations.h:201
+#: src/translations.h:176
 msgid "Milky Way intensity: "
 msgstr "Інтенсивність Молочного шляху: "
 
-#: src/translations.h:63
+#: src/translations.h:51
 msgid "Mimas"
 msgstr "Мімас"
 
-#: src/translations.h:74
+#: src/translations.h:62
 msgid "Miranda"
 msgstr "Міранда"
 
@@ -1128,19 +1071,15 @@ msgstr "Навести телескоп %1 на точку, яка зараз п
 msgid "Movement and Selection"
 msgstr "Пересування і вибір"
 
-#: src/translations.h:122
+#: src/translations.h:97
 msgid "N"
 msgstr "Пн"
-
-#: src/translations.h:84
-msgid "Naiad"
-msgstr ""
 
 #: src/ui_locationDialogGui.h:408
 msgid "Name/City:"
 msgstr "Назва/місто:"
 
-#: src/translations.h:135
+#: src/translations.h:110
 msgid "Navajo"
 msgstr "Навахо"
 
@@ -1152,11 +1091,11 @@ msgstr "Навігація"
 msgid "Nebula"
 msgstr "Туманність"
 
-#: src/translations.h:194
+#: src/translations.h:169
 msgid "Nebula Circles"
 msgstr "Кільця туманностей"
 
-#: src/translations.h:193
+#: src/translations.h:168
 msgid "Nebula Names"
 msgstr "Назви туманностей"
 
@@ -1168,17 +1107,9 @@ msgstr "Туманності"
 msgid "Nebulas background images"
 msgstr "Зображення туманностей"
 
-#: src/translations.h:72
+#: src/translations.h:60
 msgid "Neptune"
 msgstr "Нептун"
-
-#: src/translations.h:83
-msgid "Nereid"
-msgstr ""
-
-#: src/translations.h:94
-msgid "Neso"
-msgstr ""
 
 #: src/gui/LocationDialog.cpp:332
 msgid "New Location"
@@ -1211,7 +1142,7 @@ msgstr "Нічого"
 msgid "Normal rate"
 msgstr "Нормальна частота"
 
-#: src/translations.h:136
+#: src/translations.h:111
 msgid "Norse"
 msgstr "Скандинавська"
 
@@ -1220,11 +1151,11 @@ msgstr "Скандинавська"
 msgid "OSX Developer: %1"
 msgstr "Розробник під OSX: %1"
 
-#: src/translations.h:78
+#: src/translations.h:66
 msgid "Oberon"
 msgstr "Оберон"
 
-#: src/translations.h:199
+#: src/translations.h:174
 msgid "Object Sizing Rule: "
 msgstr "Правило зміни розміру об'єкту: "
 
@@ -1286,10 +1217,6 @@ msgstr "Загальний вигляд неба"
 msgid "Parallax: %1\""
 msgstr "Паралакс: %1\""
 
-#: src/translations.h:53
-msgid "Pasiphae"
-msgstr ""
-
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
 msgstr "Перспектива"
@@ -1306,19 +1233,19 @@ msgstr ""
 msgid "Phobos"
 msgstr "Фобос"
 
-#: src/translations.h:71
+#: src/translations.h:59
 msgid "Phoebe"
 msgstr "Феба"
 
-#: src/translations.h:185
+#: src/translations.h:160
 msgid "Planet Names"
 msgstr "Назви планет"
 
-#: src/translations.h:186
+#: src/translations.h:161
 msgid "Planet Orbits"
 msgstr "Орбіти планет"
 
-#: src/translations.h:187
+#: src/translations.h:162
 msgid "Planet Trails"
 msgstr "Сліди від планет"
 
@@ -1378,11 +1305,11 @@ msgstr ""
 msgid "Plugins"
 msgstr "Додатки"
 
-#: src/translations.h:79
+#: src/translations.h:67
 msgid "Pluto"
 msgstr "Плутон"
 
-#: src/translations.h:137
+#: src/translations.h:112
 msgid "Polynesian"
 msgstr "Полінезійська"
 
@@ -1393,11 +1320,11 @@ msgid ""
 msgstr ""
 "Визначення позицій штучних супутників на орбіті Землі на основі даних NORAD"
 
-#: src/translations.h:163
+#: src/translations.h:138
 msgid "Preset Sky Time: "
 msgstr "Встановлений астрономічний час: "
 
-#: src/translations.h:166
+#: src/translations.h:141
 msgid "Preset Time"
 msgstr "Заданий час"
 
@@ -1414,17 +1341,9 @@ msgstr "Координатор проекту і основний розробн
 msgid "Projection"
 msgstr "Проекція"
 
-#: src/translations.h:89
-msgid "Proteus"
-msgstr ""
-
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
 msgstr "Інструмент вимірювання кутів"
-
-#: src/translations.h:91
-msgid "Psamathe"
-msgstr ""
 
 #: src/gui/StelGui.cpp:171
 msgid "Quit"
@@ -1486,7 +1405,7 @@ msgstr ""
 msgid "Retry"
 msgstr "Повторити"
 
-#: src/translations.h:67
+#: src/translations.h:55
 msgid "Rhea"
 msgstr "Рея"
 
@@ -1506,17 +1425,13 @@ msgstr "Запуск скрипту: "
 msgid "Running script: [none]"
 msgstr "Запуск скрипту: [Немає]"
 
-#: src/translations.h:123
+#: src/translations.h:98
 msgid "S"
 msgstr "Пд"
 
-#: src/translations.h:138
+#: src/translations.h:113
 msgid "Sami"
 msgstr "Саамська"
-
-#: src/translations.h:92
-msgid "Sao"
-msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:127
 msgid "Satellite hints"
@@ -1534,11 +1449,11 @@ msgstr "Супутники"
 msgid "Satellites configuration window"
 msgstr "Вікно налаштування супутників"
 
-#: src/translations.h:62
+#: src/translations.h:50
 msgid "Saturn"
 msgstr "Сатурн"
 
-#: src/translations.h:214
+#: src/translations.h:189
 msgid "Save Current Configuration as Default: "
 msgstr "Зберегти поточні налаштування як типові: "
 
@@ -1578,7 +1493,7 @@ msgstr "Вікно консолі скриптів"
 msgid "Scripts"
 msgstr "Скрипти"
 
-#: src/translations.h:150
+#: src/translations.h:125
 msgid "Scripts "
 msgstr "Скрипти "
 
@@ -1590,7 +1505,7 @@ msgstr "Вікно пошуку"
 msgid "Select a ZIP archive that contains a Stellarium landscape"
 msgstr "Виберіть архів ZIP з ландшафтом для Stellarium"
 
-#: src/translations.h:211
+#: src/translations.h:186
 msgid "Select and exit to run."
 msgstr "Вибрати та вийти для перезапуску."
 
@@ -1610,19 +1525,19 @@ msgstr "Виберіть одне сузір'я"
 msgid "Selected object information"
 msgstr "Інформація про вибраний об’єкт"
 
-#: src/translations.h:144
+#: src/translations.h:119
 msgid "Set Location "
 msgstr "Встановити розташування "
 
-#: src/translations.h:145
+#: src/translations.h:120
 msgid "Set Time "
 msgstr "Встановити час "
 
-#: src/translations.h:159
+#: src/translations.h:134
 msgid "Set Time Zone: "
 msgstr "Встановити часовий пояс: "
 
-#: src/translations.h:217
+#: src/translations.h:192
 msgid "Set UI Locale: "
 msgstr "Встановити локаль інтерфейсу: "
 
@@ -1706,7 +1621,7 @@ msgstr "Показати орбіти планет"
 msgid "Show planets"
 msgstr "Показати планети"
 
-#: src/translations.h:173
+#: src/translations.h:148
 msgid "Show: "
 msgstr "Показ: "
 
@@ -1714,21 +1629,17 @@ msgstr "Показ: "
 msgid "Shows the sky as if looking through a telescope eyepiece"
 msgstr "Показ неба таким, як його видно через окуляр телескопа"
 
-#: src/translations.h:215
+#: src/translations.h:190
 msgid "Shut Down: "
 msgstr "Завершення роботи: "
 
-#: src/translations.h:162
+#: src/translations.h:137
 msgid "Sidereal"
 msgstr "Зоряний"
 
 #: src/ui_viewDialog.h:1013
 msgid "Simulate light speed"
 msgstr "Імітувати швидкість світла"
-
-#: src/translations.h:54
-msgid "Sinope"
-msgstr ""
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
@@ -1745,19 +1656,19 @@ msgstr "Розмір: %1"
 msgid "Sky"
 msgstr "Небо"
 
-#: src/translations.h:170
+#: src/translations.h:145
 msgid "Sky Culture: "
 msgstr "Схема назв: "
 
-#: src/translations.h:171
+#: src/translations.h:146
 msgid "Sky Language: "
 msgstr "Назви небесних об’єктів: "
 
-#: src/translations.h:164
+#: src/translations.h:139
 msgid "Sky Time At Start-up: "
 msgstr "Астрономічний час при запуску: "
 
-#: src/translations.h:158
+#: src/translations.h:133
 msgid "Sky Time: "
 msgstr "Астрономічний час: "
 
@@ -1769,7 +1680,7 @@ msgstr "Вікно параметрів неба та відображення"
 msgid "Slow down the script execution rate"
 msgstr "Уповільнити виконання скрипту"
 
-#: src/translations.h:156
+#: src/translations.h:131
 msgid "Solar System Body: "
 msgstr "Сонячна система: "
 
@@ -1777,7 +1688,7 @@ msgstr "Сонячна система: "
 msgid "Solar System Editor"
 msgstr "Редактор Сонячної системи"
 
-#: src/translations.h:95
+#: src/translations.h:70
 msgid "Solar System Observer"
 msgstr "Оглядач Сонячної системи"
 
@@ -1811,7 +1722,7 @@ msgstr ""
 msgid "Standard Perseids rate"
 msgstr "Стандартна частота (Персеїди)"
 
-#: src/translations.h:174
+#: src/translations.h:149
 msgid "Star Value Multiplier: "
 msgstr "Коефіцієнт підсилення зірок: "
 
@@ -1827,7 +1738,7 @@ msgstr "Зіркова статистика"
 msgid "Stars"
 msgstr "Зірки"
 
-#: src/translations.h:147
+#: src/translations.h:122
 msgid "Stars "
 msgstr "Зірки "
 
@@ -1938,17 +1849,13 @@ msgstr "Системна дата на:"
 msgid "Telescope Control"
 msgstr "Управління телескопом"
 
-#: src/translations.h:65
+#: src/translations.h:53
 msgid "Tethys"
 msgstr "Тефія"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:79
 msgid "Text User Interface"
 msgstr "Текстовий інтерфейс користувача"
-
-#: src/translations.h:85
-msgid "Thalassa"
-msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:187
 msgid ""
@@ -2024,11 +1931,6 @@ msgstr "Вказаний ландшафт не вдалося вилучити (
 msgid "The width of your view when Stellarium starts"
 msgstr "Ширина вікна при запуску Stellarium"
 
-#: src/translations.h:59
-#, fuzzy
-msgid "Thebe"
-msgstr "Феба"
-
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
@@ -2041,7 +1943,7 @@ msgstr ""
 msgid "This system does not support OpenGL."
 msgstr "Система не підтримує OpenGL."
 
-#: src/translations.h:167
+#: src/translations.h:142
 msgid "Time Display Format: "
 msgstr "Формат відображення часу: "
 
@@ -2049,11 +1951,11 @@ msgstr "Формат відображення часу: "
 msgid "Time Zone"
 msgstr "Часовий пояс"
 
-#: src/translations.h:68
+#: src/translations.h:56
 msgid "Titan"
 msgstr "Титан"
 
-#: src/translations.h:77
+#: src/translations.h:65
 msgid "Titania"
 msgstr "Титанія"
 
@@ -2075,12 +1977,7 @@ msgstr "Інструменти"
 msgid "Track object"
 msgstr "Відслідкувати об’єкт"
 
-#: src/translations.h:82
-#, fuzzy
-msgid "Triton"
-msgstr "Титан"
-
-#: src/translations.h:139
+#: src/translations.h:114
 msgid "Tupi-Guarani"
 msgstr "Тупі-Гуарані"
 
@@ -2088,7 +1985,7 @@ msgstr "Тупі-Гуарані"
 msgid "Twinkle:"
 msgstr "Мерехтіння:"
 
-#: src/translations.h:177
+#: src/translations.h:152
 msgid "Twinkling: "
 msgstr "Мерехтіння: "
 
@@ -2097,11 +1994,11 @@ msgstr "Мерехтіння: "
 msgid "Type: <b>%1</b>"
 msgstr "Тип: <b>%1</b>"
 
-#: src/translations.h:209
+#: src/translations.h:184
 msgid "USB Script: "
 msgstr "USB-скрипт: "
 
-#: src/translations.h:76
+#: src/translations.h:64
 msgid "Umbriel"
 msgstr "Умбріель"
 
@@ -2113,11 +2010,11 @@ msgstr "Недокументований тип"
 msgid "Unknown"
 msgstr "Невідомо"
 
-#: src/translations.h:216
+#: src/translations.h:191
 msgid "Update me via Internet: "
 msgstr "Оновити мене через Інтернет: "
 
-#: src/translations.h:73
+#: src/translations.h:61
 msgid "Uranus"
 msgstr "Уран"
 
@@ -2161,7 +2058,7 @@ msgstr "Перегляд"
 msgid "Visible"
 msgstr "Видимий"
 
-#: src/translations.h:125
+#: src/translations.h:100
 msgid "W"
 msgstr "Зх"
 
@@ -2173,7 +2070,7 @@ msgstr ""
 "ПОПЕРЕДЖЕННЯ: під час вилучення вказаного ландшафту буде вилучено всі його "
 "файли. Відновити ці файли після вилучення буде дуже важко."
 
-#: src/translations.h:140
+#: src/translations.h:115
 msgid "Western"
 msgstr "Західна"
 
@@ -2186,8 +2083,8 @@ msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
-"Якщо позначити цей пункт, клавіша «автоматичного зменшення» встановлюватиме і "
-"початковий напрям погляду"
+"Якщо позначити цей пункт, клавіша «автоматичного зменшення» встановлюватиме "
+"і початковий напрям погляду"
 
 #: src/gui/StelGui.cpp:129
 msgid "Windows"
@@ -2212,7 +2109,7 @@ msgstr "Щоб вилучити його, вилучіть такий катал
 msgid "ZIP archives"
 msgstr "архіви ZIP"
 
-#: src/translations.h:203
+#: src/translations.h:178
 msgid "Zoom Duration: "
 msgstr "Тривалість зміни масштабу: "
 
