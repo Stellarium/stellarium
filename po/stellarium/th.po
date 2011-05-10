@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-10 14:10+0700\n"
+"POT-Creation-Date: 2011-04-20 11:50-0400\n"
 "PO-Revision-Date: 2010-11-21 03:00+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Launchpad-Export-Date: 2010-12-05 08:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: THAILAND\n"
@@ -88,7 +88,7 @@ msgstr "อันดับความสว่างสัมบูรณ์ %1
 msgid "Absolute scale:"
 msgstr "อัตราส่วนจริง:"
 
-#: src/translations.h:165
+#: src/translations.h:140
 msgid "Actual Time"
 msgstr "เวลาจริง"
 
@@ -128,14 +128,9 @@ msgstr "เพิ่ม/ลบ ภูมิทัศน์"
 msgid "Add/remove landscapes..."
 msgstr "เพิ่มหรือลบภูมิทัศน์"
 
-#: src/translations.h:151
+#: src/translations.h:126
 msgid "Administration "
 msgstr "ผู้บริหาร "
-
-#: src/translations.h:60
-#, fuzzy
-msgid "Adrastea"
-msgstr "แอสเทรีย"
 
 #: src/ui_configurationDialog.h:820
 msgid "Align labels with the horizon"
@@ -153,7 +148,7 @@ msgstr "ใช้แป้นพิมพ์เพื่อส่ายและ
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "ใช้เมาส์ในการส่าย (ลาก) และซูม (mousewheel)"
 
-#: src/translations.h:155
+#: src/translations.h:130
 msgid "Altitude (m): "
 msgstr "ระดับความสูง (ม.): "
 
@@ -161,12 +156,8 @@ msgstr "ระดับความสูง (ม.): "
 msgid "Altitude:"
 msgstr "ระดับความสูง:"
 
-#: src/translations.h:50
-msgid "Amalthea"
-msgstr ""
-
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:110
+#: src/translations.h:85
 msgid "Amor"
 msgstr "เอมอร์"
 
@@ -180,10 +171,6 @@ msgstr ""
 "มันจะดาวน์โหลดรายชื่อวัตถุจากเว็บไซต์ของศูนย์ดาวเคราะห์น้อย และค้นหาในฐานข้อมูลออนไลน์ "
 "ส่วนนี้ยังอยู่ระหว่างการพัฒนา"
 
-#: src/translations.h:57
-msgid "Ananke"
-msgstr ""
-
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
 msgstr "วัดมุม"
@@ -193,7 +180,7 @@ msgid "Angle measure"
 msgstr "วัดมุม"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:112
+#: src/translations.h:87
 msgid "Apophis"
 msgstr "อะโพฟิส"
 
@@ -202,11 +189,11 @@ msgstr "อะโพฟิส"
 msgid "Apparent diameter: %1"
 msgstr "เส้นผ่านศูนย์กลางปรากฏ: %1"
 
-#: src/translations.h:75
+#: src/translations.h:63
 msgid "Ariel"
 msgstr "แอเรียล"
 
-#: src/translations.h:210
+#: src/translations.h:185
 msgid "Arrow down to load list."
 msgstr "ใช้ลูกศรลงเพื่อโหลดรายการ"
 
@@ -219,7 +206,7 @@ msgid "Art brightness: "
 msgstr "ความสว่างของภาพวาด: "
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:98
+#: src/translations.h:73
 msgid "Astraea"
 msgstr "แอสเทรีย"
 
@@ -256,7 +243,7 @@ msgstr ""
 msgid "Az/Alt: %1/%2"
 msgstr "มุมทิศ/มุมเงย: %1/%2"
 
-#: src/translations.h:189
+#: src/translations.h:164
 msgid "Azimuthal Grid"
 msgstr "เส้นพิกัดภาคทิศ"
 
@@ -264,11 +251,11 @@ msgstr "เส้นพิกัดภาคทิศ"
 msgid "Azimuthal grid"
 msgstr "เส้นพิกัดภาคทิศ"
 
-#: src/translations.h:128
+#: src/translations.h:103
 msgid "Aztec"
 msgstr ""
 
-#: src/translations.h:208
+#: src/translations.h:183
 msgid "CD/DVD Script: "
 msgstr "สคริปต์ที่มีอยู่ใน CD/DVD: "
 
@@ -280,7 +267,7 @@ msgstr "CTRL และคลิกซ้าย"
 msgid "CTRL + Up/Down"
 msgstr "CTRL + Up/Down"
 
-#: src/translations.h:161
+#: src/translations.h:136
 msgid "Calendar"
 msgstr "ปฏิทิน"
 
@@ -292,18 +279,13 @@ msgstr "คัสลิสโต"
 msgid "Cancel"
 msgstr "ยกเลิก"
 
-#: src/translations.h:184
+#: src/translations.h:159
 msgid "Cardinal Points"
 msgstr "ทิศทั้งสี่"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1037
 msgid "Cardinal points"
 msgstr "ทิศทั้งสี่"
-
-#: src/translations.h:56
-#, fuzzy
-msgid "Carme"
-msgstr "ซีรีส"
 
 #: src/ui_viewDialog.h:1030
 msgid "Celestial Sphere"
@@ -317,16 +299,16 @@ msgstr "ทำให้วัตถุที่เลือกมาอยู่
 msgid "Ceres"
 msgstr "ซีรีส"
 
-#: src/translations.h:80
+#: src/translations.h:68
 msgid "Charon"
 msgstr "แครอน"
 
-#: src/translations.h:129
+#: src/translations.h:104
 msgid "Chinese"
 msgstr "จีน"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:114
+#: src/translations.h:89
 msgid "Chiron"
 msgstr "ไครอน"
 
@@ -346,7 +328,7 @@ msgstr "ปิดหน้าต่างเมื่อสคริปต์ท
 msgid "Cluster associated with nebulosity"
 msgstr "กระจุกที่เกี่ยวข้องกับกลุ่มก๊าซ"
 
-#: src/translations.h:148
+#: src/translations.h:123
 msgid "Colors "
 msgstr "สี "
 
@@ -366,19 +348,19 @@ msgstr "การตั้งค่า"
 msgid "Configuration window"
 msgstr "หน้าต่างการปรับแต่ง"
 
-#: src/translations.h:182
+#: src/translations.h:157
 msgid "Constellation Art Intensity"
 msgstr "ความเข้มของภาพกลุ่มดาว"
 
-#: src/translations.h:183
+#: src/translations.h:158
 msgid "Constellation Boundaries"
 msgstr "อาณาเขตกลุ่มดาว"
 
-#: src/translations.h:180
+#: src/translations.h:155
 msgid "Constellation Lines"
 msgstr "เส้นกลุ่มดาว"
 
-#: src/translations.h:181
+#: src/translations.h:156
 msgid "Constellation Names"
 msgstr "ชื่อของกลุ่มดาว"
 
@@ -410,7 +392,7 @@ msgstr "การติดต่อ"
 msgid "Control"
 msgstr "ควบคุม"
 
-#: src/translations.h:205
+#: src/translations.h:180
 msgid "Correct for light travel time: "
 msgstr "ปรับแก้โดยคำนึงถึงการเดินทางของแสง: "
 
@@ -422,7 +404,7 @@ msgstr "ประเทศ:"
 msgid "Current location information"
 msgstr "ข้อมูลที่ตั้งปัจจุบัน"
 
-#: src/translations.h:204
+#: src/translations.h:179
 msgid "Cursor Timeout: "
 msgstr "เวลาปรากฏเคอร์เซอร์ "
 
@@ -430,7 +412,7 @@ msgstr "เวลาปรากฏเคอร์เซอร์ "
 msgid "Cylinder"
 msgstr "มุมมองแบบกระบอก"
 
-#: src/translations.h:168
+#: src/translations.h:143
 msgid "Date Display Format: "
 msgstr "รูปแบบวันที่: "
 
@@ -442,7 +424,7 @@ msgstr "วันที่ และ เวลา"
 msgid "Date/time window"
 msgstr "หน้าต่าง วัน/เวลา"
 
-#: src/translations.h:160
+#: src/translations.h:135
 msgid "Day keys: "
 msgstr "กำหนดชนิดของวัน "
 
@@ -466,10 +448,6 @@ msgstr "ดีมอส"
 msgid "Delete"
 msgstr "ลบทิ้ง"
 
-#: src/translations.h:86
-msgid "Despina"
-msgstr ""
-
 #: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
 #: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
 #, qt-format
@@ -484,7 +462,7 @@ msgstr "เหล่านักพัฒนา"
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "ลดแสงของดาวที่สว่างน้อย เมื่อมีวัตถุที่สว่างมากอยู่ในเขตการมองเห็น"
 
-#: src/translations.h:66
+#: src/translations.h:54
 msgid "Dione"
 msgstr "ไดโอเน"
 
@@ -555,7 +533,7 @@ msgstr ""
 msgid "Dynamic eye adaptation"
 msgstr "ปรับดวงตาตามสภาพของท้องฟ้า"
 
-#: src/translations.h:124
+#: src/translations.h:99
 msgid "E"
 msgstr "ตะวันออก"
 
@@ -567,7 +545,7 @@ msgstr "โลก"
 msgid "Ecliptic"
 msgstr "สุริยวิถี"
 
-#: src/translations.h:192
+#: src/translations.h:167
 msgid "Ecliptic Line"
 msgstr "เส้นสุริยวิถี"
 
@@ -575,18 +553,13 @@ msgstr "เส้นสุริยวิถี"
 msgid "Ecliptic line"
 msgstr "เส้นสุริยวิถี"
 
-#: src/translations.h:149
+#: src/translations.h:124
 msgid "Effects "
 msgstr "เอฟเฟค "
 
-#: src/translations.h:130
+#: src/translations.h:105
 msgid "Egyptian"
 msgstr "อียิปต์"
-
-#: src/translations.h:52
-#, fuzzy
-msgid "Elara"
-msgstr "โลก"
 
 #: src/ui_configurationDialog.h:786
 msgid "Enable keyboard navigation"
@@ -596,7 +569,7 @@ msgstr "เปิดใช้การนำทางผ่านแป้นพ
 msgid "Enable mouse navigation"
 msgstr "เปิดใช้การนำทางโดยเมาส์"
 
-#: src/translations.h:64
+#: src/translations.h:52
 msgid "Enceladus"
 msgstr "เอ็สเซลาดุส"
 
@@ -612,7 +585,7 @@ msgstr "บริเวณเท่ากัน"
 msgid "Equator"
 msgstr "เส้นศูนย์สูตร"
 
-#: src/translations.h:191
+#: src/translations.h:166
 msgid "Equator Line"
 msgstr "เส้นศูนย์สูตรฟ้า"
 
@@ -620,7 +593,7 @@ msgstr "เส้นศูนย์สูตรฟ้า"
 msgid "Equator line"
 msgstr "เส้นศูนย์สูตร"
 
-#: src/translations.h:190
+#: src/translations.h:165
 msgid "Equatorial Grid"
 msgstr "กริดพิกัดศูนย์สูตร"
 
@@ -632,12 +605,12 @@ msgstr "กริดศูนย์สูตร J2000"
 msgid "Equatorial grid"
 msgstr "กริดศูนย์สูตร"
 
-#: src/translations.h:81
+#: src/translations.h:69
 msgid "Eris"
 msgstr "อีริส"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:116
+#: src/translations.h:91
 msgid "Eros"
 msgstr "อีรอส"
 
@@ -705,7 +678,7 @@ msgid "Flip scene vertically"
 msgstr "กลับภาพในแนวตั้ง"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:104
+#: src/translations.h:79
 msgid "Flora"
 msgstr "ฟลอรา"
 
@@ -725,11 +698,6 @@ msgstr "ศึกษาเพิ่มเติม"
 msgid "Galactic grid"
 msgstr "กริดกาแล็กซี"
 
-#: src/translations.h:87
-#, fuzzy
-msgid "Galatea"
-msgstr "กาแล็กซี"
-
 #: src/core/modules/Nebula.cpp:269
 msgid "Galaxy"
 msgstr "กาแล็กซี"
@@ -738,7 +706,7 @@ msgstr "กาแล็กซี"
 msgid "Ganymede"
 msgstr "แกนีมีด"
 
-#: src/translations.h:146
+#: src/translations.h:121
 msgid "General "
 msgstr "ทั่วไป "
 
@@ -768,22 +736,17 @@ msgstr ""
 msgid "Ground"
 msgstr "พื้น"
 
-#: src/translations.h:90
-#, fuzzy
-msgid "Halimede"
-msgstr "แกนีมีด"
-
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
 msgstr "แฮมเมอร์-ไอทอฟฟ์"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:100
+#: src/translations.h:75
 msgid "Hebe"
 msgstr "ฮีบี"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:118
+#: src/translations.h:93
 msgid "Hektor"
 msgstr "เฮคเตอร์"
 
@@ -807,10 +770,6 @@ msgstr "ซ่อนตัวชี้เมาส์เมื่อไม่ม
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "อัตราตกสูงสุดเท่าที่เคยมีมา (ฝนดาวตกสิงโต ค.ศ. ๑๙๖๖)"
 
-#: src/translations.h:51
-msgid "Himalia"
-msgstr ""
-
 #: src/core/StelObject.cpp:80
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
@@ -821,15 +780,15 @@ msgid "Hourly zenith rate:"
 msgstr "อัตราสูงสุดต่อชั่วโมง:"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:108
+#: src/translations.h:83
 msgid "Hygiea"
 msgstr "ไฮเจีย"
 
-#: src/translations.h:69
+#: src/translations.h:57
 msgid "Hyperion"
 msgstr "ไฮเพอเรียน"
 
-#: src/translations.h:70
+#: src/translations.h:58
 msgid "Iapetus"
 msgstr "ไอแอพีทัส"
 
@@ -856,7 +815,7 @@ msgstr "เวลาเดินหน้า (เล็กน้อย)"
 msgid "Install a new landscape from a ZIP archive..."
 msgstr "ติดตั้งภูมิทัศน์ใหม่จากแฟ้มบีบอัด"
 
-#: src/translations.h:131
+#: src/translations.h:106
 msgid "Inuit"
 msgstr "อินูอิท"
 
@@ -869,7 +828,7 @@ msgid "Io"
 msgstr "ไอโอ"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:102
+#: src/translations.h:77
 msgid "Iris"
 msgstr "ไอริส"
 
@@ -889,7 +848,7 @@ msgstr ""
 msgid "Keys"
 msgstr "ปุ่ม"
 
-#: src/translations.h:132
+#: src/translations.h:107
 msgid "Korean"
 msgstr "เกาหลี"
 
@@ -897,7 +856,7 @@ msgstr "เกาหลี"
 msgid "Labels and Markers"
 msgstr "ชื่อ และ เครื่องหมาย"
 
-#: src/translations.h:133
+#: src/translations.h:108
 msgid "Lakota"
 msgstr "ลาโกตา"
 
@@ -915,29 +874,17 @@ msgstr "การติดตั้งภูมิทัศน์ \"%1\" สำ�
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "ภูมิทัศน์ \"%1\" ถูกลบออกเรียบร้อยแล้ว"
 
-#: src/translations.h:197
+#: src/translations.h:172
 msgid "Landscape: "
 msgstr "ภูมิทัศน์: "
-
-#: src/translations.h:93
-msgid "Laomedeia"
-msgstr ""
-
-#: src/translations.h:88
-msgid "Larissa"
-msgstr ""
 
 #: src/ui_locationDialogGui.h:395
 msgid "Latitude:"
 msgstr "ละติจูด:"
 
-#: src/translations.h:153
+#: src/translations.h:128
 msgid "Latitude: "
 msgstr "เส้นรุ้ง: "
-
-#: src/translations.h:58
-msgid "Leda"
-msgstr ""
 
 #: src/gui/HelpDialog.cpp:56
 msgid "Left click"
@@ -947,7 +894,7 @@ msgstr "คลิกซ้าย"
 msgid "License"
 msgstr "ลิขสิทธิ์"
 
-#: src/translations.h:196
+#: src/translations.h:171
 msgid "Light Pollution Luminance: "
 msgstr "ปริมาณมลภาวะทางแสง: "
 
@@ -955,11 +902,11 @@ msgstr "ปริมาณมลภาวะทางแสง: "
 msgid "Light pollution: "
 msgstr "มลภาวะทางแสง: "
 
-#: src/translations.h:178
+#: src/translations.h:153
 msgid "Limiting Magnitude: "
 msgstr "การจำกัดค่าความสว่าง "
 
-#: src/translations.h:213
+#: src/translations.h:188
 msgid "Load Default Configuration: "
 msgstr "โหลดค่าเริ่มต้น: "
 
@@ -967,7 +914,7 @@ msgstr "โหลดค่าเริ่มต้น: "
 msgid "Load at startup"
 msgstr "โหลดเมื่อเริ่มต้นระบบ"
 
-#: src/translations.h:207
+#: src/translations.h:182
 msgid "Local Script: "
 msgstr "สคริปต์ที่มีอยู่ในโปรแกรม: "
 
@@ -991,19 +938,15 @@ msgstr "Log"
 msgid "Longitude:"
 msgstr "ลองจิจูด:"
 
-#: src/translations.h:154
+#: src/translations.h:129
 msgid "Longitude: "
 msgstr "เส้นแวง: "
 
-#: src/translations.h:55
-msgid "Lysithea"
-msgstr ""
-
-#: src/translations.h:200
+#: src/translations.h:175
 msgid "Magnitude Scaling Multiplier: "
 msgstr "ตัวคูณการปรับตามอันดับความสว่าง: "
 
-#: src/translations.h:175
+#: src/translations.h:150
 msgid "Magnitude Sizing Multiplier: "
 msgstr "ตัวคูณความใหญ่ซึ่งจัดกลุ่มตามขนาด : "
 
@@ -1021,11 +964,11 @@ msgstr "อันดับความสว่าง: <b>%1</b> (B-V: %2)"
 msgid "Main"
 msgstr "หลัก"
 
-#: src/translations.h:198
+#: src/translations.h:173
 msgid "Manual zoom: "
 msgstr "ซูมด้วยมือ: "
 
-#: src/translations.h:134
+#: src/translations.h:109
 msgid "Maori"
 msgstr "เมารี"
 
@@ -1045,11 +988,11 @@ msgstr ""
 msgid "Maximum FOV: "
 msgstr "พื้นที่การมองเห็นสูงสุด: "
 
-#: src/translations.h:176
+#: src/translations.h:151
 msgid "Maximum Magnitude to Label: "
 msgstr "อันดับความสว่างสูงที่สุดที่จะแสดงชื่อ "
 
-#: src/translations.h:202
+#: src/translations.h:177
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "อันดับความสว่างสูงสุดของเนบิวลาที่จะแสดงชื่อ: "
 
@@ -1065,7 +1008,7 @@ msgstr "ดาวพุธ"
 msgid "Meridian"
 msgstr "เมริเดียน"
 
-#: src/translations.h:188
+#: src/translations.h:163
 msgid "Meridian Line"
 msgstr "เส้นเมอริเดียน"
 
@@ -1074,19 +1017,19 @@ msgid "Meridian line"
 msgstr "เส้นเมอริเดียน"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:106
+#: src/translations.h:81
 msgid "Metis"
 msgstr "มีทีส"
 
-#: src/translations.h:201
+#: src/translations.h:176
 msgid "Milky Way intensity: "
 msgstr "ความสว่างของทางช้างเผือก "
 
-#: src/translations.h:63
+#: src/translations.h:51
 msgid "Mimas"
 msgstr "ไมมาส"
 
-#: src/translations.h:74
+#: src/translations.h:62
 msgid "Miranda"
 msgstr "มิแรนดา"
 
@@ -1121,19 +1064,15 @@ msgstr "หันกล้องโทรทรรศน์ #%1 ไปยัง�
 msgid "Movement and Selection"
 msgstr "การเคลื่อนไหวและการเลือก"
 
-#: src/translations.h:122
+#: src/translations.h:97
 msgid "N"
 msgstr "เหนือ"
-
-#: src/translations.h:84
-msgid "Naiad"
-msgstr ""
 
 #: src/ui_locationDialogGui.h:408
 msgid "Name/City:"
 msgstr "ชื่อ/เมือง:"
 
-#: src/translations.h:135
+#: src/translations.h:110
 msgid "Navajo"
 msgstr "นาวาโฮ"
 
@@ -1145,11 +1084,11 @@ msgstr "นำทาง"
 msgid "Nebula"
 msgstr "เนบิวลา"
 
-#: src/translations.h:194
+#: src/translations.h:169
 msgid "Nebula Circles"
 msgstr "วงกลมเนบิวลา"
 
-#: src/translations.h:193
+#: src/translations.h:168
 msgid "Nebula Names"
 msgstr "ชื่อเนบิวลา"
 
@@ -1161,17 +1100,9 @@ msgstr "เนบิวลา"
 msgid "Nebulas background images"
 msgstr "ภาพเบื้องหลังของเนบิวลา"
 
-#: src/translations.h:72
+#: src/translations.h:60
 msgid "Neptune"
 msgstr "เนปจูน"
-
-#: src/translations.h:83
-msgid "Nereid"
-msgstr ""
-
-#: src/translations.h:94
-msgid "Neso"
-msgstr ""
 
 #: src/gui/LocationDialog.cpp:332
 msgid "New Location"
@@ -1204,7 +1135,7 @@ msgstr "ไม่มี"
 msgid "Normal rate"
 msgstr "อัตราปกติ"
 
-#: src/translations.h:136
+#: src/translations.h:111
 msgid "Norse"
 msgstr "นอเวย์"
 
@@ -1213,11 +1144,11 @@ msgstr "นอเวย์"
 msgid "OSX Developer: %1"
 msgstr "นักพัฒนา OSX: %1"
 
-#: src/translations.h:78
+#: src/translations.h:66
 msgid "Oberon"
 msgstr "โอเบอรอน"
 
-#: src/translations.h:199
+#: src/translations.h:174
 msgid "Object Sizing Rule: "
 msgstr "เกณฑ์การแสดงขนาดของวัตถุ: "
 
@@ -1277,10 +1208,6 @@ msgstr "มองกราดไปทั่วท้องฟ้า"
 msgid "Parallax: %1\""
 msgstr "แพรัลแลกซ์: %1\""
 
-#: src/translations.h:53
-msgid "Pasiphae"
-msgstr ""
-
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
 msgstr "ทัศนมิติ"
@@ -1297,19 +1224,19 @@ msgstr ""
 msgid "Phobos"
 msgstr "โฟบอส"
 
-#: src/translations.h:71
+#: src/translations.h:59
 msgid "Phoebe"
 msgstr "ฟีบี"
 
-#: src/translations.h:185
+#: src/translations.h:160
 msgid "Planet Names"
 msgstr "ชื่อดาวเคราะห์"
 
-#: src/translations.h:186
+#: src/translations.h:161
 msgid "Planet Orbits"
 msgstr "วงโคจรดาวเคราะห์"
 
-#: src/translations.h:187
+#: src/translations.h:162
 msgid "Planet Trails"
 msgstr "ทางเดินของดาวเคราะห์"
 
@@ -1367,11 +1294,11 @@ msgstr ""
 msgid "Plugins"
 msgstr "โปรแกรมเสริม"
 
-#: src/translations.h:79
+#: src/translations.h:67
 msgid "Pluto"
 msgstr "ดาวพลูโต"
 
-#: src/translations.h:137
+#: src/translations.h:112
 msgid "Polynesian"
 msgstr "โพลีนีเชีย"
 
@@ -1381,11 +1308,11 @@ msgid ""
 "TLE data"
 msgstr "การคาดหมายตำแหน่งดาวเทียมในวงโคจรรอบโลกจากข้อมูล TLE ของ NORAD"
 
-#: src/translations.h:163
+#: src/translations.h:138
 msgid "Preset Sky Time: "
 msgstr "ตั้งเวลาท้องฟ้าล่วงหน้า: "
 
-#: src/translations.h:166
+#: src/translations.h:141
 msgid "Preset Time"
 msgstr "เวลาที่ตั้งไว้ล่วงหน้า"
 
@@ -1402,17 +1329,9 @@ msgstr "ผู้ร่วมโครงการและผู้พัฒน
 msgid "Projection"
 msgstr "การฉายภาพ"
 
-#: src/translations.h:89
-msgid "Proteus"
-msgstr ""
-
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
 msgstr "แสดงเครื่องมือวัดมุม"
-
-#: src/translations.h:91
-msgid "Psamathe"
-msgstr ""
 
 #: src/gui/StelGui.cpp:171
 msgid "Quit"
@@ -1473,7 +1392,7 @@ msgstr ""
 msgid "Retry"
 msgstr "ลองซ้ำ"
 
-#: src/translations.h:67
+#: src/translations.h:55
 msgid "Rhea"
 msgstr "เรีย"
 
@@ -1493,16 +1412,12 @@ msgstr "สคริปต์ที่กำลังดำเนินงาน
 msgid "Running script: [none]"
 msgstr "สคริปต์ที่กำลังดำเนินงานอยู่: [ไม่มี]"
 
-#: src/translations.h:123
+#: src/translations.h:98
 msgid "S"
 msgstr "ใต้"
 
-#: src/translations.h:138
+#: src/translations.h:113
 msgid "Sami"
-msgstr ""
-
-#: src/translations.h:92
-msgid "Sao"
 msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:127
@@ -1521,11 +1436,11 @@ msgstr "บริวาร"
 msgid "Satellites configuration window"
 msgstr "หน้าต่างการตั้งค่าดาวเทียม"
 
-#: src/translations.h:62
+#: src/translations.h:50
 msgid "Saturn"
 msgstr "ดาวเสาร์"
 
-#: src/translations.h:214
+#: src/translations.h:189
 msgid "Save Current Configuration as Default: "
 msgstr "บันทึกค่าปัจจุบันเป็นค่าเริ่มต้น: "
 
@@ -1563,7 +1478,7 @@ msgstr "หน้าต่างรายการสคริปต์"
 msgid "Scripts"
 msgstr "สคริปต์"
 
-#: src/translations.h:150
+#: src/translations.h:125
 msgid "Scripts "
 msgstr "สคริปต์ "
 
@@ -1575,7 +1490,7 @@ msgstr "หน้าต่างการค้นหา"
 msgid "Select a ZIP archive that contains a Stellarium landscape"
 msgstr "เลือกแฟ้มบีบอัดที่มีภูมิทัศน์สำหรับ Stellarium"
 
-#: src/translations.h:211
+#: src/translations.h:186
 msgid "Select and exit to run."
 msgstr "เลือกและออกเพื่อเริ่มการใช้งาน"
 
@@ -1595,19 +1510,19 @@ msgstr "เลือกกลุ่มดาวหนึ่ง"
 msgid "Selected object information"
 msgstr "ข้อมูลวัตถุที่เลือก"
 
-#: src/translations.h:144
+#: src/translations.h:119
 msgid "Set Location "
 msgstr "ตั้งตำแหน่ง "
 
-#: src/translations.h:145
+#: src/translations.h:120
 msgid "Set Time "
 msgstr "ตั้งเวลา "
 
-#: src/translations.h:159
+#: src/translations.h:134
 msgid "Set Time Zone: "
 msgstr "เขตเวลามาตรฐาน: "
 
-#: src/translations.h:217
+#: src/translations.h:192
 msgid "Set UI Locale: "
 msgstr "เลือกภาษา: "
 
@@ -1689,7 +1604,7 @@ msgstr "แสดงวงโคจรของดาวเคราะห์"
 msgid "Show planets"
 msgstr "แสดงดาวเคราะห์"
 
-#: src/translations.h:173
+#: src/translations.h:148
 msgid "Show: "
 msgstr "แสดง: "
 
@@ -1697,21 +1612,17 @@ msgstr "แสดง: "
 msgid "Shows the sky as if looking through a telescope eyepiece"
 msgstr "แสดงท้องฟ้าเมื่อมองผ่านเลนส์ใกล้ตาของกล้องโทรทรรศน์"
 
-#: src/translations.h:215
+#: src/translations.h:190
 msgid "Shut Down: "
 msgstr "ปิดโปรแกรม: "
 
-#: src/translations.h:162
+#: src/translations.h:137
 msgid "Sidereal"
 msgstr "เวลาดาราคติ"
 
 #: src/ui_viewDialog.h:1013
 msgid "Simulate light speed"
 msgstr "จำลองตามความเร็วแสง"
-
-#: src/translations.h:54
-msgid "Sinope"
-msgstr ""
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
@@ -1728,19 +1639,19 @@ msgstr "ขนาด: %1"
 msgid "Sky"
 msgstr "ท้องฟ้า"
 
-#: src/translations.h:170
+#: src/translations.h:145
 msgid "Sky Culture: "
 msgstr "แสดงกลุ่มดาวตามวัฒนธรรม: "
 
-#: src/translations.h:171
+#: src/translations.h:146
 msgid "Sky Language: "
 msgstr "ภาษาบนท้องฟ้า: "
 
-#: src/translations.h:164
+#: src/translations.h:139
 msgid "Sky Time At Start-up: "
 msgstr "เวลาท้องฟ้าเมื่อเริ่มต้น: "
 
-#: src/translations.h:158
+#: src/translations.h:133
 msgid "Sky Time: "
 msgstr "เวลาท้องฟ้า: "
 
@@ -1752,7 +1663,7 @@ msgstr "หน้าต่างท้องฟ้าและการมอง
 msgid "Slow down the script execution rate"
 msgstr "ลดอัตราการประมวลผลสคริปต์"
 
-#: src/translations.h:156
+#: src/translations.h:131
 msgid "Solar System Body: "
 msgstr "วัตถุในระบบสุริยะ "
 
@@ -1760,7 +1671,7 @@ msgstr "วัตถุในระบบสุริยะ "
 msgid "Solar System Editor"
 msgstr "เครื่องมือปรับแต่งระบบสุริยะ"
 
-#: src/translations.h:95
+#: src/translations.h:70
 msgid "Solar System Observer"
 msgstr "ดูระบบสุริยะ"
 
@@ -1792,7 +1703,7 @@ msgstr ""
 msgid "Standard Perseids rate"
 msgstr "อัตราฝนดาวตกเพอร์ซิอัสมาตรฐาน"
 
-#: src/translations.h:174
+#: src/translations.h:149
 msgid "Star Value Multiplier: "
 msgstr "ตัวคูณค่าความสว่างของดาวฤกษ์: "
 
@@ -1808,7 +1719,7 @@ msgstr "ตำนานดาว"
 msgid "Stars"
 msgstr "ดาวฤกษ์"
 
-#: src/translations.h:147
+#: src/translations.h:122
 msgid "Stars "
 msgstr "ดาวฤกษ์ "
 
@@ -1919,16 +1830,12 @@ msgstr "วันที่ระบบคือ:"
 msgid "Telescope Control"
 msgstr "ควบคุมกล้องโทรทรรศน์"
 
-#: src/translations.h:65
+#: src/translations.h:53
 msgid "Tethys"
 msgstr "ธีธีส"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:79
 msgid "Text User Interface"
-msgstr ""
-
-#: src/translations.h:85
-msgid "Thalassa"
 msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:187
@@ -1998,11 +1905,6 @@ msgstr "ไม่สามารถลบภูมิทัศน์ที่เ
 msgid "The width of your view when Stellarium starts"
 msgstr "ความกว้างของมุมมองเมื่อเริ่มต้น Stellarium"
 
-#: src/translations.h:59
-#, fuzzy
-msgid "Thebe"
-msgstr "ฟีบี"
-
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
@@ -2015,7 +1917,7 @@ msgstr ""
 msgid "This system does not support OpenGL."
 msgstr "ระบบไม่สนับสนุน OpenGL"
 
-#: src/translations.h:167
+#: src/translations.h:142
 msgid "Time Display Format: "
 msgstr "รูปแบบเวลา: "
 
@@ -2023,11 +1925,11 @@ msgstr "รูปแบบเวลา: "
 msgid "Time Zone"
 msgstr "เขตเวลา"
 
-#: src/translations.h:68
+#: src/translations.h:56
 msgid "Titan"
 msgstr "ไททัน"
 
-#: src/translations.h:77
+#: src/translations.h:65
 msgid "Titania"
 msgstr "ทิเทเนีย"
 
@@ -2047,12 +1949,7 @@ msgstr "เครื่องมือ"
 msgid "Track object"
 msgstr "ติดตามวัตถุ"
 
-#: src/translations.h:82
-#, fuzzy
-msgid "Triton"
-msgstr "ไททัน"
-
-#: src/translations.h:139
+#: src/translations.h:114
 msgid "Tupi-Guarani"
 msgstr "ทูปิ-กวารานิ"
 
@@ -2060,7 +1957,7 @@ msgstr "ทูปิ-กวารานิ"
 msgid "Twinkle:"
 msgstr "กะพริบแสง:"
 
-#: src/translations.h:177
+#: src/translations.h:152
 msgid "Twinkling: "
 msgstr "การกะพริบ: "
 
@@ -2069,11 +1966,11 @@ msgstr "การกะพริบ: "
 msgid "Type: <b>%1</b>"
 msgstr "ชนิด: <b>%1</b>"
 
-#: src/translations.h:209
+#: src/translations.h:184
 msgid "USB Script: "
 msgstr "สคริปต์ที่มีอยู่ใน USB: "
 
-#: src/translations.h:76
+#: src/translations.h:64
 msgid "Umbriel"
 msgstr "อัมเบรียล"
 
@@ -2085,11 +1982,11 @@ msgstr "ยังไม่ได้ระบุในเอกสาร"
 msgid "Unknown"
 msgstr "ไม่มีข้อมูล"
 
-#: src/translations.h:216
+#: src/translations.h:191
 msgid "Update me via Internet: "
 msgstr "อัปเดตผ่านอินเทอร์เน็ต: "
 
-#: src/translations.h:73
+#: src/translations.h:61
 msgid "Uranus"
 msgstr "ดาวยูเรนัส"
 
@@ -2133,7 +2030,7 @@ msgstr "มุมมอง"
 msgid "Visible"
 msgstr "มองเห็นได้"
 
-#: src/translations.h:125
+#: src/translations.h:100
 msgid "W"
 msgstr "ตะวันตก"
 
@@ -2143,7 +2040,7 @@ msgid ""
 "operation is irreversible."
 msgstr ""
 
-#: src/translations.h:140
+#: src/translations.h:115
 msgid "Western"
 msgstr "ตะวันตก"
 
@@ -2178,7 +2075,7 @@ msgstr ""
 msgid "ZIP archives"
 msgstr "แฟ้มบีบอัด"
 
-#: src/translations.h:203
+#: src/translations.h:178
 msgid "Zoom Duration: "
 msgstr "ช่วงเวลาการซูม: "
 

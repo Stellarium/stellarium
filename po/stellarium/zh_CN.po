@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-10 14:10+0700\n"
+"POT-Creation-Date: 2011-04-20 11:50-0400\n"
 "PO-Revision-Date: 2010-12-05 04:07+0000\n"
 "Last-Translator: forest93 <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
+"Language: zh_HK\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_HK\n"
 "X-Launchpad-Export-Date: 2010-12-05 08:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
@@ -88,7 +88,7 @@ msgstr "绝对星等: %1"
 msgid "Absolute scale:"
 msgstr "绝对大小:"
 
-#: src/translations.h:165
+#: src/translations.h:140
 msgid "Actual Time"
 msgstr "实际时间"
 
@@ -128,14 +128,9 @@ msgstr "添加或移除地景"
 msgid "Add/remove landscapes..."
 msgstr "添加或移除地景..."
 
-#: src/translations.h:151
+#: src/translations.h:126
 msgid "Administration "
 msgstr "管理设定 "
-
-#: src/translations.h:60
-#, fuzzy
-msgid "Adrastea"
-msgstr "义神星(小行星5号)"
 
 #: src/ui_configurationDialog.h:820
 msgid "Align labels with the horizon"
@@ -153,7 +148,7 @@ msgstr "使用键盘移动及缩放画面"
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "使用鼠标移动及缩放画面 (拖拉滚轮)"
 
-#: src/translations.h:155
+#: src/translations.h:130
 msgid "Altitude (m): "
 msgstr "海拔(米): "
 
@@ -161,12 +156,8 @@ msgstr "海拔(米): "
 msgid "Altitude:"
 msgstr "海拔:"
 
-#: src/translations.h:50
-msgid "Amalthea"
-msgstr ""
-
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:110
+#: src/translations.h:85
 msgid "Amor"
 msgstr "阿莫尔(小行星1221号)"
 
@@ -180,10 +171,6 @@ msgstr ""
 "（Minor Planet Center）的网站上下载天体列表并在其在线数据库中检索信息。此功能"
 "暂处于开发阶段。"
 
-#: src/translations.h:57
-msgid "Ananke"
-msgstr ""
-
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
 msgstr "角度测量"
@@ -193,7 +180,7 @@ msgid "Angle measure"
 msgstr "角度测量"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:112
+#: src/translations.h:87
 msgid "Apophis"
 msgstr "阿波菲斯(小行星99942号)"
 
@@ -202,11 +189,11 @@ msgstr "阿波菲斯(小行星99942号)"
 msgid "Apparent diameter: %1"
 msgstr "视直径: %1"
 
-#: src/translations.h:75
+#: src/translations.h:63
 msgid "Ariel"
 msgstr "阿里尔(天卫一)"
 
-#: src/translations.h:210
+#: src/translations.h:185
 msgid "Arrow down to load list."
 msgstr "按向下键以载入列表"
 
@@ -219,7 +206,7 @@ msgid "Art brightness: "
 msgstr "图绘亮度: "
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:98
+#: src/translations.h:73
 msgid "Astraea"
 msgstr "义神星(小行星5号)"
 
@@ -256,7 +243,7 @@ msgstr "自动缩小时回到原本的观看方向"
 msgid "Az/Alt: %1/%2"
 msgstr "方位角/高度角: %1/%2"
 
-#: src/translations.h:189
+#: src/translations.h:164
 msgid "Azimuthal Grid"
 msgstr "天球方位系统"
 
@@ -264,11 +251,11 @@ msgstr "天球方位系统"
 msgid "Azimuthal grid"
 msgstr "地平座标"
 
-#: src/translations.h:128
+#: src/translations.h:103
 msgid "Aztec"
 msgstr "阿兹特克"
 
-#: src/translations.h:208
+#: src/translations.h:183
 msgid "CD/DVD Script: "
 msgstr "CD/DVD 脚本: "
 
@@ -280,7 +267,7 @@ msgstr "CTRL + 鼠标左键"
 msgid "CTRL + Up/Down"
 msgstr "CTRL + Up/Down键"
 
-#: src/translations.h:161
+#: src/translations.h:136
 msgid "Calendar"
 msgstr "日历"
 
@@ -292,18 +279,13 @@ msgstr "木卫四(卡利斯托)"
 msgid "Cancel"
 msgstr "取消"
 
-#: src/translations.h:184
+#: src/translations.h:159
 msgid "Cardinal Points"
 msgstr "方位座标"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1037
 msgid "Cardinal points"
 msgstr "基点"
-
-#: src/translations.h:56
-#, fuzzy
-msgid "Carme"
-msgstr "谷神星(小行星1号)"
 
 #: src/ui_viewDialog.h:1030
 msgid "Celestial Sphere"
@@ -317,16 +299,16 @@ msgstr "将已选物体置中"
 msgid "Ceres"
 msgstr "谷神星(小行星1号)"
 
-#: src/translations.h:80
+#: src/translations.h:68
 msgid "Charon"
 msgstr "冥卫一(卡戎)"
 
-#: src/translations.h:129
+#: src/translations.h:104
 msgid "Chinese"
 msgstr "中国"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:114
+#: src/translations.h:89
 msgid "Chiron"
 msgstr "喀戎星(小行星2060号)"
 
@@ -346,7 +328,7 @@ msgstr "执行指令时关闭窗口"
 msgid "Cluster associated with nebulosity"
 msgstr "迷漫星云"
 
-#: src/translations.h:148
+#: src/translations.h:123
 msgid "Colors "
 msgstr "颜色 "
 
@@ -366,19 +348,19 @@ msgstr "设定"
 msgid "Configuration window"
 msgstr "设定"
 
-#: src/translations.h:182
+#: src/translations.h:157
 msgid "Constellation Art Intensity"
 msgstr "星座图象亮度"
 
-#: src/translations.h:183
+#: src/translations.h:158
 msgid "Constellation Boundaries"
 msgstr "星座界线"
 
-#: src/translations.h:180
+#: src/translations.h:155
 msgid "Constellation Lines"
 msgstr "星座连线"
 
-#: src/translations.h:181
+#: src/translations.h:156
 msgid "Constellation Names"
 msgstr "星座名称"
 
@@ -410,7 +392,7 @@ msgstr "联系信息"
 msgid "Control"
 msgstr "<emph>控制项</emph>"
 
-#: src/translations.h:205
+#: src/translations.h:180
 msgid "Correct for light travel time: "
 msgstr "光行进时间修正： "
 
@@ -422,7 +404,7 @@ msgstr "国家/地区:"
 msgid "Current location information"
 msgstr "目前位置资讯"
 
-#: src/translations.h:204
+#: src/translations.h:179
 msgid "Cursor Timeout: "
 msgstr "光标自动隐藏延时: "
 
@@ -430,7 +412,7 @@ msgstr "光标自动隐藏延时: "
 msgid "Cylinder"
 msgstr "圆柱式"
 
-#: src/translations.h:168
+#: src/translations.h:143
 msgid "Date Display Format: "
 msgstr "日期显示格式: "
 
@@ -442,7 +424,7 @@ msgstr "日期及时间"
 msgid "Date/time window"
 msgstr "日期/时间"
 
-#: src/translations.h:160
+#: src/translations.h:135
 msgid "Day keys: "
 msgstr "时间定义: "
 
@@ -466,10 +448,6 @@ msgstr "火卫二(戴摩斯)"
 msgid "Delete"
 msgstr "删除"
 
-#: src/translations.h:86
-msgid "Despina"
-msgstr ""
-
 #: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
 #: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
 #, qt-format
@@ -484,7 +462,7 @@ msgstr "开发者"
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "降低明亮天体附近其馀天体的亮度"
 
-#: src/translations.h:66
+#: src/translations.h:54
 msgid "Dione"
 msgstr "土卫四(狄奥妮)"
 
@@ -553,7 +531,7 @@ msgstr "正在下载 %1 ..."
 msgid "Dynamic eye adaptation"
 msgstr "人眼动态视觉调适"
 
-#: src/translations.h:124
+#: src/translations.h:99
 msgid "E"
 msgstr "东"
 
@@ -565,7 +543,7 @@ msgstr "地球"
 msgid "Ecliptic"
 msgstr "黄道"
 
-#: src/translations.h:192
+#: src/translations.h:167
 msgid "Ecliptic Line"
 msgstr "黄道"
 
@@ -573,18 +551,13 @@ msgstr "黄道"
 msgid "Ecliptic line"
 msgstr "黄道"
 
-#: src/translations.h:149
+#: src/translations.h:124
 msgid "Effects "
 msgstr "效果 "
 
-#: src/translations.h:130
+#: src/translations.h:105
 msgid "Egyptian"
 msgstr "埃及"
-
-#: src/translations.h:52
-#, fuzzy
-msgid "Elara"
-msgstr "地球"
 
 #: src/ui_configurationDialog.h:786
 msgid "Enable keyboard navigation"
@@ -594,7 +567,7 @@ msgstr "开启键盘导览"
 msgid "Enable mouse navigation"
 msgstr "启用鼠标导览"
 
-#: src/translations.h:64
+#: src/translations.h:52
 msgid "Enceladus"
 msgstr "土卫二(恩克拉多斯)"
 
@@ -610,7 +583,7 @@ msgstr "相等面积"
 msgid "Equator"
 msgstr "赤道"
 
-#: src/translations.h:191
+#: src/translations.h:166
 msgid "Equator Line"
 msgstr "赤道"
 
@@ -618,7 +591,7 @@ msgstr "赤道"
 msgid "Equator line"
 msgstr "赤道"
 
-#: src/translations.h:190
+#: src/translations.h:165
 msgid "Equatorial Grid"
 msgstr "赤道坐标网格"
 
@@ -630,12 +603,12 @@ msgstr "赤道座标 (J2000)"
 msgid "Equatorial grid"
 msgstr "赤道坐标网格"
 
-#: src/translations.h:81
+#: src/translations.h:69
 msgid "Eris"
 msgstr "阋神星"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:116
+#: src/translations.h:91
 msgid "Eros"
 msgstr "爱神星(小行星433号)"
 
@@ -703,7 +676,7 @@ msgid "Flip scene vertically"
 msgstr "垂直翻转"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:104
+#: src/translations.h:79
 msgid "Flora"
 msgstr "花神星(小行星8号)"
 
@@ -723,11 +696,6 @@ msgstr "了解更多"
 msgid "Galactic grid"
 msgstr "银河网格"
 
-#: src/translations.h:87
-#, fuzzy
-msgid "Galatea"
-msgstr "星系"
-
 #: src/core/modules/Nebula.cpp:269
 msgid "Galaxy"
 msgstr "星系"
@@ -736,7 +704,7 @@ msgstr "星系"
 msgid "Ganymede"
 msgstr "木卫三(加尼米德)"
 
-#: src/translations.h:146
+#: src/translations.h:121
 msgid "General "
 msgstr "一般设置 "
 
@@ -766,22 +734,17 @@ msgstr "重力名称文字"
 msgid "Ground"
 msgstr "地面"
 
-#: src/translations.h:90
-#, fuzzy
-msgid "Halimede"
-msgstr "木卫三(加尼米德)"
-
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
 msgstr "Hammer-Aitoff"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:100
+#: src/translations.h:75
 msgid "Hebe"
 msgstr "韶神星(小行星6号)"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:118
+#: src/translations.h:93
 msgid "Hektor"
 msgstr "赫克托(小行星624号)"
 
@@ -805,10 +768,6 @@ msgstr "静止时隐藏滑鼠指标"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "至今最高频率 (1966 狮子座流星雨)"
 
-#: src/translations.h:51
-msgid "Himalia"
-msgstr ""
-
 #: src/core/StelObject.cpp:80
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
@@ -819,15 +778,15 @@ msgid "Hourly zenith rate:"
 msgstr "流星天顶小时率:"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:108
+#: src/translations.h:83
 msgid "Hygiea"
 msgstr "健神星(小行星10号)"
 
-#: src/translations.h:69
+#: src/translations.h:57
 msgid "Hyperion"
 msgstr "土卫七(海帕里翁)"
 
-#: src/translations.h:70
+#: src/translations.h:58
 msgid "Iapetus"
 msgstr "土卫八(伊阿珀托斯)"
 
@@ -853,7 +812,7 @@ msgstr "加快时间流逝（小幅度）"
 msgid "Install a new landscape from a ZIP archive..."
 msgstr "从 ZIP 压缩包中添加地景..."
 
-#: src/translations.h:131
+#: src/translations.h:106
 msgid "Inuit"
 msgstr "因纽特(爱斯基摩)"
 
@@ -866,7 +825,7 @@ msgid "Io"
 msgstr "木卫一(伊俄)"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:102
+#: src/translations.h:77
 msgid "Iris"
 msgstr "虹神星(小行星7号)"
 
@@ -886,7 +845,7 @@ msgstr ""
 msgid "Keys"
 msgstr "按键"
 
-#: src/translations.h:132
+#: src/translations.h:107
 msgid "Korean"
 msgstr "韩语"
 
@@ -894,7 +853,7 @@ msgstr "韩语"
 msgid "Labels and Markers"
 msgstr "名称及标记"
 
-#: src/translations.h:133
+#: src/translations.h:108
 msgid "Lakota"
 msgstr "拉科塔"
 
@@ -912,29 +871,17 @@ msgstr "地景 “%1”已被成功安装。"
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "地景 “%1”已被成功移除。"
 
-#: src/translations.h:197
+#: src/translations.h:172
 msgid "Landscape: "
 msgstr "地貌： "
-
-#: src/translations.h:93
-msgid "Laomedeia"
-msgstr ""
-
-#: src/translations.h:88
-msgid "Larissa"
-msgstr ""
 
 #: src/ui_locationDialogGui.h:395
 msgid "Latitude:"
 msgstr "纬度:"
 
-#: src/translations.h:153
+#: src/translations.h:128
 msgid "Latitude: "
 msgstr "纬度: "
-
-#: src/translations.h:58
-msgid "Leda"
-msgstr ""
 
 #: src/gui/HelpDialog.cpp:56
 msgid "Left click"
@@ -944,7 +891,7 @@ msgstr "按鼠标左键"
 msgid "License"
 msgstr "授权条款"
 
-#: src/translations.h:196
+#: src/translations.h:171
 msgid "Light Pollution Luminance: "
 msgstr "光污染程度: "
 
@@ -952,11 +899,11 @@ msgstr "光污染程度: "
 msgid "Light pollution: "
 msgstr "光污染: "
 
-#: src/translations.h:178
+#: src/translations.h:153
 msgid "Limiting Magnitude: "
 msgstr "星等限制: "
 
-#: src/translations.h:213
+#: src/translations.h:188
 msgid "Load Default Configuration: "
 msgstr "载入默认设置: "
 
@@ -964,7 +911,7 @@ msgstr "载入默认设置: "
 msgid "Load at startup"
 msgstr "启动时加载"
 
-#: src/translations.h:207
+#: src/translations.h:182
 msgid "Local Script: "
 msgstr "本地脚本: "
 
@@ -988,19 +935,15 @@ msgstr "记录"
 msgid "Longitude:"
 msgstr "经度:"
 
-#: src/translations.h:154
+#: src/translations.h:129
 msgid "Longitude: "
 msgstr "经度: "
 
-#: src/translations.h:55
-msgid "Lysithea"
-msgstr ""
-
-#: src/translations.h:200
+#: src/translations.h:175
 msgid "Magnitude Scaling Multiplier: "
 msgstr "星等放大倍数： "
 
-#: src/translations.h:175
+#: src/translations.h:150
 msgid "Magnitude Sizing Multiplier: "
 msgstr "星等成像加成: "
 
@@ -1018,11 +961,11 @@ msgstr "视星等: <b>%1</b> (B-V: %2)"
 msgid "Main"
 msgstr "主设定画面"
 
-#: src/translations.h:198
+#: src/translations.h:173
 msgid "Manual zoom: "
 msgstr "手动缩放: "
 
-#: src/translations.h:134
+#: src/translations.h:109
 msgid "Maori"
 msgstr "毛利"
 
@@ -1042,11 +985,11 @@ msgstr "遮去在中间圆形范围以外的星空"
 msgid "Maximum FOV: "
 msgstr "最大视野: "
 
-#: src/translations.h:176
+#: src/translations.h:151
 msgid "Maximum Magnitude to Label: "
 msgstr "显示星名的最暗星等: "
 
-#: src/translations.h:202
+#: src/translations.h:177
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "显示星云名称的最暗星等: "
 
@@ -1062,7 +1005,7 @@ msgstr "水星"
 msgid "Meridian"
 msgstr "子午线"
 
-#: src/translations.h:188
+#: src/translations.h:163
 msgid "Meridian Line"
 msgstr "子午线"
 
@@ -1071,19 +1014,19 @@ msgid "Meridian line"
 msgstr "子午线"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:106
+#: src/translations.h:81
 msgid "Metis"
 msgstr "颖神星(小行星9号)"
 
-#: src/translations.h:201
+#: src/translations.h:176
 msgid "Milky Way intensity: "
 msgstr "银河亮度： "
 
-#: src/translations.h:63
+#: src/translations.h:51
 msgid "Mimas"
 msgstr "土卫一(美马斯)"
 
-#: src/translations.h:74
+#: src/translations.h:62
 msgid "Miranda"
 msgstr "米兰达(天卫五)"
 
@@ -1118,19 +1061,15 @@ msgstr "将天文望远镜%1对准当前屏幕的中心"
 msgid "Movement and Selection"
 msgstr "移动和选择"
 
-#: src/translations.h:122
+#: src/translations.h:97
 msgid "N"
 msgstr "北"
-
-#: src/translations.h:84
-msgid "Naiad"
-msgstr ""
 
 #: src/ui_locationDialogGui.h:408
 msgid "Name/City:"
 msgstr "地名/城市:"
 
-#: src/translations.h:135
+#: src/translations.h:110
 msgid "Navajo"
 msgstr "纳瓦霍"
 
@@ -1142,11 +1081,11 @@ msgstr "导航"
 msgid "Nebula"
 msgstr "星云"
 
-#: src/translations.h:194
+#: src/translations.h:169
 msgid "Nebula Circles"
 msgstr "星云标记"
 
-#: src/translations.h:193
+#: src/translations.h:168
 msgid "Nebula Names"
 msgstr "星云名称"
 
@@ -1158,17 +1097,9 @@ msgstr "星云"
 msgid "Nebulas background images"
 msgstr "星云背景影像"
 
-#: src/translations.h:72
+#: src/translations.h:60
 msgid "Neptune"
 msgstr "海王星"
-
-#: src/translations.h:83
-msgid "Nereid"
-msgstr ""
-
-#: src/translations.h:94
-msgid "Neso"
-msgstr ""
 
 #: src/gui/LocationDialog.cpp:332
 msgid "New Location"
@@ -1201,7 +1132,7 @@ msgstr "无"
 msgid "Normal rate"
 msgstr "日常频率"
 
-#: src/translations.h:136
+#: src/translations.h:111
 msgid "Norse"
 msgstr "挪威"
 
@@ -1210,11 +1141,11 @@ msgstr "挪威"
 msgid "OSX Developer: %1"
 msgstr "OSX开发: %1"
 
-#: src/translations.h:78
+#: src/translations.h:66
 msgid "Oberon"
 msgstr "奥伯龙(天卫四)"
 
-#: src/translations.h:199
+#: src/translations.h:174
 msgid "Object Sizing Rule: "
 msgstr "天体放缩规则： "
 
@@ -1274,10 +1205,6 @@ msgstr "移动画面"
 msgid "Parallax: %1\""
 msgstr "视差: %1\""
 
-#: src/translations.h:53
-msgid "Pasiphae"
-msgstr ""
-
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
 msgstr "透视效果"
@@ -1293,19 +1220,19 @@ msgstr ""
 msgid "Phobos"
 msgstr "火卫一(弗伯斯)"
 
-#: src/translations.h:71
+#: src/translations.h:59
 msgid "Phoebe"
 msgstr "土卫九(菲比)"
 
-#: src/translations.h:185
+#: src/translations.h:160
 msgid "Planet Names"
 msgstr "行星名称"
 
-#: src/translations.h:186
+#: src/translations.h:161
 msgid "Planet Orbits"
 msgstr "行星规道"
 
-#: src/translations.h:187
+#: src/translations.h:162
 msgid "Planet Trails"
 msgstr "行星轨迹"
 
@@ -1363,11 +1290,11 @@ msgstr "适用于天相系统，为 0.9.x 系列的文本模式的用户界面�
 msgid "Plugins"
 msgstr "插件"
 
-#: src/translations.h:79
+#: src/translations.h:67
 msgid "Pluto"
 msgstr "冥王星"
 
-#: src/translations.h:137
+#: src/translations.h:112
 msgid "Polynesian"
 msgstr "波利尼西亚"
 
@@ -1378,11 +1305,11 @@ msgid ""
 msgstr ""
 "使用基于北美防空联合司令部的两行轨道数据（NORAD TLE）预测绕地人造卫星的位置"
 
-#: src/translations.h:163
+#: src/translations.h:138
 msgid "Preset Sky Time: "
 msgstr "当前星空时间： "
 
-#: src/translations.h:166
+#: src/translations.h:141
 msgid "Preset Time"
 msgstr "预设时间"
 
@@ -1399,17 +1326,9 @@ msgstr "计划协调&开发经理: %1"
 msgid "Projection"
 msgstr "投影方式"
 
-#: src/translations.h:89
-msgid "Proteus"
-msgstr ""
-
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
 msgstr "提供一个角度测量工具"
-
-#: src/translations.h:91
-msgid "Psamathe"
-msgstr ""
 
 #: src/gui/StelGui.cpp:171
 msgid "Quit"
@@ -1470,7 +1389,7 @@ msgstr ""
 msgid "Retry"
 msgstr "重试"
 
-#: src/translations.h:67
+#: src/translations.h:55
 msgid "Rhea"
 msgstr "土卫五(瑞亚)"
 
@@ -1490,17 +1409,13 @@ msgstr "执行指令： "
 msgid "Running script: [none]"
 msgstr "执行指令：[空白]"
 
-#: src/translations.h:123
+#: src/translations.h:98
 msgid "S"
 msgstr "南"
 
-#: src/translations.h:138
+#: src/translations.h:113
 msgid "Sami"
 msgstr "萨米"
-
-#: src/translations.h:92
-msgid "Sao"
-msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:127
 msgid "Satellite hints"
@@ -1518,11 +1433,11 @@ msgstr "人造卫星"
 msgid "Satellites configuration window"
 msgstr "人造卫星设置窗口"
 
-#: src/translations.h:62
+#: src/translations.h:50
 msgid "Saturn"
 msgstr "土星"
 
-#: src/translations.h:214
+#: src/translations.h:189
 msgid "Save Current Configuration as Default: "
 msgstr "将当前设置保存为默认： "
 
@@ -1560,7 +1475,7 @@ msgstr "脚本控制台窗口"
 msgid "Scripts"
 msgstr "脚本"
 
-#: src/translations.h:150
+#: src/translations.h:125
 msgid "Scripts "
 msgstr "脚本 "
 
@@ -1572,7 +1487,7 @@ msgstr "搜索"
 msgid "Select a ZIP archive that contains a Stellarium landscape"
 msgstr "请选择一个包含 Stellarium 地景的 ZIP 压缩包"
 
-#: src/translations.h:211
+#: src/translations.h:186
 msgid "Select and exit to run."
 msgstr "选择并在退出后运行"
 
@@ -1592,19 +1507,19 @@ msgstr "选择单一星座"
 msgid "Selected object information"
 msgstr "已选择天体资料"
 
-#: src/translations.h:144
+#: src/translations.h:119
 msgid "Set Location "
 msgstr "设置当前地点 "
 
-#: src/translations.h:145
+#: src/translations.h:120
 msgid "Set Time "
 msgstr "时间设置 "
 
-#: src/translations.h:159
+#: src/translations.h:134
 msgid "Set Time Zone: "
 msgstr "时区设置: "
 
-#: src/translations.h:217
+#: src/translations.h:192
 msgid "Set UI Locale: "
 msgstr "设置界面语言： "
 
@@ -1686,7 +1601,7 @@ msgstr "显示行星轨道"
 msgid "Show planets"
 msgstr "显示行星"
 
-#: src/translations.h:173
+#: src/translations.h:148
 msgid "Show: "
 msgstr "显示: "
 
@@ -1694,21 +1609,17 @@ msgstr "显示: "
 msgid "Shows the sky as if looking through a telescope eyepiece"
 msgstr "如同通过天文望远镜的目镜一样观测天空"
 
-#: src/translations.h:215
+#: src/translations.h:190
 msgid "Shut Down: "
 msgstr "关闭程序: "
 
-#: src/translations.h:162
+#: src/translations.h:137
 msgid "Sidereal"
 msgstr "恒星"
 
 #: src/ui_viewDialog.h:1013
 msgid "Simulate light speed"
 msgstr "模拟光速"
-
-#: src/translations.h:54
-msgid "Sinope"
-msgstr ""
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
@@ -1725,19 +1636,19 @@ msgstr ""
 msgid "Sky"
 msgstr "天空"
 
-#: src/translations.h:170
+#: src/translations.h:145
 msgid "Sky Culture: "
 msgstr "星空文化: "
 
-#: src/translations.h:171
+#: src/translations.h:146
 msgid "Sky Language: "
 msgstr "天文术语： "
 
-#: src/translations.h:164
+#: src/translations.h:139
 msgid "Sky Time At Start-up: "
 msgstr "启动时的星空时间: "
 
-#: src/translations.h:158
+#: src/translations.h:133
 msgid "Sky Time: "
 msgstr "星空时间: "
 
@@ -1749,7 +1660,7 @@ msgstr "星空及显示"
 msgid "Slow down the script execution rate"
 msgstr "减慢脚本执行速度"
 
-#: src/translations.h:156
+#: src/translations.h:131
 msgid "Solar System Body: "
 msgstr "太阳系天体: "
 
@@ -1757,7 +1668,7 @@ msgstr "太阳系天体: "
 msgid "Solar System Editor"
 msgstr "太阳系编辑器"
 
-#: src/translations.h:95
+#: src/translations.h:70
 msgid "Solar System Observer"
 msgstr "太阳系全览点"
 
@@ -1789,7 +1700,7 @@ msgstr "球面镜扭曲 (使用 Stellarium 做为低成本星象投影系统的�
 msgid "Standard Perseids rate"
 msgstr "标准英仙座流星雨频率"
 
-#: src/translations.h:174
+#: src/translations.h:149
 msgid "Star Value Multiplier: "
 msgstr "星体值倍数： "
 
@@ -1805,7 +1716,7 @@ msgstr "星空术语"
 msgid "Stars"
 msgstr "恒星"
 
-#: src/translations.h:147
+#: src/translations.h:122
 msgid "Stars "
 msgstr "恒星 "
 
@@ -1916,17 +1827,13 @@ msgstr "系统日期:"
 msgid "Telescope Control"
 msgstr "望远镜控制"
 
-#: src/translations.h:65
+#: src/translations.h:53
 msgid "Tethys"
 msgstr "土卫三(特提斯)"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:79
 msgid "Text User Interface"
 msgstr "文本用户界面（TUI）"
-
-#: src/translations.h:85
-msgid "Thalassa"
-msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:187
 msgid ""
@@ -1993,11 +1900,6 @@ msgstr "选择的地景无法删除，或是删除不完全。"
 msgid "The width of your view when Stellarium starts"
 msgstr "Stellarium 默认的视野宽度"
 
-#: src/translations.h:59
-#, fuzzy
-msgid "Thebe"
-msgstr "土卫九(菲比)"
-
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
@@ -2008,7 +1910,7 @@ msgstr "此插件使 Stellarium 能够向已经载入计算机的天文望远镜
 msgid "This system does not support OpenGL."
 msgstr "您的系统不支持 OpenGL"
 
-#: src/translations.h:167
+#: src/translations.h:142
 msgid "Time Display Format: "
 msgstr "时间显示格式: "
 
@@ -2016,11 +1918,11 @@ msgstr "时间显示格式: "
 msgid "Time Zone"
 msgstr "时区"
 
-#: src/translations.h:68
+#: src/translations.h:56
 msgid "Titan"
 msgstr "土卫六(泰坦)"
 
-#: src/translations.h:77
+#: src/translations.h:65
 msgid "Titania"
 msgstr "蒂但尼亚(天卫三)"
 
@@ -2040,12 +1942,7 @@ msgstr "工具"
 msgid "Track object"
 msgstr "追随物体"
 
-#: src/translations.h:82
-#, fuzzy
-msgid "Triton"
-msgstr "土卫六(泰坦)"
-
-#: src/translations.h:139
+#: src/translations.h:114
 msgid "Tupi-Guarani"
 msgstr "图皮-瓜拉尼"
 
@@ -2053,7 +1950,7 @@ msgstr "图皮-瓜拉尼"
 msgid "Twinkle:"
 msgstr "闪烁:"
 
-#: src/translations.h:177
+#: src/translations.h:152
 msgid "Twinkling: "
 msgstr "闪烁： "
 
@@ -2062,11 +1959,11 @@ msgstr "闪烁： "
 msgid "Type: <b>%1</b>"
 msgstr "类型：<b>%1</b>"
 
-#: src/translations.h:209
+#: src/translations.h:184
 msgid "USB Script: "
 msgstr "USB 脚本: "
 
-#: src/translations.h:76
+#: src/translations.h:64
 msgid "Umbriel"
 msgstr "昂布里尔(天卫二)"
 
@@ -2078,11 +1975,11 @@ msgstr "未收录类型"
 msgid "Unknown"
 msgstr "不明"
 
-#: src/translations.h:216
+#: src/translations.h:191
 msgid "Update me via Internet: "
 msgstr "在线更新: "
 
-#: src/translations.h:73
+#: src/translations.h:61
 msgid "Uranus"
 msgstr "天王星"
 
@@ -2126,7 +2023,7 @@ msgstr "显示"
 msgid "Visible"
 msgstr "可见"
 
-#: src/translations.h:125
+#: src/translations.h:100
 msgid "W"
 msgstr "西"
 
@@ -2136,7 +2033,7 @@ msgid ""
 "operation is irreversible."
 msgstr "警告：移除选择的地景会删除其文件，此操作是不可逆的。"
 
-#: src/translations.h:140
+#: src/translations.h:115
 msgid "Western"
 msgstr "西方"
 
@@ -2171,7 +2068,7 @@ msgstr "您可以通过手动删除文件夹 %1 来移除此地景。"
 msgid "ZIP archives"
 msgstr "ZIP 压缩包"
 
-#: src/translations.h:203
+#: src/translations.h:178
 msgid "Zoom Duration: "
 msgstr "缩放持续时间: "
 
