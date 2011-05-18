@@ -1274,6 +1274,14 @@ QStringList SolarSystem::getAllPlanetEnglishNames() const
 	return res;
 }
 
+QStringList SolarSystem::getAllPlanetLocalizedNames() const
+{
+        QStringList res;
+        foreach (const PlanetP& p, systemPlanets)
+                res.append(p->nameI18);
+        return res;
+}
+
 void SolarSystem::reloadPlanets()
 {
 	//Save flag states
