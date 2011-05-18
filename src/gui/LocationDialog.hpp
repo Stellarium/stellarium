@@ -94,8 +94,8 @@ private slots:
 	
 private:
 	QString lastPlanet;
-        QStringList planetEnglishNames;
-        QStringList planetLocalizedNames;
+	QStringList planetEnglishNames;
+	QStringList planetLocalizedNames;
 	bool lastVisionMode;
 };
 
