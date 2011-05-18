@@ -185,7 +185,7 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	idx = planetEnglishNames.indexOf(loc.planetName);
 	if (idx==-1)
 	{
-		// Use Earth as default                
+		// Use Earth as default
 		ui->planetNameComboBox->findText(planetLocalizedNames.at(planetEnglishNames.indexOf("Earth")));
 	}
 	ui->planetNameComboBox->setCurrentIndex(idx);
