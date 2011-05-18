@@ -254,8 +254,7 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 StelLocation LocationDialog::locationFromFields() const
 {
         StelLocation loc;
-        int idx = planetLocalizedNames.indexOf(ui->planetNameComboBox->currentText());
-        loc.planetName = planetEnglishNames.at(idx);
+        loc.planetName = planetEnglishNames.at(planetLocalizedNames.indexOf(ui->planetNameComboBox->currentText()));
 	loc.name = ui->cityNameLineEdit->text();
 	loc.latitude = ui->latitudeSpinBox->valueDegrees();
 	loc.longitude = ui->longitudeSpinBox->valueDegrees();
