@@ -86,8 +86,7 @@ void LocationDialog::createDialogContent()
 	planetEnglishNames = ssystem->getAllPlanetEnglishNames();
 	planetLocalizedNames = ssystem->getAllPlanetLocalizedNames();
 	ui->planetNameComboBox->insertItems(0, planetLocalizedNames);
-
-        ui->countryNameComboBox->insertItems(0, StelLocaleMgr::getAllCountryNames());
+	ui->countryNameComboBox->insertItems(0, StelLocaleMgr::getAllCountryNames());
 
 	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 	connect(ui->citiesListView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(listItemActivated(const QModelIndex&)));
@@ -205,12 +204,12 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 void LocationDialog::setMapForLocation(const StelLocation& loc)
 {
 	// Avoids usless processing
-        if (lastPlanet==loc.planetName && lastVisionMode==StelApp::getInstance().getVisionModeNight())
+	if (lastPlanet==loc.planetName && lastVisionMode==StelApp::getInstance().getVisionModeNight())
 		return;
 
 	QPixmap pixmap;
 	// Try to set the proper planet map image
-        if (loc.planetName=="Earth")
+	if (loc.planetName=="Earth")
 	{
 		// Special case for earth, we don't want to see the clouds
 		pixmap = QPixmap(":/graphicGui/world.png");
@@ -218,7 +217,7 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 	else
 	{
 		SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-                PlanetP p = ssm->searchByEnglishName(loc.planetName);
+		PlanetP p = ssm->searchByEnglishName(loc.planetName);
 		QString path;
 		if (p)
 		{
@@ -232,7 +231,7 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 				return;
 			}
 			pixmap = QPixmap(path);
-		}                      
+		}
 	}
 
 	if (StelApp::getInstance().getVisionModeNight())
@@ -245,15 +244,15 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 	}
 
 	// For caching
-        lastPlanet = loc.planetName;
+	lastPlanet = loc.planetName;
 	lastVisionMode = StelApp::getInstance().getVisionModeNight();
 }
 
 // Create a StelLocation instance from the fields
 StelLocation LocationDialog::locationFromFields() const
 {
-        StelLocation loc;
-        loc.planetName = planetEnglishNames.at(planetLocalizedNames.indexOf(ui->planetNameComboBox->currentText()));
+	StelLocation loc;
+	loc.planetName = planetEnglishNames.at(planetLocalizedNames.indexOf(ui->planetNameComboBox->currentText()));
 	loc.name = ui->cityNameLineEdit->text();
 	loc.latitude = ui->latitudeSpinBox->valueDegrees();
 	loc.longitude = ui->longitudeSpinBox->valueDegrees();
