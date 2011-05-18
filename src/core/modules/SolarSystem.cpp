@@ -977,7 +977,7 @@ PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
 {
 	foreach (const PlanetP& p, systemPlanets)
 	{
-                if (p->getEnglishName() == planetEnglishName)
+		if (p->getEnglishName() == planetEnglishName)
 			return p;
 	}
 	return PlanetP();
@@ -1276,10 +1276,10 @@ QStringList SolarSystem::getAllPlanetEnglishNames() const
 
 QStringList SolarSystem::getAllPlanetLocalizedNames() const
 {
-        QStringList res;
-        foreach (const PlanetP& p, systemPlanets)
-                res.append(p->nameI18);
-        return res;
+	QStringList res;
+	foreach (const PlanetP& p, systemPlanets)
+		res.append(p->nameI18);
+	return res;
 }
 
 void SolarSystem::reloadPlanets()

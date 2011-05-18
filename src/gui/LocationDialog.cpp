@@ -83,9 +83,9 @@ void LocationDialog::createDialogContent()
 	ui->citiesListView->setModel(proxyModel);
 
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-        planetEnglishNames = ssystem->getAllPlanetEnglishNames();
-        planetLocalizedNames = ssystem->getAllPlanetLocalizedNames();
-        ui->planetNameComboBox->insertItems(0, planetLocalizedNames);
+	planetEnglishNames = ssystem->getAllPlanetEnglishNames();
+	planetLocalizedNames = ssystem->getAllPlanetLocalizedNames();
+	ui->planetNameComboBox->insertItems(0, planetLocalizedNames);
 
         ui->countryNameComboBox->insertItems(0, StelLocaleMgr::getAllCountryNames());
 
@@ -183,12 +183,11 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	ui->longitudeSpinBox->setDegrees(loc.longitude);
 	ui->latitudeSpinBox->setDegrees(loc.latitude);
 	ui->altitudeSpinBox->setValue(loc.altitude);
-        //idx = ui->planetNameComboBox->findText(loc.planetName, Qt::MatchCaseSensitive);
-        idx = planetEnglishNames.indexOf(loc.planetName);
+	idx = planetEnglishNames.indexOf(loc.planetName);
 	if (idx==-1)
 	{
 		// Use Earth as default                
-                ui->planetNameComboBox->findText(planetLocalizedNames.at(planetEnglishNames.indexOf("Earth")));
+		ui->planetNameComboBox->findText(planetLocalizedNames.at(planetEnglishNames.indexOf("Earth")));
 	}
 	ui->planetNameComboBox->setCurrentIndex(idx);
 	setMapForLocation(loc);
