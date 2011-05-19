@@ -200,6 +200,9 @@ public:
 	//! Get the list of all the planet english names
 	QStringList getAllPlanetEnglishNames() const;
 
+	//! Get the list of all the planet localized names
+	QStringList getAllPlanetLocalizedNames() const;
+
 	//! Reload the planets
 	void reloadPlanets();
 
