@@ -1265,13 +1265,20 @@ void SolarSystem::setSelected(const QString& englishName)
 	setSelected(searchByEnglishName(englishName));
 }
 
-
 // Get the list of all the planet english names
 QStringList SolarSystem::getAllPlanetEnglishNames() const
 {
 	QStringList res;
 	foreach (const PlanetP& p, systemPlanets)
 		res.append(p->englishName);
+	return res;
+}
+
+QStringList SolarSystem::getAllPlanetLocalizedNames() const
+{
+	QStringList res;
+	foreach (const PlanetP& p, systemPlanets)
+		res.append(p->nameI18);
 	return res;
 }
 
