@@ -2,6 +2,7 @@
  * Stellarium
  * Copyright (C) 2006 Fabien Chereau
  * Copyright (C) 2010 Bogdan Marinov (add/remove landscapes feature)
+ * Copyright (C) 2011 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -444,6 +445,8 @@ QString LandscapeMgr::getCurrentLandscapeName() const
 
 QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 {
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+	QString planetName = ssmgr->searchByEnglishName(landscape->getLocation().planetName)->getNameI18n();
 	QString desc = QString("<h3>%1</h3>").arg(landscape->getName());
 	desc += landscape->getDescription();
 	desc+="<br><br>";
@@ -456,9 +459,9 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 		desc += StelUtils::radToDmsStrAdapt(landscape->getLocation().longitude * M_PI/180.);
 		desc += "/" + StelUtils::radToDmsStrAdapt(landscape->getLocation().latitude *M_PI/180.);
 		desc += QString(q_(", %1 m")).arg(landscape->getLocation().altitude);
-		if (landscape->getLocation().planetName!="")
+		if (planetName!="")
 		{
-			desc += "<br><b>"+q_("Planet: ")+"</b>"+landscape->getLocation().planetName;
+			desc += "<br><b>"+q_("Planet: ")+"</b>"+planetName;
 		}
 		desc += "<br><br>";
 	}
