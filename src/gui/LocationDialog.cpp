@@ -85,7 +85,7 @@ void LocationDialog::createDialogContent()
 
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	planetEnglishNames = ssystem->getAllPlanetEnglishNames();
-	planetLocalizedNames = ssystem->getAllPlanetLocalizedNames();
+	QStringList planetLocalizedNames = ssystem->getAllPlanetLocalizedNames();
 	ui->planetNameComboBox->insertItems(0, planetLocalizedNames);
 	ui->countryNameComboBox->insertItems(0, StelLocaleMgr::getAllCountryNames());
 
@@ -167,8 +167,7 @@ void LocationDialog::connectEditSignals()
 }
 
 void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
-{
-	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+{	
 	// Deactivate edit signals
 	disconnectEditSignals();
 
@@ -188,6 +187,7 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	if (idx==-1)
 	{
 		// Use Earth as default
+		SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 		ui->planetNameComboBox->findText(ssystem->getEarth()->getNameI18n());
 	}
 	ui->planetNameComboBox->setCurrentIndex(idx);
