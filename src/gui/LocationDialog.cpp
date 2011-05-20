@@ -168,6 +168,7 @@ void LocationDialog::connectEditSignals()
 
 void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 {
+	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	// Deactivate edit signals
 	disconnectEditSignals();
 
@@ -187,7 +188,7 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	if (idx==-1)
 	{
 		// Use Earth as default
-		ui->planetNameComboBox->findText(planetLocalizedNames.at(planetEnglishNames.indexOf("Earth")));
+		ui->planetNameComboBox->findText(ssystem->getEarth()->getNameI18n());
 	}
 	ui->planetNameComboBox->setCurrentIndex(idx);
 	setMapForLocation(loc);
@@ -252,8 +253,9 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 // Create a StelLocation instance from the fields
 StelLocation LocationDialog::locationFromFields() const
 {
+	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	StelLocation loc;
-	loc.planetName = planetEnglishNames.at(planetLocalizedNames.indexOf(ui->planetNameComboBox->currentText()));
+	loc.planetName = ssystem->searchByNameI18n(ui->planetNameComboBox->currentText())->getEnglishName();
 	loc.name = ui->cityNameLineEdit->text();
 	loc.latitude = ui->latitudeSpinBox->valueDegrees();
 	loc.longitude = ui->longitudeSpinBox->valueDegrees();
