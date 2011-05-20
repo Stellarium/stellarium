@@ -168,6 +168,9 @@ public slots:
 	//! Get the light pollution following the Bortle Scale
 	int getAtmosphereBortleLightPollution();
 
+	//! Get version for displaying Landscape
+	QString getVersion() const;
+
 	//! Set the rotation of the landscape about the z-axis.
 	//! This is intended for special uses such as when the landscape consists of
 	//! a vehicle which might change orientation over time (e.g. a ship).
