@@ -21,7 +21,7 @@
 #define _LOCATIONDIALOG_HPP_
 
 #include <QObject>
-#include <QStringListModel>
+#include <QStringList>
 #include "StelDialog.hpp"
 
 class Ui_locationDialogForm;
@@ -95,7 +95,6 @@ private slots:
 private:
 	QString lastPlanet;
 	QStringList planetEnglishNames;
-	QStringList planetLocalizedNames;
 	bool lastVisionMode;
 };
 
