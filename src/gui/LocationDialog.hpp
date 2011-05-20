@@ -92,7 +92,7 @@ private slots:
 	void useAsDefaultClicked();
 	
 private:
-	QString lastPlanet;
+	QString lastPlanet;	
 	bool lastVisionMode;
 };
 
