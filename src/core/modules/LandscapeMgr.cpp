@@ -395,6 +395,10 @@ bool LandscapeMgr::getFlagFog() const
 	return landscape->getFlagShowFog();
 }
 
+QString LandscapeMgr::getVersion() const
+{
+	return landscape->getVersion();
+}
 /*********************************************************************
  Retrieve list of the names of all the available landscapes
  *********************************************************************/
@@ -449,9 +453,13 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 	QString planetName = ssmgr->searchByEnglishName(landscape->getLocation().planetName)->getNameI18n();
 	QString desc = QString("<h3>%1</h3>").arg(landscape->getName());
 	desc += landscape->getDescription();
-	desc+="<br><br>";
+	desc+="<p>";
 	desc+="<b>"+q_("Author: ")+"</b>";
 	desc+=landscape->getAuthorName();
+	if (landscape->getVersion()!="")
+	{
+		desc += "<br><b>"+q_("Version: ")+"</b>"+landscape->getVersion();
+	}
 	desc+="<br>";
 	desc+="<b>"+q_("Location: ")+"</b>";
 	if (landscape->getLocation().longitude>-500.0 && landscape->getLocation().latitude>-500.0)

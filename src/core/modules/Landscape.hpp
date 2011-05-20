@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2003 Fabien Chereau
+ * Copyright (C) 2011 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,6 +69,8 @@ public:
 	QString getAuthorName() const {return author;}
 	//! Get landscape description
 	QString getDescription() const {return description;}
+	//! Get landscape version
+	QString getVersion() const {return version;}
 
 	//! Return the associated location or NULL
 	const StelLocation& getLocation() const {return location;}
@@ -94,6 +97,7 @@ protected:
 	LinearFader fogFader;
 	QString author;
 	QString description;
+	QString version;
 	// GZ patched, these can now be set in landscape.ini:
 	int rows; // horizontal rows
 	int cols; // vertical columns
