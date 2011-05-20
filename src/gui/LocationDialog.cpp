@@ -83,10 +83,8 @@ void LocationDialog::createDialogContent()
 	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->citiesListView->setModel(proxyModel);
 
-	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-	planetEnglishNames = ssystem->getAllPlanetEnglishNames();
-	QStringList planetLocalizedNames = ssystem->getAllPlanetLocalizedNames();
-	ui->planetNameComboBox->insertItems(0, planetLocalizedNames);
+	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);		
+	ui->planetNameComboBox->insertItems(0, ssystem->getAllPlanetLocalizedNames());
 	ui->countryNameComboBox->insertItems(0, StelLocaleMgr::getAllCountryNames());
 
 	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
@@ -183,11 +181,11 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	ui->longitudeSpinBox->setDegrees(loc.longitude);
 	ui->latitudeSpinBox->setDegrees(loc.latitude);
 	ui->altitudeSpinBox->setValue(loc.altitude);
-	idx = planetEnglishNames.indexOf(loc.planetName);
+	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	idx = ui->planetNameComboBox->findText(ssystem->searchByEnglishName(loc.planetName)->getNameI18n(), Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
-		// Use Earth as default
-		SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+		// Use Earth as default		
 		ui->planetNameComboBox->findText(ssystem->getEarth()->getNameI18n());
 	}
 	ui->planetNameComboBox->setCurrentIndex(idx);
