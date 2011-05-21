@@ -124,6 +124,12 @@ public slots:
 	//! @param name the name of the new landscape, as found in the landscape:name key of the landscape.ini file.
 	bool setCurrentLandscapeName(const QString& name);
 
+	//! Get the current landscape localized name
+	QString getCurrentLandscapeI18Name() const;
+
+	//! Get the english name of landscape from localized name
+	QString getLandscapeEnglishName(QString landscapeName) const;
+
 	//! Get the default landscape ID.
 	const QString& getDefaultLandscapeID() const {return defaultLandscapeID;}
 	//! Change the default landscape to the landscape with the ID specified.
