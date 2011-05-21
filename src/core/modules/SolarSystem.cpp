@@ -2,6 +2,7 @@
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
  * Copyright (C) 2010 Bogdan Marinov
+ * Copyright (C) 2011 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1265,13 +1266,20 @@ void SolarSystem::setSelected(const QString& englishName)
 	setSelected(searchByEnglishName(englishName));
 }
 
-
 // Get the list of all the planet english names
 QStringList SolarSystem::getAllPlanetEnglishNames() const
 {
 	QStringList res;
 	foreach (const PlanetP& p, systemPlanets)
 		res.append(p->englishName);
+	return res;
+}
+
+QStringList SolarSystem::getAllPlanetLocalizedNames() const
+{
+	QStringList res;
+	foreach (const PlanetP& p, systemPlanets)
+		res.append(p->nameI18);
 	return res;
 }
 
