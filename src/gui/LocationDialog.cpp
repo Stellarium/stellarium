@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Guillaume Chereau
+ * Copyright (C) 2011 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -82,9 +83,8 @@ void LocationDialog::createDialogContent()
 	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->citiesListView->setModel(proxyModel);
 
-	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-	ui->planetNameComboBox->insertItems(0, ssystem->getAllPlanetEnglishNames());
-
+	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);		
+	ui->planetNameComboBox->insertItems(0, ssystem->getAllPlanetLocalizedNames());
 	ui->countryNameComboBox->insertItems(0, StelLocaleMgr::getAllCountryNames());
 
 	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
@@ -165,7 +165,7 @@ void LocationDialog::connectEditSignals()
 }
 
 void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
-{
+{	
 	// Deactivate edit signals
 	disconnectEditSignals();
 
@@ -181,11 +181,12 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	ui->longitudeSpinBox->setDegrees(loc.longitude);
 	ui->latitudeSpinBox->setDegrees(loc.latitude);
 	ui->altitudeSpinBox->setValue(loc.altitude);
-	idx = ui->planetNameComboBox->findText(loc.planetName, Qt::MatchCaseSensitive);
+	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	idx = ui->planetNameComboBox->findText(ssystem->searchByEnglishName(loc.planetName)->getNameI18n(), Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
-		// Use Earth as default
-		ui->planetNameComboBox->findText("Earth");
+		// Use Earth as default		
+		ui->planetNameComboBox->findText(ssystem->getEarth()->getNameI18n());
 	}
 	ui->planetNameComboBox->setCurrentIndex(idx);
 	setMapForLocation(loc);
@@ -250,8 +251,9 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 // Create a StelLocation instance from the fields
 StelLocation LocationDialog::locationFromFields() const
 {
+	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	StelLocation loc;
-	loc.planetName = ui->planetNameComboBox->currentText();
+	loc.planetName = ssystem->searchByNameI18n(ui->planetNameComboBox->currentText())->getEnglishName();
 	loc.name = ui->cityNameLineEdit->text();
 	loc.latitude = ui->latitudeSpinBox->valueDegrees();
 	loc.longitude = ui->longitudeSpinBox->valueDegrees();

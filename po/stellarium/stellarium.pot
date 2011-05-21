@@ -1,18 +1,20 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Stellarium's team
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-19 19:55+0200\n"
+"POT-Creation-Date: 2011-05-10 14:10+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-05 08:52+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
-"Language: \n"
 
 #: src/core/modules/GridLinesMgr.cpp:516
 msgid "Meridian"
@@ -26,20 +28,20 @@ msgstr ""
 msgid "Equator"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:447
+#: src/core/modules/LandscapeMgr.cpp:450
 msgid "Author: "
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:450
+#: src/core/modules/LandscapeMgr.cpp:453
 msgid "Location: "
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:455
+#: src/core/modules/LandscapeMgr.cpp:458
 #, qt-format
 msgid ", %1 m"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:458
+#: src/core/modules/LandscapeMgr.cpp:461
 msgid "Planet: "
 msgstr ""
 
@@ -48,7 +50,7 @@ msgstr ""
 msgid "Type: <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:95 src/core/modules/Planet.cpp:119
+#: src/core/modules/Nebula.cpp:95 src/core/modules/Planet.cpp:122
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr ""
@@ -90,17 +92,17 @@ msgstr ""
 msgid "Undocumented type"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:122 src/core/modules/StarWrapper.cpp:114
+#: src/core/modules/Planet.cpp:125 src/core/modules/StarWrapper.cpp:114
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:129
+#: src/core/modules/Planet.cpp:132
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:133
+#: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr ""
@@ -233,54 +235,54 @@ msgstr ""
 msgid "Az/Alt: %1/%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:294
+#: src/gui/ConfigurationDialog.cpp:297
 msgid "Select screenshot directory"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:460
+#: src/gui/ConfigurationDialog.cpp:463
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:468
+#: src/gui/ConfigurationDialog.cpp:471
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:508
+#: src/gui/ConfigurationDialog.cpp:511
 msgid "Authors"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:512 src/gui/ViewDialog.cpp:345
+#: src/gui/ConfigurationDialog.cpp:515 src/gui/ViewDialog.cpp:347
 msgid "Contact"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:584
+#: src/gui/ConfigurationDialog.cpp:587
 msgid "Author"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:585
+#: src/gui/ConfigurationDialog.cpp:588
 msgid "License"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:614
+#: src/gui/ConfigurationDialog.cpp:617
 msgid "Running script: "
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:621
+#: src/gui/ConfigurationDialog.cpp:624
 msgid "Running script: [none]"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:664
+#: src/gui/ConfigurationDialog.cpp:667
 msgid "Finished downloading all star catalogs!"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:673
+#: src/gui/ConfigurationDialog.cpp:676
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:675
+#: src/gui/ConfigurationDialog.cpp:678
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -288,31 +290,31 @@ msgid ""
 "Magnitude range: %3 - %4"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:684
+#: src/gui/ConfigurationDialog.cpp:687
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:722 src/gui/ConfigurationDialog.cpp:756
+#: src/gui/ConfigurationDialog.cpp:725 src/gui/ConfigurationDialog.cpp:759
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
 "%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:727
+#: src/gui/ConfigurationDialog.cpp:730
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:807
+#: src/gui/ConfigurationDialog.cpp:810
 msgid "Verifying file integrity..."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:811
+#: src/gui/ConfigurationDialog.cpp:814
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -384,49 +386,49 @@ msgstr ""
 msgid "Set the normal script execution rate"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:162
+#: src/gui/HelpDialog.cpp:163
 msgid "Stellarium Help"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:163
+#: src/gui/HelpDialog.cpp:164
 msgid "Keys"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:171
+#: src/gui/HelpDialog.cpp:172
 msgid "Further Reading"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:172
+#: src/gui/HelpDialog.cpp:173
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:173
+#: src/gui/HelpDialog.cpp:174
 msgid "The Stellarium User Guide"
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:177
+#: src/gui/HelpDialog.cpp:178
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:182
+#: src/gui/HelpDialog.cpp:183
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:187
+#: src/gui/HelpDialog.cpp:188
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:192
+#: src/gui/HelpDialog.cpp:193
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -434,41 +436,41 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:197
+#: src/gui/HelpDialog.cpp:198
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:233 src/gui/HelpDialog.cpp:325
-#: src/gui/HelpDialog.cpp:327 src/gui/StelGui.cpp:169
+#: src/gui/HelpDialog.cpp:234 src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:328 src/gui/StelGui.cpp:169
 msgid "Miscellaneous"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:293
-msgid "Developers"
-msgstr ""
-
 #: src/gui/HelpDialog.cpp:294
-#, qt-format
-msgid "Project coordinator & lead developer: %1"
+msgid "Developers"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:295
 #, qt-format
-msgid "Doc author/developer: %1"
+msgid "Project coordinator & lead developer: %1"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:296
 #, qt-format
+msgid "Doc author/developer: %1"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:297
+#, qt-format
 msgid "Graphic/other designer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:297 src/gui/HelpDialog.cpp:298
-#: src/gui/HelpDialog.cpp:300 src/gui/HelpDialog.cpp:301
+#: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
+#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
 #, qt-format
 msgid "Developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:299
+#: src/gui/HelpDialog.cpp:300
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr ""
@@ -730,105 +732,105 @@ msgstr ""
 msgid "%1m"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:399
+#: src/gui/ViewDialog.cpp:401
 msgid "No description"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:467
+#: src/gui/ViewDialog.cpp:469
 msgid "No shooting stars"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:470
+#: src/gui/ViewDialog.cpp:472
 msgid "Normal rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:473
+#: src/gui/ViewDialog.cpp:475
 msgid "Standard Perseids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:476
+#: src/gui/ViewDialog.cpp:478
 msgid "Exceptional Leonid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:479
+#: src/gui/ViewDialog.cpp:481
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:331
+#: src/gui/LocationDialog.cpp:332
 msgid "New Location"
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:113
+#: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
 msgstr ""
 
 #. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
-#: src/gui/AddRemoveLandscapesDialog.cpp:115
+#: src/gui/AddRemoveLandscapesDialog.cpp:114
 msgid "ZIP archives"
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:128
+#: src/gui/AddRemoveLandscapesDialog.cpp:127
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:129
-#: src/gui/AddRemoveLandscapesDialog.cpp:156
+#: src/gui/AddRemoveLandscapesDialog.cpp:128
+#: src/gui/AddRemoveLandscapesDialog.cpp:155
 msgid "Success"
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:142
-#: src/gui/AddRemoveLandscapesDialog.cpp:212
-#: src/gui/AddRemoveLandscapesDialog.cpp:221
-#: src/gui/AddRemoveLandscapesDialog.cpp:229
+#: src/gui/AddRemoveLandscapesDialog.cpp:141
+#: src/gui/AddRemoveLandscapesDialog.cpp:211
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:228
 msgid "No landscape was installed."
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:143
-#: src/gui/AddRemoveLandscapesDialog.cpp:167
-#: src/gui/AddRemoveLandscapesDialog.cpp:216
-#: src/gui/AddRemoveLandscapesDialog.cpp:222
-#: src/gui/AddRemoveLandscapesDialog.cpp:230
-#: src/gui/AddRemoveLandscapesDialog.cpp:240
+#: src/gui/AddRemoveLandscapesDialog.cpp:142
+#: src/gui/AddRemoveLandscapesDialog.cpp:166
+#: src/gui/AddRemoveLandscapesDialog.cpp:215
+#: src/gui/AddRemoveLandscapesDialog.cpp:221
+#: src/gui/AddRemoveLandscapesDialog.cpp:229
+#: src/gui/AddRemoveLandscapesDialog.cpp:239
 msgid "Error!"
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:155
+#: src/gui/AddRemoveLandscapesDialog.cpp:154
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:166
-#: src/gui/AddRemoveLandscapesDialog.cpp:236
+#: src/gui/AddRemoveLandscapesDialog.cpp:165
+#: src/gui/AddRemoveLandscapesDialog.cpp:235
 msgid "The selected landscape could not be (completely) removed."
 msgstr ""
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:189
+#: src/gui/AddRemoveLandscapesDialog.cpp:188
 #, qt-format
 msgid "Size on disk: %1 MiB"
 msgstr ""
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:215
+#: src/gui/AddRemoveLandscapesDialog.cpp:214
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:221
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
 msgstr ""
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:228
+#: src/gui/AddRemoveLandscapesDialog.cpp:227
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr ""
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:239
+#: src/gui/AddRemoveLandscapesDialog.cpp:238
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr ""
@@ -906,473 +908,569 @@ msgid "Callisto"
 msgstr ""
 
 #: src/translations.h:50
-msgid "Saturn"
+msgid "Amalthea"
 msgstr ""
 
 #: src/translations.h:51
-msgid "Mimas"
+msgid "Himalia"
 msgstr ""
 
 #: src/translations.h:52
-msgid "Enceladus"
+msgid "Elara"
 msgstr ""
 
 #: src/translations.h:53
-msgid "Tethys"
+msgid "Pasiphae"
 msgstr ""
 
 #: src/translations.h:54
-msgid "Dione"
+msgid "Sinope"
 msgstr ""
 
 #: src/translations.h:55
-msgid "Rhea"
+msgid "Lysithea"
 msgstr ""
 
 #: src/translations.h:56
-msgid "Titan"
+msgid "Carme"
 msgstr ""
 
 #: src/translations.h:57
-msgid "Hyperion"
+msgid "Ananke"
 msgstr ""
 
 #: src/translations.h:58
-msgid "Iapetus"
+msgid "Leda"
 msgstr ""
 
 #: src/translations.h:59
-msgid "Phoebe"
+msgid "Thebe"
 msgstr ""
 
 #: src/translations.h:60
-msgid "Neptune"
+msgid "Adrastea"
 msgstr ""
 
-#: src/translations.h:61
-msgid "Uranus"
+#. TRANSLATORS: Asteroid (9) Metis
+#: src/translations.h:61 src/translations.h:106
+msgid "Metis"
 msgstr ""
 
 #: src/translations.h:62
-msgid "Miranda"
+msgid "Saturn"
 msgstr ""
 
 #: src/translations.h:63
-msgid "Ariel"
+msgid "Mimas"
 msgstr ""
 
 #: src/translations.h:64
-msgid "Umbriel"
+msgid "Enceladus"
 msgstr ""
 
 #: src/translations.h:65
-msgid "Titania"
+msgid "Tethys"
 msgstr ""
 
 #: src/translations.h:66
-msgid "Oberon"
+msgid "Dione"
 msgstr ""
 
 #: src/translations.h:67
-msgid "Pluto"
+msgid "Rhea"
 msgstr ""
 
 #: src/translations.h:68
-msgid "Charon"
+msgid "Titan"
 msgstr ""
 
 #: src/translations.h:69
-msgid "Eris"
+msgid "Hyperion"
 msgstr ""
 
 #: src/translations.h:70
+msgid "Iapetus"
+msgstr ""
+
+#: src/translations.h:71
+msgid "Phoebe"
+msgstr ""
+
+#: src/translations.h:72
+msgid "Neptune"
+msgstr ""
+
+#: src/translations.h:73
+msgid "Uranus"
+msgstr ""
+
+#: src/translations.h:74
+msgid "Miranda"
+msgstr ""
+
+#: src/translations.h:75
+msgid "Ariel"
+msgstr ""
+
+#: src/translations.h:76
+msgid "Umbriel"
+msgstr ""
+
+#: src/translations.h:77
+msgid "Titania"
+msgstr ""
+
+#: src/translations.h:78
+msgid "Oberon"
+msgstr ""
+
+#: src/translations.h:79
+msgid "Pluto"
+msgstr ""
+
+#: src/translations.h:80
+msgid "Charon"
+msgstr ""
+
+#: src/translations.h:81
+msgid "Eris"
+msgstr ""
+
+#: src/translations.h:82
+msgid "Triton"
+msgstr ""
+
+#: src/translations.h:83
+msgid "Nereid"
+msgstr ""
+
+#: src/translations.h:84
+msgid "Naiad"
+msgstr ""
+
+#: src/translations.h:85
+msgid "Thalassa"
+msgstr ""
+
+#: src/translations.h:86
+msgid "Despina"
+msgstr ""
+
+#: src/translations.h:87
+msgid "Galatea"
+msgstr ""
+
+#: src/translations.h:88
+msgid "Larissa"
+msgstr ""
+
+#: src/translations.h:89
+msgid "Proteus"
+msgstr ""
+
+#: src/translations.h:90
+msgid "Halimede"
+msgstr ""
+
+#: src/translations.h:91
+msgid "Psamathe"
+msgstr ""
+
+#: src/translations.h:92
+msgid "Sao"
+msgstr ""
+
+#: src/translations.h:93
+msgid "Laomedeia"
+msgstr ""
+
+#: src/translations.h:94
+msgid "Neso"
+msgstr ""
+
+#: src/translations.h:95
 msgid "Solar System Observer"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:73
+#: src/translations.h:98
 msgid "Astraea"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:75
+#: src/translations.h:100
 msgid "Hebe"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:77
+#: src/translations.h:102
 msgid "Iris"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:79
+#: src/translations.h:104
 msgid "Flora"
 msgstr ""
 
-#. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:81
-msgid "Metis"
-msgstr ""
-
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:83
+#: src/translations.h:108
 msgid "Hygiea"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:85
+#: src/translations.h:110
 msgid "Amor"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:87
+#: src/translations.h:112
 msgid "Apophis"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:89
+#: src/translations.h:114
 msgid "Chiron"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:91
+#: src/translations.h:116
 msgid "Eros"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:93
+#: src/translations.h:118
 msgid "Hektor"
 msgstr ""
 
-#: src/translations.h:97
+#: src/translations.h:122
 msgid "N"
 msgstr ""
 
-#: src/translations.h:98
+#: src/translations.h:123
 msgid "S"
 msgstr ""
 
-#: src/translations.h:99
+#: src/translations.h:124
 msgid "E"
 msgstr ""
 
-#: src/translations.h:100
+#: src/translations.h:125
 msgid "W"
 msgstr ""
 
-#: src/translations.h:103
+#: src/translations.h:128
 msgid "Aztec"
 msgstr ""
 
-#: src/translations.h:104
+#: src/translations.h:129
 msgid "Chinese"
 msgstr ""
 
-#: src/translations.h:105
+#: src/translations.h:130
 msgid "Egyptian"
 msgstr ""
 
-#: src/translations.h:106
+#: src/translations.h:131
 msgid "Inuit"
 msgstr ""
 
-#: src/translations.h:107
+#: src/translations.h:132
 msgid "Korean"
 msgstr ""
 
-#: src/translations.h:108
+#: src/translations.h:133
 msgid "Lakota"
 msgstr ""
 
-#: src/translations.h:109
+#: src/translations.h:134
 msgid "Maori"
 msgstr ""
 
-#: src/translations.h:110
+#: src/translations.h:135
 msgid "Navajo"
 msgstr ""
 
-#: src/translations.h:111
+#: src/translations.h:136
 msgid "Norse"
 msgstr ""
 
-#: src/translations.h:112
+#: src/translations.h:137
 msgid "Polynesian"
 msgstr ""
 
-#: src/translations.h:113
+#: src/translations.h:138
 msgid "Sami"
 msgstr ""
 
-#: src/translations.h:114
+#: src/translations.h:139
 msgid "Tupi-Guarani"
 msgstr ""
 
-#: src/translations.h:115
+#: src/translations.h:140
 msgid "Western"
 msgstr ""
 
-#: src/translations.h:119
+#: src/translations.h:144
 msgid "Set Location "
 msgstr ""
 
-#: src/translations.h:120
+#: src/translations.h:145
 msgid "Set Time "
 msgstr ""
 
-#: src/translations.h:121
+#: src/translations.h:146
 msgid "General "
 msgstr ""
 
-#: src/translations.h:122
+#: src/translations.h:147
 msgid "Stars "
 msgstr ""
 
-#: src/translations.h:123
+#: src/translations.h:148
 msgid "Colors "
 msgstr ""
 
-#: src/translations.h:124
+#: src/translations.h:149
 msgid "Effects "
 msgstr ""
 
-#: src/translations.h:125
+#: src/translations.h:150
 msgid "Scripts "
 msgstr ""
 
-#: src/translations.h:126
+#: src/translations.h:151
 msgid "Administration "
 msgstr ""
 
-#: src/translations.h:128
+#: src/translations.h:153
 msgid "Latitude: "
 msgstr ""
 
-#: src/translations.h:129
+#: src/translations.h:154
 msgid "Longitude: "
 msgstr ""
 
-#: src/translations.h:130
+#: src/translations.h:155
 msgid "Altitude (m): "
 msgstr ""
 
-#: src/translations.h:131
+#: src/translations.h:156
 msgid "Solar System Body: "
 msgstr ""
 
-#: src/translations.h:133
+#: src/translations.h:158
 msgid "Sky Time: "
 msgstr ""
 
-#: src/translations.h:134
+#: src/translations.h:159
 msgid "Set Time Zone: "
 msgstr ""
 
-#: src/translations.h:135
+#: src/translations.h:160
 msgid "Day keys: "
 msgstr ""
 
-#: src/translations.h:136
+#: src/translations.h:161
 msgid "Calendar"
 msgstr ""
 
-#: src/translations.h:137
+#: src/translations.h:162
 msgid "Sidereal"
 msgstr ""
 
-#: src/translations.h:138
+#: src/translations.h:163
 msgid "Preset Sky Time: "
 msgstr ""
 
-#: src/translations.h:139
+#: src/translations.h:164
 msgid "Sky Time At Start-up: "
 msgstr ""
 
-#: src/translations.h:140
+#: src/translations.h:165
 msgid "Actual Time"
 msgstr ""
 
-#: src/translations.h:141
+#: src/translations.h:166
 msgid "Preset Time"
 msgstr ""
 
-#: src/translations.h:142
+#: src/translations.h:167
 msgid "Time Display Format: "
 msgstr ""
 
-#: src/translations.h:143
+#: src/translations.h:168
 msgid "Date Display Format: "
 msgstr ""
 
-#: src/translations.h:145
+#: src/translations.h:170
 msgid "Sky Culture: "
 msgstr ""
 
-#: src/translations.h:146
+#: src/translations.h:171
 msgid "Sky Language: "
 msgstr ""
 
-#: src/translations.h:148
+#: src/translations.h:173
 msgid "Show: "
 msgstr ""
 
-#: src/translations.h:149
+#: src/translations.h:174
 msgid "Star Value Multiplier: "
 msgstr ""
 
-#: src/translations.h:150
+#: src/translations.h:175
 msgid "Magnitude Sizing Multiplier: "
 msgstr ""
 
-#: src/translations.h:151
+#: src/translations.h:176
 msgid "Maximum Magnitude to Label: "
 msgstr ""
 
-#: src/translations.h:152
+#: src/translations.h:177
 msgid "Twinkling: "
 msgstr ""
 
-#: src/translations.h:153
+#: src/translations.h:178
 msgid "Limiting Magnitude: "
 msgstr ""
 
-#: src/translations.h:155
+#: src/translations.h:180
 msgid "Constellation Lines"
 msgstr ""
 
-#: src/translations.h:156
+#: src/translations.h:181
 msgid "Constellation Names"
 msgstr ""
 
-#: src/translations.h:157
+#: src/translations.h:182
 msgid "Constellation Art Intensity"
 msgstr ""
 
-#: src/translations.h:158
+#: src/translations.h:183
 msgid "Constellation Boundaries"
 msgstr ""
 
-#: src/translations.h:159
+#: src/translations.h:184
 msgid "Cardinal Points"
 msgstr ""
 
-#: src/translations.h:160
+#: src/translations.h:185
 msgid "Planet Names"
 msgstr ""
 
-#: src/translations.h:161
+#: src/translations.h:186
 msgid "Planet Orbits"
 msgstr ""
 
-#: src/translations.h:162
+#: src/translations.h:187
 msgid "Planet Trails"
 msgstr ""
 
-#: src/translations.h:163
+#: src/translations.h:188
 msgid "Meridian Line"
 msgstr ""
 
-#: src/translations.h:164
+#: src/translations.h:189
 msgid "Azimuthal Grid"
 msgstr ""
 
-#: src/translations.h:165
+#: src/translations.h:190
 msgid "Equatorial Grid"
 msgstr ""
 
-#: src/translations.h:166
+#: src/translations.h:191
 msgid "Equator Line"
 msgstr ""
 
-#: src/translations.h:167
+#: src/translations.h:192
 msgid "Ecliptic Line"
 msgstr ""
 
-#: src/translations.h:168
+#: src/translations.h:193
 msgid "Nebula Names"
 msgstr ""
 
-#: src/translations.h:169
+#: src/translations.h:194
 msgid "Nebula Circles"
 msgstr ""
 
-#: src/translations.h:171
+#: src/translations.h:196
 msgid "Light Pollution Luminance: "
 msgstr ""
 
-#: src/translations.h:172
+#: src/translations.h:197
 msgid "Landscape: "
 msgstr ""
 
-#: src/translations.h:173
+#: src/translations.h:198
 msgid "Manual zoom: "
 msgstr ""
 
-#: src/translations.h:174
+#: src/translations.h:199
 msgid "Object Sizing Rule: "
 msgstr ""
 
-#: src/translations.h:175
+#: src/translations.h:200
 msgid "Magnitude Scaling Multiplier: "
 msgstr ""
 
-#: src/translations.h:176
+#: src/translations.h:201
 msgid "Milky Way intensity: "
 msgstr ""
 
-#: src/translations.h:177
+#: src/translations.h:202
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr ""
 
-#: src/translations.h:178
+#: src/translations.h:203
 msgid "Zoom Duration: "
 msgstr ""
 
-#: src/translations.h:179
+#: src/translations.h:204
 msgid "Cursor Timeout: "
 msgstr ""
 
-#: src/translations.h:180
+#: src/translations.h:205
 msgid "Correct for light travel time: "
 msgstr ""
 
-#: src/translations.h:182
+#: src/translations.h:207
 msgid "Local Script: "
 msgstr ""
 
-#: src/translations.h:183
+#: src/translations.h:208
 msgid "CD/DVD Script: "
 msgstr ""
 
-#: src/translations.h:184
+#: src/translations.h:209
 msgid "USB Script: "
 msgstr ""
 
-#: src/translations.h:185
+#: src/translations.h:210
 msgid "Arrow down to load list."
 msgstr ""
 
-#: src/translations.h:186
+#: src/translations.h:211
 msgid "Select and exit to run."
 msgstr ""
 
-#: src/translations.h:188
+#: src/translations.h:213
 msgid "Load Default Configuration: "
 msgstr ""
 
-#: src/translations.h:189
+#: src/translations.h:214
 msgid "Save Current Configuration as Default: "
 msgstr ""
 
-#: src/translations.h:190
+#: src/translations.h:215
 msgid "Shut Down: "
 msgstr ""
 
-#: src/translations.h:191
+#: src/translations.h:216
 msgid "Update me via Internet: "
 msgstr ""
 
-#: src/translations.h:192
+#: src/translations.h:217
 msgid "Set UI Locale: "
 msgstr ""
 
@@ -1458,11 +1556,111 @@ msgstr ""
 msgid "Planet:"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:227 src/ui_searchDialogGui.h:228
+#: src/ui_searchDialogGui.h:440 src/ui_searchDialogGui.h:441
 msgid "Find Object"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:233
+#: src/ui_searchDialogGui.h:446
+msgid "Keyboard for Greek input"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:449
+msgid "alpha"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:452
+msgid "beta"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:455
+msgid "gamma"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:458
+msgid "delta"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:461
+msgid "epsilon"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:464
+msgid "zeta"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:467
+msgid "eta"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:470
+msgid "theta"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:473
+msgid "iota"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:476
+msgid "kappa"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:479
+msgid "lambda"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:482
+msgid "mu"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:485
+msgid "nu"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:488
+msgid "xi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:491
+msgid "omicron"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:494
+msgid "pi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:497
+msgid "rho"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:500
+msgid "sigma"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:503
+msgid "tau"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:506
+msgid "upsilon"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:509
+msgid "phi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:512
+msgid "chi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:515
+msgid "psi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:518
+msgid "omega"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:520
 msgid "RA/Dec (J2000):"
 msgstr ""
 
@@ -1975,7 +2173,7 @@ msgstr ""
 #. TRANSLATORS: Title of a group of key bindings in the Help window
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:121
 #: plugins/CompassMarks/src/CompassMarks.cpp:121
-#: plugins/Oculars/src/Oculars.cpp:565 plugins/Oculars/src/Oculars.cpp:575
+#: plugins/Oculars/src/Oculars.cpp:931 plugins/Oculars/src/Oculars.cpp:945
 #: plugins/Satellites/src/Satellites.cpp:124
 msgid "Plugin Key Bindings"
 msgstr ""
@@ -1992,24 +2190,20 @@ msgstr ""
 msgid "Compass marks"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:74
+#: plugins/Oculars/src/Oculars.cpp:76
 msgid "Oculars"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:77
+#: plugins/Oculars/src/Oculars.cpp:79
 msgid "Shows the sky as if looking through a telescope eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:573
+#: plugins/Oculars/src/Oculars.cpp:943
 msgid "Ocular view"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:580
-msgid "Oculars configuration window"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:587
-msgid "Telrad circles"
+#: plugins/Oculars/src/Oculars.cpp:965
+msgid "Oculars popup menu"
 msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:68
@@ -2040,7 +2234,7 @@ msgid ""
 msgstr ""
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:165
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:150
 msgid "Telescope Control"
 msgstr ""
 
@@ -2050,17 +2244,17 @@ msgid ""
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:170
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:155
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr ""
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:177
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:162
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr ""
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:188
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:173
 msgid "Move a telescope to a given set of coordinates"
 msgstr ""
 
