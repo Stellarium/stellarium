@@ -125,9 +125,7 @@ class Translations
 		N_("W");	// West
 
 		// Landscape names
-		// TRANSLATORS: Guéreins (fr.)
 		N_("Guereins");
-		// TRANSLATORS: Garching bei München (de.)
 		N_("Garching");
 
 		// Constellation cultures
