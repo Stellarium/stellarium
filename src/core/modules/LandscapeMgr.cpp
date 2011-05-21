@@ -415,6 +415,19 @@ QStringList LandscapeMgr::getAllLandscapeNames() const
 	return result;
 }
 
+QStringList LandscapeMgr::getAllLandscapeI18Names() const
+{
+	QMap<QString,QString> nameToDirMap = getNameToDirMap();
+	QStringList result;
+
+	// We just look over the map of names to IDs and extract the keys
+	foreach (QString i, nameToDirMap.keys())
+	{
+		result += q_(i);
+	}
+	return result;
+}
+
 QStringList LandscapeMgr::getAllLandscapeIDs() const
 {
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
@@ -451,8 +464,7 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 {
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	QString planetName = ssmgr->searchByEnglishName(landscape->getLocation().planetName)->getNameI18n();
-	QString desc = QString("<h3>%1</h3>").arg(landscape->getName());
-	desc += landscape->getDescription();
+	QString desc = getDescription();
 	desc+="<p>";
 	desc+="<b>"+q_("Author: ")+"</b>";
 	desc+=landscape->getAuthorName();
@@ -932,4 +944,27 @@ quint64 LandscapeMgr::loadLandscapeSize(QString landscapeID)
 	}
 
 	return landscapeSize;
+}
+
+QString LandscapeMgr::getDescription() const
+{
+	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	QString descriptionFile = StelFileMgr::findFile("landscapes/" + getCurrentLandscapeID(), StelFileMgr::Directory) + "/description." + lang + ".utf8";
+	QString desc;
+
+	if(QFileInfo(descriptionFile).exists())
+	{
+		QFile file(descriptionFile);
+		file.open(QIODevice::ReadOnly | QIODevice::Text);
+		QTextStream in(&file);
+		desc = in.readAll();
+		file.close();
+	}
+	else
+	{
+		desc = QString("<h2>%1</h2>").arg(landscape->getName());
+		desc += landscape->getDescription();
+	}
+
+	return desc;
 }
