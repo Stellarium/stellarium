@@ -2,6 +2,7 @@
  * Stellarium
  * Copyright (C) 2006 Fabien Chereau
  * Copyright (C) 2010 Bogdan Marinov (add/remove landscapes feature)
+ * Copyright (C) 2011 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -95,6 +96,11 @@ public slots:
 	//! @return the names of the landscapes, which are the values of the name parameter in the landscape.ini files
 	QStringList getAllLandscapeNames() const;
 
+	//! Retrieve a list of the localized names of all the available lanscapes in
+	//! the file search path sub-directories of the landscape area
+	//! @return the localized names of the landscapes, which are the values of the translated name parameter from the landscape.ini files
+	QStringList getAllLandscapeI18Names() const;
+
 	//! Retrieve a list of the identifiers of all the available landscapes in
 	//! the file search path sub-directories of the landscape area
 	//! @return the identifiers of the landscapes, which are the names of the directories containing the landscapes' files
@@ -127,6 +133,9 @@ public slots:
 
 	//! Return a pseudo HTML formated string with all informations on the current landscape
 	QString getCurrentLandscapeHtmlDescription() const;
+
+	//! Return a pseudo HTML formated string with information from description or ini file
+	QString getDescription() const;
 
 	//! Get flag for displaying Landscape.
 	bool getFlagLandscape() const;
