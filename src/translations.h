@@ -125,8 +125,14 @@ class Translations
 		N_("W");	// West
 
 		// Landscape names
+		// TRANSLATORS: This is the name of french town 
 		N_("Guereins");
+		// TRANSLATORS: This is the name of german city 
 		N_("Garching");
+		// TRANSLATORS: This is the name of national park of USA
+		N_("Hurricane");
+		N_("Trees");
+		N_("Ocean");
 
 		// Constellation cultures
 		N_("Aztec");
