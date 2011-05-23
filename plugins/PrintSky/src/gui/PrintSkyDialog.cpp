@@ -64,11 +64,6 @@ PrintSkyDialog::~PrintSkyDialog()
 }
 
 /* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark StelModule Methods
-#endif
-/* ********************************************************************* */
 void PrintSkyDialog::languageChanged()
 {
 	if (dialog) {
@@ -93,11 +88,6 @@ void PrintSkyDialog::styleChanged()
 }
 
 /* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Slot Methods
-#endif
-/* ********************************************************************* */
 void PrintSkyDialog::closeWindow()
 {
 	setVisible(false);
@@ -105,11 +95,6 @@ void PrintSkyDialog::closeWindow()
 }
 
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Private Slot Methods
-#endif
 /* ********************************************************************* */
 void PrintSkyDialog::invertColorsStateChanged(int state)
 {
@@ -135,11 +120,6 @@ void PrintSkyDialog::invertColorsStateChanged(int state)
 }
 
 /* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Private Slot Methods
-#endif
-/* ********************************************************************* */
 void PrintSkyDialog::scaleToFitStateChanged(int state)
 {
 	bool shouldScale = (state == Qt::Checked);
@@ -163,11 +143,6 @@ void PrintSkyDialog::scaleToFitStateChanged(int state)
 
 }
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Private Slot Methods
-#endif
 /* ********************************************************************* */
 void PrintSkyDialog::orientationStateChanged(bool state)
 {
@@ -193,11 +168,6 @@ void PrintSkyDialog::orientationStateChanged(bool state)
 }
 
 /* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Private Slot Methods
-#endif
-/* ********************************************************************* */
 void PrintSkyDialog::printDataStateChanged(int state)
 {
 	bool shouldPrint = (state == Qt::Checked);
@@ -221,11 +191,6 @@ void PrintSkyDialog::printDataStateChanged(int state)
 
 }
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Private Slot Methods
-#endif
 /* ********************************************************************* */
 void PrintSkyDialog::printSSEphemeridesStateChanged(int state)
 {
@@ -251,11 +216,6 @@ void PrintSkyDialog::printSSEphemeridesStateChanged(int state)
 }
 
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Protected Methods
-#endif
 /* ********************************************************************* */
 void PrintSkyDialog::createDialogContent()
 {
@@ -406,8 +366,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 
 		painter.drawText(surfaceData.adjusted(surfaceData.width()-(15*font.pixelSize()), 0, 0, 0), Qt::AlignLeft, "Radius-magnitude relation");
 
-		StarMgr* smgr = GETSTELMODULE(StarMgr);
-		QList< QPair<float,float> > listPairsMagnitudesRadius=smgr->getListMagnitudeRadius(core);
+		QList< QPair<float,float> > listPairsMagnitudesRadius=getListMagnitudeRadius(core);
 
 		int xPos=-(12*font.pixelSize()), yPos=lineSpacing+10;
 		for (int icount=1; icount<=listPairsMagnitudesRadius.count(); ++icount)
@@ -620,4 +579,31 @@ QString PrintSkyDialog::printableTime(double time, int shift)
 	time*=60;
 	int minute=(int) time;
 	return(QString("%1:%2").arg(hour, 2, 10, QChar('0')).arg(minute, 2, 10, QChar('0')));
+}
+
+//! Get relations between magnitude stars and draw radius
+QList< QPair<float, float> > PrintSkyDialog::getListMagnitudeRadius(StelCore *core)
+{
+    QList< QPair<float, float> > listPairsMagnitudesRadius;
+    StelSkyDrawer* skyDrawer = core->getSkyDrawer();
+
+
+    float rcmag_table[1];
+    for (int mag=-30; mag<100; ++mag)
+    {
+	skyDrawer->computeRCMag(mag,rcmag_table);
+	if (rcmag_table[0]>0. && rcmag_table[0]<13.)
+	{
+	    QPair<float, float> pairMagnitudeRadius;
+	    pairMagnitudeRadius.first=mag;
+	    pairMagnitudeRadius.second=rcmag_table[0];
+	    bool found=false;
+	    for (int icount=1; !found && icount<=listPairsMagnitudesRadius.count();++icount)
+		found=listPairsMagnitudesRadius.at(icount-1).first==pairMagnitudeRadius.first;
+	    if (!found)
+		listPairsMagnitudesRadius << pairMagnitudeRadius;
+	}
+    }
+
+  return(listPairsMagnitudesRadius);
 }

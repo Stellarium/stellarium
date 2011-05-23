@@ -90,6 +90,8 @@ private:
 	bool printDataOption;
 	bool printSSEphemeridesOption;
 	QString printableTime(double time, int shift);
+	QList< QPair<float, float> > getListMagnitudeRadius(StelCore *core);
+
 
 };
 
