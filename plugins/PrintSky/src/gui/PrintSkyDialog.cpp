@@ -597,11 +597,7 @@ QList< QPair<float, float> > PrintSkyDialog::getListMagnitudeRadius(StelCore *co
 	    QPair<float, float> pairMagnitudeRadius;
 	    pairMagnitudeRadius.first=mag;
 	    pairMagnitudeRadius.second=rcmag_table[0];
-	    bool found=false;
-	    for (int icount=1; !found && icount<=listPairsMagnitudesRadius.count();++icount)
-		found=listPairsMagnitudesRadius.at(icount-1).first==pairMagnitudeRadius.first;
-	    if (!found)
-		listPairsMagnitudesRadius << pairMagnitudeRadius;
+	    listPairsMagnitudesRadius << pairMagnitudeRadius;
 	}
     }
 

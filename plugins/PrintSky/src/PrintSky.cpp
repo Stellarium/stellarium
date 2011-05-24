@@ -30,10 +30,10 @@ StelPluginInfo PrintSkyStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
 	info.id = "PrintSky";
-	info.displayedName = "Print Sky";
+	info.displayedName =  q_("Print Sky");
 	info.authors = "Pep Pujols";
 	info.contact = "maslarocaxica@gmail.com";
-	info.description = "Provides an system printing sky";
+	info.description = q_("Provides a system printing sky");
 	return info;
 }
 
