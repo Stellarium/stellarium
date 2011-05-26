@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-21 21:02+0700\n"
+"POT-Creation-Date: 2011-05-26 18:34+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,24 +29,24 @@ msgstr ""
 msgid "Equator"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:483
+#: src/core/modules/LandscapeMgr.cpp:456
 msgid "Author: "
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:487
+#: src/core/modules/LandscapeMgr.cpp:460
 msgid "Version: "
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:490
+#: src/core/modules/LandscapeMgr.cpp:463
 msgid "Location: "
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:495
+#: src/core/modules/LandscapeMgr.cpp:468
 #, qt-format
 msgid ", %1 m"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:498
+#: src/core/modules/LandscapeMgr.cpp:471
 msgid "Planet: "
 msgstr ""
 
@@ -1163,342 +1163,319 @@ msgstr ""
 msgid "W"
 msgstr ""
 
-#. TRANSLATORS: This is the name of french town
-#: src/translations.h:129
-msgid "Guereins"
-msgstr ""
-
-#. TRANSLATORS: This is the name of german city
-#: src/translations.h:131
-msgid "Garching"
-msgstr ""
-
-#. TRANSLATORS: This is the name of national park of USA
-#: src/translations.h:133
-msgid "Hurricane"
-msgstr ""
-
-#: src/translations.h:134
-msgid "Trees"
-msgstr ""
-
-#: src/translations.h:135
-msgid "Ocean"
-msgstr ""
-
-#: src/translations.h:138
+#: src/translations.h:128
 msgid "Aztec"
 msgstr ""
 
-#: src/translations.h:139
+#: src/translations.h:129
 msgid "Chinese"
 msgstr ""
 
-#: src/translations.h:140
+#: src/translations.h:130
 msgid "Egyptian"
 msgstr ""
 
-#: src/translations.h:141
+#: src/translations.h:131
 msgid "Inuit"
 msgstr ""
 
-#: src/translations.h:142
+#: src/translations.h:132
 msgid "Korean"
 msgstr ""
 
-#: src/translations.h:143
+#: src/translations.h:133
 msgid "Lakota"
 msgstr ""
 
-#: src/translations.h:144
+#: src/translations.h:134
 msgid "Maori"
 msgstr ""
 
-#: src/translations.h:145
+#: src/translations.h:135
 msgid "Navajo"
 msgstr ""
 
-#: src/translations.h:146
+#: src/translations.h:136
 msgid "Norse"
 msgstr ""
 
-#: src/translations.h:147
+#: src/translations.h:137
 msgid "Polynesian"
 msgstr ""
 
-#: src/translations.h:148
+#: src/translations.h:138
 msgid "Sami"
 msgstr ""
 
-#: src/translations.h:149
+#: src/translations.h:139
 msgid "Tupi-Guarani"
 msgstr ""
 
-#: src/translations.h:150
+#: src/translations.h:140
 msgid "Western"
 msgstr ""
 
-#: src/translations.h:154
+#: src/translations.h:144
 msgid "Set Location "
 msgstr ""
 
-#: src/translations.h:155
+#: src/translations.h:145
 msgid "Set Time "
 msgstr ""
 
-#: src/translations.h:156
+#: src/translations.h:146
 msgid "General "
 msgstr ""
 
-#: src/translations.h:157
+#: src/translations.h:147
 msgid "Stars "
 msgstr ""
 
-#: src/translations.h:158
+#: src/translations.h:148
 msgid "Colors "
 msgstr ""
 
-#: src/translations.h:159
+#: src/translations.h:149
 msgid "Effects "
 msgstr ""
 
-#: src/translations.h:160
+#: src/translations.h:150
 msgid "Scripts "
 msgstr ""
 
-#: src/translations.h:161
+#: src/translations.h:151
 msgid "Administration "
 msgstr ""
 
-#: src/translations.h:163
+#: src/translations.h:153
 msgid "Latitude: "
 msgstr ""
 
-#: src/translations.h:164
+#: src/translations.h:154
 msgid "Longitude: "
 msgstr ""
 
-#: src/translations.h:165
+#: src/translations.h:155
 msgid "Altitude (m): "
 msgstr ""
 
-#: src/translations.h:166
+#: src/translations.h:156
 msgid "Solar System Body: "
 msgstr ""
 
-#: src/translations.h:168
+#: src/translations.h:158
 msgid "Sky Time: "
 msgstr ""
 
-#: src/translations.h:169
+#: src/translations.h:159
 msgid "Set Time Zone: "
 msgstr ""
 
-#: src/translations.h:170
+#: src/translations.h:160
 msgid "Day keys: "
 msgstr ""
 
-#: src/translations.h:171
+#: src/translations.h:161
 msgid "Calendar"
 msgstr ""
 
-#: src/translations.h:172
+#: src/translations.h:162
 msgid "Sidereal"
 msgstr ""
 
-#: src/translations.h:173
+#: src/translations.h:163
 msgid "Preset Sky Time: "
 msgstr ""
 
-#: src/translations.h:174
+#: src/translations.h:164
 msgid "Sky Time At Start-up: "
 msgstr ""
 
-#: src/translations.h:175
+#: src/translations.h:165
 msgid "Actual Time"
 msgstr ""
 
-#: src/translations.h:176
+#: src/translations.h:166
 msgid "Preset Time"
 msgstr ""
 
-#: src/translations.h:177
+#: src/translations.h:167
 msgid "Time Display Format: "
 msgstr ""
 
-#: src/translations.h:178
+#: src/translations.h:168
 msgid "Date Display Format: "
 msgstr ""
 
-#: src/translations.h:180
+#: src/translations.h:170
 msgid "Sky Culture: "
 msgstr ""
 
-#: src/translations.h:181
+#: src/translations.h:171
 msgid "Sky Language: "
 msgstr ""
 
-#: src/translations.h:183
+#: src/translations.h:173
 msgid "Show: "
 msgstr ""
 
-#: src/translations.h:184
+#: src/translations.h:174
 msgid "Star Value Multiplier: "
 msgstr ""
 
-#: src/translations.h:185
+#: src/translations.h:175
 msgid "Magnitude Sizing Multiplier: "
 msgstr ""
 
-#: src/translations.h:186
+#: src/translations.h:176
 msgid "Maximum Magnitude to Label: "
 msgstr ""
 
-#: src/translations.h:187
+#: src/translations.h:177
 msgid "Twinkling: "
 msgstr ""
 
-#: src/translations.h:188
+#: src/translations.h:178
 msgid "Limiting Magnitude: "
 msgstr ""
 
-#: src/translations.h:190
+#: src/translations.h:180
 msgid "Constellation Lines"
 msgstr ""
 
-#: src/translations.h:191
+#: src/translations.h:181
 msgid "Constellation Names"
 msgstr ""
 
-#: src/translations.h:192
+#: src/translations.h:182
 msgid "Constellation Art Intensity"
 msgstr ""
 
-#: src/translations.h:193
+#: src/translations.h:183
 msgid "Constellation Boundaries"
 msgstr ""
 
-#: src/translations.h:194
+#: src/translations.h:184
 msgid "Cardinal Points"
 msgstr ""
 
-#: src/translations.h:195
+#: src/translations.h:185
 msgid "Planet Names"
 msgstr ""
 
-#: src/translations.h:196
+#: src/translations.h:186
 msgid "Planet Orbits"
 msgstr ""
 
-#: src/translations.h:197
+#: src/translations.h:187
 msgid "Planet Trails"
 msgstr ""
 
-#: src/translations.h:198
+#: src/translations.h:188
 msgid "Meridian Line"
 msgstr ""
 
-#: src/translations.h:199
+#: src/translations.h:189
 msgid "Azimuthal Grid"
 msgstr ""
 
-#: src/translations.h:200
+#: src/translations.h:190
 msgid "Equatorial Grid"
 msgstr ""
 
-#: src/translations.h:201
+#: src/translations.h:191
 msgid "Equator Line"
 msgstr ""
 
-#: src/translations.h:202
+#: src/translations.h:192
 msgid "Ecliptic Line"
 msgstr ""
 
-#: src/translations.h:203
+#: src/translations.h:193
 msgid "Nebula Names"
 msgstr ""
 
-#: src/translations.h:204
+#: src/translations.h:194
 msgid "Nebula Circles"
 msgstr ""
 
-#: src/translations.h:206
+#: src/translations.h:196
 msgid "Light Pollution Luminance: "
 msgstr ""
 
-#: src/translations.h:207
+#: src/translations.h:197
 msgid "Landscape: "
 msgstr ""
 
-#: src/translations.h:208
+#: src/translations.h:198
 msgid "Manual zoom: "
 msgstr ""
 
-#: src/translations.h:209
+#: src/translations.h:199
 msgid "Object Sizing Rule: "
 msgstr ""
 
-#: src/translations.h:210
+#: src/translations.h:200
 msgid "Magnitude Scaling Multiplier: "
 msgstr ""
 
-#: src/translations.h:211
+#: src/translations.h:201
 msgid "Milky Way intensity: "
 msgstr ""
 
-#: src/translations.h:212
+#: src/translations.h:202
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr ""
 
-#: src/translations.h:213
+#: src/translations.h:203
 msgid "Zoom Duration: "
 msgstr ""
 
-#: src/translations.h:214
+#: src/translations.h:204
 msgid "Cursor Timeout: "
 msgstr ""
 
-#: src/translations.h:215
+#: src/translations.h:205
 msgid "Correct for light travel time: "
 msgstr ""
 
-#: src/translations.h:217
+#: src/translations.h:207
 msgid "Local Script: "
 msgstr ""
 
-#: src/translations.h:218
+#: src/translations.h:208
 msgid "CD/DVD Script: "
 msgstr ""
 
-#: src/translations.h:219
+#: src/translations.h:209
 msgid "USB Script: "
 msgstr ""
 
-#: src/translations.h:220
+#: src/translations.h:210
 msgid "Arrow down to load list."
 msgstr ""
 
-#: src/translations.h:221
+#: src/translations.h:211
 msgid "Select and exit to run."
 msgstr ""
 
-#: src/translations.h:223
+#: src/translations.h:213
 msgid "Load Default Configuration: "
 msgstr ""
 
-#: src/translations.h:224
+#: src/translations.h:214
 msgid "Save Current Configuration as Default: "
 msgstr ""
 
-#: src/translations.h:225
+#: src/translations.h:215
 msgid "Shut Down: "
 msgstr ""
 
-#: src/translations.h:226
+#: src/translations.h:216
 msgid "Update me via Internet: "
 msgstr ""
 
-#: src/translations.h:227
+#: src/translations.h:217
 msgid "Set UI Locale: "
 msgstr ""
 

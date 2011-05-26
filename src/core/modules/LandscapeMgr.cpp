@@ -343,18 +343,17 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 
 bool LandscapeMgr::setCurrentLandscapeName(const QString& name)
 {
-	QString englishName = getLandscapeEnglishName(name);
-	if (englishName.isEmpty())
+	if (name.isEmpty())
 		return false;
 	
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
-	if (nameToDirMap.find(englishName)!=nameToDirMap.end())
+	if (nameToDirMap.find(name)!=nameToDirMap.end())
 	{
-		return setCurrentLandscapeID(nameToDirMap[englishName]);
+		return setCurrentLandscapeID(nameToDirMap[name]);
 	}
 	else
 	{
-		qWarning() << "Can't find a landscape with name=" << englishName << endl;
+		qWarning() << "Can't find a landscape with name=" << name << endl;
 		return false;
 	}
 }
@@ -416,19 +415,6 @@ QStringList LandscapeMgr::getAllLandscapeNames() const
 	return result;
 }
 
-QStringList LandscapeMgr::getAllLandscapeI18Names() const
-{
-	QMap<QString,QString> nameToDirMap = getNameToDirMap();
-	QStringList result;
-
-	// We just look over the map of names to IDs and extract the keys
-	foreach (QString i, nameToDirMap.keys())
-	{
-		result += q_(i);
-	}
-	return result;
-}
-
 QStringList LandscapeMgr::getAllLandscapeIDs() const
 {
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
@@ -459,19 +445,6 @@ QStringList LandscapeMgr::getUserLandscapeIDs() const
 QString LandscapeMgr::getCurrentLandscapeName() const
 {
 	return landscape->getName();
-}
-
-QString LandscapeMgr::getCurrentLandscapeI18Name() const
-{
-	return q_(landscape->getName());
-}
-
-QString LandscapeMgr::getLandscapeEnglishName(QString landscapeName) const
-{
-	QStringList englishNames = getAllLandscapeNames();
-	QStringList localizedNames = getAllLandscapeI18Names();
-
-	return englishNames.at(localizedNames.indexOf(landscapeName));
 }
 
 QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
