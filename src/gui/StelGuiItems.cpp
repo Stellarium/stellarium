@@ -547,7 +547,19 @@ void BottomStelBar::updateText(bool updatePos)
 
 	QString str;
 	QTextStream wos(&str);
-	wos << "FOV " << qSetRealNumberPrecision(3) << core->getMovementMgr()->getCurrentFov() << QChar(0x00B0);
+	wos << "FOV " << qSetRealNumberPrecision(3);
+	if (core->getMovementMgr()->getCurrentFov()>1)
+	{
+		wos << core->getMovementMgr()->getCurrentFov() << QChar(0x00B0);
+	}
+	if (core->getMovementMgr()->getCurrentFov()<=1 && core->getMovementMgr()->getCurrentFov()>0.017)
+	{
+		wos << 60 * core->getMovementMgr()->getCurrentFov() << QChar(0x02B9);
+	}
+	if (core->getMovementMgr()->getCurrentFov()<=0.017)
+	{
+		wos << 3600 * core->getMovementMgr()->getCurrentFov() << QChar(0x02BA);
+	}
 	if (fov->text()!=str)
 	{
 		updatePos = true;
