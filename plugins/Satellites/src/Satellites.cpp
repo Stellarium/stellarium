@@ -125,7 +125,7 @@ void Satellites::init()
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		gui->addGuiActions("actionShow_Satellite_ConfigDialog", N_("Satellites configuration window"), "Alt+Z", groupName, true);
 		gui->addGuiActions("actionShow_Satellite_Hints", N_("Satellite hints"), "Ctrl+Z", groupName, true, false);
-		gui->getGuiActions("actionShow_Satellite_Hints")->setChecked(hintFader);
+		gui->getGuiActions("actionShow_Satellite_Hints")->setChecked(getFlagHints());
 		gui->addGuiActions("actionShow_Satellite_Labels", N_("Satellite labels"), "Shift+Z", groupName, true, false);
 		gui->getGuiActions("actionShow_Satellite_Labels")->setChecked(Satellite::showLabels);
 
@@ -206,6 +206,7 @@ void Satellites::init()
 	}
 	styleSheetFile.close();
 
+	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 }
 
 bool Satellites::backupJsonFile(bool deleteOriginal)
@@ -391,10 +392,9 @@ void Satellites::restoreDefaultConfigIni(void)
 	// delete all existing Satellite settings...
 	conf->remove("");
 
-	conf->setValue("show_satellite_hints", true);
+	conf->setValue("show_satellite_hints", false);
 	conf->setValue("show_satellite_labels", true);
 	conf->setValue("updates_enabled", true);
-	conf->setValue("show_satellites", true);
 	conf->setValue("hint_color", "0.0,0.4,0.6");
 	conf->setValue("hint_font_size", 10);
 	conf->setValue("tle_url0", "http://celestrak.com/NORAD/elements/noaa.txt");
@@ -461,7 +461,7 @@ void Satellites::readSettingsFromConfig(void)
 	updateFrequencyHours = conf->value("update_frequency_hours", 72).toInt();
 	// last update default is the first Towell Day.  <3 DA
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2001-05-25T12:00:00").toString(), Qt::ISODate);
-	hintFader = conf->value("show_satellite_hints", true).toBool();
+	setFlagHints(conf->value("show_satellite_hints", false).toBool());
 	Satellite::showLabels = conf->value("show_satellite_labels", true).toBool();
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 
@@ -501,7 +501,7 @@ void Satellites::saveSettingsToConfig(void)
 
 	// updater related settings...
 	conf->setValue("update_frequency_hours", updateFrequencyHours);
-	conf->setValue("show_satellite_hints", (bool)hintFader);
+	conf->setValue("show_satellite_hints", getFlagHints());
 	conf->setValue("show_satellite_labels", Satellite::showLabels);
 	conf->setValue("updates_enabled", updatesEnabled );
 

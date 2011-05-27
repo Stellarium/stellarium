@@ -33,9 +33,7 @@
 AddRemoveLandscapesDialog::AddRemoveLandscapesDialog()
 {
 	ui = new Ui_addRemoveLandscapesDialogForm;
-	
 	landscapeManager = GETSTELMODULE(LandscapeMgr);
-
 	lastUsedDirectoryPath = QDir::homePath();
 }
 
@@ -56,6 +54,7 @@ void AddRemoveLandscapesDialog::createDialogContent()
 	ui->setupUi(dialog);
 	
 	//Signals and slots
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	connect(ui->pushButtonBrowseForArchive, SIGNAL(clicked()), this, SLOT(browseForArchiveClicked()));

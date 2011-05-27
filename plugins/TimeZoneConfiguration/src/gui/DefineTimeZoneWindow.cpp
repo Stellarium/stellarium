@@ -20,7 +20,9 @@
 #include "TimeZoneConfigurationWindow.hpp"
 #include "DefineTimeZoneWindow.hpp"
 #include "ui_defineTimeZone.h"
+#include "StelApp.hpp"
 
+#include <cmath>
 #include <QRegExpValidator>
 
 DefineTimeZoneWindow::DefineTimeZoneWindow()
@@ -44,14 +46,20 @@ void DefineTimeZoneWindow::languageChanged()
 void DefineTimeZoneWindow::createDialogContent()
 {
 	ui->setupUi(dialog);
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
+	        this, SLOT(languageChanged()));
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->pushButtonUseDefinition, SIGNAL(clicked()), this, SLOT(useDefinition()));
+	connect(ui->pushButtonUseDefinition, SIGNAL(clicked()),
+	        this, SLOT(useDefinition()));
 
-	connect(ui->doubleSpinBoxOffset, SIGNAL(valueChanged(double)), this, SLOT(updateDstOffset(double)));
+	connect(ui->doubleSpinBoxOffset, SIGNAL(valueChanged(double)),
+	        this, SLOT(updateDstOffset(double)));
 
-	connect(ui->comboBoxDstStartDateMonth, SIGNAL(currentIndexChanged(int)), this, SLOT(updateDayNumberMaximumDstStart(int)));
-	connect(ui->comboBoxDstEndDateMonth, SIGNAL(currentIndexChanged(int)), this, SLOT(updateDayNumberMaximumDstEnd(int)));
+	connect(ui->comboBoxDstStartDateMonth, SIGNAL(currentIndexChanged(int)),
+	        this, SLOT(updateDayNumberMaximumDstStart(int)));
+	connect(ui->comboBoxDstEndDateMonth, SIGNAL(currentIndexChanged(int)),
+	        this, SLOT(updateDayNumberMaximumDstEnd(int)));
 
 	ui->lineEditName->setValidator(timeZoneNameValidator);
 	ui->lineEditNameDst->setValidator(timeZoneNameValidator);
@@ -82,7 +90,7 @@ void DefineTimeZoneWindow::useDefinition()
 		definition.append(dstTimeZoneName);
 
 		//The offset is not necessary
-		if (ui->checkBoxOffsetDst)
+		if (ui->checkBoxOffsetDst->isChecked())
 		{
 			definition.append(TimeZoneConfigurationWindow::getTzOffsetStringFrom(ui->doubleSpinBoxOffsetDst));
 		}
@@ -301,4 +309,212 @@ void DefineTimeZoneWindow::updateDayNumberMaximumDstStart(int monthIndex)
 void DefineTimeZoneWindow::updateDayNumberMaximumDstEnd(int monthIndex)
 {
 	updateDayNumberMaximum(monthIndex, ui->spinBoxDstEndDateDay);
+}
+
+bool DefineTimeZoneWindow::readDstEndpoint(const QString& string,
+                                           DstEndpoint endpoint)
+{
+	QGroupBox* groupBox = 0;
+	QRadioButton* radioButtonDay = 0;
+	QRadioButton* radioButtonDate = 0;
+	QCheckBox* checkBoxTime = 0;
+	QComboBox* comboBoxWeek = 0;
+	QComboBox* comboBoxMonth = 0;
+	QComboBox* comboBoxDay = 0;
+	QTimeEdit* timeEdit = 0;
+
+	if (endpoint == DstStart)
+	{
+		groupBox = ui->groupBoxDstStart;
+		radioButtonDay = ui->radioButtonDstStartDay;
+		radioButtonDate = ui->radioButtonDstStartDate;
+		checkBoxTime = ui->checkBoxDstStartTime;
+		comboBoxWeek = ui->comboBoxDstStartWeek;
+		comboBoxMonth = ui->comboBoxDstStartMonth;
+		comboBoxDay = ui->comboBoxDstStartDay;
+		timeEdit = ui->timeEditDstStart;
+	}
+	else
+	{
+		groupBox = ui->groupBoxDstEnd;
+		radioButtonDay = ui->radioButtonDstEndDay;
+		radioButtonDate = ui->radioButtonDstEndDate;
+		checkBoxTime = ui->checkBoxDstEndTime;
+		comboBoxWeek = ui->comboBoxDstEndWeek;
+		comboBoxMonth = ui->comboBoxDstEndMonth;
+		comboBoxDay = ui->comboBoxDstEndDay;
+		timeEdit = ui->timeEditDstEnd;
+	}
+
+	QRegExp endPointFormat("(J\\d{1,3}|\\d{1,3}|M\\d{1,2}\\.\\d\\.\\d)(?:\\/(\\d{1,2}(?:\\:(?:\\d{1,2})(?:\\:(?:\\d{1,2}))?)?))?");
+	if (!endPointFormat.exactMatch(string))
+		return false;
+
+	if (endPointFormat.numCaptures() == 2)
+	{
+		QString timeString = endPointFormat.cap(2).trimmed();
+		if (!timeString.isEmpty())
+		{
+			int hours, minutes, seconds;
+			TimeZoneConfigurationWindow::readTzTimeString(timeString,
+			                                              hours,
+			                                              minutes,
+			                                              seconds);
+			QTime time(hours, minutes, seconds);
+			if (time.isValid())
+			{
+				checkBoxTime->setChecked(true);
+				timeEdit->setTime(time);
+			}
+			else
+				return false;
+		}
+	}
+
+	QString date = endPointFormat.cap(1);
+	if (date.startsWith('J'))
+	{
+		int julianDay = date.mid(1).toInt();
+		if (julianDay < 1 || julianDay > 365)
+			return false;
+
+		radioButtonDate->setChecked(true);
+		setEndPointDate(julianDay, false, endpoint);
+	}
+	else if (date.startsWith('M'))
+	{
+		QStringList list = date.mid(1).split('.');
+		if (list.count() != 3)
+			return false;
+
+		int month = list[0].toInt();
+		if (month < 1 || month > 12)
+			return false;
+		int week = list[1].toInt();
+		if (week < 1 || week > 5)
+			return false;
+		int day = list[2].toInt();
+		if (day < 0 || day > 6)
+			return false;
+
+		radioButtonDay->setChecked(true);
+		comboBoxMonth->setCurrentIndex(month - 1);
+		comboBoxWeek->setCurrentIndex(week - 1);
+		comboBoxDay->setCurrentIndex(day);
+	}
+	else
+	{
+		int julianDay = date.toInt();
+		if (julianDay < 0 || julianDay > 365)
+			return false;
+
+		radioButtonDate->setChecked(true);
+		setEndPointDate(julianDay+1, true, endpoint);
+	}
+
+	groupBox->setChecked(true);
+	return true;
+}
+
+void DefineTimeZoneWindow::setEndPointDate(int ordinalDate,
+                                           bool leapYear,
+                                           DstEndpoint endpoint)
+{
+	QSpinBox* spinBoxDateDay = 0;
+	QComboBox* comboBoxDateMonth = 0;
+	if (endpoint == DstStart)
+	{
+		spinBoxDateDay = ui->spinBoxDstStartDateDay;
+		comboBoxDateMonth = ui->comboBoxDstStartDateMonth;
+	}
+	else
+	{
+		spinBoxDateDay = ui->spinBoxDstEndDateDay;
+		comboBoxDateMonth = ui->comboBoxDstEndDateMonth;
+	}
+
+	int monthLength[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	if (leapYear)
+		monthLength[1] = 29;
+	for (int i = 0; i < 12; i++)
+	{
+		if (ordinalDate <= monthLength[i])
+		{
+			spinBoxDateDay->setValue(ordinalDate);
+			comboBoxDateMonth->setCurrentIndex(i);
+			break;
+		}
+		else
+		{
+			ordinalDate -= monthLength[i];
+		}
+	}
+}
+
+void DefineTimeZoneWindow::setTimeZone(QString tzString)
+{
+	if (dialog == NULL) //As initialized in StelDialog
+		return;
+
+	if (tzString.isEmpty())
+		return;
+
+	//TZ variable format:
+	// - name
+	// - signed offset
+	// The following is optional:
+	// - DST name
+	// - DST signed offset
+	// - DST beginning
+	// - DST end
+	QRegExp tzFormat("^([^:\\d,+-/]{3,})([+-]?[\\d:]+)(?:([^:\\d,+-/]{3,})((?:[+-]?[\\d:]+)?),([JM\\d\\./:]+),([JM\\d\\./:]+))?$");
+	if (!tzFormat.exactMatch(tzString))
+		return;
+
+	double offset = TimeZoneConfigurationWindow::readTzOffsetString(tzFormat.cap(2));
+	if (fabs(offset) >= 24)
+		return;
+
+	QString name = tzFormat.cap(1).trimmed();
+	if (name.isEmpty())
+		return;
+
+	ui->lineEditName->setText(name);
+	ui->doubleSpinBoxOffset->setValue(offset);
+
+	//TODO: Clean this up. The offset and the end point are not obligatory?
+	int count = tzFormat.captureCount();
+	if (count > 2)
+	{
+		QString dstName = tzFormat.cap(3).trimmed();
+		if (dstName.isEmpty())
+			return;
+		QString dstOffsetString = tzFormat.cap(4).trimmed();
+		if (!dstOffsetString.isEmpty())
+		{
+			double dstOffset = TimeZoneConfigurationWindow::readTzOffsetString(dstOffsetString);
+			if (fabs(dstOffset) >= 24)
+				return;
+
+			ui->checkBoxOffsetDst->setChecked(true);
+			ui->doubleSpinBoxOffsetDst->setValue(dstOffset);
+		}
+		else
+		{
+			ui->checkBoxOffsetDst->setChecked(false);
+			ui->doubleSpinBoxOffsetDst->setValue(offset + 1);
+		}
+
+		QString dstStartString = tzFormat.cap(5).trimmed();
+		if (!readDstEndpoint(dstStartString, DstStart))
+			return;
+		QString dstEndString = tzFormat.cap(6).trimmed();
+		if (!readDstEndpoint(dstEndString, DstEnd))
+			return;
+
+		ui->checkBoxDst->setChecked(true);
+		ui->lineEditNameDst->setText(dstName);
+	}
+
+
 }

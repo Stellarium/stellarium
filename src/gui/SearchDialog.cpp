@@ -22,18 +22,19 @@
 #include "ui_searchDialogGui.h"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelObjectMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelNavigator.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelUtils.hpp"
 
-#include <QTextEdit>
-#include <QLabel>
-#include <QString>
-#include <QStringList>
 #include <QDebug>
 #include <QFrame>
+#include <QLabel>
+#include <QPushButton>
+#include <QString>
+#include <QStringList>
+#include <QTextEdit>
 
 #include "SimbadSearcher.hpp"
 
@@ -124,22 +125,26 @@ SearchDialog::SearchDialog() : simbadReply(NULL)
 	greekLetters.insert("gamma", QString(QChar(0x03B3)));
 	greekLetters.insert("delta", QString(QChar(0x03B4)));
 	greekLetters.insert("epsilon", QString(QChar(0x03B5)));
+    
 	greekLetters.insert("zeta", QString(QChar(0x03B6)));
 	greekLetters.insert("eta", QString(QChar(0x03B7)));
 	greekLetters.insert("theta", QString(QChar(0x03B8)));
 	greekLetters.insert("iota", QString(QChar(0x03B9)));
 	greekLetters.insert("kappa", QString(QChar(0x03BA)));
-	greekLetters.insert("lambda", QString(QChar(0x03BB)));
+	
+    greekLetters.insert("lambda", QString(QChar(0x03BB)));
 	greekLetters.insert("mu", QString(QChar(0x03BC)));
 	greekLetters.insert("nu", QString(QChar(0x03BD)));
 	greekLetters.insert("xi", QString(QChar(0x03BE)));
 	greekLetters.insert("omicron", QString(QChar(0x03BF)));
-	greekLetters.insert("pi", QString(QChar(0x03C0)));
+	
+    greekLetters.insert("pi", QString(QChar(0x03C0)));
 	greekLetters.insert("rho", QString(QChar(0x03C1)));
 	greekLetters.insert("sigma", QString(QChar(0x03C3))); // second lower-case sigma shouldn't affect anything
 	greekLetters.insert("tau", QString(QChar(0x03C4)));
 	greekLetters.insert("upsilon", QString(QChar(0x03C5)));
-	greekLetters.insert("phi", QString(QChar(0x03C6)));
+	
+    greekLetters.insert("phi", QString(QChar(0x03C6)));
 	greekLetters.insert("chi", QString(QChar(0x03C7)));
 	greekLetters.insert("psi", QString(QChar(0x03C8)));
 	greekLetters.insert("omega", QString(QChar(0x03C9)));
@@ -174,23 +179,47 @@ void SearchDialog::styleChanged()
 void SearchDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	setSimpleStyle(true);
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+//	setSimpleStyle();
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onTextChanged(const QString&)));
+	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), 
+            this, SLOT(onSearchTextChanged(const QString&)));
 	connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
-	onTextChanged(ui->lineEditSearchSkyObject->text());
+	onSearchTextChanged(ui->lineEditSearchSkyObject->text());
 	connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
-	dialog->installEventFilter(this);
+
+	ui->lineEditSearchSkyObject->installEventFilter(this);
 	ui->RAAngleSpinBox->setDisplayFormat(AngleSpinBox::HMSLetters);
 	ui->DEAngleSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->DEAngleSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 
-	// This simply doesn't work. Probably a Qt bug
-	ui->RAAngleSpinBox->setFocusPolicy(Qt::NoFocus);
-	ui->DEAngleSpinBox->setFocusPolicy(Qt::NoFocus);
-
 	connect(ui->RAAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->DEAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
+    
+    connect(ui->alphaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->betaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->gammaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->deltaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->epsilonPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->zetaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->etaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->thetaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->iotaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->kappaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->lambdaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->muPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->nuPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->xiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->omicronPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->piPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->rhoPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->sigmaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->tauPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->upsilonPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->phiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->chiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->psiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+    connect(ui->omegaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 }
 
 void SearchDialog::setVisible(bool v)
@@ -202,13 +231,14 @@ void SearchDialog::setVisible(bool v)
 		ui->lineEditSearchSkyObject->setFocus();
 }
 
-void SearchDialog::setSimpleStyle(bool b)
+void SearchDialog::setSimpleStyle()
 {
-	ui->RAAngleSpinBox->setVisible(!b);
-	ui->DEAngleSpinBox->setVisible(!b);
+	ui->RAAngleSpinBox->setVisible(false);
+	ui->DEAngleSpinBox->setVisible(false);
 	ui->simbadStatusLabel->setVisible(false);
-	ui->raDecLabel->setVisible(!b);
+	ui->raDecLabel->setVisible(false);
 }
+
 
 void SearchDialog::manualPositionChanged()
 {
@@ -220,7 +250,7 @@ void SearchDialog::manualPositionChanged()
 	mvmgr->moveToJ2000(pos, 0.05);
 }
 
-void SearchDialog::onTextChanged(const QString& text)
+void SearchDialog::onSearchTextChanged(const QString& text)
 {
 	if (simbadReply)
 	{
@@ -252,7 +282,9 @@ void SearchDialog::onTextChanged(const QString& text)
 			matches += objectMgr->listMatchingObjectsI18n(greekText, (5 - matches.size()));
 		}
 		else
+        {
 			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 5);
+        }
 
 		ui->completionLabel->setValues(matches);
 		ui->completionLabel->selectFirst();
@@ -294,9 +326,17 @@ void SearchDialog::onSimbadStatusChanged()
 		simbadReply=NULL;
 
 		// Update push button enabled state
-		// Update push button enabled state
 		ui->pushButtonGotoSearchSkyObject->setEnabled(!ui->completionLabel->isEmpty());
 	}
+}
+
+void SearchDialog::greekLetterClicked()
+{
+    QPushButton *sender = reinterpret_cast<QPushButton *>(this->sender());
+    if (sender) {
+        ui->lineEditSearchSkyObject->setText(ui->lineEditSearchSkyObject->text() + sender->text());
+    }
+    ui->lineEditSearchSkyObject->setFocus();
 }
 
 void SearchDialog::gotoObject()
@@ -344,11 +384,6 @@ bool SearchDialog::eventFilter(QObject*, QEvent *event)
 	if (event->type() == QEvent::KeyRelease)
 	{
 		QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-
-		// Kludgy workaround for Qt focusPolicy bug. Get rid of this if
-		// they ever fix it.
-		if(keyEvent->key() == Qt::Key_Tab)
-			ui->lineEditSearchSkyObject->setFocus(Qt::OtherFocusReason);
 
 		if (keyEvent->key() == Qt::Key_Tab || keyEvent->key() == Qt::Key_Down)
 		{
