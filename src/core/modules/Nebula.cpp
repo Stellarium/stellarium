@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2011 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -151,7 +152,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	if (nType != 1 && nType != 2 && nType != 4)
 		Nebula::texCircle->bind();
 
-	sPainter.drawSprite2dMode(XY[0], XY[1], 5);
+	sPainter.drawSprite2dMode(XY[0], XY[1], 6);
 }
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
