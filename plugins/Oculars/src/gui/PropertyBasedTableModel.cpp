@@ -1,6 +1,12 @@
 #include "PropertyBasedTableModel.hpp"
 #include <QDebug>
 
+/* ********************************************************************* */
+#if 0
+#pragma mark -
+#pragma mark instance Methods
+#endif
+/* ********************************************************************* */
 PropertyBasedTableModel::PropertyBasedTableModel(QObject *parent)
 	: QAbstractTableModel(parent)
 {
@@ -44,7 +50,7 @@ int PropertyBasedTableModel::columnCount(const QModelIndex &parent) const
 QVariant PropertyBasedTableModel::data(const QModelIndex &index, int role) const
 {
 	QVariant data;
-	if ((role == Qt::DisplayRole || role ==Qt::EditRole)
+	if ((role == Qt::DisplayRole || role == Qt::EditRole)
 		 && index.isValid()
 		 && index.row() < content->size()
 		 && index.row() >= 0
@@ -59,7 +65,7 @@ QVariant PropertyBasedTableModel::data(const QModelIndex &index, int role) const
 bool PropertyBasedTableModel::insertRows(int position, int rows, const QModelIndex &index)
 {
 	Q_UNUSED(index);
-	beginInsertRows(QModelIndex(), position, position+rows-1);
+	beginInsertRows(QModelIndex(), position, position + rows - 1);
 
 	for (int row=0; row < rows; row++) {
 		QObject* newInstance = modelObject->metaObject()->newInstance(Q_ARG(QObject, *modelObject));
@@ -74,7 +80,7 @@ bool PropertyBasedTableModel::insertRows(int position, int rows, const QModelInd
 bool PropertyBasedTableModel::removeRows(int position, int rows, const QModelIndex &index)
 {
 	Q_UNUSED(index);
-	beginRemoveRows(QModelIndex(), position, position+rows-1);
+	beginRemoveRows(QModelIndex(), position, position + rows - 1);
 
 	for (int row=0; row < rows; ++row) {
 		content->removeAt(position);

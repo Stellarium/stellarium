@@ -83,6 +83,7 @@ void ViewDialog::styleChanged()
 void ViewDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
 
 	// Set the Sky tab activated by default
 	ui->stackedWidget->setCurrentIndex(0);
@@ -319,8 +320,9 @@ void ViewDialog::populateLists()
 	l->addItems(lmgr->getAllLandscapeNames());
 	l->setCurrentItem(l->findItems(lmgr->getCurrentLandscapeName(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
-	//ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription()); //Is there any reason not to reuse code?
-	landscapeChanged(l->currentItem());
+	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
+	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
+	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getDefaultLandscapeID()!=lmgr->getCurrentLandscapeID());
 }
 
 void ViewDialog::populateSkyLayersList()

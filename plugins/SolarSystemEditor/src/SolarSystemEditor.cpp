@@ -113,6 +113,7 @@ void SolarSystemEditor::init()
 		return;
 	}
 
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	isInitialized = true;
 }
 
@@ -188,11 +189,6 @@ void SolarSystemEditor::updateI18n()
 	//The Solar System MUST be translated before updating the window
 	//TODO: Remove this if/when you merge this module in the Solar System module
 	solarSystemManager->updateI18n();
-
-	if (mainWindow)
-	{
-		mainWindow->languageChanged();
-	}
 }
 
 bool SolarSystemEditor::cloneSolarSystemConfigurationFile()

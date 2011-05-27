@@ -34,11 +34,17 @@
 #include <QObject>
 
 #include "StelApp.hpp"
+#include "StelCore.hpp" //Needed for getting StelNavigator instances
 #include "StelObject.hpp"
 #include "StelNavigator.hpp"
 #include "InterpolatedPosition.hpp"
 
 qint64 getNow(void);
+
+enum Equinox {
+	EquinoxJ2000,
+	EquinoxJNow
+};
 
 //! An abstract base class that should never be used directly, only inherited.
 //! This class used to be called Telescope, but it has been renamed
@@ -149,7 +155,7 @@ class TelescopeTCP : public TelescopeClient
 {
 	Q_OBJECT
 public:
-	TelescopeTCP(const QString &name,const QString &params);
+	TelescopeTCP(const QString &name, const QString &params, Equinox eq = EquinoxJ2000);
 	~TelescopeTCP(void)
 	{
 		hangup();
@@ -190,6 +196,8 @@ private:
 	{
 		return interpolatedPosition.isKnown();
 	}
+
+	Equinox equinox;
 	
 private slots:
 	void socketFailed(QAbstractSocket::SocketError socketError);
