@@ -70,8 +70,10 @@ ConfigurationDialog::~ConfigurationDialog()
 
 void ConfigurationDialog::languageChanged()
 {
-	if (dialog)
+	if (dialog) {
 		ui->retranslateUi(dialog);
+		ui->stackListWidget->repaint();
+	}
 
 	//Script information
 	//(trigger re-displaying the description of the current item)
@@ -94,6 +96,7 @@ void ConfigurationDialog::createDialogContent()
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 
 	ui->setupUi(dialog);
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
 
 	// Set the main tab activated by default
 	ui->configurationStackedWidget->setCurrentIndex(0);

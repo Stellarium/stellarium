@@ -81,6 +81,7 @@ void MpcImportWindow::createDialogContent()
 	ui->setupUi(dialog);
 
 	//Signals
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	connect(ui->pushButtonAcquire, SIGNAL(clicked()), this, SLOT(acquireObjectData()));
@@ -678,7 +679,7 @@ void MpcImportWindow::sendQuery()
 	url.addQueryItem("ce", "f");
 	url.addQueryItem("js", "f");
 
-	QNetworkRequest request(QUrl("http://scully.cfa.harvard.edu/~cgi/MPEph2"));
+	QNetworkRequest request(QUrl("http://scully.cfa.harvard.edu/cgi-bin/mpeph2.cgi"));
 	request.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");//Is this really necessary?
 	request.setHeader(QNetworkRequest::ContentLengthHeader, url.encodedQuery().length());
 

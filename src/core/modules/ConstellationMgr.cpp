@@ -89,7 +89,14 @@ void ConstellationMgr::init()
 	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected",
 						   conf->value("viewing/flag_constellation_pick", false).toBool() ).toBool());
 
-	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
+	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
+	objectManager->registerStelObjectMgr(this);
+	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), 
+			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
+	StelApp *app = &StelApp::getInstance();
+	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(app, SIGNAL(skyCultureChanged(const QString&)), this, SLOT(updateSkyCulture(const QString&)));
+	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 }
 
 /*************************************************************************
@@ -166,7 +173,7 @@ void ConstellationMgr::setStelStyle(const QString& section)
 	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/const_names_color", defaultColor).toString()));
 }
 
-void ConstellationMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)
+void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction action)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(omgr);
@@ -439,40 +446,38 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			Mat4d A(x1, texSizeY - y1, 0.f, 1.f, x2, texSizeY - y2, 0.f, 1.f, x3, texSizeY - y3, 0.f, 1.f, x1, texSizeY - y1, texSizeX, 1.f);
 			Mat4d X = B * A.inverse();
 
-			QVector<Vec3d> contour(10);
-			contour[0] = X * Vec3d(texSizeX*0.5, texSizeY*0.5, 0.);
-			contour[1] = X * Vec3d(texSizeX, texSizeY*0.5, 0.);
-			contour[2] = X * Vec3d(texSizeX, texSizeY, 0.);
-			contour[3] = X * Vec3d(texSizeX*0.5, texSizeY, 0.);
-			contour[4] = X * Vec3d(0, texSizeY, 0.);
-			contour[5] = X * Vec3d(0, texSizeY*0.5, 0.);
-			contour[6] = X * Vec3d(0, 0, 0.);
-			contour[7] = X * Vec3d(texSizeX*0.5, 0, 0.);
-			contour[8] = X * Vec3d(texSizeX, 0, 0.);
-			contour[9] = X * Vec3d(texSizeX, texSizeY*0.5, 0.);
-			for (int i=0;i<10;++i)
+			// Tesselate on the plan assuming a tangential projection for the image
+			static const int nbPoints=5;
+			QVector<Vec2f> texCoords;
+			texCoords.reserve(nbPoints*nbPoints*6);
+			for (int j=0;j<nbPoints;++j)
 			{
-				contour[i].normalize();
+				for (int i=0;i<nbPoints;++i)
+				{
+					texCoords << Vec2f(((float)i)/nbPoints, ((float)j)/nbPoints);
+					texCoords << Vec2f(((float)i+1.f)/nbPoints, ((float)j)/nbPoints);
+					texCoords << Vec2f(((float)i)/nbPoints, ((float)j+1.f)/nbPoints);
+					texCoords << Vec2f(((float)i+1.f)/nbPoints, ((float)j)/nbPoints);
+					texCoords << Vec2f(((float)i+1.f)/nbPoints, ((float)j+1.f)/nbPoints);
+					texCoords << Vec2f(((float)i)/nbPoints, ((float)j+1.f)/nbPoints);
+				}
 			}
 
-			QVector<Vec2f> texCoords(10);
-			texCoords[0].set(0.5,0.5);
-			texCoords[1].set(1,0.5);
-			texCoords[2].set(1,1);
-			texCoords[3].set(0.5,1);
-			texCoords[4].set(0,1);
-			texCoords[5].set(0,0.5);
-			texCoords[6].set(0,0);
-			texCoords[7].set(0.5,0);
-			texCoords[8].set(1,0);
-			texCoords[9].set(1,0.5);
+			QVector<Vec3d> contour;
+			contour.reserve(texCoords.size());
+			foreach (const Vec2f& v, texCoords)
+				contour << X * Vec3d(v[0]*texSizeX, v[1]*texSizeY, 0.);
 
 			cons->artPolygon.vertex=contour;
 			cons->artPolygon.texCoords=texCoords;
-			cons->artPolygon.primitiveType=StelVertexArray::TriangleFan;
+			cons->artPolygon.primitiveType=StelVertexArray::Triangles;
 
-			cons->boundingCap.n=contour[0];
-			cons->boundingCap.d=contour[0]*contour[2];
+			Vec3d tmp(X * Vec3d(0.5*texSizeX, 0.5*texSizeY, 0.));
+			tmp.normalize();
+			Vec3d tmp2(X * Vec3d(0., 0., 0.));
+			tmp2.normalize();
+			cons->boundingCap.n=tmp;
+			cons->boundingCap.d=tmp*tmp2;
 			++readOk;
 		}
 	}

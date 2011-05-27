@@ -49,24 +49,26 @@
 
 TelescopeClient *TelescopeClient::create(const QString &url)
 {
-	// example url: My_first_telescope:TCP:localhost:10000:500000
+	// example url: My_first_telescope:TCP:J2000:localhost:10000:500000
 	// split to:
 	// name    = My_first_telescope
 	// type    = TCP
+	// equinox = J2000
 	// params  = localhost:10000:500000
 	//
 	// The params part is optional.  We will use QRegExp to validate
 	// the url and extact the components.
 
 	// note, in a reg exp, [^:] matches any chararacter except ':'
-	QRegExp recRx("^([^:]*):([^:]*)(:(.*))?$");
-	QString name, type, params;
-	if (recRx.exactMatch(url))
+	QRegExp urlSchema("^([^:]*):([^:]*):([^:]*)(?::(.*))?$");
+	QString name, type, equinox, params;
+	if (urlSchema.exactMatch(url))
 	{
 		// trimmed removes whitespace on either end of a QString
-		name = recRx.capturedTexts().at(1).trimmed();
-		type = recRx.capturedTexts().at(2).trimmed();
-		params = recRx.capturedTexts().at(4).trimmed();
+		name = urlSchema.capturedTexts().at(1).trimmed();
+		type = urlSchema.capturedTexts().at(2).trimmed();
+		equinox = urlSchema.capturedTexts().at(3).trimmed();
+		params = urlSchema.capturedTexts().at(4).trimmed();
 	}
 	else
 	{
@@ -74,7 +76,11 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 		return NULL;
 	}
 
-	qDebug() << "Creating telescope" << url << "; name/type/params:" << name << type << params;
+	Equinox eq = EquinoxJ2000;
+	if (equinox == "JNow")
+		eq = EquinoxJNow;
+
+	qDebug() << "Creating telescope" << url << "; name/type/equinox/params:" << name << type << ((eq == EquinoxJNow) ? "JNow" : "J2000") << params;
 
 	TelescopeClient * newTelescope = 0;
 	
@@ -85,15 +91,15 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	}
 	else if (type == "TCP")
 	{
-		newTelescope = new TelescopeTCP(name, params);
+		newTelescope = new TelescopeTCP(name, params, eq);
 	}
 	else if (type == "TelescopeServerLx200") //BM: One of the rare occasions of painless extension
 	{
-		newTelescope= new TelescopeClientDirectLx200(name, params);
+		newTelescope= new TelescopeClientDirectLx200(name, params, eq);
 	}
 	else if (type == "TelescopeServerNexStar")
 	{
-		newTelescope= new TelescopeClientDirectNexStar(name, params);
+		newTelescope= new TelescopeClientDirectNexStar(name, params, eq);
 	}
 	else
 	{
@@ -150,9 +156,10 @@ qint64 getNow(void)
 #endif
 }
 
-TelescopeTCP::TelescopeTCP(const QString &name, const QString &params) :
+TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Equinox eq) :
 		TelescopeClient(name),
-		tcpSocket(new QTcpSocket())
+		tcpSocket(new QTcpSocket()),
+		equinox(eq)
 {
 	hangup();
 	
@@ -244,60 +251,67 @@ void TelescopeTCP::hangup(void)
 //! "Stellarium telescope control protocol" text file
 void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos)
 {
-	if (isConnected())
+	if (!isConnected())
+		return;
+
+	Vec3d position = j2000Pos;
+	if (equinox == EquinoxJNow)
 	{
-		if (writeBufferEnd - writeBuffer + 20 < (int)sizeof(writeBuffer))
-		{
-			const double ra_signed = atan2(j2000Pos[1], j2000Pos[0]);
-			//Workaround for the discrepancy in precision between Windows/Linux/PPC Macs and Intel Macs:
-			const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2.0 * M_PI);
-			const double dec = atan2(j2000Pos[2], sqrt(j2000Pos[0]*j2000Pos[0]+j2000Pos[1]*j2000Pos[1]));
-			unsigned int ra_int = (unsigned int)floor(0.5 + ra*(((unsigned int)0x80000000)/M_PI));
-			int dec_int = (int)floor(0.5 + dec*(((unsigned int)0x80000000)/M_PI));
-			// length of packet:
-			*writeBufferEnd++ = 20;
-			*writeBufferEnd++ = 0;
-			// type of packet:
-			*writeBufferEnd++ = 0;
-			*writeBufferEnd++ = 0;
-			// client_micros:
-			qint64 now = getNow();
-			*writeBufferEnd++ = now;
-			now>>=8;
-			*writeBufferEnd++ = now;
-			now>>=8;
-			*writeBufferEnd++ = now;
-			now>>=8;
-			*writeBufferEnd++ = now;
-			now>>=8;
-			*writeBufferEnd++ = now;
-			now>>=8;
-			*writeBufferEnd++ = now;
-			now>>=8;
-			*writeBufferEnd++ = now;
-			now>>=8;
-			*writeBufferEnd++ = now;
-			// ra:
-			*writeBufferEnd++ = ra_int;
-			ra_int>>=8;
-			*writeBufferEnd++ = ra_int;
-			ra_int>>=8;
-			*writeBufferEnd++ = ra_int;
-			ra_int>>=8;
-			*writeBufferEnd++ = ra_int;
-			// dec:
-			*writeBufferEnd++ = dec_int;
-			dec_int>>=8;
-			*writeBufferEnd++ = dec_int;
-			dec_int>>=8;
-			*writeBufferEnd++ = dec_int;
-			dec_int>>=8;
-			*writeBufferEnd++ = dec_int;
-		}
-		else
-		{
-			qDebug() << "TelescopeTCP(" << name << ")::telescopeGoto: "<< "communication is too slow, I will ignore this command";
-		}
+		const StelNavigator* navigator = StelApp::getInstance().getCore()->getNavigator();
+		position = navigator->j2000ToEquinoxEqu(j2000Pos);
+	}
+
+	if (writeBufferEnd - writeBuffer + 20 < (int)sizeof(writeBuffer))
+	{
+		const double ra_signed = atan2(position[1], position[0]);
+		//Workaround for the discrepancy in precision between Windows/Linux/PPC Macs and Intel Macs:
+		const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2.0 * M_PI);
+		const double dec = atan2(position[2], sqrt(position[0]*position[0]+position[1]*position[1]));
+		unsigned int ra_int = (unsigned int)floor(0.5 + ra*(((unsigned int)0x80000000)/M_PI));
+		int dec_int = (int)floor(0.5 + dec*(((unsigned int)0x80000000)/M_PI));
+		// length of packet:
+		*writeBufferEnd++ = 20;
+		*writeBufferEnd++ = 0;
+		// type of packet:
+		*writeBufferEnd++ = 0;
+		*writeBufferEnd++ = 0;
+		// client_micros:
+		qint64 now = getNow();
+		*writeBufferEnd++ = now;
+		now>>=8;
+		*writeBufferEnd++ = now;
+		now>>=8;
+		*writeBufferEnd++ = now;
+		now>>=8;
+		*writeBufferEnd++ = now;
+		now>>=8;
+		*writeBufferEnd++ = now;
+		now>>=8;
+		*writeBufferEnd++ = now;
+		now>>=8;
+		*writeBufferEnd++ = now;
+		now>>=8;
+		*writeBufferEnd++ = now;
+		// ra:
+		*writeBufferEnd++ = ra_int;
+		ra_int>>=8;
+		*writeBufferEnd++ = ra_int;
+		ra_int>>=8;
+		*writeBufferEnd++ = ra_int;
+		ra_int>>=8;
+		*writeBufferEnd++ = ra_int;
+		// dec:
+		*writeBufferEnd++ = dec_int;
+		dec_int>>=8;
+		*writeBufferEnd++ = dec_int;
+		dec_int>>=8;
+		*writeBufferEnd++ = dec_int;
+		dec_int>>=8;
+		*writeBufferEnd++ = dec_int;
+	}
+	else
+	{
+		qDebug() << "TelescopeTCP(" << name << ")::telescopeGoto: "<< "communication is too slow, I will ignore this command";
 	}
 }
 
@@ -406,8 +420,14 @@ void TelescopeTCP::performReading(void)
 					const double ra  =  ra_int * (M_PI/(unsigned int)0x80000000);
 					const double dec = dec_int * (M_PI/(unsigned int)0x80000000);
 					const double cdec = cos(dec);
-					Vec3d vector(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
-					interpolatedPosition.add(vector, getNow(), server_micros, status);
+					Vec3d position(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
+					Vec3d j2000Position = position;
+					if (equinox == EquinoxJNow)
+					{
+						const StelNavigator* navigator = StelApp::getInstance().getCore()->getNavigator();
+						j2000Position = navigator->equinoxEquToJ2000(position);
+					}
+					interpolatedPosition.add(j2000Position, getNow(), server_micros, status);
 				}
 				break;
 				default:

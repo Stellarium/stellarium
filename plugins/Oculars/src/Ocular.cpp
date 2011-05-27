@@ -29,6 +29,7 @@ Ocular::Ocular(const QObject& other)
 	this->m_effectiveFocalLength = other.property("effectiveFocalLength").toDouble();
 	this->m_fieldStop = other.property("fieldStop").toDouble();
 	this->m_name = other.property("name").toString();
+	this->m_binoculars = other.property("binoculars").toBool();
 }
 
 Ocular::~Ocular()
@@ -44,6 +45,7 @@ QMap<int, QString> Ocular::propertyMap()
 		mapping[1] = "appearentFOV";
 		mapping[2] = "effectiveFocalLength";
 		mapping[3] = "fieldStop";
+		mapping[4] = "binoculars";
 	}
 	return mapping;
 }
@@ -58,7 +60,9 @@ QMap<int, QString> Ocular::propertyMap()
 double Ocular::actualFOV(Telescope *telescope) const
 {
 	double actualFOV = 0.0;
-	if (fieldStop() > 0.0) {
+	if (m_binoculars) {
+		actualFOV = appearentFOV();
+	} else if (fieldStop() > 0.0) {
 		actualFOV =  fieldStop() / telescope->focalLength() * 57.3;
 	} else {
 		//actualFOV = apparent / mag
@@ -69,7 +73,13 @@ double Ocular::actualFOV(Telescope *telescope) const
 
 double Ocular::magnification(Telescope *telescope) const
 {
-	return telescope->focalLength() / effectiveFocalLength();
+	double magnifiction = 0.0;
+	if (m_binoculars) {
+		magnifiction = effectiveFocalLength();
+	} else {
+		magnifiction = telescope->focalLength() / effectiveFocalLength();
+	}
+	return magnifiction;
 }
 
 /* ********************************************************************* */
@@ -118,6 +128,16 @@ void Ocular::setFieldStop(double fs)
 	m_fieldStop = fs;
 }
 
+bool Ocular::isBinoculars() const
+{
+	return m_binoculars;
+}
+
+void Ocular::setBinoculars(bool flag)
+{
+	m_binoculars = flag;
+}
+
 /* ********************************************************************* */
 #if 0
 #pragma mark -
@@ -134,6 +154,7 @@ Ocular* Ocular::ocularFromSettings(QSettings* theSettings, int ocularIndex)
 	ocular->setAppearentFOV(theSettings->value(prefix + "afov", "0.0").toDouble());
 	ocular->setEffectiveFocalLength(theSettings->value(prefix + "efl", "0.0").toDouble());
 	ocular->setFieldStop(theSettings->value(prefix + "fieldStop", "0.0").toDouble());
+	ocular->setBinoculars(theSettings->value(prefix + "binoculars", "false").toBool());
 	
 	if (!(ocular->appearentFOV() > 0.0 && ocular->effectiveFocalLength() > 0.0)) {
 		qWarning() << "WARNING: Invalid data for ocular. Ocular values must be positive. \n"
@@ -154,5 +175,6 @@ Ocular* Ocular::ocularModel()
 	model->setAppearentFOV(68);
 	model->setEffectiveFocalLength(32);
 	model->setFieldStop(0);
+	model->setBinoculars(false);
 	return model;
 }

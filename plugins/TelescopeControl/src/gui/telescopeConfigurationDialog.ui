@@ -228,9 +228,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-112</y>
+        <y>0</y>
         <width>382</width>
-        <height>425</height>
+        <height>476</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayoutScrollArea">
@@ -347,6 +347,36 @@ Increase this value if the reticle is skipping.</string>
              </widget>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelEquinox">
+            <property name="text">
+             <string>Coordinate system:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frameEquinox">
+            <layout class="QHBoxLayout" name="horizontalLayoutEpoch">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QRadioButton" name="radioButtonJ2000">
+               <property name="text">
+                <string>J2000 (default)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="radioButtonJNow">
+               <property name="text">
+                <string>Equinox of the date (JNow)</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="checkBoxConnectAtStartup">

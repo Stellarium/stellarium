@@ -42,14 +42,8 @@ main() {
 
 	# output warnings last, but uniq them first
 	sort -u "$log"
+	cd
 	rm -f "$log"
-
-	if [ $(svn status |grep '^?' |wc -l) -gt 0 ]; then
-		echo ""
-		echo "There are new files to add to SVN in \$STELROOT/po :"
-		svn status |grep '^?'
-	fi
-
 	rm -rf "$tmp_dir"
 }
 
@@ -77,8 +71,9 @@ detar() {
 }
 
 process_group() {
-	group_dir="$tmp_dir/translations/$1"
+	group_dir="$tmp_dir/po/$1"
 	if [[ ! -d "$group_dir" ]]; then
+		err "process_group: couldn't find group dir $group_dir" 
 		return
 	fi
 
