@@ -60,6 +60,9 @@ NebulaMgr::NebulaMgr(void) : nebGrid(200), displayNoTexture(false)
 NebulaMgr::~NebulaMgr()
 {
 	Nebula::texCircle = StelTextureSP();
+	Nebula::texOpenCluster = StelTextureSP();
+	Nebula::texGlobularCluster = StelTextureSP();
+	Nebula::texPlanetNebula = StelTextureSP();
 }
 
 /*************************************************************************
@@ -89,6 +92,9 @@ void NebulaMgr::init()
 
 	nebulaFont.setPixelSize(13);
 	Nebula::texCircle = StelApp::getInstance().getTextureManager().createTexture("textures/neb.png");   // Load circle texture
+	Nebula::texOpenCluster = StelApp::getInstance().getTextureManager().createTexture("textures/ocl.png");   // Load open clister marker texture
+	Nebula::texGlobularCluster = StelApp::getInstance().getTextureManager().createTexture("textures/gcl.png");   // Load globular clister marker texture
+	Nebula::texPlanetNebula = StelApp::getInstance().getTextureManager().createTexture("textures/pnb.png");   // Load planetary nebula marker texture
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur5.png");   // Load pointer texture
 
 	setFlagShow(conf->value("astro/flag_nebula",true).toBool());
