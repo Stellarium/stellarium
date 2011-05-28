@@ -72,12 +72,12 @@ gSatWrapper::~gSatWrapper()
 
 Vec3d gSatWrapper::getTEMEPos()
 {
-	gVector tempPos;
+        gVector position;
 	Vec3d returnedVector;
 	if (pSatellite != NULL)
 	{
-		tempPos = pSatellite->getPos();
-		returnedVector.set(tempPos[0], tempPos[1], tempPos[2]);
+                position = pSatellite->getPos();
+                returnedVector.set(position[0], position[1], position[2]);
 	}
 	else
 		qWarning() << "gSatWrapper::getTEMEPos Method called without pSatellite initialized";
@@ -89,12 +89,12 @@ Vec3d gSatWrapper::getTEMEPos()
 
 Vec3d gSatWrapper::getTEMEVel()
 {
-	gVector tempVel;
+        gVector velocity;
 	Vec3d returnedVector;
 	if (pSatellite != NULL)
 	{
-		tempVel = pSatellite->getVel();
-		returnedVector.set(tempVel[0], tempVel[1], tempVel[2]);
+                velocity = pSatellite->getVel();
+                returnedVector.set(velocity[0], velocity[1], velocity[2]);
 	}
 	else
 		qWarning() << "gSatWrapper::getTEMEVel Method called without pSatellite initialized";
@@ -106,12 +106,12 @@ Vec3d gSatWrapper::getTEMEVel()
 
 Vec3d gSatWrapper::getSubPoint()
 {
-	gVector tempSubPoint;
+        gVector satelliteSubPoint;
 	Vec3d returnedVector;
 	if (pSatellite != NULL)
 	{
-		tempSubPoint = pSatellite->getSubPoint();
-		returnedVector.set(tempSubPoint[0], tempSubPoint[1], tempSubPoint[2]);
+                satelliteSubPoint = pSatellite->getSubPoint();
+                returnedVector.set(satelliteSubPoint[0], satelliteSubPoint[1], satelliteSubPoint[2]);
 	}
 	else
 		qWarning() << "gSatWrapper::getTEMEVel Method called without pSatellite initialized";
@@ -123,27 +123,27 @@ Vec3d gSatWrapper::getSubPoint()
 void gSatWrapper::updateEpoch()
 {
 	double jul_utc = StelApp::getInstance().getCore()->getNavigator()->getJDay();
-	Epoch = jul_utc;
+        epoch = jul_utc;
 
 	if (pSatellite)
-		pSatellite->setEpoch(Epoch);
+                pSatellite->setEpoch(epoch);
 }
 
 void gSatWrapper::setEpoch(double ai_julianDaysEpoch)
 {
-    Epoch = ai_julianDaysEpoch;
+    epoch = ai_julianDaysEpoch;
     if (pSatellite)
 		pSatellite->setEpoch(ai_julianDaysEpoch);
 }
 
 
-void gSatWrapper::calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_vel)
+void gSatWrapper::calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_velocity)
 {
 
 	StelLocation loc   = StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation();
 
 	double radLatitude = loc.latitude * KDEG2RAD;
-	double theta       = Epoch.toThetaLMST(loc.longitude * KDEG2RAD);
+        double theta       = epoch.toThetaLMST(loc.longitude * KDEG2RAD);
 	double r;
 	double c,sq;
 
@@ -157,9 +157,9 @@ void gSatWrapper::calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_vel)
 	ao_position[0] = r * cos(theta);/*kilometers*/
 	ao_position[1] = r * sin(theta);
 	ao_position[2] = (KEARTHRADIUS*sq + (loc.altitude/1000))*sin(radLatitude);
-	ao_vel[0] = -KMFACTOR*ao_position[1];/*kilometers/second*/
-	ao_vel[1] =  KMFACTOR*ao_position[0];
-	ao_vel[2] =  0;
+        ao_velocity[0] = -KMFACTOR*ao_position[1];/*kilometers/second*/
+        ao_velocity[1] =  KMFACTOR*ao_position[0];
+        ao_velocity[2] =  0;
 }
 
 
@@ -173,7 +173,7 @@ Vec3d gSatWrapper::getAltAz()
 	Vec3d observerECIVel;
 
 	double  radLatitude    = loc.latitude * KDEG2RAD;
-	double  theta          = Epoch.toThetaLMST(loc.longitude * KDEG2RAD);
+        double  theta          = epoch.toThetaLMST(loc.longitude * KDEG2RAD);
 
 	calcObserverECIPosition(observerECIPos, observerECIVel);
 
@@ -205,13 +205,13 @@ void  gSatWrapper::getSlantRange(double &ao_slantRange, double &ao_slantRangeRat
 	calcObserverECIPosition(observerECIPos, observerECIVel);
 
 
-	Vec3d satECIPos = getTEMEPos();
-	Vec3d satECIVel = getTEMEVel();
-	Vec3d slantRange = satECIPos - observerECIPos;
-	Vec3d rangeVel   = satECIVel - observerECIVel;
+        Vec3d satECIPos            = getTEMEPos();
+        Vec3d satECIVel            = getTEMEVel();
+        Vec3d slantRange           = satECIPos - observerECIPos;
+        Vec3d slantRangeVelocity   = satECIVel - observerECIVel;
 
 	ao_slantRange     = slantRange.length();
-	ao_slantRangeRate = slantRange.dot(rangeVel)/ao_slantRange;
+        ao_slantRangeRate = slantRange.dot(slantRangeVelocity)/ao_slantRange;
 }
 
 // Operation getVisibilityPredict
