@@ -213,21 +213,21 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << QString("Range (km): <b>%1</b>").arg(range, 5, 'f', 2) << "<br>";
 		oss << QString("Range rate (km/s): <b>%1</b>").arg(rangeRate, 5, 'f', 3) << "<br>";
 		oss << QString("Altitude (km): <b>%1</b>").arg(height, 5, 'f', 2) << "<br>";
-		oss << QString("SubPoint Lat/Long(Deg): <b>%1</b>").arg(LatLong[0], 5, 'f', 2) << "/";
-		oss << QString("<b>%1</b>").arg(LatLong[1], 5, 'f', 3);
+                oss << QString("SubPoint Lat/Long(Deg): <b>%1</b>").arg(latLongSubPointPosition[0], 5, 'f', 2) << "/";
+                oss << QString("<b>%1</b>").arg(latLongSubPointPosition[1], 5, 'f', 3);
 		oss << "</p>";
 
 		oss << "TEME Coordinates(km):  ";
-		oss << QString("<b>X:</b> %1 ").arg(Position[0], 5, 'f', 2);
-		oss << QString("<b>Y:</b> %1 ").arg(Position[1], 5, 'f', 2);
-		oss << QString("<b>Z:</b> %1 ").arg(Position[2], 5, 'f', 2) << "<br>";
+                oss << QString("<b>X:</b> %1 ").arg(position[0], 5, 'f', 2);
+                oss << QString("<b>Y:</b> %1 ").arg(position[1], 5, 'f', 2);
+                oss << QString("<b>Z:</b> %1 ").arg(position[2], 5, 'f', 2) << "<br>";
 		oss << "TEME Vel(km/s):  ";
-		oss << QString("<b>X:</b> %1 ").arg(Vel[0], 5, 'f', 2);
-		oss << QString("<b>Y:</b> %1 ").arg(Vel[1], 5, 'f', 2);
-		oss << QString("<b>Z:</b> %1 ").arg(Vel[2], 5, 'f', 2) << "<br>";
+                oss << QString("<b>X:</b> %1 ").arg(velocity[0], 5, 'f', 2);
+                oss << QString("<b>Y:</b> %1 ").arg(velocity[1], 5, 'f', 2);
+                oss << QString("<b>Z:</b> %1 ").arg(velocity[2], 5, 'f', 2) << "<br>";
 
 		oss << "Visibility:  ";
-		switch (Visibility)
+                switch (visibility)
 		{
 		case RADAR_SUN:
 			oss << "Sat&Observer in Sunlit" << "<br>";
@@ -316,15 +316,15 @@ void Satellite::update(double)
 		epochTime = StelApp::getInstance().getCore()->getNavigator()->getJDay();
 
 		pSatWrapper->setEpoch(epochTime);
-		Position = pSatWrapper->getTEMEPos();
-		Vel      = pSatWrapper->getTEMEVel();
-		LatLong  = pSatWrapper->getSubPoint();
-		height   = LatLong[2];
-		ElAzPos  = pSatWrapper->getAltAz();
-                ElAzPos.normalize();
+                position                 = pSatWrapper->getTEMEPos();
+                velocity                 = pSatWrapper->getTEMEVel();
+                latLongSubPointPosition  = pSatWrapper->getSubPoint();
+                height                   = latLongSubPointPosition[2];
+                elAzPosition             = pSatWrapper->getAltAz();
+                elAzPosition.normalize();
 
 		pSatWrapper->getSlantRange(range, rangeRate);
-		Visibility = pSatWrapper->getVisibilityPredict();
+                visibility = pSatWrapper->getVisibilityPredict();
 
 		// Compute orbit points to draw orbit line.
 		if (orbitVisible) computeOrbitPoints();
@@ -335,7 +335,7 @@ double Satellite::getDoppler(double freq) const
 {
 	double result;
 	double f = freq * 1000000;
-	result = -f*((rangeRate*1000.0)/SPEED_OF_LIGHT);
+        result   = -f*((rangeRate*1000.0)/SPEED_OF_LIGHT);
 	return result/1000000;
 }
 
@@ -346,7 +346,7 @@ void Satellite::recalculateOrbitLines(void)
 
 void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 {
-	XYZ = core->getNavigator()->altAzToJ2000(ElAzPos);
+        XYZ = core->getNavigator()->altAzToJ2000(elAzPosition);
 	StelApp::getInstance().getVisionModeNight() ? glColor4f(0.6,0.0,0.0,1.0) : glColor4f(hintColor[0],hintColor[1],hintColor[2], Satellite::hintBrightness);
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
@@ -368,14 +368,14 @@ void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 
 void Satellite::drawOrbit(StelPainter& painter)
 {
-	Vec3d pos,posPrev;
+        Vec3d position,previousPosition;
 
 	glDisable(GL_TEXTURE_2D);
 
 	QList<Vec3d>::iterator it= orbitPoints.begin();
 
 	//First point projection calculation
-	posPrev.set(it->operator [](0), it->operator [](1), it->operator [](2));
+        previousPosition.set(it->operator [](0), it->operator [](1), it->operator [](2));
 
 	it++;
 	StelVertexArray vertexArray;
@@ -384,23 +384,22 @@ void Satellite::drawOrbit(StelPainter& painter)
 	//Rest of points
 	for (int i=1; i<orbitPoints.size(); i++)
 	{
-		pos.set(it->operator [](0), it->operator [](1), it->operator [](2));
+                position.set(it->operator [](0), it->operator [](1), it->operator [](2));
 		it++;
-
-		pos.normalize();
-		posPrev.normalize();
+                position.normalize();
+                previousPosition.normalize();
 
 		// Draw end (fading) parts of orbit lines one segment at a time.
 		if (i<=orbitLineFadeSegments || orbitLineSegments-i < orbitLineFadeSegments)
 		{
 			painter.setColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2], hintBrightness * calculateOrbitSegmentIntensity(i));
-			painter.drawGreatCircleArc(posPrev, pos, &viewportHalfspace);
+                        painter.drawGreatCircleArc(previousPosition, position, &viewportHalfspace);
 		}
 		else
 		{
-			vertexArray.vertex << posPrev << pos;
+                        vertexArray.vertex << previousPosition << position;
 		}
-		posPrev = pos;
+                previousPosition = position;
 	}
 
 	// Draw center section of orbit in one go
@@ -439,21 +438,21 @@ void Satellite::computeOrbitPoints()
 	gTimeSpan computeInterval(0, 0, 0, orbitLineSegmentDuration);
 	gTimeSpan orbitSpan(0, 0, 0, orbitLineSegments*orbitLineSegmentDuration/2);
 	gTime	  epochTm;
-	gTime	  Epoch(epochTime);
+        gTime	  epoch(epochTime);
 	gTime	  lastEpochComp(lastEpochCompForOrbit);
-	Vec3d  ElAzVector;
-	int	   diffSlots;
+        Vec3d     elAzVector;
+        int	  diffSlots;
 
 
 	if (orbitPoints.isEmpty())//Setup orbitPoins
 	{
-		epochTm  = Epoch - orbitSpan;
+                epochTm  = epoch - orbitSpan;
 
 		for (int i=0; i<=orbitLineSegments; i++)
 		{
 			pSatWrapper->setEpoch(epochTm.getGmtTm());
-			ElAzVector  = pSatWrapper->getAltAz();
-			orbitPoints.append(ElAzVector);
+                        elAzVector  = pSatWrapper->getAltAz();
+                        orbitPoints.append(elAzVector);
 			epochTm    += computeInterval;
 		}
 		lastEpochCompForOrbit = epochTime;
@@ -461,7 +460,7 @@ void Satellite::computeOrbitPoints()
 	else if (epochTime > lastEpochCompForOrbit)
 	{ // compute next orbit point when clock runs forward
 
-		gTimeSpan diffTime = Epoch - lastEpochComp;
+                gTimeSpan diffTime = epoch - lastEpochComp;
 		diffSlots          = (int)(diffTime.getDblSeconds()/orbitLineSegmentDuration);
 
 		if (diffSlots > 0)
@@ -469,7 +468,7 @@ void Satellite::computeOrbitPoints()
 			if (diffSlots > orbitLineSegments)
 			{
 				diffSlots = orbitLineSegments + 1;
-				epochTm  = Epoch - orbitSpan;
+                                epochTm  = epoch - orbitSpan;
 			}
 			else
 			{
@@ -480,8 +479,8 @@ void Satellite::computeOrbitPoints()
 			{  //remove points at beginning of list and add points at end.
 				orbitPoints.removeFirst();
 				pSatWrapper->setEpoch(epochTm.getGmtTm());
-				ElAzVector  = pSatWrapper->getAltAz();
-				orbitPoints.append(ElAzVector);
+                                elAzVector  = pSatWrapper->getAltAz();
+                                orbitPoints.append(elAzVector);
 				epochTm    += computeInterval;
 			}
 
@@ -490,7 +489,7 @@ void Satellite::computeOrbitPoints()
 	}
 	else if (epochTime < lastEpochCompForOrbit)
 	{ // compute next orbit point when clock runs backward
-		gTimeSpan diffTime = lastEpochComp - Epoch;
+                gTimeSpan diffTime = lastEpochComp - epoch;
 		diffSlots          = (int)(diffTime.getDblSeconds()/orbitLineSegmentDuration);
 
 		if (diffSlots > 0)
@@ -498,18 +497,18 @@ void Satellite::computeOrbitPoints()
 			if (diffSlots > orbitLineSegments)
 			{
 				diffSlots = orbitLineSegments + 1;
-				epochTm   = Epoch + orbitSpan;
+                                epochTm   = epoch + orbitSpan;
 			}
 			else
 			{
-				epochTm   = Epoch - orbitSpan - computeInterval;
+                                epochTm   = epoch - orbitSpan - computeInterval;
 			}
 			for (int i=0; i<diffSlots; i++)
 			{ //remove points at end of list and add points at beginning.
 				orbitPoints.removeLast();
 				pSatWrapper->setEpoch(epochTm.getGmtTm());
-				ElAzVector  = pSatWrapper->getAltAz();
-				orbitPoints.push_front(ElAzVector);
+                                elAzVector  = pSatWrapper->getAltAz();
+                                orbitPoints.push_front(elAzVector);
 				epochTm -= computeInterval;
 
 			}

@@ -147,12 +147,13 @@ private:
 
 	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
 
+        //Satellite Orbit Position calculation
         gSatWrapper *pSatWrapper;
-	Vec3d Position;
-	Vec3d Vel;
-	Vec3d LatLong;
-	Vec3d ElAzPos;
-        int   Visibility;
+        Vec3d position;
+        Vec3d velocity;
+        Vec3d latLongSubPointPosition;
+        Vec3d elAzPosition;
+        int   visibility;
 
 	//Satellite Orbit Draw
 	QFont     font;
