@@ -47,6 +47,18 @@ class Translations
 		N_("Europa");
 		N_("Ganymede");
 		N_("Callisto");
+		N_("Amalthea");
+		N_("Himalia");
+		N_("Elara");
+		N_("Pasiphae");
+		N_("Sinope");
+		N_("Lysithea");
+		N_("Carme");
+		N_("Ananke");
+		N_("Leda");
+		N_("Thebe");
+		N_("Adrastea");
+		N_("Metis");
 		N_("Saturn");
 		N_("Mimas");
 		N_("Enceladus");
@@ -67,6 +79,19 @@ class Translations
 		N_("Pluto");
 		N_("Charon");
 		N_("Eris");
+		N_("Triton");
+		N_("Nereid");
+		N_("Naiad");
+		N_("Thalassa");
+		N_("Despina");
+		N_("Galatea");
+		N_("Larissa");
+		N_("Proteus");
+		N_("Halimede");
+		N_("Psamathe");
+		N_("Sao");
+		N_("Laomedeia");
+		N_("Neso");
 		N_("Solar System Observer");
 		//Asteroids that are not in the default ssystem.ini
 		// TRANSLATORS: Asteroid (5) Astraea
