@@ -104,7 +104,7 @@ Satellite::Satellite(const QVariantMap& map)
 
 	if (map.contains("comms"))
 	{
-		foreach(QVariant comm, map.value("comms").toList())
+                foreach(const QVariant &comm, map.value("comms").toList())
 		{
 			QVariantMap commMap = comm.toMap();
 			commLink c;
@@ -117,7 +117,7 @@ Satellite::Satellite(const QVariantMap& map)
 
 	if (map.contains("groups"))
 	{
-		foreach(QVariant group, map.value("groups").toList())
+                foreach(const QVariant &group, map.value("groups").toList())
 		{
 			if (!groupIDs.contains(group.toString()))
 				groupIDs << group.toString();
@@ -163,7 +163,7 @@ QVariantMap Satellite::getMap(void)
 	map["hintColor"] = col;
 	map["orbitColor"] = orbitCol;
 	QVariantList commList;
-	foreach(commLink c, comms)
+        foreach(const commLink &c, comms)
 	{
 		QVariantMap commMap;
 		commMap["frequency"] = c.frequency;
@@ -173,7 +173,7 @@ QVariantMap Satellite::getMap(void)
 	}
 	map["comms"] = commList;
 	QVariantList groupList;
-	foreach(QString g, groupIDs)
+        foreach(const QString &g, groupIDs)
 	{
 		groupList << g;
 	}
@@ -249,7 +249,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 	if (flags&Extra2 && comms.size() > 0)
 	{
-		foreach(commLink c, comms)
+                foreach(const commLink &c, comms)
 		{
 			double dop = getDoppler(c.frequency);
 			double ddop = dop;
