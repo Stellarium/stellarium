@@ -184,15 +184,24 @@ void OcularDialog::keyBindingPopupNavigatorConfigChanged(const QString& newStrin
 	}
 }
 					  
+void OcularDialog::requireSelectionStateChanged(int state)
+{
+	bool requireSelection = (state == Qt::Checked);
+	bool requireSelectionToZoom = Oculars::appSettings()->value("require_selection_to_zoom", 1.0).toBool();
+	if (requireSelection != requireSelectionToZoom) {
+		Oculars::appSettings()->setValue("require_selection_to_zoom", requireSelection);
+		Oculars::appSettings()->sync();\
+		emit(requireSelectionChanged(requireSelection));
+	}
+}
+
 void OcularDialog::scaleImageCircleStateChanged(int state)
 {
 	bool shouldScale = (state == Qt::Checked);
-	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
-	QString ocularIniPath = StelFileMgr::findFile("modules/Oculars/", flags) + "ocular.ini";
-	QSettings settings(ocularIniPath, QSettings::IniFormat);
-	bool useMaxImageCircle = settings.value("use_max_exit_circle", 0.0).toBool();
-	if (state != useMaxImageCircle) {
-		settings.setValue("use_max_exit_circle", shouldScale);
+	bool useMaxImageCircle = Oculars::appSettings()->value("use_max_exit_circle",01.0).toBool();
+	if (shouldScale != useMaxImageCircle) {
+		Oculars::appSettings()->setValue("use_max_exit_circle", shouldScale);
+		Oculars::appSettings()->sync();\
 		emit(scaleImageCircleChanged(shouldScale));
 	}
 }
@@ -214,6 +223,7 @@ void OcularDialog::createDialogContent()
 	//Now the rest of the actions.
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->scaleImageCircleCheckBox, SIGNAL(stateChanged(int)), this, SLOT(scaleImageCircleStateChanged(int)));
+	connect(ui->requireSelectionCheckBox, SIGNAL(stateChanged(int)), this, SLOT(requireSelectionStateChanged(int)));
 	// The add & delete buttons
 	connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
 	connect(ui->deleteCCD, SIGNAL(clicked()), this, SLOT(deleteSelectedCCD()));
@@ -293,7 +303,10 @@ void OcularDialog::createDialogContent()
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
 
 	// set the initial state
-	if (Oculars::appSettings()->value("use_max_exit_circle", false).toBool()) {
+	if (Oculars::appSettings()->value("require_selection_to_zoom", 1.0).toBool()) {
+		ui->requireSelectionCheckBox->setCheckState(Qt::Checked);
+	}
+	if (Oculars::appSettings()->value("use_max_exit_circle", 0.0).toBool()) {
 		ui->scaleImageCircleCheckBox->setCheckState(Qt::Checked);
 	}
 
