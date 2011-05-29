@@ -101,6 +101,10 @@ Q_IMPORT_PLUGIN(SolarSystemEditor)
 Q_IMPORT_PLUGIN(TimeZoneConfiguration)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_SNE
+Q_IMPORT_PLUGIN(SNe)
+#endif
+
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
