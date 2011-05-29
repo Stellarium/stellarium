@@ -1,0 +1,43 @@
+INCLUDE_DIRECTORIES(.)
+
+LINK_DIRECTORIES(${BUILD_DIR}/src)
+
+SET(SNe_SRCS
+  SNe.hpp
+  SNe.cpp)
+
+SET(SNe_MOC_HDRS
+ SNe.hpp)
+
+QT4_WRAP_CPP(SNe_MOC_SRCS ${SNe_MOC_HDRS})
+
+SET(extLinkerOption ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
+
+############### For building the dynamic library ######################
+IF(BUILD_DYNAMIC_PLUGINS)
+	ADD_LIBRARY(SNe MODULE ${SNe_SRCS} ${SNe_MOC_SRCS})
+	IF(APPLE)
+		FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
+		MARK_AS_ADVANCED(OPENGL_LIBRARY)
+		SET_TARGET_PROPERTIES(SNe PROPERTIES LINK_FLAGS "-undefined dynamic_lookup" SUFFIX ".dylib")
+	ENDIF()
+
+	IF(WIN32)
+		SET_TARGET_PROPERTIES(SNe PROPERTIES LINK_FLAGS "-enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition" )
+		SET(StelMain stelMain)
+	ELSE(WIN32)
+		SET(StelMain )
+	ENDIF(WIN32)
+
+	TARGET_LINK_LIBRARIES(SNe ${StelMain} ${extLinkerOption})
+	INSTALL(TARGETS SNe DESTINATION "modules/SNe")
+ENDIF()
+
+############### For building the static library ######################
+IF(BUILD_STATIC_PLUGINS)
+	ADD_LIBRARY(SNe-static STATIC ${SNe_SRCS} ${SNe_MOC_SRCS})
+	SET_TARGET_PROPERTIES(SNe-static PROPERTIES OUTPUT_NAME "SNe")
+	TARGET_LINK_LIBRARIES(SNe-static ${extLinkerOption})
+	SET_TARGET_PROPERTIES(SNe-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
+	ADD_DEPENDENCIES(AllStaticPlugins SNe-static)
+ENDIF()
