@@ -1,5 +1,5 @@
 /***************************************************************************
- * Name: mathUtils.hpp
+ * Name: mathUtils.cpp
  *
  * Description: Mathematical utilities
  *              Implement some mathematical utilities to trigonometrical
