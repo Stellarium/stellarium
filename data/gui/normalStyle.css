@@ -192,11 +192,14 @@ QFrame#completionLabel {
 	border: none;
 }
 
-QGroupBox#greekLettersGroupBox {
+QFrame#greekLettersFrame {
     font-size: 18px;
-    padding-bottom: 0px;
-    padding-top: 0px;
+    padding: 10px 20px;
     background: transparent;
+}
+
+QFrame#j2000Frame {
+	padding: 10px 20px;
 }
 
 QPushButton {
