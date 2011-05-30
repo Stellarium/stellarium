@@ -74,6 +74,12 @@ void StelDialog::close()
 	((QGraphicsWidget*)StelMainGraphicsView::getInstance().getStelAppGraphicsWidget())->setFocus(Qt::OtherFocusReason);
 }
 
+void StelDialog::languageChanged()
+{
+	// This is here so that developers sublassing this will know they should probably do something.
+	// They should set up a connection in their create dialog content method to handle the StellApp signal.
+}
+
 bool StelDialog::visible() const
 {
 	return dialog!=NULL && dialog->isVisible();

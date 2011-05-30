@@ -1,6 +1,5 @@
 /*
- * portions Copyright (C) 2010 Bernhard Reutner-Fischer
- * portions Copyright (C) 2010 Timothy Reaves
+ * Copyright (C) 2010 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,10 +31,10 @@ class CCD : public QObject
 	Q_PROPERTY(QString name READ name WRITE setName)
 	Q_PROPERTY(int resolutionX READ resolutionX WRITE setResolutionX)
 	Q_PROPERTY(int resolutionY READ resolutionY WRITE setResolutionY)
-	Q_PROPERTY(float chipWidth READ chipWidth WRITE setChipWidth)
-	Q_PROPERTY(float chipHeight READ chipHeight WRITE setChipHeight)
-	Q_PROPERTY(float pixelWidth READ pixelWidth WRITE setPixelWidth)
-	Q_PROPERTY(float pixelHeight READ pixelHeight WRITE setPixelHeight)
+	Q_PROPERTY(double chipWidth READ chipWidth WRITE setChipWidth)
+	Q_PROPERTY(double chipHeight READ chipHeight WRITE setChipHeight)
+	Q_PROPERTY(double pixelWidth READ pixelWidth WRITE setPixelWidth)
+	Q_PROPERTY(double pixelHeight READ pixelHeight WRITE setPixelHeight)
 public:
 	CCD();
 	Q_INVOKABLE CCD(const QObject& other);
@@ -46,37 +45,40 @@ public:
 	QString name() const;
 	void setName(QString name);
 	int getCCDID();
-	int resolutionX()  const;
+	int resolutionX() const;
 	void setResolutionX(int resolution);
-	int resolutionY()  const;
+	int resolutionY() const;
 	void setResolutionY(int resolution);
-	float chipWidth()  const;
-	void setChipWidth(float width);
-	float chipHeight()  const;
-	void setChipHeight(float height);
-	float pixelWidth()  const;
-	void setPixelWidth(float width);
-	float pixelHeight()  const;
-	void setPixelHeight(float height);
+	double chipWidth() const;
+	void setChipWidth(double width);
+	double chipHeight() const;
+	void setChipHeight(double height);
+	double pixelWidth() const;
+	void setPixelWidth(double width);
+	double pixelHeight() const;
+	void setPixelHeight(double height);
 
-	float getActualFOVx(Telescope *telescope) const;
-	float getActualFOVy(Telescope *telescope) const;
+	/**
+	  * The formula for this calculation comes from the Yerkes observatory.
+	  * fov degrees = 2PI/360degrees * chipDimension mm / telescope FL mm
+	  */
+	double getActualFOVx(Telescope *telescope) const;
+	double getActualFOVy(Telescope *telescope) const;
 	QMap<int, QString> propertyMap();
 private:
-	int ccdID;
 	QString m_name;
 	//! total resolution width in pixels
 	int m_resolutionX;
 	//! total resolution height in pixels
 	int m_resolutionY;
 	//! chip width in millimeters
-	float m_chipWidth;
+	double m_chipWidth;
 	//! chip height in millimeters
-	float m_chipHeight;
+	double m_chipHeight;
 	//! height of 1 pixel in micron (micrometer)
-	float m_pixelWidth;
+	double m_pixelWidth;
 	//! width of 1 pixel in micron (micrometer)
-	float m_pixelHeight;
+	double m_pixelHeight;
 };
 
 

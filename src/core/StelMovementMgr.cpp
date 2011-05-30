@@ -64,7 +64,9 @@ void StelMovementMgr::init()
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(conf);
 	Q_ASSERT(objectMgr);
-
+	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), 
+			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
+	
 	movementsSpeedFactor=1.;
 	flagEnableMoveAtScreenEdge = conf->value("navigation/flag_enable_move_at_screen_edge",false).toBool();
 	mouseZoomSpeed = conf->value("navigation/mouse_zoom",30).toInt();
@@ -385,7 +387,7 @@ void StelMovementMgr::setInitViewDirectionToCurrent()
 /*************************************************************************
  The selected objects changed, follow it it we were already following another one
 *************************************************************************/
-void StelMovementMgr::selectedObjectChangeCallBack(StelModuleSelectAction)
+void StelMovementMgr::selectedObjectChange(StelModule::StelModuleSelectAction)
 {
 	// If an object was selected keep the earth following
 	if (objectMgr->getWasSelected())

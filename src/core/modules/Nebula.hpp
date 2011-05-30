@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2011 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -108,6 +109,9 @@ private:
 	SphericalRegionP pointRegion;
 
 	static StelTextureSP texCircle;   // The symbolic circle texture
+	static StelTextureSP texOpenCluster;
+	static StelTextureSP texGlobularCluster;
+	static StelTextureSP texPlanetNebula;
 	static float hintsBrightness;
 
 	static Vec3f labelColor, circleColor;

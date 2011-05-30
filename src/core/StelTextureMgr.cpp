@@ -17,6 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
@@ -26,6 +27,7 @@
 #include <QFileInfo>
 #include <QFile>
 #include <QDebug>
+#include <QNetworkRequest>
 #include <QThread>
 #include <QSettings>
 #include <QGLFormat>
@@ -34,10 +36,16 @@
 
 StelTextureMgr::StelTextureMgr()
 {
+	// This thread is doing nothing but will contains all the loader objects.
+	loaderThread = new QThread(this);
+	loaderThread->start(QThread::LowestPriority);
 }
 
 StelTextureMgr::~StelTextureMgr()
 {
+	// Hopefully this doesn't take much time.
+	loaderThread->quit();
+	loaderThread->wait();
 }
 
 void StelTextureMgr::init()
@@ -144,6 +152,7 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 	}
 	if (!fileExtension.isEmpty())
 		tex->fileExtension = fileExtension;
+
 	if (!lazyLoading)
 	{
 		StelPainter::makeMainGLContextCurrent();
