@@ -258,7 +258,7 @@ public:
 
 	void toCalendarDate(int *pYear, int *pMonth , double *pDom) const;
 
-
+	double toJCenturies() const;
 
 	// Operation:  toThetaGMST();
 	//! @brief Calculate Theta Angle at Greenwich Mean Time for the Julian date.

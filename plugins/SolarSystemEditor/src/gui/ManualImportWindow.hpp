@@ -40,6 +40,8 @@ class ManualImportWindow : public StelDialog
 public:
 	ManualImportWindow();
 	virtual ~ManualImportWindow();
+
+public slots:
 	void languageChanged();
 
 private slots:

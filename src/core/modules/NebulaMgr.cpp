@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2011 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,6 +62,9 @@ NebulaMgr::NebulaMgr(void) : nebGrid(200), displayNoTexture(false)
 NebulaMgr::~NebulaMgr()
 {
 	Nebula::texCircle = StelTextureSP();
+	Nebula::texOpenCluster = StelTextureSP();
+	Nebula::texGlobularCluster = StelTextureSP();
+	Nebula::texPlanetNebula = StelTextureSP();
 }
 
 /*************************************************************************
@@ -90,6 +94,9 @@ void NebulaMgr::init()
 
 	nebulaFont.setPixelSize(13);
 	Nebula::texCircle = StelApp::getInstance().getTextureManager().createTexture("textures/neb.png");   // Load circle texture
+	Nebula::texOpenCluster = StelApp::getInstance().getTextureManager().createTexture("textures/ocl.png");   // Load open clister marker texture
+	Nebula::texGlobularCluster = StelApp::getInstance().getTextureManager().createTexture("textures/gcl.png");   // Load globular clister marker texture
+	Nebula::texPlanetNebula = StelApp::getInstance().getTextureManager().createTexture("textures/pnb.png");   // Load planetary nebula marker texture
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur5.png");   // Load pointer texture
 
 	setFlagShow(conf->value("astro/flag_nebula",true).toBool());
@@ -100,7 +107,10 @@ void NebulaMgr::init()
 	setFlagDisplayNoTexture(conf->value("astro/flag_nebula_display_no_texture", false).toBool());
 
 	updateI18n();
-
+	
+	StelApp *app = &StelApp::getInstance();
+	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
 
