@@ -128,6 +128,9 @@ public slots:
 	//! Return a pseudo HTML formated string with all informations on the current landscape
 	QString getCurrentLandscapeHtmlDescription() const;
 
+	//! Return a pseudo HTML formated string with information from description or ini file
+	QString getDescription() const;
+
 	//! Get flag for displaying Landscape.
 	bool getFlagLandscape() const;
 	//! Set flag for displaying Landscape.
