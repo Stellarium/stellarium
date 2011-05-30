@@ -2,7 +2,6 @@
  * Stellarium
  * Copyright (C) 2003 Fabien Chereau
  * Copyright (C) 2011 Bogdan Marinov
- * Copyright (C) 2011 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +46,6 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 {
 	name = landscapeIni.value("landscape/name").toString();
 	author = landscapeIni.value("landscape/author").toString();
-	version = landscapeIni.value("landscape/version").toString();
 	description = landscapeIni.value("landscape/description").toString();
 	description = description.replace(QRegExp("\\\\n\\s*\\\\n"), "<br />");
 	description = description.replace("\\n", " ");

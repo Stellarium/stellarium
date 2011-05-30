@@ -2,7 +2,6 @@
  * Stellarium
  * Copyright (C) 2006 Fabien Chereau
  * Copyright (C) 2010 Bogdan Marinov (add/remove landscapes feature)
- * Copyright (C) 2011 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -171,9 +170,6 @@ public slots:
 	void setAtmosphereBortleLightPollution(int bIndex);
 	//! Get the light pollution following the Bortle Scale
 	int getAtmosphereBortleLightPollution();
-
-	//! Get version for displaying Landscape
-	QString getVersion() const;
 
 	//! Set the rotation of the landscape about the z-axis.
 	//! This is intended for special uses such as when the landscape consists of
