@@ -127,45 +127,51 @@ StelProjectorP StelCore::getProjection(const Mat4d& modelViewMat, bool withRefra
 	if (projType==1000)
 		projType = currentProjectionType;
 
-	Refraction* refractionFunc = NULL;
+	StelProjector::ModelViewTranform* modelViewTransform = NULL;
 	if (withRefraction)
 	{
-		refractionFunc = new Refraction(skyDrawer->getRefraction());
+		Refraction* refr = new Refraction(skyDrawer->getRefraction());
 
 		// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
-		refractionFunc->setPreTransfoMat(navigation->getInvertAltAzModelViewMat()*modelViewMat);
+		refr->setPreTransfoMat(navigation->getInvertAltAzModelViewMat()*modelViewMat);
+		refr->setPostTransfoMat(navigation->getAltAzModelViewMat());
+		modelViewTransform = refr;
+	}
+	else
+	{
+		modelViewTransform = new StelProjector::Mat4dTransform(modelViewMat);
 	}
 
 	StelProjectorP prj;
 	switch (projType)
 	{
 		case ProjectionPerspective:
-			prj = StelProjectorP(new StelProjectorPerspective(withRefraction ? navigation->getAltAzModelViewMat() : modelViewMat, refractionFunc));
+			prj = StelProjectorP(new StelProjectorPerspective(modelViewTransform));
 			break;
 		case ProjectionEqualArea:
-			prj = StelProjectorP(new StelProjectorEqualArea(withRefraction ? navigation->getAltAzModelViewMat() : modelViewMat, refractionFunc));
+			prj = StelProjectorP(new StelProjectorEqualArea(modelViewTransform));
 			break;
 		case ProjectionStereographic:
-			prj = StelProjectorP(new StelProjectorStereographic(withRefraction ? navigation->getAltAzModelViewMat() : modelViewMat, refractionFunc));
+			prj = StelProjectorP(new StelProjectorStereographic(modelViewTransform));
 			break;
 		case ProjectionFisheye:
-			prj = StelProjectorP(new StelProjectorFisheye(withRefraction ? navigation->getAltAzModelViewMat() : modelViewMat, refractionFunc));
+			prj = StelProjectorP(new StelProjectorFisheye(modelViewTransform));
 			break;
 		case ProjectionHammer:
-			prj = StelProjectorP(new StelProjectorHammer(withRefraction ? navigation->getAltAzModelViewMat() : modelViewMat, refractionFunc));
+			prj = StelProjectorP(new StelProjectorHammer(modelViewTransform));
 			break;
 		case ProjectionCylinder:
-			prj = StelProjectorP(new StelProjectorCylinder(withRefraction ? navigation->getAltAzModelViewMat() : modelViewMat, refractionFunc));
+			prj = StelProjectorP(new StelProjectorCylinder(modelViewTransform));
 			break;
 		case ProjectionMercator:
-			prj = StelProjectorP(new StelProjectorMercator(withRefraction ? navigation->getAltAzModelViewMat() : modelViewMat, refractionFunc));
+			prj = StelProjectorP(new StelProjectorMercator(modelViewTransform));
 			break;
 		case ProjectionOrthographic:
-			prj = StelProjectorP(new StelProjectorOrthographic(withRefraction ? navigation->getAltAzModelViewMat() : modelViewMat, refractionFunc));
+			prj = StelProjectorP(new StelProjectorOrthographic(modelViewTransform));
 			break;
 		default:
 			qWarning() << "Unknown projection type: " << (int)(projType) << "using ProjectionStereographic instead";
-			prj = StelProjectorP(new StelProjectorStereographic(withRefraction ? navigation->getAltAzModelViewMat() : modelViewMat, refractionFunc));
+			prj = StelProjectorP(new StelProjectorStereographic(modelViewTransform));
 			Q_ASSERT(0);
 	}
 	prj->init(currentProjectorParams);
