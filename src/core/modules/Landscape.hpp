@@ -94,7 +94,6 @@ protected:
 	LinearFader fogFader;
 	QString author;
 	QString description;
-	QString version;
 	// GZ patched, these can now be set in landscape.ini:
 	int rows; // horizontal rows
 	int cols; // vertical columns
