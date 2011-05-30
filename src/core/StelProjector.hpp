@@ -38,16 +38,56 @@ public:
 	friend class StelCore;
 
 	//! @class PreModelViewFunc
-	//! Allows to define non linear operators to apply before the standard ModelView transformation.
-	class PreModelViewFunc
+	//! Allows to define non linear operations in addition to the standard linear (Matrix 4d) ModelView transformation.
+	class ModelViewTranform
 	{
 	public:
-		PreModelViewFunc() {;}
-		virtual ~PreModelViewFunc() {;}
+		ModelViewTranform() {;}
+		virtual ~ModelViewTranform() {;}
 		virtual void forward(Vec3d&) const =0;
 		virtual void backward(Vec3d&) const =0;
 		virtual void forward(Vec3f&) const =0;
 		virtual void backward(Vec3f&) const =0;
+	};
+
+	class Mat4dTransform: public ModelViewTranform
+	{
+	public:
+		Mat4dTransform(const Mat4d& m) : transfoMat(m),
+			transfoMatf(m[0], m[1], m[2], m[3],
+							 m[4], m[5], m[6], m[7],
+							 m[8], m[9], m[10], m[11],
+							 m[12], m[13], m[14], m[15]) {;}
+
+		void forward(Vec3d& v) const {v.transfo4d(transfoMat);}
+		void backward(Vec3d& v) const
+		{
+			// We need no matrix inversion because we always work with orthogonal matrices (where the transposed is the inverse).
+			//v.transfo4d(inverseTransfoMat);
+			const double x = v[0] - transfoMat.r[12];
+			const double y = v[1] - transfoMat.r[13];
+			const double z = v[2] - transfoMat.r[14];
+			v[0] = transfoMat.r[0]*x + transfoMat.r[1]*y + transfoMat.r[2]*z;
+			v[1] = transfoMat.r[4]*x + transfoMat.r[5]*y + transfoMat.r[6]*z;
+			v[2] = transfoMat.r[8]*x + transfoMat.r[9]*y + transfoMat.r[10]*z;
+		}
+		void forward(Vec3f& v) const {v.transfo4d(transfoMatf);}
+		void backward(Vec3f& v) const
+		{
+			// We need no matrix inversion because we always work with orthogonal matrices (where the transposed is the inverse).
+			//v.transfo4d(inverseTransfoMat);
+			const float x = v[0] - transfoMatf.r[12];
+			const float y = v[1] - transfoMatf.r[13];
+			const float z = v[2] - transfoMatf.r[14];
+			v[0] = transfoMatf.r[0]*x + transfoMatf.r[1]*y + transfoMatf.r[2]*z;
+			v[1] = transfoMatf.r[4]*x + transfoMatf.r[5]*y + transfoMatf.r[6]*z;
+			v[2] = transfoMatf.r[8]*x + transfoMatf.r[9]*y + transfoMatf.r[10]*z;
+		}
+
+	private:
+		//! transfo matrix and invert
+		Mat4d transfoMat;
+		Mat4f transfoMatf;
 	};
 
 	//! @enum StelProjectorMaskType
@@ -75,7 +115,7 @@ public:
 	};
 
 	//! Destructor
-	virtual ~StelProjector() {delete preModelViewFunc;}
+	virtual ~StelProjector() {delete modelViewTransform;}
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods which must be reimplemented by all instance of StelProjector
@@ -106,34 +146,20 @@ public:
 	{
 		if (hasDiscontinuity()==false)
 			return false;
-		if (preModelViewFunc==NULL)
-			return intersectViewportDiscontinuityInternal(modelViewMatrix*p1, modelViewMatrix*p2);
-		else
-		{
-			Vec3d v1(p1);
-			preModelViewFunc->forward(v1);
-			v1.transfo4d(modelViewMatrix);
-			Vec3d v2(p2);
-			preModelViewFunc->forward(v2);
-			v2.transfo4d(modelViewMatrix);
-			return intersectViewportDiscontinuityInternal(v1, v2);
-		}
-
+		Vec3d v1(p1);
+		modelViewTransform->forward(v1);
+		Vec3d v2(p2);
+		modelViewTransform->forward(v2);
+		return intersectViewportDiscontinuityInternal(v1, v2);
 	}
 
 	bool intersectViewportDiscontinuity(const SphericalCap& cap) const
 	{
 		if (hasDiscontinuity()==false)
 			return false;
-		if (preModelViewFunc==NULL)
-			return intersectViewportDiscontinuityInternal(modelViewMatrix*cap.n, cap.d);
-		else
-		{
-			Vec3d v1(cap.n);
-			preModelViewFunc->forward(v1);
-			v1.transfo4d(modelViewMatrix);
-			return intersectViewportDiscontinuityInternal(v1, cap.d);
-		}
+		Vec3d v1(cap.n);
+		modelViewTransform->forward(v1);
+		return intersectViewportDiscontinuityInternal(v1, cap.d);
 	}
 
 	//! Convert a Field Of View radius value in radians in ViewScalingFactor (used internally)
@@ -245,9 +271,7 @@ public:
 		for (int i = 0; i < n; ++i, ++out)
 		{
 			v = in[i];
-			if (preModelViewFunc)
-				preModelViewFunc->forward(v);
-			v.transfo4d(modelViewMatrix);
+			modelViewTransform->forward(v);
 			out->set(v[0], v[1], v[2]);
 			forward(*out);
 			out->set(viewportCenter[0] + flipHorz * pixelPerRad * (*out)[0],
@@ -261,9 +285,7 @@ public:
 		for (int i = 0; i < n; ++i, ++out)
 		{
 			*out=in[i];
-			if (preModelViewFunc)
-				preModelViewFunc->forward(*out);
-			out->transfo4d(modelViewMatrixf);
+			modelViewTransform->forward(*out);
 			forward(*out);
 			out->set(viewportCenter[0] + flipHorz * pixelPerRad * (*out)[0],
 				viewportCenter[1] + flipVert * pixelPerRad * (*out)[1],
@@ -276,9 +298,7 @@ public:
 	//! @return true if the projected coordinate is valid.
 	inline bool projectInPlace(Vec3d& vd) const
 	{
-		if (preModelViewFunc)
-			preModelViewFunc->forward(vd);
-		vd.transfo4d(modelViewMatrix);
+		modelViewTransform->forward(vd);
 		Vec3f v(vd[0], vd[1], vd[2]);
 		const bool rval = forward(v);
 		// very important: even when the projected point comes from an
@@ -296,9 +316,7 @@ public:
 	//! @return true if the projected coordinate is valid.
 	inline bool projectInPlace(Vec3f& v) const
 	{
-		if (preModelViewFunc)
-			preModelViewFunc->forward(v);
-		v.transfo4d(modelViewMatrixf);
+		modelViewTransform->forward(v);
 		const bool rval = forward(v);
 		// very important: even when the projected point comes from an
 		// invisible region of the sky (rval=false), we must finish
@@ -339,7 +357,7 @@ public:
 		{return project(v1, win1) && project(v2, win2) && (checkInViewport(win1) || checkInViewport(win2));}
 
 	//! Get the current model view matrix.
-	const Mat4d& getModelViewMatrix() const {return modelViewMatrix;}
+	const ModelViewTranform& getModelViewTransform() const {return *modelViewTransform;}
 
 	//! Get the current projection matrix.
 	Mat4f getProjectionMatrix() const {return Mat4f(2.f/viewportXywh[2], 0, 0, 0, 0, 2.f/viewportXywh[3], 0, 0, 0, 0, -1., 0., -(2.f*viewportXywh[0] + viewportXywh[2])/viewportXywh[2], -(2.f*viewportXywh[1] + viewportXywh[3])/viewportXywh[3], 0, 1);}
@@ -355,11 +373,8 @@ public:
 
 protected:
 	//! Private constructor. Only StelCore can create instances of StelProjector.
-	StelProjector(const Mat4d& modelViewMat, PreModelViewFunc* apreModelViewFunc=NULL) : modelViewMatrix(modelViewMat),
-		modelViewMatrixf(modelViewMat[0], modelViewMat[1], modelViewMat[2], modelViewMat[3],
-						 modelViewMat[4], modelViewMat[5], modelViewMat[6], modelViewMat[7],
-						 modelViewMat[8], modelViewMat[9], modelViewMat[10], modelViewMat[11],
-						 modelViewMat[12], modelViewMat[13], modelViewMat[14], modelViewMat[15]), preModelViewFunc(apreModelViewFunc) {;}
+	StelProjector(ModelViewTranform* amodelViewTransform) : modelViewTransform(amodelViewTransform) {;}
+
 	//! Return whether the projection presents discontinuities. Used for optimization.
 	virtual bool hasDiscontinuity() const =0;
 	//! Determine whether a great circle connection p1 and p2 intersects with a projection discontinuity.
@@ -373,9 +388,7 @@ protected:
 	//! Initialize the bounding cap.
 	virtual void computeBoundingCap();
 
-	Mat4d modelViewMatrix;			    // openGL MODELVIEW Matrix
-	Mat4f modelViewMatrixf;             // openGL MODELVIEW Matrix
-	PreModelViewFunc* preModelViewFunc;	// Operator to apply (if not NULL) before the modelview projection step
+	ModelViewTranform* modelViewTransform;	// Operator to apply (if not NULL) before the modelview projection step
 
 	float flipHorz,flipVert;            // Whether to flip in horizontal or vertical directions
 	float pixelPerRad;                  // pixel per rad at the center of the viewport disk

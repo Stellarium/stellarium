@@ -84,7 +84,8 @@ void Extinction::setExtinctionCoefficient(float k)
 
 
 Refraction::Refraction() : pressure(1013.f), temperature(10.f),
-	preTransfoMat(Mat4d::identity()), invertPreTransfoMat(Mat4d::identity()), preTransfoMatf(Mat4f::identity()), invertPreTransfoMatf(Mat4f::identity())
+	preTransfoMat(Mat4d::identity()), invertPreTransfoMat(Mat4d::identity()), preTransfoMatf(Mat4f::identity()), invertPreTransfoMatf(Mat4f::identity()),
+	postTransfoMat(Mat4d::identity()), invertPostTransfoMat(Mat4d::identity()), postTransfoMatf(Mat4f::identity()), invertPostTransfoMatf(Mat4f::identity())
 {
 	updatePrecomputed();
 }
@@ -98,6 +99,17 @@ void Refraction::setPreTransfoMat(const Mat4d& m)
 							 invertPreTransfoMat[4], invertPreTransfoMat[5], invertPreTransfoMat[6], invertPreTransfoMat[7],
 							 invertPreTransfoMat[8], invertPreTransfoMat[9], invertPreTransfoMat[10], invertPreTransfoMat[11],
 							 invertPreTransfoMat[12], invertPreTransfoMat[13], invertPreTransfoMat[14], invertPreTransfoMat[15]);
+}
+
+void Refraction::setPostTransfoMat(const Mat4d& m)
+{
+	postTransfoMat=m;
+	invertPostTransfoMat=m.inverse();
+	postTransfoMatf.set(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11], m[12], m[13], m[14], m[15]);
+	invertPostTransfoMatf.set(invertPostTransfoMat[0], invertPostTransfoMat[1], invertPostTransfoMat[2], invertPostTransfoMat[3],
+							 invertPostTransfoMat[4], invertPostTransfoMat[5], invertPostTransfoMat[6], invertPostTransfoMat[7],
+							 invertPostTransfoMat[8], invertPostTransfoMat[9], invertPostTransfoMat[10], invertPostTransfoMat[11],
+							 invertPostTransfoMat[12], invertPostTransfoMat[13], invertPostTransfoMat[14], invertPostTransfoMat[15]);
 }
 
 void Refraction::updatePrecomputed()
@@ -121,10 +133,12 @@ void Refraction::forward(Vec3d& altAzPos) const
 			geom_alt_deg=90.; // SAFETY, SHOULD NOT BE NECESSARY
 		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.)*length;
 	}
+	altAzPos.transfo4d(postTransfoMat);
 }
 
 void Refraction::backward(Vec3d& altAzPos) const
 {
+	altAzPos.transfo4d(invertPostTransfoMat);
 	// going from observed position/magnitude to geometrical position and atmosphere-free mag.
 	const double length = altAzPos.length();
 	double obs_alt_deg=180./M_PI*std::asin(altAzPos[2]/length);
@@ -152,10 +166,12 @@ void Refraction::forward(Vec3f& altAzPos) const
 			geom_alt_deg=90.f; // SAFETY, SHOULD NOT BE NECESSARY
 		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.f)*length;
 	}
+	altAzPos.transfo4d(postTransfoMatf);
 }
 
 void Refraction::backward(Vec3f& altAzPos) const
 {
+	altAzPos.transfo4d(invertPostTransfoMatf);
 	// going from observed position/magnitude to geometrical position and atmosphere-free mag.
 	const float length = altAzPos.length();
 	float obs_alt_deg=180.f/M_PI*std::asin(altAzPos[2]/length);
