@@ -77,7 +77,7 @@ private:
 };
 
 
-class Refraction: public StelProjector::PreModelViewFunc
+class Refraction: public StelProjector::ModelViewTranform
 {
 public:
 	Refraction();
@@ -112,6 +112,7 @@ public:
 
 	//! Set the transformation matrice used to transform input vector to AltAz frame.
 	void setPreTransfoMat(const Mat4d& m);
+	void setPostTransfoMat(const Mat4d& m);
 
 private:
 	//! Update precomputed variables.
@@ -127,11 +128,17 @@ private:
 	//! Numerator of refraction formula, to be cached for speed.
 	float press_temp_corr_Bennett;
 
-	//! Used to pretransform coordinate into AltAz frame.
+	//! Used to pretransform coordinates into AltAz frame.
 	Mat4d preTransfoMat;
 	Mat4d invertPreTransfoMat;
 	Mat4f preTransfoMatf;
 	Mat4f invertPreTransfoMatf;
+
+	//! Used to postransform refracted coordinates from AltAz to view.
+	Mat4d postTransfoMat;
+	Mat4d invertPostTransfoMat;
+	Mat4f postTransfoMatf;
+	Mat4f invertPostTransfoMatf;
 };
 
 #endif  // _REFRACTIONEXTINCTION_HPP_

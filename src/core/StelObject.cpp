@@ -84,8 +84,8 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 	QString res;
 	const StelNavigator* nav = core->getNavigator();
 	// GZ: added refraction handling.
-	const StelSkyDrawer* drawer = core->getSkyDrawer();
-	bool withAtmosphericEffects=drawer->getFlagHasAtmosphere();
+//	const StelSkyDrawer* drawer = core->getSkyDrawer();
+//	bool withAtmosphericEffects=drawer->getFlagHasAtmosphere();
 //	const RefractionExtinction *refExt=drawer->getRefractionExtinction();
 
 	if (flags&RaDecJ2000)
