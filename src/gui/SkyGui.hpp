@@ -62,9 +62,6 @@ public:
 	
 	void init(class StelGui* stelGui);
 	
-	//! Load color scheme from the given ini file and section name
-	void setStelStyle(const StelStyle& style);
-
 	virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget* = 0);
 	
 protected:
@@ -72,6 +69,9 @@ protected:
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event);
 
 private slots:
+	//! Load color scheme from the given ini file and section name
+	void setStelStyle(const QString& style);
+	
 	//! Update the position of the button bars in the main window
 	void updateBarsPos();
 	
