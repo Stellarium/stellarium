@@ -102,6 +102,13 @@ public:
 	//! Note that forward/backward are no absolute reverse operations!
 	void backward(Vec3f& altAzPos) const;
 
+	void combine(const Mat4d& m)
+	{
+		setPreTransfoMat(preTransfoMat*m);
+	}
+
+	Mat4d getApproximateLinearTransfo() const {return postTransfoMat*preTransfoMat;}
+
 	//! Set surface air pressure (mbars), influences refraction computation.
 	void setPressure(float p_mbar);
 	float getPressure() const {return pressure;}
