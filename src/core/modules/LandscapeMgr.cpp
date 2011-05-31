@@ -2,6 +2,7 @@
  * Stellarium
  * Copyright (C) 2006 Fabien Chereau
  * Copyright (C) 2010 Bogdan Marinov (add/remove landscapes feature)
+ * Copyright (C) 2011 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -189,9 +190,9 @@ void LandscapeMgr::update(double deltaTime)
 	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 
 	StelCore* core = StelApp::getInstance().getCore();
-	Vec3d sunPos = ssystem->getSun()->getAltAzPos(core);
+	Vec3d sunPos = ssystem->getSun()->getAltAzPosApparent(core);
 	// Compute the moon position in local coordinate
-	Vec3d moonPos = ssystem->getMoon()->getAltAzPos(core);
+	Vec3d moonPos = ssystem->getMoon()->getAltAzPosApparent(core);
 	atmosphere->computeColor(core->getJDay(), sunPos, moonPos,
 		ssystem->getMoon()->getPhase(ssystem->getEarth()->getHeliocentricEclipticPos()),
 		core, core->getCurrentLocation().latitude, core->getCurrentLocation().altitude,
@@ -480,9 +481,10 @@ QString LandscapeMgr::getCurrentLandscapeName() const
 
 QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 {
-	QString desc = QString("<h3>%1</h3>").arg(landscape->getName());
-	desc += landscape->getDescription();
-	desc+="<br><br>";
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+	QString planetName = ssmgr->searchByEnglishName(landscape->getLocation().planetName)->getNameI18n();
+	QString desc = getDescription();
+	desc+="<p>";
 	desc+="<b>"+q_("Author: ")+"</b>";
 	desc+=landscape->getAuthorName();
 	desc+="<br>";
@@ -492,9 +494,9 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 		desc += StelUtils::radToDmsStrAdapt(landscape->getLocation().longitude * M_PI/180.);
 		desc += "/" + StelUtils::radToDmsStrAdapt(landscape->getLocation().latitude *M_PI/180.);
 		desc += QString(q_(", %1 m")).arg(landscape->getLocation().altitude);
-		if (landscape->getLocation().planetName!="")
+		if (planetName!="")
 		{
-			desc += "<br><b>"+q_("Planet: ")+"</b>"+landscape->getLocation().planetName;
+			desc += "<br><b>"+q_("Planet: ")+"</b>"+planetName;
 		}
 		desc += "<br><br>";
 	}
@@ -957,4 +959,27 @@ quint64 LandscapeMgr::loadLandscapeSize(QString landscapeID)
 	}
 
 	return landscapeSize;
+}
+
+QString LandscapeMgr::getDescription() const
+{
+	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	QString descriptionFile = StelFileMgr::findFile("landscapes/" + getCurrentLandscapeID(), StelFileMgr::Directory) + "/description." + lang + ".utf8";
+	QString desc;
+
+	if(QFileInfo(descriptionFile).exists())
+	{
+		QFile file(descriptionFile);
+		file.open(QIODevice::ReadOnly | QIODevice::Text);
+		QTextStream in(&file);
+		desc = in.readAll();
+		file.close();
+	}
+	else
+	{
+		desc = QString("<h2>%1</h2>").arg(q_(landscape->getName()));
+		desc += landscape->getDescription();
+	}
+
+	return desc;
 }

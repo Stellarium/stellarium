@@ -37,55 +37,35 @@ Vec3d StelObject::getEquinoxEquatorialPos(const StelCore* core) const
 	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core));
 }
 
-// Return the radius of a circle containing the object on screen
-// float StelObject::getOnScreenSize(const StelCore* core, const StelProjectorP& prj) const
-// {
-// 	return getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
-// }
-
 // Get observer local sideral coordinate
-Vec3d StelObject::getSideralPos(const StelCore* core) const
+Vec3d StelObject::getSideralPosGeometric(const StelCore* core) const
 {
 	return Mat4d::zrotation(-core->getLocalSideralTime())* getEquinoxEquatorialPos(core);
 }
-// GZ: Get observer local sidereal coordinates, deflected by refraction 
-void StelObject::getSideralPosRefr(const StelCore* core, double *ha_ref, double *dec_ref) const
-{
-  Vec3d altaz=getAltAzPos(core);
-  double az, alt;
-  StelUtils::rectToSphe(&az, &alt, altaz);
-  az = 2.*M_PI - az;  // S is zero for the formula now coming.
 
-// FC need to recode that
-//  const StelSkyDrawer* drawer = core->getSkyDrawer();
-//  bool withAtmosphericEffects=drawer->getFlagHasAtmosphere();
-//  // Only affect objects higher than -2 degrees.
-//  if ( withAtmosphericEffects && altaz[2]>-0.035f ) {
-//    // refract.
-//    const RefractionExtinction *refExt=drawer->getRefractionExtinction();
-//    refExt->addRefraction(alt);
-//  }
-  // rebuild hour angle, declination.
-  double lat=(core->getCurrentLocation().latitude)*M_PI/180.0;
-  *ha_ref=atan2(std::sin(az), std::cos(az)*std::sin(lat)+std::tan(alt)*std::cos(lat));
-  *dec_ref=std::asin(std::sin(lat)*std::sin(alt)-std::cos(lat)*std::cos(alt)*std::cos(az));
+// Get observer local sidereal coordinates, deflected by refraction
+Vec3d StelObject::getSideralPosApparent(const StelCore* core) const
+{
+	Vec3d v=getAltAzPosApparent(core);
+	v = core->altAzToEquinoxEqu(v, StelCore::RefractionOff);
+	return Mat4d::zrotation(-core->getLocalSideralTime())*v;
+}
+
+Vec3d StelObject::getAltAzPosGeometric(const StelCore* core) const
+{
+	return core->j2000ToAltAz(getJ2000EquatorialPos(core), StelCore::RefractionOff);
 }
 
 // Get observer-centered alt/az position
-Vec3d StelObject::getAltAzPos(const StelCore* core) const
+Vec3d StelObject::getAltAzPosApparent(const StelCore* core) const
 {
-	return core->j2000ToAltAz(getJ2000EquatorialPos(core));
+	return core->j2000ToAltAz(getJ2000EquatorialPos(core), StelCore::RefractionOn);
 }
 
 // Format the positional info string contain J2000/of date/altaz/hour angle positions for the object
 QString StelObject::getPositionInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	QString res;
-	// GZ: added refraction handling.
-//	const StelSkyDrawer* drawer = core->getSkyDrawer();
-//	bool withAtmosphericEffects=drawer->getFlagHasAtmosphere();
-//	const RefractionExtinction *refExt=drawer->getRefractionExtinction();
-
 	if (flags&RaDecJ2000)
 	{
 		double dec_j2000, ra_j2000;
@@ -103,38 +83,29 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 	if (flags&HourAngle)
 	{
 		double dec_sideral, ra_sideral;
-		StelUtils::rectToSphe(&ra_sideral,&dec_sideral,getSideralPos(core));
+		StelUtils::rectToSphe(&ra_sideral,&dec_sideral,getSideralPosGeometric(core));
 		ra_sideral = 2.*M_PI-ra_sideral;
-//		if (withAtmosphericEffects)
-//		  {
-//		    res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) + q_("(geom.)") + "<br>";
-//		    getSideralPosRefr(core, &ra_sideral, &dec_sideral);
-//		    res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) + q_("(app.)")  + "<br>";
-//		  }
-//		else
-//		  {
-		    res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) + "<br>";
-//		  }
+		res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) + q_("(geom.)") + "<br>";
+		StelUtils::rectToSphe(&ra_sideral,&dec_sideral,getSideralPosApparent(core));
+		ra_sideral = 2.*M_PI-ra_sideral;
+		res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sideral), StelUtils::radToDmsStr(dec_sideral)) + q_("(app.)") + "<br>";
 	}
 
 	if (flags&AltAzi)
 	{
 		// calculate alt az
 		double az,alt;
-		StelUtils::rectToSphe(&az,&alt,getAltAzPos(core));
+		StelUtils::rectToSphe(&az,&alt,getAltAzPosGeometric(core));
 		az = 3.*M_PI - az;  // N is zero, E is 90 degrees
 		if (az > M_PI*2)
 			az -= M_PI*2;
-//		if (withAtmosphericEffects)
-//		  {
-//		    res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + q_("(geom.)") + "<br>";
-//		    refExt->addRefraction(alt);
-//		    res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + q_("(app.)")  + "<br>";
-//		  }
-//		else
-//		  {
-		  res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + "<br>";
-//		  }
+		res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + q_("(geom.)") + "<br>";
+
+		StelUtils::rectToSphe(&az,&alt,getAltAzPosApparent(core));
+		az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+		if (az > M_PI*2)
+			az -= M_PI*2;
+		res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + q_("(app.)") + "<br>";
 	}
 	return res;
 }

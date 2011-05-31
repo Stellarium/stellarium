@@ -1,5 +1,5 @@
 
 ########### install files ###############
 
-INSTALL(FILES landscape.ini apollo17.png DESTINATION share/${PACKAGE}/landscapes/moon)
+INSTALL(FILES landscape.ini description.en.utf8 description.ru.utf8 apollo17.png DESTINATION share/${PACKAGE}/landscapes/moon)
 

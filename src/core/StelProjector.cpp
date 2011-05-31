@@ -102,7 +102,7 @@ SphericalRegionP StelProjector::getViewportConvexPolygon(float marginX, float ma
 		{
 			return SphericalRegionP(res);
 		}
-		qDebug() << "!valid";
+		//qDebug() << "!valid";
 		delete res;
 	}
 	//return SphericalRegionP((SphericalRegion*)(new AllSkySphericalRegion()));
