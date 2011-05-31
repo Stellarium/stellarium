@@ -26,7 +26,7 @@
 class StelProjectorPerspective : public StelProjector
 {
 public:
-	StelProjectorPerspective(ModelViewTranform* func) : StelProjector(func) {;}
+	StelProjectorPerspective(ModelViewTranformP func) : StelProjector(func) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 120.f;}
@@ -63,7 +63,7 @@ protected:
 class StelProjectorEqualArea : public StelProjector
 {
 public:
-	StelProjectorEqualArea(ModelViewTranform* func) : StelProjector(func) {;}
+	StelProjectorEqualArea(ModelViewTranformP func) : StelProjector(func) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 360.f;}
@@ -89,7 +89,7 @@ protected:
 class StelProjectorStereographic : public StelProjector
 {
 public:
-	StelProjectorStereographic(ModelViewTranform* func) : StelProjector(func) {;}
+	StelProjectorStereographic(ModelViewTranformP func) : StelProjector(func) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 235.f;}
@@ -138,7 +138,7 @@ protected:
 class StelProjectorFisheye : public StelProjector
 {
 public:
-	StelProjectorFisheye(ModelViewTranform* func) : StelProjector(func) {;}
+	StelProjectorFisheye(ModelViewTranformP func) : StelProjector(func) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 180.00001f;}
@@ -177,7 +177,7 @@ protected:
 class StelProjectorHammer : public StelProjector
 {
 public:
-	StelProjectorHammer(ModelViewTranform* func) : StelProjector(func) {;}
+	StelProjectorHammer(ModelViewTranformP func) : StelProjector(func) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 360.f;}
@@ -227,7 +227,7 @@ protected:
 class StelProjectorCylinder : public StelProjector
 {
 public:
-	StelProjectorCylinder(ModelViewTranform* func) : StelProjector(func) {;}
+	StelProjectorCylinder(ModelViewTranformP func) : StelProjector(func) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 175.f * 4.f/3.f;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
@@ -255,7 +255,7 @@ protected:
 class StelProjectorMercator : public StelProjector
 {
 public:
-	StelProjectorMercator(ModelViewTranform* func) : StelProjector(func) {;}
+	StelProjectorMercator(ModelViewTranformP func) : StelProjector(func) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 175.f * 4.f/3.f;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
@@ -283,7 +283,7 @@ protected:
 class StelProjectorOrthographic : public StelProjector
 {
 public:
-	StelProjectorOrthographic(ModelViewTranform* func) : StelProjector(func) {;}
+	StelProjectorOrthographic(ModelViewTranformP func) : StelProjector(func) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 179.9999f;}
@@ -301,7 +301,7 @@ protected:
 class StelProjector2d : public StelProjector
 {
 public:
-	StelProjector2d() : StelProjector(new StelProjector::Mat4dTransform(Mat4d::identity())) {;}
+	StelProjector2d() : StelProjector(ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity()))) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 360.f;}

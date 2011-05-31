@@ -593,21 +593,21 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	}
 
 	// This removed totally the Planet shaking bug!!!
-	mat = core->getHeliocentricEclipticModelViewMat() * mat;
-
+	StelProjector::ModelViewTranformP transfo = core->getHeliocentricEclipticModelViewTransform();
+	transfo->combine(mat);
 	if (getEnglishName() == core->getCurrentLocation().planetName)
 	{
 		// Draw the rings if we are located on a planet with rings, but not the planet itself.
 		if (rings)
 		{
-			StelPainter sPainter(core->getProjection(mat));
-			rings->draw(&sPainter,mat,1000.0);
+			StelPainter sPainter(core->getProjection(transfo));
+			rings->draw(&sPainter,transfo,1000.0);
 		}
 		return;
 	}
 
 	// Compute the 2D position and check if in the screen
-	const StelProjectorP prj = core->getProjection(mat);
+	const StelProjectorP prj = core->getProjection(transfo);
 	float screenSz = getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
@@ -634,7 +634,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		}
 		drawHints(core, planetNameFont);
 
-		draw3dModel(core,mat,screenSz);
+		draw3dModel(core,transfo,screenSz);
 	}
 	return;
 }
@@ -653,7 +653,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 			sPainter->getLight().enable();
 
 			// Set the main source of light to be the sun
-			const Vec3d& sunPos = core->getHeliocentricEclipticModelViewMat()*Vec3d(0,0,0);
+			const Vec3d& sunPos = core->getHeliocentricEclipticModelViewTransform()*Vec3d(0,0,0);
 			sPainter->getLight().setPosition(Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
 
 			// Set the light parameters taking sun as the light source
@@ -898,7 +898,7 @@ Ring::~Ring(void)
 {
 }
 
-void Ring::draw(StelPainter* sPainter,const Mat4d& mat,double screenSz)
+void Ring::draw(StelPainter* sPainter,StelProjector::ModelViewTranformP transfo,double screenSz)
 {
 	screenSz -= 50;
 	screenSz /= 250.0;
@@ -916,6 +916,7 @@ void Ring::draw(StelPainter* sPainter,const Mat4d& mat,double screenSz)
 
 	if (tex) tex->bind();
 
+	Mat4d mat = transfo->getApproximateLinearTransfo();
 	  // solve the ring wraparound by culling:
 	  // decide if we are above or below the ring plane
 	const double h = mat.r[ 8]*mat.r[12]

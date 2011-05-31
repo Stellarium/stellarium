@@ -373,7 +373,7 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 		return;
 
 	const float vpos = (tanMode||calibrated) ? radius*std::tan(fogAngleShift*M_PI/180.) : radius*std::sin(fogAngleShift*M_PI/180.);
-	sPainter.setProjector(core->getProjection(core->getAltAzModelViewMat() * Mat4d::translation(Vec3d(0.,0.,vpos))));
+	sPainter.setProjector(core->getProjection(core->getAltAzModelViewTransform() * Mat4d::translation(Vec3d(0.,0.,vpos))));
 	glBlendFunc(GL_ONE, GL_ONE);
 	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
 	sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
@@ -396,7 +396,7 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
 	// and the texture in between is correctly stretched.
 	// TODO: (1) Replace fog cylinder by similar texture, which could be painted as image layer in Photoshop/Gimp.
 	//       (2) Implement calibrated && tan_mode
-	Mat4d mat = core->getAltAzModelViewMat() * Mat4d::zrotation(-angleRotateZOffset*M_PI/180.f);
+	Mat4d mat = core->getAltAzModelViewTransform() * Mat4d::zrotation(-angleRotateZOffset*M_PI/180.f);
 	sPainter.setProjector(core->getProjection(mat));
 
 	if (!landFader.getInterstate())
@@ -420,7 +420,7 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 	const float vshift = (tanMode || calibrated) ?
 	  radius*std::tan(groundAngleShift*M_PI/180.) :
 	  radius*std::sin(groundAngleShift*M_PI/180.);
-	Mat4d mat = core->getAltAzModelViewMat() * Mat4d::zrotation((groundAngleRotateZ-angleRotateZOffset)*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift));
+	Mat4d mat = core->getAltAzModelViewTransform() * Mat4d::zrotation((groundAngleRotateZ-angleRotateZOffset)*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift));
 	sPainter.setProjector(core->getProjection(mat));
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
 	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
@@ -470,7 +470,7 @@ void LandscapeFisheye::draw(StelCore* core)
 	if(!validLandscape) return;
 	if(!landFader.getInterstate()) return;
 
-	const StelProjectorP prj = core->getProjection(core->getAltAzModelViewMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
+	const StelProjectorP prj = core->getProjection(core->getAltAzModelViewTransform() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
 	StelPainter sPainter(prj);
 
 	// Normal transparency mode
@@ -533,7 +533,7 @@ void LandscapeSpherical::draw(StelCore* core)
 	if(!validLandscape) return;
 	if(!landFader.getInterstate()) return;
 
-	const StelProjectorP prj = core->getProjection(core->getAltAzModelViewMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
+	const StelProjectorP prj = core->getProjection(core->getAltAzModelViewTransform() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
 	StelPainter sPainter(prj);
 
 	// Normal transparency mode

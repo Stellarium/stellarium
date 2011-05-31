@@ -165,23 +165,27 @@ StelProjectorP StelCore::getProjection2d() const
 // and using the given modelview matrix
 StelProjectorP StelCore::getProjection(const Mat4d& modelViewMat, RefractionMode refractionMode, ProjectionType projType) const
 {
-	if (projType==1000)
-		projType = currentProjectionType;
-
-	StelProjector::ModelViewTranform* modelViewTransform = NULL;
+	StelProjector::ModelViewTranformP modelViewTransform;
 	if (refractionMode==RefractionOn || (refractionMode==RefractionAuto && skyDrawer && skyDrawer->getFlagHasAtmosphere()))
 	{
 		Refraction* refr = new Refraction(skyDrawer->getRefraction());
 
 		// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
-		refr->setPreTransfoMat(getInvertAltAzModelViewMat()*modelViewMat);
-		refr->setPostTransfoMat(getAltAzModelViewMat());
-		modelViewTransform = refr;
+		refr->setPreTransfoMat(invertMatAltAzModelView*modelViewMat);
+		refr->setPostTransfoMat(getAltAzModelViewTransform());
+		modelViewTransform = StelProjector::ModelViewTranformP(refr);
 	}
 	else
 	{
-		modelViewTransform = new StelProjector::Mat4dTransform(modelViewMat);
+		modelViewTransform = StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(modelViewMat));
 	}
+	return getProjection(modelViewTransform, projType);
+}
+
+StelProjectorP StelCore::getProjection(StelProjector::ModelViewTranformP modelViewTransform, ProjectionType projType) const
+{
+	if (projType==1000)
+		projType = currentProjectionType;
 
 	StelProjectorP prj;
 	switch (projType)
@@ -225,17 +229,17 @@ StelProjectorP StelCore::getProjection(FrameType frameType, RefractionMode refra
 	switch (frameType)
 	{
 		case FrameAltAz:
-			return getProjection(getAltAzModelViewMat(), refractionMode);
+			return getProjection(getAltAzModelViewTransform(), refractionMode);
 		case FrameHeliocentricEcliptic:
-			return getProjection(getHeliocentricEclipticModelViewMat(), refractionMode);
+			return getProjection(getHeliocentricEclipticModelViewTransform(refractionMode));
 		case FrameObservercentricEcliptic:
-			return getProjection(getObservercentricEclipticModelViewMat(), refractionMode);
+			return getProjection(getObservercentricEclipticModelViewTransform(), refractionMode);
 		case FrameEquinoxEqu:
-			return getProjection(getEquinoxEquModelViewMat(), refractionMode);
+			return getProjection(getEquinoxEquModelViewTransform(), refractionMode);
 		case FrameJ2000:
-			return getProjection(getJ2000ModelViewMat(), refractionMode);
+			return getProjection(getJ2000ModelViewTransform(), refractionMode);
 		case FrameGalactic:
-			 return getProjection(getGalacticModelViewMat(), refractionMode);
+			 return getProjection(getGalacticModelViewTransform(), refractionMode);
 		default:
 			qDebug() << "Unknown reference frame type: " << (int)frameType << ".";
 	}
