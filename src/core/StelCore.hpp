@@ -106,16 +106,12 @@ public:
 	//! only for 2d painting
 	StelProjectorP getProjection2d() const;
 
-	//! Get a new instance of projector using the current display parameters from Navigation, StelMovementMgr, etc...
-	//! If not specified the projection type is the default one set in the core.
-	//! This is a smart pointer, you don't need to delete it.
+	//! Get a new instance of projector using a modelview transformation corresponding to the the given frame.
+	//! If not specified the refraction effect is included if atmosphere is on.
 	StelProjectorP getProjection(FrameType frameType, RefractionMode refractionMode=RefractionAuto) const;
 
-	//! Get an instance of projector using the current display parameters from Navigation, StelMovementMgr
-	//! and using the given modelview matrix.
-	//! If not specified default the projection type is the default one set in the core.
-	StelProjectorP getProjection(const Mat4d& modelViewMat, RefractionMode refractionMode=RefractionAuto, ProjectionType projType=(ProjectionType)1000) const;
-
+	//! Get a new instance of projector using the given modelview transformatione.
+	//! If not specified the projection used is the one currently used as default.
 	StelProjectorP getProjection(StelProjector::ModelViewTranformP modelViewTransform, ProjectionType projType=(ProjectionType)1000) const;
 
 	//! Get the current tone reproducer used in the core.

@@ -540,7 +540,7 @@ QVariantMap StelMainScriptAPI::getObjectPosition(const QString& name)
 	map.insert("decJ2000", dec*180./M_PI);
 
 	// altitude/azimuth
-	pos = obj->getAltAzPos(StelApp::getInstance().getCore());
+	pos = obj->getAltAzPosApparent(StelApp::getInstance().getCore());
 	StelUtils::rectToSphe(&azi, &alt, pos);
 	map.insert("altitude", alt*180./M_PI);
 	map.insert("azimuth", azi*180./M_PI);

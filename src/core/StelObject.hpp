@@ -95,16 +95,24 @@ public:
 	Vec3d getEquinoxEquatorialPos(const StelCore* core) const;
 
 	//! Get observer-centered hour angle + declination (at current equinox)
+	//! It is the geometric position, i.e. without taking refraction effect into account.
 	//! The frame has its Z axis at the planet's current rotation axis
-	Vec3d getSideralPos(const StelCore* core) const;
+	Vec3d getSideralPosGeometric(const StelCore* core) const;
 
-	//! Get observer-centered hour angle + declination, deflected by refraction
-	//Vec3d getSideralPosRefr(const StelCore* core) const;
-	void getSideralPosRefr(const StelCore* core, double *ha_ref, double *dec_ref) const;
+	//! Get observer-centered hour angle + declination (at current equinox)
+	//! It is the apparent position, i.e. taking the refraction effect into account.
+	//! The frame has its Z axis at the planet's current rotation axis
+	Vec3d getSideralPosApparent(const StelCore* core) const;
 
 	//! Get observer-centered alt/az position
+	//! It is the geometric position, i.e. without taking refraction effect into account.
 	//! The frame has it's Z axis at the zenith
-	Vec3d getAltAzPos(const StelCore* core) const;
+	Vec3d getAltAzPosGeometric(const StelCore* core) const;
+
+	//! Get observer-centered alt/az position
+	//! It is the apparent position, i.e. taking the refraction effect into account.
+	//! The frame has it's Z axis at the zenith
+	Vec3d getAltAzPosApparent(const StelCore* core) const;
 
 	//! Return object's apparent V magnitude as seen from observer
 	virtual float getVMagnitude(const StelCore*) const {return 99;}
