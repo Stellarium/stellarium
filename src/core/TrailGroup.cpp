@@ -38,7 +38,9 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	float currentTime = core->getJDay();
-	sPainter->setProjector(core->getProjection(core->getJ2000ModelViewTransform()*j2000ToTrailNativeInverted));
+	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
+	transfo->combine(j2000ToTrailNativeInverted);
+	sPainter->setProjector(core->getProjection(transfo));
 	foreach (const Trail& trail, allTrails)
 	{
 		Planet* hpl = dynamic_cast<Planet*>(trail.stelObject.data());

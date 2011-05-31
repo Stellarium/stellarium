@@ -69,10 +69,12 @@ bool MilkyWay::getFlagShow() const {return *fader;}
 
 void MilkyWay::draw(StelCore* core)
 {
-	const StelProjectorP prj = core->getProjection(core->getJ2000ModelViewTransform()*
-			Mat4d::xrotation(M_PI/180.*23.)*
-			Mat4d::yrotation(M_PI/180.*120.)*
-			Mat4d::zrotation(M_PI/180.*7.));
+	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
+	transfo->combine(Mat4d::xrotation(M_PI/180.*23.)*
+					 Mat4d::yrotation(M_PI/180.*120.)*
+					 Mat4d::zrotation(M_PI/180.*7.));
+
+	const StelProjectorP prj = core->getProjection(transfo);
 	StelToneReproducer* eye = core->getToneReproducer();
 
 	Q_ASSERT(tex);	// A texture must be loaded before calling this

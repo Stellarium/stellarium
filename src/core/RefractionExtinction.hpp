@@ -109,6 +109,8 @@ public:
 
 	Mat4d getApproximateLinearTransfo() const {return postTransfoMat*preTransfoMat;}
 
+	StelProjector::ModelViewTranformP clone() const {Refraction* refr = new Refraction(); *refr=*this; return StelProjector::ModelViewTranformP(refr);}
+
 	//! Set surface air pressure (mbars), influences refraction computation.
 	void setPressure(float p_mbar);
 	float getPressure() const {return pressure;}
