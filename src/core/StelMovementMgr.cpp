@@ -538,7 +538,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		if (!move.targetObject.isNull())
 		{
 			// if zooming in, object may be moving so be sure to zoom to latest position
-			move.aim = move.targetObject->getJ2000EquatorialPos(core);
+			move.aim = core->altAzToJ2000(move.targetObject->getAltAzPosAuto(core), StelCore::RefractionOff);
 			move.aim.normalize();
 			move.aim*=2.;
 		}
@@ -604,7 +604,8 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 	{
 		if (flagTracking && objectMgr->getWasSelected()) // Equatorial vision vector locked on selected object
 		{
-			setViewDirectionJ2000(objectMgr->getSelectedObject()[0]->getJ2000EquatorialPos(core));
+			Vec3d v = objectMgr->getSelectedObject()[0]->getAltAzPosAuto(core);
+			setViewDirectionJ2000(core->altAzToJ2000(v, StelCore::RefractionOff));
 		}
 		else
 		{
