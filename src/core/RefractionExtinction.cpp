@@ -133,6 +133,15 @@ void Refraction::forward(Vec3d& altAzPos) const
 			geom_alt_deg=90.; // SAFETY, SHOULD NOT BE NECESSARY
 		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.)*length;
 	}
+	else if(geom_alt_deg>-90.)
+	{
+		// Avoids the jump below -2 by interpolating linearly between -2 and -7
+		float r=press_temp_corr_Saemundson / std::tan((-2.+10.3f/(-2.+5.11f))*M_PI/180.f) + 0.0019279f;
+		geom_alt_deg += r*(geom_alt_deg+90.)/88;
+		if (geom_alt_deg < -90.)
+			geom_alt_deg=-90.; // SAFETY, SHOULD NOT BE NECESSARY
+		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.)*length;
+	}
 	altAzPos.transfo4d(postTransfoMat);
 }
 
@@ -147,6 +156,13 @@ void Refraction::backward(Vec3d& altAzPos) const
 		// refraction from Bennett, in Meeus, Astr.Alg.
 		float r=press_temp_corr_Bennett / std::tan((obs_alt_deg+7.31/(obs_alt_deg+4.4f))*M_PI/180.f) + 0.0013515f;
 		obs_alt_deg -= r;
+		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.)*length;
+	}
+	else if (obs_alt_deg > -90.)
+	{
+		// refraction from Bennett, in Meeus, Astr.Alg.
+		float r=press_temp_corr_Bennett / std::tan((-2.+7.31/(-2.+4.4f))*M_PI/180.f) + 0.0013515f;
+		obs_alt_deg -= r*(obs_alt_deg+90.)/88;
 		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.)*length;
 	}
 	altAzPos.transfo4d(invertPreTransfoMat);
@@ -166,6 +182,15 @@ void Refraction::forward(Vec3f& altAzPos) const
 			geom_alt_deg=90.f; // SAFETY, SHOULD NOT BE NECESSARY
 		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.f)*length;
 	}
+	else if(geom_alt_deg>-90.)
+	{
+		// Avoids the jump below -2 by interpolating linearly between -2 and -7
+		float r=press_temp_corr_Saemundson / std::tan((-2.+10.3f/(-2.+5.11f))*M_PI/180.f) + 0.0019279f;
+		geom_alt_deg += r*(geom_alt_deg+90.)/88;
+		if (geom_alt_deg < -90.)
+			geom_alt_deg=-90.; // SAFETY, SHOULD NOT BE NECESSARY
+		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.)*length;
+	}
 	altAzPos.transfo4d(postTransfoMatf);
 }
 
@@ -181,6 +206,13 @@ void Refraction::backward(Vec3f& altAzPos) const
 		float r=press_temp_corr_Bennett / std::tan((obs_alt_deg+7.31/(obs_alt_deg+4.4f))*M_PI/180.f) + 0.0013515f;
 		obs_alt_deg -= r;
 		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.f)*length;
+	}
+	else if (obs_alt_deg > -90.)
+	{
+		// refraction from Bennett, in Meeus, Astr.Alg.
+		float r=press_temp_corr_Bennett / std::tan((-2.+7.31/(-2.+4.4f))*M_PI/180.f) + 0.0013515f;
+		obs_alt_deg -= r*(obs_alt_deg+90.)/88;
+		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.)*length;
 	}
 	altAzPos.transfo4d(invertPreTransfoMatf);
 }

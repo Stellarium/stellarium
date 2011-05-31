@@ -655,7 +655,7 @@ void StelMainScriptAPI::clear(const QString& state)
 
 double StelMainScriptAPI::getViewAltitudeAngle()
 {
-	const Vec3d& current = StelApp::getInstance().getCore()->j2000ToAltAz(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000());
+	const Vec3d& current = StelApp::getInstance().getCore()->j2000ToAltAz(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000(), StelCore::RefractionOff);
 	double alt, azi;
 	StelUtils::rectToSphe(&azi, &alt, current);
 	return alt*180/M_PI; // convert to degrees from radians
@@ -663,7 +663,7 @@ double StelMainScriptAPI::getViewAltitudeAngle()
 
 double StelMainScriptAPI::getViewAzimuthAngle()
 {
-	const Vec3d& current = StelApp::getInstance().getCore()->j2000ToAltAz(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000());
+	const Vec3d& current = StelApp::getInstance().getCore()->j2000ToAltAz(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000(), StelCore::RefractionOff);
 	double alt, azi;
 	StelUtils::rectToSphe(&azi, &alt, current);
 	// The returned azimuth angle is in radians and set up such that:
@@ -718,7 +718,7 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 	double dAzi = M_PI - StelUtils::getDecAngle(azi);
 
 	StelUtils::spheToRect(dAzi,dAlt,aim);
-	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->altAzToJ2000(aim), duration);
+	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->altAzToJ2000(aim, StelCore::RefractionOff), duration);
 }
 
 void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float duration)
