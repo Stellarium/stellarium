@@ -233,7 +233,7 @@ protected:
 	QString getSkyLabel(const StelCore* core) const;
 
 	// Draw the 3d model. Call the proper functions if there are rings etc..
-	void draw3dModel(StelCore* core, const Mat4d& mat, float screenSz);
+	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz);
 
 	// Draw the 3D sphere
 	void drawSphere(StelPainter* painter, float screenSz);
