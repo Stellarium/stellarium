@@ -37,6 +37,11 @@ public:
 	friend class StelPainter;
 	friend class StelCore;
 
+	class ModelViewTranform;
+	//! @typedef ModelViewTranformP
+	//! Shared pointer on a ModelViewTranform instance (implement reference counting)
+	typedef QSharedPointer<ModelViewTranform> ModelViewTranformP;
+
 	//! @class PreModelViewFunc
 	//! Allows to define non linear operations in addition to the standard linear (Matrix 4d) ModelView transformation.
 	class ModelViewTranform
@@ -50,12 +55,10 @@ public:
 		virtual void backward(Vec3f&) const =0;
 
 		virtual void combine(const Mat4d&)=0;
+		virtual ModelViewTranformP clone() const=0;
 
 		virtual Mat4d getApproximateLinearTransfo() const=0;
 	};
-	//! @typedef ModelViewTranformP
-	//! Shared pointer on a ModelViewTranform instance (implement reference counting)
-	typedef QSharedPointer<ModelViewTranform> ModelViewTranformP;
 
 	class Mat4dTransform: public ModelViewTranform
 	{
@@ -99,8 +102,8 @@ public:
 			transfoMat=transfoMat*m;
 			transfoMatf=transfoMatf*mf;
 		}
-
 		Mat4d getApproximateLinearTransfo() const {return transfoMat;}
+		ModelViewTranformP clone() const {return ModelViewTranformP(new Mat4dTransform(transfoMat));}
 
 	private:
 		//! transfo matrix and invert

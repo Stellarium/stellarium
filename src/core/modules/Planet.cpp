@@ -639,21 +639,24 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	return;
 }
 
-void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
+void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz)
 {
 	// This is the main method drawing a planet 3d model
 	// Some work has to be done on this method to make the rendering nicer
 
 	if (screenSz>1.)
 	{
-		StelPainter* sPainter = new StelPainter(core->getProjection(mat * Mat4d::zrotation(M_PI/180*(axisRotation + 90.))));
+		StelProjector::ModelViewTranformP transfo2 = transfo->clone();
+		transfo2->combine(Mat4d::zrotation(M_PI/180*(axisRotation + 90.)));
+		StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
 
 		if (flagLighting)
 		{
 			sPainter->getLight().enable();
 
 			// Set the main source of light to be the sun
-			const Vec3d& sunPos = core->getHeliocentricEclipticModelViewTransform()*Vec3d(0,0,0);
+			Vec3d sunPos(0);
+			core->getHeliocentricEclipticModelViewTransform()->forward(sunPos);
 			sPainter->getLight().setPosition(Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
 
 			// Set the light parameters taking sun as the light source
@@ -690,7 +693,7 @@ void Planet::draw3dModel(StelCore* core, const Mat4d& mat, float screenSz)
 			drawSphere(sPainter, screenSz);
 			glDepthMask(GL_FALSE);
 			sPainter->getLight().disable();
-			rings->draw(sPainter,mat,screenSz);
+			rings->draw(sPainter,transfo,screenSz);
 			sPainter->getLight().enable();
 			glDisable(GL_DEPTH_TEST);
 			core->setClippingPlanes(n,f);  // Restore old clipping planes

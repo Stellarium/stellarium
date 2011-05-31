@@ -218,7 +218,6 @@ public:
 	{
 		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
 			return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matHeliocentricEclipticToAltAz));
-
 		Refraction* refr = new Refraction(skyDrawer->getRefraction());
 		// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
 		refr->setPreTransfoMat(matHeliocentricEclipticToAltAz);
@@ -227,15 +226,63 @@ public:
 	}
 
 	//! Get the modelview matrix for observer-centric ecliptic (Vsop87) drawing
-	const Mat4d getObservercentricEclipticModelViewTransform(RefractionMode refMode=RefractionAuto) const {return matAltAzModelView*matJ2000ToAltAz*matVsop87ToJ2000;}
+	StelProjector::ModelViewTranformP getObservercentricEclipticModelViewTransform(RefractionMode refMode=RefractionAuto) const
+	{
+		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+			return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matJ2000ToAltAz*matVsop87ToJ2000));
+		Refraction* refr = new Refraction(skyDrawer->getRefraction());
+		// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
+		refr->setPreTransfoMat(matJ2000ToAltAz*matVsop87ToJ2000);
+		refr->setPostTransfoMat(matAltAzModelView);
+		return StelProjector::ModelViewTranformP(refr);
+	}
+
 	//! Get the modelview matrix for observer-centric equatorial at equinox drawing
-	const Mat4d getEquinoxEquModelViewTransform(RefractionMode refMode=RefractionAuto) const {return matAltAzModelView*matEquinoxEquToAltAz;}
+	StelProjector::ModelViewTranformP getEquinoxEquModelViewTransform(RefractionMode refMode=RefractionAuto) const
+	{
+		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+			return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz));
+		Refraction* refr = new Refraction(skyDrawer->getRefraction());
+		// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
+		refr->setPreTransfoMat(matEquinoxEquToAltAz);
+		refr->setPostTransfoMat(matAltAzModelView);
+		return StelProjector::ModelViewTranformP(refr);
+	}
+
 	//! Get the modelview matrix for observer-centric altazimuthal drawing
-	const Mat4d& getAltAzModelViewTransform(RefractionMode refMode=RefractionAuto) const {return matAltAzModelView;}
+	StelProjector::ModelViewTranformP getAltAzModelViewTransform(RefractionMode refMode=RefractionAuto) const
+	{
+		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+			return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView));
+		Refraction* refr = new Refraction(skyDrawer->getRefraction());
+		// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
+		refr->setPostTransfoMat(matAltAzModelView);
+		return StelProjector::ModelViewTranformP(refr);
+	}
+
 	//! Get the modelview matrix for observer-centric J2000 equatorial drawing
-	const Mat4d getJ2000ModelViewTransform(RefractionMode refMode=RefractionAuto) const {return matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;}
+	StelProjector::ModelViewTranformP getJ2000ModelViewTransform(RefractionMode refMode=RefractionAuto) const
+	{
+		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+			return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu));
+		Refraction* refr = new Refraction(skyDrawer->getRefraction());
+		// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
+		refr->setPreTransfoMat(matEquinoxEquToAltAz*matJ2000ToEquinoxEqu);
+		refr->setPostTransfoMat(matAltAzModelView);
+		return StelProjector::ModelViewTranformP(refr);
+	}
+
 	//! Get the modelview matrix for observer-centric Galactic equatorial drawing
-	const Mat4d getGalacticModelViewTransform(RefractionMode refMode=RefractionAuto) const {return getJ2000ModelViewTransform()*matGalacticToJ2000;}
+	StelProjector::ModelViewTranformP getGalacticModelViewTransform(RefractionMode refMode=RefractionAuto) const
+	{
+		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+			return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matGalacticToJ2000));
+		Refraction* refr = new Refraction(skyDrawer->getRefraction());
+		// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
+		refr->setPreTransfoMat(matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matGalacticToJ2000);
+		refr->setPostTransfoMat(matAltAzModelView);
+		return StelProjector::ModelViewTranformP(refr);
+	}
 
 	//! Rotation matrix from equatorial J2000 to ecliptic (Vsop87)
 	static const Mat4d matJ2000ToVsop87;

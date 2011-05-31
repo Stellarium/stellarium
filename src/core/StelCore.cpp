@@ -172,7 +172,7 @@ StelProjectorP StelCore::getProjection(const Mat4d& modelViewMat, RefractionMode
 
 		// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
 		refr->setPreTransfoMat(invertMatAltAzModelView*modelViewMat);
-		refr->setPostTransfoMat(getAltAzModelViewTransform());
+		refr->setPostTransfoMat(matAltAzModelView);
 		modelViewTransform = StelProjector::ModelViewTranformP(refr);
 	}
 	else
@@ -229,17 +229,17 @@ StelProjectorP StelCore::getProjection(FrameType frameType, RefractionMode refra
 	switch (frameType)
 	{
 		case FrameAltAz:
-			return getProjection(getAltAzModelViewTransform(), refractionMode);
+			return getProjection(getAltAzModelViewTransform(refractionMode));
 		case FrameHeliocentricEcliptic:
 			return getProjection(getHeliocentricEclipticModelViewTransform(refractionMode));
 		case FrameObservercentricEcliptic:
-			return getProjection(getObservercentricEclipticModelViewTransform(), refractionMode);
+			return getProjection(getObservercentricEclipticModelViewTransform(refractionMode));
 		case FrameEquinoxEqu:
-			return getProjection(getEquinoxEquModelViewTransform(), refractionMode);
+			return getProjection(getEquinoxEquModelViewTransform(refractionMode));
 		case FrameJ2000:
-			return getProjection(getJ2000ModelViewTransform(), refractionMode);
+			return getProjection(getJ2000ModelViewTransform(refractionMode));
 		case FrameGalactic:
-			 return getProjection(getGalacticModelViewTransform(), refractionMode);
+			 return getProjection(getGalacticModelViewTransform(refractionMode));
 		default:
 			qDebug() << "Unknown reference frame type: " << (int)frameType << ".";
 	}
