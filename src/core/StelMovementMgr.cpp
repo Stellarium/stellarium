@@ -85,7 +85,7 @@ void StelMovementMgr::init()
 
 	Vec3f tmp = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
 	initViewPos.set(tmp[0], tmp[1], tmp[2]);
-	viewDirectionJ2000 = core->altAzToJ2000(initViewPos);
+	viewDirectionJ2000 = core->altAzToJ2000(initViewPos, StelCore::RefractionOff);
 
 	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
 	if (tmpstr=="equator")
@@ -378,7 +378,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 
 void StelMovementMgr::setInitViewDirectionToCurrent()
 {
-	initViewPos = core->j2000ToAltAz(viewDirectionJ2000);
+	initViewPos = core->j2000ToAltAz(viewDirectionJ2000, StelCore::RefractionOff);
 	QString dirStr = QString("%1,%2,%3").arg(initViewPos[0]).arg(initViewPos[1]).arg(initViewPos[2]);
 	StelApp::getInstance().getSettings()->setValue("navigation/init_view_pos", dirStr);
 }
@@ -695,7 +695,7 @@ void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 	zoomTo(initFov, moveDuration);
 	if (flagAutoZoomOutResetsDirection)
 	{
-		moveToJ2000(core->altAzToJ2000(getInitViewingDirection()), moveDuration, -1);
+		moveToJ2000(core->altAzToJ2000(getInitViewingDirection(), StelCore::RefractionOff), moveDuration, -1);
 		setFlagTracking(false);
 		setFlagLockEquPos(false);
 	}
@@ -753,7 +753,7 @@ Vec3d StelMovementMgr::j2000ToMountFrame(const Vec3d& v) const
 	switch (mountMode)
 	{
 		case MountAltAzimuthal:
-			return core->j2000ToAltAz(v);
+			return core->j2000ToAltAz(v, StelCore::RefractionOff);
 		case MountEquinoxEquatorial:
 			return core->j2000ToEquinoxEqu(v);
 		case MountGalactic:
@@ -768,7 +768,7 @@ Vec3d StelMovementMgr::mountFrameToJ2000(const Vec3d& v) const
 	switch (mountMode)
 	{
 		case MountAltAzimuthal:
-			return core->altAzToJ2000(v);
+			return core->altAzToJ2000(v, StelCore::RefractionOff);
 		case MountEquinoxEquatorial:
 			return core->equinoxEquToJ2000(v);
 		case MountGalactic:
