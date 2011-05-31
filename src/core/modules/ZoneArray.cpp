@@ -30,8 +30,6 @@
 #include "StelGeodesicGrid.hpp"
 #include "StelObject.hpp"
 
-#include "RefractionExtinction.hpp"
-
 static unsigned int stel_bswap_32(unsigned int val) {
   return (((val) & 0xff000000) >> 24) | (((val) & 0x00ff0000) >>  8) |
 	(((val) & 0x0000ff00) <<  8) | (((val) & 0x000000ff) << 24);
@@ -82,12 +80,6 @@ static inline int ReadInt(QFile& file, unsigned int &x)
 	const int rval = (4 == file.read((char*)&x, 4)) ? 0 : -1;
 	return rval;
 }
-  // GZ-Test.
-static inline int ReadSInt(QFile& file, int &x)
-{
-	const int rval = (4 == file.read((char*)&x, 4)) ? 0 : -1;
-	return rval;
-}
 
 #if (!defined(__GNUC__))
 #warning Star catalogue loading has only been tested with gcc
@@ -104,8 +96,6 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	}
 	dbStr = "Loading \"" + catalogFilePath + "\": ";
 	unsigned int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
-	// GZ Test
-	//int mag_min;
 	if (ReadInt(*file,magic) < 0 ||
 			ReadInt(*file,type) < 0 ||
 			ReadInt(*file,major) < 0 ||
@@ -119,8 +109,6 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		qDebug() << dbStr;
 		return 0;
 	}
-	// GZ patch: need more data. The next line can be removed again after fixing the extincted-magnitude problem.
-	qWarning() << "Star catalog: " << catalogFilePath << QString(": mag_min: %1, mag_steps: %2, mag_range: %3").arg(mag_min).arg(mag_steps).arg(mag_range);
 	const bool byte_swap = (magic == FILE_MAGIC_OTHER_ENDIAN);
 	if (byte_swap)
 	{
@@ -395,15 +383,6 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 				{
 					stars = (Star*)mmap_start;
 					Star *s = stars;
-					//// GZ: Must find out max_mag in stars.
-					//int mag_max=0;
-					//for (unsigned int i=0; i<nr_of_stars; i++)
-					//  {
-					//    if (stars[i].mag > mag_max) mag_max=stars[i].mag;
-					//  }
-					//qWarning() << QString("max. mag. value (coded integer) for stars in this catalog: %1").arg(mag_max);
-					//// GZ: end
-
 					for (unsigned int z=0;z<nr_of_zones;z++)
 					{
 
@@ -434,14 +413,6 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 				else
 				{
 					Star *s = stars;
-					// // GZ: Must find out max_mag in stars.
-					// int mag_max=0;
-					// for (unsigned int i=0; i<nr_of_stars; i++)
-					//   {
-					//     if (stars[i].mag > mag_max) mag_max=stars[i].mag;
-					//   }
-					// qWarning() << QString("max. mag. value (coded integer) for stars in this catalog: %1").arg(mag_max);
-					// // GZ: end
 					for (unsigned int z=0;z<nr_of_zones;z++)
 					{
 						getZones()[z].stars = s;
@@ -512,46 +483,12 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_insi
 	static const double d2000 = 2451545.0;
 	const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
 	const float* tmpRcmag;
-	// GZ: TODO: exclude effects for no-Earth conditions?
 	for (const Star *s=z->getStars();s<end;++s)
 	{
-		// preselect and skip dim stars.
 		tmpRcmag = rcmag_table+2*s->mag;
 		if (*tmpRcmag<=0.f)
 			break;
-		// vf<-star positions in J2000 coordinate frame.
 		s->getJ2000Pos(z,movementFactor, vf);
-
-		// FC re-do extinction
-//		// GZ: Refraction&Extinction
-//		if (withAtmosphericEffects)
-//		{
-//			// (1) get stellar magnitude from packed format.
-//			float mag= 0.001f*mag_min + s->mag*(0.001f*mag_range)/mag_steps;
-//			// (2) compute alt-az coordinates from vf
-//			Vec3d altaz=core->j2000ToAltAz(Vec3d(vf[0], vf[1], vf[2]));
-//			// (2a) Option: immediately skip stars below -2 under horizon.
-//			if (altaz[2]<-0.035f) break;
-//			// (3) compute refraction and extinction effects:
-//			refExt->forward(&altaz, &mag, 1);
-
-//			// //if (mag<mag_min) mag=mag_min;
-//			// // repack mag to get a correct lookup for tmpRcmag. DOES NOT WORK CORRECTLY!
-//			// unsigned int packedMagRed=(unsigned int) ((mag-0.001f*mag_min)*mag_steps/(0.001f*mag_range));
-//			// // Now reevaluate tmpRcmag, skip again stars now too dim to paint.
-//			// tmpRcmag = rcmag_table+2*packedMagRed;
-
-//			float refRCmag[2];
-//			if (! drawer->computeRCMag(mag, refRCmag)) break;
-//			//if (*refRCmag<=0.f) break; // previous.
-//			tmpRcmag=refRCmag;
-//			// (4) return to equatorial system, but refracted.
-//			Vec3d vf_refracted=core->altAzToJ2000(altaz);
-//			vf[0]=vf_refracted[0];
-//			vf[1]=vf_refracted[1];
-//			vf[2]=vf_refracted[2];
-//		}
-
 		if (drawer->drawPointSource(sPainter, vf, tmpRcmag, s->bV, !is_inside) && s->hasName() && s->mag < maxMagStarName)
 		{
 			const float offset = *tmpRcmag*0.7f;
@@ -577,8 +514,6 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 		tmp.normalize();
 		if (tmp*vf >= cosLimFov)
 		{
-		  // GZ: temporary message for stellar catalog magntude dump
-		  qWarning() << "Star: " << QString(": mag_min: %1, mag_steps: %2, mag_range: %3, mag: %4").arg(mag_min).arg(mag_steps).arg(mag_range).arg(s->mag);
 			// TODO: do not select stars that are too faint to display
 			result.push_back(s->createStelObject(this,z));
 		}

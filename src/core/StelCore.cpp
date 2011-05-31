@@ -161,27 +161,6 @@ StelProjectorP StelCore::getProjection2d() const
 	return prj;
 }
 
-// Get an instance of projector using the current display parameters from Navigation, StelMovementMgr
-// and using the given modelview matrix
-StelProjectorP StelCore::getProjection(const Mat4d& modelViewMat, RefractionMode refractionMode, ProjectionType projType) const
-{
-	StelProjector::ModelViewTranformP modelViewTransform;
-	if (refractionMode==RefractionOn || (refractionMode==RefractionAuto && skyDrawer && skyDrawer->getFlagHasAtmosphere()))
-	{
-		Refraction* refr = new Refraction(skyDrawer->getRefraction());
-
-		// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
-		refr->setPreTransfoMat(invertMatAltAzModelView*modelViewMat);
-		refr->setPostTransfoMat(matAltAzModelView);
-		modelViewTransform = StelProjector::ModelViewTranformP(refr);
-	}
-	else
-	{
-		modelViewTransform = StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(modelViewMat));
-	}
-	return getProjection(modelViewTransform, projType);
-}
-
 StelProjectorP StelCore::getProjection(StelProjector::ModelViewTranformP modelViewTransform, ProjectionType projType) const
 {
 	if (projType==1000)
@@ -308,7 +287,7 @@ void StelCore::setCurrentProjectionType(ProjectionType type)
 	currentProjectionType=type;
 	const double savedFov = currentProjectorParams.fov;
 	currentProjectorParams.fov = 0.0001;	// Avoid crash
-	double newMaxFov = getProjection(Mat4d::identity())->getMaxFov();
+	double newMaxFov = getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())))->getMaxFov();
 	movementMgr->setMaxFov(newMaxFov);
 	currentProjectorParams.fov = qMin(newMaxFov, savedFov);
 }
@@ -346,7 +325,7 @@ QStringList StelCore::getAllProjectionTypeKeys() const
 QString StelCore::projectionTypeKeyToNameI18n(const QString& key) const
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType"));
-	QString s(getProjection(Mat4d::identity(), RefractionOff, (ProjectionType)en.keyToValue(key.toAscii()))->getNameI18());
+	QString s(getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())), (ProjectionType)en.keyToValue(key.toAscii()))->getNameI18());
 	return s;
 }
 
@@ -356,7 +335,7 @@ QString StelCore::projectionNameI18nToTypeKey(const QString& nameI18n) const
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType"));
 	for (int i=0;i<en.keyCount();++i)
 	{
-		if (getProjection(Mat4d::identity(), RefractionOff, (ProjectionType)i)->getNameI18()==nameI18n)
+		if (getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())), (ProjectionType)i)->getNameI18()==nameI18n)
 			return en.valueToKey(i);
 	}
 	// Unknown translated name
