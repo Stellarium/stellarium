@@ -24,7 +24,7 @@
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelObjectMgr.hpp"
 #include "StelUtils.hpp"
 
@@ -365,7 +365,7 @@ void SearchDialog::gotoObject()
 			ui->lineEditSearchSkyObject->clear();
 			ui->completionLabel->clearValues();
 			// Can't point to home planet
-			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().name)
+			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().name)
 			{
 				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
 				mvmgr->setFlagTracking(true);

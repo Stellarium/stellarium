@@ -157,7 +157,7 @@ void StelSkyLayerMgr::draw(StelCore* core)
 	if (!flagShow)
 		return;
 
-	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000, core->getSkyDrawer()->getFlagHasAtmosphere()));
+	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_BLEND);
 	foreach (SkyLayerElem* s, allSkyLayers)

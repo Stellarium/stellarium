@@ -28,7 +28,7 @@
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
@@ -92,7 +92,8 @@ void ConfigurationDialog::styleChanged()
 void ConfigurationDialog::createDialogContent()
 {
 	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000);
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
+	StelCore* core = StelApp::getInstance().getCore();
+
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 
 	ui->setupUi(dialog);
@@ -140,9 +141,9 @@ void ConfigurationDialog::createDialogContent()
 
 	// Navigation tab
 	// Startup time
-	if (nav->getStartupTimeMode()=="actual")
+	if (core->getStartupTimeMode()=="actual")
 		ui->systemTimeRadio->setChecked(true);
-	else if (nav->getStartupTimeMode()=="today")
+	else if (core->getStartupTimeMode()=="today")
 		ui->todayRadio->setChecked(true);
 	else
 		ui->fixedTimeRadio->setChecked(true);
@@ -150,10 +151,10 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->todayRadio, SIGNAL(clicked(bool)), this, SLOT(setStartupTimeMode()));
 	connect(ui->fixedTimeRadio, SIGNAL(clicked(bool)), this, SLOT(setStartupTimeMode()));
 
-	ui->todayTimeSpinBox->setTime(nav->getInitTodayTime());
-	connect(ui->todayTimeSpinBox, SIGNAL(timeChanged(QTime)), nav, SLOT(setInitTodayTime(QTime)));
-	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(nav->getPresetSkyTime()));
-	connect(ui->fixedDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), nav, SLOT(setPresetSkyTime(QDateTime)));
+	ui->todayTimeSpinBox->setTime(core->getInitTodayTime());
+	connect(ui->todayTimeSpinBox, SIGNAL(timeChanged(QTime)), core, SLOT(setInitTodayTime(QTime)));
+	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(core->getPresetSkyTime()));
+	connect(ui->fixedDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), core, SLOT(setPresetSkyTime(QDateTime)));
 
 	ui->enableKeysNavigationCheckBox->setChecked(mvmgr->getFlagEnableMoveKeys() || mvmgr->getFlagEnableZoomKeys());
 	ui->enableMouseNavigationCheckBox->setChecked(mvmgr->getFlagEnableMouseNavigation());
@@ -230,20 +231,17 @@ void ConfigurationDialog::languageChanged(const QString& langName)
 	StelMainWindow::getInstance().initTitleI18n();
 }
 
-void ConfigurationDialog::setStartupTimeMode(void)
+void ConfigurationDialog::setStartupTimeMode()
 {
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	Q_ASSERT(nav);
-
 	if (ui->systemTimeRadio->isChecked())
-		StelApp::getInstance().getCore()->getNavigator()->setStartupTimeMode("actual");
+		StelApp::getInstance().getCore()->setStartupTimeMode("actual");
 	else if (ui->todayRadio->isChecked())
-		StelApp::getInstance().getCore()->getNavigator()->setStartupTimeMode("today");
+		StelApp::getInstance().getCore()->setStartupTimeMode("today");
 	else
-		StelApp::getInstance().getCore()->getNavigator()->setStartupTimeMode("preset");
+		StelApp::getInstance().getCore()->setStartupTimeMode("preset");
 
-	nav->setInitTodayTime(ui->todayTimeSpinBox->time());
-	nav->setPresetSkyTime(ui->fixedDateTimeEdit->dateTime());
+	StelApp::getInstance().getCore()->setInitTodayTime(ui->todayTimeSpinBox->time());
+	StelApp::getInstance().getCore()->setPresetSkyTime(ui->fixedDateTimeEdit->dateTime());
 }
 
 void ConfigurationDialog::setDiskViewport(bool b)
@@ -343,9 +341,9 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	Q_ASSERT(glmgr);
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mvmgr);
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	Q_ASSERT(nav);
-	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000);
+
+	StelCore* core = StelApp::getInstance().getCore();
+	const StelProjectorP proj = core->getProjection(StelCore::FrameJ2000);
 	Q_ASSERT(proj);
 
 	// view dialog / sky tab settings
@@ -382,7 +380,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/labels_amount", ssmgr->getLabelsAmount());
 	conf->setValue("astro/nebula_hints_amount", nmgr->getHintsAmount());
 	conf->setValue("astro/flag_nebula_name", nmgr->getFlagHints());
-	conf->setValue("projection/type", StelApp::getInstance().getCore()->getCurrentProjectionTypeKey());
+	conf->setValue("projection/type", core->getCurrentProjectionTypeKey());
 
 	// view dialog / landscape tab settings
 	lmgr->setDefaultLandscapeID(lmgr->getCurrentLandscapeID());
@@ -390,13 +388,13 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("landscape/flag_landscape", lmgr->getFlagLandscape());
 	conf->setValue("landscape/flag_atmosphere", lmgr->getFlagAtmosphere());
 	conf->setValue("landscape/flag_fog", lmgr->getFlagFog());
-	conf->setValue("stars/init_bortle_scale", StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScale());
+	conf->setValue("stars/init_bortle_scale", core->getSkyDrawer()->getBortleScale());
 
 	// view dialog / starlore tab
 	StelApp::getInstance().getSkyCultureMgr().setDefaultSkyCultureID(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
 
 	// Save default location
-	nav->setDefaultLocationID(nav->getCurrentLocation().getID());
+	StelApp::getInstance().getCore()->setDefaultLocationID(core->getCurrentLocation().getID());
 
 	// configuration dialog / main tab
 	QString langName = StelApp::getInstance().getLocaleMgr().getAppLanguage();
@@ -422,9 +420,9 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("navigation/flag_enable_zoom_keys", mvmgr->getFlagEnableZoomKeys());
 	conf->setValue("navigation/flag_enable_mouse_navigation", mvmgr->getFlagEnableMouseNavigation());
 	conf->setValue("navigation/flag_enable_move_keys", mvmgr->getFlagEnableMoveKeys());
-	conf->setValue("navigation/startup_time_mode", nav->getStartupTimeMode());
-	conf->setValue("navigation/today_time", nav->getInitTodayTime());
-	conf->setValue("navigation/preset_sky_time", nav->getPresetSkyTime());
+	conf->setValue("navigation/startup_time_mode", core->getStartupTimeMode());
+	conf->setValue("navigation/today_time", core->getInitTodayTime());
+	conf->setValue("navigation/preset_sky_time", core->getPresetSkyTime());
 	conf->setValue("navigation/init_fov", mvmgr->getInitFov());
 	if (mvmgr->getMountMode() == StelMovementMgr::MountAltAzimuthal)
 		conf->setValue("navigation/viewing_mode", "horizon");
@@ -629,7 +627,7 @@ void ConfigurationDialog::aScriptHasStopped(void)
 
 void ConfigurationDialog::setFixedDateTimeToCurrent(void)
 {
-	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(StelApp::getInstance().getCore()->getNavigator()->getJDay()));
+	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(StelApp::getInstance().getCore()->getJDay()));
 	ui->fixedTimeRadio->setChecked(true);
 	setStartupTimeMode();
 }

@@ -33,7 +33,7 @@
 
 #include "StelSkyDrawer.hpp"
 #include "StelProjector.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelToneReproducer.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelApp.hpp"

@@ -25,7 +25,7 @@
 
 #include "GridLinesMgr.hpp"
 #include "StelApp.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelTranslator.hpp"
 #include "StelProjector.hpp"
 #include "StelFader.hpp"
@@ -253,7 +253,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 //! Draw the sky grid in the current frame
 void SkyGrid::draw(const StelCore* core) const
 {
-	const StelProjectorP prj = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? core->getSkyDrawer()->getFlagHasAtmosphere() : false);
+	const StelProjectorP prj = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? StelCore::RefractionAuto : StelCore::RefractionOff);
 	if (!fader.getInterstate())
 		return;
 
@@ -541,7 +541,7 @@ void SkyLine::draw(StelCore *core) const
 	if (!fader.getInterstate())
 		return;
 
-	StelProjectorP prj = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? core->getSkyDrawer()->getFlagHasAtmosphere() : false);
+	StelProjectorP prj = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? StelCore::RefractionAuto : StelCore::RefractionOff);
 
 	// Get the bounding halfspace
 	const SphericalCap& viewPortSphericalCap = prj->getBoundingCap();
