@@ -346,8 +346,8 @@ QString StelCore::projectionNameI18nToTypeKey(const QString& nameI18n) const
 
 void StelCore::lookAtJ2000(const Vec3d& pos, const Vec3d& aup)
 {
-	Vec3d f(j2000ToAltAz(pos));
-	Vec3d up(j2000ToAltAz(aup));
+	Vec3d f(j2000ToAltAz(pos, RefractionOff));
+	Vec3d up(j2000ToAltAz(aup, RefractionOff));
 	f.normalize();
 	up.normalize();
 

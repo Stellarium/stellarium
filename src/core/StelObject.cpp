@@ -62,6 +62,12 @@ Vec3d StelObject::getAltAzPosApparent(const StelCore* core) const
 	return core->j2000ToAltAz(getJ2000EquatorialPos(core), StelCore::RefractionOn);
 }
 
+// Get observer-centered alt/az position
+Vec3d StelObject::getAltAzPosAuto(const StelCore* core) const
+{
+	return core->j2000ToAltAz(getJ2000EquatorialPos(core));
+}
+
 // Format the positional info string contain J2000/of date/altaz/hour angle positions for the object
 QString StelObject::getPositionInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
