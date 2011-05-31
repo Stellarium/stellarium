@@ -114,6 +114,11 @@ public:
 	//! The frame has it's Z axis at the zenith
 	Vec3d getAltAzPosApparent(const StelCore* core) const;
 
+	//! Get observer-centered alt/az position
+	//! It is the automatic position, i.e. taking the refraction effect into account if atmosphere is on.
+	//! The frame has it's Z axis at the zenith
+	Vec3d getAltAzPosAuto(const StelCore* core) const;
+
 	//! Return object's apparent V magnitude as seen from observer
 	virtual float getVMagnitude(const StelCore*) const {return 99;}
 
