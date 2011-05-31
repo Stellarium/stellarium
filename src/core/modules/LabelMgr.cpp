@@ -24,7 +24,7 @@
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelProjector.hpp"
 #include "StelModule.hpp"
 #include "StelObject.hpp"
@@ -208,7 +208,7 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 	if(labelFader.getInterstate() <= 0.0)
 		return false;
 
-	Vec3d objectPos = labelObject->getJ2000EquatorialPos(core->getNavigator());
+	Vec3d objectPos = labelObject->getJ2000EquatorialPos(core);
 	Vec3d labelXY;
 	sPainter.getProjector()->project(objectPos,labelXY);
 

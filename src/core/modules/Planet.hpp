@@ -115,14 +115,14 @@ public:
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Planet.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
-	virtual double getCloseViewFov(const StelNavigator * nav) const;
-	virtual double getSatellitesFov(const StelNavigator * nav) const;
-	virtual double getParentSatellitesFov(const StelNavigator * nav) const;
-	virtual float getVMagnitude(const StelNavigator * nav) const;
-	virtual float getSelectPriority(const StelNavigator *nav) const;
+	virtual double getCloseViewFov(const StelCore* core) const;
+	virtual double getSatellitesFov(const StelCore* core) const;
+	virtual double getParentSatellitesFov(const StelCore* core) const;
+	virtual float getVMagnitude(const StelCore* core) const;
+	virtual float getSelectPriority(const StelCore* core) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual QString getType(void) const {return "Planet";}
-	virtual Vec3d getJ2000EquatorialPos(const StelNavigator *nav) const;
+	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
 	virtual QString getEnglishName(void) const {return englishName;}
 	virtual QString getNameI18n(void) const {return nameI18;}
 	virtual double getAngularSize(const StelCore* core) const;
@@ -229,7 +229,7 @@ protected:
 	void drawEarthShadow(StelCore* core, StelPainter* sPainter);
 
 	// Return the information string "ready to print" :)
-	QString getSkyLabel(const StelNavigator * nav) const;
+	QString getSkyLabel(const StelCore* core) const;
 
 	// Draw the 3d model. Call the proper functions if there are rings etc..
 	void draw3dModel(StelCore* core, const Mat4d& mat, float screenSz);

@@ -32,7 +32,7 @@
 #include "NebulaMgr.hpp"
 #include "Nebula.hpp"
 #include "StelTexture.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelSkyDrawer.hpp"
 #include "StelTranslator.hpp"
 #include "StelTextureMgr.hpp"
@@ -142,7 +142,7 @@ struct DrawNebulaFuncObject
 // Draw all the Nebulae
 void NebulaMgr::draw(StelCore* core)
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, core->getSkyDrawer()->getFlagHasAtmosphere());
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 
 	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
@@ -170,14 +170,13 @@ void NebulaMgr::draw(StelCore* core)
 
 void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 {
-	const StelNavigator* nav = core->getNavigator();
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, core->getSkyDrawer()->getFlagHasAtmosphere());
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Nebula");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
-		Vec3d pos=obj->getJ2000EquatorialPos(nav);
+		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
 		// Compute 2D pos and return if outside screen
 		if (!prj->projectInPlace(pos)) return;

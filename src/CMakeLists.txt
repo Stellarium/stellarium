@@ -43,8 +43,6 @@ SET(stellarium_lib_SRCS
 	core/StelGeodesicGrid.hpp
 	core/StelMovementMgr.cpp
 	core/StelMovementMgr.hpp
-	core/StelNavigator.cpp
-	core/StelNavigator.hpp
 	core/StelObserver.cpp
 	core/StelObserver.hpp
 	core/StelLocation.hpp
@@ -342,7 +340,6 @@ SET(stellarium_MOC_HDRS
 	core/StelObjectMgr.hpp
 	core/StelObserver.hpp
 	core/StelApp.hpp
-	core/StelNavigator.hpp
 	core/StelLocationMgr.hpp
 	core/StelCore.hpp
 	core/StelAppGraphicsWidget.hpp

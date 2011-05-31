@@ -23,7 +23,7 @@
 #include <QString>
 #include "StelObject.hpp"
 #include "StelApp.hpp"
-#include "StelNavigator.hpp"
+#include "StelCore.hpp"
 #include "StarMgr.hpp"
 #include "Star.hpp"
 #include "StelSkyDrawer.hpp"
@@ -74,22 +74,22 @@ protected:
 	StarWrapper(const SpecialZoneArray<Star> *a,
 		const SpecialZoneData<Star> *z,
 		const Star *s) : a(a), z(z), s(s) {;}
-	Vec3d getJ2000EquatorialPos(const StelNavigator* nav) const
+	Vec3d getJ2000EquatorialPos(const StelCore* core) const
 	{
 		static const double d2000 = 2451545.0;
 		Vec3f v;
-		s->getJ2000Pos(z, (M_PI/180.)*(0.0001/3600.) * ((nav->getJDay()-d2000)/365.25) / a->star_position_scale, v);
+		s->getJ2000Pos(z, (M_PI/180.)*(0.0001/3600.) * ((core->getJDay()-d2000)/365.25) / a->star_position_scale, v);
 		return Vec3d(v[0], v[1], v[2]);
 	}
 	Vec3f getInfoColor(void) const
 	{
 		return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.2, 0.2) : StelSkyDrawer::indexToColor(s->bV);
 	}
-	float getVMagnitude(const StelNavigator*) const
+	float getVMagnitude(const StelCore*) const
 	{
 		return 0.001f*a->mag_min + s->mag*(0.001f*a->mag_range)/a->mag_steps;
 	}
-	float getSelectPriority(const StelNavigator *nav) const {return getVMagnitude(nav);}
+	float getSelectPriority(const StelCore* core) const {return getVMagnitude(core);}
 	float getBV(void) const {return s->getBV();}
 	QString getEnglishName(void) const {return QString();}
 	QString getNameI18n(void) const {return s->getNameI18n();}
