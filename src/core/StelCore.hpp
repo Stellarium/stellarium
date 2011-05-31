@@ -42,7 +42,7 @@ class StelMovementMgr;
 class StelCore : public QObject
 {
 	Q_OBJECT
-	Q_ENUMS(ProjectionType);
+	Q_ENUMS(ProjectionType)
 
 public:
 	//! @enum FrameType
