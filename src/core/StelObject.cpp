@@ -19,7 +19,7 @@
 
 
 #include "StelObject.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelCore.hpp"
 #include "StelProjector.hpp"
 #include "StelUtils.hpp"
@@ -32,9 +32,9 @@
 #include <QDebug>
 
 
-Vec3d StelObject::getEquinoxEquatorialPos(const StelNavigator* nav) const
+Vec3d StelObject::getEquinoxEquatorialPos(const StelCore* core) const
 {
-	return nav->j2000ToEquinoxEqu(getJ2000EquatorialPos(nav));
+	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core));
 }
 
 // Return the radius of a circle containing the object on screen
@@ -46,13 +46,12 @@ Vec3d StelObject::getEquinoxEquatorialPos(const StelNavigator* nav) const
 // Get observer local sideral coordinate
 Vec3d StelObject::getSideralPos(const StelCore* core) const
 {
-	return Mat4d::zrotation(-core->getNavigator()->getLocalSideralTime())* getEquinoxEquatorialPos(core->getNavigator());
+	return Mat4d::zrotation(-core->getLocalSideralTime())* getEquinoxEquatorialPos(core);
 }
 // GZ: Get observer local sidereal coordinates, deflected by refraction 
 void StelObject::getSideralPosRefr(const StelCore* core, double *ha_ref, double *dec_ref) const
 {
-  const StelNavigator *nav=core->getNavigator();
-  Vec3d altaz=getAltAzPos(nav);
+  Vec3d altaz=getAltAzPos(core);
   double az, alt;
   StelUtils::rectToSphe(&az, &alt, altaz);
   az = 2.*M_PI - az;  // S is zero for the formula now coming.
@@ -67,22 +66,21 @@ void StelObject::getSideralPosRefr(const StelCore* core, double *ha_ref, double 
 //    refExt->addRefraction(alt);
 //  }
   // rebuild hour angle, declination.
-  double lat=(nav->getCurrentLocation().latitude)*M_PI/180.0;
+  double lat=(core->getCurrentLocation().latitude)*M_PI/180.0;
   *ha_ref=atan2(std::sin(az), std::cos(az)*std::sin(lat)+std::tan(alt)*std::cos(lat));
   *dec_ref=std::asin(std::sin(lat)*std::sin(alt)-std::cos(lat)*std::cos(alt)*std::cos(az));
 }
 
 // Get observer-centered alt/az position
-Vec3d StelObject::getAltAzPos(const StelNavigator* nav) const
+Vec3d StelObject::getAltAzPos(const StelCore* core) const
 {
-	return nav->j2000ToAltAz(getJ2000EquatorialPos(nav));
+	return core->j2000ToAltAz(getJ2000EquatorialPos(core));
 }
 
 // Format the positional info string contain J2000/of date/altaz/hour angle positions for the object
 QString StelObject::getPositionInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	QString res;
-	const StelNavigator* nav = core->getNavigator();
 	// GZ: added refraction handling.
 //	const StelSkyDrawer* drawer = core->getSkyDrawer();
 //	bool withAtmosphericEffects=drawer->getFlagHasAtmosphere();
@@ -91,14 +89,14 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 	if (flags&RaDecJ2000)
 	{
 		double dec_j2000, ra_j2000;
-		StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getJ2000EquatorialPos(nav));
+		StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getJ2000EquatorialPos(core));
 		res += q_("RA/DE (J2000): %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true), StelUtils::radToDmsStr(dec_j2000,true)) + "<br>";
 	}
 
 	if (flags&RaDecOfDate)
 	{
 		double dec_equ, ra_equ;
-		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(nav));
+		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
 		res += q_("RA/DE (of date): %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ)) + "<br>";
 	}
 
@@ -123,7 +121,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 	{
 		// calculate alt az
 		double az,alt;
-		StelUtils::rectToSphe(&az,&alt,getAltAzPos(nav));
+		StelUtils::rectToSphe(&az,&alt,getAltAzPos(core));
 		az = 3.*M_PI - az;  // N is zero, E is 90 degrees
 		if (az > M_PI*2)
 			az -= M_PI*2;

@@ -91,7 +91,7 @@ Cardinals::~Cardinals()
 // handles special cases at poles
 void Cardinals::draw(const StelCore* core, double latitude) const
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	StelPainter sPainter(prj);
 	sPainter.setFont(font);
 
@@ -187,24 +187,24 @@ void LandscapeMgr::update(double deltaTime)
 	// Compute the atmosphere color and intensity
 	// Compute the sun position in local coordinate
 	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 
-	Vec3d sunPos = ssystem->getSun()->getAltAzPos(nav);
+	StelCore* core = StelApp::getInstance().getCore();
+	Vec3d sunPos = ssystem->getSun()->getAltAzPos(core);
 	// Compute the moon position in local coordinate
-	Vec3d moonPos = ssystem->getMoon()->getAltAzPos(nav);
-	atmosphere->computeColor(nav->getJDay(), sunPos, moonPos,
+	Vec3d moonPos = ssystem->getMoon()->getAltAzPos(core);
+	atmosphere->computeColor(core->getJDay(), sunPos, moonPos,
 		ssystem->getMoon()->getPhase(ssystem->getEarth()->getHeliocentricEclipticPos()),
-		StelApp::getInstance().getCore(), nav->getCurrentLocation().latitude, nav->getCurrentLocation().altitude,
+		core, core->getCurrentLocation().latitude, core->getCurrentLocation().altitude,
 		15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 
-	StelApp::getInstance().getCore()->getSkyDrawer()->reportLuminanceInFov(3.75+atmosphere->getAverageLuminance()*3.5, true);
+	core->getSkyDrawer()->reportLuminanceInFov(3.75+atmosphere->getAverageLuminance()*3.5, true);
 
 	// Compute the ground luminance based on every planets around
 //	float groundLuminance = 0;
 //	const vector<Planet*>& allPlanets = ssystem->getAllPlanets();
 //	for (vector<Planet*>::const_iterator i=allPlanets.begin();i!=allPlanets.end();++i)
 //	{
-//		Vec3d pos = (*i)->getAltAzPos(nav);
+//		Vec3d pos = (*i)->getAltAzPos(core);
 //		pos.normalize();
 //		if (pos[2] <= 0)
 //		{
@@ -214,8 +214,8 @@ void LandscapeMgr::update(double deltaTime)
 //		else
 //		{
 //			// Compute the Illuminance E of the ground caused by the planet in lux = lumen/m^2
-//			float E = pow10(((*i)->get_mag(nav)+13.988)/-2.5);
-//			//qDebug() << "mag=" << (*i)->get_mag(nav) << " illum=" << E;
+//			float E = pow10(((*i)->get_mag(core)+13.988)/-2.5);
+//			//qDebug() << "mag=" << (*i)->get_mag(core) << " illum=" << E;
 //			// Luminance in cd/m^2
 //			groundLuminance += E/0.44*pos[2]*pos[2]; // 1m^2 from 1.5 m above the ground is 0.44 sr.
 //		}
@@ -238,7 +238,7 @@ void LandscapeMgr::update(double deltaTime)
 	else
 		landscapeBrightness = (0.01 + 1.5*(sinSunAngleRad+0.1/1.5));
 	if (moonPos[2] > -0.1/1.5)
-		landscapeBrightness += qMax(0.2/-12.*ssystem->getMoon()->getVMagnitude(nav),0.)*moonPos[2];
+		landscapeBrightness += qMax(0.2/-12.*ssystem->getMoon()->getVMagnitude(core),0.)*moonPos[2];
 
 	// TODO make this more generic for non-atmosphere planets
 	if(atmosphere->getFadeIntensity() == 1)
@@ -261,7 +261,7 @@ void LandscapeMgr::draw(StelCore* core)
 	landscape->draw(core);
 
 	// Draw the cardinal points
-	cardinalsPoints->draw(core, StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().latitude);
+	cardinalsPoints->draw(core, StelApp::getInstance().getCore()->getCurrentLocation().latitude);
 }
 
 void LandscapeMgr::init()
@@ -335,7 +335,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 
 	if (getFlagLandscapeSetsLocation())
 	{
-		StelApp::getInstance().getCore()->getNavigator()->moveObserverTo(landscape->getLocation());
+		StelApp::getInstance().getCore()->moveObserverTo(landscape->getLocation());
 		// GZ Patch: allow change in fog, extinction, refraction parameters and light pollution
 		//QSettings* conf = StelApp::getInstance().getSettings();
 		//Q_ASSERT(conf);

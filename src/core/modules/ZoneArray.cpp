@@ -29,7 +29,7 @@
 #include "StelFileMgr.hpp"
 #include "StelGeodesicGrid.hpp"
 #include "StelObject.hpp"
-#include "StelNavigator.hpp"
+
 #include "RefractionExtinction.hpp"
 
 static unsigned int stel_bswap_32(unsigned int val) {
@@ -510,7 +510,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_insi
 	Vec3f vf;
 	const Star *const end = z->getStars() + z->size;
 	static const double d2000 = 2451545.0;
-	const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getNavigator()->getJDay()-d2000)/365.25) / star_position_scale;
+	const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
 	const float* tmpRcmag;
 	// GZ: TODO: exclude effects for no-Earth conditions?
 	for (const Star *s=z->getStars();s<end;++s)
@@ -529,7 +529,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_insi
 //			// (1) get stellar magnitude from packed format.
 //			float mag= 0.001f*mag_min + s->mag*(0.001f*mag_range)/mag_steps;
 //			// (2) compute alt-az coordinates from vf
-//			Vec3d altaz=nav->j2000ToAltAz(Vec3d(vf[0], vf[1], vf[2]));
+//			Vec3d altaz=core->j2000ToAltAz(Vec3d(vf[0], vf[1], vf[2]));
 //			// (2a) Option: immediately skip stars below -2 under horizon.
 //			if (altaz[2]<-0.035f) break;
 //			// (3) compute refraction and extinction effects:
@@ -546,7 +546,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_insi
 //			//if (*refRCmag<=0.f) break; // previous.
 //			tmpRcmag=refRCmag;
 //			// (4) return to equatorial system, but refracted.
-//			Vec3d vf_refracted=nav->altAzToJ2000(altaz);
+//			Vec3d vf_refracted=core->altAzToJ2000(altaz);
 //			vf[0]=vf_refracted[0];
 //			vf[1]=vf_refracted[1];
 //			vf[2]=vf_refracted[2];
@@ -563,11 +563,11 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_insi
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::searchAround(const StelNavigator* nav, int index, const Vec3d &v, double cosLimFov,
+void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const Vec3d &v, double cosLimFov,
 					  QList<StelObjectP > &result)
 {
 	static const double d2000 = 2451545.0;
-	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * ((nav->getJDay()-d2000)/365.25)/ star_position_scale;
+	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * ((core->getJDay()-d2000)/365.25)/ star_position_scale;
 	const SpecialZoneData<Star> *const z = getZones()+index;
 	Vec3f tmp;
 	Vec3f vf(v[0], v[1], v[2]);
