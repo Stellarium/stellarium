@@ -22,6 +22,7 @@
 #include "StelProjector.hpp"
 #include "StelProjectorType.hpp"
 #include "StelLocation.hpp"
+#include "StelSkyDrawer.hpp"
 #include <QString>
 #include <QStringList>
 #include <QTime>
@@ -115,6 +116,8 @@ public:
 	//! If not specified default the projection type is the default one set in the core.
 	StelProjectorP getProjection(const Mat4d& modelViewMat, RefractionMode refractionMode=RefractionAuto, ProjectionType projType=(ProjectionType)1000) const;
 
+	StelProjectorP getProjection(StelProjector::ModelViewTranformP modelViewTransform, ProjectionType projType=(ProjectionType)1000) const;
+
 	//! Get the current tone reproducer used in the core.
 	StelToneReproducer* getToneReproducer() {return toneConverter;}
 	//! Get the current tone reproducer used in the core.
@@ -152,16 +155,58 @@ public:
 	//! Get vision direction
 	void lookAtJ2000(const Vec3d& pos, const Vec3d& up);
 
-	Vec3d altAzToEquinoxEqu(const Vec3d& v) const {return matAltAzToEquinoxEqu*v;}
-	Vec3d equinoxEquToAltAz(const Vec3d& v) const {return matEquinoxEquToAltAz*v;}
-	Vec3d equinoxEquToJ2000(const Vec3d& v) const {return matEquinoxEquToJ2000*v;}
-	Vec3d altAzToJ2000(const Vec3d& v) const {return matEquinoxEquToJ2000*matAltAzToEquinoxEqu*v;}
+	Vec3d altAzToEquinoxEqu(const Vec3d& v, RefractionMode refMode=RefractionAuto) const
+	{
+		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+			return matAltAzToEquinoxEqu*v;
+		Vec3d r(v);
+		skyDrawer->getRefraction().backward(r);
+		r.transfo4d(matAltAzToEquinoxEqu);
+		return r;
+	}
+	Vec3d equinoxEquToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const
+	{
+		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+			return matEquinoxEquToAltAz*v;
+		Vec3d r(v);
+		r.transfo4d(matEquinoxEquToAltAz);
+		skyDrawer->getRefraction().forward(r);
+		return r;
+	}
+	Vec3d altAzToJ2000(const Vec3d& v, RefractionMode refMode=RefractionAuto) const
+	{
+		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+			return matEquinoxEquToJ2000*matAltAzToEquinoxEqu*v;
+		Vec3d r(v);
+		skyDrawer->getRefraction().backward(r);
+		r.transfo4d(matEquinoxEquToJ2000*matAltAzToEquinoxEqu);
+		return r;
+	}
+	Vec3d j2000ToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const
+	{
+		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+			return matJ2000ToAltAz*v;
+		Vec3d r(v);
+		r.transfo4d(matJ2000ToAltAz);
+		skyDrawer->getRefraction().forward(r);
+		return r;
+	}
 	Vec3d galacticToJ2000(const Vec3d& v) const {return matGalacticToJ2000*v;}
+	Vec3d equinoxEquToJ2000(const Vec3d& v) const {return matEquinoxEquToJ2000*v;}
 	Vec3d j2000ToEquinoxEqu(const Vec3d& v) const {return matJ2000ToEquinoxEqu*v;}
-	Vec3d j2000ToAltAz(const Vec3d& v) const {return matJ2000ToAltAz*v;}
 	Vec3d j2000ToGalactic(const Vec3d& v) const {return matJ2000ToGalactic*v;}
+
 	//! Transform vector from heliocentric ecliptic coordinate to altazimuthal
-	Vec3d heliocentricEclipticToAltAz(const Vec3d& v) const {return matHeliocentricEclipticToAltAz*v;}
+	Vec3d heliocentricEclipticToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const
+	{
+		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+			return matHeliocentricEclipticToAltAz*v;
+		Vec3d r(v);
+		r.transfo4d(matHeliocentricEclipticToAltAz);
+		skyDrawer->getRefraction().forward(r);
+		return r;
+	}
+
 	//! Transform from heliocentric coordinate to equatorial at current equinox (for the planet where the observer stands)
 	Vec3d heliocentricEclipticToEquinoxEqu(const Vec3d& v) const {return matHeliocentricEclipticToEquinoxEqu*v;}
 	//! Transform vector from heliocentric coordinate to false equatorial : equatorial
@@ -169,19 +214,28 @@ public:
 	Vec3d heliocentricEclipticToEarthPosEquinoxEqu(const Vec3d& v) const {return matAltAzToEquinoxEqu*matHeliocentricEclipticToAltAz*v;}
 
 	//! Get the modelview matrix for heliocentric ecliptic (Vsop87) drawing
-	const Mat4d getHeliocentricEclipticModelViewMat() const {return matAltAzModelView*matHeliocentricEclipticToAltAz;}
+	StelProjector::ModelViewTranformP getHeliocentricEclipticModelViewTransform(RefractionMode refMode=RefractionAuto) const
+	{
+		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+			return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matHeliocentricEclipticToAltAz));
+
+		Refraction* refr = new Refraction(skyDrawer->getRefraction());
+		// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
+		refr->setPreTransfoMat(matHeliocentricEclipticToAltAz);
+		refr->setPostTransfoMat(matAltAzModelView);
+		return StelProjector::ModelViewTranformP(refr);
+	}
+
 	//! Get the modelview matrix for observer-centric ecliptic (Vsop87) drawing
-	const Mat4d getObservercentricEclipticModelViewMat() const {return matAltAzModelView*matJ2000ToAltAz*matVsop87ToJ2000;}
+	const Mat4d getObservercentricEclipticModelViewTransform(RefractionMode refMode=RefractionAuto) const {return matAltAzModelView*matJ2000ToAltAz*matVsop87ToJ2000;}
 	//! Get the modelview matrix for observer-centric equatorial at equinox drawing
-	const Mat4d getEquinoxEquModelViewMat() const {return matAltAzModelView*matEquinoxEquToAltAz;}
+	const Mat4d getEquinoxEquModelViewTransform(RefractionMode refMode=RefractionAuto) const {return matAltAzModelView*matEquinoxEquToAltAz;}
 	//! Get the modelview matrix for observer-centric altazimuthal drawing
-	const Mat4d& getAltAzModelViewMat() const {return matAltAzModelView;}
-	//! Get the inverted modelview matrix for observer-centric altazimuthal drawing
-	const Mat4d& getInvertAltAzModelViewMat() const {return invertMatAltAzModelView;}
+	const Mat4d& getAltAzModelViewTransform(RefractionMode refMode=RefractionAuto) const {return matAltAzModelView;}
 	//! Get the modelview matrix for observer-centric J2000 equatorial drawing
-	const Mat4d getJ2000ModelViewMat() const {return matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;}
+	const Mat4d getJ2000ModelViewTransform(RefractionMode refMode=RefractionAuto) const {return matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;}
 	//! Get the modelview matrix for observer-centric Galactic equatorial drawing
-	const Mat4d getGalacticModelViewMat() const {return getJ2000ModelViewMat()*matGalacticToJ2000;}
+	const Mat4d getGalacticModelViewTransform(RefractionMode refMode=RefractionAuto) const {return getJ2000ModelViewTransform()*matGalacticToJ2000;}
 
 	//! Rotation matrix from equatorial J2000 to ecliptic (Vsop87)
 	static const Mat4d matJ2000ToVsop87;

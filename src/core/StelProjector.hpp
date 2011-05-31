@@ -48,7 +48,14 @@ public:
 		virtual void backward(Vec3d&) const =0;
 		virtual void forward(Vec3f&) const =0;
 		virtual void backward(Vec3f&) const =0;
+
+		virtual void combine(const Mat4d&)=0;
+
+		virtual Mat4d getApproximateLinearTransfo() const=0;
 	};
+	//! @typedef ModelViewTranformP
+	//! Shared pointer on a ModelViewTranform instance (implement reference counting)
+	typedef QSharedPointer<ModelViewTranform> ModelViewTranformP;
 
 	class Mat4dTransform: public ModelViewTranform
 	{
@@ -83,6 +90,17 @@ public:
 			v[1] = transfoMatf.r[4]*x + transfoMatf.r[5]*y + transfoMatf.r[6]*z;
 			v[2] = transfoMatf.r[8]*x + transfoMatf.r[9]*y + transfoMatf.r[10]*z;
 		}
+		void combine(const Mat4d& m)
+		{
+			Mat4f mf(m[0], m[1], m[2], m[3],
+							 m[4], m[5], m[6], m[7],
+							 m[8], m[9], m[10], m[11],
+							 m[12], m[13], m[14], m[15]);
+			transfoMat=transfoMat*m;
+			transfoMatf=transfoMatf*mf;
+		}
+
+		Mat4d getApproximateLinearTransfo() const {return transfoMat;}
 
 	private:
 		//! transfo matrix and invert
@@ -115,7 +133,7 @@ public:
 	};
 
 	//! Destructor
-	virtual ~StelProjector() {delete modelViewTransform;}
+	virtual ~StelProjector() {}
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods which must be reimplemented by all instance of StelProjector
@@ -357,7 +375,7 @@ public:
 		{return project(v1, win1) && project(v2, win2) && (checkInViewport(win1) || checkInViewport(win2));}
 
 	//! Get the current model view matrix.
-	const ModelViewTranform& getModelViewTransform() const {return *modelViewTransform;}
+	ModelViewTranformP getModelViewTransform() const {return modelViewTransform;}
 
 	//! Get the current projection matrix.
 	Mat4f getProjectionMatrix() const {return Mat4f(2.f/viewportXywh[2], 0, 0, 0, 0, 2.f/viewportXywh[3], 0, 0, 0, 0, -1., 0., -(2.f*viewportXywh[0] + viewportXywh[2])/viewportXywh[2], -(2.f*viewportXywh[1] + viewportXywh[3])/viewportXywh[3], 0, 1);}
@@ -373,7 +391,7 @@ public:
 
 protected:
 	//! Private constructor. Only StelCore can create instances of StelProjector.
-	StelProjector(ModelViewTranform* amodelViewTransform) : modelViewTransform(amodelViewTransform) {;}
+	StelProjector(ModelViewTranformP amodelViewTransform) : modelViewTransform(amodelViewTransform) {;}
 
 	//! Return whether the projection presents discontinuities. Used for optimization.
 	virtual bool hasDiscontinuity() const =0;
@@ -388,7 +406,7 @@ protected:
 	//! Initialize the bounding cap.
 	virtual void computeBoundingCap();
 
-	ModelViewTranform* modelViewTransform;	// Operator to apply (if not NULL) before the modelview projection step
+	ModelViewTranformP modelViewTransform;	// Operator to apply (if not NULL) before the modelview projection step
 
 	float flipHorz,flipVert;            // Whether to flip in horizontal or vertical directions
 	float pixelPerRad;                  // pixel per rad at the center of the viewport disk

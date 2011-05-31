@@ -69,7 +69,7 @@ bool MilkyWay::getFlagShow() const {return *fader;}
 
 void MilkyWay::draw(StelCore* core)
 {
-	const StelProjectorP prj = core->getProjection(core->getJ2000ModelViewMat()*
+	const StelProjectorP prj = core->getProjection(core->getJ2000ModelViewTransform()*
 			Mat4d::xrotation(M_PI/180.*23.)*
 			Mat4d::yrotation(M_PI/180.*120.)*
 			Mat4d::zrotation(M_PI/180.*7.));

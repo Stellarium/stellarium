@@ -458,10 +458,10 @@ void StelPainter::sRing(float rMin, float rMax, int slices, int stacks, int orie
 	{
 		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
 		Vec3f tmpv(0.f);
-		prj->getModelViewTransform().forward(tmpv); // -posCenterEye
+		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
 		lightPos3 -= tmpv;
 		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
-		prj->getModelViewTransform().backward(lightPos3);
+		prj->getModelViewTransform()->backward(lightPos3);
 		lightPos3.normalize();
 		ambientLight = light.getAmbient();
 		diffuseLight = light.getDiffuse();
@@ -1587,10 +1587,10 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	{
 		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
 		Vec3f tmpv(0.f);
-		prj->getModelViewTransform().forward(tmpv); // -posCenterEye
+		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
 		lightPos3 -= tmpv;
 		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
-		prj->getModelViewTransform().backward(lightPos3);
+		prj->getModelViewTransform()->backward(lightPos3);
 		lightPos3.normalize();
 		ambientLight = light.getAmbient();
 		diffuseLight = light.getDiffuse();

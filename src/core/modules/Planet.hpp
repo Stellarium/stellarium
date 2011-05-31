@@ -23,6 +23,7 @@
 #include <QString>
 
 #include "StelObject.hpp"
+#include "StelProjector.hpp"
 #include "VecMath.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
@@ -69,7 +70,7 @@ class Ring
 public:
 	Ring(double radiusMin,double radiusMax,const QString &texname);
 	~Ring(void);
-	void draw(StelPainter* painter,const Mat4d& mat,double screenSz);
+	void draw(StelPainter* painter, StelProjector::ModelViewTranformP transfo, double screenSz);
 	double getSize(void) const {return radiusMax;}
 private:
 	const double radiusMin;
