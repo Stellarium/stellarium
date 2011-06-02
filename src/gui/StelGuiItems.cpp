@@ -547,20 +547,7 @@ void BottomStelBar::updateText(bool updatePos)
 
 	QString str;
 	QTextStream wos(&str);
-	double currentFOV = core->getMovementMgr()->getCurrentFov();
-	wos << "FOV " << qSetRealNumberPrecision(3);
-	if (currentFOV>1)
-	{
-		wos << currentFOV << QChar(0x00B0);
-	}
-	if (currentFOV<=1 && currentFOV>0.017)
-	{
-		wos << 60 * currentFOV << QChar(0x02B9);
-	}
-	if (currentFOV<=0.017)
-	{
-		wos << 3600 * currentFOV << QChar(0x02BA);
-	}
+	wos << "FOV " << qSetRealNumberPrecision(3) << core->getMovementMgr()->getCurrentFov() << QChar(0x00B0);
 	if (fov->text()!=str)
 	{
 		updatePos = true;
@@ -581,8 +568,8 @@ void BottomStelBar::updateText(bool updatePos)
 		QRectF rectCh = getButtonsBoundingRect();
 		location->setPos(0, 0);
 		datetime->setPos(rectCh.right()-datetime->boundingRect().width()-5,0);
-		fov->setPos(datetime->x()-230, 0);
-		fps->setPos(datetime->x()-140, 0);
+		fov->setPos(datetime->x()-200, 0);
+		fps->setPos(datetime->x()-95, 0);
 	}
 }
 
