@@ -38,6 +38,20 @@ public:
 private:
 	// Font used for displaying our text
 	QFont font;
+
+	//! replace the json file with the default from the compiled-in resource
+	void restoreDefaultJsonFile(void);
+
+	//! read the json file and create the meteor showers.
+	void readJsonFile(void);
+
+	//! Creates a backup of the meteors.json file called meteors.json.old
+	//! @param deleteOriginal if true, the original file is removed, else not
+	//! @return true on OK, false on failure
+	bool backupJsonFile(bool deleteOriginal=false);
+
+	QString sneJsonPath;
+
 };
 
 

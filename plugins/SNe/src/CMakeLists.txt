@@ -6,6 +6,9 @@ SET(SNe_SRCS
   SNe.hpp
   SNe.cpp)
 
+SET(SNe_RES ../resources/SNe.qrc)
+QT4_ADD_RESOURCES(SNe_RES_CXX ${SNe_RES})
+
 SET(SNe_MOC_HDRS
  SNe.hpp)
 
@@ -15,7 +18,7 @@ SET(extLinkerOption ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)
-	ADD_LIBRARY(SNe MODULE ${SNe_SRCS} ${SNe_MOC_SRCS})
+	ADD_LIBRARY(SNe MODULE ${SNe_SRCS} ${SNe_MOC_SRCS} ${SNe_RES_CXX})
 	IF(APPLE)
 		FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
 		MARK_AS_ADVANCED(OPENGL_LIBRARY)
@@ -35,7 +38,7 @@ ENDIF()
 
 ############### For building the static library ######################
 IF(BUILD_STATIC_PLUGINS)
-	ADD_LIBRARY(SNe-static STATIC ${SNe_SRCS} ${SNe_MOC_SRCS})
+	ADD_LIBRARY(SNe-static STATIC ${SNe_SRCS} ${SNe_MOC_SRCS} ${SNe_RES_CXX})
 	SET_TARGET_PROPERTIES(SNe-static PROPERTIES OUTPUT_NAME "SNe")
 	TARGET_LINK_LIBRARIES(SNe-static ${extLinkerOption})
 	SET_TARGET_PROPERTIES(SNe-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
