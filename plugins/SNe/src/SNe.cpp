@@ -22,9 +22,13 @@
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelJsonParser.hpp"
+#include "StelFileMgr.hpp"
 #include "SNe.hpp"
 
 #include <QDebug>
+#include <QFileInfo>
+#include <QFile>
 
 /*************************************************************************
  This method is the one called automatically by the StelModuleMgr just 
@@ -37,6 +41,8 @@ StelModule* SNeStelPluginInterface::getStelModule() const
 
 StelPluginInfo SNeStelPluginInterface::getPluginInfo() const
 {
+	Q_INIT_RESOURCE(SNe);
+
 	StelPluginInfo info;
 	info.id = "SNe";
 	info.displayedName = q_("Historical supernova");
@@ -81,7 +87,29 @@ double SNe::getCallOrder(StelModuleActionName actionName) const
 *************************************************************************/
 void SNe::init()
 {
-	qDebug() << "init called for HelloStelModule";
+	try
+	{
+		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/SNe");
+
+		sneJsonPath = StelFileMgr::findFile("modules/SNe", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/sne.json";
+	}
+	catch (std::runtime_error &e)
+	{
+		qWarning() << "SNe::init error: " << e.what();
+		return;
+	}
+
+	// If the json file does not already exist, create it from the resource in the QT resource
+	if(!QFileInfo(sneJsonPath).exists())
+	{
+		qDebug() << "SNe::init sne.json does not exist - copying default file to " << sneJsonPath;
+		restoreDefaultJsonFile();
+	}
+
+	qDebug() << "SNe::init using sne.json file: " << sneJsonPath;
+
+	readJsonFile();
+
 }
 
 /*************************************************************************
@@ -95,3 +123,60 @@ void SNe::draw(StelCore* core)
 	painter.drawText(300, 300, "Hello World!");
 }
 
+void SNe::restoreDefaultJsonFile(void)
+{
+	if (QFileInfo(sneJsonPath).exists())
+		backupJsonFile(true);
+
+	QFile src(":/SNe/sne.json");
+	if (!src.copy(sneJsonPath))
+	{
+		qWarning() << "SNe::restoreDefaultJsonFile cannot copy json resource to " + sneJsonPath;
+	}
+	else
+	{
+		qDebug() << "SNe::init copied default meteors.json to " << sneJsonPath;
+		// The resource is read only, and the new file inherits this...  make sure the new file
+		// is writable by the Stellarium process so that updates can be done.
+		QFile dest(sneJsonPath);
+		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
+	}
+}
+
+bool SNe::backupJsonFile(bool deleteOriginal)
+{
+	QFile old(sneJsonPath);
+	if (!old.exists())
+	{
+		qWarning() << "SNe::backupJsonFile no file to backup";
+		return false;
+	}
+
+	QString backupPath = sneJsonPath + ".old";
+	if (QFileInfo(backupPath).exists())
+		QFile(backupPath).remove();
+
+	if (old.copy(backupPath))
+	{
+		if (deleteOriginal)
+		{
+			if (!old.remove())
+			{
+				qWarning() << "SNe::backupJsonFile WARNING - could not remove old sne.json file";
+				return false;
+			}
+		}
+	}
+	else
+	{
+		qWarning() << "SNe::backupJsonFile WARNING - failed to copy meteors.json to sne.json.old";
+		return false;
+	}
+
+	return true;
+}
+
+void SNe::readJsonFile(void)
+{
+	//
+}
