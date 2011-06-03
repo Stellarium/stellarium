@@ -77,7 +77,9 @@ void StelMovementMgr::init()
 	flagAutoZoomOutResetsDirection = conf->value("navigation/auto_zoom_out_resets_direction", true).toBool();
 	flagEnableMouseNavigation = conf->value("navigation/flag_enable_mouse_navigation",true).toBool();
 
-	minFov = 0.0001;
+	//minFov = 0.0001;
+	// GZ: This value should be configurable! Zooming in too much is useless for archaeoastronomy.
+  minFov = conf->value("navigation/min_fov",0.0001).toDouble();
 	maxFov = 100.;
 	initFov = conf->value("navigation/init_fov",60.f).toFloat();
 	currentFov = initFov;
