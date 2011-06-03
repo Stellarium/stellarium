@@ -1,6 +1,7 @@
 #ifndef _SCENERY3DDIALOG_HPP_
 #define _SCENERY3DDIALOG_HPP_
 
+#include "fixx11h.h"
 #include "StelDialog.hpp"
 #include "ui_scenery3dDialog.h"
 

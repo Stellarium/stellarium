@@ -21,6 +21,7 @@
 #ifndef _SCENERY3D_HPP_
 #define _SCENERY3D_HPP_
 
+#include "fixx11h.h"
 #include "StelGui.hpp"
 #include "StelModule.hpp"
 #include "StelPainter.hpp"
