@@ -36,7 +36,6 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp" //Needed for getting StelNavigator instances
 #include "StelObject.hpp"
-#include "StelNavigator.hpp"
 #include "InterpolatedPosition.hpp"
 
 qint64 getNow(void);
@@ -136,7 +135,7 @@ public:
 	{
 		return true;
 	}
-	Vec3d getJ2000EquatorialPos(const StelNavigator*) const
+	Vec3d getJ2000EquatorialPos(const StelCore*) const
 	{
 		return XYZ;
 	}
@@ -167,7 +166,7 @@ public:
 	}
 	
 private:
-	Vec3d getJ2000EquatorialPos(const StelNavigator *nav=0) const;
+	Vec3d getJ2000EquatorialPos(const StelCore* core=0) const;
 	bool prepareCommunication();
 	void performCommunication();
 	void telescopeGoto(const Vec3d &j2000Pos);
