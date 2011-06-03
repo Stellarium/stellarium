@@ -670,6 +670,12 @@
                </item>
                <item>
                 <widget class="QSpinBox" name="lightPollutionSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>70</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
@@ -738,42 +744,6 @@
                  </property>
                  <property name="value">
                   <double>10.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="extinctionLayout">
-               <item>
-                <widget class="QLabel" name="extinctionLabel">
-                 <property name="toolTip">
-                  <string/>
-                 </property>
-                 <property name="whatsThis">
-                  <string>Extinction is the loss of star brightness due to Earth's atmosphere. It is given in mag/airmass, where airmass is number of atmospheres light has to pass. (zenith: 1; horizon: about 40)</string>
-                 </property>
-                 <property name="text">
-                  <string>Extinction Coefficient:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="extinctionDoubleSpinBox">
-                 <property name="toolTip">
-                  <string>Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 for murky conditions.</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="maximum">
-                  <double>3.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.010000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>0.220000000000000</double>
                  </property>
                 </widget>
                </item>
@@ -1689,7 +1659,6 @@
   <tabstop>lightPollutionSpinBox</tabstop>
   <tabstop>pressureDoubleSpinBox</tabstop>
   <tabstop>temperatureDoubleSpinBox</tabstop>
-  <tabstop>extinctionDoubleSpinBox</tabstop>
   <tabstop>starLabelCheckBox</tabstop>
   <tabstop>starsLabelsHorizontalSlider</tabstop>
   <tabstop>nebulaLabelCheckBox</tabstop>
@@ -1726,8 +1695,6 @@
   <tabstop>showEquatorialJ2000GridCheckBox</tabstop>
   <tabstop>showEquatorialGridCheckBox</tabstop>
  </tabstops>
- <resources>
-  <include location="../../data/gui/guiRes.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
