@@ -23,7 +23,6 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelLocation.hpp"
-#include "StelNavigator.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelLocaleMgr.hpp"
@@ -189,7 +188,7 @@ void Satellites::init()
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	// Handle changes to the observer location:
-	connect(StelApp::getInstance().getCore()->getNavigator(), SIGNAL(locationChanged(StelLocation)), this, SLOT(observerLocationChanged(StelLocation)));
+	connect(StelApp::getInstance().getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(observerLocationChanged(StelLocation)));
 	
 	//Load the module's custom style sheets
 	QFile styleSheetFile;
@@ -279,7 +278,7 @@ double Satellites::getCallOrder(StelModuleActionName actionName) const
 QList<StelObjectP> Satellites::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
 {
 	QList<StelObjectP> result;
-	if (!hintFader || StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().planetName != earth->getEnglishName())
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
 		return result;
 
 	Vec3d v(av);
@@ -304,7 +303,7 @@ QList<StelObjectP> Satellites::searchAround(const Vec3d& av, double limitFov, co
 
 StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 {
-	if (!hintFader || StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().planetName != earth->getEnglishName())
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
 		return NULL;
 
 	QString objw = nameI18n.toUpper();
@@ -323,7 +322,7 @@ StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 
 StelObjectP Satellites::searchByName(const QString& englishName) const
 {
-	if (!hintFader || StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().planetName != earth->getEnglishName())
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
 		return NULL;
 
 	QString objw = englishName.toUpper();
@@ -342,7 +341,7 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
-	if (!hintFader || StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().planetName != earth->getEnglishName())
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
 		return result;
 	if (maxNbItem==0) return result;
 
@@ -977,7 +976,7 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 
 void Satellites::update(double deltaTime)
 {
-	if (StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().planetName != earth->getEnglishName() || (!hintFader && hintFader.getInterstate() <= 0.))
+	if (StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || (!hintFader && hintFader.getInterstate() <= 0.))
 		return;
 
 	hintFader.update((int)(deltaTime*1000));
@@ -991,7 +990,7 @@ void Satellites::update(double deltaTime)
 
 void Satellites::draw(StelCore* core)
 {
-	if (core->getNavigator()->getCurrentLocation().planetName != earth->getEnglishName() || (!hintFader && hintFader.getInterstate() <= 0.))
+	if (core->getCurrentLocation().planetName != earth->getEnglishName() || (!hintFader && hintFader.getInterstate() <= 0.))
 		return;
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
@@ -1016,14 +1015,13 @@ void Satellites::draw(StelCore* core)
 
 void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 {
-	const StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Satellite");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
-		Vec3d pos=obj->getJ2000EquatorialPos(nav);
+		Vec3d pos=obj->getJ2000EquatorialPos(core);
 		Vec3d screenpos;
 
 		// Compute 2D pos and return if outside screen

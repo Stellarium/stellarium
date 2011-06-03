@@ -219,7 +219,7 @@ static double c_JD = 0.0, c_longitude = 0.0, c_obliquity = 0.0, c_ecliptic = 0.0
 void get_nutation (double JD, struct ln_nutation * nutation)
 {
 
-	double D,M,MM,F,O,T,T2,T3;
+	double D,M,MM,F,O,T;
 	double coeff_sine, coeff_cos;
 	int i;
 

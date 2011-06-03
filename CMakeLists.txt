@@ -170,6 +170,11 @@ IF (BUILD_STATIC_PLUGINS)
 	  DOC "cfitsio link options")
 	SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
   ENDIF()
+
+  IF (USE_PLUGIN_LOGBOOK)
+	SET(QT_USE_QTSQL TRUE) # For LogBook we also need SQL module
+  ENDIF()
+
 ENDIF()
 
 # Custom target used to manage dependencies of stellarium -> Static plugins
