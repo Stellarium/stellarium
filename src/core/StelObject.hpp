@@ -87,7 +87,7 @@ public:
 	virtual QString getNameI18n() const = 0;
 
 	//! Get observer-centered equatorial coordinates at equinox J2000
-	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const = 0;
+	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const = 0;
 
 	//! Get observer-centered equatorial coordinate at the current equinox
 	//! The frame has it's Z axis at the planet's current rotation axis
