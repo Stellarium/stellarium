@@ -59,14 +59,17 @@ for the standard version of Google Sketchup. If you are not willing to
 afford Sketchup Pro, you have to find another way to export a textured
 OBJ model. 
 
-One good exporter is available in the Kerkythea renderer
-project available at <http://www.kerkythea.net/joomla/>. 
-Deselect any selection, then export your model to the Kerkythea XML
-format with settings Yes-Yes-No-No-No (Or, with selection enabled,
-make sure settings are No-Yes-Yes-No-No-No).  You do not have to
-launch Kerkythea. Then, use the KT2OBJ converter to create an OBJ.
-You can delete the XML after the conversion.  Note that some texture
-coordinates may not be exported correctly.
+One good exporter is available in the Kerkythea renderer project
+available at <http://www.kerkythea.net/joomla/>.  You need SU2KT 3.17
+or better, and KT2OBJ 1.1.0 or better.  Deselect any selection, then
+export your model to the Kerkythea XML format with settings
+Geometry:Yes-Lights:Yes-Clay:No-Photomatched:Yes-DefaultUVs:No-Instanced:No
+(Or, with selection enabled, make sure settings are
+No-Yes-Yes-No-Yes-No-No).  You do not have to launch Kerkythea. Then,
+use the KT2OBJ converter to create an OBJ.  You can delete the XML
+after the conversion.  Note that some texture coordinates may not be
+exported correctly. The setting Photomatched:Yes seems now to have
+corrected this issue, esp. with distorted/manually shifted textures.
 
 Working alternative: ObjExporter.rb by Honing.  Here, export with
 settings 0xxx00. This will not create a TX... folder but dump all
@@ -78,7 +81,7 @@ coordinates in any order of X, Y, Z - all those can be properly
 configured.
 
 Recently, another free OBJ exporter has been made available by user TIG.
-OBJexporter. However, version 1.2 has bad texture coordinates.
+OBJexporter. However, as of version 1.2 it still has bad texture coordinates.
 
 Yet another exporter, su2objmtl, does also not provide good texture
 coordinates and cannot be recommended.
