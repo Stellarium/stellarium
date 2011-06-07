@@ -29,11 +29,13 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QFile>
+#include <QVariantMap>
+#include <QVariant>
 
-/*************************************************************************
+/*
  This method is the one called automatically by the StelModuleMgr just 
  after loading the dynamic library
-*************************************************************************/
+*/
 StelModule* SNeStelPluginInterface::getStelModule() const
 {
 	return new SNe();
@@ -55,25 +57,25 @@ StelPluginInfo SNeStelPluginInterface::getPluginInfo() const
 Q_EXPORT_PLUGIN2(SNe, SNeStelPluginInterface)
 
 
-/*************************************************************************
+/*
  Constructor
-*************************************************************************/
+*/
 SNe::SNe()
 {
-	setObjectName("SNe");
-	font.setPixelSize(25);
+	setObjectName("SNe");	
 }
 
-/*************************************************************************
+/*
  Destructor
-*************************************************************************/
+*/
 SNe::~SNe()
 {
+	//
 }
 
-/*************************************************************************
+/*
  Reimplementation of the getCallOrder method
-*************************************************************************/
+*/
 double SNe::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
@@ -82,9 +84,9 @@ double SNe::getCallOrder(StelModuleActionName actionName) const
 }
 
 
-/*************************************************************************
+/*
  Init our module
-*************************************************************************/
+*/
 void SNe::init()
 {
 	try
@@ -99,7 +101,7 @@ void SNe::init()
 		return;
 	}
 
-	// If the json file does not already exist, create it from the resource in the QT resource
+	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(!QFileInfo(sneJsonPath).exists())
 	{
 		qDebug() << "SNe::init sne.json does not exist - copying default file to " << sneJsonPath;
@@ -112,17 +114,19 @@ void SNe::init()
 
 }
 
-/*************************************************************************
- Draw our module. This should print "Hello world!" in the main window
-*************************************************************************/
+/*
+ Draw our module. This should print name of first SNe in the main window
+*/
 void SNe::draw(StelCore* core)
 {
 	StelPainter painter(core->getProjection2d());
-	painter.setColor(1,1,1,1);
-	painter.setFont(font);
-	painter.drawText(300, 300, "Hello World!");
+	painter.setColor(1,1,1,1);	
+	painter.drawText(300, 300, QString("SN %1").arg(supernova[0].name));
 }
 
+/*
+  Replace the JSON file with the default from the compiled-in resource
+*/
 void SNe::restoreDefaultJsonFile(void)
 {
 	if (QFileInfo(sneJsonPath).exists())
@@ -135,7 +139,7 @@ void SNe::restoreDefaultJsonFile(void)
 	}
 	else
 	{
-		qDebug() << "SNe::init copied default meteors.json to " << sneJsonPath;
+		qDebug() << "SNe::init copied default sne.json to " << sneJsonPath;
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(sneJsonPath);
@@ -143,6 +147,9 @@ void SNe::restoreDefaultJsonFile(void)
 	}
 }
 
+/*
+  Creates a backup of the sne.json file called sne.json.old
+*/
 bool SNe::backupJsonFile(bool deleteOriginal)
 {
 	QFile old(sneJsonPath);
@@ -169,14 +176,58 @@ bool SNe::backupJsonFile(bool deleteOriginal)
 	}
 	else
 	{
-		qWarning() << "SNe::backupJsonFile WARNING - failed to copy meteors.json to sne.json.old";
+		qWarning() << "SNe::backupJsonFile WARNING - failed to copy sne.json to sne.json.old";
 		return false;
 	}
 
 	return true;
 }
 
+/*
+  Read the JSON file and create list of supernovaes.
+*/
 void SNe::readJsonFile(void)
 {
-	//
+	setSNeMap(loadSNeMap());
+}
+
+/*
+  Parse JSON file and load supernovaes to map
+*/
+QVariantMap SNe::loadSNeMap(QString path)
+{
+	if (path.isEmpty())
+	    path = sneJsonPath;
+
+	QVariantMap map;
+	QFile jsonFile(path);
+	if (!jsonFile.open(QIODevice::ReadOnly))
+	    qWarning() << "SNe::loadSNeMap cannot open " << path;
+	else
+	    map = StelJsonParser::parse(jsonFile.readAll()).toMap();
+
+	jsonFile.close();
+	return map;
+}
+
+/*
+  Set items for array of struct from data map
+*/
+void SNe::setSNeMap(const QVariantMap& map)
+{
+	QVariantMap sneMap = map.value("supernova").toMap();
+	int numRows = 0;
+	foreach(QString sneKey, sneMap.keys())
+	{
+		QVariantMap sneData = sneMap.value(sneKey).toMap();
+
+		supernova[numRows].name = sneKey;
+		supernova[numRows].type = sneData.value("type").toString();
+		supernova[numRows].maxMagnitude = sneData.value("maxMagnitude").toFloat();
+		supernova[numRows].peakJD = sneData.value("peakJD").toDouble();
+		supernova[numRows].alpha = sneData.value("alpha").toDouble();
+		supernova[numRows].delta = sneData.value("delta").toDouble();
+
+		numRows++;
+	}
 }
