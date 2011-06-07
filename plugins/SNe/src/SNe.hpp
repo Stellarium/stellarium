@@ -21,11 +21,23 @@
 
 #include "StelModule.hpp"
 #include <QFont>
+#include <QVariantMap>
+#include <QDateTime>
 
 //! This is an example of a plug-in which can be dynamically loaded into stellarium
 class SNe : public StelModule
 {
 public:
+	struct sne_t
+	{
+		QString name;
+		QString type;
+		float maxMagnitude;
+		double peakJD;
+		double alpha;
+		double delta;
+	};
+
 	SNe();
 	virtual ~SNe();
 
@@ -42,15 +54,23 @@ private:
 	//! replace the json file with the default from the compiled-in resource
 	void restoreDefaultJsonFile(void);
 
-	//! read the json file and create the meteor showers.
+	//! read the json file and create list of supernovaes.
 	void readJsonFile(void);
 
-	//! Creates a backup of the meteors.json file called meteors.json.old
+	//! Creates a backup of the sne.json file called sne.json.old
 	//! @param deleteOriginal if true, the original file is removed, else not
 	//! @return true on OK, false on failure
 	bool backupJsonFile(bool deleteOriginal=false);
 
+	//! parse JSON file and load supernovaes to map
+	QVariantMap loadSNeMap(QString path=QString());
+
+	//! set items for array of struct from data map
+	void setSNeMap(const QVariantMap& map);
+
 	QString sneJsonPath;
+
+	sne_t supernova[25];
 
 };
 
