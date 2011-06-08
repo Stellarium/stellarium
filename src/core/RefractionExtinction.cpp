@@ -17,48 +17,61 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * Refraction and extinction computations.
- * Implementation: 2010-03-23 GZ=Georg Zotti, Georg.Zotti@univie.ac.at
+ * Principal implementation: 2010-03-23 GZ=Georg Zotti, Georg.Zotti@univie.ac.at
  */
 
 #include "RefractionExtinction.hpp"
+
+
+// To be decided: The following should be either 0 or 40 (or 42? ;-)
+const float Extinction::SUBHORIZONTAL_AIRMASS=0.0f;
 
 Extinction::Extinction() : ext_coeff(0.20f)
 {
 }
 
-void Extinction::forward(Vec3d *altAzPos, float *mag, const int size) const
+//  altAzPos is the normalized star position vector AFTER REFRACTION, and its z component sin(altitude).
+void Extinction::forward(const Vec3d *altAzPos, float *mag, const int num) const
 {
-	// Assuming altAzPos is the normalized star position vector, and its z component sin(altitude).
-	for (int i=0; i<size; ++i)
-	{
-		float geom_alt_deg=(180.f/M_PI)*std::asin(altAzPos[i][2]);
-		if (geom_alt_deg > -2.f)
-		{
-			// now altitude is corrected, but object still too bright.
-			// note that sin(h)=cos(z)...
-			mag[i] += airmass(altAzPos[i][2], true) * ext_coeff;
-		}
-	}
+	for (int i=0; i<num; ++i) mag[i] += airmass(altAzPos[i][2], true) * ext_coeff;
 }
-
-void Extinction::backward(Vec3d *altAzPos, float *mag, const int size) const
+void Extinction::forward(const Vec3f *altAzPos, float *mag, const int num) const
 {
-	// going from observed position/magnitude to geometrical position and atmosphere-free mag.
-	for (int i=0; i<size; ++i)
-	{
-		float obs_alt_deg=(180.f/M_PI)*std::asin(altAzPos[i][2]);
-		if (obs_alt_deg > -2.f)
-		{
-			mag[i] -= airmass(altAzPos[i][2], true) * ext_coeff;
-		}
-	}
+	for (int i=0; i<num; ++i) mag[i] += airmass(altAzPos[i][2], true) * ext_coeff;
+}
+// If only sin(altitude) is available:
+void Extinction::forward(const double *sinAlt, float *mag, const int num) const
+{
+	for (int i=0; i<num; ++i) mag[i] += airmass(sinAlt[i], true) * ext_coeff;
+}
+void Extinction::forward(const float *sinAlt, float *mag, const int num) const
+{
+	for (int i=0; i<num; ++i) mag[i] += airmass(sinAlt[i], true) * ext_coeff;
+}
+// from observed magnitude in apparent (observed) altitude to atmosphere-free mag, still in apparent, refracted altitude.
+void Extinction::backward(const Vec3d *altAzPos, float *mag, const int num) const
+{
+	for (int i=0; i<num; ++i) mag[i] -= airmass(altAzPos[i][2], true) * ext_coeff;
+}
+void Extinction::backward(const Vec3f *altAzPos, float *mag, const int num) const
+{
+	for (int i=0; i<num; ++i) mag[i] -= airmass(altAzPos[i][2], true) * ext_coeff;
+}
+// If only sin(altitude) is available:
+void Extinction::backward(const double *sinAlt, float *mag, const int num) const
+{
+	for (int i=0; i<num; ++i) mag[i] -= airmass(sinAlt[i], true) * ext_coeff;
+}
+void Extinction::backward(const float *sinAlt, float *mag, const int num) const
+{
+	for (int i=0; i<num; ++i) mag[i] -= airmass(sinAlt[i], true) * ext_coeff;
 }
 
 // airmass computation for cosine of zenith angle z
-float Extinction::airmass(float cosZ, bool apparent_z) const
+float Extinction::airmass(const float cosZ, const bool apparent_z) const
 {
 	if (cosZ<-0.035f)
-		return 0.0f; // Safety: Do nothing for below -2 degrees.
+	    return Extinction::SUBHORIZONTAL_AIRMASS; // Safety: 0 or 40 for below -2 degrees.
 
 	float X;
 	if (apparent_z)
@@ -77,11 +90,28 @@ float Extinction::airmass(float cosZ, bool apparent_z) const
 }
 
 
-void Extinction::setExtinctionCoefficient(float k)
-{
-	ext_coeff=k;
-}
-
+// The following 3 are to be configured, the rest is derived.
+// Recommendations: -4.9/-4.3/0.1: sharp but continuous transition, no effects below -5.
+//                  -4.3/-4.3/0.7: sharp but continuous transition, no effects below -5. Maybe better for picking?
+//                  -3/-3/2: "strange" zone 2 degrees wide. Both formulae are close near -3. Actually, refraction formulae dubious below 0
+//                   0/0/1: "strange zone 1 degree wide just below horizon, no effect below -1. Actually, refraction formulae dubious below 0! But it looks stupid, see the sun!
+// This must be -5 or higher
+const double Refraction::MIN_GEO_ALTITUDE_DEG=-3;
+// this must be -4.3 or higher
+const double Refraction::MIN_APP_ALTITUDE_DEG=-3;
+// this must be positive. Transition zone goes that far below the values just specified.
+const double Refraction::TRANSITION_WIDTH_DEG=2;
+const double Refraction::MIN_GEO_ALTITUDE_RAD=Refraction::MIN_GEO_ALTITUDE_DEG*M_PI/180.0;
+const double Refraction::MIN_GEO_ALTITUDE_SIN=std::sin(Refraction::MIN_GEO_ALTITUDE_RAD);
+const double Refraction::MIN_APP_ALTITUDE_RAD=Refraction::MIN_APP_ALTITUDE_DEG*M_PI/180.0;
+const double Refraction::MIN_APP_ALTITUDE_SIN=std::sin(Refraction::MIN_APP_ALTITUDE_RAD);
+const float Refraction::MIN_GEO_ALTITUDE_DEG_F=(float)Refraction::MIN_GEO_ALTITUDE_DEG;
+const float Refraction::MIN_GEO_ALTITUDE_RAD_F=(float)Refraction::MIN_GEO_ALTITUDE_RAD;
+const float Refraction::MIN_GEO_ALTITUDE_SIN_F=(float)Refraction::MIN_GEO_ALTITUDE_SIN;
+const float Refraction::MIN_APP_ALTITUDE_DEG_F=(float)Refraction::MIN_APP_ALTITUDE_DEG;
+const float Refraction::MIN_APP_ALTITUDE_RAD_F=(float)Refraction::MIN_APP_ALTITUDE_RAD;
+const float Refraction::MIN_APP_ALTITUDE_SIN_F=(float)Refraction::MIN_APP_ALTITUDE_SIN;
+const double Refraction::TRANSITION_WIDTH_DEG_F=(float)Refraction::TRANSITION_WIDTH_DEG;
 
 Refraction::Refraction() : pressure(1013.f), temperature(10.f),
 	preTransfoMat(Mat4d::identity()), invertPreTransfoMat(Mat4d::identity()), preTransfoMatf(Mat4f::identity()), invertPreTransfoMatf(Mat4f::identity()),
@@ -124,7 +154,7 @@ void Refraction::forward(Vec3d& altAzPos) const
 	const double length = altAzPos.length();
 
 	double geom_alt_deg=180./M_PI*std::asin(altAzPos[2]/length);
-	if (geom_alt_deg > -2.)
+	if (geom_alt_deg > Refraction::MIN_GEO_ALTITUDE_DEG)
 	{
 		// refraction from Saemundsson, S&T1986 p70 / in Meeus, Astr.Alg.
 		float r=press_temp_corr_Saemundson / std::tan((geom_alt_deg+10.3f/(geom_alt_deg+5.11f))*M_PI/180.f) + 0.0019279f;
@@ -133,13 +163,11 @@ void Refraction::forward(Vec3d& altAzPos) const
 			geom_alt_deg=90.; // SAFETY, SHOULD NOT BE NECESSARY
 		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.)*length;
 	}
-	else if(geom_alt_deg>-90.)
+	else if(geom_alt_deg>Refraction::MIN_GEO_ALTITUDE_DEG-Refraction::TRANSITION_WIDTH_DEG)
 	{
-		// Avoids the jump below -2 by interpolating linearly between -2 and -7
-		float r=press_temp_corr_Saemundson / std::tan((-2.+10.3f/(-2.+5.11f))*M_PI/180.f) + 0.0019279f;
-		geom_alt_deg += r*(geom_alt_deg+90.)/88;
-		if (geom_alt_deg < -90.)
-			geom_alt_deg=-90.; // SAFETY, SHOULD NOT BE NECESSARY
+		// Avoids the jump near -5 by interpolating linearly between MIN_GEO_ALTITUDE_DEG and bottom of transition zone
+		float r_min=press_temp_corr_Saemundson / std::tan((Refraction::MIN_GEO_ALTITUDE_DEG+10.3f/(Refraction::MIN_GEO_ALTITUDE_DEG+5.11f))*M_PI/180.f) + 0.0019279f;
+		geom_alt_deg += r_min*(geom_alt_deg-(Refraction::MIN_GEO_ALTITUDE_DEG-Refraction::TRANSITION_WIDTH_DEG))/Refraction::TRANSITION_WIDTH_DEG;
 		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.)*length;
 	}
 	altAzPos.transfo4d(postTransfoMat);
@@ -148,21 +176,23 @@ void Refraction::forward(Vec3d& altAzPos) const
 void Refraction::backward(Vec3d& altAzPos) const
 {
 	altAzPos.transfo4d(invertPostTransfoMat);
-	// going from observed position/magnitude to geometrical position and atmosphere-free mag.
+	// going from apparent (observed) position to geometrical position.
 	const double length = altAzPos.length();
 	double obs_alt_deg=180./M_PI*std::asin(altAzPos[2]/length);
-	if (obs_alt_deg > -2.)
+	if (obs_alt_deg > Refraction::MIN_APP_ALTITUDE_DEG)
 	{
 		// refraction from Bennett, in Meeus, Astr.Alg.
 		float r=press_temp_corr_Bennett / std::tan((obs_alt_deg+7.31/(obs_alt_deg+4.4f))*M_PI/180.f) + 0.0013515f;
+		if (r>0.5) r=0.5*(r-0.5)+0.5; // reduce silly lobe.
 		obs_alt_deg -= r;
 		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.)*length;
 	}
-	else if (obs_alt_deg > -90.)
+	else if (obs_alt_deg > Refraction::MIN_APP_ALTITUDE_DEG-Refraction::TRANSITION_WIDTH_DEG)
 	{
 		// refraction from Bennett, in Meeus, Astr.Alg.
-		float r=press_temp_corr_Bennett / std::tan((-2.+7.31/(-2.+4.4f))*M_PI/180.f) + 0.0013515f;
-		obs_alt_deg -= r*(obs_alt_deg+90.)/88;
+		float r_min=press_temp_corr_Bennett / std::tan((Refraction::MIN_APP_ALTITUDE_DEG+7.31/(Refraction::MIN_APP_ALTITUDE_DEG+4.4f))*M_PI/180.f) + 0.0013515f;
+		if (r_min>0.5) r_min=0.5*(r_min-0.5)+0.5; // reduce silly lobe.
+		obs_alt_deg -= r_min*(obs_alt_deg-(Refraction::MIN_APP_ALTITUDE_DEG-Refraction::TRANSITION_WIDTH_DEG))/Refraction::TRANSITION_WIDTH_DEG;
 		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.)*length;
 	}
 	altAzPos.transfo4d(invertPreTransfoMat);
@@ -173,7 +203,7 @@ void Refraction::forward(Vec3f& altAzPos) const
 	altAzPos.transfo4d(preTransfoMatf);
 	const float length = altAzPos.length();
 	float geom_alt_deg=180.f/M_PI*std::asin(altAzPos[2]/length);
-	if (geom_alt_deg > -2.f)
+	if (geom_alt_deg > Refraction::MIN_GEO_ALTITUDE_DEG_F)
 	{
 		// refraction from Saemundsson, S&T1986 p70 / in Meeus, Astr.Alg.
 		float r=press_temp_corr_Saemundson / std::tan((geom_alt_deg+10.3f/(geom_alt_deg+5.11f))*M_PI/180.f) + 0.0019279f;
@@ -182,13 +212,11 @@ void Refraction::forward(Vec3f& altAzPos) const
 			geom_alt_deg=90.f; // SAFETY, SHOULD NOT BE NECESSARY
 		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.f)*length;
 	}
-	else if(geom_alt_deg>-90.)
+	else if(geom_alt_deg>Refraction::MIN_GEO_ALTITUDE_DEG_F-Refraction::TRANSITION_WIDTH_DEG_F)
 	{
-		// Avoids the jump below -2 by interpolating linearly between -2 and -7
-		float r=press_temp_corr_Saemundson / std::tan((-2.+10.3f/(-2.+5.11f))*M_PI/180.f) + 0.0019279f;
-		geom_alt_deg += r*(geom_alt_deg+90.)/88;
-		if (geom_alt_deg < -90.)
-			geom_alt_deg=-90.; // SAFETY, SHOULD NOT BE NECESSARY
+		// Avoids the jump below -5 by interpolating linearly between MIN_GEO_ALTITUDE_DEG_F and bottom of transition zone
+		float r_m5=press_temp_corr_Saemundson / std::tan((Refraction::MIN_GEO_ALTITUDE_DEG_F+10.3f/(Refraction::MIN_GEO_ALTITUDE_DEG_F+5.11f))*M_PI/180.f) + 0.0019279f;
+		geom_alt_deg += r_m5*(geom_alt_deg-(Refraction::MIN_GEO_ALTITUDE_DEG_F-Refraction::TRANSITION_WIDTH_DEG_F))/Refraction::TRANSITION_WIDTH_DEG_F;
 		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.)*length;
 	}
 	altAzPos.transfo4d(postTransfoMatf);
@@ -200,19 +228,21 @@ void Refraction::backward(Vec3f& altAzPos) const
 	// going from observed position/magnitude to geometrical position and atmosphere-free mag.
 	const float length = altAzPos.length();
 	float obs_alt_deg=180.f/M_PI*std::asin(altAzPos[2]/length);
-	if (obs_alt_deg > -2.f)
+	if (obs_alt_deg > Refraction::MIN_APP_ALTITUDE_DEG_F)
 	{
 		// refraction from Bennett, in Meeus, Astr.Alg.
-		float r=press_temp_corr_Bennett / std::tan((obs_alt_deg+7.31/(obs_alt_deg+4.4f))*M_PI/180.f) + 0.0013515f;
+		float r=press_temp_corr_Bennett / std::tan((obs_alt_deg+7.31f/(obs_alt_deg+4.4f))*M_PI/180.f) + 0.0013515f;
+		if (r>0.5f) r=0.5f*(r-0.5f)+0.5f; // reduce silly lobe.
 		obs_alt_deg -= r;
 		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.f)*length;
 	}
-	else if (obs_alt_deg > -90.)
+	else if (obs_alt_deg > Refraction::MIN_APP_ALTITUDE_DEG_F-Refraction::TRANSITION_WIDTH_DEG_F)
 	{
 		// refraction from Bennett, in Meeus, Astr.Alg.
-		float r=press_temp_corr_Bennett / std::tan((-2.+7.31/(-2.+4.4f))*M_PI/180.f) + 0.0013515f;
-		obs_alt_deg -= r*(obs_alt_deg+90.)/88;
-		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.)*length;
+		float r_min=press_temp_corr_Bennett / std::tan((Refraction::MIN_APP_ALTITUDE_DEG_F+7.31f/(Refraction::MIN_APP_ALTITUDE_DEG_F+4.4f))*M_PI/180.f) + 0.0013515f;
+		if (r_min>0.5f) r_min=0.5f*(r_min-0.5f)+0.5f; // reduce silly lobe.
+		obs_alt_deg -= r_min*(obs_alt_deg-(Refraction::MIN_APP_ALTITUDE_DEG_F-Refraction::TRANSITION_WIDTH_DEG_F))/Refraction::TRANSITION_WIDTH_DEG_F;
+		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.f)*length;
 	}
 	altAzPos.transfo4d(invertPreTransfoMatf);
 }
