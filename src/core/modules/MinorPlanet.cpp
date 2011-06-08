@@ -22,7 +22,7 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelTranslator.hpp"
@@ -40,7 +40,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 						 const QString& atexMapName,
 						 posFuncType coordFunc,
 						 void* auserDataPtr,
-						 OsulatingFunctType *osculatingFunc,
+						 OsculatingFunctType *osculatingFunc,
 						 bool acloseOrbit,
 						 bool hidden)
 						: Planet (englishName,
@@ -59,7 +59,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 {
 	texMapName = atexMapName;
 	lastOrbitJD =0;
-	deltaJD = JD_SECOND;
+	deltaJD = StelCore::JD_SECOND;
 	orbitCached = 0;
 	closeOrbit = acloseOrbit;
 
@@ -164,7 +164,6 @@ void MinorPlanet::setProvisionalDesignation(QString designation)
 QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
 {
 	//Mostly copied from Planet::getInfoString():
-	const StelNavigator* nav = core->getNavigator();
 
 	QString str;
 	QTextStream oss(&str);
@@ -191,7 +190,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	}
 
 	if (flags&Magnitude)
-		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(nav), 0, 'f', 2) << "<br>";
+		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
 
 	if (flags&AbsoluteMagnitude)
 	{
@@ -199,7 +198,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		//If the H-G system is not used, use the default radius/albedo mechanism
 		if (slopeParameter < 0)
 		{
-			oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(nav) - 5. * (std::log10(getJ2000EquatorialPos(nav).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
+			oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core) - 5. * (std::log10(getJ2000EquatorialPos(core).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
 		}
 		else
 		{
@@ -212,7 +211,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	if (flags&Distance)
 	{
 		// xgettext:no-c-format
-		oss << q_("Distance: %1AU").arg(getJ2000EquatorialPos(nav).length(), 0, 'f', 8) << "<br>";
+		oss << q_("Distance: %1AU").arg(getJ2000EquatorialPos(core).length(), 0, 'f', 8) << "<br>";
 	}
 
 	if (flags&Size)
@@ -229,18 +228,18 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	return str;
 }
 
-float MinorPlanet::getVMagnitude(const StelNavigator *nav) const
+float MinorPlanet::getVMagnitude(const StelCore* core) const
 {
 	//If the H-G system is not used, use the default radius/albedo mechanism
 	if (slopeParameter < 0)
 	{
-		return Planet::getVMagnitude(nav);
+		return Planet::getVMagnitude(core);
 	}
 
 	//Calculate phase angle
 	//(Code copied from Planet::getVMagnitude())
 	//(LOL, this is actually vector substraction + the cosine theorem :))
-	const Vec3d& observerHelioPos = nav->getObserverHeliocentricEclipticPos();
+	const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 	const double observerRq = observerHelioPos.lengthSquared();
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
 	const double planetRq = planetHelioPos.lengthSquared();

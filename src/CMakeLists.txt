@@ -43,8 +43,6 @@ SET(stellarium_lib_SRCS
 	core/StelGeodesicGrid.hpp
 	core/StelMovementMgr.cpp
 	core/StelMovementMgr.hpp
-	core/StelNavigator.cpp
-	core/StelNavigator.hpp
 	core/StelObserver.cpp
 	core/StelObserver.hpp
 	core/StelLocation.hpp
@@ -342,7 +340,6 @@ SET(stellarium_MOC_HDRS
 	core/StelObjectMgr.hpp
 	core/StelObserver.hpp
 	core/StelApp.hpp
-	core/StelNavigator.hpp
 	core/StelLocationMgr.hpp
 	core/StelCore.hpp
 	core/StelAppGraphicsWidget.hpp
@@ -414,6 +411,8 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/ConfigurationDialog.cpp
 		gui/AddRemoveLandscapesDialog.hpp
 		gui/AddRemoveLandscapesDialog.cpp
+		gui/AtmosphereDialog.hpp
+		gui/AtmosphereDialog.cpp
 		gui/StelDialog.hpp
 		gui/StelDialog.cpp)
 
@@ -432,6 +431,7 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/SearchDialog.hpp
 		gui/ConfigurationDialog.hpp
 		gui/AddRemoveLandscapesDialog.hpp
+		gui/AtmosphereDialog.hpp
 		gui/StelDialog.hpp)
 
 	################# compiles .ui files ############
@@ -442,6 +442,7 @@ IF (GUI_MODE STREQUAL "Standard")
 	gui/viewDialog.ui
 	gui/searchDialogGui.ui
 	gui/configurationDialog.ui
+	gui/AtmosphereDialog.ui
 	gui/addRemoveLandscapesDialog.ui)
 
 	IF(ENABLE_SCRIPT_CONSOLE)

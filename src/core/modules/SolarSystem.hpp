@@ -41,7 +41,7 @@ class QSettings;
 typedef QSharedPointer<Planet> PlanetP;
 
 //! @class SolarSystem
-//! This StelObjectModule derivative is used to model SolarSystem boies.
+//! This StelObjectModule derivative is used to model SolarSystem bodies.
 //! This includes the Major Planets, Minor Planets and Comets.
 class SolarSystem : public StelObjectModule
 {
@@ -80,7 +80,7 @@ public:
 	//! @param limitFov The radius of the circle around the point v which
 	//! defines the size of the area to search.
 	//! @param core the core object
-	//! @return A STL vector of SpelObjectP (pointers) containing all SolarSystem
+	//! @return A STL vector of StelObjectP (pointers) containing all SolarSystem
 	//! objects found in the specified area. This vector is not sorted by distance
 	//! from v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;

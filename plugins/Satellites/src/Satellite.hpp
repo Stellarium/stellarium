@@ -68,7 +68,7 @@ public:
 	{
 		return "Satellite";
 	}
-	virtual float getSelectPriority(const StelNavigator *nav) const;
+	virtual float getSelectPriority(const StelCore* core) const;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
@@ -80,11 +80,11 @@ public:
 	//! - Extra2: Comms frequencies, modulation types and so on.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelNavigator *) const
+	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const
 	{
 		return XYZ;
 	}
-	virtual float getVMagnitude(const StelNavigator* nav=NULL) const;
+	virtual float getVMagnitude(const StelCore* core=NULL) const;
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual QString getNameI18n(void) const
 	{

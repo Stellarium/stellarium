@@ -32,7 +32,7 @@
 #include "NebulaMgr.hpp"
 #include "Nebula.hpp"
 #include "StelTexture.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelSkyDrawer.hpp"
 #include "StelTranslator.hpp"
 #include "StelTextureMgr.hpp"
@@ -44,6 +44,7 @@
 #include "StelCore.hpp"
 #include "StelSkyImageTile.hpp"
 #include "StelPainter.hpp"
+#include "RefractionExtinction.hpp"
 
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c;}
 const Vec3f &NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
@@ -115,7 +116,7 @@ void NebulaMgr::init()
 
 struct DrawNebulaFuncObject
 {
-	DrawNebulaFuncObject(float amaxMagHints, float amaxMagLabels, StelPainter* p, bool acheckMaxMagHints) : maxMagHints(amaxMagHints), maxMagLabels(amaxMagLabels), sPainter(p), checkMaxMagHints(acheckMaxMagHints)
+	DrawNebulaFuncObject(float amaxMagHints, float amaxMagLabels, StelPainter* p, StelCore* aCore, bool acheckMaxMagHints) : maxMagHints(amaxMagHints), maxMagLabels(amaxMagLabels), sPainter(p), core(aCore), checkMaxMagHints(acheckMaxMagHints)
 	{
 		angularSizeLimit = 5.f/sPainter->getProjector()->getPixelPerRadAtCenter()*180.f/M_PI;
 	}
@@ -124,14 +125,16 @@ struct DrawNebulaFuncObject
 		Nebula* n = obj.staticCast<Nebula>().data();
 		if (n->angularSize>angularSizeLimit || (checkMaxMagHints && n->mag <= maxMagHints))
 		{
+			float refmag_add=0; // value to adjust hints visibility threshold.
 			sPainter->getProjector()->project(n->XYZ,n->XY);
-			n->drawLabel(*sPainter, maxMagLabels);
-			n->drawHints(*sPainter, maxMagHints);
+			n->drawLabel(*sPainter, maxMagLabels-refmag_add);
+			n->drawHints(*sPainter, maxMagHints -refmag_add);
 		}
 	}
 	float maxMagHints;
 	float maxMagLabels;
 	StelPainter* sPainter;
+	StelCore* core;
 	float angularSizeLimit;
 	bool checkMaxMagHints;
 };
@@ -158,7 +161,7 @@ void NebulaMgr::draw(StelCore* core)
 	float maxMagHints = skyDrawer->getLimitMagnitude()*1.2f-2.f+(hintsAmount*1.2f)-2.f;
 	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.f+(labelsAmount*1.2f)-2.f;
 	sPainter.setFont(nebulaFont);
-	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, hintsFader.getInterstate()>0.0001);
+	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, core, hintsFader.getInterstate()>0.0001);
 	nebGrid.processIntersectingRegions(p, func);
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
@@ -167,14 +170,13 @@ void NebulaMgr::draw(StelCore* core)
 
 void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 {
-	const StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Nebula");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
-		Vec3d pos=obj->getJ2000EquatorialPos(nav);
+		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
 		// Compute 2D pos and return if outside screen
 		if (!prj->projectInPlace(pos)) return;

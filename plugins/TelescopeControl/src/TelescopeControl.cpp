@@ -232,7 +232,6 @@ void TelescopeControl::update(double deltaTime)
 
 void TelescopeControl::draw(StelCore* core)
 {
-	StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 	sPainter.setFont(labelFont);
@@ -245,7 +244,7 @@ void TelescopeControl::draw(StelCore* core)
 		if (telescope->isConnected() && telescope->hasKnownPosition())
 		{
 			Vec3d XY;
-			if (prj->projectCheck(telescope->getJ2000EquatorialPos(nav), XY))
+			if (prj->projectCheck(telescope->getJ2000EquatorialPos(core), XY))
 			{
 				//Telescope circles appear synchronously with markers
 				if (circleFader.getInterstate() >= 0)
@@ -278,7 +277,7 @@ void TelescopeControl::draw(StelCore* core)
 	}
 
 	if(GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-		drawPointer(prj, nav, sPainter);
+		drawPointer(prj, core, sPainter);
 }
 
 void TelescopeControl::setStelStyle(const QString& section)
@@ -321,7 +320,7 @@ QList<StelObjectP> TelescopeControl::searchAround(const Vec3d& vv, double limitF
 	double cosLimFov = cos(limitFov * M_PI/180.);
 	foreach (const TelescopeClientP& telescope, telescopeClients)
 	{
-		if (telescope->getJ2000EquatorialPos(core->getNavigator()).dot(v) >= cosLimFov)
+		if (telescope->getJ2000EquatorialPos(core).dot(v) >= cosLimFov)
 		{
 			result.append(qSharedPointerCast<StelObject>(telescope));
 		}
@@ -405,7 +404,7 @@ void TelescopeControl::slewTelescopeToSelectedObject()
 	if (!selectObject)  // should never happen
 		return;
 
-	Vec3d objectPosition = selectObject->getJ2000EquatorialPos(StelApp::getInstance().getCore()->getNavigator());
+	Vec3d objectPosition = selectObject->getJ2000EquatorialPos(StelApp::getInstance().getCore());
 
 	telescopeGoto(slotNumber, objectPosition);
 }
@@ -423,7 +422,7 @@ void TelescopeControl::slewTelescopeToViewDirection()
 	telescopeGoto(slotNumber, centerPosition);
 }
 
-void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelNavigator * nav, StelPainter& sPainter)
+void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* core, StelPainter& sPainter)
 {
 	#ifndef COMPATIBILITY_001002
 	//Leaves this whole routine empty if this is the backport version.
@@ -433,7 +432,7 @@ void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelNavigato
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
-		Vec3d pos = obj->getJ2000EquatorialPos(nav);
+		Vec3d pos = obj->getJ2000EquatorialPos(core);
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos))

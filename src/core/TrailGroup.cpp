@@ -18,7 +18,7 @@
  */
 
 #include "TrailGroup.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelApp.hpp"
 #include "StelPainter.hpp"
 #include "StelObject.hpp"
@@ -37,8 +37,10 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	float currentTime = core->getNavigator()->getJDay();
-	sPainter->setProjector(core->getProjection(core->getNavigator()->getJ2000ModelViewMat()*j2000ToTrailNativeInverted));
+	float currentTime = core->getJDay();
+	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
+	transfo->combine(j2000ToTrailNativeInverted);
+	sPainter->setProjector(core->getProjection(transfo));
 	foreach (const Trail& trail, allTrails)
 	{
 		Planet* hpl = dynamic_cast<Planet*>(trail.stelObject.data());
@@ -46,7 +48,7 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 		{
 			// Avoid drawing the trails if the object is the home planet
 			QString homePlanetName = hpl==NULL ? "" : hpl->getEnglishName();
-			if (homePlanetName==StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().planetName)
+			if (homePlanetName==StelApp::getInstance().getCore()->getCurrentLocation().planetName)
 				continue;
 		}
 		const QList<Vec3d>& posHistory = trail.posHistory;
@@ -69,13 +71,12 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 // Add 1 point to all the curves at current time and suppress too old points
 void TrailGroup::update()
 {
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	times.append(nav->getJDay());
+	times.append(StelApp::getInstance().getCore()->getJDay());
 	for (QList<Trail>::Iterator iter=allTrails.begin();iter!=allTrails.end();++iter)
 	{
-		iter->posHistory.append(j2000ToTrailNative*iter->stelObject->getJ2000EquatorialPos(nav));
+		iter->posHistory.append(j2000ToTrailNative*iter->stelObject->getJ2000EquatorialPos(StelApp::getInstance().getCore()));
 	}
-	if (nav->getJDay()-times.at(0)>timeExtent)
+	if (StelApp::getInstance().getCore()->getJDay()-times.at(0)>timeExtent)
 	{
 		times.pop_front();
 		for (QList<Trail>::Iterator iter=allTrails.begin();iter!=allTrails.end();++iter)

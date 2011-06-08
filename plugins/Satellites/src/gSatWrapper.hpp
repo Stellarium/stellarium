@@ -32,7 +32,6 @@
 #include <QString>
 
 #include "VecMath.hpp"
-#include "StelNavigator.hpp"
 
 #include "gsatellite/gSatTEME.hpp"
 #include "gsatellite/gTime.hpp"

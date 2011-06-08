@@ -122,7 +122,7 @@ Vec3d gSatWrapper::getSubPoint()
 
 void gSatWrapper::updateEpoch()
 {
-	double jul_utc = StelApp::getInstance().getCore()->getNavigator()->getJDay();
+	double jul_utc = StelApp::getInstance().getCore()->getJDay();
         epoch = jul_utc;
 
 	if (pSatellite)
@@ -140,7 +140,7 @@ void gSatWrapper::setEpoch(double ai_julianDaysEpoch)
 void gSatWrapper::calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_velocity)
 {
 
-	StelLocation loc   = StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation();
+	StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();
 
 	double radLatitude = loc.latitude * KDEG2RAD;
         double theta       = epoch.toThetaLMST(loc.longitude * KDEG2RAD);
@@ -167,7 +167,7 @@ void gSatWrapper::calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_velocity
 Vec3d gSatWrapper::getAltAz()
 {
 
-	StelLocation loc   = StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation();
+	StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();
 	Vec3d topoSatPos;
 	Vec3d observerECIPos;
 	Vec3d observerECIVel;
@@ -241,8 +241,8 @@ int gSatWrapper::getVisibilityPredict()
 
 		satECIPos = getTEMEPos();
 		SolarSystem *solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
-		sunEquinoxEqPos        = solsystem->getSun()->getEquinoxEquatorialPos(StelApp::getInstance().getCore()->getNavigator());
-		sunAltAzPos        = solsystem->getSun()->getAltAzPos(StelApp::getInstance().getCore()->getNavigator());
+		sunEquinoxEqPos        = solsystem->getSun()->getEquinoxEquatorialPos(StelApp::getInstance().getCore());
+		sunAltAzPos        = solsystem->getSun()->getAltAzPosGeometric(StelApp::getInstance().getCore());
 
 		//sunEquinoxEqPos is measured in AU. we need meassure it in Km
 		sunECIPos.set(sunEquinoxEqPos[0]*AU, sunEquinoxEqPos[1]*AU, sunEquinoxEqPos[2]*AU);

@@ -90,6 +90,24 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	else
 		location.name = name;
 	location.landscapeKey = name;
+	// New entries by GZ.
+	if (landscapeIni.contains("location/light_pollution"))
+		defaultBortleIndex = landscapeIni.value("location/light_pollution").toInt();
+	else defaultBortleIndex=-1; // mark "invalid/no change".
+	if (defaultBortleIndex<=0) defaultBortleIndex=-1; // also allow neg. values in ini file, signalling "no change".
+	if (defaultBortleIndex>9) defaultBortleIndex=9; // correct bad values.
+	if (landscapeIni.contains("location/display_fog"))
+		defaultFogSetting = landscapeIni.value("location/display_fog").toInt();
+	else defaultFogSetting=-1;
+	if (landscapeIni.contains("location/atmospheric_extinction_coefficient"))
+		defaultExtinctionCoefficient = landscapeIni.value("location/atmospheric_extinction_coefficient").toDouble();
+	else defaultExtinctionCoefficient=-1.0;
+	if (landscapeIni.contains("location/atmospheric_temperature"))
+		defaultTemperature = landscapeIni.value("location/atmospheric_temperature").toDouble();
+	else defaultTemperature=-1000.0;
+	if (landscapeIni.contains("location/atmospheric_pressure"))
+		defaultPressure = landscapeIni.value("location/atmospheric_pressure").toDouble();
+	else defaultPressure=-2.0; // "no change"
 }
 
 #include <iostream>
@@ -331,7 +349,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 void LandscapeOldStyle::draw(StelCore* core)
 {
-	StelPainter painter(core->getProjection(StelCore::FrameAltAz));
+	StelPainter painter(core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff));
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 	painter.enableTexture2d(true);
@@ -355,7 +373,9 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 		return;
 
 	const float vpos = (tanMode||calibrated) ? radius*std::tan(fogAngleShift*M_PI/180.) : radius*std::sin(fogAngleShift*M_PI/180.);
-	sPainter.setProjector(core->getProjection(core->getNavigator()->getAltAzModelViewMat() * Mat4d::translation(Vec3d(0.,0.,vpos))));
+	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transfo->combine(Mat4d::translation(Vec3d(0.,0.,vpos)));
+	sPainter.setProjector(core->getProjection(transfo));
 	glBlendFunc(GL_ONE, GL_ONE);
 	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
 	sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
@@ -378,8 +398,10 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
 	// and the texture in between is correctly stretched.
 	// TODO: (1) Replace fog cylinder by similar texture, which could be painted as image layer in Photoshop/Gimp.
 	//       (2) Implement calibrated && tan_mode
-	Mat4d mat = core->getNavigator()->getAltAzModelViewMat() * Mat4d::zrotation(-angleRotateZOffset*M_PI/180.f);
-	sPainter.setProjector(core->getProjection(mat));
+	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transfo->combine(Mat4d::zrotation(-angleRotateZOffset*M_PI/180.f));
+
+	sPainter.setProjector(core->getProjection(transfo));
 
 	if (!landFader.getInterstate())
 		return;
@@ -399,12 +421,13 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 {
 	if (!landFader.getInterstate())
 		return;
-	const StelNavigator* nav = core->getNavigator();
 	const float vshift = (tanMode || calibrated) ?
 	  radius*std::tan(groundAngleShift*M_PI/180.) :
 	  radius*std::sin(groundAngleShift*M_PI/180.);
-	Mat4d mat = nav->getAltAzModelViewMat() * Mat4d::zrotation((groundAngleRotateZ-angleRotateZOffset)*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift));
-	sPainter.setProjector(core->getProjection(mat));
+	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transfo->combine(Mat4d::zrotation((groundAngleRotateZ-angleRotateZOffset)*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift)));
+
+	sPainter.setProjector(core->getProjection(transfo));
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
 	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 	groundTex->bind();
@@ -453,8 +476,9 @@ void LandscapeFisheye::draw(StelCore* core)
 	if(!validLandscape) return;
 	if(!landFader.getInterstate()) return;
 
-	StelNavigator* nav = core->getNavigator();
-	const StelProjectorP prj = core->getProjection(nav->getAltAzModelViewMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
+	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transfo->combine(Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
+	const StelProjectorP prj = core->getProjection(transfo);
 	StelPainter sPainter(prj);
 
 	// Normal transparency mode
@@ -517,8 +541,9 @@ void LandscapeSpherical::draw(StelCore* core)
 	if(!validLandscape) return;
 	if(!landFader.getInterstate()) return;
 
-	StelNavigator* nav = core->getNavigator();
-	const StelProjectorP prj = core->getProjection(nav->getAltAzModelViewMat() * Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
+	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transfo->combine(Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
+	const StelProjectorP prj = core->getProjection(transfo);
 	StelPainter sPainter(prj);
 
 	// Normal transparency mode
