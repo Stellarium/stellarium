@@ -25,6 +25,9 @@
 #include "StelUtils.hpp"
 #include "StelProjector.hpp"
 #include "StelMovementMgr.hpp"
+#include "RefractionExtinction.hpp"
+#include "StelSkyDrawer.hpp"
+
 #include <QMouseEvent>
 #include <QString>
 #include <QDebug>
@@ -139,10 +142,10 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	best_object_value = 100000.f;
 	foreach (const StelObjectP& obj, candidates)
 	{
-		prj->project(obj->getJ2000EquatorialPos(core->getNavigator()), winpos);
+		prj->project(obj->getJ2000EquatorialPos(core), winpos);
 		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]))*distanceWeight;
-		float priority =  obj->getSelectPriority(core->getNavigator());
-		// qDebug() << (*iter).getShortInfoString(core->getNavigator()) << ": " << priority << " " << distance;
+		float priority =  obj->getSelectPriority(core);
+		// qDebug() << (*iter).getShortInfoString(core) << ": " << priority << " " << distance;
 		if (distance + priority < best_object_value)
 		{
 			best_object_value = distance + priority;
@@ -160,7 +163,9 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 {
 	Vec3d v;
 	if (core->getProjection(StelCore::FrameJ2000)->unProject(x,y,v))
+	{
 		return cleverFind(core, v);
+	}
 	return StelObjectP();
 }
 

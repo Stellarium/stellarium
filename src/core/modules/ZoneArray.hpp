@@ -93,7 +93,7 @@ public:
 	virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {Q_UNUSED(hipIndex);}
 
 	//! Pure virtual method. See subclass implementation.
-	virtual void searchAround(const StelNavigator* nav, int index,const Vec3d &v,double cosLimFov,
+	virtual void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
 							  QList<StelObjectP > &result) = 0;
 
 	//! Pure virtual method. See subclass implementation.
@@ -182,7 +182,7 @@ protected:
 			  unsigned int maxMagStarName,float names_brightness) const;
 
 	void scaleAxis(void);
-	void searchAround(const StelNavigator* nav, int index,const Vec3d &v,double cosLimFov,
+	void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
 					  QList<StelObjectP > &result);
 
 	Star *stars;

@@ -43,7 +43,6 @@
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
 #include "StelLocation.hpp"
-#include "StelNavigator.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
@@ -131,12 +130,12 @@ void TextUserInterface::init()
 	                                  getLongitude(), -180, 180, 0.5, m1, m1_1);
 	TuiNode* m1_3 = new TuiNodeInt("1.3 Altitude", 
 	                               this, SLOT(setAltitude(int)),
-	                               StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().altitude,
+								   StelApp::getInstance().getCore()->getCurrentLocation().altitude,
 	                               -200, 200000, 100, m1, m1_2);
 	TuiNode* m1_4 = new TuiNodeEnum("1.4 Solar System Body", 
 	                                this, SLOT(setHomePlanet(QString)),
 	                                GETSTELMODULE(SolarSystem)->getAllPlanetEnglishNames(),
-	                                StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().planetName,
+									StelApp::getInstance().getCore()->getCurrentLocation().planetName,
 	                                m1, m1_3);
 	m1_1->setPrevNode(m1_4);
 	m1_1->setNextNode(m1_2);
@@ -148,22 +147,22 @@ void TextUserInterface::init()
 	TuiNode* m2 = new TuiNode("2. Date & Time", NULL, m1);
 	m1->setNextNode(m2);
 	TuiNode* m2_1 = new TuiNodeDateTime("2.1 Sky Time", 
-	                                    StelApp::getInstance().getCore()->getNavigator(), 
+										StelApp::getInstance().getCore(),
 	                                    SLOT(setJDay(double)),  
-	                                    StelApp::getInstance().getCore()->getNavigator()->getJDay(), 
+										StelApp::getInstance().getCore()->getJDay(),
 	                                    m2);
 	TuiNode* m2_2 = new TuiNode("2.2 Set Time Zone", m2, m2_1);
 	TuiNode* m2_3 = new TuiNode("2.3 Day Keys", m2, m2_2);
 	TuiNode* m2_4 = new TuiNodeDateTime("2.4 Preset Sky Time", 
-	                                    StelApp::getInstance().getCore()->getNavigator(), 
+										StelApp::getInstance().getCore(),
 	                                    SLOT(setPresetSkyTime(double)), 
-	                                    StelApp::getInstance().getCore()->getNavigator()->getPresetSkyTime(), 
+										StelApp::getInstance().getCore()->getPresetSkyTime(),
 	                                    m2, m2_3);
 	QStringList startupModes;
 	startupModes << "system" << "preset";
 	TuiNode* m2_5 = new TuiNodeEnum("2.5 Sky Time at Startup", 
 	                                this, SLOT(setStartupDateMode(QString)), startupModes,
-	                                StelApp::getInstance().getCore()->getNavigator()->getStartupTimeMode(),
+									StelApp::getInstance().getCore()->getStartupTimeMode(),
 	                                m2, m2_4);
 	QStringList dateFormats;
 	dateFormats << "system_default" << "mmddyyyy" << "ddmmyyyy" << "yyyymmdd";
@@ -453,61 +452,61 @@ void TextUserInterface::handleKeys(QKeyEvent* event)
 
 void TextUserInterface::setHomePlanet(QString planetName)
 {
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	if (nav->getCurrentLocation().planetName != planetName)
+	StelCore* core = StelApp::getInstance().getCore();
+	if (core->getCurrentLocation().planetName != planetName)
 	{
-		StelLocation newLocation = nav->getCurrentLocation();
+		StelLocation newLocation = core->getCurrentLocation();
 		newLocation.planetName = planetName;
-		nav->moveObserverTo(newLocation);
+		core->moveObserverTo(newLocation);
 	}
 }
 
 void TextUserInterface::setAltitude(int altitude)
 {
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	if (nav->getCurrentLocation().altitude != altitude)
+	StelCore* core = StelApp::getInstance().getCore();
+	if (core->getCurrentLocation().altitude != altitude)
 	{
-		StelLocation newLocation = nav->getCurrentLocation();
+		StelLocation newLocation = core->getCurrentLocation();
 		newLocation.altitude = altitude;
-		nav->moveObserverTo(newLocation, 0.0, 0.0);
+		core->moveObserverTo(newLocation, 0.0, 0.0);
 	}
 }
 
 void TextUserInterface::setLatitude(double latitude)
 {
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	if (nav->getCurrentLocation().latitude != latitude)
+	StelCore* core = StelApp::getInstance().getCore();
+	if (core->getCurrentLocation().latitude != latitude)
 	{
-		StelLocation newLocation = nav->getCurrentLocation();
+		StelLocation newLocation = core->getCurrentLocation();
 		newLocation.latitude = latitude;
-		nav->moveObserverTo(newLocation, 0.0, 0.0);
+		core->moveObserverTo(newLocation, 0.0, 0.0);
 	}
 }
 
 void TextUserInterface::setLongitude(double longitude)
 {
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	if (nav->getCurrentLocation().longitude != longitude)
+	StelCore* core = StelApp::getInstance().getCore();
+	if (core->getCurrentLocation().longitude != longitude)
 	{
-		StelLocation newLocation = nav->getCurrentLocation();
+		StelLocation newLocation = core->getCurrentLocation();
 		newLocation.longitude = longitude;
-		nav->moveObserverTo(newLocation, 0.0, 0.0);
+		core->moveObserverTo(newLocation, 0.0, 0.0);
 	}
 }
 
 double TextUserInterface::getLatitude(void)
 {
-	return StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().latitude;
+	return StelApp::getInstance().getCore()->getCurrentLocation().latitude;
 }
 
 double TextUserInterface::getLongitude(void)
 {
-	return StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().longitude;
+	return StelApp::getInstance().getCore()->getCurrentLocation().longitude;
 }
 
 void TextUserInterface::setStartupDateMode(QString mode)
 {
-	StelApp::getInstance().getCore()->getNavigator()->setStartupTimeMode(mode);
+	StelApp::getInstance().getCore()->setStartupTimeMode(mode);
 }
 
 void TextUserInterface::setDateFormat(QString format)
@@ -553,11 +552,11 @@ void TextUserInterface::saveDefaultSettings(void)
 	Q_ASSERT(glmgr);
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mvmgr);
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	Q_ASSERT(nav);
+	StelCore* core = StelApp::getInstance().getCore();
+	Q_ASSERT(core);
 	MilkyWay* milk = GETSTELMODULE(MilkyWay);
-	Q_ASSERT(nav);
-	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(Mat4d());
+	Q_ASSERT(milk);
+	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000);
 	Q_ASSERT(proj);
 	StelLocaleMgr& lomgr = StelApp::getInstance().getLocaleMgr();
 
@@ -567,9 +566,9 @@ void TextUserInterface::saveDefaultSettings(void)
 	
 
 	// sub-menu 2: date and time
-	conf->setValue("navigation/preset_sky_time", nav->getPresetSkyTime());
-	conf->setValue("navigation/startup_time_mode", nav->getStartupTimeMode());
-	conf->setValue("navigation/startup_time_mode", nav->getStartupTimeMode());
+	conf->setValue("navigation/preset_sky_time", core->getPresetSkyTime());
+	conf->setValue("navigation/startup_time_mode", core->getStartupTimeMode());
+	conf->setValue("navigation/startup_time_mode", core->getStartupTimeMode());
 	conf->setValue("localization/time_display_format", lomgr.getTimeFormatStr());
 	conf->setValue("localization/date_display_format", lomgr.getDateFormatStr());
 

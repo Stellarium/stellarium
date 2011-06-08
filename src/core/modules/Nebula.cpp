@@ -25,7 +25,7 @@
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
 #include "StelTexture.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
@@ -108,17 +108,17 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	return str;
 }
 
-float Nebula::getSelectPriority(const StelNavigator *nav) const
+float Nebula::getSelectPriority(const StelCore* core) const
 {
 	if( ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getFlagHints() )
 	{
 		// make very easy to select IF LABELED
-		return -10;
+		return -10.f;
 	}
 	else
 	{
-		if (getVMagnitude(nav)>20) return 20;
-		return getVMagnitude(nav);
+		if (getVMagnitude(core)>20.f) return 20.f;
+		return getVMagnitude(core);
 	}
 }
 
@@ -127,7 +127,7 @@ Vec3f Nebula::getInfoColor(void) const
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.4) : ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getLabelsColor();
 }
 
-double Nebula::getCloseViewFov(const StelNavigator*) const
+double Nebula::getCloseViewFov(const StelCore*) const
 {
 	return angularSize>0 ? angularSize * 4 : 1;
 }

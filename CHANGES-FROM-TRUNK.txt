@@ -1,0 +1,56 @@
+REFRACTION branch:
+
+Introduces changes necessary for refraction and extinction effects. 
+
+Status: Partial solution, needs help.
+
+Contributor: Georg.Zotti@univie.ac.at
+All changes are donated to the Stellarium project for distribution under opensource licenses like GNU.
+
+COMPUTING:      core/RefractionExtinction. DONE
+STARS:          core/modules/ZoneArray::draw
+           BUG: stars appear to have a problem after magnitude loss.
++SELECT-MARK:   StarMgr.cpp::drawPointer(). DONE
+CLICK-IDENTIFY: core/StelObjectMgr::cleverFind(core, x, y) DONE
+INFOSTRING:     core/StelObject.cpp::getPositionInfoString(core, flags) DONE
+                new core/StelObject.cpp::getSideralPosRefr(core) DONE
+DEEPSKY:        NebulaMgr::draw(). Influences symbols and labels only.
++DSO TEXTURES:  ---TODO. May require a vertex shader program, beyond my knowledge.
++SELECT-MARK:   NebulaMgr::drawPointer(). DONE
++MILKY WAY:     Should become dimmer in low sky. May require a vertex shader program, beyond my knowledge.
+PLANETS:        ---TODO. Involves StelPainter, 3D spheres, full matrices. 
+                         May require a vertex shader program, beyond my knowledge, sorry.
++SELECT-MARK:   SolarSystem::drawPointer. DONE
+RA-DEC+GAL.GRIDS: core/GridLinesMgr. TODO OR LEAVE-AS-IS
+                Requires changes in StelPainter's arc drawing methods.
+                Currently this seems not viable and will not be changed.
+SATELLITES:     Not required, practically unobservable on horizon, orbital parameters unsure, etc.
+                Should be easy, however.
+CONSTELLATIONS: Large-scale items. Vertices could be refracted. Extinction would be a nice effect. 
+                Not urgent, later.
+METEORS         NOT NECESSARY.
+OTHER?          ???
+
+CHANGES IN LANDSCAPE HANDLING:
+1) Moved config.ini:[stars].init_bortle_scale to [landscape] section
+2) Added optional settings to landscape.ini files:
+   landscape.ini:[location].light_pollution (<1: no change; 1..9: Bortle; >9-->9); 
+   landscape.ini:[location].display_fog: -1=no change, 0=off, 1=on
+   landscape.ini:[location].atmospheric_extinction_coefficient (mag/airmass; -1=no change)
+   landscape.ini:[location].atmospheric_temperature (C; -1000=no change) 
+   landscape.ini:[location].atmospheric_pressure    (mbar; -1=auto, <-1 no change)
+
+   LandscapeMgr forwards those settings to the respective recipients. 
+   TODO: make GUI aware of changed values (how?).
+
+GUI changes: ViewDialog.ui
+added 3 DoubleSpinBoxes for temperature, pressure, extinction coefficient into atmosphereGroupBox
+ViewDialog.cpp: TODO: when switching landscapes, new data only load partially into GUI. No idea why!
+
+CHANGES IN ASTR.COMPUTATIONS
+planetsephems/sideral_time.[hc]: added get_mean_ecliptical_obliquity(double JDE), 
+                                 changed correct ecliptic in nutation computation.
+StelUtil::ctRadec2Ecl(): coordinate transformation RA/dec to ecliptical with given ecl. obliquity.
+Planet::getInfoString(): added ecliptical positions for planets if observed from earth.
+                         This helped detect A BUG, apparently ecliptical obliquity does not change, currently.
+

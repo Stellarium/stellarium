@@ -33,7 +33,7 @@
 
 #include "StelSkyDrawer.hpp"
 #include "StelProjector.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelToneReproducer.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelApp.hpp"
@@ -79,7 +79,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), flagHasAtmosphere(t
 	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
 	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
-
+	
 	bool ok=true;
 
 	setBortleScale(conf->value("stars/init_bortle_scale",3).toInt(&ok));
@@ -103,6 +103,29 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), flagHasAtmosphere(t
 	{
 		conf->setValue("stars/absolute_scale",1.0);
 		setAbsoluteStarScale(1.0);
+		ok = true;
+	}
+
+	//GZ: load 3 values from config for now. TODO: make adjustable with GUI!
+	setExtinctionCoefficient(conf->value("landscape/atmospheric_extinction_coefficient",0.2).toDouble(&ok));
+	if (!ok)
+	{
+		conf->setValue("landscape/atmospheric_extinction_coefficient",0.2);
+		setExtinctionCoefficient(0.2);
+		ok = true;
+	}
+	setAtmosphereTemperature(conf->value("landscape/temperature_C",15.0).toDouble(&ok));
+	if (!ok)
+	{
+		conf->setValue("landscape/temperature_C",15);
+		setAtmosphereTemperature(15.0);
+		ok = true;
+	}
+	setAtmospherePressure(conf->value("landscape/pressure_mbar",1013.0).toDouble(&ok));
+	if (!ok)
+	{
+		conf->setValue("landscape/pressure_mbar",1013.0);
+		setAtmospherePressure(1013.0);
 		ok = true;
 	}
 
@@ -459,6 +482,8 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 
 	if (rcMag[0]<=0.f)
 		return false;
+
+	// TODO: compute Vec3f v_refr (position including refraction) --> NO: This is done in ZoneArray!
 
 	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
 		return false;
