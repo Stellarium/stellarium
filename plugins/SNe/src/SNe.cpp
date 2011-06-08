@@ -24,6 +24,8 @@
 #include "StelModuleMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelFileMgr.hpp"
+#include "StelUtils.hpp"
+#include "StelSkyDrawer.hpp"
 #include "SNe.hpp"
 
 #include <QDebug>
@@ -119,9 +121,22 @@ void SNe::init()
 */
 void SNe::draw(StelCore* core)
 {
-	StelPainter painter(core->getProjection2d());
-	painter.setColor(1,1,1,1);	
-	painter.drawText(300, 300, QString("SN %1").arg(supernova[0].name));
+	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	StelSkyDrawer* sd = core->getSkyDrawer();
+	StelPainter painter(prj);
+
+	Vec3f color = Vec3f(1.f,1.f,1.f);
+	float rcMag[2];
+	Vec3f v;
+	for (int i=0;i<10;i++)
+	{
+		StelUtils::spheToRect(supernova[i].ra, supernova[i].de, v);
+
+		sd->computeRCMag(supernova[i].maxMagnitude, rcMag);
+		sd->drawPointSource(&painter, v, rcMag, color, false);
+		painter.setColor(color[0], color[1], color[2], 1);
+		painter.drawText(Vec3d(v[0], v[1], v[2]), QString("SN %1").arg(supernova[i].name), 0, 10, 10, false);
+	}
 }
 
 /*
@@ -216,7 +231,7 @@ QVariantMap SNe::loadSNeMap(QString path)
 void SNe::setSNeMap(const QVariantMap& map)
 {
 	QVariantMap sneMap = map.value("supernova").toMap();
-	int numRows = 0;
+	int numRows = 0;	
 	foreach(QString sneKey, sneMap.keys())
 	{
 		QVariantMap sneData = sneMap.value(sneKey).toMap();
@@ -224,9 +239,9 @@ void SNe::setSNeMap(const QVariantMap& map)
 		supernova[numRows].name = sneKey;
 		supernova[numRows].type = sneData.value("type").toString();
 		supernova[numRows].maxMagnitude = sneData.value("maxMagnitude").toFloat();
-		supernova[numRows].peakJD = sneData.value("peakJD").toDouble();
-		supernova[numRows].alpha = sneData.value("alpha").toDouble();
-		supernova[numRows].delta = sneData.value("delta").toDouble();
+		supernova[numRows].peakJD = sneData.value("peakJD").toDouble();		
+		supernova[numRows].ra = StelUtils::getDecAngle(sneData.value("alpha").toString());
+		supernova[numRows].de = StelUtils::getDecAngle(sneData.value("delta").toString());
 
 		numRows++;
 	}
