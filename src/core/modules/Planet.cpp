@@ -122,28 +122,20 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&AbsoluteMagnitude)
 		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core)-5.*(std::log10(getJ2000EquatorialPos(core).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
 
-	//GZ: add heliocentric and observer-planetocentric ecliptical coordinates as Extra1 and Extra2
-	// if ((flags&Extra1) && (englishName!="Sun") && (core->getCurrentLocation().planetName=="Earth"))
-	//   { float lambda, beta;
-	//     Vec3d pos=getHeliocentricEclipticPos(); // this is in J2000 frame, unfortunately.
-	//     StelUtils::rectToSphe(&lambda, &beta, pos);
-	//     if (lambda<0) lambda+=2.0f*M_PI;
-	//     oss << q_("Helioc.Ecl.J2000: %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) << "<br>";
-	//   }	
+	oss << getPositionInfoString(core, flags);
+
 	if ((flags&Extra2) && (core->getCurrentLocation().planetName=="Earth"))
-	  { 
-	    //static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-	    //double ecl= -(ssystem->getEarth()->getRotObliquity()); // BUG DETECTED! Earth's obliquity is apparently reported constant. 
-	    double ra_equ, dec_equ, lambda, beta;
+	{
+		//static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+		//double ecl= -(ssystem->getEarth()->getRotObliquity()); // BUG DETECTED! Earth's obliquity is apparently reported constant.
+		double ra_equ, dec_equ, lambda, beta;
 		double ecl= get_mean_ecliptical_obliquity(core->getJDay()) *M_PI/180.0;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
-	    StelUtils::ctRadec2Ecl(ra_equ, dec_equ, ecl, &lambda, &beta);
-	    if (lambda<0) lambda+=2.0*M_PI;
-	    oss << q_("Ecl.Geoc.(Date): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) << "<br>";
-	    oss << q_("Obliquity (Date): %1").arg(StelUtils::radToDmsStr(ecl, true)) << "<br>";       
-	  }
-
-	oss << getPositionInfoString(core, flags);
+		StelUtils::ctRadec2Ecl(ra_equ, dec_equ, ecl, &lambda, &beta);
+		if (lambda<0) lambda+=2.0*M_PI;
+		oss << q_("Ecliptic Geocentric (of date): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) << "<br>";
+		oss << q_("Obliquity (of date): %1").arg(StelUtils::radToDmsStr(ecl, true)) << "<br>";
+	}
 
 	if (flags&Distance)
 	{
