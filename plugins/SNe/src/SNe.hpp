@@ -68,6 +68,14 @@ private:
 	//! set items for array of struct from data map
 	void setSNeMap(const QVariantMap& map);
 
+	//! compute visible magnitude for supernova
+	//! @param peakJD is date of maximum of brightness of supernova on Julian Day
+	//! @param maxMag is maximum magnitude for supernova
+	//! @param sntype is type of supernova
+	//! @param currentJD is current Julian Day
+	//! @return current magnitude
+	double computeSNeMag(double peakJD, float maxMag, QString sntype, double currentJD);
+
 	QString sneJsonPath;
 
 	sne_t supernova[25];

@@ -128,7 +128,7 @@ void SNe::draw(StelCore* core)
 	Vec3f color = Vec3f(1.f,1.f,1.f);
 	float rcMag[2];
 	Vec3f v;
-	for (int i=0;i<10;i++)
+	for (int i=0;i<(sizeof(supernova)/sizeof(supernova[0])-1);i++)
 	{
 		StelUtils::spheToRect(supernova[i].ra, supernova[i].de, v);
 
@@ -245,4 +245,9 @@ void SNe::setSNeMap(const QVariantMap& map)
 
 		numRows++;
 	}
+}
+
+double SNe::computeSNeMag(double peakJD, float maxMag, QString sntype, double currentJD)
+{
+	return maxMag;
 }
