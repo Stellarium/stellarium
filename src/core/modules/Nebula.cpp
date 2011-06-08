@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2011 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,6 +37,9 @@
 #include <QBuffer>
 
 StelTextureSP Nebula::texCircle;
+StelTextureSP Nebula::texOpenCluster;
+StelTextureSP Nebula::texGlobularCluster;
+StelTextureSP Nebula::texPlanetNebula;
 float Nebula::circleScale = 1.f;
 float Nebula::hintsBrightness = 0;
 Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);
@@ -136,8 +140,19 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	glBlendFunc(GL_ONE, GL_ONE);
 	float lum = 1.f;//qMin(1,4.f/getOnScreenSize(core))*0.8;
 	sPainter.setColor(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness, 1);
-	Nebula::texCircle->bind();
-	sPainter.drawSprite2dMode(XY[0], XY[1], 4);
+	if (nType == 1)
+		Nebula::texOpenCluster->bind();
+
+	if (nType == 2)
+		Nebula::texGlobularCluster->bind();
+
+	if (nType == 4)
+		Nebula::texPlanetNebula->bind();
+
+	if (nType != 1 && nType != 2 && nType != 4)
+		Nebula::texCircle->bind();
+
+	sPainter.drawSprite2dMode(XY[0], XY[1], 6);
 }
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)

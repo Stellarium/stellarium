@@ -59,9 +59,6 @@ private:
 	friend class StelTexture;
 	friend class ImageLoader;
 
-	//! Whether ARB_texture_non_power_of_two is supported on this card
-	bool isNoPowerOfTwoAllowed;
-
 	//! A thread that is used by the TextureLoader object to avoid pausing the main thread too long.
 	QThread* loaderThread;
 };
