@@ -34,8 +34,8 @@ public:
 		QString type;
 		float maxMagnitude;
 		double peakJD;
-		double alpha;
-		double delta;
+		double ra;
+		double de;
 	};
 
 	SNe();
