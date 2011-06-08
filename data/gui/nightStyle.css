@@ -150,12 +150,12 @@ QTextEdit {
 
 QTextBrowser {
 	border: 0px;
-	background: rgba(0, 0, 0, 0%);
+	background: rgb(61, 0, 0);
 	color: rgb(3, 0, 0); /* (133, 0, 0) */
 }
 
 QTextBrowser#helpBrowser, QTextBrowser#aboutBrowser {
-	margin-left: 11px;
+	padding-left:11px;
 }
 
 /***************************************************SearchDialog********************************************************/
@@ -192,11 +192,14 @@ QFrame#completionLabel {
 	border: none;
 }
 
-QGroupBox#greekLettersGroupBox {
+QFrame#greekLettersFrame {
     font-size: 18px;
-    padding-bottom: 0px;
-    padding-top: 0px;
+    padding: 10px 20px;
     background: transparent;
+}
+
+QFrame#j2000Frame {
+	padding: 10px 20px;
 }
 
 QPushButton {
