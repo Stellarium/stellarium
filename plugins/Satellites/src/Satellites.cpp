@@ -447,7 +447,7 @@ void Satellites::readSettingsFromConfig(void)
 	// populate updateUrls from tle_url? keys
 	QRegExp keyRE("^tle_url\\d+$");
 	updateUrls.clear();
-	foreach(QString key, conf->childKeys())
+        foreach(const QString& key, conf->childKeys())
 	{
 		if (keyRE.exactMatch(key))
 		{
@@ -484,7 +484,7 @@ void Satellites::saveSettingsToConfig(void)
 
 	// update tle urls... first clear the existing ones in the file
 	QRegExp keyRE("^tle_url\\d+$");
-	foreach(QString key, conf->childKeys())
+        foreach(const QString& key, conf->childKeys())
 	{
 		if (keyRE.exactMatch(key))
 			conf->remove(key);
@@ -493,7 +493,7 @@ void Satellites::saveSettingsToConfig(void)
 
 	// populate updateUrls from tle_url? keys
 	int n=0;
-	foreach(QString url, updateUrls)
+        foreach(const QString& url, updateUrls)
 	{
 		QString key = QString("tle_url%1").arg(n++);
 		conf->setValue(key, url);
@@ -604,7 +604,7 @@ void Satellites::setTleMap(const QVariantMap& map)
 
 	satellites.clear();
 	QVariantMap satMap = map.value("satellites").toMap();
-	foreach(QString designation, satMap.keys())
+        foreach(const QString& designation, satMap.keys())
 	{
 		QVariantMap satData = satMap.value(designation).toMap();
 		satData["designation"] = designation;
@@ -662,7 +662,7 @@ QStringList Satellites::getGroups(void) const
 	{
 		if (sat->initialized)
 		{
-			foreach(QString group, sat->groupIDs)
+                        foreach(const QString& group, sat->groupIDs)
 			{
 				if (!groups.contains(group))
 					groups << group;
@@ -712,7 +712,7 @@ void Satellites::setTleSources(QStringList tleSources)
 
 	// clear old source list
 	QRegExp keyRE("^tle_url\\d+$");
-	foreach(QString key, conf->childKeys())
+        foreach(const QString& key, conf->childKeys())
 	{
 		if (keyRE.exactMatch(key))
 			conf->remove(key);
@@ -720,7 +720,7 @@ void Satellites::setTleSources(QStringList tleSources)
 
 	// set the new sources list
 	int i=0;
-	foreach (QString url, updateUrls)
+        foreach (const QString& url, updateUrls)
 	{
 		conf->setValue(QString("tle_url%1").arg(i++), url);
 	}
@@ -826,13 +826,8 @@ void Satellites::updateDownloadComplete(QNetworkReply* reply)
 	}
 }
 
-void Satellites::observerLocationChanged(StelLocation loc)
+void Satellites::observerLocationChanged(StelLocation)
 {
-	foreach(const SatelliteP& sat, satellites)
-	{
-		if (sat->initialized && sat->visible)
-			sat->setObserverLocation(&loc);
-	}
 	recalculateOrbitLines();
 }
 
@@ -863,9 +858,9 @@ void Satellites::displayMessage(const QString& message, const QString hexColor)
 
 void Satellites::messageTimeout(void)
 {
-	foreach(int i, messageIDs)
+        foreach(const int& id, messageIDs)
 	{
-		GETSTELMODULE(LabelMgr)->deleteLabel(i);
+                GETSTELMODULE(LabelMgr)->deleteLabel(id);
 	}
 }
 
@@ -886,7 +881,7 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 		progressBar->setFormat("TLE updating %v/%m");
 	}
 
-	foreach(QString tleFilePath, paths)
+        foreach(const QString& tleFilePath, paths)
 	{
 		QFile tleFile(tleFilePath);
 		if (tleFile.open(QIODevice::ReadOnly|QIODevice::Text))
