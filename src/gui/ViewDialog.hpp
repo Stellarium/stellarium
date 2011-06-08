@@ -27,6 +27,7 @@ class Ui_viewDialogForm;
 class QListWidgetItem;
 
 class AddRemoveLandscapesDialog;
+class AtmosphereDialog;
 
 class ViewDialog : public StelDialog
 {
@@ -60,6 +61,7 @@ private slots:
 	void updateFromProgram();
 
 	void showAddRemoveLandscapesDialog();
+        void showAtmosphereDialog();
 
 	void populateSkyLayersList();
 	void skyLayersSelectionChanged(const QString&);
@@ -70,6 +72,7 @@ private:
 	void updateSkyCultureText();
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
+        AtmosphereDialog * atmosphereDialog;
 };
 
 #endif // _VIEWDIALOG_HPP_

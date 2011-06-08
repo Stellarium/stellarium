@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>508</width>
-    <height>511</height>
+    <height>517</height>
    </rect>
   </property>
   <property name="font">
@@ -670,12 +670,6 @@
                </item>
                <item>
                 <widget class="QSpinBox" name="lightPollutionSpinBox">
-                 <property name="maximumSize">
-                  <size>
-                   <width>70</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
@@ -693,63 +687,14 @@
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="temperatureLayout">
+              <layout class="QHBoxLayout" name="horizontalLayout">
                <item>
-                <widget class="QLabel" name="temperatureLabel">
-                 <property name="inputMethodHints">
-                  <set>Qt::ImhNone</set>
+                <widget class="QPushButton" name="pushButtonAtmosphereDetails">
+                 <property name="toolTip">
+                  <string>pressure, temperature, extinction coefficient</string>
                  </property>
                  <property name="text">
-                  <string>Temperature (C):</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="temperatureDoubleSpinBox">
-                 <property name="maximumSize">
-                  <size>
-                   <width>70</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>-100.000000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>10.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="pressureLayout">
-               <item>
-                <widget class="QLabel" name="pressureLabel">
-                 <property name="text">
-                  <string>Pressure (mbar):</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="pressureDoubleSpinBox">
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="maximum">
-                  <double>1500.000000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>1013.250000000000000</double>
+                  <string>Refraction/Extinction settings...</string>
                  </property>
                 </widget>
                </item>
@@ -1663,8 +1608,6 @@
   <tabstop>planetScaleMoonCheckBox</tabstop>
   <tabstop>showAtmosphereCheckBox</tabstop>
   <tabstop>lightPollutionSpinBox</tabstop>
-  <tabstop>pressureDoubleSpinBox</tabstop>
-  <tabstop>temperatureDoubleSpinBox</tabstop>
   <tabstop>starLabelCheckBox</tabstop>
   <tabstop>starsLabelsHorizontalSlider</tabstop>
   <tabstop>nebulaLabelCheckBox</tabstop>
