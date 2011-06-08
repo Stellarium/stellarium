@@ -21,6 +21,7 @@
 #include "ViewDialog.hpp"
 #include "ui_viewDialog.h"
 #include "AddRemoveLandscapesDialog.hpp"
+#include "AtmosphereDialog.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -52,6 +53,7 @@ ViewDialog::ViewDialog()
 {
 	ui = new Ui_viewDialogForm;
 	addRemoveLandscapesDialog = NULL;
+        atmosphereDialog=NULL;
 }
 
 ViewDialog::~ViewDialog()
@@ -60,6 +62,8 @@ ViewDialog::~ViewDialog()
 	ui=NULL;
 	delete addRemoveLandscapesDialog;
 	addRemoveLandscapesDialog = NULL;
+        delete atmosphereDialog;
+        atmosphereDialog = NULL;
 }
 
 void ViewDialog::languageChanged()
@@ -198,13 +202,15 @@ void ViewDialog::createDialogContent()
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScale(int)));
 	
 	// GZ: changes for refraction
-	ui->pressureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmospherePressure());
-	connect(ui->pressureDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setAtmospherePressure(double)));
-	ui->temperatureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmosphereTemperature());
-	connect(ui->temperatureDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setAtmosphereTemperature(double)));
-//	ui->extinctionDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getExtinctionCoefficient());
-//	connect(ui->extinctionDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setExtinctionCoefficient(double)));
-	// GZ: Done
+        //ui->pressureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmospherePressure());
+        //connect(ui->pressureDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setAtmospherePressure(double)));
+        //ui->temperatureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmosphereTemperature());
+        //connect(ui->temperatureDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setAtmosphereTemperature(double)));
+        //ui->extinctionDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getExtinctionCoefficient());
+        //connect(ui->extinctionDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setExtinctionCoefficient(double)));
+        //// instead
+        connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
+        // GZ: Done
 
 
 	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getCurrentLandscapeID()==lmgr->getDefaultLandscapeID());
@@ -442,9 +448,6 @@ void ViewDialog::landscapeChanged(QListWidgetItem* item)
 	// GZ: Reset values that might have changed.
 	ui->showFogCheckBox->setChecked(lmgr->getFlagFog());
 	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScale());
-	ui->temperatureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmosphereTemperature());
-//	ui->extinctionDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getExtinctionCoefficient());
-	ui->pressureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmospherePressure());
 }
 
 void ViewDialog::showAddRemoveLandscapesDialog()
@@ -454,6 +457,18 @@ void ViewDialog::showAddRemoveLandscapesDialog()
 
 	addRemoveLandscapesDialog->setVisible(true);
 }
+
+void ViewDialog::showAtmosphereDialog()
+{
+        if(atmosphereDialog == NULL)
+                atmosphereDialog = new AtmosphereDialog();
+        //ui->temperatureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmosphereTemperature());
+        //ui->extinctionDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getExtinctionCoefficient());
+        //ui->pressureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmospherePressure());
+
+        atmosphereDialog->setVisible(true);
+}
+
 
 void ViewDialog::shootingStarsZHRChanged()
 {
