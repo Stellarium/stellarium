@@ -22,7 +22,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
-#include "StelNavigator.hpp"
+
 #include "ui_dateTimeDialogGui.h"
 
 #include <QDebug>
@@ -49,7 +49,7 @@ DateTimeDialog::~DateTimeDialog()
 void DateTimeDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	double jd = StelApp::getInstance().getCore()->getNavigator()->getJDay();
+	double jd = StelApp::getInstance().getCore()->getJDay();
 	setDateTime(jd + (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0)); // UTC -> local tz
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
@@ -62,7 +62,7 @@ void DateTimeDialog::createDialogContent()
 	connect(ui->spinner_minute, SIGNAL(valueChanged(int)), this, SLOT(minuteChanged(int)));
 	connect(ui->spinner_second, SIGNAL(valueChanged(int)), this, SLOT(secondChanged(int)));
 
-	connect(this, SIGNAL(dateTimeChanged(double)), StelApp::getInstance().getCore()->getNavigator(), SLOT(setJDay(double)));
+	connect(this, SIGNAL(dateTimeChanged(double)), StelApp::getInstance().getCore(), SLOT(setJDay(double)));
 }
 
 //! take in values, adjust for calendrical correctness if needed, and push to

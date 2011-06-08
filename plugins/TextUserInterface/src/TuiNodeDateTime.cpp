@@ -17,8 +17,8 @@
  */
 
 #include "TuiNodeDateTime.hpp"
-#include "StelNavigator.hpp"
 #include "StelUtils.hpp"
+#include "StelCore.hpp"
 #include <QKeyEvent>
 #include <QDebug>
 #include <QStringList>
@@ -160,19 +160,19 @@ void TuiNodeDateTime::incPart(int part, bool add)
 	}
 	else if (editingPart==2)
 	{
-		value += (diff * JD_DAY);
+		value += (diff * StelCore::JD_DAY);
 	}
 	else if (editingPart==3)
 	{
-		value += (diff * JD_HOUR);
+		value += (diff * StelCore::JD_HOUR);
 	}
 	else if (editingPart==4)
 	{
-		value += (diff * JD_MINUTE);
+		value += (diff * StelCore::JD_MINUTE);
 	}
 	else if (editingPart==5)
 	{
-		value += (diff * JD_SECOND);
+		value += (diff * StelCore::JD_SECOND);
 	}
 }
 

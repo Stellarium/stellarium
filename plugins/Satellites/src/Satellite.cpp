@@ -21,7 +21,6 @@
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
-#include "StelNavigator.hpp"
 #include "StelLocation.hpp"
 #include "StelCore.hpp"
 #include "StelTexture.hpp"
@@ -187,7 +186,7 @@ QVariantMap Satellite::getMap(void)
 	return map;
 }
 
-float Satellite::getSelectPriority(const StelNavigator*) const
+float Satellite::getSelectPriority(const StelCore*) const
 {
 	return -10.;
 }
@@ -281,7 +280,7 @@ Vec3f Satellite::getInfoColor(void) const
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : hintColor;
 }
 
-float Satellite::getVMagnitude(const StelNavigator*) const
+float Satellite::getVMagnitude(const StelCore*) const
 {
 	return 5.0;
 }
@@ -313,7 +312,7 @@ void Satellite::update(double)
 {
 	if (pSatWrapper)
 	{
-		epochTime = StelApp::getInstance().getCore()->getNavigator()->getJDay();
+		epochTime = StelApp::getInstance().getCore()->getJDay();
 
 		pSatWrapper->setEpoch(epochTime);
                 position                 = pSatWrapper->getTEMEPos();
@@ -346,7 +345,7 @@ void Satellite::recalculateOrbitLines(void)
 
 void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 {
-        XYZ = core->getNavigator()->altAzToJ2000(elAzPosition);
+		XYZ = core->altAzToJ2000(elAzPosition);
 	StelApp::getInstance().getVisionModeNight() ? glColor4f(0.6,0.0,0.0,1.0) : glColor4f(hintColor[0],hintColor[1],hintColor[2], Satellite::hintBrightness);
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);

@@ -35,7 +35,7 @@
 #include "GridLinesMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "StelLocaleMgr.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelObjectType.hpp"
 #include "StelObject.hpp"
 #include "StelProjector.hpp"
@@ -228,31 +228,32 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiActions("actionShow_DSS"), SIGNAL(toggled(bool)), imgr, SLOT(setFlagShow(bool)));
 	getGuiActions("actionShow_DSS")->setChecked(imgr->getFlagShow());
 
+
+	StelCore* core = StelApp::getInstance().getCore();
 	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 	connect(getGuiActions("actionIncrease_Script_Speed"), SIGNAL(triggered()), this, SLOT(increaseScriptSpeed()));
 	connect(getGuiActions("actionDecrease_Script_Speed"), SIGNAL(triggered()), this, SLOT(decreaseScriptSpeed()));
 	connect(getGuiActions("actionSet_Real_Script_Speed"), SIGNAL(triggered()), this, SLOT(setRealScriptSpeed()));
-	connect(getGuiActions("actionIncrease_Time_Speed"), SIGNAL(triggered()), nav, SLOT(increaseTimeSpeed()));
-	connect(getGuiActions("actionDecrease_Time_Speed"), SIGNAL(triggered()), nav, SLOT(decreaseTimeSpeed()));
-	connect(getGuiActions("actionIncrease_Time_Speed_Less"), SIGNAL(triggered()), nav, SLOT(increaseTimeSpeedLess()));
-	connect(getGuiActions("actionDecrease_Time_Speed_Less"), SIGNAL(triggered()), nav, SLOT(decreaseTimeSpeedLess()));
-	connect(getGuiActions("actionSet_Real_Time_Speed"), SIGNAL(triggered()), nav, SLOT(toggleRealTimeSpeed()));
-	connect(getGuiActions("actionSet_Time_Rate_Zero"), SIGNAL(triggered()), nav, SLOT(setZeroTimeSpeed()));
-	connect(getGuiActions("actionReturn_To_Current_Time"), SIGNAL(triggered()), nav, SLOT(setTimeNow()));
+	connect(getGuiActions("actionIncrease_Time_Speed"), SIGNAL(triggered()), core, SLOT(increaseTimeSpeed()));
+	connect(getGuiActions("actionDecrease_Time_Speed"), SIGNAL(triggered()), core, SLOT(decreaseTimeSpeed()));
+	connect(getGuiActions("actionIncrease_Time_Speed_Less"), SIGNAL(triggered()), core, SLOT(increaseTimeSpeedLess()));
+	connect(getGuiActions("actionDecrease_Time_Speed_Less"), SIGNAL(triggered()), core, SLOT(decreaseTimeSpeedLess()));
+	connect(getGuiActions("actionSet_Real_Time_Speed"), SIGNAL(triggered()), core, SLOT(toggleRealTimeSpeed()));
+	connect(getGuiActions("actionSet_Time_Rate_Zero"), SIGNAL(triggered()), core, SLOT(setZeroTimeSpeed()));
+	connect(getGuiActions("actionReturn_To_Current_Time"), SIGNAL(triggered()), core, SLOT(setTimeNow()));
 	connect(getGuiActions("actionSwitch_Equatorial_Mount"), SIGNAL(toggled(bool)), mmgr, SLOT(setEquatorialMount(bool)));
 	getGuiActions("actionSwitch_Equatorial_Mount")->setChecked(mmgr->getMountMode() != StelMovementMgr::MountAltAzimuthal);
-	connect(getGuiActions("actionAdd_Solar_Hour"), SIGNAL(triggered()), nav, SLOT(addHour()));
-	connect(getGuiActions("actionAdd_Solar_Day"), SIGNAL(triggered()), nav, SLOT(addDay()));
-	connect(getGuiActions("actionAdd_Solar_Week"), SIGNAL(triggered()), nav, SLOT(addWeek()));
-	connect(getGuiActions("actionSubtract_Solar_Hour"), SIGNAL(triggered()), nav, SLOT(subtractHour()));
-	connect(getGuiActions("actionSubtract_Solar_Day"), SIGNAL(triggered()), nav, SLOT(subtractDay()));
-	connect(getGuiActions("actionSubtract_Solar_Week"), SIGNAL(triggered()), nav, SLOT(subtractWeek()));
-	connect(getGuiActions("actionAdd_Sidereal_Day"), SIGNAL(triggered()), nav, SLOT(addSiderealDay()));
-	connect(getGuiActions("actionAdd_Sidereal_Week"), SIGNAL(triggered()), nav, SLOT(addSiderealWeek()));
-	connect(getGuiActions("actionSubtract_Sidereal_Day"), SIGNAL(triggered()), nav, SLOT(subtractSiderealDay()));
-	connect(getGuiActions("actionSubtract_Sidereal_Week"), SIGNAL(triggered()), nav, SLOT(subtractSiderealWeek()));
-	connect(getGuiActions("actionSet_Home_Planet_To_Selected"), SIGNAL(triggered()), nav, SLOT(moveObserverToSelected()));
+	connect(getGuiActions("actionAdd_Solar_Hour"), SIGNAL(triggered()), core, SLOT(addHour()));
+	connect(getGuiActions("actionAdd_Solar_Day"), SIGNAL(triggered()), core, SLOT(addDay()));
+	connect(getGuiActions("actionAdd_Solar_Week"), SIGNAL(triggered()), core, SLOT(addWeek()));
+	connect(getGuiActions("actionSubtract_Solar_Hour"), SIGNAL(triggered()), core, SLOT(subtractHour()));
+	connect(getGuiActions("actionSubtract_Solar_Day"), SIGNAL(triggered()), core, SLOT(subtractDay()));
+	connect(getGuiActions("actionSubtract_Solar_Week"), SIGNAL(triggered()), core, SLOT(subtractWeek()));
+	connect(getGuiActions("actionAdd_Sidereal_Day"), SIGNAL(triggered()), core, SLOT(addSiderealDay()));
+	connect(getGuiActions("actionAdd_Sidereal_Week"), SIGNAL(triggered()), core, SLOT(addSiderealWeek()));
+	connect(getGuiActions("actionSubtract_Sidereal_Day"), SIGNAL(triggered()), core, SLOT(subtractSiderealDay()));
+	connect(getGuiActions("actionSubtract_Sidereal_Week"), SIGNAL(triggered()), core, SLOT(subtractSiderealWeek()));
+	connect(getGuiActions("actionSet_Home_Planet_To_Selected"), SIGNAL(triggered()), core, SLOT(moveObserverToSelected()));
 
 	// connect the actor after setting the nightmode.
 	// StelApp::init() already set flagNightMode for us, don't do it twice!
@@ -552,8 +553,8 @@ void StelGui::updateI18n()
 
 void StelGui::update()
 {
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	if (nav->getTimeRate()<-0.99*JD_SECOND)
+	StelCore* core = StelApp::getInstance().getCore();
+	if (core->getTimeRate()<-0.99*StelCore::JD_SECOND)
 	{
 		if (buttonTimeRewind->isChecked()==false)
 			buttonTimeRewind->setChecked(true);
@@ -563,7 +564,7 @@ void StelGui::update()
 		if (buttonTimeRewind->isChecked()==true)
 			buttonTimeRewind->setChecked(false);
 	}
-	if (nav->getTimeRate()>1.01*JD_SECOND)
+	if (core->getTimeRate()>1.01*StelCore::JD_SECOND)
 	{
 		if (buttonTimeForward->isChecked()==false)
 			buttonTimeForward->setChecked(true);
@@ -573,16 +574,16 @@ void StelGui::update()
 		if (buttonTimeForward->isChecked()==true)
 			buttonTimeForward->setChecked(false);
 	}
-	if (nav->getTimeRate() == 0) {
+	if (core->getTimeRate() == 0) {
 		if (buttonTimeRealTimeSpeed->isChecked() != StelButton::ButtonStateNoChange)
 			buttonTimeRealTimeSpeed->setChecked(StelButton::ButtonStateNoChange);
-	} else if (nav->getRealTimeSpeed()) {
+	} else if (core->getRealTimeSpeed()) {
 		if (buttonTimeRealTimeSpeed->isChecked() != StelButton::ButtonStateOn)
 			buttonTimeRealTimeSpeed->setChecked(StelButton::ButtonStateOn);
 	} else if (buttonTimeRealTimeSpeed->isChecked() != StelButton::ButtonStateOff) {
 		buttonTimeRealTimeSpeed->setChecked(StelButton::ButtonStateOff);
 	}
-	const bool isTimeNow=nav->getIsTimeNow();
+	const bool isTimeNow=core->getIsTimeNow();
 	if (buttonTimeCurrent->isChecked()!=isTimeNow)
 		buttonTimeCurrent->setChecked(isTimeNow);
 	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
@@ -677,7 +678,7 @@ void StelGui::update()
 	}
 
 	if (dateTimeDialog.visible())
-		dateTimeDialog.setDateTime(nav->getJDay());
+		dateTimeDialog.setDateTime(core->getJDay());
 }
 
 // Add a new progress bar in the lower right corner of the screen.

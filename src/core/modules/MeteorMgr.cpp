@@ -23,7 +23,7 @@
 #include <QtOpenGL>
 
 #include "StelProjector.hpp"
-#include "StelNavigator.hpp"
+
 #include "MeteorMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -93,7 +93,7 @@ void MeteorMgr::update(double deltaTime)
 		return;
 	
 	deltaTime*=1000;
-	StelNavigator * nav = StelApp::getInstance().getCore()->getNavigator();
+	StelCore* core = StelApp::getInstance().getCore();
 
 	// step through and update all active meteors
 	for (std::vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
@@ -111,7 +111,7 @@ void MeteorMgr::update(double deltaTime)
 
 	// only makes sense given lifetimes of meteors to draw when timeSpeed is realtime
 	// otherwise high overhead of large numbers of meteors
-	double tspeed = nav->getTimeRate()*86400;  // sky seconds per actual second
+	double tspeed = core->getTimeRate()*86400;  // sky seconds per actual second
 	if (tspeed<=0 || fabs(tspeed)>1.)
 	{
 		// don't start any more meteors

@@ -63,7 +63,7 @@ private:
 	virtual QString getType() const {return "Constellation";}
 
 	//! observer centered J2000 coordinates.
-	virtual Vec3d getJ2000EquatorialPos(const StelNavigator*) const {return XYZname;}
+	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const {return XYZname;}
 
 	virtual double getAngularSize(const StelCore*) const {Q_ASSERT(0); return 0;} // TODO
 
@@ -105,7 +105,7 @@ private:
 	//! Draw the lines for the Constellation.
 	//! This method uses the coords of the stars (optimized for use thru
 	//! the class ConstellationMgr only).
-	void drawOptim(StelPainter& sPainter, const StelNavigator* nav, const SphericalCap& viewportHalfspace) const;
+	void drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const;
 	//! Draw the art texture, optimized function to be called thru a constellation manager only.
 	void drawArtOptim(StelPainter& sPainter, const SphericalRegion& region) const;
 	//! Update fade levels according to time since various events.
