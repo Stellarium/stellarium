@@ -18,16 +18,15 @@
  *
  * Refraction and extinction computations.
  * Implementation: 2010-03-23 GZ=Georg Zotti, Georg.Zotti@univie.ac.at
- */
+ * 2010-12 FC split into 2 classes, implemented Refraction */
 
 #ifndef _REFRACTIONEXTINCTION_HPP_
 #define _REFRACTIONEXTINCTION_HPP_
-// TODO USABILITY: add 4 more flags/switches in GUI:
-// (boolean) refraction, [could be omitted and linked to global "show atmosphere"]
-// (value field) Temperature [C] [influences refraction]
-// (value field) Pressure [mbar]  [influences refraction]
-// (combo)   extinction Coeff. k=0...(0.01)...1, [if k=0, no ext. effect]
-// SUGGESTION: Could Temperature/Pressure/ex.Coeff./LightPollution be linked to the landscape files?
+// USABILITY: added 3 more flags/switches in GUI:
+// Temperature [C] [influences refraction]
+// Pressure [mbar]  [influences refraction]
+// extinction Coeff. k=0...(0.01)...1, [if k=0, no ext. effect]
+// SUGGESTION: Allow Temperature/Pressure/ex.Coeff./LightPollution set in the landscape files
 
 #include "VecMath.hpp"
 #include "StelProjector.hpp"
@@ -37,9 +36,9 @@
 //! Airmass computations are limited to meaningful altitudes,
 //! and refraction solutions can only be aproximate, given the turbulent, unpredictable real atmosphere.
 //! The solution provided here will [hopefully!] result in a visible "zone of avoidance" near the horizon down to altitude -2,
-//! and will show stars in their full brightness at their geometrical positions below -2 degrees.
+//! and will show stars in their full brightness at their geometrical positions below -5 degrees.
 //! Of course, plotting stars below the horizon could be coupled to setting of horizon foreground,
-//! it's another usability issue. Typical horizons do not go down below -1, so -2 should leave a fair amount of room.
+//! it's another usability issue. Typical horizons do not go down below -1, so strange effects between -2 and -5 should be covered.
 //! Note that forward/backward are no absolute reverse operations!
 //! All the computations should be in effect
 //! (1) only if atmosphere effects are true
@@ -49,17 +48,28 @@ class Extinction
 {
 public:
 	Extinction();
-	//! Compute extinction effect for arrays of size @param size position vectors and magnitudes.
-	//! @param altAzPos are the normalized (true) star position vectors, and their z components sin(true_altitude).
+	//! Compute extinction effect for arrays of size @param num position vectors and magnitudes.
+	//! @param altAzPos are the normalized (apparent) star position vectors, and their z components sin(apparent_altitude).
+	//! This call must therefore be done after application of Refraction, and only if atmospheric effects are on.
 	//! Note that forward/backward are no absolute reverse operations!
-	void forward(Vec3d *altAzPos, float *mag, const int size) const;
+	void forward(const Vec3d *altAzPos, float *mag, const int num) const;
+	void forward(const Vec3f *altAzPos, float *mag, const int num) const;
+	//! Convenience method for the same
+	void forward(const double *sinAlt,  float *mag, const int num) const;
+	void forward(const float  *sinAlt,  float *mag, const int num) const;
+
 	//! Compute extinction effect for arrays of size @param size position vectors and magnitudes.
 	//! @param altAzPos are the normalized (apparent) star position vectors, and their z components sin(apparent_altitude).
 	//! Note that forward/backward are no absolute reverse operations!
-	void backward(Vec3d *altAzPos, float *mag, const int size) const;
+	void backward(const Vec3d *altAzPos, float *mag, const int num) const;
+	void backward(const Vec3f *altAzPos, float *mag, const int num) const;
+	//! Convenience method for the same
+	void backward(const double *sinAlt,  float *mag, const int num) const;
+	void backward(const float  *sinAlt,  float *mag, const int num) const;
+
 	//! Set visual extinction coefficient (mag/airmass), influences extinction computation.
 	//! @param k= 0.1 for highest mountains, 0.2 for very good lowland locations, 0.35 for typical lowland, 0.5 in humid climates.
-	void setExtinctionCoefficient(float k);
+	void setExtinctionCoefficient(float k) { ext_coeff=k; }
 	float getExtinctionCoefficient() const {return ext_coeff;}
 
 private:
@@ -69,11 +79,13 @@ private:
 	//! following Young: Air mass and refraction. Applied Optics 33(6), pp.1108-1110, 1994. [X(90)~32].
 	//! A problem ist that refraction depends on air pressure and temperature, but Young's formula assumes T=15C, p=1013.25mbar.
 	//! So, it seems better to compute refraction first, and then use the Rozenberg formula here.
-	//! Rozenberg is infinite at Z=92.17 deg, Young at Z=93.6 deg, so this function RETURNS 0 BELOW -2 DEGREES!
-	float airmass(float cosZ, bool apparent_z=true) const;
+	//! Rozenberg is infinite at Z=92.17 deg, Young at Z=93.6 deg, so this function RETURNS SUBHORIZONTAL_AIRMASS BELOW -2 DEGREES!
+	float airmass(const float cosZ, const bool apparent_z=true) const;
 
 	//! k, magnitudes/airmass, in [0.00, ... 1.00], (default 0.20).
 	float ext_coeff;
+	//! should be either 0.0 (stars visible in full brightness below horizon) or 40.0 (practically invisible)
+	static const float SUBHORIZONTAL_AIRMASS;
 };
 
 
@@ -82,23 +94,23 @@ class Refraction: public StelProjector::ModelViewTranform
 public:
 	Refraction();
 
-	//! Compute refraction.
-	//! @param altAzPos is the apparent star position vector
+	//! Apply refraction.
+	//! @param altAzPos is the geometrical star position vector, to be transformed into apparent position.
 	//! Note that forward/backward are no absolute reverse operations!
 	void forward(Vec3d& altAzPos) const;
 
-	//! Compute refraction and extinction effects for arrays of size @param size position vectors and magnitudes.
-	//! @param altAzPos is the apparent star position vector
+	//! Remove refraction from position ("reduce").
+	//! @param altAzPos is the apparent star position vector, to be transformed into geometrical position.
 	//! Note that forward/backward are no absolute reverse operations!
 	void backward(Vec3d& altAzPos) const;
 
-	//! Compute refraction.
-	//! @param altAzPos is the apparent star position vector
+	//! Apply refraction.
+	//! @param altAzPos is the geometrical star position vector, to be transformed into apparent position.
 	//! Note that forward/backward are no absolute reverse operations!
 	void forward(Vec3f& altAzPos) const;
 
-	//! Compute refraction and extinction effects for arrays of size @param size position vectors and magnitudes.
-	//! @param altAzPos is the apparent star position vector
+	//! Remove refraction from position ("reduce").
+	//! @param altAzPos is the apparent star position vector, to be transformed into geometrical position.
 	//! Note that forward/backward are no absolute reverse operations!
 	void backward(Vec3f& altAzPos) const;
 
@@ -119,7 +131,7 @@ public:
 	void setTemperature(float t_C);
 	float getTemperature() const {return temperature;}
 
-	//! Set the transformation matrice used to transform input vector to AltAz frame.
+	//! Set the transformation matrices used to transform input vector to AltAz frame.
 	void setPreTransfoMat(const Mat4d& m);
 	void setPostTransfoMat(const Mat4d& m);
 
@@ -127,7 +139,7 @@ private:
 	//! Update precomputed variables.
 	void updatePrecomputed();
 
-	//! Actually, these 3 Atmosphere parameters should be controlled by GUI.
+	//! These 3 Atmosphere parameters can be controlled by GUI.
 	//! Pressure[mbar] (1013)
 	float pressure;
 	//! Temperature[Celsius deg] (10).
@@ -136,6 +148,22 @@ private:
 	float press_temp_corr_Saemundson;
 	//! Numerator of refraction formula, to be cached for speed.
 	float press_temp_corr_Bennett;
+
+	//! These constants are usable for experiments with the limits of refraction effects.
+	static const double MIN_GEO_ALTITUDE_DEG;
+	static const double MIN_GEO_ALTITUDE_RAD;
+	static const double MIN_GEO_ALTITUDE_SIN;
+	static const double MIN_APP_ALTITUDE_DEG;
+	static const double MIN_APP_ALTITUDE_RAD;
+	static const double MIN_APP_ALTITUDE_SIN;
+	static const float MIN_GEO_ALTITUDE_DEG_F;
+	static const float MIN_GEO_ALTITUDE_RAD_F;
+	static const float MIN_GEO_ALTITUDE_SIN_F;
+	static const float MIN_APP_ALTITUDE_DEG_F;
+	static const float MIN_APP_ALTITUDE_RAD_F;
+	static const float MIN_APP_ALTITUDE_SIN_F;
+	static const double TRANSITION_WIDTH_DEG;
+	static const double TRANSITION_WIDTH_DEG_F;
 
 	//! Used to pretransform coordinates into AltAz frame.
 	Mat4d preTransfoMat;
