@@ -58,6 +58,7 @@ void SolarSystemManagerWindow::createDialogContent()
 	ui->setupUi(dialog);
 
 	//Signals
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->pushButtonCopyFile, SIGNAL(clicked()), this, SLOT(copyConfiguration()));
 	connect(ui->pushButtonReplaceFile, SIGNAL(clicked()), this, SLOT(replaceConfiguration()));
@@ -89,9 +90,6 @@ void SolarSystemManagerWindow::languageChanged()
 		populateSolarSystemList();
 		ui->labelVersion->setText(QString("Version %1").arg(PLUGIN_VERSION));
 	}
-
-	if (mpcImportWindow)
-		mpcImportWindow->languageChanged();
 }
 
 void SolarSystemManagerWindow::newImportMPC()

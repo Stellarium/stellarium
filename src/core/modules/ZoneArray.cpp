@@ -29,7 +29,6 @@
 #include "StelFileMgr.hpp"
 #include "StelGeodesicGrid.hpp"
 #include "StelObject.hpp"
-#include "StelNavigator.hpp"
 
 static unsigned int stel_bswap_32(unsigned int val) {
   return (((val) & 0xff000000) >> 24) | (((val) & 0x00ff0000) >>  8) |
@@ -482,7 +481,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_insi
 	Vec3f vf;
 	const Star *const end = z->getStars() + z->size;
 	static const double d2000 = 2451545.0;
-	const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getNavigator()->getJDay()-d2000)/365.25) / star_position_scale;
+	const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
 	const float* tmpRcmag;
 	for (const Star *s=z->getStars();s<end;++s)
 	{
@@ -501,11 +500,11 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_insi
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::searchAround(const StelNavigator* nav, int index, const Vec3d &v, double cosLimFov,
+void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const Vec3d &v, double cosLimFov,
 					  QList<StelObjectP > &result)
 {
 	static const double d2000 = 2451545.0;
-	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * ((nav->getJDay()-d2000)/365.25)/ star_position_scale;
+	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * ((core->getJDay()-d2000)/365.25)/ star_position_scale;
 	const SpecialZoneData<Star> *const z = getZones()+index;
 	Vec3f tmp;
 	Vec3f vf(v[0], v[1], v[2]);

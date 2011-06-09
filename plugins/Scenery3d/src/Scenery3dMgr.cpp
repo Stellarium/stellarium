@@ -207,7 +207,7 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
     if (newScenery3d->hasLocation())
     {
         qDebug() << "Re-Setting location to given coordinates.";
-        StelApp::getInstance().getCore()->getNavigator()->moveObserverTo(newScenery3d->getLocation(), 0., 0.);
+	StelApp::getInstance().getCore()->moveObserverTo(newScenery3d->getLocation(), 0., 0.);
     }
     else qDebug() << "No coordinates given in scenery3d.";
 
@@ -444,7 +444,8 @@ StelPluginInfo Scenery3dStelPluginInterface::getPluginInfo() const
 	info.displayedName = "Scenery3d";
         info.authors = "Simon Parzer, Peter Neubauer, Georg Zotti";
         info.contact = "Georg.Zotti@univie.ac.at";
-        info.description = "OBJ landscape renderer.";
+	info.description = "OBJ landscape renderer.";
+//	info.description = "OBJ landscape renderer. This Beta compiled 2011-06-06 for Maurizio Forte for collaboration on Copan.";
 	return info;
 }
 

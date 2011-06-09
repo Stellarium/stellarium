@@ -4,11 +4,6 @@ LINK_DIRECTORIES(/src)
 
 SET(Satellites_SRCS
   gsatellite/gException.hpp
-  gsatellite/gMatrix.cpp
-  gsatellite/gMatrix.hpp
-  gsatellite/gMatrixTempl.hpp
-  gsatellite/gObserver.cpp
-  gsatellite/gObserver.hpp
   gsatellite/gSatTEME.cpp
   gsatellite/gSatTEME.hpp
   gsatellite/mathUtils.cpp
@@ -27,7 +22,8 @@ SET(Satellites_SRCS
   gsatellite/sgp4unit.h
   gsatellite/stdsat.h
 
-  
+  gSatWrapper.hpp
+  gSatWrapper.cpp
   Satellite.hpp
   Satellite.cpp
   Satellites.hpp

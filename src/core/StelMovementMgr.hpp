@@ -63,10 +63,9 @@ public:
 	//! Handle mouse click events.
 	virtual void handleMouseClicks(class QMouseEvent* event);
 	//! Called then the selected object changes.
-	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::ReplaceSelection);
-        // GZ: allow some keypress interaction by plugins.
-        virtual double getCallOrder(StelModuleActionName actionName) const;
-
+	//virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::ReplaceSelection);
+	// GZ: allow some keypress interaction by plugins.
+	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to StelMovementMgr
@@ -203,6 +202,10 @@ public slots:
 	void setDragTimeMode(bool b) {dragTimeMode=b;}
 	bool getDragTimeMode() const {return dragTimeMode;}
 
+private slots:
+	//! Called when the selected object changes.
+	void selectedObjectChange(StelModule::StelModuleSelectAction action);
+	
 private:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
 	Vec3d mountFrameToJ2000(const Vec3d& v) const;

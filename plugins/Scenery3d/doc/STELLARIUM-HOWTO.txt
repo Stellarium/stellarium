@@ -6,7 +6,7 @@ http://astrosim.univie.ac.at
 
 Have you ever wished to be able to walk through Stonehenge or other
 building structures described as being constructed with astronomical
-orientations in mind, and experience such orientations in 3D?
+orientation in mind, and experience such orientation in 3D?
 
 The Stellarium Scenery3d plugin, developed for the Astrosim project by
 Simon Parzer and Peter Neubauer from Vienna University of Technology
@@ -27,8 +27,8 @@ keys. Adding [Shift] key increases speed by 10, [Alt] by 5 (both:
 continue. (Press [Ctrl]+any cursor key to stop.)
 
 [Ctrl-K] toggles coordinate display. If you have georeferenced models
-in a true geographical coordinate grid, e.g. UTM or Gauss-Grueger, you
-will especially like this. Display shows Easting, Nothing, Altitude of
+in a true geographical coordinate grid, e.g. UTM or Gauss-Krueger, you
+will especially like this. Display shows Easting, Northing, Altitude of
 ground, and eye height above ground.
 
 Press [Ctrl+Space] to toggle shadow display. Note that currently
@@ -155,7 +155,7 @@ author=<Your Name yourname@yourplace.com>
 copyright=<Copyright Info>
 description=<Description>    What you can see in this scenery, what to 
                              look for, historical context, etc.
-obj_order=XZY                If you have used an exporter which swaps Y/Z coordinates, use this key. 
+obj_order=XYZ                If you have used an exporter which swaps Y/Z coordinates, use this key. 
                              Default: XYZ, options: XZY, YZX, YXZ, ZXY, ZYX
 
 ; OPTIONAL SECTION, Required if coord/convergence_angle==from_grid; else location is inherited from landscape.
