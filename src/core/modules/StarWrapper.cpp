@@ -44,12 +44,11 @@ namespace BigStarCatalogExtension {
 
 QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
-	const StelNavigator* nav = core->getNavigator();
 	QString str;
 	QTextStream oss(&str);
 
 	if (flags&Magnitude)
-		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(nav), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
+		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(core), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
 
 	oss << getPositionInfoString(core, flags);
 
@@ -69,7 +68,6 @@ QString StarWrapper1::getEnglishName(void) const
 QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	QString str;
-	const StelNavigator* nav = core->getNavigator();
 
 	QTextStream oss(&str);
 	if (s->hip)
@@ -107,11 +105,11 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	}
 
 	if (flags&Magnitude)
-		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(nav), 'f', 2),
+		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(core), 'f', 2),
 														QString::number(s->getBV(), 'f', 2)) << "<br>";
 
 	if ((flags&AbsoluteMagnitude) && s->plx && !isNan(s->plx) && !isInf(s->plx))
-		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(nav)+5.*(1.+std::log10(0.00001*s->plx)), 0, 'f', 2) << "<br>";
+		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core)+5.*(1.+std::log10(0.00001*s->plx)), 0, 'f', 2) << "<br>";
 
 	oss << getPositionInfoString(core, flags);
 

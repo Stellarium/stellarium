@@ -1,6 +1,5 @@
 /*
- * portions Copyright (C) 2010 Bernhard Reutner-Fischer
- * portions Copyright (C) 2010 Timothy Reaves
+ * Copyright (C) 2010 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +23,8 @@
 #include <QSettings>
 
 #include <math.h>
+
+#define RADIAN_TO_DEGREES 57.2957795131
 
 CCD::CCD()
 {
@@ -99,55 +100,55 @@ void CCD::setResolutionY(int resolution)
 	m_resolutionY = resolution;
 }
 
-float CCD::chipWidth()  const 
+double CCD::chipWidth()  const
 {
 	return m_chipWidth;
 }
 
-void CCD::setChipWidth(float width)
+void CCD::setChipWidth(double width)
 {
 	m_chipWidth = width;
 }
 
-float CCD::chipHeight()  const 
+double CCD::chipHeight()  const
 {
 	return m_chipHeight;
 }
 
-void CCD::setChipHeight(float height)
+void CCD::setChipHeight(double height)
 {
 	m_chipHeight = height;
 }
 
-float CCD::pixelWidth()  const 
+double CCD::pixelWidth()  const
 {
 	return m_pixelWidth;
 }
 
-void CCD::setPixelWidth(float width)
+void CCD::setPixelWidth(double width)
 {
 	m_pixelWidth = width;
 }
 
-float CCD::pixelHeight()  const 
+double CCD::pixelHeight()  const
 {
 	return m_pixelHeight;
 }
 
-void CCD::setPixelHeight(float height)
+void CCD::setPixelHeight(double height)
 {
 	m_pixelHeight = height;
 }
 
-float CCD::getActualFOVx(Telescope *telescope) const
+double CCD::getActualFOVx(Telescope *telescope) const
 {
-	float FOVx = 6875.5 * atan(this->chipHeight() / telescope->focalLength() / 2);
+	double FOVx = RADIAN_TO_DEGREES * this->chipHeight() / telescope->focalLength();
 	return FOVx;
 }
 
-float CCD::getActualFOVy(Telescope *telescope) const
+double CCD::getActualFOVy(Telescope *telescope) const
 {
-	float FOVy = 6875.5 * atan(this->chipWidth() / telescope->focalLength() / 2);
+	double FOVy = RADIAN_TO_DEGREES * this->chipWidth() / telescope->focalLength();
 	return FOVy;
 }
 
@@ -164,10 +165,10 @@ CCD* CCD::ccdFromSettings(QSettings* theSettings, int ccdIndex)
 	ccd->setName(theSettings->value(prefix + "name", "").toString());
 	ccd->setResolutionX(theSettings->value(prefix + "resolutionX", "0").toInt());
 	ccd->setResolutionY(theSettings->value(prefix + "resolutionY", "0").toInt());
-	ccd->setChipWidth(theSettings->value(prefix + "chip_width", "0.0").toFloat());
-	ccd->setChipHeight(theSettings->value(prefix + "chip_height", "0.0").toFloat());
-	ccd->setPixelWidth(theSettings->value(prefix + "pixel_width", "0.0").toFloat());
-	ccd->setPixelHeight(theSettings->value(prefix + "pixel_height", "0.0").toFloat());
+	ccd->setChipWidth(theSettings->value(prefix + "chip_width", "0.0").toDouble());
+	ccd->setChipHeight(theSettings->value(prefix + "chip_height", "0.0").toDouble());
+	ccd->setPixelWidth(theSettings->value(prefix + "pixel_width", "0.0").toDouble());
+	ccd->setPixelHeight(theSettings->value(prefix + "pixel_height", "0.0").toDouble());
 	
 	return ccd;
 }

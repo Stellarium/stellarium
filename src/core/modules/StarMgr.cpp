@@ -32,7 +32,7 @@
 #include "StarMgr.hpp"
 #include "StelObject.hpp"
 #include "StelTexture.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelUtils.hpp"
 #include "StelToneReproducer.hpp"
 #include "StelTranslator.hpp"
@@ -50,6 +50,8 @@
 #include "StelPainter.hpp"
 #include "StelJsonParser.hpp"
 #include "ZoneArray.hpp"
+#include "StelSkyDrawer.hpp"
+#include "RefractionExtinction.hpp"
 
 #include <errno.h>
 #include <unistd.h>
@@ -236,16 +238,21 @@ void StarMgr::init()
 	{
 		it.value()->scaleAxis();
 	}
+	StelApp *app = &StelApp::getInstance();
+	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(app, SIGNAL(skyCultureChanged(const QString&)), this, SLOT(updateSkyCulture(const QString&)));
+	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 }
 
 
-void StarMgr::drawPointer(StelPainter& sPainter, const StelNavigator * nav)
+void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 {
 	const QList<StelObjectP> newSelected = objectMgr->getSelectedObject("Star");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
-		Vec3d pos=obj->getJ2000EquatorialPos(nav);
+		Vec3d pos=obj->getJ2000EquatorialPos(core);
+
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
 		if (!sPainter.getProjector()->project(pos, screenpos))
@@ -618,7 +625,6 @@ int StarMgr::getMaxSearchLevel() const
 // Draw all the stars
 void StarMgr::draw(StelCore* core)
 {
-	StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
 	// If stars are turned off don't waste time below
@@ -682,7 +688,7 @@ void StarMgr::draw(StelCore* core)
 	skyDrawer->postDrawPointSource(&sPainter);
 
 	if (objectMgr->getFlagSelectedObjectPointer())
-		drawPointer(sPainter, nav);
+		drawPointer(sPainter, core);
 }
 
 
@@ -746,13 +752,13 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 		int zone;
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it.key());(zone = it1.next()) >= 0;)
 		{
-			it.value()->searchAround(core->getNavigator(), zone,v,f,result);
+			it.value()->searchAround(core, zone,v,f,result);
 			//qDebug() << " " << zone;
 		}
 		//qDebug() << endl << "search border(" << it->first << "):";
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it.key()); (zone = it1.next()) >= 0;)
 		{
-			it.value()->searchAround(core->getNavigator(), zone,v,f,result);
+			it.value()->searchAround(core, zone,v,f,result);
 			//qDebug() << " " << zone;
 		}
 	}

@@ -257,8 +257,8 @@ void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos)
 	Vec3d position = j2000Pos;
 	if (equinox == EquinoxJNow)
 	{
-		const StelNavigator* navigator = StelApp::getInstance().getCore()->getNavigator();
-		position = navigator->j2000ToEquinoxEqu(j2000Pos);
+		const StelCore* core = StelApp::getInstance().getCore();
+		position = core->j2000ToEquinoxEqu(j2000Pos);
 	}
 
 	if (writeBufferEnd - writeBuffer + 20 < (int)sizeof(writeBuffer))
@@ -424,8 +424,8 @@ void TelescopeTCP::performReading(void)
 					Vec3d j2000Position = position;
 					if (equinox == EquinoxJNow)
 					{
-						const StelNavigator* navigator = StelApp::getInstance().getCore()->getNavigator();
-						j2000Position = navigator->equinoxEquToJ2000(position);
+						const StelCore* core = StelApp::getInstance().getCore();
+						j2000Position = core->equinoxEquToJ2000(position);
 					}
 					interpolatedPosition.add(j2000Position, getNow(), server_micros, status);
 				}
@@ -452,7 +452,7 @@ void TelescopeTCP::performReading(void)
 
 //! estimates where the telescope is by interpolation in the stored
 //! telescope positions:
-Vec3d TelescopeTCP::getJ2000EquatorialPos(const StelNavigator*) const
+Vec3d TelescopeTCP::getJ2000EquatorialPos(const StelCore*) const
 {
 	const qint64 now = getNow() - time_delay;
 	return interpolatedPosition.get(now);

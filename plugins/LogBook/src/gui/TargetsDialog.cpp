@@ -130,7 +130,7 @@ void TargetsDialog::createTargetFromSelection()
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected()) {
 		QList<StelObjectP> selectedObjects = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
 		QListIterator<StelObjectP> objectIterator(selectedObjects);
-		StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
+		StelCore* core = StelApp::getInstance().getCore();
 		while (objectIterator.hasNext()) {
 			StelObjectP stelObject = objectIterator.next();
 			QString type = stelObject->getType();
@@ -138,13 +138,13 @@ void TargetsDialog::createTargetFromSelection()
 			if (englishName == "") {
 				englishName = "No Name";
 			}
-			float magnatude = stelObject->getVMagnitude(nav);
-			double angularSize = stelObject->getAngularSize(StelApp::getInstance().getCore());
+			float magnatude = stelObject->getVMagnitude(core);
+			double angularSize = stelObject->getAngularSize(core);
 			
 			Vec3d pos;
 			double ra, dec;
 			// ra/dec in J2000
-			pos = stelObject->getJ2000EquatorialPos(nav);
+			pos = stelObject->getJ2000EquatorialPos(core);
 			StelUtils::rectToSphe(&ra, &dec, pos);
 			
 		    QSqlField field1("name", QVariant::String);

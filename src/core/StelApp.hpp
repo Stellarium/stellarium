@@ -176,6 +176,11 @@ public slots:
 	//! Report that a download occured. This is used for statistics purposes.
 	//! Connect this slot to QNetworkAccessManager::finished() slot to obtain statistics at the end of the program.
 	void reportFileDownloadFinished(QNetworkReply* reply);
+	
+signals:
+	void colorSchemeChanged(const QString&);
+	void languageChanged();
+	void skyCultureChanged(const QString&);
 
 private:
 
@@ -187,10 +192,6 @@ private:
 	void handleMove(int x, int y, Qt::MouseButtons b);
 	//! Handle key press and release.
 	void handleKeys(class QKeyEvent* event);
-
-	//! Set the colorscheme for all the modules
-	void setColorScheme(const QString& section);
-
 
 	// The StelApp singleton
 	static StelApp* singleton;

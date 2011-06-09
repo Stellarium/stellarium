@@ -81,6 +81,7 @@ void MpcImportWindow::createDialogContent()
 	ui->setupUi(dialog);
 
 	//Signals
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	connect(ui->pushButtonAcquire, SIGNAL(clicked()), this, SLOT(acquireObjectData()));
@@ -678,7 +679,7 @@ void MpcImportWindow::sendQuery()
 	url.addQueryItem("ce", "f");
 	url.addQueryItem("js", "f");
 
-	QNetworkRequest request(QUrl("http://scully.cfa.harvard.edu/~cgi/MPEph2"));
+	QNetworkRequest request(QUrl("http://scully.cfa.harvard.edu/cgi-bin/mpeph2.cgi"));
 	request.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");//Is this really necessary?
 	request.setHeader(QNetworkRequest::ContentLengthHeader, url.encodedQuery().length());
 
@@ -877,10 +878,10 @@ void MpcImportWindow::loadBookmarks()
 	qDebug() << "Bookmarks file can't be read. Hard-coded bookmarks will be used.";
 
 	//Initialize with hard-coded values
-	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition", "http://www.minorplanetcenter.org/iau/Ephemerides/Bright/2010/Soft00Bright.txt");
-	bookmarks[MpcMinorPlanets].insert("MPCORB: near-Earth asteroids (NEAs)", "http://www.minorplanetcenter.org/iau/MPCORB/NEA.txt");
-	bookmarks[MpcMinorPlanets].insert("MPCORB: potentially hazardous asteroids (PHAs)", "http://www.minorplanetcenter.org/iau/MPCORB/PHA.txt");
-	bookmarks[MpcComets].insert("MPC's list of observable comets", "http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft00Cmt.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2011", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2011/Soft00Bright.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: near-Earth asteroids (NEAs)", "http://www.minorplanetcenter.net/iau/MPCORB/NEA.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: potentially hazardous asteroids (PHAs)", "http://www.minorplanetcenter.net/iau/MPCORB/PHA.txt");
+	bookmarks[MpcComets].insert("MPC's list of observable comets", "http://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt");
 
 	//Try to save them to a file
 	saveBookmarks();

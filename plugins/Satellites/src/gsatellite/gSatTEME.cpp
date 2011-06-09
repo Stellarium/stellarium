@@ -102,13 +102,17 @@ void gSatTEME::setEpoch(gTime ai_time)
 	m_Vel[ 0]     = vo[ 0];
 	m_Vel[ 1]     = vo[ 1];
 	m_Vel[ 2]     = vo[ 2];
+	m_SubPoint    = computeSubPoint( ai_time);
 }
 
-void gSatTEME::setEpoch(double ai_minSinceKepEpoch)
+void gSatTEME::setMinSinceKepEpoch(double ai_minSinceKepEpoch)
 {
 
 	double ro[3];
 	double vo[3];
+	gTimeSpan tSince( ai_minSinceKepEpoch/KMIN_PER_DAY);
+	gTime     Epoch(satrec.jdsatepoch);
+	Epoch += tSince;
 	// call the propagator to get the initial state vector value
 	sgp4(CONSTANTS_SET, satrec,  ai_minSinceKepEpoch, ro,  vo);
 
@@ -118,9 +122,10 @@ void gSatTEME::setEpoch(double ai_minSinceKepEpoch)
 	m_Vel[ 0]     = vo[ 0];
 	m_Vel[ 1]     = vo[ 1];
 	m_Vel[ 2]     = vo[ 2];
+	m_SubPoint    = computeSubPoint( Epoch);
 }
 
-gVector gSatTEME::getSubPoint(gTime ai_Time)
+gVector gSatTEME::computeSubPoint(gTime ai_Time)
 {
 
 	gVector resultVector(3); // (0) Latitude, (1) Longitude, (2) altitude

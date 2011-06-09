@@ -28,6 +28,7 @@ static const double K2PI=6.283185308;
 static const double KEARTHRADIUS=6378.135;
 static const double __f=3.352779E-3;
 static const double KMFACTOR=7.292115E-5;
+static const double KAU=1.4959787066E8; //Km
 
 static const double KDEG2RAD  =   KPI / 180.0;   //   0.0174532925199433
 static const double XPDOTP   =  1440.0 / K2PI;  // 229.1831180523293 minutes per radian (earth rotation)
