@@ -23,21 +23,22 @@
 #include <QFont>
 #include <QVariantMap>
 #include <QDateTime>
+#include <QList>
+
+typedef struct
+{
+	QString name;
+	QString type;
+	float maxMagnitude;
+	double peakJD;
+	double ra;
+	double de;
+} supernova;
 
 //! This is an example of a plug-in which can be dynamically loaded into stellarium
 class SNe : public StelModule
 {
-public:
-	struct sne_t
-	{
-		QString name;
-		QString type;
-		float maxMagnitude;
-		double peakJD;
-		double ra;
-		double de;
-	};
-
+public:	
 	SNe();
 	virtual ~SNe();
 
@@ -78,7 +79,7 @@ private:
 
 	QString sneJsonPath;
 
-	sne_t supernova[25];
+	QList<supernova> snstar;
 
 };
 
