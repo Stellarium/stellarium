@@ -457,8 +457,11 @@ void StelPainter::sRing(float rMin, float rMax, int slices, int stacks, int orie
 	if (isLightOn)
 	{
 		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
-		lightPos3 -= prj->modelViewMatrixf * Vec3f(0.f); // -posCenterEye
-		lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
+		Vec3f tmpv(0.f);
+		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
+		lightPos3 -= tmpv;
+		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
+		prj->getModelViewTransform()->backward(lightPos3);
 		lightPos3.normalize();
 		ambientLight = light.getAmbient();
 		diffuseLight = light.getDiffuse();
@@ -1583,8 +1586,11 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	if (isLightOn)
 	{
 		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
-		lightPos3 -= prj->modelViewMatrixf * Vec3f(0.f);
-		lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
+		Vec3f tmpv(0.f);
+		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
+		lightPos3 -= tmpv;
+		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
+		prj->getModelViewTransform()->backward(lightPos3);
 		lightPos3.normalize();
 		ambientLight = light.getAmbient();
 		diffuseLight = light.getDiffuse();

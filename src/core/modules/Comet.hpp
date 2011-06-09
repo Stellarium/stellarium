@@ -41,7 +41,7 @@ public:
 	       const QString& texMapName,
 	       posFuncType _coordFunc,
 	       void* userDataPtr,
-	       OsulatingFunctType *osculatingFunc,
+	       OsculatingFunctType *osculatingFunc,
 	       bool closeOrbit,
 	       bool hidden);
 
@@ -63,7 +63,7 @@ public:
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup &flags) const;
 	virtual QString getType() const {return "Comet";}
 	//! \todo Find better sources for the g,k system
-	virtual float getVMagnitude(const StelNavigator *nav) const;
+	virtual float getVMagnitude(const StelCore* core) const;
 
 	//! \brief sets absolute magnitude and slope parameter.
 	//! These are the parameters in the IAU's two-parameter magnitude system

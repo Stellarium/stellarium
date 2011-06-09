@@ -23,6 +23,7 @@
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 #include "VecMath.hpp"
+#include "RefractionExtinction.hpp"
 
 #include <QObject>
 
@@ -159,11 +160,31 @@ public slots:
 	//! Set the value of the eye adaptation flag
 	void setFlagLuminanceAdaptation(bool b) {flagLuminanceAdaptation=b;}
 	//! Get the current value of eye adaptation flag
-	bool getFlagLuminanceAdaptation(void) const {return flagLuminanceAdaptation;}
+	bool getFlagLuminanceAdaptation() const {return flagLuminanceAdaptation;}
 
 	//! Informing the drawer whether atmosphere is displayed.
 	//! This is used to avoid twinkling/simulate extinction/refraction.
 	void setFlagHasAtmosphere(bool b) {flagHasAtmosphere=b;}
+	//! This is used to decide whether to apply refraction/extinction before rendering point sources et al.
+	bool getFlagHasAtmosphere() const {return flagHasAtmosphere;}
+
+	//! Set extinction coefficient, mag/airmass (for extinction).
+	void setExtinctionCoefficient(double extCoeff) {extinction.setExtinctionCoefficient(extCoeff);}
+	//! Get extinction coefficient, mag/airmass (for extinction).
+	double getExtinctionCoefficient() const {return extinction.getExtinctionCoefficient();}
+	//! Set atmospheric (ground) temperature in deg celsius (for refraction).
+	void setAtmosphereTemperature(double celsius) {refraction.setTemperature(celsius);}
+	//! Get atmospheric (ground) temperature in deg celsius (for refraction).
+	double getAtmosphereTemperature() const {return refraction.getTemperature();}
+	//! Set atmospheric (ground) pressure in mbar (for refraction).
+	void setAtmospherePressure(double mbar) {refraction.setPressure(mbar);}
+	//! Get atmospheric (ground) pressure in mbar (for refraction).
+	double getAtmospherePressure() const {return refraction.getPressure();}
+
+	//! Get the current valid extinction computation class.
+	const Extinction& getExtinction() const {return extinction;}
+	//! Get the current valid fefraction computation class.
+	const Refraction& getRefraction() const {return refraction;}
 
 	//! Get the radius of the big halo texture used when a 3d model is very bright.
 	float getBig3dModelHaloRadius() const {return big3dModelHaloRadius;}
@@ -223,6 +244,9 @@ private:
 	StelCore* core;
 	StelToneReproducer* eye;
 
+	Extinction extinction;
+	Refraction refraction;
+
 	float maxAdaptFov, minAdaptFov, lnfovFactor;
 	bool flagPointStar;
 	bool flagStarTwinkle;
@@ -231,6 +255,7 @@ private:
 	//! Informing the drawer whether atmosphere is displayed.
 	//! This is used to avoid twinkling/simulate extinction/refraction.
 	bool flagHasAtmosphere;
+
 
 	float starRelativeScale;
 	float starAbsoluteScaleF;

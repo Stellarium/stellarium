@@ -23,6 +23,7 @@
 #include <QString>
 
 #include "StelObject.hpp"
+#include "StelProjector.hpp"
 #include "VecMath.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
@@ -32,7 +33,7 @@
 // The last variable is the userData pointer.
 typedef void (*posFuncType)(double, double*, void*);
 
-typedef void (OsulatingFunctType)(double jd0,double jd,double xyz[3]);
+typedef void (OsculatingFunctType)(double jd0,double jd,double xyz[3]);
 
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
@@ -69,7 +70,7 @@ class Ring
 public:
 	Ring(double radiusMin,double radiusMax,const QString &texname);
 	~Ring(void);
-	void draw(StelPainter* painter,const Mat4d& mat,double screenSz);
+	void draw(StelPainter* painter, StelProjector::ModelViewTranformP transfo, double screenSz);
 	double getSize(void) const {return radiusMax;}
 private:
 	const double radiusMin;
@@ -83,18 +84,18 @@ class Planet : public StelObject
 public:
 	friend class SolarSystem;
 	Planet(const QString& englishName,
-	       int flagLighting,
-	       double radius,
-	       double oblateness,
-	       Vec3f color,
-	       float albedo,
-	       const QString& texMapName,
-	       posFuncType _coordFunc,
-	       void* userDataPtr,
-	       OsulatingFunctType *osculatingFunc,
-	       bool closeOrbit,
-	       bool hidden,
-	       bool hasAtmosphere);
+		   int flagLighting,
+		   double radius,
+		   double oblateness,
+		   Vec3f color,
+		   float albedo,
+		   const QString& texMapName,
+		   posFuncType _coordFunc,
+		   void* userDataPtr,
+		   OsculatingFunctType *osculatingFunc,
+		   bool closeOrbit,
+		   bool hidden,
+		   bool hasAtmosphere);
 
 	~Planet();
 
@@ -109,18 +110,20 @@ public:
 	//! - Distance
 	//! - Size
 	//! - PlainText
-	//! @param core the Stelore object
+        //! - Extra1: Heliocentric Ecliptical Coordinates
+        //! - Extra2: Observer-planetocentric Ecliptical Coordinates
+	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Planet.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
-	virtual double getCloseViewFov(const StelNavigator * nav) const;
-	virtual double getSatellitesFov(const StelNavigator * nav) const;
-	virtual double getParentSatellitesFov(const StelNavigator * nav) const;
-	virtual float getVMagnitude(const StelNavigator * nav) const;
-	virtual float getSelectPriority(const StelNavigator *nav) const;
+	virtual double getCloseViewFov(const StelCore* core) const;
+	virtual double getSatellitesFov(const StelCore* core) const;
+	virtual double getParentSatellitesFov(const StelCore* core) const;
+	virtual float getVMagnitude(const StelCore* core) const;
+	virtual float getSelectPriority(const StelCore* core) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual QString getType(void) const {return "Planet";}
-	virtual Vec3d getJ2000EquatorialPos(const StelNavigator *nav) const;
+	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
 	virtual QString getEnglishName(void) const {return englishName;}
 	virtual QString getNameI18n(void) const {return nameI18;}
 	virtual double getAngularSize(const StelCore* core) const;
@@ -227,10 +230,10 @@ protected:
 	void drawEarthShadow(StelCore* core, StelPainter* sPainter);
 
 	// Return the information string "ready to print" :)
-	QString getSkyLabel(const StelNavigator * nav) const;
+	QString getSkyLabel(const StelCore* core) const;
 
 	// Draw the 3d model. Call the proper functions if there are rings etc..
-	void draw3dModel(StelCore* core, const Mat4d& mat, float screenSz);
+	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz);
 
 	// Draw the 3D sphere
 	void drawSphere(StelPainter* painter, float screenSz);
@@ -263,9 +266,9 @@ protected:
 	posFuncType coordFunc;
 	void* userDataPtr;
 
-	OsulatingFunctType *const osculatingFunc;
-	QSharedPointer<Planet> parent;   // Planet parent i.e. sun for earth
-	QList<QSharedPointer<Planet> > satellites; // satellites of the Planet
+	OsculatingFunctType *const osculatingFunc;
+	QSharedPointer<Planet> parent;           // Planet parent i.e. sun for earth
+	QList<QSharedPointer<Planet> > satellites;      // satellites of the Planet
 	LinearFader hintFader;
 	LinearFader labelsFader;         // Store the current state of the label for this planet
 	bool flagLabels;                 // Define whether labels should be displayed

@@ -24,7 +24,7 @@
 #include "ui_locationDialogGui.h"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelModuleMgr.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
@@ -61,7 +61,7 @@ void LocationDialog::styleChanged()
 {
 	// Make the map red if needed
 	if (dialog)
-		setMapForLocation(StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation());
+		setMapForLocation(StelApp::getInstance().getCore()->getCurrentLocation());
 }
 
 // Initialize the dialog widgets and connect the signals/slots
@@ -97,10 +97,10 @@ void LocationDialog::createDialogContent()
 	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));
 	connect(ui->deleteLocationFromListPushButton, SIGNAL(clicked()), this, SLOT(deleteCurrentLocationFromList()));
 
-	setFieldsFromLocation(StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation());
+	setFieldsFromLocation(StelApp::getInstance().getCore()->getCurrentLocation());
 
-	const bool b = StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().getID()
-			==StelApp::getInstance().getCore()->getNavigator()->getDefaultLocationID();
+	const bool b = StelApp::getInstance().getCore()->getCurrentLocation().getID()
+			==StelApp::getInstance().getCore()->getDefaultLocationID();
 	ui->useAsDefaultLocationCheckBox->setChecked(b);
 	ui->useAsDefaultLocationCheckBox->setEnabled(!b);
 	connect(ui->useAsDefaultLocationCheckBox, SIGNAL(clicked()), this, SLOT(useAsDefaultClicked()));
@@ -121,7 +121,7 @@ void LocationDialog::updateFromProgram()
 		return;
 
 	// Check that the use as default check box needs to be updated
-	const bool b = StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().getID() == StelApp::getInstance().getCore()->getNavigator()->getDefaultLocationID();
+	const bool b = StelApp::getInstance().getCore()->getCurrentLocation().getID() == StelApp::getInstance().getCore()->getDefaultLocationID();
 	if (b!=ui->useAsDefaultLocationCheckBox->isChecked())
 	{
 		ui->useAsDefaultLocationCheckBox->setChecked(b);
@@ -134,11 +134,11 @@ void LocationDialog::updateFromProgram()
 	if (isEditingNew==true)
 		return;
 
-	const QString& key1 = StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().getID();
+	const QString& key1 = StelApp::getInstance().getCore()->getCurrentLocation().getID();
 	const QString& key2 = locationFromFields().getID();
 	if (key1!=key2)
 	{
-		setFieldsFromLocation(StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation());
+		setFieldsFromLocation(StelApp::getInstance().getCore()->getCurrentLocation());
 	}
 }
 
@@ -270,9 +270,9 @@ void LocationDialog::listItemActivated(const QModelIndex& index)
 	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForSmallString(index.data().toString());
 
 	setFieldsFromLocation(loc);
-	StelApp::getInstance().getCore()->getNavigator()->moveObserverTo(loc, 0.);
+	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
 
-	const bool b = loc.getID()==StelApp::getInstance().getCore()->getNavigator()->getDefaultLocationID();
+	const bool b = loc.getID()==StelApp::getInstance().getCore()->getDefaultLocationID();
 	ui->useAsDefaultLocationCheckBox->setChecked(b);
 	ui->useAsDefaultLocationCheckBox->setEnabled(!b);
 }
@@ -284,7 +284,7 @@ void LocationDialog::setPositionFromMap(double longitude, double latitude)
 	loc.latitude = latitude;
 	loc.longitude = longitude;
 	setFieldsFromLocation(loc);
-	StelApp::getInstance().getCore()->getNavigator()->moveObserverTo(loc, 0.);
+	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
 }
 
 // Called when the planet name is changed by hand
@@ -292,16 +292,16 @@ void LocationDialog::comboBoxChanged(const QString&)
 {
 	reportEdit();
 	StelLocation loc = locationFromFields();
-	if (loc.planetName!=StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().planetName)
+	if (loc.planetName!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
 		setFieldsFromLocation(loc);
-	StelApp::getInstance().getCore()->getNavigator()->moveObserverTo(loc, 0.);
+	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
 }
 
 void LocationDialog::spinBoxChanged(int )
 {
 	reportEdit();
 	StelLocation loc = locationFromFields();
-	StelApp::getInstance().getCore()->getNavigator()->moveObserverTo(loc, 0.);
+	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
 }
 
 // Called when the location name is manually changed
@@ -366,9 +366,9 @@ void LocationDialog::addCurrentLocationToList()
 // Called when the user wants to use the current location as default
 void LocationDialog::useAsDefaultClicked()
 {
-	StelApp::getInstance().getCore()->getNavigator()->setDefaultLocationID(StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().getID());
-	const bool b = StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().getID()==
-			StelApp::getInstance().getCore()->getNavigator()->getDefaultLocationID();
+	StelApp::getInstance().getCore()->setDefaultLocationID(StelApp::getInstance().getCore()->getCurrentLocation().getID());
+	const bool b = StelApp::getInstance().getCore()->getCurrentLocation().getID()==
+			StelApp::getInstance().getCore()->getDefaultLocationID();
 	ui->useAsDefaultLocationCheckBox->setChecked(b);
 	ui->useAsDefaultLocationCheckBox->setEnabled(!b);
 }

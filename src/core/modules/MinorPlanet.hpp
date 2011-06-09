@@ -46,7 +46,7 @@ public:
 	       const QString& texMapName,
 	       posFuncType _coordFunc,
 	       void* userDataPtr,
-	       OsulatingFunctType *osculatingFunc,
+	       OsculatingFunctType *osculatingFunc,
 	       bool closeOrbit,
 	       bool hidden);
 
@@ -68,7 +68,7 @@ public:
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup &flags) const;
 	//! \todo Decide if this is going to be "MinorPlanet" or "Asteroid"
 	virtual QString getType() const {return "MinorPlanet";}
-	virtual float getVMagnitude(const StelNavigator *nav) const;
+	virtual float getVMagnitude(const StelCore* core) const;
 	//! sets the nameI18 property with the appropriate translation.
 	//! Function overriden to handle the problem with name conflicts.
 	virtual void translateName(StelTranslator& trans);

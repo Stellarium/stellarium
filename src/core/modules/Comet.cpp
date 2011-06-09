@@ -21,7 +21,7 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelTranslator.hpp"
@@ -39,7 +39,7 @@ Comet::Comet(const QString& englishName,
 						 const QString& atexMapName,
 						 posFuncType coordFunc,
 						 void* auserDataPtr,
-						 OsulatingFunctType *osculatingFunc,
+						 OsculatingFunctType *osculatingFunc,
 						 bool acloseOrbit,
 						 bool hidden)
 						: Planet (englishName,
@@ -58,7 +58,7 @@ Comet::Comet(const QString& englishName,
 {
 	texMapName = atexMapName;
 	lastOrbitJD =0;
-	deltaJD = JD_SECOND;
+	deltaJD = StelCore::JD_SECOND;
 	orbitCached = 0;
 	closeOrbit = acloseOrbit;
 
@@ -100,8 +100,6 @@ void Comet::setAbsoluteMagnitudeAndSlope(double magnitude, double slope)
 QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
 {
 	//Mostly copied from Planet::getInfoString():
-	const StelNavigator* nav = core->getNavigator();
-
 	QString str;
 	QTextStream oss(&str);
 
@@ -117,7 +115,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	}
 
 	if (flags&Magnitude)
-		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(nav), 0, 'f', 2) << "<br>";
+		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
 
 	if (flags&AbsoluteMagnitude)
 	{
@@ -133,7 +131,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	if (flags&Distance)
 	{
 		// xgettext:no-c-format
-		oss << q_("Distance: %1AU").arg(getJ2000EquatorialPos(nav).length(), 0, 'f', 8) << "<br>";
+		oss << q_("Distance: %1AU").arg(getJ2000EquatorialPos(core).length(), 0, 'f', 8) << "<br>";
 	}
 
 	/*
@@ -146,17 +144,17 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	return str;
 }
 
-float Comet::getVMagnitude(const StelNavigator *nav) const
+float Comet::getVMagnitude(const StelCore* core) const
 {
 	//If the two parameter system is not used,
 	//use the default radius/albedo mechanism
 	if (slopeParameter < 0)
 	{
-		return Planet::getVMagnitude(nav);
+		return Planet::getVMagnitude(core);
 	}
 
 	//Calculate distances
-	const Vec3d& observerHeliocentricPosition = nav->getObserverHeliocentricEclipticPos();
+	const Vec3d& observerHeliocentricPosition = core->getObserverHeliocentricEclipticPos();
 	const Vec3d& cometHeliocentricPosition = getHeliocentricEclipticPos();
 	const double cometSunDistance = std::sqrt(cometHeliocentricPosition.lengthSquared());
 	const double observerCometDistance = std::sqrt((observerHeliocentricPosition - cometHeliocentricPosition).lengthSquared());

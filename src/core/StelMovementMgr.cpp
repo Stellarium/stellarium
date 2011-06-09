@@ -22,7 +22,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelNavigator.hpp"
 #include "StelUtils.hpp"
 
 #include <QString>
@@ -86,7 +85,7 @@ void StelMovementMgr::init()
 
 	Vec3f tmp = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
 	initViewPos.set(tmp[0], tmp[1], tmp[2]);
-	viewDirectionJ2000 = core->getNavigator()->altAzToJ2000(initViewPos);
+	viewDirectionJ2000 = core->altAzToJ2000(initViewPos, StelCore::RefractionOff);
 
 	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
 	if (tmpstr=="equator")
@@ -259,7 +258,7 @@ void StelMovementMgr::addTimeDragPoint(int x, int y)
 {
 	DragHistoryEntry e;
 	e.runTime=StelApp::getInstance().getTotalRunTime();
-	e.jd=core->getNavigator()->getJDay();
+	e.jd=core->getJDay();
 	e.x=x;
 	e.y=y;
 	timeDragHistory.append(e);
@@ -289,7 +288,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 				hasDragged = false;
 				previousX = event->x();
 				previousY = event->y();
-				beforeTimeDragTimeRate=core->getNavigator()->getTimeRate();
+				beforeTimeDragTimeRate=core->getTimeRate();
 				if (dragTimeMode)
 				{
 					timeDragHistory.clear();
@@ -312,7 +311,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 							Vec2f d(timeDragHistory.last().x-timeDragHistory.first().x, timeDragHistory.last().y-timeDragHistory.first().y);
 							if (d.length()/deltaT<dragTriggerDistance)
 							{
-								core->getNavigator()->setTimeRate(JD_SECOND);
+								core->setTimeRate(StelCore::JD_SECOND);
 							}
 							else
 							{
@@ -321,16 +320,16 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 								if (deltaT>0.00000001)
 								{
 									if (newTimeRate>=0)
-										core->getNavigator()->setTimeRate(qMax(newTimeRate, JD_SECOND));
+										core->setTimeRate(qMax(newTimeRate, StelCore::JD_SECOND));
 									else
-										core->getNavigator()->setTimeRate(qMin(newTimeRate, -JD_SECOND));
+										core->setTimeRate(qMin(newTimeRate, -StelCore::JD_SECOND));
 								}
 								else
-									core->getNavigator()->setTimeRate(beforeTimeDragTimeRate);
+									core->setTimeRate(beforeTimeDragTimeRate);
 							}
 						}
 						else
-							core->getNavigator()->setTimeRate(beforeTimeDragTimeRate);
+							core->setTimeRate(beforeTimeDragTimeRate);
 					}
 					return;
 				}
@@ -379,7 +378,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 
 void StelMovementMgr::setInitViewDirectionToCurrent()
 {
-	initViewPos = core->getNavigator()->j2000ToAltAz(viewDirectionJ2000);
+	initViewPos = core->j2000ToAltAz(viewDirectionJ2000, StelCore::RefractionOff);
 	QString dirStr = QString("%1,%2,%3").arg(initViewPos[0]).arg(initViewPos[1]).arg(initViewPos[2]);
 	StelApp::getInstance().getSettings()->setValue("navigation/init_view_pos", dirStr);
 }
@@ -539,7 +538,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		if (!move.targetObject.isNull())
 		{
 			// if zooming in, object may be moving so be sure to zoom to latest position
-			move.aim = move.targetObject->getJ2000EquatorialPos(core->getNavigator());
+			move.aim = core->altAzToJ2000(move.targetObject->getAltAzPosAuto(core), StelCore::RefractionOff);
 			move.aim.normalize();
 			move.aim*=2.;
 		}
@@ -605,7 +604,8 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 	{
 		if (flagTracking && objectMgr->getWasSelected()) // Equatorial vision vector locked on selected object
 		{
-			setViewDirectionJ2000(objectMgr->getSelectedObject()[0]->getJ2000EquatorialPos(core->getNavigator()));
+			Vec3d v = objectMgr->getSelectedObject()[0]->getAltAzPosAuto(core);
+			setViewDirectionJ2000(core->altAzToJ2000(v, StelCore::RefractionOff));
 		}
 		else
 		{
@@ -652,13 +652,13 @@ void StelMovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 	}
 	else
 	{
-		float satfov = objectMgr->getSelectedObject()[0]->getSatellitesFov(core->getNavigator());
+		float satfov = objectMgr->getSelectedObject()[0]->getSatellitesFov(core);
 
 		if (satfov>0.0 && currentFov*0.9>satfov)
 			zoomTo(satfov, moveDuration);
 		else
 		{
-			float closefov = objectMgr->getSelectedObject()[0]->getCloseViewFov(core->getNavigator());
+			float closefov = objectMgr->getSelectedObject()[0]->getCloseViewFov(core);
 			if (currentFov>closefov)
 				zoomTo(closefov, moveDuration);
 		}
@@ -675,7 +675,7 @@ void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 	{
 		// If the selected object has satellites, unzoom to satellites view
 		// unless specified otherwise
-		float satfov = objectMgr->getSelectedObject()[0]->getSatellitesFov(core->getNavigator());
+		float satfov = objectMgr->getSelectedObject()[0]->getSatellitesFov(core);
 
 		if (satfov>0.0 && currentFov<=satfov*0.9)
 		{
@@ -685,7 +685,7 @@ void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 
 		// If the selected object is part of a Planet subsystem (other than sun),
 		// unzoom to subsystem view
-		satfov = objectMgr->getSelectedObject()[0]->getParentSatellitesFov((core->getNavigator()));
+		satfov = objectMgr->getSelectedObject()[0]->getParentSatellitesFov((core));
 		if (satfov>0.0 && currentFov<=satfov*0.9)
 		{
 			zoomTo(satfov, moveDuration);
@@ -696,7 +696,7 @@ void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 	zoomTo(initFov, moveDuration);
 	if (flagAutoZoomOutResetsDirection)
 	{
-		moveToJ2000(core->getNavigator()->altAzToJ2000(getInitViewingDirection()), moveDuration, -1);
+		moveToJ2000(core->altAzToJ2000(getInitViewingDirection(), StelCore::RefractionOff), moveDuration, -1);
 		setFlagTracking(false);
 		setFlagLockEquPos(false);
 	}
@@ -754,11 +754,11 @@ Vec3d StelMovementMgr::j2000ToMountFrame(const Vec3d& v) const
 	switch (mountMode)
 	{
 		case MountAltAzimuthal:
-			return core->getNavigator()->j2000ToAltAz(v);
+			return core->j2000ToAltAz(v, StelCore::RefractionOff);
 		case MountEquinoxEquatorial:
-			return core->getNavigator()->j2000ToEquinoxEqu(v);
+			return core->j2000ToEquinoxEqu(v);
 		case MountGalactic:
-			return core->getNavigator()->j2000ToGalactic(v);
+			return core->j2000ToGalactic(v);
 	}
 	Q_ASSERT(0);
 	return Vec3d(0);
@@ -769,11 +769,11 @@ Vec3d StelMovementMgr::mountFrameToJ2000(const Vec3d& v) const
 	switch (mountMode)
 	{
 		case MountAltAzimuthal:
-			return core->getNavigator()->altAzToJ2000(v);
+			return core->altAzToJ2000(v, StelCore::RefractionOff);
 		case MountEquinoxEquatorial:
-			return core->getNavigator()->equinoxEquToJ2000(v);
+			return core->equinoxEquToJ2000(v);
 		case MountGalactic:
-			return core->getNavigator()->galacticToJ2000(v);
+			return core->galacticToJ2000(v);
 	}
 	Q_ASSERT(0);
 	return Vec3d(0);
@@ -781,7 +781,7 @@ Vec3d StelMovementMgr::mountFrameToJ2000(const Vec3d& v) const
 
 void StelMovementMgr::setViewDirectionJ2000(const Vec3d& v)
 {
-	core->getNavigator()->lookAtJ2000(v, getViewUpVectorJ2000());
+	core->lookAtJ2000(v, getViewUpVectorJ2000());
 	viewDirectionJ2000 = v;
 	viewDirectionMountFrame = j2000ToMountFrame(v);
 }
@@ -817,7 +817,7 @@ void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 {
 	if (dragTimeMode)
 	{
-		core->getNavigator()->setTimeRate(0);
+		core->setTimeRate(0);
 		Vec3d v1, v2;
 		const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
 		prj->unProject(x2,y2, v2);
@@ -825,8 +825,8 @@ void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 		v1[2]=0; v1.normalize();
 		v2[2]=0; v2.normalize();
 		double angle = (v2^v1)[2];
-		double deltaDay = angle/(2.*M_PI)*core->getNavigator()->getLocalSideralDayLength();
-		core->getNavigator()->setJDay(core->getNavigator()->getJDay()+deltaDay);
+		double deltaDay = angle/(2.*M_PI)*core->getLocalSideralDayLength();
+		core->setJDay(core->getJDay()+deltaDay);
 		addTimeDragPoint(x2, y2);
 	}
 	else

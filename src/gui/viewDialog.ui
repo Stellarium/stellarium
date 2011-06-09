@@ -328,7 +328,7 @@
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>3</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout">
@@ -670,6 +670,9 @@
                </item>
                <item>
                 <widget class="QSpinBox" name="lightPollutionSpinBox">
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
                  <property name="minimum">
                   <number>1</number>
                  </property>
@@ -678,6 +681,20 @@
                  </property>
                  <property name="value">
                   <number>1</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <widget class="QPushButton" name="pushButtonAtmosphereDetails">
+                 <property name="toolTip">
+                  <string>pressure, temperature, extinction coefficient</string>
+                 </property>
+                 <property name="text">
+                  <string>Refraction/Extinction settings...</string>
                  </property>
                 </widget>
                </item>
@@ -1578,8 +1595,55 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../../data/gui/guiRes.qrc"/>
- </resources>
+ <tabstops>
+  <tabstop>starScaleRadiusDoubleSpinBox</tabstop>
+  <tabstop>starRelativeScaleDoubleSpinBox</tabstop>
+  <tabstop>starTwinkleCheckBox</tabstop>
+  <tabstop>starTwinkleAmountDoubleSpinBox</tabstop>
+  <tabstop>adaptationCheckbox</tabstop>
+  <tabstop>showPlanetCheckBox</tabstop>
+  <tabstop>planetMarkerCheckBox</tabstop>
+  <tabstop>planetOrbitCheckBox</tabstop>
+  <tabstop>planetLightSpeedCheckBox</tabstop>
+  <tabstop>planetScaleMoonCheckBox</tabstop>
+  <tabstop>showAtmosphereCheckBox</tabstop>
+  <tabstop>lightPollutionSpinBox</tabstop>
+  <tabstop>starLabelCheckBox</tabstop>
+  <tabstop>starsLabelsHorizontalSlider</tabstop>
+  <tabstop>nebulaLabelCheckBox</tabstop>
+  <tabstop>nebulasLabelsHorizontalSlider</tabstop>
+  <tabstop>planetLabelCheckBox</tabstop>
+  <tabstop>planetsLabelsHorizontalSlider</tabstop>
+  <tabstop>zhrNone</tabstop>
+  <tabstop>zhr10</tabstop>
+  <tabstop>zhr80</tabstop>
+  <tabstop>zhr10000</tabstop>
+  <tabstop>zhr144000</tabstop>
+  <tabstop>showEquatorLineCheckBox</tabstop>
+  <tabstop>showMeridianLineCheckBox</tabstop>
+  <tabstop>showEclipticLineCheckBox</tabstop>
+  <tabstop>showCardinalPointsCheckBox</tabstop>
+  <tabstop>showConstellationLinesCheckBox</tabstop>
+  <tabstop>showConstellationLabelsCheckBox</tabstop>
+  <tabstop>showConstellationBoundariesCheckBox</tabstop>
+  <tabstop>showConstellationArtCheckBox</tabstop>
+  <tabstop>constellationArtBrightnessSpinBox</tabstop>
+  <tabstop>projectionTextBrowser</tabstop>
+  <tabstop>landscapeTextBrowser</tabstop>
+  <tabstop>pushButtonAddRemoveLandscapes</tabstop>
+  <tabstop>showGroundCheckBox</tabstop>
+  <tabstop>showFogCheckBox</tabstop>
+  <tabstop>landscapePositionCheckBox</tabstop>
+  <tabstop>useAsDefaultLandscapeCheckBox</tabstop>
+  <tabstop>skyCultureTextBrowser</tabstop>
+  <tabstop>useAsDefaultSkyCultureCheckBox</tabstop>
+  <tabstop>skyLayerListWidget</tabstop>
+  <tabstop>skyLayerTextBrowser</tabstop>
+  <tabstop>skyLayerEnableCheckBox</tabstop>
+  <tabstop>showAzimuthalGridCheckBox</tabstop>
+  <tabstop>showEquatorialJ2000GridCheckBox</tabstop>
+  <tabstop>showEquatorialGridCheckBox</tabstop>
+ </tabstops>
+ <resources/>
  <connections/>
 </ui>

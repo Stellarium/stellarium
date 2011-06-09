@@ -2,6 +2,7 @@
  * Stellarium
  * Copyright (C) 2006 Fabien Chereau
  * Copyright (C) 2010 Bogdan Marinov (add/remove landscapes feature)
+ * Copyright (C) 2011 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -91,7 +92,7 @@ Cardinals::~Cardinals()
 // handles special cases at poles
 void Cardinals::draw(const StelCore* core, double latitude) const
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	StelPainter sPainter(prj);
 	sPainter.setFont(font);
 
@@ -187,24 +188,24 @@ void LandscapeMgr::update(double deltaTime)
 	// Compute the atmosphere color and intensity
 	// Compute the sun position in local coordinate
 	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
 
-	Vec3d sunPos = ssystem->getSun()->getAltAzPos(nav);
+	StelCore* core = StelApp::getInstance().getCore();
+	Vec3d sunPos = ssystem->getSun()->getAltAzPosApparent(core);
 	// Compute the moon position in local coordinate
-	Vec3d moonPos = ssystem->getMoon()->getAltAzPos(nav);
-	atmosphere->computeColor(nav->getJDay(), sunPos, moonPos,
+	Vec3d moonPos = ssystem->getMoon()->getAltAzPosApparent(core);
+	atmosphere->computeColor(core->getJDay(), sunPos, moonPos,
 		ssystem->getMoon()->getPhase(ssystem->getEarth()->getHeliocentricEclipticPos()),
-		StelApp::getInstance().getCore(), nav->getCurrentLocation().latitude, nav->getCurrentLocation().altitude,
+		core, core->getCurrentLocation().latitude, core->getCurrentLocation().altitude,
 		15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 
-	StelApp::getInstance().getCore()->getSkyDrawer()->reportLuminanceInFov(3.75+atmosphere->getAverageLuminance()*3.5, true);
+	core->getSkyDrawer()->reportLuminanceInFov(3.75+atmosphere->getAverageLuminance()*3.5, true);
 
 	// Compute the ground luminance based on every planets around
 //	float groundLuminance = 0;
 //	const vector<Planet*>& allPlanets = ssystem->getAllPlanets();
 //	for (vector<Planet*>::const_iterator i=allPlanets.begin();i!=allPlanets.end();++i)
 //	{
-//		Vec3d pos = (*i)->getAltAzPos(nav);
+//		Vec3d pos = (*i)->getAltAzPos(core);
 //		pos.normalize();
 //		if (pos[2] <= 0)
 //		{
@@ -214,8 +215,8 @@ void LandscapeMgr::update(double deltaTime)
 //		else
 //		{
 //			// Compute the Illuminance E of the ground caused by the planet in lux = lumen/m^2
-//			float E = pow10(((*i)->get_mag(nav)+13.988)/-2.5);
-//			//qDebug() << "mag=" << (*i)->get_mag(nav) << " illum=" << E;
+//			float E = pow10(((*i)->get_mag(core)+13.988)/-2.5);
+//			//qDebug() << "mag=" << (*i)->get_mag(core) << " illum=" << E;
 //			// Luminance in cd/m^2
 //			groundLuminance += E/0.44*pos[2]*pos[2]; // 1m^2 from 1.5 m above the ground is 0.44 sr.
 //		}
@@ -238,7 +239,7 @@ void LandscapeMgr::update(double deltaTime)
 	else
 		landscapeBrightness = (0.01 + 1.5*(sinSunAngleRad+0.1/1.5));
 	if (moonPos[2] > -0.1/1.5)
-		landscapeBrightness += qMax(0.2/-12.*ssystem->getMoon()->getVMagnitude(nav),0.)*moonPos[2];
+		landscapeBrightness += qMax(0.2/-12.*ssystem->getMoon()->getVMagnitude(core),0.)*moonPos[2];
 
 	// TODO make this more generic for non-atmosphere planets
 	if(atmosphere->getFadeIntensity() == 1)
@@ -261,7 +262,7 @@ void LandscapeMgr::draw(StelCore* core)
 	landscape->draw(core);
 
 	// Draw the cardinal points
-	cardinalsPoints->draw(core, StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().latitude);
+	cardinalsPoints->draw(core, StelApp::getInstance().getCore()->getCurrentLocation().latitude);
 }
 
 void LandscapeMgr::init()
@@ -283,10 +284,10 @@ void LandscapeMgr::init()
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
 
 	bool ok =true;
-	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
+	setAtmosphereBortleLightPollution(conf->value("landscape/init_bortle_scale",3).toInt(&ok));
 	if (!ok)
 	{
-		conf->setValue("stars/init_bortle_scale",3);
+		conf->setValue("landscape/init_bortle_scale",3);
 		setAtmosphereBortleLightPollution(3);
 		ok = true;
 	}
@@ -335,7 +336,43 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 
 	if (getFlagLandscapeSetsLocation())
 	{
-		StelApp::getInstance().getCore()->getNavigator()->moveObserverTo(landscape->getLocation());
+		StelApp::getInstance().getCore()->moveObserverTo(landscape->getLocation());
+		// GZ Patch: allow change in fog, extinction, refraction parameters and light pollution
+		//QSettings* conf = StelApp::getInstance().getSettings();
+		//Q_ASSERT(conf);
+		StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
+
+		if (landscape->getDefaultFogSetting() >-1)
+		  {
+		    setFlagFog((bool) landscape->getDefaultFogSetting());
+		    landscape->setFlagShowFog((bool) landscape->getDefaultFogSetting());
+		  }
+		if (landscape->getDefaultBortleIndex() > 0)
+		  {
+		    setAtmosphereBortleLightPollution(landscape->getDefaultBortleIndex());
+		    // TODO: HOWTO make the GUI aware of the new value? 
+		    // conf->setValue("landscape/init_bortle_scale", landscape->getDefaultBortleIndex());
+		  }
+		if (landscape->getDefaultAtmosphericExtinction() >= 0.0)
+		  {
+		    drawer->setExtinctionCoefficient(landscape->getDefaultAtmosphericExtinction());
+		  }
+		if (landscape->getDefaultAtmosphericTemperature() > -273.15)
+		  {
+		    drawer->setAtmosphereTemperature(landscape->getDefaultAtmosphericTemperature());
+		  }
+		if (landscape->getDefaultAtmosphericPressure() >= 0.0)
+		  {
+		    drawer->setAtmospherePressure(landscape->getDefaultAtmosphericPressure());
+		  }
+		else if (landscape->getDefaultAtmosphericPressure() == -1.0)
+		  {
+		    // compute standard pressure for standard atmosphere in given altitude if landscape.ini coded as atmospheric_pressure=-1
+		    // International altitude formula found in Wikipedia.
+		    double alt=landscape->getLocation().altitude;
+		    double p=1013.25*std::pow(1-(0.0065*alt)/288.15, 5.255);
+		    drawer->setAtmospherePressure(p);
+		  }
 	}
 	return true;
 }
@@ -444,9 +481,10 @@ QString LandscapeMgr::getCurrentLandscapeName() const
 
 QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 {
-	QString desc = QString("<h3>%1</h3>").arg(landscape->getName());
-	desc += landscape->getDescription();
-	desc+="<br><br>";
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+	QString planetName = ssmgr->searchByEnglishName(landscape->getLocation().planetName)->getNameI18n();
+	QString desc = getDescription();
+	desc+="<p>";
 	desc+="<b>"+q_("Author: ")+"</b>";
 	desc+=landscape->getAuthorName();
 	desc+="<br>";
@@ -456,9 +494,9 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 		desc += StelUtils::radToDmsStrAdapt(landscape->getLocation().longitude * M_PI/180.);
 		desc += "/" + StelUtils::radToDmsStrAdapt(landscape->getLocation().latitude *M_PI/180.);
 		desc += QString(q_(", %1 m")).arg(landscape->getLocation().altitude);
-		if (landscape->getLocation().planetName!="")
+		if (planetName!="")
 		{
-			desc += "<br><b>"+q_("Planet: ")+"</b>"+landscape->getLocation().planetName;
+			desc += "<br><b>"+q_("Planet: ")+"</b>"+planetName;
 		}
 		desc += "<br><br>";
 	}
@@ -921,4 +959,27 @@ quint64 LandscapeMgr::loadLandscapeSize(QString landscapeID)
 	}
 
 	return landscapeSize;
+}
+
+QString LandscapeMgr::getDescription() const
+{
+	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	QString descriptionFile = StelFileMgr::findFile("landscapes/" + getCurrentLandscapeID(), StelFileMgr::Directory) + "/description." + lang + ".utf8";
+	QString desc;
+
+	if(QFileInfo(descriptionFile).exists())
+	{
+		QFile file(descriptionFile);
+		file.open(QIODevice::ReadOnly | QIODevice::Text);
+		QTextStream in(&file);
+		desc = in.readAll();
+		file.close();
+	}
+	else
+	{
+		desc = QString("<h2>%1</h2>").arg(q_(landscape->getName()));
+		desc += landscape->getDescription();
+	}
+
+	return desc;
 }
