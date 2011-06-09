@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2011 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,15 +46,15 @@ public:
 	//! - Size
 	//! - Extra1 (contains the Nebula type, which might be "Galaxy", "Cluster" or similar)
 	//! - PlainText
-	//! @param core the Stelore object
+	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Nebula.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual QString getType() const {return "Nebula";}
-	virtual Vec3d getJ2000EquatorialPos(const StelNavigator*) const {return XYZ;}
-	virtual double getCloseViewFov(const StelNavigator* nav = NULL) const;
-	virtual float getVMagnitude(const StelNavigator* nav = NULL) const {Q_UNUSED(nav); return mag;}
-	virtual float getSelectPriority(const StelNavigator *nav) const;
+	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const {return XYZ;}
+	virtual double getCloseViewFov(const StelCore* core = NULL) const;
+	virtual float getVMagnitude(const StelCore* core = NULL) const {Q_UNUSED(core); return mag;}
+	virtual float getSelectPriority(const StelCore* core) const;
 	virtual Vec3f getInfoColor() const;
 	virtual QString getNameI18n() const {return nameI18;}
 	virtual QString getEnglishName() const {return englishName;}
@@ -79,8 +80,8 @@ private:
 		NebGc=2,     //!< Globular star cluster, usually in the Milky Way Galaxy
 		NebN=3,      //!< Bright emission or reflection nebula
 		NebPn=4,     //!< Planetary nebula
-		NebDn=5,     //!< ???
-		NebIg=6,     //!< ???
+		NebDn=5,     //!< ??? 
+		NebIg=6,     //!< ??? 
 		NebCn=7,     //!< Cluster associated with nebulosity
 		NebUnknown=8 //!< Unknown type
 	};
@@ -108,6 +109,9 @@ private:
 	SphericalRegionP pointRegion;
 
 	static StelTextureSP texCircle;   // The symbolic circle texture
+	static StelTextureSP texOpenCluster;
+	static StelTextureSP texGlobularCluster;
+	static StelTextureSP texPlanetNebula;
 	static float hintsBrightness;
 
 	static Vec3f labelColor, circleColor;

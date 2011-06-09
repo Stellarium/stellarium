@@ -40,6 +40,7 @@ double range_radians (double r)
 }
 
 #define TERMS 63
+/* compute only every tenths of day:  */
 #define LN_NUTATION_EPOCH_THRESHOLD 0.1
 
 
@@ -211,34 +212,64 @@ static double c_JD = 0.0, c_longitude = 0.0, c_obliquity = 0.0, c_ecliptic = 0.0
 
 /* Calculate nutation of longitude and obliquity in degrees from Julian Ephemeris Day
 * params : JD Julian Day, nutation Pointer to store nutation.
-* Chapter 21 pg 131-134 Using Table 21A */
+* Meeus, Astr. Alg. (1st ed., 1994), Chapter 21 pg 131-134 Using Table 21A */
+/* GZ: Changed: ecliptic obliquity used to be constant J2000.0. 
+ * If you don't compute this, you may as well forget about nutation!
+ */
 void get_nutation (double JD, struct ln_nutation * nutation)
 {
 
-	double D,M,MM,F,O,T,T2,T3;
+	double D,M,MM,F,O,T;
 	double coeff_sine, coeff_cos;
 	int i;
 
 	/* should we bother recalculating nutation */
 	if (fabs(JD - c_JD) > LN_NUTATION_EPOCH_THRESHOLD)
-	{
+	  {
 		/* set the new epoch */
 		c_JD = JD;
 
-		/* set ecliptic */
-		c_ecliptic = 23.0 + 26.0 / 60.0 + 27.407 / 3600.0;
+		/* set ecliptic. GZ: This is constant only, J2000.0. WRONG! */
+		/* c_ecliptic = 23.0 + 26.0 / 60.0 + 27.407 / 3600.0; */
 
 		/* calc T */
 		T = (JD - 2451545.0)/36525;
+		/* GZotti: we don't need those. * /
 		T2 = T * T;
 		T3 = T2 * T;
 
-		/* calculate D,M,M',F and Omega */
+		/ * calculate D,M,M',F and Omega * /
 		D = 297.85036 + 445267.111480 * T - 0.0019142 * T2 + T3 / 189474.0;
 		M = 357.52772 + 35999.050340 * T - 0.0001603 * T2 - T3 / 300000.0;
 		MM = 134.96298 + 477198.867398 * T + 0.0086972 * T2 + T3 / 56250.0;
 		F = 93.2719100 + 483202.017538 * T - 0.0036825 * T2 + T3 / 327270.0;
 		O = 125.04452 - 1934.136261 * T + 0.0020708 * T2 + T3 / 450000.0;
+
+		/ * GZotti: Laskar's formula, only valid for J2000+/-10000 years! */
+		if (fabs(T)<100) 
+		  {
+		    double U=T/100.0;	
+
+
+		    c_ecliptic=((((((((((2.45*U+ 5.79)*U +27.87)*U +7.12)*U -39.05)*U -249.67)*U 
+				    -51.38)*U +1999.25)*U -1.55)*U)-4680.93)*U +21.448;
+		  }
+		else /* Use IAU formula. This might be more stable in faraway times, but is less accurate in any case for |U|<1. */
+		  { 
+		    c_ecliptic=((0.001813*T-0.00059)*T-46.8150)*T+21.448;
+		  }
+		c_ecliptic/=60.0;
+		c_ecliptic+=26.0;
+		c_ecliptic/=60.0;
+		c_ecliptic+=23.0;
+
+		/* GZotti: I prefer Horner's Scheme and its better numerical accuracy. */
+		D = ((T / 189474.0 - 0.0019142)*T + 445267.111480)*T + 297.85036;
+		M = ((T / 300000.0 - 0.0001603)*T +  35999.050340)*T + 357.52772;
+		MM= ((T /  56250.0 + 0.0086972)*T + 477198.867398)*T + 134.96298;
+		F = ((T / 327270.0 - 0.0036825)*T + 483202.017538)*T +  93.27191;
+		O = ((T / 450000.0 + 0.0020708)*T -   1934.136261)*T + 125.04452;
+
 
 		/* convert to radians */
 		D *= M_PI/180.;
@@ -286,8 +317,9 @@ void get_nutation (double JD, struct ln_nutation * nutation)
 		c_longitude /= 36000000.;
 		c_obliquity /= 36000000.;
 
-		c_ecliptic += c_obliquity;
-	}
+		/* GZ: mean ecliptic should be still available! Addition must be done where needed. */
+		/* c_ecliptic += c_obliquity; */
+	  }
 
 	/* return results */
 	nutation->longitude = c_longitude;
@@ -330,9 +362,17 @@ double get_apparent_sidereal_time (double JD)
    the ecliptic */   
    get_nutation (JD, &nutation); 
     
-   correction = (nutation.longitude * cos (nutation.obliquity*M_PI/180.));
+   /* GZ: This was the only place where this was used. I added the summation here. */
+   correction = (nutation.longitude * cos ((nutation.ecliptic+nutation.obliquity)*M_PI/180.));
 
    sidereal += correction;
    
    return (sidereal);
+}
+
+double get_mean_ecliptical_obliquity(double JDE)
+{
+  struct ln_nutation nutation;
+  get_nutation(JDE, &nutation);
+  return nutation.ecliptic;
 }

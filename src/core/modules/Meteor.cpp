@@ -32,14 +32,13 @@ which are generally not at the apex of the Earth's way, such as the Perseids sho
 #include <cstdlib>
 #include "Meteor.hpp"
 #include "StelCore.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelToneReproducer.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 
 Meteor::Meteor(const StelCore* core, double v)
 {
-	const StelNavigator* nav = core->getNavigator();
 	const StelToneReproducer* eye = core->getToneReproducer();
 	
   //  velocity = 11+(double)rand()/((double)RAND_MAX+1)*v;  // abs range 11-72 km/s
@@ -50,7 +49,7 @@ Meteor::Meteor(const StelCore* core, double v)
   // determine meteor model view matrix (want z in dir of travel of earth, z=0 at center of earth)
   // meteor life is so short, no need to recalculate
   double equ_rotation; // rotation needed to align with path of earth
-  Vec3d sun_dir = nav->heliocentricEclipticToEquinoxEqu( Vec3d(0,0,0) );
+  Vec3d sun_dir = core->heliocentricEclipticToEquinoxEqu( Vec3d(0,0,0) );
 
   Mat4d tmat = Mat4d::xrotation(-23.45f*M_PI/180.f);  // ecliptical tilt
   sun_dir.transfo4d(tmat);  // convert to ecliptical coordinates
@@ -68,7 +67,7 @@ Meteor::Meteor(const StelCore* core, double v)
   double angle = (double)rand()/((double)RAND_MAX+1)*2*M_PI;
 
   // find observer position in meteor coordinate system
-  obs = nav->altAzToEquinoxEqu(Vec3d(0,0,EARTH_RADIUS));
+  obs = core->altAzToEquinoxEqu(Vec3d(0,0,EARTH_RADIUS));
   obs.transfo4d(mmat.transpose());
 
   // set meteor start x,y
@@ -206,7 +205,6 @@ void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 	if (!alive)
 		return;
 
-	const StelNavigator* nav = core->getNavigator();
 	const StelProjectorP proj = sPainter.getProjector();
 
 	Vec3d spos = position;
@@ -217,8 +215,8 @@ void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 	epos.transfo4d(mmat);
 
 	// convert to local and correct for earth radius [since equ and local coordinates in stellarium use same 0 point!] 
-	spos = nav->equinoxEquToAltAz( spos );
-	epos = nav->equinoxEquToAltAz( epos );
+	spos = core->equinoxEquToAltAz( spos );
+	epos = core->equinoxEquToAltAz( epos );
 	spos[2] -= EARTH_RADIUS;
 	epos[2] -= EARTH_RADIUS;
 	// 1216 is to scale down under 1 for desktop version
@@ -236,7 +234,7 @@ void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 		Vec3d posi = posInternal; 
 		posi[2] = position[2] + (posTrain[2] - position[2])/2;
 		posi.transfo4d(mmat);
-		posi = nav->equinoxEquToAltAz( posi );
+		posi = core->equinoxEquToAltAz( posi );
 		posi[2] -= EARTH_RADIUS;
 		posi/=1216;
 
