@@ -164,9 +164,9 @@ void AngleSpinBox::stepBy (int steps)
 
 QValidator::State AngleSpinBox::validate(QString& input, int& pos) const
 {
+    Q_UNUSED(pos);
 	QValidator::State state;
 	stringToDouble(input, &state);
-	pos = pos; // shut up the compiler
 	return state;
 }
 
@@ -210,8 +210,10 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 		input = input.mid(positivePrefix(prefix).length());
 	}
 
-	QRegExp dmsRx("^\\s*(\\d+)\\s*[d\\x00b0](\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$", Qt::CaseInsensitive);
-	QRegExp hmsRx("^\\s*(\\d+)\\s*h(\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$", Qt::CaseInsensitive);
+	QRegExp dmsRx("^\\s*(\\d+)\\s*[d\\x00b0](\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$", 
+                  Qt::CaseInsensitive);
+	QRegExp hmsRx("^\\s*(\\d+)\\s*h(\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$", 
+                  Qt::CaseInsensitive);
 	QRegExp decRx("^(\\d+(\\.\\d*)?)(\\s*[\\x00b0]\\s*)?$");
 	QRegExp badRx("[^hdms0-9 \\x00b0'\"\\.]", Qt::CaseInsensitive);
 
@@ -370,9 +372,12 @@ void AngleSpinBox::formatText(void)
 				signInd = negativePrefix(currentPrefixType);
 
 			if (angleSpinBoxFormat == DMSLetters)
-				lineEdit()->setText(QString("%1%2d %3m %4s").arg(signInd).arg(d).arg(m).arg(s, 0, 'f', decimalPlaces, ' '));
+				lineEdit()->setText(QString("%1%2d %3m %4s")
+                                    .arg(signInd).arg(d).arg(m).arg(s, 0, 'f', decimalPlaces, ' '));
 			else
-				lineEdit()->setText(QString("%1%2%3 %4' %5\"").arg(signInd).arg(d).arg(QChar(176)).arg(m).arg(s, 0, 'f', decimalPlaces, ' '));
+				lineEdit()->setText(QString("%1%2%3 %4' %5\"")
+                                    .arg(signInd).arg(d).arg(QChar(176)).arg(m)
+                                    .arg(s, 0, 'f', decimalPlaces, ' '));
 			break;
 		}
 		case HMSLetters:
@@ -409,9 +414,11 @@ void AngleSpinBox::formatText(void)
 				s= 0.0;
 
 			if (angleSpinBoxFormat == HMSLetters)
-				lineEdit()->setText(QString("%1h %2m %3s").arg(h).arg(m).arg(s, 0, 'f', decimalPlaces, ' '));
+				lineEdit()->setText(QString("%1h %2m %3s")
+                                    .arg(h).arg(m).arg(s, 0, 'f', decimalPlaces, ' '));
 			else
-				lineEdit()->setText(QString("%1h %2' %3\"").arg(h).arg(m).arg(s, 0, 'f', decimalPlaces, ' '));
+				lineEdit()->setText(QString("%1h %2' %3\"")
+                                    .arg(h).arg(m).arg(s, 0, 'f', decimalPlaces, ' '));
 			break;
 		}
 		case DecimalDeg:
@@ -427,13 +434,16 @@ void AngleSpinBox::formatText(void)
 				signInd = negativePrefix(currentPrefixType);
 			}
 
-			// lineEdit()->setText(QString("%1%2").arg(radAngle * 180.0 / M_PI, 0, 'g', decimalPlaces, ' ').arg(QChar(176)));
-			lineEdit()->setText(QString("%1%2%3").arg(signInd).arg(fmod(angle * 180.0 / M_PI, 360.0), 0, 'f', decimalPlaces, ' ').arg(QChar(176)));
+			lineEdit()->setText(QString("%1%2%3")
+                                .arg(signInd)
+                                .arg(fmod(angle * 180.0 / M_PI, 360.0), 0, 'f', decimalPlaces, ' ')
+                                .arg(QChar(176)));
 			break;
 		}
 		default:
 		{
-			qWarning() << "AngleSpinBox::formatText - WARNING - unknown format" << (int)(angleSpinBoxFormat);
+			qWarning() << "AngleSpinBox::formatText - WARNING - unknown format" 
+                       << (int)(angleSpinBoxFormat);
 			break;
 		}
 	}

@@ -26,7 +26,6 @@
 #include "StelPainter.hpp"
 #include "StelFileMgr.hpp"
 #include "Scenery3dMgr.hpp"
-#include "StelNavigator.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelUtils.hpp"
 #include "SolarSystem.hpp"
@@ -344,7 +343,7 @@ void Scenery3d::update(double deltaTime)
         StelMovementMgr *stelMovementMgr = GETSTELMODULE(StelMovementMgr);
 
         Vec3d viewDirection = core->getMovementMgr()->getViewDirectionJ2000();
-        Vec3d viewDirectionAltAz=core->getNavigator()->j2000ToAltAz(viewDirection);
+	Vec3d viewDirectionAltAz=core->j2000ToAltAz(viewDirection);
         double alt, az;
         StelUtils::rectToSphe(&az, &alt, viewDirectionAltAz);
 
@@ -483,7 +482,7 @@ void Scenery3d::generateShadowMap(StelCore* core)
 		return;
 	}
 
-	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, core->getCurrentProjectionType());
+	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	StelPainter painter(prj);
 
 	if (shadowMapTexture == 0) {
@@ -500,11 +499,11 @@ void Scenery3d::generateShadowMap(StelCore* core)
 
         // Determine sun position
         SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-        Vec3d sunPosition = ssystem->getSun()->getAltAzPos(core->getNavigator());
+	Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
         //zRotateMatrix.transfo(sunPosition);
         sunPosition.normalize();
         // GZ: at night, a near-full Moon can cast good shadows.
-        Vec3d moonPosition = ssystem->getMoon()->getAltAzPos(core->getNavigator());
+	Vec3d moonPosition = ssystem->getMoon()->getAltAzPosAuto(core);
         //zRotateMatrix.transfo(sunPosition);
         moonPosition.normalize();
 
@@ -573,7 +572,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
 {
     if (objModelArrays.empty()) return;
 
-    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, core->getCurrentProjectionType());
+    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
     StelPainter painter(prj);
 
     for (int i=0; i<6; i++) {
@@ -596,10 +595,10 @@ void Scenery3d::generateCubeMap(StelCore* core)
     glShadeModel(GL_SMOOTH);
 
     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-    Vec3d sunPosition = ssystem->getSun()->getAltAzPos(core->getNavigator());
+    Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
     zRotateMatrix.transfo(sunPosition); //: GZ: VERIFY THE NECESSITY OF THIS
     sunPosition.normalize();
-    Vec3d moonPosition = ssystem->getMoon()->getAltAzPos(core->getNavigator());
+    Vec3d moonPosition = ssystem->getMoon()->getAltAzPosAuto(core);
     zRotateMatrix.transfo(moonPosition); //: GZ: VERIFY THE NECESSITY OF THIS
     moonPosition.normalize();
 
@@ -724,7 +723,7 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
         return;
     }
 
-    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, core->getCurrentProjectionType());
+    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
     StelPainter painter(prj);
 
     glEnable(GL_TEXTURE_2D);
@@ -775,7 +774,7 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
 {
     if (objModelArrays.empty()) return;
 
-    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, core->getCurrentProjectionType());
+    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
     StelPainter painter(prj);
 
     //glEnable(GL_MULTISAMPLE); // enabling multisampling aka Anti-Aliasing
@@ -790,10 +789,10 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
     glShadeModel(GL_SMOOTH);
 
     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-    Vec3d sunPosition = ssystem->getSun()->getAltAzPos(core->getNavigator());
+    Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
     zRotateMatrix.transfo(sunPosition);
     sunPosition.normalize();
-    Vec3d moonPosition = ssystem->getMoon()->getAltAzPos(core->getNavigator());
+    Vec3d moonPosition = ssystem->getMoon()->getAltAzPosAuto(core);
     zRotateMatrix.transfo(moonPosition);
     moonPosition.normalize();
 
@@ -840,7 +839,8 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glLoadIdentity();
-    glMultMatrixd(prj->getModelViewMatrix());
+    //glMultMatrixd(prj->getModelViewMatrix());
+    glMultMatrixd(prj->getModelViewTransform()->getApproximateLinearTransfo());
     glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
 
     glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
@@ -870,7 +870,7 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
     if (objModelArrays.empty()) {
         return;
     }
-    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, core->getCurrentProjectionType());
+    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
     StelPainter painter(prj);
     const QFont font("Courier", 12);
     painter.setFont(font);

@@ -32,7 +32,6 @@
 
 #include "StelApp.hpp"
 #include "StelObject.hpp"
-#include "StelNavigator.hpp"
 
 #include "Server.hpp" //from the telescope server source tree
 #include "TelescopeClient.hpp" //from the plug-in's source tree
@@ -66,7 +65,7 @@ public:
 private:
 	//======================================================================
 	// Methods inherited from TelescopeClient
-	Vec3d getJ2000EquatorialPos(const StelNavigator *nav=0) const;
+	Vec3d getJ2000EquatorialPos(const StelCore* core=0) const;
 	bool prepareCommunication();
 	void performCommunication();
 	void telescopeGoto(const Vec3d &j2000Pos);

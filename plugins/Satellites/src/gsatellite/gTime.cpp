@@ -228,6 +228,16 @@ void gTime::toCalendarDate(int *pYear, int *pMonth , double *pDom) const
 	*pDom = DOM;
 }
 
+double gTime::toJCenturies() const
+{
+
+	double jd;
+	double UT = fmod((m_time + 0.5), 1.0);
+	jd = m_time - UT;
+	double TU = (jd- JDAY_JAN1_12H_2000) / 36525.0;
+
+	return TU;
+}
 
 // @method  toThetaGMST();
 // Definition: Calculate Theta Angle at Greenwich Mean Time for the Julian date. The return value

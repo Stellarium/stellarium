@@ -62,7 +62,7 @@ public:
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroup ShortInfo = (InfoStringGroup)(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
-	virtual ~StelObject(void) {}
+	virtual ~StelObject() {}
 
 	//! Default implementation of the getRegion method.
 	//! Calling this method on some object will cause an error if they need a valid StelNavigator instance to compute their position.
@@ -78,46 +78,63 @@ public:
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const = 0;
 
 	//! Return object's type. It should be the name of the class.
-	virtual QString getType(void) const = 0;
+	virtual QString getType() const = 0;
 
 	//! Return object's name in english
-	virtual QString getEnglishName(void) const = 0;
+	virtual QString getEnglishName() const = 0;
 
 	//! Return translated object's name
-	virtual QString getNameI18n(void) const = 0;
+	virtual QString getNameI18n() const = 0;
 
 	//! Get observer-centered equatorial coordinates at equinox J2000
-	virtual Vec3d getJ2000EquatorialPos(const StelNavigator *nav) const = 0;
+	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const = 0;
 
 	//! Get observer-centered equatorial coordinate at the current equinox
 	//! The frame has it's Z axis at the planet's current rotation axis
 	//! At time 2000-01-01 this frame is almost the same as J2000, but ONLY if the observer is on earth
-	Vec3d getEquinoxEquatorialPos(const StelNavigator* nav) const;
+	Vec3d getEquinoxEquatorialPos(const StelCore* core) const;
 
 	//! Get observer-centered hour angle + declination (at current equinox)
+	//! It is the geometric position, i.e. without taking refraction effect into account.
 	//! The frame has its Z axis at the planet's current rotation axis
-	Vec3d getSideralPos(const StelCore* core) const;
+	Vec3d getSideralPosGeometric(const StelCore* core) const;
+
+	//! Get observer-centered hour angle + declination (at current equinox)
+	//! It is the apparent position, i.e. taking the refraction effect into account.
+	//! The frame has its Z axis at the planet's current rotation axis
+	Vec3d getSideralPosApparent(const StelCore* core) const;
 
 	//! Get observer-centered alt/az position
+	//! It is the geometric position, i.e. without taking refraction effect into account.
 	//! The frame has it's Z axis at the zenith
-	Vec3d getAltAzPos(const StelNavigator* nav) const;
+	Vec3d getAltAzPosGeometric(const StelCore* core) const;
+
+	//! Get observer-centered alt/az position
+	//! It is the apparent position, i.e. taking the refraction effect into account.
+	//! The frame has it's Z axis at the zenith
+	Vec3d getAltAzPosApparent(const StelCore* core) const;
+
+	//! Get observer-centered alt/az position
+	//! It is the automatic position, i.e. taking the refraction effect into account if atmosphere is on.
+	//! The frame has it's Z axis at the zenith
+	Vec3d getAltAzPosAuto(const StelCore* core) const;
 
 	//! Return object's apparent V magnitude as seen from observer
-	virtual float getVMagnitude(const StelNavigator*) const {return 99;}
+	virtual float getVMagnitude(const StelCore*) const {return 99;}
 
 	//! Return a priority value which is used to discriminate objects by priority
 	//! As for magnitudes, the lower is the higher priority
-	virtual float getSelectPriority(const StelNavigator*) const {return 99;}
+	virtual float getSelectPriority(const StelCore*) const {return 99;}
 
 	//! Get a color used to display info about the object
 	virtual Vec3f getInfoColor() const {return Vec3f(1,1,1);}
 
 	//! Return the best FOV in degree to use for a close view of the object
-	virtual double getCloseViewFov(const StelNavigator*) const {return 10.;}
+	virtual double getCloseViewFov(const StelCore*) const {return 10.;}
 
 	//! Return the best FOV in degree to use for a global view of the object satellite system (if there are satellites)
-	virtual double getSatellitesFov(const StelNavigator*) const {return -1.;}
-	virtual double getParentSatellitesFov(const StelNavigator*) const {return -1.;}
+	virtual double getSatellitesFov(const StelCore*) const {return -1.;}
+	virtual double getParentSatellitesFov(const StelCore*) const {return -1.;}
 
 	//! Return the angular radius of a circle containing the object as seen from the observer
 	//! with the circle center assumed to be at getJ2000EquatorialPos().

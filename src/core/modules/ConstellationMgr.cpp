@@ -39,6 +39,7 @@
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
+#include "StelSkyDrawer.hpp"
 
 using namespace std;
 
@@ -89,7 +90,14 @@ void ConstellationMgr::init()
 	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected",
 						   conf->value("viewing/flag_constellation_pick", false).toBool() ).toBool());
 
-	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
+	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
+	objectManager->registerStelObjectMgr(this);
+	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), 
+			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
+	StelApp *app = &StelApp::getInstance();
+	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(app, SIGNAL(skyCultureChanged(const QString&)), this, SLOT(updateSkyCulture(const QString&)));
+	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 }
 
 /*************************************************************************
@@ -166,7 +174,7 @@ void ConstellationMgr::setStelStyle(const QString& section)
 	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/const_names_color", defaultColor).toString()));
 }
 
-void ConstellationMgr::selectedObjectChangeCallBack(StelModuleSelectAction action)
+void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction action)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(omgr);
@@ -425,10 +433,10 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 				qWarning() << "Texture dimension not available";
 			}
 
-			const StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-			Vec3d s1 = hipStarMgr->searchHP(hp1)->getJ2000EquatorialPos(nav);
-			Vec3d s2 = hipStarMgr->searchHP(hp2)->getJ2000EquatorialPos(nav);
-			Vec3d s3 = hipStarMgr->searchHP(hp3)->getJ2000EquatorialPos(nav);
+			StelCore* core = StelApp::getInstance().getCore();
+			Vec3d s1 = hipStarMgr->searchHP(hp1)->getJ2000EquatorialPos(core);
+			Vec3d s2 = hipStarMgr->searchHP(hp2)->getJ2000EquatorialPos(core);
+			Vec3d s3 = hipStarMgr->searchHP(hp3)->getJ2000EquatorialPos(core);
 
 			// To transform from texture coordinate to 2d coordinate we need to find X with XA = B
 			// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate
@@ -481,11 +489,10 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 
 void ConstellationMgr::draw(StelCore* core)
 {
-	StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 	sPainter.setFont(asterFont);
-	drawLines(sPainter, nav);
+	drawLines(sPainter, core);
 	drawNames(sPainter);
 	drawArt(sPainter);
 	drawBoundaries(sPainter);
@@ -510,7 +517,7 @@ void ConstellationMgr::drawArt(StelPainter& sPainter) const
 }
 
 // Draw constellations lines
-void ConstellationMgr::drawLines(StelPainter& sPainter, const StelNavigator* nav) const
+void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 {
 	sPainter.enableTexture2d(false);
 	glEnable(GL_BLEND);
@@ -519,7 +526,7 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelNavigator* nav
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->drawOptim(sPainter, nav, viewportHalfspace);
+		(*iter)->drawOptim(sPainter, core, viewportHalfspace);
 	}
 }
 

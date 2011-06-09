@@ -24,7 +24,7 @@
 #include "StelTranslator.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelLocationMgr.hpp"
 #include "StelModuleMgr.hpp"
 
@@ -76,7 +76,7 @@ void ArtificialPlanet::setDest(const PlanetP& dest)
 
 	// rotation:
 	const RotationElements &r(dest->getRotationElements());
-	lastJD = StelApp::getInstance().getCore()->getNavigator()->getJDay();
+	lastJD = StelApp::getInstance().getCore()->getJDay();
 
 	re.offset = r.offset + fmod(re.offset - r.offset + 360.0*( (lastJD-re.epoch)/re.period - (lastJD-r.epoch)/r.period), 360.0);
 
@@ -203,8 +203,8 @@ Mat4d StelObserver::getRotAltAzToEquatorial(double jd) const
 	// This is a kludge
 	if( lat > 89.5 )  lat = 89.5;
 	if( lat < -89.5 ) lat = -89.5;
-	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+currentLocation.longitude)*(M_PI/180.))
-		* Mat4d::yrotation((90.-lat)*(M_PI/180.));
+	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+currentLocation.longitude)*M_PI/180.)
+		* Mat4d::yrotation((90.-lat)*M_PI/180.);
 }
 
 Mat4d StelObserver::getRotEquatorialToVsop87(void) const

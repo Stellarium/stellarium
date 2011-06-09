@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2009 Matthew Gates
+ * Copyright (C) 2010 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +25,7 @@
 @section intro_scripts Introduction
 
 Since version 0.10.1, Stellarium includes a scripting feature based on the 
-<a href="http://doc.trolltech.com/4.6/qtscript.html">QT Scripting Engine</a>.  
+<a href="http://doc.trolltech.com/4.7/qtscript.html">QT Scripting Engine</a>.  
 This makes it possible to write small programs within Stellarium to produce 
 presentations, set up custom configurations, and to automate repetitive 
 tasks.  Prior to version 0.10.0, Stellarium used a different scripting engine 
@@ -40,72 +41,95 @@ itself.  See @ref scripting_api for more details.
 @section scratoscript Stratoscript
 
 Prior to version 0.10.0, Stellarium had a simple scripting engine, known as 
-<i>StratoScript</i>.  Using StratoScript it was possible to record and play back 
+\e StratoScript.  Using \e StratoScript it was possible to record and play back 
 sequences of Stellarium commands, load and display custom images, and play sounds.  
 In this way it was possible to make planetarium presentations - a feature used 
 quite widely in the small planetarium community.
 
-However StratoScript lacked many features of a real programming language - there 
-were no variables, no flow control and no way to introspect the state of Stellarium.
+However \e StratoScript lacked many features of a real programming language -
+there were no variables, no flow control and no way to introspect the state of
+Stellarium.
 
 The replacement scripting engine implemented in the 0.10.x series addresses these
 shortcomings, at the expense of a little complexity and a new language syntax.
 
-A compatibility mode which converts StratoScript into new scripting engine on
+A compatibility mode which converts \e StratoScript into new scripting engine on
 the fly is in progress.
 
-Note:  StratoScript compatibility is a build-time option.  To enable this feature, 
+Note: StratoScript compatibility is a build-time option. To enable this feature, 
 Stellarium must be built using the ENABLE_STRATOSCRIPT_COMPAT=1 option to cmake.
 
 @section scripting_api Scripting API
 
-Interation with Stellarium-specific functionality is done by calling the <b>public slots</b>
-of instances of a group of Stellarium's core classes.  
+Interation with Stellarium-specific functionality is done by calling the
+<b>public slots</b> of instances of a group of Stellarium's core classes.
 
-- The public slots in the class StelMainScriptAPI are available via an object named 
-  <b>core</b>.  For example, to access StelMainScriptAPI::wait() from a script, use the 
-  scripting command: core.wait(...);
+- The public slots in the class StelMainScriptAPI are available via an object
+  named \b core. For example, to access StelMainScriptAPI::wait() from a script,
+  use the scripting command:
+\code
+core.wait(...);
+\endcode
 
-- The public slots for each StelModule are available in the scripting engine via an 
-  object with the same name as the corresponding StelModule.  For example, to access 
-  LandscapeMgr::setFlagAtmosphere(), use the scripting command: 
-  LandscapeMgr.setFlagAtmosphere(...);
-
-- Additional core classes have self-named objects available from the scripting engine:
-  - StelSkyDrawer
-  - StelSkyLayerMgr
+- The public slots for each of the following classes are available in the
+  scripting engine via an object with the same name as the corresponding class:
+   - ConstellationMgr
+   - GridLinesMgr
+   - LabelMgr
+   - LandscapeMgr
+   - MeteorMgr
+   - NebulaMgr
+   - ScreenImageMgr
+   - SolarSystem
+   - StarMgr
+   - StelAudioMgr
+   - StelMovementMgr
+   - StelSkyDrawer
+   - StelSkyLayerMgr
+   .
+  For example, to access LandscapeMgr::setFlagAtmosphere(), use the scripting
+  command: 
+\code
+LandscapeMgr.setFlagAtmosphere(true);
+\endcode
+  Note: All of these except for StelSkyDrawer are StelModule classes.
 
 @section script_console Script Console
 
-Note:  The Script Console has been enabled by default since version 0.10.5.  
-It is a build-time option.  To enable or disable this feature, use the
-ENABLE_SCRIPT_CONSOLE=1 or =0 option to cmake.
-
 It is possible to open, edit run and save scripts using the script console window.  
-To toggle the script console, press F12.  The script console also provides an output
-window in which script debugging output is visible.
+To toggle the script console, press F12.  The script console also provides
+an output window in which script debugging output is visible.
+
+Note:  The Script Console is a build-time option.  It has been enabled by
+default since version 0.10.5.  To enable or disable this feature, use the
+ENABLE_SCRIPT_CONSOLE=1 or =0 option to cmake.
 
 @section example_scripts Examples
 
-The best source of examples is the <b>scripts</b> sub-directory of the main Stellarium 
-source tree.  This directory contains a sub-directory called tests which are not installed
-with Stellarium, but are nontheless useful sources of example code for various scripting 
-features.
+The best source of examples is the \b scripts sub-directory of the main Stellarium 
+source tree.  This directory contains a sub-directory called \b tests which are not
+installed with Stellarium, but are nontheless useful sources of example code for
+various scripting features. (The directory can be <a href="http://bazaar.launchpad.net/~stellarium/stellarium/trunk/files/head:/scripts/">browsed online</a>. Script files end in <tt>.ssc</tt> and <tt>.inc</tt>. Download links
+are to the right.)
 
 @subsection minimal_script Minimal Script
 
 This script prints "Hello Universe" in the @ref script_console output window.
 
-<pre>core.debug("Hello Universe");</pre>
+\code
+core.debug("Hello Universe");
+\endcode
 
 @subsection using_module Using a StelModule
 
-This script uses the LabelMgr module to display "Hello Universe" the screen for 
-3 seconds.
+This script uses the LabelMgr module to display "Hello Universe" in white on
+the screen for 3 seconds.
 
-<pre>LabelMgr.labelScreen("Hello Universe", 200, 200, true, 20, "#ff0000");
+\code
+LabelMgr.labelScreen("Hello Universe", 200, 200, true, 20, "#ff0000");
 core.wait(3);
-LabelMgr.deleteAllLabels();</pre>
+LabelMgr.deleteAllLabels();
+\endcode
 
 */
 

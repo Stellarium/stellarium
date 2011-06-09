@@ -37,9 +37,6 @@ public:
 
 	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraphicsWidget* stelAppGraphicsWidget);
 
-	//! Translate all texts to the new Locale.
-	virtual void updateI18n();
-
 	//! Load color scheme matchin the section name.
 	virtual void setStelStyle(const QString& section) =0;
 
@@ -80,6 +77,9 @@ public:
 
 protected:
 	class StelAppGraphicsWidget* stelAppGraphicsWidget;
+	//! Translate all texts to the new Locale.
+	void updateI18n();
+	
 };
 
 //! @class StelGuiPluginInterface

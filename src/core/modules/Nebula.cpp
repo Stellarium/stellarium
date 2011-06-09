@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2011 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +25,7 @@
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
 #include "StelTexture.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
@@ -36,6 +37,9 @@
 #include <QBuffer>
 
 StelTextureSP Nebula::texCircle;
+StelTextureSP Nebula::texOpenCluster;
+StelTextureSP Nebula::texGlobularCluster;
+StelTextureSP Nebula::texPlanetNebula;
 float Nebula::circleScale = 1.f;
 float Nebula::hintsBrightness = 0;
 Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);
@@ -104,17 +108,17 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	return str;
 }
 
-float Nebula::getSelectPriority(const StelNavigator *nav) const
+float Nebula::getSelectPriority(const StelCore* core) const
 {
 	if( ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getFlagHints() )
 	{
 		// make very easy to select IF LABELED
-		return -10;
+		return -10.f;
 	}
 	else
 	{
-		if (getVMagnitude(nav)>20) return 20;
-		return getVMagnitude(nav);
+		if (getVMagnitude(core)>20.f) return 20.f;
+		return getVMagnitude(core);
 	}
 }
 
@@ -123,7 +127,7 @@ Vec3f Nebula::getInfoColor(void) const
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.4) : ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getLabelsColor();
 }
 
-double Nebula::getCloseViewFov(const StelNavigator*) const
+double Nebula::getCloseViewFov(const StelCore*) const
 {
 	return angularSize>0 ? angularSize * 4 : 1;
 }
@@ -136,8 +140,19 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	glBlendFunc(GL_ONE, GL_ONE);
 	float lum = 1.f;//qMin(1,4.f/getOnScreenSize(core))*0.8;
 	sPainter.setColor(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness, 1);
-	Nebula::texCircle->bind();
-	sPainter.drawSprite2dMode(XY[0], XY[1], 4);
+	if (nType == 1)
+		Nebula::texOpenCluster->bind();
+
+	if (nType == 2)
+		Nebula::texGlobularCluster->bind();
+
+	if (nType == 4)
+		Nebula::texPlanetNebula->bind();
+
+	if (nType != 1 && nType != 2 && nType != 4)
+		Nebula::texCircle->bind();
+
+	sPainter.drawSprite2dMode(XY[0], XY[1], 6);
 }
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)

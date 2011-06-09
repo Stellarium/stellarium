@@ -26,13 +26,41 @@
 #include <QImage>
 #include <QtOpenGL>
 
-class QMutex;
-class QSemaphore;
 class QFile;
+class StelTextureMgr;
+class QNetworkReply;
 
 #ifndef GL_CLAMP_TO_EDGE
 #define GL_CLAMP_TO_EDGE 0x812F
 #endif
+
+// This class is just used internally to load the texture data.
+class ImageLoader : QObject
+{
+	Q_OBJECT
+
+private:
+	friend class StelTextureMgr;
+	friend class StelTexture;
+
+	ImageLoader(const QString& path, int delay);
+	void abort();
+
+signals:
+	void finished(QImage);
+	void error(const QString& errorMsg);
+
+public slots:
+	void start();
+
+private slots:
+	void onNetworkReply();
+	void directLoad();
+
+private:
+	QString path;
+	QNetworkReply* networkReply;
+};
 
 //! @class StelTexture
 //! Base texture class. For creating an instance, use StelTextureMgr::createTexture() and StelTextureMgr::createTextureThread()
@@ -95,23 +123,17 @@ signals:
 	void loadingProcessFinished(bool error);
 
 private slots:
-	//! Called when the download for the texture file terminated
-	void downloadFinished();
-
-	//! Called when the file loading thread has terminated
-	void fileLoadFinished();
+	//! Called by the loader when the data has finished loading
+	void onImageLoaded(QImage image);
+	//! Called by the loader in case of an error
+	void onLoadingError(const QString& errorMessage) {reportError(errorMessage);}
 
 private:
 	friend class StelTextureMgr;
-	friend class ImageLoadThread;
+	friend class TextureLoader;
 
 	//! Private constructor
 	StelTexture();
-
-	//! Loading of the image data.
-	//! This method is thread safe
-	//! @return false if an error occured
-	bool imageLoad();
 
 	//! This method should be called if the texture loading failed for any reasons
 	//! @param errorMessage the human friendly error message
@@ -119,11 +141,8 @@ private:
 
 	StelTextureParams loadParams;
 
-	//! Used to download remote files if needed
-	class QNetworkReply* httpReply;
-
-	//! Used to load in thread
-	class ImageLoadThread* loadThread;
+	//! The loader object
+	ImageLoader* loader;
 
 	//! Define if the texture was already downloaded if it was a remote one
 	bool downloaded;
@@ -134,7 +153,6 @@ private:
 	QString fullPath;
 
 	//! The data that was loaded from http
-	QByteArray downloadedData;
 	QImage qImage;
 
 	//! Used ony when creating temporary file
@@ -149,19 +167,11 @@ private:
 	//! OpenGL id
 	GLuint id;
 
-	///////////////////////////////////////////////////////////////////////////
-	// Attributes protected by the Mutex
-	//! Mutex used to protect all the attributes below
-	QMutex* mutex;
-
 	//! Cached average luminance
 	float avgLuminance;
 
 	GLsizei width;	//! Texture image width
 	GLsizei height;	//! Texture image height
-
-	//! Fix a limit to the number of maximum simultaneous loading threads
-	static QSemaphore* maxLoadThreadSemaphore;
 };
 
 

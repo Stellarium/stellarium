@@ -41,7 +41,7 @@ class QSettings;
 typedef QSharedPointer<Planet> PlanetP;
 
 //! @class SolarSystem
-//! This StelObjectModule derivative is used to model SolarSystem boies.
+//! This StelObjectModule derivative is used to model SolarSystem bodies.
 //! This includes the Major Planets, Minor Planets and Comets.
 class SolarSystem : public StelObjectModule
 {
@@ -70,15 +70,6 @@ public:
 	//! This includes planet motion trails.
 	virtual void update(double deltaTime);
 
-	//! Translate names.
-	virtual void updateI18n();
-
-	//! Called when a new object is selected.
-	virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::ReplaceSelection);
-
-	//! Load a color scheme
-	virtual void setStelStyle(const QString& section);
-
 	//! Used to determine what order to draw the various StelModules.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
@@ -89,7 +80,7 @@ public:
 	//! @param limitFov The radius of the circle around the point v which
 	//! defines the size of the area to search.
 	//! @param core the core object
-	//! @return A STL vector of SpelObjectP (pointers) containing all SolarSystem
+	//! @return A STL vector of StelObjectP (pointers) containing all SolarSystem
 	//! objects found in the specified area. This vector is not sorted by distance
 	//! from v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
@@ -183,6 +174,9 @@ public slots:
 	//! Get the display scaling factor for Earth's oon.
 	float getMoonScale(void) const {return moonScale;}
 
+	//! Translate names. (public so that SolarSystemEditor can call it).
+	void updateI18n();
+
 public:
 	///////////////////////////////////////////////////////////////////////////
 	// Other public methods
@@ -206,6 +200,9 @@ public:
 	//! Get the list of all the planet english names
 	QStringList getAllPlanetEnglishNames() const;
 
+	//! Get the list of all the planet localized names
+	QStringList getAllPlanetLocalizedNames() const;
+
 	//! Reload the planets
 	void reloadPlanets();
 
@@ -228,6 +225,14 @@ public:
 	//! Get the list of all the bodies of the solar system.
 	//! \deprecated Used in LandscapeMgr::update(), but commented out.
 	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}
+
+private slots:
+	//! Called when a new object is selected.
+	void selectedObjectChange(StelModule::StelModuleSelectAction action);
+
+	//! Load a color scheme
+	void setStelStyle(const QString& section);
+
 
 private:
 	//! Search for SolarSystem objects which are close to the position given

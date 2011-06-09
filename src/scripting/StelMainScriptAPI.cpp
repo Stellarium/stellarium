@@ -40,7 +40,7 @@
 #include "StelMainGraphicsView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelProjector.hpp"
@@ -91,19 +91,19 @@ StelMainScriptAPI::~StelMainScriptAPI()
 //! @param JD the Julian Date
 void StelMainScriptAPI::setJDay(double JD)
 {
-	StelApp::getInstance().getCore()->getNavigator()->setJDay(JD);
+	StelApp::getInstance().getCore()->setJDay(JD);
 }
 
 //! Get the current date in Julian Day
 //! @return the Julian Date
 double StelMainScriptAPI::getJDay() const
 {
-	return StelApp::getInstance().getCore()->getNavigator()->getJDay();
+	return StelApp::getInstance().getCore()->getJDay();
 }
 
 void StelMainScriptAPI::setDate(const QString& dt, const QString& spec)
 {
-	StelApp::getInstance().getCore()->getNavigator()->setJDay(jdFromDateString(dt, spec));
+	StelApp::getInstance().getCore()->setJDay(jdFromDateString(dt, spec));
 }
 
 QString StelMainScriptAPI::getDate(const QString& spec)
@@ -119,35 +119,34 @@ QString StelMainScriptAPI::getDate(const QString& spec)
 void StelMainScriptAPI::setTimeRate(double ts)
 {
 	// 1 second = .00001157407407407407 JDay
-	StelApp::getInstance().getCore()->getNavigator()->setTimeRate(ts * 0.00001157407407407407 * StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate());
+	StelApp::getInstance().getCore()->setTimeRate(ts * 0.00001157407407407407 * StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate());
 }
 
 //! Get time speed in JDay/sec
 //! @return time speed in JDay/sec
 double StelMainScriptAPI::getTimeRate() const
 {
-	return StelApp::getInstance().getCore()->getNavigator()->getTimeRate() / (0.00001157407407407407 * StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate());
+	return StelApp::getInstance().getCore()->getTimeRate() / (0.00001157407407407407 * StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate());
 }
 
 bool StelMainScriptAPI::isRealTime()
 {
-	return StelApp::getInstance().getCore()->getNavigator()->getIsTimeNow();
+	return StelApp::getInstance().getCore()->getIsTimeNow();
 }
 
 void StelMainScriptAPI::setRealTime()
 {
 	setTimeRate(1.0);
-	StelApp::getInstance().getCore()->getNavigator()->setTimeNow();
+	StelApp::getInstance().getCore()->setTimeNow();
 }
 
 void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, double altitude, double duration, const QString& name, const QString& planet)
 {
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	Q_ASSERT(nav);
+	StelCore* core = StelApp::getInstance().getCore();
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	Q_ASSERT(ssmgr);
 
-	StelLocation loc = nav->getCurrentLocation();
+	StelLocation loc = core->getCurrentLocation();
 	loc.longitude = longitude;
 	loc.latitude = latitude;
 	if (altitude > -1000)
@@ -155,23 +154,22 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 	if (ssmgr->searchByName(planet))
 		loc.planetName = planet;
 	loc.name = name;
-	nav->moveObserverTo(loc, duration);
+	core->moveObserverTo(loc, duration);
 }
 
 void StelMainScriptAPI::setObserverLocation(const QString id, float duration)
 {
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	Q_ASSERT(nav);
+	StelCore* core = StelApp::getInstance().getCore();
 	bool ok;
 	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForSmallString(id, &ok);
 	if (!ok)
 		return;	// location find failed
-	nav->moveObserverTo(loc, duration);
+	core->moveObserverTo(loc, duration);
 }
 
 QString StelMainScriptAPI::getObserverLocation()
 {
-	return StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().getID();
+	return StelApp::getInstance().getCore()->getCurrentLocation().getID();
 }
 
 void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir)
@@ -463,10 +461,10 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 		if (nowRe.capturedTexts().at(1)=="now")
 			jd = StelUtils::getJDFromSystem();
 		else
-			jd = StelApp::getInstance().getCore()->getNavigator()->getJDay();
+			jd = StelApp::getInstance().getCore()->getJDay();
 
 		if (nowRe.capturedTexts().at(8) == "sidereal")
-			dayLength = StelApp::getInstance().getCore()->getNavigator()->getLocalSideralDayLength();
+			dayLength = StelApp::getInstance().getCore()->getLocalSideralDayLength();
 
 		QString unitString = nowRe.capturedTexts().at(6);
 		if (unitString == "seconds" || unitString == "second")
@@ -525,24 +523,24 @@ QVariantMap StelMainScriptAPI::getObjectPosition(const QString& name)
 		map.insert("found", true);
 	}
 
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
+	
 	Vec3d pos;
 	double ra, dec, alt, azi;
 
 	// ra/dec
-	pos = obj->getEquinoxEquatorialPos(nav);
+	pos = obj->getEquinoxEquatorialPos(StelApp::getInstance().getCore());
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("ra", ra*180./M_PI);
 	map.insert("dec", dec*180./M_PI);
 
 	// ra/dec in J2000
-	pos = obj->getJ2000EquatorialPos(nav);
+	pos = obj->getJ2000EquatorialPos(StelApp::getInstance().getCore());
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("raJ2000", ra*180./M_PI);
 	map.insert("decJ2000", dec*180./M_PI);
 
 	// altitude/azimuth
-	pos = obj->getAltAzPos(nav);
+	pos = obj->getAltAzPosApparent(StelApp::getInstance().getCore());
 	StelUtils::rectToSphe(&azi, &alt, pos);
 	map.insert("altitude", alt*180./M_PI);
 	map.insert("azimuth", azi*180./M_PI);
@@ -657,7 +655,7 @@ void StelMainScriptAPI::clear(const QString& state)
 
 double StelMainScriptAPI::getViewAltitudeAngle()
 {
-	const Vec3d& current = StelApp::getInstance().getCore()->getNavigator()->j2000ToAltAz(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000());
+	const Vec3d& current = StelApp::getInstance().getCore()->j2000ToAltAz(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000(), StelCore::RefractionOff);
 	double alt, azi;
 	StelUtils::rectToSphe(&azi, &alt, current);
 	return alt*180/M_PI; // convert to degrees from radians
@@ -665,7 +663,7 @@ double StelMainScriptAPI::getViewAltitudeAngle()
 
 double StelMainScriptAPI::getViewAzimuthAngle()
 {
-	const Vec3d& current = StelApp::getInstance().getCore()->getNavigator()->j2000ToAltAz(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000());
+	const Vec3d& current = StelApp::getInstance().getCore()->j2000ToAltAz(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000(), StelCore::RefractionOff);
 	double alt, azi;
 	StelUtils::rectToSphe(&azi, &alt, current);
 	// The returned azimuth angle is in radians and set up such that:
@@ -676,7 +674,7 @@ double StelMainScriptAPI::getViewAzimuthAngle()
 
 double StelMainScriptAPI::getViewRaAngle()
 {
-	const Vec3d& current = StelApp::getInstance().getCore()->getNavigator()->j2000ToEquinoxEqu(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000());
+	const Vec3d& current = StelApp::getInstance().getCore()->j2000ToEquinoxEqu(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000());
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, current);
 	// returned RA angle is in range -PI .. PI, but we want 0 .. 360
@@ -685,7 +683,7 @@ double StelMainScriptAPI::getViewRaAngle()
 
 double StelMainScriptAPI::getViewDecAngle()
 {
-	const Vec3d& current = StelApp::getInstance().getCore()->getNavigator()->j2000ToEquinoxEqu(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000());
+	const Vec3d& current = StelApp::getInstance().getCore()->j2000ToEquinoxEqu(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000());
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, current);
 	return dec*180/M_PI; // convert to degrees from radians
@@ -720,7 +718,7 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 	double dAzi = M_PI - StelUtils::getDecAngle(azi);
 
 	StelUtils::spheToRect(dAzi,dAlt,aim);
-	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->getNavigator()->altAzToJ2000(aim), duration);
+	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->altAzToJ2000(aim, StelCore::RefractionOff), duration);
 }
 
 void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float duration)
@@ -735,7 +733,7 @@ void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float
 	double dDec = StelUtils::getDecAngle(dec);
 
 	StelUtils::spheToRect(dRa,dDec,aim);
-	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->getNavigator()->equinoxEquToJ2000(aim), duration);
+	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->equinoxEquToJ2000(aim), duration);
 }
 
 void StelMainScriptAPI::moveToRaDecJ2000(const QString& ra, const QString& dec, float duration)
@@ -750,7 +748,7 @@ void StelMainScriptAPI::moveToRaDecJ2000(const QString& ra, const QString& dec, 
 	double dDec = StelUtils::getDecAngle(dec);
 
 	StelUtils::spheToRect(dRa,dDec,aimJ2000);
-	aimEquofDate = StelApp::getInstance().getCore()->getNavigator()->j2000ToEquinoxEqu(aimJ2000);
+	aimEquofDate = StelApp::getInstance().getCore()->j2000ToEquinoxEqu(aimJ2000);
 	mvmgr->moveToJ2000(aimEquofDate, duration);
 }
 
