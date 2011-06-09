@@ -128,14 +128,14 @@ void SNe::draw(StelCore* core)
 	Vec3f color = Vec3f(1.f,1.f,1.f);
 	float rcMag[2];
 	Vec3f v;
-	for (int i=0;i<(sizeof(supernova)/sizeof(supernova[0])-1);i++)
+	foreach(const supernova &sn, snstar)
 	{
-		StelUtils::spheToRect(supernova[i].ra, supernova[i].de, v);
+		StelUtils::spheToRect(sn.ra, sn.de, v);
 
-		sd->computeRCMag(supernova[i].maxMagnitude, rcMag);
+		sd->computeRCMag(sn.maxMagnitude, rcMag);
 		sd->drawPointSource(&painter, v, rcMag, color, false);
 		painter.setColor(color[0], color[1], color[2], 1);
-		painter.drawText(Vec3d(v[0], v[1], v[2]), QString("SN %1").arg(supernova[i].name), 0, 10, 10, false);
+		painter.drawText(Vec3d(v[0], v[1], v[2]), QString("SN %1").arg(sn.name), 0, 10, 10, false);
 	}
 }
 
@@ -232,16 +232,18 @@ void SNe::setSNeMap(const QVariantMap& map)
 {
 	QVariantMap sneMap = map.value("supernova").toMap();
 	int numRows = 0;	
+	supernova sn;
 	foreach(QString sneKey, sneMap.keys())
 	{
 		QVariantMap sneData = sneMap.value(sneKey).toMap();
+		sn.name = sneKey;
+		sn.type = sneData.value("type").toString();
+		sn.maxMagnitude = sneData.value("maxMagnitude").toFloat();
+		sn.peakJD = sneData.value("peakJD").toDouble();
+		sn.ra = StelUtils::getDecAngle(sneData.value("alpha").toString());
+		sn.de = StelUtils::getDecAngle(sneData.value("delta").toString());
 
-		supernova[numRows].name = sneKey;
-		supernova[numRows].type = sneData.value("type").toString();
-		supernova[numRows].maxMagnitude = sneData.value("maxMagnitude").toFloat();
-		supernova[numRows].peakJD = sneData.value("peakJD").toDouble();		
-		supernova[numRows].ra = StelUtils::getDecAngle(sneData.value("alpha").toString());
-		supernova[numRows].de = StelUtils::getDecAngle(sneData.value("delta").toString());
+		snstar.append(sn);
 
 		numRows++;
 	}
