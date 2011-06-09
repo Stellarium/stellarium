@@ -28,7 +28,7 @@
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelSkyDrawer.hpp"
 #include "StelSkyLayerMgr.hpp"
 
@@ -385,10 +385,11 @@ void StelScriptMgr::setScriptRate(float r)
 	// pre-calculate the new time rate in an effort to prevent there being much latency
 	// between setting the script rate and the time rate.
 	float factor = r / currentScriptRate;
-	StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
-	nav->setTimeRate(nav->getTimeRate() * factor);
 	
-	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(nav->getTimeRate());
+	StelCore* core = StelApp::getInstance().getCore();
+	core->setTimeRate(core->getTimeRate() * factor);
+	
+	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(core->getTimeRate());
 	engine.globalObject().setProperty("scriptRateReadOnly", r);
 }
 

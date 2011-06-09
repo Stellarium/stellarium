@@ -26,7 +26,7 @@
 class StelProjectorPerspective : public StelProjector
 {
 public:
-	StelProjectorPerspective(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
+	StelProjectorPerspective(ModelViewTranformP func) : StelProjector(func) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 120.f;}
@@ -63,7 +63,7 @@ protected:
 class StelProjectorEqualArea : public StelProjector
 {
 public:
-	StelProjectorEqualArea(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
+	StelProjectorEqualArea(ModelViewTranformP func) : StelProjector(func) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 360.f;}
@@ -89,7 +89,7 @@ protected:
 class StelProjectorStereographic : public StelProjector
 {
 public:
-	StelProjectorStereographic(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
+	StelProjectorStereographic(ModelViewTranformP func) : StelProjector(func) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 235.f;}
@@ -116,7 +116,7 @@ public:
 		for (int i = 0; i < n; ++i, ++out)
 		{
 			v = in[i];
-			v.transfo4d(modelViewMatrix);
+			modelViewTransform->forward(v);
 			out->set(v[0], v[1], v[2]);
 			StelProjectorStereographic::forward(*out);
 			out->set(viewportCenter[0] + flipHorz * pixelPerRad * (*out)[0],
@@ -138,7 +138,7 @@ protected:
 class StelProjectorFisheye : public StelProjector
 {
 public:
-	StelProjectorFisheye(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
+	StelProjectorFisheye(ModelViewTranformP func) : StelProjector(func) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 180.00001f;}
@@ -177,7 +177,7 @@ protected:
 class StelProjectorHammer : public StelProjector
 {
 public:
-	StelProjectorHammer(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
+	StelProjectorHammer(ModelViewTranformP func) : StelProjector(func) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 360.f;}
@@ -187,7 +187,7 @@ public:
 		for (int i = 0; i < n; ++i)
 		{
 			v = in[i];
-			v.transfo4d(modelViewMatrix);
+			modelViewTransform->forward(v);
 			out[i].set(v[0], v[1], v[2]);
 			StelProjectorHammer::forward(out[i]);
 			out[i][0] = viewportCenter[0] + flipHorz * pixelPerRad * out[i][0];
@@ -227,7 +227,7 @@ protected:
 class StelProjectorCylinder : public StelProjector
 {
 public:
-	StelProjectorCylinder(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
+	StelProjectorCylinder(ModelViewTranformP func) : StelProjector(func) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 175.f * 4.f/3.f;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
@@ -255,7 +255,7 @@ protected:
 class StelProjectorMercator : public StelProjector
 {
 public:
-	StelProjectorMercator(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
+	StelProjectorMercator(ModelViewTranformP func) : StelProjector(func) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 175.f * 4.f/3.f;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
@@ -283,7 +283,7 @@ protected:
 class StelProjectorOrthographic : public StelProjector
 {
 public:
-	StelProjectorOrthographic(const Mat4d& modelViewMat) : StelProjector(modelViewMat) {;}
+	StelProjectorOrthographic(ModelViewTranformP func) : StelProjector(func) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 179.9999f;}
@@ -301,7 +301,7 @@ protected:
 class StelProjector2d : public StelProjector
 {
 public:
-	StelProjector2d() : StelProjector(Mat4d::identity()) {;}
+	StelProjector2d() : StelProjector(ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity()))) {;}
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 360.f;}

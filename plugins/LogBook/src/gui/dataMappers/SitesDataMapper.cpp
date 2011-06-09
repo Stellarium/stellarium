@@ -32,7 +32,6 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelNavigator.hpp"
 
 SitesDataMapper::SitesDataMapper(Ui_SitesWidget *aWidget, QMap<QString, QSqlTableModel *> tableModels, QObject *parent) : QObject(parent)
 {
@@ -64,16 +63,16 @@ SitesDataMapper::~SitesDataMapper()
 /* ********************************************************************* */
 void SitesDataMapper::addSiteForCurrentLocation()
 {
-	const StelNavigator* nav = StelApp::getInstance().getCore()->getNavigator();
+	const StelCore* core = StelApp::getInstance().getCore();
     QSqlField field1("name", QVariant::String);
     QSqlField field2("longitude", QVariant::Double);
     QSqlField field3("latitude", QVariant::Double);
     QSqlField field4("elevation", QVariant::Int);
     QSqlField field5("timezone_offset", QVariant::Double);
-	field1.setValue(QVariant(nav->getCurrentLocation().name));
-	field2.setValue(QVariant(nav->getCurrentLocation().longitude));
-	field3.setValue(QVariant(nav->getCurrentLocation().latitude));
-	field4.setValue(QVariant(nav->getCurrentLocation().altitude));
+	field1.setValue(QVariant(core->getCurrentLocation().name));
+	field2.setValue(QVariant(core->getCurrentLocation().longitude));
+	field3.setValue(QVariant(core->getCurrentLocation().latitude));
+	field4.setValue(QVariant(core->getCurrentLocation().altitude));
 	field5.setValue(QVariant(0));
 	QSqlRecord newRecord = QSqlRecord();
 	newRecord.append(field1);

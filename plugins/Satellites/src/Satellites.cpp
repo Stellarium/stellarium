@@ -23,7 +23,6 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelLocation.hpp"
-#include "StelNavigator.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelLocaleMgr.hpp"
@@ -189,7 +188,7 @@ void Satellites::init()
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	// Handle changes to the observer location:
-	connect(StelApp::getInstance().getCore()->getNavigator(), SIGNAL(locationChanged(StelLocation)), this, SLOT(observerLocationChanged(StelLocation)));
+	connect(StelApp::getInstance().getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(observerLocationChanged(StelLocation)));
 	
 	//Load the module's custom style sheets
 	QFile styleSheetFile;
@@ -279,7 +278,7 @@ double Satellites::getCallOrder(StelModuleActionName actionName) const
 QList<StelObjectP> Satellites::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
 {
 	QList<StelObjectP> result;
-	if (!hintFader || StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().planetName != earth->getEnglishName())
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
 		return result;
 
 	Vec3d v(av);
@@ -304,7 +303,7 @@ QList<StelObjectP> Satellites::searchAround(const Vec3d& av, double limitFov, co
 
 StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 {
-	if (!hintFader || StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().planetName != earth->getEnglishName())
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
 		return NULL;
 
 	QString objw = nameI18n.toUpper();
@@ -323,7 +322,7 @@ StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 
 StelObjectP Satellites::searchByName(const QString& englishName) const
 {
-	if (!hintFader || StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().planetName != earth->getEnglishName())
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
 		return NULL;
 
 	QString objw = englishName.toUpper();
@@ -342,7 +341,7 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
-	if (!hintFader || StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().planetName != earth->getEnglishName())
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
 		return result;
 	if (maxNbItem==0) return result;
 
@@ -447,7 +446,7 @@ void Satellites::readSettingsFromConfig(void)
 	// populate updateUrls from tle_url? keys
 	QRegExp keyRE("^tle_url\\d+$");
 	updateUrls.clear();
-	foreach(QString key, conf->childKeys())
+        foreach(const QString& key, conf->childKeys())
 	{
 		if (keyRE.exactMatch(key))
 		{
@@ -484,7 +483,7 @@ void Satellites::saveSettingsToConfig(void)
 
 	// update tle urls... first clear the existing ones in the file
 	QRegExp keyRE("^tle_url\\d+$");
-	foreach(QString key, conf->childKeys())
+        foreach(const QString& key, conf->childKeys())
 	{
 		if (keyRE.exactMatch(key))
 			conf->remove(key);
@@ -493,7 +492,7 @@ void Satellites::saveSettingsToConfig(void)
 
 	// populate updateUrls from tle_url? keys
 	int n=0;
-	foreach(QString url, updateUrls)
+        foreach(const QString& url, updateUrls)
 	{
 		QString key = QString("tle_url%1").arg(n++);
 		conf->setValue(key, url);
@@ -604,7 +603,7 @@ void Satellites::setTleMap(const QVariantMap& map)
 
 	satellites.clear();
 	QVariantMap satMap = map.value("satellites").toMap();
-	foreach(QString designation, satMap.keys())
+        foreach(const QString& designation, satMap.keys())
 	{
 		QVariantMap satData = satMap.value(designation).toMap();
 		satData["designation"] = designation;
@@ -662,7 +661,7 @@ QStringList Satellites::getGroups(void) const
 	{
 		if (sat->initialized)
 		{
-			foreach(QString group, sat->groupIDs)
+                        foreach(const QString& group, sat->groupIDs)
 			{
 				if (!groups.contains(group))
 					groups << group;
@@ -712,7 +711,7 @@ void Satellites::setTleSources(QStringList tleSources)
 
 	// clear old source list
 	QRegExp keyRE("^tle_url\\d+$");
-	foreach(QString key, conf->childKeys())
+        foreach(const QString& key, conf->childKeys())
 	{
 		if (keyRE.exactMatch(key))
 			conf->remove(key);
@@ -720,7 +719,7 @@ void Satellites::setTleSources(QStringList tleSources)
 
 	// set the new sources list
 	int i=0;
-	foreach (QString url, updateUrls)
+        foreach (const QString& url, updateUrls)
 	{
 		conf->setValue(QString("tle_url%1").arg(i++), url);
 	}
@@ -826,13 +825,8 @@ void Satellites::updateDownloadComplete(QNetworkReply* reply)
 	}
 }
 
-void Satellites::observerLocationChanged(StelLocation loc)
+void Satellites::observerLocationChanged(StelLocation)
 {
-	foreach(const SatelliteP& sat, satellites)
-	{
-		if (sat->initialized && sat->visible)
-			sat->setObserverLocation(&loc);
-	}
 	recalculateOrbitLines();
 }
 
@@ -863,9 +857,9 @@ void Satellites::displayMessage(const QString& message, const QString hexColor)
 
 void Satellites::messageTimeout(void)
 {
-	foreach(int i, messageIDs)
+        foreach(const int& id, messageIDs)
 	{
-		GETSTELMODULE(LabelMgr)->deleteLabel(i);
+                GETSTELMODULE(LabelMgr)->deleteLabel(id);
 	}
 }
 
@@ -886,7 +880,7 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 		progressBar->setFormat("TLE updating %v/%m");
 	}
 
-	foreach(QString tleFilePath, paths)
+        foreach(const QString& tleFilePath, paths)
 	{
 		QFile tleFile(tleFilePath);
 		if (tleFile.open(QIODevice::ReadOnly|QIODevice::Text))
@@ -982,7 +976,7 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 
 void Satellites::update(double deltaTime)
 {
-	if (StelApp::getInstance().getCore()->getNavigator()->getCurrentLocation().planetName != earth->getEnglishName() || (!hintFader && hintFader.getInterstate() <= 0.))
+	if (StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || (!hintFader && hintFader.getInterstate() <= 0.))
 		return;
 
 	hintFader.update((int)(deltaTime*1000));
@@ -996,7 +990,7 @@ void Satellites::update(double deltaTime)
 
 void Satellites::draw(StelCore* core)
 {
-	if (core->getNavigator()->getCurrentLocation().planetName != earth->getEnglishName() || (!hintFader && hintFader.getInterstate() <= 0.))
+	if (core->getCurrentLocation().planetName != earth->getEnglishName() || (!hintFader && hintFader.getInterstate() <= 0.))
 		return;
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
@@ -1021,14 +1015,13 @@ void Satellites::draw(StelCore* core)
 
 void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 {
-	const StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Satellite");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
-		Vec3d pos=obj->getJ2000EquatorialPos(nav);
+		Vec3d pos=obj->getJ2000EquatorialPos(core);
 		Vec3d screenpos;
 
 		// Compute 2D pos and return if outside screen
