@@ -20,12 +20,16 @@
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelGui.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelObjectMgr.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelSkyDrawer.hpp"
+#include "LabelMgr.hpp"
 #include "SNe.hpp"
 
 #include <QDebug>
@@ -34,6 +38,8 @@
 #include <QVariantMap>
 #include <QVariant>
 #include <QList>
+#include <QSharedPointer>
+#include <QStringList>
 
 /*
  This method is the one called automatically by the StelModuleMgr just 
@@ -72,6 +78,11 @@ SNe::SNe()
  Destructor
 */
 SNe::~SNe()
+{
+	//
+}
+
+void SNe::deinit()
 {
 	//
 }
@@ -145,6 +156,102 @@ void SNe::draw(StelCore* core)
 			painter.drawText(Vec3d(v[0], v[1], v[2]), QString("SN %1").arg(sn.name), 0, 10, 10, false);
 		}
 	}
+
+	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
+		drawPointer(core, painter);
+}
+
+void SNe::drawPointer(StelCore* core, StelPainter& painter)
+{
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+
+	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Supernova");
+	if (!newSelected.empty())
+	{
+		const StelObjectP obj = newSelected[0];
+		Vec3d pos=obj->getJ2000EquatorialPos(core);
+		Vec3d screenpos;
+
+		// Compute 2D pos and return if outside screen
+		if (!prj->project(pos, screenpos))
+			return;
+		glColor3f(0.4f,0.5f,0.8f);
+		texPointer->bind();
+
+		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+
+		// Size on screen
+		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
+		size += 12.f + 3.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
+		// size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
+		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 20, 90);
+		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 20, 0);
+		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 20, -90);
+		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 20, -180);
+	}
+}
+
+QList<StelObjectP> SNe::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
+{
+	QList<StelObjectP> result;
+
+	/*
+	foreach(const supernova &sn, snstar)
+	{
+		result.append(qSharedPointerCast<StelObject>(sn));
+	}
+	*/
+	return result;
+}
+
+StelObjectP SNe::searchByName(const QString& englishName) const
+{
+	/*
+	QString objw = englishName.toUpper();
+	foreach(const supernova &sn, snstar)
+	{
+		if (sn->getEnglishName().toUpper() == englishName)
+			return qSharedPointerCast<StelObject>(sn);
+	}
+	*/
+	return NULL;
+}
+
+StelObjectP SNe::searchByNameI18n(const QString& nameI18n) const
+{
+	/*
+	QString objw = nameI18n.toUpper();
+
+	foreach(const supernova &sn, snstar)
+	{
+		if (sn->getNameI18n().toUpper() == nameI18n)
+			return qSharedPointerCast<StelObject>(sn);
+	}
+	*/
+	return NULL;
+}
+
+QStringList SNe::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+{
+	QStringList result;
+	if (maxNbItem==0) return result;
+
+	QString objw = objPrefix.toUpper();
+	/*
+	foreach(const supernova &sn, snstar)
+	{
+		if (sn->getNameI18n().toUpper().left(objw.length()) == objw)
+		{
+				result << sn->getNameI18n().toUpper();
+		}
+	}
+	*/
+	result.sort();
+	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+
+	return result;
 }
 
 /*
