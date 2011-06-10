@@ -128,14 +128,21 @@ void SNe::draw(StelCore* core)
 	Vec3f color = Vec3f(1.f,1.f,1.f);
 	float rcMag[2];
 	Vec3f v;
+	double cJD = core->getJDay();
+	double mag;
 	foreach(const supernova &sn, snstar)
 	{
 		StelUtils::spheToRect(sn.ra, sn.de, v);
 
-		sd->computeRCMag(sn.maxMagnitude, rcMag);
-		sd->drawPointSource(&painter, v, rcMag, color, false);
-		painter.setColor(color[0], color[1], color[2], 1);
-		painter.drawText(Vec3d(v[0], v[1], v[2]), QString("SN %1").arg(sn.name), 0, 10, 10, false);
+		mag = computeSNeMag(sn.peakJD,sn.maxMagnitude,sn.type,cJD);
+
+		if (mag <= sd->getLimitMagnitude())
+		{
+			sd->computeRCMag(mag, rcMag);
+			sd->drawPointSource(&painter, v, rcMag, color, false);
+			painter.setColor(color[0], color[1], color[2], 1);
+			painter.drawText(Vec3d(v[0], v[1], v[2]), QString("SN %1").arg(sn.name), 0, 10, 10, false);
+		}
 	}
 }
 
@@ -226,12 +233,11 @@ QVariantMap SNe::loadSNeMap(QString path)
 }
 
 /*
-  Set items for array of struct from data map
+  Set items for list of struct from data map
 */
 void SNe::setSNeMap(const QVariantMap& map)
 {
 	QVariantMap sneMap = map.value("supernova").toMap();
-	int numRows = 0;	
 	supernova sn;
 	foreach(QString sneKey, sneMap.keys())
 	{
@@ -244,12 +250,31 @@ void SNe::setSNeMap(const QVariantMap& map)
 		sn.de = StelUtils::getDecAngle(sneData.value("delta").toString());
 
 		snstar.append(sn);
-
-		numRows++;
 	}
 }
 
+/*
+  Computation of visual magnitude as function from supernova type and time
+*/
 double SNe::computeSNeMag(double peakJD, float maxMag, QString sntype, double currentJD)
 {
-	return maxMag;
+	double vmag = 30;
+	if (peakJD<=currentJD)
+	{
+	    if (peakJD==std::floor(currentJD))
+		vmag = maxMag;
+
+	    else
+		vmag = maxMag - 2.5 * (-3) * std::log10(currentJD-peakJD);
+	}
+	else
+	{
+	    if (std::abs(peakJD-currentJD)<=5)
+		vmag = maxMag - 2.5 * (-1.75) * std::log10(std::abs(peakJD-currentJD));
+		if (vmag<maxMag)
+		    vmag = maxMag;
+	}
+
+
+	return vmag;
 }
