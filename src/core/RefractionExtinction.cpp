@@ -90,17 +90,19 @@ float Extinction::airmass(const float cosZ, const bool apparent_z) const
 }
 
 
-// The following 3 are to be configured, the rest is derived.
-// Recommendations: -4.9/-4.3/0.1: sharp but continuous transition, no effects below -5.
-//                  -4.3/-4.3/0.7: sharp but continuous transition, no effects below -5. Maybe better for picking?
-//                  -3/-3/2: "strange" zone 2 degrees wide. Both formulae are close near -3. Actually, refraction formulae dubious below 0
-//                   0/0/1: "strange zone 1 degree wide just below horizon, no effect below -1. Actually, refraction formulae dubious below 0! But it looks stupid, see the sun!
-// This must be -5 or higher
-const double Refraction::MIN_GEO_ALTITUDE_DEG=-3;
-// this must be -4.3 or higher
-const double Refraction::MIN_APP_ALTITUDE_DEG=-3;
+// The following 4 are to be configured, the rest is derived.
+// Recommendations: -4.9/-4.3/0.1/0.1: sharp but continuous transition, no effects below -5.
+//                  -4.3/-4.3/0.7/0.7: sharp but continuous transition, no effects below -5. Maybe better for picking?
+//                  -3/-3/2/2: "strange" zone 2 degrees wide. Both formulae are close near -3. Actually, refraction formulae dubious below 0
+//                   0/0/1/1: "strange zone 1 degree wide just below horizon, no effect below -1. Actually, refraction formulae dubious below 0! But it looks stupid, see the sun!
+//                  Optimum:-3.54/-3.21783/1.46/1.78217. Here forward/backward are almost perfect inverses (-->good picking!), and nothing happens below -5 degrees.
+// This must be -5 or higher.
+const double Refraction::MIN_GEO_ALTITUDE_DEG=-3.54;
+// this must be -4.3 or higher. -3.21783 is an optimal value to fit against forward refraction!
+const double Refraction::MIN_APP_ALTITUDE_DEG=-3.21783;
 // this must be positive. Transition zone goes that far below the values just specified.
-const double Refraction::TRANSITION_WIDTH_DEG=2;
+const double Refraction::TRANSITION_WIDTH_GEO_DEG=1.46;
+const double Refraction::TRANSITION_WIDTH_APP_DEG=1.78217;
 const double Refraction::MIN_GEO_ALTITUDE_RAD=Refraction::MIN_GEO_ALTITUDE_DEG*M_PI/180.0;
 const double Refraction::MIN_GEO_ALTITUDE_SIN=std::sin(Refraction::MIN_GEO_ALTITUDE_RAD);
 const double Refraction::MIN_APP_ALTITUDE_RAD=Refraction::MIN_APP_ALTITUDE_DEG*M_PI/180.0;
@@ -111,7 +113,8 @@ const float Refraction::MIN_GEO_ALTITUDE_SIN_F=(float)Refraction::MIN_GEO_ALTITU
 const float Refraction::MIN_APP_ALTITUDE_DEG_F=(float)Refraction::MIN_APP_ALTITUDE_DEG;
 const float Refraction::MIN_APP_ALTITUDE_RAD_F=(float)Refraction::MIN_APP_ALTITUDE_RAD;
 const float Refraction::MIN_APP_ALTITUDE_SIN_F=(float)Refraction::MIN_APP_ALTITUDE_SIN;
-const double Refraction::TRANSITION_WIDTH_DEG_F=(float)Refraction::TRANSITION_WIDTH_DEG;
+const double Refraction::TRANSITION_WIDTH_GEO_DEG_F=(float)Refraction::TRANSITION_WIDTH_GEO_DEG;
+const double Refraction::TRANSITION_WIDTH_APP_DEG_F=(float)Refraction::TRANSITION_WIDTH_APP_DEG;
 
 Refraction::Refraction() : pressure(1013.f), temperature(10.f),
 	preTransfoMat(Mat4d::identity()), invertPreTransfoMat(Mat4d::identity()), preTransfoMatf(Mat4f::identity()), invertPreTransfoMatf(Mat4f::identity()),
@@ -159,40 +162,50 @@ void Refraction::forward(Vec3d& altAzPos) const
 		// refraction from Saemundsson, S&T1986 p70 / in Meeus, Astr.Alg.
 		float r=press_temp_corr_Saemundson / std::tan((geom_alt_deg+10.3f/(geom_alt_deg+5.11f))*M_PI/180.f) + 0.0019279f;
 		geom_alt_deg += r;
-		if (geom_alt_deg > 90.)
-			geom_alt_deg=90.; // SAFETY, SHOULD NOT BE NECESSARY
+		if (geom_alt_deg > 90.) geom_alt_deg=90.; // SAFETY
 		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.)*length;
 	}
-	else if(geom_alt_deg>Refraction::MIN_GEO_ALTITUDE_DEG-Refraction::TRANSITION_WIDTH_DEG)
+	else if(geom_alt_deg>Refraction::MIN_GEO_ALTITUDE_DEG-Refraction::TRANSITION_WIDTH_GEO_DEG)
 	{
 		// Avoids the jump near -5 by interpolating linearly between MIN_GEO_ALTITUDE_DEG and bottom of transition zone
 		float r_min=press_temp_corr_Saemundson / std::tan((Refraction::MIN_GEO_ALTITUDE_DEG+10.3f/(Refraction::MIN_GEO_ALTITUDE_DEG+5.11f))*M_PI/180.f) + 0.0019279f;
-		geom_alt_deg += r_min*(geom_alt_deg-(Refraction::MIN_GEO_ALTITUDE_DEG-Refraction::TRANSITION_WIDTH_DEG))/Refraction::TRANSITION_WIDTH_DEG;
+		geom_alt_deg += r_min*(geom_alt_deg-(Refraction::MIN_GEO_ALTITUDE_DEG-Refraction::TRANSITION_WIDTH_GEO_DEG))/Refraction::TRANSITION_WIDTH_GEO_DEG;
 		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.)*length;
 	}
 	altAzPos.transfo4d(postTransfoMat);
 }
 
+//Bennett's formula is not a strict inverse of Saemundsson's. There is a notable discrepancy (alt!=backward(forward(alt))) for
+// geometric altitudes <-.3deg.  This is not a problem in real life, but if a user switches off landscape, click-identify may pose a problem.
+// Below this altitude, we therefore use a polynomial fit that should represent a close inverse of Saemundsson.
 void Refraction::backward(Vec3d& altAzPos) const
 {
 	altAzPos.transfo4d(invertPostTransfoMat);
 	// going from apparent (observed) position to geometrical position.
 	const double length = altAzPos.length();
 	double obs_alt_deg=180./M_PI*std::asin(altAzPos[2]/length);
-	if (obs_alt_deg > Refraction::MIN_APP_ALTITUDE_DEG)
+	if (obs_alt_deg > 0.22879)
 	{
-		// refraction from Bennett, in Meeus, Astr.Alg.
+		// refraction directly from Bennett, in Meeus, Astr.Alg.
 		float r=press_temp_corr_Bennett / std::tan((obs_alt_deg+7.31/(obs_alt_deg+4.4f))*M_PI/180.f) + 0.0013515f;
-		if (r>0.5) r=0.5*(r-0.5)+0.5; // reduce silly lobe.
 		obs_alt_deg -= r;
 		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.)*length;
 	}
-	else if (obs_alt_deg > Refraction::MIN_APP_ALTITUDE_DEG-Refraction::TRANSITION_WIDTH_DEG)
+	else if (obs_alt_deg > Refraction::MIN_APP_ALTITUDE_DEG)
 	{
-		// refraction from Bennett, in Meeus, Astr.Alg.
-		float r_min=press_temp_corr_Bennett / std::tan((Refraction::MIN_APP_ALTITUDE_DEG+7.31/(Refraction::MIN_APP_ALTITUDE_DEG+4.4f))*M_PI/180.f) + 0.0013515f;
-		if (r_min>0.5) r_min=0.5*(r_min-0.5)+0.5; // reduce silly lobe.
-		obs_alt_deg -= r_min*(obs_alt_deg-(Refraction::MIN_APP_ALTITUDE_DEG-Refraction::TRANSITION_WIDTH_DEG))/Refraction::TRANSITION_WIDTH_DEG;
+		// backward refraction from polynomial fit against Saemundson[-5...-0.3]
+		float r=(((((0.0444*obs_alt_deg+.7662)*obs_alt_deg+4.9746)*obs_alt_deg+13.599)*obs_alt_deg+8.052)*obs_alt_deg-11.308)*obs_alt_deg+34.341;
+		obs_alt_deg -= press_temp_corr_Bennett*r;
+		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.)*length;
+	}
+	else if (obs_alt_deg > Refraction::MIN_APP_ALTITUDE_DEG-Refraction::TRANSITION_WIDTH_APP_DEG)
+	{
+		// use polynomial fit for topmost value, linear interpolation inside transition zone
+		float r_min=(((((0.0444*Refraction::MIN_APP_ALTITUDE_DEG+.7662)*Refraction::MIN_APP_ALTITUDE_DEG
+				+4.9746)*Refraction::MIN_APP_ALTITUDE_DEG+13.599)*Refraction::MIN_APP_ALTITUDE_DEG
+			      +8.052)*Refraction::MIN_APP_ALTITUDE_DEG-11.308)*Refraction::MIN_APP_ALTITUDE_DEG+34.341;
+		r_min*=press_temp_corr_Bennett;
+		obs_alt_deg -= r_min*(obs_alt_deg-(Refraction::MIN_APP_ALTITUDE_DEG-Refraction::TRANSITION_WIDTH_APP_DEG))/Refraction::TRANSITION_WIDTH_APP_DEG;
 		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.)*length;
 	}
 	altAzPos.transfo4d(invertPreTransfoMat);
@@ -208,15 +221,14 @@ void Refraction::forward(Vec3f& altAzPos) const
 		// refraction from Saemundsson, S&T1986 p70 / in Meeus, Astr.Alg.
 		float r=press_temp_corr_Saemundson / std::tan((geom_alt_deg+10.3f/(geom_alt_deg+5.11f))*M_PI/180.f) + 0.0019279f;
 		geom_alt_deg += r;
-		if (geom_alt_deg > 90.f)
-			geom_alt_deg=90.f; // SAFETY, SHOULD NOT BE NECESSARY
+		if (geom_alt_deg > 90.f) geom_alt_deg=90.f; // SAFETY
 		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.f)*length;
 	}
-	else if(geom_alt_deg>Refraction::MIN_GEO_ALTITUDE_DEG_F-Refraction::TRANSITION_WIDTH_DEG_F)
+	else if(geom_alt_deg>Refraction::MIN_GEO_ALTITUDE_DEG_F-Refraction::TRANSITION_WIDTH_GEO_DEG_F)
 	{
 		// Avoids the jump below -5 by interpolating linearly between MIN_GEO_ALTITUDE_DEG_F and bottom of transition zone
 		float r_m5=press_temp_corr_Saemundson / std::tan((Refraction::MIN_GEO_ALTITUDE_DEG_F+10.3f/(Refraction::MIN_GEO_ALTITUDE_DEG_F+5.11f))*M_PI/180.f) + 0.0019279f;
-		geom_alt_deg += r_m5*(geom_alt_deg-(Refraction::MIN_GEO_ALTITUDE_DEG_F-Refraction::TRANSITION_WIDTH_DEG_F))/Refraction::TRANSITION_WIDTH_DEG_F;
+		geom_alt_deg += r_m5*(geom_alt_deg-(Refraction::MIN_GEO_ALTITUDE_DEG_F-Refraction::TRANSITION_WIDTH_GEO_DEG_F))/Refraction::TRANSITION_WIDTH_GEO_DEG_F;
 		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.)*length;
 	}
 	altAzPos.transfo4d(postTransfoMatf);
@@ -228,20 +240,29 @@ void Refraction::backward(Vec3f& altAzPos) const
 	// going from observed position/magnitude to geometrical position and atmosphere-free mag.
 	const float length = altAzPos.length();
 	float obs_alt_deg=180.f/M_PI*std::asin(altAzPos[2]/length);
-	if (obs_alt_deg > Refraction::MIN_APP_ALTITUDE_DEG_F)
+	if (obs_alt_deg > 0.22879f)
 	{
 		// refraction from Bennett, in Meeus, Astr.Alg.
 		float r=press_temp_corr_Bennett / std::tan((obs_alt_deg+7.31f/(obs_alt_deg+4.4f))*M_PI/180.f) + 0.0013515f;
-		if (r>0.5f) r=0.5f*(r-0.5f)+0.5f; // reduce silly lobe.
 		obs_alt_deg -= r;
 		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.f)*length;
 	}
-	else if (obs_alt_deg > Refraction::MIN_APP_ALTITUDE_DEG_F-Refraction::TRANSITION_WIDTH_DEG_F)
+	else if (obs_alt_deg > Refraction::MIN_APP_ALTITUDE_DEG_F)
 	{
-		// refraction from Bennett, in Meeus, Astr.Alg.
-		float r_min=press_temp_corr_Bennett / std::tan((Refraction::MIN_APP_ALTITUDE_DEG_F+7.31f/(Refraction::MIN_APP_ALTITUDE_DEG_F+4.4f))*M_PI/180.f) + 0.0013515f;
-		if (r_min>0.5f) r_min=0.5f*(r_min-0.5f)+0.5f; // reduce silly lobe.
-		obs_alt_deg -= r_min*(obs_alt_deg-(Refraction::MIN_APP_ALTITUDE_DEG_F-Refraction::TRANSITION_WIDTH_DEG_F))/Refraction::TRANSITION_WIDTH_DEG_F;
+		// backward refraction from polynomial fit against Saemundson[-5...-0.3]
+		float r=(((((0.0444f*obs_alt_deg+.7662f)*obs_alt_deg+4.9746f)*obs_alt_deg+13.599f)*obs_alt_deg+8.052f)*obs_alt_deg-11.308f)*obs_alt_deg+34.341f;
+		obs_alt_deg -= press_temp_corr_Bennett*r;
+		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.f)*length;
+	}
+	else if (obs_alt_deg > Refraction::MIN_APP_ALTITUDE_DEG_F-Refraction::TRANSITION_WIDTH_APP_DEG_F)
+	{
+		// Compute top value from polynome, apply linear interpolation
+		float r_min=(((((0.0444f*Refraction::MIN_APP_ALTITUDE_DEG_F+.7662f)*Refraction::MIN_APP_ALTITUDE_DEG_F
+				+4.9746f)*Refraction::MIN_APP_ALTITUDE_DEG_F+13.599f)*Refraction::MIN_APP_ALTITUDE_DEG_F
+			      +8.052f)*Refraction::MIN_APP_ALTITUDE_DEG_F-11.308f)*Refraction::MIN_APP_ALTITUDE_DEG_F+34.341f;
+
+		r_min*=press_temp_corr_Bennett;
+		obs_alt_deg -= r_min*(obs_alt_deg-(Refraction::MIN_APP_ALTITUDE_DEG_F-Refraction::TRANSITION_WIDTH_APP_DEG_F))/Refraction::TRANSITION_WIDTH_APP_DEG_F;
 		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.f)*length;
 	}
 	altAzPos.transfo4d(invertPreTransfoMatf);
