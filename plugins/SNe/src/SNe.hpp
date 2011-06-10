@@ -19,11 +19,17 @@
 #ifndef SNE_HPP_
 #define SNE_HPP_
 
-#include "StelModule.hpp"
+#include "StelObjectModule.hpp"
+#include "StelObject.hpp"
+#include "StelTextureTypes.hpp"
+#include "StelPainter.hpp"
 #include <QFont>
 #include <QVariantMap>
 #include <QDateTime>
 #include <QList>
+#include <QSharedPointer>
+
+class StelPainter;
 
 typedef struct
 {
@@ -36,7 +42,7 @@ typedef struct
 } supernova;
 
 //! This is an example of a plug-in which can be dynamically loaded into stellarium
-class SNe : public StelModule
+class SNe : public StelObjectModule
 {
 public:	
 	SNe();
@@ -45,9 +51,35 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init();
+	virtual void deinit();
 	virtual void update(double) {;}
 	virtual void draw(StelCore* core);
+	virtual void drawPointer(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
+
+	///////////////////////////////////////////////////////////////////////////
+	// Methods defined in StelObjectManager class
+	//! Used to get a list of objects which are near to some position.
+	//! @param v a vector representing the position in th sky around which to search for nebulae.
+	//! @param limitFov the field of view around the position v in which to search for satellites.
+	//! @param core the StelCore to use for computations.
+	//! @return an list containing the satellites located inside the limitFov circle around position v.
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
+
+	//! Return the matching satellite object's pointer if exists or NULL.
+	//! @param nameI18n The case in-sensistive satellite name
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
+
+	//! Return the matching satellite if exists or NULL.
+	//! @param name The case in-sensistive standard program name
+	virtual StelObjectP searchByName(const QString& name) const;
+
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
+	//! @param objPrefix the case insensitive first letters of the searched object
+	//! @param maxNbItem the maximum number of returned object names
+	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+
 private:
 	// Font used for displaying our text
 	QFont font;
@@ -80,6 +112,7 @@ private:
 	QString sneJsonPath;
 
 	QList<supernova> snstar;
+	StelTextureSP texPointer;
 
 };
 
