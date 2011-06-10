@@ -85,6 +85,7 @@ private:
 	//! k, magnitudes/airmass, in [0.00, ... 1.00], (default 0.20).
 	float ext_coeff;
 	//! should be either 0.0 (stars visible in full brightness below horizon) or 40.0 (practically invisible)
+	//! Maybe make this a user-configurable option?
 	static const float SUBHORIZONTAL_AIRMASS;
 };
 
@@ -162,8 +163,10 @@ private:
 	static const float MIN_APP_ALTITUDE_DEG_F;
 	static const float MIN_APP_ALTITUDE_RAD_F;
 	static const float MIN_APP_ALTITUDE_SIN_F;
-	static const double TRANSITION_WIDTH_DEG;
-	static const double TRANSITION_WIDTH_DEG_F;
+	static const double TRANSITION_WIDTH_GEO_DEG;
+	static const double TRANSITION_WIDTH_GEO_DEG_F;
+	static const double TRANSITION_WIDTH_APP_DEG;
+	static const double TRANSITION_WIDTH_APP_DEG_F;
 
 	//! Used to pretransform coordinates into AltAz frame.
 	Mat4d preTransfoMat;
