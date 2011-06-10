@@ -1,12 +1,28 @@
 {
-	"version": "0.1.0",
+	"version": "0.2",
 	"shortName": "Historical supernovaes data with brightness over 10 magnitude",
 	"supernova":
 	{
+		"185A":
+		{
+			"type": "Ia",
+			"maxMagnitude": -6,
+			"peakJD": 1788969,
+			"alpha": "14h45m02.30s",
+			"delta": "-62d20m32.00s"
+		},
+		"386A":
+		{
+			"type": "II",
+			"maxMagnitude": 1.5,
+			"peakJD": 1862158,
+			"alpha": "18h11m30.4s",
+			"delta": "-19d25m24s"
+		},
 		"1006A":
 		{
 			"type": "I",
-			"maxMagnitude": -9,
+			"maxMagnitude": -7.5,
 			"peakJD": 2088618,
 			"alpha": "15h02m48.00s",
 			"delta": "-41d57m00.0s"
@@ -17,7 +33,15 @@
 			"maxMagnitude": -6,
 			"peakJD": 2106215,
 			"alpha": "05h34m30.00s",
-			"delta": "+22d01m00.0s"
+			"delta": "22d01m00.0s"
+		},
+		"1181A":
+		{
+			"type": "II",
+			"maxMagnitude": -2,
+			"peakJD": 2152634,
+			"alpha": "02h05m37s",
+			"delta": "64d49m48s"
 		},
 		"1572A":
 		{
@@ -30,10 +54,18 @@
 		"1604A":
 		{
 			"type": "I",
-			"maxMagnitude": -3,
+			"maxMagnitude": -2,
 			"peakJD": 2307190,
 			"alpha": "17h30m36.00s",
 			"delta": "-21d29m00.0s"
+		},
+		"1680A":
+		{
+			"type": "IIb",
+			"maxMagnitude": 6,
+			"peakJD": 2334895,
+			"alpha": "23h23m24.00s",
+			"delta": "58d48m54s"
 		},
 		"1885A":
 		{
