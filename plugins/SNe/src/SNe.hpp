@@ -66,7 +66,7 @@ private:
 	//! parse JSON file and load supernovaes to map
 	QVariantMap loadSNeMap(QString path=QString());
 
-	//! set items for array of struct from data map
+	//! set items for list of struct from data map
 	void setSNeMap(const QVariantMap& map);
 
 	//! compute visible magnitude for supernova
