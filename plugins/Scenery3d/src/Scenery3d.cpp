@@ -63,6 +63,7 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
     groundModel = new OBJ();
     zRotateMatrix = Mat4d::identity();
     shadowMapTexture = 0;
+    lookAt_fov=Vec3f(0.f, 0.f, -1000.f);
     for (int i=0; i<6; i++) {
         cubeMap[i] = NULL;
     }
@@ -243,7 +244,21 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
     if (worldPosition[2]==MEANINGLESS) absolutePosition[2]=MEANINGLESS;
 
     groundNullHeight=scenery3dIni.value("coord/zero_ground_height", MEANINGLESS).toDouble();
+
+    if (scenery3dIni.contains("coord/start_az_alt_fov"))
+    {
+	qDebug() << "scenery3d.ini: setting initial dir/fov.";
+	//QStringList list=QString(scenery3dIni.value("coord/start_az_alt_fov")).split(",");
+	//lookAt=new Vec3f(list.at(0).toFloat(), list.at(1).toFloat(), list.at(2).toFloat());
+	lookAt_fov=StelUtils::strToVec3f(scenery3dIni.value("coord/start_az_alt_fov").toString());
+	lookAt_fov[0]=180.0f-lookAt_fov[0];
+    }
+    else qDebug() << "scenery3d.ini: No initial dir/fov given.";
+
+
 }
+
+
 
 void Scenery3d::loadModel()
 {
