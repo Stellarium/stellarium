@@ -69,6 +69,7 @@ private slots:
 
 	//Online search
 	void sendQuery();
+	void sendQueryToUrl(QUrl url);
 	void abortQuery();
 	void updateCountdown();
 	void resetNotFound();
@@ -77,7 +78,8 @@ private slots:
 	void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 	void updateQueryProgress(qint64 bytesReceived, qint64 bytesTotal);
 	void downloadComplete(QNetworkReply * reply);
-	void queryComplete(QNetworkReply * reply);
+	void receiveQueryReply(QNetworkReply * reply);
+	void readQueryReply(QNetworkReply * reply);
 
 	//! Marks (checks) all items in the results lists
 	void markAll();
@@ -124,6 +126,7 @@ private:
 	void saveBookmarksGroup(Bookmarks & bookmarkGroup, QVariantMap & output);
 
 	//Online search
+	QString query;
 	int countdown;
 	QTimer * countdownTimer;
 	void startCountdown();
