@@ -28,6 +28,7 @@
 #include "StelJsonParser.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelTranslator.hpp"
 #include "Supernovas.hpp"
 #include "Supernova.hpp"
 
@@ -83,7 +84,7 @@ Supernovas::~Supernovas()
 
 void Supernovas::deinit()
 {
-	//
+	texPointer.clear();
 }
 
 /*
@@ -92,7 +93,7 @@ void Supernovas::deinit()
 double Supernovas::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("NebulaMgr")->getCallOrder(actionName)+10.;
+		return StelApp::getInstance().getModuleMgr().getModule("ConstellationMgr")->getCallOrder(actionName)+10.;
 	return 0;
 }
 
@@ -107,6 +108,8 @@ void Supernovas::init()
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Supernovas");
 
 		sneJsonPath = StelFileMgr::findFile("modules/Supernovas", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/supernovas.json";
+
+		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
 	}
 	catch (std::runtime_error &e)
 	{
@@ -132,6 +135,7 @@ void Supernovas::init()
 
 	readJsonFile();
 
+	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
 
 /*
@@ -162,26 +166,19 @@ void Supernovas::drawPointer(StelCore* core, StelPainter& painter)
 	{
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
+
 		Vec3d screenpos;
-
 		// Compute 2D pos and return if outside screen
-		if (!prj->project(pos, screenpos))
+		if (!painter.getProjector()->project(pos, screenpos))
 			return;
-		glColor3f(0.4f,0.5f,0.8f);
-		texPointer->bind();
 
-		glEnable(GL_TEXTURE_2D);
+		const Vec3f& c(obj->getInfoColor());
+		painter.setColor(c[0],c[1],c[2]);
+		texPointer->bind();
+		painter.enableTexture2d(true);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-
-		// Size on screen
-		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
-		size += 12.f + 3.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
-		// size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
-		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 20, 90);
-		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 20, 0);
-		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 20, -90);
-		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 20, -180);
+		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
 

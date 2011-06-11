@@ -58,13 +58,13 @@ public:
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
-	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const
 	{
 		return XYZ;
 	}
-	virtual float getVMagnitude(const StelCore* core);
+	virtual float getVMagnitude(const StelCore* core) const;
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual QString getNameI18n(void) const
 	{
@@ -85,14 +85,6 @@ private:
 	static StelTextureSP hintTexture;
 
 	void draw(StelCore* core, StelPainter& painter);
-	//! compute visible magnitude for supernova
-	//! @param peakJD is date of maximum of brightness of supernova on Julian Day
-	//! @param maxMag is maximum magnitude for supernova
-	//! @param sntype is type of supernova
-	//! @param currentJD is current Julian Day
-	//! @return current magnitude
-	double computeSNeMag(double peakJD, float maxMag, QString sntype, double currentJD);
-
 
 	QFont     font;
 
