@@ -23,6 +23,8 @@
 #include "StelCore.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
+#include "StelTranslator.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
 
 #include <QTextStream>
@@ -72,18 +74,22 @@ QVariantMap Supernova::getMap(void)
 
 float Supernova::getSelectPriority(const StelCore*) const
 {
-	return -10.;
+	return -10.f;
 }
 
-QString Supernova::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
+QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str;
 	QTextStream oss(&str);
+	double mag = getVMagnitude(core);
 
 	if (flags&Name)
 	{
 		oss << "<h2>" << designation << "</h2>";
 	}
+
+	if (flags&Magnitude && mag <= core->getSkyDrawer()->getLimitMagnitude())
+		oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
 
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
@@ -97,9 +103,31 @@ Vec3f Supernova::getInfoColor(void) const
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
 }
 
-float Supernova::getVMagnitude(const StelCore* core)
+float Supernova::getVMagnitude(const StelCore* core) const
 {
-	return computeSNeMag(peakJD, maxMagnitude, sntype, core->getJDay());
+	double vmag = 20;
+	double currentJD = core->getJDay();
+
+	if (peakJD<=currentJD)
+	{
+		if (peakJD==std::floor(currentJD))
+			vmag = maxMagnitude;
+
+		else
+			vmag = maxMagnitude - 2.5 * (-3) * std::log10(currentJD-peakJD);
+	}
+	else
+	{
+		if (std::abs(peakJD-currentJD)<=5)
+			vmag = maxMagnitude - 2.5 * (-1.75) * std::log10(std::abs(peakJD-currentJD));
+
+		if (vmag<maxMagnitude)
+			vmag = maxMagnitude;
+	}
+
+	return vmag;
+
+	//return computeSNeMag(peakJD, maxMagnitude, sntype, core->getJDay());
 }
 
 double Supernova::getAngularSize(const StelCore*) const
@@ -117,7 +145,7 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 	StelSkyDrawer* sd = core->getSkyDrawer();
 
 	Vec3f color = Vec3f(1.f,1.f,1.f);
-	float rcMag[2];
+	float rcMag[2], size, shift;
 	double mag;
 
 	StelUtils::spheToRect(snra, snde, XYZ);
@@ -128,32 +156,8 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 		sd->computeRCMag(mag, rcMag);
 		sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, color, false);
 		painter.setColor(color[0], color[1], color[2], 1);
-		painter.drawText(XYZ, designation, 0, 10, 10, false);
+		size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
+		shift = 6.f + size/1.8f;
+		painter.drawText(XYZ, designation, 0, shift, shift, false);
 	}
 }
-
-/*
-  Computation of visual magnitude as function from supernova type and time
-*/
-double Supernova::computeSNeMag(double peakJD, float maxMag, QString sntype, double currentJD)
-{
-	double vmag = 30;
-	if (peakJD<=currentJD)
-	{
-	    if (peakJD==std::floor(currentJD))
-		vmag = maxMag;
-
-	    else
-		vmag = maxMag - 2.5 * (-3) * std::log10(currentJD-peakJD);
-	}
-	else
-	{
-	    if (std::abs(peakJD-currentJD)<=5)
-		vmag = maxMag - 2.5 * (-1.75) * std::log10(std::abs(peakJD-currentJD));
-		if (vmag<maxMag)
-		    vmag = maxMag;
-	}
-
-	return vmag;
-}
-
