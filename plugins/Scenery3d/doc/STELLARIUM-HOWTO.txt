@@ -198,8 +198,10 @@ start_E=<double> /* Coordinates to be set after loading the scenery.  */
 start_N=<double> /* default->center of boundingbox. */
 start_H=<double> /* only meaningful if ground==NULL, else H is derived from ground */
 start_Eye=<double> /* default: 1.65m */
+start_az_alt_fov=<az_deg>,<alt_deg>,<fov_deg> /* initial view direction and field of view.*/
 
-; It is advisable to use the grid coordinates of the location of the panoramic photo ("landscape") as start_.. coordinates.
+; It is advisable to use the grid coordinates of the location of the panoramic photo ("landscape") as start_.. coordinates, 
+and some carefully selected start_az_alt_fov in case of certain view corriors (temple axes, ...).
 
 ;TODO: IMPLEMENT ALTERNATIVE TO ORIG_..: Regardless of what model coordinates say, 
 ;                                        specify minimal coordinates grid coordinates, 

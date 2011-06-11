@@ -80,6 +80,13 @@ public:
     //! @return Location data. These are valid only if written in the @file scenery3d.ini, section location.
     //! Else, returns NULL. You can also check with .hasLocation() before calling.
     const StelLocation& getLocation() const {return *location; }
+    //! @return Flag, whether scenery provides default/startup looking direction.
+    bool hasLookat() const { return (lookAt_fov[2]!=-1000.0f); }
+    //! @return default looking direction and field-of-view (altazimuthal, 0=North).
+    //! Valid only if written in the @file scenery3d.ini, value: coord/start_az_alt_fov.
+    //! Else, returns NULL. You can also check with .hasLookup() before calling.
+    const Vec3f& getLookat() const {return lookAt_fov; }
+
 
     enum shadowCaster { None, Sun, Moon };
 
@@ -134,6 +141,7 @@ private:
     QString modelSceneryFile;
     QString modelGroundFile;
     StelLocation* location;
+    Vec3f lookAt_fov; // (az_deg, alt_deg, fov_deg)
 
     Vec3d modelWorldOffset; // required for coordinate display
     QString gridName;
