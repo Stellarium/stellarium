@@ -16,13 +16,14 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef SNE_HPP_
-#define SNE_HPP_
+#ifndef _SUPERNOVAS_HPP_
+#define _SUPERNOVAS_HPP_
 
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelPainter.hpp"
+#include "Supernova.hpp"
 #include <QFont>
 #include <QVariantMap>
 #include <QDateTime>
@@ -31,22 +32,14 @@
 
 class StelPainter;
 
-typedef struct
-{
-	QString name;
-	QString type;
-	float maxMagnitude;
-	double peakJD;
-	double ra;
-	double de;
-} supernova;
+typedef QSharedPointer<Supernova> SupernovaP;
 
 //! This is an example of a plug-in which can be dynamically loaded into stellarium
-class SNe : public StelObjectModule
+class Supernovas : public StelObjectModule
 {
 public:	
-	SNe();
-	virtual ~SNe();
+	Supernovas();
+	virtual ~Supernovas();
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -80,6 +73,9 @@ public:
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
 
+	//! get a supernova object by identifier
+	SupernovaP getByID(const QString& id);
+
 private:
 	// Font used for displaying our text
 	QFont font;
@@ -95,24 +91,20 @@ private:
 	//! @return true on OK, false on failure
 	bool backupJsonFile(bool deleteOriginal=false);
 
+	//! Get the version from the "version" value in the supernovas.json file
+	//! @return version string, e.g. "0.2"
+	const QString getJsonFileVersion(void);
+
 	//! parse JSON file and load supernovaes to map
 	QVariantMap loadSNeMap(QString path=QString());
 
 	//! set items for list of struct from data map
 	void setSNeMap(const QVariantMap& map);
 
-	//! compute visible magnitude for supernova
-	//! @param peakJD is date of maximum of brightness of supernova on Julian Day
-	//! @param maxMag is maximum magnitude for supernova
-	//! @param sntype is type of supernova
-	//! @param currentJD is current Julian Day
-	//! @return current magnitude
-	double computeSNeMag(double peakJD, float maxMag, QString sntype, double currentJD);
-
 	QString sneJsonPath;
 
-	QList<supernova> snstar;
 	StelTextureSP texPointer;
+	QList<SupernovaP> snstar;
 
 };
 
@@ -122,7 +114,7 @@ private:
 #include "StelPluginInterface.hpp"
 
 //! This class is used by Qt to manage a plug-in interface
-class SNeStelPluginInterface : public QObject, public StelPluginInterface
+class SupernovasStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
 	Q_INTERFACES(StelPluginInterface)
@@ -131,4 +123,4 @@ public:
 	virtual StelPluginInfo getPluginInfo() const;
 };
 
-#endif /*SNE_HPP_*/
+#endif /*_SUPERNOVAS_HPP_*/

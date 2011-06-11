@@ -28,9 +28,8 @@
 #include "StelJsonParser.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
-#include "StelSkyDrawer.hpp"
-#include "LabelMgr.hpp"
-#include "SNe.hpp"
+#include "Supernovas.hpp"
+#include "Supernova.hpp"
 
 #include <QDebug>
 #include <QFileInfo>
@@ -45,17 +44,17 @@
  This method is the one called automatically by the StelModuleMgr just 
  after loading the dynamic library
 */
-StelModule* SNeStelPluginInterface::getStelModule() const
+StelModule* SupernovasStelPluginInterface::getStelModule() const
 {
-	return new SNe();
+	return new Supernovas();
 }
 
-StelPluginInfo SNeStelPluginInterface::getPluginInfo() const
+StelPluginInfo SupernovasStelPluginInterface::getPluginInfo() const
 {
-	Q_INIT_RESOURCE(SNe);
+	Q_INIT_RESOURCE(Supernovas);
 
 	StelPluginInfo info;
-	info.id = "SNe";
+	info.id = "Supernovas";
 	info.displayedName = q_("Historical supernova");
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
@@ -63,26 +62,26 @@ StelPluginInfo SNeStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(SNe, SNeStelPluginInterface)
+Q_EXPORT_PLUGIN2(Supernovas, SupernovasStelPluginInterface)
 
 
 /*
  Constructor
 */
-SNe::SNe()
+Supernovas::Supernovas()
 {
-	setObjectName("SNe");	
+	setObjectName("Supernovas");
 }
 
 /*
  Destructor
 */
-SNe::~SNe()
+Supernovas::~Supernovas()
 {
 	//
 }
 
-void SNe::deinit()
+void Supernovas::deinit()
 {
 	//
 }
@@ -90,7 +89,7 @@ void SNe::deinit()
 /*
  Reimplementation of the getCallOrder method
 */
-double SNe::getCallOrder(StelModuleActionName actionName) const
+double Supernovas::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
 		return StelApp::getInstance().getModuleMgr().getModule("NebulaMgr")->getCallOrder(actionName)+10.;
@@ -101,28 +100,35 @@ double SNe::getCallOrder(StelModuleActionName actionName) const
 /*
  Init our module
 */
-void SNe::init()
+void Supernovas::init()
 {
 	try
 	{
-		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/SNe");
+		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Supernovas");
 
-		sneJsonPath = StelFileMgr::findFile("modules/SNe", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/sne.json";
+		sneJsonPath = StelFileMgr::findFile("modules/Supernovas", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/supernovas.json";
 	}
 	catch (std::runtime_error &e)
 	{
-		qWarning() << "SNe::init error: " << e.what();
+		qWarning() << "Supernovas::init error: " << e.what();
 		return;
 	}
 
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(!QFileInfo(sneJsonPath).exists())
 	{
-		qDebug() << "SNe::init sne.json does not exist - copying default file to " << sneJsonPath;
+		if (getJsonFileVersion() != "0.2")
+		{
+			restoreDefaultJsonFile();
+		}
+	}
+	else
+	{
+		qDebug() << "Supernovas::init supernovas.json does not exist - copying default file to " << sneJsonPath;
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "SNe::init using sne.json file: " << sneJsonPath;
+	qDebug() << "Supernovas::init using supernovas.json file: " << sneJsonPath;
 
 	readJsonFile();
 
@@ -131,37 +137,23 @@ void SNe::init()
 /*
  Draw our module. This should print name of first SNe in the main window
 */
-void SNe::draw(StelCore* core)
+void Supernovas::draw(StelCore* core)
 {
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelSkyDrawer* sd = core->getSkyDrawer();
 	StelPainter painter(prj);
 
-	Vec3f color = Vec3f(1.f,1.f,1.f);
-	float rcMag[2];
-	Vec3f v;
-	double cJD = core->getJDay();
-	double mag;
-	foreach(const supernova &sn, snstar)
+	foreach (const SupernovaP& sn, snstar)
 	{
-		StelUtils::spheToRect(sn.ra, sn.de, v);
-
-		mag = computeSNeMag(sn.peakJD,sn.maxMagnitude,sn.type,cJD);
-
-		if (mag <= sd->getLimitMagnitude())
-		{
-			sd->computeRCMag(mag, rcMag);
-			sd->drawPointSource(&painter, v, rcMag, color, false);
-			painter.setColor(color[0], color[1], color[2], 1);
-			painter.drawText(Vec3d(v[0], v[1], v[2]), QString("SN %1").arg(sn.name), 0, 10, 10, false);
-		}
+		if (sn && sn->initialized)
+			sn->draw(core, painter);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
+
 }
 
-void SNe::drawPointer(StelCore* core, StelPainter& painter)
+void Supernovas::drawPointer(StelCore* core, StelPainter& painter)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
@@ -193,61 +185,58 @@ void SNe::drawPointer(StelCore* core, StelPainter& painter)
 	}
 }
 
-QList<StelObjectP> SNe::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
+QList<StelObjectP> Supernovas::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
 {
 	QList<StelObjectP> result;
 
-	/*
-	foreach(const supernova &sn, snstar)
+	foreach(const SupernovaP& sn, snstar)
 	{
 		result.append(qSharedPointerCast<StelObject>(sn));
 	}
-	*/
+
 	return result;
 }
 
-StelObjectP SNe::searchByName(const QString& englishName) const
+StelObjectP Supernovas::searchByName(const QString& englishName) const
 {
-	/*
 	QString objw = englishName.toUpper();
-	foreach(const supernova &sn, snstar)
+	foreach(const SupernovaP& sn, snstar)
 	{
 		if (sn->getEnglishName().toUpper() == englishName)
 			return qSharedPointerCast<StelObject>(sn);
 	}
-	*/
+
 	return NULL;
 }
 
-StelObjectP SNe::searchByNameI18n(const QString& nameI18n) const
+StelObjectP Supernovas::searchByNameI18n(const QString& nameI18n) const
 {
-	/*
 	QString objw = nameI18n.toUpper();
 
-	foreach(const supernova &sn, snstar)
+	foreach(const SupernovaP& sn, snstar)
 	{
 		if (sn->getNameI18n().toUpper() == nameI18n)
 			return qSharedPointerCast<StelObject>(sn);
 	}
-	*/
+
 	return NULL;
 }
 
-QStringList SNe::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+QStringList Supernovas::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
 	if (maxNbItem==0) return result;
 
 	QString objw = objPrefix.toUpper();
-	/*
-	foreach(const supernova &sn, snstar)
+
+	foreach(const SupernovaP& sn, snstar)
 	{
 		if (sn->getNameI18n().toUpper().left(objw.length()) == objw)
 		{
 				result << sn->getNameI18n().toUpper();
 		}
 	}
-	*/
+
 	result.sort();
 	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
 
@@ -257,19 +246,19 @@ QStringList SNe::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem
 /*
   Replace the JSON file with the default from the compiled-in resource
 */
-void SNe::restoreDefaultJsonFile(void)
+void Supernovas::restoreDefaultJsonFile(void)
 {
 	if (QFileInfo(sneJsonPath).exists())
 		backupJsonFile(true);
 
-	QFile src(":/SNe/sne.json");
+	QFile src(":/Supernovas/supernovas.json");
 	if (!src.copy(sneJsonPath))
 	{
-		qWarning() << "SNe::restoreDefaultJsonFile cannot copy json resource to " + sneJsonPath;
+		qWarning() << "Supernovas::restoreDefaultJsonFile cannot copy json resource to " + sneJsonPath;
 	}
 	else
 	{
-		qDebug() << "SNe::init copied default sne.json to " << sneJsonPath;
+		qDebug() << "Supernovas::init copied default supernovas.json to " << sneJsonPath;
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(sneJsonPath);
@@ -280,12 +269,12 @@ void SNe::restoreDefaultJsonFile(void)
 /*
   Creates a backup of the sne.json file called sne.json.old
 */
-bool SNe::backupJsonFile(bool deleteOriginal)
+bool Supernovas::backupJsonFile(bool deleteOriginal)
 {
 	QFile old(sneJsonPath);
 	if (!old.exists())
 	{
-		qWarning() << "SNe::backupJsonFile no file to backup";
+		qWarning() << "Supernovas::backupJsonFile no file to backup";
 		return false;
 	}
 
@@ -299,14 +288,14 @@ bool SNe::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "SNe::backupJsonFile WARNING - could not remove old sne.json file";
+				qWarning() << "Supernovas::backupJsonFile WARNING - could not remove old supernovas.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "SNe::backupJsonFile WARNING - failed to copy sne.json to sne.json.old";
+		qWarning() << "Supernovas::backupJsonFile WARNING - failed to copy supernovas.json to supernovas.json.old";
 		return false;
 	}
 
@@ -316,7 +305,7 @@ bool SNe::backupJsonFile(bool deleteOriginal)
 /*
   Read the JSON file and create list of supernovaes.
 */
-void SNe::readJsonFile(void)
+void Supernovas::readJsonFile(void)
 {
 	setSNeMap(loadSNeMap());
 }
@@ -324,7 +313,7 @@ void SNe::readJsonFile(void)
 /*
   Parse JSON file and load supernovaes to map
 */
-QVariantMap SNe::loadSNeMap(QString path)
+QVariantMap Supernovas::loadSNeMap(QString path)
 {
 	if (path.isEmpty())
 	    path = sneJsonPath;
@@ -332,7 +321,7 @@ QVariantMap SNe::loadSNeMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-	    qWarning() << "SNe::loadSNeMap cannot open " << path;
+	    qWarning() << "Supernovas::loadSNeMap cannot open " << path;
 	else
 	    map = StelJsonParser::parse(jsonFile.readAll()).toMap();
 
@@ -343,46 +332,55 @@ QVariantMap SNe::loadSNeMap(QString path)
 /*
   Set items for list of struct from data map
 */
-void SNe::setSNeMap(const QVariantMap& map)
+void Supernovas::setSNeMap(const QVariantMap& map)
 {
+	snstar.clear();
 	QVariantMap sneMap = map.value("supernova").toMap();
-	supernova sn;
 	foreach(QString sneKey, sneMap.keys())
 	{
 		QVariantMap sneData = sneMap.value(sneKey).toMap();
-		sn.name = sneKey;
-		sn.type = sneData.value("type").toString();
-		sn.maxMagnitude = sneData.value("maxMagnitude").toFloat();
-		sn.peakJD = sneData.value("peakJD").toDouble();
-		sn.ra = StelUtils::getDecAngle(sneData.value("alpha").toString());
-		sn.de = StelUtils::getDecAngle(sneData.value("delta").toString());
+		sneData["designation"] = QString("SN %1").arg(sneKey);
 
-		snstar.append(sn);
+		SupernovaP sn(new Supernova(sneData));
+		if (sn->initialized)
+			snstar.append(sn);
+
 	}
 }
 
-/*
-  Computation of visual magnitude as function from supernova type and time
-*/
-double SNe::computeSNeMag(double peakJD, float maxMag, QString sntype, double currentJD)
+const QString Supernovas::getJsonFileVersion(void)
 {
-	double vmag = 30;
-	if (peakJD<=currentJD)
+	QString jsonVersion("unknown");
+	QFile sneJsonFile(sneJsonPath);
+	if (!sneJsonFile.open(QIODevice::ReadOnly))
 	{
-	    if (peakJD==std::floor(currentJD))
-		vmag = maxMag;
-
-	    else
-		vmag = maxMag - 2.5 * (-3) * std::log10(currentJD-peakJD);
-	}
-	else
-	{
-	    if (std::abs(peakJD-currentJD)<=5)
-		vmag = maxMag - 2.5 * (-1.75) * std::log10(std::abs(peakJD-currentJD));
-		if (vmag<maxMag)
-		    vmag = maxMag;
+		qWarning() << "Supernovas::init cannot open " << sneJsonPath;
+		return jsonVersion;
 	}
 
+	QVariantMap map;
+	map = StelJsonParser::parse(&sneJsonFile).toMap();
+	if (map.contains("version"))
+	{
+		QString creator = map.value("version").toString();
+		QRegExp vRx(".*(\\d+\\.\\d+).*");
+		if (vRx.exactMatch(creator))
+		{
+			jsonVersion = vRx.capturedTexts().at(1);
+		}
+	}
 
-	return vmag;
+	sneJsonFile.close();
+	qDebug() << "Supernovas::getJsonFileVersion() version from file:" << jsonVersion;
+	return jsonVersion;
+}
+
+SupernovaP Supernovas::getByID(const QString& id)
+{
+	foreach(const SupernovaP& sn, snstar)
+	{
+		if (sn->initialized && sn->designation == id)
+			return sn;
+	}
+	return SupernovaP();
 }
