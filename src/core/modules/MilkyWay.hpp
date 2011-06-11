@@ -76,7 +76,7 @@ private:
 	float intensity;
 	class LinearFader* fader;
 
-	class StelVertexArray* vertexArray;
+	struct StelVertexArray* vertexArray;
 };
 
 #endif // _MILKYWAY_HPP_
