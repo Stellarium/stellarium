@@ -33,7 +33,7 @@ using namespace TelescopeControlGlobals;
 
 class Ui_telescopeConfigurationDialog;
 class TelescopeControl;
-struct StelStyle;
+class StelStyle;
 
 class TelescopeConfigurationDialog : public StelDialogTelescopeControl
 {
