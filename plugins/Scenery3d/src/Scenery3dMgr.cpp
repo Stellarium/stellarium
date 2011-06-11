@@ -12,6 +12,7 @@
 #include "Scenery3d.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelFileMgr.hpp"
@@ -210,6 +211,18 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
 	StelApp::getInstance().getCore()->moveObserverTo(newScenery3d->getLocation(), 0., 0.);
     }
     else qDebug() << "No coordinates given in scenery3d.";
+
+    if (newScenery3d->hasLookat())
+    {
+	qDebug() << "Scenery3dMgr: Setting orientation.";
+	StelMovementMgr* mm=StelApp::getInstance().getCore()->getMovementMgr();
+	Vec3f lookat=newScenery3d->getLookat();
+	// This vector is (az_deg, alt_deg, fov_deg)
+	Vec3d v;
+	StelUtils::spheToRect(lookat[0]*M_PI/180.0, lookat[1]*M_PI/180.0, v);
+	mm->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(v, StelCore::RefractionOff));
+	mm->zoomTo(lookat[2], 3.);
+    } else qDebug() << "Scenery3dMgr: Not setting orientation, no data.";
 
     scenery3d = newScenery3d;
     currentScenery3dID = id;
