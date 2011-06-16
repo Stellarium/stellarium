@@ -41,15 +41,14 @@ Supernova::Supernova(const QVariantMap& map)
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation"))
 		return;
-
-	font.setPixelSize(16);
-
+		
 	designation  = map.value("designation").toString();
 	sntype = map.value("type").toString();
 	maxMagnitude = map.value("maxMagnitude").toFloat();
 	peakJD = map.value("peakJD").toDouble();
 	snra = StelUtils::getDecAngle(map.value("alpha").toString());
 	snde = StelUtils::getDecAngle(map.value("delta").toString());
+	note = map.value("note").toString();
 
 	initialized = true;
 }
@@ -68,6 +67,7 @@ QVariantMap Supernova::getMap(void)
 	map["peakJD"] = peakJD;
 	map["snra"] = snra;
 	map["snde"] = snde;
+	map["note"] = note;
 
 	return map;
 }
@@ -85,7 +85,11 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 
 	if (flags&Name)
 	{
-		oss << "<h2>" << designation << "</h2>";
+		oss << "<h2>" << designation;
+		if (note.size()!=0)
+		    oss << " (" << note << ")";
+		
+		oss << "</h2>";
 	}
 
 	if (flags&Magnitude && mag <= core->getSkyDrawer()->getLimitMagnitude())
@@ -150,7 +154,7 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 
 	StelUtils::spheToRect(snra, snde, XYZ);
 	mag = getVMagnitude(core);
-
+	
 	if (mag <= sd->getLimitMagnitude())
 	{
 		sd->computeRCMag(mag, rcMag);

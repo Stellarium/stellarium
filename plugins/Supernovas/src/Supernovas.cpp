@@ -72,6 +72,7 @@ Q_EXPORT_PLUGIN2(Supernovas, SupernovasStelPluginInterface)
 Supernovas::Supernovas()
 {
 	setObjectName("Supernovas");
+	font.setPixelSize(13);
 }
 
 /*
@@ -120,7 +121,7 @@ void Supernovas::init()
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(!QFileInfo(sneJsonPath).exists())
 	{
-		if (getJsonFileVersion() != "0.2")
+		if (getJsonFileVersion() != PLUGIN_VERSION)
 		{
 			restoreDefaultJsonFile();
 		}
@@ -145,7 +146,8 @@ void Supernovas::draw(StelCore* core)
 {
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
-
+	painter.setFont(font);
+	
 	foreach (const SupernovaP& sn, snstar)
 	{
 		if (sn && sn->initialized)
@@ -360,7 +362,7 @@ const QString Supernovas::getJsonFileVersion(void)
 	if (map.contains("version"))
 	{
 		QString creator = map.value("version").toString();
-		QRegExp vRx(".*(\\d+\\.\\d+).*");
+		QRegExp vRx(".*(\\d+\\.\\d+\\.\\d+).*");
 		if (vRx.exactMatch(creator))
 		{
 			jsonVersion = vRx.capturedTexts().at(1);
