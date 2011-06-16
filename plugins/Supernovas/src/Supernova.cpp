@@ -95,6 +95,9 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	if (flags&Magnitude && mag <= core->getSkyDrawer()->getLimitMagnitude())
 		oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
 
+	if (flags&Extra1)
+		oss << q_("Type: %1").arg(sntype) << "<br>";
+
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 
@@ -111,27 +114,79 @@ float Supernova::getVMagnitude(const StelCore* core) const
 {
 	double vmag = 20;
 	double currentJD = core->getJDay();
+	double deltaJD = std::abs(peakJD-currentJD);
 
+	/*
 	if (peakJD<=currentJD)
 	{
 		if (peakJD==std::floor(currentJD))
 			vmag = maxMagnitude;
 
 		else
-			vmag = maxMagnitude - 2.5 * (-3) * std::log10(currentJD-peakJD);
+			vmag = maxMagnitude - 2.5 * (-3) * std::log10(deltaJD);
 	}
 	else
 	{
 		if (std::abs(peakJD-currentJD)<=5)
-			vmag = maxMagnitude - 2.5 * (-1.75) * std::log10(std::abs(peakJD-currentJD));
+			vmag = maxMagnitude - 2.5 * (-1.75) * std::log10(std::abs(deltaJD));
 
-		if (vmag<maxMagnitude)
+		if (vmag>maxMagnitude)
 			vmag = maxMagnitude;
 	}
+	*/
 
-	return vmag;
+	// Use supernova light curve model from here - http://www.astronet.ru/db/msg/1188703
 
-	//return computeSNeMag(peakJD, maxMagnitude, sntype, core->getJDay());
+	if (sntype.contains("II", Qt::CaseSensitive)) {
+		// Type II
+		if (peakJD<=currentJD)
+		{
+			if (deltaJD>=0 && deltaJD<=5)
+				vmag = maxMagnitude;
+
+			if (deltaJD>5 && deltaJD<=35)
+				vmag = maxMagnitude + 0.05 * deltaJD;
+
+			if (deltaJD>35 && deltaJD<=85)
+				vmag = maxMagnitude + 0.013 * deltaJD + 1.5;
+
+			if (deltaJD>85)
+				vmag = maxMagnitude + 0.05 * deltaJD + 2.15;
+		}
+		else
+		{
+			if (deltaJD<=20)
+				vmag = maxMagnitude - 2.5 * (-2) * std::log10(deltaJD);
+
+		}
+	}
+	else
+	{
+		// Type I
+		if (peakJD<=currentJD)
+		{
+			if (deltaJD>=0 && deltaJD<=5)
+				vmag = maxMagnitude;
+
+			if (deltaJD>5 && deltaJD<=30)
+				vmag = maxMagnitude + 0.1 * deltaJD;
+
+			if (deltaJD>30)
+				vmag = maxMagnitude + 0.016 * deltaJD + 2.5;
+
+		}
+		else
+		{
+			if (deltaJD<=15)
+				vmag = maxMagnitude - 2.5 * (-1.75) * std::log10(deltaJD);
+
+		}
+	}
+
+	if (vmag<maxMagnitude)
+		vmag = maxMagnitude;
+
+	return vmag;	
 }
 
 double Supernova::getAngularSize(const StelCore*) const
