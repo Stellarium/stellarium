@@ -86,15 +86,14 @@ private:
 
 	void draw(StelCore* core, StelPainter& painter);
 
-	QFont     font;
-
 	// Supernova
-	QString designation;               // The ID of the supernova
-	QString sntype;			    // Type of the supernova
-	float maxMagnitude;		    // Maximal visual magnitude
-	double peakJD;			    // Julian Day of max. vis. mag.
-	double snra;			    // R.A. for the supernova
-	double snde;			    // Dec. for the supernova
+	QString designation;               //! The ID of the supernova
+	QString sntype;			   //! Type of the supernova
+	float maxMagnitude;		   //! Maximal visual magnitude
+	double peakJD;			   //! Julian Day of max. vis. mag.
+	double snra;			   //! R.A. for the supernova
+	double snde;			   //! Dec. for the supernova
+	QString note;			   //! Notes for the supernova
 };
 
 #endif // _SUPERNOVA_HPP_
