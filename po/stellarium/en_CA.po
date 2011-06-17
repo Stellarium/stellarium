@@ -8,26 +8,26 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-05-10 14:10+0700\n"
-"PO-Revision-Date: 2010-06-03 20:56+0000\n"
-"Last-Translator: Luke Hollins <Unknown>\n"
+"PO-Revision-Date: 2011-06-16 19:47+0000\n"
+"Last-Translator: Xiaomao Chen <Unknown>\n"
 "Language-Team: English (Canada) <en_CA@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-31 04:39+0000\n"
-"X-Generator: Launchpad (build 12959)\n"
+"X-Launchpad-Export-Date: 2011-06-17 04:32+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:516
 msgid "Meridian"
-msgstr ""
+msgstr "Meridian"
 
 #: src/core/modules/GridLinesMgr.cpp:520
 msgid "Ecliptic"
-msgstr ""
+msgstr "Ecliptic"
 
 #: src/core/modules/GridLinesMgr.cpp:524
 msgid "Equator"
-msgstr ""
+msgstr "Equator"
 
 #: src/core/modules/LandscapeMgr.cpp:450
 msgid "Author: "
@@ -803,29 +803,29 @@ msgstr "New Location"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
-msgstr ""
+msgstr "Select a ZIP archive that contains a Stellarium landscape"
 
 #. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 #: src/gui/AddRemoveLandscapesDialog.cpp:114
 msgid "ZIP archives"
-msgstr ""
+msgstr "ZIP archives"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:127
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
-msgstr ""
+msgstr "Landscape \"%1\" has been installed successfully."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:128
 #: src/gui/AddRemoveLandscapesDialog.cpp:155
 msgid "Success"
-msgstr ""
+msgstr "Success"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:141
 #: src/gui/AddRemoveLandscapesDialog.cpp:211
 #: src/gui/AddRemoveLandscapesDialog.cpp:220
 #: src/gui/AddRemoveLandscapesDialog.cpp:228
 msgid "No landscape was installed."
-msgstr ""
+msgstr "No landscape was installed."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:142
 #: src/gui/AddRemoveLandscapesDialog.cpp:166
@@ -834,47 +834,49 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:229
 #: src/gui/AddRemoveLandscapesDialog.cpp:239
 msgid "Error!"
-msgstr ""
+msgstr "Error!"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:154
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
-msgstr ""
+msgstr "Landscape \"%1\" has been removed successfully."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:165
 #: src/gui/AddRemoveLandscapesDialog.cpp:235
 msgid "The selected landscape could not be (completely) removed."
-msgstr ""
+msgstr "The selected landscape could not be (completely) removed."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
 #, qt-format
 msgid "Size on disk: %1 MiB"
-msgstr ""
+msgstr "Size on disk: %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
 #: src/gui/AddRemoveLandscapesDialog.cpp:214
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
-msgstr ""
+msgstr "Stellarium cannot open %1 for reading or writing"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:220
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
 msgstr ""
+"The selected file is not a ZIP archive or does not contain a Stellarium "
+"landscape."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
 #: src/gui/AddRemoveLandscapesDialog.cpp:227
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
-msgstr ""
+msgstr "A landscape with the same name or identifier (%1) already exists."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
 #: src/gui/AddRemoveLandscapesDialog.cpp:238
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
-msgstr ""
+msgstr "You can remove it manually by deleting the following directory: %1"
 
 #: src/main.cpp:335
 msgid "This system does not support OpenGL."
@@ -914,19 +916,19 @@ msgstr "Phobos"
 
 #: src/translations.h:41
 msgid "Ceres"
-msgstr ""
+msgstr "Ceres"
 
 #: src/translations.h:42
 msgid "Pallas"
-msgstr ""
+msgstr "Pallas"
 
 #: src/translations.h:43
 msgid "Juno"
-msgstr ""
+msgstr "Juno"
 
 #: src/translations.h:44
 msgid "Vesta"
-msgstr ""
+msgstr "Vesta"
 
 #: src/translations.h:45
 msgid "Jupiter"
@@ -950,52 +952,52 @@ msgstr "Callisto"
 
 #: src/translations.h:50
 msgid "Amalthea"
-msgstr ""
+msgstr "Amalthea"
 
 #: src/translations.h:51
 msgid "Himalia"
-msgstr ""
+msgstr "Himalia"
 
 #: src/translations.h:52
 msgid "Elara"
-msgstr ""
+msgstr "Elara"
 
 #: src/translations.h:53
 msgid "Pasiphae"
-msgstr ""
+msgstr "Pasiphae"
 
 #: src/translations.h:54
 msgid "Sinope"
-msgstr ""
+msgstr "Sinope"
 
 #: src/translations.h:55
 msgid "Lysithea"
-msgstr ""
+msgstr "Lysithea"
 
 #: src/translations.h:56
 msgid "Carme"
-msgstr ""
+msgstr "Carme"
 
 #: src/translations.h:57
 msgid "Ananke"
-msgstr ""
+msgstr "Ananke"
 
 #: src/translations.h:58
 msgid "Leda"
-msgstr ""
+msgstr "Leda"
 
 #: src/translations.h:59
 msgid "Thebe"
-msgstr ""
+msgstr "Thebe"
 
 #: src/translations.h:60
 msgid "Adrastea"
-msgstr ""
+msgstr "Adrastea"
 
 #. TRANSLATORS: Asteroid (9) Metis
 #: src/translations.h:61 src/translations.h:106
 msgid "Metis"
-msgstr ""
+msgstr "Metis"
 
 #: src/translations.h:62
 msgid "Saturn"
@@ -1047,23 +1049,23 @@ msgstr "Uranus"
 
 #: src/translations.h:74
 msgid "Miranda"
-msgstr ""
+msgstr "Miranda"
 
 #: src/translations.h:75
 msgid "Ariel"
-msgstr ""
+msgstr "Ariel"
 
 #: src/translations.h:76
 msgid "Umbriel"
-msgstr ""
+msgstr "Umbriel"
 
 #: src/translations.h:77
 msgid "Titania"
-msgstr ""
+msgstr "Titania"
 
 #: src/translations.h:78
 msgid "Oberon"
-msgstr ""
+msgstr "Oberon"
 
 #: src/translations.h:79
 msgid "Pluto"
@@ -1075,15 +1077,15 @@ msgstr "Charon"
 
 #: src/translations.h:81
 msgid "Eris"
-msgstr ""
+msgstr "Eris"
 
 #: src/translations.h:82
 msgid "Triton"
-msgstr ""
+msgstr "Triton"
 
 #: src/translations.h:83
 msgid "Nereid"
-msgstr ""
+msgstr "Nereid"
 
 #: src/translations.h:84
 msgid "Naiad"
