@@ -124,21 +124,23 @@ float Supernova::getVMagnitude(const StelCore* core) const
 
 	// Use supernova light curve model from here - http://www.astronet.ru/db/msg/1188703
 
-	if (sntype.contains("II", Qt::CaseSensitive)) {
+	if (sntype.contains("II", Qt::CaseSensitive))
+	{
 		// Type II
 		if (peakJD<=currentJD)
 		{
-			if (deltaJD>=0 && deltaJD<=5)
+			if (deltaJD>=0 && deltaJD<=1)
 				vmag = maxMagnitude;
 
-			if (deltaJD>5 && deltaJD<=35)
+			if (deltaJD>1 && deltaJD<=34)
 				vmag = maxMagnitude + 0.05 * deltaJD;
 
-			if (deltaJD>35 && deltaJD<=85)
+			if (deltaJD>34 && deltaJD<=84)
 				vmag = maxMagnitude + 0.013 * deltaJD + 1.5;
 
-			if (deltaJD>85)
+			if (deltaJD>84)
 				vmag = maxMagnitude + 0.05 * deltaJD + 2.15;
+
 		}
 		else
 		{
@@ -152,13 +154,13 @@ float Supernova::getVMagnitude(const StelCore* core) const
 		// Type I
 		if (peakJD<=currentJD)
 		{
-			if (deltaJD>=0 && deltaJD<=5)
+			if (deltaJD>=0 && deltaJD<=1)
 				vmag = maxMagnitude;
 
-			if (deltaJD>5 && deltaJD<=30)
+			if (deltaJD>1 && deltaJD<=26)
 				vmag = maxMagnitude + 0.1 * deltaJD;
 
-			if (deltaJD>30)
+			if (deltaJD>26)
 				vmag = maxMagnitude + 0.016 * deltaJD + 2.5;
 
 		}
