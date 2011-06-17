@@ -42,17 +42,16 @@
 #include <QTimer>
 #include <QUrl>
 
-MpcImportWindow::MpcImportWindow()
+MpcImportWindow::MpcImportWindow() :
+    downloadReply(0),
+    queryReply(0),
+    downloadProgressBar(0),
+    queryProgressBar(0)
 {
 	ui = new Ui_mpcImportWindow();
 	ssoManager = GETSTELMODULE(SolarSystemEditor);
 
 	networkManager = StelApp::getInstance().getNetworkAccessManager();
-
-	downloadReply = NULL;
-	queryReply = NULL;
-	downloadProgressBar = NULL;
-	queryProgressBar = NULL;
 
 	countdownTimer = new QTimer(this);
 
@@ -634,10 +633,10 @@ void MpcImportWindow::deleteDownloadProgressBar()
 
 void MpcImportWindow::sendQuery()
 {
-	if (queryReply != NULL)
+	if (queryReply != 0)
 		return;
 
-	QString query = ui->lineEditQuery->text().trimmed();
+	query = ui->lineEditQuery->text().trimmed();
 	if (query.isEmpty())
 		return;
 
@@ -652,10 +651,20 @@ void MpcImportWindow::sendQuery()
 	enableInterface(false);
 	ui->labelQueryMessage->setVisible(false);
 
-	QUrl url;
+	startCountdown();
+	ui->pushButtonAbortQuery->setVisible(true);
+
+	sendQueryToUrl(QUrl("http://stellarium.org/mpc-mpeph"));
+	//sendQueryToUrl(QUrl("http://scully.cfa.harvard.edu/cgi-bin/mpeph2.cgi"));
+}
+
+void MpcImportWindow::sendQueryToUrl(QUrl url)
+{
+	//QUrl url;
 	url.addQueryItem("ty","e");//Type: ephemerides
 	url.addQueryItem("TextArea", query);//Object name query
 	//url.addQueryItem("e", "-1");//Elements format: MPC 1-line
+	//XEphem's format is used instead because it doesn't truncate object names.
 	url.addQueryItem("e", "3");//Elements format: XEphem
 	//Yes, all of the rest are necessary
 	url.addQueryItem("d","");
@@ -679,37 +688,56 @@ void MpcImportWindow::sendQuery()
 	url.addQueryItem("ce", "f");
 	url.addQueryItem("js", "f");
 
-	QNetworkRequest request(QUrl("http://scully.cfa.harvard.edu/cgi-bin/mpeph2.cgi"));
-	request.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");//Is this really necessary?
-	request.setHeader(QNetworkRequest::ContentLengthHeader, url.encodedQuery().length());
+	QNetworkRequest request(url);
+	request.setHeader(QNetworkRequest::ContentTypeHeader,
+	                  "application/x-www-form-urlencoded");//Is this really necessary?
+	request.setHeader(QNetworkRequest::ContentLengthHeader,
+	                  url.encodedQuery().length());
 
-	startCountdown();
-	ui->pushButtonAbortQuery->setVisible(true);
-	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(queryComplete(QNetworkReply*)));
+	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveQueryReply(QNetworkReply*)));
 	queryReply = networkManager->post(request, url.encodedQuery());
 	connect(queryReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateQueryProgress(qint64,qint64)));
 }
 
 void MpcImportWindow::abortQuery()
 {
-	if (queryReply == NULL)
+	if (queryReply == 0)
 		return;
 
-	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(queryComplete(QNetworkReply*)));
+	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveQueryReply(QNetworkReply*)));
 	deleteQueryProgressBar();
 
 	queryReply->abort();
 	queryReply->deleteLater();
-	queryReply = NULL;
+	queryReply = 0;
 
 	//resetCountdown();
 	enableInterface(true);
 	ui->pushButtonAbortQuery->setVisible(false);
 }
 
-void MpcImportWindow::queryComplete(QNetworkReply *reply)
+void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 {
-	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(queryComplete(QNetworkReply*)));
+	if (reply == 0)
+		return;
+
+	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveQueryReply(QNetworkReply*)));
+
+	int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+	if (statusCode == 301 || statusCode == 302 || statusCode == 307)
+	{
+		QUrl rawUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
+		QUrl redirectUrl(rawUrl.toString(QUrl::RemoveQuery));
+		qDebug() << "The search query has been redirected to" << redirectUrl.toString();
+
+		//TODO: Add counter and cycle check.
+
+		reply->deleteLater();
+		queryReply = 0;
+		sendQueryToUrl(redirectUrl);
+		return;
+	}
+
 	deleteQueryProgressBar();
 
 	//Hide the abort button - a reply has been received
@@ -726,65 +754,74 @@ void MpcImportWindow::queryComplete(QNetworkReply *reply)
 		enableInterface(true);
 
 		reply->deleteLater();
-		queryReply = NULL;
+		queryReply = 0;
 		return;
 	}
 
-	if (reply->header(QNetworkRequest::ContentTypeHeader) != "text/ascii" ||
-	    reply->rawHeader(QByteArray("Content-disposition")) != "attachment; filename=elements.txt")
+	QString contentType = reply->header(QNetworkRequest::ContentTypeHeader).toString();
+	QString contentDisposition = reply->rawHeader(QByteArray("Content-disposition"));
+	if (contentType == "text/ascii" &&
+	    contentDisposition == "attachment; filename=elements.txt")
+	{
+		readQueryReply(reply);
+	}
+	else
 	{
 		ui->labelQueryMessage->setText("Object not found.");
 		ui->labelQueryMessage->setVisible(true);
 		enableInterface(true);
 	}
-	else
-	{
-		QList<SsoElements> objects;
-		QTemporaryFile file;
-		if (file.open())
-		{
-			file.write(reply->readAll());
-			file.close();
-
-			/*
-			//Try to read it as a comet first?
-			objects = readElementsFromFile(MpcComets, file.fileName());
-			if (objects.isEmpty())
-				objects = readElementsFromFile(MpcMinorPlanets, file.fileName());
-			*/
-			objects = ssoManager->readXEphemOneLineElementsFromFile(file.fileName());
-		}
-		else
-		{
-			qWarning() << "Unable to open a temporary file. Aborting operation.";
-		}
-
-		if (objects.isEmpty())
-		{
-			qWarning() << "No objects found in the file downloaded from"
-					   << reply->url().toString();
-		}
-		else
-		{
-			//The request has been successful: add the URL to bookmarks?
-			if (ui->checkBoxAddBookmark->isChecked())
-			{
-				QString url = reply->url().toString();
-				if (!bookmarks.value(importType).values().contains(url))
-				{
-					//Use the URL as a title for now
-					bookmarks[importType].insert(url, url);
-				}
-			}
-
-			//Temporary, until the slot/socket mechanism is ready
-			populateCandidateObjects(objects);
-			ui->stackedWidget->setCurrentIndex(1);
-		}
-	}
 
 	reply->deleteLater();
-	queryReply = NULL;
+	queryReply = 0;
+}
+
+void MpcImportWindow::readQueryReply(QNetworkReply * reply)
+{
+	Q_ASSERT(reply);
+
+	QList<SsoElements> objects;
+	QTemporaryFile file;
+	if (file.open())
+	{
+		file.write(reply->readAll());
+		file.close();
+
+		/*
+		//Try to read it as a comet first?
+		objects = readElementsFromFile(MpcComets, file.fileName());
+		if (objects.isEmpty())
+			objects = readElementsFromFile(MpcMinorPlanets, file.fileName());
+		*/
+		objects = ssoManager->readXEphemOneLineElementsFromFile(file.fileName());
+	}
+	else
+	{
+		qWarning() << "Unable to open a temporary file. Aborting operation.";
+	}
+
+	if (objects.isEmpty())
+	{
+		qWarning() << "No objects found in the file downloaded from"
+				   << reply->url().toString();
+	}
+	else
+	{
+		//The request has been successful: add the URL to bookmarks?
+		if (ui->checkBoxAddBookmark->isChecked())
+		{
+			QString url = reply->url().toString();
+			if (!bookmarks.value(importType).values().contains(url))
+			{
+				//Use the URL as a title for now
+				bookmarks[importType].insert(url, url);
+			}
+		}
+
+		//Temporary, until the slot/socket mechanism is ready
+		populateCandidateObjects(objects);
+		ui->stackedWidget->setCurrentIndex(1);
+	}
 }
 
 void MpcImportWindow::deleteQueryProgressBar()
@@ -816,7 +853,7 @@ void MpcImportWindow::resetCountdown()
 		countdownTimer->stop();
 
 		//If the query is still active, kill it
-		if (queryReply != NULL && queryReply->isRunning())
+		if (queryReply != 0 && queryReply->isRunning())
 		{
 			abortQuery();
 			ui->labelQueryMessage->setText("The query timed out. You can try again, now or later.");
@@ -840,7 +877,7 @@ void MpcImportWindow::updateCountdown()
 		resetCountdown();
 	}
 	//If there has been an answer
-	else if (countdown > 50 && queryReply == NULL)
+	else if (countdown > 50 && queryReply == 0)
 	{
 		resetCountdown();
 	}
