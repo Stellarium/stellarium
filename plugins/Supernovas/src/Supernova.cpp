@@ -49,6 +49,7 @@ Supernova::Supernova(const QVariantMap& map)
 	snra = StelUtils::getDecAngle(map.value("alpha").toString());
 	snde = StelUtils::getDecAngle(map.value("delta").toString());
 	note = map.value("note").toString();
+	distance = map.value("distance").toDouble();
 
 	initialized = true;
 }
@@ -68,6 +69,7 @@ QVariantMap Supernova::getMap(void)
 	map["snra"] = snra;
 	map["snde"] = snde;
 	map["note"] = note;
+	map["distance"] = distance;
 
 	return map;
 }
@@ -95,11 +97,15 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	if (flags&Magnitude && mag <= core->getSkyDrawer()->getLimitMagnitude())
 		oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
 
-	if (flags&Extra1)
-		oss << q_("Type: %1").arg(sntype) << "<br>";
-
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
+
+	if (flags&Extra1)
+	{
+		oss << q_("Type: %1").arg(sntype) << "<br>";
+		if (distance>0)
+			oss << q_("Distance: %1 Light Years").arg(distance*1000) << "<br>";
+	}
 
 	postProcessInfoString(str, flags);
 	return str;
@@ -115,25 +121,6 @@ float Supernova::getVMagnitude(const StelCore* core) const
 	double vmag = 20;
 	double currentJD = core->getJDay();
 	double deltaJD = std::abs(peakJD-currentJD);
-
-	/*
-	if (peakJD<=currentJD)
-	{
-		if (peakJD==std::floor(currentJD))
-			vmag = maxMagnitude;
-
-		else
-			vmag = maxMagnitude - 2.5 * (-3) * std::log10(deltaJD);
-	}
-	else
-	{
-		if (std::abs(peakJD-currentJD)<=5)
-			vmag = maxMagnitude - 2.5 * (-1.75) * std::log10(std::abs(deltaJD));
-
-		if (vmag>maxMagnitude)
-			vmag = maxMagnitude;
-	}
-	*/
 
 	// Use supernova light curve model from here - http://www.astronet.ru/db/msg/1188703
 
@@ -156,7 +143,7 @@ float Supernova::getVMagnitude(const StelCore* core) const
 		else
 		{
 			if (deltaJD<=20)
-				vmag = maxMagnitude - 2.5 * (-2) * std::log10(deltaJD);
+				vmag = maxMagnitude + 0.75 * deltaJD;
 
 		}
 	}
@@ -178,7 +165,7 @@ float Supernova::getVMagnitude(const StelCore* core) const
 		else
 		{
 			if (deltaJD<=15)
-				vmag = maxMagnitude - 2.5 * (-1.75) * std::log10(deltaJD);
+				vmag = maxMagnitude + 1.13 * deltaJD;
 
 		}
 	}

@@ -94,6 +94,7 @@ private:
 	double snra;			   //! R.A. for the supernova
 	double snde;			   //! Dec. for the supernova
 	QString note;			   //! Notes for the supernova
+	double distance;		   //! Distance to supernova (10^3 ly)
 };
 
 #endif // _SUPERNOVA_HPP_
