@@ -184,13 +184,17 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 					// We are at meridian 0
 					lon = 0.;
 				}
+
 				if (std::fabs(lon-raAngle) < 0.01)
 					text = StelUtils::radToDmsStrAdapt(raAngle);
 				else
 				{
 					const double delta = raAngle<M_PI ? M_PI : -M_PI;
-					text = StelUtils::radToDmsStrAdapt(raAngle+delta);
-				}
+					if (raAngle==2*M_PI && delta==-M_PI)
+						text = StelUtils::radToDmsStrAdapt(0);
+					else
+						text = StelUtils::radToDmsStrAdapt(raAngle+delta);
+				}				
 				break;
 			}
 			case StelCore::FrameGalactic:
