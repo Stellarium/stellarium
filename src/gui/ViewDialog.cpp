@@ -237,6 +237,11 @@ void ViewDialog::createDialogContent()
 	connect(a, SIGNAL(toggled(bool)), ui->showMeridianLineCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showMeridianLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
+	ui->showHorizonLineCheckBox->setChecked(glmgr->getFlagHorizonLine());
+	a = gui->getGuiActions("actionShow_Horizon_Line");
+	connect(a, SIGNAL(toggled(bool)), ui->showHorizonLineCheckBox, SLOT(setChecked(bool)));
+	connect(ui->showHorizonLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+
 	ui->showEquatorialGridCheckBox->setChecked(glmgr->getFlagEquatorGrid());
 	a = gui->getGuiActions("actionShow_Equatorial_Grid");
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorialGridCheckBox, SLOT(setChecked(bool)));

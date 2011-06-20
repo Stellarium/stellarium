@@ -1060,6 +1060,13 @@
               </widget>
              </item>
              <item>
+              <widget class="QCheckBox" name="showHorizonLineCheckBox">
+               <property name="text">
+                <string>Horizon line</string>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QCheckBox" name="showEclipticLineCheckBox">
                <property name="text">
                 <string>Ecliptic line</string>
@@ -1621,6 +1628,7 @@
   <tabstop>zhr144000</tabstop>
   <tabstop>showEquatorLineCheckBox</tabstop>
   <tabstop>showMeridianLineCheckBox</tabstop>
+  <tabstop>showHorizonLineCheckBox</tabstop>
   <tabstop>showEclipticLineCheckBox</tabstop>
   <tabstop>showCardinalPointsCheckBox</tabstop>
   <tabstop>showConstellationLinesCheckBox</tabstop>
