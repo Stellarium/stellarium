@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-05-10 14:10+0700\n"
-"PO-Revision-Date: 2011-03-06 03:24+0000\n"
+"PO-Revision-Date: 2011-06-20 04:11+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-31 04:39+0000\n"
-"X-Generator: Launchpad (build 12959)\n"
+"X-Launchpad-Export-Date: 2011-06-20 04:31+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:516
 msgid "Meridian"
@@ -289,11 +289,11 @@ msgstr "Licença"
 
 #: src/gui/ConfigurationDialog.cpp:617
 msgid "Running script: "
-msgstr "Rodando script: "
+msgstr "Rodando escripte: "
 
 #: src/gui/ConfigurationDialog.cpp:624
 msgid "Running script: [none]"
-msgstr "Rodando script: [nenhum]"
+msgstr "Rodando escripte: [nenhum]"
 
 #: src/gui/ConfigurationDialog.cpp:667
 msgid "Finished downloading all star catalogs!"
@@ -342,7 +342,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:810
 msgid "Verifying file integrity..."
-msgstr "Verificando integridade do arquivo..."
+msgstr "Verificando a integridade do arquivo..."
 
 #: src/gui/ConfigurationDialog.cpp:814
 #, qt-format
@@ -351,7 +351,7 @@ msgid ""
 "File is corrupted."
 msgstr ""
 "Erro ao baixar %1:\n"
-"Arquivo está corrompido."
+"O arquivo está corrompido."
 
 #: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:285
 #: src/gui/StelGuiItems.cpp:640
@@ -384,7 +384,7 @@ msgstr "CTRL + clique esquerdo"
 
 #: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:162
 msgid "Movement and Selection"
-msgstr "Movimentar e Selecionar"
+msgstr "Movimento e seleção"
 
 #: src/gui/HelpDialog.cpp:62
 msgid "Pan view around the sky"
@@ -392,7 +392,7 @@ msgstr "Visão panorâmica do céu"
 
 #: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
 msgid "Zoom in/out"
-msgstr "Aproximar/Afastar Zoom"
+msgstr "Aproximar/Afastar zum"
 
 #: src/gui/HelpDialog.cpp:65
 msgid "Select object"
@@ -404,19 +404,19 @@ msgstr "Limpar seleção"
 
 #: src/gui/HelpDialog.cpp:71
 msgid "When a Script is Running"
-msgstr "Quando um Script estiver sendo executado"
+msgstr "Quando um escripte estiver sendo executado"
 
 #: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:141
 msgid "Slow down the script execution rate"
-msgstr "Desacelerar a taxa de execução de scripts"
+msgstr "Desacelerar a taxa de execução de escriptes"
 
 #: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:142
 msgid "Speed up the script execution rate"
-msgstr "Acelerar a taxa de execução de scripts"
+msgstr "Acelerar a taxa de execução de escriptes"
 
 #: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:143
 msgid "Set the normal script execution rate"
-msgstr "Definir taxa normal de execução de script"
+msgstr "Definir a taxa normal de execução de escripte"
 
 #: src/gui/HelpDialog.cpp:163
 msgid "Stellarium Help"
@@ -428,15 +428,15 @@ msgstr "Teclas"
 
 #: src/gui/HelpDialog.cpp:172
 msgid "Further Reading"
-msgstr "Leitura posterior"
+msgstr "Leitura adicional"
 
 #: src/gui/HelpDialog.cpp:173
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr ""
-"O links seguintes são de sites externos e irão abrir no seu navegador de "
-"internet\n"
+"O seguintes linques são de saites externos e abrirão o seu navegador de "
+"internet:\n"
 
 #: src/gui/HelpDialog.cpp:174
 msgid "The Stellarium User Guide"
@@ -445,7 +445,7 @@ msgstr "Manual do Usuário do Stellarium"
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:178
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr "{Perguntas frequentes} sobre Stellarium. Respostas também."
+msgstr "{Perguntas frequentes} sobre o Stellarium. Respostas também."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:183
@@ -453,8 +453,8 @@ msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
 msgstr ""
-"{Stellarium Wiki} - Informações gerais. Você também pode encontrar planos de "
-"fundo de usuários contribuintes e scripts aqui."
+"{Stellarium Wiki} - Informações gerais. Aqui você também pode encontrar "
+"planos de fundo enviados por usuários e escriptes."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:188
@@ -462,7 +462,7 @@ msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr ""
-"{Sistema de requisição de suporte} - Se você precisa de ajuda usando o  "
+"{Sistema de requisição de suporte} - se você precisa de ajuda usando o  "
 "Stellarium, submeta uma requisição de suporte aqui e tentaremos ajudar."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
@@ -479,12 +479,12 @@ msgstr ""
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:198
 msgid "{Forums} - discuss Stellarium with other users."
-msgstr "{Fórums} - Discuta o Stellarium com outros usuários."
+msgstr "{Fóruns} - discuta o Stellarium com outros usuários."
 
 #: src/gui/HelpDialog.cpp:234 src/gui/HelpDialog.cpp:326
 #: src/gui/HelpDialog.cpp:328 src/gui/StelGui.cpp:169
 msgid "Miscellaneous"
-msgstr "Variados"
+msgstr "Miscelânea"
 
 #: src/gui/HelpDialog.cpp:294
 msgid "Developers"
@@ -787,7 +787,7 @@ msgstr "Taxa normal"
 
 #: src/gui/ViewDialog.cpp:475
 msgid "Standard Perseids rate"
-msgstr "Taxa Padrão de Perseides"
+msgstr "Taxa padrão de Perseidas"
 
 #: src/gui/ViewDialog.cpp:478
 msgid "Exceptional Leonid rate"
@@ -808,7 +808,7 @@ msgstr "Selecione um arquivo ZIP que contenha uma paisagem do Stellarium"
 #. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 #: src/gui/AddRemoveLandscapesDialog.cpp:114
 msgid "ZIP archives"
-msgstr "Arquivos zip"
+msgstr "Arquivos ZIP"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:127
 #, qt-format
@@ -844,7 +844,7 @@ msgstr "A paisagem \"%1\" foi removida com sucesso."
 #: src/gui/AddRemoveLandscapesDialog.cpp:165
 #: src/gui/AddRemoveLandscapesDialog.cpp:235
 msgid "The selected landscape could not be (completely) removed."
-msgstr "A paisagem selecionada não pode ser removida (completamente)."
+msgstr "A paisagem selecionada não pôde ser removida (completamente)."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
@@ -952,47 +952,47 @@ msgstr "Calisto"
 
 #: src/translations.h:50
 msgid "Amalthea"
-msgstr ""
+msgstr "Amaltea"
 
 #: src/translations.h:51
 msgid "Himalia"
-msgstr ""
+msgstr "Himalia"
 
 #: src/translations.h:52
 msgid "Elara"
-msgstr ""
+msgstr "Elara"
 
 #: src/translations.h:53
 msgid "Pasiphae"
-msgstr ""
+msgstr "Pasífae"
 
 #: src/translations.h:54
 msgid "Sinope"
-msgstr ""
+msgstr "Sinope"
 
 #: src/translations.h:55
 msgid "Lysithea"
-msgstr ""
+msgstr "Lisiteia"
 
 #: src/translations.h:56
 msgid "Carme"
-msgstr ""
+msgstr "Carme"
 
 #: src/translations.h:57
 msgid "Ananke"
-msgstr ""
+msgstr "Ananque"
 
 #: src/translations.h:58
 msgid "Leda"
-msgstr ""
+msgstr "Leda"
 
 #: src/translations.h:59
 msgid "Thebe"
-msgstr ""
+msgstr "Tebe"
 
 #: src/translations.h:60
 msgid "Adrastea"
-msgstr ""
+msgstr "Adrasteia"
 
 #. TRANSLATORS: Asteroid (9) Metis
 #: src/translations.h:61 src/translations.h:106
@@ -1081,55 +1081,55 @@ msgstr "Eris"
 
 #: src/translations.h:82
 msgid "Triton"
-msgstr ""
+msgstr "Tritão"
 
 #: src/translations.h:83
 msgid "Nereid"
-msgstr ""
+msgstr "Nereida"
 
 #: src/translations.h:84
 msgid "Naiad"
-msgstr ""
+msgstr "Náiade"
 
 #: src/translations.h:85
 msgid "Thalassa"
-msgstr ""
+msgstr "Talassa"
 
 #: src/translations.h:86
 msgid "Despina"
-msgstr ""
+msgstr "Despina"
 
 #: src/translations.h:87
 msgid "Galatea"
-msgstr ""
+msgstr "Galateia"
 
 #: src/translations.h:88
 msgid "Larissa"
-msgstr ""
+msgstr "Larissa"
 
 #: src/translations.h:89
 msgid "Proteus"
-msgstr ""
+msgstr "Proteu"
 
 #: src/translations.h:90
 msgid "Halimede"
-msgstr ""
+msgstr "Halimede"
 
 #: src/translations.h:91
 msgid "Psamathe"
-msgstr ""
+msgstr "Psámata"
 
 #: src/translations.h:92
 msgid "Sao"
-msgstr ""
+msgstr "Sao"
 
 #: src/translations.h:93
 msgid "Laomedeia"
-msgstr ""
+msgstr "Laomedeia"
 
 #: src/translations.h:94
 msgid "Neso"
-msgstr ""
+msgstr "Neso"
 
 #: src/translations.h:95
 msgid "Solar System Observer"
@@ -1215,7 +1215,7 @@ msgstr "Egípcio"
 
 #: src/translations.h:131
 msgid "Inuit"
-msgstr "Inuit"
+msgstr "Inuíte"
 
 #: src/translations.h:132
 msgid "Korean"
@@ -1607,103 +1607,103 @@ msgstr "Encontrar objeto"
 
 #: src/ui_searchDialogGui.h:446
 msgid "Keyboard for Greek input"
-msgstr ""
+msgstr "Teclado para a inserção de letras gregas"
 
 #: src/ui_searchDialogGui.h:449
 msgid "alpha"
-msgstr ""
+msgstr "alfa"
 
 #: src/ui_searchDialogGui.h:452
 msgid "beta"
-msgstr ""
+msgstr "beta"
 
 #: src/ui_searchDialogGui.h:455
 msgid "gamma"
-msgstr ""
+msgstr "gama"
 
 #: src/ui_searchDialogGui.h:458
 msgid "delta"
-msgstr ""
+msgstr "delta"
 
 #: src/ui_searchDialogGui.h:461
 msgid "epsilon"
-msgstr ""
+msgstr "épsilon"
 
 #: src/ui_searchDialogGui.h:464
 msgid "zeta"
-msgstr ""
+msgstr "zeta"
 
 #: src/ui_searchDialogGui.h:467
 msgid "eta"
-msgstr ""
+msgstr "etá"
 
 #: src/ui_searchDialogGui.h:470
 msgid "theta"
-msgstr ""
+msgstr "teta"
 
 #: src/ui_searchDialogGui.h:473
 msgid "iota"
-msgstr ""
+msgstr "iota"
 
 #: src/ui_searchDialogGui.h:476
 msgid "kappa"
-msgstr ""
+msgstr "capa"
 
 #: src/ui_searchDialogGui.h:479
 msgid "lambda"
-msgstr ""
+msgstr "lambda"
 
 #: src/ui_searchDialogGui.h:482
 msgid "mu"
-msgstr ""
+msgstr "mi"
 
 #: src/ui_searchDialogGui.h:485
 msgid "nu"
-msgstr ""
+msgstr "ni"
 
 #: src/ui_searchDialogGui.h:488
 msgid "xi"
-msgstr ""
+msgstr "ksi"
 
 #: src/ui_searchDialogGui.h:491
 msgid "omicron"
-msgstr ""
+msgstr "ómicron"
 
 #: src/ui_searchDialogGui.h:494
 msgid "pi"
-msgstr ""
+msgstr "pi"
 
 #: src/ui_searchDialogGui.h:497
 msgid "rho"
-msgstr ""
+msgstr "rô"
 
 #: src/ui_searchDialogGui.h:500
 msgid "sigma"
-msgstr ""
+msgstr "sigma"
 
 #: src/ui_searchDialogGui.h:503
 msgid "tau"
-msgstr ""
+msgstr "tau"
 
 #: src/ui_searchDialogGui.h:506
 msgid "upsilon"
-msgstr ""
+msgstr "upsilon"
 
 #: src/ui_searchDialogGui.h:509
 msgid "phi"
-msgstr ""
+msgstr "fi"
 
 #: src/ui_searchDialogGui.h:512
 msgid "chi"
-msgstr ""
+msgstr "chi"
 
 #: src/ui_searchDialogGui.h:515
 msgid "psi"
-msgstr ""
+msgstr "psi"
 
 #: src/ui_searchDialogGui.h:518
 msgid "omega"
-msgstr ""
+msgstr "ômega"
 
 #: src/ui_searchDialogGui.h:520
 msgid "RA/Dec (J2000):"
@@ -2267,7 +2267,7 @@ msgstr "Visão da ocular"
 
 #: plugins/Oculars/src/Oculars.cpp:965
 msgid "Oculars popup menu"
-msgstr ""
+msgstr "Menu de popape para as oculares"
 
 #: plugins/Satellites/src/Satellites.cpp:68
 msgid "Satellites"
