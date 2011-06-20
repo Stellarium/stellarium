@@ -562,11 +562,9 @@ void SkyLine::draw(StelCore *core) const
 	textColor[3]=fader.getInterstate();
 
 	ViewportEdgeIntersectCallbackData userData(&sPainter);	
-
 	sPainter.setFont(font);
 	userData.textColor = textColor;	
 	userData.text = label;
-
 	/////////////////////////////////////////////////
 	// Draw the line
 	SphericalCap meridianSphericalCap(Vec3d(0,0,1), 0);	
@@ -602,6 +600,7 @@ void SkyLine::draw(StelCore *core) const
 	middlePoint.normalize();
 	if (!viewPortSphericalCap.contains(middlePoint))
 		middlePoint*=-1.;
+
 	// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
 	sPainter.drawGreatCircleArc(p1, middlePoint, NULL, viewportEdgeIntersectCallback, &userData);
 	sPainter.drawGreatCircleArc(p2, middlePoint, NULL, viewportEdgeIntersectCallback, &userData);
