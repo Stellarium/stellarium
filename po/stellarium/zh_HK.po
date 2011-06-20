@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-05-10 14:10+0700\n"
-"PO-Revision-Date: 2010-11-20 18:00+0000\n"
-"Last-Translator: Nautical Liu <Unknown>\n"
+"PO-Revision-Date: 2011-06-19 12:40+0000\n"
+"Last-Translator: siulamvictor <victorlamhk@gmail.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-31 04:39+0000\n"
-"X-Generator: Launchpad (build 12959)\n"
+"X-Launchpad-Export-Date: 2011-06-20 04:31+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:516
 msgid "Meridian"
@@ -154,18 +154,18 @@ msgstr "這种投影法的全名是 <i>Lambert 等面积方位投影法</i>. 這
 
 #: src/core/StelProjectorClasses.cpp:108
 msgid "Stereographic"
-msgstr "立体绘图法"
+msgstr "立體繪圖法"
 
 #: src/core/StelProjectorClasses.cpp:113
 msgid ""
 "Stereographic projection is known since the antiquity and was originally "
 "known as the planisphere projection. It preserves the angles at which curves "
 "cross each other but it does not preserve area."
-msgstr "立体绘图法原称为星座盘投影法。他保留曲线交汇的角度而不是面积的大小。（另译为赤平投影法）"
+msgstr "立體繪圖法原稱為星座盤投影法,他保留曲線交匯的角度而不是面積的大小 (另譯為赤平投影法)"
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Fish-eye"
-msgstr "鱼眼"
+msgstr "魚眼"
 
 #: src/core/StelProjectorClasses.cpp:150
 msgid ""
@@ -173,7 +173,7 @@ msgid ""
 "lines become curves when they appear a large angular distance from the "
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
-msgstr "鱼眼投影法或称为<i>等距方位投影法</i>，当直线距离中心的角度很大时会变成曲线 (像是从广角镜头看出去所见到的变形)。"
+msgstr "魚眼投影法或稱為<i>等距方位投影法</i>.當直線距離中心的角度很大時會變成曲線 (像是從廣角鏡頭看出去所見到的變形)."
 
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
@@ -183,21 +183,21 @@ msgstr ""
 msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
-msgstr ""
+msgstr "該錘投影是一個等面積地圖投影, 描述了在1892年和恩斯特錘直接靈感來自於 Aitoff投影."
 
 #: src/core/StelProjectorClasses.cpp:223
 msgid "Cylinder"
-msgstr "圆柱式"
+msgstr "圓柱體"
 
 #: src/core/StelProjectorClasses.cpp:228
 msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
-msgstr "這個投影法的全名是<i>等距圆柱投影</i>。 所有经纬线的投影都是相同距离。"
+msgstr "這個投影法的全名是<i>等距圓柱投影</i>所有經緯線的投影都是相同距離。"
 
 #: src/core/StelProjectorClasses.cpp:270
 msgid "Mercator"
-msgstr "麦卡托投影"
+msgstr "麥卡托投影"
 
 #: src/core/StelProjectorClasses.cpp:275
 msgid ""
@@ -214,22 +214,22 @@ msgstr "正角投影"
 msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
-msgstr "正射投影类似透视投影，但是投影点位在无限远的距离。"
+msgstr "正射投影類似透視投影，但是投影點位在無限遠的距離。"
 
 #: src/core/StelObject.cpp:65
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
-msgstr "赤经/赤纬 (J2000): %1/%2"
+msgstr "赤經/赤緯 (J2000): %1%2"
 
 #: src/core/StelObject.cpp:72
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr "赤经/赤纬(日期): %1/%2"
+msgstr "赤經/赤緯(日期): %1/%2"
 
 #: src/core/StelObject.cpp:80
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr "時角/赤纬: %1/%2"
+msgstr "時角/赤緯:%1/%2"
 
 #: src/core/StelObject.cpp:91
 #, qt-format
@@ -243,20 +243,20 @@ msgstr "選擇儲存截圖資料夾"
 #: src/gui/ConfigurationDialog.cpp:463
 #, qt-format
 msgid "Startup FOV: %1%2"
-msgstr "启动时的视角: %1%2"
+msgstr "啟動時視野:%1%2"
 
 #: src/gui/ConfigurationDialog.cpp:471
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr "启动时的地平坐标方位角/高度角: %1/%2"
+msgstr "啟動時的地平坐標方位角/高度角: %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:511
 msgid "Authors"
-msgstr ""
+msgstr "著作群"
 
 #: src/gui/ConfigurationDialog.cpp:515 src/gui/ViewDialog.cpp:347
 msgid "Contact"
-msgstr ""
+msgstr "聯繫"
 
 #: src/gui/ConfigurationDialog.cpp:587
 msgid "Author"
@@ -290,6 +290,9 @@ msgid ""
 "Star count: %2 Million\n"
 "Magnitude range: %3 - %4"
 msgstr ""
+"下載大小:%1MB\n"
+"星體數量:%2 百萬\n"
+"星等範圍: %3 - %4"
 
 #: src/gui/ConfigurationDialog.cpp:687
 msgid ""
@@ -355,7 +358,7 @@ msgstr "按滑鼠右鍵"
 
 #: src/gui/HelpDialog.cpp:58
 msgid "CTRL + Left click"
-msgstr "CTRL + 鼠标左键"
+msgstr "CTRL+滑鼠左鍵"
 
 #: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:162
 msgid "Movement and Selection"
@@ -363,39 +366,39 @@ msgstr "移動和選擇"
 
 #: src/gui/HelpDialog.cpp:62
 msgid "Pan view around the sky"
-msgstr "移动画面"
+msgstr "平移檢視周邊天空"
 
 #: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
 msgid "Zoom in/out"
-msgstr "放大/缩小"
+msgstr "放大/縮小"
 
 #: src/gui/HelpDialog.cpp:65
 msgid "Select object"
-msgstr "选取物体"
+msgstr "選取物件"
 
 #: src/gui/HelpDialog.cpp:66 src/gui/HelpDialog.cpp:68
 msgid "Clear selection"
-msgstr "消除选取"
+msgstr "清除選取"
 
 #: src/gui/HelpDialog.cpp:71
 msgid "When a Script is Running"
-msgstr ""
+msgstr "當腳本運行"
 
 #: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:141
 msgid "Slow down the script execution rate"
-msgstr ""
+msgstr "緩慢腳本執行效率"
 
 #: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:142
 msgid "Speed up the script execution rate"
-msgstr ""
+msgstr "加快腳本的執行效率"
 
 #: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:143
 msgid "Set the normal script execution rate"
-msgstr ""
+msgstr "正常腳本的執行效率"
 
 #: src/gui/HelpDialog.cpp:163
 msgid "Stellarium Help"
-msgstr "Stellarium说明"
+msgstr "Stellarium說明"
 
 #: src/gui/HelpDialog.cpp:164
 msgid "Keys"
@@ -418,7 +421,7 @@ msgstr "Stellarium用戶指南"
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:178
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr "{FAQ} -关于Stellarium 的常见问答"
+msgstr "{FAQ} 關於 Stellarium的的常見問答"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:183
@@ -432,7 +435,7 @@ msgstr "{Stellarium Wiki} - 一般資料，你亦可以在這裏找到由使用�
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
-msgstr "{技术支持系统} - 若您在使用 Stellarium 時需要帮忙，请至该处提出要求，我們會尽量帮忙。"
+msgstr "{技術支持系統} - 若您在使用Stellarium的時需要幫忙，請至該處提出要求，我們會盡量幫忙。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:193
@@ -440,12 +443,12 @@ msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
 "reports here."
-msgstr ""
+msgstr "{錯誤報告和功能要求系統} - 如果有什麼不正常或丟失，不列在追踪器，你可以在這裡打開錯誤報告。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:198
 msgid "{Forums} - discuss Stellarium with other users."
-msgstr "{讨论区} - 在此处和其他爱好者讨论Stellarium。"
+msgstr "{討論區} - 在此處和其他愛好者討論 Stellarium的。"
 
 #: src/gui/HelpDialog.cpp:234 src/gui/HelpDialog.cpp:326
 #: src/gui/HelpDialog.cpp:328 src/gui/StelGui.cpp:169
@@ -459,48 +462,48 @@ msgstr "開發者"
 #: src/gui/HelpDialog.cpp:295
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
-msgstr "计划协调&开发经理: %1"
+msgstr "計劃協調和開發經理: %1"
 
 #: src/gui/HelpDialog.cpp:296
 #, qt-format
 msgid "Doc author/developer: %1"
-msgstr "说明文件撰写: %1"
+msgstr "說明文件撰寫: %1"
 
 #: src/gui/HelpDialog.cpp:297
 #, qt-format
 msgid "Graphic/other designer: %1"
-msgstr "视觉与其他设计: %1"
+msgstr "視覺與其他設計: %1"
 
 #: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
 #: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
 #, qt-format
 msgid "Developer: %1"
-msgstr "开发者: %1"
+msgstr "開發者: %1"
 
 #: src/gui/HelpDialog.cpp:300
 #, qt-format
 msgid "OSX Developer: %1"
-msgstr "OSX开发: %1"
+msgstr "OSX開發: %1"
 
 #: src/gui/StelGui.cpp:98
 msgid "Display Options"
-msgstr "显示选项"
+msgstr "顯示選項"
 
 #: src/gui/StelGui.cpp:99
 msgid "Constellation lines"
-msgstr "星座连线"
+msgstr "星座連線"
 
 #: src/gui/StelGui.cpp:100
 msgid "Constellation art"
-msgstr "星座图绘"
+msgstr "星座圖繪"
 
 #: src/gui/StelGui.cpp:101
 msgid "Constellation labels"
-msgstr "星座标示"
+msgstr "星座標示"
 
 #: src/gui/StelGui.cpp:102
 msgid "Constellation boundaries"
-msgstr "星座边界"
+msgstr "星座邊界"
 
 #: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1033
 msgid "Azimuthal grid"
@@ -508,31 +511,31 @@ msgstr "地平座標"
 
 #: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1031
 msgid "Equatorial grid"
-msgstr "赤道座标"
+msgstr "赤道座標"
 
 #: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1032
 msgid "Equatorial J2000 grid"
-msgstr "赤道座标 (J2000)"
+msgstr "赤道座標 (J2000)"
 
 #: src/gui/StelGui.cpp:107
 msgid "Galactic grid"
-msgstr ""
+msgstr "銀河系網格"
 
 #: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1036
 msgid "Ecliptic line"
-msgstr "黄道"
+msgstr "黃道線"
 
 #: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1034
 msgid "Equator line"
-msgstr "赤道"
+msgstr "赤道線"
 
 #: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1035
 msgid "Meridian line"
-msgstr "子午线"
+msgstr "子午線"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1037
 msgid "Cardinal points"
-msgstr "基点"
+msgstr "基點"
 
 #: src/gui/StelGui.cpp:113
 msgid "Ground"
@@ -540,7 +543,7 @@ msgstr "地面"
 
 #: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1015
 msgid "Atmosphere"
-msgstr "大气层"
+msgstr "大氣"
 
 #: src/gui/StelGui.cpp:115
 msgid "Fog"
@@ -548,11 +551,11 @@ msgstr "霧"
 
 #: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1020
 msgid "Nebulas"
-msgstr "星云"
+msgstr "星雲"
 
 #: src/gui/StelGui.cpp:118
 msgid "Nebulas background images"
-msgstr "星云背景影像"
+msgstr "星雲背景影像"
 
 #: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1001 src/ui_viewDialog.h:1019
 msgid "Stars"
@@ -564,27 +567,27 @@ msgstr "行星標籤"
 
 #: src/gui/StelGui.cpp:121
 msgid "Planet orbits"
-msgstr ""
+msgstr "行星軌道"
 
 #: src/gui/StelGui.cpp:122
 msgid "Planet trails"
-msgstr ""
+msgstr "行星路徑"
 
 #: src/gui/StelGui.cpp:124
 msgid "Night mode"
-msgstr "夜间模式"
+msgstr "夜間模式"
 
 #: src/gui/StelGui.cpp:125
 msgid "Full-screen mode"
-msgstr "全萤幕模式"
+msgstr "全螢幕模式"
 
 #: src/gui/StelGui.cpp:126
 msgid "Flip scene horizontally"
-msgstr "水平翻转"
+msgstr "水平翻轉"
 
 #: src/gui/StelGui.cpp:127
 msgid "Flip scene vertically"
-msgstr "垂直翻转"
+msgstr "垂直翻轉"
 
 #: src/gui/StelGui.cpp:129
 msgid "Windows"
@@ -592,11 +595,11 @@ msgstr "視窗"
 
 #: src/gui/StelGui.cpp:130
 msgid "Help window"
-msgstr "说明"
+msgstr "說明"
 
 #: src/gui/StelGui.cpp:131
 msgid "Configuration window"
-msgstr "设定"
+msgstr "設定"
 
 #: src/gui/StelGui.cpp:132
 msgid "Search window"
@@ -604,43 +607,43 @@ msgstr "搜尋視窗"
 
 #: src/gui/StelGui.cpp:133
 msgid "Sky and viewing options window"
-msgstr "星空及显示"
+msgstr "星空及顯示"
 
 #: src/gui/StelGui.cpp:134
 msgid "Date/time window"
-msgstr "日期/時监"
+msgstr "日期/時監"
 
 #: src/gui/StelGui.cpp:135
 msgid "Location window"
-msgstr "所在地点"
+msgstr "所在地點"
 
 #: src/gui/StelGui.cpp:137
 msgid "Script console window"
-msgstr ""
+msgstr "腳本控制台窗口"
 
 #: src/gui/StelGui.cpp:140 src/ui_dateTimeDialogGui.h:294
 msgid "Date and Time"
-msgstr "日期及时间"
+msgstr "日期與時間"
 
 #: src/gui/StelGui.cpp:144
 msgid "Decrease time speed"
-msgstr "减慢时间速度"
+msgstr "減慢時間速度"
 
 #: src/gui/StelGui.cpp:145
 msgid "Increase time speed"
-msgstr "加快时间速度"
+msgstr "加快時間速度"
 
 #: src/gui/StelGui.cpp:146
 msgid "Set normal time rate"
-msgstr "正常时间速度"
+msgstr "正常時間速度"
 
 #: src/gui/StelGui.cpp:147
 msgid "Decrease time speed (a little)"
-msgstr ""
+msgstr "減慢時間速度 (稍微)"
 
 #: src/gui/StelGui.cpp:148
 msgid "Increase time speed (a little)"
-msgstr ""
+msgstr "加快時間速度 (稍微)"
 
 #: src/gui/StelGui.cpp:149
 msgid "Set time rate to zero"
@@ -648,39 +651,39 @@ msgstr "將時間流速設定為零"
 
 #: src/gui/StelGui.cpp:150
 msgid "Set time to now"
-msgstr "跳至当前时刻"
+msgstr "跳至當前時刻"
 
 #: src/gui/StelGui.cpp:151
 msgid "Add 1 solar hour"
-msgstr "增加 1 太阳时"
+msgstr "增加1太陽時"
 
 #: src/gui/StelGui.cpp:152
 msgid "Subtract 1 solar hour"
-msgstr "减少1 太阳时"
+msgstr "減少1太陽時"
 
 #: src/gui/StelGui.cpp:153
 msgid "Add 1 solar day"
-msgstr "增加 1 太阳日"
+msgstr "增加1太陽日"
 
 #: src/gui/StelGui.cpp:154
 msgid "Subtract 1 solar day"
-msgstr "减少 1 太阳日"
+msgstr "減少1太陽日"
 
 #: src/gui/StelGui.cpp:155
 msgid "Add 1 solar week"
-msgstr "增加 1 太阳周"
+msgstr "增加1太陽週"
 
 #: src/gui/StelGui.cpp:156
 msgid "Subtract 1 solar week"
-msgstr "减少 1 太阳周"
+msgstr "減少1太陽週"
 
 #: src/gui/StelGui.cpp:157
 msgid "Add 1 sidereal day"
-msgstr "增加 1 恒星日"
+msgstr "增加1恆星日"
 
 #: src/gui/StelGui.cpp:158
 msgid "Subtract 1 sidereal day"
-msgstr "减少 1 恒星日"
+msgstr "減少1恆星日"
 
 #: src/gui/StelGui.cpp:159
 msgid "Add 1 sidereal week"
@@ -688,23 +691,23 @@ msgstr "增加 1 恒星周"
 
 #: src/gui/StelGui.cpp:160
 msgid "Subtract 1 sidereal week"
-msgstr "减少 1 恒星周"
+msgstr "減少1恆星週"
 
 #: src/gui/StelGui.cpp:163
 msgid "Center on selected object"
-msgstr "将已选物体置中"
+msgstr "將已選物體置中"
 
 #: src/gui/StelGui.cpp:164
 msgid "Track object"
-msgstr "追随物体"
+msgstr "追隨物體"
 
 #: src/gui/StelGui.cpp:165
 msgid "Zoom in on selected object"
-msgstr "放大已选的物体"
+msgstr "放大已選的物體"
 
 #: src/gui/StelGui.cpp:166
 msgid "Zoom out"
-msgstr "缩小"
+msgstr "縮小"
 
 #: src/gui/StelGui.cpp:167
 msgid "Set home planet to selected planet"
@@ -712,11 +715,11 @@ msgstr "將選擇的行星設為預設位置"
 
 #: src/gui/StelGui.cpp:170
 msgid "Switch between equatorial and azimuthal mount"
-msgstr "赤道仪/水平仪切换"
+msgstr "赤道儀/水平儀切換"
 
 #: src/gui/StelGui.cpp:171
 msgid "Quit"
-msgstr "退出 (Quit)"
+msgstr "退出"
 
 #: src/gui/StelGui.cpp:172
 msgid "Save screenshot"
@@ -728,11 +731,11 @@ msgstr "自動隱藏水平工具列"
 
 #: src/gui/StelGui.cpp:176
 msgid "Auto hide vertical button bar"
-msgstr "自动隐藏垂直工具栏"
+msgstr "自動隱藏垂直工具欄"
 
 #: src/gui/StelGui.cpp:177
 msgid "Toggle visibility of GUI"
-msgstr ""
+msgstr "切換顯示的圖形用戶界面"
 
 #: src/gui/StelGuiItems.cpp:541
 #, no-c-format, qt-format
@@ -745,19 +748,19 @@ msgstr "沒有資訊"
 
 #: src/gui/ViewDialog.cpp:469
 msgid "No shooting stars"
-msgstr "无流星"
+msgstr "無流星"
 
 #: src/gui/ViewDialog.cpp:472
 msgid "Normal rate"
-msgstr "正常频率"
+msgstr "正常頻率"
 
 #: src/gui/ViewDialog.cpp:475
 msgid "Standard Perseids rate"
-msgstr "标准英仙座流星雨频率"
+msgstr "標準英仙座流星雨頻率"
 
 #: src/gui/ViewDialog.cpp:478
 msgid "Exceptional Leonid rate"
-msgstr "超量狮子座流星雨"
+msgstr "超量獅子座流星雨"
 
 #: src/gui/ViewDialog.cpp:481
 msgid "Highest rate ever (1966 Leonids)"
@@ -765,26 +768,26 @@ msgstr "至今最高频率 (1966 獅子座流星雨)"
 
 #: src/gui/LocationDialog.cpp:332
 msgid "New Location"
-msgstr ""
+msgstr "新的位置"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
-msgstr ""
+msgstr "選擇一個 ZIP檔案，其中包含一個 Stellarium的風景"
 
 #. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 #: src/gui/AddRemoveLandscapesDialog.cpp:114
 msgid "ZIP archives"
-msgstr ""
+msgstr "ZIP檔案"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:127
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
-msgstr ""
+msgstr "風景%1”已成功安裝。"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:128
 #: src/gui/AddRemoveLandscapesDialog.cpp:155
 msgid "Success"
-msgstr ""
+msgstr "完成"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:141
 #: src/gui/AddRemoveLandscapesDialog.cpp:211
@@ -880,19 +883,19 @@ msgstr "火衛一(弗伯斯)"
 
 #: src/translations.h:41
 msgid "Ceres"
-msgstr ""
+msgstr "穀神星"
 
 #: src/translations.h:42
 msgid "Pallas"
-msgstr ""
+msgstr "智神星"
 
 #: src/translations.h:43
 msgid "Juno"
-msgstr ""
+msgstr "婚神星"
 
 #: src/translations.h:44
 msgid "Vesta"
-msgstr ""
+msgstr "灶神星"
 
 #: src/translations.h:45
 msgid "Jupiter"
@@ -916,52 +919,52 @@ msgstr "木衛四(卡利斯托)"
 
 #: src/translations.h:50
 msgid "Amalthea"
-msgstr ""
+msgstr "羊神星"
 
 #: src/translations.h:51
 msgid "Himalia"
-msgstr ""
+msgstr "木衛六(希瑪利亞)"
 
 #: src/translations.h:52
 msgid "Elara"
-msgstr ""
+msgstr "木衛七(伊拉拉)"
 
 #: src/translations.h:53
 msgid "Pasiphae"
-msgstr ""
+msgstr "木衛八(帕西法爾)"
 
 #: src/translations.h:54
 msgid "Sinope"
-msgstr ""
+msgstr "木衛九(希諾佩)"
 
 #: src/translations.h:55
 msgid "Lysithea"
-msgstr ""
+msgstr "木衛十(萊西薩)"
 
 #: src/translations.h:56
 msgid "Carme"
-msgstr ""
+msgstr "木衛十一(加爾尼)"
 
 #: src/translations.h:57
 msgid "Ananke"
-msgstr ""
+msgstr "木衛十二(阿南刻)"
 
 #: src/translations.h:58
 msgid "Leda"
-msgstr ""
+msgstr "木衛十三(勒達)"
 
 #: src/translations.h:59
 msgid "Thebe"
-msgstr ""
+msgstr "木衛十四(寧芙忒拜)"
 
 #: src/translations.h:60
 msgid "Adrastea"
-msgstr ""
+msgstr "木衛十五(阿德剌斯忒亞)"
 
 #. TRANSLATORS: Asteroid (9) Metis
 #: src/translations.h:61 src/translations.h:106
 msgid "Metis"
-msgstr ""
+msgstr "木衛十六(墨提斯)"
 
 #: src/translations.h:62
 msgid "Saturn"
@@ -981,11 +984,11 @@ msgstr "土衛三(蒂西斯)"
 
 #: src/translations.h:66
 msgid "Dione"
-msgstr "土卫四(Dione)"
+msgstr "土衛四(戴奧妮)"
 
 #: src/translations.h:67
 msgid "Rhea"
-msgstr ""
+msgstr "土衛五(麗雅)"
 
 #: src/translations.h:68
 msgid "Titan"
