@@ -478,7 +478,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_insi
 {
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 	SpecialZoneData<Star> *const z = getZones() + index;
-	Vec3f vf;
+	Vec3f vf;	
 	const Star *const end = z->getStars() + z->size;
 	static const double d2000 = 2451545.0;
 	const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
@@ -489,7 +489,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_insi
 		if (*tmpRcmag<=0.f)
 			break;
 		s->getJ2000Pos(z,movementFactor, vf);
-		if (drawer->drawPointSource(sPainter, vf, tmpRcmag, s->bV, !is_inside) && s->hasName() && s->mag < maxMagStarName)
+		if (drawer->drawPointSource(sPainter, vf, tmpRcmag, s->bV, !is_inside) && s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
 		{
 			const float offset = *tmpRcmag*0.7f;
 			const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.2f, 0.2f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;
