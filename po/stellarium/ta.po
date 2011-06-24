@@ -7,123 +7,135 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-05-10 14:10+0700\n"
+"POT-Creation-Date: 2011-06-17 18:17+0700\n"
 "PO-Revision-Date: 2011-04-01 15:28+0000\n"
 "Last-Translator: balajijagadesh பாலாஜி <Unknown>\n"
 "Language-Team: Tamil <ta@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-31 04:39+0000\n"
-"X-Generator: Launchpad (build 12959)\n"
+"X-Launchpad-Export-Date: 2011-06-24 04:36+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 
-#: src/core/modules/GridLinesMgr.cpp:516
+#: src/core/modules/GridLinesMgr.cpp:517
 msgid "Meridian"
 msgstr "மெரிடியன்"
 
-#: src/core/modules/GridLinesMgr.cpp:520
+#: src/core/modules/GridLinesMgr.cpp:521
 msgid "Ecliptic"
 msgstr "கிரகணம்"
 
-#: src/core/modules/GridLinesMgr.cpp:524
+#: src/core/modules/GridLinesMgr.cpp:525
 msgid "Equator"
 msgstr "பூமத்திய ரேகை"
 
-#: src/core/modules/LandscapeMgr.cpp:450
+#: src/core/modules/LandscapeMgr.cpp:488
 msgid "Author: "
 msgstr "எழுதியவர் "
 
-#: src/core/modules/LandscapeMgr.cpp:453
+#: src/core/modules/LandscapeMgr.cpp:491
 msgid "Location: "
 msgstr "இடம்: "
 
-#: src/core/modules/LandscapeMgr.cpp:458
+#: src/core/modules/LandscapeMgr.cpp:496
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:461
+#: src/core/modules/LandscapeMgr.cpp:499
 msgid "Planet: "
 msgstr "கோள் "
 
-#: src/core/modules/Nebula.cpp:92
+#: src/core/modules/Nebula.cpp:96
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "வகை: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:95 src/core/modules/Planet.cpp:122
+#: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:120
+#: plugins/Supernovas/src/Supernova.cpp:98
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "பருமை: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:100
+#: src/core/modules/Nebula.cpp:104
 #, qt-format
 msgid "Size: %1"
 msgstr "அளவு: %1"
 
-#: src/core/modules/Nebula.cpp:269
+#: src/core/modules/Nebula.cpp:284
 msgid "Galaxy"
 msgstr "விண்மீன் மண்டலம்"
 
-#: src/core/modules/Nebula.cpp:272
+#: src/core/modules/Nebula.cpp:287
 msgid "Open cluster"
 msgstr "பரவிய விண்மீன் கொத்து"
 
-#: src/core/modules/Nebula.cpp:275
+#: src/core/modules/Nebula.cpp:290
 msgid "Globular cluster"
 msgstr "கோள விண்மீன் கொத்து"
 
-#: src/core/modules/Nebula.cpp:278
+#: src/core/modules/Nebula.cpp:293
 msgid "Nebula"
 msgstr "நெபுலா"
 
-#: src/core/modules/Nebula.cpp:281
+#: src/core/modules/Nebula.cpp:296
 msgid "Planetary nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:284
+#: src/core/modules/Nebula.cpp:299
 msgid "Cluster associated with nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:287
+#: src/core/modules/Nebula.cpp:302
 msgid "Unknown"
 msgstr "தெரியாதது"
 
-#: src/core/modules/Nebula.cpp:290
+#: src/core/modules/Nebula.cpp:305
 msgid "Undocumented type"
 msgstr "ஆவணம் செய்யபடாத வகை"
 
-#: src/core/modules/Planet.cpp:125 src/core/modules/StarWrapper.cpp:114
+#: src/core/modules/Planet.cpp:123 src/core/modules/StarWrapper.cpp:112
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "பூரண பருமை :%1"
 
-#: src/core/modules/Planet.cpp:132
+#: src/core/modules/Planet.cpp:136
+#, qt-format
+msgid "Ecliptic Geocentric (of date): %1/%2"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:137
+#, qt-format
+msgid "Obliquity (of date): %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:143
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr "தொலைவு: %1AU (வானியல் அலகு)"
 
-#: src/core/modules/Planet.cpp:136
+#: src/core/modules/Planet.cpp:147
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "தோற்ற நிலை விட்டம்: %1"
 
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:110
+#: src/core/modules/StarWrapper.cpp:51 src/core/modules/StarWrapper.cpp:108
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
 msgstr "எண் மதிப்பு: <b>%1</b> (B-V: %2)"
 
-#: src/core/modules/StarWrapper.cpp:120
+#: src/core/modules/StarWrapper.cpp:118
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "நிறமாலை வகை: %1"
 
-#: src/core/modules/StarWrapper.cpp:124
+#: src/core/modules/StarWrapper.cpp:122
+#: plugins/Supernovas/src/Supernova.cpp:107
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "தொலைவு: %1 ஒளி வருடம்"
 
-#: src/core/modules/StarWrapper.cpp:127
+#: src/core/modules/StarWrapper.cpp:125
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "இடமாறுதோற்றம்: %1\""
@@ -216,74 +228,82 @@ msgid ""
 "of perspective is set to an infinite distance."
 msgstr ""
 
-#: src/core/StelObject.cpp:65
+#: src/core/StelObject.cpp:79
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
 msgstr "RA/DE (J2000): %1/%2"
 
-#: src/core/StelObject.cpp:72
+#: src/core/StelObject.cpp:86
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
 msgstr "RA/DE (of தேதி): %1/%2"
 
-#: src/core/StelObject.cpp:80
+#: src/core/StelObject.cpp:94 src/core/StelObject.cpp:97
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr ""
 
-#: src/core/StelObject.cpp:91
+#: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
+msgid "(geometric)"
+msgstr ""
+
+#: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
+msgid "(apparent)"
+msgstr ""
+
+#: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:297
+#: src/gui/ConfigurationDialog.cpp:295
 msgid "Select screenshot directory"
 msgstr "திரைவெட்டு கோபகத்தை தேர்வு செய்"
 
-#: src/gui/ConfigurationDialog.cpp:463
+#: src/gui/ConfigurationDialog.cpp:461
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:471
+#: src/gui/ConfigurationDialog.cpp:469
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:511
+#: src/gui/ConfigurationDialog.cpp:509
 msgid "Authors"
 msgstr "படைப்பாளர்கள்"
 
-#: src/gui/ConfigurationDialog.cpp:515 src/gui/ViewDialog.cpp:347
+#: src/gui/ConfigurationDialog.cpp:513 src/gui/ViewDialog.cpp:363
 msgid "Contact"
 msgstr "தொடர்புகொள்"
 
-#: src/gui/ConfigurationDialog.cpp:587
+#: src/gui/ConfigurationDialog.cpp:585
 msgid "Author"
 msgstr "படைப்பாளர்"
 
-#: src/gui/ConfigurationDialog.cpp:588
+#: src/gui/ConfigurationDialog.cpp:586
 msgid "License"
 msgstr "உரிமம்"
 
-#: src/gui/ConfigurationDialog.cpp:617
+#: src/gui/ConfigurationDialog.cpp:615
 msgid "Running script: "
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:624
+#: src/gui/ConfigurationDialog.cpp:622
 msgid "Running script: [none]"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:667
+#: src/gui/ConfigurationDialog.cpp:665
 msgid "Finished downloading all star catalogs!"
 msgstr "அனைத்து நட்சத்திர பட்டியல்கள் பதிவிறக்கம் செய்யப்பட்டுவிட்டது"
 
-#: src/gui/ConfigurationDialog.cpp:676
+#: src/gui/ConfigurationDialog.cpp:674
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:678
+#: src/gui/ConfigurationDialog.cpp:676
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -294,7 +314,7 @@ msgstr ""
 "நட்சத்திர எண்ணிக்கை: %2 மில்லியன் \n"
 "எண் மதிப்பு வரையறை: %3- %4"
 
-#: src/gui/ConfigurationDialog.cpp:687
+#: src/gui/ConfigurationDialog.cpp:685
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -302,7 +322,7 @@ msgstr ""
 "புது நட்சத்திரங்களின் விவர ஏடுகள் பதிவிறக்கம் செய்யப்பட்டுவிட்டது!\n"
 "அவைகளை காட்சிக்கு வைக்க மறுதொடக்கம் செய்யவும்."
 
-#: src/gui/ConfigurationDialog.cpp:725 src/gui/ConfigurationDialog.cpp:759
+#: src/gui/ConfigurationDialog.cpp:723 src/gui/ConfigurationDialog.cpp:757
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -311,18 +331,18 @@ msgstr ""
 "பதிவிறக்கத்தில் பிழை %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:730
+#: src/gui/ConfigurationDialog.cpp:728
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr "பதிவிறக்கம் நடைபெற்று வருகிறது %1"
 
-#: src/gui/ConfigurationDialog.cpp:810
+#: src/gui/ConfigurationDialog.cpp:808
 msgid "Verifying file integrity..."
 msgstr "கோப்பு ஒழுங்கமைவு பரிசோதிக்கபடுகிறது..."
 
-#: src/gui/ConfigurationDialog.cpp:814
+#: src/gui/ConfigurationDialog.cpp:812
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -507,15 +527,15 @@ msgstr "விண்மீன் குழு விவரக்குறிப�
 msgid "Constellation boundaries"
 msgstr "விண்மீன் குழு எல்லைகள்"
 
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1033
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1096
 msgid "Azimuthal grid"
 msgstr ""
 
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1031
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1094
 msgid "Equatorial grid"
 msgstr "மத்தியகோட்டிற்குரிய கட்டம்"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1032
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1095
 msgid "Equatorial J2000 grid"
 msgstr ""
 
@@ -523,19 +543,19 @@ msgstr ""
 msgid "Galactic grid"
 msgstr ""
 
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1036
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1099
 msgid "Ecliptic line"
 msgstr ""
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1034
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1097
 msgid "Equator line"
 msgstr "பூமத்திய ரேகை"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1035
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1098
 msgid "Meridian line"
 msgstr "உச்சநெடுங்கோடு"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1037
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1100
 msgid "Cardinal points"
 msgstr "சிறப்பியல்புப் புள்ளிகள்"
 
@@ -543,7 +563,7 @@ msgstr "சிறப்பியல்புப் புள்ளிகள்"
 msgid "Ground"
 msgstr "தரை"
 
-#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1015
+#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1074
 msgid "Atmosphere"
 msgstr "வளிமண்டலம்"
 
@@ -551,7 +571,7 @@ msgstr "வளிமண்டலம்"
 msgid "Fog"
 msgstr "மூடு பனி"
 
-#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1020
+#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1083
 msgid "Nebulas"
 msgstr "நெபுளாக்கள்"
 
@@ -559,7 +579,7 @@ msgstr "நெபுளாக்கள்"
 msgid "Nebulas background images"
 msgstr "பின்னணி நெபுலா படங்கள்"
 
-#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1001 src/ui_viewDialog.h:1019
+#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1060 src/ui_viewDialog.h:1082
 msgid "Stars"
 msgstr "நட்சத்திரங்கள்"
 
@@ -744,31 +764,31 @@ msgstr ""
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:401
+#: src/gui/ViewDialog.cpp:417
 msgid "No description"
 msgstr "விவரணம் இல்லை"
 
-#: src/gui/ViewDialog.cpp:469
+#: src/gui/ViewDialog.cpp:501
 msgid "No shooting stars"
 msgstr "எரிநட்சத்திரங்கள் இல்லை"
 
-#: src/gui/ViewDialog.cpp:472
+#: src/gui/ViewDialog.cpp:504
 msgid "Normal rate"
 msgstr "வழக்கமான வேகம்"
 
-#: src/gui/ViewDialog.cpp:475
+#: src/gui/ViewDialog.cpp:507
 msgid "Standard Perseids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:478
+#: src/gui/ViewDialog.cpp:510
 msgid "Exceptional Leonid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:481
+#: src/gui/ViewDialog.cpp:513
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:332
+#: src/gui/LocationDialog.cpp:334
 msgid "New Location"
 msgstr "புதிய இடம்"
 
@@ -1154,335 +1174,345 @@ msgstr ""
 msgid "Hektor"
 msgstr ""
 
+#. TRANSLATORS: Name of supernova SN 1572A
+#: src/translations.h:120
+msgid "Tycho's Supernova"
+msgstr ""
+
+#. TRANSLATORS: Name of supernova SN 1604A
 #: src/translations.h:122
+msgid "Kepler's Supernova"
+msgstr ""
+
+#: src/translations.h:126
 msgid "N"
 msgstr "வ (N)"
 
-#: src/translations.h:123
+#: src/translations.h:127
 msgid "S"
 msgstr "தெ (S)"
 
-#: src/translations.h:124
+#: src/translations.h:128
 msgid "E"
 msgstr "கி (E)"
 
-#: src/translations.h:125
+#: src/translations.h:129
 msgid "W"
 msgstr "மே (W)"
 
-#: src/translations.h:128
+#: src/translations.h:132
 msgid "Aztec"
 msgstr "ஏஸ்டெக்"
 
-#: src/translations.h:129
+#: src/translations.h:133
 msgid "Chinese"
 msgstr "சைனீஸ்"
 
-#: src/translations.h:130
+#: src/translations.h:134
 msgid "Egyptian"
 msgstr "எகிப்தியன்"
 
-#: src/translations.h:131
+#: src/translations.h:135
 msgid "Inuit"
 msgstr ""
 
-#: src/translations.h:132
+#: src/translations.h:136
 msgid "Korean"
 msgstr "கொரியன்"
 
-#: src/translations.h:133
+#: src/translations.h:137
 msgid "Lakota"
 msgstr "லகோடா"
 
-#: src/translations.h:134
+#: src/translations.h:138
 msgid "Maori"
 msgstr "மௌரி"
 
-#: src/translations.h:135
+#: src/translations.h:139
 msgid "Navajo"
 msgstr "நவாஜோ"
 
-#: src/translations.h:136
+#: src/translations.h:140
 msgid "Norse"
 msgstr ""
 
-#: src/translations.h:137
+#: src/translations.h:141
 msgid "Polynesian"
 msgstr ""
 
-#: src/translations.h:138
+#: src/translations.h:142
 msgid "Sami"
 msgstr ""
 
-#: src/translations.h:139
+#: src/translations.h:143
 msgid "Tupi-Guarani"
 msgstr ""
 
-#: src/translations.h:140
+#: src/translations.h:144
 msgid "Western"
 msgstr "வெஸ்டர்ன்"
 
-#: src/translations.h:144
+#: src/translations.h:148
 msgid "Set Location "
 msgstr "இடத்தை அமை "
 
-#: src/translations.h:145
+#: src/translations.h:149
 msgid "Set Time "
 msgstr "நேரத்தை அமை "
 
-#: src/translations.h:146
+#: src/translations.h:150
 msgid "General "
 msgstr "பொதுவானவை "
 
-#: src/translations.h:147
+#: src/translations.h:151
 msgid "Stars "
 msgstr "நட்சதிரங்கள் "
 
-#: src/translations.h:148
+#: src/translations.h:152
 msgid "Colors "
 msgstr "வண்ணங்கள் "
 
-#: src/translations.h:149
+#: src/translations.h:153
 msgid "Effects "
 msgstr "விளைவுகள் "
 
-#: src/translations.h:150
+#: src/translations.h:154
 msgid "Scripts "
 msgstr ""
 
-#: src/translations.h:151
+#: src/translations.h:155
 msgid "Administration "
 msgstr "நிர்வாகம் "
 
-#: src/translations.h:153
+#: src/translations.h:157
 msgid "Latitude: "
 msgstr "நில நேர்க்கோடு "
 
-#: src/translations.h:154
+#: src/translations.h:158
 msgid "Longitude: "
 msgstr "நில நிரைக்கோடு "
 
-#: src/translations.h:155
+#: src/translations.h:159
 msgid "Altitude (m): "
 msgstr "உயரம் (மீ) "
 
-#: src/translations.h:156
+#: src/translations.h:160
 msgid "Solar System Body: "
 msgstr ""
 
-#: src/translations.h:158
+#: src/translations.h:162
 msgid "Sky Time: "
 msgstr "வான் நேரம்: "
 
-#: src/translations.h:159
+#: src/translations.h:163
 msgid "Set Time Zone: "
 msgstr "சமநேர மண்டலத்தை அமை: "
 
-#: src/translations.h:160
+#: src/translations.h:164
 msgid "Day keys: "
 msgstr ""
 
-#: src/translations.h:161
+#: src/translations.h:165
 msgid "Calendar"
 msgstr "நாள்காட்டி:"
 
-#: src/translations.h:162
+#: src/translations.h:166
 msgid "Sidereal"
 msgstr "மீன்வழி"
 
-#: src/translations.h:163
+#: src/translations.h:167
 msgid "Preset Sky Time: "
 msgstr ""
 
-#: src/translations.h:164
+#: src/translations.h:168
 msgid "Sky Time At Start-up: "
 msgstr ""
 
-#: src/translations.h:165
+#: src/translations.h:169
 msgid "Actual Time"
 msgstr "உண்மையான நேரம்"
 
-#: src/translations.h:166
+#: src/translations.h:170
 msgid "Preset Time"
 msgstr "முன் நிறுவு நேரம்"
 
-#: src/translations.h:167
+#: src/translations.h:171
 msgid "Time Display Format: "
 msgstr ""
 
-#: src/translations.h:168
+#: src/translations.h:172
 msgid "Date Display Format: "
 msgstr "தேதியின் காட்சி வடிவூட்டம் "
 
-#: src/translations.h:170
+#: src/translations.h:174
 msgid "Sky Culture: "
 msgstr ""
 
-#: src/translations.h:171
+#: src/translations.h:175
 msgid "Sky Language: "
 msgstr ""
 
-#: src/translations.h:173
+#: src/translations.h:177
 msgid "Show: "
 msgstr "காட்டு: "
 
-#: src/translations.h:174
+#: src/translations.h:178
 msgid "Star Value Multiplier: "
 msgstr ""
 
-#: src/translations.h:175
+#: src/translations.h:179
 msgid "Magnitude Sizing Multiplier: "
 msgstr ""
 
-#: src/translations.h:176
+#: src/translations.h:180
 msgid "Maximum Magnitude to Label: "
 msgstr ""
 
-#: src/translations.h:177
+#: src/translations.h:181
 msgid "Twinkling: "
 msgstr "மினுமினுப்பு: "
 
-#: src/translations.h:178
+#: src/translations.h:182
 msgid "Limiting Magnitude: "
 msgstr ""
 
-#: src/translations.h:180
+#: src/translations.h:184
 msgid "Constellation Lines"
 msgstr ""
 
-#: src/translations.h:181
+#: src/translations.h:185
 msgid "Constellation Names"
 msgstr "நட்சத்திரக்கூட்டப் பெயர்கள்"
 
-#: src/translations.h:182
+#: src/translations.h:186
 msgid "Constellation Art Intensity"
 msgstr ""
 
-#: src/translations.h:183
+#: src/translations.h:187
 msgid "Constellation Boundaries"
 msgstr ""
 
-#: src/translations.h:184
+#: src/translations.h:188
 msgid "Cardinal Points"
 msgstr ""
 
-#: src/translations.h:185
+#: src/translations.h:189
 msgid "Planet Names"
 msgstr "கோள் பெயர்கள்"
 
-#: src/translations.h:186
+#: src/translations.h:190
 msgid "Planet Orbits"
 msgstr "கோள் சுற்று பாதை"
 
-#: src/translations.h:187
+#: src/translations.h:191
 msgid "Planet Trails"
 msgstr "கோள் தடங்கள்"
 
-#: src/translations.h:188
+#: src/translations.h:192
 msgid "Meridian Line"
 msgstr ""
 
-#: src/translations.h:189
+#: src/translations.h:193
 msgid "Azimuthal Grid"
 msgstr ""
 
-#: src/translations.h:190
+#: src/translations.h:194
 msgid "Equatorial Grid"
 msgstr ""
 
-#: src/translations.h:191
+#: src/translations.h:195
 msgid "Equator Line"
 msgstr "பூமத்திய ரேகை"
 
-#: src/translations.h:192
+#: src/translations.h:196
 msgid "Ecliptic Line"
 msgstr ""
 
-#: src/translations.h:193
+#: src/translations.h:197
 msgid "Nebula Names"
 msgstr ""
 
-#: src/translations.h:194
+#: src/translations.h:198
 msgid "Nebula Circles"
 msgstr ""
 
-#: src/translations.h:196
+#: src/translations.h:200
 msgid "Light Pollution Luminance: "
 msgstr ""
 
-#: src/translations.h:197
+#: src/translations.h:201
 msgid "Landscape: "
 msgstr ""
 
-#: src/translations.h:198
+#: src/translations.h:202
 msgid "Manual zoom: "
 msgstr "கைமுறை உரு அளவு "
 
-#: src/translations.h:199
+#: src/translations.h:203
 msgid "Object Sizing Rule: "
 msgstr ""
 
-#: src/translations.h:200
+#: src/translations.h:204
 msgid "Magnitude Scaling Multiplier: "
 msgstr ""
 
-#: src/translations.h:201
+#: src/translations.h:205
 msgid "Milky Way intensity: "
 msgstr ""
 
-#: src/translations.h:202
+#: src/translations.h:206
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr ""
 
-#: src/translations.h:203
+#: src/translations.h:207
 msgid "Zoom Duration: "
 msgstr "உரு அளவு நேரம்: "
 
-#: src/translations.h:204
+#: src/translations.h:208
 msgid "Cursor Timeout: "
 msgstr ""
 
-#: src/translations.h:205
+#: src/translations.h:209
 msgid "Correct for light travel time: "
 msgstr ""
 
-#: src/translations.h:207
+#: src/translations.h:211
 msgid "Local Script: "
 msgstr ""
 
-#: src/translations.h:208
+#: src/translations.h:212
 msgid "CD/DVD Script: "
 msgstr ""
 
-#: src/translations.h:209
+#: src/translations.h:213
 msgid "USB Script: "
 msgstr ""
 
-#: src/translations.h:210
+#: src/translations.h:214
 msgid "Arrow down to load list."
 msgstr ""
 
-#: src/translations.h:211
+#: src/translations.h:215
 msgid "Select and exit to run."
 msgstr "இயக்குவதற்கு தேர்வு செய்துவிட்டு வெளியேறவும்"
 
-#: src/translations.h:213
+#: src/translations.h:217
 msgid "Load Default Configuration: "
 msgstr ""
 
-#: src/translations.h:214
+#: src/translations.h:218
 msgid "Save Current Configuration as Default: "
 msgstr ""
 
-#: src/translations.h:215
+#: src/translations.h:219
 msgid "Shut Down: "
 msgstr "அணை: "
 
-#: src/translations.h:216
+#: src/translations.h:220
 msgid "Update me via Internet: "
 msgstr "என்னை இணையம் முலம் நிகழ்நிலைப்படுத்த "
 
-#: src/translations.h:217
+#: src/translations.h:221
 msgid "Set UI Locale: "
 msgstr ""
 
@@ -1568,284 +1598,304 @@ msgstr "நாடு:"
 msgid "Planet:"
 msgstr "கோள்:"
 
-#: src/ui_searchDialogGui.h:440 src/ui_searchDialogGui.h:441
+#: src/ui_searchDialogGui.h:450
 msgid "Find Object"
 msgstr "பொருளைக் கண்டுபிடி"
 
-#: src/ui_searchDialogGui.h:446
-msgid "Keyboard for Greek input"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:449
-msgid "alpha"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:452
-msgid "beta"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:455
-msgid "gamma"
+#: src/ui_searchDialogGui.h:451
+msgid "Find Object or Position"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:458
-msgid "delta"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:461
-msgid "epsilon"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:464
-msgid "zeta"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:467
-msgid "eta"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:470
-msgid "theta"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:473
 msgid "iota"
 msgstr ""
 
+#: src/ui_searchDialogGui.h:461
+msgid "alpha"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:464
+msgid "beta"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:467
+msgid "gamma"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:470
+msgid "delta"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:473
+msgid "epsilon"
+msgstr ""
+
 #: src/ui_searchDialogGui.h:476
-msgid "kappa"
+msgid "zeta"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:479
-msgid "lambda"
+msgid "eta"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:482
-msgid "mu"
+msgid "theta"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:485
-msgid "nu"
+msgid "kappa"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:488
-msgid "xi"
+msgid "lambda"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:491
-msgid "omicron"
+msgid "mu"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:494
-msgid "pi"
+msgid "nu"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:497
-msgid "rho"
+msgid "xi"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:500
-msgid "sigma"
+msgid "omicron"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:503
-msgid "tau"
+msgid "pi"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:506
-msgid "upsilon"
+msgid "rho"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:509
-msgid "phi"
+msgid "sigma"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:512
-msgid "chi"
+msgid "tau"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:515
-msgid "psi"
+msgid "upsilon"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:518
+msgid "phi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:521
+msgid "chi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:524
+msgid "psi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:527
 msgid "omega"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:520
+#: src/ui_searchDialogGui.h:529
+msgid "Greek letters for Bayer designations"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:530
+msgid "Object"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:531
 msgid "RA/Dec (J2000):"
 msgstr ""
 
-#: src/ui_viewDialog.h:986
-msgid "View"
-msgstr "பார்வையிடு"
-
-#: src/ui_viewDialog.h:992
-msgid "Sky"
-msgstr "வானம்"
-
-#: src/ui_viewDialog.h:994
-msgid "Markings"
-msgstr "குறியிடுதல்"
-
-#: src/ui_viewDialog.h:996
-msgid "Landscape"
-msgstr "நிலக்காட்சி"
-
-#: src/ui_viewDialog.h:998
-msgid "Starlore"
-msgstr ""
-
-#: src/ui_viewDialog.h:1002
-msgid "Absolute scale:"
-msgstr ""
-
-#: src/ui_viewDialog.h:1003
-msgid "Relative scale:"
-msgstr "சார்ந்த அளவுகோல்"
-
-#: src/ui_viewDialog.h:1004
-msgid "Twinkle:"
-msgstr "மினுமினுப்பு"
-
-#: src/ui_viewDialog.h:1006
-msgid "Dim faint stars when a very bright object is visible"
-msgstr ""
-
-#: src/ui_viewDialog.h:1008
-msgid "Dynamic eye adaptation"
-msgstr ""
-
-#: src/ui_viewDialog.h:1009
-msgid "Planets and satellites"
-msgstr "கோள் மற்றும் துணைக்கோள்"
-
-#: src/ui_viewDialog.h:1010
-msgid "Show planets"
-msgstr "கோள்களைக் காட்டு"
-
-#: src/ui_viewDialog.h:1011
-msgid "Show planet markers"
-msgstr "கோள் குறியீட்டை காட்டு"
-
-#: src/ui_viewDialog.h:1012
-msgid "Show planet orbits"
-msgstr "கோள் சுற்றுபாதையை காட்டு"
-
-#: src/ui_viewDialog.h:1013
-msgid "Simulate light speed"
-msgstr "ஒளி வேகத்தை ஒப்புருவாக்கு"
-
-#: src/ui_viewDialog.h:1014
-msgid "Scale Moon"
-msgstr ""
-
-#: src/ui_viewDialog.h:1016
-msgid "Show atmosphere"
-msgstr "வளிமண்டலத்தை காட்டு"
-
-#: src/ui_viewDialog.h:1017
-msgid "Light pollution: "
-msgstr "ஒளி மாசு: "
-
-#: src/ui_viewDialog.h:1018
-msgid "Labels and Markers"
-msgstr ""
-
-#: src/ui_viewDialog.h:1021
-msgid "Planets"
-msgstr "கோள்கள்"
-
-#: src/ui_viewDialog.h:1022
-msgid "Shooting Stars"
-msgstr "எரிநட்சத்திரங்கள்"
-
-#: src/ui_viewDialog.h:1023
-msgid "Hourly zenith rate:"
-msgstr ""
-
-#: src/ui_viewDialog.h:1024
-msgid "0"
-msgstr ""
-
-#: src/ui_viewDialog.h:1025
-msgid "10"
-msgstr "10"
-
-#: src/ui_viewDialog.h:1026
-msgid "80"
-msgstr "80"
-
-#: src/ui_viewDialog.h:1027
-msgid "10000"
-msgstr "10000"
-
-#: src/ui_viewDialog.h:1028
-msgid "144000"
-msgstr "144000"
-
-#: src/ui_viewDialog.h:1030
-msgid "Celestial Sphere"
-msgstr ""
-
-#: src/ui_viewDialog.h:1038
-msgid "Constellations"
-msgstr "நட்சத்திரக்கூட்டம்"
-
-#: src/ui_viewDialog.h:1039
-msgid "Show lines"
-msgstr "கோடுகளை காட்டு"
-
-#: src/ui_viewDialog.h:1040
-msgid "Show labels"
-msgstr "அட்டவணையை காண்பிக்கவும்"
-
-#: src/ui_viewDialog.h:1041
-msgid "Show boundaries"
-msgstr "எல்லையை காட்டு"
-
-#: src/ui_viewDialog.h:1042
-msgid "Show art"
-msgstr ""
-
-#: src/ui_viewDialog.h:1043
-msgid "Art brightness: "
-msgstr ""
-
-#: src/ui_viewDialog.h:1044
-msgid "Projection"
+#: src/ui_searchDialogGui.h:532
+msgid "Position"
 msgstr ""
 
 #: src/ui_viewDialog.h:1045
+msgid "View"
+msgstr "பார்வையிடு"
+
+#: src/ui_viewDialog.h:1051
+msgid "Sky"
+msgstr "வானம்"
+
+#: src/ui_viewDialog.h:1053
+msgid "Markings"
+msgstr "குறியிடுதல்"
+
+#: src/ui_viewDialog.h:1055
+msgid "Landscape"
+msgstr "நிலக்காட்சி"
+
+#: src/ui_viewDialog.h:1057
+msgid "Starlore"
+msgstr ""
+
+#: src/ui_viewDialog.h:1061
+msgid "Absolute scale:"
+msgstr ""
+
+#: src/ui_viewDialog.h:1062
+msgid "Relative scale:"
+msgstr "சார்ந்த அளவுகோல்"
+
+#: src/ui_viewDialog.h:1063
+msgid "Twinkle:"
+msgstr "மினுமினுப்பு"
+
+#: src/ui_viewDialog.h:1065
+msgid "Dim faint stars when a very bright object is visible"
+msgstr ""
+
+#: src/ui_viewDialog.h:1067
+msgid "Dynamic eye adaptation"
+msgstr ""
+
+#: src/ui_viewDialog.h:1068
+msgid "Planets and satellites"
+msgstr "கோள் மற்றும் துணைக்கோள்"
+
+#: src/ui_viewDialog.h:1069
+msgid "Show planets"
+msgstr "கோள்களைக் காட்டு"
+
+#: src/ui_viewDialog.h:1070
+msgid "Show planet markers"
+msgstr "கோள் குறியீட்டை காட்டு"
+
+#: src/ui_viewDialog.h:1071
+msgid "Show planet orbits"
+msgstr "கோள் சுற்றுபாதையை காட்டு"
+
+#: src/ui_viewDialog.h:1072
+msgid "Simulate light speed"
+msgstr "ஒளி வேகத்தை ஒப்புருவாக்கு"
+
+#: src/ui_viewDialog.h:1073
+msgid "Scale Moon"
+msgstr ""
+
+#: src/ui_viewDialog.h:1075
+msgid "Show atmosphere"
+msgstr "வளிமண்டலத்தை காட்டு"
+
+#: src/ui_viewDialog.h:1076
+msgid "Light pollution: "
+msgstr "ஒளி மாசு: "
+
+#: src/ui_viewDialog.h:1078
+msgid "pressure, temperature, extinction coefficient"
+msgstr ""
+
+#: src/ui_viewDialog.h:1080
+msgid "Refraction/Extinction settings..."
+msgstr ""
+
+#: src/ui_viewDialog.h:1081
+msgid "Labels and Markers"
+msgstr ""
+
+#: src/ui_viewDialog.h:1084
+msgid "Planets"
+msgstr "கோள்கள்"
+
+#: src/ui_viewDialog.h:1085
+msgid "Shooting Stars"
+msgstr "எரிநட்சத்திரங்கள்"
+
+#: src/ui_viewDialog.h:1086
+msgid "Hourly zenith rate:"
+msgstr ""
+
+#: src/ui_viewDialog.h:1087
+msgid "0"
+msgstr ""
+
+#: src/ui_viewDialog.h:1088
+msgid "10"
+msgstr "10"
+
+#: src/ui_viewDialog.h:1089
+msgid "80"
+msgstr "80"
+
+#: src/ui_viewDialog.h:1090
+msgid "10000"
+msgstr "10000"
+
+#: src/ui_viewDialog.h:1091
+msgid "144000"
+msgstr "144000"
+
+#: src/ui_viewDialog.h:1093
+msgid "Celestial Sphere"
+msgstr ""
+
+#: src/ui_viewDialog.h:1101
+msgid "Constellations"
+msgstr "நட்சத்திரக்கூட்டம்"
+
+#: src/ui_viewDialog.h:1102
+msgid "Show lines"
+msgstr "கோடுகளை காட்டு"
+
+#: src/ui_viewDialog.h:1103
+msgid "Show labels"
+msgstr "அட்டவணையை காண்பிக்கவும்"
+
+#: src/ui_viewDialog.h:1104
+msgid "Show boundaries"
+msgstr "எல்லையை காட்டு"
+
+#: src/ui_viewDialog.h:1105
+msgid "Show art"
+msgstr ""
+
+#: src/ui_viewDialog.h:1106
+msgid "Art brightness: "
+msgstr ""
+
+#: src/ui_viewDialog.h:1107
+msgid "Projection"
+msgstr ""
+
+#: src/ui_viewDialog.h:1108
 msgid "Add/remove landscapes..."
 msgstr "landscapeக்களை சேர்/நீக்கு..."
 
-#: src/ui_viewDialog.h:1046 src/ui_viewDialog.h:1051 src/ui_viewDialog.h:1053
+#: src/ui_viewDialog.h:1109 src/ui_viewDialog.h:1114 src/ui_viewDialog.h:1116
 #: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
 msgid "Options"
 msgstr "விருப்பங்கள்"
 
-#: src/ui_viewDialog.h:1047
+#: src/ui_viewDialog.h:1110
 msgid "Show ground"
 msgstr "நிலத்தை காட்டு"
 
-#: src/ui_viewDialog.h:1048
+#: src/ui_viewDialog.h:1111
 msgid "Show fog"
 msgstr "முடுபனியை காட்டு"
 
-#: src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1112
 msgid "Use associated planet and position"
 msgstr ""
 
-#: src/ui_viewDialog.h:1050
+#: src/ui_viewDialog.h:1113
 msgid "Use this landscape as default"
 msgstr ""
 
-#: src/ui_viewDialog.h:1052
+#: src/ui_viewDialog.h:1115
 msgid "Use this sky culture as default"
 msgstr ""
 
-#: src/ui_viewDialog.h:1054
+#: src/ui_viewDialog.h:1117
 msgid "Visible"
 msgstr "பார்க்கக்கூடியது"
 
@@ -2186,7 +2236,7 @@ msgstr ""
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:121
 #: plugins/CompassMarks/src/CompassMarks.cpp:121
 #: plugins/Oculars/src/Oculars.cpp:931 plugins/Oculars/src/Oculars.cpp:945
-#: plugins/Satellites/src/Satellites.cpp:124
+#: plugins/Satellites/src/Satellites.cpp:123
 msgid "Plugin Key Bindings"
 msgstr ""
 
@@ -2218,29 +2268,29 @@ msgstr ""
 msgid "Oculars popup menu"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:68
+#: plugins/Satellites/src/Satellites.cpp:67
 msgid "Satellites"
 msgstr "துணை கோள்கள்"
 
-#: plugins/Satellites/src/Satellites.cpp:71
+#: plugins/Satellites/src/Satellites.cpp:70
 msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:126
+#: plugins/Satellites/src/Satellites.cpp:125
 msgid "Satellites configuration window"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:127
+#: plugins/Satellites/src/Satellites.cpp:126
 msgid "Satellite hints"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:129
+#: plugins/Satellites/src/Satellites.cpp:128
 msgid "Satellite labels"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:163
+#: plugins/Satellites/src/Satellites.cpp:162
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
@@ -2281,11 +2331,11 @@ msgid ""
 "time and the date are displayed in the bottom bar."
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:79
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:78
 msgid "Text User Interface"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:82
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:81
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
@@ -2300,6 +2350,29 @@ msgid ""
 "An interface for adding asteroids and comets to Stellarium. It can download "
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
+msgstr ""
+
+#: plugins/Supernovas/src/Supernovas.cpp:59
+msgid "Historical supernova"
+msgstr ""
+
+#: plugins/Supernovas/src/Supernovas.cpp:62
+msgid ""
+"The plugin for visualization of some historical supernovas, brighter 10 "
+"magnitude"
+msgstr ""
+
+#: plugins/Supernovas/src/Supernovas.cpp:62
+msgid ""
+"SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
+"July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
+"1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
+"August), SN 1972E (8 May) and SN 1987A (24 February)"
+msgstr ""
+
+#: plugins/Supernovas/src/Supernova.cpp:105
+#, qt-format
+msgid "Type: %1"
 msgstr ""
 
 #~ msgid "Form"
