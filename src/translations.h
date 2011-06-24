@@ -116,6 +116,10 @@ class Translations
 		N_("Eros");
 		// TRANSLATORS: Asteroid (624) Hektor
 		N_("Hektor");
+		// TRANSLATORS: Name of supernova SN 1572A
+		N_("Tycho's Supernova");
+		// TRANSLATORS: Name of supernova SN 1604A
+		N_("Kepler's Supernova");
 		
 		
 		// Cardinals names
