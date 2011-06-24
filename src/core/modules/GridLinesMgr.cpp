@@ -190,7 +190,14 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				else
 				{
 					const double delta = raAngle<M_PI ? M_PI : -M_PI;
-					text = StelUtils::radToDmsStrAdapt(raAngle+delta);
+					if (raAngle==2*M_PI && delta==-M_PI)
+					{
+						text = StelUtils::radToDmsStrAdapt(0);
+					}
+					else
+					{
+						text = StelUtils::radToDmsStrAdapt(raAngle+delta);
+					}
 				}
 				break;
 			}
