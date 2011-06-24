@@ -9,126 +9,138 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-10 14:10+0700\n"
+"POT-Creation-Date: 2011-06-17 18:17+0700\n"
 "PO-Revision-Date: 2011-05-14 04:28+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-05-31 04:39+0000\n"
-"X-Generator: Launchpad (build 12959)\n"
+"X-Launchpad-Export-Date: 2011-06-24 04:37+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/core/modules/GridLinesMgr.cpp:516
+#: src/core/modules/GridLinesMgr.cpp:517
 msgid "Meridian"
 msgstr "Меридіан"
 
-#: src/core/modules/GridLinesMgr.cpp:520
+#: src/core/modules/GridLinesMgr.cpp:521
 msgid "Ecliptic"
 msgstr "Екліптика"
 
-#: src/core/modules/GridLinesMgr.cpp:524
+#: src/core/modules/GridLinesMgr.cpp:525
 msgid "Equator"
 msgstr "Екватор"
 
-#: src/core/modules/LandscapeMgr.cpp:450
+#: src/core/modules/LandscapeMgr.cpp:488
 msgid "Author: "
 msgstr "Автор: "
 
-#: src/core/modules/LandscapeMgr.cpp:453
+#: src/core/modules/LandscapeMgr.cpp:491
 msgid "Location: "
 msgstr "Розташування: "
 
-#: src/core/modules/LandscapeMgr.cpp:458
+#: src/core/modules/LandscapeMgr.cpp:496
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 м"
 
-#: src/core/modules/LandscapeMgr.cpp:461
+#: src/core/modules/LandscapeMgr.cpp:499
 msgid "Planet: "
 msgstr "Планета: "
 
-#: src/core/modules/Nebula.cpp:92
+#: src/core/modules/Nebula.cpp:96
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Тип: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:95 src/core/modules/Planet.cpp:122
+#: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:120
+#: plugins/Supernovas/src/Supernova.cpp:98
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Величина: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:100
+#: src/core/modules/Nebula.cpp:104
 #, qt-format
 msgid "Size: %1"
 msgstr "Розмір: %1"
 
-#: src/core/modules/Nebula.cpp:269
+#: src/core/modules/Nebula.cpp:284
 msgid "Galaxy"
 msgstr "Галактика"
 
-#: src/core/modules/Nebula.cpp:272
+#: src/core/modules/Nebula.cpp:287
 msgid "Open cluster"
 msgstr "Розсіяне зоряне скупчення"
 
-#: src/core/modules/Nebula.cpp:275
+#: src/core/modules/Nebula.cpp:290
 msgid "Globular cluster"
 msgstr "Кулясте зоряне скупчення"
 
-#: src/core/modules/Nebula.cpp:278
+#: src/core/modules/Nebula.cpp:293
 msgid "Nebula"
 msgstr "Туманність"
 
-#: src/core/modules/Nebula.cpp:281
+#: src/core/modules/Nebula.cpp:296
 msgid "Planetary nebula"
 msgstr "Планетарна туманність"
 
-#: src/core/modules/Nebula.cpp:284
+#: src/core/modules/Nebula.cpp:299
 msgid "Cluster associated with nebulosity"
 msgstr "Зоряне скупчення, пов'язане з туманністю"
 
-#: src/core/modules/Nebula.cpp:287
+#: src/core/modules/Nebula.cpp:302
 msgid "Unknown"
 msgstr "Невідомо"
 
-#: src/core/modules/Nebula.cpp:290
+#: src/core/modules/Nebula.cpp:305
 msgid "Undocumented type"
 msgstr "Недокументований тип"
 
-#: src/core/modules/Planet.cpp:125 src/core/modules/StarWrapper.cpp:114
+#: src/core/modules/Planet.cpp:123 src/core/modules/StarWrapper.cpp:112
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Абсолютна зіркова величина: %1"
 
-#: src/core/modules/Planet.cpp:132
+#: src/core/modules/Planet.cpp:136
+#, qt-format
+msgid "Ecliptic Geocentric (of date): %1/%2"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:137
+#, qt-format
+msgid "Obliquity (of date): %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:143
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr "Відстань: %1 а.о."
 
-#: src/core/modules/Planet.cpp:136
+#: src/core/modules/Planet.cpp:147
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Видимий діаметр: %1"
 
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:110
+#: src/core/modules/StarWrapper.cpp:51 src/core/modules/StarWrapper.cpp:108
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
 msgstr "Зоряна величина: <b>%1</b> (B-V: %2)"
 
-#: src/core/modules/StarWrapper.cpp:120
+#: src/core/modules/StarWrapper.cpp:118
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Спектральний тип: %1"
 
-#: src/core/modules/StarWrapper.cpp:124
+#: src/core/modules/StarWrapper.cpp:122
+#: plugins/Supernovas/src/Supernova.cpp:107
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Відстань: %1 світлових років"
 
-#: src/core/modules/StarWrapper.cpp:127
+#: src/core/modules/StarWrapper.cpp:125
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Паралакс: %1\""
@@ -240,74 +252,82 @@ msgstr ""
 "Ортографічна проекція дуже схожа із проекцією перспективи, але точка "
 "перспективи розташована на нескінченній відстані."
 
-#: src/core/StelObject.cpp:65
+#: src/core/StelObject.cpp:79
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
 msgstr "ПС/Сх (J2000): %1/%2"
 
-#: src/core/StelObject.cpp:72
+#: src/core/StelObject.cpp:86
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
 msgstr "ПС/Сх (дати): %1/%2"
 
-#: src/core/StelObject.cpp:80
+#: src/core/StelObject.cpp:94 src/core/StelObject.cpp:97
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Годинний кут/Сх: %1/%2"
 
-#: src/core/StelObject.cpp:91
+#: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
+msgid "(geometric)"
+msgstr ""
+
+#: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
+msgid "(apparent)"
+msgstr ""
+
+#: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Аз/Висота: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:297
+#: src/gui/ConfigurationDialog.cpp:295
 msgid "Select screenshot directory"
 msgstr "Оберіть каталог для знімків екрана"
 
-#: src/gui/ConfigurationDialog.cpp:463
+#: src/gui/ConfigurationDialog.cpp:461
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Початкове поле зору: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:471
+#: src/gui/ConfigurationDialog.cpp:469
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Початковий напрямок зору Аз/Висота: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:511
+#: src/gui/ConfigurationDialog.cpp:509
 msgid "Authors"
 msgstr "Автори"
 
-#: src/gui/ConfigurationDialog.cpp:515 src/gui/ViewDialog.cpp:347
+#: src/gui/ConfigurationDialog.cpp:513 src/gui/ViewDialog.cpp:363
 msgid "Contact"
 msgstr "Контакти"
 
-#: src/gui/ConfigurationDialog.cpp:587
+#: src/gui/ConfigurationDialog.cpp:585
 msgid "Author"
 msgstr "Автор"
 
-#: src/gui/ConfigurationDialog.cpp:588
+#: src/gui/ConfigurationDialog.cpp:586
 msgid "License"
 msgstr "Ліцензія"
 
-#: src/gui/ConfigurationDialog.cpp:617
+#: src/gui/ConfigurationDialog.cpp:615
 msgid "Running script: "
 msgstr "Запуск скрипту: "
 
-#: src/gui/ConfigurationDialog.cpp:624
+#: src/gui/ConfigurationDialog.cpp:622
 msgid "Running script: [none]"
 msgstr "Запуск скрипту: [Немає]"
 
-#: src/gui/ConfigurationDialog.cpp:667
+#: src/gui/ConfigurationDialog.cpp:665
 msgid "Finished downloading all star catalogs!"
 msgstr "Звантаження всіх зоряних каталогів завершено!"
 
-#: src/gui/ConfigurationDialog.cpp:676
+#: src/gui/ConfigurationDialog.cpp:674
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Отримати каталог %1 із %2"
 
-#: src/gui/ConfigurationDialog.cpp:678
+#: src/gui/ConfigurationDialog.cpp:676
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -318,7 +338,7 @@ msgstr ""
 "Кількість зірок: %2 мільйонів\n"
 "Діапазон зоряних величин: %3-%4"
 
-#: src/gui/ConfigurationDialog.cpp:687
+#: src/gui/ConfigurationDialog.cpp:685
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -326,7 +346,7 @@ msgstr ""
 "Завершено завантаження нових каталогів зірок!\n"
 "Перезапустіть Stellarium для їх відображення."
 
-#: src/gui/ConfigurationDialog.cpp:725 src/gui/ConfigurationDialog.cpp:759
+#: src/gui/ConfigurationDialog.cpp:723 src/gui/ConfigurationDialog.cpp:757
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -335,7 +355,7 @@ msgstr ""
 "Помилка при звантаженні %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:730
+#: src/gui/ConfigurationDialog.cpp:728
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -344,11 +364,11 @@ msgstr ""
 "Звантаження %1...\n"
 "(Ви можете закрити це вікно.)"
 
-#: src/gui/ConfigurationDialog.cpp:810
+#: src/gui/ConfigurationDialog.cpp:808
 msgid "Verifying file integrity..."
 msgstr "Перевірка цілісності файлів..."
 
-#: src/gui/ConfigurationDialog.cpp:814
+#: src/gui/ConfigurationDialog.cpp:812
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -540,15 +560,15 @@ msgstr "Мітки сузір’їв"
 msgid "Constellation boundaries"
 msgstr "Межі сузір’їв"
 
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1033
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1096
 msgid "Azimuthal grid"
 msgstr "Азимутальна сітка"
 
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1031
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1094
 msgid "Equatorial grid"
 msgstr "Екваторіальна сітка"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1032
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1095
 msgid "Equatorial J2000 grid"
 msgstr "Екваторіальна сітка J2000"
 
@@ -556,19 +576,19 @@ msgstr "Екваторіальна сітка J2000"
 msgid "Galactic grid"
 msgstr "Галактична сітка"
 
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1036
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1099
 msgid "Ecliptic line"
 msgstr "Лінія екліптики"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1034
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1097
 msgid "Equator line"
 msgstr "Лінія екватора"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1035
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1098
 msgid "Meridian line"
 msgstr "Лінія меридіана"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1037
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1100
 msgid "Cardinal points"
 msgstr "Частини світу"
 
@@ -576,7 +596,7 @@ msgstr "Частини світу"
 msgid "Ground"
 msgstr "Земля"
 
-#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1015
+#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1074
 msgid "Atmosphere"
 msgstr "Атмосфера"
 
@@ -584,7 +604,7 @@ msgstr "Атмосфера"
 msgid "Fog"
 msgstr "Туман"
 
-#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1020
+#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1083
 msgid "Nebulas"
 msgstr "Туманності"
 
@@ -592,7 +612,7 @@ msgstr "Туманності"
 msgid "Nebulas background images"
 msgstr "Зображення туманностей"
 
-#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1001 src/ui_viewDialog.h:1019
+#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1060 src/ui_viewDialog.h:1082
 msgid "Stars"
 msgstr "Зірки"
 
@@ -777,31 +797,31 @@ msgstr "Увімкнути/Вимкнути графічний інтерфей�
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:401
+#: src/gui/ViewDialog.cpp:417
 msgid "No description"
 msgstr "Немає опису"
 
-#: src/gui/ViewDialog.cpp:469
+#: src/gui/ViewDialog.cpp:501
 msgid "No shooting stars"
 msgstr "Без метеорів"
 
-#: src/gui/ViewDialog.cpp:472
+#: src/gui/ViewDialog.cpp:504
 msgid "Normal rate"
 msgstr "Нормальна частота"
 
-#: src/gui/ViewDialog.cpp:475
+#: src/gui/ViewDialog.cpp:507
 msgid "Standard Perseids rate"
 msgstr "Стандартна частота (Персеїди)"
 
-#: src/gui/ViewDialog.cpp:478
+#: src/gui/ViewDialog.cpp:510
 msgid "Exceptional Leonid rate"
 msgstr "Незвичайна частота (Леоніди)"
 
-#: src/gui/ViewDialog.cpp:481
+#: src/gui/ViewDialog.cpp:513
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Найбільша частота (1966, Леоніди)"
 
-#: src/gui/LocationDialog.cpp:332
+#: src/gui/LocationDialog.cpp:334
 msgid "New Location"
 msgstr "Нове розташування"
 
@@ -1188,335 +1208,345 @@ msgstr "Ерос"
 msgid "Hektor"
 msgstr "Гектор"
 
+#. TRANSLATORS: Name of supernova SN 1572A
+#: src/translations.h:120
+msgid "Tycho's Supernova"
+msgstr ""
+
+#. TRANSLATORS: Name of supernova SN 1604A
 #: src/translations.h:122
+msgid "Kepler's Supernova"
+msgstr ""
+
+#: src/translations.h:126
 msgid "N"
 msgstr "Пн"
 
-#: src/translations.h:123
+#: src/translations.h:127
 msgid "S"
 msgstr "Пд"
 
-#: src/translations.h:124
+#: src/translations.h:128
 msgid "E"
 msgstr "Сх"
 
-#: src/translations.h:125
+#: src/translations.h:129
 msgid "W"
 msgstr "Зх"
 
-#: src/translations.h:128
+#: src/translations.h:132
 msgid "Aztec"
 msgstr "Ацтецька"
 
-#: src/translations.h:129
+#: src/translations.h:133
 msgid "Chinese"
 msgstr "Китайська"
 
-#: src/translations.h:130
+#: src/translations.h:134
 msgid "Egyptian"
 msgstr "Єгипетська"
 
-#: src/translations.h:131
+#: src/translations.h:135
 msgid "Inuit"
 msgstr "Ескімоська"
 
-#: src/translations.h:132
+#: src/translations.h:136
 msgid "Korean"
 msgstr "Корейська"
 
-#: src/translations.h:133
+#: src/translations.h:137
 msgid "Lakota"
 msgstr "Лакота"
 
-#: src/translations.h:134
+#: src/translations.h:138
 msgid "Maori"
 msgstr "Маорійська"
 
-#: src/translations.h:135
+#: src/translations.h:139
 msgid "Navajo"
 msgstr "Навахо"
 
-#: src/translations.h:136
+#: src/translations.h:140
 msgid "Norse"
 msgstr "Скандинавська"
 
-#: src/translations.h:137
+#: src/translations.h:141
 msgid "Polynesian"
 msgstr "Полінезійська"
 
-#: src/translations.h:138
+#: src/translations.h:142
 msgid "Sami"
 msgstr "Саамська"
 
-#: src/translations.h:139
+#: src/translations.h:143
 msgid "Tupi-Guarani"
 msgstr "Тупі-Гуарані"
 
-#: src/translations.h:140
+#: src/translations.h:144
 msgid "Western"
 msgstr "Західна"
 
-#: src/translations.h:144
+#: src/translations.h:148
 msgid "Set Location "
 msgstr "Встановити розташування "
 
-#: src/translations.h:145
+#: src/translations.h:149
 msgid "Set Time "
 msgstr "Встановити час "
 
-#: src/translations.h:146
+#: src/translations.h:150
 msgid "General "
 msgstr "Загальне "
 
-#: src/translations.h:147
+#: src/translations.h:151
 msgid "Stars "
 msgstr "Зірки "
 
-#: src/translations.h:148
+#: src/translations.h:152
 msgid "Colors "
 msgstr "Кольори "
 
-#: src/translations.h:149
+#: src/translations.h:153
 msgid "Effects "
 msgstr "Ефекти "
 
-#: src/translations.h:150
+#: src/translations.h:154
 msgid "Scripts "
 msgstr "Скрипти "
 
-#: src/translations.h:151
+#: src/translations.h:155
 msgid "Administration "
 msgstr "Управління "
 
-#: src/translations.h:153
+#: src/translations.h:157
 msgid "Latitude: "
 msgstr "Широта: "
 
-#: src/translations.h:154
+#: src/translations.h:158
 msgid "Longitude: "
 msgstr "Довгота: "
 
-#: src/translations.h:155
+#: src/translations.h:159
 msgid "Altitude (m): "
 msgstr "Висота (у м): "
 
-#: src/translations.h:156
+#: src/translations.h:160
 msgid "Solar System Body: "
 msgstr "Сонячна система: "
 
-#: src/translations.h:158
+#: src/translations.h:162
 msgid "Sky Time: "
 msgstr "Астрономічний час: "
 
-#: src/translations.h:159
+#: src/translations.h:163
 msgid "Set Time Zone: "
 msgstr "Встановити часовий пояс: "
 
-#: src/translations.h:160
+#: src/translations.h:164
 msgid "Day keys: "
 msgstr "Клавіші днів: "
 
-#: src/translations.h:161
+#: src/translations.h:165
 msgid "Calendar"
 msgstr "Календар"
 
-#: src/translations.h:162
+#: src/translations.h:166
 msgid "Sidereal"
 msgstr "Зоряний"
 
-#: src/translations.h:163
+#: src/translations.h:167
 msgid "Preset Sky Time: "
 msgstr "Встановлений астрономічний час: "
 
-#: src/translations.h:164
+#: src/translations.h:168
 msgid "Sky Time At Start-up: "
 msgstr "Астрономічний час при запуску: "
 
-#: src/translations.h:165
+#: src/translations.h:169
 msgid "Actual Time"
 msgstr "Поточний час"
 
-#: src/translations.h:166
+#: src/translations.h:170
 msgid "Preset Time"
 msgstr "Заданий час"
 
-#: src/translations.h:167
+#: src/translations.h:171
 msgid "Time Display Format: "
 msgstr "Формат відображення часу: "
 
-#: src/translations.h:168
+#: src/translations.h:172
 msgid "Date Display Format: "
 msgstr "Формат показу дати: "
 
-#: src/translations.h:170
+#: src/translations.h:174
 msgid "Sky Culture: "
 msgstr "Схема назв: "
 
-#: src/translations.h:171
+#: src/translations.h:175
 msgid "Sky Language: "
 msgstr "Назви небесних об’єктів: "
 
-#: src/translations.h:173
+#: src/translations.h:177
 msgid "Show: "
 msgstr "Показ: "
 
-#: src/translations.h:174
+#: src/translations.h:178
 msgid "Star Value Multiplier: "
 msgstr "Коефіцієнт підсилення зірок: "
 
-#: src/translations.h:175
+#: src/translations.h:179
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Множник зміни величини: "
 
-#: src/translations.h:176
+#: src/translations.h:180
 msgid "Maximum Magnitude to Label: "
 msgstr "Максимальна величина для напису: "
 
-#: src/translations.h:177
+#: src/translations.h:181
 msgid "Twinkling: "
 msgstr "Мерехтіння: "
 
-#: src/translations.h:178
+#: src/translations.h:182
 msgid "Limiting Magnitude: "
 msgstr "Максимальна величина: "
 
-#: src/translations.h:180
+#: src/translations.h:184
 msgid "Constellation Lines"
 msgstr "Лінії сузір'їв"
 
-#: src/translations.h:181
+#: src/translations.h:185
 msgid "Constellation Names"
 msgstr "Назви сузір'їв"
 
-#: src/translations.h:182
+#: src/translations.h:186
 msgid "Constellation Art Intensity"
 msgstr "Яскравість зображень сузір'їв"
 
-#: src/translations.h:183
+#: src/translations.h:187
 msgid "Constellation Boundaries"
 msgstr "Межі сузір'їв"
 
-#: src/translations.h:184
+#: src/translations.h:188
 msgid "Cardinal Points"
 msgstr "Сторони світу"
 
-#: src/translations.h:185
+#: src/translations.h:189
 msgid "Planet Names"
 msgstr "Назви планет"
 
-#: src/translations.h:186
+#: src/translations.h:190
 msgid "Planet Orbits"
 msgstr "Орбіти планет"
 
-#: src/translations.h:187
+#: src/translations.h:191
 msgid "Planet Trails"
 msgstr "Сліди від планет"
 
-#: src/translations.h:188
+#: src/translations.h:192
 msgid "Meridian Line"
 msgstr "Лінія меридіана"
 
-#: src/translations.h:189
+#: src/translations.h:193
 msgid "Azimuthal Grid"
 msgstr "Азимутальна сітка"
 
-#: src/translations.h:190
+#: src/translations.h:194
 msgid "Equatorial Grid"
 msgstr "Екваторіальна сітка"
 
-#: src/translations.h:191
+#: src/translations.h:195
 msgid "Equator Line"
 msgstr "Лінія екватора"
 
-#: src/translations.h:192
+#: src/translations.h:196
 msgid "Ecliptic Line"
 msgstr "Лінія екліптики"
 
-#: src/translations.h:193
+#: src/translations.h:197
 msgid "Nebula Names"
 msgstr "Назви туманностей"
 
-#: src/translations.h:194
+#: src/translations.h:198
 msgid "Nebula Circles"
 msgstr "Кільця туманностей"
 
-#: src/translations.h:196
+#: src/translations.h:200
 msgid "Light Pollution Luminance: "
 msgstr "Яскравість світлового забруднення: "
 
-#: src/translations.h:197
+#: src/translations.h:201
 msgid "Landscape: "
 msgstr "Ландшафт: "
 
-#: src/translations.h:198
+#: src/translations.h:202
 msgid "Manual zoom: "
 msgstr "Ручний масштаб: "
 
-#: src/translations.h:199
+#: src/translations.h:203
 msgid "Object Sizing Rule: "
 msgstr "Правило зміни розміру об'єкту: "
 
-#: src/translations.h:200
+#: src/translations.h:204
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Множник масштабування величин: "
 
-#: src/translations.h:201
+#: src/translations.h:205
 msgid "Milky Way intensity: "
 msgstr "Інтенсивність Молочного шляху: "
 
-#: src/translations.h:202
+#: src/translations.h:206
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Максимальна величина туманності для напису: "
 
-#: src/translations.h:203
+#: src/translations.h:207
 msgid "Zoom Duration: "
 msgstr "Тривалість зміни масштабу: "
 
-#: src/translations.h:204
+#: src/translations.h:208
 msgid "Cursor Timeout: "
 msgstr "Затримка курсора: "
 
-#: src/translations.h:205
+#: src/translations.h:209
 msgid "Correct for light travel time: "
 msgstr "Корекція на час поширення світла: "
 
-#: src/translations.h:207
+#: src/translations.h:211
 msgid "Local Script: "
 msgstr "Локальний скрипт: "
 
-#: src/translations.h:208
+#: src/translations.h:212
 msgid "CD/DVD Script: "
 msgstr "Скрипт CD/DVD: "
 
-#: src/translations.h:209
+#: src/translations.h:213
 msgid "USB Script: "
 msgstr "USB-скрипт: "
 
-#: src/translations.h:210
+#: src/translations.h:214
 msgid "Arrow down to load list."
 msgstr "Натисніть стрілку донизу для завантаження списку."
 
-#: src/translations.h:211
+#: src/translations.h:215
 msgid "Select and exit to run."
 msgstr "Вибрати та вийти для перезапуску."
 
-#: src/translations.h:213
+#: src/translations.h:217
 msgid "Load Default Configuration: "
 msgstr "Завантажити типові налаштування: "
 
-#: src/translations.h:214
+#: src/translations.h:218
 msgid "Save Current Configuration as Default: "
 msgstr "Зберегти поточні налаштування як типові: "
 
-#: src/translations.h:215
+#: src/translations.h:219
 msgid "Shut Down: "
 msgstr "Завершення роботи: "
 
-#: src/translations.h:216
+#: src/translations.h:220
 msgid "Update me via Internet: "
 msgstr "Оновити мене через Інтернет: "
 
-#: src/translations.h:217
+#: src/translations.h:221
 msgid "Set UI Locale: "
 msgstr "Встановити локаль інтерфейсу: "
 
@@ -1604,284 +1634,304 @@ msgstr "Країна:"
 msgid "Planet:"
 msgstr "Планета:"
 
-#: src/ui_searchDialogGui.h:440 src/ui_searchDialogGui.h:441
+#: src/ui_searchDialogGui.h:450
 msgid "Find Object"
 msgstr "Знайти об'єкт"
 
-#: src/ui_searchDialogGui.h:446
-msgid "Keyboard for Greek input"
-msgstr "Клавіатура для введення грецьких літер"
-
-#: src/ui_searchDialogGui.h:449
-msgid "alpha"
-msgstr "альфа"
-
-#: src/ui_searchDialogGui.h:452
-msgid "beta"
-msgstr "бета"
-
-#: src/ui_searchDialogGui.h:455
-msgid "gamma"
-msgstr "гамма"
+#: src/ui_searchDialogGui.h:451
+msgid "Find Object or Position"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:458
-msgid "delta"
-msgstr "дельта"
-
-#: src/ui_searchDialogGui.h:461
-msgid "epsilon"
-msgstr "епсілон"
-
-#: src/ui_searchDialogGui.h:464
-msgid "zeta"
-msgstr "дзета"
-
-#: src/ui_searchDialogGui.h:467
-msgid "eta"
-msgstr "ета"
-
-#: src/ui_searchDialogGui.h:470
-msgid "theta"
-msgstr "тета"
-
-#: src/ui_searchDialogGui.h:473
 msgid "iota"
 msgstr "йота"
 
+#: src/ui_searchDialogGui.h:461
+msgid "alpha"
+msgstr "альфа"
+
+#: src/ui_searchDialogGui.h:464
+msgid "beta"
+msgstr "бета"
+
+#: src/ui_searchDialogGui.h:467
+msgid "gamma"
+msgstr "гамма"
+
+#: src/ui_searchDialogGui.h:470
+msgid "delta"
+msgstr "дельта"
+
+#: src/ui_searchDialogGui.h:473
+msgid "epsilon"
+msgstr "епсілон"
+
 #: src/ui_searchDialogGui.h:476
+msgid "zeta"
+msgstr "дзета"
+
+#: src/ui_searchDialogGui.h:479
+msgid "eta"
+msgstr "ета"
+
+#: src/ui_searchDialogGui.h:482
+msgid "theta"
+msgstr "тета"
+
+#: src/ui_searchDialogGui.h:485
 msgid "kappa"
 msgstr "каппа"
 
-#: src/ui_searchDialogGui.h:479
+#: src/ui_searchDialogGui.h:488
 msgid "lambda"
 msgstr "лямбда"
 
-#: src/ui_searchDialogGui.h:482
+#: src/ui_searchDialogGui.h:491
 msgid "mu"
 msgstr "мю"
 
-#: src/ui_searchDialogGui.h:485
+#: src/ui_searchDialogGui.h:494
 msgid "nu"
 msgstr "ню"
 
-#: src/ui_searchDialogGui.h:488
+#: src/ui_searchDialogGui.h:497
 msgid "xi"
 msgstr "ксі"
 
-#: src/ui_searchDialogGui.h:491
+#: src/ui_searchDialogGui.h:500
 msgid "omicron"
 msgstr "омікрон"
 
-#: src/ui_searchDialogGui.h:494
+#: src/ui_searchDialogGui.h:503
 msgid "pi"
 msgstr "пі"
 
-#: src/ui_searchDialogGui.h:497
+#: src/ui_searchDialogGui.h:506
 msgid "rho"
 msgstr "ро"
 
-#: src/ui_searchDialogGui.h:500
+#: src/ui_searchDialogGui.h:509
 msgid "sigma"
 msgstr "сигма"
 
-#: src/ui_searchDialogGui.h:503
+#: src/ui_searchDialogGui.h:512
 msgid "tau"
 msgstr "тау"
 
-#: src/ui_searchDialogGui.h:506
+#: src/ui_searchDialogGui.h:515
 msgid "upsilon"
 msgstr "іпсілон"
 
-#: src/ui_searchDialogGui.h:509
+#: src/ui_searchDialogGui.h:518
 msgid "phi"
 msgstr "фі"
 
-#: src/ui_searchDialogGui.h:512
+#: src/ui_searchDialogGui.h:521
 msgid "chi"
 msgstr "хі"
 
-#: src/ui_searchDialogGui.h:515
+#: src/ui_searchDialogGui.h:524
 msgid "psi"
 msgstr "псі"
 
-#: src/ui_searchDialogGui.h:518
+#: src/ui_searchDialogGui.h:527
 msgid "omega"
 msgstr "омега"
 
-#: src/ui_searchDialogGui.h:520
+#: src/ui_searchDialogGui.h:529
+msgid "Greek letters for Bayer designations"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:530
+msgid "Object"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:531
 msgid "RA/Dec (J2000):"
 msgstr "Пряме сходження/Схилення (J2000):"
 
-#: src/ui_viewDialog.h:986
+#: src/ui_searchDialogGui.h:532
+msgid "Position"
+msgstr ""
+
+#: src/ui_viewDialog.h:1045
 msgid "View"
 msgstr "Перегляд"
 
-#: src/ui_viewDialog.h:992
+#: src/ui_viewDialog.h:1051
 msgid "Sky"
 msgstr "Небо"
 
-#: src/ui_viewDialog.h:994
+#: src/ui_viewDialog.h:1053
 msgid "Markings"
 msgstr "Розмітка"
 
-#: src/ui_viewDialog.h:996
+#: src/ui_viewDialog.h:1055
 msgid "Landscape"
 msgstr "Ландшафт"
 
-#: src/ui_viewDialog.h:998
+#: src/ui_viewDialog.h:1057
 msgid "Starlore"
 msgstr "Зіркова статистика"
 
-#: src/ui_viewDialog.h:1002
+#: src/ui_viewDialog.h:1061
 msgid "Absolute scale:"
 msgstr "Абсолютна шкала:"
 
-#: src/ui_viewDialog.h:1003
+#: src/ui_viewDialog.h:1062
 msgid "Relative scale:"
 msgstr "Відносна шкала:"
 
-#: src/ui_viewDialog.h:1004
+#: src/ui_viewDialog.h:1063
 msgid "Twinkle:"
 msgstr "Мерехтіння:"
 
-#: src/ui_viewDialog.h:1006
+#: src/ui_viewDialog.h:1065
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Робити слабкі зірки тьмянішими, якщо видимим є дуже яскравий об’єкт"
 
-#: src/ui_viewDialog.h:1008
+#: src/ui_viewDialog.h:1067
 msgid "Dynamic eye adaptation"
 msgstr "Динамічна зорова адаптація"
 
-#: src/ui_viewDialog.h:1009
+#: src/ui_viewDialog.h:1068
 msgid "Planets and satellites"
 msgstr "Планети і супутники"
 
-#: src/ui_viewDialog.h:1010
+#: src/ui_viewDialog.h:1069
 msgid "Show planets"
 msgstr "Показати планети"
 
-#: src/ui_viewDialog.h:1011
+#: src/ui_viewDialog.h:1070
 msgid "Show planet markers"
 msgstr "Показати позначки планет"
 
-#: src/ui_viewDialog.h:1012
+#: src/ui_viewDialog.h:1071
 msgid "Show planet orbits"
 msgstr "Показати орбіти планет"
 
-#: src/ui_viewDialog.h:1013
+#: src/ui_viewDialog.h:1072
 msgid "Simulate light speed"
 msgstr "Імітувати швидкість світла"
 
-#: src/ui_viewDialog.h:1014
+#: src/ui_viewDialog.h:1073
 msgid "Scale Moon"
 msgstr "Масштабувати Місяць"
 
-#: src/ui_viewDialog.h:1016
+#: src/ui_viewDialog.h:1075
 msgid "Show atmosphere"
 msgstr "Показати атмосферу"
 
-#: src/ui_viewDialog.h:1017
+#: src/ui_viewDialog.h:1076
 msgid "Light pollution: "
 msgstr "Забруднення світлом: "
 
-#: src/ui_viewDialog.h:1018
+#: src/ui_viewDialog.h:1078
+msgid "pressure, temperature, extinction coefficient"
+msgstr ""
+
+#: src/ui_viewDialog.h:1080
+msgid "Refraction/Extinction settings..."
+msgstr ""
+
+#: src/ui_viewDialog.h:1081
 msgid "Labels and Markers"
 msgstr "Мітки і позначки"
 
-#: src/ui_viewDialog.h:1021
+#: src/ui_viewDialog.h:1084
 msgid "Planets"
 msgstr "Планети"
 
-#: src/ui_viewDialog.h:1022
+#: src/ui_viewDialog.h:1085
 msgid "Shooting Stars"
 msgstr "Метеори"
 
-#: src/ui_viewDialog.h:1023
+#: src/ui_viewDialog.h:1086
 msgid "Hourly zenith rate:"
 msgstr "Інтенсивність метеорного потоку:"
 
-#: src/ui_viewDialog.h:1024
+#: src/ui_viewDialog.h:1087
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:1025
+#: src/ui_viewDialog.h:1088
 msgid "10"
 msgstr "10"
 
-#: src/ui_viewDialog.h:1026
+#: src/ui_viewDialog.h:1089
 msgid "80"
 msgstr "80"
 
-#: src/ui_viewDialog.h:1027
+#: src/ui_viewDialog.h:1090
 msgid "10000"
 msgstr "10000"
 
-#: src/ui_viewDialog.h:1028
+#: src/ui_viewDialog.h:1091
 msgid "144000"
 msgstr "144000"
 
-#: src/ui_viewDialog.h:1030
+#: src/ui_viewDialog.h:1093
 msgid "Celestial Sphere"
 msgstr "Небесна сфера"
 
-#: src/ui_viewDialog.h:1038
+#: src/ui_viewDialog.h:1101
 msgid "Constellations"
 msgstr "Сузір'я"
 
-#: src/ui_viewDialog.h:1039
+#: src/ui_viewDialog.h:1102
 msgid "Show lines"
 msgstr "Показувати лінії"
 
-#: src/ui_viewDialog.h:1040
+#: src/ui_viewDialog.h:1103
 msgid "Show labels"
 msgstr "Показувати мітки"
 
-#: src/ui_viewDialog.h:1041
+#: src/ui_viewDialog.h:1104
 msgid "Show boundaries"
 msgstr "Показувати межі"
 
-#: src/ui_viewDialog.h:1042
+#: src/ui_viewDialog.h:1105
 msgid "Show art"
 msgstr "Показувати малюнки"
 
-#: src/ui_viewDialog.h:1043
+#: src/ui_viewDialog.h:1106
 msgid "Art brightness: "
 msgstr "Яскравість малюнків: "
 
-#: src/ui_viewDialog.h:1044
+#: src/ui_viewDialog.h:1107
 msgid "Projection"
 msgstr "Проекція"
 
-#: src/ui_viewDialog.h:1045
+#: src/ui_viewDialog.h:1108
 msgid "Add/remove landscapes..."
 msgstr "Додати/Вилучити ландшафти…"
 
-#: src/ui_viewDialog.h:1046 src/ui_viewDialog.h:1051 src/ui_viewDialog.h:1053
+#: src/ui_viewDialog.h:1109 src/ui_viewDialog.h:1114 src/ui_viewDialog.h:1116
 #: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
 msgid "Options"
 msgstr "Параметри"
 
-#: src/ui_viewDialog.h:1047
+#: src/ui_viewDialog.h:1110
 msgid "Show ground"
 msgstr "Показувати землю"
 
-#: src/ui_viewDialog.h:1048
+#: src/ui_viewDialog.h:1111
 msgid "Show fog"
 msgstr "Показувати туман"
 
-#: src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1112
 msgid "Use associated planet and position"
 msgstr "Використовувати пов'язані планети та позиції"
 
-#: src/ui_viewDialog.h:1050
+#: src/ui_viewDialog.h:1113
 msgid "Use this landscape as default"
 msgstr "Використовувати цей краєвид як типовий"
 
-#: src/ui_viewDialog.h:1052
+#: src/ui_viewDialog.h:1115
 msgid "Use this sky culture as default"
 msgstr "Використовувати цю культуру неба як типову"
 
-#: src/ui_viewDialog.h:1054
+#: src/ui_viewDialog.h:1117
 msgid "Visible"
 msgstr "Видимий"
 
@@ -2237,7 +2287,7 @@ msgstr "Вимірювання кутів"
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:121
 #: plugins/CompassMarks/src/CompassMarks.cpp:121
 #: plugins/Oculars/src/Oculars.cpp:931 plugins/Oculars/src/Oculars.cpp:945
-#: plugins/Satellites/src/Satellites.cpp:124
+#: plugins/Satellites/src/Satellites.cpp:123
 msgid "Plugin Key Bindings"
 msgstr "Прив’язка клавіш у додатках"
 
@@ -2269,30 +2319,30 @@ msgstr "Перегляд крізь окуляр"
 msgid "Oculars popup menu"
 msgstr "Контекстне меню окулярів"
 
-#: plugins/Satellites/src/Satellites.cpp:68
+#: plugins/Satellites/src/Satellites.cpp:67
 msgid "Satellites"
 msgstr "Супутники"
 
-#: plugins/Satellites/src/Satellites.cpp:71
+#: plugins/Satellites/src/Satellites.cpp:70
 msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
 msgstr ""
 "Визначення позицій штучних супутників на орбіті Землі на основі даних NORAD"
 
-#: plugins/Satellites/src/Satellites.cpp:126
+#: plugins/Satellites/src/Satellites.cpp:125
 msgid "Satellites configuration window"
 msgstr "Вікно налаштування супутників"
 
-#: plugins/Satellites/src/Satellites.cpp:127
+#: plugins/Satellites/src/Satellites.cpp:126
 msgid "Satellite hints"
 msgstr "Підказки щодо супутників"
 
-#: plugins/Satellites/src/Satellites.cpp:129
+#: plugins/Satellites/src/Satellites.cpp:128
 msgid "Satellite labels"
 msgstr "Мітки супутників"
 
-#: plugins/Satellites/src/Satellites.cpp:163
+#: plugins/Satellites/src/Satellites.cpp:162
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
@@ -2340,11 +2390,11 @@ msgstr ""
 "Stellarium. Надає змогу встановити часовий пояс та зміни формат показу дати "
 "і часу на нижній панелі."
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:79
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:78
 msgid "Text User Interface"
 msgstr "Текстовий інтерфейс користувача"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:82
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:81
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
@@ -2366,6 +2416,29 @@ msgstr ""
 "Передбачено можливість звантаження списків об’єктів з сайта Центру "
 "дослідження малих планет та виконання пошуку у базі даних цього центру. "
 "Розробку додатка ще не завершено."
+
+#: plugins/Supernovas/src/Supernovas.cpp:59
+msgid "Historical supernova"
+msgstr ""
+
+#: plugins/Supernovas/src/Supernovas.cpp:62
+msgid ""
+"The plugin for visualization of some historical supernovas, brighter 10 "
+"magnitude"
+msgstr ""
+
+#: plugins/Supernovas/src/Supernovas.cpp:62
+msgid ""
+"SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
+"July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
+"1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
+"August), SN 1972E (8 May) and SN 1987A (24 February)"
+msgstr ""
+
+#: plugins/Supernovas/src/Supernova.cpp:105
+#, qt-format
+msgid "Type: %1"
+msgstr ""
 
 #, qt-format
 #~ msgid "Loading NGC catalog: %1/%2"
@@ -2472,3 +2545,6 @@ msgstr ""
 
 #~ msgid "Telrad circles"
 #~ msgstr "Кола прицілів"
+
+#~ msgid "Keyboard for Greek input"
+#~ msgstr "Клавіатура для введення грецьких літер"
