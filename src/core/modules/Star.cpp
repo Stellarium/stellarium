@@ -41,6 +41,12 @@ QString Star1::getNameI18n(void) const {
   return QString();
 }
 
+int Star1::hasComponentID(void) const {
+  if (componentIds) {
+     return componentIds;
+  }
+  return 0;
+}
 
 static
 int UnpackBits(bool fromBe,const char *addr,int bits_begin,
