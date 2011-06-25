@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-20 11:50-0400\n"
+"POT-Creation-Date: 2011-06-25 13:31-0400\n"
 "PO-Revision-Date: 2010-11-12 12:24+0000\n"
 "Last-Translator: sungyup nham <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -27,7 +27,15 @@ msgstr " m"
 msgid "%1m"
 msgstr "%1m"
 
-#: src/core/modules/LandscapeMgr.cpp:458
+#: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
+msgid "(apparent)"
+msgstr ""
+
+#: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
+msgid "(geometric)"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:496
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
@@ -36,23 +44,23 @@ msgstr ", %1 m"
 msgid "/"
 msgstr "/"
 
-#: src/ui_viewDialog.h:1024
+#: src/ui_viewDialog.h:1094
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:1025
+#: src/ui_viewDialog.h:1095
 msgid "10"
 msgstr "10"
 
-#: src/ui_viewDialog.h:1027
+#: src/ui_viewDialog.h:1097
 msgid "10000"
 msgstr "10000"
 
-#: src/ui_viewDialog.h:1028
+#: src/ui_viewDialog.h:1098
 msgid "144000"
 msgstr "144000"
 
-#: src/ui_viewDialog.h:1026
+#: src/ui_viewDialog.h:1096
 msgid "80"
 msgstr "80"
 
@@ -77,36 +85,36 @@ msgstr "같은 이름의 전망 자료이거나 식별자(%1)가 이미 존재�
 msgid "About"
 msgstr "프로그램 정보"
 
-#: src/core/modules/Planet.cpp:125 src/core/modules/StarWrapper.cpp:114
+#: src/core/modules/Planet.cpp:123 src/core/modules/StarWrapper.cpp:112
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "절대등급: %1"
 
-#: src/ui_viewDialog.h:1002
+#: src/ui_viewDialog.h:1068
 msgid "Absolute scale:"
 msgstr "절대 크기:"
 
-#: src/translations.h:140
+#: src/translations.h:169
 msgid "Actual Time"
 msgstr "실제 시간"
 
-#: src/gui/StelGui.cpp:157
+#: src/gui/StelGui.cpp:158
 msgid "Add 1 sidereal day"
 msgstr "1 항성일 더하기"
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:160
 msgid "Add 1 sidereal week"
 msgstr "1 항성주 더하기"
 
-#: src/gui/StelGui.cpp:153
+#: src/gui/StelGui.cpp:154
 msgid "Add 1 solar day"
 msgstr "1 태양일 더하기"
 
-#: src/gui/StelGui.cpp:151
+#: src/gui/StelGui.cpp:152
 msgid "Add 1 solar hour"
 msgstr "1 태양시 더하기"
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:156
 msgid "Add 1 solar week"
 msgstr "1 태양주 더하기"
 
@@ -122,13 +130,17 @@ msgstr "목록에 추가"
 msgid "Add/Remove Landscapes"
 msgstr "전망 자료 추가/삭제"
 
-#: src/ui_viewDialog.h:1045
+#: src/ui_viewDialog.h:1116
 msgid "Add/remove landscapes..."
 msgstr "전망 자료 추가/삭제..."
 
-#: src/translations.h:126
+#: src/translations.h:155
 msgid "Administration "
 msgstr "관리 "
+
+#: src/translations.h:60
+msgid "Adrastea"
+msgstr ""
 
 #: src/ui_configurationDialog.h:820
 msgid "Align labels with the horizon"
@@ -146,7 +158,7 @@ msgstr "키보드로 회전과 줌을 가능하게 합니다"
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "마우스로 회전(끌기)과 줌(마우스 휠)을 가능하게 합니다"
 
-#: src/translations.h:130
+#: src/translations.h:159
 msgid "Altitude (m): "
 msgstr "고도 (m): "
 
@@ -154,8 +166,12 @@ msgstr "고도 (m): "
 msgid "Altitude:"
 msgstr "고도:"
 
+#: src/translations.h:50
+msgid "Amalthea"
+msgstr ""
+
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:85
+#: src/translations.h:110
 msgid "Amor"
 msgstr ""
 
@@ -164,6 +180,10 @@ msgid ""
 "An interface for adding asteroids and comets to Stellarium. It can download "
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
+msgstr ""
+
+#: src/translations.h:57
+msgid "Ananke"
 msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
@@ -175,20 +195,20 @@ msgid "Angle measure"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:87
+#: src/translations.h:112
 msgid "Apophis"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:136
+#: src/core/modules/Planet.cpp:147
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "시직경: %1"
 
-#: src/translations.h:63
+#: src/translations.h:75
 msgid "Ariel"
 msgstr ""
 
-#: src/translations.h:185
+#: src/translations.h:214
 msgid "Arrow down to load list."
 msgstr "아래 화살표로 목록을 부르세요."
 
@@ -196,36 +216,36 @@ msgstr "아래 화살표로 목록을 부르세요."
 msgid "Arrow keys & left mouse drag"
 msgstr "방향키 & 마우스 왼쪽 드래그"
 
-#: src/ui_viewDialog.h:1043
+#: src/ui_viewDialog.h:1114
 msgid "Art brightness: "
 msgstr "그림 밝기: "
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:73
+#: src/translations.h:98
 msgid "Astraea"
 msgstr ""
 
-#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1015
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1081
 msgid "Atmosphere"
 msgstr "대기"
 
-#: src/gui/ConfigurationDialog.cpp:587
+#: src/gui/ConfigurationDialog.cpp:585
 msgid "Author"
 msgstr "작성자"
 
-#: src/core/modules/LandscapeMgr.cpp:450
+#: src/core/modules/LandscapeMgr.cpp:488
 msgid "Author: "
 msgstr "작성자: "
 
-#: src/gui/ConfigurationDialog.cpp:511
+#: src/gui/ConfigurationDialog.cpp:509
 msgid "Authors"
 msgstr "저작자"
 
-#: src/gui/StelGui.cpp:175
+#: src/gui/StelGui.cpp:176
 msgid "Auto hide horizontal button bar"
 msgstr "수평 단추 막대 자동 숨기기"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:177
 msgid "Auto hide vertical button bar"
 msgstr "수직 단추 막대 자동 숨기기"
 
@@ -233,24 +253,24 @@ msgstr "수직 단추 막대 자동 숨기기"
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "자동 축소 키로 초기 시야 방향으로 돌아가기"
 
-#: src/core/StelObject.cpp:91
+#: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "방위/고도: %1/%2"
 
-#: src/translations.h:164
+#: src/translations.h:193
 msgid "Azimuthal Grid"
 msgstr "방위 격자"
 
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1033
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1103
 msgid "Azimuthal grid"
 msgstr "방위 격자"
 
-#: src/translations.h:103
+#: src/translations.h:132
 msgid "Aztec"
 msgstr "아즈텍"
 
-#: src/translations.h:183
+#: src/translations.h:212
 msgid "CD/DVD Script: "
 msgstr "CD/DVD 스크립트: "
 
@@ -262,7 +282,7 @@ msgstr "CTRL + 마우스 왼쪽 클릭"
 msgid "CTRL + Up/Down"
 msgstr "CTRL + 위/아래"
 
-#: src/translations.h:136
+#: src/translations.h:165
 msgid "Calendar"
 msgstr "달력"
 
@@ -274,19 +294,23 @@ msgstr "칼리스토"
 msgid "Cancel"
 msgstr "취소"
 
-#: src/translations.h:159
+#: src/translations.h:188
 msgid "Cardinal Points"
 msgstr "방위기점"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1037
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
 msgid "Cardinal points"
 msgstr "방위기점"
 
-#: src/ui_viewDialog.h:1030
+#: src/translations.h:56
+msgid "Carme"
+msgstr ""
+
+#: src/ui_viewDialog.h:1100
 msgid "Celestial Sphere"
 msgstr "천구"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:164
 msgid "Center on selected object"
 msgstr "선택한 천체로 이동"
 
@@ -294,16 +318,16 @@ msgstr "선택한 천체로 이동"
 msgid "Ceres"
 msgstr ""
 
-#: src/translations.h:68
+#: src/translations.h:80
 msgid "Charon"
 msgstr "카론"
 
-#: src/translations.h:104
+#: src/translations.h:133
 msgid "Chinese"
 msgstr "중국"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:89
+#: src/translations.h:114
 msgid "Chiron"
 msgstr ""
 
@@ -319,11 +343,11 @@ msgstr "내려받으려면 클릭하세요."
 msgid "Close window when script runs"
 msgstr "스크립트 실행 중에 창 닫기"
 
-#: src/core/modules/Nebula.cpp:284
+#: src/core/modules/Nebula.cpp:299
 msgid "Cluster associated with nebulosity"
 msgstr "성운과 관련된 성단"
 
-#: src/translations.h:123
+#: src/translations.h:152
 msgid "Colors "
 msgstr "색깔 "
 
@@ -339,23 +363,23 @@ msgstr ""
 msgid "Configuration"
 msgstr "설정"
 
-#: src/gui/StelGui.cpp:131
+#: src/gui/StelGui.cpp:132
 msgid "Configuration window"
 msgstr "설정 창"
 
-#: src/translations.h:157
+#: src/translations.h:186
 msgid "Constellation Art Intensity"
 msgstr "별자리 그림 명암도"
 
-#: src/translations.h:158
+#: src/translations.h:187
 msgid "Constellation Boundaries"
 msgstr "별자리 경계선"
 
-#: src/translations.h:155
+#: src/translations.h:184
 msgid "Constellation Lines"
 msgstr "별자리 선"
 
-#: src/translations.h:156
+#: src/translations.h:185
 msgid "Constellation Names"
 msgstr "별자리 이름"
 
@@ -375,11 +399,11 @@ msgstr "별자리 이름표"
 msgid "Constellation lines"
 msgstr "별자리 선"
 
-#: src/ui_viewDialog.h:1038
+#: src/ui_viewDialog.h:1109
 msgid "Constellations"
 msgstr "별자리"
 
-#: src/gui/ConfigurationDialog.cpp:515 src/gui/ViewDialog.cpp:347
+#: src/gui/ConfigurationDialog.cpp:513 src/gui/ViewDialog.cpp:368
 msgid "Contact"
 msgstr "연락처"
 
@@ -387,7 +411,7 @@ msgstr "연락처"
 msgid "Control"
 msgstr "제어"
 
-#: src/translations.h:180
+#: src/translations.h:209
 msgid "Correct for light travel time: "
 msgstr "빛의 여행 시간에 맞게 고치세요: "
 
@@ -399,7 +423,7 @@ msgstr "나라:"
 msgid "Current location information"
 msgstr "현재 위치 정보"
 
-#: src/translations.h:179
+#: src/translations.h:208
 msgid "Cursor Timeout: "
 msgstr "커서 타임아웃: "
 
@@ -407,27 +431,27 @@ msgstr "커서 타임아웃: "
 msgid "Cylinder"
 msgstr "원통도법"
 
-#: src/translations.h:143
+#: src/translations.h:172
 msgid "Date Display Format: "
 msgstr "날짜 표시 형식: "
 
-#: src/gui/StelGui.cpp:140 src/ui_dateTimeDialogGui.h:294
+#: src/gui/StelGui.cpp:141 src/ui_dateTimeDialogGui.h:294
 msgid "Date and Time"
 msgstr "날짜 및 시간"
 
-#: src/gui/StelGui.cpp:134
+#: src/gui/StelGui.cpp:135
 msgid "Date/time window"
 msgstr "날짜/시간 창"
 
-#: src/translations.h:135
+#: src/translations.h:164
 msgid "Day keys: "
 msgstr "날짜 키: "
 
-#: src/gui/StelGui.cpp:144
+#: src/gui/StelGui.cpp:145
 msgid "Decrease time speed"
 msgstr "시간 빠르기 감소"
 
-#: src/gui/StelGui.cpp:147
+#: src/gui/StelGui.cpp:148
 msgid "Decrease time speed (a little)"
 msgstr "시간 빠르기 감소 (약간)"
 
@@ -443,6 +467,10 @@ msgstr "데이모스"
 msgid "Delete"
 msgstr "삭제"
 
+#: src/translations.h:86
+msgid "Despina"
+msgstr ""
+
 #: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
 #: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
 #, qt-format
@@ -453,11 +481,11 @@ msgstr "개발자: %1"
 msgid "Developers"
 msgstr "만든 사람들"
 
-#: src/ui_viewDialog.h:1006
+#: src/ui_viewDialog.h:1072
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "매우 밝은 천체가 보일 때 어두운 별을 희미하게 합니다"
 
-#: src/translations.h:54
+#: src/translations.h:66
 msgid "Dione"
 msgstr "디오네"
 
@@ -485,12 +513,13 @@ msgstr "정보 보이지 않음"
 msgid "Displays compass bearing marks along the horizon"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:124
+#: src/core/modules/StarWrapper.cpp:122
+#: plugins/Supernovas/src/Supernova.cpp:107
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "거리: %1 광년"
 
-#: src/core/modules/Planet.cpp:132
+#: src/core/modules/Planet.cpp:143
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr "거리: %1AU"
@@ -500,7 +529,7 @@ msgstr "거리: %1AU"
 msgid "Doc author/developer: %1"
 msgstr "문서 저자/개발자: %1"
 
-#: src/gui/ConfigurationDialog.cpp:678
+#: src/gui/ConfigurationDialog.cpp:676
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -515,7 +544,7 @@ msgstr ""
 msgid "Download this file to view even more stars"
 msgstr "더 많은 별을 볼 수 있게 파일 내려받기"
 
-#: src/gui/ConfigurationDialog.cpp:730
+#: src/gui/ConfigurationDialog.cpp:728
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -524,11 +553,11 @@ msgstr ""
 "내려받는 중... %1\n"
 "(창을 닫아도 됩니다.)"
 
-#: src/ui_viewDialog.h:1008
+#: src/ui_viewDialog.h:1074
 msgid "Dynamic eye adaptation"
 msgstr "눈의 명암 적응"
 
-#: src/translations.h:99
+#: src/translations.h:128
 msgid "E"
 msgstr "동"
 
@@ -536,25 +565,34 @@ msgstr "동"
 msgid "Earth"
 msgstr "지구"
 
-#: src/core/modules/GridLinesMgr.cpp:520
+#: src/core/modules/GridLinesMgr.cpp:529
 msgid "Ecliptic"
 msgstr ""
 
-#: src/translations.h:167
+#: src/core/modules/Planet.cpp:136
+#, fuzzy, qt-format
+msgid "Ecliptic Geocentric (of date): %1/%2"
+msgstr "적경/적위 (날짜): %1/%2"
+
+#: src/translations.h:196
 msgid "Ecliptic Line"
 msgstr "황도"
 
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1036
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1107
 msgid "Ecliptic line"
 msgstr "황도"
 
-#: src/translations.h:124
+#: src/translations.h:153
 msgid "Effects "
 msgstr "효과 "
 
-#: src/translations.h:105
+#: src/translations.h:134
 msgid "Egyptian"
 msgstr "이집트"
+
+#: src/translations.h:52
+msgid "Elara"
+msgstr ""
 
 #: src/ui_configurationDialog.h:786
 msgid "Enable keyboard navigation"
@@ -564,7 +602,7 @@ msgstr "키보드 탐색 활성화"
 msgid "Enable mouse navigation"
 msgstr "마우스 탐색 활성화"
 
-#: src/translations.h:52
+#: src/translations.h:64
 msgid "Enceladus"
 msgstr "엔셀라두스"
 
@@ -576,40 +614,40 @@ msgstr "고도를 입력하세요. (단위:m)"
 msgid "Equal Area"
 msgstr "정적도법"
 
-#: src/core/modules/GridLinesMgr.cpp:524
+#: src/core/modules/GridLinesMgr.cpp:533
 msgid "Equator"
 msgstr ""
 
-#: src/translations.h:166
+#: src/translations.h:195
 msgid "Equator Line"
 msgstr "적도"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1034
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1104
 msgid "Equator line"
 msgstr "적도"
 
-#: src/translations.h:165
+#: src/translations.h:194
 msgid "Equatorial Grid"
 msgstr "적위 격자"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1032
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1102
 msgid "Equatorial J2000 grid"
 msgstr "J2000 적위 격자"
 
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1031
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1101
 msgid "Equatorial grid"
 msgstr "적위 격자"
 
-#: src/translations.h:69
+#: src/translations.h:81
 msgid "Eris"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:91
+#: src/translations.h:116
 msgid "Eros"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:725 src/gui/ConfigurationDialog.cpp:759
+#: src/gui/ConfigurationDialog.cpp:723 src/gui/ConfigurationDialog.cpp:757
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -618,7 +656,7 @@ msgstr ""
 "%1을 내려받는 중 오류 발생:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:814
+#: src/gui/ConfigurationDialog.cpp:812
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -640,19 +678,24 @@ msgstr "오류!"
 msgid "Europa"
 msgstr "유로파"
 
-#: src/gui/ViewDialog.cpp:478
+#: src/gui/ViewDialog.cpp:515
 msgid "Exceptional Leonid rate"
 msgstr "예외적인 사자자리 유성우 빈도수"
 
-#: src/ui_searchDialogGui.h:440 src/ui_searchDialogGui.h:441
+#: src/ui_searchDialogGui.h:450
 msgid "Find Object"
 msgstr "천체 찾기"
 
-#: src/gui/ConfigurationDialog.cpp:667
+#: src/ui_searchDialogGui.h:451
+#, fuzzy
+msgid "Find Object or Position"
+msgstr "천체 찾기"
+
+#: src/gui/ConfigurationDialog.cpp:665
 msgid "Finished downloading all star catalogs!"
 msgstr "모든 별 목록의 다운로드가 끝났습니다!"
 
-#: src/gui/ConfigurationDialog.cpp:687
+#: src/gui/ConfigurationDialog.cpp:685
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -664,24 +707,24 @@ msgstr ""
 msgid "Fish-eye"
 msgstr "어안"
 
-#: src/gui/StelGui.cpp:126
+#: src/gui/StelGui.cpp:127
 msgid "Flip scene horizontally"
 msgstr "수평 반전"
 
-#: src/gui/StelGui.cpp:127
+#: src/gui/StelGui.cpp:128
 msgid "Flip scene vertically"
 msgstr "수직 반전"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:79
+#: src/translations.h:104
 msgid "Flora"
 msgstr ""
 
-#: src/gui/StelGui.cpp:115
+#: src/gui/StelGui.cpp:116
 msgid "Fog"
 msgstr "안개"
 
-#: src/gui/StelGui.cpp:125
+#: src/gui/StelGui.cpp:126
 msgid "Full-screen mode"
 msgstr "전체 화면 모드"
 
@@ -693,7 +736,12 @@ msgstr "더 읽어 보기"
 msgid "Galactic grid"
 msgstr "성운 눈금"
 
-#: src/core/modules/Nebula.cpp:269
+#: src/translations.h:87
+#, fuzzy
+msgid "Galatea"
+msgstr "은하"
+
+#: src/core/modules/Nebula.cpp:284
 msgid "Galaxy"
 msgstr "은하"
 
@@ -701,11 +749,11 @@ msgstr "은하"
 msgid "Ganymede"
 msgstr "가니메데"
 
-#: src/translations.h:121
+#: src/translations.h:150
 msgid "General "
 msgstr "일반 "
 
-#: src/gui/ConfigurationDialog.cpp:676
+#: src/gui/ConfigurationDialog.cpp:674
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%2 중 %1의 목록을 받음"
@@ -714,7 +762,7 @@ msgstr "%2 중 %1의 목록을 받음"
 msgid "Get catalog x of y"
 msgstr "y 의 x 목록 가져오기"
 
-#: src/core/modules/Nebula.cpp:275
+#: src/core/modules/Nebula.cpp:290
 msgid "Globular cluster"
 msgstr "구상성단"
 
@@ -727,21 +775,30 @@ msgstr "그래픽/기타 디자이너: %1"
 msgid "Gravity labels"
 msgstr "중력 이름표"
 
-#: src/gui/StelGui.cpp:113
+#: src/ui_searchDialogGui.h:529
+msgid "Greek letters for Bayer designations"
+msgstr ""
+
+#: src/gui/StelGui.cpp:114
 msgid "Ground"
 msgstr "지면"
+
+#: src/translations.h:90
+#, fuzzy
+msgid "Halimede"
+msgstr "가니메데"
 
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
 msgstr "함메르도법"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:75
+#: src/translations.h:100
 msgid "Hebe"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:93
+#: src/translations.h:118
 msgid "Hektor"
 msgstr ""
 
@@ -749,7 +806,7 @@ msgstr ""
 msgid "Help"
 msgstr "도움말"
 
-#: src/gui/StelGui.cpp:130
+#: src/gui/StelGui.cpp:131
 msgid "Help window"
 msgstr "도움말 창"
 
@@ -761,29 +818,46 @@ msgstr "별자리를 클릭할 때에 다른 별자리 감추기"
 msgid "Hides the mouse cursor when inactive"
 msgstr "멈췄을 때 마우스 커서 숨기기"
 
-#: src/gui/ViewDialog.cpp:481
+#: src/gui/ViewDialog.cpp:518
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "사상 최고 빈도수 (1996년 사자자리 유성우)"
 
-#: src/core/StelObject.cpp:80
+#: src/translations.h:51
+msgid "Himalia"
+msgstr ""
+
+#: plugins/Supernovas/src/Supernovas.cpp:59
+msgid "Historical supernova"
+msgstr ""
+
+#: src/core/modules/GridLinesMgr.cpp:537
+msgid "Horizon"
+msgstr ""
+
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
+#, fuzzy
+msgid "Horizon line"
+msgstr "자오선"
+
+#: src/core/StelObject.cpp:94 src/core/StelObject.cpp:97
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "시간각/적위: %1/%2"
 
-#: src/ui_viewDialog.h:1023
+#: src/ui_viewDialog.h:1093
 msgid "Hourly zenith rate:"
 msgstr "시간당 유성 개수:"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:83
+#: src/translations.h:108
 msgid "Hygiea"
 msgstr ""
 
-#: src/translations.h:57
+#: src/translations.h:69
 msgid "Hyperion"
 msgstr "하이페리온"
 
-#: src/translations.h:58
+#: src/translations.h:70
 msgid "Iapetus"
 msgstr "라페투스"
 
@@ -797,11 +871,11 @@ msgstr ""
 "어안 투영법, 즉 <i>정거방위도법</i>은 직선이 시야 중심으로부터 큰 각거리로 나"
 "타날 때 곡선이 됩니다 (매우 넓은 광각 카메라 렌즈에서 보이는 왜곡과 유사)."
 
-#: src/gui/StelGui.cpp:145
+#: src/gui/StelGui.cpp:146
 msgid "Increase time speed"
 msgstr "시간 빠르기 증가"
 
-#: src/gui/StelGui.cpp:148
+#: src/gui/StelGui.cpp:149
 msgid "Increase time speed (a little)"
 msgstr "시간 빠르기 증가 (약간)"
 
@@ -809,7 +883,7 @@ msgstr "시간 빠르기 증가 (약간)"
 msgid "Install a new landscape from a ZIP archive..."
 msgstr "ZIP 압축 파일에서 새 전망 자료 설치..."
 
-#: src/translations.h:106
+#: src/translations.h:135
 msgid "Inuit"
 msgstr "이뉴잇"
 
@@ -822,7 +896,7 @@ msgid "Io"
 msgstr "이오"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:77
+#: src/translations.h:102
 msgid "Iris"
 msgstr ""
 
@@ -834,27 +908,28 @@ msgstr ""
 msgid "Jupiter"
 msgstr "목성"
 
-#: src/ui_searchDialogGui.h:446
-msgid "Keyboard for Greek input"
+#. TRANSLATORS: Name of supernova SN 1604A
+#: src/translations.h:122
+msgid "Kepler's Supernova"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:164
 msgid "Keys"
 msgstr "키"
 
-#: src/translations.h:107
+#: src/translations.h:136
 msgid "Korean"
 msgstr "한국"
 
-#: src/ui_viewDialog.h:1018
+#: src/ui_viewDialog.h:1088
 msgid "Labels and Markers"
 msgstr "이름표와 표지"
 
-#: src/translations.h:108
+#: src/translations.h:137
 msgid "Lakota"
 msgstr "라코타 인디언"
 
-#: src/ui_viewDialog.h:996
+#: src/ui_viewDialog.h:1062
 msgid "Landscape"
 msgstr "풍경"
 
@@ -868,39 +943,51 @@ msgstr "\"%1\" 전망 자료를 무사히 설치하였습니다."
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "\"%1\" 전망 자료를 무사히 제거하였습니다"
 
-#: src/translations.h:172
+#: src/translations.h:201
 msgid "Landscape: "
 msgstr "풍경: "
+
+#: src/translations.h:93
+msgid "Laomedeia"
+msgstr ""
+
+#: src/translations.h:88
+msgid "Larissa"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:395
 msgid "Latitude:"
 msgstr "위도:"
 
-#: src/translations.h:128
+#: src/translations.h:157
 msgid "Latitude: "
 msgstr "위도: "
+
+#: src/translations.h:58
+msgid "Leda"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:56
 msgid "Left click"
 msgstr "마우스 왼쪽 클릭"
 
-#: src/gui/ConfigurationDialog.cpp:588
+#: src/gui/ConfigurationDialog.cpp:586
 msgid "License"
 msgstr "라이선스"
 
-#: src/translations.h:171
+#: src/translations.h:200
 msgid "Light Pollution Luminance: "
 msgstr "광공해 밝기: "
 
-#: src/ui_viewDialog.h:1017
+#: src/ui_viewDialog.h:1083
 msgid "Light pollution: "
 msgstr "광공해: "
 
-#: src/translations.h:153
+#: src/translations.h:182
 msgid "Limiting Magnitude: "
 msgstr "한계등급 "
 
-#: src/translations.h:188
+#: src/translations.h:217
 msgid "Load Default Configuration: "
 msgstr "설정 기본값 불러오기: "
 
@@ -908,7 +995,7 @@ msgstr "설정 기본값 불러오기: "
 msgid "Load at startup"
 msgstr "시작시 불러오기"
 
-#: src/translations.h:182
+#: src/translations.h:211
 msgid "Local Script: "
 msgstr "로컬 스크립트: "
 
@@ -916,11 +1003,11 @@ msgstr "로컬 스크립트: "
 msgid "Location"
 msgstr "위치"
 
-#: src/gui/StelGui.cpp:135
+#: src/gui/StelGui.cpp:136
 msgid "Location window"
 msgstr "위치 창"
 
-#: src/core/modules/LandscapeMgr.cpp:453
+#: src/core/modules/LandscapeMgr.cpp:491
 msgid "Location: "
 msgstr "위치: "
 
@@ -932,24 +1019,29 @@ msgstr "로그"
 msgid "Longitude:"
 msgstr "경도:"
 
-#: src/translations.h:129
+#: src/translations.h:158
 msgid "Longitude: "
 msgstr "경도: "
 
-#: src/translations.h:175
+#: src/translations.h:55
+msgid "Lysithea"
+msgstr ""
+
+#: src/translations.h:204
 msgid "Magnitude Scaling Multiplier: "
 msgstr "등급에 비례한 배율: "
 
-#: src/translations.h:150
+#: src/translations.h:179
 msgid "Magnitude Sizing Multiplier: "
 msgstr "등급에 의한 배율: "
 
-#: src/core/modules/Nebula.cpp:95 src/core/modules/Planet.cpp:122
+#: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:120
+#: plugins/Supernovas/src/Supernova.cpp:98
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "등급: <b>%1</b>"
 
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:110
+#: src/core/modules/StarWrapper.cpp:51 src/core/modules/StarWrapper.cpp:108
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
 msgstr "등급: <b>%1</b>(B-V: %2)"
@@ -958,15 +1050,15 @@ msgstr "등급: <b>%1</b>(B-V: %2)"
 msgid "Main"
 msgstr "주 설정"
 
-#: src/translations.h:173
+#: src/translations.h:202
 msgid "Manual zoom: "
 msgstr "수동 확대: "
 
-#: src/translations.h:109
+#: src/translations.h:138
 msgid "Maori"
 msgstr "마오리"
 
-#: src/ui_viewDialog.h:994
+#: src/ui_viewDialog.h:1060
 msgid "Markings"
 msgstr "표지"
 
@@ -982,11 +1074,11 @@ msgstr "화면 중심의 원 바깥쪽에 있는 모든 것을 표시하지 않�
 msgid "Maximum FOV: "
 msgstr "최대 화각: "
 
-#: src/translations.h:151
+#: src/translations.h:180
 msgid "Maximum Magnitude to Label: "
 msgstr "이름표가 붙는 최대 등급: "
 
-#: src/translations.h:177
+#: src/translations.h:206
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "성운에 이름표가 붙는 최대 등급: "
 
@@ -998,37 +1090,37 @@ msgstr "메르카토르"
 msgid "Mercury"
 msgstr "수성"
 
-#: src/core/modules/GridLinesMgr.cpp:516
+#: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
 msgstr ""
 
-#: src/translations.h:163
+#: src/translations.h:192
 msgid "Meridian Line"
 msgstr "자오선"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1035
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1105
 msgid "Meridian line"
 msgstr "자오선"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:81
+#: src/translations.h:61 src/translations.h:106
 msgid "Metis"
 msgstr ""
 
-#: src/translations.h:176
+#: src/translations.h:205
 msgid "Milky Way intensity: "
 msgstr "은하수 농도: "
 
-#: src/translations.h:51
+#: src/translations.h:63
 msgid "Mimas"
 msgstr "미마스"
 
-#: src/translations.h:62
+#: src/translations.h:74
 msgid "Miranda"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:234 src/gui/HelpDialog.cpp:326
-#: src/gui/HelpDialog.cpp:328 src/gui/StelGui.cpp:169
+#: src/gui/HelpDialog.cpp:328 src/gui/StelGui.cpp:170
 msgid "Miscellaneous"
 msgstr "기타"
 
@@ -1054,19 +1146,23 @@ msgstr ""
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:162
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:163
 msgid "Movement and Selection"
 msgstr "이동 및 선택"
 
-#: src/translations.h:97
+#: src/translations.h:126
 msgid "N"
 msgstr "북"
+
+#: src/translations.h:84
+msgid "Naiad"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:408
 msgid "Name/City:"
 msgstr "이름/나라:"
 
-#: src/translations.h:110
+#: src/translations.h:139
 msgid "Navajo"
 msgstr "나바호"
 
@@ -1074,39 +1170,47 @@ msgstr "나바호"
 msgid "Navigation"
 msgstr "탐색"
 
-#: src/core/modules/Nebula.cpp:278
+#: src/core/modules/Nebula.cpp:293
 msgid "Nebula"
 msgstr "성운"
 
-#: src/translations.h:169
+#: src/translations.h:198
 msgid "Nebula Circles"
 msgstr "성운 영역"
 
-#: src/translations.h:168
+#: src/translations.h:197
 msgid "Nebula Names"
 msgstr "성운 이름"
 
-#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1020
+#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1090
 msgid "Nebulas"
 msgstr "성운"
 
-#: src/gui/StelGui.cpp:118
+#: src/gui/StelGui.cpp:119
 msgid "Nebulas background images"
 msgstr "성운 배경 그림"
 
-#: src/translations.h:60
+#: src/translations.h:72
 msgid "Neptune"
 msgstr "해왕성"
 
-#: src/gui/LocationDialog.cpp:332
+#: src/translations.h:83
+msgid "Nereid"
+msgstr ""
+
+#: src/translations.h:94
+msgid "Neso"
+msgstr ""
+
+#: src/gui/LocationDialog.cpp:334
 msgid "New Location"
 msgstr "새 위치"
 
-#: src/gui/StelGui.cpp:124
+#: src/gui/StelGui.cpp:125
 msgid "Night mode"
 msgstr "야간 모드"
 
-#: src/gui/ViewDialog.cpp:401
+#: src/gui/ViewDialog.cpp:422
 msgid "No description"
 msgstr "설명 없음"
 
@@ -1117,7 +1221,7 @@ msgstr "설명 없음"
 msgid "No landscape was installed."
 msgstr "전망 자료를 전혀 설치하지 않았습니다."
 
-#: src/gui/ViewDialog.cpp:469
+#: src/gui/ViewDialog.cpp:506
 msgid "No shooting stars"
 msgstr "유성 없음"
 
@@ -1125,11 +1229,11 @@ msgstr "유성 없음"
 msgid "None"
 msgstr "없음"
 
-#: src/gui/ViewDialog.cpp:472
+#: src/gui/ViewDialog.cpp:509
 msgid "Normal rate"
 msgstr "정상 속도"
 
-#: src/translations.h:111
+#: src/translations.h:140
 msgid "Norse"
 msgstr "고대 스칸디나비아"
 
@@ -1138,13 +1242,23 @@ msgstr "고대 스칸디나비아"
 msgid "OSX Developer: %1"
 msgstr "OSX 개발자: %1"
 
-#: src/translations.h:66
+#: src/translations.h:78
 msgid "Oberon"
 msgstr ""
 
-#: src/translations.h:174
+#: src/ui_searchDialogGui.h:530
+#, fuzzy
+msgid "Object"
+msgstr "천체 찾기"
+
+#: src/translations.h:203
 msgid "Object Sizing Rule: "
 msgstr "천체 크기 자(尺): "
+
+#: src/core/modules/Planet.cpp:137
+#, fuzzy, qt-format
+msgid "Obliquity (of date): %1"
+msgstr "적경/적위 (날짜): %1/%2"
 
 #: plugins/Oculars/src/Oculars.cpp:943
 msgid "Ocular view"
@@ -1158,11 +1272,11 @@ msgstr ""
 msgid "Oculars popup menu"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:272
+#: src/core/modules/Nebula.cpp:287
 msgid "Open cluster"
 msgstr "산개성단"
 
-#: src/ui_viewDialog.h:1046 src/ui_viewDialog.h:1051 src/ui_viewDialog.h:1053
+#: src/ui_viewDialog.h:1117 src/ui_viewDialog.h:1122 src/ui_viewDialog.h:1124
 #: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
 msgid "Options"
 msgstr "설정"
@@ -1197,10 +1311,14 @@ msgstr ""
 msgid "Pan view around the sky"
 msgstr "회전하며 하늘 보기"
 
-#: src/core/modules/StarWrapper.cpp:127
+#: src/core/modules/StarWrapper.cpp:125
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "시차: %1\""
+
+#: src/translations.h:53
+msgid "Pasiphae"
+msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
@@ -1218,27 +1336,27 @@ msgstr ""
 msgid "Phobos"
 msgstr "포보스"
 
-#: src/translations.h:59
+#: src/translations.h:71
 msgid "Phoebe"
 msgstr "포이베"
 
-#: src/translations.h:160
+#: src/translations.h:189
 msgid "Planet Names"
 msgstr "행성 이름"
 
-#: src/translations.h:161
+#: src/translations.h:190
 msgid "Planet Orbits"
 msgstr "행성 궤도"
 
-#: src/translations.h:162
+#: src/translations.h:191
 msgid "Planet Trails"
 msgstr "행성 궤적"
 
-#: src/gui/StelGui.cpp:121
+#: src/gui/StelGui.cpp:122
 msgid "Planet orbits"
 msgstr "행성 궤도"
 
-#: src/gui/StelGui.cpp:122
+#: src/gui/StelGui.cpp:123
 msgid "Planet trails"
 msgstr "행성 궤적"
 
@@ -1246,7 +1364,7 @@ msgstr "행성 궤적"
 msgid "Planet:"
 msgstr "행성:"
 
-#: src/core/modules/LandscapeMgr.cpp:461
+#: src/core/modules/LandscapeMgr.cpp:499
 msgid "Planet: "
 msgstr "행성: "
 
@@ -1254,19 +1372,19 @@ msgstr "행성: "
 msgid "Planetarium options"
 msgstr "플라네타리움 설정"
 
-#: src/core/modules/Nebula.cpp:281
+#: src/core/modules/Nebula.cpp:296
 msgid "Planetary nebula"
 msgstr "행성상성운"
 
-#: src/ui_viewDialog.h:1021
+#: src/ui_viewDialog.h:1091
 msgid "Planets"
 msgstr "행성"
 
-#: src/ui_viewDialog.h:1009
+#: src/ui_viewDialog.h:1075
 msgid "Planets and satellites"
 msgstr "행성과 위성"
 
-#: src/gui/StelGui.cpp:120
+#: src/gui/StelGui.cpp:121
 msgid "Planets labels"
 msgstr "행성 이름표"
 
@@ -1274,11 +1392,11 @@ msgstr "행성 이름표"
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:121
 #: plugins/CompassMarks/src/CompassMarks.cpp:121
 #: plugins/Oculars/src/Oculars.cpp:931 plugins/Oculars/src/Oculars.cpp:945
-#: plugins/Satellites/src/Satellites.cpp:124
+#: plugins/Satellites/src/Satellites.cpp:123
 msgid "Plugin Key Bindings"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:82
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:81
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
@@ -1288,25 +1406,30 @@ msgstr ""
 msgid "Plugins"
 msgstr "플러그인"
 
-#: src/translations.h:67
+#: src/translations.h:79
 msgid "Pluto"
 msgstr "명왕성(134340 플루토)"
 
-#: src/translations.h:112
+#: src/translations.h:141
 msgid "Polynesian"
 msgstr "폴리네시아"
 
-#: plugins/Satellites/src/Satellites.cpp:71
+#: src/ui_searchDialogGui.h:532
+#, fuzzy
+msgid "Position"
+msgstr "투영"
+
+#: plugins/Satellites/src/Satellites.cpp:70
 msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
 msgstr ""
 
-#: src/translations.h:138
+#: src/translations.h:167
 msgid "Preset Sky Time: "
 msgstr "하늘 시간 미리 설정: "
 
-#: src/translations.h:141
+#: src/translations.h:170
 msgid "Preset Time"
 msgstr "미리 설정된 시간"
 
@@ -1319,37 +1442,49 @@ msgstr "프로그램 언어"
 msgid "Project coordinator & lead developer: %1"
 msgstr "프로젝트 책임자 & 핵심 개발자: %1"
 
-#: src/ui_viewDialog.h:1044
+#: src/ui_viewDialog.h:1115
 msgid "Projection"
 msgstr "투영"
+
+#: src/translations.h:89
+msgid "Proteus"
+msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
 msgstr ""
 
-#: src/gui/StelGui.cpp:171
+#: src/translations.h:91
+msgid "Psamathe"
+msgstr ""
+
+#: src/gui/StelGui.cpp:172
 msgid "Quit"
 msgstr "종료"
 
-#: src/core/StelObject.cpp:65
+#: src/core/StelObject.cpp:79
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
 msgstr "적경/적위 (J2000): %1/%2"
 
-#: src/core/StelObject.cpp:72
+#: src/core/StelObject.cpp:86
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
 msgstr "적경/적위 (날짜): %1/%2"
 
-#: src/ui_searchDialogGui.h:520
+#: src/ui_searchDialogGui.h:531
 msgid "RA/Dec (J2000):"
 msgstr "적경/적위 (J2000):"
+
+#: src/ui_viewDialog.h:1087
+msgid "Refraction/Extinction settings..."
+msgstr ""
 
 #: src/ui_helpDialogGui.h:272
 msgid "Refresh"
 msgstr "새로 고침"
 
-#: src/ui_viewDialog.h:1003
+#: src/ui_viewDialog.h:1069
 msgid "Relative scale:"
 msgstr "상대 크기:"
 
@@ -1386,7 +1521,7 @@ msgstr ""
 msgid "Retry"
 msgstr "다시 시도"
 
-#: src/translations.h:55
+#: src/translations.h:67
 msgid "Rhea"
 msgstr "레아"
 
@@ -1398,47 +1533,59 @@ msgstr "마우스 오른쪽 클릭"
 msgid "Run the selected script"
 msgstr "선택한 스크립트 실행"
 
-#: src/gui/ConfigurationDialog.cpp:617
+#: src/gui/ConfigurationDialog.cpp:615
 msgid "Running script: "
 msgstr "실행 중인 스크립트: "
 
-#: src/gui/ConfigurationDialog.cpp:624
+#: src/gui/ConfigurationDialog.cpp:622
 msgid "Running script: [none]"
 msgstr "실행 중인 스크립트: [없음]"
 
-#: src/translations.h:98
+#: src/translations.h:127
 msgid "S"
 msgstr "남"
 
-#: src/translations.h:113
+#: plugins/Supernovas/src/Supernovas.cpp:62
+msgid ""
+"SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
+"July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
+"1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
+"August), SN 1972E (8 May) and SN 1987A (24 February)"
+msgstr ""
+
+#: src/translations.h:142
 msgid "Sami"
 msgstr "스칸디나비아"
 
-#: plugins/Satellites/src/Satellites.cpp:127
-msgid "Satellite hints"
-msgstr ""
-
-#: plugins/Satellites/src/Satellites.cpp:129
-msgid "Satellite labels"
-msgstr ""
-
-#: plugins/Satellites/src/Satellites.cpp:68
-msgid "Satellites"
+#: src/translations.h:92
+msgid "Sao"
 msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:126
+msgid "Satellite hints"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:128
+msgid "Satellite labels"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:67
+msgid "Satellites"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:125
 msgid "Satellites configuration window"
 msgstr ""
 
-#: src/translations.h:50
+#: src/translations.h:62
 msgid "Saturn"
 msgstr "토성"
 
-#: src/translations.h:189
+#: src/translations.h:218
 msgid "Save Current Configuration as Default: "
 msgstr "현재 설정을 기본값으로 저장: "
 
-#: src/gui/StelGui.cpp:172
+#: src/gui/StelGui.cpp:173
 msgid "Save screenshot"
 msgstr "스크린샷 저장"
 
@@ -1452,7 +1599,7 @@ msgid ""
 "you start Stellarium"
 msgstr "사용 중 변경한 사항을 스텔라리움을 시작할 때에 적용되도록 저장합니다."
 
-#: src/ui_viewDialog.h:1014
+#: src/ui_viewDialog.h:1080
 msgid "Scale Moon"
 msgstr "달 확대"
 
@@ -1464,7 +1611,7 @@ msgstr "스크린샷 경로"
 msgid "Screenshots"
 msgstr "스크린샷"
 
-#: src/gui/StelGui.cpp:137
+#: src/gui/StelGui.cpp:138
 msgid "Script console window"
 msgstr "스크립트 콘솔 창"
 
@@ -1472,11 +1619,11 @@ msgstr "스크립트 콘솔 창"
 msgid "Scripts"
 msgstr "스크립트"
 
-#: src/translations.h:125
+#: src/translations.h:154
 msgid "Scripts "
 msgstr "스크립트 "
 
-#: src/gui/StelGui.cpp:132
+#: src/gui/StelGui.cpp:133
 msgid "Search window"
 msgstr "검색 창"
 
@@ -1484,7 +1631,7 @@ msgstr "검색 창"
 msgid "Select a ZIP archive that contains a Stellarium landscape"
 msgstr "Stellarium 전망 자료를 담고 있는 ZIP 압축 파일을 선택합니다."
 
-#: src/translations.h:186
+#: src/translations.h:215
 msgid "Select and exit to run."
 msgstr "선택-종료하고 실행하세요."
 
@@ -1492,7 +1639,7 @@ msgstr "선택-종료하고 실행하세요."
 msgid "Select object"
 msgstr "천체 찾기"
 
-#: src/gui/ConfigurationDialog.cpp:297
+#: src/gui/ConfigurationDialog.cpp:295
 msgid "Select screenshot directory"
 msgstr "스크린샷 경로 선택"
 
@@ -1504,39 +1651,39 @@ msgstr "하나의 별자리 선택"
 msgid "Selected object information"
 msgstr "선택한 천체 정보"
 
-#: src/translations.h:119
+#: src/translations.h:148
 msgid "Set Location "
 msgstr "위치 설정 "
 
-#: src/translations.h:120
+#: src/translations.h:149
 msgid "Set Time "
 msgstr "시간 설정 "
 
-#: src/translations.h:134
+#: src/translations.h:163
 msgid "Set Time Zone: "
 msgstr "시간대 설정: "
 
-#: src/translations.h:192
+#: src/translations.h:221
 msgid "Set UI Locale: "
 msgstr "인터페이스 지역 설정: "
 
-#: src/gui/StelGui.cpp:167
+#: src/gui/StelGui.cpp:168
 msgid "Set home planet to selected planet"
 msgstr "선택된 행성을 모행성으로 설정"
 
-#: src/gui/StelGui.cpp:146
+#: src/gui/StelGui.cpp:147
 msgid "Set normal time rate"
 msgstr "정상 속도로"
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:143
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:144
 msgid "Set the normal script execution rate"
 msgstr "스크립트 실행 속도를 보통으로"
 
-#: src/gui/StelGui.cpp:149
+#: src/gui/StelGui.cpp:150
 msgid "Set time rate to zero"
 msgstr "시간 멈춤"
 
-#: src/gui/StelGui.cpp:150
+#: src/gui/StelGui.cpp:151
 msgid "Set time to now"
 msgstr "현재 시각으로 설정"
 
@@ -1546,7 +1693,7 @@ msgid ""
 "Stellarium starts"
 msgstr "스텔라리움을 시작할 때 시뮬레이션 시각을 다음의 시각으로 맞춥니다."
 
-#: src/ui_viewDialog.h:1022
+#: src/ui_viewDialog.h:1092
 msgid "Shooting Stars"
 msgstr "유성"
 
@@ -1554,15 +1701,15 @@ msgstr "유성"
 msgid "Short"
 msgstr "짧게"
 
-#: src/ui_viewDialog.h:1042
+#: src/ui_viewDialog.h:1113
 msgid "Show art"
 msgstr "그림 보기"
 
-#: src/ui_viewDialog.h:1016
+#: src/ui_viewDialog.h:1082
 msgid "Show atmosphere"
 msgstr "대기 보기"
 
-#: src/ui_viewDialog.h:1041
+#: src/ui_viewDialog.h:1112
 msgid "Show boundaries"
 msgstr "경계선 보기"
 
@@ -1570,35 +1717,35 @@ msgstr "경계선 보기"
 msgid "Show flip buttons"
 msgstr "반전 단추 보기"
 
-#: src/ui_viewDialog.h:1048
+#: src/ui_viewDialog.h:1119
 msgid "Show fog"
 msgstr "안개 보기"
 
-#: src/ui_viewDialog.h:1047
+#: src/ui_viewDialog.h:1118
 msgid "Show ground"
 msgstr "지면 보기"
 
-#: src/ui_viewDialog.h:1040
+#: src/ui_viewDialog.h:1111
 msgid "Show labels"
 msgstr "이름표 보기"
 
-#: src/ui_viewDialog.h:1039
+#: src/ui_viewDialog.h:1110
 msgid "Show lines"
 msgstr "선 보기"
 
-#: src/ui_viewDialog.h:1011
+#: src/ui_viewDialog.h:1077
 msgid "Show planet markers"
 msgstr "행성 표지 보기"
 
-#: src/ui_viewDialog.h:1012
+#: src/ui_viewDialog.h:1078
 msgid "Show planet orbits"
 msgstr "행성 궤도 보기"
 
-#: src/ui_viewDialog.h:1010
+#: src/ui_viewDialog.h:1076
 msgid "Show planets"
 msgstr "행성 보기"
 
-#: src/translations.h:148
+#: src/translations.h:177
 msgid "Show: "
 msgstr "보이기: "
 
@@ -1606,17 +1753,21 @@ msgstr "보이기: "
 msgid "Shows the sky as if looking through a telescope eyepiece"
 msgstr ""
 
-#: src/translations.h:190
+#: src/translations.h:219
 msgid "Shut Down: "
 msgstr "종료: "
 
-#: src/translations.h:137
+#: src/translations.h:166
 msgid "Sidereal"
 msgstr "항성의"
 
-#: src/ui_viewDialog.h:1013
+#: src/ui_viewDialog.h:1079
 msgid "Simulate light speed"
 msgstr "광속 시뮬레이션"
+
+#: src/translations.h:54
+msgid "Sinope"
+msgstr ""
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
@@ -1624,40 +1775,40 @@ msgstr "광속 시뮬레이션"
 msgid "Size on disk: %1 MiB"
 msgstr "디스크 상의 용량: %1 MiB"
 
-#: src/core/modules/Nebula.cpp:100
+#: src/core/modules/Nebula.cpp:104
 #, qt-format
 msgid "Size: %1"
 msgstr "크기: %1"
 
-#: src/ui_viewDialog.h:992
+#: src/ui_viewDialog.h:1058
 msgid "Sky"
 msgstr "하늘"
 
-#: src/translations.h:145
+#: src/translations.h:174
 msgid "Sky Culture: "
 msgstr "하늘 문화: "
 
-#: src/translations.h:146
+#: src/translations.h:175
 msgid "Sky Language: "
 msgstr "하늘 언어: "
 
-#: src/translations.h:139
+#: src/translations.h:168
 msgid "Sky Time At Start-up: "
 msgstr "시작시 하늘 시간 적용: "
 
-#: src/translations.h:133
+#: src/translations.h:162
 msgid "Sky Time: "
 msgstr "하늘 시간: "
 
-#: src/gui/StelGui.cpp:133
+#: src/gui/StelGui.cpp:134
 msgid "Sky and viewing options window"
 msgstr "하늘과 보기 설정 창"
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:141
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:142
 msgid "Slow down the script execution rate"
 msgstr "스크립트 실행 속도를 느리게"
 
-#: src/translations.h:131
+#: src/translations.h:160
 msgid "Solar System Body: "
 msgstr "태양계 천체: "
 
@@ -1665,7 +1816,7 @@ msgstr "태양계 천체: "
 msgid "Solar System Editor"
 msgstr ""
 
-#: src/translations.h:70
+#: src/translations.h:95
 msgid "Solar System Observer"
 msgstr "태양계 관측자"
 
@@ -1674,12 +1825,12 @@ msgstr "태양계 관측자"
 msgid "Space"
 msgstr "스페이스"
 
-#: src/core/modules/StarWrapper.cpp:120
+#: src/core/modules/StarWrapper.cpp:118
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "스펙트럼형: %1"
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:142
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:143
 msgid "Speed up the script execution rate"
 msgstr "스크립트 실행 속도를 빠르게"
 
@@ -1695,11 +1846,11 @@ msgstr ""
 "구면경 왜곡은 저가형 플라네타리움 시스템에서 구면경에 스텔라리움을 투영할 때 "
 "사용합니다."
 
-#: src/gui/ViewDialog.cpp:475
+#: src/gui/ViewDialog.cpp:512
 msgid "Standard Perseids rate"
 msgstr "표준 페르세우스 유성우 빈도수"
 
-#: src/translations.h:149
+#: src/translations.h:178
 msgid "Star Value Multiplier: "
 msgstr "밝기에 의한 배율: "
 
@@ -1707,15 +1858,15 @@ msgstr "밝기에 의한 배율: "
 msgid "Star catalog updates"
 msgstr "별 목록 업데이트"
 
-#: src/ui_viewDialog.h:998
+#: src/ui_viewDialog.h:1064
 msgid "Starlore"
 msgstr "하늘 문화"
 
-#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1001 src/ui_viewDialog.h:1019
+#: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1067 src/ui_viewDialog.h:1089
 msgid "Stars"
 msgstr "별"
 
-#: src/translations.h:122
+#: src/translations.h:151
 msgid "Stars "
 msgstr "별 "
 
@@ -1723,7 +1874,7 @@ msgstr "별 "
 msgid "Starts Stellarium at system clock date and time"
 msgstr "시스템 날짜 및 시각으로 스텔라리움을 시작합니다."
 
-#: src/gui/ConfigurationDialog.cpp:463
+#: src/gui/ConfigurationDialog.cpp:461
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "시작시 화각: %1%2"
@@ -1736,7 +1887,7 @@ msgstr "시작시 화각: XX"
 msgid "Startup date and time"
 msgstr "시작시 날짜 및 시각"
 
-#: src/gui/ConfigurationDialog.cpp:471
+#: src/gui/ConfigurationDialog.cpp:469
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "시작시 시야 방향 방위/고도: %1/%2"
@@ -1776,23 +1927,23 @@ msgstr "실행 중인 스크립트 정지"
 msgid "Stop the download. You can always restart it later"
 msgstr "내려받기 중단. 이후 언제라도 다시 받을 수 있습니다."
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:159
 msgid "Subtract 1 sidereal day"
 msgstr "1 항성일 빼기"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:161
 msgid "Subtract 1 sidereal week"
 msgstr "1 항성주 빼기"
 
-#: src/gui/StelGui.cpp:154
+#: src/gui/StelGui.cpp:155
 msgid "Subtract 1 solar day"
 msgstr "1 태양일 빼기"
 
-#: src/gui/StelGui.cpp:152
+#: src/gui/StelGui.cpp:153
 msgid "Subtract 1 solar hour"
 msgstr "1 태양시 빼기"
 
-#: src/gui/StelGui.cpp:156
+#: src/gui/StelGui.cpp:157
 msgid "Subtract 1 solar week"
 msgstr "1 태양주 빼기"
 
@@ -1805,7 +1956,7 @@ msgstr "성공"
 msgid "Sun"
 msgstr "태양"
 
-#: src/gui/StelGui.cpp:170
+#: src/gui/StelGui.cpp:171
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "적도의/경위대 전환"
 
@@ -1826,12 +1977,16 @@ msgstr "시각 지정:"
 msgid "Telescope Control"
 msgstr "망원경 제어"
 
-#: src/translations.h:53
+#: src/translations.h:65
 msgid "Tethys"
 msgstr "테티스"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:79
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:78
 msgid "Text User Interface"
+msgstr ""
+
+#: src/translations.h:85
+msgid "Thalassa"
 msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:187
@@ -1882,9 +2037,15 @@ msgstr ""
 "메르카토르도법은 세계지도 투영에서 가장 많이 사용됩니다. 이 투영법은 방향과 "
 "모양은 유지하나 적도로부터 각도가 증가할 때 크기를 왜곡합니다."
 
-#: plugins/Satellites/src/Satellites.cpp:163
+#: plugins/Satellites/src/Satellites.cpp:162
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
+msgstr ""
+
+#: plugins/Supernovas/src/Supernovas.cpp:62
+msgid ""
+"The plugin for visualization of some historical supernovas, brighter 10 "
+"magnitude"
 msgstr ""
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:220
@@ -1904,6 +2065,10 @@ msgstr "선택한 전망 자료는 (완전히) 제거할 수 없습니다."
 msgid "The width of your view when Stellarium starts"
 msgstr "스텔라리움을 시작할 때의 시야폭"
 
+#: src/translations.h:59
+msgid "Thebe"
+msgstr ""
+
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
@@ -1914,7 +2079,7 @@ msgstr ""
 msgid "This system does not support OpenGL."
 msgstr "이 시스템은 OpenGL을 지원하지 않습니다."
 
-#: src/translations.h:142
+#: src/translations.h:171
 msgid "Time Display Format: "
 msgstr "시간 표시 형식: "
 
@@ -1922,11 +2087,11 @@ msgstr "시간 표시 형식: "
 msgid "Time Zone"
 msgstr ""
 
-#: src/translations.h:56
+#: src/translations.h:68
 msgid "Titan"
 msgstr "타이탄"
 
-#: src/translations.h:65
+#: src/translations.h:77
 msgid "Titania"
 msgstr ""
 
@@ -1934,7 +2099,7 @@ msgstr ""
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "수직과 수평 화면 반전 단추를 켜고 끕니다."
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:178
 msgid "Toggle visibility of GUI"
 msgstr "GUI 켜고 끄기"
 
@@ -1942,48 +2107,62 @@ msgstr "GUI 켜고 끄기"
 msgid "Tools"
 msgstr "도구"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:165
 msgid "Track object"
 msgstr "천체 추적"
 
-#: src/translations.h:114
+#: src/translations.h:82
+msgid "Triton"
+msgstr ""
+
+#: src/translations.h:143
 msgid "Tupi-Guarani"
 msgstr "투피-과라니"
 
-#: src/ui_viewDialog.h:1004
+#: src/ui_viewDialog.h:1070
 msgid "Twinkle:"
 msgstr "깜박임:"
 
-#: src/translations.h:152
+#: src/translations.h:181
 msgid "Twinkling: "
 msgstr "깜박임: "
 
-#: src/core/modules/Nebula.cpp:92
+#. TRANSLATORS: Name of supernova SN 1572A
+#: src/translations.h:120
+msgid "Tycho's Supernova"
+msgstr ""
+
+#: plugins/Supernovas/src/Supernova.cpp:105
+#, fuzzy, qt-format
+msgid "Type: %1"
+msgstr "유형: <b>%1</b>"
+
+#: src/core/modules/Nebula.cpp:96
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "유형: <b>%1</b>"
 
-#: src/translations.h:184
+#: src/translations.h:213
 msgid "USB Script: "
 msgstr "USB 스크립트: "
 
-#: src/translations.h:64
+#: src/translations.h:76
 msgid "Umbriel"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:290
+#: src/core/modules/Nebula.cpp:305
 msgid "Undocumented type"
 msgstr "자료 없는 유형"
 
-#: src/core/modules/Nebula.cpp:287
+#: src/core/modules/Nebula.cpp:302
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: src/translations.h:191
+#: src/translations.h:220
 msgid "Update me via Internet: "
 msgstr "인터넷으로 프로그램 업데이트: "
 
-#: src/translations.h:61
+#: src/translations.h:73
 msgid "Uranus"
 msgstr "천왕성"
 
@@ -1995,15 +2174,15 @@ msgstr "스텔라리움을 시작할 때 특정한 날짜 및 시각을 사용�
 msgid "Use as default"
 msgstr "기본값으로 사용"
 
-#: src/ui_viewDialog.h:1049
+#: src/ui_viewDialog.h:1120
 msgid "Use associated planet and position"
 msgstr "관련된 행성과 위치로 이동"
 
-#: src/ui_viewDialog.h:1050
+#: src/ui_viewDialog.h:1121
 msgid "Use this landscape as default"
 msgstr "이 풍경을 기본값으로 사용"
 
-#: src/ui_viewDialog.h:1052
+#: src/ui_viewDialog.h:1123
 msgid "Use this sky culture as default"
 msgstr "이 하늘 문화를 기본값으로 사용"
 
@@ -2011,7 +2190,7 @@ msgstr "이 하늘 문화를 기본값으로 사용"
 msgid "Venus"
 msgstr "금성"
 
-#: src/gui/ConfigurationDialog.cpp:810
+#: src/gui/ConfigurationDialog.cpp:808
 msgid "Verifying file integrity..."
 msgstr "파일 무결성 검사 중..."
 
@@ -2019,15 +2198,15 @@ msgstr "파일 무결성 검사 중..."
 msgid "Vesta"
 msgstr ""
 
-#: src/ui_viewDialog.h:986
+#: src/ui_viewDialog.h:1052
 msgid "View"
 msgstr "보기"
 
-#: src/ui_viewDialog.h:1054
+#: src/ui_viewDialog.h:1125
 msgid "Visible"
 msgstr "표시하기"
 
-#: src/translations.h:100
+#: src/translations.h:129
 msgid "W"
 msgstr "서"
 
@@ -2039,7 +2218,7 @@ msgstr ""
 "경고: 선택한 전망 자료를 제거하시면 자료 파일을 삭제합니다. 삭제후 복구할 수 "
 "없습니다."
 
-#: src/translations.h:115
+#: src/translations.h:144
 msgid "Western"
 msgstr "서양"
 
@@ -2054,7 +2233,7 @@ msgid ""
 msgstr ""
 "활성화되면 \"자동 축소\" 키를 눌렀을 때 초기 시야 방향으로도 돌아갑니다"
 
-#: src/gui/StelGui.cpp:129
+#: src/gui/StelGui.cpp:130
 msgid "Windows"
 msgstr "창"
 
@@ -2075,11 +2254,11 @@ msgstr "다음 디렉토리를 삭제하여 수동으로 제거할 수 있습니
 msgid "ZIP archives"
 msgstr "ZIP 압축 파일"
 
-#: src/translations.h:178
+#: src/translations.h:207
 msgid "Zoom Duration: "
 msgstr "확대 지속: "
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:166
 msgid "Zoom in on selected object"
 msgstr "선택한 천체 확대"
 
@@ -2087,19 +2266,19 @@ msgstr "선택한 천체 확대"
 msgid "Zoom in/out"
 msgstr "확대/축소"
 
-#: src/gui/StelGui.cpp:166
+#: src/gui/StelGui.cpp:167
 msgid "Zoom out"
 msgstr "축소"
 
-#: src/ui_searchDialogGui.h:449
+#: src/ui_searchDialogGui.h:461
 msgid "alpha"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:452
+#: src/ui_searchDialogGui.h:464
 msgid "beta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:512
+#: src/ui_searchDialogGui.h:521
 msgid "chi"
 msgstr ""
 
@@ -2107,79 +2286,83 @@ msgstr ""
 msgid "configure"
 msgstr "설정"
 
-#: src/ui_searchDialogGui.h:458
+#: src/ui_searchDialogGui.h:470
 msgid "delta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:461
+#: src/ui_searchDialogGui.h:473
 msgid "epsilon"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:467
+#: src/ui_searchDialogGui.h:479
 msgid "eta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:455
+#: src/ui_searchDialogGui.h:467
 msgid "gamma"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:473
+#: src/ui_searchDialogGui.h:458
 msgid "iota"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:476
+#: src/ui_searchDialogGui.h:485
 msgid "kappa"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:479
+#: src/ui_searchDialogGui.h:488
 msgid "lambda"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:482
+#: src/ui_searchDialogGui.h:491
 msgid "mu"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:485
+#: src/ui_searchDialogGui.h:494
 msgid "nu"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:518
+#: src/ui_searchDialogGui.h:527
 msgid "omega"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:491
+#: src/ui_searchDialogGui.h:500
 msgid "omicron"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:509
+#: src/ui_searchDialogGui.h:518
 msgid "phi"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:494
+#: src/ui_searchDialogGui.h:503
 msgid "pi"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:515
+#: src/ui_viewDialog.h:1085
+msgid "pressure, temperature, extinction coefficient"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:524
 msgid "psi"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:497
+#: src/ui_searchDialogGui.h:506
 msgid "rho"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:500
+#: src/ui_searchDialogGui.h:509
 msgid "sigma"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:503
+#: src/ui_searchDialogGui.h:512
 msgid "tau"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:470
+#: src/ui_searchDialogGui.h:482
 msgid "theta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:506
+#: src/ui_searchDialogGui.h:515
 msgid "upsilon"
 msgstr ""
 
@@ -2187,7 +2370,7 @@ msgstr ""
 msgid "use current"
 msgstr "현재 설정을 유지"
 
-#: src/ui_searchDialogGui.h:488
+#: src/ui_searchDialogGui.h:497
 msgid "xi"
 msgstr ""
 
@@ -2195,7 +2378,7 @@ msgstr ""
 msgid "xxx"
 msgstr "xxx"
 
-#: src/ui_searchDialogGui.h:464
+#: src/ui_searchDialogGui.h:476
 msgid "zeta"
 msgstr ""
 
