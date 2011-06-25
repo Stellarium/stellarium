@@ -89,7 +89,7 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	{
 		oss << "<h2>" << designation;
 		if (note.size()!=0)
-		    oss << " (" << note << ")";
+		    oss << " (" << q_(note) << ")";
 		
 		oss << "</h2>";
 	}
