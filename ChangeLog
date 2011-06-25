@@ -1,5 +1,494 @@
-0.10.7/1.0.0
-TimeZone plug-in: fixed a bug preventing the saving of custom time zones. (LP: #720107)
+0.11.0 [2011-06-25]
+
+------------------------------------------------------------
+revno: 4911
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: 0.11
+timestamp: Sat 2011-06-25 15:26:38 -0400
+message:
+  Updated PO file.
+------------------------------------------------------------
+revno: 4910 [merge]
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: 0.11
+timestamp: Sat 2011-06-25 14:58:57 -0400
+message:
+  Merge https://code.launchpad.net/~alexwolf/stellarium/po-fix
+------------------------------------------------------------
+revno: 4909
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: 0.11
+timestamp: Sat 2011-06-25 13:32:22 -0400
+message:
+  Updated the PO files.
+------------------------------------------------------------
+revno: 4908
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: 0.11
+timestamp: Sat 2011-06-25 13:29:27 -0400
+message:
+  Updated the version number.
+------------------------------------------------------------
+revno: 4907 [merge]
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: 0.11
+timestamp: Sat 2011-06-25 13:24:06 -0400
+message:
+  Merge of lp:~alexwolf/stellarium/sne
+------------------------------------------------------------
+revno: 4906 [merge]
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Thu 2011-06-23 23:32:24 -0400
+message:
+  Merge lp:~alexwolf/stellarium/star-labels
+------------------------------------------------------------
+revno: 4905 [merge]
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Thu 2011-06-23 23:26:24 -0400
+message:
+  Merge lp:~alexwolf/stellarium/altaz
+------------------------------------------------------------
+revno: 4904 [merge]
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Thu 2011-06-23 23:23:08 -0400
+message:
+  Merge lp:~alexwolf/stellarium/degree
+------------------------------------------------------------
+revno: 4903 [merge]
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Thu 2011-06-23 23:22:05 -0400
+message:
+  Merge lp:~alexwolf/stellarium/horizon
+------------------------------------------------------------
+revno: 4902 [merge]
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Thu 2011-06-23 23:09:20 -0400
+message:
+  Merge lp:~alexwolf/stellarium/sne
+------------------------------------------------------------
+revno: 4901 [merge]
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Thu 2011-06-23 22:59:23 -0400
+message:
+  Merge of ~alexwolf/stellarium/fov
+------------------------------------------------------------
+revno: 4900
+fixes bug(s): https://launchpad.net/bugs/688930
+committer: Bogdan Marinov <bogdan.marinov84@gmail.com>
+branch nick: stellarium
+timestamp: Sun 2011-06-12 18:30:54 +0300
+message:
+  tentative fix for the problem with comet and asteroid selection pointer/object types
+------------------------------------------------------------
+revno: 4899
+fixes bug(s): https://launchpad.net/bugs/725870
+committer: Bogdan Marinov <bogdan.marinov84@gmail.com>
+branch nick: trunk-intermediate
+timestamp: Sat 2011-06-11 23:39:16 +0300
+message:
+  SolarSystemEditor: simple implementation of a HTTP redirect for the online search
+------------------------------------------------------------
+revno: 4898
+committer: Guillaume Chereau <charlie137@gmail.com>
+branch nick: stellarium
+timestamp: Sat 2011-06-11 01:40:45 +0200
+message:
+  Fix a few warnings when compiling with clang
+------------------------------------------------------------
+revno: 4897
+committer: Fabien Chéreau <fabien.chereau@gmail.com>
+branch nick: trunk
+timestamp: Fri 2011-06-10 13:31:13 +0200
+message:
+  Patch by Georg to improve refraction formulas
+------------------------------------------------------------
+revno: 4896 [merge]
+committer: Fabien Chéreau <fabien.chereau@gmail.com>
+branch nick: trunk
+timestamp: Wed 2011-06-08 17:26:32 +0200
+message:
+  Merged atmosphere refraction support
+------------------------------------------------------------
+revno: 4895
+committer: Fabien Chéreau <fabien.chereau@gmail.com>
+branch nick: trunk
+timestamp: Wed 2011-06-08 17:12:38 +0200
+message:
+  Fixed typo
+------------------------------------------------------------
+revno: 4894
+committer: Bogdan Marinov <bogdan.marinov84@gmail.com>
+branch nick: trunk
+timestamp: Mon 2011-06-06 16:52:49 +0300
+message:
+  SolarSystemEditor: updated hard-coded URLs
+------------------------------------------------------------
+revno: 4893
+committer: Bogdan Marinov <bogdan.marinov84@gmail.com>
+branch nick: stellarium
+timestamp: Fri 2011-06-03 21:35:02 +0300
+message:
+  updated README file with attribution of the satellite textures added in trunk revision 4883
+------------------------------------------------------------
+revno: 4892 [merge]
+committer: Fabien Chéreau <fabien.chereau@gmail.com>
+branch nick: trunk
+timestamp: Mon 2011-05-30 23:00:54 +0200
+message:
+  Merged branch from Alex for adding landscape description + translation support.
+------------------------------------------------------------
+revno: 4891 [merge]
+committer: Fabien Chéreau <fabien.chereau@gmail.com>
+branch nick: trunk
+timestamp: Mon 2011-05-30 15:58:40 +0200
+message:
+  Merged improved texture manager by Guillaume.
+------------------------------------------------------------
+revno: 4890 [merge]
+committer: Fabien Chéreau <fabien.chereau@gmail.com>
+branch nick: trunk
+timestamp: Mon 2011-05-30 15:25:41 +0200
+message:
+  Merged patch by AlexWolf for using different symbols for nebula icons.
+------------------------------------------------------------
+revno: 4889 [merge]
+committer: Fabien Chéreau <fabien.chereau@gmail.com>
+branch nick: trunk
+timestamp: Sun 2011-05-29 22:44:59 +0200
+message:
+  Merged satellite plugin branch by JC Canales.
+------------------------------------------------------------
+revno: 4888
+committer: Bogdan Marinov <bogdan.marinov84@gmail.com>
+branch nick: stellarium
+timestamp: Sun 2011-05-29 17:10:40 +0300
+message:
+  Search window: added a tabbed widget because of the Tab key feature, changed the layout and the style
+------------------------------------------------------------
+revno: 4887
+committer: Bogdan Marinov <bogdan.marinov84@gmail.com>
+branch nick: stellarium
+timestamp: Sun 2011-05-29 16:00:59 +0300
+message:
+  synchronised nightStyle.css with the changes in normalStyle.css in revisions 4885 and 4886
+------------------------------------------------------------
+revno: 4886
+committer: Alexander Wolf <alex.v.wolf@gmail.com>
+branch nick: trunk
+timestamp: Fri 2011-05-27 21:33:20 +0700
+message:
+  Small improvement look and feel for help window
+------------------------------------------------------------
+revno: 4885
+committer: Alexander Wolf <alex.v.wolf@gmail.com>
+branch nick: trunk
+timestamp: Fri 2011-05-27 21:09:32 +0700
+message:
+  Fix bug #589634
+------------------------------------------------------------
+revno: 4884 [merge]
+committer: Fabien Chéreau <fabien.chereau@gmail.com>
+branch nick: trunk
+timestamp: Fri 2011-05-20 14:55:47 +0200
+message:
+  Merged branch by Alexander to fix planet names translation in location GUI.
+------------------------------------------------------------
+revno: 4883 [merge]
+committer: Fabien Chéreau <fabien.chereau@gmail.com>
+branch nick: trunk
+timestamp: Sat 2011-05-14 00:56:06 +0200
+message:
+  Merged planet satellites patch by Alexwolf.
+------------------------------------------------------------
+revno: 4882
+committer: treaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Wed 2011-04-20 11:53:31 -0400
+message:
+  Updated the po files, including removing '\r' that was in three of them.
+  Adjusted searchDialogGui.ui to be 540 pixels wide, to allow for languages with wide characters (i.e. Russion).
+  Added searchDialogGui.ui CSS changes to the nightStyle.css file.
+------------------------------------------------------------
+revno: 4881
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Sun 2011-04-17 10:50:31 -0400
+message:
+  Added label to the search dialog for the Greek keyboard.
+------------------------------------------------------------
+revno: 4880 [merge]
+fixes bug(s): https://launchpad.net/bugs/730687
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Sat 2011-04-16 12:17:34 -0400
+message:
+  This is for the https://blueprints.launchpad.net/stellarium/+spec/search-go-to-redesign blueprint.
+------------------------------------------------------------
+revno: 4879
+fixes bug(s): https://launchpad.net/bugs/728290
+committer: treaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Thu 2011-03-24 12:25:59 -0400
+message:
+  Added a setting to allow enableing of zoom with no object selected.
+------------------------------------------------------------
+revno: 4878 [merge]
+author: FreewareTips <ft-001@Safe-mail.net>
+committer: Bogdan Marinov <bogdan.marinov84@gmail.com>
+branch nick: stellarium
+timestamp: Mon 2011-03-07 18:02:43 +0200
+message:
+  merged two new skyculture descriptions in Norwegian (Bokmål) by "FreewareTips"
+------------------------------------------------------------
+revno: 4877
+committer: Bogdan Marinov <bogdan.marinov84@gmail.com>
+branch nick: stellarium
+timestamp: Mon 2011-02-28 17:26:46 +0200
+message:
+  improved scripting documentation
+------------------------------------------------------------
+revno: 4876
+fixes bug(s): https://launchpad.net/bugs/720107
+committer: Bogdan Marinov <bogdan.marinov84@gmail.com>
+branch nick: stellarium
+timestamp: Tue 2011-02-22 16:48:42 +0200
+message:
+  TimeZone plugin 0.0.2: fixed bugs, implemented missing features
+------------------------------------------------------------
+revno: 4875
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Mon 2011-02-07 18:41:25 -0500
+message:
+  Corrected a scoping error in two-phase name lookup.
+------------------------------------------------------------
+revno: 4874
+fixes bug(s): https://launchpad.net/bugs/713463
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Fri 2011-02-04 21:00:17 -0500
+message:
+  Directly setting Oculars config window visible when config button pressed, instead of using an action.
+------------------------------------------------------------
+revno: 4873
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Fri 2011-02-04 10:20:09 -0500
+message:
+  Updated the info.plist for Mac to set the minimum OS to 10.5.0.
+------------------------------------------------------------
+revno: 4872
+fixes bug(s): https://launchpad.net/bugs/711887
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Wed 2011-02-02 09:44:30 -0500
+message:
+  Repaint the stackedWidget after language change.
+------------------------------------------------------------
+revno: 4871 [merge]
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Tue 2011-02-01 08:17:34 -0500
+message:
+  Refactoring to use signals/slots for module-related functionality.
+------------------------------------------------------------
+revno: 4870
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Mon 2011-01-24 19:02:27 -0500
+message:
+  Undo the changes Diego made not related to QtWebKit.
+  Added some code to the APPLE section, to make it easier for developers to know what options are available.
+------------------------------------------------------------
+revno: 4869
+fixes bug(s): https://launchpad.net/bugs/657455 https://launchpad.net/bugs/518809
+committer: Bogdan Marinov <bogdan.marinov84@gmail.com>
+branch nick: trunk
+timestamp: Mon 2011-01-24 18:43:13 +0200
+message:
+  fix bug caused by locale settings breaking the rendering of old style landscapes on Ubuntu
+------------------------------------------------------------
+revno: 4868
+committer: diego-marcos diego.marcos@gmail.com
+branch nick: trunk
+timestamp: Mon 2011-01-24 15:15:34 +0100
+message:
+  Adding QtWebKit dependency for SVMT
+------------------------------------------------------------
+revno: 4867
+committer: Bogdan Marinov <bogdan.marinov84@gmail.com>
+branch nick: trunk-4866
+timestamp: Sun 2011-01-16 17:40:33 +0200
+message:
+  fixed MPES online search (the MPC changed their server address)
+------------------------------------------------------------
+revno: 4866
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Thu 2011-01-13 21:13:12 -0500
+message:
+  Corrected an issue with switching to an index eyepiece.
+------------------------------------------------------------
+revno: 4865
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Thu 2011-01-13 19:10:42 -0500
+message:
+  Put the plugins in the cmake file alphabetical order.
+------------------------------------------------------------
+revno: 4864
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Wed 2011-01-12 21:51:26 -0500
+message:
+  Made Telrad & CCD mutually exclusive.
+------------------------------------------------------------
+revno: 4863
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Wed 2011-01-12 16:08:24 -0500
+message:
+  Trivial code cleanup.
+------------------------------------------------------------
+revno: 4862
+committer: diego-marcos diego.marcos@gmail.com
+branch nick: trunk
+timestamp: Tue 2011-01-11 15:37:26 +0100
+message:
+  Adding exception for libintl.dylib when copying dependencies from /usr/lib
+------------------------------------------------------------
+revno: 4861
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Mon 2011-01-10 19:16:09 -0500
+message:
+  Remove QtSql from Mac bundle script.
+------------------------------------------------------------
+revno: 4860 [merge]
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Sun 2011-01-09 20:16:17 -0500
+message:
+  Overhauled Oculars:
+  -- removed no longer needed StelDialiog replacemnet
+  -- removed key bindings
+  -- added popup menu
+  -- better binocular support
+  -- better CCD support
+------------------------------------------------------------
+revno: 4859 [merge]
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Wed 2011-01-05 10:17:57 -0500
+message:
+  This code changes the callback used when an object changes to a SIGNAL/SLOT.  This commit changes the base functionalirty in StelObjectMgr, as well as all classes that were using the callback.
+  
+  This is one step in making the app more fully Qt-like, and hopefully to clean up the design & simplify.
+------------------------------------------------------------
+revno: 4858
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Wed 2010-12-29 22:39:15 -0500
+message:
+  Put back the line to draw the CCD frame.
+  Added code to prevent the deletion of the last telescope or ocular from the configurtion dialog.
+------------------------------------------------------------
+revno: 4857
+fixes bug(s): https://launchpad.net/bugs/695568
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Wed 2010-12-29 21:26:59 -0500
+message:
+  Implemented better binoculars support; the Ocular object now has an attribute that may be set if the eyepiece is a pair of binoculars.  This causes the current telescope to be ignored, so users no longer have to worry about how to set this up.  Inlcudes UI configuration, and changes to default ini file.
+------------------------------------------------------------
+revno: 4856
+fixes bug(s): https://launchpad.net/bugs/692408
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Tue 2010-12-21 17:29:26 -0500
+message:
+  Corrected typo.
+------------------------------------------------------------
+revno: 4855
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Tue 2010-12-21 16:21:45 -0500
+message:
+  Implemented rotating the CCD bounding box.
+------------------------------------------------------------
+revno: 4854
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Tue 2010-12-21 09:37:44 -0500
+message:
+  Corrected the calculation for the aspect of the CCD.
+  Changed the CCD label on-screen to be the degrees the CCD covers.
+------------------------------------------------------------
+revno: 4853
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Mon 2010-12-20 15:55:41 -0500
+message:
+  Corrected the calculation of CCD FOV.
+  Updated the CCD painting code; will allow for non-ocular use.
+------------------------------------------------------------
+revno: 4852
+committer: Matthew Gates <matthewg42@gmail.com>
+branch nick: stellarium
+timestamp: Sun 2010-12-19 18:14:35 +0000
+message:
+  ignore core files
+------------------------------------------------------------
+revno: 4851
+committer: Matthew Gates <matthewg42@gmail.com>
+branch nick: stellarium
+timestamp: Mon 2010-12-13 16:41:56 +0000
+message:
+  fix ugly indentation / a few comments
+------------------------------------------------------------
+revno: 4850
+committer: Bogdan Marinov <bogdan.marinov84@gmail.com>
+branch nick: stellarium
+timestamp: Mon 2010-12-13 12:42:41 +0200
+message:
+  the default Inno Setup file should not include a SQLite driver; bzr ignore the auto-generated Inno Setup file
+------------------------------------------------------------
+revno: 4849
+fixes bug(s): https://launchpad.net/bugs/687654
+committer: Timothy Reaves <treaves@silverfieldstech.com>
+branch nick: trunk
+timestamp: Thu 2010-12-09 13:56:38 -0500
+message:
+  Corrected the calculation for the X-axis FOV for CCDs.
+------------------------------------------------------------
+revno: 4848
+committer: Fabien Chéreau <fabien.chereau@gmail.com>
+branch nick: trunk
+timestamp: Mon 2010-12-06 23:11:10 +0100
+message:
+  Attempted to fix text display error
+------------------------------------------------------------
+revno: 4847
+committer: Matthew Gates <matthewg42@gmail.com>
+branch nick: stellarium
+timestamp: Mon 2010-12-06 14:07:59 +0000
+message:
+  suppress CMakeLists.txt.user in source package
+------------------------------------------------------------
+revno: 4846
+committer: Matthew Gates <matthewg42@gmail.com>
+branch nick: stellarium
+timestamp: Mon 2010-12-06 13:58:43 +0000
+message:
+  prevent .bzrignore from ending up in source package
+------------------------------------------------------------
+Use --include-merges or -n0 to see merged revisions.
 
 0.10.6 [2010-12-05]
 New feature for installing landscapes from ZIP archives.
