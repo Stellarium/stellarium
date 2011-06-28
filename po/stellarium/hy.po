@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-17 18:17+0700\n"
+"POT-Creation-Date: 2011-06-26 01:48+0700\n"
 "PO-Revision-Date: 2011-05-28 11:53+0000\n"
 "Last-Translator: Serj Safarian <serjsafarian@gmail.com>\n"
 "Language-Team: Armenian <hy@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-06-25 04:32+0000\n"
+"X-Launchpad-Export-Date: 2011-06-28 04:32+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 
@@ -58,17 +58,21 @@ msgstr "USB գրվածքներ՝ "
 msgid "Arrow down to load list."
 msgstr "Սլաք ներքեւ՝ ցանկը բեռնելու համար։"
 
-#: src/core/modules/GridLinesMgr.cpp:517
+#: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
 msgstr "Միջօրեական"
 
-#: src/core/modules/GridLinesMgr.cpp:521
+#: src/core/modules/GridLinesMgr.cpp:529
 msgid "Ecliptic"
 msgstr "Խավարածիր"
 
-#: src/core/modules/GridLinesMgr.cpp:525
+#: src/core/modules/GridLinesMgr.cpp:533
 msgid "Equator"
 msgstr "Հասարակած"
+
+#: src/core/modules/GridLinesMgr.cpp:537
+msgid "Horizon"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:488
 msgid "Author: "
@@ -335,7 +339,7 @@ msgstr "Դիտելու սզբնական ուղղությունը. Ազ/Բարձ�
 msgid "Authors"
 msgstr "Հեղինակներ"
 
-#: src/gui/ConfigurationDialog.cpp:513 src/gui/ViewDialog.cpp:363
+#: src/gui/ConfigurationDialog.cpp:513 src/gui/ViewDialog.cpp:368
 msgid "Contact"
 msgstr "Կապորդներ"
 
@@ -443,7 +447,7 @@ msgstr "Աջ կտտոց"
 msgid "CTRL + Left click"
 msgstr "CTRL + Ձախ կտտոց"
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:162
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:163
 msgid "Movement and Selection"
 msgstr "Տեղաշարժում եւ ընտրում"
 
@@ -467,15 +471,15 @@ msgstr "Մաքրե՛լ ընտրությունը"
 msgid "When a Script is Running"
 msgstr "Երբ գրվածքը գործարկված է"
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:141
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:142
 msgid "Slow down the script execution rate"
 msgstr "Դանդաղեցնել գրվածքի կատարումը"
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:142
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:143
 msgid "Speed up the script execution rate"
 msgstr "Արագացնել գրվածքի կատարումը"
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:143
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:144
 msgid "Set the normal script execution rate"
 msgstr "Սովորական արագությունը գրվածքը կատարելու համար"
 
@@ -541,7 +545,7 @@ msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Քննարկումներ}. քննարկե՛ք Stellarium֊ն այլոց հետ։"
 
 #: src/gui/HelpDialog.cpp:234 src/gui/HelpDialog.cpp:326
-#: src/gui/HelpDialog.cpp:328 src/gui/StelGui.cpp:169
+#: src/gui/HelpDialog.cpp:328 src/gui/StelGui.cpp:170
 msgid "Miscellaneous"
 msgstr "Զանազանք"
 
@@ -595,15 +599,15 @@ msgstr "Համաստեղությունների անվանումները"
 msgid "Constellation boundaries"
 msgstr "Համաստեղությունների սահմանները"
 
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1096
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1103
 msgid "Azimuthal grid"
 msgstr "Ազիմուտային ցանց"
 
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1094
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1101
 msgid "Equatorial grid"
 msgstr "Հասարակածային ցանց"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1095
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1102
 msgid "Equatorial J2000 grid"
 msgstr "Հասարակածային ցանց J2000"
 
@@ -611,219 +615,223 @@ msgstr "Հասարակածային ցանց J2000"
 msgid "Galactic grid"
 msgstr "Գալակտիկական ցանց"
 
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1099
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1107
 msgid "Ecliptic line"
 msgstr "Խավարածիրը"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1097
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1104
 msgid "Equator line"
 msgstr "Հասարակածի գիծը"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1098
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1105
 msgid "Meridian line"
 msgstr "Միջօրեականի գիծը"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1100
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
+msgid "Horizon line"
+msgstr ""
+
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
 msgid "Cardinal points"
 msgstr "Աշխարհի կողմեր"
 
-#: src/gui/StelGui.cpp:113
+#: src/gui/StelGui.cpp:114
 msgid "Ground"
 msgstr "Գետին"
 
-#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1074
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1081
 msgid "Atmosphere"
 msgstr "Մթնոլորտ"
 
-#: src/gui/StelGui.cpp:115
+#: src/gui/StelGui.cpp:116
 msgid "Fog"
 msgstr "Մշուշ"
 
-#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1083
+#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1090
 msgid "Nebulas"
 msgstr "Միգամածություններ"
 
-#: src/gui/StelGui.cpp:118
+#: src/gui/StelGui.cpp:119
 msgid "Nebulas background images"
 msgstr "Միգամածությունների հետին խորքը"
 
-#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1060 src/ui_viewDialog.h:1082
+#: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1067 src/ui_viewDialog.h:1089
 msgid "Stars"
 msgstr "Աստղեր"
 
-#: src/gui/StelGui.cpp:120
+#: src/gui/StelGui.cpp:121
 msgid "Planets labels"
 msgstr "Մոլորակների պիտակներ"
 
-#: src/gui/StelGui.cpp:121
+#: src/gui/StelGui.cpp:122
 msgid "Planet orbits"
 msgstr "Մոլորակների ուղեծիրները"
 
-#: src/gui/StelGui.cpp:122
+#: src/gui/StelGui.cpp:123
 msgid "Planet trails"
 msgstr "Մոլորակների հետքերը"
 
-#: src/gui/StelGui.cpp:124
+#: src/gui/StelGui.cpp:125
 msgid "Night mode"
 msgstr "Գիշերային աշխատակերպ"
 
-#: src/gui/StelGui.cpp:125
+#: src/gui/StelGui.cpp:126
 msgid "Full-screen mode"
 msgstr "Լիցուցադրիչ աշխատակերպ"
 
-#: src/gui/StelGui.cpp:126
+#: src/gui/StelGui.cpp:127
 msgid "Flip scene horizontally"
 msgstr "Արտացոլել հորիզոնական"
 
-#: src/gui/StelGui.cpp:127
+#: src/gui/StelGui.cpp:128
 msgid "Flip scene vertically"
 msgstr "Արտացոլել ուղղաձիգ"
 
-#: src/gui/StelGui.cpp:129
+#: src/gui/StelGui.cpp:130
 msgid "Windows"
 msgstr "Պատուհաններ"
 
-#: src/gui/StelGui.cpp:130
+#: src/gui/StelGui.cpp:131
 msgid "Help window"
 msgstr "Օգնության պատուհան"
 
-#: src/gui/StelGui.cpp:131
+#: src/gui/StelGui.cpp:132
 msgid "Configuration window"
 msgstr "Կարգավորման պատուհան"
 
-#: src/gui/StelGui.cpp:132
+#: src/gui/StelGui.cpp:133
 msgid "Search window"
 msgstr "Որոնման պատուհան"
 
-#: src/gui/StelGui.cpp:133
+#: src/gui/StelGui.cpp:134
 msgid "Sky and viewing options window"
 msgstr "Երկնքի եւ դիտման ընտրանքների պատուհան"
 
-#: src/gui/StelGui.cpp:134
+#: src/gui/StelGui.cpp:135
 msgid "Date/time window"
 msgstr "Ամսաթվի/ժամանակի պատուհան"
 
-#: src/gui/StelGui.cpp:135
+#: src/gui/StelGui.cpp:136
 msgid "Location window"
 msgstr "Տեղադրության պատուհան"
 
-#: src/gui/StelGui.cpp:137
+#: src/gui/StelGui.cpp:138
 msgid "Script console window"
 msgstr "Գրվածքների գոտու պատուհան"
 
-#: src/gui/StelGui.cpp:140 src/ui_dateTimeDialogGui.h:294
+#: src/gui/StelGui.cpp:141 src/ui_dateTimeDialogGui.h:294
 msgid "Date and Time"
 msgstr "Ամսաթիվը և ժամը"
 
-#: src/gui/StelGui.cpp:144
+#: src/gui/StelGui.cpp:145
 msgid "Decrease time speed"
 msgstr "Դանդաղեցնել ժամանակի արագությունը"
 
-#: src/gui/StelGui.cpp:145
+#: src/gui/StelGui.cpp:146
 msgid "Increase time speed"
 msgstr "Արագացնել ժամանակի ընթացքը"
 
-#: src/gui/StelGui.cpp:146
+#: src/gui/StelGui.cpp:147
 msgid "Set normal time rate"
 msgstr "ժամանակի սովորական արագությունը"
 
-#: src/gui/StelGui.cpp:147
+#: src/gui/StelGui.cpp:148
 msgid "Decrease time speed (a little)"
 msgstr "Դանդաղեցնել ժամանակի արագությունը (մի փոքր)"
 
-#: src/gui/StelGui.cpp:148
+#: src/gui/StelGui.cpp:149
 msgid "Increase time speed (a little)"
 msgstr "Արագացնել ժամանակի ընթացքը (մի փոքր)"
 
-#: src/gui/StelGui.cpp:149
+#: src/gui/StelGui.cpp:150
 msgid "Set time rate to zero"
 msgstr "Կանգնեցնել ժամանակը"
 
-#: src/gui/StelGui.cpp:150
+#: src/gui/StelGui.cpp:151
 msgid "Set time to now"
 msgstr "Ընթացիկ ժամանակը"
 
-#: src/gui/StelGui.cpp:151
+#: src/gui/StelGui.cpp:152
 msgid "Add 1 solar hour"
 msgstr "Ավելացնել 1 արեւային ժամ"
 
-#: src/gui/StelGui.cpp:152
+#: src/gui/StelGui.cpp:153
 msgid "Subtract 1 solar hour"
 msgstr "Հանել 1 արեւային ժամ"
 
-#: src/gui/StelGui.cpp:153
+#: src/gui/StelGui.cpp:154
 msgid "Add 1 solar day"
 msgstr "Ավելացնել 1 արեւային օր"
 
-#: src/gui/StelGui.cpp:154
+#: src/gui/StelGui.cpp:155
 msgid "Subtract 1 solar day"
 msgstr "Ավելացնել 1 արեւային օր"
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:156
 msgid "Add 1 solar week"
 msgstr "Ավելացնել 1 արեւային շաբաթ"
 
-#: src/gui/StelGui.cpp:156
+#: src/gui/StelGui.cpp:157
 msgid "Subtract 1 solar week"
 msgstr "Հանել 1 արեւային շաբաթ"
 
-#: src/gui/StelGui.cpp:157
+#: src/gui/StelGui.cpp:158
 msgid "Add 1 sidereal day"
 msgstr "Ավելացնել 1 աստղային օր"
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:159
 msgid "Subtract 1 sidereal day"
 msgstr "Հանել 1 աստղային օր"
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:160
 msgid "Add 1 sidereal week"
 msgstr "Ավելացնել 1 աստղային շաբաթ"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:161
 msgid "Subtract 1 sidereal week"
 msgstr "Հանել 1 աստղային շաբաթ"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:164
 msgid "Center on selected object"
 msgstr "Կենտրոնացնել ընտրված առարկան"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:165
 msgid "Track object"
 msgstr "Հետեւել առարկային"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:166
 msgid "Zoom in on selected object"
 msgstr "Խոշորացնել ընտրված առարկան"
 
-#: src/gui/StelGui.cpp:166
+#: src/gui/StelGui.cpp:167
 msgid "Zoom out"
 msgstr "Փոքրացնել"
 
-#: src/gui/StelGui.cpp:167
+#: src/gui/StelGui.cpp:168
 msgid "Set home planet to selected planet"
 msgstr "Կայել ընտրված մոլորակն որպես տնային"
 
-#: src/gui/StelGui.cpp:170
+#: src/gui/StelGui.cpp:171
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Փոխանջատում հասարակածային և ազիմուտային տեղակայումների միջեւ"
 
-#: src/gui/StelGui.cpp:171
+#: src/gui/StelGui.cpp:172
 msgid "Quit"
 msgstr "Ելք"
 
-#: src/gui/StelGui.cpp:172
+#: src/gui/StelGui.cpp:173
 msgid "Save screenshot"
 msgstr "Պահել ցուցադրիչի լուսանկարը"
 
-#: src/gui/StelGui.cpp:175
+#: src/gui/StelGui.cpp:176
 msgid "Auto hide horizontal button bar"
 msgstr "Հորիզոնական վահանակի ինքնաթաքցնում"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:177
 msgid "Auto hide vertical button bar"
 msgstr "Ուղղաձիգ վահանակի ինքնաթաքցնում"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:178
 msgid "Toggle visibility of GUI"
 msgstr "Ցույց տալ գործիքների վահանակը"
 
@@ -832,27 +840,27 @@ msgstr "Ցույց տալ գործիքների վահանակը"
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:417
+#: src/gui/ViewDialog.cpp:422
 msgid "No description"
 msgstr "Նկարագրություն չկա"
 
-#: src/gui/ViewDialog.cpp:501
+#: src/gui/ViewDialog.cpp:506
 msgid "No shooting stars"
 msgstr "Առանց ընկնող աստղերի"
 
-#: src/gui/ViewDialog.cpp:504
+#: src/gui/ViewDialog.cpp:509
 msgid "Normal rate"
 msgstr "Սովորական ընթացքը"
 
-#: src/gui/ViewDialog.cpp:507
+#: src/gui/ViewDialog.cpp:512
 msgid "Standard Perseids rate"
 msgstr "Պերսեւսի համար սովորական ասուպային հոսք"
 
-#: src/gui/ViewDialog.cpp:510
+#: src/gui/ViewDialog.cpp:515
 msgid "Exceptional Leonid rate"
 msgstr "Առյուծի բացառիկ ասուպային հոսք"
 
-#: src/gui/ViewDialog.cpp:513
+#: src/gui/ViewDialog.cpp:518
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Առավելագույնը (1966, Առյուծի ասուպային հոսք)"
 
@@ -1749,184 +1757,184 @@ msgstr "Ուղղակի ծագումը/Հակումը (J2000)՝"
 msgid "Position"
 msgstr ""
 
-#: src/ui_viewDialog.h:1045
+#: src/ui_viewDialog.h:1052
 msgid "View"
 msgstr "Դիտել"
 
-#: src/ui_viewDialog.h:1051
+#: src/ui_viewDialog.h:1058
 msgid "Sky"
 msgstr "Երկինք"
 
-#: src/ui_viewDialog.h:1053
+#: src/ui_viewDialog.h:1060
 msgid "Markings"
 msgstr "Նշաններ"
 
-#: src/ui_viewDialog.h:1055
+#: src/ui_viewDialog.h:1062
 msgid "Landscape"
 msgstr "Բնապատկեր"
 
-#: src/ui_viewDialog.h:1057
+#: src/ui_viewDialog.h:1064
 msgid "Starlore"
 msgstr "Աստղեր գիտություն"
 
-#: src/ui_viewDialog.h:1061
+#: src/ui_viewDialog.h:1068
 msgid "Absolute scale:"
 msgstr "Բացարձակ սանդղակ՝"
 
-#: src/ui_viewDialog.h:1062
+#: src/ui_viewDialog.h:1069
 msgid "Relative scale:"
 msgstr "Հարաբերական սանդղակ՝"
 
-#: src/ui_viewDialog.h:1063
+#: src/ui_viewDialog.h:1070
 msgid "Twinkle:"
 msgstr "Առկայծումը՝"
 
-#: src/ui_viewDialog.h:1065
+#: src/ui_viewDialog.h:1072
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Խլացնել ոչ պայծառ աստղերը՝ շատ պայծառ առարկա տեսանելիս"
 
-#: src/ui_viewDialog.h:1067
+#: src/ui_viewDialog.h:1074
 msgid "Dynamic eye adaptation"
 msgstr "Զգայունության հարաշարժ հարմարեցում"
 
-#: src/ui_viewDialog.h:1068
+#: src/ui_viewDialog.h:1075
 msgid "Planets and satellites"
 msgstr "Մոլորակներ եւ արբանյակներ"
 
-#: src/ui_viewDialog.h:1069
+#: src/ui_viewDialog.h:1076
 msgid "Show planets"
 msgstr "Ցույց տալ մոլորակները"
 
-#: src/ui_viewDialog.h:1070
+#: src/ui_viewDialog.h:1077
 msgid "Show planet markers"
 msgstr "Ցույց տալ մոլորակների նշիչները"
 
-#: src/ui_viewDialog.h:1071
+#: src/ui_viewDialog.h:1078
 msgid "Show planet orbits"
 msgstr "Ցույց տալ մոլորակների ուղեծիրները"
 
-#: src/ui_viewDialog.h:1072
+#: src/ui_viewDialog.h:1079
 msgid "Simulate light speed"
 msgstr "Ձեւացնել լույսի արագությունը"
 
-#: src/ui_viewDialog.h:1073
+#: src/ui_viewDialog.h:1080
 msgid "Scale Moon"
 msgstr "Լուսնի սանղակավորում"
 
-#: src/ui_viewDialog.h:1075
+#: src/ui_viewDialog.h:1082
 msgid "Show atmosphere"
 msgstr "Ցույց տալ մթնոլորտը"
 
-#: src/ui_viewDialog.h:1076
+#: src/ui_viewDialog.h:1083
 msgid "Light pollution: "
 msgstr "Լույսի աղտոտվածությունը՝ "
 
-#: src/ui_viewDialog.h:1078
+#: src/ui_viewDialog.h:1085
 msgid "pressure, temperature, extinction coefficient"
 msgstr ""
 
-#: src/ui_viewDialog.h:1080
+#: src/ui_viewDialog.h:1087
 msgid "Refraction/Extinction settings..."
 msgstr ""
 
-#: src/ui_viewDialog.h:1081
+#: src/ui_viewDialog.h:1088
 msgid "Labels and Markers"
 msgstr "Պիտակներ եւ նշիչներ"
 
-#: src/ui_viewDialog.h:1084
+#: src/ui_viewDialog.h:1091
 msgid "Planets"
 msgstr "Մոլորակներ"
 
-#: src/ui_viewDialog.h:1085
+#: src/ui_viewDialog.h:1092
 msgid "Shooting Stars"
 msgstr "Ասուպներ"
 
-#: src/ui_viewDialog.h:1086
+#: src/ui_viewDialog.h:1093
 msgid "Hourly zenith rate:"
 msgstr "Ասուպների քանակը մեկ ժամում"
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1094
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1095
 msgid "10"
 msgstr "10"
 
-#: src/ui_viewDialog.h:1089
+#: src/ui_viewDialog.h:1096
 msgid "80"
 msgstr "80"
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:1097
 msgid "10000"
 msgstr "10000"
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:1098
 msgid "144000"
 msgstr "144000"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1100
 msgid "Celestial Sphere"
 msgstr "Երկնային ոլորտ"
 
-#: src/ui_viewDialog.h:1101
+#: src/ui_viewDialog.h:1109
 msgid "Constellations"
 msgstr "Համաստեղություններ"
 
-#: src/ui_viewDialog.h:1102
+#: src/ui_viewDialog.h:1110
 msgid "Show lines"
 msgstr "Ցույց տալ գծերը"
 
-#: src/ui_viewDialog.h:1103
+#: src/ui_viewDialog.h:1111
 msgid "Show labels"
 msgstr "Ցույց տալ անվանումները"
 
-#: src/ui_viewDialog.h:1104
+#: src/ui_viewDialog.h:1112
 msgid "Show boundaries"
 msgstr "Ցույց տալ սահմանները"
 
-#: src/ui_viewDialog.h:1105
+#: src/ui_viewDialog.h:1113
 msgid "Show art"
 msgstr "Ցույց տալ պատկերները"
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1114
 msgid "Art brightness: "
 msgstr "Պատկերների վառությունը՝ "
 
-#: src/ui_viewDialog.h:1107
+#: src/ui_viewDialog.h:1115
 msgid "Projection"
 msgstr "Նախագծումներ"
 
-#: src/ui_viewDialog.h:1108
+#: src/ui_viewDialog.h:1116
 msgid "Add/remove landscapes..."
 msgstr "Ավելացնել/ջնջել բնապատկերներ..."
 
-#: src/ui_viewDialog.h:1109 src/ui_viewDialog.h:1114 src/ui_viewDialog.h:1116
+#: src/ui_viewDialog.h:1117 src/ui_viewDialog.h:1122 src/ui_viewDialog.h:1124
 #: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
 msgid "Options"
 msgstr "Ընտրանքներ"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1118
 msgid "Show ground"
 msgstr "Ցույց տալ գետինը"
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1119
 msgid "Show fog"
 msgstr "Ցույց տալ մշուշը"
 
-#: src/ui_viewDialog.h:1112
+#: src/ui_viewDialog.h:1120
 msgid "Use associated planet and position"
 msgstr "Օգտագործել համապատասխան մոլորակն եւ դիրքը"
 
-#: src/ui_viewDialog.h:1113
+#: src/ui_viewDialog.h:1121
 msgid "Use this landscape as default"
 msgstr "Օգտագործել այս բնապատկերը լռելյայն"
 
-#: src/ui_viewDialog.h:1115
+#: src/ui_viewDialog.h:1123
 msgid "Use this sky culture as default"
 msgstr "Օգտագործել երկնքի այս մշակույթը լռելյայն"
 
-#: src/ui_viewDialog.h:1117
+#: src/ui_viewDialog.h:1125
 msgid "Visible"
 msgstr "Տեսանելի"
 
@@ -2259,6 +2267,43 @@ msgid ""
 msgstr ""
 "ՈՒՇԱԴՐՈՒԹՅՈՒՆ. ընտրված բնապատկերը ջնջելու դեպքում կջնջվի նաեւ նրա նշոցները։ "
 "Այդ գործողությունն անետարկելի է։"
+
+#: src/ui_AtmosphereDialog.h:167
+msgid "Dialog"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:168
+msgid "Atmosphere Details"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:170
+msgid "Refraction Settings"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:171
+msgid "Pressure (mbar):"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:172
+msgid "Temperature (C):"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:177
+msgid ""
+"Extinction is the loss of star brightness due to Earth's atmosphere. It is "
+"given in mag/airmass, where airmass is number of atmospheres light has to "
+"pass. (zenith: 1; horizon: about 40)"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:179
+msgid "Extinction Coefficient:"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:181
+msgid ""
+"Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
+"for murky conditions."
+msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
