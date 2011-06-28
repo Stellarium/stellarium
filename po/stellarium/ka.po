@@ -7,1033 +7,55 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-25 13:31-0400\n"
-"PO-Revision-Date: 2010-05-07 20:22+0000\n"
-"Last-Translator: aleksandre apkhaidze <momtsere@gmail.com>\n"
+"POT-Creation-Date: 2011-06-26 01:48+0700\n"
+"PO-Revision-Date: 2011-05-09 01:51+0000\n"
+"Last-Translator: George Machitidze <giomac@gmail.com>\n"
 "Language-Team: Georgian <ka@li.org>\n"
-"Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-05 08:52+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-06-28 04:33+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 "X-Poedit-Country: GEORGIA\n"
 "X-Poedit-Language: Georgian\n"
 
-#: src/ui_locationDialogGui.h:407
-msgid " m"
-msgstr " მ"
+#: src/core/modules/GridLinesMgr.cpp:525
+msgid "Meridian"
+msgstr "მერიდიანი"
 
-#: src/gui/StelGuiItems.cpp:541
-#, no-c-format, qt-format
-msgid "%1m"
-msgstr "%1m"
+#: src/core/modules/GridLinesMgr.cpp:529
+msgid "Ecliptic"
+msgstr "ელიფსური"
 
-#: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
-msgid "(apparent)"
+#: src/core/modules/GridLinesMgr.cpp:533
+msgid "Equator"
+msgstr "ეკვატორი"
+
+#: src/core/modules/GridLinesMgr.cpp:537
+msgid "Horizon"
 msgstr ""
 
-#: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
-msgid "(geometric)"
-msgstr ""
+#: src/core/modules/LandscapeMgr.cpp:488
+msgid "Author: "
+msgstr "ავტორი: "
+
+#: src/core/modules/LandscapeMgr.cpp:491
+msgid "Location: "
+msgstr "მდებარეობა: "
 
 #: src/core/modules/LandscapeMgr.cpp:496
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 მ"
 
-#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
-msgid "/"
-msgstr "/"
+#: src/core/modules/LandscapeMgr.cpp:499
+msgid "Planet: "
+msgstr "პლანეტა: "
 
-#: src/ui_viewDialog.h:1094
-msgid "0"
-msgstr "0"
-
-#: src/ui_viewDialog.h:1095
-msgid "10"
-msgstr "10"
-
-#: src/ui_viewDialog.h:1097
-msgid "10000"
-msgstr "10000"
-
-#: src/ui_viewDialog.h:1098
-msgid "144000"
-msgstr "144000"
-
-#: src/ui_viewDialog.h:1096
-msgid "80"
-msgstr "80"
-
-#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
-msgid ":"
-msgstr ":"
-
-#: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:44
-msgid ""
-"A convenient interface for some of the more obscure options in Stellarium's "
-"configuration file. Allows setting the time zone and changing the way the "
-"time and the date are displayed in the bottom bar."
-msgstr ""
-
-#. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:227
+#: src/core/modules/Nebula.cpp:96
 #, qt-format
-msgid "A landscape with the same name or identifier (%1) already exists."
-msgstr ""
-
-#: src/ui_helpDialogGui.h:267
-msgid "About"
-msgstr "ინფორმაცია"
-
-#: src/core/modules/Planet.cpp:123 src/core/modules/StarWrapper.cpp:112
-#, qt-format
-msgid "Absolute Magnitude: %1"
-msgstr "აბსოლუტური მაგნიტუდა: %1"
-
-#: src/ui_viewDialog.h:1068
-msgid "Absolute scale:"
-msgstr "აბსოლუტური მასშტაბი:"
-
-#: src/translations.h:169
-msgid "Actual Time"
-msgstr "ნამდვილი დრო"
-
-#: src/gui/StelGui.cpp:158
-msgid "Add 1 sidereal day"
-msgstr "1 ვარსკვლავური დღის დამატება"
-
-#: src/gui/StelGui.cpp:160
-msgid "Add 1 sidereal week"
-msgstr "1 ვარსკვლავური კვირის დამატება"
-
-#: src/gui/StelGui.cpp:154
-msgid "Add 1 solar day"
-msgstr "1 მზის დღის დამატება"
-
-#: src/gui/StelGui.cpp:152
-msgid "Add 1 solar hour"
-msgstr "1 მზის საათის დამატება"
-
-#: src/gui/StelGui.cpp:156
-msgid "Add 1 solar week"
-msgstr "1 მზის კვირის დამატება"
-
-#: src/ui_addRemoveLandscapesDialog.h:268
-msgid "Add a new landscape"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:394
-msgid "Add to list"
-msgstr "სიაში დამატება"
-
-#: src/ui_addRemoveLandscapesDialog.h:266
-msgid "Add/Remove Landscapes"
-msgstr ""
-
-#: src/ui_viewDialog.h:1116
-msgid "Add/remove landscapes..."
-msgstr ""
-
-#: src/translations.h:155
-msgid "Administration "
-msgstr "ადმინისტრირება "
-
-#: src/translations.h:60
-msgid "Adrastea"
-msgstr ""
-
-#: src/ui_configurationDialog.h:820
-msgid "Align labels with the horizon"
-msgstr "წარწერების ჰორიზონტზე განთავსება"
-
-#: src/ui_configurationDialog.h:755
-msgid "All available"
-msgstr "ყველა შესაძლო"
-
-#: src/ui_configurationDialog.h:784
-msgid "Allow keyboard to pan and zoom"
-msgstr "კლავიატურით სარგებლობა გადასატანად და მასშტაბირებისთვის"
-
-#: src/ui_configurationDialog.h:788
-msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr "თაგუნათი სარგებლობა გადასატანად და მასშტაბირებისთვის"
-
-#: src/translations.h:159
-msgid "Altitude (m): "
-msgstr "სიმაღლე (მ): "
-
-#: src/ui_locationDialogGui.h:403
-msgid "Altitude:"
-msgstr "სიმაღლე :"
-
-#: src/translations.h:50
-msgid "Amalthea"
-msgstr ""
-
-#. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:110
-msgid "Amor"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:59
-msgid ""
-"An interface for adding asteroids and comets to Stellarium. It can download "
-"object lists from the Minor Planet Center's website and perform searches in "
-"its online database. Still a work in progress."
-msgstr ""
-
-#: src/translations.h:57
-msgid "Ananke"
-msgstr ""
-
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:57
-msgid "Angle Measure"
-msgstr ""
-
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:121
-msgid "Angle measure"
-msgstr ""
-
-#. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:112
-msgid "Apophis"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:147
-#, qt-format
-msgid "Apparent diameter: %1"
-msgstr "ხილული დიამეტრი: %1"
-
-#: src/translations.h:75
-msgid "Ariel"
-msgstr ""
-
-#: src/translations.h:214
-msgid "Arrow down to load list."
-msgstr "ქვედა ისარი სიის ჩასატვირთად."
-
-#: src/gui/HelpDialog.cpp:53
-msgid "Arrow keys & left mouse drag"
-msgstr "ისრები და გადათრევა თაგუნას მარცხენა ღილაკით"
-
-#: src/ui_viewDialog.h:1114
-msgid "Art brightness: "
-msgstr "ნახატების სიკაშკაშე: "
-
-#. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:98
-msgid "Astraea"
-msgstr ""
-
-#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1081
-msgid "Atmosphere"
-msgstr "ატმოსფერო"
-
-#: src/gui/ConfigurationDialog.cpp:585
-msgid "Author"
-msgstr "ავტორი"
-
-#: src/core/modules/LandscapeMgr.cpp:488
-msgid "Author: "
-msgstr "ავტორი: "
-
-#: src/gui/ConfigurationDialog.cpp:509
-msgid "Authors"
-msgstr "ავტორები"
-
-#: src/gui/StelGui.cpp:176
-msgid "Auto hide horizontal button bar"
-msgstr "ღილაკების განივი პანელის თვითდამალვა"
-
-#: src/gui/StelGui.cpp:177
-msgid "Auto hide vertical button bar"
-msgstr "ღილაკების მართობული პანელის თვითდამალვა"
-
-#: src/ui_configurationDialog.h:826
-msgid "Auto zoom out returns to initial direction of view"
-msgstr "თვითმასშტაბირება ხედვის საწყის მიმართულებაზე დაგაბრუნებთ"
-
-#: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
-#, qt-format
-msgid "Az/Alt: %1/%2"
-msgstr "აზიმუტი/სიმაღლე: %1/%2"
-
-#: src/translations.h:193
-msgid "Azimuthal Grid"
-msgstr "აზიმუტური ბადე"
-
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1103
-msgid "Azimuthal grid"
-msgstr "აზიმუტური ბადე"
-
-#: src/translations.h:132
-msgid "Aztec"
-msgstr "აცტეკები"
-
-#: src/translations.h:212
-msgid "CD/DVD Script: "
-msgstr "CD/DVD სცენარი: "
-
-#: src/gui/HelpDialog.cpp:58
-msgid "CTRL + Left click"
-msgstr "CTRL + მარცხენა დაწკაპვა"
-
-#: src/gui/HelpDialog.cpp:55
-msgid "CTRL + Up/Down"
-msgstr "CTRL + ზედა/ქვედა ისარი"
-
-#: src/translations.h:165
-msgid "Calendar"
-msgstr "კალენდარი"
-
-#: src/translations.h:49
-msgid "Callisto"
-msgstr "კალისტო"
-
-#: src/ui_configurationDialog.h:853
-msgid "Cancel"
-msgstr "გაუქმება"
-
-#: src/translations.h:188
-msgid "Cardinal Points"
-msgstr "ქვეყნის მხარეები"
-
-#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
-msgid "Cardinal points"
-msgstr "ქვეყნის მხარეები"
-
-#: src/translations.h:56
-msgid "Carme"
-msgstr ""
-
-#: src/ui_viewDialog.h:1100
-msgid "Celestial Sphere"
-msgstr "ციური სფერო"
-
-#: src/gui/StelGui.cpp:164
-msgid "Center on selected object"
-msgstr "ცენტრირება შერჩეულ ობიექტზე"
-
-#: src/translations.h:41
-msgid "Ceres"
-msgstr ""
-
-#: src/translations.h:80
-msgid "Charon"
-msgstr "ქარონი"
-
-#: src/translations.h:133
-msgid "Chinese"
-msgstr "ჩინური"
-
-#. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:114
-msgid "Chiron"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:66 src/gui/HelpDialog.cpp:68
-msgid "Clear selection"
-msgstr "მონიშვნის მოხსნა"
-
-#: src/ui_configurationDialog.h:841
-msgid "Click here to start downloading"
-msgstr "დაწკაპეთ ჩამოტვირთვის დასაწყებად"
-
-#: src/ui_configurationDialog.h:856
-msgid "Close window when script runs"
-msgstr "სარკმლის დახურვა სცენარის შესრულებისას"
-
-#: src/core/modules/Nebula.cpp:299
-msgid "Cluster associated with nebulosity"
-msgstr "ნისლეულთან დაკავშირებული გროვა"
-
-#: src/translations.h:152
-msgid "Colors "
-msgstr "ფერები "
-
-#: plugins/CompassMarks/src/CompassMarks.cpp:57
-msgid "Compass Marks"
-msgstr ""
-
-#: plugins/CompassMarks/src/CompassMarks.cpp:121
-msgid "Compass marks"
-msgstr ""
-
-#: src/ui_configurationDialog.h:748
-msgid "Configuration"
-msgstr "გამართვა"
-
-#: src/gui/StelGui.cpp:132
-msgid "Configuration window"
-msgstr "კონფიგურაციის სარკმელი"
-
-#: src/translations.h:186
-msgid "Constellation Art Intensity"
-msgstr "ხომლთა ჩვენების სიკაშკაშე"
-
-#: src/translations.h:187
-msgid "Constellation Boundaries"
-msgstr "ხომლთა საზღვრები"
-
-#: src/translations.h:184
-msgid "Constellation Lines"
-msgstr "ხომლთა ხაზები"
-
-#: src/translations.h:185
-msgid "Constellation Names"
-msgstr "ხომლთა სახელები"
-
-#: src/gui/StelGui.cpp:100
-msgid "Constellation art"
-msgstr "ხომლთა ნახატები"
-
-#: src/gui/StelGui.cpp:102
-msgid "Constellation boundaries"
-msgstr "ხომლთა საზღვრები"
-
-#: src/gui/StelGui.cpp:101
-msgid "Constellation labels"
-msgstr "ხომლთა წარწერები"
-
-#: src/gui/StelGui.cpp:99
-msgid "Constellation lines"
-msgstr "ხომლთა ხაზები"
-
-#: src/ui_viewDialog.h:1109
-msgid "Constellations"
-msgstr "ხომლები"
-
-#: src/gui/ConfigurationDialog.cpp:513 src/gui/ViewDialog.cpp:368
-msgid "Contact"
-msgstr "კონტაქტი"
-
-#: src/ui_configurationDialog.h:782
-msgid "Control"
-msgstr "კონტროლი"
-
-#: src/translations.h:209
-msgid "Correct for light travel time: "
-msgstr "სინათლის მოძრაობის დროის შესწორება: "
-
-#: src/ui_locationDialogGui.h:409
-msgid "Country:"
-msgstr "ქვეყანა:"
-
-#: src/ui_locationDialogGui.h:391
-msgid "Current location information"
-msgstr "მიმდინარე მდებარეობის მონაცემები"
-
-#: src/translations.h:208
-msgid "Cursor Timeout: "
-msgstr "კურსორის ყოვნი: "
-
-#: src/core/StelProjectorClasses.cpp:223
-msgid "Cylinder"
-msgstr "ცილინდრი"
-
-#: src/translations.h:172
-msgid "Date Display Format: "
-msgstr "თარიღის ფორმატი: "
-
-#: src/gui/StelGui.cpp:141 src/ui_dateTimeDialogGui.h:294
-msgid "Date and Time"
-msgstr "თარიღი და დრო"
-
-#: src/gui/StelGui.cpp:135
-msgid "Date/time window"
-msgstr "თარიღისა და დროის სარკმელი"
-
-#: src/translations.h:164
-msgid "Day keys: "
-msgstr "დღის მინიშნებები: "
-
-#: src/gui/StelGui.cpp:145
-msgid "Decrease time speed"
-msgstr "დროის შენელება/უკუსვლა"
-
-#: src/gui/StelGui.cpp:148
-msgid "Decrease time speed (a little)"
-msgstr "დროის სიჩქარის შემცირება"
-
-#: src/ui_configurationDialog.h:764
-msgid "Default options"
-msgstr "ნაგულისხმები პარამეტრები"
-
-#: src/translations.h:39
-msgid "Deimos"
-msgstr "დეიმოსი"
-
-#: src/ui_locationDialogGui.h:393
-msgid "Delete"
-msgstr "წაშლა"
-
-#: src/translations.h:86
-msgid "Despina"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
-#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
-#, qt-format
-msgid "Developer: %1"
-msgstr "პროგრამისტი: %1"
-
-#: src/gui/HelpDialog.cpp:294
-msgid "Developers"
-msgstr "შემმუშავებლები"
-
-#: src/ui_viewDialog.h:1072
-msgid "Dim faint stars when a very bright object is visible"
-msgstr "მცირე ვარკვლავების ჩამუქება ნათელი ობიექტის მახლობლად"
-
-#: src/translations.h:66
-msgid "Dione"
-msgstr "დიონა"
-
-#: src/ui_configurationDialog.h:830
-msgid "Disc viewport"
-msgstr "დისკოსებრი ხედი"
-
-#: src/gui/StelGui.cpp:98
-msgid "Display Options"
-msgstr "ჩვენების პარამეტრები"
-
-#: src/ui_configurationDialog.h:753
-msgid "Display all information available"
-msgstr "ყველა არსებული ინფორმაციის ჩვენება"
-
-#: src/ui_configurationDialog.h:757
-msgid "Display less information"
-msgstr "ნაკლები ინფორმაციის ჩვენება"
-
-#: src/ui_configurationDialog.h:761
-msgid "Display no information"
-msgstr "ინფორმაციის ჩვენების გარეშე"
-
-#: plugins/CompassMarks/src/CompassMarks.cpp:60
-msgid "Displays compass bearing marks along the horizon"
-msgstr ""
-
-#: src/core/modules/StarWrapper.cpp:122
-#: plugins/Supernovas/src/Supernova.cpp:107
-#, qt-format
-msgid "Distance: %1 Light Years"
-msgstr "მანძილი: %1 სინათლის წელი"
-
-#: src/core/modules/Planet.cpp:143
-#, no-c-format, qt-format
-msgid "Distance: %1AU"
-msgstr "მანძილი: %1აე"
-
-#: src/gui/HelpDialog.cpp:296
-#, qt-format
-msgid "Doc author/developer: %1"
-msgstr "დოკუმენტაციის ავტორი/შემმუშავებელი: %1"
-
-#: src/gui/ConfigurationDialog.cpp:676
-#, qt-format
-msgid ""
-"Download size: %1MB\n"
-"Star count: %2 Million\n"
-"Magnitude range: %3 - %4"
-msgstr ""
-
-#: src/ui_configurationDialog.h:844
-msgid "Download this file to view even more stars"
-msgstr "ამ ფაილის ჩამოტვირთვა სხვა ვარსკვლავების საჩვენებლად"
-
-#: src/gui/ConfigurationDialog.cpp:728
-#, qt-format
-msgid ""
-"Downloading %1...\n"
-"(You can close this window.)"
-msgstr ""
-"იტვირთება %1...\n"
-"(შეგიძლიათ დახუროთ ეს სარკმელი.)"
-
-#: src/ui_viewDialog.h:1074
-msgid "Dynamic eye adaptation"
-msgstr "თვალის დინამიკური ადაპტაცია"
-
-#: src/translations.h:128
-msgid "E"
-msgstr "ა"
-
-#: src/translations.h:36
-msgid "Earth"
-msgstr "დედამიწა"
-
-#: src/core/modules/GridLinesMgr.cpp:529
-msgid "Ecliptic"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:136
-#, fuzzy, qt-format
-msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr "რად/გრად. (თარიღის): %1/%2"
-
-#: src/translations.h:196
-msgid "Ecliptic Line"
-msgstr "ეკლიპტიკის ხაზი"
-
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1107
-msgid "Ecliptic line"
-msgstr "ეკლიპტიკის ხაზი"
-
-#: src/translations.h:153
-msgid "Effects "
-msgstr "ეფექტები "
-
-#: src/translations.h:134
-msgid "Egyptian"
-msgstr "ეგვიპტური"
-
-#: src/translations.h:52
-msgid "Elara"
-msgstr ""
-
-#: src/ui_configurationDialog.h:786
-msgid "Enable keyboard navigation"
-msgstr "კლავიატურით ნავიგაციის ჩართვა"
-
-#: src/ui_configurationDialog.h:790
-msgid "Enable mouse navigation"
-msgstr "თაგუნათი ნავიგაციის ჩართვა"
-
-#: src/translations.h:64
-msgid "Enceladus"
-msgstr "ენკელადე"
-
-#: src/ui_locationDialogGui.h:405
-msgid "Enter the altitude in meter"
-msgstr "მიუთითეთ სიმაღლე მეტრებში"
-
-#: src/core/StelProjectorClasses.cpp:63
-msgid "Equal Area"
-msgstr "თანაბარი არე"
-
-#: src/core/modules/GridLinesMgr.cpp:533
-msgid "Equator"
-msgstr ""
-
-#: src/translations.h:195
-msgid "Equator Line"
-msgstr "ეკვატორის ხაზი"
-
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1104
-msgid "Equator line"
-msgstr "ეკვატორის ხაზი"
-
-#: src/translations.h:194
-msgid "Equatorial Grid"
-msgstr "ეკვატორული ბადე"
-
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1102
-msgid "Equatorial J2000 grid"
-msgstr "ეკვატორული J2000 ბადე"
-
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1101
-msgid "Equatorial grid"
-msgstr "ეკვატორული ბადე"
-
-#: src/translations.h:81
-msgid "Eris"
-msgstr ""
-
-#. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:116
-msgid "Eros"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:723 src/gui/ConfigurationDialog.cpp:757
-#, qt-format
-msgid ""
-"Error downloading %1:\n"
-"%2"
-msgstr ""
-"შეცდომა %1 ჩამოტვირთვისას:\n"
-"%2"
-
-#: src/gui/ConfigurationDialog.cpp:812
-#, qt-format
-msgid ""
-"Error downloading %1:\n"
-"File is corrupted."
-msgstr ""
-"შეცდომა %1 ჩამოტვირთვისას:\n"
-"ფაილი დაზიანებულია."
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:142
-#: src/gui/AddRemoveLandscapesDialog.cpp:166
-#: src/gui/AddRemoveLandscapesDialog.cpp:215
-#: src/gui/AddRemoveLandscapesDialog.cpp:221
-#: src/gui/AddRemoveLandscapesDialog.cpp:229
-#: src/gui/AddRemoveLandscapesDialog.cpp:239
-msgid "Error!"
-msgstr ""
-
-#: src/translations.h:47
-msgid "Europa"
-msgstr "ევროპა"
-
-#: src/gui/ViewDialog.cpp:515
-msgid "Exceptional Leonid rate"
-msgstr "ლეონიდების განსაკუთრებული ნაკადი"
-
-#: src/ui_searchDialogGui.h:450
-msgid "Find Object"
-msgstr "ობიექტის პოვნა"
-
-#: src/ui_searchDialogGui.h:451
-#, fuzzy
-msgid "Find Object or Position"
-msgstr "ობიექტის პოვნა"
-
-#: src/gui/ConfigurationDialog.cpp:665
-msgid "Finished downloading all star catalogs!"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:685
-msgid ""
-"Finished downloading new star catalogs!\n"
-"Restart Stellarium to display them."
-msgstr ""
-"ვარსკვლავთა ახალი კატალოგების გამოტვირთვა დასრულდა!\n"
-"ხელახლა გახსენით პროგრამა Stellarium მათ საჩვენებლად."
-
-#: src/core/StelProjectorClasses.cpp:145
-msgid "Fish-eye"
-msgstr "თევზის თვალი"
-
-#: src/gui/StelGui.cpp:127
-msgid "Flip scene horizontally"
-msgstr "განივი დასარკვა"
-
-#: src/gui/StelGui.cpp:128
-msgid "Flip scene vertically"
-msgstr "სცენის მართობული ამოტრიალება"
-
-#. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:104
-msgid "Flora"
-msgstr ""
-
-#: src/gui/StelGui.cpp:116
-msgid "Fog"
-msgstr "ნისლი"
-
-#: src/gui/StelGui.cpp:126
-msgid "Full-screen mode"
-msgstr "სრული ეკრანის რეჟიმი"
-
-#: src/gui/HelpDialog.cpp:172
-msgid "Further Reading"
-msgstr "შემდეგი საკითხავი"
-
-#: src/gui/StelGui.cpp:107
-msgid "Galactic grid"
-msgstr "გალაქტიკური ბადე"
-
-#: src/translations.h:87
-#, fuzzy
-msgid "Galatea"
-msgstr "გალაქტიკა"
-
-#: src/core/modules/Nebula.cpp:284
-msgid "Galaxy"
-msgstr "გალაქტიკა"
-
-#: src/translations.h:48
-msgid "Ganymede"
-msgstr "განიმედი"
-
-#: src/translations.h:150
-msgid "General "
-msgstr "ზოგადი "
-
-#: src/gui/ConfigurationDialog.cpp:674
-#, qt-format
-msgid "Get catalog %1 of %2"
-msgstr "%1 კატალოგის მიღება, სულ %2-დან"
-
-#: src/ui_configurationDialog.h:843
-msgid "Get catalog x of y"
-msgstr "კატალოგის მიღება x - y"
-
-#: src/core/modules/Nebula.cpp:290
-msgid "Globular cluster"
-msgstr "ვარსკვლავთა სფერული გროვა"
-
-#: src/gui/HelpDialog.cpp:297
-#, qt-format
-msgid "Graphic/other designer: %1"
-msgstr "გრაფიკული/სხვა გაფორმება: %1"
-
-#: src/ui_configurationDialog.h:822
-msgid "Gravity labels"
-msgstr "გრავიტაციის წარწერები"
-
-#: src/ui_searchDialogGui.h:529
-msgid "Greek letters for Bayer designations"
-msgstr ""
-
-#: src/gui/StelGui.cpp:114
-msgid "Ground"
-msgstr "მიწა"
-
-#: src/translations.h:90
-#, fuzzy
-msgid "Halimede"
-msgstr "განიმედი"
-
-#: src/core/StelProjectorClasses.cpp:182
-msgid "Hammer-Aitoff"
-msgstr "Hammer-Aitoff"
-
-#. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:100
-msgid "Hebe"
-msgstr ""
-
-#. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:118
-msgid "Hektor"
-msgstr ""
-
-#: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
-msgid "Help"
-msgstr "დახმარება"
-
-#: src/gui/StelGui.cpp:131
-msgid "Help window"
-msgstr "დახმარების სარკმელი"
-
-#: src/ui_configurationDialog.h:832
-msgid "Hide other constellations when you click one"
-msgstr "სხვა ხომლების დამალვა ერთერთის დაწკაპვისას"
-
-#: src/ui_configurationDialog.h:807
-msgid "Hides the mouse cursor when inactive"
-msgstr "თაგუნას კურსორის დამალვა უქმად ყოფნისას"
-
-#: src/gui/ViewDialog.cpp:518
-msgid "Highest rate ever (1966 Leonids)"
-msgstr "მაქსიმალური ნაკადი (1966 ლეონიდები)"
-
-#: src/translations.h:51
-msgid "Himalia"
-msgstr ""
-
-#: plugins/Supernovas/src/Supernovas.cpp:59
-msgid "Historical supernova"
-msgstr ""
-
-#: src/core/modules/GridLinesMgr.cpp:537
-msgid "Horizon"
-msgstr ""
-
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
-#, fuzzy
-msgid "Horizon line"
-msgstr "მერიდიანის ხაზი"
-
-#: src/core/StelObject.cpp:94 src/core/StelObject.cpp:97
-#, qt-format
-msgid "Hour angle/DE: %1/%2"
-msgstr "საათობრივი კუთხე/გრად.: %1/%2"
-
-#: src/ui_viewDialog.h:1093
-msgid "Hourly zenith rate:"
-msgstr "ზენიტის საათობრივი სვლა:"
-
-#. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:108
-msgid "Hygiea"
-msgstr ""
-
-#: src/translations.h:69
-msgid "Hyperion"
-msgstr "ჰიპერიონი"
-
-#: src/translations.h:70
-msgid "Iapetus"
-msgstr "იაფეტი"
-
-#: src/core/StelProjectorClasses.cpp:150
-msgid ""
-"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
-"lines become curves when they appear a large angular distance from the "
-"centre of the field of view (like the distortions seen with very wide angle "
-"camera lenses)."
-msgstr ""
-"თევზის თვალის ანუ <i>აზიმუტური თანაბარმონაკვეთიანი პროექციაში</i>, წრფეები "
-"მრუდებად გარდაიქმნება როცა დამზერის წერტილიდან დიდი კუთხური მანძილით არიან "
-"დაშორებული (ისევე, როგორც ფართოფორმატიანი ობიექტივის შემთხვევაში)."
-
-#: src/gui/StelGui.cpp:146
-msgid "Increase time speed"
-msgstr "დროის დაჩქარება"
-
-#: src/gui/StelGui.cpp:149
-msgid "Increase time speed (a little)"
-msgstr "დროის სიჩქარის გაზრდა"
-
-#: src/ui_addRemoveLandscapesDialog.h:269
-msgid "Install a new landscape from a ZIP archive..."
-msgstr ""
-
-#: src/translations.h:135
-msgid "Inuit"
-msgstr "ესკიმოსური"
-
-#: src/ui_configurationDialog.h:838
-msgid "Invert colors"
-msgstr "ფერების ინვერსია"
-
-#: src/translations.h:46
-msgid "Io"
-msgstr "იო"
-
-#. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:102
-msgid "Iris"
-msgstr ""
-
-#: src/translations.h:43
-msgid "Juno"
-msgstr ""
-
-#: src/translations.h:45
-msgid "Jupiter"
-msgstr "იუპიტერი"
-
-#. TRANSLATORS: Name of supernova SN 1604A
-#: src/translations.h:122
-msgid "Kepler's Supernova"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:164
-msgid "Keys"
-msgstr "კლავიშები"
-
-#: src/translations.h:136
-msgid "Korean"
-msgstr "კორეული"
-
-#: src/ui_viewDialog.h:1088
-msgid "Labels and Markers"
-msgstr "წარწერები და ნიშნები"
-
-#: src/translations.h:137
-msgid "Lakota"
-msgstr "ლაკოტა"
-
-#: src/ui_viewDialog.h:1062
-msgid "Landscape"
-msgstr "პეიზაჟი"
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:127
-#, qt-format
-msgid "Landscape \"%1\" has been installed successfully."
-msgstr ""
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:154
-#, qt-format
-msgid "Landscape \"%1\" has been removed successfully."
-msgstr ""
-
-#: src/translations.h:201
-msgid "Landscape: "
-msgstr "ლანდშაფტი: "
-
-#: src/translations.h:93
-msgid "Laomedeia"
-msgstr ""
-
-#: src/translations.h:88
-msgid "Larissa"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:395
-msgid "Latitude:"
-msgstr "განედი:"
-
-#: src/translations.h:157
-msgid "Latitude: "
-msgstr "განედი: "
-
-#: src/translations.h:58
-msgid "Leda"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:56
-msgid "Left click"
-msgstr "მარცხენა დაწკაპვა"
-
-#: src/gui/ConfigurationDialog.cpp:586
-msgid "License"
-msgstr "ლიცენზია"
-
-#: src/translations.h:200
-msgid "Light Pollution Luminance: "
-msgstr "სინათლის დაბინძურება: "
-
-#: src/ui_viewDialog.h:1083
-msgid "Light pollution: "
-msgstr "სინათლის დაბინძურება: "
-
-#: src/translations.h:182
-msgid "Limiting Magnitude: "
-msgstr "ზღვრული მაგნიტუდა: "
-
-#: src/translations.h:217
-msgid "Load Default Configuration: "
-msgstr "ნაგულისხმები კონფიგურაციის ჩატვირთვა: "
-
-#: src/ui_configurationDialog.h:866
-msgid "Load at startup"
-msgstr "გაშვებისთანავე ჩატვირთვა"
-
-#: src/translations.h:211
-msgid "Local Script: "
-msgstr "ლოკალური სცენარი: "
-
-#: src/ui_locationDialogGui.h:387
-msgid "Location"
-msgstr "ადგილი"
-
-#: src/gui/StelGui.cpp:136
-msgid "Location window"
-msgstr "მდებარეობის სარკმელი"
-
-#: src/core/modules/LandscapeMgr.cpp:491
-msgid "Location: "
-msgstr "მდებარეობა: "
-
-#: src/ui_helpDialogGui.h:269
-msgid "Log"
-msgstr "დავთარი"
-
-#: src/ui_locationDialogGui.h:399
-msgid "Longitude:"
-msgstr "გრძედი:"
-
-#: src/translations.h:158
-msgid "Longitude: "
-msgstr "გრძედი: "
-
-#: src/translations.h:55
-msgid "Lysithea"
-msgstr ""
-
-#: src/translations.h:204
-msgid "Magnitude Scaling Multiplier: "
-msgstr "მაგნიტუდის კოეფიციენტი: "
-
-#: src/translations.h:179
-msgid "Magnitude Sizing Multiplier: "
-msgstr "მაგნიტუდის ზომის კოეფიციენტი: "
+msgid "Type: <b>%1</b>"
+msgstr "ტიპი: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:120
 #: plugins/Supernovas/src/Supernova.cpp:98
@@ -1041,286 +63,92 @@ msgstr "მაგნიტუდის ზომის კოეფიციე�
 msgid "Magnitude: <b>%1</b>"
 msgstr "მაგნიტუდა: <b>%1</b>"
 
-#: src/core/modules/StarWrapper.cpp:51 src/core/modules/StarWrapper.cpp:108
+#: src/core/modules/Nebula.cpp:104
 #, qt-format
-msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr "მაგნიტუდა: <b>%1</b> (B-V: %2)"
+msgid "Size: %1"
+msgstr "ზომა: %1"
 
-#: src/ui_configurationDialog.h:872
-msgid "Main"
-msgstr "ძირითადი"
-
-#: src/translations.h:202
-msgid "Manual zoom: "
-msgstr "მასშტაბირება ხელით: "
-
-#: src/translations.h:138
-msgid "Maori"
-msgstr "მაორი"
-
-#: src/ui_viewDialog.h:1060
-msgid "Markings"
-msgstr "ნიშნულები"
-
-#: src/translations.h:38
-msgid "Mars"
-msgstr "მარსი"
-
-#: src/ui_configurationDialog.h:828
-msgid "Mask out everything outside a central circle in the main view"
-msgstr "ყველაფრის შენიღბვა მთავარი ხედის ცენტრალური წრის გარეთ"
-
-#: src/core/StelProjector.cpp:62
-msgid "Maximum FOV: "
-msgstr "მაქსიმალური FOV: "
-
-#: src/translations.h:180
-msgid "Maximum Magnitude to Label: "
-msgstr "მაგნიტუდის მაქს. წარწერისთვის: "
-
-#: src/translations.h:206
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "ნისლეულის მაქს. მაგნიტუდა წარწერისთვის: "
-
-#: src/core/StelProjectorClasses.cpp:270
-msgid "Mercator"
-msgstr "მერკატორი"
-
-#: src/translations.h:34
-msgid "Mercury"
-msgstr "მერკური"
-
-#: src/core/modules/GridLinesMgr.cpp:525
-msgid "Meridian"
-msgstr ""
-
-#: src/translations.h:192
-msgid "Meridian Line"
-msgstr "მერიდიანის ხაზი"
-
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1105
-msgid "Meridian line"
-msgstr "მერიდიანის ხაზი"
-
-#. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:106
-msgid "Metis"
-msgstr ""
-
-#: src/translations.h:205
-msgid "Milky Way intensity: "
-msgstr "ირმის ნახტომის სიკაშკაშე: "
-
-#: src/translations.h:63
-msgid "Mimas"
-msgstr "მიმასი"
-
-#: src/translations.h:74
-msgid "Miranda"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:234 src/gui/HelpDialog.cpp:326
-#: src/gui/HelpDialog.cpp:328 src/gui/StelGui.cpp:170
-msgid "Miscellaneous"
-msgstr "სხვადასხვა"
-
-#: src/translations.h:37
-msgid "Moon"
-msgstr "მთვარე"
-
-#: src/ui_configurationDialog.h:809
-msgid "Mouse cursor timeout (seconds):"
-msgstr "თაგუნას კურსორის ვადა (წამები):"
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:173
-msgid "Move a telescope to a given set of coordinates"
-msgstr ""
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:155
-#, qt-format
-msgid "Move telescope #%1 to selected object"
-msgstr ""
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:162
-#, qt-format
-msgid "Move telescope #%1 to the point currently in the center of the screen"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:163
-msgid "Movement and Selection"
-msgstr "მოძრაობა და მონიშვნა"
-
-#: src/translations.h:126
-msgid "N"
-msgstr "ჩ"
-
-#: src/translations.h:84
-msgid "Naiad"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:408
-msgid "Name/City:"
-msgstr "სახელი/ქალაქი:"
-
-#: src/translations.h:139
-msgid "Navajo"
-msgstr "ნავახო"
-
-#: src/ui_configurationDialog.h:874
-msgid "Navigation"
-msgstr "ნავიგაცია"
-
-#: src/core/modules/Nebula.cpp:293
-msgid "Nebula"
-msgstr "ნისლეული"
-
-#: src/translations.h:198
-msgid "Nebula Circles"
-msgstr "ნისლეულთა წრეები"
-
-#: src/translations.h:197
-msgid "Nebula Names"
-msgstr "ნისლეულთა სახელები"
-
-#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1090
-msgid "Nebulas"
-msgstr "ნისლეულები"
-
-#: src/gui/StelGui.cpp:119
-msgid "Nebulas background images"
-msgstr "ნისლეულთა ფონების ნახატები"
-
-#: src/translations.h:72
-msgid "Neptune"
-msgstr "ნეპტუნი"
-
-#: src/translations.h:83
-msgid "Nereid"
-msgstr ""
-
-#: src/translations.h:94
-msgid "Neso"
-msgstr ""
-
-#: src/gui/LocationDialog.cpp:334
-msgid "New Location"
-msgstr "ახალი ადგილმდებარეობა"
-
-#: src/gui/StelGui.cpp:125
-msgid "Night mode"
-msgstr "ღამის რეჟიმი"
-
-#: src/gui/ViewDialog.cpp:422
-msgid "No description"
-msgstr "აღწერილობის გარეშე"
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:141
-#: src/gui/AddRemoveLandscapesDialog.cpp:211
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-#: src/gui/AddRemoveLandscapesDialog.cpp:228
-msgid "No landscape was installed."
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:506
-msgid "No shooting stars"
-msgstr "მეტეორები არაა"
-
-#: src/ui_configurationDialog.h:763
-msgid "None"
-msgstr "არა"
-
-#: src/gui/ViewDialog.cpp:509
-msgid "Normal rate"
-msgstr "ჩვეულებრივი სვლა"
-
-#: src/translations.h:140
-msgid "Norse"
-msgstr "ნორვეგიული"
-
-#: src/gui/HelpDialog.cpp:300
-#, qt-format
-msgid "OSX Developer: %1"
-msgstr "OSX პროგრამისტი: %1"
-
-#: src/translations.h:78
-msgid "Oberon"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:530
-#, fuzzy
-msgid "Object"
-msgstr "ობიექტის პოვნა"
-
-#: src/translations.h:203
-msgid "Object Sizing Rule: "
-msgstr "ობიექტის ზომის შეცვლის წესი: "
-
-#: src/core/modules/Planet.cpp:137
-#, fuzzy, qt-format
-msgid "Obliquity (of date): %1"
-msgstr "რად/გრად. (თარიღის): %1/%2"
-
-#: plugins/Oculars/src/Oculars.cpp:943
-msgid "Ocular view"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:76
-msgid "Oculars"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:965
-msgid "Oculars popup menu"
-msgstr ""
+#: src/core/modules/Nebula.cpp:284
+msgid "Galaxy"
+msgstr "გალაქტიკა"
 
 #: src/core/modules/Nebula.cpp:287
 msgid "Open cluster"
 msgstr "ღია გროვა"
 
-#: src/ui_viewDialog.h:1117 src/ui_viewDialog.h:1122 src/ui_viewDialog.h:1124
-#: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
-msgid "Options"
-msgstr "პარამეტრები"
+#: src/core/modules/Nebula.cpp:290
+msgid "Globular cluster"
+msgstr "ვარსკვლავთა სფერული გროვა"
 
-#: src/core/StelProjectorClasses.cpp:322
-msgid "Orthographic"
-msgstr "ორთოგრაფული"
+#: src/core/modules/Nebula.cpp:293
+msgid "Nebula"
+msgstr "ნისლეული"
 
-#: src/core/StelProjectorClasses.cpp:327
-msgid ""
-"Orthographic projection is related to perspective projection, but the point "
-"of perspective is set to an infinite distance."
+#: src/core/modules/Nebula.cpp:296
+msgid "Planetary nebula"
+msgstr "პლანეტარული ნისლეული"
+
+#: src/core/modules/Nebula.cpp:299
+msgid "Cluster associated with nebulosity"
+msgstr "ნისლეულთან დაკავშირებული გროვა"
+
+#: src/core/modules/Nebula.cpp:302
+msgid "Unknown"
+msgstr "უცნობია"
+
+#: src/core/modules/Nebula.cpp:305
+msgid "Undocumented type"
+msgstr "არადოკუმენტირებული ტიპი"
+
+#: src/core/modules/Planet.cpp:123 src/core/modules/StarWrapper.cpp:112
+#, qt-format
+msgid "Absolute Magnitude: %1"
+msgstr "აბსოლუტური მაგნიტუდა: %1"
+
+#: src/core/modules/Planet.cpp:136
+#, qt-format
+msgid "Ecliptic Geocentric (of date): %1/%2"
 msgstr ""
-"ორთოგრაფული პროექცია პერსპექტიულის მონათესავეა, თუმცა პერსპექტივის წერტილით "
-"უსასრულობაში."
 
-#: src/ui_configurationDialog.h:805
-msgid "Other"
-msgstr "სხვა"
-
-#: src/ui_configurationDialog.h:803
-msgid "Other:"
-msgstr "სხვა:"
-
-#: src/gui/HelpDialog.cpp:54
-msgid "Page Up/Down"
-msgstr "გვერდი ზემოთ/ქვემოთ"
-
-#: src/translations.h:42
-msgid "Pallas"
+#: src/core/modules/Planet.cpp:137
+#, qt-format
+msgid "Obliquity (of date): %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:62
-msgid "Pan view around the sky"
-msgstr "ცის სრული მიმოხილვა"
+#: src/core/modules/Planet.cpp:143
+#, no-c-format, qt-format
+msgid "Distance: %1AU"
+msgstr "მანძილი: %1აე"
+
+#: src/core/modules/Planet.cpp:147
+#, qt-format
+msgid "Apparent diameter: %1"
+msgstr "ხილული დიამეტრი: %1"
+
+#: src/core/modules/StarWrapper.cpp:51 src/core/modules/StarWrapper.cpp:108
+#, qt-format
+msgid "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr "მაგნიტუდა: <b>%1</b> (B-V: %2)"
+
+#: src/core/modules/StarWrapper.cpp:118
+#, qt-format
+msgid "Spectral Type: %1"
+msgstr "სპექტრული ტიპი: %1"
+
+#: src/core/modules/StarWrapper.cpp:122
+#: plugins/Supernovas/src/Supernova.cpp:107
+#, qt-format
+msgid "Distance: %1 Light Years"
+msgstr "მანძილი: %1 სინათლის წელი"
 
 #: src/core/modules/StarWrapper.cpp:125
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "პარალაქსი: %1\""
 
-#: src/translations.h:53
-msgid "Pasiphae"
-msgstr ""
+#: src/core/StelProjector.cpp:62
+msgid "Maximum FOV: "
+msgstr "მაქსიმალური FOV: "
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
@@ -1334,582 +162,17 @@ msgstr ""
 "პერსპექტიული პროექცია ჰორიზონტს ხაზის სახით ინარჩუნებს. ამ პროექციის "
 "მათემატიკური სახელწოდებაა - <i>გნომონური პროექცია</i>."
 
-#: src/translations.h:40
-msgid "Phobos"
-msgstr "ფობოსი"
+#: src/core/StelProjectorClasses.cpp:63
+msgid "Equal Area"
+msgstr "თანაბარი არე"
 
-#: src/translations.h:71
-msgid "Phoebe"
-msgstr "ფება"
-
-#: src/translations.h:189
-msgid "Planet Names"
-msgstr "პლანეტათა სახელები"
-
-#: src/translations.h:190
-msgid "Planet Orbits"
-msgstr "პლანეტათა ორბიტები"
-
-#: src/translations.h:191
-msgid "Planet Trails"
-msgstr "პლანეტათა კვალი"
-
-#: src/gui/StelGui.cpp:122
-msgid "Planet orbits"
-msgstr "პლანეტების ორბიტები"
-
-#: src/gui/StelGui.cpp:123
-msgid "Planet trails"
-msgstr "პლანეტების კვალი"
-
-#: src/ui_locationDialogGui.h:410
-msgid "Planet:"
-msgstr "პლანეტა:"
-
-#: src/core/modules/LandscapeMgr.cpp:499
-msgid "Planet: "
-msgstr "პლანეტა: "
-
-#: src/ui_configurationDialog.h:814
-msgid "Planetarium options"
-msgstr "პლანეტარიუმის პარამეტრები"
-
-#: src/core/modules/Nebula.cpp:296
-msgid "Planetary nebula"
-msgstr "პლანეტარული ნისლეული"
-
-#: src/ui_viewDialog.h:1091
-msgid "Planets"
-msgstr "პლანეტები"
-
-#: src/ui_viewDialog.h:1075
-msgid "Planets and satellites"
-msgstr "პლანეტები და თანამგზავრები"
-
-#: src/gui/StelGui.cpp:121
-msgid "Planets labels"
-msgstr "პლანეტათა წარწერები"
-
-#. TRANSLATORS: Title of a group of key bindings in the Help window
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:121
-#: plugins/CompassMarks/src/CompassMarks.cpp:121
-#: plugins/Oculars/src/Oculars.cpp:931 plugins/Oculars/src/Oculars.cpp:945
-#: plugins/Satellites/src/Satellites.cpp:123
-msgid "Plugin Key Bindings"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:81
+#: src/core/StelProjectorClasses.cpp:68
 msgid ""
-"Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
-"planetarium systems"
+"The full name of this projection method is, <i>Lambert azimuthal equal-area "
+"projection</i>. It preserves the area but not the angle."
 msgstr ""
-
-#: src/ui_configurationDialog.h:880
-msgid "Plugins"
-msgstr "მოდულები"
-
-#: src/translations.h:79
-msgid "Pluto"
-msgstr "პლუტონი"
-
-#: src/translations.h:141
-msgid "Polynesian"
-msgstr "პოლინეზიური"
-
-#: src/ui_searchDialogGui.h:532
-#, fuzzy
-msgid "Position"
-msgstr "პროექცია"
-
-#: plugins/Satellites/src/Satellites.cpp:70
-msgid ""
-"Prediction of artificial satellite positions in Earth orbit based on NORAD "
-"TLE data"
-msgstr ""
-
-#: src/translations.h:167
-msgid "Preset Sky Time: "
-msgstr "მითითებული ასტრ. დრო: "
-
-#: src/translations.h:170
-msgid "Preset Time"
-msgstr "მითითებული დრო"
-
-#: src/ui_configurationDialog.h:750
-msgid "Program language"
-msgstr "პროგრამის ენა"
-
-#: src/gui/HelpDialog.cpp:295
-#, qt-format
-msgid "Project coordinator & lead developer: %1"
-msgstr "პროექტის კოორდინატორი და წამყვანი პროგრამისტი: %1"
-
-#: src/ui_viewDialog.h:1115
-msgid "Projection"
-msgstr "პროექცია"
-
-#: src/translations.h:89
-msgid "Proteus"
-msgstr ""
-
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:60
-msgid "Provides an angle measurement tool"
-msgstr ""
-
-#: src/translations.h:91
-msgid "Psamathe"
-msgstr ""
-
-#: src/gui/StelGui.cpp:172
-msgid "Quit"
-msgstr "დასრულება"
-
-#: src/core/StelObject.cpp:79
-#, qt-format
-msgid "RA/DE (J2000): %1/%2"
-msgstr "რად/გრად. (J2000): %1/%2"
-
-#: src/core/StelObject.cpp:86
-#, qt-format
-msgid "RA/DE (of date): %1/%2"
-msgstr "რად/გრად. (თარიღის): %1/%2"
-
-#: src/ui_searchDialogGui.h:531
-msgid "RA/Dec (J2000):"
-msgstr "რად/გრად (J200)"
-
-#: src/ui_viewDialog.h:1087
-msgid "Refraction/Extinction settings..."
-msgstr ""
-
-#: src/ui_helpDialogGui.h:272
-msgid "Refresh"
-msgstr "განახლება"
-
-#: src/ui_viewDialog.h:1069
-msgid "Relative scale:"
-msgstr "ფარდობითი მასშტაბი:"
-
-#: src/ui_addRemoveLandscapesDialog.h:275
-msgid "Remove"
-msgstr "მოშორება"
-
-#: src/ui_addRemoveLandscapesDialog.h:273
-msgid "Remove an installed landscape"
-msgstr ""
-
-#: src/ui_configurationDialog.h:847
-msgid "Restart the download"
-msgstr "ჩამოტვირთვის განახლება"
-
-#: src/ui_configurationDialog.h:772
-msgid "Restore defaults"
-msgstr "ნაგულისხმების აღდგენა"
-
-#: src/ui_configurationDialog.h:770
-msgid "Restore the default settings that came with Stellarium"
-msgstr "Stellarium პროგრამის ნაგულისხმები პარამეტრების აღდგენა"
-
-#: src/ui_configurationDialog.h:773
-msgid ""
-"Restoring default settings requires a restart of Stellarium. Saving all the "
-"current options includes the current FOV and direction of view for use at "
-"next startup."
-msgstr ""
-"ნაგულისხმების პარამეტრების აღსადგენად Stellarium უნდა დაიხუროს და ხელეხლა "
-"გაიხსნას. ინახება ყველა მიმდინარე პარამეტრი ხედვის არისა და მიმართულების "
-"ჩათვლით პროგრამის შემდეგი გახსნისთვის."
-
-#: src/ui_configurationDialog.h:849
-msgid "Retry"
-msgstr "ხელახლა"
-
-#: src/translations.h:67
-msgid "Rhea"
-msgstr "რეა"
-
-#: src/gui/HelpDialog.cpp:57
-msgid "Right click"
-msgstr "მარჯვენა დაწკაპვა"
-
-#: src/ui_configurationDialog.h:858
-msgid "Run the selected script"
-msgstr "შერჩეული სცენარის შესრულება"
-
-#: src/gui/ConfigurationDialog.cpp:615
-msgid "Running script: "
-msgstr "მუშა სცენარი: "
-
-#: src/gui/ConfigurationDialog.cpp:622
-msgid "Running script: [none]"
-msgstr "მუშა სცენარი: [არაა]"
-
-#: src/translations.h:127
-msgid "S"
-msgstr "ს"
-
-#: plugins/Supernovas/src/Supernovas.cpp:62
-msgid ""
-"SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
-"July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
-"1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
-"August), SN 1972E (8 May) and SN 1987A (24 February)"
-msgstr ""
-
-#: src/translations.h:142
-msgid "Sami"
-msgstr "სამი"
-
-#: src/translations.h:92
-msgid "Sao"
-msgstr ""
-
-#: plugins/Satellites/src/Satellites.cpp:126
-msgid "Satellite hints"
-msgstr ""
-
-#: plugins/Satellites/src/Satellites.cpp:128
-msgid "Satellite labels"
-msgstr ""
-
-#: plugins/Satellites/src/Satellites.cpp:67
-msgid "Satellites"
-msgstr ""
-
-#: plugins/Satellites/src/Satellites.cpp:125
-msgid "Satellites configuration window"
-msgstr ""
-
-#: src/translations.h:62
-msgid "Saturn"
-msgstr "სატურნი"
-
-#: src/translations.h:218
-msgid "Save Current Configuration as Default: "
-msgstr "მიმდინარე პარამეტრების ნაგულისხმებად შენახვა: "
-
-#: src/gui/StelGui.cpp:173
-msgid "Save screenshot"
-msgstr "ანაბეჭდის შენახვა"
-
-#: src/ui_configurationDialog.h:768
-msgid "Save settings"
-msgstr "პარამეტრების შენახვა"
-
-#: src/ui_configurationDialog.h:766
-msgid ""
-"Save the settings you've changed this session to be the same the next time "
-"you start Stellarium"
-msgstr ""
-"ამ სეანსის ცვლილებების შენახვა და გამოყენება Stellarium პროგრამის ახალ "
-"სეანსზე"
-
-#: src/ui_viewDialog.h:1080
-msgid "Scale Moon"
-msgstr "მთვარის მასშტაბი"
-
-#: src/ui_configurationDialog.h:836
-msgid "Screenshot Directory"
-msgstr "ეკრანთა ანაბეჭდების დასტა"
-
-#: src/ui_configurationDialog.h:835
-msgid "Screenshots"
-msgstr "ეკრანის ანაბეჭდები"
-
-#: src/gui/StelGui.cpp:138
-msgid "Script console window"
-msgstr "სკრიპტის კონსოლის ფანჯარა"
-
-#: src/ui_configurationDialog.h:878
-msgid "Scripts"
-msgstr "სცენარები"
-
-#: src/translations.h:154
-msgid "Scripts "
-msgstr "სცენარები "
-
-#: src/gui/StelGui.cpp:133
-msgid "Search window"
-msgstr "ძიების სარკმელი"
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:112
-msgid "Select a ZIP archive that contains a Stellarium landscape"
-msgstr ""
-
-#: src/translations.h:215
-msgid "Select and exit to run."
-msgstr "შერჩევა და გამოსვლა გასახსნელად."
-
-#: src/gui/HelpDialog.cpp:65
-msgid "Select object"
-msgstr "ობიექტის მონიშვნა"
-
-#: src/gui/ConfigurationDialog.cpp:295
-msgid "Select screenshot directory"
-msgstr "ეკრანთა ანაბეჭდების დასტის არჩევა"
-
-#: src/ui_configurationDialog.h:834
-msgid "Select single constellation"
-msgstr "ცალკეული ხომლის შერჩევა"
-
-#: src/ui_configurationDialog.h:751
-msgid "Selected object information"
-msgstr "შერჩეული ობიექტის მონაცემები"
-
-#: src/translations.h:148
-msgid "Set Location "
-msgstr "ადგილის მითითება "
-
-#: src/translations.h:149
-msgid "Set Time "
-msgstr "დროის მითითება "
-
-#: src/translations.h:163
-msgid "Set Time Zone: "
-msgstr "საათის ზონის მითითება: "
-
-#: src/translations.h:221
-msgid "Set UI Locale: "
-msgstr "UI ლოკალის მითითება "
-
-#: src/gui/StelGui.cpp:168
-msgid "Set home planet to selected planet"
-msgstr "შერჩეული პლანეტის საკუთარ პლანეტად მითითება"
-
-#: src/gui/StelGui.cpp:147
-msgid "Set normal time rate"
-msgstr "დროის ნორმალური სვლა"
-
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:144
-msgid "Set the normal script execution rate"
-msgstr "სკრიპტის შესრულების სიხშირის ნორმალიზება"
-
-#: src/gui/StelGui.cpp:150
-msgid "Set time rate to zero"
-msgstr "დროის სიჩქარის განულება"
-
-#: src/gui/StelGui.cpp:151
-msgid "Set time to now"
-msgstr "მიმდინარე დროის მითითება"
-
-#: src/ui_configurationDialog.h:797
-msgid ""
-"Sets the simulation time to the next instance of this time of day when "
-"Stellarium starts"
-msgstr "მიუთითებს სიმულაციის დროს Stellariumის შემდეგი გახსნისას"
-
-#: src/ui_viewDialog.h:1092
-msgid "Shooting Stars"
-msgstr "მეტეორები"
-
-#: src/ui_configurationDialog.h:759
-msgid "Short"
-msgstr "მოკლე"
-
-#: src/ui_viewDialog.h:1113
-msgid "Show art"
-msgstr "ნახატების ჩვენება"
-
-#: src/ui_viewDialog.h:1082
-msgid "Show atmosphere"
-msgstr "ატმოსფეროს ჩვენება"
-
-#: src/ui_viewDialog.h:1112
-msgid "Show boundaries"
-msgstr "საზღვრების ჩვენება"
-
-#: src/ui_configurationDialog.h:813
-msgid "Show flip buttons"
-msgstr "არეკვლის ღილაკების ჩვენება"
-
-#: src/ui_viewDialog.h:1119
-msgid "Show fog"
-msgstr "ნისლის ჩვენება"
-
-#: src/ui_viewDialog.h:1118
-msgid "Show ground"
-msgstr "მიწის ჩვენება"
-
-#: src/ui_viewDialog.h:1111
-msgid "Show labels"
-msgstr "წარწერების ჩვენება"
-
-#: src/ui_viewDialog.h:1110
-msgid "Show lines"
-msgstr "ხაზების ჩვენება"
-
-#: src/ui_viewDialog.h:1077
-msgid "Show planet markers"
-msgstr "პლანეტების ნიშნულების ჩვენება"
-
-#: src/ui_viewDialog.h:1078
-msgid "Show planet orbits"
-msgstr "პლანეტათა ორბიტების ჩვენება"
-
-#: src/ui_viewDialog.h:1076
-msgid "Show planets"
-msgstr "პლანეტების ჩვენება"
-
-#: src/translations.h:177
-msgid "Show: "
-msgstr "ჩვენება: "
-
-#: plugins/Oculars/src/Oculars.cpp:79
-msgid "Shows the sky as if looking through a telescope eyepiece"
-msgstr ""
-
-#: src/translations.h:219
-msgid "Shut Down: "
-msgstr "გამორთვა: "
-
-#: src/translations.h:166
-msgid "Sidereal"
-msgstr "ვარსკვლავური"
-
-#: src/ui_viewDialog.h:1079
-msgid "Simulate light speed"
-msgstr "სინათლის სიჩქარის სიმულაცია"
-
-#: src/translations.h:54
-msgid "Sinope"
-msgstr ""
-
-#. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:188
-#, qt-format
-msgid "Size on disk: %1 MiB"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:104
-#, qt-format
-msgid "Size: %1"
-msgstr "ზომა: %1"
-
-#: src/ui_viewDialog.h:1058
-msgid "Sky"
-msgstr "ცა"
-
-#: src/translations.h:174
-msgid "Sky Culture: "
-msgstr "ცის კულტურა: "
-
-#: src/translations.h:175
-msgid "Sky Language: "
-msgstr "ცის ენა : "
-
-#: src/translations.h:168
-msgid "Sky Time At Start-up: "
-msgstr "ცის ენა გახსნისას: "
-
-#: src/translations.h:162
-msgid "Sky Time: "
-msgstr "ასტრ. დრო: "
-
-#: src/gui/StelGui.cpp:134
-msgid "Sky and viewing options window"
-msgstr "ცისა და ჩვენების პარამეტრების სარკმელი"
-
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:142
-msgid "Slow down the script execution rate"
-msgstr "სკრიპტის შესრულების სიხშირის შემცირება"
-
-#: src/translations.h:160
-msgid "Solar System Body: "
-msgstr "მზის სისტემის სხეული: "
-
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
-msgid "Solar System Editor"
-msgstr ""
-
-#: src/translations.h:95
-msgid "Solar System Observer"
-msgstr "მზის სისტემის დამკვირვებელი"
-
-#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:285
-#: src/gui/StelGuiItems.cpp:640
-msgid "Space"
-msgstr "კოსმოსი"
-
-#: src/core/modules/StarWrapper.cpp:118
-#, qt-format
-msgid "Spectral Type: %1"
-msgstr "სპექტრული ტიპი: %1"
-
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:143
-msgid "Speed up the script execution rate"
-msgstr "სკრიპტის შესრულების სიხშირის გაზრდა"
-
-#: src/ui_configurationDialog.h:818
-msgid "Spheric mirror distortion"
-msgstr "სფერული სარკის ეფექტი"
-
-#: src/ui_configurationDialog.h:816
-msgid ""
-"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
-"mirror for low-cost planetarium systems."
-msgstr ""
-"სფერული სარკის ეფექტი გამოიყენება სფერულ სარკეზე პროექციისას დაბალი ხარისხის "
-"პლანეტარიუმებში."
-
-#: src/gui/ViewDialog.cpp:512
-msgid "Standard Perseids rate"
-msgstr "პერსეიდების სტანდარტული ნაკადი"
-
-#: src/translations.h:178
-msgid "Star Value Multiplier: "
-msgstr "ვარსკვლავური სიდიდის კოეფიციენტი: "
-
-#: src/ui_configurationDialog.h:839
-msgid "Star catalog updates"
-msgstr "ვარსკვლავთა კატალოგის განახლება"
-
-#: src/ui_viewDialog.h:1064
-msgid "Starlore"
-msgstr "ცოდნა ვარსკვლავების შესახებ"
-
-#: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1067 src/ui_viewDialog.h:1089
-msgid "Stars"
-msgstr "ვარსკვლავები"
-
-#: src/translations.h:151
-msgid "Stars "
-msgstr "ვარსკვლავები "
-
-#: src/ui_configurationDialog.h:793
-msgid "Starts Stellarium at system clock date and time"
-msgstr "Stellarium-ის დაწყება სისტემური თარიღითა და დროით"
-
-#: src/gui/ConfigurationDialog.cpp:461
-#, qt-format
-msgid "Startup FOV: %1%2"
-msgstr "ხედვის საწყისი არე: %1%2"
-
-#: src/ui_configurationDialog.h:777
-msgid "Startup FOV: XX"
-msgstr "ხედვის საწყისი არე: XX"
-
-#: src/ui_configurationDialog.h:791
-msgid "Startup date and time"
-msgstr "დაწყების თარიღი და დრო"
-
-#: src/gui/ConfigurationDialog.cpp:469
-#, qt-format
-msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr "ხედვის საწყისი მიმართულება აზიმუტი/სიმაღლე: %1/%2"
-
-#: src/ui_configurationDialog.h:781
-msgid "Startup direction of view: xxxx"
-msgstr "ხედვის საწყისი მიმართულება: xxxx"
-
-#: src/gui/HelpDialog.cpp:163
-msgid "Stellarium Help"
-msgstr "Stellarium-ის დახმარება"
-
-#. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:214
-#, qt-format
-msgid "Stellarium cannot open for reading or writing %1"
-msgstr ""
+"პროექციის მეთოდის სრული სახელია, <i>ლამბერტის აზიმუტური თანაბარ-არიანი "
+"პროექცია</i>. ნარჩუნდება არე მაგრამ არა კუთხე."
 
 #: src/core/StelProjectorClasses.cpp:108
 msgid "Stereographic"
@@ -1924,75 +187,24 @@ msgstr ""
 "სტერეოგრაფული პროექცია ცნობილია ანტიკური დროიდან და პლანისფერულად იწოდებოდა. "
 "იგი ინარჩუნებს რკალების გადაკვეთის კუთხეებს, მაგრამ არა არეებს."
 
-#: src/ui_configurationDialog.h:862
-msgid "Stop a running script"
-msgstr "შერჩეული სცენარის შეჩერება"
+#: src/core/StelProjectorClasses.cpp:145
+msgid "Fish-eye"
+msgstr "თევზის თვალი"
 
-#: src/ui_configurationDialog.h:851
-msgid "Stop the download. You can always restart it later"
-msgstr "ჩამოტვირთვის შეჩერება. ყოველთვის შეგიძლიათ მისი განახლება"
-
-#: src/gui/StelGui.cpp:159
-msgid "Subtract 1 sidereal day"
-msgstr "1 ვარსკვლავური დღის გამოკლება"
-
-#: src/gui/StelGui.cpp:161
-msgid "Subtract 1 sidereal week"
-msgstr "1 ვარსკვლავური კვირის გამოკლება"
-
-#: src/gui/StelGui.cpp:155
-msgid "Subtract 1 solar day"
-msgstr "1 მზის დღის გამოკლება"
-
-#: src/gui/StelGui.cpp:153
-msgid "Subtract 1 solar hour"
-msgstr "1 მზის საათის გამოკლება"
-
-#: src/gui/StelGui.cpp:157
-msgid "Subtract 1 solar week"
-msgstr "1 მზის კვირის გამოკლება"
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:128
-#: src/gui/AddRemoveLandscapesDialog.cpp:155
-msgid "Success"
+#: src/core/StelProjectorClasses.cpp:150
+msgid ""
+"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
+"lines become curves when they appear a large angular distance from the "
+"centre of the field of view (like the distortions seen with very wide angle "
+"camera lenses)."
 msgstr ""
+"თევზის თვალის ანუ <i>აზიმუტური თანაბარმონაკვეთიანი პროექციაში</i>, წრფეები "
+"მრუდებად გარდაიქმნება როცა დამზერის წერტილიდან დიდი კუთხური მანძილით არიან "
+"დაშორებული (ისევე, როგორც ფართოფორმატიანი ობიექტივის შემთხვევაში)."
 
-#: src/translations.h:33
-msgid "Sun"
-msgstr "მზე"
-
-#: src/gui/StelGui.cpp:171
-msgid "Switch between equatorial and azimuthal mount"
-msgstr "გადართვა ეკვატორულ და აზიმუტურ ხედებს შორის"
-
-#: src/ui_addRemoveLandscapesDialog.h:270
-msgid "Switch to the new landscape after installation"
-msgstr ""
-
-#: src/ui_configurationDialog.h:795
-msgid "System date and time"
-msgstr "დაწყების თარიღი და დრო"
-
-#: src/ui_configurationDialog.h:799
-msgid "System date at:"
-msgstr "სისტემური თარიღი:"
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:75
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:150
-msgid "Telescope Control"
-msgstr "ტელესკოპის კონტროლი"
-
-#: src/translations.h:65
-msgid "Tethys"
-msgstr "ტეთისი"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:78
-msgid "Text User Interface"
-msgstr ""
-
-#: src/translations.h:85
-msgid "Thalassa"
-msgstr ""
+#: src/core/StelProjectorClasses.cpp:182
+msgid "Hammer-Aitoff"
+msgstr "Hammer-Aitoff"
 
 #: src/core/StelProjectorClasses.cpp:187
 msgid ""
@@ -2000,27 +212,9 @@ msgid ""
 "Hammer in 1892 and directly inspired by the Aitoff projection."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:174
-msgid "The Stellarium User Guide"
-msgstr "Stellarium-ის მომხმარებლის სახელმძღვანელო"
-
-#: src/ui_configurationDialog.h:779
-msgid "The direction you're looking when Stellarium starts"
-msgstr "ხედვის მიმართულება Stellarium პროგრამის გახსნისას"
-
-#: src/gui/HelpDialog.cpp:173
-msgid ""
-"The following links are external web links, and will launch your web "
-"browser:\n"
-msgstr "შემდეგი ბმები გარე ვებ ბმებია და თქვენს ბრაუზერში გაიხსნება:\n"
-
-#: src/core/StelProjectorClasses.cpp:68
-msgid ""
-"The full name of this projection method is, <i>Lambert azimuthal equal-area "
-"projection</i>. It preserves the area but not the angle."
-msgstr ""
-"პროექციის მეთოდის სრული სახელია, <i>ლამბერტის აზიმუტური თანაბარ-არიანი "
-"პროექცია</i>. ნარჩუნდება არე მაგრამ არა კუთხე."
+#: src/core/StelProjectorClasses.cpp:223
+msgid "Cylinder"
+msgstr "ცილინდრი"
 
 #: src/core/StelProjectorClasses.cpp:228
 msgid ""
@@ -2029,6 +223,10 @@ msgid ""
 msgstr ""
 "პროექციის ამ რეჟიმის სრული სახელია <i>ცილინდრული თანაბარმონაკვეთიანი "
 "პროექცია</i>. ამ პროექციით ყველა პარალელი თანაბრადაა დაშორებული."
+
+#: src/core/StelProjectorClasses.cpp:270
+msgid "Mercator"
+msgstr "მერკატორი"
 
 #: src/core/StelProjectorClasses.cpp:275
 msgid ""
@@ -2039,15 +237,642 @@ msgstr ""
 "მერკატორის პროექცია მსოფლიოში ერთერთი ყველაზე პოპულარულია. იგი ინარჩუნებს "
 "მიმართულებასა და ფორმებს, მაგრამ ამახინჯებს ზომებს ეკვატორიდან დაცილებისას."
 
-#: plugins/Satellites/src/Satellites.cpp:162
+#: src/core/StelProjectorClasses.cpp:322
+msgid "Orthographic"
+msgstr "ორთოგრაფული"
+
+#: src/core/StelProjectorClasses.cpp:327
 msgid ""
-"The old satellites.json file is no longer compatible - using default file"
+"Orthographic projection is related to perspective projection, but the point "
+"of perspective is set to an infinite distance."
+msgstr ""
+"ორთოგრაფული პროექცია პერსპექტიულის მონათესავეა, თუმცა პერსპექტივის წერტილით "
+"უსასრულობაში."
+
+#: src/core/StelObject.cpp:79
+#, qt-format
+msgid "RA/DE (J2000): %1/%2"
+msgstr "რად/გრად. (J2000): %1/%2"
+
+#: src/core/StelObject.cpp:86
+#, qt-format
+msgid "RA/DE (of date): %1/%2"
+msgstr "რად/გრად. (თარიღის): %1/%2"
+
+#: src/core/StelObject.cpp:94 src/core/StelObject.cpp:97
+#, qt-format
+msgid "Hour angle/DE: %1/%2"
+msgstr "საათობრივი კუთხე/გრად.: %1/%2"
+
+#: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
+msgid "(geometric)"
 msgstr ""
 
-#: plugins/Supernovas/src/Supernovas.cpp:62
+#: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
+msgid "(apparent)"
+msgstr ""
+
+#: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
+#, qt-format
+msgid "Az/Alt: %1/%2"
+msgstr "აზიმუტი/სიმაღლე: %1/%2"
+
+#: src/gui/ConfigurationDialog.cpp:295
+msgid "Select screenshot directory"
+msgstr "ეკრანთა ანაბეჭდების დასტის არჩევა"
+
+#: src/gui/ConfigurationDialog.cpp:461
+#, qt-format
+msgid "Startup FOV: %1%2"
+msgstr "ხედვის საწყისი არე: %1%2"
+
+#: src/gui/ConfigurationDialog.cpp:469
+#, qt-format
+msgid "Startup direction of view Az/Alt: %1/%2"
+msgstr "ხედვის საწყისი მიმართულება აზიმუტი/სიმაღლე: %1/%2"
+
+#: src/gui/ConfigurationDialog.cpp:509
+msgid "Authors"
+msgstr "ავტორები"
+
+#: src/gui/ConfigurationDialog.cpp:513 src/gui/ViewDialog.cpp:368
+msgid "Contact"
+msgstr "კონტაქტი"
+
+#: src/gui/ConfigurationDialog.cpp:585
+msgid "Author"
+msgstr "ავტორი"
+
+#: src/gui/ConfigurationDialog.cpp:586
+msgid "License"
+msgstr "ლიცენზია"
+
+#: src/gui/ConfigurationDialog.cpp:615
+msgid "Running script: "
+msgstr "მუშა სცენარი: "
+
+#: src/gui/ConfigurationDialog.cpp:622
+msgid "Running script: [none]"
+msgstr "მუშა სცენარი: [არაა]"
+
+#: src/gui/ConfigurationDialog.cpp:665
+msgid "Finished downloading all star catalogs!"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:674
+#, qt-format
+msgid "Get catalog %1 of %2"
+msgstr "%1 კატალოგის მიღება, სულ %2-დან"
+
+#: src/gui/ConfigurationDialog.cpp:676
+#, qt-format
 msgid ""
-"The plugin for visualization of some historical supernovas, brighter 10 "
-"magnitude"
+"Download size: %1MB\n"
+"Star count: %2 Million\n"
+"Magnitude range: %3 - %4"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:685
+msgid ""
+"Finished downloading new star catalogs!\n"
+"Restart Stellarium to display them."
+msgstr ""
+"ვარსკვლავთა ახალი კატალოგების გამოტვირთვა დასრულდა!\n"
+"ხელახლა გახსენით პროგრამა Stellarium მათ საჩვენებლად."
+
+#: src/gui/ConfigurationDialog.cpp:723 src/gui/ConfigurationDialog.cpp:757
+#, qt-format
+msgid ""
+"Error downloading %1:\n"
+"%2"
+msgstr ""
+"შეცდომა %1 ჩამოტვირთვისას:\n"
+"%2"
+
+#: src/gui/ConfigurationDialog.cpp:728
+#, qt-format
+msgid ""
+"Downloading %1...\n"
+"(You can close this window.)"
+msgstr ""
+"იტვირთება %1...\n"
+"(შეგიძლიათ დახუროთ ეს სარკმელი.)"
+
+#: src/gui/ConfigurationDialog.cpp:808
+msgid "Verifying file integrity..."
+msgstr "ფაილის მთლიანობის შემოწმება..."
+
+#: src/gui/ConfigurationDialog.cpp:812
+#, qt-format
+msgid ""
+"Error downloading %1:\n"
+"File is corrupted."
+msgstr ""
+"შეცდომა %1 ჩამოტვირთვისას:\n"
+"ფაილი დაზიანებულია."
+
+#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:285
+#: src/gui/StelGuiItems.cpp:640
+msgid "Space"
+msgstr "კოსმოსი"
+
+#: src/gui/HelpDialog.cpp:53
+msgid "Arrow keys & left mouse drag"
+msgstr "ისრები და გადათრევა თაგუნას მარცხენა ღილაკით"
+
+#: src/gui/HelpDialog.cpp:54
+msgid "Page Up/Down"
+msgstr "გვერდი ზემოთ/ქვემოთ"
+
+#: src/gui/HelpDialog.cpp:55
+msgid "CTRL + Up/Down"
+msgstr "CTRL + ზედა/ქვედა ისარი"
+
+#: src/gui/HelpDialog.cpp:56
+msgid "Left click"
+msgstr "მარცხენა დაწკაპვა"
+
+#: src/gui/HelpDialog.cpp:57
+msgid "Right click"
+msgstr "მარჯვენა დაწკაპვა"
+
+#: src/gui/HelpDialog.cpp:58
+msgid "CTRL + Left click"
+msgstr "CTRL + მარცხენა დაწკაპვა"
+
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:163
+msgid "Movement and Selection"
+msgstr "მოძრაობა და მონიშვნა"
+
+#: src/gui/HelpDialog.cpp:62
+msgid "Pan view around the sky"
+msgstr "ცის სრული მიმოხილვა"
+
+#: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
+msgid "Zoom in/out"
+msgstr "მოახლოვება/დაშორება"
+
+#: src/gui/HelpDialog.cpp:65
+msgid "Select object"
+msgstr "ობიექტის მონიშვნა"
+
+#: src/gui/HelpDialog.cpp:66 src/gui/HelpDialog.cpp:68
+msgid "Clear selection"
+msgstr "მონიშვნის მოხსნა"
+
+#: src/gui/HelpDialog.cpp:71
+msgid "When a Script is Running"
+msgstr "როცა სკრიპტი გაშვებულია"
+
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:142
+msgid "Slow down the script execution rate"
+msgstr "სკრიპტის შესრულების სიხშირის შემცირება"
+
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:143
+msgid "Speed up the script execution rate"
+msgstr "სკრიპტის შესრულების სიხშირის გაზრდა"
+
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:144
+msgid "Set the normal script execution rate"
+msgstr "სკრიპტის შესრულების სიხშირის ნორმალიზება"
+
+#: src/gui/HelpDialog.cpp:163
+msgid "Stellarium Help"
+msgstr "Stellarium-ის დახმარება"
+
+#: src/gui/HelpDialog.cpp:164
+msgid "Keys"
+msgstr "კლავიშები"
+
+#: src/gui/HelpDialog.cpp:172
+msgid "Further Reading"
+msgstr "შემდეგი საკითხავი"
+
+#: src/gui/HelpDialog.cpp:173
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr "შემდეგი ბმები გარე ვებ ბმებია და თქვენს ბრაუზერში გაიხსნება:\n"
+
+#: src/gui/HelpDialog.cpp:174
+msgid "The Stellarium User Guide"
+msgstr "Stellarium-ის მომხმარებლის სახელმძღვანელო"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:178
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{ფრიად აქტუალური კითხვები} Stellarium-ის შესახებ.  პასუხებიც იქვეა."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:183
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Stellarium-ის ენციკლოპედია} - ზოგადი ინფორმაცია.  შეგიძლიათ მოიძიოთ "
+"გამოგზავნილი პეიზაჟები და სცენარები."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:188
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{მომსახურების ცენტრი} - თუ დახმარება გესაჭიროებათ, გამოაგზავნეთ მოთხოვნა და "
+"შევეცდებით დაგეხმაროთ."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:193
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:198
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{ფორუმები} - განიხილეთ Stellarium სხვა მომხმარებლებთან ერთად."
+
+#: src/gui/HelpDialog.cpp:234 src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:328 src/gui/StelGui.cpp:170
+msgid "Miscellaneous"
+msgstr "სხვადასხვა"
+
+#: src/gui/HelpDialog.cpp:294
+msgid "Developers"
+msgstr "შემმუშავებლები"
+
+#: src/gui/HelpDialog.cpp:295
+#, qt-format
+msgid "Project coordinator & lead developer: %1"
+msgstr "პროექტის კოორდინატორი და წამყვანი პროგრამისტი: %1"
+
+#: src/gui/HelpDialog.cpp:296
+#, qt-format
+msgid "Doc author/developer: %1"
+msgstr "დოკუმენტაციის ავტორი/შემმუშავებელი: %1"
+
+#: src/gui/HelpDialog.cpp:297
+#, qt-format
+msgid "Graphic/other designer: %1"
+msgstr "გრაფიკული/სხვა გაფორმება: %1"
+
+#: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
+#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
+#, qt-format
+msgid "Developer: %1"
+msgstr "პროგრამისტი: %1"
+
+#: src/gui/HelpDialog.cpp:300
+#, qt-format
+msgid "OSX Developer: %1"
+msgstr "OSX პროგრამისტი: %1"
+
+#: src/gui/StelGui.cpp:98
+msgid "Display Options"
+msgstr "ჩვენების პარამეტრები"
+
+#: src/gui/StelGui.cpp:99
+msgid "Constellation lines"
+msgstr "ხომლთა ხაზები"
+
+#: src/gui/StelGui.cpp:100
+msgid "Constellation art"
+msgstr "ხომლთა ნახატები"
+
+#: src/gui/StelGui.cpp:101
+msgid "Constellation labels"
+msgstr "ხომლთა წარწერები"
+
+#: src/gui/StelGui.cpp:102
+msgid "Constellation boundaries"
+msgstr "ხომლთა საზღვრები"
+
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1103
+msgid "Azimuthal grid"
+msgstr "აზიმუტური ბადე"
+
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1101
+msgid "Equatorial grid"
+msgstr "ეკვატორული ბადე"
+
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1102
+msgid "Equatorial J2000 grid"
+msgstr "ეკვატორული J2000 ბადე"
+
+#: src/gui/StelGui.cpp:107
+msgid "Galactic grid"
+msgstr "გალაქტიკური ბადე"
+
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1107
+msgid "Ecliptic line"
+msgstr "ეკლიპტიკის ხაზი"
+
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1104
+msgid "Equator line"
+msgstr "ეკვატორის ხაზი"
+
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1105
+msgid "Meridian line"
+msgstr "მერიდიანის ხაზი"
+
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
+msgid "Horizon line"
+msgstr ""
+
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
+msgid "Cardinal points"
+msgstr "ქვეყნის მხარეები"
+
+#: src/gui/StelGui.cpp:114
+msgid "Ground"
+msgstr "მიწა"
+
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1081
+msgid "Atmosphere"
+msgstr "ატმოსფერო"
+
+#: src/gui/StelGui.cpp:116
+msgid "Fog"
+msgstr "ნისლი"
+
+#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1090
+msgid "Nebulas"
+msgstr "ნისლეულები"
+
+#: src/gui/StelGui.cpp:119
+msgid "Nebulas background images"
+msgstr "ნისლეულთა ფონების ნახატები"
+
+#: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1067 src/ui_viewDialog.h:1089
+msgid "Stars"
+msgstr "ვარსკვლავები"
+
+#: src/gui/StelGui.cpp:121
+msgid "Planets labels"
+msgstr "პლანეტათა წარწერები"
+
+#: src/gui/StelGui.cpp:122
+msgid "Planet orbits"
+msgstr "პლანეტების ორბიტები"
+
+#: src/gui/StelGui.cpp:123
+msgid "Planet trails"
+msgstr "პლანეტების კვალი"
+
+#: src/gui/StelGui.cpp:125
+msgid "Night mode"
+msgstr "ღამის რეჟიმი"
+
+#: src/gui/StelGui.cpp:126
+msgid "Full-screen mode"
+msgstr "სრული ეკრანის რეჟიმი"
+
+#: src/gui/StelGui.cpp:127
+msgid "Flip scene horizontally"
+msgstr "განივი დასარკვა"
+
+#: src/gui/StelGui.cpp:128
+msgid "Flip scene vertically"
+msgstr "სცენის მართობული ამოტრიალება"
+
+#: src/gui/StelGui.cpp:130
+msgid "Windows"
+msgstr "სარკმლები"
+
+#: src/gui/StelGui.cpp:131
+msgid "Help window"
+msgstr "დახმარების სარკმელი"
+
+#: src/gui/StelGui.cpp:132
+msgid "Configuration window"
+msgstr "კონფიგურაციის სარკმელი"
+
+#: src/gui/StelGui.cpp:133
+msgid "Search window"
+msgstr "ძიების სარკმელი"
+
+#: src/gui/StelGui.cpp:134
+msgid "Sky and viewing options window"
+msgstr "ცისა და ჩვენების პარამეტრების სარკმელი"
+
+#: src/gui/StelGui.cpp:135
+msgid "Date/time window"
+msgstr "თარიღისა და დროის სარკმელი"
+
+#: src/gui/StelGui.cpp:136
+msgid "Location window"
+msgstr "მდებარეობის სარკმელი"
+
+#: src/gui/StelGui.cpp:138
+msgid "Script console window"
+msgstr "სკრიპტის კონსოლის ფანჯარა"
+
+#: src/gui/StelGui.cpp:141 src/ui_dateTimeDialogGui.h:294
+msgid "Date and Time"
+msgstr "თარიღი და დრო"
+
+#: src/gui/StelGui.cpp:145
+msgid "Decrease time speed"
+msgstr "დროის შენელება/უკუსვლა"
+
+#: src/gui/StelGui.cpp:146
+msgid "Increase time speed"
+msgstr "დროის დაჩქარება"
+
+#: src/gui/StelGui.cpp:147
+msgid "Set normal time rate"
+msgstr "დროის ნორმალური სვლა"
+
+#: src/gui/StelGui.cpp:148
+msgid "Decrease time speed (a little)"
+msgstr "დროის სიჩქარის შემცირება"
+
+#: src/gui/StelGui.cpp:149
+msgid "Increase time speed (a little)"
+msgstr "დროის სიჩქარის გაზრდა"
+
+#: src/gui/StelGui.cpp:150
+msgid "Set time rate to zero"
+msgstr "დროის სიჩქარის განულება"
+
+#: src/gui/StelGui.cpp:151
+msgid "Set time to now"
+msgstr "მიმდინარე დროის მითითება"
+
+#: src/gui/StelGui.cpp:152
+msgid "Add 1 solar hour"
+msgstr "1 მზის საათის დამატება"
+
+#: src/gui/StelGui.cpp:153
+msgid "Subtract 1 solar hour"
+msgstr "1 მზის საათის გამოკლება"
+
+#: src/gui/StelGui.cpp:154
+msgid "Add 1 solar day"
+msgstr "1 მზის დღის დამატება"
+
+#: src/gui/StelGui.cpp:155
+msgid "Subtract 1 solar day"
+msgstr "1 მზის დღის გამოკლება"
+
+#: src/gui/StelGui.cpp:156
+msgid "Add 1 solar week"
+msgstr "1 მზის კვირის დამატება"
+
+#: src/gui/StelGui.cpp:157
+msgid "Subtract 1 solar week"
+msgstr "1 მზის კვირის გამოკლება"
+
+#: src/gui/StelGui.cpp:158
+msgid "Add 1 sidereal day"
+msgstr "1 ვარსკვლავური დღის დამატება"
+
+#: src/gui/StelGui.cpp:159
+msgid "Subtract 1 sidereal day"
+msgstr "1 ვარსკვლავური დღის გამოკლება"
+
+#: src/gui/StelGui.cpp:160
+msgid "Add 1 sidereal week"
+msgstr "1 ვარსკვლავური კვირის დამატება"
+
+#: src/gui/StelGui.cpp:161
+msgid "Subtract 1 sidereal week"
+msgstr "1 ვარსკვლავური კვირის გამოკლება"
+
+#: src/gui/StelGui.cpp:164
+msgid "Center on selected object"
+msgstr "ცენტრირება შერჩეულ ობიექტზე"
+
+#: src/gui/StelGui.cpp:165
+msgid "Track object"
+msgstr "ობიექტის თვალმიდევნება"
+
+#: src/gui/StelGui.cpp:166
+msgid "Zoom in on selected object"
+msgstr "შერჩეული ობიექტის მოახლოება"
+
+#: src/gui/StelGui.cpp:167
+msgid "Zoom out"
+msgstr "დაშორება"
+
+#: src/gui/StelGui.cpp:168
+msgid "Set home planet to selected planet"
+msgstr "შერჩეული პლანეტის საკუთარ პლანეტად მითითება"
+
+#: src/gui/StelGui.cpp:171
+msgid "Switch between equatorial and azimuthal mount"
+msgstr "გადართვა ეკვატორულ და აზიმუტურ ხედებს შორის"
+
+#: src/gui/StelGui.cpp:172
+msgid "Quit"
+msgstr "დასრულება"
+
+#: src/gui/StelGui.cpp:173
+msgid "Save screenshot"
+msgstr "ანაბეჭდის შენახვა"
+
+#: src/gui/StelGui.cpp:176
+msgid "Auto hide horizontal button bar"
+msgstr "ღილაკების განივი პანელის თვითდამალვა"
+
+#: src/gui/StelGui.cpp:177
+msgid "Auto hide vertical button bar"
+msgstr "ღილაკების მართობული პანელის თვითდამალვა"
+
+#: src/gui/StelGui.cpp:178
+msgid "Toggle visibility of GUI"
+msgstr "ინტერფეისის ხილვადობის გადართვა"
+
+#: src/gui/StelGuiItems.cpp:541
+#, no-c-format, qt-format
+msgid "%1m"
+msgstr "%1m"
+
+#: src/gui/ViewDialog.cpp:422
+msgid "No description"
+msgstr "აღწერილობის გარეშე"
+
+#: src/gui/ViewDialog.cpp:506
+msgid "No shooting stars"
+msgstr "მეტეორები არაა"
+
+#: src/gui/ViewDialog.cpp:509
+msgid "Normal rate"
+msgstr "ჩვეულებრივი სვლა"
+
+#: src/gui/ViewDialog.cpp:512
+msgid "Standard Perseids rate"
+msgstr "პერსეიდების სტანდარტული ნაკადი"
+
+#: src/gui/ViewDialog.cpp:515
+msgid "Exceptional Leonid rate"
+msgstr "ლეონიდების განსაკუთრებული ნაკადი"
+
+#: src/gui/ViewDialog.cpp:518
+msgid "Highest rate ever (1966 Leonids)"
+msgstr "მაქსიმალური ნაკადი (1966 ლეონიდები)"
+
+#: src/gui/LocationDialog.cpp:334
+msgid "New Location"
+msgstr "ახალი ადგილმდებარეობა"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:112
+msgid "Select a ZIP archive that contains a Stellarium landscape"
+msgstr ""
+
+#. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
+#: src/gui/AddRemoveLandscapesDialog.cpp:114
+msgid "ZIP archives"
+msgstr "ZIP არქივები"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:127
+#, qt-format
+msgid "Landscape \"%1\" has been installed successfully."
+msgstr ""
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:128
+#: src/gui/AddRemoveLandscapesDialog.cpp:155
+msgid "Success"
+msgstr ""
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:141
+#: src/gui/AddRemoveLandscapesDialog.cpp:211
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:228
+msgid "No landscape was installed."
+msgstr ""
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:142
+#: src/gui/AddRemoveLandscapesDialog.cpp:166
+#: src/gui/AddRemoveLandscapesDialog.cpp:215
+#: src/gui/AddRemoveLandscapesDialog.cpp:221
+#: src/gui/AddRemoveLandscapesDialog.cpp:229
+#: src/gui/AddRemoveLandscapesDialog.cpp:239
+msgid "Error!"
+msgstr ""
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:154
+#, qt-format
+msgid "Landscape \"%1\" has been removed successfully."
+msgstr ""
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:165
+#: src/gui/AddRemoveLandscapesDialog.cpp:235
+msgid "The selected landscape could not be (completely) removed."
+msgstr ""
+
+#. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
+#: src/gui/AddRemoveLandscapesDialog.cpp:188
+#, qt-format
+msgid "Size on disk: %1 MiB"
+msgstr ""
+
+#. TRANSLATORS: The parameter is a file/directory path that may be quite long.
+#: src/gui/AddRemoveLandscapesDialog.cpp:214
+#, qt-format
+msgid "Stellarium cannot open for reading or writing %1"
 msgstr ""
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:220
@@ -2056,185 +881,714 @@ msgid ""
 "landscape."
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:165
-#: src/gui/AddRemoveLandscapesDialog.cpp:235
-msgid "The selected landscape could not be (completely) removed."
+#. TRANSLATORS: The parameter is the duplicate name or identifier.
+#: src/gui/AddRemoveLandscapesDialog.cpp:227
+#, qt-format
+msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr ""
 
-#: src/ui_configurationDialog.h:775
-msgid "The width of your view when Stellarium starts"
-msgstr "ხედვის სიგანე Stellarium პროგრამის გახსნისას"
-
-#: src/translations.h:59
-msgid "Thebe"
-msgstr ""
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:78
-msgid ""
-"This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
-"computerized mount (a \"GoTo telescope\")."
+#. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
+#: src/gui/AddRemoveLandscapesDialog.cpp:238
+#, qt-format
+msgid "You can remove it manually by deleting the following directory: %1"
 msgstr ""
 
 #: src/main.cpp:335
 msgid "This system does not support OpenGL."
 msgstr "ამ სისტემისთვის OpenGL მიუღებელია."
 
-#: src/translations.h:171
-msgid "Time Display Format: "
-msgstr "დროის ჩვენება: "
+#: src/translations.h:33
+msgid "Sun"
+msgstr "მზე"
 
-#: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
-msgid "Time Zone"
+#: src/translations.h:34
+msgid "Mercury"
+msgstr "მერკური"
+
+#: src/translations.h:35
+msgid "Venus"
+msgstr "ვენერა"
+
+#: src/translations.h:36
+msgid "Earth"
+msgstr "დედამიწა"
+
+#: src/translations.h:37
+msgid "Moon"
+msgstr "მთვარე"
+
+#: src/translations.h:38
+msgid "Mars"
+msgstr "მარსი"
+
+#: src/translations.h:39
+msgid "Deimos"
+msgstr "დეიმოსი"
+
+#: src/translations.h:40
+msgid "Phobos"
+msgstr "ფობოსი"
+
+#: src/translations.h:41
+msgid "Ceres"
 msgstr ""
+
+#: src/translations.h:42
+msgid "Pallas"
+msgstr ""
+
+#: src/translations.h:43
+msgid "Juno"
+msgstr ""
+
+#: src/translations.h:44
+msgid "Vesta"
+msgstr ""
+
+#: src/translations.h:45
+msgid "Jupiter"
+msgstr "იუპიტერი"
+
+#: src/translations.h:46
+msgid "Io"
+msgstr "იო"
+
+#: src/translations.h:47
+msgid "Europa"
+msgstr "ევროპა"
+
+#: src/translations.h:48
+msgid "Ganymede"
+msgstr "განიმედი"
+
+#: src/translations.h:49
+msgid "Callisto"
+msgstr "კალისტო"
+
+#: src/translations.h:50
+msgid "Amalthea"
+msgstr ""
+
+#: src/translations.h:51
+msgid "Himalia"
+msgstr ""
+
+#: src/translations.h:52
+msgid "Elara"
+msgstr ""
+
+#: src/translations.h:53
+msgid "Pasiphae"
+msgstr ""
+
+#: src/translations.h:54
+msgid "Sinope"
+msgstr ""
+
+#: src/translations.h:55
+msgid "Lysithea"
+msgstr ""
+
+#: src/translations.h:56
+msgid "Carme"
+msgstr ""
+
+#: src/translations.h:57
+msgid "Ananke"
+msgstr ""
+
+#: src/translations.h:58
+msgid "Leda"
+msgstr ""
+
+#: src/translations.h:59
+msgid "Thebe"
+msgstr ""
+
+#: src/translations.h:60
+msgid "Adrastea"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (9) Metis
+#: src/translations.h:61 src/translations.h:106
+msgid "Metis"
+msgstr ""
+
+#: src/translations.h:62
+msgid "Saturn"
+msgstr "სატურნი"
+
+#: src/translations.h:63
+msgid "Mimas"
+msgstr "მიმასი"
+
+#: src/translations.h:64
+msgid "Enceladus"
+msgstr "ენკელადე"
+
+#: src/translations.h:65
+msgid "Tethys"
+msgstr "ტეთისი"
+
+#: src/translations.h:66
+msgid "Dione"
+msgstr "დიონა"
+
+#: src/translations.h:67
+msgid "Rhea"
+msgstr "რეა"
 
 #: src/translations.h:68
 msgid "Titan"
 msgstr "ტიტანი"
 
+#: src/translations.h:69
+msgid "Hyperion"
+msgstr "ჰიპერიონი"
+
+#: src/translations.h:70
+msgid "Iapetus"
+msgstr "იაფეტი"
+
+#: src/translations.h:71
+msgid "Phoebe"
+msgstr "ფება"
+
+#: src/translations.h:72
+msgid "Neptune"
+msgstr "ნეპტუნი"
+
+#: src/translations.h:73
+msgid "Uranus"
+msgstr "ურანი"
+
+#: src/translations.h:74
+msgid "Miranda"
+msgstr ""
+
+#: src/translations.h:75
+msgid "Ariel"
+msgstr ""
+
+#: src/translations.h:76
+msgid "Umbriel"
+msgstr ""
+
 #: src/translations.h:77
 msgid "Titania"
 msgstr ""
 
-#: src/ui_configurationDialog.h:811
-msgid "Toggle vertical and horizontal image flip buttons."
-msgstr "მართობული და განივი არეკვლის ღილაკების გადართვა."
+#: src/translations.h:78
+msgid "Oberon"
+msgstr ""
 
-#: src/gui/StelGui.cpp:178
-msgid "Toggle visibility of GUI"
-msgstr "ინტერფეისის ხილვადობის გადართვა"
+#: src/translations.h:79
+msgid "Pluto"
+msgstr "პლუტონი"
 
-#: src/ui_configurationDialog.h:876
-msgid "Tools"
-msgstr "სამარჯვები"
+#: src/translations.h:80
+msgid "Charon"
+msgstr "ქარონი"
 
-#: src/gui/StelGui.cpp:165
-msgid "Track object"
-msgstr "ობიექტის თვალმიდევნება"
+#: src/translations.h:81
+msgid "Eris"
+msgstr ""
 
 #: src/translations.h:82
 msgid "Triton"
 msgstr ""
 
-#: src/translations.h:143
-msgid "Tupi-Guarani"
-msgstr "ტუპი-გუარანი"
+#: src/translations.h:83
+msgid "Nereid"
+msgstr ""
 
-#: src/ui_viewDialog.h:1070
-msgid "Twinkle:"
-msgstr "ციმციმი:"
+#: src/translations.h:84
+msgid "Naiad"
+msgstr ""
 
-#: src/translations.h:181
-msgid "Twinkling: "
-msgstr "ციმციმი: "
+#: src/translations.h:85
+msgid "Thalassa"
+msgstr ""
+
+#: src/translations.h:86
+msgid "Despina"
+msgstr ""
+
+#: src/translations.h:87
+msgid "Galatea"
+msgstr ""
+
+#: src/translations.h:88
+msgid "Larissa"
+msgstr ""
+
+#: src/translations.h:89
+msgid "Proteus"
+msgstr ""
+
+#: src/translations.h:90
+msgid "Halimede"
+msgstr ""
+
+#: src/translations.h:91
+msgid "Psamathe"
+msgstr ""
+
+#: src/translations.h:92
+msgid "Sao"
+msgstr ""
+
+#: src/translations.h:93
+msgid "Laomedeia"
+msgstr ""
+
+#: src/translations.h:94
+msgid "Neso"
+msgstr ""
+
+#: src/translations.h:95
+msgid "Solar System Observer"
+msgstr "მზის სისტემის დამკვირვებელი"
+
+#. TRANSLATORS: Asteroid (5) Astraea
+#: src/translations.h:98
+msgid "Astraea"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (6) Hebe
+#: src/translations.h:100
+msgid "Hebe"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (7) Iris
+#: src/translations.h:102
+msgid "Iris"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (8) Flora
+#: src/translations.h:104
+msgid "Flora"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (10) Hygiea
+#: src/translations.h:108
+msgid "Hygiea"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (1221) Amor
+#: src/translations.h:110
+msgid "Amor"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (99942) Apophis
+#: src/translations.h:112
+msgid "Apophis"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (2060) Chiron
+#: src/translations.h:114
+msgid "Chiron"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (433) Eros
+#: src/translations.h:116
+msgid "Eros"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (624) Hektor
+#: src/translations.h:118
+msgid "Hektor"
+msgstr ""
 
 #. TRANSLATORS: Name of supernova SN 1572A
 #: src/translations.h:120
 msgid "Tycho's Supernova"
 msgstr ""
 
-#: plugins/Supernovas/src/Supernova.cpp:105
-#, fuzzy, qt-format
-msgid "Type: %1"
-msgstr "ტიპი: <b>%1</b>"
-
-#: src/core/modules/Nebula.cpp:96
-#, qt-format
-msgid "Type: <b>%1</b>"
-msgstr "ტიპი: <b>%1</b>"
-
-#: src/translations.h:213
-msgid "USB Script: "
-msgstr "USB სცენარი: "
-
-#: src/translations.h:76
-msgid "Umbriel"
+#. TRANSLATORS: Name of supernova SN 1604A
+#: src/translations.h:122
+msgid "Kepler's Supernova"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:305
-msgid "Undocumented type"
-msgstr "არადოკუმენტირებული ტიპი"
+#: src/translations.h:126
+msgid "N"
+msgstr "ჩ"
 
-#: src/core/modules/Nebula.cpp:302
-msgid "Unknown"
-msgstr "უცნობია"
+#: src/translations.h:127
+msgid "S"
+msgstr "ს"
 
-#: src/translations.h:220
-msgid "Update me via Internet: "
-msgstr "განახლება ინტერნეტით: "
-
-#: src/translations.h:73
-msgid "Uranus"
-msgstr "ურანი"
-
-#: src/ui_configurationDialog.h:801
-msgid "Use a specific date and time when Stellarium starts up"
-msgstr "შერჩეული თარიღისა და დროის მითითება Stellariumის გახსნისას"
-
-#: src/ui_locationDialogGui.h:392
-msgid "Use as default"
-msgstr "გამოყენება ნაგულისხმებად"
-
-#: src/ui_viewDialog.h:1120
-msgid "Use associated planet and position"
-msgstr "შეაბამისი პლანეტით და პოზიციით სარგებლობა"
-
-#: src/ui_viewDialog.h:1121
-msgid "Use this landscape as default"
-msgstr "ამ პეიზაჟის ნაგულისხმებად გამოყენება"
-
-#: src/ui_viewDialog.h:1123
-msgid "Use this sky culture as default"
-msgstr "ამ ციური კულტურის ნაგულისხმებად გამოყენება"
-
-#: src/translations.h:35
-msgid "Venus"
-msgstr "ვენერა"
-
-#: src/gui/ConfigurationDialog.cpp:808
-msgid "Verifying file integrity..."
-msgstr "ფაილის მთლიანობის შემოწმება..."
-
-#: src/translations.h:44
-msgid "Vesta"
-msgstr ""
-
-#: src/ui_viewDialog.h:1052
-msgid "View"
-msgstr "ხედი"
-
-#: src/ui_viewDialog.h:1125
-msgid "Visible"
-msgstr "ხილული"
+#: src/translations.h:128
+msgid "E"
+msgstr "ა"
 
 #: src/translations.h:129
 msgid "W"
 msgstr "დ"
 
-#: src/ui_addRemoveLandscapesDialog.h:276
-msgid ""
-"WARNING: Removing the selected landscape means deleting its files. This "
-"operation is irreversible."
-msgstr ""
+#: src/translations.h:132
+msgid "Aztec"
+msgstr "აცტეკები"
+
+#: src/translations.h:133
+msgid "Chinese"
+msgstr "ჩინური"
+
+#: src/translations.h:134
+msgid "Egyptian"
+msgstr "ეგვიპტური"
+
+#: src/translations.h:135
+msgid "Inuit"
+msgstr "ესკიმოსური"
+
+#: src/translations.h:136
+msgid "Korean"
+msgstr "კორეული"
+
+#: src/translations.h:137
+msgid "Lakota"
+msgstr "ლაკოტა"
+
+#: src/translations.h:138
+msgid "Maori"
+msgstr "მაორი"
+
+#: src/translations.h:139
+msgid "Navajo"
+msgstr "ნავახო"
+
+#: src/translations.h:140
+msgid "Norse"
+msgstr "ნორვეგიული"
+
+#: src/translations.h:141
+msgid "Polynesian"
+msgstr "პოლინეზიური"
+
+#: src/translations.h:142
+msgid "Sami"
+msgstr "სამი"
+
+#: src/translations.h:143
+msgid "Tupi-Guarani"
+msgstr "ტუპი-გუარანი"
 
 #: src/translations.h:144
 msgid "Western"
 msgstr "დასავლეთის"
 
-#: src/gui/HelpDialog.cpp:71
-msgid "When a Script is Running"
-msgstr "როცა სკრიპტი გაშვებულია"
+#: src/translations.h:148
+msgid "Set Location "
+msgstr "ადგილის მითითება "
 
-#: src/ui_configurationDialog.h:824
-msgid ""
-"When enabled, the \"auto zoom out\" key will also set the initial viewing "
-"direction"
-msgstr ""
-"როცა ჩართულია, ღილაკი \"თვითმასშტაბირება\" ასევე მიუთითებს ხედვის საწყის "
-"მიმართულებას"
+#: src/translations.h:149
+msgid "Set Time "
+msgstr "დროის მითითება "
 
-#: src/gui/StelGui.cpp:130
-msgid "Windows"
-msgstr "სარკმლები"
+#: src/translations.h:150
+msgid "General "
+msgstr "ზოგადი "
+
+#: src/translations.h:151
+msgid "Stars "
+msgstr "ვარსკვლავები "
+
+#: src/translations.h:152
+msgid "Colors "
+msgstr "ფერები "
+
+#: src/translations.h:153
+msgid "Effects "
+msgstr "ეფექტები "
+
+#: src/translations.h:154
+msgid "Scripts "
+msgstr "სცენარები "
+
+#: src/translations.h:155
+msgid "Administration "
+msgstr "ადმინისტრირება "
+
+#: src/translations.h:157
+msgid "Latitude: "
+msgstr "განედი: "
+
+#: src/translations.h:158
+msgid "Longitude: "
+msgstr "გრძედი: "
+
+#: src/translations.h:159
+msgid "Altitude (m): "
+msgstr "სიმაღლე (მ): "
+
+#: src/translations.h:160
+msgid "Solar System Body: "
+msgstr "მზის სისტემის სხეული: "
+
+#: src/translations.h:162
+msgid "Sky Time: "
+msgstr "ასტრ. დრო: "
+
+#: src/translations.h:163
+msgid "Set Time Zone: "
+msgstr "საათის ზონის მითითება: "
+
+#: src/translations.h:164
+msgid "Day keys: "
+msgstr "დღის მინიშნებები: "
+
+#: src/translations.h:165
+msgid "Calendar"
+msgstr "კალენდარი"
+
+#: src/translations.h:166
+msgid "Sidereal"
+msgstr "ვარსკვლავური"
+
+#: src/translations.h:167
+msgid "Preset Sky Time: "
+msgstr "მითითებული ასტრ. დრო: "
+
+#: src/translations.h:168
+msgid "Sky Time At Start-up: "
+msgstr "ცის ენა გახსნისას: "
+
+#: src/translations.h:169
+msgid "Actual Time"
+msgstr "ნამდვილი დრო"
+
+#: src/translations.h:170
+msgid "Preset Time"
+msgstr "მითითებული დრო"
+
+#: src/translations.h:171
+msgid "Time Display Format: "
+msgstr "დროის ჩვენება: "
+
+#: src/translations.h:172
+msgid "Date Display Format: "
+msgstr "თარიღის ფორმატი: "
+
+#: src/translations.h:174
+msgid "Sky Culture: "
+msgstr "ცის კულტურა: "
+
+#: src/translations.h:175
+msgid "Sky Language: "
+msgstr "ცის ენა : "
+
+#: src/translations.h:177
+msgid "Show: "
+msgstr "ჩვენება: "
+
+#: src/translations.h:178
+msgid "Star Value Multiplier: "
+msgstr "ვარსკვლავური სიდიდის კოეფიციენტი: "
+
+#: src/translations.h:179
+msgid "Magnitude Sizing Multiplier: "
+msgstr "მაგნიტუდის ზომის კოეფიციენტი: "
+
+#: src/translations.h:180
+msgid "Maximum Magnitude to Label: "
+msgstr "მაგნიტუდის მაქს. წარწერისთვის: "
+
+#: src/translations.h:181
+msgid "Twinkling: "
+msgstr "ციმციმი: "
+
+#: src/translations.h:182
+msgid "Limiting Magnitude: "
+msgstr "ზღვრული მაგნიტუდა: "
+
+#: src/translations.h:184
+msgid "Constellation Lines"
+msgstr "ხომლთა ხაზები"
+
+#: src/translations.h:185
+msgid "Constellation Names"
+msgstr "ხომლთა სახელები"
+
+#: src/translations.h:186
+msgid "Constellation Art Intensity"
+msgstr "ხომლთა ჩვენების სიკაშკაშე"
+
+#: src/translations.h:187
+msgid "Constellation Boundaries"
+msgstr "ხომლთა საზღვრები"
+
+#: src/translations.h:188
+msgid "Cardinal Points"
+msgstr "ქვეყნის მხარეები"
+
+#: src/translations.h:189
+msgid "Planet Names"
+msgstr "პლანეტათა სახელები"
+
+#: src/translations.h:190
+msgid "Planet Orbits"
+msgstr "პლანეტათა ორბიტები"
+
+#: src/translations.h:191
+msgid "Planet Trails"
+msgstr "პლანეტათა კვალი"
+
+#: src/translations.h:192
+msgid "Meridian Line"
+msgstr "მერიდიანის ხაზი"
+
+#: src/translations.h:193
+msgid "Azimuthal Grid"
+msgstr "აზიმუტური ბადე"
+
+#: src/translations.h:194
+msgid "Equatorial Grid"
+msgstr "ეკვატორული ბადე"
+
+#: src/translations.h:195
+msgid "Equator Line"
+msgstr "ეკვატორის ხაზი"
+
+#: src/translations.h:196
+msgid "Ecliptic Line"
+msgstr "ეკლიპტიკის ხაზი"
+
+#: src/translations.h:197
+msgid "Nebula Names"
+msgstr "ნისლეულთა სახელები"
+
+#: src/translations.h:198
+msgid "Nebula Circles"
+msgstr "ნისლეულთა წრეები"
+
+#: src/translations.h:200
+msgid "Light Pollution Luminance: "
+msgstr "სინათლის დაბინძურება: "
+
+#: src/translations.h:201
+msgid "Landscape: "
+msgstr "ლანდშაფტი: "
+
+#: src/translations.h:202
+msgid "Manual zoom: "
+msgstr "მასშტაბირება ხელით: "
+
+#: src/translations.h:203
+msgid "Object Sizing Rule: "
+msgstr "ობიექტის ზომის შეცვლის წესი: "
+
+#: src/translations.h:204
+msgid "Magnitude Scaling Multiplier: "
+msgstr "მაგნიტუდის კოეფიციენტი: "
+
+#: src/translations.h:205
+msgid "Milky Way intensity: "
+msgstr "ირმის ნახტომის სიკაშკაშე: "
+
+#: src/translations.h:206
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "ნისლეულის მაქს. მაგნიტუდა წარწერისთვის: "
+
+#: src/translations.h:207
+msgid "Zoom Duration: "
+msgstr "მოახლოების დრო: "
+
+#: src/translations.h:208
+msgid "Cursor Timeout: "
+msgstr "კურსორის ყოვნი: "
+
+#: src/translations.h:209
+msgid "Correct for light travel time: "
+msgstr "სინათლის მოძრაობის დროის შესწორება: "
+
+#: src/translations.h:211
+msgid "Local Script: "
+msgstr "ლოკალური სცენარი: "
+
+#: src/translations.h:212
+msgid "CD/DVD Script: "
+msgstr "CD/DVD სცენარი: "
+
+#: src/translations.h:213
+msgid "USB Script: "
+msgstr "USB სცენარი: "
+
+#: src/translations.h:214
+msgid "Arrow down to load list."
+msgstr "ქვედა ისარი სიის ჩასატვირთად."
+
+#: src/translations.h:215
+msgid "Select and exit to run."
+msgstr "შერჩევა და გამოსვლა გასახსნელად."
+
+#: src/translations.h:217
+msgid "Load Default Configuration: "
+msgstr "ნაგულისხმები კონფიგურაციის ჩატვირთვა: "
+
+#: src/translations.h:218
+msgid "Save Current Configuration as Default: "
+msgstr "მიმდინარე პარამეტრების ნაგულისხმებად შენახვა: "
+
+#: src/translations.h:219
+msgid "Shut Down: "
+msgstr "გამორთვა: "
+
+#: src/translations.h:220
+msgid "Update me via Internet: "
+msgstr "განახლება ინტერნეტით: "
+
+#: src/translations.h:221
+msgid "Set UI Locale: "
+msgstr "UI ლოკალის მითითება "
+
+#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
+msgid "/"
+msgstr "/"
+
+#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
+msgid ":"
+msgstr ":"
+
+#: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
+msgid "Help"
+msgstr "დახმარება"
+
+#: src/ui_helpDialogGui.h:267
+msgid "About"
+msgstr "ინფორმაცია"
+
+#: src/ui_helpDialogGui.h:269
+msgid "Log"
+msgstr "დავთარი"
+
+#: src/ui_helpDialogGui.h:272
+msgid "Refresh"
+msgstr "განახლება"
+
+#: src/ui_locationDialogGui.h:387
+msgid "Location"
+msgstr "ადგილი"
+
+#: src/ui_locationDialogGui.h:391
+msgid "Current location information"
+msgstr "მიმდინარე მდებარეობის მონაცემები"
+
+#: src/ui_locationDialogGui.h:392
+msgid "Use as default"
+msgstr "გამოყენება ნაგულისხმებად"
+
+#: src/ui_locationDialogGui.h:393
+msgid "Delete"
+msgstr "წაშლა"
+
+#: src/ui_locationDialogGui.h:394
+msgid "Add to list"
+msgstr "სიაში დამატება"
+
+#: src/ui_locationDialogGui.h:395
+msgid "Latitude:"
+msgstr "განედი:"
 
 #: src/ui_locationDialogGui.h:397 src/ui_locationDialogGui.h:401
 msgid ""
@@ -2244,32 +1598,45 @@ msgstr ""
 "შეგიძლიათ მიუთითოთ მნიშვნელობა მეათედ გრადუსებში ან ფორმატში dms, მაგალითად, "
 "+1d 12m 8s"
 
-#. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:238
-#, qt-format
-msgid "You can remove it manually by deleting the following directory: %1"
+#: src/ui_locationDialogGui.h:399
+msgid "Longitude:"
+msgstr "გრძედი:"
+
+#: src/ui_locationDialogGui.h:403
+msgid "Altitude:"
+msgstr "სიმაღლე :"
+
+#: src/ui_locationDialogGui.h:405
+msgid "Enter the altitude in meter"
+msgstr "მიუთითეთ სიმაღლე მეტრებში"
+
+#: src/ui_locationDialogGui.h:407
+msgid " m"
+msgstr " მ"
+
+#: src/ui_locationDialogGui.h:408
+msgid "Name/City:"
+msgstr "სახელი/ქალაქი:"
+
+#: src/ui_locationDialogGui.h:409
+msgid "Country:"
+msgstr "ქვეყანა:"
+
+#: src/ui_locationDialogGui.h:410
+msgid "Planet:"
+msgstr "პლანეტა:"
+
+#: src/ui_searchDialogGui.h:450
+msgid "Find Object"
+msgstr "ობიექტის პოვნა"
+
+#: src/ui_searchDialogGui.h:451
+msgid "Find Object or Position"
 msgstr ""
 
-#. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
-#: src/gui/AddRemoveLandscapesDialog.cpp:114
-msgid "ZIP archives"
+#: src/ui_searchDialogGui.h:458
+msgid "iota"
 msgstr ""
-
-#: src/translations.h:207
-msgid "Zoom Duration: "
-msgstr "მოახლოების დრო: "
-
-#: src/gui/StelGui.cpp:166
-msgid "Zoom in on selected object"
-msgstr "შერჩეული ობიექტის მოახლოება"
-
-#: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
-msgid "Zoom in/out"
-msgstr "მოახლოვება/დაშორება"
-
-#: src/gui/StelGui.cpp:167
-msgid "Zoom out"
-msgstr "დაშორება"
 
 #: src/ui_searchDialogGui.h:461
 msgid "alpha"
@@ -2279,13 +1646,9 @@ msgstr ""
 msgid "beta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:521
-msgid "chi"
+#: src/ui_searchDialogGui.h:467
+msgid "gamma"
 msgstr ""
-
-#: src/ui_configurationDialog.h:867
-msgid "configure"
-msgstr "აწყობა"
 
 #: src/ui_searchDialogGui.h:470
 msgid "delta"
@@ -2295,16 +1658,16 @@ msgstr ""
 msgid "epsilon"
 msgstr ""
 
+#: src/ui_searchDialogGui.h:476
+msgid "zeta"
+msgstr ""
+
 #: src/ui_searchDialogGui.h:479
 msgid "eta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:467
-msgid "gamma"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:458
-msgid "iota"
+#: src/ui_searchDialogGui.h:482
+msgid "theta"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:485
@@ -2323,28 +1686,16 @@ msgstr ""
 msgid "nu"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:527
-msgid "omega"
+#: src/ui_searchDialogGui.h:497
+msgid "xi"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:500
 msgid "omicron"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:518
-msgid "phi"
-msgstr ""
-
 #: src/ui_searchDialogGui.h:503
 msgid "pi"
-msgstr ""
-
-#: src/ui_viewDialog.h:1085
-msgid "pressure, temperature, extinction coefficient"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:524
-msgid "psi"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:506
@@ -2359,77 +1710,747 @@ msgstr ""
 msgid "tau"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:482
-msgid "theta"
-msgstr ""
-
 #: src/ui_searchDialogGui.h:515
 msgid "upsilon"
 msgstr ""
+
+#: src/ui_searchDialogGui.h:518
+msgid "phi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:521
+msgid "chi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:524
+msgid "psi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:527
+msgid "omega"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:529
+msgid "Greek letters for Bayer designations"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:530
+msgid "Object"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:531
+msgid "RA/Dec (J2000):"
+msgstr "რად/გრად (J200)"
+
+#: src/ui_searchDialogGui.h:532
+msgid "Position"
+msgstr ""
+
+#: src/ui_viewDialog.h:1052
+msgid "View"
+msgstr "ხედი"
+
+#: src/ui_viewDialog.h:1058
+msgid "Sky"
+msgstr "ცა"
+
+#: src/ui_viewDialog.h:1060
+msgid "Markings"
+msgstr "ნიშნულები"
+
+#: src/ui_viewDialog.h:1062
+msgid "Landscape"
+msgstr "პეიზაჟი"
+
+#: src/ui_viewDialog.h:1064
+msgid "Starlore"
+msgstr "ცოდნა ვარსკვლავების შესახებ"
+
+#: src/ui_viewDialog.h:1068
+msgid "Absolute scale:"
+msgstr "აბსოლუტური მასშტაბი:"
+
+#: src/ui_viewDialog.h:1069
+msgid "Relative scale:"
+msgstr "ფარდობითი მასშტაბი:"
+
+#: src/ui_viewDialog.h:1070
+msgid "Twinkle:"
+msgstr "ციმციმი:"
+
+#: src/ui_viewDialog.h:1072
+msgid "Dim faint stars when a very bright object is visible"
+msgstr "მცირე ვარკვლავების ჩამუქება ნათელი ობიექტის მახლობლად"
+
+#: src/ui_viewDialog.h:1074
+msgid "Dynamic eye adaptation"
+msgstr "თვალის დინამიკური ადაპტაცია"
+
+#: src/ui_viewDialog.h:1075
+msgid "Planets and satellites"
+msgstr "პლანეტები და თანამგზავრები"
+
+#: src/ui_viewDialog.h:1076
+msgid "Show planets"
+msgstr "პლანეტების ჩვენება"
+
+#: src/ui_viewDialog.h:1077
+msgid "Show planet markers"
+msgstr "პლანეტების ნიშნულების ჩვენება"
+
+#: src/ui_viewDialog.h:1078
+msgid "Show planet orbits"
+msgstr "პლანეტათა ორბიტების ჩვენება"
+
+#: src/ui_viewDialog.h:1079
+msgid "Simulate light speed"
+msgstr "სინათლის სიჩქარის სიმულაცია"
+
+#: src/ui_viewDialog.h:1080
+msgid "Scale Moon"
+msgstr "მთვარის მასშტაბი"
+
+#: src/ui_viewDialog.h:1082
+msgid "Show atmosphere"
+msgstr "ატმოსფეროს ჩვენება"
+
+#: src/ui_viewDialog.h:1083
+msgid "Light pollution: "
+msgstr "სინათლის დაბინძურება: "
+
+#: src/ui_viewDialog.h:1085
+msgid "pressure, temperature, extinction coefficient"
+msgstr ""
+
+#: src/ui_viewDialog.h:1087
+msgid "Refraction/Extinction settings..."
+msgstr ""
+
+#: src/ui_viewDialog.h:1088
+msgid "Labels and Markers"
+msgstr "წარწერები და ნიშნები"
+
+#: src/ui_viewDialog.h:1091
+msgid "Planets"
+msgstr "პლანეტები"
+
+#: src/ui_viewDialog.h:1092
+msgid "Shooting Stars"
+msgstr "მეტეორები"
+
+#: src/ui_viewDialog.h:1093
+msgid "Hourly zenith rate:"
+msgstr "ზენიტის საათობრივი სვლა:"
+
+#: src/ui_viewDialog.h:1094
+msgid "0"
+msgstr "0"
+
+#: src/ui_viewDialog.h:1095
+msgid "10"
+msgstr "10"
+
+#: src/ui_viewDialog.h:1096
+msgid "80"
+msgstr "80"
+
+#: src/ui_viewDialog.h:1097
+msgid "10000"
+msgstr "10000"
+
+#: src/ui_viewDialog.h:1098
+msgid "144000"
+msgstr "144000"
+
+#: src/ui_viewDialog.h:1100
+msgid "Celestial Sphere"
+msgstr "ციური სფერო"
+
+#: src/ui_viewDialog.h:1109
+msgid "Constellations"
+msgstr "ხომლები"
+
+#: src/ui_viewDialog.h:1110
+msgid "Show lines"
+msgstr "ხაზების ჩვენება"
+
+#: src/ui_viewDialog.h:1111
+msgid "Show labels"
+msgstr "წარწერების ჩვენება"
+
+#: src/ui_viewDialog.h:1112
+msgid "Show boundaries"
+msgstr "საზღვრების ჩვენება"
+
+#: src/ui_viewDialog.h:1113
+msgid "Show art"
+msgstr "ნახატების ჩვენება"
+
+#: src/ui_viewDialog.h:1114
+msgid "Art brightness: "
+msgstr "ნახატების სიკაშკაშე: "
+
+#: src/ui_viewDialog.h:1115
+msgid "Projection"
+msgstr "პროექცია"
+
+#: src/ui_viewDialog.h:1116
+msgid "Add/remove landscapes..."
+msgstr ""
+
+#: src/ui_viewDialog.h:1117 src/ui_viewDialog.h:1122 src/ui_viewDialog.h:1124
+#: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
+msgid "Options"
+msgstr "პარამეტრები"
+
+#: src/ui_viewDialog.h:1118
+msgid "Show ground"
+msgstr "მიწის ჩვენება"
+
+#: src/ui_viewDialog.h:1119
+msgid "Show fog"
+msgstr "ნისლის ჩვენება"
+
+#: src/ui_viewDialog.h:1120
+msgid "Use associated planet and position"
+msgstr "შეაბამისი პლანეტით და პოზიციით სარგებლობა"
+
+#: src/ui_viewDialog.h:1121
+msgid "Use this landscape as default"
+msgstr "ამ პეიზაჟის ნაგულისხმებად გამოყენება"
+
+#: src/ui_viewDialog.h:1123
+msgid "Use this sky culture as default"
+msgstr "ამ ციური კულტურის ნაგულისხმებად გამოყენება"
+
+#: src/ui_viewDialog.h:1125
+msgid "Visible"
+msgstr "ხილული"
+
+#: src/ui_configurationDialog.h:748
+msgid "Configuration"
+msgstr "გამართვა"
+
+#: src/ui_configurationDialog.h:750
+msgid "Program language"
+msgstr "პროგრამის ენა"
+
+#: src/ui_configurationDialog.h:751
+msgid "Selected object information"
+msgstr "შერჩეული ობიექტის მონაცემები"
+
+#: src/ui_configurationDialog.h:753
+msgid "Display all information available"
+msgstr "ყველა არსებული ინფორმაციის ჩვენება"
+
+#: src/ui_configurationDialog.h:755
+msgid "All available"
+msgstr "ყველა შესაძლო"
+
+#: src/ui_configurationDialog.h:757
+msgid "Display less information"
+msgstr "ნაკლები ინფორმაციის ჩვენება"
+
+#: src/ui_configurationDialog.h:759
+msgid "Short"
+msgstr "მოკლე"
+
+#: src/ui_configurationDialog.h:761
+msgid "Display no information"
+msgstr "ინფორმაციის ჩვენების გარეშე"
+
+#: src/ui_configurationDialog.h:763
+msgid "None"
+msgstr "არა"
+
+#: src/ui_configurationDialog.h:764
+msgid "Default options"
+msgstr "ნაგულისხმები პარამეტრები"
+
+#: src/ui_configurationDialog.h:766
+msgid ""
+"Save the settings you've changed this session to be the same the next time "
+"you start Stellarium"
+msgstr ""
+"ამ სეანსის ცვლილებების შენახვა და გამოყენება Stellarium პროგრამის ახალ "
+"სეანსზე"
+
+#: src/ui_configurationDialog.h:768
+msgid "Save settings"
+msgstr "პარამეტრების შენახვა"
+
+#: src/ui_configurationDialog.h:770
+msgid "Restore the default settings that came with Stellarium"
+msgstr "Stellarium პროგრამის ნაგულისხმები პარამეტრების აღდგენა"
+
+#: src/ui_configurationDialog.h:772
+msgid "Restore defaults"
+msgstr "ნაგულისხმების აღდგენა"
+
+#: src/ui_configurationDialog.h:773
+msgid ""
+"Restoring default settings requires a restart of Stellarium. Saving all the "
+"current options includes the current FOV and direction of view for use at "
+"next startup."
+msgstr ""
+"ნაგულისხმების პარამეტრების აღსადგენად Stellarium უნდა დაიხუროს და ხელეხლა "
+"გაიხსნას. ინახება ყველა მიმდინარე პარამეტრი ხედვის არისა და მიმართულების "
+"ჩათვლით პროგრამის შემდეგი გახსნისთვის."
+
+#: src/ui_configurationDialog.h:775
+msgid "The width of your view when Stellarium starts"
+msgstr "ხედვის სიგანე Stellarium პროგრამის გახსნისას"
+
+#: src/ui_configurationDialog.h:777
+msgid "Startup FOV: XX"
+msgstr "ხედვის საწყისი არე: XX"
+
+#: src/ui_configurationDialog.h:779
+msgid "The direction you're looking when Stellarium starts"
+msgstr "ხედვის მიმართულება Stellarium პროგრამის გახსნისას"
+
+#: src/ui_configurationDialog.h:781
+msgid "Startup direction of view: xxxx"
+msgstr "ხედვის საწყისი მიმართულება: xxxx"
+
+#: src/ui_configurationDialog.h:782
+msgid "Control"
+msgstr "კონტროლი"
+
+#: src/ui_configurationDialog.h:784
+msgid "Allow keyboard to pan and zoom"
+msgstr "კლავიატურით სარგებლობა გადასატანად და მასშტაბირებისთვის"
+
+#: src/ui_configurationDialog.h:786
+msgid "Enable keyboard navigation"
+msgstr "კლავიატურით ნავიგაციის ჩართვა"
+
+#: src/ui_configurationDialog.h:788
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr "თაგუნათი სარგებლობა გადასატანად და მასშტაბირებისთვის"
+
+#: src/ui_configurationDialog.h:790
+msgid "Enable mouse navigation"
+msgstr "თაგუნათი ნავიგაციის ჩართვა"
+
+#: src/ui_configurationDialog.h:791
+msgid "Startup date and time"
+msgstr "დაწყების თარიღი და დრო"
+
+#: src/ui_configurationDialog.h:793
+msgid "Starts Stellarium at system clock date and time"
+msgstr "Stellarium-ის დაწყება სისტემური თარიღითა და დროით"
+
+#: src/ui_configurationDialog.h:795
+msgid "System date and time"
+msgstr "დაწყების თარიღი და დრო"
+
+#: src/ui_configurationDialog.h:797
+msgid ""
+"Sets the simulation time to the next instance of this time of day when "
+"Stellarium starts"
+msgstr "მიუთითებს სიმულაციის დროს Stellariumის შემდეგი გახსნისას"
+
+#: src/ui_configurationDialog.h:799
+msgid "System date at:"
+msgstr "სისტემური თარიღი:"
+
+#: src/ui_configurationDialog.h:801
+msgid "Use a specific date and time when Stellarium starts up"
+msgstr "შერჩეული თარიღისა და დროის მითითება Stellariumის გახსნისას"
+
+#: src/ui_configurationDialog.h:803
+msgid "Other:"
+msgstr "სხვა:"
 
 #: src/ui_configurationDialog.h:804
 msgid "use current"
 msgstr "არსებულის გამოყენება"
 
-#: src/ui_searchDialogGui.h:497
-msgid "xi"
+#: src/ui_configurationDialog.h:805
+msgid "Other"
+msgstr "სხვა"
+
+#: src/ui_configurationDialog.h:807
+msgid "Hides the mouse cursor when inactive"
+msgstr "თაგუნას კურსორის დამალვა უქმად ყოფნისას"
+
+#: src/ui_configurationDialog.h:809
+msgid "Mouse cursor timeout (seconds):"
+msgstr "თაგუნას კურსორის ვადა (წამები):"
+
+#: src/ui_configurationDialog.h:811
+msgid "Toggle vertical and horizontal image flip buttons."
+msgstr "მართობული და განივი არეკვლის ღილაკების გადართვა."
+
+#: src/ui_configurationDialog.h:813
+msgid "Show flip buttons"
+msgstr "არეკვლის ღილაკების ჩვენება"
+
+#: src/ui_configurationDialog.h:814
+msgid "Planetarium options"
+msgstr "პლანეტარიუმის პარამეტრები"
+
+#: src/ui_configurationDialog.h:816
+msgid ""
+"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
+"mirror for low-cost planetarium systems."
 msgstr ""
+"სფერული სარკის ეფექტი გამოიყენება სფერულ სარკეზე პროექციისას დაბალი ხარისხის "
+"პლანეტარიუმებში."
+
+#: src/ui_configurationDialog.h:818
+msgid "Spheric mirror distortion"
+msgstr "სფერული სარკის ეფექტი"
+
+#: src/ui_configurationDialog.h:820
+msgid "Align labels with the horizon"
+msgstr "წარწერების ჰორიზონტზე განთავსება"
+
+#: src/ui_configurationDialog.h:822
+msgid "Gravity labels"
+msgstr "გრავიტაციის წარწერები"
+
+#: src/ui_configurationDialog.h:824
+msgid ""
+"When enabled, the \"auto zoom out\" key will also set the initial viewing "
+"direction"
+msgstr ""
+"როცა ჩართულია, ღილაკი \"თვითმასშტაბირება\" ასევე მიუთითებს ხედვის საწყის "
+"მიმართულებას"
+
+#: src/ui_configurationDialog.h:826
+msgid "Auto zoom out returns to initial direction of view"
+msgstr "თვითმასშტაბირება ხედვის საწყის მიმართულებაზე დაგაბრუნებთ"
+
+#: src/ui_configurationDialog.h:828
+msgid "Mask out everything outside a central circle in the main view"
+msgstr "ყველაფრის შენიღბვა მთავარი ხედის ცენტრალური წრის გარეთ"
+
+#: src/ui_configurationDialog.h:830
+msgid "Disc viewport"
+msgstr "დისკოსებრი ხედი"
+
+#: src/ui_configurationDialog.h:832
+msgid "Hide other constellations when you click one"
+msgstr "სხვა ხომლების დამალვა ერთერთის დაწკაპვისას"
+
+#: src/ui_configurationDialog.h:834
+msgid "Select single constellation"
+msgstr "ცალკეული ხომლის შერჩევა"
+
+#: src/ui_configurationDialog.h:835
+msgid "Screenshots"
+msgstr "ეკრანის ანაბეჭდები"
+
+#: src/ui_configurationDialog.h:836
+msgid "Screenshot Directory"
+msgstr "ეკრანთა ანაბეჭდების დასტა"
+
+#: src/ui_configurationDialog.h:838
+msgid "Invert colors"
+msgstr "ფერების ინვერსია"
+
+#: src/ui_configurationDialog.h:839
+msgid "Star catalog updates"
+msgstr "ვარსკვლავთა კატალოგის განახლება"
+
+#: src/ui_configurationDialog.h:841
+msgid "Click here to start downloading"
+msgstr "დაწკაპეთ ჩამოტვირთვის დასაწყებად"
+
+#: src/ui_configurationDialog.h:843
+msgid "Get catalog x of y"
+msgstr "კატალოგის მიღება x - y"
+
+#: src/ui_configurationDialog.h:844
+msgid "Download this file to view even more stars"
+msgstr "ამ ფაილის ჩამოტვირთვა სხვა ვარსკვლავების საჩვენებლად"
 
 #: src/ui_configurationDialog.h:845
 msgid "xxx"
 msgstr "xxx"
 
-#: src/ui_searchDialogGui.h:476
-msgid "zeta"
+#: src/ui_configurationDialog.h:847
+msgid "Restart the download"
+msgstr "ჩამოტვირთვის განახლება"
+
+#: src/ui_configurationDialog.h:849
+msgid "Retry"
+msgstr "ხელახლა"
+
+#: src/ui_configurationDialog.h:851
+msgid "Stop the download. You can always restart it later"
+msgstr "ჩამოტვირთვის შეჩერება. ყოველთვის შეგიძლიათ მისი განახლება"
+
+#: src/ui_configurationDialog.h:853
+msgid "Cancel"
+msgstr "გაუქმება"
+
+#: src/ui_configurationDialog.h:856
+msgid "Close window when script runs"
+msgstr "სარკმლის დახურვა სცენარის შესრულებისას"
+
+#: src/ui_configurationDialog.h:858
+msgid "Run the selected script"
+msgstr "შერჩეული სცენარის შესრულება"
+
+#: src/ui_configurationDialog.h:862
+msgid "Stop a running script"
+msgstr "შერჩეული სცენარის შეჩერება"
+
+#: src/ui_configurationDialog.h:866
+msgid "Load at startup"
+msgstr "გაშვებისთანავე ჩატვირთვა"
+
+#: src/ui_configurationDialog.h:867
+msgid "configure"
+msgstr "აწყობა"
+
+#: src/ui_configurationDialog.h:872
+msgid "Main"
+msgstr "ძირითადი"
+
+#: src/ui_configurationDialog.h:874
+msgid "Navigation"
+msgstr "ნავიგაცია"
+
+#: src/ui_configurationDialog.h:876
+msgid "Tools"
+msgstr "სამარჯვები"
+
+#: src/ui_configurationDialog.h:878
+msgid "Scripts"
+msgstr "სცენარები"
+
+#: src/ui_configurationDialog.h:880
+msgid "Plugins"
+msgstr "მოდულები"
+
+#: src/ui_addRemoveLandscapesDialog.h:266
+msgid "Add/Remove Landscapes"
 msgstr ""
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:193
+#: src/ui_addRemoveLandscapesDialog.h:268
+msgid "Add a new landscape"
+msgstr ""
+
+#: src/ui_addRemoveLandscapesDialog.h:269
+msgid "Install a new landscape from a ZIP archive..."
+msgstr ""
+
+#: src/ui_addRemoveLandscapesDialog.h:270
+msgid "Switch to the new landscape after installation"
+msgstr ""
+
+#: src/ui_addRemoveLandscapesDialog.h:273
+msgid "Remove an installed landscape"
+msgstr ""
+
+#: src/ui_addRemoveLandscapesDialog.h:275
+msgid "Remove"
+msgstr "მოშორება"
+
+#: src/ui_addRemoveLandscapesDialog.h:276
 msgid ""
-"{Bug reporting and feature request system} - if something doesn't work "
-"properly or is missing and is not listed in the tracker, you can open bug "
-"reports here."
+"WARNING: Removing the selected landscape means deleting its files. This "
+"operation is irreversible."
 msgstr ""
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:198
-msgid "{Forums} - discuss Stellarium with other users."
-msgstr "{ფორუმები} - განიხილეთ Stellarium სხვა მომხმარებლებთან ერთად."
+#: src/ui_AtmosphereDialog.h:167
+msgid "Dialog"
+msgstr ""
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:178
-msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr "{ფრიად აქტუალური კითხვები} Stellarium-ის შესახებ.  პასუხებიც იქვეა."
+#: src/ui_AtmosphereDialog.h:168
+msgid "Atmosphere Details"
+msgstr ""
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:188
+#: src/ui_AtmosphereDialog.h:170
+msgid "Refraction Settings"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:171
+msgid "Pressure (mbar):"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:172
+msgid "Temperature (C):"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:177
 msgid ""
-"{Support ticket system} - if you need help using Stellarium, post a support "
-"request here and we'll try to help."
+"Extinction is the loss of star brightness due to Earth's atmosphere. It is "
+"given in mag/airmass, where airmass is number of atmospheres light has to "
+"pass. (zenith: 1; horizon: about 40)"
 msgstr ""
-"{მომსახურების ცენტრი} - თუ დახმარება გესაჭიროებათ, გამოაგზავნეთ მოთხოვნა და "
-"შევეცდებით დაგეხმაროთ."
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:183
-msgid ""
-"{The Stellarium Wiki} - General information.  You can also find user-"
-"contributed landscapes and scripts here."
+#: src/ui_AtmosphereDialog.h:179
+msgid "Extinction Coefficient:"
 msgstr ""
-"{Stellarium-ის ენციკლოპედია} - ზოგადი ინფორმაცია.  შეგიძლიათ მოიძიოთ "
-"გამოგზავნილი პეიზაჟები და სცენარები."
+
+#: src/ui_AtmosphereDialog.h:181
+msgid ""
+"Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
+"for murky conditions."
+msgstr ""
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:57
+msgid "Angle Measure"
+msgstr ""
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:60
+msgid "Provides an angle measurement tool"
+msgstr ""
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:121
+msgid "Angle measure"
+msgstr ""
+
+#. TRANSLATORS: Title of a group of key bindings in the Help window
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:121
+#: plugins/CompassMarks/src/CompassMarks.cpp:121
+#: plugins/Oculars/src/Oculars.cpp:931 plugins/Oculars/src/Oculars.cpp:945
+#: plugins/Satellites/src/Satellites.cpp:123
+msgid "Plugin Key Bindings"
+msgstr ""
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:57
+msgid "Compass Marks"
+msgstr ""
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:60
+msgid "Displays compass bearing marks along the horizon"
+msgstr ""
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:121
+msgid "Compass marks"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:76
+msgid "Oculars"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:79
+msgid "Shows the sky as if looking through a telescope eyepiece"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:943
+msgid "Ocular view"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:965
+msgid "Oculars popup menu"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:67
+msgid "Satellites"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:70
+msgid ""
+"Prediction of artificial satellite positions in Earth orbit based on NORAD "
+"TLE data"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:125
+msgid "Satellites configuration window"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:126
+msgid "Satellite hints"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:128
+msgid "Satellite labels"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:162
+msgid ""
+"The old satellites.json file is no longer compatible - using default file"
+msgstr ""
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:75
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:150
+msgid "Telescope Control"
+msgstr "ტელესკოპის კონტროლი"
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:78
+msgid ""
+"This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
+"computerized mount (a \"GoTo telescope\")."
+msgstr ""
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:155
+#, qt-format
+msgid "Move telescope #%1 to selected object"
+msgstr ""
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:162
+#, qt-format
+msgid "Move telescope #%1 to the point currently in the center of the screen"
+msgstr ""
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:173
+msgid "Move a telescope to a given set of coordinates"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
+msgid "Time Zone"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:44
+msgid ""
+"A convenient interface for some of the more obscure options in Stellarium's "
+"configuration file. Allows setting the time zone and changing the way the "
+"time and the date are displayed in the bottom bar."
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:78
+msgid "Text User Interface"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:81
+msgid ""
+"Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
+"planetarium systems"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
+msgid "Solar System Editor"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:59
+msgid ""
+"An interface for adding asteroids and comets to Stellarium. It can download "
+"object lists from the Minor Planet Center's website and perform searches in "
+"its online database. Still a work in progress."
+msgstr ""
+
+#: plugins/Supernovas/src/Supernovas.cpp:59
+msgid "Historical supernova"
+msgstr ""
+
+#: plugins/Supernovas/src/Supernovas.cpp:62
+msgid ""
+"The plugin for visualization of some historical supernovas, brighter 10 "
+"magnitude"
+msgstr ""
+
+#: plugins/Supernovas/src/Supernovas.cpp:62
+msgid ""
+"SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
+"July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
+"1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
+"August), SN 1972E (8 May) and SN 1987A (24 February)"
+msgstr ""
+
+#: plugins/Supernovas/src/Supernova.cpp:105
+#, qt-format
+msgid "Type: %1"
+msgstr ""
 
 #~ msgid "Form"
 #~ msgstr "ფორმა"
-
-#~ msgid "Loading NGC catalog"
-#~ msgstr "იტვირთება NGC კატალოგი"
-
-#~ msgid "Loading NGC catalog: %1/%2"
-#~ msgstr "იტვირთება NGC კატალოგი: %1/%2"
-
-#~ msgid "Loading catalog %1 from file %2"
-#~ msgstr "%1 კატალოგის ჩამოტვირთვა %2 ფაილიდან"
 
 #~ msgid "Move telescope #0 to selected object"
 #~ msgstr "#0 ტელესკოპის შერჩეულ ობიექტზე გადატანა"
@@ -2437,26 +2458,60 @@ msgstr ""
 #~ msgid "Move telescope #1 to selected object"
 #~ msgstr "#1 ტელესკოპის შერჩეულ ობიექტზე გადატანა"
 
-#~ msgid "Move telescope #2 to selected object"
-#~ msgstr "#2 ტელესკოპის შერჩეულ ობიექტზე გადატანა"
-
 #~ msgid "Move telescope #3 to selected object"
 #~ msgstr "#3 ტელესკოპის შერჩეულ ობიექტზე გადატანა"
 
-#~ msgid "Move telescope #4 to selected object"
-#~ msgstr "#4 ტელესკოპის შერჩეულ ობიექტზე გადატანა"
+#~ msgid "Move telescope #2 to selected object"
+#~ msgstr "#2 ტელესკოპის შერჩეულ ობიექტზე გადატანა"
 
-#~ msgid "Move telescope #5 to selected object"
-#~ msgstr "#5 ტელესკოპის შერჩეულ ობიექტზე გადატანა"
-
-#~ msgid "Move telescope #6 to selected object"
-#~ msgstr "#6 ტელესკოპის შერჩეულ ობიექტზე გადატანა"
-
-#~ msgid "Move telescope #7 to selected object"
-#~ msgstr "#7 ტელესკოპის შერჩეულ ობიექტზე გადატანა"
+#~ msgid "Move telescope #9 to selected object"
+#~ msgstr "#9 ტელესკოპის შერჩეულ ობიექტზე გადატანა"
 
 #~ msgid "Move telescope #8 to selected object"
 #~ msgstr "#8 ტელესკოპის შერჩეულ ობიექტზე გადატანა"
 
-#~ msgid "Move telescope #9 to selected object"
-#~ msgstr "#9 ტელესკოპის შერჩეულ ობიექტზე გადატანა"
+#~ msgid "Move telescope #5 to selected object"
+#~ msgstr "#5 ტელესკოპის შერჩეულ ობიექტზე გადატანა"
+
+#~ msgid "Move telescope #4 to selected object"
+#~ msgstr "#4 ტელესკოპის შერჩეულ ობიექტზე გადატანა"
+
+#~ msgid "Move telescope #7 to selected object"
+#~ msgstr "#7 ტელესკოპის შერჩეულ ობიექტზე გადატანა"
+
+#~ msgid "Move telescope #6 to selected object"
+#~ msgstr "#6 ტელესკოპის შერჩეულ ობიექტზე გადატანა"
+
+#, qt-format
+#~ msgid "Loading catalog %1 from file %2"
+#~ msgstr "%1 კატალოგის ჩამოტვირთვა %2 ფაილიდან"
+
+#~ msgid "Loading NGC catalog"
+#~ msgstr "იტვირთება NGC კატალოგი"
+
+#, qt-format
+#~ msgid "Loading NGC catalog: %1/%2"
+#~ msgstr "იტვირთება NGC კატალოგი: %1/%2"
+
+#, qt-format
+#~ msgid "Successfully loaded data from new file %1"
+#~ msgstr "ახალი ფაილიდან %1 ინფორმაცია წარმატებით ჩაიტვირთა"
+
+#~ msgid "Brief"
+#~ msgstr "მოკლედ"
+
+#, qt-format
+#~ msgid ""
+#~ "File size: %1MB\n"
+#~ "Star count: %2 Million\n"
+#~ "Magnitude range: %3 - %4"
+#~ msgstr ""
+#~ "ფაილის ზომა: %1 მბ\n"
+#~ "ვარსკლავთა რაოდენობა: %2 მილიონი\n"
+#~ "სიდიდის დიაპაზონი: %3 - %4"
+
+#~ msgid "General settings"
+#~ msgstr "ზოგადი პარამეტრები"
+
+#~ msgid "Download"
+#~ msgstr "ჩამოტვირთვა"
