@@ -29,7 +29,7 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
-#include "Supernovas.hpp"
+#include "Supernovae.hpp"
 #include "Supernova.hpp"
 
 #include <QDebug>
@@ -45,45 +45,45 @@
  This method is the one called automatically by the StelModuleMgr just 
  after loading the dynamic library
 */
-StelModule* SupernovasStelPluginInterface::getStelModule() const
+StelModule* SupernovaeStelPluginInterface::getStelModule() const
 {
-	return new Supernovas();
+	return new Supernovae();
 }
 
-StelPluginInfo SupernovasStelPluginInterface::getPluginInfo() const
+StelPluginInfo SupernovaeStelPluginInterface::getPluginInfo() const
 {
-	Q_INIT_RESOURCE(Supernovas);
+	Q_INIT_RESOURCE(Supernovae);
 
 	StelPluginInfo info;
-	info.id = "Supernovas";
-	info.displayedName = q_("Historical supernova");
+	info.id = "Supernovae";
+	info.displayedName = q_("Historical supernovae");
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
-	info.description = QString("%1: %2.").arg(q_("The plugin for visualization of some historical supernovas, brighter 10 magnitude")).arg(q_("SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 August), SN 1972E (8 May) and SN 1987A (24 February)"));
+	info.description = QString("%1: %2.").arg(q_("The plugin for visualization of some historical supernovae, brighter 10 magnitude")).arg(q_("SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 August), SN 1972E (8 May) and SN 1987A (24 February)"));
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(Supernovas, SupernovasStelPluginInterface)
+Q_EXPORT_PLUGIN2(Supernovae, SupernovaeStelPluginInterface)
 
 
 /*
  Constructor
 */
-Supernovas::Supernovas()
+Supernovae::Supernovae()
 {
-	setObjectName("Supernovas");
+	setObjectName("Supernovae");
 	font.setPixelSize(13);
 }
 
 /*
  Destructor
 */
-Supernovas::~Supernovas()
+Supernovae::~Supernovae()
 {
 	//
 }
 
-void Supernovas::deinit()
+void Supernovae::deinit()
 {
 	texPointer.clear();
 }
@@ -91,7 +91,7 @@ void Supernovas::deinit()
 /*
  Reimplementation of the getCallOrder method
 */
-double Supernovas::getCallOrder(StelModuleActionName actionName) const
+double Supernovae::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
 		return StelApp::getInstance().getModuleMgr().getModule("ConstellationMgr")->getCallOrder(actionName)+10.;
@@ -102,13 +102,13 @@ double Supernovas::getCallOrder(StelModuleActionName actionName) const
 /*
  Init our module
 */
-void Supernovas::init()
+void Supernovae::init()
 {
 	try
 	{
-		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Supernovas");
+		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Supernovae");
 
-		sneJsonPath = StelFileMgr::findFile("modules/Supernovas", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/supernovas.json";
+		sneJsonPath = StelFileMgr::findFile("modules/Supernovae", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/supernovae.json";
 
 		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
 	}
@@ -128,11 +128,11 @@ void Supernovas::init()
 	}
 	else
 	{
-		qDebug() << "Supernovas::init supernovas.json does not exist - copying default file to " << sneJsonPath;
+		qDebug() << "Supernovae::init supernovae.json does not exist - copying default file to " << sneJsonPath;
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "Supernovas::init using supernovas.json file: " << sneJsonPath;
+	qDebug() << "Supernovae::init using supernovae.json file: " << sneJsonPath;
 
 	readJsonFile();
 
@@ -142,7 +142,7 @@ void Supernovas::init()
 /*
  Draw our module. This should print name of first SNe in the main window
 */
-void Supernovas::draw(StelCore* core)
+void Supernovae::draw(StelCore* core)
 {
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
@@ -159,7 +159,7 @@ void Supernovas::draw(StelCore* core)
 
 }
 
-void Supernovas::drawPointer(StelCore* core, StelPainter& painter)
+void Supernovae::drawPointer(StelCore* core, StelPainter& painter)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
@@ -184,7 +184,7 @@ void Supernovas::drawPointer(StelCore* core, StelPainter& painter)
 	}
 }
 
-QList<StelObjectP> Supernovas::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
+QList<StelObjectP> Supernovae::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
 {
 	QList<StelObjectP> result;
 
@@ -209,7 +209,7 @@ QList<StelObjectP> Supernovas::searchAround(const Vec3d& av, double limitFov, co
 	return result;
 }
 
-StelObjectP Supernovas::searchByName(const QString& englishName) const
+StelObjectP Supernovae::searchByName(const QString& englishName) const
 {
 	QString objw = englishName.toUpper();
 	foreach(const SupernovaP& sn, snstar)
@@ -221,7 +221,7 @@ StelObjectP Supernovas::searchByName(const QString& englishName) const
 	return NULL;
 }
 
-StelObjectP Supernovas::searchByNameI18n(const QString& nameI18n) const
+StelObjectP Supernovae::searchByNameI18n(const QString& nameI18n) const
 {
 	QString objw = nameI18n.toUpper();
 
@@ -234,7 +234,7 @@ StelObjectP Supernovas::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList Supernovas::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+QStringList Supernovae::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
 	if (maxNbItem==0) return result;
@@ -258,19 +258,19 @@ QStringList Supernovas::listMatchingObjectsI18n(const QString& objPrefix, int ma
 /*
   Replace the JSON file with the default from the compiled-in resource
 */
-void Supernovas::restoreDefaultJsonFile(void)
+void Supernovae::restoreDefaultJsonFile(void)
 {
 	if (QFileInfo(sneJsonPath).exists())
 		backupJsonFile(true);
 
-	QFile src(":/Supernovas/supernovas.json");
+	QFile src(":/Supernovae/supernovae.json");
 	if (!src.copy(sneJsonPath))
 	{
-		qWarning() << "Supernovas::restoreDefaultJsonFile cannot copy json resource to " + sneJsonPath;
+		qWarning() << "Supernovae::restoreDefaultJsonFile cannot copy json resource to " + sneJsonPath;
 	}
 	else
 	{
-		qDebug() << "Supernovas::init copied default supernovas.json to " << sneJsonPath;
+		qDebug() << "Supernovae::init copied default supernovae.json to " << sneJsonPath;
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(sneJsonPath);
@@ -279,14 +279,14 @@ void Supernovas::restoreDefaultJsonFile(void)
 }
 
 /*
-  Creates a backup of the sne.json file called sne.json.old
+  Creates a backup of the supernovae.json file called supernovae.json.old
 */
-bool Supernovas::backupJsonFile(bool deleteOriginal)
+bool Supernovae::backupJsonFile(bool deleteOriginal)
 {
 	QFile old(sneJsonPath);
 	if (!old.exists())
 	{
-		qWarning() << "Supernovas::backupJsonFile no file to backup";
+		qWarning() << "Supernovae::backupJsonFile no file to backup";
 		return false;
 	}
 
@@ -300,14 +300,14 @@ bool Supernovas::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "Supernovas::backupJsonFile WARNING - could not remove old supernovas.json file";
+				qWarning() << "Supernovae::backupJsonFile WARNING - could not remove old supernovas.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "Supernovas::backupJsonFile WARNING - failed to copy supernovas.json to supernovas.json.old";
+		qWarning() << "Supernovae::backupJsonFile WARNING - failed to copy supernovae.json to supernovae.json.old";
 		return false;
 	}
 
@@ -317,7 +317,7 @@ bool Supernovas::backupJsonFile(bool deleteOriginal)
 /*
   Read the JSON file and create list of supernovaes.
 */
-void Supernovas::readJsonFile(void)
+void Supernovae::readJsonFile(void)
 {
 	setSNeMap(loadSNeMap());
 }
@@ -325,7 +325,7 @@ void Supernovas::readJsonFile(void)
 /*
   Parse JSON file and load supernovaes to map
 */
-QVariantMap Supernovas::loadSNeMap(QString path)
+QVariantMap Supernovae::loadSNeMap(QString path)
 {
 	if (path.isEmpty())
 	    path = sneJsonPath;
@@ -333,7 +333,7 @@ QVariantMap Supernovas::loadSNeMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-	    qWarning() << "Supernovas::loadSNeMap cannot open " << path;
+	    qWarning() << "Supernovae::loadSNeMap cannot open " << path;
 	else
 	    map = StelJsonParser::parse(jsonFile.readAll()).toMap();
 
@@ -344,7 +344,7 @@ QVariantMap Supernovas::loadSNeMap(QString path)
 /*
   Set items for list of struct from data map
 */
-void Supernovas::setSNeMap(const QVariantMap& map)
+void Supernovae::setSNeMap(const QVariantMap& map)
 {
 	snstar.clear();
 	QVariantMap sneMap = map.value("supernova").toMap();
@@ -360,13 +360,13 @@ void Supernovas::setSNeMap(const QVariantMap& map)
 	}
 }
 
-const QString Supernovas::getJsonFileVersion(void)
+const QString Supernovae::getJsonFileVersion(void)
 {
 	QString jsonVersion("unknown");
 	QFile sneJsonFile(sneJsonPath);
 	if (!sneJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Supernovas::init cannot open " << sneJsonPath;
+		qWarning() << "Supernovae::init cannot open " << sneJsonPath;
 		return jsonVersion;
 	}
 
@@ -383,11 +383,11 @@ const QString Supernovas::getJsonFileVersion(void)
 	}
 
 	sneJsonFile.close();
-	qDebug() << "Supernovas::getJsonFileVersion() version from file:" << jsonVersion;
+	qDebug() << "Supernovae::getJsonFileVersion() version from file:" << jsonVersion;
 	return jsonVersion;
 }
 
-SupernovaP Supernovas::getByID(const QString& id)
+SupernovaP Supernovae::getByID(const QString& id)
 {
 	foreach(const SupernovaP& sn, snstar)
 	{

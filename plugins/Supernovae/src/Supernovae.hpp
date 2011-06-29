@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _SUPERNOVAS_HPP_
-#define _SUPERNOVAS_HPP_
+#ifndef _SUPERNOVAE_HPP_
+#define _SUPERNOVAE_HPP_
 
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
@@ -35,11 +35,11 @@ class StelPainter;
 typedef QSharedPointer<Supernova> SupernovaP;
 
 //! This is an example of a plug-in which can be dynamically loaded into stellarium
-class Supernovas : public StelObjectModule
+class Supernovae : public StelObjectModule
 {
 public:	
-	Supernovas();
-	virtual ~Supernovas();
+	Supernovae();
+	virtual ~Supernovae();
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -83,10 +83,10 @@ private:
 	//! replace the json file with the default from the compiled-in resource
 	void restoreDefaultJsonFile(void);
 
-	//! read the json file and create list of supernovaes.
+	//! read the json file and create list of supernovae.
 	void readJsonFile(void);
 
-	//! Creates a backup of the sne.json file called sne.json.old
+	//! Creates a backup of the supernovae.json file called supernovae.json.old
 	//! @param deleteOriginal if true, the original file is removed, else not
 	//! @return true on OK, false on failure
 	bool backupJsonFile(bool deleteOriginal=false);
@@ -114,7 +114,7 @@ private:
 #include "StelPluginInterface.hpp"
 
 //! This class is used by Qt to manage a plug-in interface
-class SupernovasStelPluginInterface : public QObject, public StelPluginInterface
+class SupernovaeStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
 	Q_INTERFACES(StelPluginInterface)
@@ -123,4 +123,4 @@ public:
 	virtual StelPluginInfo getPluginInfo() const;
 };
 
-#endif /*_SUPERNOVAS_HPP_*/
+#endif /*_SUPERNOVAE_HPP_*/
