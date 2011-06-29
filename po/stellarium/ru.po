@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-06-26 01:48+0700\n"
-"PO-Revision-Date: 2011-06-27 10:51+0000\n"
+"PO-Revision-Date: 2011-06-28 12:10+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-06-28 04:35+0000\n"
+"X-Launchpad-Export-Date: 2011-06-29 04:41+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
@@ -106,7 +106,7 @@ msgstr "Абсолютная звёздная величина: %1"
 #: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr "Эклиптические геоцентрические (по дате): %1/%2"
+msgstr "Эклиптические геоцентр. координаты (по дате): %1/%2"
 
 #: src/core/modules/Planet.cpp:137
 #, qt-format
@@ -269,11 +269,11 @@ msgstr "Часовой угол/Склонение: %1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
-msgstr "(геометр.)"
+msgstr "(геометрические)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
-msgstr "(видим.)"
+msgstr "(видимые)"
 
 #: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
@@ -752,7 +752,7 @@ msgstr "Вычесть 1 звёздную неделю"
 
 #: src/gui/StelGui.cpp:164
 msgid "Center on selected object"
-msgstr "Установить выбранный объект по центру"
+msgstr "Центрировать выбранный объект"
 
 #: src/gui/StelGui.cpp:165
 msgid "Track object"
@@ -1890,7 +1890,7 @@ msgstr "Показывать названия"
 
 #: src/ui_viewDialog.h:1112
 msgid "Show boundaries"
-msgstr "Показать контуры"
+msgstr "Показать границы"
 
 #: src/ui_viewDialog.h:1113
 msgid "Show art"
@@ -2147,7 +2147,7 @@ msgstr "Спрятать созвездия при клике"
 
 #: src/ui_configurationDialog.h:834
 msgid "Select single constellation"
-msgstr "Вы"
+msgstr "Поштучный выбор созвездий"
 
 #: src/ui_configurationDialog.h:835
 msgid "Screenshots"
