@@ -39,7 +39,7 @@ class StelPainter;
 
 class Supernova : public StelObject
 {
-	friend class Supernovas;
+	friend class Supernovae;
 public:
 	//! @param id The official designation for a supernova, e.g. "SN 1054A"
 	Supernova(const QVariantMap& map);
