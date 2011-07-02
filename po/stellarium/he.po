@@ -7,1203 +7,146 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-20 11:50-0400\n"
-"PO-Revision-Date: 2010-11-26 21:55+0000\n"
-"Last-Translator: Bernd Saering <Unknown>\n"
+"POT-Creation-Date: 2011-06-26 01:48+0700\n"
+"PO-Revision-Date: 2011-03-27 07:27+0000\n"
+"Last-Translator: Lior Yosub <lior.yosub@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
-"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-05 08:52+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-06-28 04:33+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 
-#: src/ui_locationDialogGui.h:407
-msgid " m"
-msgstr " מ"
+#: src/core/modules/GridLinesMgr.cpp:525
+msgid "Meridian"
+msgstr "מרידיאן"
 
-#: src/gui/StelGuiItems.cpp:541
-#, no-c-format, qt-format
-msgid "%1m"
-msgstr "%1מטר"
+#: src/core/modules/GridLinesMgr.cpp:529
+msgid "Ecliptic"
+msgstr "קו המלקה"
 
-#: src/core/modules/LandscapeMgr.cpp:458
+#: src/core/modules/GridLinesMgr.cpp:533
+msgid "Equator"
+msgstr "קו המשווה"
+
+#: src/core/modules/GridLinesMgr.cpp:537
+msgid "Horizon"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:488
+msgid "Author: "
+msgstr "מחבר: "
+
+#: src/core/modules/LandscapeMgr.cpp:491
+msgid "Location: "
+msgstr "מיקום: ‏ "
+
+#: src/core/modules/LandscapeMgr.cpp:496
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 מ'"
 
-#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
-msgid "/"
-msgstr "/"
+#: src/core/modules/LandscapeMgr.cpp:499
+msgid "Planet: "
+msgstr "כוכב לכת "
 
-#: src/ui_viewDialog.h:1024
-msgid "0"
-msgstr "0"
-
-#: src/ui_viewDialog.h:1025
-msgid "10"
-msgstr "10"
-
-#: src/ui_viewDialog.h:1027
-msgid "10000"
-msgstr "10000"
-
-#: src/ui_viewDialog.h:1028
-msgid "144000"
-msgstr "14400"
-
-#: src/ui_viewDialog.h:1026
-msgid "80"
-msgstr "80"
-
-#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
-msgid ":"
-msgstr ":"
-
-#: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:44
-msgid ""
-"A convenient interface for some of the more obscure options in Stellarium's "
-"configuration file. Allows setting the time zone and changing the way the "
-"time and the date are displayed in the bottom bar."
-msgstr ""
-
-#. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:227
+#: src/core/modules/Nebula.cpp:96
 #, qt-format
-msgid "A landscape with the same name or identifier (%1) already exists."
-msgstr ""
-
-#: src/ui_helpDialogGui.h:267
-msgid "About"
-msgstr "אודות"
-
-#: src/core/modules/Planet.cpp:125 src/core/modules/StarWrapper.cpp:114
-#, qt-format
-msgid "Absolute Magnitude: %1"
-msgstr "מגניטודה(בהירות) מוחלטת: %1"
-
-#: src/ui_viewDialog.h:1002
-msgid "Absolute scale:"
-msgstr "קנה מידה מוחלט:"
-
-#: src/translations.h:140
-msgid "Actual Time"
-msgstr "זמן נוכחי"
-
-#: src/gui/StelGui.cpp:157
-msgid "Add 1 sidereal day"
-msgstr "הוסף יום כוכבי"
-
-#: src/gui/StelGui.cpp:159
-msgid "Add 1 sidereal week"
-msgstr "הוסף שבוע כוכבי"
-
-#: src/gui/StelGui.cpp:153
-msgid "Add 1 solar day"
-msgstr "הוסף יום שמשי אחד"
-
-#: src/gui/StelGui.cpp:151
-msgid "Add 1 solar hour"
-msgstr "הוסף שעה שמשית אחת"
-
-#: src/gui/StelGui.cpp:155
-msgid "Add 1 solar week"
-msgstr "הוסף שבוע שמשי אחד"
-
-#: src/ui_addRemoveLandscapesDialog.h:268
-msgid "Add a new landscape"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:394
-msgid "Add to list"
-msgstr "הוסף לרשימה"
-
-#: src/ui_addRemoveLandscapesDialog.h:266
-msgid "Add/Remove Landscapes"
-msgstr "הוספה / הסרה של נוף"
-
-#: src/ui_viewDialog.h:1045
-msgid "Add/remove landscapes..."
-msgstr "הוספה / הסרה של נוף"
-
-#: src/translations.h:126
-msgid "Administration "
-msgstr "ניהול "
-
-#: src/ui_configurationDialog.h:820
-msgid "Align labels with the horizon"
-msgstr "יישר תוויות עם האופק"
-
-#: src/ui_configurationDialog.h:755
-msgid "All available"
-msgstr "כל הזמין"
-
-#: src/ui_configurationDialog.h:784
-msgid "Allow keyboard to pan and zoom"
-msgstr "אפשר סריקה והתמקדות באמצעות המקלדת"
-
-#: src/ui_configurationDialog.h:788
-msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr "אפשר סריקה והתמקדות באמצעות העכבר"
-
-#: src/translations.h:130
-msgid "Altitude (m): "
-msgstr "גובה (מטרים): "
-
-#: src/ui_locationDialogGui.h:403
-msgid "Altitude:"
-msgstr "גובה:"
-
-#. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:85
-msgid "Amor"
-msgstr "אמור"
-
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:59
-msgid ""
-"An interface for adding asteroids and comets to Stellarium. It can download "
-"object lists from the Minor Planet Center's website and perform searches in "
-"its online database. Still a work in progress."
-msgstr ""
-
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:57
-msgid "Angle Measure"
-msgstr "מדידת זווית"
-
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:121
-msgid "Angle measure"
-msgstr "מדידת זווית"
-
-#. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:87
-msgid "Apophis"
-msgstr "אפופיס"
-
-#: src/core/modules/Planet.cpp:136
-#, qt-format
-msgid "Apparent diameter: %1"
-msgstr "קוטר נראה: %1"
-
-#: src/translations.h:63
-msgid "Ariel"
-msgstr "אריאל"
-
-#: src/translations.h:185
-msgid "Arrow down to load list."
-msgstr "לחץ על חץ למטה כדי לטעון רשימה."
-
-#: src/gui/HelpDialog.cpp:53
-msgid "Arrow keys & left mouse drag"
-msgstr "מקשי חיצים ולחיצה על כפתור שמאלי כדי לגרור"
-
-#: src/ui_viewDialog.h:1043
-msgid "Art brightness: "
-msgstr "בהירות האומנות "
-
-#. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:73
-msgid "Astraea"
-msgstr ""
-
-#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1015
-msgid "Atmosphere"
-msgstr "אטמוספירה"
-
-#: src/gui/ConfigurationDialog.cpp:587
-msgid "Author"
-msgstr "מחבר"
-
-#: src/core/modules/LandscapeMgr.cpp:450
-msgid "Author: "
-msgstr "מחבר: "
-
-#: src/gui/ConfigurationDialog.cpp:511
-msgid "Authors"
-msgstr "מחברים"
-
-#: src/gui/StelGui.cpp:175
-msgid "Auto hide horizontal button bar"
-msgstr "החבא אוטומטית פס כפתורים אופקי"
-
-#: src/gui/StelGui.cpp:176
-msgid "Auto hide vertical button bar"
-msgstr "החבא אוטומטית פס כפתורים אנכי"
-
-#: src/ui_configurationDialog.h:826
-msgid "Auto zoom out returns to initial direction of view"
-msgstr "התרחקות אוטומטית תחזיר את כיוון ההסתכלות לכיוון הראשוני"
-
-#: src/core/StelObject.cpp:91
-#, qt-format
-msgid "Az/Alt: %1/%2"
-msgstr "אזימוט/גובה: %1/%2"
-
-#: src/translations.h:164
-msgid "Azimuthal Grid"
-msgstr "רשת אזימוטלית"
-
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1033
-msgid "Azimuthal grid"
-msgstr "רשת אזימוטלית"
-
-#: src/translations.h:103
-msgid "Aztec"
-msgstr "אצטקית"
-
-#: src/translations.h:183
-msgid "CD/DVD Script: "
-msgstr "סקריפט CD/DVD : "
-
-#: src/gui/HelpDialog.cpp:58
-msgid "CTRL + Left click"
-msgstr "קונטרול + לחיצה על כפתור שמאלי"
-
-#: src/gui/HelpDialog.cpp:55
-msgid "CTRL + Up/Down"
-msgstr "קונטרול + למעלה/למטה"
-
-#: src/translations.h:136
-msgid "Calendar"
-msgstr "לוח שנה"
-
-#: src/translations.h:49
-msgid "Callisto"
-msgstr "קליסטו"
-
-#: src/ui_configurationDialog.h:853
-msgid "Cancel"
-msgstr "ביטול"
-
-#: src/translations.h:159
-msgid "Cardinal Points"
-msgstr "נקודות חשובות"
-
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1037
-msgid "Cardinal points"
-msgstr "נקודות חשובות"
-
-#: src/ui_viewDialog.h:1030
-msgid "Celestial Sphere"
-msgstr "ספירה שמימית"
-
-#: src/gui/StelGui.cpp:163
-msgid "Center on selected object"
-msgstr "התמקד על העצם הנבחר"
-
-#: src/translations.h:41
-msgid "Ceres"
-msgstr "קרס"
-
-#: src/translations.h:68
-msgid "Charon"
-msgstr "כארון"
-
-#: src/translations.h:104
-msgid "Chinese"
-msgstr "סינית"
-
-#. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:89
-msgid "Chiron"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:66 src/gui/HelpDialog.cpp:68
-msgid "Clear selection"
-msgstr "נקה בחירה"
-
-#: src/ui_configurationDialog.h:841
-msgid "Click here to start downloading"
-msgstr "לחץ כאן כדי להתחיל את ההורדה"
-
-#: src/ui_configurationDialog.h:856
-msgid "Close window when script runs"
-msgstr "סגור חלון בעת ריצת סקריפט"
-
-#: src/core/modules/Nebula.cpp:284
-msgid "Cluster associated with nebulosity"
-msgstr "צבירים הקשורים לעירפול"
-
-#: src/translations.h:123
-msgid "Colors "
-msgstr "צבעים "
-
-#: plugins/CompassMarks/src/CompassMarks.cpp:57
-msgid "Compass Marks"
-msgstr "סימוני מצפן"
-
-#: plugins/CompassMarks/src/CompassMarks.cpp:121
-msgid "Compass marks"
-msgstr ""
-
-#: src/ui_configurationDialog.h:748
-msgid "Configuration"
-msgstr "קונפיגורציה"
-
-#: src/gui/StelGui.cpp:131
-msgid "Configuration window"
-msgstr "חלון קונפיגורציה"
-
-#: src/translations.h:157
-msgid "Constellation Art Intensity"
-msgstr "עוצמת הגרפיקה של קבוצות כוכבים"
-
-#: src/translations.h:158
-msgid "Constellation Boundaries"
-msgstr "גבולות קבוצות כוכבים"
-
-#: src/translations.h:155
-msgid "Constellation Lines"
-msgstr "קווי קבוצות כוכבים"
-
-#: src/translations.h:156
-msgid "Constellation Names"
-msgstr "שמות קבוצות כוכבים"
-
-#: src/gui/StelGui.cpp:100
-msgid "Constellation art"
-msgstr "אומנות קבוצות כוכבים"
-
-#: src/gui/StelGui.cpp:102
-msgid "Constellation boundaries"
-msgstr "גבולות קבוצות כוכבים"
-
-#: src/gui/StelGui.cpp:101
-msgid "Constellation labels"
-msgstr "שמות קבוצות כוכבים"
-
-#: src/gui/StelGui.cpp:99
-msgid "Constellation lines"
-msgstr "קווי קבוצות כוכבים"
-
-#: src/ui_viewDialog.h:1038
-msgid "Constellations"
-msgstr "קבוצות כוכבים"
-
-#: src/gui/ConfigurationDialog.cpp:515 src/gui/ViewDialog.cpp:347
-msgid "Contact"
-msgstr "צור קשר"
-
-#: src/ui_configurationDialog.h:782
-msgid "Control"
-msgstr "בקרה"
-
-#: src/translations.h:180
-msgid "Correct for light travel time: "
-msgstr "תיקון עבור זמן מסע של אור: "
-
-#: src/ui_locationDialogGui.h:409
-msgid "Country:"
-msgstr "ארץ:"
-
-#: src/ui_locationDialogGui.h:391
-msgid "Current location information"
-msgstr "מידע על המיקום הנוכחי"
-
-#: src/translations.h:179
-msgid "Cursor Timeout: "
-msgstr "גבול זמן לסמן: "
-
-#: src/core/StelProjectorClasses.cpp:223
-msgid "Cylinder"
-msgstr "גליל"
-
-#: src/translations.h:143
-msgid "Date Display Format: "
-msgstr "פורמט תאריך: "
-
-#: src/gui/StelGui.cpp:140 src/ui_dateTimeDialogGui.h:294
-msgid "Date and Time"
-msgstr "תאריך ושעה"
-
-#: src/gui/StelGui.cpp:134
-msgid "Date/time window"
-msgstr "חלון תאריך/זמן"
-
-#: src/translations.h:135
-msgid "Day keys: "
-msgstr "מקשי יום: "
-
-#: src/gui/StelGui.cpp:144
-msgid "Decrease time speed"
-msgstr "האט את מהירות הזמן"
-
-#: src/gui/StelGui.cpp:147
-msgid "Decrease time speed (a little)"
-msgstr "האט את מהירות הזמן (מעט)"
-
-#: src/ui_configurationDialog.h:764
-msgid "Default options"
-msgstr "אפשרויות ברירת מחדל"
-
-#: src/translations.h:39
-msgid "Deimos"
-msgstr "דיימוס"
-
-#: src/ui_locationDialogGui.h:393
-msgid "Delete"
-msgstr "מחק"
-
-#: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
-#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
-#, qt-format
-msgid "Developer: %1"
-msgstr "מפתח: %1"
-
-#: src/gui/HelpDialog.cpp:294
-msgid "Developers"
-msgstr "מפתחים"
-
-#: src/ui_viewDialog.h:1006
-msgid "Dim faint stars when a very bright object is visible"
-msgstr "עמעם כוכבים קלושים כאשר עצם בהיר במיוחד ניראה"
-
-#: src/translations.h:54
-msgid "Dione"
-msgstr "דיון"
-
-#: src/ui_configurationDialog.h:830
-msgid "Disc viewport"
-msgstr ""
-
-#: src/gui/StelGui.cpp:98
-msgid "Display Options"
-msgstr "אפשרויות תצוגה"
-
-#: src/ui_configurationDialog.h:753
-msgid "Display all information available"
-msgstr "הצג את כל המידע הזמין"
-
-#: src/ui_configurationDialog.h:757
-msgid "Display less information"
-msgstr "הצג פחות מידע"
-
-#: src/ui_configurationDialog.h:761
-msgid "Display no information"
-msgstr "אל תציג מידע"
-
-#: plugins/CompassMarks/src/CompassMarks.cpp:60
-msgid "Displays compass bearing marks along the horizon"
-msgstr "תצוגת כיווני מצפן באופק"
-
-#: src/core/modules/StarWrapper.cpp:124
-#, qt-format
-msgid "Distance: %1 Light Years"
-msgstr "מרחק: %1 שנות-אור"
-
-#: src/core/modules/Planet.cpp:132
-#, no-c-format, qt-format
-msgid "Distance: %1AU"
-msgstr "מרחק: %1 י\"א"
-
-#: src/gui/HelpDialog.cpp:296
-#, qt-format
-msgid "Doc author/developer: %1"
-msgstr "מחבר מסמך/מפתח: %1"
-
-#: src/gui/ConfigurationDialog.cpp:678
-#, qt-format
-msgid ""
-"Download size: %1MB\n"
-"Star count: %2 Million\n"
-"Magnitude range: %3 - %4"
-msgstr ""
-"גודל הורדה: %1 מ\"ב\n"
-"מספר כוכבים: %2 מיליונים\n"
-"טווח מגניטודה(בהירות): %3 - %4"
-
-#: src/ui_configurationDialog.h:844
-msgid "Download this file to view even more stars"
-msgstr "הורד קובץ זה"
-
-#: src/gui/ConfigurationDialog.cpp:730
-#, qt-format
-msgid ""
-"Downloading %1...\n"
-"(You can close this window.)"
-msgstr ""
-"מוריד %1...\n"
-"(ניתן לסגור חלון זה.)"
-
-#: src/ui_viewDialog.h:1008
-msgid "Dynamic eye adaptation"
-msgstr "הסתגלות עין דינמית"
-
-#: src/translations.h:99
-msgid "E"
-msgstr "מז'"
-
-#: src/translations.h:36
-msgid "Earth"
-msgstr "ארץ"
-
-#: src/core/modules/GridLinesMgr.cpp:520
-msgid "Ecliptic"
-msgstr "קו המלקה"
-
-#: src/translations.h:167
-msgid "Ecliptic Line"
-msgstr "קו המילקה"
-
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1036
-msgid "Ecliptic line"
-msgstr "קו המילקה"
-
-#: src/translations.h:124
-msgid "Effects "
-msgstr "אפקטים "
-
-#: src/translations.h:105
-msgid "Egyptian"
-msgstr "מצרית"
-
-#: src/ui_configurationDialog.h:786
-msgid "Enable keyboard navigation"
-msgstr "אפשר ניווט באמצעות מקלדת"
-
-#: src/ui_configurationDialog.h:790
-msgid "Enable mouse navigation"
-msgstr "אפשר ניווט באמצעות עכבר"
-
-#: src/translations.h:52
-msgid "Enceladus"
-msgstr "אנקלדוס"
-
-#: src/ui_locationDialogGui.h:405
-msgid "Enter the altitude in meter"
-msgstr "הכנס גובה במטרים"
-
-#: src/core/StelProjectorClasses.cpp:63
-msgid "Equal Area"
-msgstr "שוות שטח"
-
-#: src/core/modules/GridLinesMgr.cpp:524
-msgid "Equator"
-msgstr "קו המשווה"
-
-#: src/translations.h:166
-msgid "Equator Line"
-msgstr "קו המשווה"
-
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1034
-msgid "Equator line"
-msgstr "קו המשווה"
-
-#: src/translations.h:165
-msgid "Equatorial Grid"
-msgstr "רשת משוונית"
-
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1032
-msgid "Equatorial J2000 grid"
-msgstr "רשת משוונית J2000"
-
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1031
-msgid "Equatorial grid"
-msgstr "רשת משוונית"
-
-#: src/translations.h:69
-msgid "Eris"
-msgstr "אריס"
-
-#. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:91
-msgid "Eros"
-msgstr "ארוס"
-
-#: src/gui/ConfigurationDialog.cpp:725 src/gui/ConfigurationDialog.cpp:759
-#, qt-format
-msgid ""
-"Error downloading %1:\n"
-"%2"
-msgstr ""
-"שגיאת הורדה %1:\n"
-"%2"
-
-#: src/gui/ConfigurationDialog.cpp:814
-#, qt-format
-msgid ""
-"Error downloading %1:\n"
-"File is corrupted."
-msgstr ""
-"שגיאה בהורדת %1:\n"
-"הקובץ פגום."
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:142
-#: src/gui/AddRemoveLandscapesDialog.cpp:166
-#: src/gui/AddRemoveLandscapesDialog.cpp:215
-#: src/gui/AddRemoveLandscapesDialog.cpp:221
-#: src/gui/AddRemoveLandscapesDialog.cpp:229
-#: src/gui/AddRemoveLandscapesDialog.cpp:239
-msgid "Error!"
-msgstr "שגיאה!"
-
-#: src/translations.h:47
-msgid "Europa"
-msgstr "אירופה"
-
-#: src/gui/ViewDialog.cpp:478
-msgid "Exceptional Leonid rate"
-msgstr "קצב ליאונידים חריג"
-
-#: src/ui_searchDialogGui.h:440 src/ui_searchDialogGui.h:441
-msgid "Find Object"
-msgstr "מצא עצם"
-
-#: src/gui/ConfigurationDialog.cpp:667
-msgid "Finished downloading all star catalogs!"
-msgstr "הורדת כל קטלוגי הכוכבים הסתיימה!"
-
-#: src/gui/ConfigurationDialog.cpp:687
-msgid ""
-"Finished downloading new star catalogs!\n"
-"Restart Stellarium to display them."
-msgstr ""
-"סתיימה הורדת קטלוגי כוכבים חדשים!\n"
-"אתחל את סטלריום כדי להציגם."
-
-#: src/core/StelProjectorClasses.cpp:145
-msgid "Fish-eye"
-msgstr "עין-דג"
-
-#: src/gui/StelGui.cpp:126
-msgid "Flip scene horizontally"
-msgstr "הפוך סצנה אופקית"
-
-#: src/gui/StelGui.cpp:127
-msgid "Flip scene vertically"
-msgstr "הפוך סצנה אנכית"
-
-#. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:79
-msgid "Flora"
-msgstr "פלורה"
-
-#: src/gui/StelGui.cpp:115
-msgid "Fog"
-msgstr "ערפל"
-
-#: src/gui/StelGui.cpp:125
-msgid "Full-screen mode"
-msgstr "מצב מסך מלא"
-
-#: src/gui/HelpDialog.cpp:172
-msgid "Further Reading"
-msgstr "קריאה נוספת"
-
-#: src/gui/StelGui.cpp:107
-msgid "Galactic grid"
-msgstr "רשת גלקטית"
-
-#: src/core/modules/Nebula.cpp:269
-msgid "Galaxy"
-msgstr "גלקסיה"
-
-#: src/translations.h:48
-msgid "Ganymede"
-msgstr "גנימד"
-
-#: src/translations.h:121
-msgid "General "
-msgstr "כללי "
-
-#: src/gui/ConfigurationDialog.cpp:676
-#, qt-format
-msgid "Get catalog %1 of %2"
-msgstr "מוריד קטלוג %1 מתוך %2"
-
-#: src/ui_configurationDialog.h:843
-msgid "Get catalog x of y"
-msgstr "הורד קטלוג x מתוך y"
-
-#: src/core/modules/Nebula.cpp:275
-msgid "Globular cluster"
-msgstr "צביר כדורי"
-
-#: src/gui/HelpDialog.cpp:297
-#, qt-format
-msgid "Graphic/other designer: %1"
-msgstr "מעצב גרפי/אחר: %1"
-
-#: src/ui_configurationDialog.h:822
-msgid "Gravity labels"
-msgstr "תוויות גרביטציה"
-
-#: src/gui/StelGui.cpp:113
-msgid "Ground"
-msgstr "אדמה"
-
-#: src/core/StelProjectorClasses.cpp:182
-msgid "Hammer-Aitoff"
-msgstr "האמר-אייטוף"
-
-#. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:75
-msgid "Hebe"
-msgstr "הבי"
-
-#. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:93
-msgid "Hektor"
-msgstr "הקטור"
-
-#: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
-msgid "Help"
-msgstr "עזרה"
-
-#: src/gui/StelGui.cpp:130
-msgid "Help window"
-msgstr "חלון עזרה"
-
-#: src/ui_configurationDialog.h:832
-msgid "Hide other constellations when you click one"
-msgstr "הסתר קבוצות כוכבים אחרות כאשר לוחצים על אחת"
-
-#: src/ui_configurationDialog.h:807
-msgid "Hides the mouse cursor when inactive"
-msgstr "הסתר את סמן העכבר כאשר הוא לא פעיל"
-
-#: src/gui/ViewDialog.cpp:481
-msgid "Highest rate ever (1966 Leonids)"
-msgstr "הקצב הגבוה ביותר אי פעם (הליאונידים של 1966)"
-
-#: src/core/StelObject.cpp:80
-#, qt-format
-msgid "Hour angle/DE: %1/%2"
-msgstr "זווית שעה/נטייה: %1/%2"
-
-#: src/ui_viewDialog.h:1023
-msgid "Hourly zenith rate:"
-msgstr ""
-
-#. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:83
-msgid "Hygiea"
-msgstr ""
-
-#: src/translations.h:57
-msgid "Hyperion"
-msgstr "היפריון"
-
-#: src/translations.h:58
-msgid "Iapetus"
-msgstr "יאפטוס"
-
-#: src/core/StelProjectorClasses.cpp:150
-msgid ""
-"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
-"lines become curves when they appear a large angular distance from the "
-"centre of the field of view (like the distortions seen with very wide angle "
-"camera lenses)."
-msgstr ""
-"בההיטל עין-דג, או <i>היטל אזימוטלי שווה-מרחק</i>, קווים ישרים הופכים לעקומות "
-"ככל שנראה שהמרחק הזוויתי שלהם ממרכז שדה הראייה גדל (בדומה לעיוותים שרואים "
-"בעדשת מצלמה המיועדת לזווית רחבה)."
-
-#: src/gui/StelGui.cpp:145
-msgid "Increase time speed"
-msgstr "האץ את מהירות הזמן"
-
-#: src/gui/StelGui.cpp:148
-msgid "Increase time speed (a little)"
-msgstr "האץ את מהירות הזמן (מעט)"
-
-#: src/ui_addRemoveLandscapesDialog.h:269
-msgid "Install a new landscape from a ZIP archive..."
-msgstr "התקת נוף חדש מקובץ ZIP"
-
-#: src/translations.h:106
-msgid "Inuit"
-msgstr "אינואטים"
-
-#: src/ui_configurationDialog.h:838
-msgid "Invert colors"
-msgstr "היפוך צבעים"
-
-#: src/translations.h:46
-msgid "Io"
-msgstr "איו"
-
-#. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:77
-msgid "Iris"
-msgstr "איריס"
-
-#: src/translations.h:43
-msgid "Juno"
-msgstr "יונו"
-
-#: src/translations.h:45
-msgid "Jupiter"
-msgstr "צדק"
-
-#: src/ui_searchDialogGui.h:446
-msgid "Keyboard for Greek input"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:164
-msgid "Keys"
-msgstr "מקשים"
-
-#: src/translations.h:107
-msgid "Korean"
-msgstr "קוראנית"
-
-#: src/ui_viewDialog.h:1018
-msgid "Labels and Markers"
-msgstr "תוויות וסימונים"
-
-#: src/translations.h:108
-msgid "Lakota"
-msgstr "לקוטה"
-
-#: src/ui_viewDialog.h:996
-msgid "Landscape"
-msgstr "נוף"
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:127
-#, qt-format
-msgid "Landscape \"%1\" has been installed successfully."
-msgstr ""
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:154
-#, qt-format
-msgid "Landscape \"%1\" has been removed successfully."
-msgstr ""
-
-#: src/translations.h:172
-msgid "Landscape: "
-msgstr "נוף: "
-
-#: src/ui_locationDialogGui.h:395
-msgid "Latitude:"
-msgstr "קו רוחב:"
-
-#: src/translations.h:128
-msgid "Latitude: "
-msgstr "קו רוחב: "
-
-#: src/gui/HelpDialog.cpp:56
-msgid "Left click"
-msgstr "לחיצה על כפתור שמאלי"
-
-#: src/gui/ConfigurationDialog.cpp:588
-msgid "License"
-msgstr "רשיון"
-
-#: src/translations.h:171
-msgid "Light Pollution Luminance: "
-msgstr "עוצמת זיהום אור: "
-
-#: src/ui_viewDialog.h:1017
-msgid "Light pollution: "
-msgstr "זיהום אור: "
-
-#: src/translations.h:153
-msgid "Limiting Magnitude: "
-msgstr "בהירות מגבילה: "
-
-#: src/translations.h:188
-msgid "Load Default Configuration: "
-msgstr "טען קונפיגורציית ברירת מחדל: "
-
-#: src/ui_configurationDialog.h:866
-msgid "Load at startup"
-msgstr "טען בעליית התוכנה"
-
-#: src/translations.h:182
-msgid "Local Script: "
-msgstr "סקריפט מקומי: "
-
-#: src/ui_locationDialogGui.h:387
-msgid "Location"
-msgstr "מיקום"
-
-#: src/gui/StelGui.cpp:135
-msgid "Location window"
-msgstr "חלון מיקום"
-
-#: src/core/modules/LandscapeMgr.cpp:453
-msgid "Location: "
-msgstr "מיקום: ‏ "
-
-#: src/ui_helpDialogGui.h:269
-msgid "Log"
-msgstr "יומן"
-
-#: src/ui_locationDialogGui.h:399
-msgid "Longitude:"
-msgstr "קו אורך:"
-
-#: src/translations.h:129
-msgid "Longitude: "
-msgstr "קו אורך: "
-
-#: src/translations.h:175
-msgid "Magnitude Scaling Multiplier: "
-msgstr "מכפיל סקאלת בהירות "
-
-#: src/translations.h:150
-msgid "Magnitude Sizing Multiplier: "
-msgstr "מכפיל מגניטודה: "
-
-#: src/core/modules/Nebula.cpp:95 src/core/modules/Planet.cpp:122
+msgid "Type: <b>%1</b>"
+msgstr "סוג: <b>%1</b>"
+
+#: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:120
+#: plugins/Supernovas/src/Supernova.cpp:98
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "מגניטודה(בהירות): <b>%1</b>"
 
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:110
+#: src/core/modules/Nebula.cpp:104
+#, qt-format
+msgid "Size: %1"
+msgstr "גודל: %1"
+
+#: src/core/modules/Nebula.cpp:284
+msgid "Galaxy"
+msgstr "גלקסיה"
+
+#: src/core/modules/Nebula.cpp:287
+msgid "Open cluster"
+msgstr "צביר פתוח"
+
+#: src/core/modules/Nebula.cpp:290
+msgid "Globular cluster"
+msgstr "צביר כדורי"
+
+#: src/core/modules/Nebula.cpp:293
+msgid "Nebula"
+msgstr "ערפילית"
+
+#: src/core/modules/Nebula.cpp:296
+msgid "Planetary nebula"
+msgstr "ערפילית פלנטרית"
+
+#: src/core/modules/Nebula.cpp:299
+msgid "Cluster associated with nebulosity"
+msgstr "צבירים הקשורים לעירפול"
+
+#: src/core/modules/Nebula.cpp:302
+msgid "Unknown"
+msgstr "לא ידוע"
+
+#: src/core/modules/Nebula.cpp:305
+msgid "Undocumented type"
+msgstr "סוג לא מתועד"
+
+#: src/core/modules/Planet.cpp:123 src/core/modules/StarWrapper.cpp:112
+#, qt-format
+msgid "Absolute Magnitude: %1"
+msgstr "מגניטודה(בהירות) מוחלטת: %1"
+
+#: src/core/modules/Planet.cpp:136
+#, qt-format
+msgid "Ecliptic Geocentric (of date): %1/%2"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:137
+#, qt-format
+msgid "Obliquity (of date): %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:143
+#, no-c-format, qt-format
+msgid "Distance: %1AU"
+msgstr "מרחק: %1 י\"א"
+
+#: src/core/modules/Planet.cpp:147
+#, qt-format
+msgid "Apparent diameter: %1"
+msgstr "קוטר נראה: %1"
+
+#: src/core/modules/StarWrapper.cpp:51 src/core/modules/StarWrapper.cpp:108
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
 msgstr "מגניטודה (בהירות): <b>%1</b> (B-V: %2)"
 
-#: src/ui_configurationDialog.h:872
-msgid "Main"
-msgstr "ראשי"
+#: src/core/modules/StarWrapper.cpp:118
+#, qt-format
+msgid "Spectral Type: %1"
+msgstr "סיווג ספקטרלי: %1"
 
-#: src/translations.h:173
-msgid "Manual zoom: "
-msgstr "זום ידני: "
+#: src/core/modules/StarWrapper.cpp:122
+#: plugins/Supernovas/src/Supernova.cpp:107
+#, qt-format
+msgid "Distance: %1 Light Years"
+msgstr "מרחק: %1 שנות-אור"
 
-#: src/translations.h:109
-msgid "Maori"
-msgstr "מאורית"
-
-#: src/ui_viewDialog.h:994
-msgid "Markings"
-msgstr "סימונים"
-
-#: src/translations.h:38
-msgid "Mars"
-msgstr "מאדים"
-
-#: src/ui_configurationDialog.h:828
-msgid "Mask out everything outside a central circle in the main view"
-msgstr "הסתר כל מה שמחוץ למעגל המרכזי בתצוגה הראשית"
+#: src/core/modules/StarWrapper.cpp:125
+#, qt-format
+msgid "Parallax: %1\""
+msgstr "פרלקסה: \"%1"
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
 msgstr "שדה ראייה מקסימילי: "
-
-#: src/translations.h:151
-msgid "Maximum Magnitude to Label: "
-msgstr "מגניטודת כוכב מירבית לסימון: "
-
-#: src/translations.h:177
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "עוצמת ערפילית מירבית לסימון: "
-
-#: src/core/StelProjectorClasses.cpp:270
-msgid "Mercator"
-msgstr "מרקטור"
-
-#: src/translations.h:34
-msgid "Mercury"
-msgstr "כוכב חמה"
-
-#: src/core/modules/GridLinesMgr.cpp:516
-msgid "Meridian"
-msgstr "מרידיאן"
-
-#: src/translations.h:163
-msgid "Meridian Line"
-msgstr "קו המרידיאן"
-
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1035
-msgid "Meridian line"
-msgstr "קו המרידיאן"
-
-#. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:81
-msgid "Metis"
-msgstr "מטיס"
-
-#: src/translations.h:176
-msgid "Milky Way intensity: "
-msgstr "עוצמת הארה של שביל החלב: "
-
-#: src/translations.h:51
-msgid "Mimas"
-msgstr "מימס"
-
-#: src/translations.h:62
-msgid "Miranda"
-msgstr "מירנדה"
-
-#: src/gui/HelpDialog.cpp:234 src/gui/HelpDialog.cpp:326
-#: src/gui/HelpDialog.cpp:328 src/gui/StelGui.cpp:169
-msgid "Miscellaneous"
-msgstr "שונות"
-
-#: src/translations.h:37
-msgid "Moon"
-msgstr "ירח"
-
-#: src/ui_configurationDialog.h:809
-msgid "Mouse cursor timeout (seconds):"
-msgstr "השהיית סמן עכבר (שניות):"
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:173
-msgid "Move a telescope to a given set of coordinates"
-msgstr ""
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:155
-#, qt-format
-msgid "Move telescope #%1 to selected object"
-msgstr ""
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:162
-#, qt-format
-msgid "Move telescope #%1 to the point currently in the center of the screen"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:162
-msgid "Movement and Selection"
-msgstr "תנועה ובחירה"
-
-#: src/translations.h:97
-msgid "N"
-msgstr "צ'"
-
-#: src/ui_locationDialogGui.h:408
-msgid "Name/City:"
-msgstr "שם/עיר:"
-
-#: src/translations.h:110
-msgid "Navajo"
-msgstr "נבאחו"
-
-#: src/ui_configurationDialog.h:874
-msgid "Navigation"
-msgstr "ניווט"
-
-#: src/core/modules/Nebula.cpp:278
-msgid "Nebula"
-msgstr "ערפילית"
-
-#: src/translations.h:169
-msgid "Nebula Circles"
-msgstr "מעגלי ערפיליות"
-
-#: src/translations.h:168
-msgid "Nebula Names"
-msgstr "שמות ערפיליות"
-
-#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1020
-msgid "Nebulas"
-msgstr "ערפיליות"
-
-#: src/gui/StelGui.cpp:118
-msgid "Nebulas background images"
-msgstr "תמונות רקע של ערפיליות"
-
-#: src/translations.h:60
-msgid "Neptune"
-msgstr "נפטון"
-
-#: src/gui/LocationDialog.cpp:332
-msgid "New Location"
-msgstr "מיקום חדש"
-
-#: src/gui/StelGui.cpp:124
-msgid "Night mode"
-msgstr "מצב לילה"
-
-#: src/gui/ViewDialog.cpp:401
-msgid "No description"
-msgstr "אין תיאור"
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:141
-#: src/gui/AddRemoveLandscapesDialog.cpp:211
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-#: src/gui/AddRemoveLandscapesDialog.cpp:228
-msgid "No landscape was installed."
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:469
-msgid "No shooting stars"
-msgstr "ללא כוכבים נופלים"
-
-#: src/ui_configurationDialog.h:763
-msgid "None"
-msgstr "אף אחד"
-
-#: src/gui/ViewDialog.cpp:472
-msgid "Normal rate"
-msgstr "קצב נורמלי"
-
-#: src/translations.h:111
-msgid "Norse"
-msgstr "נורדית"
-
-#: src/gui/HelpDialog.cpp:300
-#, qt-format
-msgid "OSX Developer: %1"
-msgstr "מפתח OSX: %1"
-
-#: src/translations.h:66
-msgid "Oberon"
-msgstr "אוברון"
-
-#: src/translations.h:174
-msgid "Object Sizing Rule: "
-msgstr "כלל להגדלת עצם: "
-
-#: plugins/Oculars/src/Oculars.cpp:943
-msgid "Ocular view"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:76
-msgid "Oculars"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:965
-msgid "Oculars popup menu"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:272
-msgid "Open cluster"
-msgstr "צביר פתוח"
-
-#: src/ui_viewDialog.h:1046 src/ui_viewDialog.h:1051 src/ui_viewDialog.h:1053
-#: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
-msgid "Options"
-msgstr "אפשרויות"
-
-#: src/core/StelProjectorClasses.cpp:322
-msgid "Orthographic"
-msgstr "אורתוגרפי"
-
-#: src/core/StelProjectorClasses.cpp:327
-msgid ""
-"Orthographic projection is related to perspective projection, but the point "
-"of perspective is set to an infinite distance."
-msgstr ""
-"שיטת ההיטל האורתוגרפי קשורה להיטל פרספקטיבי, אך נקודת הפרספקטיבה נמצאת במרחק "
-"אינסופי."
-
-#: src/ui_configurationDialog.h:805
-msgid "Other"
-msgstr "אחר"
-
-#: src/ui_configurationDialog.h:803
-msgid "Other:"
-msgstr "אחר:"
-
-#: src/gui/HelpDialog.cpp:54
-msgid "Page Up/Down"
-msgstr "מקש פייג' אפ / פייג' דאון"
-
-#: src/translations.h:42
-msgid "Pallas"
-msgstr "פאלאס"
-
-#: src/gui/HelpDialog.cpp:62
-msgid "Pan view around the sky"
-msgstr "סרוק לאורך השמיים"
-
-#: src/core/modules/StarWrapper.cpp:127
-#, qt-format
-msgid "Parallax: %1\""
-msgstr "פרלקסה: \"%1"
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
@@ -1217,547 +160,17 @@ msgstr ""
 "היטל פרספקטיבה שומר על האופק כקו ישר. השם המתמטי לשיטת היטל זו הוא היטל "
 "גנומני"
 
-#: src/translations.h:40
-msgid "Phobos"
-msgstr "פובוס"
+#: src/core/StelProjectorClasses.cpp:63
+msgid "Equal Area"
+msgstr "שוות שטח"
 
-#: src/translations.h:59
-msgid "Phoebe"
-msgstr "פיבי"
-
-#: src/translations.h:160
-msgid "Planet Names"
-msgstr "שמות כוכבי לכת"
-
-#: src/translations.h:161
-msgid "Planet Orbits"
-msgstr "מסלולי כוכבי לכת"
-
-#: src/translations.h:162
-msgid "Planet Trails"
-msgstr "עקבות כוכבי לכת"
-
-#: src/gui/StelGui.cpp:121
-msgid "Planet orbits"
-msgstr "מסלולי כוכבי הלכת"
-
-#: src/gui/StelGui.cpp:122
-msgid "Planet trails"
-msgstr "עקבות כוכבי לכת"
-
-#: src/ui_locationDialogGui.h:410
-msgid "Planet:"
-msgstr "כוכב לכת:"
-
-#: src/core/modules/LandscapeMgr.cpp:461
-msgid "Planet: "
-msgstr "כוכב לכת "
-
-#: src/ui_configurationDialog.h:814
-msgid "Planetarium options"
-msgstr "אפשרויות פלנטריום"
-
-#: src/core/modules/Nebula.cpp:281
-msgid "Planetary nebula"
-msgstr "ערפילית פלנטרית"
-
-#: src/ui_viewDialog.h:1021
-msgid "Planets"
-msgstr "כוכבי לכת"
-
-#: src/ui_viewDialog.h:1009
-msgid "Planets and satellites"
-msgstr "כוכבי לכת וירחים"
-
-#: src/gui/StelGui.cpp:120
-msgid "Planets labels"
-msgstr "שמות כוכבי הלכת"
-
-#. TRANSLATORS: Title of a group of key bindings in the Help window
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:121
-#: plugins/CompassMarks/src/CompassMarks.cpp:121
-#: plugins/Oculars/src/Oculars.cpp:931 plugins/Oculars/src/Oculars.cpp:945
-#: plugins/Satellites/src/Satellites.cpp:124
-msgid "Plugin Key Bindings"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:82
+#: src/core/StelProjectorClasses.cpp:68
 msgid ""
-"Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
-"planetarium systems"
+"The full name of this projection method is, <i>Lambert azimuthal equal-area "
+"projection</i>. It preserves the area but not the angle."
 msgstr ""
-
-#: src/ui_configurationDialog.h:880
-msgid "Plugins"
-msgstr "תוספים"
-
-#: src/translations.h:67
-msgid "Pluto"
-msgstr "פלוטו"
-
-#: src/translations.h:112
-msgid "Polynesian"
-msgstr "פולינזית"
-
-#: plugins/Satellites/src/Satellites.cpp:71
-msgid ""
-"Prediction of artificial satellite positions in Earth orbit based on NORAD "
-"TLE data"
-msgstr ""
-
-#: src/translations.h:138
-msgid "Preset Sky Time: "
-msgstr "זמן שמיים קבוע מראש: "
-
-#: src/translations.h:141
-msgid "Preset Time"
-msgstr "זמן קבוע מראש"
-
-#: src/ui_configurationDialog.h:750
-msgid "Program language"
-msgstr "שפת תוכנה"
-
-#: src/gui/HelpDialog.cpp:295
-#, qt-format
-msgid "Project coordinator & lead developer: %1"
-msgstr "מתאם פרויקט ומפתח ראשי: %1"
-
-#: src/ui_viewDialog.h:1044
-msgid "Projection"
-msgstr "היטל"
-
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:60
-msgid "Provides an angle measurement tool"
-msgstr ""
-
-#: src/gui/StelGui.cpp:171
-msgid "Quit"
-msgstr "יציאה"
-
-#: src/core/StelObject.cpp:65
-#, qt-format
-msgid "RA/DE (J2000): %1/%2"
-msgstr "RA/DE (J2000): %1/%2"
-
-#: src/core/StelObject.cpp:72
-#, qt-format
-msgid "RA/DE (of date): %1/%2"
-msgstr "RA/DE (של היום): %1/%2"
-
-#: src/ui_searchDialogGui.h:520
-msgid "RA/Dec (J2000):"
-msgstr "עלייה ישרה/נטייה (ינואר2000):"
-
-#: src/ui_helpDialogGui.h:272
-msgid "Refresh"
-msgstr "רענן"
-
-#: src/ui_viewDialog.h:1003
-msgid "Relative scale:"
-msgstr "קנה מידה יחסי:"
-
-#: src/ui_addRemoveLandscapesDialog.h:275
-msgid "Remove"
-msgstr "הסרה"
-
-#: src/ui_addRemoveLandscapesDialog.h:273
-msgid "Remove an installed landscape"
-msgstr "הסרת נוף מותקן"
-
-#: src/ui_configurationDialog.h:847
-msgid "Restart the download"
-msgstr "התחל שנית את ההורדה"
-
-#: src/ui_configurationDialog.h:772
-msgid "Restore defaults"
-msgstr "שחזור ברירת מחדל"
-
-#: src/ui_configurationDialog.h:770
-msgid "Restore the default settings that came with Stellarium"
-msgstr "שחזר את הגדרות ברירת המחדל לאלו שהגיעו עם סטלריום"
-
-#: src/ui_configurationDialog.h:773
-msgid ""
-"Restoring default settings requires a restart of Stellarium. Saving all the "
-"current options includes the current FOV and direction of view for use at "
-"next startup."
-msgstr ""
-"שחזור הגדרות ברירת מחדל, דורש איתחול של סטלריום. שומר את כל האפשרויות "
-"הנוכחיות, כולל את שדה הראייה הנוכחי וכיוון הסתכלות להפעלה הבאה."
-
-#: src/ui_configurationDialog.h:849
-msgid "Retry"
-msgstr "נסה שנית"
-
-#: src/translations.h:55
-msgid "Rhea"
-msgstr "ריאה"
-
-#: src/gui/HelpDialog.cpp:57
-msgid "Right click"
-msgstr "לחיצה על כפתור ימני"
-
-#: src/ui_configurationDialog.h:858
-msgid "Run the selected script"
-msgstr "הרץ את הסקריפט הנבחר"
-
-#: src/gui/ConfigurationDialog.cpp:617
-msgid "Running script: "
-msgstr "סקריפט פעיל: "
-
-#: src/gui/ConfigurationDialog.cpp:624
-msgid "Running script: [none]"
-msgstr "סקריפט רץ: [אין]"
-
-#: src/translations.h:98
-msgid "S"
-msgstr "ד'"
-
-#: src/translations.h:113
-msgid "Sami"
-msgstr ""
-
-#: plugins/Satellites/src/Satellites.cpp:127
-msgid "Satellite hints"
-msgstr ""
-
-#: plugins/Satellites/src/Satellites.cpp:129
-msgid "Satellite labels"
-msgstr "שמות לווינים"
-
-#: plugins/Satellites/src/Satellites.cpp:68
-msgid "Satellites"
-msgstr "לווינים"
-
-#: plugins/Satellites/src/Satellites.cpp:126
-msgid "Satellites configuration window"
-msgstr ""
-
-#: src/translations.h:50
-msgid "Saturn"
-msgstr "שבתאי"
-
-#: src/translations.h:189
-msgid "Save Current Configuration as Default: "
-msgstr "שמור קונפיגורציה נוכחית כברירת מחדל: "
-
-#: src/gui/StelGui.cpp:172
-msgid "Save screenshot"
-msgstr "שמור תמונת מסך"
-
-#: src/ui_configurationDialog.h:768
-msgid "Save settings"
-msgstr "שמור הגדרות"
-
-#: src/ui_configurationDialog.h:766
-msgid ""
-"Save the settings you've changed this session to be the same the next time "
-"you start Stellarium"
-msgstr ""
-"שמור את ההגדרות ששינית בהפעלה הזו כך שיהיו זהים בפעם הבאה שתפעיל/י את סטלריום"
-
-#: src/ui_viewDialog.h:1014
-msgid "Scale Moon"
-msgstr ""
-
-#: src/ui_configurationDialog.h:836
-msgid "Screenshot Directory"
-msgstr "תיקיית תמונות מסך"
-
-#: src/ui_configurationDialog.h:835
-msgid "Screenshots"
-msgstr "תמונות מסך"
-
-#: src/gui/StelGui.cpp:137
-msgid "Script console window"
-msgstr "חלון קונסולת סקריפט"
-
-#: src/ui_configurationDialog.h:878
-msgid "Scripts"
-msgstr "סקריפטים"
-
-#: src/translations.h:125
-msgid "Scripts "
-msgstr "סקריפטים "
-
-#: src/gui/StelGui.cpp:132
-msgid "Search window"
-msgstr "חלון חיפוש"
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:112
-msgid "Select a ZIP archive that contains a Stellarium landscape"
-msgstr "בחר קובץ ZIP שמכיל את הנוף עבור סטלריום"
-
-#: src/translations.h:186
-msgid "Select and exit to run."
-msgstr "בחר וצא להרצה"
-
-#: src/gui/HelpDialog.cpp:65
-msgid "Select object"
-msgstr "בחירת עצם"
-
-#: src/gui/ConfigurationDialog.cpp:297
-msgid "Select screenshot directory"
-msgstr "בחר תיקית תמונות מסך"
-
-#: src/ui_configurationDialog.h:834
-msgid "Select single constellation"
-msgstr "בחר קבוצת כוכבים יחידה"
-
-#: src/ui_configurationDialog.h:751
-msgid "Selected object information"
-msgstr "מידע על העצם הנבחר"
-
-#: src/translations.h:119
-msgid "Set Location "
-msgstr "קבע מיקום "
-
-#: src/translations.h:120
-msgid "Set Time "
-msgstr "קבע זמן "
-
-#: src/translations.h:134
-msgid "Set Time Zone: "
-msgstr "קבע אזור זמן: "
-
-#: src/translations.h:192
-msgid "Set UI Locale: "
-msgstr "קבע שפת ממשק: "
-
-#: src/gui/StelGui.cpp:167
-msgid "Set home planet to selected planet"
-msgstr "קבע את כוכב לכת הביתי ככוכב הלכת הנבחר"
-
-#: src/gui/StelGui.cpp:146
-msgid "Set normal time rate"
-msgstr "קבע קצב זמן למהירות נורמלית"
-
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:143
-msgid "Set the normal script execution rate"
-msgstr "קבע את קצב ביצוע הסקריפט לקצב נורמלי"
-
-#: src/gui/StelGui.cpp:149
-msgid "Set time rate to zero"
-msgstr "קבע את קצב הזמן לאפס"
-
-#: src/gui/StelGui.cpp:150
-msgid "Set time to now"
-msgstr "קבע את הזמן לעכשיו"
-
-#: src/ui_configurationDialog.h:797
-msgid ""
-"Sets the simulation time to the next instance of this time of day when "
-"Stellarium starts"
-msgstr "קבע את זמן ההדמייה למופע הבא של הזמן ביום כאשר מפעילים את סטלריום"
-
-#: src/ui_viewDialog.h:1022
-msgid "Shooting Stars"
-msgstr "כוכבים נופלים"
-
-#: src/ui_configurationDialog.h:759
-msgid "Short"
-msgstr "קצר"
-
-#: src/ui_viewDialog.h:1042
-msgid "Show art"
-msgstr "הצג אומנות"
-
-#: src/ui_viewDialog.h:1016
-msgid "Show atmosphere"
-msgstr "הראה אטמוספירה"
-
-#: src/ui_viewDialog.h:1041
-msgid "Show boundaries"
-msgstr "הצג גבולות"
-
-#: src/ui_configurationDialog.h:813
-msgid "Show flip buttons"
-msgstr "הצג כפתורי היפוך"
-
-#: src/ui_viewDialog.h:1048
-msgid "Show fog"
-msgstr "הצג ערפל"
-
-#: src/ui_viewDialog.h:1047
-msgid "Show ground"
-msgstr "הצג אדמה"
-
-#: src/ui_viewDialog.h:1040
-msgid "Show labels"
-msgstr "הצג שמות"
-
-#: src/ui_viewDialog.h:1039
-msgid "Show lines"
-msgstr "הצג קוים"
-
-#: src/ui_viewDialog.h:1011
-msgid "Show planet markers"
-msgstr "הצג סימוני כוכבי לכת"
-
-#: src/ui_viewDialog.h:1012
-msgid "Show planet orbits"
-msgstr "הצג מסלולי כוכבי לכת"
-
-#: src/ui_viewDialog.h:1010
-msgid "Show planets"
-msgstr "הצג כוכבי לכת"
-
-#: src/translations.h:148
-msgid "Show: "
-msgstr "הצג: "
-
-#: plugins/Oculars/src/Oculars.cpp:79
-msgid "Shows the sky as if looking through a telescope eyepiece"
-msgstr ""
-
-#: src/translations.h:190
-msgid "Shut Down: "
-msgstr "כיבוי: "
-
-#: src/translations.h:137
-msgid "Sidereal"
-msgstr "סידרי"
-
-#: src/ui_viewDialog.h:1013
-msgid "Simulate light speed"
-msgstr "דמה את מהירות האור"
-
-#. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:188
-#, qt-format
-msgid "Size on disk: %1 MiB"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:100
-#, qt-format
-msgid "Size: %1"
-msgstr "גודל: %1"
-
-#: src/ui_viewDialog.h:992
-msgid "Sky"
-msgstr "שמיים"
-
-#: src/translations.h:145
-msgid "Sky Culture: "
-msgstr "שמיים לפי תרבות: "
-
-#: src/translations.h:146
-msgid "Sky Language: "
-msgstr "שפת שמיים: "
-
-#: src/translations.h:139
-msgid "Sky Time At Start-up: "
-msgstr "זמן שמיים באתחול: "
-
-#: src/translations.h:133
-msgid "Sky Time: "
-msgstr "זמן שמיים: "
-
-#: src/gui/StelGui.cpp:133
-msgid "Sky and viewing options window"
-msgstr "חלון אפשרויות שמיים ותצוגה"
-
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:141
-msgid "Slow down the script execution rate"
-msgstr "מאיט את קצב ביצוע הסקריפט"
-
-#: src/translations.h:131
-msgid "Solar System Body: "
-msgstr "עצם במערכת שמש: "
-
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
-msgid "Solar System Editor"
-msgstr "עורך מערכת השמש"
-
-#: src/translations.h:70
-msgid "Solar System Observer"
-msgstr "צופה מערכת השמש"
-
-#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:285
-#: src/gui/StelGuiItems.cpp:640
-msgid "Space"
-msgstr "Space"
-
-#: src/core/modules/StarWrapper.cpp:120
-#, qt-format
-msgid "Spectral Type: %1"
-msgstr "סיווג ספקטרלי: %1"
-
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:142
-msgid "Speed up the script execution rate"
-msgstr "מאיץ את קצב ביצוע הסקריפט"
-
-#: src/ui_configurationDialog.h:818
-msgid "Spheric mirror distortion"
-msgstr "עיוותי מראה כדורית"
-
-#: src/ui_configurationDialog.h:816
-msgid ""
-"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
-"mirror for low-cost planetarium systems."
-msgstr ""
-"עיוותי מראה כדורית בשימוש כאשר מקרינים את סטלריום על מראה כדורית בעבור "
-"מערכות פלנטריום זולות."
-
-#: src/gui/ViewDialog.cpp:475
-msgid "Standard Perseids rate"
-msgstr "קצב פרסאידים סטנדרטי"
-
-#: src/translations.h:149
-msgid "Star Value Multiplier: "
-msgstr "מכפיל ערך כוכב: "
-
-#: src/ui_configurationDialog.h:839
-msgid "Star catalog updates"
-msgstr "קטלוג כוכבים מתעדכן"
-
-#: src/ui_viewDialog.h:998
-msgid "Starlore"
-msgstr "מורשת כוכבים"
-
-#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1001 src/ui_viewDialog.h:1019
-msgid "Stars"
-msgstr "כוכבים"
-
-#: src/translations.h:122
-msgid "Stars "
-msgstr "כוכבים "
-
-#: src/ui_configurationDialog.h:793
-msgid "Starts Stellarium at system clock date and time"
-msgstr "התחל את סטלריום עם תאריך וזמן המערכת"
-
-#: src/gui/ConfigurationDialog.cpp:463
-#, qt-format
-msgid "Startup FOV: %1%2"
-msgstr "שדה ראייה באיתחול: %2%1"
-
-#: src/ui_configurationDialog.h:777
-msgid "Startup FOV: XX"
-msgstr "שדה ראייה באתחול: XX"
-
-#: src/ui_configurationDialog.h:791
-msgid "Startup date and time"
-msgstr "תאריך ושעה בעת הפעלת התוכנה"
-
-#: src/gui/ConfigurationDialog.cpp:471
-#, qt-format
-msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr "כיוון הסתכלות בעת הפעלה אזימוט/גובה: %1/%2"
-
-#: src/ui_configurationDialog.h:781
-msgid "Startup direction of view: xxxx"
-msgstr "כיוון הסתכלות בהפעלה: xxx"
-
-#: src/gui/HelpDialog.cpp:163
-msgid "Stellarium Help"
-msgstr "עזרה של סטלריום"
-
-#. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:214
-#, qt-format
-msgid "Stellarium cannot open for reading or writing %1"
-msgstr ""
+"השם המלא של שיטת הטל זו היא <i>הטל אזימוטלי לאמברטיני שווה-שטח</i>. שיטה זו "
+"משמרת את גודל השטח אבל לא את הזווית"
 
 #: src/core/StelProjectorClasses.cpp:108
 msgid "Stereographic"
@@ -1773,71 +186,24 @@ msgstr ""
 "פלינספרי. שיטה זו משמרת את הזווית שבה קווים חוצים זה את זה אבל אינה משמרת את "
 "גודל השטח."
 
-#: src/ui_configurationDialog.h:862
-msgid "Stop a running script"
-msgstr "עצור סקריפט שרץ"
+#: src/core/StelProjectorClasses.cpp:145
+msgid "Fish-eye"
+msgstr "עין-דג"
 
-#: src/ui_configurationDialog.h:851
-msgid "Stop the download. You can always restart it later"
-msgstr "עצור את ההורדה. תוכל להמשיכה מאוחר יותר"
+#: src/core/StelProjectorClasses.cpp:150
+msgid ""
+"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
+"lines become curves when they appear a large angular distance from the "
+"centre of the field of view (like the distortions seen with very wide angle "
+"camera lenses)."
+msgstr ""
+"בההיטל עין-דג, או <i>היטל אזימוטלי שווה-מרחק</i>, קווים ישרים הופכים לעקומות "
+"ככל שנראה שהמרחק הזוויתי שלהם ממרכז שדה הראייה גדל (בדומה לעיוותים שרואים "
+"בעדשת מצלמה המיועדת לזווית רחבה)."
 
-#: src/gui/StelGui.cpp:158
-msgid "Subtract 1 sidereal day"
-msgstr "החסר יום כוכבי"
-
-#: src/gui/StelGui.cpp:160
-msgid "Subtract 1 sidereal week"
-msgstr "החסר שבוע כוכבי"
-
-#: src/gui/StelGui.cpp:154
-msgid "Subtract 1 solar day"
-msgstr "הורד יום שמשי אחד"
-
-#: src/gui/StelGui.cpp:152
-msgid "Subtract 1 solar hour"
-msgstr "הורד שעה שמשית אחת"
-
-#: src/gui/StelGui.cpp:156
-msgid "Subtract 1 solar week"
-msgstr "הורד שבוע שמשי אחד"
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:128
-#: src/gui/AddRemoveLandscapesDialog.cpp:155
-msgid "Success"
-msgstr "הצלחה"
-
-#: src/translations.h:33
-msgid "Sun"
-msgstr "שמש"
-
-#: src/gui/StelGui.cpp:170
-msgid "Switch between equatorial and azimuthal mount"
-msgstr "החלף בין כנה אזימוטלית לכנה משוונית"
-
-#: src/ui_addRemoveLandscapesDialog.h:270
-msgid "Switch to the new landscape after installation"
-msgstr "מעבר לנוף החדש לאחר ההתקנה"
-
-#: src/ui_configurationDialog.h:795
-msgid "System date and time"
-msgstr "תאריך וזמן המערכת"
-
-#: src/ui_configurationDialog.h:799
-msgid "System date at:"
-msgstr "תאריך מערכת ב:"
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:75
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:150
-msgid "Telescope Control"
-msgstr "שליטה על הטלסקופ"
-
-#: src/translations.h:53
-msgid "Tethys"
-msgstr "תטיס"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:79
-msgid "Text User Interface"
-msgstr "ממשק טקסט"
+#: src/core/StelProjectorClasses.cpp:182
+msgid "Hammer-Aitoff"
+msgstr "האמר-אייטוף"
 
 #: src/core/StelProjectorClasses.cpp:187
 msgid ""
@@ -1847,27 +213,9 @@ msgstr ""
 "שיטת היטל האמר, היא שיטת היטל שווה-שטח אשר תוארה על ידי ארנסט האמר ב-1892. "
 "שיטת היטל האמר נוצרה בהשראת שיטת היטל אייטוף"
 
-#: src/gui/HelpDialog.cpp:174
-msgid "The Stellarium User Guide"
-msgstr "מדריך למשתמש בסטלריום"
-
-#: src/ui_configurationDialog.h:779
-msgid "The direction you're looking when Stellarium starts"
-msgstr "הכיוון אליו את/ה מסתכל/ת באתחול של סטלריום"
-
-#: src/gui/HelpDialog.cpp:173
-msgid ""
-"The following links are external web links, and will launch your web "
-"browser:\n"
-msgstr "הקישורים הבאים הם קישורי אינטרנט חיצוניים ויפעילו את הדפדפן שלך:\n"
-
-#: src/core/StelProjectorClasses.cpp:68
-msgid ""
-"The full name of this projection method is, <i>Lambert azimuthal equal-area "
-"projection</i>. It preserves the area but not the angle."
-msgstr ""
-"השם המלא של שיטת הטל זו היא <i>הטל אזימוטלי לאמברטיני שווה-שטח</i>. שיטה זו "
-"משמרת את גודל השטח אבל לא את הזווית"
+#: src/core/StelProjectorClasses.cpp:223
+msgid "Cylinder"
+msgstr "גליל"
 
 #: src/core/StelProjectorClasses.cpp:228
 msgid ""
@@ -1876,6 +224,10 @@ msgid ""
 msgstr ""
 "השם המלא של שיטת היטל זו היא <i>היטל גלילי שווה-מרחק</i>. בשיטת היטל זו כל "
 "הקווים המקבילים מרווחים בצורה שווה."
+
+#: src/core/StelProjectorClasses.cpp:270
+msgid "Mercator"
+msgstr "מרקטור"
 
 #: src/core/StelProjectorClasses.cpp:275
 msgid ""
@@ -1886,319 +238,247 @@ msgstr ""
 "שיטת היטל מרקטור היא מהנפוצות בהכנת מפות עולם. שיטה זו משמרת את כיוון וצורה "
 "אך מעוותת את הגודל בזווית גדלה ככל שמתרחקים מקו המשווה."
 
-#: plugins/Satellites/src/Satellites.cpp:163
+#: src/core/StelProjectorClasses.cpp:322
+msgid "Orthographic"
+msgstr "אורתוגרפי"
+
+#: src/core/StelProjectorClasses.cpp:327
 msgid ""
-"The old satellites.json file is no longer compatible - using default file"
+"Orthographic projection is related to perspective projection, but the point "
+"of perspective is set to an infinite distance."
 msgstr ""
+"שיטת ההיטל האורתוגרפי קשורה להיטל פרספקטיבי, אך נקודת הפרספקטיבה נמצאת במרחק "
+"אינסופי."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-msgid ""
-"The selected file is not a ZIP archive or does not contain a Stellarium "
-"landscape."
-msgstr ""
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:165
-#: src/gui/AddRemoveLandscapesDialog.cpp:235
-msgid "The selected landscape could not be (completely) removed."
-msgstr ""
-
-#: src/ui_configurationDialog.h:775
-msgid "The width of your view when Stellarium starts"
-msgstr "רוחב התצוגה כאשר סטלריום עולה"
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:78
-msgid ""
-"This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
-"computerized mount (a \"GoTo telescope\")."
-msgstr ""
-
-#: src/main.cpp:335
-msgid "This system does not support OpenGL."
-msgstr "מערכת זו אינו תומכת בOpenGL."
-
-#: src/translations.h:142
-msgid "Time Display Format: "
-msgstr "פורמט זמן: "
-
-#: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
-msgid "Time Zone"
-msgstr "אזור זמן"
-
-#: src/translations.h:56
-msgid "Titan"
-msgstr "טיטן"
-
-#: src/translations.h:65
-msgid "Titania"
-msgstr "טיטניה"
-
-#: src/ui_configurationDialog.h:811
-msgid "Toggle vertical and horizontal image flip buttons."
-msgstr "אפשר / בטל כפתורי היפוך תמונה אופקי ואנכי"
-
-#: src/gui/StelGui.cpp:177
-msgid "Toggle visibility of GUI"
-msgstr "הפעל / בטל את נראות הממשק הגרפי"
-
-#: src/ui_configurationDialog.h:876
-msgid "Tools"
-msgstr "כלים"
-
-#: src/gui/StelGui.cpp:164
-msgid "Track object"
-msgstr "עקוב אחרי העצם"
-
-#: src/translations.h:114
-msgid "Tupi-Guarani"
-msgstr "טופי-גוארני"
-
-#: src/ui_viewDialog.h:1004
-msgid "Twinkle:"
-msgstr "ניצנוץ:"
-
-#: src/translations.h:152
-msgid "Twinkling: "
-msgstr "ניצנוץ: "
-
-#: src/core/modules/Nebula.cpp:92
+#: src/core/StelObject.cpp:79
 #, qt-format
-msgid "Type: <b>%1</b>"
-msgstr "סוג: <b>%1</b>"
+msgid "RA/DE (J2000): %1/%2"
+msgstr "RA/DE (J2000): %1/%2"
 
-#: src/translations.h:184
-msgid "USB Script: "
-msgstr "סקריפט USB "
+#: src/core/StelObject.cpp:86
+#, qt-format
+msgid "RA/DE (of date): %1/%2"
+msgstr "RA/DE (של היום): %1/%2"
 
-#: src/translations.h:64
-msgid "Umbriel"
-msgstr "אומבריאל"
+#: src/core/StelObject.cpp:94 src/core/StelObject.cpp:97
+#, qt-format
+msgid "Hour angle/DE: %1/%2"
+msgstr "זווית שעה/נטייה: %1/%2"
 
-#: src/core/modules/Nebula.cpp:290
-msgid "Undocumented type"
-msgstr "סוג לא מתועד"
+#: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
+msgid "(geometric)"
+msgstr ""
 
-#: src/core/modules/Nebula.cpp:287
-msgid "Unknown"
-msgstr "לא ידוע"
+#: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
+msgid "(apparent)"
+msgstr ""
 
-#: src/translations.h:191
-msgid "Update me via Internet: "
-msgstr "עדכן אותי דרך אינטרנט: "
+#: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
+#, qt-format
+msgid "Az/Alt: %1/%2"
+msgstr "אזימוט/גובה: %1/%2"
 
-#: src/translations.h:61
-msgid "Uranus"
-msgstr "אוראנוס"
+#: src/gui/ConfigurationDialog.cpp:295
+msgid "Select screenshot directory"
+msgstr "בחר תיקית תמונות מסך"
 
-#: src/ui_configurationDialog.h:801
-msgid "Use a specific date and time when Stellarium starts up"
-msgstr "השתמש בתאריך ושעה מסויימים כשסטלריום עולה"
+#: src/gui/ConfigurationDialog.cpp:461
+#, qt-format
+msgid "Startup FOV: %1%2"
+msgstr "שדה ראייה באיתחול: %2%1"
 
-#: src/ui_locationDialogGui.h:392
-msgid "Use as default"
-msgstr "קבע כברירת מחדל"
+#: src/gui/ConfigurationDialog.cpp:469
+#, qt-format
+msgid "Startup direction of view Az/Alt: %1/%2"
+msgstr "כיוון הסתכלות בעת הפעלה אזימוט/גובה: %1/%2"
 
-#: src/ui_viewDialog.h:1049
-msgid "Use associated planet and position"
-msgstr "השתמש בכוכבי הלכת ובמיקומים הקשורים"
+#: src/gui/ConfigurationDialog.cpp:509
+msgid "Authors"
+msgstr "מחברים"
 
-#: src/ui_viewDialog.h:1050
-msgid "Use this landscape as default"
-msgstr "השתמש בנוף זה כברירת מחדל"
+#: src/gui/ConfigurationDialog.cpp:513 src/gui/ViewDialog.cpp:368
+msgid "Contact"
+msgstr "צור קשר"
 
-#: src/ui_viewDialog.h:1052
-msgid "Use this sky culture as default"
-msgstr "השתמש בתרבות שמיים זו כברירת מחדל"
+#: src/gui/ConfigurationDialog.cpp:585
+msgid "Author"
+msgstr "מחבר"
 
-#: src/translations.h:35
-msgid "Venus"
-msgstr "נגה"
+#: src/gui/ConfigurationDialog.cpp:586
+msgid "License"
+msgstr "רשיון"
 
-#: src/gui/ConfigurationDialog.cpp:810
+#: src/gui/ConfigurationDialog.cpp:615
+msgid "Running script: "
+msgstr "סקריפט פעיל: "
+
+#: src/gui/ConfigurationDialog.cpp:622
+msgid "Running script: [none]"
+msgstr "סקריפט רץ: [אין]"
+
+#: src/gui/ConfigurationDialog.cpp:665
+msgid "Finished downloading all star catalogs!"
+msgstr "הורדת כל קטלוגי הכוכבים הסתיימה!"
+
+#: src/gui/ConfigurationDialog.cpp:674
+#, qt-format
+msgid "Get catalog %1 of %2"
+msgstr "מוריד קטלוג %1 מתוך %2"
+
+#: src/gui/ConfigurationDialog.cpp:676
+#, qt-format
+msgid ""
+"Download size: %1MB\n"
+"Star count: %2 Million\n"
+"Magnitude range: %3 - %4"
+msgstr ""
+"גודל הורדה: %1 מ\"ב\n"
+"מספר כוכבים: %2 מיליונים\n"
+"טווח מגניטודה(בהירות): %3 - %4"
+
+#: src/gui/ConfigurationDialog.cpp:685
+msgid ""
+"Finished downloading new star catalogs!\n"
+"Restart Stellarium to display them."
+msgstr ""
+"סתיימה הורדת קטלוגי כוכבים חדשים!\n"
+"אתחל את סטלריום כדי להציגם."
+
+#: src/gui/ConfigurationDialog.cpp:723 src/gui/ConfigurationDialog.cpp:757
+#, qt-format
+msgid ""
+"Error downloading %1:\n"
+"%2"
+msgstr ""
+"שגיאת הורדה %1:\n"
+"%2"
+
+#: src/gui/ConfigurationDialog.cpp:728
+#, qt-format
+msgid ""
+"Downloading %1...\n"
+"(You can close this window.)"
+msgstr ""
+"מוריד %1...\n"
+"(ניתן לסגור חלון זה.)"
+
+#: src/gui/ConfigurationDialog.cpp:808
 msgid "Verifying file integrity..."
 msgstr "מוודא את שלמות הקובץ..."
 
-#: src/translations.h:44
-msgid "Vesta"
-msgstr "ווסטה"
-
-#: src/ui_viewDialog.h:986
-msgid "View"
-msgstr "תצוגה"
-
-#: src/ui_viewDialog.h:1054
-msgid "Visible"
-msgstr "נראה"
-
-#: src/translations.h:100
-msgid "W"
-msgstr "מע'"
-
-#: src/ui_addRemoveLandscapesDialog.h:276
-msgid ""
-"WARNING: Removing the selected landscape means deleting its files. This "
-"operation is irreversible."
-msgstr ""
-
-#: src/translations.h:115
-msgid "Western"
-msgstr "מערבית"
-
-#: src/gui/HelpDialog.cpp:71
-msgid "When a Script is Running"
-msgstr "כאשר סקריפט רץ"
-
-#: src/ui_configurationDialog.h:824
-msgid ""
-"When enabled, the \"auto zoom out\" key will also set the initial viewing "
-"direction"
-msgstr ""
-"כאשר מאופשר, מקש \"התרחקות אוטומטית\" יקבע גם את כיוון ההסתכלות הראשוני"
-
-#: src/gui/StelGui.cpp:129
-msgid "Windows"
-msgstr "חלונות"
-
-#: src/ui_locationDialogGui.h:397 src/ui_locationDialogGui.h:401
-msgid ""
-"You can enter values in decimal degrees, or using dms format, for example: "
-"+1d 12m 8s"
-msgstr "ניתן להכניס ערכים כמעלות עשרוניות או בפורמט dms, למשל: +1d 12m 8s"
-
-#. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:238
+#: src/gui/ConfigurationDialog.cpp:812
 #, qt-format
-msgid "You can remove it manually by deleting the following directory: %1"
+msgid ""
+"Error downloading %1:\n"
+"File is corrupted."
 msgstr ""
+"שגיאה בהורדת %1:\n"
+"הקובץ פגום."
 
-#. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
-#: src/gui/AddRemoveLandscapesDialog.cpp:114
-msgid "ZIP archives"
-msgstr "קובץ ZIP"
+#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:285
+#: src/gui/StelGuiItems.cpp:640
+msgid "Space"
+msgstr "Space"
 
-#: src/translations.h:178
-msgid "Zoom Duration: "
-msgstr "משך זמן לזום: "
+#: src/gui/HelpDialog.cpp:53
+msgid "Arrow keys & left mouse drag"
+msgstr "מקשי חיצים ולחיצה על כפתור שמאלי כדי לגרור"
 
-#: src/gui/StelGui.cpp:165
-msgid "Zoom in on selected object"
-msgstr "התמקד על העצם הנבחר"
+#: src/gui/HelpDialog.cpp:54
+msgid "Page Up/Down"
+msgstr "מקש פייג' אפ / פייג' דאון"
+
+#: src/gui/HelpDialog.cpp:55
+msgid "CTRL + Up/Down"
+msgstr "קונטרול + למעלה/למטה"
+
+#: src/gui/HelpDialog.cpp:56
+msgid "Left click"
+msgstr "לחיצה על כפתור שמאלי"
+
+#: src/gui/HelpDialog.cpp:57
+msgid "Right click"
+msgstr "לחיצה על כפתור ימני"
+
+#: src/gui/HelpDialog.cpp:58
+msgid "CTRL + Left click"
+msgstr "קונטרול + לחיצה על כפתור שמאלי"
+
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:163
+msgid "Movement and Selection"
+msgstr "תנועה ובחירה"
+
+#: src/gui/HelpDialog.cpp:62
+msgid "Pan view around the sky"
+msgstr "סרוק לאורך השמיים"
 
 #: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
 msgid "Zoom in/out"
 msgstr "זום פנימה / החוצה"
 
-#: src/gui/StelGui.cpp:166
-msgid "Zoom out"
-msgstr "להתרחק"
+#: src/gui/HelpDialog.cpp:65
+msgid "Select object"
+msgstr "בחירת עצם"
 
-#: src/ui_searchDialogGui.h:449
-msgid "alpha"
-msgstr ""
+#: src/gui/HelpDialog.cpp:66 src/gui/HelpDialog.cpp:68
+msgid "Clear selection"
+msgstr "נקה בחירה"
 
-#: src/ui_searchDialogGui.h:452
-msgid "beta"
-msgstr ""
+#: src/gui/HelpDialog.cpp:71
+msgid "When a Script is Running"
+msgstr "כאשר סקריפט רץ"
 
-#: src/ui_searchDialogGui.h:512
-msgid "chi"
-msgstr ""
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:142
+msgid "Slow down the script execution rate"
+msgstr "מאיט את קצב ביצוע הסקריפט"
 
-#: src/ui_configurationDialog.h:867
-msgid "configure"
-msgstr "הגדר"
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:143
+msgid "Speed up the script execution rate"
+msgstr "מאיץ את קצב ביצוע הסקריפט"
 
-#: src/ui_searchDialogGui.h:458
-msgid "delta"
-msgstr ""
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:144
+msgid "Set the normal script execution rate"
+msgstr "קבע את קצב ביצוע הסקריפט לקצב נורמלי"
 
-#: src/ui_searchDialogGui.h:461
-msgid "epsilon"
-msgstr ""
+#: src/gui/HelpDialog.cpp:163
+msgid "Stellarium Help"
+msgstr "עזרה של סטלריום"
 
-#: src/ui_searchDialogGui.h:467
-#, fuzzy
-msgid "eta"
-msgstr "ווסטה"
+#: src/gui/HelpDialog.cpp:164
+msgid "Keys"
+msgstr "מקשים"
 
-#: src/ui_searchDialogGui.h:455
-msgid "gamma"
-msgstr ""
+#: src/gui/HelpDialog.cpp:172
+msgid "Further Reading"
+msgstr "קריאה נוספת"
 
-#: src/ui_searchDialogGui.h:473
-msgid "iota"
-msgstr ""
+#: src/gui/HelpDialog.cpp:173
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr "הקישורים הבאים הם קישורי אינטרנט חיצוניים ויפעילו את הדפדפן שלך:\n"
 
-#: src/ui_searchDialogGui.h:476
-msgid "kappa"
-msgstr ""
+#: src/gui/HelpDialog.cpp:174
+msgid "The Stellarium User Guide"
+msgstr "מדריך למשתמש בסטלריום"
 
-#: src/ui_searchDialogGui.h:479
-msgid "lambda"
-msgstr ""
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:178
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{שאלות נפוצות} אודות סטלריום וגם תשובות."
 
-#: src/ui_searchDialogGui.h:482
-msgid "mu"
-msgstr ""
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:183
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr "{ויקי סטלריום} - מידע כללי. כאן תוכלו להוסיף נופים וסקריפטים משלכם."
 
-#: src/ui_searchDialogGui.h:485
-msgid "nu"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:518
-msgid "omega"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:491
-msgid "omicron"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:509
-#, fuzzy
-msgid "phi"
-msgstr "אפופיס"
-
-#: src/ui_searchDialogGui.h:494
-msgid "pi"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:515
-msgid "psi"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:497
-msgid "rho"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:500
-msgid "sigma"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:503
-msgid "tau"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:470
-msgid "theta"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:506
-msgid "upsilon"
-msgstr ""
-
-#: src/ui_configurationDialog.h:804
-msgid "use current"
-msgstr "השתמש בנוכחי"
-
-#: src/ui_searchDialogGui.h:488
-msgid "xi"
-msgstr ""
-
-#: src/ui_configurationDialog.h:845
-msgid "xxx"
-msgstr "xxx"
-
-#: src/ui_searchDialogGui.h:464
-msgid "zeta"
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:188
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
@@ -2214,42 +494,1972 @@ msgstr ""
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{פורומים} - דונו על סטלריום עם משתמשים אחרים."
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:178
-msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr "{שאלות נפוצות} אודות סטלריום וגם תשובות."
+#: src/gui/HelpDialog.cpp:234 src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:328 src/gui/StelGui.cpp:170
+msgid "Miscellaneous"
+msgstr "שונות"
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:188
-msgid ""
-"{Support ticket system} - if you need help using Stellarium, post a support "
-"request here and we'll try to help."
+#: src/gui/HelpDialog.cpp:294
+msgid "Developers"
+msgstr "מפתחים"
+
+#: src/gui/HelpDialog.cpp:295
+#, qt-format
+msgid "Project coordinator & lead developer: %1"
+msgstr "מתאם פרויקט ומפתח ראשי: %1"
+
+#: src/gui/HelpDialog.cpp:296
+#, qt-format
+msgid "Doc author/developer: %1"
+msgstr "מחבר מסמך/מפתח: %1"
+
+#: src/gui/HelpDialog.cpp:297
+#, qt-format
+msgid "Graphic/other designer: %1"
+msgstr "מעצב גרפי/אחר: %1"
+
+#: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
+#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
+#, qt-format
+msgid "Developer: %1"
+msgstr "מפתח: %1"
+
+#: src/gui/HelpDialog.cpp:300
+#, qt-format
+msgid "OSX Developer: %1"
+msgstr "מפתח OSX: %1"
+
+#: src/gui/StelGui.cpp:98
+msgid "Display Options"
+msgstr "אפשרויות תצוגה"
+
+#: src/gui/StelGui.cpp:99
+msgid "Constellation lines"
+msgstr "קווי קבוצות כוכבים"
+
+#: src/gui/StelGui.cpp:100
+msgid "Constellation art"
+msgstr "אומנות קבוצות כוכבים"
+
+#: src/gui/StelGui.cpp:101
+msgid "Constellation labels"
+msgstr "שמות קבוצות כוכבים"
+
+#: src/gui/StelGui.cpp:102
+msgid "Constellation boundaries"
+msgstr "גבולות קבוצות כוכבים"
+
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1103
+msgid "Azimuthal grid"
+msgstr "רשת אזימוטלית"
+
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1101
+msgid "Equatorial grid"
+msgstr "רשת משוונית"
+
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1102
+msgid "Equatorial J2000 grid"
+msgstr "רשת משוונית J2000"
+
+#: src/gui/StelGui.cpp:107
+msgid "Galactic grid"
+msgstr "רשת גלקטית"
+
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1107
+msgid "Ecliptic line"
+msgstr "קו המילקה"
+
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1104
+msgid "Equator line"
+msgstr "קו המשווה"
+
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1105
+msgid "Meridian line"
+msgstr "קו המרידיאן"
+
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
+msgid "Horizon line"
 msgstr ""
 
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:183
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
+msgid "Cardinal points"
+msgstr "נקודות חשובות"
+
+#: src/gui/StelGui.cpp:114
+msgid "Ground"
+msgstr "אדמה"
+
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1081
+msgid "Atmosphere"
+msgstr "אטמוספירה"
+
+#: src/gui/StelGui.cpp:116
+msgid "Fog"
+msgstr "ערפל"
+
+#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1090
+msgid "Nebulas"
+msgstr "ערפיליות"
+
+#: src/gui/StelGui.cpp:119
+msgid "Nebulas background images"
+msgstr "תמונות רקע של ערפיליות"
+
+#: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1067 src/ui_viewDialog.h:1089
+msgid "Stars"
+msgstr "כוכבים"
+
+#: src/gui/StelGui.cpp:121
+msgid "Planets labels"
+msgstr "שמות כוכבי הלכת"
+
+#: src/gui/StelGui.cpp:122
+msgid "Planet orbits"
+msgstr "מסלולי כוכבי הלכת"
+
+#: src/gui/StelGui.cpp:123
+msgid "Planet trails"
+msgstr "עקבות כוכבי לכת"
+
+#: src/gui/StelGui.cpp:125
+msgid "Night mode"
+msgstr "מצב לילה"
+
+#: src/gui/StelGui.cpp:126
+msgid "Full-screen mode"
+msgstr "מצב מסך מלא"
+
+#: src/gui/StelGui.cpp:127
+msgid "Flip scene horizontally"
+msgstr "הפוך סצנה אופקית"
+
+#: src/gui/StelGui.cpp:128
+msgid "Flip scene vertically"
+msgstr "הפוך סצנה אנכית"
+
+#: src/gui/StelGui.cpp:130
+msgid "Windows"
+msgstr "חלונות"
+
+#: src/gui/StelGui.cpp:131
+msgid "Help window"
+msgstr "חלון עזרה"
+
+#: src/gui/StelGui.cpp:132
+msgid "Configuration window"
+msgstr "חלון קונפיגורציה"
+
+#: src/gui/StelGui.cpp:133
+msgid "Search window"
+msgstr "חלון חיפוש"
+
+#: src/gui/StelGui.cpp:134
+msgid "Sky and viewing options window"
+msgstr "חלון אפשרויות שמיים ותצוגה"
+
+#: src/gui/StelGui.cpp:135
+msgid "Date/time window"
+msgstr "חלון תאריך/זמן"
+
+#: src/gui/StelGui.cpp:136
+msgid "Location window"
+msgstr "חלון מיקום"
+
+#: src/gui/StelGui.cpp:138
+msgid "Script console window"
+msgstr "חלון קונסולת סקריפט"
+
+#: src/gui/StelGui.cpp:141 src/ui_dateTimeDialogGui.h:294
+msgid "Date and Time"
+msgstr "תאריך ושעה"
+
+#: src/gui/StelGui.cpp:145
+msgid "Decrease time speed"
+msgstr "האט את מהירות הזמן"
+
+#: src/gui/StelGui.cpp:146
+msgid "Increase time speed"
+msgstr "האץ את מהירות הזמן"
+
+#: src/gui/StelGui.cpp:147
+msgid "Set normal time rate"
+msgstr "קבע קצב זמן למהירות נורמלית"
+
+#: src/gui/StelGui.cpp:148
+msgid "Decrease time speed (a little)"
+msgstr "האט את מהירות הזמן (מעט)"
+
+#: src/gui/StelGui.cpp:149
+msgid "Increase time speed (a little)"
+msgstr "האץ את מהירות הזמן (מעט)"
+
+#: src/gui/StelGui.cpp:150
+msgid "Set time rate to zero"
+msgstr "קבע את קצב הזמן לאפס"
+
+#: src/gui/StelGui.cpp:151
+msgid "Set time to now"
+msgstr "קבע את הזמן לעכשיו"
+
+#: src/gui/StelGui.cpp:152
+msgid "Add 1 solar hour"
+msgstr "הוסף שעה שמשית אחת"
+
+#: src/gui/StelGui.cpp:153
+msgid "Subtract 1 solar hour"
+msgstr "הורד שעה שמשית אחת"
+
+#: src/gui/StelGui.cpp:154
+msgid "Add 1 solar day"
+msgstr "הוסף יום שמשי אחד"
+
+#: src/gui/StelGui.cpp:155
+msgid "Subtract 1 solar day"
+msgstr "הורד יום שמשי אחד"
+
+#: src/gui/StelGui.cpp:156
+msgid "Add 1 solar week"
+msgstr "הוסף שבוע שמשי אחד"
+
+#: src/gui/StelGui.cpp:157
+msgid "Subtract 1 solar week"
+msgstr "הורד שבוע שמשי אחד"
+
+#: src/gui/StelGui.cpp:158
+msgid "Add 1 sidereal day"
+msgstr "הוסף יום כוכבי"
+
+#: src/gui/StelGui.cpp:159
+msgid "Subtract 1 sidereal day"
+msgstr "החסר יום כוכבי"
+
+#: src/gui/StelGui.cpp:160
+msgid "Add 1 sidereal week"
+msgstr "הוסף שבוע כוכבי"
+
+#: src/gui/StelGui.cpp:161
+msgid "Subtract 1 sidereal week"
+msgstr "החסר שבוע כוכבי"
+
+#: src/gui/StelGui.cpp:164
+msgid "Center on selected object"
+msgstr "התמקד על העצם הנבחר"
+
+#: src/gui/StelGui.cpp:165
+msgid "Track object"
+msgstr "עקוב אחרי העצם"
+
+#: src/gui/StelGui.cpp:166
+msgid "Zoom in on selected object"
+msgstr "התמקד על העצם הנבחר"
+
+#: src/gui/StelGui.cpp:167
+msgid "Zoom out"
+msgstr "להתרחק"
+
+#: src/gui/StelGui.cpp:168
+msgid "Set home planet to selected planet"
+msgstr "קבע את כוכב לכת הביתי ככוכב הלכת הנבחר"
+
+#: src/gui/StelGui.cpp:171
+msgid "Switch between equatorial and azimuthal mount"
+msgstr "החלף בין כנה אזימוטלית לכנה משוונית"
+
+#: src/gui/StelGui.cpp:172
+msgid "Quit"
+msgstr "יציאה"
+
+#: src/gui/StelGui.cpp:173
+msgid "Save screenshot"
+msgstr "שמור תמונת מסך"
+
+#: src/gui/StelGui.cpp:176
+msgid "Auto hide horizontal button bar"
+msgstr "החבא אוטומטית פס כפתורים אופקי"
+
+#: src/gui/StelGui.cpp:177
+msgid "Auto hide vertical button bar"
+msgstr "החבא אוטומטית פס כפתורים אנכי"
+
+#: src/gui/StelGui.cpp:178
+msgid "Toggle visibility of GUI"
+msgstr "הפעל / בטל את נראות הממשק הגרפי"
+
+#: src/gui/StelGuiItems.cpp:541
+#, no-c-format, qt-format
+msgid "%1m"
+msgstr "%1מטר"
+
+#: src/gui/ViewDialog.cpp:422
+msgid "No description"
+msgstr "אין תיאור"
+
+#: src/gui/ViewDialog.cpp:506
+msgid "No shooting stars"
+msgstr "ללא כוכבים נופלים"
+
+#: src/gui/ViewDialog.cpp:509
+msgid "Normal rate"
+msgstr "קצב נורמלי"
+
+#: src/gui/ViewDialog.cpp:512
+msgid "Standard Perseids rate"
+msgstr "קצב פרסאידים סטנדרטי"
+
+#: src/gui/ViewDialog.cpp:515
+msgid "Exceptional Leonid rate"
+msgstr "קצב ליאונידים חריג"
+
+#: src/gui/ViewDialog.cpp:518
+msgid "Highest rate ever (1966 Leonids)"
+msgstr "הקצב הגבוה ביותר אי פעם (הליאונידים של 1966)"
+
+#: src/gui/LocationDialog.cpp:334
+msgid "New Location"
+msgstr "מיקום חדש"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:112
+msgid "Select a ZIP archive that contains a Stellarium landscape"
+msgstr "בחר קובץ ZIP שמכיל את הנוף עבור סטלריום"
+
+#. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
+#: src/gui/AddRemoveLandscapesDialog.cpp:114
+msgid "ZIP archives"
+msgstr "קובץ ZIP"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:127
+#, qt-format
+msgid "Landscape \"%1\" has been installed successfully."
+msgstr ""
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:128
+#: src/gui/AddRemoveLandscapesDialog.cpp:155
+msgid "Success"
+msgstr "הצלחה"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:141
+#: src/gui/AddRemoveLandscapesDialog.cpp:211
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:228
+msgid "No landscape was installed."
+msgstr ""
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:142
+#: src/gui/AddRemoveLandscapesDialog.cpp:166
+#: src/gui/AddRemoveLandscapesDialog.cpp:215
+#: src/gui/AddRemoveLandscapesDialog.cpp:221
+#: src/gui/AddRemoveLandscapesDialog.cpp:229
+#: src/gui/AddRemoveLandscapesDialog.cpp:239
+msgid "Error!"
+msgstr "שגיאה!"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:154
+#, qt-format
+msgid "Landscape \"%1\" has been removed successfully."
+msgstr ""
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:165
+#: src/gui/AddRemoveLandscapesDialog.cpp:235
+msgid "The selected landscape could not be (completely) removed."
+msgstr ""
+
+#. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
+#: src/gui/AddRemoveLandscapesDialog.cpp:188
+#, qt-format
+msgid "Size on disk: %1 MiB"
+msgstr ""
+
+#. TRANSLATORS: The parameter is a file/directory path that may be quite long.
+#: src/gui/AddRemoveLandscapesDialog.cpp:214
+#, qt-format
+msgid "Stellarium cannot open for reading or writing %1"
+msgstr ""
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
 msgid ""
-"{The Stellarium Wiki} - General information.  You can also find user-"
-"contributed landscapes and scripts here."
-msgstr "{ויקי סטלריום} - מידע כללי. כאן תוכלו להוסיף נופים וסקריפטים משלכם."
+"The selected file is not a ZIP archive or does not contain a Stellarium "
+"landscape."
+msgstr ""
+
+#. TRANSLATORS: The parameter is the duplicate name or identifier.
+#: src/gui/AddRemoveLandscapesDialog.cpp:227
+#, qt-format
+msgid "A landscape with the same name or identifier (%1) already exists."
+msgstr ""
+
+#. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
+#: src/gui/AddRemoveLandscapesDialog.cpp:238
+#, qt-format
+msgid "You can remove it manually by deleting the following directory: %1"
+msgstr ""
+
+#: src/main.cpp:335
+msgid "This system does not support OpenGL."
+msgstr "מערכת זו אינו תומכת בOpenGL."
+
+#: src/translations.h:33
+msgid "Sun"
+msgstr "שמש"
+
+#: src/translations.h:34
+msgid "Mercury"
+msgstr "כוכב חמה"
+
+#: src/translations.h:35
+msgid "Venus"
+msgstr "נגה"
+
+#: src/translations.h:36
+msgid "Earth"
+msgstr "ארץ"
+
+#: src/translations.h:37
+msgid "Moon"
+msgstr "ירח"
+
+#: src/translations.h:38
+msgid "Mars"
+msgstr "מאדים"
+
+#: src/translations.h:39
+msgid "Deimos"
+msgstr "דיימוס"
+
+#: src/translations.h:40
+msgid "Phobos"
+msgstr "פובוס"
+
+#: src/translations.h:41
+msgid "Ceres"
+msgstr "קרס"
+
+#: src/translations.h:42
+msgid "Pallas"
+msgstr "פאלאס"
+
+#: src/translations.h:43
+msgid "Juno"
+msgstr "יונו"
+
+#: src/translations.h:44
+msgid "Vesta"
+msgstr "ווסטה"
+
+#: src/translations.h:45
+msgid "Jupiter"
+msgstr "צדק"
+
+#: src/translations.h:46
+msgid "Io"
+msgstr "איו"
+
+#: src/translations.h:47
+msgid "Europa"
+msgstr "אירופה"
+
+#: src/translations.h:48
+msgid "Ganymede"
+msgstr "גנימד"
+
+#: src/translations.h:49
+msgid "Callisto"
+msgstr "קליסטו"
+
+#: src/translations.h:50
+msgid "Amalthea"
+msgstr ""
+
+#: src/translations.h:51
+msgid "Himalia"
+msgstr ""
+
+#: src/translations.h:52
+msgid "Elara"
+msgstr ""
+
+#: src/translations.h:53
+msgid "Pasiphae"
+msgstr ""
+
+#: src/translations.h:54
+msgid "Sinope"
+msgstr ""
+
+#: src/translations.h:55
+msgid "Lysithea"
+msgstr ""
+
+#: src/translations.h:56
+msgid "Carme"
+msgstr ""
+
+#: src/translations.h:57
+msgid "Ananke"
+msgstr ""
+
+#: src/translations.h:58
+msgid "Leda"
+msgstr ""
+
+#: src/translations.h:59
+msgid "Thebe"
+msgstr ""
+
+#: src/translations.h:60
+msgid "Adrastea"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (9) Metis
+#: src/translations.h:61 src/translations.h:106
+msgid "Metis"
+msgstr "מטיס"
+
+#: src/translations.h:62
+msgid "Saturn"
+msgstr "שבתאי"
+
+#: src/translations.h:63
+msgid "Mimas"
+msgstr "מימס"
+
+#: src/translations.h:64
+msgid "Enceladus"
+msgstr "אנקלדוס"
+
+#: src/translations.h:65
+msgid "Tethys"
+msgstr "תטיס"
+
+#: src/translations.h:66
+msgid "Dione"
+msgstr "דיון"
+
+#: src/translations.h:67
+msgid "Rhea"
+msgstr "ריאה"
+
+#: src/translations.h:68
+msgid "Titan"
+msgstr "טיטן"
+
+#: src/translations.h:69
+msgid "Hyperion"
+msgstr "היפריון"
+
+#: src/translations.h:70
+msgid "Iapetus"
+msgstr "יאפטוס"
+
+#: src/translations.h:71
+msgid "Phoebe"
+msgstr "פיבי"
+
+#: src/translations.h:72
+msgid "Neptune"
+msgstr "נפטון"
+
+#: src/translations.h:73
+msgid "Uranus"
+msgstr "אוראנוס"
+
+#: src/translations.h:74
+msgid "Miranda"
+msgstr "מירנדה"
+
+#: src/translations.h:75
+msgid "Ariel"
+msgstr "אריאל"
+
+#: src/translations.h:76
+msgid "Umbriel"
+msgstr "אומבריאל"
+
+#: src/translations.h:77
+msgid "Titania"
+msgstr "טיטניה"
+
+#: src/translations.h:78
+msgid "Oberon"
+msgstr "אוברון"
+
+#: src/translations.h:79
+msgid "Pluto"
+msgstr "פלוטו"
+
+#: src/translations.h:80
+msgid "Charon"
+msgstr "כארון"
+
+#: src/translations.h:81
+msgid "Eris"
+msgstr "אריס"
+
+#: src/translations.h:82
+msgid "Triton"
+msgstr ""
+
+#: src/translations.h:83
+msgid "Nereid"
+msgstr ""
+
+#: src/translations.h:84
+msgid "Naiad"
+msgstr ""
+
+#: src/translations.h:85
+msgid "Thalassa"
+msgstr ""
+
+#: src/translations.h:86
+msgid "Despina"
+msgstr ""
+
+#: src/translations.h:87
+msgid "Galatea"
+msgstr ""
+
+#: src/translations.h:88
+msgid "Larissa"
+msgstr ""
+
+#: src/translations.h:89
+msgid "Proteus"
+msgstr ""
+
+#: src/translations.h:90
+msgid "Halimede"
+msgstr ""
+
+#: src/translations.h:91
+msgid "Psamathe"
+msgstr ""
+
+#: src/translations.h:92
+msgid "Sao"
+msgstr ""
+
+#: src/translations.h:93
+msgid "Laomedeia"
+msgstr ""
+
+#: src/translations.h:94
+msgid "Neso"
+msgstr ""
+
+#: src/translations.h:95
+msgid "Solar System Observer"
+msgstr "צופה מערכת השמש"
+
+#. TRANSLATORS: Asteroid (5) Astraea
+#: src/translations.h:98
+msgid "Astraea"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (6) Hebe
+#: src/translations.h:100
+msgid "Hebe"
+msgstr "הבי"
+
+#. TRANSLATORS: Asteroid (7) Iris
+#: src/translations.h:102
+msgid "Iris"
+msgstr "איריס"
+
+#. TRANSLATORS: Asteroid (8) Flora
+#: src/translations.h:104
+msgid "Flora"
+msgstr "פלורה"
+
+#. TRANSLATORS: Asteroid (10) Hygiea
+#: src/translations.h:108
+msgid "Hygiea"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (1221) Amor
+#: src/translations.h:110
+msgid "Amor"
+msgstr "אמור"
+
+#. TRANSLATORS: Asteroid (99942) Apophis
+#: src/translations.h:112
+msgid "Apophis"
+msgstr "אפופיס"
+
+#. TRANSLATORS: Asteroid (2060) Chiron
+#: src/translations.h:114
+msgid "Chiron"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (433) Eros
+#: src/translations.h:116
+msgid "Eros"
+msgstr "ארוס"
+
+#. TRANSLATORS: Asteroid (624) Hektor
+#: src/translations.h:118
+msgid "Hektor"
+msgstr "הקטור"
+
+#. TRANSLATORS: Name of supernova SN 1572A
+#: src/translations.h:120
+msgid "Tycho's Supernova"
+msgstr ""
+
+#. TRANSLATORS: Name of supernova SN 1604A
+#: src/translations.h:122
+msgid "Kepler's Supernova"
+msgstr ""
+
+#: src/translations.h:126
+msgid "N"
+msgstr "צ'"
+
+#: src/translations.h:127
+msgid "S"
+msgstr "ד'"
+
+#: src/translations.h:128
+msgid "E"
+msgstr "מז'"
+
+#: src/translations.h:129
+msgid "W"
+msgstr "מע'"
+
+#: src/translations.h:132
+msgid "Aztec"
+msgstr "אצטקית"
+
+#: src/translations.h:133
+msgid "Chinese"
+msgstr "סינית"
+
+#: src/translations.h:134
+msgid "Egyptian"
+msgstr "מצרית"
+
+#: src/translations.h:135
+msgid "Inuit"
+msgstr "אינואטים"
+
+#: src/translations.h:136
+msgid "Korean"
+msgstr "קוראנית"
+
+#: src/translations.h:137
+msgid "Lakota"
+msgstr "לקוטה"
+
+#: src/translations.h:138
+msgid "Maori"
+msgstr "מאורית"
+
+#: src/translations.h:139
+msgid "Navajo"
+msgstr "נבאחו"
+
+#: src/translations.h:140
+msgid "Norse"
+msgstr "נורדית"
+
+#: src/translations.h:141
+msgid "Polynesian"
+msgstr "פולינזית"
+
+#: src/translations.h:142
+msgid "Sami"
+msgstr ""
+
+#: src/translations.h:143
+msgid "Tupi-Guarani"
+msgstr "טופי-גוארני"
+
+#: src/translations.h:144
+msgid "Western"
+msgstr "מערבית"
+
+#: src/translations.h:148
+msgid "Set Location "
+msgstr "קבע מיקום "
+
+#: src/translations.h:149
+msgid "Set Time "
+msgstr "קבע זמן "
+
+#: src/translations.h:150
+msgid "General "
+msgstr "כללי "
+
+#: src/translations.h:151
+msgid "Stars "
+msgstr "כוכבים "
+
+#: src/translations.h:152
+msgid "Colors "
+msgstr "צבעים "
+
+#: src/translations.h:153
+msgid "Effects "
+msgstr "אפקטים "
+
+#: src/translations.h:154
+msgid "Scripts "
+msgstr "סקריפטים "
+
+#: src/translations.h:155
+msgid "Administration "
+msgstr "ניהול "
+
+#: src/translations.h:157
+msgid "Latitude: "
+msgstr "קו רוחב: "
+
+#: src/translations.h:158
+msgid "Longitude: "
+msgstr "קו אורך: "
+
+#: src/translations.h:159
+msgid "Altitude (m): "
+msgstr "גובה (מטרים): "
+
+#: src/translations.h:160
+msgid "Solar System Body: "
+msgstr "עצם במערכת שמש: "
+
+#: src/translations.h:162
+msgid "Sky Time: "
+msgstr "זמן שמיים: "
+
+#: src/translations.h:163
+msgid "Set Time Zone: "
+msgstr "קבע אזור זמן: "
+
+#: src/translations.h:164
+msgid "Day keys: "
+msgstr "מקשי יום: "
+
+#: src/translations.h:165
+msgid "Calendar"
+msgstr "לוח שנה"
+
+#: src/translations.h:166
+msgid "Sidereal"
+msgstr "סידרי"
+
+#: src/translations.h:167
+msgid "Preset Sky Time: "
+msgstr "זמן שמיים קבוע מראש: "
+
+#: src/translations.h:168
+msgid "Sky Time At Start-up: "
+msgstr "זמן שמיים באתחול: "
+
+#: src/translations.h:169
+msgid "Actual Time"
+msgstr "זמן נוכחי"
+
+#: src/translations.h:170
+msgid "Preset Time"
+msgstr "זמן קבוע מראש"
+
+#: src/translations.h:171
+msgid "Time Display Format: "
+msgstr "פורמט זמן: "
+
+#: src/translations.h:172
+msgid "Date Display Format: "
+msgstr "פורמט תאריך: "
+
+#: src/translations.h:174
+msgid "Sky Culture: "
+msgstr "שמיים לפי תרבות: "
+
+#: src/translations.h:175
+msgid "Sky Language: "
+msgstr "שפת שמיים: "
+
+#: src/translations.h:177
+msgid "Show: "
+msgstr "הצג: "
+
+#: src/translations.h:178
+msgid "Star Value Multiplier: "
+msgstr "מכפיל ערך כוכב: "
+
+#: src/translations.h:179
+msgid "Magnitude Sizing Multiplier: "
+msgstr "מכפיל מגניטודה: "
+
+#: src/translations.h:180
+msgid "Maximum Magnitude to Label: "
+msgstr "מגניטודת כוכב מירבית לסימון: "
+
+#: src/translations.h:181
+msgid "Twinkling: "
+msgstr "ניצנוץ: "
+
+#: src/translations.h:182
+msgid "Limiting Magnitude: "
+msgstr "בהירות מגבילה: "
+
+#: src/translations.h:184
+msgid "Constellation Lines"
+msgstr "קווי קבוצות כוכבים"
+
+#: src/translations.h:185
+msgid "Constellation Names"
+msgstr "שמות קבוצות כוכבים"
+
+#: src/translations.h:186
+msgid "Constellation Art Intensity"
+msgstr "עוצמת הגרפיקה של קבוצות כוכבים"
+
+#: src/translations.h:187
+msgid "Constellation Boundaries"
+msgstr "גבולות קבוצות כוכבים"
+
+#: src/translations.h:188
+msgid "Cardinal Points"
+msgstr "נקודות חשובות"
+
+#: src/translations.h:189
+msgid "Planet Names"
+msgstr "שמות כוכבי לכת"
+
+#: src/translations.h:190
+msgid "Planet Orbits"
+msgstr "מסלולי כוכבי לכת"
+
+#: src/translations.h:191
+msgid "Planet Trails"
+msgstr "עקבות כוכבי לכת"
+
+#: src/translations.h:192
+msgid "Meridian Line"
+msgstr "קו המרידיאן"
+
+#: src/translations.h:193
+msgid "Azimuthal Grid"
+msgstr "רשת אזימוטלית"
+
+#: src/translations.h:194
+msgid "Equatorial Grid"
+msgstr "רשת משוונית"
+
+#: src/translations.h:195
+msgid "Equator Line"
+msgstr "קו המשווה"
+
+#: src/translations.h:196
+msgid "Ecliptic Line"
+msgstr "קו המילקה"
+
+#: src/translations.h:197
+msgid "Nebula Names"
+msgstr "שמות ערפיליות"
+
+#: src/translations.h:198
+msgid "Nebula Circles"
+msgstr "מעגלי ערפיליות"
+
+#: src/translations.h:200
+msgid "Light Pollution Luminance: "
+msgstr "עוצמת זיהום אור: "
+
+#: src/translations.h:201
+msgid "Landscape: "
+msgstr "נוף: "
+
+#: src/translations.h:202
+msgid "Manual zoom: "
+msgstr "זום ידני: "
+
+#: src/translations.h:203
+msgid "Object Sizing Rule: "
+msgstr "כלל להגדלת עצם: "
+
+#: src/translations.h:204
+msgid "Magnitude Scaling Multiplier: "
+msgstr "מכפיל סקאלת בהירות "
+
+#: src/translations.h:205
+msgid "Milky Way intensity: "
+msgstr "עוצמת הארה של שביל החלב: "
+
+#: src/translations.h:206
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "עוצמת ערפילית מירבית לסימון: "
+
+#: src/translations.h:207
+msgid "Zoom Duration: "
+msgstr "משך זמן לזום: "
+
+#: src/translations.h:208
+msgid "Cursor Timeout: "
+msgstr "גבול זמן לסמן: "
+
+#: src/translations.h:209
+msgid "Correct for light travel time: "
+msgstr "תיקון עבור זמן מסע של אור: "
+
+#: src/translations.h:211
+msgid "Local Script: "
+msgstr "סקריפט מקומי: "
+
+#: src/translations.h:212
+msgid "CD/DVD Script: "
+msgstr "סקריפט CD/DVD : "
+
+#: src/translations.h:213
+msgid "USB Script: "
+msgstr "סקריפט USB "
+
+#: src/translations.h:214
+msgid "Arrow down to load list."
+msgstr "לחץ על חץ למטה כדי לטעון רשימה."
+
+#: src/translations.h:215
+msgid "Select and exit to run."
+msgstr "בחר וצא להרצה"
+
+#: src/translations.h:217
+msgid "Load Default Configuration: "
+msgstr "טען קונפיגורציית ברירת מחדל: "
+
+#: src/translations.h:218
+msgid "Save Current Configuration as Default: "
+msgstr "שמור קונפיגורציה נוכחית כברירת מחדל: "
+
+#: src/translations.h:219
+msgid "Shut Down: "
+msgstr "כיבוי: "
+
+#: src/translations.h:220
+msgid "Update me via Internet: "
+msgstr "עדכן אותי דרך אינטרנט: "
+
+#: src/translations.h:221
+msgid "Set UI Locale: "
+msgstr "קבע שפת ממשק: "
+
+#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
+msgid "/"
+msgstr "/"
+
+#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
+msgid ":"
+msgstr ":"
+
+#: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
+msgid "Help"
+msgstr "עזרה"
+
+#: src/ui_helpDialogGui.h:267
+msgid "About"
+msgstr "אודות"
+
+#: src/ui_helpDialogGui.h:269
+msgid "Log"
+msgstr "יומן"
+
+#: src/ui_helpDialogGui.h:272
+msgid "Refresh"
+msgstr "רענן"
+
+#: src/ui_locationDialogGui.h:387
+msgid "Location"
+msgstr "מיקום"
+
+#: src/ui_locationDialogGui.h:391
+msgid "Current location information"
+msgstr "מידע על המיקום הנוכחי"
+
+#: src/ui_locationDialogGui.h:392
+msgid "Use as default"
+msgstr "קבע כברירת מחדל"
+
+#: src/ui_locationDialogGui.h:393
+msgid "Delete"
+msgstr "מחק"
+
+#: src/ui_locationDialogGui.h:394
+msgid "Add to list"
+msgstr "הוסף לרשימה"
+
+#: src/ui_locationDialogGui.h:395
+msgid "Latitude:"
+msgstr "קו רוחב:"
+
+#: src/ui_locationDialogGui.h:397 src/ui_locationDialogGui.h:401
+msgid ""
+"You can enter values in decimal degrees, or using dms format, for example: "
+"+1d 12m 8s"
+msgstr "ניתן להכניס ערכים כמעלות עשרוניות או בפורמט dms, למשל: +1d 12m 8s"
+
+#: src/ui_locationDialogGui.h:399
+msgid "Longitude:"
+msgstr "קו אורך:"
+
+#: src/ui_locationDialogGui.h:403
+msgid "Altitude:"
+msgstr "גובה:"
+
+#: src/ui_locationDialogGui.h:405
+msgid "Enter the altitude in meter"
+msgstr "הכנס גובה במטרים"
+
+#: src/ui_locationDialogGui.h:407
+msgid " m"
+msgstr " מ"
+
+#: src/ui_locationDialogGui.h:408
+msgid "Name/City:"
+msgstr "שם/עיר:"
+
+#: src/ui_locationDialogGui.h:409
+msgid "Country:"
+msgstr "ארץ:"
+
+#: src/ui_locationDialogGui.h:410
+msgid "Planet:"
+msgstr "כוכב לכת:"
+
+#: src/ui_searchDialogGui.h:450
+msgid "Find Object"
+msgstr "מצא עצם"
+
+#: src/ui_searchDialogGui.h:451
+msgid "Find Object or Position"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:458
+msgid "iota"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:461
+msgid "alpha"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:464
+msgid "beta"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:467
+msgid "gamma"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:470
+msgid "delta"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:473
+msgid "epsilon"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:476
+msgid "zeta"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:479
+msgid "eta"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:482
+msgid "theta"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:485
+msgid "kappa"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:488
+msgid "lambda"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:491
+msgid "mu"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:494
+msgid "nu"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:497
+msgid "xi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:500
+msgid "omicron"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:503
+msgid "pi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:506
+msgid "rho"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:509
+msgid "sigma"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:512
+msgid "tau"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:515
+msgid "upsilon"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:518
+msgid "phi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:521
+msgid "chi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:524
+msgid "psi"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:527
+msgid "omega"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:529
+msgid "Greek letters for Bayer designations"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:530
+msgid "Object"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:531
+msgid "RA/Dec (J2000):"
+msgstr "עלייה ישרה/נטייה (ינואר2000):"
+
+#: src/ui_searchDialogGui.h:532
+msgid "Position"
+msgstr ""
+
+#: src/ui_viewDialog.h:1052
+msgid "View"
+msgstr "תצוגה"
+
+#: src/ui_viewDialog.h:1058
+msgid "Sky"
+msgstr "שמיים"
+
+#: src/ui_viewDialog.h:1060
+msgid "Markings"
+msgstr "סימונים"
+
+#: src/ui_viewDialog.h:1062
+msgid "Landscape"
+msgstr "נוף"
+
+#: src/ui_viewDialog.h:1064
+msgid "Starlore"
+msgstr "מורשת כוכבים"
+
+#: src/ui_viewDialog.h:1068
+msgid "Absolute scale:"
+msgstr "קנה מידה מוחלט:"
+
+#: src/ui_viewDialog.h:1069
+msgid "Relative scale:"
+msgstr "קנה מידה יחסי:"
+
+#: src/ui_viewDialog.h:1070
+msgid "Twinkle:"
+msgstr "ניצנוץ:"
+
+#: src/ui_viewDialog.h:1072
+msgid "Dim faint stars when a very bright object is visible"
+msgstr "עמעם כוכבים קלושים כאשר עצם בהיר במיוחד ניראה"
+
+#: src/ui_viewDialog.h:1074
+msgid "Dynamic eye adaptation"
+msgstr "הסתגלות עין דינמית"
+
+#: src/ui_viewDialog.h:1075
+msgid "Planets and satellites"
+msgstr "כוכבי לכת וירחים"
+
+#: src/ui_viewDialog.h:1076
+msgid "Show planets"
+msgstr "הצג כוכבי לכת"
+
+#: src/ui_viewDialog.h:1077
+msgid "Show planet markers"
+msgstr "הצג סימוני כוכבי לכת"
+
+#: src/ui_viewDialog.h:1078
+msgid "Show planet orbits"
+msgstr "הצג מסלולי כוכבי לכת"
+
+#: src/ui_viewDialog.h:1079
+msgid "Simulate light speed"
+msgstr "דמה את מהירות האור"
+
+#: src/ui_viewDialog.h:1080
+msgid "Scale Moon"
+msgstr ""
+
+#: src/ui_viewDialog.h:1082
+msgid "Show atmosphere"
+msgstr "הראה אטמוספירה"
+
+#: src/ui_viewDialog.h:1083
+msgid "Light pollution: "
+msgstr "זיהום אור: "
+
+#: src/ui_viewDialog.h:1085
+msgid "pressure, temperature, extinction coefficient"
+msgstr ""
+
+#: src/ui_viewDialog.h:1087
+msgid "Refraction/Extinction settings..."
+msgstr ""
+
+#: src/ui_viewDialog.h:1088
+msgid "Labels and Markers"
+msgstr "תוויות וסימונים"
+
+#: src/ui_viewDialog.h:1091
+msgid "Planets"
+msgstr "כוכבי לכת"
+
+#: src/ui_viewDialog.h:1092
+msgid "Shooting Stars"
+msgstr "כוכבים נופלים"
+
+#: src/ui_viewDialog.h:1093
+msgid "Hourly zenith rate:"
+msgstr ""
+
+#: src/ui_viewDialog.h:1094
+msgid "0"
+msgstr "0"
+
+#: src/ui_viewDialog.h:1095
+msgid "10"
+msgstr "10"
+
+#: src/ui_viewDialog.h:1096
+msgid "80"
+msgstr "80"
+
+#: src/ui_viewDialog.h:1097
+msgid "10000"
+msgstr "10000"
+
+#: src/ui_viewDialog.h:1098
+msgid "144000"
+msgstr "14400"
+
+#: src/ui_viewDialog.h:1100
+msgid "Celestial Sphere"
+msgstr "ספירה שמימית"
+
+#: src/ui_viewDialog.h:1109
+msgid "Constellations"
+msgstr "קבוצות כוכבים"
+
+#: src/ui_viewDialog.h:1110
+msgid "Show lines"
+msgstr "הצג קוים"
+
+#: src/ui_viewDialog.h:1111
+msgid "Show labels"
+msgstr "הצג שמות"
+
+#: src/ui_viewDialog.h:1112
+msgid "Show boundaries"
+msgstr "הצג גבולות"
+
+#: src/ui_viewDialog.h:1113
+msgid "Show art"
+msgstr "הצג אומנות"
+
+#: src/ui_viewDialog.h:1114
+msgid "Art brightness: "
+msgstr "בהירות האומנות "
+
+#: src/ui_viewDialog.h:1115
+msgid "Projection"
+msgstr "היטל"
+
+#: src/ui_viewDialog.h:1116
+msgid "Add/remove landscapes..."
+msgstr "הוספה / הסרה של נוף"
+
+#: src/ui_viewDialog.h:1117 src/ui_viewDialog.h:1122 src/ui_viewDialog.h:1124
+#: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
+msgid "Options"
+msgstr "אפשרויות"
+
+#: src/ui_viewDialog.h:1118
+msgid "Show ground"
+msgstr "הצג אדמה"
+
+#: src/ui_viewDialog.h:1119
+msgid "Show fog"
+msgstr "הצג ערפל"
+
+#: src/ui_viewDialog.h:1120
+msgid "Use associated planet and position"
+msgstr "השתמש בכוכבי הלכת ובמיקומים הקשורים"
+
+#: src/ui_viewDialog.h:1121
+msgid "Use this landscape as default"
+msgstr "השתמש בנוף זה כברירת מחדל"
+
+#: src/ui_viewDialog.h:1123
+msgid "Use this sky culture as default"
+msgstr "השתמש בתרבות שמיים זו כברירת מחדל"
+
+#: src/ui_viewDialog.h:1125
+msgid "Visible"
+msgstr "נראה"
+
+#: src/ui_configurationDialog.h:748
+msgid "Configuration"
+msgstr "קונפיגורציה"
+
+#: src/ui_configurationDialog.h:750
+msgid "Program language"
+msgstr "שפת תוכנה"
+
+#: src/ui_configurationDialog.h:751
+msgid "Selected object information"
+msgstr "מידע על העצם הנבחר"
+
+#: src/ui_configurationDialog.h:753
+msgid "Display all information available"
+msgstr "הצג את כל המידע הזמין"
+
+#: src/ui_configurationDialog.h:755
+msgid "All available"
+msgstr "כל הזמין"
+
+#: src/ui_configurationDialog.h:757
+msgid "Display less information"
+msgstr "הצג פחות מידע"
+
+#: src/ui_configurationDialog.h:759
+msgid "Short"
+msgstr "קצר"
+
+#: src/ui_configurationDialog.h:761
+msgid "Display no information"
+msgstr "אל תציג מידע"
+
+#: src/ui_configurationDialog.h:763
+msgid "None"
+msgstr "אף אחד"
+
+#: src/ui_configurationDialog.h:764
+msgid "Default options"
+msgstr "אפשרויות ברירת מחדל"
+
+#: src/ui_configurationDialog.h:766
+msgid ""
+"Save the settings you've changed this session to be the same the next time "
+"you start Stellarium"
+msgstr ""
+"שמור את ההגדרות ששינית בהפעלה הזו כך שיהיו זהים בפעם הבאה שתפעיל/י את סטלריום"
+
+#: src/ui_configurationDialog.h:768
+msgid "Save settings"
+msgstr "שמור הגדרות"
+
+#: src/ui_configurationDialog.h:770
+msgid "Restore the default settings that came with Stellarium"
+msgstr "שחזר את הגדרות ברירת המחדל לאלו שהגיעו עם סטלריום"
+
+#: src/ui_configurationDialog.h:772
+msgid "Restore defaults"
+msgstr "שחזור ברירת מחדל"
+
+#: src/ui_configurationDialog.h:773
+msgid ""
+"Restoring default settings requires a restart of Stellarium. Saving all the "
+"current options includes the current FOV and direction of view for use at "
+"next startup."
+msgstr ""
+"שחזור הגדרות ברירת מחדל, דורש איתחול של סטלריום. שומר את כל האפשרויות "
+"הנוכחיות, כולל את שדה הראייה הנוכחי וכיוון הסתכלות להפעלה הבאה."
+
+#: src/ui_configurationDialog.h:775
+msgid "The width of your view when Stellarium starts"
+msgstr "רוחב התצוגה כאשר סטלריום עולה"
+
+#: src/ui_configurationDialog.h:777
+msgid "Startup FOV: XX"
+msgstr "שדה ראייה באתחול: XX"
+
+#: src/ui_configurationDialog.h:779
+msgid "The direction you're looking when Stellarium starts"
+msgstr "הכיוון אליו את/ה מסתכל/ת באתחול של סטלריום"
+
+#: src/ui_configurationDialog.h:781
+msgid "Startup direction of view: xxxx"
+msgstr "כיוון הסתכלות בהפעלה: xxx"
+
+#: src/ui_configurationDialog.h:782
+msgid "Control"
+msgstr "בקרה"
+
+#: src/ui_configurationDialog.h:784
+msgid "Allow keyboard to pan and zoom"
+msgstr "אפשר סריקה והתמקדות באמצעות המקלדת"
+
+#: src/ui_configurationDialog.h:786
+msgid "Enable keyboard navigation"
+msgstr "אפשר ניווט באמצעות מקלדת"
+
+#: src/ui_configurationDialog.h:788
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr "אפשר סריקה והתמקדות באמצעות העכבר"
+
+#: src/ui_configurationDialog.h:790
+msgid "Enable mouse navigation"
+msgstr "אפשר ניווט באמצעות עכבר"
+
+#: src/ui_configurationDialog.h:791
+msgid "Startup date and time"
+msgstr "תאריך ושעה בעת הפעלת התוכנה"
+
+#: src/ui_configurationDialog.h:793
+msgid "Starts Stellarium at system clock date and time"
+msgstr "התחל את סטלריום עם תאריך וזמן המערכת"
+
+#: src/ui_configurationDialog.h:795
+msgid "System date and time"
+msgstr "תאריך וזמן המערכת"
+
+#: src/ui_configurationDialog.h:797
+msgid ""
+"Sets the simulation time to the next instance of this time of day when "
+"Stellarium starts"
+msgstr "קבע את זמן ההדמייה למופע הבא של הזמן ביום כאשר מפעילים את סטלריום"
+
+#: src/ui_configurationDialog.h:799
+msgid "System date at:"
+msgstr "תאריך מערכת ב:"
+
+#: src/ui_configurationDialog.h:801
+msgid "Use a specific date and time when Stellarium starts up"
+msgstr "השתמש בתאריך ושעה מסויימים כשסטלריום עולה"
+
+#: src/ui_configurationDialog.h:803
+msgid "Other:"
+msgstr "אחר:"
+
+#: src/ui_configurationDialog.h:804
+msgid "use current"
+msgstr "השתמש בנוכחי"
+
+#: src/ui_configurationDialog.h:805
+msgid "Other"
+msgstr "אחר"
+
+#: src/ui_configurationDialog.h:807
+msgid "Hides the mouse cursor when inactive"
+msgstr "הסתר את סמן העכבר כאשר הוא לא פעיל"
+
+#: src/ui_configurationDialog.h:809
+msgid "Mouse cursor timeout (seconds):"
+msgstr "השהיית סמן עכבר (שניות):"
+
+#: src/ui_configurationDialog.h:811
+msgid "Toggle vertical and horizontal image flip buttons."
+msgstr "אפשר / בטל כפתורי היפוך תמונה אופקי ואנכי"
+
+#: src/ui_configurationDialog.h:813
+msgid "Show flip buttons"
+msgstr "הצג כפתורי היפוך"
+
+#: src/ui_configurationDialog.h:814
+msgid "Planetarium options"
+msgstr "אפשרויות פלנטריום"
+
+#: src/ui_configurationDialog.h:816
+msgid ""
+"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
+"mirror for low-cost planetarium systems."
+msgstr ""
+"עיוותי מראה כדורית בשימוש כאשר מקרינים את סטלריום על מראה כדורית בעבור "
+"מערכות פלנטריום זולות."
+
+#: src/ui_configurationDialog.h:818
+msgid "Spheric mirror distortion"
+msgstr "עיוותי מראה כדורית"
+
+#: src/ui_configurationDialog.h:820
+msgid "Align labels with the horizon"
+msgstr "יישר תוויות עם האופק"
+
+#: src/ui_configurationDialog.h:822
+msgid "Gravity labels"
+msgstr "תוויות גרביטציה"
+
+#: src/ui_configurationDialog.h:824
+msgid ""
+"When enabled, the \"auto zoom out\" key will also set the initial viewing "
+"direction"
+msgstr ""
+"כאשר מאופשר, מקש \"התרחקות אוטומטית\" יקבע גם את כיוון ההסתכלות הראשוני"
+
+#: src/ui_configurationDialog.h:826
+msgid "Auto zoom out returns to initial direction of view"
+msgstr "התרחקות אוטומטית תחזיר את כיוון ההסתכלות לכיוון הראשוני"
+
+#: src/ui_configurationDialog.h:828
+msgid "Mask out everything outside a central circle in the main view"
+msgstr "הסתר כל מה שמחוץ למעגל המרכזי בתצוגה הראשית"
+
+#: src/ui_configurationDialog.h:830
+msgid "Disc viewport"
+msgstr "תצוגת דיסק"
+
+#: src/ui_configurationDialog.h:832
+msgid "Hide other constellations when you click one"
+msgstr "הסתר קבוצות כוכבים אחרות כאשר לוחצים על אחת"
+
+#: src/ui_configurationDialog.h:834
+msgid "Select single constellation"
+msgstr "בחר קבוצת כוכבים יחידה"
+
+#: src/ui_configurationDialog.h:835
+msgid "Screenshots"
+msgstr "תמונות מסך"
+
+#: src/ui_configurationDialog.h:836
+msgid "Screenshot Directory"
+msgstr "תיקיית תמונות מסך"
+
+#: src/ui_configurationDialog.h:838
+msgid "Invert colors"
+msgstr "היפוך צבעים"
+
+#: src/ui_configurationDialog.h:839
+msgid "Star catalog updates"
+msgstr "קטלוג כוכבים מתעדכן"
+
+#: src/ui_configurationDialog.h:841
+msgid "Click here to start downloading"
+msgstr "לחץ כאן כדי להתחיל את ההורדה"
+
+#: src/ui_configurationDialog.h:843
+msgid "Get catalog x of y"
+msgstr "הורד קטלוג x מתוך y"
+
+#: src/ui_configurationDialog.h:844
+msgid "Download this file to view even more stars"
+msgstr "הורד קובץ זה"
+
+#: src/ui_configurationDialog.h:845
+msgid "xxx"
+msgstr "xxx"
+
+#: src/ui_configurationDialog.h:847
+msgid "Restart the download"
+msgstr "התחל שנית את ההורדה"
+
+#: src/ui_configurationDialog.h:849
+msgid "Retry"
+msgstr "נסה שנית"
+
+#: src/ui_configurationDialog.h:851
+msgid "Stop the download. You can always restart it later"
+msgstr "עצור את ההורדה. תוכל להמשיכה מאוחר יותר"
+
+#: src/ui_configurationDialog.h:853
+msgid "Cancel"
+msgstr "ביטול"
+
+#: src/ui_configurationDialog.h:856
+msgid "Close window when script runs"
+msgstr "סגור חלון בעת ריצת סקריפט"
+
+#: src/ui_configurationDialog.h:858
+msgid "Run the selected script"
+msgstr "הרץ את הסקריפט הנבחר"
+
+#: src/ui_configurationDialog.h:862
+msgid "Stop a running script"
+msgstr "עצור סקריפט שרץ"
+
+#: src/ui_configurationDialog.h:866
+msgid "Load at startup"
+msgstr "טען בעליית התוכנה"
+
+#: src/ui_configurationDialog.h:867
+msgid "configure"
+msgstr "הגדר"
+
+#: src/ui_configurationDialog.h:872
+msgid "Main"
+msgstr "ראשי"
+
+#: src/ui_configurationDialog.h:874
+msgid "Navigation"
+msgstr "ניווט"
+
+#: src/ui_configurationDialog.h:876
+msgid "Tools"
+msgstr "כלים"
+
+#: src/ui_configurationDialog.h:878
+msgid "Scripts"
+msgstr "סקריפטים"
+
+#: src/ui_configurationDialog.h:880
+msgid "Plugins"
+msgstr "תוספים"
+
+#: src/ui_addRemoveLandscapesDialog.h:266
+msgid "Add/Remove Landscapes"
+msgstr "הוספה / הסרה של נוף"
+
+#: src/ui_addRemoveLandscapesDialog.h:268
+msgid "Add a new landscape"
+msgstr ""
+
+#: src/ui_addRemoveLandscapesDialog.h:269
+msgid "Install a new landscape from a ZIP archive..."
+msgstr "התקת נוף חדש מקובץ ZIP"
+
+#: src/ui_addRemoveLandscapesDialog.h:270
+msgid "Switch to the new landscape after installation"
+msgstr "מעבר לנוף החדש לאחר ההתקנה"
+
+#: src/ui_addRemoveLandscapesDialog.h:273
+msgid "Remove an installed landscape"
+msgstr "הסרת נוף מותקן"
+
+#: src/ui_addRemoveLandscapesDialog.h:275
+msgid "Remove"
+msgstr "הסרה"
+
+#: src/ui_addRemoveLandscapesDialog.h:276
+msgid ""
+"WARNING: Removing the selected landscape means deleting its files. This "
+"operation is irreversible."
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:167
+msgid "Dialog"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:168
+msgid "Atmosphere Details"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:170
+msgid "Refraction Settings"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:171
+msgid "Pressure (mbar):"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:172
+msgid "Temperature (C):"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:177
+msgid ""
+"Extinction is the loss of star brightness due to Earth's atmosphere. It is "
+"given in mag/airmass, where airmass is number of atmospheres light has to "
+"pass. (zenith: 1; horizon: about 40)"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:179
+msgid "Extinction Coefficient:"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:181
+msgid ""
+"Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
+"for murky conditions."
+msgstr ""
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:57
+msgid "Angle Measure"
+msgstr "מדידת זווית"
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:60
+msgid "Provides an angle measurement tool"
+msgstr ""
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:121
+msgid "Angle measure"
+msgstr "מדידת זווית"
+
+#. TRANSLATORS: Title of a group of key bindings in the Help window
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:121
+#: plugins/CompassMarks/src/CompassMarks.cpp:121
+#: plugins/Oculars/src/Oculars.cpp:931 plugins/Oculars/src/Oculars.cpp:945
+#: plugins/Satellites/src/Satellites.cpp:123
+msgid "Plugin Key Bindings"
+msgstr ""
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:57
+msgid "Compass Marks"
+msgstr "סימוני מצפן"
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:60
+msgid "Displays compass bearing marks along the horizon"
+msgstr "תצוגת כיווני מצפן באופק"
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:121
+msgid "Compass marks"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:76
+msgid "Oculars"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:79
+msgid "Shows the sky as if looking through a telescope eyepiece"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:943
+msgid "Ocular view"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:965
+msgid "Oculars popup menu"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:67
+msgid "Satellites"
+msgstr "לווינים"
+
+#: plugins/Satellites/src/Satellites.cpp:70
+msgid ""
+"Prediction of artificial satellite positions in Earth orbit based on NORAD "
+"TLE data"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:125
+msgid "Satellites configuration window"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:126
+msgid "Satellite hints"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:128
+msgid "Satellite labels"
+msgstr "שמות לווינים"
+
+#: plugins/Satellites/src/Satellites.cpp:162
+msgid ""
+"The old satellites.json file is no longer compatible - using default file"
+msgstr ""
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:75
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:150
+msgid "Telescope Control"
+msgstr "שליטה על הטלסקופ"
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:78
+msgid ""
+"This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
+"computerized mount (a \"GoTo telescope\")."
+msgstr ""
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:155
+#, qt-format
+msgid "Move telescope #%1 to selected object"
+msgstr ""
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:162
+#, qt-format
+msgid "Move telescope #%1 to the point currently in the center of the screen"
+msgstr ""
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:173
+msgid "Move a telescope to a given set of coordinates"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
+msgid "Time Zone"
+msgstr "אזור זמן"
+
+#: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:44
+msgid ""
+"A convenient interface for some of the more obscure options in Stellarium's "
+"configuration file. Allows setting the time zone and changing the way the "
+"time and the date are displayed in the bottom bar."
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:78
+msgid "Text User Interface"
+msgstr "ממשק טקסט"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:81
+msgid ""
+"Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
+"planetarium systems"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
+msgid "Solar System Editor"
+msgstr "עורך מערכת השמש"
+
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:59
+msgid ""
+"An interface for adding asteroids and comets to Stellarium. It can download "
+"object lists from the Minor Planet Center's website and perform searches in "
+"its online database. Still a work in progress."
+msgstr ""
+
+#: plugins/Supernovas/src/Supernovas.cpp:59
+msgid "Historical supernova"
+msgstr ""
+
+#: plugins/Supernovas/src/Supernovas.cpp:62
+msgid ""
+"The plugin for visualization of some historical supernovas, brighter 10 "
+"magnitude"
+msgstr ""
+
+#: plugins/Supernovas/src/Supernovas.cpp:62
+msgid ""
+"SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
+"July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
+"1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
+"August), SN 1972E (8 May) and SN 1987A (24 February)"
+msgstr ""
+
+#: plugins/Supernovas/src/Supernova.cpp:105
+#, qt-format
+msgid "Type: %1"
+msgstr ""
+
+#, qt-format
+#~ msgid "Loading NGC catalog: %1/%2"
+#~ msgstr "טוען קטלוג NGC: %1/%2"
 
 #~ msgid "Form"
 #~ msgstr "טופס"
 
-#~ msgid "Loading NGC catalog"
-#~ msgstr "טוען קטלוג NGC"
-
-#~ msgid "Loading NGC catalog: %1/%2"
-#~ msgstr "טוען קטלוג NGC: %1/%2"
-
+#, qt-format
 #~ msgid "Loading catalog %1 from file %2"
 #~ msgstr "טוען את הקטלוג %1 מתוך הקובץ %2"
 
+#~ msgid "Loading NGC catalog"
+#~ msgstr "טוען קטלוג NGC"
+
 #~ msgid "Move telescope #0 to selected object"
 #~ msgstr "הזז טלסקופ #0 לעצם הנבחר"
-
-#~ msgid "Move telescope #1 to selected object"
-#~ msgstr "הזז טלסקופ #1 לעצם הנבחר"
 
 #~ msgid "Move telescope #2 to selected object"
 #~ msgstr "הזז טלסקופ #2 לעצם הנבחר"
@@ -2257,20 +2467,23 @@ msgstr "{ויקי סטלריום} - מידע כללי. כאן תוכלו להו�
 #~ msgid "Move telescope #3 to selected object"
 #~ msgstr "הזז טלסקופ #3 לעצם הנבחר"
 
-#~ msgid "Move telescope #4 to selected object"
-#~ msgstr "הזז טלסקופ #4 לעצם הנבחר"
-
-#~ msgid "Move telescope #5 to selected object"
-#~ msgstr "הזז טלסקופ #5 לעצם הנבחר"
-
-#~ msgid "Move telescope #6 to selected object"
-#~ msgstr "הזז טלסקופ #6 לעצם הנבחר"
-
-#~ msgid "Move telescope #7 to selected object"
-#~ msgstr "הזז טלסקופ #7 לעצם הנבחר"
+#~ msgid "Move telescope #9 to selected object"
+#~ msgstr "הזז טלסקופ #9 לעצם הנבחר"
 
 #~ msgid "Move telescope #8 to selected object"
 #~ msgstr "הזז טלסקופ #8 לעצם הנבחר"
 
-#~ msgid "Move telescope #9 to selected object"
-#~ msgstr "הזז טלסקופ #9 לעצם הנבחר"
+#~ msgid "Move telescope #5 to selected object"
+#~ msgstr "הזז טלסקופ #5 לעצם הנבחר"
+
+#~ msgid "Move telescope #4 to selected object"
+#~ msgstr "הזז טלסקופ #4 לעצם הנבחר"
+
+#~ msgid "Move telescope #7 to selected object"
+#~ msgstr "הזז טלסקופ #7 לעצם הנבחר"
+
+#~ msgid "Move telescope #6 to selected object"
+#~ msgstr "הזז טלסקופ #6 לעצם הנבחר"
+
+#~ msgid "Move telescope #1 to selected object"
+#~ msgstr "הזז טלסקופ #1 לעצם הנבחר"

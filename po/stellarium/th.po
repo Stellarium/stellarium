@@ -7,1206 +7,148 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-20 11:50-0400\n"
-"PO-Revision-Date: 2010-11-21 03:00+0000\n"
+"POT-Creation-Date: 2011-06-26 01:48+0700\n"
+"PO-Revision-Date: 2011-06-02 09:46+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-05 08:52+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-06-28 04:36+0000\n"
+"X-Generator: Launchpad (build 13168)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
-#: src/ui_locationDialogGui.h:407
-msgid " m"
-msgstr " ม."
+#: src/core/modules/GridLinesMgr.cpp:525
+msgid "Meridian"
+msgstr "เมริเดียน"
 
-#: src/gui/StelGuiItems.cpp:541
-#, no-c-format, qt-format
-msgid "%1m"
-msgstr "%1 ม."
+#: src/core/modules/GridLinesMgr.cpp:529
+msgid "Ecliptic"
+msgstr "สุริยวิถี"
 
-#: src/core/modules/LandscapeMgr.cpp:458
+#: src/core/modules/GridLinesMgr.cpp:533
+msgid "Equator"
+msgstr "เส้นศูนย์สูตร"
+
+#: src/core/modules/GridLinesMgr.cpp:537
+msgid "Horizon"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:488
+msgid "Author: "
+msgstr "ผู้สร้าง: "
+
+#: src/core/modules/LandscapeMgr.cpp:491
+msgid "Location: "
+msgstr "สถานที่: "
+
+#: src/core/modules/LandscapeMgr.cpp:496
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 ม."
 
-#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
-msgid "/"
-msgstr "/"
+#: src/core/modules/LandscapeMgr.cpp:499
+msgid "Planet: "
+msgstr "ดาวเคราะห์: "
 
-#: src/ui_viewDialog.h:1024
-msgid "0"
-msgstr "๐"
-
-#: src/ui_viewDialog.h:1025
-msgid "10"
-msgstr "๑๐"
-
-#: src/ui_viewDialog.h:1027
-msgid "10000"
-msgstr "๑๐๐๐๐"
-
-#: src/ui_viewDialog.h:1028
-msgid "144000"
-msgstr "๑๔๔๐๐๐"
-
-#: src/ui_viewDialog.h:1026
-msgid "80"
-msgstr "๘๐"
-
-#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
-msgid ":"
-msgstr ":"
-
-#: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:44
-msgid ""
-"A convenient interface for some of the more obscure options in Stellarium's "
-"configuration file. Allows setting the time zone and changing the way the "
-"time and the date are displayed in the bottom bar."
-msgstr ""
-
-#. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:227
+#: src/core/modules/Nebula.cpp:96
 #, qt-format
-msgid "A landscape with the same name or identifier (%1) already exists."
-msgstr "มีภูมิทัศน์ที่ใช้ชื่อเดียวกันหรือตัวระบุเดียวกัน (%1) อยู่แล้ว"
-
-#: src/ui_helpDialogGui.h:267
-msgid "About"
-msgstr "เกี่ยวกับ"
-
-#: src/core/modules/Planet.cpp:125 src/core/modules/StarWrapper.cpp:114
-#, qt-format
-msgid "Absolute Magnitude: %1"
-msgstr "อันดับความสว่างสัมบูรณ์ %1"
-
-#: src/ui_viewDialog.h:1002
-msgid "Absolute scale:"
-msgstr "อัตราส่วนจริง:"
-
-#: src/translations.h:140
-msgid "Actual Time"
-msgstr "เวลาจริง"
-
-#: src/gui/StelGui.cpp:157
-msgid "Add 1 sidereal day"
-msgstr "เพิ่ม ๑ วันดาราคติ"
-
-#: src/gui/StelGui.cpp:159
-msgid "Add 1 sidereal week"
-msgstr "เพิ่ม ๑ สัปดาห์ดาราคติ"
-
-#: src/gui/StelGui.cpp:153
-msgid "Add 1 solar day"
-msgstr "เพิ่ม ๑ วันสุริยะ"
-
-#: src/gui/StelGui.cpp:151
-msgid "Add 1 solar hour"
-msgstr "เพิ่ม ๑ ชั่วโมงสุริยะ"
-
-#: src/gui/StelGui.cpp:155
-msgid "Add 1 solar week"
-msgstr "เพิ่ม ๑ สัปดาห์สุริยะ"
-
-#: src/ui_addRemoveLandscapesDialog.h:268
-msgid "Add a new landscape"
-msgstr "เพิ่มภูมิทัศน์ใหม่"
-
-#: src/ui_locationDialogGui.h:394
-msgid "Add to list"
-msgstr "เพิ่มไปยังรายการ"
-
-#: src/ui_addRemoveLandscapesDialog.h:266
-msgid "Add/Remove Landscapes"
-msgstr "เพิ่ม/ลบ ภูมิทัศน์"
-
-#: src/ui_viewDialog.h:1045
-msgid "Add/remove landscapes..."
-msgstr "เพิ่มหรือลบภูมิทัศน์"
-
-#: src/translations.h:126
-msgid "Administration "
-msgstr "ผู้บริหาร "
-
-#: src/ui_configurationDialog.h:820
-msgid "Align labels with the horizon"
-msgstr "วางป้ายอักษรให้อยู่ในแนวขนานกับขอบฟ้า"
-
-#: src/ui_configurationDialog.h:755
-msgid "All available"
-msgstr "ทั้งหมดที่มี"
-
-#: src/ui_configurationDialog.h:784
-msgid "Allow keyboard to pan and zoom"
-msgstr "ใช้แป้นพิมพ์เพื่อส่ายและซูม"
-
-#: src/ui_configurationDialog.h:788
-msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr "ใช้เมาส์ในการส่าย (ลาก) และซูม (mousewheel)"
-
-#: src/translations.h:130
-msgid "Altitude (m): "
-msgstr "ระดับความสูง (ม.): "
-
-#: src/ui_locationDialogGui.h:403
-msgid "Altitude:"
-msgstr "ระดับความสูง:"
-
-#. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:85
-msgid "Amor"
-msgstr "เอมอร์"
-
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:59
-msgid ""
-"An interface for adding asteroids and comets to Stellarium. It can download "
-"object lists from the Minor Planet Center's website and perform searches in "
-"its online database. Still a work in progress."
-msgstr ""
-"ส่วนสำหรับเพิ่มข้อมูลดาวเคราะห์น้อยและดาวหางลงใน Stellarium "
-"มันจะดาวน์โหลดรายชื่อวัตถุจากเว็บไซต์ของศูนย์ดาวเคราะห์น้อย และค้นหาในฐานข้อมูลออนไลน์ "
-"ส่วนนี้ยังอยู่ระหว่างการพัฒนา"
-
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:57
-msgid "Angle Measure"
-msgstr "วัดมุม"
-
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:121
-msgid "Angle measure"
-msgstr "วัดมุม"
-
-#. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:87
-msgid "Apophis"
-msgstr "อะโพฟิส"
-
-#: src/core/modules/Planet.cpp:136
-#, qt-format
-msgid "Apparent diameter: %1"
-msgstr "เส้นผ่านศูนย์กลางปรากฏ: %1"
-
-#: src/translations.h:63
-msgid "Ariel"
-msgstr "แอเรียล"
-
-#: src/translations.h:185
-msgid "Arrow down to load list."
-msgstr "ใช้ลูกศรลงเพื่อโหลดรายการ"
-
-#: src/gui/HelpDialog.cpp:53
-msgid "Arrow keys & left mouse drag"
-msgstr "ปุ่มลูกศรและลากเมาส์ซ้าย"
-
-#: src/ui_viewDialog.h:1043
-msgid "Art brightness: "
-msgstr "ความสว่างของภาพวาด: "
-
-#. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:73
-msgid "Astraea"
-msgstr "แอสเทรีย"
-
-#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1015
-msgid "Atmosphere"
-msgstr "บรรยากาศ"
-
-#: src/gui/ConfigurationDialog.cpp:587
-msgid "Author"
-msgstr "ผู้ประพันธ์"
-
-#: src/core/modules/LandscapeMgr.cpp:450
-msgid "Author: "
-msgstr "ผู้สร้าง: "
-
-#: src/gui/ConfigurationDialog.cpp:511
-msgid "Authors"
-msgstr "ผู้ประพันธ์:"
-
-#: src/gui/StelGui.cpp:175
-msgid "Auto hide horizontal button bar"
-msgstr "ซ่อนแถบแนวนอนโดยอัตโนมัติ"
-
-#: src/gui/StelGui.cpp:176
-msgid "Auto hide vertical button bar"
-msgstr "ซ่อนแถบแนวตั้งโดยอัตโนมัติ"
-
-#: src/ui_configurationDialog.h:826
-msgid "Auto zoom out returns to initial direction of view"
-msgstr ""
-
-#: src/core/StelObject.cpp:91
-#, qt-format
-msgid "Az/Alt: %1/%2"
-msgstr "มุมทิศ/มุมเงย: %1/%2"
-
-#: src/translations.h:164
-msgid "Azimuthal Grid"
-msgstr "เส้นพิกัดภาคทิศ"
-
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1033
-msgid "Azimuthal grid"
-msgstr "เส้นพิกัดภาคทิศ"
-
-#: src/translations.h:103
-msgid "Aztec"
-msgstr ""
-
-#: src/translations.h:183
-msgid "CD/DVD Script: "
-msgstr "สคริปต์ที่มีอยู่ใน CD/DVD: "
-
-#: src/gui/HelpDialog.cpp:58
-msgid "CTRL + Left click"
-msgstr "CTRL และคลิกซ้าย"
-
-#: src/gui/HelpDialog.cpp:55
-msgid "CTRL + Up/Down"
-msgstr "CTRL + Up/Down"
-
-#: src/translations.h:136
-msgid "Calendar"
-msgstr "ปฏิทิน"
-
-#: src/translations.h:49
-msgid "Callisto"
-msgstr "คัสลิสโต"
-
-#: src/ui_configurationDialog.h:853
-msgid "Cancel"
-msgstr "ยกเลิก"
-
-#: src/translations.h:159
-msgid "Cardinal Points"
-msgstr "ทิศทั้งสี่"
-
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1037
-msgid "Cardinal points"
-msgstr "ทิศทั้งสี่"
-
-#: src/ui_viewDialog.h:1030
-msgid "Celestial Sphere"
-msgstr "โลกของท้องฟ้า"
-
-#: src/gui/StelGui.cpp:163
-msgid "Center on selected object"
-msgstr "ทำให้วัตถุที่เลือกมาอยู่กลางจอ"
-
-#: src/translations.h:41
-msgid "Ceres"
-msgstr "ซีรีส"
-
-#: src/translations.h:68
-msgid "Charon"
-msgstr "แครอน"
-
-#: src/translations.h:104
-msgid "Chinese"
-msgstr "จีน"
-
-#. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:89
-msgid "Chiron"
-msgstr "ไครอน"
-
-#: src/gui/HelpDialog.cpp:66 src/gui/HelpDialog.cpp:68
-msgid "Clear selection"
-msgstr "ล้างการเลือก"
-
-#: src/ui_configurationDialog.h:841
-msgid "Click here to start downloading"
-msgstr "คลิ๊กที่นี่เพื่อเริ่มการดาวน์โหลด"
-
-#: src/ui_configurationDialog.h:856
-msgid "Close window when script runs"
-msgstr "ปิดหน้าต่างเมื่อสคริปต์ทำงาน"
-
-#: src/core/modules/Nebula.cpp:284
-msgid "Cluster associated with nebulosity"
-msgstr "กระจุกที่เกี่ยวข้องกับกลุ่มก๊าซ"
-
-#: src/translations.h:123
-msgid "Colors "
-msgstr "สี "
-
-#: plugins/CompassMarks/src/CompassMarks.cpp:57
-msgid "Compass Marks"
-msgstr "เครื่องหมายแสดงทิศ"
-
-#: plugins/CompassMarks/src/CompassMarks.cpp:121
-msgid "Compass marks"
-msgstr ""
-
-#: src/ui_configurationDialog.h:748
-msgid "Configuration"
-msgstr "การตั้งค่า"
-
-#: src/gui/StelGui.cpp:131
-msgid "Configuration window"
-msgstr "หน้าต่างการปรับแต่ง"
-
-#: src/translations.h:157
-msgid "Constellation Art Intensity"
-msgstr "ความเข้มของภาพกลุ่มดาว"
-
-#: src/translations.h:158
-msgid "Constellation Boundaries"
-msgstr "อาณาเขตกลุ่มดาว"
-
-#: src/translations.h:155
-msgid "Constellation Lines"
-msgstr "เส้นกลุ่มดาว"
-
-#: src/translations.h:156
-msgid "Constellation Names"
-msgstr "ชื่อของกลุ่มดาว"
-
-#: src/gui/StelGui.cpp:100
-msgid "Constellation art"
-msgstr "ภาพกลุ่มดาว"
-
-#: src/gui/StelGui.cpp:102
-msgid "Constellation boundaries"
-msgstr "ขอบเขตของกลุ่มดาว"
-
-#: src/gui/StelGui.cpp:101
-msgid "Constellation labels"
-msgstr "ชื่อกลุ่มดาว"
-
-#: src/gui/StelGui.cpp:99
-msgid "Constellation lines"
-msgstr "เส้นกลุ่มดาว"
-
-#: src/ui_viewDialog.h:1038
-msgid "Constellations"
-msgstr "กลุ่มดาว"
-
-#: src/gui/ConfigurationDialog.cpp:515 src/gui/ViewDialog.cpp:347
-msgid "Contact"
-msgstr "การติดต่อ"
-
-#: src/ui_configurationDialog.h:782
-msgid "Control"
-msgstr "ควบคุม"
-
-#: src/translations.h:180
-msgid "Correct for light travel time: "
-msgstr "ปรับแก้โดยคำนึงถึงการเดินทางของแสง: "
-
-#: src/ui_locationDialogGui.h:409
-msgid "Country:"
-msgstr "ประเทศ:"
-
-#: src/ui_locationDialogGui.h:391
-msgid "Current location information"
-msgstr "ข้อมูลที่ตั้งปัจจุบัน"
-
-#: src/translations.h:179
-msgid "Cursor Timeout: "
-msgstr "เวลาปรากฏเคอร์เซอร์ "
-
-#: src/core/StelProjectorClasses.cpp:223
-msgid "Cylinder"
-msgstr "มุมมองแบบกระบอก"
-
-#: src/translations.h:143
-msgid "Date Display Format: "
-msgstr "รูปแบบวันที่: "
-
-#: src/gui/StelGui.cpp:140 src/ui_dateTimeDialogGui.h:294
-msgid "Date and Time"
-msgstr "วันที่ และ เวลา"
-
-#: src/gui/StelGui.cpp:134
-msgid "Date/time window"
-msgstr "หน้าต่าง วัน/เวลา"
-
-#: src/translations.h:135
-msgid "Day keys: "
-msgstr "กำหนดชนิดของวัน "
-
-#: src/gui/StelGui.cpp:144
-msgid "Decrease time speed"
-msgstr "เวลาถอยหลัง"
-
-#: src/gui/StelGui.cpp:147
-msgid "Decrease time speed (a little)"
-msgstr "เวลาถอยหลัง (เล็กน้อย)"
-
-#: src/ui_configurationDialog.h:764
-msgid "Default options"
-msgstr "ตัวเลือกปริยาย"
-
-#: src/translations.h:39
-msgid "Deimos"
-msgstr "ดีมอส"
-
-#: src/ui_locationDialogGui.h:393
-msgid "Delete"
-msgstr "ลบทิ้ง"
-
-#: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
-#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
-#, qt-format
-msgid "Developer: %1"
-msgstr "นักพัฒนา: %1"
-
-#: src/gui/HelpDialog.cpp:294
-msgid "Developers"
-msgstr "เหล่านักพัฒนา"
-
-#: src/ui_viewDialog.h:1006
-msgid "Dim faint stars when a very bright object is visible"
-msgstr "ลดแสงของดาวที่สว่างน้อย เมื่อมีวัตถุที่สว่างมากอยู่ในเขตการมองเห็น"
-
-#: src/translations.h:54
-msgid "Dione"
-msgstr "ไดโอเน"
-
-#: src/ui_configurationDialog.h:830
-msgid "Disc viewport"
-msgstr ""
-
-#: src/gui/StelGui.cpp:98
-msgid "Display Options"
-msgstr "ตัวเลือกการแสดงผล"
-
-#: src/ui_configurationDialog.h:753
-msgid "Display all information available"
-msgstr "แสดงข้อมูลทั้งหมด"
-
-#: src/ui_configurationDialog.h:757
-msgid "Display less information"
-msgstr "แสดงข้อมูลโดยสังเขป"
-
-#: src/ui_configurationDialog.h:761
-msgid "Display no information"
-msgstr "ไม่แสดงข้อมูล"
-
-#: plugins/CompassMarks/src/CompassMarks.cpp:60
-msgid "Displays compass bearing marks along the horizon"
-msgstr "แสดงแบริงเข็มทิศตามแนวขอบฟ้า"
-
-#: src/core/modules/StarWrapper.cpp:124
-#, qt-format
-msgid "Distance: %1 Light Years"
-msgstr "ระยะทาง: %1 ปีแสง"
-
-#: src/core/modules/Planet.cpp:132
-#, no-c-format, qt-format
-msgid "Distance: %1AU"
-msgstr "ระยะทาง: %1 หน่วยดาราศาสตร์"
-
-#: src/gui/HelpDialog.cpp:296
-#, qt-format
-msgid "Doc author/developer: %1"
-msgstr ""
-
-#: src/gui/ConfigurationDialog.cpp:678
-#, qt-format
-msgid ""
-"Download size: %1MB\n"
-"Star count: %2 Million\n"
-"Magnitude range: %3 - %4"
-msgstr ""
-"ขนาดดาวน์โหลด: %1เม็กกะไบต์\n"
-"จำนวนดาว: %2 ล้าน\n"
-"พิสัยความสว่าง: %3 - %4"
-
-#: src/ui_configurationDialog.h:844
-msgid "Download this file to view even more stars"
-msgstr "ดาวน์โหลดแฟ้มนี้เพื่อดูดาวมากขึ้น"
-
-#: src/gui/ConfigurationDialog.cpp:730
-#, qt-format
-msgid ""
-"Downloading %1...\n"
-"(You can close this window.)"
-msgstr ""
-"กำลังดาวน์โหลด %1...\n"
-"(คุณสามารถปิดหน้าต่างนี้ได้)"
-
-#: src/ui_viewDialog.h:1008
-msgid "Dynamic eye adaptation"
-msgstr "ปรับดวงตาตามสภาพของท้องฟ้า"
-
-#: src/translations.h:99
-msgid "E"
-msgstr "ตะวันออก"
-
-#: src/translations.h:36
-msgid "Earth"
-msgstr "โลก"
-
-#: src/core/modules/GridLinesMgr.cpp:520
-msgid "Ecliptic"
-msgstr "สุริยวิถี"
-
-#: src/translations.h:167
-msgid "Ecliptic Line"
-msgstr "เส้นสุริยวิถี"
-
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1036
-msgid "Ecliptic line"
-msgstr "เส้นสุริยวิถี"
-
-#: src/translations.h:124
-msgid "Effects "
-msgstr "เอฟเฟค "
-
-#: src/translations.h:105
-msgid "Egyptian"
-msgstr "อียิปต์"
-
-#: src/ui_configurationDialog.h:786
-msgid "Enable keyboard navigation"
-msgstr "เปิดใช้การนำทางผ่านแป้นพิมพ์"
-
-#: src/ui_configurationDialog.h:790
-msgid "Enable mouse navigation"
-msgstr "เปิดใช้การนำทางโดยเมาส์"
-
-#: src/translations.h:52
-msgid "Enceladus"
-msgstr "เอ็สเซลาดุส"
-
-#: src/ui_locationDialogGui.h:405
-msgid "Enter the altitude in meter"
-msgstr "ป้อนระดับความสูงในหน่วยเมตร"
-
-#: src/core/StelProjectorClasses.cpp:63
-msgid "Equal Area"
-msgstr "บริเวณเท่ากัน"
-
-#: src/core/modules/GridLinesMgr.cpp:524
-msgid "Equator"
-msgstr "เส้นศูนย์สูตร"
-
-#: src/translations.h:166
-msgid "Equator Line"
-msgstr "เส้นศูนย์สูตรฟ้า"
-
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1034
-msgid "Equator line"
-msgstr "เส้นศูนย์สูตร"
-
-#: src/translations.h:165
-msgid "Equatorial Grid"
-msgstr "กริดพิกัดศูนย์สูตร"
-
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1032
-msgid "Equatorial J2000 grid"
-msgstr "กริดศูนย์สูตร J2000"
-
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1031
-msgid "Equatorial grid"
-msgstr "กริดศูนย์สูตร"
-
-#: src/translations.h:69
-msgid "Eris"
-msgstr "อีริส"
-
-#. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:91
-msgid "Eros"
-msgstr "อีรอส"
-
-#: src/gui/ConfigurationDialog.cpp:725 src/gui/ConfigurationDialog.cpp:759
-#, qt-format
-msgid ""
-"Error downloading %1:\n"
-"%2"
-msgstr ""
-"เกิดข้อผิดพลาดในการดาวน์โหลด %1:\n"
-"%2"
-
-#: src/gui/ConfigurationDialog.cpp:814
-#, qt-format
-msgid ""
-"Error downloading %1:\n"
-"File is corrupted."
-msgstr ""
-"เกิดข้อผิดพลาดในการดาวน์โหลด %1:\n"
-"ไฟล์เสียหาย"
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:142
-#: src/gui/AddRemoveLandscapesDialog.cpp:166
-#: src/gui/AddRemoveLandscapesDialog.cpp:215
-#: src/gui/AddRemoveLandscapesDialog.cpp:221
-#: src/gui/AddRemoveLandscapesDialog.cpp:229
-#: src/gui/AddRemoveLandscapesDialog.cpp:239
-msgid "Error!"
-msgstr "ผิดพลาด!"
-
-#: src/translations.h:47
-msgid "Europa"
-msgstr "ยูโรปา"
-
-#: src/gui/ViewDialog.cpp:478
-msgid "Exceptional Leonid rate"
-msgstr "อัตราฝนดาวตกสิงโตระดับสูง"
-
-#: src/ui_searchDialogGui.h:440 src/ui_searchDialogGui.h:441
-msgid "Find Object"
-msgstr "ค้นหาวัตถุท้องฟ้า"
-
-#: src/gui/ConfigurationDialog.cpp:667
-msgid "Finished downloading all star catalogs!"
-msgstr "การดาวน์โหลดแค็ตตาล็อกดาวเสร็จสมบูรณ์"
-
-#: src/gui/ConfigurationDialog.cpp:687
-msgid ""
-"Finished downloading new star catalogs!\n"
-"Restart Stellarium to display them."
-msgstr ""
-"สิ้นสุดการดาวน์โหลดดวงดาวใหม่!\n"
-"เริ่ม Stellarium ใหม่เพื่อแสดง"
-
-#: src/core/StelProjectorClasses.cpp:145
-msgid "Fish-eye"
-msgstr "มุมมองตาปลา"
-
-#: src/gui/StelGui.cpp:126
-msgid "Flip scene horizontally"
-msgstr "กลับภาพในแนวนอน"
-
-#: src/gui/StelGui.cpp:127
-msgid "Flip scene vertically"
-msgstr "กลับภาพในแนวตั้ง"
-
-#. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:79
-msgid "Flora"
-msgstr "ฟลอรา"
-
-#: src/gui/StelGui.cpp:115
-msgid "Fog"
-msgstr "หมอก"
-
-#: src/gui/StelGui.cpp:125
-msgid "Full-screen mode"
-msgstr "โหมดเต็มจอ"
-
-#: src/gui/HelpDialog.cpp:172
-msgid "Further Reading"
-msgstr "ศึกษาเพิ่มเติม"
-
-#: src/gui/StelGui.cpp:107
-msgid "Galactic grid"
-msgstr "กริดกาแล็กซี"
-
-#: src/core/modules/Nebula.cpp:269
-msgid "Galaxy"
-msgstr "กาแล็กซี"
-
-#: src/translations.h:48
-msgid "Ganymede"
-msgstr "แกนีมีด"
-
-#: src/translations.h:121
-msgid "General "
-msgstr "ทั่วไป "
-
-#: src/gui/ConfigurationDialog.cpp:676
-#, qt-format
-msgid "Get catalog %1 of %2"
-msgstr "รับวัตถุหรือดวงดาว %1 จาก %2"
-
-#: src/ui_configurationDialog.h:843
-msgid "Get catalog x of y"
-msgstr "รับกลุ่มดาว x จาก y"
-
-#: src/core/modules/Nebula.cpp:275
-msgid "Globular cluster"
-msgstr "กระจุกดาวทรงกลม"
-
-#: src/gui/HelpDialog.cpp:297
-#, qt-format
-msgid "Graphic/other designer: %1"
-msgstr "นักออกแบบกราฟฟิก: %1"
-
-#: src/ui_configurationDialog.h:822
-msgid "Gravity labels"
-msgstr ""
-
-#: src/gui/StelGui.cpp:113
-msgid "Ground"
-msgstr "พื้น"
-
-#: src/core/StelProjectorClasses.cpp:182
-msgid "Hammer-Aitoff"
-msgstr "แฮมเมอร์-ไอทอฟฟ์"
-
-#. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:75
-msgid "Hebe"
-msgstr "ฮีบี"
-
-#. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:93
-msgid "Hektor"
-msgstr "เฮคเตอร์"
-
-#: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
-msgid "Help"
-msgstr "วิธีใช้"
-
-#: src/gui/StelGui.cpp:130
-msgid "Help window"
-msgstr "หน้าต่างช่วยเหลือ"
-
-#: src/ui_configurationDialog.h:832
-msgid "Hide other constellations when you click one"
-msgstr "ซ่อนกลุ่มดาวอื่นเมื่อคลิกที่กลุ่มดาวกลุ่มหนึ่ง"
-
-#: src/ui_configurationDialog.h:807
-msgid "Hides the mouse cursor when inactive"
-msgstr "ซ่อนตัวชี้เมาส์เมื่อไม่มีการใช้งาน"
-
-#: src/gui/ViewDialog.cpp:481
-msgid "Highest rate ever (1966 Leonids)"
-msgstr "อัตราตกสูงสุดเท่าที่เคยมีมา (ฝนดาวตกสิงโต ค.ศ. ๑๙๖๖)"
-
-#: src/core/StelObject.cpp:80
-#, qt-format
-msgid "Hour angle/DE: %1/%2"
-msgstr "มุมชั่วโมง/เดคลิเนชัน %1/%2"
-
-#: src/ui_viewDialog.h:1023
-msgid "Hourly zenith rate:"
-msgstr "อัตราสูงสุดต่อชั่วโมง:"
-
-#. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:83
-msgid "Hygiea"
-msgstr "ไฮเจีย"
-
-#: src/translations.h:57
-msgid "Hyperion"
-msgstr "ไฮเพอเรียน"
-
-#: src/translations.h:58
-msgid "Iapetus"
-msgstr "ไอแอพีทัส"
-
-#: src/core/StelProjectorClasses.cpp:150
-msgid ""
-"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
-"lines become curves when they appear a large angular distance from the "
-"centre of the field of view (like the distortions seen with very wide angle "
-"camera lenses)."
-msgstr ""
-"ในมุมมองตาปลาหรือ<i>มุมมองทิศทางของดาววัดบนพื้นโลกที่มีระยะเท่ากัน</i> "
-"แนวเส้นตรงกลายเป็นแนวเส้นโค้งเมื่อพวกมันปรากฎระยะทางเชิงมุมจากศูนย์กลางของมุมมอง "
-"(เหมือนการทำให้รูปบิดเบือนทำให้มองเป็นมุมกล้องที่กว้างมาก)"
-
-#: src/gui/StelGui.cpp:145
-msgid "Increase time speed"
-msgstr "เวลาเดินหน้า"
-
-#: src/gui/StelGui.cpp:148
-msgid "Increase time speed (a little)"
-msgstr "เวลาเดินหน้า (เล็กน้อย)"
-
-#: src/ui_addRemoveLandscapesDialog.h:269
-msgid "Install a new landscape from a ZIP archive..."
-msgstr "ติดตั้งภูมิทัศน์ใหม่จากแฟ้มบีบอัด"
-
-#: src/translations.h:106
-msgid "Inuit"
-msgstr "อินูอิท"
-
-#: src/ui_configurationDialog.h:838
-msgid "Invert colors"
-msgstr "กลับสี"
-
-#: src/translations.h:46
-msgid "Io"
-msgstr "ไอโอ"
-
-#. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:77
-msgid "Iris"
-msgstr "ไอริส"
-
-#: src/translations.h:43
-msgid "Juno"
-msgstr "จูโน"
-
-#: src/translations.h:45
-msgid "Jupiter"
-msgstr "ดาวพฤหัสบดี"
-
-#: src/ui_searchDialogGui.h:446
-msgid "Keyboard for Greek input"
-msgstr ""
-
-#: src/gui/HelpDialog.cpp:164
-msgid "Keys"
-msgstr "ปุ่ม"
-
-#: src/translations.h:107
-msgid "Korean"
-msgstr "เกาหลี"
-
-#: src/ui_viewDialog.h:1018
-msgid "Labels and Markers"
-msgstr "ชื่อ และ เครื่องหมาย"
-
-#: src/translations.h:108
-msgid "Lakota"
-msgstr "ลาโกตา"
-
-#: src/ui_viewDialog.h:996
-msgid "Landscape"
-msgstr "ภูมิทัศน์"
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:127
-#, qt-format
-msgid "Landscape \"%1\" has been installed successfully."
-msgstr "การติดตั้งภูมิทัศน์ \"%1\" สำเร็จแล้ว"
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:154
-#, qt-format
-msgid "Landscape \"%1\" has been removed successfully."
-msgstr "ภูมิทัศน์ \"%1\" ถูกลบออกเรียบร้อยแล้ว"
-
-#: src/translations.h:172
-msgid "Landscape: "
-msgstr "ภูมิทัศน์: "
-
-#: src/ui_locationDialogGui.h:395
-msgid "Latitude:"
-msgstr "ละติจูด:"
-
-#: src/translations.h:128
-msgid "Latitude: "
-msgstr "เส้นรุ้ง: "
-
-#: src/gui/HelpDialog.cpp:56
-msgid "Left click"
-msgstr "คลิกซ้าย"
-
-#: src/gui/ConfigurationDialog.cpp:588
-msgid "License"
-msgstr "ลิขสิทธิ์"
-
-#: src/translations.h:171
-msgid "Light Pollution Luminance: "
-msgstr "ปริมาณมลภาวะทางแสง: "
-
-#: src/ui_viewDialog.h:1017
-msgid "Light pollution: "
-msgstr "มลภาวะทางแสง: "
-
-#: src/translations.h:153
-msgid "Limiting Magnitude: "
-msgstr "การจำกัดค่าความสว่าง "
-
-#: src/translations.h:188
-msgid "Load Default Configuration: "
-msgstr "โหลดค่าเริ่มต้น: "
-
-#: src/ui_configurationDialog.h:866
-msgid "Load at startup"
-msgstr "โหลดเมื่อเริ่มต้นระบบ"
-
-#: src/translations.h:182
-msgid "Local Script: "
-msgstr "สคริปต์ที่มีอยู่ในโปรแกรม: "
-
-#: src/ui_locationDialogGui.h:387
-msgid "Location"
-msgstr "ตำแหน่งที่ตั้ง"
-
-#: src/gui/StelGui.cpp:135
-msgid "Location window"
-msgstr "หน้าต่างที่ตั้ง"
-
-#: src/core/modules/LandscapeMgr.cpp:453
-msgid "Location: "
-msgstr "สถานที่: "
-
-#: src/ui_helpDialogGui.h:269
-msgid "Log"
-msgstr "Log"
-
-#: src/ui_locationDialogGui.h:399
-msgid "Longitude:"
-msgstr "ลองจิจูด:"
-
-#: src/translations.h:129
-msgid "Longitude: "
-msgstr "เส้นแวง: "
-
-#: src/translations.h:175
-msgid "Magnitude Scaling Multiplier: "
-msgstr "ตัวคูณการปรับตามอันดับความสว่าง: "
-
-#: src/translations.h:150
-msgid "Magnitude Sizing Multiplier: "
-msgstr "ตัวคูณความใหญ่ซึ่งจัดกลุ่มตามขนาด : "
-
-#: src/core/modules/Nebula.cpp:95 src/core/modules/Planet.cpp:122
+msgid "Type: <b>%1</b>"
+msgstr "ชนิด: <b>%1</b>"
+
+#: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:120
+#: plugins/Supernovas/src/Supernova.cpp:98
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "อันดับความสว่าง: <b>%1</b>"
 
-#: src/core/modules/StarWrapper.cpp:52 src/core/modules/StarWrapper.cpp:110
+#: src/core/modules/Nebula.cpp:104
+#, qt-format
+msgid "Size: %1"
+msgstr "ขนาด: %1"
+
+#: src/core/modules/Nebula.cpp:284
+msgid "Galaxy"
+msgstr "กาแล็กซี"
+
+#: src/core/modules/Nebula.cpp:287
+msgid "Open cluster"
+msgstr "กระจุกดาวเปิด"
+
+#: src/core/modules/Nebula.cpp:290
+msgid "Globular cluster"
+msgstr "กระจุกดาวทรงกลม"
+
+#: src/core/modules/Nebula.cpp:293
+msgid "Nebula"
+msgstr "เนบิวลา"
+
+#: src/core/modules/Nebula.cpp:296
+msgid "Planetary nebula"
+msgstr "เนบิวลาดาวเคราะห์"
+
+#: src/core/modules/Nebula.cpp:299
+msgid "Cluster associated with nebulosity"
+msgstr "กระจุกที่เกี่ยวข้องกับกลุ่มก๊าซ"
+
+#: src/core/modules/Nebula.cpp:302
+msgid "Unknown"
+msgstr "ไม่มีข้อมูล"
+
+#: src/core/modules/Nebula.cpp:305
+msgid "Undocumented type"
+msgstr "ยังไม่ได้ระบุในเอกสาร"
+
+#: src/core/modules/Planet.cpp:123 src/core/modules/StarWrapper.cpp:112
+#, qt-format
+msgid "Absolute Magnitude: %1"
+msgstr "อันดับความสว่างสัมบูรณ์ %1"
+
+#: src/core/modules/Planet.cpp:136
+#, qt-format
+msgid "Ecliptic Geocentric (of date): %1/%2"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:137
+#, qt-format
+msgid "Obliquity (of date): %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:143
+#, no-c-format, qt-format
+msgid "Distance: %1AU"
+msgstr "ระยะทาง: %1 หน่วยดาราศาสตร์"
+
+#: src/core/modules/Planet.cpp:147
+#, qt-format
+msgid "Apparent diameter: %1"
+msgstr "เส้นผ่านศูนย์กลางปรากฏ: %1"
+
+#: src/core/modules/StarWrapper.cpp:51 src/core/modules/StarWrapper.cpp:108
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
 msgstr "อันดับความสว่าง: <b>%1</b> (B-V: %2)"
 
-#: src/ui_configurationDialog.h:872
-msgid "Main"
-msgstr "หลัก"
+#: src/core/modules/StarWrapper.cpp:118
+#, qt-format
+msgid "Spectral Type: %1"
+msgstr "ชนิดสเปกตรัม: %1"
 
-#: src/translations.h:173
-msgid "Manual zoom: "
-msgstr "ซูมด้วยมือ: "
+#: src/core/modules/StarWrapper.cpp:122
+#: plugins/Supernovas/src/Supernova.cpp:107
+#, qt-format
+msgid "Distance: %1 Light Years"
+msgstr "ระยะทาง: %1 ปีแสง"
 
-#: src/translations.h:109
-msgid "Maori"
-msgstr "เมารี"
-
-#: src/ui_viewDialog.h:994
-msgid "Markings"
-msgstr "เครื่องหมาย"
-
-#: src/translations.h:38
-msgid "Mars"
-msgstr "ดาวอังคาร"
-
-#: src/ui_configurationDialog.h:828
-msgid "Mask out everything outside a central circle in the main view"
-msgstr ""
+#: src/core/modules/StarWrapper.cpp:125
+#, qt-format
+msgid "Parallax: %1\""
+msgstr "แพรัลแลกซ์: %1\""
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
 msgstr "พื้นที่การมองเห็นสูงสุด: "
-
-#: src/translations.h:151
-msgid "Maximum Magnitude to Label: "
-msgstr "อันดับความสว่างสูงที่สุดที่จะแสดงชื่อ "
-
-#: src/translations.h:177
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "อันดับความสว่างสูงสุดของเนบิวลาที่จะแสดงชื่อ: "
-
-#: src/core/StelProjectorClasses.cpp:270
-msgid "Mercator"
-msgstr "เมอร์เคเตอร์"
-
-#: src/translations.h:34
-msgid "Mercury"
-msgstr "ดาวพุธ"
-
-#: src/core/modules/GridLinesMgr.cpp:516
-msgid "Meridian"
-msgstr "เมริเดียน"
-
-#: src/translations.h:163
-msgid "Meridian Line"
-msgstr "เส้นเมอริเดียน"
-
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1035
-msgid "Meridian line"
-msgstr "เส้นเมอริเดียน"
-
-#. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:81
-msgid "Metis"
-msgstr "มีทีส"
-
-#: src/translations.h:176
-msgid "Milky Way intensity: "
-msgstr "ความสว่างของทางช้างเผือก "
-
-#: src/translations.h:51
-msgid "Mimas"
-msgstr "ไมมาส"
-
-#: src/translations.h:62
-msgid "Miranda"
-msgstr "มิแรนดา"
-
-#: src/gui/HelpDialog.cpp:234 src/gui/HelpDialog.cpp:326
-#: src/gui/HelpDialog.cpp:328 src/gui/StelGui.cpp:169
-msgid "Miscellaneous"
-msgstr "จิปาถะ"
-
-#: src/translations.h:37
-msgid "Moon"
-msgstr "ดวงจันทร์"
-
-#: src/ui_configurationDialog.h:809
-msgid "Mouse cursor timeout (seconds):"
-msgstr "เวลาปรากฎตัวชี้เมาส์ (วินาที):"
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:173
-msgid "Move a telescope to a given set of coordinates"
-msgstr "หันกล้องโทรทรรศน์ไปยังพิกัดที่กำหนด"
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:155
-#, qt-format
-msgid "Move telescope #%1 to selected object"
-msgstr "หันกล้องโทรทรรศน์ #%1 ไปยังวัตถุที่เลือก"
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:162
-#, qt-format
-msgid "Move telescope #%1 to the point currently in the center of the screen"
-msgstr "หันกล้องโทรทรรศน์ #%1 ไปยังตำแหน่งที่อยู่กลางจอภาพในขณะนี้"
-
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:162
-msgid "Movement and Selection"
-msgstr "การเคลื่อนไหวและการเลือก"
-
-#: src/translations.h:97
-msgid "N"
-msgstr "เหนือ"
-
-#: src/ui_locationDialogGui.h:408
-msgid "Name/City:"
-msgstr "ชื่อ/เมือง:"
-
-#: src/translations.h:110
-msgid "Navajo"
-msgstr "นาวาโฮ"
-
-#: src/ui_configurationDialog.h:874
-msgid "Navigation"
-msgstr "นำทาง"
-
-#: src/core/modules/Nebula.cpp:278
-msgid "Nebula"
-msgstr "เนบิวลา"
-
-#: src/translations.h:169
-msgid "Nebula Circles"
-msgstr "วงกลมเนบิวลา"
-
-#: src/translations.h:168
-msgid "Nebula Names"
-msgstr "ชื่อเนบิวลา"
-
-#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1020
-msgid "Nebulas"
-msgstr "เนบิวลา"
-
-#: src/gui/StelGui.cpp:118
-msgid "Nebulas background images"
-msgstr "ภาพเบื้องหลังของเนบิวลา"
-
-#: src/translations.h:60
-msgid "Neptune"
-msgstr "เนปจูน"
-
-#: src/gui/LocationDialog.cpp:332
-msgid "New Location"
-msgstr "ตำแหน่งใหม่"
-
-#: src/gui/StelGui.cpp:124
-msgid "Night mode"
-msgstr "โหมดกลางคืน"
-
-#: src/gui/ViewDialog.cpp:401
-msgid "No description"
-msgstr "ไม่มีคำบรรยาย"
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:141
-#: src/gui/AddRemoveLandscapesDialog.cpp:211
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-#: src/gui/AddRemoveLandscapesDialog.cpp:228
-msgid "No landscape was installed."
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:469
-msgid "No shooting stars"
-msgstr "ไม่มีดาวตก"
-
-#: src/ui_configurationDialog.h:763
-msgid "None"
-msgstr "ไม่มี"
-
-#: src/gui/ViewDialog.cpp:472
-msgid "Normal rate"
-msgstr "อัตราปกติ"
-
-#: src/translations.h:111
-msgid "Norse"
-msgstr "นอเวย์"
-
-#: src/gui/HelpDialog.cpp:300
-#, qt-format
-msgid "OSX Developer: %1"
-msgstr "นักพัฒนา OSX: %1"
-
-#: src/translations.h:66
-msgid "Oberon"
-msgstr "โอเบอรอน"
-
-#: src/translations.h:174
-msgid "Object Sizing Rule: "
-msgstr "เกณฑ์การแสดงขนาดของวัตถุ: "
-
-#: plugins/Oculars/src/Oculars.cpp:943
-msgid "Ocular view"
-msgstr "มุมมองเลนส์ใกล้ตา"
-
-#: plugins/Oculars/src/Oculars.cpp:76
-msgid "Oculars"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:965
-msgid "Oculars popup menu"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:272
-msgid "Open cluster"
-msgstr "กระจุกดาวเปิด"
-
-#: src/ui_viewDialog.h:1046 src/ui_viewDialog.h:1051 src/ui_viewDialog.h:1053
-#: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
-msgid "Options"
-msgstr "ตัวเลือก"
-
-#: src/core/StelProjectorClasses.cpp:322
-msgid "Orthographic"
-msgstr "ออร์โทกราฟิก"
-
-#: src/core/StelProjectorClasses.cpp:327
-msgid ""
-"Orthographic projection is related to perspective projection, but the point "
-"of perspective is set to an infinite distance."
-msgstr "การฉายแบบออร์โทกราฟิกเกี่ยวข้องกับทัศนมิติ แต่จุดรวมสายตาอยู่ที่ระยะอนันต์"
-
-#: src/ui_configurationDialog.h:805
-msgid "Other"
-msgstr "อื่น ๆ"
-
-#: src/ui_configurationDialog.h:803
-msgid "Other:"
-msgstr "อื่น ๆ :"
-
-#: src/gui/HelpDialog.cpp:54
-msgid "Page Up/Down"
-msgstr "Page Up/Down"
-
-#: src/translations.h:42
-msgid "Pallas"
-msgstr "แพลลัส"
-
-#: src/gui/HelpDialog.cpp:62
-msgid "Pan view around the sky"
-msgstr "มองกราดไปทั่วท้องฟ้า"
-
-#: src/core/modules/StarWrapper.cpp:127
-#, qt-format
-msgid "Parallax: %1\""
-msgstr "แพรัลแลกซ์: %1\""
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
@@ -1217,547 +159,20 @@ msgid ""
 "Perspective projection keeps the horizon a straight line. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
-"การฉายเชิงทัศนมิติทำให้เส้นขอบฟ้าเป็นเส้นตรง ชื่อทางคณิตศาสตร์ของการฉายแบบนี้คือ  "
-"<i>การฉายแบบโนโมนิก</i>"
+"การฉายเชิงทัศนมิติทำให้เส้นขอบฟ้าเป็นเส้นตรง "
+"ชื่อทางคณิตศาสตร์ของการฉายแบบนี้คือ  <i>การฉายแบบโนโมนิก</i>"
 
-#: src/translations.h:40
-msgid "Phobos"
-msgstr "โฟบอส"
+#: src/core/StelProjectorClasses.cpp:63
+msgid "Equal Area"
+msgstr "บริเวณเท่ากัน"
 
-#: src/translations.h:59
-msgid "Phoebe"
-msgstr "ฟีบี"
-
-#: src/translations.h:160
-msgid "Planet Names"
-msgstr "ชื่อดาวเคราะห์"
-
-#: src/translations.h:161
-msgid "Planet Orbits"
-msgstr "วงโคจรดาวเคราะห์"
-
-#: src/translations.h:162
-msgid "Planet Trails"
-msgstr "ทางเดินของดาวเคราะห์"
-
-#: src/gui/StelGui.cpp:121
-msgid "Planet orbits"
-msgstr "วงโคจรดาวเคราะห์"
-
-#: src/gui/StelGui.cpp:122
-msgid "Planet trails"
-msgstr "รอยการเคลื่อนที่ของดาวเคราะห์"
-
-#: src/ui_locationDialogGui.h:410
-msgid "Planet:"
-msgstr "ดาวเคราะห์:"
-
-#: src/core/modules/LandscapeMgr.cpp:461
-msgid "Planet: "
-msgstr "ดาวเคราะห์: "
-
-#: src/ui_configurationDialog.h:814
-msgid "Planetarium options"
-msgstr "ตัวเลือกท้องฟ้าจำลอง"
-
-#: src/core/modules/Nebula.cpp:281
-msgid "Planetary nebula"
-msgstr "เนบิวลาดาวเคราะห์"
-
-#: src/ui_viewDialog.h:1021
-msgid "Planets"
-msgstr "ดาวเคราะห์"
-
-#: src/ui_viewDialog.h:1009
-msgid "Planets and satellites"
-msgstr "ดาวเคราะห์และบริวาร"
-
-#: src/gui/StelGui.cpp:120
-msgid "Planets labels"
-msgstr "ชื่อดาวเคราะห์"
-
-#. TRANSLATORS: Title of a group of key bindings in the Help window
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:121
-#: plugins/CompassMarks/src/CompassMarks.cpp:121
-#: plugins/Oculars/src/Oculars.cpp:931 plugins/Oculars/src/Oculars.cpp:945
-#: plugins/Satellites/src/Satellites.cpp:124
-msgid "Plugin Key Bindings"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:82
+#: src/core/StelProjectorClasses.cpp:68
 msgid ""
-"Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
-"planetarium systems"
+"The full name of this projection method is, <i>Lambert azimuthal equal-area "
+"projection</i>. It preserves the area but not the angle."
 msgstr ""
-
-#: src/ui_configurationDialog.h:880
-msgid "Plugins"
-msgstr "โปรแกรมเสริม"
-
-#: src/translations.h:67
-msgid "Pluto"
-msgstr "ดาวพลูโต"
-
-#: src/translations.h:112
-msgid "Polynesian"
-msgstr "โพลีนีเชีย"
-
-#: plugins/Satellites/src/Satellites.cpp:71
-msgid ""
-"Prediction of artificial satellite positions in Earth orbit based on NORAD "
-"TLE data"
-msgstr "การคาดหมายตำแหน่งดาวเทียมในวงโคจรรอบโลกจากข้อมูล TLE ของ NORAD"
-
-#: src/translations.h:138
-msgid "Preset Sky Time: "
-msgstr "ตั้งเวลาท้องฟ้าล่วงหน้า: "
-
-#: src/translations.h:141
-msgid "Preset Time"
-msgstr "เวลาที่ตั้งไว้ล่วงหน้า"
-
-#: src/ui_configurationDialog.h:750
-msgid "Program language"
-msgstr "ภาษาของโปรแกรม"
-
-#: src/gui/HelpDialog.cpp:295
-#, qt-format
-msgid "Project coordinator & lead developer: %1"
-msgstr "ผู้ร่วมโครงการและผู้พัฒนาหลัก: %1"
-
-#: src/ui_viewDialog.h:1044
-msgid "Projection"
-msgstr "การฉายภาพ"
-
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:60
-msgid "Provides an angle measurement tool"
-msgstr "แสดงเครื่องมือวัดมุม"
-
-#: src/gui/StelGui.cpp:171
-msgid "Quit"
-msgstr "ออก"
-
-#: src/core/StelObject.cpp:65
-#, qt-format
-msgid "RA/DE (J2000): %1/%2"
-msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000): %1/%2"
-
-#: src/core/StelObject.cpp:72
-#, qt-format
-msgid "RA/DE (of date): %1/%2"
-msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (ของวัน): %1/%2"
-
-#: src/ui_searchDialogGui.h:520
-msgid "RA/Dec (J2000):"
-msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000):"
-
-#: src/ui_helpDialogGui.h:272
-msgid "Refresh"
-msgstr "เรียกใหม่"
-
-#: src/ui_viewDialog.h:1003
-msgid "Relative scale:"
-msgstr "อัตราส่วนสัมพัทธ์"
-
-#: src/ui_addRemoveLandscapesDialog.h:275
-msgid "Remove"
-msgstr "เอาออก"
-
-#: src/ui_addRemoveLandscapesDialog.h:273
-msgid "Remove an installed landscape"
-msgstr ""
-
-#: src/ui_configurationDialog.h:847
-msgid "Restart the download"
-msgstr "เริ่มต้นการดาวน์โหลดใหม่"
-
-#: src/ui_configurationDialog.h:772
-msgid "Restore defaults"
-msgstr "คืนค่าเริ่มต้นเดิม"
-
-#: src/ui_configurationDialog.h:770
-msgid "Restore the default settings that came with Stellarium"
-msgstr "คืนค่าเดิมที่มาพร้อมกับ Stellarium"
-
-#: src/ui_configurationDialog.h:773
-msgid ""
-"Restoring default settings requires a restart of Stellarium. Saving all the "
-"current options includes the current FOV and direction of view for use at "
-"next startup."
-msgstr ""
-"การคืนค่าเริ่มต้นเดิมต้องการการเริ่มต้น Stellarium ใหม่ บันทึกทุกตัวเลือกปัจจุบัน "
-"รวมทั้งพื้นที่การมองเห็น และทิศทางของมุมมองสำหรับใช้ในการเริ่มต้นถัดไป"
-
-#: src/ui_configurationDialog.h:849
-msgid "Retry"
-msgstr "ลองซ้ำ"
-
-#: src/translations.h:55
-msgid "Rhea"
-msgstr "เรีย"
-
-#: src/gui/HelpDialog.cpp:57
-msgid "Right click"
-msgstr "คลิกขวา"
-
-#: src/ui_configurationDialog.h:858
-msgid "Run the selected script"
-msgstr "สั่งให้สคริปต์ที่เลือกไว้ทำงาน"
-
-#: src/gui/ConfigurationDialog.cpp:617
-msgid "Running script: "
-msgstr "สคริปต์ที่กำลังดำเนินงานอยู่: "
-
-#: src/gui/ConfigurationDialog.cpp:624
-msgid "Running script: [none]"
-msgstr "สคริปต์ที่กำลังดำเนินงานอยู่: [ไม่มี]"
-
-#: src/translations.h:98
-msgid "S"
-msgstr "ใต้"
-
-#: src/translations.h:113
-msgid "Sami"
-msgstr ""
-
-#: plugins/Satellites/src/Satellites.cpp:127
-msgid "Satellite hints"
-msgstr "ดาวเทียม"
-
-#: plugins/Satellites/src/Satellites.cpp:129
-msgid "Satellite labels"
-msgstr "ชื่อดาวเทียม"
-
-#: plugins/Satellites/src/Satellites.cpp:68
-msgid "Satellites"
-msgstr "บริวาร"
-
-#: plugins/Satellites/src/Satellites.cpp:126
-msgid "Satellites configuration window"
-msgstr "หน้าต่างการตั้งค่าดาวเทียม"
-
-#: src/translations.h:50
-msgid "Saturn"
-msgstr "ดาวเสาร์"
-
-#: src/translations.h:189
-msgid "Save Current Configuration as Default: "
-msgstr "บันทึกค่าปัจจุบันเป็นค่าเริ่มต้น: "
-
-#: src/gui/StelGui.cpp:172
-msgid "Save screenshot"
-msgstr "บันทึกภาพหน้าจอ"
-
-#: src/ui_configurationDialog.h:768
-msgid "Save settings"
-msgstr "บันทึกการตั้งค่าต่าง ๆ"
-
-#: src/ui_configurationDialog.h:766
-msgid ""
-"Save the settings you've changed this session to be the same the next time "
-"you start Stellarium"
-msgstr "บันทึกการตั้งค่าที่คุณได้เปลี่ยนแปลงนี้ ให้เป็นแบบเดียวกันเมื่อเริ่ม Stellarium ในครั้งต่อไป"
-
-#: src/ui_viewDialog.h:1014
-msgid "Scale Moon"
-msgstr "ขยายขนาดดวงจันทร์"
-
-#: src/ui_configurationDialog.h:836
-msgid "Screenshot Directory"
-msgstr "ไดเรกทอรี่ภาพหน้าจอที่บันทึก"
-
-#: src/ui_configurationDialog.h:835
-msgid "Screenshots"
-msgstr "ภาพหน้าจอ"
-
-#: src/gui/StelGui.cpp:137
-msgid "Script console window"
-msgstr "หน้าต่างรายการสคริปต์"
-
-#: src/ui_configurationDialog.h:878
-msgid "Scripts"
-msgstr "สคริปต์"
-
-#: src/translations.h:125
-msgid "Scripts "
-msgstr "สคริปต์ "
-
-#: src/gui/StelGui.cpp:132
-msgid "Search window"
-msgstr "หน้าต่างการค้นหา"
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:112
-msgid "Select a ZIP archive that contains a Stellarium landscape"
-msgstr "เลือกแฟ้มบีบอัดที่มีภูมิทัศน์สำหรับ Stellarium"
-
-#: src/translations.h:186
-msgid "Select and exit to run."
-msgstr "เลือกและออกเพื่อเริ่มการใช้งาน"
-
-#: src/gui/HelpDialog.cpp:65
-msgid "Select object"
-msgstr "เลือกวัตถุ"
-
-#: src/gui/ConfigurationDialog.cpp:297
-msgid "Select screenshot directory"
-msgstr "เลือกไดเร็กทอรีสำหรับเก็บภาพหน้าจอ"
-
-#: src/ui_configurationDialog.h:834
-msgid "Select single constellation"
-msgstr "เลือกกลุ่มดาวหนึ่ง"
-
-#: src/ui_configurationDialog.h:751
-msgid "Selected object information"
-msgstr "ข้อมูลวัตถุที่เลือก"
-
-#: src/translations.h:119
-msgid "Set Location "
-msgstr "ตั้งตำแหน่ง "
-
-#: src/translations.h:120
-msgid "Set Time "
-msgstr "ตั้งเวลา "
-
-#: src/translations.h:134
-msgid "Set Time Zone: "
-msgstr "เขตเวลามาตรฐาน: "
-
-#: src/translations.h:192
-msgid "Set UI Locale: "
-msgstr "เลือกภาษา: "
-
-#: src/gui/StelGui.cpp:167
-msgid "Set home planet to selected planet"
-msgstr "กำหนดดาวเคราะห์ที่เลือกให้เป็นดาวเคราะห์บ้าน"
-
-#: src/gui/StelGui.cpp:146
-msgid "Set normal time rate"
-msgstr "ความเร็วปกติ"
-
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:143
-msgid "Set the normal script execution rate"
-msgstr "ตั้งอัตราการปรัมวลผลสคริปต์เป็นอัตราปกติ"
-
-#: src/gui/StelGui.cpp:149
-msgid "Set time rate to zero"
-msgstr "ตั้งอัตราเวลาไปที่ศูนย์"
-
-#: src/gui/StelGui.cpp:150
-msgid "Set time to now"
-msgstr "กลับสู่เวลาปัจจุบัน"
-
-#: src/ui_configurationDialog.h:797
-msgid ""
-"Sets the simulation time to the next instance of this time of day when "
-"Stellarium starts"
-msgstr ""
-
-#: src/ui_viewDialog.h:1022
-msgid "Shooting Stars"
-msgstr "ดาวตก"
-
-#: src/ui_configurationDialog.h:759
-msgid "Short"
-msgstr "สั้น"
-
-#: src/ui_viewDialog.h:1042
-msgid "Show art"
-msgstr "แสดงภาพวาด"
-
-#: src/ui_viewDialog.h:1016
-msgid "Show atmosphere"
-msgstr "แสดงบรรยากาศ"
-
-#: src/ui_viewDialog.h:1041
-msgid "Show boundaries"
-msgstr "แสดงขอบเขต"
-
-#: src/ui_configurationDialog.h:813
-msgid "Show flip buttons"
-msgstr "แสดงปุ่มพลิก"
-
-#: src/ui_viewDialog.h:1048
-msgid "Show fog"
-msgstr "แสดงหมอก"
-
-#: src/ui_viewDialog.h:1047
-msgid "Show ground"
-msgstr "แสดงพื้นดิน"
-
-#: src/ui_viewDialog.h:1040
-msgid "Show labels"
-msgstr "แสดงป้ายชื่อ"
-
-#: src/ui_viewDialog.h:1039
-msgid "Show lines"
-msgstr "แสดงเส้น"
-
-#: src/ui_viewDialog.h:1011
-msgid "Show planet markers"
-msgstr "แสดงตัวบ่งชี้ดาวเคราะห์"
-
-#: src/ui_viewDialog.h:1012
-msgid "Show planet orbits"
-msgstr "แสดงวงโคจรของดาวเคราะห์"
-
-#: src/ui_viewDialog.h:1010
-msgid "Show planets"
-msgstr "แสดงดาวเคราะห์"
-
-#: src/translations.h:148
-msgid "Show: "
-msgstr "แสดง: "
-
-#: plugins/Oculars/src/Oculars.cpp:79
-msgid "Shows the sky as if looking through a telescope eyepiece"
-msgstr "แสดงท้องฟ้าเมื่อมองผ่านเลนส์ใกล้ตาของกล้องโทรทรรศน์"
-
-#: src/translations.h:190
-msgid "Shut Down: "
-msgstr "ปิดโปรแกรม: "
-
-#: src/translations.h:137
-msgid "Sidereal"
-msgstr "เวลาดาราคติ"
-
-#: src/ui_viewDialog.h:1013
-msgid "Simulate light speed"
-msgstr "จำลองตามความเร็วแสง"
-
-#. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:188
-#, qt-format
-msgid "Size on disk: %1 MiB"
-msgstr "ขนาดบนดิสก์: %1 MiB"
-
-#: src/core/modules/Nebula.cpp:100
-#, qt-format
-msgid "Size: %1"
-msgstr "ขนาด: %1"
-
-#: src/ui_viewDialog.h:992
-msgid "Sky"
-msgstr "ท้องฟ้า"
-
-#: src/translations.h:145
-msgid "Sky Culture: "
-msgstr "แสดงกลุ่มดาวตามวัฒนธรรม: "
-
-#: src/translations.h:146
-msgid "Sky Language: "
-msgstr "ภาษาบนท้องฟ้า: "
-
-#: src/translations.h:139
-msgid "Sky Time At Start-up: "
-msgstr "เวลาท้องฟ้าเมื่อเริ่มต้น: "
-
-#: src/translations.h:133
-msgid "Sky Time: "
-msgstr "เวลาท้องฟ้า: "
-
-#: src/gui/StelGui.cpp:133
-msgid "Sky and viewing options window"
-msgstr "หน้าต่างท้องฟ้าและการมองเห็น"
-
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:141
-msgid "Slow down the script execution rate"
-msgstr "ลดอัตราการประมวลผลสคริปต์"
-
-#: src/translations.h:131
-msgid "Solar System Body: "
-msgstr "วัตถุในระบบสุริยะ "
-
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
-msgid "Solar System Editor"
-msgstr "เครื่องมือปรับแต่งระบบสุริยะ"
-
-#: src/translations.h:70
-msgid "Solar System Observer"
-msgstr "ดูระบบสุริยะ"
-
-#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:285
-#: src/gui/StelGuiItems.cpp:640
-msgid "Space"
-msgstr "อวกาศ"
-
-#: src/core/modules/StarWrapper.cpp:120
-#, qt-format
-msgid "Spectral Type: %1"
-msgstr "ชนิดสเปกตรัม: %1"
-
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:142
-msgid "Speed up the script execution rate"
-msgstr "เพิ่มอัตราการประมวลผลสคริปต์"
-
-#: src/ui_configurationDialog.h:818
-msgid "Spheric mirror distortion"
-msgstr ""
-
-#: src/ui_configurationDialog.h:816
-msgid ""
-"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
-"mirror for low-cost planetarium systems."
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:475
-msgid "Standard Perseids rate"
-msgstr "อัตราฝนดาวตกเพอร์ซิอัสมาตรฐาน"
-
-#: src/translations.h:149
-msgid "Star Value Multiplier: "
-msgstr "ตัวคูณค่าความสว่างของดาวฤกษ์: "
-
-#: src/ui_configurationDialog.h:839
-msgid "Star catalog updates"
-msgstr "ปรับปรุงชุดกลุ่มดวงดาว"
-
-#: src/ui_viewDialog.h:998
-msgid "Starlore"
-msgstr "ตำนานดาว"
-
-#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1001 src/ui_viewDialog.h:1019
-msgid "Stars"
-msgstr "ดาวฤกษ์"
-
-#: src/translations.h:122
-msgid "Stars "
-msgstr "ดาวฤกษ์ "
-
-#: src/ui_configurationDialog.h:793
-msgid "Starts Stellarium at system clock date and time"
-msgstr "เริ่ม Stellarium ตามวันและเวลาของระบบ"
-
-#: src/gui/ConfigurationDialog.cpp:463
-#, qt-format
-msgid "Startup FOV: %1%2"
-msgstr "พื้นที่การมองเห็นเริ่มต้น: %1%2"
-
-#: src/ui_configurationDialog.h:777
-msgid "Startup FOV: XX"
-msgstr "พื้นที่การมองเห็นเริ่มต้น: XX"
-
-#: src/ui_configurationDialog.h:791
-msgid "Startup date and time"
-msgstr "วันและเวลาเริ่มต้น"
-
-#: src/gui/ConfigurationDialog.cpp:471
-#, qt-format
-msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr "ทิศทางการเริ่มต้นของการมองมุมทิศ/มุมเงย: %1/%2"
-
-#: src/ui_configurationDialog.h:781
-msgid "Startup direction of view: xxxx"
-msgstr "ทิศทางการเริ่มต้นของการดู: xxxx"
-
-#: src/gui/HelpDialog.cpp:163
-msgid "Stellarium Help"
-msgstr "วิธีใช้ Stellarium"
-
-#. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:214
-#, qt-format
-msgid "Stellarium cannot open for reading or writing %1"
-msgstr "Stellarium ไม่สามารถเปิด %1 เพื่ออ่านหรือเขียนได้"
+"ชื่อเต็มของการฉายภาพแบบนี้คือ <i>Lambert azimuthal equal-area projection</i> "
+"ซึ่งเป็นการฉายภาพที่คงพื้นที่การฉายภาพแต่ไม่คงองศามุมมอง"
 
 #: src/core/StelProjectorClasses.cpp:108
 msgid "Stereographic"
@@ -1769,112 +184,52 @@ msgid ""
 "known as the planisphere projection. It preserves the angles at which curves "
 "cross each other but it does not preserve area."
 msgstr ""
-"การฉายแบบสเตอริโอกราฟมีการใช้งานมาตั้งแต่ยุคโบราณ เดิมเรียกว่าการฉายทรงกลมลงบนระนาบ "
+"การฉายแบบสเตอริโอกราฟมีการใช้งานมาตั้งแต่ยุคโบราณ "
+"เดิมเรียกว่าการฉายทรงกลมลงบนระนาบ "
 "การฉายแบบนี้จะคงสภาพของมุมที่เส้นโค้งตัดกัน แต่ไม่คงพื้นที่"
 
-#: src/ui_configurationDialog.h:862
-msgid "Stop a running script"
-msgstr "หยุดสคริปต์ที่กำลังทำงานอยู่"
+#: src/core/StelProjectorClasses.cpp:145
+msgid "Fish-eye"
+msgstr "มุมมองตาปลา"
 
-#: src/ui_configurationDialog.h:851
-msgid "Stop the download. You can always restart it later"
-msgstr "หยุดการดาวน์โหลด คุณสามารถเริ่มต้นใหม่ได้ในภายหลัง"
-
-#: src/gui/StelGui.cpp:158
-msgid "Subtract 1 sidereal day"
-msgstr "ลบ ๑ วันดาราคติ"
-
-#: src/gui/StelGui.cpp:160
-msgid "Subtract 1 sidereal week"
-msgstr "ลบ ๑ สัปดาห์ดาราคติ"
-
-#: src/gui/StelGui.cpp:154
-msgid "Subtract 1 solar day"
-msgstr "ลบ ๑ วันสุริยะ"
-
-#: src/gui/StelGui.cpp:152
-msgid "Subtract 1 solar hour"
-msgstr "ลบ ๑ ชั่วโมงสุริยะ"
-
-#: src/gui/StelGui.cpp:156
-msgid "Subtract 1 solar week"
-msgstr "ลบ ๑ สัปดาห์สุริยะ"
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:128
-#: src/gui/AddRemoveLandscapesDialog.cpp:155
-msgid "Success"
-msgstr "สำเร็จ"
-
-#: src/translations.h:33
-msgid "Sun"
-msgstr "ดวงอาทิตย์"
-
-#: src/gui/StelGui.cpp:170
-msgid "Switch between equatorial and azimuthal mount"
-msgstr "สลับระหว่างแนวเชิงศูนย์สูตรกับภาคทิศ"
-
-#: src/ui_addRemoveLandscapesDialog.h:270
-msgid "Switch to the new landscape after installation"
-msgstr "สลับไปที่ภูมิทัศน์ใหม่หลังจากติดตั้ง"
-
-#: src/ui_configurationDialog.h:795
-msgid "System date and time"
-msgstr "ระบบวันและเวลา"
-
-#: src/ui_configurationDialog.h:799
-msgid "System date at:"
-msgstr "วันที่ระบบคือ:"
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:75
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:150
-msgid "Telescope Control"
-msgstr "ควบคุมกล้องโทรทรรศน์"
-
-#: src/translations.h:53
-msgid "Tethys"
-msgstr "ธีธีส"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:79
-msgid "Text User Interface"
+#: src/core/StelProjectorClasses.cpp:150
+msgid ""
+"In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
+"lines become curves when they appear a large angular distance from the "
+"centre of the field of view (like the distortions seen with very wide angle "
+"camera lenses)."
 msgstr ""
+"ในมุมมองตาปลาหรือ<i>มุมมองทิศทางของดาววัดบนพื้นโลกที่มีระยะเท่ากัน</i> "
+"แนวเส้นตรงกลายเป็นแนวเส้นโค้งเมื่อพวกมันปรากฎระยะทางเชิงมุมจากศูนย์กลางของมุม"
+"มอง (เหมือนการทำให้รูปบิดเบือนทำให้มองเป็นมุมกล้องที่กว้างมาก)"
+
+#: src/core/StelProjectorClasses.cpp:182
+msgid "Hammer-Aitoff"
+msgstr "แฮมเมอร์-ไอทอฟฟ์"
 
 #: src/core/StelProjectorClasses.cpp:187
 msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
 msgstr ""
-"การฉายแบบแฮมเมอร์เป็นการฉายแบบคงพื้นที่ เสนอโดยเออร์เนสต์ แฮมเมอร์ เมื่อ ค.ศ. 1892  "
-"ได้รับแรงบันดาลใจโดยตรงมาจากการฉายแบบไอทอฟฟ์"
+"การฉายแบบแฮมเมอร์เป็นการฉายแบบคงพื้นที่ เสนอโดยเออร์เนสต์ แฮมเมอร์ เมื่อ "
+"ค.ศ. 1892  ได้รับแรงบันดาลใจโดยตรงมาจากการฉายแบบไอทอฟฟ์"
 
-#: src/gui/HelpDialog.cpp:174
-msgid "The Stellarium User Guide"
-msgstr "คู่มือผู้ใช้งาน Stellarium"
-
-#: src/ui_configurationDialog.h:779
-msgid "The direction you're looking when Stellarium starts"
-msgstr "ทิศทางที่คุณต้องการเมื่อเริ่ม Stellarium"
-
-#: src/gui/HelpDialog.cpp:173
-msgid ""
-"The following links are external web links, and will launch your web "
-"browser:\n"
-msgstr "การเชื่อมต่อนี้จะเชื่อมต่อเวบภายนอก และจะเรียกให้เบราเซอร์ของท่านทำงาน\n"
-
-#: src/core/StelProjectorClasses.cpp:68
-msgid ""
-"The full name of this projection method is, <i>Lambert azimuthal equal-area "
-"projection</i>. It preserves the area but not the angle."
-msgstr ""
-"ชื่อเต็มของการฉายภาพแบบนี้คือ <i>Lambert azimuthal equal-area projection</i> "
-"ซึ่งเป็นการฉายภาพที่คงพื้นที่การฉายภาพแต่ไม่คงองศามุมมอง"
+#: src/core/StelProjectorClasses.cpp:223
+msgid "Cylinder"
+msgstr "มุมมองแบบกระบอก"
 
 #: src/core/StelProjectorClasses.cpp:228
 msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
 msgstr ""
-"ชื่อเต็มของโหมดมุมมองแบบนี้คือ<i>มุมมองแบบกระบอกที่มีระยะเท่ากัน</"
-"i>ด้วยมุมมองแบบนี้คู่ขนานทั้งหมดจะมีระยะเว้นเท่ากัน"
+"ชื่อเต็มของโหมดมุมมองแบบนี้คือ<i>มุมมองแบบกระบอกที่มีระยะเท่ากัน</i>ด้วยมุมมอ"
+"งแบบนี้คู่ขนานทั้งหมดจะมีระยะเว้นเท่ากัน"
+
+#: src/core/StelProjectorClasses.cpp:270
+msgid "Mercator"
+msgstr "เมอร์เคเตอร์"
 
 #: src/core/StelProjectorClasses.cpp:275
 msgid ""
@@ -1882,28 +237,2155 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
-"การฉายแบบเมอร์เคเตอร์เป็นการฉายที่นิยมใช้ในแผนที่โลก การฉายแบบนี้จะคงทิศทางและรูปร่างไว้ "
-"แต่ขนาดจะผิดเพี้ยนมากยิ่งขึ้น ตามระยะห่างจากเส้นศูนย์สูตร"
+"การฉายแบบเมอร์เคเตอร์เป็นการฉายที่นิยมใช้ในแผนที่โลก "
+"การฉายแบบนี้จะคงทิศทางและรูปร่างไว้ แต่ขนาดจะผิดเพี้ยนมากยิ่งขึ้น "
+"ตามระยะห่างจากเส้นศูนย์สูตร"
 
-#: plugins/Satellites/src/Satellites.cpp:163
+#: src/core/StelProjectorClasses.cpp:322
+msgid "Orthographic"
+msgstr "ออร์โทกราฟิก"
+
+#: src/core/StelProjectorClasses.cpp:327
 msgid ""
-"The old satellites.json file is no longer compatible - using default file"
-msgstr "แฟ้ม satellites.json แฟ้มเก่าเข้ากันไม่ได้แล้ว กำลังใช้แฟ้มปริยาย"
+"Orthographic projection is related to perspective projection, but the point "
+"of perspective is set to an infinite distance."
+msgstr ""
+"การฉายแบบออร์โทกราฟิกเกี่ยวข้องกับทัศนมิติ แต่จุดรวมสายตาอยู่ที่ระยะอนันต์"
 
+#: src/core/StelObject.cpp:79
+#, qt-format
+msgid "RA/DE (J2000): %1/%2"
+msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000): %1/%2"
+
+#: src/core/StelObject.cpp:86
+#, qt-format
+msgid "RA/DE (of date): %1/%2"
+msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (ของวัน): %1/%2"
+
+#: src/core/StelObject.cpp:94 src/core/StelObject.cpp:97
+#, qt-format
+msgid "Hour angle/DE: %1/%2"
+msgstr "มุมชั่วโมง/เดคลิเนชัน %1/%2"
+
+#: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
+msgid "(geometric)"
+msgstr ""
+
+#: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
+msgid "(apparent)"
+msgstr ""
+
+#: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
+#, qt-format
+msgid "Az/Alt: %1/%2"
+msgstr "มุมทิศ/มุมเงย: %1/%2"
+
+#: src/gui/ConfigurationDialog.cpp:295
+msgid "Select screenshot directory"
+msgstr "เลือกไดเร็กทอรีสำหรับเก็บภาพหน้าจอ"
+
+#: src/gui/ConfigurationDialog.cpp:461
+#, qt-format
+msgid "Startup FOV: %1%2"
+msgstr "พื้นที่การมองเห็นเริ่มต้น: %1%2"
+
+#: src/gui/ConfigurationDialog.cpp:469
+#, qt-format
+msgid "Startup direction of view Az/Alt: %1/%2"
+msgstr "ทิศทางการเริ่มต้นของการมองมุมทิศ/มุมเงย: %1/%2"
+
+#: src/gui/ConfigurationDialog.cpp:509
+msgid "Authors"
+msgstr "ผู้ประพันธ์:"
+
+#: src/gui/ConfigurationDialog.cpp:513 src/gui/ViewDialog.cpp:368
+msgid "Contact"
+msgstr "การติดต่อ"
+
+#: src/gui/ConfigurationDialog.cpp:585
+msgid "Author"
+msgstr "ผู้ประพันธ์"
+
+#: src/gui/ConfigurationDialog.cpp:586
+msgid "License"
+msgstr "ลิขสิทธิ์"
+
+#: src/gui/ConfigurationDialog.cpp:615
+msgid "Running script: "
+msgstr "สคริปต์ที่กำลังดำเนินงานอยู่: "
+
+#: src/gui/ConfigurationDialog.cpp:622
+msgid "Running script: [none]"
+msgstr "สคริปต์ที่กำลังดำเนินงานอยู่: [ไม่มี]"
+
+#: src/gui/ConfigurationDialog.cpp:665
+msgid "Finished downloading all star catalogs!"
+msgstr "การดาวน์โหลดแค็ตตาล็อกดาวเสร็จสมบูรณ์"
+
+#: src/gui/ConfigurationDialog.cpp:674
+#, qt-format
+msgid "Get catalog %1 of %2"
+msgstr "รับวัตถุหรือดวงดาว %1 จาก %2"
+
+#: src/gui/ConfigurationDialog.cpp:676
+#, qt-format
+msgid ""
+"Download size: %1MB\n"
+"Star count: %2 Million\n"
+"Magnitude range: %3 - %4"
+msgstr ""
+"ขนาดดาวน์โหลด: %1 เมกะไบต์\n"
+"จำนวนดาว: %2 ล้าน\n"
+"พิสัยอันดับความสว่าง: %3 - %4"
+
+#: src/gui/ConfigurationDialog.cpp:685
+msgid ""
+"Finished downloading new star catalogs!\n"
+"Restart Stellarium to display them."
+msgstr ""
+"สิ้นสุดการดาวน์โหลดดวงดาวใหม่!\n"
+"เริ่ม Stellarium ใหม่เพื่อแสดง"
+
+#: src/gui/ConfigurationDialog.cpp:723 src/gui/ConfigurationDialog.cpp:757
+#, qt-format
+msgid ""
+"Error downloading %1:\n"
+"%2"
+msgstr ""
+"เกิดข้อผิดพลาดในการดาวน์โหลด %1:\n"
+"%2"
+
+#: src/gui/ConfigurationDialog.cpp:728
+#, qt-format
+msgid ""
+"Downloading %1...\n"
+"(You can close this window.)"
+msgstr ""
+"กำลังดาวน์โหลด %1...\n"
+"(คุณสามารถปิดหน้าต่างนี้ได้)"
+
+#: src/gui/ConfigurationDialog.cpp:808
+msgid "Verifying file integrity..."
+msgstr "กำลังทวนสอบบูรณภาพของแฟ้มข้อมูล..."
+
+#: src/gui/ConfigurationDialog.cpp:812
+#, qt-format
+msgid ""
+"Error downloading %1:\n"
+"File is corrupted."
+msgstr ""
+"เกิดข้อผิดพลาดในการดาวน์โหลด %1:\n"
+"ไฟล์เสียหาย"
+
+#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:285
+#: src/gui/StelGuiItems.cpp:640
+msgid "Space"
+msgstr "Space"
+
+#: src/gui/HelpDialog.cpp:53
+msgid "Arrow keys & left mouse drag"
+msgstr "ปุ่มลูกศรและลากเมาส์ซ้าย"
+
+#: src/gui/HelpDialog.cpp:54
+msgid "Page Up/Down"
+msgstr "Page Up/Down"
+
+#: src/gui/HelpDialog.cpp:55
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Up/Down"
+
+#: src/gui/HelpDialog.cpp:56
+msgid "Left click"
+msgstr "คลิกซ้าย"
+
+#: src/gui/HelpDialog.cpp:57
+msgid "Right click"
+msgstr "คลิกขวา"
+
+#: src/gui/HelpDialog.cpp:58
+msgid "CTRL + Left click"
+msgstr "CTRL และคลิกซ้าย"
+
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:163
+msgid "Movement and Selection"
+msgstr "การเคลื่อนไหวและการเลือก"
+
+#: src/gui/HelpDialog.cpp:62
+msgid "Pan view around the sky"
+msgstr "มองกราดไปทั่วท้องฟ้า"
+
+#: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
+msgid "Zoom in/out"
+msgstr "ซูมเข้า/ออก"
+
+#: src/gui/HelpDialog.cpp:65
+msgid "Select object"
+msgstr "เลือกวัตถุ"
+
+#: src/gui/HelpDialog.cpp:66 src/gui/HelpDialog.cpp:68
+msgid "Clear selection"
+msgstr "ล้างการเลือก"
+
+#: src/gui/HelpDialog.cpp:71
+msgid "When a Script is Running"
+msgstr "เมื่อสคริปต์กำลังทำงาน"
+
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:142
+msgid "Slow down the script execution rate"
+msgstr "ลดอัตราการประมวลผลสคริปต์"
+
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:143
+msgid "Speed up the script execution rate"
+msgstr "เพิ่มอัตราการประมวลผลสคริปต์"
+
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:144
+msgid "Set the normal script execution rate"
+msgstr "ตั้งอัตราการประมวลผลสคริปต์เป็นอัตราปกติ"
+
+#: src/gui/HelpDialog.cpp:163
+msgid "Stellarium Help"
+msgstr "วิธีใช้ Stellarium"
+
+#: src/gui/HelpDialog.cpp:164
+msgid "Keys"
+msgstr "ปุ่ม"
+
+#: src/gui/HelpDialog.cpp:172
+msgid "Further Reading"
+msgstr "ศึกษาเพิ่มเติม"
+
+#: src/gui/HelpDialog.cpp:173
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"การเชื่อมต่อนี้จะเชื่อมต่อเวบภายนอก และจะเรียกให้เบราเซอร์ของท่านทำงาน\n"
+
+#: src/gui/HelpDialog.cpp:174
+msgid "The Stellarium User Guide"
+msgstr "คู่มือผู้ใช้งาน Stellarium"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:178
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{คำถามที่ถามบ่อย} เกี่ยวกับ Stellarium และคำตอบ"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:183
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Stellarium วิกิ} - ข้อมูลทั่วไป "
+"คุณสามารถหารายชื่อผู้เข้าร่วมและสคริปต์ได้ที่นี่"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:188
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{ระบบสนับสนุน} - ถ้าคุณต้องการความช่วยเหลือ "
+"สามารถร้องขอความช่วยเหลือได้ที่นี่ แล้วเราจะช่วยคุณ"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:193
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{ระบบการรายงานข้อผิดพลาดและข้อเสนอแนะ} - "
+"หากพบการทำงานผิดปกติซึ่งไม่ได้แสดงไว้ใน tracker "
+"คุณสามารถสร้างรายงานข้อผิดพลาดได้ที่นี่"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:198
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{กระทู้} - ถกปัญหากับผู้ใช้คนอื่น ๆ  เกี่ยวกับ Stellarium"
+
+#: src/gui/HelpDialog.cpp:234 src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:328 src/gui/StelGui.cpp:170
+msgid "Miscellaneous"
+msgstr "จิปาถะ"
+
+#: src/gui/HelpDialog.cpp:294
+msgid "Developers"
+msgstr "เหล่านักพัฒนา"
+
+#: src/gui/HelpDialog.cpp:295
+#, qt-format
+msgid "Project coordinator & lead developer: %1"
+msgstr "ผู้ร่วมโครงการและผู้พัฒนาหลัก: %1"
+
+#: src/gui/HelpDialog.cpp:296
+#, qt-format
+msgid "Doc author/developer: %1"
+msgstr "เจ้าของผลงาน/ผู้พัฒนา เอกสาร: %1"
+
+#: src/gui/HelpDialog.cpp:297
+#, qt-format
+msgid "Graphic/other designer: %1"
+msgstr "นักออกแบบกราฟฟิก: %1"
+
+#: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
+#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
+#, qt-format
+msgid "Developer: %1"
+msgstr "นักพัฒนา: %1"
+
+#: src/gui/HelpDialog.cpp:300
+#, qt-format
+msgid "OSX Developer: %1"
+msgstr "นักพัฒนา OSX: %1"
+
+#: src/gui/StelGui.cpp:98
+msgid "Display Options"
+msgstr "ตัวเลือกการแสดงผล"
+
+#: src/gui/StelGui.cpp:99
+msgid "Constellation lines"
+msgstr "เส้นกลุ่มดาว"
+
+#: src/gui/StelGui.cpp:100
+msgid "Constellation art"
+msgstr "ภาพกลุ่มดาว"
+
+#: src/gui/StelGui.cpp:101
+msgid "Constellation labels"
+msgstr "ชื่อกลุ่มดาว"
+
+#: src/gui/StelGui.cpp:102
+msgid "Constellation boundaries"
+msgstr "ขอบเขตของกลุ่มดาว"
+
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1103
+msgid "Azimuthal grid"
+msgstr "เส้นพิกัดภาคทิศ"
+
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1101
+msgid "Equatorial grid"
+msgstr "กริดศูนย์สูตร"
+
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1102
+msgid "Equatorial J2000 grid"
+msgstr "กริดศูนย์สูตร J2000"
+
+#: src/gui/StelGui.cpp:107
+msgid "Galactic grid"
+msgstr "กริดกาแล็กซี"
+
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1107
+msgid "Ecliptic line"
+msgstr "เส้นสุริยวิถี"
+
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1104
+msgid "Equator line"
+msgstr "เส้นศูนย์สูตร"
+
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1105
+msgid "Meridian line"
+msgstr "เส้นเมอริเดียน"
+
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
+msgid "Horizon line"
+msgstr ""
+
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
+msgid "Cardinal points"
+msgstr "ทิศทั้งสี่"
+
+#: src/gui/StelGui.cpp:114
+msgid "Ground"
+msgstr "พื้น"
+
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1081
+msgid "Atmosphere"
+msgstr "บรรยากาศ"
+
+#: src/gui/StelGui.cpp:116
+msgid "Fog"
+msgstr "หมอก"
+
+#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1090
+msgid "Nebulas"
+msgstr "เนบิวลา"
+
+#: src/gui/StelGui.cpp:119
+msgid "Nebulas background images"
+msgstr "ภาพเบื้องหลังของเนบิวลา"
+
+#: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1067 src/ui_viewDialog.h:1089
+msgid "Stars"
+msgstr "ดาวฤกษ์"
+
+#: src/gui/StelGui.cpp:121
+msgid "Planets labels"
+msgstr "ชื่อดาวเคราะห์"
+
+#: src/gui/StelGui.cpp:122
+msgid "Planet orbits"
+msgstr "วงโคจรดาวเคราะห์"
+
+#: src/gui/StelGui.cpp:123
+msgid "Planet trails"
+msgstr "รอยการเคลื่อนที่ของดาวเคราะห์"
+
+#: src/gui/StelGui.cpp:125
+msgid "Night mode"
+msgstr "โหมดกลางคืน"
+
+#: src/gui/StelGui.cpp:126
+msgid "Full-screen mode"
+msgstr "โหมดเต็มจอ"
+
+#: src/gui/StelGui.cpp:127
+msgid "Flip scene horizontally"
+msgstr "กลับภาพในแนวนอน"
+
+#: src/gui/StelGui.cpp:128
+msgid "Flip scene vertically"
+msgstr "กลับภาพในแนวตั้ง"
+
+#: src/gui/StelGui.cpp:130
+msgid "Windows"
+msgstr "หน้าต่าง"
+
+#: src/gui/StelGui.cpp:131
+msgid "Help window"
+msgstr "หน้าต่างช่วยเหลือ"
+
+#: src/gui/StelGui.cpp:132
+msgid "Configuration window"
+msgstr "หน้าต่างการปรับแต่ง"
+
+#: src/gui/StelGui.cpp:133
+msgid "Search window"
+msgstr "หน้าต่างการค้นหา"
+
+#: src/gui/StelGui.cpp:134
+msgid "Sky and viewing options window"
+msgstr "หน้าต่างท้องฟ้าและการมองเห็น"
+
+#: src/gui/StelGui.cpp:135
+msgid "Date/time window"
+msgstr "หน้าต่าง วัน/เวลา"
+
+#: src/gui/StelGui.cpp:136
+msgid "Location window"
+msgstr "หน้าต่างที่ตั้ง"
+
+#: src/gui/StelGui.cpp:138
+msgid "Script console window"
+msgstr "หน้าต่างรายการสคริปต์"
+
+#: src/gui/StelGui.cpp:141 src/ui_dateTimeDialogGui.h:294
+msgid "Date and Time"
+msgstr "วันที่ และ เวลา"
+
+#: src/gui/StelGui.cpp:145
+msgid "Decrease time speed"
+msgstr "เวลาถอยหลัง"
+
+#: src/gui/StelGui.cpp:146
+msgid "Increase time speed"
+msgstr "เวลาเดินหน้า"
+
+#: src/gui/StelGui.cpp:147
+msgid "Set normal time rate"
+msgstr "ปรับเวลาเดินตามปกติ"
+
+#: src/gui/StelGui.cpp:148
+msgid "Decrease time speed (a little)"
+msgstr "เวลาถอยหลัง (เล็กน้อย)"
+
+#: src/gui/StelGui.cpp:149
+msgid "Increase time speed (a little)"
+msgstr "เวลาเดินหน้า (เล็กน้อย)"
+
+#: src/gui/StelGui.cpp:150
+msgid "Set time rate to zero"
+msgstr "ตั้งอัตราเวลาไปที่ศูนย์"
+
+#: src/gui/StelGui.cpp:151
+msgid "Set time to now"
+msgstr "กลับสู่เวลาปัจจุบัน"
+
+#: src/gui/StelGui.cpp:152
+msgid "Add 1 solar hour"
+msgstr "เพิ่ม ๑ ชั่วโมงสุริยะ"
+
+#: src/gui/StelGui.cpp:153
+msgid "Subtract 1 solar hour"
+msgstr "ลบ ๑ ชั่วโมงสุริยะ"
+
+#: src/gui/StelGui.cpp:154
+msgid "Add 1 solar day"
+msgstr "เพิ่ม ๑ วันสุริยะ"
+
+#: src/gui/StelGui.cpp:155
+msgid "Subtract 1 solar day"
+msgstr "ลบ ๑ วันสุริยะ"
+
+#: src/gui/StelGui.cpp:156
+msgid "Add 1 solar week"
+msgstr "เพิ่ม ๑ สัปดาห์สุริยะ"
+
+#: src/gui/StelGui.cpp:157
+msgid "Subtract 1 solar week"
+msgstr "ลบ ๑ สัปดาห์สุริยะ"
+
+#: src/gui/StelGui.cpp:158
+msgid "Add 1 sidereal day"
+msgstr "เพิ่ม ๑ วันดาราคติ"
+
+#: src/gui/StelGui.cpp:159
+msgid "Subtract 1 sidereal day"
+msgstr "ลบ ๑ วันดาราคติ"
+
+#: src/gui/StelGui.cpp:160
+msgid "Add 1 sidereal week"
+msgstr "เพิ่ม ๑ สัปดาห์ดาราคติ"
+
+#: src/gui/StelGui.cpp:161
+msgid "Subtract 1 sidereal week"
+msgstr "ลบ ๑ สัปดาห์ดาราคติ"
+
+#: src/gui/StelGui.cpp:164
+msgid "Center on selected object"
+msgstr "ทำให้วัตถุที่เลือกมาอยู่กลางจอ"
+
+#: src/gui/StelGui.cpp:165
+msgid "Track object"
+msgstr "ติดตามวัตถุ"
+
+#: src/gui/StelGui.cpp:166
+msgid "Zoom in on selected object"
+msgstr "ขยายวัตถุที่เลือก"
+
+#: src/gui/StelGui.cpp:167
+msgid "Zoom out"
+msgstr "ย่อ"
+
+#: src/gui/StelGui.cpp:168
+msgid "Set home planet to selected planet"
+msgstr "กำหนดดาวเคราะห์ที่เลือกให้เป็นดาวเคราะห์บ้าน"
+
+#: src/gui/StelGui.cpp:171
+msgid "Switch between equatorial and azimuthal mount"
+msgstr "สลับระหว่างแนวเชิงศูนย์สูตรกับภาคทิศ"
+
+#: src/gui/StelGui.cpp:172
+msgid "Quit"
+msgstr "ออก"
+
+#: src/gui/StelGui.cpp:173
+msgid "Save screenshot"
+msgstr "บันทึกภาพหน้าจอ"
+
+#: src/gui/StelGui.cpp:176
+msgid "Auto hide horizontal button bar"
+msgstr "ซ่อนแถบแนวนอนโดยอัตโนมัติ"
+
+#: src/gui/StelGui.cpp:177
+msgid "Auto hide vertical button bar"
+msgstr "ซ่อนแถบแนวตั้งโดยอัตโนมัติ"
+
+#: src/gui/StelGui.cpp:178
+msgid "Toggle visibility of GUI"
+msgstr "สลับการแสดงส่วนต่อประสานกราฟิกกับผู้ใช้"
+
+#: src/gui/StelGuiItems.cpp:541
+#, no-c-format, qt-format
+msgid "%1m"
+msgstr "%1 ม."
+
+#: src/gui/ViewDialog.cpp:422
+msgid "No description"
+msgstr "ไม่มีคำบรรยาย"
+
+#: src/gui/ViewDialog.cpp:506
+msgid "No shooting stars"
+msgstr "ไม่มีดาวตก"
+
+#: src/gui/ViewDialog.cpp:509
+msgid "Normal rate"
+msgstr "อัตราปกติ"
+
+#: src/gui/ViewDialog.cpp:512
+msgid "Standard Perseids rate"
+msgstr "อัตราฝนดาวตกเพอร์ซิอัสมาตรฐาน"
+
+#: src/gui/ViewDialog.cpp:515
+msgid "Exceptional Leonid rate"
+msgstr "อัตราฝนดาวตกสิงโตระดับสูง"
+
+#: src/gui/ViewDialog.cpp:518
+msgid "Highest rate ever (1966 Leonids)"
+msgstr "อัตราตกสูงสุดเท่าที่เคยมีมา (ฝนดาวตกสิงโต ค.ศ. ๑๙๖๖)"
+
+#: src/gui/LocationDialog.cpp:334
+msgid "New Location"
+msgstr "ตำแหน่งใหม่"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:112
+msgid "Select a ZIP archive that contains a Stellarium landscape"
+msgstr "เลือกแฟ้มบีบอัดที่มีภูมิทัศน์สำหรับ Stellarium"
+
+#. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
+#: src/gui/AddRemoveLandscapesDialog.cpp:114
+msgid "ZIP archives"
+msgstr "แฟ้มบีบอัด"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:127
+#, qt-format
+msgid "Landscape \"%1\" has been installed successfully."
+msgstr "การติดตั้งภูมิทัศน์ \"%1\" สำเร็จแล้ว"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:128
+#: src/gui/AddRemoveLandscapesDialog.cpp:155
+msgid "Success"
+msgstr "สำเร็จ"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:141
+#: src/gui/AddRemoveLandscapesDialog.cpp:211
 #: src/gui/AddRemoveLandscapesDialog.cpp:220
-msgid ""
-"The selected file is not a ZIP archive or does not contain a Stellarium "
-"landscape."
-msgstr "แฟ้มข้อมูลที่เลือกไม่ใช่แฟ้มบีบอัด หรือไม่มีภูมิทัศน์ที่ใช้สำหรับ Stellarium"
+#: src/gui/AddRemoveLandscapesDialog.cpp:228
+msgid "No landscape was installed."
+msgstr "ไม่มีการติดตั้งภูมิทัศน์"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:142
+#: src/gui/AddRemoveLandscapesDialog.cpp:166
+#: src/gui/AddRemoveLandscapesDialog.cpp:215
+#: src/gui/AddRemoveLandscapesDialog.cpp:221
+#: src/gui/AddRemoveLandscapesDialog.cpp:229
+#: src/gui/AddRemoveLandscapesDialog.cpp:239
+msgid "Error!"
+msgstr "ผิดพลาด!"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:154
+#, qt-format
+msgid "Landscape \"%1\" has been removed successfully."
+msgstr "ภูมิทัศน์ \"%1\" ถูกลบออกเรียบร้อยแล้ว"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:165
 #: src/gui/AddRemoveLandscapesDialog.cpp:235
 msgid "The selected landscape could not be (completely) removed."
 msgstr "ไม่สามารถลบภูมิทัศน์ที่เลือกได้"
 
+#. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
+#: src/gui/AddRemoveLandscapesDialog.cpp:188
+#, qt-format
+msgid "Size on disk: %1 MiB"
+msgstr "ขนาดบนดิสก์: %1 MiB"
+
+#. TRANSLATORS: The parameter is a file/directory path that may be quite long.
+#: src/gui/AddRemoveLandscapesDialog.cpp:214
+#, qt-format
+msgid "Stellarium cannot open for reading or writing %1"
+msgstr "Stellarium ไม่สามารถเปิด %1 เพื่ออ่านหรือเขียนได้"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+msgid ""
+"The selected file is not a ZIP archive or does not contain a Stellarium "
+"landscape."
+msgstr ""
+"แฟ้มข้อมูลที่เลือกไม่ใช่แฟ้มบีบอัด หรือไม่มีภูมิทัศน์ที่ใช้สำหรับ Stellarium"
+
+#. TRANSLATORS: The parameter is the duplicate name or identifier.
+#: src/gui/AddRemoveLandscapesDialog.cpp:227
+#, qt-format
+msgid "A landscape with the same name or identifier (%1) already exists."
+msgstr "มีภูมิทัศน์ที่ใช้ชื่อเดียวกันหรือตัวระบุเดียวกัน (%1) อยู่แล้ว"
+
+#. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
+#: src/gui/AddRemoveLandscapesDialog.cpp:238
+#, qt-format
+msgid "You can remove it manually by deleting the following directory: %1"
+msgstr "คุณสามารถเอามันออกได้ด้วยมือ โดยลบไดเร็กทอรีต่อไปนี้: %1"
+
+#: src/main.cpp:335
+msgid "This system does not support OpenGL."
+msgstr "ระบบไม่สนับสนุน OpenGL"
+
+#: src/translations.h:33
+msgid "Sun"
+msgstr "ดวงอาทิตย์"
+
+#: src/translations.h:34
+msgid "Mercury"
+msgstr "ดาวพุธ"
+
+#: src/translations.h:35
+msgid "Venus"
+msgstr "ดาวศุกร์"
+
+#: src/translations.h:36
+msgid "Earth"
+msgstr "โลก"
+
+#: src/translations.h:37
+msgid "Moon"
+msgstr "ดวงจันทร์"
+
+#: src/translations.h:38
+msgid "Mars"
+msgstr "ดาวอังคาร"
+
+#: src/translations.h:39
+msgid "Deimos"
+msgstr "ดีมอส"
+
+#: src/translations.h:40
+msgid "Phobos"
+msgstr "โฟบอส"
+
+#: src/translations.h:41
+msgid "Ceres"
+msgstr "ซีรีส"
+
+#: src/translations.h:42
+msgid "Pallas"
+msgstr "แพลลัส"
+
+#: src/translations.h:43
+msgid "Juno"
+msgstr "จูโน"
+
+#: src/translations.h:44
+msgid "Vesta"
+msgstr "เวสตา"
+
+#: src/translations.h:45
+msgid "Jupiter"
+msgstr "ดาวพฤหัสบดี"
+
+#: src/translations.h:46
+msgid "Io"
+msgstr "ไอโอ"
+
+#: src/translations.h:47
+msgid "Europa"
+msgstr "ยูโรปา"
+
+#: src/translations.h:48
+msgid "Ganymede"
+msgstr "แกนีมีด"
+
+#: src/translations.h:49
+msgid "Callisto"
+msgstr "คัสลิสโต"
+
+#: src/translations.h:50
+msgid "Amalthea"
+msgstr "อะมัลเทีย"
+
+#: src/translations.h:51
+msgid "Himalia"
+msgstr "ฮิมาเลีย"
+
+#: src/translations.h:52
+msgid "Elara"
+msgstr "อีลารา"
+
+#: src/translations.h:53
+msgid "Pasiphae"
+msgstr "พาซิฟาอี"
+
+#: src/translations.h:54
+msgid "Sinope"
+msgstr "ซิโนพี"
+
+#: src/translations.h:55
+msgid "Lysithea"
+msgstr "ลีซิเทีย"
+
+#: src/translations.h:56
+msgid "Carme"
+msgstr "คาร์มี"
+
+#: src/translations.h:57
+msgid "Ananke"
+msgstr "อะนางคี"
+
+#: src/translations.h:58
+msgid "Leda"
+msgstr "ลีดา"
+
+#: src/translations.h:59
+msgid "Thebe"
+msgstr "ทีบี"
+
+#: src/translations.h:60
+msgid "Adrastea"
+msgstr "อะแดรสเทีย"
+
+#. TRANSLATORS: Asteroid (9) Metis
+#: src/translations.h:61 src/translations.h:106
+msgid "Metis"
+msgstr "มีทิส"
+
+#: src/translations.h:62
+msgid "Saturn"
+msgstr "ดาวเสาร์"
+
+#: src/translations.h:63
+msgid "Mimas"
+msgstr "ไมมัส"
+
+#: src/translations.h:64
+msgid "Enceladus"
+msgstr "เอนเซลาดัส"
+
+#: src/translations.h:65
+msgid "Tethys"
+msgstr "ทีทิส"
+
+#: src/translations.h:66
+msgid "Dione"
+msgstr "ไดโอนี"
+
+#: src/translations.h:67
+msgid "Rhea"
+msgstr "เรีย"
+
+#: src/translations.h:68
+msgid "Titan"
+msgstr "ไททัน"
+
+#: src/translations.h:69
+msgid "Hyperion"
+msgstr "ไฮเพอเรียน"
+
+#: src/translations.h:70
+msgid "Iapetus"
+msgstr "ไอแอพีทัส"
+
+#: src/translations.h:71
+msgid "Phoebe"
+msgstr "ฟีบี"
+
+#: src/translations.h:72
+msgid "Neptune"
+msgstr "เนปจูน"
+
+#: src/translations.h:73
+msgid "Uranus"
+msgstr "ดาวยูเรนัส"
+
+#: src/translations.h:74
+msgid "Miranda"
+msgstr "มิแรนดา"
+
+#: src/translations.h:75
+msgid "Ariel"
+msgstr "แอเรียล"
+
+#: src/translations.h:76
+msgid "Umbriel"
+msgstr "อัมเบรียล"
+
+#: src/translations.h:77
+msgid "Titania"
+msgstr "ทิเทเนีย"
+
+#: src/translations.h:78
+msgid "Oberon"
+msgstr "โอเบอรอน"
+
+#: src/translations.h:79
+msgid "Pluto"
+msgstr "ดาวพลูโต"
+
+#: src/translations.h:80
+msgid "Charon"
+msgstr "แครอน"
+
+#: src/translations.h:81
+msgid "Eris"
+msgstr "อีริส"
+
+#: src/translations.h:82
+msgid "Triton"
+msgstr "ไทรทัน"
+
+#: src/translations.h:83
+msgid "Nereid"
+msgstr "นีรีด"
+
+#: src/translations.h:84
+msgid "Naiad"
+msgstr "ไนแอด"
+
+#: src/translations.h:85
+msgid "Thalassa"
+msgstr "ทาลัสซา"
+
+#: src/translations.h:86
+msgid "Despina"
+msgstr "เดสพีนา"
+
+#: src/translations.h:87
+msgid "Galatea"
+msgstr "กาละเทีย"
+
+#: src/translations.h:88
+msgid "Larissa"
+msgstr "ลาริสซา"
+
+#: src/translations.h:89
+msgid "Proteus"
+msgstr "โพรเทียส"
+
+#: src/translations.h:90
+msgid "Halimede"
+msgstr "ฮาลิมีดี"
+
+#: src/translations.h:91
+msgid "Psamathe"
+msgstr ""
+
+#: src/translations.h:92
+msgid "Sao"
+msgstr "เซโอ"
+
+#: src/translations.h:93
+msgid "Laomedeia"
+msgstr ""
+
+#: src/translations.h:94
+msgid "Neso"
+msgstr "นีโซ"
+
+#: src/translations.h:95
+msgid "Solar System Observer"
+msgstr "ดูระบบสุริยะ"
+
+#. TRANSLATORS: Asteroid (5) Astraea
+#: src/translations.h:98
+msgid "Astraea"
+msgstr "แอสเทรีย"
+
+#. TRANSLATORS: Asteroid (6) Hebe
+#: src/translations.h:100
+msgid "Hebe"
+msgstr "ฮีบี"
+
+#. TRANSLATORS: Asteroid (7) Iris
+#: src/translations.h:102
+msgid "Iris"
+msgstr "ไอริส"
+
+#. TRANSLATORS: Asteroid (8) Flora
+#: src/translations.h:104
+msgid "Flora"
+msgstr "ฟลอรา"
+
+#. TRANSLATORS: Asteroid (10) Hygiea
+#: src/translations.h:108
+msgid "Hygiea"
+msgstr "ไฮเจีย"
+
+#. TRANSLATORS: Asteroid (1221) Amor
+#: src/translations.h:110
+msgid "Amor"
+msgstr "เอมอร์"
+
+#. TRANSLATORS: Asteroid (99942) Apophis
+#: src/translations.h:112
+msgid "Apophis"
+msgstr "อะโพฟิส"
+
+#. TRANSLATORS: Asteroid (2060) Chiron
+#: src/translations.h:114
+msgid "Chiron"
+msgstr "ไครอน"
+
+#. TRANSLATORS: Asteroid (433) Eros
+#: src/translations.h:116
+msgid "Eros"
+msgstr "อีรอส"
+
+#. TRANSLATORS: Asteroid (624) Hektor
+#: src/translations.h:118
+msgid "Hektor"
+msgstr "เฮคเตอร์"
+
+#. TRANSLATORS: Name of supernova SN 1572A
+#: src/translations.h:120
+msgid "Tycho's Supernova"
+msgstr ""
+
+#. TRANSLATORS: Name of supernova SN 1604A
+#: src/translations.h:122
+msgid "Kepler's Supernova"
+msgstr ""
+
+#: src/translations.h:126
+msgid "N"
+msgstr "เหนือ"
+
+#: src/translations.h:127
+msgid "S"
+msgstr "ใต้"
+
+#: src/translations.h:128
+msgid "E"
+msgstr "ตะวันออก"
+
+#: src/translations.h:129
+msgid "W"
+msgstr "ตะวันตก"
+
+#: src/translations.h:132
+msgid "Aztec"
+msgstr "แอซเทก"
+
+#: src/translations.h:133
+msgid "Chinese"
+msgstr "จีน"
+
+#: src/translations.h:134
+msgid "Egyptian"
+msgstr "อียิปต์"
+
+#: src/translations.h:135
+msgid "Inuit"
+msgstr "อินูอิท"
+
+#: src/translations.h:136
+msgid "Korean"
+msgstr "เกาหลี"
+
+#: src/translations.h:137
+msgid "Lakota"
+msgstr "ลาโกตา"
+
+#: src/translations.h:138
+msgid "Maori"
+msgstr "เมารี"
+
+#: src/translations.h:139
+msgid "Navajo"
+msgstr "นาวาโฮ"
+
+#: src/translations.h:140
+msgid "Norse"
+msgstr "นอเวย์"
+
+#: src/translations.h:141
+msgid "Polynesian"
+msgstr "โพลีนีเชีย"
+
+#: src/translations.h:142
+msgid "Sami"
+msgstr "เซมี"
+
+#: src/translations.h:143
+msgid "Tupi-Guarani"
+msgstr "ทูปิ-กวารานิ"
+
+#: src/translations.h:144
+msgid "Western"
+msgstr "ตะวันตก"
+
+#: src/translations.h:148
+msgid "Set Location "
+msgstr "ตั้งตำแหน่ง "
+
+#: src/translations.h:149
+msgid "Set Time "
+msgstr "ตั้งเวลา "
+
+#: src/translations.h:150
+msgid "General "
+msgstr "ทั่วไป "
+
+#: src/translations.h:151
+msgid "Stars "
+msgstr "ดาวฤกษ์ "
+
+#: src/translations.h:152
+msgid "Colors "
+msgstr "สี "
+
+#: src/translations.h:153
+msgid "Effects "
+msgstr "เอฟเฟค "
+
+#: src/translations.h:154
+msgid "Scripts "
+msgstr "สคริปต์ "
+
+#: src/translations.h:155
+msgid "Administration "
+msgstr "ผู้บริหาร "
+
+#: src/translations.h:157
+msgid "Latitude: "
+msgstr "เส้นรุ้ง: "
+
+#: src/translations.h:158
+msgid "Longitude: "
+msgstr "เส้นแวง: "
+
+#: src/translations.h:159
+msgid "Altitude (m): "
+msgstr "ระดับความสูง (ม.): "
+
+#: src/translations.h:160
+msgid "Solar System Body: "
+msgstr "วัตถุในระบบสุริยะ "
+
+#: src/translations.h:162
+msgid "Sky Time: "
+msgstr "เวลาท้องฟ้า: "
+
+#: src/translations.h:163
+msgid "Set Time Zone: "
+msgstr "เขตเวลามาตรฐาน: "
+
+#: src/translations.h:164
+msgid "Day keys: "
+msgstr "กำหนดชนิดของวัน "
+
+#: src/translations.h:165
+msgid "Calendar"
+msgstr "ปฏิทิน"
+
+#: src/translations.h:166
+msgid "Sidereal"
+msgstr "เวลาดาราคติ"
+
+#: src/translations.h:167
+msgid "Preset Sky Time: "
+msgstr "ตั้งเวลาท้องฟ้าล่วงหน้า: "
+
+#: src/translations.h:168
+msgid "Sky Time At Start-up: "
+msgstr "เวลาท้องฟ้าเมื่อเริ่มต้น: "
+
+#: src/translations.h:169
+msgid "Actual Time"
+msgstr "เวลาจริง"
+
+#: src/translations.h:170
+msgid "Preset Time"
+msgstr "เวลาที่ตั้งไว้ล่วงหน้า"
+
+#: src/translations.h:171
+msgid "Time Display Format: "
+msgstr "รูปแบบเวลา: "
+
+#: src/translations.h:172
+msgid "Date Display Format: "
+msgstr "รูปแบบวันที่: "
+
+#: src/translations.h:174
+msgid "Sky Culture: "
+msgstr "แสดงกลุ่มดาวตามวัฒนธรรม: "
+
+#: src/translations.h:175
+msgid "Sky Language: "
+msgstr "ภาษาบนท้องฟ้า: "
+
+#: src/translations.h:177
+msgid "Show: "
+msgstr "แสดง: "
+
+#: src/translations.h:178
+msgid "Star Value Multiplier: "
+msgstr "ตัวคูณค่าความสว่างของดาวฤกษ์: "
+
+#: src/translations.h:179
+msgid "Magnitude Sizing Multiplier: "
+msgstr "ตัวคูณความใหญ่ซึ่งจัดกลุ่มตามขนาด : "
+
+#: src/translations.h:180
+msgid "Maximum Magnitude to Label: "
+msgstr "อันดับความสว่างสูงที่สุดที่จะแสดงชื่อ "
+
+#: src/translations.h:181
+msgid "Twinkling: "
+msgstr "การกะพริบ: "
+
+#: src/translations.h:182
+msgid "Limiting Magnitude: "
+msgstr "การจำกัดค่าความสว่าง "
+
+#: src/translations.h:184
+msgid "Constellation Lines"
+msgstr "เส้นกลุ่มดาว"
+
+#: src/translations.h:185
+msgid "Constellation Names"
+msgstr "ชื่อของกลุ่มดาว"
+
+#: src/translations.h:186
+msgid "Constellation Art Intensity"
+msgstr "ความเข้มของภาพกลุ่มดาว"
+
+#: src/translations.h:187
+msgid "Constellation Boundaries"
+msgstr "อาณาเขตกลุ่มดาว"
+
+#: src/translations.h:188
+msgid "Cardinal Points"
+msgstr "ทิศทั้งสี่"
+
+#: src/translations.h:189
+msgid "Planet Names"
+msgstr "ชื่อดาวเคราะห์"
+
+#: src/translations.h:190
+msgid "Planet Orbits"
+msgstr "วงโคจรดาวเคราะห์"
+
+#: src/translations.h:191
+msgid "Planet Trails"
+msgstr "ทางเดินของดาวเคราะห์"
+
+#: src/translations.h:192
+msgid "Meridian Line"
+msgstr "เส้นเมอริเดียน"
+
+#: src/translations.h:193
+msgid "Azimuthal Grid"
+msgstr "เส้นพิกัดภาคทิศ"
+
+#: src/translations.h:194
+msgid "Equatorial Grid"
+msgstr "กริดพิกัดศูนย์สูตร"
+
+#: src/translations.h:195
+msgid "Equator Line"
+msgstr "เส้นศูนย์สูตรฟ้า"
+
+#: src/translations.h:196
+msgid "Ecliptic Line"
+msgstr "เส้นสุริยวิถี"
+
+#: src/translations.h:197
+msgid "Nebula Names"
+msgstr "ชื่อเนบิวลา"
+
+#: src/translations.h:198
+msgid "Nebula Circles"
+msgstr "วงกลมเนบิวลา"
+
+#: src/translations.h:200
+msgid "Light Pollution Luminance: "
+msgstr "ปริมาณมลภาวะทางแสง: "
+
+#: src/translations.h:201
+msgid "Landscape: "
+msgstr "ภูมิทัศน์: "
+
+#: src/translations.h:202
+msgid "Manual zoom: "
+msgstr "ซูมด้วยมือ: "
+
+#: src/translations.h:203
+msgid "Object Sizing Rule: "
+msgstr "เกณฑ์การแสดงขนาดของวัตถุ: "
+
+#: src/translations.h:204
+msgid "Magnitude Scaling Multiplier: "
+msgstr "ตัวคูณการปรับตามอันดับความสว่าง: "
+
+#: src/translations.h:205
+msgid "Milky Way intensity: "
+msgstr "ความสว่างของทางช้างเผือก "
+
+#: src/translations.h:206
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "อันดับความสว่างสูงสุดของเนบิวลาที่จะแสดงชื่อ: "
+
+#: src/translations.h:207
+msgid "Zoom Duration: "
+msgstr "ช่วงเวลาการซูม: "
+
+#: src/translations.h:208
+msgid "Cursor Timeout: "
+msgstr "เวลาปรากฏเคอร์เซอร์ "
+
+#: src/translations.h:209
+msgid "Correct for light travel time: "
+msgstr "ปรับแก้โดยคำนึงถึงการเดินทางของแสง: "
+
+#: src/translations.h:211
+msgid "Local Script: "
+msgstr "สคริปต์ที่มีอยู่ในโปรแกรม: "
+
+#: src/translations.h:212
+msgid "CD/DVD Script: "
+msgstr "สคริปต์ที่มีอยู่ใน CD/DVD: "
+
+#: src/translations.h:213
+msgid "USB Script: "
+msgstr "สคริปต์ที่มีอยู่ใน USB: "
+
+#: src/translations.h:214
+msgid "Arrow down to load list."
+msgstr "ใช้ลูกศรลงเพื่อโหลดรายการ"
+
+#: src/translations.h:215
+msgid "Select and exit to run."
+msgstr "เลือกและออกเพื่อเริ่มการใช้งาน"
+
+#: src/translations.h:217
+msgid "Load Default Configuration: "
+msgstr "โหลดค่าเริ่มต้น: "
+
+#: src/translations.h:218
+msgid "Save Current Configuration as Default: "
+msgstr "บันทึกค่าปัจจุบันเป็นค่าเริ่มต้น: "
+
+#: src/translations.h:219
+msgid "Shut Down: "
+msgstr "ปิดโปรแกรม: "
+
+#: src/translations.h:220
+msgid "Update me via Internet: "
+msgstr "อัปเดตผ่านอินเทอร์เน็ต: "
+
+#: src/translations.h:221
+msgid "Set UI Locale: "
+msgstr "เลือกภาษา: "
+
+#: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
+msgid "/"
+msgstr "/"
+
+#: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
+msgid ":"
+msgstr ":"
+
+#: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
+msgid "Help"
+msgstr "วิธีใช้"
+
+#: src/ui_helpDialogGui.h:267
+msgid "About"
+msgstr "เกี่ยวกับ"
+
+#: src/ui_helpDialogGui.h:269
+msgid "Log"
+msgstr "บันทึก"
+
+#: src/ui_helpDialogGui.h:272
+msgid "Refresh"
+msgstr "เรียกใหม่"
+
+#: src/ui_locationDialogGui.h:387
+msgid "Location"
+msgstr "ตำแหน่งที่ตั้ง"
+
+#: src/ui_locationDialogGui.h:391
+msgid "Current location information"
+msgstr "ข้อมูลที่ตั้งปัจจุบัน"
+
+#: src/ui_locationDialogGui.h:392
+msgid "Use as default"
+msgstr "ใช้เป็นค่าเริ่มต้น"
+
+#: src/ui_locationDialogGui.h:393
+msgid "Delete"
+msgstr "ลบทิ้ง"
+
+#: src/ui_locationDialogGui.h:394
+msgid "Add to list"
+msgstr "เพิ่มไปยังรายการ"
+
+#: src/ui_locationDialogGui.h:395
+msgid "Latitude:"
+msgstr "ละติจูด:"
+
+#: src/ui_locationDialogGui.h:397 src/ui_locationDialogGui.h:401
+msgid ""
+"You can enter values in decimal degrees, or using dms format, for example: "
+"+1d 12m 8s"
+msgstr ""
+"คุณสามารถป้อนค่าเป็นเลขทศนิยม หรือใช้รูปแบบ องศา ลิปดา พิลิปดา เช่น +1d 12m "
+"8s"
+
+#: src/ui_locationDialogGui.h:399
+msgid "Longitude:"
+msgstr "ลองจิจูด:"
+
+#: src/ui_locationDialogGui.h:403
+msgid "Altitude:"
+msgstr "ระดับความสูง:"
+
+#: src/ui_locationDialogGui.h:405
+msgid "Enter the altitude in meter"
+msgstr "ป้อนระดับความสูงในหน่วยเมตร"
+
+#: src/ui_locationDialogGui.h:407
+msgid " m"
+msgstr " ม."
+
+#: src/ui_locationDialogGui.h:408
+msgid "Name/City:"
+msgstr "ชื่อ/เมือง:"
+
+#: src/ui_locationDialogGui.h:409
+msgid "Country:"
+msgstr "ประเทศ:"
+
+#: src/ui_locationDialogGui.h:410
+msgid "Planet:"
+msgstr "ดาวเคราะห์:"
+
+#: src/ui_searchDialogGui.h:450
+msgid "Find Object"
+msgstr "ค้นหาวัตถุท้องฟ้า"
+
+#: src/ui_searchDialogGui.h:451
+msgid "Find Object or Position"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:458
+msgid "iota"
+msgstr "ไอโอตา"
+
+#: src/ui_searchDialogGui.h:461
+msgid "alpha"
+msgstr "แอลฟา"
+
+#: src/ui_searchDialogGui.h:464
+msgid "beta"
+msgstr "บีตา"
+
+#: src/ui_searchDialogGui.h:467
+msgid "gamma"
+msgstr "แกมมา"
+
+#: src/ui_searchDialogGui.h:470
+msgid "delta"
+msgstr "เดลตา"
+
+#: src/ui_searchDialogGui.h:473
+msgid "epsilon"
+msgstr "เอปไซลอน"
+
+#: src/ui_searchDialogGui.h:476
+msgid "zeta"
+msgstr "ซีตา"
+
+#: src/ui_searchDialogGui.h:479
+msgid "eta"
+msgstr "อีตา"
+
+#: src/ui_searchDialogGui.h:482
+msgid "theta"
+msgstr "ทีตา"
+
+#: src/ui_searchDialogGui.h:485
+msgid "kappa"
+msgstr "แคปปา"
+
+#: src/ui_searchDialogGui.h:488
+msgid "lambda"
+msgstr "แลมบ์ดา"
+
+#: src/ui_searchDialogGui.h:491
+msgid "mu"
+msgstr "มิว"
+
+#: src/ui_searchDialogGui.h:494
+msgid "nu"
+msgstr "นิว"
+
+#: src/ui_searchDialogGui.h:497
+msgid "xi"
+msgstr "ไซ"
+
+#: src/ui_searchDialogGui.h:500
+msgid "omicron"
+msgstr "โอไมครอน"
+
+#: src/ui_searchDialogGui.h:503
+msgid "pi"
+msgstr "พาย"
+
+#: src/ui_searchDialogGui.h:506
+msgid "rho"
+msgstr "โร"
+
+#: src/ui_searchDialogGui.h:509
+msgid "sigma"
+msgstr "ซิกมา"
+
+#: src/ui_searchDialogGui.h:512
+msgid "tau"
+msgstr "เทา"
+
+#: src/ui_searchDialogGui.h:515
+msgid "upsilon"
+msgstr "อิปไซลอน"
+
+#: src/ui_searchDialogGui.h:518
+msgid "phi"
+msgstr "ฟาย"
+
+#: src/ui_searchDialogGui.h:521
+msgid "chi"
+msgstr "ไค"
+
+#: src/ui_searchDialogGui.h:524
+msgid "psi"
+msgstr "ซาย"
+
+#: src/ui_searchDialogGui.h:527
+msgid "omega"
+msgstr "โอเมกา"
+
+#: src/ui_searchDialogGui.h:529
+msgid "Greek letters for Bayer designations"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:530
+msgid "Object"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:531
+msgid "RA/Dec (J2000):"
+msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000):"
+
+#: src/ui_searchDialogGui.h:532
+msgid "Position"
+msgstr ""
+
+#: src/ui_viewDialog.h:1052
+msgid "View"
+msgstr "มุมมอง"
+
+#: src/ui_viewDialog.h:1058
+msgid "Sky"
+msgstr "ท้องฟ้า"
+
+#: src/ui_viewDialog.h:1060
+msgid "Markings"
+msgstr "เครื่องหมาย"
+
+#: src/ui_viewDialog.h:1062
+msgid "Landscape"
+msgstr "ภูมิทัศน์"
+
+#: src/ui_viewDialog.h:1064
+msgid "Starlore"
+msgstr "ตำนานดาว"
+
+#: src/ui_viewDialog.h:1068
+msgid "Absolute scale:"
+msgstr "อัตราส่วนจริง:"
+
+#: src/ui_viewDialog.h:1069
+msgid "Relative scale:"
+msgstr "อัตราส่วนสัมพัทธ์"
+
+#: src/ui_viewDialog.h:1070
+msgid "Twinkle:"
+msgstr "กะพริบแสง:"
+
+#: src/ui_viewDialog.h:1072
+msgid "Dim faint stars when a very bright object is visible"
+msgstr "ลดแสงของดาวที่สว่างน้อย เมื่อมีวัตถุที่สว่างมากอยู่ในเขตการมองเห็น"
+
+#: src/ui_viewDialog.h:1074
+msgid "Dynamic eye adaptation"
+msgstr "ปรับดวงตาตามสภาพของท้องฟ้า"
+
+#: src/ui_viewDialog.h:1075
+msgid "Planets and satellites"
+msgstr "ดาวเคราะห์และบริวาร"
+
+#: src/ui_viewDialog.h:1076
+msgid "Show planets"
+msgstr "แสดงดาวเคราะห์"
+
+#: src/ui_viewDialog.h:1077
+msgid "Show planet markers"
+msgstr "แสดงตัวบ่งชี้ดาวเคราะห์"
+
+#: src/ui_viewDialog.h:1078
+msgid "Show planet orbits"
+msgstr "แสดงวงโคจรของดาวเคราะห์"
+
+#: src/ui_viewDialog.h:1079
+msgid "Simulate light speed"
+msgstr "จำลองตามความเร็วแสง"
+
+#: src/ui_viewDialog.h:1080
+msgid "Scale Moon"
+msgstr "ขยายขนาดดวงจันทร์"
+
+#: src/ui_viewDialog.h:1082
+msgid "Show atmosphere"
+msgstr "แสดงบรรยากาศ"
+
+#: src/ui_viewDialog.h:1083
+msgid "Light pollution: "
+msgstr "มลภาวะทางแสง: "
+
+#: src/ui_viewDialog.h:1085
+msgid "pressure, temperature, extinction coefficient"
+msgstr ""
+
+#: src/ui_viewDialog.h:1087
+msgid "Refraction/Extinction settings..."
+msgstr ""
+
+#: src/ui_viewDialog.h:1088
+msgid "Labels and Markers"
+msgstr "ชื่อ และ เครื่องหมาย"
+
+#: src/ui_viewDialog.h:1091
+msgid "Planets"
+msgstr "ดาวเคราะห์"
+
+#: src/ui_viewDialog.h:1092
+msgid "Shooting Stars"
+msgstr "ดาวตก"
+
+#: src/ui_viewDialog.h:1093
+msgid "Hourly zenith rate:"
+msgstr "อัตราสูงสุดที่เหนือศีรษะ:"
+
+#: src/ui_viewDialog.h:1094
+msgid "0"
+msgstr "๐"
+
+#: src/ui_viewDialog.h:1095
+msgid "10"
+msgstr "๑๐"
+
+#: src/ui_viewDialog.h:1096
+msgid "80"
+msgstr "๘๐"
+
+#: src/ui_viewDialog.h:1097
+msgid "10000"
+msgstr "๑๐๐๐๐"
+
+#: src/ui_viewDialog.h:1098
+msgid "144000"
+msgstr "๑๔๔๐๐๐"
+
+#: src/ui_viewDialog.h:1100
+msgid "Celestial Sphere"
+msgstr "ทรงกลมท้องฟ้า"
+
+#: src/ui_viewDialog.h:1109
+msgid "Constellations"
+msgstr "กลุ่มดาว"
+
+#: src/ui_viewDialog.h:1110
+msgid "Show lines"
+msgstr "แสดงเส้น"
+
+#: src/ui_viewDialog.h:1111
+msgid "Show labels"
+msgstr "แสดงป้ายชื่อ"
+
+#: src/ui_viewDialog.h:1112
+msgid "Show boundaries"
+msgstr "แสดงขอบเขต"
+
+#: src/ui_viewDialog.h:1113
+msgid "Show art"
+msgstr "แสดงภาพวาด"
+
+#: src/ui_viewDialog.h:1114
+msgid "Art brightness: "
+msgstr "ความสว่างของภาพวาด: "
+
+#: src/ui_viewDialog.h:1115
+msgid "Projection"
+msgstr "การฉายภาพ"
+
+#: src/ui_viewDialog.h:1116
+msgid "Add/remove landscapes..."
+msgstr "เพิ่มหรือลบภูมิทัศน์"
+
+#: src/ui_viewDialog.h:1117 src/ui_viewDialog.h:1122 src/ui_viewDialog.h:1124
+#: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
+msgid "Options"
+msgstr "ตัวเลือก"
+
+#: src/ui_viewDialog.h:1118
+msgid "Show ground"
+msgstr "แสดงพื้นดิน"
+
+#: src/ui_viewDialog.h:1119
+msgid "Show fog"
+msgstr "แสดงหมอก"
+
+#: src/ui_viewDialog.h:1120
+msgid "Use associated planet and position"
+msgstr "ใช้ดาวเคราะห์ที่เกี่ยวข้องและตำแหน่ง"
+
+#: src/ui_viewDialog.h:1121
+msgid "Use this landscape as default"
+msgstr "ใช้ภูมิทัศน์นี้เป็นค่าเริ่มต้น"
+
+#: src/ui_viewDialog.h:1123
+msgid "Use this sky culture as default"
+msgstr "ใช้คุณลักษณะท้องฟ้านี้เป็นค่าเริ่มต้น"
+
+#: src/ui_viewDialog.h:1125
+msgid "Visible"
+msgstr "มองเห็นได้"
+
+#: src/ui_configurationDialog.h:748
+msgid "Configuration"
+msgstr "การตั้งค่า"
+
+#: src/ui_configurationDialog.h:750
+msgid "Program language"
+msgstr "ภาษาของโปรแกรม"
+
+#: src/ui_configurationDialog.h:751
+msgid "Selected object information"
+msgstr "ข้อมูลวัตถุที่เลือก"
+
+#: src/ui_configurationDialog.h:753
+msgid "Display all information available"
+msgstr "แสดงข้อมูลทั้งหมด"
+
+#: src/ui_configurationDialog.h:755
+msgid "All available"
+msgstr "ทั้งหมดที่มี"
+
+#: src/ui_configurationDialog.h:757
+msgid "Display less information"
+msgstr "แสดงข้อมูลโดยสังเขป"
+
+#: src/ui_configurationDialog.h:759
+msgid "Short"
+msgstr "สั้น"
+
+#: src/ui_configurationDialog.h:761
+msgid "Display no information"
+msgstr "ไม่แสดงข้อมูล"
+
+#: src/ui_configurationDialog.h:763
+msgid "None"
+msgstr "ไม่มี"
+
+#: src/ui_configurationDialog.h:764
+msgid "Default options"
+msgstr "ตัวเลือกปริยาย"
+
+#: src/ui_configurationDialog.h:766
+msgid ""
+"Save the settings you've changed this session to be the same the next time "
+"you start Stellarium"
+msgstr ""
+"บันทึกการตั้งค่าที่คุณได้เปลี่ยนแปลงนี้ ให้เป็นแบบเดียวกันเมื่อเริ่ม "
+"Stellarium ในครั้งต่อไป"
+
+#: src/ui_configurationDialog.h:768
+msgid "Save settings"
+msgstr "บันทึกการตั้งค่าต่าง ๆ"
+
+#: src/ui_configurationDialog.h:770
+msgid "Restore the default settings that came with Stellarium"
+msgstr "คืนค่าเดิมที่มาพร้อมกับ Stellarium"
+
+#: src/ui_configurationDialog.h:772
+msgid "Restore defaults"
+msgstr "คืนค่าเริ่มต้นเดิม"
+
+#: src/ui_configurationDialog.h:773
+msgid ""
+"Restoring default settings requires a restart of Stellarium. Saving all the "
+"current options includes the current FOV and direction of view for use at "
+"next startup."
+msgstr ""
+"การคืนค่าเริ่มต้นเดิมต้องการการเริ่มต้น Stellarium ใหม่ "
+"บันทึกทุกตัวเลือกปัจจุบัน รวมทั้งพื้นที่การมองเห็น "
+"และทิศทางของมุมมองสำหรับใช้ในการเริ่มต้นถัดไป"
+
 #: src/ui_configurationDialog.h:775
 msgid "The width of your view when Stellarium starts"
 msgstr "ความกว้างของมุมมองเมื่อเริ่มต้น Stellarium"
+
+#: src/ui_configurationDialog.h:777
+msgid "Startup FOV: XX"
+msgstr "พื้นที่การมองเห็นเริ่มต้น: XX"
+
+#: src/ui_configurationDialog.h:779
+msgid "The direction you're looking when Stellarium starts"
+msgstr "ทิศทางที่คุณต้องการเมื่อเริ่ม Stellarium"
+
+#: src/ui_configurationDialog.h:781
+msgid "Startup direction of view: xxxx"
+msgstr "ทิศทางการเริ่มต้นของการดู: xxxx"
+
+#: src/ui_configurationDialog.h:782
+msgid "Control"
+msgstr "ควบคุม"
+
+#: src/ui_configurationDialog.h:784
+msgid "Allow keyboard to pan and zoom"
+msgstr "ใช้แป้นพิมพ์เพื่อส่ายและซูม"
+
+#: src/ui_configurationDialog.h:786
+msgid "Enable keyboard navigation"
+msgstr "เปิดใช้การนำทางผ่านแป้นพิมพ์"
+
+#: src/ui_configurationDialog.h:788
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr "ใช้เมาส์ในการส่าย (ลาก) และซูม (mousewheel)"
+
+#: src/ui_configurationDialog.h:790
+msgid "Enable mouse navigation"
+msgstr "เปิดใช้การนำทางโดยเมาส์"
+
+#: src/ui_configurationDialog.h:791
+msgid "Startup date and time"
+msgstr "วันและเวลาเริ่มต้น"
+
+#: src/ui_configurationDialog.h:793
+msgid "Starts Stellarium at system clock date and time"
+msgstr "เริ่ม Stellarium ตามวันและเวลาของระบบ"
+
+#: src/ui_configurationDialog.h:795
+msgid "System date and time"
+msgstr "ใช้วันที่และเวลาของระบบ"
+
+#: src/ui_configurationDialog.h:797
+msgid ""
+"Sets the simulation time to the next instance of this time of day when "
+"Stellarium starts"
+msgstr "ตั้งค่าเวลาของการจำลองเหตุการณ์หากวันที่ตรงกับการใช้งาน Stellarium"
+
+#: src/ui_configurationDialog.h:799
+msgid "System date at:"
+msgstr "วันที่ระบบคือ:"
+
+#: src/ui_configurationDialog.h:801
+msgid "Use a specific date and time when Stellarium starts up"
+msgstr "ใช้วันที่และเวลาที่เจาะจงเมื่อเริ่ม Stellarium"
+
+#: src/ui_configurationDialog.h:803
+msgid "Other:"
+msgstr "อื่น ๆ :"
+
+#: src/ui_configurationDialog.h:804
+msgid "use current"
+msgstr "ใช้ค่าขณะนี้"
+
+#: src/ui_configurationDialog.h:805
+msgid "Other"
+msgstr "อื่น ๆ"
+
+#: src/ui_configurationDialog.h:807
+msgid "Hides the mouse cursor when inactive"
+msgstr "ซ่อนตัวชี้เมาส์เมื่อไม่มีการใช้งาน"
+
+#: src/ui_configurationDialog.h:809
+msgid "Mouse cursor timeout (seconds):"
+msgstr "เวลาปรากฎตัวชี้เมาส์ (วินาที):"
+
+#: src/ui_configurationDialog.h:811
+msgid "Toggle vertical and horizontal image flip buttons."
+msgstr "สลับปุ่มพลิกภาพแนวตั้งและแนวนอน"
+
+#: src/ui_configurationDialog.h:813
+msgid "Show flip buttons"
+msgstr "แสดงปุ่มพลิก"
+
+#: src/ui_configurationDialog.h:814
+msgid "Planetarium options"
+msgstr "ตัวเลือกท้องฟ้าจำลอง"
+
+#: src/ui_configurationDialog.h:816
+msgid ""
+"Spheric mirror distortion is used when projecting Stellarium onto a spheric "
+"mirror for low-cost planetarium systems."
+msgstr ""
+"ปรับภาพเป็นการสะท้อนผิวโค้งสำหรับการใช้ในการฉายภาพลงบนกระจกโค้งของระบบท้องฟ้า"
+"จำลองราคาประหยัด"
+
+#: src/ui_configurationDialog.h:818
+msgid "Spheric mirror distortion"
+msgstr "ปรับภาพให้เหมือนสะท้อนกระจกโค้งทรงกลม"
+
+#: src/ui_configurationDialog.h:820
+msgid "Align labels with the horizon"
+msgstr "วางป้ายอักษรให้อยู่ในแนวขนานกับขอบฟ้า"
+
+#: src/ui_configurationDialog.h:822
+msgid "Gravity labels"
+msgstr "ป้ายแสดงความโน้มถ่วง"
+
+#: src/ui_configurationDialog.h:824
+msgid ""
+"When enabled, the \"auto zoom out\" key will also set the initial viewing "
+"direction"
+msgstr ""
+"เมื่อกำหนดให้ทำงาน, ปุ่ม \"ย่อภาพอัตโนมัติ\" "
+"จะถูกกำหนดเป็นค่าเริ่มต้นในทิศทางการมอง"
+
+#: src/ui_configurationDialog.h:826
+msgid "Auto zoom out returns to initial direction of view"
+msgstr "ซูมออกอัตโนมัติเพื่อกลับไปยังทิศทางของมุมมองเริ่มต้น"
+
+#: src/ui_configurationDialog.h:828
+msgid "Mask out everything outside a central circle in the main view"
+msgstr "บังส่วนที่อยู่นอกมุมมองรูปวงกลม"
+
+#: src/ui_configurationDialog.h:830
+msgid "Disc viewport"
+msgstr "มุมมองรูปวงกลม"
+
+#: src/ui_configurationDialog.h:832
+msgid "Hide other constellations when you click one"
+msgstr "ซ่อนกลุ่มดาวอื่นเมื่อคลิกที่กลุ่มดาวกลุ่มหนึ่ง"
+
+#: src/ui_configurationDialog.h:834
+msgid "Select single constellation"
+msgstr "เลือกกลุ่มดาวหนึ่ง"
+
+#: src/ui_configurationDialog.h:835
+msgid "Screenshots"
+msgstr "ภาพหน้าจอ"
+
+#: src/ui_configurationDialog.h:836
+msgid "Screenshot Directory"
+msgstr "ไดเรกทอรี่ภาพหน้าจอที่บันทึก"
+
+#: src/ui_configurationDialog.h:838
+msgid "Invert colors"
+msgstr "กลับสี"
+
+#: src/ui_configurationDialog.h:839
+msgid "Star catalog updates"
+msgstr "ปรับปรุงชุดกลุ่มดวงดาว"
+
+#: src/ui_configurationDialog.h:841
+msgid "Click here to start downloading"
+msgstr "คลิ๊กที่นี่เพื่อเริ่มการดาวน์โหลด"
+
+#: src/ui_configurationDialog.h:843
+msgid "Get catalog x of y"
+msgstr "รับกลุ่มดาว x จาก y"
+
+#: src/ui_configurationDialog.h:844
+msgid "Download this file to view even more stars"
+msgstr "ดาวน์โหลดแฟ้มนี้เพื่อดูดาวมากขึ้น"
+
+#: src/ui_configurationDialog.h:845
+msgid "xxx"
+msgstr "xxx"
+
+#: src/ui_configurationDialog.h:847
+msgid "Restart the download"
+msgstr "เริ่มต้นการดาวน์โหลดใหม่"
+
+#: src/ui_configurationDialog.h:849
+msgid "Retry"
+msgstr "ลองซ้ำ"
+
+#: src/ui_configurationDialog.h:851
+msgid "Stop the download. You can always restart it later"
+msgstr "หยุดการดาวน์โหลด คุณสามารถเริ่มต้นใหม่ได้ในภายหลัง"
+
+#: src/ui_configurationDialog.h:853
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+#: src/ui_configurationDialog.h:856
+msgid "Close window when script runs"
+msgstr "ปิดหน้าต่างเมื่อสคริปต์ทำงาน"
+
+#: src/ui_configurationDialog.h:858
+msgid "Run the selected script"
+msgstr "สั่งให้สคริปต์ที่เลือกไว้ทำงาน"
+
+#: src/ui_configurationDialog.h:862
+msgid "Stop a running script"
+msgstr "หยุดสคริปต์ที่กำลังทำงานอยู่"
+
+#: src/ui_configurationDialog.h:866
+msgid "Load at startup"
+msgstr "โหลดเมื่อเริ่มต้นระบบ"
+
+#: src/ui_configurationDialog.h:867
+msgid "configure"
+msgstr "ปรับแต่ง"
+
+#: src/ui_configurationDialog.h:872
+msgid "Main"
+msgstr "หลัก"
+
+#: src/ui_configurationDialog.h:874
+msgid "Navigation"
+msgstr "นำทาง"
+
+#: src/ui_configurationDialog.h:876
+msgid "Tools"
+msgstr "เครื่องมือ"
+
+#: src/ui_configurationDialog.h:878
+msgid "Scripts"
+msgstr "สคริปต์"
+
+#: src/ui_configurationDialog.h:880
+msgid "Plugins"
+msgstr "โปรแกรมเสริม"
+
+#: src/ui_addRemoveLandscapesDialog.h:266
+msgid "Add/Remove Landscapes"
+msgstr "เพิ่ม/ลบ ภูมิทัศน์"
+
+#: src/ui_addRemoveLandscapesDialog.h:268
+msgid "Add a new landscape"
+msgstr "เพิ่มภูมิทัศน์ใหม่"
+
+#: src/ui_addRemoveLandscapesDialog.h:269
+msgid "Install a new landscape from a ZIP archive..."
+msgstr "ติดตั้งภูมิทัศน์ใหม่จากแฟ้มบีบอัด"
+
+#: src/ui_addRemoveLandscapesDialog.h:270
+msgid "Switch to the new landscape after installation"
+msgstr "สลับไปที่ภูมิทัศน์ใหม่หลังจากติดตั้ง"
+
+#: src/ui_addRemoveLandscapesDialog.h:273
+msgid "Remove an installed landscape"
+msgstr "ถอดถอนภูมิทัศน์ที่ติดตั้งไว้"
+
+#: src/ui_addRemoveLandscapesDialog.h:275
+msgid "Remove"
+msgstr "เอาออก"
+
+#: src/ui_addRemoveLandscapesDialog.h:276
+msgid ""
+"WARNING: Removing the selected landscape means deleting its files. This "
+"operation is irreversible."
+msgstr ""
+"คำเตือน: การถอดถอนภูมิทัศน์ที่เลือกไว้คือการลบแฟ้มที่เกี่ยวข้อง "
+"โดยไม่สามารถย้อนกลับได้"
+
+#: src/ui_AtmosphereDialog.h:167
+msgid "Dialog"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:168
+msgid "Atmosphere Details"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:170
+msgid "Refraction Settings"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:171
+msgid "Pressure (mbar):"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:172
+msgid "Temperature (C):"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:177
+msgid ""
+"Extinction is the loss of star brightness due to Earth's atmosphere. It is "
+"given in mag/airmass, where airmass is number of atmospheres light has to "
+"pass. (zenith: 1; horizon: about 40)"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:179
+msgid "Extinction Coefficient:"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:181
+msgid ""
+"Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
+"for murky conditions."
+msgstr ""
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:57
+msgid "Angle Measure"
+msgstr "วัดมุม"
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:60
+msgid "Provides an angle measurement tool"
+msgstr "แสดงเครื่องมือวัดมุม"
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:121
+msgid "Angle measure"
+msgstr "วัดมุม"
+
+#. TRANSLATORS: Title of a group of key bindings in the Help window
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:121
+#: plugins/CompassMarks/src/CompassMarks.cpp:121
+#: plugins/Oculars/src/Oculars.cpp:931 plugins/Oculars/src/Oculars.cpp:945
+#: plugins/Satellites/src/Satellites.cpp:123
+msgid "Plugin Key Bindings"
+msgstr "ปุ่มลัดในโปรแกรมเสริม"
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:57
+msgid "Compass Marks"
+msgstr "เครื่องหมายแสดงทิศ"
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:60
+msgid "Displays compass bearing marks along the horizon"
+msgstr "แสดงแบริงเข็มทิศตามแนวขอบฟ้า"
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:121
+msgid "Compass marks"
+msgstr "ขีดแสดงมุมทิศ"
+
+#: plugins/Oculars/src/Oculars.cpp:76
+msgid "Oculars"
+msgstr "เลนส์ใกล้ตา"
+
+#: plugins/Oculars/src/Oculars.cpp:79
+msgid "Shows the sky as if looking through a telescope eyepiece"
+msgstr "แสดงท้องฟ้าเมื่อมองผ่านเลนส์ใกล้ตาของกล้องโทรทรรศน์"
+
+#: plugins/Oculars/src/Oculars.cpp:943
+msgid "Ocular view"
+msgstr "มุมมองเลนส์ใกล้ตา"
+
+#: plugins/Oculars/src/Oculars.cpp:965
+msgid "Oculars popup menu"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:67
+msgid "Satellites"
+msgstr "ดาวเทียม"
+
+#: plugins/Satellites/src/Satellites.cpp:70
+msgid ""
+"Prediction of artificial satellite positions in Earth orbit based on NORAD "
+"TLE data"
+msgstr "การคาดหมายตำแหน่งดาวเทียมในวงโคจรรอบโลกจากข้อมูล TLE ของ NORAD"
+
+#: plugins/Satellites/src/Satellites.cpp:125
+msgid "Satellites configuration window"
+msgstr "หน้าต่างการตั้งค่าดาวเทียม"
+
+#: plugins/Satellites/src/Satellites.cpp:126
+msgid "Satellite hints"
+msgstr "ดาวเทียม"
+
+#: plugins/Satellites/src/Satellites.cpp:128
+msgid "Satellite labels"
+msgstr "ชื่อดาวเทียม"
+
+#: plugins/Satellites/src/Satellites.cpp:162
+msgid ""
+"The old satellites.json file is no longer compatible - using default file"
+msgstr "แฟ้ม satellites.json แฟ้มเก่าเข้ากันไม่ได้แล้ว กำลังใช้แฟ้มปริยาย"
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:75
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:150
+msgid "Telescope Control"
+msgstr "ควบคุมกล้องโทรทรรศน์"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 msgid ""
@@ -1913,338 +2395,88 @@ msgstr ""
 "โปรแกรมเสริมสำหรับให้ Stellarium ส่งคำสั่ง \"สลูว์\" "
 "ไปยังกล้องโทรทรรศน์ที่ฐานยึดควบคุมด้วยคอมพิวเตอร์ (กล้องแบบ GoTo)"
 
-#: src/main.cpp:335
-msgid "This system does not support OpenGL."
-msgstr "ระบบไม่สนับสนุน OpenGL"
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:155
+#, qt-format
+msgid "Move telescope #%1 to selected object"
+msgstr "หันกล้องโทรทรรศน์ #%1 ไปยังวัตถุที่เลือก"
 
-#: src/translations.h:142
-msgid "Time Display Format: "
-msgstr "รูปแบบเวลา: "
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:162
+#, qt-format
+msgid "Move telescope #%1 to the point currently in the center of the screen"
+msgstr "หันกล้องโทรทรรศน์ #%1 ไปยังตำแหน่งที่อยู่กลางจอภาพในขณะนี้"
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:173
+msgid "Move a telescope to a given set of coordinates"
+msgstr "หันกล้องโทรทรรศน์ไปยังพิกัดที่กำหนด"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
 msgstr "เขตเวลา"
 
-#: src/translations.h:56
-msgid "Titan"
-msgstr "ไททัน"
+#: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:44
+msgid ""
+"A convenient interface for some of the more obscure options in Stellarium's "
+"configuration file. Allows setting the time zone and changing the way the "
+"time and the date are displayed in the bottom bar."
+msgstr ""
 
-#: src/translations.h:65
-msgid "Titania"
-msgstr "ทิเทเนีย"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:78
+msgid "Text User Interface"
+msgstr "ส่วนต่อประสานกับผู้ใช้แบบข้อความ"
 
-#: src/ui_configurationDialog.h:811
-msgid "Toggle vertical and horizontal image flip buttons."
-msgstr "สลับปุ่มพลิกภาพแนวตั้งและแนวนอน"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:81
+msgid ""
+"Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
+"planetarium systems"
+msgstr ""
 
-#: src/gui/StelGui.cpp:177
-msgid "Toggle visibility of GUI"
-msgstr "สลับการแสดงส่วนต่อประสานกราฟิกกับผู้ใช้"
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
+msgid "Solar System Editor"
+msgstr "เครื่องมือปรับแต่งระบบสุริยะ"
 
-#: src/ui_configurationDialog.h:876
-msgid "Tools"
-msgstr "เครื่องมือ"
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:59
+msgid ""
+"An interface for adding asteroids and comets to Stellarium. It can download "
+"object lists from the Minor Planet Center's website and perform searches in "
+"its online database. Still a work in progress."
+msgstr ""
+"ส่วนสำหรับเพิ่มข้อมูลดาวเคราะห์น้อยและดาวหางลงใน Stellarium "
+"มันจะดาวน์โหลดรายชื่อวัตถุจากเว็บไซต์ของศูนย์ดาวเคราะห์น้อย "
+"และค้นหาในฐานข้อมูลออนไลน์ ส่วนนี้ยังอยู่ระหว่างการพัฒนา"
 
-#: src/gui/StelGui.cpp:164
-msgid "Track object"
-msgstr "ติดตามวัตถุ"
+#: plugins/Supernovas/src/Supernovas.cpp:59
+msgid "Historical supernova"
+msgstr ""
 
-#: src/translations.h:114
-msgid "Tupi-Guarani"
-msgstr "ทูปิ-กวารานิ"
+#: plugins/Supernovas/src/Supernovas.cpp:62
+msgid ""
+"The plugin for visualization of some historical supernovas, brighter 10 "
+"magnitude"
+msgstr ""
 
-#: src/ui_viewDialog.h:1004
-msgid "Twinkle:"
-msgstr "กะพริบแสง:"
+#: plugins/Supernovas/src/Supernovas.cpp:62
+msgid ""
+"SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
+"July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
+"1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
+"August), SN 1972E (8 May) and SN 1987A (24 February)"
+msgstr ""
 
-#: src/translations.h:152
-msgid "Twinkling: "
-msgstr "การกะพริบ: "
-
-#: src/core/modules/Nebula.cpp:92
+#: plugins/Supernovas/src/Supernova.cpp:105
 #, qt-format
-msgid "Type: <b>%1</b>"
-msgstr "ชนิด: <b>%1</b>"
-
-#: src/translations.h:184
-msgid "USB Script: "
-msgstr "สคริปต์ที่มีอยู่ใน USB: "
-
-#: src/translations.h:64
-msgid "Umbriel"
-msgstr "อัมเบรียล"
-
-#: src/core/modules/Nebula.cpp:290
-msgid "Undocumented type"
-msgstr "ยังไม่ได้ระบุในเอกสาร"
-
-#: src/core/modules/Nebula.cpp:287
-msgid "Unknown"
-msgstr "ไม่มีข้อมูล"
-
-#: src/translations.h:191
-msgid "Update me via Internet: "
-msgstr "อัปเดตผ่านอินเทอร์เน็ต: "
-
-#: src/translations.h:61
-msgid "Uranus"
-msgstr "ดาวยูเรนัส"
-
-#: src/ui_configurationDialog.h:801
-msgid "Use a specific date and time when Stellarium starts up"
-msgstr "ใช้วันที่และเวลาที่เจาะจงเมื่อเริ่ม Stellarium"
-
-#: src/ui_locationDialogGui.h:392
-msgid "Use as default"
-msgstr "ใช้เป็นค่าเริ่มต้น"
-
-#: src/ui_viewDialog.h:1049
-msgid "Use associated planet and position"
-msgstr "ใช้ดาวเคราะห์ที่เกี่ยวข้องและตำแหน่ง"
-
-#: src/ui_viewDialog.h:1050
-msgid "Use this landscape as default"
-msgstr "ใช้ภูมิทัศน์นี้เป็นค่าเริ่มต้น"
-
-#: src/ui_viewDialog.h:1052
-msgid "Use this sky culture as default"
-msgstr "ใช้คุณลักษณะท้องฟ้านี้เป็นค่าเริ่มต้น"
-
-#: src/translations.h:35
-msgid "Venus"
-msgstr "ดาวศุกร์"
-
-#: src/gui/ConfigurationDialog.cpp:810
-msgid "Verifying file integrity..."
-msgstr "กำลังทวนสอบบูรณภาพของแฟ้มข้อมูล..."
-
-#: src/translations.h:44
-msgid "Vesta"
-msgstr "เวสตา"
-
-#: src/ui_viewDialog.h:986
-msgid "View"
-msgstr "มุมมอง"
-
-#: src/ui_viewDialog.h:1054
-msgid "Visible"
-msgstr "มองเห็นได้"
-
-#: src/translations.h:100
-msgid "W"
-msgstr "ตะวันตก"
-
-#: src/ui_addRemoveLandscapesDialog.h:276
-msgid ""
-"WARNING: Removing the selected landscape means deleting its files. This "
-"operation is irreversible."
+msgid "Type: %1"
 msgstr ""
 
-#: src/translations.h:115
-msgid "Western"
-msgstr "ตะวันตก"
-
-#: src/gui/HelpDialog.cpp:71
-msgid "When a Script is Running"
-msgstr "เมื่อสคริปต์กำลังทำงาน"
-
-#: src/ui_configurationDialog.h:824
-msgid ""
-"When enabled, the \"auto zoom out\" key will also set the initial viewing "
-"direction"
-msgstr ""
-
-#: src/gui/StelGui.cpp:129
-msgid "Windows"
-msgstr "หน้าต่าง"
-
-#: src/ui_locationDialogGui.h:397 src/ui_locationDialogGui.h:401
-msgid ""
-"You can enter values in decimal degrees, or using dms format, for example: "
-"+1d 12m 8s"
-msgstr "คุณสามารถป้อนค่าเป็นเลขทศนิยม หรือใช้รูปแบบ องศา ลิปดา พิลิปดา เช่น +1d 12m 8s"
-
-#. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:238
 #, qt-format
-msgid "You can remove it manually by deleting the following directory: %1"
-msgstr ""
-
-#. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
-#: src/gui/AddRemoveLandscapesDialog.cpp:114
-msgid "ZIP archives"
-msgstr "แฟ้มบีบอัด"
-
-#: src/translations.h:178
-msgid "Zoom Duration: "
-msgstr "ช่วงเวลาการซูม: "
-
-#: src/gui/StelGui.cpp:165
-msgid "Zoom in on selected object"
-msgstr "ขยายวัตถุที่เลือก"
-
-#: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
-msgid "Zoom in/out"
-msgstr "ซูมเข้า/ออก"
-
-#: src/gui/StelGui.cpp:166
-msgid "Zoom out"
-msgstr "ย่อ"
-
-#: src/ui_searchDialogGui.h:449
-msgid "alpha"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:452
-msgid "beta"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:512
-msgid "chi"
-msgstr ""
-
-#: src/ui_configurationDialog.h:867
-msgid "configure"
-msgstr "ปรับแต่ง"
-
-#: src/ui_searchDialogGui.h:458
-msgid "delta"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:461
-msgid "epsilon"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:467
-#, fuzzy
-msgid "eta"
-msgstr "เวสตา"
-
-#: src/ui_searchDialogGui.h:455
-msgid "gamma"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:473
-msgid "iota"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:476
-msgid "kappa"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:479
-msgid "lambda"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:482
-msgid "mu"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:485
-msgid "nu"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:518
-msgid "omega"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:491
-msgid "omicron"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:509
-#, fuzzy
-msgid "phi"
-msgstr "อะโพฟิส"
-
-#: src/ui_searchDialogGui.h:494
-msgid "pi"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:515
-msgid "psi"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:497
-msgid "rho"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:500
-msgid "sigma"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:503
-msgid "tau"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:470
-msgid "theta"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:506
-msgid "upsilon"
-msgstr ""
-
-#: src/ui_configurationDialog.h:804
-msgid "use current"
-msgstr "ใช้ค่าขณะนี้"
-
-#: src/ui_searchDialogGui.h:488
-msgid "xi"
-msgstr ""
-
-#: src/ui_configurationDialog.h:845
-msgid "xxx"
-msgstr "xxx"
-
-#: src/ui_searchDialogGui.h:464
-msgid "zeta"
-msgstr ""
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:193
-msgid ""
-"{Bug reporting and feature request system} - if something doesn't work "
-"properly or is missing and is not listed in the tracker, you can open bug "
-"reports here."
-msgstr ""
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:198
-msgid "{Forums} - discuss Stellarium with other users."
-msgstr "{กระทู้} - ถกปัญหากับผู้ใช้คนอื่น ๆ  เกี่ยวกับ Stellarium"
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:178
-msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr "{คำถามที่ถามบ่อย} เกี่ยวกับ Stellarium และคำตอบ"
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:188
-msgid ""
-"{Support ticket system} - if you need help using Stellarium, post a support "
-"request here and we'll try to help."
-msgstr ""
-"{ระบบสนับสนุน} - ถ้าคุณต้องการความช่วยเหลือ สามารถร้องขอความช่วยเหลือได้ที่นี่ แล้วเราจะช่วยคุณ"
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:183
-msgid ""
-"{The Stellarium Wiki} - General information.  You can also find user-"
-"contributed landscapes and scripts here."
-msgstr "{Stellarium วิกิ} - ข้อมูลทั่วไป คุณสามารถหารายชื่อผู้เข้าร่วมและสคริปต์ได้ที่นี่"
-
-#~ msgid "Form"
-#~ msgstr "จาก"
-
-#~ msgid "Loading NGC catalog"
-#~ msgstr "กำลังเรียกบัญชีเอ็นจีซี"
-
 #~ msgid "Loading NGC catalog: %1/%2"
 #~ msgstr "กำลังเปิด %1/%2 จากฐานข้อมูล NGC"
 
+#, qt-format
 #~ msgid "Loading catalog %1 from file %2"
 #~ msgstr "กำลังเปิด %1 จาก %2"
+
+#~ msgid "Form"
+#~ msgstr "จาก"
 
 #~ msgid "Move telescope #0 to selected object"
 #~ msgstr "หันกล้องโทรทรรศน์ #0 ไปยังวัตถุที่เลือก"
@@ -2252,26 +2484,35 @@ msgstr "{Stellarium วิกิ} - ข้อมูลทั่วไป คุ�
 #~ msgid "Move telescope #1 to selected object"
 #~ msgstr "หันกล้องโทรทรรศน์ #1 ไปยังวัตถุที่เลือก"
 
-#~ msgid "Move telescope #2 to selected object"
-#~ msgstr "หันกล้องโทรทรรศน์ #2 ไปยังวัตถุที่เลือก"
-
-#~ msgid "Move telescope #3 to selected object"
-#~ msgstr "หันกล้องโทรทรรศน์ #3 ไปยังวัตถุที่เลือก"
-
 #~ msgid "Move telescope #4 to selected object"
 #~ msgstr "หันกล้องโทรทรรศน์ #4 ไปยังวัตถุที่เลือก"
 
-#~ msgid "Move telescope #5 to selected object"
-#~ msgstr "หันกล้องโทรทรรศน์ #5 ไปยังวัตถุที่เลือก"
+#~ msgid "Move telescope #2 to selected object"
+#~ msgstr "หันกล้องโทรทรรศน์ #2 ไปยังวัตถุที่เลือก"
 
-#~ msgid "Move telescope #6 to selected object"
-#~ msgstr "หันกล้องโทรทรรศน์ #6 ไปยังวัตถุที่เลือก"
-
-#~ msgid "Move telescope #7 to selected object"
-#~ msgstr "หันกล้องโทรทรรศน์ #7 ไปยังวัตถุที่เลือก"
+#~ msgid "Move telescope #9 to selected object"
+#~ msgstr "หันกล้องโทรทรรศน์ #9 ไปยังวัตถุที่เลือก"
 
 #~ msgid "Move telescope #8 to selected object"
 #~ msgstr "หันกล้องโทรทรรศน์ #8 ไปยังวัตถุที่เลือก"
 
-#~ msgid "Move telescope #9 to selected object"
-#~ msgstr "หันกล้องโทรทรรศน์ #9 ไปยังวัตถุที่เลือก"
+#~ msgid "Move telescope #5 to selected object"
+#~ msgstr "หันกล้องโทรทรรศน์ #5 ไปยังวัตถุที่เลือก"
+
+#~ msgid "Move telescope #7 to selected object"
+#~ msgstr "หันกล้องโทรทรรศน์ #7 ไปยังวัตถุที่เลือก"
+
+#~ msgid "Move telescope #6 to selected object"
+#~ msgstr "หันกล้องโทรทรรศน์ #6 ไปยังวัตถุที่เลือก"
+
+#~ msgid "Move telescope #3 to selected object"
+#~ msgstr "หันกล้องโทรทรรศน์ #3 ไปยังวัตถุที่เลือก"
+
+#~ msgid "Loading NGC catalog"
+#~ msgstr "กำลังเรียกบัญชีเอ็นจีซี"
+
+#~ msgid "Oculars configuration window"
+#~ msgstr "หน้าต่างปรับแต่งเลนส์ใกล้ตา"
+
+#~ msgid "Telrad circles"
+#~ msgstr "วงกลม Telrad"
