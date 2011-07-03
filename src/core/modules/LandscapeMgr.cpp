@@ -972,6 +972,7 @@ QString LandscapeMgr::getDescription() const
 		QFile file(descriptionFile);
 		file.open(QIODevice::ReadOnly | QIODevice::Text);
 		QTextStream in(&file);
+		in.setCodec("UTF-8");
 		desc = in.readAll();
 		file.close();
 	}

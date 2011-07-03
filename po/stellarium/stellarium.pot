@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-29 08:44+0700\n"
+"POT-Creation-Date: 2011-06-26 01:48+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,7 +56,7 @@ msgid "Type: <b>%1</b>"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:120
-#: plugins/Supernovae/src/Supernova.cpp:98
+#: plugins/Supernovas/src/Supernova.cpp:98
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr ""
@@ -134,7 +134,7 @@ msgid "Spectral Type: %1"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:122
-#: plugins/Supernovae/src/Supernova.cpp:107
+#: plugins/Supernovas/src/Supernova.cpp:107
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr ""
@@ -2217,6 +2217,43 @@ msgid ""
 "operation is irreversible."
 msgstr ""
 
+#: src/ui_AtmosphereDialog.h:167
+msgid "Dialog"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:168
+msgid "Atmosphere Details"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:170
+msgid "Refraction Settings"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:171
+msgid "Pressure (mbar):"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:172
+msgid "Temperature (C):"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:177
+msgid ""
+"Extinction is the loss of star brightness due to Earth's atmosphere. It is "
+"given in mag/airmass, where airmass is number of atmospheres light has to "
+"pass. (zenith: 1; horizon: about 40)"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:179
+msgid "Extinction Coefficient:"
+msgstr ""
+
+#: src/ui_AtmosphereDialog.h:181
+msgid ""
+"Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
+"for murky conditions."
+msgstr ""
+
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
 msgstr ""
@@ -2349,17 +2386,17 @@ msgid ""
 "its online database. Still a work in progress."
 msgstr ""
 
-#: plugins/Supernovae/src/Supernovae.cpp:59
-msgid "Historical supernovae"
+#: plugins/Supernovas/src/Supernovas.cpp:59
+msgid "Historical supernova"
 msgstr ""
 
-#: plugins/Supernovae/src/Supernovae.cpp:62
+#: plugins/Supernovas/src/Supernovas.cpp:62
 msgid ""
-"The plugin for visualization of some historical supernovae, brighter 10 "
+"The plugin for visualization of some historical supernovas, brighter 10 "
 "magnitude"
 msgstr ""
 
-#: plugins/Supernovae/src/Supernovae.cpp:62
+#: plugins/Supernovas/src/Supernovas.cpp:62
 msgid ""
 "SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
 "July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
@@ -2367,7 +2404,7 @@ msgid ""
 "August), SN 1972E (8 May) and SN 1987A (24 February)"
 msgstr ""
 
-#: plugins/Supernovae/src/Supernova.cpp:105
+#: plugins/Supernovas/src/Supernova.cpp:105
 #, qt-format
 msgid "Type: %1"
 msgstr ""
