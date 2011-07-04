@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-06-26 01:48+0700\n"
+"POT-Creation-Date: 2011-07-03 17:49+0700\n"
 "PO-Revision-Date: 2011-07-01 10:08+0000\n"
 "Last-Translator: Kenan Dervišević <kenan3008@gmail.com>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-02 04:32+0000\n"
+"X-Launchpad-Export-Date: 2011-07-04 04:39+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
@@ -56,7 +56,7 @@ msgid "Type: <b>%1</b>"
 msgstr "Tip: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:120
-#: plugins/Supernovas/src/Supernova.cpp:98
+#: plugins/Supernovae/src/Supernova.cpp:98
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Veličina: <b>%1</b>"
@@ -134,7 +134,7 @@ msgid "Spectral Type: %1"
 msgstr "Spektralna vrsta: %1"
 
 #: src/core/modules/StarWrapper.cpp:122
-#: plugins/Supernovas/src/Supernova.cpp:107
+#: plugins/Supernovae/src/Supernova.cpp:107
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Udaljenost: %1 svjestlosnih godina"
@@ -2462,18 +2462,17 @@ msgstr ""
 "preuzimanja i pretrage liste objekata sa Minor Planet Center web stranice. "
 "Još je u fazi izrade."
 
-#: plugins/Supernovas/src/Supernovas.cpp:59
-msgid "Historical supernova"
-msgstr "Historijska supernova"
+#: plugins/Supernovae/src/Supernovae.cpp:59
+msgid "Historical supernovae"
+msgstr ""
 
-#: plugins/Supernovas/src/Supernovas.cpp:62
+#: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
-"The plugin for visualization of some historical supernovas, brighter 10 "
+"The plugin for visualization of some historical supernovae, brighter 10 "
 "magnitude"
 msgstr ""
-"Plugin za vizualizaciju nekih historijskih supernova, svijetlih i veličine 10"
 
-#: plugins/Supernovas/src/Supernovas.cpp:62
+#: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
 "SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
 "July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
@@ -2485,7 +2484,7 @@ msgstr ""
 "oktobar), SN 1680A (15. august), SN 1885A (17. august), SN 1895B (5. juli), "
 "SN 1937C (21. august), SN 1972E (8. maj) and SN 1987A (24. februar)"
 
-#: plugins/Supernovas/src/Supernova.cpp:105
+#: plugins/Supernovae/src/Supernova.cpp:105
 #, qt-format
 msgid "Type: %1"
 msgstr "Tip: %1"
@@ -2542,3 +2541,12 @@ msgstr "Tip: %1"
 
 #~ msgid "Keyboard for Greek input"
 #~ msgstr "Tastatura za grčka slova"
+
+#~ msgid "Historical supernova"
+#~ msgstr "Historijska supernova"
+
+#~ msgid ""
+#~ "The plugin for visualization of some historical supernovas, brighter 10 "
+#~ "magnitude"
+#~ msgstr ""
+#~ "Plugin za vizualizaciju nekih historijskih supernova, svijetlih i veličine 10"
