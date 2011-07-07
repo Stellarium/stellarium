@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-07-03 17:49+0700\n"
-"PO-Revision-Date: 2011-06-02 09:46+0000\n"
+"PO-Revision-Date: 2011-07-07 04:00+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-04 04:42+0000\n"
+"X-Launchpad-Export-Date: 2011-07-07 04:35+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -33,7 +33,7 @@ msgstr "เส้นศูนย์สูตร"
 
 #: src/core/modules/GridLinesMgr.cpp:537
 msgid "Horizon"
-msgstr ""
+msgstr "ขอบฟ้า"
 
 #: src/core/modules/LandscapeMgr.cpp:488
 msgid "Author: "
@@ -108,12 +108,12 @@ msgstr "อันดับความสว่างสัมบูรณ์ %1
 #: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr ""
+msgstr "พิกัดสุริยวิถีศูนย์โลก (ของวัน): %1/%2"
 
 #: src/core/modules/Planet.cpp:137
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr ""
+msgstr "ความเอียง (ของวัน): %1"
 
 #: src/core/modules/Planet.cpp:143
 #, no-c-format, qt-format
@@ -269,11 +269,11 @@ msgstr "มุมชั่วโมง/เดคลิเนชัน %1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
-msgstr ""
+msgstr "(เรขาคณิต)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
-msgstr ""
+msgstr "(ปรากฏ)"
 
 #: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
@@ -589,7 +589,7 @@ msgstr "เส้นเมอริเดียน"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
 msgid "Horizon line"
-msgstr ""
+msgstr "เส้นขอบฟ้า"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
 msgid "Cardinal points"
@@ -1143,7 +1143,7 @@ msgstr "ฮาลิมีดี"
 
 #: src/translations.h:91
 msgid "Psamathe"
-msgstr ""
+msgstr "แซมาที"
 
 #: src/translations.h:92
 msgid "Sao"
@@ -1151,7 +1151,7 @@ msgstr "เซโอ"
 
 #: src/translations.h:93
 msgid "Laomedeia"
-msgstr ""
+msgstr "เลโอมาเดีย"
 
 #: src/translations.h:94
 msgid "Neso"
@@ -1214,12 +1214,12 @@ msgstr "เฮคเตอร์"
 #. TRANSLATORS: Name of supernova SN 1572A
 #: src/translations.h:120
 msgid "Tycho's Supernova"
-msgstr ""
+msgstr "ซูเปอร์โนวาของทีโค"
 
 #. TRANSLATORS: Name of supernova SN 1604A
 #: src/translations.h:122
 msgid "Kepler's Supernova"
-msgstr ""
+msgstr "ซูเปอร์โนวาของเคปเลอร์"
 
 #: src/translations.h:126
 msgid "N"
@@ -1643,7 +1643,7 @@ msgstr "ค้นหาวัตถุท้องฟ้า"
 
 #: src/ui_searchDialogGui.h:451
 msgid "Find Object or Position"
-msgstr ""
+msgstr "ค้นหาวัตถุหรือตำแหน่ง"
 
 #: src/ui_searchDialogGui.h:458
 msgid "iota"
@@ -1743,11 +1743,11 @@ msgstr "โอเมกา"
 
 #: src/ui_searchDialogGui.h:529
 msgid "Greek letters for Bayer designations"
-msgstr ""
+msgstr "อักษรกรีกสำหรับระบบของเบเยอร์"
 
 #: src/ui_searchDialogGui.h:530
 msgid "Object"
-msgstr ""
+msgstr "วัตถุ"
 
 #: src/ui_searchDialogGui.h:531
 msgid "RA/Dec (J2000):"
@@ -1755,7 +1755,7 @@ msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (
 
 #: src/ui_searchDialogGui.h:532
 msgid "Position"
-msgstr ""
+msgstr "ตำแหน่ง"
 
 #: src/ui_viewDialog.h:1052
 msgid "View"
@@ -1831,11 +1831,11 @@ msgstr "มลภาวะทางแสง: "
 
 #: src/ui_viewDialog.h:1085
 msgid "pressure, temperature, extinction coefficient"
-msgstr ""
+msgstr "ความกดอากาศ, อุณหภูมิ, สัมประสิทธิ์การสูญหาย"
 
 #: src/ui_viewDialog.h:1087
 msgid "Refraction/Extinction settings..."
-msgstr ""
+msgstr "การตั้งค่าการหักเห/การสูญหาย..."
 
 #: src/ui_viewDialog.h:1088
 msgid "Labels and Markers"
@@ -2272,23 +2272,23 @@ msgstr ""
 
 #: src/ui_AtmosphereDialog.h:167
 msgid "Dialog"
-msgstr ""
+msgstr "กล่องโต้ตอบ"
 
 #: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
-msgstr ""
+msgstr "สภาพบรรยากาศ"
 
 #: src/ui_AtmosphereDialog.h:170
 msgid "Refraction Settings"
-msgstr ""
+msgstr "การตั้งค่าการหักเหแสง"
 
 #: src/ui_AtmosphereDialog.h:171
 msgid "Pressure (mbar):"
-msgstr ""
+msgstr "ความกดอากาศ (มิลลิบาร์)"
 
 #: src/ui_AtmosphereDialog.h:172
 msgid "Temperature (C):"
-msgstr ""
+msgstr "อุณหภูมิ (องศาเซลเซียส)"
 
 #: src/ui_AtmosphereDialog.h:177
 msgid ""
@@ -2296,16 +2296,22 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
+"การสูญหาย (Extinction) คือการที่แสงดาวลดความสว่างลงเนื่องจากบรรยากาศโลก "
+"ระบุในหน่วยโชติมาตรต่อมวลอากาศ มวลอากาศ (airmass) "
+"คือปริมาณบรรยากาศที่แสงเดินทางผ่าน (จุดเหนือศีรษะมีค่าเท่ากับ 1; "
+"ขอบฟ้ามีค่าประมาณ 40)"
 
 #: src/ui_AtmosphereDialog.h:179
 msgid "Extinction Coefficient:"
-msgstr ""
+msgstr "สัมประสิทธิ์การสูญหาย:"
 
 #: src/ui_AtmosphereDialog.h:181
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
+"ใช้ค่าประมาณ 0.12 สำหรับทัศนวิสัยดีเลิศบนยอดเขา, 0.2 "
+"สำหรับทัศนวิสัยดีแบบในชนบท, 0.35 สำหรับทัศนวิสัยที่มืดมัว"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -2353,7 +2359,7 @@ msgstr "มุมมองเลนส์ใกล้ตา"
 
 #: plugins/Oculars/src/Oculars.cpp:965
 msgid "Oculars popup menu"
-msgstr ""
+msgstr "รายการเลือกแบบผุดขึ้นของเลนส์ใกล้ตา"
 
 #: plugins/Satellites/src/Satellites.cpp:67
 msgid "Satellites"
@@ -2419,6 +2425,8 @@ msgid ""
 "configuration file. Allows setting the time zone and changing the way the "
 "time and the date are displayed in the bottom bar."
 msgstr ""
+"ส่วนต่อประสานสำหรับตั้งค่าตัวเลือกที่ซ่อนอยู่ในไฟล์การตั้งค่าของ Stellarium "
+"สามารถใช้สำหรับตั้งค่าเขตเวลาและเปลี่ยนแปลงรูปแบบวัน-เวลาในแถบด้านล่าง"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:78
 msgid "Text User Interface"
@@ -2429,6 +2437,8 @@ msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
+"ส่วนต่อประสานผู้ใช้แบบข้อความ (TUI) ซึ่งเป็นโปรแกรมเสริมสำหรับรุ่น 0.9.x "
+"นำมาใช้ในระบบท้องฟ้าจำลอง"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
@@ -2446,13 +2456,14 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical supernovae"
-msgstr ""
+msgstr "ซูเปอร์โนวาในประวัติศาสตร์"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
 "The plugin for visualization of some historical supernovae, brighter 10 "
 "magnitude"
 msgstr ""
+"โปรแกรมเสริมสำหรับแสดงซูเปอร์โนวาที่สว่างกว่าโชติมาตร 10 ในประวัติศาสตร์"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
@@ -2461,11 +2472,15 @@ msgid ""
 "1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
 "August), SN 1972E (8 May) and SN 1987A (24 February)"
 msgstr ""
+"SN 185A (7 ธันวาคม), SN 386A (24 เมษายน), SN 1006A (29 เมษายน), SN 1054A (3 "
+"กรกฎาคม), SN 1181A (4 สิงหาคม), SN 1572A (5 พฤศจิกายน), SN 1604A (8 ตุลาคม), "
+"SN 1680A (15 สิงหาคม), SN 1885A (17 สิงหาคม), SN 1895B (5 กรกฎาคม), SN 1937C "
+"(21 สิงหาคม), SN 1972E (8 พฤษภาคม) และ SN 1987A (24 กุมภาพันธ์)"
 
 #: plugins/Supernovae/src/Supernova.cpp:105
 #, qt-format
 msgid "Type: %1"
-msgstr ""
+msgstr "ชนิด: %1"
 
 #, qt-format
 #~ msgid "Loading NGC catalog: %1/%2"
