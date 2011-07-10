@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-07-03 17:49+0700\n"
-"PO-Revision-Date: 2011-02-21 16:31+0000\n"
+"PO-Revision-Date: 2011-07-09 05:28+0000\n"
 "Last-Translator: Ondřej Kuchař <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-04 04:39+0000\n"
+"X-Launchpad-Export-Date: 2011-07-10 04:31+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
@@ -895,13 +895,13 @@ msgstr "Vybraný soubor není archiv ZIP nebo neobsahuje terén pro Stellarium."
 #: src/gui/AddRemoveLandscapesDialog.cpp:227
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
-msgstr ""
+msgstr "Krajina se stejným názvem nebo identifikátorem (%1) již existuje."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
 #: src/gui/AddRemoveLandscapesDialog.cpp:238
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
-msgstr ""
+msgstr "Tuto krajinu můžete vymazat ručně smazáním tohoto adresáře: %1"
 
 #: src/main.cpp:335
 msgid "This system does not support OpenGL."
@@ -2269,6 +2269,8 @@ msgid ""
 "WARNING: Removing the selected landscape means deleting its files. This "
 "operation is irreversible."
 msgstr ""
+"VAROVÁNÍ: Odstranění vybraného terénu znamená vymazání jeho souborů. Tato "
+"operace je nevratná."
 
 #: src/ui_AtmosphereDialog.h:167
 msgid "Dialog"
@@ -2309,15 +2311,15 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
-msgstr ""
+msgstr "Měření úhlů"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
-msgstr ""
+msgstr "Poskytuje nástroj pro měření úhlů"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:121
 msgid "Angle measure"
-msgstr ""
+msgstr "Měření úhlů"
 
 #. TRANSLATORS: Title of a group of key bindings in the Help window
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:121
@@ -2325,7 +2327,7 @@ msgstr ""
 #: plugins/Oculars/src/Oculars.cpp:931 plugins/Oculars/src/Oculars.cpp:945
 #: plugins/Satellites/src/Satellites.cpp:123
 msgid "Plugin Key Bindings"
-msgstr ""
+msgstr "Klávesové zkratky pluginu"
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
@@ -2364,6 +2366,8 @@ msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
 msgstr ""
+"Předpovězení pozice umělých družic, obíhajících okolo Země, na základě NORAD "
+"TLE dat"
 
 #: plugins/Satellites/src/Satellites.cpp:125
 msgid "Satellites configuration window"
@@ -2396,16 +2400,16 @@ msgstr ""
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:155
 #, qt-format
 msgid "Move telescope #%1 to selected object"
-msgstr ""
+msgstr "Posunout dalekohled #%1 na vybraný objekt"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:162
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
-msgstr ""
+msgstr "Posunout dalekohled #%1 na bod, který je nyní ve středu obrazovky"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:173
 msgid "Move a telescope to a given set of coordinates"
-msgstr ""
+msgstr "Posunout dalekohled na dané souřadnice"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -2417,6 +2421,9 @@ msgid ""
 "configuration file. Allows setting the time zone and changing the way the "
 "time and the date are displayed in the bottom bar."
 msgstr ""
+"Praktické rozhraní pro některé z méně dostupných možností v konfiguračním "
+"souboru Stellaria. Umožňuje nastavovat časové pásmo a měnit zobrazení času a "
+"data na spodní liště."
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:78
 msgid "Text User Interface"
@@ -2438,6 +2445,9 @@ msgid ""
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
 msgstr ""
+"Rozhraní pro přidávání asteroidů a komet do Stellaria. Dokáže stahovat "
+"seznamy objektů ze stránek Minor Planet Center a provádět online hledání v "
+"jejich databázi. Vývoj stále probíhá."
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical supernovae"
