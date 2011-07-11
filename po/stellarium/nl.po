@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-07-03 17:49+0700\n"
-"PO-Revision-Date: 2010-12-07 00:46+0000\n"
+"PO-Revision-Date: 2011-07-11 00:56+0000\n"
 "Last-Translator: Maikel Geirnaert <maikel.geirnaert@telenet.be>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-04 04:39+0000\n"
+"X-Launchpad-Export-Date: 2011-07-11 04:31+0000\n"
 "X-Generator: Launchpad (build 13168)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -34,7 +34,7 @@ msgstr "Evenaar"
 
 #: src/core/modules/GridLinesMgr.cpp:537
 msgid "Horizon"
-msgstr ""
+msgstr "Horizon"
 
 #: src/core/modules/LandscapeMgr.cpp:488
 msgid "Author: "
@@ -109,12 +109,12 @@ msgstr "Absolute helderheid: %1"
 #: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr ""
+msgstr "Ecliptisch Geocentrisch (van datum): %1/%2"
 
 #: src/core/modules/Planet.cpp:137
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr ""
+msgstr "Afwijking (van datum): %1"
 
 #: src/core/modules/Planet.cpp:143
 #, no-c-format, qt-format
@@ -273,11 +273,11 @@ msgstr "Uur hoek/DE: %1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
-msgstr ""
+msgstr "(geometrisch)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
-msgstr ""
+msgstr "(duidelijk)"
 
 #: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
@@ -592,7 +592,7 @@ msgstr "Meridaan"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
 msgid "Horizon line"
-msgstr ""
+msgstr "Horizon lijn"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
 msgid "Cardinal points"
@@ -982,47 +982,47 @@ msgstr "Callisto"
 
 #: src/translations.h:50
 msgid "Amalthea"
-msgstr ""
+msgstr "Amalthea"
 
 #: src/translations.h:51
 msgid "Himalia"
-msgstr ""
+msgstr "Himalia"
 
 #: src/translations.h:52
 msgid "Elara"
-msgstr ""
+msgstr "Elara"
 
 #: src/translations.h:53
 msgid "Pasiphae"
-msgstr ""
+msgstr "Pasiphae"
 
 #: src/translations.h:54
 msgid "Sinope"
-msgstr ""
+msgstr "Sinope"
 
 #: src/translations.h:55
 msgid "Lysithea"
-msgstr ""
+msgstr "Lysithea"
 
 #: src/translations.h:56
 msgid "Carme"
-msgstr ""
+msgstr "Carme"
 
 #: src/translations.h:57
 msgid "Ananke"
-msgstr ""
+msgstr "Ananke"
 
 #: src/translations.h:58
 msgid "Leda"
-msgstr ""
+msgstr "Leda"
 
 #: src/translations.h:59
 msgid "Thebe"
-msgstr ""
+msgstr "Thebe"
 
 #: src/translations.h:60
 msgid "Adrastea"
-msgstr ""
+msgstr "Adrastea"
 
 #. TRANSLATORS: Asteroid (9) Metis
 #: src/translations.h:61 src/translations.h:106
@@ -1111,55 +1111,55 @@ msgstr "Eris"
 
 #: src/translations.h:82
 msgid "Triton"
-msgstr ""
+msgstr "Triton"
 
 #: src/translations.h:83
 msgid "Nereid"
-msgstr ""
+msgstr "Nereid"
 
 #: src/translations.h:84
 msgid "Naiad"
-msgstr ""
+msgstr "Naiad"
 
 #: src/translations.h:85
 msgid "Thalassa"
-msgstr ""
+msgstr "Thalassa"
 
 #: src/translations.h:86
 msgid "Despina"
-msgstr ""
+msgstr "Despina"
 
 #: src/translations.h:87
 msgid "Galatea"
-msgstr ""
+msgstr "Galatea"
 
 #: src/translations.h:88
 msgid "Larissa"
-msgstr ""
+msgstr "Larissa"
 
 #: src/translations.h:89
 msgid "Proteus"
-msgstr ""
+msgstr "Proteus"
 
 #: src/translations.h:90
 msgid "Halimede"
-msgstr ""
+msgstr "Halimede"
 
 #: src/translations.h:91
 msgid "Psamathe"
-msgstr ""
+msgstr "Psamathe"
 
 #: src/translations.h:92
 msgid "Sao"
-msgstr ""
+msgstr "Sao"
 
 #: src/translations.h:93
 msgid "Laomedeia"
-msgstr ""
+msgstr "Laomedeia"
 
 #: src/translations.h:94
 msgid "Neso"
-msgstr ""
+msgstr "Neso"
 
 #: src/translations.h:95
 msgid "Solar System Observer"
@@ -1218,12 +1218,12 @@ msgstr "Hektor"
 #. TRANSLATORS: Name of supernova SN 1572A
 #: src/translations.h:120
 msgid "Tycho's Supernova"
-msgstr ""
+msgstr "Tycho's Supernova"
 
 #. TRANSLATORS: Name of supernova SN 1604A
 #: src/translations.h:122
 msgid "Kepler's Supernova"
-msgstr ""
+msgstr "Kepler's Supernova"
 
 #: src/translations.h:126
 msgid "N"
@@ -1647,111 +1647,111 @@ msgstr "Object zoeken"
 
 #: src/ui_searchDialogGui.h:451
 msgid "Find Object or Position"
-msgstr ""
+msgstr "Zoek Object of Positie"
 
 #: src/ui_searchDialogGui.h:458
 msgid "iota"
-msgstr ""
+msgstr "iota"
 
 #: src/ui_searchDialogGui.h:461
 msgid "alpha"
-msgstr ""
+msgstr "alfa"
 
 #: src/ui_searchDialogGui.h:464
 msgid "beta"
-msgstr ""
+msgstr "beta"
 
 #: src/ui_searchDialogGui.h:467
 msgid "gamma"
-msgstr ""
+msgstr "gamma"
 
 #: src/ui_searchDialogGui.h:470
 msgid "delta"
-msgstr ""
+msgstr "delta"
 
 #: src/ui_searchDialogGui.h:473
 msgid "epsilon"
-msgstr ""
+msgstr "epsilon"
 
 #: src/ui_searchDialogGui.h:476
 msgid "zeta"
-msgstr ""
+msgstr "zeta"
 
 #: src/ui_searchDialogGui.h:479
 msgid "eta"
-msgstr ""
+msgstr "eta"
 
 #: src/ui_searchDialogGui.h:482
 msgid "theta"
-msgstr ""
+msgstr "theta"
 
 #: src/ui_searchDialogGui.h:485
 msgid "kappa"
-msgstr ""
+msgstr "kappa"
 
 #: src/ui_searchDialogGui.h:488
 msgid "lambda"
-msgstr ""
+msgstr "lambda"
 
 #: src/ui_searchDialogGui.h:491
 msgid "mu"
-msgstr ""
+msgstr "mu"
 
 #: src/ui_searchDialogGui.h:494
 msgid "nu"
-msgstr ""
+msgstr "nu"
 
 #: src/ui_searchDialogGui.h:497
 msgid "xi"
-msgstr ""
+msgstr "ksi"
 
 #: src/ui_searchDialogGui.h:500
 msgid "omicron"
-msgstr ""
+msgstr "omikron"
 
 #: src/ui_searchDialogGui.h:503
 msgid "pi"
-msgstr ""
+msgstr "pi"
 
 #: src/ui_searchDialogGui.h:506
 msgid "rho"
-msgstr ""
+msgstr "rho"
 
 #: src/ui_searchDialogGui.h:509
 msgid "sigma"
-msgstr ""
+msgstr "sigma"
 
 #: src/ui_searchDialogGui.h:512
 msgid "tau"
-msgstr ""
+msgstr "tau"
 
 #: src/ui_searchDialogGui.h:515
 msgid "upsilon"
-msgstr ""
+msgstr "ypsilon"
 
 #: src/ui_searchDialogGui.h:518
 msgid "phi"
-msgstr ""
+msgstr "phi"
 
 #: src/ui_searchDialogGui.h:521
 msgid "chi"
-msgstr ""
+msgstr "chi"
 
 #: src/ui_searchDialogGui.h:524
 msgid "psi"
-msgstr ""
+msgstr "psi"
 
 #: src/ui_searchDialogGui.h:527
 msgid "omega"
-msgstr ""
+msgstr "omega"
 
 #: src/ui_searchDialogGui.h:529
 msgid "Greek letters for Bayer designations"
-msgstr ""
+msgstr "Griekse letters voor Bayer benamingen"
 
 #: src/ui_searchDialogGui.h:530
 msgid "Object"
-msgstr ""
+msgstr "Object"
 
 #: src/ui_searchDialogGui.h:531
 msgid "RA/Dec (J2000):"
@@ -1759,7 +1759,7 @@ msgstr "RA/Dec (J2000):"
 
 #: src/ui_searchDialogGui.h:532
 msgid "Position"
-msgstr ""
+msgstr "Positie"
 
 #: src/ui_viewDialog.h:1052
 msgid "View"
@@ -1835,11 +1835,11 @@ msgstr "Lichtvervuiling: "
 
 #: src/ui_viewDialog.h:1085
 msgid "pressure, temperature, extinction coefficient"
-msgstr ""
+msgstr "druk, temperatuur, extinctie coëfficiënt"
 
 #: src/ui_viewDialog.h:1087
 msgid "Refraction/Extinction settings..."
-msgstr ""
+msgstr "Refractie/Extinctie instelllingen..."
 
 #: src/ui_viewDialog.h:1088
 msgid "Labels and Markers"
@@ -2279,23 +2279,23 @@ msgstr ""
 
 #: src/ui_AtmosphereDialog.h:167
 msgid "Dialog"
-msgstr ""
+msgstr "Dialoog"
 
 #: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
-msgstr ""
+msgstr "Atmosfeer Details"
 
 #: src/ui_AtmosphereDialog.h:170
 msgid "Refraction Settings"
-msgstr ""
+msgstr "Refractie Instellingen"
 
 #: src/ui_AtmosphereDialog.h:171
 msgid "Pressure (mbar):"
-msgstr ""
+msgstr "Druk (mbar):"
 
 #: src/ui_AtmosphereDialog.h:172
 msgid "Temperature (C):"
-msgstr ""
+msgstr "Temperatuur (C):"
 
 #: src/ui_AtmosphereDialog.h:177
 msgid ""
@@ -2303,16 +2303,21 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
+"Extinctie is het verlies van helderheid van sterren vanwege de aardse "
+"atmosfeer. Het wordt gegeven in mag/luchtmassa, waar luchtmassa het aantal "
+"atmosferen is dat licht moet passeren. (zenit: 1, horizon: ongeveer 40)"
 
 #: src/ui_AtmosphereDialog.h:179
 msgid "Extinction Coefficient:"
-msgstr ""
+msgstr "Extinctie Coëfficiënt"
 
 #: src/ui_AtmosphereDialog.h:181
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
+"Gebruik ongeveer 0,12 voor uitstekende bergtoppen, 0,2 voor goede platte "
+"landschappen, 0,35 voor slechte omstandigheden."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -2360,7 +2365,7 @@ msgstr "Oculair zicht"
 
 #: plugins/Oculars/src/Oculars.cpp:965
 msgid "Oculars popup menu"
-msgstr ""
+msgstr "Oculaire popup menu"
 
 #: plugins/Satellites/src/Satellites.cpp:67
 msgid "Satellites"
@@ -2466,13 +2471,15 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical supernovae"
-msgstr ""
+msgstr "Historiche supernova's"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
 "The plugin for visualization of some historical supernovae, brighter 10 "
 "magnitude"
 msgstr ""
+"De plugin voor het visualiseren van sommige historische supernova's, "
+"helderder dan helderheid 10"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
@@ -2481,11 +2488,15 @@ msgid ""
 "1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
 "August), SN 1972E (8 May) and SN 1987A (24 February)"
 msgstr ""
+"SN 185A (7 december), SN 386A (24 april), SN 1006A (29 april), SN 1054A (3 "
+"juli), SN 1181A (4 augustus), SN 1572A (5 november), SN 1604A (8 oktober), "
+"SN 1680A (15 augustus), SN 1885A (17 augustus), SN 1895B (5 juli), SN 1937C "
+"(21 augustus), SN 1972E (8 mei) en SN 1987A (24 februari)"
 
 #: plugins/Supernovae/src/Supernova.cpp:105
 #, qt-format
 msgid "Type: %1"
-msgstr ""
+msgstr "Type: %1"
 
 #~ msgid "Form"
 #~ msgstr "Vorm"
