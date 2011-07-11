@@ -262,7 +262,7 @@ void SpaceShipObserver::update(double deltaTime)
 		{
 			// Update SpaceShip position
 			static_cast<ArtificialPlanet*>(artificialPlanet.data())->computeAverage(timeToGo/(timeToGo + deltaTime));
-			currentLocation.planetName = "SpaceShip";
+			currentLocation.planetName = q_("SpaceShip");
 			currentLocation.name = moveStartLocation.planetName + " -> " + moveTargetLocation.planetName;
 		}
 		else
