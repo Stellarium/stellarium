@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-07-03 17:49+0700\n"
-"PO-Revision-Date: 2011-06-10 14:50+0000\n"
-"Last-Translator: arashbm <arashbm@gmail.com>\n"
+"PO-Revision-Date: 2011-07-17 20:45+0000\n"
+"Last-Translator: Reza Babri <Unknown>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-04 04:41+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-07-18 04:40+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -32,7 +32,7 @@ msgstr "استوا"
 
 #: src/core/modules/GridLinesMgr.cpp:537
 msgid "Horizon"
-msgstr ""
+msgstr "افق"
 
 #: src/core/modules/LandscapeMgr.cpp:488
 msgid "Author: "
@@ -107,7 +107,7 @@ msgstr "%1 : قدر مطلق"
 #: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr ""
+msgstr "گرفتگي (تاريخ): %2/%1"
 
 #: src/core/modules/Planet.cpp:137
 #, qt-format
@@ -269,11 +269,11 @@ msgstr "زاویهٔ ساعتی/میل: %1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
-msgstr ""
+msgstr "(هندسي)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
-msgstr ""
+msgstr "(ظاهري)"
 
 #: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
@@ -587,7 +587,7 @@ msgstr "خط نصف النهار"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
 msgid "Horizon line"
-msgstr ""
+msgstr "خط افق"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
 msgid "Cardinal points"
@@ -999,7 +999,7 @@ msgstr "ليستيا"
 
 #: src/translations.h:56
 msgid "Carme"
-msgstr ""
+msgstr "كارم"
 
 #: src/translations.h:57
 msgid "Ananke"
@@ -1015,7 +1015,7 @@ msgstr "تئوري"
 
 #: src/translations.h:60
 msgid "Adrastea"
-msgstr ""
+msgstr "ادراستيا"
 
 #. TRANSLATORS: Asteroid (9) Metis
 #: src/translations.h:61 src/translations.h:106
@@ -1206,17 +1206,17 @@ msgstr "اِروس"
 #. TRANSLATORS: Asteroid (624) Hektor
 #: src/translations.h:118
 msgid "Hektor"
-msgstr ""
+msgstr "هكتور"
 
 #. TRANSLATORS: Name of supernova SN 1572A
 #: src/translations.h:120
 msgid "Tycho's Supernova"
-msgstr ""
+msgstr "ابرنواختر تيكو"
 
 #. TRANSLATORS: Name of supernova SN 1604A
 #: src/translations.h:122
 msgid "Kepler's Supernova"
-msgstr ""
+msgstr "ابرنواختر كپلر"
 
 #: src/translations.h:126
 msgid "N"
@@ -1640,7 +1640,7 @@ msgstr "جستحوي اجرام"
 
 #: src/ui_searchDialogGui.h:451
 msgid "Find Object or Position"
-msgstr ""
+msgstr "جستجوي جسم / موقعيت"
 
 #: src/ui_searchDialogGui.h:458
 msgid "iota"
@@ -1740,11 +1740,11 @@ msgstr "اُمگا"
 
 #: src/ui_searchDialogGui.h:529
 msgid "Greek letters for Bayer designations"
-msgstr ""
+msgstr "حروف يوناني براي عنوان"
 
 #: src/ui_searchDialogGui.h:530
 msgid "Object"
-msgstr ""
+msgstr "شيء"
 
 #: src/ui_searchDialogGui.h:531
 msgid "RA/Dec (J2000):"
@@ -1752,7 +1752,7 @@ msgstr "بعد/میل (J2000):"
 
 #: src/ui_searchDialogGui.h:532
 msgid "Position"
-msgstr ""
+msgstr "موقعیت"
 
 #: src/ui_viewDialog.h:1052
 msgid "View"
@@ -1828,7 +1828,7 @@ msgstr "آلودگي نوري: "
 
 #: src/ui_viewDialog.h:1085
 msgid "pressure, temperature, extinction coefficient"
-msgstr ""
+msgstr "ضريب جذب، دما، فشار"
 
 #: src/ui_viewDialog.h:1087
 msgid "Refraction/Extinction settings..."
@@ -2269,19 +2269,19 @@ msgstr ""
 
 #: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
-msgstr ""
+msgstr "مشخصات جو"
 
 #: src/ui_AtmosphereDialog.h:170
 msgid "Refraction Settings"
-msgstr ""
+msgstr "تنظيم انكسار"
 
 #: src/ui_AtmosphereDialog.h:171
 msgid "Pressure (mbar):"
-msgstr ""
+msgstr "فشار (mbar)"
 
 #: src/ui_AtmosphereDialog.h:172
 msgid "Temperature (C):"
-msgstr ""
+msgstr "دما (c)"
 
 #: src/ui_AtmosphereDialog.h:177
 msgid ""
@@ -2298,7 +2298,7 @@ msgstr ""
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
-msgstr ""
+msgstr "قله‌هاي بلند 0.12، چسم‌انداز روستا 0.2، هواي تيره 0.35"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -2374,6 +2374,7 @@ msgstr "نام ماهواره"
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
+"فايل قديمي satellites.json سازگار نيست. از فايل پيشفرض استفاده مي‌شود"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:150
@@ -2434,13 +2435,13 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical supernovae"
-msgstr ""
+msgstr "ابرنواخترهاي تاريخي"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
 "The plugin for visualization of some historical supernovae, brighter 10 "
 "magnitude"
-msgstr ""
+msgstr "افزونه نمايش ابرنواخترهاي تاريخي، روشنايي 10 برابر"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
@@ -2453,7 +2454,7 @@ msgstr ""
 #: plugins/Supernovae/src/Supernova.cpp:105
 #, qt-format
 msgid "Type: %1"
-msgstr ""
+msgstr "نوع: %1"
 
 #~ msgid "Form"
 #~ msgstr "برگه"
