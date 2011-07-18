@@ -113,7 +113,7 @@ void AddRemoveLandscapesDialog::browseForArchiveClicked()
 	// TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 	QString filter = q_("ZIP archives");
 	filter += " (*.zip)";
-	QString sourceArchivePath = QFileDialog::getOpenFileName(NULL, caption, lastUsedDirectoryPath, filter);
+	QString sourceArchivePath = QFileDialog::getOpenFileName(NULL, caption, lastUsedDirectoryPath, filter, 0, QFileDialog::DontUseNativeDialog);
 	bool useLandscape = ui->checkBoxUseLandscape->isChecked();
 	if (!sourceArchivePath.isEmpty() && QFile::exists(sourceArchivePath))
 	{
