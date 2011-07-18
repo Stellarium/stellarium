@@ -292,7 +292,7 @@ void ConfigurationDialog::cursorTimeOutChanged()
 void ConfigurationDialog::browseForScreenshotDir()
 {
 	QString oldScreenshorDir = StelFileMgr::getScreenshotDir();
-	QString newScreenshotDir = QFileDialog::getExistingDirectory(NULL, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::ShowDirsOnly);
+	QString newScreenshotDir = QFileDialog::getExistingDirectory(NULL, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::DontUseNativeDialog);
 
 	if (!newScreenshotDir.isEmpty()) {
 		// remove trailing slash
