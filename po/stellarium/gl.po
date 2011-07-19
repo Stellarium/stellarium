@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-07-03 17:49+0700\n"
-"PO-Revision-Date: 2011-05-16 19:37+0000\n"
+"PO-Revision-Date: 2011-07-18 20:13+0000\n"
 "Last-Translator: Manuel Rosales Graña <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-04 04:40+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-07-19 04:31+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -31,7 +31,7 @@ msgstr "Ecuador"
 
 #: src/core/modules/GridLinesMgr.cpp:537
 msgid "Horizon"
-msgstr ""
+msgstr "Horizonte"
 
 #: src/core/modules/LandscapeMgr.cpp:488
 msgid "Author: "
@@ -59,7 +59,7 @@ msgstr "Tipo: <b>%1</b>"
 #: plugins/Supernovae/src/Supernova.cpp:98
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
-msgstr "Magnitude:<b>%1</b>"
+msgstr "Magnitude: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:104
 #, qt-format
@@ -101,17 +101,17 @@ msgstr "Tipo non documentado"
 #: src/core/modules/Planet.cpp:123 src/core/modules/StarWrapper.cpp:112
 #, qt-format
 msgid "Absolute Magnitude: %1"
-msgstr "Magnitude absoluta: %1"
+msgstr "Absolute Magnitude: %1"
 
 #: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr ""
+msgstr "Eclíptica Xeocéntrica (de data): %1/%2"
 
 #: src/core/modules/Planet.cpp:137
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr ""
+msgstr "Oblicuidade (de data): %1"
 
 #: src/core/modules/Planet.cpp:143
 #, no-c-format, qt-format
@@ -270,11 +270,11 @@ msgstr "Ángulo horario/DE: %1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
-msgstr ""
+msgstr "(xeométrica)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
-msgstr ""
+msgstr "(aparente)"
 
 #: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
@@ -589,7 +589,7 @@ msgstr "Liña do meridiano"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
 msgid "Horizon line"
-msgstr ""
+msgstr "Liña do horizonte"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
 msgid "Cardinal points"
@@ -1215,12 +1215,12 @@ msgstr "Hektor"
 #. TRANSLATORS: Name of supernova SN 1572A
 #: src/translations.h:120
 msgid "Tycho's Supernova"
-msgstr ""
+msgstr "Supernova de Tycho"
 
 #. TRANSLATORS: Name of supernova SN 1604A
 #: src/translations.h:122
 msgid "Kepler's Supernova"
-msgstr ""
+msgstr "Supernova de Kepler"
 
 #: src/translations.h:126
 msgid "N"
@@ -1644,7 +1644,7 @@ msgstr "Buscar un obxecto"
 
 #: src/ui_searchDialogGui.h:451
 msgid "Find Object or Position"
-msgstr ""
+msgstr "Buscar Obxecto ou Posición"
 
 #: src/ui_searchDialogGui.h:458
 msgid "iota"
@@ -1744,11 +1744,11 @@ msgstr "omega"
 
 #: src/ui_searchDialogGui.h:529
 msgid "Greek letters for Bayer designations"
-msgstr ""
+msgstr "Letras gregas para designacións Bayer"
 
 #: src/ui_searchDialogGui.h:530
 msgid "Object"
-msgstr ""
+msgstr "Obxecto"
 
 #: src/ui_searchDialogGui.h:531
 msgid "RA/Dec (J2000):"
@@ -1756,7 +1756,7 @@ msgstr "RA/Dec (J2000):"
 
 #: src/ui_searchDialogGui.h:532
 msgid "Position"
-msgstr ""
+msgstr "Posición"
 
 #: src/ui_viewDialog.h:1052
 msgid "View"
@@ -1832,11 +1832,11 @@ msgstr "Contaminación lumínica: "
 
 #: src/ui_viewDialog.h:1085
 msgid "pressure, temperature, extinction coefficient"
-msgstr ""
+msgstr "presión, temperatura, coeficiente de extinción"
 
 #: src/ui_viewDialog.h:1087
 msgid "Refraction/Extinction settings..."
-msgstr ""
+msgstr "Refracción/Configuración de extinción..."
 
 #: src/ui_viewDialog.h:1088
 msgid "Labels and Markers"
@@ -2272,23 +2272,23 @@ msgstr ""
 
 #: src/ui_AtmosphereDialog.h:167
 msgid "Dialog"
-msgstr ""
+msgstr "Diálogo"
 
 #: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
-msgstr ""
+msgstr "Detalles da atmosfera"
 
 #: src/ui_AtmosphereDialog.h:170
 msgid "Refraction Settings"
-msgstr ""
+msgstr "Configuración da Refracción"
 
 #: src/ui_AtmosphereDialog.h:171
 msgid "Pressure (mbar):"
-msgstr ""
+msgstr "Presión(mbar):"
 
 #: src/ui_AtmosphereDialog.h:172
 msgid "Temperature (C):"
-msgstr ""
+msgstr "Temperatura (C):"
 
 #: src/ui_AtmosphereDialog.h:177
 msgid ""
@@ -2296,16 +2296,21 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
+"Extinción é a perda do brillo das estrelas debido á atmosfera da Terra. Vén "
+"dada en mag/masa de aire, onde a masa de aire é o número de atmosferas que a "
+"luz debe atravesar (Zenith: 1; horizonte: preto de 40)"
 
 #: src/ui_AtmosphereDialog.h:179
 msgid "Extinction Coefficient:"
-msgstr ""
+msgstr "Coeficiente de Extinción:"
 
 #: src/ui_AtmosphereDialog.h:181
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
+"Usar uns 0,12 para cumes de montaña moi altos, 0,2 para a paisaxe rural boa, "
+"0,35 para as condicións escuras."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -2457,13 +2462,15 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical supernovae"
-msgstr ""
+msgstr "Supernova histórica"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
 "The plugin for visualization of some historical supernovae, brighter 10 "
 "magnitude"
 msgstr ""
+"O plugin para a visualización dalgunhas supernovas históricas, de magnitude "
+"superior a 10"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
@@ -2472,11 +2479,15 @@ msgid ""
 "1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
 "August), SN 1972E (8 May) and SN 1987A (24 February)"
 msgstr ""
+"SN 185A (7 Decembro), SN 386A (24 Abril), SN 1006A (29 Abril), SN 1054A (3 "
+"Xullo), SN 1181A (4 Agosto), SN 1572A (5 Novembro), SN 1604A (8 Outubro), SN "
+"1680A (15 Agosto), SN 1885A (17 Agosto), SN 1895B (5 Xullo), SN 1937C (21 "
+"Agosto), SN 1972E (8 Maio) e SN 1987A (24 Febreiro)"
 
 #: plugins/Supernovae/src/Supernova.cpp:105
 #, qt-format
 msgid "Type: %1"
-msgstr ""
+msgstr "Tipo: %1"
 
 #, qt-format
 #~ msgid "Loading NGC catalog: %1/%2"
