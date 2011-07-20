@@ -312,7 +312,7 @@ int main(int argc, char **argv)
 #endif
 #endif
 	tmpFont.OpenGLCompatible;
-	tmpFont.setPixelSize(confSettings->value("gui/base_font_size", 13).toInteger());
+	tmpFont.setPixelSize(confSettings->value("gui/base_font_size", 13).toInt());
 //tmpFont.setFamily("Verdana");
 //tmpFont.setBold(true);
 	QApplication::setFont(tmpFont);
