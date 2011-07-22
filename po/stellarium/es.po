@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-03 17:49+0700\n"
-"PO-Revision-Date: 2011-07-09 05:05+0000\n"
-"Last-Translator: Hernan. <Unknown>\n"
+"POT-Creation-Date: 2011-07-11 18:20+0700\n"
+"PO-Revision-Date: 2011-07-21 21:54+0000\n"
+"Last-Translator: Leonel Reyes Mata <lreyes6@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-10 04:31+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-07-22 04:37+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -147,6 +147,10 @@ msgstr "Distancia: %1 años luz"
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Paralaje: %1\""
+
+#: src/core/StelObserver.cpp:265
+msgid "SpaceShip"
+msgstr "Nave Espacial"
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
@@ -597,7 +601,7 @@ msgstr "Línea del Meridiano"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
 msgid "Horizon line"
-msgstr ""
+msgstr "Linea del Horizonte"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
 msgid "Cardinal points"

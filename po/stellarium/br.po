@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: Jérémy Ar Floc'h <jeremy.lefloch@gmail.com>\n"
-"POT-Creation-Date: 2011-07-03 17:49+0700\n"
+"POT-Creation-Date: 2011-07-11 18:20+0700\n"
 "PO-Revision-Date: 2010-05-07 21:18+0000\n"
 "Last-Translator: Jérémy Le Floc'h <jeremy.lefloch@gmail.com>\n"
 "Language-Team: Breton <jeremy.lefloch@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-04 04:39+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-07-22 04:35+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -142,6 +142,10 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:125
 #, qt-format
 msgid "Parallax: %1\""
+msgstr ""
+
+#: src/core/StelObserver.cpp:265
+msgid "SpaceShip"
 msgstr ""
 
 #: src/core/StelProjector.cpp:62

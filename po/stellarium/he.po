@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-03 17:49+0700\n"
+"POT-Creation-Date: 2011-07-11 18:20+0700\n"
 "PO-Revision-Date: 2011-07-18 20:26+0000\n"
 "Last-Translator: Kiril <Unknown>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-19 04:31+0000\n"
+"X-Launchpad-Export-Date: 2011-07-22 04:36+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
@@ -143,6 +143,10 @@ msgstr "מרחק: %1 שנות-אור"
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "פרלקסה: \"%1"
+
+#: src/core/StelObserver.cpp:265
+msgid "SpaceShip"
+msgstr ""
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
