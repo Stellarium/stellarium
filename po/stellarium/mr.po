@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-03 17:49+0700\n"
+"POT-Creation-Date: 2011-07-11 18:20+0700\n"
 "PO-Revision-Date: 2010-12-28 08:45+0000\n"
 "Last-Translator: Sujay Patankar <Unknown>\n"
 "Language-Team: Marathi <mr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-04 04:41+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-07-22 04:36+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -144,13 +144,17 @@ msgstr "अंतर: %1 प्रकाश वर्षे"
 msgid "Parallax: %1\""
 msgstr "पराशय: %1\""
 
+#: src/core/StelObserver.cpp:265
+msgid "SpaceShip"
+msgstr ""
+
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
 msgstr "जास्तित जास्त दृस्टीक्षेत्र "
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
-msgstr "यथादर्श"
+msgstr "दृष्टीकोन"
 
 #: src/core/StelProjectorClasses.cpp:30
 msgid ""
@@ -189,7 +193,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Fish-eye"
-msgstr "मत्स्य नेत्र"
+msgstr "मत्स्य-नेत्र"
 
 #: src/core/StelProjectorClasses.cpp:150
 msgid ""
@@ -204,7 +208,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
-msgstr "हॅमर एटऑफ"
+msgstr "हॅमर-एटऑफ"
 
 #: src/core/StelProjectorClasses.cpp:187
 msgid ""
@@ -223,7 +227,7 @@ msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
 msgstr ""
-"या प्रक्षेप पद्धतीचे पुर्ण नाव <i>सिलेन्ड्रीकल इक्वीडिस्टनट "
+"या प्रक्षेप पद्धतीचे पुर्ण नाव <i>सिलेन्ड्रीकल इक़ुइडीस्टन्ट "
 "प्रोजेक्शन</i>आहे. या मध्ये सर्व उभ्या समांतर रेषा समान मापाच्या असतात."
 
 #: src/core/StelProjectorClasses.cpp:270
@@ -255,17 +259,17 @@ msgstr ""
 #: src/core/StelObject.cpp:79
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
-msgstr "आरए/डीइ(J2000): %1/%2"
+msgstr "आरए/डेक (J2000): %1/%2"
 
 #: src/core/StelObject.cpp:86
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr "आरए/डीइ(दिनांक): %1/%2"
+msgstr "आरए/डेक (दिनांक): %1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:97
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr "तास कोन/डीइ: %1/%2"
+msgstr "तास कोन/डेक : %1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
@@ -316,11 +320,11 @@ msgstr "आज्ञावली सुरू: "
 
 #: src/gui/ConfigurationDialog.cpp:622
 msgid "Running script: [none]"
-msgstr "आज्ञावली सुरु: [none]"
+msgstr "आज्ञावली सुरु: [नाही]"
 
 #: src/gui/ConfigurationDialog.cpp:665
 msgid "Finished downloading all star catalogs!"
-msgstr "सर्व तारकासुची उतरवून घेतल्या आहेत"
+msgstr "सर्व तारकासुची डाउनलोड झाल्या आहेत!"
 
 #: src/gui/ConfigurationDialog.cpp:674
 #, qt-format
@@ -335,16 +339,16 @@ msgid ""
 "Magnitude range: %3 - %4"
 msgstr ""
 "डाउनलोड आकार: %1MB\n"
-"एकुण तारेt: %2 Million\n"
-"प्रकाशदिप्ती आवाका : %3 - %4"
+"एकुण तारे: %2 Million\n"
+"प्रकाशप्रत आवक : %3 - %4"
 
 #: src/gui/ConfigurationDialog.cpp:685
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
-"नविन तारकसूची !\n"
-" उतरवून घेण्याचे काम पुर्ण झाले आहेती पाहण्यासाठी स्टेलेरीअम पुन्हा सुरु करा."
+"नवीन तारकासुची डाउनलोड झाली आहे!\n"
+"ती पाहण्यासाठी स्टेलेरीअम पुन्हा सुरु करा."
 
 #: src/gui/ConfigurationDialog.cpp:723 src/gui/ConfigurationDialog.cpp:757
 #, qt-format
@@ -353,7 +357,7 @@ msgid ""
 "%2"
 msgstr ""
 "%1:\n"
-" उतरवून घेण्यात तृटी%2"
+"उतरवून घेण्यात तृटी%2"
 
 #: src/gui/ConfigurationDialog.cpp:728
 #, qt-format

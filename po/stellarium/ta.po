@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-03 17:49+0700\n"
+"POT-Creation-Date: 2011-07-11 18:20+0700\n"
 "PO-Revision-Date: 2011-04-01 15:28+0000\n"
 "Last-Translator: balajijagadesh பாலாஜி <Unknown>\n"
 "Language-Team: Tamil <ta@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-04 04:42+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-07-22 04:38+0000\n"
+"X-Generator: Launchpad (build 13405)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -143,6 +143,10 @@ msgstr "தொலைவு: %1 ஒளி வருடம்"
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "இடமாறுதோற்றம்: %1\""
+
+#: src/core/StelObserver.cpp:265
+msgid "SpaceShip"
+msgstr ""
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
