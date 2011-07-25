@@ -78,6 +78,10 @@ class Translations
 		N_("Oberon");
 		N_("Pluto");
 		N_("Charon");
+		// TRANSLATORS: Moon of Pluto (II)
+		N_("Nix");
+		// TRANSLATORS: Moon of Pluto (III)
+		N_("Hydra");
 		N_("Eris");
 		N_("Triton");
 		N_("Nereid");
