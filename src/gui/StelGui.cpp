@@ -626,6 +626,9 @@ void StelGui::update()
 	flag = gmgr->getFlagMeridianLine();
 	if (getGuiActions("actionShow_Meridian_Line")->isChecked() != flag)
 		getGuiActions("actionShow_Meridian_Line")->setChecked(flag);
+	flag = gmgr->getFlagHorizonLine();
+	if (getGuiActions("actionShow_Horizon_Line")->isChecked() != flag)
+		getGuiActions("actionShow_Horizon_Line")->setChecked(flag);
 	flag = gmgr->getFlagEquatorJ2000Grid();
 	if (getGuiActions("actionShow_Equatorial_J2000_Grid")->isChecked() != flag)
 		getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(flag);
