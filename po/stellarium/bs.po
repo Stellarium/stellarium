@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-11 18:20+0700\n"
+"POT-Creation-Date: 2011-07-25 18:49+0700\n"
 "PO-Revision-Date: 2011-07-07 11:19+0000\n"
 "Last-Translator: Kenan Dervišević <kenan3008@gmail.com>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-22 04:35+0000\n"
+"X-Launchpad-Export-Date: 2011-07-26 04:32+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
@@ -287,50 +287,50 @@ msgstr "Az/Alt: %1/%2"
 msgid "Select screenshot directory"
 msgstr "Odaberi direktorij za slike ekrana"
 
-#: src/gui/ConfigurationDialog.cpp:461
+#: src/gui/ConfigurationDialog.cpp:462
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Početni ugao pogleda: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:469
+#: src/gui/ConfigurationDialog.cpp:470
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Početni smjer azimuta/visine pogleda: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:509
+#: src/gui/ConfigurationDialog.cpp:510
 msgid "Authors"
 msgstr "Autori"
 
-#: src/gui/ConfigurationDialog.cpp:513 src/gui/ViewDialog.cpp:368
+#: src/gui/ConfigurationDialog.cpp:514 src/gui/ViewDialog.cpp:368
 msgid "Contact"
 msgstr "Kontakt"
 
-#: src/gui/ConfigurationDialog.cpp:585
+#: src/gui/ConfigurationDialog.cpp:586
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:586
+#: src/gui/ConfigurationDialog.cpp:587
 msgid "License"
 msgstr "Licenca"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:616
 msgid "Running script: "
 msgstr "Skripta koja se izvodi: "
 
-#: src/gui/ConfigurationDialog.cpp:622
+#: src/gui/ConfigurationDialog.cpp:623
 msgid "Running script: [none]"
 msgstr "Skripta koja se izvodi: [nijedna]"
 
-#: src/gui/ConfigurationDialog.cpp:665
+#: src/gui/ConfigurationDialog.cpp:666
 msgid "Finished downloading all star catalogs!"
 msgstr "Završeno preuzimanje svi kataloga sa zvijezdama!"
 
-#: src/gui/ConfigurationDialog.cpp:674
+#: src/gui/ConfigurationDialog.cpp:675
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Dobavi katalog %1 od %2"
 
-#: src/gui/ConfigurationDialog.cpp:676
+#: src/gui/ConfigurationDialog.cpp:677
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -341,7 +341,7 @@ msgstr ""
 "Broj zvijezda: %2 miliona\n"
 "Opseg magnitude: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:685
+#: src/gui/ConfigurationDialog.cpp:686
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -349,7 +349,7 @@ msgstr ""
 "Završeno preuzimanje novih kataloga sa zvijezdama!\n"
 "Ponovo pokrenite Stellarium za njihov prikaz."
 
-#: src/gui/ConfigurationDialog.cpp:723 src/gui/ConfigurationDialog.cpp:757
+#: src/gui/ConfigurationDialog.cpp:724 src/gui/ConfigurationDialog.cpp:758
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -358,7 +358,7 @@ msgstr ""
 "Greška pri preuzimanju %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:728
+#: src/gui/ConfigurationDialog.cpp:729
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -367,11 +367,11 @@ msgstr ""
 "Skidam %1...\n"
 "(Možete zatvoriti ovaj prozor.)"
 
-#: src/gui/ConfigurationDialog.cpp:808
+#: src/gui/ConfigurationDialog.cpp:809
 msgid "Verifying file integrity..."
 msgstr "Provjera ispravnosti datoteke..."
 
-#: src/gui/ConfigurationDialog.cpp:812
+#: src/gui/ConfigurationDialog.cpp:813
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -380,8 +380,8 @@ msgstr ""
 "Greška pri preuzimanju %1:\n"
 "Datoteka je oštećena."
 
-#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:285
-#: src/gui/StelGuiItems.cpp:640
+#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:286
+#: src/gui/StelGuiItems.cpp:656
 msgid "Space"
 msgstr "Svemir"
 
@@ -800,7 +800,7 @@ msgstr "Automatski sakrij vertikalnu traku sa dugmadima"
 msgid "Toggle visibility of GUI"
 msgstr "Uključi/isključi grafički interfejs"
 
-#: src/gui/StelGuiItems.cpp:541
+#: src/gui/StelGuiItems.cpp:542
 #, no-c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
@@ -908,7 +908,7 @@ msgstr "Pejzaž sa istim imenom ili oznakom (%1) već postoji."
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "Možete ga ukloniti ručno brisanjem sljedećeg direktorija: %1"
 
-#: src/main.cpp:335
+#: src/main.cpp:336
 msgid "This system does not support OpenGL."
 msgstr "Sistem ne podržava OpenGL."
 
@@ -1025,7 +1025,7 @@ msgid "Adrastea"
 msgstr "Adrasteja"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:106
+#: src/translations.h:61 src/translations.h:110
 msgid "Metis"
 msgstr "Metis"
 
@@ -1105,455 +1105,465 @@ msgstr "Pluton"
 msgid "Charon"
 msgstr "Haron"
 
-#: src/translations.h:81
+#. TRANSLATORS: Moon of Pluto (II)
+#: src/translations.h:82
+msgid "Nix"
+msgstr ""
+
+#. TRANSLATORS: Moon of Pluto (III)
+#: src/translations.h:84
+msgid "Hydra"
+msgstr ""
+
+#: src/translations.h:85
 msgid "Eris"
 msgstr "Eris"
 
-#: src/translations.h:82
+#: src/translations.h:86
 msgid "Triton"
 msgstr "Triton"
 
-#: src/translations.h:83
+#: src/translations.h:87
 msgid "Nereid"
 msgstr "Nereid"
 
-#: src/translations.h:84
+#: src/translations.h:88
 msgid "Naiad"
 msgstr "Naijad"
 
-#: src/translations.h:85
+#: src/translations.h:89
 msgid "Thalassa"
 msgstr "Talasa"
 
-#: src/translations.h:86
+#: src/translations.h:90
 msgid "Despina"
 msgstr "Despina"
 
-#: src/translations.h:87
+#: src/translations.h:91
 msgid "Galatea"
 msgstr "Galateja"
 
-#: src/translations.h:88
+#: src/translations.h:92
 msgid "Larissa"
 msgstr "Larisa"
 
-#: src/translations.h:89
+#: src/translations.h:93
 msgid "Proteus"
 msgstr "Proteus"
 
-#: src/translations.h:90
+#: src/translations.h:94
 msgid "Halimede"
 msgstr "Halimeda"
 
-#: src/translations.h:91
+#: src/translations.h:95
 msgid "Psamathe"
 msgstr "Psamathe"
 
-#: src/translations.h:92
+#: src/translations.h:96
 msgid "Sao"
 msgstr "Sao"
 
-#: src/translations.h:93
+#: src/translations.h:97
 msgid "Laomedeia"
 msgstr "Laomedeja"
 
-#: src/translations.h:94
+#: src/translations.h:98
 msgid "Neso"
 msgstr "Neso"
 
-#: src/translations.h:95
+#: src/translations.h:99
 msgid "Solar System Observer"
 msgstr "Posmatrač Sunčevog sistema"
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:98
+#: src/translations.h:102
 msgid "Astraea"
 msgstr "Astraea"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:100
+#: src/translations.h:104
 msgid "Hebe"
 msgstr "Hebe"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:102
+#: src/translations.h:106
 msgid "Iris"
 msgstr "Iris"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:104
+#: src/translations.h:108
 msgid "Flora"
 msgstr "Flora"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:108
+#: src/translations.h:112
 msgid "Hygiea"
 msgstr "Hygiea"
 
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:110
+#: src/translations.h:114
 msgid "Amor"
 msgstr "Amor"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:112
+#: src/translations.h:116
 msgid "Apophis"
 msgstr "Apophis"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:114
+#: src/translations.h:118
 msgid "Chiron"
 msgstr "Hiron"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:116
+#: src/translations.h:120
 msgid "Eros"
 msgstr "Eros"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:118
+#: src/translations.h:122
 msgid "Hektor"
 msgstr "Hektor"
 
 #. TRANSLATORS: Name of supernova SN 1572A
-#: src/translations.h:120
+#: src/translations.h:124
 msgid "Tycho's Supernova"
 msgstr "Tychoova supernova"
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: src/translations.h:122
+#: src/translations.h:126
 msgid "Kepler's Supernova"
 msgstr "Keplerova supernova"
 
-#: src/translations.h:126
+#: src/translations.h:130
 msgid "N"
 msgstr "S"
 
-#: src/translations.h:127
+#: src/translations.h:131
 msgid "S"
 msgstr "J"
 
-#: src/translations.h:128
+#: src/translations.h:132
 msgid "E"
 msgstr "I"
 
-#: src/translations.h:129
+#: src/translations.h:133
 msgid "W"
 msgstr "Z"
 
-#: src/translations.h:132
+#: src/translations.h:136
 msgid "Aztec"
 msgstr "Aztec"
 
-#: src/translations.h:133
+#: src/translations.h:137
 msgid "Chinese"
 msgstr "Kinesko"
 
-#: src/translations.h:134
+#: src/translations.h:138
 msgid "Egyptian"
 msgstr "Egipatsko"
 
-#: src/translations.h:135
+#: src/translations.h:139
 msgid "Inuit"
 msgstr "Eskimsko"
 
-#: src/translations.h:136
+#: src/translations.h:140
 msgid "Korean"
 msgstr "Korejsko"
 
-#: src/translations.h:137
+#: src/translations.h:141
 msgid "Lakota"
 msgstr "Lakota"
 
-#: src/translations.h:138
+#: src/translations.h:142
 msgid "Maori"
 msgstr "Maori"
 
-#: src/translations.h:139
+#: src/translations.h:143
 msgid "Navajo"
 msgstr "Navaho"
 
-#: src/translations.h:140
+#: src/translations.h:144
 msgid "Norse"
 msgstr "Nordijsko"
 
-#: src/translations.h:141
+#: src/translations.h:145
 msgid "Polynesian"
 msgstr "Polinezijsko"
 
-#: src/translations.h:142
+#: src/translations.h:146
 msgid "Sami"
 msgstr "Sami"
 
-#: src/translations.h:143
+#: src/translations.h:147
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
-#: src/translations.h:144
+#: src/translations.h:148
 msgid "Western"
 msgstr "Zapadno"
 
-#: src/translations.h:148
+#: src/translations.h:152
 msgid "Set Location "
 msgstr "Podesi lokaciju "
 
-#: src/translations.h:149
+#: src/translations.h:153
 msgid "Set Time "
 msgstr "Podesi vrijeme "
 
-#: src/translations.h:150
+#: src/translations.h:154
 msgid "General "
 msgstr "Općenito "
 
-#: src/translations.h:151
+#: src/translations.h:155
 msgid "Stars "
 msgstr "Zvijezde "
 
-#: src/translations.h:152
+#: src/translations.h:156
 msgid "Colors "
 msgstr "Boje "
 
-#: src/translations.h:153
+#: src/translations.h:157
 msgid "Effects "
 msgstr "Efekti "
 
-#: src/translations.h:154
+#: src/translations.h:158
 msgid "Scripts "
 msgstr "Skripte "
 
-#: src/translations.h:155
+#: src/translations.h:159
 msgid "Administration "
 msgstr "Administracija "
 
-#: src/translations.h:157
+#: src/translations.h:161
 msgid "Latitude: "
 msgstr "Geografska širina: "
 
-#: src/translations.h:158
+#: src/translations.h:162
 msgid "Longitude: "
 msgstr "Geografska dužina: "
 
-#: src/translations.h:159
+#: src/translations.h:163
 msgid "Altitude (m): "
 msgstr "Nadmorska visina (m): "
 
-#: src/translations.h:160
+#: src/translations.h:164
 msgid "Solar System Body: "
 msgstr "Tijelo sunčevog sistema: "
 
-#: src/translations.h:162
+#: src/translations.h:166
 msgid "Sky Time: "
 msgstr "Zvjezdano vrijeme: "
 
-#: src/translations.h:163
+#: src/translations.h:167
 msgid "Set Time Zone: "
 msgstr "Postavi vremensku zonu: "
 
-#: src/translations.h:164
+#: src/translations.h:168
 msgid "Day keys: "
 msgstr "Dnevni ključevi: "
 
-#: src/translations.h:165
+#: src/translations.h:169
 msgid "Calendar"
 msgstr "Kalendar"
 
-#: src/translations.h:166
+#: src/translations.h:170
 msgid "Sidereal"
 msgstr "Zvjezdani"
 
-#: src/translations.h:167
+#: src/translations.h:171
 msgid "Preset Sky Time: "
 msgstr "Unaprijed zadano zvjezdano vrijeme: "
 
-#: src/translations.h:168
+#: src/translations.h:172
 msgid "Sky Time At Start-up: "
 msgstr "Zvjezdano vrijeme pri pokretanju: "
 
-#: src/translations.h:169
+#: src/translations.h:173
 msgid "Actual Time"
 msgstr "Stvarno vrijeme"
 
-#: src/translations.h:170
+#: src/translations.h:174
 msgid "Preset Time"
 msgstr "Postavljeno vrijeme"
 
-#: src/translations.h:171
+#: src/translations.h:175
 msgid "Time Display Format: "
 msgstr "Oblik prikaza vremena: "
 
-#: src/translations.h:172
+#: src/translations.h:176
 msgid "Date Display Format: "
 msgstr "Oblik prikaza datuma: "
 
-#: src/translations.h:174
+#: src/translations.h:178
 msgid "Sky Culture: "
 msgstr "Kultura sazviježđa: "
 
-#: src/translations.h:175
+#: src/translations.h:179
 msgid "Sky Language: "
 msgstr "Jezik sazviježda: "
 
-#: src/translations.h:177
+#: src/translations.h:181
 msgid "Show: "
 msgstr "Prikaži: "
 
-#: src/translations.h:178
+#: src/translations.h:182
 msgid "Star Value Multiplier: "
 msgstr "Množitelj vrijednosti zvijezde: "
 
-#: src/translations.h:179
+#: src/translations.h:183
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Množitelj veličine uvećavanja: "
 
-#: src/translations.h:180
+#: src/translations.h:184
 msgid "Maximum Magnitude to Label: "
 msgstr "Prikaži maglice do veličine: "
 
-#: src/translations.h:181
+#: src/translations.h:185
 msgid "Twinkling: "
 msgstr "Treperenje: "
 
-#: src/translations.h:182
+#: src/translations.h:186
 msgid "Limiting Magnitude: "
 msgstr "Granična veličina: "
 
-#: src/translations.h:184
+#: src/translations.h:188
 msgid "Constellation Lines"
 msgstr "Linije sazviježđa"
 
-#: src/translations.h:185
+#: src/translations.h:189
 msgid "Constellation Names"
 msgstr "Imena sazvježđa"
 
-#: src/translations.h:186
+#: src/translations.h:190
 msgid "Constellation Art Intensity"
 msgstr "Sjajnost slika sazviježđa"
 
-#: src/translations.h:187
+#: src/translations.h:191
 msgid "Constellation Boundaries"
 msgstr "Granice sazviježđa"
 
-#: src/translations.h:188
+#: src/translations.h:192
 msgid "Cardinal Points"
 msgstr "Strane svijeta"
 
-#: src/translations.h:189
+#: src/translations.h:193
 msgid "Planet Names"
 msgstr "Imena planeta"
 
-#: src/translations.h:190
+#: src/translations.h:194
 msgid "Planet Orbits"
 msgstr "Orbite planeta"
 
-#: src/translations.h:191
+#: src/translations.h:195
 msgid "Planet Trails"
 msgstr "Putanje planeta"
 
-#: src/translations.h:192
+#: src/translations.h:196
 msgid "Meridian Line"
 msgstr "Meridijanska linija"
 
-#: src/translations.h:193
+#: src/translations.h:197
 msgid "Azimuthal Grid"
 msgstr "Azimutna mreža"
 
-#: src/translations.h:194
+#: src/translations.h:198
 msgid "Equatorial Grid"
 msgstr "Ekvatorska mreža"
 
-#: src/translations.h:195
+#: src/translations.h:199
 msgid "Equator Line"
 msgstr "Ekvatorska linija"
 
-#: src/translations.h:196
+#: src/translations.h:200
 msgid "Ecliptic Line"
 msgstr "Ekliptika"
 
-#: src/translations.h:197
+#: src/translations.h:201
 msgid "Nebula Names"
 msgstr "Imena maglica"
 
-#: src/translations.h:198
+#: src/translations.h:202
 msgid "Nebula Circles"
 msgstr "Magličini krugovi"
 
-#: src/translations.h:200
+#: src/translations.h:204
 msgid "Light Pollution Luminance: "
 msgstr "Intenzitet svjetlosnog zagađenja: "
 
-#: src/translations.h:201
+#: src/translations.h:205
 msgid "Landscape: "
 msgstr "Krajolik: "
 
-#: src/translations.h:202
+#: src/translations.h:206
 msgid "Manual zoom: "
 msgstr "Ručno uvećavanje: "
 
-#: src/translations.h:203
+#: src/translations.h:207
 msgid "Object Sizing Rule: "
 msgstr "Pravilo uvećavanja objekta: "
 
-#: src/translations.h:204
+#: src/translations.h:208
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Množitelj razmjere uvećavanja: "
 
-#: src/translations.h:205
+#: src/translations.h:209
 msgid "Milky Way intensity: "
 msgstr "Sjajnost Mliječnog puta: "
 
-#: src/translations.h:206
+#: src/translations.h:210
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Prikaži imena za maglice do veličine: "
 
-#: src/translations.h:207
+#: src/translations.h:211
 msgid "Zoom Duration: "
 msgstr "Trajanje uvećanja: "
 
-#: src/translations.h:208
+#: src/translations.h:212
 msgid "Cursor Timeout: "
 msgstr "Vrijeme do nestanka pokazivača miša: "
 
-#: src/translations.h:209
+#: src/translations.h:213
 msgid "Correct for light travel time: "
 msgstr "Ispravka vremena putovanja svjetlosti: "
 
-#: src/translations.h:211
+#: src/translations.h:215
 msgid "Local Script: "
 msgstr "Lokalna skripta: "
 
-#: src/translations.h:212
+#: src/translations.h:216
 msgid "CD/DVD Script: "
 msgstr "CD/DVD skripta: "
 
-#: src/translations.h:213
+#: src/translations.h:217
 msgid "USB Script: "
 msgstr "USB skripta: "
 
-#: src/translations.h:214
+#: src/translations.h:218
 msgid "Arrow down to load list."
 msgstr "Strelica dole za učitavanje liste."
 
-#: src/translations.h:215
+#: src/translations.h:219
 msgid "Select and exit to run."
 msgstr "Odaberite i izađite za pokretanje."
 
-#: src/translations.h:217
+#: src/translations.h:221
 msgid "Load Default Configuration: "
 msgstr "Učitaj početne postavke: "
 
-#: src/translations.h:218
+#: src/translations.h:222
 msgid "Save Current Configuration as Default: "
 msgstr "Snimi trenutne postavke kao početne: "
 
-#: src/translations.h:219
+#: src/translations.h:223
 msgid "Shut Down: "
 msgstr "Ugasi: "
 
-#: src/translations.h:220
+#: src/translations.h:224
 msgid "Update me via Internet: "
 msgstr "Nadogradi me putem interneta: "
 
-#: src/translations.h:221
+#: src/translations.h:225
 msgid "Set UI Locale: "
 msgstr "Postavi lokalizaciju: "
 

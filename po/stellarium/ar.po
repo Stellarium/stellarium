@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-11 18:20+0700\n"
-"PO-Revision-Date: 2011-07-22 03:16+0000\n"
+"POT-Creation-Date: 2011-07-25 18:49+0700\n"
+"PO-Revision-Date: 2011-07-25 22:19+0000\n"
 "Last-Translator: kajaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-23 04:34+0000\n"
+"X-Launchpad-Export-Date: 2011-07-26 04:32+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
@@ -286,50 +286,50 @@ msgstr "‎ارتفاع زاوي / سمتي:‎ %1/%2"
 msgid "Select screenshot directory"
 msgstr "أختر مجلد حفظ لقطة الشاشة"
 
-#: src/gui/ConfigurationDialog.cpp:461
+#: src/gui/ConfigurationDialog.cpp:462
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "حقل الرؤية عند بدء البرنامج: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:469
+#: src/gui/ConfigurationDialog.cpp:470
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "اتجاه الرؤية عند بدء البرنامج سمت/ارتفاع: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:509
+#: src/gui/ConfigurationDialog.cpp:510
 msgid "Authors"
 msgstr "المؤلفون"
 
-#: src/gui/ConfigurationDialog.cpp:513 src/gui/ViewDialog.cpp:368
+#: src/gui/ConfigurationDialog.cpp:514 src/gui/ViewDialog.cpp:368
 msgid "Contact"
 msgstr "مراسلة"
 
-#: src/gui/ConfigurationDialog.cpp:585
+#: src/gui/ConfigurationDialog.cpp:586
 msgid "Author"
 msgstr "المؤلف"
 
-#: src/gui/ConfigurationDialog.cpp:586
+#: src/gui/ConfigurationDialog.cpp:587
 msgid "License"
 msgstr "الرخصة"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:616
 msgid "Running script: "
 msgstr "البرنامج النصي الشغَال‎: "
 
-#: src/gui/ConfigurationDialog.cpp:622
+#: src/gui/ConfigurationDialog.cpp:623
 msgid "Running script: [none]"
 msgstr "البرنامج النصي الشغَال‎: [لايوجد]"
 
-#: src/gui/ConfigurationDialog.cpp:665
+#: src/gui/ConfigurationDialog.cpp:666
 msgid "Finished downloading all star catalogs!"
 msgstr "انتهى تحميل جميع أدلة النجوم!‏"
 
-#: src/gui/ConfigurationDialog.cpp:674
+#: src/gui/ConfigurationDialog.cpp:675
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "اجلب الدليل %1 من %2"
 
-#: src/gui/ConfigurationDialog.cpp:676
+#: src/gui/ConfigurationDialog.cpp:677
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -340,7 +340,7 @@ msgstr ""
 "عدد النجوم: %2 مليون\n"
 "نطاق قدر لمعان النجوم: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:685
+#: src/gui/ConfigurationDialog.cpp:686
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -348,7 +348,7 @@ msgstr ""
 "أنتهى تحميل أدلة النجوم الجديدة\n"
 "أعد تشغيل برنامج ستيللاريوم لرؤيتها.‏"
 
-#: src/gui/ConfigurationDialog.cpp:723 src/gui/ConfigurationDialog.cpp:757
+#: src/gui/ConfigurationDialog.cpp:724 src/gui/ConfigurationDialog.cpp:758
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -357,7 +357,7 @@ msgstr ""
 "خطأ في تحميل %1‎:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:728
+#: src/gui/ConfigurationDialog.cpp:729
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -366,11 +366,11 @@ msgstr ""
 "جاري التحميل %1 ...‏\n"
 "(تستطيع إغلاق هذه النافذة)"
 
-#: src/gui/ConfigurationDialog.cpp:808
+#: src/gui/ConfigurationDialog.cpp:809
 msgid "Verifying file integrity..."
 msgstr "جاري التأكد من صحة الملف...‏"
 
-#: src/gui/ConfigurationDialog.cpp:812
+#: src/gui/ConfigurationDialog.cpp:813
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -379,8 +379,8 @@ msgstr ""
 "خطأ في تحميل %1‎:\n"
 "الملف فاسد"
 
-#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:285
-#: src/gui/StelGuiItems.cpp:640
+#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:286
+#: src/gui/StelGuiItems.cpp:656
 msgid "Space"
 msgstr "مفتاح المسافة"
 
@@ -798,7 +798,7 @@ msgstr "إخفاء تلقائي لشريط الأدوات العمودي"
 msgid "Toggle visibility of GUI"
 msgstr "إظهار وإخفاء شريط الأدوات الرئيس والجانبي"
 
-#: src/gui/StelGuiItems.cpp:541
+#: src/gui/StelGuiItems.cpp:542
 #, no-c-format, qt-format
 msgid "%1m"
 msgstr "‏%1 متر"
@@ -909,7 +909,7 @@ msgstr "يوجد ملف بنفس الاسم أو المعرف (%1)."
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "تستطيع حذفه يدوياً بحذف الدليل التالي: %1"
 
-#: src/main.cpp:335
+#: src/main.cpp:336
 msgid "This system does not support OpenGL."
 msgstr "(OpenGL)هذا النظام لا يدعم مكتبة الرسومات المفتوحة"
 
@@ -1026,7 +1026,7 @@ msgid "Adrastea"
 msgstr "أدراستيا"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:106
+#: src/translations.h:61 src/translations.h:110
 msgid "Metis"
 msgstr "ميتس"
 
@@ -1106,455 +1106,465 @@ msgstr "بلوتو"
 msgid "Charon"
 msgstr "كارون"
 
-#: src/translations.h:81
+#. TRANSLATORS: Moon of Pluto (II)
+#: src/translations.h:82
+msgid "Nix"
+msgstr "نكس"
+
+#. TRANSLATORS: Moon of Pluto (III)
+#: src/translations.h:84
+msgid "Hydra"
+msgstr "الشجاع"
+
+#: src/translations.h:85
 msgid "Eris"
 msgstr "إيريس"
 
-#: src/translations.h:82
+#: src/translations.h:86
 msgid "Triton"
 msgstr "ترايتون"
 
-#: src/translations.h:83
+#: src/translations.h:87
 msgid "Nereid"
 msgstr "نيرييد"
 
-#: src/translations.h:84
+#: src/translations.h:88
 msgid "Naiad"
 msgstr "ناياد"
 
-#: src/translations.h:85
+#: src/translations.h:89
 msgid "Thalassa"
 msgstr "ثلاسا"
 
-#: src/translations.h:86
+#: src/translations.h:90
 msgid "Despina"
 msgstr "ديسبينا"
 
-#: src/translations.h:87
+#: src/translations.h:91
 msgid "Galatea"
 msgstr "جالاتيا"
 
-#: src/translations.h:88
+#: src/translations.h:92
 msgid "Larissa"
 msgstr "لاريسا"
 
-#: src/translations.h:89
+#: src/translations.h:93
 msgid "Proteus"
 msgstr "بروتيوس"
 
-#: src/translations.h:90
+#: src/translations.h:94
 msgid "Halimede"
 msgstr "هاليميدي"
 
-#: src/translations.h:91
+#: src/translations.h:95
 msgid "Psamathe"
 msgstr "ساماثي"
 
-#: src/translations.h:92
+#: src/translations.h:96
 msgid "Sao"
 msgstr "ساو"
 
-#: src/translations.h:93
+#: src/translations.h:97
 msgid "Laomedeia"
 msgstr "لاوميديا"
 
-#: src/translations.h:94
+#: src/translations.h:98
 msgid "Neso"
 msgstr "نيسو"
 
-#: src/translations.h:95
+#: src/translations.h:99
 msgid "Solar System Observer"
 msgstr "راصد المجموعة الشمسية"
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:98
+#: src/translations.h:102
 msgid "Astraea"
 msgstr "أسترايا"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:100
+#: src/translations.h:104
 msgid "Hebe"
 msgstr "هيبي"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:102
+#: src/translations.h:106
 msgid "Iris"
 msgstr "آيريس"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:104
+#: src/translations.h:108
 msgid "Flora"
 msgstr "فلورا"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:108
+#: src/translations.h:112
 msgid "Hygiea"
 msgstr "هايجيا"
 
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:110
+#: src/translations.h:114
 msgid "Amor"
 msgstr "آمور"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:112
+#: src/translations.h:116
 msgid "Apophis"
 msgstr "أبوفيس"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:114
+#: src/translations.h:118
 msgid "Chiron"
 msgstr "كايرون"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:116
+#: src/translations.h:120
 msgid "Eros"
 msgstr "إيروس"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:118
+#: src/translations.h:122
 msgid "Hektor"
 msgstr "هيكتور"
 
 #. TRANSLATORS: Name of supernova SN 1572A
-#: src/translations.h:120
+#: src/translations.h:124
 msgid "Tycho's Supernova"
 msgstr "مستعر تايكو"
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: src/translations.h:122
+#: src/translations.h:126
 msgid "Kepler's Supernova"
 msgstr "مستعر كبلر"
 
-#: src/translations.h:126
+#: src/translations.h:130
 msgid "N"
 msgstr "شمال"
 
-#: src/translations.h:127
+#: src/translations.h:131
 msgid "S"
 msgstr "جنوب"
 
-#: src/translations.h:128
+#: src/translations.h:132
 msgid "E"
 msgstr "شرق"
 
-#: src/translations.h:129
+#: src/translations.h:133
 msgid "W"
 msgstr "غرب"
 
-#: src/translations.h:132
+#: src/translations.h:136
 msgid "Aztec"
 msgstr "الأزتك"
 
-#: src/translations.h:133
+#: src/translations.h:137
 msgid "Chinese"
 msgstr "الصينية"
 
-#: src/translations.h:134
+#: src/translations.h:138
 msgid "Egyptian"
 msgstr "مصري"
 
-#: src/translations.h:135
+#: src/translations.h:139
 msgid "Inuit"
 msgstr "إنيويت"
 
-#: src/translations.h:136
+#: src/translations.h:140
 msgid "Korean"
 msgstr "الكوري"
 
-#: src/translations.h:137
+#: src/translations.h:141
 msgid "Lakota"
 msgstr "لاكوتا"
 
-#: src/translations.h:138
+#: src/translations.h:142
 msgid "Maori"
 msgstr "الماوري"
 
-#: src/translations.h:139
+#: src/translations.h:143
 msgid "Navajo"
 msgstr "النافاهو"
 
-#: src/translations.h:140
+#: src/translations.h:144
 msgid "Norse"
 msgstr "النرويجي"
 
-#: src/translations.h:141
+#: src/translations.h:145
 msgid "Polynesian"
 msgstr "البولونيزي"
 
-#: src/translations.h:142
+#: src/translations.h:146
 msgid "Sami"
 msgstr "السامي"
 
-#: src/translations.h:143
+#: src/translations.h:147
 msgid "Tupi-Guarani"
 msgstr "توبي - جواراني"
 
-#: src/translations.h:144
+#: src/translations.h:148
 msgid "Western"
 msgstr "الغربي"
 
-#: src/translations.h:148
+#: src/translations.h:152
 msgid "Set Location "
 msgstr "حدد الموقع "
 
-#: src/translations.h:149
+#: src/translations.h:153
 msgid "Set Time "
 msgstr "حدد الوقت "
 
-#: src/translations.h:150
+#: src/translations.h:154
 msgid "General "
 msgstr "عام "
 
-#: src/translations.h:151
+#: src/translations.h:155
 msgid "Stars "
 msgstr "النجوم "
 
-#: src/translations.h:152
+#: src/translations.h:156
 msgid "Colors "
 msgstr "الألوان "
 
-#: src/translations.h:153
+#: src/translations.h:157
 msgid "Effects "
 msgstr "المؤثرات "
 
-#: src/translations.h:154
+#: src/translations.h:158
 msgid "Scripts "
 msgstr "البرامج النصية "
 
-#: src/translations.h:155
+#: src/translations.h:159
 msgid "Administration "
 msgstr "الإدارة "
 
-#: src/translations.h:157
+#: src/translations.h:161
 msgid "Latitude: "
 msgstr "خط العرض‎: "
 
-#: src/translations.h:158
+#: src/translations.h:162
 msgid "Longitude: "
 msgstr "خط الطول‎: "
 
-#: src/translations.h:159
+#: src/translations.h:163
 msgid "Altitude (m): "
 msgstr "(الارتفاع (م ‎: "
 
-#: src/translations.h:160
+#: src/translations.h:164
 msgid "Solar System Body: "
 msgstr "جرم من المجموعة الشمسية‎: "
 
-#: src/translations.h:162
+#: src/translations.h:166
 msgid "Sky Time: "
 msgstr "توقيت السماء‎: "
 
-#: src/translations.h:163
+#: src/translations.h:167
 msgid "Set Time Zone: "
 msgstr "حدد المنطقة الزمنية‎: "
 
-#: src/translations.h:164
+#: src/translations.h:168
 msgid "Day keys: "
 msgstr "مفاتيح اليوم‎: "
 
-#: src/translations.h:165
+#: src/translations.h:169
 msgid "Calendar"
 msgstr "تقويم"
 
-#: src/translations.h:166
+#: src/translations.h:170
 msgid "Sidereal"
 msgstr "نجمي"
 
-#: src/translations.h:167
+#: src/translations.h:171
 msgid "Preset Sky Time: "
 msgstr "(حدد الوقت المضبوط مسبقاً (في حالة عدم اختيار التوقيت الفعلي‎: "
 
-#: src/translations.h:168
+#: src/translations.h:172
 msgid "Sky Time At Start-up: "
 msgstr "توقيت السماء عند البدء‎: "
 
-#: src/translations.h:169
+#: src/translations.h:173
 msgid "Actual Time"
 msgstr "الوقت الفعلي"
 
-#: src/translations.h:170
+#: src/translations.h:174
 msgid "Preset Time"
 msgstr "الوقت المضبوط مسبقاً"
 
-#: src/translations.h:171
+#: src/translations.h:175
 msgid "Time Display Format: "
 msgstr "نمط عرض الوقت ‎: "
 
-#: src/translations.h:172
+#: src/translations.h:176
 msgid "Date Display Format: "
 msgstr "نمط عرض التاريخ‎: "
 
-#: src/translations.h:174
+#: src/translations.h:178
 msgid "Sky Culture: "
 msgstr "التراث الفلكي‎: "
 
-#: src/translations.h:175
+#: src/translations.h:179
 msgid "Sky Language: "
 msgstr "اللغة‎: "
 
-#: src/translations.h:177
+#: src/translations.h:181
 msgid "Show: "
 msgstr "أظهر‎: "
 
-#: src/translations.h:178
+#: src/translations.h:182
 msgid "Star Value Multiplier: "
 msgstr "مضاعف قيمة النجم‎: "
 
-#: src/translations.h:179
+#: src/translations.h:183
 msgid "Magnitude Sizing Multiplier: "
 msgstr "مضاعف حجم قدر السطوع‎: "
 
-#: src/translations.h:180
+#: src/translations.h:184
 msgid "Maximum Magnitude to Label: "
 msgstr "إظهار أسماء النجوم الأكثر سطوعاً من القدر‎: "
 
-#: src/translations.h:181
+#: src/translations.h:185
 msgid "Twinkling: "
 msgstr "التلألؤ "
 
-#: src/translations.h:182
+#: src/translations.h:186
 msgid "Limiting Magnitude: "
 msgstr "القدرالمحدد‎: "
 
-#: src/translations.h:184
+#: src/translations.h:188
 msgid "Constellation Lines"
 msgstr "خطوط الكوكبات"
 
-#: src/translations.h:185
+#: src/translations.h:189
 msgid "Constellation Names"
 msgstr "اسماء الكوكبات"
 
-#: src/translations.h:186
+#: src/translations.h:190
 msgid "Constellation Art Intensity"
 msgstr "سطوع الرسوم الفنية للكوكبات"
 
-#: src/translations.h:187
+#: src/translations.h:191
 msgid "Constellation Boundaries"
 msgstr "حدود الكوكبات"
 
-#: src/translations.h:188
+#: src/translations.h:192
 msgid "Cardinal Points"
 msgstr "الجهات الاربع"
 
-#: src/translations.h:189
+#: src/translations.h:193
 msgid "Planet Names"
 msgstr "أسماء الكواكب"
 
-#: src/translations.h:190
+#: src/translations.h:194
 msgid "Planet Orbits"
 msgstr "مدارات الكواكب"
 
-#: src/translations.h:191
+#: src/translations.h:195
 msgid "Planet Trails"
 msgstr "مسار  الكوكب"
 
-#: src/translations.h:192
+#: src/translations.h:196
 msgid "Meridian Line"
 msgstr "خط دائرة نصف النهار"
 
-#: src/translations.h:193
+#: src/translations.h:197
 msgid "Azimuthal Grid"
 msgstr "الشبكة السمتية"
 
-#: src/translations.h:194
+#: src/translations.h:198
 msgid "Equatorial Grid"
 msgstr "الشبكة الاستوائية"
 
-#: src/translations.h:195
+#: src/translations.h:199
 msgid "Equator Line"
 msgstr "خط الاستواء"
 
-#: src/translations.h:196
+#: src/translations.h:200
 msgid "Ecliptic Line"
 msgstr "خط الدائرةالكسوفية"
 
-#: src/translations.h:197
+#: src/translations.h:201
 msgid "Nebula Names"
 msgstr "أسماء السدم"
 
-#: src/translations.h:198
+#: src/translations.h:202
 msgid "Nebula Circles"
 msgstr "دوائر السدم السماوية"
 
-#: src/translations.h:200
+#: src/translations.h:204
 msgid "Light Pollution Luminance: "
 msgstr "مستوى التلوث الضوئي‎: "
 
-#: src/translations.h:201
+#: src/translations.h:205
 msgid "Landscape: "
 msgstr "المناظر الطبيعية‎: "
 
-#: src/translations.h:202
+#: src/translations.h:206
 msgid "Manual zoom: "
 msgstr "التقريب اليدوي‎: "
 
-#: src/translations.h:203
+#: src/translations.h:207
 msgid "Object Sizing Rule: "
 msgstr "قاعدة تقدير حجم الجرم‎: "
 
-#: src/translations.h:204
+#: src/translations.h:208
 msgid "Magnitude Scaling Multiplier: "
 msgstr "مضاعف مقياس القدر‎: "
 
-#: src/translations.h:205
+#: src/translations.h:209
 msgid "Milky Way intensity: "
 msgstr "سطوع رسم درب التبانة‎: "
 
-#: src/translations.h:206
+#: src/translations.h:210
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "إظهار أسماء السدم عندما يكون قدر السطوع أكثر من‎: "
 
-#: src/translations.h:207
+#: src/translations.h:211
 msgid "Zoom Duration: "
 msgstr "مدة التقريب‎: "
 
-#: src/translations.h:208
+#: src/translations.h:212
 msgid "Cursor Timeout: "
 msgstr "مهلة المؤشر‎: "
 
-#: src/translations.h:209
+#: src/translations.h:213
 msgid "Correct for light travel time: "
 msgstr "صحح لسرعة انتقال الضوء‎: "
 
-#: src/translations.h:211
+#: src/translations.h:215
 msgid "Local Script: "
 msgstr "نص برمجي محلي‎: "
 
-#: src/translations.h:212
+#: src/translations.h:216
 msgid "CD/DVD Script: "
 msgstr "نص برمجي في قرص مدمج أو ضوئي‎: "
 
-#: src/translations.h:213
+#: src/translations.h:217
 msgid "USB Script: "
 msgstr "نص برمجي في المنفذ التسلسلي‎: "
 
-#: src/translations.h:214
+#: src/translations.h:218
 msgid "Arrow down to load list."
 msgstr ".مفتاح السهم السفلي لتحميل القائمة"
 
-#: src/translations.h:215
+#: src/translations.h:219
 msgid "Select and exit to run."
 msgstr "اختر واخرج من البرنامج للتنفيذ.‏"
 
-#: src/translations.h:217
+#: src/translations.h:221
 msgid "Load Default Configuration: "
 msgstr "حمل الإعدادات الأصلية‎: "
 
-#: src/translations.h:218
+#: src/translations.h:222
 msgid "Save Current Configuration as Default: "
 msgstr "احفظ الإعدادات الحالية كأساسية‎: "
 
-#: src/translations.h:219
+#: src/translations.h:223
 msgid "Shut Down: "
 msgstr "إغلاق‎: "
 
-#: src/translations.h:220
+#: src/translations.h:224
 msgid "Update me via Internet: "
 msgstr "حدث بواسطة الإنترنت‎: "
 
-#: src/translations.h:221
+#: src/translations.h:225
 msgid "Set UI Locale: "
 msgstr "حدد لغة واجهة المستخدم‎: "
 
