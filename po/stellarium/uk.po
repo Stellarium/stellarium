@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-11 18:20+0700\n"
-"PO-Revision-Date: 2011-07-22 05:25+0000\n"
+"POT-Creation-Date: 2011-07-25 18:49+0700\n"
+"PO-Revision-Date: 2011-07-25 19:02+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-23 04:34+0000\n"
+"X-Launchpad-Export-Date: 2011-07-26 04:36+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -292,50 +292,50 @@ msgstr "Аз/Висота: %1/%2"
 msgid "Select screenshot directory"
 msgstr "Оберіть каталог для знімків екрана"
 
-#: src/gui/ConfigurationDialog.cpp:461
+#: src/gui/ConfigurationDialog.cpp:462
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Початкове поле зору: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:469
+#: src/gui/ConfigurationDialog.cpp:470
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Початковий напрямок зору Аз/Висота: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:509
+#: src/gui/ConfigurationDialog.cpp:510
 msgid "Authors"
 msgstr "Автори"
 
-#: src/gui/ConfigurationDialog.cpp:513 src/gui/ViewDialog.cpp:368
+#: src/gui/ConfigurationDialog.cpp:514 src/gui/ViewDialog.cpp:368
 msgid "Contact"
 msgstr "Контакти"
 
-#: src/gui/ConfigurationDialog.cpp:585
+#: src/gui/ConfigurationDialog.cpp:586
 msgid "Author"
 msgstr "Автор"
 
-#: src/gui/ConfigurationDialog.cpp:586
+#: src/gui/ConfigurationDialog.cpp:587
 msgid "License"
 msgstr "Ліцензія"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:616
 msgid "Running script: "
 msgstr "Запуск скрипту: "
 
-#: src/gui/ConfigurationDialog.cpp:622
+#: src/gui/ConfigurationDialog.cpp:623
 msgid "Running script: [none]"
 msgstr "Запуск скрипту: [Немає]"
 
-#: src/gui/ConfigurationDialog.cpp:665
+#: src/gui/ConfigurationDialog.cpp:666
 msgid "Finished downloading all star catalogs!"
 msgstr "Звантаження всіх зоряних каталогів завершено!"
 
-#: src/gui/ConfigurationDialog.cpp:674
+#: src/gui/ConfigurationDialog.cpp:675
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Отримати каталог %1 із %2"
 
-#: src/gui/ConfigurationDialog.cpp:676
+#: src/gui/ConfigurationDialog.cpp:677
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -346,7 +346,7 @@ msgstr ""
 "Кількість зірок: %2 мільйонів\n"
 "Діапазон зоряних величин: %3-%4"
 
-#: src/gui/ConfigurationDialog.cpp:685
+#: src/gui/ConfigurationDialog.cpp:686
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -354,7 +354,7 @@ msgstr ""
 "Завершено завантаження нових каталогів зірок!\n"
 "Перезапустіть Stellarium для їх відображення."
 
-#: src/gui/ConfigurationDialog.cpp:723 src/gui/ConfigurationDialog.cpp:757
+#: src/gui/ConfigurationDialog.cpp:724 src/gui/ConfigurationDialog.cpp:758
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -363,7 +363,7 @@ msgstr ""
 "Помилка при звантаженні %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:728
+#: src/gui/ConfigurationDialog.cpp:729
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -372,11 +372,11 @@ msgstr ""
 "Звантаження %1...\n"
 "(Ви можете закрити це вікно.)"
 
-#: src/gui/ConfigurationDialog.cpp:808
+#: src/gui/ConfigurationDialog.cpp:809
 msgid "Verifying file integrity..."
 msgstr "Перевірка цілісності файлів..."
 
-#: src/gui/ConfigurationDialog.cpp:812
+#: src/gui/ConfigurationDialog.cpp:813
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -385,8 +385,8 @@ msgstr ""
 "Помилка при звантаженні %1:\n"
 "Файл пошкоджено."
 
-#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:285
-#: src/gui/StelGuiItems.cpp:640
+#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:286
+#: src/gui/StelGuiItems.cpp:656
 msgid "Space"
 msgstr "Пробіл"
 
@@ -804,7 +804,7 @@ msgstr "Автоматично ховати вертикальні клавіш�
 msgid "Toggle visibility of GUI"
 msgstr "Увімкнути/Вимкнути графічний інтерфейс"
 
-#: src/gui/StelGuiItems.cpp:541
+#: src/gui/StelGuiItems.cpp:542
 #, no-c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
@@ -913,7 +913,7 @@ msgstr "Ландшафт з такою назвою або ідентифіка�
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "Щоб вилучити його, вилучіть такий каталог: %1"
 
-#: src/main.cpp:335
+#: src/main.cpp:336
 msgid "This system does not support OpenGL."
 msgstr "Система не підтримує OpenGL."
 
@@ -1030,7 +1030,7 @@ msgid "Adrastea"
 msgstr "Адрастея"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:106
+#: src/translations.h:61 src/translations.h:110
 msgid "Metis"
 msgstr "Метида"
 
@@ -1110,455 +1110,465 @@ msgstr "Плутон"
 msgid "Charon"
 msgstr "Харон"
 
-#: src/translations.h:81
+#. TRANSLATORS: Moon of Pluto (II)
+#: src/translations.h:82
+msgid "Nix"
+msgstr "Нікта"
+
+#. TRANSLATORS: Moon of Pluto (III)
+#: src/translations.h:84
+msgid "Hydra"
+msgstr "Гідра"
+
+#: src/translations.h:85
 msgid "Eris"
 msgstr "Ерида"
 
-#: src/translations.h:82
+#: src/translations.h:86
 msgid "Triton"
 msgstr "Тритон"
 
-#: src/translations.h:83
+#: src/translations.h:87
 msgid "Nereid"
 msgstr "Нереїда"
 
-#: src/translations.h:84
+#: src/translations.h:88
 msgid "Naiad"
 msgstr "Наяда"
 
-#: src/translations.h:85
+#: src/translations.h:89
 msgid "Thalassa"
 msgstr "Таласа"
 
-#: src/translations.h:86
+#: src/translations.h:90
 msgid "Despina"
 msgstr "Деспіна"
 
-#: src/translations.h:87
+#: src/translations.h:91
 msgid "Galatea"
 msgstr "Галатея"
 
-#: src/translations.h:88
+#: src/translations.h:92
 msgid "Larissa"
 msgstr "Ларіса"
 
-#: src/translations.h:89
+#: src/translations.h:93
 msgid "Proteus"
 msgstr "Протей"
 
-#: src/translations.h:90
+#: src/translations.h:94
 msgid "Halimede"
 msgstr "Галімеда"
 
-#: src/translations.h:91
+#: src/translations.h:95
 msgid "Psamathe"
 msgstr "Псамафа"
 
-#: src/translations.h:92
+#: src/translations.h:96
 msgid "Sao"
 msgstr "Сао"
 
-#: src/translations.h:93
+#: src/translations.h:97
 msgid "Laomedeia"
 msgstr "Лаомедія"
 
-#: src/translations.h:94
+#: src/translations.h:98
 msgid "Neso"
 msgstr "Несо"
 
-#: src/translations.h:95
+#: src/translations.h:99
 msgid "Solar System Observer"
 msgstr "Оглядач Сонячної системи"
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:98
+#: src/translations.h:102
 msgid "Astraea"
 msgstr "Астрея"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:100
+#: src/translations.h:104
 msgid "Hebe"
 msgstr "Геба"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:102
+#: src/translations.h:106
 msgid "Iris"
 msgstr "Ірида"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:104
+#: src/translations.h:108
 msgid "Flora"
 msgstr "Флора"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:108
+#: src/translations.h:112
 msgid "Hygiea"
 msgstr "Гігіея"
 
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:110
+#: src/translations.h:114
 msgid "Amor"
 msgstr "Амур"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:112
+#: src/translations.h:116
 msgid "Apophis"
 msgstr "Апофіс"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:114
+#: src/translations.h:118
 msgid "Chiron"
 msgstr "Хірон"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:116
+#: src/translations.h:120
 msgid "Eros"
 msgstr "Ерос"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:118
+#: src/translations.h:122
 msgid "Hektor"
 msgstr "Гектор"
 
 #. TRANSLATORS: Name of supernova SN 1572A
-#: src/translations.h:120
+#: src/translations.h:124
 msgid "Tycho's Supernova"
 msgstr "Наднова Тіхо"
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: src/translations.h:122
+#: src/translations.h:126
 msgid "Kepler's Supernova"
 msgstr "Наднова Кеплера"
 
-#: src/translations.h:126
+#: src/translations.h:130
 msgid "N"
 msgstr "Пн"
 
-#: src/translations.h:127
+#: src/translations.h:131
 msgid "S"
 msgstr "Пд"
 
-#: src/translations.h:128
+#: src/translations.h:132
 msgid "E"
 msgstr "Сх"
 
-#: src/translations.h:129
+#: src/translations.h:133
 msgid "W"
 msgstr "Зх"
 
-#: src/translations.h:132
+#: src/translations.h:136
 msgid "Aztec"
 msgstr "Ацтецька"
 
-#: src/translations.h:133
+#: src/translations.h:137
 msgid "Chinese"
 msgstr "Китайська"
 
-#: src/translations.h:134
+#: src/translations.h:138
 msgid "Egyptian"
 msgstr "Єгипетська"
 
-#: src/translations.h:135
+#: src/translations.h:139
 msgid "Inuit"
 msgstr "Ескімоська"
 
-#: src/translations.h:136
+#: src/translations.h:140
 msgid "Korean"
 msgstr "Корейська"
 
-#: src/translations.h:137
+#: src/translations.h:141
 msgid "Lakota"
 msgstr "Лакота"
 
-#: src/translations.h:138
+#: src/translations.h:142
 msgid "Maori"
 msgstr "Маорійська"
 
-#: src/translations.h:139
+#: src/translations.h:143
 msgid "Navajo"
 msgstr "Навахо"
 
-#: src/translations.h:140
+#: src/translations.h:144
 msgid "Norse"
 msgstr "Скандинавська"
 
-#: src/translations.h:141
+#: src/translations.h:145
 msgid "Polynesian"
 msgstr "Полінезійська"
 
-#: src/translations.h:142
+#: src/translations.h:146
 msgid "Sami"
 msgstr "Саамська"
 
-#: src/translations.h:143
+#: src/translations.h:147
 msgid "Tupi-Guarani"
 msgstr "Тупі-Гуарані"
 
-#: src/translations.h:144
+#: src/translations.h:148
 msgid "Western"
 msgstr "Західна"
 
-#: src/translations.h:148
+#: src/translations.h:152
 msgid "Set Location "
 msgstr "Встановити розташування "
 
-#: src/translations.h:149
+#: src/translations.h:153
 msgid "Set Time "
 msgstr "Встановити час "
 
-#: src/translations.h:150
+#: src/translations.h:154
 msgid "General "
 msgstr "Загальне "
 
-#: src/translations.h:151
+#: src/translations.h:155
 msgid "Stars "
 msgstr "Зірки "
 
-#: src/translations.h:152
+#: src/translations.h:156
 msgid "Colors "
 msgstr "Кольори "
 
-#: src/translations.h:153
+#: src/translations.h:157
 msgid "Effects "
 msgstr "Ефекти "
 
-#: src/translations.h:154
+#: src/translations.h:158
 msgid "Scripts "
 msgstr "Скрипти "
 
-#: src/translations.h:155
+#: src/translations.h:159
 msgid "Administration "
 msgstr "Управління "
 
-#: src/translations.h:157
+#: src/translations.h:161
 msgid "Latitude: "
 msgstr "Широта: "
 
-#: src/translations.h:158
+#: src/translations.h:162
 msgid "Longitude: "
 msgstr "Довгота: "
 
-#: src/translations.h:159
+#: src/translations.h:163
 msgid "Altitude (m): "
 msgstr "Висота (у м): "
 
-#: src/translations.h:160
+#: src/translations.h:164
 msgid "Solar System Body: "
 msgstr "Сонячна система: "
 
-#: src/translations.h:162
+#: src/translations.h:166
 msgid "Sky Time: "
 msgstr "Астрономічний час: "
 
-#: src/translations.h:163
+#: src/translations.h:167
 msgid "Set Time Zone: "
 msgstr "Встановити часовий пояс: "
 
-#: src/translations.h:164
+#: src/translations.h:168
 msgid "Day keys: "
 msgstr "Клавіші днів: "
 
-#: src/translations.h:165
+#: src/translations.h:169
 msgid "Calendar"
 msgstr "Календар"
 
-#: src/translations.h:166
+#: src/translations.h:170
 msgid "Sidereal"
 msgstr "Зоряний"
 
-#: src/translations.h:167
+#: src/translations.h:171
 msgid "Preset Sky Time: "
 msgstr "Встановлений астрономічний час: "
 
-#: src/translations.h:168
+#: src/translations.h:172
 msgid "Sky Time At Start-up: "
 msgstr "Астрономічний час при запуску: "
 
-#: src/translations.h:169
+#: src/translations.h:173
 msgid "Actual Time"
 msgstr "Поточний час"
 
-#: src/translations.h:170
+#: src/translations.h:174
 msgid "Preset Time"
 msgstr "Заданий час"
 
-#: src/translations.h:171
+#: src/translations.h:175
 msgid "Time Display Format: "
 msgstr "Формат відображення часу: "
 
-#: src/translations.h:172
+#: src/translations.h:176
 msgid "Date Display Format: "
 msgstr "Формат показу дати: "
 
-#: src/translations.h:174
+#: src/translations.h:178
 msgid "Sky Culture: "
 msgstr "Схема назв: "
 
-#: src/translations.h:175
+#: src/translations.h:179
 msgid "Sky Language: "
 msgstr "Назви небесних об’єктів: "
 
-#: src/translations.h:177
+#: src/translations.h:181
 msgid "Show: "
 msgstr "Показ: "
 
-#: src/translations.h:178
+#: src/translations.h:182
 msgid "Star Value Multiplier: "
 msgstr "Коефіцієнт підсилення зірок: "
 
-#: src/translations.h:179
+#: src/translations.h:183
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Множник зміни величини: "
 
-#: src/translations.h:180
+#: src/translations.h:184
 msgid "Maximum Magnitude to Label: "
 msgstr "Максимальна величина для напису: "
 
-#: src/translations.h:181
+#: src/translations.h:185
 msgid "Twinkling: "
 msgstr "Мерехтіння: "
 
-#: src/translations.h:182
+#: src/translations.h:186
 msgid "Limiting Magnitude: "
 msgstr "Максимальна величина: "
 
-#: src/translations.h:184
+#: src/translations.h:188
 msgid "Constellation Lines"
 msgstr "Лінії сузір'їв"
 
-#: src/translations.h:185
+#: src/translations.h:189
 msgid "Constellation Names"
 msgstr "Назви сузір'їв"
 
-#: src/translations.h:186
+#: src/translations.h:190
 msgid "Constellation Art Intensity"
 msgstr "Яскравість зображень сузір'їв"
 
-#: src/translations.h:187
+#: src/translations.h:191
 msgid "Constellation Boundaries"
 msgstr "Межі сузір'їв"
 
-#: src/translations.h:188
+#: src/translations.h:192
 msgid "Cardinal Points"
 msgstr "Сторони світу"
 
-#: src/translations.h:189
+#: src/translations.h:193
 msgid "Planet Names"
 msgstr "Назви планет"
 
-#: src/translations.h:190
+#: src/translations.h:194
 msgid "Planet Orbits"
 msgstr "Орбіти планет"
 
-#: src/translations.h:191
+#: src/translations.h:195
 msgid "Planet Trails"
 msgstr "Сліди від планет"
 
-#: src/translations.h:192
+#: src/translations.h:196
 msgid "Meridian Line"
 msgstr "Лінія меридіана"
 
-#: src/translations.h:193
+#: src/translations.h:197
 msgid "Azimuthal Grid"
 msgstr "Азимутальна сітка"
 
-#: src/translations.h:194
+#: src/translations.h:198
 msgid "Equatorial Grid"
 msgstr "Екваторіальна сітка"
 
-#: src/translations.h:195
+#: src/translations.h:199
 msgid "Equator Line"
 msgstr "Лінія екватора"
 
-#: src/translations.h:196
+#: src/translations.h:200
 msgid "Ecliptic Line"
 msgstr "Лінія екліптики"
 
-#: src/translations.h:197
+#: src/translations.h:201
 msgid "Nebula Names"
 msgstr "Назви туманностей"
 
-#: src/translations.h:198
+#: src/translations.h:202
 msgid "Nebula Circles"
 msgstr "Кільця туманностей"
 
-#: src/translations.h:200
+#: src/translations.h:204
 msgid "Light Pollution Luminance: "
 msgstr "Яскравість світлового забруднення: "
 
-#: src/translations.h:201
+#: src/translations.h:205
 msgid "Landscape: "
 msgstr "Ландшафт: "
 
-#: src/translations.h:202
+#: src/translations.h:206
 msgid "Manual zoom: "
 msgstr "Ручний масштаб: "
 
-#: src/translations.h:203
+#: src/translations.h:207
 msgid "Object Sizing Rule: "
 msgstr "Правило зміни розміру об'єкту: "
 
-#: src/translations.h:204
+#: src/translations.h:208
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Множник масштабування величин: "
 
-#: src/translations.h:205
+#: src/translations.h:209
 msgid "Milky Way intensity: "
 msgstr "Інтенсивність Молочного шляху: "
 
-#: src/translations.h:206
+#: src/translations.h:210
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Максимальна величина туманності для напису: "
 
-#: src/translations.h:207
+#: src/translations.h:211
 msgid "Zoom Duration: "
 msgstr "Тривалість зміни масштабу: "
 
-#: src/translations.h:208
+#: src/translations.h:212
 msgid "Cursor Timeout: "
 msgstr "Затримка курсора: "
 
-#: src/translations.h:209
+#: src/translations.h:213
 msgid "Correct for light travel time: "
 msgstr "Корекція на час поширення світла: "
 
-#: src/translations.h:211
+#: src/translations.h:215
 msgid "Local Script: "
 msgstr "Локальний скрипт: "
 
-#: src/translations.h:212
+#: src/translations.h:216
 msgid "CD/DVD Script: "
 msgstr "Скрипт CD/DVD: "
 
-#: src/translations.h:213
+#: src/translations.h:217
 msgid "USB Script: "
 msgstr "USB-скрипт: "
 
-#: src/translations.h:214
+#: src/translations.h:218
 msgid "Arrow down to load list."
 msgstr "Натисніть стрілку донизу для завантаження списку."
 
-#: src/translations.h:215
+#: src/translations.h:219
 msgid "Select and exit to run."
 msgstr "Вибрати та вийти для перезапуску."
 
-#: src/translations.h:217
+#: src/translations.h:221
 msgid "Load Default Configuration: "
 msgstr "Завантажити типові налаштування: "
 
-#: src/translations.h:218
+#: src/translations.h:222
 msgid "Save Current Configuration as Default: "
 msgstr "Зберегти поточні налаштування як типові: "
 
-#: src/translations.h:219
+#: src/translations.h:223
 msgid "Shut Down: "
 msgstr "Завершення роботи: "
 
-#: src/translations.h:220
+#: src/translations.h:224
 msgid "Update me via Internet: "
 msgstr "Оновити мене через Інтернет: "
 
-#: src/translations.h:221
+#: src/translations.h:225
 msgid "Set UI Locale: "
 msgstr "Встановити локаль інтерфейсу: "
 

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-11 18:20+0700\n"
+"POT-Creation-Date: 2011-07-25 18:49+0700\n"
 "PO-Revision-Date: 2011-07-09 13:37+0000\n"
 "Last-Translator: Xiaomao Chen <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-22 04:38+0000\n"
+"X-Launchpad-Export-Date: 2011-07-26 04:36+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
@@ -268,50 +268,50 @@ msgstr "方位角/高度角: %1/%2"
 msgid "Select screenshot directory"
 msgstr "选择储存截图资料夹"
 
-#: src/gui/ConfigurationDialog.cpp:461
+#: src/gui/ConfigurationDialog.cpp:462
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "启动时的视角: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:469
+#: src/gui/ConfigurationDialog.cpp:470
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "启动时的地平坐标方位角/高度角: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:509
+#: src/gui/ConfigurationDialog.cpp:510
 msgid "Authors"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:513 src/gui/ViewDialog.cpp:368
+#: src/gui/ConfigurationDialog.cpp:514 src/gui/ViewDialog.cpp:368
 msgid "Contact"
 msgstr "联系信息"
 
-#: src/gui/ConfigurationDialog.cpp:585
+#: src/gui/ConfigurationDialog.cpp:586
 msgid "Author"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:586
+#: src/gui/ConfigurationDialog.cpp:587
 msgid "License"
 msgstr "授权条款"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:616
 msgid "Running script: "
 msgstr "执行指令： "
 
-#: src/gui/ConfigurationDialog.cpp:622
+#: src/gui/ConfigurationDialog.cpp:623
 msgid "Running script: [none]"
 msgstr "执行指令：[空白]"
 
-#: src/gui/ConfigurationDialog.cpp:665
+#: src/gui/ConfigurationDialog.cpp:666
 msgid "Finished downloading all star catalogs!"
 msgstr "下载恒星名录完成!"
 
-#: src/gui/ConfigurationDialog.cpp:674
+#: src/gui/ConfigurationDialog.cpp:675
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "在 %2 中取后 %1 目录"
 
-#: src/gui/ConfigurationDialog.cpp:676
+#: src/gui/ConfigurationDialog.cpp:677
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -322,7 +322,7 @@ msgstr ""
 "恒星数量: %2 百万\n"
 "星等范围: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:685
+#: src/gui/ConfigurationDialog.cpp:686
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -330,7 +330,7 @@ msgstr ""
 "新的恒星目录经已下载完毕！\n"
 "请重新启动 Stellarium 以使用新的目录。"
 
-#: src/gui/ConfigurationDialog.cpp:723 src/gui/ConfigurationDialog.cpp:757
+#: src/gui/ConfigurationDialog.cpp:724 src/gui/ConfigurationDialog.cpp:758
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -339,7 +339,7 @@ msgstr ""
 "在下载 %1 时发生了错误：\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:728
+#: src/gui/ConfigurationDialog.cpp:729
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -348,11 +348,11 @@ msgstr ""
 "下载中 %1\n"
 "您可以关闭此窗口"
 
-#: src/gui/ConfigurationDialog.cpp:808
+#: src/gui/ConfigurationDialog.cpp:809
 msgid "Verifying file integrity..."
 msgstr "正在校验文件..."
 
-#: src/gui/ConfigurationDialog.cpp:812
+#: src/gui/ConfigurationDialog.cpp:813
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -361,8 +361,8 @@ msgstr ""
 "在下载 %1 时发生了错误：\n"
 "文件被损坏。"
 
-#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:285
-#: src/gui/StelGuiItems.cpp:640
+#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:286
+#: src/gui/StelGuiItems.cpp:656
 msgid "Space"
 msgstr "空格键"
 
@@ -771,7 +771,7 @@ msgstr "自动隐藏垂直工具栏"
 msgid "Toggle visibility of GUI"
 msgstr "显示/隐藏工具栏"
 
-#: src/gui/StelGuiItems.cpp:541
+#: src/gui/StelGuiItems.cpp:542
 #, no-c-format, qt-format
 msgid "%1m"
 msgstr "%1 米"
@@ -879,7 +879,7 @@ msgstr "指定的地景（%1）已存在于列表中。"
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "您可以通过手动删除文件夹 %1 来移除此地景。"
 
-#: src/main.cpp:335
+#: src/main.cpp:336
 msgid "This system does not support OpenGL."
 msgstr "您的系统不支持 OpenGL"
 
@@ -996,7 +996,7 @@ msgid "Adrastea"
 msgstr "木卫十五(Adrastea)"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:106
+#: src/translations.h:61 src/translations.h:110
 msgid "Metis"
 msgstr "颖神星(小行星9号)"
 
@@ -1076,455 +1076,465 @@ msgstr "冥王星"
 msgid "Charon"
 msgstr "冥卫一(卡戎)"
 
-#: src/translations.h:81
+#. TRANSLATORS: Moon of Pluto (II)
+#: src/translations.h:82
+msgid "Nix"
+msgstr ""
+
+#. TRANSLATORS: Moon of Pluto (III)
+#: src/translations.h:84
+msgid "Hydra"
+msgstr "长蛇座"
+
+#: src/translations.h:85
 msgid "Eris"
 msgstr "阋神星"
 
-#: src/translations.h:82
+#: src/translations.h:86
 msgid "Triton"
 msgstr "海卫一"
 
-#: src/translations.h:83
+#: src/translations.h:87
 msgid "Nereid"
 msgstr "海卫二"
 
-#: src/translations.h:84
+#: src/translations.h:88
 msgid "Naiad"
 msgstr "海卫三"
 
-#: src/translations.h:85
+#: src/translations.h:89
 msgid "Thalassa"
 msgstr "海卫四"
 
-#: src/translations.h:86
+#: src/translations.h:90
 msgid "Despina"
 msgstr "海卫五"
 
-#: src/translations.h:87
+#: src/translations.h:91
 msgid "Galatea"
 msgstr "海卫六"
 
-#: src/translations.h:88
+#: src/translations.h:92
 msgid "Larissa"
 msgstr "海卫七"
 
-#: src/translations.h:89
+#: src/translations.h:93
 msgid "Proteus"
 msgstr "海卫八"
 
-#: src/translations.h:90
+#: src/translations.h:94
 msgid "Halimede"
 msgstr "海卫九"
 
-#: src/translations.h:91
+#: src/translations.h:95
 msgid "Psamathe"
 msgstr "海卫十"
 
-#: src/translations.h:92
+#: src/translations.h:96
 msgid "Sao"
 msgstr "海卫十一"
 
-#: src/translations.h:93
+#: src/translations.h:97
 msgid "Laomedeia"
 msgstr "海卫十二"
 
-#: src/translations.h:94
+#: src/translations.h:98
 msgid "Neso"
 msgstr "海卫十三"
 
-#: src/translations.h:95
+#: src/translations.h:99
 msgid "Solar System Observer"
 msgstr "太阳系全览点"
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:98
+#: src/translations.h:102
 msgid "Astraea"
 msgstr "义神星(小行星5号)"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:100
+#: src/translations.h:104
 msgid "Hebe"
 msgstr "韶神星(小行星6号)"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:102
+#: src/translations.h:106
 msgid "Iris"
 msgstr "虹神星(小行星7号)"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:104
+#: src/translations.h:108
 msgid "Flora"
 msgstr "花神星(小行星8号)"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:108
+#: src/translations.h:112
 msgid "Hygiea"
 msgstr "健神星(小行星10号)"
 
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:110
+#: src/translations.h:114
 msgid "Amor"
 msgstr "阿莫尔(小行星1221号)"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:112
+#: src/translations.h:116
 msgid "Apophis"
 msgstr "阿波菲斯(小行星99942号)"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:114
+#: src/translations.h:118
 msgid "Chiron"
 msgstr "喀戎星(小行星2060号)"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:116
+#: src/translations.h:120
 msgid "Eros"
 msgstr "爱神星(小行星433号)"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:118
+#: src/translations.h:122
 msgid "Hektor"
 msgstr "赫克托(小行星624号)"
 
 #. TRANSLATORS: Name of supernova SN 1572A
-#: src/translations.h:120
+#: src/translations.h:124
 msgid "Tycho's Supernova"
 msgstr "SN 1572A"
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: src/translations.h:122
+#: src/translations.h:126
 msgid "Kepler's Supernova"
 msgstr "SN 1604A"
 
-#: src/translations.h:126
+#: src/translations.h:130
 msgid "N"
 msgstr "北"
 
-#: src/translations.h:127
+#: src/translations.h:131
 msgid "S"
 msgstr "南"
 
-#: src/translations.h:128
+#: src/translations.h:132
 msgid "E"
 msgstr "东"
 
-#: src/translations.h:129
+#: src/translations.h:133
 msgid "W"
 msgstr "西"
 
-#: src/translations.h:132
+#: src/translations.h:136
 msgid "Aztec"
 msgstr "阿兹特克"
 
-#: src/translations.h:133
+#: src/translations.h:137
 msgid "Chinese"
 msgstr "中国"
 
-#: src/translations.h:134
+#: src/translations.h:138
 msgid "Egyptian"
 msgstr "埃及"
 
-#: src/translations.h:135
+#: src/translations.h:139
 msgid "Inuit"
 msgstr "因纽特(爱斯基摩)"
 
-#: src/translations.h:136
+#: src/translations.h:140
 msgid "Korean"
 msgstr "韩语"
 
-#: src/translations.h:137
+#: src/translations.h:141
 msgid "Lakota"
 msgstr "拉科塔"
 
-#: src/translations.h:138
+#: src/translations.h:142
 msgid "Maori"
 msgstr "毛利"
 
-#: src/translations.h:139
+#: src/translations.h:143
 msgid "Navajo"
 msgstr "纳瓦霍"
 
-#: src/translations.h:140
+#: src/translations.h:144
 msgid "Norse"
 msgstr "挪威"
 
-#: src/translations.h:141
+#: src/translations.h:145
 msgid "Polynesian"
 msgstr "波利尼西亚"
 
-#: src/translations.h:142
+#: src/translations.h:146
 msgid "Sami"
 msgstr "萨米"
 
-#: src/translations.h:143
+#: src/translations.h:147
 msgid "Tupi-Guarani"
 msgstr "图皮-瓜拉尼"
 
-#: src/translations.h:144
+#: src/translations.h:148
 msgid "Western"
 msgstr "西方"
 
-#: src/translations.h:148
+#: src/translations.h:152
 msgid "Set Location "
 msgstr "设置当前地点 "
 
-#: src/translations.h:149
+#: src/translations.h:153
 msgid "Set Time "
 msgstr "时间设置 "
 
-#: src/translations.h:150
+#: src/translations.h:154
 msgid "General "
 msgstr "一般设置 "
 
-#: src/translations.h:151
+#: src/translations.h:155
 msgid "Stars "
 msgstr "恒星 "
 
-#: src/translations.h:152
+#: src/translations.h:156
 msgid "Colors "
 msgstr "颜色 "
 
-#: src/translations.h:153
+#: src/translations.h:157
 msgid "Effects "
 msgstr "效果 "
 
-#: src/translations.h:154
+#: src/translations.h:158
 msgid "Scripts "
 msgstr "脚本 "
 
-#: src/translations.h:155
+#: src/translations.h:159
 msgid "Administration "
 msgstr "管理设定 "
 
-#: src/translations.h:157
+#: src/translations.h:161
 msgid "Latitude: "
 msgstr "纬度: "
 
-#: src/translations.h:158
+#: src/translations.h:162
 msgid "Longitude: "
 msgstr "经度: "
 
-#: src/translations.h:159
+#: src/translations.h:163
 msgid "Altitude (m): "
 msgstr "海拔(米): "
 
-#: src/translations.h:160
+#: src/translations.h:164
 msgid "Solar System Body: "
 msgstr "太阳系天体: "
 
-#: src/translations.h:162
+#: src/translations.h:166
 msgid "Sky Time: "
 msgstr "星空时间: "
 
-#: src/translations.h:163
+#: src/translations.h:167
 msgid "Set Time Zone: "
 msgstr "时区设置: "
 
-#: src/translations.h:164
+#: src/translations.h:168
 msgid "Day keys: "
 msgstr "时间定义: "
 
-#: src/translations.h:165
+#: src/translations.h:169
 msgid "Calendar"
 msgstr "日历"
 
-#: src/translations.h:166
+#: src/translations.h:170
 msgid "Sidereal"
 msgstr "恒星"
 
-#: src/translations.h:167
+#: src/translations.h:171
 msgid "Preset Sky Time: "
 msgstr "当前星空时间： "
 
-#: src/translations.h:168
+#: src/translations.h:172
 msgid "Sky Time At Start-up: "
 msgstr "启动时的星空时间: "
 
-#: src/translations.h:169
+#: src/translations.h:173
 msgid "Actual Time"
 msgstr "实际时间"
 
-#: src/translations.h:170
+#: src/translations.h:174
 msgid "Preset Time"
 msgstr "预设时间"
 
-#: src/translations.h:171
+#: src/translations.h:175
 msgid "Time Display Format: "
 msgstr "时间显示格式: "
 
-#: src/translations.h:172
+#: src/translations.h:176
 msgid "Date Display Format: "
 msgstr "日期显示格式: "
 
-#: src/translations.h:174
+#: src/translations.h:178
 msgid "Sky Culture: "
 msgstr "星空文化: "
 
-#: src/translations.h:175
+#: src/translations.h:179
 msgid "Sky Language: "
 msgstr "天文术语： "
 
-#: src/translations.h:177
+#: src/translations.h:181
 msgid "Show: "
 msgstr "显示: "
 
-#: src/translations.h:178
+#: src/translations.h:182
 msgid "Star Value Multiplier: "
 msgstr "星体值倍数： "
 
-#: src/translations.h:179
+#: src/translations.h:183
 msgid "Magnitude Sizing Multiplier: "
 msgstr "星等成像加成: "
 
-#: src/translations.h:180
+#: src/translations.h:184
 msgid "Maximum Magnitude to Label: "
 msgstr "显示星名的最暗星等: "
 
-#: src/translations.h:181
+#: src/translations.h:185
 msgid "Twinkling: "
 msgstr "闪烁： "
 
-#: src/translations.h:182
+#: src/translations.h:186
 msgid "Limiting Magnitude: "
 msgstr "星等限制: "
 
-#: src/translations.h:184
+#: src/translations.h:188
 msgid "Constellation Lines"
 msgstr "星座连线"
 
-#: src/translations.h:185
+#: src/translations.h:189
 msgid "Constellation Names"
 msgstr "星座名称"
 
-#: src/translations.h:186
+#: src/translations.h:190
 msgid "Constellation Art Intensity"
 msgstr "星座图象亮度"
 
-#: src/translations.h:187
+#: src/translations.h:191
 msgid "Constellation Boundaries"
 msgstr "星座界线"
 
-#: src/translations.h:188
+#: src/translations.h:192
 msgid "Cardinal Points"
 msgstr "方位座标"
 
-#: src/translations.h:189
+#: src/translations.h:193
 msgid "Planet Names"
 msgstr "行星名称"
 
-#: src/translations.h:190
+#: src/translations.h:194
 msgid "Planet Orbits"
 msgstr "行星规道"
 
-#: src/translations.h:191
+#: src/translations.h:195
 msgid "Planet Trails"
 msgstr "行星轨迹"
 
-#: src/translations.h:192
+#: src/translations.h:196
 msgid "Meridian Line"
 msgstr "子午线"
 
-#: src/translations.h:193
+#: src/translations.h:197
 msgid "Azimuthal Grid"
 msgstr "天球方位系统"
 
-#: src/translations.h:194
+#: src/translations.h:198
 msgid "Equatorial Grid"
 msgstr "赤道坐标网格"
 
-#: src/translations.h:195
+#: src/translations.h:199
 msgid "Equator Line"
 msgstr "赤道"
 
-#: src/translations.h:196
+#: src/translations.h:200
 msgid "Ecliptic Line"
 msgstr "黄道"
 
-#: src/translations.h:197
+#: src/translations.h:201
 msgid "Nebula Names"
 msgstr "星云名称"
 
-#: src/translations.h:198
+#: src/translations.h:202
 msgid "Nebula Circles"
 msgstr "星云标记"
 
-#: src/translations.h:200
+#: src/translations.h:204
 msgid "Light Pollution Luminance: "
 msgstr "光污染程度: "
 
-#: src/translations.h:201
+#: src/translations.h:205
 msgid "Landscape: "
 msgstr "地貌： "
 
-#: src/translations.h:202
+#: src/translations.h:206
 msgid "Manual zoom: "
 msgstr "手动缩放: "
 
-#: src/translations.h:203
+#: src/translations.h:207
 msgid "Object Sizing Rule: "
 msgstr "天体放缩规则： "
 
-#: src/translations.h:204
+#: src/translations.h:208
 msgid "Magnitude Scaling Multiplier: "
 msgstr "星等放大倍数： "
 
-#: src/translations.h:205
+#: src/translations.h:209
 msgid "Milky Way intensity: "
 msgstr "银河亮度： "
 
-#: src/translations.h:206
+#: src/translations.h:210
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "显示星云名称的最暗星等: "
 
-#: src/translations.h:207
+#: src/translations.h:211
 msgid "Zoom Duration: "
 msgstr "缩放持续时间: "
 
-#: src/translations.h:208
+#: src/translations.h:212
 msgid "Cursor Timeout: "
 msgstr "光标自动隐藏延时: "
 
-#: src/translations.h:209
+#: src/translations.h:213
 msgid "Correct for light travel time: "
 msgstr "光行进时间修正： "
 
-#: src/translations.h:211
+#: src/translations.h:215
 msgid "Local Script: "
 msgstr "本地脚本: "
 
-#: src/translations.h:212
+#: src/translations.h:216
 msgid "CD/DVD Script: "
 msgstr "CD/DVD 脚本: "
 
-#: src/translations.h:213
+#: src/translations.h:217
 msgid "USB Script: "
 msgstr "USB 脚本: "
 
-#: src/translations.h:214
+#: src/translations.h:218
 msgid "Arrow down to load list."
 msgstr "按向下键以载入列表"
 
-#: src/translations.h:215
+#: src/translations.h:219
 msgid "Select and exit to run."
 msgstr "选择并在退出后运行"
 
-#: src/translations.h:217
+#: src/translations.h:221
 msgid "Load Default Configuration: "
 msgstr "载入默认设置: "
 
-#: src/translations.h:218
+#: src/translations.h:222
 msgid "Save Current Configuration as Default: "
 msgstr "将当前设置保存为默认： "
 
-#: src/translations.h:219
+#: src/translations.h:223
 msgid "Shut Down: "
 msgstr "关闭程序: "
 
-#: src/translations.h:220
+#: src/translations.h:224
 msgid "Update me via Internet: "
 msgstr "在线更新: "
 
-#: src/translations.h:221
+#: src/translations.h:225
 msgid "Set UI Locale: "
 msgstr "设置界面语言： "
 
