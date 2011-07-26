@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-11 18:20+0700\n"
+"POT-Creation-Date: 2011-07-25 18:49+0700\n"
 "PO-Revision-Date: 2010-12-28 08:45+0000\n"
 "Last-Translator: Sujay Patankar <Unknown>\n"
 "Language-Team: Marathi <mr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-22 04:36+0000\n"
+"X-Launchpad-Export-Date: 2011-07-26 04:34+0000\n"
 "X-Generator: Launchpad (build 13405)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
@@ -288,50 +288,50 @@ msgstr "दिगंश/उन्न्तांश: %1/%2"
 msgid "Select screenshot directory"
 msgstr "पटलचित्र संचिका निवडा"
 
-#: src/gui/ConfigurationDialog.cpp:461
+#: src/gui/ConfigurationDialog.cpp:462
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "सुरु होतांनाचे दृष्टीक्षेत्र: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:469
+#: src/gui/ConfigurationDialog.cpp:470
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "सुरु होतांनाच्या दिगंश/उन्न्तांशची दिशा: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:509
+#: src/gui/ConfigurationDialog.cpp:510
 msgid "Authors"
 msgstr "लेखक"
 
-#: src/gui/ConfigurationDialog.cpp:513 src/gui/ViewDialog.cpp:368
+#: src/gui/ConfigurationDialog.cpp:514 src/gui/ViewDialog.cpp:368
 msgid "Contact"
 msgstr "संपर्क"
 
-#: src/gui/ConfigurationDialog.cpp:585
+#: src/gui/ConfigurationDialog.cpp:586
 msgid "Author"
 msgstr "लेखक"
 
-#: src/gui/ConfigurationDialog.cpp:586
+#: src/gui/ConfigurationDialog.cpp:587
 msgid "License"
 msgstr "परवाना"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:616
 msgid "Running script: "
 msgstr "आज्ञावली सुरू: "
 
-#: src/gui/ConfigurationDialog.cpp:622
+#: src/gui/ConfigurationDialog.cpp:623
 msgid "Running script: [none]"
 msgstr "आज्ञावली सुरु: [नाही]"
 
-#: src/gui/ConfigurationDialog.cpp:665
+#: src/gui/ConfigurationDialog.cpp:666
 msgid "Finished downloading all star catalogs!"
 msgstr "सर्व तारकासुची डाउनलोड झाल्या आहेत!"
 
-#: src/gui/ConfigurationDialog.cpp:674
+#: src/gui/ConfigurationDialog.cpp:675
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%2  पैकी %1 वी सूची मिळवा"
 
-#: src/gui/ConfigurationDialog.cpp:676
+#: src/gui/ConfigurationDialog.cpp:677
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -342,7 +342,7 @@ msgstr ""
 "एकुण तारे: %2 Million\n"
 "प्रकाशप्रत आवक : %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:685
+#: src/gui/ConfigurationDialog.cpp:686
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -350,7 +350,7 @@ msgstr ""
 "नवीन तारकासुची डाउनलोड झाली आहे!\n"
 "ती पाहण्यासाठी स्टेलेरीअम पुन्हा सुरु करा."
 
-#: src/gui/ConfigurationDialog.cpp:723 src/gui/ConfigurationDialog.cpp:757
+#: src/gui/ConfigurationDialog.cpp:724 src/gui/ConfigurationDialog.cpp:758
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -359,7 +359,7 @@ msgstr ""
 "%1:\n"
 "उतरवून घेण्यात तृटी%2"
 
-#: src/gui/ConfigurationDialog.cpp:728
+#: src/gui/ConfigurationDialog.cpp:729
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -368,11 +368,11 @@ msgstr ""
 "%1... उतरवून घेतले जात आहेत\n"
 "(तुम्ही ही खिडकी बंद करू शकता.)"
 
-#: src/gui/ConfigurationDialog.cpp:808
+#: src/gui/ConfigurationDialog.cpp:809
 msgid "Verifying file integrity..."
 msgstr "फाइलची एकात्मता तपासली जात आहे...."
 
-#: src/gui/ConfigurationDialog.cpp:812
+#: src/gui/ConfigurationDialog.cpp:813
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -381,8 +381,8 @@ msgstr ""
 "%1:\n"
 " उतरवून घेण्यात तृटीफाइल खराब आहे."
 
-#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:285
-#: src/gui/StelGuiItems.cpp:640
+#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:286
+#: src/gui/StelGuiItems.cpp:656
 msgid "Space"
 msgstr "स्पेस"
 
@@ -800,7 +800,7 @@ msgstr "उभी कळ पट्टी स्वत:हून लपवा"
 msgid "Toggle visibility of GUI"
 msgstr "पडद्यावरील आकृत्य़ांची दृष्यमानता बदला"
 
-#: src/gui/StelGuiItems.cpp:541
+#: src/gui/StelGuiItems.cpp:542
 #, no-c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
@@ -908,7 +908,7 @@ msgstr ""
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr ""
 
-#: src/main.cpp:335
+#: src/main.cpp:336
 msgid "This system does not support OpenGL."
 msgstr "हा संगणक ओपनजीएल कार्यप्रणालीशी सुसंगत नाही."
 
@@ -1025,7 +1025,7 @@ msgid "Adrastea"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:106
+#: src/translations.h:61 src/translations.h:110
 msgid "Metis"
 msgstr "मेटिस"
 
@@ -1105,455 +1105,465 @@ msgstr "प्लुटो"
 msgid "Charon"
 msgstr "चेरॉन"
 
-#: src/translations.h:81
-msgid "Eris"
-msgstr "एरिस"
-
+#. TRANSLATORS: Moon of Pluto (II)
 #: src/translations.h:82
-msgid "Triton"
+msgid "Nix"
 msgstr ""
 
-#: src/translations.h:83
-msgid "Nereid"
-msgstr ""
-
+#. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
-msgid "Naiad"
+msgid "Hydra"
 msgstr ""
 
 #: src/translations.h:85
-msgid "Thalassa"
-msgstr ""
+msgid "Eris"
+msgstr "एरिस"
 
 #: src/translations.h:86
-msgid "Despina"
+msgid "Triton"
 msgstr ""
 
 #: src/translations.h:87
-msgid "Galatea"
+msgid "Nereid"
 msgstr ""
 
 #: src/translations.h:88
-msgid "Larissa"
+msgid "Naiad"
 msgstr ""
 
 #: src/translations.h:89
-msgid "Proteus"
+msgid "Thalassa"
 msgstr ""
 
 #: src/translations.h:90
-msgid "Halimede"
+msgid "Despina"
 msgstr ""
 
 #: src/translations.h:91
-msgid "Psamathe"
+msgid "Galatea"
 msgstr ""
 
 #: src/translations.h:92
-msgid "Sao"
+msgid "Larissa"
 msgstr ""
 
 #: src/translations.h:93
-msgid "Laomedeia"
+msgid "Proteus"
 msgstr ""
 
 #: src/translations.h:94
-msgid "Neso"
+msgid "Halimede"
 msgstr ""
 
 #: src/translations.h:95
+msgid "Psamathe"
+msgstr ""
+
+#: src/translations.h:96
+msgid "Sao"
+msgstr ""
+
+#: src/translations.h:97
+msgid "Laomedeia"
+msgstr ""
+
+#: src/translations.h:98
+msgid "Neso"
+msgstr ""
+
+#: src/translations.h:99
 msgid "Solar System Observer"
 msgstr "सूर्यमाला निरिक्षक"
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:98
+#: src/translations.h:102
 msgid "Astraea"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:100
+#: src/translations.h:104
 msgid "Hebe"
 msgstr "हेबे"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:102
+#: src/translations.h:106
 msgid "Iris"
 msgstr "आयरिस"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:104
+#: src/translations.h:108
 msgid "Flora"
 msgstr "फ्लोरा"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:108
+#: src/translations.h:112
 msgid "Hygiea"
 msgstr "हायजिया"
 
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:110
+#: src/translations.h:114
 msgid "Amor"
 msgstr "अमोर"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:112
+#: src/translations.h:116
 msgid "Apophis"
 msgstr "अपोफिस"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:114
+#: src/translations.h:118
 msgid "Chiron"
 msgstr "चिरॉन"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:116
+#: src/translations.h:120
 msgid "Eros"
 msgstr "इरॉस"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:118
+#: src/translations.h:122
 msgid "Hektor"
 msgstr "हेक्टर"
 
 #. TRANSLATORS: Name of supernova SN 1572A
-#: src/translations.h:120
+#: src/translations.h:124
 msgid "Tycho's Supernova"
 msgstr ""
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: src/translations.h:122
+#: src/translations.h:126
 msgid "Kepler's Supernova"
 msgstr ""
 
-#: src/translations.h:126
+#: src/translations.h:130
 msgid "N"
 msgstr "उ"
 
-#: src/translations.h:127
+#: src/translations.h:131
 msgid "S"
 msgstr "द"
 
-#: src/translations.h:128
+#: src/translations.h:132
 msgid "E"
 msgstr "पू"
 
-#: src/translations.h:129
+#: src/translations.h:133
 msgid "W"
 msgstr "प"
 
-#: src/translations.h:132
+#: src/translations.h:136
 msgid "Aztec"
 msgstr "अ‍ॅझटेक"
 
-#: src/translations.h:133
+#: src/translations.h:137
 msgid "Chinese"
 msgstr "चायनीज"
 
-#: src/translations.h:134
+#: src/translations.h:138
 msgid "Egyptian"
 msgstr "इजिप्शिअन"
 
-#: src/translations.h:135
+#: src/translations.h:139
 msgid "Inuit"
 msgstr "इन्युट"
 
-#: src/translations.h:136
+#: src/translations.h:140
 msgid "Korean"
 msgstr "कोरियन"
 
-#: src/translations.h:137
+#: src/translations.h:141
 msgid "Lakota"
 msgstr "लॅकोटा"
 
-#: src/translations.h:138
+#: src/translations.h:142
 msgid "Maori"
 msgstr "माओरी"
 
-#: src/translations.h:139
+#: src/translations.h:143
 msgid "Navajo"
 msgstr "नावाहो"
 
-#: src/translations.h:140
+#: src/translations.h:144
 msgid "Norse"
 msgstr "नॉर्स"
 
-#: src/translations.h:141
+#: src/translations.h:145
 msgid "Polynesian"
 msgstr "पॉलीनेशिअन"
 
-#: src/translations.h:142
+#: src/translations.h:146
 msgid "Sami"
 msgstr "सामी"
 
-#: src/translations.h:143
+#: src/translations.h:147
 msgid "Tupi-Guarani"
 msgstr "टुपी-ग्वारानी"
 
-#: src/translations.h:144
+#: src/translations.h:148
 msgid "Western"
 msgstr "पाश्चिमात्य"
 
-#: src/translations.h:148
+#: src/translations.h:152
 msgid "Set Location "
 msgstr "स्थान निश्चित करा "
 
-#: src/translations.h:149
+#: src/translations.h:153
 msgid "Set Time "
 msgstr "वेळ निर्धारीत करा "
 
-#: src/translations.h:150
+#: src/translations.h:154
 msgid "General "
 msgstr "सामान्य "
 
-#: src/translations.h:151
+#: src/translations.h:155
 msgid "Stars "
 msgstr "तारे "
 
-#: src/translations.h:152
+#: src/translations.h:156
 msgid "Colors "
 msgstr "रंग "
 
-#: src/translations.h:153
+#: src/translations.h:157
 msgid "Effects "
 msgstr "परिणाम "
 
-#: src/translations.h:154
+#: src/translations.h:158
 msgid "Scripts "
 msgstr "आज्ञावली "
 
-#: src/translations.h:155
+#: src/translations.h:159
 msgid "Administration "
 msgstr "व्यवस्थापन "
 
-#: src/translations.h:157
+#: src/translations.h:161
 msgid "Latitude: "
 msgstr "अक्षांश: "
 
-#: src/translations.h:158
+#: src/translations.h:162
 msgid "Longitude: "
 msgstr "रेखांश: "
 
-#: src/translations.h:159
+#: src/translations.h:163
 msgid "Altitude (m): "
 msgstr "उंची (m): "
 
-#: src/translations.h:160
+#: src/translations.h:164
 msgid "Solar System Body: "
 msgstr "सूर्यमालेतील वस्तू "
 
-#: src/translations.h:162
+#: src/translations.h:166
 msgid "Sky Time: "
 msgstr "अवकाश वेळ: "
 
-#: src/translations.h:163
+#: src/translations.h:167
 msgid "Set Time Zone: "
 msgstr "कालक्षेत्र निश्चित करा "
 
-#: src/translations.h:164
+#: src/translations.h:168
 msgid "Day keys: "
 msgstr "दिवस कळ: "
 
-#: src/translations.h:165
+#: src/translations.h:169
 msgid "Calendar"
 msgstr "दिनदर्शिका"
 
-#: src/translations.h:166
+#: src/translations.h:170
 msgid "Sidereal"
 msgstr "नाक्षत्रवर्ष"
 
-#: src/translations.h:167
+#: src/translations.h:171
 msgid "Preset Sky Time: "
 msgstr "पूर्वनिर्धारित अवकाश वेळ "
 
-#: src/translations.h:168
+#: src/translations.h:172
 msgid "Sky Time At Start-up: "
 msgstr "सुरुवात होतांनांची अवकाश वेळ: "
 
-#: src/translations.h:169
+#: src/translations.h:173
 msgid "Actual Time"
 msgstr "आताची वेळ"
 
-#: src/translations.h:170
+#: src/translations.h:174
 msgid "Preset Time"
 msgstr "पूर्वनिर्धारित वेळ"
 
-#: src/translations.h:171
+#: src/translations.h:175
 msgid "Time Display Format: "
 msgstr "वेळ दर्शविण्याची पद्धत: "
 
-#: src/translations.h:172
+#: src/translations.h:176
 msgid "Date Display Format: "
 msgstr "दिनांक दर्शविण्याची पद्धत: "
 
-#: src/translations.h:174
+#: src/translations.h:178
 msgid "Sky Culture: "
 msgstr "अवकाश संस्कृती "
 
-#: src/translations.h:175
+#: src/translations.h:179
 msgid "Sky Language: "
 msgstr "आकाशाची भाषा: "
 
-#: src/translations.h:177
+#: src/translations.h:181
 msgid "Show: "
 msgstr "दर्शवा: "
 
-#: src/translations.h:178
+#: src/translations.h:182
 msgid "Star Value Multiplier: "
 msgstr "तारकामूल्य गुणक: "
 
-#: src/translations.h:179
+#: src/translations.h:183
 msgid "Magnitude Sizing Multiplier: "
 msgstr "प्रत आकार गुणक: "
 
-#: src/translations.h:180
+#: src/translations.h:184
 msgid "Maximum Magnitude to Label: "
 msgstr "नाव दर्शविण्यासाठीची जास्तीत जास्त प्रत: "
 
-#: src/translations.h:181
+#: src/translations.h:185
 msgid "Twinkling: "
 msgstr "लुकलुकणारे: "
 
-#: src/translations.h:182
+#: src/translations.h:186
 msgid "Limiting Magnitude: "
 msgstr "नुसत्या डोळ्याने दिसणारी जास्तीत जास्त प्रत "
 
-#: src/translations.h:184
+#: src/translations.h:188
 msgid "Constellation Lines"
 msgstr "तारकापुंज रेषा"
 
-#: src/translations.h:185
+#: src/translations.h:189
 msgid "Constellation Names"
 msgstr "तारकापुंजाची नावे"
 
-#: src/translations.h:186
+#: src/translations.h:190
 msgid "Constellation Art Intensity"
 msgstr "ताराकापुंज चित्राची दीप्ती"
 
-#: src/translations.h:187
+#: src/translations.h:191
 msgid "Constellation Boundaries"
 msgstr "ताराकापुंज सीमा"
 
-#: src/translations.h:188
+#: src/translations.h:192
 msgid "Cardinal Points"
 msgstr "प्रमाणक बिंदू"
 
-#: src/translations.h:189
+#: src/translations.h:193
 msgid "Planet Names"
 msgstr "ग्रहांची नावे"
 
-#: src/translations.h:190
+#: src/translations.h:194
 msgid "Planet Orbits"
 msgstr "ग्रहांच्या कक्षा"
 
-#: src/translations.h:191
+#: src/translations.h:195
 msgid "Planet Trails"
 msgstr "ग्रहाची मागरेष"
 
-#: src/translations.h:192
+#: src/translations.h:196
 msgid "Meridian Line"
 msgstr "मध्यानवृत्त"
 
-#: src/translations.h:193
+#: src/translations.h:197
 msgid "Azimuthal Grid"
 msgstr "दिगंश"
 
-#: src/translations.h:194
+#: src/translations.h:198
 msgid "Equatorial Grid"
 msgstr "विषुवांश"
 
-#: src/translations.h:195
+#: src/translations.h:199
 msgid "Equator Line"
 msgstr "विषुववृत्त रेषा"
 
-#: src/translations.h:196
+#: src/translations.h:200
 msgid "Ecliptic Line"
 msgstr "अयनवृत्त"
 
-#: src/translations.h:197
+#: src/translations.h:201
 msgid "Nebula Names"
 msgstr "तेजोमेघाचे नाव"
 
-#: src/translations.h:198
+#: src/translations.h:202
 msgid "Nebula Circles"
 msgstr "तेजोमेघ वर्तृळ"
 
-#: src/translations.h:200
+#: src/translations.h:204
 msgid "Light Pollution Luminance: "
 msgstr "प्रकाश प्रदूषण दिप्ती: "
 
-#: src/translations.h:201
+#: src/translations.h:205
 msgid "Landscape: "
 msgstr "देखावा: "
 
-#: src/translations.h:202
+#: src/translations.h:206
 msgid "Manual zoom: "
 msgstr "स्वहस्ते निकटन/दुरावलोकन: "
 
-#: src/translations.h:203
+#: src/translations.h:207
 msgid "Object Sizing Rule: "
 msgstr "वस्तूचा आकार ठरविण्याचे नियम "
 
-#: src/translations.h:204
+#: src/translations.h:208
 msgid "Magnitude Scaling Multiplier: "
 msgstr "प्रत कमीजास्त करण्याचा गुणक "
 
-#: src/translations.h:205
+#: src/translations.h:209
 msgid "Milky Way intensity: "
 msgstr "आकाशगंगेची दीप्ती: "
 
-#: src/translations.h:206
+#: src/translations.h:210
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "तेजोमेघाचे नाव दर्शविण्यासाठीची जास्तीत जास्त प्रत: "
 
-#: src/translations.h:207
+#: src/translations.h:211
 msgid "Zoom Duration: "
 msgstr "चित्र मोठे करण्याचा काल: "
 
-#: src/translations.h:208
+#: src/translations.h:212
 msgid "Cursor Timeout: "
 msgstr "कर्सर वेळमर्यादा: "
 
-#: src/translations.h:209
+#: src/translations.h:213
 msgid "Correct for light travel time: "
 msgstr "प्रकाशाच्या मार्गक्रमणाचा वेळ ध्यानात घेवून दुरुस्ती करा: "
 
-#: src/translations.h:211
+#: src/translations.h:215
 msgid "Local Script: "
 msgstr "स्थानिक आज्ञावली: "
 
-#: src/translations.h:212
+#: src/translations.h:216
 msgid "CD/DVD Script: "
 msgstr "सीडी/ डीव्हीडी आज्ञावली: "
 
-#: src/translations.h:213
+#: src/translations.h:217
 msgid "USB Script: "
 msgstr "यू एस बी आज्ञावली: "
 
-#: src/translations.h:214
+#: src/translations.h:218
 msgid "Arrow down to load list."
 msgstr "यादी भरण्यासासाठी  खालच्या दिशेची कळ दाबा."
 
-#: src/translations.h:215
+#: src/translations.h:219
 msgid "Select and exit to run."
 msgstr "सुरू करण्यासाठी निवडा व बाहेर पडा."
 
-#: src/translations.h:217
+#: src/translations.h:221
 msgid "Load Default Configuration: "
 msgstr "मूळ संरचना भरा: "
 
-#: src/translations.h:218
+#: src/translations.h:222
 msgid "Save Current Configuration as Default: "
 msgstr "सध्याची संरचना मूळ म्हणून साठवा: "
 
-#: src/translations.h:219
+#: src/translations.h:223
 msgid "Shut Down: "
 msgstr "बंद करा: "
 
-#: src/translations.h:220
+#: src/translations.h:224
 msgid "Update me via Internet: "
 msgstr "इंटरनेटद्वारे अद्यायावत करा: "
 
-#: src/translations.h:221
+#: src/translations.h:225
 msgid "Set UI Locale: "
 msgstr "UI Locale निश्चित करा: "
 
