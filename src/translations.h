@@ -133,6 +133,7 @@ class Translations
 		N_("W");	// West
 
 		// Constellation cultures
+		N_("Arabic");
 		N_("Aztec");
 		N_("Chinese");
 		N_("Egyptian");
