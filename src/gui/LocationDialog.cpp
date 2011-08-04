@@ -302,6 +302,8 @@ void LocationDialog::spinBoxChanged(int )
 	reportEdit();
 	StelLocation loc = locationFromFields();
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
+	//Update the position of the map pointer
+	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
 }
 
 // Called when the location name is manually changed
