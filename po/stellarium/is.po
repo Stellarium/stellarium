@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 090410-lp_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-25 18:49+0700\n"
+"POT-Creation-Date: 2011-08-04 16:40+0300\n"
 "PO-Revision-Date: 2011-07-05 14:25+0000\n"
 "Last-Translator: Sverrir Gudmundsson <Unknown>\n"
 "Language-Team: icelandic <kde-isl@molar.is>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:34+0000\n"
-"X-Generator: Launchpad (build 13405)\n"
+"X-Launchpad-Export-Date: 2011-08-05 04:33+0000\n"
+"X-Generator: Launchpad (build 13604)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -822,7 +822,7 @@ msgstr "Óvenju há tíðni Leoníta"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Hæsta tíðni (Leonítadrífan 1966)"
 
-#: src/gui/LocationDialog.cpp:334
+#: src/gui/LocationDialog.cpp:336
 msgid "New Location"
 msgstr "Ný staðsetning"
 
@@ -2281,26 +2281,22 @@ msgstr ""
 "Þessi aðgerð er óafturkræf."
 
 #: src/ui_AtmosphereDialog.h:167
-msgid "Dialog"
-msgstr "Samskiptagluggi"
-
-#: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
 msgstr "Smáatriði í lofthjúpi"
 
-#: src/ui_AtmosphereDialog.h:170
+#: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
 msgstr "Stillingar ljósbrots"
 
-#: src/ui_AtmosphereDialog.h:171
+#: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
 msgstr "Þrýstingur (mbar):"
 
-#: src/ui_AtmosphereDialog.h:172
+#: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
 msgstr "Hitastig (C):"
 
-#: src/ui_AtmosphereDialog.h:177
+#: src/ui_AtmosphereDialog.h:176
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
@@ -2312,11 +2308,11 @@ msgstr ""
 "lofthjúpinn. (stjarna í hvirfilpunkti: 1 loftmassi; við sjóndeildarhring: um "
 "40 loftmassar)"
 
-#: src/ui_AtmosphereDialog.h:179
+#: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
 msgstr "Ljósdeyfingarstuðull"
 
-#: src/ui_AtmosphereDialog.h:181
+#: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
@@ -2496,46 +2492,8 @@ msgstr ""
 msgid "Type: %1"
 msgstr "Gerð: %1"
 
-#, qt-format
-#~ msgid "Loading NGC catalog: %1/%2"
-#~ msgstr "Hleð inn NGC grunngögnum: %1/%2"
-
 #~ msgid "Form"
 #~ msgstr "Eyðublað"
-
-#~ msgid "Move telescope #1 to selected object"
-#~ msgstr "Færa sjónauka #1 á valið fyrirbæri"
-
-#~ msgid "Move telescope #0 to selected object"
-#~ msgstr "Færa sjónauka #0 á valið fyrirbæri"
-
-#~ msgid "Move telescope #2 to selected object"
-#~ msgstr "Færa sjónauka #2 á valið fyrirbæri"
-
-#~ msgid "Move telescope #3 to selected object"
-#~ msgstr "Færa sjónauka #3 á valið fyrirbæri"
-
-#~ msgid "Move telescope #6 to selected object"
-#~ msgstr "Færa sjónauka #6 á valið fyrirbæri"
-
-#~ msgid "Move telescope #9 to selected object"
-#~ msgstr "Færa sjónauka #9 á valið fyrirbæri"
-
-#~ msgid "Move telescope #8 to selected object"
-#~ msgstr "Færa sjónauka #8 á valið fyrirbæri"
-
-#~ msgid "Move telescope #5 to selected object"
-#~ msgstr "Færa sjónauka #5 á valið fyrirbæri"
-
-#~ msgid "Move telescope #4 to selected object"
-#~ msgstr "Færa sjónauka #4 á valið fyrirbæri"
-
-#~ msgid "Move telescope #7 to selected object"
-#~ msgstr "Færa sjónauka #7 á valið fyrirbæri"
-
-#, qt-format
-#~ msgid "Loading catalog %1 from file %2"
-#~ msgstr "Hleð inn katalóg %1 úr skrá %2"
 
 #~ msgid "Loading NGC catalog"
 #~ msgstr "Hleð inn NGC yfirlit"
@@ -2548,3 +2506,6 @@ msgstr "Gerð: %1"
 
 #~ msgid "Keyboard for Greek input"
 #~ msgstr "Lyklaborð fyrir grískt letur"
+
+#~ msgid "Dialog"
+#~ msgstr "Samskiptagluggi"

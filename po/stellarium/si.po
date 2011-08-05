@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-07-25 18:49+0700\n"
+"POT-Creation-Date: 2011-08-04 16:40+0300\n"
 "PO-Revision-Date: 2011-06-30 14:09+0000\n"
 "Last-Translator: පසිඳු කාවින්ද <Unknown>\n"
 "Language-Team: Sinhalese <si@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:35+0000\n"
-"X-Generator: Launchpad (build 13405)\n"
+"X-Launchpad-Export-Date: 2011-08-05 04:35+0000\n"
+"X-Generator: Launchpad (build 13604)\n"
 "X-Poedit-Country: SRI LANKA\n"
 "X-Poedit-Language: Estonian\n"
 
@@ -813,7 +813,7 @@ msgstr "විකල්ප ලියොනීඩ්ස් අගය"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "වාර්තාගත වැඩිම අගය (1966 ලියොනිඩ්ස්)"
 
-#: src/gui/LocationDialog.cpp:334
+#: src/gui/LocationDialog.cpp:336
 msgid "New Location"
 msgstr "නව ස්ථානයක්"
 
@@ -2268,37 +2268,33 @@ msgstr ""
 "මකා දැමීමෙන් පසුව එම ගොනු නැවතත් ලබාගත නොහැක."
 
 #: src/ui_AtmosphereDialog.h:167
-msgid "Dialog"
-msgstr ""
-
-#: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:170
+#: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:171
+#: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:172
+#: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:177
+#: src/ui_AtmosphereDialog.h:176
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:179
+#: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:181
+#: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
@@ -2460,44 +2456,6 @@ msgstr ""
 #, qt-format
 msgid "Type: %1"
 msgstr ""
-
-#, qt-format
-#~ msgid "Loading NGC catalog: %1/%2"
-#~ msgstr "NGC නාමාවලිය  ලබාගනිමින් පවතී: %1/%2"
-
-#, qt-format
-#~ msgid "Loading catalog %1 from file %2"
-#~ msgstr "සූචිය විවෘත වෙමින් පවතී %1/%2"
-
-#~ msgid "Move telescope #0 to selected object"
-#~ msgstr "තෝරාගත් වස්තුව වෙත #0 දුරේක්ෂය යොමු කරන්න"
-
-#~ msgid "Move telescope #1 to selected object"
-#~ msgstr "නො-1 දුරේක්ෂය තෝරාගත් වස්තුව වෙත යොමු කරන්න"
-
-#~ msgid "Move telescope #2 to selected object"
-#~ msgstr "නො-2 දුරේක්ෂය තෝරාගත් වස්තුව වෙත යොමු කරන්න"
-
-#~ msgid "Move telescope #3 to selected object"
-#~ msgstr "නො-3 දුරේක්ෂය තෝරාගත් වස්තුව වෙත යොමු කරන්න"
-
-#~ msgid "Move telescope #9 to selected object"
-#~ msgstr "නො-9 දුරේක්ෂය තෝරාගත් වස්තුව වෙත යොමු කරන්න"
-
-#~ msgid "Move telescope #8 to selected object"
-#~ msgstr "නො-8 දුරේක්ෂය තෝරාගත් වස්තුව වෙත යොමු කරන්න"
-
-#~ msgid "Move telescope #5 to selected object"
-#~ msgstr "නො-5 දුරේක්ෂය තෝරාගත් වස්තුව වෙත යොමු කරන්න"
-
-#~ msgid "Move telescope #4 to selected object"
-#~ msgstr "නො-4 දුරේක්ෂය තෝරාගත් වස්තුව වෙත යොමු කරන්න"
-
-#~ msgid "Move telescope #7 to selected object"
-#~ msgstr "නො-7 දුරේක්ෂය තෝරාගත් වස්තුව වෙත යොමු කරන්න"
-
-#~ msgid "Move telescope #6 to selected object"
-#~ msgstr "නො-6 දුරේක්ෂය තෝරාගත් වස්තුව වෙත යොමු කරන්න"
 
 #~ msgid "Form"
 #~ msgstr "පෝරමය"

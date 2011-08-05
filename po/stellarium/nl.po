@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-25 18:49+0700\n"
+"POT-Creation-Date: 2011-08-04 16:40+0300\n"
 "PO-Revision-Date: 2011-07-29 14:44+0000\n"
 "Last-Translator: Maikel Geirnaert <maikel.geirnaert@telenet.be>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-30 04:35+0000\n"
-"X-Generator: Launchpad (build 13405)\n"
+"X-Launchpad-Export-Date: 2011-08-05 04:32+0000\n"
+"X-Generator: Launchpad (build 13604)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -831,7 +831,7 @@ msgstr "Buitengewoon Leoniden aantal"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Hoogste aantal ooit (1966 Leoniden)"
 
-#: src/gui/LocationDialog.cpp:334
+#: src/gui/LocationDialog.cpp:336
 msgid "New Location"
 msgstr "Nieuwe Locatie"
 
@@ -2292,26 +2292,22 @@ msgstr ""
 "de bestanden worden gewist. Deze actie kan niet ongedaan worden gemaakt."
 
 #: src/ui_AtmosphereDialog.h:167
-msgid "Dialog"
-msgstr "Dialoog"
-
-#: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
 msgstr "Atmosfeer Details"
 
-#: src/ui_AtmosphereDialog.h:170
+#: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
 msgstr "Refractie Instellingen"
 
-#: src/ui_AtmosphereDialog.h:171
+#: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
 msgstr "Druk (mbar):"
 
-#: src/ui_AtmosphereDialog.h:172
+#: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
 msgstr "Temperatuur (C):"
 
-#: src/ui_AtmosphereDialog.h:177
+#: src/ui_AtmosphereDialog.h:176
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
@@ -2321,11 +2317,11 @@ msgstr ""
 "atmosfeer. Het wordt gegeven in mag/luchtmassa, waar luchtmassa het aantal "
 "atmosferen is dat licht moet passeren. (zenit: 1, horizon: ongeveer 40)"
 
-#: src/ui_AtmosphereDialog.h:179
+#: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
 msgstr "Extinctie Coëfficiënt"
 
-#: src/ui_AtmosphereDialog.h:181
+#: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
@@ -2515,49 +2511,14 @@ msgstr "Type: %1"
 #~ msgid "Form"
 #~ msgstr "Vorm"
 
-#~ msgid "Move telescope #0 to selected object"
-#~ msgstr "Verplaats telescoop #0 naar geselecteerd object."
-
-#~ msgid "Move telescope #1 to selected object"
-#~ msgstr "Verplaats telescoop #1 naar geselecteerd object."
-
-#~ msgid "Move telescope #5 to selected object"
-#~ msgstr "Verplaats telescoop #5 naar geselecteerd object."
-
-#~ msgid "Move telescope #2 to selected object"
-#~ msgstr "Verplaats telescoop #1 naar geselecteerd object."
-
-#~ msgid "Move telescope #3 to selected object"
-#~ msgstr "Verplaats telescoop #3 naar geselecteerd object."
-
-#~ msgid "Move telescope #7 to selected object"
-#~ msgstr "Verplaats telescoop #7 naar geselecteerd object."
-
-#~ msgid "Move telescope #9 to selected object"
-#~ msgstr "Verplaats telescoop #9 naar geselecteerd object."
-
-#~ msgid "Move telescope #8 to selected object"
-#~ msgstr "Verplaats telescoop #8 naar geselecteerd object."
-
-#~ msgid "Move telescope #4 to selected object"
-#~ msgstr "Verplaats telescoop #4 naar geselecteerd object."
-
-#~ msgid "Move telescope #6 to selected object"
-#~ msgstr "Verplaats telescoop #6 naar geselecteerd object."
-
 #~ msgid "Loading NGC catalog"
 #~ msgstr "NGC-catalogus laden"
-
-#, qt-format
-#~ msgid "Loading NGC catalog: %1/%2"
-#~ msgstr "NGC-catalogus laden: %1/%2"
-
-#, qt-format
-#~ msgid "Loading catalog %1 from file %2"
-#~ msgstr "Laden catalogus %1 van bestand %2"
 
 #~ msgid "Oculars configuration window"
 #~ msgstr "Configuratievenster van de oculairen"
 
 #~ msgid "Telrad circles"
 #~ msgstr "Telrad cirkels"
+
+#~ msgid "Dialog"
+#~ msgstr "Dialoog"

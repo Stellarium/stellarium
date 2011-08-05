@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-25 18:49+0700\n"
-"PO-Revision-Date: 2011-06-27 16:05+0000\n"
+"POT-Creation-Date: 2011-08-04 16:40+0300\n"
+"PO-Revision-Date: 2011-08-04 07:47+0000\n"
 "Last-Translator: Bogdan Marinov <daggerstab@gmail.com>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:33+0000\n"
-"X-Generator: Launchpad (build 13405)\n"
+"X-Launchpad-Export-Date: 2011-08-05 04:32+0000\n"
+"X-Generator: Launchpad (build 13604)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -830,7 +830,7 @@ msgstr "Изключителна честота на Леонидите"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Най-високата достигната честота (Леонидите през 1966)"
 
-#: src/gui/LocationDialog.cpp:334
+#: src/gui/LocationDialog.cpp:336
 msgid "New Location"
 msgstr "Ново Място"
 
@@ -1109,7 +1109,7 @@ msgstr "Харон"
 #. TRANSLATORS: Moon of Pluto (II)
 #: src/translations.h:82
 msgid "Nix"
-msgstr ""
+msgstr "Никта"
 
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
@@ -2293,26 +2293,22 @@ msgstr ""
 "му. Тази операция е необратима."
 
 #: src/ui_AtmosphereDialog.h:167
-msgid "Dialog"
-msgstr ""
-
-#: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
 msgstr "Свойства на атмосферата"
 
-#: src/ui_AtmosphereDialog.h:170
+#: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
 msgstr "Настройки на рефракцията"
 
-#: src/ui_AtmosphereDialog.h:171
+#: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
 msgstr "Атмосферно налягане (mbar):"
 
-#: src/ui_AtmosphereDialog.h:172
+#: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
 msgstr "Температура (C):"
 
-#: src/ui_AtmosphereDialog.h:177
+#: src/ui_AtmosphereDialog.h:176
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
@@ -2323,11 +2319,11 @@ msgstr ""
 "броят атмосфери през които трябва да премине светлината. (В зенита е 1, на "
 "хоризонта - около 40.)"
 
-#: src/ui_AtmosphereDialog.h:179
+#: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
 msgstr "Коефициент на екстинкция"
 
-#: src/ui_AtmosphereDialog.h:181
+#: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
@@ -2484,13 +2480,14 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical supernovae"
-msgstr ""
+msgstr "Исторически свръхнови"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
 "The plugin for visualization of some historical supernovae, brighter 10 "
 "magnitude"
 msgstr ""
+"Приставка, показваща някои исторически свръхнови по-ярки от 10-та величина"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
@@ -2509,46 +2506,8 @@ msgstr ""
 msgid "Type: %1"
 msgstr "Тип: %1"
 
-#, qt-format
-#~ msgid "Loading NGC catalog: %1/%2"
-#~ msgstr "Зареждане на каталога NGC: %1/%2"
-
 #~ msgid "Form"
 #~ msgstr "Формат"
-
-#~ msgid "Move telescope #9 to selected object"
-#~ msgstr "Насочване на телескоп №9 към избрания обект"
-
-#~ msgid "Move telescope #0 to selected object"
-#~ msgstr "Насочване на телескоп №0 към избрания обект"
-
-#~ msgid "Move telescope #1 to selected object"
-#~ msgstr "Насочване на телескоп №1 към избрания обект"
-
-#~ msgid "Move telescope #2 to selected object"
-#~ msgstr "Насочване на телескоп №2 към избрания обект"
-
-#~ msgid "Move telescope #3 to selected object"
-#~ msgstr "Насочване на телескоп №3 към избрания обект"
-
-#~ msgid "Move telescope #8 to selected object"
-#~ msgstr "Насочване на телескоп №8 към избрания обект"
-
-#~ msgid "Move telescope #5 to selected object"
-#~ msgstr "Насочване на телескоп №5 към избрания обект"
-
-#~ msgid "Move telescope #4 to selected object"
-#~ msgstr "Насочване на телескоп №4 към избрания обект"
-
-#~ msgid "Move telescope #7 to selected object"
-#~ msgstr "Насочване на телескоп №7 към избрания обект"
-
-#~ msgid "Move telescope #6 to selected object"
-#~ msgstr "Насочване на телескоп №6 към избрания обект"
-
-#, qt-format
-#~ msgid "Loading catalog %1 from file %2"
-#~ msgstr "Зареждане на каталог %1 от файла %2"
 
 #~ msgid "Loading NGC catalog"
 #~ msgstr "Зареждане на каталога NGC"

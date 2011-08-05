@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-25 18:49+0700\n"
+"POT-Creation-Date: 2011-08-04 16:40+0300\n"
 "PO-Revision-Date: 2011-07-21 21:54+0000\n"
 "Last-Translator: Leonel Reyes Mata <lreyes6@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:35+0000\n"
-"X-Generator: Launchpad (build 13405)\n"
+"X-Launchpad-Export-Date: 2011-08-05 04:35+0000\n"
+"X-Generator: Launchpad (build 13604)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -836,7 +836,7 @@ msgstr "Tasa excepcional de las Leónidas"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Tasa máxima alcanzada (1966 Leónidas)"
 
-#: src/gui/LocationDialog.cpp:334
+#: src/gui/LocationDialog.cpp:336
 msgid "New Location"
 msgstr "Nueva ubicación"
 
@@ -2304,37 +2304,33 @@ msgstr ""
 "Esta operacion es irreversible."
 
 #: src/ui_AtmosphereDialog.h:167
-msgid "Dialog"
-msgstr "Diálogo"
-
-#: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
 msgstr "Detalles de la Atmósfera"
 
-#: src/ui_AtmosphereDialog.h:170
+#: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
 msgstr "Configuración Refracción"
 
-#: src/ui_AtmosphereDialog.h:171
+#: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
 msgstr "Presión"
 
-#: src/ui_AtmosphereDialog.h:172
+#: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
 msgstr "Temperatura (C):"
 
-#: src/ui_AtmosphereDialog.h:177
+#: src/ui_AtmosphereDialog.h:176
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:179
+#: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
 msgstr "Coeficiente de Extinción:"
 
-#: src/ui_AtmosphereDialog.h:181
+#: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
@@ -2518,46 +2514,8 @@ msgstr ""
 msgid "Type: %1"
 msgstr "Tipo: %1"
 
-#, qt-format
-#~ msgid "Loading NGC catalog: %1/%2"
-#~ msgstr "Cargando catálogo NGC: %1/%2"
-
 #~ msgid "Form"
 #~ msgstr "Formulario"
-
-#~ msgid "Move telescope #0 to selected object"
-#~ msgstr "Mover telecopio #0 a objetivo seleccionado"
-
-#~ msgid "Move telescope #1 to selected object"
-#~ msgstr "Mover telecopio #1 a objetivo seleccionado"
-
-#~ msgid "Move telescope #2 to selected object"
-#~ msgstr "Mover telecopio #2 a objetivo seleccionado"
-
-#~ msgid "Move telescope #3 to selected object"
-#~ msgstr "Mover telecopio #3 a objetivo seleccionado"
-
-#~ msgid "Move telescope #9 to selected object"
-#~ msgstr "Mover telecopio #9 a objetivo seleccionado"
-
-#~ msgid "Move telescope #8 to selected object"
-#~ msgstr "Mover telecopio #8 a objetivo seleccionado"
-
-#~ msgid "Move telescope #5 to selected object"
-#~ msgstr "Mover telecopio #5 a objetivo seleccionado"
-
-#~ msgid "Move telescope #4 to selected object"
-#~ msgstr "Mover telecopio #4 a objetivo seleccionado"
-
-#~ msgid "Move telescope #7 to selected object"
-#~ msgstr "Mover telecopio #7 a objetivo seleccionado"
-
-#~ msgid "Move telescope #6 to selected object"
-#~ msgstr "Mover telecopio #6 a objetivo seleccionado"
-
-#, qt-format
-#~ msgid "Loading catalog %1 from file %2"
-#~ msgstr "Cargando catálogo %1 de archivo %2"
 
 #~ msgid "Loading NGC catalog"
 #~ msgstr "Cargando catalogo NGC"
@@ -2593,3 +2551,6 @@ msgstr "Tipo: %1"
 
 #~ msgid "Keyboard for Greek input"
 #~ msgstr "Teclado para entrada en Griego"
+
+#~ msgid "Dialog"
+#~ msgstr "Diálogo"
