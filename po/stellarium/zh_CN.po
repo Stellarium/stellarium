@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-25 18:49+0700\n"
+"POT-Creation-Date: 2011-08-04 16:40+0300\n"
 "PO-Revision-Date: 2011-07-27 12:33+0000\n"
 "Last-Translator: Canius <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-28 04:32+0000\n"
-"X-Generator: Launchpad (build 13405)\n"
+"X-Launchpad-Export-Date: 2011-08-05 04:36+0000\n"
+"X-Generator: Launchpad (build 13604)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -800,7 +800,7 @@ msgstr "超量狮子座流星雨"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "至今最高频率 (1966 狮子座流星雨)"
 
-#: src/gui/LocationDialog.cpp:334
+#: src/gui/LocationDialog.cpp:336
 msgid "New Location"
 msgstr "新位置"
 
@@ -2243,37 +2243,33 @@ msgid ""
 msgstr "警告：移除选择的地景会删除其文件，此操作是不可逆的。"
 
 #: src/ui_AtmosphereDialog.h:167
-msgid "Dialog"
-msgstr "对话框"
-
-#: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
 msgstr "大气层详情"
 
-#: src/ui_AtmosphereDialog.h:170
+#: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
 msgstr "折射设置"
 
-#: src/ui_AtmosphereDialog.h:171
+#: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
 msgstr "气压(毫巴):"
 
-#: src/ui_AtmosphereDialog.h:172
+#: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
 msgstr "温度(射氏)"
 
-#: src/ui_AtmosphereDialog.h:177
+#: src/ui_AtmosphereDialog.h:176
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:179
+#: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
 msgstr "消光系数:"
 
-#: src/ui_AtmosphereDialog.h:181
+#: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
@@ -2440,46 +2436,8 @@ msgstr ""
 msgid "Type: %1"
 msgstr "类型：%1"
 
-#, qt-format
-#~ msgid "Loading catalog %1 from file %2"
-#~ msgstr "由文件 %2 载入目录 %1"
-
-#~ msgid "Move telescope #0 to selected object"
-#~ msgstr "将望远镜 #0 移动至所选天体"
-
-#~ msgid "Move telescope #1 to selected object"
-#~ msgstr "将望远镜 #1 移动至所选天体"
-
-#~ msgid "Move telescope #2 to selected object"
-#~ msgstr "将望远镜 #2 移动至所选天体"
-
-#~ msgid "Move telescope #3 to selected object"
-#~ msgstr "将望远镜 #3 移动至所选天体"
-
-#~ msgid "Move telescope #4 to selected object"
-#~ msgstr "将望远镜 #4 移动至所选天体"
-
-#~ msgid "Move telescope #5 to selected object"
-#~ msgstr "将望远镜 #5 移动至所选天体"
-
-#~ msgid "Move telescope #6 to selected object"
-#~ msgstr "将望远镜 #6 移动至所选天体"
-
-#~ msgid "Move telescope #7 to selected object"
-#~ msgstr "将望远镜 #7 移动至所选天体"
-
-#~ msgid "Move telescope #8 to selected object"
-#~ msgstr "将望远镜 #8 移动至所选天体"
-
-#~ msgid "Move telescope #9 to selected object"
-#~ msgstr "将望远镜 #9 移动至所选天体"
-
 #~ msgid "Form"
 #~ msgstr "格式"
-
-#, qt-format
-#~ msgid "Loading NGC catalog: %1/%2"
-#~ msgstr "载入 NGC 目录: %1/%2"
 
 #~ msgid "Loading NGC catalog"
 #~ msgstr "正在载入星云星团新总表"
@@ -2492,6 +2450,9 @@ msgstr "类型：%1"
 
 #~ msgid "Keyboard for Greek input"
 #~ msgstr "希腊语键盘"
+
+#~ msgid "Dialog"
+#~ msgstr "对话框"
 
 #~ msgid "Historical supernova"
 #~ msgstr "历史记载的超新星"

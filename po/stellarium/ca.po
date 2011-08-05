@@ -10,15 +10,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-25 18:49+0700\n"
+"POT-Creation-Date: 2011-08-04 16:40+0300\n"
 "PO-Revision-Date: 2011-07-31 20:03+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-01 04:36+0000\n"
-"X-Generator: Launchpad (build 13405)\n"
+"X-Launchpad-Export-Date: 2011-08-05 04:32+0000\n"
+"X-Generator: Launchpad (build 13604)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -835,7 +835,7 @@ msgstr "Ràtio de Leònides excepcional"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Ràtio mes gran (Leònides del 1966)"
 
-#: src/gui/LocationDialog.cpp:334
+#: src/gui/LocationDialog.cpp:336
 msgid "New Location"
 msgstr "Nova localització"
 
@@ -2295,26 +2295,22 @@ msgstr ""
 "fitxers. Aquesta operació es irreversible."
 
 #: src/ui_AtmosphereDialog.h:167
-msgid "Dialog"
-msgstr "Diàleg"
-
-#: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
 msgstr "Detalls de la atmosfera"
 
-#: src/ui_AtmosphereDialog.h:170
+#: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
 msgstr "Paràmetres de refracció"
 
-#: src/ui_AtmosphereDialog.h:171
+#: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
 msgstr "Pressió (mbar)"
 
-#: src/ui_AtmosphereDialog.h:172
+#: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
 msgstr "Temperatura (C):"
 
-#: src/ui_AtmosphereDialog.h:177
+#: src/ui_AtmosphereDialog.h:176
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
@@ -2324,11 +2320,11 @@ msgstr ""
 "l'atmosfera de la Terra. Es dóna en mag/massa d'aire, on massa d'aire és el "
 "nombre d'atmosferes de llum que ha de passar. (Zenit: 1; horitzó: sobre 40)"
 
-#: src/ui_AtmosphereDialog.h:179
+#: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
 msgstr "Coeficient d'extinció"
 
-#: src/ui_AtmosphereDialog.h:181
+#: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
@@ -2512,46 +2508,8 @@ msgstr ""
 msgid "Type: %1"
 msgstr "Tipus: %1"
 
-#, qt-format
-#~ msgid "Loading NGC catalog: %1/%2"
-#~ msgstr "Carregant catàleg NGC: %1/%2"
-
 #~ msgid "Form"
 #~ msgstr "Format"
-
-#, qt-format
-#~ msgid "Loading catalog %1 from file %2"
-#~ msgstr "Carregant catàleg %1 del fitxer %2"
-
-#~ msgid "Move telescope #0 to selected object"
-#~ msgstr "Moure telescopi #0 a l'objecte seleccionat"
-
-#~ msgid "Move telescope #1 to selected object"
-#~ msgstr "Moure telescopi #1 a l'objecte seleccionat"
-
-#~ msgid "Move telescope #2 to selected object"
-#~ msgstr "Moure telescopi #2 a l'objecte seleccionat"
-
-#~ msgid "Move telescope #3 to selected object"
-#~ msgstr "Moure telescopi #3 a l'objecte seleccionat"
-
-#~ msgid "Move telescope #9 to selected object"
-#~ msgstr "Moure telescopi #9 a l'objecte seleccionat"
-
-#~ msgid "Move telescope #8 to selected object"
-#~ msgstr "Moure telescopi #8 a l'objecte seleccionat"
-
-#~ msgid "Move telescope #5 to selected object"
-#~ msgstr "Moure telescopi #5 a l'objecte seleccionat"
-
-#~ msgid "Move telescope #4 to selected object"
-#~ msgstr "Moure telescopi #4 a l'objecte seleccionat"
-
-#~ msgid "Move telescope #7 to selected object"
-#~ msgstr "Moure telescopi #7 a l'objecte seleccionat"
-
-#~ msgid "Move telescope #6 to selected object"
-#~ msgstr "Moure telescopi #6 a l'objecte seleccionat"
 
 #~ msgid "Loading NGC catalog"
 #~ msgstr "Carregant catàleg NGC"
@@ -2561,3 +2519,6 @@ msgstr "Tipus: %1"
 
 #~ msgid "Telrad circles"
 #~ msgstr "Cercles de Telrad"
+
+#~ msgid "Dialog"
+#~ msgstr "Diàleg"

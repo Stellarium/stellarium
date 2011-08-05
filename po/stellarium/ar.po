@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-25 18:49+0700\n"
+"POT-Creation-Date: 2011-08-04 16:40+0300\n"
 "PO-Revision-Date: 2011-07-25 22:19+0000\n"
 "Last-Translator: kajaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:32+0000\n"
-"X-Generator: Launchpad (build 13405)\n"
+"X-Launchpad-Export-Date: 2011-08-05 04:32+0000\n"
+"X-Generator: Launchpad (build 13604)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -827,7 +827,7 @@ msgstr "المعدل الاستثنائي للأسديات"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "المعدل الأعلى (الأسديات لعام 1966)‏"
 
-#: src/gui/LocationDialog.cpp:334
+#: src/gui/LocationDialog.cpp:336
 msgid "New Location"
 msgstr "موقع جديد"
 
@@ -2286,26 +2286,22 @@ msgstr ""
 "عنها"
 
 #: src/ui_AtmosphereDialog.h:167
-msgid "Dialog"
-msgstr "الحوار"
-
-#: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
 msgstr "تفاصيل الغلاف الجوي"
 
-#: src/ui_AtmosphereDialog.h:170
+#: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
 msgstr "إعدادات الانكسار"
 
-#: src/ui_AtmosphereDialog.h:171
+#: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
 msgstr "الضغط (mbar)"
 
-#: src/ui_AtmosphereDialog.h:172
+#: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
 msgstr "الحرارة (C)"
 
-#: src/ui_AtmosphereDialog.h:177
+#: src/ui_AtmosphereDialog.h:176
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
@@ -2315,11 +2311,11 @@ msgstr ""
 "القدر/كتلة الهواء ، حيث كتلة الهواء هو الرقم للغلاف الجوي الذي يلزم للضوء "
 "عبوره. (في السمت تكون القيمة 1، وفي الأفق تكون القيمة 40)ـ"
 
-#: src/ui_AtmosphereDialog.h:179
+#: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
 msgstr "معامل الانقراض"
 
-#: src/ui_AtmosphereDialog.h:181
+#: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
@@ -2506,46 +2502,8 @@ msgstr "النوع :%1"
 #~ msgid "Form"
 #~ msgstr "شكل"
 
-#, qt-format
-#~ msgid "Loading catalog %1 from file %2"
-#~ msgstr "تحميل الدليل %1 من الملف %2"
-
-#, qt-format
-#~ msgid "Loading NGC catalog: %1/%2"
-#~ msgstr "تحميل دليل  ان جي سي‎: %1/%2"
-
 #~ msgid "Loading NGC catalog"
 #~ msgstr "(الدليل العام الجديد - New General Catalog) NGC جاري تحميل دليل"
-
-#~ msgid "Move telescope #0 to selected object"
-#~ msgstr "حرك المقراب 0 إلى الجسم المختار"
-
-#~ msgid "Move telescope #1 to selected object"
-#~ msgstr "حرك المقراب 1 إلى الجسم المختار"
-
-#~ msgid "Move telescope #2 to selected object"
-#~ msgstr "حرك المقراب 2 إلى الجسم المختار"
-
-#~ msgid "Move telescope #3 to selected object"
-#~ msgstr "حرك المقراب 3 إلى الجسم المختار"
-
-#~ msgid "Move telescope #4 to selected object"
-#~ msgstr "حرك المقراب 4 إلى الجسم المختار"
-
-#~ msgid "Move telescope #5 to selected object"
-#~ msgstr "حرك المقراب 5 إلى الجسم المختار"
-
-#~ msgid "Move telescope #6 to selected object"
-#~ msgstr "حرك المقراب 6 إلى الجسم المختار"
-
-#~ msgid "Move telescope #7 to selected object"
-#~ msgstr "حرك المقراب 7 إلى الجسم المختار"
-
-#~ msgid "Move telescope #8 to selected object"
-#~ msgstr "حرك المقراب 8 إلى الجسم المختار"
-
-#~ msgid "Move telescope #9 to selected object"
-#~ msgstr "حرك المقراب 9 إلى الجسم المختار"
 
 #, qt-format
 #~ msgid "Successfully loaded data from new file %1"
@@ -2578,3 +2536,6 @@ msgstr "النوع :%1"
 
 #~ msgid "Keyboard for Greek input"
 #~ msgstr "لوحة مفاتيح الحروف الإغريقية"
+
+#~ msgid "Dialog"
+#~ msgstr "الحوار"
