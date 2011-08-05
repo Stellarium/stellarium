@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-25 18:49+0700\n"
+"POT-Creation-Date: 2011-08-04 16:40+0300\n"
 "PO-Revision-Date: 2010-11-30 21:44+0000\n"
 "Last-Translator: Elian Myftiu <Unknown>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:32+0000\n"
-"X-Generator: Launchpad (build 13405)\n"
+"X-Launchpad-Export-Date: 2011-08-05 04:32+0000\n"
+"X-Generator: Launchpad (build 13604)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -832,7 +832,7 @@ msgstr "Sasi e veçantë Leonidësh"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Sasia më e madhe ndonjëherë (Leonidët, 1966)"
 
-#: src/gui/LocationDialog.cpp:334
+#: src/gui/LocationDialog.cpp:336
 msgid "New Location"
 msgstr "Vendndodhje e Re"
 
@@ -2291,37 +2291,33 @@ msgstr ""
 "Ky veprim është i pakthyeshëm."
 
 #: src/ui_AtmosphereDialog.h:167
-msgid "Dialog"
-msgstr ""
-
-#: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:170
+#: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:171
+#: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:172
+#: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:177
+#: src/ui_AtmosphereDialog.h:176
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:179
+#: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:181
+#: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
@@ -2496,46 +2492,8 @@ msgstr ""
 msgid "Type: %1"
 msgstr ""
 
-#, qt-format
-#~ msgid "Loading NGC catalog: %1/%2"
-#~ msgstr "Duke ngarkuar katalogun NGC: %1/%2"
-
 #~ msgid "Form"
 #~ msgstr "Forma"
-
-#, qt-format
-#~ msgid "Loading catalog %1 from file %2"
-#~ msgstr "Duke ngarkuar katalogun %1 nga skedari %2"
-
-#~ msgid "Move telescope #0 to selected object"
-#~ msgstr "Lëviz teleskopin #0 në objektin e zgjedhur"
-
-#~ msgid "Move telescope #1 to selected object"
-#~ msgstr "Lëviz teleskopin #1 në objektin e zgjedhur"
-
-#~ msgid "Move telescope #2 to selected object"
-#~ msgstr "Lëviz teleskopin #2 në objektin e zgjedhur"
-
-#~ msgid "Move telescope #3 to selected object"
-#~ msgstr "Lëviz teleskopin #3 në objektin e zgjedhur"
-
-#~ msgid "Move telescope #9 to selected object"
-#~ msgstr "Lëviz teleskopin #9 në objektin e zgjedhur"
-
-#~ msgid "Move telescope #8 to selected object"
-#~ msgstr "Lëviz teleskopin #8 në objektin e zgjedhur"
-
-#~ msgid "Move telescope #5 to selected object"
-#~ msgstr "Lëviz teleskopin #5 në objektin e zgjedhur"
-
-#~ msgid "Move telescope #4 to selected object"
-#~ msgstr "Lëviz teleskopin #4 në objektin e zgjedhur"
-
-#~ msgid "Move telescope #7 to selected object"
-#~ msgstr "Lëviz teleskopin #7 në objektin e zgjedhur"
-
-#~ msgid "Move telescope #6 to selected object"
-#~ msgstr "Lëviz teleskopin #6 në objektin e zgjedhur"
 
 #~ msgid "Oculars configuration window"
 #~ msgstr "Dritare konfigurimi okulari"

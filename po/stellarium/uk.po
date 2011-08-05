@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-25 18:49+0700\n"
+"POT-Creation-Date: 2011-08-04 16:40+0300\n"
 "PO-Revision-Date: 2011-07-25 19:02+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-26 04:36+0000\n"
-"X-Generator: Launchpad (build 13405)\n"
+"X-Launchpad-Export-Date: 2011-08-05 04:35+0000\n"
+"X-Generator: Launchpad (build 13604)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -833,7 +833,7 @@ msgstr "Незвичайна частота (Леоніди)"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Найбільша частота (1966, Леоніди)"
 
-#: src/gui/LocationDialog.cpp:334
+#: src/gui/LocationDialog.cpp:336
 msgid "New Location"
 msgstr "Нове розташування"
 
@@ -2294,26 +2294,22 @@ msgstr ""
 "файли. Відновити ці файли після вилучення буде дуже важко."
 
 #: src/ui_AtmosphereDialog.h:167
-msgid "Dialog"
-msgstr "Діалогове вікно"
-
-#: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
 msgstr "Параметри атмосфери"
 
-#: src/ui_AtmosphereDialog.h:170
+#: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
 msgstr "Параметри рефракції"
 
-#: src/ui_AtmosphereDialog.h:171
+#: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
 msgstr "Тиск (у мбар):"
 
-#: src/ui_AtmosphereDialog.h:172
+#: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
 msgstr "Температура (у ℃)"
 
-#: src/ui_AtmosphereDialog.h:177
+#: src/ui_AtmosphereDialog.h:176
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
@@ -2324,11 +2320,11 @@ msgstr ""
 "де товщина шару повітря вимірюється у товщинах атмосфери, які має пройти "
 "промінь світла (зеніт — 1, горизонт — близько 40)."
 
-#: src/ui_AtmosphereDialog.h:179
+#: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
 msgstr "Коефіцієнт поглинання:"
 
-#: src/ui_AtmosphereDialog.h:181
+#: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
@@ -2510,49 +2506,11 @@ msgstr ""
 msgid "Type: %1"
 msgstr "Тип: %1"
 
-#, qt-format
-#~ msgid "Loading NGC catalog: %1/%2"
-#~ msgstr "Завантаження каталогу NGC: %1/%2"
-
 #~ msgid "Form"
 #~ msgstr "Форма"
 
-#~ msgid "Move telescope #0 to selected object"
-#~ msgstr "Перемістіть телескоп #0 до обраного об'єкта"
-
-#~ msgid "Move telescope #1 to selected object"
-#~ msgstr "Перемістіть телескоп #1 до обраного об'єкта"
-
-#~ msgid "Move telescope #2 to selected object"
-#~ msgstr "Перемістіть телескоп #2 до обраного об'єкта"
-
-#~ msgid "Move telescope #3 to selected object"
-#~ msgstr "Перемістіть телескоп #3 до обраного об'єкта"
-
-#~ msgid "Move telescope #7 to selected object"
-#~ msgstr "Перемістіть телескоп #7 до обраного об'єкта"
-
-#~ msgid "Move telescope #9 to selected object"
-#~ msgstr "Перемістіть телескоп #9 до обраного об'єкта"
-
-#~ msgid "Move telescope #8 to selected object"
-#~ msgstr "Перемістіть телескоп #8 до обраного об'єкта"
-
-#~ msgid "Move telescope #5 to selected object"
-#~ msgstr "Перемістіть телескоп #5 до обраного об'єкта"
-
-#~ msgid "Move telescope #4 to selected object"
-#~ msgstr "Перемістіть телескоп #4 до обраного об'єкта"
-
-#~ msgid "Move telescope #6 to selected object"
-#~ msgstr "Перемістіть телескоп #6 до обраного об'єкта"
-
 #~ msgid "Loading NGC catalog"
 #~ msgstr "Завантаження каталогу NGC"
-
-#, qt-format
-#~ msgid "Loading catalog %1 from file %2"
-#~ msgstr "Завантаження каталогу %1 з файла %2"
 
 #~ msgid "General settings"
 #~ msgstr "Загальні параметри"
@@ -2627,3 +2585,6 @@ msgstr "Тип: %1"
 #~ "magnitude"
 #~ msgstr ""
 #~ "Додаток для показу деяких відомих наднових, яскравіших за 10 зоряну величину"
+
+#~ msgid "Dialog"
+#~ msgstr "Діалогове вікно"

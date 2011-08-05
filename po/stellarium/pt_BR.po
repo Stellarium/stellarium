@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-25 18:49+0700\n"
+"POT-Creation-Date: 2011-08-04 16:40+0300\n"
 "PO-Revision-Date: 2011-08-03 12:36+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-04 04:31+0000\n"
-"X-Generator: Launchpad (build 13573)\n"
+"X-Launchpad-Export-Date: 2011-08-05 04:35+0000\n"
+"X-Generator: Launchpad (build 13604)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -830,7 +830,7 @@ msgstr "Taxa excepcional de Leonídeos"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Taxa mais alta de todas (Leonídeos em 1966)"
 
-#: src/gui/LocationDialog.cpp:334
+#: src/gui/LocationDialog.cpp:336
 msgid "New Location"
 msgstr "Nova localização"
 
@@ -2295,26 +2295,22 @@ msgstr ""
 "relacionados. Esta operação é irreversível."
 
 #: src/ui_AtmosphereDialog.h:167
-msgid "Dialog"
-msgstr "Caixa de diálogo"
-
-#: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
 msgstr "Detalhes da atmosfera"
 
-#: src/ui_AtmosphereDialog.h:170
+#: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
 msgstr "Configurações de refração"
 
-#: src/ui_AtmosphereDialog.h:171
+#: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
 msgstr "Pressão (mbar):"
 
-#: src/ui_AtmosphereDialog.h:172
+#: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
 msgstr "Temperatura (°C):"
 
-#: src/ui_AtmosphereDialog.h:177
+#: src/ui_AtmosphereDialog.h:176
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
@@ -2325,11 +2321,11 @@ msgstr ""
 "o número de atmosferas que a luz tem de atravessar. (zênite: 1; horizonte: "
 "aproximadamente 40)"
 
-#: src/ui_AtmosphereDialog.h:179
+#: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
 msgstr "Coeficiente de extinção:"
 
-#: src/ui_AtmosphereDialog.h:181
+#: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
@@ -2516,46 +2512,8 @@ msgstr ""
 msgid "Type: %1"
 msgstr "Tipo: %1"
 
-#, qt-format
-#~ msgid "Loading NGC catalog: %1/%2"
-#~ msgstr "Carregando Catálogo NGC: %1/%2"
-
 #~ msgid "Form"
 #~ msgstr "Formulário"
-
-#, qt-format
-#~ msgid "Loading catalog %1 from file %2"
-#~ msgstr "Carregando catálogo %1 do arquivo %2"
-
-#~ msgid "Move telescope #0 to selected object"
-#~ msgstr "Mover telescópio #0 ao objeto selecionado"
-
-#~ msgid "Move telescope #1 to selected object"
-#~ msgstr "Mover telescópio #1 ao objeto selecionado"
-
-#~ msgid "Move telescope #2 to selected object"
-#~ msgstr "Mover telescópio #2 ao objeto selecionado"
-
-#~ msgid "Move telescope #3 to selected object"
-#~ msgstr "Mover telescópio #3 ao objeto selecionado"
-
-#~ msgid "Move telescope #7 to selected object"
-#~ msgstr "Mover telescópio #7 ao objeto selecionado"
-
-#~ msgid "Move telescope #9 to selected object"
-#~ msgstr "Mover telescópio #9 ao objeto selecionado"
-
-#~ msgid "Move telescope #8 to selected object"
-#~ msgstr "Mover telescópio #8 ao objeto selecionado"
-
-#~ msgid "Move telescope #5 to selected object"
-#~ msgstr "Mover telescópio #5 ao objeto selecionado"
-
-#~ msgid "Move telescope #4 to selected object"
-#~ msgstr "Mover telescópio #4 ao objeto selecionado"
-
-#~ msgid "Move telescope #6 to selected object"
-#~ msgstr "Mover telescópio #6 ao objeto selecionado"
 
 #~ msgid "Oculars configuration window"
 #~ msgstr "Janela de configuração da ocular"
@@ -2575,3 +2533,6 @@ msgstr "Tipo: %1"
 
 #~ msgid "Historical supernova"
 #~ msgstr "Supernova histórica"
+
+#~ msgid "Dialog"
+#~ msgstr "Caixa de diálogo"
