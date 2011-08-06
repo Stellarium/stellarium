@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-04 16:40+0300\n"
-"PO-Revision-Date: 2011-08-03 19:17+0000\n"
+"PO-Revision-Date: 2011-08-05 19:53+0000\n"
 "Last-Translator: Hleb Valoshka <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-05 04:32+0000\n"
-"X-Generator: Launchpad (build 13604)\n"
+"X-Launchpad-Export-Date: 2011-08-06 04:34+0000\n"
+"X-Generator: Launchpad (build 13613)\n"
 "X-Poedit-Country: BELARUS\n"
 "Language: be\n"
 "X-Poedit-Language: Belarusian\n"
@@ -110,12 +110,12 @@ msgstr "Абсалютная велічыня: %1"
 #: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr "Ґеацэнтрычная экліптыка (у дзень): %1/%2"
+msgstr "Ґеацэнтрычная экліптыка (даты): %1/%2"
 
 #: src/core/modules/Planet.cpp:137
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr "Нахіленьне (у дзень): %1"
+msgstr "Нахіленьне (даты): %1"
 
 #: src/core/modules/Planet.cpp:143
 #, no-c-format, qt-format
@@ -170,14 +170,14 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:63
 msgid "Equal Area"
-msgstr "Роўная плошча"
+msgstr "Раўнаплошчавая"
 
 #: src/core/StelProjectorClasses.cpp:68
 msgid ""
 "The full name of this projection method is, <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
-"Поўная назва такой праекцыі — <i>Лямбэртава азімутальная роўнавобласьцевая "
+"Поўная назва такой праекцыі — <i>Лямбэртава азімутальная раўнаплошчавая "
 "праекцыя</i>. Пры ёй захоўваецца плошча, але не вуглы."
 
 #: src/core/StelProjectorClasses.cpp:108
@@ -236,7 +236,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:270
 msgid "Mercator"
-msgstr "Мэркатора"
+msgstr "Мэркаторава"
 
 #: src/core/StelProjectorClasses.cpp:275
 msgid ""
@@ -244,8 +244,8 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
-"Праекцыя «Мэркатор» — гэта адна з найчасьцей ужываных праекцый. Пры ёй "
-"захоўваюцца напрамкі й формы, але скажаецца памер, чым далей ад экватара, "
+"Мэркаторава праекцыя — гэта адна з найчасьцей ужываных праекцый. Пры ёй "
+"захоўваюцца напрамкі й формы, але скажаецца памер, і чым далей ад экватара, "
 "тым болей."
 
 #: src/core/StelProjectorClasses.cpp:322
@@ -279,7 +279,7 @@ msgstr "Гадзінавы вугал/Схіленьне: %1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
-msgstr "(ґевмэтрычны)"
+msgstr "(ґеамэтрычны)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
@@ -2511,51 +2511,3 @@ msgstr "Тып: %1"
 
 #~ msgid "Form"
 #~ msgstr "Форма"
-
-#~ msgid "Loading NGC catalog"
-#~ msgstr "Загрузка каталёґу NGC"
-
-#~ msgid "General settings"
-#~ msgstr "Агульныя настаўленьні"
-
-#, qt-format
-#~ msgid "Successfully loaded data from new file %1"
-#~ msgstr "Удала загружаныя даньні з новага файла %1"
-
-#~ msgid "Brief"
-#~ msgstr "Сьцісла"
-
-#, qt-format
-#~ msgid ""
-#~ "File size: %1MB\n"
-#~ "Star count: %2 Million\n"
-#~ "Magnitude range: %3 - %4"
-#~ msgstr ""
-#~ "Памер файла: %1МБ\n"
-#~ "Колькасьць зорак: %2 Млн\n"
-#~ "Дыяпазон велічынь: %3 — %4"
-
-#~ msgid "Download"
-#~ msgstr "Загрузка"
-
-#~ msgid "Oculars configuration window"
-#~ msgstr "Вакно настпўленьняў акуляра"
-
-#~ msgid "Telrad circles"
-#~ msgstr "Акружыны Telrad"
-
-#~ msgid "Keyboard for Greek input"
-#~ msgstr "Клявіятура для ўводжаньня грэцкае"
-
-#~ msgid "Dialog"
-#~ msgstr "Дыялёґ"
-
-#~ msgid "Historical supernova"
-#~ msgstr "Гістарычная звышновая"
-
-#~ msgid ""
-#~ "The plugin for visualization of some historical supernovas, brighter 10 "
-#~ "magnitude"
-#~ msgstr ""
-#~ "Дадатак для візуалізацыі некаторых гістарычных звышновых, ярчэйшых за 10-ю "
-#~ "велічыню"
