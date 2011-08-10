@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-08-04 16:40+0300\n"
-"PO-Revision-Date: 2011-06-30 14:09+0000\n"
-"Last-Translator: පසිඳු කාවින්ද <Unknown>\n"
+"PO-Revision-Date: 2011-08-09 18:31+0000\n"
+"Last-Translator: අනුරාධ Jayathilaka <astroanu2004@yahoo.co.uk>\n"
 "Language-Team: Sinhalese <si@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-05 04:35+0000\n"
-"X-Generator: Launchpad (build 13604)\n"
+"X-Launchpad-Export-Date: 2011-08-10 04:31+0000\n"
+"X-Generator: Launchpad (build 13636)\n"
 "X-Poedit-Country: SRI LANKA\n"
 "X-Poedit-Language: Estonian\n"
 
@@ -50,7 +50,7 @@ msgstr ", %1 m"
 
 #: src/core/modules/LandscapeMgr.cpp:499
 msgid "Planet: "
-msgstr "Planet: "
+msgstr "ග්‍රහලෝකය "
 
 #: src/core/modules/Nebula.cpp:96
 #, qt-format
@@ -108,12 +108,12 @@ msgstr "නිරපේක්ෂ දීප්ත විශාලත්වය: %1
 #: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr ""
+msgstr "ක්‍රාන්ති භූකේන්ද්‍ර අගය (අදාල දිනට): %1/%2"
 
 #: src/core/modules/Planet.cpp:137
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr ""
+msgstr "ඇලය (අදාල දිනට): %1"
 
 #: src/core/modules/Planet.cpp:143
 #, no-c-format, qt-format
@@ -148,7 +148,7 @@ msgstr "අසම්පාතය: %1\""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr ""
+msgstr "අභ්‍යවකාශ යානය"
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
@@ -262,11 +262,11 @@ msgstr "පැය කෝණය/DE: %1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
-msgstr ""
+msgstr "(ජ්‍යාමිතික)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
-msgstr ""
+msgstr "(දෘෂ්‍ය)"
 
 #: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
@@ -578,7 +578,7 @@ msgstr "මධ්‍යාන රේඛාව"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
 msgid "Horizon line"
-msgstr ""
+msgstr "ක්ෂිතිජ රේඛාව"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
 msgid "Cardinal points"
@@ -1093,12 +1093,12 @@ msgstr "චාරෝන්"
 #. TRANSLATORS: Moon of Pluto (II)
 #: src/translations.h:82
 msgid "Nix"
-msgstr ""
+msgstr "නික්ස්"
 
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
 msgid "Hydra"
-msgstr ""
+msgstr "හයිඩ්‍රා"
 
 #: src/translations.h:85
 msgid "Eris"
@@ -1213,12 +1213,12 @@ msgstr "හෙක්ටර්"
 #. TRANSLATORS: Name of supernova SN 1572A
 #: src/translations.h:124
 msgid "Tycho's Supernova"
-msgstr ""
+msgstr "ටයිකෝගේ සුපර්නෝවාව"
 
 #. TRANSLATORS: Name of supernova SN 1604A
 #: src/translations.h:126
 msgid "Kepler's Supernova"
-msgstr ""
+msgstr "කෙප්ලර්ගේ සුපර්නෝවාව"
 
 #: src/translations.h:130
 msgid "N"
@@ -1641,7 +1641,7 @@ msgstr "සොයන්න"
 
 #: src/ui_searchDialogGui.h:451
 msgid "Find Object or Position"
-msgstr ""
+msgstr "වස්තුවක් හෝ ස්ථානයක් සොයන්න"
 
 #: src/ui_searchDialogGui.h:458
 msgid "iota"
@@ -1741,11 +1741,11 @@ msgstr "ඔමෙගා"
 
 #: src/ui_searchDialogGui.h:529
 msgid "Greek letters for Bayer designations"
-msgstr ""
+msgstr "බේයර් නාමකරණය සඳහා ග්‍රීක අකුරු"
 
 #: src/ui_searchDialogGui.h:530
 msgid "Object"
-msgstr ""
+msgstr "වස්තුව"
 
 #: src/ui_searchDialogGui.h:531
 msgid "RA/Dec (J2000):"
@@ -1753,7 +1753,7 @@ msgstr "RA/Dec (J2000):"
 
 #: src/ui_searchDialogGui.h:532
 msgid "Position"
-msgstr ""
+msgstr "පිහිටීම"
 
 #: src/ui_viewDialog.h:1052
 msgid "View"
@@ -1829,11 +1829,11 @@ msgstr "ආලෝක දූෂණය: "
 
 #: src/ui_viewDialog.h:1085
 msgid "pressure, temperature, extinction coefficient"
-msgstr ""
+msgstr "පීඩනය, උෂ්නත්වය, නෂ්ට සංගුණකය"
 
 #: src/ui_viewDialog.h:1087
 msgid "Refraction/Extinction settings..."
-msgstr ""
+msgstr "වර්තන / නෂ්ට සැකසුම්..."
 
 #: src/ui_viewDialog.h:1088
 msgid "Labels and Markers"
@@ -2269,19 +2269,19 @@ msgstr ""
 
 #: src/ui_AtmosphereDialog.h:167
 msgid "Atmosphere Details"
-msgstr ""
+msgstr "වායුගෝල විස්තර"
 
 #: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
-msgstr ""
+msgstr "වර්තන සැකසුම්"
 
 #: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
-msgstr ""
+msgstr "පීඩනය (මිලිබාර්)"
 
 #: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
-msgstr ""
+msgstr "උෂ්නත්වය (සෙල්සියස්)"
 
 #: src/ui_AtmosphereDialog.h:176
 msgid ""
@@ -2289,16 +2289,21 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
+"නෂ්ට අගය යනු පෘථිවි වායුගෝලය නිසා තරුවක දීප්තිය හීන වීම යි. එය "
+"දීප්තතාවය/වායු ඝනත්වය මගින් ගනණය කෙරේ. වායු ඝනත්වය යනු තරුවේ ආලෝකය ගමන්කරන "
+"වායු තල ගණන යි. (අහස මුදුන: 1; ක්ෂිතිජය: 40 ක් පමණ)"
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
-msgstr ""
+msgstr "නෂ්ට සංගුණකය:"
 
 #: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
+"පැහැදිලි කඳු මුදුන් සඳහා 0.12ක් ද, හොඳ; නගරයෙන් ඈත් වු ප්‍රදේශ සඳහා 0.2ක් ද, "
+"වළාකුළු බහුල අවස්ථා සඳහා  0.35ක්ද භාවිතා කරන්න."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -2436,13 +2441,13 @@ msgstr "ස්ටෙලාරියම් වෙත ධූමකේතු සහ
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical supernovae"
-msgstr ""
+msgstr "‍ඓතිහාසික සුපර්නෝවාව"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
 "The plugin for visualization of some historical supernovae, brighter 10 "
 "magnitude"
-msgstr ""
+msgstr "මෙම ප්ලගිනයෙන් දීප්තතාවය 10ට වැඩි ඓතිහාසික සුපර්නෝවා නැරඹිය හැකි ය."
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
@@ -2451,23 +2456,15 @@ msgid ""
 "1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
 "August), SN 1972E (8 May) and SN 1987A (24 February)"
 msgstr ""
+"SN 185A (7 දෙසැම්බර්), SN 386A (24 අප්‍රේල්), SN 1006A (29 අප්‍රේල්), SN "
+"1054A (3 ජුලි), SN 1181A (4 අගෝස්තු), SN 1572A (5 නොවැම්බර්), SN 1604A (8 "
+"ඔක්තෝබර්), SN 1680A (15 අගෝස්තු), SN 1885A (17 අගෝස්තු), SN 1895B (5 ජුලි), "
+"SN 1937C (21 අගෝස්තු), SN 1972E (8 මැයි) and SN 1987A (24 පෙබරවාරි)"
 
 #: plugins/Supernovae/src/Supernova.cpp:105
 #, qt-format
 msgid "Type: %1"
-msgstr ""
+msgstr "වර්‍ගය: %1"
 
 #~ msgid "Form"
 #~ msgstr "පෝරමය"
-
-#~ msgid "Loading NGC catalog"
-#~ msgstr "NGC නාමාවලිය පූරණය වෙමින් පවතී"
-
-#~ msgid "Oculars configuration window"
-#~ msgstr "ආක්ෂික සැකසුම් කවුළුව"
-
-#~ msgid "Telrad circles"
-#~ msgstr "ටෙල්රාඩ් වෘත්ත"
-
-#~ msgid "Keyboard for Greek input"
-#~ msgstr "ග්‍රීක අකුරු ඇතුල් කිරීම"
