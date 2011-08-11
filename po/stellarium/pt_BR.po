@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-04 16:40+0300\n"
-"PO-Revision-Date: 2011-08-03 12:36+0000\n"
+"PO-Revision-Date: 2011-08-10 22:57+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-05 04:35+0000\n"
-"X-Generator: Launchpad (build 13604)\n"
+"X-Launchpad-Export-Date: 2011-08-11 04:31+0000\n"
+"X-Generator: Launchpad (build 13644)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -215,7 +215,7 @@ msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
 msgstr ""
-"A projeção Hammer é uma projeção cartográfica equivalente, descrito por "
+"A projeção Hammer é uma projeção cartográfica equivalente, descrita por "
 "Ernst Hammer em 1892 e diretamente inspirada pela projeção Aitoff."
 
 #: src/core/StelProjectorClasses.cpp:223
@@ -243,7 +243,7 @@ msgid ""
 msgstr ""
 "A projeção de Mercator é uma das mais utilizadas projeções de mapa-mundi. "
 "Ela preserva a direção e as formas, mas distorce o tamanho em um grau "
-"crescente à medida em que há um afastamento do equador."
+"crescente à medida em que há um afastamento do Equador."
 
 #: src/core/StelProjectorClasses.cpp:322
 msgid "Orthographic"
@@ -287,7 +287,7 @@ msgstr "Azimute/Altura: %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:295
 msgid "Select screenshot directory"
-msgstr "Selecione o diretório onde serão armazenadas as capturas de tela"
+msgstr "Selecione o diretório em que serão armazenadas as capturas de tela"
 
 #: src/gui/ConfigurationDialog.cpp:462
 #, qt-format
@@ -389,7 +389,7 @@ msgstr "Espaço"
 
 #: src/gui/HelpDialog.cpp:53
 msgid "Arrow keys & left mouse drag"
-msgstr "Setas do teclado e pressionar e segurar botão esquerdo do mouse"
+msgstr "Setas do teclado e pressionar e segurar botão esquerdo do máuse"
 
 #: src/gui/HelpDialog.cpp:54
 msgid "Page Up/Down"
@@ -469,7 +469,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:174
 msgid "The Stellarium User Guide"
-msgstr "Manual do Usuário do Stellarium"
+msgstr "Guia do Usuário do Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:178
@@ -491,8 +491,8 @@ msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr ""
-"{Sistema de requisição de suporte} - se você precisa de ajuda usando o "
-"Stellarium, submeta uma requisição de suporte aqui e tentaremos ajudar."
+"{Sistema de requisição de suporte} - se você precisa de ajuda utilizando o "
+"Stellarium, submeta uma requisição de suporte aqui, e tentaremos ajudar."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:193
@@ -2514,25 +2514,3 @@ msgstr "Tipo: %1"
 
 #~ msgid "Form"
 #~ msgstr "Formulário"
-
-#~ msgid "Oculars configuration window"
-#~ msgstr "Janela de configuração da ocular"
-
-#~ msgid "Telrad circles"
-#~ msgstr "Círculos Telrad"
-
-#~ msgid "Keyboard for Greek input"
-#~ msgstr "Teclado para inserir letras do alfabeto grego"
-
-#~ msgid ""
-#~ "The plugin for visualization of some historical supernovas, brighter 10 "
-#~ "magnitude"
-#~ msgstr ""
-#~ "O pluguím para a visualização de algumas supernovas históricas, mais "
-#~ "brilhantes do que a magnitude 10"
-
-#~ msgid "Historical supernova"
-#~ msgstr "Supernova histórica"
-
-#~ msgid "Dialog"
-#~ msgstr "Caixa de diálogo"
