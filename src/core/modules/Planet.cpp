@@ -18,17 +18,22 @@
  */
 
 #include <iomanip>
-
+#include <QtCore/QtCore>
+#include <QtGui/QtGui>
 #include <QTextStream>
 #include <QString>
 #include <QDebug>
+#include <QObject>
+#include <QVariant>
 #include <QVarLengthArray>
+
+#include <GLee.h>
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelTexture.hpp"
 #include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
-#include "StelTexture.hpp"
 #include "Planet.hpp"
 
 #include "StelProjector.hpp"
@@ -44,7 +49,6 @@ Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
 StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
-
 Planet::Planet(const QString& englishName,
 			   int flagLighting,
 			   double radius,
@@ -80,6 +84,53 @@ Planet::Planet(const QString& englishName,
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+
+	nameI18 = englishName;
+	if (englishName!="Pluto")
+	{
+		deltaJD = 0.001*StelCore::JD_SECOND;
+	}
+	flagLabels = true;
+}
+
+Planet::Planet(const QString& englishName,
+			   int flagLighting,
+			   double radius,
+			   double oblateness,
+			   Vec3f color,
+			   float albedo,
+			   const QString& atexMapName,
+			   const QString& normalMapName,
+			   posFuncType coordFunc,
+			   void* auserDataPtr,
+			   OsculatingFunctType *osculatingFunc,
+			   bool acloseOrbit,
+			   bool hidden,
+			   bool hasAtmosphere)
+	: englishName(englishName),
+	  flagLighting(flagLighting),
+	  radius(radius), oneMinusOblateness(1.0-oblateness),
+	  color(color), albedo(albedo), axisRotation(0.), rings(NULL),
+	  sphereScale(1.f),
+	  lastJD(J2000),
+	  coordFunc(coordFunc),
+	  userDataPtr(auserDataPtr),
+	  osculatingFunc(osculatingFunc),
+	  parent(NULL),
+	  hidden(hidden),
+	  atmosphere(hasAtmosphere)
+{
+	texMapName = atexMapName;
+	this->normalMapName = normalMapName;
+	lastOrbitJD =0;
+	deltaJD = StelCore::JD_SECOND;
+	orbitCached = 0;
+	closeOrbit = acloseOrbit;
+
+	eclipticPos=Vec3d(0.,0.,0.);
+	rotLocalToParent = Mat4d::identity();
+	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	normalMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	nameI18 = englishName;
 	if (englishName!="Pluto")
@@ -739,6 +790,15 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 		// For lazy loading, return if texture not yet loaded
 		if (!texMap->bind())
 			return;
+	}
+
+	if (normalMap)
+	{
+	        //for lazy loading, disable normal mapping
+	        if(!(normalMap->bind()))
+	        {
+	                glUseProgram(0);
+                }
 	}
 
 	painter->enableTexture2d(true);
