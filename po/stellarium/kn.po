@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-04 16:40+0300\n"
-"PO-Revision-Date: 2011-03-31 04:43+0000\n"
-"Last-Translator: Jayasimha (ಜಯಸಿಂಹ) <jayasimha3000@gmail.com>\n"
+"PO-Revision-Date: 2011-08-11 05:09+0000\n"
+"Last-Translator: Prashanth <Unknown>\n"
 "Language-Team: Kannada <kn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-05 04:34+0000\n"
-"X-Generator: Launchpad (build 13604)\n"
+"X-Launchpad-Export-Date: 2011-08-12 04:34+0000\n"
+"X-Generator: Launchpad (build 13662)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -31,7 +31,7 @@ msgstr "ಸಮಭಾಜವೃತ್ತ"
 
 #: src/core/modules/GridLinesMgr.cpp:537
 msgid "Horizon"
-msgstr ""
+msgstr "ಕ್ಷಿತಿಜ"
 
 #: src/core/modules/LandscapeMgr.cpp:488
 msgid "Author: "
@@ -483,7 +483,7 @@ msgstr "ಇತರೆ"
 
 #: src/gui/HelpDialog.cpp:294
 msgid "Developers"
-msgstr ""
+msgstr "ನಿಮಿ೯ಸಿದವರು"
 
 #: src/gui/HelpDialog.cpp:295
 #, qt-format
@@ -1337,7 +1337,7 @@ msgstr "ದಿನದರ್ಶಿ"
 
 #: src/translations.h:170
 msgid "Sidereal"
-msgstr ""
+msgstr "ಸ್ಥಿರ ನಕ್ಷತ್ರ ಪುಂಜ"
 
 #: src/translations.h:171
 msgid "Preset Sky Time: "
@@ -2382,10 +2382,14 @@ msgid ""
 "configuration file. Allows setting the time zone and changing the way the "
 "time and the date are displayed in the bottom bar."
 msgstr ""
+"ಸ್ಟೆಲ್ಲೇರಿಯಮನ ಸಂರಚನಾ ಕಡತದ ಕೆಲವು ಹೆಚ್ಚಿನ ಅಸ್ಪಷ್ಟ ಆಯ್ಕೆಗಳ ಒಂದು ಅನುಕೂಲಕರ "
+"ಇಂಟರ್ಫೇಸ್. ಇದು ಸಮಯ ವಲಯವನ್ನು ನಿಶ್ಚಯಿಸುವುದಕ್ಕೆ ಹಾಗು ಸಮಯ ಮತ್ತು ದಿನಾಂಕಗಳು "
+"ಕೆಳಗೆಇರುವ ಪಟ್ಟಿಯಲ್ಲಿ ಪ್ರದರ್ಶನಗೊಳ್ಳುವ ರೀತಿಯನ್ನು ಬದಲಾಯಿಸುವುದಕ್ಕೆ ಅವಕಾಶ "
+"ಮಾಡಿಕೊಡುತ್ತದೆ."
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:78
 msgid "Text User Interface"
-msgstr ""
+msgstr "ಪಠ್ಯ ಬಳಕೆದಾರರ ಮಾಧ್ಯಮ"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:81
 msgid ""
@@ -2425,4 +2429,4 @@ msgstr ""
 #: plugins/Supernovae/src/Supernova.cpp:105
 #, qt-format
 msgid "Type: %1"
-msgstr ""
+msgstr "ಬಗೆ: %1"
