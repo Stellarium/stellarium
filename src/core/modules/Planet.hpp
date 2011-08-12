@@ -97,6 +97,20 @@ public:
 		   bool hidden,
 		   bool hasAtmosphere);
 
+	Planet(const QString& englishName,
+		   int flagLighting,
+		   double radius,
+		   double oblateness,
+		   Vec3f color,
+		   float albedo,
+		   const QString& texMapName,
+		   const QString& normalMapName,
+		   posFuncType _coordFunc,
+		   void* userDataPtr,
+		   OsculatingFunctType *osculatingFunc,
+		   bool closeOrbit,
+		   bool hidden,
+		   bool hasAtmosphere);
 	~Planet();
 
 	///////////////////////////////////////////////////////////////////////////
@@ -145,6 +159,7 @@ public:
 	double getSiderealDay(void) const {return re.period;}
 
 	const QString& getTextMapName() const {return texMapName;}
+	const QString& getNormalMapName() const {return normalMapName;}
 
 	// Compute the z rotation to use from equatorial to geographic coordinates
 	double getSiderealTime(double jd) const;
@@ -244,6 +259,7 @@ protected:
 	QString englishName;             // english planet name
 	QString nameI18;                 // International translated name
 	QString texMapName;              // Texture file path
+	QString normalMapName;           // Normal Map texture file path
 	int flagLighting;                // Set whether light computation has to be proceed
 	RotationElements re;             // Rotation param
 	double radius;                   // Planet radius in AU
@@ -257,6 +273,7 @@ protected:
 	Mat4d rotLocalToParent;
 	float axisRotation;              // Rotation angle of the Planet on it's axis
 	StelTextureSP texMap;            // Planet map texture
+	StelTextureSP normalMap;         // Planet normal map texture
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
 					 // it is used for sorting while drawing
