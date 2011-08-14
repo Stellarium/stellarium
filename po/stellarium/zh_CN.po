@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-04 16:40+0300\n"
-"PO-Revision-Date: 2011-07-27 12:33+0000\n"
-"Last-Translator: Canius <Unknown>\n"
+"PO-Revision-Date: 2011-08-13 08:48+0000\n"
+"Last-Translator: forest93 <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-05 04:36+0000\n"
-"X-Generator: Launchpad (build 13604)\n"
+"X-Launchpad-Export-Date: 2011-08-14 04:34+0000\n"
+"X-Generator: Launchpad (build 13674)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -106,7 +106,7 @@ msgstr "绝对星等: %1"
 #: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr ""
+msgstr "地心黄道座标轴（已过时）：%1/%2"
 
 #: src/core/modules/Planet.cpp:137
 #, qt-format
@@ -146,7 +146,7 @@ msgstr "视差: %1\""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr ""
+msgstr "太空船"
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
@@ -2264,6 +2264,8 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
+"“消光”是由于地球大气层的存在导致恒星亮度减弱的现象。其单位是星等或是气团。其中，“气团”指光线需要穿过的大气的厚度单位（天顶为 1，地平线为 40 "
+"左右）。"
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
@@ -2438,26 +2440,3 @@ msgstr "类型：%1"
 
 #~ msgid "Form"
 #~ msgstr "格式"
-
-#~ msgid "Loading NGC catalog"
-#~ msgstr "正在载入星云星团新总表"
-
-#~ msgid "Oculars configuration window"
-#~ msgstr "目镜设置窗口"
-
-#~ msgid "Telrad circles"
-#~ msgstr "圈出观测范围"
-
-#~ msgid "Keyboard for Greek input"
-#~ msgstr "希腊语键盘"
-
-#~ msgid "Dialog"
-#~ msgstr "对话框"
-
-#~ msgid "Historical supernova"
-#~ msgstr "历史记载的超新星"
-
-#~ msgid ""
-#~ "The plugin for visualization of some historical supernovas, brighter 10 "
-#~ "magnitude"
-#~ msgstr "这个插件包含了一些历史记载的超新星（亮度大于10星等）的图案"
