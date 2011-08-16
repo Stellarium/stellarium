@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-04 16:40+0300\n"
-"PO-Revision-Date: 2011-08-15 03:29+0000\n"
+"PO-Revision-Date: 2011-08-15 13:15+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-15 04:32+0000\n"
-"X-Generator: Launchpad (build 13674)\n"
+"X-Launchpad-Export-Date: 2011-08-16 04:32+0000\n"
+"X-Generator: Launchpad (build 13687)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -295,7 +295,7 @@ msgstr "Selecione o diretório em que serão armazenadas as capturas de tela"
 #: src/gui/ConfigurationDialog.cpp:462
 #, qt-format
 msgid "Startup FOV: %1%2"
-msgstr "Campo de visão a ser usado ao iniciar: %1%2"
+msgstr "Campo de visão a ser utilizado ao iniciar: %1%2"
 
 #: src/gui/ConfigurationDialog.cpp:470
 #, qt-format
@@ -2036,7 +2036,7 @@ msgstr "A largura do seu campo de visão quando o Stellarium iniciar"
 
 #: src/ui_configurationDialog.h:777
 msgid "Startup FOV: XX"
-msgstr "Campo de visão a ser usado na inicialização: XX"
+msgstr "Campo de visão a ser utilizado ao iniciar: XX"
 
 #: src/ui_configurationDialog.h:779
 msgid "The direction you're looking when Stellarium starts"
@@ -2133,8 +2133,8 @@ msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr ""
-"A distorção de espelho esférico é usada quando se projeta o Stellarium em um "
-"espelho esférico para sistemas de planetário de de baixo custo."
+"A distorção de espelho esférico é utilizada quando se projeta o Stellarium "
+"em um espelho esférico para sistemas de planetário de de baixo custo."
 
 #: src/ui_configurationDialog.h:818
 msgid "Spheric mirror distortion"
@@ -2461,7 +2461,7 @@ msgid ""
 msgstr ""
 "<p align=\"justify\">Uma interface prática para algumas das opções mais "
 "confusas no arquivo de configuração do Stellarium. Possibilita ajustar o "
-"fuso horário e mudar a forma como a hora e a data são exibidas na barra "
+"fuso horário e alterar a forma como a hora e a data são exibidas na barra "
 "inferior."
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:78
@@ -2474,7 +2474,7 @@ msgid ""
 "planetarium systems"
 msgstr ""
 "<p align=\"justify\">Implementação do pluguím das séries 0.9.x da interface "
-"textual (TUI), usada em sistemas de planetário."
+"textual (TUI), utilizada em sistemas de planetário."
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
