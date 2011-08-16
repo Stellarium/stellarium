@@ -1953,12 +1953,31 @@ void StelPainter::setArrays(const Vec3d* vertice, const Vec2f* texCoords, const 
 	setNormalPointer(GL_FLOAT, normalArray);
 }
 
+void StelPainter::setShaderArrays(const Vec3d *vertice, const Vec2f *texCoords, const Vec3f *colorArray, const Vec3f *normalArray, const Vec3f *tangentArray)
+{
+        enableNMapClientStates(vertice, texCoords, colorArray, normalArray, tangentArray);
+	setVertexPointer(3, GL_DOUBLE, vertice);
+	setTexCoordPointer(2, GL_FLOAT, texCoords);
+	setColorPointer(3, GL_FLOAT, colorArray);
+	setNormalPointer(GL_FLOAT, normalArray);
+	setTangentPointer(GL_FLOAT, tangentArray);
+}
+
 void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool normal)
 {
 	vertexArray.enabled = vertex;
 	texCoordArray.enabled = texture;
 	colorArray.enabled = color;
 	normalArray.enabled = normal;
+}
+
+void StelPainter::enableNMapClientStates(bool vertex, bool texture, bool color, bool normal, bool tangent)
+{
+        vertexArray.enabled = vertex;
+        texCoordArray.enabled = texture;
+        colorArray.enabled = color;
+        normalArray.enabled = normal;
+        tangentArray.enabled = tangent;
 }
 
 void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned int* indices)
