@@ -503,21 +503,13 @@
            </widget>
           </item>
           <item>
-           <widget class="QListWidget" name="listWidgetObjects">
+           <widget class="QListView" name="listViewObjects">
             <property name="selectionMode">
              <enum>QAbstractItemView::NoSelection</enum>
             </property>
-            <item>
-             <property name="text">
-              <string notr="true">2P/Encke</string>
-             </property>
-             <property name="checkState">
-              <enum>Unchecked</enum>
-             </property>
-             <property name="flags">
-              <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
-             </property>
-            </item>
+            <property name="uniformItemSizes">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
@@ -601,7 +593,7 @@
   <tabstop>radioButtonOverwrite</tabstop>
   <tabstop>radioButtonUpdate</tabstop>
   <tabstop>checkBoxOnlyOrbitalElements</tabstop>
-  <tabstop>listWidgetObjects</tabstop>
+  <tabstop>listViewObjects</tabstop>
   <tabstop>pushButtonMarkAll</tabstop>
   <tabstop>pushButtonMarkNone</tabstop>
   <tabstop>pushButtonDiscard</tabstop>
