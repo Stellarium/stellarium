@@ -147,8 +147,8 @@ void MpcImportWindow::resetDialog()
 	ui->groupBoxType->setVisible(true);
 	ui->radioButtonAsteroids->setChecked(true);
 
-	ui->radioButtonFile->setChecked(true);
-	ui->frameURL->setVisible(false);
+	ui->radioButtonURL->setChecked(true);
+	ui->frameFile->setVisible(false);
 
 	ui->lineEditFilePath->clear();
 	ui->lineEditQuery->clear();

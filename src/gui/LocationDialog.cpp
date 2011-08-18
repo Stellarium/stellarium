@@ -83,7 +83,7 @@ void LocationDialog::createDialogContent()
 	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->citiesListView->setModel(proxyModel);
 
-	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);		
+	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	ui->planetNameComboBox->insertItems(0, ssystem->getAllPlanetLocalizedNames());
 	ui->countryNameComboBox->insertItems(0, StelLocaleMgr::getAllCountryNames());
 
