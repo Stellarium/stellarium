@@ -83,7 +83,7 @@ void LocationDialog::createDialogContent()
 	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->citiesListView->setModel(proxyModel);
 
-	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);		
+	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	ui->planetNameComboBox->insertItems(0, ssystem->getAllPlanetLocalizedNames());
 	ui->countryNameComboBox->insertItems(0, StelLocaleMgr::getAllCountryNames());
 
@@ -302,6 +302,8 @@ void LocationDialog::spinBoxChanged(int )
 	reportEdit();
 	StelLocation loc = locationFromFields();
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
+	//Update the position of the map pointer
+	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
 }
 
 // Called when the location name is manually changed
