@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-04 16:40+0300\n"
-"PO-Revision-Date: 2011-04-30 15:16+0000\n"
-"Last-Translator: Bosse Klykken <Unknown>\n"
+"POT-Creation-Date: 2011-08-19 16:53+0700\n"
+"PO-Revision-Date: 2011-08-20 16:31+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-05 04:34+0000\n"
-"X-Generator: Launchpad (build 13604)\n"
+"X-Launchpad-Export-Date: 2011-08-21 04:35+0000\n"
+"X-Generator: Launchpad (build 13697)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -34,7 +34,7 @@ msgstr "Ekvator"
 
 #: src/core/modules/GridLinesMgr.cpp:537
 msgid "Horizon"
-msgstr ""
+msgstr "Horisont"
 
 #: src/core/modules/LandscapeMgr.cpp:488
 msgid "Author: "
@@ -62,7 +62,7 @@ msgstr "Type: <b>%1</b>"
 #: plugins/Supernovae/src/Supernova.cpp:98
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
-msgstr "Lysstyrke: <b>%1</b>"
+msgstr "Magnitude: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:104
 #, qt-format
@@ -104,17 +104,17 @@ msgstr "Udokumentert type"
 #: src/core/modules/Planet.cpp:123 src/core/modules/StarWrapper.cpp:112
 #, qt-format
 msgid "Absolute Magnitude: %1"
-msgstr "Absolutt lysstyrke: %1"
+msgstr "Absolutt magnitude: %1"
 
 #: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr ""
+msgstr "Ekliptisk geosentrisk (d.d.): %1/%2"
 
 #: src/core/modules/Planet.cpp:137
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr ""
+msgstr "Aksehelning (d.d.): %1"
 
 #: src/core/modules/Planet.cpp:143
 #, no-c-format, qt-format
@@ -129,7 +129,7 @@ msgstr "Tilsynelatende diameter: %1"
 #: src/core/modules/StarWrapper.cpp:51 src/core/modules/StarWrapper.cpp:108
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr "Lysstyrke: <b>%1</b> (B-V: %2)"
+msgstr "Magnitude: <b>%1</b> (B-V: %2)"
 
 #: src/core/modules/StarWrapper.cpp:118
 #, qt-format
@@ -149,7 +149,7 @@ msgstr "Parallakse: %1\""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr ""
+msgstr "Romskip"
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
@@ -277,11 +277,11 @@ msgstr "Timevinkel/DE: %1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
-msgstr ""
+msgstr "(geometrisk)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
-msgstr ""
+msgstr "(tilsynelatende)"
 
 #: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
@@ -596,7 +596,7 @@ msgstr "Meridianlinje"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
 msgid "Horizon line"
-msgstr ""
+msgstr "Horisontlinje"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
 msgid "Cardinal points"
@@ -986,47 +986,47 @@ msgstr "Callisto"
 
 #: src/translations.h:50
 msgid "Amalthea"
-msgstr ""
+msgstr "Amalthea"
 
 #: src/translations.h:51
 msgid "Himalia"
-msgstr ""
+msgstr "Himalia"
 
 #: src/translations.h:52
 msgid "Elara"
-msgstr ""
+msgstr "Elara"
 
 #: src/translations.h:53
 msgid "Pasiphae"
-msgstr ""
+msgstr "Pasiphae"
 
 #: src/translations.h:54
 msgid "Sinope"
-msgstr ""
+msgstr "Sinope"
 
 #: src/translations.h:55
 msgid "Lysithea"
-msgstr ""
+msgstr "Lysithea"
 
 #: src/translations.h:56
 msgid "Carme"
-msgstr ""
+msgstr "Carme"
 
 #: src/translations.h:57
 msgid "Ananke"
-msgstr ""
+msgstr "Ananke"
 
 #: src/translations.h:58
 msgid "Leda"
-msgstr ""
+msgstr "Leda"
 
 #: src/translations.h:59
 msgid "Thebe"
-msgstr ""
+msgstr "Thebe"
 
 #: src/translations.h:60
 msgid "Adrastea"
-msgstr ""
+msgstr "Adrastea"
 
 #. TRANSLATORS: Asteroid (9) Metis
 #: src/translations.h:61 src/translations.h:110
@@ -1112,12 +1112,12 @@ msgstr "Charon"
 #. TRANSLATORS: Moon of Pluto (II)
 #: src/translations.h:82
 msgid "Nix"
-msgstr ""
+msgstr "Nix"
 
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
 msgid "Hydra"
-msgstr "Vannslangen"
+msgstr "Hydra"
 
 #: src/translations.h:85
 msgid "Eris"
@@ -1125,55 +1125,55 @@ msgstr "Eris"
 
 #: src/translations.h:86
 msgid "Triton"
-msgstr ""
+msgstr "Triton"
 
 #: src/translations.h:87
 msgid "Nereid"
-msgstr ""
+msgstr "Nereid"
 
 #: src/translations.h:88
 msgid "Naiad"
-msgstr ""
+msgstr "Naiad"
 
 #: src/translations.h:89
 msgid "Thalassa"
-msgstr ""
+msgstr "Thalassa"
 
 #: src/translations.h:90
 msgid "Despina"
-msgstr ""
+msgstr "Despina"
 
 #: src/translations.h:91
 msgid "Galatea"
-msgstr ""
+msgstr "Galatea"
 
 #: src/translations.h:92
 msgid "Larissa"
-msgstr ""
+msgstr "Larissa"
 
 #: src/translations.h:93
 msgid "Proteus"
-msgstr ""
+msgstr "Proteus"
 
 #: src/translations.h:94
 msgid "Halimede"
-msgstr ""
+msgstr "Halimede"
 
 #: src/translations.h:95
 msgid "Psamathe"
-msgstr ""
+msgstr "Psamathe"
 
 #: src/translations.h:96
 msgid "Sao"
-msgstr ""
+msgstr "Sao"
 
 #: src/translations.h:97
 msgid "Laomedeia"
-msgstr ""
+msgstr "Laomedeia"
 
 #: src/translations.h:98
 msgid "Neso"
-msgstr ""
+msgstr "Neso"
 
 #: src/translations.h:99
 msgid "Solar System Observer"
@@ -1232,12 +1232,12 @@ msgstr "Hektor"
 #. TRANSLATORS: Name of supernova SN 1572A
 #: src/translations.h:124
 msgid "Tycho's Supernova"
-msgstr ""
+msgstr "Tychos supernova"
 
 #. TRANSLATORS: Name of supernova SN 1604A
 #: src/translations.h:126
 msgid "Kepler's Supernova"
-msgstr ""
+msgstr "Keplers supernova"
 
 # Noorden
 #: src/translations.h:130
@@ -1260,318 +1260,322 @@ msgid "W"
 msgstr "V"
 
 #: src/translations.h:136
+msgid "Arabic"
+msgstr "Arabisk"
+
+#: src/translations.h:137
 msgid "Aztec"
 msgstr "Aztekisk"
 
-#: src/translations.h:137
+#: src/translations.h:138
 msgid "Chinese"
 msgstr "Kinesisk"
 
-#: src/translations.h:138
+#: src/translations.h:139
 msgid "Egyptian"
 msgstr "Egyptisk"
 
-#: src/translations.h:139
+#: src/translations.h:140
 msgid "Inuit"
 msgstr "Inuittisk"
 
-#: src/translations.h:140
+#: src/translations.h:141
 msgid "Korean"
 msgstr "Koreansk"
 
-#: src/translations.h:141
+#: src/translations.h:142
 msgid "Lakota"
 msgstr "Lakota (indianere)"
 
-#: src/translations.h:142
+#: src/translations.h:143
 msgid "Maori"
 msgstr "Maori"
 
-#: src/translations.h:143
+#: src/translations.h:144
 msgid "Navajo"
 msgstr "Navajo (indianere)"
 
-#: src/translations.h:144
+#: src/translations.h:145
 msgid "Norse"
 msgstr "Norrøn"
 
-#: src/translations.h:145
+#: src/translations.h:146
 msgid "Polynesian"
 msgstr "Polynesisk"
 
-#: src/translations.h:146
+#: src/translations.h:147
 msgid "Sami"
 msgstr "Samisk"
 
-#: src/translations.h:147
+#: src/translations.h:148
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
-#: src/translations.h:148
+#: src/translations.h:149
 msgid "Western"
 msgstr "Vestlig"
 
-#: src/translations.h:152
+#: src/translations.h:153
 msgid "Set Location "
 msgstr "Still inn sted "
 
-#: src/translations.h:153
+#: src/translations.h:154
 msgid "Set Time "
 msgstr "Still inn tidspunkt "
 
-#: src/translations.h:154
+#: src/translations.h:155
 msgid "General "
 msgstr "Generelt "
 
-#: src/translations.h:155
+#: src/translations.h:156
 msgid "Stars "
 msgstr "Stjerner "
 
-#: src/translations.h:156
+#: src/translations.h:157
 msgid "Colors "
 msgstr "Farger "
 
-#: src/translations.h:157
+#: src/translations.h:158
 msgid "Effects "
 msgstr "Effekter "
 
-#: src/translations.h:158
+#: src/translations.h:159
 msgid "Scripts "
 msgstr "Skript "
 
-#: src/translations.h:159
+#: src/translations.h:160
 msgid "Administration "
 msgstr "Administrasjon "
 
-#: src/translations.h:161
+#: src/translations.h:162
 msgid "Latitude: "
 msgstr "Breddegrad: "
 
-#: src/translations.h:162
+#: src/translations.h:163
 msgid "Longitude: "
 msgstr "Lengdegrad: "
 
-#: src/translations.h:163
+#: src/translations.h:164
 msgid "Altitude (m): "
 msgstr "Høyde (m): "
 
-#: src/translations.h:164
+#: src/translations.h:165
 msgid "Solar System Body: "
 msgstr "Solsystemlegeme: "
 
-#: src/translations.h:166
+#: src/translations.h:167
 msgid "Sky Time: "
 msgstr "Stjernetid: "
 
-#: src/translations.h:167
+#: src/translations.h:168
 msgid "Set Time Zone: "
 msgstr "Still inn tidssone: "
 
-#: src/translations.h:168
+#: src/translations.h:169
 msgid "Day keys: "
 msgstr "Dag-taster: "
 
-#: src/translations.h:169
+#: src/translations.h:170
 msgid "Calendar"
 msgstr "Kalender"
 
-#: src/translations.h:170
+#: src/translations.h:171
 msgid "Sidereal"
 msgstr "Siderisk"
 
-#: src/translations.h:171
+#: src/translations.h:172
 msgid "Preset Sky Time: "
 msgstr "Forhåndsinnstilt himmeltid: "
 
-#: src/translations.h:172
+#: src/translations.h:173
 msgid "Sky Time At Start-up: "
 msgstr "Himmeltid ved oppstart: "
 
-#: src/translations.h:173
+#: src/translations.h:174
 msgid "Actual Time"
 msgstr "Faktisk tid"
 
-#: src/translations.h:174
+#: src/translations.h:175
 msgid "Preset Time"
 msgstr "Forhåndsinnstilt tid"
 
-#: src/translations.h:175
+#: src/translations.h:176
 msgid "Time Display Format: "
 msgstr "Format for tidsvisning: "
 
-#: src/translations.h:176
+#: src/translations.h:177
 msgid "Date Display Format: "
 msgstr "Format for datovisning: "
 
-#: src/translations.h:178
+#: src/translations.h:179
 msgid "Sky Culture: "
 msgstr "Stjernebilder utfra kultur: "
 
-#: src/translations.h:179
+#: src/translations.h:180
 msgid "Sky Language: "
 msgstr "Språk for objektbeskrivelse: "
 
-#: src/translations.h:181
+#: src/translations.h:182
 msgid "Show: "
 msgstr "Vis: "
 
-#: src/translations.h:182
-msgid "Star Value Multiplier: "
-msgstr "Stjerneverdi multiplikator: "
-
 #: src/translations.h:183
-msgid "Magnitude Sizing Multiplier: "
-msgstr "Størrelsesendringsfaktor: "
+msgid "Star Value Multiplier: "
+msgstr "Stjerneverdi-multiplikator: "
 
 #: src/translations.h:184
+msgid "Magnitude Sizing Multiplier: "
+msgstr "Magnitude - dimensjoneringsmultiplikator: "
+
+#: src/translations.h:185
 msgid "Maximum Magnitude to Label: "
 msgstr "Maksimum magnitude for å bli påskrevet: "
 
-#: src/translations.h:185
+#: src/translations.h:186
 msgid "Twinkling: "
 msgstr "Funkling: "
 
-#: src/translations.h:186
+#: src/translations.h:187
 msgid "Limiting Magnitude: "
 msgstr "Grensemagnitude: "
 
-#: src/translations.h:188
+#: src/translations.h:189
 msgid "Constellation Lines"
 msgstr "Stjernebildelinjer"
 
-#: src/translations.h:189
+#: src/translations.h:190
 msgid "Constellation Names"
 msgstr "Stjernebildenavn"
 
-#: src/translations.h:190
+#: src/translations.h:191
 msgid "Constellation Art Intensity"
 msgstr "Stjernebildekunstens intensitet"
 
-#: src/translations.h:191
+#: src/translations.h:192
 msgid "Constellation Boundaries"
 msgstr "Stjernebildegrenser"
 
-#: src/translations.h:192
+#: src/translations.h:193
 msgid "Cardinal Points"
 msgstr "Himmelretninger"
 
-#: src/translations.h:193
+#: src/translations.h:194
 msgid "Planet Names"
 msgstr "Planetnavn"
 
-#: src/translations.h:194
+#: src/translations.h:195
 msgid "Planet Orbits"
 msgstr "Planetbaner"
 
-#: src/translations.h:195
+#: src/translations.h:196
 msgid "Planet Trails"
 msgstr "Planetspor"
 
-#: src/translations.h:196
+#: src/translations.h:197
 msgid "Meridian Line"
 msgstr "Meridianlinje"
 
-#: src/translations.h:197
+#: src/translations.h:198
 msgid "Azimuthal Grid"
 msgstr "Asimutnett"
 
-#: src/translations.h:198
+#: src/translations.h:199
 msgid "Equatorial Grid"
 msgstr "Ekvatorialt nett"
 
-#: src/translations.h:199
+#: src/translations.h:200
 msgid "Equator Line"
 msgstr "Ekvatorlinje"
 
-#: src/translations.h:200
+#: src/translations.h:201
 msgid "Ecliptic Line"
 msgstr "Ekliptikklinje"
 
-#: src/translations.h:201
+#: src/translations.h:202
 msgid "Nebula Names"
 msgstr "Stjernetåkenavn"
 
-#: src/translations.h:202
+#: src/translations.h:203
 msgid "Nebula Circles"
 msgstr "Stjernetåkesirkler"
 
-#: src/translations.h:204
+#: src/translations.h:205
 msgid "Light Pollution Luminance: "
 msgstr "Styrke på lysforurensing: "
 
-#: src/translations.h:205
+#: src/translations.h:206
 msgid "Landscape: "
 msgstr "Landskap: "
 
-#: src/translations.h:206
+#: src/translations.h:207
 msgid "Manual zoom: "
 msgstr "Manuell zoom: "
 
-#: src/translations.h:207
-msgid "Object Sizing Rule: "
-msgstr "Regel for endring av objektstørrelse: "
-
 #: src/translations.h:208
-msgid "Magnitude Scaling Multiplier: "
-msgstr "Magnitudeskaleringsfaktor: "
+msgid "Object Sizing Rule: "
+msgstr "Regel for objektstørrelse: "
 
 #: src/translations.h:209
+msgid "Magnitude Scaling Multiplier: "
+msgstr "Magnitude - skaleringsmultiplikator: "
+
+#: src/translations.h:210
 msgid "Milky Way intensity: "
 msgstr "Intensitet for Melkeveien: "
 
-#: src/translations.h:210
+#: src/translations.h:211
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Maksimum magnitude på stjernetåke for å bli påskrevet: "
 
-#: src/translations.h:211
+#: src/translations.h:212
 msgid "Zoom Duration: "
 msgstr "Trinn for zoom: "
 
-#: src/translations.h:212
+#: src/translations.h:213
 msgid "Cursor Timeout: "
 msgstr "Markør fjernes etter: "
 
-#: src/translations.h:213
+#: src/translations.h:214
 msgid "Correct for light travel time: "
 msgstr "Korriger for lysreisetid: "
 
-#: src/translations.h:215
+#: src/translations.h:216
 msgid "Local Script: "
 msgstr "Lokalt skript: "
 
-#: src/translations.h:216
+#: src/translations.h:217
 msgid "CD/DVD Script: "
 msgstr "CD/DVD skript: "
 
-#: src/translations.h:217
+#: src/translations.h:218
 msgid "USB Script: "
 msgstr "USB-skript: "
 
-#: src/translations.h:218
+#: src/translations.h:219
 msgid "Arrow down to load list."
 msgstr "Pil ned for å laste liste."
 
-#: src/translations.h:219
+#: src/translations.h:220
 msgid "Select and exit to run."
 msgstr "Velg og avslutt for å kjøre."
 
-#: src/translations.h:221
+#: src/translations.h:222
 msgid "Load Default Configuration: "
 msgstr "Last standardinnstillinger: "
 
-#: src/translations.h:222
+#: src/translations.h:223
 msgid "Save Current Configuration as Default: "
 msgstr "Lagre gjeldende innstillinger som standard: "
 
-#: src/translations.h:223
+#: src/translations.h:224
 msgid "Shut Down: "
 msgstr "Avslutte: "
 
-#: src/translations.h:224
+#: src/translations.h:225
 msgid "Update me via Internet: "
 msgstr "Oppdater meg via internett: "
 
-#: src/translations.h:225
+#: src/translations.h:226
 msgid "Set UI Locale: "
 msgstr "Språk i programmet: "
 
@@ -1665,15 +1669,15 @@ msgstr "Finn objekt"
 
 #: src/ui_searchDialogGui.h:451
 msgid "Find Object or Position"
-msgstr ""
+msgstr "Finn objekt eller posisjon"
 
 #: src/ui_searchDialogGui.h:458
 msgid "iota"
-msgstr ""
+msgstr "iota"
 
 #: src/ui_searchDialogGui.h:461
 msgid "alpha"
-msgstr "alpha"
+msgstr "alfa"
 
 #: src/ui_searchDialogGui.h:464
 msgid "beta"
@@ -1713,15 +1717,15 @@ msgstr "lambda"
 
 #: src/ui_searchDialogGui.h:491
 msgid "mu"
-msgstr "mu"
+msgstr "my"
 
 #: src/ui_searchDialogGui.h:494
 msgid "nu"
-msgstr "nu"
+msgstr "ny"
 
 #: src/ui_searchDialogGui.h:497
 msgid "xi"
-msgstr "xi"
+msgstr "ksi"
 
 #: src/ui_searchDialogGui.h:500
 msgid "omicron"
@@ -1729,11 +1733,11 @@ msgstr "omikron"
 
 #: src/ui_searchDialogGui.h:503
 msgid "pi"
-msgstr ""
+msgstr "pi"
 
 #: src/ui_searchDialogGui.h:506
 msgid "rho"
-msgstr ""
+msgstr "rho"
 
 #: src/ui_searchDialogGui.h:509
 msgid "sigma"
@@ -1741,35 +1745,35 @@ msgstr "sigma"
 
 #: src/ui_searchDialogGui.h:512
 msgid "tau"
-msgstr ""
+msgstr "tau"
 
 #: src/ui_searchDialogGui.h:515
 msgid "upsilon"
-msgstr "upsilon"
+msgstr "ypsilon"
 
 #: src/ui_searchDialogGui.h:518
 msgid "phi"
-msgstr ""
+msgstr "phi"
 
 #: src/ui_searchDialogGui.h:521
 msgid "chi"
-msgstr ""
+msgstr "khi"
 
 #: src/ui_searchDialogGui.h:524
 msgid "psi"
-msgstr ""
+msgstr "psi"
 
 #: src/ui_searchDialogGui.h:527
 msgid "omega"
-msgstr ""
+msgstr "omega"
 
 #: src/ui_searchDialogGui.h:529
 msgid "Greek letters for Bayer designations"
-msgstr ""
+msgstr "Greske bokstaver for Bayer-betegnelser"
 
 #: src/ui_searchDialogGui.h:530
 msgid "Object"
-msgstr ""
+msgstr "Objekt"
 
 #: src/ui_searchDialogGui.h:531
 msgid "RA/Dec (J2000):"
@@ -1777,7 +1781,7 @@ msgstr "RA/Dec (J2000):"
 
 #: src/ui_searchDialogGui.h:532
 msgid "Position"
-msgstr ""
+msgstr "Posisjon"
 
 #: src/ui_viewDialog.h:1052
 msgid "View"
@@ -1853,11 +1857,11 @@ msgstr "Lysforurensing: "
 
 #: src/ui_viewDialog.h:1085
 msgid "pressure, temperature, extinction coefficient"
-msgstr ""
+msgstr "trykk, temperatur, ekstinksjonskoeffisient"
 
 #: src/ui_viewDialog.h:1087
 msgid "Refraction/Extinction settings..."
-msgstr ""
+msgstr "Still inn refraksjon/ekstinksjon"
 
 #: src/ui_viewDialog.h:1088
 msgid "Labels and Markers"
@@ -1954,7 +1958,7 @@ msgstr "Bruk dette landskapet som standard"
 
 #: src/ui_viewDialog.h:1123
 msgid "Use this sky culture as default"
-msgstr "Bruk denne stjernebildekulturen som standard"
+msgstr "Bruk denne himmelkulturen som standard"
 
 #: src/ui_viewDialog.h:1125
 msgid "Visible"
@@ -2296,19 +2300,19 @@ msgstr ""
 
 #: src/ui_AtmosphereDialog.h:167
 msgid "Atmosphere Details"
-msgstr ""
+msgstr "Atmosfæredetaljer"
 
 #: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
-msgstr ""
+msgstr "Refraksjons-innstillinger"
 
 #: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
-msgstr ""
+msgstr "Trykk (mbar):"
 
 #: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
-msgstr ""
+msgstr "Temperatur (C):"
 
 #: src/ui_AtmosphereDialog.h:176
 msgid ""
@@ -2316,16 +2320,21 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
+"Ekstinksjon er svekkelsen av stjerners lysstyrke grunnet Jordas atmosfære. "
+"Den er gitt i mag/luftmasse, hvor luftmasse er antallet atmosfærer lys må "
+"passere. (senit: 1; horisont: omtrent 40)"
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
-msgstr ""
+msgstr "Ekstinksjonskoeffisient:"
 
 #: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
+"Bruk omtrent 0,12 for ypperlige fjelltopper, 0,2 for gode landlige landskap, "
+"0,35 for mørke forhold."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -2373,7 +2382,7 @@ msgstr "Okularvisning"
 
 #: plugins/Oculars/src/Oculars.cpp:965
 msgid "Oculars popup menu"
-msgstr "Ocular oppsprettmeny"
+msgstr "Oppsprettsmeny for okularer"
 
 #: plugins/Satellites/src/Satellites.cpp:67
 msgid "Satellites"
@@ -2470,18 +2479,20 @@ msgid ""
 "its online database. Still a work in progress."
 msgstr ""
 "En brukerflate for å legge til asteroider og kometer i Stellarium. Den kan "
-"laste ned objektlister fra Minor Planet Center's nettsted og utføre søk i "
-"dets nettbaserte database. Fremdeles i utvikling."
+"laste ned objektlister fra nettstedet til Minor Planet Center og utføre søk "
+"i dets nettbaserte database. Fremdeles i utvikling."
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical supernovae"
-msgstr ""
+msgstr "Historiske supernovaer"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
 "The plugin for visualization of some historical supernovae, brighter 10 "
 "magnitude"
 msgstr ""
+"Programtillegget for visualisering av noen historiske supernovaer, lysere "
+"enn magnitude 10"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
@@ -2490,23 +2501,15 @@ msgid ""
 "1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
 "August), SN 1972E (8 May) and SN 1987A (24 February)"
 msgstr ""
+"SN 185A (7. desember), SN 386A (24. april), SN 1006A (29. april), SN 1054A "
+"(3. juli), SN 1181A (4. august), SN 1572A (5. november), SN 1604A (8. "
+"oktober), SN 1680A (15. august), SN 1885A (17. august), SN 1895B (5. juli), "
+"SN 1937C (21. august), SN 1972E (8. mai) og SN 1987A (24. februar)"
 
 #: plugins/Supernovae/src/Supernova.cpp:105
 #, qt-format
 msgid "Type: %1"
-msgstr ""
+msgstr "Type: %1"
 
 #~ msgid "Form"
 #~ msgstr "Format"
-
-#~ msgid "Loading NGC catalog"
-#~ msgstr "Laster NGC katalog"
-
-#~ msgid "Oculars configuration window"
-#~ msgstr "Innstillingsvindu for okularer"
-
-#~ msgid "Telrad circles"
-#~ msgstr "Telrad-sirkler"
-
-#~ msgid "Keyboard for Greek input"
-#~ msgstr "Gresk tastatur"
