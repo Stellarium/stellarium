@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-04 16:40+0300\n"
+"POT-Creation-Date: 2011-08-19 16:53+0700\n"
 "PO-Revision-Date: 2011-05-28 21:30+0000\n"
-"Last-Translator: j0hn aka c7p <c7p.admin@gmail.com>\n"
+"Last-Translator: c7p <c7p.admin@gmail.com>\n"
 "Language-Team: Greek, Modern (1453-) <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-05 04:33+0000\n"
-"X-Generator: Launchpad (build 13604)\n"
+"X-Launchpad-Export-Date: 2011-08-21 04:34+0000\n"
+"X-Generator: Launchpad (build 13697)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -1256,318 +1256,322 @@ msgid "W"
 msgstr "Δ"
 
 #: src/translations.h:136
+msgid "Arabic"
+msgstr ""
+
+#: src/translations.h:137
 msgid "Aztec"
 msgstr "Αζτέκοι"
 
-#: src/translations.h:137
+#: src/translations.h:138
 msgid "Chinese"
 msgstr "Κινέζικος"
 
-#: src/translations.h:138
+#: src/translations.h:139
 msgid "Egyptian"
 msgstr "Αιγυπτιακός"
 
-#: src/translations.h:139
+#: src/translations.h:140
 msgid "Inuit"
 msgstr "Ίνουιτ (Εσκιμώος)"
 
-#: src/translations.h:140
+#: src/translations.h:141
 msgid "Korean"
 msgstr "Κορεάτικη"
 
-#: src/translations.h:141
+#: src/translations.h:142
 msgid "Lakota"
 msgstr "Ινδιάνοι Λακότα"
 
-#: src/translations.h:142
+#: src/translations.h:143
 msgid "Maori"
 msgstr "Maori"
 
-#: src/translations.h:143
+#: src/translations.h:144
 msgid "Navajo"
 msgstr "Ινδιάνοι Ναβάχο"
 
-#: src/translations.h:144
+#: src/translations.h:145
 msgid "Norse"
 msgstr "Σκανδιναβική"
 
-#: src/translations.h:145
+#: src/translations.h:146
 msgid "Polynesian"
 msgstr "Πολυνήσιος"
 
-#: src/translations.h:146
+#: src/translations.h:147
 msgid "Sami"
 msgstr "Sami"
 
-#: src/translations.h:147
+#: src/translations.h:148
 msgid "Tupi-Guarani"
 msgstr "Τούπι-Γκουαράνι"
 
-#: src/translations.h:148
+#: src/translations.h:149
 msgid "Western"
 msgstr "Δυτικός"
 
-#: src/translations.h:152
+#: src/translations.h:153
 msgid "Set Location "
 msgstr "Καθορισμός τοποθεσίας: "
 
-#: src/translations.h:153
+#: src/translations.h:154
 msgid "Set Time "
 msgstr "Καθορισμός ώρας "
 
-#: src/translations.h:154
+#: src/translations.h:155
 msgid "General "
 msgstr "Γενικά "
 
-#: src/translations.h:155
+#: src/translations.h:156
 msgid "Stars "
 msgstr "Αστέρες "
 
-#: src/translations.h:156
+#: src/translations.h:157
 msgid "Colors "
 msgstr "Χρώματα "
 
-#: src/translations.h:157
+#: src/translations.h:158
 msgid "Effects "
 msgstr "Εφέ "
 
-#: src/translations.h:158
+#: src/translations.h:159
 msgid "Scripts "
 msgstr "Σενάρια "
 
-#: src/translations.h:159
+#: src/translations.h:160
 msgid "Administration "
 msgstr "Διαχείριση "
 
-#: src/translations.h:161
+#: src/translations.h:162
 msgid "Latitude: "
 msgstr "Γεωγραφικό πλάτος: "
 
-#: src/translations.h:162
+#: src/translations.h:163
 msgid "Longitude: "
 msgstr "Γεωγραφικό μήκος: "
 
-#: src/translations.h:163
+#: src/translations.h:164
 msgid "Altitude (m): "
 msgstr "Ύψος (μ): "
 
-#: src/translations.h:164
+#: src/translations.h:165
 msgid "Solar System Body: "
 msgstr "Σώμα Ηλιακού Συστήματος: "
 
-#: src/translations.h:166
+#: src/translations.h:167
 msgid "Sky Time: "
 msgstr "Ώρα ουρανού: "
 
-#: src/translations.h:167
+#: src/translations.h:168
 msgid "Set Time Zone: "
 msgstr "Καθορισμός ζώνης ώρας: "
 
-#: src/translations.h:168
+#: src/translations.h:169
 msgid "Day keys: "
 msgstr "Πλήκτρα ημέρας: "
 
-#: src/translations.h:169
+#: src/translations.h:170
 msgid "Calendar"
 msgstr "Ημερολόγιο"
 
-#: src/translations.h:170
+#: src/translations.h:171
 msgid "Sidereal"
 msgstr "Συνοδικός"
 
-#: src/translations.h:171
+#: src/translations.h:172
 msgid "Preset Sky Time: "
 msgstr "Προκαθορισμένος χρόνος ουρανού: "
 
-#: src/translations.h:172
+#: src/translations.h:173
 msgid "Sky Time At Start-up: "
 msgstr "Ώρα ουρανού κατά την εκκίνηση: "
 
-#: src/translations.h:173
+#: src/translations.h:174
 msgid "Actual Time"
 msgstr "Πραγματική ώρα"
 
-#: src/translations.h:174
+#: src/translations.h:175
 msgid "Preset Time"
 msgstr "Προκαθορισμένη ώρα"
 
-#: src/translations.h:175
+#: src/translations.h:176
 msgid "Time Display Format: "
 msgstr "Μορφή παρουσίασης ώρας: "
 
-#: src/translations.h:176
+#: src/translations.h:177
 msgid "Date Display Format: "
 msgstr "Μορφή παρουσίασης ημερομηνίας: "
 
-#: src/translations.h:178
+#: src/translations.h:179
 msgid "Sky Culture: "
 msgstr "Πολιτισμός παρουσίασης ουρανού: "
 
-#: src/translations.h:179
+#: src/translations.h:180
 msgid "Sky Language: "
 msgstr "Γλώσσα παρουσίασης ουρανού: "
 
-#: src/translations.h:181
+#: src/translations.h:182
 msgid "Show: "
 msgstr "Παρουσίαση: "
 
-#: src/translations.h:182
+#: src/translations.h:183
 msgid "Star Value Multiplier: "
 msgstr "Πολλαπλασιαστής αριθμού αστέρων: "
 
-#: src/translations.h:183
+#: src/translations.h:184
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Πολλαπλασιαστής μεγέθους οπτικού μεγέθους αστέρα "
 
-#: src/translations.h:184
+#: src/translations.h:185
 msgid "Maximum Magnitude to Label: "
 msgstr "Μέγιστη απόσταση παρουσίασης ετικετών: "
 
-#: src/translations.h:185
+#: src/translations.h:186
 msgid "Twinkling: "
 msgstr "Αναλαμπές: "
 
-#: src/translations.h:186
+#: src/translations.h:187
 msgid "Limiting Magnitude: "
 msgstr "Οριακό μέγεθος: "
 
-#: src/translations.h:188
+#: src/translations.h:189
 msgid "Constellation Lines"
 msgstr "Γραμμές αστερισμών"
 
-#: src/translations.h:189
+#: src/translations.h:190
 msgid "Constellation Names"
 msgstr "Ονόματα αστερισμών"
 
-#: src/translations.h:190
+#: src/translations.h:191
 msgid "Constellation Art Intensity"
 msgstr "Ένταση εμφάνισης καλλιτεχνικής άποψης αστερισμών"
 
-#: src/translations.h:191
+#: src/translations.h:192
 msgid "Constellation Boundaries"
 msgstr "Όρια αστερισμών"
 
-#: src/translations.h:192
+#: src/translations.h:193
 msgid "Cardinal Points"
 msgstr "Σημεία ορίζοντα"
 
-#: src/translations.h:193
+#: src/translations.h:194
 msgid "Planet Names"
 msgstr "Ονόματα πλανητών"
 
-#: src/translations.h:194
+#: src/translations.h:195
 msgid "Planet Orbits"
 msgstr "Τροχιές πλανητών"
 
-#: src/translations.h:195
+#: src/translations.h:196
 msgid "Planet Trails"
 msgstr "Ίχνη πλανητών"
 
-#: src/translations.h:196
+#: src/translations.h:197
 msgid "Meridian Line"
 msgstr "Γραμμή Μεσημβρινού"
 
-#: src/translations.h:197
+#: src/translations.h:198
 msgid "Azimuthal Grid"
 msgstr "Πλέγμα Αζιμούθιου"
 
-#: src/translations.h:198
+#: src/translations.h:199
 msgid "Equatorial Grid"
 msgstr "Πλέγμα Ισημερινού"
 
-#: src/translations.h:199
+#: src/translations.h:200
 msgid "Equator Line"
 msgstr "Γραμμή Ισημερινού"
 
-#: src/translations.h:200
+#: src/translations.h:201
 msgid "Ecliptic Line"
 msgstr "Εκλειπτική γραμμή"
 
-#: src/translations.h:201
+#: src/translations.h:202
 msgid "Nebula Names"
 msgstr "Ονόματα νεφελωμάτων"
 
-#: src/translations.h:202
+#: src/translations.h:203
 msgid "Nebula Circles"
 msgstr "Κύκλοι νεφελωμάτων"
 
-#: src/translations.h:204
+#: src/translations.h:205
 msgid "Light Pollution Luminance: "
 msgstr "Ένταση φωτορύπανσης: "
 
-#: src/translations.h:205
+#: src/translations.h:206
 msgid "Landscape: "
 msgstr "Τοπίο: "
 
-#: src/translations.h:206
+#: src/translations.h:207
 msgid "Manual zoom: "
 msgstr "Χειροκίνητη εστίαση: "
 
-#: src/translations.h:207
+#: src/translations.h:208
 msgid "Object Sizing Rule: "
 msgstr "Κανόνας μεγέθους αντικειμένων: "
 
-#: src/translations.h:208
+#: src/translations.h:209
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Πολλαπλασιαστής κλίμακας μεγεθών "
 
-#: src/translations.h:209
+#: src/translations.h:210
 msgid "Milky Way intensity: "
 msgstr "Φωτεινότητα Γαλαξία: "
 
-#: src/translations.h:210
+#: src/translations.h:211
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Μέγιστη Φωτεινότητα Νεφελωμάτων για ετικέτα "
 
-#: src/translations.h:211
+#: src/translations.h:212
 msgid "Zoom Duration: "
 msgstr "Διάρκεια εστίασης: "
 
-#: src/translations.h:212
+#: src/translations.h:213
 msgid "Cursor Timeout: "
 msgstr "Μέγιστο χρονικό όριο δείκτη ποντικιού: "
 
-#: src/translations.h:213
+#: src/translations.h:214
 msgid "Correct for light travel time: "
 msgstr "Διόρθωση για χρόνο ταξιδιού φωτός: "
 
-#: src/translations.h:215
+#: src/translations.h:216
 msgid "Local Script: "
 msgstr "Τοπικό Σενάριο: "
 
-#: src/translations.h:216
+#: src/translations.h:217
 msgid "CD/DVD Script: "
 msgstr "Σενάριο CD/DVD "
 
-#: src/translations.h:217
+#: src/translations.h:218
 msgid "USB Script: "
 msgstr "USB σενάριο: "
 
-#: src/translations.h:218
+#: src/translations.h:219
 msgid "Arrow down to load list."
 msgstr "Βέλος προς τα κάτω για να φορτωθεί η λίστα."
 
-#: src/translations.h:219
+#: src/translations.h:220
 msgid "Select and exit to run."
 msgstr "Επιλογή και έξοδος για εκτέλεση."
 
-#: src/translations.h:221
+#: src/translations.h:222
 msgid "Load Default Configuration: "
 msgstr "Φόρτωση προεπιλεγμένων ρυθμίσεων: "
 
-#: src/translations.h:222
+#: src/translations.h:223
 msgid "Save Current Configuration as Default: "
 msgstr "Αποθήκευση τρεχόντων ρυθμίσεων ως προεπιλεγμένες: "
 
-#: src/translations.h:223
+#: src/translations.h:224
 msgid "Shut Down: "
 msgstr "Τερματισμός: "
 
-#: src/translations.h:224
+#: src/translations.h:225
 msgid "Update me via Internet: "
 msgstr "Ενημέρωση μέσω Διαδικτύου: "
 
-#: src/translations.h:225
+#: src/translations.h:226
 msgid "Set UI Locale: "
 msgstr "Γλώσσα περιβάλλοντος χρήστη: "
 
@@ -2503,12 +2507,3 @@ msgstr ""
 
 #~ msgid "Form"
 #~ msgstr "Φόρμα"
-
-#~ msgid "Loading NGC catalog"
-#~ msgstr "Φόρτωση καταλόγου NGC"
-
-#~ msgid "Oculars configuration window"
-#~ msgstr "παράθυρο διαμόρφωσης οπτικών"
-
-#~ msgid "Telrad circles"
-#~ msgstr "Κύκλοι Τέλραντ"
