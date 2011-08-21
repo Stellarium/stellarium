@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-04 16:40+0300\n"
-"PO-Revision-Date: 2011-08-04 07:47+0000\n"
-"Last-Translator: Bogdan Marinov <daggerstab@gmail.com>\n"
+"POT-Creation-Date: 2011-08-19 16:53+0700\n"
+"PO-Revision-Date: 2011-08-20 08:02+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-05 04:32+0000\n"
-"X-Generator: Launchpad (build 13604)\n"
+"X-Launchpad-Export-Date: 2011-08-21 04:33+0000\n"
+"X-Generator: Launchpad (build 13697)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -146,7 +146,7 @@ msgstr "Паралакс: %1\""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr ""
+msgstr "Космически апарат"
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
@@ -1253,318 +1253,322 @@ msgid "W"
 msgstr "З"
 
 #: src/translations.h:136
+msgid "Arabic"
+msgstr ""
+
+#: src/translations.h:137
 msgid "Aztec"
 msgstr "Ацтекска"
 
-#: src/translations.h:137
+#: src/translations.h:138
 msgid "Chinese"
 msgstr "Китайска"
 
-#: src/translations.h:138
+#: src/translations.h:139
 msgid "Egyptian"
 msgstr "Египетска"
 
-#: src/translations.h:139
+#: src/translations.h:140
 msgid "Inuit"
 msgstr "Ескимоска"
 
-#: src/translations.h:140
+#: src/translations.h:141
 msgid "Korean"
 msgstr "Корейска"
 
-#: src/translations.h:141
+#: src/translations.h:142
 msgid "Lakota"
 msgstr "Лакотска"
 
-#: src/translations.h:142
+#: src/translations.h:143
 msgid "Maori"
 msgstr "Маорска"
 
-#: src/translations.h:143
+#: src/translations.h:144
 msgid "Navajo"
 msgstr "Навахо"
 
-#: src/translations.h:144
+#: src/translations.h:145
 msgid "Norse"
 msgstr "Норвежка"
 
-#: src/translations.h:145
+#: src/translations.h:146
 msgid "Polynesian"
 msgstr "Полинезийска"
 
-#: src/translations.h:146
+#: src/translations.h:147
 msgid "Sami"
 msgstr "Сами"
 
-#: src/translations.h:147
+#: src/translations.h:148
 msgid "Tupi-Guarani"
 msgstr "Тупи-гуарани"
 
-#: src/translations.h:148
+#: src/translations.h:149
 msgid "Western"
 msgstr "Западна"
 
-#: src/translations.h:152
+#: src/translations.h:153
 msgid "Set Location "
 msgstr "Задаване на местоположение "
 
-#: src/translations.h:153
+#: src/translations.h:154
 msgid "Set Time "
 msgstr "Задаване на време "
 
-#: src/translations.h:154
+#: src/translations.h:155
 msgid "General "
 msgstr "Главно "
 
-#: src/translations.h:155
+#: src/translations.h:156
 msgid "Stars "
 msgstr "Звезди "
 
-#: src/translations.h:156
+#: src/translations.h:157
 msgid "Colors "
 msgstr "Цветове "
 
-#: src/translations.h:157
+#: src/translations.h:158
 msgid "Effects "
 msgstr "Ефекти "
 
-#: src/translations.h:158
+#: src/translations.h:159
 msgid "Scripts "
 msgstr "Скриптове "
 
-#: src/translations.h:159
+#: src/translations.h:160
 msgid "Administration "
 msgstr "Администрация "
 
-#: src/translations.h:161
+#: src/translations.h:162
 msgid "Latitude: "
 msgstr "Г.ш.: "
 
-#: src/translations.h:162
+#: src/translations.h:163
 msgid "Longitude: "
 msgstr "Г.д.: "
 
-#: src/translations.h:163
+#: src/translations.h:164
 msgid "Altitude (m): "
 msgstr "Надморска височина (m): "
 
-#: src/translations.h:164
+#: src/translations.h:165
 msgid "Solar System Body: "
 msgstr "Тяло от слънчевата система: "
 
-#: src/translations.h:166
+#: src/translations.h:167
 msgid "Sky Time: "
 msgstr "Небесно време: "
 
-#: src/translations.h:167
+#: src/translations.h:168
 msgid "Set Time Zone: "
 msgstr "Задаване на часова зона: "
 
-#: src/translations.h:168
+#: src/translations.h:169
 msgid "Day keys: "
 msgstr "Клавиши за дните: "
 
-#: src/translations.h:169
+#: src/translations.h:170
 msgid "Calendar"
 msgstr "Календар"
 
-#: src/translations.h:170
+#: src/translations.h:171
 msgid "Sidereal"
 msgstr "Астрономически"
 
-#: src/translations.h:171
+#: src/translations.h:172
 msgid "Preset Sky Time: "
 msgstr "Зададено небесно време: "
 
-#: src/translations.h:172
+#: src/translations.h:173
 msgid "Sky Time At Start-up: "
 msgstr "Небесно време при стартиране: "
 
-#: src/translations.h:173
+#: src/translations.h:174
 msgid "Actual Time"
 msgstr "Настоящо време"
 
-#: src/translations.h:174
+#: src/translations.h:175
 msgid "Preset Time"
 msgstr "Зададено време"
 
-#: src/translations.h:175
+#: src/translations.h:176
 msgid "Time Display Format: "
 msgstr "Формат на времето: "
 
-#: src/translations.h:176
+#: src/translations.h:177
 msgid "Date Display Format: "
 msgstr "Формат на датата: "
 
-#: src/translations.h:178
+#: src/translations.h:179
 msgid "Sky Culture: "
 msgstr "Звездна култура: "
 
-#: src/translations.h:179
+#: src/translations.h:180
 msgid "Sky Language: "
 msgstr "Език на небесните тела: "
 
-#: src/translations.h:181
+#: src/translations.h:182
 msgid "Show: "
 msgstr "Показване: "
 
-#: src/translations.h:182
+#: src/translations.h:183
 msgid "Star Value Multiplier: "
 msgstr "Множител на звездната стойност: "
 
-#: src/translations.h:183
+#: src/translations.h:184
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Множител за осъразмеряване величината: "
 
-#: src/translations.h:184
+#: src/translations.h:185
 msgid "Maximum Magnitude to Label: "
 msgstr "Максимална величина за именуване: "
 
-#: src/translations.h:185
+#: src/translations.h:186
 msgid "Twinkling: "
 msgstr "Трептене: "
 
-#: src/translations.h:186
+#: src/translations.h:187
 msgid "Limiting Magnitude: "
 msgstr "Максимална величина: "
 
-#: src/translations.h:188
+#: src/translations.h:189
 msgid "Constellation Lines"
 msgstr "Линии на съзвездията"
 
-#: src/translations.h:189
+#: src/translations.h:190
 msgid "Constellation Names"
 msgstr "Имена на съзвездията"
 
-#: src/translations.h:190
+#: src/translations.h:191
 msgid "Constellation Art Intensity"
 msgstr "Наситеност на илюстрациите на съзвездията"
 
-#: src/translations.h:191
+#: src/translations.h:192
 msgid "Constellation Boundaries"
 msgstr "Граници на съзвездията"
 
-#: src/translations.h:192
+#: src/translations.h:193
 msgid "Cardinal Points"
 msgstr "Посоки на света"
 
-#: src/translations.h:193
+#: src/translations.h:194
 msgid "Planet Names"
 msgstr "Имена на планетите"
 
-#: src/translations.h:194
+#: src/translations.h:195
 msgid "Planet Orbits"
 msgstr "Траектории на планети"
 
-#: src/translations.h:195
+#: src/translations.h:196
 msgid "Planet Trails"
 msgstr "Планетни следи"
 
-#: src/translations.h:196
+#: src/translations.h:197
 msgid "Meridian Line"
 msgstr "Линия на меридиана на наблюдателя"
 
-#: src/translations.h:197
+#: src/translations.h:198
 msgid "Azimuthal Grid"
 msgstr "Азимутна мрежа"
 
-#: src/translations.h:198
+#: src/translations.h:199
 msgid "Equatorial Grid"
 msgstr "Екваториална мрежа"
 
-#: src/translations.h:199
+#: src/translations.h:200
 msgid "Equator Line"
 msgstr "Линия на екватора"
 
-#: src/translations.h:200
+#: src/translations.h:201
 msgid "Ecliptic Line"
 msgstr "Линия на еклиптиката"
 
-#: src/translations.h:201
+#: src/translations.h:202
 msgid "Nebula Names"
 msgstr "Имена на мъглявини"
 
-#: src/translations.h:202
+#: src/translations.h:203
 msgid "Nebula Circles"
 msgstr "Кръгове на мъглявините"
 
-#: src/translations.h:204
+#: src/translations.h:205
 msgid "Light Pollution Luminance: "
 msgstr "Яркост при светлинен смог: "
 
-#: src/translations.h:205
+#: src/translations.h:206
 msgid "Landscape: "
 msgstr "Пейзаж: "
 
-#: src/translations.h:206
+#: src/translations.h:207
 msgid "Manual zoom: "
 msgstr "Ръчно приближаване: "
 
-#: src/translations.h:207
+#: src/translations.h:208
 msgid "Object Sizing Rule: "
 msgstr "Правило за оразмеряване на обектите: "
 
-#: src/translations.h:208
+#: src/translations.h:209
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Множител за мащаб на величина: "
 
-#: src/translations.h:209
+#: src/translations.h:210
 msgid "Milky Way intensity: "
 msgstr "Яркост на Млечния път: "
 
-#: src/translations.h:210
+#: src/translations.h:211
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Имена на мъглявини до величина: "
 
-#: src/translations.h:211
+#: src/translations.h:212
 msgid "Zoom Duration: "
 msgstr "Продължителност на увеличението: "
 
-#: src/translations.h:212
+#: src/translations.h:213
 msgid "Cursor Timeout: "
 msgstr "Скриване на курсора след: "
 
-#: src/translations.h:213
+#: src/translations.h:214
 msgid "Correct for light travel time: "
 msgstr "По светлинно време: "
 
-#: src/translations.h:215
+#: src/translations.h:216
 msgid "Local Script: "
 msgstr "Локален скрипт: "
 
-#: src/translations.h:216
+#: src/translations.h:217
 msgid "CD/DVD Script: "
 msgstr "Скрипт на CD/DVD: "
 
-#: src/translations.h:217
+#: src/translations.h:218
 msgid "USB Script: "
 msgstr "Скрипт на USB памет: "
 
-#: src/translations.h:218
+#: src/translations.h:219
 msgid "Arrow down to load list."
 msgstr "Стрелка надолу за зареждане на списък"
 
-#: src/translations.h:219
+#: src/translations.h:220
 msgid "Select and exit to run."
 msgstr "Избери и излез, за да започне."
 
-#: src/translations.h:221
+#: src/translations.h:222
 msgid "Load Default Configuration: "
 msgstr "Зареди подразбиращите се настройки: "
 
-#: src/translations.h:222
+#: src/translations.h:223
 msgid "Save Current Configuration as Default: "
 msgstr "Запази текущите настройки като подразбиращи се: "
 
-#: src/translations.h:223
+#: src/translations.h:224
 msgid "Shut Down: "
 msgstr "Затваряне: "
 
-#: src/translations.h:224
+#: src/translations.h:225
 msgid "Update me via Internet: "
 msgstr "Обнови ме чрез интернет: "
 
-#: src/translations.h:225
+#: src/translations.h:226
 msgid "Set UI Locale: "
 msgstr "Задаване на език на интерфейса: "
 
@@ -2508,47 +2512,3 @@ msgstr "Тип: %1"
 
 #~ msgid "Form"
 #~ msgstr "Формат"
-
-#~ msgid "Loading NGC catalog"
-#~ msgstr "Зареждане на каталога NGC"
-
-#~ msgid "General settings"
-#~ msgstr "Общи настройки"
-
-#~ msgid "Brief"
-#~ msgstr "Съкратена"
-
-#, qt-format
-#~ msgid ""
-#~ "File size: %1MB\n"
-#~ "Star count: %2 Million\n"
-#~ "Magnitude range: %3 - %4"
-#~ msgstr ""
-#~ "Размер на файла: %1MB\n"
-#~ "Брой звезди: %2 милиона\n"
-#~ "Величини: между %3 и %4"
-
-#~ msgid "Download"
-#~ msgstr "Изтегляне"
-
-#, qt-format
-#~ msgid "Successfully loaded data from new file %1"
-#~ msgstr "Данните от новия файл %1 бяха успешно заредени."
-
-#~ msgid "Oculars configuration window"
-#~ msgstr "Настройки на Окуляри"
-
-#~ msgid "Telrad circles"
-#~ msgstr "Прицел Telrad"
-
-#~ msgid "Keyboard for Greek input"
-#~ msgstr "Клавиатура за гръцки символи"
-
-#~ msgid "Historical supernova"
-#~ msgstr "Исторически свръхнови"
-
-#~ msgid ""
-#~ "The plugin for visualization of some historical supernovas, brighter 10 "
-#~ "magnitude"
-#~ msgstr ""
-#~ "Показва някои исторически свръхнови по-ярки от 10-та звездна величина"
