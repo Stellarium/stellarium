@@ -17,6 +17,7 @@
  */
 
 #include "Oculars.hpp"
+#include "OcularsGuiPanel.hpp"
 
 #include "GridLinesMgr.hpp"
 #include "LabelMgr.hpp"
@@ -35,6 +36,7 @@
 #include "StelTranslator.hpp"
 
 #include <QAction>
+#include <QGraphicsWidget>
 #include <QKeyEvent>
 #include <QDebug>
 #include <QMenu>
@@ -124,6 +126,7 @@ Oculars::~Oculars()
 {
 	delete ocularDialog;
 	ocularDialog = NULL;
+	delete guiPanel;
 }
 
 QSettings* Oculars::appSettings()
@@ -454,6 +457,13 @@ void Oculars::init()
 		ocularDialog = new OcularDialog(&ccds, &oculars, &telescopes);
 		initializeActivationActions();
 		determineMaxEyepieceAngle();
+
+		//BM: Hack to get to the SkyGui QGraphicsWidget object without
+		//modifiying StelGuiBase.
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
+		QGraphicsWidget* skyGui = gui->getButtonBar()->parentWidget();
+		guiPanel = new OcularsGuiPanel(this, skyGui);
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 		ready = false;
