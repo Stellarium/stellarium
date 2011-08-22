@@ -183,6 +183,8 @@ private:
 	OcularDialog *ocularDialog;
 	bool ready; //!< A flag that determines that this module is usable.  If false, we won't open.
 
+	class OcularsGuiPanel* guiPanel;
+
 	//Styles
 	QByteArray normalStyleSheet;
 	QByteArray nightStyleSheet;
