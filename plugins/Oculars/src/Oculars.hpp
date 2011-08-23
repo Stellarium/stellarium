@@ -45,6 +45,9 @@ class StelButton;
 class Oculars : public StelModule
 {
 	Q_OBJECT
+	//BM: Temporary, until the GUI is finalized and some other method of getting
+	//info from the main class is implemented.
+	friend class OcularsGuiPanel;
 
 public:
 	Oculars();

@@ -24,6 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Oculars;
 class QGraphicsProxyWidget;
+class QLabel;
 class QPushButton;
 class QWidget;
 
@@ -39,9 +40,25 @@ public:
 	~OcularsGuiPanel();
 
 public slots:
+	//! Show only the controls used with an ocular overlay.
+	void showOcularGui();
+	//! Show only the controls used with a CCD overlay.
+	void showCcdGui();
+
+private slots:
 	//! Update the position of the widget within the parent.
 	//! Tied to the parent's geometryChanged() signal.
 	void updatePosition();
+
+	void openOcularsConfigurationWindow();
+
+	//! Updates the information shown when an ocular overlay is displayed
+	void updateOcularInfo();
+	//! Updates the information shown when a CCD overlay is displayed
+	void updateCcdInfo();
+	//! Updates the information that depends on the current telescope.
+	//! Called in both updateOcularInfo() and updateCcdInfo().
+	void updateTelescopeInfo();
 
 private:
 	Oculars* ocularsPlugin;
@@ -54,12 +71,32 @@ private:
 	QGraphicsProxyWidget* proxy;
 	QWidget* mainWidget;
 
+	//Buttons
 	QPushButton* nextTelescopeButton;
 	QPushButton* nextCcdButton;
 	QPushButton* nextOcularButton;
 	QPushButton* prevTelescopeButton;
 	QPushButton* prevCcdButton;
 	QPushButton* prevOcularButton;
+	QPushButton* toggleCrosshairsButton;
+	QPushButton* configurationButton;
+
+	QLabel* labelOcularName;
+	QLabel* labelOcularFl;
+	QLabel* labelOcularAfov;
+	QLabel* labelCcdName;
+	QLabel* labelCcdDimensions;
+	QLabel* labelTelescopeName;
+	QLabel* labelMagnification;
+	QLabel* labelFov;
+
+	//Sets the visibility of the ocular name label and the associated buttons.
+	void setOcularControlsVisible(bool show);
+	//Sets the visibility of the ocular labels that are not used for binoculars.
+	void setOcularInfoVisible(bool show);
+	void setCcdControlsVisible(bool show);
+	//Sets the visibility of the other information shown for an ocular overlay.
+	void setOtherControlsVisible(bool show);
 };
 
 #endif // OCULARSGUIPANEL_HPP

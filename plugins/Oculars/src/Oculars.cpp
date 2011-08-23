@@ -200,7 +200,7 @@ void Oculars::draw(StelCore* core)
 	if (flagShowTelrad) {
 		paintTelrad();
 	} else if (flagShowOculars){
-		// Insure there is a selected ocular & telescope
+		// Ensure there is a selected ocular & telescope
 		if (selectedCCDIndex > ccds.count()) {
 			qWarning() << "Oculars: the selected sensor index of "
 						  << selectedCCDIndex << " is greater than the sensor count of "
@@ -237,7 +237,7 @@ void Oculars::draw(StelCore* core)
 	}	
 }
 
-//! Determine which "layer" the plagin's drawing will happen on.
+//! Determine which "layer" the plugin's drawing will happen on.
 double Oculars::getCallOrder(StelModuleActionName actionName) const
 {
 	// TODO; this really doesn't seem to have any effect.  I've tried everything from -100 to +100,
@@ -621,6 +621,8 @@ void Oculars::enableOcular(bool enableOcularMode)
 			}
 			flagShowOculars = enableOcularMode;
 			zoom(false);
+			//BM: I hope this is the right place...
+			guiPanel->showOcularGui();
 		}
 	}
 }
@@ -628,7 +630,7 @@ void Oculars::enableOcular(bool enableOcularMode)
 void Oculars::decrementCCDIndex()
 {
 	selectedCCDIndex--;
-	if (selectedCCDIndex == -2) {
+	if (selectedCCDIndex == -1) {
 		selectedCCDIndex = ccds.count() - 1;
 	}
 	emit(selectedCCDChanged());
@@ -807,7 +809,7 @@ void Oculars::incrementCCDIndex()
 {
 	selectedCCDIndex++;
 	if (selectedCCDIndex == ccds.count()) {
-		selectedCCDIndex = -1;
+		selectedCCDIndex = 0;
 	}
 	emit(selectedCCDChanged());
 }
@@ -896,6 +898,8 @@ void Oculars::toggleCCD()
 		selectedCCDIndex = -1;
 		movementManager->zoomTo(movementManager->getInitFov());
 		movementManager->setFlagTracking(false);
+
+		guiPanel->setVisible(false);
 	} else {
 		// Check to insure that we have enough CCDs & telescopes, as they may have been edited in the config dialog
 		if (ccds.count() == 0) {
@@ -916,6 +920,8 @@ void Oculars::toggleCCD()
 		}
 		flagShowCCD = true;
 		setScreenFOVForCCD();
+
+		guiPanel->showCcdGui();
 	}
 }
 
