@@ -45,11 +45,22 @@
 #include <QGraphicsLinearLayout>
 #include <QSettings>
 
-StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixmap& apixOff,
-		const QPixmap& apixHover, QAction* aaction, bool noBackground) :
-			QGraphicsPixmapItem(apixOff, parent), pixOn(apixOn), pixOff(apixOff), pixHover(apixHover),
-			checked(ButtonStateOff), action(aaction), noBckground(noBackground), isTristate_(false),
-			opacity(1.), hoverOpacity(0.)
+StelButton::StelButton(QGraphicsItem* parent,
+                       const QPixmap& apixOn,
+                       const QPixmap& apixOff,
+                       const QPixmap& apixHover,
+                       QAction* aaction,
+                       bool noBackground) :
+	QGraphicsPixmapItem(apixOff, parent),
+	pixOn(apixOn),
+	pixOff(apixOff),
+	pixHover(apixHover),
+	checked(ButtonStateOff),
+	action(aaction),
+	noBckground(noBackground),
+	isTristate_(false),
+	opacity(1.),
+	hoverOpacity(0.)
 {
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());
@@ -70,24 +81,41 @@ StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixm
 
 	if (action!=NULL)
 	{
-		QObject::connect(action, SIGNAL(toggled(bool)), this, SLOT(setChecked(bool)));
+		QObject::connect(action, SIGNAL(toggled(bool)),
+		                 this, SLOT(setChecked(bool)));
 		if (action->isCheckable())
 		{
 			setChecked(action->isChecked());
-			QObject::connect(this, SIGNAL(toggled(bool)), action, SLOT(setChecked(bool)));
+			QObject::connect(this, SIGNAL(toggled(bool)),
+			                 action, SLOT(setChecked(bool)));
 		}
 		else
 		{
-			QObject::connect(this, SIGNAL(triggered()), action, SLOT(trigger()));
+			QObject::connect(this, SIGNAL(triggered()),
+			                 action, SLOT(trigger()));
 		}
 	}
 }
 
-StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixmap& apixOff, const QPixmap& apixNoChange,
-		const QPixmap& apixHover, QAction* aaction, bool noBackground, bool isTristate) :
-			QGraphicsPixmapItem(apixOff, parent), pixOn(apixOn), pixOff(apixOff), pixNoChange(apixNoChange), pixHover(apixHover),
-			checked(ButtonStateOff), action(aaction), noBckground(noBackground), isTristate_(isTristate),
-			opacity(1.), hoverOpacity(0.)
+StelButton::StelButton(QGraphicsItem* parent,
+                       const QPixmap& apixOn,
+                       const QPixmap& apixOff,
+                       const QPixmap& apixNoChange,
+                       const QPixmap& apixHover,
+                       QAction* aaction,
+                       bool noBackground,
+                       bool isTristate) :
+	QGraphicsPixmapItem(apixOff, parent),
+	pixOn(apixOn),
+	pixOff(apixOff),
+	pixNoChange(apixNoChange),
+	pixHover(apixHover),
+	checked(ButtonStateOff),
+	action(aaction),
+	noBckground(noBackground),
+	isTristate_(isTristate),
+	opacity(1.),
+	hoverOpacity(0.)
 {
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());
@@ -95,7 +123,8 @@ StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixm
 	redMode = StelApp::getInstance().getVisionModeNight();
 	pixOnRed = StelButton::makeRed(pixOn);
 	pixOffRed = StelButton::makeRed(pixOff);
-	if (isTristate_) {
+	if (isTristate_)
+	{
 		Q_ASSERT(!pixNoChange.isNull());
 		pixNoChangeRed = StelButton::makeRed(pixNoChange);
 	}
@@ -108,27 +137,33 @@ StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixm
 	setAcceptsHoverEvents(true);
 	timeLine = new QTimeLine(250, this);
 	timeLine->setCurveShape(QTimeLine::EaseOutCurve);
-	connect(timeLine, SIGNAL(valueChanged(qreal)), this, SLOT(animValueChanged(qreal)));
+	connect(timeLine, SIGNAL(valueChanged(qreal)),
+	        this, SLOT(animValueChanged(qreal)));
 
 	if (action!=NULL)
 	{
-		QObject::connect(action, SIGNAL(toggled(bool)), this, SLOT(setChecked(bool)));
+		QObject::connect(action, SIGNAL(toggled(bool)),
+		                 this, SLOT(setChecked(bool)));
 		if (action->isCheckable())
 		{
 			setChecked(action->isChecked());
-			QObject::connect(this, SIGNAL(toggled(bool)), action, SLOT(setChecked(bool)));
+			QObject::connect(this, SIGNAL(toggled(bool)),
+			                 action, SLOT(setChecked(bool)));
 		}
 		else
 		{
-			QObject::connect(this, SIGNAL(triggered()), action, SLOT(trigger()));
+			QObject::connect(this, SIGNAL(triggered()),
+			                 action, SLOT(trigger()));
 		}
 	}
 }
 
-int StelButton::toggleChecked(int checked) {
+int StelButton::toggleChecked(int checked)
+{
 	if (!isTristate_)
 		checked = !!!checked;
-	else {
+	else
+	{
 		if (++checked > ButtonStateNoChange)
 			checked = ButtonStateOff;
 	}
@@ -169,22 +204,22 @@ void StelButton::mouseReleaseEvent(QGraphicsSceneMouseEvent*)
 
 void StelButton::updateIcon()
 {
-	if (opacity<0.)
-		opacity=0;
+	if (opacity < 0.)
+		opacity = 0;
 	QPixmap pix(pixOn.size());
 	pix.fill(QColor(0,0,0,0));
 	QPainter painter(&pix);
 	painter.setOpacity(opacity);
 	if (!pixBackground.isNull() && noBckground==false)
-		painter.drawPixmap(0,0, redMode ? pixBackgroundRed : pixBackground);
+		painter.drawPixmap(0, 0, redMode ? pixBackgroundRed : pixBackground);
 	painter.drawPixmap(0, 0,
 		(isTristate_ && checked == ButtonStateNoChange) ? (redMode ? pixNoChangeRed : pixNoChange) :
 		(checked == ButtonStateOn) ? (redMode ? pixOnRed : pixOn) :
 		/* (checked == ButtonStateOff) ? */ (redMode ? pixOffRed : pixOff));
-	if (hoverOpacity>0)
+	if (hoverOpacity > 0)
 	{
-		painter.setOpacity(hoverOpacity*opacity);
-		painter.drawPixmap(0,0, redMode ? pixHoverRed : pixHover);
+		painter.setOpacity(hoverOpacity * opacity);
+		painter.drawPixmap(0, 0, redMode ? pixHoverRed : pixHover);
 	}
 	setPixmap(pix);
 }
@@ -199,6 +234,12 @@ void StelButton::setChecked(int b)
 {
 	checked=b;
 	updateIcon();
+}
+
+void StelButton::setBackgroundPixmap(const QPixmap &newBackground)
+{
+	pixBackground = newBackground;
+	pixBackgroundRed = makeRed(newBackground);
 }
 
 QPixmap StelButton::makeRed(const QPixmap& p)
@@ -461,63 +502,65 @@ QRectF BottomStelBar::getButtonsBoundingRect() const
 
 void BottomStelBar::updateButtonsGroups()
 {
-	double x=0;
-	double y = datetime->boundingRect().height()+3;
+	double x = 0;
+	double y = datetime->boundingRect().height() + 3;
 	for (QMap<QString, ButtonGroup >::iterator iter=buttonGroups.begin();iter!=buttonGroups.end();++iter)
 	{
-		if (iter.value().elems.empty())
+		ButtonGroup& group = iter.value();
+		QList<StelButton*>& buttons = group.elems;
+		if (buttons.empty())
 			continue;
-		x+=iter.value().leftMargin;
-		int n=0;
-		foreach (StelButton* b, iter.value().elems)
+		x += group.leftMargin;
+		int n = 0;
+		foreach (StelButton* b, buttons)
 		{
 			// We check if the group has its own background if not the case
 			// We apply a default background.
-			if (n==0)
+			if (n == 0)
 			{
-				if (iter.value().elems.size()==1)
+				if (buttons.size() == 1)
 				{
-					if (iter.value().pixBackgroundSingle == NULL)
-						b->pixBackground = pixBackgroundSingle;
+					if (group.pixBackgroundSingle == NULL)
+						b->setBackgroundPixmap(pixBackgroundSingle);
 					else
-						b->pixBackground = *(iter.value().pixBackgroundSingle);
+						b->setBackgroundPixmap(*group.pixBackgroundSingle);
 				}
 				else
 				{
-					if (iter.value().pixBackgroundLeft == NULL)
-						b->pixBackground = pixBackgroundLeft;
+					if (group.pixBackgroundLeft == NULL)
+						b->setBackgroundPixmap(pixBackgroundLeft);
 					else
-						b->pixBackground = *(iter.value().pixBackgroundLeft);
+						b->setBackgroundPixmap(*group.pixBackgroundLeft);
 				}
 			}
-			else if (n==iter.value().elems.size()-1)
+			else if (n == buttons.size()-1)
 			{
-				if (iter.value().elems.size()!=1)
+				if (buttons.size() != 1)
 				{
-					if (iter.value().pixBackgroundSingle == NULL)
-						b->pixBackground = pixBackgroundSingle;
+					if (group.pixBackgroundSingle == NULL)
+						b->setBackgroundPixmap(pixBackgroundSingle);
 					else
-						b->pixBackground = *(iter.value().pixBackgroundSingle);
+						b->setBackgroundPixmap(*group.pixBackgroundSingle);
 				}
-				if (iter.value().pixBackgroundRight == NULL)
-					b->pixBackground = pixBackgroundRight;
+				if (group.pixBackgroundRight == NULL)
+					b->setBackgroundPixmap(pixBackgroundRight);
 				else
-					b->pixBackground = *(iter.value().pixBackgroundRight);
+					b->setBackgroundPixmap(*group.pixBackgroundRight);
 			}
 			else
 			{
-				if (iter.value().pixBackgroundMiddle == NULL)
-					b->pixBackground = pixBackgroundMiddle;
+				if (group.pixBackgroundMiddle == NULL)
+					b->setBackgroundPixmap(pixBackgroundMiddle);
 				else
-					b->pixBackground = *(iter.value().pixBackgroundMiddle);
+					b->setBackgroundPixmap(*group.pixBackgroundMiddle);
 			}
 			// Update the button pixmap
 			b->animValueChanged(0.);
 			b->setPos(x, y);
-			x+=b->pixOn.width();
+			x += b->getButtonPixmapWidth();
 			++n;
 		}
-		x+=iter.value().rightMargin;
+		x+=group.rightMargin;
 	}
 	updateText(true);
 }
