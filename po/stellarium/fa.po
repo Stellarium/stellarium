@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-22 11:18+0700\n"
-"PO-Revision-Date: 2011-07-17 20:45+0000\n"
-"Last-Translator: Reza Babri <Unknown>\n"
+"PO-Revision-Date: 2011-08-24 19:44+0000\n"
+"Last-Translator: Mohammad Amiri <Unknown>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-23 04:48+0000\n"
-"X-Generator: Launchpad (build 13697)\n"
+"X-Launchpad-Export-Date: 2011-08-25 04:36+0000\n"
+"X-Generator: Launchpad (build 13727)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -24,7 +24,7 @@ msgstr "نصف‌النهار"
 
 #: src/core/modules/GridLinesMgr.cpp:529
 msgid "Ecliptic"
-msgstr "دایرهٔ برج‌ها"
+msgstr "دایرة البروج"
 
 #: src/core/modules/GridLinesMgr.cpp:533
 msgid "Equator"
@@ -36,11 +36,11 @@ msgstr "افق"
 
 #: src/core/modules/LandscapeMgr.cpp:488
 msgid "Author: "
-msgstr "پدیدآور "
+msgstr ": نویسنده "
 
 #: src/core/modules/LandscapeMgr.cpp:491
 msgid "Location: "
-msgstr "جا "
+msgstr ": محل "
 
 #: src/core/modules/LandscapeMgr.cpp:496
 #, qt-format
@@ -54,7 +54,7 @@ msgstr ": سیاره "
 #: src/core/modules/Nebula.cpp:96
 #, qt-format
 msgid "Type: <b>%1</b>"
-msgstr "گونه: <b>%1</b>"
+msgstr "<b>%1</b> : گونه"
 
 #: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:120
 #: plugins/Supernovae/src/Supernova.cpp:98
@@ -65,7 +65,7 @@ msgstr "<b>%1</b> : قدر"
 #: src/core/modules/Nebula.cpp:104
 #, qt-format
 msgid "Size: %1"
-msgstr "اندازه: %1"
+msgstr "%1 : اندازه"
 
 #: src/core/modules/Nebula.cpp:284
 msgid "Galaxy"
@@ -77,19 +77,19 @@ msgstr "خوشهٔ باز"
 
 #: src/core/modules/Nebula.cpp:290
 msgid "Globular cluster"
-msgstr "خوشهٔ گوی‌سان"
+msgstr "خوشۀ کروی"
 
 #: src/core/modules/Nebula.cpp:293
 msgid "Nebula"
-msgstr "میغ"
+msgstr "سحابی"
 
 #: src/core/modules/Nebula.cpp:296
 msgid "Planetary nebula"
-msgstr "میغ سیاره‌نما"
+msgstr "سحابی سیاره ای"
 
 #: src/core/modules/Nebula.cpp:299
 msgid "Cluster associated with nebulosity"
-msgstr "خوشهٔ همراه میغ"
+msgstr "خوشهٔ همراه با سحابی"
 
 #: src/core/modules/Nebula.cpp:302
 msgid "Unknown"
@@ -107,17 +107,17 @@ msgstr "%1 : قدر مطلق"
 #: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr "گرفتگي (تاريخ): %2/%1"
+msgstr "%2/%1 : (همین تاریخ) کسوف زمینی"
 
 #: src/core/modules/Planet.cpp:137
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr ""
+msgstr "%1 : (همین تاریخ) انحراف"
 
 #: src/core/modules/Planet.cpp:143
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
-msgstr "فاصله: %1یکای اخترشناختی"
+msgstr "واحد نجومی %1 : فاصله"
 
 #: src/core/modules/Planet.cpp:147
 #, qt-format
@@ -127,59 +127,59 @@ msgstr "%1 : قطر ظاهری"
 #: src/core/modules/StarWrapper.cpp:51 src/core/modules/StarWrapper.cpp:108
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr "قدر: <b>%1</b> (B-V: %2)"
+msgstr "(b>%1</b> (B-V: %2> : قدر"
 
 #: src/core/modules/StarWrapper.cpp:118
 #, qt-format
 msgid "Spectral Type: %1"
-msgstr "گونه طیفی : %1"
+msgstr "%1 : گونه طیفی"
 
 #: src/core/modules/StarWrapper.cpp:122
 #: plugins/Supernovae/src/Supernova.cpp:107
 #, qt-format
 msgid "Distance: %1 Light Years"
-msgstr "فاصله: %1 سال نوری"
+msgstr "سال نوری %1 : فاصله"
 
 #: src/core/modules/StarWrapper.cpp:125
 #, qt-format
 msgid "Parallax: %1\""
-msgstr "اختلاف منظر: %1"
+msgstr "\"%1 : اختلاف منظر"
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr ""
+msgstr "فضاپیما"
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
-msgstr "میدان دید بیشینه: "
+msgstr ": حداکثر میدان دید "
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
-msgstr "چشم‌انداز"
+msgstr "چشم ‌انداز"
 
 #: src/core/StelProjectorClasses.cpp:30
 msgid ""
 "Perspective projection keeps the horizon a straight line. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
-"برنمایش چشم‌اندازی، افق را افقی می‌دارد. نام این برنمایش در ریاضیات "
-"<i>برنمایش گنومی</i> است."
+"طرح چشم انداز ، افق را به صورت یک خط مستقیم حفظ می کند . نام این طرح در "
+"ریاضیات <i>طرح گنومی<i/> است ."
 
 #: src/core/StelProjectorClasses.cpp:63
 msgid "Equal Area"
-msgstr "ناحیهٔ برابر"
+msgstr "سطح برابر"
 
 #: src/core/StelProjectorClasses.cpp:68
 msgid ""
 "The full name of this projection method is, <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
-"نام کامل این برنمایش <i>برنمایش ناحیهٔ برابر سمتی لامبرت</i> است. ایو "
-"برنمایش، ناحیه را نگه داشته، زاویه را نگه نمی‌دارد."
+"نام کامل این طرح <i>طرح هم سطح سمتی لامبرت<i/> است. این طرح ، سطح را حفظ "
+"میکند ولی زاویه را خیر ."
 
 #: src/core/StelProjectorClasses.cpp:108
 msgid "Stereographic"
-msgstr "استریونگاشتی"
+msgstr "استریوگرافی"
 
 #: src/core/StelProjectorClasses.cpp:113
 msgid ""
@@ -187,9 +187,9 @@ msgid ""
 "known as the planisphere projection. It preserves the angles at which curves "
 "cross each other but it does not preserve area."
 msgstr ""
-"برنمایش استیونگاشتی  را ، از دیرباز جهان‌نمایی هموار (نمایش گوی بر صفحه) "
-"می‌شناختند. این روش با تغییر مساحت ناحیه‌ها، زاویه‌های برخورد خم‌ها را نگاه "
-"می‌دارد."
+"طرح استریوگرافی از دیر باز شناخته شده است و در اصل به عنوان طرح جهان نمای "
+"مسطح شناخته شده بود . این طرح زاویه ها را در محل برخورد خم ها با یکدیگر حفظ "
+"می کند اما سطح را حفظ نمی کند ."
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Fish-eye"
@@ -202,9 +202,9 @@ msgid ""
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
 msgstr ""
-"در برنمایش چشم ماهی یا <i>برنمایش هم‌مسافت سمتی</i>، خط‌های راست با فاصلهٔ "
-"زاویه‌ای بسیار از مرکز میدان دید خم می‌شود (مانند واپیچش‌های عدسی زاویه‌باز "
-"دوربین عکس‌برداری)"
+"در طرح چشم ماهی ، یا <i>طرح مساوی المسافت سمتی<i/> ، خطهای مستقیم هنگامی که "
+"فاصلۀ زاویه ای زیادی از مرکز میدان دید می گیرند ، خم می شوند ( مانند اعوجاج "
+"مشهود در لنز های زاویه باز دوربین )"
 
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
@@ -215,20 +215,20 @@ msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
 msgstr ""
-"برنمایش همر نوعی برنمایش نقشهٔ ناحیهٔ برابر است که «ارنست همر» در سال ۱۸۹۲ "
-"میلادی بازنمود و یک‌راست از برنمایش «آیتف» الهام گرفته‌بود."
+"طرح همر یک طرح نقشۀ هم سطح است . که «ارنست همر» در سال ۱۸۹۲ میلادی توصیف "
+"نمود و به طور مستقیم از طرح «آیتف» الهام گرفته ‌بود ."
 
 #: src/core/StelProjectorClasses.cpp:223
 msgid "Cylinder"
-msgstr "استوانه"
+msgstr "استوانه ای"
 
 #: src/core/StelProjectorClasses.cpp:228
 msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
 msgstr ""
-"نام کامل این برنمایش  <i>برنمایش هم‌مسافت استوانه‌ای</i> است. در آن همهٔ "
-"مدارها هم‌فاصله است."
+"نام کامل این نوع طرح <i>طرح هم‌مسافت استوانه‌ای<i/> است. در آن همه متشابه "
+"هستند و به همان اندازه هم جدا شده اند."
 
 #: src/core/StelProjectorClasses.cpp:270
 msgid "Mercator"
@@ -240,9 +240,8 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
-"برنمایش مرکاتور از پرکاربردترین برنمایش‌ها نقشه در جهان است. در این، سویه و "
-"شکل را نگه می‌دارد، ولی اندازه را نه. نیز با دور شدن خط از استوا، زاویه‌اش "
-"را می‌کشد."
+"طرح مرکاتور یکی از پرکاربردترین طرح های نقشه در جهان است. این طرح ، در یک "
+"افزایش زاویه از استوا ، جهت و شکل را حفظ میکند ولی اندازه را نه."
 
 #: src/core/StelProjectorClasses.cpp:322
 msgid "Orthographic"
@@ -253,23 +252,23 @@ msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
 msgstr ""
-"برنمایش املایی مانند برنمایش چشم‌انداز است ولی همگرایش‌گاه چشم‌انداز "
-"بی‌نهایت است."
+"طرح املایی مانند طرح چشم ‌انداز است ولی ، نقطه ی چشم انداز در فاصله بی نهایت "
+"تنظیم شده است ."
 
 #: src/core/StelObject.cpp:79
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
-msgstr "بعد/میل (جَی۲۰۰۰): %1/%2"
+msgstr "%2/%1 : (J2000) میل/بعد"
 
 #: src/core/StelObject.cpp:86
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr "بعد/میل (تاریخِ): %1/%2"
+msgstr "%2/%1 : (همین تاریخ) میل/بعد"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:97
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr "زاویهٔ ساعتی/میل: %1/%2"
+msgstr "%2/%1 : میل/زاویه ساعتی"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
@@ -282,25 +281,25 @@ msgstr "(ظاهري)"
 #: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
 msgid "Az/Alt: %1/%2"
-msgstr "سمت/ارتفاع: %1/%2"
+msgstr "%2/%1 : ارتفاع/سمت"
 
 #: src/gui/ConfigurationDialog.cpp:295
 msgid "Select screenshot directory"
-msgstr "جهت نماگیری (اسکرین‌شات) را بگزینید."
+msgstr "آدرس ( ذخیرۀ ) عکس صفحه را انتخاب کنید ."
 
 #: src/gui/ConfigurationDialog.cpp:462
 #, qt-format
 msgid "Startup FOV: %1%2"
-msgstr "میدان دید هنگام راه‌اندازی: %1/%2"
+msgstr "%1%2 : میدان دید هنگام راه اندازی"
 
 #: src/gui/ConfigurationDialog.cpp:470
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr "جهت دید سمت/ارتفاع هنگام راه‌اندازی: %1/%2"
+msgstr "%2/%1 : جهت دید ارتفاع/سمت هنگام راه اندازی"
 
 #: src/gui/ConfigurationDialog.cpp:510
 msgid "Authors"
-msgstr "پدیدآوران:"
+msgstr "نویسندگان‌"
 
 #: src/gui/ConfigurationDialog.cpp:514 src/gui/ViewDialog.cpp:368
 msgid "Contact"
@@ -308,7 +307,7 @@ msgstr "تماس"
 
 #: src/gui/ConfigurationDialog.cpp:586
 msgid "Author"
-msgstr "پدیدآور"
+msgstr "نویسنده"
 
 #: src/gui/ConfigurationDialog.cpp:587
 msgid "License"
@@ -316,20 +315,20 @@ msgstr "گواهی"
 
 #: src/gui/ConfigurationDialog.cpp:616
 msgid "Running script: "
-msgstr "پردازهٔ در اجرا: "
+msgstr ": اسکریپت در حال اجرا "
 
 #: src/gui/ConfigurationDialog.cpp:623
 msgid "Running script: [none]"
-msgstr "پردازه‌ای اجرا نمی‌شود."
+msgstr "[هیچ] : اسکریپت در حال اجرا"
 
 #: src/gui/ConfigurationDialog.cpp:666
 msgid "Finished downloading all star catalogs!"
-msgstr "همهٔ ستاره‌نامه‌ها بارگیری شد."
+msgstr "بارگیری همۀ ستاره‌نامه‌ها تمام شد!"
 
 #: src/gui/ConfigurationDialog.cpp:675
 #, qt-format
 msgid "Get catalog %1 of %2"
-msgstr "بارگیری ستاره‌نامهٔ %1اُم از %2تا"
+msgstr "بارگیری ستاره‌نامهٔ %1 از %2"
 
 #: src/gui/ConfigurationDialog.cpp:677
 #, qt-format
@@ -338,17 +337,17 @@ msgid ""
 "Star count: %2 Million\n"
 "Magnitude range: %3 - %4"
 msgstr ""
-"حجم بازگیری: %1مگابایت\n"
-"شمار ستارگان: %2 ملیون\n"
-"برد فروغ: %3 - %4"
+"مگابایت %1 : حجم دانلود\n"
+"میلیون %2 : شمار ستارگان\n"
+"%4 - %3 : حد قدر"
 
 #: src/gui/ConfigurationDialog.cpp:686
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
-"بارگیری ستاره‌نامه‌های تازه انجام شد.\n"
-"پس از باز‌آغاز اسلاریم اجرا خواهد شد."
+"بارگیری ستاره‌نامه‌های جدید تمام شد!\n"
+"برای نمایش آنها ، استلاریوم را دوباره راه انداری کنید."
 
 #: src/gui/ConfigurationDialog.cpp:724 src/gui/ConfigurationDialog.cpp:758
 #, qt-format
@@ -356,7 +355,7 @@ msgid ""
 "Error downloading %1:\n"
 "%2"
 msgstr ""
-"خطا در بارگیری %1:\n"
+":%1 خطا در بارگیری\n"
 "%2"
 
 #: src/gui/ConfigurationDialog.cpp:729
@@ -365,7 +364,7 @@ msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
-"بارگیری %1...\n"
+"... %1 در حال بارگیری\n"
 "(می‌توانید این پنجره را ببندید)"
 
 #: src/gui/ConfigurationDialog.cpp:809
@@ -378,7 +377,7 @@ msgid ""
 "Error downloading %1:\n"
 "File is corrupted."
 msgstr ""
-"بارگیری در بارگیری %1:\n"
+": %1 خطا در بارگیری\n"
 "پرونده خراب است."
 
 #: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:286
@@ -1250,7 +1249,7 @@ msgstr "غرب"
 
 #: src/translations.h:136
 msgid "Arabic"
-msgstr ""
+msgstr "عربی"
 
 #: src/translations.h:137
 msgid "Aztec"
