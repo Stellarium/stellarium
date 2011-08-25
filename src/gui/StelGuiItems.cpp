@@ -240,6 +240,7 @@ void StelButton::setBackgroundPixmap(const QPixmap &newBackground)
 {
 	pixBackground = newBackground;
 	pixBackgroundRed = makeRed(newBackground);
+	updateIcon();
 }
 
 QPixmap StelButton::makeRed(const QPixmap& p)
@@ -355,9 +356,16 @@ void LeftStelBar::setRedMode(bool b)
 	}
 }
 
-BottomStelBar::BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft, const QPixmap& pixRight,
-		const QPixmap& pixMiddle, const QPixmap& pixSingle) : QGraphicsItem(parent), pixBackgroundLeft(pixLeft), pixBackgroundRight(pixRight),
-		pixBackgroundMiddle(pixMiddle), pixBackgroundSingle(pixSingle)
+BottomStelBar::BottomStelBar(QGraphicsItem* parent,
+                             const QPixmap& pixLeft,
+                             const QPixmap& pixRight,
+                             const QPixmap& pixMiddle,
+                             const QPixmap& pixSingle) :
+	QGraphicsItem(parent),
+	pixBackgroundLeft(pixLeft),
+	pixBackgroundRight(pixRight),
+	pixBackgroundMiddle(pixMiddle),
+	pixBackgroundSingle(pixSingle)
 {
 	// The text is dummy just for testing
 	datetime = new QGraphicsSimpleTextItem("2008-02-06  17:33", this);
@@ -400,17 +408,17 @@ BottomStelBar::~BottomStelBar()
 void BottomStelBar::addButton(StelButton* button, const QString& groupName, const QString& beforeActionName)
 {
 	QList<StelButton*>& g = buttonGroups[groupName].elems;
-	bool done=false;
-	for (int i=0;i<g.size();++i)
+	bool done = false;
+	for (int i=0; i<g.size(); ++i)
 	{
 		if (g[i]->action && g[i]->action->objectName()==beforeActionName)
 		{
 			g.insert(i, button);
-			done=true;
+			done = true;
 			break;
 		}
 	}
-	if (done==false)
+	if (done == false)
 		g.append(button);
 
 	button->setVisible(true);
@@ -423,7 +431,7 @@ void BottomStelBar::addButton(StelButton* button, const QString& groupName, cons
 StelButton* BottomStelBar::hideButton(const QString& actionName)
 {
 	QString gName;
-	StelButton* bToRemove=NULL;
+	StelButton* bToRemove = NULL;
 	for (QMap<QString, ButtonGroup>::iterator iter=buttonGroups.begin();iter!=buttonGroups.end();++iter)
 	{
 		int i=0;
@@ -431,7 +439,7 @@ StelButton* BottomStelBar::hideButton(const QString& actionName)
 		{
 			if (b->action && b->action->objectName()==actionName)
 			{
-				gName=iter.key();
+				gName = iter.key();
 				bToRemove = b;
 				iter.value().elems.removeAt(i);
 				break;
@@ -439,9 +447,9 @@ StelButton* BottomStelBar::hideButton(const QString& actionName)
 			++i;
 		}
 	}
-	if (bToRemove==NULL)
+	if (bToRemove == NULL)
 		return NULL;
-	if (buttonGroups[gName].elems.size()==0)
+	if (buttonGroups[gName].elems.size() == 0)
 	{
 		buttonGroups.remove(gName);
 	}
@@ -458,15 +466,18 @@ void BottomStelBar::setGroupMargin(const QString& groupName, int left, int right
 {
 	if (!buttonGroups.contains(groupName))
 		return;
-	buttonGroups[groupName].leftMargin=left;
-	buttonGroups[groupName].rightMargin=right;
+	buttonGroups[groupName].leftMargin = left;
+	buttonGroups[groupName].rightMargin = right;
 	updateButtonsGroups();
 }
 
 //! Change the background of a group
-void BottomStelBar::setGroupBackground(const QString& groupName, const QPixmap& pixLeft,
-						const QPixmap& pixRight,  const QPixmap& pixMiddle,
-						const QPixmap& pixSingle){
+void BottomStelBar::setGroupBackground(const QString& groupName,
+                                       const QPixmap& pixLeft,
+                                       const QPixmap& pixRight,
+                                       const QPixmap& pixMiddle,
+                                       const QPixmap& pixSingle)
+{
 
 	if (!buttonGroups.contains(groupName))
 		return;
@@ -476,7 +487,6 @@ void BottomStelBar::setGroupBackground(const QString& groupName, const QPixmap& 
 	buttonGroups[groupName].pixBackgroundMiddle = new QPixmap(pixMiddle);
 	buttonGroups[groupName].pixBackgroundSingle = new QPixmap(pixSingle);
 	updateButtonsGroups();
-
 }
 
 QRectF BottomStelBar::getButtonsBoundingRect() const
