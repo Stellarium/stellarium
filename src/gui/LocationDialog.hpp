@@ -63,6 +63,12 @@ private:
 	
 	//! Update the map for the given location.
 	void setMapForLocation(const StelLocation& loc);
+
+	//! Populates the drop-down list of planets.
+	//! The displayed names are localized in the current interface language.
+	//! The original names are kept in the user data field of each QComboBox
+	//! item.
+	void populatePlanetList();
 	
 private slots:
 	//! Update the widget to make sure it is synchrone if the location is changed programmatically
