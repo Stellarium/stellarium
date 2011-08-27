@@ -830,6 +830,8 @@ BottomStelBar* StelGui::getButtonBar() {return skyGui->buttonBar;}
 
 LeftStelBar* StelGui::getWindowsButtonBar() {return skyGui->winBar;}
 
+SkyGui* StelGui::getSkyGui() {return skyGui;}
+
 bool StelGui::getAutoHideHorizontalButtonBar() const {return skyGui->autoHideHorizontalButtonBar;}
 
 void StelGui::setAutoHideHorizontalButtonBar(bool b) {skyGui->autoHideHorizontalButtonBar=b;}
