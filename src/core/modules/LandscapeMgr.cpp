@@ -481,8 +481,6 @@ QString LandscapeMgr::getCurrentLandscapeName() const
 
 QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 {
-	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	QString planetName = ssmgr->searchByEnglishName(landscape->getLocation().planetName)->getNameI18n();
 	QString desc = getDescription();
 	desc+="<p>";
 	desc+="<b>"+q_("Author: ")+"</b>";
@@ -494,9 +492,10 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 		desc += StelUtils::radToDmsStrAdapt(landscape->getLocation().longitude * M_PI/180.);
 		desc += "/" + StelUtils::radToDmsStrAdapt(landscape->getLocation().latitude *M_PI/180.);
 		desc += QString(q_(", %1 m")).arg(landscape->getLocation().altitude);
-		if (planetName!="")
+		QString planetName = landscape->getLocation().planetName;
+		if (!planetName.isEmpty())
 		{
-			desc += "<br><b>"+q_("Planet: ")+"</b>"+planetName;
+			desc += "<br><b>"+q_("Planet: ")+"</b>"+ q_(planetName);
 		}
 		desc += "<br><br>";
 	}
