@@ -529,13 +529,33 @@ void OcularsGuiPanel::updateTelescopeInfo()
 		Ocular* ocular = ocularsPlugin->oculars[index];
 		Q_ASSERT(ocular);
 
+		if (ocular->isBinoculars())
+		{
+			prevTelescopeButton->setVisible(false);
+			nextTelescopeButton->setVisible(false);
+			fieldTelescopeName->setVisible(false);
+			posY = 0.;
+			widgetHeight = 0.;
+
+			fieldMagnification->setToolTip("Magnification provided by these binoculars");
+			fieldFov->setToolTip("Actual field of view provided by these binoculars");
+		}
+		else
+		{
+			prevTelescopeButton->setVisible(true);
+			nextTelescopeButton->setVisible(true);
+			fieldTelescopeName->setVisible(true);
+
+			fieldMagnification->setToolTip("Magnification provided by this ocular/telescope combination");
+			fieldFov->setToolTip("Actual field of view provided by this ocular/telescope combination");
+		}
+
 		//WTF? Rounding?
 		double magnification = ((int)(ocular->magnification(telescope) * 10.0)) / 10.0;
 		//TODO: Again, this can be simpler
 		QString magnificationString =
 			QString("Magnification: %1%2").arg(magnification).arg(QChar(0x00D7));
 		fieldMagnification->setPlainText(magnificationString);
-		fieldMagnification->setToolTip("Magnification provided by this ocular/telescope combination");
 		fieldMagnification->setPos(posX, posY);
 		posY += fieldMagnification->boundingRect().height();
 		widgetHeight += fieldMagnification->boundingRect().height();
@@ -544,7 +564,6 @@ void OcularsGuiPanel::updateTelescopeInfo()
 		//TODO: Again, this can be simpler
 		QString fovString = QString("FOV: %1%2").arg(fov).arg(QChar(0x00B0));
 		fieldFov->setPlainText(fovString);
-		fieldFov->setToolTip("Actual field of view provided by this ocular/telescope combination");
 		fieldFov->setPos(posX, posY);
 		widgetHeight += fieldFov->boundingRect().height();
 
