@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 Timothy Reaves
+ * Copyright (C) 2011 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,6 +35,7 @@
 #include "StelGuiItems.hpp"
 #include "StelMainWindow.hpp"
 #include "StelTranslator.hpp"
+#include "SkyGui.hpp"
 
 #include <QAction>
 #include <QGraphicsWidget>
@@ -228,12 +230,18 @@ void Oculars::draw(StelCore* core)
 				}
 			}
 			// Paint the information in the upper-right hand corner
-			paintText(core);
+			//paintText(core);
+			glDisable(GL_TEXTURE_2D);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glEnable(GL_BLEND);
 		}
 	} else if (flagShowCCD) {
 		paintCCDBounds();
 		// Paint the information in the upper-right hand corner
-		paintText(core);
+		//paintText(core);
+		glDisable(GL_TEXTURE_2D);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
 	}	
 }
 
@@ -276,12 +284,7 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 			movementManager->setFlagTracking(true);
 		} else {
 			// remove the usage label if it is being displayed.
-			if (usageMessageLabelID > -1) {
-				LabelMgr *labelManager = GETSTELMODULE(LabelMgr);
-				labelManager->setLabelShow(usageMessageLabelID, false);
-				labelManager->deleteLabel(usageMessageLabelID);
-				usageMessageLabelID = -1;
-			}
+			hideUsageMessageIfDisplayed();
 		}
 	} else if(flagShowOculars) {
 		//TODO: this is broke in Stellarium.
@@ -458,12 +461,9 @@ void Oculars::init()
 		initializeActivationActions();
 		determineMaxEyepieceAngle();
 
-		//BM: Hack to get to the SkyGui QGraphicsWidget object without
-		//modifiying StelGuiBase.
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		Q_ASSERT(gui);
-		QGraphicsWidget* skyGui = gui->getButtonBar()->parentWidget();
-		guiPanel = new OcularsGuiPanel(this, skyGui);
+		guiPanel = new OcularsGuiPanel(this, gui->getSkyGui());
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 		ready = false;
@@ -608,17 +608,14 @@ void Oculars::enableOcular(bool enableOcularMode)
 		// we didn't accept the new status - make sure the toolbar button reflects this
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		Q_ASSERT(gui);
-		disconnect(gui->getGuiActions("actionShow_Ocular"), SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
-		gui->getGuiActions("actionShow_Ocular")->setChecked(false);
-		connect(gui->getGuiActions("actionShow_Ocular"), SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
+		QAction* actionShow = gui->getGuiActions("actionShow_Ocular");
+		disconnect(actionShow, SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
+		actionShow->setChecked(false);
+		connect(actionShow, SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
 	} else {
 		if (selectedOcularIndex != -1) {
 			// remove the usage label if it is being displayed.
-			if (usageMessageLabelID > -1) {
-				labelManager->setLabelShow(usageMessageLabelID, false);
-				labelManager->deleteLabel(usageMessageLabelID);
-				usageMessageLabelID = -1;
-			}
+			hideUsageMessageIfDisplayed();
 			flagShowOculars = enableOcularMode;
 			zoom(false);
 			//BM: I hope this is the right place...
@@ -899,7 +896,7 @@ void Oculars::toggleCCD()
 		movementManager->zoomTo(movementManager->getInitFov());
 		movementManager->setFlagTracking(false);
 
-		guiPanel->setVisible(false);
+		guiPanel->hidePanel();
 	} else {
 		// Check to insure that we have enough CCDs & telescopes, as they may have been edited in the config dialog
 		if (ccds.count() == 0) {
@@ -1370,3 +1367,13 @@ void Oculars::zoomOcular()
 	movementManager->zoomTo(actualFOV, 0.0);
 }
 
+void Oculars::hideUsageMessageIfDisplayed()
+{
+	if (usageMessageLabelID > -1)
+	{
+		LabelMgr *labelManager = GETSTELMODULE(LabelMgr);
+		labelManager->setLabelShow(usageMessageLabelID, false);
+		labelManager->deleteLabel(usageMessageLabelID);
+		usageMessageLabelID = -1;
+	}
+}
