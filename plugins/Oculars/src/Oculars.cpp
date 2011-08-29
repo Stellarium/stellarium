@@ -93,7 +93,15 @@ Q_EXPORT_PLUGIN2(Oculars, OcularsStelPluginInterface)
 #pragma mark Instance Methods
 #endif
 /* ********************************************************************* */
-Oculars::Oculars() : pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL)
+Oculars::Oculars():
+	pxmapGlow(NULL),
+	pxmapOnIcon(NULL),
+	pxmapOffIcon(NULL),
+	toolbarButton(NULL),
+	actionShowOcular(0),
+	actionShowCrosshairs(0),
+	actionShowSensor(0),
+	actionShowTelrad(0)
 {
 	flagShowCCD = false;
 	flagShowOculars = false;
@@ -608,10 +616,11 @@ void Oculars::enableOcular(bool enableOcularMode)
 		// we didn't accept the new status - make sure the toolbar button reflects this
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		Q_ASSERT(gui);
-		QAction* actionShow = gui->getGuiActions("actionShow_Ocular");
-		disconnect(actionShow, SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
-		actionShow->setChecked(false);
-		connect(actionShow, SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
+		disconnect(actionShowOcular, SIGNAL(toggled(bool)),
+		           this, SLOT(enableOcular(bool)));
+		actionShowOcular->setChecked(false);
+		connect(actionShowOcular, SIGNAL(toggled(bool)),
+		        this, SLOT(enableOcular(bool)));
 	} else {
 		if (selectedOcularIndex != -1) {
 			// remove the usage label if it is being displayed.
@@ -707,7 +716,7 @@ void Oculars::displayPopupMenu()
 			popup->addSeparator();
 		}
 
-		popup->addAction("toggle crosshair", this, SLOT(toggleCrosshair()), Qt::Key_5);
+		popup->addAction("toggle crosshair", this, SLOT(toggleCrosshairs()), Qt::Key_5);
 	} else {
 		int outerMenuLevel = 1;
 		// We are not in Oculars mode
@@ -722,7 +731,7 @@ void Oculars::displayPopupMenu()
 		popup->addSeparator();
 
 		if (!flagShowTelrad) {
-			popup->addAction("Toggle CCD", this, SLOT(toggleCCD()), QKeySequence(QString("%1").arg(outerMenuLevel++)));
+			popup->addAction("Toggle CCD", this, SLOT(toggleCCD(bool)), QKeySequence(QString("%1").arg(outerMenuLevel++)));
 		}
 		
 		if (!flagShowCCD) {
@@ -886,50 +895,66 @@ void Oculars::selectTelescopeAtIndex(QString indexString)
 	}
 }
 
-void Oculars::toggleCCD()
+void Oculars::toggleCCD(bool show)
 {
-	StelCore *core = StelApp::getInstance().getCore();
-	StelMovementMgr *movementManager = core->getMovementMgr();
-	if (flagShowCCD) {
+	//If there are no sensors...
+	if (ccds.isEmpty() || telescopes.isEmpty())
+	{
+		//TODO: BM: Make this an on-screen message and/or disable the button
+		//if there are no sensors.
+		if (show)
+			qWarning() << "Oculars plugin: Unable to display a sensor boundary:"
+			           << "No sensors or telescopes are defined.";
 		flagShowCCD = false;
 		selectedCCDIndex = -1;
-		movementManager->zoomTo(movementManager->getInitFov());
-		movementManager->setFlagTracking(false);
+		show = false;
+	}
 
-		guiPanel->hidePanel();
-	} else {
-		// Check to insure that we have enough CCDs & telescopes, as they may have been edited in the config dialog
-		if (ccds.count() == 0) {
-			selectedCCDIndex = -1;
-			qDebug() << "No CCDs found";
-		} else if (ccds.count() > 0 && selectedCCDIndex == -1) {
-			selectedCCDIndex = 0;
-		}
-		if (telescopes.count() == 0) {
-			selectedTelescopeIndex = -1;
-			qDebug() << "No telescopes found";
-		} else if (telescopes.count() > 0 && selectedTelescopeIndex == -1) {
+	if (show)
+	{
+		//Mutually exclusive with the ocular mode
+		if (flagShowOculars)
+			enableOcular(false);
+
+		if (selectedTelescopeIndex < 0)
 			selectedTelescopeIndex = 0;
-		}		
-		if (!ready  || selectedCCDIndex == -1 || selectedTelescopeIndex == -1 ) {
-			qDebug() << "The Oculars module has been disabled.";
-			return;
-		}
+		if (selectedCCDIndex < 0)
+			selectedCCDIndex = 0;
 		flagShowCCD = true;
 		setScreenFOVForCCD();
 
 		guiPanel->showCcdGui();
 	}
+	else
+	{
+		flagShowCCD = false;
+
+		//Zoom out
+		StelCore *core = StelApp::getInstance().getCore();
+		StelMovementMgr *movementManager = core->getMovementMgr();
+		movementManager->zoomTo(movementManager->getInitFov());
+		movementManager->setFlagTracking(false);
+
+		guiPanel->hidePanel();
+	}
 }
 
-void Oculars::toggleCrosshair()
+void Oculars::toggleCrosshairs(bool show)
 {
-	flagShowCrosshairs = !flagShowCrosshairs;
+	if (show && flagShowOculars)
+	{
+		flagShowCrosshairs = true;
+	}
+	else
+	{
+		flagShowCrosshairs = false;
+	}
 }
 
-void Oculars::toggleTelrad()
+void Oculars::toggleTelrad(bool show)
 {
-	flagShowTelrad = !flagShowTelrad;
+	//TODO: BM: Mutually exclusive with?
+	flagShowTelrad = show;
 }
 
 /* ********************************************************************* */
@@ -952,12 +977,13 @@ void Oculars::initializeActivationActions()
 	//the necessary button is created to prevent the button from being checked
 	//the first time this action is checked. See:
 	//http://doc.qt.nokia.com/4.7/signalsandslots.html#signals
-	gui->addGuiActions("actionShow_Ocular",
-							 N_("Ocular view"),
-							 settings->value("bindings/toggle_oculars", "Ctrl+O").toString(),
-							 N_("Plugin Key Bindings"),
-							 true);
-	gui->getGuiActions("actionShow_Ocular")->setChecked(flagShowOculars);
+	QString shortcutStr = settings->value("bindings/toggle_oculars", "Ctrl+O").toString();
+	actionShowOcular = gui->addGuiActions("actionShow_Ocular",
+	                                      N_("Ocular view"),
+	                                      shortcutStr,
+	                                      group,
+	                                      true);
+	actionShowOcular->setChecked(flagShowOculars);
 	// Make a toolbar button
 	try {
 		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
@@ -967,19 +993,56 @@ void Oculars::initializeActivationActions()
 										*pxmapOnIcon,
 										*pxmapOffIcon,
 										*pxmapGlow,
-										gui->getGuiActions("actionShow_Ocular"));
+										actionShowOcular);
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable create toolbar button for Oculars plugin: " << e.what();
 	}
-	connect(gui->getGuiActions("actionShow_Ocular"), SIGNAL(toggled(bool)), this, SLOT(enableOcular(bool)));
+	connect(actionShowOcular, SIGNAL(toggled(bool)),
+	        this, SLOT(enableOcular(bool)));
 
-	gui->addGuiActions("actionShow_Ocular_Menu",
-							 N_("Oculars popup menu"),
-							 settings->value("bindings/popup_navigator", "Alt+O").toString(),
-							 group,
-							 true);
-	connect(gui->getGuiActions("actionShow_Ocular_Menu"), SIGNAL(toggled(bool)), this, SLOT(displayPopupMenu()));
+	shortcutStr = settings->value("bindings/popup_navigator", "Alt+O").toString();
+	actionMenu = gui->addGuiActions("actionShow_Ocular_Menu",
+	                                N_("Oculars popup menu"),
+	                                shortcutStr,
+	                                group,
+	                                true);
+	connect(actionMenu, SIGNAL(toggled(bool)),
+	        this, SLOT(displayPopupMenu()));
+
+	actionShowCrosshairs = gui->addGuiActions("actionShow_Ocular_Crosshairs",
+	                                          N_("Crosshairs"),
+	                                          QString(),
+	                                          group,
+	                                          true);
+	connect(actionShowCrosshairs, SIGNAL(toggled(bool)),
+	        this, SLOT(toggleCrosshairs(bool)));
+
+	actionShowSensor = gui->addGuiActions("actionShow_Sensor",
+	                                      N_("Sensor"),
+	                                      QString(),
+	                                      group,
+	                                      true);
+	connect(actionShowSensor, SIGNAL(toggled(bool)),
+	        this, SLOT(toggleCCD(bool)));
+
+	actionShowTelrad = gui->addGuiActions("actionShow_Telrad",
+	                                      N_("Telrad"),
+	                                      QString(),
+	                                      group,
+	                                      true);
+	connect(actionShowTelrad, SIGNAL(toggled(bool)),
+	        this, SLOT(toggleTelrad(bool)));
+
+	actionConfiguration = gui->addGuiActions("actionOpen_Oculars_Configuration",
+	                                         N_("Oculars plugin configuration"),
+	                                         QString(),
+	                                         group,
+	                                         true);
+	connect(actionConfiguration, SIGNAL(toggled(bool)),
+	        ocularDialog, SLOT(setVisible(bool)));
+	connect(ocularDialog, SIGNAL(visibleChanged(bool)),
+	        actionConfiguration, SLOT(setChecked(bool)));
 
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(setScreenFOVForCCD()));
