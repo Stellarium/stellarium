@@ -814,6 +814,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	// Rotate and add an extra quarter rotation so that the planet texture map
 	// fits to the observers position. No idea why this is necessary,
 	// perhaps some openGl strangeness, or confusing sin/cos.
+
 	painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
 	painter->setShadeModel(StelPainter::ShadeModelFlat);
 	glDisable(GL_CULL_FACE);
@@ -1009,6 +1010,7 @@ void Planet::drawOrbit(const StelCore* core)
 	QVarLengthArray<float, 1024> vertexArray;
 
 	sPainter.enableClientStates(true, false, false);
+
 	for (int n=0; n<=nbIter; ++n)
 	{
 		if (prj->project(orbit[n],onscreen) && (vertexArray.size()==0 || !prj->intersectViewportDiscontinuity(orbit[n-1], orbit[n])))
