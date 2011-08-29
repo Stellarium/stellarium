@@ -23,6 +23,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <QGraphicsWidget>
 
 class Oculars;
+class StelButton;
+class QGraphicsLinearLayout;
 class QGraphicsProxyWidget;
 class QLabel;
 class QPushButton;
@@ -44,6 +46,8 @@ public slots:
 	void showOcularGui();
 	//! Show only the controls used with a CCD overlay.
 	void showCcdGui();
+	//! Hide the panel.
+	void hidePanel();
 
 private slots:
 	//! Update the position of the widget within the parent.
@@ -53,12 +57,15 @@ private slots:
 	void openOcularsConfigurationWindow();
 
 	//! Updates the information shown when an ocular overlay is displayed
-	void updateOcularInfo();
+	void updateOcularControls();
 	//! Updates the information shown when a CCD overlay is displayed
 	void updateCcdInfo();
 	//! Updates the information that depends on the current telescope.
 	//! Called in both updateOcularInfo() and updateCcdInfo().
 	void updateTelescopeInfo();
+
+	//! Sets the color scheme (day/night mode)
+	void setColorScheme(const QString& schemeName);
 
 private:
 	Oculars* ocularsPlugin;
@@ -66,37 +73,50 @@ private:
 	//! This is actually SkyGui. Perhaps it should be more specific?
 	QGraphicsWidget* parentWidget;
 
-	// For now, this uses regular widgets wrapped in a proxy. In the future
-	// it may be implemented purely with classes derived from QGraphicsItem.
-	QGraphicsProxyWidget* proxy;
-	QWidget* mainWidget;
+	QGraphicsLinearLayout* mainLayout;
 
-	//Buttons
-	QPushButton* nextTelescopeButton;
-	QPushButton* nextCcdButton;
-	QPushButton* nextOcularButton;
-	QPushButton* prevTelescopeButton;
-	QPushButton* prevCcdButton;
-	QPushButton* prevOcularButton;
-	QPushButton* toggleCrosshairsButton;
-	QPushButton* configurationButton;
+	QGraphicsPathItem* borderPath;
 
-	QLabel* labelOcularName;
-	QLabel* labelOcularFl;
-	QLabel* labelOcularAfov;
-	QLabel* labelCcdName;
-	QLabel* labelCcdDimensions;
-	QLabel* labelTelescopeName;
-	QLabel* labelMagnification;
-	QLabel* labelFov;
+	//! Mini-toolbar holding StelButtons
+	QGraphicsWidget* buttonBar;
+	QGraphicsWidget* ocularControls;
+	QGraphicsWidget* ccdControls;
+	QGraphicsWidget* telescopeControls;
 
-	//Sets the visibility of the ocular name label and the associated buttons.
+	//Mini-toolbar
+	StelButton* buttonOcular;
+	StelButton* buttonCrosshairs;
+	StelButton* buttonCcd;
+	StelButton* buttonTelrad;
+	StelButton* buttonConfiguration;
+
+	//Information display
+	StelButton* prevOcularButton;
+	StelButton* nextOcularButton;
+	StelButton* prevTelescopeButton;
+	StelButton* nextTelescopeButton;
+	StelButton* prevCcdButton;
+	StelButton* nextCcdButton;
+	QGraphicsTextItem* fieldOcularName;
+	QGraphicsTextItem* fieldOcularFl;
+	QGraphicsTextItem* fieldOcularAfov;
+	QGraphicsTextItem* fieldCcdName;
+	QGraphicsTextItem* fieldCcdDimensions;
+	QGraphicsTextItem* fieldTelescopeName;
+	QGraphicsTextItem* fieldMagnification;
+	QGraphicsTextItem* fieldFov;
+
+	//! Sets the visibility of the ocular name label and the associated buttons.
 	void setOcularControlsVisible(bool show);
-	//Sets the visibility of the ocular labels that are not used for binoculars.
-	void setOcularInfoVisible(bool show);
 	void setCcdControlsVisible(bool show);
-	//Sets the visibility of the other information shown for an ocular overlay.
-	void setOtherControlsVisible(bool show);
+	void setTelescopeControlsVisible(bool show);
+	//! Updates the positions of the buttons inside the button bar.
+	void updateMainButtonsPositions();
+
+	void setControlsColor(const QColor& color);
+	void setControlsFont(const QFont& font);
+	//! Sets the night mode flag on all StelButton-s.
+	void setButtonsNightMode(bool nightMode);
 };
 
 #endif // OCULARSGUIPANEL_HPP
