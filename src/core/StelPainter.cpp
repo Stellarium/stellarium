@@ -1588,6 +1588,7 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
 		Vec3f tmpv(0.f);
 		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
+
 		lightPos3 -= tmpv;
 		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
 		prj->getModelViewTransform()->backward(lightPos3);
@@ -1634,6 +1635,7 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	static QVector<float> texCoordArr;
 	static QVector<float> colorArr;
 	static QVector<unsigned int> indiceArr;
+
 	texCoordArr.resize(0);
 	vertexArr.resize(0);
 	colorArr.resize(0);
@@ -1682,6 +1684,221 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	else
 		setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
 	drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
+}
+
+//drawing method for sphere when normal map is going to be used - eg in planet rendering
+//the method is similar to the sSphere but it calculates tangent vectors for each point as well
+void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
+{
+    static Vec3f lightPos3;
+    static Vec4f ambientLight;
+    static Vec4f diffuseLight;
+    const bool isLightOn = light.isEnabled();
+    if (isLightOn)
+    {
+            lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
+            Vec3f tmpv(0.f);
+            //transforms to world coord system
+            prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
+
+            lightPos3 -= tmpv;
+            //lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
+            //transforms back to view space
+            prj->getModelViewTransform()->backward(lightPos3);
+            lightPos3.normalize();
+            ambientLight = light.getAmbient();
+            diffuseLight = light.getDiffuse();
+            // TODO: pass them as attributes to the shader if glGetUseShaders
+    }
+
+    //up vector in view space - we need it to calculate the tangent vector
+    //Vec3f upVector(0.0, 1.0, 0.0); //world coordinates
+    //prj->getModelViewTransform()->backward(upVector); //view space coordinates
+
+    GLfloat x, y, z;
+    GLfloat s=0.f, t=0.f;
+    GLint i, j;
+    GLfloat nsign;
+
+    if (orientInside)
+    {
+            nsign = -1.f;
+            t=0.f; // from inside texture is reversed
+    }
+    else
+    {
+            nsign = 1.f;
+            t=1.f;
+    }
+
+    const float drho = M_PI / stacks;
+    Q_ASSERT(stacks<=MAX_STACKS);
+    ComputeCosSinRho(drho,stacks);
+    float* cos_sin_rho_p;
+
+    const float dtheta = 2.f * M_PI / slices;
+    Q_ASSERT(slices<=MAX_SLICES);
+    ComputeCosSinTheta(dtheta,slices);
+    const float *cos_sin_theta_p;
+
+    // texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
+    // t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
+    // cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
+    // If the texture is flipped, we iterate the coordinates backward.
+    const GLfloat ds = (flipTexture ? -1.f : 1.f) / slices;
+    const GLfloat dt = nsign / stacks; // from inside texture is reversed
+
+    // draw intermediate  as quad strips
+    static QVector<double> vertexArr;
+    static QVector<float> texCoordArr;
+    static QVector<float> normalArr;
+    static QVector<float> tangentArr;        //tangent array
+    static QVector<unsigned int> indiceArr;
+
+    texCoordArr.resize(0);
+    vertexArr.resize(0);
+    normalArr.resize(0);
+    indiceArr.resize(0);
+    tangentArr.resize(0);
+
+    for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
+    {
+            s = !flipTexture ? 0.f : 1.f;
+            for (j = 0,cos_sin_theta_p = cos_sin_theta; j<=slices;++j,cos_sin_theta_p+=2)
+            {
+                    Vec3f vector, normal, tangent, nextv, prevv;
+                    float px, py, pz;
+                    float nx, ny, nz;
+
+//first point
+
+                    x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
+                    y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
+                    z = nsign * cos_sin_rho_p[0];
+
+//TODO make this a function
+                    if (j == 0)
+                    {
+                            px = -cos_sin_theta[2 * slices - 1] * cos_sin_rho[2 * stacks - 1];
+                            py = cos_sin_theta[2 * slices - 2] * cos_sin_rho[2 * stacks - 1];
+                            pz = nsign * cos_sin_rho[2 * stacks - 2];
+
+                            nx = -cos_sin_theta[2 * slices] * cos_sin_rho[2 * stacks];
+                            ny = cos_sin_theta[2 * slices - 1] * cos_sin_rho[2 * stacks];
+                            nz = nsign * cos_sin_rho[2 * stacks - 1];
+                    }
+                    else if (j == slices)
+                    {
+                            px = -cos_sin_theta_p[-1] * cos_sin_rho_p[-1];
+                            py = cos_sin_theta_p[-2] * cos_sin_rho_p[-1];
+                            pz = nsign * cos_sin_rho_p[-2];
+
+                            nx = -cos_sin_theta[1] * cos_sin_rho[1];
+                            ny = cos_sin_theta[0] * cos_sin_rho[1];
+                            nz = nsign * cos_sin_rho[0];
+                    }
+                    else
+                    {
+                         px = -cos_sin_theta_p[-1] * cos_sin_rho_p[-1];
+                         py = cos_sin_theta_p[-2] * cos_sin_rho_p[-1];
+                         pz = nsign * cos_sin_rho_p[-2];
+
+                         nx = -cos_sin_theta_p[3] * cos_sin_rho_p[3];
+                         ny = cos_sin_theta_p[2] * cos_sin_rho_p[3];
+                         nz = nsign * cos_sin_rho_p[2];
+                    }
+
+                    nextv = Vec3f(nx * radius, ny * radius, nz * oneMinusOblateness * radius);
+                    prevv = Vec3f(px * radius, py * radius, pz * oneMinusOblateness * radius);
+                    tangent = nextv - prevv;
+                    tangent.normalize();
+
+/*
+                    vertexArr << x * radius << y * radius << z * oneMinusOblateness * radius;
+                    normalArr << x * oneMinusOblateness << y * oneMinusOblateness << z;
+                    */
+
+                    vector = Vec3f(x * radius, y * radius, z * oneMinusOblateness * radius);
+                    normal = Vec3f(x * oneMinusOblateness, y * oneMinusOblateness, z);
+                    normal.normalize();
+
+                    texCoordArr << s << t;
+                    vertexArr << vector[0] << vector[1] << vector[2];
+                    normalArr << normal[0] << normal[1] << normal[2];
+                    tangentArr << tangent[0] << tangent[1] << tangent[2];
+
+//second point
+                    x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
+                    y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
+                    z = nsign * cos_sin_rho_p[2];
+                    if (j == 0)
+                    {
+                            px = -cos_sin_theta[2 * slices - 1] * cos_sin_rho[2 * stacks - 1];
+                            py = cos_sin_theta[2 * slices - 2] * cos_sin_rho[2 * stacks - 1];
+                            pz = nsign * cos_sin_rho[2 * stacks - 2];
+
+                            nx = -cos_sin_theta[2 * slices] * cos_sin_rho[2 * stacks];
+                            ny = cos_sin_theta[2 * slices - 1] * cos_sin_rho[2 * stacks];
+                            nz = nsign * cos_sin_rho[2 * stacks - 1];
+                    }
+                    else if (j == slices)
+                    {
+                            px = -cos_sin_theta_p[-1] * cos_sin_rho_p[-1];
+                            py = cos_sin_theta_p[-2] * cos_sin_rho_p[-1];
+                            pz = nsign * cos_sin_rho_p[-2];
+
+                            nx = -cos_sin_theta[1] * cos_sin_rho[1];
+                            ny = cos_sin_theta[0] * cos_sin_rho[1];
+                            nz = nsign * cos_sin_rho[0];
+                    }
+                    else
+                    {
+                         px = -cos_sin_theta_p[-1] * cos_sin_rho_p[-1];
+                         py = cos_sin_theta_p[-2] * cos_sin_rho_p[-1];
+                         pz = nsign * cos_sin_rho_p[-2];
+
+                         nx = -cos_sin_theta_p[3] * cos_sin_rho_p[3];
+                         ny = cos_sin_theta_p[2] * cos_sin_rho_p[3];
+                         nz = nsign * cos_sin_rho_p[2];
+                    }
+
+                    nextv = Vec3f(nx * radius, ny * radius, nz * oneMinusOblateness * radius);
+                    prevv = Vec3f(px * radius, py * radius, pz * oneMinusOblateness * radius);
+                    tangent = nextv - prevv;
+                    tangent.normalize();
+
+                    vector = Vec3f(x * radius, y * radius, z * oneMinusOblateness * radius);
+                    normal = Vec3f(x * oneMinusOblateness, y * oneMinusOblateness, z);
+                    normal.normalize();
+
+                    texCoordArr << s << t - dt;
+                    vertexArr << vector[0] << vector[1] << vector[2];
+                    normalArr << normal[0] << normal[1] << normal[2];
+                    tangentArr << tangent[0] << tangent[1] << tangent[2];
+
+                    s += ds;
+            }
+
+            unsigned int offset = i*(slices+1)*2;
+            for (j = 2;j<slices*2+2;j+=2)
+            {
+                    indiceArr << offset+j-2 << offset+j-1 << offset+j;
+                    indiceArr << offset+j << offset+j-1 << offset+j+1;
+            }
+            t -= dt;
+    }
+
+    // Draw the array now
+
+/*
+    if (isLightOn)
+            setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData());
+            //setNMapArrays
+    else
+            setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
+            //setNMapArrays
+    drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
+*/
 }
 
 StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
@@ -1953,7 +2170,7 @@ void StelPainter::setArrays(const Vec3d* vertice, const Vec2f* texCoords, const 
 	setNormalPointer(GL_FLOAT, normalArray);
 }
 
-void StelPainter::setShaderArrays(const Vec3d *vertice, const Vec2f *texCoords, const Vec3f *colorArray, const Vec3f *normalArray, const Vec3f *tangentArray)
+/*void StelPainter::setShaderArrays(const Vec3d *vertice, const Vec2f *texCoords, const Vec3f *colorArray, const Vec3f *normalArray, const Vec3f *tangentArray)
 {
         enableNMapClientStates(vertice, texCoords, colorArray, normalArray, tangentArray);
 	setVertexPointer(3, GL_DOUBLE, vertice);
@@ -1961,7 +2178,7 @@ void StelPainter::setShaderArrays(const Vec3d *vertice, const Vec2f *texCoords, 
 	setColorPointer(3, GL_FLOAT, colorArray);
 	setNormalPointer(GL_FLOAT, normalArray);
 	setTangentPointer(GL_FLOAT, tangentArray);
-}
+}*/
 
 void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool normal)
 {
@@ -1971,14 +2188,14 @@ void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool
 	normalArray.enabled = normal;
 }
 
-void StelPainter::enableNMapClientStates(bool vertex, bool texture, bool color, bool normal, bool tangent)
+/*void StelPainter::enableNMapClientStates(bool vertex, bool texture, bool color, bool normal, bool tangent)
 {
         vertexArray.enabled = vertex;
         texCoordArray.enabled = texture;
         colorArray.enabled = color;
         normalArray.enabled = normal;
         tangentArray.enabled = tangent;
-}
+}*/
 
 void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned int* indices)
 {
@@ -2016,6 +2233,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		glEnableClientState(GL_COLOR_ARRAY);
 		glColorPointer(colorArray.size, colorArray.type, 0, colorArray.pointer);
 	}
+
 #else
 	QGLShaderProgram* pr=NULL;
 
