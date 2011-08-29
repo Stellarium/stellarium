@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 Timothy Reaves
+ * Copyright (C) 2011 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,7 +42,7 @@ QT_END_NAMESPACE
 
 class StelButton;
 
-//! This is an example of a plug-in which can be dynamically loaded into stellarium
+//! Main class of the Oculars plug-in.
 class Oculars : public StelModule
 {
 	Q_OBJECT
@@ -144,6 +145,8 @@ private:
 
 	//! This method is called by the zoom() method, when this plugin is toggled on; it resets the zoomed view.
 	void zoomOcular();
+
+	void hideUsageMessageIfDisplayed();
 
 	//! A list of all the oculars defined in the ini file.  Must have at least one, or module will not run.
 	QList<CCD *> ccds;
