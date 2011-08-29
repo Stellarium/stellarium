@@ -319,21 +319,21 @@ public:
 	}
 
 	// tangent
-	/*void setTangentPointer(int type, const void* pointer)
+	void setTangentPointer(int type, const void* pointer)
 	{
 	        tangentArray.size = 3; tangentArray.type = type; tangentArray.pointer = pointer;
-        }*/
+        }
 
 	//! use instead of glEnableClient
 	void enableClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false);
-        //void enableNMapClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false, bool tangent=false);
+        void enableNMapClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false, bool tangent=false);
 
 	//! convenience method that enable and set all the given arrays.
 	//! It is equivalent to calling enableClientState and set the array pointer for each arrays.
 	void setArrays(const Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL);
 
 	// there are conflicts if we name the function setArrays
-	// void setShaderArrays(const Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL, const Vec3f* tangentArray=NULL);
+	void setNMapArrays(const Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL, const Vec3f* tangentArray=NULL);
 
 	//! Draws primitives using vertices from the arrays specified by setVertexArray().
 	//! The type of primitive to draw is specified by mode.
@@ -435,8 +435,8 @@ private:
 	ArrayDesc normalArray;
 	//! The descriptor for the current opengl color array
 	ArrayDesc colorArray;
-
-       // ArrayDesc tangentArray;
+        //! The descriptor for the current opengl tangent array
+        ArrayDesc tangentArray;
 
 	//! the single light used by the painter
 	StelPainterLight light;
