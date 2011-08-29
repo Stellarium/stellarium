@@ -33,6 +33,7 @@
 #define MIN_OCULARS_INI_VERSION 0.12
 
 QT_BEGIN_NAMESPACE
+class QAction;
 class QKeyEvent;
 class QMouseEvent;
 class QPixmap;
@@ -84,13 +85,13 @@ public slots:
 	void incrementCCDIndex();
 	void incrementOcularIndex();
 	void incrementTelescopeIndex();
-	void rotateCCD(QString amount); //<! amount must be a number.
-	void selectCCDAtIndex(QString indexString); //<! indexString must be an integer, in the range of -1:ccds.count()
-	void selectOcularAtIndex(QString indexString);  //<! indexString must be an integer, in the range of -1:oculars.count()
-	void selectTelescopeAtIndex(QString indexString);  //<! indexString must be an integer, in the range of -1:telescopes.count()
-	void toggleCCD();
-	void toggleCrosshair();
-	void toggleTelrad();
+	void rotateCCD(QString amount); //!< amount must be a number.
+	void selectCCDAtIndex(QString indexString); //!< indexString must be an integer, in the range of -1:ccds.count()
+	void selectOcularAtIndex(QString indexString);  //!< indexString must be an integer, in the range of -1:oculars.count()
+	void selectTelescopeAtIndex(QString indexString);  //!< indexString must be an integer, in the range of -1:telescopes.count()
+	void toggleCCD(bool show = true);
+	void toggleCrosshairs(bool show = true);
+	void toggleTelrad(bool show = true);
 
 signals:
 	void selectedCCDChanged();
@@ -152,9 +153,9 @@ private:
 	QList<CCD *> ccds;
 	QList<Ocular *> oculars;
 	QList<Telescope *> telescopes;
-	int selectedCCDIndex; //<! index of the current CCD, in the range of -1:ccds.count().  -1 means no CCD is selected.
-	int selectedOcularIndex; //<! index of the current ocular, in the range of -1:oculars.count().  -1 means no ocular is selected.
-	int selectedTelescopeIndex; //<! index of the current telescope, in the range of -1:telescopes.count(). -1 means none is selected.
+	int selectedCCDIndex; //!< index of the current CCD, in the range of -1:ccds.count().  -1 means no CCD is selected.
+	int selectedOcularIndex; //!< index of the current ocular, in the range of -1:oculars.count().  -1 means no ocular is selected.
+	int selectedTelescopeIndex; //!< index of the current telescope, in the range of -1:telescopes.count(). -1 means none is selected.
 
 	QFont font;					//!< The font used for drawing labels.
 	bool flagShowCCD;				//!< flag used to track f we are in CCD mode.
@@ -170,15 +171,15 @@ private:
 	bool flagEclipticLine;		//!< Flag to track if EclipticLine was displayed at activation.
 	bool flagMeridianLine;		//!< Flag to track if MeridianLine was displayed at activation.
 
-	double ccdRotationAngle;	//<! The angle to rotate the CCD bounding box. */
+	double ccdRotationAngle;	//!< The angle to rotate the CCD bounding box. */
 	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
 	bool requireSelection;		//!< Read from the ini file, whether an object is required to be selected to zoom in.
 	bool useMaxEyepieceAngle;	//!< Read from the ini file, whether to scale the mask based aFOV.
 
-	QSignalMapper* ccdRotationSignalMapper;  //<! Used to rotate the CCD. */
-	QSignalMapper* ccdsSignalMapper; //<! Used to determine which CCD was selected from the popup navigator. */
-	QSignalMapper* ocularsSignalMapper; //<! Used to determine which ocular was selected from the popup navigator. */
-	QSignalMapper* telescopesSignalMapper; //<! Used to determine which telescope was selected from the popup navigator. */
+	QSignalMapper* ccdRotationSignalMapper;  //!< Used to rotate the CCD. */
+	QSignalMapper* ccdsSignalMapper; //!< Used to determine which CCD was selected from the popup navigator. */
+	QSignalMapper* ocularsSignalMapper; //!< Used to determine which ocular was selected from the popup navigator. */
+	QSignalMapper* telescopesSignalMapper; //!< Used to determine which telescope was selected from the popup navigator. */
 
 	// for toolbar button
 	QPixmap* pxmapGlow;
@@ -188,6 +189,13 @@ private:
 
 	OcularDialog *ocularDialog;
 	bool ready; //!< A flag that determines that this module is usable.  If false, we won't open.
+
+	QAction* actionShowOcular;
+	QAction* actionShowCrosshairs;
+	QAction* actionShowSensor;
+	QAction* actionShowTelrad;
+	QAction* actionConfiguration;
+	QAction* actionMenu;
 
 	class OcularsGuiPanel* guiPanel;
 
