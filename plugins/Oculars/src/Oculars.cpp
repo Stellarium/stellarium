@@ -1416,7 +1416,13 @@ void Oculars::zoomOcular()
 	Ocular *ocular = oculars[selectedOcularIndex];
 	Telescope *telescope = NULL;
 	// Only consider flip is we're not binoculars
-	if (!ocular->isBinoculars()) {
+	if (ocular->isBinoculars())
+	{
+		core->setFlipHorz(false);
+		core->setFlipVert(false);
+	}
+	else
+	{
 		telescope = telescopes[selectedTelescopeIndex];
 		core->setFlipHorz(telescope->isHFlipped());
 		core->setFlipVert(telescope->isVFlipped());
