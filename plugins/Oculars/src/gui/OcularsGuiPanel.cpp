@@ -66,51 +66,54 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	StelApp& stelApp = StelApp::getInstance();
 	StelGui* gui = dynamic_cast<StelGui*>(stelApp.getGui());
 	Q_ASSERT(gui);
-	QAction* actionToggleOcular = gui->getGuiActions("actionShow_Ocular");
+	//QAction* actionToggleOcular = gui->getGuiActions("actionShow_Ocular");
 	buttonOcular = new StelButton(buttonBar,
 	                              QPixmap(":/ocular/bt_ocular_on.png"),
 	                              QPixmap(":/ocular/bt_ocular_off.png"),
 	                              QPixmap(),
-	                              actionToggleOcular,
+	                              ocularsPlugin->actionShowOcular,
 	                              true); //No background
 	buttonOcular->setToolTip("Ocular");
 	//buttonOcular->setBackgroundPixmap(leftBackground);
 	buttonOcular->setParentItem(buttonBar);
 
-	QAction* actionToggleCrosshairs = new QAction(this);
+	//Hack to avoid buttonOcular being left "checked" if it has been toggled
+	//without any object selected.
+	disconnect(ocularsPlugin->actionShowOcular, SIGNAL(toggled(bool)),
+	           ocularsPlugin, SLOT(enableOcular(bool)));
+	connect(ocularsPlugin->actionShowOcular, SIGNAL(toggled(bool)),
+	        ocularsPlugin, SLOT(enableOcular(bool)));
+
 	buttonCrosshairs = new StelButton(buttonBar,
 	                                  QPixmap(":/ocular/bt_crosshairs_on.png"),
 	                                  QPixmap(":/ocular/bt_crosshairs_off.png"),
 	                                  QPixmap(),
-	                                  actionToggleCrosshairs,
+	                                  ocularsPlugin->actionShowCrosshairs,
 	                                  true);
 	buttonCrosshairs->setToolTip("Crosshairs");
 	buttonCrosshairs->setVisible(false);
 
-	QAction* actionToggleCcd = new QAction(this);
 	buttonCcd = new StelButton(buttonBar,
 	                           QPixmap(":/ocular/bt_sensor_on.png"),
 	                           QPixmap(":/ocular/bt_sensor_off.png"),
 	                           QPixmap(),
-	                           actionToggleCcd,
+	                           ocularsPlugin->actionShowSensor,
 	                           true);
 	buttonCcd->setToolTip("Sensor");
 
-	QAction* actionToggleTelrad = new QAction(this);
 	buttonTelrad = new StelButton(buttonBar,
 	                              QPixmap(":/ocular/bt_telrad_on.png"),
 	                              QPixmap(":/ocular/bt_telrad_off.png"),
 	                              QPixmap(),
-	                              actionToggleTelrad,
+	                              ocularsPlugin->actionShowTelrad,
 	                              true);
 	buttonTelrad->setToolTip("Telrad circles");
 
-	QAction* actionOpenConfiguration = new QAction(this);
 	buttonConfiguration = new StelButton(buttonBar,
 	                                     QPixmap(":/ocular/bt_settings_on.png"),
 	                                     QPixmap(":/ocular/bt_settings_off.png"),
 	                                     QPixmap(),
-	                                     actionOpenConfiguration,
+	                                     ocularsPlugin->actionConfiguration,
 	                                     true);
 	buttonConfiguration->setToolTip("Oculars plugin configuration window");
 
@@ -119,15 +122,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	buttonBar->setMaximumHeight(buttonHeight);
 
 	setLayout(mainLayout);
-
-	connect(buttonCrosshairs, SIGNAL(triggered()),
-	        ocularsPlugin, SLOT(toggleCrosshair()));
-	connect(buttonCcd, SIGNAL(toggled(bool)),
-	        ocularsPlugin, SLOT(toggleCCD()));
-	connect(buttonTelrad, SIGNAL(toggled(bool)),
-	        ocularsPlugin, SLOT(toggleTelrad()));
-	connect(buttonConfiguration, SIGNAL(triggered()),
-	        this, SLOT(openOcularsConfigurationWindow()));
 
 	//Widgets with control and information fields
 	ocularControls = new QGraphicsWidget(this);
