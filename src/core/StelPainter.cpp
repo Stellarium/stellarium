@@ -1640,6 +1640,7 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	vertexArr.resize(0);
 	colorArr.resize(0);
 	indiceArr.resize(0);
+
 	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
 	{
 		s = !flipTexture ? 0.f : 1.f;
@@ -1693,7 +1694,9 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
     static Vec3f lightPos3;
     static Vec4f ambientLight;
     static Vec4f diffuseLight;
+    float c;
     const bool isLightOn = light.isEnabled();
+
     if (isLightOn)
     {
             lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
@@ -1708,7 +1711,6 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
             lightPos3.normalize();
             ambientLight = light.getAmbient();
             diffuseLight = light.getDiffuse();
-            // TODO: pass them as attributes to the shader if glGetUseShaders
     }
 
     //up vector in view space - we need it to calculate the tangent vector
@@ -1752,6 +1754,7 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
     static QVector<double> vertexArr;
     static QVector<float> texCoordArr;
     static QVector<float> normalArr;
+    static QVector<float> colorArr;
     static QVector<float> tangentArr;        //tangent array
     static QVector<unsigned int> indiceArr;
 
@@ -1760,6 +1763,7 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
     normalArr.resize(0);
     indiceArr.resize(0);
     tangentArr.resize(0);
+    colorArr.resize(0);
 
     for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
     {
@@ -1769,14 +1773,18 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
                     Vec3f vector, normal, tangent, nextv, prevv;
                     float px, py, pz;
                     float nx, ny, nz;
-
 //first point
-
                     x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
                     y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
                     z = nsign * cos_sin_rho_p[0];
 
-//TODO make this a function
+                    if (isLightOn)
+                    {
+                            c = nsign * (lightPos3[0]*x*oneMinusOblateness + lightPos3[1]*y*oneMinusOblateness + lightPos3[2]*z);
+                            if (c<0) {c=0;}
+                            colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
+                    }
+
                     if (j == 0)
                     {
                             px = -cos_sin_theta[2 * slices - 1] * cos_sin_rho[2 * stacks - 1];
@@ -1831,6 +1839,14 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
                     x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
                     y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
                     z = nsign * cos_sin_rho_p[2];
+
+                    if (isLightOn)
+                    {
+                            c = nsign * (lightPos3[0]*x*oneMinusOblateness + lightPos3[1]*y*oneMinusOblateness + lightPos3[2]*z);
+                            if (c<0) {c=0;}
+                            colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
+                    }
+
                     if (j == 0)
                     {
                             px = -cos_sin_theta[2 * slices - 1] * cos_sin_rho[2 * stacks - 1];
@@ -1890,15 +1906,13 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
 
     // Draw the array now
 
-/*
+
     if (isLightOn)
-            setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData());
-            //setNMapArrays
+            setNMapArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData(), (Vec3f*)tangentArr.constData());
     else
-            setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
-            //setNMapArrays
+            setNMapArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)tangentArr.constData());
+
     drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
-*/
 }
 
 StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
@@ -2170,7 +2184,7 @@ void StelPainter::setArrays(const Vec3d* vertice, const Vec2f* texCoords, const 
 	setNormalPointer(GL_FLOAT, normalArray);
 }
 
-/*void StelPainter::setShaderArrays(const Vec3d *vertice, const Vec2f *texCoords, const Vec3f *colorArray, const Vec3f *normalArray, const Vec3f *tangentArray)
+void StelPainter::setNMapArrays(const Vec3d *vertice, const Vec2f *texCoords, const Vec3f *colorArray, const Vec3f *normalArray, const Vec3f *tangentArray)
 {
         enableNMapClientStates(vertice, texCoords, colorArray, normalArray, tangentArray);
 	setVertexPointer(3, GL_DOUBLE, vertice);
@@ -2178,7 +2192,7 @@ void StelPainter::setArrays(const Vec3d* vertice, const Vec2f* texCoords, const 
 	setColorPointer(3, GL_FLOAT, colorArray);
 	setNormalPointer(GL_FLOAT, normalArray);
 	setTangentPointer(GL_FLOAT, tangentArray);
-}*/
+}
 
 void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool normal)
 {
@@ -2188,14 +2202,14 @@ void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool
 	normalArray.enabled = normal;
 }
 
-/*void StelPainter::enableNMapClientStates(bool vertex, bool texture, bool color, bool normal, bool tangent)
+void StelPainter::enableNMapClientStates(bool vertex, bool texture, bool color, bool normal, bool tangent)
 {
         vertexArray.enabled = vertex;
         texCoordArray.enabled = texture;
         colorArray.enabled = color;
         normalArray.enabled = normal;
         tangentArray.enabled = tangent;
-}*/
+}
 
 void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned int* indices)
 {
