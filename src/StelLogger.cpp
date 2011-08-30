@@ -255,36 +255,36 @@ void StelLogger::init(const QString& logFilePath)
 		writeLog("Could not get processor info.");
 
 #elif defined Q_OS_MAC
-    QProcess systemProfiler;
-    systemProfiler.start("/usr/sbin/system_profiler -detailLevel full SPHardwareDataType");
-    systemProfiler.waitForFinished(200);
-    const QString systemData(systemProfiler.readAll());
-    QStringList systemLines = systemData.split('\n', QString::SkipEmptyParts);
-    for (i = 0; i<systemLines.size(); i++)
-    {
-        if(systemLines.at(i).contains("Model"))
-              writeLog(systemLines.at(i).trimmed());
+	QProcess systemProfiler;
+	systemProfiler.start("/usr/sbin/system_profiler -detailLevel full SPHardwareDataType");
+	systemProfiler.waitForFinished(100);
+	const QString systemData(systemProfiler.readAll());
+	QStringList systemLines = systemData.split('\n', QString::SkipEmptyParts);
+	for (i = 0; i<systemLines.size(); i++)
+	{
+		if(systemLines.at(i).contains("Model"))
+			writeLog(systemLines.at(i).trimmed());
 
-        if(systemLines.at(i).contains("Processor"))
-              writeLog(systemLines.at(i).trimmed());
+		if(systemLines.at(i).contains("Processor"))
+			writeLog(systemLines.at(i).trimmed());
 
-        if(systemLines.at(i).contains("Memory"))
-              writeLog(systemLines.at(i).trimmed());
+		if(systemLines.at(i).contains("Memory"))
+			writeLog(systemLines.at(i).trimmed());
 
-    }
-    systemProfiler.start("/usr/sbin/system_profiler -detailLevel full SPDisplaysDataType");
-    systemProfiler.waitForFinished(200);
-    const QString graphicsData(systemProfiler.readAll());
-    QStringList graphicsLines = graphicsData.split('\n', QString::SkipEmptyParts);
-    for(i = 0; i<graphicsLines.size(); i++)
-    {
-         if(graphicsLines.at(i).contains("Chipset"))
-              writeLog(graphicsLines.at(i).trimmed());
+	}
+	systemProfiler.start("/usr/sbin/system_profiler -detailLevel full SPDisplaysDataType");
+	systemProfiler.waitForFinished(100);
+	const QString graphicsData(systemProfiler.readAll());
+	QStringList graphicsLines = graphicsData.split('\n', QString::SkipEmptyParts);
+	for(i = 0; i<graphicsLines.size(); i++)
+	{
+		if(graphicsLines.at(i).contains("Chipset"))
+			writeLog(graphicsLines.at(i).trimmed());
 
-         if(graphicsLines.at(i).contains("VRAM"))
-              writeLog(graphicsLines.at(i).trimmed());
+		if(graphicsLines.at(i).contains("VRAM"))
+			writeLog(graphicsLines.at(i).trimmed());
 
-    }
+	}
 	//writeLog("You look like a Mac user. How would you like to write some system info code here? That would help a lot.");
 
 #endif
