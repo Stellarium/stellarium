@@ -31,6 +31,7 @@
 
 #include <QApplication>
 #include <QClipboard>
+#include <QDesktopServices>
 #include <QFileDialog>
 #include <QSortFilterProxyModel>
 #include <QHash>
@@ -289,7 +290,10 @@ void MpcImportWindow::pasteClipboardURL()
 
 void MpcImportWindow::selectFile()
 {
-	QString filePath = QFileDialog::getOpenFileName(NULL, "Select a text file", StelFileMgr::getDesktopDir());
+	QString directory = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation);
+	if (directory.isEmpty())
+		directory = QDesktopServices::storageLocation(QDesktopServices::HomeLocation);
+	QString filePath = QFileDialog::getOpenFileName(NULL, "Select a text file", directory);
 	ui->lineEditFilePath->setText(filePath);
 }
 
