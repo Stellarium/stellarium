@@ -624,7 +624,7 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 
 	float initX = x + xshift*cosr - yshift*sinr;
 	float initY = y + yshift*sinr + yshift*cosr;
-	
+
 	for (int i=0;i<ws.length();++i)
 	{
 		drawText(initX, initY, ws[i], -theta*180./M_PI+psi*i, 0., 0.);
@@ -747,7 +747,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 
 
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);		
+		glEnable(GL_BLEND);
 		enableClientStates(true, true);
 		setVertexPointer(2, GL_FLOAT, vertexData);
 
@@ -1911,10 +1911,7 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
     else
             setNMapArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)tangentArr.constData());
 
- //   drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
- //TODO: put this on a StelPainter function drawNMapSphere(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
- //DRAWING
- 
+    drawFromArrayNMap(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
 }
 
 StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
@@ -2336,6 +2333,29 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	if (pr)
 		pr->release();
 #endif
+}
+
+void StelPainter::drawFromArrayNMap(DrawingMode mode, int count, int offset, bool doProj, const unsigned int* indices)
+{
+	ArrayDesc projectedVertexArray = vertexArray;
+	if (doProj)
+	{
+		// Project the vertex array using current projection
+		if (indices)
+			projectedVertexArray = projectArray(vertexArray, 0, count, indices + offset);
+		else
+			projectedVertexArray = projectArray(vertexArray, offset, count, NULL);
+	}
+
+	if (!(texCoordArray.enabled && normalArray.enabled && colorArray.enabled && tangentArray.enabled))
+	{
+        drawFromArray(mode, count, offset, doProj, indices);
+	}
+	else
+	{
+	//todo - after changing this part we are ready for the shader
+        drawFromArray(mode, count, offset, doProj, indices);
+	}
 }
 
 StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& array, int offset, int count, const unsigned int* indices)
