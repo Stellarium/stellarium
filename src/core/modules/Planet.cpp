@@ -763,6 +763,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			else
 			{
 				// Normal planet
+				//TODO: drawNMapSphere(sPainter, screenSz);
 				drawSphere(sPainter, screenSz);
 			}
 		}
@@ -791,16 +792,6 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 		if (!texMap->bind())
 			return;
 	}
-
-	if (normalMap)
-	{
-	        //for lazy loading, disable normal mapping
-	        if(!(normalMap->bind()))
-	        {
-	                glUseProgram(0);
-                }
-	}
-
 	painter->enableTexture2d(true);
 	glDisable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
@@ -818,6 +809,52 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
 	painter->setShadeModel(StelPainter::ShadeModelFlat);
 	glDisable(GL_CULL_FACE);
+}
+
+void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
+{
+    bool has_nmap = true;
+    if (texMap)
+    {
+        // For lazy loading, return if texture not yet loaded
+        if (!texMap->bind())
+            return;
+    }
+
+    if (normalMap)
+    {
+        //for lazy loading, disable normal mapping
+        if(!normalMap->bind())
+        {
+            glUseProgram(0);
+            has_nmap = false;
+        }
+    }
+
+    painter->enableTexture2d(true);
+    glDisable(GL_BLEND);
+    glEnable(GL_CULL_FACE);
+
+    // Draw the spheroid itself
+    // Adapt the number of facets according with the size of the sphere for optimization
+    int nb_facet = (int)(screenSz * 40/50);	// 40 facets for 1024 pixels diameter on screen
+    if (nb_facet<10) nb_facet = 10;
+    if (nb_facet>40) nb_facet = 40;
+    painter->setShadeModel(StelPainter::ShadeModelSmooth);
+    // Rotate and add an extra quarter rotation so that the planet texture map
+    // fits to the observers position. No idea why this is necessary,
+    // perhaps some openGl strangeness, or confusing sin/cos.
+
+    if (has_nmap)
+    {
+        painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+    }
+    else
+    {
+        painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+    }
+    painter->setShadeModel(StelPainter::ShadeModelFlat);
+    glDisable(GL_CULL_FACE);
 }
 
 

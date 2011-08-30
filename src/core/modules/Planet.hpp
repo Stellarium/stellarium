@@ -252,6 +252,7 @@ protected:
 
 	// Draw the 3D sphere
 	void drawSphere(StelPainter* painter, float screenSz);
+	void drawNMapSphere(StelPainter* painter, float screenSz);
 
 	// Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, const QFont& planetNameFont);
