@@ -1938,18 +1938,28 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
 
     // Draw the array now
 
-    if (isLightOn)
-        setNMapArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData(), (Vec3f*)normalArr.constData(), (Vec3f*)tangentArr.constData());
-    else
+    if(!isLightOn)
     {
         setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
         drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
-        return;
     }
+    else
+    {
 
-	ArrayDesc projectedVertexArray = vertexArray;
-    projectedVertexArray = projectArray(vertexArray, 0, indiceArr.size(), indiceArr.constData());
-    drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
+	  //      ArrayDesc projectedVertexArray = vertexArray;
+     //       projectedVertexArray = projectArray(vertexArray, 0, indiceArr.size(), indiceArr.constData());
+
+           //to be removed
+            setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData());
+            drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
+        //end of removed
+// glEnableVertexAttribArray
+// glVertexAttribPointer
+// draw
+
+   //this will be removed:
+  //  drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
+        }
 }
 
 StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
@@ -2229,31 +2239,12 @@ void StelPainter::setArrays(const Vec3d* vertice, const Vec2f* texCoords, const 
 	setNormalPointer(GL_FLOAT, normalArray);
 }
 
-void StelPainter::setNMapArrays(const Vec3d *vertice, const Vec2f *texCoords, const Vec3f *colorArray, const Vec3f *normalArray, const Vec3f *tangentArray)
-{
-    enableNMapClientStates(vertice, texCoords, colorArray, normalArray, tangentArray);
-	setVertexPointer(3, GL_DOUBLE, vertice);
-	setTexCoordPointer(2, GL_FLOAT, texCoords);
-	setColorPointer(3, GL_FLOAT, colorArray);
-	setNormalPointer(GL_FLOAT, normalArray);
-	setTangentPointer(GL_FLOAT, tangentArray);
-}
-
 void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool normal)
 {
 	vertexArray.enabled = vertex;
 	texCoordArray.enabled = texture;
 	colorArray.enabled = color;
 	normalArray.enabled = normal;
-}
-
-void StelPainter::enableNMapClientStates(bool vertex, bool texture, bool color, bool normal, bool tangent)
-{
-        vertexArray.enabled = vertex;
-        texCoordArray.enabled = texture;
-        colorArray.enabled = color;
-        normalArray.enabled = normal;
-        tangentArray.enabled = tangent;
 }
 
 void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned int* indices)
