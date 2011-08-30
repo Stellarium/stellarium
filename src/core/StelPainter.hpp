@@ -19,7 +19,6 @@
 
 #ifndef _STELPAINTER_HPP_
 #define _STELPAINTER_HPP_
-
 #include "VecMath.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelProjectorType.hpp"
@@ -321,8 +320,8 @@ public:
 	// tangent
 	void setTangentPointer(int type, const void* pointer)
 	{
-	        tangentArray.size = 3; tangentArray.type = type; tangentArray.pointer = pointer;
-        }
+        tangentArray.size = 3; tangentArray.type = type; tangentArray.pointer = pointer;
+    }
 
 	//! use instead of glEnableClient
 	void enableClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false);

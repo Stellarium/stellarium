@@ -17,8 +17,20 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "StelPainter.hpp"
+//remove
+#include <iomanip>
+#include <QtCore/QtCore>
+#include <QtGui/QtGui>
+#include <QTextStream>
+#include <QString>
+#include <QDebug>
+#include <QObject>
+#include <QVariant>
+#include <QVarLengthArray>
+//i put them to use glUseProgram(0)
 
+#include <GLee.h>
+#include "StelPainter.hpp"
 #include <QtOpenGL>
 
 #include "StelProjector.hpp"
@@ -1713,10 +1725,6 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
             diffuseLight = light.getDiffuse();
     }
 
-    //up vector in view space - we need it to calculate the tangent vector
-    //Vec3f upVector(0.0, 1.0, 0.0); //world coordinates
-    //prj->getModelViewTransform()->backward(upVector); //view space coordinates
-
     GLfloat x, y, z;
     GLfloat s=0.f, t=0.f;
     GLint i, j;
@@ -1830,6 +1838,19 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
                     normal = Vec3f(x * oneMinusOblateness, y * oneMinusOblateness, z);
                     normal.normalize();
 
+//debug
+/*
+                    glUseProgram(0);
+                    glDisable(GL_LIGHTING);
+                    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+                    glLineWidth(5);
+                    glBegin(GL_LINE);
+                    glColor3f(1.0, 0.0, 0.0);
+                    glVertex3f(vector[0], vector[1], vector[2]);
+                    glVertex3f(tangent[0]+vector[0], tangent[1]+vector[1], tangent[2]+vector[2]);
+                    glFlush();
+                    glEnd();*/
+
                     texCoordArr << s << t;
                     vertexArr << vector[0] << vector[1] << vector[2];
                     normalArr << normal[0] << normal[1] << normal[2];
@@ -1887,6 +1908,17 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
                     normal = Vec3f(x * oneMinusOblateness, y * oneMinusOblateness, z);
                     normal.normalize();
 
+//debug
+/*
+                    glLineWidth(5);
+                    glBegin(GL_LINE);
+                    glColor3f(1.0, 0.0, 0.0);
+                    glVertex3f(vector[0], vector[1], vector[2]);
+                    glVertex3f(tangent[0]+vector[0], tangent[1]+vector[1], tangent[2]+vector[2]);
+                    glFlush();
+                    glEnd();
+                    glLineWidth(0.5);*/
+
                     texCoordArr << s << t - dt;
                     vertexArr << vector[0] << vector[1] << vector[2];
                     normalArr << normal[0] << normal[1] << normal[2];
@@ -1907,11 +1939,17 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
     // Draw the array now
 
     if (isLightOn)
-            setNMapArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData(), (Vec3f*)tangentArr.constData());
+        setNMapArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData(), (Vec3f*)normalArr.constData(), (Vec3f*)tangentArr.constData());
     else
-            setNMapArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)tangentArr.constData());
+    {
+        setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
+        drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
+        return;
+    }
 
-    drawFromArrayNMap(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
+	ArrayDesc projectedVertexArray = vertexArray;
+    projectedVertexArray = projectArray(vertexArray, 0, indiceArr.size(), indiceArr.constData());
+    drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
 }
 
 StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
@@ -2193,7 +2231,7 @@ void StelPainter::setArrays(const Vec3d* vertice, const Vec2f* texCoords, const 
 
 void StelPainter::setNMapArrays(const Vec3d *vertice, const Vec2f *texCoords, const Vec3f *colorArray, const Vec3f *normalArray, const Vec3f *tangentArray)
 {
-        enableNMapClientStates(vertice, texCoords, colorArray, normalArray, tangentArray);
+    enableNMapClientStates(vertice, texCoords, colorArray, normalArray, tangentArray);
 	setVertexPointer(3, GL_DOUBLE, vertice);
 	setTexCoordPointer(2, GL_FLOAT, texCoords);
 	setColorPointer(3, GL_FLOAT, colorArray);
@@ -2347,6 +2385,7 @@ void StelPainter::drawFromArrayNMap(DrawingMode mode, int count, int offset, boo
 			projectedVertexArray = projectArray(vertexArray, offset, count, NULL);
 	}
 
+    /*
 	if (!(texCoordArray.enabled && normalArray.enabled && colorArray.enabled && tangentArray.enabled))
 	{
         drawFromArray(mode, count, offset, doProj, indices);
@@ -2354,8 +2393,10 @@ void StelPainter::drawFromArrayNMap(DrawingMode mode, int count, int offset, boo
 	else
 	{
 	//todo - after changing this part we are ready for the shader
-        drawFromArray(mode, count, offset, doProj, indices);
-	}
+      //  drawFromArray(mode, count, offset, doProj, indices);
+	}*/
+	//pass arrays to shader
+
 }
 
 StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& array, int offset, int count, const unsigned int* indices)
