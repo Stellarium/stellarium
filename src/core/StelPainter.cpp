@@ -1906,13 +1906,15 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
 
     // Draw the array now
 
-
     if (isLightOn)
             setNMapArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData(), (Vec3f*)tangentArr.constData());
     else
             setNMapArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)tangentArr.constData());
 
-    drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
+ //   drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
+ //TODO: put this on a StelPainter function drawNMapSphere(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
+ //DRAWING
+ 
 }
 
 StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
@@ -2172,6 +2174,14 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 	texturesColorShaderVars.vertex = texturesColorShaderProgram->attributeLocation("vertex");
 	texturesColorShaderVars.color = texturesColorShaderProgram->attributeLocation("color");
 	texturesColorShaderVars.texture = texturesColorShaderProgram->uniformLocation("tex");
+
+	//initialize a normal map shader: at the moment a shader class is used
+	//this will be replaced with qt functions
+     //   Shader* nMapShader = new Shader;
+       // if (!nMapShader->load("data/shaders/nmap.v.glsl", "data/shaders/nmap.f.glsl"))
+         //       return;
+       // }
+
 #endif
 }
 
