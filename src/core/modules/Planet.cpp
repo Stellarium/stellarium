@@ -763,8 +763,8 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			else
 			{
 				// Normal planet
-				//TODO: drawNMapSphere(sPainter, screenSz);
-				drawSphere(sPainter, screenSz);
+				drawNMapSphere(sPainter, screenSz);
+		//		drawSphere(sPainter, screenSz);
 			}
 		}
 		if (sPainter)

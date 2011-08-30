@@ -341,6 +341,7 @@ public:
 	//! Else it will consume count elements of indices, starting at offset, which are used to index into the
 	//! enabled arrays.
 	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned int* indices=NULL);
+	void drawFromArrayNMap(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned int* indices=NULL);
 
 	//! Draws the primitives defined in the StelVertexArray.
 	//! @param checkDiscontinuity will check and suppress discontinuities if necessary.
