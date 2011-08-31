@@ -37,7 +37,8 @@
 #include <QStandardItemModel>
 #include <limits>
 
-OcularDialog::OcularDialog(QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes)
+OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes) :
+	plugin(pluginPtr)
 {
 	ui = new Ui_ocularDialogForm;
 	this->ccds = ccds;
@@ -94,7 +95,7 @@ void OcularDialog::updateStyle()
 	if(dialog) {
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		Q_ASSERT(gui);
-		const StelStyle pluginStyle = GETSTELMODULE(Oculars)->getModuleStyleSheet(gui->getStelStyle());
+		const StelStyle pluginStyle = plugin->getModuleStyleSheet(gui->getStelStyle());
 		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
 		ui->textBrowser->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
 	}
@@ -116,6 +117,7 @@ void OcularDialog::deleteSelectedCCD()
 {
 	ccdTableModel->removeRows(ui->ccdListView->currentIndex().row(), 1);
 	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
+	plugin->updateLists();
 }
 
 void OcularDialog::deleteSelectedOcular()
@@ -125,6 +127,7 @@ void OcularDialog::deleteSelectedOcular()
 	} else {
 		ocularTableModel->removeRows(ui->ocularListView->currentIndex().row(), 1);
 		ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
+		plugin->updateLists();
 	}
 }
 
@@ -135,6 +138,7 @@ void OcularDialog::deleteSelectedTelescope()
 	} else {
 		telescopeTableModel->removeRows(ui->telescopeListView->currentIndex().row(), 1);
 		ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
+		plugin->updateLists();
 	}
 }
 

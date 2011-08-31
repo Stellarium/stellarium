@@ -74,6 +74,10 @@ public:
 	virtual void update(double) {;}
 
 public slots:
+	//! Update the ocular, telescope and sensor lists after the removal of a member.
+	//! Necessary because of the way model/view management in the OcularDialog
+	//! is implemented.
+	void updateLists();
 	void ccdRotationReset();
 	void decrementCCDIndex();
 	void decrementOcularIndex();
