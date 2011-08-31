@@ -1945,21 +1945,29 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
     }
     else
     {
+        setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData(), (Vec3f*) normalArr.constData());
 
-	  //      ArrayDesc projectedVertexArray = vertexArray;
-     //       projectedVertexArray = projectArray(vertexArray, 0, indiceArr.size(), indiceArr.constData());
+        ArrayDesc projectedVertexArray = vertexArray;
+        projectedVertexArray = projectArray(vertexArray, 0, indiceArr.size(), indiceArr.constData());
 
-           //to be removed
-            setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData());
-            drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
-        //end of removed
-// glEnableVertexAttribArray
-// glVertexAttribPointer
-// draw
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glVertexPointer(projectedVertexArray.size, GL_FLOAT, 0, projectedVertexArray.pointer);
 
-   //this will be removed:
-  //  drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
-        }
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glTexCoordPointer(2, GL_FLOAT, 0, texCoordArray.pointer);
+
+		glDrawElements(GL_TRIANGLES, indiceArr.size(), GL_UNSIGNED_INT, indiceArr.constData());
+
+		glDisableClientState(GL_COLOR_ARRAY);
+		glDisableClientState(GL_NORMAL_ARRAY);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		glDisableClientState(GL_VERTEX_ARRAY);
+
+		//for tangent:
+		// glEnableVertexAttribArray
+		// glVertexAttribPointer
+		// draw
+    }
 }
 
 StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
