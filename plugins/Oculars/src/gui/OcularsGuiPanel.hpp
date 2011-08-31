@@ -46,23 +46,21 @@ public slots:
 	void showOcularGui();
 	//! Show only the controls used with a CCD overlay.
 	void showCcdGui();
-	//! Hide the panel.
-	void hidePanel();
+	//! Hide the controls, leaving only the button bar.
+	void foldGui();
 
 private slots:
 	//! Update the position of the widget within the parent.
 	//! Tied to the parent's geometryChanged() signal.
 	void updatePosition();
 
-	void openOcularsConfigurationWindow();
-
 	//! Updates the information shown when an ocular overlay is displayed
 	void updateOcularControls();
-	//! Updates the information shown when a CCD overlay is displayed
-	void updateCcdInfo();
+	//! Updates the information shown when a sensor overlay is displayed
+	void updateCcdControls();
 	//! Updates the information that depends on the current telescope.
-	//! Called in both updateOcularInfo() and updateCcdInfo().
-	void updateTelescopeInfo();
+	//! Called in both updateOcularControls() and updateCcdControls().
+	void updateTelescopeControls();
 
 	//! Sets the color scheme (day/night mode)
 	void setColorScheme(const QString& schemeName);
