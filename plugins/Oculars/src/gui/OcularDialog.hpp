@@ -59,6 +59,12 @@ public slots:
 	void insertNewCCD();
 	void insertNewOcular();
 	void insertNewTelescope();
+	void moveUpSelectedSensor();
+	void moveUpSelectedOcular();
+	void moveUpSelectedTelescope();
+	void moveDownSelectedSensor();
+	void moveDownSelectedOcular();
+	void moveDownSelectedTelescope();
 	void languageChanged();
 
 signals:

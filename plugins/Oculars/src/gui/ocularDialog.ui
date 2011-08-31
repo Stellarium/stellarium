@@ -22,9 +22,6 @@
     <height>320</height>
    </size>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="spacing">
     <number>0</number>
@@ -380,6 +377,22 @@
                   </property>
                  </widget>
                 </item>
+                <item>
+                 <widget class="QPushButton" name="pushButtonMoveOcularUp">
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButtonMoveOcularDown">
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
+                  </property>
+                 </widget>
+                </item>
                </layout>
               </widget>
              </item>
@@ -648,6 +661,22 @@
                  <widget class="QPushButton" name="deleteCCD">
                   <property name="text">
                    <string>Delete</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButtonMoveSensorUp">
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButtonMoveSensorDown">
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -947,12 +976,6 @@
              </item>
              <item>
               <widget class="QFrame" name="frame_3">
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
                <layout class="QHBoxLayout" name="horizontalLayout">
                 <item>
                  <widget class="QPushButton" name="addTelescope">
@@ -981,6 +1004,22 @@
                  <widget class="QPushButton" name="deleteTelescope">
                   <property name="text">
                    <string>Delete</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButtonMoveTelescopeUp">
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButtonMoveTelescopeDown">
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1161,6 +1200,8 @@ p, li { white-space: pre-wrap; }
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections/>
 </ui>

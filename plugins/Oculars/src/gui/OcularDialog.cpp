@@ -160,6 +160,66 @@ void OcularDialog::insertNewTelescope()
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(telescopeTableModel->rowCount() - 1, 1));
 }
 
+void OcularDialog::moveUpSelectedSensor()
+{
+	int index = ui->ccdListView->currentIndex().row();
+	if (index > 0)
+	{
+		ccdTableModel->moveRowUp(index);
+		plugin->updateLists();
+	}
+}
+
+void OcularDialog::moveUpSelectedOcular()
+{
+	int index = ui->ocularListView->currentIndex().row();
+	if (index > 0)
+	{
+		ocularTableModel->moveRowUp(index);
+		plugin->updateLists();
+	}
+}
+
+void OcularDialog::moveUpSelectedTelescope()
+{
+	int index = ui->ocularListView->currentIndex().row();
+	if (index > 0)
+	{
+		telescopeTableModel->moveRowUp(index);
+		plugin->updateLists();
+	}
+}
+
+void OcularDialog::moveDownSelectedSensor()
+{
+	int index = ui->ccdListView->currentIndex().row();
+	if (index >= 0 && index < ccdTableModel->rowCount() - 1)
+	{
+		ccdTableModel->moveRowDown(index);
+		plugin->updateLists();
+	}
+}
+
+void OcularDialog::moveDownSelectedOcular()
+{
+	int index = ui->ocularListView->currentIndex().row();
+	if (index >= 0 && index < ocularTableModel->rowCount() - 1)
+	{
+		ocularTableModel->moveRowDown(index);
+		plugin->updateLists();
+	}
+}
+
+void OcularDialog::moveDownSelectedTelescope()
+{
+	int index = ui->telescopeListView->currentIndex().row();
+	if (index >= 0 && index < telescopeTableModel->rowCount() - 1)
+	{
+		telescopeTableModel->moveRowDown(index);
+		plugin->updateLists();
+	}
+}
+
 /* ********************************************************************* */
 #if 0
 #pragma mark -
@@ -261,7 +321,20 @@ void OcularDialog::createDialogContent()
 			this, SLOT(keyBindingTogglePluginChanged(const QString&)));
 	connect(ui->togglePopupNavigatorWindowLineEdit, SIGNAL(textEdited(const QString&)), 
 			this, SLOT(keyBindingPopupNavigatorConfigChanged(const QString&)));
-						  
+
+	connect(ui->pushButtonMoveOcularUp, SIGNAL(pressed()),
+	       this, SLOT(moveUpSelectedOcular()));
+	connect(ui->pushButtonMoveOcularDown, SIGNAL(pressed()),
+	        this, SLOT(moveDownSelectedOcular()));
+	connect(ui->pushButtonMoveSensorUp, SIGNAL(pressed()),
+	        this, SLOT(moveUpSelectedSensor()));
+	connect(ui->pushButtonMoveSensorDown, SIGNAL(pressed()),
+	        this, SLOT(moveDownSelectedSensor()));
+	connect(ui->pushButtonMoveTelescopeUp, SIGNAL(pressed()),
+	        this, SLOT(moveUpSelectedTelescope()));
+	connect(ui->pushButtonMoveTelescopeDown, SIGNAL(pressed()),
+	        this, SLOT(moveDownSelectedTelescope()));
+
 	// The CCD mapper
 	ccdMapper = new QDataWidgetMapper();
 	ccdMapper->setModel(ccdTableModel);
