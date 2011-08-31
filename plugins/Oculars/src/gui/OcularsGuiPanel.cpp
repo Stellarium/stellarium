@@ -253,9 +253,9 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	connect(ocularsPlugin, SIGNAL(selectedOcularChanged()),
 	        this, SLOT(updateOcularControls()));
 	connect(ocularsPlugin, SIGNAL(selectedCCDChanged()),
-	        this, SLOT(updateCcdInfo()));
+	        this, SLOT(updateCcdControls()));
 	connect(ocularsPlugin, SIGNAL(selectedTelescopeChanged()),
-	        this, SLOT(updateTelescopeInfo()));
+	        this, SLOT(updateTelescopeControls()));
 
 	//Night mode
 	connect(&stelApp, SIGNAL(colorSchemeChanged(const QString&)),
@@ -285,10 +285,10 @@ void OcularsGuiPanel::showOcularGui()
 
 void OcularsGuiPanel::showCcdGui()
 {
-	updateCcdInfo();
+	updateCcdControls();
 }
 
-void OcularsGuiPanel::hidePanel()
+void OcularsGuiPanel::foldGui()
 {
 	//qDebug() << "hidePanel()";
 	setOcularControlsVisible(false);
@@ -300,12 +300,12 @@ void OcularsGuiPanel::hidePanel()
 void OcularsGuiPanel::updatePosition()
 {
 	updateGeometry();
-	qDebug() << "Widget:" << size()
+	/*qDebug() << "Widget:" << size()
 		<< "Buttonbar:" << buttonBar->size()
 		<< "Ocular" << ocularControls->size()
 		<< "CCD" << ccdControls->size()
 		<< "Telescope" << telescopeControls->size()
-		<< "Layout" << mainLayout->geometry();
+		<< "Layout" << mainLayout->geometry();*/
 	qreal xPos = parentWidget->size().width() - size().width();
 	qreal yPos = 0;
 	setPos(xPos, yPos);
@@ -323,11 +323,6 @@ void OcularsGuiPanel::updatePosition()
 	newBorderPath.lineTo(horizontalBorderEnd);
 	newBorderPath.lineTo(horizontalBorderEnd.x(), verticalBorderStart.y());
 	borderPath->setPath(newBorderPath);
-}
-
-void OcularsGuiPanel::openOcularsConfigurationWindow()
-{
-	ocularsPlugin->configureGui();
 }
 
 void OcularsGuiPanel::updateOcularControls()
@@ -408,10 +403,10 @@ void OcularsGuiPanel::updateOcularControls()
 	ocularControls->resize(widgetWidth, widgetHeight);
 	setOcularControlsVisible(true);
 
-	updateTelescopeInfo();//Contains a call to updatePosition()
+	updateTelescopeControls();//Contains a call to updatePosition()
 }
 
-void OcularsGuiPanel::updateCcdInfo()
+void OcularsGuiPanel::updateCcdControls()
 {
 	setOcularControlsVisible(false);
 
@@ -471,10 +466,10 @@ void OcularsGuiPanel::updateCcdInfo()
 	ccdControls->resize(widgetWidth, widgetHeight);
 	setCcdControlsVisible(true);
 
-	updateTelescopeInfo();//Contains a call to updatePosition()
+	updateTelescopeControls();//Contains a call to updatePosition()
 }
 
-void OcularsGuiPanel::updateTelescopeInfo()
+void OcularsGuiPanel::updateTelescopeControls()
 {
 	//Get the name
 	int index = ocularsPlugin->selectedTelescopeIndex;

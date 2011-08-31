@@ -935,7 +935,7 @@ void Oculars::toggleCCD(bool show)
 		movementManager->zoomTo(movementManager->getInitFov());
 		movementManager->setFlagTracking(false);
 
-		guiPanel->hidePanel();
+		guiPanel->foldGui();
 	}
 }
 
