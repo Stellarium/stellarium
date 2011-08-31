@@ -465,7 +465,7 @@ void Oculars::init()
 			selectedTelescopeIndex = 0;
 		}
 
-		ocularDialog = new OcularDialog(&ccds, &oculars, &telescopes);
+		ocularDialog = new OcularDialog(this, &ccds, &oculars, &telescopes);
 		initializeActivationActions();
 		determineMaxEyepieceAngle();
 
@@ -563,6 +563,52 @@ void Oculars::setScreenFOVForCCD()
 #pragma mark Slots Methods
 #endif
 /* ********************************************************************* */
+void Oculars::updateLists()
+{
+	if (oculars.isEmpty())
+	{
+		selectedOcularIndex = -1;
+		actionShowOcular->setChecked(false);
+	}
+	else
+	{
+		if (selectedOcularIndex >= oculars.count())
+			selectedOcularIndex = oculars.count() - 1;
+
+		if (flagShowOculars)
+			emit selectedOcularChanged();
+	}
+
+	if (telescopes.isEmpty())
+	{
+		selectedTelescopeIndex = -1;
+		actionShowOcular->setChecked(false);
+		actionShowSensor->setChecked(false);
+	}
+	else
+	{
+		if (selectedTelescopeIndex >= telescopes.count())
+			selectedTelescopeIndex = telescopes.count() - 1;
+
+		if (flagShowOculars || flagShowCCD)
+			emit selectedTelescopeChanged();
+	}
+
+	if (ccds.isEmpty())
+	{
+		selectedCCDIndex = -1;
+		actionShowSensor->setChecked(false);
+	}
+	else
+	{
+		if (selectedCCDIndex >= ccds.count())
+			selectedCCDIndex = ccds.count() - 1;
+
+		if (flagShowCCD)
+			emit selectedCCDChanged();
+	}
+}
+
 void Oculars::ccdRotationReset()
 {
 	ccdRotationAngle = 0.0;

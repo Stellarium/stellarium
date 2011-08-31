@@ -38,17 +38,17 @@ class QModelIndex;
 class QStandardItemModel;
 QT_END_NAMESPACE
 
+class Oculars;
 
 class OcularDialog : public StelDialog
 {
 	Q_OBJECT
 
 public:
-	OcularDialog(QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes);
+	OcularDialog(Oculars* plugin, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes);
 	virtual ~OcularDialog();
 	//! Notify that the application style changed
 	void styleChanged();
-	void setOculars(QList<Ocular*> theOculars);
 	void updateStyle();
 
 public slots:
@@ -77,6 +77,8 @@ private slots:
 	void scaleImageCircleStateChanged(int state);
 
 private:
+	Oculars* plugin;
+
 	QDataWidgetMapper*			ccdMapper;
 	QList<CCD *>*					ccds;
 	PropertyBasedTableModel*	ccdTableModel;
