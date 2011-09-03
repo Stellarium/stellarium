@@ -28,6 +28,7 @@
 #include <QVarLengthArray>
 
 #include <GLee.h>
+#include "StelShader.hpp"
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -763,8 +764,8 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			else
 			{
 				// Normal planet
+				useShader(ssm->nMapShader);
 				drawNMapSphere(sPainter, screenSz);
-		//		drawSphere(sPainter, screenSz);
 			}
 		}
 		if (sPainter)
@@ -813,25 +814,38 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 
 void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 {
-    bool has_nmap = true;
-    if (texMap)
-    {
-        // For lazy loading, return if texture not yet loaded
-        if (!texMap->bind())
-            return;
-    }
 
-    if (normalMap)
+	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+    if (normalMap && ssm->nMapShader!=0)
     {
         //for lazy loading, disable normal mapping
+        glActiveTexture(GL_TEXTURE1);
         if(!normalMap->bind())
         {
-            glUseProgram(0);
-            has_nmap = false;
+            glDisable(GL_TEXTURE_2D);
+            return;
+        }
+        else
+        {
+             glEnable(GL_TEXTURE_2D);
         }
     }
 
-    painter->enableTexture2d(true);
+    if (texMap)
+    {
+        glActiveTexture(GL_TEXTURE0);
+        // For lazy loading, return if texture not yet loaded
+        if (!texMap->bind())
+        {
+			painter->enableTexture2d(false);
+            return;
+        }
+        else
+        {
+			painter->enableTexture2d(true);
+        }
+    }
+
     glDisable(GL_BLEND);
     glEnable(GL_CULL_FACE);
 
@@ -845,15 +859,27 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
     // fits to the observers position. No idea why this is necessary,
     // perhaps some openGl strangeness, or confusing sin/cos.
 
-    if (has_nmap)
+    if (normalMap && ssm->nMapShader!=0)
     {
-        painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
-    }
-    else
-    {
-        painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
-    }
+		ssm->nMapShader->use();
+		ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("texMap"),0);
+		ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("normalMap"),1);
+		painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
+		glActiveTexture(GL_TEXTURE1);
+		glDisable(GL_TEXTURE_2D);
+	}
+	else
+	{
+		glActiveTexture(GL_TEXTURE1);
+		glDisable(GL_TEXTURE_2D);
+		painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+	}
+
+    glActiveTexture(GL_TEXTURE0);
+    painter->enableTexture2d(false);
+
     painter->setShadeModel(StelPainter::ShadeModelFlat);
+
     glDisable(GL_CULL_FACE);
 }
 

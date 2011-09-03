@@ -61,6 +61,7 @@ SolarSystem::SolarSystem() : moonScale(1.),	flagOrbits(false), flagLightTravelTi
 {
 	planetNameFont.setPixelSize(13);
 	setObjectName("SolarSystem");
+	nMapShader = 0;
 }
 
 void SolarSystem::setFontSize(float newFontSize)
@@ -85,12 +86,13 @@ SolarSystem::~SolarSystem()
 
 	delete allTrails;
 	allTrails = NULL;
-	
+
 	// Get rid of circular reference between the shared pointers which prevent proper destruction of the Planet objects.
 	foreach (PlanetP p, systemPlanets)
 	{
 		p->satellites.clear();
 	}
+	delete nMapShader;
 }
 
 /*************************************************************************
@@ -131,7 +133,7 @@ void SolarSystem::init()
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
-	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), 
+	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur4.png");
@@ -140,6 +142,12 @@ void SolarSystem::init()
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+
+	nMapShader = new StelShader;
+	if (!(nMapShader->load("data/shaders/nmap.v.glsl", "data/shaders/nmap.f.glsl")))
+	{
+	        nMapShader = 0;
+	}
 }
 
 void SolarSystem::recreateTrails()

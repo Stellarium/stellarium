@@ -1701,8 +1701,9 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 
 //drawing method for sphere when normal map is going to be used - eg in planet rendering
 //the method is similar to the sSphere but it calculates tangent vectors for each point as well
-void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
+void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, int stacks, SolarSystem* ssm, int orientInside, bool flipTexture)
 {
+
     static Vec3f lightPos3;
     static Vec4f ambientLight;
     static Vec4f diffuseLight;
