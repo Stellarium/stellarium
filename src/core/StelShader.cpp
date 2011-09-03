@@ -176,15 +176,12 @@ static unsigned int loadShader(const char* path, unsigned int type)
         QString shaderFile = StelFileMgr::findFile(path, StelFileMgr::File);
         if (!QFileInfo(shaderFile).exists())
         {
-//               qWarning() << "Could not find file: " << shaderFile << "\n";
                fprintf(stderr, "Could not find file: %s\n", path);
                return 0;
         }
-        qDebug() << "Loading shader: " << shaderFile << "...\n";
 
         if (!(fp = fopen(path, "r")))
         {
-//                        qWarning() << "Could not open file: " << fileName << "...\n";
                 fprintf(stderr, "Could not open shader %s: %s\n", path, strerror(errno));
                 return 0;
         }
@@ -231,14 +228,12 @@ static unsigned int createShader(const char *source, unsigned int type, const ch
 
         if (status == GL_FALSE)
         {
-//                qWarning << "Error while compiling " << fileName << ":\n" << infoLog;
                 fprintf(stderr, "Error while compiling %s:\n%s\n", fileName, infoLog);
                 glDeleteShader(shader);
                 return 0;
         }
         else if (logLength)
         {
-//                qWarning << *fileName << "\n" << infoLog << "\n";
                 fprintf(stderr, "%s:\n%s\n", fileName, infoLog);
         }
         return shader;

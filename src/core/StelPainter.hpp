@@ -20,6 +20,7 @@
 #ifndef _STELPAINTER_HPP_
 #define _STELPAINTER_HPP_
 #include "VecMath.hpp"
+#include "SolarSystem.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelProjectorType.hpp"
 #include "StelProjector.hpp"
@@ -225,7 +226,7 @@ public:
 
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
 	void sSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
-	void nmSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
+	void nmSphere(float radius, float oneMinusOblateness, int slices, int stacks,  SolarSystem* ssm, int orientInside = 0, bool flipTexture = false);
 
 	//! Generate a StelVertexArray for a sphere.
 	static StelVertexArray computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
