@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-22 11:18+0700\n"
-"PO-Revision-Date: 2011-08-31 05:37+0000\n"
+"PO-Revision-Date: 2011-09-04 02:57+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-01 04:35+0000\n"
-"X-Generator: Launchpad (build 13827)\n"
+"X-Launchpad-Export-Date: 2011-09-04 04:37+0000\n"
+"X-Generator: Launchpad (build 13830)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -300,7 +300,7 @@ msgstr "ทิศทางการเริ่มต้นของการม
 
 #: src/gui/ConfigurationDialog.cpp:510
 msgid "Authors"
-msgstr "ผู้ประพันธ์:"
+msgstr "ผู้สร้าง"
 
 #: src/gui/ConfigurationDialog.cpp:514 src/gui/ViewDialog.cpp:368
 msgid "Contact"
@@ -308,11 +308,11 @@ msgstr "การติดต่อ"
 
 #: src/gui/ConfigurationDialog.cpp:586
 msgid "Author"
-msgstr "ผู้ประพันธ์"
+msgstr "ผู้สร้าง"
 
 #: src/gui/ConfigurationDialog.cpp:587
 msgid "License"
-msgstr "ลิขสิทธิ์"
+msgstr "สัญญาอนุญาต"
 
 #: src/gui/ConfigurationDialog.cpp:616
 msgid "Running script: "
@@ -347,7 +347,7 @@ msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
-"สิ้นสุดการดาวน์โหลดดวงดาวใหม่!\n"
+"เสร็จสิ้นการดาวน์โหลดแค็ตตาล็อกดาวใหม่!\n"
 "เริ่ม Stellarium ใหม่เพื่อแสดง"
 
 #: src/gui/ConfigurationDialog.cpp:724 src/gui/ConfigurationDialog.cpp:758
@@ -1469,7 +1469,7 @@ msgstr "เส้นเมอริเดียน"
 
 #: src/translations.h:198
 msgid "Azimuthal Grid"
-msgstr "เส้นพิกัดภาคทิศ"
+msgstr "เส้นพิกัดมุมทิศ"
 
 #: src/translations.h:199
 msgid "Equatorial Grid"
