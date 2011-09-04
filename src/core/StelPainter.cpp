@@ -1957,6 +1957,10 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		glTexCoordPointer(2, GL_FLOAT, 0, texCoordArray.pointer);
 
+	//vertex attribute -
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, 0, tangentArr.size(), tangentArr.constData());
+
 		glDrawElements(GL_TRIANGLES, indiceArr.size(), GL_UNSIGNED_INT, indiceArr.constData());
 
 		glDisableClientState(GL_COLOR_ARRAY);
@@ -2373,31 +2377,6 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 #endif
 }
 
-void StelPainter::drawFromArrayNMap(DrawingMode mode, int count, int offset, bool doProj, const unsigned int* indices)
-{
-	ArrayDesc projectedVertexArray = vertexArray;
-	if (doProj)
-	{
-		// Project the vertex array using current projection
-		if (indices)
-			projectedVertexArray = projectArray(vertexArray, 0, count, indices + offset);
-		else
-			projectedVertexArray = projectArray(vertexArray, offset, count, NULL);
-	}
-
-    /*
-	if (!(texCoordArray.enabled && normalArray.enabled && colorArray.enabled && tangentArray.enabled))
-	{
-        drawFromArray(mode, count, offset, doProj, indices);
-	}
-	else
-	{
-	//todo - after changing this part we are ready for the shader
-      //  drawFromArray(mode, count, offset, doProj, indices);
-	}*/
-	//pass arrays to shader
-
-}
 
 StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& array, int offset, int count, const unsigned int* indices)
 {
