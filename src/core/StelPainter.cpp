@@ -1830,11 +1830,6 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
                     tangent = nextv - prevv;
                     tangent.normalize();
 
-/*
-                    vertexArr << x * radius << y * radius << z * oneMinusOblateness * radius;
-                    normalArr << x * oneMinusOblateness << y * oneMinusOblateness << z;
-                    */
-
                     vector = Vec3f(x * radius, y * radius, z * oneMinusOblateness * radius);
                     normal = Vec3f(x * oneMinusOblateness, y * oneMinusOblateness, z);
                     normal.normalize();
@@ -1951,16 +1946,24 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
         ArrayDesc projectedVertexArray = vertexArray;
         projectedVertexArray = projectArray(vertexArray, 0, indiceArr.size(), indiceArr.constData());
 
-        glEnableClientState(GL_VERTEX_ARRAY);
-        glVertexPointer(projectedVertexArray.size, GL_FLOAT, 0, projectedVertexArray.pointer);
-
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		glTexCoordPointer(2, GL_FLOAT, 0, texCoordArray.pointer);
 
-	//vertex attribute -
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, 0, tangentArr.size(), tangentArr.constData());
+	//vertex attributes projected and tangent array
 
+        int pVecLocation = ssm->nMapShader->attributeLocation("pvec");
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(pVecLocation, projectedVertexArray.size, GL_FLOAT, 0, 0, projectedVertexArray.pointer);
+
+        int tangentLocation = ssm->nMapShader->attributeLocation("tangent");
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(tangentLocation, 3, GL_FLOAT, 0, 0, tangentArr.constData());
+
+//uniform
+        int lposLocation = ssm->nMapShader->uniformLocation("lpos");
+        ssm->nMapShader->setUniform(lposLocation, lightPos3[0], lightPos3[1], lightPos3[2]);
+
+//drawing
 		glDrawElements(GL_TRIANGLES, indiceArr.size(), GL_UNSIGNED_INT, indiceArr.constData());
 
 		glDisableClientState(GL_COLOR_ARRAY);
@@ -1968,10 +1971,6 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 		glDisableClientState(GL_VERTEX_ARRAY);
 
-		//for tangent:
-		// glEnableVertexAttribArray
-		// glVertexAttribPointer
-		// draw
     }
 }
 
