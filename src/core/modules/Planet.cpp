@@ -862,8 +862,8 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
     if (normalMap && ssm->nMapShader!=0)
     {
 		ssm->nMapShader->use();
-		ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("texMap"),0);
-		ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("normalMap"),1);
+		ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("tex"),0);
+		ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("nmap"),1);
 		painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
 		glActiveTexture(GL_TEXTURE1);
 		glDisable(GL_TEXTURE_2D);
