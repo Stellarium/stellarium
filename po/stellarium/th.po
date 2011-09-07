@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-22 11:18+0700\n"
-"PO-Revision-Date: 2011-09-04 02:57+0000\n"
+"PO-Revision-Date: 2011-09-07 01:45+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-05 04:51+0000\n"
-"X-Generator: Launchpad (build 13830)\n"
+"X-Launchpad-Export-Date: 2011-09-07 04:34+0000\n"
+"X-Generator: Launchpad (build 13861)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -103,7 +103,7 @@ msgstr "ยังไม่ได้ระบุในเอกสาร"
 #: src/core/modules/Planet.cpp:123 src/core/modules/StarWrapper.cpp:112
 #, qt-format
 msgid "Absolute Magnitude: %1"
-msgstr "โชติมาตรสัมบูรณ์ %1"
+msgstr "โชติมาตรสัมบูรณ์: %1"
 
 #: src/core/modules/Planet.cpp:136
 #, qt-format
@@ -589,7 +589,7 @@ msgstr "เส้นศูนย์สูตร"
 
 #: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1105
 msgid "Meridian line"
-msgstr "เส้นเมอริเดียน"
+msgstr "เส้นเมริเดียน"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
 msgid "Horizon line"
@@ -1341,11 +1341,11 @@ msgstr "ผู้บริหาร "
 
 #: src/translations.h:162
 msgid "Latitude: "
-msgstr "เส้นรุ้ง: "
+msgstr "ละติจูด: "
 
 #: src/translations.h:163
 msgid "Longitude: "
-msgstr "เส้นแวง: "
+msgstr "ลองจิจูด : "
 
 #: src/translations.h:164
 msgid "Altitude (m): "
@@ -1465,11 +1465,11 @@ msgstr "ทางเดินของดาวเคราะห์"
 
 #: src/translations.h:197
 msgid "Meridian Line"
-msgstr "เส้นเมอริเดียน"
+msgstr "เส้นเมริเดียน"
 
 #: src/translations.h:198
 msgid "Azimuthal Grid"
-msgstr "เส้นพิกัดมุมทิศ"
+msgstr "กริดมุมเงยมุมทิศ"
 
 #: src/translations.h:199
 msgid "Equatorial Grid"
@@ -2048,7 +2048,7 @@ msgstr "ควบคุม"
 
 #: src/ui_configurationDialog.h:784
 msgid "Allow keyboard to pan and zoom"
-msgstr "ใช้แป้นพิมพ์เพื่อส่ายและซูม"
+msgstr "ใช้แป้นพิมพ์เพื่อกวาดและซูม"
 
 #: src/ui_configurationDialog.h:786
 msgid "Enable keyboard navigation"
@@ -2056,7 +2056,7 @@ msgstr "เปิดใช้การนำทางผ่านแป้นพ
 
 #: src/ui_configurationDialog.h:788
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr "ใช้เมาส์ในการส่าย (ลาก) และซูม (mousewheel)"
+msgstr "ใช้เมาส์ในการกวาด (ลากเมาส์) และซูม (หมุนล้อของเมาส์)"
 
 #: src/ui_configurationDialog.h:790
 msgid "Enable mouse navigation"
@@ -2182,19 +2182,19 @@ msgstr "กลับสี"
 
 #: src/ui_configurationDialog.h:839
 msgid "Star catalog updates"
-msgstr "ปรับปรุงชุดกลุ่มดวงดาว"
+msgstr "ปรับปรุงแค็ตตาล็อกดาว"
 
 #: src/ui_configurationDialog.h:841
 msgid "Click here to start downloading"
-msgstr "คลิ๊กที่นี่เพื่อเริ่มการดาวน์โหลด"
+msgstr "คลิกที่นี่เพื่อเริ่มการดาวน์โหลด"
 
 #: src/ui_configurationDialog.h:843
 msgid "Get catalog x of y"
-msgstr "รับกลุ่มดาว x จาก y"
+msgstr "รับแค็ตตาล็อกดาว x จาก y"
 
 #: src/ui_configurationDialog.h:844
 msgid "Download this file to view even more stars"
-msgstr "ดาวน์โหลดแฟ้มนี้เพื่อดูดาวมากขึ้น"
+msgstr "ดาวน์โหลดแฟ้มนี้เพื่อเพิ่มจำนวนดาวให้มากขึ้น"
 
 #: src/ui_configurationDialog.h:845
 msgid "xxx"
