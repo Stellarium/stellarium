@@ -416,7 +416,6 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 
 	if (nbPointSources==0)
 		return;
-
 	texHalo->bind();
 	sPainter->enableTexture2d(true);
 	glBlendFunc(GL_ONE, GL_ONE);

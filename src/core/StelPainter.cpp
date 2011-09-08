@@ -1955,11 +1955,11 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
         glEnableVertexAttribArray(pVecLocation);
         glVertexAttribPointer(pVecLocation, projectedVertexArray.size, GL_FLOAT, 0, 0, projectedVertexArray.pointer);
 
-        int tangentLocation = ssm->nMapShader->attributeLocation("tangent");
+        int tangentLocation = ssm->nMapShader->attributeLocation("tang");
 		glEnableVertexAttribArray(tangentLocation);
 		glVertexAttribPointer(tangentLocation, 3, GL_FLOAT, 0, 0, tangentArr.constData());
 
-//uniform
+//uniform light position
         int lposLocation = ssm->nMapShader->uniformLocation("lpos");
         ssm->nMapShader->setUniform(lposLocation, lightPos3[0], lightPos3[1], lightPos3[2]);
 

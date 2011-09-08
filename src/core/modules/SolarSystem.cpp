@@ -61,6 +61,7 @@ SolarSystem::SolarSystem() : moonScale(1.),	flagOrbits(false), flagLightTravelTi
 {
 	planetNameFont.setPixelSize(13);
 	setObjectName("SolarSystem");
+
 	nMapShader = 0;
 }
 
@@ -143,11 +144,13 @@ void SolarSystem::init()
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 
-	nMapShader = new StelShader;
+    nMapShader = new StelShader;
 	if (!(nMapShader->load("data/shaders/nmap.v.glsl", "data/shaders/nmap.f.glsl")))
 	{
+	        fprintf(stderr, "Could not find shader files\n");
 	        nMapShader = 0;
 	}
+	Q_ASSERT(nMapShader);
 }
 
 void SolarSystem::recreateTrails()

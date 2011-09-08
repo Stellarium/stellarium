@@ -101,7 +101,7 @@ Planet::Planet(const QString& englishName,
 			   Vec3f color,
 			   float albedo,
 			   const QString& atexMapName,
-			   const QString& normalMapName,
+			   const QString& anormalMapName,
 			   posFuncType coordFunc,
 			   void* auserDataPtr,
 			   OsculatingFunctType *osculatingFunc,
@@ -122,7 +122,7 @@ Planet::Planet(const QString& englishName,
 	  atmosphere(hasAtmosphere)
 {
 	texMapName = atexMapName;
-	this->normalMapName = normalMapName;
+	normalMapName = anormalMapName;
 	lastOrbitJD =0;
 	deltaJD = StelCore::JD_SECOND;
 	orbitCached = 0;
@@ -131,7 +131,7 @@ Planet::Planet(const QString& englishName,
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
-	normalMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	normalMap = StelApp::getInstance().getTextureManager().createTexture("textures/"+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	nameI18 = englishName;
 	if (englishName!="Pluto")
@@ -764,7 +764,6 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			else
 			{
 				// Normal planet
-				useShader(ssm->nMapShader);
 				drawNMapSphere(sPainter, screenSz);
 			}
 		}
@@ -791,7 +790,9 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	{
 		// For lazy loading, return if texture not yet loaded
 		if (!texMap->bind())
+		{
 			return;
+		}
 	}
 	painter->enableTexture2d(true);
 	glDisable(GL_BLEND);
@@ -812,37 +813,33 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	glDisable(GL_CULL_FACE);
 }
 
+static bool hasNMap;
 void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 {
 
-	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-    if (normalMap && ssm->nMapShader!=0)
-    {
-        //for lazy loading, disable normal mapping
-        glActiveTexture(GL_TEXTURE1);
-        if(!normalMap->bind())
-        {
-            glDisable(GL_TEXTURE_2D);
-            return;
-        }
-        else
-        {
-             glEnable(GL_TEXTURE_2D);
-        }
-    }
-
+	glActiveTexture(GL_TEXTURE0);
     if (texMap)
     {
-        glActiveTexture(GL_TEXTURE0);
-        // For lazy loading, return if texture not yet loaded
         if (!texMap->bind())
         {
-			painter->enableTexture2d(false);
             return;
+        }
+    }
+    painter->enableTexture2d(true);
+
+    if (normalMap)
+    {
+        glActiveTexture(GL_TEXTURE1);
+        glEnable(GL_TEXTURE_2D);
+        if(!normalMap->bind())
+        {
+            hasNMap = false;
+            return;
+            glDisable(GL_TEXTURE_2D);
         }
         else
         {
-			painter->enableTexture2d(true);
+			hasNMap = true;
         }
     }
 
@@ -859,24 +856,27 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
     // fits to the observers position. No idea why this is necessary,
     // perhaps some openGl strangeness, or confusing sin/cos.
 
-    if (normalMap && ssm->nMapShader!=0)
+	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+    if (normalMap && hasNMap && (ssm->nMapShader!=0))
     {
 		ssm->nMapShader->use();
 		ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("tex"),0);
 		ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("nmap"),1);
 		painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
-		glActiveTexture(GL_TEXTURE1);
-		glDisable(GL_TEXTURE_2D);
+		glUseProgram(0);
+		fprintf(stdout, "nmsphere\n");
 	}
 	else
 	{
-		glActiveTexture(GL_TEXTURE1);
-		glDisable(GL_TEXTURE_2D);
 		painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+		fprintf(stdout, "ssphere\n");
 	}
 
-    glActiveTexture(GL_TEXTURE0);
-    painter->enableTexture2d(false);
+    if (normalMap && hasNMap && (ssm->nMapShader != 0)) {
+    	glActiveTexture(GL_TEXTURE1);
+    	glDisable(GL_TEXTURE_2D);
+    }
+
 
     painter->setShadeModel(StelPainter::ShadeModelFlat);
 
