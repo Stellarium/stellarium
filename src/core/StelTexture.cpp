@@ -157,7 +157,10 @@ bool StelTexture::bind()
 		return true;
 	}
 	if (errorOccured)
+	{
+	Q_ASSERT(errorOccured);
 		return false;
+    }
 
 	if (!isLoadingImage && loader == NULL) {
 		isLoadingImage = true;

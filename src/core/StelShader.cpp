@@ -173,11 +173,9 @@ static unsigned int loadShader(const char* path, unsigned int type)
         int size;
         unsigned int shader;
 
-        QString shaderFile = StelFileMgr::findFile(path, StelFileMgr::File);
-        if (!QFileInfo(shaderFile).exists())
+        if (!path)
         {
-               fprintf(stderr, "Could not find file: %s\n", path);
-               return 0;
+                return 0;
         }
 
         if (!(fp = fopen(path, "r")))
