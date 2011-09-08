@@ -834,7 +834,6 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
         if(!normalMap->bind())
         {
             hasNMap = false;
-            return;
             glDisable(GL_TEXTURE_2D);
         }
         else
