@@ -862,6 +862,7 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 		ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("tex"),0);
 		ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("nmap"),1);
 		painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
+
 		glUseProgram(0);
 		fprintf(stdout, "nmsphere\n");
 	}
