@@ -91,9 +91,6 @@ void StelLogger::init(const QString& logFilePath)
 		case QSysInfo::MV_10_6:
 			writeLog("Mac OS X 10.6");
 			break;
-        case QSysInfo::MV_10_7:
-            writeLog("Mac OS X 10.7");
-            break;
 		default:
 			writeLog("Unsupported Mac version");
 			break;
@@ -260,7 +257,7 @@ void StelLogger::init(const QString& logFilePath)
 	systemProfiler.waitForFinished(100);
 	const QString systemData(systemProfiler.readAll());
 	QStringList systemLines = systemData.split('\n', QString::SkipEmptyParts);
-	for (i = 0; i<systemLines.size(); i++)
+	for (int i = 0; i<systemLines.size(); i++)
 	{
 		if(systemLines.at(i).contains("Model"))
 			writeLog(systemLines.at(i).trimmed());
@@ -276,7 +273,7 @@ void StelLogger::init(const QString& logFilePath)
 	systemProfiler.waitForFinished(100);
 	const QString graphicsData(systemProfiler.readAll());
 	QStringList graphicsLines = graphicsData.split('\n', QString::SkipEmptyParts);
-	for(i = 0; i<graphicsLines.size(); i++)
+	for(int i = 0; i<graphicsLines.size(); i++)
 	{
 		if(graphicsLines.at(i).contains("Chipset"))
 			writeLog(graphicsLines.at(i).trimmed());
