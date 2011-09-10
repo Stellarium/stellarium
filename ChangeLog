@@ -1,5 +1,7 @@
 [development version]
 Location window: map pointer position is updated on longitude/latitude change.
+Solar System Editor plug-in:
+- fixed a bug in the parsing of MPC lists: the epoch's Julian Day value was wrong by 0.5 JD (LP: #836839)
 
 0.11.0
 New feature: atmosphere refraction support.
