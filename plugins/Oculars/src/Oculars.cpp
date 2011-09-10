@@ -616,14 +616,24 @@ void Oculars::ccdRotationReset()
 
 void Oculars::enableOcular(bool enableOcularMode)
 {
-	// If showing a CCD, cancel it.
-	if (flagShowCCD) {
+	// Close the sensor view if it's displayed
+	if (flagShowCCD)
+	{
+		if (actionShowSensor->isChecked())
+			actionShowSensor->setChecked(false);
 		flagShowCCD = false;
 		selectedCCDIndex = -1;
 	}
+
+	// Close the Telrad sight if it's displayed
+	if (flagShowTelrad)
+	{
+		if (actionShowTelrad->isChecked())
+			actionShowTelrad->setChecked(false);
+	}
 	
 	if (enableOcularMode) {
-		// Check to insure that we have enough oculars & telescopes, as they may have been edited in the config dialog
+		// Check to ensure that we have enough oculars & telescopes, as they may have been edited in the config dialog
 		if (oculars.count() == 0) {
 			selectedOcularIndex = -1;
 			qWarning() << "No oculars found";
@@ -646,11 +656,11 @@ void Oculars::enableOcular(bool enableOcularMode)
 	StelCore *core = StelApp::getInstance().getCore();
 	LabelMgr* labelManager = GETSTELMODULE(LabelMgr);
 
-	// Toggle the plugin on & off.  To toggle on, we want to ensure there is a selected object.
+	// Toggle the ocular view on & off. To toggle on, we want to ensure there is a selected object.
 	if (!flagShowOculars && requireSelection && !StelApp::getInstance().getStelObjectMgr().getWasSelected() ) {
 		if (usageMessageLabelID == -1) {
 			QFontMetrics metrics(font);
-			QString labelText = "Please select an object before enabling Ocular.";
+			QString labelText = "Please select an object before switching to ocular view.";
 			StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
 			int xPosition = projectorParams.viewportCenter[0];
 			xPosition = xPosition - 0.5 * (metrics.width(labelText));
@@ -954,13 +964,25 @@ void Oculars::toggleCCD(bool show)
 		flagShowCCD = false;
 		selectedCCDIndex = -1;
 		show = false;
+		if (actionShowSensor->isChecked())
+			actionShowSensor->setChecked(false);
 	}
 
 	if (show)
 	{
 		//Mutually exclusive with the ocular mode
+		hideUsageMessageIfDisplayed();
 		if (flagShowOculars)
-			enableOcular(false);
+		{
+			if (actionShowOcular->isChecked())
+				actionShowOcular->setChecked(false);
+		}
+
+		if (flagShowTelrad)
+		{
+			if (actionShowTelrad->isChecked())
+				actionShowTelrad->setChecked(false);
+		}
 
 		if (selectedTelescopeIndex < 0)
 			selectedTelescopeIndex = 0;
@@ -999,7 +1021,14 @@ void Oculars::toggleCrosshairs(bool show)
 
 void Oculars::toggleTelrad(bool show)
 {
-	//TODO: BM: Mutually exclusive with?
+	if (show)
+	{
+		hideUsageMessageIfDisplayed();
+		if (actionShowOcular->isChecked())
+			actionShowOcular->setChecked(false);
+		if (actionShowSensor->isChecked())
+			actionShowSensor->setChecked(false);
+	}
 	flagShowTelrad = show;
 }
 
