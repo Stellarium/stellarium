@@ -146,115 +146,130 @@
       </property>
       <item>
        <widget class="QTabWidget" name="Tabs">
-        <property name="documentMode">
-         <bool>false</bool>
-        </property>
         <widget class="QWidget" name="General">
          <attribute name="title">
           <string>General</string>
          </attribute>
-         <widget class="QCheckBox" name="scaleImageCircleCheckBox">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>10</y>
-            <width>141</width>
-            <height>21</height>
-           </rect>
+         <layout class="QVBoxLayout" name="verticalLayoutTabGeneral">
+          <property name="spacing">
+           <number>0</number>
           </property>
-          <property name="text">
-           <string>Scale Image Circle</string>
+          <property name="margin">
+           <number>0</number>
           </property>
-         </widget>
-         <widget class="QGroupBox" name="groupBox">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>40</y>
-            <width>503</width>
-            <height>121</height>
-           </rect>
-          </property>
-          <property name="title">
-           <string>Key Mappings</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_2">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_11">
-             <property name="text">
-              <string>Toggle Plugin:</string>
+          <item>
+           <widget class="QGroupBox" name="groupBoxOcularOptions">
+            <property name="title">
+             <string>Ocular view</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <property name="margin">
+              <number>0</number>
              </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             <item>
+              <widget class="QCheckBox" name="requireSelectionCheckBox">
+               <property name="text">
+                <string>Enable only if an object is selected</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="scaleImageCircleCheckBox">
+               <property name="text">
+                <string>Scale image circle</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox">
+            <property name="title">
+             <string>Key Mappings</string>
+            </property>
+            <layout class="QFormLayout" name="formLayout_3">
+             <property name="margin">
+              <number>0</number>
              </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLineEdit" name="togglePluginLineEdit">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="baseSize">
-              <size>
-               <width>100</width>
-               <height>22</height>
-              </size>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="maxLength">
-              <number>50</number>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QLabel" name="label_13">
-             <property name="text">
-              <string>Popup Navigator:</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="3">
-            <widget class="QLineEdit" name="togglePopupNavigatorWindowLineEdit">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="baseSize">
-              <size>
-               <width>100</width>
-               <height>22</height>
-              </size>
-             </property>
-             <property name="maxLength">
-              <number>50</number>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QCheckBox" name="requireSelectionCheckBox">
-          <property name="geometry">
-           <rect>
-            <x>260</x>
-            <y>10</y>
-            <width>201</width>
-            <height>21</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Require selection to enable</string>
-          </property>
-         </widget>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_11">
+               <property name="text">
+                <string>Toggle ocular view:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="togglePluginLineEdit">
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>100</width>
+                 <height>22</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="maxLength">
+                <number>50</number>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_13">
+               <property name="text">
+                <string>Popup Navigator:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="togglePopupNavigatorWindowLineEdit">
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>100</width>
+                 <height>22</height>
+                </size>
+               </property>
+               <property name="maxLength">
+                <number>50</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </widget>
         <widget class="QWidget" name="Eyepieces">
          <attribute name="title">
@@ -495,7 +510,7 @@
                 <item row="2" column="0">
                  <widget class="QLabel" name="label_5">
                   <property name="text">
-                   <string>Focal Length:</string>
+                   <string>Focal length:</string>
                   </property>
                  </widget>
                 </item>
@@ -515,7 +530,7 @@
                 <item row="3" column="0">
                  <widget class="QLabel" name="label_10">
                   <property name="text">
-                   <string>Field Stop:</string>
+                   <string>Field stop:</string>
                   </property>
                  </widget>
                 </item>
@@ -1142,7 +1157,7 @@
                 <item row="1" column="0">
                  <widget class="QLabel" name="label_9">
                   <property name="text">
-                   <string>Focal Length:</string>
+                   <string>Focal length:</string>
                   </property>
                  </widget>
                 </item>
@@ -1170,14 +1185,14 @@
                 <item row="3" column="1">
                  <widget class="QCheckBox" name="telescopeHFlip">
                   <property name="text">
-                   <string>Horizontal Flip</string>
+                   <string>Horizontal flip</string>
                   </property>
                  </widget>
                 </item>
                 <item row="4" column="1">
                  <widget class="QCheckBox" name="telescopeVFlip">
                   <property name="text">
-                   <string>Vertical Flip</string>
+                   <string>Vertical flip</string>
                   </property>
                  </widget>
                 </item>
@@ -1225,7 +1240,7 @@
              <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;table border=&quot;0&quot; style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
 &lt;tr&gt;
 &lt;td style=&quot;border: none;&quot;&gt;
@@ -1265,8 +1280,8 @@ p, li { white-space: pre-wrap; }
  </customwidgets>
  <tabstops>
   <tabstop>Tabs</tabstop>
-  <tabstop>scaleImageCircleCheckBox</tabstop>
   <tabstop>requireSelectionCheckBox</tabstop>
+  <tabstop>scaleImageCircleCheckBox</tabstop>
   <tabstop>togglePluginLineEdit</tabstop>
   <tabstop>togglePopupNavigatorWindowLineEdit</tabstop>
   <tabstop>ocularListView</tabstop>
