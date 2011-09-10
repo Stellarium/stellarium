@@ -962,7 +962,11 @@ quint64 LandscapeMgr::loadLandscapeSize(QString landscapeID)
 
 QString LandscapeMgr::getDescription() const
 {
-	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+        QString lang;
+        if (QString("pt_BR zh_CN zh_HK zh_TW").contains(StelApp::getInstance().getLocaleMgr().getAppLanguage()))
+                lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+        else
+                lang = StelApp::getInstance().getLocaleMgr().getAppLanguage().split("_").at(0);
 	QString descriptionFile = StelFileMgr::findFile("landscapes/" + getCurrentLandscapeID(), StelFileMgr::Directory) + "/description." + lang + ".utf8";
 	QString desc;
 
