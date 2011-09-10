@@ -146,9 +146,6 @@
       </property>
       <item>
        <widget class="QTabWidget" name="Tabs">
-        <property name="currentIndex">
-         <number>0</number>
-        </property>
         <property name="documentMode">
          <bool>false</bool>
         </property>
@@ -332,9 +329,6 @@
                 <enum>QFrame::Raised</enum>
                </property>
                <layout class="QHBoxLayout" name="horizontalLayout_2">
-                <property name="spacing">
-                 <number>0</number>
-                </property>
                 <property name="leftMargin">
                  <number>0</number>
                 </property>
@@ -349,36 +343,31 @@
                 </property>
                 <item>
                  <widget class="QPushButton" name="addOcular">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
                   <property name="text">
                    <string>Add</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <spacer name="horizontalSpacer_3">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                 <widget class="QPushButton" name="pushButtonMoveOcularUp">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
                   </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Preferred</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
+                  <property name="minimumSize">
                    <size>
-                    <width>20</width>
-                    <height>20</height>
+                    <width>24</width>
+                    <height>24</height>
                    </size>
                   </property>
-                 </spacer>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="deleteOcular">
-                  <property name="text">
-                   <string>Delete</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="pushButtonMoveOcularUp">
                   <property name="icon">
                    <iconset resource="../../../../data/gui/guiRes.qrc">
                     <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
@@ -387,9 +376,34 @@
                 </item>
                 <item>
                  <widget class="QPushButton" name="pushButtonMoveOcularDown">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>24</width>
+                    <height>24</height>
+                   </size>
+                  </property>
                   <property name="icon">
                    <iconset resource="../../../../data/gui/guiRes.qrc">
                     <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="deleteOcular">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Delete</string>
                   </property>
                  </widget>
                 </item>
@@ -619,9 +633,6 @@
                 <enum>QFrame::Raised</enum>
                </property>
                <layout class="QHBoxLayout" name="CCD_horizontalLayout_2">
-                <property name="spacing">
-                 <number>0</number>
-                </property>
                 <property name="leftMargin">
                  <number>0</number>
                 </property>
@@ -636,36 +647,31 @@
                 </property>
                 <item>
                  <widget class="QPushButton" name="addCCD">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
                   <property name="text">
                    <string>Add</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <spacer name="horizontalSpacer_add_remove">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                 <widget class="QPushButton" name="pushButtonMoveSensorUp">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
                   </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Preferred</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
+                  <property name="minimumSize">
                    <size>
-                    <width>20</width>
-                    <height>20</height>
+                    <width>24</width>
+                    <height>24</height>
                    </size>
                   </property>
-                 </spacer>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="deleteCCD">
-                  <property name="text">
-                   <string>Delete</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="pushButtonMoveSensorUp">
                   <property name="icon">
                    <iconset resource="../../../../data/gui/guiRes.qrc">
                     <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
@@ -674,9 +680,34 @@
                 </item>
                 <item>
                  <widget class="QPushButton" name="pushButtonMoveSensorDown">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>24</width>
+                    <height>24</height>
+                   </size>
+                  </property>
                   <property name="icon">
                    <iconset resource="../../../../data/gui/guiRes.qrc">
                     <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="deleteCCD">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Delete</string>
                   </property>
                  </widget>
                 </item>
@@ -977,38 +1008,45 @@
              <item>
               <widget class="QFrame" name="frame_3">
                <layout class="QHBoxLayout" name="horizontalLayout">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>5</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
                 <item>
                  <widget class="QPushButton" name="addTelescope">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
                   <property name="text">
                    <string>Add</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <spacer name="horizontalSpacer">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                 <widget class="QPushButton" name="pushButtonMoveTelescopeUp">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
                   </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Preferred</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
+                  <property name="minimumSize">
                    <size>
-                    <width>20</width>
-                    <height>20</height>
+                    <width>24</width>
+                    <height>24</height>
                    </size>
                   </property>
-                 </spacer>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="deleteTelescope">
-                  <property name="text">
-                   <string>Delete</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="pushButtonMoveTelescopeUp">
                   <property name="icon">
                    <iconset resource="../../../../data/gui/guiRes.qrc">
                     <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
@@ -1017,9 +1055,34 @@
                 </item>
                 <item>
                  <widget class="QPushButton" name="pushButtonMoveTelescopeDown">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>24</width>
+                    <height>24</height>
+                   </size>
+                  </property>
                   <property name="icon">
                    <iconset resource="../../../../data/gui/guiRes.qrc">
                     <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="deleteTelescope">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Delete</string>
                   </property>
                  </widget>
                 </item>
@@ -1162,7 +1225,7 @@
              <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;table border=&quot;0&quot; style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
 &lt;tr&gt;
 &lt;td style=&quot;border: none;&quot;&gt;
@@ -1200,6 +1263,46 @@ p, li { white-space: pre-wrap; }
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>Tabs</tabstop>
+  <tabstop>scaleImageCircleCheckBox</tabstop>
+  <tabstop>requireSelectionCheckBox</tabstop>
+  <tabstop>togglePluginLineEdit</tabstop>
+  <tabstop>togglePopupNavigatorWindowLineEdit</tabstop>
+  <tabstop>ocularListView</tabstop>
+  <tabstop>addOcular</tabstop>
+  <tabstop>pushButtonMoveOcularUp</tabstop>
+  <tabstop>pushButtonMoveOcularDown</tabstop>
+  <tabstop>deleteOcular</tabstop>
+  <tabstop>ocularName</tabstop>
+  <tabstop>ocularAFov</tabstop>
+  <tabstop>ocularFL</tabstop>
+  <tabstop>ocularFieldStop</tabstop>
+  <tabstop>binocularsCheckBox</tabstop>
+  <tabstop>ccdListView</tabstop>
+  <tabstop>addCCD</tabstop>
+  <tabstop>pushButtonMoveSensorUp</tabstop>
+  <tabstop>pushButtonMoveSensorDown</tabstop>
+  <tabstop>deleteCCD</tabstop>
+  <tabstop>ccdName</tabstop>
+  <tabstop>ccdResX</tabstop>
+  <tabstop>ccdResY</tabstop>
+  <tabstop>ccdChipX</tabstop>
+  <tabstop>ccdChipY</tabstop>
+  <tabstop>ccdPixelX</tabstop>
+  <tabstop>ccdPixelY</tabstop>
+  <tabstop>telescopeListView</tabstop>
+  <tabstop>addTelescope</tabstop>
+  <tabstop>pushButtonMoveTelescopeUp</tabstop>
+  <tabstop>pushButtonMoveTelescopeDown</tabstop>
+  <tabstop>deleteTelescope</tabstop>
+  <tabstop>telescopeName</tabstop>
+  <tabstop>telescopeFL</tabstop>
+  <tabstop>telescopeDiameter</tabstop>
+  <tabstop>telescopeHFlip</tabstop>
+  <tabstop>telescopeVFlip</tabstop>
+  <tabstop>textBrowser</tabstop>
+ </tabstops>
  <resources>
   <include location="../../../../data/gui/guiRes.qrc"/>
  </resources>
