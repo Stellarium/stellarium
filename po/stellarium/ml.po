@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-22 11:18+0700\n"
-"PO-Revision-Date: 2011-08-20 08:45+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2011-09-10 11:18+0000\n"
+"Last-Translator: Amal Bose <axatrikx@gmail.com>\n"
 "Language-Team: Malayalam <ml@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-23 04:47+0000\n"
-"X-Generator: Launchpad (build 13697)\n"
+"X-Launchpad-Export-Date: 2011-09-11 04:42+0000\n"
+"X-Generator: Launchpad (build 13900)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -150,17 +150,19 @@ msgstr "ആകാശകപ്പല്‍"
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
-msgstr ""
+msgstr "കൂടിയ FOV "
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
-msgstr ""
+msgstr "വീക്ഷണം"
 
 #: src/core/StelProjectorClasses.cpp:30
 msgid ""
 "Perspective projection keeps the horizon a straight line. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"വീക്ഷണ പ്രൊജക്ഷന്‍ ചക്രവാളത്തെ ഒരു നേര്‍വരയായി നിലനിര്‍ത്തും. ഈ പ്രോജക്ഷന്റെ "
+"ശാസ്ത്രീയ നാമം <i> ഗ്നോമിക് പ്രോജെക്ഷന്‍ <i> എന്നാണ്"
 
 #: src/core/StelProjectorClasses.cpp:63
 msgid "Equal Area"
@@ -177,7 +179,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:108
 msgid "Stereographic"
-msgstr ""
+msgstr "സ്ടീരിയോഗ്രഫിക്"
 
 #: src/core/StelProjectorClasses.cpp:113
 msgid ""
@@ -185,6 +187,10 @@ msgid ""
 "known as the planisphere projection. It preserves the angles at which curves "
 "cross each other but it does not preserve area."
 msgstr ""
+"സ്ടീരിയോഗ്രഫിക്  പ്രൊജക്ഷന്‍ പണ്ട് കാലംതോട്ടെ ഉള്ളവയാണ്. പ്ലാനിസ്ഫെയര്‍ "
+"പ്രോജെക്ഷന്‍ എന്നാണു അറിയപ്പെട്ടിരുന്നത്. വക്ക്രരേഖകള്‍ തമ്മില്‍ "
+"കൂട്ടിമുട്ടുന്ന കോണുകള്‍ കാത്തുസൂക്ഷിക്കുകയും ഉള്ളളവ് "
+"കാത്തുസൂക്ഷിക്കാത്തിരിക്കുകയും ചെയ്യുന്നു."
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Fish-eye"
