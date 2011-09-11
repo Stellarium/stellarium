@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-22 11:18+0700\n"
-"PO-Revision-Date: 2011-08-24 19:44+0000\n"
-"Last-Translator: Mohammad Amiri <Unknown>\n"
+"PO-Revision-Date: 2011-09-10 16:58+0000\n"
+"Last-Translator: Reza Babri <Unknown>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-25 04:36+0000\n"
-"X-Generator: Launchpad (build 13727)\n"
+"X-Launchpad-Export-Date: 2011-09-11 04:42+0000\n"
+"X-Generator: Launchpad (build 13900)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -1104,7 +1104,7 @@ msgstr "كارن"
 #. TRANSLATORS: Moon of Pluto (II)
 #: src/translations.h:82
 msgid "Nix"
-msgstr ""
+msgstr "نیکس"
 
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
@@ -1204,7 +1204,7 @@ msgstr "امور"
 #. TRANSLATORS: Asteroid (99942) Apophis
 #: src/translations.h:116
 msgid "Apophis"
-msgstr ""
+msgstr "آپوفیس"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
 #: src/translations.h:118
@@ -1849,7 +1849,7 @@ msgstr "ضريب جذب، دما، فشار"
 
 #: src/ui_viewDialog.h:1087
 msgid "Refraction/Extinction settings..."
-msgstr ""
+msgstr "تنظيمات انكسار/تفرق"
 
 #: src/ui_viewDialog.h:1088
 msgid "Labels and Markers"
@@ -2399,6 +2399,8 @@ msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
+"اين افزونه دستورات «چرخش» را به تلسكوپ سوار شده بر پايه رايانه‌اي ارسال "
+"مي‌كند."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:155
 #, qt-format
@@ -2433,7 +2435,7 @@ msgstr "واسط متني كاربر"
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
-msgstr ""
+msgstr "راه‌اندازي ويرايشگر سري 0.9x متداول در سامانه‌هاي افلاك‌نما"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
@@ -2444,7 +2446,7 @@ msgid ""
 "An interface for adding asteroids and comets to Stellarium. It can download "
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
-msgstr ""
+msgstr "یک رابط برای افزودن سیارکها و دنباله‌دارها به برنامه"
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical supernovae"
