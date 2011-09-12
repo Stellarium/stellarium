@@ -8,7 +8,7 @@ varying vec3 var_vdir;
 
 void main()
 {
-	gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+	gl_Position = pvec; 
 
 	vec3 vpos = (gl_ModelViewMatrix * gl_Vertex).xyz;
 	vec3 normal = normalize(gl_NormalMatrix * gl_Normal);

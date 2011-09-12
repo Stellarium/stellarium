@@ -150,7 +150,6 @@ void SolarSystem::init()
 	        fprintf(stderr, "Could not find shader files\n");
 	        nMapShader = 0;
 	}
-	Q_ASSERT(nMapShader);
 }
 
 void SolarSystem::recreateTrails()
