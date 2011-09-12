@@ -16,8 +16,8 @@ void main()
 	float diffuse = max(dot(ldir, normal), 0.0);
 	vec4 dcol = diffuse * texture2D(tex, gl_TexCoord[0].xy) * gl_FrontMaterial.diffuse;
 
-	float specular = pow(max(dot(rdir, vdir), 0.0), gl_FrontMaterial.shininess);
-	vec4 scol = specular * gl_FrontMaterial.specular;
+	//float specular = pow(max(dot(rdir, vdir), 0.0), gl_FrontMaterial.shininess);
+	//vec4 scol = specular * gl_FrontMaterial.specular;
 
-	gl_FragColor = gl_FrontMaterial.ambient * gl_LightModel.ambient + dcol + scol;
+	gl_FragColor = gl_FrontMaterial.ambient * gl_LightModel.ambient + dcol; //+ scol;
 }
