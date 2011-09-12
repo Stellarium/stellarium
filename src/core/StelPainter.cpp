@@ -1953,7 +1953,7 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
 
         int pVecLocation = ssm->nMapShader->attributeLocation("pvec");
         glEnableVertexAttribArray(pVecLocation);
-        glVertexAttribPointer(pVecLocation, projectedVertexArray.size, GL_FLOAT, 0, 0, projectedVertexArray.pointer);
+        glVertexAttribPointer(pVecLocation, 3, GL_FLOAT, 0, 0, projectedVertexArray.pointer);
 
         int tangentLocation = ssm->nMapShader->attributeLocation("tang");
 		glEnableVertexAttribArray(tangentLocation);
