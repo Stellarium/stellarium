@@ -1946,8 +1946,8 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
         ArrayDesc projectedVertexArray = vertexArray;
         projectedVertexArray = projectArray(vertexArray, 0, indiceArr.size(), indiceArr.constData());
 
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glTexCoordPointer(2, GL_FLOAT, 0, texCoordArray.pointer);
+	//	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	//	glTexCoordPointer(2, GL_FLOAT, 0, texCoordArray.pointer);
 
 	//vertex attributes projected and tangent array
 
@@ -1970,7 +1970,8 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
 		glDisableClientState(GL_NORMAL_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 		glDisableClientState(GL_VERTEX_ARRAY);
-
+        glDisableVertexAttribArray(tangentLocation);
+        glDisableVertexAttribArray(pVecLocation);
     }
 }
 

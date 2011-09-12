@@ -813,9 +813,21 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	glDisable(GL_CULL_FACE);
 }
 
-static bool hasNMap;
 void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 {
+    bool hasNMap = false;
+    if (normalMap)
+    {
+    Q_ASSERT(normalMap);
+        glActiveTexture(GL_TEXTURE1);
+        glEnable(GL_TEXTURE_2D);
+        hasNMap = true;
+        if(!normalMap->bind())
+        {
+            hasNMap = false;
+            glDisable(GL_TEXTURE_2D);
+        }
+    }
 
 	glActiveTexture(GL_TEXTURE0);
     if (texMap)
@@ -826,22 +838,6 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
         }
     }
     painter->enableTexture2d(true);
-
-    if (normalMap)
-    {
-        glActiveTexture(GL_TEXTURE1);
-        glEnable(GL_TEXTURE_2D);
-        if(!normalMap->bind())
-        {
-            hasNMap = false;
-            glDisable(GL_TEXTURE_2D);
-        }
-        else
-        {
-			hasNMap = true;
-        }
-    }
-
     glDisable(GL_BLEND);
     glEnable(GL_CULL_FACE);
 
@@ -855,32 +851,37 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
     // fits to the observers position. No idea why this is necessary,
     // perhaps some openGl strangeness, or confusing sin/cos.
 
-	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-    if (normalMap && hasNMap && (ssm->nMapShader!=0))
-    {
-		ssm->nMapShader->use();
-		ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("tex"),0);
-		ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("nmap"),1);
-		painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
 
-		glUseProgram(0);
-		fprintf(stdout, "nmsphere\n");
-	}
-	else
-	{
+
+	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+    if (!(hasNMap && (ssm->nMapShader!=0)))
+    {
 		painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
 		fprintf(stdout, "ssphere\n");
 	}
+	else
+	{
+        ssm->nMapShader->use();
+        ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("tex"),0);
+		ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("nmap"),1);
+		painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
+		fprintf(stdout, "nmsphere\n");
+		useShader(0);
+	}
+
+    painter->setShadeModel(StelPainter::ShadeModelFlat);
+    glDisable(GL_CULL_FACE);
 
     if (normalMap && hasNMap && (ssm->nMapShader != 0)) {
     	glActiveTexture(GL_TEXTURE1);
     	glDisable(GL_TEXTURE_2D);
     }
 
+    glActiveTexture(GL_TEXTURE0);
+    if (texMap) {
+            glDisable(GL_TEXTURE_2D);
+    }
 
-    painter->setShadeModel(StelPainter::ShadeModelFlat);
-
-    glDisable(GL_CULL_FACE);
 }
 
 
