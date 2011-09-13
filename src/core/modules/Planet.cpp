@@ -815,29 +815,15 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 
 void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 {
-    bool hasNMap = false;
-    if (normalMap)
-    {
-    Q_ASSERT(normalMap);
-        glActiveTexture(GL_TEXTURE1);
-        glEnable(GL_TEXTURE_2D);
-        hasNMap = true;
-        if(!normalMap->bind())
-        {
-            hasNMap = false;
-            glDisable(GL_TEXTURE_2D);
-        }
-    }
-
-	glActiveTexture(GL_TEXTURE0);
+    glActiveTexture(GL_TEXTURE0);
     if (texMap)
     {
         if (!texMap->bind())
         {
             return;
         }
+        painter->enableTexture2d(true);
     }
-    painter->enableTexture2d(true);
     glDisable(GL_BLEND);
     glEnable(GL_CULL_FACE);
 
@@ -854,25 +840,39 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 
 
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-    if (!(hasNMap && (ssm->nMapShader!=0)))
+    if (ssm->nMapShader == 0)
     {
 		painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
 		fprintf(stdout, "ssphere\n");
 	}
 	else
 	{
-        ssm->nMapShader->use();
-        ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("tex"),0);
-		ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("nmap"),1);
-		painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
-		fprintf(stdout, "nmsphere\n");
-		useShader(0);
+		if (normalMap)
+		{
+            glActiveTexture(GL_TEXTURE1);
+            glEnable(GL_TEXTURE_2D);
+			if (!normalMap->bind())
+			{
+                glDisable(GL_TEXTURE_2D);
+				painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+				fprintf(stdout, "ssphere2\n");
+			}
+			else
+			{
+    			ssm->nMapShader->use();
+    			ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("tex"),0);
+    			ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("nmap"),1);
+    			painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
+    			fprintf(stdout, "nmsphere\n");
+    			useShader(0);
+    		}
+		}
 	}
 
     painter->setShadeModel(StelPainter::ShadeModelFlat);
     glDisable(GL_CULL_FACE);
 
-    if (normalMap && hasNMap && (ssm->nMapShader != 0)) {
+    if (ssm->nMapShader != 0) {
     	glActiveTexture(GL_TEXTURE1);
     	glDisable(GL_TEXTURE_2D);
     }
