@@ -865,17 +865,13 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
     			painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
     			fprintf(stdout, "nmsphere\n");
     			useShader(0);
+		    	glDisable(GL_TEXTURE_2D);
     		}
 		}
 	}
 
     painter->setShadeModel(StelPainter::ShadeModelFlat);
     glDisable(GL_CULL_FACE);
-
-    if (ssm->nMapShader != 0) {
-    	glActiveTexture(GL_TEXTURE1);
-    	glDisable(GL_TEXTURE_2D);
-    }
 
     glActiveTexture(GL_TEXTURE0);
     if (texMap) {
