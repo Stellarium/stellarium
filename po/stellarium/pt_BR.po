@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-22 11:18+0700\n"
-"PO-Revision-Date: 2011-08-21 00:58+0000\n"
+"PO-Revision-Date: 2011-09-17 02:42+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-23 04:49+0000\n"
-"X-Generator: Launchpad (build 13697)\n"
+"X-Launchpad-Export-Date: 2011-09-17 04:34+0000\n"
+"X-Generator: Launchpad (build 13955)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -96,7 +96,7 @@ msgstr "Desconhecido"
 
 #: src/core/modules/Nebula.cpp:305
 msgid "Undocumented type"
-msgstr "Tipo não-documentado"
+msgstr "Tipo não documentado"
 
 #: src/core/modules/Planet.cpp:123 src/core/modules/StarWrapper.cpp:112
 #, qt-format
@@ -142,7 +142,7 @@ msgstr "Distância: %1 Anos-luz"
 #: src/core/modules/StarWrapper.cpp:125
 #, qt-format
 msgid "Parallax: %1\""
-msgstr "Paralaxe: %1"
+msgstr "Paralaxe: %1\""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
@@ -188,8 +188,9 @@ msgid ""
 "cross each other but it does not preserve area."
 msgstr ""
 "<p align=\"justify\">A projeção estereográfica é conhecida desde a "
-"antiguidade, tendo sido originalmente chamada de projeção planisférica. Ela "
-"preserva os ângulos em que as curvas se cruzam, mas não preserva a área."
+"antiguidade, tendo sido originalmente chamada de <i>projeção "
+"planisférica</i>. Ela preserva os ângulos em que as curvas se cruzam, mas "
+"não preserva a área."
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Fish-eye"
@@ -203,9 +204,9 @@ msgid ""
 "camera lenses)."
 msgstr ""
 "<p align=\"justify\">Na projeção olho de peixe ou <i>projeção azimutal "
-"equidistante</i>, as linhas retas tornam-se curvas quando estão em uma "
-"grande distância angular do centro do campo de visão (como as distorções "
-"vistas com lentes de câmeras de ângulo amplo)."
+"equidistante</i>, as linhas retas tornam-se curvas quando estão a uma grande "
+"distância angular do centro do campo de visão (como as distorções vistas com "
+"lentes de câmeras de ângulo muito amplo)."
 
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
@@ -217,8 +218,8 @@ msgid ""
 "Hammer in 1892 and directly inspired by the Aitoff projection."
 msgstr ""
 "<p align=\"justify\">A projeção Hammer é uma projeção cartográfica "
-"equivalente, descrita por Ernst Hammer em 1892 e diretamente inspirada pela "
-"projeção Aitoff."
+"equivalente, descrita por Ernst Hammer em 1892, tendo sido inspirada "
+"diretamente pela projeção Aitoff."
 
 #: src/core/StelProjectorClasses.cpp:223
 msgid "Cylinder"
@@ -230,8 +231,8 @@ msgid ""
 "projection</i>. With this projection all parallels are equally spaced."
 msgstr ""
 "<p align=\"justify\">O nome completo deste modo de projeção é <i>projeção "
-"cilindrica equidistante</i>. Nesta projeção, todos os paralelos são "
-"separados por distâncias iguais."
+"cilíndrica equidistante</i>. Nesta projeção, todos os paralelos são "
+"igualmente espaçados."
 
 #: src/core/StelProjectorClasses.cpp:270
 msgid "Mercator"
@@ -244,8 +245,8 @@ msgid ""
 "away from the equator."
 msgstr ""
 "<p align=\"justify\">A projeção de Mercator é uma das mais utilizadas "
-"projeções de mapa-mundi. Ela preserva a direção e as formas, mas distorce o "
-"tamanho em um grau crescente à medida em que há um afastamento do Equador."
+"projeções de mapa-múndi. Ela preserva a direção e as formas, mas distorce o "
+"tamanho em um grau crescente à medida em que há um distanciamento do Equador."
 
 #: src/core/StelProjectorClasses.cpp:322
 msgid "Orthographic"
@@ -268,7 +269,7 @@ msgstr "Ascensão reta/Declinação (J2000): %1/%2"
 #: src/core/StelObject.cpp:86
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr "Ascensão reta/Declinação (da data): %1%2"
+msgstr "Ascensão reta/Declinação (da data): %1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:97
 #, qt-format
@@ -277,7 +278,7 @@ msgstr "Ângulo horário/Declinação: %1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
-msgstr "(geométrico)"
+msgstr "(geométrica)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
@@ -320,11 +321,11 @@ msgstr "Licença"
 
 #: src/gui/ConfigurationDialog.cpp:616
 msgid "Running script: "
-msgstr "Rodando escripte: "
+msgstr "Executando escripte: "
 
 #: src/gui/ConfigurationDialog.cpp:623
 msgid "Running script: [none]"
-msgstr "Rodando escripte: [nenhum]"
+msgstr "Executando escripte: [nenhum]"
 
 #: src/gui/ConfigurationDialog.cpp:666
 msgid "Finished downloading all star catalogs!"
@@ -342,8 +343,8 @@ msgid ""
 "Star count: %2 Million\n"
 "Magnitude range: %3 - %4"
 msgstr ""
-"Tamanho do arquivo a ser baixado: %1MB\n"
-"Contagem de estrelas: %2 Million\n"
+"Tamanho do arquivo a ser baixado: %1 MB\n"
+"Contagem de estrelas: %2 milhões\n"
 "Alcance da magnitude: %3 - %4"
 
 #: src/gui/ConfigurationDialog.cpp:686
@@ -392,7 +393,7 @@ msgstr "Espaço"
 
 #: src/gui/HelpDialog.cpp:53
 msgid "Arrow keys & left mouse drag"
-msgstr "Setas do teclado e pressionar e segurar botão esquerdo do máuse"
+msgstr "Setas do teclado e arrasto com o botão esquerdo do mause"
 
 #: src/gui/HelpDialog.cpp:54
 msgid "Page Up/Down"
@@ -400,7 +401,7 @@ msgstr "Page Up/Down"
 
 #: src/gui/HelpDialog.cpp:55
 msgid "CTRL + Up/Down"
-msgstr "CTRL + Cima/baixo"
+msgstr "CTRL + Cima/Baixo"
 
 #: src/gui/HelpDialog.cpp:56
 msgid "Left click"
@@ -412,7 +413,7 @@ msgstr "Clique com o botão direito"
 
 #: src/gui/HelpDialog.cpp:58
 msgid "CTRL + Left click"
-msgstr "CTRL + clique esquerdo"
+msgstr "CTRL + Clique com o botão esquerdo"
 
 #: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:163
 msgid "Movement and Selection"
@@ -448,11 +449,11 @@ msgstr "Acelerar a taxa de execução de escriptes"
 
 #: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:144
 msgid "Set the normal script execution rate"
-msgstr "Definir a taxa normal de execução de escripte"
+msgstr "Definir a taxa normal de execução de escriptes"
 
 #: src/gui/HelpDialog.cpp:163
 msgid "Stellarium Help"
-msgstr "Ajuda Stellarium"
+msgstr "Ajuda do Stellarium"
 
 #: src/gui/HelpDialog.cpp:164
 msgid "Keys"
@@ -486,7 +487,7 @@ msgid ""
 "contributed landscapes and scripts here."
 msgstr ""
 "{The Stellarium Wiki} - Informações gerais. Aqui você também pode encontrar "
-"planos de fundo e escriptes enviados por usuários."
+"paisagens e escriptes contribuídos por usuários."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:188
@@ -494,8 +495,8 @@ msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr ""
-"{Sistema de requisição de suporte} - se você precisa de ajuda utilizando o "
-"Stellarium, submeta uma requisição de suporte aqui, e tentaremos ajudar."
+"{Sistema de requisição de suporte} - se você precisa de ajuda para utilizar "
+"o Stellarium, submeta uma requisição de suporte aqui, e tentaremos ajudar."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:193
@@ -504,9 +505,9 @@ msgid ""
 "properly or is missing and is not listed in the tracker, you can open bug "
 "reports here."
 msgstr ""
-"{Sistema de relatório de problemas e requisição de recursos} - se algo não "
-"está funcionando corretamente ou está faltando e não está listado no "
-"tréquer, você pode abrir relatórios de problemas aqui."
+"{Sistema de relatório de erros e requisição de recursos} - se algo não está "
+"funcionando corretamente ou está faltando e não está listado no tréquer, "
+"você pode abrir relatórios de erros aqui."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:198
@@ -546,7 +547,7 @@ msgstr "Desenvolvedor: %1"
 #: src/gui/HelpDialog.cpp:300
 #, qt-format
 msgid "OSX Developer: %1"
-msgstr "Desenvolvedor OSX: %1"
+msgstr "Desenvolvedor para OSX: %1"
 
 #: src/gui/StelGui.cpp:98
 msgid "Display Options"
@@ -630,11 +631,11 @@ msgstr "Estrelas"
 
 #: src/gui/StelGui.cpp:121
 msgid "Planets labels"
-msgstr "Identificação do planeta"
+msgstr "Nomes dos planetas"
 
 #: src/gui/StelGui.cpp:122
 msgid "Planet orbits"
-msgstr "Órbitas planetárias"
+msgstr "Órbitas dos planetas"
 
 #: src/gui/StelGui.cpp:123
 msgid "Planet trails"
@@ -650,11 +651,11 @@ msgstr "Modo de tela cheia"
 
 #: src/gui/StelGui.cpp:127
 msgid "Flip scene horizontally"
-msgstr "Inverter cenário horizontalmente"
+msgstr "Inverter a tela horizontalmente"
 
 #: src/gui/StelGui.cpp:128
 msgid "Flip scene vertically"
-msgstr "Inverter cenário verticalmente"
+msgstr "Inverter a tela verticalmente"
 
 #: src/gui/StelGui.cpp:130
 msgid "Windows"
@@ -674,11 +675,11 @@ msgstr "Janela de busca"
 
 #: src/gui/StelGui.cpp:134
 msgid "Sky and viewing options window"
-msgstr "Janela de opções para céu e visualização"
+msgstr "Janela de opções do céu e de visualização"
 
 #: src/gui/StelGui.cpp:135
 msgid "Date/time window"
-msgstr "Janela de data/hora"
+msgstr "Janela de data e hora"
 
 #: src/gui/StelGui.cpp:136
 msgid "Location window"
@@ -718,7 +719,7 @@ msgstr "Definir a taxa de tempo para zero"
 
 #: src/gui/StelGui.cpp:151
 msgid "Set time to now"
-msgstr "Definir para a hora atual"
+msgstr "Definir o tempo para a hora atual"
 
 #: src/gui/StelGui.cpp:152
 msgid "Add 1 solar hour"
@@ -802,12 +803,12 @@ msgstr "Auto-ocultar a barra de botões vertical"
 
 #: src/gui/StelGui.cpp:178
 msgid "Toggle visibility of GUI"
-msgstr "Mudar a visibilidade da interface gráfica"
+msgstr "Alternar a visibilidade da interface gráfica do usuário"
 
 #: src/gui/StelGuiItems.cpp:542
 #, no-c-format, qt-format
 msgid "%1m"
-msgstr "%1m"
+msgstr "%1 m"
 
 #: src/gui/ViewDialog.cpp:422
 msgid "No description"
@@ -831,7 +832,7 @@ msgstr "Taxa excepcional de Leonídeos"
 
 #: src/gui/ViewDialog.cpp:518
 msgid "Highest rate ever (1966 Leonids)"
-msgstr "Taxa mais alta de todas (Leonídeos em 1966)"
+msgstr "Maior taxa (Leonídeos em 1966)"
 
 #: src/gui/LocationDialog.cpp:336
 msgid "New Location"
@@ -849,7 +850,7 @@ msgstr "Arquivos ZIP"
 #: src/gui/AddRemoveLandscapesDialog.cpp:127
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
-msgstr "A paisagem \"%1\" foi instalada com sucesso."
+msgstr "A paisagem “%1” foi instalada com sucesso."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:128
 #: src/gui/AddRemoveLandscapesDialog.cpp:155
@@ -861,7 +862,7 @@ msgstr "Sucesso"
 #: src/gui/AddRemoveLandscapesDialog.cpp:220
 #: src/gui/AddRemoveLandscapesDialog.cpp:228
 msgid "No landscape was installed."
-msgstr "Nenhuma paisagem foi instalada."
+msgstr "<p align=\"justify\">Nenhuma paisagem foi instalada."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:142
 #: src/gui/AddRemoveLandscapesDialog.cpp:166
@@ -875,7 +876,7 @@ msgstr "Erro!"
 #: src/gui/AddRemoveLandscapesDialog.cpp:154
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
-msgstr "A paisagem \"%1\" foi removida com sucesso."
+msgstr "A paisagem “%1” foi removida com sucesso."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:165
 #: src/gui/AddRemoveLandscapesDialog.cpp:235
@@ -912,11 +913,11 @@ msgstr "Uma paisagem com o mesmo nome ou identificador (%1) já existe."
 #: src/gui/AddRemoveLandscapesDialog.cpp:238
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
-msgstr "Você pode removê-la manualmente, deletando o seguinte diretório: %1"
+msgstr "Você pode removê-la manualmente, excluindo o seguinte diretório: %1"
 
 #: src/main.cpp:336
 msgid "This system does not support OpenGL."
-msgstr "Este sistema não suporta OpenGL"
+msgstr "Este sistema não suporta o OpenGL."
 
 #: src/translations.h:33
 msgid "Sun"
@@ -1307,7 +1308,7 @@ msgstr "Lapônica"
 
 #: src/translations.h:148
 msgid "Tupi-Guarani"
-msgstr "Tupi-Guarani"
+msgstr "Tupi-guarani"
 
 #: src/translations.h:149
 msgid "Western"
@@ -1383,7 +1384,7 @@ msgstr "Sideral"
 
 #: src/translations.h:172
 msgid "Preset Sky Time: "
-msgstr "Pré-definir a hora celeste: "
+msgstr "Predefinir a hora celeste: "
 
 #: src/translations.h:173
 msgid "Sky Time At Start-up: "
@@ -1395,11 +1396,11 @@ msgstr "Hora atual"
 
 #: src/translations.h:175
 msgid "Preset Time"
-msgstr "Hora pré-definida"
+msgstr "Predefinir a hora"
 
 #: src/translations.h:176
 msgid "Time Display Format: "
-msgstr "Formato de exibição do horário: "
+msgstr "Formato de exibição da hora: "
 
 #: src/translations.h:177
 msgid "Date Display Format: "
@@ -1407,7 +1408,7 @@ msgstr "Formato de exibição da data: "
 
 #: src/translations.h:179
 msgid "Sky Culture: "
-msgstr "Cultura celeste: "
+msgstr "Cultura do céu: "
 
 #: src/translations.h:180
 msgid "Sky Language: "
@@ -1427,7 +1428,7 @@ msgstr "Multiplicador do dimensionamento da magnitude: "
 
 #: src/translations.h:185
 msgid "Maximum Magnitude to Label: "
-msgstr "Magnitude máxima para a identificação: "
+msgstr "Magnitude máxima a ser identificada: "
 
 #: src/translations.h:186
 msgid "Twinkling: "
@@ -1435,7 +1436,7 @@ msgstr "Cintilação: "
 
 #: src/translations.h:187
 msgid "Limiting Magnitude: "
-msgstr "Limitar a magnitude: "
+msgstr "Magnitude limite: "
 
 #: src/translations.h:189
 msgid "Constellation Lines"
@@ -1499,7 +1500,7 @@ msgstr "Círculos nas nebulosas"
 
 #: src/translations.h:205
 msgid "Light Pollution Luminance: "
-msgstr "Luminância da poluição luminosa "
+msgstr "Luminância da poluição luminosa: "
 
 #: src/translations.h:206
 msgid "Landscape: "
@@ -1523,7 +1524,7 @@ msgstr "Intensidade da Via Láctea: "
 
 #: src/translations.h:211
 msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Magnitude máxima das nebulosas para exibir identificação: "
+msgstr "Magnitude máxima de nebulosas a ser identificada: "
 
 #: src/translations.h:212
 msgid "Zoom Duration: "
@@ -1531,11 +1532,11 @@ msgstr "Duração do zum: "
 
 #: src/translations.h:213
 msgid "Cursor Timeout: "
-msgstr "Tempo para o cursor desaparecer: "
+msgstr "Tempo limite para o cursor ser ocultado: "
 
 #: src/translations.h:214
 msgid "Correct for light travel time: "
-msgstr "Corrigir para tempo de viagem à velocidade da luz "
+msgstr "Correção para tempo de viagem à velocidade da luz: "
 
 #: src/translations.h:216
 msgid "Local Script: "
@@ -1571,7 +1572,7 @@ msgstr "Desligar: "
 
 #: src/translations.h:225
 msgid "Update me via Internet: "
-msgstr "Atualize-me via Internet: "
+msgstr "Atualize-me pela Internet: "
 
 #: src/translations.h:226
 msgid "Set UI Locale: "
@@ -1630,8 +1631,8 @@ msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr ""
-"Você pode inserir valores em graus decimais ou usar o formato DMS, por "
-"exemplo: +1d 12m 8s"
+"Você pode inserir valores em graus decimais ou empregar o formato GMS, por "
+"exemplo: +1g 12m 8s"
 
 #: src/ui_locationDialogGui.h:399
 msgid "Longitude:"
@@ -1783,7 +1784,7 @@ msgstr "Posição"
 
 #: src/ui_viewDialog.h:1052
 msgid "View"
-msgstr "Visão"
+msgstr "Visualização"
 
 #: src/ui_viewDialog.h:1058
 msgid "Sky"
@@ -1892,11 +1893,11 @@ msgstr "80"
 
 #: src/ui_viewDialog.h:1097
 msgid "10000"
-msgstr "10000"
+msgstr "10.000"
 
 #: src/ui_viewDialog.h:1098
 msgid "144000"
-msgstr "144000"
+msgstr "144.000"
 
 #: src/ui_viewDialog.h:1100
 msgid "Celestial Sphere"
@@ -1949,15 +1950,15 @@ msgstr "Exibir névoa"
 
 #: src/ui_viewDialog.h:1120
 msgid "Use associated planet and position"
-msgstr "Usar planeta e posição associados"
+msgstr "Utilizar planeta e posição associados"
 
 #: src/ui_viewDialog.h:1121
 msgid "Use this landscape as default"
-msgstr "Usar esta paisagem como padrão"
+msgstr "Utilizar esta paisagem como padrão"
 
 #: src/ui_viewDialog.h:1123
 msgid "Use this sky culture as default"
-msgstr "Usar esta cultura do céu como padrão"
+msgstr "Utilizar esta cultura do céu como padrão"
 
 #: src/ui_viewDialog.h:1125
 msgid "Visible"
@@ -2008,8 +2009,8 @@ msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr ""
-"Salvar as configurações que você alterou nesta sessão para elas serem "
-"carregadas da próxima vez que você iniciar o Stellarium"
+"Salvar as configurações que você alterou nesta sessão para serem carregadas "
+"da próxima vez que você iniciar o Stellarium"
 
 #: src/ui_configurationDialog.h:768
 msgid "Save settings"
@@ -2029,10 +2030,10 @@ msgid ""
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr ""
-"<p align=\"justify\">A restauração das configurações padrão requer o "
-"reinício do Stellarium. Ao salvar todas as opções atuais, serão incluídos o "
-"campo de visão atual e a direção de visualização, a fim de serem utilizados "
-"na próxima inicialização."
+"<p align=\"justify\">A restauração das configurações padrão requer que o "
+"Stellarium seja reiniciado. Ao salvar todas as opções atuais, serão "
+"incluídos o campo de visão atual e a direção de visualização, a fim de serem "
+"utilizados na próxima vez que o programa for iniciado."
 
 #: src/ui_configurationDialog.h:775
 msgid "The width of your view when Stellarium starts"
@@ -2057,24 +2058,24 @@ msgstr "Controle"
 
 #: src/ui_configurationDialog.h:784
 msgid "Allow keyboard to pan and zoom"
-msgstr "Possibilita visão panorâmica e zum no teclado"
+msgstr "Possibilita visão panorâmica e zum com o teclado"
 
 #: src/ui_configurationDialog.h:786
 msgid "Enable keyboard navigation"
-msgstr "Habilitar navegação pelo teclado"
+msgstr "Habilitar navegação com o teclado"
 
 #: src/ui_configurationDialog.h:788
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
-"Possibilita visão panorâmica (arrastar) e zum (roda do máuse) com o máuse"
+"Possibilita visão panorâmica (arrasto) e zum (botão de rolagem) com o mause"
 
 #: src/ui_configurationDialog.h:790
 msgid "Enable mouse navigation"
-msgstr "Habilitar navegação com o máuse"
+msgstr "Habilitar navegação com o mause"
 
 #: src/ui_configurationDialog.h:791
 msgid "Startup date and time"
-msgstr "Data e hora a serem utilizadas na inicialização"
+msgstr "Data e hora a serem utilizadas ao iniciar"
 
 #: src/ui_configurationDialog.h:793
 msgid "Starts Stellarium at system clock date and time"
@@ -2106,7 +2107,7 @@ msgstr "Outra:"
 
 #: src/ui_configurationDialog.h:804
 msgid "use current"
-msgstr "Usar a data e a hora atuais"
+msgstr "Utilizar a data e a hora atuais"
 
 #: src/ui_configurationDialog.h:805
 msgid "Other"
@@ -2114,11 +2115,11 @@ msgstr "Outras opções"
 
 #: src/ui_configurationDialog.h:807
 msgid "Hides the mouse cursor when inactive"
-msgstr "Oculta o ponteiro do máuse quando estiver inativo"
+msgstr "Oculta o ponteiro do mause quando estiver inativo"
 
 #: src/ui_configurationDialog.h:809
 msgid "Mouse cursor timeout (seconds):"
-msgstr "Tempo para o cursor do máuse desaparecer (em segundos):"
+msgstr "Tempo para o cursor do mause ser ocultado (em segundos):"
 
 #: src/ui_configurationDialog.h:811
 msgid "Toggle vertical and horizontal image flip buttons."
@@ -2126,11 +2127,11 @@ msgstr "Alterna entre os botões de giro vertical e horizontal de imagem."
 
 #: src/ui_configurationDialog.h:813
 msgid "Show flip buttons"
-msgstr "Exibir os botões de giro"
+msgstr "Exibir os botões de girar"
 
 #: src/ui_configurationDialog.h:814
 msgid "Planetarium options"
-msgstr "Opções do planetário"
+msgstr "Opções de planetário"
 
 #: src/ui_configurationDialog.h:816
 msgid ""
@@ -2138,7 +2139,7 @@ msgid ""
 "mirror for low-cost planetarium systems."
 msgstr ""
 "A distorção de espelho esférico é utilizada quando se projeta o Stellarium "
-"em um espelho esférico para sistemas de planetário de de baixo custo."
+"em um espelho esférico para sistemas de planetário de baixo custo."
 
 #: src/ui_configurationDialog.h:818
 msgid "Spheric mirror distortion"
@@ -2146,7 +2147,7 @@ msgstr "Distorção de espelho esférico"
 
 #: src/ui_configurationDialog.h:820
 msgid "Align labels with the horizon"
-msgstr "Alinha as indicações com o horizonte"
+msgstr "Alinha as identificações com o horizonte"
 
 #: src/ui_configurationDialog.h:822
 msgid "Gravity labels"
@@ -2157,8 +2158,8 @@ msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
-"Quando habilitado, o botão de “Aumentar zum automaticamente” também definirá "
-"a direção de visualização inicial"
+"Quando ativado, o botão de “Aumentar zum automaticamente” também definirá a "
+"direção de visualização inicial"
 
 #: src/ui_configurationDialog.h:826
 msgid "Auto zoom out returns to initial direction of view"
@@ -2167,8 +2168,7 @@ msgstr "Aumento de zum automático retorna à direção de visualização inicia
 #: src/ui_configurationDialog.h:828
 msgid "Mask out everything outside a central circle in the main view"
 msgstr ""
-"Oculta tudo o que estiver fora de um círculo central na visualização "
-"principal"
+"Oculta tudo o que estiver fora de um círculo central na visão principal"
 
 #: src/ui_configurationDialog.h:830
 msgid "Disc viewport"
@@ -2176,7 +2176,7 @@ msgstr "Visão em disco"
 
 #: src/ui_configurationDialog.h:832
 msgid "Hide other constellations when you click one"
-msgstr "Ao clicar em uma constelação, ocultar as outras constelações"
+msgstr "Oculta as outras constelações quando você clica em uma delas"
 
 #: src/ui_configurationDialog.h:834
 msgid "Select single constellation"
@@ -2208,7 +2208,7 @@ msgstr "Obter o catálogo x de y"
 
 #: src/ui_configurationDialog.h:844
 msgid "Download this file to view even more stars"
-msgstr "Baixar este arquivo para visualizar ainda mais estrelas"
+msgstr "Baixe este arquivo para visualizar ainda mais estrelas"
 
 #: src/ui_configurationDialog.h:845
 msgid "xxx"
@@ -2224,7 +2224,7 @@ msgstr "Tentar novamente"
 
 #: src/ui_configurationDialog.h:851
 msgid "Stop the download. You can always restart it later"
-msgstr "Parar o daunloude. Você poderá reiniciá-lo mais tarde"
+msgstr "Para o daunloude. Você poderá reiniciá-lo mais tarde"
 
 #: src/ui_configurationDialog.h:853
 msgid "Cancel"
@@ -2244,7 +2244,7 @@ msgstr "Para um escripte em execução"
 
 #: src/ui_configurationDialog.h:866
 msgid "Load at startup"
-msgstr "Carregar na inicialização"
+msgstr "Carregar ao iniciar"
 
 #: src/ui_configurationDialog.h:867
 msgid "configure"
@@ -2268,7 +2268,7 @@ msgstr "Escriptes"
 
 #: src/ui_configurationDialog.h:880
 msgid "Plugins"
-msgstr "Pluguíns"
+msgstr "Pluguins"
 
 #: src/ui_addRemoveLandscapesDialog.h:266
 msgid "Add/Remove Landscapes"
@@ -2284,7 +2284,7 @@ msgstr "Instalar uma nova paisagem a partir de um arquivo ZIP..."
 
 #: src/ui_addRemoveLandscapesDialog.h:270
 msgid "Switch to the new landscape after installation"
-msgstr "Mude para a nova paisagem após a instalação"
+msgstr "Mudar para a nova paisagem após a instalação"
 
 #: src/ui_addRemoveLandscapesDialog.h:273
 msgid "Remove an installed landscape"
@@ -2347,7 +2347,7 @@ msgstr "Medida angular"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
-msgstr "Fornece uma ferramenta de medição angular"
+msgstr "Fornece uma ferramenta de medição angular."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:121
 msgid "Angle measure"
@@ -2359,7 +2359,7 @@ msgstr "Medida angular"
 #: plugins/Oculars/src/Oculars.cpp:931 plugins/Oculars/src/Oculars.cpp:945
 #: plugins/Satellites/src/Satellites.cpp:123
 msgid "Plugin Key Bindings"
-msgstr "Teclas de atalho do pluguím"
+msgstr "Teclas de atalho do pluguim"
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
@@ -2369,7 +2369,7 @@ msgstr "Marcações da bússola"
 msgid "Displays compass bearing marks along the horizon"
 msgstr ""
 "<p align=\"justify\">Exibe uma bússola que possui marcações ao longo do "
-"horizonte"
+"horizonte."
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:121
 msgid "Compass marks"
@@ -2377,13 +2377,13 @@ msgstr "Marcações da bússola"
 
 #: plugins/Oculars/src/Oculars.cpp:76
 msgid "Oculars"
-msgstr "Ocular"
+msgstr "Oculares"
 
 #: plugins/Oculars/src/Oculars.cpp:79
 msgid "Shows the sky as if looking through a telescope eyepiece"
 msgstr ""
 "<p align=\"justify\">Mostra o céu como se se estivesse olhando através da "
-"ocular de um telescópio"
+"ocular de um telescópio."
 
 #: plugins/Oculars/src/Oculars.cpp:943
 msgid "Ocular view"
@@ -2391,7 +2391,7 @@ msgstr "Visão ocular"
 
 #: plugins/Oculars/src/Oculars.cpp:965
 msgid "Oculars popup menu"
-msgstr "Menu de popape para a ocular"
+msgstr "Menu de popape para as oculares"
 
 #: plugins/Satellites/src/Satellites.cpp:67
 msgid "Satellites"
@@ -2403,7 +2403,7 @@ msgid ""
 "TLE data"
 msgstr ""
 "<p align=\"justify\">Predição do posicionamento de satélites artificiais na "
-"órbita da Terra com base nos dados do NORAD TLE"
+"órbita da Terra com base nos dados do NORAD TLE."
 
 #: plugins/Satellites/src/Satellites.cpp:125
 msgid "Satellites configuration window"
@@ -2415,14 +2415,14 @@ msgstr "Dicas de satélites"
 
 #: plugins/Satellites/src/Satellites.cpp:128
 msgid "Satellite labels"
-msgstr "Identificação de satélites"
+msgstr "Identificações dos satélites"
 
 #: plugins/Satellites/src/Satellites.cpp:162
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
-"O arquivo antigo satellites.json não é mais compatível - usando o arquivo "
-"padrão"
+"O arquivo “satellites.json” antigo não é mais compatível - utilizando o "
+"arquivo padrão"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:150
@@ -2434,9 +2434,9 @@ msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
-"<p align=\"justify\">Este pluguím permite ao Stellarium enviar comandos "
-"“virar” para um telescópio em uma montagem computadorizada (um telescópio "
-"GoTo)"
+"<p align=\"justify\">Este pluguim permite ao Stellarium enviar comandos de "
+"viragem para um telescópio em uma montagem computadorizada (um telescópio "
+"GoTo)."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:155
 #, qt-format
@@ -2447,7 +2447,8 @@ msgstr "Mover o telescópio #%1 para o objeto selecionado"
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr ""
-"Mover o telescópio #%1 para o ponto que neste momento está no centro da tela"
+"Mover o telescópio #%1 para o ponto que, no presente momento, está no centro "
+"da tela"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:173
 msgid "Move a telescope to a given set of coordinates"
@@ -2470,15 +2471,15 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:78
 msgid "Text User Interface"
-msgstr "Interface textual"
+msgstr "Interface de usuário textual"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:81
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
-"<p align=\"justify\">Implementação do pluguím das séries 0.9.x da interface "
-"textual (TUI), utilizada em sistemas de planetário."
+"<p align=\"justify\">Implementação do pluguim das séries 0.9.x da interface "
+"de usuário textual (IUT), utilizada em sistemas de planetário."
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
@@ -2504,7 +2505,7 @@ msgid ""
 "The plugin for visualization of some historical supernovae, brighter 10 "
 "magnitude"
 msgstr ""
-"<p align=\"justify\">O pluguím para a visualização de algumas supernovas "
+"<p align=\"justify\">O pluguim para a visualização de algumas supernovas "
 "históricas, com magnitude maior do que 10"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
