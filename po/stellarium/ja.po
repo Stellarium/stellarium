@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-22 11:18+0700\n"
-"PO-Revision-Date: 2011-08-08 15:31+0000\n"
-"Last-Translator: Andrei <Unknown>\n"
+"PO-Revision-Date: 2011-09-18 23:30+0000\n"
+"Last-Translator: Shushi Kurose <md81bird@hitaki.net>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-23 04:47+0000\n"
-"X-Generator: Launchpad (build 13697)\n"
+"X-Launchpad-Export-Date: 2011-09-19 04:38+0000\n"
+"X-Generator: Launchpad (build 13955)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -31,7 +31,7 @@ msgstr "天の赤道"
 
 #: src/core/modules/GridLinesMgr.cpp:537
 msgid "Horizon"
-msgstr ""
+msgstr "地平線"
 
 #: src/core/modules/LandscapeMgr.cpp:488
 msgid "Author: "
@@ -146,7 +146,7 @@ msgstr "両眼視差: %1\""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr ""
+msgstr "宇宙船"
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
@@ -578,7 +578,7 @@ msgstr "子午線"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
 msgid "Horizon line"
-msgstr ""
+msgstr "地平線"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
 msgid "Cardinal points"
@@ -1212,12 +1212,12 @@ msgstr ""
 #. TRANSLATORS: Name of supernova SN 1572A
 #: src/translations.h:124
 msgid "Tycho's Supernova"
-msgstr ""
+msgstr "ティコの超新星"
 
 #. TRANSLATORS: Name of supernova SN 1604A
 #: src/translations.h:126
 msgid "Kepler's Supernova"
-msgstr ""
+msgstr "ケプラーの超新星"
 
 #: src/translations.h:130
 msgid "N"
@@ -2343,7 +2343,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:67
 msgid "Satellites"
-msgstr ""
+msgstr "衛星"
 
 #: plugins/Satellites/src/Satellites.cpp:70
 msgid ""
@@ -2353,7 +2353,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:125
 msgid "Satellites configuration window"
-msgstr ""
+msgstr "衛星設定ウィンドウ"
 
 #: plugins/Satellites/src/Satellites.cpp:126
 msgid "Satellite hints"
@@ -2361,7 +2361,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:128
 msgid "Satellite labels"
-msgstr ""
+msgstr "衛星ラベル"
 
 #: plugins/Satellites/src/Satellites.cpp:162
 msgid ""
@@ -2395,7 +2395,7 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
-msgstr ""
+msgstr "タイムゾーン"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:44
 msgid ""
@@ -2406,7 +2406,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:78
 msgid "Text User Interface"
-msgstr ""
+msgstr "テキストユーザーインターフェース"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:81
 msgid ""
@@ -2416,7 +2416,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
-msgstr ""
+msgstr "太陽系エディター"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:59
 msgid ""
@@ -2427,13 +2427,13 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical supernovae"
-msgstr ""
+msgstr "歴史上の超新星"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
 "The plugin for visualization of some historical supernovae, brighter 10 "
 "magnitude"
-msgstr ""
+msgstr "一部の歴史上の超新星を描画するプラグイン。明るい10等級。"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
@@ -2446,7 +2446,7 @@ msgstr ""
 #: plugins/Supernovae/src/Supernova.cpp:105
 #, qt-format
 msgid "Type: %1"
-msgstr ""
+msgstr "タイプ: %1"
 
 #~ msgid "Form"
 #~ msgstr "フォーム"
