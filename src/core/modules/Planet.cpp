@@ -871,7 +871,6 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 	else
 	{
 		painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
-		fprintf(stdout, "ssphere\n");
 	}
 
     painter->setShadeModel(StelPainter::ShadeModelFlat);
