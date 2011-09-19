@@ -1,6 +1,5 @@
 attribute vec3 tang;
 attribute vec3 pvec;
-
 uniform vec3 lpos;
 
 varying vec3 var_ldir;
@@ -8,7 +7,7 @@ varying vec3 var_vdir;
 
 void main()
 {
-	gl_Position = pvec; 
+	gl_Position = gl_ProjectionMatrix * vec4(pvec.x, pvec.y, pvec.z, 1.0);
 
 	vec3 vpos = (gl_ModelViewMatrix * gl_Vertex).xyz;
 	vec3 normal = normalize(gl_NormalMatrix * gl_Normal);
