@@ -147,7 +147,7 @@ void SolarSystem::init()
     nMapShader = new StelShader;
 	if (!(nMapShader->load("data/shaders/nmap.v.glsl", "data/shaders/nmap.f.glsl")))
 	{
-	        fprintf(stderr, "Could not find shader files\n");
+	        fprintf(stderr, "Could not load shader files\n");
 	        nMapShader = 0;
 	}
 }
