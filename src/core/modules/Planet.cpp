@@ -840,34 +840,38 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 
 
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-    if (ssm->nMapShader == 0)
+    if (ssm->nMapShader != 0)
     {
-		painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
-		fprintf(stdout, "ssphere\n");
-	}
-	else
-	{
-		if (normalMap)
-		{
-            glActiveTexture(GL_TEXTURE1);
-            glEnable(GL_TEXTURE_2D);
-			if (!normalMap->bind())
+			if (normalMap)
 			{
-                glDisable(GL_TEXTURE_2D);
-				painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
-				fprintf(stdout, "ssphere2\n");
+				glActiveTexture(GL_TEXTURE1);
+				glEnable(GL_TEXTURE_2D);
+				if (!normalMap->bind())
+				{
+					glDisable(GL_TEXTURE_2D);
+					painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+				}
+				else
+				{
+					ssm->nMapShader->use();
+					int texLocation = ssm->nMapShader->uniformLocation("tex");
+					ssm->nMapShader->setUniform(texLocation, 0);
+					int nMapLocation = ssm->nMapShader->uniformLocation("nmap");
+					ssm->nMapShader->setUniform(nMapLocation,1);
+					painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
+					//useShader(0);
+					glDisable(GL_TEXTURE_2D);
+				}
 			}
 			else
 			{
-    			ssm->nMapShader->use();
-    			ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("tex"),0);
-    			ssm->nMapShader->setUniform(ssm->nMapShader->uniformLocation("nmap"),1);
-    			painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
-    			fprintf(stdout, "nmsphere\n");
-    			useShader(0);
-		    	glDisable(GL_TEXTURE_2D);
-    		}
-		}
+				painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+			}
+	}
+	else
+	{
+		painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+		fprintf(stdout, "ssphere\n");
 	}
 
     painter->setShadeModel(StelPainter::ShadeModelFlat);

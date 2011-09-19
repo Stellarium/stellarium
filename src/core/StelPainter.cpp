@@ -1934,26 +1934,28 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
 
     // Draw the array now
 
-    if(!isLightOn)
-    {
-        setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
-        drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
-    }
-    else
+
+    if (isLightOn)
     {
         setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData(), (Vec3f*) normalArr.constData());
 
         ArrayDesc projectedVertexArray = vertexArray;
         projectedVertexArray = projectArray(vertexArray, 0, indiceArr.size(), indiceArr.constData());
 
-	//	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	//	glTexCoordPointer(2, GL_FLOAT, 0, texCoordArray.pointer);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glTexCoordPointer(texCoordArray.size, texCoordArray.type, 0, texCoordArray.pointer);
+
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glVertexPointer(vertexArray.size, vertexArray.type, 0, vertexArray.pointer);
+
+		glEnableClientState(GL_NORMAL_ARRAY);
+		glNormalPointer(normalArray.type, 0, normalArray.pointer);
 
 	//vertex attributes projected and tangent array
 
         int pVecLocation = ssm->nMapShader->attributeLocation("pvec");
         glEnableVertexAttribArray(pVecLocation);
-        glVertexAttribPointer(pVecLocation, 3, GL_FLOAT, 0, 0, projectedVertexArray.pointer);
+        glVertexAttribPointer(pVecLocation, projectedVertexArray.size, projectedVertexArray.type, 0, 0, projectedVertexArray.pointer);
 
         int tangentLocation = ssm->nMapShader->attributeLocation("tang");
 		glEnableVertexAttribArray(tangentLocation);
@@ -1966,12 +1968,17 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
 //drawing
 		glDrawElements(GL_TRIANGLES, indiceArr.size(), GL_UNSIGNED_INT, indiceArr.constData());
 
-		glDisableClientState(GL_COLOR_ARRAY);
 		glDisableClientState(GL_NORMAL_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 		glDisableClientState(GL_VERTEX_ARRAY);
         glDisableVertexAttribArray(tangentLocation);
         glDisableVertexAttribArray(pVecLocation);
+    }
+    else
+    {
+        useShader(0);
+        setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
+        drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
     }
 }
 
