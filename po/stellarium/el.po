@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-22 11:18+0700\n"
-"PO-Revision-Date: 2011-05-28 21:30+0000\n"
-"Last-Translator: c7p <c7p.admin@gmail.com>\n"
+"POT-Creation-Date: 2011-09-19 20:07+0700\n"
+"PO-Revision-Date: 2011-09-19 11:12+0000\n"
+"Last-Translator: Christos Spyroglou <Unknown>\n"
 "Language-Team: Greek, Modern (1453-) <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-23 04:47+0000\n"
-"X-Generator: Launchpad (build 13697)\n"
+"X-Launchpad-Export-Date: 2011-09-20 04:49+0000\n"
+"X-Generator: Launchpad (build 13980)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -31,22 +31,22 @@ msgstr "Ισημερινός"
 
 #: src/core/modules/GridLinesMgr.cpp:537
 msgid "Horizon"
-msgstr ""
+msgstr "Ορίζοντας"
 
-#: src/core/modules/LandscapeMgr.cpp:488
+#: src/core/modules/LandscapeMgr.cpp:486
 msgid "Author: "
 msgstr "Συγγραφέας: "
 
-#: src/core/modules/LandscapeMgr.cpp:491
+#: src/core/modules/LandscapeMgr.cpp:489
 msgid "Location: "
 msgstr "Τοποθεσία: "
 
-#: src/core/modules/LandscapeMgr.cpp:496
+#: src/core/modules/LandscapeMgr.cpp:494
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 μ"
 
-#: src/core/modules/LandscapeMgr.cpp:499
+#: src/core/modules/LandscapeMgr.cpp:498
 msgid "Planet: "
 msgstr "Πλανήτης: "
 
@@ -56,7 +56,7 @@ msgid "Type: <b>%1</b>"
 msgstr "Τύπος: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:120
-#: plugins/Supernovae/src/Supernova.cpp:98
+#: plugins/Supernovae/src/Supernova.cpp:99
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Μέγεθος: <b>%1</b>"
@@ -106,12 +106,12 @@ msgstr "Απόλυτο μέγεθος: %1"
 #: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr ""
+msgstr "Γεωκεντρική Εκλειπτική (ημερομηνίας): %1/%2"
 
 #: src/core/modules/Planet.cpp:137
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr ""
+msgstr "Αξονική κλίση (ημερομηνίας): %1"
 
 #: src/core/modules/Planet.cpp:143
 #, no-c-format, qt-format
@@ -134,7 +134,7 @@ msgid "Spectral Type: %1"
 msgstr "Φασματικός Τύπος: %1"
 
 #: src/core/modules/StarWrapper.cpp:122
-#: plugins/Supernovae/src/Supernova.cpp:107
+#: plugins/Supernovae/src/Supernova.cpp:108
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Απόσταση: %1 Έτη Φωτός"
@@ -146,7 +146,7 @@ msgstr "Παραλλαγή: %1\""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr ""
+msgstr "Διαστημόπλοιο"
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
@@ -273,11 +273,11 @@ msgstr "Ωρική γωνία/απόκλιση: %1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
-msgstr ""
+msgstr "(γεωμετρική)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
-msgstr ""
+msgstr "(φαινόμενη)"
 
 #: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
@@ -593,7 +593,7 @@ msgstr "Γραμμή Μεσημβρινού"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
 msgid "Horizon line"
-msgstr ""
+msgstr "Γραμμή Ορίζοντα"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
 msgid "Cardinal points"
@@ -828,7 +828,7 @@ msgstr "Ασυνήθης ρυθμός διαττόντων αστέρων Λεο
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Υψηλότερος ρυθμός στην ιστορία (1966 Λεοντίδες)"
 
-#: src/gui/LocationDialog.cpp:336
+#: src/gui/LocationDialog.cpp:367
 msgid "New Location"
 msgstr "Νέα τοποθεσία"
 
@@ -1112,7 +1112,7 @@ msgstr "Χάρον"
 #. TRANSLATORS: Moon of Pluto (II)
 #: src/translations.h:82
 msgid "Nix"
-msgstr ""
+msgstr "Νύξ"
 
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
@@ -1232,12 +1232,12 @@ msgstr "Έκτωρ"
 #. TRANSLATORS: Name of supernova SN 1572A
 #: src/translations.h:124
 msgid "Tycho's Supernova"
-msgstr ""
+msgstr "Υπερκαινοφανής του Τύχωνα"
 
 #. TRANSLATORS: Name of supernova SN 1604A
 #: src/translations.h:126
 msgid "Kepler's Supernova"
-msgstr ""
+msgstr "Υπερκαινοφανής του Κέπλερ"
 
 #: src/translations.h:130
 msgid "N"
@@ -1257,7 +1257,7 @@ msgstr "Δ"
 
 #: src/translations.h:136
 msgid "Arabic"
-msgstr ""
+msgstr "Αραβικός"
 
 #: src/translations.h:137
 msgid "Aztec"
@@ -1665,7 +1665,7 @@ msgstr "Εύρεση αντικειμένου"
 
 #: src/ui_searchDialogGui.h:451
 msgid "Find Object or Position"
-msgstr ""
+msgstr "Εύρεση Αντικειμένου ή Τοποθεσίας"
 
 #: src/ui_searchDialogGui.h:458
 msgid "iota"
@@ -1765,11 +1765,11 @@ msgstr "ωμέγα"
 
 #: src/ui_searchDialogGui.h:529
 msgid "Greek letters for Bayer designations"
-msgstr ""
+msgstr "Ελληνικά γράμματα για την ονοματολογία Bayer"
 
 #: src/ui_searchDialogGui.h:530
 msgid "Object"
-msgstr ""
+msgstr "Αντικείμενο"
 
 #: src/ui_searchDialogGui.h:531
 msgid "RA/Dec (J2000):"
@@ -1777,7 +1777,7 @@ msgstr "RA/Dec (J2000):"
 
 #: src/ui_searchDialogGui.h:532
 msgid "Position"
-msgstr ""
+msgstr "Τοποθεσία"
 
 #: src/ui_viewDialog.h:1052
 msgid "View"
@@ -1854,11 +1854,11 @@ msgstr "Φωτορύπανση: "
 
 #: src/ui_viewDialog.h:1085
 msgid "pressure, temperature, extinction coefficient"
-msgstr ""
+msgstr "πίεση, θερμοκρασία, συντελεστής απόσβεσης"
 
 #: src/ui_viewDialog.h:1087
 msgid "Refraction/Extinction settings..."
-msgstr ""
+msgstr "Ρυθμίσεις Διάθλασης/Απόσβεσης"
 
 #: src/ui_viewDialog.h:1088
 msgid "Labels and Markers"
@@ -2301,19 +2301,19 @@ msgstr ""
 
 #: src/ui_AtmosphereDialog.h:167
 msgid "Atmosphere Details"
-msgstr ""
+msgstr "Λεπτομέρειες Ατμόσφαιρας"
 
 #: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
-msgstr ""
+msgstr "Ρυθμίσεις Διάθλασης"
 
 #: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
-msgstr ""
+msgstr "Πίεση (mbar):"
 
 #: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
-msgstr ""
+msgstr "Θερμοκρασία (C):"
 
 #: src/ui_AtmosphereDialog.h:176
 msgid ""
@@ -2321,16 +2321,21 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
+"Απόσβεση είναι η απώλεια λάμψης του άστρου που οφείλεται στην ατμόσφαιρα της "
+"Γης. Δίνεται σε mag/airmass, όπου airmass είναι ο αριθμός ατμοσφαιρών που "
+"πρέπει να διασχίσει το φως. (ζενίθ: 1; ορίζοντας: περίπου 40)"
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
-msgstr ""
+msgstr "Συντελεστής Απόσβεσης"
 
 #: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
+"Χρήση περίπου 0.12 για υπέροχες βουνοκορφές, 0.2 για καλό αγροτικό τοπίο, "
+"0.35 για άσχημες συνθήκες."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -2484,26 +2489,41 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical supernovae"
-msgstr ""
+msgstr "Ιστορικοί υπερκαινοφανείς αστέρες"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
 "The plugin for visualization of some historical supernovae, brighter 10 "
 "magnitude"
 msgstr ""
+"Το πρόσθετο για την εμφάνιση μερικώ ιστορικών υπερκαινοφανών αστέρων, "
+"φωτεινότητας μεγαλύτερης του 10"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
 "SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
 "July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
 "1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
-"August), SN 1972E (8 May) and SN 1987A (24 February)"
+"August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 "
+"September)"
 msgstr ""
 
-#: plugins/Supernovae/src/Supernova.cpp:105
+#: plugins/Supernovae/src/Supernova.cpp:106
 #, qt-format
 msgid "Type: %1"
-msgstr ""
+msgstr "Τύπος: %1"
 
 #~ msgid "Form"
 #~ msgstr "Φόρμα"
+
+#~ msgid ""
+#~ "SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
+#~ "July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
+#~ "1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
+#~ "August), SN 1972E (8 May) and SN 1987A (24 February)"
+#~ msgstr ""
+#~ "SN 185A (7 Δεκεμβρίου), SN 386A (24 Απριλίου), SN 1006A (29 Απριλίου), SN "
+#~ "1054A (3 Ιουλίου), SN 1181A (4 Αυγούστου), SN 1572A (5 Νοεμβρίου), SN 1604A "
+#~ "(8 Οκτωβρίου), SN 1680A (15 Αυγούστου), SN 1885A (17 Αυγούστου), SN 1895B (5 "
+#~ "Ιουλίου), SN 1937C (21 Αυγούστου), SN 1972E (8 Μαΐου) and SN 1987A (24 "
+#~ "Φεβρουαρίου)"
