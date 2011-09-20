@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-22 11:18+0700\n"
+"POT-Creation-Date: 2011-09-19 20:07+0700\n"
 "PO-Revision-Date: 2011-08-25 18:43+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-26 04:31+0000\n"
-"X-Generator: Launchpad (build 13779)\n"
+"X-Launchpad-Export-Date: 2011-09-20 04:49+0000\n"
+"X-Generator: Launchpad (build 13980)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -35,20 +35,20 @@ msgstr "Äquator"
 msgid "Horizon"
 msgstr "Horizont"
 
-#: src/core/modules/LandscapeMgr.cpp:488
+#: src/core/modules/LandscapeMgr.cpp:486
 msgid "Author: "
 msgstr "Autor: "
 
-#: src/core/modules/LandscapeMgr.cpp:491
+#: src/core/modules/LandscapeMgr.cpp:489
 msgid "Location: "
 msgstr "Standort: "
 
-#: src/core/modules/LandscapeMgr.cpp:496
+#: src/core/modules/LandscapeMgr.cpp:494
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:499
+#: src/core/modules/LandscapeMgr.cpp:498
 msgid "Planet: "
 msgstr "Planet: "
 
@@ -58,7 +58,7 @@ msgid "Type: <b>%1</b>"
 msgstr "Typ: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:120
-#: plugins/Supernovae/src/Supernova.cpp:98
+#: plugins/Supernovae/src/Supernova.cpp:99
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Helligkeit: <b>%1</b>"
@@ -136,7 +136,7 @@ msgid "Spectral Type: %1"
 msgstr "Spektraltyp: %1"
 
 #: src/core/modules/StarWrapper.cpp:122
-#: plugins/Supernovae/src/Supernova.cpp:107
+#: plugins/Supernovae/src/Supernova.cpp:108
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Entfernung: %1 Lichtjahre"
@@ -832,7 +832,7 @@ msgstr "Außergewöhnliche Leonidenfrequenz"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Höchste jemals erreichte Frequenz (Leoniden 1966)"
 
-#: src/gui/LocationDialog.cpp:336
+#: src/gui/LocationDialog.cpp:367
 msgid "New Location"
 msgstr "Neuer Standort"
 
@@ -2506,17 +2506,25 @@ msgid ""
 "SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
 "July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
 "1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
-"August), SN 1972E (8 May) and SN 1987A (24 February)"
+"August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 "
+"September)"
 msgstr ""
-"SN 185A (7. Dezember), SN 386A (24. April), SN 1006A (29. April), SN 1054A "
-"(3. Juli), SN 1181A (4. August), SN 1572A (5. November), SN 1604A (8. "
-"Oktober), SN 1680A (15. August), SN 1885A (17. August), SN 1895B (5. Juli), "
-"SN 1937C (21. August), SN 1972E (8. Mai) and SN 1987A (24. Februar)"
 
-#: plugins/Supernovae/src/Supernova.cpp:105
+#: plugins/Supernovae/src/Supernova.cpp:106
 #, qt-format
 msgid "Type: %1"
 msgstr "Art: %1"
 
 #~ msgid "Form"
 #~ msgstr "Eingabefeld"
+
+#~ msgid ""
+#~ "SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
+#~ "July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
+#~ "1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
+#~ "August), SN 1972E (8 May) and SN 1987A (24 February)"
+#~ msgstr ""
+#~ "SN 185A (7. Dezember), SN 386A (24. April), SN 1006A (29. April), SN 1054A "
+#~ "(3. Juli), SN 1181A (4. August), SN 1572A (5. November), SN 1604A (8. "
+#~ "Oktober), SN 1680A (15. August), SN 1885A (17. August), SN 1895B (5. Juli), "
+#~ "SN 1937C (21. August), SN 1972E (8. Mai) and SN 1987A (24. Februar)"
