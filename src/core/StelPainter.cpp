@@ -1834,19 +1834,6 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
                     normal = Vec3f(x * oneMinusOblateness, y * oneMinusOblateness, z);
                     normal.normalize();
 
-//debug
-/*
-                    glUseProgram(0);
-                    glDisable(GL_LIGHTING);
-                    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-                    glLineWidth(5);
-                    glBegin(GL_LINE);
-                    glColor3f(1.0, 0.0, 0.0);
-                    glVertex3f(vector[0], vector[1], vector[2]);
-                    glVertex3f(tangent[0]+vector[0], tangent[1]+vector[1], tangent[2]+vector[2]);
-                    glFlush();
-                    glEnd();*/
-
                     texCoordArr << s << t;
                     vertexArr << vector[0] << vector[1] << vector[2];
                     normalArr << normal[0] << normal[1] << normal[2];
@@ -1904,17 +1891,6 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
                     normal = Vec3f(x * oneMinusOblateness, y * oneMinusOblateness, z);
                     normal.normalize();
 
-//debug
-/*
-                    glLineWidth(5);
-                    glBegin(GL_LINE);
-                    glColor3f(1.0, 0.0, 0.0);
-                    glVertex3f(vector[0], vector[1], vector[2]);
-                    glVertex3f(tangent[0]+vector[0], tangent[1]+vector[1], tangent[2]+vector[2]);
-                    glFlush();
-                    glEnd();
-                    glLineWidth(0.5);*/
-
                     texCoordArr << s << t - dt;
                     vertexArr << vector[0] << vector[1] << vector[2];
                     normalArr << normal[0] << normal[1] << normal[2];
@@ -1964,6 +1940,12 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
 //uniform light position
         int lposLocation = ssm->nMapShader->uniformLocation("lpos");
         ssm->nMapShader->setUniform(lposLocation, lightPos3[0], lightPos3[1], lightPos3[2]);
+
+        int ambientLocation = ssm->nMapShader->uniformLocation("ambient");
+        ssm->nMapShader->setUniform(ambientLocation, ambientLight[0], ambientLight[1], ambientLight[2], ambientLight[3]);
+
+        int diffuseLocation = ssm->nMapShader->uniformLocation("diffuse");
+        ssm->nMapShader->setUniform(diffuseLocation, diffuseLight[0], diffuseLight[1], diffuseLight[2], diffuseLight[3]);
 
 //drawing
 		glDrawElements(GL_TRIANGLES, indiceArr.size(), GL_UNSIGNED_INT, indiceArr.constData());
