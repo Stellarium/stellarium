@@ -412,10 +412,13 @@ void StelCore::moveObserverToSelected()
 		{
 			// We need to move to the selected planet. Try to generate a location from the current one
 			StelLocation loc = getCurrentLocation();
+			if (loc.planetName != pl->getEnglishName())
+			{
 			loc.planetName = pl->getEnglishName();
 			loc.name = "-";
 			loc.state = "";
 			moveObserverTo(loc);
+			}
 		}
 	}
 	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
