@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-19 20:07+0700\n"
-"PO-Revision-Date: 2011-09-23 02:58+0000\n"
+"PO-Revision-Date: 2011-09-24 11:36+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-24 04:37+0000\n"
+"X-Launchpad-Export-Date: 2011-09-25 04:37+0000\n"
 "X-Generator: Launchpad (build 14012)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
@@ -39,7 +39,7 @@ msgstr "المؤلف: ‎ "
 
 #: src/core/modules/LandscapeMgr.cpp:489
 msgid "Location: "
-msgstr "الموقع‎: "
+msgstr "الموقع‎: ‏ "
 
 #: src/core/modules/LandscapeMgr.cpp:494
 #, qt-format
@@ -712,7 +712,7 @@ msgstr "أوقف الزمن"
 
 #: src/gui/StelGui.cpp:151
 msgid "Set time to now"
-msgstr "استخدم الوقت الحالي‎"
+msgstr "‏استخدم الوقت الحالي‎‏"
 
 #: src/gui/StelGui.cpp:152
 msgid "Add 1 solar hour"
@@ -1618,7 +1618,7 @@ msgstr "أضف إلى القائمة"
 
 #: src/ui_locationDialogGui.h:395
 msgid "Latitude:"
-msgstr "خط العرض:"
+msgstr "خط العرض"
 
 #: src/ui_locationDialogGui.h:397 src/ui_locationDialogGui.h:401
 msgid ""
@@ -1630,11 +1630,11 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:399
 msgid "Longitude:"
-msgstr "خط الطول:"
+msgstr "خط الطول"
 
 #: src/ui_locationDialogGui.h:403
 msgid "Altitude:"
-msgstr "الارتفاع:"
+msgstr "الارتفاع"
 
 #: src/ui_locationDialogGui.h:405
 msgid "Enter the altitude in meter"
@@ -1646,15 +1646,15 @@ msgstr " متر"
 
 #: src/ui_locationDialogGui.h:408
 msgid "Name/City:"
-msgstr "الاسم / المدينة:"
+msgstr "المدينة/اسم الموقع"
 
 #: src/ui_locationDialogGui.h:409
 msgid "Country:"
-msgstr "الدولة:"
+msgstr "الدولة"
 
 #: src/ui_locationDialogGui.h:410
 msgid "Planet:"
-msgstr "الكوكب:"
+msgstr "الكوكب"
 
 #: src/ui_searchDialogGui.h:450
 msgid "Find Object"
@@ -1770,7 +1770,7 @@ msgstr "اسم الجرم"
 
 #: src/ui_searchDialogGui.h:531
 msgid "RA/Dec (J2000):"
-msgstr "الميل / المطلع المستقيم (J2000):‏"
+msgstr "الميل / المطلع المستقيم (J2000)"
 
 #: src/ui_searchDialogGui.h:532
 msgid "Position"
