@@ -391,7 +391,12 @@ void ViewDialog::updateSkyCultureText()
 	QString descPath;
 	try
 	{
-		descPath = StelFileMgr::findFile("skycultures/" + StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID() + "/description."+StelApp::getInstance().getLocaleMgr().getAppLanguage()+".utf8");
+                QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+                if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang)) 
+                {
+                        lang = lang.split("_").at(0);
+                }
+                descPath = StelFileMgr::findFile("skycultures/" + StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID() + "/description."+lang+".utf8");
 	}
 	catch (std::runtime_error& e)
 	{
