@@ -5,7 +5,6 @@
 
 //! @class StelShader
 //! stores basic info about a glsl shader program
-//! @author Eleni Maria Stea
 
 class StelShader {
 public:
