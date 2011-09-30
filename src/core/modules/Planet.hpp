@@ -252,6 +252,8 @@ protected:
 
 	// Draw the 3D sphere
 	void drawSphere(StelPainter* painter, float screenSz);
+
+	// Draw the 3d sphere when normal mapping is used
 	void drawNMapSphere(StelPainter* painter, float screenSz);
 
 	// Draw the circle and name of the Planet
