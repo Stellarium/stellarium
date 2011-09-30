@@ -1699,8 +1699,16 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
 }
 
-//drawing method for sphere when normal map is going to be used - eg in planet rendering
-//the method is similar to the sSphere but it calculates tangent vectors for each point as well
+//! drawing method for sphere when normal map is going to be used - eg in planet rendering
+//! the method is similar to the sSphere but it calculates tangent vectors for each point as well
+//! @param ellipsoid radius (float)
+//! @param 1 - oblateness (float)
+//! @param number of slices (float)
+//! @param number of stacks (float)
+//! @param pointer to the solar system (SolarSystem*)
+//! @param orientation: inside or not (int)
+//! @param flip texture or not (int)
+
 void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, int stacks, SolarSystem* ssm, int orientInside, bool flipTexture)
 {
 
