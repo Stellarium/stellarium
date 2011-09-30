@@ -813,6 +813,10 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	glDisable(GL_CULL_FACE);
 }
 
+//! draws the planet when normal map is used
+//! @param StelPainter* (pointer to the painter used)
+//! @param float (screen size)
+
 void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 {
     glActiveTexture(GL_TEXTURE0);
