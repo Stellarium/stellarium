@@ -698,7 +698,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 
 			QPainter painter(&strImage);
 			painter.setFont(qPainter->font());
-			painter.setRenderHints(QPainter::TextAntialiasing);
+			painter.setRenderHints(QPainter::TextAntialiasing, true);
 			painter.setPen(Qt::white);
 			painter.drawText(-strRect.x(), -strRect.y(), str);
 
