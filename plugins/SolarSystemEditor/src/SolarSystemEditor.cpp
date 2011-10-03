@@ -723,7 +723,9 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 				 << "This is not a valid date for an Epoch.";
 		return SsoElements();
 	}
-	int epochJD = epochDate.toJulianDay();
+	//Epoch is at .0 TT, i.e. midnight
+	double epochJD;
+	StelUtils::getJDFromDate(&epochJD, year, month, day, 0, 0, 0);
 	result.insert("orbit_Epoch", epochJD);
 
 	column = oneLineElements.mid(26, 9).trimmed();

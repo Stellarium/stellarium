@@ -78,6 +78,10 @@ class Translations
 		N_("Oberon");
 		N_("Pluto");
 		N_("Charon");
+		// TRANSLATORS: Moon of Pluto (II)
+		N_("Nix");
+		// TRANSLATORS: Moon of Pluto (III)
+		N_("Hydra");
 		N_("Eris");
 		N_("Triton");
 		N_("Nereid");
@@ -129,6 +133,7 @@ class Translations
 		N_("W");	// West
 
 		// Constellation cultures
+		N_("Arabic");
 		N_("Aztec");
 		N_("Chinese");
 		N_("Egyptian");
