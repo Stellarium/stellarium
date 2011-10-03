@@ -67,6 +67,9 @@ void StelLogger::init(const QString& logFilePath)
 		case QSysInfo::WV_VISTA:
 			writeLog("Windows Vista");
 			break;
+		case QSysInfo::WV_WINDOWS7:
+			writeLog("Windows 7");
+			break;
 		default:
 			writeLog("Unsupported Windows version");
 			break;

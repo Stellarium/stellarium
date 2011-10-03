@@ -101,8 +101,8 @@ Q_IMPORT_PLUGIN(SolarSystemEditor)
 Q_IMPORT_PLUGIN(TimeZoneConfiguration)
 #endif
 
-#ifdef USE_STATIC_PLUGIN_SUPERNOVAS
-Q_IMPORT_PLUGIN(Supernovas)
+#ifdef USE_STATIC_PLUGIN_SUPERNOVAE
+Q_IMPORT_PLUGIN(Supernovae)
 #endif
 
 // Initialize static variables
