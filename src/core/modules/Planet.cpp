@@ -920,11 +920,17 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 					        cloudSharpness = 0;
 					        cloudScale = 0;
 					}
-			  /*      int cColorLocation = ssm->nMapShader->uniformLocation("ccolor");
-			        ssm->nMapShader->setUniform(cColorLocation, ccloudColor[0], ccloudColor[1], ccloudColor[2]);
+
+			        int cColorLocation = ssm->nMapShader->uniformLocation("ccolor");
+			        ssm->nMapShader->setUniform(cColorLocation, cloudColor[0], cloudColor[1], cloudColor[2]);
 			        int cDensityLocation = ssm->nMapShader->uniformLocation("cdensity");
 			        ssm->nMapShader->setUniform(cDensityLocation, cloudDensity);
-*/
+			        int cScaleLocation = ssm->nMapShader->uniformLocation("cscale");
+			        ssm->nMapShader->setUniform(cScaleLocation, cloudScale);
+			        int cSharpLocation = ssm->nMapShader->uniformLocation("csharp");
+			        ssm->nMapShader->setUniform(cSharpLocation, cloudSharpness);
+
+
 					painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
 					//useShader(0);
 					glDisable(GL_TEXTURE_2D);
