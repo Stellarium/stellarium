@@ -7,6 +7,11 @@ uniform sampler2D nmap;
 uniform vec4 ambient;
 uniform vec4 diffuse;
 
+uniform vec3 ccolor;
+uniform float cdensity;
+uniform float cscale;
+uniform float csharp;
+
 void main()
 {
 	vec3 normal = texture2D(nmap, gl_TexCoord[0].xy).xyz * 2.0 - 1.0;
