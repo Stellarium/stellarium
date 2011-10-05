@@ -794,6 +794,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			               pd.value(secname+"/radius").toDouble()/AU,
 			               pd.value(secname+"/oblateness", 0.0).toDouble(),
 			               StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
+			               StelUtils::strToVec3f(pd.value(secname+"/cloud_color").toString()),
+			               pd.value(secname+"/color_density").toFloat(),
 			               pd.value(secname+"/albedo").toFloat(),
 			               pd.value(secname+"/tex_map").toString(),
 			               pd.value(secname+"/normal_map").toString(),

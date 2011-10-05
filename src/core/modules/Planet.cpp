@@ -141,6 +141,55 @@ Planet::Planet(const QString& englishName,
 	flagLabels = true;
 }
 
+Planet::Planet(const QString& englishName,
+			   int flagLighting,
+			   double radius,
+			   double oblateness,
+			   Vec3f color,
+			   Vec3f cloudColor,
+			   float cloudDensity,
+			   float albedo,
+			   const QString& atexMapName,
+			   const QString& anormalMapName,
+			   posFuncType coordFunc,
+			   void* auserDataPtr,
+			   OsculatingFunctType *osculatingFunc,
+			   bool acloseOrbit,
+			   bool hidden,
+			   bool hasAtmosphere)
+	: englishName(englishName),
+	  flagLighting(flagLighting),
+	  radius(radius), oneMinusOblateness(1.0-oblateness),
+	  color(color), cloudColor(cloudColor), cloudDensity(cloudDensity), albedo(albedo), axisRotation(0.), rings(NULL),
+	  sphereScale(1.f),
+	  lastJD(J2000),
+	  coordFunc(coordFunc),
+	  userDataPtr(auserDataPtr),
+	  osculatingFunc(osculatingFunc),
+	  parent(NULL),
+	  hidden(hidden),
+	  atmosphere(hasAtmosphere)
+{
+	texMapName = atexMapName;
+	normalMapName = anormalMapName;
+	lastOrbitJD =0;
+	deltaJD = StelCore::JD_SECOND;
+	orbitCached = 0;
+	closeOrbit = acloseOrbit;
+
+	eclipticPos=Vec3d(0.,0.,0.);
+	rotLocalToParent = Mat4d::identity();
+	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	normalMap = StelApp::getInstance().getTextureManager().createTexture("textures/"+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+
+	nameI18 = englishName;
+	if (englishName!="Pluto")
+	{
+		deltaJD = 0.001*StelCore::JD_SECOND;
+	}
+	flagLabels = true;
+}
+
 Planet::~Planet()
 {
 	if (rings)
