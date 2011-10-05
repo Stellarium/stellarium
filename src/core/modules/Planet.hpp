@@ -111,6 +111,24 @@ public:
 		   bool closeOrbit,
 		   bool hidden,
 		   bool hasAtmosphere);
+
+    Planet(const QString& englishName,
+			int flagLighting,
+			double radius,
+			double oblateness,
+			Vec3f color,
+			Vec3f cloudColor,
+			float cloudDensity,
+			float albedo,
+			const QString& texMapName,
+			const QString& normalMapName,
+			posFuncType _coordFunc,
+			void* userDataPtr,
+			OsculatingFunctType *osculatingFunc,
+			bool closeOrbit,
+			bool hidden,
+			bool hasAtmosphere);
+
 	~Planet();
 
 	///////////////////////////////////////////////////////////////////////////
@@ -272,6 +290,10 @@ protected:
 	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen
 	Vec3d previousScreenPos;         // The position of this planet in the previous frame.
 	Vec3f color;
+
+	Vec3f cloudColor;                // main cloud color
+	float cloudDensity;              // how cloudy atmosphere
+
 	float albedo;                    // Planet albedo
 	Mat4d rotLocalToParent;
 	float axisRotation;              // Rotation angle of the Planet on it's axis
