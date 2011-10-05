@@ -148,6 +148,8 @@ Planet::Planet(const QString& englishName,
 			   Vec3f color,
 			   Vec3f cloudColor,
 			   float cloudDensity,
+			   float cloudScale,
+			   float cloudSharpness,
 			   float albedo,
 			   const QString& atexMapName,
 			   const QString& anormalMapName,
@@ -160,7 +162,7 @@ Planet::Planet(const QString& englishName,
 	: englishName(englishName),
 	  flagLighting(flagLighting),
 	  radius(radius), oneMinusOblateness(1.0-oblateness),
-	  color(color), cloudColor(cloudColor), cloudDensity(cloudDensity), albedo(albedo), axisRotation(0.), rings(NULL),
+	  color(color), cloudColor(cloudColor), cloudDensity(cloudDensity), cloudScale(cloudScale), cloudSharpness(cloudSharpness), albedo(albedo), axisRotation(0.), rings(NULL),
 	  sphereScale(1.f),
 	  lastJD(J2000),
 	  coordFunc(coordFunc),
@@ -911,6 +913,18 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 					ssm->nMapShader->setUniform(texLocation, 0);
 					int nMapLocation = ssm->nMapShader->uniformLocation("nmap");
 					ssm->nMapShader->setUniform(nMapLocation,1);
+
+					if (!(cloudColor && cloudDensity && cloudSharpness && cloudScale)) {
+					        cloudColor = Vec3f(0.0, 0.0, 0.0);
+					        cloudDensity = 0;
+					        cloudSharpness = 0;
+					        cloudScale = 0;
+					}
+			  /*      int cColorLocation = ssm->nMapShader->uniformLocation("ccolor");
+			        ssm->nMapShader->setUniform(cColorLocation, ccloudColor[0], ccloudColor[1], ccloudColor[2]);
+			        int cDensityLocation = ssm->nMapShader->uniformLocation("cdensity");
+			        ssm->nMapShader->setUniform(cDensityLocation, cloudDensity);
+*/
 					painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
 					//useShader(0);
 					glDisable(GL_TEXTURE_2D);
