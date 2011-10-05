@@ -119,6 +119,8 @@ public:
 			Vec3f color,
 			Vec3f cloudColor,
 			float cloudDensity,
+			float cloudScale,
+			float cloudSharpness,
 			float albedo,
 			const QString& texMapName,
 			const QString& normalMapName,
@@ -293,6 +295,8 @@ protected:
 
 	Vec3f cloudColor;                // main cloud color
 	float cloudDensity;              // how cloudy atmosphere
+	float cloudScale;                // how much planet surface the cloud cover
+	float cloudSharpness;            // how sharp clouds - for fading effect
 
 	float albedo;                    // Planet albedo
 	Mat4d rotLocalToParent;
