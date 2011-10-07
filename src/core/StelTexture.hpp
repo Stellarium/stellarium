@@ -114,6 +114,7 @@ public:
 	//! This function uses openGL routines and must be called in the main thread
 	//! @return false if an error occured
 	bool glLoad();
+	void setImage(QImage* img);
 
 signals:
 	//! Emitted when the texture is ready to be bind(), i.e. when downloaded, imageLoading and	glLoading is over
