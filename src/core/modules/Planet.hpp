@@ -303,6 +303,7 @@ protected:
 	float axisRotation;              // Rotation angle of the Planet on it's axis
 	StelTextureSP texMap;            // Planet map texture
 	StelTextureSP normalMap;         // Planet normal map texture
+
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
 					 // it is used for sorting while drawing
