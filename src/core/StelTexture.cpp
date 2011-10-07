@@ -98,6 +98,10 @@ void ImageLoader::directLoad() {
 	emit finished(image);
 }
 
+void StelTexture::setImage(QImage* img)
+{
+        qImage = *img;
+}
 
 StelTexture::StelTexture() : loader(NULL), downloaded(false), isLoadingImage(false),
 				   errorOccured(false), id(0), avgLuminance(-1.f)
