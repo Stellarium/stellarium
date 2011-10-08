@@ -119,7 +119,7 @@ void Supernovae::init()
 	}
 
 	// If the json file does not already exist, create it from the resource in the Qt resource
-	if(!QFileInfo(sneJsonPath).exists())
+	if(QFileInfo(sneJsonPath).exists())
 	{
 		if (getJsonFileVersion() != PLUGIN_VERSION)
 		{
