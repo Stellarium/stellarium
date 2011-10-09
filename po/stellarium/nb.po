@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-19 20:07+0700\n"
-"PO-Revision-Date: 2011-08-20 16:31+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2011-10-08 23:34+0000\n"
+"Last-Translator: Odin <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-20 04:50+0000\n"
-"X-Generator: Launchpad (build 13980)\n"
+"X-Launchpad-Export-Date: 2011-10-09 05:16+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -26,7 +26,7 @@ msgstr "Meridian"
 
 #: src/core/modules/GridLinesMgr.cpp:529
 msgid "Ecliptic"
-msgstr "Ekliptikken"
+msgstr "Ekliptisk"
 
 #: src/core/modules/GridLinesMgr.cpp:533
 msgid "Equator"
@@ -109,12 +109,12 @@ msgstr "Absolutt magnitude: %1"
 #: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr "Ekliptisk geosentrisk (d.d.): %1/%2"
+msgstr "Ekliptisk geosentrisk (dato): %1/%2"
 
 #: src/core/modules/Planet.cpp:137
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr "Aksehelning (d.d.): %1"
+msgstr "Aksehelning (dato): %1"
 
 #: src/core/modules/Planet.cpp:143
 #, no-c-format, qt-format
@@ -268,7 +268,7 @@ msgstr "RA/DE (J2000): %1/%2"
 #: src/core/StelObject.cpp:86
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr "RA/DE (d.d.): %1/%2"
+msgstr "RA/DE (dato): %1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:97
 #, qt-format
@@ -343,7 +343,7 @@ msgid ""
 "Magnitude range: %3 - %4"
 msgstr ""
 "Nedlastingsstørrelse: %1MB\n"
-"Antall stjerner: %2 Million\n"
+"Antall stjerner: %2 Millioner\n"
 "Magnitudeområde: %3 - %4"
 
 #: src/gui/ConfigurationDialog.cpp:686
@@ -400,7 +400,7 @@ msgstr "Page Up/Down"
 
 #: src/gui/HelpDialog.cpp:55
 msgid "CTRL + Up/Down"
-msgstr "Ctrl + Pil opp/ned"
+msgstr "Ctrl + Pil opp/Pil ned"
 
 #: src/gui/HelpDialog.cpp:56
 msgid "Left click"
@@ -2116,11 +2116,11 @@ msgstr "Skjuler musepekeren ved inaktivitet"
 
 #: src/ui_configurationDialog.h:809
 msgid "Mouse cursor timeout (seconds):"
-msgstr "Skjuling av musepeker (sekunder):"
+msgstr "Skjul musepekeren (sekunder)"
 
 #: src/ui_configurationDialog.h:811
 msgid "Toggle vertical and horizontal image flip buttons."
-msgstr "Vis eller skjul vertikale og horisontale bildespeilvendingsknapper."
+msgstr "Vis eller skjul vertikal og horisontal bildespeilvendings-knapper"
 
 #: src/ui_configurationDialog.h:813
 msgid "Show flip buttons"
@@ -2220,7 +2220,7 @@ msgstr "Prøv på nytt"
 
 #: src/ui_configurationDialog.h:851
 msgid "Stop the download. You can always restart it later"
-msgstr "Stopp nedlastingen. Du kan alltid starte den på nytt senere"
+msgstr "Stopp nedlastingen. Du kan alltids starte den på nytt senere"
 
 #: src/ui_configurationDialog.h:853
 msgid "Cancel"
@@ -2244,11 +2244,11 @@ msgstr "Last ved oppstart"
 
 #: src/ui_configurationDialog.h:867
 msgid "configure"
-msgstr "still inn"
+msgstr "konfigurer"
 
 #: src/ui_configurationDialog.h:872
 msgid "Main"
-msgstr "Generelt"
+msgstr "Hoved"
 
 #: src/ui_configurationDialog.h:874
 msgid "Navigation"
@@ -2264,7 +2264,7 @@ msgstr "Skript"
 
 #: src/ui_configurationDialog.h:880
 msgid "Plugins"
-msgstr "Prog.tillegg"
+msgstr "Programtillegg"
 
 #: src/ui_addRemoveLandscapesDialog.h:266
 msgid "Add/Remove Landscapes"
@@ -2320,21 +2320,21 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
-"Ekstinksjon er svekkelsen av stjerners lysstyrke grunnet Jordas atmosfære. "
-"Den er gitt i mag/luftmasse, hvor luftmasse er antallet atmosfærer lys må "
-"passere. (senit: 1; horisont: omtrent 40)"
+"Forurenselse er svekkelsen av stjerners lysstyrke grunnet jorden's "
+"atmosfære. Den er gitt i styrke/luftmasse, hvor luftmasse er antallet "
+"atmosfærer lys må passere. (senit: 1; horisont: ca 40)"
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
-msgstr "Ekstinksjonskoeffisient:"
+msgstr "Forurenselse-koeffisient"
 
 #: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
-"Bruk omtrent 0,12 for ypperlige fjelltopper, 0,2 for gode landlige landskap, "
-"0,35 for mørke forhold."
+"Bruk ca 0,12 for ypperlige fjelltopper, 0,2 for gode landlige landskap, 0,35 "
+"for mørke forhold."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -2342,7 +2342,7 @@ msgstr "Vinkelmål"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
-msgstr "Tilbyr en vinkelmåler"
+msgstr "Gir ett vinkel måleverktøy"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:121
 msgid "Angle measure"
@@ -2382,7 +2382,7 @@ msgstr "Okularvisning"
 
 #: plugins/Oculars/src/Oculars.cpp:965
 msgid "Oculars popup menu"
-msgstr "Oppsprettsmeny for okularer"
+msgstr "Popup-meny for okularer"
 
 #: plugins/Satellites/src/Satellites.cpp:67
 msgid "Satellites"
@@ -2394,7 +2394,7 @@ msgid ""
 "TLE data"
 msgstr ""
 "Forutsigelse av posisjoner til kunstige satellitter i jordbane basert på "
-"NORAD TLE-data"
+"NORAD's TLE-data"
 
 #: plugins/Satellites/src/Satellites.cpp:125
 msgid "Satellites configuration window"
@@ -2436,7 +2436,7 @@ msgstr "Beveg teleskop #%1 til valgte objekt"
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:162
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
-msgstr "Beveg teleskop #%1 til punktet som nå er i skjermens senter"
+msgstr "Flytt teleskop #%1 til det punktet som nå er i midten av skjermen"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:173
 msgid "Move a telescope to a given set of coordinates"
@@ -2458,7 +2458,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:78
 msgid "Text User Interface"
-msgstr "Tekst-brukergrensesnitt"
+msgstr "Tekst brukergrensesnitt"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:81
 msgid ""
@@ -2470,7 +2470,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
-msgstr "Solsystem-redigering"
+msgstr "Solsystem redigering"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:59
 msgid ""
@@ -2478,9 +2478,9 @@ msgid ""
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
 msgstr ""
-"En brukerflate for å legge til asteroider og kometer i Stellarium. Den kan "
-"laste ned objektlister fra nettstedet til Minor Planet Center og utføre søk "
-"i dets nettbaserte database. Fremdeles i utvikling."
+"Et grensesnitt for å legge til asteroider og kometer til Stellarium. Den kan "
+"laste ned objekt lister fra Minor Planet Center's nettside og utføre søk i "
+"dens online database. Fortsatt under utvikling."
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical supernovae"
@@ -2502,6 +2502,10 @@ msgid ""
 "August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 "
 "September)"
 msgstr ""
+"SN 185A (7 Desember), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
+"Juli), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 Oktober), SN "
+"1680A (15 August), SN 1885A (17 August), SN 1895B (5 Juli), SN 1937C (21 "
+"August), SN 1972E (8 Mai), SN 1987A (24 Februar) og SN 2011FE (13 September)"
 
 #: plugins/Supernovae/src/Supernova.cpp:106
 #, qt-format
@@ -2510,14 +2514,3 @@ msgstr "Type: %1"
 
 #~ msgid "Form"
 #~ msgstr "Format"
-
-#~ msgid ""
-#~ "SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
-#~ "July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
-#~ "1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
-#~ "August), SN 1972E (8 May) and SN 1987A (24 February)"
-#~ msgstr ""
-#~ "SN 185A (7. desember), SN 386A (24. april), SN 1006A (29. april), SN 1054A "
-#~ "(3. juli), SN 1181A (4. august), SN 1572A (5. november), SN 1604A (8. "
-#~ "oktober), SN 1680A (15. august), SN 1885A (17. august), SN 1895B (5. juli), "
-#~ "SN 1937C (21. august), SN 1972E (8. mai) og SN 1987A (24. februar)"
