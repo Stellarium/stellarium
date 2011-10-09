@@ -937,7 +937,8 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
         {
             return;
         }
-        painter->enableTexture2d(true);
+       // painter->enableTexture2d(true);
+       glEnable(GL_TEXTURE_2D);
     }
     glDisable(GL_BLEND);
     glEnable(GL_CULL_FACE);
@@ -966,19 +967,15 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 				}
 				else
 				{
-					ssm->nMapShader->use();
-					int texLocation = ssm->nMapShader->uniformLocation("tex");
-					ssm->nMapShader->setUniform(texLocation, 0);
-					int nMapLocation = ssm->nMapShader->uniformLocation("nmap");
-					ssm->nMapShader->setUniform(nMapLocation, 1);
-
 					if (!permMap) {
 				        permMap = createPermTexture();
 					}
+					Q_ASSERT(permMap != 0);
 
-                    glActiveTexture(GL_TEXTURE3);
+                    glActiveTexture(GL_TEXTURE2);
                     glEnable(GL_TEXTURE_2D);
                     glBindTexture(GL_TEXTURE_2D, permMap);
+
 					if (!(cloudColor && cloudDensity && cloudSharpness && cloudScale)) {
 					        cloudColor = Vec3f(0.0, 0.0, 0.0);
 					        cloudDensity = 0;
@@ -995,13 +992,27 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 			        int cSharpLocation = ssm->nMapShader->uniformLocation("csharp");
 			        ssm->nMapShader->setUniform(cSharpLocation, cloudSharpness);
 
+					ssm->nMapShader->use();
+					int texLocation = ssm->nMapShader->uniformLocation("tex");
+					ssm->nMapShader->setUniform(texLocation, 0);
+					int nMapLocation = ssm->nMapShader->uniformLocation("nmap");
+					ssm->nMapShader->setUniform(nMapLocation, 1);
+
 			        int permTexLocation = ssm->nMapShader->uniformLocation("permap");
 			        ssm->nMapShader->setUniform(permTexLocation, 2);
+
+			        float pixw = 1.0 / 256;
+			        int pwLocation = ssm->nMapShader->uniformLocation("pixw");
+			        ssm->nMapShader->setUniform(pixw, pwLocation);
+
+			        float halfpixw = 0.5 / 256;
+					int hpwLocation = ssm->nMapShader->uniformLocation("halfpixw");
+					ssm->nMapShader->setUniform(halfpixw, hpwLocation);
 
 					painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
 					//useShader(0);
 					glDisable(GL_TEXTURE_2D);
-					glActiveTexture(GL_TEXTURE2);
+					glActiveTexture(GL_TEXTURE1);
 					glDisable(GL_TEXTURE_2D);
 				}
 			}
@@ -1020,7 +1031,8 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 
     glActiveTexture(GL_TEXTURE0);
     if (texMap) {
-            glDisable(GL_TEXTURE_2D);
+       glDisable(GL_TEXTURE_2D);
+      //   painter->enableTexture2d(false);
     }
 
 }
