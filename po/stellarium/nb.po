@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-19 20:07+0700\n"
-"PO-Revision-Date: 2011-10-08 23:34+0000\n"
+"PO-Revision-Date: 2011-10-09 20:09+0000\n"
 "Last-Translator: Odin <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-09 05:16+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
+"X-Launchpad-Export-Date: 2011-10-10 05:10+0000\n"
+"X-Generator: Launchpad (build 14123)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -383,7 +383,7 @@ msgid ""
 "File is corrupted."
 msgstr ""
 "Feil ved nedlasting av %1:\n"
-"Filen er skadet."
+"Filen er skadet!"
 
 #: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:286
 #: src/gui/StelGuiItems.cpp:656
@@ -523,7 +523,7 @@ msgstr "Utviklere"
 #: src/gui/HelpDialog.cpp:295
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
-msgstr "Prosjektkoordinator og hovedutvikler: %1"
+msgstr "Prosjekt-koordinator og hovedutvikler: %1"
 
 #: src/gui/HelpDialog.cpp:296
 #, qt-format
@@ -552,19 +552,19 @@ msgstr "Visningsalternativer"
 
 #: src/gui/StelGui.cpp:99
 msgid "Constellation lines"
-msgstr "Stjernebildelinjer"
+msgstr "Stjernebilde linjer"
 
 #: src/gui/StelGui.cpp:100
 msgid "Constellation art"
-msgstr "Stjernebildekunst"
+msgstr "Stjernebilde grafikk"
 
 #: src/gui/StelGui.cpp:101
 msgid "Constellation labels"
-msgstr "Stjernebildenavn"
+msgstr "Stjernebilde navn"
 
 #: src/gui/StelGui.cpp:102
 msgid "Constellation boundaries"
-msgstr "Stjernebildegrenser"
+msgstr "Stjernebilde grenser"
 
 #: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1103
 msgid "Azimuthal grid"
@@ -672,11 +672,11 @@ msgstr "Søk"
 
 #: src/gui/StelGui.cpp:134
 msgid "Sky and viewing options window"
-msgstr "Himmel- og visningsalternativer"
+msgstr "Himmel og visningsalternativer"
 
 #: src/gui/StelGui.cpp:135
 msgid "Date/time window"
-msgstr "Dato/tid"
+msgstr "Dato/Klokkeslett"
 
 #: src/gui/StelGui.cpp:136
 msgid "Location window"
@@ -688,7 +688,7 @@ msgstr "Skript-konsollvindu"
 
 #: src/gui/StelGui.cpp:141 src/ui_dateTimeDialogGui.h:294
 msgid "Date and Time"
-msgstr "Dato og tid"
+msgstr "Dato og klokkeslett"
 
 #: src/gui/StelGui.cpp:145
 msgid "Decrease time speed"
@@ -712,7 +712,7 @@ msgstr "Øk tidshastigheten (litt)"
 
 #: src/gui/StelGui.cpp:150
 msgid "Set time rate to zero"
-msgstr "Sett tidshastighet til null"
+msgstr "Sett tidshastighet til null (pause)"
 
 #: src/gui/StelGui.cpp:151
 msgid "Set time to now"
@@ -792,11 +792,11 @@ msgstr "Lagre skjermbilde"
 
 #: src/gui/StelGui.cpp:176
 msgid "Auto hide horizontal button bar"
-msgstr "Skjul horisontal knappe-linje automatisk"
+msgstr "Skjul den horisontale knappe-linjen automatisk"
 
 #: src/gui/StelGui.cpp:177
 msgid "Auto hide vertical button bar"
-msgstr "Skjul vertikal knappe-linje automatisk"
+msgstr "Skjul den vertikale knappe-linje automatisk"
 
 #: src/gui/StelGui.cpp:178
 msgid "Toggle visibility of GUI"
@@ -1433,7 +1433,7 @@ msgstr "Maksimum magnitude for å bli påskrevet: "
 
 #: src/translations.h:186
 msgid "Twinkling: "
-msgstr "Funkling: "
+msgstr "Blinking: "
 
 #: src/translations.h:187
 msgid "Limiting Magnitude: "
@@ -1441,15 +1441,15 @@ msgstr "Grensemagnitude: "
 
 #: src/translations.h:189
 msgid "Constellation Lines"
-msgstr "Stjernebildelinjer"
+msgstr "Stjernebilde linjer"
 
 #: src/translations.h:190
 msgid "Constellation Names"
-msgstr "Stjernebildenavn"
+msgstr "Stjernebilde navn"
 
 #: src/translations.h:191
 msgid "Constellation Art Intensity"
-msgstr "Stjernebildekunstens intensitet"
+msgstr "Stjernebilde-grafikkens intensitet"
 
 #: src/translations.h:192
 msgid "Constellation Boundaries"
@@ -1857,11 +1857,11 @@ msgstr "Lysforurensing: "
 
 #: src/ui_viewDialog.h:1085
 msgid "pressure, temperature, extinction coefficient"
-msgstr "trykk, temperatur, ekstinksjonskoeffisient"
+msgstr "lufttrykk, temperatur, forurensnings-koeffisient"
 
 #: src/ui_viewDialog.h:1087
 msgid "Refraction/Extinction settings..."
-msgstr "Still inn refraksjon/ekstinksjon"
+msgstr "Brytning/Forurensnings-instillinger"
 
 #: src/ui_viewDialog.h:1088
 msgid "Labels and Markers"
@@ -1925,7 +1925,7 @@ msgstr "Vis kunst"
 
 #: src/ui_viewDialog.h:1114
 msgid "Art brightness: "
-msgstr "Lysstyrke til stjernebildekunst: "
+msgstr "Grafikkens lysstyrke "
 
 #: src/ui_viewDialog.h:1115
 msgid "Projection"
@@ -2072,11 +2072,11 @@ msgstr "Aktiver musenavigering"
 
 #: src/ui_configurationDialog.h:791
 msgid "Startup date and time"
-msgstr "Dato og tid ved oppstart"
+msgstr "Dato og klokkeslett ved oppstart"
 
 #: src/ui_configurationDialog.h:793
 msgid "Starts Stellarium at system clock date and time"
-msgstr "Start Stellarium med systemets dato og tid"
+msgstr "Start Stellarium med systemets dato og klokkeslett"
 
 #: src/ui_configurationDialog.h:795
 msgid "System date and time"
@@ -2124,7 +2124,7 @@ msgstr "Vis eller skjul vertikal og horisontal bildespeilvendings-knapper"
 
 #: src/ui_configurationDialog.h:813
 msgid "Show flip buttons"
-msgstr "Vis speilvendingsknapper"
+msgstr "Vis speilvendings-knapper"
 
 #: src/ui_configurationDialog.h:814
 msgid "Planetarium options"
@@ -2148,7 +2148,7 @@ msgstr "Juster påskrifter etter horisonten"
 
 #: src/ui_configurationDialog.h:822
 msgid "Gravity labels"
-msgstr "Gravitasjonspåskrifter"
+msgstr "Gravitasjons-påskrifter"
 
 #: src/ui_configurationDialog.h:824
 msgid ""
@@ -2304,11 +2304,11 @@ msgstr "Atmosfæredetaljer"
 
 #: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
-msgstr "Refraksjons-innstillinger"
+msgstr "Brytnings-innstillinger"
 
 #: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
-msgstr "Trykk (mbar):"
+msgstr "Lufttrykk (mbar)"
 
 #: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
@@ -2322,11 +2322,11 @@ msgid ""
 msgstr ""
 "Forurenselse er svekkelsen av stjerners lysstyrke grunnet jorden's "
 "atmosfære. Den er gitt i styrke/luftmasse, hvor luftmasse er antallet "
-"atmosfærer lys må passere. (senit: 1; horisont: ca 40)"
+"atmosfærer lyset må trenge gjennom (senit: 1 - horisont: ca 40)."
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
-msgstr "Forurenselse-koeffisient"
+msgstr "Forurensnings-koeffisient"
 
 #: src/ui_AtmosphereDialog.h:180
 msgid ""
@@ -2342,7 +2342,7 @@ msgstr "Vinkelmål"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
-msgstr "Gir ett vinkel måleverktøy"
+msgstr "Dette er ett måleverktøy for vinkler"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:121
 msgid "Angle measure"
@@ -2354,7 +2354,7 @@ msgstr "Vinkelmål"
 #: plugins/Oculars/src/Oculars.cpp:931 plugins/Oculars/src/Oculars.cpp:945
 #: plugins/Satellites/src/Satellites.cpp:123
 msgid "Plugin Key Bindings"
-msgstr "Programtillegg tastesnarveier"
+msgstr "Tastesnarveier for Programtillegg"
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
@@ -2418,7 +2418,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:150
 msgid "Telescope Control"
-msgstr "Teleskopkontroll"
+msgstr "Teleskop-kontroll"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 msgid ""
@@ -2426,7 +2426,8 @@ msgid ""
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
 "Dette programtillegget gjør det mulig for Stellarium å sende \"styre\"-"
-"kommandoer til et teleskop ved datamaskin-montering (et \"GoTo\" teleskop)."
+"kommandoer til et teleskop som er tilkoblet en datamaskin (et såkalt "
+"\"GoTo\" teleskop)."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:155
 #, qt-format
@@ -2440,7 +2441,7 @@ msgstr "Flytt teleskop #%1 til det punktet som nå er i midten av skjermen"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:173
 msgid "Move a telescope to a given set of coordinates"
-msgstr "Beveg et teleskop til et gitt sett av koordinater"
+msgstr "Flytt et teleskop til et gitt sett av koordinater"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -2491,8 +2492,8 @@ msgid ""
 "The plugin for visualization of some historical supernovae, brighter 10 "
 "magnitude"
 msgstr ""
-"Programtillegget for visualisering av noen historiske supernovaer, lysere "
-"enn magnitude 10"
+"Programtillegg for visualisering av noen historiske supernovaer, som er "
+"lysere enn magnitude 10"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
