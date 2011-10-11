@@ -910,6 +910,10 @@ void Oculars::incrementTelescopeIndex()
 void Oculars::rotateCCD(QString amount)
 {
 	ccdRotationAngle += amount.toInt();
+	if (ccdRotationAngle >= 360)
+		ccdRotationAngle -= 360;
+	if (ccdRotationAngle <= -360)
+		ccdRotationAngle += 360;
 }
 
 void Oculars::selectCCDAtIndex(QString indexString)
