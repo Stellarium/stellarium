@@ -100,9 +100,19 @@ private:
 	QGraphicsTextItem* fieldOcularAfov;
 	QGraphicsTextItem* fieldCcdName;
 	QGraphicsTextItem* fieldCcdDimensions;
+	QGraphicsTextItem* fieldCcdRotation;
 	QGraphicsTextItem* fieldTelescopeName;
 	QGraphicsTextItem* fieldMagnification;
 	QGraphicsTextItem* fieldFov;
+
+	//Sensor frame rotation controls
+	StelButton* rotateCcdMinus15Button;
+	StelButton* rotateCcdMinus5Button;
+	StelButton* rotateCcdMinus1Button;
+	StelButton* resetCcdRotationButton;
+	StelButton* rotateCcdPlus1Button;
+	StelButton* rotateCcdPlus5Button;
+	StelButton* rotateCcdPlus15Button;
 
 	//! Sets the visibility of the ocular name label and the associated buttons.
 	void setOcularControlsVisible(bool show);
@@ -115,6 +125,13 @@ private:
 	void setControlsFont(const QFont& font);
 	//! Sets the night mode flag on all StelButton-s.
 	void setButtonsNightMode(bool nightMode);
+
+	static QPixmap createPixmapFromText(const QString& text,
+	                                    int width,
+	                                    int height,
+	                                    const QFont& font,
+	                                    const QColor& textColor,
+	                                    const QColor& backgroundColor = QColor(0,0,0,0));
 };
 
 #endif // OCULARSGUIPANEL_HPP
