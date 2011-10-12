@@ -726,6 +726,10 @@ void OcularsGuiPanel::updateTelescopeControls()
 	}
 	else
 	{
+		prevTelescopeButton->setVisible(true);
+		nextTelescopeButton->setVisible(true);
+		fieldTelescopeName->setVisible(true);
+
 		fieldMagnification->setVisible(false);
 		fieldFov->setVisible(false);
 	}
