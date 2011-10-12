@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-19 20:07+0700\n"
-"PO-Revision-Date: 2011-10-09 20:09+0000\n"
+"PO-Revision-Date: 2011-10-11 21:08+0000\n"
 "Last-Translator: Odin <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-10 05:10+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"X-Launchpad-Export-Date: 2011-10-12 04:38+0000\n"
+"X-Generator: Launchpad (build 14124)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -26,7 +26,7 @@ msgstr "Meridian"
 
 #: src/core/modules/GridLinesMgr.cpp:529
 msgid "Ecliptic"
-msgstr "Ekliptisk"
+msgstr "Ekliptikken"
 
 #: src/core/modules/GridLinesMgr.cpp:533
 msgid "Equator"
@@ -109,12 +109,12 @@ msgstr "Absolutt magnitude: %1"
 #: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr "Ekliptisk geosentrisk (dato): %1/%2"
+msgstr "Ekliptisk geosentrisk (d.d.): %1/%2"
 
 #: src/core/modules/Planet.cpp:137
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr "Aksehelning (dato): %1"
+msgstr "Aksehelning (d.d.): %1"
 
 #: src/core/modules/Planet.cpp:143
 #, no-c-format, qt-format
@@ -268,7 +268,7 @@ msgstr "RA/DE (J2000): %1/%2"
 #: src/core/StelObject.cpp:86
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr "RA/DE (dato): %1/%2"
+msgstr "RA/DE (d.d.): %1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:97
 #, qt-format
@@ -424,7 +424,7 @@ msgstr "Panoramavisning av himmelen"
 
 #: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
 msgid "Zoom in/out"
-msgstr "Zoom inn/ut"
+msgstr "Forstørre/forminske"
 
 #: src/gui/HelpDialog.cpp:65
 msgid "Select object"
@@ -523,7 +523,7 @@ msgstr "Utviklere"
 #: src/gui/HelpDialog.cpp:295
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
-msgstr "Prosjekt-koordinator og hovedutvikler: %1"
+msgstr "Prosjektkoordinator og hovedutvikler: %1"
 
 #: src/gui/HelpDialog.cpp:296
 #, qt-format
@@ -552,19 +552,19 @@ msgstr "Visningsalternativer"
 
 #: src/gui/StelGui.cpp:99
 msgid "Constellation lines"
-msgstr "Stjernebilde linjer"
+msgstr "Stjernebildelinjer"
 
 #: src/gui/StelGui.cpp:100
 msgid "Constellation art"
-msgstr "Stjernebilde grafikk"
+msgstr "Stjernebildekunst"
 
 #: src/gui/StelGui.cpp:101
 msgid "Constellation labels"
-msgstr "Stjernebilde navn"
+msgstr "Stjernebildenavn"
 
 #: src/gui/StelGui.cpp:102
 msgid "Constellation boundaries"
-msgstr "Stjernebilde grenser"
+msgstr "Stjernebildegrenser"
 
 #: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1103
 msgid "Azimuthal grid"
@@ -672,7 +672,7 @@ msgstr "Søk"
 
 #: src/gui/StelGui.cpp:134
 msgid "Sky and viewing options window"
-msgstr "Himmel og visningsalternativer"
+msgstr "Himmel- og visningsalternativer"
 
 #: src/gui/StelGui.cpp:135
 msgid "Date/time window"
@@ -712,7 +712,7 @@ msgstr "Øk tidshastigheten (litt)"
 
 #: src/gui/StelGui.cpp:150
 msgid "Set time rate to zero"
-msgstr "Sett tidshastighet til null (pause)"
+msgstr "Sett tidshastighet til null"
 
 #: src/gui/StelGui.cpp:151
 msgid "Set time to now"
@@ -768,11 +768,11 @@ msgstr "Følg objekt"
 
 #: src/gui/StelGui.cpp:166
 msgid "Zoom in on selected object"
-msgstr "Zoom inn på valgt objekt"
+msgstr "Forstørre det valgte objektet"
 
 #: src/gui/StelGui.cpp:167
 msgid "Zoom out"
-msgstr "Zoom ut"
+msgstr "Forminske"
 
 #: src/gui/StelGui.cpp:168
 msgid "Set home planet to selected planet"
@@ -930,7 +930,7 @@ msgstr "Venus"
 
 #: src/translations.h:36
 msgid "Earth"
-msgstr "Jorda"
+msgstr "Jorden"
 
 #: src/translations.h:37
 msgid "Moon"
@@ -1441,15 +1441,15 @@ msgstr "Grensemagnitude: "
 
 #: src/translations.h:189
 msgid "Constellation Lines"
-msgstr "Stjernebilde linjer"
+msgstr "Stjernebildelinjer"
 
 #: src/translations.h:190
 msgid "Constellation Names"
-msgstr "Stjernebilde navn"
+msgstr "Stjernebildenavn"
 
 #: src/translations.h:191
 msgid "Constellation Art Intensity"
-msgstr "Stjernebilde-grafikkens intensitet"
+msgstr "Stjernebildekunstens intensitet"
 
 #: src/translations.h:192
 msgid "Constellation Boundaries"
@@ -1509,7 +1509,7 @@ msgstr "Landskap: "
 
 #: src/translations.h:207
 msgid "Manual zoom: "
-msgstr "Manuell zoom: "
+msgstr "Manuell skalering "
 
 #: src/translations.h:208
 msgid "Object Sizing Rule: "
@@ -1529,7 +1529,7 @@ msgstr "Maksimum magnitude på stjernetåke for å bli påskrevet: "
 
 #: src/translations.h:212
 msgid "Zoom Duration: "
-msgstr "Trinn for zoom: "
+msgstr "Trinn for skalering "
 
 #: src/translations.h:213
 msgid "Cursor Timeout: "
@@ -1857,11 +1857,11 @@ msgstr "Lysforurensing: "
 
 #: src/ui_viewDialog.h:1085
 msgid "pressure, temperature, extinction coefficient"
-msgstr "lufttrykk, temperatur, forurensnings-koeffisient"
+msgstr "trykk, temperatur, ekstinksjonskoeffisient"
 
 #: src/ui_viewDialog.h:1087
 msgid "Refraction/Extinction settings..."
-msgstr "Brytning/Forurensnings-instillinger"
+msgstr "Still inn refraksjon/ekstinksjon"
 
 #: src/ui_viewDialog.h:1088
 msgid "Labels and Markers"
@@ -1925,7 +1925,7 @@ msgstr "Vis kunst"
 
 #: src/ui_viewDialog.h:1114
 msgid "Art brightness: "
-msgstr "Grafikkens lysstyrke "
+msgstr "Lysstyrke til stjernebildekunst: "
 
 #: src/ui_viewDialog.h:1115
 msgid "Projection"
@@ -2056,7 +2056,7 @@ msgstr "Styring"
 
 #: src/ui_configurationDialog.h:784
 msgid "Allow keyboard to pan and zoom"
-msgstr "Tillat tastaturet å panorere og zoome"
+msgstr "Tillat tastaturet å panorere og skalere"
 
 #: src/ui_configurationDialog.h:786
 msgid "Enable keyboard navigation"
@@ -2064,7 +2064,7 @@ msgstr "Aktiver tastenavigering"
 
 #: src/ui_configurationDialog.h:788
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr "Tillat mus å panorere (dra) og zoome (musehjul)"
+msgstr "Tillat mus å panorere (dra) og skalere (musehjul)"
 
 #: src/ui_configurationDialog.h:790
 msgid "Enable mouse navigation"
@@ -2116,15 +2116,15 @@ msgstr "Skjuler musepekeren ved inaktivitet"
 
 #: src/ui_configurationDialog.h:809
 msgid "Mouse cursor timeout (seconds):"
-msgstr "Skjul musepekeren (sekunder)"
+msgstr "Skjul musepekeren (sekunder):"
 
 #: src/ui_configurationDialog.h:811
 msgid "Toggle vertical and horizontal image flip buttons."
-msgstr "Vis eller skjul vertikal og horisontal bildespeilvendings-knapper"
+msgstr "Vis eller skjul vertikale og horisontale bildespeilvendingsknapper."
 
 #: src/ui_configurationDialog.h:813
 msgid "Show flip buttons"
-msgstr "Vis speilvendings-knapper"
+msgstr "Vis speilvendingsknapper"
 
 #: src/ui_configurationDialog.h:814
 msgid "Planetarium options"
@@ -2148,19 +2148,19 @@ msgstr "Juster påskrifter etter horisonten"
 
 #: src/ui_configurationDialog.h:822
 msgid "Gravity labels"
-msgstr "Gravitasjons-påskrifter"
+msgstr "Gravitasjonspåskrifter"
 
 #: src/ui_configurationDialog.h:824
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
-"Når aktivert, vil \"auto-zoom ut\" tasten også stille inn den opprinnelige "
+"Når aktivert, vil \"auto-skaler ut\" tasten også stille inn den opprinnelige "
 "visningsretningen."
 
 #: src/ui_configurationDialog.h:826
 msgid "Auto zoom out returns to initial direction of view"
-msgstr "Auto-utzooming returnerer til opprinnelig visningsretning"
+msgstr "Auto-forminsking returnerer til opprinnelig visningsretning"
 
 #: src/ui_configurationDialog.h:828
 msgid "Mask out everything outside a central circle in the main view"
@@ -2248,7 +2248,7 @@ msgstr "konfigurer"
 
 #: src/ui_configurationDialog.h:872
 msgid "Main"
-msgstr "Hoved"
+msgstr "Generelt"
 
 #: src/ui_configurationDialog.h:874
 msgid "Navigation"
@@ -2304,11 +2304,11 @@ msgstr "Atmosfæredetaljer"
 
 #: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
-msgstr "Brytnings-innstillinger"
+msgstr "Refraksjons-innstillinger"
 
 #: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
-msgstr "Lufttrykk (mbar)"
+msgstr "Trykk (mbar):"
 
 #: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
@@ -2320,21 +2320,21 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
-"Forurenselse er svekkelsen av stjerners lysstyrke grunnet jorden's "
-"atmosfære. Den er gitt i styrke/luftmasse, hvor luftmasse er antallet "
-"atmosfærer lyset må trenge gjennom (senit: 1 - horisont: ca 40)."
+"Ekstinksjon er svekkelsen av stjerners lysstyrke grunnet Jordens atmosfære. "
+"Den er gitt i mag/luftmasse, hvor luftmasse er antallet atmosfærer lyset må "
+"passere. (senit: 1; horisonten: ca. 40)"
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
-msgstr "Forurensnings-koeffisient"
+msgstr "Ekstinksjonskoeffisient:"
 
 #: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
-"Bruk ca 0,12 for ypperlige fjelltopper, 0,2 for gode landlige landskap, 0,35 "
-"for mørke forhold."
+"Bruk ca. 0,12 for ypperlige fjelltopper, 0,2 for gode landlige landskap, "
+"0,35 for mørke forhold."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -2342,7 +2342,7 @@ msgstr "Vinkelmål"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
-msgstr "Dette er ett måleverktøy for vinkler"
+msgstr "Et måleverktøy for vinkler"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:121
 msgid "Angle measure"
@@ -2382,7 +2382,7 @@ msgstr "Okularvisning"
 
 #: plugins/Oculars/src/Oculars.cpp:965
 msgid "Oculars popup menu"
-msgstr "Popup-meny for okularer"
+msgstr "Oppsprettsmeny for okularer"
 
 #: plugins/Satellites/src/Satellites.cpp:67
 msgid "Satellites"
@@ -2394,7 +2394,7 @@ msgid ""
 "TLE data"
 msgstr ""
 "Forutsigelse av posisjoner til kunstige satellitter i jordbane basert på "
-"NORAD's TLE-data"
+"NORADs TLE-data"
 
 #: plugins/Satellites/src/Satellites.cpp:125
 msgid "Satellites configuration window"
@@ -2418,7 +2418,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:150
 msgid "Telescope Control"
-msgstr "Teleskop-kontroll"
+msgstr "Teleskopkontroll"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 msgid ""
@@ -2471,7 +2471,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
-msgstr "Solsystem redigering"
+msgstr "Solsystemredigering"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:59
 msgid ""
@@ -2479,9 +2479,9 @@ msgid ""
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
 msgstr ""
-"Et grensesnitt for å legge til asteroider og kometer til Stellarium. Den kan "
-"laste ned objekt lister fra Minor Planet Center's nettside og utføre søk i "
-"dens online database. Fortsatt under utvikling."
+"Et grensesnitt for å legge til asteroider og kometer i Stellarium. Den kan "
+"laste ned objektlister fra nettstedet til Minor Planet Center og utføre søk "
+"i dets nettbaserte database. Fortsatt under utvikling."
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical supernovae"
@@ -2503,10 +2503,11 @@ msgid ""
 "August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 "
 "September)"
 msgstr ""
-"SN 185A (7 Desember), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
-"Juli), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 Oktober), SN "
-"1680A (15 August), SN 1885A (17 August), SN 1895B (5 Juli), SN 1937C (21 "
-"August), SN 1972E (8 Mai), SN 1987A (24 Februar) og SN 2011FE (13 September)"
+"SN 185A (7. desember), SN 386A (24. april), SN 1006A (29. april), SN 1054A "
+"(3. juli), SN 1181A (4. august), SN 1572A (5. november), SN 1604A (8. "
+"oktober), SN 1680A (15. august), SN 1885A (17. august), SN 1895B (5. juli), "
+"SN 1937C (21. august), SN 1972E (8. mai), SN 1987A (24. februar) og SN "
+"2011FE (13. september)"
 
 #: plugins/Supernovae/src/Supernova.cpp:106
 #, qt-format
