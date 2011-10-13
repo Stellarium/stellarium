@@ -1,0 +1,411 @@
+\documentclass[a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{a4wide}
+\usepackage{hyperref}
+\newcommand{\filename}[1]{\texttt{#1}}
+\newcommand{\cmd}[1]{\texttt{#1}}
+
+\title{Scenery3d - Walkable 3D Models in Stellarium}
+\author{Georg Zotti\thanks{\url{Georg.Zotti@univie.ac.at}, \url{http://astrosim.univie.ac.at}}}
+\begin{document}
+\maketitle
+
+\section{Introduction}
+\label{sec:Introduction}
+
+
+Have you ever wished to be able to walk through Stonehenge or other
+ancient building structures described as being constructed with astronomical
+orientation in mind, and experience such orientation in 3D?
+
+The Stellarium Scenery3d plugin
+allows you to see architectural 3D models
+embedded in a landscape combined with the excellent representation of
+a sky simulation provided by Stellarium. You can walk around, check
+for (or demonstrate) possible astronomical alignments of ancient
+architecture, see sundials and other shadow casters in action, etc.
+
+\section{Usage}
+\label{sec:Usage}
+
+
+You activate the plugin with the \emph{circular enclosure} button at screen
+bottom or by pressing [Ctrl+3]. The other button with circular
+enclosure and tool icon (or [Ctrl+Shift+3]) opens the settings
+dialog. Once loaded and displaying, you can walk around pressing
+[Ctrl] plus cursor keys. Change eye height with [Ctrl]+[PgUp]/[PgDn]
+keys. Adding [Shift] key increases speed by 10, [Alt] by 5 (pressing
+both keys multiplies by 50!). If you release [Ctrl] before the cursor
+key, animation will continue. (Press [Ctrl]+any cursor key to stop
+moving.)\footnote{Bug or feature? I (GZ) had to change keyboard
+  handling in the main program, somewhat breaking the plugin
+  concept. TBD: Discuss with the core team.}
+
+[Ctrl-K] toggles coordinate display. If you have georeferenced models
+in a true geographical coordinate grid, e.g. UTM or Gauss-Krueger, you
+will especially like this, and this makes the plugin usable for
+scientific purposes. Display shows grid name, Easting, Northing,
+Altitude of ground, and eye height above ground.
+
+Press [Ctrl+Space] to toggle shadow display. Note that currently
+textures are not displayed when shadow map is active. \footnote{ShadowMap is currently being improved by Andrei Borza/TUW.}
+
+\section{Hardware Requirements}
+\label{sec:HardwareRequirements}
+
+
+In order to work with the advanced projection models in Stellarium,
+this plugin uses a trick to create the foreground renderings: it
+renders the scene into the six planes of a cube map which are then
+drawn into the foreground. Your graphics card must be able to do this,
+i.e., it must support the OpenGL extension called
+\texttt{EXT\_framebuffer\_object}. Typical modern 3D cards (by NVidia
+or ATI/AMD) support this extension. In case your graphics hardware
+does not suppport it, it still works, but you are limited to
+perspective projection, and the program will switch to it as soon as
+you switch on, and switch back once you switch off the the Scenery3d
+plugin.
+
+You can influence rendering quality, but also speed, with 2 config
+variables in the global \filename{config.ini}, which default to these values:
+\begin{verbatim}
+[Scenery3d]
+cubemapSize                         = 1024
+shadowmapSize                       = 1024
+\end{verbatim}
+
+Larger numbers will improve image quality. On fast computers, try
+sizes of upto 4096, on slower ones maybe only 512, but always use a
+power of 2.  Use \verb|cubemapSize=0| to switch off using the framebuffer
+hardware extension, but you will be limited to perspective projection
+in this case.
+
+
+\section{Model Configuration}
+\label{sec:ModelConfiguration}
+
+
+The model format supported in Scenery3d is Wavefront .OBJ, which is
+pretty common for 3D models.  You can use several modeling programs to
+build your models. Software such as Blender, Maya, 3D Studio
+Max etc.\ can export OBJ. 
+
+A simple and cost-free modeling program is Google Sketchup, commonly
+used to create the 3D buildings seen in Google Earth. It can be used
+to create georeferenced models.  OBJ is not a native export format for
+the standard version of Google Sketchup. If you are not willing to
+afford Sketchup Pro, you have to find another way to export a textured
+OBJ model.
+
+One good exporter is available in the Kerkythea renderer project
+available at \url{http://www.kerkythea.net/joomla/}.  You need \filename{SU2KT~3.17}
+or better, and \filename{KT2OBJ~1.1.0} or better.  Deselect any selection, then
+export your model to the Kerkythea XML format with settings shown in figure~\ref{fig:KerkytheaExportSettings}.
+\begin{figure}[hb]
+  \centering
+\begin{tabular}{rl}
+Geometry&Yes\\Lights&Yes\\Clay&No\\Photomatched&Yes\\DefaultUVs&No\\Instanced&No
+\end{tabular}
+\caption{Kerkythea Export Settings}
+  \label{fig:KerkytheaExportSettings}
+\end{figure}
+
+
+%(Or, with selection enabled, make sure settings are No-Yes-Yes-No-Yes-No-No).  
+You do not have to launch Kerkythea. Then,
+use the \filename{KT2OBJ} converter to create an OBJ.  You can delete the XML
+after the conversion.  Note that some texture coordinates may not be
+exported correctly. The setting Photomatched:Yes seems now to have
+corrected this issue, esp. with distorted/manu\-ally shifted textures.
+
+(Almost) Working alternative: \filename{ObjExporter.rb} by author Honing.  Here,
+export with settings 0xxx00. This will not create a \filename{TX...} folder but
+dump all textures in the same directory as the OBJ and MTL
+files. Unfortunately, this time some material assignments seem to be
+bad. Also, it swaps Y/Z coordinates, but you can add a key to the
+config file to correct swapped axes, see below. Other exporters may
+also provide coordinates in any order of X, Y, Z -- all those can be
+properly configured.
+
+Recently, another free OBJ exporter has been made available by user TIG:
+\filename{OBJexporter.rb}. However, as of version 1.2 it still has bad texture coordinates.
+
+Yet another exporter, \filename{su2objmtl}, does also not provide good texture
+coordinates and cannot be recommended at this time.
+
+\subsection{Notes on OBJ file format limitations}
+\label{sec:OBJlimitations}
+
+The OBJ format supported is only a subset of the full OBJ format: Only
+(textured) triangle meshes are supported, i.e., only lines containing statements:  
+\cmd{mtllib}, \cmd{usemtl}, \cmd{v}, \cmd{vn}, \cmd{vt}, \cmd{f} (with three elements only!), \cmd{g}.
+Negative vertex numbers (i.e., a specification of relative positions) are not supported.
+
+A further requirement for correct illumination is that all vertices must have
+vertex normals. Sketchup models exported with the Kerkythea plugin
+should have correct normals. If you model does not provide them, you
+can add vertex normals using e.g. meshlab (\url{http://www.meshlab.org}).  
+
+Every \cmd{usemtl} statement must come after a \cmd{g} (group) statement and sets
+the material for the respective face group. If necessary, you must
+edit your OBJ file.
+
+On reasonably good hardware (tested on a notebook PC with NVidia M9800
+GTS), models up to 100.000 triangles are fluent, up to 250.000 are
+still "interactive".  If display is too slow, switch to perspective
+projection. All other projections require sixfold effort! 
+
+
+\subsection{Configuring OBJ for Scenery3d}
+\label{sec:Configuring}
+
+The walkaround in your scene can use a ground level (piece of terrain)
+on which the observer can walk. The observer eye will always stay ``eye
+height'' above ground. Currently, there is no collision detection with
+walls implemented, so you can easily walk through walls, or jump on
+high towers, if their platform or roof is exported in the ground
+layer. If your model has no explicit ground layer, walk will be on the
+highest surface of the scenery layer.  If you use the special name
+NULL as ground layer, walk will be above a zero-height level.
+
+Technically, if your model has cavities or doors, you should export
+your model twice. Once, just the ground plane, i.e. where you will
+walk. Of course, for a temple or other building, this includes its
+socket above soil, and any steps.  This plane is required to compute
+eye position above ground. Note that it is not possible to walk in
+several floors of a building, or in a multi-plane staircase. You may
+have to export several ``ground'' planes and configure several scenery
+directories for those rare cases.
+
+The second export includes all visible model parts, and will be used for
+rendering. Of course, this requires the ground plane again, but also
+all building elements, walls, roofs, etc. 
+
+If you have not done so by yourself, it is recommended to separate
+ground and buildings into Sketchup layers in order to easily switch
+the model to the right state prior to exporting.
+
+Filename recommendations: 
+\begin{verbatim}
+<Temple>.skp        Name of a Sketchup Model file. 
+                    (The "<>" brackets signal "use your own name here!")
+                    The SKP file is not used by Scenery3d.
+<Temple>.obj        Model in OBJ format. 
+<Temple>_ground.obj Ground layer, if different from Model file. 
+\end{verbatim}
+
+OBJ export may also create folders \verb|TX_<Temple>| and
+\verb|TX_<Temple>_ground|. You can delete the \verb|TX_<Temple>_ground| folder, 
+\verb|<Temple>_ground.obj| is just used to compute vertical height.
+
+Stellarium uses a directory to store additional data per-user. On Windows, this defaults to 
+\verb|C:\Documents and Settings\<username>\Application Data\Stellarium|, but you can use another directory by using the command-line argument 
+\cmd{--user-dir <USERDATA>}. We will refer to this directory.
+Put the OBJ, MTL and TX directories into a directory, \\
+\verb|<USERDATA>/Stellarium/modules/scenery3d/<Temple>|, and add a text file
+called \texttt{scenery3d.ini} (This name is fixed!) with content described as follows.
+
+% A Sketchup plugin "Write scenery3d.ini for Stellarium" will write this
+% file. Locate the directory where the .obj file(s) reside(s), and store
+% scenery3d.ini there. If you have other modelers and models, or if your
+% model is not georeferenced in Sketchup, write the file yourself and
+% use the following format.
+%
+% TBD GZ: Write this Sketchup export plugin!
+
+\begin{verbatim}
+
+[model]
+name=<Temple>                Unique ID within all models in scenery3d directory.
+                             Recommendation: use directory name.
+landscape=<landscapename>    Name of an available Stellarium landscape.
+\end{verbatim}
+This is required if the landscape file includes geographical
+coordinates and your model does not: First, the location coordinates
+of the Landscape file are used, then location coordinates given here.
+The landscape also provides the background image of your scenery. - If
+you want a zero-height (mathematical) horizon, use the provided
+landscape called \filename{Zero}.
+\begin{verbatim}
+scenery=<Temple>.obj         The complete model, including visible ground.
+ground=<Temple>_ground.obj   Optional: separate ground plane. (NULL for zero altitude.)
+description=<Description>    What you can see in this scenery, what to 
+                             look for, historical context, etc.
+author=<Your Name yourname@yourplace.com>
+copyright=<Copyright Info>
+
+obj_order=XYZ      | Use this if you have used an exporter which swaps Y/Z coordinates.
+                   | Defaults to XYZ, other options: XZY, YZX, YXZ, ZXY, ZYX
+
+
+[location]
+\end{verbatim}
+Optional section to specify geographic longitude $\lambda$, latitude
+$\varphi$, and altitude. Required if\\
+\verb|coord/convergence_angle==from_grid|, else location is inherited
+from landscape.
+\begin{verbatim}
+planet = Earth
+latitude = +48d31'30.4"      ; Required if coord/convergence_angle==from_grid
+longitude = +16d12'25.5"     ; "--"
+altitude =from_model|<int>   ; 
+\end{verbatim}
+altitude (for astronomical computations) can be computed from the
+model:  if \verb|from_model|, it is computed as $(z_{min}+z_{max})/2+\mathtt{orig\_H}$,
+i.e. from the model bounding box centre height.
+
+\begin{verbatim}
+display_fog = 0
+atmospheric_extinction_coefficient = 0.2
+atmospheric_temperature = 10.0
+atmospheric_pressure = 1013.0
+light_pollution = 1
+
+[coord]
+\end{verbatim}
+
+Entries in the \verb|[coord]| section are again optional, default to zero when not specified, but are
+required if you want to display meaningful eye coordinates in your
+survey (world) coordinate system, like UTM or Gauss-Krueger.  
+
+\begin{verbatim}
+grid_name=<string> 
+\end{verbatim}
+Name of grid coordinates, e.g. \texttt{``UTM 33 U (WGS 84)''}, \texttt{``Gauss-Krüger M34''} or \verb|``Relative to <Center>''| 
+                       This name is only displayed, there is no evaluation of its contents.
+
+\begin{verbatim}
+orig_E=<double> | (Easting)  East-West-distance to zone central meridian
+orig_N=<double> | (Northing) North distance from Equator
+orig_H=<double> | (Height)   Altitude above Mean Sea Level of model origin
+\end{verbatim}
+These entries describe the offset, in metres, of the model coordinates relative to coordinates in a geographic grid, like Gauss-Krüger.
+If you have your model vertices specified in grid coordinates, do not specify \verb|orig_...| data, 
+but please add \verb|start_...| data, below. 
+
+
+\begin{verbatim}
+convergence_angle=from_grid|<double> 
+grid_meridian=<double>|+<int>d<int>'<float>"      
+\end{verbatim}
+Typically, digital elevation models and building structures built on those are survey-grid aligned, so true
+geographical north will not coincide with grid north, the difference
+is known as meridian convergence. 
+\begin{equation}
+\gamma(\lambda, \varphi)=\arctan(\tan(\lambda-\lambda_0)\sin\varphi)
+\end{equation}
+This amount can be given in \verb|convergence_angle|
+(degrees), so that your model will be aligned with True North\footnote{%
+\url{http://en.wikipedia.org/wiki/Transverse_Mercator_projection}}.
+Central meridian $\lambda_0$ of grid zone, e.g. for UTM or Gauss-Krüger. 
+\verb|grid_meridian| is  only required to compute convergence angle if \verb|convergence_angle="from_grid"|
+
+\begin{verbatim}
+zero_ground_height=<double> 
+\end{verbatim}
+height of terrain outside \filename{ground.OBJ}, or if \verb|ground=NULL|. Allows smooth
+approach from outside.  This value is relative to the model origin, or
+typically close to zero, i.e.,  use a Z value in model coordinates, not
+world coordinates! (If you want the terrain height surrounding
+your model to be \verb|orig_H|, use 0, not the correct mean height above sea
+level!)  Defaults to minimum of height of ground level (or model, resp.)
+bounding box.
+
+\begin{verbatim}
+start_E=<double> 
+start_N=<double> 
+start_H=<double> /* only meaningful if ground==NULL, else H is derived from ground */
+start_Eye=<double> /* default: 1.65m */
+start_az_alt_fov=<az_deg>,<alt_deg>,<fov_deg> /* initial view direction and field of view.*/
+\end{verbatim}
+\verb|start...| coordinates to be set after loading the scenery. Default to center of model boundingbox. 
+
+It is advisable to use the grid coordinates of the location of the panoramic photo ("landscape") as \verb|start_..| coordinates, 
+or the correct coordinates and some carefully selected \texttt{start\_az\_alt\_fov} in case of certain view corridors (temple axes, \ldots).
+
+
+\subsection{Working with non-georeferenced OBJ files}
+\label{sec:NonGeoreferenced}
+
+
+There exists modeling software which produces nice models, but without
+concept of georeference. One spectacular example is AutoDesk PhotoFly,
+a cloud application which delivers 3D models from a bunch of photos
+uploaded via its program interface. This ``technological preview'' is
+in version 2 and free of cost as of mid-2011.
+
+The problem with these models is that you cannot assign surveyed
+coordinates to points in the model, so either you can georeference the
+models in other applications, or you must find the correct
+transformation matrix.  Importing the OBJ in Sketchup may take a long
+time for detailed photo-generated models, and the texturing may
+suffer, so you can cut the model down to the minimum necessary e.g.\ in
+Meshlab, and import just a stub required to georeference the model in
+Sketchup. 
+
+Now, how would you find the proper orientation? The easiest chance
+would be with a structure visible in the photo layer of Google
+Earth. So, start a new model and immediately "add location" from the
+Google Earth interface. Then you can import the OBJ with TIG's importer
+plugin.  If the imported model looks perfect, you may just place the
+model into the Sketchup landscape and export a complete landscape just
+like above. If not, or if you had to cut/simplify the OBJ to be able
+to import it, you can rotate/scale the OBJ (it must be grouped!). If
+you see a shadow in the photos, you may want to set the date/time of
+the photos in the scene and verify that the shadows created by
+Sketchup illuminating the model match those in the model's photo
+texture. When you are satisfied with placement/orientation, you create
+a \filename{scenery3d.ini} like above with the command
+\cmd{Plugins->ASTROSIM/Stellarium scenery3d helpers->Create scenery3d.ini}.
+
+Then, you select the OBJ group, open \cmd{Windows->Ruby Console} and call
+\cmd{Plugins->ASTROSIM/Stellarium scenery3d helpers->Export transformation
+of selected group (e.g., from PhotoFly import)}.
+
+On the Ruby console, you will find a line of numbers (the $4\times4$ transformation matrix) which you
+copy/paste into the \filename{[model]} section in \filename{scenery3d.ini}. 
+\begin{verbatim}
+obj2grid_trafo=<a11>,<a12>,<a13>,<a14>,<a21>,<a22>,<a23>,<a24>,<a31>,<a32>,<a33>,<a34>,<a41>,<a42>,<a43>,<a44>
+\end{verbatim}
+You edit the \filename{scenery3d.ini} to use your full (unmodified)
+PhotoFly model and, if you don't have a panorama, take \filename{Zero}
+landscape as (no-)background. It depends on the model if you want to
+be able to step on it, or to declare \verb|ground=NULL| for a
+constant-height ground. Run Stellarum once and adjust the
+\verb|start_N|, \verb|start_E| and \verb|zero_ground_height|.
+
+\subsubsection{Rotating OBJs with recognized survey points}
+\label{sec:RotatingOBJ}
+
+
+If you have survey points measured in a survey grid plus a photomodel
+with those points visible, you can use Meshlab to find the model
+vertex coordinates in the photo model, and some other program like
+CoordTrans in the JavaGraticule3D suite to find either the matrix
+values to enter in \filename{scenery3d.ini} or even rotate the OBJ
+points. However, this involves more math than can be described here;
+if you came that far, you likely know the required steps.  Here it
+really helps if you know how to operate automatic text processors like
+AWK.
+
+\section*{Authors and Acknowledgements}
+\label{Acknowledgments}
+
+
+Scenery3d was conceived by Georg Zotti for the Astrosim project. It
+was implemented (mostly) in 2010/2011 by Simon Parzer and Peter
+Neubauer as student work supervised by Michael Wimmer (TU
+Wien). Improvements in integration, user interaction, .ini option
+handling, OBJ/MTL loader bugfixes and georeference testing by Georg
+Zotti. Andrei Borza (again supervised by Michael Wimmer) in 2011
+further improved rendering quality and speed.
+
+This work has been created during the ASTROSIM project supported
+2008-2011 by the Austrian Science Fund (FWF) under grant number
+P~21208-G19. 
+
+
+
+
+\end{document}
