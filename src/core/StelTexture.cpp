@@ -16,6 +16,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+#include <iomanip>
+#include <QtCore/QtCore>
+#include <QtGui/QtGui>
+#include <QTextStream>
+#include <QString>
+#include <QDebug>
+#include <QObject>
+#include <QVariant>
+#include <QVarLengthArray>
+
+#include <GLee.h>
 
 #include <cstdlib>
 #include "StelTextureMgr.hpp"
@@ -148,15 +159,17 @@ void StelTexture::reportError(const QString& aerrorMessage)
 /*************************************************************************
  Bind the texture so that it can be used for openGL drawing (calls glBindTexture)
  *************************************************************************/
-bool StelTexture::bind()
+bool StelTexture::bind(int texunit)
 {
 	// qDebug() << "TEST bind" << fullPath;
 	if (id != 0)
 	{
 		// The texture is already fully loaded, just bind and return true;
-#ifdef USE_OPENGL_ES2
-		glActiveTexture(GL_TEXTURE0);
+#ifndef USE_OPENGL_ES2
+		if(GLEE_ARB_multitexture)
 #endif
+			glActiveTexture(GL_TEXTURE0 + texunit);
+
 		glBindTexture(GL_TEXTURE_2D, id);
 		return true;
 	}

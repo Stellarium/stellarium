@@ -931,15 +931,13 @@ static unsigned int createPermTexture()
 
 void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 {
-    glActiveTexture(GL_TEXTURE0);
     if (texMap)
     {
         if (!texMap->bind())
         {
             return;
         }
-       // painter->enableTexture2d(true);
-       glEnable(GL_TEXTURE_2D);
+        painter->enableTexture2d(true);
     }
     glDisable(GL_BLEND);
     glEnable(GL_CULL_FACE);
@@ -959,15 +957,14 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
     {
 			if (normalMap)
 			{
-				glActiveTexture(GL_TEXTURE1);
-				glEnable(GL_TEXTURE_2D);
-				if (!normalMap->bind())
+				if (!normalMap->bind(1))
 				{
-					glDisable(GL_TEXTURE_2D);
 					painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
 				}
 				else
 				{
+					painter->enableTexture2d(true, 1);
+
 					if (!permMap) {
 				        permMap = createPermTexture();
 					}
@@ -980,7 +977,7 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 					        cloudColor = Vec3f(0.0, 0.0, 0.0);
 					        cloudDensity = 0;
 					        cloudSharpness = 0;
-					        cloudScale = 0;
+					        cloudScale = 1;
 					}
 
 			        int cColorLocation = ssm->nMapShader->uniformLocation("ccolor");
@@ -1013,9 +1010,9 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 					painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
 
 					//useShader(0);
+					glActiveTexture(GL_TEXTURE2);
 					glDisable(GL_TEXTURE_2D);
-					glActiveTexture(GL_TEXTURE1);
-					glDisable(GL_TEXTURE_2D);
+					painter->enableTexture2d(false, 1);
 				}
 			}
 			else
@@ -1031,12 +1028,9 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
     painter->setShadeModel(StelPainter::ShadeModelFlat);
     glDisable(GL_CULL_FACE);
 
-    glActiveTexture(GL_TEXTURE0);
     if (texMap) {
-       glDisable(GL_TEXTURE_2D);
-      //   painter->enableTexture2d(false);
-    }
-
+		painter->enableTexture2d(false, 0);
+	}
 }
 
 
