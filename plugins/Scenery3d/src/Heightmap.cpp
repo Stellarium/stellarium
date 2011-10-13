@@ -35,24 +35,24 @@ Heightmap::~Heightmap()
  * The height is the highest z value of the ground model at these
  * coordinates.
  */
-float Heightmap::getHeight(float x, float y)
+float Heightmap::getHeight(const float x, const float y) const
 {
    Heightmap::GridSpace* space = getSpace(x, y);
    if (space == NULL) 
    {
-      return nullHeight;
+       return nullHeight;
    }
    else
    {
-      float h = space->getHeight(obj, x, y);
-      if (h == NO_HEIGHT)
-      {
-                        return nullHeight;
-      }
-      else
-		{
-			return h;
-      }
+       float h = space->getHeight(obj, x, y);
+       if (h == NO_HEIGHT)
+	{
+	    return nullHeight;
+	}
+	else
+	{
+	    return h;
+	}
    }
 }
 
@@ -61,20 +61,19 @@ float Heightmap::getHeight(float x, float y)
  * for intersection with the observer coords is limited to faces
  * intersecting this grid space.
  */
-float Heightmap::GridSpace::getHeight(const OBJ& obj, float x, float y)
+float Heightmap::GridSpace::getHeight(const OBJ& obj, const float x, const float y) const
 {
-	float h = NO_HEIGHT;
+    float h = NO_HEIGHT;
 
-	for (size_t i = 0; i < faces.size(); i++)
+    for (size_t i = 0; i < faces.size(); i++)
+    {
+	const OBJ::Face* face = faces[i];
+	float face_h = face_height_at(obj, face, x, y);
+	if (face_h > h)
 	{
-		const OBJ::Face* face = faces[i];
-		float face_h = face_height_at(obj, face, x, y);
-		if (face_h > h)
-		{
-			h = face_h;
-		}
+	    h = face_h;
 	}
-
+    }
    return h;
 }
 
@@ -84,54 +83,54 @@ float Heightmap::GridSpace::getHeight(const OBJ& obj, float x, float y)
  */
 void Heightmap::initGrid()
 {
-   grid = new GridSpace[GRID_LENGTH*GRID_LENGTH];
+    grid = new GridSpace[GRID_LENGTH*GRID_LENGTH];
    
-   for (int y = 0; y < GRID_LENGTH; y++)
-   for (int x = 0; x < GRID_LENGTH; x++)
-   {
-		float xmin = this->xMin + (x * (this->xMax - this->xMin)) / GRID_LENGTH;
-		float ymin = this->yMin + (y * (this->yMax - this->yMin)) / GRID_LENGTH;
-		float xmax = this->xMin + ((x+1) * (this->xMax - this->xMin)) / GRID_LENGTH;
-		float ymax = this->yMin + ((y+1) * (this->yMax - this->yMin)) / GRID_LENGTH;
+    for (int y = 0; y < GRID_LENGTH; y++)
+    for (int x = 0; x < GRID_LENGTH; x++)
+    {
+	float xmin = this->xMin + (x * (this->xMax - this->xMin)) / GRID_LENGTH;
+	float ymin = this->yMin + (y * (this->yMax - this->yMin)) / GRID_LENGTH;
+	float xmax = this->xMin + ((x+1) * (this->xMax - this->xMin)) / GRID_LENGTH;
+	float ymax = this->yMin + ((y+1) * (this->yMax - this->yMin)) / GRID_LENGTH;
       
-      FaceVector* faces = &grid[y*GRID_LENGTH + x].faces;
+	FaceVector* faces = &grid[y*GRID_LENGTH + x].faces;
       
-		for (OBJ::ModelList::const_iterator m = obj.models.begin(); m != obj.models.end(); m++)
-		{
-			for (OBJ::FaceList::const_iterator face = m->faces.begin(); face != m->faces.end(); face++)
-			{
-				if (face_in_area (&(*face), xmin, ymin, xmax, ymax))
-				{
-					faces->push_back(&(*face));
-				}
-			}
-		}
+	for (OBJ::ModelList::const_iterator m = obj.models.begin(); m != obj.models.end(); m++)
+	{
+	    for (OBJ::FaceList::const_iterator face = m->faces.begin(); face != m->faces.end(); face++)
+	    {
+		if (face_in_area (&(*face), xmin, ymin, xmax, ymax))
+		    {
+			faces->push_back(&(*face));
+		    }
+	    }
+	}
    }
 }
 
 /**
  * Returns the GridSpace which covers the area around x/y.
  */
-Heightmap::GridSpace* Heightmap::getSpace(float x, float y)
+Heightmap::GridSpace* Heightmap::getSpace(const float x, const float y) const
 {
-   int ix = (x - xMin) / (xMax - xMin) * GRID_LENGTH;
-   int iy = (y - yMin) / (yMax - yMin) * GRID_LENGTH;
+    int ix = (x - xMin) / (xMax - xMin) * GRID_LENGTH;
+    int iy = (y - yMin) / (yMax - yMin) * GRID_LENGTH;
 
-   if ((ix < 0) || (ix >= GRID_LENGTH) || (iy < 0) || (iy >= GRID_LENGTH))
-	{
-      return NULL;
-   }
-   else
-   {
-      return &grid[iy*GRID_LENGTH + ix];
-   }
+    if ((ix < 0) || (ix >= GRID_LENGTH) || (iy < 0) || (iy >= GRID_LENGTH))
+    {
+	return NULL;
+    }
+    else
+    {
+	return &grid[iy*GRID_LENGTH + ix];
+    }
 }
 
 /**
  * Returns the height of the face at the given point or -inf if
  * the coordinates are outside the bounds of the face.
  */
-float Heightmap::GridSpace::face_height_at(const OBJ& obj, const OBJ::Face* face, float x, float y)
+float Heightmap::GridSpace::face_height_at(const OBJ& obj, const OBJ::Face* face, const float x, const float y)
 {
 	Q_ASSERT(face->refs.size() == 3); // There are only triangles in our models, nothing else
 
@@ -167,7 +166,7 @@ float Heightmap::GridSpace::face_height_at(const OBJ& obj, const OBJ::Face* face
 /**
  * Returns true if the given face intersects the given area.
  */
-bool Heightmap::face_in_area (const OBJ::Face* face, float xmin, float ymin, float xmax, float ymax)
+bool Heightmap::face_in_area (const OBJ::Face* face, const float xmin, const float ymin, const float xmax, const float ymax) const
 {
    // current implementation: use face's bounding box
    float f_xmin = xmax;
@@ -176,20 +175,20 @@ bool Heightmap::face_in_area (const OBJ::Face* face, float xmin, float ymin, flo
    float f_ymax = ymin;
    
    for (OBJ::RefList::const_iterator r = face->refs.begin(); r != face->refs.end(); r++)
-	{
-		OBJ::Vertex vertex = obj.vertices[r->v];
-      if (vertex.x < f_xmin) f_xmin = vertex.x;
-      if (vertex.y < f_ymin) f_ymin = vertex.y;
-      if (vertex.x > f_xmax) f_xmax = vertex.x;
-      if (vertex.y > f_ymax) f_ymax = vertex.y;
+   {
+	OBJ::Vertex vertex = obj.vertices[r->v];
+	if (vertex.x < f_xmin) f_xmin = vertex.x;
+	if (vertex.y < f_ymin) f_ymin = vertex.y;
+	if (vertex.x > f_xmax) f_xmax = vertex.x;
+	if (vertex.y > f_ymax) f_ymax = vertex.y;
    }
    
    if ((f_xmin < xmax) && (f_ymin < ymax) && (f_xmax > xmin) && (f_ymax > ymin))
-	{
+   {
       return true;
    }
    else
-	{
+   {
       return false;
    }
 }
