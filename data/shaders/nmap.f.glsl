@@ -3,7 +3,7 @@ varying vec3 var_vdir;
 
 uniform sampler2D tex;
 uniform sampler2D nmap;
-//uniform sampler2D permap;
+uniform sampler2D permap;
 
 uniform vec4 ambient;
 uniform vec4 diffuse;
