@@ -27,7 +27,6 @@
 #include <QObject>
 #include <QVariant>
 #include <QVarLengthArray>
-//i put them to use glUseProgram(0)
 
 #include <GLee.h>
 #include "StelPainter.hpp"
@@ -2088,8 +2087,13 @@ void StelPainter::setShadeModel(ShadeModel m)
 #endif
 }
 
-void StelPainter::enableTexture2d(bool b)
+void StelPainter::enableTexture2d(bool b, int texunit)
 {
+#ifndef USE_OPENGL_ES2
+	if(GLEE_ARB_multitexture)
+#endif
+		glActiveTexture(GL_TEXTURE0 + texunit);
+
 #ifndef STELPAINTER_GL2
 	if (b)
 		glEnable(GL_TEXTURE_2D);

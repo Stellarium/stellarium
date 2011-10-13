@@ -292,7 +292,7 @@ public:
 	void setShadeModel(ShadeModel m);
 
 	//! Set whether texturing is enabled.
-	void enableTexture2d(bool b);
+	void enableTexture2d(bool b, int texunit = 0);
 
 	// Thoses methods should eventually be replaced by a single setVertexArray
 	//! use instead of glVertexPointer
