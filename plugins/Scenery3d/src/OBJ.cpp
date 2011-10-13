@@ -133,8 +133,8 @@ void OBJ::load( const char* filename, const enum vertexOrder order )
                         if (model.faces.size() > 0) {
                             models.push_back(model);
                             model = Model();
-                        }
-                        model.name = parts[1];
+			    model.name = parts[1];
+			}
                     }
                 } else if (parts[0] == "usemtl") { // use material
                     if (parts.size() > 1) {
@@ -149,10 +149,10 @@ void OBJ::load( const char* filename, const enum vertexOrder order )
                     for (unsigned int i=1; i<parts.size(); ++i) {
                         Ref ref={0, 0, 0, 0, 0};
                         vector<string> f = splitStr(parts[i], '/');
-                        if (f.size() >= 2) {
+                        if (f.size() >= 2) { // ONLY for vertices with either texture or texture and normals
                             ref.v = parseInt(f[0]) - 1;
                             ref.texture = false;
-                            if (f[1].size() > 0) {
+                            if (f[1].size() > 0) { // if string is valid
                                 ref.t = parseInt(f[1]) - 1;
                                 ref.texture = true;
                             }
@@ -177,24 +177,28 @@ void OBJ::load( const char* filename, const enum vertexOrder order )
                         mtlLib.load(path.c_str());
                         mtlLib.uploadTexturesGL();
                     }
-                }
-            }
+		} else if (line[0]=='#') {
+		    // skip comment line
+		} else {
+		    qDebug() << "Unknown .OBJ feature: " << parts[0].c_str();
+		}
+	    }
         }
         if (model.faces.size() > 0) {
             models.push_back(model);
             model = Model();
         }
         loaded = true;
-        qDebug() << vertices.size() << " vertices.";
-        qDebug() << normals.size() << " normals.";
-        qDebug() << totalFaces << " faces";
-        qDebug() << texcoords.size() << " texture coordinates.";
-        qDebug() << models.size() << " models.";
-        qDebug() << filename << " loaded.";
-        qDebug() << mtlLib.size() << " materials.";
-        qDebug() << "X: [" << minX << ", " << maxX << "] ";
-        qDebug() << "Y: [" << minY << ", " << maxY << "] ";
-        qDebug() << "Z: [" << minZ << ", " << maxZ << "]";
+	qDebug() << vertices.size() << " vertices,";
+	qDebug() << normals.size() << " normals,";
+	qDebug() << totalFaces << " faces,";
+	qDebug() << texcoords.size() << " texture coordinates,";
+	qDebug() << models.size() << " models (OBJ groups),";
+	qDebug() << mtlLib.size() << " materials.";
+	qDebug() << filename << " loaded.";
+	qDebug() << "X: [" << minX << ", " << maxX << "] ";
+	qDebug() << "Y: [" << minY << ", " << maxY << "] ";
+	qDebug() << "Z: [" << minZ << ", " << maxZ << "]";
     } else {
         qDebug() << "Couldn't open " << filename;
     }
