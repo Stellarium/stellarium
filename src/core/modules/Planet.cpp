@@ -46,6 +46,7 @@
 #include "StelPainter.hpp"
 #include "StelTranslator.hpp"
 
+
 static unsigned int permMap;
 static unsigned int createPermTexture();
 
@@ -970,7 +971,6 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 					if (!permMap) {
 				        permMap = createPermTexture();
 					}
-					Q_ASSERT(permMap != 0);
 
                     glActiveTexture(GL_TEXTURE2);
                     glEnable(GL_TEXTURE_2D);
@@ -1001,15 +1001,17 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 			        int permTexLocation = ssm->nMapShader->uniformLocation("permap");
 			        ssm->nMapShader->setUniform(permTexLocation, 2);
 
-			        float pixw = 1.0 / 256;
+			        float pixw = 1.0 / 256.0;
 			        int pwLocation = ssm->nMapShader->uniformLocation("pixw");
-			        ssm->nMapShader->setUniform(pixw, pwLocation);
+			        ssm->nMapShader->setUniform(pwLocation, pixw);
 
-			        float halfpixw = 0.5 / 256;
+
+			        float halfpixw = 0.5 / 256.0;
 					int hpwLocation = ssm->nMapShader->uniformLocation("halfpixw");
-					ssm->nMapShader->setUniform(halfpixw, hpwLocation);
+					ssm->nMapShader->setUniform(hpwLocation, halfpixw);
 
 					painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
+
 					//useShader(0);
 					glDisable(GL_TEXTURE_2D);
 					glActiveTexture(GL_TEXTURE1);
