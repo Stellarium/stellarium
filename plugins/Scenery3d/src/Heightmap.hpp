@@ -20,11 +20,11 @@ public:
 	//! @param x x-value
 	//! @param y y-value
 	//! @return z-Value at position given by x and y
-	float getHeight(float x, float y);
+	float getHeight(const float x, const float y) const;
 
         //! set/retrieve default height
         void setNullHeight(float h){nullHeight=h;}
-        float getNullHeight(){return nullHeight;}
+	float getNullHeight() const {return nullHeight;}
 
 private:
 
@@ -34,7 +34,7 @@ private:
 
 	struct GridSpace {
 		FaceVector faces;
-		float getHeight(const OBJ& obj, float x, float y);
+		float getHeight(const OBJ& obj, const float x, const float y) const;
 
 		static float face_height_at(const OBJ& obj, const OBJ::Face* face, float x, float y);
 	};
@@ -46,8 +46,8 @@ private:
         float nullHeight; // return value for areas outside grid
 
 	void initGrid();
-	GridSpace* getSpace(float x, float y);
-	bool face_in_area (const OBJ::Face* face, float xmin, float ymin, float xmax, float ymax);
+	GridSpace* getSpace(const float x, const float y) const ;
+	bool face_in_area (const OBJ::Face* face, const float xmin, const float ymin, const float xmax, const float ymax) const;
 
 };
 
