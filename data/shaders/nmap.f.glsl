@@ -39,13 +39,10 @@ void main()
 	float pn = fractalNoise(texC) * 0.5 + 0.5;
 	float cloud = cloudCurve(pn, cdensity, csharp);
 	
-	vec4 color = ambient * gl_LightModel.ambient + dcol;
-	color.x = mix(color.x, color.x, cloud);
-	color.y = mix(color.y, color.y, cloud);
-	color.z = mix(color.z, color.z, cloud);
-	color.w = cloud;
+	vec3 color = (ambient * gl_LightModel.ambient).xyz + dcol.xyz;
+	color = mix(color, ccolor, cloud);
 
-	gl_FragColor = color;
+	gl_FragColor = vec4(color, 1.0);
 }
 
 float cloudCurve(float v, float cover, float sharpness)
