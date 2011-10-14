@@ -26,6 +26,7 @@
 #include <QObject>
 #include <QVariant>
 #include <QVarLengthArray>
+#include <QTime>
 
 #include <GLee.h>
 #include "StelShader.hpp"
@@ -154,6 +155,7 @@ Planet::Planet(const QString& englishName,
 			   float cloudDensity,
 			   float cloudScale,
 			   float cloudSharpness,
+			   Vec3f cloudVel,
 			   float albedo,
 			   const QString& atexMapName,
 			   const QString& anormalMapName,
@@ -166,7 +168,7 @@ Planet::Planet(const QString& englishName,
 	: englishName(englishName),
 	  flagLighting(flagLighting),
 	  radius(radius), oneMinusOblateness(1.0-oblateness),
-	  color(color), cloudColor(cloudColor), cloudDensity(cloudDensity), cloudScale(cloudScale), cloudSharpness(cloudSharpness), albedo(albedo), axisRotation(0.), rings(NULL),
+	  color(color), cloudColor(cloudColor), cloudDensity(cloudDensity), cloudScale(cloudScale), cloudSharpness(cloudSharpness), cloudVel(cloudVel), albedo(albedo), axisRotation(0.), rings(NULL),
 	  sphereScale(1.f),
 	  lastJD(J2000),
 	  coordFunc(coordFunc),
@@ -973,39 +975,55 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
                     glEnable(GL_TEXTURE_2D);
                     glBindTexture(GL_TEXTURE_2D, permMap);
 
-					if (!(cloudColor && cloudDensity && cloudSharpness && cloudScale)) {
+					if (!(cloudColor && cloudDensity && cloudSharpness && cloudScale && cloudVel)) {
 					        cloudColor = Vec3f(0.0, 0.0, 0.0);
+					        cloudVel = Vec3f(0.0, 0.5, 0.5);
 					        cloudDensity = 0;
 					        cloudSharpness = 0;
 					        cloudScale = 1;
 					}
 
-			        int cColorLocation = ssm->nMapShader->uniformLocation("ccolor");
-			        ssm->nMapShader->setUniform(cColorLocation, cloudColor[0], cloudColor[1], cloudColor[2]);
-			        int cDensityLocation = ssm->nMapShader->uniformLocation("cdensity");
-			        ssm->nMapShader->setUniform(cDensityLocation, cloudDensity);
-			        int cScaleLocation = ssm->nMapShader->uniformLocation("cscale");
-			        ssm->nMapShader->setUniform(cScaleLocation, cloudScale);
-			        int cSharpLocation = ssm->nMapShader->uniformLocation("csharp");
-			        ssm->nMapShader->setUniform(cSharpLocation, cloudSharpness);
+					int location = -1;
+
+			        location = ssm->nMapShader->uniformLocation("ccolor");
+			        ssm->nMapShader->setUniform(location, cloudColor[0], cloudColor[1], cloudColor[2]);
+
+					location = ssm->nMapShader->uniformLocation("cdensity");
+			        ssm->nMapShader->setUniform(location, cloudDensity);
+
+					location = ssm->nMapShader->uniformLocation("cscale");
+			        ssm->nMapShader->setUniform(location, cloudScale);
+
+					location = ssm->nMapShader->uniformLocation("csharp");
+			        ssm->nMapShader->setUniform(location, cloudSharpness);
 
 					ssm->nMapShader->use();
-					int texLocation = ssm->nMapShader->uniformLocation("tex");
-					ssm->nMapShader->setUniform(texLocation, 0);
-					int nMapLocation = ssm->nMapShader->uniformLocation("nmap");
-					ssm->nMapShader->setUniform(nMapLocation, 1);
 
-			        int permTexLocation = ssm->nMapShader->uniformLocation("permap");
-			        ssm->nMapShader->setUniform(permTexLocation, 2);
+					location = ssm->nMapShader->uniformLocation("tex");
+					ssm->nMapShader->setUniform(location, 0);
+
+					location = ssm->nMapShader->uniformLocation("nmap");
+					ssm->nMapShader->setUniform(location, 1);
+
+			        location = ssm->nMapShader->uniformLocation("permap");
+			        ssm->nMapShader->setUniform(location, 2);
 
 			        float pixw = 1.0 / 256.0;
-			        int pwLocation = ssm->nMapShader->uniformLocation("pixw");
-			        ssm->nMapShader->setUniform(pwLocation, pixw);
+			        location = ssm->nMapShader->uniformLocation("pixw");
+			        ssm->nMapShader->setUniform(location, pixw);
 
 
 			        float halfpixw = 0.5 / 256.0;
-					int hpwLocation = ssm->nMapShader->uniformLocation("halfpixw");
-					ssm->nMapShader->setUniform(hpwLocation, halfpixw);
+					location = ssm->nMapShader->uniformLocation("halfpixw");
+					ssm->nMapShader->setUniform(location, halfpixw);
+
+					location = ssm->nMapShader->uniformLocation("cvel");
+					ssm->nMapShader->setUniform(location, cloudVel[0], cloudVel[1], cloudVel[2]);
+
+					QTime time;
+					float t = (float) ((float) (time.currentTime().msec()) / 1000.0);
+					location = ssm->nMapShader->uniformLocation("t");
+					ssm->nMapShader->setUniform(location, t);
 
 					painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
 
