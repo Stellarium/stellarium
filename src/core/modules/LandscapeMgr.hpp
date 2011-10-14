@@ -110,13 +110,15 @@ public slots:
 	//! Change the current landscape to the landscape with the ID specified.
 	//! @param id the ID of the new landscape
 	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found).
-	bool setCurrentLandscapeID(const QString& id);
+	//  GZ: I have added a default here to be able to set the new landscape location immediately.
+	bool setCurrentLandscapeID(const QString& id, double changeLocationDuration=1.);
 	
 	//! Get the current landscape name.
 	QString getCurrentLandscapeName() const;
 	//! Change the current landscape to the landscape with the name specified.
 	//! @param name the name of the new landscape, as found in the landscape:name key of the landscape.ini file.
-	bool setCurrentLandscapeName(const QString& name);
+	//  GZ: I have added a default here to be able to set the new landscape location immediately.
+	bool setCurrentLandscapeName(const QString& name, double changeLocationDuration=1.);
 
 	//! Get the default landscape ID.
 	const QString& getDefaultLandscapeID() const {return defaultLandscapeID;}

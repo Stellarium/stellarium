@@ -305,7 +305,7 @@ void LandscapeMgr::setStelStyle(const QString& section)
 	setColorCardinalPoints(StelUtils::strToVec3f(conf->value(section+"/cardinal_color", defaultColor).toString()));
 }
 
-bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
+bool LandscapeMgr::setCurrentLandscapeID(const QString& id, double changeLocationDuration)
 {
 	if (id.isEmpty())
 		return false;
@@ -334,9 +334,9 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 	}
 	currentLandscapeID = id;
 
-	if (getFlagLandscapeSetsLocation())
+	if ((getFlagLandscapeSetsLocation()) && (landscape->hasLocation())) // GZ: added second query to ensure only meaningful change!
 	{
-		StelApp::getInstance().getCore()->moveObserverTo(landscape->getLocation());
+		StelApp::getInstance().getCore()->moveObserverTo(landscape->getLocation(), changeLocationDuration);
 		// GZ Patch: allow change in fog, extinction, refraction parameters and light pollution
 		//QSettings* conf = StelApp::getInstance().getSettings();
 		//Q_ASSERT(conf);
@@ -377,7 +377,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 	return true;
 }
 
-bool LandscapeMgr::setCurrentLandscapeName(const QString& name)
+bool LandscapeMgr::setCurrentLandscapeName(const QString& name, double changeLocationDuration)
 {
 	if (name.isEmpty())
 		return false;
@@ -385,7 +385,7 @@ bool LandscapeMgr::setCurrentLandscapeName(const QString& name)
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
 	if (nameToDirMap.find(name)!=nameToDirMap.end())
 	{
-		return setCurrentLandscapeID(nameToDirMap[name]);
+		return setCurrentLandscapeID(nameToDirMap[name], changeLocationDuration);
 	}
 	else
 	{
