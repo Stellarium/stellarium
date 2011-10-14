@@ -120,7 +120,7 @@ void Scenery3dMgr::init()
     connect(scenery3dDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Scenery3d_window"), SLOT(setChecked(bool)));
 
 
-    // GZ: Add 2 toolbar buttons (copy/paste widely from AngleMeasure): activate, and settings.
+    // Add 2 toolbar buttons (copy/paste widely from AngleMeasure): activate, and settings.
     try
     {
         //qDebug() << "trying buttons\n";
@@ -189,9 +189,10 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
     LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
     bool landscapeSetsLocation=lmgr->getFlagLandscapeSetsLocation();
     lmgr->setFlagLandscapeSetsLocation(true);
-    lmgr->setCurrentLandscapeName(newScenery3d->getLandscapeName()); // takes a second, implicitly.
-    // Landscape and Navigator at this time has old coordinates! Else it would have been possible to
-    // delay rot_z computation up to this point and live without location section even
+    lmgr->setCurrentLandscapeName(newScenery3d->getLandscapeName(), 0.); // took a second, implicitly.
+    // Switched to immediate landscape loading: Else,
+    // Landscape and Navigator at this time have old coordinates! But it should be possible to
+    // delay rot_z computation up to this point and live without an own location section even
     // with meridian_convergence=from_grid.
     lmgr->setFlagLandscapeSetsLocation(landscapeSetsLocation); // restore
 
@@ -207,14 +208,14 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
 
     if (newScenery3d->hasLocation())
     {
-        qDebug() << "Re-Setting location to given coordinates.";
+	qDebug() << "Scenery3D: Setting location to given coordinates.";
 	StelApp::getInstance().getCore()->moveObserverTo(newScenery3d->getLocation(), 0., 0.);
     }
-    else qDebug() << "No coordinates given in scenery3d.";
+    else qDebug() << "Scenery3D: No coordinates given in scenery3d.";
 
     if (newScenery3d->hasLookat())
     {
-	qDebug() << "Scenery3dMgr: Setting orientation.";
+	qDebug() << "Scenery3D: Setting orientation.";
 	StelMovementMgr* mm=StelApp::getInstance().getCore()->getMovementMgr();
 	Vec3f lookat=newScenery3d->getLookat();
 	// This vector is (az_deg, alt_deg, fov_deg)
@@ -222,7 +223,7 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
 	StelUtils::spheToRect(lookat[0]*M_PI/180.0, lookat[1]*M_PI/180.0, v);
 	mm->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(v, StelCore::RefractionOff));
 	mm->zoomTo(lookat[2], 3.);
-    } else qDebug() << "Scenery3dMgr: Not setting orientation, no data.";
+    } else qDebug() << "Scenery3D: Not setting orientation, no data.";
 
     scenery3d = newScenery3d;
     currentScenery3dID = id;
