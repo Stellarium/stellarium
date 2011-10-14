@@ -88,12 +88,11 @@ public:
     const Vec3f& getLookat() const {return lookAt_fov; }
 
 
-    enum shadowCaster { None, Sun, Moon };
+    enum shadowCaster { None, Sun, Moon, Venus };
 
 private:
     double eyeLevel;
 
-    void drawCubeTestScene(StelCore* core);
     void drawObjModel(StelCore* core);
     void generateShadowMap(StelCore* core);
     void generateCubeMap(StelCore* core);
@@ -105,33 +104,33 @@ private:
     //! @return height at -absolutePosition, which is the current eye point.
     float groundHeight();
 
-    bool shadowsEnabled;
-    bool textEnabled;
+    bool shadowsEnabled;    // switchable value: Use shadow mapping
+    bool textEnabled;       // switchable value: display coordinates on screen
 
-    StelCore* core;
-    int cubemapSize;
+    int cubemapSize;        // configurable values, typically 512/1024/2048/4096
     int shadowmapSize;
 
-    Mat4f projectionMatrix;
-    Vec3d absolutePosition;
-    float movement_x;
+    Vec3d absolutePosition; // current eyepoint in model
+    float movement_x;       // speed values for moving around the scenery
     float movement_y;
     float movement_z;
 
+    StelCore* core;
     OBJ* objModel;
     OBJ* groundModel;
-    OBJ::vertexOrder objVertexOrder;
+    Heightmap* heightmap;
+    OBJ::vertexOrder objVertexOrder; // some OBJ files have left-handed coordinate counting or swapped axes. Allows accounting for those.
     GLuint shadowMapTexture;
+    Mat4f projectionMatrix;
     Mat4f lightViewMatrix;
     Mat4f lightProjectionMatrix;
     QGLFramebufferObject* shadowMapFbo;
     QGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
-    StelVertexArray cubePlane, cubePlaneBack,
+    StelVertexArray cubePlaneFront, cubePlaneBack,
                 cubePlaneLeft, cubePlaneRight,
                 cubePlaneTop, cubePlaneBottom;
 
     vector<OBJ::StelModel> objModelArrays;
-    Heightmap* heightmap;
 
     QString id;
     QString name;
@@ -142,15 +141,17 @@ private:
     QString modelGroundFile;
     StelLocation* location;
     Vec3f lookAt_fov; // (az_deg, alt_deg, fov_deg)
-
     Vec3d modelWorldOffset; // required for coordinate display
     QString gridName;
     double gridCentralMeridian;
-    double groundNullHeight; // Used as height value outside the model ground
+    double groundNullHeight; // Used as height value outside the model ground, or if ground=NULL
 
     // used to apply the rotation from model/grid coordinates to Stellarium coordinates.
     // In the OBJ files, X=Grid-East, Y=Grid-North, Z=height.
     Mat4d zRotateMatrix;
+    // if only a non-georeferenced OBJ can be provided, you can specify a matrix via .ini/[model]/obj_world_trafo.
+    // This will be applied to make sure that X=Grid-East, Y=Grid-North, Z=height.
+    Mat4d obj2gridMatrix;
 };
 
 #endif
