@@ -69,7 +69,9 @@ public:
 	//! Get landscape description
 	QString getDescription() const {return description;}
 
-	//! Return the associated location or NULL
+	//! returns whether landscape has location
+	bool hasLocation() const {return !(location.getID()=="");}
+	//! Return the associated location. Test with hasLocation() whether it is meaningful!
 	const StelLocation& getLocation() const {return location;}
   	//! Return default Bortle index (light pollution value) or -1 (unknown/no change)
 	int getDefaultBortleIndex() const {return defaultBortleIndex;}
