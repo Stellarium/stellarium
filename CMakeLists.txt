@@ -11,8 +11,8 @@ ENDIF()
 ########### Project name ###########
 PROJECT(Stellarium)
 SET(STELLARIUM_MAJOR "0")
-SET(STELLARIUM_MINOR "10")
-SET(STELLARIUM_PATCH "6")
+SET(STELLARIUM_MINOR "11")
+SET(STELLARIUM_PATCH "0")
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
 SET(PACKAGE stellarium)
 
@@ -146,7 +146,8 @@ SET(USE_PLUGIN_TEXTUSERINTERFACE 1 CACHE BOOL "Define whether the TextUserInterf
 SET(USE_PLUGIN_TIMEZONECONFIGURATION 1 CACHE BOOL "Define whether the TimeZoneConfiguration plugin should be created.")
 SET(USE_PLUGIN_VIRGO 0 CACHE BOOL "Define whether the VirGO plugin should be created.")
 SET(USE_PLUGIN_SOLARSYSTEMEDITOR 1 CACHE BOOL "Define whether the Solar System Editor should be built.")
-SET(USE_PLUGIN_SCENERY3D 1 1 CACHE BOOL "Define whether the Scenery3d plugin should be created.")
+SET(USE_PLUGIN_SUPERNOVAE 1 CACHE BOOL "Define whether the Historical Supernova plugin should be created.")
+SET(USE_PLUGIN_SCENERY3D 1 CACHE BOOL "Define whether the Scenery3d plugin should be created.")
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself

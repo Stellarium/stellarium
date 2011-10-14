@@ -1,5 +1,27 @@
-0.10.7/1.0.0
+[development version]
+Location window: map pointer position is updated on longitude/latitude change.
+Solar System Editor plug-in:
+- fixed a bug in the parsing of MPC lists: the epoch's Julian Day value was wrong by 0.5 JD (LP: #836839)
+
+0.11.0
+New feature: atmosphere refraction support.
+New plugin: Historical supernova.
+New translatable strings: landscapes.
+New moons of solar system planets (LP: #730686).
+New feature: using different symbols for nebula icons.
 TimeZone plug-in: fixed a bug preventing the saving of custom time zones. (LP: #720107)
+Ocular plug-in: Corrected the calculation of CCD FOV.
+Ocular plug-in: Implemented rotating the CCD bounding box.
+Ocular plug-in: Made Telrad & CCD mutually exclusive.
+Ocular plug-in: Implemented better binoculars support (LP: #695568).
+Ocular plug-in: Redesign dialog.
+SVMT plug-in: Adding QtWebKit dependency.
+Satellite plug-in: improve of code.
+Solar System Editor plug-in: fixed MPES online search and updated hard-coded URLs (LP: #725870).
+Skycultures: two new skyculture descriptions in Norwegian (Bokmål).
+Redesign search tool (LP: #730687).
+Improved texture manager.
+Various problems resolved (LP: #730069, #772206, #683255, #657455, #785574, #515311, #730075, #711887, #688978, #616748, #589634)
 
 0.10.6 [2010-12-05]
 New feature for installing landscapes from ZIP archives.

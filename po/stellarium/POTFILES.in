@@ -12,7 +12,6 @@ src/core/StelObserver.cpp
 src/core/StelCore.cpp
 src/core/StelProjector.cpp
 src/core/StelProjectorClasses.cpp
-src/core/StelProjectorClasses.cpp
 src/core/StelObject.cpp
 src/gui/ConfigurationDialog.cpp
 src/gui/HelpDialog.cpp
@@ -30,6 +29,7 @@ src/ui_searchDialogGui.h
 src/ui_viewDialog.h
 src/ui_configurationDialog.h
 src/ui_addRemoveLandscapesDialog.h
+src/ui_AtmosphereDialog.h
 plugins/AngleMeasure/src/AngleMeasure.cpp
 plugins/CompassMarks/src/CompassMarks.cpp
 plugins/Oculars/src/Oculars.cpp
@@ -38,3 +38,5 @@ plugins/TelescopeControl/src/TelescopeControl.cpp
 plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp
 plugins/TextUserInterface/src/TextUserInterface.cpp
 plugins/SolarSystemEditor/src/SolarSystemEditor.cpp
+plugins/Supernovae/src/Supernovae.cpp
+plugins/Supernovae/src/Supernova.cpp
