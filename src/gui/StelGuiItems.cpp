@@ -43,6 +43,7 @@
 #include <QGraphicsWidget>
 #include <QGraphicsProxyWidget>
 #include <QGraphicsLinearLayout>
+#include <QSettings>
 
 StelButton::StelButton(QGraphicsItem* parent, const QPixmap& apixOn, const QPixmap& apixOff,
 		const QPixmap& apixHover, QAction* aaction, bool noBackground) :
@@ -545,13 +546,21 @@ void BottomStelBar::updateText(bool updatePos)
 		location->setText(newLocation);
 	}
 
+	QSettings* confSettings = StelApp::getInstance().getSettings();
 	QString str;
 	QTextStream wos(&str);
 	wos << "FOV " << qSetRealNumberPrecision(3) << core->getMovementMgr()->getCurrentFov() << QChar(0x00B0);
 	if (fov->text()!=str)
 	{
 		updatePos = true;
-		fov->setText(str);
+		if (confSettings->value("gui/flag_show_fov", true).toBool())
+		{
+			fov->setText(str);
+		}
+		else
+		{
+			fov->setText("");
+		}
 	}
 
 	str="";
@@ -560,7 +569,14 @@ void BottomStelBar::updateText(bool updatePos)
 	if (fps->text()!=str)
 	{
 		updatePos = true;
-		fps->setText(str);
+		if (confSettings->value("gui/flag_show_fps", true).toBool())
+		{
+			fps->setText(str);
+		}
+		else
+		{
+			fps->setText("");
+		}
 	}
 
 	if (updatePos)
@@ -568,8 +584,8 @@ void BottomStelBar::updateText(bool updatePos)
 		QRectF rectCh = getButtonsBoundingRect();
 		location->setPos(0, 0);
 		datetime->setPos(rectCh.right()-datetime->boundingRect().width()-5,0);
-		fov->setPos(datetime->x()-230, 0);
-		fps->setPos(datetime->x()-140, 0);
+		fov->setPos(datetime->x()-200, 0);
+		fps->setPos(datetime->x()-95, 0);
 	}
 }
 

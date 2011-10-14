@@ -481,8 +481,6 @@ QString LandscapeMgr::getCurrentLandscapeName() const
 
 QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 {
-	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	QString planetName = ssmgr->searchByEnglishName(landscape->getLocation().planetName)->getNameI18n();
 	QString desc = getDescription();
 	desc+="<p>";
 	desc+="<b>"+q_("Author: ")+"</b>";
@@ -494,9 +492,10 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 		desc += StelUtils::radToDmsStrAdapt(landscape->getLocation().longitude * M_PI/180.);
 		desc += "/" + StelUtils::radToDmsStrAdapt(landscape->getLocation().latitude *M_PI/180.);
 		desc += QString(q_(", %1 m")).arg(landscape->getLocation().altitude);
-		if (planetName!="")
+		QString planetName = landscape->getLocation().planetName;
+		if (!planetName.isEmpty())
 		{
-			desc += "<br><b>"+q_("Planet: ")+"</b>"+planetName;
+			desc += "<br><b>"+q_("Planet: ")+"</b>"+ q_(planetName);
 		}
 		desc += "<br><br>";
 	}
@@ -963,7 +962,11 @@ quint64 LandscapeMgr::loadLandscapeSize(QString landscapeID)
 
 QString LandscapeMgr::getDescription() const
 {
-	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+        QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+        if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
+        {
+                lang = lang.split("_").at(0);
+        }
 	QString descriptionFile = StelFileMgr::findFile("landscapes/" + getCurrentLandscapeID(), StelFileMgr::Directory) + "/description." + lang + ".utf8";
 	QString desc;
 
@@ -972,6 +975,7 @@ QString LandscapeMgr::getDescription() const
 		QFile file(descriptionFile);
 		file.open(QIODevice::ReadOnly | QIODevice::Text);
 		QTextStream in(&file);
+		in.setCodec("UTF-8");
 		desc = in.readAll();
 		file.close();
 	}

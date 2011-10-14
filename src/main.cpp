@@ -150,7 +150,7 @@ int main(int argc, char **argv)
 	// OK we start the full program.
 	// Print the console splash and get on with loading the program
 	QString versionLine = QString("This is %1 - http://www.stellarium.org").arg(StelUtils::getApplicationName());
-	QString copyrightLine = QString("Copyright (C) 2000-2010 Fabien Chereau et al");
+	QString copyrightLine = QString("Copyright (C) 2000-2011 Fabien Chereau et al");
 	int maxLength = qMax(versionLine.size(), copyrightLine.size());
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
 	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
@@ -300,6 +300,7 @@ int main(int argc, char **argv)
 	// On windows use Verdana font, to avoid unresolved bug with OpenGL1 Qt paint engine.
 	// See Launchpad question #111823 for more info
 	QFont tmpFont(safeMode ? "Verdana" : "DejaVu Sans");
+	tmpFont.setStyleStrategy(QFont::OpenGLCompatible);
 
 	// Activate verdana by defaut for all win32 builds to see if it improves things.
 	// -> this seems to bring crippled arabic fonts with OpenGL2 paint engine..
@@ -311,7 +312,7 @@ int main(int argc, char **argv)
 	QFont tmpFont("DejaVu Sans");
 #endif
 #endif
-	tmpFont.setPixelSize(13);
+	tmpFont.setPixelSize(confSettings->value("gui/base_font_size", 13).toInt());
 //tmpFont.setFamily("Verdana");
 //tmpFont.setBold(true);
 	QApplication::setFont(tmpFont);
