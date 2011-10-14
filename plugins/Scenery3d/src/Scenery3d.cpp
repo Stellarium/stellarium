@@ -43,6 +43,8 @@
 
 #define MEANINGLESS 1.E34
 #define MEANINGLESS_INT -32767
+#define FROM_MODEL (MEANINGLESS_INT + 1)
+
 
 
 //float Scenery3d::EYE_LEVEL = 1.65;
@@ -50,9 +52,8 @@
 //const float Scenery3d::MAX_SLOPE = 1.1;
 
 Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
-    :core(NULL),
-    absolutePosition(0.0, 0.0, 0.0), // 1.E-12, 1.E-12, 1.E-12), // these values signify "set default values"
-    movement_x(0.0f), movement_y(0.0f), movement_z(0.0f),
+    :absolutePosition(0.0, 0.0, 0.0), // 1.E-12, 1.E-12, 1.E-12), // these values signify "set default values"
+    movement_x(0.0f), movement_y(0.0f), movement_z(0.0f),core(NULL),
     objModel(NULL), groundModel(NULL), heightmap(NULL), location(NULL)
 {
     this->cubemapSize=cubemapSize;
@@ -62,6 +63,7 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
     objModel = new OBJ();
     groundModel = new OBJ();
     zRotateMatrix = Mat4d::identity();
+    obj2gridMatrix = Mat4d::identity();
     shadowMapTexture = 0;
     lookAt_fov=Vec3f(0.f, 0.f, -1000.f);
     for (int i=0; i<6; i++) {
@@ -91,9 +93,9 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
             };
             for (int i=0; i<6; i++) {
                 v[i].normalize();
-                cubePlane.vertex << v[i];
+		cubePlaneFront.vertex << v[i];
             }
-            cubePlane.texCoords << Vec2f(tx0, ty0)
+	    cubePlaneFront.texCoords << Vec2f(tx0, ty0)
                                 << Vec2f(tx1, ty0)
                                 << Vec2f(tx1, ty1)
                                 << Vec2f(tx0, ty0)
@@ -103,8 +105,8 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
     }
     shadowsEnabled = false;
     Mat4d matrix;
-#define PLANE(var, mat) matrix=mat; var=StelVertexArray(cubePlane.vertex,StelVertexArray::Triangles,cubePlane.texCoords);\
-                        for(int i=0;i<var.vertex.size();i++){ matrix.transfo(var.vertex[i]); }
+#define PLANE(_VAR_, _MAT_) matrix=_MAT_; _VAR_=StelVertexArray(cubePlaneFront.vertex,StelVertexArray::Triangles,cubePlaneFront.texCoords);\
+			for(int i=0;i<_VAR_.vertex.size();i++){ matrix.transfo(_VAR_.vertex[i]); }
     PLANE(cubePlaneRight, Mat4d::zrotation(-M_PI_2))
     PLANE(cubePlaneLeft, Mat4d::zrotation(M_PI_2))
     PLANE(cubePlaneBack, Mat4d::zrotation(M_PI))
@@ -162,7 +164,7 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
         if (scenery3dIni.contains("location/altitude"))
         {
             if (scenery3dIni.value("location/altitude") == "from_model")
-                location->altitude=MEANINGLESS_INT;
+		location->altitude=FROM_MODEL;
             else
                 location->altitude = scenery3dIni.value("location/altitude", 0).toInt();
         }
@@ -187,6 +189,39 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
     double orig_z = scenery3dIni.value("coord/orig_H", 0.0).toDouble();
     modelWorldOffset=Vec3d(orig_x, orig_y, orig_z); // RealworldGridCoords=objCoords+modelWorldOffset
 
+
+    // In case we don't have an axis-aligned OBJ model, this is the chance to correct it.
+    if (scenery3dIni.contains("model/obj2grid_trafo"))
+    {
+	QString str=scenery3dIni.value("model/obj2grid_trafo").toString();
+	QStringList strList=str.split(",");
+	bool conversionOK[16];
+	if (strList.length()==16)
+	{
+	    obj2gridMatrix.set(strList.at(0).toDouble(&conversionOK[0]),
+			       strList.at(1).toDouble(&conversionOK[1]),
+			       strList.at(2).toDouble(&conversionOK[2]),
+			       strList.at(3).toDouble(&conversionOK[3]),
+			       strList.at(4).toDouble(&conversionOK[4]),
+			       strList.at(5).toDouble(&conversionOK[5]),
+			       strList.at(6).toDouble(&conversionOK[6]),
+			       strList.at(7).toDouble(&conversionOK[7]),
+			       strList.at(8).toDouble(&conversionOK[8]),
+			       strList.at(9).toDouble(&conversionOK[9]),
+			       strList.at(10).toDouble(&conversionOK[10]),
+			       strList.at(11).toDouble(&conversionOK[11]),
+			       strList.at(12).toDouble(&conversionOK[12]),
+			       strList.at(13).toDouble(&conversionOK[13]),
+			       strList.at(14).toDouble(&conversionOK[14]),
+			       strList.at(15).toDouble(&conversionOK[15])
+			       );
+	    for (int i=0; i<16; ++i)
+	    {
+		if (!conversionOK[i]) qDebug() << "WARNING: scenery3d.ini: element " << i+1 << " of obj2grid_trafo invalid, set zo zero.";
+	    }
+	}
+	else qDebug() << "obj2grid_trafo invalid: not 16 comma-separated elements";
+    }
     // Find a rotation around vertical axis, most likely required by meridian convergence.
     double rot_z=0.0;
     if (!scenery3dIni.value("coord/convergence_angle").toString().compare("from_grid"))
@@ -220,7 +255,7 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
     } else {
         rot_z = scenery3dIni.value("coord/convergence_angle", 0.0).toDouble() * M_PI / 180.0;
     }
-    // We do not do the 90deg now, just rot_z
+    // We must apply also a 90 degree rotation, plus convergence(rot_z)
     zRotateMatrix = Mat4d::zrotation(M_PI/2.0 + rot_z);
     //zRotateMatrix = Mat4d::zrotation( rot_z);
 
@@ -265,7 +300,7 @@ void Scenery3d::loadModel()
 	QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
 	qDebug() << "Trying to load OBJ model: " << modelFile;
         objModel->load(modelFile.toAscii(), objVertexOrder);
-        objModel->transform(zRotateMatrix);
+	objModel->transform(zRotateMatrix*obj2gridMatrix);
 	objModelArrays = objModel->getStelArrays();
 
         /* We could re-create zRotateMatrix here if needed: We may have "default" conditions with landscape coordinates
@@ -287,23 +322,26 @@ void Scenery3d::loadModel()
             modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelGroundFile);
             qDebug() << "Trying to load ground OBJ model: " << modelFile;
             groundModel->load(modelFile.toAscii(), objVertexOrder);
-            groundModel->transform(zRotateMatrix);
-        }
+	    groundModel->transform(zRotateMatrix*obj2gridMatrix);
+	}
 
         if (this->hasLocation())
-        { if (location->altitude==MEANINGLESS_INT) // previouslay marked meaningless
-            location->altitude=0.5*(objModel->getMinZ()+objModel->getMaxZ())+modelWorldOffset[2];
+	{ if (location->altitude==FROM_MODEL) // previouslay marked meaningless
+	    location->altitude=(int) (0.5*(objModel->getMinZ()+objModel->getMaxZ())+modelWorldOffset[2]);
         }
 
         if (groundNullHeight==MEANINGLESS)
         {
-            groundNullHeight=(this->hasLocation() ? location->altitude : objModel->getMinZ());
-            qDebug() << "Ground outside model is " << groundNullHeight  << "m high";
+	    groundNullHeight=((groundModel!=NULL) ? groundModel->getMinZ() : objModel->getMinZ());
+	    qDebug() << "Ground outside model is " << groundNullHeight  << "m high (in model coordinates)";
         }
-        else             qDebug() << "Ground outside model stays " << groundNullHeight  << "m high";
+	else qDebug() << "Ground outside model stays " << groundNullHeight  << "m high (in model coordinates)";
 
-        heightmap = new Heightmap(*groundModel);
-        heightmap->setNullHeight(groundNullHeight);
+	if (groundModel)
+	{
+	    heightmap = new Heightmap(*groundModel);
+	    heightmap->setNullHeight(groundNullHeight);
+	}
 
         if (absolutePosition.v[0]==MEANINGLESS) {
             absolutePosition.v[0] = -(objModel->getMaxX()+objModel->getMinX())/2.0;
@@ -318,6 +356,9 @@ void Scenery3d::loadModel()
 
         absolutePosition[2] = -groundHeight()-eyeLevel;
         //absolutePosition.transfo4d(zRotateMatrix); // bring this position into rotated space.
+
+	// finally, set core to enable update(). GZ: This was dne in draw() each time, seems unnecessary there!
+	this->core=StelApp::getInstance().getCore();
 }
 
 void Scenery3d::handleKeys(QKeyEvent* e)
@@ -371,8 +412,6 @@ void Scenery3d::update(double deltaTime)
         absolutePosition.v[1] += move.v[1];
         eyeLevel -= move.v[2];
         absolutePosition.v[2] = -groundHeight()-eyeLevel;
-
-
     }
 }
 
@@ -381,7 +420,7 @@ float Scenery3d::groundHeight()
     if (heightmap == NULL) {
         return groundNullHeight;
     } else {
-        return heightmap->getHeight(-absolutePosition.v[0],-absolutePosition.v[1]);
+	return heightmap->getHeight(-absolutePosition.v[0],-absolutePosition.v[1]);
     }
 }
 
@@ -404,7 +443,8 @@ void Scenery3d::generateCubeMap_drawScene(StelPainter& painter, float lightBrigh
 {
     //GZ: to achieve brighter surfaces, we use sqrt(lightBrightness):
     float diffBrightness=std::sqrt(lightBrightness);
-    const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
+    //const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
+    const GLfloat LightAmbient[] = {lightBrightness, lightBrightness, lightBrightness, 1.0f};
     const GLfloat LightDiffuse[] = {diffBrightness, diffBrightness, diffBrightness, 1.0f};
     glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
@@ -416,7 +456,8 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float
     //GZ: to achieve brighter surfaces, we use sqrt(lightBrightness):
     float diffBrightness=std::sqrt(lightBrightness);
 
-    const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
+    //const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
+    const GLfloat LightAmbient[] = {lightBrightness, lightBrightness, lightBrightness, 1.0f};
     const GLfloat LightDiffuse[] = {diffBrightness, diffBrightness, diffBrightness, 1.0f};
 
     //const GLfloat LightAmbientShadow[] = {0.02f, 0.02f, 0.02f, 1.0f};
@@ -521,6 +562,8 @@ void Scenery3d::generateShadowMap(StelCore* core)
 	Vec3d moonPosition = ssystem->getMoon()->getAltAzPosAuto(core);
         //zRotateMatrix.transfo(sunPosition);
         moonPosition.normalize();
+	Vec3d venusPosition = ssystem->searchByName("Venus")->getAltAzPosAuto(core);
+	venusPosition.normalize();
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_DEPTH_TEST);
@@ -553,8 +596,10 @@ void Scenery3d::generateShadowMap(StelCore* core)
 	glLoadIdentity();
         if (sunPosition[2]>0)
             gluLookAt (sunPosition[0], sunPosition[1], sunPosition[2], 0, 0, 0, 0, 0, 1);
-        else
+	else if (moonPosition[2]>0)
             gluLookAt (moonPosition[0], moonPosition[1], moonPosition[2], 0, 0, 0, 0, 0, 1);
+	else
+	    gluLookAt (venusPosition[0], venusPosition[1], venusPosition[2], 0, 0, 0, 0, 0, 1);
 
 	/* eyeX,eyeY,eyeZ,centerX,centerY,centerZ,upX,upY,upZ)*/
         glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix); // save light view for further render passes
@@ -757,7 +802,7 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
 #else
         glBindTexture(GL_TEXTURE_2D, cubeMap[0]->texture());
 #endif
-    painter.drawSphericalTriangles(cubePlane, true, __null, false);
+    painter.drawSphericalTriangles(cubePlaneFront, true, __null, false);
 
     //right
     glBindTexture(GL_TEXTURE_2D, cubeMap[1]->texture());
@@ -811,27 +856,29 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
     zRotateMatrix.transfo(moonPosition);
     moonPosition.normalize();
 
+    // TODO: INCREASE BRIGHTNESS AT HORIZONTAL-SUN
     // We define the brigthness zero when the sun is 8 degrees below the horizon.
-    float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+8.*M_PI/180.));
+    float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+15.*M_PI/180.));
     float sinMoonAngleRad = moonPosition[2];
     float lightBrightness;
     shadowCaster shadows = None;
-    if(sinSunAngleRad > -0.1/1.5 ) // sun above -8 deg?
+    if(sinSunAngleRad > 0 ) //-0.1/1.5 ) // sun above -8 deg?
     {
-        lightBrightness = (0.01 + 1.5*(sinSunAngleRad+0.1/1.5));
+	lightBrightness = (0.1 + 1.5*(sinSunAngleRad)); //+0.1/1.5));
         if ((shadowsEnabled) && (sunPosition[2]>0.)) shadows = Sun;
     }
     else if (sinMoonAngleRad>0)
     {
-        lightBrightness = 0.01 + 0.2*sinMoonAngleRad; // TODO: dependence on Lunar phase and general sky brightness!
+	lightBrightness = 0.1 + 0.2*sinMoonAngleRad; // TODO: dependence on Lunar phase and general sky brightness!
         if (shadowsEnabled) shadows = Moon;
     }
     else
     {
-        lightBrightness = 0.01; // TODO: dependence on general sky brightness!
+	lightBrightness = 0.1; // TODO: dependence on general sky brightness! Landscape had some code, commented out, to provide ambient brightness.
     }
 
-    Vec3d sunOrMoon = ( (sinSunAngleRad > -0.1/1.5 ) ? sunPosition : moonPosition);
+    Vec3d sunOrMoon = ( (sinSunAngleRad > 0 ) //-0.1/1.5 )
+			? sunPosition : moonPosition);
     const GLfloat LightPosition[]= {-sunOrMoon.v[0], -sunOrMoon.v[1], sunOrMoon.v[2], 0.0f} ;// signs determined by experiment
 
 
@@ -899,7 +946,9 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
 
     // world_pos is the observer position (camera eye position) in grid coordinates, e.g. Gauss-Krueger or UTM.
     Vec3d world_pos= model_pos+modelWorldOffset;
-    painter.drawText(screen_x, screen_y, gridName);
+    // problem: long grid names!
+    painter.drawText(prj->getViewportWidth()-10-qMax(240, painter.getFontMetrics().boundingRect(gridName).width()),
+		     screen_y, gridName);
     screen_y -= 17.0f;
     str = QString("East:   %1m").arg(world_pos[0], 10, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
@@ -919,20 +968,21 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
     str = QString("model_Y:%1m").arg(model_pos[1], 10, 'f', 2);
     painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
     str = QString("model_Z:%1m").arg(model_pos[2], 10, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
+    painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
     str = QString("abs_X:  %1m").arg(absolutePosition.v[0], 10, 'f', 2);
     painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
     str = QString("abs_Y:  %1m").arg(absolutePosition.v[1], 10, 'f', 2);
     painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
     str = QString("abs_Z:  %1m").arg(absolutePosition.v[2], 10, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+    str = QString("groundNullHeight: %1m").arg(groundNullHeight, 7, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
-    */
+    //*/
 }
 	
 void Scenery3d::draw(StelCore* core)
 {
-    this->core = core;
+    //this->core = core; // GZ: now in loadScenery()
 
     if (shadowsEnabled)
     {

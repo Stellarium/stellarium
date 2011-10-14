@@ -65,14 +65,14 @@ private:
     QString nameToID(const QString& name);
     QMap<QString, QString> getNameToDirMap() const;
 
-    bool flagEnabled; // GZ: toggle to switch it off completely.
-    int cubemapSize; // GZ: configurable via config.ini:Scenery3d/cubemapSize
-    int shadowmapSize; // GZ: configurable via config.ini:Scenery3d/shadowmapSize
+    bool flagEnabled;  // toggle to switch it off completely.
+    int cubemapSize;   // configurable via config.ini:Scenery3d/cubemapSize
+    int shadowmapSize; // configurable via config.ini:Scenery3d/shadowmapSize
     Scenery3d* scenery3d;
     Scenery3dDialog* scenery3dDialog;
     QString currentScenery3dID;
     QString defaultScenery3dID;
-    bool enableShadows;
+    bool enableShadows;  // toggle shadow mapping
     StelButton* toolbarEnableButton;
     StelButton* toolbarSettingsButton;
     StelCore::ProjectionType oldProjectionType;
