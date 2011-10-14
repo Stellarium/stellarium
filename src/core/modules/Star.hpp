@@ -75,6 +75,7 @@ struct Star1 { // 28 byte
   float getBV(void) const {return IndexToBV(bV);}
   bool hasName() const {return hip;}
   QString getNameI18n(void) const;
+  int hasComponentID(void) const;
   void repack(bool fromBe);
   void print(void);
 }
@@ -108,6 +109,7 @@ struct Star2 {  // 10 byte
   }
   float getBV(void) const {return IndexToBV(bV);}
   QString getNameI18n(void) const {return QString();}
+  int hasComponentID(void) const {return 0;}
   bool hasName() const {return false;}
   void repack(bool fromBe);
   void print(void);
@@ -140,6 +142,7 @@ struct Star3 {  // 6 byte
   }
   float getBV(void) const {return IndexToBV(bV);}
   QString getNameI18n(void) const {return QString();}
+  int hasComponentID(void) const {return 0;}
   bool hasName() const {return false;}
   void repack(bool fromBe);
   void print(void);

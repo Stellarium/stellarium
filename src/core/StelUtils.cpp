@@ -77,7 +77,7 @@ void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
 
 	h = (unsigned int)angle;
 	m = (unsigned int)((angle-h)*60);
-	s = (angle-h)*3600.-60.*m;
+	s = (angle-h)*3600.-60.*m;	
 }
 
 /*************************************************************************
@@ -85,6 +85,7 @@ void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
 *************************************************************************/
 void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double& s)
 {
+	int n;
 	angle = std::fmod(angle,2.0*M_PI);
 	sign=true;
 	if (angle<0)
@@ -94,9 +95,11 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 	}
 	angle *= 180./M_PI;
 
-	d = (unsigned int)angle;
-	m = (unsigned int)((angle - d)*60);
-	s = (angle-d)*3600-60*m;
+	n = (int)std::floor(std::fabs(3600 * angle) + 0.5);
+	s = n % 60;
+	n /= 60;
+	m = (unsigned int)(n % 60);
+	d = (unsigned int)(n / 60);
 }
 
 /*************************************************************************

@@ -108,6 +108,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionShow_Ecliptic_Line", N_("Ecliptic line"), ",", group, true, false);
 	addGuiActions("actionShow_Equator_Line", N_("Equator line"), ".", group, true, false);
 	addGuiActions("actionShow_Meridian_Line", N_("Meridian line"), ";", group, true, false);
+	addGuiActions("actionShow_Horizon_Line", N_("Horizon line"), "", group, true, false);
 	addGuiActions("actionShow_Cardinal_Points", N_("Cardinal points"), "Q", group, true, false);
 
 	addGuiActions("actionShow_Ground", N_("Ground"), "G", group, true, false);
@@ -205,6 +206,8 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	getGuiActions("actionShow_Equator_Line")->setChecked(gmgr->getFlagEquatorLine());
 	connect(getGuiActions("actionShow_Meridian_Line"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagMeridianLine(bool)));
 	getGuiActions("actionShow_Meridian_Line")->setChecked(gmgr->getFlagMeridianLine());
+	connect(getGuiActions("actionShow_Horizon_Line"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagHorizonLine(bool)));
+	getGuiActions("actionShow_Horizon_Line")->setChecked(gmgr->getFlagHorizonLine());
 	connect(getGuiActions("actionShow_Equatorial_J2000_Grid"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagEquatorJ2000Grid(bool)));
 	getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(gmgr->getFlagEquatorJ2000Grid());
 	connect(getGuiActions("actionShow_Galactic_Grid"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagGalacticGrid(bool)));
@@ -623,6 +626,9 @@ void StelGui::update()
 	flag = gmgr->getFlagMeridianLine();
 	if (getGuiActions("actionShow_Meridian_Line")->isChecked() != flag)
 		getGuiActions("actionShow_Meridian_Line")->setChecked(flag);
+	flag = gmgr->getFlagHorizonLine();
+	if (getGuiActions("actionShow_Horizon_Line")->isChecked() != flag)
+		getGuiActions("actionShow_Horizon_Line")->setChecked(flag);
 	flag = gmgr->getFlagEquatorJ2000Grid();
 	if (getGuiActions("actionShow_Equatorial_J2000_Grid")->isChecked() != flag)
 		getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(flag);

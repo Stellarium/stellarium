@@ -135,8 +135,8 @@ private:
 	//! Tesselate the contours per side, producing a list of triangles subcontours according to the given rule.
 	void tesselate(TessWindingRule rule);
 
-	QVector<SubContour> tesselateOneSideLineLoop(class GLUEStesselator* tess, int sidenb) const;
-	QVector<Vec3d> tesselateOneSideTriangles(class GLUEStesselator* tess, int sidenb) const;
+	QVector<SubContour> tesselateOneSideLineLoop(struct GLUEStesselator* tess, int sidenb) const;
+	QVector<Vec3d> tesselateOneSideTriangles(struct GLUEStesselator* tess, int sidenb) const;
 	QVarLengthArray<QVector<SubContour>,8 > sides;
 
 	//! Update the content of both cached vertex arrays.
