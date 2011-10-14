@@ -121,6 +121,7 @@ public:
 			float cloudDensity,
 			float cloudScale,
 			float cloudSharpness,
+			Vec3f cloudVel,
 			float albedo,
 			const QString& texMapName,
 			const QString& normalMapName,
@@ -297,6 +298,8 @@ protected:
 	float cloudDensity;              // how cloudy atmosphere
 	float cloudScale;                // how much planet surface the cloud cover
 	float cloudSharpness;            // how sharp clouds - for fading effect
+	Vec3f cloudVel;                  // cloudVel[0] = u coord velocity, cloudVel[1] = v coord velocity,
+	                                 // cloudVel[2] = cloud animation speed
 
 	float albedo;                    // Planet albedo
 	Mat4d rotLocalToParent;
