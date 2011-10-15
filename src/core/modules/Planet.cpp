@@ -1021,7 +1021,7 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 					ssm->nMapShader->setUniform(location, cloudVel[0], cloudVel[1], cloudVel[2]);
 
 					QTime time;
-					float t = (float) ((float) (time.currentTime().msec()) / 1000.0);
+					float t = (float) ((float) (time.currentTime().msec()) / 10000.0);
 					location = ssm->nMapShader->uniformLocation("t");
 					ssm->nMapShader->setUniform(location, t);
 
