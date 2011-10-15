@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-19 20:07+0700\n"
-"PO-Revision-Date: 2011-09-14 13:45+0000\n"
-"Last-Translator: Liu Qishuai <Unknown>\n"
+"PO-Revision-Date: 2011-10-01 05:45+0000\n"
+"Last-Translator: forest93 <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-20 04:52+0000\n"
-"X-Generator: Launchpad (build 13980)\n"
+"X-Launchpad-Export-Date: 2011-10-02 04:47+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -48,7 +48,7 @@ msgstr ", %1 米"
 
 #: src/core/modules/LandscapeMgr.cpp:498
 msgid "Planet: "
-msgstr "行星 "
+msgstr "行星： "
 
 #: src/core/modules/Nebula.cpp:96
 #, qt-format
@@ -345,8 +345,8 @@ msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
-"下载中 %1\n"
-"您可以关闭此窗口"
+"正在下载 %1……\n"
+"（您可以关闭此窗口）"
 
 #: src/gui/ConfigurationDialog.cpp:809
 msgid "Verifying file integrity..."
@@ -2400,7 +2400,7 @@ msgstr "文本用户界面（TUI）"
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
-msgstr "适用于天相系统，为 0.9.x 系列的文本模式的用户界面（TUI）提供实现的插件"
+msgstr "适用于天相系统，为 0.9.x 系列的文本模式的用户界面（TUI）提供实现的插件。"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
@@ -2423,7 +2423,7 @@ msgstr "历史上的超新星"
 msgid ""
 "The plugin for visualization of some historical supernovae, brighter 10 "
 "magnitude"
-msgstr "这个插件包含了对超过10星等的超新星的图案"
+msgstr "这个插件包含了超过10星等的超新星的图案。"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
@@ -2433,22 +2433,15 @@ msgid ""
 "August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 "
 "September)"
 msgstr ""
+"SN 185A（12月7日）、SN 386A（4月24日）、SN 1006A（4月29日）、SN 1054A（7月3日）、SN "
+"1181A（8月4日）、SN 1572A（11月5日）、SN 1604A（10月8日）、SN 1680A（8月15日）、SN "
+"1885A（8月17日）、SN 1895B（7月5日）、SN 1937C（8月21日）、SN 1972E（5月8日）、SN 1987A（2月24日）和 "
+"SN 2011FE（9月13日）"
 
 #: plugins/Supernovae/src/Supernova.cpp:106
 #, qt-format
 msgid "Type: %1"
-msgstr "类型：%1"
+msgstr "类型： %1"
 
 #~ msgid "Form"
 #~ msgstr "格式"
-
-#~ msgid ""
-#~ "SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
-#~ "July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
-#~ "1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
-#~ "August), SN 1972E (8 May) and SN 1987A (24 February)"
-#~ msgstr ""
-#~ "SN 185A (12月7日, SN 386A (4月24日), SN 1006A (4月29日), SN 1054A (7月3日), SN 1181A "
-#~ "(8月4日), SN 1572A (11月5日), SN 1604A (10月8日), SN 1680A (8月15日), SN 1885A "
-#~ "(8月17日), SN 1895B (7月5日), SN 1937C (8月21日), SN 1972E (5月8日) and SN 1987A "
-#~ "(2月24日)"
