@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-19 20:07+0700\n"
-"PO-Revision-Date: 2011-09-10 11:18+0000\n"
-"Last-Translator: Amal Bose <axatrikx@gmail.com>\n"
+"PO-Revision-Date: 2011-10-02 18:59+0000\n"
+"Last-Translator: BRIJESH E.P <Unknown>\n"
 "Language-Team: Malayalam <ml@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-20 04:50+0000\n"
-"X-Generator: Launchpad (build 13980)\n"
+"X-Launchpad-Export-Date: 2011-10-03 04:37+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -597,7 +597,7 @@ msgstr "മൂടല്‍ മഞ്ഞ്"
 
 #: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1090
 msgid "Nebulas"
-msgstr ""
+msgstr "നെബുലകള്‍"
 
 #: src/gui/StelGui.cpp:119
 msgid "Nebulas background images"
@@ -633,7 +633,7 @@ msgstr "തിരശ്ശീല തിരശ്ചീനദിശയില്�
 
 #: src/gui/StelGui.cpp:128
 msgid "Flip scene vertically"
-msgstr "തിരശ്ശീല നെടുകെ വിപരീതമാക്കുക"
+msgstr "ആകാശ ക്രമീകരണ ജാലകം [F4]"
 
 #: src/gui/StelGui.cpp:130
 msgid "Windows"
@@ -653,7 +653,7 @@ msgstr "തെരച്ചില്‍ ജാലകം"
 
 #: src/gui/StelGui.cpp:134
 msgid "Sky and viewing options window"
-msgstr "തിരശ്ശീല നെടുക വിപരീതമാക്കുക"
+msgstr "ആകാശ-ദൃശ്യ ക്രമീകരണ ജാലകം [F4]"
 
 #: src/gui/StelGui.cpp:135
 msgid "Date/time window"
@@ -901,7 +901,7 @@ msgstr "സൂര്യന്‍"
 
 #: src/translations.h:34
 msgid "Mercury"
-msgstr "മെര്‍ക്കുറി"
+msgstr "ബുധന്‍"
 
 #: src/translations.h:35
 msgid "Venus"
@@ -929,19 +929,19 @@ msgstr "ഫോബോസ്"
 
 #: src/translations.h:41
 msgid "Ceres"
-msgstr ""
+msgstr "സിറീസ്"
 
 #: src/translations.h:42
 msgid "Pallas"
-msgstr ""
+msgstr "പല്ലാസ്"
 
 #: src/translations.h:43
 msgid "Juno"
-msgstr ""
+msgstr "ജൂനോ"
 
 #: src/translations.h:44
 msgid "Vesta"
-msgstr ""
+msgstr "വെസ്റ്റ"
 
 #: src/translations.h:45
 msgid "Jupiter"
@@ -957,7 +957,7 @@ msgstr "യൂറോപ്പ"
 
 #: src/translations.h:48
 msgid "Ganymede"
-msgstr "ഗാനിമീഡ്"
+msgstr "ഗാനിമെഡെ"
 
 #: src/translations.h:49
 msgid "Callisto"
@@ -1062,23 +1062,23 @@ msgstr "യുറാനസ്"
 
 #: src/translations.h:74
 msgid "Miranda"
-msgstr ""
+msgstr "മിരാന്‍ഡ"
 
 #: src/translations.h:75
 msgid "Ariel"
-msgstr ""
+msgstr "ഏരിയല്‍"
 
 #: src/translations.h:76
 msgid "Umbriel"
-msgstr ""
+msgstr "ഉംബ്രിയല്‍"
 
 #: src/translations.h:77
 msgid "Titania"
-msgstr ""
+msgstr "ടൈറ്റാനിയ"
 
 #: src/translations.h:78
 msgid "Oberon"
-msgstr ""
+msgstr "ഒബ്റോണ്‍"
 
 #: src/translations.h:79
 msgid "Pluto"
@@ -1091,7 +1091,7 @@ msgstr "ഷാരോണ്‍"
 #. TRANSLATORS: Moon of Pluto (II)
 #: src/translations.h:82
 msgid "Nix"
-msgstr ""
+msgstr "നിക്സ്"
 
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
@@ -1100,23 +1100,23 @@ msgstr "ആയില്യന്‍"
 
 #: src/translations.h:85
 msgid "Eris"
-msgstr ""
+msgstr "എറിസ്"
 
 #: src/translations.h:86
 msgid "Triton"
-msgstr ""
+msgstr "ട്രിറ്റോണ്‍"
 
 #: src/translations.h:87
 msgid "Nereid"
-msgstr ""
+msgstr "നെറീദ്"
 
 #: src/translations.h:88
 msgid "Naiad"
-msgstr ""
+msgstr "നെയാദ്"
 
 #: src/translations.h:89
 msgid "Thalassa"
-msgstr ""
+msgstr "തലാസ്സ"
 
 #: src/translations.h:90
 msgid "Despina"
@@ -1128,7 +1128,7 @@ msgstr ""
 
 #: src/translations.h:92
 msgid "Larissa"
-msgstr ""
+msgstr "ലാരിസ്സ"
 
 #: src/translations.h:93
 msgid "Proteus"
@@ -1171,12 +1171,12 @@ msgstr ""
 #. TRANSLATORS: Asteroid (7) Iris
 #: src/translations.h:106
 msgid "Iris"
-msgstr ""
+msgstr "ഐറിസ്"
 
 #. TRANSLATORS: Asteroid (8) Flora
 #: src/translations.h:108
 msgid "Flora"
-msgstr ""
+msgstr "ഫ്ളോറാ"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
 #: src/translations.h:112
@@ -1211,32 +1211,32 @@ msgstr ""
 #. TRANSLATORS: Name of supernova SN 1572A
 #: src/translations.h:124
 msgid "Tycho's Supernova"
-msgstr ""
+msgstr "ടൈക്കോയുടെ സൂപ്പര്‍നോവ SN 1572A"
 
 #. TRANSLATORS: Name of supernova SN 1604A
 #: src/translations.h:126
 msgid "Kepler's Supernova"
-msgstr ""
+msgstr "കെപ്ലറുടെ  സൂപ്പര്‍നോവ SN 1604A"
 
 #: src/translations.h:130
 msgid "N"
-msgstr "N"
+msgstr "വടക്ക് (N)"
 
 #: src/translations.h:131
 msgid "S"
-msgstr "S"
+msgstr "തെക്ക് (S)"
 
 #: src/translations.h:132
 msgid "E"
-msgstr "E"
+msgstr "കിഴക്ക് (E)"
 
 #: src/translations.h:133
 msgid "W"
-msgstr "W"
+msgstr "പടിഞ്ഞാറ് (W)"
 
 #: src/translations.h:136
 msgid "Arabic"
-msgstr ""
+msgstr "അറബിക്"
 
 #: src/translations.h:137
 msgid "Aztec"
@@ -1264,7 +1264,7 @@ msgstr "ലക്കോട്ട"
 
 #: src/translations.h:143
 msgid "Maori"
-msgstr ""
+msgstr "മാവോരി"
 
 #: src/translations.h:144
 msgid "Navajo"
@@ -1910,7 +1910,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1116
 msgid "Add/remove landscapes..."
-msgstr ""
+msgstr "പ്രകൃതിദൃശ്യങ്ങള്‍ ചേര്‍ക്കുക/ഒഴിവാക്കുക"
 
 #: src/ui_viewDialog.h:1117 src/ui_viewDialog.h:1122 src/ui_viewDialog.h:1124
 #: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
@@ -1923,7 +1923,7 @@ msgstr "ഭൗമോപരിതലം കാട്ടുക"
 
 #: src/ui_viewDialog.h:1119
 msgid "Show fog"
-msgstr "ഫോഗ് കാണിക്കുക"
+msgstr "പൊടിപടലം, മഞ്ഞ് കാണിക്കുക"
 
 #: src/ui_viewDialog.h:1120
 msgid "Use associated planet and position"
@@ -1939,7 +1939,7 @@ msgstr "ഈ ആകാശസംസ്കാരം സ്വതവേയായി 
 
 #: src/ui_viewDialog.h:1125
 msgid "Visible"
-msgstr ""
+msgstr "ദൃശ്യമായതു്"
 
 #: src/ui_configurationDialog.h:748
 msgid "Configuration"
@@ -2154,23 +2154,23 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:834
 msgid "Select single constellation"
-msgstr ""
+msgstr "ഒരു നക്ഷത്രരാശി മാത്രം തിരഞ്ഞെടുക്കുക"
 
 #: src/ui_configurationDialog.h:835
 msgid "Screenshots"
-msgstr ""
+msgstr "സ്ക്രീന്‍ഷോട്ടുകള്‍"
 
 #: src/ui_configurationDialog.h:836
 msgid "Screenshot Directory"
-msgstr ""
+msgstr "സ്ക്രീന്‍ഷോട്ടുകള്‍ സേവ് ചെയ്യേണ്ടയിടം"
 
 #: src/ui_configurationDialog.h:838
 msgid "Invert colors"
-msgstr ""
+msgstr "നെഗറ്റീവ് നിറങ്ങള്‍"
 
 #: src/ui_configurationDialog.h:839
 msgid "Star catalog updates"
-msgstr ""
+msgstr "നക്ഷത്ര കാറ്റലോഗിലെ പുതിയ മാറ്റങ്ങള്‍"
 
 #: src/ui_configurationDialog.h:841
 msgid "Click here to start downloading"
@@ -2182,7 +2182,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:844
 msgid "Download this file to view even more stars"
-msgstr ""
+msgstr "കൂടുതല്‍ നക്ഷത്രങ്ങള്‍ക്കായി ഇത് ഡൌണ്‍ലോഡ് ചെയ്യുക"
 
 #: src/ui_configurationDialog.h:845
 msgid "xxx"
@@ -2238,7 +2238,7 @@ msgstr "ഉപകരണങ്ങള്‍"
 
 #: src/ui_configurationDialog.h:878
 msgid "Scripts"
-msgstr ""
+msgstr "സ്ക്രിപ്റ്റുകള്‍"
 
 #: src/ui_configurationDialog.h:880
 msgid "Plugins"
@@ -2357,7 +2357,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:67
 msgid "Satellites"
-msgstr ""
+msgstr "കൃത്രിമ ഉപഗ്രഹങ്ങള്‍"
 
 #: plugins/Satellites/src/Satellites.cpp:70
 msgid ""
@@ -2409,7 +2409,7 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
-msgstr ""
+msgstr "സമയമേഖല"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:44
 msgid ""
