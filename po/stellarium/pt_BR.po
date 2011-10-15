@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-19 20:07+0700\n"
-"PO-Revision-Date: 2011-09-23 15:41+0000\n"
+"PO-Revision-Date: 2011-09-29 16:49+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-24 04:37+0000\n"
-"X-Generator: Launchpad (build 14012)\n"
+"X-Launchpad-Export-Date: 2011-09-30 04:34+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -361,7 +361,7 @@ msgid ""
 "Error downloading %1:\n"
 "%2"
 msgstr ""
-"Erro ao baixar %1:\n"
+"Ocorreu um erro ao baixar %1:\n"
 "%2"
 
 #: src/gui/ConfigurationDialog.cpp:729
@@ -383,7 +383,7 @@ msgid ""
 "Error downloading %1:\n"
 "File is corrupted."
 msgstr ""
-"Erro ao baixar %1:\n"
+"Ocorreu um erro ao baixar %1:\n"
 "O arquivo está corrompido."
 
 #: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:286
@@ -651,11 +651,11 @@ msgstr "Modo de tela cheia"
 
 #: src/gui/StelGui.cpp:127
 msgid "Flip scene horizontally"
-msgstr "Inverter a tela horizontalmente"
+msgstr "Inverter a imagem horizontalmente"
 
 #: src/gui/StelGui.cpp:128
 msgid "Flip scene vertically"
-msgstr "Inverter a tela verticalmente"
+msgstr "Inverter a imagem verticalmente"
 
 #: src/gui/StelGui.cpp:130
 msgid "Windows"
@@ -1372,7 +1372,7 @@ msgstr "Definir o fuso horário: "
 
 #: src/translations.h:169
 msgid "Day keys: "
-msgstr "Dias chave: "
+msgstr "Chaves de dias: "
 
 #: src/translations.h:170
 msgid "Calendar"
@@ -1748,7 +1748,7 @@ msgstr "tau"
 
 #: src/ui_searchDialogGui.h:515
 msgid "upsilon"
-msgstr "upsilon"
+msgstr "ípsilon"
 
 #: src/ui_searchDialogGui.h:518
 msgid "phi"
