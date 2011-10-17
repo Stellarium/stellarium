@@ -85,11 +85,18 @@ protected:
 	{
 		return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.2, 0.2) : StelSkyDrawer::indexToColor(s->bV);
 	}
-	float getVMagnitude(const StelCore*) const
+	float getVMagnitude(const StelCore* core, bool withExtinction=false) const
 	{
-		return 0.001f*a->mag_min + s->mag*(0.001f*a->mag_range)/a->mag_steps;
+	    float extinctionMag=0.0; // track magnitude loss
+	    if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
+	    {
+		double alt=getAltAzPosApparent(core)[2];
+		core->getSkyDrawer()->getExtinction().forward(&alt, &extinctionMag);
+	    }
+
+		return 0.001f*a->mag_min + s->mag*(0.001f*a->mag_range)/a->mag_steps  + extinctionMag;
 	}
-	float getSelectPriority(const StelCore* core) const {return getVMagnitude(core);}
+	float getSelectPriority(const StelCore* core) const {return getVMagnitude(core, false);}
 	float getBV(void) const {return s->getBV();}
 	QString getEnglishName(void) const {return QString();}
 	QString getNameI18n(void) const {return s->getNameI18n();}

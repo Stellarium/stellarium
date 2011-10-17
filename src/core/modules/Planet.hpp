@@ -119,7 +119,7 @@ public:
 	virtual double getCloseViewFov(const StelCore* core) const;
 	virtual double getSatellitesFov(const StelCore* core) const;
 	virtual double getParentSatellitesFov(const StelCore* core) const;
-	virtual float getVMagnitude(const StelCore* core) const;
+	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
 	virtual float getSelectPriority(const StelCore* core) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual QString getType(void) const {return "Planet";}

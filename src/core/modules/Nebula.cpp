@@ -96,8 +96,13 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		oss << q_("Type: <b>%1</b>").arg(getTypeString()) << "<br>";
 
 	if (mag < 50 && flags&Magnitude)
-		oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
-
+	{
+	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
+										QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+	    else
+		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core, false), 0, 'f', 2) << "<br>";
+	}
 	oss << getPositionInfoString(core, flags);
 
 	if (angularSize>0 && flags&Size)
@@ -108,6 +113,19 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	return str;
 }
 
+float Nebula::getVMagnitude(const StelCore* core, bool withExtinction) const
+{
+    float extinctionMag=0.0; // track magnitude loss
+    if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
+    {
+	double alt=getAltAzPosApparent(core)[2];
+	core->getSkyDrawer()->getExtinction().forward(&alt, &extinctionMag);
+    }
+
+    return mag+extinctionMag;
+}
+
+
 float Nebula::getSelectPriority(const StelCore* core) const
 {
 	if( ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getFlagHints() )
@@ -117,8 +135,8 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	}
 	else
 	{
-		if (getVMagnitude(core)>20.f) return 20.f;
-		return getVMagnitude(core);
+		if (getVMagnitude(core, false)>20.f) return 20.f;
+		return getVMagnitude(core, false);
 	}
 }
 
