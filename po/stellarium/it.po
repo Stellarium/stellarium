@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-19 20:07+0700\n"
-"PO-Revision-Date: 2011-08-29 14:31+0000\n"
-"Last-Translator: Paolo Coveri <Unknown>\n"
+"PO-Revision-Date: 2011-10-16 15:59+0000\n"
+"Last-Translator: Sergio Zanchetta <primes2h@ubuntu.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-20 04:49+0000\n"
-"X-Generator: Launchpad (build 13980)\n"
+"X-Launchpad-Export-Date: 2011-10-17 04:41+0000\n"
+"X-Generator: Launchpad (build 14155)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -106,7 +106,7 @@ msgstr "Magnitudine assoluta: %1"
 #: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr "Eclittica Geocentrica (alla data): %1/%2"
+msgstr "Eclittica geocentrica (alla data): %1/%2"
 
 #: src/core/modules/Planet.cpp:137
 #, qt-format
@@ -137,12 +137,12 @@ msgstr "Classe spettrale: %1"
 #: plugins/Supernovae/src/Supernova.cpp:108
 #, qt-format
 msgid "Distance: %1 Light Years"
-msgstr "Distanza: %1 Anni Luce"
+msgstr "Distanza: %1 anni luce"
 
 #: src/core/modules/StarWrapper.cpp:125
 #, qt-format
 msgid "Parallax: %1\""
-msgstr "Parallasse: %1"
+msgstr "Parallasse: %1\""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
@@ -167,7 +167,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:63
 msgid "Equal Area"
-msgstr "Area Uguale"
+msgstr "Area equivalente"
 
 #: src/core/StelProjectorClasses.cpp:68
 msgid ""
@@ -175,11 +175,11 @@ msgid ""
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
 "Il nome completo di questo metodo di proiezione è: <i>proiezione dell'area "
-"uguale azimutale di Lambert</i>. Esso preserva l'area ma non l'angolo."
+"equivalente azimutale di Lambert</i>. Esso preserva l'area ma non l'angolo."
 
 #: src/core/StelProjectorClasses.cpp:108
 msgid "Stereographic"
-msgstr "Stereografico"
+msgstr "Stereografica"
 
 #: src/core/StelProjectorClasses.cpp:113
 msgid ""
@@ -187,13 +187,13 @@ msgid ""
 "known as the planisphere projection. It preserves the angles at which curves "
 "cross each other but it does not preserve area."
 msgstr ""
-"La proiezione stereografica è conosciuta dall'antichità ed era "
-"originariamente conosciuta come proiezione planisfero. Essa preserva gli "
-"angoli con cui le curve si incrociano a vicenda ma non preserva l'area"
+"La proiezione stereografica è conosciuta fin dall'antichità e "
+"originariamente era conosciuta come proiezione planisfero. Essa preserva gli "
+"angoli con cui le curve si incrociano a vicenda ma non preserva l'area."
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Fish-eye"
-msgstr "Fish-eye"
+msgstr "Fisheye"
 
 #: src/core/StelProjectorClasses.cpp:150
 msgid ""
@@ -202,10 +202,10 @@ msgid ""
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
 msgstr ""
-"Nella proiezione fish-eye, o <i>proiezione equidistante azimutale</i>, le "
-"linee dritte diventano curve quando appaiono in una grande distanza angolare "
-"dal centro del campo di vista (come le distorsioni viste con un angolo molto "
-"ampio delle lenti della camera)"
+"Nella proiezione fisheye, o <i>proiezione equidistante azimutale</i>, le "
+"linee diritte diventano curve quando si trovano ad una grande distanza "
+"angolare dal centro del campo di vista (come le distorsioni viste con un "
+"angolo molto ampio dall'obiettivo della fotocamera)"
 
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
@@ -279,7 +279,7 @@ msgstr "(geometrico)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
-msgstr "apparente"
+msgstr "(apparente)"
 
 #: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
@@ -288,7 +288,7 @@ msgstr "Az/Alt: %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:295
 msgid "Select screenshot directory"
-msgstr "Seleziona la cartella per le screenshot"
+msgstr "Seleziona la directory delle schermate"
 
 #: src/gui/ConfigurationDialog.cpp:462
 #, qt-format
@@ -318,20 +318,20 @@ msgstr "Licenza"
 
 #: src/gui/ConfigurationDialog.cpp:616
 msgid "Running script: "
-msgstr "Eseguendo il codice: "
+msgstr "Esecuzione script: "
 
 #: src/gui/ConfigurationDialog.cpp:623
 msgid "Running script: [none]"
-msgstr "Script"
+msgstr "Esecuzione script: [nessuno]"
 
 #: src/gui/ConfigurationDialog.cpp:666
 msgid "Finished downloading all star catalogs!"
-msgstr "Scaricamento catalogo di tutte le stelle completato!"
+msgstr "Scaricamento di tutti i cataloghi di stelle completato."
 
 #: src/gui/ConfigurationDialog.cpp:675
 #, qt-format
 msgid "Get catalog %1 of %2"
-msgstr "Ottieni catalogo %1 of %2"
+msgstr "Ricezione del catalogo %1 di %2"
 
 #: src/gui/ConfigurationDialog.cpp:677
 #, qt-format
@@ -340,17 +340,17 @@ msgid ""
 "Star count: %2 Million\n"
 "Magnitude range: %3 - %4"
 msgstr ""
-"Dimensione download: %1MB\n"
+"Dimensione scaricamento: %1MB\n"
 "Numero di stelle: %2 Million\n"
-"Intervallo magnitudo: %3 - %4"
+"Intervallo di magnitudo: %3 - %4"
 
 #: src/gui/ConfigurationDialog.cpp:686
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
-"Download dei cataloghi stellari terminato!\n"
-"Riavvia Stellarium per visualizzarli."
+"Scaricamento dei cataloghi di stelle completato.\n"
+"Riavviare Stellarium per visualizzarli."
 
 #: src/gui/ConfigurationDialog.cpp:724 src/gui/ConfigurationDialog.cpp:758
 #, qt-format
@@ -358,7 +358,7 @@ msgid ""
 "Error downloading %1:\n"
 "%2"
 msgstr ""
-"Errore nel download di %1:\n"
+"Errore nello scaricamento di %1:\n"
 "%2"
 
 #: src/gui/ConfigurationDialog.cpp:729
@@ -367,8 +367,8 @@ msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
-"Download in corso %1 ...\n"
-"(Puoi chiudere la finestra)"
+"Scaricamento di %1 ...\n"
+"(È possibile chiudere questa finestra.)"
 
 #: src/gui/ConfigurationDialog.cpp:809
 msgid "Verifying file integrity..."
@@ -380,8 +380,8 @@ msgid ""
 "Error downloading %1:\n"
 "File is corrupted."
 msgstr ""
-"Errore nel download di %1:\n"
-"Il file è corrotto."
+"Errore nello scaricamento di %1:\n"
+"Il file è danneggiato."
 
 #: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:286
 #: src/gui/StelGuiItems.cpp:656
@@ -2515,14 +2515,3 @@ msgstr "Tipo: %1"
 
 #~ msgid "Form"
 #~ msgstr "Modulo"
-
-#~ msgid ""
-#~ "SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
-#~ "July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
-#~ "1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
-#~ "August), SN 1972E (8 May) and SN 1987A (24 February)"
-#~ msgstr ""
-#~ "SN 185A (7 dicembre), SN 386A (24 aprile), SN 1006A (29 aprile), SN 1054A (3 "
-#~ "luglio), SN 1181A (4 agosto), SN 1572A (5 novembre), SN 1604A (8 ottobre), "
-#~ "SN 1680A (15 agosto), SN 1885A (17 agosto), SN 1895B (5 luglio), SN 1937C "
-#~ "(21 agosto), SN 1972E (8 maggio) e SN 1987A (24 febbraio)"
