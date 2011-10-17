@@ -20,14 +20,18 @@
  * Principal implementation: 2010-03-23 GZ=Georg Zotti, Georg.Zotti@univie.ac.at
  */
 
+#include <qsettings.h>
+#include "StelApp.hpp"
 #include "RefractionExtinction.hpp"
 
 
 // To be decided: The following should be either 0 or 40 (or 42? ;-)
-const float Extinction::SUBHORIZONTAL_AIRMASS=0.0f;
+float Extinction::SUBHORIZONTAL_AIRMASS=0.0f;
 
 Extinction::Extinction() : ext_coeff(0.20f)
 {
+    QSettings* conf = StelApp::getInstance().getSettings();
+    SUBHORIZONTAL_AIRMASS = (conf->value("astro/subhorizontal_extinction", false).toBool()? 42.0f : 0.0f);
 }
 
 //  altAzPos is the normalized star position vector AFTER REFRACTION, and its z component sin(altitude).
@@ -70,7 +74,7 @@ void Extinction::backward(const float *sinAlt, float *mag, const int num) const
 // airmass computation for cosine of zenith angle z
 float Extinction::airmass(const float cosZ, const bool apparent_z) const
 {
-	if (cosZ<-0.035f)
+	if (cosZ<-0.035f) // about -2 degrees. Here, RozenbergZ>574 and climbs fast!
 	    return Extinction::SUBHORIZONTAL_AIRMASS; // Safety: 0 or 40 for below -2 degrees.
 
 	float X;
@@ -89,6 +93,7 @@ float Extinction::airmass(const float cosZ, const bool apparent_z) const
 	return X;
 }
 
+/* ***************************************************************************************************** */
 
 // The following 4 are to be configured, the rest is derived.
 // Recommendations: -4.9/-4.3/0.1/0.1: sharp but continuous transition, no effects below -5.

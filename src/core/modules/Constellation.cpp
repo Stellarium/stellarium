@@ -220,7 +220,7 @@ StelObjectP Constellation::getBrightestStarInConstellation(void) const
 	// so check all segment endpoints:
 	for (int i=2*numberOfSegments-1;i>=0;i--)
 	{
-		const float Mag = asterism[i]->getVMagnitude(0);
+		const float Mag = asterism[i]->getVMagnitude(0, false);
 		if (Mag < maxMag)
 		{
 			brightest = asterism[i];

@@ -117,10 +117,15 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	}
 
 	if (flags&Magnitude)
-		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
-
+	{
+		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		    oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
+										    QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+		else
+		    oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core, false), 0, 'f', 2) << "<br>";
+	}
 	if (flags&AbsoluteMagnitude)
-		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core)-5.*(std::log10(getJ2000EquatorialPos(core).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
+		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core, false)-5.*(std::log10(getJ2000EquatorialPos(core).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
 
 	oss << getPositionInfoString(core, flags);
 
@@ -171,11 +176,11 @@ float Planet::getSelectPriority(const StelCore* core) const
 	if( ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getFlagHints() )
 	{
 	// easy to select, especially pluto
-		return getVMagnitude(core)-15.f;
+		return getVMagnitude(core, false)-15.f;
 	}
 	else
 	{
-		return getVMagnitude(core) - 8.f;
+		return getVMagnitude(core, false) - 8.f;
 	}
 }
 
@@ -464,13 +469,21 @@ double Planet::getPhase(const Vec3d& obsPos) const
 }
 
 // Computation of the visual magnitude (V band) of the planet.
-float Planet::getVMagnitude(const StelCore* core) const
+float Planet::getVMagnitude(const StelCore* core, bool withExtinction) const
 {
+	float extinctionMag=0.0; // track magnitude loss
+	if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
+	{
+	    double alt=getAltAzPosApparent(core)[2];
+	    core->getSkyDrawer()->getExtinction().forward(&alt, &extinctionMag);
+	}
+
+
 	if (parent == 0)
 	{
 		// sun, compute the apparent magnitude for the absolute mag (4.83) and observer's distance
 		const double distParsec = std::sqrt(core->getObserverHeliocentricEclipticPos().lengthSquared())*AU/PARSEC;
-		return 4.83 + 5.*(std::log10(distParsec)-1.);
+		return 4.83 + 5.*(std::log10(distParsec)-1.) + extinctionMag;
 	}
 
 	// Compute the angular phase
@@ -525,27 +538,27 @@ float Planet::getVMagnitude(const StelCore* core) const
 		if (englishName=="Mercury")
 		{
 			if ( phase > 150. ) f1 = 1.5;
-			return -0.36 + d + 3.8*f1 - 2.73*f1*f1 + 2*f1*f1*f1;
+			return -0.36 + d + 3.8*f1 - 2.73*f1*f1 + 2*f1*f1*f1 + extinctionMag;
 		}
 		if (englishName=="Venus")
-			return -4.29 + d + 0.09*f1 + 2.39*f1*f1 - 0.65*f1*f1*f1;
+			return -4.29 + d + 0.09*f1 + 2.39*f1*f1 - 0.65*f1*f1*f1 + extinctionMag;
 		if (englishName=="Mars")
-			return -1.52 + d + 0.016*phase;
+			return -1.52 + d + 0.016*phase + extinctionMag;
 		if (englishName=="Jupiter")
-			return -9.25 + d + 0.005*phase;
+			return -9.25 + d + 0.005*phase + extinctionMag;
 		if (englishName=="Saturn")
 		{
 			// TODO re-add rings computation
 			// double rings = -2.6*sinx + 1.25*sinx*sinx;
-			return -8.88 + d + 0.044*phase;// + rings;
+			return -8.88 + d + 0.044*phase + extinctionMag;// + rings;
 		}
 
 		if (englishName=="Uranus")
-			return -7.19 + d + 0.0028*phase;
+			return -7.19 + d + 0.0028*phase + extinctionMag;
 		if (englishName=="Neptune")
-			return -6.87 + d;
+			return -6.87 + d + extinctionMag;
 		if (englishName=="Pluto")
-			return -1.01 + d + 0.041*phase;
+			return -1.01 + d + 0.041*phase + extinctionMag;
 
 		phase/=180./M_PI;
 	}
@@ -553,7 +566,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 	// This formula seems to give wrong results
 	const double p = (1.0 - phase/M_PI) * cos_chi + std::sqrt(1.0 - cos_chi*cos_chi) / M_PI;
 	double F = 2.0 * albedo * radius * radius * p / (3.0*observerPlanetRq*planetRq) * shadowFactor;
-	return -26.73 - 2.5 * std::log10(F);
+	return -26.73 - 2.5 * std::log10(F) + extinctionMag;
 }
 
 double Planet::getAngularSize(const StelCore* core) const
@@ -728,7 +741,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	Vec3d tmp = getJ2000EquatorialPos(core);
-	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitude(core), color);
+	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitude(core, true), color);
 }
 
 

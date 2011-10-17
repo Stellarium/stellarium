@@ -280,9 +280,16 @@ Vec3f Satellite::getInfoColor(void) const
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : hintColor;
 }
 
-float Satellite::getVMagnitude(const StelCore*) const
+float Satellite::getVMagnitude(const StelCore* core, bool withExtinction) const
 {
-	return 5.0;
+    float extinctionMag=0.0; // track magnitude loss
+    if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
+    {
+	double alt=getAltAzPosApparent(core)[2];
+	core->getSkyDrawer()->getExtinction().forward(&alt, &extinctionMag);
+    }
+
+    return 5.0 + extinctionMag;
 }
 
 double Satellite::getAngularSize(const StelCore*) const
