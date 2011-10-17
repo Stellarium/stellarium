@@ -476,27 +476,38 @@ template<class Star>
 void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_inside, const float *rcmag_table, StelCore* core, unsigned int maxMagStarName,
 				  float names_brightness) const
 {
-	StelSkyDrawer* drawer = core->getSkyDrawer();
-	SpecialZoneData<Star> *const z = getZones() + index;
-	Vec3f vf;	
-	const Star *const end = z->getStars() + z->size;
-	static const double d2000 = 2451545.0;
-	const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
-	const float* tmpRcmag;
-	for (const Star *s=z->getStars();s<end;++s)
+    StelSkyDrawer* drawer = core->getSkyDrawer();
+    SpecialZoneData<Star> *const z = getZones() + index;
+    Vec3f vf;
+    const Star *const end = z->getStars() + z->size;
+    static const double d2000 = 2451545.0;
+    const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
+    const float* tmpRcmag;
+    Extinction extinction=core->getSkyDrawer()->getExtinction();
+    for (const Star *s=z->getStars();s<end;++s)
+    {
+	//GZ: We must compute position first, then shift magnitude.
+	s->getJ2000Pos(z,movementFactor, vf);
+	// GZ new:
+	Vec3d altAz=core->j2000ToAltAz(Vec3d(vf[0], vf[1], vf[2]), StelCore::RefractionOn);
+	float magShift=0.0f;
+	extinction.forward(&altAz, &magShift, 1);
+
+	const float k = (0.001f*mag_range)/mag_steps; // from StarMgr.cpp line 654
+
+	int magStepExtinctionReduction=(int)floor(magShift/k);
+	// GZ done
+	tmpRcmag = rcmag_table+2*s->mag+magStepExtinctionReduction;
+	if (*tmpRcmag<=0.f) // no size?
+		break;
+	if (drawer->drawPointSource(sPainter, vf, tmpRcmag, s->bV, !is_inside) && s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
 	{
-		tmpRcmag = rcmag_table+2*s->mag;
-		if (*tmpRcmag<=0.f)
-			break;
-		s->getJ2000Pos(z,movementFactor, vf);
-		if (drawer->drawPointSource(sPainter, vf, tmpRcmag, s->bV, !is_inside) && s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
-		{
-			const float offset = *tmpRcmag*0.7f;
-			const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.2f, 0.2f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;
-			sPainter->setColor(colorr[0], colorr[1], colorr[2],names_brightness);
-			sPainter->drawText(Vec3d(vf[0], vf[1], vf[2]), s->getNameI18n(), 0, offset, offset, false);
-		}
+	    const float offset = *tmpRcmag*0.7f;
+	    const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.2f, 0.2f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;
+	    sPainter->setColor(colorr[0], colorr[1], colorr[2],names_brightness);
+	    sPainter->drawText(Vec3d(vf[0], vf[1], vf[2]), s->getNameI18n(), 0, offset, offset, false);
 	}
+    }
 }
 
 template<class Star>
