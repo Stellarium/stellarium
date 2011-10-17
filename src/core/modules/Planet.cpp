@@ -26,7 +26,7 @@
 #include <QObject>
 #include <QVariant>
 #include <QVarLengthArray>
-#include <QTime>
+#include <QDateTime>
 
 #include <GLee.h>
 #include "StelShader.hpp"
@@ -1020,8 +1020,13 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 					location = ssm->nMapShader->uniformLocation("cvel");
 					ssm->nMapShader->setUniform(location, cloudVel[0], cloudVel[1], cloudVel[2]);
 
-					QTime time;
-					float t = (float) ((float) (time.currentTime().msec()) / 10000.0);
+					QTime dat;
+					float t = (float) dat.msecsTo(QTime::currentTime()) -
+						QTime::currentTime().hour() * 3600000 -
+						QTime::currentTime().minute() * 60000;
+
+					t = t / 3000.0;
+
 					location = ssm->nMapShader->uniformLocation("t");
 					ssm->nMapShader->setUniform(location, t);
 
