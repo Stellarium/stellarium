@@ -644,16 +644,17 @@ void StarMgr::draw(StelCore* core)
 	skyDrawer->preDrawPointSource(&sPainter);
 
 	// draw all the stars of all the selected zones
-	// GZ: This table must be enlarged from 2x256 to 2x2048 entries
+	// GZ: This table must be enlarged from 2x256 to many more entries
 	//float rcmag_table[2*256];
-	float rcmag_table[2*10000];
+	float rcmag_table[2*16384];
 
 	for (ZoneArrayMap::const_iterator it(zoneArrays.constBegin()); it!=zoneArrays.constEnd();++it)
 	{
 		const float mag_min = 0.001f*it.value()->mag_min;
 		const float k = (0.001f*it.value()->mag_range)/it.value()->mag_steps; // MagStepIncrement
-		// GZ: add 9000 entries to rcMag
-		for (int i=it.value()->mag_steps-1+9000;i>=0;--i)
+		// GZ: add a huge number of entries to rcMag
+		//for (int i=it.value()->mag_steps-1;i>=0;--i)
+		for (int i=16384-1;i>=0;--i)
 		{
 			const float mag = mag_min+k*i;
 			if (skyDrawer->computeRCMag(mag,rcmag_table + 2*i)==false)
