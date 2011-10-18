@@ -52,6 +52,14 @@ void Extinction::forward(const float *sinAlt, float *mag, const int num) const
 {
 	for (int i=0; i<num; ++i) mag[i] += airmass(sinAlt[i], true) * ext_coeff;
 }
+void Extinction::forward(const double *sinAlt, float *mag) const
+{
+	*mag += airmass(*sinAlt, true) * ext_coeff;
+}
+void Extinction::forward(const float *sinAlt, float *mag) const
+{
+	*mag += airmass(*sinAlt, true) * ext_coeff;
+}
 // from observed magnitude in apparent (observed) altitude to atmosphere-free mag, still in apparent, refracted altitude.
 void Extinction::backward(const Vec3d *altAzPos, float *mag, const int num) const
 {

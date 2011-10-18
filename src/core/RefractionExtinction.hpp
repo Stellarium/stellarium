@@ -52,8 +52,10 @@ public:
 	//! Note that forward/backward are no absolute reverse operations!
 	void forward(const Vec3d *altAzPos, float *mag, const int num=1) const;
 	void forward(const Vec3f *altAzPos, float *mag, const int num=1) const;
-	void forward(const double *sinAlt,  float *mag, const int num=1) const;
-	void forward(const float  *sinAlt,  float *mag, const int num=1) const;
+	void forward(const double *sinAlt,  float *mag, const int num) const;
+	void forward(const float  *sinAlt,  float *mag, const int num) const;
+	void forward(const double *sinAlt,  float *mag) const;
+	void forward(const float  *sinAlt,  float *mag) const;
 
 	//! Compute inverse extinction effect for arrays of size @param num position vectors and magnitudes.
 	//! @param altAzPos are the normalized (apparent) star position vectors, and their z components sin(apparent_altitude).
