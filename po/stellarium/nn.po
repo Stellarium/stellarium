@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-19 20:07+0700\n"
-"PO-Revision-Date: 2011-10-11 21:47+0000\n"
+"PO-Revision-Date: 2011-10-18 13:49+0000\n"
 "Last-Translator: Odin <Unknown>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-12 04:37+0000\n"
-"X-Generator: Launchpad (build 14124)\n"
+"X-Launchpad-Export-Date: 2011-10-19 04:37+0000\n"
+"X-Generator: Launchpad (build 14157)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -206,7 +206,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
-msgstr ""
+msgstr "Hammer-Aitoff"
 
 #: src/core/StelProjectorClasses.cpp:187
 msgid ""
@@ -266,11 +266,11 @@ msgstr "RA/DE (av dato): %1/%2"
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:97
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr ""
+msgstr "Timevinkel/DE: %1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
-msgstr ""
+msgstr "(geometrisk)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
@@ -279,7 +279,7 @@ msgstr ""
 #: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
 msgid "Az/Alt: %1/%2"
-msgstr ""
+msgstr "Az/Alt: %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:295
 msgid "Select screenshot directory"
@@ -297,11 +297,11 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:510
 msgid "Authors"
-msgstr ""
+msgstr "Forfattarar"
 
 #: src/gui/ConfigurationDialog.cpp:514 src/gui/ViewDialog.cpp:368
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #: src/gui/ConfigurationDialog.cpp:586
 msgid "Author"
@@ -335,6 +335,9 @@ msgid ""
 "Star count: %2 Million\n"
 "Magnitude range: %3 - %4"
 msgstr ""
+"Nedlastingsstørrelse: %1MB\n"
+"Antall stjerner: %2 Millioner\n"
+"Magnitudeområde: %3 - %4"
 
 #: src/gui/ConfigurationDialog.cpp:686
 msgid ""
@@ -556,19 +559,19 @@ msgstr "Stjernebiletegrenser"
 
 #: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1103
 msgid "Azimuthal grid"
-msgstr ""
+msgstr "Asimutnett"
 
 #: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1101
 msgid "Equatorial grid"
-msgstr ""
+msgstr "Ekvatorialt nett"
 
 #: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1102
 msgid "Equatorial J2000 grid"
-msgstr ""
+msgstr "Ekvatorialt J2000-nett"
 
 #: src/gui/StelGui.cpp:107
 msgid "Galactic grid"
-msgstr ""
+msgstr "Galaktisk nett"
 
 #: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1107
 msgid "Ecliptic line"
@@ -584,7 +587,7 @@ msgstr "Meridianline"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
 msgid "Horizon line"
-msgstr ""
+msgstr "Horisontlinje"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
 msgid "Cardinal points"
@@ -620,7 +623,7 @@ msgstr "Planetnamn"
 
 #: src/gui/StelGui.cpp:122
 msgid "Planet orbits"
-msgstr ""
+msgstr "Planetveg"
 
 #: src/gui/StelGui.cpp:123
 msgid "Planet trails"
@@ -636,11 +639,11 @@ msgstr "Fullskjerm-modus"
 
 #: src/gui/StelGui.cpp:127
 msgid "Flip scene horizontally"
-msgstr ""
+msgstr "Speilvend horisontalt"
 
 #: src/gui/StelGui.cpp:128
 msgid "Flip scene vertically"
-msgstr ""
+msgstr "Speilvend vertikalt"
 
 #: src/gui/StelGui.cpp:130
 msgid "Windows"
@@ -660,7 +663,7 @@ msgstr "Søkevindauge"
 
 #: src/gui/StelGui.cpp:134
 msgid "Sky and viewing options window"
-msgstr ""
+msgstr "Himmel- og visningsalternativer"
 
 #: src/gui/StelGui.cpp:135
 msgid "Date/time window"
@@ -668,11 +671,11 @@ msgstr "Dato/tidsvindauge"
 
 #: src/gui/StelGui.cpp:136
 msgid "Location window"
-msgstr ""
+msgstr "Stedsvalg"
 
 #: src/gui/StelGui.cpp:138
 msgid "Script console window"
-msgstr ""
+msgstr "Skript-konsollvindauge"
 
 #: src/gui/StelGui.cpp:141 src/ui_dateTimeDialogGui.h:294
 msgid "Date and Time"
@@ -680,19 +683,19 @@ msgstr "Dato og tid"
 
 #: src/gui/StelGui.cpp:145
 msgid "Decrease time speed"
-msgstr ""
+msgstr "Reduser tidshastighet"
 
 #: src/gui/StelGui.cpp:146
 msgid "Increase time speed"
-msgstr ""
+msgstr "Øk tidshastighet"
 
 #: src/gui/StelGui.cpp:147
 msgid "Set normal time rate"
-msgstr ""
+msgstr "Normal tidshastighet"
 
 #: src/gui/StelGui.cpp:148
 msgid "Decrease time speed (a little)"
-msgstr ""
+msgstr "Reduser tidshastigheten (litt)"
 
 #: src/gui/StelGui.cpp:149
 msgid "Increase time speed (a little)"
