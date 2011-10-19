@@ -474,8 +474,9 @@ float Planet::getVMagnitude(const StelCore* core, bool withExtinction) const
 	float extinctionMag=0.0; // track magnitude loss
 	if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
 	{
-	    double alt=getAltAzPosApparent(core)[2];
-	    core->getSkyDrawer()->getExtinction().forward(&alt, &extinctionMag);
+	    Vec3d altAz=getAltAzPosApparent(core);
+	    altAz.normalize();
+	    core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
 	}
 
 
@@ -528,39 +529,112 @@ float Planet::getVMagnitude(const StelCore* core, bool withExtinction) const
 	}
 
 	// Use empirical formulae for main planets when seen from earth
-	// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
 	if (core->getCurrentLocation().planetName=="Earth")
 	{
-		phase*=180./M_PI;
+		const double phaseDeg=phase*180./M_PI;
 		const double d = 5. * log10(sqrt(observerPlanetRq*planetRq));
-		double f1 = phase/100.;
+		//double f1 = phaseDeg/100.;
 
+		/*
+		// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
 		if (englishName=="Mercury")
 		{
-			if ( phase > 150. ) f1 = 1.5;
+			if ( phaseDeg > 150. ) f1 = 1.5;
 			return -0.36 + d + 3.8*f1 - 2.73*f1*f1 + 2*f1*f1*f1 + extinctionMag;
 		}
 		if (englishName=="Venus")
 			return -4.29 + d + 0.09*f1 + 2.39*f1*f1 - 0.65*f1*f1*f1 + extinctionMag;
 		if (englishName=="Mars")
-			return -1.52 + d + 0.016*phase + extinctionMag;
+			return -1.52 + d + 0.016*phaseDeg + extinctionMag;
 		if (englishName=="Jupiter")
-			return -9.25 + d + 0.005*phase + extinctionMag;
+			return -9.25 + d + 0.005*phaseDeg + extinctionMag;
 		if (englishName=="Saturn")
 		{
 			// TODO re-add rings computation
 			// double rings = -2.6*sinx + 1.25*sinx*sinx;
-			return -8.88 + d + 0.044*phase + extinctionMag;// + rings;
+			return -8.88 + d + 0.044*phaseDeg + extinctionMag;// + rings;
 		}
-
 		if (englishName=="Uranus")
-			return -7.19 + d + 0.0028*phase + extinctionMag;
+			return -7.19 + d + 0.0028*phaseDeg + extinctionMag;
 		if (englishName=="Neptune")
 			return -6.87 + d + extinctionMag;
 		if (englishName=="Pluto")
-			return -1.01 + d + 0.041*phase + extinctionMag;
-
-		phase/=180./M_PI;
+			return -1.01 + d + 0.041*phaseDeg + extinctionMag;
+		*/
+		// GZ: I prefer the values given by Meeus, Astronomical Algorithms (1992).
+		// There are two solutions:
+		// (1) G. Müller, based on visual observations 1877-91. [Expl.Suppl.1961]
+		// (2) Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes.
+		// The structure is almost identical, just the numbers are different!
+		// I activate (1) for now, because we want to simulate the eye's impression. (Esp. Venus!)
+		// (1)
+		if (englishName=="Mercury")
+		    {
+			double ph50=phaseDeg-50.0;
+			return 1.16 + d + 0.02838*ph50 + 0.0001023*ph50*ph50 + extinctionMag;
+		    }
+		if (englishName=="Venus")
+			return -4.0 + d + 0.01322*phaseDeg + 0.0000004247*phaseDeg*phaseDeg*phaseDeg + extinctionMag;
+		if (englishName=="Mars")
+			return -1.3 + d + 0.01486*phaseDeg + extinctionMag;
+		if (englishName=="Jupiter")
+			return -8.93 + d + extinctionMag;
+		if (englishName=="Saturn")
+		{
+			// TODO re-add rings computation
+			// GZ: implemented from Meeus, Astr.Alg.1992
+			const double jd=core->getJDay();
+			const double T=(jd-2451545.0)/36525.0;
+			const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
+			const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
+			static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+			const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
+			double lambda=atan2(saturnEarth[1], saturnEarth[0]);
+			double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+			const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
+			double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
+			return -8.68 + d + 0.044*phaseDeg + rings + extinctionMag;
+		}
+		if (englishName=="Uranus")
+			return -6.85 + d + extinctionMag;
+		if (englishName=="Neptune")
+			return -7.05 + d + extinctionMag;
+		if (englishName=="Pluto")
+			return -1.0 + d + extinctionMag;
+		/*
+		// (2)
+		if (englishName=="Mercury")
+			return 0.42 + d + .038*phaseDeg - 0.000273*phaseDeg*phaseDeg + 0.000002*phaseDeg*phaseDeg*phaseDeg + extinctionMag;
+		if (englishName=="Venus")
+			return -4.40 + d + 0.0009*phaseDeg + 0.000239*phaseDeg*phaseDeg - 0.00000065*phaseDeg*phaseDeg*phaseDeg + extinctionMag;
+		if (englishName=="Mars")
+			return -1.52 + d + 0.016*phaseDeg + extinctionMag;
+		if (englishName=="Jupiter")
+			return -9.40 + d + 0.005*phaseDeg + extinctionMag;
+		if (englishName=="Saturn")
+		{
+			// TODO re-add rings computation
+			// GZ: implemented from Meeus, Astr.Alg.1992
+			const double jd=core->getJDay();
+			const double T=(jd-2451545.0)/36525.0;
+			const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
+			const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
+			static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+			const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
+			double lambda=atan2(saturnEarth[1], saturnEarth[0]);
+			double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+			const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
+			double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
+			return -8.88 + d + 0.044*phaseDeg + rings + extinctionMag;
+		}
+		if (englishName=="Uranus")
+			return -7.19f + d + extinctionMag;
+		if (englishName=="Neptune")
+			return -6.87f + d + extinctionMag;
+		if (englishName=="Pluto")
+			return -1.00f + d + extinctionMag;
+	*/
+	// TODO: decide which set of formulae is best?
 	}
 
 	// This formula seems to give wrong results

@@ -162,8 +162,9 @@ float Comet::getVMagnitude(const StelCore* core, bool withExtinction) const
 	float extinctionMag=0.0; // track magnitude loss
 	if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
 	{
-	    double alt=getAltAzPosApparent(core)[2];
-	    core->getSkyDrawer()->getExtinction().forward(&alt, &extinctionMag);
+	    Vec3d altAz=getAltAzPosApparent(core);
+	    altAz.normalize();
+	    core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
 	}
 
 	//Calculate distances
