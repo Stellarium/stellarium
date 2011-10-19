@@ -34,7 +34,7 @@ Extinction::Extinction() : ext_coeff(0.20f)
     SUBHORIZONTAL_AIRMASS = (conf->value("astro/subhorizontal_extinction", false).toBool()? 42.0f : 0.0f);
 }
 
-//  altAzPos is the normalized star position vector AFTER REFRACTION, and its z component sin(altitude).
+//  altAzPos is the NORMALIZED (!!!) star position vector AFTER REFRACTION, and its z component sin(altitude).
 void Extinction::forward(const Vec3d *altAzPos, float *mag, const int num) const
 {
 	for (int i=0; i<num; ++i) mag[i] += airmass(altAzPos[i][2], true) * ext_coeff;

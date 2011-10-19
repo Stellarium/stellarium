@@ -47,7 +47,7 @@ class Extinction
 public:
 	Extinction();
 	//! Compute extinction effect for arrays of size @param num position vectors and magnitudes.
-	//! @param altAzPos are the normalized (apparent) star position vectors, and their z components sin(apparent_altitude).
+	//! @param altAzPos are the NORMALIZED (!!) (apparent) star position vectors, and their z components sin(apparent_altitude).
 	//! This call must therefore be done after application of Refraction, and only if atmospheric effects are on.
 	//! Note that forward/backward are no absolute reverse operations!
 	void forward(const Vec3d *altAzPos, float *mag, const int num=1) const;
@@ -58,7 +58,7 @@ public:
 	void forward(const float  *sinAlt,  float *mag) const;
 
 	//! Compute inverse extinction effect for arrays of size @param num position vectors and magnitudes.
-	//! @param altAzPos are the normalized (apparent) star position vectors, and their z components sin(apparent_altitude).
+	//! @param altAzPos are the NORMALIZED (!!) (apparent) star position vectors, and their z components sin(apparent_altitude).
 	//! Note that forward/backward are no absolute reverse operations!
 	void backward(const Vec3d *altAzPos, float *mag, const int num=1) const;
 	void backward(const Vec3f *altAzPos, float *mag, const int num=1) const;
