@@ -616,23 +616,24 @@ void Oculars::ccdRotationReset()
 
 void Oculars::enableOcular(bool enableOcularMode)
 {
-	// Close the sensor view if it's displayed
-	if (flagShowCCD)
+	if (enableOcularMode)
 	{
-		if (actionShowSensor->isChecked())
-			actionShowSensor->setChecked(false);
-		flagShowCCD = false;
-		selectedCCDIndex = -1;
-	}
+		// Close the sensor view if it's displayed
+		if (flagShowCCD)
+		{
+			if (actionShowSensor->isChecked())
+				actionShowSensor->setChecked(false);
+			flagShowCCD = false;
+			selectedCCDIndex = -1;
+		}
 
-	// Close the Telrad sight if it's displayed
-	if (flagShowTelrad)
-	{
-		if (actionShowTelrad->isChecked())
-			actionShowTelrad->setChecked(false);
-	}
-	
-	if (enableOcularMode) {
+		// Close the Telrad sight if it's displayed
+		if (flagShowTelrad)
+		{
+			if (actionShowTelrad->isChecked())
+				actionShowTelrad->setChecked(false);
+		}
+
 		// Check to ensure that we have enough oculars & telescopes, as they may have been edited in the config dialog
 		if (oculars.count() == 0) {
 			selectedOcularIndex = -1;
