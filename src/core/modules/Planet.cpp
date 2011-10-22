@@ -1032,7 +1032,7 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 
 					painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
 
-					//useShader(0);
+					useShader(0);
 					glActiveTexture(GL_TEXTURE2);
 					glDisable(GL_TEXTURE_2D);
 					painter->enableTexture2d(false, 1);
