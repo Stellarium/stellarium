@@ -1784,7 +1784,7 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
     for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
     {
             s = !flipTexture ? 0.f : 1.f;
-            for (j = 0,cos_sin_theta_p = cos_sin_theta; j<=slices;++j,cos_sin_theta_p+=2)
+            for (j = 0,cos_sin_theta_p = cos_sin_theta; j<= slices;++j,cos_sin_theta_p+=2)
             {
                     Vec3f vector, normal, tangent, nextv, prevv;
                     float px, py, pz;
@@ -1801,36 +1801,22 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
                             colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
                     }
 
-                    if (j == 0)
-                    {
-                            px = -cos_sin_theta[2 * slices - 1] * cos_sin_rho[2 * stacks - 1];
-                            py = cos_sin_theta[2 * slices - 2] * cos_sin_rho[2 * stacks - 1];
-                            pz = nsign * cos_sin_rho[2 * stacks - 2];
+					int prevx, prevy, nextx, nexty; //offsets
+					prevx = -2; prevy = -2;
+					nextx = 2; nexty = -2;
 
-                            nx = -cos_sin_theta[2 * slices] * cos_sin_rho[2 * stacks];
-                            ny = cos_sin_theta[2 * slices - 1] * cos_sin_rho[2 * stacks];
-                            nz = nsign * cos_sin_rho[2 * stacks - 1];
-                    }
-                    else if (j == slices)
-                    {
-                            px = -cos_sin_theta_p[-1] * cos_sin_rho_p[-1];
-                            py = cos_sin_theta_p[-2] * cos_sin_rho_p[-1];
-                            pz = nsign * cos_sin_rho_p[-2];
+					if (i == 0) {prevy = 0;}//2; nexty = 4;}
+					if (i == (stacks - 1)) {nexty = 0;}
+					if (j == 0) {prevx = 0;}
+					if (j == slices) {nextx = 0;}
 
-                            nx = -cos_sin_theta[1] * cos_sin_rho[1];
-                            ny = cos_sin_theta[0] * cos_sin_rho[1];
-                            nz = nsign * cos_sin_rho[0];
-                    }
-                    else
-                    {
-                         px = -cos_sin_theta_p[-1] * cos_sin_rho_p[-1];
-                         py = cos_sin_theta_p[-2] * cos_sin_rho_p[-1];
-                         pz = nsign * cos_sin_rho_p[-2];
+                    px = -cos_sin_theta_p[1 + prevx] * cos_sin_rho_p[1 + prevy];
+                    py = cos_sin_theta_p[0 + prevx] * cos_sin_rho_p[1 + prevy];
+                    pz = nsign * cos_sin_rho_p[0 + prevy];
 
-                         nx = -cos_sin_theta_p[3] * cos_sin_rho_p[3];
-                         ny = cos_sin_theta_p[2] * cos_sin_rho_p[3];
-                         nz = nsign * cos_sin_rho_p[2];
-                    }
+                    nx = -cos_sin_theta_p[1 + nextx] * cos_sin_rho_p[1 + nexty];
+                    ny = cos_sin_theta_p[0 + nextx] * cos_sin_rho_p[1 + nexty];
+                    nz = nsign * cos_sin_rho_p[0 + nexty];
 
                     nextv = Vec3f(nx * radius, ny * radius, nz * oneMinusOblateness * radius);
                     prevv = Vec3f(px * radius, py * radius, pz * oneMinusOblateness * radius);
@@ -1858,36 +1844,21 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
                             colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
                     }
 
-                    if (j == 0)
-                    {
-                            px = -cos_sin_theta[2 * slices - 1] * cos_sin_rho[2 * stacks - 1];
-                            py = cos_sin_theta[2 * slices - 2] * cos_sin_rho[2 * stacks - 1];
-                            pz = nsign * cos_sin_rho[2 * stacks - 2];
+					prevx = -2; prevy = -2;
+					nextx = 2; nexty = -2;
 
-                            nx = -cos_sin_theta[2 * slices] * cos_sin_rho[2 * stacks];
-                            ny = cos_sin_theta[2 * slices - 1] * cos_sin_rho[2 * stacks];
-                            nz = nsign * cos_sin_rho[2 * stacks - 1];
-                    }
-                    else if (j == slices)
-                    {
-                            px = -cos_sin_theta_p[-1] * cos_sin_rho_p[-1];
-                            py = cos_sin_theta_p[-2] * cos_sin_rho_p[-1];
-                            pz = nsign * cos_sin_rho_p[-2];
+					if (i == 0) {prevy = 0;}//2; nexty = 4;}
+					if (i == (stacks - 1)) {nexty = 0;}
+					if (j == 0) {prevx = 0;}
+					if (j == slices) {nextx = 0;}
 
-                            nx = -cos_sin_theta[1] * cos_sin_rho[1];
-                            ny = cos_sin_theta[0] * cos_sin_rho[1];
-                            nz = nsign * cos_sin_rho[0];
-                    }
-                    else
-                    {
-                         px = -cos_sin_theta_p[-1] * cos_sin_rho_p[-1];
-                         py = cos_sin_theta_p[-2] * cos_sin_rho_p[-1];
-                         pz = nsign * cos_sin_rho_p[-2];
+                    px = -cos_sin_theta_p[1 + prevx] * cos_sin_rho_p[3 + prevy];
+                    py = cos_sin_theta_p[0 + prevx] * cos_sin_rho_p[3 + prevy];
+                    pz = nsign * cos_sin_rho_p[2 + prevy];
 
-                         nx = -cos_sin_theta_p[3] * cos_sin_rho_p[3];
-                         ny = cos_sin_theta_p[2] * cos_sin_rho_p[3];
-                         nz = nsign * cos_sin_rho_p[2];
-                    }
+                    nx = -cos_sin_theta_p[1 + nextx] * cos_sin_rho_p[3 + nexty];
+                    ny = cos_sin_theta_p[0 + nextx] * cos_sin_rho_p[3 + nexty];
+                    nz = nsign * cos_sin_rho_p[2 + nexty];
 
                     nextv = Vec3f(nx * radius, ny * radius, nz * oneMinusOblateness * radius);
                     prevv = Vec3f(px * radius, py * radius, pz * oneMinusOblateness * radius);

@@ -41,6 +41,7 @@ void main()
 	
 	vec3 texC = vec3(mod((gl_TexCoord[0].x + t * cvel.x), 1.0), mod((gl_TexCoord[0].y + t * cvel.y), 1.0), (gl_TexCoord[0].z + t * cvel.z)) * cscale;
 
+
 	float pn = fractalNoise(texC) * 0.5 + 0.5;
 	float cloud = cloudCurve(pn, cdensity, csharp);
 	
