@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-19 20:07+0700\n"
-"PO-Revision-Date: 2011-07-17 10:11+0000\n"
-"Last-Translator: VeikkoM <veikko.makela@ursa.fi>\n"
+"PO-Revision-Date: 2011-10-24 08:31+0000\n"
+"Last-Translator: Jiri Grönroos <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-20 04:48+0000\n"
-"X-Generator: Launchpad (build 13980)\n"
+"X-Launchpad-Export-Date: 2011-10-25 04:48+0000\n"
+"X-Generator: Launchpad (build 14185)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -146,11 +146,11 @@ msgstr "Parallaksi: %1\""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr ""
+msgstr "Avaruusalus"
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
-msgstr "Maksiminäköknettä: "
+msgstr "Enimmäisnäkökenttä: "
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
@@ -1111,7 +1111,7 @@ msgstr "Kharon"
 #. TRANSLATORS: Moon of Pluto (II)
 #: src/translations.h:82
 msgid "Nix"
-msgstr ""
+msgstr "Nix"
 
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
@@ -1256,7 +1256,7 @@ msgstr "L"
 
 #: src/translations.h:136
 msgid "Arabic"
-msgstr ""
+msgstr "Arabialainen"
 
 #: src/translations.h:137
 msgid "Aztec"
@@ -1584,7 +1584,7 @@ msgstr ":"
 
 #: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
 msgid "Help"
-msgstr "Apua"
+msgstr "Ohje"
 
 #: src/ui_helpDialogGui.h:267
 msgid "About"
@@ -2026,8 +2026,8 @@ msgid ""
 "next startup."
 msgstr ""
 "Oletusarvojen palautus vaati Stellariumin uudelleenkäynnistyksen. "
-"Tallennetaan seuraavaa käynnistystä varten kaikki nykyiset asetukset "
-"mukaanlukien nykyinen näkökenttä ja katselusuunta."
+"Tallennetaan seuraavaa käynnistystä varten kaikki nykyiset asetukset mukaan "
+"lukien nykyinen näkökenttä ja katselusuunta."
 
 #: src/ui_configurationDialog.h:775
 msgid "The width of your view when Stellarium starts"
@@ -2143,14 +2143,14 @@ msgstr "Suuntaa nimet horisontin mukaan"
 
 #: src/ui_configurationDialog.h:822
 msgid "Gravity labels"
-msgstr "\"Gravitaatio\"nimet"
+msgstr "\"Gravitaationimet\""
 
 #: src/ui_configurationDialog.h:824
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
-"Kun käytössä, \"automaattinen loitonnus\" -näppäin asettaa myös "
+"Kun käytössä, \"automaattinen loitonnus\"-näppäin asettaa myös "
 "aloituskatselusuunnan"
 
 #: src/ui_configurationDialog.h:826
@@ -2175,7 +2175,7 @@ msgstr "Valitse yksittäinen tähdistö"
 
 #: src/ui_configurationDialog.h:835
 msgid "Screenshots"
-msgstr "Ruudunkaappaukset"
+msgstr "Kuvankaappaukset"
 
 #: src/ui_configurationDialog.h:836
 msgid "Screenshot Directory"
@@ -2219,7 +2219,7 @@ msgstr "Keskeytä haku. Voit aina aloittaa sen myöhemmin uudelleen"
 
 #: src/ui_configurationDialog.h:853
 msgid "Cancel"
-msgstr "Hylkää"
+msgstr "Peru"
 
 #: src/ui_configurationDialog.h:856
 msgid "Close window when script runs"
@@ -2259,7 +2259,7 @@ msgstr "Komentojonot"
 
 #: src/ui_configurationDialog.h:880
 msgid "Plugins"
-msgstr "Lisäosat"
+msgstr "Liitännäiset"
 
 #: src/ui_addRemoveLandscapesDialog.h:266
 msgid "Add/Remove Landscapes"
@@ -2290,8 +2290,8 @@ msgid ""
 "WARNING: Removing the selected landscape means deleting its files. This "
 "operation is irreversible."
 msgstr ""
-"VAROITUS: VAlitus maiseman poistaminen tarkoittaa sen tiedostojen "
-"poistamista. Toimenpidettä ei voi peruuttaa."
+"VAROITUS: Valitun maiseman poistaminen tarkoittaa sen tiedostojen "
+"poistamista. Toimenpidettä ei voi perua."
 
 #: src/ui_AtmosphereDialog.h:167
 msgid "Atmosphere Details"
@@ -2349,7 +2349,7 @@ msgstr "Kulman mittaus"
 #: plugins/Oculars/src/Oculars.cpp:931 plugins/Oculars/src/Oculars.cpp:945
 #: plugins/Satellites/src/Satellites.cpp:123
 msgid "Plugin Key Bindings"
-msgstr "Laajennus näppäinoikoteille"
+msgstr "Liitännäinen näppäinoikoteille"
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
@@ -2460,7 +2460,7 @@ msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
-"Toteutus versiosarjan 0.9.x tekstinkäyttöliittymälaajennukseksi (TUI), "
+"Liitännäistoteutus versiosarjan 0.9.x tekstikäyttöliittymästä (TUI), "
 "käytetään planetaariosysteemeissä"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
@@ -2486,7 +2486,7 @@ msgid ""
 "The plugin for visualization of some historical supernovae, brighter 10 "
 "magnitude"
 msgstr ""
-"Laajennus joidenkin hisotriallisten supernovien visualisoimiseksi, lisää "
+"Liitännäinen joidenkin hisotriallisten supernovien visualisoimiseksi, lisää "
 "kirkkautta 10 magnitudia"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
@@ -2505,15 +2505,3 @@ msgstr "Tyyppi: %1"
 
 #~ msgid "Form"
 #~ msgstr "Muoto"
-
-#~ msgid ""
-#~ "SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
-#~ "July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
-#~ "1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
-#~ "August), SN 1972E (8 May) and SN 1987A (24 February)"
-#~ msgstr ""
-#~ "SN 185A (7. joulukuuta), SN 386A (24. huhtikuuta), SN 1006A (29. "
-#~ "huhtikuuta), SN 1054A (3. heinäkuuta), SN 1181A (4. elokuuta), SN 1572A (5. "
-#~ "marraskuuta), SN 1604A (8. lokakuuta), SN 1680A (15. elokuuta), SN 1885A "
-#~ "(17. elokuuta), SN 1895B (5. heinäkuuta), SN 1937C (21. elokuuta), SN 1972E "
-#~ "(8. toukokuuta) and SN 1987A (24. helmikuuta)"
