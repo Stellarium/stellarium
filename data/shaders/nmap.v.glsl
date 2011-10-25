@@ -4,6 +4,9 @@ uniform vec3 lpos;
 
 varying vec3 var_ldir;
 varying vec3 var_vdir;
+varying vec3 var_norm;
+
+varying vec3 pos;
 
 void main()
 {
@@ -25,4 +28,7 @@ void main()
 
 	var_ldir = tbnv * ldir;
 	var_vdir = -(tbnv * pvec);
+	pos = gl_Vertex.xyz;
+
+	var_norm = normal;
 }
