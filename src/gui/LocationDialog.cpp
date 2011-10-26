@@ -399,11 +399,20 @@ void LocationDialog::addCurrentLocationToList()
 // Called when the user wants to use the current location as default
 void LocationDialog::useAsDefaultClicked()
 {
-	StelApp::getInstance().getCore()->setDefaultLocationID(StelApp::getInstance().getCore()->getCurrentLocation().getID());
-	const bool b = StelApp::getInstance().getCore()->getCurrentLocation().getID()==
-			StelApp::getInstance().getCore()->getDefaultLocationID();
-	ui->useAsDefaultLocationCheckBox->setChecked(b);
-	ui->useAsDefaultLocationCheckBox->setEnabled(!b);
+	StelCore* core = StelApp::getInstance().getCore();
+	QString newDefaultLocationId = core->getCurrentLocation().getID();
+	core->setDefaultLocationID(newDefaultLocationId);
+
+	QString currentLocationId = core->getCurrentLocation().getID();
+	const bool show = (currentLocationId == core->getDefaultLocationID());
+	disconnectEditSignals();
+	ui->useAsDefaultLocationCheckBox->setChecked(show);
+	ui->useAsDefaultLocationCheckBox->setEnabled(!show);
+	//The focus need to be switched to another control, otherwise
+	//ui->latitudeSpinBox receives it and emits a valueChanged() signal when
+	//the window is closed.
+	ui->citySearchLineEdit->setFocus();
+	connectEditSignals();
 }
 
 // Called when the user clic on the delete button
