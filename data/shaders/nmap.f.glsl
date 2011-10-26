@@ -38,9 +38,6 @@ void main()
 	float diffusel = max(dot(ldir, normal), 0.0);
 	vec4 dcol = diffusel * texture2D(tex, gl_TexCoord[0].xy) * diffuse;
 
-//	float specular = pow(max(dot(rdir, vdir), 0.0), gl_FrontMaterial.shininess);
-//	vec4 scol = specular * gl_FrontMaterial.specular;
-	
 	//vec3 texC = vec3(mod((gl_TexCoord[0].x + t * cvel.x), 1.0), mod((gl_TexCoord[0].y + t * cvel.y), 1.0), (gl_TexCoord[0].z + t * cvel.z)) * cscale;
 
 	float theta = mod(t * cvel.x, 2.0 * 3.14159265);
@@ -51,7 +48,8 @@ void main()
 
 	float pn = fractalNoise(rotpos * 10000.0 * cscale) * 0.5 + 0.5;
 	float cloud = cloudCurve(pn, cdensity, csharp);
-	
+	ccolor = ccolor * max(dot(ldir, normal), 0.0);
+
 	//vec3 color = (ambient * gl_LightModel.ambient).xyz + dcol.xyz;
 	vec3 color = dcol.xyz;
 	color = mix(color, ccolor, cloud);
