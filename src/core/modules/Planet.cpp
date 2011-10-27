@@ -954,6 +954,8 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
     // fits to the observers position. No idea why this is necessary,
     // perhaps some openGl strangeness, or confusing sin/cos.
 
+    //the following lines are compatible to opengl es but have not been tested in an opengl es machine
+#ifndef USE_OPENGL_ES2
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
     if (ssm->nMapShader != 0)
     {
@@ -1047,6 +1049,9 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 	{
 		painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
 	}
+#else
+	painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+#endif
 
     painter->setShadeModel(StelPainter::ShadeModelFlat);
     glDisable(GL_CULL_FACE);
