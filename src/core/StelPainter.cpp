@@ -1707,6 +1707,9 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 //! @param pointer to the solar system (SolarSystem*)
 //! @param orientation: inside or not (int)
 //! @param flip texture or not (int)
+Vec3f cross(Vec3f a, Vec3f b) {
+	return Vec3f(a[1]*b[2] - a[2]*b[1], a[2]*b[0] - a[0]*b[2], a[0]*b[1] - a[1]*b[0]);
+}
 
 void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, int stacks, SolarSystem* ssm, int orientInside, bool flipTexture)
 {
@@ -1782,145 +1785,47 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
     colorArr.resize(0);
 
 	static QVector<Vec3f> tArr1, tArr2;
-	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
-    {
+	tArr1.resize(0);
+	tArr2.resize(0);
+//	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
+ //   {
+			Vec3f up = Vec3f(0.0, 0.0, 1.0);
+			cos_sin_rho_p = cos_sin_rho + stacks;
 
-		if ( i == (stacks / 2.0) ) {
 			for (j = 0,cos_sin_theta_p = cos_sin_theta; j<= slices;++j,cos_sin_theta_p+=2)
 			{
-				Vec3f vector, normal, tangent, nextv, prevv;
-				float px, py, pz;
-				float nx, ny, nz;
+				Vec3f vector, normal, tangent;
 
 /* FIRST POINT */
-				int prevx, prevy, nextx, nexty; //offsets
-					prevx = -2; prevy = -2;
-					nextx = 2; nexty = -2;
-
-					if (i == 0) {prevy = 0;}//2; nexty = 4;}
-					if (i == (stacks - 1)) {nexty = 0;}
-					if (j == 0) {prevx = 0;}
-					if (j == slices) {nextx = 0;}
-
-                    px = -cos_sin_theta_p[1 + prevx] * cos_sin_rho_p[1 + prevy];
-                    py = cos_sin_theta_p[0 + prevx] * cos_sin_rho_p[1 + prevy];
-                    pz = nsign * cos_sin_rho_p[0 + prevy];
-
-                    nx = -cos_sin_theta_p[1 + nextx] * cos_sin_rho_p[1 + nexty];
-                    ny = cos_sin_theta_p[0 + nextx] * cos_sin_rho_p[1 + nexty];
-                    nz = nsign * cos_sin_rho_p[0 + nexty];
-
-                    nextv = Vec3f(nx * radius, ny * radius, nz * oneMinusOblateness * radius);
-                    prevv = Vec3f(px * radius, py * radius, pz * oneMinusOblateness * radius);
-                    tangent = nextv - prevv;
-                    tangent.normalize();
-					/*
 				x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
 				y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
 				z = nsign * cos_sin_rho_p[0];
 
-				if (j == 0)
-				{
-					px = -cos_sin_theta[slices - 1] * cos_sin_rho_p[-1];
-					py = cos_sin_theta[slices - 2] * cos_sin_rho_p[-1];
-					pz = nsign * cos_sin_rho_p[-2];
+				vector = Vec3f(x * radius, y * radius, z * oneMinusOblateness * radius);
+				normal = Vec3f(x * oneMinusOblateness, y * oneMinusOblateness, z);
+				normal.normalize();
 
-					nx = -cos_sin_theta_p[3] * cos_sin_rho_p[3];
-					ny = cos_sin_theta_p[2] * cos_sin_rho_p[3];
-					nz = nsign * cos_sin_rho_p[2];
-				}
-				else if (j == slices)
-				{
-					px = -cos_sin_theta_p[-1] * cos_sin_rho_p[-1];
-					py = cos_sin_theta_p[-2] * cos_sin_rho_p[-1];
-					pz = nsign * cos_sin_rho_p[-2];
-
-					nx = -cos_sin_theta[2] * cos_sin_rho_p[3];
-					ny = cos_sin_theta[1] * cos_sin_rho_p[3];
-					nz = nsign * cos_sin_rho_p[2];
-				}
-				else{
-					px = -cos_sin_theta_p[-1] * cos_sin_rho_p[-1];
-					py = cos_sin_theta_p[-2] * cos_sin_rho_p[-1];
-					pz = nsign * cos_sin_rho_p[-2];
-
-					nx = -cos_sin_theta_p[3] * cos_sin_rho_p[3];
-					ny = cos_sin_theta_p[2] * cos_sin_rho_p[3];
-					nz = nsign * cos_sin_rho_p[2];
-				}
-
-				nextv = Vec3f(nx * radius, ny * radius, nz * oneMinusOblateness * radius);
-				prevv = Vec3f(px * radius, py * radius, pz * oneMinusOblateness * radius);
-				tangent = nextv - prevv;
-				tangent.normalize();*/
+				tangent = cross(up, normal);
+				tangent.normalize();
 
 				tArr1 << tangent;
 
 /* SECOND POINT */
-
 				x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
 				y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
 				z = nsign * cos_sin_rho_p[2];
 
-			/*	if (j == 0)
-				{
-					px = -cos_sin_theta[slices - 1] * cos_sin_rho_p[1];
-					py = cos_sin_theta[slices - 2] * cos_sin_rho_p[1];
-					pz = nsign * cos_sin_rho_p[0];
+				vector = Vec3f(x * radius, y * radius, z * oneMinusOblateness * radius);
+				normal = Vec3f(x * oneMinusOblateness, y * oneMinusOblateness, z);
+				normal.normalize();
 
-					nx = -cos_sin_theta_p[3] * cos_sin_rho_p[5];
-					ny = cos_sin_theta_p[2] * cos_sin_rho_p[5];
-					nz = nsign * cos_sin_rho_p[4];
-				}
-				if (j == slices)
-				{
-					px = -cos_sin_theta_p[-1] * cos_sin_rho_p[1];
-					py = cos_sin_theta_p[-2] * cos_sin_rho_p[1];
-					pz = nsign * cos_sin_rho_p[0];
-
-					nx = -cos_sin_theta[2] * cos_sin_rho_p[5];
-					ny = cos_sin_theta[1] * cos_sin_rho_p[5];
-					nz = nsign * cos_sin_rho_p[4];
-				}
-				else {
-					px = -cos_sin_theta_p[-1] * cos_sin_rho_p[1];
-					py = cos_sin_theta_p[-2] * cos_sin_rho_p[1];
-					pz = nsign * cos_sin_rho_p[0];
-
-					nx = -cos_sin_theta_p[3] * cos_sin_rho_p[5];
-					ny = cos_sin_theta_p[2] * cos_sin_rho_p[5];
-					nz = nsign * cos_sin_rho_p[4];
-				}
-*/
-					prevx = -2; prevy = -2;
-					nextx = 2; nexty = -2;
-
-					if (i == 0) {prevy = 0;}//2; nexty = 4;}
-					if (i == (stacks - 1)) {nexty = 0;}
-					if (j == 0) {prevx = 0;}
-					if (j == slices) {nextx = 0;}
-
-                    px = -cos_sin_theta_p[1 + prevx] * cos_sin_rho_p[3 + prevy];
-                    py = cos_sin_theta_p[0 + prevx] * cos_sin_rho_p[3 + prevy];
-                    pz = nsign * cos_sin_rho_p[2 + prevy];
-
-                    nx = -cos_sin_theta_p[1 + nextx] * cos_sin_rho_p[3 + nexty];
-                    ny = cos_sin_theta_p[0 + nextx] * cos_sin_rho_p[3 + nexty];
-                    nz = nsign * cos_sin_rho_p[2 + nexty];
-
-                    nextv = Vec3f(nx * radius, ny * radius, nz * oneMinusOblateness * radius);
-                    prevv = Vec3f(px * radius, py * radius, pz * oneMinusOblateness * radius);
-                    tangent = nextv - prevv;
-                    tangent.normalize();
-
-				nextv = Vec3f(nx * radius, ny * radius, nz * oneMinusOblateness * radius);
-				prevv = Vec3f(px * radius, py * radius, pz * oneMinusOblateness * radius);
-				tangent = nextv - prevv;
+				tangent = cross(up, normal);
 				tangent.normalize();
+
 				tArr2 << tangent;
 			}
-		}
-	}
+	//	}
+//	}
 
     for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
     {
