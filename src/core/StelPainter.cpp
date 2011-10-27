@@ -1833,9 +1833,7 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
             for (j = 0,cos_sin_theta_p = cos_sin_theta; j<= slices;++j,cos_sin_theta_p+=2)
             {
                     Vec3f vector, normal, tangent, nextv, prevv;
-             /*       float px, py, pz;
-                    float nx, ny, nz;*/
-//first point
+
                     x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
                     y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
                     z = nsign * cos_sin_rho_p[0];
@@ -1846,28 +1844,6 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
                             if (c<0) {c=0;}
                             colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
                     }
-/*
-					int prevx, prevy, nextx, nexty; //offsets
-					prevx = -2; prevy = -2;
-					nextx = 2; nexty = -2;
-
-					if (i == 0) {prevy = 0;}//2; nexty = 4;}
-					if (i == (stacks - 1)) {nexty = 0;}
-					if (j == 0) {prevx = 0;}
-					if (j == slices) {nextx = 0;}
-
-                    px = -cos_sin_theta_p[1 + prevx] * cos_sin_rho_p[1 + prevy];
-                    py = cos_sin_theta_p[0 + prevx] * cos_sin_rho_p[1 + prevy];
-                    pz = nsign * cos_sin_rho_p[0 + prevy];
-
-                    nx = -cos_sin_theta_p[1 + nextx] * cos_sin_rho_p[1 + nexty];
-                    ny = cos_sin_theta_p[0 + nextx] * cos_sin_rho_p[1 + nexty];
-                    nz = nsign * cos_sin_rho_p[0 + nexty];
-
-                    nextv = Vec3f(nx * radius, ny * radius, nz * oneMinusOblateness * radius);
-                    prevv = Vec3f(px * radius, py * radius, pz * oneMinusOblateness * radius);
-                    tangent = nextv - prevv;
-                    tangent.normalize(); */
 
                     vector = Vec3f(x * radius, y * radius, z * oneMinusOblateness * radius);
                     normal = Vec3f(x * oneMinusOblateness, y * oneMinusOblateness, z);
@@ -1876,11 +1852,10 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
                     texCoordArr << s << t;
                     vertexArr << vector[0] << vector[1] << vector[2];
                     normalArr << normal[0] << normal[1] << normal[2];
-                  //  tangentArr << tangent[0] << tangent[1] << tangent[2];
+
 					Vec3f tang = tArr1[j];
 					tangentArr << tang[0] << tang[1] << tang[2];
 
-//second point
                     x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
                     y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
                     z = nsign * cos_sin_rho_p[2];
@@ -1892,27 +1867,6 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
                             colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
                     }
 
-/*					prevx = -2; prevy = -2;
-					nextx = 2; nexty = -2;
-
-					if (i == 0) {prevy = 0;}//2; nexty = 4;}
-					if (i == (stacks - 1)) {nexty = 0;}
-					if (j == 0) {prevx = 0;}
-					if (j == slices) {nextx = 0;}
-
-                    px = -cos_sin_theta_p[1 + prevx] * cos_sin_rho_p[3 + prevy];
-                    py = cos_sin_theta_p[0 + prevx] * cos_sin_rho_p[3 + prevy];
-                    pz = nsign * cos_sin_rho_p[2 + prevy];
-
-                    nx = -cos_sin_theta_p[1 + nextx] * cos_sin_rho_p[3 + nexty];
-                    ny = cos_sin_theta_p[0 + nextx] * cos_sin_rho_p[3 + nexty];
-                    nz = nsign * cos_sin_rho_p[2 + nexty];
-
-                    nextv = Vec3f(nx * radius, ny * radius, nz * oneMinusOblateness * radius);
-                    prevv = Vec3f(px * radius, py * radius, pz * oneMinusOblateness * radius);
-                    tangent = nextv - prevv;
-                    tangent.normalize(); */
-
                     vector = Vec3f(x * radius, y * radius, z * oneMinusOblateness * radius);
                     normal = Vec3f(x * oneMinusOblateness, y * oneMinusOblateness, z);
                     normal.normalize();
@@ -1920,7 +1874,7 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
                     texCoordArr << s << t - dt;
                     vertexArr << vector[0] << vector[1] << vector[2];
                     normalArr << normal[0] << normal[1] << normal[2];
-                   // tangentArr << tangent[0] << tangent[1] << tangent[2];
+
 					tang = tArr2[j];
 					tangentArr << tang[0] << tang[1] << tang[2];
 
