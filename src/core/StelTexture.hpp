@@ -90,7 +90,12 @@ public:
 
 	//! Bind the texture so that it can be used for openGL drawing (calls glBindTexture).
 	//! If the texture is lazyly loaded, this starts the loading and return false immediately.
+	//! @param int texture unit (default is 0)
 	//! @return true if the binding successfully occured, false if the texture is not yet loaded.
+	
+	//minor change by Eleni Maria Stea:
+	//added texture unit (useful when multiple textures are used)
+	//this change doesn't affect the previous calls of the function!
 	bool bind(int texunit = 0);
 
 	//! Return whether the texture can be binded, i.e. it is fully loaded

@@ -1,6 +1,8 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2011 Eleni Maria Stea (planet rendering using normal mapping
+ * and clouds)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
