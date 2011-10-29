@@ -31,7 +31,7 @@ void TestRefractionExtinction::initTestCase()
 
 void TestRefractionExtinction::testBase()
 {
-	RefractionExtinction refExt;
+	Refraction refExt;
 	Vec3d v(1.,0.,0.);
 	float mag=4.f;
 	refExt.forward(&v, &mag, 1);
@@ -41,7 +41,7 @@ void TestRefractionExtinction::testBase()
 
 	Vec3d vert(0.,0.,1.);
 	mag=2.0f;
-	refExt.setExtinctionCoefficient(0.25);
+	#refExt.setExtinctionCoefficient(0.25);
 	refExt.setTemperature(15.0);
 	refExt.setPressure(1000.0);
 	refExt.forward(&vert, &mag, 1);
