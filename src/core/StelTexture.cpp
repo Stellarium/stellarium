@@ -159,6 +159,11 @@ void StelTexture::reportError(const QString& aerrorMessage)
 /*************************************************************************
  Bind the texture so that it can be used for openGL drawing (calls glBindTexture)
  *************************************************************************/
+
+//minor change by Eleni Maria Stea:
+//added texture unit (useful when multiple textures are used)
+//this change doesn't affect the previous calls of the function!
+
 bool StelTexture::bind(int texunit)
 {
 	// qDebug() << "TEST bind" << fullPath;
