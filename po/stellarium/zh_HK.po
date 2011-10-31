@@ -8,30 +8,30 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-19 20:07+0700\n"
-"PO-Revision-Date: 2011-06-19 12:40+0000\n"
-"Last-Translator: siulamvictor <victorlamhk@gmail.com>\n"
+"PO-Revision-Date: 2011-10-31 01:23+0000\n"
+"Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-20 04:51+0000\n"
-"X-Generator: Launchpad (build 13980)\n"
+"X-Launchpad-Export-Date: 2011-10-31 05:31+0000\n"
+"X-Generator: Launchpad (build 14197)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
-msgstr ""
+msgstr "子午圈"
 
 #: src/core/modules/GridLinesMgr.cpp:529
 msgid "Ecliptic"
-msgstr ""
+msgstr "黄道"
 
 #: src/core/modules/GridLinesMgr.cpp:533
 msgid "Equator"
-msgstr ""
+msgstr "赤道"
 
 #: src/core/modules/GridLinesMgr.cpp:537
 msgid "Horizon"
-msgstr ""
+msgstr "地平線"
 
 #: src/core/modules/LandscapeMgr.cpp:486
 msgid "Author: "
@@ -84,7 +84,7 @@ msgstr "星云"
 
 #: src/core/modules/Nebula.cpp:296
 msgid "Planetary nebula"
-msgstr ""
+msgstr "行星狀星雲"
 
 #: src/core/modules/Nebula.cpp:299
 msgid "Cluster associated with nebulosity"
@@ -92,7 +92,7 @@ msgstr "瀰漫星雲"
 
 #: src/core/modules/Nebula.cpp:302
 msgid "Unknown"
-msgstr ""
+msgstr "不詳"
 
 #: src/core/modules/Nebula.cpp:305
 msgid "Undocumented type"
@@ -106,12 +106,12 @@ msgstr "絕對星等: %1"
 #: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr ""
+msgstr "黄道的地心 (日期): %1/%2"
 
 #: src/core/modules/Planet.cpp:137
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr ""
+msgstr "傾角 (日期): %1"
 
 #: src/core/modules/Planet.cpp:143
 #, no-c-format, qt-format
@@ -253,11 +253,11 @@ msgstr "時角/赤緯:%1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
-msgstr ""
+msgstr "(幾何)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
-msgstr ""
+msgstr "(明顯)"
 
 #: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
@@ -304,7 +304,7 @@ msgstr "執行指令：[空白]"
 
 #: src/gui/ConfigurationDialog.cpp:666
 msgid "Finished downloading all star catalogs!"
-msgstr ""
+msgstr "已完成下載所有的星表！"
 
 #: src/gui/ConfigurationDialog.cpp:675
 #, qt-format
@@ -826,7 +826,7 @@ msgstr "完成"
 #: src/gui/AddRemoveLandscapesDialog.cpp:220
 #: src/gui/AddRemoveLandscapesDialog.cpp:228
 msgid "No landscape was installed."
-msgstr ""
+msgstr "未有安裝風景"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:142
 #: src/gui/AddRemoveLandscapesDialog.cpp:166
@@ -835,35 +835,35 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:229
 #: src/gui/AddRemoveLandscapesDialog.cpp:239
 msgid "Error!"
-msgstr ""
+msgstr "錯誤！"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:154
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
-msgstr ""
+msgstr "風景 \"%1\" 已成功移除."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:165
 #: src/gui/AddRemoveLandscapesDialog.cpp:235
 msgid "The selected landscape could not be (completely) removed."
-msgstr ""
+msgstr "所選的風景不能 (完全地) 移除."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
 #, qt-format
 msgid "Size on disk: %1 MiB"
-msgstr ""
+msgstr "在硬碟上的大小: %1 Mib"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
 #: src/gui/AddRemoveLandscapesDialog.cpp:214
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
-msgstr ""
+msgstr "Stellarium無法開啟, 讀取或寫入%1"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:220
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
-msgstr ""
+msgstr "所選擇的文件不是一個 ZIP壓縮檔, 或不包含Stellarium風景."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
 #: src/gui/AddRemoveLandscapesDialog.cpp:227
@@ -2196,7 +2196,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:872
 msgid "Main"
-msgstr "主設定畫面"
+msgstr "主要設定"
 
 #: src/ui_configurationDialog.h:874
 msgid "Navigation"
