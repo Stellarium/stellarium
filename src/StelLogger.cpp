@@ -260,16 +260,24 @@ void StelLogger::init(const QString& logFilePath)
 	for (int i = 0; i<systemLines.size(); i++)
 	{
 		if(systemLines.at(i).contains("Model"))
+		{
 			writeLog(systemLines.at(i).trimmed());
+		}
 
 		if(systemLines.at(i).contains("Processor"))
+		{
 			writeLog(systemLines.at(i).trimmed());
+		}
 
 		if(systemLines.at(i).contains("Memory"))
+		{
 			writeLog(systemLines.at(i).trimmed());
+		}
 
 		if(systemLines.at(i).contains("VRAM"))
+		{
 			writeLog(systemLines.at(i).trimmed());
+		}
 
 	}
 	//writeLog("You look like a Mac user. How would you like to write some system info code here? That would help a lot.");
