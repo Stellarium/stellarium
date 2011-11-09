@@ -146,6 +146,9 @@
       </property>
       <item>
        <widget class="QTabWidget" name="Tabs">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
         <widget class="QWidget" name="General">
          <attribute name="title">
           <string>General</string>
@@ -225,9 +228,9 @@
               </widget>
              </item>
              <item row="1" column="0">
-              <widget class="QLabel" name="label_13">
+              <widget class="QLabel" name="labelPopupMenuShortcut">
                <property name="text">
-                <string>Popup Navigator:</string>
+                <string>Open pop-up navigation menu:</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
