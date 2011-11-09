@@ -734,25 +734,38 @@ void Oculars::displayPopupMenu()
 {
 	QMenu* popup = new QMenu();
 
-	if (flagShowOculars) {
+	if (flagShowOculars)
+	{
 		// We are in Oculars mode
 		// We want to show all of the Oculars, and if the current ocular is not a binocular,
 		// we will also show the telescopes.
-		if (oculars.count() > 0) {
-			popup->addAction("previous ocular", this, SLOT(decrementOcularIndex()), Qt::Key_1);
-			popup->addAction("next ocular", this, SLOT(incrementOcularIndex()), Qt::Key_2);
-			QMenu* submenu = new QMenu("select ocular", popup);
+		if (!oculars.isEmpty())
+		{
+			popup->addAction("&Previous ocular", this, SLOT(decrementOcularIndex()));
+			popup->addAction("&Next ocular", this, SLOT(incrementOcularIndex()));
+			QMenu* submenu = new QMenu("Select &ocular", popup);
 			int availableOcularCount = 0;
-			for (int index = 0; index < oculars.count(); ++index) {
+			for (int index = 0; index < oculars.count(); ++index)
+			{
+				QString label;
+				if (availableOcularCount < 10)
+				{
+					label = QString("&%1: %2").arg(availableOcularCount).arg(oculars[index]->name());
+				}
+				else
+				{
+					label = oculars[index]->name();
+				}
+				//BM: Does this happen at all any more?
 				if (selectedTelescopeIndex == -1) {
 					if (oculars[index]->isBinoculars()) {
-						QAction* action = submenu->addAction(oculars[index]->name(), ocularsSignalMapper, SLOT(map()), 
-																		 QKeySequence(QString("%1").arg(availableOcularCount++)));
+						QAction* action = submenu->addAction(label, ocularsSignalMapper, SLOT(map()));
+						availableOcularCount++;
 						ocularsSignalMapper->setMapping(action, QString("%1").arg(index));
 					}
 				} else {
-					QAction* action = submenu->addAction(oculars[index]->name(), ocularsSignalMapper, SLOT(map()), 
-																	 QKeySequence(QString("%1").arg(availableOcularCount++)));
+					QAction* action = submenu->addAction(label, ocularsSignalMapper, SLOT(map()));
+					availableOcularCount++;
 					ocularsSignalMapper->setMapping(action, QString("%1").arg(index));
 				}
 			}
@@ -760,104 +773,101 @@ void Oculars::displayPopupMenu()
 			popup->addSeparator();
 		}
 
-		if (telescopes.count() > 0 && (selectedOcularIndex > -1 && !oculars[selectedOcularIndex]->isBinoculars())) {
-			popup->addAction("previous telescope", this, SLOT(decrementTelescopeIndex()), Qt::Key_3);
-			popup->addAction("next telescope", this, SLOT(incrementTelescopeIndex()), Qt::Key_4);
-			QMenu* submenu = new QMenu("select telescope", popup);
-			for (int index = 0; index < telescopes.count(); ++index) {
-				QAction* action = submenu->addAction(telescopes[index]->name(), telescopesSignalMapper, SLOT(map()), 
-																 QKeySequence(QString("%1").arg(index)));
-				telescopesSignalMapper->setMapping(action, QString("%1").arg(index));
-			}
+		// If there is more than one telescope, show the prev/next/list complex.
+		// If the selected ocular is a binoculars, show nothing.
+		if (telescopes.count() > 1 && (selectedOcularIndex > -1 && !oculars[selectedOcularIndex]->isBinoculars()))
+		{
+			popup->addAction("&Previous telescope", this, SLOT(decrementTelescopeIndex()));
+			popup->addAction("&Next telescope", this, SLOT(incrementTelescopeIndex()));
+			QMenu* submenu = createTelescopeSelectionMenu(popup);
 			popup->addMenu(submenu);
 			popup->addSeparator();
 		}
 
-		popup->addAction("toggle crosshair", this, SLOT(toggleCrosshairs()), Qt::Key_5);
+		popup->addAction("Toggle &crosshair", this, SLOT(toggleCrosshairs()));
 	} else {
-		int outerMenuLevel = 1;
-		// We are not in Oculars mode
-		// We want to show the CCD's, and if a CCD is selected, the Telescopes (as a CCD requires a telescope),
-		// and the general menu items.
-		QAction* action = new QAction("Configure Oculars", popup);
-		action->setCheckable(TRUE);
-		action->setShortcut(QString("%1").arg(outerMenuLevel++));
-		connect(action, SIGNAL(toggled(bool)), ocularDialog, SLOT(setVisible(bool)));
-		connect(ocularDialog, SIGNAL(visibleChanged(bool)), action, SLOT(setChecked(bool)));
+		// We are not in ocular mode
+		// We want to show the CCD's, and if a CCD is selected, the telescopes
+		//(as a CCD requires a telescope) and the general menu items.
+		QAction* action = new QAction("Configure &Oculars", popup);
+		action->setCheckable(true);
+		connect(action, SIGNAL(triggered(bool)), ocularDialog, SLOT(setVisible(bool)));
+		//connect(ocularDialog, SIGNAL(visibleChanged(bool)), action, SLOT(setChecked(bool)));
 		popup->addAction(action);
 		popup->addSeparator();
 
 		if (!flagShowTelrad) {
-			popup->addAction("Toggle CCD", this, SLOT(toggleCCD(bool)), QKeySequence(QString("%1").arg(outerMenuLevel++)));
+			popup->addAction("Toggle &CCD", this, SLOT(toggleCCD()));
 		}
 		
 		if (!flagShowCCD) {
-			popup->addAction("Toggle Telrad", this,
-								  SLOT(toggleTelrad()), QKeySequence(QString("%1").arg(outerMenuLevel++)));
+			popup->addAction("Toggle &Telrad", this, SLOT(toggleTelrad()));
 		}
 
 		popup->addSeparator();
-		if (selectedCCDIndex > -1 && selectedTelescopeIndex > -1) {
-			popup->addAction("previous CCD", this,
-								  SLOT(decrementCCDIndex()), QKeySequence(QString("%1").arg(outerMenuLevel++)));
-			popup->addAction("next CCD", this,
-								  SLOT(incrementCCDIndex()), QKeySequence(QString("%1").arg(outerMenuLevel++)));
-			QMenu* submenu = new QMenu("select CCD", popup);
-			for (int index = 0; index < ccds.count(); ++index) {
-				QAction* action = submenu->addAction(ccds[index]->name(), ccdsSignalMapper, SLOT(map()), 
-																 QKeySequence(QString("%1").arg(index)));
+		if (flagShowCCD && selectedCCDIndex > -1 && selectedTelescopeIndex > -1)
+		{
+			popup->addAction("&Previous CCD", this, SLOT(decrementCCDIndex()));
+			popup->addAction("&Next CCD", this, SLOT(incrementCCDIndex()));
+			QMenu* submenu = new QMenu("&Select CCD", popup);
+			for (int index = 0; index < ccds.count(); ++index)
+			{
+				QString label;
+				if (index < 10)
+				{
+					label = QString("&%1: %2").arg(index).arg(ccds[index]->name());
+				}
+				else
+				{
+					label = ccds[index]->name();
+				}
+				QAction* action = submenu->addAction(label, ccdsSignalMapper, SLOT(map()));
 				ccdsSignalMapper->setMapping(action, QString("%1").arg(index));
 			}
 			popup->addMenu(submenu);
 			
-			submenu = new QMenu("Rotate CCD", popup);
+			submenu = new QMenu("&Rotate CCD", popup);
 			QAction* rotateAction = NULL;
-			rotateAction = submenu->addAction(QString("-90") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()), Qt::Key_1);
+			rotateAction = submenu->addAction(QString("&1: -90") + QChar(0x00B0),
+														 ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-90"));
-			rotateAction = submenu->addAction(QString("-45") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()), Qt::Key_2);
+			rotateAction = submenu->addAction(QString("&2: -45") + QChar(0x00B0),
+														 ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-45"));
-			rotateAction = submenu->addAction(QString("-15") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()), Qt::Key_3);
+			rotateAction = submenu->addAction(QString("&3: -15") + QChar(0x00B0),
+														 ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-15"));
-			rotateAction = submenu->addAction(QString("-5") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()), Qt::Key_4);
+			rotateAction = submenu->addAction(QString("&4: -5") + QChar(0x00B0),
+														 ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-5"));
-			rotateAction = submenu->addAction(QString("-1") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()), Qt::Key_5);
+			rotateAction = submenu->addAction(QString("&5: -1") + QChar(0x00B0),
+														 ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-1"));
-			rotateAction = submenu->addAction(QString("+1") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()), Qt::Key_6);
+			rotateAction = submenu->addAction(QString("&6: +1") + QChar(0x00B0),
+														 ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("1"));
-			rotateAction = submenu->addAction(QString("+5") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()), Qt::Key_7);
+			rotateAction = submenu->addAction(QString("&7: +5") + QChar(0x00B0),
+														 ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("5"));
-			rotateAction = submenu->addAction(QString("+15") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()), Qt::Key_8);
+			rotateAction = submenu->addAction(QString("&8: +15") + QChar(0x00B0),
+														 ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("15"));
-			rotateAction = submenu->addAction(QString("+45") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()), Qt::Key_9);
+			rotateAction = submenu->addAction(QString("&9: +45") + QChar(0x00B0),
+														 ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("45"));
-			rotateAction = submenu->addAction(QString("+90") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()), Qt::Key_0);
+			rotateAction = submenu->addAction(QString("&0: +90") + QChar(0x00B0),
+														 ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("90"));
-			rotateAction = submenu->addAction("Reset", this, SLOT(ccdRotationReset()), Qt::Key_R);
+			rotateAction = submenu->addAction("&Reset", this, SLOT(ccdRotationReset()));
 			popup->addMenu(submenu);
 			
 			popup->addSeparator();
 		}
-		if (selectedCCDIndex > -1 && telescopes.count() > 0) {
-			popup->addAction("previous telescope", this,
-								  SLOT(decrementTelescopeIndex()), QKeySequence(QString("%1").arg(outerMenuLevel++)));
-			popup->addAction("next telescope", this,
-								  SLOT(incrementTelescopeIndex()), QKeySequence(QString("%1").arg(outerMenuLevel++)));
-			QMenu* submenu = new QMenu("select telescope", popup);
-			for (int index = 0; index < telescopes.count(); ++index) {
-				QAction* action = submenu->addAction(telescopes[index]->name(), telescopesSignalMapper, SLOT(map()), 
-																 QKeySequence(QString("%1").arg(index)));
-				telescopesSignalMapper->setMapping(action, QString("%1").arg(index));
-			}
+		if (flagShowCCD && selectedCCDIndex > -1 && telescopes.count() > 1)
+		{
+			popup->addAction("&Previous telescope", this, SLOT(decrementTelescopeIndex()));
+			popup->addAction("&Next telescope", this, SLOT(incrementTelescopeIndex()));
+			QMenu* submenu = createTelescopeSelectionMenu(popup);
 			popup->addMenu(submenu);
 			popup->addSeparator();
 		}
@@ -1012,6 +1022,14 @@ void Oculars::toggleCCD(bool show)
 	}
 }
 
+void Oculars::toggleCCD()
+{
+	if (flagShowCCD)
+		toggleCCD(false);
+	else
+		toggleCCD(true);
+}
+
 void Oculars::toggleCrosshairs(bool show)
 {
 	if (show && flagShowOculars)
@@ -1035,6 +1053,14 @@ void Oculars::toggleTelrad(bool show)
 			actionShowSensor->setChecked(false);
 	}
 	flagShowTelrad = show;
+}
+
+void Oculars::toggleTelrad()
+{
+	if (flagShowTelrad)
+		toggleTelrad(false);
+	else
+		toggleTelrad(true);
 }
 
 /* ********************************************************************* */
@@ -1104,7 +1130,7 @@ void Oculars::initializeActivationActions()
 	                                      group,
 	                                      true);
 	connect(actionShowSensor, SIGNAL(toggled(bool)),
-	        this, SLOT(toggleCCD(bool)));
+			this, SLOT(toggleCCD(bool)));
 
 	actionShowTelrad = gui->addGuiActions("actionShow_Telrad",
 	                                      N_("Telrad"),
@@ -1525,4 +1551,27 @@ void Oculars::hideUsageMessageIfDisplayed()
 		labelManager->deleteLabel(usageMessageLabelID);
 		usageMessageLabelID = -1;
 	}
+}
+
+QMenu* Oculars::createTelescopeSelectionMenu(QMenu *parent)
+{
+	Q_ASSERT(parent);
+
+	QMenu* submenu = new QMenu("Select &telescope", parent);
+	for (int index = 0; index < telescopes.count(); ++index)
+	{
+		QString label;
+		if (index < 10)
+		{
+			label = QString("&%1: %2").arg(index).arg(telescopes[index]->name());
+		}
+		else
+		{
+			label = telescopes[index]->name();
+		}
+		QAction* action = submenu->addAction(label, telescopesSignalMapper, SLOT(map()));
+		telescopesSignalMapper->setMapping(action, QString("%1").arg(index));
+	}
+
+	return submenu;
 }
