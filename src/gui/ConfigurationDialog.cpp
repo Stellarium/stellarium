@@ -73,15 +73,16 @@ void ConfigurationDialog::languageChanged()
 	if (dialog) {
 		ui->retranslateUi(dialog);
 		ui->stackListWidget->repaint();
+
+		//Script information
+		//(trigger re-displaying the description of the current item)
+		scriptSelectionChanged(ui->scriptListWidget->currentItem()->text());
+
+		//Plug-in information
+		//(the same trick)
+		populatePluginsList();
+		//pluginsSelectionChanged(ui->pluginsListWidget->currentItem()->text());
 	}
-
-	//Script information
-	//(trigger re-displaying the description of the current item)
-	scriptSelectionChanged(ui->scriptListWidget->currentItem()->text());
-
-	//Plug-in information
-	//(the same trick)
-	pluginsSelectionChanged(ui->pluginsListWidget->currentItem()->text());
 }
 
 void ConfigurationDialog::styleChanged()
@@ -490,7 +491,10 @@ void ConfigurationDialog::populatePluginsList()
 	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
-		ui->pluginsListWidget->addItem(desc.info.displayedName);
+		QString label = q_(desc.info.displayedName);
+		QListWidgetItem* item = new QListWidgetItem(label);
+		item->setData(Qt::UserRole, desc.info.id);
+		ui->pluginsListWidget->addItem(item);
 	}
 	// If we had a valid previous selection (i.e. not first time we populate), restore it
 	if (prevSel >= 0 && prevSel < ui->pluginsListWidget->count())
@@ -504,11 +508,7 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
-		//BM: Localization of plug-in name and description should be done
-		//in the plug-in, not here. This is acceptable only as a temporary
-		//solution if someone puts the necessary strings in translations.h
-		//so that they are included in the translation template.
-		if (s==desc.info.displayedName)
+		if (s==q_(desc.info.displayedName))//TODO: Use ID!
 		{
 			QString html = "<html><head></head><body>";
 			html += "<h2>" + q_(desc.info.displayedName) + "</h2>";

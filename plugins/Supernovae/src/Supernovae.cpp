@@ -56,10 +56,10 @@ StelPluginInfo SupernovaeStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
 	info.id = "Supernovae";
-	info.displayedName = q_("Historical Supernovae");
+	info.displayedName = N_("Historical Supernovae");
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
-	info.description = q_("A plugin that shows some historical supernovae brighter than 10 visual magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 September).");
+	info.description = N_("A plugin that shows some historical supernovae brighter than 10 visual magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 September).");
 	return info;
 }
 
