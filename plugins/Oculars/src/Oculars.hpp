@@ -35,6 +35,7 @@
 QT_BEGIN_NAMESPACE
 class QAction;
 class QKeyEvent;
+class QMenu;
 class QMouseEvent;
 class QPixmap;
 class QSettings;
@@ -93,9 +94,15 @@ public slots:
 	void selectCCDAtIndex(QString indexString); //!< indexString must be an integer, in the range of -1:ccds.count()
 	void selectOcularAtIndex(QString indexString);  //!< indexString must be an integer, in the range of -1:oculars.count()
 	void selectTelescopeAtIndex(QString indexString);  //!< indexString must be an integer, in the range of -1:telescopes.count()
-	void toggleCCD(bool show = true);
+	//! Toggles the sensor frame overlay.
+	void toggleCCD(bool show);
+	//! Toggles the sensor frame overlay (overloaded for blind switching).
+	void toggleCCD();
 	void toggleCrosshairs(bool show = true);
-	void toggleTelrad(bool show = true);
+	//! Toggles the Telrad sight overlay.
+	void toggleTelrad(bool show);
+	//! Toggles the Telrad sight overlay (overloaded for blind switching).
+	void toggleTelrad();
 
 signals:
 	void selectedCCDChanged();
@@ -152,6 +159,9 @@ private:
 	void zoomOcular();
 
 	void hideUsageMessageIfDisplayed();
+
+	//! Creates the sub-menu listing telescopes in the pop-up menu.
+	QMenu* createTelescopeSelectionMenu(QMenu* parent);
 
 	//! A list of all the oculars defined in the ini file.  Must have at least one, or module will not run.
 	QList<CCD *> ccds;
