@@ -72,16 +72,19 @@ void ConfigurationDialog::languageChanged()
 {
 	if (dialog) {
 		ui->retranslateUi(dialog);
-		ui->stackListWidget->repaint();
+
+		//Hack to shrink the tabs to optimal size after language change
+		//by causing the list items to be laid out again.
+		ui->stackListWidget->setWrapping(false);
+
+		//Script information
+		//(trigger re-displaying the description of the current item)
+		scriptSelectionChanged(ui->scriptListWidget->currentItem()->text());
+
+		//Plug-in information
+		//(the same trick)
+		populatePluginsList();
 	}
-
-	//Script information
-	//(trigger re-displaying the description of the current item)
-	scriptSelectionChanged(ui->scriptListWidget->currentItem()->text());
-
-	//Plug-in information
-	//(the same trick)
-	pluginsSelectionChanged(ui->pluginsListWidget->currentItem()->text());
 }
 
 void ConfigurationDialog::styleChanged()
@@ -292,7 +295,12 @@ void ConfigurationDialog::cursorTimeOutChanged()
 void ConfigurationDialog::browseForScreenshotDir()
 {
 	QString oldScreenshorDir = StelFileMgr::getScreenshotDir();
+	#ifdef Q_OS_MAC
+	//work-around for Qt bug -  http://bugreports.qt.nokia.com/browse/QTBUG-16722
+	QString newScreenshotDir = QFileDialog::getExistingDirectory(NULL, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::DontUseNativeDialog);
+	#else
 	QString newScreenshotDir = QFileDialog::getExistingDirectory(NULL, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::ShowDirsOnly);
+	#endif
 
 	if (!newScreenshotDir.isEmpty()) {
 		// remove trailing slash
@@ -485,7 +493,10 @@ void ConfigurationDialog::populatePluginsList()
 	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
-		ui->pluginsListWidget->addItem(desc.info.displayedName);
+		QString label = q_(desc.info.displayedName);
+		QListWidgetItem* item = new QListWidgetItem(label);
+		item->setData(Qt::UserRole, desc.info.id);
+		ui->pluginsListWidget->addItem(item);
 	}
 	// If we had a valid previous selection (i.e. not first time we populate), restore it
 	if (prevSel >= 0 && prevSel < ui->pluginsListWidget->count())
@@ -499,11 +510,7 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
-		//BM: Localization of plug-in name and description should be done
-		//in the plug-in, not here. This is acceptable only as a temporary
-		//solution if someone puts the necessary strings in translations.h
-		//so that they are included in the translation template.
-		if (s==desc.info.displayedName)
+		if (s==q_(desc.info.displayedName))//TODO: Use ID!
 		{
 			QString html = "<html><head></head><body>";
 			html += "<h2>" + q_(desc.info.displayedName) + "</h2>";
@@ -525,18 +532,19 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 	}
 }
 
-void ConfigurationDialog::pluginConfigureCurrentSelection(void)
+void ConfigurationDialog::pluginConfigureCurrentSelection()
 {
-	QString s = ui->pluginsListWidget->currentItem()->text();
-	if (s.isEmpty() || s=="")
+	QString id = ui->pluginsListWidget->currentItem()->data(Qt::UserRole).toString();
+	if (id.isEmpty())
 		return;
 
-	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
+	StelModuleMgr& moduleMgr = StelApp::getInstance().getModuleMgr();
+	const QList<StelModuleMgr::PluginDescriptor> pluginsList = moduleMgr.getPluginsList();
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
-		if (s==desc.info.displayedName)
+		if (id == desc.info.id)
 		{
-			StelModule* pmod = StelApp::getInstance().getModuleMgr().getModule(desc.info.id);
+			StelModule* pmod = moduleMgr.getModule(desc.info.id);
 			if (pmod != NULL)
 			{
 				pmod->configureGui(true);
@@ -550,16 +558,18 @@ void ConfigurationDialog::loadAtStartupChanged(int state)
 {
 	if (ui->pluginsListWidget->count() <= 0)
 		return;
-	QString name = ui->pluginsListWidget->currentItem()->text();
-	QString key;
-	QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
+
+	QString id = ui->pluginsListWidget->currentItem()->data(Qt::UserRole).toString();
+	StelModuleMgr& moduleMgr = StelApp::getInstance().getModuleMgr();
+	const QList<StelModuleMgr::PluginDescriptor> pluginsList = moduleMgr.getPluginsList();
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
-		if (desc.info.displayedName==name)
-			key = desc.info.id;
+		if (id == desc.info.id)
+		{
+			moduleMgr.setPluginLoadAtStartup(id, state == Qt::Checked);
+			break;
+		}
 	}
-	if (!key.isEmpty())
-		StelApp::getInstance().getModuleMgr().setPluginLoadAtStartup(key, state==Qt::Checked);
 }
 
 void ConfigurationDialog::populateScriptsList(void)

@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-26 01:48+0700\n"
-"PO-Revision-Date: 2010-05-07 20:25+0000\n"
-"Last-Translator: Christian Reis <kiko@async.com.br>\n"
+"POT-Creation-Date: 2011-09-19 20:07+0700\n"
+"PO-Revision-Date: 2011-10-02 18:59+0000\n"
+"Last-Translator: BRIJESH E.P <Unknown>\n"
 "Language-Team: Malayalam <ml@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-06-28 04:34+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-10-03 04:37+0000\n"
+"X-Generator: Launchpad (build 14071)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
-msgstr ""
+msgstr "മേരീഡിയന്‍"
 
 #: src/core/modules/GridLinesMgr.cpp:529
 msgid "Ecliptic"
@@ -27,26 +27,26 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:533
 msgid "Equator"
-msgstr ""
+msgstr "ഭൂമധൃരേഖ"
 
 #: src/core/modules/GridLinesMgr.cpp:537
 msgid "Horizon"
-msgstr ""
+msgstr "ചക്രവാളം"
 
-#: src/core/modules/LandscapeMgr.cpp:488
+#: src/core/modules/LandscapeMgr.cpp:486
 msgid "Author: "
 msgstr "ലേഖകന്‍ "
 
-#: src/core/modules/LandscapeMgr.cpp:491
+#: src/core/modules/LandscapeMgr.cpp:489
 msgid "Location: "
 msgstr "സ്ഥാനം: "
 
-#: src/core/modules/LandscapeMgr.cpp:496
+#: src/core/modules/LandscapeMgr.cpp:494
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:499
+#: src/core/modules/LandscapeMgr.cpp:498
 msgid "Planet: "
 msgstr "ഗ്രഹം: "
 
@@ -56,7 +56,7 @@ msgid "Type: <b>%1</b>"
 msgstr "തരം: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:120
-#: plugins/Supernovas/src/Supernova.cpp:98
+#: plugins/Supernovae/src/Supernova.cpp:99
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "കാന്തിമാനം: <b>%1</b>"
@@ -134,7 +134,7 @@ msgid "Spectral Type: %1"
 msgstr "വര്‍ണ്ണരാജി ഗണം: %1"
 
 #: src/core/modules/StarWrapper.cpp:122
-#: plugins/Supernovas/src/Supernova.cpp:107
+#: plugins/Supernovae/src/Supernova.cpp:108
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "ദൂരം: %1 പ്രകാശ വര്‍ഷങ്ങള്‍"
@@ -144,19 +144,25 @@ msgstr "ദൂരം: %1 പ്രകാശ വര്‍ഷങ്ങള്‍"
 msgid "Parallax: %1\""
 msgstr "ദൃഗ്‌ഭ്രംശം: %1"
 
+#: src/core/StelObserver.cpp:265
+msgid "SpaceShip"
+msgstr "ആകാശകപ്പല്‍"
+
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
-msgstr ""
+msgstr "കൂടിയ FOV "
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
-msgstr ""
+msgstr "വീക്ഷണം"
 
 #: src/core/StelProjectorClasses.cpp:30
 msgid ""
 "Perspective projection keeps the horizon a straight line. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"വീക്ഷണ പ്രൊജക്ഷന്‍ ചക്രവാളത്തെ ഒരു നേര്‍വരയായി നിലനിര്‍ത്തും. ഈ പ്രോജക്ഷന്റെ "
+"ശാസ്ത്രീയ നാമം <i> ഗ്നോമിക് പ്രോജെക്ഷന്‍ <i> എന്നാണ്"
 
 #: src/core/StelProjectorClasses.cpp:63
 msgid "Equal Area"
@@ -173,7 +179,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:108
 msgid "Stereographic"
-msgstr ""
+msgstr "സ്ടീരിയോഗ്രഫിക്"
 
 #: src/core/StelProjectorClasses.cpp:113
 msgid ""
@@ -181,6 +187,10 @@ msgid ""
 "known as the planisphere projection. It preserves the angles at which curves "
 "cross each other but it does not preserve area."
 msgstr ""
+"സ്ടീരിയോഗ്രഫിക്  പ്രൊജക്ഷന്‍ പണ്ട് കാലംതോട്ടെ ഉള്ളവയാണ്. പ്ലാനിസ്ഫെയര്‍ "
+"പ്രോജെക്ഷന്‍ എന്നാണു അറിയപ്പെട്ടിരുന്നത്. വക്ക്രരേഖകള്‍ തമ്മില്‍ "
+"കൂട്ടിമുട്ടുന്ന കോണുകള്‍ കാത്തുസൂക്ഷിക്കുകയും ഉള്ളളവ് "
+"കാത്തുസൂക്ഷിക്കാത്തിരിക്കുകയും ചെയ്യുന്നു."
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Fish-eye"
@@ -267,50 +277,50 @@ msgstr "Az/Alt: %1/%2"
 msgid "Select screenshot directory"
 msgstr "സ്ക്രീന്‍ഷോട്ടിനുള്ള ഡയറക്ടറി തിരഞ്ഞെടുക്കുക"
 
-#: src/gui/ConfigurationDialog.cpp:461
+#: src/gui/ConfigurationDialog.cpp:462
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:469
+#: src/gui/ConfigurationDialog.cpp:470
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:509
+#: src/gui/ConfigurationDialog.cpp:510
 msgid "Authors"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:513 src/gui/ViewDialog.cpp:368
+#: src/gui/ConfigurationDialog.cpp:514 src/gui/ViewDialog.cpp:368
 msgid "Contact"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:585
+#: src/gui/ConfigurationDialog.cpp:586
 msgid "Author"
 msgstr "രചയിതാവ്"
 
-#: src/gui/ConfigurationDialog.cpp:586
+#: src/gui/ConfigurationDialog.cpp:587
 msgid "License"
 msgstr "അനുമതിപത്രം"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:616
 msgid "Running script: "
 msgstr "പ്രവര്‍ത്തിച്ചുകൊണ്ടിരിക്കുന്ന സ്ക്രിപ്റ്റ്: "
 
-#: src/gui/ConfigurationDialog.cpp:622
+#: src/gui/ConfigurationDialog.cpp:623
 msgid "Running script: [none]"
 msgstr "പ്രവര്‍ത്തിച്ചുകൊണ്ടിരിക്കുന്ന സ്ക്രിപ്റ്റ്: [ശൂന്യം]"
 
-#: src/gui/ConfigurationDialog.cpp:665
+#: src/gui/ConfigurationDialog.cpp:666
 msgid "Finished downloading all star catalogs!"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:674
+#: src/gui/ConfigurationDialog.cpp:675
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%2 ലെ %1 കാറ്റലോഗ്ഗ് എടുക്കുക"
 
-#: src/gui/ConfigurationDialog.cpp:676
+#: src/gui/ConfigurationDialog.cpp:677
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -318,7 +328,7 @@ msgid ""
 "Magnitude range: %3 - %4"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:685
+#: src/gui/ConfigurationDialog.cpp:686
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -327,7 +337,7 @@ msgstr ""
 "പൂര്‍ത്തീകരിച്ചിരിക്കുന്നു!\n"
 "അവ പ്രദര്‍ശിപ്പിക്കുവാന്‍ സ്റ്റെല്ലേറിയം റീസ്റ്റാര്‍ട്ട് ചെയ്യുക."
 
-#: src/gui/ConfigurationDialog.cpp:723 src/gui/ConfigurationDialog.cpp:757
+#: src/gui/ConfigurationDialog.cpp:724 src/gui/ConfigurationDialog.cpp:758
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -336,7 +346,7 @@ msgstr ""
 "%1 ഡൌണ്‍ലോഡ് ചെയ്യുന്നതില്‍ പിഴവ്:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:728
+#: src/gui/ConfigurationDialog.cpp:729
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -345,11 +355,11 @@ msgstr ""
 "%1 ഡൌണ്‍ലോഡ് ചെയ്തുകൊണ്ടിരിക്കുന്നു...\n"
 "(ഈ ജാലകം അടക്കുന്നതിന് കുഴപ്പമില്ല.)"
 
-#: src/gui/ConfigurationDialog.cpp:808
+#: src/gui/ConfigurationDialog.cpp:809
 msgid "Verifying file integrity..."
 msgstr "പ്രമാണത്തിന്റെ സാധുത പരിശോധിച്ചുകൊണ്ടിരിക്കുന്നു"
 
-#: src/gui/ConfigurationDialog.cpp:812
+#: src/gui/ConfigurationDialog.cpp:813
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -358,8 +368,8 @@ msgstr ""
 "%1 ഡൌണ്‍ലോഡ് ചെയ്യുന്നതില്‍ പിഴവ്:\n"
 "പ്രമാണം ദുഷിച്ചിരിക്കുന്നു."
 
-#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:285
-#: src/gui/StelGuiItems.cpp:640
+#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:286
+#: src/gui/StelGuiItems.cpp:656
 msgid "Space"
 msgstr ""
 
@@ -587,7 +597,7 @@ msgstr "മൂടല്‍ മഞ്ഞ്"
 
 #: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1090
 msgid "Nebulas"
-msgstr ""
+msgstr "നെബുലകള്‍"
 
 #: src/gui/StelGui.cpp:119
 msgid "Nebulas background images"
@@ -623,7 +633,7 @@ msgstr "തിരശ്ശീല തിരശ്ചീനദിശയില്�
 
 #: src/gui/StelGui.cpp:128
 msgid "Flip scene vertically"
-msgstr "തിരശ്ശീല നെടുകെ വിപരീതമാക്കുക"
+msgstr "ആകാശ ക്രമീകരണ ജാലകം [F4]"
 
 #: src/gui/StelGui.cpp:130
 msgid "Windows"
@@ -643,7 +653,7 @@ msgstr "തെരച്ചില്‍ ജാലകം"
 
 #: src/gui/StelGui.cpp:134
 msgid "Sky and viewing options window"
-msgstr "തിരശ്ശീല നെടുക വിപരീതമാക്കുക"
+msgstr "ആകാശ-ദൃശ്യ ക്രമീകരണ ജാലകം [F4]"
 
 #: src/gui/StelGui.cpp:135
 msgid "Date/time window"
@@ -773,7 +783,7 @@ msgstr "കുത്തനെയുള്ള ബട്ടണ്‍ ബാര്�
 msgid "Toggle visibility of GUI"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:541
+#: src/gui/StelGuiItems.cpp:542
 #, no-c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
@@ -802,7 +812,7 @@ msgstr ""
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:334
+#: src/gui/LocationDialog.cpp:367
 msgid "New Location"
 msgstr "പുതിയ സ്ഥാനം"
 
@@ -881,7 +891,7 @@ msgstr ""
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr ""
 
-#: src/main.cpp:335
+#: src/main.cpp:336
 msgid "This system does not support OpenGL."
 msgstr "ഈ സിസ്റ്റം OpenGL പിന്താങ്ങുന്നില്ല"
 
@@ -891,7 +901,7 @@ msgstr "സൂര്യന്‍"
 
 #: src/translations.h:34
 msgid "Mercury"
-msgstr "മെര്‍ക്കുറി"
+msgstr "ബുധന്‍"
 
 #: src/translations.h:35
 msgid "Venus"
@@ -919,19 +929,19 @@ msgstr "ഫോബോസ്"
 
 #: src/translations.h:41
 msgid "Ceres"
-msgstr ""
+msgstr "സിറീസ്"
 
 #: src/translations.h:42
 msgid "Pallas"
-msgstr ""
+msgstr "പല്ലാസ്"
 
 #: src/translations.h:43
 msgid "Juno"
-msgstr ""
+msgstr "ജൂനോ"
 
 #: src/translations.h:44
 msgid "Vesta"
-msgstr ""
+msgstr "വെസ്റ്റ"
 
 #: src/translations.h:45
 msgid "Jupiter"
@@ -947,7 +957,7 @@ msgstr "യൂറോപ്പ"
 
 #: src/translations.h:48
 msgid "Ganymede"
-msgstr "ഗാനിമീഡ്"
+msgstr "ഗാനിമെഡെ"
 
 #: src/translations.h:49
 msgid "Callisto"
@@ -998,7 +1008,7 @@ msgid "Adrastea"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:106
+#: src/translations.h:61 src/translations.h:110
 msgid "Metis"
 msgstr ""
 
@@ -1052,23 +1062,23 @@ msgstr "യുറാനസ്"
 
 #: src/translations.h:74
 msgid "Miranda"
-msgstr ""
+msgstr "മിരാന്‍ഡ"
 
 #: src/translations.h:75
 msgid "Ariel"
-msgstr ""
+msgstr "ഏരിയല്‍"
 
 #: src/translations.h:76
 msgid "Umbriel"
-msgstr ""
+msgstr "ഉംബ്രിയല്‍"
 
 #: src/translations.h:77
 msgid "Titania"
-msgstr ""
+msgstr "ടൈറ്റാനിയ"
 
 #: src/translations.h:78
 msgid "Oberon"
-msgstr ""
+msgstr "ഒബ്റോണ്‍"
 
 #: src/translations.h:79
 msgid "Pluto"
@@ -1078,455 +1088,469 @@ msgstr "പ്ലൂട്ടോ"
 msgid "Charon"
 msgstr "ഷാരോണ്‍"
 
-#: src/translations.h:81
-msgid "Eris"
-msgstr ""
-
+#. TRANSLATORS: Moon of Pluto (II)
 #: src/translations.h:82
-msgid "Triton"
-msgstr ""
+msgid "Nix"
+msgstr "നിക്സ്"
 
-#: src/translations.h:83
-msgid "Nereid"
-msgstr ""
-
+#. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
-msgid "Naiad"
-msgstr ""
+msgid "Hydra"
+msgstr "ആയില്യന്‍"
 
 #: src/translations.h:85
-msgid "Thalassa"
-msgstr ""
+msgid "Eris"
+msgstr "എറിസ്"
 
 #: src/translations.h:86
+msgid "Triton"
+msgstr "ട്രിറ്റോണ്‍"
+
+#: src/translations.h:87
+msgid "Nereid"
+msgstr "നെറീദ്"
+
+#: src/translations.h:88
+msgid "Naiad"
+msgstr "നെയാദ്"
+
+#: src/translations.h:89
+msgid "Thalassa"
+msgstr "തലാസ്സ"
+
+#: src/translations.h:90
 msgid "Despina"
 msgstr ""
 
-#: src/translations.h:87
+#: src/translations.h:91
 msgid "Galatea"
 msgstr ""
 
-#: src/translations.h:88
+#: src/translations.h:92
 msgid "Larissa"
-msgstr ""
+msgstr "ലാരിസ്സ"
 
-#: src/translations.h:89
+#: src/translations.h:93
 msgid "Proteus"
 msgstr ""
 
-#: src/translations.h:90
+#: src/translations.h:94
 msgid "Halimede"
 msgstr ""
 
-#: src/translations.h:91
+#: src/translations.h:95
 msgid "Psamathe"
 msgstr ""
 
-#: src/translations.h:92
+#: src/translations.h:96
 msgid "Sao"
 msgstr ""
 
-#: src/translations.h:93
+#: src/translations.h:97
 msgid "Laomedeia"
 msgstr ""
 
-#: src/translations.h:94
+#: src/translations.h:98
 msgid "Neso"
 msgstr ""
 
-#: src/translations.h:95
+#: src/translations.h:99
 msgid "Solar System Observer"
 msgstr "സൌരയൂഥ നിരീക്ഷകന്‍"
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:98
+#: src/translations.h:102
 msgid "Astraea"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:100
+#: src/translations.h:104
 msgid "Hebe"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:102
+#: src/translations.h:106
 msgid "Iris"
-msgstr ""
+msgstr "ഐറിസ്"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:104
+#: src/translations.h:108
 msgid "Flora"
-msgstr ""
+msgstr "ഫ്ളോറാ"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:108
+#: src/translations.h:112
 msgid "Hygiea"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:110
+#: src/translations.h:114
 msgid "Amor"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:112
+#: src/translations.h:116
 msgid "Apophis"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:114
+#: src/translations.h:118
 msgid "Chiron"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:116
+#: src/translations.h:120
 msgid "Eros"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:118
+#: src/translations.h:122
 msgid "Hektor"
 msgstr ""
 
 #. TRANSLATORS: Name of supernova SN 1572A
-#: src/translations.h:120
+#: src/translations.h:124
 msgid "Tycho's Supernova"
-msgstr ""
+msgstr "ടൈക്കോയുടെ സൂപ്പര്‍നോവ SN 1572A"
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: src/translations.h:122
-msgid "Kepler's Supernova"
-msgstr ""
-
 #: src/translations.h:126
+msgid "Kepler's Supernova"
+msgstr "കെപ്ലറുടെ  സൂപ്പര്‍നോവ SN 1604A"
+
+#: src/translations.h:130
 msgid "N"
-msgstr "N"
+msgstr "വടക്ക് (N)"
 
-#: src/translations.h:127
+#: src/translations.h:131
 msgid "S"
-msgstr "S"
-
-#: src/translations.h:128
-msgid "E"
-msgstr "E"
-
-#: src/translations.h:129
-msgid "W"
-msgstr "W"
+msgstr "തെക്ക് (S)"
 
 #: src/translations.h:132
+msgid "E"
+msgstr "കിഴക്ക് (E)"
+
+#: src/translations.h:133
+msgid "W"
+msgstr "പടിഞ്ഞാറ് (W)"
+
+#: src/translations.h:136
+msgid "Arabic"
+msgstr "അറബിക്"
+
+#: src/translations.h:137
 msgid "Aztec"
 msgstr ""
 
-#: src/translations.h:133
+#: src/translations.h:138
 msgid "Chinese"
 msgstr "ചൈനീസ്‌"
 
-#: src/translations.h:134
+#: src/translations.h:139
 msgid "Egyptian"
 msgstr "ഈജിപ്റ്റ്"
 
-#: src/translations.h:135
+#: src/translations.h:140
 msgid "Inuit"
 msgstr "ധ്രുവ്വപ്രദേശ ഭാഷ"
 
-#: src/translations.h:136
+#: src/translations.h:141
 msgid "Korean"
 msgstr "കൊറിയന്‍"
 
-#: src/translations.h:137
+#: src/translations.h:142
 msgid "Lakota"
 msgstr "ലക്കോട്ട"
 
-#: src/translations.h:138
+#: src/translations.h:143
 msgid "Maori"
-msgstr ""
+msgstr "മാവോരി"
 
-#: src/translations.h:139
+#: src/translations.h:144
 msgid "Navajo"
 msgstr "നവാജോ"
 
-#: src/translations.h:140
+#: src/translations.h:145
 msgid "Norse"
 msgstr "നോഴ്സ്"
 
-#: src/translations.h:141
+#: src/translations.h:146
 msgid "Polynesian"
 msgstr "പോളിനേഷ്യന്‍"
 
-#: src/translations.h:142
+#: src/translations.h:147
 msgid "Sami"
 msgstr ""
 
-#: src/translations.h:143
+#: src/translations.h:148
 msgid "Tupi-Guarani"
 msgstr "തുപി-ഗ്വറാനി"
 
-#: src/translations.h:144
+#: src/translations.h:149
 msgid "Western"
 msgstr "പാശ്ചാത്യം"
 
-#: src/translations.h:148
+#: src/translations.h:153
 msgid "Set Location "
 msgstr "സ്ഥാനം ഉറപ്പിക്കുക "
 
-#: src/translations.h:149
+#: src/translations.h:154
 msgid "Set Time "
 msgstr "സമയം ഉറപ്പിക്കുക "
 
-#: src/translations.h:150
+#: src/translations.h:155
 msgid "General "
 msgstr "പൊതുവായത് "
 
-#: src/translations.h:151
+#: src/translations.h:156
 msgid "Stars "
 msgstr "നക്ഷത്രങ്ങള്‍ "
 
-#: src/translations.h:152
+#: src/translations.h:157
 msgid "Colors "
 msgstr "നിറങ്ങള്‍ "
 
-#: src/translations.h:153
+#: src/translations.h:158
 msgid "Effects "
 msgstr "ഫലങ്ങള്‍ "
 
-#: src/translations.h:154
+#: src/translations.h:159
 msgid "Scripts "
 msgstr "സ്ക്രിപ്റ്റുകള്‍ "
 
-#: src/translations.h:155
+#: src/translations.h:160
 msgid "Administration "
 msgstr "മേല്‍നോട്ടം "
 
-#: src/translations.h:157
+#: src/translations.h:162
 msgid "Latitude: "
 msgstr "അക്ഷാംശം: "
 
-#: src/translations.h:158
+#: src/translations.h:163
 msgid "Longitude: "
 msgstr "രേഖാംശം: "
 
-#: src/translations.h:159
+#: src/translations.h:164
 msgid "Altitude (m): "
 msgstr "സമുദ്രനിരപ്പില്‍ നിന്നുള്ള ഉയരം (മീറ്ററില്‍) : "
 
-#: src/translations.h:160
+#: src/translations.h:165
 msgid "Solar System Body: "
 msgstr "സൗരയൂഥ വസ്തു: "
 
-#: src/translations.h:162
+#: src/translations.h:167
 msgid "Sky Time: "
 msgstr "ആകാശ സമയം: "
 
-#: src/translations.h:163
+#: src/translations.h:168
 msgid "Set Time Zone: "
 msgstr "സമയ മേഖല ഉറപ്പിക്കുക: "
 
-#: src/translations.h:164
+#: src/translations.h:169
 msgid "Day keys: "
 msgstr "ദിവസ സൂചികകള്‍: "
 
-#: src/translations.h:165
+#: src/translations.h:170
 msgid "Calendar"
 msgstr "കലണ്ടര്‍"
 
-#: src/translations.h:166
+#: src/translations.h:171
 msgid "Sidereal"
 msgstr "സൂര്യനുമായി ബന്ധപ്പെട്ടത്"
 
-#: src/translations.h:167
+#: src/translations.h:172
 msgid "Preset Sky Time: "
 msgstr "ആകാശ സമയം മുന്‍‌കൂട്ടി സെറ്റ് ചെയ്യുക: "
 
-#: src/translations.h:168
+#: src/translations.h:173
 msgid "Sky Time At Start-up: "
 msgstr "ആരംഭത്തില്‍ ആകാശ സമയം "
 
-#: src/translations.h:169
+#: src/translations.h:174
 msgid "Actual Time"
 msgstr "ശരിയായ സമയം"
 
-#: src/translations.h:170
+#: src/translations.h:175
 msgid "Preset Time"
 msgstr "മുന്‍ കൂട്ടിയുള്ള സമയം"
 
-#: src/translations.h:171
+#: src/translations.h:176
 msgid "Time Display Format: "
 msgstr "സമയം കാണിക്കേണ്ട വിധം: "
 
-#: src/translations.h:172
+#: src/translations.h:177
 msgid "Date Display Format: "
 msgstr "തിയ്യതി കാണിക്കേണ്ട വിധം: "
 
-#: src/translations.h:174
+#: src/translations.h:179
 msgid "Sky Culture: "
 msgstr "ആകാശ സംസ്കാരം: "
 
-#: src/translations.h:175
+#: src/translations.h:180
 msgid "Sky Language: "
 msgstr "ആകാശത്തില്‍ ഉപയോഗിക്കേണ്ട ഭാഷ: "
 
-#: src/translations.h:177
+#: src/translations.h:182
 msgid "Show: "
 msgstr "കാണിക്കുക: "
 
-#: src/translations.h:178
+#: src/translations.h:183
 msgid "Star Value Multiplier: "
 msgstr "നക്ഷത്രമൂല്യ വര്‍ദ്ധനി: "
 
-#: src/translations.h:179
+#: src/translations.h:184
 msgid "Magnitude Sizing Multiplier: "
 msgstr "കാന്തിമാന വലിപ്പ വര്‍ദ്ധിനി: "
 
-#: src/translations.h:180
+#: src/translations.h:185
 msgid "Maximum Magnitude to Label: "
 msgstr "എത്ര കാന്തിമാനം വരെയുള്ളതിനു പേര് കാണിക്കണം: "
 
-#: src/translations.h:181
+#: src/translations.h:186
 msgid "Twinkling: "
 msgstr "മിന്നുന്നു: "
 
-#: src/translations.h:182
+#: src/translations.h:187
 msgid "Limiting Magnitude: "
 msgstr "മിതപ്പെടുത്തേണ്ട കാന്തിമാനം: "
 
-#: src/translations.h:184
+#: src/translations.h:189
 msgid "Constellation Lines"
 msgstr "നക്ഷത്രരാശിയുടെ വരകള്‍"
 
-#: src/translations.h:185
+#: src/translations.h:190
 msgid "Constellation Names"
 msgstr "നക്ഷത്രരാശിയുടെ നാമങ്ങള്‍"
 
-#: src/translations.h:186
+#: src/translations.h:191
 msgid "Constellation Art Intensity"
 msgstr "നക്ഷത്രരാശിയുടെ കലാരൂപത്തിന്റെ തീവ്രത"
 
-#: src/translations.h:187
+#: src/translations.h:192
 msgid "Constellation Boundaries"
 msgstr "നക്ഷത്രരാശിയുടെ അതിരുകള്‍"
 
-#: src/translations.h:188
+#: src/translations.h:193
 msgid "Cardinal Points"
 msgstr "ദിശാ ബിന്ദുക്കള്‍"
 
-#: src/translations.h:189
+#: src/translations.h:194
 msgid "Planet Names"
 msgstr "ഗ്രഹങ്ങളുടെ പേരുകള്‍"
 
-#: src/translations.h:190
+#: src/translations.h:195
 msgid "Planet Orbits"
 msgstr "ഗ്രഹ പ്രദക്ഷിണ പഥങ്ങള്‍"
 
-#: src/translations.h:191
+#: src/translations.h:196
 msgid "Planet Trails"
 msgstr "ഗ്രഹത്തിന്റെ നിഴല്‍പ്പാടുകള്‍"
 
-#: src/translations.h:192
+#: src/translations.h:197
 msgid "Meridian Line"
 msgstr "മദ്ധ്യാഹ്നികരേഖ"
 
-#: src/translations.h:193
+#: src/translations.h:198
 msgid "Azimuthal Grid"
 msgstr "അഗ്രകോടി ചട്ടക്കൂട്"
 
-#: src/translations.h:194
+#: src/translations.h:199
 msgid "Equatorial Grid"
 msgstr "ഭൂമദ്ധ്യരേഖാ ചട്ടക്കൂട്"
 
-#: src/translations.h:195
+#: src/translations.h:200
 msgid "Equator Line"
 msgstr "ഭൂമദ്ധ്യരേഖ"
 
-#: src/translations.h:196
+#: src/translations.h:201
 msgid "Ecliptic Line"
 msgstr "ക്രാന്തിവൃത്ത രേഖ"
 
-#: src/translations.h:197
+#: src/translations.h:202
 msgid "Nebula Names"
 msgstr "നീഹാരിക നാമങ്ങള്‍"
 
-#: src/translations.h:198
+#: src/translations.h:203
 msgid "Nebula Circles"
 msgstr "നീഹാരിക വൃത്തങ്ങള്‍"
 
-#: src/translations.h:200
+#: src/translations.h:205
 msgid "Light Pollution Luminance: "
 msgstr "പ്രകാശ മലിനീകരണ തീവ്രത "
 
-#: src/translations.h:201
+#: src/translations.h:206
 msgid "Landscape: "
 msgstr "പ്രകൃതി ദൃശ്യം "
 
-#: src/translations.h:202
+#: src/translations.h:207
 msgid "Manual zoom: "
 msgstr "മാനുഷിക പര്‍വ്വതീകരണം: "
 
-#: src/translations.h:203
+#: src/translations.h:208
 msgid "Object Sizing Rule: "
 msgstr "വസ്തുവിന്റെ വലിപ്പം മാറ്റുന്നതിനുള്ള നിയമം: "
 
-#: src/translations.h:204
+#: src/translations.h:209
 msgid "Magnitude Scaling Multiplier: "
 msgstr "കാന്തിമാന വലിപ്പ വര്‍ദ്ധിനി: "
 
-#: src/translations.h:205
+#: src/translations.h:210
 msgid "Milky Way intensity: "
 msgstr "ആകാശ ഗംഗയുടെ തീവ്രത: "
 
-#: src/translations.h:206
+#: src/translations.h:211
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "എത്ര കാന്തിമാനം വരെയുള്ള നെബുലയുടെ പേര് കാണിക്കണം: "
 
-#: src/translations.h:207
+#: src/translations.h:212
 msgid "Zoom Duration: "
 msgstr "പര്‍വ്വതീകരണ ഇടവേള: "
 
-#: src/translations.h:208
+#: src/translations.h:213
 msgid "Cursor Timeout: "
 msgstr "സൂചിനി ടൈം ഔട്ട് "
 
-#: src/translations.h:209
+#: src/translations.h:214
 msgid "Correct for light travel time: "
 msgstr "പ്രകാശ സഞ്ചാരസമയത്തിന് വെണ്ടി കൃത്യമാക്കുക: "
 
-#: src/translations.h:211
+#: src/translations.h:216
 msgid "Local Script: "
 msgstr "ലോക്കല്‍ സ്ക്രിപ്റ്റ്: "
 
-#: src/translations.h:212
+#: src/translations.h:217
 msgid "CD/DVD Script: "
 msgstr "CD/DVD സ്ക്രിപ്റ്റ്: "
 
-#: src/translations.h:213
+#: src/translations.h:218
 msgid "USB Script: "
 msgstr "യു.എസ്.ബി. സ്ക്രിപ്റ്റ്: "
 
-#: src/translations.h:214
+#: src/translations.h:219
 msgid "Arrow down to load list."
 msgstr "പട്ടിക ലോഡ് ചെയ്യാന്‍ കീഴ് ദിശാ കട്ട അമര്‍ത്തുക."
 
-#: src/translations.h:215
+#: src/translations.h:220
 msgid "Select and exit to run."
 msgstr "തുടങ്ങാന്‍ തിരഞ്ഞെടുത്ത് പുറത്ത് കടക്കുക."
 
-#: src/translations.h:217
+#: src/translations.h:222
 msgid "Load Default Configuration: "
 msgstr "തനത് ക്രമീകരണം ലോഡ് ചെയ്യുക: "
 
-#: src/translations.h:218
+#: src/translations.h:223
 msgid "Save Current Configuration as Default: "
 msgstr "ഇപ്പോഴത്തെ ക്രമീകരണം തനത് ക്രമീകരണം ആക്കുക: "
 
-#: src/translations.h:219
+#: src/translations.h:224
 msgid "Shut Down: "
 msgstr "നിര്‍ത്തുക: "
 
-#: src/translations.h:220
+#: src/translations.h:225
 msgid "Update me via Internet: "
 msgstr "പുതിയ വിവരങ്ങള്‍ എന്നെ ഇന്റര്‍നെറ്റില്‍ കൂടി അറിയിക്കുക "
 
-#: src/translations.h:221
+#: src/translations.h:226
 msgid "Set UI Locale: "
 msgstr "സെറ്റ് UI ലോക്കലെ (Set UI Locale): "
 
@@ -1886,7 +1910,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1116
 msgid "Add/remove landscapes..."
-msgstr ""
+msgstr "പ്രകൃതിദൃശ്യങ്ങള്‍ ചേര്‍ക്കുക/ഒഴിവാക്കുക"
 
 #: src/ui_viewDialog.h:1117 src/ui_viewDialog.h:1122 src/ui_viewDialog.h:1124
 #: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
@@ -1899,7 +1923,7 @@ msgstr "ഭൗമോപരിതലം കാട്ടുക"
 
 #: src/ui_viewDialog.h:1119
 msgid "Show fog"
-msgstr "ഫോഗ് കാണിക്കുക"
+msgstr "പൊടിപടലം, മഞ്ഞ് കാണിക്കുക"
 
 #: src/ui_viewDialog.h:1120
 msgid "Use associated planet and position"
@@ -1915,7 +1939,7 @@ msgstr "ഈ ആകാശസംസ്കാരം സ്വതവേയായി 
 
 #: src/ui_viewDialog.h:1125
 msgid "Visible"
-msgstr ""
+msgstr "ദൃശ്യമായതു്"
 
 #: src/ui_configurationDialog.h:748
 msgid "Configuration"
@@ -2130,23 +2154,23 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:834
 msgid "Select single constellation"
-msgstr ""
+msgstr "ഒരു നക്ഷത്രരാശി മാത്രം തിരഞ്ഞെടുക്കുക"
 
 #: src/ui_configurationDialog.h:835
 msgid "Screenshots"
-msgstr ""
+msgstr "സ്ക്രീന്‍ഷോട്ടുകള്‍"
 
 #: src/ui_configurationDialog.h:836
 msgid "Screenshot Directory"
-msgstr ""
+msgstr "സ്ക്രീന്‍ഷോട്ടുകള്‍ സേവ് ചെയ്യേണ്ടയിടം"
 
 #: src/ui_configurationDialog.h:838
 msgid "Invert colors"
-msgstr ""
+msgstr "നെഗറ്റീവ് നിറങ്ങള്‍"
 
 #: src/ui_configurationDialog.h:839
 msgid "Star catalog updates"
-msgstr ""
+msgstr "നക്ഷത്ര കാറ്റലോഗിലെ പുതിയ മാറ്റങ്ങള്‍"
 
 #: src/ui_configurationDialog.h:841
 msgid "Click here to start downloading"
@@ -2158,7 +2182,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:844
 msgid "Download this file to view even more stars"
-msgstr ""
+msgstr "കൂടുതല്‍ നക്ഷത്രങ്ങള്‍ക്കായി ഇത് ഡൌണ്‍ലോഡ് ചെയ്യുക"
 
 #: src/ui_configurationDialog.h:845
 msgid "xxx"
@@ -2214,7 +2238,7 @@ msgstr "ഉപകരണങ്ങള്‍"
 
 #: src/ui_configurationDialog.h:878
 msgid "Scripts"
-msgstr ""
+msgstr "സ്ക്രിപ്റ്റുകള്‍"
 
 #: src/ui_configurationDialog.h:880
 msgid "Plugins"
@@ -2251,37 +2275,33 @@ msgid ""
 msgstr ""
 
 #: src/ui_AtmosphereDialog.h:167
-msgid "Dialog"
-msgstr ""
-
-#: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:170
+#: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:171
+#: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:172
+#: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:177
+#: src/ui_AtmosphereDialog.h:176
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:179
+#: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:181
+#: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
@@ -2337,7 +2357,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:67
 msgid "Satellites"
-msgstr ""
+msgstr "കൃത്രിമ ഉപഗ്രഹങ്ങള്‍"
 
 #: plugins/Satellites/src/Satellites.cpp:70
 msgid ""
@@ -2389,7 +2409,7 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
-msgstr ""
+msgstr "സമയമേഖല"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:44
 msgid ""
@@ -2419,66 +2439,29 @@ msgid ""
 "its online database. Still a work in progress."
 msgstr ""
 
-#: plugins/Supernovas/src/Supernovas.cpp:59
-msgid "Historical supernova"
+#: plugins/Supernovae/src/Supernovae.cpp:59
+msgid "Historical supernovae"
 msgstr ""
 
-#: plugins/Supernovas/src/Supernovas.cpp:62
+#: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
-"The plugin for visualization of some historical supernovas, brighter 10 "
+"The plugin for visualization of some historical supernovae, brighter 10 "
 "magnitude"
 msgstr ""
 
-#: plugins/Supernovas/src/Supernovas.cpp:62
+#: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
 "SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
 "July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
 "1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
-"August), SN 1972E (8 May) and SN 1987A (24 February)"
+"August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 "
+"September)"
 msgstr ""
 
-#: plugins/Supernovas/src/Supernova.cpp:105
+#: plugins/Supernovae/src/Supernova.cpp:106
 #, qt-format
 msgid "Type: %1"
 msgstr ""
-
-#, qt-format
-#~ msgid "Loading NGC catalog: %1/%2"
-#~ msgstr "NGC കാറ്റലോഗ് ലോഡ് ചെയ്തുകൊണ്ടിരിക്കുന്നു: %1/%2"
-
-#, qt-format
-#~ msgid "Loading catalog %1 from file %2"
-#~ msgstr "കാറ്റലോഗ് %1 പ്രമാണം %2 ല്‍ നിന്നും ലോഡ് ചെയ്തുകൊണ്ടിരിക്കുന്നു"
-
-#~ msgid "Move telescope #0 to selected object"
-#~ msgstr "ദൂരദര്‍ശിനി #0 തിരഞ്ഞെടുത്ത വസ്തുവിലേക്ക് നീക്കുക"
-
-#~ msgid "Move telescope #1 to selected object"
-#~ msgstr "ദൂരദര്‍ശിനി #1 തിരഞ്ഞെടുത്ത വസ്തുവിലേക്ക് നീക്കുക"
-
-#~ msgid "Move telescope #2 to selected object"
-#~ msgstr "ദൂരദര്‍ശിനി #2 തിരഞ്ഞെടുത്ത വസ്തുവിലേക്ക് നീക്കുക"
-
-#~ msgid "Move telescope #3 to selected object"
-#~ msgstr "ദൂരദര്‍ശിനി #3 തിരഞ്ഞെടുത്ത വസ്തുവിലേക്ക് നീക്കുക"
-
-#~ msgid "Move telescope #9 to selected object"
-#~ msgstr "ദൂരദര്‍ശിനി #9 തിരഞ്ഞെടുത്ത വസ്തുവിലേക്ക് നീക്കുക"
-
-#~ msgid "Move telescope #8 to selected object"
-#~ msgstr "ദൂരദര്‍ശിനി #8 തിരഞ്ഞെടുത്ത വസ്തുവിലേക്ക് നീക്കുക"
-
-#~ msgid "Move telescope #5 to selected object"
-#~ msgstr "ദൂരദര്‍ശിനി #5 തിരഞ്ഞെടുത്ത വസ്തുവിലേക്ക് നീക്കുക"
-
-#~ msgid "Move telescope #4 to selected object"
-#~ msgstr "ദൂരദര്‍ശിനി #4 തിരഞ്ഞെടുത്ത വസ്തുവിലേക്ക് നീക്കുക"
-
-#~ msgid "Move telescope #7 to selected object"
-#~ msgstr "ദൂരദര്‍ശിനി #7 തിരഞ്ഞെടുത്ത വസ്തുവിലേക്ക് നീക്കുക"
-
-#~ msgid "Move telescope #6 to selected object"
-#~ msgstr "ദൂരദര്‍ശിനി #6 തിരഞ്ഞെടുത്ത വസ്തുവിലേക്ക് നീക്കുക"
 
 #~ msgid "Form"
 #~ msgstr "സാധാരണ"

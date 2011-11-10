@@ -8,5 +8,6 @@ GET http://celestrak.com/NORAD/elements/visual.txt >> new.tle
 GET http://celestrak.com/NORAD/elements/amateur.txt >> new.tle
 GET http://celestrak.com/NORAD/elements/iridium.txt >> new.tle
 GET http://celestrak.com/NORAD/elements/tle-new.txt >> new.tle
+GET http://celestrak.com/NORAD/elements/geo.txt >> new.tle
 
 

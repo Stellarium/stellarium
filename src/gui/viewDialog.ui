@@ -645,6 +645,13 @@
           </item>
           <item row="1" column="0">
            <widget class="QGroupBox" name="atmosphereGroupBox">
+            <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+            </property>
             <property name="title">
              <string>Atmosphere</string>
             </property>
