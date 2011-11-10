@@ -179,8 +179,8 @@ void AngleMeasure::draw(StelCore* core)
 	if (messageFader.getInterstate() > 0.000001f)
 	{
 		painter.setColor(textColor[0], textColor[1], textColor[2], messageFader.getInterstate());
-		painter.drawText(83, 120, "Angle Tool Enabled - left drag to measure, left click to clear");
-		painter.drawText(83, 95,  "right click to change end point only");
+		painter.drawText(83, 120, q_("Angle Tool Enabled - left drag to measure, left click to clear,"));
+		painter.drawText(83, 95,  q_("right click to change end point only"));
 	}
 }
 

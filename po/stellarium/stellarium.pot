@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-10 11:52+0700\n"
+"POT-Creation-Date: 2011-11-10 15:01+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2285,6 +2285,14 @@ msgstr ""
 #: plugins/Oculars/src/Oculars.cpp:931 plugins/Oculars/src/Oculars.cpp:945
 #: plugins/Satellites/src/Satellites.cpp:123
 msgid "Plugin Key Bindings"
+msgstr ""
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:182
+msgid "Angle Tool Enabled - left drag to measure, left click to clear,"
+msgstr ""
+
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:183
+msgid "right click to change end point only"
 msgstr ""
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
