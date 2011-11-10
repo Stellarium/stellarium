@@ -73,6 +73,10 @@ void ViewDialog::languageChanged()
 		ui->retranslateUi(dialog);
 		shootingStarsZHRChanged();
 		populateLists();
+
+		//Hack to shrink the tabs to optimal size after language change
+		//by causing the list items to be laid out again.
+		ui->stackListWidget->setWrapping(false);
 	}
 }
 

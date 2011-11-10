@@ -72,7 +72,10 @@ void ConfigurationDialog::languageChanged()
 {
 	if (dialog) {
 		ui->retranslateUi(dialog);
-		ui->stackListWidget->repaint();
+
+		//Hack to shrink the tabs to optimal size after language change
+		//by causing the list items to be laid out again.
+		ui->stackListWidget->setWrapping(false);
 
 		//Script information
 		//(trigger re-displaying the description of the current item)
@@ -81,7 +84,6 @@ void ConfigurationDialog::languageChanged()
 		//Plug-in information
 		//(the same trick)
 		populatePluginsList();
-		//pluginsSelectionChanged(ui->pluginsListWidget->currentItem()->text());
 	}
 }
 
