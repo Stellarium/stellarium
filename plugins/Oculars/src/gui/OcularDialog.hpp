@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 Timothy Reaves
+ * Copyright (C) 2011 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -79,6 +80,7 @@ protected:
 private slots:
 	void keyBindingTogglePluginChanged(const QString& newString);
 	void keyBindingPopupNavigatorConfigChanged(const QString& newString);
+	void initAboutText();
 	void requireSelectionStateChanged(int state);
 	void scaleImageCircleStateChanged(int state);
 
