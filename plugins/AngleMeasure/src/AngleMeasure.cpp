@@ -54,10 +54,10 @@ StelPluginInfo AngleMeasureStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
 	info.id = "AngleMeasure";
-	info.displayedName = q_("Angle Measure");
+	info.displayedName = N_("Angle Measure");
 	info.authors = "Matthew Gates";
 	info.contact = "http://porpoisehead.net/";
-	info.description = q_("Provides an angle measurement tool");
+	info.description = N_("Provides an angle measurement tool");
 	return info;
 }
 
@@ -115,12 +115,23 @@ void AngleMeasure::init()
 	perp2StartPoint.set(0.,0.,0.);
 	perp2EndPoint.set(0.,0.,0.);
 
-	// create action for enable/disable & hook up signals
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	StelApp& app = StelApp::getInstance();
+
+	// Create action for enable/disable & hook up signals
+	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
 	Q_ASSERT(gui);
-	gui->addGuiActions("actionShow_Angle_Measure", N_("Angle measure"), "Ctrl+A", N_("Plugin Key Bindings"), true, false);
-	gui->getGuiActions("actionShow_Angle_Measure")->setChecked(flagShowAngleMeasure);
-	connect(gui->getGuiActions("actionShow_Angle_Measure"), SIGNAL(toggled(bool)), this, SLOT(enableAngleMeasure(bool)));
+	QAction* action = gui->addGuiActions("actionShow_Angle_Measure",
+	                                     N_("Angle measure"),
+	                                     "Ctrl+A",
+	                                     N_("Plugin Key Bindings"),
+	                                     true, false);
+	action->setChecked(flagShowAngleMeasure);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(enableAngleMeasure(bool)));
+
+	// Initialize the message strings and make sure they are translated when
+	// the language changes.
+	updateMessageText();
+	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateMessageText()));
 
 	// Add a toolbar button
 	try
@@ -179,8 +190,14 @@ void AngleMeasure::draw(StelCore* core)
 	if (messageFader.getInterstate() > 0.000001f)
 	{
 		painter.setColor(textColor[0], textColor[1], textColor[2], messageFader.getInterstate());
-		painter.drawText(83, 120, "Angle Tool Enabled - left drag to measure, left click to clear");
-		painter.drawText(83, 95,  "right click to change end point only");
+		int x = 83;
+		int y = 120;
+		int ls = painter.getFontMetrics().lineSpacing();
+		painter.drawText(x, y, messageEnabled);
+		y -= ls;
+		painter.drawText(x, y, messageLeftButton);
+		y -= ls;
+		painter.drawText(x, y, messageRightButton);
 	}
 }
 
@@ -280,14 +297,23 @@ void AngleMeasure::enableAngleMeasure(bool b)
 	messageFader = b;
 	if (b)
 	{
-		qDebug() << "AngleMeasure::enableAngleMeasure starting timer";
+		//qDebug() << "AngleMeasure::enableAngleMeasure starting timer";
 		messageTimer->start();
 	}
 }
 
-void AngleMeasure::clearMessage()
+void AngleMeasure::updateMessageText()
 {
-	qDebug() << "AngleMeasure::clearMessage";
-	messageFader = false;
+	// TRANSLATORS: instructions for using the AngleMeasure plugin.
+	messageEnabled = q_("The Angle Measure is enabled:");
+	// TRANSLATORS: instructions for using the AngleMeasure plugin.
+	messageLeftButton = q_("Drag with the left button to measure, left-click to clear.");
+	// TRANSLATORS: instructions for using the AngleMeasure plugin.
+	messageRightButton = q_("Right-clicking changes the end point only.");
 }
 
+void AngleMeasure::clearMessage()
+{
+	//qDebug() << "AngleMeasure::clearMessage";
+	messageFader = false;
+}

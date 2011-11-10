@@ -129,7 +129,7 @@ StarMgr::StarMgr(void) : hipIndex(new HipIndexStruct[NR_OF_HIP+1])
 	}
 	maxGeodesicGridLevel = -1;
 	lastMaxSearchLevel = -1;
-	starFont.setPixelSize(13.);
+	starFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
 }
@@ -224,7 +224,7 @@ void StarMgr::init()
 	}
 
 	loadData(starSettings);
-	starFont.setPixelSize(13);
+	starFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
