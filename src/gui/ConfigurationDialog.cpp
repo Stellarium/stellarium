@@ -530,18 +530,19 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 	}
 }
 
-void ConfigurationDialog::pluginConfigureCurrentSelection(void)
+void ConfigurationDialog::pluginConfigureCurrentSelection()
 {
-	QString s = ui->pluginsListWidget->currentItem()->text();
-	if (s.isEmpty() || s=="")
+	QString id = ui->pluginsListWidget->currentItem()->data(Qt::UserRole).toString();
+	if (id.isEmpty())
 		return;
 
-	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
+	StelModuleMgr& moduleMgr = StelApp::getInstance().getModuleMgr();
+	const QList<StelModuleMgr::PluginDescriptor> pluginsList = moduleMgr.getPluginsList();
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
-		if (s==desc.info.displayedName)
+		if (id == desc.info.id)
 		{
-			StelModule* pmod = StelApp::getInstance().getModuleMgr().getModule(desc.info.id);
+			StelModule* pmod = moduleMgr.getModule(desc.info.id);
 			if (pmod != NULL)
 			{
 				pmod->configureGui(true);
@@ -555,16 +556,18 @@ void ConfigurationDialog::loadAtStartupChanged(int state)
 {
 	if (ui->pluginsListWidget->count() <= 0)
 		return;
-	QString name = ui->pluginsListWidget->currentItem()->text();
-	QString key;
-	QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
+
+	QString id = ui->pluginsListWidget->currentItem()->data(Qt::UserRole).toString();
+	StelModuleMgr& moduleMgr = StelApp::getInstance().getModuleMgr();
+	const QList<StelModuleMgr::PluginDescriptor> pluginsList = moduleMgr.getPluginsList();
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
-		if (desc.info.displayedName==name)
-			key = desc.info.id;
+		if (id == desc.info.id)
+		{
+			moduleMgr.setPluginLoadAtStartup(id, state == Qt::Checked);
+			break;
+		}
 	}
-	if (!key.isEmpty())
-		StelApp::getInstance().getModuleMgr().setPluginLoadAtStartup(key, state==Qt::Checked);
 }
 
 void ConfigurationDialog::populateScriptsList(void)
