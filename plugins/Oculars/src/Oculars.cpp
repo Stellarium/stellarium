@@ -732,7 +732,7 @@ void Oculars::decrementTelescopeIndex()
 
 void Oculars::displayPopupMenu()
 {
-	QMenu* popup = new QMenu();
+	QMenu* popup = new QMenu(&StelMainWindow::getInstance());
 
 	if (flagShowOculars)
 	{
