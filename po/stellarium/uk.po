@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-19 20:07+0700\n"
+"POT-Creation-Date: 2011-11-09 16:48+0700\n"
 "PO-Revision-Date: 2011-09-19 14:44+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-20 04:51+0000\n"
-"X-Generator: Launchpad (build 13980)\n"
+"X-Launchpad-Export-Date: 2011-11-10 04:47+0000\n"
+"X-Generator: Launchpad (build 14263)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -288,54 +288,54 @@ msgstr "(видимі)"
 msgid "Az/Alt: %1/%2"
 msgstr "Аз/Висота: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:295
+#: src/gui/ConfigurationDialog.cpp:297 src/gui/ConfigurationDialog.cpp:299
 msgid "Select screenshot directory"
 msgstr "Оберіть каталог для знімків екрана"
 
-#: src/gui/ConfigurationDialog.cpp:462
+#: src/gui/ConfigurationDialog.cpp:467
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Початкове поле зору: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:470
+#: src/gui/ConfigurationDialog.cpp:475
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Початковий напрямок зору Аз/Висота: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:510
+#: src/gui/ConfigurationDialog.cpp:515
 msgid "Authors"
 msgstr "Автори"
 
-#: src/gui/ConfigurationDialog.cpp:514 src/gui/ViewDialog.cpp:368
+#: src/gui/ConfigurationDialog.cpp:519 src/gui/ViewDialog.cpp:368
 msgid "Contact"
 msgstr "Контакти"
 
-#: src/gui/ConfigurationDialog.cpp:586
+#: src/gui/ConfigurationDialog.cpp:591
 msgid "Author"
 msgstr "Автор"
 
-#: src/gui/ConfigurationDialog.cpp:587
+#: src/gui/ConfigurationDialog.cpp:592
 msgid "License"
 msgstr "Ліцензія"
 
-#: src/gui/ConfigurationDialog.cpp:616
+#: src/gui/ConfigurationDialog.cpp:621
 msgid "Running script: "
 msgstr "Запуск скрипту: "
 
-#: src/gui/ConfigurationDialog.cpp:623
+#: src/gui/ConfigurationDialog.cpp:628
 msgid "Running script: [none]"
 msgstr "Запуск скрипту: [Немає]"
 
-#: src/gui/ConfigurationDialog.cpp:666
+#: src/gui/ConfigurationDialog.cpp:671
 msgid "Finished downloading all star catalogs!"
 msgstr "Звантаження всіх зоряних каталогів завершено!"
 
-#: src/gui/ConfigurationDialog.cpp:675
+#: src/gui/ConfigurationDialog.cpp:680
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Отримати каталог %1 із %2"
 
-#: src/gui/ConfigurationDialog.cpp:677
+#: src/gui/ConfigurationDialog.cpp:682
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -346,7 +346,7 @@ msgstr ""
 "Кількість зірок: %2 мільйонів\n"
 "Діапазон зоряних величин: %3-%4"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:691
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -354,7 +354,7 @@ msgstr ""
 "Завершено завантаження нових каталогів зірок!\n"
 "Перезапустіть Stellarium для їх відображення."
 
-#: src/gui/ConfigurationDialog.cpp:724 src/gui/ConfigurationDialog.cpp:758
+#: src/gui/ConfigurationDialog.cpp:729 src/gui/ConfigurationDialog.cpp:763
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -363,7 +363,7 @@ msgstr ""
 "Помилка при звантаженні %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:729
+#: src/gui/ConfigurationDialog.cpp:734
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -372,11 +372,11 @@ msgstr ""
 "Звантаження %1...\n"
 "(Ви можете закрити це вікно.)"
 
-#: src/gui/ConfigurationDialog.cpp:809
+#: src/gui/ConfigurationDialog.cpp:814
 msgid "Verifying file integrity..."
 msgstr "Перевірка цілісності файлів..."
 
-#: src/gui/ConfigurationDialog.cpp:813
+#: src/gui/ConfigurationDialog.cpp:818
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -568,15 +568,15 @@ msgstr "Мітки сузір’їв"
 msgid "Constellation boundaries"
 msgstr "Межі сузір’їв"
 
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1103
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1104
 msgid "Azimuthal grid"
 msgstr "Азимутальна сітка"
 
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1101
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1102
 msgid "Equatorial grid"
 msgstr "Екваторіальна сітка"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1102
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1103
 msgid "Equatorial J2000 grid"
 msgstr "Екваторіальна сітка J2000"
 
@@ -584,23 +584,23 @@ msgstr "Екваторіальна сітка J2000"
 msgid "Galactic grid"
 msgstr "Галактична сітка"
 
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1107
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1108
 msgid "Ecliptic line"
 msgstr "Лінія екліптики"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1104
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1105
 msgid "Equator line"
 msgstr "Лінія екватора"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1105
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1106
 msgid "Meridian line"
 msgstr "Лінія меридіана"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1107
 msgid "Horizon line"
 msgstr "Лінія горизонту"
 
-#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1109
 msgid "Cardinal points"
 msgstr "Частини світу"
 
@@ -608,7 +608,7 @@ msgstr "Частини світу"
 msgid "Ground"
 msgstr "Земля"
 
-#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1081
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1082
 msgid "Atmosphere"
 msgstr "Атмосфера"
 
@@ -616,7 +616,7 @@ msgstr "Атмосфера"
 msgid "Fog"
 msgstr "Туман"
 
-#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1090
+#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1091
 msgid "Nebulas"
 msgstr "Туманності"
 
@@ -624,7 +624,7 @@ msgstr "Туманності"
 msgid "Nebulas background images"
 msgstr "Зображення туманностей"
 
-#: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1067 src/ui_viewDialog.h:1089
+#: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1068 src/ui_viewDialog.h:1090
 msgid "Stars"
 msgstr "Зірки"
 
@@ -809,27 +809,27 @@ msgstr "Увімкнути/Вимкнути графічний інтерфей�
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:422
+#: src/gui/ViewDialog.cpp:427
 msgid "No description"
 msgstr "Немає опису"
 
-#: src/gui/ViewDialog.cpp:506
+#: src/gui/ViewDialog.cpp:511
 msgid "No shooting stars"
 msgstr "Без метеорів"
 
-#: src/gui/ViewDialog.cpp:509
+#: src/gui/ViewDialog.cpp:514
 msgid "Normal rate"
 msgstr "Нормальна частота"
 
-#: src/gui/ViewDialog.cpp:512
+#: src/gui/ViewDialog.cpp:517
 msgid "Standard Perseids rate"
 msgstr "Стандартна частота (Персеїди)"
 
-#: src/gui/ViewDialog.cpp:515
+#: src/gui/ViewDialog.cpp:520
 msgid "Exceptional Leonid rate"
 msgstr "Незвичайна частота (Леоніди)"
 
-#: src/gui/ViewDialog.cpp:518
+#: src/gui/ViewDialog.cpp:523
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Найбільша частота (1966, Леоніди)"
 
@@ -846,55 +846,55 @@ msgstr "Виберіть архів ZIP з ландшафтом для Stellariu
 msgid "ZIP archives"
 msgstr "архіви ZIP"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:127
+#: src/gui/AddRemoveLandscapesDialog.cpp:132
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
 msgstr "Ландшафт «%1» було успішно встановлено."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:128
-#: src/gui/AddRemoveLandscapesDialog.cpp:155
+#: src/gui/AddRemoveLandscapesDialog.cpp:133
+#: src/gui/AddRemoveLandscapesDialog.cpp:160
 msgid "Success"
 msgstr "Виконано"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:141
-#: src/gui/AddRemoveLandscapesDialog.cpp:211
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-#: src/gui/AddRemoveLandscapesDialog.cpp:228
+#: src/gui/AddRemoveLandscapesDialog.cpp:146
+#: src/gui/AddRemoveLandscapesDialog.cpp:216
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
+#: src/gui/AddRemoveLandscapesDialog.cpp:233
 msgid "No landscape was installed."
 msgstr "Ландшафт не встановлено."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:142
-#: src/gui/AddRemoveLandscapesDialog.cpp:166
-#: src/gui/AddRemoveLandscapesDialog.cpp:215
-#: src/gui/AddRemoveLandscapesDialog.cpp:221
-#: src/gui/AddRemoveLandscapesDialog.cpp:229
-#: src/gui/AddRemoveLandscapesDialog.cpp:239
+#: src/gui/AddRemoveLandscapesDialog.cpp:147
+#: src/gui/AddRemoveLandscapesDialog.cpp:171
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:226
+#: src/gui/AddRemoveLandscapesDialog.cpp:234
+#: src/gui/AddRemoveLandscapesDialog.cpp:244
 msgid "Error!"
 msgstr "Помилка!"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:154
+#: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "Ландшафт «%1» успішно вилучено."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:165
-#: src/gui/AddRemoveLandscapesDialog.cpp:235
+#: src/gui/AddRemoveLandscapesDialog.cpp:170
+#: src/gui/AddRemoveLandscapesDialog.cpp:240
 msgid "The selected landscape could not be (completely) removed."
 msgstr "Вказаний ландшафт не вдалося вилучити (повністю)."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:188
+#: src/gui/AddRemoveLandscapesDialog.cpp:193
 #, qt-format
 msgid "Size on disk: %1 MiB"
 msgstr "Розмір на диску: %1 МіБ"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:214
+#: src/gui/AddRemoveLandscapesDialog.cpp:219
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr "Stellarium не вдалося відкрити для читання або запису %1"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
@@ -902,13 +902,13 @@ msgstr ""
 "Вказаний файл не є файлом архіву ZIP або не містить ландшафту Stellarium."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:227
+#: src/gui/AddRemoveLandscapesDialog.cpp:232
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr "Ландшафт з такою назвою або ідентифікатором (%1) вже існує."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:238
+#: src/gui/AddRemoveLandscapesDialog.cpp:243
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "Щоб вилучити його, вилучіть такий каталог: %1"
@@ -1780,184 +1780,184 @@ msgstr "Пряме сходження/Схилення (J2000):"
 msgid "Position"
 msgstr "Позиція"
 
-#: src/ui_viewDialog.h:1052
+#: src/ui_viewDialog.h:1053
 msgid "View"
 msgstr "Перегляд"
 
-#: src/ui_viewDialog.h:1058
+#: src/ui_viewDialog.h:1059
 msgid "Sky"
 msgstr "Небо"
 
-#: src/ui_viewDialog.h:1060
+#: src/ui_viewDialog.h:1061
 msgid "Markings"
 msgstr "Розмітка"
 
-#: src/ui_viewDialog.h:1062
+#: src/ui_viewDialog.h:1063
 msgid "Landscape"
 msgstr "Ландшафт"
 
-#: src/ui_viewDialog.h:1064
+#: src/ui_viewDialog.h:1065
 msgid "Starlore"
 msgstr "Зіркова статистика"
 
-#: src/ui_viewDialog.h:1068
+#: src/ui_viewDialog.h:1069
 msgid "Absolute scale:"
 msgstr "Абсолютна шкала:"
 
-#: src/ui_viewDialog.h:1069
+#: src/ui_viewDialog.h:1070
 msgid "Relative scale:"
 msgstr "Відносна шкала:"
 
-#: src/ui_viewDialog.h:1070
+#: src/ui_viewDialog.h:1071
 msgid "Twinkle:"
 msgstr "Мерехтіння:"
 
-#: src/ui_viewDialog.h:1072
+#: src/ui_viewDialog.h:1073
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Робити слабкі зірки тьмянішими, якщо видимим є дуже яскравий об’єкт"
 
-#: src/ui_viewDialog.h:1074
+#: src/ui_viewDialog.h:1075
 msgid "Dynamic eye adaptation"
 msgstr "Динамічна зорова адаптація"
 
-#: src/ui_viewDialog.h:1075
+#: src/ui_viewDialog.h:1076
 msgid "Planets and satellites"
 msgstr "Планети і супутники"
 
-#: src/ui_viewDialog.h:1076
+#: src/ui_viewDialog.h:1077
 msgid "Show planets"
 msgstr "Показати планети"
 
-#: src/ui_viewDialog.h:1077
+#: src/ui_viewDialog.h:1078
 msgid "Show planet markers"
 msgstr "Показати позначки планет"
 
-#: src/ui_viewDialog.h:1078
+#: src/ui_viewDialog.h:1079
 msgid "Show planet orbits"
 msgstr "Показати орбіти планет"
 
-#: src/ui_viewDialog.h:1079
+#: src/ui_viewDialog.h:1080
 msgid "Simulate light speed"
 msgstr "Імітувати швидкість світла"
 
-#: src/ui_viewDialog.h:1080
+#: src/ui_viewDialog.h:1081
 msgid "Scale Moon"
 msgstr "Масштабувати Місяць"
 
-#: src/ui_viewDialog.h:1082
+#: src/ui_viewDialog.h:1083
 msgid "Show atmosphere"
 msgstr "Показати атмосферу"
 
-#: src/ui_viewDialog.h:1083
+#: src/ui_viewDialog.h:1084
 msgid "Light pollution: "
 msgstr "Забруднення світлом: "
 
-#: src/ui_viewDialog.h:1085
+#: src/ui_viewDialog.h:1086
 msgid "pressure, temperature, extinction coefficient"
 msgstr "тиск, температура, коефіцієнт поглинання"
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1088
 msgid "Refraction/Extinction settings..."
 msgstr "Параметри розсіювання та поглинання…"
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1089
 msgid "Labels and Markers"
 msgstr "Мітки і позначки"
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:1092
 msgid "Planets"
 msgstr "Планети"
 
-#: src/ui_viewDialog.h:1092
+#: src/ui_viewDialog.h:1093
 msgid "Shooting Stars"
 msgstr "Метеори"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1094
 msgid "Hourly zenith rate:"
 msgstr "Інтенсивність метеорного потоку:"
 
-#: src/ui_viewDialog.h:1094
+#: src/ui_viewDialog.h:1095
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1096
 msgid "10"
 msgstr "10"
 
-#: src/ui_viewDialog.h:1096
+#: src/ui_viewDialog.h:1097
 msgid "80"
 msgstr "80"
 
-#: src/ui_viewDialog.h:1097
+#: src/ui_viewDialog.h:1098
 msgid "10000"
 msgstr "10000"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1099
 msgid "144000"
 msgstr "144000"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1101
 msgid "Celestial Sphere"
 msgstr "Небесна сфера"
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1110
 msgid "Constellations"
 msgstr "Сузір'я"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1111
 msgid "Show lines"
 msgstr "Показувати лінії"
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1112
 msgid "Show labels"
 msgstr "Показувати мітки"
 
-#: src/ui_viewDialog.h:1112
+#: src/ui_viewDialog.h:1113
 msgid "Show boundaries"
 msgstr "Показувати межі"
 
-#: src/ui_viewDialog.h:1113
+#: src/ui_viewDialog.h:1114
 msgid "Show art"
 msgstr "Показувати малюнки"
 
-#: src/ui_viewDialog.h:1114
+#: src/ui_viewDialog.h:1115
 msgid "Art brightness: "
 msgstr "Яскравість малюнків: "
 
-#: src/ui_viewDialog.h:1115
+#: src/ui_viewDialog.h:1116
 msgid "Projection"
 msgstr "Проекція"
 
-#: src/ui_viewDialog.h:1116
+#: src/ui_viewDialog.h:1117
 msgid "Add/remove landscapes..."
 msgstr "Додати/Вилучити ландшафти…"
 
-#: src/ui_viewDialog.h:1117 src/ui_viewDialog.h:1122 src/ui_viewDialog.h:1124
+#: src/ui_viewDialog.h:1118 src/ui_viewDialog.h:1123 src/ui_viewDialog.h:1125
 #: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
 msgid "Options"
 msgstr "Параметри"
 
-#: src/ui_viewDialog.h:1118
+#: src/ui_viewDialog.h:1119
 msgid "Show ground"
 msgstr "Показувати землю"
 
-#: src/ui_viewDialog.h:1119
+#: src/ui_viewDialog.h:1120
 msgid "Show fog"
 msgstr "Показувати туман"
 
-#: src/ui_viewDialog.h:1120
+#: src/ui_viewDialog.h:1121
 msgid "Use associated planet and position"
 msgstr "Використовувати пов'язані планети та позиції"
 
-#: src/ui_viewDialog.h:1121
+#: src/ui_viewDialog.h:1122
 msgid "Use this landscape as default"
 msgstr "Використовувати цей краєвид як типовий"
 
-#: src/ui_viewDialog.h:1123
+#: src/ui_viewDialog.h:1124
 msgid "Use this sky culture as default"
 msgstr "Використовувати цю культуру неба як типову"
 
-#: src/ui_viewDialog.h:1125
+#: src/ui_viewDialog.h:1126
 msgid "Visible"
 msgstr "Видимий"
 
@@ -2513,14 +2513,3 @@ msgstr "Тип: %1"
 
 #~ msgid "Form"
 #~ msgstr "Форма"
-
-#~ msgid ""
-#~ "SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
-#~ "July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
-#~ "1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
-#~ "August), SN 1972E (8 May) and SN 1987A (24 February)"
-#~ msgstr ""
-#~ "SN 185A (7 грудня), SN 386A (24 квітня), SN 1006A (29 квітня), SN 1054A (3 "
-#~ "липня), SN 1181A (4 серпня), SN 1572A (5 листопада), SN 1604A (8 жовтня), SN "
-#~ "1680A (15 серпня), SN 1885A (17 серпня), SN 1895B (5 липня), SN 1937C (21 "
-#~ "серпня), SN 1972E (8 травня) та SN 1987A (24 лютого)"

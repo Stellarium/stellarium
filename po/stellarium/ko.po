@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-19 20:07+0700\n"
+"POT-Creation-Date: 2011-11-09 16:48+0700\n"
 "PO-Revision-Date: 2010-11-12 12:24+0000\n"
 "Last-Translator: sungyup nham <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-20 04:49+0000\n"
-"X-Generator: Launchpad (build 13980)\n"
+"X-Launchpad-Export-Date: 2011-11-10 04:45+0000\n"
+"X-Generator: Launchpad (build 14263)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -271,54 +271,54 @@ msgstr ""
 msgid "Az/Alt: %1/%2"
 msgstr "방위/고도: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:295
+#: src/gui/ConfigurationDialog.cpp:297 src/gui/ConfigurationDialog.cpp:299
 msgid "Select screenshot directory"
 msgstr "스크린샷 경로 선택"
 
-#: src/gui/ConfigurationDialog.cpp:462
+#: src/gui/ConfigurationDialog.cpp:467
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "시작시 화각: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:470
+#: src/gui/ConfigurationDialog.cpp:475
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "시작시 시야 방향 방위/고도: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:510
+#: src/gui/ConfigurationDialog.cpp:515
 msgid "Authors"
 msgstr "저작자"
 
-#: src/gui/ConfigurationDialog.cpp:514 src/gui/ViewDialog.cpp:368
+#: src/gui/ConfigurationDialog.cpp:519 src/gui/ViewDialog.cpp:368
 msgid "Contact"
 msgstr "연락처"
 
-#: src/gui/ConfigurationDialog.cpp:586
+#: src/gui/ConfigurationDialog.cpp:591
 msgid "Author"
 msgstr "작성자"
 
-#: src/gui/ConfigurationDialog.cpp:587
+#: src/gui/ConfigurationDialog.cpp:592
 msgid "License"
 msgstr "라이선스"
 
-#: src/gui/ConfigurationDialog.cpp:616
+#: src/gui/ConfigurationDialog.cpp:621
 msgid "Running script: "
 msgstr "실행 중인 스크립트: "
 
-#: src/gui/ConfigurationDialog.cpp:623
+#: src/gui/ConfigurationDialog.cpp:628
 msgid "Running script: [none]"
 msgstr "실행 중인 스크립트: [없음]"
 
-#: src/gui/ConfigurationDialog.cpp:666
+#: src/gui/ConfigurationDialog.cpp:671
 msgid "Finished downloading all star catalogs!"
 msgstr "모든 별 목록의 다운로드가 끝났습니다!"
 
-#: src/gui/ConfigurationDialog.cpp:675
+#: src/gui/ConfigurationDialog.cpp:680
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%2 중 %1의 목록을 받음"
 
-#: src/gui/ConfigurationDialog.cpp:677
+#: src/gui/ConfigurationDialog.cpp:682
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -329,7 +329,7 @@ msgstr ""
 "별 갯수: %2 100만\n"
 "광도 범위: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:691
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -337,7 +337,7 @@ msgstr ""
 "새 별 목록을 모두 내려받았습니다!\n"
 "내려받은 별을 표시하려면 스텔라리움을 재시작하세요."
 
-#: src/gui/ConfigurationDialog.cpp:724 src/gui/ConfigurationDialog.cpp:758
+#: src/gui/ConfigurationDialog.cpp:729 src/gui/ConfigurationDialog.cpp:763
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -346,7 +346,7 @@ msgstr ""
 "%1을 내려받는 중 오류 발생:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:729
+#: src/gui/ConfigurationDialog.cpp:734
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -355,11 +355,11 @@ msgstr ""
 "내려받는 중... %1\n"
 "(창을 닫아도 됩니다.)"
 
-#: src/gui/ConfigurationDialog.cpp:809
+#: src/gui/ConfigurationDialog.cpp:814
 msgid "Verifying file integrity..."
 msgstr "파일 무결성 검사 중..."
 
-#: src/gui/ConfigurationDialog.cpp:813
+#: src/gui/ConfigurationDialog.cpp:818
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -546,15 +546,15 @@ msgstr "별자리 이름표"
 msgid "Constellation boundaries"
 msgstr "별자리 경계선"
 
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1103
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1104
 msgid "Azimuthal grid"
 msgstr "방위 격자"
 
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1101
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1102
 msgid "Equatorial grid"
 msgstr "적위 격자"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1102
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1103
 msgid "Equatorial J2000 grid"
 msgstr "J2000 적위 격자"
 
@@ -562,23 +562,23 @@ msgstr "J2000 적위 격자"
 msgid "Galactic grid"
 msgstr "성운 눈금"
 
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1107
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1108
 msgid "Ecliptic line"
 msgstr "황도"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1104
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1105
 msgid "Equator line"
 msgstr "적도"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1105
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1106
 msgid "Meridian line"
 msgstr "자오선"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1107
 msgid "Horizon line"
 msgstr ""
 
-#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1109
 msgid "Cardinal points"
 msgstr "방위기점"
 
@@ -586,7 +586,7 @@ msgstr "방위기점"
 msgid "Ground"
 msgstr "지면"
 
-#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1081
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1082
 msgid "Atmosphere"
 msgstr "대기"
 
@@ -594,7 +594,7 @@ msgstr "대기"
 msgid "Fog"
 msgstr "안개"
 
-#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1090
+#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1091
 msgid "Nebulas"
 msgstr "성운"
 
@@ -602,7 +602,7 @@ msgstr "성운"
 msgid "Nebulas background images"
 msgstr "성운 배경 그림"
 
-#: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1067 src/ui_viewDialog.h:1089
+#: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1068 src/ui_viewDialog.h:1090
 msgid "Stars"
 msgstr "별"
 
@@ -787,27 +787,27 @@ msgstr "GUI 켜고 끄기"
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:422
+#: src/gui/ViewDialog.cpp:427
 msgid "No description"
 msgstr "설명 없음"
 
-#: src/gui/ViewDialog.cpp:506
+#: src/gui/ViewDialog.cpp:511
 msgid "No shooting stars"
 msgstr "유성 없음"
 
-#: src/gui/ViewDialog.cpp:509
+#: src/gui/ViewDialog.cpp:514
 msgid "Normal rate"
 msgstr "정상 속도"
 
-#: src/gui/ViewDialog.cpp:512
+#: src/gui/ViewDialog.cpp:517
 msgid "Standard Perseids rate"
 msgstr "표준 페르세우스 유성우 빈도수"
 
-#: src/gui/ViewDialog.cpp:515
+#: src/gui/ViewDialog.cpp:520
 msgid "Exceptional Leonid rate"
 msgstr "예외적인 사자자리 유성우 빈도수"
 
-#: src/gui/ViewDialog.cpp:518
+#: src/gui/ViewDialog.cpp:523
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "사상 최고 빈도수 (1996년 사자자리 유성우)"
 
@@ -824,68 +824,68 @@ msgstr "Stellarium 전망 자료를 담고 있는 ZIP 압축 파일을 선택합
 msgid "ZIP archives"
 msgstr "ZIP 압축 파일"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:127
+#: src/gui/AddRemoveLandscapesDialog.cpp:132
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
 msgstr "\"%1\" 전망 자료를 무사히 설치하였습니다."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:128
-#: src/gui/AddRemoveLandscapesDialog.cpp:155
+#: src/gui/AddRemoveLandscapesDialog.cpp:133
+#: src/gui/AddRemoveLandscapesDialog.cpp:160
 msgid "Success"
 msgstr "성공"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:141
-#: src/gui/AddRemoveLandscapesDialog.cpp:211
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-#: src/gui/AddRemoveLandscapesDialog.cpp:228
+#: src/gui/AddRemoveLandscapesDialog.cpp:146
+#: src/gui/AddRemoveLandscapesDialog.cpp:216
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
+#: src/gui/AddRemoveLandscapesDialog.cpp:233
 msgid "No landscape was installed."
 msgstr "전망 자료를 전혀 설치하지 않았습니다."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:142
-#: src/gui/AddRemoveLandscapesDialog.cpp:166
-#: src/gui/AddRemoveLandscapesDialog.cpp:215
-#: src/gui/AddRemoveLandscapesDialog.cpp:221
-#: src/gui/AddRemoveLandscapesDialog.cpp:229
-#: src/gui/AddRemoveLandscapesDialog.cpp:239
+#: src/gui/AddRemoveLandscapesDialog.cpp:147
+#: src/gui/AddRemoveLandscapesDialog.cpp:171
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:226
+#: src/gui/AddRemoveLandscapesDialog.cpp:234
+#: src/gui/AddRemoveLandscapesDialog.cpp:244
 msgid "Error!"
 msgstr "오류!"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:154
+#: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "\"%1\" 전망 자료를 무사히 제거하였습니다"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:165
-#: src/gui/AddRemoveLandscapesDialog.cpp:235
+#: src/gui/AddRemoveLandscapesDialog.cpp:170
+#: src/gui/AddRemoveLandscapesDialog.cpp:240
 msgid "The selected landscape could not be (completely) removed."
 msgstr "선택한 전망 자료는 (완전히) 제거할 수 없습니다."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:188
+#: src/gui/AddRemoveLandscapesDialog.cpp:193
 #, qt-format
 msgid "Size on disk: %1 MiB"
 msgstr "디스크 상의 용량: %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:214
+#: src/gui/AddRemoveLandscapesDialog.cpp:219
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr "Stellarium에서 %1을(를) 읽거나 쓰기 위하여 열수 없습니다."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
 msgstr "선택하 파일은 ZIP 압축 파일이 아니거나 Stellarium 전망 자료를 담고 있지 않습니다."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:227
+#: src/gui/AddRemoveLandscapesDialog.cpp:232
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr "같은 이름의 전망 자료이거나 식별자(%1)가 이미 존재합니다."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:238
+#: src/gui/AddRemoveLandscapesDialog.cpp:243
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "다음 디렉토리를 삭제하여 수동으로 제거할 수 있습니다.: %1"
@@ -1755,184 +1755,184 @@ msgstr "적경/적위 (J2000):"
 msgid "Position"
 msgstr ""
 
-#: src/ui_viewDialog.h:1052
+#: src/ui_viewDialog.h:1053
 msgid "View"
 msgstr "보기"
 
-#: src/ui_viewDialog.h:1058
+#: src/ui_viewDialog.h:1059
 msgid "Sky"
 msgstr "하늘"
 
-#: src/ui_viewDialog.h:1060
+#: src/ui_viewDialog.h:1061
 msgid "Markings"
 msgstr "표지"
 
-#: src/ui_viewDialog.h:1062
+#: src/ui_viewDialog.h:1063
 msgid "Landscape"
 msgstr "풍경"
 
-#: src/ui_viewDialog.h:1064
+#: src/ui_viewDialog.h:1065
 msgid "Starlore"
 msgstr "하늘 문화"
 
-#: src/ui_viewDialog.h:1068
+#: src/ui_viewDialog.h:1069
 msgid "Absolute scale:"
 msgstr "절대 크기:"
 
-#: src/ui_viewDialog.h:1069
+#: src/ui_viewDialog.h:1070
 msgid "Relative scale:"
 msgstr "상대 크기:"
 
-#: src/ui_viewDialog.h:1070
+#: src/ui_viewDialog.h:1071
 msgid "Twinkle:"
 msgstr "깜박임:"
 
-#: src/ui_viewDialog.h:1072
+#: src/ui_viewDialog.h:1073
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "매우 밝은 천체가 보일 때 어두운 별을 희미하게 합니다"
 
-#: src/ui_viewDialog.h:1074
+#: src/ui_viewDialog.h:1075
 msgid "Dynamic eye adaptation"
 msgstr "눈의 명암 적응"
 
-#: src/ui_viewDialog.h:1075
+#: src/ui_viewDialog.h:1076
 msgid "Planets and satellites"
 msgstr "행성과 위성"
 
-#: src/ui_viewDialog.h:1076
+#: src/ui_viewDialog.h:1077
 msgid "Show planets"
 msgstr "행성 보기"
 
-#: src/ui_viewDialog.h:1077
+#: src/ui_viewDialog.h:1078
 msgid "Show planet markers"
 msgstr "행성 표지 보기"
 
-#: src/ui_viewDialog.h:1078
+#: src/ui_viewDialog.h:1079
 msgid "Show planet orbits"
 msgstr "행성 궤도 보기"
 
-#: src/ui_viewDialog.h:1079
+#: src/ui_viewDialog.h:1080
 msgid "Simulate light speed"
 msgstr "광속 시뮬레이션"
 
-#: src/ui_viewDialog.h:1080
+#: src/ui_viewDialog.h:1081
 msgid "Scale Moon"
 msgstr "달 확대"
 
-#: src/ui_viewDialog.h:1082
+#: src/ui_viewDialog.h:1083
 msgid "Show atmosphere"
 msgstr "대기 보기"
 
-#: src/ui_viewDialog.h:1083
+#: src/ui_viewDialog.h:1084
 msgid "Light pollution: "
 msgstr "광공해: "
 
-#: src/ui_viewDialog.h:1085
+#: src/ui_viewDialog.h:1086
 msgid "pressure, temperature, extinction coefficient"
 msgstr ""
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1088
 msgid "Refraction/Extinction settings..."
 msgstr ""
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1089
 msgid "Labels and Markers"
 msgstr "이름표와 표지"
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:1092
 msgid "Planets"
 msgstr "행성"
 
-#: src/ui_viewDialog.h:1092
+#: src/ui_viewDialog.h:1093
 msgid "Shooting Stars"
 msgstr "유성"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1094
 msgid "Hourly zenith rate:"
 msgstr "시간당 유성 개수:"
 
-#: src/ui_viewDialog.h:1094
+#: src/ui_viewDialog.h:1095
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1096
 msgid "10"
 msgstr "10"
 
-#: src/ui_viewDialog.h:1096
+#: src/ui_viewDialog.h:1097
 msgid "80"
 msgstr "80"
 
-#: src/ui_viewDialog.h:1097
+#: src/ui_viewDialog.h:1098
 msgid "10000"
 msgstr "10000"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1099
 msgid "144000"
 msgstr "144000"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1101
 msgid "Celestial Sphere"
 msgstr "천구"
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1110
 msgid "Constellations"
 msgstr "별자리"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1111
 msgid "Show lines"
 msgstr "선 보기"
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1112
 msgid "Show labels"
 msgstr "이름표 보기"
 
-#: src/ui_viewDialog.h:1112
+#: src/ui_viewDialog.h:1113
 msgid "Show boundaries"
 msgstr "경계선 보기"
 
-#: src/ui_viewDialog.h:1113
+#: src/ui_viewDialog.h:1114
 msgid "Show art"
 msgstr "그림 보기"
 
-#: src/ui_viewDialog.h:1114
+#: src/ui_viewDialog.h:1115
 msgid "Art brightness: "
 msgstr "그림 밝기: "
 
-#: src/ui_viewDialog.h:1115
+#: src/ui_viewDialog.h:1116
 msgid "Projection"
 msgstr "투영"
 
-#: src/ui_viewDialog.h:1116
+#: src/ui_viewDialog.h:1117
 msgid "Add/remove landscapes..."
 msgstr "전망 자료 추가/삭제..."
 
-#: src/ui_viewDialog.h:1117 src/ui_viewDialog.h:1122 src/ui_viewDialog.h:1124
+#: src/ui_viewDialog.h:1118 src/ui_viewDialog.h:1123 src/ui_viewDialog.h:1125
 #: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
 msgid "Options"
 msgstr "설정"
 
-#: src/ui_viewDialog.h:1118
+#: src/ui_viewDialog.h:1119
 msgid "Show ground"
 msgstr "지면 보기"
 
-#: src/ui_viewDialog.h:1119
+#: src/ui_viewDialog.h:1120
 msgid "Show fog"
 msgstr "안개 보기"
 
-#: src/ui_viewDialog.h:1120
+#: src/ui_viewDialog.h:1121
 msgid "Use associated planet and position"
 msgstr "관련된 행성과 위치로 이동"
 
-#: src/ui_viewDialog.h:1121
+#: src/ui_viewDialog.h:1122
 msgid "Use this landscape as default"
 msgstr "이 풍경을 기본값으로 사용"
 
-#: src/ui_viewDialog.h:1123
+#: src/ui_viewDialog.h:1124
 msgid "Use this sky culture as default"
 msgstr "이 하늘 문화를 기본값으로 사용"
 
-#: src/ui_viewDialog.h:1125
+#: src/ui_viewDialog.h:1126
 msgid "Visible"
 msgstr "표시하기"
 

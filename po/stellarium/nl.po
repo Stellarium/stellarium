@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-19 20:07+0700\n"
+"POT-Creation-Date: 2011-11-09 16:48+0700\n"
 "PO-Revision-Date: 2011-10-21 13:04+0000\n"
 "Last-Translator: Lazlo <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-22 04:39+0000\n"
-"X-Generator: Launchpad (build 14170)\n"
+"X-Launchpad-Export-Date: 2011-11-10 04:44+0000\n"
+"X-Generator: Launchpad (build 14263)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -288,54 +288,54 @@ msgstr "(duidelijk)"
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Hgte: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:295
+#: src/gui/ConfigurationDialog.cpp:297 src/gui/ConfigurationDialog.cpp:299
 msgid "Select screenshot directory"
 msgstr "Selecteer screenshot folder"
 
-#: src/gui/ConfigurationDialog.cpp:462
+#: src/gui/ConfigurationDialog.cpp:467
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Gezichtsveld bij opstarten: %1 %2"
 
-#: src/gui/ConfigurationDialog.cpp:470
+#: src/gui/ConfigurationDialog.cpp:475
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Hor/Vert weergave bij opstarten: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:510
+#: src/gui/ConfigurationDialog.cpp:515
 msgid "Authors"
 msgstr "Auteurs"
 
-#: src/gui/ConfigurationDialog.cpp:514 src/gui/ViewDialog.cpp:368
+#: src/gui/ConfigurationDialog.cpp:519 src/gui/ViewDialog.cpp:368
 msgid "Contact"
 msgstr "Contact"
 
-#: src/gui/ConfigurationDialog.cpp:586
+#: src/gui/ConfigurationDialog.cpp:591
 msgid "Author"
 msgstr "Auteur"
 
-#: src/gui/ConfigurationDialog.cpp:587
+#: src/gui/ConfigurationDialog.cpp:592
 msgid "License"
 msgstr "Licentie"
 
-#: src/gui/ConfigurationDialog.cpp:616
+#: src/gui/ConfigurationDialog.cpp:621
 msgid "Running script: "
 msgstr "Draaiende script: "
 
-#: src/gui/ConfigurationDialog.cpp:623
+#: src/gui/ConfigurationDialog.cpp:628
 msgid "Running script: [none]"
 msgstr "Draaiende script: [geen]"
 
-#: src/gui/ConfigurationDialog.cpp:666
+#: src/gui/ConfigurationDialog.cpp:671
 msgid "Finished downloading all star catalogs!"
 msgstr "Klaar met het downloaden van alle sterrencatalogi!"
 
-#: src/gui/ConfigurationDialog.cpp:675
+#: src/gui/ConfigurationDialog.cpp:680
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Verkrijg catalogus %1 van %2"
 
-#: src/gui/ConfigurationDialog.cpp:677
+#: src/gui/ConfigurationDialog.cpp:682
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -346,7 +346,7 @@ msgstr ""
 "Aantal sterren: %2 miljoen\n"
 "Magnitudebereik: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:691
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -354,7 +354,7 @@ msgstr ""
 "Klaar met het downloaden van nieuwe ster catalogi!\n"
 "Herstart Stellarium om ze weer te geven."
 
-#: src/gui/ConfigurationDialog.cpp:724 src/gui/ConfigurationDialog.cpp:758
+#: src/gui/ConfigurationDialog.cpp:729 src/gui/ConfigurationDialog.cpp:763
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -363,7 +363,7 @@ msgstr ""
 "Fout bij het downloaden van %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:729
+#: src/gui/ConfigurationDialog.cpp:734
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -372,11 +372,11 @@ msgstr ""
 "Downloaden %1...\n"
 "(U kunt dit venster sluiten.)"
 
-#: src/gui/ConfigurationDialog.cpp:809
+#: src/gui/ConfigurationDialog.cpp:814
 msgid "Verifying file integrity..."
 msgstr "Bestandsintegriteit verifiëren..."
 
-#: src/gui/ConfigurationDialog.cpp:813
+#: src/gui/ConfigurationDialog.cpp:818
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -566,15 +566,15 @@ msgstr "Sterrenbeeldlabels"
 msgid "Constellation boundaries"
 msgstr "Sterrenbeeldgrenzen"
 
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1103
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1104
 msgid "Azimuthal grid"
 msgstr "Azimitaal raster"
 
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1101
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1102
 msgid "Equatorial grid"
 msgstr "Equatoriaal raster"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1102
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1103
 msgid "Equatorial J2000 grid"
 msgstr "Equatoriaal J2000 raster"
 
@@ -582,23 +582,23 @@ msgstr "Equatoriaal J2000 raster"
 msgid "Galactic grid"
 msgstr "Galactisch coördinatenstelsel"
 
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1107
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1108
 msgid "Ecliptic line"
 msgstr "Ecliptica"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1104
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1105
 msgid "Equator line"
 msgstr "Evenaar"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1105
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1106
 msgid "Meridian line"
 msgstr "Meridaan"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1107
 msgid "Horizon line"
 msgstr "Horizon lijn"
 
-#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1109
 msgid "Cardinal points"
 msgstr "Poolwijzers"
 
@@ -606,7 +606,7 @@ msgstr "Poolwijzers"
 msgid "Ground"
 msgstr "Grond"
 
-#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1081
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1082
 msgid "Atmosphere"
 msgstr "Atmosfeer"
 
@@ -614,7 +614,7 @@ msgstr "Atmosfeer"
 msgid "Fog"
 msgstr "Mist"
 
-#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1090
+#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1091
 msgid "Nebulas"
 msgstr "Nevels"
 
@@ -622,7 +622,7 @@ msgstr "Nevels"
 msgid "Nebulas background images"
 msgstr "Achtergrondafbeeldingen van nevels"
 
-#: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1067 src/ui_viewDialog.h:1089
+#: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1068 src/ui_viewDialog.h:1090
 msgid "Stars"
 msgstr "Sterren"
 
@@ -807,27 +807,27 @@ msgstr "Zichtbaarheid van de GUI aan-/uitzetten"
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:422
+#: src/gui/ViewDialog.cpp:427
 msgid "No description"
 msgstr "Geen beschrijving"
 
-#: src/gui/ViewDialog.cpp:506
+#: src/gui/ViewDialog.cpp:511
 msgid "No shooting stars"
 msgstr "Geen vallende sterren"
 
-#: src/gui/ViewDialog.cpp:509
+#: src/gui/ViewDialog.cpp:514
 msgid "Normal rate"
 msgstr "Normale snelheid"
 
-#: src/gui/ViewDialog.cpp:512
+#: src/gui/ViewDialog.cpp:517
 msgid "Standard Perseids rate"
 msgstr "Normaal Perseïden aantal"
 
-#: src/gui/ViewDialog.cpp:515
+#: src/gui/ViewDialog.cpp:520
 msgid "Exceptional Leonid rate"
 msgstr "Buitengewoon Leoniden aantal"
 
-#: src/gui/ViewDialog.cpp:518
+#: src/gui/ViewDialog.cpp:523
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Hoogste aantal ooit (1966 Leoniden)"
 
@@ -844,55 +844,55 @@ msgstr "Selecteer een ZIP bestand dat een Stellarium landschap bevat"
 msgid "ZIP archives"
 msgstr "ZIP bestanden"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:127
+#: src/gui/AddRemoveLandscapesDialog.cpp:132
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
 msgstr "Landschap \"%1\" is succesvol geïnstalleerd."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:128
-#: src/gui/AddRemoveLandscapesDialog.cpp:155
+#: src/gui/AddRemoveLandscapesDialog.cpp:133
+#: src/gui/AddRemoveLandscapesDialog.cpp:160
 msgid "Success"
 msgstr "Succes"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:141
-#: src/gui/AddRemoveLandscapesDialog.cpp:211
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-#: src/gui/AddRemoveLandscapesDialog.cpp:228
+#: src/gui/AddRemoveLandscapesDialog.cpp:146
+#: src/gui/AddRemoveLandscapesDialog.cpp:216
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
+#: src/gui/AddRemoveLandscapesDialog.cpp:233
 msgid "No landscape was installed."
 msgstr "Er werd geen landschap geïnstalleerd."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:142
-#: src/gui/AddRemoveLandscapesDialog.cpp:166
-#: src/gui/AddRemoveLandscapesDialog.cpp:215
-#: src/gui/AddRemoveLandscapesDialog.cpp:221
-#: src/gui/AddRemoveLandscapesDialog.cpp:229
-#: src/gui/AddRemoveLandscapesDialog.cpp:239
+#: src/gui/AddRemoveLandscapesDialog.cpp:147
+#: src/gui/AddRemoveLandscapesDialog.cpp:171
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:226
+#: src/gui/AddRemoveLandscapesDialog.cpp:234
+#: src/gui/AddRemoveLandscapesDialog.cpp:244
 msgid "Error!"
 msgstr "Foutmelding!"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:154
+#: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "Landschap \"%1\" is succesvol verwijderd."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:165
-#: src/gui/AddRemoveLandscapesDialog.cpp:235
+#: src/gui/AddRemoveLandscapesDialog.cpp:170
+#: src/gui/AddRemoveLandscapesDialog.cpp:240
 msgid "The selected landscape could not be (completely) removed."
 msgstr "Het geselecteerde landschap kon niet (volledig) worden verwijderd."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:188
+#: src/gui/AddRemoveLandscapesDialog.cpp:193
 #, qt-format
 msgid "Size on disk: %1 MiB"
 msgstr "Grootte op harde schijf: %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:214
+#: src/gui/AddRemoveLandscapesDialog.cpp:219
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr "Stellarium kan het volgende niet lezen of schrijven %1"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:225
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
@@ -901,13 +901,13 @@ msgstr ""
 "landschap."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:227
+#: src/gui/AddRemoveLandscapesDialog.cpp:232
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr "Een landschap met dezelfde naam of identifier (%1) bestaat reeds."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:238
+#: src/gui/AddRemoveLandscapesDialog.cpp:243
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "U kan het manueel verwijderen door volgende folder te wissen: %1"
@@ -1779,184 +1779,184 @@ msgstr "RA/Dec (J2000):"
 msgid "Position"
 msgstr "Positie"
 
-#: src/ui_viewDialog.h:1052
+#: src/ui_viewDialog.h:1053
 msgid "View"
 msgstr "Beeld"
 
-#: src/ui_viewDialog.h:1058
+#: src/ui_viewDialog.h:1059
 msgid "Sky"
 msgstr "Hemel"
 
-#: src/ui_viewDialog.h:1060
+#: src/ui_viewDialog.h:1061
 msgid "Markings"
 msgstr "Markeringen"
 
-#: src/ui_viewDialog.h:1062
+#: src/ui_viewDialog.h:1063
 msgid "Landscape"
 msgstr "Landschap"
 
-#: src/ui_viewDialog.h:1064
+#: src/ui_viewDialog.h:1065
 msgid "Starlore"
 msgstr "Verhalen over de sterren"
 
-#: src/ui_viewDialog.h:1068
+#: src/ui_viewDialog.h:1069
 msgid "Absolute scale:"
 msgstr "Absolute schaal:"
 
-#: src/ui_viewDialog.h:1069
+#: src/ui_viewDialog.h:1070
 msgid "Relative scale:"
 msgstr "Relatieve schaal:"
 
-#: src/ui_viewDialog.h:1070
+#: src/ui_viewDialog.h:1071
 msgid "Twinkle:"
 msgstr "Fonkelen:"
 
-#: src/ui_viewDialog.h:1072
+#: src/ui_viewDialog.h:1073
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Dim zwakke sterren als een zeer helder object in beeld is"
 
-#: src/ui_viewDialog.h:1074
+#: src/ui_viewDialog.h:1075
 msgid "Dynamic eye adaptation"
 msgstr "Dynamische oogaanpassing"
 
-#: src/ui_viewDialog.h:1075
+#: src/ui_viewDialog.h:1076
 msgid "Planets and satellites"
 msgstr "Planeten en satellieten"
 
-#: src/ui_viewDialog.h:1076
+#: src/ui_viewDialog.h:1077
 msgid "Show planets"
 msgstr "Toon planeten"
 
-#: src/ui_viewDialog.h:1077
+#: src/ui_viewDialog.h:1078
 msgid "Show planet markers"
 msgstr "Toon planeetmarkeringen"
 
-#: src/ui_viewDialog.h:1078
+#: src/ui_viewDialog.h:1079
 msgid "Show planet orbits"
 msgstr "Toon planeetbanen"
 
-#: src/ui_viewDialog.h:1079
+#: src/ui_viewDialog.h:1080
 msgid "Simulate light speed"
 msgstr "Simuleer de lichtsnelheid"
 
-#: src/ui_viewDialog.h:1080
+#: src/ui_viewDialog.h:1081
 msgid "Scale Moon"
 msgstr "Maan op visuele formaat"
 
-#: src/ui_viewDialog.h:1082
+#: src/ui_viewDialog.h:1083
 msgid "Show atmosphere"
 msgstr "Toon atmosfeer"
 
-#: src/ui_viewDialog.h:1083
+#: src/ui_viewDialog.h:1084
 msgid "Light pollution: "
 msgstr "Lichtvervuiling: "
 
-#: src/ui_viewDialog.h:1085
+#: src/ui_viewDialog.h:1086
 msgid "pressure, temperature, extinction coefficient"
 msgstr "druk, temperatuur, extinctie coëfficiënt"
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1088
 msgid "Refraction/Extinction settings..."
 msgstr "Refractie/Extinctie instelllingen..."
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1089
 msgid "Labels and Markers"
 msgstr "Labels en markeringen"
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:1092
 msgid "Planets"
 msgstr "Planeten"
 
-#: src/ui_viewDialog.h:1092
+#: src/ui_viewDialog.h:1093
 msgid "Shooting Stars"
 msgstr "Vallende sterren"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1094
 msgid "Hourly zenith rate:"
 msgstr "Zenithsnelheid per uur:"
 
-#: src/ui_viewDialog.h:1094
+#: src/ui_viewDialog.h:1095
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1096
 msgid "10"
 msgstr "10"
 
-#: src/ui_viewDialog.h:1096
+#: src/ui_viewDialog.h:1097
 msgid "80"
 msgstr "80"
 
-#: src/ui_viewDialog.h:1097
+#: src/ui_viewDialog.h:1098
 msgid "10000"
 msgstr "10000"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1099
 msgid "144000"
 msgstr "144000"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1101
 msgid "Celestial Sphere"
 msgstr "hemelgewelf"
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1110
 msgid "Constellations"
 msgstr "Sterrenbeelden"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1111
 msgid "Show lines"
 msgstr "Toon lijnen"
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1112
 msgid "Show labels"
 msgstr "Toon labels"
 
-#: src/ui_viewDialog.h:1112
+#: src/ui_viewDialog.h:1113
 msgid "Show boundaries"
 msgstr "Toon grenzen"
 
-#: src/ui_viewDialog.h:1113
+#: src/ui_viewDialog.h:1114
 msgid "Show art"
 msgstr "Toon beelden"
 
-#: src/ui_viewDialog.h:1114
+#: src/ui_viewDialog.h:1115
 msgid "Art brightness: "
 msgstr "Helderheid kunst: "
 
-#: src/ui_viewDialog.h:1115
+#: src/ui_viewDialog.h:1116
 msgid "Projection"
 msgstr "Projectie"
 
-#: src/ui_viewDialog.h:1116
+#: src/ui_viewDialog.h:1117
 msgid "Add/remove landscapes..."
 msgstr "Installeer/verwijder landschappen..."
 
-#: src/ui_viewDialog.h:1117 src/ui_viewDialog.h:1122 src/ui_viewDialog.h:1124
+#: src/ui_viewDialog.h:1118 src/ui_viewDialog.h:1123 src/ui_viewDialog.h:1125
 #: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
 msgid "Options"
 msgstr "Opties"
 
-#: src/ui_viewDialog.h:1118
+#: src/ui_viewDialog.h:1119
 msgid "Show ground"
 msgstr "Toon grond"
 
-#: src/ui_viewDialog.h:1119
+#: src/ui_viewDialog.h:1120
 msgid "Show fog"
 msgstr "Toon mist"
 
-#: src/ui_viewDialog.h:1120
+#: src/ui_viewDialog.h:1121
 msgid "Use associated planet and position"
 msgstr "Gebruik de geassocieerde planeet en positie"
 
-#: src/ui_viewDialog.h:1121
+#: src/ui_viewDialog.h:1122
 msgid "Use this landscape as default"
 msgstr "Gebruik dit landschap als standaard"
 
-#: src/ui_viewDialog.h:1123
+#: src/ui_viewDialog.h:1124
 msgid "Use this sky culture as default"
 msgstr "Gebruik deze ruimtevariatie als standaard"
 
-#: src/ui_viewDialog.h:1125
+#: src/ui_viewDialog.h:1126
 msgid "Visible"
 msgstr "Zichtbaar"
 
