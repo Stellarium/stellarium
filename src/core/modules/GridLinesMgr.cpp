@@ -84,6 +84,8 @@ public:
 	void setFlagshow(bool b){fader = b;}
 	bool getFlagshow(void) const {return fader;}
 	void setFontSize(double newSize);
+	//! Re-translates the label.
+	void updateLabel();
 private:
 	SKY_LINE_TYPE line_type;
 	Vec3f color;
@@ -518,6 +520,20 @@ SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : color(0.f, 0.f, 1.f)
 	font.setPixelSize(14);
 	line_type = _line_type;
 
+	updateLabel();
+}
+
+SkyLine::~SkyLine()
+{
+}
+
+void SkyLine::setFontSize(double newFontSize)
+{
+	font.setPixelSize(newFontSize);
+}
+
+void SkyLine::updateLabel()
+{
 	switch (line_type)
 	{
 		case MERIDIAN:
@@ -537,15 +553,6 @@ SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : color(0.f, 0.f, 1.f)
 			label = q_("Horizon");
 			break;
 	}
-}
-
-SkyLine::~SkyLine()
-{
-}
-
-void SkyLine::setFontSize(double newFontSize)
-{
-	font.setPixelSize(newFontSize);
 }
 
 void SkyLine::draw(StelCore *core) const
@@ -666,7 +673,10 @@ void GridLinesMgr::init()
 	setFlagEclipticLine(conf->value("viewing/flag_ecliptic_line").toBool());
 	setFlagMeridianLine(conf->value("viewing/flag_meridian_line").toBool());
 	setFlagHorizonLine(conf->value("viewing/flag_horizon_line").toBool());
-	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+	
+	StelApp& app = StelApp::getInstance();
+	connect(&app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLineLabels()));
 }
 
 void GridLinesMgr::update(double deltaTime)
@@ -708,6 +718,14 @@ void GridLinesMgr::setStelStyle(const QString& section)
 	setColorEclipticLine(StelUtils::strToVec3f(conf->value(section+"/ecliptic_color", defaultColor).toString()));
 	setColorMeridianLine(StelUtils::strToVec3f(conf->value(section+"/meridian_color", defaultColor).toString()));
 	setColorHorizonLine(StelUtils::strToVec3f(conf->value(section+"/horizon_color", defaultColor).toString()));
+}
+
+void GridLinesMgr::updateLineLabels()
+{
+	equatorLine->updateLabel();
+	eclipticLine->updateLabel();
+	meridianLine->updateLabel();
+	horizonLine->updateLabel();
 }
 
 //! Set flag for displaying Azimuthal Grid
