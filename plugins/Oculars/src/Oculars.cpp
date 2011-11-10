@@ -77,10 +77,10 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
 	info.id = "Oculars";
-	info.displayedName = q_("Oculars");
+	info.displayedName = N_("Oculars");
 	info.authors = "Timothy Reaves";
 	info.contact = "treaves@silverfieldstech.com";
-	info.description = q_("Shows the sky as if looking through a telescope eyepiece");
+	info.description = N_("Shows the sky as if looking through a telescope eyepiece. (Only magnification and field of view are simulated.) It can also show a sensor frame and a Telrad sight.");
 	return info;
 }
 
