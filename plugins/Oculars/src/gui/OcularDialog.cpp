@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 Timothy Reaves
+ * Copyright (C) 2011 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -231,7 +232,7 @@ void OcularDialog::keyBindingTogglePluginChanged(const QString& newString)
 	Oculars::appSettings()->setValue("bindings/toggle_oculars", newString);
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
-	QAction* action = gui->getGuiActions("toggle_oculars");
+	QAction* action = gui->getGuiActions("actionShow_Ocular");
 	if (action != NULL) {
 		action->setShortcut(QKeySequence(newString.trimmed()));
 	}
@@ -317,10 +318,16 @@ void OcularDialog::createDialogContent()
 	ui->togglePluginLineEdit->setText(bindingString);
 	bindingString = Oculars::appSettings()->value("bindings/popup_navigator", "Alt+O").toString();
 	ui->togglePopupNavigatorWindowLineEdit->setText(bindingString);
-	connect(ui->togglePluginLineEdit, SIGNAL(textEdited(const QString&)), 
-			this, SLOT(keyBindingTogglePluginChanged(const QString&)));
-	connect(ui->togglePopupNavigatorWindowLineEdit, SIGNAL(textEdited(const QString&)), 
-			this, SLOT(keyBindingPopupNavigatorConfigChanged(const QString&)));
+	connect(ui->togglePluginLineEdit, SIGNAL(textEdited(const QString&)),
+	        this, SLOT(keyBindingTogglePluginChanged(const QString&)));
+	connect(ui->togglePopupNavigatorWindowLineEdit, SIGNAL(textEdited(const QString&)),
+	        this, SLOT(keyBindingPopupNavigatorConfigChanged(const QString&)));
+	
+	initAboutText();
+	connect(ui->togglePluginLineEdit, SIGNAL(textEdited(QString)),
+	        this, SLOT(initAboutText()));
+	connect(ui->togglePopupNavigatorWindowLineEdit, SIGNAL(textEdited(QString)),
+	        this, SLOT(initAboutText()));
 
 	connect(ui->pushButtonMoveOcularUp, SIGNAL(pressed()),
 	       this, SLOT(moveUpSelectedOcular()));
@@ -389,4 +396,58 @@ void OcularDialog::createDialogContent()
 
 	//Initialize the style
 	updateStyle();
+}
+
+void OcularDialog::initAboutText()
+{
+	//BM: Most of the text for now is the original contents of the About widget.
+	QString html = "<html><head><title></title></head><body>";
+
+	html += "<h1>Oculars plug-in</h1>";
+	
+	//Authors
+	QString authors = "Authors: <a href=\"mailto:treaves@silverfieldstech.com\">Timothy Reaves</a>, Bogdan Marinov";
+	html += "<h3>" + authors + "</h3>";
+
+	//Overview
+	html += "<h2>Overview</h2>";
+
+	html += "<p>This plugin is intended to simulate what you would see through an eyepiece.  This configuration dialog can be used to add, modify, or delete eyepieces and telescopes, as well as CCD Sensors.  Your first time running the app will populate some samples to get your started.</p>";
+	html += "<p>You can choose to scale the image you see on the screen.  This is intended to show you a better comparison of what one eyepiece/telescope combination will be like as compared to another.  The same eyepiece in two different telescopes of differing focal length will produce two different exit circles, changing the view someone.  The trade-off of this is that, with the image scaled, a good deal of the screen can be wasted.  Therefor I recommend that you leave it off, unless you feel you have a need of it.</p>";
+	html += "<p>You can toggle a crosshair in the view.  Ideally, I wanted this to be aligned to North.  I've been unable to do so.  So currently it aligns to the top of the screen.</p>";
+	html += QString("<p>You can toggle a Telrad finder; this can only be done when you have not turned on the Ocular view.  This feature draws three concentric circles of 0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with the naked eye through the Telrad (or similar) finder.</p>").arg(QChar(0x00B0));
+	html += "<p>If you find any issues, please let me know.  Enjoy!</p>";
+
+	//Keys
+	html += "<h2>Hot Keys</h2>";
+	html += "<p>The plug-in's key bindings can be edited in the General Tab.</p>";
+
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	Q_ASSERT(gui);
+	QAction* actionOcular = gui->getGuiActions("actionShow_Ocular");
+	Q_ASSERT(actionOcular);
+	QAction* actionMenu = gui->getGuiActions("actionShow_Ocular_Menu");
+	Q_ASSERT(actionMenu);
+	QKeySequence ocularShortcut = actionOcular->shortcut();
+	QString ocularString = ocularShortcut.toString(QKeySequence::NativeText);
+	ocularString = Qt::escape(ocularString);
+	if (ocularString.isEmpty())
+		ocularString = "[no key defined]";
+	QKeySequence menuShortcut = actionMenu->shortcut();
+	QString menuString = menuShortcut.toString(QKeySequence::NativeText);
+	menuString = Qt::escape(menuString);
+	if (menuString.isEmpty())
+		menuString = "[no key defined]";
+
+	html += "<ul>";
+	html += "<li>";
+	html += QString("<strong>%1:</strong> Switches on/off the ocular overlay.").arg(ocularString);
+	html += "</li>";
+	
+	html += "<li>";
+	html += QString("<strong>%1:</strong> Opens the pop-up navigation menu.").arg(menuString);
+	html += "</li>";
+	html += "</ul>";
+	html += "</body></html>";
+	ui->textBrowser->setHtml(html);
 }
