@@ -36,11 +36,7 @@
 #include "StelGui.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelFileMgr.hpp"
-
-// When i18n is implemented, uncomment the StelTranslator.hpp include
-// and remove the definition of q_
-//#include "StelTranslator.hpp"
-#define q_ QString
+#include "StelTranslator.hpp"
 
 SatellitesDialog::SatellitesDialog() : updateTimer(NULL)
 {
@@ -200,8 +196,8 @@ void SatellitesDialog::setAboutHtml(void)
 {
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Stellarium Satellites Plugin") + "</h2><table width=\"90%\">";
-	html += "<tr width=\"30%\"><td>" + q_("Version:") + "</td><td>" + PLUGIN_VERSION + "</td></td>";
-	html += "<tr><td>" + q_("Authors:") + "</td><td>Matthew Gates &lt;matthew@porpoisehead.net&gt;</td></td>";
+	html += "<tr width=\"30%\"><td>" + q_("Version") + ":</td><td>" + PLUGIN_VERSION + "</td></td>";
+	html += "<tr><td>" + q_("Authors") + ":</td><td>Matthew Gates &lt;matthew@porpoisehead.net&gt;</td></td>";
 	html += "<tr><td></td><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></tr></table>";
 
 	html += "<p>" + q_("The Satellites plugin predicts the positions of artificial satellites in Earth orbit.") + "</p>";
