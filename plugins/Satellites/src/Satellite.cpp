@@ -26,6 +26,7 @@
 #include "StelTexture.hpp"
 #include "VecMath.hpp"
 #include "StelUtils.hpp"
+#include "StelTranslator.hpp"
 
 #include <QTextStream>
 #include <QRegExp>
@@ -209,36 +210,46 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	if (flags&Extra1)
 	{
 		oss << "<p>";
-		oss << QString("Range (km): <b>%1</b>").arg(range, 5, 'f', 2) << "<br>";
-		oss << QString("Range rate (km/s): <b>%1</b>").arg(rangeRate, 5, 'f', 3) << "<br>";
-		oss << QString("Altitude (km): <b>%1</b>").arg(height, 5, 'f', 2) << "<br>";
-                oss << QString("SubPoint Lat/Long(Deg): <b>%1</b>").arg(latLongSubPointPosition[0], 5, 'f', 2) << "/";
+		oss << QString("%1 <b>%2</b> %3").arg(q_("Range"))
+		       .arg(range, 5, 'f', 2)
+		       // TRANSLATORS: unit of measurement
+		       .arg(q_("km")) << "<br>";
+		oss << QString("%1 <b>%2</b> %3").arg(q_("Range rate"))
+		       .arg(rangeRate, 5, 'f', 3)
+		       // TRANSLATORS: unit of measurement
+		       .arg(q_("km/s")) << "<br>";
+		oss << QString("%1 <b>%2</b> %3").arg(q_("Altitude"))
+		       .arg(height, 5, 'f', 2)
+		       // TRANSLATORS: unit of measurement
+		       .arg(q_("km")) << "<br>";
+		oss << QString("%1: <b>%2</b>").arg(q_("SubPoint Lat/Long (deg.)"))
+		       .arg(latLongSubPointPosition[0], 5, 'f', 2) << "/";
                 oss << QString("<b>%1</b>").arg(latLongSubPointPosition[1], 5, 'f', 3);
 		oss << "</p>";
 
-		oss << "TEME Coordinates(km):  ";
+		oss << q_("TEME Coordinates (km):  ");
                 oss << QString("<b>X:</b> %1 ").arg(position[0], 5, 'f', 2);
                 oss << QString("<b>Y:</b> %1 ").arg(position[1], 5, 'f', 2);
                 oss << QString("<b>Z:</b> %1 ").arg(position[2], 5, 'f', 2) << "<br>";
-		oss << "TEME Vel(km/s):  ";
+		oss << q_("TEME Velocity (km/s):  ");
                 oss << QString("<b>X:</b> %1 ").arg(velocity[0], 5, 'f', 2);
                 oss << QString("<b>Y:</b> %1 ").arg(velocity[1], 5, 'f', 2);
                 oss << QString("<b>Z:</b> %1 ").arg(velocity[2], 5, 'f', 2) << "<br>";
 
-		oss << "Visibility:  ";
+		oss << q_("Visibility:  ");
                 switch (visibility)
 		{
 		case RADAR_SUN:
-			oss << "Sat&Observer in Sunlit" << "<br>";
+			oss << q_("Sat&Observer in Sunlit") << "<br>";
 			break;
 		case VISIBLE:
-			oss << "Visible" << "<br>";
+			oss << q_("Sat. Visible") << "<br>";
 			break;
 		case RADAR_NIGHT:
-			oss << "Sat. Eclipsed" << "<br>";
+			oss << q_("Sat. Eclipsed") << "<br>";
 			break;
 		case NOT_VISIBLE:
-			oss << "Sat. Not Visible" << "<br>";
+			oss << q_("Sat. Not Visible") << "<br>";
 			break;
 		default:
 			break;
@@ -265,9 +276,11 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			if (!c.modulation.isEmpty() && c.modulation != "") oss << "  " << c.modulation;
 			if (!c.description.isEmpty() && c.description != "") oss << "  " << c.description;
 			if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << "<br>";
-			oss << QString("%1 MHz (%2%3 kHz)</p>").arg(c.frequency, 8, 'f', 5)
+			oss << QString("%1 %2 (%3%4 %5)</p>").arg(c.frequency, 8, 'f', 5)
+			.arg(q_("MHz"))
 			.arg(sign)
-			.arg(ddop, 6, 'f', 3);
+			.arg(ddop, 6, 'f', 3)
+			.arg(q_("kHz"));
 		}
 	}
 
