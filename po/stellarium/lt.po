@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-09 16:48+0700\n"
-"PO-Revision-Date: 2010-12-31 15:05+0000\n"
-"Last-Translator: Joshas <Unknown>\n"
+"POT-Creation-Date: 2011-11-10 15:29+0700\n"
+"PO-Revision-Date: 2011-11-10 13:25+0000\n"
+"Last-Translator: Vaidotas <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-10 04:45+0000\n"
-"X-Generator: Launchpad (build 14263)\n"
+"X-Launchpad-Export-Date: 2011-11-11 04:49+0000\n"
+"X-Generator: Launchpad (build 14277)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -31,7 +31,7 @@ msgstr "Pusiaujas"
 
 #: src/core/modules/GridLinesMgr.cpp:537
 msgid "Horizon"
-msgstr ""
+msgstr "Horizontas"
 
 #: src/core/modules/LandscapeMgr.cpp:486
 msgid "Author: "
@@ -146,7 +146,7 @@ msgstr "Paralaksas: %1\""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr ""
+msgstr "Erdvėlaivis"
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
@@ -285,16 +285,16 @@ msgstr ""
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:297 src/gui/ConfigurationDialog.cpp:299
+#: src/gui/ConfigurationDialog.cpp:298 src/gui/ConfigurationDialog.cpp:300
 msgid "Select screenshot directory"
 msgstr "Nurodykite katalogą ekrano nuotraukoms"
 
-#: src/gui/ConfigurationDialog.cpp:467
+#: src/gui/ConfigurationDialog.cpp:468
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Pradinis apžvalgos laukas: %1 %2"
 
-#: src/gui/ConfigurationDialog.cpp:475
+#: src/gui/ConfigurationDialog.cpp:476
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Pradinė Az/Alt vaizdo kryptis: %1/%2"
@@ -595,7 +595,7 @@ msgstr "Dienovidinio linija"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1107
 msgid "Horizon line"
-msgstr ""
+msgstr "Horizonto linija"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1109
 msgid "Cardinal points"
@@ -2345,6 +2345,16 @@ msgstr "Kampo matavimas"
 msgid "Plugin Key Bindings"
 msgstr "Papildinių klavišų saistymas"
 
+#. TRANSLATORS: First part of instructions for Angle Measure plugin
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:183
+msgid "Angle Tool Enabled - left drag to measure, left click to clear,"
+msgstr ""
+
+#. TRANSLATORS: Second part of instruction for Angle Measure plugin
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:185
+msgid "right click to change end point only"
+msgstr ""
+
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
 msgstr "Kompaso žymos"
@@ -2362,8 +2372,11 @@ msgid "Oculars"
 msgstr "Okuliarai"
 
 #: plugins/Oculars/src/Oculars.cpp:79
-msgid "Shows the sky as if looking through a telescope eyepiece"
-msgstr "Rodo dangų, lyg žvelgtumėte per teleskopo okuliarą"
+msgid ""
+"Shows the sky as if looking through a telescope eyepiece. (Only "
+"magnification and field of view are simulated.) It can also show a sensor "
+"frame and a Telrad sight."
+msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:943
 msgid "Ocular view"
@@ -2470,22 +2483,17 @@ msgstr ""
 "paiešką jos internetinėje duomenų bazėje. Vis dar kuriamas."
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
-msgid "Historical supernovae"
+msgid "Historical Supernovae"
 msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
-"The plugin for visualization of some historical supernovae, brighter 10 "
-"magnitude"
-msgstr ""
-
-#: plugins/Supernovae/src/Supernovae.cpp:62
-msgid ""
-"SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
-"July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
-"1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
-"August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 "
-"September)"
+"A plugin that shows some historical supernovae brighter than 10 visual "
+"magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN "
+"1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 "
+"October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN "
+"1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
+"(13 September)."
 msgstr ""
 
 #: plugins/Supernovae/src/Supernova.cpp:106

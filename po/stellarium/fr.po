@@ -17,15 +17,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-09 16:48+0700\n"
+"POT-Creation-Date: 2011-11-10 15:29+0700\n"
 "PO-Revision-Date: 2011-10-05 09:19+0000\n"
 "Last-Translator: xemard.nicolas <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-10 04:44+0000\n"
-"X-Generator: Launchpad (build 14263)\n"
+"X-Launchpad-Export-Date: 2011-11-11 04:48+0000\n"
+"X-Generator: Launchpad (build 14277)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -296,16 +296,16 @@ msgstr "(apparent)"
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Haut: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:297 src/gui/ConfigurationDialog.cpp:299
+#: src/gui/ConfigurationDialog.cpp:298 src/gui/ConfigurationDialog.cpp:300
 msgid "Select screenshot directory"
 msgstr "Sélectionner le répertoire pour la capture d'écran"
 
-#: src/gui/ConfigurationDialog.cpp:467
+#: src/gui/ConfigurationDialog.cpp:468
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Champ de vision au démarrage: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:475
+#: src/gui/ConfigurationDialog.cpp:476
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Direction de la vue Az/Alt au démarrage: %1/%2"
@@ -2371,6 +2371,16 @@ msgstr "Goniomètre"
 msgid "Plugin Key Bindings"
 msgstr "Raccourcis clavier du plugin"
 
+#. TRANSLATORS: First part of instructions for Angle Measure plugin
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:183
+msgid "Angle Tool Enabled - left drag to measure, left click to clear,"
+msgstr ""
+
+#. TRANSLATORS: Second part of instruction for Angle Measure plugin
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:185
+msgid "right click to change end point only"
+msgstr ""
+
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
 msgstr "Graduations de la boussole"
@@ -2388,8 +2398,11 @@ msgid "Oculars"
 msgstr "Oculaires"
 
 #: plugins/Oculars/src/Oculars.cpp:79
-msgid "Shows the sky as if looking through a telescope eyepiece"
-msgstr "Montre le ciel comme vu à travers un oculaire de télescope"
+msgid ""
+"Shows the sky as if looking through a telescope eyepiece. (Only "
+"magnification and field of view are simulated.) It can also show a sensor "
+"frame and a Telrad sight."
+msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:943
 msgid "Ocular view"
@@ -2500,29 +2513,18 @@ msgstr ""
 "données en ligne. Travail toujours en cours."
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
-msgid "Historical supernovae"
-msgstr "Supernovae historiques"
+msgid "Historical Supernovae"
+msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
-"The plugin for visualization of some historical supernovae, brighter 10 "
-"magnitude"
+"A plugin that shows some historical supernovae brighter than 10 visual "
+"magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN "
+"1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 "
+"October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN "
+"1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
+"(13 September)."
 msgstr ""
-"Plugin pour la visualisation de certaines supernovae historiques, plus "
-"brillant de magnitude 10"
-
-#: plugins/Supernovae/src/Supernovae.cpp:62
-msgid ""
-"SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
-"July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
-"1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
-"August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 "
-"September)"
-msgstr ""
-"SN 185A (7 Décembre), SN 386A (24 avril), SN 1006a (29 avril), SN 1054A (3 "
-"Juillet), SN 1181A (4 août), SN 1572A (5 Novembre), SN 1604A (8 Octobre), SN "
-"1680A (15 août), SN 1885A (17 août), SN 1895B (5 Juillet), SN 1937C (21 "
-"août), SN 1972E (8 mai), SN 1987A (24 Février) et SN 2011FE (13 Septembre)"
 
 #: plugins/Supernovae/src/Supernova.cpp:106
 #, qt-format
