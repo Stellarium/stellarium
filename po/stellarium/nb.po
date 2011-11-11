@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-09 16:48+0700\n"
+"POT-Creation-Date: 2011-11-10 15:29+0700\n"
 "PO-Revision-Date: 2011-10-11 21:08+0000\n"
 "Last-Translator: Odin <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-10 04:46+0000\n"
-"X-Generator: Launchpad (build 14263)\n"
+"X-Launchpad-Export-Date: 2011-11-11 04:49+0000\n"
+"X-Generator: Launchpad (build 14277)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -288,16 +288,16 @@ msgstr "(tilsynelatende)"
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:297 src/gui/ConfigurationDialog.cpp:299
+#: src/gui/ConfigurationDialog.cpp:298 src/gui/ConfigurationDialog.cpp:300
 msgid "Select screenshot directory"
 msgstr "Velg skjermbildemappe"
 
-#: src/gui/ConfigurationDialog.cpp:467
+#: src/gui/ConfigurationDialog.cpp:468
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Synsfelt ved oppstart: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:475
+#: src/gui/ConfigurationDialog.cpp:476
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Visningsretning ved oppstart Az/Alt: %1/%2"
@@ -2356,6 +2356,16 @@ msgstr "Vinkelmål"
 msgid "Plugin Key Bindings"
 msgstr "Tastesnarveier for Programtillegg"
 
+#. TRANSLATORS: First part of instructions for Angle Measure plugin
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:183
+msgid "Angle Tool Enabled - left drag to measure, left click to clear,"
+msgstr ""
+
+#. TRANSLATORS: Second part of instruction for Angle Measure plugin
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:185
+msgid "right click to change end point only"
+msgstr ""
+
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
 msgstr "Kompassmarkeringer"
@@ -2373,8 +2383,11 @@ msgid "Oculars"
 msgstr "Okularer"
 
 #: plugins/Oculars/src/Oculars.cpp:79
-msgid "Shows the sky as if looking through a telescope eyepiece"
-msgstr "Viser himmelen som gjennom et teleskop-okular"
+msgid ""
+"Shows the sky as if looking through a telescope eyepiece. (Only "
+"magnification and field of view are simulated.) It can also show a sensor "
+"frame and a Telrad sight."
+msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:943
 msgid "Ocular view"
@@ -2484,30 +2497,18 @@ msgstr ""
 "i dets nettbaserte database. Fortsatt under utvikling."
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
-msgid "Historical supernovae"
-msgstr "Historiske supernovaer"
+msgid "Historical Supernovae"
+msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
-"The plugin for visualization of some historical supernovae, brighter 10 "
-"magnitude"
+"A plugin that shows some historical supernovae brighter than 10 visual "
+"magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN "
+"1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 "
+"October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN "
+"1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
+"(13 September)."
 msgstr ""
-"Programtillegg for visualisering av noen historiske supernovaer, som er "
-"lysere enn magnitude 10"
-
-#: plugins/Supernovae/src/Supernovae.cpp:62
-msgid ""
-"SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
-"July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
-"1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
-"August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 "
-"September)"
-msgstr ""
-"SN 185A (7. desember), SN 386A (24. april), SN 1006A (29. april), SN 1054A "
-"(3. juli), SN 1181A (4. august), SN 1572A (5. november), SN 1604A (8. "
-"oktober), SN 1680A (15. august), SN 1885A (17. august), SN 1895B (5. juli), "
-"SN 1937C (21. august), SN 1972E (8. mai), SN 1987A (24. februar) og SN "
-"2011FE (13. september)"
 
 #: plugins/Supernovae/src/Supernova.cpp:106
 #, qt-format
