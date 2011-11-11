@@ -893,3 +893,7 @@ QGraphicsWidget#observationListView  QLabel {
 		font-size: 40px;
 }
 
+/**** The following are used for Satellites ****/
+QListWidget#satellitesList, QListWidget#sourceList {
+		font-size: 8pt;
+}
