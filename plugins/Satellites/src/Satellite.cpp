@@ -285,10 +285,11 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			if (!c.modulation.isEmpty() && c.modulation != "") oss << "  " << c.modulation;
 			if (!c.description.isEmpty() && c.description != "") oss << "  " << c.description;
 			if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << "<br>";
-			oss << QString(q_("%1 MHz (%2%3 kHz)</p>"))
+			oss << QString(q_("%1 MHz (%2%3 kHz)"))
 			       .arg(c.frequency, 8, 'f', 5)
 			       .arg(sign)
 			       .arg(ddop, 6, 'f', 3);
+			oss << "</p>";
 		}
 	}
 
