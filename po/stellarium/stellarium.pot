@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-11 17:33+0700\n"
+"POT-Creation-Date: 2011-11-12 15:35+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -581,6 +581,7 @@ msgid "Nebulas background images"
 msgstr ""
 
 #: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1068 src/ui_viewDialog.h:1090
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:208
 msgid "Stars"
 msgstr ""
 
@@ -1392,58 +1393,72 @@ msgid "Limiting Magnitude: "
 msgstr ""
 
 #: src/translations.h:189
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Constellation Lines"
 msgstr ""
 
 #: src/translations.h:190
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
 msgid "Constellation Names"
 msgstr ""
 
 #: src/translations.h:191
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
 msgid "Constellation Art Intensity"
 msgstr ""
 
 #: src/translations.h:192
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:243
 msgid "Constellation Boundaries"
 msgstr ""
 
 #: src/translations.h:193
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:251
 msgid "Cardinal Points"
 msgstr ""
 
 #: src/translations.h:194
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
 msgid "Planet Names"
 msgstr ""
 
 #: src/translations.h:195
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
 msgid "Planet Orbits"
 msgstr ""
 
 #: src/translations.h:196
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
 msgid "Planet Trails"
 msgstr ""
 
 #: src/translations.h:197
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
 msgid "Meridian Line"
 msgstr ""
 
 #: src/translations.h:198
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
 msgid "Azimuthal Grid"
 msgstr ""
 
 #: src/translations.h:199
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
 msgid "Equatorial Grid"
 msgstr ""
 
 #: src/translations.h:200
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:283
 msgid "Equator Line"
 msgstr ""
 
 #: src/translations.h:201
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
 msgid "Ecliptic Line"
 msgstr ""
 
 #: src/translations.h:202
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
 msgid "Nebula Names"
 msgstr ""
 
@@ -1746,6 +1761,7 @@ msgid "Markings"
 msgstr ""
 
 #: src/ui_viewDialog.h:1063
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Landscape"
 msgstr ""
 
@@ -2198,6 +2214,7 @@ msgid "Tools"
 msgstr ""
 
 #: src/ui_configurationDialog.h:878
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:362
 msgid "Scripts"
 msgstr ""
 
@@ -2382,6 +2399,7 @@ msgid "km/s"
 msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:221
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:131
 msgid "Altitude"
 msgstr ""
 
@@ -2752,6 +2770,181 @@ msgstr ""
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:124
+msgid "Set Location"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:125
+msgid "Latitude"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:128
+msgid "Longitude"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:135
+msgid "Solar System Body"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:147
+msgid "Date & Time"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:149
+msgid "Sky Time"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:154
+msgid "Set Time Zone"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:155
+msgid "Day Keys"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:156
+msgid "Preset Sky Time"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:163
+msgid "Sky Time at Startup"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:169
+msgid "Date Display Format"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
+msgid "Time Display Format"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:189
+msgid "General"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
+msgid "Sky Culture"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:197
+msgid "Language"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:210
+msgid "Show Stars"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:213
+msgid "Star Relative Scale"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:217
+msgid "Absolute Star Scale"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:221
+msgid "Twinkling"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:232
+msgid "Colors"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:242
+msgid "Constellation Art"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:279
+msgid "Equatorial J2000 Grid"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:295
+msgid "Nebubla Hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:319
+msgid "Effects"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:321
+msgid "Light Pollution Level"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:331
+msgid "Manual Zoom"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:335
+msgid "Magnitude Scaling Multiplier"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:336
+msgid "Milky Way Intensity"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:340
+msgid "Nebula Label Frequency"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:341
+msgid "Zoom Duration"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:345
+msgid "Cursor Timeout"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:346
+msgid "Setting Landscape Sets Location"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:364
+msgid "Run Local Script"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:370
+msgid "Stop Running Script"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:371
+msgid "CD/DVD Script"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:378
+msgid "Administration"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:382
+msgid "Load Default Configuration"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:383
+msgid "Save Current Configuration"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:384
+msgid "Shut Down"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:402
+msgid "[no TUI node]"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:84
+msgid "On"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:79
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:86
+msgid "Off"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TuiNodeColor.cpp:105
+#, qt-format
+msgid "error, unknown color part \"%1\""
 msgstr ""
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56

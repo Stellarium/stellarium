@@ -16,6 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include "StelTranslator.hpp"
 #include "TuiNodeBool.hpp"
 #include <QKeyEvent>
 
@@ -73,16 +74,16 @@ QString TuiNodeBool::getDisplayText()
 	if (!editing)
 	{
 		if (state)
-			return displayText + ":  On";
+			return displayText + QString(":  %1").arg(q_("On"));
 		else
-			return displayText + ":  Off";
+			return displayText + QString(":  %1").arg(q_("Off"));
 	}
 	else
 	{
 		if (state)
-			return displayText + ": >On<";
+			return displayText + QString(": >%1<").arg(q_("On"));
 		else
-			return displayText + ": >Off<";
+			return displayText + QString(": >%1<").arg(q_("Off"));
 	}
 }
 
