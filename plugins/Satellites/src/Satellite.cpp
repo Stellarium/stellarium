@@ -197,63 +197,72 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	QString str;
 	QTextStream oss(&str);
 	
-	if (flags&Name)
+	if (flags & Name)
 	{
-		oss << "<h2>" << designation << "</h2><br>";
+		oss << "<h2>" << designation << "</h2><br/>";
 		if (description!="")
-			oss << description << "<br>";
+			oss << description << "<br/>";
 	}
 	
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 	
-	if (flags&Extra1)
+	if (flags & Extra1)
 	{
-		oss << "<p>";
-		oss << QString("%1 <b>%2</b> %3").arg(q_("Range"))
-		       .arg(range, 5, 'f', 2)
-		       // TRANSLATORS: unit of measurement
-		       .arg(q_("km")) << "<br>";
-		oss << QString("%1 <b>%2</b> %3").arg(q_("Range rate"))
-		       .arg(rangeRate, 5, 'f', 3)
-		       // TRANSLATORS: unit of measurement
-		       .arg(q_("km/s")) << "<br>";
-		oss << QString("%1 <b>%2</b> %3").arg(q_("Altitude"))
-		       .arg(height, 5, 'f', 2)
-		       // TRANSLATORS: unit of measurement
-		       .arg(q_("km")) << "<br>";
-		oss << QString("%1: <b>%2</b>").arg(q_("SubPoint Lat/Long (deg.)"))
-		       .arg(latLongSubPointPosition[0], 5, 'f', 2) << "/";
-		oss << QString("<b>%1</b>").arg(latLongSubPointPosition[1], 5, 'f', 3);
+		oss << "<p>";//TODO: I think that this causes too large a margin --BM.
+		// TRANSLATORS: Slant range: distance between the satellite and the observer
+		oss << QString(q_("Range (km): %1")).arg(range, 5, 'f', 2);
+		oss << "<br/>";
+		// TRANSLATORS: Rate at which the distance changes
+		oss << QString(q_("Range rate (km/s): %1")).arg(rangeRate, 5, 'f', 3);
+		oss << "<br/>";
+		// TRANSLATORS: Satellite altitude
+		oss << QString(q_("Altitude (km): %1")).arg(height, 5, 'f', 2);
+		oss << "<br/>";
+		// TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
+		oss << QString("SubPoint (Lat./Long.): %1%2/%3%4")
+		       .arg(latLongSubPointPosition[0], 5, 'f', 2)
+		       .arg(QChar(0x00B0))
+		       .arg(latLongSubPointPosition[1], 5, 'f', 3)
+		       .arg(QChar(0x00B0));
 		oss << "</p>";
 		
-		oss << q_("TEME Coordinates (km):  ");
-		oss << QString("<b>X:</b> %1 ").arg(position[0], 5, 'f', 2);
-		oss << QString("<b>Y:</b> %1 ").arg(position[1], 5, 'f', 2);
-		oss << QString("<b>Z:</b> %1 ").arg(position[2], 5, 'f', 2) << "<br>";
-		oss << q_("TEME Velocity (km/s):  ");
-		oss << QString("<b>X:</b> %1 ").arg(velocity[0], 5, 'f', 2);
-		oss << QString("<b>Y:</b> %1 ").arg(velocity[1], 5, 'f', 2);
-		oss << QString("<b>Z:</b> %1 ").arg(velocity[2], 5, 'f', 2) << "<br>";
+		//TODO: This one can be done better
+		const char* xyz = "<b>X:</b> %1, <b>Y:</b> %2, <b>Z:</b> %3";
+		QString temeCoords = QString(xyz)
+		        .arg(position[0], 5, 'f', 2)
+		        .arg(position[1], 5, 'f', 2)
+		        .arg(position[2], 5, 'f', 2);
+		// TRANSLATORS: TEME is an Earth-centered inertial coordinate system
+		oss << QString(q_("TEME coordinates (km): %1")).arg(temeCoords);
+		oss << "<br/>";
 		
-		oss << q_("Visibility:  ");
+		QString temeVel = QString(xyz)
+		        .arg(velocity[0], 5, 'f', 2)
+		        .arg(velocity[1], 5, 'f', 2)
+		        .arg(velocity[2], 5, 'f', 2);
+		// TRANSLATORS: TEME is an Earth-centered inertial coordinate system
+		oss << QString(q_("TEME velocity (km/s): %1")).arg(temeVel);
+		oss << "<br/>";
+		
+		//Visibility: Full text
+		//TODO: Move to a more prominent place.
 		switch (visibility)
 		{
 		case RADAR_SUN:
-			oss << q_("Sat&Observer in Sunlit") << "<br>";
+			oss << q_("The satellite and the observer are in sunlight.") << "<br/>";
 			break;
 		case VISIBLE:
-			oss << q_("Sat. Visible") << "<br>";
+			oss << q_("The satellite is visible.") << "<br/>";
 			break;
 		case RADAR_NIGHT:
-			oss << q_("Sat. Eclipsed") << "<br>";
+			oss << q_("The satellite is eclipsed.") << "<br/>";
 			break;
 		case NOT_VISIBLE:
-			oss << q_("Sat. Not Visible") << "<br>";
+			oss << q_("The satellite is not visible") << "<br/>";
 			break;
 		default:
 			break;
-
 		}
 	}
 
@@ -276,11 +285,10 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			if (!c.modulation.isEmpty() && c.modulation != "") oss << "  " << c.modulation;
 			if (!c.description.isEmpty() && c.description != "") oss << "  " << c.description;
 			if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << "<br>";
-			oss << QString("%1 %2 (%3%4 %5)</p>").arg(c.frequency, 8, 'f', 5)
-			.arg(q_("MHz"))
-			.arg(sign)
-			.arg(ddop, 6, 'f', 3)
-			.arg(q_("kHz"));
+			oss << QString(q_("%1 MHz (%2%3 kHz)</p>"))
+			       .arg(c.frequency, 8, 'f', 5)
+			       .arg(sign)
+			       .arg(ddop, 6, 'f', 3);
 		}
 	}
 
