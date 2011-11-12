@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-13 00:35+0700\n"
+"POT-Creation-Date: 2011-11-12 22:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -566,7 +566,6 @@ msgid "Ground"
 msgstr ""
 
 #: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1082
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:909
 msgid "Atmosphere"
 msgstr ""
 
@@ -1850,7 +1849,6 @@ msgid "Hourly zenith rate:"
 msgstr ""
 
 #: src/ui_viewDialog.h:1095
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:922
 msgid "0"
 msgstr ""
 
@@ -2971,8 +2969,6 @@ msgid "User-defined:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:382
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:912
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:952
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "..."
 msgstr ""
@@ -3227,241 +3223,6 @@ msgid ""
 "An interface for adding asteroids and comets to Stellarium. It can download "
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/gui/ManualImportWindow.cpp:62
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:924
-#, qt-format
-msgid "Longitude of the ascending node %1:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/gui/ManualImportWindow.cpp:63
-#, qt-format
-msgid "Argument of periapsis %1:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/gui/ManualImportWindow.cpp:64
-#, qt-format
-msgid "Longitude of periapsis %1:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:893
-msgid "Object type"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:894
-msgid "Solar System object"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:895
-msgid "Minor planet (asteroid)"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:896
-msgid "Comet"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:897
-msgid "Satellite"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:898
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:899
-msgid "Name"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:900
-msgid "Identifier"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:901
-msgid "Minor planet number"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:902
-msgid "Properties"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:903
-msgid "Parent:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:904
-msgid "Radius:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:905
-msgid "Oblateness:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:906
-msgid "Albedo:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:907
-msgid "Color:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:908
-msgid "Lighting (TODO: More clear name)"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:910
-msgid "Hidden"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:911
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:951
-msgid "Texture:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:913
-msgid "Absolute magnitude:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:914
-msgid "Slope parameter:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:915
-msgid ""
-"Calculate the object's radius from the absolute magnitude and the current "
-"albedo"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:916
-msgid "H-G two parameter magnitude system for minor planets:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:917
-msgid "Orbital elements"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:918
-msgid "Orbital function type:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:919
-msgid "Cometary orbit"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:920
-msgid "Elliptic orbit"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:921
-#, qt-format
-msgid "Eccentricity (%1):"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:923
-msgid "Inclination (degrees):"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:925
-#, qt-format
-msgid "Argument of the periapsis %1:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:926
-#, qt-format
-msgid "Longitude of the periapsis %1:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:927
-#, qt-format
-msgid "Semi-major axis %1:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:928
-#, qt-format
-msgid "Periapsis distance %1:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:929
-msgid "Period:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:930
-msgid "Mean motion:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:931
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:944
-msgid "Epoch:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:932
-msgid "Time of periapsis passage:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:933
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:947
-msgid "J2000.0"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:934
-msgid "Mean anomaly:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:935
-msgid "Mean longitude:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:936
-msgid "Object-specific:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:937
-msgid "Orbit visualization period:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:938
-msgid "Rotational elements"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:939
-msgid "Obliquity:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:940
-msgid "North pole right ascension:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:941
-msgid "North pole declination:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:942
-msgid "Period (hours):"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:943
-msgid "Precession rate:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:945
-msgid "Offset:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:946
-msgid "Longitude of the ascending node of the ecliptic on the equator:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:948
-msgid "Rings"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:949
-msgid "Inner size:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:950
-msgid "Outer size:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:954
-msgid "Save"
 msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521

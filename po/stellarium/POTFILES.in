@@ -1,3 +1,4 @@
+# Core source files
 src/core/modules/ConstellationMgr.cpp
 src/core/modules/StarMgr.cpp
 src/core/modules/GridLinesMgr.cpp
@@ -21,7 +22,11 @@ src/gui/ViewDialog.cpp
 src/gui/LocationDialog.cpp
 src/gui/AddRemoveLandscapesDialog.cpp
 src/main.cpp
+
+# Translations of strings not contained in the source code
 src/translations.h
+
+# Translations of GUI files generated at build time
 src/ui_dateTimeDialogGui.h
 src/ui_helpDialogGui.h
 src/ui_locationDialogGui.h
@@ -30,6 +35,8 @@ src/ui_viewDialog.h
 src/ui_configurationDialog.h
 src/ui_addRemoveLandscapesDialog.h
 src/ui_AtmosphereDialog.h
+
+# Plug-in translations
 plugins/AngleMeasure/src/AngleMeasure.cpp
 plugins/CompassMarks/src/CompassMarks.cpp
 plugins/Oculars/src/Oculars.cpp
@@ -46,8 +53,8 @@ plugins/TextUserInterface/src/TextUserInterface.cpp
 plugins/TextUserInterface/src/TuiNodeBool.cpp
 plugins/TextUserInterface/src/TuiNodeColor.cpp
 plugins/SolarSystemEditor/src/SolarSystemEditor.cpp
-plugins/SolarSystemEditor/src/gui/ManualImportWindow.cpp
-plugins/SolarSystemEditor/src/ui_manualImportWindow.h
+#plugins/SolarSystemEditor/src/gui/ManualImportWindow.cpp
+#plugins/SolarSystemEditor/src/ui_manualImportWindow.h
 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h
 plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h
 plugins/Supernovae/src/Supernovae.cpp
