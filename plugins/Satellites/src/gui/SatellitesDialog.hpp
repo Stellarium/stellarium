@@ -72,6 +72,7 @@ private:
 	bool satelliteModified;
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
+	void populateGroupsList();
 	QTimer* updateTimer;
 
 };
