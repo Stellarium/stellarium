@@ -91,6 +91,13 @@ void Satellites::deinit()
 Satellites::~Satellites()
 {
 	delete configDialog;
+	
+	if (pxmapGlow)
+		delete pxmapGlow;
+	if (pxmapOnIcon)
+		delete pxmapOnIcon;
+	if (pxmapOffIcon)
+		delete pxmapOffIcon;
 }
 
 
