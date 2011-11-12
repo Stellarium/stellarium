@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-12 21:43+0700\n"
+"POT-Creation-Date: 2011-11-13 00:35+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -566,6 +566,7 @@ msgid "Ground"
 msgstr ""
 
 #: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1082
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:909
 msgid "Atmosphere"
 msgstr ""
 
@@ -1559,8 +1560,9 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: src/ui_helpDialogGui.h:267 plugins/Satellites/src/ui_satellitesDialog.h:619
+#: src/ui_helpDialogGui.h:267 plugins/Satellites/src/ui_satellitesDialog.h:670
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:350
 msgid "About"
 msgstr ""
 
@@ -1848,6 +1850,7 @@ msgid "Hourly zenith rate:"
 msgstr ""
 
 #: src/ui_viewDialog.h:1095
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:922
 msgid "0"
 msgstr ""
 
@@ -1928,7 +1931,7 @@ msgstr ""
 msgid "Use this sky culture as default"
 msgstr ""
 
-#: src/ui_viewDialog.h:1126 plugins/Satellites/src/ui_satellitesDialog.h:588
+#: src/ui_viewDialog.h:1126
 msgid "Visible"
 msgstr ""
 
@@ -2246,6 +2249,7 @@ msgid "Remove an installed landscape"
 msgstr ""
 
 #: src/ui_addRemoveLandscapesDialog.h:275
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:339
 msgid "Remove"
 msgstr ""
 
@@ -2355,7 +2359,7 @@ msgid "Oculars popup menu"
 msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:67
-#: plugins/Satellites/src/ui_satellitesDialog.h:606
+#: plugins/Satellites/src/ui_satellitesDialog.h:657
 msgid "Satellites"
 msgstr ""
 
@@ -2569,7 +2573,7 @@ msgid "Next update: %1 hours"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
-#: plugins/Satellites/src/ui_satellitesDialog.h:578
+#: plugins/Satellites/src/ui_satellitesDialog.h:605
 msgid "Update now"
 msgstr ""
 
@@ -2606,112 +2610,137 @@ msgstr ""
 msgid "Select TLE Update File"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:570
-#: plugins/Satellites/src/ui_satellitesDialog.h:571
+#: plugins/Satellites/src/ui_satellitesDialog.h:598
+#: plugins/Satellites/src/ui_satellitesDialog.h:599
 msgid "Satellites Configuration"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:573
-msgid "Update TLE elements from Internet sources"
+#: plugins/Satellites/src/ui_satellitesDialog.h:601
+msgid "Update TLE lists from Internet sources"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:574
+#: plugins/Satellites/src/ui_satellitesDialog.h:602
 msgid "Update from Internet sources"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:575
+#: plugins/Satellites/src/ui_satellitesDialog.h:603
 msgid "Last update:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:576
+#: plugins/Satellites/src/ui_satellitesDialog.h:604
 msgid "Update frequency (hours):"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:577
-msgid "[next update info]"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:579
+#: plugins/Satellites/src/ui_satellitesDialog.h:606
 msgid "Labels"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:580
-msgid "Label font size:"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:581
-msgid "Orbit Lines"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:582
-msgid "# Segments:"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:583
-msgid "Fade Length:"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:584
-msgid "Length:"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:585
-msgid "Restore default settings"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:586
-msgid "Save settings as default"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:587
-msgid "Settings"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:589
-msgid "Orbit"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:590
-msgid "Satellite ID:"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:592
-msgid "Description:"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:593
-msgid "Groups:"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:595
-msgid "Comma separated list of groups"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:597
-msgid "TLE Elements:"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:599
-msgid "NORAD two line element orbit data"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:603
-msgid "Save changes"
+#: plugins/Satellites/src/ui_satellitesDialog.h:607
+msgid "Label font size (pixels):"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:608
-msgid "edit selected source"
+msgid "Orbit Lines"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:611
+#: plugins/Satellites/src/ui_satellitesDialog.h:610
+#: plugins/Satellites/src/ui_satellitesDialog.h:614
+msgid "Number of segments used to draw the line"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:612
+msgid "# segments:"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:617
+#: plugins/Satellites/src/ui_satellitesDialog.h:621
+msgid "Number of segments used to draw each end of the line"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:619
+msgid "Fade length:"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:624
+#: plugins/Satellites/src/ui_satellitesDialog.h:628
+msgid "Duration of a single segment in seconds"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:626
+msgid "Length (s):"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:630
+msgid "Restore default settings"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:631
+msgid "Save settings as default"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:632
+msgid "Settings"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:634
+msgid "Display the selected satellite(s)"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:636
+msgid "Displayed"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:638
+msgid "Display orbit line(s) for the selected satellite(s)"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:640
+msgid "Orbit"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:641
+msgid "Satellite ID:"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:643
+msgid "Description:"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:644
+msgid "Groups:"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:646
+msgid "Comma separated list of groups"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:648
+msgid "TLE data:"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:650
+msgid "NORAD two line element orbit data"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:654
+msgid "Save changes"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:659
+msgid ""
+"Enter or edit the URL of the selected source. Changes are saved by pressing "
+"Enter."
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Add new source"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:615
+#: plugins/Satellites/src/ui_satellitesDialog.h:666
 msgid "Remove selected source"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:618
+#: plugins/Satellites/src/ui_satellitesDialog.h:669
 msgid "Sources"
 msgstr ""
 
@@ -2942,6 +2971,9 @@ msgid "User-defined:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:382
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:912
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:952
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "..."
 msgstr ""
 
@@ -3100,7 +3132,7 @@ msgid "Equatorial J2000 Grid"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:295
-msgid "Nebubla Hints"
+msgid "Nebula Hints"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:319
@@ -3195,6 +3227,453 @@ msgid ""
 "An interface for adding asteroids and comets to Stellarium. It can download "
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/gui/ManualImportWindow.cpp:62
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:924
+#, qt-format
+msgid "Longitude of the ascending node %1:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/gui/ManualImportWindow.cpp:63
+#, qt-format
+msgid "Argument of periapsis %1:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/gui/ManualImportWindow.cpp:64
+#, qt-format
+msgid "Longitude of periapsis %1:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:893
+msgid "Object type"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:894
+msgid "Solar System object"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:895
+msgid "Minor planet (asteroid)"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:896
+msgid "Comet"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:897
+msgid "Satellite"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:898
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:899
+msgid "Name"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:900
+msgid "Identifier"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:901
+msgid "Minor planet number"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:902
+msgid "Properties"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:903
+msgid "Parent:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:904
+msgid "Radius:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:905
+msgid "Oblateness:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:906
+msgid "Albedo:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:907
+msgid "Color:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:908
+msgid "Lighting (TODO: More clear name)"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:910
+msgid "Hidden"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:911
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:951
+msgid "Texture:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:913
+msgid "Absolute magnitude:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:914
+msgid "Slope parameter:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:915
+msgid ""
+"Calculate the object's radius from the absolute magnitude and the current "
+"albedo"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:916
+msgid "H-G two parameter magnitude system for minor planets:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:917
+msgid "Orbital elements"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:918
+msgid "Orbital function type:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:919
+msgid "Cometary orbit"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:920
+msgid "Elliptic orbit"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:921
+#, qt-format
+msgid "Eccentricity (%1):"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:923
+msgid "Inclination (degrees):"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:925
+#, qt-format
+msgid "Argument of the periapsis %1:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:926
+#, qt-format
+msgid "Longitude of the periapsis %1:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:927
+#, qt-format
+msgid "Semi-major axis %1:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:928
+#, qt-format
+msgid "Periapsis distance %1:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:929
+msgid "Period:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:930
+msgid "Mean motion:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:931
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:944
+msgid "Epoch:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:932
+msgid "Time of periapsis passage:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:933
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:947
+msgid "J2000.0"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:934
+msgid "Mean anomaly:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:935
+msgid "Mean longitude:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:936
+msgid "Object-specific:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:937
+msgid "Orbit visualization period:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:938
+msgid "Rotational elements"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:939
+msgid "Obliquity:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:940
+msgid "North pole right ascension:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:941
+msgid "North pole declination:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:942
+msgid "Period (hours):"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:943
+msgid "Precession rate:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:945
+msgid "Offset:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:946
+msgid "Longitude of the ascending node of the ecliptic on the equator:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:948
+msgid "Rings"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:949
+msgid "Inner size:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:950
+msgid "Outer size:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_manualImportWindow.h:954
+msgid "Save"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
+msgid "Select the type"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:522
+msgid "Asteroids"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
+msgid "Comets"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
+msgid "Select the source"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
+msgid "Download a list of objects from the Internet"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
+msgid "Select a source from the list:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
+msgid "Or enter a URL:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
+msgid "paste"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
+msgid "Add this URL to the bookmarks list"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
+msgid "Bookmark title:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
+msgid "A file containing a list of objects"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
+msgid "Get orbital elements"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
+msgid "Abort download"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
+msgid "Lists"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
+msgid "Online search"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
+msgid ""
+"Query the MPC's <a href=\"http://www.minorplanetcenter.net/iau/MPEph/MPEph."
+"html\">Minor Planet &amp; Comet Ephemeris Service</a>:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
+msgid ""
+"Only one result will be returned if the query is successful.<br>Both comets "
+"and asteroids can be identified with their number, name or provisional "
+"designation.<br>Comet <i>names</i> need to be prefixed with <b>C/</b> or "
+"<b>P/</b>. If more than one comet matches a name, only the first result will "
+"be returned. For example, \"C/Halley\" will return 1P/Halley, Halley's "
+"Comet, but \"Halley\" will return the asteorid (2688) Halley."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
+msgid "Objects found"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+msgid ""
+"Mark the objects you wish to be imported. In <i>italic</i> are listed names "
+"that match the names of already loaded objects. In <b>bold</b> are listed "
+"names that match the names of objects inherited from Stellarium's default "
+"Solar System configuration.<br/>Note that adding a large number of objects "
+"may cause Stellarium to run slowly."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
+msgid "Overwrite existing objects"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
+msgid "Update existing objects"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
+msgid "Update only the orbital elements"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
+msgid "Mark all"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
+msgid "Mark none"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
+msgid "Discard"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
+msgid "Add objects"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:327
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:338
+msgid "Solar System objects"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:329
+msgid "Warning"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:330
+msgid ""
+"This plug-in uses a custom Solar System configuration file. If something "
+"goes wrong and Stellarium crashes and/or doesn't start, you can delete "
+"manually that file from:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:331
+msgid "You can also reset all changes and return to the default configuration:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:332
+msgid "Reset to defaults"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:333
+msgid "Copy/replace the Solar System file"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:334
+msgid ""
+"You can create a backup copy of the custom Solar System configuration file "
+"in a convenient location, or replace it with such a copy."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:335
+msgid "Copy the Solar System file..."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:336
+msgid "Replace the Solar System file..."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:337
+msgid "Configuration file"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:340
+msgid "Add new Solar System objects"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:341
+msgid ""
+"You can import comet and asteroid data formatted in the export formats of "
+"the IAU's <a href=\"http://www.minorplanetcenter.net/\">Minor Planet Center</"
+"a> (MPC). You can import files with lists of objects, download such lists "
+"from the Internet or search the online Minor Planet and Comet Ephemeris "
+"Service (MPES)."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:342
+msgid "Import orbital elements in MPC format..."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:343
+msgid "Solar System"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:344
+msgid "Enter manually a new Solar System object"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:345
+msgid ""
+"You can add a new object by entering manually the properties used by "
+"Stellarium."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:346
+msgid "Enter manually object properties..."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:347
+msgid "Data import"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:348
+msgid "Solar System Editor plug-in"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:349
+#, qt-format
+msgid "Version %1"
 msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
