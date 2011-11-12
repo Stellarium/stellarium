@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-12 15:35+0700\n"
+"POT-Creation-Date: 2011-11-12 18:08+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1559,6 +1560,7 @@ msgid "Help"
 msgstr ""
 
 #: src/ui_helpDialogGui.h:267 plugins/Satellites/src/ui_satellitesDialog.h:619
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 msgid "About"
 msgstr ""
 
@@ -1977,6 +1979,7 @@ msgid ""
 msgstr ""
 
 #: src/ui_configurationDialog.h:768
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:383
 msgid "Save settings"
 msgstr ""
 
@@ -2760,6 +2763,252 @@ msgid ""
 "A convenient interface for some of the more obscure options in Stellarium's "
 "configuration file. Allows setting the time zone and changing the way the "
 "time and the date are displayed in the bottom bar."
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:223
+msgid "January"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:224
+msgid "February"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:225
+msgid "March"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:226
+msgid "April"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:227
+msgid "May"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:228
+msgid "June"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:229
+msgid "July"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:230
+msgid "August"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:231
+msgid "September"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:232
+msgid "October"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:233
+msgid "November"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:234
+msgid "December"
+msgstr ""
+
+#. TRANSLATORS: refers to any day of the week, if not possible, translate as "First week"
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
+msgid "First"
+msgstr ""
+
+#. TRANSLATORS: refers to any day of the week
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
+msgid "Second"
+msgstr ""
+
+#. TRANSLATORS: refers to any day of the week
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
+msgid "Third"
+msgstr ""
+
+#. TRANSLATORS: refers to any day of the week
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:254
+msgid "Fourth"
+msgstr ""
+
+#. TRANSLATORS: refers to any day of the week
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:256
+msgid "Last"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:265
+msgid "Sunday"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:266
+msgid "Monday"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:267
+msgid "Tuesday"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:268
+msgid "Wednesday"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:269
+msgid "Thursday"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:270
+msgid "Friday"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:271
+msgid "Saturday"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:449
+msgid "Define a time zone"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:372
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:374
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
+msgid "Time zone"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:452
+msgid "Timezone name:"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:378
+msgid "Offset from UTC:"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:379
+msgid " hours"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
+msgid "Daylight saving time (summer time)"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
+msgid "DST timezone name:"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
+msgid "DST offset from UTC:"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
+msgid "Daylight saving time start"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
+msgid "Day:"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:465
+msgid "Time of change:"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:466
+msgid "Date:"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
+msgid "Daylight saving time end"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:467
+msgid "Use this definition"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:375
+msgid ""
+"By default, the time displayed in Stellarium is interpreted as the local "
+"time in the system's time zone, not in the displayed location's time zone. "
+"This behaviour can be changed by changing Stellarium's global time zone "
+"settings."
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:376
+msgid "Use system settings (default)"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:377
+msgid "Universal Coordinated Time (UTC)"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:380
+msgid "(offset = local time - UTC time)"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
+msgid "User-defined:"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:382
+msgid "..."
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
+msgid "Any changes will take effect the next time Stellarium is started."
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
+msgid "Display formats"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
+msgid ""
+"These settings control the way time and date are displayed in the bottom bar."
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
+msgid "Time display format"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
+msgid "System default"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
+msgid "12-hour format"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
+msgid "24-hour format"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
+msgid "Date display format"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
+msgid "yyyy-mm-dd (ISO 8601)"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
+msgid "dd-mm-yyyy"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
+msgid "mm-dd-yyyy"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
+#, qt-format
+msgid "Time Zone plug-in (version %1)"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:78
