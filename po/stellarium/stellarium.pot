@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-12 22:59+0200\n"
+"POT-Creation-Date: 2011-11-13 01:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2304,9 +2304,9 @@ msgstr ""
 
 #. TRANSLATORS: Title of a group of key bindings in the Help window
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:126
-#: plugins/CompassMarks/src/CompassMarks.cpp:121
-#: plugins/Oculars/src/Oculars.cpp:931 plugins/Oculars/src/Oculars.cpp:945
-#: plugins/Satellites/src/Satellites.cpp:123
+#: plugins/CompassMarks/src/CompassMarks.cpp:124
+#: plugins/Oculars/src/Oculars.cpp:945 plugins/Oculars/src/Oculars.cpp:959
+#: plugins/Satellites/src/Satellites.cpp:130
 msgid "Plugin Key Bindings"
 msgstr ""
 
@@ -2333,7 +2333,7 @@ msgstr ""
 msgid "Displays compass bearing marks along the horizon"
 msgstr ""
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:121
+#: plugins/CompassMarks/src/CompassMarks.cpp:124
 msgid "Compass marks"
 msgstr ""
 
@@ -2348,11 +2348,11 @@ msgid ""
 "frame and a Telrad sight."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:943
+#: plugins/Oculars/src/Oculars.cpp:957
 msgid "Ocular view"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:965
+#: plugins/Oculars/src/Oculars.cpp:979
 msgid "Oculars popup menu"
 msgstr ""
 
@@ -2367,19 +2367,19 @@ msgid ""
 "TLE data"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:125
+#: plugins/Satellites/src/Satellites.cpp:132
 msgid "Satellites configuration window"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:126
+#: plugins/Satellites/src/Satellites.cpp:133
 msgid "Satellite hints"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:128
+#: plugins/Satellites/src/Satellites.cpp:135
 msgid "Satellite labels"
 msgstr ""
 
-#: plugins/Satellites/src/Satellites.cpp:162
+#: plugins/Satellites/src/Satellites.cpp:169
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
@@ -2432,7 +2432,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:288
 #, qt-format
-msgid "%1 MHz (%2%3 kHz)</p>"
+msgid "%1 MHz (%2%3 kHz)"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:209
@@ -2486,11 +2486,12 @@ msgid ""
 "incomplete, missing or buggy."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:230
+#. TRANSLATORS: Title of a section in the About tab of the Satellites window
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:231
 msgid "TLE data updates"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:231
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:232
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more "
@@ -2498,113 +2499,139 @@ msgid ""
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:233
+#, qt-format
+msgid ""
+"If you disable Internet updates, you may update from a file on your "
+"computer.  This file must be in the same format as the Celestrak updates "
+"(see %1 for an example)."
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:234
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:236
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:237
 msgid "Adding new satellites"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:237
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:238
 #, qt-format
 msgid ""
 "At the moment you must manually edit the %1 file to add new satellites to "
 "the database. Making this easier is still on the TODO list..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:239
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:240
 msgid "Technical notes"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:240
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:241
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:241
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:242
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:245
-msgid "Links"
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:244
+#, qt-format
+msgid "See %1this document%2 for details."
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:246
+msgid "Links"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:247
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
 "plugin\" in the subject when posting."
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:253
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:250
+#, qt-format
+msgid "If you have a question, you can %1get an answer here%2"
+msgstr ""
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:252
+#, qt-format
+msgid "Bug reports can be made %1here%2."
+msgstr ""
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:266
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:267
 msgid "Internet updates disabled"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:268
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:300
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:269
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
 msgid "Updating now..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:270
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:271
 msgid "Next update: < 1 minute"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:272
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:273
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:274
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:275
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
 #: plugins/Satellites/src/ui_satellitesDialog.h:605
 msgid "Update now"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:291
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:292
 msgid "Update from files"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:303
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:304
 msgid "Update error"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:310
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:311
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:367
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:368
 msgid "[new source]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 msgid "[all not displayed]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
 msgid "[all displayed]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:411
 msgid "[all]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:466
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:467
 msgid "Select TLE Update File"
 msgstr ""
 
@@ -2638,7 +2665,7 @@ msgid "Label font size (pixels):"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:608
-msgid "Orbit Lines"
+msgid "Orbit lines"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:610
