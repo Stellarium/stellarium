@@ -292,7 +292,7 @@ void TextUserInterface::init()
 	                                 GETSTELMODULE(NebulaMgr), SLOT(setLabelsColor(Vec3f)),
 	                                 GETSTELMODULE(NebulaMgr)->getLabelsColor(), 
 	                                 m5, m5_15);
-	TuiNode* m5_17 = new TuiNodeColor(QString("5.17 %1").arg(q_("Nebubla Hints")),
+        TuiNode* m5_17 = new TuiNodeColor(QString("5.17 %1").arg(q_("Nebula Hints")),
 	                                 GETSTELMODULE(NebulaMgr), SLOT(setCirclesColor(Vec3f)),
 	                                 GETSTELMODULE(NebulaMgr)->getCirclesColor(), 
 	                                 m5, m5_16);
