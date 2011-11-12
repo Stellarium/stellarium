@@ -124,6 +124,20 @@ Oculars::~Oculars()
 {
 	delete ocularDialog;
 	ocularDialog = NULL;
+	
+	if (pxmapGlow)
+		delete pxmapGlow;
+	if (pxmapOnIcon)
+		delete pxmapOnIcon;
+	if (pxmapOffIcon)
+		delete pxmapOffIcon;
+	
+	qDeleteAll(ccds);
+	ccds.clear();
+	qDeleteAll(telescopes);
+	telescopes.clear();
+	qDeleteAll(oculars);
+	oculars.clear();
 }
 
 QSettings* Oculars::appSettings()

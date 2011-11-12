@@ -70,6 +70,7 @@ MpcImportWindow::~MpcImportWindow()
 {
 	delete ui;
 	delete countdownTimer;
+	candidateObjectsModel->clear();
 	delete candidateObjectsModel;
 	if (downloadReply)
 		downloadReply->deleteLater();
