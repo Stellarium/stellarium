@@ -16,6 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include "StelTranslator.hpp"
 #include "TuiNodeColor.hpp"
 #include <QKeyEvent>
 
@@ -101,7 +102,7 @@ QString TuiNodeColor::getDisplayText()
 		else if (editingPart==2)
 			return displayText + QString(":  RGB %1,%2,>%3<").arg(value[0], 2, 'f', 2).arg(value[1], 2, 'f', 2).arg(value[2], 2, 'f', 2);
 		else
-			return QString("error, unknown color part \"%1\"").arg(editingPart);
+			return QString(q_("error, unknown color part \"%1\"")).arg(editingPart);
 	}
 }
 
