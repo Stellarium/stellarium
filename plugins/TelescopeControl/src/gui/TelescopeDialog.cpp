@@ -25,6 +25,7 @@
 #include "StelFileMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelStyle.hpp"
+#include "StelTranslator.hpp"
 #include "TelescopeControl.hpp"
 #include "TelescopeConfigurationDialog.hpp"
 #include "TelescopeDialog.hpp"
@@ -52,12 +53,12 @@ TelescopeDialog::TelescopeDialog()
 	telescopeListModel = new QStandardItemModel(0, ColumnCount);
 	
 	//TODO: This shouldn't be a hash...
-	statusString[StatusNA] = QString("N/A");
-	statusString[StatusStarting] = QString("Starting");
-	statusString[StatusConnecting] = QString("Connecting");
-	statusString[StatusConnected] = QString("Connected");
-	statusString[StatusDisconnected] = QString("Disconnected");
-	statusString[StatusStopped] = QString("Stopped");
+        statusString[StatusNA] = QString(q_("N/A"));
+        statusString[StatusStarting] = QString(q_("Starting"));
+        statusString[StatusConnecting] = QString(q_("Connecting"));
+        statusString[StatusConnected] = QString(q_("Connected"));
+        statusString[StatusDisconnected] = QString(q_("Disconnected"));
+        statusString[StatusStopped] = QString(q_("Stopped"));
 	
 	telescopeCount = 0;
 }
@@ -263,8 +264,8 @@ void TelescopeDialog::createDialogContent()
 	//About page
 	//TODO: Expand
 	QString htmlPage = "<html><head></head><body>";
-	htmlPage += "<h2>Stellarium Telescope Control Plug-in</h2>";
-	htmlPage += "<h3>Version " + QString(PLUGIN_VERSION) + "</h3>";
+        htmlPage += QString("<h2>%1</h2>").arg(q_("Stellarium Telescope Control Plug-in"));
+        htmlPage += QString("<h3>%1 %2</h3>").arg(q_("Version")).arg(PLUGIN_VERSION);
 	QFile helpFile(":/telescopeControl/help.utf8");
 	helpFile.open(QFile::ReadOnly | QFile::Text);
 	htmlPage += helpFile.readAll();
@@ -676,26 +677,26 @@ void TelescopeDialog::updateStatusButtonForSlot(int selectedSlot)
 
 void TelescopeDialog::setStatusButtonToStart()
 {
-	ui->pushButtonChangeStatus->setText("Start");
-	ui->pushButtonChangeStatus->setToolTip("Start the selected local telescope");
+        ui->pushButtonChangeStatus->setText(q_("Start"));
+        ui->pushButtonChangeStatus->setToolTip(q_("Start the selected local telescope"));
 }
 
 void TelescopeDialog::setStatusButtonToStop()
 {
-	ui->pushButtonChangeStatus->setText("Stop");
-	ui->pushButtonChangeStatus->setToolTip("Stop the selected local telescope");
+        ui->pushButtonChangeStatus->setText(q_("Stop"));
+        ui->pushButtonChangeStatus->setToolTip(q_("Stop the selected local telescope"));
 }
 
 void TelescopeDialog::setStatusButtonToConnect()
 {
-	ui->pushButtonChangeStatus->setText("Connect");
-	ui->pushButtonChangeStatus->setToolTip("Connect to the selected telescope");
+        ui->pushButtonChangeStatus->setText(q_("Connect"));
+        ui->pushButtonChangeStatus->setToolTip(q_("Connect to the selected telescope"));
 }
 
 void TelescopeDialog::setStatusButtonToDisconnect()
 {
-	ui->pushButtonChangeStatus->setText("Disconnect");
-	ui->pushButtonChangeStatus->setToolTip("Disconnect from the selected telescope");
+        ui->pushButtonChangeStatus->setText(q_("Disconnect"));
+        ui->pushButtonChangeStatus->setToolTip(q_("Disconnect from the selected telescope"));
 }
 
 void TelescopeDialog::updateStyle()
@@ -716,7 +717,7 @@ void TelescopeDialog::checkBoxUseExecutablesToggled(bool useExecutables)
 
 void TelescopeDialog::buttonBrowseServerDirectoryPressed()
 {
-	QString newPath = QFileDialog::getExistingDirectory (0, QString("Select a directory"), telescopeManager->getServerExecutablesDirectoryPath());
+        QString newPath = QFileDialog::getExistingDirectory (0, QString(q_("Select a directory")), telescopeManager->getServerExecutablesDirectoryPath());
 	//TODO: Validation? Directory exists and contains servers?
 	if(!newPath.isEmpty())
 	{
