@@ -266,7 +266,7 @@ void OcularDialog::scaleImageCircleStateChanged(int state)
 	bool useMaxImageCircle = Oculars::appSettings()->value("use_max_exit_circle",01.0).toBool();
 	if (shouldScale != useMaxImageCircle) {
 		Oculars::appSettings()->setValue("use_max_exit_circle", shouldScale);
-		Oculars::appSettings()->sync();\
+		Oculars::appSettings()->sync();
 		emit(scaleImageCircleChanged(shouldScale));
 	}
 }
@@ -289,6 +289,9 @@ void OcularDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->scaleImageCircleCheckBox, SIGNAL(stateChanged(int)), this, SLOT(scaleImageCircleStateChanged(int)));
 	connect(ui->requireSelectionCheckBox, SIGNAL(stateChanged(int)), this, SLOT(requireSelectionStateChanged(int)));
+	connect(ui->checkBoxControlPanel, SIGNAL(clicked(bool)),
+	        dynamic_cast<Oculars*>GETSTELMODULE(Oculars), SLOT(enableControlPanel(bool)));
+	
 	// The add & delete buttons
 	connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
 	connect(ui->deleteCCD, SIGNAL(clicked()), this, SLOT(deleteSelectedCCD()));
@@ -392,6 +395,10 @@ void OcularDialog::createDialogContent()
 	}
 	if (Oculars::appSettings()->value("use_max_exit_circle", 0.0).toBool()) {
 		ui->scaleImageCircleCheckBox->setCheckState(Qt::Checked);
+	}
+	if (Oculars::appSettings()->value("enable_control_panel", false).toBool())
+	{
+		ui->checkBoxControlPanel->setChecked(true);
 	}
 
 	//Initialize the style
