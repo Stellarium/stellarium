@@ -101,7 +101,8 @@ Oculars::Oculars():
 	actionShowOcular(0),
 	actionShowCrosshairs(0),
 	actionShowSensor(0),
-	actionShowTelrad(0)
+	actionShowTelrad(0),
+	guiPanel(0)
 {
 	flagShowCCD = false;
 	flagShowOculars = false;
@@ -136,7 +137,8 @@ Oculars::~Oculars()
 {
 	delete ocularDialog;
 	ocularDialog = NULL;
-	delete guiPanel;
+	if (guiPanel)
+		delete guiPanel;
 }
 
 QSettings* Oculars::appSettings()
@@ -237,20 +239,34 @@ void Oculars::draw(StelCore* core)
 					paintCrosshairs();
 				}
 			}
-			// Paint the information in the upper-right hand corner
-			//paintText(core);
+			if (guiPanelEnabled)
+			{
+				// Reset the state to allow the panel to be painted normally
+				glDisable(GL_TEXTURE_2D);
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				glEnable(GL_BLEND);
+			}
+			else
+			{
+				// Paint the information in the upper-right hand corner
+				paintText(core);
+			}
+		}
+	} else if (flagShowCCD) {
+		paintCCDBounds();
+		if (guiPanelEnabled)
+		{
+			// Reset the state to allow the panel to be painted normally
 			glDisable(GL_TEXTURE_2D);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glEnable(GL_BLEND);
 		}
-	} else if (flagShowCCD) {
-		paintCCDBounds();
-		// Paint the information in the upper-right hand corner
-		//paintText(core);
-		glDisable(GL_TEXTURE_2D);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);
-	}	
+		else
+		{
+			// Paint the information in the upper-right hand corner
+			paintText(core);
+		}
+	}
 }
 
 //! Determine which "layer" the plugin's drawing will happen on.
@@ -468,10 +484,9 @@ void Oculars::init()
 		ocularDialog = new OcularDialog(this, &ccds, &oculars, &telescopes);
 		initializeActivationActions();
 		determineMaxEyepieceAngle();
-
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		Q_ASSERT(gui);
-		guiPanel = new OcularsGuiPanel(this, gui->getSkyGui());
+		
+		guiPanelEnabled = settings->value("enable_control_panel", false).toBool();
+		enableControlPanel(guiPanelEnabled);
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 		ready = false;
@@ -555,6 +570,32 @@ void Oculars::setScreenFOVForCCD()
 		movementManager->setFlagTracking(true);
 		movementManager->zoomTo(actualFOVx * 3.0, 0.0);
 	}
+}
+
+void Oculars::enableControlPanel(bool enable)
+{
+	if (enable)
+	{
+		if (!guiPanel)
+		{
+			StelApp& app = StelApp::getInstance();
+			StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
+			Q_ASSERT(gui);
+			guiPanel = new OcularsGuiPanel(this, gui->getSkyGui());
+		}
+	}
+	else
+	{
+		if (guiPanel)
+		{
+			guiPanel->hide();
+			delete guiPanel;
+			guiPanel = 0;
+		}
+	}
+	guiPanelEnabled = enable;
+	settings->setValue("enable_control_panel", enable);
+	settings->sync();
 }
 
 /* ********************************************************************* */
@@ -671,8 +712,6 @@ void Oculars::enableOcular(bool enableOcularMode)
 																			true, font.pixelSize(), "#99FF99");
 		}
 		// we didn't accept the new status - make sure the toolbar button reflects this
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		Q_ASSERT(gui);
 		disconnect(actionShowOcular, SIGNAL(toggled(bool)),
 		           this, SLOT(enableOcular(bool)));
 		actionShowOcular->setChecked(false);
@@ -685,7 +724,8 @@ void Oculars::enableOcular(bool enableOcularMode)
 			flagShowOculars = enableOcularMode;
 			zoom(false);
 			//BM: I hope this is the right place...
-			guiPanel->showOcularGui();
+			if (guiPanel)
+				guiPanel->showOcularGui();
 		}
 	}
 }
@@ -1012,7 +1052,8 @@ void Oculars::toggleCCD(bool show)
 		flagShowCCD = true;
 		setScreenFOVForCCD();
 
-		guiPanel->showCcdGui();
+		if (guiPanel)
+			guiPanel->showCcdGui();
 	}
 	else
 	{
@@ -1024,7 +1065,8 @@ void Oculars::toggleCCD(bool show)
 		movementManager->zoomTo(movementManager->getInitFov());
 		movementManager->setFlagTracking(false);
 
-		guiPanel->foldGui();
+		if (guiPanel)
+			guiPanel->foldGui();
 	}
 }
 
