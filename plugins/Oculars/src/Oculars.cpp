@@ -486,7 +486,7 @@ void Oculars::init()
 		determineMaxEyepieceAngle();
 		
 		guiPanelEnabled = settings->value("enable_control_panel", false).toBool();
-		enableControlPanel(guiPanelEnabled);
+		enableGuiPanel(guiPanelEnabled);
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 		ready = false;
@@ -572,7 +572,7 @@ void Oculars::setScreenFOVForCCD()
 	}
 }
 
-void Oculars::enableControlPanel(bool enable)
+void Oculars::enableGuiPanel(bool enable)
 {
 	if (enable)
 	{
