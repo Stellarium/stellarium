@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>475</height>
+    <width>478</width>
+    <height>490</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -133,6 +133,9 @@
        </property>
        <item>
         <widget class="QTabWidget" name="tabWidget">
+         <property name="currentIndex">
+          <number>1</number>
+         </property>
          <widget class="QWidget" name="tabLists">
           <attribute name="title">
            <string>Lists</string>
@@ -422,7 +425,7 @@
               <item>
                <widget class="QLabel" name="labelQueryInstructions">
                 <property name="text">
-                 <string>Only one result will be returned if the query is successful.&lt;br&gt;Both comets and asteroids can be identified with their number, name or provisional designation.&lt;br&gt;Comet &lt;i&gt;names&lt;/i&gt; need to be prefixed with &lt;b&gt;C/&lt;/b&gt; or &lt;b&gt;P/&lt;/b&gt;. If more than one comet matches a name, only the first result will be returned. For example, &quot;C/Halley&quot; will return 1P/Halley, Halley's Comet, but &quot;Halley&quot; will return the asteorid (2688) Halley.</string>
+                 <string>Only one result will be returned if the query is successful.&lt;br&gt;Both comets and asteroids can be identified with their number, name or provisional designation.&lt;br&gt;Comet &lt;i&gt;names&lt;/i&gt; need to be prefixed with &lt;b&gt;C/&lt;/b&gt; or &lt;b&gt;P/&lt;/b&gt;. If more than one comet matches a name, only the first result will be returned. For example, &quot;C/Halley&quot; will return 1P/Halley, Halley's Comet, but &quot;Halley&quot; will return the asteroid (2688) Halley.</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
