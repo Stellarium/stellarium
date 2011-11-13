@@ -757,16 +757,22 @@ void Oculars::displayPopupMenu()
 					label = oculars[index]->name();
 				}
 				//BM: Does this happen at all any more?
+				QAction* action = 0;
 				if (selectedTelescopeIndex == -1) {
 					if (oculars[index]->isBinoculars()) {
-						QAction* action = submenu->addAction(label, ocularsSignalMapper, SLOT(map()));
+						action = submenu->addAction(label, ocularsSignalMapper, SLOT(map()));
 						availableOcularCount++;
 						ocularsSignalMapper->setMapping(action, QString("%1").arg(index));
 					}
 				} else {
-					QAction* action = submenu->addAction(label, ocularsSignalMapper, SLOT(map()));
+					action = submenu->addAction(label, ocularsSignalMapper, SLOT(map()));
 					availableOcularCount++;
 					ocularsSignalMapper->setMapping(action, QString("%1").arg(index));
+				}
+				if (action && index == selectedOcularIndex)
+				{
+					action->setCheckable(true);
+					action->setChecked(true);
 				}
 			}
 			popup->addMenu(submenu);
@@ -777,9 +783,7 @@ void Oculars::displayPopupMenu()
 		// If the selected ocular is a binoculars, show nothing.
 		if (telescopes.count() > 1 && (selectedOcularIndex > -1 && !oculars[selectedOcularIndex]->isBinoculars()))
 		{
-			popup->addAction("&Previous telescope", this, SLOT(decrementTelescopeIndex()));
-			popup->addAction("&Next telescope", this, SLOT(incrementTelescopeIndex()));
-			QMenu* submenu = createTelescopeSelectionMenu(popup);
+			QMenu* submenu = addTelescopeSubmenu(popup);
 			popup->addMenu(submenu);
 			popup->addSeparator();
 		}
@@ -822,6 +826,11 @@ void Oculars::displayPopupMenu()
 					label = ccds[index]->name();
 				}
 				QAction* action = submenu->addAction(label, ccdsSignalMapper, SLOT(map()));
+				if (index == selectedCCDIndex)
+				{
+					action->setCheckable(true);
+					action->setChecked(true);
+				}
 				ccdsSignalMapper->setMapping(action, QString("%1").arg(index));
 			}
 			popup->addMenu(submenu);
@@ -865,13 +874,10 @@ void Oculars::displayPopupMenu()
 		}
 		if (flagShowCCD && selectedCCDIndex > -1 && telescopes.count() > 1)
 		{
-			popup->addAction("&Previous telescope", this, SLOT(decrementTelescopeIndex()));
-			popup->addAction("&Next telescope", this, SLOT(incrementTelescopeIndex()));
-			QMenu* submenu = createTelescopeSelectionMenu(popup);
+			QMenu* submenu = addTelescopeSubmenu(popup);
 			popup->addMenu(submenu);
 			popup->addSeparator();
 		}
-		
 	}
 
 	popup->exec(QCursor::pos());
@@ -1553,11 +1559,14 @@ void Oculars::hideUsageMessageIfDisplayed()
 	}
 }
 
-QMenu* Oculars::createTelescopeSelectionMenu(QMenu *parent)
+QMenu* Oculars::addTelescopeSubmenu(QMenu *parent)
 {
 	Q_ASSERT(parent);
 
-	QMenu* submenu = new QMenu("Select &telescope", parent);
+	QMenu* submenu = new QMenu("&Telescope", parent);
+	submenu->addAction("&Previous telescope", this, SLOT(decrementTelescopeIndex()));
+	submenu->addAction("&Next telescope", this, SLOT(incrementTelescopeIndex()));
+	submenu->addSeparator();
 	for (int index = 0; index < telescopes.count(); ++index)
 	{
 		QString label;
@@ -1570,6 +1579,11 @@ QMenu* Oculars::createTelescopeSelectionMenu(QMenu *parent)
 			label = telescopes[index]->name();
 		}
 		QAction* action = submenu->addAction(label, telescopesSignalMapper, SLOT(map()));
+		if (index == selectedTelescopeIndex)
+		{
+			action->setCheckable(true);
+			action->setChecked(true);
+		}
 		telescopesSignalMapper->setMapping(action, QString("%1").arg(index));
 	}
 
