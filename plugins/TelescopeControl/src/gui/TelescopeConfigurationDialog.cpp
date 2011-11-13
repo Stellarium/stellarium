@@ -28,6 +28,7 @@
 #include "StelFileMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelStyle.hpp"
+#include "StelTranslator.hpp"
 
 #include <QDebug>
 #include <QCompleter>
@@ -134,7 +135,7 @@ void TelescopeConfigurationDialog::initNewTelescopeConfiguration(int slot)
 {
 	configuredSlot = slot;
 	initConfigurationDialog();
-	ui->stelWindowTitle->setText("Add New Telescope");
+        ui->stelWindowTitle->setText(q_("Add New Telescope"));
 	ui->lineEditTelescopeName->setText(QString("New Telescope %1").arg(QString::number(configuredSlot)));
 	
 	if(deviceModelNames.isEmpty())
@@ -157,7 +158,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 {
 	configuredSlot = slot;
 	initConfigurationDialog();
-	ui->stelWindowTitle->setText("Configure Telescope");
+        ui->stelWindowTitle->setText(q_("Configure Telescope"));
 	
 	//Read the telescope properties
 	QString name;

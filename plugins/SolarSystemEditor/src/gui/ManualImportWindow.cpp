@@ -31,6 +31,7 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
+//#include "StelTranslator.hpp"
 
 
 ManualImportWindow::ManualImportWindow()
@@ -58,9 +59,9 @@ void ManualImportWindow::createDialogContent()
 	connect(ui->pushButtonSelectTexture, SIGNAL(clicked()), this, SLOT(selectPlanetTextureFile()));
 	connect(ui->pushButtonSelectRingTexture, SIGNAL(clicked()), this, SLOT(selectRingTextureFile()));
 
-	ui->labelLongitudeOfTheAscendingNode->setText(QString("Longitude of the ascending node %1:").arg(QChar(0x03A9)));//Capital omega
-	ui->radioButtonArgumentOfPeriapsis->setText(QString("Argument of periapsis %1:").arg(QChar(0x3C9)));//Lowercase omega
-	ui->radioButtonLongitudeOfPeriapsis->setText(QString("Longitude of periapsis %1:").arg(QChar(0x3D6)));
+        ui->labelLongitudeOfTheAscendingNode->setText(QString("Longitude of the ascending node %1:").arg(QChar(0x03A9)));//Capital omega
+        ui->radioButtonArgumentOfPeriapsis->setText(QString("Argument of periapsis %1:").arg(QChar(0x3C9)));//Lowercase omega
+        ui->radioButtonLongitudeOfPeriapsis->setText(QString("Longitude of periapsis %1:").arg(QChar(0x3D6)));
 
 	//TODO: Move to "set defaults" function
 	ui->lineEditColor->setText("1.0, 1.0, 1.0");

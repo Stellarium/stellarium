@@ -70,6 +70,7 @@ MpcImportWindow::~MpcImportWindow()
 {
 	delete ui;
 	delete countdownTimer;
+	candidateObjectsModel->clear();
 	delete candidateObjectsModel;
 	if (downloadReply)
 		downloadReply->deleteLater();
@@ -174,7 +175,7 @@ void MpcImportWindow::resetDialog()
 void MpcImportWindow::populateBookmarksList()
 {
 	ui->comboBoxBookmarks->clear();
-	ui->comboBoxBookmarks->addItem("Select bookmark...");
+        ui->comboBoxBookmarks->addItem("Select bookmark...");
 	QStringList bookmarkTitles(bookmarks.value(importType).keys());
 	bookmarkTitles.sort();
 	ui->comboBoxBookmarks->addItems(bookmarkTitles);
@@ -293,7 +294,7 @@ void MpcImportWindow::selectFile()
 	QString directory = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation);
 	if (directory.isEmpty())
 		directory = QDesktopServices::storageLocation(QDesktopServices::HomeLocation);
-	QString filePath = QFileDialog::getOpenFileName(NULL, "Select a text file", directory);
+        QString filePath = QFileDialog::getOpenFileName(NULL, "Select a text file", directory);
 	ui->lineEditFilePath->setText(filePath);
 }
 
@@ -672,7 +673,7 @@ void MpcImportWindow::sendQuery()
 	queryProgressBar = StelApp::getInstance().getGui()->addProgressBar();
 	queryProgressBar->setValue(0);
 	queryProgressBar->setMaximum(0);
-	queryProgressBar->setFormat("Searching...");
+        queryProgressBar->setFormat("Searching...");
 	queryProgressBar->setVisible(true);
 
 	//TODO: Better handling of the interface
@@ -795,7 +796,7 @@ void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 	}
 	else
 	{
-		ui->labelQueryMessage->setText("Object not found.");
+                ui->labelQueryMessage->setText("Object not found.");
 		ui->labelQueryMessage->setVisible(true);
 		enableInterface(true);
 	}
@@ -884,7 +885,7 @@ void MpcImportWindow::resetCountdown()
 		if (queryReply != 0 && queryReply->isRunning())
 		{
 			abortQuery();
-			ui->labelQueryMessage->setText("The query timed out. You can try again, now or later.");
+                        ui->labelQueryMessage->setText("The query timed out. You can try again, now or later.");
 			ui->labelQueryMessage->setVisible(true);
 		}
 	}
