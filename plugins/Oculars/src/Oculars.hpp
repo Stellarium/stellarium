@@ -161,7 +161,7 @@ private:
 	void hideUsageMessageIfDisplayed();
 
 	//! Creates the sub-menu listing telescopes in the pop-up menu.
-	QMenu* createTelescopeSelectionMenu(QMenu* parent);
+	QMenu* addTelescopeSubmenu(QMenu* parent);
 
 	//! A list of all the oculars defined in the ini file.  Must have at least one, or module will not run.
 	QList<CCD *> ccds;
