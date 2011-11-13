@@ -309,7 +309,7 @@ void OcularDialog::createDialogContent()
 	connect(ui->scaleImageCircleCheckBox, SIGNAL(stateChanged(int)), this, SLOT(scaleImageCircleStateChanged(int)));
 	connect(ui->requireSelectionCheckBox, SIGNAL(stateChanged(int)), this, SLOT(requireSelectionStateChanged(int)));
 	connect(ui->checkBoxControlPanel, SIGNAL(clicked(bool)),
-	        dynamic_cast<Oculars*>GETSTELMODULE(Oculars), SLOT(enableControlPanel(bool)));
+	        plugin, SLOT(enableGuiPanel(bool)));
 	
 	// The add & delete buttons
 	connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
