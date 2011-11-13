@@ -40,7 +40,8 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
                                  Qt::WindowFlags wFlags):
 	QGraphicsWidget(parent, wFlags),
 	ocularsPlugin(plugin),
-	parentWidget(parent)
+	parentWidget(parent),
+	borderPath(0)
 {
 	//setVisible(false);
 	//setMinimumSize(0, 0);
@@ -63,9 +64,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	//QPixmap rightBackground(":/graphicGui/btbg-right.png");
 
 	StelApp& stelApp = StelApp::getInstance();
-	StelGui* gui = dynamic_cast<StelGui*>(stelApp.getGui());
-	Q_ASSERT(gui);
-	//QAction* actionToggleOcular = gui->getGuiActions("actionShow_Ocular");
 	buttonOcular = new StelButton(buttonBar,
 	                              QPixmap(":/ocular/bt_ocular_on.png"),
 	                              QPixmap(":/ocular/bt_ocular_off.png"),
@@ -399,7 +397,8 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 
 OcularsGuiPanel::~OcularsGuiPanel()
 {
-
+	if (borderPath)
+		delete borderPath;
 }
 
 void OcularsGuiPanel::showOcularGui()

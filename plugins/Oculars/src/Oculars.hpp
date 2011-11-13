@@ -103,6 +103,7 @@ public slots:
 	void toggleTelrad(bool show);
 	//! Toggles the Telrad sight overlay (overloaded for blind switching).
 	void toggleTelrad();
+	void enableControlPanel(bool enable = true);
 
 signals:
 	void selectedCCDChanged();
@@ -189,6 +190,8 @@ private:
 	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
 	bool requireSelection;		//!< Read from the ini file, whether an object is required to be selected to zoom in.
 	bool useMaxEyepieceAngle;	//!< Read from the ini file, whether to scale the mask based aFOV.
+	//! Display the GUI control panel
+	bool guiPanelEnabled;
 
 	QSignalMapper* ccdRotationSignalMapper;  //!< Used to rotate the CCD. */
 	QSignalMapper* ccdsSignalMapper; //!< Used to determine which CCD was selected from the popup navigator. */
