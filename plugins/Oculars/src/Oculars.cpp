@@ -828,26 +828,39 @@ void Oculars::displayPopupMenu()
 			popup->addSeparator();
 		}
 
-		popup->addAction("Toggle &crosshair", this, SLOT(toggleCrosshairs()));
+		QAction* action = popup->addAction("Toggle &crosshair");
+		action->setCheckable(true);
+		action->setChecked(flagShowCrosshairs);
+		connect(action, SIGNAL(toggled(bool)),
+		        actionShowCrosshairs, SLOT(setChecked(bool))); 
 	} else {
 		// We are not in ocular mode
 		// We want to show the CCD's, and if a CCD is selected, the telescopes
 		//(as a CCD requires a telescope) and the general menu items.
 		QAction* action = new QAction("Configure &Oculars", popup);
 		action->setCheckable(true);
-		connect(action, SIGNAL(triggered(bool)), ocularDialog, SLOT(setVisible(bool)));
-		//connect(ocularDialog, SIGNAL(visibleChanged(bool)), action, SLOT(setChecked(bool)));
+		action->setChecked(ocularDialog->visible());
+		connect(action, SIGNAL(triggered(bool)),
+		        ocularDialog, SLOT(setVisible(bool)));
 		popup->addAction(action);
 		popup->addSeparator();
 
 		if (!flagShowTelrad) {
-			popup->addAction("Toggle &CCD", this, SLOT(toggleCCD()));
+			QAction* action = popup->addAction("Toggle &CCD");
+			action->setCheckable(true);
+			action->setChecked(flagShowCCD);
+			connect(action, SIGNAL(toggled(bool)),
+			        actionShowSensor, SLOT(setChecked(bool)));
 		}
 		
 		if (!flagShowCCD) {
-			popup->addAction("Toggle &Telrad", this, SLOT(toggleTelrad()));
+			QAction* action = popup->addAction("Toggle &Telrad");
+			action->setCheckable(true);
+			action->setChecked(flagShowTelrad);
+			connect(action, SIGNAL(toggled(bool)),
+			        actionShowTelrad, SLOT(setChecked(bool)));
 		}
-
+		
 		popup->addSeparator();
 		if (flagShowCCD && selectedCCDIndex > -1 && selectedTelescopeIndex > -1)
 		{
