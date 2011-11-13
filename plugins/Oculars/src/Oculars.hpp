@@ -103,7 +103,7 @@ public slots:
 	void toggleTelrad(bool show);
 	//! Toggles the Telrad sight overlay (overloaded for blind switching).
 	void toggleTelrad();
-	void enableControlPanel(bool enable = true);
+	void enableGuiPanel(bool enable = true);
 
 signals:
 	void selectedCCDChanged();
