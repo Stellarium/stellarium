@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-13 01:06+0200\n"
-"PO-Revision-Date: 2011-11-12 23:56+0000\n"
+"POT-Creation-Date: 2011-11-13 22:43+0700\n"
+"PO-Revision-Date: 2011-11-14 02:09+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-13 05:25+0000\n"
+"X-Launchpad-Export-Date: 2011-11-14 04:51+0000\n"
 "X-Generator: Launchpad (build 14277)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -1612,6 +1612,7 @@ msgid ":"
 msgstr ":"
 
 #: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "Help"
 msgstr "Pomoc"
 
@@ -1964,6 +1965,7 @@ msgstr "Dodaj/usuń krajobrazy..."
 
 #: src/ui_viewDialog.h:1118 src/ui_viewDialog.h:1123 src/ui_viewDialog.h:1125
 #: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Options"
 msgstr "Opcje"
 
@@ -2254,6 +2256,7 @@ msgid "Stop the download. You can always restart it later"
 msgstr "Zatrzymaj pobieranie. Zawsze możesz je wznowić."
 
 #: src/ui_configurationDialog.h:853
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
 msgid "Cancel"
 msgstr "Anuluj"
 
@@ -2319,6 +2322,7 @@ msgid "Remove an installed landscape"
 msgstr "Usuń zainstalowany krajobraz"
 
 #: src/ui_addRemoveLandscapesDialog.h:275
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:339
 msgid "Remove"
 msgstr "Usuń"
@@ -2526,6 +2530,7 @@ msgid "Stellarium Satellites Plugin"
 msgstr "Wtyczka Satelity do programu Stellarium"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:210
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Version"
 msgstr "Wersja"
 
@@ -2917,6 +2922,346 @@ msgstr "Ustaw teleskop #%1 na punkt znajdujący się obecnie na środku ekranu"
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Ustaw teleskop na punkt o określonych współrzędnych"
 
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:138
+msgid "Add New Telescope"
+msgstr "Dodaj nowy teleskop"
+
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:161
+msgid "Configure Telescope"
+msgstr "Konfiguracja teleskopu"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
+msgid "N/A"
+msgstr "n.d."
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
+msgid "Starting"
+msgstr "Uruchamianie"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:58
+msgid "Connecting"
+msgstr "Łączenie"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:59
+msgid "Connected"
+msgstr "Połączone"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:60
+msgid "Disconnected"
+msgstr "Rozłączone"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:61
+msgid "Stopped"
+msgstr "Zatrzymane"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
+msgid "Stellarium Telescope Control Plug-in"
+msgstr "Wtyczka Sterowanie teleskopem"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:680
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:386
+msgid "Start"
+msgstr "Start"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:681
+msgid "Start the selected local telescope"
+msgstr "Uruchom wybrany teleskop lokalny"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:686
+msgid "Stop"
+msgstr "Stop"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:687
+msgid "Stop the selected local telescope"
+msgstr "Zatrzymaj wybrany teleskop lokalny"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:692
+msgid "Connect"
+msgstr "Połącz"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:693
+msgid "Connect to the selected telescope"
+msgstr "Połącz z wybranym teleskopem"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:698
+msgid "Disconnect"
+msgstr "Rozłącz"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:699
+msgid "Disconnect from the selected telescope"
+msgstr "Rozłącz wybrany teleskop"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:720
+msgid "Select a directory"
+msgstr "Wybierz katalog"
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:297
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:469
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:382
+msgid "Form"
+msgstr "Formularz"
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:298
+msgid "Slew telescope to"
+msgstr "Ustaw teleskop na"
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:300
+msgid "There are no active devices."
+msgstr "Brak aktywnych urządzeń."
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:301
+msgid "Slew telescope to coordinates"
+msgstr "Ustaw teleskop na współrzędne"
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:302
+msgid "&Right Ascension"
+msgstr "&Rektascensja"
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:303
+#: plugins/TelescopeControl/src/ui_slewDialog.h:305
+msgid "(J2000)"
+msgstr "(J2000)"
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:304
+msgid "De&clination"
+msgstr "De&klinacja"
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:307
+msgid "Hours-minutes-seconds format"
+msgstr "Format godziny-minuty-sekundy"
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:309
+msgid "&HMS"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:311
+msgid "Degrees-minutes-seconds format"
+msgstr "Format stopnie-minuty-sekundy"
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:313
+msgid "&DMS"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:315
+msgid "Decimal degrees"
+msgstr "Stopnie w postaci ułamka dziesiętnego"
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:317
+msgid "D&ecimal"
+msgstr "D&ziesiętne"
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:318
+msgid "&Slew"
+msgstr "&Ustaw"
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:319
+msgid "Configure &telescopes..."
+msgstr "Konfiguruj &teleskopy..."
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:470
+msgid "Telescope Configuration"
+msgstr "Konfiguracja teleskopu"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
+msgid "Telescope controlled by:"
+msgstr "Teleskop sterowany przez:"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
+msgid ""
+"A telescope connected to this computer via a serial port and controlled "
+"directly by Stellarium."
+msgstr ""
+"Teleskop podłączony do tego komputera przez port szeregowy i sterowany "
+"bezpośrednio przez Stellarium."
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
+msgid "Stellarium, directly through a serial port"
+msgstr "Stellarium, bezpośrednio przez port szeregowy"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
+msgid ""
+"A telescope controlled by an external application, either at this computer "
+"or at a remote machine."
+msgstr ""
+"Teleskop sterowany przez aplikację zewnętrzną - bądź na tym komputerze, bądź "
+"na komputerze odległym."
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
+msgid "External software or a remote computer"
+msgstr "Zewnętrzny program lub komputer odległy"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
+msgid "Nothing, just simulate one (a moving reticle)"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
+msgid "Telescope properties"
+msgstr "Właściwości teleskopu"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
+msgid "Name:"
+msgstr "Nazwa:"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
+msgid "Connection delay:"
+msgstr "Opóźnienie połączenia:"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
+msgid ""
+"The approximate time it takes for the signals from the telescope to reach "
+"Stellarium.\n"
+"Increase this value if the reticle is skipping."
+msgstr ""
+"Przybliżony czas otrzymania sygnałów z teleskopu przez program Stellarium.\n"
+"Zwiększ tę wartość jeśli siatka przesuwa się skokowo."
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
+msgid "s"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
+msgid "Coordinate system:"
+msgstr "Układ współrzędnych:"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
+msgid "J2000 (default)"
+msgstr "J2000 (domyślny)"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
+msgid "Equinox of the date (JNow)"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:494
+msgid ""
+"Automatically attempt to start the telescope or establish connection when "
+"Stellarium starts"
+msgstr ""
+"Automatycznie spróbuj uruchomić teleskop lub ustanowić połączenie podczas "
+"uruchamiania Stellarium"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
+msgid "Start/connect at startup"
+msgstr "Uruchom/połącz podczas uruchamiania programu"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
+msgid "Device settings"
+msgstr "Ustawienia urządzenia"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
+msgid "Serial port:"
+msgstr "Port szeregowy:"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
+msgid "Device model:"
+msgstr "Model urządzenia:"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
+msgid "Connection settings"
+msgstr "Ustawienia połączenia"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
+msgid "Host:"
+msgstr "Host:"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:503
+msgid ""
+"Host name or IPv4 address of the machine that hosts the telescope server"
+msgstr ""
+"Nazwa host lub adres IPv4 komputera, na którym działa serwer teleskopu"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:505
+msgid "localhost"
+msgstr "serwer lokalny"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
+msgid "TCP port:"
+msgstr "Port TCP:"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
+msgid "User interface settings"
+msgstr "Ustawienia interfejsu użytkownika"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
+msgid "Show circles with fixed angular size around the telescope reticle"
+msgstr "Wyświetlaj okręgi o stałym rozmiarze kątowym wokół siatki teleskopu"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:511
+msgid "Use field of view indicators"
+msgstr "Używaj wskaźników pola widzenia"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:512
+msgid "Circle size(s):"
+msgstr "Rozmiary okręgów:"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:514
+msgid "Up to ten decimal values in degrees of arc, separated with commas"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
+msgid "OK"
+msgstr "OK"
+
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:383
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
+msgid "Telescopes"
+msgstr "Teleskopy"
+
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:385
+msgid "Telescopes Controlled"
+msgstr "Sterowane teleskopy"
+
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:388
+msgid "Configure the selected telescope"
+msgstr "Konfiguruj wybrany teleskop"
+
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:390
+msgid "Configure"
+msgstr "Konfiguruj"
+
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
+msgid "Add a new telescope"
+msgstr "Dodaj nowy teleskop"
+
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:394
+msgid "Add"
+msgstr "Dodaj"
+
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
+msgid "Remove the selected telescope"
+msgstr "Usuń wybrany teleskop"
+
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:400
+msgid "GUI"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
+msgid "Show telescope labels"
+msgstr "Pokazuj etykiety teleskopów"
+
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:402
+msgid "Show telescope reticles"
+msgstr "Pokazuj siatki teleskopów"
+
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
+msgid "Show field of view indicators"
+msgstr "Pokazuj wskaźniki pola widzenia"
+
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
+msgid "Files"
+msgstr "Pliki"
+
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
+msgid "Log telescope driver messages to files"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:406
+msgid "Use telescope server executables (override built-in drivers)"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
+msgid "Executables directory:"
+msgstr ""
+
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
 msgstr "Strefa czasowa"
@@ -3126,7 +3471,7 @@ msgid "User-defined:"
 msgstr "Określone przez użytkownika:"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:382
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "..."
 msgstr "..."
 
@@ -3250,7 +3595,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:189
 msgid "General"
-msgstr ""
+msgstr "Ogólne"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "Sky Culture"
@@ -3389,96 +3734,89 @@ msgstr ""
 "list obiektów ze strony internetowej Minor Planet Center i przeszukiwanie "
 "jej internetowej bazy danych. Prace nad interfejsem wciąż trwają."
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Select the type"
 msgstr "Wybierz typ"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:522
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Asteroids"
 msgstr "Asteroidy"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Comets"
 msgstr "Komety"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Select the source"
 msgstr "Wybierz źródło"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Download a list of objects from the Internet"
 msgstr "Pobierz listę obiektów z Internetu"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Select a source from the list:"
 msgstr "Wybierz źródło z listy"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Or enter a URL:"
 msgstr "albo wprowadź adres URL:"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "paste"
 msgstr "wklej"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Add this URL to the bookmarks list"
 msgstr "Dodaj ten adres URL do listy zakładek"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Bookmark title:"
 msgstr "Tytuł zakładki:"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "A file containing a list of objects"
 msgstr "Plik zawierający listę obiektów"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Get orbital elements"
 msgstr "Pobierz elementy orbitalne"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "Abort download"
 msgstr "Przerwij pobieranie"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Lists"
 msgstr "Listy"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid "Online search"
 msgstr "Wyszukiwanie on-line"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid ""
 "Query the MPC's <a "
 "href=\"http://www.minorplanetcenter.net/iau/MPEph/MPEph.html\">Minor Planet "
 "&amp; Comet Ephemeris Service</a>:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
 msgid ""
 "Only one result will be returned if the query is successful.<br>Both comets "
 "and asteroids can be identified with their number, name or provisional "
 "designation.<br>Comet <i>names</i> need to be prefixed with <b>C/</b> or "
 "<b>P/</b>. If more than one comet matches a name, only the first result will "
 "be returned. For example, \"C/Halley\" will return 1P/Halley, Halley's "
-"Comet, but \"Halley\" will return the asteorid (2688) Halley."
+"Comet, but \"Halley\" will return the asteroid (2688) Halley."
 msgstr ""
-"Jeśli zostanie znaleziona odpowiedź na zapytanie, pojawi się tylko jeden "
-"wynik.<br>Za pomocą numeru, nazwy lub oznaczenia tymczasowego można "
-"zidentyfikować zarówno komety, jak i asteroidy.<br><i>Nazwy</i> komet muszą "
-"być poprzedzone <b>C/</b> lub <b>P/</b>. Jeśli do nazwy pasuje więcej niż "
-"jedna kometa, zostanie zwrócony jedynie pierwszy wynik wyszukiwania. Na "
-"przykład, \"C/Halley\" zwróci w wyniku 1P/Halley, Kometa Halleya, ale "
-"\"Halley\" zwróci w wyniku asteoridę (2688) Halley."
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid "Objects found"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid ""
 "Mark the objects you wish to be imported. In <i>italic</i> are listed names "
 "that match the names of already loaded objects. In <b>bold</b> are listed "
@@ -3487,31 +3825,31 @@ msgid ""
 "may cause Stellarium to run slowly."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Overwrite existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid "Update existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
 msgid "Update only the orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
 msgid "Mark all"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:549
 msgid "Mark none"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:550
 msgid "Discard"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:551
 msgid "Add objects"
 msgstr ""
 
@@ -3634,13 +3972,3 @@ msgstr ""
 #, qt-format
 msgid "Type: %1"
 msgstr "Typ: %1"
-
-#~ msgid "Form"
-#~ msgstr "Formularz"
-
-#~ msgid "Orbit Lines"
-#~ msgstr "Orbity"
-
-#, qt-format
-#~ msgid "%1 MHz (%2%3 kHz)</p>"
-#~ msgstr "%1 MHz (%2%3 kHz)</p>"
