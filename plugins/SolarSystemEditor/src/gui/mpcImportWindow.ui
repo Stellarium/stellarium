@@ -134,7 +134,7 @@
        <item>
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="tabLists">
           <attribute name="title">
@@ -301,8 +301,9 @@
                  </item>
                  <item>
                   <widget class="QPushButton" name="pushButtonBrowse">
-                   <property name="text">
-                    <string>...</string>
+                   <property name="icon">
+                    <iconset resource="../../../../data/gui/guiRes.qrc">
+                     <normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
                    </property>
                   </widget>
                  </item>
