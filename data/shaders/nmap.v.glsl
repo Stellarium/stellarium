@@ -19,7 +19,10 @@
 
 attribute vec3 tang;
 attribute vec3 pvec;
+
 uniform vec3 lpos;
+uniform float t;
+uniform vec3 cvel;
 
 varying vec3 var_ldir;
 varying vec3 var_vdir;
@@ -36,7 +39,6 @@ void main()
 	vec3 tangent = normalize(gl_NormalMatrix * tang);
 	vec3 binormal = cross(normal, tangent);
 
-//	vec3 lpos = gl_LightSource[0].position.xyz;
 	vec3 ldir = normalize(lpos - vpos);
 
 	gl_TexCoord[0] = gl_MultiTexCoord0;
@@ -47,7 +49,13 @@ void main()
 
 	var_ldir = tbnv * ldir;
 	var_vdir = -(tbnv * pvec);
-	pos = gl_Vertex.xyz;
+	vec3 position = gl_Vertex.xyz;
+	
+	float theta = mod(t * cvel.x, 2.0 * 3.14159265);
+
+	pos.x = position.x * cos(theta) + position.y * sin(theta);
+	pos.y = -position.x * sin(theta) + position.y * cos(theta);
+	pos.z = position.z;
 
 	var_norm = normal;
 }
