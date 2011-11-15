@@ -646,11 +646,11 @@
           <item row="1" column="0">
            <widget class="QGroupBox" name="atmosphereGroupBox">
             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <bold>false</bold>
-              </font>
+             <font>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
             </property>
             <property name="title">
              <string>Atmosphere</string>
@@ -671,7 +671,7 @@
                <item>
                 <widget class="QLabel" name="label_4">
                  <property name="text">
-                  <string>Light pollution: </string>
+                  <string>Light pollution:</string>
                  </property>
                 </widget>
                </item>
@@ -1145,7 +1145,7 @@
                <item>
                 <widget class="QLabel" name="label_6">
                  <property name="text">
-                  <string>Art brightness: </string>
+                  <string>Art brightness:</string>
                  </property>
                 </widget>
                </item>

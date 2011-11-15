@@ -120,15 +120,20 @@ double TextUserInterface::getCallOrder(StelModuleActionName actionName) const
 *************************************************************************/
 void TextUserInterface::init()
 {
+	//Reusing translations: The translators will have to do less work if the
+	//strings used here match strings used elsewhere. Do not change strings
+	//unless you have a good reason. --BM
+	
 	StelCore* core = StelApp::getInstance().getCore();
-	TuiNode* m1 = new TuiNode(N_("Set Location"));
-	TuiNode* m1_1 = new TuiNodeDouble(N_("Latitude"),
+	//Reusing strings from the location dialog
+	TuiNode* m1 = new TuiNode(N_("Location"));
+	TuiNode* m1_1 = new TuiNodeDouble(N_("Latitude:"),
 	                                  this, SLOT(setLatitude(double)),
 	                                  getLatitude(), -180, 180, 0.5, m1);
-	TuiNode* m1_2 = new TuiNodeDouble(N_("Longitude"),
+	TuiNode* m1_2 = new TuiNodeDouble(N_("Longitude:"),
 	                                  this, SLOT(setLongitude(double)),
 	                                  getLongitude(), -180, 180, 0.5, m1, m1_1);
-	TuiNode* m1_3 = new TuiNodeInt(N_("Altitude"),
+	TuiNode* m1_3 = new TuiNodeInt(N_("Altitude:"),
 	                               this, SLOT(setAltitude(int)),
 	                               core->getCurrentLocation().altitude,
 	                               -200, 200000, 100, m1, m1_2);
@@ -136,7 +141,7 @@ void TextUserInterface::init()
 	// TODO: Now new Solar System bodies can be added at runtime, so the list
 	// needs to be populated every time this happens. --BM
 	SolarSystem* solarSystem = GETSTELMODULE(SolarSystem);
-	TuiNode* m1_4 = new TuiNodeEnum(N_("Solar System Body"),
+	TuiNode* m1_4 = new TuiNodeEnum(N_("Solar System body"),
 	                                this, SLOT(setHomePlanet(QString)),
 	                                solarSystem->getAllPlanetEnglishNames(),
 	                                core->getCurrentLocation().planetName,
@@ -148,37 +153,45 @@ void TextUserInterface::init()
 	m1_1->loopToTheLast();
 	m1->setChildNode(m1_1);
 
-	TuiNode* m2 = new TuiNode(N_("Date & Time"), NULL, m1);
+	TuiNode* m2 = new TuiNode(N_("Date and Time"), NULL, m1);
 	m1->setNextNode(m2);
-	TuiNode* m2_1 = new TuiNodeDateTime(N_("Sky Time"),
+	TuiNode* m2_1 = new TuiNodeDateTime(N_("Current date/time"),
 	                                    core,
 	                                    SLOT(setJDay(double)),  
 	                                    core->getJDay(),
 	                                    m2);
-	TuiNode* m2_2 = new TuiNode(N_("Set Time Zone"), m2, m2_1);
-	TuiNode* m2_3 = new TuiNode(N_("Day Keys"), m2, m2_2);
-	TuiNode* m2_4 = new TuiNodeDateTime(N_("Preset Sky Time"),
+	TuiNode* m2_2 = new TuiNode(N_("Set time zone"), m2, m2_1);
+	TuiNode* m2_3 = new TuiNode(N_("Day keys"), m2, m2_2);
+	TuiNode* m2_4 = new TuiNodeDateTime(N_("Startup date/time preset"),
 										core,
 	                                    SLOT(setPresetSkyTime(double)), 
 										core->getPresetSkyTime(),
 	                                    m2, m2_3);
 	QStringList startupModes;
-	startupModes << N_("system") << N_("preset");
-	TuiNode* m2_5 = new TuiNodeEnum(N_("Sky Time at Startup"),
-	                                this, SLOT(setStartupDateMode(QString)), startupModes,
+	// TRANSLATORS: The current system time is used at startup
+	startupModes << N_("system");
+	// TRANSLATORS: A pre-set time is used at startup
+	startupModes << N_("preset");
+	TuiNode* m2_5 = new TuiNodeEnum(N_("Startup date and time"),
+	                                this, SLOT(setStartupDateMode(QString)),
+	                                startupModes,
 									core->getStartupTimeMode(),
 	                                m2, m2_4);
 	StelLocaleMgr& localeMgr = StelApp::getInstance().getLocaleMgr();
 	QStringList dateFormats;
 	dateFormats << "system_default" << N_("mmddyyyy") << N_("ddmmyyyy") << N_("yyyymmdd");
-	TuiNode* m2_6 = new TuiNodeEnum(N_("Date Display Format"),
+	TuiNode* m2_6 = new TuiNodeEnum(N_("Date display format"), //Used in Time Zone plugin
 	                                this, SLOT(setDateFormat(QString)),
 	                                dateFormats,
 	                                localeMgr.getDateFormatStr(),
 	                                m2, m2_5);
 	QStringList timeFormats;
-	timeFormats << "system_default" << N_("12h") << N_("24h");
-	TuiNode* m2_7 = new TuiNodeEnum(N_("Time Display Format"),
+	timeFormats << "system_default";
+	// TRANSLATORS: 12-hour time format
+	timeFormats << N_("12h");
+	// TRANSLATORS: 24-hour time format
+	timeFormats << N_("24h");
+	TuiNode* m2_7 = new TuiNodeEnum(N_("Time display format"), //Used in Time Zone plugin
 	                                this, SLOT(setTimeFormat(QString)),
 	                                timeFormats,
 	                                localeMgr.getTimeFormatStr(),
@@ -196,7 +209,7 @@ void TextUserInterface::init()
 	TuiNode* m3 = new TuiNode(N_("General"), NULL, m2);
 	m2->setNextNode(m3);
 	StelSkyCultureMgr& skyCultureMgr = StelApp::getInstance().getSkyCultureMgr();
-	TuiNode* m3_1 = new TuiNodeEnum(N_("Sky Culture"),
+	TuiNode* m3_1 = new TuiNodeEnum(N_("Starlore"),
 	                                this, 
 	                                SLOT(setSkyCulture(QString)), 
 	                                skyCultureMgr.getSkyCultureListI18(),
@@ -216,23 +229,23 @@ void TextUserInterface::init()
 	TuiNode* m4 = new TuiNode(N_("Stars"), NULL, m3);
 	m3->setNextNode(m4);
 	StarMgr* starMgr = GETSTELMODULE(StarMgr);
-	TuiNode* m4_1 = new TuiNodeBool(N_("Show Stars"),
+	TuiNode* m4_1 = new TuiNodeBool(N_("Show stars"),
 	                                starMgr, SLOT(setFlagStars(bool)), 
 	                                starMgr->getFlagStars(), m4);
 	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
-	TuiNode* m4_2 = new TuiNodeDouble(N_("Star Relative Scale"),
+	TuiNode* m4_2 = new TuiNodeDouble(N_("Relative scale:"),
 	                                  skyDrawer,
 	                                  SLOT(setRelativeStarScale(double)),
 	                                  skyDrawer->getRelativeStarScale(),
 	                                  0.0, 5., 0.15,
 	                                  m4, m4_1);
-	TuiNode* m4_3 = new TuiNodeDouble(N_("Absolute Star Scale"),
+	TuiNode* m4_3 = new TuiNodeDouble(N_("Absolute scale:"),
 	                                  skyDrawer,
 	                                  SLOT(setAbsoluteStarScale(double)),
 	                                  skyDrawer->getAbsoluteStarScale(),
 	                                  0.0, 9., 0.15,
 	                                  m4, m4_2);
-	TuiNode* m4_4 = new TuiNodeDouble(N_("Twinkling"),
+	TuiNode* m4_4 = new TuiNodeDouble(N_("Twinkle:"),
 	                                  skyDrawer, SLOT(setTwinkleAmount(double)),
 	                                  skyDrawer->getTwinkleAmount(),
 	                                  0.0, 1.5, 0.1,
@@ -247,83 +260,84 @@ void TextUserInterface::init()
 	TuiNode* m5 = new TuiNode(N_("Colors"), NULL, m4);
 	m4->setNextNode(m5);
 	ConstellationMgr* constellationMgr = GETSTELMODULE(ConstellationMgr);
-	TuiNode* m5_1 = new TuiNodeColor(N_("Constellation Lines"),
+	TuiNode* m5_1 = new TuiNodeColor(N_("Constellation lines"),
 	                                 constellationMgr,
 	                                 SLOT(setLinesColor(Vec3f)),
 	                                 constellationMgr->getLinesColor(), 
 	                                 m5);
-	TuiNode* m5_2 = new TuiNodeColor(N_("Constellation Names"),
+	TuiNode* m5_2 = new TuiNodeColor(N_("Constellation labels"),
 	                                 constellationMgr,
 	                                 SLOT(setLabelsColor(Vec3f)),
 	                                 constellationMgr->getLabelsColor(), 
 	                                 m5, m5_1);
-	TuiNode* m5_3 = new TuiNode(N_("Constellation Art"), m5, m5_2);
-	TuiNode* m5_4 = new TuiNodeColor(N_("Constellation Boundaries"),
+	TuiNode* m5_3 = new TuiNode(N_("Constellation art"), m5, m5_2);
+	TuiNode* m5_4 = new TuiNodeColor(N_("Constellation boundaries"),
 	                                 constellationMgr,
 	                                 SLOT(setBoundariesColor(Vec3f)),
 	                                 constellationMgr->getBoundariesColor(), 
                                          m5, m5_3);
-	TuiNode* m5_5 = new TuiNodeDouble(N_("Constellation Art Intensity"),
+	// TRANSLATORS: Refers to constellation art
+	TuiNode* m5_5 = new TuiNodeDouble(N_("Art brightness:"),
 	                                  constellationMgr,
 	                                  SLOT(setArtIntensity(double)),
 	                                  constellationMgr->getArtIntensity(),
 	                                  0.0, 1.0, 0.05,
 	                                  m5, m5_4);
 	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
-	TuiNode* m5_6 = new TuiNodeColor(N_("Cardinal Points"),
+	TuiNode* m5_6 = new TuiNodeColor(N_("Cardinal points"),
 	                                 landscapeMgr,
 	                                 SLOT(setColorCardinalPoints(Vec3f)),
 	                                 landscapeMgr->getColorCardinalPoints(), 
 	                                 m5, m5_5);
-	TuiNode* m5_7 = new TuiNodeColor(N_("Planet Names"),
+	TuiNode* m5_7 = new TuiNodeColor(N_("Planet labels"),
 	                                 solarSystem, SLOT(setLabelsColor(Vec3f)),
 	                                 solarSystem->getLabelsColor(), 
 	                                 m5, m5_6);
-	TuiNode* m5_8 = new TuiNodeColor(N_("Planet Orbits"),
+	TuiNode* m5_8 = new TuiNodeColor(N_("Planet orbits"),
 	                                 solarSystem, SLOT(setOrbitsColor(Vec3f)),
 	                                 solarSystem->getOrbitsColor(), 
 	                                 m5, m5_7);
-	TuiNode* m5_9 = new TuiNodeColor(N_("Planet Trails"),
+	TuiNode* m5_9 = new TuiNodeColor(N_("Planet trails"),
 	                                 solarSystem, SLOT(setTrailsColor(Vec3f)),
 	                                 solarSystem->getTrailsColor(), 
 	                                 m5, m5_8);
 	GridLinesMgr* gridLinesMgr = GETSTELMODULE(GridLinesMgr);
-	TuiNode* m5_10 = new TuiNodeColor(N_("Meridian Line"),
+	TuiNode* m5_10 = new TuiNodeColor(N_("Meridian line"),
 	                                 gridLinesMgr,
 	                                 SLOT(setColorMeridianLine(Vec3f)),
 	                                 gridLinesMgr->getColorMeridianLine(), 
 	                                 m5, m5_9);
-	TuiNode* m5_11 = new TuiNodeColor(N_("Azimuthal Grid"),
+	TuiNode* m5_11 = new TuiNodeColor(N_("Azimuthal grid"),
 	                                 gridLinesMgr,
 	                                 SLOT(setColorAzimuthalGrid(Vec3f)),
 	                                 gridLinesMgr->getColorAzimuthalGrid(), 
 	                                 m5, m5_10);
-	TuiNode* m5_12 = new TuiNodeColor(N_("Equatorial Grid"),
+	TuiNode* m5_12 = new TuiNodeColor(N_("Equatorial grid"),
 	                                 gridLinesMgr,
 	                                 SLOT(setColorEquatorGrid(Vec3f)),
 	                                 gridLinesMgr->getColorEquatorGrid(), 
 	                                 m5, m5_11);
-	TuiNode* m5_13 = new TuiNodeColor(N_("Equatorial J2000 Grid"),
+	TuiNode* m5_13 = new TuiNodeColor(N_("Equatorial J2000 grid"),
 	                                 gridLinesMgr,
 	                                 SLOT(setColorEquatorJ2000Grid(Vec3f)),
 	                                 gridLinesMgr->getColorEquatorJ2000Grid(), 
 	                                 m5, m5_12);
-	TuiNode* m5_14 = new TuiNodeColor(N_("Equator Line"),
+	TuiNode* m5_14 = new TuiNodeColor(N_("Equator line"),
 	                                 gridLinesMgr,
 	                                 SLOT(setColorEquatorLine(Vec3f)),
 	                                 gridLinesMgr->getColorEquatorLine(), 
 	                                 m5, m5_13);
-	TuiNode* m5_15 = new TuiNodeColor(N_("Ecliptic Line"),
+	TuiNode* m5_15 = new TuiNodeColor(N_("Ecliptic line"),
 	                                 gridLinesMgr,
 	                                 SLOT(setColorEclipticLine(Vec3f)),
 	                                 gridLinesMgr->getColorEclipticLine(), 
 	                                 m5, m5_14);
 	NebulaMgr* nebulaMgr = GETSTELMODULE(NebulaMgr);
-	TuiNode* m5_16 = new TuiNodeColor(N_("Nebula Names"),
+	TuiNode* m5_16 = new TuiNodeColor(N_("Nebula names"),
 	                                 nebulaMgr, SLOT(setLabelsColor(Vec3f)),
 	                                 nebulaMgr->getLabelsColor(), 
 	                                 m5, m5_15);
-	TuiNode* m5_17 = new TuiNodeColor(N_("Nebula Hints"),
+	TuiNode* m5_17 = new TuiNodeColor(N_("Nebula hints"),
 	                                  nebulaMgr, SLOT(setCirclesColor(Vec3f)),
 	                                  nebulaMgr->getCirclesColor(), 
 	                                  m5, m5_16);
@@ -349,8 +363,9 @@ void TextUserInterface::init()
 
 	TuiNode* m6 = new TuiNode(N_("Effects"), NULL, m5);
 	m5->setNextNode(m6);
-	TuiNode* m6_1 = new TuiNodeInt(N_("Light Pollution Level"),
-	                               landscapeMgr, SLOT(setAtmosphereBortleLightPollution(int)),
+	TuiNode* m6_1 = new TuiNodeInt(N_("Light pollution:"),
+	                               landscapeMgr,
+	                               SLOT(setAtmosphereBortleLightPollution(int)),
 	                               3, 1, 9, 1,
 	                               m6);
 	TuiNode* m6_2 = new TuiNodeEnum(N_("Landscape"),
@@ -360,28 +375,28 @@ void TextUserInterface::init()
 	                                landscapeMgr->getCurrentLandscapeName(),
 	                                m6, m6_1);
 	StelMovementMgr* movementMgr = GETSTELMODULE(StelMovementMgr);
-	TuiNode* m6_3 = new TuiNodeBool(N_("Manual Zoom"),
+	TuiNode* m6_3 = new TuiNodeBool(N_("Manual zoom"),
 	                                movementMgr,
 	                                SLOT(setFlagAutoZoomOutResetsDirection(bool)), 
 	                                movementMgr->getFlagAutoZoomOutResetsDirection(), 
 	                                m6, m6_2);
-	TuiNode* m6_4 = new TuiNode(N_("Magnitude Scaling Multiplier"),
+	TuiNode* m6_4 = new TuiNode(N_("Magnitude scaling multiplier"),
 	                                    m6, m6_3);
-	TuiNode* m6_5 = new TuiNodeFloat(N_("Milky Way Intensity"),
+	TuiNode* m6_5 = new TuiNodeFloat(N_("Milky Way intensity:"),
 	                                 GETSTELMODULE(MilkyWay),
 	                                 SLOT(setIntensity(float)),
 	                                 GETSTELMODULE(MilkyWay)->getIntensity(),
 	                                 0, 10.0, 0.1, 
 	                                 m6, m6_4);
-	TuiNode* m6_6 = new TuiNode(N_("Nebula Label Frequency"), m6, m6_5);
-	TuiNode* m6_7 = new TuiNodeFloat(N_("Zoom Duration"),
+	TuiNode* m6_6 = new TuiNode(N_("Nebula label frequency:"), m6, m6_5);
+	TuiNode* m6_7 = new TuiNodeFloat(N_("Zoom duration:"),
 	                                 movementMgr,
 	                                 SLOT(setAutoMoveDuration(float)), 
 	                                 movementMgr->getAutoMoveDuration(),
 	                                 0, 20.0, 0.1,
 	                                 m6, m6_6);
-	TuiNode* m6_8 = new TuiNode(N_("Cursor Timeout"), m6, m6_7);
-	TuiNode* m6_9 = new TuiNodeBool(N_("Setting Landscape Sets Location"),
+	TuiNode* m6_8 = new TuiNode(N_("Cursor timeout:"), m6, m6_7);
+	TuiNode* m6_9 = new TuiNodeBool(N_("Setting landscape sets location"),
 	                                landscapeMgr,
 	                                SLOT(setFlagLandscapeSetsLocation(bool)), 
 	                                landscapeMgr->getFlagLandscapeSetsLocation(), 
@@ -401,16 +416,16 @@ void TextUserInterface::init()
 	TuiNode* m7 = new TuiNode(N_("Scripts"), NULL, m6);
 	m6->setNextNode(m7);
 	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
-	TuiNode* m7_1 = new TuiNodeEnum(N_("Run Local Script"),
+	TuiNode* m7_1 = new TuiNodeEnum(N_("Run local script"),
 	                                &scriptMgr,
 	                                SLOT(runScript(QString)),
 	                                scriptMgr.getScriptList(),
 	                                "",
 	                                m7);
-	TuiNode* m7_2 = new TuiNodeActivate(N_("Stop Running Script"),
+	TuiNode* m7_2 = new TuiNodeActivate(N_("Stop running script"),
 	                                    &scriptMgr, SLOT(stopScript()),
 	                                    m7, m7_1);
-	TuiNode* m7_3 = new TuiNode(N_("CD/DVD Script"), m7, m7_2);
+	TuiNode* m7_3 = new TuiNode(N_("CD/DVD script"), m7, m7_2);
 	m7_1->setNextNode(m7_2);
 	m7_2->setNextNode(m7_3);
 	m7_3->setNextNode(m7_1);
@@ -421,11 +436,11 @@ void TextUserInterface::init()
 	m7->setNextNode(m8);
 	m8->setNextNode(m1);
 	m1->loopToTheLast();
-	TuiNode* m8_1 = new TuiNode(N_("Load Default Configuration"), m8);
-	TuiNode* m8_2 = new TuiNodeActivate(N_("Save Current Configuration"),
+	TuiNode* m8_1 = new TuiNode(N_("Load default configuration"), m8);
+	TuiNode* m8_2 = new TuiNodeActivate(N_("Save current configuration"),
 	                                    this, SLOT(saveDefaultSettings()),
 	                                    m8, m8_1);
-	TuiNode* m8_3 = new TuiNode(N_("Shut Down"), m8, m8_2);
+	TuiNode* m8_3 = new TuiNode(N_("Shut down"), m8, m8_2);
 	m8_1->setNextNode(m8_2);
 	m8_2->setNextNode(m8_3);
 	m8_3->setNextNode(m8_1);

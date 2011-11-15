@@ -118,7 +118,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionShow_Nebulas", N_("Nebulas"), "N", group, true, false);
 	addGuiActions("actionShow_DSS", N_("Nebulas background images"), "", group, true, false);
 	addGuiActions("actionShow_Stars", N_("Stars"), "S", group, true, false);
-	addGuiActions("actionShow_Planets_Labels", N_("Planets labels"), "P", group, true, false);
+	addGuiActions("actionShow_Planets_Labels", N_("Planet labels"), "P", group, true, false);
 	addGuiActions("actionShow_Planets_Orbits", N_("Planet orbits"), "O", group, true, false);
 	addGuiActions("actionShow_Planets_Trails", N_("Planet trails"), "Shift+T", group, true, false);
 
