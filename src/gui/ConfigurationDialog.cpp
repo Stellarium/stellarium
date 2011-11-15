@@ -60,6 +60,7 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), star
 {
 	ui = new Ui_configurationDialogForm;
 	hasDownloadedStarCatalog = false;
+	isDownloadingStarCatalog = false;
 	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();
 }
 
@@ -81,8 +82,7 @@ void ConfigurationDialog::languageChanged()
 		updateConfigLabels();
 		
 		//Star catalog download button and info
-		//TODO: This also reloads all the catalog info, which may slow down language switching.
-		refreshStarCatalogButton();
+		updateStarCatalogControlsText();
 
 		//Script information
 		//(trigger re-displaying the description of the current item)
@@ -135,7 +135,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->getStarsButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
 	connect(ui->downloadRetryButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
-	refreshStarCatalogButton();
+	resetStarCatalogControls();
 
 	// Selected object info
 	if (gui->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
@@ -656,7 +656,7 @@ void ConfigurationDialog::changePage(QListWidgetItem *current, QListWidgetItem *
 }
 
 
-void ConfigurationDialog::refreshStarCatalogButton()
+void ConfigurationDialog::resetStarCatalogControls()
 {
 	const QVariantList& catalogConfig = GETSTELMODULE(StarMgr)->getCatalogsDescription();
 	nextStarCatalogToDownload.clear();
@@ -678,28 +678,61 @@ void ConfigurationDialog::refreshStarCatalogButton()
 	if (idx == catalogConfig.size() && !hasDownloadedStarCatalog)//The size is 9; for "stars8", idx is 9
 	{
 		ui->getStarsButton->setVisible(false);
-		ui->downloadLabel->setText(q_("Finished downloading all star catalogs!"));
-		//BM: Doesn't this message duplicate the one below?
-		//This one should be something like "All available star catalogs are installed."
+		updateStarCatalogControlsText();
 		return;
 	}
 
 	ui->getStarsButton->setEnabled(true);
 	if (!nextStarCatalogToDownload.isEmpty())
 	{
-		ui->getStarsButton->setText(q_("Get catalog %1 of %2").arg(idx).arg(catalogConfig.size()));
-		const QVariantList& magRange = nextStarCatalogToDownload.value("magRange").toList();
-		ui->downloadLabel->setText(q_("Download size: %1MB\nStar count: %2 Million\nMagnitude range: %3 - %4")
-			.arg(nextStarCatalogToDownload.value("sizeMb").toString())
-			.arg(nextStarCatalogToDownload.value("count").toString())
-			.arg(magRange.at(0).toString())
-			.arg(magRange.at(1).toString()));
+		nextStarCatalogToDownloadIndex = idx;
+		starCatalogsCount = catalogConfig.size();
+		updateStarCatalogControlsText();
 		ui->getStarsButton->setVisible(true);
 	}
 	else
 	{
-		ui->downloadLabel->setText(q_("Finished downloading new star catalogs!\nRestart Stellarium to display them."));
+		updateStarCatalogControlsText();
 		ui->getStarsButton->setVisible(false);
+	}
+}
+
+void ConfigurationDialog::updateStarCatalogControlsText()
+{
+	if (nextStarCatalogToDownload.isEmpty())
+	{
+		//There are no more catalogs left?
+		if (hasDownloadedStarCatalog)
+		{
+			ui->downloadLabel->setText(q_("Finished downloading new star catalogs!\nRestart Stellarium to display them."));
+		}
+		else
+		{
+			ui->downloadLabel->setText(q_("All available star catalogs have been installed."));
+		}
+	}
+	else
+	{
+		QString text = QString(q_("Get catalog %1 of %2"))
+		               .arg(nextStarCatalogToDownloadIndex)
+		               .arg(starCatalogsCount);
+		ui->getStarsButton->setText(text);
+		
+		if (isDownloadingStarCatalog)
+		{
+			QString text = QString(q_("Downloading %1...\n(You can close this window.)"))
+			                 .arg(nextStarCatalogToDownload.value("id").toString());
+			ui->downloadLabel->setText(text);
+		}
+		else
+		{
+			const QVariantList& magRange = nextStarCatalogToDownload.value("magRange").toList();
+			ui->downloadLabel->setText(q_("Download size: %1MB\nStar count: %2 Million\nMagnitude range: %3 - %4")
+				.arg(nextStarCatalogToDownload.value("sizeMb").toString())
+				.arg(nextStarCatalogToDownload.value("count").toString())
+				.arg(magRange.first().toString())
+				.arg(magRange.last().toString()));
+		}
 	}
 }
 
@@ -725,6 +758,7 @@ void ConfigurationDialog::newStarCatalogData()
 void ConfigurationDialog::downloadStars()
 {
 	Q_ASSERT(!nextStarCatalogToDownload.isEmpty());
+	Q_ASSERT(!isDownloadingStarCatalog);
 	Q_ASSERT(starCatalogDownloadReply==NULL);
 	Q_ASSERT(currentDownloadFile==NULL);
 	Q_ASSERT(progressBar==NULL);
@@ -741,7 +775,8 @@ void ConfigurationDialog::downloadStars()
 		return;
 	}
 
-	ui->downloadLabel->setText(q_("Downloading %1...\n(You can close this window.)").arg(nextStarCatalogToDownload.value("id").toString()));
+	isDownloadingStarCatalog = true;
+	updateStarCatalogControlsText();
 	ui->downloadCancelButton->setVisible(true);
 	ui->downloadRetryButton->setVisible(false);
 	ui->getStarsButton->setVisible(true);
@@ -769,6 +804,7 @@ void ConfigurationDialog::downloadError(QNetworkReply::NetworkError)
 	Q_ASSERT(currentDownloadFile);
 	Q_ASSERT(starCatalogDownloadReply);
 
+	isDownloadingStarCatalog = false;
 	qWarning() << "Error downloading file" << starCatalogDownloadReply->url() << ": " << starCatalogDownloadReply->errorString();
 	ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString()).arg(starCatalogDownloadReply->errorString()));
 	ui->downloadCancelButton->setVisible(false);
@@ -813,6 +849,7 @@ void ConfigurationDialog::downloadFinished()
 		return;
 	}
 
+	isDownloadingStarCatalog = false;
 	currentDownloadFile->close();
 	currentDownloadFile->deleteLater();
 	currentDownloadFile = NULL;
@@ -834,5 +871,5 @@ void ConfigurationDialog::downloadFinished()
 		hasDownloadedStarCatalog = true;
 	}
 
-	refreshStarCatalogButton();
+	resetStarCatalogControls();
 }
