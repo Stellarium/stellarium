@@ -16,6 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include "StelTranslator.hpp"
 #include "TuiNodeActivate.hpp"
 #include <QKeyEvent>
 
@@ -44,6 +45,6 @@ TuiNodeResponse TuiNodeActivate::handleKey(int key)
 
 QString TuiNodeActivate::getDisplayText() 
 {
-	return displayText + " [RETURN to activate]";
+	return prefixText + q_(displayText) + q_(" [RETURN to activate]");
 }
 
