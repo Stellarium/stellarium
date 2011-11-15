@@ -76,13 +76,19 @@ void ConfigurationDialog::languageChanged()
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
 		ui->stackListWidget->setWrapping(false);
+		
+		//Initial FOV and direction on the "Main" page
+		updateConfigLabels();
+		
+		//Star catalog download button and info
+		//TODO: This also reloads all the catalog info, which may slow down language switching.
+		refreshStarCatalogButton();
 
 		//Script information
 		//(trigger re-displaying the description of the current item)
 		scriptSelectionChanged(ui->scriptListWidget->currentItem()->text());
 
 		//Plug-in information
-		//(the same trick)
 		populatePluginsList();
 	}
 }
@@ -230,7 +236,6 @@ void ConfigurationDialog::languageChanged(const QString& langName)
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
 	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
-	updateConfigLabels();
 	StelMainWindow::getInstance().initTitleI18n();
 }
 
