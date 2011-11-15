@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 090410-lp_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-13 22:43+0700\n"
+"POT-Creation-Date: 2011-11-15 00:02+0200\n"
 "PO-Revision-Date: 2011-09-24 12:09+0000\n"
 "Last-Translator: Sverrir Gudmundsson <Unknown>\n"
 "Language-Team: icelandic <kde-isl@molar.is>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-14 04:49+0000\n"
-"X-Generator: Launchpad (build 14277)\n"
+"X-Launchpad-Export-Date: 2011-11-15 05:00+0000\n"
+"X-Generator: Launchpad (build 14291)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
 msgid "Meridian"
@@ -824,7 +824,7 @@ msgstr "Óvenju há tíðni Leoníta"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Hæsta tíðni (Leonítadrífan 1966)"
 
-#: src/gui/LocationDialog.cpp:367
+#: src/gui/LocationDialog.cpp:369
 msgid "New Location"
 msgstr "Ný staðsetning"
 
@@ -1304,284 +1304,6 @@ msgstr "Tupi-Guarani"
 #: src/translations.h:149
 msgid "Western"
 msgstr "Vestræn"
-
-#: src/translations.h:153
-msgid "Set Location "
-msgstr "Stilla staðsetningu "
-
-#: src/translations.h:154
-msgid "Set Time "
-msgstr "Stilla tíma "
-
-#: src/translations.h:155
-msgid "General "
-msgstr "Almennt "
-
-#: src/translations.h:156
-msgid "Stars "
-msgstr "Stjörnur "
-
-#: src/translations.h:157
-msgid "Colors "
-msgstr "Litir "
-
-#: src/translations.h:158
-msgid "Effects "
-msgstr "Áhrif "
-
-#: src/translations.h:159
-msgid "Scripts "
-msgstr "Skriftur "
-
-#: src/translations.h:160
-msgid "Administration "
-msgstr "Kerfisstjórnun "
-
-#: src/translations.h:162
-msgid "Latitude: "
-msgstr "Breiddargráða: "
-
-#: src/translations.h:163
-msgid "Longitude: "
-msgstr "Lengdargráða: "
-
-#: src/translations.h:164
-msgid "Altitude (m): "
-msgstr "Hæð (m): "
-
-#: src/translations.h:165
-msgid "Solar System Body: "
-msgstr "Hnöttur í sólkerfinu: "
-
-#: src/translations.h:167
-msgid "Sky Time: "
-msgstr "Himintími: "
-
-#: src/translations.h:168
-msgid "Set Time Zone: "
-msgstr "Stilla tímabelti: "
-
-#: src/translations.h:169
-msgid "Day keys: "
-msgstr "Dagalyklar: "
-
-#: src/translations.h:170
-msgid "Calendar"
-msgstr "Dagatal"
-
-#: src/translations.h:171
-msgid "Sidereal"
-msgstr "Stjarnbundinn"
-
-#: src/translations.h:172
-msgid "Preset Sky Time: "
-msgstr "Forstilltur himintími: "
-
-#: src/translations.h:173
-msgid "Sky Time At Start-up: "
-msgstr "Himintími við ræsingu: "
-
-#: src/translations.h:174
-msgid "Actual Time"
-msgstr "Rauntími"
-
-#: src/translations.h:175
-msgid "Preset Time"
-msgstr "Forstilltur tími"
-
-#: src/translations.h:176
-msgid "Time Display Format: "
-msgstr "Tímasnið: "
-
-#: src/translations.h:177
-msgid "Date Display Format: "
-msgstr "Sýnisnið dagsetningar: "
-
-#: src/translations.h:179
-msgid "Sky Culture: "
-msgstr "Stjörnumerkjakerfi: "
-
-#: src/translations.h:180
-msgid "Sky Language: "
-msgstr "Tungumál á himni: "
-
-#: src/translations.h:182
-msgid "Show: "
-msgstr "Sýna: "
-
-#: src/translations.h:183
-msgid "Star Value Multiplier: "
-msgstr "Margfaldari stjörnugilda: "
-
-#: src/translations.h:184
-msgid "Magnitude Sizing Multiplier: "
-msgstr "Margfaldari stjörnustærða "
-
-#: src/translations.h:185
-msgid "Maximum Magnitude to Label: "
-msgstr "Merkja að hámarksbirtustigi: "
-
-#: src/translations.h:186
-msgid "Twinkling: "
-msgstr "Stjörnublik "
-
-#: src/translations.h:187
-msgid "Limiting Magnitude: "
-msgstr "Birtustigsmörk: "
-
-#: src/translations.h:189
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
-msgid "Constellation Lines"
-msgstr "Stjörnumerkjalínur"
-
-#: src/translations.h:190
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
-msgid "Constellation Names"
-msgstr "Nöfn stjörnumerkja"
-
-#: src/translations.h:191
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
-msgid "Constellation Art Intensity"
-msgstr "Styrkur stjörnumerkjamynda"
-
-#: src/translations.h:192
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:243
-msgid "Constellation Boundaries"
-msgstr "Mörk stjörnumerkja"
-
-#: src/translations.h:193
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:251
-msgid "Cardinal Points"
-msgstr "Höfuðáttir"
-
-#: src/translations.h:194
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
-msgid "Planet Names"
-msgstr "Nöfn reikistjarna"
-
-#: src/translations.h:195
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
-msgid "Planet Orbits"
-msgstr "Brautir reikistjarna"
-
-#: src/translations.h:196
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
-msgid "Planet Trails"
-msgstr "Ferlar reikistjarna"
-
-#: src/translations.h:197
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
-msgid "Meridian Line"
-msgstr "Hádegisbaugur"
-
-#: src/translations.h:198
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
-msgid "Azimuthal Grid"
-msgstr "Sjónbaugshnit"
-
-#: src/translations.h:199
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
-msgid "Equatorial Grid"
-msgstr "Miðbaugshnit"
-
-#: src/translations.h:200
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:283
-msgid "Equator Line"
-msgstr "Miðbaugslína"
-
-#: src/translations.h:201
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
-msgid "Ecliptic Line"
-msgstr "Sólbraut"
-
-#: src/translations.h:202
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
-msgid "Nebula Names"
-msgstr "Nöfn geimþoka"
-
-#: src/translations.h:203
-msgid "Nebula Circles"
-msgstr "Baugar stjörnuþoka"
-
-#: src/translations.h:205
-msgid "Light Pollution Luminance: "
-msgstr "Ljómi vegna ljósmengunar "
-
-#: src/translations.h:206
-msgid "Landscape: "
-msgstr "Landslag: "
-
-#: src/translations.h:207
-msgid "Manual zoom: "
-msgstr "Handvirkur aðdráttur: "
-
-#: src/translations.h:208
-msgid "Object Sizing Rule: "
-msgstr "Stærð stjarna: "
-
-#: src/translations.h:209
-msgid "Magnitude Scaling Multiplier: "
-msgstr "Margfaldari birtustigs: "
-
-#: src/translations.h:210
-msgid "Milky Way intensity: "
-msgstr "Bjarmi Vetrarbrautarinnar "
-
-#: src/translations.h:211
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Merkja stjörnuþokur að birtustigi: "
-
-#: src/translations.h:212
-msgid "Zoom Duration: "
-msgstr "Tímalengd aðdráttar: "
-
-#: src/translations.h:213
-msgid "Cursor Timeout: "
-msgstr "Tímamörk bendils: "
-
-#: src/translations.h:214
-msgid "Correct for light travel time: "
-msgstr "Leiðrétta vegna ferðatíma ljóss: "
-
-#: src/translations.h:216
-msgid "Local Script: "
-msgstr "Staðvær skrifta: "
-
-#: src/translations.h:217
-msgid "CD/DVD Script: "
-msgstr "CD/DVD skrifta: "
-
-#: src/translations.h:218
-msgid "USB Script: "
-msgstr "USB skrifta: "
-
-#: src/translations.h:219
-msgid "Arrow down to load list."
-msgstr "Ör niður til að hlaða inn lista."
-
-#: src/translations.h:220
-msgid "Select and exit to run."
-msgstr "Velja og fara út úr til að keyra"
-
-#: src/translations.h:222
-msgid "Load Default Configuration: "
-msgstr "Hlaða inn sjálfgefnar stillingar: "
-
-#: src/translations.h:223
-msgid "Save Current Configuration as Default: "
-msgstr "Vista núverandi stillingar sem sjálfgefnar: "
-
-#: src/translations.h:224
-msgid "Shut Down: "
-msgstr "Slökkva: "
-
-#: src/translations.h:225
-msgid "Update me via Internet: "
-msgstr "Uppfæra mig um Internetið: "
-
-#: src/translations.h:226
-msgid "Set UI Locale: "
-msgstr "Stilla staðfærslu viðmóts: "
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -3309,8 +3031,8 @@ msgid "Define a time zone"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:372
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:374
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:373
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:375
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
 msgid "Time zone"
 msgstr ""
@@ -3320,13 +3042,13 @@ msgid "Timezone name:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:378
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:379
 msgid "Offset from UTC:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:379
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:380
 msgid " hours"
 msgstr ""
 
@@ -3369,7 +3091,7 @@ msgstr ""
 msgid "Use this definition"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:375
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:376
 msgid ""
 "By default, the time displayed in Stellarium is interpreted as the local "
 "time in the system's time zone, not in the displayed location's time zone. "
@@ -3377,25 +3099,20 @@ msgid ""
 "settings."
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:376
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:377
 msgid "Use system settings (default)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:377
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:378
 msgid "Universal Coordinated Time (UTC)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:380
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
 msgid "(offset = local time - UTC time)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
-msgid "User-defined:"
-msgstr ""
-
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:382
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
-msgid "..."
+msgid "User-defined:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
@@ -3546,13 +3263,69 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
+msgid "Constellation Lines"
+msgstr "Stjörnumerkjalínur"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
+msgid "Constellation Names"
+msgstr "Nöfn stjörnumerkja"
+
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Constellation Art"
 msgstr ""
 
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:243
+msgid "Constellation Boundaries"
+msgstr "Mörk stjörnumerkja"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
+msgid "Constellation Art Intensity"
+msgstr "Styrkur stjörnumerkjamynda"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:251
+msgid "Cardinal Points"
+msgstr "Höfuðáttir"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
+msgid "Planet Names"
+msgstr "Nöfn reikistjarna"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
+msgid "Planet Orbits"
+msgstr "Brautir reikistjarna"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
+msgid "Planet Trails"
+msgstr "Ferlar reikistjarna"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
+msgid "Meridian Line"
+msgstr "Hádegisbaugur"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
+msgid "Azimuthal Grid"
+msgstr "Sjónbaugshnit"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
+msgid "Equatorial Grid"
+msgstr "Miðbaugshnit"
+
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Equatorial J2000 Grid"
 msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:283
+msgid "Equator Line"
+msgstr "Miðbaugslína"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
+msgid "Ecliptic Line"
+msgstr "Sólbraut"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
+msgid "Nebula Names"
+msgstr "Nöfn geimþoka"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:295
 msgid "Nebula Hints"
@@ -3655,75 +3428,75 @@ msgstr ""
 "getur hlaðið niður lista yfir fyrirbæri af vefsíðu Minor Planet Center og "
 "framkvæmt leitir í gagnagrunni þess á netinu. Þessi hluti er enn í vinnslu."
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Select the type"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Asteroids"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Comets"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Select the source"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Download a list of objects from the Internet"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Select a source from the list:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Or enter a URL:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "paste"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Add this URL to the bookmarks list"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Bookmark title:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "A file containing a list of objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Get orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid "Abort download"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Lists"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Online search"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid ""
 "Query the MPC's <a "
 "href=\"http://www.minorplanetcenter.net/iau/MPEph/MPEph.html\">Minor Planet "
 "&amp; Comet Ephemeris Service</a>:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid ""
 "Only one result will be returned if the query is successful.<br>Both comets "
 "and asteroids can be identified with their number, name or provisional "
@@ -3733,11 +3506,11 @@ msgid ""
 "Comet, but \"Halley\" will return the asteroid (2688) Halley."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Objects found"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid ""
 "Mark the objects you wish to be imported. In <i>italic</i> are listed names "
 "that match the names of already loaded objects. In <b>bold</b> are listed "
@@ -3746,31 +3519,31 @@ msgid ""
 "may cause Stellarium to run slowly."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
 msgid "Overwrite existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
 msgid "Update existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:549
 msgid "Update only the orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:550
 msgid "Mark all"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:549
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:551
 msgid "Mark none"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:550
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:552
 msgid "Discard"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:551
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:553
 msgid "Add objects"
 msgstr ""
 
@@ -3887,3 +3660,159 @@ msgstr ""
 #, qt-format
 msgid "Type: %1"
 msgstr "Gerð: %1"
+
+#~ msgid "Colors "
+#~ msgstr "Litir "
+
+#~ msgid "Stars "
+#~ msgstr "Stjörnur "
+
+#~ msgid "General "
+#~ msgstr "Almennt "
+
+#~ msgid "Latitude: "
+#~ msgstr "Breiddargráða: "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Hæð (m): "
+
+#~ msgid "Longitude: "
+#~ msgstr "Lengdargráða: "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Hnöttur í sólkerfinu: "
+
+#~ msgid "Calendar"
+#~ msgstr "Dagatal"
+
+#~ msgid "Preset Time"
+#~ msgstr "Forstilltur tími"
+
+#~ msgid "Show: "
+#~ msgstr "Sýna: "
+
+#~ msgid "Landscape: "
+#~ msgstr "Landslag: "
+
+#~ msgid "Sky Language: "
+#~ msgstr "Tungumál á himni: "
+
+#~ msgid "Set Location "
+#~ msgstr "Stilla staðsetningu "
+
+#~ msgid "Set Time "
+#~ msgstr "Stilla tíma "
+
+#~ msgid "Effects "
+#~ msgstr "Áhrif "
+
+#~ msgid "Scripts "
+#~ msgstr "Skriftur "
+
+#~ msgid "Administration "
+#~ msgstr "Kerfisstjórnun "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Himintími: "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Stilla tímabelti: "
+
+#~ msgid "Day keys: "
+#~ msgstr "Dagalyklar: "
+
+#~ msgid "Sidereal"
+#~ msgstr "Stjarnbundinn"
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Forstilltur himintími: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Himintími við ræsingu: "
+
+#~ msgid "Actual Time"
+#~ msgstr "Rauntími"
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Sýnisnið dagsetningar: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Merkja að hámarksbirtustigi: "
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Baugar stjörnuþoka"
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Handvirkur aðdráttur: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Tímalengd aðdráttar: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Tímamörk bendils: "
+
+#~ msgid "Local Script: "
+#~ msgstr "Staðvær skrifta: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "CD/DVD skrifta: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Vista núverandi stillingar sem sjálfgefnar: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "Slökkva: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Uppfæra mig um Internetið: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Stilla staðfærslu viðmóts: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "Ör niður til að hlaða inn lista."
+
+#~ msgid "USB Script: "
+#~ msgstr "USB skrifta: "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "Margfaldari stjörnugilda: "
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "Ljómi vegna ljósmengunar "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Bjarmi Vetrarbrautarinnar "
+
+#~ msgid "Select and exit to run."
+#~ msgstr "Velja og fara út úr til að keyra"
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Merkja stjörnuþokur að birtustigi: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "Stjörnumerkjakerfi: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "Stjörnublik "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "Birtustigsmörk: "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Margfaldari stjörnustærða "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "Margfaldari birtustigs: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "Leiðrétta vegna ferðatíma ljóss: "
+
+#~ msgid "Time Display Format: "
+#~ msgstr "Tímasnið: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Stærð stjarna: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Hlaða inn sjálfgefnar stillingar: "

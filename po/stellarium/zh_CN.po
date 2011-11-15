@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-13 22:43+0700\n"
+"POT-Creation-Date: 2011-11-15 00:02+0200\n"
 "PO-Revision-Date: 2011-10-01 05:45+0000\n"
 "Last-Translator: forest93 <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-14 04:53+0000\n"
-"X-Generator: Launchpad (build 14277)\n"
+"X-Launchpad-Export-Date: 2011-11-15 05:04+0000\n"
+"X-Generator: Launchpad (build 14291)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
 msgid "Meridian"
@@ -802,7 +802,7 @@ msgstr "超量狮子座流星雨"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "至今最高频率 (1966 狮子座流星雨)"
 
-#: src/gui/LocationDialog.cpp:367
+#: src/gui/LocationDialog.cpp:369
 msgid "New Location"
 msgstr "新位置"
 
@@ -1279,284 +1279,6 @@ msgstr "图皮-瓜拉尼"
 #: src/translations.h:149
 msgid "Western"
 msgstr "西方"
-
-#: src/translations.h:153
-msgid "Set Location "
-msgstr "设置当前地点 "
-
-#: src/translations.h:154
-msgid "Set Time "
-msgstr "时间设置 "
-
-#: src/translations.h:155
-msgid "General "
-msgstr "一般设置 "
-
-#: src/translations.h:156
-msgid "Stars "
-msgstr "天体 "
-
-#: src/translations.h:157
-msgid "Colors "
-msgstr "颜色 "
-
-#: src/translations.h:158
-msgid "Effects "
-msgstr "效果 "
-
-#: src/translations.h:159
-msgid "Scripts "
-msgstr "脚本 "
-
-#: src/translations.h:160
-msgid "Administration "
-msgstr "管理设定 "
-
-#: src/translations.h:162
-msgid "Latitude: "
-msgstr "纬度: "
-
-#: src/translations.h:163
-msgid "Longitude: "
-msgstr "经度: "
-
-#: src/translations.h:164
-msgid "Altitude (m): "
-msgstr "海拔(米): "
-
-#: src/translations.h:165
-msgid "Solar System Body: "
-msgstr "太阳系天体: "
-
-#: src/translations.h:167
-msgid "Sky Time: "
-msgstr "星空时间: "
-
-#: src/translations.h:168
-msgid "Set Time Zone: "
-msgstr "时区设置: "
-
-#: src/translations.h:169
-msgid "Day keys: "
-msgstr "时间定义: "
-
-#: src/translations.h:170
-msgid "Calendar"
-msgstr "日历"
-
-#: src/translations.h:171
-msgid "Sidereal"
-msgstr "恒星"
-
-#: src/translations.h:172
-msgid "Preset Sky Time: "
-msgstr "当前星空时间： "
-
-#: src/translations.h:173
-msgid "Sky Time At Start-up: "
-msgstr "启动时的星空时间: "
-
-#: src/translations.h:174
-msgid "Actual Time"
-msgstr "实际时间"
-
-#: src/translations.h:175
-msgid "Preset Time"
-msgstr "预设时间"
-
-#: src/translations.h:176
-msgid "Time Display Format: "
-msgstr "时间显示格式: "
-
-#: src/translations.h:177
-msgid "Date Display Format: "
-msgstr "日期显示格式: "
-
-#: src/translations.h:179
-msgid "Sky Culture: "
-msgstr "星空文化: "
-
-#: src/translations.h:180
-msgid "Sky Language: "
-msgstr "天文术语： "
-
-#: src/translations.h:182
-msgid "Show: "
-msgstr "显示: "
-
-#: src/translations.h:183
-msgid "Star Value Multiplier: "
-msgstr "星体值倍数： "
-
-#: src/translations.h:184
-msgid "Magnitude Sizing Multiplier: "
-msgstr "星等成像加成: "
-
-#: src/translations.h:185
-msgid "Maximum Magnitude to Label: "
-msgstr "显示星名的最暗星等: "
-
-#: src/translations.h:186
-msgid "Twinkling: "
-msgstr "闪烁： "
-
-#: src/translations.h:187
-msgid "Limiting Magnitude: "
-msgstr "星等限制: "
-
-#: src/translations.h:189
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
-msgid "Constellation Lines"
-msgstr "星座连线"
-
-#: src/translations.h:190
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
-msgid "Constellation Names"
-msgstr "星座名称"
-
-#: src/translations.h:191
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
-msgid "Constellation Art Intensity"
-msgstr "星座图象亮度"
-
-#: src/translations.h:192
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:243
-msgid "Constellation Boundaries"
-msgstr "星座界线"
-
-#: src/translations.h:193
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:251
-msgid "Cardinal Points"
-msgstr "方位座标"
-
-#: src/translations.h:194
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
-msgid "Planet Names"
-msgstr "行星名称"
-
-#: src/translations.h:195
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
-msgid "Planet Orbits"
-msgstr "行星规道"
-
-#: src/translations.h:196
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
-msgid "Planet Trails"
-msgstr "行星轨迹"
-
-#: src/translations.h:197
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
-msgid "Meridian Line"
-msgstr "子午线"
-
-#: src/translations.h:198
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
-msgid "Azimuthal Grid"
-msgstr "天球方位系统"
-
-#: src/translations.h:199
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
-msgid "Equatorial Grid"
-msgstr "赤道坐标网格"
-
-#: src/translations.h:200
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:283
-msgid "Equator Line"
-msgstr "赤道"
-
-#: src/translations.h:201
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
-msgid "Ecliptic Line"
-msgstr "黄道"
-
-#: src/translations.h:202
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
-msgid "Nebula Names"
-msgstr "星云名称"
-
-#: src/translations.h:203
-msgid "Nebula Circles"
-msgstr "星云标记"
-
-#: src/translations.h:205
-msgid "Light Pollution Luminance: "
-msgstr "光污染程度: "
-
-#: src/translations.h:206
-msgid "Landscape: "
-msgstr "地貌： "
-
-#: src/translations.h:207
-msgid "Manual zoom: "
-msgstr "手动缩放: "
-
-#: src/translations.h:208
-msgid "Object Sizing Rule: "
-msgstr "天体放缩规则： "
-
-#: src/translations.h:209
-msgid "Magnitude Scaling Multiplier: "
-msgstr "星等放大倍数： "
-
-#: src/translations.h:210
-msgid "Milky Way intensity: "
-msgstr "银河亮度： "
-
-#: src/translations.h:211
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "显示星云名称的最暗星等: "
-
-#: src/translations.h:212
-msgid "Zoom Duration: "
-msgstr "缩放持续时间: "
-
-#: src/translations.h:213
-msgid "Cursor Timeout: "
-msgstr "光标自动隐藏延时: "
-
-#: src/translations.h:214
-msgid "Correct for light travel time: "
-msgstr "光行进时间修正： "
-
-#: src/translations.h:216
-msgid "Local Script: "
-msgstr "本地脚本: "
-
-#: src/translations.h:217
-msgid "CD/DVD Script: "
-msgstr "CD/DVD 脚本: "
-
-#: src/translations.h:218
-msgid "USB Script: "
-msgstr "USB 脚本: "
-
-#: src/translations.h:219
-msgid "Arrow down to load list."
-msgstr "按向下键以载入列表"
-
-#: src/translations.h:220
-msgid "Select and exit to run."
-msgstr "选择并在退出后运行"
-
-#: src/translations.h:222
-msgid "Load Default Configuration: "
-msgstr "载入默认设置: "
-
-#: src/translations.h:223
-msgid "Save Current Configuration as Default: "
-msgstr "将当前设置保存为默认： "
-
-#: src/translations.h:224
-msgid "Shut Down: "
-msgstr "关闭程序: "
-
-#: src/translations.h:225
-msgid "Update me via Internet: "
-msgstr "在线更新: "
-
-#: src/translations.h:226
-msgid "Set UI Locale: "
-msgstr "设置界面语言： "
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -3260,8 +2982,8 @@ msgid "Define a time zone"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:372
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:374
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:373
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:375
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
 msgid "Time zone"
 msgstr ""
@@ -3271,13 +2993,13 @@ msgid "Timezone name:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:378
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:379
 msgid "Offset from UTC:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:379
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:380
 msgid " hours"
 msgstr ""
 
@@ -3320,7 +3042,7 @@ msgstr ""
 msgid "Use this definition"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:375
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:376
 msgid ""
 "By default, the time displayed in Stellarium is interpreted as the local "
 "time in the system's time zone, not in the displayed location's time zone. "
@@ -3328,25 +3050,20 @@ msgid ""
 "settings."
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:376
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:377
 msgid "Use system settings (default)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:377
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:378
 msgid "Universal Coordinated Time (UTC)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:380
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
 msgid "(offset = local time - UTC time)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
-msgid "User-defined:"
-msgstr ""
-
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:382
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
-msgid "..."
+msgid "User-defined:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
@@ -3495,13 +3212,69 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
+msgid "Constellation Lines"
+msgstr "星座连线"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
+msgid "Constellation Names"
+msgstr "星座名称"
+
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Constellation Art"
 msgstr ""
 
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:243
+msgid "Constellation Boundaries"
+msgstr "星座界线"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
+msgid "Constellation Art Intensity"
+msgstr "星座图象亮度"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:251
+msgid "Cardinal Points"
+msgstr "方位座标"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
+msgid "Planet Names"
+msgstr "行星名称"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
+msgid "Planet Orbits"
+msgstr "行星规道"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
+msgid "Planet Trails"
+msgstr "行星轨迹"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
+msgid "Meridian Line"
+msgstr "子午线"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
+msgid "Azimuthal Grid"
+msgstr "天球方位系统"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
+msgid "Equatorial Grid"
+msgstr "赤道坐标网格"
+
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Equatorial J2000 Grid"
 msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:283
+msgid "Equator Line"
+msgstr "赤道"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
+msgid "Ecliptic Line"
+msgstr "黄道"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
+msgid "Nebula Names"
+msgstr "星云名称"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:295
 msgid "Nebula Hints"
@@ -3603,75 +3376,75 @@ msgstr ""
 "这是一个用于为 Stellarium 添加小行星或是彗星的界面。它可以通过从小行星中心（Minor Planet "
 "Center）的网站上下载天体列表并在其在线数据库中检索信息。此功能暂处于开发阶段。"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Select the type"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Asteroids"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Comets"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Select the source"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Download a list of objects from the Internet"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Select a source from the list:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Or enter a URL:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "paste"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Add this URL to the bookmarks list"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Bookmark title:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "A file containing a list of objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Get orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid "Abort download"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Lists"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Online search"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid ""
 "Query the MPC's <a "
 "href=\"http://www.minorplanetcenter.net/iau/MPEph/MPEph.html\">Minor Planet "
 "&amp; Comet Ephemeris Service</a>:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid ""
 "Only one result will be returned if the query is successful.<br>Both comets "
 "and asteroids can be identified with their number, name or provisional "
@@ -3681,11 +3454,11 @@ msgid ""
 "Comet, but \"Halley\" will return the asteroid (2688) Halley."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Objects found"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid ""
 "Mark the objects you wish to be imported. In <i>italic</i> are listed names "
 "that match the names of already loaded objects. In <b>bold</b> are listed "
@@ -3694,31 +3467,31 @@ msgid ""
 "may cause Stellarium to run slowly."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
 msgid "Overwrite existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
 msgid "Update existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:549
 msgid "Update only the orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:550
 msgid "Mark all"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:549
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:551
 msgid "Mark none"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:550
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:552
 msgid "Discard"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:551
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:553
 msgid "Add objects"
 msgstr ""
 
@@ -3835,3 +3608,159 @@ msgstr ""
 #, qt-format
 msgid "Type: %1"
 msgstr "类型： %1"
+
+#~ msgid "General "
+#~ msgstr "一般设置 "
+
+#~ msgid "Colors "
+#~ msgstr "颜色 "
+
+#~ msgid "Effects "
+#~ msgstr "效果 "
+
+#~ msgid "Scripts "
+#~ msgstr "脚本 "
+
+#~ msgid "Latitude: "
+#~ msgstr "纬度: "
+
+#~ msgid "Longitude: "
+#~ msgstr "经度: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "星空时间: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "启动时的星空时间: "
+
+#~ msgid "Actual Time"
+#~ msgstr "实际时间"
+
+#~ msgid "Preset Time"
+#~ msgstr "预设时间"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "时间显示格式: "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "日期显示格式: "
+
+#~ msgid "Show: "
+#~ msgstr "显示: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "手动缩放: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "缩放持续时间: "
+
+#~ msgid "Local Script: "
+#~ msgstr "本地脚本: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "载入默认设置: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "星空文化: "
+
+#~ msgid "Set Location "
+#~ msgstr "设置当前地点 "
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "光污染程度: "
+
+#~ msgid "Calendar"
+#~ msgstr "日历"
+
+#~ msgid "Solar System Body: "
+#~ msgstr "太阳系天体: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "按向下键以载入列表"
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "星等限制: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "光行进时间修正： "
+
+#~ msgid "Shut Down: "
+#~ msgstr "关闭程序: "
+
+#~ msgid "Sky Language: "
+#~ msgstr "天文术语： "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "将当前设置保存为默认： "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "天体放缩规则： "
+
+#~ msgid "Twinkling: "
+#~ msgstr "闪烁： "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "银河亮度： "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "CD/DVD 脚本: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "当前星空时间： "
+
+#~ msgid "Set Time "
+#~ msgstr "时间设置 "
+
+#~ msgid "Administration "
+#~ msgstr "管理设定 "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "海拔(米): "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "时区设置: "
+
+#~ msgid "Day keys: "
+#~ msgstr "时间定义: "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "星体值倍数： "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "星等成像加成: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "显示星名的最暗星等: "
+
+#~ msgid "Nebula Circles"
+#~ msgstr "星云标记"
+
+#~ msgid "Landscape: "
+#~ msgstr "地貌： "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "星等放大倍数： "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "显示星云名称的最暗星等: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "光标自动隐藏延时: "
+
+#~ msgid "USB Script: "
+#~ msgstr "USB 脚本: "
+
+#~ msgid "Select and exit to run."
+#~ msgstr "选择并在退出后运行"
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "在线更新: "
+
+#~ msgid "Sidereal"
+#~ msgstr "恒星"
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "设置界面语言： "
+
+#~ msgid "Stars "
+#~ msgstr "天体 "

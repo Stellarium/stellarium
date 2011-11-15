@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-13 22:43+0700\n"
+"POT-Creation-Date: 2011-11-15 00:02+0200\n"
 "PO-Revision-Date: 2011-09-18 23:30+0000\n"
 "Last-Translator: Shushi Kurose <md81bird@hitaki.net>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-14 04:50+0000\n"
-"X-Generator: Launchpad (build 14277)\n"
+"X-Launchpad-Export-Date: 2011-11-15 05:01+0000\n"
+"X-Generator: Launchpad (build 14291)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
 msgid "Meridian"
@@ -815,7 +815,7 @@ msgstr "しし座流星群の多いとき"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "1966年のしし座流星群"
 
-#: src/gui/LocationDialog.cpp:367
+#: src/gui/LocationDialog.cpp:369
 msgid "New Location"
 msgstr "新しい場所"
 
@@ -1292,284 +1292,6 @@ msgstr "トゥピ・グアラニー語"
 #: src/translations.h:149
 msgid "Western"
 msgstr "西洋"
-
-#: src/translations.h:153
-msgid "Set Location "
-msgstr "場所の設定 "
-
-#: src/translations.h:154
-msgid "Set Time "
-msgstr "時刻の設定 "
-
-#: src/translations.h:155
-msgid "General "
-msgstr "一般 "
-
-#: src/translations.h:156
-msgid "Stars "
-msgstr "恒星 "
-
-#: src/translations.h:157
-msgid "Colors "
-msgstr "色 "
-
-#: src/translations.h:158
-msgid "Effects "
-msgstr "効果 "
-
-#: src/translations.h:159
-msgid "Scripts "
-msgstr "スクリプト "
-
-#: src/translations.h:160
-msgid "Administration "
-msgstr "管理 "
-
-#: src/translations.h:162
-msgid "Latitude: "
-msgstr "緯度: "
-
-#: src/translations.h:163
-msgid "Longitude: "
-msgstr "経度: "
-
-#: src/translations.h:164
-msgid "Altitude (m): "
-msgstr "標高(m): "
-
-#: src/translations.h:165
-msgid "Solar System Body: "
-msgstr "太陽系惑星・天体: "
-
-#: src/translations.h:167
-msgid "Sky Time: "
-msgstr "天の時間 : "
-
-#: src/translations.h:168
-msgid "Set Time Zone: "
-msgstr "タイムゾーンの設定: "
-
-#: src/translations.h:169
-msgid "Day keys: "
-msgstr "日付キー: "
-
-#: src/translations.h:170
-msgid "Calendar"
-msgstr "カレンダー"
-
-#: src/translations.h:171
-msgid "Sidereal"
-msgstr "恒星時"
-
-#: src/translations.h:172
-msgid "Preset Sky Time: "
-msgstr "天の時間の設定: "
-
-#: src/translations.h:173
-msgid "Sky Time At Start-up: "
-msgstr "起動時の天の時間: "
-
-#: src/translations.h:174
-msgid "Actual Time"
-msgstr "現在の時刻"
-
-#: src/translations.h:175
-msgid "Preset Time"
-msgstr "設定された時刻"
-
-#: src/translations.h:176
-msgid "Time Display Format: "
-msgstr "時間の表示形式: "
-
-#: src/translations.h:177
-msgid "Date Display Format: "
-msgstr "日付の表示形式: "
-
-#: src/translations.h:179
-msgid "Sky Culture: "
-msgstr "星座の地域: "
-
-#: src/translations.h:180
-msgid "Sky Language: "
-msgstr "天体名の言語: "
-
-#: src/translations.h:182
-msgid "Show: "
-msgstr "表示: "
-
-#: src/translations.h:183
-msgid "Star Value Multiplier: "
-msgstr "星の明るさの倍率: "
-
-#: src/translations.h:184
-msgid "Magnitude Sizing Multiplier: "
-msgstr "等級による倍率 : "
-
-#: src/translations.h:185
-msgid "Maximum Magnitude to Label: "
-msgstr "名前を表示する最大等級: "
-
-#: src/translations.h:186
-msgid "Twinkling: "
-msgstr "またたき: "
-
-#: src/translations.h:187
-msgid "Limiting Magnitude: "
-msgstr "限界等級: "
-
-#: src/translations.h:189
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
-msgid "Constellation Lines"
-msgstr "星座線"
-
-#: src/translations.h:190
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
-msgid "Constellation Names"
-msgstr "星座名"
-
-#: src/translations.h:191
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
-msgid "Constellation Art Intensity"
-msgstr "星座絵の明るさ"
-
-#: src/translations.h:192
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:243
-msgid "Constellation Boundaries"
-msgstr "星座の境界線"
-
-#: src/translations.h:193
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:251
-msgid "Cardinal Points"
-msgstr "方位"
-
-#: src/translations.h:194
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
-msgid "Planet Names"
-msgstr "惑星の名前"
-
-#: src/translations.h:195
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
-msgid "Planet Orbits"
-msgstr "惑星の軌道"
-
-#: src/translations.h:196
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
-msgid "Planet Trails"
-msgstr "惑星の通った跡"
-
-#: src/translations.h:197
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
-msgid "Meridian Line"
-msgstr "子午線"
-
-#: src/translations.h:198
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
-msgid "Azimuthal Grid"
-msgstr "地平座標"
-
-#: src/translations.h:199
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
-msgid "Equatorial Grid"
-msgstr "赤道座標"
-
-#: src/translations.h:200
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:283
-msgid "Equator Line"
-msgstr "赤道線"
-
-#: src/translations.h:201
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
-msgid "Ecliptic Line"
-msgstr "黄道線"
-
-#: src/translations.h:202
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
-msgid "Nebula Names"
-msgstr "星雲の名前"
-
-#: src/translations.h:203
-msgid "Nebula Circles"
-msgstr "星雲の円"
-
-#: src/translations.h:205
-msgid "Light Pollution Luminance: "
-msgstr "光害の明るさ: "
-
-#: src/translations.h:206
-msgid "Landscape: "
-msgstr "背景: "
-
-#: src/translations.h:207
-msgid "Manual zoom: "
-msgstr "手動ズーム: "
-
-#: src/translations.h:208
-msgid "Object Sizing Rule: "
-msgstr "天体の大きさの設定: "
-
-#: src/translations.h:209
-msgid "Magnitude Scaling Multiplier: "
-msgstr "等級による倍率: "
-
-#: src/translations.h:210
-msgid "Milky Way intensity: "
-msgstr "天の川の明るさ: "
-
-#: src/translations.h:211
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "名前を表示する星雲・星団の最大等級: "
-
-#: src/translations.h:212
-msgid "Zoom Duration: "
-msgstr "ズーム時間: "
-
-#: src/translations.h:213
-msgid "Cursor Timeout: "
-msgstr "カーソル表示時間: "
-
-#: src/translations.h:214
-msgid "Correct for light travel time: "
-msgstr "光の到達時間を補正する: "
-
-#: src/translations.h:216
-msgid "Local Script: "
-msgstr "ローカルスクリプト: "
-
-#: src/translations.h:217
-msgid "CD/DVD Script: "
-msgstr "CD/DVD スクリプト: "
-
-#: src/translations.h:218
-msgid "USB Script: "
-msgstr "USBスクリプト: "
-
-#: src/translations.h:219
-msgid "Arrow down to load list."
-msgstr "下矢印キーで一覧を表示します。"
-
-#: src/translations.h:220
-msgid "Select and exit to run."
-msgstr "選択しメニューを抜けるとスタートします。"
-
-#: src/translations.h:222
-msgid "Load Default Configuration: "
-msgstr "デフォルトの設定を読み込む: "
-
-#: src/translations.h:223
-msgid "Save Current Configuration as Default: "
-msgstr "現在の設定をデフォルトとして保存 : "
-
-#: src/translations.h:224
-msgid "Shut Down: "
-msgstr "終了: "
-
-#: src/translations.h:225
-msgid "Update me via Internet: "
-msgstr "インターネット経由で更新: "
-
-#: src/translations.h:226
-msgid "Set UI Locale: "
-msgstr "操作パネルの言語: "
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -3272,8 +2994,8 @@ msgid "Define a time zone"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:372
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:374
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:373
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:375
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
 msgid "Time zone"
 msgstr ""
@@ -3283,13 +3005,13 @@ msgid "Timezone name:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:378
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:379
 msgid "Offset from UTC:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:379
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:380
 msgid " hours"
 msgstr ""
 
@@ -3332,7 +3054,7 @@ msgstr ""
 msgid "Use this definition"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:375
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:376
 msgid ""
 "By default, the time displayed in Stellarium is interpreted as the local "
 "time in the system's time zone, not in the displayed location's time zone. "
@@ -3340,25 +3062,20 @@ msgid ""
 "settings."
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:376
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:377
 msgid "Use system settings (default)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:377
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:378
 msgid "Universal Coordinated Time (UTC)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:380
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
 msgid "(offset = local time - UTC time)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
-msgid "User-defined:"
-msgstr ""
-
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:382
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
-msgid "..."
+msgid "User-defined:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
@@ -3507,13 +3224,69 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
+msgid "Constellation Lines"
+msgstr "星座線"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
+msgid "Constellation Names"
+msgstr "星座名"
+
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Constellation Art"
 msgstr ""
 
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:243
+msgid "Constellation Boundaries"
+msgstr "星座の境界線"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
+msgid "Constellation Art Intensity"
+msgstr "星座絵の明るさ"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:251
+msgid "Cardinal Points"
+msgstr "方位"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
+msgid "Planet Names"
+msgstr "惑星の名前"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
+msgid "Planet Orbits"
+msgstr "惑星の軌道"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
+msgid "Planet Trails"
+msgstr "惑星の通った跡"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
+msgid "Meridian Line"
+msgstr "子午線"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
+msgid "Azimuthal Grid"
+msgstr "地平座標"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
+msgid "Equatorial Grid"
+msgstr "赤道座標"
+
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Equatorial J2000 Grid"
 msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:283
+msgid "Equator Line"
+msgstr "赤道線"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
+msgid "Ecliptic Line"
+msgstr "黄道線"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
+msgid "Nebula Names"
+msgstr "星雲の名前"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:295
 msgid "Nebula Hints"
@@ -3613,75 +3386,75 @@ msgid ""
 "its online database. Still a work in progress."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Select the type"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Asteroids"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Comets"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Select the source"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Download a list of objects from the Internet"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Select a source from the list:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Or enter a URL:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "paste"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Add this URL to the bookmarks list"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Bookmark title:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "A file containing a list of objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Get orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid "Abort download"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Lists"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Online search"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid ""
 "Query the MPC's <a "
 "href=\"http://www.minorplanetcenter.net/iau/MPEph/MPEph.html\">Minor Planet "
 "&amp; Comet Ephemeris Service</a>:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid ""
 "Only one result will be returned if the query is successful.<br>Both comets "
 "and asteroids can be identified with their number, name or provisional "
@@ -3691,11 +3464,11 @@ msgid ""
 "Comet, but \"Halley\" will return the asteroid (2688) Halley."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Objects found"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid ""
 "Mark the objects you wish to be imported. In <i>italic</i> are listed names "
 "that match the names of already loaded objects. In <b>bold</b> are listed "
@@ -3704,31 +3477,31 @@ msgid ""
 "may cause Stellarium to run slowly."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
 msgid "Overwrite existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
 msgid "Update existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:549
 msgid "Update only the orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:550
 msgid "Mark all"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:549
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:551
 msgid "Mark none"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:550
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:552
 msgid "Discard"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:551
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:553
 msgid "Add objects"
 msgstr ""
 
@@ -3845,3 +3618,159 @@ msgstr ""
 #, qt-format
 msgid "Type: %1"
 msgstr "タイプ: %1"
+
+#~ msgid "Sky Language: "
+#~ msgstr "天体名の言語: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "星座の地域: "
+
+#~ msgid "Set Time "
+#~ msgstr "時刻の設定 "
+
+#~ msgid "General "
+#~ msgstr "一般 "
+
+#~ msgid "Stars "
+#~ msgstr "恒星 "
+
+#~ msgid "Colors "
+#~ msgstr "色 "
+
+#~ msgid "Effects "
+#~ msgstr "効果 "
+
+#~ msgid "Scripts "
+#~ msgstr "スクリプト "
+
+#~ msgid "Administration "
+#~ msgstr "管理 "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "標高(m): "
+
+#~ msgid "Sky Time: "
+#~ msgstr "天の時間 : "
+
+#~ msgid "Actual Time"
+#~ msgstr "現在の時刻"
+
+#~ msgid "Preset Time"
+#~ msgstr "設定された時刻"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "星雲の円"
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "操作パネルの言語: "
+
+#~ msgid "Select and exit to run."
+#~ msgstr "選択しメニューを抜けるとスタートします。"
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "等級による倍率 : "
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "光害の明るさ: "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "星の明るさの倍率: "
+
+#~ msgid "Sidereal"
+#~ msgstr "恒星時"
+
+#~ msgid "USB Script: "
+#~ msgstr "USBスクリプト: "
+
+#~ msgid "Calendar"
+#~ msgstr "カレンダー"
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "名前を表示する最大等級: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "名前を表示する星雲・星団の最大等級: "
+
+#~ msgid "Set Location "
+#~ msgstr "場所の設定 "
+
+#~ msgid "Longitude: "
+#~ msgstr "経度: "
+
+#~ msgid "Latitude: "
+#~ msgstr "緯度: "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "太陽系惑星・天体: "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "タイムゾーンの設定: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "天の時間の設定: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "起動時の天の時間: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "またたき: "
+
+#~ msgid "Show: "
+#~ msgstr "表示: "
+
+#~ msgid "Time Display Format: "
+#~ msgstr "時間の表示形式: "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "日付の表示形式: "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "限界等級: "
+
+#~ msgid "Landscape: "
+#~ msgstr "背景: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "手動ズーム: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "天体の大きさの設定: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "カーソル表示時間: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "光の到達時間を補正する: "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "等級による倍率: "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "天の川の明るさ: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "ズーム時間: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "CD/DVD スクリプト: "
+
+#~ msgid "Local Script: "
+#~ msgstr "ローカルスクリプト: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "下矢印キーで一覧を表示します。"
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "デフォルトの設定を読み込む: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "終了: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "現在の設定をデフォルトとして保存 : "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "インターネット経由で更新: "
+
+#~ msgid "Day keys: "
+#~ msgstr "日付キー: "
