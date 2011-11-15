@@ -160,14 +160,14 @@ QString TuiNodeFloat::getDisplayText()
 {
 	if (!editing)
 	{
-		return prefixText + q_(displayText) + QString(":  %1").arg(value);
+		return prefixText + q_(displayText) + QString("  %1").arg(value);
 	}
 	else
 	{
 		if (typedDecimal)
-			return prefixText + q_(displayText) + QString(": >%1.<").arg(value);
+			return prefixText + q_(displayText) + QString(" >%1.<").arg(value);
 		else
-			return prefixText + q_(displayText) + QString(": >%1<").arg(value);
+			return prefixText + q_(displayText) + QString(" >%1<").arg(value);
 	}
 }
 
