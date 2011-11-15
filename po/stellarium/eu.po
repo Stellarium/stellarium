@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-13 22:43+0700\n"
-"PO-Revision-Date: 2011-11-02 00:58+0000\n"
+"POT-Creation-Date: 2011-11-15 00:02+0200\n"
+"PO-Revision-Date: 2011-11-15 01:20+0000\n"
 "Last-Translator: Asier Iturralde Sarasola <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-14 04:47+0000\n"
-"X-Generator: Launchpad (build 14277)\n"
+"X-Launchpad-Export-Date: 2011-11-15 04:58+0000\n"
+"X-Generator: Launchpad (build 14291)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
 msgid "Meridian"
@@ -833,7 +833,7 @@ msgstr "Leoniden ohiz kanpoko agertze-tasa"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Inozko agertze-tasarik handiena (1966ko Leonidak)"
 
-#: src/gui/LocationDialog.cpp:367
+#: src/gui/LocationDialog.cpp:369
 msgid "New Location"
 msgstr "Kokaleku berria"
 
@@ -1313,284 +1313,6 @@ msgstr "Tupi-Guarania"
 #: src/translations.h:149
 msgid "Western"
 msgstr "Mendebaldekoa"
-
-#: src/translations.h:153
-msgid "Set Location "
-msgstr "Ezarri kokalekua "
-
-#: src/translations.h:154
-msgid "Set Time "
-msgstr "Ezarri data "
-
-#: src/translations.h:155
-msgid "General "
-msgstr "Orokorra "
-
-#: src/translations.h:156
-msgid "Stars "
-msgstr "Izarrak "
-
-#: src/translations.h:157
-msgid "Colors "
-msgstr "Koloreak "
-
-#: src/translations.h:158
-msgid "Effects "
-msgstr "Efektuak "
-
-#: src/translations.h:159
-msgid "Scripts "
-msgstr "Scriptak "
-
-#: src/translations.h:160
-msgid "Administration "
-msgstr "Administrazioa "
-
-#: src/translations.h:162
-msgid "Latitude: "
-msgstr "Latitudea: "
-
-#: src/translations.h:163
-msgid "Longitude: "
-msgstr "Longitud: "
-
-#: src/translations.h:164
-msgid "Altitude (m): "
-msgstr "Altitudea (m): "
-
-#: src/translations.h:165
-msgid "Solar System Body: "
-msgstr "Eguzki Sistemako Gorputza: "
-
-#: src/translations.h:167
-msgid "Sky Time: "
-msgstr "Zeruko Ordua: "
-
-#: src/translations.h:168
-msgid "Set Time Zone: "
-msgstr "Hautatu ordu zona: "
-
-#: src/translations.h:169
-msgid "Day keys: "
-msgstr "Egun motak: "
-
-#: src/translations.h:170
-msgid "Calendar"
-msgstr "Egutegia"
-
-#: src/translations.h:171
-msgid "Sidereal"
-msgstr "Siderala"
-
-#: src/translations.h:172
-msgid "Preset Sky Time: "
-msgstr "Zeruko Ordu Aurrezarria: "
-
-#: src/translations.h:173
-msgid "Sky Time At Start-up: "
-msgstr "Hasierako Zeruko Ordua: "
-
-#: src/translations.h:174
-msgid "Actual Time"
-msgstr "Oraingo ordua"
-
-#: src/translations.h:175
-msgid "Preset Time"
-msgstr "Aurrezarritako ordua"
-
-#: src/translations.h:176
-msgid "Time Display Format: "
-msgstr "Ordu-formatua: "
-
-#: src/translations.h:177
-msgid "Date Display Format: "
-msgstr "Data-formatua: "
-
-#: src/translations.h:179
-msgid "Sky Culture: "
-msgstr "Zeru kultura: "
-
-#: src/translations.h:180
-msgid "Sky Language: "
-msgstr "Zeruko hizkuntza: "
-
-#: src/translations.h:182
-msgid "Show: "
-msgstr "Erakutsi: "
-
-#: src/translations.h:183
-msgid "Star Value Multiplier: "
-msgstr "Izar-distira biderkatzailea: "
-
-#: src/translations.h:184
-msgid "Magnitude Sizing Multiplier: "
-msgstr "Magnitudearen tamaina-biderkatzailea: "
-
-#: src/translations.h:185
-msgid "Maximum Magnitude to Label: "
-msgstr "Etiketatuko den magnitude maximoa: "
-
-#: src/translations.h:186
-msgid "Twinkling: "
-msgstr "Dirdira "
-
-#: src/translations.h:187
-msgid "Limiting Magnitude: "
-msgstr "Magnitude mugatzailea: "
-
-#: src/translations.h:189
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
-msgid "Constellation Lines"
-msgstr "Konstelazio lerroak"
-
-#: src/translations.h:190
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
-msgid "Constellation Names"
-msgstr "Konstelazio izenak"
-
-#: src/translations.h:191
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
-msgid "Constellation Art Intensity"
-msgstr "Konstelazioen irudien intentsitatea"
-
-#: src/translations.h:192
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:243
-msgid "Constellation Boundaries"
-msgstr "Konstelazioen mugak"
-
-#: src/translations.h:193
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:251
-msgid "Cardinal Points"
-msgstr "Puntu kardinalak"
-
-#: src/translations.h:194
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
-msgid "Planet Names"
-msgstr "Planeten izenak"
-
-#: src/translations.h:195
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
-msgid "Planet Orbits"
-msgstr "Planeten orbitak"
-
-#: src/translations.h:196
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
-msgid "Planet Trails"
-msgstr "Planeten arrastoak"
-
-#: src/translations.h:197
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
-msgid "Meridian Line"
-msgstr "Meridiano lerroa"
-
-#: src/translations.h:198
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
-msgid "Azimuthal Grid"
-msgstr "Sareta azimutala"
-
-#: src/translations.h:199
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
-msgid "Equatorial Grid"
-msgstr "Sareta ekuatoriala"
-
-#: src/translations.h:200
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:283
-msgid "Equator Line"
-msgstr "Ekuatore lerroa"
-
-#: src/translations.h:201
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
-msgid "Ecliptic Line"
-msgstr "Ekliptika lerroa"
-
-#: src/translations.h:202
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
-msgid "Nebula Names"
-msgstr "Nebulosa izenak"
-
-#: src/translations.h:203
-msgid "Nebula Circles"
-msgstr "Nebulosen zirkuluak"
-
-#: src/translations.h:205
-msgid "Light Pollution Luminance: "
-msgstr "Argi kutsaduraren distira: "
-
-#: src/translations.h:206
-msgid "Landscape: "
-msgstr "Paisaia: "
-
-#: src/translations.h:207
-msgid "Manual zoom: "
-msgstr "Eskuzko zooma: "
-
-#: src/translations.h:208
-msgid "Object Sizing Rule: "
-msgstr "Objektuen tamaina araua: "
-
-#: src/translations.h:209
-msgid "Magnitude Scaling Multiplier: "
-msgstr "Magnitude eskala-biderkatzailea: "
-
-#: src/translations.h:210
-msgid "Milky Way intensity: "
-msgstr "Esne Bidearen intentsitatea: "
-
-#: src/translations.h:211
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Izena erakusteko nebulosaren magnitude maximoa: "
-
-#: src/translations.h:212
-msgid "Zoom Duration: "
-msgstr "Zoomaren iraupena: "
-
-#: src/translations.h:213
-msgid "Cursor Timeout: "
-msgstr "Erakuslearen denbora muga: "
-
-#: src/translations.h:214
-msgid "Correct for light travel time: "
-msgstr "Zuzendu argiaren bidaia denborarentzako: "
-
-#: src/translations.h:216
-msgid "Local Script: "
-msgstr "Script lokala: "
-
-#: src/translations.h:217
-msgid "CD/DVD Script: "
-msgstr "CD/DVD Script-a: "
-
-#: src/translations.h:218
-msgid "USB Script: "
-msgstr "USB Script-a: "
-
-#: src/translations.h:219
-msgid "Arrow down to load list."
-msgstr "Zerrenda kargatzeko kurtsorearen beheko gezia."
-
-#: src/translations.h:220
-msgid "Select and exit to run."
-msgstr "Hautatu eta irten abiarazteko."
-
-#: src/translations.h:222
-msgid "Load Default Configuration: "
-msgstr "Kargatu konfigurazio lehenetsia: "
-
-#: src/translations.h:223
-msgid "Save Current Configuration as Default: "
-msgstr "Gorde uneko konfigurazioa lehenetsi bezala: "
-
-#: src/translations.h:224
-msgid "Shut Down: "
-msgstr "Itzali: "
-
-#: src/translations.h:225
-msgid "Update me via Internet: "
-msgstr "Eguneratu Internet bidez: "
-
-#: src/translations.h:226
-msgid "Set UI Locale: "
-msgstr "Ezarri erabiltzaile interfaze lokala: "
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -2384,7 +2106,7 @@ msgstr "Laster-teklen plugina"
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:308
 msgid "The Angle Measure is enabled:"
-msgstr ""
+msgstr "Angelu neurgailua gaituta dago:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:310
@@ -2394,7 +2116,7 @@ msgstr ""
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:312
 msgid "Right-clicking changes the end point only."
-msgstr ""
+msgstr "Eskuin klik egiteak bukaerako puntua soilik aldatzen du."
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
@@ -2475,64 +2197,68 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:220
 #, qt-format
 msgid "Altitude (km): %1"
-msgstr ""
+msgstr "Altitudea (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:237
 #, qt-format
 msgid "TEME coordinates (km): %1"
-msgstr ""
+msgstr "TEME koordenatuak (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:245
 #, qt-format
 msgid "TEME velocity (km/s): %1"
-msgstr ""
+msgstr "TEME abiadura (km/s): %1"
 
 #: plugins/Satellites/src/Satellite.cpp:253
 msgid "The satellite and the observer are in sunlight."
-msgstr ""
+msgstr "Satelitea eta behatzailea eguzki-argitan daude."
 
 #: plugins/Satellites/src/Satellite.cpp:256
 msgid "The satellite is visible."
-msgstr ""
+msgstr "Satelitea ikusgai dago."
 
 #: plugins/Satellites/src/Satellite.cpp:259
 msgid "The satellite is eclipsed."
-msgstr ""
+msgstr "Satelitea eklipsatuta dago."
 
 #: plugins/Satellites/src/Satellite.cpp:262
 msgid "The satellite is not visible"
-msgstr ""
+msgstr "Satelitea ez dago ikusgai"
 
 #: plugins/Satellites/src/Satellite.cpp:288
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
-msgstr ""
+msgstr "%1 MHz (%2%3 kHz)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:209
 msgid "Stellarium Satellites Plugin"
-msgstr ""
+msgstr "Stellarium Sateliteak Plugin-a"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:210
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Version"
-msgstr ""
+msgstr "Bertsioa"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:214
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
+"Sateliteak plugin-ak Lurraren orbitan dauden satelite artifizialen posizioa "
+"iragartzen du."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:216
 msgid "Notes for users"
-msgstr ""
+msgstr "Erabiltzaileentzako oharrak"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:217
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
+"Sateliteak eta beren orbitak behatzailea Lurrean dagoenean soilik erakusten "
+"dira."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:218
 msgid ""
@@ -2555,17 +2281,23 @@ msgid ""
 "the default %3 file.  The old file will be backed up as %4.  This can be "
 "found in the user data directory, under \"modules/Satellites/\"."
 msgstr ""
+"Elkarrizketa-koadro honetako \"%2\" fitxako \"%1\" botoia klikatzeak %3 "
+"fitxategi lehenetsira leheneratzen du. Fitxategi zaharraren babeskopia %4 "
+"bezala gordeko da. Hau erabiltzailearen datuen direktorioan aurkitu daiteke, "
+"\"modules/Satellites\" pean."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:227
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
+"Sateliteak plugin-a garapenean dago oraindik. Zenbait ezaugarri falta dira "
+"edo osatugabeak edo akastunak dira."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:231
 msgid "TLE data updates"
-msgstr ""
+msgstr "TLE datu eguneraketak"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:232
 msgid ""
@@ -2573,6 +2305,8 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
+"Sateliteak pluginak automatikoki deskargatu ditzake TLE datuak Internetetik, "
+"eta lehenetsia dago halaxe egitea datuak 72 ordu baino zaharragoak badira. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:233
 #, qt-format
@@ -2581,16 +2315,21 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
+"Internet bidezko eguneraketak desgaitzen badituzu, zure konputagailuko "
+"fitxategi batetik egin dezakezu eguneraketa. Fitxategi honek Celestrak "
+"eguneraketen formatu berean egon behar du (ikusi %1 adibidetarako)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:234
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr ""
+"<b>Oharra:</b> eguneraketa datuetan satelitearen izenak parentesi zuzenen [ "
+"] artean zerbait badu bukaeran, ezabatua izango da datuak erabili aurretik."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:237
 msgid "Adding new satellites"
-msgstr ""
+msgstr "Satelite berriak gehitzen"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:238
 #, qt-format
@@ -2598,16 +2337,20 @@ msgid ""
 "At the moment you must manually edit the %1 file to add new satellites to "
 "the database. Making this easier is still on the TODO list..."
 msgstr ""
+"Oraingoz eskuz editatu behar duzu %1 fitxategia datu-basera satelite berriak "
+"gehitzeko. Prozedura hau erraztea EGITEKOAK zerrendan dago oraindik..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:240
 msgid "Technical notes"
-msgstr ""
+msgstr "Ohar teknikoak"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:241
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
 msgstr ""
+"Posizioak SGP4 eta SDP4 metodoak erabiliz kalkulatzen dira, NORAD TLE datuak "
+"erabiliz sarrera bezala. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:242
 msgid ""
@@ -2623,7 +2366,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:246
 msgid "Links"
-msgstr ""
+msgstr "Estekak"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:247
 msgid ""
@@ -2652,48 +2395,48 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:267
 msgid "Internet updates disabled"
-msgstr ""
+msgstr "Internet bidezko eguneraketak desgaituta"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:269
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
 msgid "Updating now..."
-msgstr ""
+msgstr "Eguneratzen..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:271
 msgid "Next update: < 1 minute"
-msgstr ""
+msgstr "Hurrengo eguneraketarako: < minutu 1"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:273
 #, qt-format
 msgid "Next update: %1 minutes"
-msgstr ""
+msgstr "Hurrengo eguneraketarako: %1 minutu"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:275
 #, qt-format
 msgid "Next update: %1 hours"
-msgstr ""
+msgstr "Hurrengo eguneraketarako: %1 ordu"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
 #: plugins/Satellites/src/ui_satellitesDialog.h:605
 msgid "Update now"
-msgstr ""
+msgstr "Eguneratu orain"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:292
 msgid "Update from files"
-msgstr ""
+msgstr "Eguneratu fitxategietatik"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:304
 msgid "Update error"
-msgstr ""
+msgstr "Eguneraketa errorea"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:311
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
-msgstr ""
+msgstr "%1/%2 satelite eguneratua(k); %3 falta d(ir)a"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:368
 msgid "[new source]"
-msgstr ""
+msgstr "[iturburu berria]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 msgid "[all not displayed]"
@@ -2709,40 +2452,40 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:467
 msgid "Select TLE Update File"
-msgstr ""
+msgstr "Hautatu TLE eguneraketa fitxategia"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:598
 #: plugins/Satellites/src/ui_satellitesDialog.h:599
 msgid "Satellites Configuration"
-msgstr ""
+msgstr "Sateliteaken konfigurazioa"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:601
 msgid "Update TLE lists from Internet sources"
-msgstr ""
+msgstr "Eguneratu TLE zerrendak Interneteko iturburuetatik"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:602
 msgid "Update from Internet sources"
-msgstr ""
+msgstr "Eguneratu Interneteko iturburuetatik"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:603
 msgid "Last update:"
-msgstr ""
+msgstr "Azken eguneraketa:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:604
 msgid "Update frequency (hours):"
-msgstr ""
+msgstr "Eguneraketa maiztasuna (orduak):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:606
 msgid "Labels"
-msgstr ""
+msgstr "Etiketak"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:607
 msgid "Label font size (pixels):"
-msgstr ""
+msgstr "Etiketen letra-tamaina"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:608
 msgid "Orbit lines"
-msgstr ""
+msgstr "Orbita lerroak"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:610
 #: plugins/Satellites/src/ui_satellitesDialog.h:614
@@ -2769,23 +2512,23 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:626
 msgid "Length (s):"
-msgstr ""
+msgstr "Luzera (s):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:630
 msgid "Restore default settings"
-msgstr ""
+msgstr "Berrezarri ezarpen lehenetsiak"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:631
 msgid "Save settings as default"
-msgstr ""
+msgstr "Gorde ezarpenak lehenetsi bezala"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:632
 msgid "Settings"
-msgstr ""
+msgstr "Ezarpenak"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:634
 msgid "Display the selected satellite(s)"
-msgstr ""
+msgstr "Bistaratu hautatutako satelitea(k)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:636
 msgid "Displayed"
@@ -2793,31 +2536,31 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:638
 msgid "Display orbit line(s) for the selected satellite(s)"
-msgstr ""
+msgstr "Bistaratu hautatutako satelite(ar)en orbita lerroa(k)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 msgid "Orbit"
-msgstr ""
+msgstr "Orbita"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
 msgid "Satellite ID:"
-msgstr ""
+msgstr "Satelitearen ID-a:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:643
 msgid "Description:"
-msgstr ""
+msgstr "Deskribapena:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:644
 msgid "Groups:"
-msgstr ""
+msgstr "Taldeak:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:646
 msgid "Comma separated list of groups"
-msgstr ""
+msgstr "Komaz banatutako talde zerrenda"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:648
 msgid "TLE data:"
-msgstr ""
+msgstr "TLE datuak:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:650
 msgid "NORAD two line element orbit data"
@@ -2825,25 +2568,27 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Save changes"
-msgstr ""
+msgstr "Gorde aldaketak"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:659
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
 msgstr ""
+"Sartu edo editatu hautatutako iturburuaren URL-a. Aldaketak Enter sakatuz "
+"gordetzen dira."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Add new source"
-msgstr ""
+msgstr "Gehitu iturburu berria"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:666
 msgid "Remove selected source"
-msgstr ""
+msgstr "Kendu hautatutako iturburua"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:669
 msgid "Sources"
-msgstr ""
+msgstr "Iturburuak"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:150
@@ -2874,76 +2619,76 @@ msgstr "Mugitu teleskopioa koordenatu jakin batzuetara"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:138
 msgid "Add New Telescope"
-msgstr ""
+msgstr "Gehitu teleskopio berria"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:161
 msgid "Configure Telescope"
-msgstr ""
+msgstr "Konfiguratu teleskopioa"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
-msgstr ""
+msgstr "Ez dago eskuragarri"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
 msgid "Starting"
-msgstr ""
+msgstr "Abiarazten"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:58
 msgid "Connecting"
-msgstr ""
+msgstr "Konektatzen"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:59
 msgid "Connected"
-msgstr ""
+msgstr "Konektatua"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:60
 msgid "Disconnected"
-msgstr ""
+msgstr "Deskonektatua"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:61
 msgid "Stopped"
-msgstr ""
+msgstr "Gelditua"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Stellarium Telescope Control Plug-in"
-msgstr ""
+msgstr "Stellarium Teleskopioen Kontrolerako Plugin-a"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:680
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:386
 msgid "Start"
-msgstr ""
+msgstr "Abiarazi"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:681
 msgid "Start the selected local telescope"
-msgstr ""
+msgstr "Abiarazi hautatutako teleskopio lokala"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:686
 msgid "Stop"
-msgstr ""
+msgstr "Gelditu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:687
 msgid "Stop the selected local telescope"
-msgstr ""
+msgstr "Gelditu hautatutako teleskopio lokala"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:692
 msgid "Connect"
-msgstr ""
+msgstr "Konektatu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:693
 msgid "Connect to the selected telescope"
-msgstr ""
+msgstr "Konektatu hautatutako teleskopiora"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:698
 msgid "Disconnect"
-msgstr ""
+msgstr "Deskonektatu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:699
 msgid "Disconnect from the selected telescope"
-msgstr ""
+msgstr "Deskonektatu hautatutako teleskopiotik"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:720
 msgid "Select a directory"
-msgstr ""
+msgstr "Hautatu direktorio bat"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:297
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:469
@@ -2953,88 +2698,92 @@ msgstr "Inprimakia"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:298
 msgid "Slew telescope to"
-msgstr ""
+msgstr "Biratu teleskopia hona:"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:300
 msgid "There are no active devices."
-msgstr ""
+msgstr "Ez dago gailu aktiborik."
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Slew telescope to coordinates"
-msgstr ""
+msgstr "Biratu teleskopioa koordenatuetara."
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:302
 msgid "&Right Ascension"
-msgstr ""
+msgstr "&Igoera zuzena"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:303
 #: plugins/TelescopeControl/src/ui_slewDialog.h:305
 msgid "(J2000)"
-msgstr ""
+msgstr "(J2000)"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:304
 msgid "De&clination"
-msgstr ""
+msgstr "De&klinazioa"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:307
 msgid "Hours-minutes-seconds format"
-msgstr ""
+msgstr "Orduak-minutuak-segunduak formatua"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:309
 msgid "&HMS"
-msgstr ""
+msgstr "&HMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:311
 msgid "Degrees-minutes-seconds format"
-msgstr ""
+msgstr "Gradu-minutu-segundu formatua"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:313
 msgid "&DMS"
-msgstr ""
+msgstr "&DMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:315
 msgid "Decimal degrees"
-msgstr ""
+msgstr "Gradu dezimalak"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:317
 msgid "D&ecimal"
-msgstr ""
+msgstr "D&ezimalak"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:318
 msgid "&Slew"
-msgstr ""
+msgstr "&Biratu"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:319
 msgid "Configure &telescopes..."
-msgstr ""
+msgstr "Konfiguratu &teleskopioak..."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:470
 msgid "Telescope Configuration"
-msgstr ""
+msgstr "Teleskopioen konfigurazioa"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope controlled by:"
-msgstr ""
+msgstr "Honek kontrolatutako teleskopioa:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
+"Ordenagailu honetara serieko ataka bidez konektatutako teleskopioa eta "
+"Stellarium-ek zuzenean kontrolatua."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
 msgid "Stellarium, directly through a serial port"
-msgstr ""
+msgstr "Stellarium, zuzenean serieko ataka bidez"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
+"Kanpoko aplikazio batek kontrolatutako teleskopioa, ordenagailu honetan edo "
+"urruneko makina batean"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid "External software or a remote computer"
-msgstr ""
+msgstr "Kanpoko softwarea edo urruneko ordenagailua"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
 msgid "Nothing, just simulate one (a moving reticle)"
@@ -3042,15 +2791,15 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "Telescope properties"
-msgstr ""
+msgstr "Teleskopioaren propietateak"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Name:"
-msgstr ""
+msgstr "Izena:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Connection delay:"
-msgstr ""
+msgstr "Konexio atzerapena:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid ""
@@ -3065,11 +2814,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "Coordinate system:"
-msgstr ""
+msgstr "Koordenatu sistema:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "J2000 (default)"
-msgstr ""
+msgstr "J2000 (lehenetsia)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "Equinox of the date (JNow)"
@@ -3323,8 +3072,8 @@ msgid "Define a time zone"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:372
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:374
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:373
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:375
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
 msgid "Time zone"
 msgstr ""
@@ -3334,13 +3083,13 @@ msgid "Timezone name:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:378
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:379
 msgid "Offset from UTC:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:379
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:380
 msgid " hours"
 msgstr ""
 
@@ -3383,7 +3132,7 @@ msgstr ""
 msgid "Use this definition"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:375
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:376
 msgid ""
 "By default, the time displayed in Stellarium is interpreted as the local "
 "time in the system's time zone, not in the displayed location's time zone. "
@@ -3391,25 +3140,20 @@ msgid ""
 "settings."
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:376
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:377
 msgid "Use system settings (default)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:377
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:378
 msgid "Universal Coordinated Time (UTC)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:380
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
 msgid "(offset = local time - UTC time)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
-msgid "User-defined:"
-msgstr ""
-
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:382
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
-msgid "..."
+msgid "User-defined:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
@@ -3560,13 +3304,69 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
+msgid "Constellation Lines"
+msgstr "Konstelazio lerroak"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
+msgid "Constellation Names"
+msgstr "Konstelazio izenak"
+
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Constellation Art"
 msgstr ""
 
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:243
+msgid "Constellation Boundaries"
+msgstr "Konstelazioen mugak"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
+msgid "Constellation Art Intensity"
+msgstr "Konstelazioen irudien intentsitatea"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:251
+msgid "Cardinal Points"
+msgstr "Puntu kardinalak"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
+msgid "Planet Names"
+msgstr "Planeten izenak"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
+msgid "Planet Orbits"
+msgstr "Planeten orbitak"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
+msgid "Planet Trails"
+msgstr "Planeten arrastoak"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
+msgid "Meridian Line"
+msgstr "Meridiano lerroa"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
+msgid "Azimuthal Grid"
+msgstr "Sareta azimutala"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
+msgid "Equatorial Grid"
+msgstr "Sareta ekuatoriala"
+
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Equatorial J2000 Grid"
 msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:283
+msgid "Equator Line"
+msgstr "Ekuatore lerroa"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
+msgid "Ecliptic Line"
+msgstr "Ekliptika lerroa"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
+msgid "Nebula Names"
+msgstr "Nebulosa izenak"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:295
 msgid "Nebula Hints"
@@ -3669,75 +3469,75 @@ msgstr ""
 "deskargatu ditzake \"Minor Planet Center\"-en webgunetik eta bilaketak egin "
 "bere online datubasean. Oraindik bukatu gabe dago."
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Select the type"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Asteroids"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Comets"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Select the source"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Download a list of objects from the Internet"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Select a source from the list:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Or enter a URL:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "paste"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Add this URL to the bookmarks list"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Bookmark title:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "A file containing a list of objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Get orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid "Abort download"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Lists"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Online search"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid ""
 "Query the MPC's <a "
 "href=\"http://www.minorplanetcenter.net/iau/MPEph/MPEph.html\">Minor Planet "
 "&amp; Comet Ephemeris Service</a>:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid ""
 "Only one result will be returned if the query is successful.<br>Both comets "
 "and asteroids can be identified with their number, name or provisional "
@@ -3747,11 +3547,11 @@ msgid ""
 "Comet, but \"Halley\" will return the asteroid (2688) Halley."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Objects found"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid ""
 "Mark the objects you wish to be imported. In <i>italic</i> are listed names "
 "that match the names of already loaded objects. In <b>bold</b> are listed "
@@ -3760,31 +3560,31 @@ msgid ""
 "may cause Stellarium to run slowly."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
 msgid "Overwrite existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
 msgid "Update existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:549
 msgid "Update only the orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:550
 msgid "Mark all"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:549
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:551
 msgid "Mark none"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:550
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:552
 msgid "Discard"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:551
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:553
 msgid "Add objects"
 msgstr ""
 
@@ -3901,3 +3701,159 @@ msgstr ""
 #, qt-format
 msgid "Type: %1"
 msgstr "Mota: %1"
+
+#~ msgid "Stars "
+#~ msgstr "Izarrak "
+
+#~ msgid "Colors "
+#~ msgstr "Koloreak "
+
+#~ msgid "Calendar"
+#~ msgstr "Egutegia"
+
+#~ msgid "Select and exit to run."
+#~ msgstr "Hautatu eta irten abiarazteko."
+
+#~ msgid "General "
+#~ msgstr "Orokorra "
+
+#~ msgid "Administration "
+#~ msgstr "Administrazioa "
+
+#~ msgid "Actual Time"
+#~ msgstr "Oraingo ordua"
+
+#~ msgid "Show: "
+#~ msgstr "Erakutsi: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Zoomaren iraupena: "
+
+#~ msgid "Scripts "
+#~ msgstr "Scriptak "
+
+#~ msgid "Twinkling: "
+#~ msgstr "Dirdira "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Objektuen tamaina araua: "
+
+#~ msgid "Day keys: "
+#~ msgstr "Egun motak: "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "Magnitude eskala-biderkatzailea: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Erakuslearen denbora muga: "
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Nebulosen zirkuluak"
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "Zerrenda kargatzeko kurtsorearen beheko gezia."
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Izena erakusteko nebulosaren magnitude maximoa: "
+
+#~ msgid "Set Location "
+#~ msgstr "Ezarri kokalekua "
+
+#~ msgid "Effects "
+#~ msgstr "Efektuak "
+
+#~ msgid "Set Time "
+#~ msgstr "Ezarri data "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Hautatu ordu zona: "
+
+#~ msgid "Latitude: "
+#~ msgstr "Latitudea: "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Altitudea (m): "
+
+#~ msgid "Sidereal"
+#~ msgstr "Siderala"
+
+#~ msgid "Longitude: "
+#~ msgstr "Longitud: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Zeruko Ordua: "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "Izar-distira biderkatzailea: "
+
+#~ msgid "Sky Language: "
+#~ msgstr "Zeruko hizkuntza: "
+
+#~ msgid "Time Display Format: "
+#~ msgstr "Ordu-formatua: "
+
+#~ msgid "Preset Time"
+#~ msgstr "Aurrezarritako ordua"
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Data-formatua: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Zeruko Ordu Aurrezarria: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Hasierako Zeruko Ordua: "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "Magnitude mugatzailea: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Etiketatuko den magnitude maximoa: "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Magnitudearen tamaina-biderkatzailea: "
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "Argi kutsaduraren distira: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "Zuzendu argiaren bidaia denborarentzako: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Eskuzko zooma: "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Esne Bidearen intentsitatea: "
+
+#~ msgid "Local Script: "
+#~ msgstr "Script lokala: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "CD/DVD Script-a: "
+
+#~ msgid "USB Script: "
+#~ msgstr "USB Script-a: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Kargatu konfigurazio lehenetsia: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "Itzali: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Gorde uneko konfigurazioa lehenetsi bezala: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Ezarri erabiltzaile interfaze lokala: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Eguneratu Internet bidez: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "Zeru kultura: "
+
+#~ msgid "Landscape: "
+#~ msgstr "Paisaia: "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Eguzki Sistemako Gorputza: "

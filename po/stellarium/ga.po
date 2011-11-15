@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-13 22:43+0700\n"
+"POT-Creation-Date: 2011-11-15 00:02+0200\n"
 "PO-Revision-Date: 2011-01-11 17:45+0000\n"
 "Last-Translator: Seanan <Unknown>\n"
 "Language-Team: Irish <ga@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-14 04:49+0000\n"
-"X-Generator: Launchpad (build 14277)\n"
+"X-Launchpad-Export-Date: 2011-11-15 05:00+0000\n"
+"X-Generator: Launchpad (build 14291)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
 msgid "Meridian"
@@ -793,7 +793,7 @@ msgstr ""
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:367
+#: src/gui/LocationDialog.cpp:369
 msgid "New Location"
 msgstr "Suíomh Nua"
 
@@ -1270,284 +1270,6 @@ msgstr ""
 #: src/translations.h:149
 msgid "Western"
 msgstr "Iartharach"
-
-#: src/translations.h:153
-msgid "Set Location "
-msgstr "Socraigh an Suíomh "
-
-#: src/translations.h:154
-msgid "Set Time "
-msgstr "Socraigh an tAm "
-
-#: src/translations.h:155
-msgid "General "
-msgstr "Coiteann "
-
-#: src/translations.h:156
-msgid "Stars "
-msgstr "Réatla "
-
-#: src/translations.h:157
-msgid "Colors "
-msgstr "Dathanna "
-
-#: src/translations.h:158
-msgid "Effects "
-msgstr "Tionchair "
-
-#: src/translations.h:159
-msgid "Scripts "
-msgstr "Scripteanna "
-
-#: src/translations.h:160
-msgid "Administration "
-msgstr "Riarachán "
-
-#: src/translations.h:162
-msgid "Latitude: "
-msgstr "Leithead: "
-
-#: src/translations.h:163
-msgid "Longitude: "
-msgstr "Fad: "
-
-#: src/translations.h:164
-msgid "Altitude (m): "
-msgstr "Airde (m): "
-
-#: src/translations.h:165
-msgid "Solar System Body: "
-msgstr ""
-
-#: src/translations.h:167
-msgid "Sky Time: "
-msgstr "Am na Spéire: "
-
-#: src/translations.h:168
-msgid "Set Time Zone: "
-msgstr ""
-
-#: src/translations.h:169
-msgid "Day keys: "
-msgstr ""
-
-#: src/translations.h:170
-msgid "Calendar"
-msgstr "Féilire"
-
-#: src/translations.h:171
-msgid "Sidereal"
-msgstr ""
-
-#: src/translations.h:172
-msgid "Preset Sky Time: "
-msgstr ""
-
-#: src/translations.h:173
-msgid "Sky Time At Start-up: "
-msgstr ""
-
-#: src/translations.h:174
-msgid "Actual Time"
-msgstr "Am iarbhír"
-
-#: src/translations.h:175
-msgid "Preset Time"
-msgstr "Am Réamhshocraithe"
-
-#: src/translations.h:176
-msgid "Time Display Format: "
-msgstr ""
-
-#: src/translations.h:177
-msgid "Date Display Format: "
-msgstr ""
-
-#: src/translations.h:179
-msgid "Sky Culture: "
-msgstr ""
-
-#: src/translations.h:180
-msgid "Sky Language: "
-msgstr "Teanga na Spéire: "
-
-#: src/translations.h:182
-msgid "Show: "
-msgstr "Taispeáin: "
-
-#: src/translations.h:183
-msgid "Star Value Multiplier: "
-msgstr ""
-
-#: src/translations.h:184
-msgid "Magnitude Sizing Multiplier: "
-msgstr ""
-
-#: src/translations.h:185
-msgid "Maximum Magnitude to Label: "
-msgstr ""
-
-#: src/translations.h:186
-msgid "Twinkling: "
-msgstr "Drithliú: "
-
-#: src/translations.h:187
-msgid "Limiting Magnitude: "
-msgstr ""
-
-#: src/translations.h:189
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
-msgid "Constellation Lines"
-msgstr "Línte na realtbhuíonta"
-
-#: src/translations.h:190
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
-msgid "Constellation Names"
-msgstr "Ainmneacha na réaltbhuíonta"
-
-#: src/translations.h:191
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
-msgid "Constellation Art Intensity"
-msgstr ""
-
-#: src/translations.h:192
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:243
-msgid "Constellation Boundaries"
-msgstr "Teorainneacha na Réaltbhuíne"
-
-#: src/translations.h:193
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:251
-msgid "Cardinal Points"
-msgstr "Príomhairde"
-
-#: src/translations.h:194
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
-msgid "Planet Names"
-msgstr "Ainmneacha na bpláinéad"
-
-#: src/translations.h:195
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
-msgid "Planet Orbits"
-msgstr "Fithisí na bpláinéad"
-
-#: src/translations.h:196
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
-msgid "Planet Trails"
-msgstr "Rianta na bpláinéad"
-
-#: src/translations.h:197
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
-msgid "Meridian Line"
-msgstr "Líne na fadlíne"
-
-#: src/translations.h:198
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
-msgid "Azimuthal Grid"
-msgstr "Eangach asamatach"
-
-#: src/translations.h:199
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
-msgid "Equatorial Grid"
-msgstr "Eangach mheánchriosach"
-
-#: src/translations.h:200
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:283
-msgid "Equator Line"
-msgstr "Líne an mheánchiorcail"
-
-#: src/translations.h:201
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
-msgid "Ecliptic Line"
-msgstr "Líne an éicliptigh"
-
-#: src/translations.h:202
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
-msgid "Nebula Names"
-msgstr "Ainmneacha na réaltnéalta"
-
-#: src/translations.h:203
-msgid "Nebula Circles"
-msgstr "Ciorcail na réaltnéalta"
-
-#: src/translations.h:205
-msgid "Light Pollution Luminance: "
-msgstr ""
-
-#: src/translations.h:206
-msgid "Landscape: "
-msgstr "Tírdhreach: "
-
-#: src/translations.h:207
-msgid "Manual zoom: "
-msgstr "Súmáil láimhe: "
-
-#: src/translations.h:208
-msgid "Object Sizing Rule: "
-msgstr ""
-
-#: src/translations.h:209
-msgid "Magnitude Scaling Multiplier: "
-msgstr ""
-
-#: src/translations.h:210
-msgid "Milky Way intensity: "
-msgstr "Déine an Bhealaigh na Bó Finne "
-
-#: src/translations.h:211
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr ""
-
-#: src/translations.h:212
-msgid "Zoom Duration: "
-msgstr "Aga na sumail "
-
-#: src/translations.h:213
-msgid "Cursor Timeout: "
-msgstr ""
-
-#: src/translations.h:214
-msgid "Correct for light travel time: "
-msgstr ""
-
-#: src/translations.h:216
-msgid "Local Script: "
-msgstr ""
-
-#: src/translations.h:217
-msgid "CD/DVD Script: "
-msgstr ""
-
-#: src/translations.h:218
-msgid "USB Script: "
-msgstr ""
-
-#: src/translations.h:219
-msgid "Arrow down to load list."
-msgstr ""
-
-#: src/translations.h:220
-msgid "Select and exit to run."
-msgstr ""
-
-#: src/translations.h:222
-msgid "Load Default Configuration: "
-msgstr ""
-
-#: src/translations.h:223
-msgid "Save Current Configuration as Default: "
-msgstr ""
-
-#: src/translations.h:224
-msgid "Shut Down: "
-msgstr ""
-
-#: src/translations.h:225
-msgid "Update me via Internet: "
-msgstr ""
-
-#: src/translations.h:226
-msgid "Set UI Locale: "
-msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -3249,8 +2971,8 @@ msgid "Define a time zone"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:372
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:374
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:373
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:375
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
 msgid "Time zone"
 msgstr ""
@@ -3260,13 +2982,13 @@ msgid "Timezone name:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:378
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:379
 msgid "Offset from UTC:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:379
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:380
 msgid " hours"
 msgstr ""
 
@@ -3309,7 +3031,7 @@ msgstr ""
 msgid "Use this definition"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:375
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:376
 msgid ""
 "By default, the time displayed in Stellarium is interpreted as the local "
 "time in the system's time zone, not in the displayed location's time zone. "
@@ -3317,25 +3039,20 @@ msgid ""
 "settings."
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:376
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:377
 msgid "Use system settings (default)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:377
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:378
 msgid "Universal Coordinated Time (UTC)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:380
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
 msgid "(offset = local time - UTC time)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
-msgid "User-defined:"
-msgstr ""
-
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:382
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
-msgid "..."
+msgid "User-defined:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
@@ -3484,13 +3201,69 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
+msgid "Constellation Lines"
+msgstr "Línte na realtbhuíonta"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
+msgid "Constellation Names"
+msgstr "Ainmneacha na réaltbhuíonta"
+
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Constellation Art"
 msgstr ""
 
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:243
+msgid "Constellation Boundaries"
+msgstr "Teorainneacha na Réaltbhuíne"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
+msgid "Constellation Art Intensity"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:251
+msgid "Cardinal Points"
+msgstr "Príomhairde"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
+msgid "Planet Names"
+msgstr "Ainmneacha na bpláinéad"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
+msgid "Planet Orbits"
+msgstr "Fithisí na bpláinéad"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
+msgid "Planet Trails"
+msgstr "Rianta na bpláinéad"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
+msgid "Meridian Line"
+msgstr "Líne na fadlíne"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
+msgid "Azimuthal Grid"
+msgstr "Eangach asamatach"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
+msgid "Equatorial Grid"
+msgstr "Eangach mheánchriosach"
+
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Equatorial J2000 Grid"
 msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:283
+msgid "Equator Line"
+msgstr "Líne an mheánchiorcail"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
+msgid "Ecliptic Line"
+msgstr "Líne an éicliptigh"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
+msgid "Nebula Names"
+msgstr "Ainmneacha na réaltnéalta"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:295
 msgid "Nebula Hints"
@@ -3590,75 +3363,75 @@ msgid ""
 "its online database. Still a work in progress."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Select the type"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Asteroids"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Comets"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Select the source"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Download a list of objects from the Internet"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Select a source from the list:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Or enter a URL:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "paste"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Add this URL to the bookmarks list"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Bookmark title:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "A file containing a list of objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Get orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid "Abort download"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Lists"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Online search"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid ""
 "Query the MPC's <a "
 "href=\"http://www.minorplanetcenter.net/iau/MPEph/MPEph.html\">Minor Planet "
 "&amp; Comet Ephemeris Service</a>:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid ""
 "Only one result will be returned if the query is successful.<br>Both comets "
 "and asteroids can be identified with their number, name or provisional "
@@ -3668,11 +3441,11 @@ msgid ""
 "Comet, but \"Halley\" will return the asteroid (2688) Halley."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Objects found"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid ""
 "Mark the objects you wish to be imported. In <i>italic</i> are listed names "
 "that match the names of already loaded objects. In <b>bold</b> are listed "
@@ -3681,31 +3454,31 @@ msgid ""
 "may cause Stellarium to run slowly."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
 msgid "Overwrite existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
 msgid "Update existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:549
 msgid "Update only the orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:550
 msgid "Mark all"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:549
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:551
 msgid "Mark none"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:550
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:552
 msgid "Discard"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:551
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:553
 msgid "Add objects"
 msgstr ""
 
@@ -3822,3 +3595,72 @@ msgstr ""
 #, qt-format
 msgid "Type: %1"
 msgstr ""
+
+#~ msgid "Colors "
+#~ msgstr "Dathanna "
+
+#~ msgid "Scripts "
+#~ msgstr "Scripteanna "
+
+#~ msgid "Administration "
+#~ msgstr "Riarachán "
+
+#~ msgid "Latitude: "
+#~ msgstr "Leithead: "
+
+#~ msgid "Longitude: "
+#~ msgstr "Fad: "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Airde (m): "
+
+#~ msgid "Actual Time"
+#~ msgstr "Am iarbhír"
+
+#~ msgid "Show: "
+#~ msgstr "Taispeáin: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "Drithliú: "
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Ciorcail na réaltnéalta"
+
+#~ msgid "Landscape: "
+#~ msgstr "Tírdhreach: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Súmáil láimhe: "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Déine an Bhealaigh na Bó Finne "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Aga na sumail "
+
+#~ msgid "General "
+#~ msgstr "Coiteann "
+
+#~ msgid "Stars "
+#~ msgstr "Réatla "
+
+#~ msgid "Set Location "
+#~ msgstr "Socraigh an Suíomh "
+
+#~ msgid "Effects "
+#~ msgstr "Tionchair "
+
+#~ msgid "Set Time "
+#~ msgstr "Socraigh an tAm "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Am na Spéire: "
+
+#~ msgid "Calendar"
+#~ msgstr "Féilire"
+
+#~ msgid "Sky Language: "
+#~ msgstr "Teanga na Spéire: "
+
+#~ msgid "Preset Time"
+#~ msgstr "Am Réamhshocraithe"

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-13 22:43+0700\n"
+"POT-Creation-Date: 2011-11-15 00:02+0200\n"
 "PO-Revision-Date: 2011-11-13 23:04+0000\n"
 "Last-Translator: Bogdan Marinov <daggerstab@gmail.com>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-14 04:47+0000\n"
-"X-Generator: Launchpad (build 14277)\n"
+"X-Launchpad-Export-Date: 2011-11-15 04:59+0000\n"
+"X-Generator: Launchpad (build 14291)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
 msgid "Meridian"
@@ -832,7 +832,7 @@ msgstr "Изключителна честота на Леонидите"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Най-високата достигната честота (Леонидите през 1966)"
 
-#: src/gui/LocationDialog.cpp:367
+#: src/gui/LocationDialog.cpp:369
 msgid "New Location"
 msgstr "Ново Място"
 
@@ -1309,284 +1309,6 @@ msgstr "Тупи-гуарани"
 #: src/translations.h:149
 msgid "Western"
 msgstr "Западна"
-
-#: src/translations.h:153
-msgid "Set Location "
-msgstr "Задаване на местоположение "
-
-#: src/translations.h:154
-msgid "Set Time "
-msgstr "Задаване на време "
-
-#: src/translations.h:155
-msgid "General "
-msgstr "Главно "
-
-#: src/translations.h:156
-msgid "Stars "
-msgstr "Звезди "
-
-#: src/translations.h:157
-msgid "Colors "
-msgstr "Цветове "
-
-#: src/translations.h:158
-msgid "Effects "
-msgstr "Ефекти "
-
-#: src/translations.h:159
-msgid "Scripts "
-msgstr "Скриптове "
-
-#: src/translations.h:160
-msgid "Administration "
-msgstr "Администрация "
-
-#: src/translations.h:162
-msgid "Latitude: "
-msgstr "Г.ш.: "
-
-#: src/translations.h:163
-msgid "Longitude: "
-msgstr "Г.д.: "
-
-#: src/translations.h:164
-msgid "Altitude (m): "
-msgstr "Надморска височина (m): "
-
-#: src/translations.h:165
-msgid "Solar System Body: "
-msgstr "Тяло от слънчевата система: "
-
-#: src/translations.h:167
-msgid "Sky Time: "
-msgstr "Небесно време: "
-
-#: src/translations.h:168
-msgid "Set Time Zone: "
-msgstr "Задаване на часова зона: "
-
-#: src/translations.h:169
-msgid "Day keys: "
-msgstr "Клавиши за дните: "
-
-#: src/translations.h:170
-msgid "Calendar"
-msgstr "Календар"
-
-#: src/translations.h:171
-msgid "Sidereal"
-msgstr "Астрономически"
-
-#: src/translations.h:172
-msgid "Preset Sky Time: "
-msgstr "Зададено небесно време: "
-
-#: src/translations.h:173
-msgid "Sky Time At Start-up: "
-msgstr "Небесно време при стартиране: "
-
-#: src/translations.h:174
-msgid "Actual Time"
-msgstr "Настоящо време"
-
-#: src/translations.h:175
-msgid "Preset Time"
-msgstr "Зададено време"
-
-#: src/translations.h:176
-msgid "Time Display Format: "
-msgstr "Формат на времето: "
-
-#: src/translations.h:177
-msgid "Date Display Format: "
-msgstr "Формат на датата: "
-
-#: src/translations.h:179
-msgid "Sky Culture: "
-msgstr "Звездна култура: "
-
-#: src/translations.h:180
-msgid "Sky Language: "
-msgstr "Език на небесните тела: "
-
-#: src/translations.h:182
-msgid "Show: "
-msgstr "Показване: "
-
-#: src/translations.h:183
-msgid "Star Value Multiplier: "
-msgstr "Множител на звездната стойност: "
-
-#: src/translations.h:184
-msgid "Magnitude Sizing Multiplier: "
-msgstr "Множител за осъразмеряване величината: "
-
-#: src/translations.h:185
-msgid "Maximum Magnitude to Label: "
-msgstr "Максимална величина за именуване: "
-
-#: src/translations.h:186
-msgid "Twinkling: "
-msgstr "Трептене: "
-
-#: src/translations.h:187
-msgid "Limiting Magnitude: "
-msgstr "Максимална величина: "
-
-#: src/translations.h:189
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
-msgid "Constellation Lines"
-msgstr "Линии на съзвездията"
-
-#: src/translations.h:190
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
-msgid "Constellation Names"
-msgstr "Имена на съзвездията"
-
-#: src/translations.h:191
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
-msgid "Constellation Art Intensity"
-msgstr "Наситеност на илюстрациите на съзвездията"
-
-#: src/translations.h:192
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:243
-msgid "Constellation Boundaries"
-msgstr "Граници на съзвездията"
-
-#: src/translations.h:193
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:251
-msgid "Cardinal Points"
-msgstr "Посоки на света"
-
-#: src/translations.h:194
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
-msgid "Planet Names"
-msgstr "Имена на планетите"
-
-#: src/translations.h:195
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
-msgid "Planet Orbits"
-msgstr "Траектории на планети"
-
-#: src/translations.h:196
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
-msgid "Planet Trails"
-msgstr "Планетни следи"
-
-#: src/translations.h:197
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
-msgid "Meridian Line"
-msgstr "Линия на меридиана на наблюдателя"
-
-#: src/translations.h:198
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
-msgid "Azimuthal Grid"
-msgstr "Азимутна мрежа"
-
-#: src/translations.h:199
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
-msgid "Equatorial Grid"
-msgstr "Екваториална мрежа"
-
-#: src/translations.h:200
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:283
-msgid "Equator Line"
-msgstr "Линия на екватора"
-
-#: src/translations.h:201
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
-msgid "Ecliptic Line"
-msgstr "Линия на еклиптиката"
-
-#: src/translations.h:202
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
-msgid "Nebula Names"
-msgstr "Имена на мъглявини"
-
-#: src/translations.h:203
-msgid "Nebula Circles"
-msgstr "Кръгове на мъглявините"
-
-#: src/translations.h:205
-msgid "Light Pollution Luminance: "
-msgstr "Яркост при светлинен смог: "
-
-#: src/translations.h:206
-msgid "Landscape: "
-msgstr "Пейзаж: "
-
-#: src/translations.h:207
-msgid "Manual zoom: "
-msgstr "Ръчно приближаване: "
-
-#: src/translations.h:208
-msgid "Object Sizing Rule: "
-msgstr "Правило за оразмеряване на обектите: "
-
-#: src/translations.h:209
-msgid "Magnitude Scaling Multiplier: "
-msgstr "Множител за мащаб на величина: "
-
-#: src/translations.h:210
-msgid "Milky Way intensity: "
-msgstr "Яркост на Млечния път: "
-
-#: src/translations.h:211
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Имена на мъглявини до величина: "
-
-#: src/translations.h:212
-msgid "Zoom Duration: "
-msgstr "Продължителност на увеличението: "
-
-#: src/translations.h:213
-msgid "Cursor Timeout: "
-msgstr "Скриване на курсора след: "
-
-#: src/translations.h:214
-msgid "Correct for light travel time: "
-msgstr "По светлинно време: "
-
-#: src/translations.h:216
-msgid "Local Script: "
-msgstr "Локален скрипт: "
-
-#: src/translations.h:217
-msgid "CD/DVD Script: "
-msgstr "Скрипт на CD/DVD: "
-
-#: src/translations.h:218
-msgid "USB Script: "
-msgstr "Скрипт на USB памет: "
-
-#: src/translations.h:219
-msgid "Arrow down to load list."
-msgstr "Стрелка надолу за зареждане на списък"
-
-#: src/translations.h:220
-msgid "Select and exit to run."
-msgstr "Избери и излез, за да започне."
-
-#: src/translations.h:222
-msgid "Load Default Configuration: "
-msgstr "Зареди подразбиращите се настройки: "
-
-#: src/translations.h:223
-msgid "Save Current Configuration as Default: "
-msgstr "Запази текущите настройки като подразбиращи се: "
-
-#: src/translations.h:224
-msgid "Shut Down: "
-msgstr "Затваряне: "
-
-#: src/translations.h:225
-msgid "Update me via Internet: "
-msgstr "Обнови ме чрез интернет: "
-
-#: src/translations.h:226
-msgid "Set UI Locale: "
-msgstr "Задаване на език на интерфейса: "
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -3365,8 +3087,8 @@ msgid "Define a time zone"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:372
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:374
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:373
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:375
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
 msgid "Time zone"
 msgstr ""
@@ -3376,13 +3098,13 @@ msgid "Timezone name:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:378
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:379
 msgid "Offset from UTC:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:379
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:380
 msgid " hours"
 msgstr ""
 
@@ -3425,7 +3147,7 @@ msgstr ""
 msgid "Use this definition"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:375
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:376
 msgid ""
 "By default, the time displayed in Stellarium is interpreted as the local "
 "time in the system's time zone, not in the displayed location's time zone. "
@@ -3433,25 +3155,20 @@ msgid ""
 "settings."
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:376
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:377
 msgid "Use system settings (default)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:377
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:378
 msgid "Universal Coordinated Time (UTC)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:380
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
 msgid "(offset = local time - UTC time)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
-msgid "User-defined:"
-msgstr ""
-
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:382
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
-msgid "..."
+msgid "User-defined:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
@@ -3602,13 +3319,69 @@ msgstr ""
 msgid "Colors"
 msgstr ""
 
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
+msgid "Constellation Lines"
+msgstr "Линии на съзвездията"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
+msgid "Constellation Names"
+msgstr "Имена на съзвездията"
+
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Constellation Art"
 msgstr ""
 
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:243
+msgid "Constellation Boundaries"
+msgstr "Граници на съзвездията"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
+msgid "Constellation Art Intensity"
+msgstr "Наситеност на илюстрациите на съзвездията"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:251
+msgid "Cardinal Points"
+msgstr "Посоки на света"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
+msgid "Planet Names"
+msgstr "Имена на планетите"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
+msgid "Planet Orbits"
+msgstr "Траектории на планети"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
+msgid "Planet Trails"
+msgstr "Планетни следи"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
+msgid "Meridian Line"
+msgstr "Линия на меридиана на наблюдателя"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
+msgid "Azimuthal Grid"
+msgstr "Азимутна мрежа"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
+msgid "Equatorial Grid"
+msgstr "Екваториална мрежа"
+
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Equatorial J2000 Grid"
 msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:283
+msgid "Equator Line"
+msgstr "Линия на екватора"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
+msgid "Ecliptic Line"
+msgstr "Линия на еклиптиката"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
+msgid "Nebula Names"
+msgstr "Имена на мъглявини"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:295
 msgid "Nebula Hints"
@@ -3711,75 +3484,75 @@ msgstr ""
 "от сайта на Центъра за малки планети (MPC) и да търси в неговата он-лайн "
 "база данни. Все още в разработка."
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Select the type"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Asteroids"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Comets"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Select the source"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Download a list of objects from the Internet"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Select a source from the list:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Or enter a URL:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "paste"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Add this URL to the bookmarks list"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Bookmark title:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "A file containing a list of objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Get orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid "Abort download"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Lists"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Online search"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid ""
 "Query the MPC's <a "
 "href=\"http://www.minorplanetcenter.net/iau/MPEph/MPEph.html\">Minor Planet "
 "&amp; Comet Ephemeris Service</a>:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid ""
 "Only one result will be returned if the query is successful.<br>Both comets "
 "and asteroids can be identified with their number, name or provisional "
@@ -3789,11 +3562,11 @@ msgid ""
 "Comet, but \"Halley\" will return the asteroid (2688) Halley."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Objects found"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid ""
 "Mark the objects you wish to be imported. In <i>italic</i> are listed names "
 "that match the names of already loaded objects. In <b>bold</b> are listed "
@@ -3802,31 +3575,31 @@ msgid ""
 "may cause Stellarium to run slowly."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
 msgid "Overwrite existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
 msgid "Update existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:549
 msgid "Update only the orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:550
 msgid "Mark all"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:549
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:551
 msgid "Mark none"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:550
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:552
 msgid "Discard"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:551
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:553
 msgid "Add objects"
 msgstr ""
 
@@ -3949,3 +3722,159 @@ msgstr ""
 #, qt-format
 msgid "Type: %1"
 msgstr "Тип: %1"
+
+#~ msgid "General "
+#~ msgstr "Главно "
+
+#~ msgid "Stars "
+#~ msgstr "Звезди "
+
+#~ msgid "Colors "
+#~ msgstr "Цветове "
+
+#~ msgid "Effects "
+#~ msgstr "Ефекти "
+
+#~ msgid "Scripts "
+#~ msgstr "Скриптове "
+
+#~ msgid "Administration "
+#~ msgstr "Администрация "
+
+#~ msgid "Latitude: "
+#~ msgstr "Г.ш.: "
+
+#~ msgid "Longitude: "
+#~ msgstr "Г.д.: "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Надморска височина (m): "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Тяло от слънчевата система: "
+
+#~ msgid "Preset Time"
+#~ msgstr "Зададено време"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "Формат на времето: "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Формат на датата: "
+
+#~ msgid "Show: "
+#~ msgstr "Показване: "
+
+#~ msgid "Landscape: "
+#~ msgstr "Пейзаж: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Ръчно приближаване: "
+
+#~ msgid "Local Script: "
+#~ msgstr "Локален скрипт: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Зареди подразбиращите се настройки: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Запази текущите настройки като подразбиращи се: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Обнови ме чрез интернет: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Небесно време: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "Трептене: "
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Кръгове на мъглявините"
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Имена на мъглявини до величина: "
+
+#~ msgid "Select and exit to run."
+#~ msgstr "Избери и излез, за да започне."
+
+#~ msgid "Sky Language: "
+#~ msgstr "Език на небесните тела: "
+
+#~ msgid "Calendar"
+#~ msgstr "Календар"
+
+#~ msgid "Sky Culture: "
+#~ msgstr "Звездна култура: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "Стрелка надолу за зареждане на списък"
+
+#~ msgid "Sidereal"
+#~ msgstr "Астрономически"
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Продължителност на увеличението: "
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "Яркост при светлинен смог: "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "Множител за мащаб на величина: "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "Множител на звездната стойност: "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Множител за осъразмеряване величината: "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "Максимална величина: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "По светлинно време: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "Затваряне: "
+
+#~ msgid "Day keys: "
+#~ msgstr "Клавиши за дните: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Правило за оразмеряване на обектите: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Задаване на език на интерфейса: "
+
+#~ msgid "USB Script: "
+#~ msgstr "Скрипт на USB памет: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Скриване на курсора след: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Максимална величина за именуване: "
+
+#~ msgid "Set Location "
+#~ msgstr "Задаване на местоположение "
+
+#~ msgid "Set Time "
+#~ msgstr "Задаване на време "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Задаване на часова зона: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Зададено небесно време: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Небесно време при стартиране: "
+
+#~ msgid "Actual Time"
+#~ msgstr "Настоящо време"
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Яркост на Млечния път: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "Скрипт на CD/DVD: "
