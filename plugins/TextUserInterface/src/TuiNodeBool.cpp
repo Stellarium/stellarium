@@ -71,19 +71,25 @@ TuiNodeResponse TuiNodeBool::handleEditingKey(int key)
 
 QString TuiNodeBool::getDisplayText() 
 {
+	// TODO: The label/value separation needs to be reworked. This way of using
+	// the colon is not i18n-friendly. --BM
+	QString stringOn = q_("On");
+	QString stringOff = q_("Off");
+	QString value;
 	if (!editing)
 	{
 		if (state)
-			return displayText + QString(":  %1").arg(q_("On"));
+			value = QString(":  %1").arg(stringOn);
 		else
-			return displayText + QString(":  %1").arg(q_("Off"));
+			value = QString(":  %1").arg(stringOff);
 	}
 	else
 	{
 		if (state)
-			return displayText + QString(": >%1<").arg(q_("On"));
+			value = QString(": >%1<").arg(stringOn);
 		else
-			return displayText + QString(": >%1<").arg(q_("Off"));
+			value = QString(": >%1<").arg(stringOff);
 	}
+	return prefixText + q_(displayText) + value;
 }
 
