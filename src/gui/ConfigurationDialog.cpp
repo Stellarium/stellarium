@@ -675,7 +675,7 @@ void ConfigurationDialog::resetStarCatalogControls()
 	ui->downloadCancelButton->setVisible(false);
 	ui->downloadRetryButton->setVisible(false);
 
-	if (idx == catalogConfig.size() && !hasDownloadedStarCatalog)//The size is 9; for "stars8", idx is 9
+	if (idx > catalogConfig.size() && !hasDownloadedStarCatalog)
 	{
 		ui->getStarsButton->setVisible(false);
 		updateStarCatalogControlsText();
