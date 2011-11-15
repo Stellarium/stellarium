@@ -53,8 +53,19 @@ protected:
 private:
 	//! Contains the parsed content of the starsConfig.json file
 	QVariantMap nextStarCatalogToDownload;
-	//! Set the content of the "Star catalog updates" box
-	void refreshStarCatalogButton();
+	//! Reset the content of the "Star catalog updates" box.
+	//! Should be called only during initialization or
+	//! after a download is complete.
+	void resetStarCatalogControls();
+	//! Re-translate the contents of the "Star calalogs" box.
+	//! Update the strings according to the state.
+	void updateStarCatalogControlsText();
+	//! True if a star catalog download is in progress.
+	bool isDownloadingStarCatalog;
+	//! Value set by resetStarCatalogControls().
+	int nextStarCatalogToDownloadIndex;
+	//! Value set by resetStarCatalogControls().
+	int starCatalogsCount;
 	//! True when at least one star catalog has been downloaded successfully this session
 	bool hasDownloadedStarCatalog;
 	QNetworkReply* starCatalogDownloadReply;
