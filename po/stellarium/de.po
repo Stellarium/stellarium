@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-15 00:02+0200\n"
+"POT-Creation-Date: 2011-11-15 19:54+0200\n"
 "PO-Revision-Date: 2011-10-09 19:35+0000\n"
 "Last-Translator: Odin <Unknown>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-15 05:00+0000\n"
+"X-Launchpad-Export-Date: 2011-11-16 05:16+0000\n"
 "X-Generator: Launchpad (build 14291)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -288,55 +288,72 @@ msgstr "(scheinbar)"
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:300 src/gui/ConfigurationDialog.cpp:302
+#: src/gui/ConfigurationDialog.cpp:305 src/gui/ConfigurationDialog.cpp:307
 msgid "Select screenshot directory"
 msgstr "Screenshot-Verzeichnis auswählen"
 
-#: src/gui/ConfigurationDialog.cpp:470
+#: src/gui/ConfigurationDialog.cpp:475
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Anfängliches Gesichtsfeld: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:478
+#: src/gui/ConfigurationDialog.cpp:483
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Anfängliche Blickrichtung in Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:517
+#: src/gui/ConfigurationDialog.cpp:522
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:211
 msgid "Authors"
 msgstr "Autoren"
 
-#: src/gui/ConfigurationDialog.cpp:521 src/gui/ViewDialog.cpp:372
+#: src/gui/ConfigurationDialog.cpp:526 src/gui/ViewDialog.cpp:372
 msgid "Contact"
 msgstr "Ansprechpartner"
 
-#: src/gui/ConfigurationDialog.cpp:596
+#: src/gui/ConfigurationDialog.cpp:601
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:597
+#: src/gui/ConfigurationDialog.cpp:602
 msgid "License"
 msgstr "Lizenz"
 
-#: src/gui/ConfigurationDialog.cpp:626
+#: src/gui/ConfigurationDialog.cpp:631
 msgid "Running script: "
 msgstr "Ausgeführtes Skript: "
 
-#: src/gui/ConfigurationDialog.cpp:633
+#: src/gui/ConfigurationDialog.cpp:638
 msgid "Running script: [none]"
 msgstr "Ausgeführtes Skript: [keines]"
 
-#: src/gui/ConfigurationDialog.cpp:676
-msgid "Finished downloading all star catalogs!"
-msgstr "Alle Sternkataloge sind heruntergeladen!"
+#: src/gui/ConfigurationDialog.cpp:707
+msgid ""
+"Finished downloading new star catalogs!\n"
+"Restart Stellarium to display them."
+msgstr ""
+"Herunterladen neuer Sternkataloge beendet!\n"
+"Starten Sie Stellarium neu, um sie anzuzeigen."
 
-#: src/gui/ConfigurationDialog.cpp:685
+#: src/gui/ConfigurationDialog.cpp:711
+msgid "All available star catalogs have been installed."
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:716
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Empfange Katalog %1 von %2"
 
-#: src/gui/ConfigurationDialog.cpp:687
+#: src/gui/ConfigurationDialog.cpp:723
+#, qt-format
+msgid ""
+"Downloading %1...\n"
+"(You can close this window.)"
+msgstr ""
+"Lade %1...\n"
+"(Sie können dieses Fenster schließen.)"
+
+#: src/gui/ConfigurationDialog.cpp:730
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -347,15 +364,7 @@ msgstr ""
 "Anzahl der Sterne: %2 Millionen\n"
 "Magnitudenspanne: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:696
-msgid ""
-"Finished downloading new star catalogs!\n"
-"Restart Stellarium to display them."
-msgstr ""
-"Herunterladen neuer Sternkataloge beendet!\n"
-"Starten Sie Stellarium neu, um sie anzuzeigen."
-
-#: src/gui/ConfigurationDialog.cpp:734 src/gui/ConfigurationDialog.cpp:768
+#: src/gui/ConfigurationDialog.cpp:773 src/gui/ConfigurationDialog.cpp:809
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -364,20 +373,11 @@ msgstr ""
 "Fehler beim Herunterladen von %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:739
-#, qt-format
-msgid ""
-"Downloading %1...\n"
-"(You can close this window.)"
-msgstr ""
-"Lade %1...\n"
-"(Sie können dieses Fenster schließen.)"
-
-#: src/gui/ConfigurationDialog.cpp:819
+#: src/gui/ConfigurationDialog.cpp:861
 msgid "Verifying file integrity..."
 msgstr "Überprüfe Dateiintegrität..."
 
-#: src/gui/ConfigurationDialog.cpp:823
+#: src/gui/ConfigurationDialog.cpp:865
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1710,47 +1710,47 @@ msgstr "Benutze diese Sternbilddarstellung als Standardvorgabe"
 msgid "Visible"
 msgstr "Sichtbar"
 
-#: src/ui_configurationDialog.h:748
+#: src/ui_configurationDialog.h:752
 msgid "Configuration"
 msgstr "Konfiguration"
 
-#: src/ui_configurationDialog.h:750
+#: src/ui_configurationDialog.h:754
 msgid "Program language"
 msgstr "Programmsprache"
 
-#: src/ui_configurationDialog.h:751
+#: src/ui_configurationDialog.h:755
 msgid "Selected object information"
 msgstr "Informationen über das angewählte Objekt"
 
-#: src/ui_configurationDialog.h:753
+#: src/ui_configurationDialog.h:757
 msgid "Display all information available"
 msgstr "jede verfügbare Information anzeigen"
 
-#: src/ui_configurationDialog.h:755
+#: src/ui_configurationDialog.h:759
 msgid "All available"
 msgstr "Alles verfügbare"
 
-#: src/ui_configurationDialog.h:757
+#: src/ui_configurationDialog.h:761
 msgid "Display less information"
 msgstr "weniger Information anzeigen"
 
-#: src/ui_configurationDialog.h:759
+#: src/ui_configurationDialog.h:763
 msgid "Short"
 msgstr "Kurz"
 
-#: src/ui_configurationDialog.h:761
+#: src/ui_configurationDialog.h:765
 msgid "Display no information"
 msgstr "keine Information anzeigen"
 
-#: src/ui_configurationDialog.h:763
+#: src/ui_configurationDialog.h:767
 msgid "None"
 msgstr "Ohne"
 
-#: src/ui_configurationDialog.h:764
+#: src/ui_configurationDialog.h:768
 msgid "Default options"
 msgstr "Standardeinstellungen"
 
-#: src/ui_configurationDialog.h:766
+#: src/ui_configurationDialog.h:770
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -1758,20 +1758,20 @@ msgstr ""
 "Die Einstellungen, die während dieser Sitzung geändert wurden, speichern, um "
 "sie auch beim nächsten Programmstart zu verwenden."
 
-#: src/ui_configurationDialog.h:768
+#: src/ui_configurationDialog.h:772
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:383
 msgid "Save settings"
 msgstr "Einstellungen speichern"
 
-#: src/ui_configurationDialog.h:770
+#: src/ui_configurationDialog.h:774
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Die Standardeinstellungen von Stellarium wieder herstellen."
 
-#: src/ui_configurationDialog.h:772
+#: src/ui_configurationDialog.h:776
 msgid "Restore defaults"
 msgstr "Standardeinstellungen wiederherstellen"
 
-#: src/ui_configurationDialog.h:773
+#: src/ui_configurationDialog.h:777
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -1782,55 +1782,47 @@ msgstr ""
 "schließt das derzeitige Blickfeld und die Blickrichtung für den nächsten "
 "Neustart mit ein."
 
-#: src/ui_configurationDialog.h:775
+#: src/ui_configurationDialog.h:779
 msgid "The width of your view when Stellarium starts"
 msgstr "Den Horizont einstellen, mit dem Stellarium startet"
 
-#: src/ui_configurationDialog.h:777
-msgid "Startup FOV: XX"
-msgstr "Anfängliches Gesichtsfeld: XX"
-
-#: src/ui_configurationDialog.h:779
+#: src/ui_configurationDialog.h:782
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Die Richtung, in die Sie sehen, wenn Stellarium startet"
 
-#: src/ui_configurationDialog.h:781
-msgid "Startup direction of view: xxxx"
-msgstr "Anfängliche Blickrichtung: xxxx"
-
-#: src/ui_configurationDialog.h:782
+#: src/ui_configurationDialog.h:784
 msgid "Control"
 msgstr "Steuerung"
 
-#: src/ui_configurationDialog.h:784
+#: src/ui_configurationDialog.h:786
 msgid "Allow keyboard to pan and zoom"
 msgstr "Tastatur zum Schwenken und Zoomen verwenden"
 
-#: src/ui_configurationDialog.h:786
+#: src/ui_configurationDialog.h:788
 msgid "Enable keyboard navigation"
 msgstr "Tastaturnavigation aktivieren"
 
-#: src/ui_configurationDialog.h:788
+#: src/ui_configurationDialog.h:790
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "Maus zum Schwenken (Ziehen) und Zoomen (Mausrad) verwenden"
 
-#: src/ui_configurationDialog.h:790
+#: src/ui_configurationDialog.h:792
 msgid "Enable mouse navigation"
 msgstr "Mausnavigation aktivieren"
 
-#: src/ui_configurationDialog.h:791
+#: src/ui_configurationDialog.h:793
 msgid "Startup date and time"
 msgstr "Datum und Uhrzeit beim Programmstart"
 
-#: src/ui_configurationDialog.h:793
+#: src/ui_configurationDialog.h:795
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Startet Stellarium mit Systemdatum und -zeit"
 
-#: src/ui_configurationDialog.h:795
+#: src/ui_configurationDialog.h:797
 msgid "System date and time"
 msgstr "Systemdatum und -zeit"
 
-#: src/ui_configurationDialog.h:797
+#: src/ui_configurationDialog.h:799
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -1838,48 +1830,48 @@ msgstr ""
 "Setzt die von Stellarium beim Start verwendete Zeit auf das nächste "
 "Vorkommen dieser Tageszeit"
 
-#: src/ui_configurationDialog.h:799
+#: src/ui_configurationDialog.h:801
 msgid "System date at:"
 msgstr "Systemzeit bei:"
 
-#: src/ui_configurationDialog.h:801
+#: src/ui_configurationDialog.h:803
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr ""
 "Setzt das Datum und die Zeit beim Start von Stellarium auf einen festen Wert"
 
-#: src/ui_configurationDialog.h:803
+#: src/ui_configurationDialog.h:805
 msgid "Other:"
 msgstr "Andere:"
 
-#: src/ui_configurationDialog.h:804
+#: src/ui_configurationDialog.h:806
 msgid "use current"
 msgstr "Aktuelle Zeit verwenden"
 
-#: src/ui_configurationDialog.h:805
+#: src/ui_configurationDialog.h:807
 msgid "Other"
 msgstr "Andere"
 
-#: src/ui_configurationDialog.h:807
+#: src/ui_configurationDialog.h:809
 msgid "Hides the mouse cursor when inactive"
 msgstr "Mauszeiger ausblenden, wenn inaktiv"
 
-#: src/ui_configurationDialog.h:809
+#: src/ui_configurationDialog.h:811
 msgid "Mouse cursor timeout (seconds):"
 msgstr "Mauszeiger-Timeout (Sekunden):"
 
-#: src/ui_configurationDialog.h:811
+#: src/ui_configurationDialog.h:813
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Schaltflächen für horizontale und vertikale Spiegelung vertauschen."
 
-#: src/ui_configurationDialog.h:813
+#: src/ui_configurationDialog.h:815
 msgid "Show flip buttons"
 msgstr "Zeige Spiegelungsschaltflächen"
 
-#: src/ui_configurationDialog.h:814
+#: src/ui_configurationDialog.h:816
 msgid "Planetarium options"
 msgstr "Planetariumseinstellungen"
 
-#: src/ui_configurationDialog.h:816
+#: src/ui_configurationDialog.h:818
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -1888,19 +1880,19 @@ msgstr ""
 "Stellarium auf einen kugelförmigen Spiegel projiziert wird (für ein "
 "einfaches Planetarium)."
 
-#: src/ui_configurationDialog.h:818
+#: src/ui_configurationDialog.h:820
 msgid "Spheric mirror distortion"
 msgstr "Verzerrung für sphärische Projektion"
 
-#: src/ui_configurationDialog.h:820
+#: src/ui_configurationDialog.h:822
 msgid "Align labels with the horizon"
 msgstr "Beschriftung am Horizont ausrichten"
 
-#: src/ui_configurationDialog.h:822
+#: src/ui_configurationDialog.h:824
 msgid "Gravity labels"
 msgstr "Schwerkraftbeschriftung"
 
-#: src/ui_configurationDialog.h:824
+#: src/ui_configurationDialog.h:826
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -1908,58 +1900,50 @@ msgstr ""
 "Mit dieser Option stellt die Taste \"automatisch herauszoomen\" auch die "
 "anfängliche Blickrichtung ein."
 
-#: src/ui_configurationDialog.h:826
+#: src/ui_configurationDialog.h:828
 msgid "Auto zoom out returns to initial direction of view"
 msgstr ""
 "\"Automatisch herauszoomen\" kehrt zur anfänglichen Blickrichtung zurück"
 
-#: src/ui_configurationDialog.h:828
+#: src/ui_configurationDialog.h:830
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Alles bis auf einen zentralen Kreis in der Hauptansicht ausblenden"
 
-#: src/ui_configurationDialog.h:830
+#: src/ui_configurationDialog.h:832
 msgid "Disc viewport"
 msgstr "Scheibenförmiges Darstellungsfeld"
 
-#: src/ui_configurationDialog.h:832
+#: src/ui_configurationDialog.h:834
 msgid "Hide other constellations when you click one"
 msgstr "Die anderen Konstellationen verbergen, wenn Sie auf eine klicken"
 
-#: src/ui_configurationDialog.h:834
+#: src/ui_configurationDialog.h:836
 msgid "Select single constellation"
 msgstr "Wähle ein einzelnes Sternbild"
 
-#: src/ui_configurationDialog.h:835
+#: src/ui_configurationDialog.h:837
 msgid "Screenshots"
 msgstr "Screenshots"
 
-#: src/ui_configurationDialog.h:836
+#: src/ui_configurationDialog.h:838
 msgid "Screenshot Directory"
 msgstr "Screenshot Verzeichnis"
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:840
 msgid "Invert colors"
 msgstr "Farben invertieren"
 
-#: src/ui_configurationDialog.h:839
+#: src/ui_configurationDialog.h:841
 msgid "Star catalog updates"
 msgstr "Neue Sternkataloge"
 
-#: src/ui_configurationDialog.h:841
+#: src/ui_configurationDialog.h:843
 msgid "Click here to start downloading"
 msgstr "Auf diese Schaltfläche klicken, um den Download-Vorgang zu starten"
 
-#: src/ui_configurationDialog.h:843
-msgid "Get catalog x of y"
-msgstr "Katalog x von y holen"
-
-#: src/ui_configurationDialog.h:844
+#: src/ui_configurationDialog.h:845
 msgid "Download this file to view even more stars"
 msgstr "Laden Sie diese Datei herunter, um noch mehr Sterne zu sehen"
-
-#: src/ui_configurationDialog.h:845
-msgid "xxx"
-msgstr "xxx"
 
 #: src/ui_configurationDialog.h:847
 msgid "Restart the download"
@@ -3800,6 +3784,18 @@ msgstr "Art: %1"
 #~ msgid "Light Pollution Luminance: "
 #~ msgstr "Stärke der Lichtverschmutzung: "
 
+#~ msgid "Startup FOV: XX"
+#~ msgstr "Anfängliches Gesichtsfeld: XX"
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "Anfängliche Blickrichtung: xxxx"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "Katalog x von y holen"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
 #~ msgid "Star Value Multiplier: "
 #~ msgstr "Sternwerte Multiplikator "
 
@@ -3835,6 +3831,9 @@ msgstr "Art: %1"
 
 #~ msgid "Set UI Locale: "
 #~ msgstr "Setze Menüsprache: "
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "Alle Sternkataloge sind heruntergeladen!"
 
 #~ msgid "Preset Time"
 #~ msgstr "Aktuelle Zeit"

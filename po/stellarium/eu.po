@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-15 00:02+0200\n"
-"PO-Revision-Date: 2011-11-15 01:20+0000\n"
+"POT-Creation-Date: 2011-11-15 19:54+0200\n"
+"PO-Revision-Date: 2011-11-15 16:40+0000\n"
 "Last-Translator: Asier Iturralde Sarasola <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-15 04:58+0000\n"
+"X-Launchpad-Export-Date: 2011-11-16 05:14+0000\n"
 "X-Generator: Launchpad (build 14291)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -284,55 +284,72 @@ msgstr "(itxurazkoa)"
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:300 src/gui/ConfigurationDialog.cpp:302
+#: src/gui/ConfigurationDialog.cpp:305 src/gui/ConfigurationDialog.cpp:307
 msgid "Select screenshot directory"
 msgstr "Hautatu pantaila-argazkien karpeta"
 
-#: src/gui/ConfigurationDialog.cpp:470
+#: src/gui/ConfigurationDialog.cpp:475
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Hasierako ikuseremua: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:478
+#: src/gui/ConfigurationDialog.cpp:483
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Hasierako ikuspuntua Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:517
+#: src/gui/ConfigurationDialog.cpp:522
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:211
 msgid "Authors"
 msgstr "Egileak"
 
-#: src/gui/ConfigurationDialog.cpp:521 src/gui/ViewDialog.cpp:372
+#: src/gui/ConfigurationDialog.cpp:526 src/gui/ViewDialog.cpp:372
 msgid "Contact"
 msgstr "Kontaktua"
 
-#: src/gui/ConfigurationDialog.cpp:596
+#: src/gui/ConfigurationDialog.cpp:601
 msgid "Author"
 msgstr "Egilea"
 
-#: src/gui/ConfigurationDialog.cpp:597
+#: src/gui/ConfigurationDialog.cpp:602
 msgid "License"
 msgstr "Lizentzia"
 
-#: src/gui/ConfigurationDialog.cpp:626
+#: src/gui/ConfigurationDialog.cpp:631
 msgid "Running script: "
 msgstr "Scripta exekutatzen: "
 
-#: src/gui/ConfigurationDialog.cpp:633
+#: src/gui/ConfigurationDialog.cpp:638
 msgid "Running script: [none]"
 msgstr "Scripta exekutatzen: [bat ere ez]"
 
-#: src/gui/ConfigurationDialog.cpp:676
-msgid "Finished downloading all star catalogs!"
-msgstr "Izar-katalago guztien deskarga burutu da!"
+#: src/gui/ConfigurationDialog.cpp:707
+msgid ""
+"Finished downloading new star catalogs!\n"
+"Restart Stellarium to display them."
+msgstr ""
+"Izar-katalogo berrien deskarga bukatu da!\n"
+"Berrabiarazi Stellarium bistaratzeko."
 
-#: src/gui/ConfigurationDialog.cpp:685
+#: src/gui/ConfigurationDialog.cpp:711
+msgid "All available star catalogs have been installed."
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:716
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Eskuratu katalogoa %2tik %1"
 
-#: src/gui/ConfigurationDialog.cpp:687
+#: src/gui/ConfigurationDialog.cpp:723
+#, qt-format
+msgid ""
+"Downloading %1...\n"
+"(You can close this window.)"
+msgstr ""
+"%1 deskargatzen...\n"
+"(Leiho hau itxi dezakezu.)"
+
+#: src/gui/ConfigurationDialog.cpp:730
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -343,15 +360,7 @@ msgstr ""
 "Izar kopurua: %2 Milioi\n"
 "Magnitude tartea: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:696
-msgid ""
-"Finished downloading new star catalogs!\n"
-"Restart Stellarium to display them."
-msgstr ""
-"Izar-katalogo berrien deskarga bukatu da!\n"
-"Berrabiarazi Stellarium bistaratzeko."
-
-#: src/gui/ConfigurationDialog.cpp:734 src/gui/ConfigurationDialog.cpp:768
+#: src/gui/ConfigurationDialog.cpp:773 src/gui/ConfigurationDialog.cpp:809
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -360,20 +369,11 @@ msgstr ""
 "Errorea %1 deskargatzean:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:739
-#, qt-format
-msgid ""
-"Downloading %1...\n"
-"(You can close this window.)"
-msgstr ""
-"%1 deskargatzen...\n"
-"(Leiho hau itxi dezakezu.)"
-
-#: src/gui/ConfigurationDialog.cpp:819
+#: src/gui/ConfigurationDialog.cpp:861
 msgid "Verifying file integrity..."
 msgstr "Fitxategiaren osotasuna egiaztatzen..."
 
-#: src/gui/ConfigurationDialog.cpp:823
+#: src/gui/ConfigurationDialog.cpp:865
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -557,7 +557,7 @@ msgstr "Konstelazio lerroak"
 
 #: src/gui/StelGui.cpp:100
 msgid "Constellation art"
-msgstr "Konstelazio irudiak"
+msgstr "Konstelazioen irudiak"
 
 #: src/gui/StelGui.cpp:101
 msgid "Constellation labels"
@@ -1180,7 +1180,7 @@ msgstr "Neso"
 
 #: src/translations.h:99
 msgid "Solar System Observer"
-msgstr "Eguzki sistemaren behatzailea"
+msgstr "Eguzki-sistemaren behatzailea"
 
 #. TRANSLATORS: Asteroid (5) Astraea
 #: src/translations.h:102
@@ -1698,53 +1698,53 @@ msgstr "Erabili paisaia hau lehenetsi bezala"
 
 #: src/ui_viewDialog.h:1124
 msgid "Use this sky culture as default"
-msgstr "Erabili zeru kultura hau lehenetsi bezala"
+msgstr "Erabili zeru-kultura hau lehenetsi bezala"
 
 #: src/ui_viewDialog.h:1126
 msgid "Visible"
 msgstr "Ikusgai"
 
-#: src/ui_configurationDialog.h:748
+#: src/ui_configurationDialog.h:752
 msgid "Configuration"
 msgstr "Konfigurazioa"
 
-#: src/ui_configurationDialog.h:750
+#: src/ui_configurationDialog.h:754
 msgid "Program language"
 msgstr "Programaren hizkuntza"
 
-#: src/ui_configurationDialog.h:751
+#: src/ui_configurationDialog.h:755
 msgid "Selected object information"
 msgstr "Hautatutako objektuaren informazioa"
 
-#: src/ui_configurationDialog.h:753
+#: src/ui_configurationDialog.h:757
 msgid "Display all information available"
 msgstr "Erakutsi eskuragarri dagoen informazio guztia"
 
-#: src/ui_configurationDialog.h:755
+#: src/ui_configurationDialog.h:759
 msgid "All available"
 msgstr "Eskuragarri dagoen guztia"
 
-#: src/ui_configurationDialog.h:757
+#: src/ui_configurationDialog.h:761
 msgid "Display less information"
 msgstr "Erakutsi informazio gutxiago"
 
-#: src/ui_configurationDialog.h:759
+#: src/ui_configurationDialog.h:763
 msgid "Short"
 msgstr "Laburra"
 
-#: src/ui_configurationDialog.h:761
+#: src/ui_configurationDialog.h:765
 msgid "Display no information"
 msgstr "Ez erakutsi informaziorik"
 
-#: src/ui_configurationDialog.h:763
+#: src/ui_configurationDialog.h:767
 msgid "None"
 msgstr "Bat ere ez"
 
-#: src/ui_configurationDialog.h:764
+#: src/ui_configurationDialog.h:768
 msgid "Default options"
 msgstr "Aukera lehenetsiak"
 
-#: src/ui_configurationDialog.h:766
+#: src/ui_configurationDialog.h:770
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -1752,20 +1752,20 @@ msgstr ""
 "Gorde saio honetan aldatu dituzun ezarpenak Stellarium abiarazten duzun "
 "hurrengo aldian berdinak izan daitezen"
 
-#: src/ui_configurationDialog.h:768
+#: src/ui_configurationDialog.h:772
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:383
 msgid "Save settings"
 msgstr "Gorde ezarpenak"
 
-#: src/ui_configurationDialog.h:770
+#: src/ui_configurationDialog.h:774
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Berrezarri Stellarium-en jatorrizko ezarpen lehenetsiak"
 
-#: src/ui_configurationDialog.h:772
+#: src/ui_configurationDialog.h:776
 msgid "Restore defaults"
 msgstr "Berrezarri balio lehenetsiak"
 
-#: src/ui_configurationDialog.h:773
+#: src/ui_configurationDialog.h:777
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -1775,56 +1775,48 @@ msgstr ""
 "abiarazten denerako uneko aukera guztiak gordetzeak barne hartzen ditu uneko "
 "ikuseremua eta ikuspegiaren norabidea."
 
-#: src/ui_configurationDialog.h:775
+#: src/ui_configurationDialog.h:779
 msgid "The width of your view when Stellarium starts"
 msgstr "Zure ikuspegiaren zabalera Stellarium abiaraztean"
 
-#: src/ui_configurationDialog.h:777
-msgid "Startup FOV: XX"
-msgstr "Hasierako ikuseremua: XX"
-
-#: src/ui_configurationDialog.h:779
+#: src/ui_configurationDialog.h:782
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Stellarium abiaraztean ikusiko duzun ikuspegiaren norabidea"
 
-#: src/ui_configurationDialog.h:781
-msgid "Startup direction of view: xxxx"
-msgstr "Abioko ikuspegiaren norabidea: xxxx"
-
-#: src/ui_configurationDialog.h:782
+#: src/ui_configurationDialog.h:784
 msgid "Control"
 msgstr "Kontrol"
 
-#: src/ui_configurationDialog.h:784
+#: src/ui_configurationDialog.h:786
 msgid "Allow keyboard to pan and zoom"
 msgstr "Baimendu teklatu bidezko lekualdatzea eta zoom-a"
 
-#: src/ui_configurationDialog.h:786
+#: src/ui_configurationDialog.h:788
 msgid "Enable keyboard navigation"
 msgstr "Gaitu teklatu bidezko nabigazioa"
 
-#: src/ui_configurationDialog.h:788
+#: src/ui_configurationDialog.h:790
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "Baimendu sagu bidezko lekualdatzea (arrastatzea)  eta zoom-a (gurpila)"
 
-#: src/ui_configurationDialog.h:790
+#: src/ui_configurationDialog.h:792
 msgid "Enable mouse navigation"
 msgstr "Gaitu sagu bidezko nabigazioa"
 
-#: src/ui_configurationDialog.h:791
+#: src/ui_configurationDialog.h:793
 msgid "Startup date and time"
 msgstr "Hasierako data eta ordua"
 
-#: src/ui_configurationDialog.h:793
+#: src/ui_configurationDialog.h:795
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Sistemaren data eta orduarekin abiarazten du Stellarium"
 
-#: src/ui_configurationDialog.h:795
+#: src/ui_configurationDialog.h:797
 msgid "System date and time"
 msgstr "Sistemaren data eta ordua"
 
-#: src/ui_configurationDialog.h:797
+#: src/ui_configurationDialog.h:799
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -1832,47 +1824,47 @@ msgstr ""
 "Eguneko ordu hau ezartzen du simulazio ordu bezala Stellariumen hurrengo "
 "saioa abiaraztean"
 
-#: src/ui_configurationDialog.h:799
+#: src/ui_configurationDialog.h:801
 msgid "System date at:"
 msgstr "Sistemaren data:"
 
-#: src/ui_configurationDialog.h:801
+#: src/ui_configurationDialog.h:803
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Erabili data eta ordu zehatz bat Stellarium abiaraztean"
 
-#: src/ui_configurationDialog.h:803
+#: src/ui_configurationDialog.h:805
 msgid "Other:"
 msgstr "Bestelakoa:"
 
-#: src/ui_configurationDialog.h:804
+#: src/ui_configurationDialog.h:806
 msgid "use current"
 msgstr "unekoa erabili"
 
-#: src/ui_configurationDialog.h:805
+#: src/ui_configurationDialog.h:807
 msgid "Other"
 msgstr "Bestelakoa"
 
-#: src/ui_configurationDialog.h:807
+#: src/ui_configurationDialog.h:809
 msgid "Hides the mouse cursor when inactive"
 msgstr "Saguaren erakuslea ezkutatzen du geldirik dagoenean"
 
-#: src/ui_configurationDialog.h:809
+#: src/ui_configurationDialog.h:811
 msgid "Mouse cursor timeout (seconds):"
 msgstr "Saguren erakuslearen ikusmen denbora (segundotan)"
 
-#: src/ui_configurationDialog.h:811
+#: src/ui_configurationDialog.h:813
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Txandakatu irudiak bertikalki eta horizontalki iraultzeko botoiak."
 
-#: src/ui_configurationDialog.h:813
+#: src/ui_configurationDialog.h:815
 msgid "Show flip buttons"
 msgstr "Erakutsi iraultzeko botoiak"
 
-#: src/ui_configurationDialog.h:814
+#: src/ui_configurationDialog.h:816
 msgid "Planetarium options"
 msgstr "Planetario-aukerak"
 
-#: src/ui_configurationDialog.h:816
+#: src/ui_configurationDialog.h:818
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -1880,19 +1872,19 @@ msgstr ""
 "Ispilu esferikoaren distortsioa erabiltzen da Stellarium planetario sistema "
 "merke bateko ispilu esferikoan proiektatzean."
 
-#: src/ui_configurationDialog.h:818
+#: src/ui_configurationDialog.h:820
 msgid "Spheric mirror distortion"
 msgstr "Ispilu esferikoaren distortsioa"
 
-#: src/ui_configurationDialog.h:820
+#: src/ui_configurationDialog.h:822
 msgid "Align labels with the horizon"
 msgstr "Lerrokatu etiketak zerumugarekin"
 
-#: src/ui_configurationDialog.h:822
+#: src/ui_configurationDialog.h:824
 msgid "Gravity labels"
 msgstr "Grabitate etiketak"
 
-#: src/ui_configurationDialog.h:824
+#: src/ui_configurationDialog.h:826
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -1900,58 +1892,50 @@ msgstr ""
 "Gaituta badago, \"zoom-a txikiagotu automatikoki\" botoiak hasierako "
 "ikuspegiaren norabidea ezarriko du baita"
 
-#: src/ui_configurationDialog.h:826
+#: src/ui_configurationDialog.h:828
 msgid "Auto zoom out returns to initial direction of view"
 msgstr ""
 "Zoom txikiagotze automatikoa hasierako ikuspegiaren norabidera itzultzen da"
 
-#: src/ui_configurationDialog.h:828
+#: src/ui_configurationDialog.h:830
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Ezkutatu ikuspegi nagusiaren zentroko zirkulutik kanpo dagoen guztia"
 
-#: src/ui_configurationDialog.h:830
+#: src/ui_configurationDialog.h:832
 msgid "Disc viewport"
 msgstr "Disko leihoa"
 
-#: src/ui_configurationDialog.h:832
+#: src/ui_configurationDialog.h:834
 msgid "Hide other constellations when you click one"
 msgstr "Konstelazio batean klikatzean ezkutatu gainerakoak"
 
-#: src/ui_configurationDialog.h:834
+#: src/ui_configurationDialog.h:836
 msgid "Select single constellation"
 msgstr "Hautatu konstelazio bakar bat"
 
-#: src/ui_configurationDialog.h:835
+#: src/ui_configurationDialog.h:837
 msgid "Screenshots"
 msgstr "Pantaila-argazkiak"
 
-#: src/ui_configurationDialog.h:836
+#: src/ui_configurationDialog.h:838
 msgid "Screenshot Directory"
 msgstr "Pantaila-argazkien direkorioa"
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:840
 msgid "Invert colors"
 msgstr "Alderantzikatu koloreak"
 
-#: src/ui_configurationDialog.h:839
+#: src/ui_configurationDialog.h:841
 msgid "Star catalog updates"
 msgstr "Izar katalogoen eguneraketak"
 
-#: src/ui_configurationDialog.h:841
+#: src/ui_configurationDialog.h:843
 msgid "Click here to start downloading"
 msgstr "Klikatu hemen deskargatzen hasteko"
 
-#: src/ui_configurationDialog.h:843
-msgid "Get catalog x of y"
-msgstr "Lortu y-ren x katalogoa"
-
-#: src/ui_configurationDialog.h:844
+#: src/ui_configurationDialog.h:845
 msgid "Download this file to view even more stars"
 msgstr "Deskargatu fitxategi hau izar gehiago ikusteko"
-
-#: src/ui_configurationDialog.h:845
-msgid "xxx"
-msgstr "xxx"
 
 #: src/ui_configurationDialog.h:847
 msgid "Restart the download"
@@ -2532,7 +2516,7 @@ msgstr "Bistaratu hautatutako satelitea(k)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:636
 msgid "Displayed"
-msgstr ""
+msgstr "Bistaratuta"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:638
 msgid "Display orbit line(s) for the selected satellite(s)"
@@ -2822,54 +2806,58 @@ msgstr "J2000 (lehenetsia)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "Equinox of the date (JNow)"
-msgstr ""
+msgstr "Dataren ekinokzioa (JNow)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:494
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
+"Saiatu automatikoki teleskopioa abiarazten edo konexioa ezartzen Stellarium "
+"abiaraztean"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
 msgid "Start/connect at startup"
-msgstr ""
+msgstr "Abiarazi/konektatu abioan"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Device settings"
-msgstr ""
+msgstr "Gailuaren ezarpenak"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Serial port:"
-msgstr ""
+msgstr "Serieko ataka:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Device model:"
-msgstr ""
+msgstr "Gailuaren modeloa:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Connection settings"
-msgstr ""
+msgstr "Konexioaren ezarpenak:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Host:"
-msgstr ""
+msgstr "Ostalaria:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:503
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr ""
+"Teleskopio-zerbitzaria ostatatzen duen makinaren ostalari-izena edo IPv4 "
+"helbidea"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:505
 msgid "localhost"
-msgstr ""
+msgstr "ostalari lokala"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "TCP port:"
-msgstr ""
+msgstr "TCP ataka:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "User interface settings"
-msgstr ""
+msgstr "Erabiltzaile-interfazearen ezarpenak"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
 msgid "Show circles with fixed angular size around the telescope reticle"
@@ -2881,7 +2869,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:512
 msgid "Circle size(s):"
-msgstr ""
+msgstr "Zirkuluen tamaina(s):"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:514
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
@@ -2894,39 +2882,39 @@ msgstr "Ados"
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:383
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Telescopes"
-msgstr ""
+msgstr "Teleskopioak"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:385
 msgid "Telescopes Controlled"
-msgstr ""
+msgstr "Kontrolatutako teleskopioak"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:388
 msgid "Configure the selected telescope"
-msgstr ""
+msgstr "Konfiguratu hautatutako teleskopioa"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:390
 msgid "Configure"
-msgstr ""
+msgstr "Konfiguratu"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 msgid "Add a new telescope"
-msgstr ""
+msgstr "Gehitu teleskopio berri bat"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:394
 msgid "Add"
-msgstr ""
+msgstr "Gehitu"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 msgid "Remove the selected telescope"
-msgstr ""
+msgstr "Kendu hautatutako teleskopioa"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:400
 msgid "GUI"
-msgstr ""
+msgstr "GUI-a"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Show telescope labels"
-msgstr ""
+msgstr "Erakutsi teleskopioen etiketak"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:402
 msgid "Show telescope reticles"
@@ -2938,7 +2926,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
 msgid "Files"
-msgstr ""
+msgstr "Fitxategiak"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Log telescope driver messages to files"
@@ -2950,7 +2938,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Executables directory:"
-msgstr ""
+msgstr "Exekutagarrien direktorioa:"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -2968,169 +2956,169 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:223
 msgid "January"
-msgstr ""
+msgstr "Urtarrila"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:224
 msgid "February"
-msgstr ""
+msgstr "Otsaila"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:225
 msgid "March"
-msgstr ""
+msgstr "Martxoa"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:226
 msgid "April"
-msgstr ""
+msgstr "Apirila"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:227
 msgid "May"
-msgstr ""
+msgstr "Maiatza"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:228
 msgid "June"
-msgstr ""
+msgstr "Ekaina"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:229
 msgid "July"
-msgstr ""
+msgstr "Uztaila"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:230
 msgid "August"
-msgstr ""
+msgstr "Abuztua"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:231
 msgid "September"
-msgstr ""
+msgstr "Iraila"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:232
 msgid "October"
-msgstr ""
+msgstr "Urria"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:233
 msgid "November"
-msgstr ""
+msgstr "Azaroa"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:234
 msgid "December"
-msgstr ""
+msgstr "Abendua"
 
 #. TRANSLATORS: refers to any day of the week, if not possible, translate as "First week"
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 msgid "First"
-msgstr ""
+msgstr "Lehen astea"
 
 #. TRANSLATORS: refers to any day of the week
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 msgid "Second"
-msgstr ""
+msgstr "Bigarren astea"
 
 #. TRANSLATORS: refers to any day of the week
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 msgid "Third"
-msgstr ""
+msgstr "Hirugarren astea"
 
 #. TRANSLATORS: refers to any day of the week
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:254
 msgid "Fourth"
-msgstr ""
+msgstr "Laugarren astea"
 
 #. TRANSLATORS: refers to any day of the week
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:256
 msgid "Last"
-msgstr ""
+msgstr "Azken astea"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:265
 msgid "Sunday"
-msgstr ""
+msgstr "Igandea"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:266
 msgid "Monday"
-msgstr ""
+msgstr "Astelehena"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:267
 msgid "Tuesday"
-msgstr ""
+msgstr "Asteartea"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:268
 msgid "Wednesday"
-msgstr ""
+msgstr "Asteazkena"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:269
 msgid "Thursday"
-msgstr ""
+msgstr "Osteguna"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:270
 msgid "Friday"
-msgstr ""
+msgstr "Ostirala"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:271
 msgid "Saturday"
-msgstr ""
+msgstr "Larunbata"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:449
 msgid "Define a time zone"
-msgstr ""
+msgstr "Zehaztu ordu-eremu bat"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:373
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:375
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
 msgid "Time zone"
-msgstr ""
+msgstr "Ordu-eremua"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:452
 msgid "Timezone name:"
-msgstr ""
+msgstr "Ordu-eremuaren izena:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:379
 msgid "Offset from UTC:"
-msgstr ""
+msgstr "UTC-rekiko aldea:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:380
 msgid " hours"
-msgstr ""
+msgstr " ordu"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
 msgid "Daylight saving time (summer time)"
-msgstr ""
+msgstr "Udako ordutegia (DST)"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
 msgid "DST timezone name:"
-msgstr ""
+msgstr "DST ordu-eremuaren izena:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
 msgid "DST offset from UTC:"
-msgstr ""
+msgstr "DST-ren aldea UTC-rekiko:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
 msgid "Daylight saving time start"
-msgstr ""
+msgstr "Udako ordutegiaren hasiera"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
 msgid "Day:"
-msgstr ""
+msgstr "Eguna:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:465
 msgid "Time of change:"
-msgstr ""
+msgstr "Aldaketaren ordua:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:466
 msgid "Date:"
-msgstr ""
+msgstr "Data:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
 msgid "Daylight saving time end"
-msgstr ""
+msgstr "Udako ordutegiaren amaiera"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:467
 msgid "Use this definition"
-msgstr ""
+msgstr "Erabili definizio hau"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:376
 msgid ""
@@ -3139,74 +3127,80 @@ msgid ""
 "This behaviour can be changed by changing Stellarium's global time zone "
 "settings."
 msgstr ""
+"Stellarium-en bistaratzen den ordua sistemaren ordu-eremuko ordu lokal "
+"bezala interpretatzea da portaera lehenetsia, eta ez da bistaratutako "
+"kokapenaren ordu-eremua erabiltzen. Portaera hau aldatu daiteke Stellarium-"
+"en ordu-eremu orokorraren ezarpenak aldatuz."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:377
 msgid "Use system settings (default)"
-msgstr ""
+msgstr "Erabili sistemaren ezarpenak (lehenetsia)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:378
 msgid "Universal Coordinated Time (UTC)"
-msgstr ""
+msgstr "Ordu Unibertsal Koordinatua (UTC)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
 msgid "(offset = local time - UTC time)"
-msgstr ""
+msgstr "(aldea = ordu lokala - UTC ordua)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:382
 msgid "User-defined:"
-msgstr ""
+msgstr "Erabiltzaileak definitua:"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
 msgid "Any changes will take effect the next time Stellarium is started."
-msgstr ""
+msgstr "Stellarium hurrena abiaraztean ezarriko dira aldaketak."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid "Display formats"
-msgstr ""
+msgstr "Bistaratze formatuak"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
+"Ezarpen hauek ordua eta data azpialdeko barran nola bistaratzen diren "
+"kontrolatzen dute."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "Time display format"
-msgstr ""
+msgstr "Ordua bistaratzeko formatua"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 msgid "System default"
-msgstr ""
+msgstr "Sistemaren lehenetsia"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "12-hour format"
-msgstr ""
+msgstr "12 orduko formatua"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "24-hour format"
-msgstr ""
+msgstr "24 orduko formatua"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
 msgid "Date display format"
-msgstr ""
+msgstr "Dataren bistaratze formatua"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
 msgid "yyyy-mm-dd (ISO 8601)"
-msgstr ""
+msgstr "uuuu-hh-ee (ISO 8601)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
 msgid "dd-mm-yyyy"
-msgstr ""
+msgstr "ee-hh-uuuu"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 msgid "mm-dd-yyyy"
-msgstr ""
+msgstr "hh-ee-uuuu"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 #, qt-format
 msgid "Time Zone plug-in (version %1)"
-msgstr ""
+msgstr "Ordu-eremu plugina (%1 bertsioa)"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:78
 msgid "Text User Interface"
@@ -3222,23 +3216,23 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:124
 msgid "Set Location"
-msgstr ""
+msgstr "Hautatu kokapena"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:125
 msgid "Latitude"
-msgstr ""
+msgstr "Latitudea"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:128
 msgid "Longitude"
-msgstr ""
+msgstr "Longitudea"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:131
 msgid "Altitude"
-msgstr ""
+msgstr "Altitudea"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:135
 msgid "Solar System Body"
-msgstr ""
+msgstr "Eguzki-sistemako gorputza"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:147
 msgid "Date & Time"
@@ -3246,39 +3240,39 @@ msgstr "Data eta ordua"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:149
 msgid "Sky Time"
-msgstr ""
+msgstr "Zeruko ordua"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:154
 msgid "Set Time Zone"
-msgstr ""
+msgstr "Ezarri ordu-eremua"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:155
 msgid "Day Keys"
-msgstr ""
+msgstr "Egunen gakoak"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:156
 msgid "Preset Sky Time"
-msgstr ""
+msgstr "Aurrezarri zeruko ordua"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:163
 msgid "Sky Time at Startup"
-msgstr ""
+msgstr "Zeruko ordua abioan"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:169
 msgid "Date Display Format"
-msgstr ""
+msgstr "Data bistaratzeko formatua"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Time Display Format"
-msgstr ""
+msgstr "Ordua bistaratzeko formatua"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:189
 msgid "General"
-msgstr ""
+msgstr "Orokorra"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "Sky Culture"
-msgstr ""
+msgstr "Zeru-kultura"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:197
 msgid "Language"
@@ -3286,23 +3280,23 @@ msgstr "Hizkuntza"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:210
 msgid "Show Stars"
-msgstr ""
+msgstr "Erakutsi izarrak"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:213
 msgid "Star Relative Scale"
-msgstr ""
+msgstr "Izarren eskala erlatiboa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:217
 msgid "Absolute Star Scale"
-msgstr ""
+msgstr "Izarren eskala absolutua"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:221
 msgid "Twinkling"
-msgstr ""
+msgstr "Dirdira"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:232
 msgid "Colors"
-msgstr ""
+msgstr "Koloreak"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Constellation Lines"
@@ -3314,7 +3308,7 @@ msgstr "Konstelazio izenak"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Constellation Art"
-msgstr ""
+msgstr "Konstelazioen irudiak"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:243
 msgid "Constellation Boundaries"
@@ -3354,7 +3348,7 @@ msgstr "Sareta ekuatoriala"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Equatorial J2000 Grid"
-msgstr ""
+msgstr "J2000 sareta ekuatoriala"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:283
 msgid "Equator Line"
@@ -3370,19 +3364,19 @@ msgstr "Nebulosa izenak"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:295
 msgid "Nebula Hints"
-msgstr ""
+msgstr "Nebulosen posizioak"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:319
 msgid "Effects"
-msgstr ""
+msgstr "Efektuak"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:321
 msgid "Light Pollution Level"
-msgstr ""
+msgstr "Argi-kutsadura maila"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
 msgid "Manual Zoom"
-msgstr ""
+msgstr "Ezkuzko zooma"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
 msgid "Magnitude Scaling Multiplier"
@@ -3390,19 +3384,19 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Milky Way Intensity"
-msgstr ""
+msgstr "Esne Bidearen intentsitatea"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:340
 msgid "Nebula Label Frequency"
-msgstr ""
+msgstr "Nebulosen etiketen maiztasuna"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:341
 msgid "Zoom Duration"
-msgstr ""
+msgstr "Zoomaren iraupena"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:345
 msgid "Cursor Timeout"
-msgstr ""
+msgstr "Kurtsorearen denbora-muga"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:346
 msgid "Setting Landscape Sets Location"
@@ -3410,54 +3404,54 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:364
 msgid "Run Local Script"
-msgstr ""
+msgstr "Exekutatu script lokala"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
 msgid "Stop Running Script"
-msgstr ""
+msgstr "Geldiarazi script-aren exekuzioa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:371
 msgid "CD/DVD Script"
-msgstr ""
+msgstr "CD/DVD script-a"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:378
 msgid "Administration"
-msgstr ""
+msgstr "Kudeaketa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Load Default Configuration"
-msgstr ""
+msgstr "Kargatu konfigurazio lehenetsia"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:383
 msgid "Save Current Configuration"
-msgstr ""
+msgstr "Gorde uneko konfigurazioa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:384
 msgid "Shut Down"
-msgstr ""
+msgstr "Itzali"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "[no TUI node]"
-msgstr ""
+msgstr "[TUI nodorik ez]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:84
 msgid "On"
-msgstr ""
+msgstr "Gaituta"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:79
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:86
 msgid "Off"
-msgstr ""
+msgstr "Desgaituta"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:105
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr ""
+msgstr "errorea, kolore zati ezezaguna \"%1\""
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
-msgstr "Eguzki Sistemaren Editorea"
+msgstr "Eguzki-sistemaren Editorea"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:59
 msgid ""
@@ -3471,64 +3465,64 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Select the type"
-msgstr ""
+msgstr "Hautatu mota"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Asteroids"
-msgstr ""
+msgstr "Asteroideak"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Comets"
-msgstr ""
+msgstr "Kometak"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Select the source"
-msgstr ""
+msgstr "Hautatu iturburua"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Download a list of objects from the Internet"
-msgstr ""
+msgstr "Deskargatu objektu zerrenda bat Internetetik"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Select a source from the list:"
-msgstr ""
+msgstr "Hautatu zerrendarentzako iturburu bat:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Or enter a URL:"
-msgstr ""
+msgstr "Edo sartu URL bat:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "paste"
-msgstr ""
+msgstr "itsatsi"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Add this URL to the bookmarks list"
-msgstr ""
+msgstr "Gehitu URL hau laster-marken zerrendara"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Bookmark title:"
-msgstr ""
+msgstr "Laster-markaren izenburua:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "A file containing a list of objects"
-msgstr ""
+msgstr "Objektu zerrenda bat duen fitxategi bat"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Get orbital elements"
-msgstr ""
+msgstr "Eskuratu elementu orbitalak"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid "Abort download"
-msgstr ""
+msgstr "Bertan behera utzi deskarga"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Lists"
-msgstr ""
+msgstr "Zerrendak"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Online search"
-msgstr ""
+msgstr "Bilaketa linean"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid ""
@@ -3536,6 +3530,9 @@ msgid ""
 "href=\"http://www.minorplanetcenter.net/iau/MPEph/MPEph.html\">Minor Planet "
 "&amp; Comet Ephemeris Service</a>:"
 msgstr ""
+"Kontsultatu MPC-a <a "
+"href=\"http://www.minorplanetcenter.net/iau/MPEph/MPEph.html\">Planeta "
+"txikien eta kometen efemeride zerbitzua</a>:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid ""
@@ -3546,6 +3543,13 @@ msgid ""
 "be returned. For example, \"C/Halley\" will return 1P/Halley, Halley's "
 "Comet, but \"Halley\" will return the asteroid (2688) Halley."
 msgstr ""
+"Kontsulta arrakastatsua bada emaitza bakar bat itzuliko da.<br>Kometak eta "
+"asteroideak beren zenbaki, izen edo behin-behineko izendapenaren bidez "
+"identifika daitezke.<br>Kometa <i>izenek</i> <b>C/</b> edo <b>P/</b> "
+"aurrizkiak behar dituzte. Izen bat kometa bat baino gehiagorekin bat baldin "
+"badator, lehen emaitza soilik itzuliko da. Adibidez, \"C/Halley\"-k "
+"1P/Halley itzuliko du, baina \"Halley\"-k Halley asteroidea (2688) itzuliko "
+"du."
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Objects found"
@@ -3562,40 +3566,40 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
 msgid "Overwrite existing objects"
-msgstr ""
+msgstr "Gainidatzi existitzen diren objektuak"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
 msgid "Update existing objects"
-msgstr ""
+msgstr "Eguneratu existitzen diren objektuak"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:549
 msgid "Update only the orbital elements"
-msgstr ""
+msgstr "Eguneratu elementu orbitalak soilik"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:550
 msgid "Mark all"
-msgstr ""
+msgstr "Markatu guztiak"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:551
 msgid "Mark none"
-msgstr ""
+msgstr "Ez markatu bat ere"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:552
 msgid "Discard"
-msgstr ""
+msgstr "Baztertu"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:553
 msgid "Add objects"
-msgstr ""
+msgstr "Gehitu objektuak"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:327
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:338
 msgid "Solar System objects"
-msgstr ""
+msgstr "Eguzki-sistemako objektuak"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:329
 msgid "Warning"
-msgstr ""
+msgstr "Kontuz"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:330
 msgid ""
@@ -3603,41 +3607,48 @@ msgid ""
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
 msgstr ""
+"Plugin honek Eguzki-sistema konfigurazio fitxategi pertsonalizatu bat "
+"erabiltzen du. Okerren bat gertatu eta Stellarium kraskatzen bada edota ezin "
+"bada abiarazi, eskuz ezabatu dezakezu fitxategia hemendik:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:331
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
+"Aldaketa guztiak berrezarri eta konfigurazio lehenetsira itzuli zaitezke:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:332
 msgid "Reset to defaults"
-msgstr ""
+msgstr "Berrezarri balio lehenetsiak"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:333
 msgid "Copy/replace the Solar System file"
-msgstr ""
+msgstr "Kopiatu/ordeztu eguzki-sistemaren fitxategia"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:334
 msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
+"Eguzki-sistema pertsonalizatuaren konfigurazio fitxategiaren babeskopia bat "
+"sortu dezakezu egoki iruditzen zaizun kokalekuan, edo honelako babeskopia "
+"batekin ordeztu."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:335
 msgid "Copy the Solar System file..."
-msgstr ""
+msgstr "Kopiatu eguzki-sistema fitxategia..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:336
 msgid "Replace the Solar System file..."
-msgstr ""
+msgstr "Ordeztu eguzki-sistema fitxategia"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:337
 msgid "Configuration file"
-msgstr ""
+msgstr "Konfigurazio-fitxategia"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:340
 msgid "Add new Solar System objects"
-msgstr ""
+msgstr "Gehitu eguzki-sistemako objektu berriak"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:341
 msgid ""
@@ -3650,42 +3661,44 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:342
 msgid "Import orbital elements in MPC format..."
-msgstr ""
+msgstr "Inportatu elementu orbitalak MPC formatuan..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:343
 msgid "Solar System"
-msgstr ""
+msgstr "Eguzki-sistema"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:344
 msgid "Enter manually a new Solar System object"
-msgstr ""
+msgstr "Sartu eskuz eguzki-sistemako objektu berri bat"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:345
 msgid ""
 "You can add a new object by entering manually the properties used by "
 "Stellarium."
 msgstr ""
+"Objektu berri bat gehitu dezakezu Stellarium-ek erabiltzen dituen "
+"propietateak eskuz sartuz."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:346
 msgid "Enter manually object properties..."
-msgstr ""
+msgstr "Sartu eskuz objektuaren propietateak..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:347
 msgid "Data import"
-msgstr ""
+msgstr "Inportatu datuak"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:348
 msgid "Solar System Editor plug-in"
-msgstr ""
+msgstr "Eguzki-sistema Editore plugin-a"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:349
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "%1 bertsioa"
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical Supernovae"
-msgstr ""
+msgstr "Supernoba historikoak"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
@@ -3750,11 +3763,20 @@ msgstr "Mota: %1"
 #~ msgid "Nebula Circles"
 #~ msgstr "Nebulosen zirkuluak"
 
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
 #~ msgid "Arrow down to load list."
 #~ msgstr "Zerrenda kargatzeko kurtsorearen beheko gezia."
 
 #~ msgid "Maximum Nebula Magnitude to Label: "
 #~ msgstr "Izena erakusteko nebulosaren magnitude maximoa: "
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "Izar-katalago guztien deskarga burutu da!"
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "Hasierako ikuseremua: XX"
 
 #~ msgid "Set Location "
 #~ msgstr "Ezarri kokalekua "
@@ -3851,6 +3873,12 @@ msgstr "Mota: %1"
 
 #~ msgid "Sky Culture: "
 #~ msgstr "Zeru kultura: "
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "Abioko ikuspegiaren norabidea: xxxx"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "Lortu y-ren x katalogoa"
 
 #~ msgid "Landscape: "
 #~ msgstr "Paisaia: "

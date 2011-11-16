@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-15 00:02+0200\n"
+"POT-Creation-Date: 2011-11-15 19:54+0200\n"
 "PO-Revision-Date: 2011-10-24 08:31+0000\n"
 "Last-Translator: Jiri Grönroos <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-15 04:59+0000\n"
+"X-Launchpad-Export-Date: 2011-11-16 05:15+0000\n"
 "X-Generator: Launchpad (build 14291)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -285,55 +285,72 @@ msgstr "(nykyinen)"
 msgid "Az/Alt: %1/%2"
 msgstr "Atsim./Kork.: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:300 src/gui/ConfigurationDialog.cpp:302
+#: src/gui/ConfigurationDialog.cpp:305 src/gui/ConfigurationDialog.cpp:307
 msgid "Select screenshot directory"
 msgstr "Valitse kuvankaappaushakemisto"
 
-#: src/gui/ConfigurationDialog.cpp:470
+#: src/gui/ConfigurationDialog.cpp:475
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Aloitusnäkökenttä: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:478
+#: src/gui/ConfigurationDialog.cpp:483
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Aloituskatselusuunta Atsim./Kork.: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:517
+#: src/gui/ConfigurationDialog.cpp:522
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:211
 msgid "Authors"
 msgstr "Tekijät"
 
-#: src/gui/ConfigurationDialog.cpp:521 src/gui/ViewDialog.cpp:372
+#: src/gui/ConfigurationDialog.cpp:526 src/gui/ViewDialog.cpp:372
 msgid "Contact"
 msgstr "Yhteystieto"
 
-#: src/gui/ConfigurationDialog.cpp:596
+#: src/gui/ConfigurationDialog.cpp:601
 msgid "Author"
 msgstr "Tekijä"
 
-#: src/gui/ConfigurationDialog.cpp:597
+#: src/gui/ConfigurationDialog.cpp:602
 msgid "License"
 msgstr "Lisenssi"
 
-#: src/gui/ConfigurationDialog.cpp:626
+#: src/gui/ConfigurationDialog.cpp:631
 msgid "Running script: "
 msgstr "Suorittaa komentosarjaa: "
 
-#: src/gui/ConfigurationDialog.cpp:633
+#: src/gui/ConfigurationDialog.cpp:638
 msgid "Running script: [none]"
 msgstr "Suorittaa komentosarjaa: [ei mitään]"
 
-#: src/gui/ConfigurationDialog.cpp:676
-msgid "Finished downloading all star catalogs!"
-msgstr "Kaikkien tähtiluetteloiden lataus valmis!"
+#: src/gui/ConfigurationDialog.cpp:707
+msgid ""
+"Finished downloading new star catalogs!\n"
+"Restart Stellarium to display them."
+msgstr ""
+"Uudet tähtiluettelot haettu!\n"
+"Käynnistä Stellarium uudellen nähdäksesi ne."
 
-#: src/gui/ConfigurationDialog.cpp:685
+#: src/gui/ConfigurationDialog.cpp:711
+msgid "All available star catalogs have been installed."
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:716
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Hae luettelo %1 / %2"
 
-#: src/gui/ConfigurationDialog.cpp:687
+#: src/gui/ConfigurationDialog.cpp:723
+#, qt-format
+msgid ""
+"Downloading %1...\n"
+"(You can close this window.)"
+msgstr ""
+"Haetaan %1...\n"
+"(Voit sulkea tämän ikkunan.)"
+
+#: src/gui/ConfigurationDialog.cpp:730
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -344,15 +361,7 @@ msgstr ""
 "Tähtien määrä: %2 miljoonaa\n"
 "Magnitudiväli: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:696
-msgid ""
-"Finished downloading new star catalogs!\n"
-"Restart Stellarium to display them."
-msgstr ""
-"Uudet tähtiluettelot haettu!\n"
-"Käynnistä Stellarium uudellen nähdäksesi ne."
-
-#: src/gui/ConfigurationDialog.cpp:734 src/gui/ConfigurationDialog.cpp:768
+#: src/gui/ConfigurationDialog.cpp:773 src/gui/ConfigurationDialog.cpp:809
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -361,20 +370,11 @@ msgstr ""
 "Virhe haettaessa tiedostoa %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:739
-#, qt-format
-msgid ""
-"Downloading %1...\n"
-"(You can close this window.)"
-msgstr ""
-"Haetaan %1...\n"
-"(Voit sulkea tämän ikkunan.)"
-
-#: src/gui/ConfigurationDialog.cpp:819
+#: src/gui/ConfigurationDialog.cpp:861
 msgid "Verifying file integrity..."
 msgstr "Tarkastetaan yhteensopivuutta..."
 
-#: src/gui/ConfigurationDialog.cpp:823
+#: src/gui/ConfigurationDialog.cpp:865
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1702,47 +1702,47 @@ msgstr "Käytä tätä taivaskulttuuria oletuksena"
 msgid "Visible"
 msgstr "Näkyvä"
 
-#: src/ui_configurationDialog.h:748
+#: src/ui_configurationDialog.h:752
 msgid "Configuration"
 msgstr "Asetukset"
 
-#: src/ui_configurationDialog.h:750
+#: src/ui_configurationDialog.h:754
 msgid "Program language"
 msgstr "Ohjelman kieli"
 
-#: src/ui_configurationDialog.h:751
+#: src/ui_configurationDialog.h:755
 msgid "Selected object information"
 msgstr "Valitun kohteen tiedot"
 
-#: src/ui_configurationDialog.h:753
+#: src/ui_configurationDialog.h:757
 msgid "Display all information available"
 msgstr "Näytä kaikki saatavat olevat tiedot"
 
-#: src/ui_configurationDialog.h:755
+#: src/ui_configurationDialog.h:759
 msgid "All available"
 msgstr "Kaikki saatavilla olevat"
 
-#: src/ui_configurationDialog.h:757
+#: src/ui_configurationDialog.h:761
 msgid "Display less information"
 msgstr "Näytä vähemmän tietoja"
 
-#: src/ui_configurationDialog.h:759
+#: src/ui_configurationDialog.h:763
 msgid "Short"
 msgstr "Lyhennetyt"
 
-#: src/ui_configurationDialog.h:761
+#: src/ui_configurationDialog.h:765
 msgid "Display no information"
 msgstr "Älä näytä tietoja"
 
-#: src/ui_configurationDialog.h:763
+#: src/ui_configurationDialog.h:767
 msgid "None"
 msgstr "Ei tietoja"
 
-#: src/ui_configurationDialog.h:764
+#: src/ui_configurationDialog.h:768
 msgid "Default options"
 msgstr "Oletusasetukset"
 
-#: src/ui_configurationDialog.h:766
+#: src/ui_configurationDialog.h:770
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -1750,20 +1750,20 @@ msgstr ""
 "Tallenna tässä istunnossa muuttamasi asetukset, jotta ne olisivat samat "
 "seuraavalla Stellariumin käynnistyskerralla"
 
-#: src/ui_configurationDialog.h:768
+#: src/ui_configurationDialog.h:772
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:383
 msgid "Save settings"
 msgstr "Tallenna asetukset"
 
-#: src/ui_configurationDialog.h:770
+#: src/ui_configurationDialog.h:774
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Palauta Stellariumin mukana tulleet oletusasetukset"
 
-#: src/ui_configurationDialog.h:772
+#: src/ui_configurationDialog.h:776
 msgid "Restore defaults"
 msgstr "Palauta oletusarvot"
 
-#: src/ui_configurationDialog.h:773
+#: src/ui_configurationDialog.h:777
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -1773,103 +1773,95 @@ msgstr ""
 "Tallennetaan seuraavaa käynnistystä varten kaikki nykyiset asetukset mukaan "
 "lukien nykyinen näkökenttä ja katselusuunta."
 
-#: src/ui_configurationDialog.h:775
+#: src/ui_configurationDialog.h:779
 msgid "The width of your view when Stellarium starts"
 msgstr "Näkymän leveys Stellariumin käynnistyessä"
 
-#: src/ui_configurationDialog.h:777
-msgid "Startup FOV: XX"
-msgstr "Aloitusnäkökenttä: XX"
-
-#: src/ui_configurationDialog.h:779
+#: src/ui_configurationDialog.h:782
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Katselusuunta Stellarium käynnistyessä"
 
-#: src/ui_configurationDialog.h:781
-msgid "Startup direction of view: xxxx"
-msgstr "Aloituskatselusuunta: xxxx"
-
-#: src/ui_configurationDialog.h:782
+#: src/ui_configurationDialog.h:784
 msgid "Control"
 msgstr "Hallinta"
 
-#: src/ui_configurationDialog.h:784
+#: src/ui_configurationDialog.h:786
 msgid "Allow keyboard to pan and zoom"
 msgstr "Salli siirtyminen ja suurennus/loitonnus näppäimistöllä"
 
-#: src/ui_configurationDialog.h:786
+#: src/ui_configurationDialog.h:788
 msgid "Enable keyboard navigation"
 msgstr "Salli liikkuminen näppäimistöllä"
 
-#: src/ui_configurationDialog.h:788
+#: src/ui_configurationDialog.h:790
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "Salli hiirellä liikkuminen (vetämällä) ja suurennus/loitonnus (rullalla)"
 
-#: src/ui_configurationDialog.h:790
+#: src/ui_configurationDialog.h:792
 msgid "Enable mouse navigation"
 msgstr "Salli hiirellä liikkuminen"
 
-#: src/ui_configurationDialog.h:791
+#: src/ui_configurationDialog.h:793
 msgid "Startup date and time"
 msgstr "Aloituspäiväys ja -aika"
 
-#: src/ui_configurationDialog.h:793
+#: src/ui_configurationDialog.h:795
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Käynnistää Stellariumin järjestelmän päiväyksellä ja ajalla"
 
-#: src/ui_configurationDialog.h:795
+#: src/ui_configurationDialog.h:797
 msgid "System date and time"
 msgstr "Järjestelmän päiväys ja aika"
 
-#: src/ui_configurationDialog.h:797
+#: src/ui_configurationDialog.h:799
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
 "Asettaa simulaation ajaksi Stellariumin käynnistyspäivää seuraavaksi ajaksi"
 
-#: src/ui_configurationDialog.h:799
+#: src/ui_configurationDialog.h:801
 msgid "System date at:"
 msgstr "Järjestelmän päiväys:"
 
-#: src/ui_configurationDialog.h:801
+#: src/ui_configurationDialog.h:803
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Käytä tiettyä päiväystä ja aikaa Stellariumin käynnistyessä"
 
-#: src/ui_configurationDialog.h:803
+#: src/ui_configurationDialog.h:805
 msgid "Other:"
 msgstr "Muu:"
 
-#: src/ui_configurationDialog.h:804
+#: src/ui_configurationDialog.h:806
 msgid "use current"
 msgstr "Käytä nykyistä"
 
-#: src/ui_configurationDialog.h:805
+#: src/ui_configurationDialog.h:807
 msgid "Other"
 msgstr "Muut"
 
-#: src/ui_configurationDialog.h:807
+#: src/ui_configurationDialog.h:809
 msgid "Hides the mouse cursor when inactive"
 msgstr "Piilota hiiren osoitin ei-aktiivisessa tilassa"
 
-#: src/ui_configurationDialog.h:809
+#: src/ui_configurationDialog.h:811
 msgid "Mouse cursor timeout (seconds):"
 msgstr "Hiiren osoittimen aikakatkaisu (sekunteja):"
 
-#: src/ui_configurationDialog.h:811
+#: src/ui_configurationDialog.h:813
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Pysty- ja vaakapeilauksen painikkeet päälle/pois."
 
-#: src/ui_configurationDialog.h:813
+#: src/ui_configurationDialog.h:815
 msgid "Show flip buttons"
 msgstr "Näytä peilauspainikkeet"
 
-#: src/ui_configurationDialog.h:814
+#: src/ui_configurationDialog.h:816
 msgid "Planetarium options"
 msgstr "Planetaarioasetukset"
 
-#: src/ui_configurationDialog.h:816
+#: src/ui_configurationDialog.h:818
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -1877,19 +1869,19 @@ msgstr ""
 "Pallopeilikorjausta käytetään, kun Stellarium heijastetaan pallopeilille "
 "halvoissa planetaariojärjestelmissä."
 
-#: src/ui_configurationDialog.h:818
+#: src/ui_configurationDialog.h:820
 msgid "Spheric mirror distortion"
 msgstr "Pallopeilikorjaus"
 
-#: src/ui_configurationDialog.h:820
+#: src/ui_configurationDialog.h:822
 msgid "Align labels with the horizon"
 msgstr "Suuntaa nimet horisontin mukaan"
 
-#: src/ui_configurationDialog.h:822
+#: src/ui_configurationDialog.h:824
 msgid "Gravity labels"
 msgstr "\"Gravitaationimet\""
 
-#: src/ui_configurationDialog.h:824
+#: src/ui_configurationDialog.h:826
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -1897,57 +1889,49 @@ msgstr ""
 "Kun käytössä, \"automaattinen loitonnus\"-näppäin asettaa myös "
 "aloituskatselusuunnan"
 
-#: src/ui_configurationDialog.h:826
+#: src/ui_configurationDialog.h:828
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Automaattinen loitonnus palauttaa aloituskatselusuunnan"
 
-#: src/ui_configurationDialog.h:828
+#: src/ui_configurationDialog.h:830
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Peitä päänäkymästä kaikki keskusympyrän ulkopuolinen"
 
-#: src/ui_configurationDialog.h:830
+#: src/ui_configurationDialog.h:832
 msgid "Disc viewport"
 msgstr "Putkinäkymä"
 
-#: src/ui_configurationDialog.h:832
+#: src/ui_configurationDialog.h:834
 msgid "Hide other constellations when you click one"
 msgstr "Piilota muut tähdistöstä napsautettaessa yhtä"
 
-#: src/ui_configurationDialog.h:834
+#: src/ui_configurationDialog.h:836
 msgid "Select single constellation"
 msgstr "Valitse yksittäinen tähdistö"
 
-#: src/ui_configurationDialog.h:835
+#: src/ui_configurationDialog.h:837
 msgid "Screenshots"
 msgstr "Kuvankaappaukset"
 
-#: src/ui_configurationDialog.h:836
+#: src/ui_configurationDialog.h:838
 msgid "Screenshot Directory"
 msgstr "Kuvankaappaushakemisto"
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:840
 msgid "Invert colors"
 msgstr "Käänteiset värit"
 
-#: src/ui_configurationDialog.h:839
+#: src/ui_configurationDialog.h:841
 msgid "Star catalog updates"
 msgstr "Tähtiluetteloiden päivitykset"
 
-#: src/ui_configurationDialog.h:841
+#: src/ui_configurationDialog.h:843
 msgid "Click here to start downloading"
 msgstr "Napsauta tästä aloittaaksesi haku"
 
-#: src/ui_configurationDialog.h:843
-msgid "Get catalog x of y"
-msgstr "Hae luettelo x / y"
-
-#: src/ui_configurationDialog.h:844
+#: src/ui_configurationDialog.h:845
 msgid "Download this file to view even more stars"
 msgstr "Hae tämä tiedosto näyttääkseni enemmän tähtiä"
-
-#: src/ui_configurationDialog.h:845
-msgid "xxx"
-msgstr "xxx"
 
 #: src/ui_configurationDialog.h:847
 msgid "Restart the download"
@@ -3793,6 +3777,21 @@ msgstr "Tyyppi: %1"
 
 #~ msgid "Correct for light travel time: "
 #~ msgstr "Korjaa valon matka-aika: "
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "Aloitusnäkökenttä: XX"
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "Aloituskatselusuunta: xxxx"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "Hae luettelo x / y"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "Kaikkien tähtiluetteloiden lataus valmis!"
 
 #~ msgid "Scripts "
 #~ msgstr "Komentosarjat "

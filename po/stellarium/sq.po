@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-15 00:02+0200\n"
+"POT-Creation-Date: 2011-11-15 19:54+0200\n"
 "PO-Revision-Date: 2010-11-30 21:44+0000\n"
 "Last-Translator: Elian Myftiu <Unknown>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-15 04:58+0000\n"
+"X-Launchpad-Export-Date: 2011-11-16 05:14+0000\n"
 "X-Generator: Launchpad (build 14291)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -285,55 +285,72 @@ msgstr ""
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:300 src/gui/ConfigurationDialog.cpp:302
+#: src/gui/ConfigurationDialog.cpp:305 src/gui/ConfigurationDialog.cpp:307
 msgid "Select screenshot directory"
 msgstr "Cakto dosje pamjesh ekrani"
 
-#: src/gui/ConfigurationDialog.cpp:470
+#: src/gui/ConfigurationDialog.cpp:475
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "FEP në Nisje: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:478
+#: src/gui/ConfigurationDialog.cpp:483
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Drejtimi i pamjes në nisje Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:517
+#: src/gui/ConfigurationDialog.cpp:522
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:211
 msgid "Authors"
 msgstr "Autorët"
 
-#: src/gui/ConfigurationDialog.cpp:521 src/gui/ViewDialog.cpp:372
+#: src/gui/ConfigurationDialog.cpp:526 src/gui/ViewDialog.cpp:372
 msgid "Contact"
 msgstr "Kontakti"
 
-#: src/gui/ConfigurationDialog.cpp:596
+#: src/gui/ConfigurationDialog.cpp:601
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:597
+#: src/gui/ConfigurationDialog.cpp:602
 msgid "License"
 msgstr "Liçensë"
 
-#: src/gui/ConfigurationDialog.cpp:626
+#: src/gui/ConfigurationDialog.cpp:631
 msgid "Running script: "
 msgstr "Duke xhiruar skriptin: "
 
-#: src/gui/ConfigurationDialog.cpp:633
+#: src/gui/ConfigurationDialog.cpp:638
 msgid "Running script: [none]"
 msgstr "Duke xhiruar skriptin: [asnjë]"
 
-#: src/gui/ConfigurationDialog.cpp:676
-msgid "Finished downloading all star catalogs!"
-msgstr "Mbaroi shkarkimi i të gjithë katalogëve të yjeve"
+#: src/gui/ConfigurationDialog.cpp:707
+msgid ""
+"Finished downloading new star catalogs!\n"
+"Restart Stellarium to display them."
+msgstr ""
+"Katalogët e rinj u shkarkuan!\n"
+"Rinis Stellarium për t'i shfaqur."
 
-#: src/gui/ConfigurationDialog.cpp:685
+#: src/gui/ConfigurationDialog.cpp:711
+msgid "All available star catalogs have been installed."
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:716
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Merr katalogun %1 nga %2"
 
-#: src/gui/ConfigurationDialog.cpp:687
+#: src/gui/ConfigurationDialog.cpp:723
+#, qt-format
+msgid ""
+"Downloading %1...\n"
+"(You can close this window.)"
+msgstr ""
+"Duke shkarkuar %1...\n"
+"(Mund ta mbyllësh këtë dritare.)"
+
+#: src/gui/ConfigurationDialog.cpp:730
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -344,15 +361,7 @@ msgstr ""
 "Numër yjesh: %2 Milion\n"
 "Shkalla e magnitudës: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:696
-msgid ""
-"Finished downloading new star catalogs!\n"
-"Restart Stellarium to display them."
-msgstr ""
-"Katalogët e rinj u shkarkuan!\n"
-"Rinis Stellarium për t'i shfaqur."
-
-#: src/gui/ConfigurationDialog.cpp:734 src/gui/ConfigurationDialog.cpp:768
+#: src/gui/ConfigurationDialog.cpp:773 src/gui/ConfigurationDialog.cpp:809
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -361,20 +370,11 @@ msgstr ""
 "Gabim shkarkimi i %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:739
-#, qt-format
-msgid ""
-"Downloading %1...\n"
-"(You can close this window.)"
-msgstr ""
-"Duke shkarkuar %1...\n"
-"(Mund ta mbyllësh këtë dritare.)"
-
-#: src/gui/ConfigurationDialog.cpp:819
+#: src/gui/ConfigurationDialog.cpp:861
 msgid "Verifying file integrity..."
 msgstr "Kontroll tërësie skedari..."
 
-#: src/gui/ConfigurationDialog.cpp:823
+#: src/gui/ConfigurationDialog.cpp:865
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1705,47 +1705,47 @@ msgstr "Përdor këtë kulturë qielli si të përzgjedhur"
 msgid "Visible"
 msgstr "I dukshëm"
 
-#: src/ui_configurationDialog.h:748
+#: src/ui_configurationDialog.h:752
 msgid "Configuration"
 msgstr "Konfigurimi"
 
-#: src/ui_configurationDialog.h:750
+#: src/ui_configurationDialog.h:754
 msgid "Program language"
 msgstr "Gjuha e programit"
 
-#: src/ui_configurationDialog.h:751
+#: src/ui_configurationDialog.h:755
 msgid "Selected object information"
 msgstr "Të dhënat e objektit të zgjedhur"
 
-#: src/ui_configurationDialog.h:753
+#: src/ui_configurationDialog.h:757
 msgid "Display all information available"
 msgstr "Shfaq të gjitha të dhënat e gatshme"
 
-#: src/ui_configurationDialog.h:755
+#: src/ui_configurationDialog.h:759
 msgid "All available"
 msgstr "Gjithë të mundshme"
 
-#: src/ui_configurationDialog.h:757
+#: src/ui_configurationDialog.h:761
 msgid "Display less information"
 msgstr "Shfaq më pak të dhëna"
 
-#: src/ui_configurationDialog.h:759
+#: src/ui_configurationDialog.h:763
 msgid "Short"
 msgstr "Shkurt"
 
-#: src/ui_configurationDialog.h:761
+#: src/ui_configurationDialog.h:765
 msgid "Display no information"
 msgstr "Mos shfaq të dhëna"
 
-#: src/ui_configurationDialog.h:763
+#: src/ui_configurationDialog.h:767
 msgid "None"
 msgstr "Asgjë"
 
-#: src/ui_configurationDialog.h:764
+#: src/ui_configurationDialog.h:768
 msgid "Default options"
 msgstr "Mundësitë e përzgjedhura"
 
-#: src/ui_configurationDialog.h:766
+#: src/ui_configurationDialog.h:770
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -1753,20 +1753,20 @@ msgstr ""
 "Ruaj rregullimet e ndryshuara për këtë sesion që të jenë të njëjta herën "
 "tjetër kur nis Stellarium"
 
-#: src/ui_configurationDialog.h:768
+#: src/ui_configurationDialog.h:772
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:383
 msgid "Save settings"
 msgstr "Ruaj të dhënat"
 
-#: src/ui_configurationDialog.h:770
+#: src/ui_configurationDialog.h:774
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Rikthe rregullimet e parazgjedhura që erdhën me Stellarium"
 
-#: src/ui_configurationDialog.h:772
+#: src/ui_configurationDialog.h:776
 msgid "Restore defaults"
 msgstr "Rikthe të përzgjedhurat"
 
-#: src/ui_configurationDialog.h:773
+#: src/ui_configurationDialog.h:777
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -1776,101 +1776,93 @@ msgstr ""
 "gjitha mundësitë e tanishme, përfshihet dhe FOV e çastit dhe drejtimi i "
 "pamjes për nisjen e rradhës."
 
-#: src/ui_configurationDialog.h:775
+#: src/ui_configurationDialog.h:779
 msgid "The width of your view when Stellarium starts"
 msgstr "Gjerësia e pamjes kur nis Stellarium"
 
-#: src/ui_configurationDialog.h:777
-msgid "Startup FOV: XX"
-msgstr "FOV e nisjes: XX"
-
-#: src/ui_configurationDialog.h:779
+#: src/ui_configurationDialog.h:782
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Drejtimi i pamjes kur nis Stellarium"
 
-#: src/ui_configurationDialog.h:781
-msgid "Startup direction of view: xxxx"
-msgstr "Drejtimi i pamjes së nisjes: xxxx"
-
-#: src/ui_configurationDialog.h:782
+#: src/ui_configurationDialog.h:784
 msgid "Control"
 msgstr "Kontrolli"
 
-#: src/ui_configurationDialog.h:784
+#: src/ui_configurationDialog.h:786
 msgid "Allow keyboard to pan and zoom"
 msgstr "Lejo tastierën të piketojë dhe të zmadhojë"
 
-#: src/ui_configurationDialog.h:786
+#: src/ui_configurationDialog.h:788
 msgid "Enable keyboard navigation"
 msgstr "Aktivizo eksplorimin me tastierë"
 
-#: src/ui_configurationDialog.h:788
+#: src/ui_configurationDialog.h:790
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "Lejo miun të piketojë (tërheqje) dhe të zmadhojë (rrota e miut)"
 
-#: src/ui_configurationDialog.h:790
+#: src/ui_configurationDialog.h:792
 msgid "Enable mouse navigation"
 msgstr "Aktivizo eksplorimin me mi"
 
-#: src/ui_configurationDialog.h:791
+#: src/ui_configurationDialog.h:793
 msgid "Startup date and time"
 msgstr "Data dhe ora në nisje"
 
-#: src/ui_configurationDialog.h:793
+#: src/ui_configurationDialog.h:795
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Nis Stellarium sipas datës dhe orës së sistemit"
 
-#: src/ui_configurationDialog.h:795
+#: src/ui_configurationDialog.h:797
 msgid "System date and time"
 msgstr "Data dhe ora e sistemit"
 
-#: src/ui_configurationDialog.h:797
+#: src/ui_configurationDialog.h:799
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "Cakton orën e simulimit për ditën që vjen kur nis Stellarium"
 
-#: src/ui_configurationDialog.h:799
+#: src/ui_configurationDialog.h:801
 msgid "System date at:"
 msgstr "Data e sistemit më:"
 
-#: src/ui_configurationDialog.h:801
+#: src/ui_configurationDialog.h:803
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Përdor një datë dhe orë specifike kur nis Stellarium"
 
-#: src/ui_configurationDialog.h:803
+#: src/ui_configurationDialog.h:805
 msgid "Other:"
 msgstr "Tjetër:"
 
-#: src/ui_configurationDialog.h:804
+#: src/ui_configurationDialog.h:806
 msgid "use current"
 msgstr "përdor të tanishmen"
 
-#: src/ui_configurationDialog.h:805
+#: src/ui_configurationDialog.h:807
 msgid "Other"
 msgstr "Tjetër"
 
-#: src/ui_configurationDialog.h:807
+#: src/ui_configurationDialog.h:809
 msgid "Hides the mouse cursor when inactive"
 msgstr "Fsheh shënjuesin e miut kur është i plogësht"
 
-#: src/ui_configurationDialog.h:809
+#: src/ui_configurationDialog.h:811
 msgid "Mouse cursor timeout (seconds):"
 msgstr "Koha kur miu quhet i plogësht (sekonda):"
 
-#: src/ui_configurationDialog.h:811
+#: src/ui_configurationDialog.h:813
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Aktivizo butonat e rrotullimit vertikal dhe horizontal për imazhet."
 
-#: src/ui_configurationDialog.h:813
+#: src/ui_configurationDialog.h:815
 msgid "Show flip buttons"
 msgstr "Shfaq butonat e zhvendosjes"
 
-#: src/ui_configurationDialog.h:814
+#: src/ui_configurationDialog.h:816
 msgid "Planetarium options"
 msgstr "Mundësitë e Planetarium"
 
-#: src/ui_configurationDialog.h:816
+#: src/ui_configurationDialog.h:818
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -1878,19 +1870,19 @@ msgstr ""
 "Shformimi i pasqyrës sferike përdoret kur projektohet Stellarium mbi një "
 "pasqyrë sferike për sisteme planetariumesh me kosto të ulët."
 
-#: src/ui_configurationDialog.h:818
+#: src/ui_configurationDialog.h:820
 msgid "Spheric mirror distortion"
 msgstr "Shformim pasqyre sferike"
 
-#: src/ui_configurationDialog.h:820
+#: src/ui_configurationDialog.h:822
 msgid "Align labels with the horizon"
 msgstr "Etiketa paralele me horizontin"
 
-#: src/ui_configurationDialog.h:822
+#: src/ui_configurationDialog.h:824
 msgid "Gravity labels"
 msgstr "Etiketa gravitacionale"
 
-#: src/ui_configurationDialog.h:824
+#: src/ui_configurationDialog.h:826
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -1898,57 +1890,49 @@ msgstr ""
 "Kur aktivizohet, tasti \"auto zvogëlim\" do të caktojë drejtimin fillestar "
 "të pamjes gjithashtu"
 
-#: src/ui_configurationDialog.h:826
+#: src/ui_configurationDialog.h:828
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Zvogëlimi automatik të kthen në drejtimin fillestar të pamjes"
 
-#: src/ui_configurationDialog.h:828
+#: src/ui_configurationDialog.h:830
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Fshih gjithçka jashtë një rrethi qëndror në pamjen kryesore"
 
-#: src/ui_configurationDialog.h:830
+#: src/ui_configurationDialog.h:832
 msgid "Disc viewport"
 msgstr "Pamje disku"
 
-#: src/ui_configurationDialog.h:832
+#: src/ui_configurationDialog.h:834
 msgid "Hide other constellations when you click one"
 msgstr "Fshih konstelacionet e tjera kur klikon një"
 
-#: src/ui_configurationDialog.h:834
+#: src/ui_configurationDialog.h:836
 msgid "Select single constellation"
 msgstr "Zgjidh konstelacion më vete"
 
-#: src/ui_configurationDialog.h:835
+#: src/ui_configurationDialog.h:837
 msgid "Screenshots"
 msgstr "Foto ekrani"
 
-#: src/ui_configurationDialog.h:836
+#: src/ui_configurationDialog.h:838
 msgid "Screenshot Directory"
 msgstr "Dosja e pamjeve të ekranit"
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:840
 msgid "Invert colors"
 msgstr "Kthe ngjyrat"
 
-#: src/ui_configurationDialog.h:839
+#: src/ui_configurationDialog.h:841
 msgid "Star catalog updates"
 msgstr "Përditësime katalogu yjesh"
 
-#: src/ui_configurationDialog.h:841
+#: src/ui_configurationDialog.h:843
 msgid "Click here to start downloading"
 msgstr "Kliko këtu për të filluar shkarkimin"
 
-#: src/ui_configurationDialog.h:843
-msgid "Get catalog x of y"
-msgstr "Merr katalogun x nga y"
-
-#: src/ui_configurationDialog.h:844
+#: src/ui_configurationDialog.h:845
 msgid "Download this file to view even more stars"
 msgstr "Shkarko këtë skedar për të parë më shumë yjex"
-
-#: src/ui_configurationDialog.h:845
-msgid "xxx"
-msgstr "xxx"
 
 #: src/ui_configurationDialog.h:847
 msgid "Restart the download"
@@ -3822,3 +3806,18 @@ msgstr ""
 
 #~ msgid "Set UI Locale: "
 #~ msgstr "Cakto gjuhën e ndërfaqes: "
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "FOV e nisjes: XX"
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "Drejtimi i pamjes së nisjes: xxxx"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "Merr katalogun x nga y"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "Mbaroi shkarkimi i të gjithë katalogëve të yjeve"
