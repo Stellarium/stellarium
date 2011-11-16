@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-15 00:02+0200\n"
-"PO-Revision-Date: 2011-11-14 02:09+0000\n"
+"POT-Creation-Date: 2011-11-15 19:54+0200\n"
+"PO-Revision-Date: 2011-11-16 00:47+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-15 05:02+0000\n"
+"X-Launchpad-Export-Date: 2011-11-16 05:18+0000\n"
 "X-Generator: Launchpad (build 14291)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -291,55 +291,72 @@ msgstr "(pozorne)"
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Wys: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:300 src/gui/ConfigurationDialog.cpp:302
+#: src/gui/ConfigurationDialog.cpp:305 src/gui/ConfigurationDialog.cpp:307
 msgid "Select screenshot directory"
 msgstr "Wybierz katalog zrzutu ekranu"
 
-#: src/gui/ConfigurationDialog.cpp:470
+#: src/gui/ConfigurationDialog.cpp:475
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Początkowe pole widzenia: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:478
+#: src/gui/ConfigurationDialog.cpp:483
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Początkowy kierunek widzenia Az/Wys: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:517
+#: src/gui/ConfigurationDialog.cpp:522
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:211
 msgid "Authors"
 msgstr "Autorzy"
 
-#: src/gui/ConfigurationDialog.cpp:521 src/gui/ViewDialog.cpp:372
+#: src/gui/ConfigurationDialog.cpp:526 src/gui/ViewDialog.cpp:372
 msgid "Contact"
 msgstr "Kontakt"
 
-#: src/gui/ConfigurationDialog.cpp:596
+#: src/gui/ConfigurationDialog.cpp:601
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:597
+#: src/gui/ConfigurationDialog.cpp:602
 msgid "License"
 msgstr "Licencja"
 
-#: src/gui/ConfigurationDialog.cpp:626
+#: src/gui/ConfigurationDialog.cpp:631
 msgid "Running script: "
 msgstr "Uruchomiony skrypt: "
 
-#: src/gui/ConfigurationDialog.cpp:633
+#: src/gui/ConfigurationDialog.cpp:638
 msgid "Running script: [none]"
 msgstr "Uruchomiony skrypt: [brak]"
 
-#: src/gui/ConfigurationDialog.cpp:676
-msgid "Finished downloading all star catalogs!"
-msgstr "Zakończono ładowanie wszystkich katalogów gwiazd!"
+#: src/gui/ConfigurationDialog.cpp:707
+msgid ""
+"Finished downloading new star catalogs!\n"
+"Restart Stellarium to display them."
+msgstr ""
+"Zakończono pobieranie nowych katalogów gwiazd!\n"
+"Uruchom ponownie Stellarium aby je wyświetlić."
 
-#: src/gui/ConfigurationDialog.cpp:685
+#: src/gui/ConfigurationDialog.cpp:711
+msgid "All available star catalogs have been installed."
+msgstr "Zainstalowano wszystkie dostępne katalogi gwiazd."
+
+#: src/gui/ConfigurationDialog.cpp:716
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Pobierz katalog %1 z %2"
 
-#: src/gui/ConfigurationDialog.cpp:687
+#: src/gui/ConfigurationDialog.cpp:723
+#, qt-format
+msgid ""
+"Downloading %1...\n"
+"(You can close this window.)"
+msgstr ""
+"Pobieranie %1...\n"
+"(Można zamknąć to okno.)"
+
+#: src/gui/ConfigurationDialog.cpp:730
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -350,15 +367,7 @@ msgstr ""
 "Liczba gwiazd: %2 mln\n"
 "Zakres jasności: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:696
-msgid ""
-"Finished downloading new star catalogs!\n"
-"Restart Stellarium to display them."
-msgstr ""
-"Zakończono pobieranie nowych katalogów gwiazd!\n"
-"Uruchom ponownie Stellarium aby je wyświetlić."
-
-#: src/gui/ConfigurationDialog.cpp:734 src/gui/ConfigurationDialog.cpp:768
+#: src/gui/ConfigurationDialog.cpp:773 src/gui/ConfigurationDialog.cpp:809
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -367,20 +376,11 @@ msgstr ""
 "Błąd przy pobieraniu %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:739
-#, qt-format
-msgid ""
-"Downloading %1...\n"
-"(You can close this window.)"
-msgstr ""
-"Pobieranie %1...\n"
-"(Można zamknąć to okno.)"
-
-#: src/gui/ConfigurationDialog.cpp:819
+#: src/gui/ConfigurationDialog.cpp:861
 msgid "Verifying file integrity..."
 msgstr "Sprawdzanie integralności pliku..."
 
-#: src/gui/ConfigurationDialog.cpp:823
+#: src/gui/ConfigurationDialog.cpp:865
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1715,47 +1715,47 @@ msgstr "Użyj tej kultury nieba jako domyślnej"
 msgid "Visible"
 msgstr "Widoczny"
 
-#: src/ui_configurationDialog.h:748
+#: src/ui_configurationDialog.h:752
 msgid "Configuration"
 msgstr "Konfiguracja"
 
-#: src/ui_configurationDialog.h:750
+#: src/ui_configurationDialog.h:754
 msgid "Program language"
 msgstr "Język programu"
 
-#: src/ui_configurationDialog.h:751
+#: src/ui_configurationDialog.h:755
 msgid "Selected object information"
 msgstr "Informacje o wybranym obiekcie"
 
-#: src/ui_configurationDialog.h:753
+#: src/ui_configurationDialog.h:757
 msgid "Display all information available"
 msgstr "Wyświetl wszystkie dostępne informacje"
 
-#: src/ui_configurationDialog.h:755
+#: src/ui_configurationDialog.h:759
 msgid "All available"
 msgstr "Wszystkie dostępne"
 
-#: src/ui_configurationDialog.h:757
+#: src/ui_configurationDialog.h:761
 msgid "Display less information"
 msgstr "Wyświetl mniej informacji"
 
-#: src/ui_configurationDialog.h:759
+#: src/ui_configurationDialog.h:763
 msgid "Short"
 msgstr "Skrócone"
 
-#: src/ui_configurationDialog.h:761
+#: src/ui_configurationDialog.h:765
 msgid "Display no information"
 msgstr "Nie wyświetlaj informacji"
 
-#: src/ui_configurationDialog.h:763
+#: src/ui_configurationDialog.h:767
 msgid "None"
 msgstr "Brak"
 
-#: src/ui_configurationDialog.h:764
+#: src/ui_configurationDialog.h:768
 msgid "Default options"
 msgstr "Opcje domyślne"
 
-#: src/ui_configurationDialog.h:766
+#: src/ui_configurationDialog.h:770
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -1763,20 +1763,20 @@ msgstr ""
 "Zapisz ustawienia, które zmieniłeś podczas tej sesji, żeby były takie same, "
 "gdy ponownie włączysz Stellarium."
 
-#: src/ui_configurationDialog.h:768
+#: src/ui_configurationDialog.h:772
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:383
 msgid "Save settings"
 msgstr "Zapisz ustawienia"
 
-#: src/ui_configurationDialog.h:770
+#: src/ui_configurationDialog.h:774
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Przywróć ustawienia domyślne Stellarium"
 
-#: src/ui_configurationDialog.h:772
+#: src/ui_configurationDialog.h:776
 msgid "Restore defaults"
 msgstr "Przywróć domyślne"
 
-#: src/ui_configurationDialog.h:773
+#: src/ui_configurationDialog.h:777
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -1786,106 +1786,98 @@ msgstr ""
 "Zapisanie wszystkich opcji zapisze także obecne pole widzenia i kierunek "
 "patrzenia."
 
-#: src/ui_configurationDialog.h:775
+#: src/ui_configurationDialog.h:779
 msgid "The width of your view when Stellarium starts"
 msgstr "Szerokość pola widzenia po uruchomieniu Stellarium"
 
-#: src/ui_configurationDialog.h:777
-msgid "Startup FOV: XX"
-msgstr "Początkowe pole widzenia: XX"
-
-#: src/ui_configurationDialog.h:779
+#: src/ui_configurationDialog.h:782
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Kierunek widzenia ustawiany przy uruchamianiu Stellarium"
 
-#: src/ui_configurationDialog.h:781
-msgid "Startup direction of view: xxxx"
-msgstr "Początkowy kierunek widzenia: xxxx"
-
-#: src/ui_configurationDialog.h:782
+#: src/ui_configurationDialog.h:784
 msgid "Control"
 msgstr "Sterowanie"
 
-#: src/ui_configurationDialog.h:784
+#: src/ui_configurationDialog.h:786
 msgid "Allow keyboard to pan and zoom"
 msgstr "Zezwól na użycie klawiatury do przesuwania i zoomowania widoku"
 
-#: src/ui_configurationDialog.h:786
+#: src/ui_configurationDialog.h:788
 msgid "Enable keyboard navigation"
 msgstr "Zezwól na nawigację klawiaturą"
 
-#: src/ui_configurationDialog.h:788
+#: src/ui_configurationDialog.h:790
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "Zezwól na użycie myszy do przesuwania (przeciąganie) i zoomowania widoku "
 "(kółko)"
 
-#: src/ui_configurationDialog.h:790
+#: src/ui_configurationDialog.h:792
 msgid "Enable mouse navigation"
 msgstr "Zezwól na nawigację myszką"
 
-#: src/ui_configurationDialog.h:791
+#: src/ui_configurationDialog.h:793
 msgid "Startup date and time"
 msgstr "Początkowy czas i data"
 
-#: src/ui_configurationDialog.h:793
+#: src/ui_configurationDialog.h:795
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Uruchom Stellarium z datą i godziną systemową"
 
-#: src/ui_configurationDialog.h:795
+#: src/ui_configurationDialog.h:797
 msgid "System date and time"
 msgstr "Data i czas systemowy"
 
-#: src/ui_configurationDialog.h:797
+#: src/ui_configurationDialog.h:799
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
 "Ustawia czas symulacji na porę doby najbliższą porze startu Stellarium"
 
-#: src/ui_configurationDialog.h:799
+#: src/ui_configurationDialog.h:801
 msgid "System date at:"
 msgstr "Data systemowa:"
 
-#: src/ui_configurationDialog.h:801
+#: src/ui_configurationDialog.h:803
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr ""
 "Użyj określonej daty i czasu podczas uruchamiania programu Stellarium."
 
-#: src/ui_configurationDialog.h:803
+#: src/ui_configurationDialog.h:805
 msgid "Other:"
 msgstr "Inne:"
 
-#: src/ui_configurationDialog.h:804
+#: src/ui_configurationDialog.h:806
 msgid "use current"
 msgstr "użyj bieżącego"
 
-#: src/ui_configurationDialog.h:805
+#: src/ui_configurationDialog.h:807
 msgid "Other"
 msgstr "Inny"
 
-#: src/ui_configurationDialog.h:807
+#: src/ui_configurationDialog.h:809
 msgid "Hides the mouse cursor when inactive"
 msgstr "Ukrywaj nieruchomy kursor myszy"
 
-#: src/ui_configurationDialog.h:809
+#: src/ui_configurationDialog.h:811
 msgid "Mouse cursor timeout (seconds):"
 msgstr "Limit czasu kursora myszy (w sekundach):"
 
-#: src/ui_configurationDialog.h:811
+#: src/ui_configurationDialog.h:813
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr ""
 "Przełącz wyświetlanie przycisków odwracania obrazu w pionie i w poziomie."
 
-#: src/ui_configurationDialog.h:813
+#: src/ui_configurationDialog.h:815
 msgid "Show flip buttons"
 msgstr "Pokaż przyciski odwracania obrazu"
 
-#: src/ui_configurationDialog.h:814
+#: src/ui_configurationDialog.h:816
 msgid "Planetarium options"
 msgstr "Opcje planetarium"
 
-#: src/ui_configurationDialog.h:816
+#: src/ui_configurationDialog.h:818
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -1893,19 +1885,19 @@ msgstr ""
 "Zniekształcenie zwierciadła kulistego jest używane przy rzutowaniu obrazu na "
 "kopułę poprzez zwierciadło kuliste. Stosowane w tańszych planetariach."
 
-#: src/ui_configurationDialog.h:818
+#: src/ui_configurationDialog.h:820
 msgid "Spheric mirror distortion"
 msgstr "Zniekształcenie zwierciadła sferycznego"
 
-#: src/ui_configurationDialog.h:820
+#: src/ui_configurationDialog.h:822
 msgid "Align labels with the horizon"
 msgstr "Umieszczaj etykiety równolegle do horyzontu"
 
-#: src/ui_configurationDialog.h:822
+#: src/ui_configurationDialog.h:824
 msgid "Gravity labels"
 msgstr "Kierunek etykiet zgodny z grawitacją"
 
-#: src/ui_configurationDialog.h:824
+#: src/ui_configurationDialog.h:826
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -1913,57 +1905,49 @@ msgstr ""
 "Klawisz automatycznego oddalania będzie również przywracał początkowy "
 "kierunek patrzenia."
 
-#: src/ui_configurationDialog.h:826
+#: src/ui_configurationDialog.h:828
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Automatyczne oddalanie przywraca początkowy kierunek patrzenia"
 
-#: src/ui_configurationDialog.h:828
+#: src/ui_configurationDialog.h:830
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Zakryj wszystko poza kołem w centrum widoku"
 
-#: src/ui_configurationDialog.h:830
+#: src/ui_configurationDialog.h:832
 msgid "Disc viewport"
 msgstr "Okrągłe pole widzenia"
 
-#: src/ui_configurationDialog.h:832
+#: src/ui_configurationDialog.h:834
 msgid "Hide other constellations when you click one"
 msgstr "Po kliknięciu jednego z gwiazdozbiorów ukryj pozostałe"
 
-#: src/ui_configurationDialog.h:834
+#: src/ui_configurationDialog.h:836
 msgid "Select single constellation"
 msgstr "Wybierz pojedynczy gwiazdozbiór"
 
-#: src/ui_configurationDialog.h:835
+#: src/ui_configurationDialog.h:837
 msgid "Screenshots"
 msgstr "Zrzuty ekranu"
 
-#: src/ui_configurationDialog.h:836
+#: src/ui_configurationDialog.h:838
 msgid "Screenshot Directory"
 msgstr "Katalog zrzutów ekranu"
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:840
 msgid "Invert colors"
 msgstr "Odwróć kolory"
 
-#: src/ui_configurationDialog.h:839
+#: src/ui_configurationDialog.h:841
 msgid "Star catalog updates"
 msgstr "Aktualizacje katalogu gwiazd"
 
-#: src/ui_configurationDialog.h:841
+#: src/ui_configurationDialog.h:843
 msgid "Click here to start downloading"
 msgstr "Kliknij tutaj aby rozpocząć pobieranie"
 
-#: src/ui_configurationDialog.h:843
-msgid "Get catalog x of y"
-msgstr "Pobierz katalog x zawierający y"
-
-#: src/ui_configurationDialog.h:844
+#: src/ui_configurationDialog.h:845
 msgid "Download this file to view even more stars"
 msgstr "Pobierz ten plik, aby wyświetlić jeszcze więcej gwiazd"
-
-#: src/ui_configurationDialog.h:845
-msgid "xxx"
-msgstr "xxx"
 
 #: src/ui_configurationDialog.h:847
 msgid "Restart the download"
@@ -2512,7 +2496,7 @@ msgstr "Rozmiar czcionki etykiet (w pikselach):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:608
 msgid "Orbit lines"
-msgstr ""
+msgstr "Orbity"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:610
 #: plugins/Satellites/src/ui_satellitesDialog.h:614
@@ -2563,7 +2547,7 @@ msgstr "Wyświetlane"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:638
 msgid "Display orbit line(s) for the selected satellite(s)"
-msgstr ""
+msgstr "Wyświetlaj orbity wybranych satelitów"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 msgid "Orbit"
@@ -2974,7 +2958,7 @@ msgstr "Pliki"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Log telescope driver messages to files"
-msgstr ""
+msgstr "Zapisuj komunikaty sterownika teleskopu w plikach dziennika"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:406
 msgid "Use telescope server executables (override built-in drivers)"
@@ -3304,11 +3288,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:169
 msgid "Date Display Format"
-msgstr ""
+msgstr "Format wyświetlania daty"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Time Display Format"
-msgstr ""
+msgstr "Format wyświetlania daty"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:189
 msgid "General"
@@ -3324,7 +3308,7 @@ msgstr "Język"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:210
 msgid "Show Stars"
-msgstr ""
+msgstr "Pokaż gwiazdy"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:213
 msgid "Star Relative Scale"
@@ -3336,11 +3320,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:221
 msgid "Twinkling"
-msgstr ""
+msgstr "Migotanie"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:232
 msgid "Colors"
-msgstr ""
+msgstr "Kolory"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Constellation Lines"
@@ -3424,7 +3408,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
 msgid "Magnitude Scaling Multiplier"
-msgstr ""
+msgstr "Mnożnik wielkości gwiazdowej"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Milky Way Intensity"
@@ -3574,6 +3558,9 @@ msgid ""
 "href=\"http://www.minorplanetcenter.net/iau/MPEph/MPEph.html\">Minor Planet "
 "&amp; Comet Ephemeris Service</a>:"
 msgstr ""
+"Wyślij zapytanie do <a "
+"href=\"http://www.minorplanetcenter.net/iau/MPEph/MPEph.html\">Serwisu "
+"efemeryd małych ciał i komet</a> na stronie MPC:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid ""
@@ -3587,7 +3574,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Objects found"
-msgstr ""
+msgstr "Znalezione obiekty"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid ""
@@ -3597,39 +3584,44 @@ msgid ""
 "Solar System configuration.<br/>Note that adding a large number of objects "
 "may cause Stellarium to run slowly."
 msgstr ""
+"Zaznacz obiekty do zaimportowania. <i>Kursywą</i> wypisane są nazwy "
+"obiektów, które już są załadowane. <b>Pogrubioną czcionką</b> wypisane są "
+"nazwy obiektów odziedziczonych z domyślnej konfiguracji Układu Słonecznego "
+"programu Stellarium.<br/>Należy zauważyć, że dodanie dużej liczby obiektów "
+"może spowolnić działanie programu."
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
 msgid "Overwrite existing objects"
-msgstr ""
+msgstr "Zastąp istniejące obiekty"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
 msgid "Update existing objects"
-msgstr ""
+msgstr "Aktualizuj istniejące obiekty"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:549
 msgid "Update only the orbital elements"
-msgstr ""
+msgstr "Aktualizuj tylko elementy orbitalne"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:550
 msgid "Mark all"
-msgstr ""
+msgstr "Zaznacz wszystkie"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:551
 msgid "Mark none"
-msgstr ""
+msgstr "Usuń zaznaczenie"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:552
 msgid "Discard"
-msgstr ""
+msgstr "Porzuć"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:553
 msgid "Add objects"
-msgstr ""
+msgstr "Dodaj obiekty"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:327
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:338
 msgid "Solar System objects"
-msgstr ""
+msgstr "Obiekty Układu Słonecznego"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:329
 msgid "Warning"
@@ -3641,41 +3633,47 @@ msgid ""
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
 msgstr ""
+"Ta wtyczka korzysta z własnego pliku konfiguracji Układu Słonecznego. Jeśli "
+"coś pójdzie źle i program Stellarium przestanie działać i/lub nie uruchomi "
+"się, możesz ręcznie skasować ten plik stąd:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:331
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
+"Możesz również cofnąć wszystkie zmiany i przywrócić konfigurację domyślną:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:332
 msgid "Reset to defaults"
-msgstr ""
+msgstr "Przywróć ustawienia domyślne"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:333
 msgid "Copy/replace the Solar System file"
-msgstr ""
+msgstr "Kopiuj/zastąp plik Układu Słonecznego"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:334
 msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
+"Możesz utworzyć w dogodnym miejscu kopię zapasową własnego pliku "
+"konfiguracyjnego Układu Słonecznego, albo też zastąpić plik taką kopią."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:335
 msgid "Copy the Solar System file..."
-msgstr ""
+msgstr "Kopiuj plik Układu Słonecznego..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:336
 msgid "Replace the Solar System file..."
-msgstr ""
+msgstr "Zastąp plik Układu Słonecznego..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:337
 msgid "Configuration file"
-msgstr ""
+msgstr "Plik konfiguracyjny"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:340
 msgid "Add new Solar System objects"
-msgstr ""
+msgstr "Dodaj nowe obiekty Układu Słonecznego"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:341
 msgid ""
@@ -3688,38 +3686,40 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:342
 msgid "Import orbital elements in MPC format..."
-msgstr ""
+msgstr "Zaimportuj elementy orbitalne w formacie MPC..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:343
 msgid "Solar System"
-msgstr ""
+msgstr "Układ Słoneczny"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:344
 msgid "Enter manually a new Solar System object"
-msgstr ""
+msgstr "Wprowadź ręcznie nowy obiekt Układu Słonecznego"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:345
 msgid ""
 "You can add a new object by entering manually the properties used by "
 "Stellarium."
 msgstr ""
+"Możesz dodać nowy obiekt, wprowadzając ręcznie właściwości używane w "
+"programie Stellarium."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:346
 msgid "Enter manually object properties..."
-msgstr ""
+msgstr "Wprowadź ręcznie właściwości obiektu..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:347
 msgid "Data import"
-msgstr ""
+msgstr "Import danych"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:348
 msgid "Solar System Editor plug-in"
-msgstr ""
+msgstr "Wtyczka Edytor Układu Słonecznego"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:349
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "Wersja %1"
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical Supernovae"
@@ -3845,8 +3845,20 @@ msgstr "Typ: %1"
 #~ msgid "Maximum Nebula Magnitude to Label: "
 #~ msgstr "Podpisy mgławic maksymalnie do wielkości gwiazdowej: "
 
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "Pobierz katalog x zawierający y"
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "Początkowe pole widzenia: XX"
+
 #~ msgid "General "
 #~ msgstr "Ogólne "
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "Początkowy kierunek widzenia: xxxx"
 
 #~ msgid "Manual zoom: "
 #~ msgstr "Zoom Ręczny: "
@@ -3865,6 +3877,9 @@ msgstr "Typ: %1"
 
 #~ msgid "Actual Time"
 #~ msgstr "Czas rzeczywisty"
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "Zakończono ładowanie wszystkich katalogów gwiazd!"
 
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "Graniczna wielkość gwiazdowa "
