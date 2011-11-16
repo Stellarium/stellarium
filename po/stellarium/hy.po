@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-15 00:02+0200\n"
+"POT-Creation-Date: 2011-11-15 19:54+0200\n"
 "PO-Revision-Date: 2011-05-28 11:53+0000\n"
 "Last-Translator: Serj Safarian <serjsafarian@gmail.com>\n"
 "Language-Team: Armenian <hy@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-15 04:58+0000\n"
+"X-Launchpad-Export-Date: 2011-11-16 05:14+0000\n"
 "X-Generator: Launchpad (build 14291)\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 
@@ -315,55 +315,72 @@ msgstr ""
 msgid "Az/Alt: %1/%2"
 msgstr "Ազիմուտը/Բարձրությունը՝ %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:300 src/gui/ConfigurationDialog.cpp:302
+#: src/gui/ConfigurationDialog.cpp:305 src/gui/ConfigurationDialog.cpp:307
 msgid "Select screenshot directory"
 msgstr "Պանակ ընտրե՛ք ցուցադրիչի լուսանկարի համար"
 
-#: src/gui/ConfigurationDialog.cpp:470
+#: src/gui/ConfigurationDialog.cpp:475
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Սկզբնական տեսադաշտը՝ %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:478
+#: src/gui/ConfigurationDialog.cpp:483
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Դիտելու սզբնական ուղղությունը. Ազ/Բարձրութ.՝ %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:517
+#: src/gui/ConfigurationDialog.cpp:522
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:211
 msgid "Authors"
 msgstr "Հեղինակներ"
 
-#: src/gui/ConfigurationDialog.cpp:521 src/gui/ViewDialog.cpp:372
+#: src/gui/ConfigurationDialog.cpp:526 src/gui/ViewDialog.cpp:372
 msgid "Contact"
 msgstr "Կապորդներ"
 
-#: src/gui/ConfigurationDialog.cpp:596
+#: src/gui/ConfigurationDialog.cpp:601
 msgid "Author"
 msgstr "Հեղինակ"
 
-#: src/gui/ConfigurationDialog.cpp:597
+#: src/gui/ConfigurationDialog.cpp:602
 msgid "License"
 msgstr "Արտոնագիր"
 
-#: src/gui/ConfigurationDialog.cpp:626
+#: src/gui/ConfigurationDialog.cpp:631
 msgid "Running script: "
 msgstr "Գործարկված գրվածք՝ "
 
-#: src/gui/ConfigurationDialog.cpp:633
+#: src/gui/ConfigurationDialog.cpp:638
 msgid "Running script: [none]"
 msgstr "Գործարկված գրվածք՝ [չկա]"
 
-#: src/gui/ConfigurationDialog.cpp:676
-msgid "Finished downloading all star catalogs!"
-msgstr "Աստղերի բոլոր գրացուցակների ներբեռնումն ավարտվել է։"
+#: src/gui/ConfigurationDialog.cpp:707
+msgid ""
+"Finished downloading new star catalogs!\n"
+"Restart Stellarium to display them."
+msgstr ""
+"Աստղերի նոր գրացուցակների ներբեռնումն ավարտվե՛լ է։\n"
+"Վերագործարկե՛ք Stellarium֊ը՝ դրանք ցուցադրելու համար։"
 
-#: src/gui/ConfigurationDialog.cpp:685
+#: src/gui/ConfigurationDialog.cpp:711
+msgid "All available star catalogs have been installed."
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:716
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%2֊ից՝ %1 գրացուցակի ընդունում"
 
-#: src/gui/ConfigurationDialog.cpp:687
+#: src/gui/ConfigurationDialog.cpp:723
+#, qt-format
+msgid ""
+"Downloading %1...\n"
+"(You can close this window.)"
+msgstr ""
+"Ներբեռնում %1...\n"
+"(Դուք կարող եք փակել այս պատուհանը)։"
+
+#: src/gui/ConfigurationDialog.cpp:730
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -374,15 +391,7 @@ msgstr ""
 "Աստղերի քանակը՝ %2 միլիոն\n"
 "Աստղային մեծությունների սահմանները՝ %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:696
-msgid ""
-"Finished downloading new star catalogs!\n"
-"Restart Stellarium to display them."
-msgstr ""
-"Աստղերի նոր գրացուցակների ներբեռնումն ավարտվե՛լ է։\n"
-"Վերագործարկե՛ք Stellarium֊ը՝ դրանք ցուցադրելու համար։"
-
-#: src/gui/ConfigurationDialog.cpp:734 src/gui/ConfigurationDialog.cpp:768
+#: src/gui/ConfigurationDialog.cpp:773 src/gui/ConfigurationDialog.cpp:809
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -391,20 +400,11 @@ msgstr ""
 "Ներբեռնման սխալ %1՝\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:739
-#, qt-format
-msgid ""
-"Downloading %1...\n"
-"(You can close this window.)"
-msgstr ""
-"Ներբեռնում %1...\n"
-"(Դուք կարող եք փակել այս պատուհանը)։"
-
-#: src/gui/ConfigurationDialog.cpp:819
+#: src/gui/ConfigurationDialog.cpp:861
 msgid "Verifying file integrity..."
 msgstr "Նշոցների ամբողջականության ստուգում..."
 
-#: src/gui/ConfigurationDialog.cpp:823
+#: src/gui/ConfigurationDialog.cpp:865
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1729,66 +1729,66 @@ msgstr "Օգտագործել երկնքի այս մշակույթը լռելյա
 msgid "Visible"
 msgstr "Տեսանելի"
 
-#: src/ui_configurationDialog.h:748
+#: src/ui_configurationDialog.h:752
 msgid "Configuration"
 msgstr "Կազմաձեւեր"
 
-#: src/ui_configurationDialog.h:750
+#: src/ui_configurationDialog.h:754
 msgid "Program language"
 msgstr "Ծրագրի լեզուն"
 
-#: src/ui_configurationDialog.h:751
+#: src/ui_configurationDialog.h:755
 msgid "Selected object information"
 msgstr "Տեղեկություն ընտրված առարկայի մասին"
 
-#: src/ui_configurationDialog.h:753
+#: src/ui_configurationDialog.h:757
 msgid "Display all information available"
 msgstr "Ցույց տալ ամբողջ տեղեկությունը"
 
-#: src/ui_configurationDialog.h:755
+#: src/ui_configurationDialog.h:759
 msgid "All available"
 msgstr "Բոլոր մատչելի"
 
-#: src/ui_configurationDialog.h:757
+#: src/ui_configurationDialog.h:761
 msgid "Display less information"
 msgstr "Ցույց տալ հակիրճ տեղեկությունը"
 
-#: src/ui_configurationDialog.h:759
+#: src/ui_configurationDialog.h:763
 msgid "Short"
 msgstr "Կարճ"
 
-#: src/ui_configurationDialog.h:761
+#: src/ui_configurationDialog.h:765
 msgid "Display no information"
 msgstr "Ցուց չտալ տեղեկությունը"
 
-#: src/ui_configurationDialog.h:763
+#: src/ui_configurationDialog.h:767
 msgid "None"
 msgstr "Ոչ մեկը"
 
-#: src/ui_configurationDialog.h:764
+#: src/ui_configurationDialog.h:768
 msgid "Default options"
 msgstr "Լռելյայն ընտրանքներ"
 
-#: src/ui_configurationDialog.h:766
+#: src/ui_configurationDialog.h:770
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr "Հիշել այս կայանքներն ապագա բոլոր նիստերի համար"
 
-#: src/ui_configurationDialog.h:768
+#: src/ui_configurationDialog.h:772
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:383
 msgid "Save settings"
 msgstr "Հիշել կայանքները"
 
-#: src/ui_configurationDialog.h:770
+#: src/ui_configurationDialog.h:774
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Վերականգնել հիմնօրինակային կայանքները"
 
-#: src/ui_configurationDialog.h:772
+#: src/ui_configurationDialog.h:776
 msgid "Restore defaults"
 msgstr "Վերականգնել լռելյայն կայանքները"
 
-#: src/ui_configurationDialog.h:773
+#: src/ui_configurationDialog.h:777
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -1798,101 +1798,93 @@ msgstr ""
 "Բոլոր ընթացիկ ընտրանքների պահպանում, ներառյալ տեսադաշտը եւ դիտման "
 "ուղղությունը։"
 
-#: src/ui_configurationDialog.h:775
+#: src/ui_configurationDialog.h:779
 msgid "The width of your view when Stellarium starts"
 msgstr "Տեսադաշտը Stellarium֊ը գործարկելիս"
 
-#: src/ui_configurationDialog.h:777
-msgid "Startup FOV: XX"
-msgstr "Սկզբնական տեսադաշտը՝ XX"
-
-#: src/ui_configurationDialog.h:779
+#: src/ui_configurationDialog.h:782
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Հայացքի ուղղությունը՝ Stellarium֊ը գործարկելու ժամանակ"
 
-#: src/ui_configurationDialog.h:781
-msgid "Startup direction of view: xxxx"
-msgstr "Դիտման սկզբնական ուղղությունը՝ xxxx"
-
-#: src/ui_configurationDialog.h:782
+#: src/ui_configurationDialog.h:784
 msgid "Control"
 msgstr "Հսկում"
 
-#: src/ui_configurationDialog.h:784
+#: src/ui_configurationDialog.h:786
 msgid "Allow keyboard to pan and zoom"
 msgstr "Օգտագործել ստեղնաշարը շարժելու եւ խոշորացնելու համար"
 
-#: src/ui_configurationDialog.h:786
+#: src/ui_configurationDialog.h:788
 msgid "Enable keyboard navigation"
 msgstr "Միացնել ստեղնաշարի միջոցով տեղաշարժումը"
 
-#: src/ui_configurationDialog.h:788
+#: src/ui_configurationDialog.h:790
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "Օգտագործել մկնիկը՝ տեղաշարժելու եւ խոշորացնելու (մկնիկի անիվը) համար"
 
-#: src/ui_configurationDialog.h:790
+#: src/ui_configurationDialog.h:792
 msgid "Enable mouse navigation"
 msgstr "Միացնել մկնիկի միջոցով տեղաշարժումը"
 
-#: src/ui_configurationDialog.h:791
+#: src/ui_configurationDialog.h:793
 msgid "Startup date and time"
 msgstr "Սկզբնական ամսաթիվն եւ ժամանակը"
 
-#: src/ui_configurationDialog.h:793
+#: src/ui_configurationDialog.h:795
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Գործարկել Stellarium֊ը նշված օրը եւ ժամին"
 
-#: src/ui_configurationDialog.h:795
+#: src/ui_configurationDialog.h:797
 msgid "System date and time"
 msgstr "Համակարգի ամսաթիվն եւ ժամանակը"
 
-#: src/ui_configurationDialog.h:797
+#: src/ui_configurationDialog.h:799
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "Կայել հետեւյալ օրվա ժամանակը՝ Stellarium֊ը գործարկելու համար"
 
-#: src/ui_configurationDialog.h:799
+#: src/ui_configurationDialog.h:801
 msgid "System date at:"
 msgstr "Համակարգի ամսաթիվը՝"
 
-#: src/ui_configurationDialog.h:801
+#: src/ui_configurationDialog.h:803
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Օգտագործել նշված ամսաթիվն եւ ժամը՝ Stellarium֊ը գործարկելիս"
 
-#: src/ui_configurationDialog.h:803
+#: src/ui_configurationDialog.h:805
 msgid "Other:"
 msgstr "Այլ՝"
 
-#: src/ui_configurationDialog.h:804
+#: src/ui_configurationDialog.h:806
 msgid "use current"
 msgstr "օգտագործել ընթացիկը"
 
-#: src/ui_configurationDialog.h:805
+#: src/ui_configurationDialog.h:807
 msgid "Other"
 msgstr "Այլ"
 
-#: src/ui_configurationDialog.h:807
+#: src/ui_configurationDialog.h:809
 msgid "Hides the mouse cursor when inactive"
 msgstr "Թաքցնել մկնիկի շարժագիծը՝ անգործ լինելու ժամանակ"
 
-#: src/ui_configurationDialog.h:809
+#: src/ui_configurationDialog.h:811
 msgid "Mouse cursor timeout (seconds):"
 msgstr "Մկնիկի շարժագծի պարապուրդ (վայրկյան)՝"
 
-#: src/ui_configurationDialog.h:811
+#: src/ui_configurationDialog.h:813
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Հորիզոնական եւ ուղղաձիգ շրջելու համար կոճակները։"
 
-#: src/ui_configurationDialog.h:813
+#: src/ui_configurationDialog.h:815
 msgid "Show flip buttons"
 msgstr "Ցույց տալ շրջելու կոճակները"
 
-#: src/ui_configurationDialog.h:814
+#: src/ui_configurationDialog.h:816
 msgid "Planetarium options"
 msgstr "Պլանետարիումի ընտրանքները"
 
-#: src/ui_configurationDialog.h:816
+#: src/ui_configurationDialog.h:818
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -1900,19 +1892,19 @@ msgstr ""
 "Կորնթարդ հայելու աղավաղումն օգտագործվում է ոչ թանկ պլանետարիումների "
 "համակարգներում՝ Stellarium֊ը կորնթարդ հայելու վրա պրոյեկցելու ժամանակ։"
 
-#: src/ui_configurationDialog.h:818
+#: src/ui_configurationDialog.h:820
 msgid "Spheric mirror distortion"
 msgstr "Կորնթարդ հայելու աղավաղումը"
 
-#: src/ui_configurationDialog.h:820
+#: src/ui_configurationDialog.h:822
 msgid "Align labels with the horizon"
 msgstr "Հավասարեցնել ստորագրություններն ըստ հորիզոնի"
 
-#: src/ui_configurationDialog.h:822
+#: src/ui_configurationDialog.h:824
 msgid "Gravity labels"
 msgstr "Ոչ հորիզոնական ստորագրություններ"
 
-#: src/ui_configurationDialog.h:824
+#: src/ui_configurationDialog.h:826
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -1920,57 +1912,49 @@ msgstr ""
 "Եթե միացված է, ինքնափոքրացման ստեղնը նաեւ կայում է դիտելու սկզբնական "
 "ուղղությունը"
 
-#: src/ui_configurationDialog.h:826
+#: src/ui_configurationDialog.h:828
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Ինքնափոքրացումը կայում է դիտելու սկզբնական ուղղությունը"
 
-#: src/ui_configurationDialog.h:828
+#: src/ui_configurationDialog.h:830
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Դիմակավորել այն բոլորը, ինչը գտնվում է կենտրոնական տեսադաշտից դուրս"
 
-#: src/ui_configurationDialog.h:830
+#: src/ui_configurationDialog.h:832
 msgid "Disc viewport"
 msgstr "Սկավառակաձեւ տեսադաշտ"
 
-#: src/ui_configurationDialog.h:832
+#: src/ui_configurationDialog.h:834
 msgid "Hide other constellations when you click one"
 msgstr "Թաքցնել համաստեղությունները կտտոցի դեպքում"
 
-#: src/ui_configurationDialog.h:834
+#: src/ui_configurationDialog.h:836
 msgid "Select single constellation"
 msgstr "Ընտրե՛ք մի համաստեղություն"
 
-#: src/ui_configurationDialog.h:835
+#: src/ui_configurationDialog.h:837
 msgid "Screenshots"
 msgstr "Ցուցադրիչի նկարները"
 
-#: src/ui_configurationDialog.h:836
+#: src/ui_configurationDialog.h:838
 msgid "Screenshot Directory"
 msgstr "Ցուցադրիչի նկարների պանակը"
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:840
 msgid "Invert colors"
 msgstr "Հակադարձել գույները"
 
-#: src/ui_configurationDialog.h:839
+#: src/ui_configurationDialog.h:841
 msgid "Star catalog updates"
 msgstr "Աստղերի գրացուցակի թարմացում"
 
-#: src/ui_configurationDialog.h:841
+#: src/ui_configurationDialog.h:843
 msgid "Click here to start downloading"
 msgstr "Ներբեռնելու համար կտտացրեք այստեղ"
 
-#: src/ui_configurationDialog.h:843
-msgid "Get catalog x of y"
-msgstr "Ստանալ x գրացուցակը՝ y֊ից"
-
-#: src/ui_configurationDialog.h:844
+#: src/ui_configurationDialog.h:845
 msgid "Download this file to view even more stars"
 msgstr "Ներբեռնե՛ք այս նշոցը, որպեսզի տեսնել ավելի շատ աստղեր"
-
-#: src/ui_configurationDialog.h:845
-msgid "xxx"
-msgstr "xxx"
 
 #: src/ui_configurationDialog.h:847
 msgid "Restart the download"
@@ -3805,6 +3789,9 @@ msgstr ""
 #~ msgid "Save Current Configuration as Default: "
 #~ msgstr "Հիշել ընթացիկ կազմաձեւերն որպես լռելյայն կայանքներ՝ "
 
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "Աստղերի բոլոր գրացուցակների ներբեռնումն ավարտվել է։"
+
 #~ msgid "Set Time Zone: "
 #~ msgstr "Կայել ժամային գոտին՝ "
 
@@ -3813,3 +3800,15 @@ msgstr ""
 
 #~ msgid "Correct for light travel time: "
 #~ msgstr "Լույսի տարածման ժամանակի շտկում՝ "
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "Սկզբնական տեսադաշտը՝ XX"
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "Դիտման սկզբնական ուղղությունը՝ xxxx"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "Ստանալ x գրացուցակը՝ y֊ից"
