@@ -664,9 +664,7 @@ void TextUserInterface::saveDefaultSettings(void)
 	conf->setValue("color/nebula_circle_color", colToConf(nmgr->getCirclesColor()));
 
 	// sub-menu 6: effects
-	// TODO enable this when we do the release after 0.10.2 - this plugin will crash for 0.10.2 because
-	// getAtmosphereBortleLightPollution() was not defined in the 0.10.2 release.
-	// conf->setValue("stars/init_bortle_scale", lmgr->getAtmosphereBortleLightPollution());
+	conf->setValue("stars/init_bortle_scale", lmgr->getAtmosphereBortleLightPollution());
 	lmgr->setDefaultLandscapeID(lmgr->getCurrentLandscapeID());
 	conf->setValue("navigation/auto_zoom_out_resets_direction", mvmgr->getFlagAutoZoomOutResetsDirection());
 	conf->setValue("astro/milky_way_intensity", milk->getIntensity());
