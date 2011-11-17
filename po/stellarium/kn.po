@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-15 19:54+0200\n"
+"POT-Creation-Date: 2011-11-16 11:00+0200\n"
 "PO-Revision-Date: 2011-08-11 05:09+0000\n"
 "Last-Translator: Prashanth <Unknown>\n"
 "Language-Team: Kannada <kn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-16 05:17+0000\n"
+"X-Launchpad-Export-Date: 2011-11-17 05:17+0000\n"
 "X-Generator: Launchpad (build 14291)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -517,30 +517,37 @@ msgid "Display Options"
 msgstr "ದರ್ಶಕದ ಆಯ್ಕೆಗಳು"
 
 #: src/gui/StelGui.cpp:99
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
 msgid "Constellation lines"
 msgstr "ತಾರಾಗಣ ರೇಖೆ"
 
 #: src/gui/StelGui.cpp:100
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:273
 msgid "Constellation art"
 msgstr "ತಾರಾಗಣದ ಚಿತ್ರಕಲೆ"
 
 #: src/gui/StelGui.cpp:101
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Constellation labels"
 msgstr "ತಾರಾಗಣದ ಗುರುತು"
 
 #: src/gui/StelGui.cpp:102
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:274
 msgid "Constellation boundaries"
 msgstr "ತಾರಾಗಣದ ಪರಿಮಿತಿ"
 
 #: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1104
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Azimuthal grid"
 msgstr "ದಿಗಾಂಶ ಜಾಲ"
 
 #: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1102
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Equatorial grid"
 msgstr "ಸಮಭಾಜಕ ವ್ರತ್ತದ ಜಾಲ"
 
 #: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1103
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial J2000 grid"
 msgstr ""
 
@@ -549,14 +556,17 @@ msgid "Galactic grid"
 msgstr ""
 
 #: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1108
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Ecliptic line"
 msgstr ""
 
 #: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1105
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equator line"
 msgstr "ಸಮಭಾಜಕ ವ್ರತ್ತ"
 
 #: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1106
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Meridian line"
 msgstr "ಮಧ್ಯ ರೇಖೆ"
 
@@ -565,6 +575,7 @@ msgid "Horizon line"
 msgstr ""
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1109
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
 msgid "Cardinal points"
 msgstr ""
 
@@ -589,19 +600,22 @@ msgid "Nebulas background images"
 msgstr ""
 
 #: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1068 src/ui_viewDialog.h:1090
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:208
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Stars"
 msgstr "ನಕ್ಷತ್ರಗಳು"
 
 #: src/gui/StelGui.cpp:121
-msgid "Planets labels"
-msgstr "ಗ್ರಹಗಳ ಹೆಸರು"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:292
+msgid "Planet labels"
+msgstr ""
 
 #: src/gui/StelGui.cpp:122
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:296
 msgid "Planet orbits"
 msgstr "ಗ್ರಹ ಕಕ್ಷೆ"
 
 #: src/gui/StelGui.cpp:123
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:300
 msgid "Planet trails"
 msgstr "ಗ್ರಹ ಜಾಡು"
 
@@ -654,6 +668,7 @@ msgid "Script console window"
 msgstr ""
 
 #: src/gui/StelGui.cpp:141 src/ui_dateTimeDialogGui.h:294
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:156
 msgid "Date and Time"
 msgstr "ದಿನಾಂಕ ಹಾಗು ಸಮಯ"
 
@@ -1305,6 +1320,7 @@ msgid "Refresh"
 msgstr "ನವೀಕರಿಸು"
 
 #: src/ui_locationDialogGui.h:387
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:129
 msgid "Location"
 msgstr "ಸ್ಥಳ"
 
@@ -1325,6 +1341,7 @@ msgid "Add to list"
 msgstr "ಪಟ್ಟಿಗೆ ಸೇರಿಸಿ"
 
 #: src/ui_locationDialogGui.h:395
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:130
 msgid "Latitude:"
 msgstr "ಅಕ್ಷಾಂಶ:"
 
@@ -1335,10 +1352,12 @@ msgid ""
 msgstr ""
 
 #: src/ui_locationDialogGui.h:399
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:133
 msgid "Longitude:"
 msgstr "ರೇಖಾಂಶ:"
 
 #: src/ui_locationDialogGui.h:403
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:136
 msgid "Altitude:"
 msgstr "ಎತ್ತರ(ಸಮುದ್ರ ಮಟ್ಟದಿಂದ):"
 
@@ -1495,23 +1514,27 @@ msgid "Markings"
 msgstr ""
 
 #: src/ui_viewDialog.h:1063
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:325
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:371
 msgid "Landscape"
 msgstr "ಭೂದೃಶ್ಯ"
 
 #: src/ui_viewDialog.h:1065
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:212
 msgid "Starlore"
 msgstr ""
 
 #: src/ui_viewDialog.h:1069
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Absolute scale:"
 msgstr "ಪೂರ್ಣ ಪ್ರಮಾಣ:"
 
 #: src/ui_viewDialog.h:1070
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:236
 msgid "Relative scale:"
 msgstr "ಸಾಪೇಕ್ಷ ಪ್ರಮಾಣ:"
 
 #: src/ui_viewDialog.h:1071
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Twinkle:"
 msgstr "ಹೊಳೆಯುವಿಕೆ:"
 
@@ -1552,8 +1575,9 @@ msgid "Show atmosphere"
 msgstr "ವತಾವರಣವನ್ನು ತೋರಿಸು"
 
 #: src/ui_viewDialog.h:1084
-msgid "Light pollution: "
-msgstr "ಬೆಳಕಿನ ಮಾಲಿನ್ಯ: "
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
+msgid "Light pollution:"
+msgstr ""
 
 #: src/ui_viewDialog.h:1086
 msgid "pressure, temperature, extinction coefficient"
@@ -1623,9 +1647,11 @@ msgstr "ಗಡಿರೆಖೆಯನ್ನು ತೋರಿಸು"
 msgid "Show art"
 msgstr "ಚಿತ್ರಗಳನ್ನು ತೋರಿಸು"
 
+#. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1115
-msgid "Art brightness: "
-msgstr "ಚಿತ್ರಗಳ ಪ್ರಕಾಶ: "
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:280
+msgid "Art brightness:"
+msgstr ""
 
 #: src/ui_viewDialog.h:1116
 msgid "Projection"
@@ -1760,6 +1786,7 @@ msgid "Enable mouse navigation"
 msgstr ""
 
 #: src/ui_configurationDialog.h:793
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Startup date and time"
 msgstr ""
 
@@ -1935,7 +1962,7 @@ msgid "Tools"
 msgstr "ಸಾಧನಗಳು"
 
 #: src/ui_configurationDialog.h:878
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:362
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Scripts"
 msgstr ""
 
@@ -3064,6 +3091,7 @@ msgid ""
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "Time display format"
 msgstr ""
 
@@ -3081,6 +3109,7 @@ msgid "24-hour format"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Date display format"
 msgstr ""
 
@@ -3111,237 +3140,155 @@ msgid ""
 "planetarium systems"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:124
-msgid "Set Location"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:144
+msgid "Solar System body"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:125
-msgid "Latitude"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:128
-msgid "Longitude"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:131
-msgid "Altitude"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:135
-msgid "Solar System Body"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:147
-msgid "Date & Time"
-msgstr "ದಿನಾಂಕ ಹಾಗು ಸಮಯ"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:149
-msgid "Sky Time"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:154
-msgid "Set Time Zone"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:155
-msgid "Day Keys"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:156
-msgid "Preset Sky Time"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:158
+msgid "Current date/time"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:163
-msgid "Sky Time at Startup"
+msgid "Set time zone"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:169
-msgid "Date Display Format"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:164
+msgid "Day keys"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
-msgid "Time Display Format"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:165
+msgid "Startup date/time preset"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:189
+#. TRANSLATORS: The current system time is used at startup
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:172
+msgid "system"
+msgstr ""
+
+#. TRANSLATORS: A pre-set time is used at startup
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:174
+msgid "preset"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+msgid "mmddyyyy"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+msgid "ddmmyyyy"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+msgid "yyyymmdd"
+msgstr ""
+
+#. TRANSLATORS: 12-hour time format
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
+msgid "12h"
+msgstr ""
+
+#. TRANSLATORS: 24-hour time format
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:193
+msgid "24h"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:209
 msgid "General"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
-msgid "Sky Culture"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:197
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:218
 msgid "Language"
 msgstr "ಭಾಷೆ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:210
-msgid "Show Stars"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:213
-msgid "Star Relative Scale"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:217
-msgid "Absolute Star Scale"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:221
-msgid "Twinkling"
-msgstr ""
-
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:232
+msgid "Show stars"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Colors"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
-msgid "Constellation Lines"
-msgstr "ತಾರಾಗಣ ರೇಖೆ"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
-msgid "Constellation Names"
-msgstr "ತಾರಾಗಣದ ಹೆಸರುಗಳು"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:242
-msgid "Constellation Art"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:243
-msgid "Constellation Boundaries"
-msgstr "ತಾರಾಗಣದ ಗಡಿ"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
-msgid "Constellation Art Intensity"
-msgstr "ತಾರಾಗಣದ ಚಿತ್ರಕಲೆಯ ತೀಕ್ಷ್ಣತೆ"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:251
-msgid "Cardinal Points"
-msgstr "ಮೂಲಾಂಕ ಬಿಂದುಗಳು"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
-msgid "Planet Names"
-msgstr "ಗ್ರಹದ ಹೆಸರುಗಳು"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
-msgid "Planet Orbits"
-msgstr "ಗ್ರಹಕಕ್ಷೆಗಳು"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
-msgid "Planet Trails"
-msgstr "ಗ್ರಹದ ಜಾಡು"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
-msgid "Meridian Line"
-msgstr "ಮಧ್ಯ ರೇಖೆ"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
-msgid "Azimuthal Grid"
-msgstr "ದಿಗಂಶ ಜಾಲ"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
-msgid "Equatorial Grid"
-msgstr "ಸಮಭಾಜಕ ಜಾಲ"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:279
-msgid "Equatorial J2000 Grid"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:283
-msgid "Equator Line"
-msgstr "ಭೂಮಧ್ಯ ರೇಖೆ"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
-msgid "Ecliptic Line"
-msgstr "ಗ್ರಹಣ ರೇಖೆ"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
-msgid "Nebula Names"
-msgstr "ನೀಹಾರಿಕೆಯ ಹೆಸರುಗಳು"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:295
-msgid "Nebula Hints"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:319
-msgid "Effects"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:321
-msgid "Light Pollution Level"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:331
-msgid "Manual Zoom"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:335
-msgid "Magnitude Scaling Multiplier"
-msgstr ""
-
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
-msgid "Milky Way Intensity"
+msgid "Nebula names"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:340
-msgid "Nebula Label Frequency"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:341
-msgid "Zoom Duration"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:345
-msgid "Cursor Timeout"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:346
-msgid "Setting Landscape Sets Location"
+msgid "Nebula hints"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:364
-msgid "Run Local Script"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:370
-msgid "Stop Running Script"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:371
-msgid "CD/DVD Script"
+msgid "Effects"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:378
-msgid "Administration"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:382
-msgid "Load Default Configuration"
+msgid "Manual zoom"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:383
-msgid "Save Current Configuration"
+msgid "Magnitude scaling multiplier"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:384
-msgid "Shut Down"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:385
+msgid "Milky Way intensity:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:402
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:391
+msgid "Nebula label frequency:"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:392
+msgid "Zoom duration:"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:398
+msgid "Cursor timeout:"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:399
+msgid "Setting landscape sets location"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:419
+msgid "Run local script"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:425
+msgid "Stop running script"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:428
+msgid "CD/DVD script"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:435
+msgid "Administration"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:439
+msgid "Load default configuration"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
+msgid "Save current configuration"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:443
+msgid "Shut down"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 msgid "[no TUI node]"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:84
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
 msgid "On"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:79
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:86
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
 msgid "Off"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TuiNodeColor.cpp:105
+#: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format
 msgid "error, unknown color part \"%1\""
 msgstr ""
@@ -3590,6 +3537,9 @@ msgstr ""
 msgid "Type: %1"
 msgstr "ಬಗೆ: %1"
 
+#~ msgid "Date & Time"
+#~ msgstr "ದಿನಾಂಕ ಹಾಗು ಸಮಯ"
+
 #~ msgid "Stars "
 #~ msgstr "ನಕ್ಷತ್ರಗಳು "
 
@@ -3638,6 +3588,24 @@ msgstr "ಬಗೆ: %1"
 #~ msgid "Twinkling: "
 #~ msgstr "ಮಿನುಗುವಿಕೆ: "
 
+#~ msgid "Constellation Lines"
+#~ msgstr "ತಾರಾಗಣ ರೇಖೆ"
+
+#~ msgid "Constellation Names"
+#~ msgstr "ತಾರಾಗಣದ ಹೆಸರುಗಳು"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "ತಾರಾಗಣದ ಚಿತ್ರಕಲೆಯ ತೀಕ್ಷ್ಣತೆ"
+
+#~ msgid "Planet Names"
+#~ msgstr "ಗ್ರಹದ ಹೆಸರುಗಳು"
+
+#~ msgid "Planet Trails"
+#~ msgstr "ಗ್ರಹದ ಜಾಡು"
+
+#~ msgid "Equator Line"
+#~ msgstr "ಭೂಮಧ್ಯ ರೇಖೆ"
+
 #~ msgid "Nebula Circles"
 #~ msgstr "ನೀಹಾರಿಕಾ ವೃತ್ತಗಳು"
 
@@ -3658,6 +3626,9 @@ msgstr "ಬಗೆ: %1"
 
 #~ msgid "Set UI Locale: "
 #~ msgstr "ಭಾಷಾ ಆಯ್ಕೆ: "
+
+#~ msgid "Meridian Line"
+#~ msgstr "ಮಧ್ಯ ರೇಖೆ"
 
 #~ msgid "Scripts "
 #~ msgstr "ಲಿಪಿ "
@@ -3683,6 +3654,9 @@ msgstr "ಬಗೆ: %1"
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "ಪರಿಮಾಣದ ಸೀಮೆ: "
 
+#~ msgid "Cardinal Points"
+#~ msgstr "ಮೂಲಾಂಕ ಬಿಂದುಗಳು"
+
 #~ msgid "Zoom Duration: "
 #~ msgstr "ದೊಡ್ಡದಾಗಿ ಇರಬೇಕಾದ ವೇಳೆ: "
 
@@ -3700,6 +3674,15 @@ msgstr "ಬಗೆ: %1"
 
 #~ msgid "Altitude (m): "
 #~ msgstr "ಎತ್ತರ (ಮೀ): "
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "ತಾರಾಗಣದ ಗಡಿ"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "ಗ್ರಹಕಕ್ಷೆಗಳು"
+
+#~ msgid "Nebula Names"
+#~ msgstr "ನೀಹಾರಿಕೆಯ ಹೆಸರುಗಳು"
 
 #~ msgid "Object Sizing Rule: "
 #~ msgstr "ವಸ್ತುವಿನ ಗಾತ್ರ ನಿಯಮ: "
@@ -3719,8 +3702,26 @@ msgstr "ಬಗೆ: %1"
 #~ msgid "General "
 #~ msgstr "ಸಾಮಾನ್ಯ "
 
+#~ msgid "Planets labels"
+#~ msgstr "ಗ್ರಹಗಳ ಹೆಸರು"
+
 #~ msgid "Day keys: "
 #~ msgstr "ದಿನದ ಕೀಲಿ: "
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "ಗ್ರಹಣ ರೇಖೆ"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "ಸಮಭಾಜಕ ಜಾಲ"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "ದಿಗಂಶ ಜಾಲ"
+
+#~ msgid "Light pollution: "
+#~ msgstr "ಬೆಳಕಿನ ಮಾಲಿನ್ಯ: "
+
+#~ msgid "Art brightness: "
+#~ msgstr "ಚಿತ್ರಗಳ ಪ್ರಕಾಶ: "
 
 #~ msgid "Sidereal"
 #~ msgstr "ಸ್ಥಿರ ನಕ್ಷತ್ರ ಪುಂಜ"

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-15 19:54+0200\n"
+"POT-Creation-Date: 2011-11-16 11:00+0200\n"
 "PO-Revision-Date: 2011-09-19 11:12+0000\n"
 "Last-Translator: Christos Spyroglou <Unknown>\n"
 "Language-Team: Greek, Modern (1453-) <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-16 05:16+0000\n"
+"X-Launchpad-Export-Date: 2011-11-17 05:16+0000\n"
 "X-Generator: Launchpad (build 14291)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -549,30 +549,37 @@ msgid "Display Options"
 msgstr "Επιλογές εμφάνισης"
 
 #: src/gui/StelGui.cpp:99
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
 msgid "Constellation lines"
 msgstr "Γραμμές αστερισμών"
 
 #: src/gui/StelGui.cpp:100
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:273
 msgid "Constellation art"
 msgstr "Καλλιτεχνική απεικόνιση αστερισμών"
 
 #: src/gui/StelGui.cpp:101
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Constellation labels"
 msgstr "Ετικέτες αστερισμών"
 
 #: src/gui/StelGui.cpp:102
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:274
 msgid "Constellation boundaries"
 msgstr "Όρια αστερισμών"
 
 #: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1104
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Azimuthal grid"
 msgstr "Αζιμουθιακό πλέγμα"
 
 #: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1102
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Equatorial grid"
 msgstr "Πλέγμα Ισημερινού"
 
 #: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1103
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial J2000 grid"
 msgstr "Πλέγμα Ισημερινού J2000"
 
@@ -581,14 +588,17 @@ msgid "Galactic grid"
 msgstr "Γαλαξιακό πλέγμα"
 
 #: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1108
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Ecliptic line"
 msgstr "Γραμμή Εκλειπτικής"
 
 #: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1105
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equator line"
 msgstr "Γραμμή Ισημερινού"
 
 #: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1106
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Meridian line"
 msgstr "Γραμμή Μεσημβρινού"
 
@@ -597,6 +607,7 @@ msgid "Horizon line"
 msgstr "Γραμμή Ορίζοντα"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1109
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
 msgid "Cardinal points"
 msgstr "Σημεία του Ορίζοντα"
 
@@ -621,19 +632,22 @@ msgid "Nebulas background images"
 msgstr "Φωτογραφίες υποβάθρου νεφελωμάτων"
 
 #: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1068 src/ui_viewDialog.h:1090
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:208
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Stars"
 msgstr "Αστέρες"
 
 #: src/gui/StelGui.cpp:121
-msgid "Planets labels"
-msgstr "Ετικέτες πλανητών"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:292
+msgid "Planet labels"
+msgstr ""
 
 #: src/gui/StelGui.cpp:122
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:296
 msgid "Planet orbits"
 msgstr "Τροχιές πλανητών"
 
 #: src/gui/StelGui.cpp:123
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:300
 msgid "Planet trails"
 msgstr "Τροχιές πλανητών"
 
@@ -686,6 +700,7 @@ msgid "Script console window"
 msgstr "Κονσόλα σεναρίου"
 
 #: src/gui/StelGui.cpp:141 src/ui_dateTimeDialogGui.h:294
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:156
 msgid "Date and Time"
 msgstr "Ημ/νία και ώρα"
 
@@ -1341,6 +1356,7 @@ msgid "Refresh"
 msgstr "Ανανέωση"
 
 #: src/ui_locationDialogGui.h:387
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:129
 msgid "Location"
 msgstr "Τοποθεσία"
 
@@ -1361,6 +1377,7 @@ msgid "Add to list"
 msgstr "Προσθήκη στη λίστα"
 
 #: src/ui_locationDialogGui.h:395
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:130
 msgid "Latitude:"
 msgstr "Γεωγραφικό πλάτος:"
 
@@ -1373,10 +1390,12 @@ msgstr ""
 "δευτερόλεπτα), για παράδειγμα: +1μ 12λ 8δ"
 
 #: src/ui_locationDialogGui.h:399
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:133
 msgid "Longitude:"
 msgstr "Γεωγραφικό μήκος:"
 
 #: src/ui_locationDialogGui.h:403
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:136
 msgid "Altitude:"
 msgstr "Ύψος :"
 
@@ -1533,23 +1552,27 @@ msgid "Markings"
 msgstr "Διακριτικά"
 
 #: src/ui_viewDialog.h:1063
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:325
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:371
 msgid "Landscape"
 msgstr "Τοπίο"
 
 #: src/ui_viewDialog.h:1065
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:212
 msgid "Starlore"
 msgstr "Παράδοση του Ουρανού"
 
 #: src/ui_viewDialog.h:1069
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Absolute scale:"
 msgstr "Απόλυτη κλίμακα:"
 
 #: src/ui_viewDialog.h:1070
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:236
 msgid "Relative scale:"
 msgstr "Σχετική κλίμακα:"
 
 #: src/ui_viewDialog.h:1071
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Twinkle:"
 msgstr "Αναλαμπή:"
 
@@ -1591,8 +1614,9 @@ msgid "Show atmosphere"
 msgstr "Εμφάνιση ατμόσφαιρας"
 
 #: src/ui_viewDialog.h:1084
-msgid "Light pollution: "
-msgstr "Φωτορύπανση: "
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
+msgid "Light pollution:"
+msgstr ""
 
 #: src/ui_viewDialog.h:1086
 msgid "pressure, temperature, extinction coefficient"
@@ -1662,9 +1686,11 @@ msgstr "Εμφάνιση ορίων"
 msgid "Show art"
 msgstr "Εμφάνιση καλλιτεχνικής ερμηνείας"
 
+#. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1115
-msgid "Art brightness: "
-msgstr "Φωτεινότητα καλλιτεχνικής απεικόνισης: "
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:280
+msgid "Art brightness:"
+msgstr ""
 
 #: src/ui_viewDialog.h:1116
 msgid "Projection"
@@ -1804,6 +1830,7 @@ msgid "Enable mouse navigation"
 msgstr "Πλοήγηση με ποντίκι"
 
 #: src/ui_configurationDialog.h:793
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Startup date and time"
 msgstr "Ημερομηνία και ώρα εκκίνησης"
 
@@ -1989,7 +2016,7 @@ msgid "Tools"
 msgstr "Εργαλεία"
 
 #: src/ui_configurationDialog.h:878
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:362
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Scripts"
 msgstr "Σενάρια"
 
@@ -3132,6 +3159,7 @@ msgid ""
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "Time display format"
 msgstr ""
 
@@ -3149,6 +3177,7 @@ msgid "24-hour format"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Date display format"
 msgstr ""
 
@@ -3181,237 +3210,155 @@ msgstr ""
 "Εφαρμογή πρόσθετου του TUI της σειράς 0.9.x που χρησιμοποιείται σε συστήματα "
 "πλανητάριων"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:124
-msgid "Set Location"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:144
+msgid "Solar System body"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:125
-msgid "Latitude"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:128
-msgid "Longitude"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:131
-msgid "Altitude"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:135
-msgid "Solar System Body"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:147
-msgid "Date & Time"
-msgstr "Ημέρα & Ώρα"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:149
-msgid "Sky Time"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:154
-msgid "Set Time Zone"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:155
-msgid "Day Keys"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:156
-msgid "Preset Sky Time"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:158
+msgid "Current date/time"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:163
-msgid "Sky Time at Startup"
+msgid "Set time zone"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:169
-msgid "Date Display Format"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:164
+msgid "Day keys"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
-msgid "Time Display Format"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:165
+msgid "Startup date/time preset"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:189
+#. TRANSLATORS: The current system time is used at startup
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:172
+msgid "system"
+msgstr ""
+
+#. TRANSLATORS: A pre-set time is used at startup
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:174
+msgid "preset"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+msgid "mmddyyyy"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+msgid "ddmmyyyy"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+msgid "yyyymmdd"
+msgstr ""
+
+#. TRANSLATORS: 12-hour time format
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
+msgid "12h"
+msgstr ""
+
+#. TRANSLATORS: 24-hour time format
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:193
+msgid "24h"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:209
 msgid "General"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
-msgid "Sky Culture"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:197
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:218
 msgid "Language"
 msgstr "Γλώσσα"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:210
-msgid "Show Stars"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:213
-msgid "Star Relative Scale"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:217
-msgid "Absolute Star Scale"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:221
-msgid "Twinkling"
-msgstr ""
-
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:232
+msgid "Show stars"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Colors"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
-msgid "Constellation Lines"
-msgstr "Γραμμές αστερισμών"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
-msgid "Constellation Names"
-msgstr "Ονόματα αστερισμών"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:242
-msgid "Constellation Art"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:243
-msgid "Constellation Boundaries"
-msgstr "Όρια αστερισμών"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
-msgid "Constellation Art Intensity"
-msgstr "Ένταση εμφάνισης καλλιτεχνικής άποψης αστερισμών"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:251
-msgid "Cardinal Points"
-msgstr "Σημεία ορίζοντα"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
-msgid "Planet Names"
-msgstr "Ονόματα πλανητών"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
-msgid "Planet Orbits"
-msgstr "Τροχιές πλανητών"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
-msgid "Planet Trails"
-msgstr "Ίχνη πλανητών"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
-msgid "Meridian Line"
-msgstr "Γραμμή Μεσημβρινού"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
-msgid "Azimuthal Grid"
-msgstr "Πλέγμα Αζιμούθιου"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
-msgid "Equatorial Grid"
-msgstr "Πλέγμα Ισημερινού"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:279
-msgid "Equatorial J2000 Grid"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:283
-msgid "Equator Line"
-msgstr "Γραμμή Ισημερινού"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
-msgid "Ecliptic Line"
-msgstr "Εκλειπτική γραμμή"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
-msgid "Nebula Names"
-msgstr "Ονόματα νεφελωμάτων"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:295
-msgid "Nebula Hints"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:319
-msgid "Effects"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:321
-msgid "Light Pollution Level"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:331
-msgid "Manual Zoom"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:335
-msgid "Magnitude Scaling Multiplier"
-msgstr ""
-
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
-msgid "Milky Way Intensity"
+msgid "Nebula names"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:340
-msgid "Nebula Label Frequency"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:341
-msgid "Zoom Duration"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:345
-msgid "Cursor Timeout"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:346
-msgid "Setting Landscape Sets Location"
+msgid "Nebula hints"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:364
-msgid "Run Local Script"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:370
-msgid "Stop Running Script"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:371
-msgid "CD/DVD Script"
+msgid "Effects"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:378
-msgid "Administration"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:382
-msgid "Load Default Configuration"
+msgid "Manual zoom"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:383
-msgid "Save Current Configuration"
+msgid "Magnitude scaling multiplier"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:384
-msgid "Shut Down"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:385
+msgid "Milky Way intensity:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:402
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:391
+msgid "Nebula label frequency:"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:392
+msgid "Zoom duration:"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:398
+msgid "Cursor timeout:"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:399
+msgid "Setting landscape sets location"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:419
+msgid "Run local script"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:425
+msgid "Stop running script"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:428
+msgid "CD/DVD script"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:435
+msgid "Administration"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:439
+msgid "Load default configuration"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
+msgid "Save current configuration"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:443
+msgid "Shut down"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 msgid "[no TUI node]"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:84
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
 msgid "On"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:79
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:86
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
 msgid "Off"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TuiNodeColor.cpp:105
+#: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format
 msgid "error, unknown color part \"%1\""
 msgstr ""
@@ -3664,6 +3611,15 @@ msgstr ""
 msgid "Type: %1"
 msgstr "Τύπος: %1"
 
+#~ msgid "Equatorial Grid"
+#~ msgstr "Πλέγμα Ισημερινού"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "Πλέγμα Αζιμούθιου"
+
+#~ msgid "Equator Line"
+#~ msgstr "Γραμμή Ισημερινού"
+
 #~ msgid "General "
 #~ msgstr "Γενικά "
 
@@ -3697,6 +3653,9 @@ msgstr "Τύπος: %1"
 #~ msgid "Update me via Internet: "
 #~ msgstr "Ενημέρωση μέσω Διαδικτύου: "
 
+#~ msgid "Date & Time"
+#~ msgstr "Ημέρα & Ώρα"
+
 #~ msgid "Twinkling: "
 #~ msgstr "Αναλαμπές: "
 
@@ -3712,6 +3671,12 @@ msgstr "Τύπος: %1"
 #~ msgid "Calendar"
 #~ msgstr "Ημερολόγιο"
 
+#~ msgid "Light pollution: "
+#~ msgstr "Φωτορύπανση: "
+
+#~ msgid "Planets labels"
+#~ msgstr "Ετικέτες πλανητών"
+
 #~ msgid "xxx"
 #~ msgstr "xxx"
 
@@ -3726,6 +3691,12 @@ msgstr "Τύπος: %1"
 
 #~ msgid "Solar System Body: "
 #~ msgstr "Σώμα Ηλιακού Συστήματος: "
+
+#~ msgid "Meridian Line"
+#~ msgstr "Γραμμή Μεσημβρινού"
+
+#~ msgid "Art brightness: "
+#~ msgstr "Φωτεινότητα καλλιτεχνικής απεικόνισης: "
 
 #~ msgid "Startup FOV: XX"
 #~ msgstr "Οπτικό Πεδίο κατά την εκκίνηση: ΧΧ"
@@ -3772,8 +3743,38 @@ msgstr "Τύπος: %1"
 #~ msgid "Actual Time"
 #~ msgstr "Πραγματική ώρα"
 
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Όρια αστερισμών"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Ονόματα αστερισμών"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Ένταση εμφάνισης καλλιτεχνικής άποψης αστερισμών"
+
+#~ msgid "Constellation Lines"
+#~ msgstr "Γραμμές αστερισμών"
+
 #~ msgid "Star Value Multiplier: "
 #~ msgstr "Πολλαπλασιαστής αριθμού αστέρων: "
+
+#~ msgid "Cardinal Points"
+#~ msgstr "Σημεία ορίζοντα"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "Εκλειπτική γραμμή"
+
+#~ msgid "Planet Trails"
+#~ msgstr "Ίχνη πλανητών"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Τροχιές πλανητών"
+
+#~ msgid "Planet Names"
+#~ msgstr "Ονόματα πλανητών"
+
+#~ msgid "Nebula Names"
+#~ msgstr "Ονόματα νεφελωμάτων"
 
 #~ msgid "Cursor Timeout: "
 #~ msgstr "Μέγιστο χρονικό όριο δείκτη ποντικιού: "
