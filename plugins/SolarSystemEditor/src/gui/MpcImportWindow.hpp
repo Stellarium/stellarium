@@ -99,6 +99,8 @@ private:
 	QStandardItemModel * candidateObjectsModel;
 
 	ImportType importType;
+	
+	void updateTexts();
 
 	//! wrapper for the single object function to allow multiple formats.
 	SsoElements readElementsFromString(QString elements);
