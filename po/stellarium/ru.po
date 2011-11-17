@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-15 19:54+0200\n"
-"PO-Revision-Date: 2011-11-13 16:25+0000\n"
+"POT-Creation-Date: 2011-11-16 11:00+0200\n"
+"PO-Revision-Date: 2011-11-16 10:22+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-16 05:18+0000\n"
+"X-Launchpad-Export-Date: 2011-11-17 05:18+0000\n"
 "X-Generator: Launchpad (build 14291)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -333,7 +333,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:711
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "Все доступные звёздные каталоги установлены."
 
 #: src/gui/ConfigurationDialog.cpp:716
 #, qt-format
@@ -548,30 +548,37 @@ msgid "Display Options"
 msgstr "Параметры отображения"
 
 #: src/gui/StelGui.cpp:99
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
 msgid "Constellation lines"
 msgstr "Линии созвездий"
 
 #: src/gui/StelGui.cpp:100
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:273
 msgid "Constellation art"
 msgstr "Изображения созвездий"
 
 #: src/gui/StelGui.cpp:101
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Constellation labels"
 msgstr "Названия созвездий"
 
 #: src/gui/StelGui.cpp:102
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:274
 msgid "Constellation boundaries"
 msgstr "Границы созвездий"
 
 #: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1104
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Azimuthal grid"
 msgstr "Азимутальная сетка"
 
 #: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1102
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Equatorial grid"
 msgstr "Экваториальная сетка"
 
 #: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1103
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial J2000 grid"
 msgstr "Экваториальная сетка J2000"
 
@@ -580,14 +587,17 @@ msgid "Galactic grid"
 msgstr "Галактическая сетка"
 
 #: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1108
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Ecliptic line"
 msgstr "Линия эклиптики"
 
 #: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1105
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equator line"
 msgstr "Линия экватора"
 
 #: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1106
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Meridian line"
 msgstr "Линия меридиана"
 
@@ -596,6 +606,7 @@ msgid "Horizon line"
 msgstr "Линия горизонта"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1109
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
 msgid "Cardinal points"
 msgstr "Стороны света"
 
@@ -620,19 +631,22 @@ msgid "Nebulas background images"
 msgstr "Фоновые изображения туманностей"
 
 #: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1068 src/ui_viewDialog.h:1090
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:208
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Stars"
 msgstr "Звёзды"
 
 #: src/gui/StelGui.cpp:121
-msgid "Planets labels"
-msgstr "Метки планет"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:292
+msgid "Planet labels"
+msgstr "Названия планет"
 
 #: src/gui/StelGui.cpp:122
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:296
 msgid "Planet orbits"
 msgstr "Орбиты планет"
 
 #: src/gui/StelGui.cpp:123
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:300
 msgid "Planet trails"
 msgstr "Следы планет"
 
@@ -685,6 +699,7 @@ msgid "Script console window"
 msgstr "Окно консоли сценариев"
 
 #: src/gui/StelGui.cpp:141 src/ui_dateTimeDialogGui.h:294
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:156
 msgid "Date and Time"
 msgstr "Дата и время"
 
@@ -1336,6 +1351,7 @@ msgid "Refresh"
 msgstr "Обновить"
 
 #: src/ui_locationDialogGui.h:387
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:129
 msgid "Location"
 msgstr "Место"
 
@@ -1356,6 +1372,7 @@ msgid "Add to list"
 msgstr "Добавить в список"
 
 #: src/ui_locationDialogGui.h:395
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:130
 msgid "Latitude:"
 msgstr "Широта:"
 
@@ -1368,10 +1385,12 @@ msgstr ""
 "например, +1d 12m 8s"
 
 #: src/ui_locationDialogGui.h:399
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:133
 msgid "Longitude:"
 msgstr "Долгота:"
 
 #: src/ui_locationDialogGui.h:403
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:136
 msgid "Altitude:"
 msgstr "Высота:"
 
@@ -1528,23 +1547,27 @@ msgid "Markings"
 msgstr "Обозначения"
 
 #: src/ui_viewDialog.h:1063
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:325
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:371
 msgid "Landscape"
 msgstr "Ландшафт"
 
 #: src/ui_viewDialog.h:1065
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:212
 msgid "Starlore"
 msgstr "Знания о звёздах"
 
 #: src/ui_viewDialog.h:1069
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Absolute scale:"
 msgstr "Абсолютное увеличение:"
 
 #: src/ui_viewDialog.h:1070
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:236
 msgid "Relative scale:"
 msgstr "Относительное увеличение:"
 
 #: src/ui_viewDialog.h:1071
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Twinkle:"
 msgstr "Мерцание:"
 
@@ -1585,8 +1608,9 @@ msgid "Show atmosphere"
 msgstr "Показать атмосферу"
 
 #: src/ui_viewDialog.h:1084
-msgid "Light pollution: "
-msgstr "Световое загрязнение: "
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
+msgid "Light pollution:"
+msgstr "Засветка:"
 
 #: src/ui_viewDialog.h:1086
 msgid "pressure, temperature, extinction coefficient"
@@ -1656,9 +1680,11 @@ msgstr "Показать границы"
 msgid "Show art"
 msgstr "Показывать изображения"
 
+#. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1115
-msgid "Art brightness: "
-msgstr "Яркость изображений: "
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:280
+msgid "Art brightness:"
+msgstr "Яркость изображений:"
 
 #: src/ui_viewDialog.h:1116
 msgid "Projection"
@@ -1797,6 +1823,7 @@ msgid "Enable mouse navigation"
 msgstr "Включить перемещение мышью"
 
 #: src/ui_configurationDialog.h:793
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Startup date and time"
 msgstr "Начальные дата и время"
 
@@ -1977,7 +2004,7 @@ msgid "Tools"
 msgstr "Сервис"
 
 #: src/ui_configurationDialog.h:878
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:362
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Scripts"
 msgstr "Сценарии"
 
@@ -2343,12 +2370,14 @@ msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
 "plugin\" in the subject when posting."
 msgstr ""
+"Поддержка предоставляется через вебсайт Launchpad. Не забудьте написать "
+"\"Satellites plugin\" в теме при отправке."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:250
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
-msgstr ""
+msgstr "Если у вас есть вопрос, то получить ответ можно %1здесь%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:252
@@ -2530,11 +2559,11 @@ msgstr "Список групп, перечисленных через запя�
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:648
 msgid "TLE data:"
-msgstr ""
+msgstr "Данные TLE:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:650
 msgid "NORAD two line element orbit data"
-msgstr ""
+msgstr "Двухстрочные элементы орбит NORAD"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Save changes"
@@ -2666,7 +2695,7 @@ msgstr "Форма"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:298
 msgid "Slew telescope to"
-msgstr ""
+msgstr "Навести телескоп на"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:300
 msgid "There are no active devices."
@@ -2674,20 +2703,20 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Slew telescope to coordinates"
-msgstr ""
+msgstr "Навести телескоп по координатам"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:302
 msgid "&Right Ascension"
-msgstr ""
+msgstr "&Прямое восхождение"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:303
 #: plugins/TelescopeControl/src/ui_slewDialog.h:305
 msgid "(J2000)"
-msgstr ""
+msgstr "(J2000)"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:304
 msgid "De&clination"
-msgstr ""
+msgstr "&Склонение"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:307
 msgid "Hours-minutes-seconds format"
@@ -2707,15 +2736,15 @@ msgstr "&ГМС"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:315
 msgid "Decimal degrees"
-msgstr ""
+msgstr "Десятичные градусы"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:317
 msgid "D&ecimal"
-msgstr ""
+msgstr "&Десятичный"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:318
 msgid "&Slew"
-msgstr ""
+msgstr "&Навести"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:319
 msgid "Configure &telescopes..."
@@ -2747,7 +2776,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid "External software or a remote computer"
-msgstr ""
+msgstr "Внешнее ПО или удалённый компьютер"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
 msgid "Nothing, just simulate one (a moving reticle)"
@@ -2759,7 +2788,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Name:"
-msgstr ""
+msgstr "Название:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Connection delay:"
@@ -2774,15 +2803,15 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
 msgid "s"
-msgstr ""
+msgstr "сек."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "Coordinate system:"
-msgstr ""
+msgstr "Система координат:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "J2000 (default)"
-msgstr ""
+msgstr "J2000 (по умолчанию)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "Equinox of the date (JNow)"
@@ -2800,23 +2829,23 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Device settings"
-msgstr ""
+msgstr "Настройки устройства"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Serial port:"
-msgstr ""
+msgstr "Последовательный порт:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Device model:"
-msgstr ""
+msgstr "Модель устройства:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Connection settings"
-msgstr ""
+msgstr "Настройки соединения"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Host:"
-msgstr ""
+msgstr "Узел:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:503
 msgid ""
@@ -2825,7 +2854,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:505
 msgid "localhost"
-msgstr ""
+msgstr "localhost"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "TCP port:"
@@ -2886,7 +2915,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:400
 msgid "GUI"
-msgstr ""
+msgstr "Графический интерфейс пользователя"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Show telescope labels"
@@ -2902,7 +2931,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
 msgid "Files"
-msgstr ""
+msgstr "Файлы"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Log telescope driver messages to files"
@@ -3135,6 +3164,7 @@ msgid ""
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "Time display format"
 msgstr "Формат отображения времени"
 
@@ -3152,6 +3182,7 @@ msgid "24-hour format"
 msgstr "24-часовой формат"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Date display format"
 msgstr "Формат отображения даты"
 
@@ -3184,237 +3215,155 @@ msgstr ""
 "Этот плагин является реализацией текстового интерфейса пользователя (TUI) из "
 "серии 0.9.x, который используется в планетариях"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:124
-msgid "Set Location"
-msgstr "Местонахождение"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:125
-msgid "Latitude"
-msgstr "Широта"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:128
-msgid "Longitude"
-msgstr "Долгота"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:131
-msgid "Altitude"
-msgstr "Высота"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:135
-msgid "Solar System Body"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:144
+msgid "Solar System body"
 msgstr "Тело Солнечной системы"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:147
-msgid "Date & Time"
-msgstr "Дата и Время"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:149
-msgid "Sky Time"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:154
-msgid "Set Time Zone"
-msgstr "Часовой пояс"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:155
-msgid "Day Keys"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:156
-msgid "Preset Sky Time"
-msgstr ""
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:158
+msgid "Current date/time"
+msgstr "Текущая дата и время"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:163
-msgid "Sky Time at Startup"
+msgid "Set time zone"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:169
-msgid "Date Display Format"
-msgstr "Формат отображения даты"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:164
+msgid "Day keys"
+msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
-msgid "Time Display Format"
-msgstr "Формат отображения времени"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:165
+msgid "Startup date/time preset"
+msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:189
+#. TRANSLATORS: The current system time is used at startup
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:172
+msgid "system"
+msgstr "системное"
+
+#. TRANSLATORS: A pre-set time is used at startup
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:174
+msgid "preset"
+msgstr "предустановленное"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+msgid "mmddyyyy"
+msgstr "ммддгггг"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+msgid "ddmmyyyy"
+msgstr "ддммгггг"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+msgid "yyyymmdd"
+msgstr "ггггммдд"
+
+#. TRANSLATORS: 12-hour time format
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
+msgid "12h"
+msgstr "12-часовой"
+
+#. TRANSLATORS: 24-hour time format
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:193
+msgid "24h"
+msgstr "24-часовой"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:209
 msgid "General"
 msgstr "Основные"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
-msgid "Sky Culture"
-msgstr "Культура неба"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:197
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:218
 msgid "Language"
 msgstr "Язык"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:210
-msgid "Show Stars"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:232
+msgid "Show stars"
 msgstr "Показывать звёзды"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:213
-msgid "Star Relative Scale"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:217
-msgid "Absolute Star Scale"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:221
-msgid "Twinkling"
-msgstr "Мерцание"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:232
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Colors"
 msgstr "Цвета"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
-msgid "Constellation Lines"
-msgstr "Линии созвездий"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
-msgid "Constellation Names"
-msgstr "Названия созвездий"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:242
-msgid "Constellation Art"
-msgstr "Изображения созвездий"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:243
-msgid "Constellation Boundaries"
-msgstr "Границы созвездий"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
-msgid "Constellation Art Intensity"
-msgstr "Яркость изображения созвездий"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:251
-msgid "Cardinal Points"
-msgstr "Стороны света"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
-msgid "Planet Names"
-msgstr "Названия планет"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
-msgid "Planet Orbits"
-msgstr "Орбиты планет"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
-msgid "Planet Trails"
-msgstr "Траектории планет"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
-msgid "Meridian Line"
-msgstr "Меридиан"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
-msgid "Azimuthal Grid"
-msgstr "Азимутальная сетка"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
-msgid "Equatorial Grid"
-msgstr "Экваториальная сетка"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:279
-msgid "Equatorial J2000 Grid"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:283
-msgid "Equator Line"
-msgstr "Линия экватора"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
-msgid "Ecliptic Line"
-msgstr "Линия эклиптики"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
-msgid "Nebula Names"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:336
+msgid "Nebula names"
 msgstr "Названия туманностей"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:295
-msgid "Nebula Hints"
-msgstr ""
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:340
+msgid "Nebula hints"
+msgstr "Метки туманностей"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:319
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:364
 msgid "Effects"
 msgstr "Эффекты"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:321
-msgid "Light Pollution Level"
-msgstr "Уровень засветки"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:331
-msgid "Manual Zoom"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:335
-msgid "Magnitude Scaling Multiplier"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:336
-msgid "Milky Way Intensity"
-msgstr "Интенсивность Млечного пути"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:340
-msgid "Nebula Label Frequency"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:341
-msgid "Zoom Duration"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:345
-msgid "Cursor Timeout"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:346
-msgid "Setting Landscape Sets Location"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:364
-msgid "Run Local Script"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:370
-msgid "Stop Running Script"
-msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:371
-msgid "CD/DVD Script"
-msgstr ""
-
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:378
+msgid "Manual zoom"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:383
+msgid "Magnitude scaling multiplier"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:385
+msgid "Milky Way intensity:"
+msgstr "Интенсивность Млечного пути:"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:391
+msgid "Nebula label frequency:"
+msgstr "Частота названий туманностей:"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:392
+msgid "Zoom duration:"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:398
+msgid "Cursor timeout:"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:399
+msgid "Setting landscape sets location"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:419
+msgid "Run local script"
+msgstr "Выполнить локальный сценарий"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:425
+msgid "Stop running script"
+msgstr "Остановить сценарий"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:428
+msgid "CD/DVD script"
+msgstr "Сценарий с CD/DVD"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:435
 msgid "Administration"
 msgstr "Администрирование"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:382
-msgid "Load Default Configuration"
-msgstr "Загрузить настройки по умолчанию"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:439
+msgid "Load default configuration"
+msgstr "Загрузить настройки"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:383
-msgid "Save Current Configuration"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
+msgid "Save current configuration"
 msgstr "Сохранить настройки"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:384
-msgid "Shut Down"
-msgstr "Выключить"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:443
+msgid "Shut down"
+msgstr "Завершить работу"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:402
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 msgid "[no TUI node]"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:84
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
 msgid "On"
 msgstr "Вкл."
 
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:79
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:86
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
 msgid "Off"
 msgstr "Откл."
 
-#: plugins/TextUserInterface/src/TuiNodeColor.cpp:105
+#: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format
 msgid "error, unknown color part \"%1\""
 msgstr ""
@@ -3440,15 +3389,15 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Asteroids"
-msgstr ""
+msgstr "Астероиды"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Comets"
-msgstr ""
+msgstr "Кометы"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Select the source"
-msgstr ""
+msgstr "Выберите источник"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Download a list of objects from the Internet"
@@ -3460,11 +3409,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Or enter a URL:"
-msgstr ""
+msgstr "Или введите адрес:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "paste"
-msgstr ""
+msgstr "вставить"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Add this URL to the bookmarks list"
@@ -3472,7 +3421,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Bookmark title:"
-msgstr ""
+msgstr "Заголовок закладки:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "A file containing a list of objects"
@@ -3480,7 +3429,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Get orbital elements"
-msgstr ""
+msgstr "Получить элементы орбит"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid "Abort download"
@@ -3488,7 +3437,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Lists"
-msgstr ""
+msgstr "Списки"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
@@ -3514,7 +3463,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Objects found"
-msgstr ""
+msgstr "Объекты найдены"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid ""
@@ -3527,11 +3476,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
 msgid "Overwrite existing objects"
-msgstr ""
+msgstr "Переписать существующие объекты"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
 msgid "Update existing objects"
-msgstr ""
+msgstr "Обновить существующие объекты"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:549
 msgid "Update only the orbital elements"
@@ -3539,11 +3488,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:550
 msgid "Mark all"
-msgstr ""
+msgstr "Выделить все"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:551
 msgid "Mark none"
-msgstr ""
+msgstr "Снять выделение"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:552
 msgid "Discard"
@@ -3560,7 +3509,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:329
 msgid "Warning"
-msgstr ""
+msgstr "Предупреждение"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:330
 msgid ""
@@ -3576,7 +3525,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:332
 msgid "Reset to defaults"
-msgstr ""
+msgstr "Установки по умолчанию"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:333
 msgid "Copy/replace the Solar System file"
@@ -3598,11 +3547,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:337
 msgid "Configuration file"
-msgstr ""
+msgstr "Файл конфигурации"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:340
 msgid "Add new Solar System objects"
-msgstr ""
+msgstr "Добавить новый объект Солнечной системы"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:341
 msgid ""
@@ -3615,11 +3564,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:342
 msgid "Import orbital elements in MPC format..."
-msgstr ""
+msgstr "Импорт элементов орбит в формате MPC..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:343
 msgid "Solar System"
-msgstr ""
+msgstr "Солнечная система"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:344
 msgid "Enter manually a new Solar System object"
@@ -3673,8 +3622,14 @@ msgstr ""
 msgid "Type: %1"
 msgstr "Тип: %1"
 
+#~ msgid "Equator Line"
+#~ msgstr "Линия экватора"
+
 #~ msgid "Sky Culture: "
 #~ msgstr "Культура неба : "
+
+#~ msgid "Date & Time"
+#~ msgstr "Дата и Время"
 
 #~ msgid "Set Location "
 #~ msgstr "Задать местоположение "
@@ -3730,6 +3685,24 @@ msgstr "Тип: %1"
 #~ msgid "Twinkling: "
 #~ msgstr "Мерцание: "
 
+#~ msgid "Constellation Lines"
+#~ msgstr "Линии созвездий"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Названия созвездий"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Яркость изображения созвездий"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Границы созвездий"
+
+#~ msgid "Planet Names"
+#~ msgstr "Названия планет"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Орбиты планет"
+
 #~ msgid "Milky Way intensity: "
 #~ msgstr "Яркость Млечного Пути: "
 
@@ -3748,8 +3721,20 @@ msgstr "Тип: %1"
 #~ msgid "Update me via Internet: "
 #~ msgstr "Обновить через Интернет: "
 
+#~ msgid "Cardinal Points"
+#~ msgstr "Стороны света"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "Азимутальная сетка"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "Экваториальная сетка"
+
 #~ msgid "Set Time "
 #~ msgstr "Задать время "
+
+#~ msgid "Nebula Names"
+#~ msgstr "Названия туманностей"
 
 #~ msgid "Light Pollution Luminance: "
 #~ msgstr "Яркость светового загрязнения: "
@@ -3763,17 +3748,29 @@ msgstr "Тип: %1"
 #~ msgid "Day keys: "
 #~ msgstr "Подсказки по дням "
 
+#~ msgid "Ecliptic Line"
+#~ msgstr "Линия эклиптики"
+
 #~ msgid "Solar System Body: "
 #~ msgstr "Тело Солнечной системы: "
 
 #~ msgid "Landscape: "
 #~ msgstr "Ландшафт: "
 
+#~ msgid "Art brightness: "
+#~ msgstr "Яркость изображений: "
+
+#~ msgid "Light pollution: "
+#~ msgstr "Световое загрязнение: "
+
 #~ msgid "Startup FOV: XX"
 #~ msgstr "Начальное поле зрения: XX"
 
 #~ msgid "Startup direction of view: xxxx"
 #~ msgstr "Начальное направление обзора: xxxx"
+
+#~ msgid "Planets labels"
+#~ msgstr "Метки планет"
 
 #~ msgid "Correct for light travel time: "
 #~ msgstr "Корректировка на скорость света "
@@ -3787,6 +3784,9 @@ msgstr "Тип: %1"
 #~ msgid "Get catalog x of y"
 #~ msgstr "Получить каталог x из y"
 
+#~ msgid "Meridian Line"
+#~ msgstr "Меридиан"
+
 #~ msgid "Finished downloading all star catalogs!"
 #~ msgstr "Загрузка всех звёздных каталогов закончена!"
 
@@ -3798,6 +3798,9 @@ msgstr "Тип: %1"
 
 #~ msgid "Magnitude Sizing Multiplier: "
 #~ msgstr "Масштабный коэфф. звёздной величины "
+
+#~ msgid "Planet Trails"
+#~ msgstr "Траектории планет"
 
 #~ msgid "Object Sizing Rule: "
 #~ msgstr "Правило масштабирования объектов: "

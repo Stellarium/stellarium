@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-15 19:54+0200\n"
+"POT-Creation-Date: 2011-11-16 11:00+0200\n"
 "PO-Revision-Date: 2011-11-15 16:40+0000\n"
 "Last-Translator: Asier Iturralde Sarasola <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-16 05:14+0000\n"
+"X-Launchpad-Export-Date: 2011-11-17 05:15+0000\n"
 "X-Generator: Launchpad (build 14291)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -552,30 +552,37 @@ msgid "Display Options"
 msgstr "Bistaratze aukerak"
 
 #: src/gui/StelGui.cpp:99
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
 msgid "Constellation lines"
 msgstr "Konstelazio lerroak"
 
 #: src/gui/StelGui.cpp:100
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:273
 msgid "Constellation art"
 msgstr "Konstelazioen irudiak"
 
 #: src/gui/StelGui.cpp:101
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Constellation labels"
 msgstr "Konstelazioen etiketak"
 
 #: src/gui/StelGui.cpp:102
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:274
 msgid "Constellation boundaries"
 msgstr "Konstelazioen mugak"
 
 #: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1104
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Azimuthal grid"
 msgstr "Sareta azimutala"
 
 #: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1102
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Equatorial grid"
 msgstr "Sareta ekuatoriala"
 
 #: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1103
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial J2000 grid"
 msgstr "J2000 sareta ekuatoriala"
 
@@ -584,14 +591,17 @@ msgid "Galactic grid"
 msgstr "Sareta galaktikoa"
 
 #: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1108
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Ecliptic line"
 msgstr "Ekliptika lerroa"
 
 #: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1105
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equator line"
 msgstr "Ekuatore lerroa"
 
 #: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1106
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Meridian line"
 msgstr "Meridiano lerroa"
 
@@ -600,6 +610,7 @@ msgid "Horizon line"
 msgstr "Zerumuga lerroa"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1109
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
 msgid "Cardinal points"
 msgstr "Puntu kardinalak"
 
@@ -624,19 +635,22 @@ msgid "Nebulas background images"
 msgstr "Nebulosen atzeko irudiak"
 
 #: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1068 src/ui_viewDialog.h:1090
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:208
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Stars"
 msgstr "Izarrak"
 
 #: src/gui/StelGui.cpp:121
-msgid "Planets labels"
-msgstr "Planeten etiketak"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:292
+msgid "Planet labels"
+msgstr ""
 
 #: src/gui/StelGui.cpp:122
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:296
 msgid "Planet orbits"
 msgstr "Planeten orbitak"
 
 #: src/gui/StelGui.cpp:123
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:300
 msgid "Planet trails"
 msgstr "Planeten arrastoak"
 
@@ -689,6 +703,7 @@ msgid "Script console window"
 msgstr "Script kontsola leihoa"
 
 #: src/gui/StelGui.cpp:141 src/ui_dateTimeDialogGui.h:294
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:156
 msgid "Date and Time"
 msgstr "Data eta ordua"
 
@@ -1342,6 +1357,7 @@ msgid "Refresh"
 msgstr "Freskatu"
 
 #: src/ui_locationDialogGui.h:387
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:129
 msgid "Location"
 msgstr "Kokalekua"
 
@@ -1362,6 +1378,7 @@ msgid "Add to list"
 msgstr "Gehitu zerrendara"
 
 #: src/ui_locationDialogGui.h:395
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:130
 msgid "Latitude:"
 msgstr "Latitudea:"
 
@@ -1374,10 +1391,12 @@ msgstr ""
 "sar ditzakezu balioak, adibidez: +1d 12m 8s"
 
 #: src/ui_locationDialogGui.h:399
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:133
 msgid "Longitude:"
 msgstr "Longitudea:"
 
 #: src/ui_locationDialogGui.h:403
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:136
 msgid "Altitude:"
 msgstr "Altitudea:"
 
@@ -1534,23 +1553,27 @@ msgid "Markings"
 msgstr "Markak"
 
 #: src/ui_viewDialog.h:1063
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:325
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:371
 msgid "Landscape"
 msgstr "Paisaia"
 
 #: src/ui_viewDialog.h:1065
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:212
 msgid "Starlore"
 msgstr "Izarren kondaira"
 
 #: src/ui_viewDialog.h:1069
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Absolute scale:"
 msgstr "Eskala absolutua:"
 
 #: src/ui_viewDialog.h:1070
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:236
 msgid "Relative scale:"
 msgstr "Eskala erlatiboa:"
 
 #: src/ui_viewDialog.h:1071
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Twinkle:"
 msgstr "Dirdira:"
 
@@ -1591,8 +1614,9 @@ msgid "Show atmosphere"
 msgstr "Erakutsi atmosfera"
 
 #: src/ui_viewDialog.h:1084
-msgid "Light pollution: "
-msgstr "Argi kutsadura "
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
+msgid "Light pollution:"
+msgstr ""
 
 #: src/ui_viewDialog.h:1086
 msgid "pressure, temperature, extinction coefficient"
@@ -1662,9 +1686,11 @@ msgstr "Erakutsi mugak"
 msgid "Show art"
 msgstr "Erakutsi irudiak"
 
+#. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1115
-msgid "Art brightness: "
-msgstr "Irudien disdira: "
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:280
+msgid "Art brightness:"
+msgstr ""
 
 #: src/ui_viewDialog.h:1116
 msgid "Projection"
@@ -1805,6 +1831,7 @@ msgid "Enable mouse navigation"
 msgstr "Gaitu sagu bidezko nabigazioa"
 
 #: src/ui_configurationDialog.h:793
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Startup date and time"
 msgstr "Hasierako data eta ordua"
 
@@ -1987,7 +2014,7 @@ msgid "Tools"
 msgstr "Tresnak"
 
 #: src/ui_configurationDialog.h:878
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:362
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Scripts"
 msgstr "Skript-ak"
 
@@ -3165,6 +3192,7 @@ msgstr ""
 "kontrolatzen dute."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "Time display format"
 msgstr "Ordua bistaratzeko formatua"
 
@@ -3182,6 +3210,7 @@ msgid "24-hour format"
 msgstr "24 orduko formatua"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Date display format"
 msgstr "Dataren bistaratze formatua"
 
@@ -3214,237 +3243,155 @@ msgstr ""
 "Planetario sistemetan erabiltzen den 0.9.x serieko testu bidezko "
 "erabiltzaile interfazearen plugina."
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:124
-msgid "Set Location"
-msgstr "Hautatu kokapena"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:144
+msgid "Solar System body"
+msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:125
-msgid "Latitude"
-msgstr "Latitudea"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:128
-msgid "Longitude"
-msgstr "Longitudea"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:131
-msgid "Altitude"
-msgstr "Altitudea"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:135
-msgid "Solar System Body"
-msgstr "Eguzki-sistemako gorputza"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:147
-msgid "Date & Time"
-msgstr "Data eta ordua"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:149
-msgid "Sky Time"
-msgstr "Zeruko ordua"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:154
-msgid "Set Time Zone"
-msgstr "Ezarri ordu-eremua"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:155
-msgid "Day Keys"
-msgstr "Egunen gakoak"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:156
-msgid "Preset Sky Time"
-msgstr "Aurrezarri zeruko ordua"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:158
+msgid "Current date/time"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:163
-msgid "Sky Time at Startup"
-msgstr "Zeruko ordua abioan"
+msgid "Set time zone"
+msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:169
-msgid "Date Display Format"
-msgstr "Data bistaratzeko formatua"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:164
+msgid "Day keys"
+msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
-msgid "Time Display Format"
-msgstr "Ordua bistaratzeko formatua"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:165
+msgid "Startup date/time preset"
+msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:189
+#. TRANSLATORS: The current system time is used at startup
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:172
+msgid "system"
+msgstr ""
+
+#. TRANSLATORS: A pre-set time is used at startup
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:174
+msgid "preset"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+msgid "mmddyyyy"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+msgid "ddmmyyyy"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+msgid "yyyymmdd"
+msgstr ""
+
+#. TRANSLATORS: 12-hour time format
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
+msgid "12h"
+msgstr ""
+
+#. TRANSLATORS: 24-hour time format
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:193
+msgid "24h"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:209
 msgid "General"
 msgstr "Orokorra"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
-msgid "Sky Culture"
-msgstr "Zeru-kultura"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:197
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:218
 msgid "Language"
 msgstr "Hizkuntza"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:210
-msgid "Show Stars"
-msgstr "Erakutsi izarrak"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:213
-msgid "Star Relative Scale"
-msgstr "Izarren eskala erlatiboa"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:217
-msgid "Absolute Star Scale"
-msgstr "Izarren eskala absolutua"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:221
-msgid "Twinkling"
-msgstr "Dirdira"
-
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:232
+msgid "Show stars"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Colors"
 msgstr "Koloreak"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
-msgid "Constellation Lines"
-msgstr "Konstelazio lerroak"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
-msgid "Constellation Names"
-msgstr "Konstelazio izenak"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:242
-msgid "Constellation Art"
-msgstr "Konstelazioen irudiak"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:243
-msgid "Constellation Boundaries"
-msgstr "Konstelazioen mugak"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
-msgid "Constellation Art Intensity"
-msgstr "Konstelazioen irudien intentsitatea"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:251
-msgid "Cardinal Points"
-msgstr "Puntu kardinalak"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:255
-msgid "Planet Names"
-msgstr "Planeten izenak"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
-msgid "Planet Orbits"
-msgstr "Planeten orbitak"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
-msgid "Planet Trails"
-msgstr "Planeten arrastoak"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
-msgid "Meridian Line"
-msgstr "Meridiano lerroa"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:271
-msgid "Azimuthal Grid"
-msgstr "Sareta azimutala"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
-msgid "Equatorial Grid"
-msgstr "Sareta ekuatoriala"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:279
-msgid "Equatorial J2000 Grid"
-msgstr "J2000 sareta ekuatoriala"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:283
-msgid "Equator Line"
-msgstr "Ekuatore lerroa"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
-msgid "Ecliptic Line"
-msgstr "Ekliptika lerroa"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
-msgid "Nebula Names"
-msgstr "Nebulosa izenak"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:295
-msgid "Nebula Hints"
-msgstr "Nebulosen posizioak"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:319
-msgid "Effects"
-msgstr "Efektuak"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:321
-msgid "Light Pollution Level"
-msgstr "Argi-kutsadura maila"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:331
-msgid "Manual Zoom"
-msgstr "Ezkuzko zooma"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:335
-msgid "Magnitude Scaling Multiplier"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:336
+msgid "Nebula names"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:336
-msgid "Milky Way Intensity"
-msgstr "Esne Bidearen intentsitatea"
-
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:340
-msgid "Nebula Label Frequency"
-msgstr "Nebulosen etiketen maiztasuna"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:341
-msgid "Zoom Duration"
-msgstr "Zoomaren iraupena"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:345
-msgid "Cursor Timeout"
-msgstr "Kurtsorearen denbora-muga"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:346
-msgid "Setting Landscape Sets Location"
+msgid "Nebula hints"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:364
-msgid "Run Local Script"
-msgstr "Exekutatu script lokala"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:370
-msgid "Stop Running Script"
-msgstr "Geldiarazi script-aren exekuzioa"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:371
-msgid "CD/DVD Script"
-msgstr "CD/DVD script-a"
+msgid "Effects"
+msgstr "Efektuak"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:378
+msgid "Manual zoom"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:383
+msgid "Magnitude scaling multiplier"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:385
+msgid "Milky Way intensity:"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:391
+msgid "Nebula label frequency:"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:392
+msgid "Zoom duration:"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:398
+msgid "Cursor timeout:"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:399
+msgid "Setting landscape sets location"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:419
+msgid "Run local script"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:425
+msgid "Stop running script"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:428
+msgid "CD/DVD script"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:435
 msgid "Administration"
 msgstr "Kudeaketa"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:382
-msgid "Load Default Configuration"
-msgstr "Kargatu konfigurazio lehenetsia"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:439
+msgid "Load default configuration"
+msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:383
-msgid "Save Current Configuration"
-msgstr "Gorde uneko konfigurazioa"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
+msgid "Save current configuration"
+msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:384
-msgid "Shut Down"
-msgstr "Itzali"
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:443
+msgid "Shut down"
+msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:402
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 msgid "[no TUI node]"
 msgstr "[TUI nodorik ez]"
 
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:84
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
 msgid "On"
 msgstr "Gaituta"
 
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:79
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:86
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
 msgid "Off"
 msgstr "Desgaituta"
 
-#: plugins/TextUserInterface/src/TuiNodeColor.cpp:105
+#: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format
 msgid "error, unknown color part \"%1\""
 msgstr "errorea, kolore zati ezezaguna \"%1\""
@@ -3715,6 +3662,9 @@ msgstr ""
 msgid "Type: %1"
 msgstr "Mota: %1"
 
+#~ msgid "Date & Time"
+#~ msgstr "Data eta ordua"
+
 #~ msgid "Stars "
 #~ msgstr "Izarrak "
 
@@ -3723,6 +3673,15 @@ msgstr "Mota: %1"
 
 #~ msgid "Calendar"
 #~ msgstr "Egutegia"
+
+#~ msgid "Cardinal Points"
+#~ msgstr "Puntu kardinalak"
+
+#~ msgid "Meridian Line"
+#~ msgstr "Meridiano lerroa"
+
+#~ msgid "Planet Trails"
+#~ msgstr "Planeten arrastoak"
 
 #~ msgid "Select and exit to run."
 #~ msgstr "Hautatu eta irten abiarazteko."
@@ -3736,8 +3695,26 @@ msgstr "Mota: %1"
 #~ msgid "Actual Time"
 #~ msgstr "Oraingo ordua"
 
+#~ msgid "Constellation Names"
+#~ msgstr "Konstelazio izenak"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Konstelazioen irudien intentsitatea"
+
+#~ msgid "Constellation Lines"
+#~ msgstr "Konstelazio lerroak"
+
 #~ msgid "Show: "
 #~ msgstr "Erakutsi: "
+
+#~ msgid "Nebula Names"
+#~ msgstr "Nebulosa izenak"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Planeten orbitak"
+
+#~ msgid "Planet Names"
+#~ msgstr "Planeten izenak"
 
 #~ msgid "Zoom Duration: "
 #~ msgstr "Zoomaren iraupena: "
@@ -3747,6 +3724,9 @@ msgstr "Mota: %1"
 
 #~ msgid "Twinkling: "
 #~ msgstr "Dirdira "
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Konstelazioen mugak"
 
 #~ msgid "Object Sizing Rule: "
 #~ msgstr "Objektuen tamaina araua: "
@@ -3769,11 +3749,20 @@ msgstr "Mota: %1"
 #~ msgid "Arrow down to load list."
 #~ msgstr "Zerrenda kargatzeko kurtsorearen beheko gezia."
 
+#~ msgid "Light pollution: "
+#~ msgstr "Argi kutsadura "
+
 #~ msgid "Maximum Nebula Magnitude to Label: "
 #~ msgstr "Izena erakusteko nebulosaren magnitude maximoa: "
 
 #~ msgid "Finished downloading all star catalogs!"
 #~ msgstr "Izar-katalago guztien deskarga burutu da!"
+
+#~ msgid "Planets labels"
+#~ msgstr "Planeten etiketak"
+
+#~ msgid "Equator Line"
+#~ msgstr "Ekuatore lerroa"
 
 #~ msgid "Startup FOV: XX"
 #~ msgstr "Hasierako ikuseremua: XX"
@@ -3838,6 +3827,15 @@ msgstr "Mota: %1"
 #~ msgid "Light Pollution Luminance: "
 #~ msgstr "Argi kutsaduraren distira: "
 
+#~ msgid "Ecliptic Line"
+#~ msgstr "Ekliptika lerroa"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "Sareta ekuatoriala"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "Sareta azimutala"
+
 #~ msgid "Correct for light travel time: "
 #~ msgstr "Zuzendu argiaren bidaia denborarentzako: "
 
@@ -3870,6 +3868,9 @@ msgstr "Mota: %1"
 
 #~ msgid "Update me via Internet: "
 #~ msgstr "Eguneratu Internet bidez: "
+
+#~ msgid "Art brightness: "
+#~ msgstr "Irudien disdira: "
 
 #~ msgid "Sky Culture: "
 #~ msgstr "Zeru kultura: "
