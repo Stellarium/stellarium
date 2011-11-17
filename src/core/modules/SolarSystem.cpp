@@ -144,10 +144,10 @@ void SolarSystem::init()
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 
-    nMapShader = new StelShader;
+        nMapShader = new StelShader;
 	if (!(nMapShader->load(":/shaders/nmap.v.glsl", ":/shaders/nmap.f.glsl")))
 	{
-	        fprintf(stderr, "Could not load shader files\n");
+                qWarning() << "Could not load shader files";
 	        nMapShader = 0;
 	}
 }

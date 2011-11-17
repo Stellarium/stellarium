@@ -199,7 +199,7 @@ static unsigned int loadShader(const char* path, unsigned int type)
 
         if (!(fp = fopen(path, "r")))
         {
-                fprintf(stderr, "Could not open shader %s: %s\n", path, strerror(errno));
+                qWarning() << "Could not open shader " << path << ": " << strerror(errno);
                 return 0;
         }
 
@@ -245,13 +245,13 @@ static unsigned int createShader(const char *source, unsigned int type, const ch
 
         if (status == GL_FALSE)
         {
-                fprintf(stderr, "Error while compiling %s:\n%s\n", fileName, infoLog);
+                qWarning() << "Error while compiling " << fileName << ": " << infoLog;
                 glDeleteShader(shader);
                 return 0;
         }
         else if (logLength)
         {
-                fprintf(stderr, "%s:\n%s\n", fileName, infoLog);
+                qWarning() << fileName << ": " << infoLog;
         }
         return shader;
 }
@@ -274,15 +274,13 @@ static unsigned int createProgram(unsigned int vertexShader, unsigned int pixelS
 
         if (status == GL_FALSE)
         {
-//                qWarning << "Error while linking shader program:\n" << infoLog << "\n";
-                fprintf(stderr, "Error while linking shader program:\n%s\n", infoLog);
+                qWarning() << "Error while linking shader program:\n" << infoLog << "\n";
                 glDeleteProgram(program);
                 return 0;
         }
         else if (logLength)
         {
-//                qWarning << "\n" << infoLog << "\n";
-                fprintf(stderr, "%s\n", infoLog);
+                qWarning() << "\n" << infoLog << "\n";
         }
 
         return program;
