@@ -111,14 +111,12 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 
 		int size;
 		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &size);
-		fprintf(stdout, "image size: %d\n", size);
-		fprintf(stdout, "qImage width: %d\n", tex->qImage.width());
-
+                qWarning() << "image size: " << size << "\nqImage width: " << tex->qImage.width();
 
 		if (size < tex->qImage.width())
 		{
 		        tex->qImage = tex->qImage.scaledToWidth(size, Qt::FastTransformation);
-        		fprintf(stdout, "qImage resized width: %d\n", tex->qImage.width());
+                        qWarning() << "qImage resized width: " << tex->qImage.width();
 		}
         if (size < tex->qImage.height())
         {
