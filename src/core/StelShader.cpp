@@ -209,7 +209,7 @@ static unsigned int loadShader(const char* path, unsigned int type)
 
         if (!(content = (char*) malloc(size + 1)))
         {
-                perror("failed to allocate memory");
+                qWarning() << "failed to allocate memory";
                 return 0;
         }
 
