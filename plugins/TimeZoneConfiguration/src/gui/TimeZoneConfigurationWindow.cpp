@@ -43,7 +43,10 @@ TimeZoneConfigurationWindow::~TimeZoneConfigurationWindow()
 void TimeZoneConfigurationWindow::languageChanged()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+		updateAboutText();
+	}
 }
 
 void TimeZoneConfigurationWindow::createDialogContent()
@@ -93,7 +96,12 @@ void TimeZoneConfigurationWindow::createDialogContent()
 		ui->radioButtonUserDefined->setChecked(true);
 	}
 
-	QString version = QString("Time Zone plug-in (version %1)").arg(TIME_ZONE_CONFIGURATION_VERSION);
+	updateAboutText();
+}
+
+void TimeZoneConfigurationWindow::updateAboutText()
+{
+	QString version = QString(q_("Time Zone plug-in (version %1)")).arg(TIME_ZONE_CONFIGURATION_VERSION);
 	ui->labelTitle->setText(version);
 }
 

@@ -41,7 +41,26 @@ DefineTimeZoneWindow::~DefineTimeZoneWindow()
 void DefineTimeZoneWindow::languageChanged()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+		int startDateMonthIndex = ui->comboBoxDstStartDateMonth->currentIndex();
+		int startDayIndex = ui->comboBoxDstStartDay->currentIndex();
+		int startMonthIndex = ui->comboBoxDstStartMonth->currentIndex();
+		int startWeekIndex = ui->comboBoxDstStartWeek->currentIndex();
+		int endDateMonthIndex = ui->comboBoxDstEndDateMonth->currentIndex();
+		int endDayIndex = ui->comboBoxDstEndDay->currentIndex();
+		int endMonthIndex = ui->comboBoxDstEndMonth->currentIndex();
+		int endWeekIndex = ui->comboBoxDstEndWeek->currentIndex();
+		populateDateLists();
+		ui->comboBoxDstStartDateMonth->setCurrentIndex(startDateMonthIndex);
+		ui->comboBoxDstStartDay->setCurrentIndex(startDayIndex);
+		ui->comboBoxDstStartMonth->setCurrentIndex(startMonthIndex);
+		ui->comboBoxDstStartWeek->setCurrentIndex(startWeekIndex);
+		ui->comboBoxDstEndDateMonth->setCurrentIndex(endDateMonthIndex);
+		ui->comboBoxDstEndDay->setCurrentIndex(endDayIndex);
+		ui->comboBoxDstEndMonth->setCurrentIndex(endMonthIndex);
+		ui->comboBoxDstEndWeek->setCurrentIndex(endWeekIndex);
+	}
 }
 
 void DefineTimeZoneWindow::createDialogContent()
@@ -242,18 +261,12 @@ void DefineTimeZoneWindow::populateDateLists()
 	ui->comboBoxDstEndDateMonth->clear();
 	ui->comboBoxDstEndDateMonth->addItems(monthList);
 
-	//TODO: For the translators: refers to any day of the week, if not possible, translate as "First week"
 	QStringList weekList;
-	// TRANSLATORS: refers to any day of the week, if not possible, translate as "First week"
-	weekList.append(q_("First"));
-	// TRANSLATORS: refers to any day of the week
-	weekList.append(q_("Second"));
-	// TRANSLATORS: refers to any day of the week
-	weekList.append(q_("Third"));
-	// TRANSLATORS: refers to any day of the week
-	weekList.append(q_("Fourth"));
-	// TRANSLATORS: refers to any day of the week
-	weekList.append(q_("Last"));
+	weekList.append(q_("First week"));
+	weekList.append(q_("Second week"));
+	weekList.append(q_("Third week"));
+	weekList.append(q_("Fourth week"));
+	weekList.append(q_("Last week"));
 
 	ui->comboBoxDstStartWeek->clear();
 	ui->comboBoxDstStartWeek->addItems(weekList);
