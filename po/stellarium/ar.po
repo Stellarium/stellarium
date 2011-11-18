@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-16 11:00+0200\n"
+"POT-Creation-Date: 2011-11-17 21:25+0200\n"
 "PO-Revision-Date: 2011-09-24 11:36+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-17 05:14+0000\n"
-"X-Generator: Launchpad (build 14291)\n"
+"X-Launchpad-Export-Date: 2011-11-18 04:47+0000\n"
+"X-Generator: Launchpad (build 14299)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
 msgid "Meridian"
@@ -844,7 +844,7 @@ msgstr "المعدل الاستثنائي للأسديات"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "المعدل الأعلى (الأسديات لعام 1966)‏"
 
-#: src/gui/LocationDialog.cpp:369
+#: src/gui/LocationDialog.cpp:367
 msgid "New Location"
 msgstr "موقع جديد"
 
@@ -1339,8 +1339,8 @@ msgid "Help"
 msgstr "مساعدة"
 
 #: src/ui_helpDialogGui.h:267 plugins/Satellites/src/ui_satellitesDialog.h:670
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:350
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
 msgid "About"
 msgstr "عن"
 
@@ -1775,7 +1775,7 @@ msgstr ""
 "ستيللاريوم المرة القادمة"
 
 #: src/ui_configurationDialog.h:772
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:383
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
 msgid "Save settings"
 msgstr "احفظ الإعدادات"
 
@@ -2036,7 +2036,7 @@ msgstr "احذف منظر رصد مركَّب سابقاً"
 
 #: src/ui_addRemoveLandscapesDialog.h:275
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:339
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Remove"
 msgstr "إزالة"
 
@@ -2942,105 +2942,105 @@ msgstr ""
 "واجهة سهلة لبعض الخيارات الخفية الموجودة في ملف الإعدادات. تمكِّن من ضبط "
 "المنطقة الزمنية واختيار الطريقة التي يظهر بها الوقت والتاريخ في الشريط السفلي"
 
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:223
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 msgid "January"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:224
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 msgid "February"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:225
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 msgid "March"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:226
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 msgid "April"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:227
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 msgid "May"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:228
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 msgid "June"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:229
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 msgid "July"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:230
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 msgid "August"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:231
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 msgid "September"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:232
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 msgid "October"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:233
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 msgid "November"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:234
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 msgid "December"
 msgstr ""
 
-#. TRANSLATORS: refers to any day of the week, if not possible, translate as "First week"
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-msgid "First"
-msgstr ""
-
-#. TRANSLATORS: refers to any day of the week
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-msgid "Second"
-msgstr ""
-
-#. TRANSLATORS: refers to any day of the week
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-msgid "Third"
-msgstr ""
-
-#. TRANSLATORS: refers to any day of the week
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:254
-msgid "Fourth"
-msgstr ""
-
-#. TRANSLATORS: refers to any day of the week
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:256
-msgid "Last"
-msgstr ""
-
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:265
-msgid "Sunday"
+msgid "First week"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:266
-msgid "Monday"
+msgid "Second week"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:267
-msgid "Tuesday"
+msgid "Third week"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:268
-msgid "Wednesday"
+msgid "Fourth week"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:269
+msgid "Last week"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:278
+msgid "Sunday"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:279
+msgid "Monday"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:280
+msgid "Tuesday"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:281
+msgid "Wednesday"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:282
 msgid "Thursday"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:270
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:283
 msgid "Friday"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:271
+#: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:284
 msgid "Saturday"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
+#, qt-format
+msgid "Time Zone plug-in (version %1)"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:449
@@ -3048,9 +3048,9 @@ msgid "Define a time zone"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:373
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:375
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:377
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:379
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "Time zone"
 msgstr ""
 
@@ -3059,56 +3059,50 @@ msgid "Timezone name:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:379
-msgid "Offset from UTC:"
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:383
+msgid "Offset from UTC (hours):"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:380
-msgid " hours"
-msgstr ""
-
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
 msgid "Daylight saving time (summer time)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
 msgid "DST timezone name:"
 msgstr ""
 
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
+msgid "DST offset from UTC (hours):"
+msgstr ""
+
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
-msgid "DST offset from UTC:"
+msgid "Daylight saving time start"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
+msgid "Day:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
-msgid "Daylight saving time start"
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
+msgid "Time of change:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
-msgid "Day:"
-msgstr ""
-
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:465
-msgid "Time of change:"
-msgstr ""
-
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:466
 msgid "Date:"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
 msgid "Daylight saving time end"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:467
+#: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:465
 msgid "Use this definition"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:376
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:380
 msgid ""
 "By default, the time displayed in Stellarium is interpreted as the local "
 "time in the system's time zone, not in the displayed location's time zone. "
@@ -3116,74 +3110,69 @@ msgid ""
 "settings."
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:377
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
 msgid "Use system settings (default)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:378
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:382
 msgid "Universal Coordinated Time (UTC)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
 msgid "(offset = local time - UTC time)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:382
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
 msgid "User-defined:"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
 msgid "Any changes will take effect the next time Stellarium is started."
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "Display formats"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "Time display format"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 msgid "System default"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 msgid "12-hour format"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
 msgid "24-hour format"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Date display format"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 msgid "dd-mm-yyyy"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 msgid "mm-dd-yyyy"
-msgstr ""
-
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
-#, qt-format
-msgid "Time Zone plug-in (version %1)"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:78
@@ -3366,89 +3355,118 @@ msgstr ""
 "  Minor Planet Center \n"
 " وتقوم بالبحث في قواعد المعلومات المتوفرة على الشبكة. لازال تحت التطوير"
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
+#. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
+#, qt-format
+msgid "Query the MPC's %1:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
+msgid "Only one result will be returned if the query is successful."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
+msgid ""
+"Both comets and asteroids can be identified with their number, name (in "
+"English) or provisional designation."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
+#, qt-format
+msgid ""
+"Comet <i>names</i> need to be prefixed with %1 or %2. If more than one comet "
+"matches a name, only the first result will be returned. For example, "
+"searching for \"%3\" will return %4, Halley's Comet, but a search for \"%5\" "
+"will return the asteroid %6."
+msgstr ""
+
+#. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:87
+msgid "website"
+msgstr ""
+
+#. TRANSLATORS: IAU = International Astronomical Union
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:91
+#, qt-format
+msgid ""
+"You can import comet and asteroid data formatted in the export formats of "
+"the IAU's Minor Planet Center (%1). You can import files with lists of "
+"objects, download such lists from the Internet or search the online Minor "
+"Planet and Comet Ephemeris Service (MPES)."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
+msgid "Solar System Editor plug-in"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
+#, qt-format
+msgid "Version %1"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Asteroids"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Comets"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Select the source"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Download a list of objects from the Internet"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Select a source from the list:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Or enter a URL:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
-msgid "paste"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Add this URL to the bookmarks list"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Bookmark title:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "A file containing a list of objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Get orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Abort download"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Lists"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "Online search"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
-msgid ""
-"Query the MPC's <a "
-"href=\"http://www.minorplanetcenter.net/iau/MPEph/MPEph.html\">Minor Planet "
-"&amp; Comet Ephemeris Service</a>:"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
-msgid ""
-"Only one result will be returned if the query is successful.<br>Both comets "
-"and asteroids can be identified with their number, name or provisional "
-"designation.<br>Comet <i>names</i> need to be prefixed with <b>C/</b> or "
-"<b>P/</b>. If more than one comet matches a name, only the first result will "
-"be returned. For example, \"C/Halley\" will return 1P/Halley, Halley's "
-"Comet, but \"Halley\" will return the asteroid (2688) Halley."
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Objects found"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid ""
 "Mark the objects you wish to be imported. In <i>italic</i> are listed names "
 "that match the names of already loaded objects. In <b>bold</b> are listed "
@@ -3457,127 +3475,91 @@ msgid ""
 "may cause Stellarium to run slowly."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:547
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Overwrite existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:548
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
 msgid "Update existing objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:549
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid "Update only the orbital elements"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:550
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid "Mark all"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:551
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Mark none"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:552
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Discard"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:553
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid "Add objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:327
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:338
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:296
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Solar System objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:329
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
 msgid "Warning"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:330
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid ""
 "This plug-in uses a custom Solar System configuration file. If something "
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:331
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:332
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid "Reset to defaults"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:333
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Copy/replace the Solar System file"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:334
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:335
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Copy the Solar System file..."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:336
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Replace the Solar System file..."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:337
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Configuration file"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:340
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Add new Solar System objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:341
-msgid ""
-"You can import comet and asteroid data formatted in the export formats of "
-"the IAU's <a href=\"http://www.minorplanetcenter.net/\">Minor Planet "
-"Center</a> (MPC). You can import files with lists of objects, download such "
-"lists from the Internet or search the online Minor Planet and Comet "
-"Ephemeris Service (MPES)."
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:342
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Import orbital elements in MPC format..."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:343
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
 msgid "Solar System"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:344
-msgid "Enter manually a new Solar System object"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:345
-msgid ""
-"You can add a new object by entering manually the properties used by "
-"Stellarium."
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:346
-msgid "Enter manually object properties..."
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:347
-msgid "Data import"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:348
-msgid "Solar System Editor plug-in"
-msgstr ""
-
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:349
-#, qt-format
-msgid "Version %1"
 msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
