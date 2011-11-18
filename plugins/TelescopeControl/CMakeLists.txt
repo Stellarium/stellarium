@@ -1,7 +1,7 @@
 
 SET(TELESCOPE_CONTROL_MAJOR "0")
 SET(TELESCOPE_CONTROL_MINOR "2")
-SET(TELESCOPE_CONTROL_PATCH "2")
+SET(TELESCOPE_CONTROL_PATCH "3")
 SET(TELESCOPE_CONTROL_VERSION "${TELESCOPE_CONTROL_MAJOR}.${TELESCOPE_CONTROL_MINOR}.${TELESCOPE_CONTROL_PATCH}")
 #Don't forget to increment the version in device_models.json too,
 #otherwise the local copy will be overwritten each time Stellarium is started.
@@ -15,7 +15,7 @@ ENDIF(APPLE)
 #SET(TELESCOPE_SERVERS_SOURCE_DIR "$ENV{STELROOT}/../telescope_server/src"
 #	CACHE PATH "Should point to the /src/ directory where the stellarium telescope servers source tree is located")
 
-ADD_DEFINITIONS(-DPLUGIN_VERSION="${TELESCOPE_CONTROL_VERSION}")
+ADD_DEFINITIONS(-DTELESCOPE_CONTROL_VERSION="${TELESCOPE_CONTROL_VERSION}")
 
 #Temporary debugging definitions for the telescope servers code
 ADD_DEFINITIONS(-DDEBUG3 -DDEBUG4 -DDEBUG5)
