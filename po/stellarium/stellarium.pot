@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-17 21:25+0200\n"
+"POT-Creation-Date: 2011-11-18 10:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1298,7 +1298,7 @@ msgid "Help"
 msgstr ""
 
 #: src/ui_helpDialogGui.h:267 plugins/Satellites/src/ui_satellitesDialog.h:670
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
 msgid "About"
 msgstr ""
@@ -1730,7 +1730,7 @@ msgid ""
 msgstr ""
 
 #: src/ui_configurationDialog.h:772
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 msgid "Save settings"
 msgstr ""
 
@@ -1984,7 +1984,7 @@ msgstr ""
 
 #: src/ui_addRemoveLandscapesDialog.h:275
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Remove"
 msgstr ""
 
@@ -2971,8 +2971,13 @@ msgid "Saturday"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
+msgid "Time Zone plug-in"
+msgstr ""
+
+#: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 #, qt-format
-msgid "Time Zone plug-in (version %1)"
+msgid "Version %1"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:449
@@ -2980,9 +2985,9 @@ msgid "Define a time zone"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:377
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:379
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
 msgid "Time zone"
 msgstr ""
 
@@ -2991,7 +2996,7 @@ msgid "Timezone name:"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:383
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "Offset from UTC (hours):"
 msgstr ""
 
@@ -3034,7 +3039,7 @@ msgstr ""
 msgid "Use this definition"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:380
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
 msgid ""
 "By default, the time displayed in Stellarium is interpreted as the local "
 "time in the system's time zone, not in the displayed location's time zone. "
@@ -3042,68 +3047,68 @@ msgid ""
 "settings."
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "Use system settings (default)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:382
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
 msgid "Universal Coordinated Time (UTC)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "(offset = local time - UTC time)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
 msgid "User-defined:"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
 msgid "Any changes will take effect the next time Stellarium is started."
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:407
 msgid "Display formats"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "Time display format"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
 msgid "System default"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "12-hour format"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
 msgid "24-hour format"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Date display format"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 msgid "dd-mm-yyyy"
 msgstr ""
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
 msgid "mm-dd-yyyy"
 msgstr ""
 
@@ -3325,12 +3330,6 @@ msgstr ""
 msgid "Solar System Editor plug-in"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
-#, qt-format
-msgid "Version %1"
-msgstr ""
-
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
 msgstr ""
@@ -3429,61 +3428,61 @@ msgstr ""
 msgid "Add objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:296
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Solar System objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Warning"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid ""
 "This plug-in uses a custom Solar System configuration file. If something "
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid "You can also reset all changes and return to the default configuration:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Reset to defaults"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Copy/replace the Solar System file"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Copy the Solar System file..."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Replace the Solar System file..."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Configuration file"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Add new Solar System objects"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
 msgid "Import orbital elements in MPC format..."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
 msgid "Solar System"
 msgstr ""
 
