@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-18 10:16+0200\n"
+"POT-Creation-Date: 2011-11-18 12:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2177,7 +2177,6 @@ msgid "Stellarium Satellites Plugin"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:210
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Version"
 msgstr ""
 
@@ -2564,107 +2563,109 @@ msgstr ""
 msgid "Stopped"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
-msgid "Stellarium Telescope Control Plug-in"
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
+msgid "Telescope Control plug-in"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:680
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
+#: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
+#, qt-format
+msgid "Version %1"
+msgstr ""
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:697
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:386
 msgid "Start"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:681
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:698
 msgid "Start the selected local telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:686
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:703
 msgid "Stop"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:687
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:704
 msgid "Stop the selected local telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:692
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:709
 msgid "Connect"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:693
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:710
 msgid "Connect to the selected telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:698
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:715
 msgid "Disconnect"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:699
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:716
 msgid "Disconnect from the selected telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:720
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:737
 msgid "Select a directory"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:297
+#: plugins/TelescopeControl/src/ui_slewDialog.h:281
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:469
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:382
 msgid "Form"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:298
+#: plugins/TelescopeControl/src/ui_slewDialog.h:282
 msgid "Slew telescope to"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:300
+#: plugins/TelescopeControl/src/ui_slewDialog.h:284
 msgid "There are no active devices."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:301
+#: plugins/TelescopeControl/src/ui_slewDialog.h:285
+msgid "&Right Ascension (J2000):"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:286
+msgid "De&clination (J2000):"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:287
 msgid "Slew telescope to coordinates"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:302
-msgid "&Right Ascension"
-msgstr ""
-
-#: plugins/TelescopeControl/src/ui_slewDialog.h:303
-#: plugins/TelescopeControl/src/ui_slewDialog.h:305
-msgid "(J2000)"
-msgstr ""
-
-#: plugins/TelescopeControl/src/ui_slewDialog.h:304
-msgid "De&clination"
-msgstr ""
-
-#: plugins/TelescopeControl/src/ui_slewDialog.h:307
+#: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "Hours-minutes-seconds format"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:309
+#: plugins/TelescopeControl/src/ui_slewDialog.h:291
 msgid "&HMS"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:311
+#: plugins/TelescopeControl/src/ui_slewDialog.h:293
 msgid "Degrees-minutes-seconds format"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:313
+#: plugins/TelescopeControl/src/ui_slewDialog.h:295
 msgid "&DMS"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:315
+#: plugins/TelescopeControl/src/ui_slewDialog.h:297
 msgid "Decimal degrees"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:317
+#: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "D&ecimal"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:318
+#: plugins/TelescopeControl/src/ui_slewDialog.h:300
 msgid "&Slew"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:319
+#: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Configure &telescopes..."
 msgstr ""
 
@@ -2972,12 +2973,6 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
-msgstr ""
-
-#: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
-#, qt-format
-msgid "Version %1"
 msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:449
