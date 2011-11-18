@@ -409,7 +409,14 @@
 }</string>
          </property>
          <property name="text">
-          <string notr="true">Time Zone plug-in (version %1)</string>
+          <string notr="true">Time Zone plug-in</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="labelVersion">
+         <property name="text">
+          <string notr="true">Version %1</string>
          </property>
         </widget>
        </item>
