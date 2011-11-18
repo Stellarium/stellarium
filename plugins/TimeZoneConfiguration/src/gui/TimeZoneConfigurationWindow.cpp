@@ -101,8 +101,9 @@ void TimeZoneConfigurationWindow::createDialogContent()
 
 void TimeZoneConfigurationWindow::updateAboutText()
 {
-	QString version = QString(q_("Time Zone plug-in (version %1)")).arg(TIME_ZONE_CONFIGURATION_VERSION);
-	ui->labelTitle->setText(version);
+	ui->labelTitle->setText(q_("Time Zone plug-in"));
+	QString version = QString(q_("Version %1")).arg(TIME_ZONE_CONFIGURATION_VERSION);
+	ui->labelVersion->setText(version);
 }
 
 void TimeZoneConfigurationWindow::saveTimeZoneSettings()
