@@ -16,6 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include "StelTranslator.hpp"
 #include "TuiNodeFloat.hpp"
 #include <QKeyEvent>
 
@@ -159,14 +160,14 @@ QString TuiNodeFloat::getDisplayText()
 {
 	if (!editing)
 	{
-		return displayText + QString(":  %1").arg(value);
+		return prefixText + q_(displayText) + QString("  %1").arg(value);
 	}
 	else
 	{
 		if (typedDecimal)
-			return displayText + QString(": >%1.<").arg(value);
+			return prefixText + q_(displayText) + QString(" >%1.<").arg(value);
 		else
-			return displayText + QString(": >%1<").arg(value);
+			return prefixText + q_(displayText) + QString(" >%1<").arg(value);
 	}
 }
 

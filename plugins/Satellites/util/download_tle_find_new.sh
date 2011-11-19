@@ -9,5 +9,6 @@ GET "http://celestrak.com/NORAD/elements/gps-ops.txt" | ./add_new_from_tle_file.
 GET "http://celestrak.com/NORAD/elements/amateur.txt" | ./add_new_from_tle_file.pl amateur >> new.json
 GET "http://celestrak.com/NORAD/elements/iridium.txt" | ./add_new_from_tle_file.pl iridium communications >> new.json
 GET "http://celestrak.com/NORAD/elements/visual.txt"  | ./add_new_from_tle_file.pl visual >> new.json
+GET "http://celestrak.com/NORAD/elements/geo.txt"     | ./add_new_from_tle_file.pl geostationary >> new.json
 
 echo "now splice new.json into the old satellites.json file"

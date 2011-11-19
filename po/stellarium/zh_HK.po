@@ -7,46 +7,46 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-26 01:48+0700\n"
-"PO-Revision-Date: 2011-06-19 12:40+0000\n"
-"Last-Translator: siulamvictor <victorlamhk@gmail.com>\n"
+"POT-Creation-Date: 2011-09-19 20:07+0700\n"
+"PO-Revision-Date: 2011-11-01 17:02+0000\n"
+"Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-06-28 04:36+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-11-02 04:47+0000\n"
+"X-Generator: Launchpad (build 14214)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
-msgstr ""
+msgstr "子午圈"
 
 #: src/core/modules/GridLinesMgr.cpp:529
 msgid "Ecliptic"
-msgstr ""
+msgstr "黄道"
 
 #: src/core/modules/GridLinesMgr.cpp:533
 msgid "Equator"
-msgstr ""
+msgstr "赤道"
 
 #: src/core/modules/GridLinesMgr.cpp:537
 msgid "Horizon"
-msgstr ""
+msgstr "地平線"
 
-#: src/core/modules/LandscapeMgr.cpp:488
+#: src/core/modules/LandscapeMgr.cpp:486
 msgid "Author: "
 msgstr "作者: "
 
-#: src/core/modules/LandscapeMgr.cpp:491
+#: src/core/modules/LandscapeMgr.cpp:489
 msgid "Location: "
 msgstr "所在位置: "
 
-#: src/core/modules/LandscapeMgr.cpp:496
+#: src/core/modules/LandscapeMgr.cpp:494
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 公尺"
 
-#: src/core/modules/LandscapeMgr.cpp:499
+#: src/core/modules/LandscapeMgr.cpp:498
 msgid "Planet: "
 msgstr "行星: "
 
@@ -56,7 +56,7 @@ msgid "Type: <b>%1</b>"
 msgstr "種類:<b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:120
-#: plugins/Supernovas/src/Supernova.cpp:98
+#: plugins/Supernovae/src/Supernova.cpp:99
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "星等: <b>%1</b>"
@@ -80,11 +80,11 @@ msgstr "球狀星團"
 
 #: src/core/modules/Nebula.cpp:293
 msgid "Nebula"
-msgstr "星云"
+msgstr "星雲"
 
 #: src/core/modules/Nebula.cpp:296
 msgid "Planetary nebula"
-msgstr ""
+msgstr "行星狀星雲"
 
 #: src/core/modules/Nebula.cpp:299
 msgid "Cluster associated with nebulosity"
@@ -92,7 +92,7 @@ msgstr "瀰漫星雲"
 
 #: src/core/modules/Nebula.cpp:302
 msgid "Unknown"
-msgstr ""
+msgstr "不詳"
 
 #: src/core/modules/Nebula.cpp:305
 msgid "Undocumented type"
@@ -106,17 +106,17 @@ msgstr "絕對星等: %1"
 #: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr ""
+msgstr "黄道的地心 (日期): %1/%2"
 
 #: src/core/modules/Planet.cpp:137
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr ""
+msgstr "傾角 (日期): %1"
 
 #: src/core/modules/Planet.cpp:143
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
-msgstr "距離: %1天文單位"
+msgstr "距離: %1AU(天文單位)"
 
 #: src/core/modules/Planet.cpp:147
 #, qt-format
@@ -134,7 +134,7 @@ msgid "Spectral Type: %1"
 msgstr "光譜類型： %1"
 
 #: src/core/modules/StarWrapper.cpp:122
-#: plugins/Supernovas/src/Supernova.cpp:107
+#: plugins/Supernovae/src/Supernova.cpp:108
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "距離：%1 光年"
@@ -142,11 +142,15 @@ msgstr "距離：%1 光年"
 #: src/core/modules/StarWrapper.cpp:125
 #, qt-format
 msgid "Parallax: %1\""
-msgstr "视差: %1\""
+msgstr "視差: %1\""
+
+#: src/core/StelObserver.cpp:265
+msgid "SpaceShip"
+msgstr "太空船"
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
-msgstr ""
+msgstr "最大視場角 "
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
@@ -193,7 +197,7 @@ msgstr "魚眼投影法或稱為<i>等距方位投影法</i>.當直線距離中�
 
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
-msgstr ""
+msgstr "哈默 - 阿伊托夫"
 
 #: src/core/StelProjectorClasses.cpp:187
 msgid ""
@@ -249,11 +253,11 @@ msgstr "時角/赤緯:%1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
-msgstr ""
+msgstr "(幾何)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
-msgstr ""
+msgstr "(表面的)"
 
 #: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
@@ -264,50 +268,50 @@ msgstr "方位角/高度角: %1/%2"
 msgid "Select screenshot directory"
 msgstr "選擇儲存截圖資料夾"
 
-#: src/gui/ConfigurationDialog.cpp:461
+#: src/gui/ConfigurationDialog.cpp:462
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "啟動時視野:%1%2"
 
-#: src/gui/ConfigurationDialog.cpp:469
+#: src/gui/ConfigurationDialog.cpp:470
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "啟動時的地平坐標方位角/高度角: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:509
+#: src/gui/ConfigurationDialog.cpp:510
 msgid "Authors"
 msgstr "著作群"
 
-#: src/gui/ConfigurationDialog.cpp:513 src/gui/ViewDialog.cpp:368
+#: src/gui/ConfigurationDialog.cpp:514 src/gui/ViewDialog.cpp:368
 msgid "Contact"
 msgstr "聯繫"
 
-#: src/gui/ConfigurationDialog.cpp:585
+#: src/gui/ConfigurationDialog.cpp:586
 msgid "Author"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:586
+#: src/gui/ConfigurationDialog.cpp:587
 msgid "License"
 msgstr "授權條款"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:616
 msgid "Running script: "
 msgstr "執行指令： "
 
-#: src/gui/ConfigurationDialog.cpp:622
+#: src/gui/ConfigurationDialog.cpp:623
 msgid "Running script: [none]"
 msgstr "執行指令：[空白]"
 
-#: src/gui/ConfigurationDialog.cpp:665
+#: src/gui/ConfigurationDialog.cpp:666
 msgid "Finished downloading all star catalogs!"
-msgstr ""
+msgstr "已完成下載所有的星表！"
 
-#: src/gui/ConfigurationDialog.cpp:674
+#: src/gui/ConfigurationDialog.cpp:675
 #, qt-format
 msgid "Get catalog %1 of %2"
-msgstr "在 %2 中取後 %1 目錄"
+msgstr "取得星表 %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:676
+#: src/gui/ConfigurationDialog.cpp:677
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -318,7 +322,7 @@ msgstr ""
 "星體數量:%2 百萬\n"
 "星等範圍: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:685
+#: src/gui/ConfigurationDialog.cpp:686
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -326,7 +330,7 @@ msgstr ""
 "新的恆星目錄經已下載完畢！\n"
 "請重新啟動 Stellarium 以使用新的目錄。"
 
-#: src/gui/ConfigurationDialog.cpp:723 src/gui/ConfigurationDialog.cpp:757
+#: src/gui/ConfigurationDialog.cpp:724 src/gui/ConfigurationDialog.cpp:758
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -335,18 +339,18 @@ msgstr ""
 "錯誤！下載中 %1：\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:728
+#: src/gui/ConfigurationDialog.cpp:729
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr "下載中 %1 ..."
 
-#: src/gui/ConfigurationDialog.cpp:808
+#: src/gui/ConfigurationDialog.cpp:809
 msgid "Verifying file integrity..."
 msgstr "正在檢查檔案完整性..."
 
-#: src/gui/ConfigurationDialog.cpp:812
+#: src/gui/ConfigurationDialog.cpp:813
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -355,8 +359,8 @@ msgstr ""
 "錯誤！下載中 %1：\n"
 "檔案損壞。"
 
-#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:285
-#: src/gui/StelGuiItems.cpp:640
+#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:286
+#: src/gui/StelGuiItems.cpp:656
 msgid "Space"
 msgstr "太空"
 
@@ -452,7 +456,7 @@ msgstr "{FAQ} 關於 Stellarium的的常見問答"
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
-msgstr "{Stellarium Wiki} - 一般資料，你亦可以在這裏找到由使用者製作的背景及指令。"
+msgstr "{The Stellarium Wiki} - 一般資料. 你可以尋找到由其他使用者製作的地形和指令."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:188
@@ -559,7 +563,7 @@ msgstr "子午線"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
 msgid "Horizon line"
-msgstr ""
+msgstr "地平線"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
 msgid "Cardinal points"
@@ -639,7 +643,7 @@ msgstr "星空及顯示"
 
 #: src/gui/StelGui.cpp:135
 msgid "Date/time window"
-msgstr "日期/時監"
+msgstr "日期/時間"
 
 #: src/gui/StelGui.cpp:136
 msgid "Location window"
@@ -765,7 +769,7 @@ msgstr "自動隱藏垂直工具欄"
 msgid "Toggle visibility of GUI"
 msgstr "切換顯示的圖形用戶界面"
 
-#: src/gui/StelGuiItems.cpp:541
+#: src/gui/StelGuiItems.cpp:542
 #, no-c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
@@ -794,13 +798,13 @@ msgstr "超量獅子座流星雨"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "至今最高频率 (1966 獅子座流星雨)"
 
-#: src/gui/LocationDialog.cpp:334
+#: src/gui/LocationDialog.cpp:367
 msgid "New Location"
 msgstr "新的位置"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
-msgstr "選擇一個 ZIP檔案，其中包含一個 Stellarium的風景"
+msgstr "選擇一個 ZIP檔案，其中包含一個 Stellarium的地形"
 
 #. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 #: src/gui/AddRemoveLandscapesDialog.cpp:114
@@ -810,7 +814,7 @@ msgstr "ZIP檔案"
 #: src/gui/AddRemoveLandscapesDialog.cpp:127
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
-msgstr "風景%1”已成功安裝。"
+msgstr "地形%1”已成功安裝v"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:128
 #: src/gui/AddRemoveLandscapesDialog.cpp:155
@@ -822,7 +826,7 @@ msgstr "完成"
 #: src/gui/AddRemoveLandscapesDialog.cpp:220
 #: src/gui/AddRemoveLandscapesDialog.cpp:228
 msgid "No landscape was installed."
-msgstr ""
+msgstr "未有安裝地形"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:142
 #: src/gui/AddRemoveLandscapesDialog.cpp:166
@@ -831,49 +835,49 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:229
 #: src/gui/AddRemoveLandscapesDialog.cpp:239
 msgid "Error!"
-msgstr ""
+msgstr "錯誤！"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:154
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
-msgstr ""
+msgstr "地形\"%1\" 已成功移除。"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:165
 #: src/gui/AddRemoveLandscapesDialog.cpp:235
 msgid "The selected landscape could not be (completely) removed."
-msgstr ""
+msgstr "所選的地形不能 (完全地) 移除。"
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
 #, qt-format
 msgid "Size on disk: %1 MiB"
-msgstr ""
+msgstr "在硬碟上的大小: %1 Mib"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
 #: src/gui/AddRemoveLandscapesDialog.cpp:214
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
-msgstr ""
+msgstr "Stellarium無法開啟, 讀取或寫入%1"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:220
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
-msgstr ""
+msgstr "所選擇的文件不是一個 ZIP壓縮檔, 或不包含Stellarium地形。"
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
 #: src/gui/AddRemoveLandscapesDialog.cpp:227
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
-msgstr ""
+msgstr "已經存在具有相同名稱或識別碼 (%1) 的地形。"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
 #: src/gui/AddRemoveLandscapesDialog.cpp:238
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
-msgstr ""
+msgstr "你可以從此目錄手動移除風景: %1"
 
-#: src/main.cpp:335
+#: src/main.cpp:336
 msgid "This system does not support OpenGL."
 msgstr "系統不支援OpenGL"
 
@@ -990,7 +994,7 @@ msgid "Adrastea"
 msgstr "木衛十五(阿德剌斯忒亞)"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:106
+#: src/translations.h:61 src/translations.h:110
 msgid "Metis"
 msgstr "木衛十六(墨提斯)"
 
@@ -1044,7 +1048,7 @@ msgstr "天王星"
 
 #: src/translations.h:74
 msgid "Miranda"
-msgstr ""
+msgstr "米蘭達 (天衞五)"
 
 #: src/translations.h:75
 msgid "Ariel"
@@ -1070,455 +1074,469 @@ msgstr "冥王星"
 msgid "Charon"
 msgstr "冥衛一(夏龍)"
 
-#: src/translations.h:81
+#. TRANSLATORS: Moon of Pluto (II)
+#: src/translations.h:82
+msgid "Nix"
+msgstr ""
+
+#. TRANSLATORS: Moon of Pluto (III)
+#: src/translations.h:84
+msgid "Hydra"
+msgstr "長蛇座"
+
+#: src/translations.h:85
 msgid "Eris"
 msgstr ""
 
-#: src/translations.h:82
+#: src/translations.h:86
 msgid "Triton"
 msgstr ""
 
-#: src/translations.h:83
+#: src/translations.h:87
 msgid "Nereid"
 msgstr ""
 
-#: src/translations.h:84
+#: src/translations.h:88
 msgid "Naiad"
 msgstr ""
 
-#: src/translations.h:85
+#: src/translations.h:89
 msgid "Thalassa"
 msgstr ""
 
-#: src/translations.h:86
+#: src/translations.h:90
 msgid "Despina"
 msgstr ""
 
-#: src/translations.h:87
+#: src/translations.h:91
 msgid "Galatea"
 msgstr ""
 
-#: src/translations.h:88
+#: src/translations.h:92
 msgid "Larissa"
 msgstr ""
 
-#: src/translations.h:89
+#: src/translations.h:93
 msgid "Proteus"
 msgstr ""
 
-#: src/translations.h:90
+#: src/translations.h:94
 msgid "Halimede"
 msgstr ""
 
-#: src/translations.h:91
+#: src/translations.h:95
 msgid "Psamathe"
 msgstr ""
 
-#: src/translations.h:92
+#: src/translations.h:96
 msgid "Sao"
 msgstr ""
 
-#: src/translations.h:93
+#: src/translations.h:97
 msgid "Laomedeia"
 msgstr ""
 
-#: src/translations.h:94
+#: src/translations.h:98
 msgid "Neso"
 msgstr ""
 
-#: src/translations.h:95
+#: src/translations.h:99
 msgid "Solar System Observer"
 msgstr "太陽系全覽點"
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:98
+#: src/translations.h:102
 msgid "Astraea"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:100
+#: src/translations.h:104
 msgid "Hebe"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:102
+#: src/translations.h:106
 msgid "Iris"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:104
+#: src/translations.h:108
 msgid "Flora"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:108
+#: src/translations.h:112
 msgid "Hygiea"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:110
+#: src/translations.h:114
 msgid "Amor"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:112
+#: src/translations.h:116
 msgid "Apophis"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:114
+#: src/translations.h:118
 msgid "Chiron"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:116
+#: src/translations.h:120
 msgid "Eros"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:118
+#: src/translations.h:122
 msgid "Hektor"
 msgstr ""
 
 #. TRANSLATORS: Name of supernova SN 1572A
-#: src/translations.h:120
+#: src/translations.h:124
 msgid "Tycho's Supernova"
 msgstr ""
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: src/translations.h:122
+#: src/translations.h:126
 msgid "Kepler's Supernova"
 msgstr ""
 
-#: src/translations.h:126
+#: src/translations.h:130
 msgid "N"
 msgstr "北"
 
-#: src/translations.h:127
+#: src/translations.h:131
 msgid "S"
 msgstr "南"
 
-#: src/translations.h:128
+#: src/translations.h:132
 msgid "E"
 msgstr "東"
 
-#: src/translations.h:129
+#: src/translations.h:133
 msgid "W"
 msgstr "西"
 
-#: src/translations.h:132
+#: src/translations.h:136
+msgid "Arabic"
+msgstr ""
+
+#: src/translations.h:137
 msgid "Aztec"
 msgstr ""
 
-#: src/translations.h:133
+#: src/translations.h:138
 msgid "Chinese"
 msgstr "華文"
 
-#: src/translations.h:134
+#: src/translations.h:139
 msgid "Egyptian"
 msgstr "埃及"
 
-#: src/translations.h:135
+#: src/translations.h:140
 msgid "Inuit"
 msgstr "因努伊特 (北極)"
 
-#: src/translations.h:136
+#: src/translations.h:141
 msgid "Korean"
 msgstr "韓語"
 
-#: src/translations.h:137
+#: src/translations.h:142
 msgid "Lakota"
 msgstr "拉科塔语"
 
-#: src/translations.h:138
+#: src/translations.h:143
 msgid "Maori"
 msgstr ""
 
-#: src/translations.h:139
+#: src/translations.h:144
 msgid "Navajo"
 msgstr "那瓦霍语"
 
-#: src/translations.h:140
+#: src/translations.h:145
 msgid "Norse"
 msgstr "挪威"
 
-#: src/translations.h:141
+#: src/translations.h:146
 msgid "Polynesian"
 msgstr "玻里尼亞人"
 
-#: src/translations.h:142
+#: src/translations.h:147
 msgid "Sami"
 msgstr ""
 
-#: src/translations.h:143
+#: src/translations.h:148
 msgid "Tupi-Guarani"
 msgstr "图皮-瓜拉尼诸语(南美)"
 
-#: src/translations.h:144
+#: src/translations.h:149
 msgid "Western"
 msgstr "西方"
 
-#: src/translations.h:148
+#: src/translations.h:153
 msgid "Set Location "
 msgstr "位置設定 "
 
-#: src/translations.h:149
+#: src/translations.h:154
 msgid "Set Time "
 msgstr "時間設定 "
 
-#: src/translations.h:150
+#: src/translations.h:155
 msgid "General "
-msgstr ""
+msgstr "一般設定 "
 
-#: src/translations.h:151
+#: src/translations.h:156
 msgid "Stars "
 msgstr "恆星設定 "
 
-#: src/translations.h:152
+#: src/translations.h:157
 msgid "Colors "
 msgstr "顏色設定 "
 
-#: src/translations.h:153
+#: src/translations.h:158
 msgid "Effects "
 msgstr "效果設定 "
 
-#: src/translations.h:154
+#: src/translations.h:159
 msgid "Scripts "
 msgstr "指令 "
 
-#: src/translations.h:155
+#: src/translations.h:160
 msgid "Administration "
 msgstr "管理設定 "
 
-#: src/translations.h:157
+#: src/translations.h:162
 msgid "Latitude: "
 msgstr "緯度: "
 
-#: src/translations.h:158
+#: src/translations.h:163
 msgid "Longitude: "
 msgstr "經度: "
 
-#: src/translations.h:159
+#: src/translations.h:164
 msgid "Altitude (m): "
 msgstr "海拔: "
 
-#: src/translations.h:160
+#: src/translations.h:165
 msgid "Solar System Body: "
 msgstr "觀測者所處星體: "
 
-#: src/translations.h:162
+#: src/translations.h:167
 msgid "Sky Time: "
 msgstr "星空時間: "
 
-#: src/translations.h:163
+#: src/translations.h:168
 msgid "Set Time Zone: "
 msgstr "時區設定: "
 
-#: src/translations.h:164
+#: src/translations.h:169
 msgid "Day keys: "
 msgstr "时间定义: "
 
-#: src/translations.h:165
+#: src/translations.h:170
 msgid "Calendar"
 msgstr "月曆"
 
-#: src/translations.h:166
+#: src/translations.h:171
 msgid "Sidereal"
 msgstr "恆星日"
 
-#: src/translations.h:167
+#: src/translations.h:172
 msgid "Preset Sky Time: "
 msgstr "預設星空時間: "
 
-#: src/translations.h:168
+#: src/translations.h:173
 msgid "Sky Time At Start-up: "
 msgstr "程式開始時之星空時間: "
 
-#: src/translations.h:169
+#: src/translations.h:174
 msgid "Actual Time"
 msgstr "現在時間"
 
-#: src/translations.h:170
+#: src/translations.h:175
 msgid "Preset Time"
 msgstr "預設時間"
 
-#: src/translations.h:171
+#: src/translations.h:176
 msgid "Time Display Format: "
 msgstr "時間顯示格式: "
 
-#: src/translations.h:172
+#: src/translations.h:177
 msgid "Date Display Format: "
 msgstr "日期顯示格式: "
 
-#: src/translations.h:174
+#: src/translations.h:179
 msgid "Sky Culture: "
 msgstr "星空文化插圖: "
 
-#: src/translations.h:175
+#: src/translations.h:180
 msgid "Sky Language: "
 msgstr "星空術語： "
 
-#: src/translations.h:177
+#: src/translations.h:182
 msgid "Show: "
 msgstr "顯示: "
 
-#: src/translations.h:178
+#: src/translations.h:183
 msgid "Star Value Multiplier: "
 msgstr "星體值倍數： "
 
-#: src/translations.h:179
+#: src/translations.h:184
 msgid "Magnitude Sizing Multiplier: "
 msgstr "星等成像加成: "
 
-#: src/translations.h:180
+#: src/translations.h:185
 msgid "Maximum Magnitude to Label: "
-msgstr "顯示星名的最高星等： "
+msgstr "顯示星名的最高星等: "
 
-#: src/translations.h:181
+#: src/translations.h:186
 msgid "Twinkling: "
 msgstr "星光閃爍程度: "
 
-#: src/translations.h:182
+#: src/translations.h:187
 msgid "Limiting Magnitude: "
 msgstr "星等限制: "
 
-#: src/translations.h:184
+#: src/translations.h:189
 msgid "Constellation Lines"
 msgstr "星座連線"
 
-#: src/translations.h:185
+#: src/translations.h:190
 msgid "Constellation Names"
 msgstr "星座名稱"
 
-#: src/translations.h:186
+#: src/translations.h:191
 msgid "Constellation Art Intensity"
 msgstr "星座繪圖光暗度"
 
-#: src/translations.h:187
+#: src/translations.h:192
 msgid "Constellation Boundaries"
 msgstr "星座界線"
 
-#: src/translations.h:188
+#: src/translations.h:193
 msgid "Cardinal Points"
 msgstr "方位座標"
 
-#: src/translations.h:189
+#: src/translations.h:194
 msgid "Planet Names"
 msgstr "行星名稱"
 
-#: src/translations.h:190
+#: src/translations.h:195
 msgid "Planet Orbits"
 msgstr "行星軌道"
 
-#: src/translations.h:191
+#: src/translations.h:196
 msgid "Planet Trails"
 msgstr "行星跡"
 
-#: src/translations.h:192
+#: src/translations.h:197
 msgid "Meridian Line"
 msgstr "子午線"
 
-#: src/translations.h:193
+#: src/translations.h:198
 msgid "Azimuthal Grid"
 msgstr "地平座標系統"
 
-#: src/translations.h:194
+#: src/translations.h:199
 msgid "Equatorial Grid"
 msgstr "赤道座標系統"
 
-#: src/translations.h:195
+#: src/translations.h:200
 msgid "Equator Line"
 msgstr "赤道"
 
-#: src/translations.h:196
+#: src/translations.h:201
 msgid "Ecliptic Line"
 msgstr "黃道"
 
-#: src/translations.h:197
+#: src/translations.h:202
 msgid "Nebula Names"
 msgstr "星雲名稱"
 
-#: src/translations.h:198
+#: src/translations.h:203
 msgid "Nebula Circles"
 msgstr "星雲標記"
 
-#: src/translations.h:200
+#: src/translations.h:205
 msgid "Light Pollution Luminance: "
 msgstr "光污染程度: "
 
-#: src/translations.h:201
+#: src/translations.h:206
 msgid "Landscape: "
-msgstr "地貌： "
+msgstr "地形: "
 
-#: src/translations.h:202
+#: src/translations.h:207
 msgid "Manual zoom: "
 msgstr "人手縮放: "
 
-#: src/translations.h:203
+#: src/translations.h:208
 msgid "Object Sizing Rule: "
 msgstr "天體成像大小： "
 
-#: src/translations.h:204
+#: src/translations.h:209
 msgid "Magnitude Scaling Multiplier: "
 msgstr "星等放大基數： "
 
-#: src/translations.h:205
+#: src/translations.h:210
 msgid "Milky Way intensity: "
-msgstr "銀河密度: "
+msgstr "銀河光度: "
 
-#: src/translations.h:206
+#: src/translations.h:211
 msgid "Maximum Nebula Magnitude to Label: "
-msgstr "星雲顯示最高星等: "
+msgstr "顯示星雲的最高星等: "
 
-#: src/translations.h:207
+#: src/translations.h:212
 msgid "Zoom Duration: "
 msgstr "變焦過程長度: "
 
-#: src/translations.h:208
+#: src/translations.h:213
 msgid "Cursor Timeout: "
 msgstr "滑鼠指標自動隱藏: "
 
-#: src/translations.h:209
+#: src/translations.h:214
 msgid "Correct for light travel time: "
 msgstr "光行進時間修正： "
 
-#: src/translations.h:211
+#: src/translations.h:216
 msgid "Local Script: "
 msgstr "本機指令： "
 
-#: src/translations.h:212
+#: src/translations.h:217
 msgid "CD/DVD Script: "
 msgstr "CD/DVD 指令： "
 
-#: src/translations.h:213
+#: src/translations.h:218
 msgid "USB Script: "
 msgstr "USB 指令： "
 
-#: src/translations.h:214
+#: src/translations.h:219
 msgid "Arrow down to load list."
 msgstr "按下箭頭顯示清單"
 
-#: src/translations.h:215
+#: src/translations.h:220
 msgid "Select and exit to run."
 msgstr "選擇及離開執行"
 
-#: src/translations.h:217
+#: src/translations.h:222
 msgid "Load Default Configuration: "
 msgstr "載入預設值: "
 
-#: src/translations.h:218
+#: src/translations.h:223
 msgid "Save Current Configuration as Default: "
 msgstr "儲存現有設定為預設值: "
 
-#: src/translations.h:219
+#: src/translations.h:224
 msgid "Shut Down: "
 msgstr "關閉程式: "
 
-#: src/translations.h:220
+#: src/translations.h:225
 msgid "Update me via Internet: "
 msgstr "自網路進行更新: "
 
-#: src/translations.h:221
+#: src/translations.h:226
 msgid "Set UI Locale: "
 msgstr "選擇界面語言 "
 
@@ -1578,7 +1596,7 @@ msgstr "您可以输入十进位度数，或是使用 dms 格式，例如: +1d 1
 
 #: src/ui_locationDialogGui.h:399
 msgid "Longitude:"
-msgstr "经度:"
+msgstr "經度:"
 
 #: src/ui_locationDialogGui.h:403
 msgid "Altitude:"
@@ -1598,7 +1616,7 @@ msgstr "地名/城市:"
 
 #: src/ui_locationDialogGui.h:409
 msgid "Country:"
-msgstr "国家/地区:"
+msgstr "國家/地區:"
 
 #: src/ui_locationDialogGui.h:410
 msgid "Planet:"
@@ -1606,11 +1624,11 @@ msgstr "行星:"
 
 #: src/ui_searchDialogGui.h:450
 msgid "Find Object"
-msgstr "寻找天体"
+msgstr "尋找天體"
 
 #: src/ui_searchDialogGui.h:451
 msgid "Find Object or Position"
-msgstr ""
+msgstr "尋找天體或位置"
 
 #: src/ui_searchDialogGui.h:458
 msgid "iota"
@@ -1710,11 +1728,11 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:529
 msgid "Greek letters for Bayer designations"
-msgstr ""
+msgstr "使用拜耳命名法的希臘字母"
 
 #: src/ui_searchDialogGui.h:530
 msgid "Object"
-msgstr ""
+msgstr "物件"
 
 #: src/ui_searchDialogGui.h:531
 msgid "RA/Dec (J2000):"
@@ -1722,7 +1740,7 @@ msgstr "RA/DEC (J2000):"
 
 #: src/ui_searchDialogGui.h:532
 msgid "Position"
-msgstr ""
+msgstr "位置"
 
 #: src/ui_viewDialog.h:1052
 msgid "View"
@@ -1734,27 +1752,27 @@ msgstr "天空"
 
 #: src/ui_viewDialog.h:1060
 msgid "Markings"
-msgstr "标示"
+msgstr "標示"
 
 #: src/ui_viewDialog.h:1062
 msgid "Landscape"
-msgstr "背景"
+msgstr "地形"
 
 #: src/ui_viewDialog.h:1064
 msgid "Starlore"
-msgstr "星空术语"
+msgstr "星空術語"
 
 #: src/ui_viewDialog.h:1068
 msgid "Absolute scale:"
-msgstr "绝对大小:"
+msgstr "絕對大小:"
 
 #: src/ui_viewDialog.h:1069
 msgid "Relative scale:"
-msgstr "相对大小:"
+msgstr "相對大小:"
 
 #: src/ui_viewDialog.h:1070
 msgid "Twinkle:"
-msgstr "闪烁:"
+msgstr "閃爍:"
 
 #: src/ui_viewDialog.h:1072
 msgid "Dim faint stars when a very bright object is visible"
@@ -1766,19 +1784,19 @@ msgstr "人眼動態視覺調適"
 
 #: src/ui_viewDialog.h:1075
 msgid "Planets and satellites"
-msgstr "行星及卫星"
+msgstr "行星及衛星"
 
 #: src/ui_viewDialog.h:1076
 msgid "Show planets"
-msgstr "显示行星"
+msgstr "顯示行星"
 
 #: src/ui_viewDialog.h:1077
 msgid "Show planet markers"
-msgstr "显示行星标记"
+msgstr "顯示行星標記"
 
 #: src/ui_viewDialog.h:1078
 msgid "Show planet orbits"
-msgstr "显示行星轨道"
+msgstr "顯示行星軌道"
 
 #: src/ui_viewDialog.h:1079
 msgid "Simulate light speed"
@@ -1790,7 +1808,7 @@ msgstr "月球尺寸"
 
 #: src/ui_viewDialog.h:1082
 msgid "Show atmosphere"
-msgstr "显示大气层"
+msgstr "顯示大氣層"
 
 #: src/ui_viewDialog.h:1083
 msgid "Light pollution: "
@@ -1798,11 +1816,11 @@ msgstr "光污染: "
 
 #: src/ui_viewDialog.h:1085
 msgid "pressure, temperature, extinction coefficient"
-msgstr ""
+msgstr "壓力, 溫度, 消光係數"
 
 #: src/ui_viewDialog.h:1087
 msgid "Refraction/Extinction settings..."
-msgstr ""
+msgstr "折射/消光設置 ..."
 
 #: src/ui_viewDialog.h:1088
 msgid "Labels and Markers"
@@ -1874,7 +1892,7 @@ msgstr "投影方式"
 
 #: src/ui_viewDialog.h:1116
 msgid "Add/remove landscapes..."
-msgstr ""
+msgstr "添加/移除地形..."
 
 #: src/ui_viewDialog.h:1117 src/ui_viewDialog.h:1122 src/ui_viewDialog.h:1124
 #: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
@@ -1883,19 +1901,19 @@ msgstr "选项"
 
 #: src/ui_viewDialog.h:1118
 msgid "Show ground"
-msgstr "显示地面"
+msgstr "顯示地面"
 
 #: src/ui_viewDialog.h:1119
 msgid "Show fog"
-msgstr "显示雾气"
+msgstr "顯示霧氣"
 
 #: src/ui_viewDialog.h:1120
 msgid "Use associated planet and position"
-msgstr "使用与此地景关联的位置与行星"
+msgstr "使用與此地景關聯的位置與行星"
 
 #: src/ui_viewDialog.h:1121
 msgid "Use this landscape as default"
-msgstr "將此背景設定為預設值"
+msgstr "將此地形設定為預設值"
 
 #: src/ui_viewDialog.h:1123
 msgid "Use this sky culture as default"
@@ -1903,7 +1921,7 @@ msgstr "将此星空述语设为预设值"
 
 #: src/ui_viewDialog.h:1125
 msgid "Visible"
-msgstr ""
+msgstr "可見的"
 
 #: src/ui_configurationDialog.h:748
 msgid "Configuration"
@@ -1919,15 +1937,15 @@ msgstr "已選擇天體資料"
 
 #: src/ui_configurationDialog.h:753
 msgid "Display all information available"
-msgstr ""
+msgstr "顯示所有資料"
 
 #: src/ui_configurationDialog.h:755
 msgid "All available"
-msgstr "完整显示"
+msgstr "完整顯示"
 
 #: src/ui_configurationDialog.h:757
 msgid "Display less information"
-msgstr ""
+msgstr "顯示較少的資料"
 
 #: src/ui_configurationDialog.h:759
 msgid "Short"
@@ -1935,7 +1953,7 @@ msgstr "簡短顯示"
 
 #: src/ui_configurationDialog.h:761
 msgid "Display no information"
-msgstr ""
+msgstr "不顯示任何資料"
 
 #: src/ui_configurationDialog.h:763
 msgid "None"
@@ -1949,26 +1967,26 @@ msgstr "預設選項"
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
-msgstr ""
+msgstr "儲存你在此期間已改的設定, 並成為下次啟動Stellarium的設定"
 
 #: src/ui_configurationDialog.h:768
 msgid "Save settings"
-msgstr "储存设定"
+msgstr "儲存設定"
 
 #: src/ui_configurationDialog.h:770
 msgid "Restore the default settings that came with Stellarium"
-msgstr ""
+msgstr "恢愎Stellarium的原來設定"
 
 #: src/ui_configurationDialog.h:772
 msgid "Restore defaults"
-msgstr "还原预设值"
+msgstr "還原預設值"
 
 #: src/ui_configurationDialog.h:773
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
 "next startup."
-msgstr "恢复预设定需要重新启动Stellarium。储存包含目前视野大小、观看方向等所有设定以用于下次启动。"
+msgstr "恢復預設設定需要重新啟動Stellarium。儲存包含目前視野大小、觀看方向等所有設定以用於下次啟動。"
 
 #: src/ui_configurationDialog.h:775
 msgid "The width of your view when Stellarium starts"
@@ -1980,7 +1998,7 @@ msgstr "启动时的视角: XX"
 
 #: src/ui_configurationDialog.h:779
 msgid "The direction you're looking when Stellarium starts"
-msgstr ""
+msgstr "你啟動Stellarium時望的方向"
 
 #: src/ui_configurationDialog.h:781
 msgid "Startup direction of view: xxxx"
@@ -2004,7 +2022,7 @@ msgstr "使用鼠标移动及缩放画面 (拖拉滚轮)"
 
 #: src/ui_configurationDialog.h:790
 msgid "Enable mouse navigation"
-msgstr "启用鼠标导览"
+msgstr "啟用鼠標導覽"
 
 #: src/ui_configurationDialog.h:791
 msgid "Startup date and time"
@@ -2016,7 +2034,7 @@ msgstr "以系统设定的时间启动"
 
 #: src/ui_configurationDialog.h:795
 msgid "System date and time"
-msgstr "系统日期及时间"
+msgstr "系統日期及時間"
 
 #: src/ui_configurationDialog.h:797
 msgid ""
@@ -2058,7 +2076,7 @@ msgstr "轉換垂直及水平翻轉按鈕"
 
 #: src/ui_configurationDialog.h:813
 msgid "Show flip buttons"
-msgstr "显示翻转按键"
+msgstr "顯示翻轉按鍵"
 
 #: src/ui_configurationDialog.h:814
 msgid "Planetarium options"
@@ -2068,11 +2086,11 @@ msgstr "天文館選項"
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
-msgstr "球面镜扭曲 (使用 Stellarium 做为低成本星象投影系統的场合)"
+msgstr "球面鏡扭曲(使用Stellarium 做為低成本星象投影系統的場合)"
 
 #: src/ui_configurationDialog.h:818
 msgid "Spheric mirror distortion"
-msgstr "球面镜扭曲"
+msgstr "球面鏡扭曲"
 
 #: src/ui_configurationDialog.h:820
 msgid "Align labels with the horizon"
@@ -2080,7 +2098,7 @@ msgstr "星空名称文字保持水平"
 
 #: src/ui_configurationDialog.h:822
 msgid "Gravity labels"
-msgstr "重力名称文字"
+msgstr "重力名稱文字"
 
 #: src/ui_configurationDialog.h:824
 msgid ""
@@ -2090,7 +2108,7 @@ msgstr "啟動後，「自動縮小」鍵亦會將還原觀測方向。"
 
 #: src/ui_configurationDialog.h:826
 msgid "Auto zoom out returns to initial direction of view"
-msgstr "自动缩小時回到原本的观看方向"
+msgstr "自動縮小時回到原本的觀看方向"
 
 #: src/ui_configurationDialog.h:828
 msgid "Mask out everything outside a central circle in the main view"
@@ -2098,11 +2116,11 @@ msgstr "遮去在中間圓形範圍以外的星空"
 
 #: src/ui_configurationDialog.h:830
 msgid "Disc viewport"
-msgstr "圆形视角"
+msgstr "圓形視角"
 
 #: src/ui_configurationDialog.h:832
 msgid "Hide other constellations when you click one"
-msgstr ""
+msgstr "當你點擊一個星座時, 隱藏其他星座"
 
 #: src/ui_configurationDialog.h:834
 msgid "Select single constellation"
@@ -2126,11 +2144,11 @@ msgstr "恆星目錄更新"
 
 #: src/ui_configurationDialog.h:841
 msgid "Click here to start downloading"
-msgstr ""
+msgstr "點擊這裡開始下載"
 
 #: src/ui_configurationDialog.h:843
 msgid "Get catalog x of y"
-msgstr ""
+msgstr "下載星表之x,  總共y"
 
 #: src/ui_configurationDialog.h:844
 msgid "Download this file to view even more stars"
@@ -2142,7 +2160,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:847
 msgid "Restart the download"
-msgstr ""
+msgstr "重新啟動下載"
 
 #: src/ui_configurationDialog.h:849
 msgid "Retry"
@@ -2150,7 +2168,7 @@ msgstr "重試"
 
 #: src/ui_configurationDialog.h:851
 msgid "Stop the download. You can always restart it later"
-msgstr ""
+msgstr "停止下載. 您稍後可以重新下載它"
 
 #: src/ui_configurationDialog.h:853
 msgid "Cancel"
@@ -2174,15 +2192,15 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:867
 msgid "configure"
-msgstr ""
+msgstr "設定"
 
 #: src/ui_configurationDialog.h:872
 msgid "Main"
-msgstr "主設定畫面"
+msgstr "主要設定"
 
 #: src/ui_configurationDialog.h:874
 msgid "Navigation"
-msgstr "航行"
+msgstr "導航"
 
 #: src/ui_configurationDialog.h:876
 msgid "Tools"
@@ -2194,27 +2212,27 @@ msgstr "指令"
 
 #: src/ui_configurationDialog.h:880
 msgid "Plugins"
-msgstr ""
+msgstr "插件"
 
 #: src/ui_addRemoveLandscapesDialog.h:266
 msgid "Add/Remove Landscapes"
-msgstr ""
+msgstr "添加/移除地形"
 
 #: src/ui_addRemoveLandscapesDialog.h:268
 msgid "Add a new landscape"
-msgstr ""
+msgstr "添加新的地形"
 
 #: src/ui_addRemoveLandscapesDialog.h:269
 msgid "Install a new landscape from a ZIP archive..."
-msgstr ""
+msgstr "由ZIP壓縮檔安裝新的地形"
 
 #: src/ui_addRemoveLandscapesDialog.h:270
 msgid "Switch to the new landscape after installation"
-msgstr ""
+msgstr "安裝後使用新地形"
 
 #: src/ui_addRemoveLandscapesDialog.h:273
 msgid "Remove an installed landscape"
-msgstr ""
+msgstr "移除已安裝地形"
 
 #: src/ui_addRemoveLandscapesDialog.h:275
 msgid "Remove"
@@ -2224,40 +2242,38 @@ msgstr ""
 msgid ""
 "WARNING: Removing the selected landscape means deleting its files. This "
 "operation is irreversible."
-msgstr ""
+msgstr "警告: 刪除選定的地形意味著刪除其文件的操作是不可逆的。"
 
 #: src/ui_AtmosphereDialog.h:167
-msgid "Dialog"
-msgstr ""
-
-#: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
-msgstr ""
+msgstr "大氣詳細資料"
+
+#: src/ui_AtmosphereDialog.h:169
+msgid "Refraction Settings"
+msgstr "折射設定"
 
 #: src/ui_AtmosphereDialog.h:170
-msgid "Refraction Settings"
-msgstr ""
+msgid "Pressure (mbar):"
+msgstr "壓力 (毫巴):"
 
 #: src/ui_AtmosphereDialog.h:171
-msgid "Pressure (mbar):"
-msgstr ""
-
-#: src/ui_AtmosphereDialog.h:172
 msgid "Temperature (C):"
-msgstr ""
+msgstr "溫度 (攝氏):"
 
-#: src/ui_AtmosphereDialog.h:177
+#: src/ui_AtmosphereDialog.h:176
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
+"消光度是星光通過地球太氣層後所減少的光度. 單位是 星等/大氣質量, 大氣質量是大氣光數量的通過. (zenith: 1; horizon: about "
+"40)"
 
-#: src/ui_AtmosphereDialog.h:179
+#: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
-msgstr ""
+msgstr "消光係數:"
 
-#: src/ui_AtmosphereDialog.h:181
+#: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
@@ -2269,7 +2285,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
-msgstr ""
+msgstr "提供一個角度測量工具"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:121
 msgid "Angle measure"
@@ -2313,30 +2329,30 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:67
 msgid "Satellites"
-msgstr ""
+msgstr "衛星"
 
 #: plugins/Satellites/src/Satellites.cpp:70
 msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
-msgstr ""
+msgstr "以NORAD TLE資料來預測人造衛星在地球軌道的位置"
 
 #: plugins/Satellites/src/Satellites.cpp:125
 msgid "Satellites configuration window"
-msgstr ""
+msgstr "衛星設定框"
 
 #: plugins/Satellites/src/Satellites.cpp:126
 msgid "Satellite hints"
-msgstr ""
+msgstr "衛星提示"
 
 #: plugins/Satellites/src/Satellites.cpp:128
 msgid "Satellite labels"
-msgstr ""
+msgstr "衛星標示"
 
 #: plugins/Satellites/src/Satellites.cpp:162
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
-msgstr ""
+msgstr "舊的satellites.json文件不再兼容 - 使用默認的文件"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:150
@@ -2395,66 +2411,29 @@ msgid ""
 "its online database. Still a work in progress."
 msgstr ""
 
-#: plugins/Supernovas/src/Supernovas.cpp:59
-msgid "Historical supernova"
+#: plugins/Supernovae/src/Supernovae.cpp:59
+msgid "Historical supernovae"
 msgstr ""
 
-#: plugins/Supernovas/src/Supernovas.cpp:62
+#: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
-"The plugin for visualization of some historical supernovas, brighter 10 "
+"The plugin for visualization of some historical supernovae, brighter 10 "
 "magnitude"
-msgstr ""
+msgstr "一些歷史超新星的可視化插件, 亮度大過10等星."
 
-#: plugins/Supernovas/src/Supernovas.cpp:62
+#: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
 "SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
 "July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
 "1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
-"August), SN 1972E (8 May) and SN 1987A (24 February)"
+"August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 "
+"September)"
 msgstr ""
 
-#: plugins/Supernovas/src/Supernova.cpp:105
+#: plugins/Supernovae/src/Supernova.cpp:106
 #, qt-format
 msgid "Type: %1"
-msgstr ""
-
-#, qt-format
-#~ msgid "Loading NGC catalog: %1/%2"
-#~ msgstr "載入NGC目錄: %1/%2"
-
-#~ msgid "Move telescope #0 to selected object"
-#~ msgstr "將望遠鏡 #0 移動至所選天體"
-
-#~ msgid "Move telescope #2 to selected object"
-#~ msgstr "將望遠鏡 #2 移動至所選天體"
-
-#~ msgid "Move telescope #3 to selected object"
-#~ msgstr "將望遠鏡 #3 移動至所選天體"
-
-#~ msgid "Move telescope #1 to selected object"
-#~ msgstr "將望遠鏡 #1 移動至所選天體"
-
-#~ msgid "Move telescope #4 to selected object"
-#~ msgstr "將望遠鏡 #4 移動至所選天體"
-
-#~ msgid "Move telescope #8 to selected object"
-#~ msgstr "將望遠鏡 #8 移動至所選天體"
-
-#~ msgid "Move telescope #9 to selected object"
-#~ msgstr "將望遠鏡 #9 移動至所選天體"
-
-#~ msgid "Move telescope #5 to selected object"
-#~ msgstr "將望遠鏡 #5 移動至所選天體"
-
-#~ msgid "Move telescope #7 to selected object"
-#~ msgstr "將望遠鏡 #7 移動至所選天體"
-
-#~ msgid "Move telescope #6 to selected object"
-#~ msgstr "將望遠鏡 #6 移動至所選天體"
-
-#, qt-format
-#~ msgid "Loading catalog %1 from file %2"
-#~ msgstr "由檔案 %2 載入目錄 %1"
+msgstr "類型: %1"
 
 #~ msgid "Form"
 #~ msgstr "格式"

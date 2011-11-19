@@ -72,6 +72,10 @@ HelpDialog::HelpDialog()
 	setKey(group, "", "J", N_("Slow down the script execution rate"));
 	setKey(group, "", "L", N_("Speed up the script execution rate"));
 	setKey(group, "", "K", N_("Set the normal script execution rate"));
+
+        // Add keys for those plugins which do not have GUI actions.
+        group = N_("Plugin Key Bindings");
+        setKey(group, "", "Alt+M", N_("Text User Interface"));
 }
 
 HelpDialog::~HelpDialog()

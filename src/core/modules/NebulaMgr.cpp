@@ -92,7 +92,7 @@ void NebulaMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	nebulaFont.setPixelSize(13);
+	nebulaFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 	Nebula::texCircle = StelApp::getInstance().getTextureManager().createTexture("textures/neb.png");   // Load circle texture
 	Nebula::texOpenCluster = StelApp::getInstance().getTextureManager().createTexture("textures/ocl.png");   // Load open clister marker texture
 	Nebula::texGlobularCluster = StelApp::getInstance().getTextureManager().createTexture("textures/gcl.png");   // Load globular clister marker texture

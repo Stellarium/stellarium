@@ -10,15 +10,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-26 01:48+0700\n"
-"PO-Revision-Date: 2010-11-23 22:06+0000\n"
+"POT-Creation-Date: 2011-09-19 20:07+0700\n"
+"PO-Revision-Date: 2011-10-29 10:54+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-06-28 04:32+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-10-30 05:14+0000\n"
+"X-Generator: Launchpad (build 14197)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
 msgid "Meridian"
@@ -34,22 +34,22 @@ msgstr "Equador"
 
 #: src/core/modules/GridLinesMgr.cpp:537
 msgid "Horizon"
-msgstr ""
+msgstr "Horitzó"
 
-#: src/core/modules/LandscapeMgr.cpp:488
+#: src/core/modules/LandscapeMgr.cpp:486
 msgid "Author: "
 msgstr "Autor: "
 
-#: src/core/modules/LandscapeMgr.cpp:491
+#: src/core/modules/LandscapeMgr.cpp:489
 msgid "Location: "
 msgstr "Ubicació: "
 
-#: src/core/modules/LandscapeMgr.cpp:496
+#: src/core/modules/LandscapeMgr.cpp:494
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:499
+#: src/core/modules/LandscapeMgr.cpp:498
 msgid "Planet: "
 msgstr "Planeta: "
 
@@ -59,7 +59,7 @@ msgid "Type: <b>%1</b>"
 msgstr "Tipus <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:120
-#: plugins/Supernovas/src/Supernova.cpp:98
+#: plugins/Supernovae/src/Supernova.cpp:99
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnitud: <b>%1</b>"
@@ -109,12 +109,12 @@ msgstr "Magnitud absoluta: %1"
 #: src/core/modules/Planet.cpp:136
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr ""
+msgstr "Eclíptica geocèntrica (de data): %1/%2"
 
 #: src/core/modules/Planet.cpp:137
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr ""
+msgstr "Obliqüitat (de la data): %1"
 
 #: src/core/modules/Planet.cpp:143
 #, no-c-format, qt-format
@@ -137,7 +137,7 @@ msgid "Spectral Type: %1"
 msgstr "Tipus espectral: %1"
 
 #: src/core/modules/StarWrapper.cpp:122
-#: plugins/Supernovas/src/Supernova.cpp:107
+#: plugins/Supernovae/src/Supernova.cpp:108
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Distància: %1 anys llum"
@@ -146,6 +146,10 @@ msgstr "Distància: %1 anys llum"
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Paral·laxi %1\""
+
+#: src/core/StelObserver.cpp:265
+msgid "SpaceShip"
+msgstr "Nau espaial"
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
@@ -275,11 +279,11 @@ msgstr "Angle horari/DE: %1/%2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
-msgstr ""
+msgstr "(geomètric)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
-msgstr ""
+msgstr "(aparent)"
 
 #: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
@@ -290,50 +294,50 @@ msgstr "Az/Alt: %1/%2"
 msgid "Select screenshot directory"
 msgstr "Sel·leccioni carpeta per guardar la captura de pantalla"
 
-#: src/gui/ConfigurationDialog.cpp:461
+#: src/gui/ConfigurationDialog.cpp:462
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Camp de visió inicial: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:469
+#: src/gui/ConfigurationDialog.cpp:470
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Direcció de la vista inicial Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:509
+#: src/gui/ConfigurationDialog.cpp:510
 msgid "Authors"
 msgstr "Autors"
 
-#: src/gui/ConfigurationDialog.cpp:513 src/gui/ViewDialog.cpp:368
+#: src/gui/ConfigurationDialog.cpp:514 src/gui/ViewDialog.cpp:368
 msgid "Contact"
 msgstr "Contacte"
 
-#: src/gui/ConfigurationDialog.cpp:585
+#: src/gui/ConfigurationDialog.cpp:586
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:586
+#: src/gui/ConfigurationDialog.cpp:587
 msgid "License"
 msgstr "Llicència"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:616
 msgid "Running script: "
 msgstr "Executant script: "
 
-#: src/gui/ConfigurationDialog.cpp:622
+#: src/gui/ConfigurationDialog.cpp:623
 msgid "Running script: [none]"
 msgstr "Executant script: [cap]"
 
-#: src/gui/ConfigurationDialog.cpp:665
+#: src/gui/ConfigurationDialog.cpp:666
 msgid "Finished downloading all star catalogs!"
 msgstr "Finalitzada la descàrrega de tots els catàlegs estel·lars!"
 
-#: src/gui/ConfigurationDialog.cpp:674
+#: src/gui/ConfigurationDialog.cpp:675
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Obtenint catàleg %1 de %2"
 
-#: src/gui/ConfigurationDialog.cpp:676
+#: src/gui/ConfigurationDialog.cpp:677
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -344,7 +348,7 @@ msgstr ""
 "Nombre d'estels: %2 Milions\n"
 "Rang de magnitud: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:685
+#: src/gui/ConfigurationDialog.cpp:686
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -352,7 +356,7 @@ msgstr ""
 "Finalitzada la descàrrega del nous catàlegs estel·lars!\n"
 "Reinicia Stellarium per poder fer-los servir."
 
-#: src/gui/ConfigurationDialog.cpp:723 src/gui/ConfigurationDialog.cpp:757
+#: src/gui/ConfigurationDialog.cpp:724 src/gui/ConfigurationDialog.cpp:758
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -361,7 +365,7 @@ msgstr ""
 "Error descarregant %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:728
+#: src/gui/ConfigurationDialog.cpp:729
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -370,11 +374,11 @@ msgstr ""
 "Descarregant %1...\n"
 "(pots tancat aquesta finestra.)"
 
-#: src/gui/ConfigurationDialog.cpp:808
+#: src/gui/ConfigurationDialog.cpp:809
 msgid "Verifying file integrity..."
 msgstr "Verificant integritat del fitxer..."
 
-#: src/gui/ConfigurationDialog.cpp:812
+#: src/gui/ConfigurationDialog.cpp:813
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -383,8 +387,8 @@ msgstr ""
 "Error descarregant %1:\n"
 "El fitxer està corrupte."
 
-#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:285
-#: src/gui/StelGuiItems.cpp:640
+#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:286
+#: src/gui/StelGuiItems.cpp:656
 msgid "Space"
 msgstr "Espai"
 
@@ -596,7 +600,7 @@ msgstr "Línia del meridià"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1106
 msgid "Horizon line"
-msgstr ""
+msgstr "línia d'horitzó"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1108
 msgid "Cardinal points"
@@ -802,7 +806,7 @@ msgstr "Ocultar automàticament la barra de botons vertical"
 msgid "Toggle visibility of GUI"
 msgstr "Commuta la visibilitat de la IUG"
 
-#: src/gui/StelGuiItems.cpp:541
+#: src/gui/StelGuiItems.cpp:542
 #, no-c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
@@ -831,7 +835,7 @@ msgstr "Ràtio de Leònides excepcional"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Ràtio mes gran (Leònides del 1966)"
 
-#: src/gui/LocationDialog.cpp:334
+#: src/gui/LocationDialog.cpp:367
 msgid "New Location"
 msgstr "Nova localització"
 
@@ -884,7 +888,7 @@ msgstr "El paisatge sel·leccionat no pot ser el·liminat (completament)"
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
 #, qt-format
 msgid "Size on disk: %1 MiB"
-msgstr "Tamany en disc: %1 MiB"
+msgstr "Mida en disc: %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
 #: src/gui/AddRemoveLandscapesDialog.cpp:214
@@ -912,7 +916,7 @@ msgstr "Ja existeix un paisatge amb el mateix nom o identificador (%1)"
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "Pots el·liminar-lo manualment esborrant el següent directori: %1"
 
-#: src/main.cpp:335
+#: src/main.cpp:336
 msgid "This system does not support OpenGL."
 msgstr "Aquest sistema no suporta OpenGL"
 
@@ -986,50 +990,50 @@ msgstr "Cal·listo"
 
 #: src/translations.h:50
 msgid "Amalthea"
-msgstr ""
+msgstr "Amaltea"
 
 #: src/translations.h:51
 msgid "Himalia"
-msgstr ""
+msgstr "Himalia"
 
 #: src/translations.h:52
 msgid "Elara"
-msgstr ""
+msgstr "Elara"
 
 #: src/translations.h:53
 msgid "Pasiphae"
-msgstr ""
+msgstr "Pasífase"
 
 #: src/translations.h:54
 msgid "Sinope"
-msgstr ""
+msgstr "Sinope"
 
 #: src/translations.h:55
 msgid "Lysithea"
-msgstr ""
+msgstr "Lisitea"
 
 #: src/translations.h:56
 msgid "Carme"
-msgstr ""
+msgstr "Carme"
 
 #: src/translations.h:57
 msgid "Ananke"
-msgstr ""
+msgstr "Ananke"
 
 #: src/translations.h:58
 msgid "Leda"
-msgstr ""
+msgstr "Leda"
 
 #: src/translations.h:59
 msgid "Thebe"
-msgstr ""
+msgstr "Tebe"
 
 #: src/translations.h:60
 msgid "Adrastea"
-msgstr ""
+msgstr "Adrastea"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:106
+#: src/translations.h:61 src/translations.h:110
 msgid "Metis"
 msgstr "Metis"
 
@@ -1109,455 +1113,469 @@ msgstr "Plutó"
 msgid "Charon"
 msgstr "Caront"
 
-#: src/translations.h:81
+#. TRANSLATORS: Moon of Pluto (II)
+#: src/translations.h:82
+msgid "Nix"
+msgstr "Nix"
+
+#. TRANSLATORS: Moon of Pluto (III)
+#: src/translations.h:84
+msgid "Hydra"
+msgstr "Hidra femella"
+
+#: src/translations.h:85
 msgid "Eris"
 msgstr "Eris"
 
-#: src/translations.h:82
-msgid "Triton"
-msgstr ""
-
-#: src/translations.h:83
-msgid "Nereid"
-msgstr ""
-
-#: src/translations.h:84
-msgid "Naiad"
-msgstr ""
-
-#: src/translations.h:85
-msgid "Thalassa"
-msgstr ""
-
 #: src/translations.h:86
-msgid "Despina"
-msgstr ""
+msgid "Triton"
+msgstr "Triton"
 
 #: src/translations.h:87
-msgid "Galatea"
-msgstr ""
+msgid "Nereid"
+msgstr "Nereida"
 
 #: src/translations.h:88
-msgid "Larissa"
-msgstr ""
+msgid "Naiad"
+msgstr "Nàiade"
 
 #: src/translations.h:89
-msgid "Proteus"
-msgstr ""
+msgid "Thalassa"
+msgstr "Thalassa"
 
 #: src/translations.h:90
-msgid "Halimede"
-msgstr ""
+msgid "Despina"
+msgstr "Despina"
 
 #: src/translations.h:91
-msgid "Psamathe"
-msgstr ""
+msgid "Galatea"
+msgstr "Galatea"
 
 #: src/translations.h:92
-msgid "Sao"
-msgstr ""
+msgid "Larissa"
+msgstr "Làrissa"
 
 #: src/translations.h:93
-msgid "Laomedeia"
-msgstr ""
+msgid "Proteus"
+msgstr "Proteu"
 
 #: src/translations.h:94
-msgid "Neso"
-msgstr ""
+msgid "Halimede"
+msgstr "Halimedes"
 
 #: src/translations.h:95
+msgid "Psamathe"
+msgstr "Psàmate"
+
+#: src/translations.h:96
+msgid "Sao"
+msgstr "Sao"
+
+#: src/translations.h:97
+msgid "Laomedeia"
+msgstr "Laomedeia"
+
+#: src/translations.h:98
+msgid "Neso"
+msgstr "Neso"
+
+#: src/translations.h:99
 msgid "Solar System Observer"
 msgstr "Observador Sistema Solar"
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:98
+#: src/translations.h:102
 msgid "Astraea"
 msgstr "Astraea"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:100
+#: src/translations.h:104
 msgid "Hebe"
 msgstr "Hebe"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:102
+#: src/translations.h:106
 msgid "Iris"
 msgstr "Iris"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:104
+#: src/translations.h:108
 msgid "Flora"
 msgstr "Flora"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:108
+#: src/translations.h:112
 msgid "Hygiea"
 msgstr "Hygiea"
 
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:110
+#: src/translations.h:114
 msgid "Amor"
 msgstr "Amor"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:112
+#: src/translations.h:116
 msgid "Apophis"
 msgstr "Apophis"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:114
+#: src/translations.h:118
 msgid "Chiron"
 msgstr "Chiron"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:116
+#: src/translations.h:120
 msgid "Eros"
 msgstr "Eros"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:118
+#: src/translations.h:122
 msgid "Hektor"
 msgstr "Hektor"
 
 #. TRANSLATORS: Name of supernova SN 1572A
-#: src/translations.h:120
+#: src/translations.h:124
 msgid "Tycho's Supernova"
-msgstr ""
+msgstr "Supernova de Tycho"
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: src/translations.h:122
-msgid "Kepler's Supernova"
-msgstr ""
-
 #: src/translations.h:126
+msgid "Kepler's Supernova"
+msgstr "Supernova de Kepler"
+
+#: src/translations.h:130
 msgid "N"
 msgstr "N"
 
-#: src/translations.h:127
+#: src/translations.h:131
 msgid "S"
 msgstr "S"
 
-#: src/translations.h:128
+#: src/translations.h:132
 msgid "E"
 msgstr "E"
 
-#: src/translations.h:129
+#: src/translations.h:133
 msgid "W"
 msgstr "O"
 
-#: src/translations.h:132
+#: src/translations.h:136
+msgid "Arabic"
+msgstr "Àrab"
+
+#: src/translations.h:137
 msgid "Aztec"
 msgstr "Azteca"
 
-#: src/translations.h:133
+#: src/translations.h:138
 msgid "Chinese"
 msgstr "Xinesa"
 
-#: src/translations.h:134
+#: src/translations.h:139
 msgid "Egyptian"
 msgstr "Egípcia"
 
-#: src/translations.h:135
+#: src/translations.h:140
 msgid "Inuit"
 msgstr "Inuit"
 
-#: src/translations.h:136
+#: src/translations.h:141
 msgid "Korean"
 msgstr "Coreà"
 
-#: src/translations.h:137
+#: src/translations.h:142
 msgid "Lakota"
 msgstr "Lakota"
 
-#: src/translations.h:138
+#: src/translations.h:143
 msgid "Maori"
 msgstr "Maorí"
 
-#: src/translations.h:139
+#: src/translations.h:144
 msgid "Navajo"
 msgstr "Navaho"
 
-#: src/translations.h:140
+#: src/translations.h:145
 msgid "Norse"
 msgstr "Nòrdic"
 
-#: src/translations.h:141
+#: src/translations.h:146
 msgid "Polynesian"
 msgstr "Polinèsica"
 
-#: src/translations.h:142
+#: src/translations.h:147
 msgid "Sami"
 msgstr "Sami"
 
-#: src/translations.h:143
+#: src/translations.h:148
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
-#: src/translations.h:144
+#: src/translations.h:149
 msgid "Western"
 msgstr "Occidental"
 
-#: src/translations.h:148
+#: src/translations.h:153
 msgid "Set Location "
 msgstr "Estableix la ubicació "
 
-#: src/translations.h:149
+#: src/translations.h:154
 msgid "Set Time "
 msgstr "Estableix el temps "
 
-#: src/translations.h:150
+#: src/translations.h:155
 msgid "General "
 msgstr "General "
 
-#: src/translations.h:151
+#: src/translations.h:156
 msgid "Stars "
 msgstr "Estels "
 
-#: src/translations.h:152
+#: src/translations.h:157
 msgid "Colors "
 msgstr "Colors "
 
-#: src/translations.h:153
+#: src/translations.h:158
 msgid "Effects "
 msgstr "Efectes "
 
-#: src/translations.h:154
+#: src/translations.h:159
 msgid "Scripts "
 msgstr "Scripts "
 
-#: src/translations.h:155
+#: src/translations.h:160
 msgid "Administration "
 msgstr "Administració "
 
-#: src/translations.h:157
+#: src/translations.h:162
 msgid "Latitude: "
 msgstr "Latitud: "
 
-#: src/translations.h:158
+#: src/translations.h:163
 msgid "Longitude: "
 msgstr "Longitud: "
 
-#: src/translations.h:159
+#: src/translations.h:164
 msgid "Altitude (m): "
 msgstr "Altitud (m): "
 
-#: src/translations.h:160
+#: src/translations.h:165
 msgid "Solar System Body: "
 msgstr "Cos del Sistema Solar: "
 
-#: src/translations.h:162
+#: src/translations.h:167
 msgid "Sky Time: "
 msgstr "Temps sideral: "
 
-#: src/translations.h:163
+#: src/translations.h:168
 msgid "Set Time Zone: "
 msgstr "Estableix la zona horària: "
 
-#: src/translations.h:164
+#: src/translations.h:169
 msgid "Day keys: "
 msgstr "Claus del Dia: "
 
-#: src/translations.h:165
+#: src/translations.h:170
 msgid "Calendar"
 msgstr "Calendari"
 
-#: src/translations.h:166
+#: src/translations.h:171
 msgid "Sidereal"
 msgstr "Sidereal"
 
-#: src/translations.h:167
+#: src/translations.h:172
 msgid "Preset Sky Time: "
 msgstr "Prefixa el temps sideral: "
 
-#: src/translations.h:168
+#: src/translations.h:173
 msgid "Sky Time At Start-up: "
 msgstr "Temps sideral a l'inici: "
 
-#: src/translations.h:169
+#: src/translations.h:174
 msgid "Actual Time"
 msgstr "Temps actual"
 
-#: src/translations.h:170
+#: src/translations.h:175
 msgid "Preset Time"
 msgstr "Temps prefixat"
 
-#: src/translations.h:171
+#: src/translations.h:176
 msgid "Time Display Format: "
 msgstr "Format de l'hora: "
 
-#: src/translations.h:172
+#: src/translations.h:177
 msgid "Date Display Format: "
 msgstr "Format de la data: "
 
-#: src/translations.h:174
+#: src/translations.h:179
 msgid "Sky Culture: "
 msgstr "Cultura del cel: "
 
-#: src/translations.h:175
+#: src/translations.h:180
 msgid "Sky Language: "
 msgstr "Idioma del cel: "
 
-#: src/translations.h:177
+#: src/translations.h:182
 msgid "Show: "
 msgstr "Mostra: "
 
-#: src/translations.h:178
+#: src/translations.h:183
 msgid "Star Value Multiplier: "
 msgstr "Multiplicador del Valor Estelar: "
 
-#: src/translations.h:179
+#: src/translations.h:184
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Multiplicador de Magnitud: "
 
-#: src/translations.h:180
+#: src/translations.h:185
 msgid "Maximum Magnitude to Label: "
 msgstr "Màxima Magnitud a Etiquetar: "
 
-#: src/translations.h:181
+#: src/translations.h:186
 msgid "Twinkling: "
 msgstr "Centelleig: "
 
-#: src/translations.h:182
+#: src/translations.h:187
 msgid "Limiting Magnitude: "
 msgstr "Limitador de Magnitud: "
 
-#: src/translations.h:184
+#: src/translations.h:189
 msgid "Constellation Lines"
 msgstr "Línies de les Constel·lacions"
 
-#: src/translations.h:185
+#: src/translations.h:190
 msgid "Constellation Names"
 msgstr "Noms de les Constel·lacions"
 
-#: src/translations.h:186
+#: src/translations.h:191
 msgid "Constellation Art Intensity"
 msgstr "Intensitat del Dibuix de les Constel·lacions"
 
-#: src/translations.h:187
+#: src/translations.h:192
 msgid "Constellation Boundaries"
 msgstr "Límits de les Constel·lacions"
 
-#: src/translations.h:188
+#: src/translations.h:193
 msgid "Cardinal Points"
 msgstr "Punts cardinals"
 
-#: src/translations.h:189
+#: src/translations.h:194
 msgid "Planet Names"
 msgstr "Noms dels Planetes"
 
-#: src/translations.h:190
+#: src/translations.h:195
 msgid "Planet Orbits"
 msgstr "Òrbites dels Planetes"
 
-#: src/translations.h:191
+#: src/translations.h:196
 msgid "Planet Trails"
 msgstr "Traces dels Planetes"
 
-#: src/translations.h:192
+#: src/translations.h:197
 msgid "Meridian Line"
 msgstr "Línia del Meridià"
 
-#: src/translations.h:193
+#: src/translations.h:198
 msgid "Azimuthal Grid"
 msgstr "Quadrícula Azimutal"
 
-#: src/translations.h:194
+#: src/translations.h:199
 msgid "Equatorial Grid"
 msgstr "Quadrícula Equatorial"
 
-#: src/translations.h:195
+#: src/translations.h:200
 msgid "Equator Line"
 msgstr "Línia de l'equador"
 
-#: src/translations.h:196
+#: src/translations.h:201
 msgid "Ecliptic Line"
 msgstr "Línia de l'eclíptica"
 
-#: src/translations.h:197
+#: src/translations.h:202
 msgid "Nebula Names"
 msgstr "Noms de les Nebuloses"
 
-#: src/translations.h:198
+#: src/translations.h:203
 msgid "Nebula Circles"
 msgstr "Cercles de les Nebuloses"
 
-#: src/translations.h:200
+#: src/translations.h:205
 msgid "Light Pollution Luminance: "
 msgstr "Lluminositat de la Pol·lució Lumínica: "
 
-#: src/translations.h:201
+#: src/translations.h:206
 msgid "Landscape: "
 msgstr "Paisatge: "
 
-#: src/translations.h:202
+#: src/translations.h:207
 msgid "Manual zoom: "
 msgstr "Escalat manual: "
 
-#: src/translations.h:203
+#: src/translations.h:208
 msgid "Object Sizing Rule: "
-msgstr "Regla de redimensionat de l'objecte: "
+msgstr "Mida del regle de l'objecte "
 
-#: src/translations.h:204
+#: src/translations.h:209
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Multiplicador d'Escalat de la Magnitud: "
 
-#: src/translations.h:205
+#: src/translations.h:210
 msgid "Milky Way intensity: "
 msgstr "Intensitat de la Via Làctia "
 
-#: src/translations.h:206
+#: src/translations.h:211
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Màxima magnitud de nebulosa a etiquetar: "
 
-#: src/translations.h:207
+#: src/translations.h:212
 msgid "Zoom Duration: "
 msgstr "Durada de l'escalat: "
 
-#: src/translations.h:208
+#: src/translations.h:213
 msgid "Cursor Timeout: "
 msgstr "Temps d'espera del cursor: "
 
-#: src/translations.h:209
+#: src/translations.h:214
 msgid "Correct for light travel time: "
 msgstr "Correcció per viatge a la velocitat de la llum: "
 
-#: src/translations.h:211
+#: src/translations.h:216
 msgid "Local Script: "
 msgstr "Script Local: "
 
-#: src/translations.h:212
+#: src/translations.h:217
 msgid "CD/DVD Script: "
 msgstr "Script CD/DVD: "
 
-#: src/translations.h:213
+#: src/translations.h:218
 msgid "USB Script: "
 msgstr "Script USB: "
 
-#: src/translations.h:214
+#: src/translations.h:219
 msgid "Arrow down to load list."
 msgstr "Fletxa avall per carregar la llista."
 
-#: src/translations.h:215
+#: src/translations.h:220
 msgid "Select and exit to run."
 msgstr "﻿Seleccioni i sortir per arrencar."
 
-#: src/translations.h:217
+#: src/translations.h:222
 msgid "Load Default Configuration: "
 msgstr "Carrega la Configuració per Omissió: "
 
-#: src/translations.h:218
+#: src/translations.h:223
 msgid "Save Current Configuration as Default: "
 msgstr "Desa la Configuració Actual com a Predeterminada: "
 
-#: src/translations.h:219
+#: src/translations.h:224
 msgid "Shut Down: "
 msgstr "Apagar: "
 
-#: src/translations.h:220
+#: src/translations.h:225
 msgid "Update me via Internet: "
 msgstr "Actualitza'm via Internet: "
 
-#: src/translations.h:221
+#: src/translations.h:226
 msgid "Set UI Locale: "
 msgstr "Estableix IU Local: "
 
@@ -1651,111 +1669,111 @@ msgstr "Cerca l'objecte"
 
 #: src/ui_searchDialogGui.h:451
 msgid "Find Object or Position"
-msgstr ""
+msgstr "Troba objecte o posició"
 
 #: src/ui_searchDialogGui.h:458
 msgid "iota"
-msgstr ""
+msgstr "iota"
 
 #: src/ui_searchDialogGui.h:461
 msgid "alpha"
-msgstr ""
+msgstr "alfa"
 
 #: src/ui_searchDialogGui.h:464
 msgid "beta"
-msgstr ""
+msgstr "beta"
 
 #: src/ui_searchDialogGui.h:467
 msgid "gamma"
-msgstr ""
+msgstr "gamma"
 
 #: src/ui_searchDialogGui.h:470
 msgid "delta"
-msgstr ""
+msgstr "delta"
 
 #: src/ui_searchDialogGui.h:473
 msgid "epsilon"
-msgstr ""
+msgstr "èpsilon"
 
 #: src/ui_searchDialogGui.h:476
 msgid "zeta"
-msgstr ""
+msgstr "zeta"
 
 #: src/ui_searchDialogGui.h:479
 msgid "eta"
-msgstr ""
+msgstr "eta"
 
 #: src/ui_searchDialogGui.h:482
 msgid "theta"
-msgstr ""
+msgstr "theta"
 
 #: src/ui_searchDialogGui.h:485
 msgid "kappa"
-msgstr ""
+msgstr "kappa"
 
 #: src/ui_searchDialogGui.h:488
 msgid "lambda"
-msgstr ""
+msgstr "lambda"
 
 #: src/ui_searchDialogGui.h:491
 msgid "mu"
-msgstr ""
+msgstr "mu"
 
 #: src/ui_searchDialogGui.h:494
 msgid "nu"
-msgstr ""
+msgstr "ni"
 
 #: src/ui_searchDialogGui.h:497
 msgid "xi"
-msgstr ""
+msgstr "ksi"
 
 #: src/ui_searchDialogGui.h:500
 msgid "omicron"
-msgstr ""
+msgstr "òmicron"
 
 #: src/ui_searchDialogGui.h:503
 msgid "pi"
-msgstr ""
+msgstr "pi"
 
 #: src/ui_searchDialogGui.h:506
 msgid "rho"
-msgstr ""
+msgstr "ro"
 
 #: src/ui_searchDialogGui.h:509
 msgid "sigma"
-msgstr ""
+msgstr "sigma"
 
 #: src/ui_searchDialogGui.h:512
 msgid "tau"
-msgstr ""
+msgstr "tau"
 
 #: src/ui_searchDialogGui.h:515
 msgid "upsilon"
-msgstr ""
+msgstr "ípsilon"
 
 #: src/ui_searchDialogGui.h:518
 msgid "phi"
-msgstr ""
+msgstr "fi"
 
 #: src/ui_searchDialogGui.h:521
 msgid "chi"
-msgstr ""
+msgstr "khi"
 
 #: src/ui_searchDialogGui.h:524
 msgid "psi"
-msgstr ""
+msgstr "psi"
 
 #: src/ui_searchDialogGui.h:527
 msgid "omega"
-msgstr ""
+msgstr "omega"
 
 #: src/ui_searchDialogGui.h:529
 msgid "Greek letters for Bayer designations"
-msgstr ""
+msgstr "Lletres gregues per les designacions de Bayer"
 
 #: src/ui_searchDialogGui.h:530
 msgid "Object"
-msgstr ""
+msgstr "Objecte"
 
 #: src/ui_searchDialogGui.h:531
 msgid "RA/Dec (J2000):"
@@ -1763,7 +1781,7 @@ msgstr "AR/DEC (J2000):"
 
 #: src/ui_searchDialogGui.h:532
 msgid "Position"
-msgstr ""
+msgstr "Posició"
 
 #: src/ui_viewDialog.h:1052
 msgid "View"
@@ -1839,11 +1857,11 @@ msgstr "Pol·lució lumínica "
 
 #: src/ui_viewDialog.h:1085
 msgid "pressure, temperature, extinction coefficient"
-msgstr ""
+msgstr "pressió, temperatura, coeficient d'extinció"
 
 #: src/ui_viewDialog.h:1087
 msgid "Refraction/Extinction settings..."
-msgstr ""
+msgstr "Ajustaments refracció/Extinció..."
 
 #: src/ui_viewDialog.h:1088
 msgid "Labels and Markers"
@@ -2281,41 +2299,42 @@ msgstr ""
 "fitxers. Aquesta operació es irreversible."
 
 #: src/ui_AtmosphereDialog.h:167
-msgid "Dialog"
-msgstr ""
-
-#: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
-msgstr ""
+msgstr "Detalls de la atmosfera"
+
+#: src/ui_AtmosphereDialog.h:169
+msgid "Refraction Settings"
+msgstr "Paràmetres de refracció"
 
 #: src/ui_AtmosphereDialog.h:170
-msgid "Refraction Settings"
-msgstr ""
+msgid "Pressure (mbar):"
+msgstr "Pressió (mbar)"
 
 #: src/ui_AtmosphereDialog.h:171
-msgid "Pressure (mbar):"
-msgstr ""
-
-#: src/ui_AtmosphereDialog.h:172
 msgid "Temperature (C):"
-msgstr ""
+msgstr "Temperatura (C):"
 
-#: src/ui_AtmosphereDialog.h:177
+#: src/ui_AtmosphereDialog.h:176
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
+"L'extinció és la pèrdua de brillantor de les estrelles a causa de "
+"l'atmosfera de la Terra. Es dóna en mag/massa d'aire, on massa d'aire és el "
+"nombre d'atmosferes de llum que ha de passar. (Zenit: 1; horitzó: sobre 40)"
 
-#: src/ui_AtmosphereDialog.h:179
+#: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
-msgstr ""
+msgstr "Coeficient d'extinció"
 
-#: src/ui_AtmosphereDialog.h:181
+#: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
+"Utilitza aproximadament 0,12 per al cim de gran muntanyes, 0,2 per a bon "
+"paisatges rural, 0,35 per condicions fosques"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -2364,7 +2383,7 @@ msgstr "Vista d'ocular"
 
 #: plugins/Oculars/src/Oculars.cpp:965
 msgid "Oculars popup menu"
-msgstr ""
+msgstr "Menú emergent d'oculars"
 
 #: plugins/Satellites/src/Satellites.cpp:67
 msgid "Satellites"
@@ -2463,75 +2482,35 @@ msgstr ""
 "descarregar llistes d'objectes de la pàgina web del Centre de Planetes "
 "Menors i fer cerques a la base de dades en línia. Es un treball en progrés."
 
-#: plugins/Supernovas/src/Supernovas.cpp:59
-msgid "Historical supernova"
-msgstr ""
+#: plugins/Supernovae/src/Supernovae.cpp:59
+msgid "Historical supernovae"
+msgstr "Supernoves històriques"
 
-#: plugins/Supernovas/src/Supernovas.cpp:62
+#: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
-"The plugin for visualization of some historical supernovas, brighter 10 "
+"The plugin for visualization of some historical supernovae, brighter 10 "
 "magnitude"
 msgstr ""
+"Connector per a la visualització d'algunes supernoves històriques, de "
+"magnitud superior a 10"
 
-#: plugins/Supernovas/src/Supernovas.cpp:62
+#: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
 "SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
 "July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
 "1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
-"August), SN 1972E (8 May) and SN 1987A (24 February)"
+"August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 "
+"September)"
 msgstr ""
+"SN 185A (7 desembre), SN 386A (24 abril), SN 1006A (29 abril), SN 1054A (3 "
+"juliol), SN 1181A (4 agost), SN 1572A (5 novembre), SN 1604A (8 octubre), SN "
+"1680A (15 agost), SN 1885A (17 agost), SN 1895B (5 juliol), SN 1937C (21 "
+"agost), SN 1972E (8 maig), SN 1987A (24 febrer) and SN 2011FE (13 setembre)"
 
-#: plugins/Supernovas/src/Supernova.cpp:105
+#: plugins/Supernovae/src/Supernova.cpp:106
 #, qt-format
 msgid "Type: %1"
-msgstr ""
-
-#, qt-format
-#~ msgid "Loading NGC catalog: %1/%2"
-#~ msgstr "Carregant catàleg NGC: %1/%2"
+msgstr "Tipus: %1"
 
 #~ msgid "Form"
 #~ msgstr "Format"
-
-#, qt-format
-#~ msgid "Loading catalog %1 from file %2"
-#~ msgstr "Carregant catàleg %1 del fitxer %2"
-
-#~ msgid "Move telescope #0 to selected object"
-#~ msgstr "Moure telescopi #0 a l'objecte seleccionat"
-
-#~ msgid "Move telescope #1 to selected object"
-#~ msgstr "Moure telescopi #1 a l'objecte seleccionat"
-
-#~ msgid "Move telescope #2 to selected object"
-#~ msgstr "Moure telescopi #2 a l'objecte seleccionat"
-
-#~ msgid "Move telescope #3 to selected object"
-#~ msgstr "Moure telescopi #3 a l'objecte seleccionat"
-
-#~ msgid "Move telescope #9 to selected object"
-#~ msgstr "Moure telescopi #9 a l'objecte seleccionat"
-
-#~ msgid "Move telescope #8 to selected object"
-#~ msgstr "Moure telescopi #8 a l'objecte seleccionat"
-
-#~ msgid "Move telescope #5 to selected object"
-#~ msgstr "Moure telescopi #5 a l'objecte seleccionat"
-
-#~ msgid "Move telescope #4 to selected object"
-#~ msgstr "Moure telescopi #4 a l'objecte seleccionat"
-
-#~ msgid "Move telescope #7 to selected object"
-#~ msgstr "Moure telescopi #7 a l'objecte seleccionat"
-
-#~ msgid "Move telescope #6 to selected object"
-#~ msgstr "Moure telescopi #6 a l'objecte seleccionat"
-
-#~ msgid "Loading NGC catalog"
-#~ msgstr "Carregant catàleg NGC"
-
-#~ msgid "Oculars configuration window"
-#~ msgstr "Finestra de configuració de l'ocular"
-
-#~ msgid "Telrad circles"
-#~ msgstr "Cercles de Telrad"

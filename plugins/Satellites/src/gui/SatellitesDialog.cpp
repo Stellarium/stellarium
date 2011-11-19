@@ -36,11 +36,7 @@
 #include "StelGui.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelFileMgr.hpp"
-
-// When i18n is implemented, uncomment the StelTranslator.hpp include
-// and remove the definition of q_
-//#include "StelTranslator.hpp"
-#define q_ QString
+#include "StelTranslator.hpp"
 
 SatellitesDialog::SatellitesDialog() : updateTimer(NULL)
 {
@@ -61,7 +57,16 @@ SatellitesDialog::~SatellitesDialog()
 void SatellitesDialog::languageChanged()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+		refreshUpdateValues();
+		setAboutHtml();
+		// This may be a problem if we add group name translations, as the 
+		// sorting order may be different. --BM
+		int index = ui->groupsCombo->currentIndex();
+		populateGroupsList();
+		ui->groupsCombo->setCurrentIndex(index);
+	}
 }
 
 // Initialize the dialog widgets and connect the signals/slots
@@ -198,11 +203,13 @@ void SatellitesDialog::saveSatellites(void)
 
 void SatellitesDialog::setAboutHtml(void)
 {
+	QString jsonFileName("<tt>satellites.json</tt>");
+	QString oldJsonFileName("<tt>satellites.json.old</tt>");
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Stellarium Satellites Plugin") + "</h2><table width=\"90%\">";
-	html += "<tr width=\"30%\"><td>" + q_("Version:") + "</td><td>" + PLUGIN_VERSION + "</td></td>";
-	html += "<tr><td>" + q_("Authors:") + "</td><td>Matthew Gates &lt;matthew@porpoisehead.net&gt;</td></td>";
-	html += "<tr><td></td><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></tr></table>";
+	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + "</strong></td><td>" + PLUGIN_VERSION + "</td></td>";
+	html += "<tr><td rowspan=2><strong>" + q_("Authors") + "</strong></td><td>Matthew Gates &lt;matthew@porpoisehead.net&gt;</td></td>";
+	html += "<tr><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></tr></table>";
 
 	html += "<p>" + q_("The Satellites plugin predicts the positions of artificial satellites in Earth orbit.") + "</p>";
 
@@ -210,29 +217,40 @@ void SatellitesDialog::setAboutHtml(void)
 	html += "<li>" + q_("Satellites and their orbits are only shown when the observer is on Earth.") + "</li>";
 	html += "<li>" + q_("Predicted positions are only good for a fairly short time (on the order of days, weeks or perhaps a month into the past and future). Expect high weirdness when looking at dates outside this range.") + "</li>";
 	html += "<li>" + q_("Orbital elements go out of date pretty quickly (over mere weeks, sometimes days).  To get useful data out, you need to update the TLE data regularly.") + "</li>";
-	html += "<li>" + q_("Clicking the \"Restore default settings\" button in the \"Settings\" tab of this dialog will revert to the default satellite.json file.  The old file will be backed up as \"satellites.json.old\".  This can be found in the user data directory, under \"modules/Satellites/\".") + "</li>";
+	// TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
+	QString resetSettingsText = QString(q_("Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to the default %3 file.  The old file will be backed up as %4.  This can be found in the user data directory, under \"modules/Satellites/\"."))
+	        .arg(ui->restoreDefaultsButton->text())
+	        .arg(ui->tabs->tabText(ui->tabs->indexOf(ui->settingsTab)))
+	        .arg(jsonFileName)
+	        .arg(oldJsonFileName);
+	html += "<li>" + resetSettingsText + "</li>";
 	html += "<li>" + q_("The Satellites plugin is still under development.  Some features are incomplete, missing or buggy.") + "</li>";
 	html += "</ul></p>";
 
+	// TRANSLATORS: Title of a section in the About tab of the Satellites window
 	html += "<h3>" + q_("TLE data updates") + "</h3>";
 	html += "<p>" + q_("The Satellites plugin can automatically download TLE data from Internet sources, and by default the plugin will do this if the existing data is more than 72 hours old. ");
-	html += "</p><p>" + q_(QString("If you disable Internet updates, you may update from a file on your computer.  This file must be in the same format as the Celestrak updates (see %1 for an example).").arg("<a href=\"http://celestrak.com/NORAD/elements/visual.txt\">visual.txt</a>"));
-	html += "</p><p><b>" + q_("Note") + ":</b> " + q_("if the name of a satellite in update data has anything in square brackets at the end, it will be removed before the data is used.");
+	html += "</p><p>" + QString(q_("If you disable Internet updates, you may update from a file on your computer.  This file must be in the same format as the Celestrak updates (see %1 for an example).").arg("<a href=\"http://celestrak.com/NORAD/elements/visual.txt\">visual.txt</a>"));
+	html += "</p><p>" + q_("<b>Note:</b> if the name of a satellite in update data has anything in square brackets at the end, it will be removed before the data is used.");
 	html += "</p>";
 
 	html += "<h3>" + q_("Adding new satellites") + "</h3>";
-	html += "<p>" + q_("At the moment you must manually edit the satellites.json file to add new satellites to the database. Making this easier is still on the TODO list...") + "</p>";
+	html += "<p>" + QString(q_("At the moment you must manually edit the %1 file to add new satellites to the database. Making this easier is still on the TODO list...")).arg(jsonFileName) + "</p>";
 
-	html += "<h3>" + q_("Technical Notes") + "</h3>";
+	html += "<h3>" + q_("Technical notes") + "</h3>";
 	html += "<p>" + q_("Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data as the input. ");
-	html += q_("The orbital calculation code is written by Jose Luis Canales according to the revised Spacetrack report N#3 (including Spacetrack report N#6). ");
-	html += q_(QString("See %1this document%2 for details.").arg("<a href=\"http://www.celestrak.com/publications/AIAA/2006-6753\">").arg("</a>")) + "</p>";
+	html += q_("The orbital calculation code is written by Jose Luis Canales according to the revised Spacetrack Report #3 (including Spacetrack Report #6). ");
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += QString(q_("See %1this document%2 for details.")).arg("<a href=\"http://www.celestrak.com/publications/AIAA/2006-6753\">").arg("</a>") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + q_("Support is provided via the Launchpad website.  Be sure to put \"Satellites plugin\" in the subject when posting.") + "</p>";
 	html += "<p><ul>";
-	html += "<li>" + q_(QString("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">").arg("</a>")) + "</li>";
-	html += "<li>" + q_(QString("Bug reports can be made %1here%2.").arg("<a href=\"https://bugs.launchpad.net/stellarium\">").arg("</a>")) + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">")).arg("</a>") + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + QString(q_("Bug reports can be made %1here%2.")).arg("<a href=\"https://bugs.launchpad.net/stellarium\">").arg("</a>") + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
 	html += "</ul></p></body></html>";
 
@@ -373,17 +391,24 @@ void SatellitesDialog::updateGuiFromSettings(void)
 	ui->orbitFadeSpin->setValue(Satellite::orbitLineFadeSegments);
 	ui->orbitDurationSpin->setValue(Satellite::orbitLineSegmentDuration);
 
-	ui->groupsCombo->clear();
-	ui->groupsCombo->addItems(GETSTELMODULE(Satellites)->getGroups());
-	ui->groupsCombo->insertItem(0, q_("[all not visible]"), QVariant("notvisible"));
-	ui->groupsCombo->insertItem(0, q_("[all visible]"), QVariant("visible"));
-	ui->groupsCombo->insertItem(0, q_("[all]"), QVariant("all"));
+	populateGroupsList();
 	ui->satellitesList->clearSelection();
 	ui->groupsCombo->setCurrentIndex(0);
 
 	ui->sourceList->clear();
 	ui->sourceList->addItems(GETSTELMODULE(Satellites)->getTleSources());
 	if (ui->sourceList->count() > 0) ui->sourceList->setCurrentRow(0);
+}
+
+void SatellitesDialog::populateGroupsList()
+{
+	ui->groupsCombo->clear();
+	ui->groupsCombo->addItems(GETSTELMODULE(Satellites)->getGroups());
+	// BM: The wording has been changed to prevent confusion with the visibility
+	// status of the actual satellites. I'll leave further changes to Matthew.:)
+	ui->groupsCombo->insertItem(0, q_("[all not displayed]"), QVariant("notvisible"));
+	ui->groupsCombo->insertItem(0, q_("[all displayed]"), QVariant("visible"));
+	ui->groupsCombo->insertItem(0, q_("[all]"), QVariant("all"));
 }
 
 void SatellitesDialog::saveSettings(void)
