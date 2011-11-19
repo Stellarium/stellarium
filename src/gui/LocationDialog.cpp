@@ -54,7 +54,10 @@ LocationDialog::~LocationDialog()
 void LocationDialog::languageChanged()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+		populatePlanetList();
+	}
 }
 
 void LocationDialog::styleChanged()
@@ -83,8 +86,7 @@ void LocationDialog::createDialogContent()
 	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->citiesListView->setModel(proxyModel);
 
-	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);		
-	ui->planetNameComboBox->insertItems(0, ssystem->getAllPlanetLocalizedNames());
+	populatePlanetList();
 	ui->countryNameComboBox->insertItems(0, StelLocaleMgr::getAllCountryNames());
 
 	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
@@ -181,12 +183,12 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	ui->longitudeSpinBox->setDegrees(loc.longitude);
 	ui->latitudeSpinBox->setDegrees(loc.latitude);
 	ui->altitudeSpinBox->setValue(loc.altitude);
-	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-	idx = ui->planetNameComboBox->findText(ssystem->searchByEnglishName(loc.planetName)->getNameI18n(), Qt::MatchCaseSensitive);
+
+	idx = ui->planetNameComboBox->findData(loc.planetName, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
-		// Use Earth as default		
-		ui->planetNameComboBox->findText(ssystem->getEarth()->getNameI18n());
+		// Use Earth as default
+		idx = ui->planetNameComboBox->findData(QVariant("Earth"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->planetNameComboBox->setCurrentIndex(idx);
 	setMapForLocation(loc);
@@ -248,12 +250,41 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 	lastVisionMode = StelApp::getInstance().getVisionModeNight();
 }
 
+void LocationDialog::populatePlanetList()
+{
+	Q_ASSERT(ui);
+	Q_ASSERT(ui->planetNameComboBox);
+
+	QComboBox* planets = ui->planetNameComboBox;
+	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	QStringList planetNames(ssystem->getAllPlanetEnglishNames());
+
+	//Save the current selection to be restored later
+	planets->blockSignals(true);
+	int index = planets->currentIndex();
+	QVariant selectedPlanetId = planets->itemData(index);
+	planets->clear();
+	//For each planet, display the localized name and store the original as user
+	//data. Unfortunately, there's no other way to do this than with a cycle.
+	foreach(const QString& name, planetNames)
+	{
+		planets->addItem(q_(name), name);
+	}
+	//Restore the selection
+	index = planets->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
+	planets->setCurrentIndex(index);
+	planets->blockSignals(false);
+}
+
 // Create a StelLocation instance from the fields
 StelLocation LocationDialog::locationFromFields() const
 {
-	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	StelLocation loc;
-	loc.planetName = ssystem->searchByNameI18n(ui->planetNameComboBox->currentText())->getEnglishName();
+	int index = ui->planetNameComboBox->currentIndex();
+	if (index < 0)
+		loc.planetName = QString();//As returned by QComboBox::currentText()
+	else
+		loc.planetName = ui->planetNameComboBox->itemData(index).toString();
 	loc.name = ui->cityNameLineEdit->text();
 	loc.latitude = ui->latitudeSpinBox->valueDegrees();
 	loc.longitude = ui->longitudeSpinBox->valueDegrees();
@@ -302,6 +333,8 @@ void LocationDialog::spinBoxChanged(int )
 	reportEdit();
 	StelLocation loc = locationFromFields();
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
+	//Update the position of the map pointer
+	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
 }
 
 // Called when the location name is manually changed
@@ -366,11 +399,20 @@ void LocationDialog::addCurrentLocationToList()
 // Called when the user wants to use the current location as default
 void LocationDialog::useAsDefaultClicked()
 {
-	StelApp::getInstance().getCore()->setDefaultLocationID(StelApp::getInstance().getCore()->getCurrentLocation().getID());
-	const bool b = StelApp::getInstance().getCore()->getCurrentLocation().getID()==
-			StelApp::getInstance().getCore()->getDefaultLocationID();
-	ui->useAsDefaultLocationCheckBox->setChecked(b);
-	ui->useAsDefaultLocationCheckBox->setEnabled(!b);
+	StelCore* core = StelApp::getInstance().getCore();
+	QString newDefaultLocationId = core->getCurrentLocation().getID();
+	core->setDefaultLocationID(newDefaultLocationId);
+
+	QString currentLocationId = core->getCurrentLocation().getID();
+	const bool show = (currentLocationId == core->getDefaultLocationID());
+	disconnectEditSignals();
+	ui->useAsDefaultLocationCheckBox->setChecked(show);
+	ui->useAsDefaultLocationCheckBox->setEnabled(!show);
+	//The focus need to be switched to another control, otherwise
+	//ui->latitudeSpinBox receives it and emits a valueChanged() signal when
+	//the window is closed.
+	ui->citySearchLineEdit->setFocus();
+	connectEditSignals();
 }
 
 // Called when the user clic on the delete button

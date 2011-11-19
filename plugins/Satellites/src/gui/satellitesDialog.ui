@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>530</width>
-    <height>501</height>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -139,7 +139,7 @@
        <item>
         <widget class="QGroupBox" name="updatesGroup">
          <property name="title">
-          <string>Update TLE elements from Internet sources</string>
+          <string>Update TLE lists from Internet sources</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -200,7 +200,7 @@
             <item row="2" column="0">
              <widget class="QLabel" name="nextUpdateLabel">
               <property name="text">
-               <string>[next update info]</string>
+               <string notr="true">[next update info]</string>
               </property>
              </widget>
             </item>
@@ -246,7 +246,7 @@
             <item row="2" column="0">
              <widget class="QLabel" name="label_10">
               <property name="text">
-               <string>Label font size:</string>
+               <string>Label font size (pixels):</string>
               </property>
              </widget>
             </item>
@@ -277,7 +277,7 @@
        <item>
         <widget class="QGroupBox" name="orbitLinesGroup">
          <property name="title">
-          <string>Orbit Lines</string>
+          <string>Orbit lines</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -288,13 +288,19 @@
          <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item>
            <widget class="QLabel" name="label_5">
+            <property name="toolTip">
+             <string>Number of segments used to draw the line</string>
+            </property>
             <property name="text">
-             <string># Segments:</string>
+             <string># segments:</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QSpinBox" name="orbitSegmentsSpin">
+            <property name="toolTip">
+             <string>Number of segments used to draw the line</string>
+            </property>
             <property name="minimum">
              <number>3</number>
             </property>
@@ -308,13 +314,19 @@
           </item>
           <item>
            <widget class="QLabel" name="label_6">
+            <property name="toolTip">
+             <string>Number of segments used to draw each end of the line</string>
+            </property>
             <property name="text">
-             <string>Fade Length:</string>
+             <string>Fade length:</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QSpinBox" name="orbitFadeSpin">
+            <property name="toolTip">
+             <string>Number of segments used to draw each end of the line</string>
+            </property>
             <property name="maximum">
              <number>50</number>
             </property>
@@ -325,13 +337,19 @@
           </item>
           <item>
            <widget class="QLabel" name="label_8">
+            <property name="toolTip">
+             <string>Duration of a single segment in seconds</string>
+            </property>
             <property name="text">
-             <string>Length:</string>
+             <string extracomment="TRANSLATORS: = &quot;duration&quot;. 's' means seconds">Length (s):</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QSpinBox" name="orbitDurationSpin">
+            <property name="toolTip">
+             <string>Duration of a single segment in seconds</string>
+            </property>
             <property name="minimum">
              <number>5</number>
             </property>
@@ -403,9 +421,6 @@
          </item>
          <item>
           <widget class="QListWidget" name="satellitesList">
-           <property name="styleSheet">
-            <string>font: 8pt;</string>
-           </property>
            <property name="selectionMode">
             <enum>QAbstractItemView::ExtendedSelection</enum>
            </property>
@@ -415,8 +430,11 @@
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
             <widget class="QCheckBox" name="visibleCheckbox">
+             <property name="toolTip">
+              <string>Display the selected satellite(s)</string>
+             </property>
              <property name="text">
-              <string>Visible</string>
+              <string>Displayed</string>
              </property>
              <property name="tristate">
               <bool>false</bool>
@@ -425,6 +443,9 @@
            </item>
            <item>
             <widget class="QCheckBox" name="orbitCheckbox">
+             <property name="toolTip">
+              <string>Display orbit line(s) for the selected satellite(s)</string>
+             </property>
              <property name="text">
               <string>Orbit</string>
              </property>
@@ -536,7 +557,7 @@
            <item>
             <widget class="QLabel" name="label_2">
              <property name="text">
-              <string>TLE Elements:</string>
+              <string>TLE data:</string>
              </property>
             </widget>
            </item>
@@ -645,9 +666,6 @@
       <layout class="QVBoxLayout" name="verticalLayout_10">
        <item>
         <widget class="QListWidget" name="sourceList">
-         <property name="styleSheet">
-          <string>font: 8pt;</string>
-         </property>
          <property name="editTriggers">
           <set>QAbstractItemView::DoubleClicked</set>
          </property>
@@ -661,7 +679,7 @@
          <item>
           <widget class="QLineEdit" name="sourceEdit">
            <property name="toolTip">
-            <string>edit selected source</string>
+            <string>Enter or edit the URL of the selected source. Changes are saved by pressing Enter.</string>
            </property>
           </widget>
          </item>
@@ -732,6 +750,36 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>tabs</tabstop>
+  <tabstop>internetUpdatesCheckbox</tabstop>
+  <tabstop>lastUpdateDateTimeEdit</tabstop>
+  <tabstop>updateFrequencySpinBox</tabstop>
+  <tabstop>updateButton</tabstop>
+  <tabstop>labelsGroup</tabstop>
+  <tabstop>fontSizeSpinBox</tabstop>
+  <tabstop>orbitLinesGroup</tabstop>
+  <tabstop>orbitSegmentsSpin</tabstop>
+  <tabstop>orbitFadeSpin</tabstop>
+  <tabstop>orbitDurationSpin</tabstop>
+  <tabstop>restoreDefaultsButton</tabstop>
+  <tabstop>saveSettingsButton</tabstop>
+  <tabstop>groupsCombo</tabstop>
+  <tabstop>satellitesList</tabstop>
+  <tabstop>visibleCheckbox</tabstop>
+  <tabstop>orbitCheckbox</tabstop>
+  <tabstop>idLineEdit</tabstop>
+  <tabstop>descriptionTextEdit</tabstop>
+  <tabstop>groupsTextEdit</tabstop>
+  <tabstop>tleTextEdit</tabstop>
+  <tabstop>commsButton</tabstop>
+  <tabstop>saveSatellitesButton</tabstop>
+  <tabstop>sourceList</tabstop>
+  <tabstop>sourceEdit</tabstop>
+  <tabstop>addSourceButton</tabstop>
+  <tabstop>deleteSourceButton</tabstop>
+  <tabstop>aboutTextBrowser</tabstop>
+ </tabstops>
  <resources>
   <include location="../../../../data/gui/guiRes.qrc"/>
   <include location="../../resources/Satellites.qrc"/>

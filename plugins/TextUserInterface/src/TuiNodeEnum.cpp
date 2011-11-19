@@ -16,6 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include "StelTranslator.hpp"
 #include "TuiNodeEnum.hpp"
 #include <QKeyEvent>
 
@@ -70,13 +71,14 @@ TuiNodeResponse TuiNodeEnum::handleEditingKey(int key)
 
 QString TuiNodeEnum::getDisplayText() 
 {
+	QString value = q_(stringList.at(currentIdx));
 	if (!editing)
 	{
-		return displayText + QString(":  %1").arg(stringList.at(currentIdx));
+		return prefixText + q_(displayText) + QString(":  %1").arg(value);
 	}
 	else
 	{
-		return displayText + QString(": >%1<").arg(stringList.at(currentIdx));
+		return prefixText + q_(displayText) + QString(": >%1<").arg(value);
 	}
 }
 

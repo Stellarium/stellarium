@@ -1,7 +1,7 @@
 /*
  * Solar System editor plug-in for Stellarium
  *
- * Copyright (C) 2010 Bogdan Marinov
+ * Copyright (C) 2010-2011 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,16 +22,17 @@
 #define _MPC_IMPORT_WINDOW_
 
 #include <QObject>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QProgressBar>
+#include <QStandardItemModel>
 #include "StelDialog.hpp"
 
 #include "SolarSystemEditor.hpp"
 
 class Ui_mpcImportWindow;
-class QNetworkAccessManager;
-class QNetworkReply;
-class QProgressBar;
 
-/*! \brief Window for importing orbital elements from various sources.
+/*! \brief Window for importing orbital elements from the Minor Planet Center.
   \author Bogdan Marinov
 */
 class MpcImportWindow : public StelDialog
@@ -95,8 +96,11 @@ private:
 	SolarSystemEditor * ssoManager;
 	QList<SsoElements> candidatesForAddition;
 	QList<SsoElements> candidatesForUpdate;
+	QStandardItemModel * candidateObjectsModel;
 
 	ImportType importType;
+	
+	void updateTexts();
 
 	//! wrapper for the single object function to allow multiple formats.
 	SsoElements readElementsFromString(QString elements);

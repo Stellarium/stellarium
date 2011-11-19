@@ -37,23 +37,29 @@
 #include <QStandardItemModel>
 #include <limits>
 
-OcularDialog::OcularDialog(QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes)
+OcularDialog::OcularDialog(QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes) :
+    ccdMapper(0),
+    ocularMapper(0),
+    telescopeMapper(0)
 {
 	ui = new Ui_ocularDialogForm;
 	this->ccds = ccds;
 	ccdTableModel = new PropertyBasedTableModel(this);
+	CCD* ccdModel = CCD::ccdModel();
 	ccdTableModel->init(reinterpret_cast<QList<QObject *>* >(ccds),
-							  CCD::ccdModel(),
-							  CCD::ccdModel()->propertyMap());
+							  ccdModel,
+							  ccdModel->propertyMap());
 	this->oculars = oculars;
 	ocularTableModel = new PropertyBasedTableModel(this);
+	Ocular* ocularModel = Ocular::ocularModel();
 	ocularTableModel->init(reinterpret_cast<QList<QObject *>* >(oculars),
-								  Ocular::ocularModel(), Ocular::ocularModel()->propertyMap());
+								  ocularModel, ocularModel->propertyMap());
 	this->telescopes = telescopes;
 	telescopeTableModel = new PropertyBasedTableModel(this);
+	Telescope* telescopeModel = Telescope::telescopeModel();
 	telescopeTableModel->init(reinterpret_cast<QList<QObject *>* >(telescopes),
-									  Telescope::telescopeModel(),
-									  Telescope::telescopeModel()->propertyMap());
+									  telescopeModel,
+									  telescopeModel->propertyMap());
 	
 	validatorPositiveInt = new QIntValidator(0, std::numeric_limits<int>::max(), this);
 	validatorPositiveDouble = new QDoubleValidator(.0, std::numeric_limits<double>::max(), 24, this);
@@ -66,9 +72,25 @@ OcularDialog::OcularDialog(QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<T
 }
 
 OcularDialog::~OcularDialog()
-{
+{	
 	delete ui;
 	ui = NULL;
+	
+	if (ocularMapper)
+	{
+		ocularMapper->clearMapping();
+		delete ocularMapper;
+	}
+	if (telescopeMapper)
+	{
+		telescopeMapper->clearMapping();
+		delete telescopeMapper;
+	}
+	if (ccdMapper)
+	{
+		ccdMapper->clearMapping();
+		delete ccdMapper;
+	}
 }
 
 /* ********************************************************************* */
