@@ -64,10 +64,10 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 
 		StelPluginInfo info;
 		info.id = "Satellites";
-		info.displayedName = q_("Satellites");
+		info.displayedName = N_("Satellites");
 		info.authors = "Matthew Gates, Jose Luis Canales";
 		info.contact = "http://stellarium.org/";
-		info.description = q_("Prediction of artificial satellite positions in Earth orbit based on NORAD TLE data");
+		info.description = N_("Prediction of artificial satellite positions in Earth orbit based on NORAD TLE data");
 		return info;
 }
 
@@ -91,6 +91,13 @@ void Satellites::deinit()
 Satellites::~Satellites()
 {
 	delete configDialog;
+	
+	if (pxmapGlow)
+		delete pxmapGlow;
+	if (pxmapOnIcon)
+		delete pxmapOnIcon;
+	if (pxmapOffIcon)
+		delete pxmapOffIcon;
 }
 
 
@@ -403,6 +410,7 @@ void Satellites::restoreDefaultConfigIni(void)
 	conf->setValue("tle_url4", "http://celestrak.com/NORAD/elements/visual.txt");
 	conf->setValue("tle_url5", "http://celestrak.com/NORAD/elements/amateur.txt");
 	conf->setValue("tle_url6", "http://celestrak.com/NORAD/elements/iridium.txt");
+	conf->setValue("tle_url7", "http://celestrak.com/NORAD/elements/geo.txt");
 	conf->setValue("update_frequency_hours", 72);
 	conf->setValue("orbit_line_flag", true);
 	conf->setValue("orbit_line_segments", 90);

@@ -788,3 +788,7 @@ QHeaderView::section {
 QFileDialog {
 	background: rgb(35, 0, 0);
 }
+/**** The following are used for Satellites ****/
+QListWidget#satellitesList, QListWidget#sourceList {
+		font-size: 8pt;
+}

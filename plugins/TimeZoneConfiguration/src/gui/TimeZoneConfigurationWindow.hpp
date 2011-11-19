@@ -64,6 +64,8 @@ private:
 	Ui_timeZoneConfigurationWindowForm * ui;
 	DefineTimeZoneWindow * defineTimeZoneWindow;
 	TimeZoneConfiguration * timeZoneConfiguration;
+	
+	void updateAboutText();
 
 private slots:
 	void saveTimeZoneSettings();

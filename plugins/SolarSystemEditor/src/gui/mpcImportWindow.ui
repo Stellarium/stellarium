@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>475</height>
+    <width>478</width>
+    <height>490</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -123,6 +123,9 @@
    </item>
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
      <widget class="QWidget" name="pageSource">
       <layout class="QVBoxLayout" name="verticalLayout_7">
        <property name="spacing">
@@ -133,6 +136,9 @@
        </property>
        <item>
         <widget class="QTabWidget" name="tabWidget">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
          <widget class="QWidget" name="tabLists">
           <attribute name="title">
            <string>Lists</string>
@@ -180,39 +186,6 @@
                <number>0</number>
               </property>
               <item>
-               <widget class="QRadioButton" name="radioButtonFile">
-                <property name="text">
-                 <string>A file containing a list of objects</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QFrame" name="frameFile">
-                <layout class="QHBoxLayout" name="horizontalLayoutFile_2">
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="bottomMargin">
-                  <number>0</number>
-                 </property>
-                 <item>
-                  <widget class="QLineEdit" name="lineEditFilePath">
-                   <property name="inputMethodHints">
-                    <set>Qt::ImhNone</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="pushButtonBrowse">
-                   <property name="text">
-                    <string>...</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-              <item>
                <widget class="QRadioButton" name="radioButtonURL">
                 <property name="text">
                  <string>Download a list of objects from the Internet</string>
@@ -235,9 +208,19 @@
                   <number>0</number>
                  </property>
                  <item>
+                  <widget class="QLabel" name="labelSelect">
+                   <property name="text">
+                    <string>Select a source from the list:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBoxBookmarks"/>
+                 </item>
+                 <item>
                   <widget class="QLabel" name="labelEnter">
                    <property name="text">
-                    <string>Enter a URL:</string>
+                    <string>Or enter a URL:</string>
                    </property>
                   </widget>
                  </item>
@@ -254,13 +237,6 @@
                       </property>
                       <property name="text">
                        <string notr="true">http://</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="pushButtonPasteURL">
-                      <property name="text">
-                       <string>paste</string>
                       </property>
                      </widget>
                     </item>
@@ -293,15 +269,39 @@
                    </layout>
                   </widget>
                  </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QRadioButton" name="radioButtonFile">
+                <property name="text">
+                 <string>A file containing a list of objects</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frameFile">
+                <layout class="QHBoxLayout" name="horizontalLayoutFile_2">
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
                  <item>
-                  <widget class="QLabel" name="labelSelect">
-                   <property name="text">
-                    <string>Or select from the list:</string>
+                  <widget class="QLineEdit" name="lineEditFilePath">
+                   <property name="inputMethodHints">
+                    <set>Qt::ImhNone</set>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBoxBookmarks"/>
+                  <widget class="QPushButton" name="pushButtonBrowse">
+                   <property name="icon">
+                    <iconset resource="../../../../data/gui/guiRes.qrc">
+                     <normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </widget>
@@ -368,7 +368,7 @@
               <item>
                <widget class="QLabel" name="labelQueryLink">
                 <property name="text">
-                 <string>Query the MPC's &lt;a href=&quot;http://www.minorplanetcenter.net/iau/MPEph/MPEph.html&quot;&gt;Minor Planet &amp;amp; Comet Ephemeris Service&lt;/a&gt;:</string>
+                 <string notr="true">Query the MPC's &lt;a href=&quot;http://www.minorplanetcenter.net/iau/MPEph/MPEph.html&quot;&gt;Minor Planet &amp;amp; Comet Ephemeris Service&lt;/a&gt;:</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
@@ -422,7 +422,7 @@
               <item>
                <widget class="QLabel" name="labelQueryInstructions">
                 <property name="text">
-                 <string>Only one result will be returned if the query is successful.&lt;br&gt;Both comets and asteroids can be identified with their number, name or provisional designation.&lt;br&gt;Comet &lt;i&gt;names&lt;/i&gt; need to be prefixed with &lt;b&gt;C/&lt;/b&gt; or &lt;b&gt;P/&lt;/b&gt;. If more than one comet matches a name, only the first result will be returned. For example, &quot;C/Halley&quot; will return 1P/Halley, Halley's Comet, but &quot;Halley&quot; will return the asteorid (2688) Halley.</string>
+                 <string notr="true">Only one result will be returned if the query is successful.&lt;br&gt;Both comets and asteroids can be identified with their number, name or provisional designation.&lt;br&gt;Comet &lt;i&gt;names&lt;/i&gt; need to be prefixed with &lt;b&gt;C/&lt;/b&gt; or &lt;b&gt;P/&lt;/b&gt;. If more than one comet matches a name, only the first result will be returned. For example, &quot;C/Halley&quot; will return 1P/Halley, Halley's Comet, but &quot;Halley&quot; will return the asteroid (2688) Halley.</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
@@ -503,21 +503,28 @@
            </widget>
           </item>
           <item>
-           <widget class="QListWidget" name="listWidgetObjects">
+           <widget class="QLineEdit" name="lineEditSearch">
+            <property name="styleSheet">
+             <string notr="true">QLineEdit {
+	margin: 0px 0px 4px 0px;
+	padding: 4px;
+	padding-left: 32px;
+	background-image: url(:/graphicGui/searchBoxBackground.png);
+	background-repeat: none;
+	background-position: center left;
+	border: none;
+}/* Stolen from the #citySearchLineEdit widget. */</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QListView" name="listViewObjects">
             <property name="selectionMode">
              <enum>QAbstractItemView::NoSelection</enum>
             </property>
-            <item>
-             <property name="text">
-              <string notr="true">2P/Encke</string>
-             </property>
-             <property name="checkState">
-              <enum>Unchecked</enum>
-             </property>
-             <property name="flags">
-              <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
-             </property>
-            </item>
+            <property name="uniformItemSizes">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
@@ -584,28 +591,28 @@
   <tabstop>tabWidget</tabstop>
   <tabstop>radioButtonAsteroids</tabstop>
   <tabstop>radioButtonComets</tabstop>
-  <tabstop>radioButtonFile</tabstop>
-  <tabstop>pushButtonBrowse</tabstop>
-  <tabstop>lineEditFilePath</tabstop>
   <tabstop>radioButtonURL</tabstop>
+  <tabstop>comboBoxBookmarks</tabstop>
   <tabstop>lineEditURL</tabstop>
-  <tabstop>pushButtonPasteURL</tabstop>
   <tabstop>checkBoxAddBookmark</tabstop>
   <tabstop>lineEditBookmarkTitle</tabstop>
-  <tabstop>comboBoxBookmarks</tabstop>
+  <tabstop>radioButtonFile</tabstop>
+  <tabstop>lineEditFilePath</tabstop>
+  <tabstop>pushButtonBrowse</tabstop>
   <tabstop>pushButtonAcquire</tabstop>
   <tabstop>pushButtonAbortDownload</tabstop>
-  <tabstop>lineEditQuery</tabstop>
-  <tabstop>pushButtonSendQuery</tabstop>
-  <tabstop>pushButtonAbortQuery</tabstop>
   <tabstop>radioButtonOverwrite</tabstop>
   <tabstop>radioButtonUpdate</tabstop>
   <tabstop>checkBoxOnlyOrbitalElements</tabstop>
-  <tabstop>listWidgetObjects</tabstop>
+  <tabstop>lineEditSearch</tabstop>
+  <tabstop>listViewObjects</tabstop>
   <tabstop>pushButtonMarkAll</tabstop>
   <tabstop>pushButtonMarkNone</tabstop>
   <tabstop>pushButtonDiscard</tabstop>
   <tabstop>pushButtonAdd</tabstop>
+  <tabstop>pushButtonSendQuery</tabstop>
+  <tabstop>lineEditQuery</tabstop>
+  <tabstop>pushButtonAbortQuery</tabstop>
  </tabstops>
  <resources>
   <include location="../../../../data/gui/guiRes.qrc"/>
@@ -618,12 +625,12 @@
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>121</x>
-     <y>156</y>
+     <x>131</x>
+     <y>364</y>
     </hint>
     <hint type="destinationlabel">
-     <x>417</x>
-     <y>175</y>
+     <x>468</x>
+     <y>397</y>
     </hint>
    </hints>
   </connection>
@@ -634,8 +641,8 @@
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>121</x>
-     <y>218</y>
+     <x>131</x>
+     <y>161</y>
     </hint>
     <hint type="destinationlabel">
      <x>110</x>

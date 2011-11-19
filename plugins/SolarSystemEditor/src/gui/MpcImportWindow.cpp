@@ -27,16 +27,20 @@
 #include "StelFileMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelTranslator.hpp"
 #include "SolarSystem.hpp"
 
 #include <QApplication>
 #include <QClipboard>
+#include <QDesktopServices>
 #include <QFileDialog>
+#include <QSortFilterProxyModel>
 #include <QHash>
 #include <QList>
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QStandardItemModel>
 #include <QString>
 #include <QTemporaryFile>
 #include <QTimer>
@@ -59,12 +63,16 @@ MpcImportWindow::MpcImportWindow() :
 	QHash<QString,QString> cometBookmarks;
 	bookmarks.insert(MpcComets, cometBookmarks);
 	bookmarks.insert(MpcMinorPlanets, asteroidBookmarks);
+
+	candidateObjectsModel = new QStandardItemModel(this);
 }
 
 MpcImportWindow::~MpcImportWindow()
 {
 	delete ui;
 	delete countdownTimer;
+	candidateObjectsModel->clear();
+	delete candidateObjectsModel;
 	if (downloadReply)
 		downloadReply->deleteLater();
 	if (queryReply)
@@ -83,35 +91,76 @@ void MpcImportWindow::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
-	connect(ui->pushButtonAcquire, SIGNAL(clicked()), this, SLOT(acquireObjectData()));
-	connect(ui->pushButtonAbortDownload, SIGNAL(clicked()), this, SLOT(abortDownload()));
+	connect(ui->pushButtonAcquire, SIGNAL(clicked()),
+	        this, SLOT(acquireObjectData()));
+	connect(ui->pushButtonAbortDownload, SIGNAL(clicked()),
+	        this, SLOT(abortDownload()));
 	connect(ui->pushButtonAdd, SIGNAL(clicked()), this, SLOT(addObjects()));
-	connect(ui->pushButtonDiscard, SIGNAL(clicked()), this, SLOT(discardObjects()));
+	connect(ui->pushButtonDiscard, SIGNAL(clicked()),
+	        this, SLOT(discardObjects()));
 
 	connect(ui->pushButtonBrowse, SIGNAL(clicked()), this, SLOT(selectFile()));
-	connect(ui->pushButtonPasteURL, SIGNAL(clicked()), this, SLOT(pasteClipboardURL()));
-	connect(ui->comboBoxBookmarks, SIGNAL(currentIndexChanged(QString)), this, SLOT(bookmarkSelected(QString)));
+	connect(ui->comboBoxBookmarks, SIGNAL(currentIndexChanged(QString)),
+	        this, SLOT(bookmarkSelected(QString)));
 
-	//connect(ui->radioButtonSingle, SIGNAL(toggled(bool)), ui->frameSingle, SLOT(setVisible(bool)));
-	connect(ui->radioButtonFile, SIGNAL(toggled(bool)), ui->frameFile, SLOT(setVisible(bool)));
-	connect(ui->radioButtonURL, SIGNAL(toggled(bool)), ui->frameURL, SLOT(setVisible(bool)));
+	connect(ui->radioButtonFile, SIGNAL(toggled(bool)),
+	        ui->frameFile, SLOT(setVisible(bool)));
+	connect(ui->radioButtonURL, SIGNAL(toggled(bool)),
+	        ui->frameURL, SLOT(setVisible(bool)));
 
-	connect(ui->radioButtonAsteroids, SIGNAL(toggled(bool)), this, SLOT(switchImportType(bool)));
-	connect(ui->radioButtonComets, SIGNAL(toggled(bool)), this, SLOT(switchImportType(bool)));
+	connect(ui->radioButtonAsteroids, SIGNAL(toggled(bool)),
+	        this, SLOT(switchImportType(bool)));
+	connect(ui->radioButtonComets, SIGNAL(toggled(bool)),
+	        this, SLOT(switchImportType(bool)));
 
-	connect(ui->pushButtonMarkAll, SIGNAL(clicked()), this, SLOT(markAll()));
-	connect(ui->pushButtonMarkNone, SIGNAL(clicked()), this, SLOT(unmarkAll()));
+	connect(ui->pushButtonMarkAll, SIGNAL(clicked()),
+	        this, SLOT(markAll()));
+	connect(ui->pushButtonMarkNone, SIGNAL(clicked()),
+	        this, SLOT(unmarkAll()));
 
-	connect(ui->pushButtonSendQuery, SIGNAL(clicked()), this, SLOT(sendQuery()));
-	connect(ui->pushButtonAbortQuery, SIGNAL(clicked()), this, SLOT(abortQuery()));
-	connect(ui->lineEditQuery, SIGNAL(textEdited(QString)), this, SLOT(resetNotFound()));
+	connect(ui->pushButtonSendQuery, SIGNAL(clicked()),
+	        this, SLOT(sendQuery()));
+	connect(ui->pushButtonAbortQuery, SIGNAL(clicked()),
+	        this, SLOT(abortQuery()));
+	connect(ui->lineEditQuery, SIGNAL(textEdited(QString)),
+	        this, SLOT(resetNotFound()));
 	//connect(ui->lineEditQuery, SIGNAL(editingFinished()), this, SLOT(sendQuery()));
 	connect(countdownTimer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
 
+	QSortFilterProxyModel * filterProxyModel = new QSortFilterProxyModel(this);
+	filterProxyModel->setSourceModel(candidateObjectsModel);
+	filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+	ui->listViewObjects->setModel(filterProxyModel);
+	connect(ui->lineEditSearch, SIGNAL(textChanged(const QString&)),
+	        filterProxyModel, SLOT(setFilterFixedString(const QString&)));
+
 	loadBookmarks();
+	updateTexts();
 
 	resetCountdown();
 	resetDialog();
+}
+
+void MpcImportWindow::updateTexts()
+{
+	QString linkText("<a href=\"http://www.minorplanetcenter.net/iau/MPEph/MPEph.html\">Minor Planet &amp; Comet Ephemeris Service</a>");
+	// TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
+	QString queryString(q_("Query the MPC's %1:"));
+	ui->labelQueryLink->setText(QString(queryString).arg(linkText));
+	
+	QString firstLine(q_("Only one result will be returned if the query is successful."));
+	QString secondLine(q_("Both comets and asteroids can be identified with their number, name (in English) or provisional designation."));
+	QString cPrefix("<b>C/</b>");
+	QString pPrefix("<b>P/</b>");
+	QString cometQuery("<tt>C/Halley</tt>");
+	QString cometName("1P/Halley");
+	QString asteroidQuery("<tt>Halley</tt>");
+	QString asteroidName("(2688) Halley");
+	QString nameWarning(q_("Comet <i>names</i> need to be prefixed with %1 or %2. If more than one comet matches a name, only the first result will be returned. For example, searching for \"%3\" will return %4, Halley's Comet, but a search for \"%5\" will return the asteroid %6."));
+	QString thirdLine = QString(nameWarning).arg(cPrefix, pPrefix, cometQuery,
+	                                             cometName, asteroidQuery,
+	                                             asteroidName);
+	ui->labelQueryInstructions->setText(QString("%1<br/>%2<br/>%3").arg(firstLine, secondLine, thirdLine));
 }
 
 void MpcImportWindow::resetDialog()
@@ -122,8 +171,8 @@ void MpcImportWindow::resetDialog()
 	ui->groupBoxType->setVisible(true);
 	ui->radioButtonAsteroids->setChecked(true);
 
-	ui->radioButtonFile->setChecked(true);
-	ui->frameURL->setVisible(false);
+	ui->radioButtonURL->setChecked(true);
+	ui->frameFile->setVisible(false);
 
 	ui->lineEditFilePath->clear();
 	ui->lineEditQuery->clear();
@@ -148,7 +197,7 @@ void MpcImportWindow::resetDialog()
 void MpcImportWindow::populateBookmarksList()
 {
 	ui->comboBoxBookmarks->clear();
-	ui->comboBoxBookmarks->addItem("Select bookmark...");
+        ui->comboBoxBookmarks->addItem("Select bookmark...");
 	QStringList bookmarkTitles(bookmarks.value(importType).keys());
 	bookmarkTitles.sort();
 	ui->comboBoxBookmarks->addItems(bookmarkTitles);
@@ -157,7 +206,10 @@ void MpcImportWindow::populateBookmarksList()
 void MpcImportWindow::languageChanged()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+		updateTexts();
+	}
 }
 
 void MpcImportWindow::acquireObjectData()
@@ -193,14 +245,14 @@ void MpcImportWindow::addObjects()
 	QList<QString> checkedObjectsNames;
 
 	//Extract the marked objects
-	while (ui->listWidgetObjects->count() > 0)
+	//TODO: Something smarter?
+	for (int row = 0; row < candidateObjectsModel->rowCount(); row++)
 	{
-		QListWidgetItem * item = ui->listWidgetObjects->takeItem(0);
+		QStandardItem * item = candidateObjectsModel->item(row);
 		if (item->checkState() == Qt::Checked)
 		{
 			checkedObjectsNames.append(item->text());
 		}
-		delete item;
 	}
 	//qDebug() << "Checked:" << checkedObjectsNames;
 
@@ -264,7 +316,10 @@ void MpcImportWindow::pasteClipboardURL()
 
 void MpcImportWindow::selectFile()
 {
-	QString filePath = QFileDialog::getOpenFileName(NULL, "Select a text file", StelFileMgr::getDesktopDir());
+	QString directory = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation);
+	if (directory.isEmpty())
+		directory = QDesktopServices::storageLocation(QDesktopServices::HomeLocation);
+        QString filePath = QFileDialog::getOpenFileName(NULL, "Select a text file", directory);
 	ui->lineEditFilePath->setText(filePath);
 }
 
@@ -293,8 +348,10 @@ void MpcImportWindow::populateCandidateObjects(QList<SsoElements> objects)
 	int newNovelSsoIndex = 0;
 	int insertionIndex = 0;
 
-	QListWidget * list = ui->listWidgetObjects;
-	list->clear();
+	QStandardItemModel * model = candidateObjectsModel;
+	model->clear();
+	model->setColumnCount(1);
+
 	foreach (SsoElements object, objects)
 	{
 		QString name = object.value("name").toString();
@@ -315,7 +372,7 @@ void MpcImportWindow::populateCandidateObjects(QList<SsoElements> objects)
 			}
 		}
 
-		QListWidgetItem * item = new QListWidgetItem();
+		QStandardItem * item = new QStandardItem();
 		item->setText(name);
 		item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
 		item->setCheckState(Qt::Unchecked);
@@ -355,12 +412,11 @@ void MpcImportWindow::populateCandidateObjects(QList<SsoElements> objects)
 			newNovelSsoIndex++;
 		}
 
-		list->insertItem(insertionIndex, item);
+		model->insertRow(insertionIndex, item);
 	}
 
-	//Select the first item
-	if (list->count() > 0)
-		list->setCurrentRow(0);
+	//Scroll to the first items
+	ui->listViewObjects->scrollToTop();
 }
 
 void MpcImportWindow::enableInterface(bool enable)
@@ -428,14 +484,13 @@ void MpcImportWindow::switchImportType(bool)
 
 void MpcImportWindow::markAll()
 {
-	QListWidget * const list = ui->listWidgetObjects;
-	int rowCount = list->count();
+	int rowCount = candidateObjectsModel->rowCount();
 	if (rowCount < 1)
 		return;
 
 	for (int row = 0; row < rowCount; row++)
 	{
-		QListWidgetItem * item = list->item(row);
+		QStandardItem * item = candidateObjectsModel->item(row);
 		if (item)
 		{
 			item->setCheckState(Qt::Checked);
@@ -445,14 +500,13 @@ void MpcImportWindow::markAll()
 
 void MpcImportWindow::unmarkAll()
 {
-	QListWidget * const list = ui->listWidgetObjects;
-	int rowCount = list->count();
+	int rowCount = candidateObjectsModel->rowCount();
 	if (rowCount < 1)
 		return;
 
 	for (int row = 0; row < rowCount; row++)
 	{
-		QListWidgetItem * item = list->item(row);
+		QStandardItem * item = candidateObjectsModel->item(row);
 		if (item)
 		{
 			item->setCheckState(Qt::Unchecked);
@@ -644,7 +698,7 @@ void MpcImportWindow::sendQuery()
 	queryProgressBar = StelApp::getInstance().getGui()->addProgressBar();
 	queryProgressBar->setValue(0);
 	queryProgressBar->setMaximum(0);
-	queryProgressBar->setFormat("Searching...");
+        queryProgressBar->setFormat("Searching...");
 	queryProgressBar->setVisible(true);
 
 	//TODO: Better handling of the interface
@@ -767,7 +821,7 @@ void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 	}
 	else
 	{
-		ui->labelQueryMessage->setText("Object not found.");
+                ui->labelQueryMessage->setText("Object not found.");
 		ui->labelQueryMessage->setVisible(true);
 		enableInterface(true);
 	}
@@ -856,7 +910,7 @@ void MpcImportWindow::resetCountdown()
 		if (queryReply != 0 && queryReply->isRunning())
 		{
 			abortQuery();
-			ui->labelQueryMessage->setText("The query timed out. You can try again, now or later.");
+                        ui->labelQueryMessage->setText("The query timed out. You can try again, now or later.");
 			ui->labelQueryMessage->setVisible(true);
 		}
 	}

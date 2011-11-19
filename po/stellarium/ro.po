@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-26 01:48+0700\n"
+"POT-Creation-Date: 2011-09-19 20:07+0700\n"
 "PO-Revision-Date: 2011-02-25 13:51+0000\n"
 "Last-Translator: Simion Onea <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-06-28 04:35+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"X-Launchpad-Export-Date: 2011-09-20 04:50+0000\n"
+"X-Generator: Launchpad (build 13980)\n"
 "100 > 19) || ((n % 100 == 0) && (n != 0))) ? 2: 1))\n"
 
 #: src/core/modules/GridLinesMgr.cpp:525
@@ -34,20 +34,20 @@ msgstr "Ecuator"
 msgid "Horizon"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:488
+#: src/core/modules/LandscapeMgr.cpp:486
 msgid "Author: "
 msgstr "Autor: "
 
-#: src/core/modules/LandscapeMgr.cpp:491
+#: src/core/modules/LandscapeMgr.cpp:489
 msgid "Location: "
 msgstr "Locație: "
 
-#: src/core/modules/LandscapeMgr.cpp:496
+#: src/core/modules/LandscapeMgr.cpp:494
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:499
+#: src/core/modules/LandscapeMgr.cpp:498
 msgid "Planet: "
 msgstr "Planetă: "
 
@@ -57,7 +57,7 @@ msgid "Type: <b>%1</b>"
 msgstr "Tip: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:120
-#: plugins/Supernovas/src/Supernova.cpp:98
+#: plugins/Supernovae/src/Supernova.cpp:99
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnitudine: <b>%1</b>"
@@ -135,7 +135,7 @@ msgid "Spectral Type: %1"
 msgstr "Tip spectral: %1"
 
 #: src/core/modules/StarWrapper.cpp:122
-#: plugins/Supernovas/src/Supernova.cpp:107
+#: plugins/Supernovae/src/Supernova.cpp:108
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Distanța: %1 ani lumină"
@@ -144,6 +144,10 @@ msgstr "Distanța: %1 ani lumină"
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Paralaxa: %1\""
+
+#: src/core/StelObserver.cpp:265
+msgid "SpaceShip"
+msgstr ""
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
@@ -285,50 +289,50 @@ msgstr "Azimut/Altitudine: %1/%2"
 msgid "Select screenshot directory"
 msgstr "Directorul pentru capturi de imagine:"
 
-#: src/gui/ConfigurationDialog.cpp:461
+#: src/gui/ConfigurationDialog.cpp:462
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Câmpul vizual la pornirea programului: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:469
+#: src/gui/ConfigurationDialog.cpp:470
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Direcția de privire la pornirea programului Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:509
+#: src/gui/ConfigurationDialog.cpp:510
 msgid "Authors"
 msgstr "Autori"
 
-#: src/gui/ConfigurationDialog.cpp:513 src/gui/ViewDialog.cpp:368
+#: src/gui/ConfigurationDialog.cpp:514 src/gui/ViewDialog.cpp:368
 msgid "Contact"
 msgstr "Contact"
 
-#: src/gui/ConfigurationDialog.cpp:585
+#: src/gui/ConfigurationDialog.cpp:586
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:586
+#: src/gui/ConfigurationDialog.cpp:587
 msgid "License"
 msgstr "Licență"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:616
 msgid "Running script: "
 msgstr "Rulează scriptul: "
 
-#: src/gui/ConfigurationDialog.cpp:622
+#: src/gui/ConfigurationDialog.cpp:623
 msgid "Running script: [none]"
 msgstr "Se rulează scriptul: [niciunul]"
 
-#: src/gui/ConfigurationDialog.cpp:665
+#: src/gui/ConfigurationDialog.cpp:666
 msgid "Finished downloading all star catalogs!"
 msgstr "S-a încheiat descărcarea tuturor cataloagelor stelare!"
 
-#: src/gui/ConfigurationDialog.cpp:674
+#: src/gui/ConfigurationDialog.cpp:675
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Se obține catalogul %1 din %2"
 
-#: src/gui/ConfigurationDialog.cpp:676
+#: src/gui/ConfigurationDialog.cpp:677
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -339,7 +343,7 @@ msgstr ""
 "Numărul de stele: %2 milioane\n"
 "Diapazonul magnitudinii: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:685
+#: src/gui/ConfigurationDialog.cpp:686
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -347,7 +351,7 @@ msgstr ""
 "S-a finalizat descărcarea noilor cataloage de stele!\n"
 "Reporniți Stellarium pentru a le vizualiza."
 
-#: src/gui/ConfigurationDialog.cpp:723 src/gui/ConfigurationDialog.cpp:757
+#: src/gui/ConfigurationDialog.cpp:724 src/gui/ConfigurationDialog.cpp:758
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -356,7 +360,7 @@ msgstr ""
 "Eroare la descărcarea %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:728
+#: src/gui/ConfigurationDialog.cpp:729
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -365,11 +369,11 @@ msgstr ""
 "Se descarcă %1...\n"
 "(Puteți închide această fereastră.)"
 
-#: src/gui/ConfigurationDialog.cpp:808
+#: src/gui/ConfigurationDialog.cpp:809
 msgid "Verifying file integrity..."
 msgstr "Se verifică integritatea fișierelor..."
 
-#: src/gui/ConfigurationDialog.cpp:812
+#: src/gui/ConfigurationDialog.cpp:813
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -378,8 +382,8 @@ msgstr ""
 "Eroare la descărcarea %1:\n"
 "Fișierul este deteriorat."
 
-#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:285
-#: src/gui/StelGuiItems.cpp:640
+#: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:286
+#: src/gui/StelGuiItems.cpp:656
 msgid "Space"
 msgstr "Spațiu"
 
@@ -798,7 +802,7 @@ msgstr "Ascunde automat bara verticală cu butoane"
 msgid "Toggle visibility of GUI"
 msgstr "Schimbă vizibilitatea interfeței grafice"
 
-#: src/gui/StelGuiItems.cpp:541
+#: src/gui/StelGuiItems.cpp:542
 #, no-c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
@@ -827,7 +831,7 @@ msgstr "Rata Leonidelor excepțională"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Cea mai mare rată (Curentul Leonidelor 1966)"
 
-#: src/gui/LocationDialog.cpp:334
+#: src/gui/LocationDialog.cpp:367
 msgid "New Location"
 msgstr "Locație nouă"
 
@@ -907,7 +911,7 @@ msgstr "Un peisaj cu același nume sau identificator (%1) există deja."
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "Îl puteți elimina manual eliminând directorul: %1"
 
-#: src/main.cpp:335
+#: src/main.cpp:336
 msgid "This system does not support OpenGL."
 msgstr "Acest sistem nu susține OpenGL."
 
@@ -1024,7 +1028,7 @@ msgid "Adrastea"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:106
+#: src/translations.h:61 src/translations.h:110
 msgid "Metis"
 msgstr "Metis"
 
@@ -1104,455 +1108,469 @@ msgstr "Pluto"
 msgid "Charon"
 msgstr "Șaron"
 
-#: src/translations.h:81
+#. TRANSLATORS: Moon of Pluto (II)
+#: src/translations.h:82
+msgid "Nix"
+msgstr ""
+
+#. TRANSLATORS: Moon of Pluto (III)
+#: src/translations.h:84
+msgid "Hydra"
+msgstr "Hidra"
+
+#: src/translations.h:85
 msgid "Eris"
 msgstr "Eris"
 
-#: src/translations.h:82
+#: src/translations.h:86
 msgid "Triton"
 msgstr ""
 
-#: src/translations.h:83
+#: src/translations.h:87
 msgid "Nereid"
 msgstr ""
 
-#: src/translations.h:84
+#: src/translations.h:88
 msgid "Naiad"
 msgstr ""
 
-#: src/translations.h:85
+#: src/translations.h:89
 msgid "Thalassa"
 msgstr ""
 
-#: src/translations.h:86
+#: src/translations.h:90
 msgid "Despina"
 msgstr ""
 
-#: src/translations.h:87
+#: src/translations.h:91
 msgid "Galatea"
 msgstr ""
 
-#: src/translations.h:88
+#: src/translations.h:92
 msgid "Larissa"
 msgstr ""
 
-#: src/translations.h:89
+#: src/translations.h:93
 msgid "Proteus"
 msgstr ""
 
-#: src/translations.h:90
+#: src/translations.h:94
 msgid "Halimede"
 msgstr ""
 
-#: src/translations.h:91
+#: src/translations.h:95
 msgid "Psamathe"
 msgstr ""
 
-#: src/translations.h:92
+#: src/translations.h:96
 msgid "Sao"
 msgstr ""
 
-#: src/translations.h:93
+#: src/translations.h:97
 msgid "Laomedeia"
 msgstr ""
 
-#: src/translations.h:94
+#: src/translations.h:98
 msgid "Neso"
 msgstr ""
 
-#: src/translations.h:95
+#: src/translations.h:99
 msgid "Solar System Observer"
 msgstr "Observator al sistemului solar"
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:98
+#: src/translations.h:102
 msgid "Astraea"
 msgstr "Astraea"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:100
+#: src/translations.h:104
 msgid "Hebe"
 msgstr "Hebe"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:102
+#: src/translations.h:106
 msgid "Iris"
 msgstr "Iris"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:104
+#: src/translations.h:108
 msgid "Flora"
 msgstr "Flora"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:108
+#: src/translations.h:112
 msgid "Hygiea"
 msgstr "Higiea"
 
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:110
+#: src/translations.h:114
 msgid "Amor"
 msgstr "Amor"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:112
+#: src/translations.h:116
 msgid "Apophis"
 msgstr "Apofis"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:114
+#: src/translations.h:118
 msgid "Chiron"
 msgstr "Șiron"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:116
+#: src/translations.h:120
 msgid "Eros"
 msgstr "Eros"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:118
+#: src/translations.h:122
 msgid "Hektor"
 msgstr "Hektor"
 
 #. TRANSLATORS: Name of supernova SN 1572A
-#: src/translations.h:120
+#: src/translations.h:124
 msgid "Tycho's Supernova"
 msgstr ""
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: src/translations.h:122
+#: src/translations.h:126
 msgid "Kepler's Supernova"
 msgstr ""
 
-#: src/translations.h:126
+#: src/translations.h:130
 msgid "N"
 msgstr "N"
 
-#: src/translations.h:127
+#: src/translations.h:131
 msgid "S"
 msgstr "S"
 
-#: src/translations.h:128
+#: src/translations.h:132
 msgid "E"
 msgstr "E"
 
-#: src/translations.h:129
+#: src/translations.h:133
 msgid "W"
 msgstr "V"
 
-#: src/translations.h:132
+#: src/translations.h:136
+msgid "Arabic"
+msgstr ""
+
+#: src/translations.h:137
 msgid "Aztec"
 msgstr "Ațtecă"
 
-#: src/translations.h:133
+#: src/translations.h:138
 msgid "Chinese"
 msgstr "Chineză"
 
-#: src/translations.h:134
+#: src/translations.h:139
 msgid "Egyptian"
 msgstr "Egipteană"
 
-#: src/translations.h:135
+#: src/translations.h:140
 msgid "Inuit"
 msgstr "Inuită"
 
-#: src/translations.h:136
+#: src/translations.h:141
 msgid "Korean"
 msgstr "Coreană"
 
-#: src/translations.h:137
+#: src/translations.h:142
 msgid "Lakota"
 msgstr "Lakotă"
 
-#: src/translations.h:138
+#: src/translations.h:143
 msgid "Maori"
 msgstr "Maori"
 
-#: src/translations.h:139
+#: src/translations.h:144
 msgid "Navajo"
 msgstr "Navajo"
 
-#: src/translations.h:140
+#: src/translations.h:145
 msgid "Norse"
 msgstr "Norvegiană"
 
-#: src/translations.h:141
+#: src/translations.h:146
 msgid "Polynesian"
 msgstr "Polineziană"
 
-#: src/translations.h:142
+#: src/translations.h:147
 msgid "Sami"
 msgstr "Samită"
 
-#: src/translations.h:143
+#: src/translations.h:148
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
-#: src/translations.h:144
+#: src/translations.h:149
 msgid "Western"
 msgstr "Occidentală"
 
-#: src/translations.h:148
+#: src/translations.h:153
 msgid "Set Location "
 msgstr "Stabiliți locația "
 
-#: src/translations.h:149
+#: src/translations.h:154
 msgid "Set Time "
 msgstr "Stabiliți ora "
 
-#: src/translations.h:150
+#: src/translations.h:155
 msgid "General "
 msgstr "General "
 
-#: src/translations.h:151
+#: src/translations.h:156
 msgid "Stars "
 msgstr "Stele "
 
-#: src/translations.h:152
+#: src/translations.h:157
 msgid "Colors "
 msgstr "Culori "
 
-#: src/translations.h:153
+#: src/translations.h:158
 msgid "Effects "
 msgstr "Efecte "
 
-#: src/translations.h:154
+#: src/translations.h:159
 msgid "Scripts "
 msgstr "Scripturi "
 
-#: src/translations.h:155
+#: src/translations.h:160
 msgid "Administration "
 msgstr "Administrare "
 
-#: src/translations.h:157
+#: src/translations.h:162
 msgid "Latitude: "
 msgstr "Latitudine: "
 
-#: src/translations.h:158
+#: src/translations.h:163
 msgid "Longitude: "
 msgstr "Longitudine: "
 
-#: src/translations.h:159
+#: src/translations.h:164
 msgid "Altitude (m): "
 msgstr "Altitudine (m): "
 
-#: src/translations.h:160
+#: src/translations.h:165
 msgid "Solar System Body: "
 msgstr "Corp al sistemului solar: "
 
-#: src/translations.h:162
+#: src/translations.h:167
 msgid "Sky Time: "
 msgstr "Ora astrală: "
 
-#: src/translations.h:163
+#: src/translations.h:168
 msgid "Set Time Zone: "
 msgstr "Stabilește fusul orar: "
 
-#: src/translations.h:164
+#: src/translations.h:169
 msgid "Day keys: "
 msgstr "Taste în modul de zi: "
 
-#: src/translations.h:165
+#: src/translations.h:170
 msgid "Calendar"
 msgstr "Calendar"
 
-#: src/translations.h:166
+#: src/translations.h:171
 msgid "Sidereal"
 msgstr "Sideral"
 
-#: src/translations.h:167
+#: src/translations.h:172
 msgid "Preset Sky Time: "
 msgstr "Ora astrală prestabilită: "
 
-#: src/translations.h:168
+#: src/translations.h:173
 msgid "Sky Time At Start-up: "
 msgstr "Ora astrală la pornire: "
 
-#: src/translations.h:169
+#: src/translations.h:174
 msgid "Actual Time"
 msgstr "Ora reală"
 
-#: src/translations.h:170
+#: src/translations.h:175
 msgid "Preset Time"
 msgstr "Ora predefinită"
 
-#: src/translations.h:171
+#: src/translations.h:176
 msgid "Time Display Format: "
 msgstr "Format afișare timp: "
 
-#: src/translations.h:172
+#: src/translations.h:177
 msgid "Date Display Format: "
 msgstr "Format afișare dată: "
 
-#: src/translations.h:174
+#: src/translations.h:179
 msgid "Sky Culture: "
 msgstr "Mitologia astrală autohtonă: "
 
-#: src/translations.h:175
+#: src/translations.h:180
 msgid "Sky Language: "
 msgstr "Limbaj astronomic: "
 
-#: src/translations.h:177
+#: src/translations.h:182
 msgid "Show: "
 msgstr "Afișează: "
 
-#: src/translations.h:178
+#: src/translations.h:183
 msgid "Star Value Multiplier: "
 msgstr "Coeficient de multiplicare al stelei: "
 
-#: src/translations.h:179
+#: src/translations.h:184
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Coeficient de multiplicare a magnitudinii: "
 
-#: src/translations.h:180
+#: src/translations.h:185
 msgid "Maximum Magnitude to Label: "
 msgstr "Magnitudinea maximă pentru etichetare: "
 
-#: src/translations.h:181
+#: src/translations.h:186
 msgid "Twinkling: "
 msgstr "Clipire stele: "
 
-#: src/translations.h:182
+#: src/translations.h:187
 msgid "Limiting Magnitude: "
 msgstr "Magnitudinea-limită: "
 
-#: src/translations.h:184
+#: src/translations.h:189
 msgid "Constellation Lines"
 msgstr "Liniile constelațiilor"
 
-#: src/translations.h:185
+#: src/translations.h:190
 msgid "Constellation Names"
 msgstr "Numele constelațiilor"
 
-#: src/translations.h:186
+#: src/translations.h:191
 msgid "Constellation Art Intensity"
 msgstr "Intensitatea afișării reprezentărilor artistice ale constelațiilor"
 
-#: src/translations.h:187
+#: src/translations.h:192
 msgid "Constellation Boundaries"
 msgstr "Limitele constelațiilor"
 
-#: src/translations.h:188
+#: src/translations.h:193
 msgid "Cardinal Points"
 msgstr "Puncte cardinale"
 
-#: src/translations.h:189
+#: src/translations.h:194
 msgid "Planet Names"
 msgstr "Numele planetelor"
 
-#: src/translations.h:190
+#: src/translations.h:195
 msgid "Planet Orbits"
 msgstr "Orbitele planetelor"
 
-#: src/translations.h:191
+#: src/translations.h:196
 msgid "Planet Trails"
 msgstr "Urmele planetelor"
 
-#: src/translations.h:192
+#: src/translations.h:197
 msgid "Meridian Line"
 msgstr "Meridianul"
 
-#: src/translations.h:193
+#: src/translations.h:198
 msgid "Azimuthal Grid"
 msgstr "Grilă azimutală"
 
-#: src/translations.h:194
+#: src/translations.h:199
 msgid "Equatorial Grid"
 msgstr "Grilă ecuatorială"
 
-#: src/translations.h:195
+#: src/translations.h:200
 msgid "Equator Line"
 msgstr "Ecuatorul"
 
-#: src/translations.h:196
+#: src/translations.h:201
 msgid "Ecliptic Line"
 msgstr "Ecliptica"
 
-#: src/translations.h:197
+#: src/translations.h:202
 msgid "Nebula Names"
 msgstr "Numele nebuloaselor"
 
-#: src/translations.h:198
+#: src/translations.h:203
 msgid "Nebula Circles"
 msgstr "Cercurile nebuloaselor"
 
-#: src/translations.h:200
+#: src/translations.h:205
 msgid "Light Pollution Luminance: "
 msgstr "Poluarea luminoasă: "
 
-#: src/translations.h:201
+#: src/translations.h:206
 msgid "Landscape: "
 msgstr "Peisaj: "
 
-#: src/translations.h:202
+#: src/translations.h:207
 msgid "Manual zoom: "
 msgstr "Zoom manual: "
 
-#: src/translations.h:203
+#: src/translations.h:208
 msgid "Object Sizing Rule: "
 msgstr "Regula dimensionării obiectului: "
 
-#: src/translations.h:204
+#: src/translations.h:209
 msgid "Magnitude Scaling Multiplier: "
 msgstr "Coeficientul de multiplicare a magnitudinii: "
 
-#: src/translations.h:205
+#: src/translations.h:210
 msgid "Milky Way intensity: "
 msgstr "Intensitatea Căii Lactee: "
 
-#: src/translations.h:206
+#: src/translations.h:211
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Magnitudinea maximă a nebuloaselor ce se afișează: "
 
-#: src/translations.h:207
+#: src/translations.h:212
 msgid "Zoom Duration: "
 msgstr "Durata zoomului: "
 
-#: src/translations.h:208
+#: src/translations.h:213
 msgid "Cursor Timeout: "
 msgstr "Timpul de ascundere a cursorului: "
 
-#: src/translations.h:209
+#: src/translations.h:214
 msgid "Correct for light travel time: "
 msgstr "Corectează pentru timpul de călătorie al luminii: "
 
-#: src/translations.h:211
+#: src/translations.h:216
 msgid "Local Script: "
 msgstr "Script local: "
 
-#: src/translations.h:212
+#: src/translations.h:217
 msgid "CD/DVD Script: "
 msgstr "Script CD/DVD: "
 
-#: src/translations.h:213
+#: src/translations.h:218
 msgid "USB Script: "
 msgstr "Script USB: "
 
-#: src/translations.h:214
+#: src/translations.h:219
 msgid "Arrow down to load list."
 msgstr "Apasă pe tasta săgeată în jos pentru a încărca lista."
 
-#: src/translations.h:215
+#: src/translations.h:220
 msgid "Select and exit to run."
 msgstr "Selectați și ieșiți pentru a rula."
 
-#: src/translations.h:217
+#: src/translations.h:222
 msgid "Load Default Configuration: "
 msgstr "Încărcarea configurației implicite: "
 
-#: src/translations.h:218
+#: src/translations.h:223
 msgid "Save Current Configuration as Default: "
 msgstr "Salvează configurația curentă ca implicită : "
 
-#: src/translations.h:219
+#: src/translations.h:224
 msgid "Shut Down: "
 msgstr "Închide: "
 
-#: src/translations.h:220
+#: src/translations.h:225
 msgid "Update me via Internet: "
 msgstr "Actualizează prin Internet: "
 
-#: src/translations.h:221
+#: src/translations.h:226
 msgid "Set UI Locale: "
 msgstr "Stabilește limba interfeței: "
 
@@ -2280,37 +2298,33 @@ msgstr ""
 "Această operațiune nu este reversibilă."
 
 #: src/ui_AtmosphereDialog.h:167
-msgid "Dialog"
-msgstr ""
-
-#: src/ui_AtmosphereDialog.h:168
 msgid "Atmosphere Details"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:170
+#: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:171
+#: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:172
+#: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:177
+#: src/ui_AtmosphereDialog.h:176
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:179
+#: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:181
+#: src/ui_AtmosphereDialog.h:180
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
@@ -2465,72 +2479,29 @@ msgstr ""
 "Center și poate efectua căutări în baza de date online. Interfața nu este "
 "finalizată."
 
-#: plugins/Supernovas/src/Supernovas.cpp:59
-msgid "Historical supernova"
+#: plugins/Supernovae/src/Supernovae.cpp:59
+msgid "Historical supernovae"
 msgstr ""
 
-#: plugins/Supernovas/src/Supernovas.cpp:62
+#: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
-"The plugin for visualization of some historical supernovas, brighter 10 "
+"The plugin for visualization of some historical supernovae, brighter 10 "
 "magnitude"
 msgstr ""
 
-#: plugins/Supernovas/src/Supernovas.cpp:62
+#: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
 "SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 "
 "July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN "
 "1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 "
-"August), SN 1972E (8 May) and SN 1987A (24 February)"
+"August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 "
+"September)"
 msgstr ""
 
-#: plugins/Supernovas/src/Supernova.cpp:105
+#: plugins/Supernovae/src/Supernova.cpp:106
 #, qt-format
 msgid "Type: %1"
 msgstr ""
 
 #~ msgid "Form"
 #~ msgstr "Formular"
-
-#, qt-format
-#~ msgid "Loading NGC catalog: %1/%2"
-#~ msgstr "Încărcare catalog NGC: %1/%2"
-
-#, qt-format
-#~ msgid "Loading catalog %1 from file %2"
-#~ msgstr "Se încarcă catalogul %1 din fișierul %2"
-
-#~ msgid "Move telescope #0 to selected object"
-#~ msgstr "Mută telescopul #0 la obiectul selectat"
-
-#~ msgid "Move telescope #1 to selected object"
-#~ msgstr "Mută telescopul #1 la obiectul selectat"
-
-#~ msgid "Move telescope #2 to selected object"
-#~ msgstr "Mută telescopul #2 obiectul selectat"
-
-#~ msgid "Move telescope #9 to selected object"
-#~ msgstr "Mută telescopul #9 la obiectul selectat"
-
-#~ msgid "Move telescope #8 to selected object"
-#~ msgstr "Mută telescopul #8 la obiectul selectat"
-
-#~ msgid "Move telescope #5 to selected object"
-#~ msgstr "Mută telescopul #5 la obiectul selectat"
-
-#~ msgid "Move telescope #4 to selected object"
-#~ msgstr "Mută telescopul #4 la obiectul selectat"
-
-#~ msgid "Move telescope #7 to selected object"
-#~ msgstr "Mută telescopul #7 la obiectul selectat"
-
-#~ msgid "Move telescope #6 to selected object"
-#~ msgstr "Mută telescopul #6 la obiectul selectat"
-
-#~ msgid "Move telescope #3 to selected object"
-#~ msgstr "Mută telescopul #3 la obiectul selectat"
-
-#~ msgid "Telrad circles"
-#~ msgstr "Cercuri Telrad"
-
-#~ msgid "Oculars configuration window"
-#~ msgstr "Fereastra de configurare a ocularelor"

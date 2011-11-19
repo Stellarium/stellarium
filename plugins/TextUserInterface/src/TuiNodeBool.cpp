@@ -16,6 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include "StelTranslator.hpp"
 #include "TuiNodeBool.hpp"
 #include <QKeyEvent>
 
@@ -70,19 +71,25 @@ TuiNodeResponse TuiNodeBool::handleEditingKey(int key)
 
 QString TuiNodeBool::getDisplayText() 
 {
+	// TODO: The label/value separation needs to be reworked. This way of using
+	// the colon is not i18n-friendly. --BM
+	QString stringOn = q_("On");
+	QString stringOff = q_("Off");
+	QString value;
 	if (!editing)
 	{
 		if (state)
-			return displayText + ":  On";
+			value = QString(":  %1").arg(stringOn);
 		else
-			return displayText + ":  Off";
+			value = QString(":  %1").arg(stringOff);
 	}
 	else
 	{
 		if (state)
-			return displayText + ": >On<";
+			value = QString(": >%1<").arg(stringOn);
 		else
-			return displayText + ": >Off<";
+			value = QString(": >%1<").arg(stringOff);
 	}
+	return prefixText + q_(displayText) + value;
 }
 

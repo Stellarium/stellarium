@@ -63,6 +63,8 @@ private:
 	void setStatusButtonToConnect();
 	void setStatusButtonToDisconnect();
 	
+	void initAbout();
+	
 private slots:
 	void buttonChangeStatusPressed(void);
 	void buttonConfigurePressed(void);

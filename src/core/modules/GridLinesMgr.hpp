@@ -140,6 +140,9 @@ private slots:
 	//! Sets the colors of: grids and great circles, Equatorial Grid, Azimuthal Grid, 
 	//! Meridian Line, Equator Line and Ecliptic Line.
 	void setStelStyle(const QString& section);
+	//! Re-translate the labels of the great circles.
+	//! Contains only calls to SkyLine::updateLabel().
+	void updateLineLabels();
 
 private:
 	SkyGrid * equGrid;      // Equatorial grid

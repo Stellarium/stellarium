@@ -70,6 +70,8 @@ private:
 	SolarSystemEditor * ssoManager;
 
 	QHash<QString,QString> unlocalizedNames;
+	
+	void updateTexts();
 };
 
 #endif //_SOLAR_SYSTEM_MANAGER_WINDOW_
