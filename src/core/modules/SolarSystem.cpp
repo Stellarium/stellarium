@@ -144,10 +144,20 @@ void SolarSystem::init()
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 
-        nMapShader = new StelShader;
-	if (!(nMapShader->load("data/shaders/nmap.v.glsl", "data/shaders/nmap.f.glsl")))
+	nMapShader = new StelShader;
+
+	//using stellarium find path functions thank you alexwolf for noticing :-)
+    QStringList lstv =  QStringList(StelFileMgr::findFileInAllPaths("data/shaders/",
+          (StelFileMgr::Flags)(StelFileMgr::Directory)));
+	QByteArray vshader = (QString(lstv.first()) + "nmap.v.glsl").toLocal8Bit();
+
+	QStringList lstf =  QStringList(StelFileMgr::findFileInAllPaths("data/shaders/",
+          (StelFileMgr::Flags)(StelFileMgr::Directory)));
+	QByteArray fshader = (QString(lstf.first()) + "nmap.f.glsl").toLocal8Bit();
+
+	if (!(nMapShader->load(vshader.data(), fshader.data())))
 	{
-                qWarning() << "Could not load shader files";
+			qWarning() << "Could not load shader files";
 	        nMapShader = 0;
 	}
 }
