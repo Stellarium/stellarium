@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-18 12:54+0200\n"
-"PO-Revision-Date: 2011-11-19 01:27+0000\n"
-"Last-Translator: Simeon <Unknown>\n"
+"POT-Creation-Date: 2011-11-19 22:15+0700\n"
+"PO-Revision-Date: 2011-11-19 13:03+0000\n"
+"Last-Translator: Henrik Graßhoff <Unknown>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-19 04:48+0000\n"
+"X-Launchpad-Export-Date: 2011-11-20 05:19+0000\n"
 "X-Generator: Launchpad (build 14299)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -288,46 +288,46 @@ msgstr "(scheinbar)"
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:305 src/gui/ConfigurationDialog.cpp:307
+#: src/gui/ConfigurationDialog.cpp:306 src/gui/ConfigurationDialog.cpp:308
 msgid "Select screenshot directory"
 msgstr "Screenshot-Verzeichnis auswählen"
 
-#: src/gui/ConfigurationDialog.cpp:475
+#: src/gui/ConfigurationDialog.cpp:476
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Anfängliches Gesichtsfeld: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:483
+#: src/gui/ConfigurationDialog.cpp:484
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Anfängliche Blickrichtung in Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:522
+#: src/gui/ConfigurationDialog.cpp:523
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:211
 msgid "Authors"
 msgstr "Autoren"
 
-#: src/gui/ConfigurationDialog.cpp:526 src/gui/ViewDialog.cpp:372
+#: src/gui/ConfigurationDialog.cpp:527 src/gui/ViewDialog.cpp:372
 msgid "Contact"
 msgstr "Ansprechpartner"
 
-#: src/gui/ConfigurationDialog.cpp:601
+#: src/gui/ConfigurationDialog.cpp:602
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:602
+#: src/gui/ConfigurationDialog.cpp:603
 msgid "License"
 msgstr "Lizenz"
 
-#: src/gui/ConfigurationDialog.cpp:631
+#: src/gui/ConfigurationDialog.cpp:632
 msgid "Running script: "
 msgstr "Ausgeführtes Skript: "
 
-#: src/gui/ConfigurationDialog.cpp:638
+#: src/gui/ConfigurationDialog.cpp:639
 msgid "Running script: [none]"
 msgstr "Ausgeführtes Skript: [keines]"
 
-#: src/gui/ConfigurationDialog.cpp:707
+#: src/gui/ConfigurationDialog.cpp:708
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -335,16 +335,16 @@ msgstr ""
 "Herunterladen neuer Sternkataloge beendet!\n"
 "Starten Sie Stellarium neu, um sie anzuzeigen."
 
-#: src/gui/ConfigurationDialog.cpp:711
+#: src/gui/ConfigurationDialog.cpp:712
 msgid "All available star catalogs have been installed."
 msgstr "Alle verfügbaren Sternkataloge wurden installiert."
 
-#: src/gui/ConfigurationDialog.cpp:716
+#: src/gui/ConfigurationDialog.cpp:717
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Empfange Katalog %1 von %2"
 
-#: src/gui/ConfigurationDialog.cpp:723
+#: src/gui/ConfigurationDialog.cpp:724
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -353,7 +353,7 @@ msgstr ""
 "Lade %1...\n"
 "(Sie können dieses Fenster schließen.)"
 
-#: src/gui/ConfigurationDialog.cpp:730
+#: src/gui/ConfigurationDialog.cpp:731
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -364,7 +364,7 @@ msgstr ""
 "Anzahl der Sterne: %2 Millionen\n"
 "Magnitudenspanne: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:773 src/gui/ConfigurationDialog.cpp:809
+#: src/gui/ConfigurationDialog.cpp:774 src/gui/ConfigurationDialog.cpp:810
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -373,11 +373,11 @@ msgstr ""
 "Fehler beim Herunterladen von %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:861
+#: src/gui/ConfigurationDialog.cpp:862
 msgid "Verifying file integrity..."
 msgstr "Überprüfe Dateiintegrität..."
 
-#: src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:866
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -451,19 +451,32 @@ msgstr "Beschleunige die Skript-Ausführungsgeschwindigkeit"
 msgid "Set the normal script execution rate"
 msgstr "Setze die normale Skript-Ausführungsgeschwindigkeit"
 
-#: src/gui/HelpDialog.cpp:163
+#. TRANSLATORS: Title of a group of key bindings in the Help window
+#: src/gui/HelpDialog.cpp:77 plugins/AngleMeasure/src/AngleMeasure.cpp:126
+#: plugins/CompassMarks/src/CompassMarks.cpp:124
+#: plugins/Oculars/src/Oculars.cpp:945 plugins/Oculars/src/Oculars.cpp:959
+#: plugins/Satellites/src/Satellites.cpp:130
+msgid "Plugin Key Bindings"
+msgstr "Plugin-Tastenkürzel"
+
+#: src/gui/HelpDialog.cpp:78
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:78
+msgid "Text User Interface"
+msgstr "Text-Befehlsschnittstelle"
+
+#: src/gui/HelpDialog.cpp:167
 msgid "Stellarium Help"
 msgstr "Stellarium-Hilfe"
 
-#: src/gui/HelpDialog.cpp:164
+#: src/gui/HelpDialog.cpp:168
 msgid "Keys"
 msgstr "Tasten"
 
-#: src/gui/HelpDialog.cpp:172
+#: src/gui/HelpDialog.cpp:176
 msgid "Further Reading"
 msgstr "weiterführende Literatur"
 
-#: src/gui/HelpDialog.cpp:173
+#: src/gui/HelpDialog.cpp:177
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -471,17 +484,17 @@ msgstr ""
 "Die folgenden Verweise sind externe Web-Links, die Ihren Webbrowser "
 "starten:\n"
 
-#: src/gui/HelpDialog.cpp:174
+#: src/gui/HelpDialog.cpp:178
 msgid "The Stellarium User Guide"
 msgstr "Das Stellarium-Benutzerhandbuch"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:178
+#: src/gui/HelpDialog.cpp:182
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Häufig gestellte Fragen} über Stellarium.  Mit Antworten."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:183
+#: src/gui/HelpDialog.cpp:187
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -490,7 +503,7 @@ msgstr ""
 "Usern erstellte Landschaften und Skripte."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:188
+#: src/gui/HelpDialog.cpp:192
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -499,7 +512,7 @@ msgstr ""
 "stellen. Wir werden versuchen, Ihnen zu helfen."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:193
+#: src/gui/HelpDialog.cpp:197
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -509,41 +522,41 @@ msgstr ""
 "gemeldet wurde, kannst du hier eine neue Fehlerbeschreibung anlegen."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:198
+#: src/gui/HelpDialog.cpp:202
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Foren} - diskutieren Sie mit anderen Nutzern über Stellarium."
 
-#: src/gui/HelpDialog.cpp:234 src/gui/HelpDialog.cpp:326
-#: src/gui/HelpDialog.cpp:328 src/gui/StelGui.cpp:170
+#: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:330
+#: src/gui/HelpDialog.cpp:332 src/gui/StelGui.cpp:170
 msgid "Miscellaneous"
 msgstr "Verschiedenes"
 
-#: src/gui/HelpDialog.cpp:294
+#: src/gui/HelpDialog.cpp:298
 msgid "Developers"
 msgstr "Entwickler"
 
-#: src/gui/HelpDialog.cpp:295
+#: src/gui/HelpDialog.cpp:299
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Projekt Koordinator und federführender Entwickler: %1"
 
-#: src/gui/HelpDialog.cpp:296
+#: src/gui/HelpDialog.cpp:300
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Autor/Entwickler der Dokumentation: %1"
 
-#: src/gui/HelpDialog.cpp:297
+#: src/gui/HelpDialog.cpp:301
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Designer für Grafik und anderes: %1"
 
-#: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
-#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
+#: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:306
 #, qt-format
 msgid "Developer: %1"
 msgstr "Entwickler: %1"
 
-#: src/gui/HelpDialog.cpp:300
+#: src/gui/HelpDialog.cpp:304
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX Entwickler: %1"
@@ -807,6 +820,14 @@ msgstr "Beenden"
 #: src/gui/StelGui.cpp:173
 msgid "Save screenshot"
 msgstr "Screenshot speichern"
+
+#: src/gui/StelGui.cpp:174
+msgid "Reload style"
+msgstr ""
+
+#: src/gui/StelGui.cpp:174
+msgid "Debug"
+msgstr ""
 
 #: src/gui/StelGui.cpp:176
 msgid "Auto hide horizontal button bar"
@@ -2115,14 +2136,6 @@ msgstr "Bietet einen Winkelmesser"
 msgid "Angle measure"
 msgstr "Winkelmaß"
 
-#. TRANSLATORS: Title of a group of key bindings in the Help window
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:126
-#: plugins/CompassMarks/src/CompassMarks.cpp:124
-#: plugins/Oculars/src/Oculars.cpp:945 plugins/Oculars/src/Oculars.cpp:959
-#: plugins/Satellites/src/Satellites.cpp:130
-msgid "Plugin Key Bindings"
-msgstr "Plugin-Tastenkürzel"
-
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:308
 msgid "The Angle Measure is enabled:"
@@ -2160,6 +2173,9 @@ msgid ""
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
+"Den Himmel wie durch ein Teleskop-Okular betrachten (nur Vergrößerung und "
+"Sichtfeld werden simuliert.) Außerdem können ein Sensor-Rahmen und ein "
+"Telrad-Sucher dargestellt werden."
 
 #: plugins/Oculars/src/Oculars.cpp:957
 msgid "Ocular view"
@@ -2197,14 +2213,14 @@ msgstr "Satelliten-Beschriftungen"
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
-"Das alte Format der Datei satellites.json ist nicht mehr gültig - verwende "
-"Standard-Datei"
+"Das alte Format der Datei satellites.json ist nicht mehr gültig - Standard-"
+"Datei wird verwendet"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:214
 #, qt-format
 msgid "Range (km): %1"
-msgstr ""
+msgstr "Entfernung (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
 #: plugins/Satellites/src/Satellite.cpp:217
@@ -2216,7 +2232,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:220
 #, qt-format
 msgid "Altitude (km): %1"
-msgstr ""
+msgstr "Höhe (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:237
@@ -2232,19 +2248,19 @@ msgstr "TEME-Geschwindigkeit (km/s): %1"
 
 #: plugins/Satellites/src/Satellite.cpp:253
 msgid "The satellite and the observer are in sunlight."
-msgstr ""
+msgstr "Der Satellit und der Beobachter sind im Sonnenlicht."
 
 #: plugins/Satellites/src/Satellite.cpp:256
 msgid "The satellite is visible."
-msgstr ""
+msgstr "Der Satellit ist sichtbar."
 
 #: plugins/Satellites/src/Satellite.cpp:259
 msgid "The satellite is eclipsed."
-msgstr ""
+msgstr "Der Satellit ist verfinstert."
 
 #: plugins/Satellites/src/Satellite.cpp:262
 msgid "The satellite is not visible"
-msgstr ""
+msgstr "Der Satellit ist nicht sichtbar"
 
 #: plugins/Satellites/src/Satellite.cpp:288
 #, qt-format
@@ -2264,6 +2280,8 @@ msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
+"Die Satellitenerweiterung kann die Positionen von künstlichen Satelliten in "
+"der Erdumlaufbahn vorhersagen."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:216
 msgid "Notes for users"
@@ -2273,6 +2291,8 @@ msgstr "Hinweise für Benutzer"
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
+"Satelliten und deren Umlaufbahnen werden nur angezeigt, wenn sich der "
+"Beobachter auf der Erde befindet."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:218
 msgid ""
@@ -2280,6 +2300,9 @@ msgid ""
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
+"Vorhergesagte Positionen sind nur für einen begrenzten Zeitraum genau "
+"(einige Tage, Wochen oder evtl. 1 Monat in die Vergangenheit und Zukunft). "
+"Außerhalb dieses Zeitrahmens sind große Abweichungen zu erwarten."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:219
 msgid ""
@@ -2298,19 +2321,23 @@ msgid ""
 "the default %3 file.  The old file will be backed up as %4.  This can be "
 "found in the user data directory, under \"modules/Satellites/\"."
 msgstr ""
+"Durch Klicken des Knopfes »%1« im Reiter »%2« dieses Dialogs können Sie die "
+"vorgegebene Datei %3 wiederherstellen. Die alte Datei wird als %4 gesichert "
+"und befindet sich im Datenordner des Benutzers unter "
+"».stellarium/modules/Satellites/«."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:227
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
-"Das Satelliten-Plugin befindet ist noch in Entwicklung. Einige Funktionen "
-"sind unvollständig oder fehlen ganz."
+"Die Satellitenerweiterung befindet ist noch in Entwicklung. Einige "
+"Funktionen sind fehlerhaft, unvollständig oder nicht vorhanden."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:231
 msgid "TLE data updates"
-msgstr ""
+msgstr "Aktualisierungen der TLE-Daten"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:232
 msgid ""
@@ -2318,6 +2345,9 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
+"Das Satelliten-Plugin kann automatisch die TLE-Daten aus dem Internet "
+"herunterladen. In der Voreinstellung wird das Plugin die TLE-Daten "
+"aktualisieren, wenn diese älter als 72 Stunden sind. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:233
 #, qt-format
@@ -2326,16 +2356,23 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
+"Wenn Sie die Aktualisierungen aus dem Internet ausgeschaltet haben, können "
+"Sie die Daten auch mittels einer Datei aktualisieren, die sich auf Ihrem "
+"Rechner befindet. Diese Datei muss im selben Format sein, wie die Celestrak-"
+"Aktualisierungen (für ein Beispiel siehe %1)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:234
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr ""
+"<b>Hinweis:</b> Wenn in den aktualisierten Daten der Name eines Satelliten "
+"am Ende etwas in eckigen Klammern enthält, wird dieser Teil entfernt, bevor "
+"die Daten benutzt werden."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:237
 msgid "Adding new satellites"
-msgstr ""
+msgstr "Neue Satelliten hinzufügen"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:238
 #, qt-format
@@ -2343,22 +2380,29 @@ msgid ""
 "At the moment you must manually edit the %1 file to add new satellites to "
 "the database. Making this easier is still on the TODO list..."
 msgstr ""
+"Um einen neuen Satelliten zur Datenbank hinzuzufügen, müssen Sie momentan "
+"noch die Datei %1 manuell ergänzen. Es ist bereits geplant, dies zukünftig "
+"zu vereinfachen …"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:240
 msgid "Technical notes"
-msgstr ""
+msgstr "Technische Hinweise"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:241
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
 msgstr ""
+"Die Positionen werden mithilfe der SGP4- & SDP4-Methoden berechnet, "
+"ausgehend von NORAD-TLE-Eingabedaten. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:242
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
 msgstr ""
+"Der Quelltext zur Bahnberechnung wurde von Jose Luis Canales gemäß dem "
+"korrigierten Spacetrack Report #3 (sowie Spacetrack Report #6) geschrieben. "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:244
@@ -2375,18 +2419,20 @@ msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
 "plugin\" in the subject when posting."
 msgstr ""
+"Wenn Sie Hilfe benötigen, wenden Sie sich an die Launchpad-Website. Bitte "
+"schreiben Sie dabei »Satellites plugin« in die Betreffzeile Ihres Beitrags."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:250
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
-msgstr ""
+msgstr "Wenn Sie Fragen haben, können Sie %1hier eine Antwort erhalten%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:252
 #, qt-format
 msgid "Bug reports can be made %1here%2."
-msgstr ""
+msgstr "Fehlerberichte können %1hier%2 eingereicht werden."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
@@ -2394,29 +2440,31 @@ msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr ""
+"Wenn Sie neue Funktionen wünschen, erstellen Sie bitte einen Fehlerbericht "
+"und markieren Sie ihn als »wishlist«."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:267
 msgid "Internet updates disabled"
-msgstr ""
+msgstr "Internet-Aktualisierungen deaktiviert"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:269
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
 msgid "Updating now..."
-msgstr ""
+msgstr "Aktualisierung läuft …"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:271
 msgid "Next update: < 1 minute"
-msgstr ""
+msgstr "Nächste Aktualisierung in: < 1 Minute"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:273
 #, qt-format
 msgid "Next update: %1 minutes"
-msgstr "Nächste Aktualisierung in %1 Minuten"
+msgstr "Nächste Aktualisierung in: %1 Minuten"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:275
 #, qt-format
 msgid "Next update: %1 hours"
-msgstr ""
+msgstr "Nächste Aktualisierung in: %1 Stunden"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
 #: plugins/Satellites/src/ui_satellitesDialog.h:605
@@ -2425,45 +2473,45 @@ msgstr "Jetzt aktualisieren"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:292
 msgid "Update from files"
-msgstr ""
+msgstr "Aktualisierung mittels Dateien"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:304
 msgid "Update error"
-msgstr ""
+msgstr "Aktualisierungsfehler"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:311
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
-msgstr ""
+msgstr "%1/%2 Satellit(en) aktualisiert; %3 fehlt/fehlen"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:368
 msgid "[new source]"
-msgstr ""
+msgstr "[neue Quelle]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 msgid "[all not displayed]"
-msgstr ""
+msgstr "[alle nicht angezeigten]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
 msgid "[all displayed]"
-msgstr ""
+msgstr "[alle angezeigten]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:411
 msgid "[all]"
-msgstr ""
+msgstr "[alle]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:467
 msgid "Select TLE Update File"
-msgstr ""
+msgstr "Wählen Sie die TLE-Aktualisierungsdatei"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:598
 #: plugins/Satellites/src/ui_satellitesDialog.h:599
 msgid "Satellites Configuration"
-msgstr ""
+msgstr "Satelliten-Konfiguration"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:601
 msgid "Update TLE lists from Internet sources"
-msgstr ""
+msgstr "Internet-Aktualisierungen der TLE-Listen"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:602
 msgid "Update from Internet sources"
@@ -2487,21 +2535,21 @@ msgstr "Schriftgröße der Beschriftung (Pixel):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:608
 msgid "Orbit lines"
-msgstr ""
+msgstr "Bahnlinien"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:610
 #: plugins/Satellites/src/ui_satellitesDialog.h:614
 msgid "Number of segments used to draw the line"
-msgstr ""
+msgstr "Anzahl der Bahnlinien-Segmente"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:612
 msgid "# segments:"
-msgstr ""
+msgstr "# Segmente:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:617
 #: plugins/Satellites/src/ui_satellitesDialog.h:621
 msgid "Number of segments used to draw each end of the line"
-msgstr ""
+msgstr "Anzahl der Segmente am Ende jeder Bahnllinie"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:619
 msgid "Fade length:"
@@ -2510,11 +2558,11 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:624
 #: plugins/Satellites/src/ui_satellitesDialog.h:628
 msgid "Duration of a single segment in seconds"
-msgstr ""
+msgstr "Dauer eines einzelnen Segments in Sekunden"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:626
 msgid "Length (s):"
-msgstr ""
+msgstr "Länge (Sek.):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:630
 msgid "Restore default settings"
@@ -2530,23 +2578,23 @@ msgstr "Einstellungen"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:634
 msgid "Display the selected satellite(s)"
-msgstr ""
+msgstr "Gewählte(n) Satelliten anzeigen"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:636
 msgid "Displayed"
-msgstr ""
+msgstr "Angezeigt"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:638
 msgid "Display orbit line(s) for the selected satellite(s)"
-msgstr ""
+msgstr "Bahnlinie(n) des/der ausgewählten Satelliten anzeigen"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 msgid "Orbit"
-msgstr ""
+msgstr "Umlaufbahn"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
 msgid "Satellite ID:"
-msgstr ""
+msgstr "Satelliten-ID:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:643
 msgid "Description:"
@@ -2558,11 +2606,11 @@ msgstr "Gruppen:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:646
 msgid "Comma separated list of groups"
-msgstr ""
+msgstr "Komma-getrennte Liste der Gruppen"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:648
 msgid "TLE data:"
-msgstr ""
+msgstr "TLE-Daten:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:650
 msgid "NORAD two line element orbit data"
@@ -2580,11 +2628,11 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Add new source"
-msgstr ""
+msgstr "Neue Quelle hinzufügen"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:666
 msgid "Remove selected source"
-msgstr ""
+msgstr "Ausgewählte Quelle entfernen"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:669
 msgid "Sources"
@@ -2617,17 +2665,17 @@ msgstr "Bewege Teleskop #%1 zu derzeitiger Bildschirmmitte"
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Bewege ein Teleskop zu angegebenen Koordinaten"
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:138
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
-msgstr ""
+msgstr "Neues Teleskop hinzufügen"
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:161
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
-msgstr ""
+msgstr "Teleskop einrichten"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
-msgstr "Nicht Verfügbar"
+msgstr "Nicht verfügbar"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
 msgid "Starting"
@@ -2712,16 +2760,16 @@ msgid "There are no active devices."
 msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:285
-msgid "&Right Ascension (J2000):"
+msgid "Slew telescope to coordinates"
 msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:286
-msgid "De&clination (J2000):"
-msgstr "Deklination (J2000):"
+msgid "&Right Ascension (J2000):"
+msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:287
-msgid "Slew telescope to coordinates"
-msgstr ""
+msgid "De&clination (J2000):"
+msgstr "Deklination (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "Hours-minutes-seconds format"
@@ -3197,10 +3245,6 @@ msgstr "tt-mm-jjjj"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
 msgid "mm-dd-yyyy"
 msgstr "mm-tt-jjjj"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:78
-msgid "Text User Interface"
-msgstr "Text-Befehlsschnittstelle"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:81
 msgid ""

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-18 12:54+0200\n"
+"POT-Creation-Date: 2011-11-19 22:15+0700\n"
 "PO-Revision-Date: 2011-11-18 05:24+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-19 04:50+0000\n"
+"X-Launchpad-Export-Date: 2011-11-20 05:21+0000\n"
 "X-Generator: Launchpad (build 14299)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -284,46 +284,46 @@ msgstr "(видимые)"
 msgid "Az/Alt: %1/%2"
 msgstr "Азимут/высота: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:305 src/gui/ConfigurationDialog.cpp:307
+#: src/gui/ConfigurationDialog.cpp:306 src/gui/ConfigurationDialog.cpp:308
 msgid "Select screenshot directory"
 msgstr "Выберите папку для снимков экрана"
 
-#: src/gui/ConfigurationDialog.cpp:475
+#: src/gui/ConfigurationDialog.cpp:476
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Начальное поле зрения: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:483
+#: src/gui/ConfigurationDialog.cpp:484
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Начальное направление обзора аз/выс: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:522
+#: src/gui/ConfigurationDialog.cpp:523
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:211
 msgid "Authors"
 msgstr "Разработчики"
 
-#: src/gui/ConfigurationDialog.cpp:526 src/gui/ViewDialog.cpp:372
+#: src/gui/ConfigurationDialog.cpp:527 src/gui/ViewDialog.cpp:372
 msgid "Contact"
 msgstr "Обратная связь"
 
-#: src/gui/ConfigurationDialog.cpp:601
+#: src/gui/ConfigurationDialog.cpp:602
 msgid "Author"
 msgstr "Автор"
 
-#: src/gui/ConfigurationDialog.cpp:602
+#: src/gui/ConfigurationDialog.cpp:603
 msgid "License"
 msgstr "Лицензия"
 
-#: src/gui/ConfigurationDialog.cpp:631
+#: src/gui/ConfigurationDialog.cpp:632
 msgid "Running script: "
 msgstr "Запущенный сценарий: "
 
-#: src/gui/ConfigurationDialog.cpp:638
+#: src/gui/ConfigurationDialog.cpp:639
 msgid "Running script: [none]"
 msgstr "Запущенный сценарий: [нет]"
 
-#: src/gui/ConfigurationDialog.cpp:707
+#: src/gui/ConfigurationDialog.cpp:708
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -331,16 +331,16 @@ msgstr ""
 "Загрузка новых каталогов звёзд завершена.\n"
 "Перезапустите Stellarium для их отображения."
 
-#: src/gui/ConfigurationDialog.cpp:711
+#: src/gui/ConfigurationDialog.cpp:712
 msgid "All available star catalogs have been installed."
 msgstr "Все доступные звёздные каталоги установлены."
 
-#: src/gui/ConfigurationDialog.cpp:716
+#: src/gui/ConfigurationDialog.cpp:717
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Получение каталога %1 из %2"
 
-#: src/gui/ConfigurationDialog.cpp:723
+#: src/gui/ConfigurationDialog.cpp:724
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -349,7 +349,7 @@ msgstr ""
 "Загрузка %1...\n"
 "(Вы можете закрыть это окно.)"
 
-#: src/gui/ConfigurationDialog.cpp:730
+#: src/gui/ConfigurationDialog.cpp:731
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -360,7 +360,7 @@ msgstr ""
 "Количество звёзд: %2 миллиона\n"
 "Диапазон звёздных величин: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:773 src/gui/ConfigurationDialog.cpp:809
+#: src/gui/ConfigurationDialog.cpp:774 src/gui/ConfigurationDialog.cpp:810
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -369,11 +369,11 @@ msgstr ""
 "Ошибка при загрузке %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:861
+#: src/gui/ConfigurationDialog.cpp:862
 msgid "Verifying file integrity..."
 msgstr "Проверка целостности файлов..."
 
-#: src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:866
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -447,35 +447,48 @@ msgstr "Ускорить выполнение сценария"
 msgid "Set the normal script execution rate"
 msgstr "Установить нормальную скорость для выполнения сценария"
 
-#: src/gui/HelpDialog.cpp:163
+#. TRANSLATORS: Title of a group of key bindings in the Help window
+#: src/gui/HelpDialog.cpp:77 plugins/AngleMeasure/src/AngleMeasure.cpp:126
+#: plugins/CompassMarks/src/CompassMarks.cpp:124
+#: plugins/Oculars/src/Oculars.cpp:945 plugins/Oculars/src/Oculars.cpp:959
+#: plugins/Satellites/src/Satellites.cpp:130
+msgid "Plugin Key Bindings"
+msgstr "Сочетание клавиш плагина"
+
+#: src/gui/HelpDialog.cpp:78
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:78
+msgid "Text User Interface"
+msgstr "Текстовый интерфейс пользователя"
+
+#: src/gui/HelpDialog.cpp:167
 msgid "Stellarium Help"
 msgstr "Справка Stellarium"
 
-#: src/gui/HelpDialog.cpp:164
+#: src/gui/HelpDialog.cpp:168
 msgid "Keys"
 msgstr "Клавиши"
 
-#: src/gui/HelpDialog.cpp:172
+#: src/gui/HelpDialog.cpp:176
 msgid "Further Reading"
 msgstr "Дополнительная информация"
 
-#: src/gui/HelpDialog.cpp:173
+#: src/gui/HelpDialog.cpp:177
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr "Следующие ссылки - внешние, они будут открыты в браузере:\n"
 
-#: src/gui/HelpDialog.cpp:174
+#: src/gui/HelpDialog.cpp:178
 msgid "The Stellarium User Guide"
 msgstr "Руководство пользователя Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:178
+#: src/gui/HelpDialog.cpp:182
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{ЧаВо} Stellarium."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:183
+#: src/gui/HelpDialog.cpp:187
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -484,7 +497,7 @@ msgstr ""
 "пользовательские ландшафты и сценарии."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:188
+#: src/gui/HelpDialog.cpp:192
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -493,7 +506,7 @@ msgstr ""
 "отправьте запрос, и мы попробуем помочь."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:193
+#: src/gui/HelpDialog.cpp:197
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -504,41 +517,41 @@ msgstr ""
 "трекере, можно открывать отчёты об ошибках здесь."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:198
+#: src/gui/HelpDialog.cpp:202
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Форумы} - обсудите Stellarium с другими пользователями."
 
-#: src/gui/HelpDialog.cpp:234 src/gui/HelpDialog.cpp:326
-#: src/gui/HelpDialog.cpp:328 src/gui/StelGui.cpp:170
+#: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:330
+#: src/gui/HelpDialog.cpp:332 src/gui/StelGui.cpp:170
 msgid "Miscellaneous"
 msgstr "Прочее"
 
-#: src/gui/HelpDialog.cpp:294
+#: src/gui/HelpDialog.cpp:298
 msgid "Developers"
 msgstr "Разработчики"
 
-#: src/gui/HelpDialog.cpp:295
+#: src/gui/HelpDialog.cpp:299
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Координатор проекта и ведущий разработчик: %1"
 
-#: src/gui/HelpDialog.cpp:296
+#: src/gui/HelpDialog.cpp:300
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Автор документации/разработчик: %1"
 
-#: src/gui/HelpDialog.cpp:297
+#: src/gui/HelpDialog.cpp:301
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Дизайнер графики/прочего: %1"
 
-#: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
-#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
+#: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:306
 #, qt-format
 msgid "Developer: %1"
 msgstr "Разработчик: %1"
 
-#: src/gui/HelpDialog.cpp:300
+#: src/gui/HelpDialog.cpp:304
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX-разработчик: %1"
@@ -802,6 +815,14 @@ msgstr "Выход"
 #: src/gui/StelGui.cpp:173
 msgid "Save screenshot"
 msgstr "Сохранить снимок экрана"
+
+#: src/gui/StelGui.cpp:174
+msgid "Reload style"
+msgstr ""
+
+#: src/gui/StelGui.cpp:174
+msgid "Debug"
+msgstr ""
 
 #: src/gui/StelGui.cpp:176
 msgid "Auto hide horizontal button bar"
@@ -2097,14 +2118,6 @@ msgstr "Этот плагин позволяет проводить угловы
 msgid "Angle measure"
 msgstr "Угломер"
 
-#. TRANSLATORS: Title of a group of key bindings in the Help window
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:126
-#: plugins/CompassMarks/src/CompassMarks.cpp:124
-#: plugins/Oculars/src/Oculars.cpp:945 plugins/Oculars/src/Oculars.cpp:959
-#: plugins/Satellites/src/Satellites.cpp:130
-msgid "Plugin Key Bindings"
-msgstr "Сочетание клавиш плагина"
-
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:308
 msgid "The Angle Measure is enabled:"
@@ -2613,11 +2626,11 @@ msgstr "Навести телескоп #%1 на точку, находящую�
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Навести телескоп по указанным координатам"
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:138
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
 msgstr "Добавить новый телескоп"
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:161
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
 msgstr ""
 
@@ -2708,16 +2721,16 @@ msgid "There are no active devices."
 msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:285
+msgid "Slew telescope to coordinates"
+msgstr "Навести телескоп по координатам"
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:286
 msgid "&Right Ascension (J2000):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:286
+#: plugins/TelescopeControl/src/ui_slewDialog.h:287
 msgid "De&clination (J2000):"
 msgstr ""
-
-#: plugins/TelescopeControl/src/ui_slewDialog.h:287
-msgid "Slew telescope to coordinates"
-msgstr "Навести телескоп по координатам"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "Hours-minutes-seconds format"
@@ -3191,10 +3204,6 @@ msgstr "дд-мм-гггг"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
 msgid "mm-dd-yyyy"
 msgstr "мм-дд-гггг"
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:78
-msgid "Text User Interface"
-msgstr "Текстовый интерфейс пользователя"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:81
 msgid ""

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-18 12:54+0200\n"
+"POT-Creation-Date: 2011-11-19 22:15+0700\n"
 "PO-Revision-Date: 2011-10-19 21:42+0000\n"
 "Last-Translator: nicoelba <nicoelba@inwind.it>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-19 04:49+0000\n"
+"X-Launchpad-Export-Date: 2011-11-20 05:20+0000\n"
 "X-Generator: Launchpad (build 14299)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -286,46 +286,46 @@ msgstr "(apparente)"
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:305 src/gui/ConfigurationDialog.cpp:307
+#: src/gui/ConfigurationDialog.cpp:306 src/gui/ConfigurationDialog.cpp:308
 msgid "Select screenshot directory"
 msgstr "Seleziona la directory delle schermate"
 
-#: src/gui/ConfigurationDialog.cpp:475
+#: src/gui/ConfigurationDialog.cpp:476
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "FOV di avvio: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:483
+#: src/gui/ConfigurationDialog.cpp:484
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Punta direzione all'avvio Az/Alt: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:522
+#: src/gui/ConfigurationDialog.cpp:523
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:211
 msgid "Authors"
 msgstr "Autori"
 
-#: src/gui/ConfigurationDialog.cpp:526 src/gui/ViewDialog.cpp:372
+#: src/gui/ConfigurationDialog.cpp:527 src/gui/ViewDialog.cpp:372
 msgid "Contact"
 msgstr "Contatto"
 
-#: src/gui/ConfigurationDialog.cpp:601
+#: src/gui/ConfigurationDialog.cpp:602
 msgid "Author"
 msgstr "Autore"
 
-#: src/gui/ConfigurationDialog.cpp:602
+#: src/gui/ConfigurationDialog.cpp:603
 msgid "License"
 msgstr "Licenza"
 
-#: src/gui/ConfigurationDialog.cpp:631
+#: src/gui/ConfigurationDialog.cpp:632
 msgid "Running script: "
 msgstr "Esecuzione script: "
 
-#: src/gui/ConfigurationDialog.cpp:638
+#: src/gui/ConfigurationDialog.cpp:639
 msgid "Running script: [none]"
 msgstr "Esecuzione script: [nessuno]"
 
-#: src/gui/ConfigurationDialog.cpp:707
+#: src/gui/ConfigurationDialog.cpp:708
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -333,16 +333,16 @@ msgstr ""
 "Scaricamento dei cataloghi di stelle completato.\n"
 "Riavviare Stellarium per visualizzarli."
 
-#: src/gui/ConfigurationDialog.cpp:711
+#: src/gui/ConfigurationDialog.cpp:712
 msgid "All available star catalogs have been installed."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:716
+#: src/gui/ConfigurationDialog.cpp:717
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Ricezione del catalogo %1 di %2"
 
-#: src/gui/ConfigurationDialog.cpp:723
+#: src/gui/ConfigurationDialog.cpp:724
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -351,7 +351,7 @@ msgstr ""
 "Scaricamento di %1 ...\n"
 "(È possibile chiudere questa finestra.)"
 
-#: src/gui/ConfigurationDialog.cpp:730
+#: src/gui/ConfigurationDialog.cpp:731
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -362,7 +362,7 @@ msgstr ""
 "Numero di stelle: %2 Million\n"
 "Intervallo di magnitudo: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:773 src/gui/ConfigurationDialog.cpp:809
+#: src/gui/ConfigurationDialog.cpp:774 src/gui/ConfigurationDialog.cpp:810
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -371,11 +371,11 @@ msgstr ""
 "Errore nello scaricamento di %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:861
+#: src/gui/ConfigurationDialog.cpp:862
 msgid "Verifying file integrity..."
 msgstr "Verifica dell'integrità del file..."
 
-#: src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:866
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -449,19 +449,32 @@ msgstr "Aumenta la velocità di esecuzione dello script"
 msgid "Set the normal script execution rate"
 msgstr "Imposta la normale velocità di esecuzione dello script"
 
-#: src/gui/HelpDialog.cpp:163
+#. TRANSLATORS: Title of a group of key bindings in the Help window
+#: src/gui/HelpDialog.cpp:77 plugins/AngleMeasure/src/AngleMeasure.cpp:126
+#: plugins/CompassMarks/src/CompassMarks.cpp:124
+#: plugins/Oculars/src/Oculars.cpp:945 plugins/Oculars/src/Oculars.cpp:959
+#: plugins/Satellites/src/Satellites.cpp:130
+msgid "Plugin Key Bindings"
+msgstr "Chiave bloccaggio plugin"
+
+#: src/gui/HelpDialog.cpp:78
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:78
+msgid "Text User Interface"
+msgstr "Interfaccia utente testuale"
+
+#: src/gui/HelpDialog.cpp:167
 msgid "Stellarium Help"
 msgstr "Aiuto di Stellarium"
 
-#: src/gui/HelpDialog.cpp:164
+#: src/gui/HelpDialog.cpp:168
 msgid "Keys"
 msgstr "Tasti"
 
-#: src/gui/HelpDialog.cpp:172
+#: src/gui/HelpDialog.cpp:176
 msgid "Further Reading"
 msgstr "Ulteriore Lettura"
 
-#: src/gui/HelpDialog.cpp:173
+#: src/gui/HelpDialog.cpp:177
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -469,17 +482,17 @@ msgstr ""
 "I collegamenti seguenti sono collegamenti web esterni, e apriranno il vostro "
 "browser web\n"
 
-#: src/gui/HelpDialog.cpp:174
+#: src/gui/HelpDialog.cpp:178
 msgid "The Stellarium User Guide"
 msgstr "La Guida Utente Di Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:178
+#: src/gui/HelpDialog.cpp:182
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Domande Frequenti} su Stellarium. E anche le risposte."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:183
+#: src/gui/HelpDialog.cpp:187
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -488,7 +501,7 @@ msgstr ""
 "scenari e script creati dagli utenti."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:188
+#: src/gui/HelpDialog.cpp:192
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -497,7 +510,7 @@ msgstr ""
 "Stellarium, scrivi una richiesta di supporto qui e proveremo ad aiutarti."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:193
+#: src/gui/HelpDialog.cpp:197
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -511,41 +524,41 @@ msgstr ""
 "nel le segnalazioni del tracker, puoi aprire una segnalazione bug qui."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:198
+#: src/gui/HelpDialog.cpp:202
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forum} - parla di Stellarium con altri utenti"
 
-#: src/gui/HelpDialog.cpp:234 src/gui/HelpDialog.cpp:326
-#: src/gui/HelpDialog.cpp:328 src/gui/StelGui.cpp:170
+#: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:330
+#: src/gui/HelpDialog.cpp:332 src/gui/StelGui.cpp:170
 msgid "Miscellaneous"
 msgstr "Varie"
 
-#: src/gui/HelpDialog.cpp:294
+#: src/gui/HelpDialog.cpp:298
 msgid "Developers"
 msgstr "Sviluppatori"
 
-#: src/gui/HelpDialog.cpp:295
+#: src/gui/HelpDialog.cpp:299
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Coordinatore di progetto e capo sviluppo: %1"
 
-#: src/gui/HelpDialog.cpp:296
+#: src/gui/HelpDialog.cpp:300
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Autore della documentazione/Sviluppatore: %1"
 
-#: src/gui/HelpDialog.cpp:297
+#: src/gui/HelpDialog.cpp:301
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Designer grafico/Altro: %1"
 
-#: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
-#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
+#: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:306
 #, qt-format
 msgid "Developer: %1"
 msgstr "Sviluppatore: %1"
 
-#: src/gui/HelpDialog.cpp:300
+#: src/gui/HelpDialog.cpp:304
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Sviluppatore OSX: %1"
@@ -809,6 +822,14 @@ msgstr "Esci"
 #: src/gui/StelGui.cpp:173
 msgid "Save screenshot"
 msgstr "Salva schermata"
+
+#: src/gui/StelGui.cpp:174
+msgid "Reload style"
+msgstr ""
+
+#: src/gui/StelGui.cpp:174
+msgid "Debug"
+msgstr ""
 
 #: src/gui/StelGui.cpp:176
 msgid "Auto hide horizontal button bar"
@@ -2111,14 +2132,6 @@ msgstr "Fornisce uno strumento per misurare angoli"
 msgid "Angle measure"
 msgstr "Misura angolo"
 
-#. TRANSLATORS: Title of a group of key bindings in the Help window
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:126
-#: plugins/CompassMarks/src/CompassMarks.cpp:124
-#: plugins/Oculars/src/Oculars.cpp:945 plugins/Oculars/src/Oculars.cpp:959
-#: plugins/Satellites/src/Satellites.cpp:130
-msgid "Plugin Key Bindings"
-msgstr "Chiave bloccaggio plugin"
-
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:308
 msgid "The Angle Measure is enabled:"
@@ -2610,11 +2623,11 @@ msgstr "Muovi il telescopio #%1 al punto corrente al centro dello schermo"
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Punta il telescopio date le coordinate"
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:138
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:161
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
 msgstr ""
 
@@ -2705,15 +2718,15 @@ msgid "There are no active devices."
 msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:285
-msgid "&Right Ascension (J2000):"
+msgid "Slew telescope to coordinates"
 msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:286
-msgid "De&clination (J2000):"
+msgid "&Right Ascension (J2000):"
 msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:287
-msgid "Slew telescope to coordinates"
+msgid "De&clination (J2000):"
 msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:289
@@ -3188,10 +3201,6 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
 msgid "mm-dd-yyyy"
 msgstr ""
-
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:78
-msgid "Text User Interface"
-msgstr "Interfaccia utente testuale"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:81
 msgid ""
