@@ -76,6 +76,7 @@ void TelescopeDialog::languageChanged()
 	{
 		ui->retranslateUi(dialog);
 		initAbout();
+		updateWarningTexts();
 	}
 }
 
@@ -240,7 +241,6 @@ void TelescopeDialog::createDialogContent()
 	{
 		ui->telescopeTreeView->setFocus();
 		ui->telescopeTreeView->header()->setResizeMode(ColumnType, QHeaderView::ResizeToContents);
-		ui->labelWarning->setText(LABEL_TEXT_CONTROL_TIP);
 	}
 	else
 	{
@@ -248,11 +248,8 @@ void TelescopeDialog::createDialogContent()
 		ui->pushButtonConfigure->setEnabled(false);
 		ui->pushButtonRemove->setEnabled(false);
 		ui->pushButtonAdd->setFocus();
-		if(telescopeManager->getDeviceModels().isEmpty())
-			ui->labelWarning->setText(LABEL_TEXT_NO_DEVICE_MODELS);
-		else
-			ui->labelWarning->setText(LABEL_TEXT_ADD_TIP);
 	}
+	updateWarningTexts();
 	
 	if(telescopeCount >= SLOT_COUNT)
 		ui->pushButtonAdd->setEnabled(false);
@@ -292,6 +289,36 @@ void TelescopeDialog::initAbout()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 	ui->textBrowserAbout->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+}
+
+void TelescopeDialog::updateWarningTexts()
+{
+	QString text;
+	if (telescopeCount > 0)
+	{
+#ifdef Q_OS_MAC
+		QString modifierName = "Command";
+#else
+		QString modifierName = "Ctrl";
+#endif
+		
+		text = QString(q_("To slew a connected telescope to an object (for example, a star), select that object, then hold down the %1 key and press the key with that telescope's number. To slew it to the center of the current view, hold down the Alt key and press the key with that telescope's number.")).arg(modifierName);
+	}
+	else
+	{
+		if (telescopeManager->getDeviceModels().isEmpty())
+		{
+			// TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
+			text = q_("No device model descriptions are available. Stellarium will not be able to control a telescope on its own, but it is still possible to do it through an external application or to connect to a remote host.");
+		}
+		else
+		{
+			// TRANSLATORS: The translated name of the Add button is automatically inserted.
+			text = QString(q_("Press the \"%1\" button to set up a new telescope connection.")).arg(ui->pushButtonAdd->text());
+		}
+	}
+	
+	ui->labelWarning->setText(text);
 }
 
 void TelescopeDialog::selectTelecope(const QModelIndex & index)
@@ -467,16 +494,12 @@ void TelescopeDialog::buttonRemovePressed()
 		ui->pushButtonChangeStatus->setEnabled(false);
 		ui->pushButtonConfigure->setEnabled(false);
 		ui->pushButtonRemove->setEnabled(false);
-		if(telescopeManager->getDeviceModels().isEmpty())
-			ui->labelWarning->setText(LABEL_TEXT_NO_DEVICE_MODELS);
-		else
-			ui->labelWarning->setText(LABEL_TEXT_ADD_TIP);
 	}
 	else
 	{
-		ui->labelWarning->setText(LABEL_TEXT_CONTROL_TIP);
 		ui->telescopeTreeView->setCurrentIndex(telescopeListModel->index(0,0));
 	}
+	updateWarningTexts();
 }
 
 void TelescopeDialog::saveChanges(QString name, ConnectionType type)
@@ -545,10 +568,6 @@ void TelescopeDialog::saveChanges(QString name, ConnectionType type)
 		ui->pushButtonConfigure->setEnabled(false);
 		ui->pushButtonRemove->setEnabled(false);
 		ui->telescopeTreeView->header()->setResizeMode(ColumnType, QHeaderView::Interactive);
-		if(telescopeManager->getDeviceModels().isEmpty())
-			ui->labelWarning->setText(LABEL_TEXT_NO_DEVICE_MODELS);
-		else
-			ui->labelWarning->setText(LABEL_TEXT_ADD_TIP);
 	}
 	else
 	{
@@ -557,8 +576,8 @@ void TelescopeDialog::saveChanges(QString name, ConnectionType type)
 		ui->pushButtonConfigure->setEnabled(true);
 		ui->pushButtonRemove->setEnabled(true);
 		ui->telescopeTreeView->header()->setResizeMode(ColumnType, QHeaderView::ResizeToContents);
-		ui->labelWarning->setText(LABEL_TEXT_CONTROL_TIP);
 	}
+	updateWarningTexts();
 	
 	configuredTelescopeIsNew = false;
 	configurationDialog.setVisible(false);

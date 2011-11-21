@@ -64,6 +64,7 @@ private:
 	void setStatusButtonToDisconnect();
 	
 	void initAbout();
+	void updateWarningTexts();
 	
 private slots:
 	void buttonChangeStatusPressed(void);
