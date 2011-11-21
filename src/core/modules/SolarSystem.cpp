@@ -150,7 +150,6 @@ void SolarSystem::init()
     QStringList lst =  QStringList(StelFileMgr::findFileInAllPaths("data/shaders/",
           (StelFileMgr::Flags)(StelFileMgr::Directory)));
 	QByteArray vshader = (QString(lst.first()) + "nmap.v.glsl").toLocal8Bit();
-
 	QByteArray fshader = (QString(lst.first()) + "nmap.f.glsl").toLocal8Bit();
 
 	if (!(nMapShader->load(vshader.data(), fshader.data())))
