@@ -234,18 +234,28 @@ void TelescopeDialog::createDialogContent()
 void TelescopeDialog::setAboutText()
 {
 	//TODO: Expand
-	QString htmlPage = "<html><head></head><body>";
-	htmlPage += QString("<h2>%1</h2>").arg(q_("Telescope Control plug-in"));
-	htmlPage += "<h3>" + QString(q_("Version %1")).arg(TELESCOPE_CONTROL_VERSION) + "</h3>";
+	QString aboutPage = "<html><head></head><body>";
+	aboutPage += QString("<h2>%1</h2>").arg(q_("Telescope Control plug-in"));
+	aboutPage += "<h3>" + QString(q_("Version %1")).arg(TELESCOPE_CONTROL_VERSION) + "</h3>";
+	QFile aboutFile(":/telescopeControl/about.utf8");
+	aboutFile.open(QFile::ReadOnly | QFile::Text);
+	aboutPage += aboutFile.readAll();
+	aboutFile.close();
+	aboutPage += "</body></html>";
+	
+	QString helpPage = "<html><head></head><body>";
 	QFile helpFile(":/telescopeControl/help.utf8");
 	helpFile.open(QFile::ReadOnly | QFile::Text);
-	htmlPage += helpFile.readAll();
+	helpPage += helpFile.readAll();
 	helpFile.close();
-	htmlPage += "</body></html>";
-	ui->textBrowserAbout->setHtml(htmlPage);
+	helpPage += "</body></html>";
+	
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 	ui->textBrowserAbout->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	ui->textBrowserHelp->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	ui->textBrowserAbout->setHtml(aboutPage);
+	ui->textBrowserHelp->setHtml(helpPage);
 }
 
 void TelescopeDialog::setHeaderNames()
