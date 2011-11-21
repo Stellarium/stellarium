@@ -78,6 +78,15 @@ void TelescopeDialog::languageChanged()
 		setAboutText();
 		setHeaderNames();
 		updateWarningTexts();
+		
+		//Retranslate type strings
+		for (int i = 0; i < telescopeListModel->rowCount(); i++)
+		{
+			QStandardItem* item = telescopeListModel->item(i, ColumnType);
+			QString original = item->data(Qt::UserRole).toString();
+			QModelIndex index = telescopeListModel->index(i, ColumnType);
+			telescopeListModel->setData(index, q_(original), Qt::DisplayRole);
+		}
 	}
 }
 
@@ -134,9 +143,6 @@ void TelescopeDialog::createDialogContent()
 	ui->telescopeTreeView->header()->setStretchLastSection(true);
 	
 	//Populating the list
-	QStandardItem * tempItem;
-	QModelIndex modelIndex;
-
 	//Cycle the slots
 	for (int slotNumber = MIN_SLOT_NUMBER; slotNumber < SLOT_NUMBER_LIMIT; slotNumber++)
 	{
@@ -161,23 +167,6 @@ void TelescopeDialog::createDialogContent()
 			continue;
 		
 		//Determine the server type
-		QString connectionTypeLabel;
-		switch (connectionType)
-		{
-			case ConnectionInternal:
-				connectionTypeLabel = "local, Stellarium";
-				break;
-			case ConnectionLocal:
-				connectionTypeLabel = "local, external";
-				break;
-			case ConnectionRemote:
-				connectionTypeLabel = "remote, unknown";
-				break;
-			case ConnectionVirtual:
-			default:
-				connectionTypeLabel = "virtual";
-				break;
-		}
 		telescopeType[slotNumber] = connectionType;
 		
 		//Determine the telescope's status
@@ -192,34 +181,7 @@ void TelescopeDialog::createDialogContent()
 			telescopeStatus[slotNumber] = StatusConnecting;
 		}
 		
-		//New column on a new row in the list: Slot number
-		int lastRow = telescopeListModel->rowCount();
-		tempItem = new QStandardItem(QString::number(slotNumber));
-		tempItem->setEditable(false);
-		telescopeListModel->setItem(lastRow, ColumnSlot, tempItem);
-		
-		//TODO: This is not updated, because it was commented out
-		//tempItem = new QStandardItem;
-		//tempItem->setEditable(false);
-		//tempItem->setCheckable(true);
-		//tempItem->setCheckState(Qt::Checked);
-		//tempItem->setData("If checked, this telescope will start when Stellarium is started", Qt::ToolTipRole);
-		//telescopeListModel->setItem(lastRow, ColumnStartup, tempItem);//Start-up checkbox
-		
-		//New column on a new row in the list: Telescope status
-		tempItem = new QStandardItem(q_(statusString[telescopeStatus[slotNumber]]));
-		tempItem->setEditable(false);
-		telescopeListModel->setItem(lastRow, ColumnStatus, tempItem);
-		
-		//New column on a new row in the list: Telescope type
-		tempItem = new QStandardItem(connectionTypeLabel);
-		tempItem->setEditable(false);
-		telescopeListModel->setItem(lastRow, ColumnType, tempItem);
-		
-		//New column on a new row in the list: Telescope name
-		tempItem = new QStandardItem(name);
-		tempItem->setEditable(false);
-		telescopeListModel->setItem(lastRow, ColumnName, tempItem);
+		addModelRow(slotNumber, connectionType, telescopeStatus[slotNumber], name);
 		
 		//After everything is done, count this as loaded
 		telescopeCount++;
@@ -292,7 +254,7 @@ void TelescopeDialog::setHeaderNames()
 	// TRANSLATORS: Symbol for "number"
 	headerStrings << q_("#");
 	//headerStrings << "Start";
-	headerStrings <<  q_("Status");
+	headerStrings << q_("Status");
 	headerStrings << q_("Type");
 	headerStrings << q_("Name");
 	telescopeListModel->setHorizontalHeaderLabels(headerStrings);
@@ -327,6 +289,101 @@ void TelescopeDialog::updateWarningTexts()
 	
 	ui->labelWarning->setText(text);
 }
+
+QString TelescopeDialog::getTypeLabel(ConnectionType type)
+{
+	QString typeLabel;
+	switch (type)
+	{
+		case ConnectionInternal:
+			// TRANSLATORS: Telescope connection type
+			typeLabel = N_("local, Stellarium");
+			break;
+		case ConnectionLocal:
+			// TRANSLATORS: Telescope connection type
+			typeLabel = N_("local, external");
+			break;
+		case ConnectionRemote:
+			// TRANSLATORS: Telescope connection type
+			typeLabel = N_("remote, unknown");
+			break;
+		case ConnectionVirtual:
+			// TRANSLATORS: Telescope connection type
+			typeLabel = N_("virtual");
+			break;
+		default:
+			;
+	}
+	return typeLabel;
+}
+
+void TelescopeDialog::addModelRow(int number,
+                                  ConnectionType type,
+                                  TelescopeStatus status,
+                                  const QString& name)
+{
+	Q_ASSERT(telescopeListModel);
+	
+	QStandardItem* tempItem = 0;
+	int lastRow = telescopeListModel->rowCount();
+	// Number
+	tempItem = new QStandardItem(QString::number(number));
+	tempItem->setEditable(false);
+	telescopeListModel->setItem(lastRow, ColumnSlot, tempItem);
+	
+	// Checkbox
+	//TODO: This is not updated, because it was commented out
+	//tempItem = new QStandardItem;
+	//tempItem->setEditable(false);
+	//tempItem->setCheckable(true);
+	//tempItem->setCheckState(Qt::Checked);
+	//tempItem->setData("If checked, this telescope will start when Stellarium is started", Qt::ToolTipRole);
+	//telescopeListModel->setItem(lastRow, ColumnStartup, tempItem);//Start-up checkbox
+	
+	//Status
+	tempItem = new QStandardItem(q_(statusString[status]));
+	tempItem->setEditable(false);
+	telescopeListModel->setItem(lastRow, ColumnStatus, tempItem);
+	
+	//Type
+	QString typeLabel = getTypeLabel(type);
+	tempItem = new QStandardItem(q_(typeLabel));
+	tempItem->setEditable(false);
+	tempItem->setData(typeLabel, Qt::UserRole);
+	telescopeListModel->setItem(lastRow, ColumnType, tempItem);
+	
+	//Name
+	tempItem = new QStandardItem(name);
+	tempItem->setEditable(false);
+	telescopeListModel->setItem(lastRow, ColumnName, tempItem);
+}
+
+void TelescopeDialog::updateModelRow(int rowNumber,
+                                     ConnectionType type,
+                                     TelescopeStatus status,
+                                     const QString& name)
+{
+	Q_ASSERT(telescopeListModel);
+	if (rowNumber > telescopeListModel->rowCount())
+		return;
+	
+	//The slot number doesn't need to be updated. :)
+	//Status
+	QString statusLabel = q_(statusString[status]);
+	QModelIndex index = telescopeListModel->index(rowNumber, ColumnStatus);
+	telescopeListModel->setData(index, statusLabel, Qt::DisplayRole);
+	
+	//Type
+	QString typeLabel = getTypeLabel(type);
+	index = telescopeListModel->index(rowNumber, ColumnType);
+	telescopeListModel->setData(index, typeLabel, Qt::UserRole);
+	telescopeListModel->setData(index, q_(typeLabel), Qt::DisplayRole);
+	
+	//Name
+	index = telescopeListModel->index(rowNumber, ColumnName);
+	telescopeListModel->setData(index, name, Qt::DisplayRole);
+}
+
 
 void TelescopeDialog::selectTelecope(const QModelIndex & index)
 {
@@ -516,50 +573,37 @@ void TelescopeDialog::saveChanges(QString name, ConnectionType type)
 	
 	//Type and server properties
 	telescopeType[configuredSlot] = type;
-	QString typeString;
 	switch (type)
 	{
 		case ConnectionVirtual:
 			telescopeStatus[configuredSlot] = StatusStopped;
-			typeString = "virtual";
 			break;
 
 		case ConnectionInternal:
 			if(configuredTelescopeIsNew)
 				telescopeStatus[configuredSlot] = StatusStopped;//TODO: Is there a point? Isn't it better to force the status update method?
-			typeString = "local, Stellarium";
 			break;
 
 		case ConnectionLocal:
 			telescopeStatus[configuredSlot] = StatusDisconnected;
-			typeString = "local, external";
 			break;
 
 		case ConnectionRemote:
 		default:
 			telescopeStatus[configuredSlot] = StatusDisconnected;
-			typeString = "remote, unknown";
 	}
 	
 	//Update the model/list
-	QString statusStr = q_(statusString[telescopeStatus[configuredSlot]]);
+	TelescopeStatus status = telescopeStatus[configuredSlot];
 	if(configuredTelescopeIsNew)
 	{
-		QList<QStandardItem *> newRow;
-		newRow << new QStandardItem(QString::number(configuredSlot))
-		       << new QStandardItem(statusStr)
-		       << new QStandardItem(typeString)
-		       << new QStandardItem(name);
-		telescopeListModel->appendRow(newRow);
+		addModelRow(configuredSlot, type, status, name);
 		telescopeCount++;
 	}
 	else
 	{
 		int currentRow = ui->telescopeTreeView->currentIndex().row();
-		//ColumnSlot doesn't need to be updated. :)
-		telescopeListModel->setData(telescopeListModel->index(currentRow, ColumnStatus), statusStr, Qt::DisplayRole);
-		telescopeListModel->setData(telescopeListModel->index(currentRow, ColumnType), typeString, Qt::DisplayRole);
-		telescopeListModel->setData(telescopeListModel->index(currentRow, ColumnName), name, Qt::DisplayRole);
+		updateModelRow(currentRow, type, status, name);
 	}
 	//Sort the updated table by slot number
 	ui->telescopeTreeView->sortByColumn(ColumnSlot, Qt::AscendingOrder);
