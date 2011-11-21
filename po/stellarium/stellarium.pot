@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-21 12:35+0200\n"
+"POT-Creation-Date: 2011-11-21 13:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2579,40 +2579,63 @@ msgstr ""
 msgid "Version %1"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:697
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
+#, qt-format
+msgid ""
+"To slew a connected telescope to an object (for example, a star), select "
+"that object, then hold down the %1 key and press the key with that "
+"telescope's number. To slew it to the center of the current view, hold down "
+"the Alt key and press the key with that telescope's number."
+msgstr ""
+
+#. TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
+msgid ""
+"No device model descriptions are available. Stellarium will not be able to "
+"control a telescope on its own, but it is still possible to do it through an "
+"external application or to connect to a remote host."
+msgstr ""
+
+#. TRANSLATORS: The translated name of the Add button is automatically inserted.
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
+#, qt-format
+msgid "Press the \"%1\" button to set up a new telescope connection."
+msgstr ""
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:683
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:386
 msgid "Start"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:698
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:684
 msgid "Start the selected local telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:703
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:689
 msgid "Stop"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:704
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:690
 msgid "Stop the selected local telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:709
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:695
 msgid "Connect"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:710
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:696
 msgid "Connect to the selected telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:715
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:701
 msgid "Disconnect"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:716
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:702
 msgid "Disconnect from the selected telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:737
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:723
 msgid "Select a directory"
 msgstr ""
 
