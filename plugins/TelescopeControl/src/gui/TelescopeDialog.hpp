@@ -1,7 +1,7 @@
 /*
  * Stellarium Telescope Control Plug-in
  * 
- * Copyright (C) 2009-2010 Bogdan Marinov (this file)
+ * Copyright (C) 2009-2011 Bogdan Marinov (this file)
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -79,9 +79,6 @@ private slots:
 	//! Slot for receiving information from TelescopeConfigurationDialog
 	void discardChanges(void);
 	
-	void toggleReticles(int);
-	void toggleLabels(int);
-	void toggleCircles(int);
 	void selectTelecope(const QModelIndex &);
 	void configureTelescope(const QModelIndex &);
 	
