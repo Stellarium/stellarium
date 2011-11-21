@@ -1,7 +1,7 @@
 /*
  * Stellarium Telescope Control Plug-in
  * 
- * Copyright (C) 2009-2010 Bogdan Marinov (this file)
+ * Copyright (C) 2009-2011 Bogdan Marinov (this file)
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -99,9 +99,12 @@ void TelescopeDialog::createDialogContent()
 	//connect(ui->telescopeTreeView, SIGNAL(activated (const QModelIndex &)), this, SLOT(configureTelescope(const QModelIndex &)));
 	
 	//Page: Options:
-	connect(ui->checkBoxReticles, SIGNAL(stateChanged(int)), this, SLOT(toggleReticles(int)));
-	connect(ui->checkBoxLabels, SIGNAL(stateChanged(int)), this, SLOT(toggleLabels(int)));
-	connect(ui->checkBoxCircles, SIGNAL(stateChanged(int)), this, SLOT(toggleCircles(int)));
+	connect(ui->checkBoxReticles, SIGNAL(clicked(bool)),
+	        telescopeManager, SLOT(setFlagTelescopeReticles(bool)));
+	connect(ui->checkBoxLabels, SIGNAL(clicked(bool)),
+	        telescopeManager, SLOT(setFlagTelescopeLabels(bool)));
+	connect(ui->checkBoxCircles, SIGNAL(clicked(bool)),
+	        telescopeManager, SLOT(setFlagTelescopeCircles(bool)));
 	
 	connect(ui->checkBoxEnableLogs, SIGNAL(toggled(bool)), telescopeManager, SLOT(setFlagUseTelescopeServerLogs(bool)));
 	
@@ -289,42 +292,6 @@ void TelescopeDialog::initAbout()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 	ui->textBrowserAbout->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-}
-
-void TelescopeDialog::toggleReticles(int state)
-{
-	if(state == Qt::Checked)
-	{
-		telescopeManager->setFlagTelescopeReticles(true);
-	}
-	else
-	{
-		telescopeManager->setFlagTelescopeReticles(false);
-	}
-}
-
-void TelescopeDialog::toggleLabels(int state)
-{
-	if(state == Qt::Checked)
-	{
-		telescopeManager->setFlagTelescopeLabels(true);
-	}
-	else
-	{
-		telescopeManager->setFlagTelescopeLabels(false);
-	}
-}
-
-void TelescopeDialog::toggleCircles(int state)
-{
-	if(state == Qt::Checked)
-	{
-		telescopeManager->setFlagTelescopeCircles(true);
-	}
-	else
-	{
-		telescopeManager->setFlagTelescopeCircles(false);
-	}
 }
 
 void TelescopeDialog::selectTelecope(const QModelIndex & index)
