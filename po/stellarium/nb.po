@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-19 22:15+0700\n"
-"PO-Revision-Date: 2011-11-19 14:25+0000\n"
+"PO-Revision-Date: 2011-11-20 21:38+0000\n"
 "Last-Translator: Odin <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-20 05:21+0000\n"
+"X-Launchpad-Export-Date: 2011-11-21 05:20+0000\n"
 "X-Generator: Launchpad (build 14299)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
@@ -337,7 +337,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:712
 msgid "All available star catalogs have been installed."
-msgstr "Alle tilgjengelige stjerners kataloger har blitt installert"
+msgstr "Alle tilgjengelige stjernekataloger er installert."
 
 #: src/gui/ConfigurationDialog.cpp:717
 #, qt-format
@@ -655,7 +655,7 @@ msgstr "Stjerner"
 #: src/gui/StelGui.cpp:121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Planet labels"
-msgstr "Planet etiketter"
+msgstr "Planetnavn"
 
 #: src/gui/StelGui.cpp:122
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
@@ -822,11 +822,11 @@ msgstr "Lagre skjermbilde"
 
 #: src/gui/StelGui.cpp:174
 msgid "Reload style"
-msgstr ""
+msgstr "Laste på nytt"
 
 #: src/gui/StelGui.cpp:174
 msgid "Debug"
-msgstr ""
+msgstr "Feilsøking"
 
 #: src/gui/StelGui.cpp:176
 msgid "Auto hide horizontal button bar"
@@ -1714,7 +1714,7 @@ msgstr "Vis kunst"
 #: src/ui_viewDialog.h:1115
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Art brightness:"
-msgstr "Kunst lysstyrke:"
+msgstr "Lysstyrke på kunst:"
 
 #: src/ui_viewDialog.h:1116
 msgid "Projection"
@@ -2021,7 +2021,7 @@ msgstr "Last ved oppstart"
 
 #: src/ui_configurationDialog.h:867
 msgid "configure"
-msgstr "konfigurer"
+msgstr "still inn"
 
 #: src/ui_configurationDialog.h:872
 msgid "Main"
@@ -2113,8 +2113,8 @@ msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
-"Bruk ca. 0,12 for ypperlige fjelltopper, 0,2 for gode landlige landskap, "
-"0,35 for mørke forhold."
+"Bruk 0.12 for ypperlige fjelltopper, 0.2 for gode landlige landskap, 0.35 "
+"for mørke forhold."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -2131,7 +2131,7 @@ msgstr "Vinkelmål"
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:308
 msgid "The Angle Measure is enabled:"
-msgstr "Vinkel måling er aktivert:"
+msgstr "Vinkelmålingen er aktivert:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:310
@@ -2187,7 +2187,7 @@ msgid ""
 "TLE data"
 msgstr ""
 "Forutsigelse av posisjoner til kunstige satellitter i jordbane basert på "
-"NORADs TLE-data"
+"NORAD's TLE-data"
 
 #: plugins/Satellites/src/Satellites.cpp:132
 msgid "Satellites configuration window"
@@ -2218,7 +2218,7 @@ msgstr "Avstand (km): %1"
 #: plugins/Satellites/src/Satellite.cpp:217
 #, qt-format
 msgid "Range rate (km/s): %1"
-msgstr "Avstands sats (km/s): %1"
+msgstr "Avstandsrate (km/s): %1"
 
 #. TRANSLATORS: Satellite altitude
 #: plugins/Satellites/src/Satellite.cpp:220
@@ -2248,7 +2248,7 @@ msgstr "Satellitten er synlig."
 
 #: plugins/Satellites/src/Satellite.cpp:259
 msgid "The satellite is eclipsed."
-msgstr "Satellitten er i skygge."
+msgstr "Satellitten er overskygget."
 
 #: plugins/Satellites/src/Satellite.cpp:262
 msgid "The satellite is not visible"
@@ -2261,7 +2261,7 @@ msgstr "%1 MHz (%2%3 kHz)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:209
 msgid "Stellarium Satellites Plugin"
-msgstr "Stellarium's Satellitt Programtillegg"
+msgstr "Satellittprogramtillegg for Stellarium"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:210
 msgid "Version"
@@ -2272,8 +2272,8 @@ msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
-"Satellitt programtillegget spår posisjoner for kunstige satellitter i bane "
-"rundt jorden."
+"Satellittprogramtillegget forutser posisjonene til kunstige satellitter i "
+"bane rundt jorden."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:216
 msgid "Notes for users"
@@ -2282,8 +2282,7 @@ msgstr "Merknader til brukere"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:217
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
-msgstr ""
-"Satellittene og deres baner er kun synlig når observatør er på jorden."
+msgstr "Satellittene og deres baner vises kun når observatøren er på jorden."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:218
 msgid ""
@@ -2291,18 +2290,18 @@ msgid ""
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
-"Spådde stillinger er bare gyldige for en relativt kort periode (x antall "
-"dager, uker eller kanskje en måned inn i fortiden og fremtiden). Forvent en "
-"høy feilfrekvens når man ser på datoer utenfor dette intervallet."
+"Posisjonsforutsigelsene er bare til btuk for en relativt kort periode (i "
+"størrelsesorden dager, uker eller kanskje en måned inn i fortiden og "
+"fremtiden). Forvent store avvik når man ser på datoer utenfor dette "
+"tidsområdet."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:219
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
 msgstr ""
-"Jordbane elementene går ut på dato relativt raskt (etter noen uker, og i "
-"enkelte tilfeller etter noen få dager). For å få nyttige data ut, må du "
-"oppdatere TLE data regelmessig."
+"Baneelementene går ut på dato relativt raskt (etter noen uker, noen ganger "
+"dager). For å få nyttige data ut, må du oppdatere TLE-dataene regelmessig."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:221
@@ -2312,23 +2311,22 @@ msgid ""
 "the default %3 file.  The old file will be backed up as %4.  This can be "
 "found in the user data directory, under \"modules/Satellites/\"."
 msgstr ""
-"Hvis du klikker på \"%1\"-knappen i \"%2\"-kategorien i denne dialogen vil  "
-"du gå tilbake til standard %3-fil. Den gamle filen vil bli sikkerhetskopiert "
-"som %4. Denne filen finner du i din bruker data katalog, under "
-"\"modules/Satellittes/\"."
+"Ved å klikke på knappen \"%1\" i fanen \"%2\" i denne dialogen gås det "
+"tilbake til standardfilen %3. Den gamle filen vil bli sikkerhetskopiert som "
+"%4. Denne filen finnes i brukerdata-mappen, under \"modules/Satellittes/\"."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:227
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
-"Satellitt programtillegget er fortsatt under utvikling. Noen funksjoner er "
-"ufullstendige, mangler eller kan inneholde feil (buggy)."
+"Satellittprogramtillegget er fortsatt under utvikling. Noen funksjoner er "
+"ufullstendige, mangler eller kan inneholde feil."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:231
 msgid "TLE data updates"
-msgstr "TLE data oppdateringer"
+msgstr "Oppdateringer for TLE-data"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:232
 msgid ""
@@ -2336,9 +2334,9 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
-"Satellitt programtillegget kan  laste ned TLE data automisk fra Internett "
-"kilder, og programtillegget vil som standard gjøre dette hvis de "
-"eksisterende dataene er mer enn 72 timer gamle "
+"Satellittprogramtillegget kan laste ned TLE-data automatisk fra "
+"internettkilder, og programtillegget vil som standard gjøre dette hvis de "
+"eksisterende dataene er mer enn 72 timer gamle. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:233
 #, qt-format
@@ -2347,9 +2345,9 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
-"Hvis du deaktiverer Internett oppdateringer, kan du oppdatere fra en fil på "
-"datamaskinen din. Denne filen må være i samme format som Celestrak "
-"oppdateringer (se %1 for et eksempel)."
+"Hvis du deaktiverer internettoppdateringer, kan du oppdatere fra en fil på "
+"datamaskinen din. Denne filen må være i samme format som Celestrak-"
+"oppdateringene (se %1 for et eksempel)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:234
 msgid ""
@@ -2369,8 +2367,9 @@ msgid ""
 "At the moment you must manually edit the %1 file to add new satellites to "
 "the database. Making this easier is still on the TODO list..."
 msgstr ""
-"For øyeblikket så må du manuelt redigere %1 filen for  å legge til nye "
-"satellitter i databasen. Å gjøre dette enklere er fortsatt på TODO-listen ..."
+"For øyeblikket må du manuelt redigere %1-filen for å legge til nye "
+"satellitter i databasen. Å gjøre dette enklere er fortsatt på "
+"gjøremålslisten ..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:240
 msgid "Technical notes"
@@ -2381,22 +2380,22 @@ msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
 msgstr ""
-"Posisjonene er beregnet ved hjelp av SGP4 & SDP4 metoder, ved å bruke NORADs "
-"TLE data som informasjon. "
+"Posisjoner er beregnet ved bruk av metodene SGP4 & SDP4, ved å bruke NORAD "
+"TLE-data som inndata. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:242
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
 msgstr ""
-"Koden for jordbane beregningene er skrevet av Jose Luis Canales i henhold "
-"til reviderte Spacetrack Report #3 (inkludert Spacetrack Report #6). "
+"Koden for jordbaneberegningene er skrevet av Jose Luis Canales i henhold til "
+"revidert Spacetrack Report #3 (inkludert Spacetrack Report #6). "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:244
 #, qt-format
 msgid "See %1this document%2 for details."
-msgstr "Se %1 i dette dokumentet %2 for detaljer."
+msgstr "Se %1dette dokumentet%2 for detaljer."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:246
 msgid "Links"
@@ -2407,14 +2406,14 @@ msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
 "plugin\" in the subject when posting."
 msgstr ""
-"Støtte gis via Launchpad nettsted. Pass på å sette \"Satellites plugin\" i "
-"emnefeltet når du sender post."
+"Støtte gis via Launchpad-nettstedet. Pass på å sette \"Satellites plugin\" i "
+"emnefeltet når du poster."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:250
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
-msgstr "Hvis du har noen spørsmål, kan du %1 få svar her %2"
+msgstr "Hvis du har noen spørsmål, kan du %1få svar her%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:252
@@ -2478,11 +2477,11 @@ msgstr "[ny kilde]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 msgid "[all not displayed]"
-msgstr "[alle ikke-synlige]"
+msgstr "[ikke alle vist]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
 msgid "[all displayed]"
-msgstr "[alle viste]"
+msgstr "[alle vist]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:411
 msgid "[all]"
@@ -2490,20 +2489,20 @@ msgstr "[alle]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:467
 msgid "Select TLE Update File"
-msgstr "Velg TLE oppdaterings fil"
+msgstr "Velg TLE-oppdateringsfil"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:598
 #: plugins/Satellites/src/ui_satellitesDialog.h:599
 msgid "Satellites Configuration"
-msgstr "Innstillinger for satellitter"
+msgstr "Satellittinnstillinger"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:601
 msgid "Update TLE lists from Internet sources"
-msgstr "Oppdater satellittenes TLE elementer fra Internett kilder"
+msgstr "Oppdater TLE-lister fra internettkilder"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:602
 msgid "Update from Internet sources"
-msgstr "Oppdater fra Internet kilder"
+msgstr "Oppdater fra internettkilder"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:603
 msgid "Last update:"
@@ -2511,15 +2510,15 @@ msgstr "Siste oppdatering:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:604
 msgid "Update frequency (hours):"
-msgstr "Oppdaterings hyppighet (timer):"
+msgstr "Oppdateringsfrekvens (timer):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:606
 msgid "Labels"
-msgstr "Etiketter"
+msgstr "Påskrifter"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:607
 msgid "Label font size (pixels):"
-msgstr "Skriftstørrelse på etikettene (piksler):"
+msgstr "Skriftstørrelse på påskrift (piksler):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:608
 msgid "Orbit lines"
@@ -2541,7 +2540,7 @@ msgstr "Antall segmenter til bruk for å tegne hver ende av linjen"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:619
 msgid "Fade length:"
-msgstr "Blekne lengde:"
+msgstr "Uttoningslengde:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:624
 #: plugins/Satellites/src/ui_satellitesDialog.h:628
@@ -2566,7 +2565,7 @@ msgstr "Innstillinger"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:634
 msgid "Display the selected satellite(s)"
-msgstr "Vis den valgte satellitten(e)"
+msgstr "Vis valgte satellitt(er)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:636
 msgid "Displayed"
@@ -2574,7 +2573,7 @@ msgstr "Vist"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:638
 msgid "Display orbit line(s) for the selected satellite(s)"
-msgstr "Vis bane linje(r) for den valgte satellitten(e)"
+msgstr "Vis banelinje(r) for valgte satellitt(er)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 msgid "Orbit"
@@ -2598,11 +2597,11 @@ msgstr "Kommaseparert liste av grupper"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:648
 msgid "TLE data:"
-msgstr "TLE data:"
+msgstr "TLE-data:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:650
 msgid "NORAD two line element orbit data"
-msgstr "NORAD to-linjers element bane data"
+msgstr "NORAD - tolinjers elementbanedata"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Save changes"
@@ -2658,11 +2657,11 @@ msgstr "Flytt et teleskop til et gitt sett av koordinater"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
-msgstr "Legg til nytt Teleskop"
+msgstr "Legg til nytt teleskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
-msgstr "Konfigurer Teleskop"
+msgstr "Still inn teleskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
@@ -2690,7 +2689,7 @@ msgstr "Stoppet"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 msgid "Telescope Control plug-in"
-msgstr ""
+msgstr "Programtillegg for teleskopkontroll"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
@@ -2714,7 +2713,7 @@ msgstr "Stopp"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:704
 msgid "Stop the selected local telescope"
-msgstr ""
+msgstr "Stopp det valgte lokale teleskopet"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:709
 msgid "Connect"
@@ -2722,7 +2721,7 @@ msgstr "Koble til"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:710
 msgid "Connect to the selected telescope"
-msgstr ""
+msgstr "Koble til det valgte teleskopet"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:715
 msgid "Disconnect"
@@ -2730,7 +2729,7 @@ msgstr "Koble fra"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:716
 msgid "Disconnect from the selected telescope"
-msgstr ""
+msgstr "Koble fra det valgte teleskopet"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:737
 msgid "Select a directory"
@@ -2740,27 +2739,27 @@ msgstr "Velg en mappe"
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:469
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:382
 msgid "Form"
-msgstr "Format"
+msgstr "Skjema"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:282
 msgid "Slew telescope to"
-msgstr ""
+msgstr "Roter teleskopet til"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:284
 msgid "There are no active devices."
-msgstr ""
+msgstr "Det er ingen aktive enheter."
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:285
 msgid "Slew telescope to coordinates"
-msgstr ""
+msgstr "Roter teleskopet til koordinatene"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:286
 msgid "&Right Ascension (J2000):"
-msgstr ""
+msgstr "&Rektasensjon (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:287
 msgid "De&clination (J2000):"
-msgstr ""
+msgstr "De&klinasjon (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "Hours-minutes-seconds format"
@@ -2780,7 +2779,7 @@ msgstr "&GMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:297
 msgid "Decimal degrees"
-msgstr "Desimal grader"
+msgstr "Desimalgrader"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "D&ecimal"
@@ -2788,55 +2787,59 @@ msgstr "D&esimal"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:300
 msgid "&Slew"
-msgstr ""
+msgstr "&Roter"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Configure &telescopes..."
-msgstr ""
+msgstr "Still inn &teleskoper..."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:470
 msgid "Telescope Configuration"
-msgstr ""
+msgstr "Teleskopinnstillinger"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope controlled by:"
-msgstr ""
+msgstr "Teleskopet kontrollert av:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
+"Et teleskop koblet til denne datamaskinen via en seriell port og "
+"kontrolleres direkte av Stellarium."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
 msgid "Stellarium, directly through a serial port"
-msgstr ""
+msgstr "Stellarium, direkte via en seriell port"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
+"Et teleskop som styres av en ekstern applikasjon, enten på denne "
+"datamaskinen eller på en ekstern maskin."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid "External software or a remote computer"
-msgstr ""
+msgstr "Ekstern programvare eller en ekstern datamaskin"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr ""
+msgstr "Ingenting, bare simulere en (et bevegelig trådkors)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "Telescope properties"
-msgstr ""
+msgstr "Teleskopegenskaper"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Name:"
-msgstr ""
+msgstr "Navn:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Connection delay:"
-msgstr ""
+msgstr "Tilkoblingsforsinkelse:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid ""
@@ -2844,85 +2847,91 @@ msgid ""
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
+"Den omtrentlige tiden det tar for signalene fra teleskopet for å nå "
+"Stellarium.\n"
+"Øk denne verdien hvis trådkorset er fraværende."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "Coordinate system:"
-msgstr ""
+msgstr "Koordinatsystem:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "J2000 (default)"
-msgstr ""
+msgstr "J2000 (standard)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "Equinox of the date (JNow)"
-msgstr ""
+msgstr "Datoens jevndøgn (JNow)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:494
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
+"Automatisk forsøke å starte teleskop eller opprette tilkobling når "
+"Stellarium starter"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
 msgid "Start/connect at startup"
-msgstr ""
+msgstr "Star/koble til ved oppstart"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Device settings"
-msgstr ""
+msgstr "Enhetsinnstillinger"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Serial port:"
-msgstr ""
+msgstr "Seriell port:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Device model:"
-msgstr ""
+msgstr "Enhetsmodell:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Connection settings"
-msgstr ""
+msgstr "Tilkoblingsinnstillinger"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Host:"
-msgstr ""
+msgstr "Vert:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:503
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr ""
+"Vertsnavn eller IPv4-adresse til maskinen som er vert for teleskop-serveren"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:505
 msgid "localhost"
-msgstr ""
+msgstr "lokalvert"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "TCP port:"
-msgstr ""
+msgstr "TCP-port:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "User interface settings"
-msgstr ""
+msgstr "Innstillinger for brukergrensesnitt"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
 msgid "Show circles with fixed angular size around the telescope reticle"
-msgstr ""
+msgstr "Vis sirkler med fast vinkelstørrelse rundt teleskop-trådkorset"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:511
 msgid "Use field of view indicators"
-msgstr ""
+msgstr "Bruk synsfeltindikatorer"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:512
 msgid "Circle size(s):"
-msgstr ""
+msgstr "Sirkelstørrelse(r):"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:514
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
-msgstr ""
+msgstr "Opptil ti desimalverdier i buegrader, adskilt med komma"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "OK"
@@ -2931,63 +2940,63 @@ msgstr "OK"
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:383
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Telescopes"
-msgstr ""
+msgstr "Teleskoper"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:385
 msgid "Telescopes Controlled"
-msgstr ""
+msgstr "Kontrollerte Teleskoper"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:388
 msgid "Configure the selected telescope"
-msgstr ""
+msgstr "Still inn valgte teleskop"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:390
 msgid "Configure"
-msgstr ""
+msgstr "Still inn"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 msgid "Add a new telescope"
-msgstr ""
+msgstr "Legg til et nytt teleskop"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:394
 msgid "Add"
-msgstr ""
+msgstr "Legg til"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 msgid "Remove the selected telescope"
-msgstr ""
+msgstr "Fjern valgte teleskop"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:400
 msgid "GUI"
-msgstr ""
+msgstr "Grafisk brukerflate"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Show telescope labels"
-msgstr ""
+msgstr "Vis teleskoppåskrifter"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:402
 msgid "Show telescope reticles"
-msgstr ""
+msgstr "Vis teleskop-trådkors"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Show field of view indicators"
-msgstr ""
+msgstr "Vis synsfeltindikatorer"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
 msgid "Files"
-msgstr ""
+msgstr "Filer"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Log telescope driver messages to files"
-msgstr ""
+msgstr "Logg drivermeldinger for teleskop til filer"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:406
 msgid "Use telescope server executables (override built-in drivers)"
-msgstr ""
+msgstr "Bruk programfiler for teleskopserver (overstyrer innebygde drivere)"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Executables directory:"
-msgstr ""
+msgstr "Mappe for programfiler:"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -3005,162 +3014,162 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 msgid "January"
-msgstr ""
+msgstr "Januar"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 msgid "February"
-msgstr ""
+msgstr "Februar"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 msgid "March"
-msgstr ""
+msgstr "Mars"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 msgid "April"
-msgstr ""
+msgstr "April"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 msgid "May"
-msgstr ""
+msgstr "Mai"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 msgid "June"
-msgstr ""
+msgstr "Juni"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 msgid "July"
-msgstr ""
+msgstr "Juli"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 msgid "August"
-msgstr ""
+msgstr "August"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 msgid "September"
-msgstr ""
+msgstr "September"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 msgid "October"
-msgstr ""
+msgstr "Oktober"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 msgid "November"
-msgstr ""
+msgstr "November"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 msgid "December"
-msgstr ""
+msgstr "Desember"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:265
 msgid "First week"
-msgstr ""
+msgstr "Første uke"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:266
 msgid "Second week"
-msgstr ""
+msgstr "Andre uke"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:267
 msgid "Third week"
-msgstr ""
+msgstr "Tredje uke"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:268
 msgid "Fourth week"
-msgstr ""
+msgstr "Fjerde uke"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:269
 msgid "Last week"
-msgstr ""
+msgstr "Forrige uke"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:278
 msgid "Sunday"
-msgstr ""
+msgstr "Søndag"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:279
 msgid "Monday"
-msgstr ""
+msgstr "Mandag"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:280
 msgid "Tuesday"
-msgstr ""
+msgstr "Tirsdag"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:281
 msgid "Wednesday"
-msgstr ""
+msgstr "Onsdag"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:282
 msgid "Thursday"
-msgstr ""
+msgstr "Torsdag"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:283
 msgid "Friday"
-msgstr ""
+msgstr "Fredag"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:284
 msgid "Saturday"
-msgstr ""
+msgstr "Lørdag"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
-msgstr ""
+msgstr "Programtillegg for tidssone"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:449
 msgid "Define a time zone"
-msgstr ""
+msgstr "Definer en tidssone"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
 msgid "Time zone"
-msgstr ""
+msgstr "Tidssone"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:452
 msgid "Timezone name:"
-msgstr ""
+msgstr "Navn på tidssone:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "Offset from UTC (hours):"
-msgstr ""
+msgstr "Tidsavvik fra UTC (timer):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 msgid "Daylight saving time (summer time)"
-msgstr ""
+msgstr "Sommertid"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
 msgid "DST timezone name:"
-msgstr ""
+msgstr "Tidssonenavn for sommertid:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
 msgid "DST offset from UTC (hours):"
-msgstr ""
+msgstr "Sommertidsavvik fra UTC (timer):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
 msgid "Daylight saving time start"
-msgstr ""
+msgstr "Sommertidsstart"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
 msgid "Day:"
-msgstr ""
+msgstr "Dag:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
 msgid "Time of change:"
-msgstr ""
+msgstr "Endringstid:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
 msgid "Date:"
-msgstr ""
+msgstr "Dato :"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
 msgid "Daylight saving time end"
-msgstr ""
+msgstr "Sommertidsslutt"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:465
 msgid "Use this definition"
-msgstr ""
+msgstr "Bruk denne definisjonen"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
 msgid ""
@@ -3169,71 +3178,76 @@ msgid ""
 "This behaviour can be changed by changing Stellarium's global time zone "
 "settings."
 msgstr ""
+"Som standard, er tiden vist i Stellarium tolket som den lokale tiden i "
+"systemets tidssone, ikke i det viste stedets tidssone. Denne atferden kan "
+"endres ved å endre Stellariums globale tidssoneinnstillinger."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "Use system settings (default)"
-msgstr ""
+msgstr "Bruk systeminnstillinger (standard)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
 msgid "Universal Coordinated Time (UTC)"
-msgstr ""
+msgstr "Universell tid (UTC)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "(offset = local time - UTC time)"
-msgstr ""
+msgstr "(avvik = lokal tid - UTC tid)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
 msgid "User-defined:"
-msgstr ""
+msgstr "Brukerdefinert:"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
 msgid "Any changes will take effect the next time Stellarium is started."
 msgstr ""
+"Eventuelle endringer vil tre i kraft neste gang Stellarium er startet."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:407
 msgid "Display formats"
-msgstr ""
+msgstr "Visningsformater"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
+"Disse innstillingene styrer hvordan klokkeslett og dato vises i bunnlinjen."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "Time display format"
-msgstr ""
+msgstr "Tidsvisningsformat"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
 msgid "System default"
-msgstr ""
+msgstr "Systemstandard"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "12-hour format"
-msgstr ""
+msgstr "12-timers format"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
 msgid "24-hour format"
-msgstr ""
+msgstr "24-timers format"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Date display format"
-msgstr ""
+msgstr "Datovisningsformat"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
 msgid "yyyy-mm-dd (ISO 8601)"
-msgstr ""
+msgstr "åååå-mm-dd (ISO 8601)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 msgid "dd-mm-yyyy"
-msgstr ""
+msgstr "dd-mm-åååå"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
 msgid "mm-dd-yyyy"
-msgstr ""
+msgstr "mm-dd-åååå"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:81
 msgid ""
@@ -3245,59 +3259,59 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 msgid "Solar System body"
-msgstr ""
+msgstr "Solsystemlegeme"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:158
 msgid "Current date/time"
-msgstr ""
+msgstr "Gjeldende dato/klokkeslett"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:163
 msgid "Set time zone"
-msgstr ""
+msgstr "Still inn tidssone"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:164
 msgid "Day keys"
-msgstr ""
+msgstr "Dagtaster"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:165
 msgid "Startup date/time preset"
-msgstr ""
+msgstr "Forhåndsinnstilt dato/klokkeslett for oppstart"
 
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "system"
-msgstr ""
+msgstr "system"
 
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:174
 msgid "preset"
-msgstr ""
+msgstr "forhåndsinnstilt"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "mmddyyyy"
-msgstr ""
+msgstr "mmddåååå"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "ddmmyyyy"
-msgstr ""
+msgstr "ddmmåååå"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "yyyymmdd"
-msgstr ""
+msgstr "ååååmmdd"
 
 #. TRANSLATORS: 12-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "12h"
-msgstr ""
+msgstr "12t"
 
 #. TRANSLATORS: 24-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:193
 msgid "24h"
-msgstr ""
+msgstr "24t"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:209
 msgid "General"
-msgstr ""
+msgstr "Generelt"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:218
 msgid "Language"
@@ -3305,96 +3319,96 @@ msgstr "Språk"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:232
 msgid "Show stars"
-msgstr ""
+msgstr "Vis stjerner"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Colors"
-msgstr ""
+msgstr "Farger"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Nebula names"
-msgstr ""
+msgstr "Stjernetåkenavn"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:340
 msgid "Nebula hints"
-msgstr ""
+msgstr "Stjernetåke-hint"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:364
 msgid "Effects"
-msgstr ""
+msgstr "Effekter"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:378
 msgid "Manual zoom"
-msgstr ""
+msgstr "Manuell skalering"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:383
 msgid "Magnitude scaling multiplier"
-msgstr ""
+msgstr "Magnitude - skaleringsmultiplikator"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:385
 msgid "Milky Way intensity:"
-msgstr ""
+msgstr "Melkevei-intensitet:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:391
 msgid "Nebula label frequency:"
-msgstr ""
+msgstr "Påskriftfrekvens for tåker:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Zoom duration:"
-msgstr ""
+msgstr "Skalerings varighet:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Cursor timeout:"
-msgstr ""
+msgstr "Tidsavbrudd for markør:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Setting landscape sets location"
-msgstr ""
+msgstr "Still inn plassering for landskapssett"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:419
 msgid "Run local script"
-msgstr ""
+msgstr "Kjør lokalt skript"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:425
 msgid "Stop running script"
-msgstr ""
+msgstr "Stopp kjørende skript"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:428
 msgid "CD/DVD script"
-msgstr ""
+msgstr "CD/DVD-skript"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:435
 msgid "Administration"
-msgstr ""
+msgstr "Administrering"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:439
 msgid "Load default configuration"
-msgstr ""
+msgstr "Last standardinnstillinger"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Save current configuration"
-msgstr ""
+msgstr "Lagre gjeldende innstillinger"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:443
 msgid "Shut down"
-msgstr ""
+msgstr "Slå av"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 msgid "[no TUI node]"
-msgstr ""
+msgstr "[ingen TUI node]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
 msgid "On"
-msgstr ""
+msgstr "På"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
 msgid "Off"
-msgstr ""
+msgstr "Av"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr ""
+msgstr "feil, ukjent farge del \"%1\""
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
@@ -3414,17 +3428,19 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
 #, qt-format
 msgid "Query the MPC's %1:"
-msgstr ""
+msgstr "Søk i MPC %1:"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
 msgid "Only one result will be returned if the query is successful."
-msgstr ""
+msgstr "Bare ett resultat vil bli returnert hvis søket er vellykket."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
 msgstr ""
+"Både kometer og asteroider kan identifiseres med deres nummer, navn (på "
+"engelsk) eller provisorisk betegnelse."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
 #, qt-format
@@ -3434,11 +3450,15 @@ msgid ""
 "searching for \"%3\" will return %4, Halley's Comet, but a search for \"%5\" "
 "will return the asteroid %6."
 msgstr ""
+"Det må settes prefiks på <i>kometnavn</i> med %1 eller %2. Hvis mer enn en "
+"komet passer til et navn, vil bare det første resultatet returneres. F.eks., "
+"søking etter \"%3\" vil returnere %4, Halleys komet, men et søk etter \"%5\" "
+"vil returnere asteroiden %6."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:87
 msgid "website"
-msgstr ""
+msgstr "nettsted"
 
 #. TRANSLATORS: IAU = International Astronomical Union
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:91
@@ -3449,71 +3469,75 @@ msgid ""
 "objects, download such lists from the Internet or search the online Minor "
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
+"Du kan importere komet- og asteroidedata formatert i eksportformatene til "
+"IAUs Minor Planet Center (%1). Du kan importere filer med objektlister, "
+"laste ned slike lister fra internett eller søke i nettbaserte Minor Planet "
+"and Comet Ephemeris Service (MPES)."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
 msgid "Solar System Editor plug-in"
-msgstr ""
+msgstr "Programtillegg for solsystemredigering"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
-msgstr ""
+msgstr "Velg type"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Asteroids"
-msgstr ""
+msgstr "Asteroider"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Comets"
-msgstr ""
+msgstr "Kometer"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Select the source"
-msgstr ""
+msgstr "Velg kilden"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Download a list of objects from the Internet"
-msgstr ""
+msgstr "Last ned en objektliste fra internett"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Select a source from the list:"
-msgstr ""
+msgstr "Velg en kilde fra listen:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Or enter a URL:"
-msgstr ""
+msgstr "Eller oppfør en nettadresse:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Add this URL to the bookmarks list"
-msgstr ""
+msgstr "Legg til denne nettadresse i bokmerkelisten"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Bookmark title:"
-msgstr ""
+msgstr "Bokmerketittel:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "A file containing a list of objects"
-msgstr ""
+msgstr "En fil inneholdende en objektliste"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Get orbital elements"
-msgstr ""
+msgstr "Hent baneelementer"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Abort download"
-msgstr ""
+msgstr "Avbryt nedlasting"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Lists"
-msgstr ""
+msgstr "Lister"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "Online search"
-msgstr ""
+msgstr "Nettbasert søk"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Objects found"
-msgstr ""
+msgstr "Objekter funnet"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid ""
@@ -3523,43 +3547,48 @@ msgid ""
 "Solar System configuration.<br/>Note that adding a large number of objects "
 "may cause Stellarium to run slowly."
 msgstr ""
+"Marker objektene du ønsker importert. I <i>kursiv</i> er det listet navn som "
+"passer til navnene på allerede lastede objekter. I <b>fet</b> skrift er det "
+"listet navn som passer til navnene på objekter arvet fra Stellariums "
+"standard solsysteminnstilling.<br/>Merk at å legge til et stort antall "
+"objekter kan medføre at Stellarium kjører tregt."
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Overwrite existing objects"
-msgstr ""
+msgstr "Overskriv eksisterende objekter"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
 msgid "Update existing objects"
-msgstr ""
+msgstr "Oppdater eksisterende objekter"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid "Update only the orbital elements"
-msgstr ""
+msgstr "Oppdater bare baneelementer"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid "Mark all"
-msgstr ""
+msgstr "Merk alle"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Mark none"
-msgstr ""
+msgstr "Fjern markeringer"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Discard"
-msgstr ""
+msgstr "Forkast"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid "Add objects"
-msgstr ""
+msgstr "Legg til objekter"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Solar System objects"
-msgstr ""
+msgstr "Solsystemobjekter"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Warning"
-msgstr ""
+msgstr "Advarsel"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid ""
@@ -3567,49 +3596,56 @@ msgid ""
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
 msgstr ""
+"Dette programtillegget bruker en egendefinert solsystem-innstillingsfil. "
+"Hvis noe går galt og Stellarium krasjer og/eller ikke starter, kan du "
+"manuelt slette denne filen fra:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
+"Du kan også tilbakestille alle endringer og returnere til "
+"standardinnstillingen:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Reset to defaults"
-msgstr ""
+msgstr "Sett tilbake til standardinnstillinger"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Copy/replace the Solar System file"
-msgstr ""
+msgstr "Kopier/erstatt solsystemfilen"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
+"Du kan opprette en sikkerhetskopi av den egendefinerte solsystem-"
+"innstillingsfilen på et passende sted, eller erstatte den med en slik kopi."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Copy the Solar System file..."
-msgstr ""
+msgstr "Kopier solsystemfilen..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Replace the Solar System file..."
-msgstr ""
+msgstr "Erstatt solsystemfilen..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Configuration file"
-msgstr ""
+msgstr "Innstillingsfil"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Add new Solar System objects"
-msgstr ""
+msgstr "Legg til nye solsystemobjekter"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
 msgid "Import orbital elements in MPC format..."
-msgstr "Importer bane elementer i MPC format..."
+msgstr "Importer baneelementer i MPC-format..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
 msgid "Solar System"
-msgstr "Solsystemet"
+msgstr "Solsystem"
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical Supernovae"
