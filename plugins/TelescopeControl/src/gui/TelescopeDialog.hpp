@@ -63,7 +63,8 @@ private:
 	void setStatusButtonToConnect();
 	void setStatusButtonToDisconnect();
 	
-	void initAbout();
+	void setAboutText();
+	void setHeaderNames();
 	void updateWarningTexts();
 	
 private slots:
