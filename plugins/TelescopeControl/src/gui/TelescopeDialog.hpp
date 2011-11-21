@@ -55,6 +55,16 @@ protected:
 	Ui_telescopeDialogForm* ui;
 	
 private:
+	enum TelescopeStatus {
+		StatusNA = 0,
+		StatusStarting,
+		StatusConnecting,
+		StatusConnected,
+		StatusDisconnected,
+		StatusStopped,
+		StatusCount
+	};
+	
 	//! Update the text and the tooltip of the ChangeStatus button
 	void updateStatusButtonForSlot(int slot);
 	
@@ -66,6 +76,10 @@ private:
 	void setAboutText();
 	void setHeaderNames();
 	void updateWarningTexts();
+	
+	QString getTypeLabel(ConnectionType type);
+	void addModelRow(int slotNumber, ConnectionType type, TelescopeStatus status, const QString& name);
+	void updateModelRow(int rowNumber, ConnectionType type, TelescopeStatus status, const QString& name);
 	
 private slots:
 	void buttonChangeStatusPressed(void);
@@ -88,16 +102,6 @@ private slots:
 	void updateTelescopeStates(void);
 
 private:
-	enum TelescopeStatus {
-		StatusNA = 0,
-		StatusStarting,
-		StatusConnecting,
-		StatusConnected,
-		StatusDisconnected,
-		StatusStopped,
-		StatusCount
-	};
-	
 	//! @enum ModelColumns This enum defines the number and the order of the columns in the table that lists active telescopes
 	enum ModelColumns {
 		ColumnSlot = 0,		//!< slot number column
@@ -115,7 +119,7 @@ private:
 	
 	TelescopeControl * telescopeManager;
 	
-	int telescopeStatus[SLOT_NUMBER_LIMIT];
+	TelescopeStatus telescopeStatus[SLOT_NUMBER_LIMIT];
 	ConnectionType telescopeType[SLOT_NUMBER_LIMIT];
 	
 	int telescopeCount;
