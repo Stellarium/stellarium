@@ -75,7 +75,8 @@ void TelescopeDialog::languageChanged()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
-		initAbout();
+		setAboutText();
+		setHeaderNames();
 		updateWarningTexts();
 	}
 }
@@ -125,13 +126,7 @@ void TelescopeDialog::createDialogContent()
 	
 	//Initializing the list of telescopes
 	telescopeListModel->setColumnCount(ColumnCount);
-	QStringList headerStrings;
-	headerStrings << "#";
-	//headerStrings << "Start";
-	headerStrings <<  "Status";
-	headerStrings << "Type";
-	headerStrings << "Name";
-	telescopeListModel->setHorizontalHeaderLabels(headerStrings);
+	setHeaderNames();
 	
 	ui->telescopeTreeView->setModel(telescopeListModel);
 	ui->telescopeTreeView->header()->setMovable(false);
@@ -265,7 +260,7 @@ void TelescopeDialog::createDialogContent()
 	ui->lineEditExecutablesDirectory->setText(telescopeManager->getServerExecutablesDirectoryPath());
 	
 	//About page
-	initAbout();
+	setAboutText();
 	
 	//Everything must be initialized by now, start the updateTimer
 	//TODO: Find if it's possible to run it only when the dialog is visible
@@ -274,7 +269,7 @@ void TelescopeDialog::createDialogContent()
 	updateTimer->start(200);
 }
 
-void TelescopeDialog::initAbout()
+void TelescopeDialog::setAboutText()
 {
 	//TODO: Expand
 	QString htmlPage = "<html><head></head><body>";
@@ -289,6 +284,18 @@ void TelescopeDialog::initAbout()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 	ui->textBrowserAbout->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+}
+
+void TelescopeDialog::setHeaderNames()
+{
+	QStringList headerStrings;
+	// TRANSLATORS: Symbol for "number"
+	headerStrings << q_("#");
+	//headerStrings << "Start";
+	headerStrings <<  q_("Status");
+	headerStrings << q_("Type");
+	headerStrings << q_("Name");
+	telescopeListModel->setHorizontalHeaderLabels(headerStrings);
 }
 
 void TelescopeDialog::updateWarningTexts()
