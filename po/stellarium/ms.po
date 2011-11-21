@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-19 22:15+0700\n"
-"PO-Revision-Date: 2011-10-14 20:42+0000\n"
+"PO-Revision-Date: 2011-11-20 10:01+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-20 05:21+0000\n"
+"X-Launchpad-Export-Date: 2011-11-21 05:20+0000\n"
 "X-Generator: Launchpad (build 14299)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -334,7 +334,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:712
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "Semua katalog bintang yang tersedia telah dipasang."
 
 #: src/gui/ConfigurationDialog.cpp:717
 #, qt-format
@@ -654,7 +654,7 @@ msgstr "Bintang"
 #: src/gui/StelGui.cpp:121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Planet labels"
-msgstr ""
+msgstr "Label planet"
 
 #: src/gui/StelGui.cpp:122
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
@@ -821,11 +821,11 @@ msgstr "Simpan cekupan skrin"
 
 #: src/gui/StelGui.cpp:174
 msgid "Reload style"
-msgstr ""
+msgstr "Muat semula gaya"
 
 #: src/gui/StelGui.cpp:174
 msgid "Debug"
-msgstr ""
+msgstr "Nyahpepijat"
 
 #: src/gui/StelGui.cpp:176
 msgid "Auto hide horizontal button bar"
@@ -1635,7 +1635,7 @@ msgstr "Papar atmsofera"
 #: src/ui_viewDialog.h:1084
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Light pollution:"
-msgstr ""
+msgstr "Pencemaran cahaya:"
 
 #: src/ui_viewDialog.h:1086
 msgid "pressure, temperature, extinction coefficient"
@@ -1709,7 +1709,7 @@ msgstr "Papar seni"
 #: src/ui_viewDialog.h:1115
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Art brightness:"
-msgstr ""
+msgstr "Kecerahan seni:"
 
 #: src/ui_viewDialog.h:1116
 msgid "Projection"
@@ -2127,17 +2127,17 @@ msgstr "Ukuran sudut"
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:308
 msgid "The Angle Measure is enabled:"
-msgstr ""
+msgstr "Ukuran sudut dibenarkan:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:310
 msgid "Drag with the left button to measure, left-click to clear."
-msgstr ""
+msgstr "Seret dengan butang kiri untuk mengukur, klik-kanan untuk kosongkan."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:312
 msgid "Right-clicking changes the end point only."
-msgstr ""
+msgstr "Klik-kanan hanya mengubah titik akhir."
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
@@ -2161,6 +2161,9 @@ msgid ""
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
+"Papar langit sebagaimana dilihat melalui kanta teleskop. (Hannya pembesaran "
+"dan medan paparan disimulasikan). Ia boleh paparkan bingkai penderia dan "
+"pandangan Telrad."
 
 #: plugins/Oculars/src/Oculars.cpp:957
 msgid "Ocular view"
@@ -2204,39 +2207,39 @@ msgstr "Fail satelit.json lama tidak lagi serasi - menggunakan fail lalai"
 #: plugins/Satellites/src/Satellite.cpp:214
 #, qt-format
 msgid "Range (km): %1"
-msgstr ""
+msgstr "Julat (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
 #: plugins/Satellites/src/Satellite.cpp:217
 #, qt-format
 msgid "Range rate (km/s): %1"
-msgstr ""
+msgstr "Kadar julat (km/s): %1"
 
 #. TRANSLATORS: Satellite altitude
 #: plugins/Satellites/src/Satellite.cpp:220
 #, qt-format
 msgid "Altitude (km): %1"
-msgstr ""
+msgstr "Altitud (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:237
 #, qt-format
 msgid "TEME coordinates (km): %1"
-msgstr ""
+msgstr "Koordinat EME (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:245
 #, qt-format
 msgid "TEME velocity (km/s): %1"
-msgstr ""
+msgstr "Kelajuan TEME (km/s): %1"
 
 #: plugins/Satellites/src/Satellite.cpp:253
 msgid "The satellite and the observer are in sunlight."
-msgstr ""
+msgstr "Satelit dan pemerhati dalam sinaran matahari."
 
 #: plugins/Satellites/src/Satellite.cpp:256
 msgid "The satellite is visible."
-msgstr ""
+msgstr "Satelit kelihatan."
 
 #: plugins/Satellites/src/Satellite.cpp:259
 msgid "The satellite is eclipsed."
@@ -2244,35 +2247,36 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:262
 msgid "The satellite is not visible"
-msgstr ""
+msgstr "Satelit tidak kelihatan"
 
 #: plugins/Satellites/src/Satellite.cpp:288
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
-msgstr ""
+msgstr "%1 MHz (%2%3 kHz)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:209
 msgid "Stellarium Satellites Plugin"
-msgstr ""
+msgstr "Pemalam Satelit Stellarium"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:210
 msgid "Version"
-msgstr ""
+msgstr "Versi"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:214
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
+"Pemalam Satelit meramal kedudukan satelit buatan manusia dalam orbit Bumi."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:216
 msgid "Notes for users"
-msgstr ""
+msgstr "Nota untuk pengguna"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:217
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
-msgstr ""
+msgstr "Satelit dan orbitnya hanya dipaparkan bila pemerhati berada di Bumi."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:218
 msgid ""
@@ -2280,6 +2284,9 @@ msgid ""
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
+"Kedudukan yang diramal hanya untuk masa yang singkat (mengikut tertib hari, "
+"minggu atau mungkin bulan pada masa lepas atau masa akan datang). Jangkakan "
+"perkara pelik berlaku bila melihat tarikh diluar julat ini."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:219
 msgid ""
@@ -2301,11 +2308,13 @@ msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
+"Pemalam Satelit masih lagi dialam pembangunan. Beberapa fitur masuk belum "
+"lengkap, hilang atau mengandungi pepijat."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:231
 msgid "TLE data updates"
-msgstr ""
+msgstr "Kemaskini data TLE"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:232
 msgid ""
@@ -2330,7 +2339,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:237
 msgid "Adding new satellites"
-msgstr ""
+msgstr "Menambah satelit baru"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:238
 #, qt-format
@@ -2338,16 +2347,20 @@ msgid ""
 "At the moment you must manually edit the %1 file to add new satellites to "
 "the database. Making this easier is still on the TODO list..."
 msgstr ""
+"Buat masa ini, anda mesti sunting fail %1 secara manual untuk tambah satelit "
+"baru ke pengkalan data."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:240
 msgid "Technical notes"
-msgstr ""
+msgstr "Nota teknikal"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:241
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
 msgstr ""
+"Kedudukan dikira menggunakan kaedah SGP4 & SDP4, menggunakan data TLE NORAD "
+"sebagai input. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:242
 msgid ""
@@ -2363,7 +2376,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:246
 msgid "Links"
-msgstr ""
+msgstr "Pautan"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:247
 msgid ""
@@ -2397,110 +2410,110 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:269
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
 msgid "Updating now..."
-msgstr ""
+msgstr "Mengemaskini sekarang..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:271
 msgid "Next update: < 1 minute"
-msgstr ""
+msgstr "Kemaskini Berikutnya: < 1 minit"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:273
 #, qt-format
 msgid "Next update: %1 minutes"
-msgstr ""
+msgstr "Kemaskini Berikutnya: %1 minit"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:275
 #, qt-format
 msgid "Next update: %1 hours"
-msgstr ""
+msgstr "Kemaskini Berikutnya: %1 jam"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
 #: plugins/Satellites/src/ui_satellitesDialog.h:605
 msgid "Update now"
-msgstr ""
+msgstr "Kemaskini sekarang"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:292
 msgid "Update from files"
-msgstr ""
+msgstr "Kemaskini dari fail"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:304
 msgid "Update error"
-msgstr ""
+msgstr "Ralat kemaskini"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:311
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
-msgstr ""
+msgstr "Kemaskini %1/%2 satelit; %3 hilang"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:368
 msgid "[new source]"
-msgstr ""
+msgstr "[sumber baru]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 msgid "[all not displayed]"
-msgstr ""
+msgstr "[semua tidak dipaparkan]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
 msgid "[all displayed]"
-msgstr ""
+msgstr "[semua dipaparkan]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:411
 msgid "[all]"
-msgstr ""
+msgstr "[semua]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:467
 msgid "Select TLE Update File"
-msgstr ""
+msgstr "Pilih Fail Kemaskini TLE"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:598
 #: plugins/Satellites/src/ui_satellitesDialog.h:599
 msgid "Satellites Configuration"
-msgstr ""
+msgstr "Konfigurasi Satelit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:601
 msgid "Update TLE lists from Internet sources"
-msgstr ""
+msgstr "Kemaskini senarai TLE dari sumber Internet"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:602
 msgid "Update from Internet sources"
-msgstr ""
+msgstr "Kemaskini dari sumber Internet"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:603
 msgid "Last update:"
-msgstr ""
+msgstr "Terakhir dikemaskini:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:604
 msgid "Update frequency (hours):"
-msgstr ""
+msgstr "Kekerapan kemaskini (jam):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:606
 msgid "Labels"
-msgstr ""
+msgstr "Label"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:607
 msgid "Label font size (pixels):"
-msgstr ""
+msgstr "Saiz fon label (piksel):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:608
 msgid "Orbit lines"
-msgstr ""
+msgstr "Garis orbit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:610
 #: plugins/Satellites/src/ui_satellitesDialog.h:614
 msgid "Number of segments used to draw the line"
-msgstr ""
+msgstr "Bilangan segmen digunakan untuk melukis garisan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:612
 msgid "# segments:"
-msgstr ""
+msgstr "# segmen:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:617
 #: plugins/Satellites/src/ui_satellitesDialog.h:621
 msgid "Number of segments used to draw each end of the line"
-msgstr ""
+msgstr "Bilangan segmen yang digunakan untuk lukis setiap hujung garisan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:619
 msgid "Fade length:"
-msgstr ""
+msgstr "Panjang lenyap:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:624
 #: plugins/Satellites/src/ui_satellitesDialog.h:628
@@ -2509,55 +2522,55 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:626
 msgid "Length (s):"
-msgstr ""
+msgstr "Panjang\""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:630
 msgid "Restore default settings"
-msgstr ""
+msgstr "Pulih tetapan lalai"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:631
 msgid "Save settings as default"
-msgstr ""
+msgstr "Simpan tetapan  sebagai lalai"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:632
 msgid "Settings"
-msgstr ""
+msgstr "Tetapan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:634
 msgid "Display the selected satellite(s)"
-msgstr ""
+msgstr "Papar satelit pilihan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:636
 msgid "Displayed"
-msgstr ""
+msgstr "Dipaparkan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:638
 msgid "Display orbit line(s) for the selected satellite(s)"
-msgstr ""
+msgstr "Papar garis orbit untuk satelit pilihan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 msgid "Orbit"
-msgstr ""
+msgstr "Orbit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
 msgid "Satellite ID:"
-msgstr ""
+msgstr "ID Satelit:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:643
 msgid "Description:"
-msgstr ""
+msgstr "Keterangan:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:644
 msgid "Groups:"
-msgstr ""
+msgstr "Kupulan:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:646
 msgid "Comma separated list of groups"
-msgstr ""
+msgstr "Tanda komas pisahkan senarai kumpulan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:648
 msgid "TLE data:"
-msgstr ""
+msgstr "Data TLE:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:650
 msgid "NORAD two line element orbit data"
@@ -2565,7 +2578,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Save changes"
-msgstr ""
+msgstr "Simpan perubahan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:659
 msgid ""
@@ -2575,7 +2588,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Add new source"
-msgstr ""
+msgstr "Tambah sumber baru"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:666
 msgid "Remove selected source"
@@ -2583,7 +2596,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:669
 msgid "Sources"
-msgstr ""
+msgstr "Sumber"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:150
@@ -2616,83 +2629,83 @@ msgstr "Alih teleskop ke kedudukan koordinat yang diberikan"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
-msgstr ""
+msgstr "Tambah Teleskop Baru"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
-msgstr ""
+msgstr "Konfigur Teleskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
-msgstr ""
+msgstr "T/A"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
 msgid "Starting"
-msgstr ""
+msgstr "Memulakan"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:58
 msgid "Connecting"
-msgstr ""
+msgstr "Menyambung"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:59
 msgid "Connected"
-msgstr ""
+msgstr "Bersambung"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:60
 msgid "Disconnected"
-msgstr ""
+msgstr "Terputus"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:61
 msgid "Stopped"
-msgstr ""
+msgstr "Dihentikan"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 msgid "Telescope Control plug-in"
-msgstr ""
+msgstr "Pemalam Kawalan Teleskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "Versi %1"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:697
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:386
 msgid "Start"
-msgstr ""
+msgstr "Mula"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:698
 msgid "Start the selected local telescope"
-msgstr ""
+msgstr "Mula teleskop setempat pilihan"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:703
 msgid "Stop"
-msgstr ""
+msgstr "Henti"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:704
 msgid "Stop the selected local telescope"
-msgstr ""
+msgstr "Hentikan teleskop setempat pilihan"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:709
 msgid "Connect"
-msgstr ""
+msgstr "Sambung"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:710
 msgid "Connect to the selected telescope"
-msgstr ""
+msgstr "Sambung ke teleskop pilihan"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:715
 msgid "Disconnect"
-msgstr ""
+msgstr "Putus"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:716
 msgid "Disconnect from the selected telescope"
-msgstr ""
+msgstr "Putuskan dari teleskop pilihan"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:737
 msgid "Select a directory"
-msgstr ""
+msgstr "Pilih direktori"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:281
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:469
@@ -2702,15 +2715,15 @@ msgstr "Bentuk"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:282
 msgid "Slew telescope to"
-msgstr ""
+msgstr "Pusing teleskop ke"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:284
 msgid "There are no active devices."
-msgstr ""
+msgstr "Tiada peranti aktif"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:285
 msgid "Slew telescope to coordinates"
-msgstr ""
+msgstr "Pusing teleskop ke koordinat"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:286
 msgid "&Right Ascension (J2000):"
@@ -2738,27 +2751,27 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:297
 msgid "Decimal degrees"
-msgstr ""
+msgstr "Darjah desimal"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "D&ecimal"
-msgstr ""
+msgstr "D&esimal"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:300
 msgid "&Slew"
-msgstr ""
+msgstr "&Pusing"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Configure &telescopes..."
-msgstr ""
+msgstr "Konfigur &teleskop..."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:470
 msgid "Telescope Configuration"
-msgstr ""
+msgstr "Konfigurasi Teleskop"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope controlled by:"
-msgstr ""
+msgstr "Teleskop dikawal oleh:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid ""
@@ -2768,7 +2781,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
 msgid "Stellarium, directly through a serial port"
-msgstr ""
+msgstr "Stellarium, terus melalui port serial"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
 msgid ""
@@ -2778,7 +2791,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid "External software or a remote computer"
-msgstr ""
+msgstr "Perisian luaran atau komputer jauh"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
 msgid "Nothing, just simulate one (a moving reticle)"
@@ -2786,15 +2799,15 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "Telescope properties"
-msgstr ""
+msgstr "Ciri teleskop"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Name:"
-msgstr ""
+msgstr "Nama:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Connection delay:"
-msgstr ""
+msgstr "Lengahan sambungan:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid ""
@@ -2805,15 +2818,15 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "Coordinate system:"
-msgstr ""
+msgstr "Sistem koordinat:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "J2000 (default)"
-msgstr ""
+msgstr "J2000 (lalai)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "Equinox of the date (JNow)"
@@ -2827,19 +2840,19 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
 msgid "Start/connect at startup"
-msgstr ""
+msgstr "Mula/sambung pada permulaan"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Device settings"
-msgstr ""
+msgstr "Tetapan peranti"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Serial port:"
-msgstr ""
+msgstr "Port serial:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Device model:"
-msgstr ""
+msgstr "Model peranti:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Connection settings"
@@ -2847,24 +2860,25 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Host:"
-msgstr ""
+msgstr "Hos:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:503
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr ""
+"Nama hos atau alamat IPv4 bagi mesin yang menjadi hos pelayan teleskop"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:505
 msgid "localhost"
-msgstr ""
+msgstr "localhost"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "TCP port:"
-msgstr ""
+msgstr "Port TCP:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "User interface settings"
-msgstr ""
+msgstr "Tetapan antaramuka pengguna"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
 msgid "Show circles with fixed angular size around the telescope reticle"
@@ -2872,11 +2886,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:511
 msgid "Use field of view indicators"
-msgstr ""
+msgstr "Guna medan penunjuk paparan"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:512
 msgid "Circle size(s):"
-msgstr ""
+msgstr "Saiz bulatan:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:514
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
@@ -2884,68 +2898,68 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:383
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Telescopes"
-msgstr ""
+msgstr "Teleskop"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:385
 msgid "Telescopes Controlled"
-msgstr ""
+msgstr "Teleskop Dikawal"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:388
 msgid "Configure the selected telescope"
-msgstr ""
+msgstr "Konfigur teleskop pilihan"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:390
 msgid "Configure"
-msgstr ""
+msgstr "Konfigur"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 msgid "Add a new telescope"
-msgstr ""
+msgstr "Tambah teleskop baru"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:394
 msgid "Add"
-msgstr ""
+msgstr "Tambah"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 msgid "Remove the selected telescope"
-msgstr ""
+msgstr "Buang teleskop pilihan"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:400
 msgid "GUI"
-msgstr ""
+msgstr "GUI"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Show telescope labels"
-msgstr ""
+msgstr "Papar label teleskop"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:402
 msgid "Show telescope reticles"
-msgstr ""
+msgstr "Papar retikul teleskop"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Show field of view indicators"
-msgstr ""
+msgstr "Papar medan bagi penunjuk paparan"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
 msgid "Files"
-msgstr ""
+msgstr "Fail"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Log telescope driver messages to files"
-msgstr ""
+msgstr "Log mesej pemacu teleskop ke fail"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:406
 msgid "Use telescope server executables (override built-in drivers)"
-msgstr ""
+msgstr "Guna boleh laku pelayan teleskop (batalkan pemacu terbina-dalam)"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Executables directory:"
-msgstr ""
+msgstr "Direktori boleh laku:"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -2963,123 +2977,123 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 msgid "January"
-msgstr ""
+msgstr "Januari"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 msgid "February"
-msgstr ""
+msgstr "Februari"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 msgid "March"
-msgstr ""
+msgstr "Mac"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 msgid "April"
-msgstr ""
+msgstr "April"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 msgid "May"
-msgstr ""
+msgstr "Mei"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 msgid "June"
-msgstr ""
+msgstr "Jun"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 msgid "July"
-msgstr ""
+msgstr "Julai"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 msgid "August"
-msgstr ""
+msgstr "Ogos"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 msgid "September"
-msgstr ""
+msgstr "September"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 msgid "October"
-msgstr ""
+msgstr "Oktober"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 msgid "November"
-msgstr ""
+msgstr "November"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 msgid "December"
-msgstr ""
+msgstr "Disember"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:265
 msgid "First week"
-msgstr ""
+msgstr "Minggu pertama"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:266
 msgid "Second week"
-msgstr ""
+msgstr "Minggu kedua"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:267
 msgid "Third week"
-msgstr ""
+msgstr "Minggu ketiga"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:268
 msgid "Fourth week"
-msgstr ""
+msgstr "Minggu keempat"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:269
 msgid "Last week"
-msgstr ""
+msgstr "Minggu terakhir"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:278
 msgid "Sunday"
-msgstr ""
+msgstr "Ahad"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:279
 msgid "Monday"
-msgstr ""
+msgstr "Isnin"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:280
 msgid "Tuesday"
-msgstr ""
+msgstr "Selasa"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:281
 msgid "Wednesday"
-msgstr ""
+msgstr "Rabu"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:282
 msgid "Thursday"
-msgstr ""
+msgstr "Khamis"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:283
 msgid "Friday"
-msgstr ""
+msgstr "Jumaat"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:284
 msgid "Saturday"
-msgstr ""
+msgstr "Sabtu"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
-msgstr ""
+msgstr "Pemalam Zon Waktu"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:449
 msgid "Define a time zone"
-msgstr ""
+msgstr "Takrif zon waktu"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
 msgid "Time zone"
-msgstr ""
+msgstr "Zon waktu"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:452
 msgid "Timezone name:"
-msgstr ""
+msgstr "Nama zon waktu:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "Offset from UTC (hours):"
-msgstr ""
+msgstr "Ofset dari UTC (jam):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 msgid "Daylight saving time (summer time)"
@@ -3087,11 +3101,11 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
 msgid "DST timezone name:"
-msgstr ""
+msgstr "Nama zon waktu DST:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
 msgid "DST offset from UTC (hours):"
-msgstr ""
+msgstr "Ofset DST dari UTC (jam):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
 msgid "Daylight saving time start"
@@ -3100,17 +3114,17 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
 msgid "Day:"
-msgstr ""
+msgstr "Hari:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
 msgid "Time of change:"
-msgstr ""
+msgstr "Perubahan masa:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
 msgid "Date:"
-msgstr ""
+msgstr "Tarikh:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
 msgid "Daylight saving time end"
@@ -3118,7 +3132,7 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:465
 msgid "Use this definition"
-msgstr ""
+msgstr "Guna takrifan ini"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
 msgid ""
@@ -3130,7 +3144,7 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "Use system settings (default)"
-msgstr ""
+msgstr "Guna tetapan sistem (lalai)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
 msgid "Universal Coordinated Time (UTC)"
@@ -3138,43 +3152,45 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "(offset = local time - UTC time)"
-msgstr ""
+msgstr "(ofset = masa setempat - masa UTC)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
 msgid "User-defined:"
-msgstr ""
+msgstr "Ditakrif-pengguna:"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
 msgid "Any changes will take effect the next time Stellarium is started."
 msgstr ""
+"Sebarang perubahan akan berkesan bila Stellarium dimulakan lain masa."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:407
 msgid "Display formats"
-msgstr ""
+msgstr "Format paparan"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
+"Tetapan ini mengawal cara masa dan tarikh dipaparkan pada palang bawah."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "Time display format"
-msgstr ""
+msgstr "Format paparan masa"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
 msgid "System default"
-msgstr ""
+msgstr "Lalai sistem"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "12-hour format"
-msgstr ""
+msgstr "Format 12-jam"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
 msgid "24-hour format"
-msgstr ""
+msgstr "Format 24-jam"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
@@ -3183,15 +3199,15 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
 msgid "yyyy-mm-dd (ISO 8601)"
-msgstr ""
+msgstr "tttt-bb-hh(ISO 8601)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 msgid "dd-mm-yyyy"
-msgstr ""
+msgstr "hh-bb-tttt"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
 msgid "mm-dd-yyyy"
-msgstr ""
+msgstr "bb-hh-tttt"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:81
 msgid ""
@@ -3203,107 +3219,107 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 msgid "Solar System body"
-msgstr ""
+msgstr "Jasad Sistem Matahari"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:158
 msgid "Current date/time"
-msgstr ""
+msgstr "Tarikh/masa semasa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:163
 msgid "Set time zone"
-msgstr ""
+msgstr "Tetapkan zon waktu"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:164
 msgid "Day keys"
-msgstr ""
+msgstr "Kunci hari"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:165
 msgid "Startup date/time preset"
-msgstr ""
+msgstr "Praset masa/tarikh permulaan"
 
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "system"
-msgstr ""
+msgstr "sistem"
 
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:174
 msgid "preset"
-msgstr ""
+msgstr "praset"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "mmddyyyy"
-msgstr ""
+msgstr "bbhhtttt"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "ddmmyyyy"
-msgstr ""
+msgstr "hhbbtttt"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "yyyymmdd"
-msgstr ""
+msgstr "ttttbbhh"
 
 #. TRANSLATORS: 12-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "12h"
-msgstr ""
+msgstr "12j"
 
 #. TRANSLATORS: 24-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:193
 msgid "24h"
-msgstr ""
+msgstr "24j"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:209
 msgid "General"
-msgstr ""
+msgstr "Am"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:218
 msgid "Language"
-msgstr ""
+msgstr "Bahasa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:232
 msgid "Show stars"
-msgstr ""
+msgstr "Papar bintang"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Colors"
-msgstr ""
+msgstr "Warna"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Nebula names"
-msgstr ""
+msgstr "Nama Nebula"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:340
 msgid "Nebula hints"
-msgstr ""
+msgstr "Pembayang Nebula"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:364
 msgid "Effects"
-msgstr ""
+msgstr "Kesan"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:378
 msgid "Manual zoom"
-msgstr ""
+msgstr "Zum manual"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:383
 msgid "Magnitude scaling multiplier"
-msgstr ""
+msgstr "Pendarab penskalaan magnitud"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:385
 msgid "Milky Way intensity:"
-msgstr ""
+msgstr "Keamatan Bima Sakti:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:391
 msgid "Nebula label frequency:"
-msgstr ""
+msgstr "Kekerapan label Nebula:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Zoom duration:"
-msgstr ""
+msgstr "Tempoh zum:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Cursor timeout:"
-msgstr ""
+msgstr "Had masa tamat kursor:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Setting landscape sets location"
@@ -3311,48 +3327,48 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:419
 msgid "Run local script"
-msgstr ""
+msgstr "Jalankan skrip setempat"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:425
 msgid "Stop running script"
-msgstr ""
+msgstr "Henti menjalankan skrip"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:428
 msgid "CD/DVD script"
-msgstr ""
+msgstr "Skrip CD/DVD"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:435
 msgid "Administration"
-msgstr ""
+msgstr "Pentadbiran"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:439
 msgid "Load default configuration"
-msgstr ""
+msgstr "muat konfigurasi lalai"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Save current configuration"
-msgstr ""
+msgstr "Simpan konfigurasi semasa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:443
 msgid "Shut down"
-msgstr ""
+msgstr "Matikan"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 msgid "[no TUI node]"
-msgstr ""
+msgstr "[tiada nod TUI]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
 msgid "On"
-msgstr ""
+msgstr "Dihidupkan"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
 msgid "Off"
-msgstr ""
+msgstr "Dimatikan"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr ""
+msgstr "ralat, bahagian warna \"%1\" tidak diketahui"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
@@ -3373,7 +3389,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
 #, qt-format
 msgid "Query the MPC's %1:"
-msgstr ""
+msgstr "Tanya MPC %1:"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
 msgid "Only one result will be returned if the query is successful."
@@ -3397,7 +3413,7 @@ msgstr ""
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:87
 msgid "website"
-msgstr ""
+msgstr "laman sesawang"
 
 #. TRANSLATORS: IAU = International Astronomical Union
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:91
@@ -3411,68 +3427,68 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
 msgid "Solar System Editor plug-in"
-msgstr ""
+msgstr "Pemalam Penyunting Sistem Suria"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
-msgstr ""
+msgstr "pilih jenis"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Asteroids"
-msgstr ""
+msgstr "Asteroid"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Comets"
-msgstr ""
+msgstr "Komet"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Select the source"
-msgstr ""
+msgstr "Pilih sumber"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Download a list of objects from the Internet"
-msgstr ""
+msgstr "Muat turun senarau objek dari Internet"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Select a source from the list:"
-msgstr ""
+msgstr "Pilih sumber dari senarai:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Or enter a URL:"
-msgstr ""
+msgstr "Atau masukkan URL:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Add this URL to the bookmarks list"
-msgstr ""
+msgstr "Tambah URL ini ke senarai tanda buku"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Bookmark title:"
-msgstr ""
+msgstr "Tajuk tanda buku:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "A file containing a list of objects"
-msgstr ""
+msgstr "Fail mengandungi senarai objek"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Get orbital elements"
-msgstr ""
+msgstr "Dapatkan unsur orbital"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Abort download"
-msgstr ""
+msgstr "Henti paksa muat turun"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Lists"
-msgstr ""
+msgstr "Senarai"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "Online search"
-msgstr ""
+msgstr "Gelintar atas talian"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Objects found"
-msgstr ""
+msgstr "Objek ditemui"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid ""
@@ -3485,40 +3501,40 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Overwrite existing objects"
-msgstr ""
+msgstr "Tulis-ganti objek sedia ada"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
 msgid "Update existing objects"
-msgstr ""
+msgstr "Kemaskini objek sedia ada"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid "Update only the orbital elements"
-msgstr ""
+msgstr "Hanya kemaskini unsur objek"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid "Mark all"
-msgstr ""
+msgstr "Tanda semua"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Mark none"
-msgstr ""
+msgstr "Jangan tanda"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Discard"
-msgstr ""
+msgstr "Singkir"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid "Add objects"
-msgstr ""
+msgstr "Tambah objek"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Solar System objects"
-msgstr ""
+msgstr "Objek Sistem Suria"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Warning"
-msgstr ""
+msgstr "Amaran"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid ""
@@ -3534,11 +3550,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Reset to defaults"
-msgstr ""
+msgstr "Tetap semula ke lalai"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Copy/replace the Solar System file"
-msgstr ""
+msgstr "Salin/ganti fail Sistem Suria"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid ""
@@ -3548,31 +3564,31 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Copy the Solar System file..."
-msgstr ""
+msgstr "Salin fail Sistem Suria..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Replace the Solar System file..."
-msgstr ""
+msgstr "Ganti fail Sistem Suria"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Configuration file"
-msgstr ""
+msgstr "Fail kongfigurasi"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Add new Solar System objects"
-msgstr ""
+msgstr "Tambah objek Sistem Suria baru"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
 msgid "Import orbital elements in MPC format..."
-msgstr ""
+msgstr "Import unsur orbital dalam format MPC..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
 msgid "Solar System"
-msgstr ""
+msgstr "Sistem Suria"
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical Supernovae"
-msgstr ""
+msgstr "Supernova Bersejarah"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
@@ -3583,6 +3599,12 @@ msgid ""
 "1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
 "(13 September)."
 msgstr ""
+"Pemalam yang paparkan beberapa supernova bersejarah yang lebih cerah "
+"daripada magnitud visual 10: SN 185A (7 Disember), SN 386A (24 April), SN "
+"1006A (29 April), SN 1054A (3 Julai), SN 1181A (4 Ogos), SN 1572A (5 "
+"November), SN 1604A (8 Oktober), SN 1680A (15 Ogos), SN 1885A (17 Ogos), SN "
+"1895B (5 Julai), SN 1937C (21 Ogos), SN 1972E (8 Mei), SN 1987A (24 "
+"Februari) and SN 2011FE (13 September)."
 
 #: plugins/Supernovae/src/Supernova.cpp:106
 #, qt-format
