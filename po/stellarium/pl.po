@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-19 22:15+0700\n"
-"PO-Revision-Date: 2011-11-20 01:33+0000\n"
+"POT-Creation-Date: 2011-11-21 14:44+0200\n"
+"PO-Revision-Date: 2011-11-22 01:06+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-21 05:20+0000\n"
+"X-Launchpad-Export-Date: 2011-11-22 04:57+0000\n"
 "X-Generator: Launchpad (build 14299)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -828,23 +828,15 @@ msgstr "Zakończ"
 msgid "Save screenshot"
 msgstr "Zapisz zrzut ekranu"
 
-#: src/gui/StelGui.cpp:174
-msgid "Reload style"
-msgstr "Ponownie załaduj styl"
-
-#: src/gui/StelGui.cpp:174
-msgid "Debug"
-msgstr ""
-
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:180
 msgid "Auto hide horizontal button bar"
 msgstr "Automatyczne ukrywanie poziomego paska przycisków"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:181
 msgid "Auto hide vertical button bar"
 msgstr "Automatyczne ukrywanie pionowego paska przycisków"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:182
 msgid "Toggle visibility of GUI"
 msgstr "Przełączanie wyświetlania graficznego interfejsu użytkownika"
 
@@ -2703,51 +2695,114 @@ msgstr "Rozłączone"
 msgid "Stopped"
 msgstr "Zatrzymane"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
 msgstr "Wtyczka Sterowanie teleskopem"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 #, qt-format
 msgid "Version %1"
 msgstr "Wersja %1"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:697
+#. TRANSLATORS: Symbol for "number"
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:255
+msgid "#"
+msgstr "nr"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
+msgid "Status"
+msgstr ""
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
+msgid "Type"
+msgstr "Typ"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
+msgid "Name"
+msgstr "Nazwa"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
+#, qt-format
+msgid ""
+"To slew a connected telescope to an object (for example, a star), select "
+"that object, then hold down the %1 key and press the key with that "
+"telescope's number. To slew it to the center of the current view, hold down "
+"the Alt key and press the key with that telescope's number."
+msgstr ""
+
+#. TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
+msgid ""
+"No device model descriptions are available. Stellarium will not be able to "
+"control a telescope on its own, but it is still possible to do it through an "
+"external application or to connect to a remote host."
+msgstr ""
+"Opisy modeli urządzeń są niedostępne. Program Stellarium nie będzie w stanie "
+"samodzielnie sterować teleskopem, jest jednak możliwe sterowanie przez "
+"zewnętrzną aplikację lub połączenie z odległym hostem."
+
+#. TRANSLATORS: The translated name of the Add button is automatically inserted.
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
+#, qt-format
+msgid "Press the \"%1\" button to set up a new telescope connection."
+msgstr ""
+
+#. TRANSLATORS: Telescope connection type
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
+msgid "local, Stellarium"
+msgstr "lokalne, Stellarium"
+
+#. TRANSLATORS: Telescope connection type
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
+msgid "local, external"
+msgstr "lokalne, zewnętrzne"
+
+#. TRANSLATORS: Telescope connection type
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
+msgid "remote, unknown"
+msgstr "odległe, nieznane"
+
+#. TRANSLATORS: Telescope connection type
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
+msgid "virtual"
+msgstr "wirtualne"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:734
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:386
 msgid "Start"
 msgstr "Start"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:698
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:735
 msgid "Start the selected local telescope"
 msgstr "Uruchom wybrany teleskop lokalny"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:703
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:740
 msgid "Stop"
 msgstr "Stop"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:704
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:741
 msgid "Stop the selected local telescope"
 msgstr "Zatrzymaj wybrany teleskop lokalny"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:709
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:746
 msgid "Connect"
 msgstr "Połącz"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:710
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:747
 msgid "Connect to the selected telescope"
 msgstr "Połącz z wybranym teleskopem"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:715
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:752
 msgid "Disconnect"
 msgstr "Rozłącz"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:716
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:753
 msgid "Disconnect from the selected telescope"
 msgstr "Rozłącz wybrany teleskop"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:737
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:774
 msgid "Select a directory"
 msgstr "Wybierz katalog"
 
@@ -3451,7 +3506,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
 msgid "Only one result will be returned if the query is successful."
-msgstr ""
+msgstr "W odpowiedzi na zapytanie zostanie zwrócony najwyżej jeden wynik."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
 msgid ""

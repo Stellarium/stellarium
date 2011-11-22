@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-19 22:15+0700\n"
-"PO-Revision-Date: 2011-11-20 12:49+0000\n"
+"POT-Creation-Date: 2011-11-21 14:44+0200\n"
+"PO-Revision-Date: 2011-11-21 16:32+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-21 05:20+0000\n"
+"X-Launchpad-Export-Date: 2011-11-22 04:58+0000\n"
 "X-Generator: Launchpad (build 14299)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -823,23 +823,15 @@ msgstr "Sair"
 msgid "Save screenshot"
 msgstr "Salvar captura de tela"
 
-#: src/gui/StelGui.cpp:174
-msgid "Reload style"
-msgstr "Recarregar estilo"
-
-#: src/gui/StelGui.cpp:174
-msgid "Debug"
-msgstr "Depuração"
-
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:180
 msgid "Auto hide horizontal button bar"
 msgstr "Auto-ocultar a barra de botões horizontal"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:181
 msgid "Auto hide vertical button bar"
 msgstr "Auto-ocultar a barra de botões vertical"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:182
 msgid "Toggle visibility of GUI"
 msgstr "Alternar a visibilidade da interface gráfica do usuário"
 
@@ -2707,51 +2699,121 @@ msgstr "Desconectado"
 msgid "Stopped"
 msgstr "Parado"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
 msgstr "Pluguim de controle de telescópio"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 #, qt-format
 msgid "Version %1"
 msgstr "Versão %1"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:697
+#. TRANSLATORS: Symbol for "number"
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:255
+msgid "#"
+msgstr "n.º"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
+msgid "Status"
+msgstr "Estátus"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
+msgid "Type"
+msgstr "Tipo"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
+msgid "Name"
+msgstr "Nome"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
+#, qt-format
+msgid ""
+"To slew a connected telescope to an object (for example, a star), select "
+"that object, then hold down the %1 key and press the key with that "
+"telescope's number. To slew it to the center of the current view, hold down "
+"the Alt key and press the key with that telescope's number."
+msgstr ""
+"Para mover um telescópio conectado para um objeto (por exemplo, uma "
+"estrela), selecione o objeto, mantenha pressionada a tecla %1 e pressione a "
+"tecla com o número do telescópio. Para movê-lo para o centro da visão "
+"corrente, mantenha pressionada a tecla Alt e pressione a tecla com o número "
+"do telescópio."
+
+#. TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
+msgid ""
+"No device model descriptions are available. Stellarium will not be able to "
+"control a telescope on its own, but it is still possible to do it through an "
+"external application or to connect to a remote host."
+msgstr ""
+"Não está disponível nenhuma descrição do modelo do dispositivo. O Stellarium "
+"não será capaz de controlar um telescópio por si só, mas ainda é possível "
+"fazer isso mediante um aplicativo externo ou conectando-se a um hospedeiro "
+"remoto."
+
+#. TRANSLATORS: The translated name of the Add button is automatically inserted.
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
+#, qt-format
+msgid "Press the \"%1\" button to set up a new telescope connection."
+msgstr ""
+"Pressione o botão “%1” para configurar uma nova conexão de telescópio."
+
+#. TRANSLATORS: Telescope connection type
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
+msgid "local, Stellarium"
+msgstr "local, Stellarium"
+
+#. TRANSLATORS: Telescope connection type
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
+msgid "local, external"
+msgstr "local, externa"
+
+#. TRANSLATORS: Telescope connection type
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
+msgid "remote, unknown"
+msgstr "remota, desconhecida"
+
+#. TRANSLATORS: Telescope connection type
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
+msgid "virtual"
+msgstr "virtual"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:734
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:386
 msgid "Start"
 msgstr "Iniciar"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:698
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:735
 msgid "Start the selected local telescope"
 msgstr "Iniciar o telescópio local selecionado"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:703
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:740
 msgid "Stop"
 msgstr "Parar"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:704
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:741
 msgid "Stop the selected local telescope"
 msgstr "Parar o telescópio local selecionado"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:709
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:746
 msgid "Connect"
 msgstr "Conectar"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:710
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:747
 msgid "Connect to the selected telescope"
 msgstr "Conectar ao telescópio selecionado"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:715
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:752
 msgid "Disconnect"
 msgstr "Desconectar"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:716
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:753
 msgid "Disconnect from the selected telescope"
 msgstr "Desconectar do telescópio selecionado"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:737
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:774
 msgid "Select a directory"
 msgstr "Selecione um diretório"
 

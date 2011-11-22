@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-19 22:15+0700\n"
-"PO-Revision-Date: 2011-11-21 04:24+0000\n"
+"POT-Creation-Date: 2011-11-21 14:44+0200\n"
+"PO-Revision-Date: 2011-11-22 02:18+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-21 05:20+0000\n"
+"X-Launchpad-Export-Date: 2011-11-22 04:58+0000\n"
 "X-Generator: Launchpad (build 14299)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -817,23 +817,15 @@ msgstr "ออก"
 msgid "Save screenshot"
 msgstr "บันทึกภาพหน้าจอ"
 
-#: src/gui/StelGui.cpp:174
-msgid "Reload style"
-msgstr ""
-
-#: src/gui/StelGui.cpp:174
-msgid "Debug"
-msgstr ""
-
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:180
 msgid "Auto hide horizontal button bar"
 msgstr "ซ่อนแถบแนวนอนโดยอัตโนมัติ"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:181
 msgid "Auto hide vertical button bar"
 msgstr "ซ่อนแถบแนวตั้งโดยอัตโนมัติ"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:182
 msgid "Toggle visibility of GUI"
 msgstr "สลับการแสดงส่วนต่อประสานกราฟิกกับผู้ใช้"
 
@@ -2215,13 +2207,13 @@ msgstr "ระดับความสูง (กม.): %1"
 #: plugins/Satellites/src/Satellite.cpp:237
 #, qt-format
 msgid "TEME coordinates (km): %1"
-msgstr ""
+msgstr "พิกัด TEME (กม.): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:245
 #, qt-format
 msgid "TEME velocity (km/s): %1"
-msgstr ""
+msgstr "ความเร็ว TEME (กม./วินาที): %1"
 
 #: plugins/Satellites/src/Satellite.cpp:253
 msgid "The satellite and the observer are in sunlight."
@@ -2246,7 +2238,7 @@ msgstr "%1 MHz (%2%3 kHz)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:209
 msgid "Stellarium Satellites Plugin"
-msgstr ""
+msgstr "โปรแกรมเสริมดาวเทียม"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:210
 msgid "Version"
@@ -2256,7 +2248,7 @@ msgstr "รุ่น"
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
-msgstr ""
+msgstr "โปรแกรมเสริมดาวเทียมใช้พยากรณ์ตำแหน่งของดาวเทียมในวงโคจรรอบโลก"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:216
 msgid "Notes for users"
@@ -2378,13 +2370,13 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:250
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
-msgstr ""
+msgstr "หากมีคำถาม คุณสามารถ%1ถามได้ที่นี่%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:252
 #, qt-format
 msgid "Bug reports can be made %1here%2."
-msgstr ""
+msgstr "รายงานข้อผิดพลาดได้%1ที่นี่%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
@@ -2392,10 +2384,12 @@ msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr ""
+"หากต้องการให้โปรแกรมมีความสามารถอื่น ๆ เพิ่มเติม "
+"คุณสามารถร้องขอโดยสร้างรายงานข้อผิดพลาด แล้วตั้งค่าเป็น \"wishlist\""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:267
 msgid "Internet updates disabled"
-msgstr ""
+msgstr "การอัปเดตจากอินเทอร์เน็ตถูกปิดการใช้งาน"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:269
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
@@ -2423,45 +2417,45 @@ msgstr "อัปเดตเดี๋ยวนี้"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:292
 msgid "Update from files"
-msgstr ""
+msgstr "อัปเดตจากแฟ้มข้อมูล"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:304
 msgid "Update error"
-msgstr ""
+msgstr "มีข้อผิดพลาดในการอัปเดต"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:311
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
-msgstr ""
+msgstr "อัปเดตดาวเทียม %1/%2 ดวง; ไม่พบ %3 ดวง"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:368
 msgid "[new source]"
-msgstr ""
+msgstr "[แหล่งข้อมูลใหม่]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 msgid "[all not displayed]"
-msgstr ""
+msgstr "[ไม่ได้แสดงข้อมูลทั้งหมด]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
 msgid "[all displayed]"
-msgstr ""
+msgstr "[แสดงข้อมูลทั้งหมด]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:411
 msgid "[all]"
-msgstr ""
+msgstr "[ทั้งหมด]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:467
 msgid "Select TLE Update File"
-msgstr ""
+msgstr "เลือกแฟ้มข้อมูล TLE ที่จะอัปเดต"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:598
 #: plugins/Satellites/src/ui_satellitesDialog.h:599
 msgid "Satellites Configuration"
-msgstr ""
+msgstr "การตั้งค่าดาวเทียม"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:601
 msgid "Update TLE lists from Internet sources"
-msgstr ""
+msgstr "อัปเดตรายชื่อ TLE จากแหล่งข้อมูลบนอินเทอร์เน็ต"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:602
 msgid "Update from Internet sources"
@@ -2490,11 +2484,11 @@ msgstr "เส้นวงโคจร"
 #: plugins/Satellites/src/ui_satellitesDialog.h:610
 #: plugins/Satellites/src/ui_satellitesDialog.h:614
 msgid "Number of segments used to draw the line"
-msgstr ""
+msgstr "จำนวนของเซกเมนต์ที่จะใช้ในการวาดเส้น"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:612
 msgid "# segments:"
-msgstr ""
+msgstr "# เซกเมนต์:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:617
 #: plugins/Satellites/src/ui_satellitesDialog.h:621
@@ -2649,51 +2643,115 @@ msgstr "ตัดการเชื่อมต่อแล้ว"
 msgid "Stopped"
 msgstr "หยุด"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
 msgstr "โปรแกรมเสริมควบคุมกล้องโทรทรรศน์"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 #, qt-format
 msgid "Version %1"
 msgstr "รุ่น %1"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:697
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:386
-msgid "Start"
+#. TRANSLATORS: Symbol for "number"
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:255
+msgid "#"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:698
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
+msgid "Status"
+msgstr ""
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
+msgid "Type"
+msgstr "ชนิด"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
+msgid "Name"
+msgstr "ชื่อ"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
+#, qt-format
+msgid ""
+"To slew a connected telescope to an object (for example, a star), select "
+"that object, then hold down the %1 key and press the key with that "
+"telescope's number. To slew it to the center of the current view, hold down "
+"the Alt key and press the key with that telescope's number."
+msgstr ""
+"เมื่อต้องการหันกล้องโทรทรรศน์ที่เชื่อมต่ออยู่ไปยังวัตถุ (เช่น ดาวฤกษ์) "
+"ให้เลือกวัตถุนั้น แล้วกดปุ่ม %1 ค้างไว้ กดปุ่มตัวเลขประจำกล้องโทรทรรศน์, "
+"เมื่อต้องการหันกล้องไปยังจุดศูนย์กลางของมุมมองปัจจุบัน กดปุ่ม Alt ค้างไว้ "
+"แล้วกดปุ่มตัวเลขประจำกล้องโทรทรรศน์"
+
+#. TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
+msgid ""
+"No device model descriptions are available. Stellarium will not be able to "
+"control a telescope on its own, but it is still possible to do it through an "
+"external application or to connect to a remote host."
+msgstr ""
+
+#. TRANSLATORS: The translated name of the Add button is automatically inserted.
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
+#, qt-format
+msgid "Press the \"%1\" button to set up a new telescope connection."
+msgstr "กดปุ่ม \"%1\" เพื่อตั้งค่าการเชื่อมต่อกับกล้องโทรทรรศน์ใหม่"
+
+#. TRANSLATORS: Telescope connection type
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
+msgid "local, Stellarium"
+msgstr ""
+
+#. TRANSLATORS: Telescope connection type
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
+msgid "local, external"
+msgstr ""
+
+#. TRANSLATORS: Telescope connection type
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
+msgid "remote, unknown"
+msgstr ""
+
+#. TRANSLATORS: Telescope connection type
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
+msgid "virtual"
+msgstr "เสมือน"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:734
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:386
+msgid "Start"
+msgstr "เริ่มต้น"
+
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:735
 msgid "Start the selected local telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:703
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:740
 msgid "Stop"
-msgstr ""
+msgstr "หยุด"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:704
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:741
 msgid "Stop the selected local telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:709
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:746
 msgid "Connect"
-msgstr ""
+msgstr "เชื่อมต่อ"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:710
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:747
 msgid "Connect to the selected telescope"
-msgstr ""
+msgstr "เชื่อมต่อกับกล้องโทรทรรศน์ที่เลือก"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:715
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:752
 msgid "Disconnect"
 msgstr "ตัดการเชื่อมต่อ"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:716
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:753
 msgid "Disconnect from the selected telescope"
 msgstr "ตัดการเชื่อมต่อกับกล้องโทรทรรศน์ที่เลือก"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:737
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:774
 msgid "Select a directory"
 msgstr "เลือกไดเรกทอรี"
 
@@ -2729,7 +2787,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:291
 msgid "&HMS"
-msgstr ""
+msgstr "&HMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:293
 msgid "Degrees-minutes-seconds format"
@@ -2761,7 +2819,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope controlled by:"
-msgstr ""
+msgstr "ควบคุมกล้องโ๋ทรทรรศน์โดย:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid ""
@@ -2834,7 +2892,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Device settings"
-msgstr ""
+msgstr "การตั้งค่าอุปกรณ์"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Serial port:"
@@ -2846,7 +2904,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Connection settings"
-msgstr ""
+msgstr "ตั้งค่าการเชื่อมต่อ"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Host:"
@@ -2892,15 +2950,15 @@ msgstr "ตกลง"
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:383
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Telescopes"
-msgstr ""
+msgstr "กล้องโทรทรรศน์"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:385
 msgid "Telescopes Controlled"
-msgstr ""
+msgstr "กล้องโทรทรรศน์ถูกควบคุม"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:388
 msgid "Configure the selected telescope"
-msgstr ""
+msgstr "ปรับแต่งกล้องโทรทรรศน์ที่เลือก"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:390
 msgid "Configure"
@@ -3417,7 +3475,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
 msgid "Solar System Editor plug-in"
-msgstr ""
+msgstr "โปรแกรมเสริมสำหรับการปรับแต่งระบบสุริยะ"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
@@ -3474,11 +3532,11 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "Online search"
-msgstr ""
+msgstr "ค้นหาออนไลน์"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Objects found"
-msgstr ""
+msgstr "พบวัตถุที่ค้นหา"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid ""
@@ -3503,11 +3561,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid "Mark all"
-msgstr ""
+msgstr "ทำเครื่องหมายทั้งหมด"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Mark none"
-msgstr ""
+msgstr "ไม่ทำเครื่องหมายเลย"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Discard"
@@ -3515,7 +3573,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid "Add objects"
-msgstr ""
+msgstr "เพิ่มวัตถุ"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
