@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-21 14:44+0200\n"
-"PO-Revision-Date: 2011-11-22 02:18+0000\n"
+"PO-Revision-Date: 2011-11-23 03:24+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-22 04:58+0000\n"
-"X-Generator: Launchpad (build 14299)\n"
+"X-Launchpad-Export-Date: 2011-11-23 05:16+0000\n"
+"X-Generator: Launchpad (build 14336)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -2124,7 +2124,7 @@ msgstr "วัดมุมโดยกดปุ่มซ้ายของเม
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:312
 msgid "Right-clicking changes the end point only."
-msgstr ""
+msgstr "คลิกขวาเพื่อเปลี่ยนเฉพาะจุดสิ้นสุด"
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
@@ -2265,12 +2265,17 @@ msgid ""
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
+"ตำแหน่งที่พยากรณ์จะมีความแม่นยำในช่วงเวลาสั้น ๆ (อาจเป็นวัน สัปดาห์ "
+"หรือเดือนหนึ่ง ย้อนไปในอดีตหรืออนาคต) นอกกรอบเวลานี้ จะแสดงผลผิดพลาดได้"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:219
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
 msgstr ""
+"องค์ประกอบวงโคจรจะล้าสมัยได้อย่างรวดเร็ว (ภายในไม่กี่สัปดาห์หรือไม่กี่วัน) "
+"คุณจำเป็นต้องอัปเดตข้อมูล TLE เป็นระยะ ๆ อย่างสม่ำเสมอ "
+"เพื่อให้ได้ข้อมูลที่ถูกต้อง"
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:221
@@ -2280,6 +2285,8 @@ msgid ""
 "the default %3 file.  The old file will be backed up as %4.  This can be "
 "found in the user data directory, under \"modules/Satellites/\"."
 msgstr ""
+"คลิกปุ่ม \"%1\" ในแท็บ \"%2\" ของกล่องโต้ตอบนี้ จะย้อนไปใช้แฟ้ม %3 เริ่มต้น "
+"แฟ้มเก่าจะถูกสำรองเป็น %4 ซึ่งอยู่ในไดเร็กทอรีผู้ใช้ \"modules/Satellites/\""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:227
 msgid ""
@@ -2657,11 +2664,11 @@ msgstr "รุ่น %1"
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:255
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
 msgid "Status"
-msgstr ""
+msgstr "สถานภาพ"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
 msgid "Type"
@@ -2763,15 +2770,15 @@ msgstr "รูปแบบ"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:282
 msgid "Slew telescope to"
-msgstr ""
+msgstr "หันกล้องโทรทรรศน์ไปที่"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:284
 msgid "There are no active devices."
-msgstr ""
+msgstr "ไม่มีอุปกรณ์ที่เปิดใช้งาน"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:285
 msgid "Slew telescope to coordinates"
-msgstr ""
+msgstr "หันกล้องโทรทรรศน์ไปที่พิกัด"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:286
 msgid "&Right Ascension (J2000):"
@@ -2783,7 +2790,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "Hours-minutes-seconds format"
-msgstr ""
+msgstr "รูปแบบ ชั่วโมง-นาที-วินาที"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:291
 msgid "&HMS"
@@ -2791,15 +2798,15 @@ msgstr "&HMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:293
 msgid "Degrees-minutes-seconds format"
-msgstr ""
+msgstr "รูปแบบ องศา-ลิปดา-พิลิปดา"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:295
 msgid "&DMS"
-msgstr ""
+msgstr "&DMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:297
 msgid "Decimal degrees"
-msgstr ""
+msgstr "องศาในระบบทศนิยม"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "D&ecimal"
@@ -3139,7 +3146,7 @@ msgstr "ชื่อเขตเวลา:"
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "Offset from UTC (hours):"
-msgstr ""
+msgstr "ผลต่างจากเวลาสากลเชิงพิกัด (ชั่วโมง):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 msgid "Daylight saving time (summer time)"
@@ -3178,7 +3185,7 @@ msgstr "สิ้นสุดการใช้เวลาออมแสง"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:465
 msgid "Use this definition"
-msgstr ""
+msgstr "ใช้ข้อกำหนดนี้"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
 msgid ""
@@ -3206,22 +3213,22 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
 msgid "Any changes will take effect the next time Stellarium is started."
-msgstr ""
+msgstr "การเปลี่ยนแปลงใด ๆ จะมีผลเมื่อเริ่ม Stellarium ในครั้งถัดไป"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:407
 msgid "Display formats"
-msgstr ""
+msgstr "รูปแบบการแสดงผล"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
-msgstr ""
+msgstr "การตั้งค่าเหล่านี้จะควบคุมการแสดงวันที่และเวลาบนแถบด้านล่าง"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "Time display format"
-msgstr ""
+msgstr "รูปแบบการแสดงเวลา"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
@@ -3239,7 +3246,7 @@ msgstr "รูปแบบ 24 ชั่วโมง"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Date display format"
-msgstr ""
+msgstr "รูปแบบการแสดงวันที่"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
 msgid "yyyy-mm-dd (ISO 8601)"
@@ -3375,11 +3382,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:425
 msgid "Stop running script"
-msgstr ""
+msgstr "หยุดสคริปต์ที่กำลังทำงาน"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:428
 msgid "CD/DVD script"
-msgstr ""
+msgstr "สคริปต์จาก CD/DVD"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:435
 msgid "Administration"
@@ -3549,11 +3556,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Overwrite existing objects"
-msgstr ""
+msgstr "เขียนทับวัตถุที่มีอยู่แล้ว"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
 msgid "Update existing objects"
-msgstr ""
+msgstr "ปรับปรุงวัตถุที่มีอยู่แล้ว"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid "Update only the orbital elements"
@@ -3602,7 +3609,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Copy/replace the Solar System file"
-msgstr ""
+msgstr "คัดลอก/แทนที่ แฟ้มข้อมูลระบบสุริยะ"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid ""
@@ -3612,11 +3619,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Copy the Solar System file..."
-msgstr ""
+msgstr "คัดลอกแฟ้มข้อมูลระบบสุริยะ..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Replace the Solar System file..."
-msgstr ""
+msgstr "แทนที่แฟ้มข้อมูลระบบสุริยะ..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Configuration file"
