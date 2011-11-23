@@ -8,34 +8,34 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-11-21 14:44+0200\n"
-"PO-Revision-Date: 2011-04-01 15:28+0000\n"
-"Last-Translator: balaji பாலாஜி <Unknown>\n"
+"PO-Revision-Date: 2011-11-22 15:37+0000\n"
+"Last-Translator: Srivatsan Raghavan <Unknown>\n"
 "Language-Team: Tamil <ta@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-22 04:58+0000\n"
-"X-Generator: Launchpad (build 14299)\n"
+"X-Launchpad-Export-Date: 2011-11-23 05:16+0000\n"
+"X-Generator: Launchpad (build 14336)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
 msgid "Meridian"
-msgstr "மெரிடியன்"
+msgstr "உச்சநெடுங்கோடு"
 
 #: src/core/modules/GridLinesMgr.cpp:545
 msgid "Ecliptic"
-msgstr "கிரகணம்"
+msgstr "சூரிய வீதி"
 
 #: src/core/modules/GridLinesMgr.cpp:549
 msgid "Equator"
-msgstr "பூமத்திய ரேகை"
+msgstr "நிலநடுக்கோடு"
 
 #: src/core/modules/GridLinesMgr.cpp:553
 msgid "Horizon"
-msgstr ""
+msgstr "தொடுவானம்"
 
 #: src/core/modules/LandscapeMgr.cpp:486
 msgid "Author: "
-msgstr "எழுதியவர் "
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:489
 msgid "Location: "
@@ -76,15 +76,15 @@ msgstr "பரவிய விண்மீன் கொத்து"
 
 #: src/core/modules/Nebula.cpp:290
 msgid "Globular cluster"
-msgstr "கோள விண்மீன் கொத்து"
+msgstr "உருண்டையான விண்மீன் கொத்து"
 
 #: src/core/modules/Nebula.cpp:293
 msgid "Nebula"
-msgstr "நெபுலா"
+msgstr "வான்புகையுரு"
 
 #: src/core/modules/Nebula.cpp:296
 msgid "Planetary nebula"
-msgstr ""
+msgstr "கோள் விண்மீன் படலம்"
 
 #: src/core/modules/Nebula.cpp:299
 msgid "Cluster associated with nebulosity"
@@ -111,7 +111,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:137
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr ""
+msgstr "சரிவுத்தன்மை (தேதியுடையது): %1"
 
 #: src/core/modules/Planet.cpp:143
 #, no-c-format, qt-format
@@ -146,7 +146,7 @@ msgstr "இடமாறுதோற்றம்: %1\""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr ""
+msgstr "விண்கலம்"
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
@@ -161,6 +161,8 @@ msgid ""
 "Perspective projection keeps the horizon a straight line. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"பார்வை எறியம் தொடுவானத்தை ஓர் நேர்கோடாக வைத்திருக்கும். இந்த எறியம் முறையின் "
+"கணித பெயர் தான் <i>நிலைக்குத்தெறியம்</i>."
 
 #: src/core/StelProjectorClasses.cpp:63
 msgid "Equal Area"
@@ -171,10 +173,12 @@ msgid ""
 "The full name of this projection method is, <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
+"இந்த எறியம் முறையின் முழுப் பெயர்  <i> லாம்பர்ட் திசைக்கொன சமபரப்பு "
+"எறியம்</i>.இது பரப்பளவை சேமிக்கிறது ஆனால் கோணத்தை அல்ல."
 
 #: src/core/StelProjectorClasses.cpp:108
 msgid "Stereographic"
-msgstr ""
+msgstr "திண்மவரைப்படம்"
 
 #: src/core/StelProjectorClasses.cpp:113
 msgid ""
@@ -253,20 +257,20 @@ msgstr ""
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
-msgstr ""
+msgstr "(வடிவம்)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
-msgstr ""
+msgstr "(தோற்ற நிலை)"
 
 #: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
 msgid "Az/Alt: %1/%2"
-msgstr "Az/Alt: %1/%2"
+msgstr "திசைவில்/உயரம்: %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:306 src/gui/ConfigurationDialog.cpp:308
 msgid "Select screenshot directory"
-msgstr "திரைவெட்டு கோபகத்தை தேர்வு செய்"
+msgstr "திரைப்பிடிப்பு அடைவை தேர்வு செய்க"
 
 #: src/gui/ConfigurationDialog.cpp:476
 #, qt-format
@@ -276,7 +280,7 @@ msgstr ""
 #: src/gui/ConfigurationDialog.cpp:484
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr ""
+msgstr "தொடங்களின்ப் பொழுது பார்வை திசை திசைவில்/உயரம்: %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:523
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:211
@@ -313,7 +317,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:712
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "இருக்ககூடிய எல்லா விண்மீன் விவர ஏடுகளும் உள்ளீடு செய்யப்பட்டுள்ளது."
 
 #: src/gui/ConfigurationDialog.cpp:717
 #, qt-format
@@ -325,7 +329,9 @@ msgstr ""
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
-msgstr "பதிவிறக்கம் நடைபெற்று வருகிறது %1"
+msgstr ""
+"பதிவிறக்கம் நடைப்பெறுகிறது %1 \n"
+"(நீங்கள் இந்த சாளரத்தை மூடலாம்)"
 
 #: src/gui/ConfigurationDialog.cpp:731
 #, qt-format
