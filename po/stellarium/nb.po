@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-21 14:44+0200\n"
-"PO-Revision-Date: 2011-11-20 21:38+0000\n"
-"Last-Translator: Odin <Unknown>\n"
+"PO-Revision-Date: 2011-11-22 09:54+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-22 04:56+0000\n"
-"X-Generator: Launchpad (build 14299)\n"
+"X-Launchpad-Export-Date: 2011-11-23 05:16+0000\n"
+"X-Generator: Launchpad (build 14336)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -2105,8 +2105,8 @@ msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
-"Bruk 0.12 for ypperlige fjelltopper, 0.2 for gode landlige landskap, 0.35 "
-"for mørke forhold."
+"Bruk ca. 0,12 for ypperlige fjelltopper, 0,2 for gode landlige landskap, "
+"0,35 for mørke forhold."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -2179,7 +2179,7 @@ msgid ""
 "TLE data"
 msgstr ""
 "Forutsigelse av posisjoner til kunstige satellitter i jordbane basert på "
-"NORAD's TLE-data"
+"NORAD TLE-data"
 
 #: plugins/Satellites/src/Satellites.cpp:132
 msgid "Satellites configuration window"
@@ -2264,7 +2264,7 @@ msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
-"Satellittprogramtillegget forutser posisjonene til kunstige satellitter i "
+"Satellittprogramtillegget forutsier posisjonene til kunstige satellitter i "
 "bane rundt jorden."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:216
@@ -2274,7 +2274,7 @@ msgstr "Merknader til brukere"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:217
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
-msgstr "Satellittene og deres baner vises kun når observatøren er på jorden."
+msgstr "Satellitter og deres baner vises kun når observatøren er på jorden."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:218
 msgid ""
@@ -2282,7 +2282,7 @@ msgid ""
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
-"Posisjonsforutsigelsene er bare til btuk for en relativt kort periode (i "
+"Posisjonsforutsigelsene er bare gode for en relativt kort periode (i "
 "størrelsesorden dager, uker eller kanskje en måned inn i fortiden og "
 "fremtiden). Forvent store avvik når man ser på datoer utenfor dette "
 "tidsområdet."
@@ -2292,7 +2292,7 @@ msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
 msgstr ""
-"Baneelementene går ut på dato relativt raskt (etter noen uker, noen ganger "
+"Baneelementer går ut på dato relativt raskt (etter noen uker, noen ganger "
 "dager). For å få nyttige data ut, må du oppdatere TLE-dataene regelmessig."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
@@ -2514,12 +2514,12 @@ msgstr "Skriftstørrelse på påskrift (piksler):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:608
 msgid "Orbit lines"
-msgstr "Linjer på satellitt-bane"
+msgstr "Banelinjer"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:610
 #: plugins/Satellites/src/ui_satellitesDialog.h:614
 msgid "Number of segments used to draw the line"
-msgstr "Antall segmenter for å tegne linjen"
+msgstr "Antall segmenter brukt for å tegne linjen"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:612
 msgid "# segments:"
@@ -2528,7 +2528,7 @@ msgstr "# segmenter:"
 #: plugins/Satellites/src/ui_satellitesDialog.h:617
 #: plugins/Satellites/src/ui_satellitesDialog.h:621
 msgid "Number of segments used to draw each end of the line"
-msgstr "Antall segmenter til bruk for å tegne hver ende av linjen"
+msgstr "Antall segmenter brukt for å tegne hver ende av linjen"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:619
 msgid "Fade length:"
@@ -2641,11 +2641,11 @@ msgstr "Beveg teleskop #%1 til valgte objekt"
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:162
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
-msgstr "Flytt teleskop #%1 til det punktet som nå er i midten av skjermen"
+msgstr "Beveg teleskop #%1 til det punktet som nå er i midten av skjermen"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:173
 msgid "Move a telescope to a given set of coordinates"
-msgstr "Flytt et teleskop til et gitt sett av koordinater"
+msgstr "Beveg et teleskop til et gitt sett av koordinater"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
@@ -2693,19 +2693,19 @@ msgstr "Versjon %1"
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:255
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
 msgid "Name"
-msgstr ""
+msgstr "Navn"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
 #, qt-format
@@ -2715,6 +2715,10 @@ msgid ""
 "telescope's number. To slew it to the center of the current view, hold down "
 "the Alt key and press the key with that telescope's number."
 msgstr ""
+"For å styre et tilkoblet teleskop til et objekt (for eksempel en stjerne), "
+"velg dette objektet, og deretter hold nede %1-tasten og trykk på tasten med "
+"teleskopets nummer. Å styre det til midten av gjeldende visning, hold nede "
+"Alt-tasten og trykk på tasten med teleskopets nummer."
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
@@ -2723,32 +2727,35 @@ msgid ""
 "control a telescope on its own, but it is still possible to do it through an "
 "external application or to connect to a remote host."
 msgstr ""
+"Ingen beskrivelser for enhetsmodell er tilgjengelig. Stellarium vil ikke "
+"kunne kontrollere et teleskop på egen hånd, men det er fortsatt mulig å "
+"gjøre det gjennom et eksternt program, eller å koble til en ekstern vert."
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
-msgstr ""
+msgstr "Trykk på \"%1\"-knappen for å sette opp en ny teleskoptilkobling."
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
 msgid "local, Stellarium"
-msgstr ""
+msgstr "lokal, Stellarium"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
 msgid "local, external"
-msgstr ""
+msgstr "lokal, ekstern"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
 msgid "remote, unknown"
-msgstr ""
+msgstr "fjernkontroll, ukjent"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
 msgid "virtual"
-msgstr ""
+msgstr "virtuell"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:734
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:386
@@ -2858,20 +2865,20 @@ msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
-"Et teleskop koblet til denne datamaskinen via en seriell port og "
-"kontrolleres direkte av Stellarium."
+"Et teleskop koblet til denne datamaskinen via en seriell port og kontrollert "
+"direkte av Stellarium."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
 msgid "Stellarium, directly through a serial port"
-msgstr "Stellarium, direkte via en seriell port"
+msgstr "Stellarium, direkte gjennom en seriell port"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
-"Et teleskop som styres av en ekstern applikasjon, enten på denne "
-"datamaskinen eller på en ekstern maskin."
+"Et teleskop som styres av et eksternt program, enten på denne datamaskinen "
+"eller på en ekstern maskin."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid "External software or a remote computer"
@@ -2879,7 +2886,7 @@ msgstr "Ekstern programvare eller en ekstern datamaskin"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr "Ingenting, bare simulere en (et bevegelig trådkors)"
+msgstr "Ingenting, bare simuler en (et bevegelig trådkors)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "Telescope properties"
@@ -2924,12 +2931,12 @@ msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
-"Automatisk forsøke å starte teleskop eller opprette tilkobling når "
+"Forsøk automatisk å starte teleskopet eller opprette tilkobling når "
 "Stellarium starter"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
 msgid "Start/connect at startup"
-msgstr "Star/koble til ved oppstart"
+msgstr "Start/tilkoble ved oppstart"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Device settings"
@@ -2996,7 +3003,7 @@ msgstr "Teleskoper"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:385
 msgid "Telescopes Controlled"
-msgstr "Kontrollerte Teleskoper"
+msgstr "Kontrollerte teleskoper"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:388
 msgid "Configure the selected telescope"
@@ -3213,7 +3220,7 @@ msgstr "Endringstid:"
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
 msgid "Date:"
-msgstr "Dato :"
+msgstr "Dato:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
 msgid "Daylight saving time end"
@@ -3252,8 +3259,7 @@ msgstr "Brukerdefinert:"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
 msgid "Any changes will take effect the next time Stellarium is started."
-msgstr ""
-"Eventuelle endringer vil tre i kraft neste gang Stellarium er startet."
+msgstr "Eventuelle endringer vil tre i kraft neste gang Stellarium startes."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:407
@@ -3532,7 +3538,7 @@ msgstr "Programtillegg for solsystemredigering"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
-msgstr "Velg type"
+msgstr "Velg typen"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Asteroids"
