@@ -28,6 +28,8 @@
 #include <QVarLengthArray>
 #include <QFontMetrics>
 
+#include "StelShader.hpp"
+
 #ifdef USE_OPENGL_ES2
  #define STELPAINTER_GL2 1
 #endif
@@ -291,7 +293,9 @@ public:
 	void setShadeModel(ShadeModel m);
 
 	//! Set whether texturing is enabled.
-	void enableTexture2d(bool b);
+        //void enableTexture2d(bool b);
+        //ANDREI
+        void enableTexture2d(bool b, int texunit = 0);
 
 	// Thoses methods should eventually be replaced by a single setVertexArray
 	//! use instead of glVertexPointer
@@ -330,6 +334,8 @@ public:
 	//! Else it will consume count elements of indices, starting at offset, which are used to index into the
 	//! enabled arrays.
 	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned int* indices=NULL);
+
+        void drawShadowSecondPassFromArray(DrawingMode mode, int count, int offset=0, StelShader* shadowShader=0, const Vec3d* v=NULL, const Vec2f* t=NULL, const Vec3f* c=NULL, const Vec3f* n=NULL);
 
 	//! Draws the primitives defined in the StelVertexArray.
 	//! @param checkDiscontinuity will check and suppress discontinuities if necessary.

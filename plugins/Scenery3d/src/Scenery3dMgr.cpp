@@ -28,6 +28,8 @@ Scenery3dMgr::Scenery3dMgr() : scenery3d(NULL)
 {
     setObjectName("Scenery3dMgr");
     scenery3dDialog = new Scenery3dDialog();
+
+    shadowShader = 0;
 }
 
 Scenery3dMgr::~Scenery3dMgr()
@@ -35,6 +37,7 @@ Scenery3dMgr::~Scenery3dMgr()
     delete scenery3d;
     scenery3d = NULL;
     delete scenery3dDialog;
+    delete shadowShader;
 }
 
 void Scenery3dMgr::enableScenery3d(bool enable)
@@ -147,7 +150,20 @@ void Scenery3dMgr::init()
     //qDebug() << "past exception.\n";
 
 
-    scenery3d = new Scenery3d(cubemapSize, shadowmapSize);
+    //Load shadow shader
+    shadowShader = new StelShader;
+    QStringList lst =  QStringList(StelFileMgr::findFileInAllPaths("data/shaders/",
+      (StelFileMgr::Flags)(StelFileMgr::Directory)));
+    QByteArray vshader = (QString(lst.first()) + "smap.v.glsl").toLocal8Bit();
+    QByteArray fshader = (QString(lst.first()) + "smap.f.glsl").toLocal8Bit();
+
+    if (!(shadowShader->load(vshader.data(), fshader.data())))
+    {
+        qWarning() << "WARNING [Scenery3d]: unable to load shader files.\n";
+        shadowShader = 0;
+    }
+
+    scenery3d = new Scenery3d(cubemapSize, shadowmapSize, shadowShader);
     scenery3d->setShadowsEnabled(enableShadows);
 }
 
@@ -295,7 +311,7 @@ Scenery3d* Scenery3dMgr::createFromFile(const QString& scenery3dFile, const QStr
 {
     QSettings scenery3dIni(scenery3dFile, StelIniFormat);
     QString s;
-    Scenery3d* newScenery3d = new Scenery3d(cubemapSize, shadowmapSize);
+    Scenery3d* newScenery3d = new Scenery3d(cubemapSize, shadowmapSize, shadowShader);
     newScenery3d->setShadowsEnabled(enableShadows);
     if (scenery3dIni.status() != QSettings::NoError)
     {

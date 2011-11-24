@@ -16,6 +16,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+//ANDREI
+#include <GLee.h>
+//
 
 #include "StelPainter.hpp"
 
@@ -33,6 +36,9 @@
 #include <QMutex>
 #include <QVarLengthArray>
 #include <QPaintEngine>
+
+
+
 
 #ifndef GL_MULTISAMPLE
 #define GL_MULTISAMPLE  0x809D
@@ -1758,8 +1764,11 @@ void StelPainter::setShadeModel(ShadeModel m)
 #endif
 }
 
-void StelPainter::enableTexture2d(bool b)
+void StelPainter::enableTexture2d(bool b, int texunit)
 {
+    //ANDREI
+    glActiveTexture(GL_TEXTURE0 + texunit);
+
 #ifndef STELPAINTER_GL2
 	if (b)
 		glEnable(GL_TEXTURE_2D);
@@ -1914,6 +1923,69 @@ void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool
 	texCoordArray.enabled = texture;
 	colorArray.enabled = color;
 	normalArray.enabled = normal;
+}
+
+void StelPainter::drawShadowSecondPassFromArray(DrawingMode mode, int count, int offset, StelShader* shadowShader, const Vec3d* v, const Vec2f* t, const Vec3f* c, const Vec3f* n)
+{
+    glActiveTexture(GL_TEXTURE0);
+
+    ArrayDesc projectedVertexArray = vertexArray;
+
+    int vertexLocation = -1;
+    int colorLocation = -1;
+    int normalLocation = -1;
+    int texCoordLocation = -1;
+
+    // Enable the client state and set the opengl array for each array
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glVertexPointer(projectedVertexArray.size, projectedVertexArray.type, 0, projectedVertexArray.pointer);
+    vertexLocation = shadowShader->attributeLocation("vertex");
+    glEnableVertexAttribArray(vertexLocation);
+    glVertexAttribPointer(vertexLocation, 4, GL_FLOAT, GL_FALSE, 0, v);
+    if (texCoordArray.enabled)
+    {
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+        glTexCoordPointer(texCoordArray.size, texCoordArray.type, 0, texCoordArray.pointer);
+        texCoordLocation = shadowShader->attributeLocation("texCoord");
+        glEnableVertexAttribArray(texCoordLocation);
+        glVertexAttribPointer(texCoordLocation, 2, GL_FLOAT, GL_FALSE, 0, t);
+    }
+    if (normalArray.enabled)
+    {
+        glEnableClientState(GL_NORMAL_ARRAY);
+        glNormalPointer(normalArray.type, 0, normalArray.pointer);
+        normalLocation = shadowShader->attributeLocation("normal");
+        glEnableVertexAttribArray(normalLocation);
+        glVertexAttribPointer(normalLocation, 3, GL_FLOAT, GL_FALSE, 0, n);
+    }
+    if (colorArray.enabled)
+    {
+        glEnableClientState(GL_COLOR_ARRAY);
+        glColorPointer(colorArray.size, colorArray.type, 0, colorArray.pointer);
+        colorLocation = shadowShader->attributeLocation("color");
+        glEnableVertexAttribArray(colorLocation);
+        glVertexAttribPointer(colorLocation, 4, GL_FLOAT, GL_FALSE, 0, c);
+    }
+
+    glDrawArrays(mode, offset, count);
+
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableVertexAttribArray(vertexLocation);
+    if (texCoordArray.enabled)
+    {
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        glDisableVertexAttribArray(texCoordLocation);
+    }
+    if (normalArray.enabled)
+    {
+        glDisableClientState(GL_NORMAL_ARRAY);
+        glDisableVertexAttribArray(normalLocation);
+    }
+    if (colorArray.enabled)
+    {
+        glDisableClientState(GL_COLOR_ARRAY);
+        glDisableVertexAttribArray(colorLocation);
+    }
 }
 
 void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned int* indices)

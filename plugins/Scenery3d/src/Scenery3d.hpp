@@ -33,6 +33,8 @@
 #include <vector>
 #include <QGLFramebufferObject>
 
+#include "StelShader.hpp"
+
 using std::vector;
 
 //! Representation of a complete 3D scenery
@@ -41,7 +43,7 @@ class Scenery3d
 public:
     //! Initializes an empty Scenery3d object.
     //! @param cbmSize Size of the cubemap to use for indirect rendering.
-    Scenery3d(int cubemapSize=1024, int shadowmapSize=1024);
+    Scenery3d(int cubemapSize=1024, int shadowmapSize=1024, StelShader* shadowShader = 0);
     virtual ~Scenery3d();
 
     //! Loads configuration values from a scenery3d.ini file.
@@ -124,7 +126,7 @@ private:
     Mat4f projectionMatrix;
     Mat4f lightViewMatrix;
     Mat4f lightProjectionMatrix;
-    QGLFramebufferObject* shadowMapFbo;
+    //QGLFramebufferObject* shadowMapFbo;
     QGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
     StelVertexArray cubePlaneFront, cubePlaneBack,
                 cubePlaneLeft, cubePlaneRight,
@@ -152,6 +154,22 @@ private:
     // if only a non-georeferenced OBJ can be provided, you can specify a matrix via .ini/[model]/obj_world_trafo.
     // This will be applied to make sure that X=Grid-East, Y=Grid-North, Z=height.
     Mat4d obj2gridMatrix;
+
+    //Shadowmapping shader
+    StelShader* shadowShader;
+
+    //Initializes Shadow Mapping
+    void initShadowMapping();
+
+    //Shadow Map FBO
+    GLuint shadowMapFbo;
+
+    //Sets the light position
+    GLfloat LightPos[3];
+
+    GLint w_width, w_height;
+
+    void generateCubeMap_drawSecondPassScene(StelPainter& painter);
 };
 
 #endif
