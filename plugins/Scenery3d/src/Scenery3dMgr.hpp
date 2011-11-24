@@ -5,6 +5,7 @@
 #include "StelUtils.hpp"
 #include "gui/Scenery3dDialog.hpp"
 #include "StelCore.hpp"
+#include "StelShader.hpp"
 
 #include <QMap>
 #include <QStringList>
@@ -76,6 +77,9 @@ private:
     StelButton* toolbarEnableButton;
     StelButton* toolbarSettingsButton;
     StelCore::ProjectionType oldProjectionType;
+
+    //Shader for shadow mapping
+    StelShader* shadowShader;
 };
 
 
