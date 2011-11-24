@@ -88,6 +88,8 @@ SET(stellarium_lib_SRCS
 	core/StelObjectModule.hpp
 	core/StelObjectType.hpp
 	core/StelPluginInterface.hpp
+	core/StelShader.cpp
+	core/StelShader.hpp
 	core/StelSkyCultureMgr.cpp
 	core/StelSkyCultureMgr.hpp
 	core/StelTextureMgr.cpp
