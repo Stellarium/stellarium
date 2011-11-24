@@ -55,6 +55,10 @@
 #include <GL/glu.h>	/* Header File For The GLU Library */
 #endif
 
+#ifdef Q_WS_MAC
+extern void qt_set_sequence_auto_mnemonic(bool b);
+#endif
+
 static QSettings *settings; //!< The settings as read in from the ini file.
 
 /* ********************************************************************* */
@@ -131,6 +135,9 @@ Oculars::Oculars():
 
 	setObjectName("Oculars");
 
+#ifdef Q_WS_MAC
+	qt_set_sequence_auto_mnemonic(true);
+#endif
 }
 
 Oculars::~Oculars()
