@@ -130,8 +130,21 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 
 	if (flags&Distance)
 	{
-		// xgettext:no-c-format
-		oss << q_("Distance: %1AU").arg(getJ2000EquatorialPos(core).length(), 0, 'f', 8) << "<br>";
+		double distanceAu = getJ2000EquatorialPos(core).length();
+		if (distanceAu < 0.1)
+		{
+			double distanceKm = AU * distanceAu;
+			// xgettext:no-c-format
+			oss << QString(q_("Distance: %1AU (%2 km)"))
+			       .arg(distanceAu, 0, 'f', 8)
+			       .arg(distanceKm, 0, 'f', 0);
+		}
+		else
+		{
+			// xgettext:no-c-format
+			oss << q_("Distance: %1AU").arg(distanceAu, 0, 'f', 8);
+		}
+		oss << "<br>";
 	}
 
 	/*
