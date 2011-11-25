@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-21 14:44+0200\n"
+"POT-Creation-Date: 2011-11-25 01:03+0700\n"
 "PO-Revision-Date: 2011-11-22 01:06+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-23 05:16+0000\n"
-"X-Generator: Launchpad (build 14336)\n"
+"X-Launchpad-Export-Date: 2011-11-25 05:18+0000\n"
+"X-Generator: Launchpad (build 14376)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -59,7 +59,7 @@ msgstr "Planeta: "
 msgid "Type: <b>%1</b>"
 msgstr "Typ: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:120
+#: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:121
 #: plugins/Supernovae/src/Supernova.cpp:99
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
@@ -102,27 +102,32 @@ msgstr "Nieznany"
 msgid "Undocumented type"
 msgstr "Typ nieudokumentowany"
 
-#: src/core/modules/Planet.cpp:123 src/core/modules/StarWrapper.cpp:112
+#: src/core/modules/Planet.cpp:124 src/core/modules/StarWrapper.cpp:112
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Absolutna  wielkość gwiazdowa: %1"
 
-#: src/core/modules/Planet.cpp:136
+#: src/core/modules/Planet.cpp:137
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
 msgstr "Geocentryczne współrzędne ekliptyczne (na dzień): %1/%2"
 
-#: src/core/modules/Planet.cpp:137
+#: src/core/modules/Planet.cpp:138
 #, qt-format
 msgid "Obliquity (of date): %1"
 msgstr "Nachylenie (na dzień): %1"
 
-#: src/core/modules/Planet.cpp:143
+#: src/core/modules/Planet.cpp:144
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr "Odległość: %1 j.a."
 
-#: src/core/modules/Planet.cpp:147
+#. TRANSLATORS: Unit of distance
+#: src/core/modules/Planet.cpp:151
+msgid "km"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:158
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Średnica widoma: %1"
@@ -533,8 +538,8 @@ msgid "{Forums} - discuss Stellarium with other users."
 msgstr ""
 "{Forum} - podyskutuj na temat programu Stellarium z innymi użytkownikami."
 
-#: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:330
-#: src/gui/HelpDialog.cpp:332 src/gui/StelGui.cpp:170
+#: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:337
+#: src/gui/HelpDialog.cpp:339 src/gui/StelGui.cpp:170
 msgid "Miscellaneous"
 msgstr "Różne"
 
@@ -558,15 +563,22 @@ msgid "Graphic/other designer: %1"
 msgstr "Projekt grafiki/innych elementów: %1"
 
 #: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
-#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:306
+#: src/gui/HelpDialog.cpp:304 src/gui/HelpDialog.cpp:305
+#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:309
+#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
 #, qt-format
 msgid "Developer: %1"
 msgstr "Programista: %1"
 
-#: src/gui/HelpDialog.cpp:304
+#: src/gui/HelpDialog.cpp:307 src/gui/HelpDialog.cpp:308
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Programista OSX: %1"
+
+#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
+#, qt-format
+msgid "Tester: %1"
+msgstr ""
 
 #: src/gui/StelGui.cpp:98
 msgid "Display Options"
@@ -1362,11 +1374,12 @@ msgid ":"
 msgstr ":"
 
 #: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:422
 msgid "Help"
 msgstr "Pomoc"
 
 #: src/ui_helpDialogGui.h:267 plugins/Satellites/src/ui_satellitesDialog.h:670
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
 msgid "About"
@@ -1726,7 +1739,7 @@ msgstr "Dodaj/usuń krajobrazy..."
 
 #: src/ui_viewDialog.h:1118 src/ui_viewDialog.h:1123 src/ui_viewDialog.h:1125
 #: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "Opcje"
 
@@ -2068,7 +2081,7 @@ msgid "Remove an installed landscape"
 msgstr "Usuń zainstalowany krajobraz"
 
 #: src/ui_addRemoveLandscapesDialog.h:275
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Remove"
 msgstr "Usuń"
@@ -2707,23 +2720,23 @@ msgid "Version %1"
 msgstr "Wersja %1"
 
 #. TRANSLATORS: Symbol for "number"
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:255
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 msgid "#"
 msgstr "nr"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Status"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Type"
 msgstr "Typ"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
 msgstr "Nazwa"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #, qt-format
 msgid ""
 "To slew a connected telescope to an object (for example, a star), select "
@@ -2733,7 +2746,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
 msgid ""
 "No device model descriptions are available. Stellarium will not be able to "
 "control a telescope on its own, but it is still possible to do it through an "
@@ -2744,71 +2757,71 @@ msgstr ""
 "zewnętrzną aplikację lub połączenie z odległym hostem."
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
 msgstr ""
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid "local, Stellarium"
 msgstr "lokalne, Stellarium"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 msgid "local, external"
 msgstr "lokalne, zewnętrzne"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid "remote, unknown"
 msgstr "odległe, nieznane"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid "virtual"
 msgstr "wirtualne"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:734
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:386
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:744
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Start"
 msgstr "Start"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:735
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:745
 msgid "Start the selected local telescope"
 msgstr "Uruchom wybrany teleskop lokalny"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:740
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:750
 msgid "Stop"
 msgstr "Stop"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:741
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:751
 msgid "Stop the selected local telescope"
 msgstr "Zatrzymaj wybrany teleskop lokalny"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:746
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:756
 msgid "Connect"
 msgstr "Połącz"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:747
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:757
 msgid "Connect to the selected telescope"
 msgstr "Połącz z wybranym teleskopem"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:752
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:762
 msgid "Disconnect"
 msgstr "Rozłącz"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:753
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:763
 msgid "Disconnect from the selected telescope"
 msgstr "Rozłącz wybrany teleskop"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:774
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:784
 msgid "Select a directory"
 msgstr "Wybierz katalog"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:281
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:469
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:382
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
 msgid "Form"
 msgstr "Formularz"
 
@@ -3009,65 +3022,65 @@ msgstr ""
 msgid "OK"
 msgstr "OK"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:383
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Telescopes"
 msgstr "Teleskopy"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:385
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
 msgid "Telescopes Controlled"
 msgstr "Sterowane teleskopy"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:388
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Configure the selected telescope"
 msgstr "Konfiguruj wybrany teleskop"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:390
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Configure"
 msgstr "Konfiguruj"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Add a new telescope"
 msgstr "Dodaj nowy teleskop"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:394
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Add"
 msgstr "Dodaj"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "Remove the selected telescope"
 msgstr "Usuń wybrany teleskop"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:400
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "GUI"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Show telescope labels"
 msgstr "Pokazuj etykiety teleskopów"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:402
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Show telescope reticles"
 msgstr "Pokazuj siatki teleskopów"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Show field of view indicators"
 msgstr "Pokazuj wskaźniki pola widzenia"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Files"
 msgstr "Pliki"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Log telescope driver messages to files"
 msgstr "Zapisuj komunikaty sterownika teleskopu w plikach dziennika"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:406
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 msgid "Use telescope server executables (override built-in drivers)"
 msgstr ""
 "Użyj plików programów serwera teleskopu (zamiast wbudowanych sterowników)"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
 msgid "Executables directory:"
 msgstr "Katalog plików programów:"
 
