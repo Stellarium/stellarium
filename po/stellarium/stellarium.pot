@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-25 01:03+0700\n"
+"POT-Creation-Date: 2011-11-25 15:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,17 +113,17 @@ msgstr ""
 msgid "Obliquity (of date): %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:144
+#: src/core/modules/Planet.cpp:148
+#, no-c-format, qt-format
+msgid "Distance: %1AU (%2 km)"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:155
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr ""
 
-#. TRANSLATORS: Unit of distance
-#: src/core/modules/Planet.cpp:151
-msgid "km"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:158
+#: src/core/modules/Planet.cpp:161
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr ""

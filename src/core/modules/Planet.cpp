@@ -140,17 +140,20 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Distance)
 	{
-		// xgettext:no-c-format
-		oss << q_("Distance: %1AU").arg(getJ2000EquatorialPos(core).length(), 0, 'f', 8);
-
-		if (getJ2000EquatorialPos(core).length()<0.1)
+		double distanceAu = getJ2000EquatorialPos(core).length();
+		if (distanceAu < 0.1)
 		{
-			oss << QString(" (%1 %2)")
-			       .arg(AU * getJ2000EquatorialPos(core).length(), 0, 'f', 1)
-			       // TRANSLATORS: Unit of distance
-			       .arg(q_("km"));
+			double distanceKm = AU * distanceAu;
+			// xgettext:no-c-format
+			oss << QString(q_("Distance: %1AU (%2 km)"))
+			       .arg(distanceAu, 0, 'f', 8)
+			       .arg(distanceKm, 0, 'f', 0);
 		}
-
+		else
+		{
+			// xgettext:no-c-format
+			oss << q_("Distance: %1AU").arg(distanceAu, 0, 'f', 8);
+		}
 		oss << "<br>";
 	}
 
