@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-25 15:47+0200\n"
-"PO-Revision-Date: 2010-05-07 21:16+0000\n"
-"Last-Translator: Elxan İsmayılov <elxan.i@gmail.com>\n"
+"PO-Revision-Date: 2011-11-26 15:48+0000\n"
+"Last-Translator: Onur İ. <Unknown>\n"
 "Language-Team: Azerbaijani <az@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-26 04:38+0000\n"
+"X-Launchpad-Export-Date: 2011-11-27 05:21+0000\n"
 "X-Generator: Launchpad (build 14381)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -23,11 +23,11 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:545
 msgid "Ecliptic"
-msgstr ""
+msgstr "Eliptik"
 
 #: src/core/modules/GridLinesMgr.cpp:549
 msgid "Equator"
-msgstr ""
+msgstr "Ekvator"
 
 #: src/core/modules/GridLinesMgr.cpp:553
 msgid "Horizon"
@@ -39,7 +39,7 @@ msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:489
 msgid "Location: "
-msgstr ""
+msgstr "Mövqe: "
 
 #: src/core/modules/LandscapeMgr.cpp:494
 #, qt-format
@@ -48,7 +48,7 @@ msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:498
 msgid "Planet: "
-msgstr ""
+msgstr "Planet "
 
 #: src/core/modules/Nebula.cpp:96
 #, qt-format
@@ -59,7 +59,7 @@ msgstr ""
 #: plugins/Supernovae/src/Supernova.cpp:99
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
-msgstr ""
+msgstr "Böyüklük: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:104
 #, qt-format
@@ -68,7 +68,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:284
 msgid "Galaxy"
-msgstr ""
+msgstr "Qalaktika"
 
 #: src/core/modules/Nebula.cpp:287
 msgid "Open cluster"
@@ -80,7 +80,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:293
 msgid "Nebula"
-msgstr ""
+msgstr "Nebula"
 
 #: src/core/modules/Nebula.cpp:296
 msgid "Planetary nebula"
@@ -116,12 +116,12 @@ msgstr ""
 #: src/core/modules/Planet.cpp:148
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "Uzaqlıq: %1AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:155
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
-msgstr ""
+msgstr "Uzaqlıq: %1AU"
 
 #: src/core/modules/Planet.cpp:161
 #, qt-format
@@ -131,7 +131,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:51 src/core/modules/StarWrapper.cpp:108
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr ""
+msgstr "Böyüklük: <b>%1</b> (B-V: %2)"
 
 #: src/core/modules/StarWrapper.cpp:118
 #, qt-format
@@ -142,7 +142,7 @@ msgstr ""
 #: plugins/Supernovae/src/Supernova.cpp:108
 #, qt-format
 msgid "Distance: %1 Light Years"
-msgstr ""
+msgstr "Uzaqlıq: %1 İşıq ili"
 
 #: src/core/modules/StarWrapper.cpp:125
 #, qt-format
@@ -151,11 +151,11 @@ msgstr ""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr ""
+msgstr "Kosmos Gəmisi"
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
-msgstr ""
+msgstr "ən çox FOV: "
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
@@ -190,7 +190,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Fish-eye"
-msgstr ""
+msgstr "Balıq-Gözü"
 
 #: src/core/StelProjectorClasses.cpp:150
 msgid ""
@@ -212,7 +212,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:223
 msgid "Cylinder"
-msgstr ""
+msgstr "Silindr"
 
 #: src/core/StelProjectorClasses.cpp:228
 msgid ""
@@ -302,11 +302,11 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:632
 msgid "Running script: "
-msgstr ""
+msgstr "İşləyən script: "
 
 #: src/gui/ConfigurationDialog.cpp:639
 msgid "Running script: [none]"
-msgstr ""
+msgstr "İşləyən script: [yoq]"
 
 #: src/gui/ConfigurationDialog.cpp:708
 msgid ""
@@ -329,6 +329,8 @@ msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
+"Yüklənir %1...\n"
+"(Bu pəncərəni bağlaya bilərsiniz.)"
 
 #: src/gui/ConfigurationDialog.cpp:731
 #, qt-format
@@ -344,6 +346,8 @@ msgid ""
 "Error downloading %1:\n"
 "%2"
 msgstr ""
+"Səhv endirmede %1:\n"
+"%2"
 
 #: src/gui/ConfigurationDialog.cpp:862
 msgid "Verifying file integrity..."
@@ -359,7 +363,7 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:286
 #: src/gui/StelGuiItems.cpp:656
 msgid "Space"
-msgstr ""
+msgstr "Kosmos"
 
 #: src/gui/HelpDialog.cpp:53
 msgid "Arrow keys & left mouse drag"
@@ -387,7 +391,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:163
 msgid "Movement and Selection"
-msgstr ""
+msgstr "Hərəkət & Secim"
 
 #: src/gui/HelpDialog.cpp:62
 msgid "Pan view around the sky"
@@ -399,11 +403,11 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:65
 msgid "Select object"
-msgstr ""
+msgstr "Obyekti Seç"
 
 #: src/gui/HelpDialog.cpp:66 src/gui/HelpDialog.cpp:68
 msgid "Clear selection"
-msgstr ""
+msgstr "Seçiləni təmizlə"
 
 #: src/gui/HelpDialog.cpp:71
 msgid "When a Script is Running"
@@ -436,7 +440,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:167
 msgid "Stellarium Help"
-msgstr ""
+msgstr "Stellarium Kömək"
 
 #: src/gui/HelpDialog.cpp:168
 msgid "Keys"
