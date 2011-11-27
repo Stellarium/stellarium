@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-25 15:47+0200\n"
-"PO-Revision-Date: 2011-11-08 23:21+0000\n"
-"Last-Translator: kulkke <Unknown>\n"
+"PO-Revision-Date: 2011-11-26 15:31+0000\n"
+"Last-Translator: Onur İ. <Unknown>\n"
 "Language-Team: <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-26 04:43+0000\n"
+"X-Launchpad-Export-Date: 2011-11-27 05:21+0000\n"
 "X-Generator: Launchpad (build 14381)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -116,7 +116,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:148
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "Uzaklık: %1AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:155
 #, no-c-format, qt-format
@@ -281,7 +281,7 @@ msgstr "(geometrik)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
-msgstr ""
+msgstr "(açık)"
 
 #: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
 #, qt-format
@@ -337,7 +337,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:712
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "Tüm erişilebilir yıldız katalogları yüklendi."
 
 #: src/gui/ConfigurationDialog.cpp:717
 #, qt-format
@@ -566,7 +566,7 @@ msgstr "OSX gelistirici: %1"
 #: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "Tecrübe: %1"
 
 #: src/gui/StelGui.cpp:98
 msgid "Display Options"
@@ -1547,7 +1547,7 @@ msgstr "omega"
 
 #: src/ui_searchDialogGui.h:529
 msgid "Greek letters for Bayer designations"
-msgstr ""
+msgstr "Bayer belirtmeleri için Grek harfleri"
 
 #: src/ui_searchDialogGui.h:530
 msgid "Object"
@@ -1638,7 +1638,7 @@ msgstr "Atmosferi goster"
 #: src/ui_viewDialog.h:1084
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Light pollution:"
-msgstr ""
+msgstr "Düşük kirlilik:"
 
 #: src/ui_viewDialog.h:1086
 msgid "pressure, temperature, extinction coefficient"
@@ -2129,12 +2129,12 @@ msgstr ""
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:310
 msgid "Drag with the left button to measure, left-click to clear."
-msgstr ""
+msgstr "Ölçmek için farenin sol tuşu ile sürükle, silmek içinse sol-tıkla."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:312
 msgid "Right-clicking changes the end point only."
-msgstr ""
+msgstr "Sağ-Tıklama yalnız son noktayı değiştirir."
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
@@ -2150,7 +2150,7 @@ msgstr "Pusula izleri"
 
 #: plugins/Oculars/src/Oculars.cpp:76
 msgid "Oculars"
-msgstr ""
+msgstr "Oküler"
 
 #: plugins/Oculars/src/Oculars.cpp:79
 msgid ""
@@ -2161,7 +2161,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:957
 msgid "Ocular view"
-msgstr ""
+msgstr "Öküler görüş"
 
 #: plugins/Oculars/src/Oculars.cpp:979
 msgid "Oculars popup menu"
@@ -2199,7 +2199,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:214
 #, qt-format
 msgid "Range (km): %1"
-msgstr ""
+msgstr "Menzil (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
 #: plugins/Satellites/src/Satellite.cpp:217
@@ -2211,44 +2211,44 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:220
 #, qt-format
 msgid "Altitude (km): %1"
-msgstr ""
+msgstr "Rakım (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:237
 #, qt-format
 msgid "TEME coordinates (km): %1"
-msgstr ""
+msgstr "TEME koordinatları (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:245
 #, qt-format
 msgid "TEME velocity (km/s): %1"
-msgstr ""
+msgstr "TEME hızı (km/s): %1"
 
 #: plugins/Satellites/src/Satellite.cpp:253
 msgid "The satellite and the observer are in sunlight."
-msgstr ""
+msgstr "Uydu ve gözlemci güneş ışığında."
 
 #: plugins/Satellites/src/Satellite.cpp:256
 msgid "The satellite is visible."
-msgstr ""
+msgstr "Uydu görünür durumda."
 
 #: plugins/Satellites/src/Satellite.cpp:259
 msgid "The satellite is eclipsed."
-msgstr ""
+msgstr "Uydu gölgede."
 
 #: plugins/Satellites/src/Satellite.cpp:262
 msgid "The satellite is not visible"
-msgstr ""
+msgstr "Uydu görünmüyor."
 
 #: plugins/Satellites/src/Satellite.cpp:288
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
-msgstr ""
+msgstr "%1 MHz (%2%3 kHz)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:209
 msgid "Stellarium Satellites Plugin"
-msgstr ""
+msgstr "Stellarium Uydu Eklentisi"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:210
 msgid "Version"
@@ -2258,16 +2258,18 @@ msgstr ""
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
-msgstr ""
+msgstr "Uydu Eklentisi, Dünya'nın yörüngesindeki yapay uyduları tahmin eder."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:216
 msgid "Notes for users"
-msgstr ""
+msgstr "Kullanıcı Notları"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:217
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
+"Uydular ve onların yörüngeleri sadece gözlemci Dünya'da bulunuyorsa "
+"görüntülenebilir."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:218
 msgid ""
@@ -2296,11 +2298,13 @@ msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
+"Uydu Eklentisi hala gelişim aşamasındadır. Bazı özellikler henüz "
+"tamamlanmadı ya da hatalı olabilir."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:231
 msgid "TLE data updates"
-msgstr ""
+msgstr "TLE veri güncellemeleri"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:232
 msgid ""
@@ -2308,6 +2312,8 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
+"Uydu Eklentisi, eğer mevcut TLE verisi 72 saatten daha eski ise; internetten "
+"otomatik bir şekilde bu dosyaları indirebilir. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:233
 #, qt-format
@@ -2316,6 +2322,9 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
+"Eğer internet güncellemelerini kapattıysanız, güncellemelerinizi "
+"bilgisayarınızdaki dosyadan yapmalısınız. Bu dosya Celestrak güncellemeleri "
+"(Örnek için %1 'e bakın) ile aynı dosya biçiminde olmalı."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:234
 msgid ""
@@ -2325,7 +2334,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:237
 msgid "Adding new satellites"
-msgstr ""
+msgstr "Yeni uydular ekleniyor"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:238
 #, qt-format
@@ -2336,13 +2345,15 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:240
 msgid "Technical notes"
-msgstr ""
+msgstr "Teknik Notlar"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:241
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
 msgstr ""
+"Pozisyonlar SGP4 ve SDP4 yöntemleri kullanarak hesaplandı. Giriş olarak "
+"NORAD TLE verisi kullanılıyor. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:242
 msgid ""
@@ -2354,11 +2365,11 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:244
 #, qt-format
 msgid "See %1this document%2 for details."
-msgstr ""
+msgstr "Detaylar için %1 bu dökümana %2 bakın."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:246
 msgid "Links"
-msgstr ""
+msgstr "Bağlantılar"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:247
 msgid ""
@@ -2370,7 +2381,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:250
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
-msgstr ""
+msgstr "Eğer sorunuz varsa, %1 buradan yanıt alabilirsiniz %2."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:252
@@ -2387,106 +2398,106 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:267
 msgid "Internet updates disabled"
-msgstr ""
+msgstr "İnternet güncellemeleri devre dışı."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:269
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
 msgid "Updating now..."
-msgstr ""
+msgstr "Güncelleniyor..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:271
 msgid "Next update: < 1 minute"
-msgstr ""
+msgstr "Sıradaki güncelleme: <1 dakika"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:273
 #, qt-format
 msgid "Next update: %1 minutes"
-msgstr ""
+msgstr "Sıradaki güncelleme: %1 dakika"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:275
 #, qt-format
 msgid "Next update: %1 hours"
-msgstr ""
+msgstr "Sıradaki güncelleme: %1 Saat"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
 #: plugins/Satellites/src/ui_satellitesDialog.h:605
 msgid "Update now"
-msgstr ""
+msgstr "Şimdi Güncelleştir"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:292
 msgid "Update from files"
-msgstr ""
+msgstr "Dosyadan güncelleniyor"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:304
 msgid "Update error"
-msgstr ""
+msgstr "Güncelleme hatası"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:311
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
-msgstr ""
+msgstr "%1/%2 uydu(lar) güncellendi; %3 yapılamadı"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:368
 msgid "[new source]"
-msgstr ""
+msgstr "[yeni kaynak]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 msgid "[all not displayed]"
-msgstr ""
+msgstr "[tümü görüntülenemiyor]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
 msgid "[all displayed]"
-msgstr ""
+msgstr "[tümü görüntülendi]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:411
 msgid "[all]"
-msgstr ""
+msgstr "[tümü]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:467
 msgid "Select TLE Update File"
-msgstr ""
+msgstr "TLE Güncelleme Dosya 'sını Seç"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:598
 #: plugins/Satellites/src/ui_satellitesDialog.h:599
 msgid "Satellites Configuration"
-msgstr ""
+msgstr "Uydu Ayarlamaları"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:601
 msgid "Update TLE lists from Internet sources"
-msgstr ""
+msgstr "TLE listelerini internetten güncelle"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:602
 msgid "Update from Internet sources"
-msgstr ""
+msgstr "İnternetten güncelle"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:603
 msgid "Last update:"
-msgstr ""
+msgstr "Son güncelleştirme:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:604
 msgid "Update frequency (hours):"
-msgstr ""
+msgstr "Güncellenmiş frekans (saat):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:606
 msgid "Labels"
-msgstr ""
+msgstr "Etiketler"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:607
 msgid "Label font size (pixels):"
-msgstr ""
+msgstr "Etiket yazı büyüklüğü (piksel)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:608
 msgid "Orbit lines"
-msgstr ""
+msgstr "Yörünge hatları"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:610
 #: plugins/Satellites/src/ui_satellitesDialog.h:614
 msgid "Number of segments used to draw the line"
-msgstr ""
+msgstr "Numara parçaları hattı çizmek için kullanılıyordu"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:612
 msgid "# segments:"
-msgstr ""
+msgstr "# parçalar:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:617
 #: plugins/Satellites/src/ui_satellitesDialog.h:621
@@ -2504,15 +2515,15 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:626
 msgid "Length (s):"
-msgstr ""
+msgstr "Uzunluk (s):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:630
 msgid "Restore default settings"
-msgstr ""
+msgstr "Öntanımlı ayarları geri yükle"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:631
 msgid "Save settings as default"
-msgstr ""
+msgstr "Ayarları öntanımlı olarak kaydet"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:632
 msgid "Settings"
@@ -2520,7 +2531,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:634
 msgid "Display the selected satellite(s)"
-msgstr ""
+msgstr "Seçili uydu(ları) görüntüle"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:636
 msgid "Displayed"
@@ -2528,15 +2539,15 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:638
 msgid "Display orbit line(s) for the selected satellite(s)"
-msgstr ""
+msgstr "Seçilen uydu(lar) için yörünge(leri) göster"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 msgid "Orbit"
-msgstr ""
+msgstr "Yörünge"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
 msgid "Satellite ID:"
-msgstr ""
+msgstr "Uydu ID:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:643
 msgid "Description:"
@@ -2552,7 +2563,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:648
 msgid "TLE data:"
-msgstr ""
+msgstr "TLE verisi:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:650
 msgid "NORAD two line element orbit data"
@@ -2570,11 +2581,11 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Add new source"
-msgstr ""
+msgstr "Yeni kaynak ekle"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:666
 msgid "Remove selected source"
-msgstr ""
+msgstr "Seçili kaynağı sil"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:669
 msgid "Sources"
@@ -2603,19 +2614,19 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:173
 msgid "Move a telescope to a given set of coordinates"
-msgstr ""
+msgstr "Teleskopu ayarlanan koordinatlara taşı"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
-msgstr ""
+msgstr "Yeni Teleskop ekle"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
-msgstr ""
+msgstr "Teleskopu Ayarla"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
-msgstr ""
+msgstr "Değer Yok"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
 msgid "Starting"
@@ -2639,7 +2650,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
-msgstr ""
+msgstr "Teleskop Kontrol Eklentisi"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
@@ -2686,22 +2697,22 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
-msgstr ""
+msgstr "Yeni Teleskop bağlantısını ayarlamak için \"%1\" tuşuna bas"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid "local, Stellarium"
-msgstr ""
+msgstr "yerel, Stellarium"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 msgid "local, external"
-msgstr ""
+msgstr "yerel, harici"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid "remote, unknown"
-msgstr ""
+msgstr "uzaktan, bilinmiyor"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
@@ -2715,7 +2726,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:745
 msgid "Start the selected local telescope"
-msgstr ""
+msgstr "Seçili yerel teleskopu başlat"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:750
 msgid "Stop"
@@ -2723,7 +2734,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:751
 msgid "Stop the selected local telescope"
-msgstr ""
+msgstr "Seçili yerel teleskopu durdur"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:756
 msgid "Connect"
@@ -2731,7 +2742,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:757
 msgid "Connect to the selected telescope"
-msgstr ""
+msgstr "Seçili telekopa bağlan"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:762
 msgid "Disconnect"
@@ -2739,7 +2750,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:763
 msgid "Disconnect from the selected telescope"
-msgstr ""
+msgstr "Seçili teleskop ile bağlantıyı kes"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:784
 msgid "Select a directory"
@@ -2753,15 +2764,15 @@ msgstr "Biçim"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:282
 msgid "Slew telescope to"
-msgstr ""
+msgstr "Teleskopu çevir"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:284
 msgid "There are no active devices."
-msgstr ""
+msgstr "Etkin aygıt yok."
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:285
 msgid "Slew telescope to coordinates"
-msgstr ""
+msgstr "Teleskopu koordinatlara kaydır"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:286
 msgid "&Right Ascension (J2000):"
@@ -2773,49 +2784,51 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "Hours-minutes-seconds format"
-msgstr ""
+msgstr "Saat-dakika-saniye biçimi"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:291
 msgid "&HMS"
-msgstr ""
+msgstr "&SDS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:293
 msgid "Degrees-minutes-seconds format"
-msgstr ""
+msgstr "Derece-dakika-saniye biçimi"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:295
 msgid "&DMS"
-msgstr ""
+msgstr "&DDS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:297
 msgid "Decimal degrees"
-msgstr ""
+msgstr "Onluk dereceler"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "D&ecimal"
-msgstr ""
+msgstr "O%nluk"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:300
 msgid "&Slew"
-msgstr ""
+msgstr "&Çevir"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Configure &telescopes..."
-msgstr ""
+msgstr "%telescopes ayarla..."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:470
 msgid "Telescope Configuration"
-msgstr ""
+msgstr "Teleskop Ayarlamaları"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope controlled by:"
-msgstr ""
+msgstr "Teleskop tarafından kontrol edildi:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
+"Bir teleskop bu bilgisayara serial port kanalıyla bağlandı ve direk bir "
+"biçimde Stellarium tarafından kotrol ediliyor."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
 msgid "Stellarium, directly through a serial port"
