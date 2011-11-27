@@ -38,6 +38,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init();
+        virtual void deinit();
 	virtual void update(double deltaTime);
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;

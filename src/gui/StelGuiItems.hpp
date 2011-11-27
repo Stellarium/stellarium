@@ -157,6 +157,10 @@ public:
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 	virtual QRectF boundingRect() const;
 	void addButton(StelButton* button);
+        //! Remove a button from the button bar.
+        //! @param button the button to remove
+        //! @param groupName the name of the button group containing the button
+        void removeButton(StelButton* button, const QString& groupName);
 	QRectF boundingRectNoHelpLabel() const;
 	//! Set the color for all the sub elements
 	void setColor(const QColor& c);
@@ -187,6 +191,10 @@ public:
 	//! @param groupName the name of the button group to which the button belongs to. If the group doesn't exist yet, a new one is created.
 	//! @param beforeActionName insert the button before the button associated to the given action. If the action doesn't exist, insert it at the end of the group.
 	void addButton(StelButton* button, const QString& groupName="defaultGroup", const QString& beforeActionName="");
+        //! Remove a button from the button bar.
+        //! @param button the button to remove
+        //! @param groupName the name of the button group containing the button
+        void removeButton(StelButton* button, const QString& groupName);
 	//! Hide the button associated with the action of the passed name
 	StelButton* hideButton(const QString& actionName);
 

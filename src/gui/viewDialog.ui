@@ -528,6 +528,9 @@
                 </property>
                 <item>
                  <widget class="QCheckBox" name="starTwinkleCheckBox">
+                  <property name="toolTip">
+                   <string>Factor of seeing-induced increase of size and luminiscence</string>
+                  </property>
                   <property name="text">
                    <string>Twinkle:</string>
                   </property>

@@ -122,6 +122,10 @@ Oculars::Oculars() : pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), too
 
 Oculars::~Oculars()
 {
+        StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+        Q_ASSERT(gui);
+        gui->getButtonBar()->removeButton(toolbarButton, "065-pluginsGroup");
+        delete toolbarButton;
 	delete ocularDialog;
 	ocularDialog = NULL;
 	
@@ -1319,8 +1323,9 @@ void Oculars::zoom(bool zoomedIn)
 
 		// set new state
 		zoomOcular();
-	} else {
+        } else {
 		//reset to original state
+                flagShowOculars = false;
 		unzoomOcular();
 	}
 }
