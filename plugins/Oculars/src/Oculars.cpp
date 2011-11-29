@@ -723,7 +723,7 @@ void Oculars::enableOcular(bool enableOcularMode)
 	if (!flagShowOculars && requireSelection && !StelApp::getInstance().getStelObjectMgr().getWasSelected() ) {
 		if (usageMessageLabelID == -1) {
 			QFontMetrics metrics(font);
-			QString labelText = "Please select an object before switching to ocular view.";
+			QString labelText = q_("Please select an object before switching to ocular view.");
 			StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
 			int xPosition = projectorParams.viewportCenter[0];
 			xPosition = xPosition - 0.5 * (metrics.width(labelText));
