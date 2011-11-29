@@ -802,9 +802,9 @@ void Oculars::displayPopupMenu()
 		// we will also show the telescopes.
 		if (!oculars.isEmpty())
 		{
-			popup->addAction("&Previous ocular", this, SLOT(decrementOcularIndex()));
-			popup->addAction("&Next ocular", this, SLOT(incrementOcularIndex()));
-			QMenu* submenu = new QMenu("Select &ocular", popup);
+			popup->addAction(q_("&Previous ocular"), this, SLOT(decrementOcularIndex()));
+			popup->addAction(q_("&Next ocular"), this, SLOT(incrementOcularIndex()));
+			QMenu* submenu = new QMenu(q_("Select &ocular"), popup);
 			int availableOcularCount = 0;
 			for (int index = 0; index < oculars.count(); ++index)
 			{
@@ -849,7 +849,7 @@ void Oculars::displayPopupMenu()
 			popup->addSeparator();
 		}
 
-		QAction* action = popup->addAction("Toggle &crosshair");
+		QAction* action = popup->addAction(q_("Toggle &crosshair"));
 		action->setCheckable(true);
 		action->setChecked(flagShowCrosshairs);
 		connect(action, SIGNAL(toggled(bool)),
@@ -858,7 +858,7 @@ void Oculars::displayPopupMenu()
 		// We are not in ocular mode
 		// We want to show the CCD's, and if a CCD is selected, the telescopes
 		//(as a CCD requires a telescope) and the general menu items.
-		QAction* action = new QAction("Configure &Oculars", popup);
+		QAction* action = new QAction(q_("Configure &Oculars"), popup);
 		action->setCheckable(true);
 		action->setChecked(ocularDialog->visible());
 		connect(action, SIGNAL(triggered(bool)),
@@ -867,7 +867,7 @@ void Oculars::displayPopupMenu()
 		popup->addSeparator();
 
 		if (!flagShowTelrad) {
-			QAction* action = popup->addAction("Toggle &CCD");
+			QAction* action = popup->addAction(q_("Toggle &CCD"));
 			action->setCheckable(true);
 			action->setChecked(flagShowCCD);
 			connect(action, SIGNAL(toggled(bool)),
@@ -875,7 +875,7 @@ void Oculars::displayPopupMenu()
 		}
 		
 		if (!flagShowCCD) {
-			QAction* action = popup->addAction("Toggle &Telrad");
+			QAction* action = popup->addAction(q_("Toggle &Telrad"));
 			action->setCheckable(true);
 			action->setChecked(flagShowTelrad);
 			connect(action, SIGNAL(toggled(bool)),
@@ -885,9 +885,9 @@ void Oculars::displayPopupMenu()
 		popup->addSeparator();
 		if (flagShowCCD && selectedCCDIndex > -1 && selectedTelescopeIndex > -1)
 		{
-			popup->addAction("&Previous CCD", this, SLOT(decrementCCDIndex()));
-			popup->addAction("&Next CCD", this, SLOT(incrementCCDIndex()));
-			QMenu* submenu = new QMenu("&Select CCD", popup);
+			popup->addAction(q_("&Previous CCD"), this, SLOT(decrementCCDIndex()));
+			popup->addAction(q_("&Next CCD"), this, SLOT(incrementCCDIndex()));
+			QMenu* submenu = new QMenu(q_("&Select CCD"), popup);
 			for (int index = 0; index < ccds.count(); ++index)
 			{
 				QString label;
@@ -909,7 +909,7 @@ void Oculars::displayPopupMenu()
 			}
 			popup->addMenu(submenu);
 			
-			submenu = new QMenu("&Rotate CCD", popup);
+			submenu = new QMenu(q_("&Rotate CCD"), popup);
 			QAction* rotateAction = NULL;
 			rotateAction = submenu->addAction(QString("&1: -90") + QChar(0x00B0),
 														 ccdRotationSignalMapper, SLOT(map()));
@@ -941,7 +941,7 @@ void Oculars::displayPopupMenu()
 			rotateAction = submenu->addAction(QString("&0: +90") + QChar(0x00B0),
 														 ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("90"));
-			rotateAction = submenu->addAction("&Reset", this, SLOT(ccdRotationReset()));
+			rotateAction = submenu->addAction(q_("&Reset rotation"), this, SLOT(ccdRotationReset()));
 			popup->addMenu(submenu);
 			
 			popup->addSeparator();
@@ -1207,7 +1207,7 @@ void Oculars::initializeActivationActions()
 	        this, SLOT(toggleCrosshairs(bool)));
 
 	actionShowSensor = gui->addGuiActions("actionShow_Sensor",
-	                                      N_("Sensor"),
+	                                      N_("Image sensor frame"),
 	                                      QString(),
 	                                      group,
 	                                      true);
@@ -1215,7 +1215,7 @@ void Oculars::initializeActivationActions()
 			this, SLOT(toggleCCD(bool)));
 
 	actionShowTelrad = gui->addGuiActions("actionShow_Telrad",
-	                                      N_("Telrad"),
+	                                      N_("Telrad sight"),
 	                                      QString(),
 	                                      group,
 	                                      true);
@@ -1406,63 +1406,116 @@ void Oculars::paintText(const StelCore* core)
 	
 	// The Ocular
 	if (flagShowOculars) {
-		QString ocularNumberLabel = "Ocular #" + QVariant(selectedOcularIndex).toString();
-		if (ocular->name() != QString(""))  {
-			ocularNumberLabel.append(" : ").append(ocular->name());
+		QString ocularNumberLabel;
+		QString name = ocular->name();
+		if (name.isEmpty())
+		{
+			ocularNumberLabel = QString(q_("Ocular #%1"))
+		                            .arg(selectedOcularIndex);
+		}
+		else
+		{
+			ocularNumberLabel = QString(q_("Ocular #%1: %2"))
+			                    .arg(selectedOcularIndex)
+			                    .arg(name);
 		}
 		// The name of the ocular could be really long.
-		if (ocular->name().length() > widthString.length()) {
+		if (name.length() > widthString.length()) {
 			xPosition -= (insetFromRHS / 2.0);
 		}
 		painter.drawText(xPosition, yPosition, ocularNumberLabel);
 		yPosition-=lineHeight;
 		
 		if (!ocular->isBinoculars()) {
-			QString ocularFLLabel = "Ocular FL: " + QVariant(ocular->effectiveFocalLength()).toString() + "mm";
-			painter.drawText(xPosition, yPosition, ocularFLLabel);
+			QString eFocalLength = QVariant(ocular->effectiveFocalLength()).toString();
+			// TRANSLATORS: FL = Focal length
+			QString eFocalLengthLabel = QString(q_("Ocular FL: %1 mm")).arg(eFocalLength);
+			painter.drawText(xPosition, yPosition, eFocalLengthLabel);
 			yPosition-=lineHeight;
 			
-			QString ocularFOVLabel = "Ocular aFOV: " + QVariant(ocular->appearentFOV()).toString() + QChar(0x00B0);
+			QString ocularFov = QString::number(ocular->appearentFOV());
+			ocularFov.append(QChar(0x00B0));//Degree sign
+			// TRANSLATORS: aFOV = apparent field of view
+			QString ocularFOVLabel = QString(q_("Ocular aFOV: %1"))
+			                         .arg(ocularFov);
 			painter.drawText(xPosition, yPosition, ocularFOVLabel);
 			yPosition-=lineHeight;
 			
 			// The telescope
-			QString telescopeNumberLabel = "Telescope #" + QVariant(selectedTelescopeIndex).toString();
-			if (telescope->name() != QString(""))  {
-				telescopeNumberLabel.append(" : ").append(telescope->name());
+			QString telescopeNumberLabel;
+			QString telescopeName = telescope->name();
+			if (telescopeName.isEmpty())
+			{
+				telescopeNumberLabel = QString(q_("Telescope #%1"))
+				                       .arg(selectedTelescopeIndex);
+			}
+			else
+			{
+				telescopeNumberLabel = QString(q_("Telescope #%1: %2"))
+				                       .arg(selectedTelescopeIndex)
+				                       .arg(telescopeName);
 			}
 			painter.drawText(xPosition, yPosition, telescopeNumberLabel);
 			yPosition-=lineHeight;
 			
 			// General info
-			QString magnificationLabel = "Magnification: " + QVariant(((int)(ocular->magnification(telescope) * 10.0)) / 10.0).toString()+ "x";
+			double magnification = ((int)(ocular->magnification(telescope) * 10.0)) / 10.0;
+			QString magString = QString::number(magnification);
+			magString.append(QChar(0x00D7));//Multiplication sign
+			QString magnificationLabel = QString(q_("Magnification: %1"))
+			                             .arg(magString);
 			painter.drawText(xPosition, yPosition, magnificationLabel);
 			yPosition-=lineHeight;
 			
-			QString fovLabel = "FOV: " + QVariant(((int)(ocular->actualFOV(telescope) * 10000.00)) / 10000.0).toString() + QChar(0x00B0);
+			double fov = ((int)(ocular->actualFOV(telescope) * 10000.00)) / 10000.0;
+			QString fovString = QString::number(fov);
+			fovString.append(QChar(0x00B0));//Degree sign
+			QString fovLabel = QString(q_("FOV: %1")).append(fovString);
 			painter.drawText(xPosition, yPosition, fovLabel);
 		}
 	}
 
 	// The CCD
 	if (flagShowCCD) {
-		QString ccdsensorLabel, ccdInfoLabel;
+		QString ccdSensorLabel, ccdInfoLabel;
 		double fovX = ((int)(ccd->getActualFOVx(telescope) * 1000.0)) / 1000.0;
 		double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;
-		ccdInfoLabel = "Dimension : " + QVariant(fovX).toString() + QChar(0x00B0) + "x" + QVariant(fovY).toString() + QChar(0x00B0);
-		if (ccd->name() != QString("")) {
-			ccdsensorLabel = "Sensor #" + QVariant(selectedCCDIndex).toString();
-			ccdsensorLabel.append(" : ").append(ccd->name());
+		QString stringFovX = QString::number(fovX);
+		stringFovX.append(QChar(0x00B0));//Degree sign
+		QString stringFovY = QString::number(fovY);
+		stringFovY.append(QChar(0x00B0));//Degree sign
+		QString fovDimensions = stringFovX + QChar(0x00D7) + stringFovY;
+		ccdInfoLabel = QString(q_("Dimensions: %1")).arg(fovDimensions);
+		
+		QString name = ccd->name();
+		if (name.isEmpty())
+		{
+			ccdSensorLabel = QString(q_("Sensor #%1")).arg(selectedCCDIndex);
 		}
-		painter.drawText(xPosition, yPosition, ccdsensorLabel);
+		else
+		{
+			ccdSensorLabel = QString(q_("Sensor #%1: %2"))
+			                 .arg(selectedCCDIndex)
+			                 .arg(name);
+		}
+		painter.drawText(xPosition, yPosition, ccdSensorLabel);
 		yPosition-=lineHeight;
 		painter.drawText(xPosition, yPosition, ccdInfoLabel);
 		yPosition-=lineHeight;
 
 		// The telescope
-		QString telescopeNumberLabel = "Telescope #" + QVariant(selectedTelescopeIndex).toString();
-		if (telescope->name() != QString(""))  {
-			telescopeNumberLabel.append(" : ").append(telescope->name());
+		QString telescopeNumberLabel;
+		QString telescopeName = telescope->name();
+		if (telescopeName.isEmpty())
+		{
+			telescopeNumberLabel = QString(q_("Telescope #%1"))
+			                       .arg(selectedTelescopeIndex);
+		}
+		else
+		{
+			telescopeNumberLabel = QString(q_("Telescope #%1: %2"))
+			                       .arg(selectedTelescopeIndex)
+			                       .arg(telescopeName);
 		}
 		painter.drawText(xPosition, yPosition, telescopeNumberLabel);
 		yPosition-=lineHeight;
@@ -1639,9 +1692,9 @@ QMenu* Oculars::addTelescopeSubmenu(QMenu *parent)
 {
 	Q_ASSERT(parent);
 
-	QMenu* submenu = new QMenu("&Telescope", parent);
-	submenu->addAction("&Previous telescope", this, SLOT(decrementTelescopeIndex()));
-	submenu->addAction("&Next telescope", this, SLOT(incrementTelescopeIndex()));
+	QMenu* submenu = new QMenu(q_("&Telescope"), parent);
+	submenu->addAction(q_("&Previous telescope"), this, SLOT(decrementTelescopeIndex()));
+	submenu->addAction(q_("&Next telescope"), this, SLOT(incrementTelescopeIndex()));
 	submenu->addSeparator();
 	for (int index = 0; index < telescopes.count(); ++index)
 	{
