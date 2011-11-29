@@ -603,6 +603,11 @@ void Oculars::enableGuiPanel(bool enable)
 			StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
 			Q_ASSERT(gui);
 			guiPanel = new OcularsGuiPanel(this, gui->getSkyGui());
+			
+			if (flagShowOculars)
+				guiPanel->showOcularGui();
+			else if (flagShowCCD)
+				guiPanel->showCcdGui();
 		}
 	}
 	else
