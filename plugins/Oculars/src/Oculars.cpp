@@ -527,6 +527,9 @@ void Oculars::init()
 	styleSheetFile.close();
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)),
 			  this, SLOT(setStelStyle(const QString&)));
+	
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
+	        this, SLOT(retranslateGui()));
 }
 
 void Oculars::setStelStyle(const QString&)
@@ -622,6 +625,29 @@ void Oculars::enableGuiPanel(bool enable)
 	guiPanelEnabled = enable;
 	settings->setValue("enable_control_panel", enable);
 	settings->sync();
+}
+
+void Oculars::retranslateGui()
+{
+	if (guiPanel)
+	{
+		// TODO: Fix this hack!
+		
+		// Delete and re-create the panel to retranslate its trings 
+		guiPanel->hide();
+		delete guiPanel;
+		guiPanel = 0;
+		
+		StelApp& app = StelApp::getInstance();
+		StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
+		Q_ASSERT(gui);
+		guiPanel = new OcularsGuiPanel(this, gui->getSkyGui());
+		
+		if (flagShowOculars)
+			guiPanel->showOcularGui();
+		else if (flagShowCCD)
+			guiPanel->showCcdGui();
+	}
 }
 
 /* ********************************************************************* */
