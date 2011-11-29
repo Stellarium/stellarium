@@ -117,6 +117,7 @@ private slots:
 	void setRequireSelection(bool state);
 	void setScaleImageCircle(bool state);
 	void setScreenFOVForCCD();
+	void retranslateGui();
 	void setStelStyle(const QString& style);
 
 private:
