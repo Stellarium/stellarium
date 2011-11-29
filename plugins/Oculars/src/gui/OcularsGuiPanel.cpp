@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
+#include "StelTranslator.hpp"
 
 #include <QAction>
 #include <QGridLayout>
@@ -64,13 +65,14 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	//QPixmap rightBackground(":/graphicGui/btbg-right.png");
 
 	StelApp& stelApp = StelApp::getInstance();
+	Q_ASSERT(ocularsPlugin->actionShowOcular);
 	buttonOcular = new StelButton(buttonBar,
 	                              QPixmap(":/ocular/bt_ocular_on.png"),
 	                              QPixmap(":/ocular/bt_ocular_off.png"),
 	                              QPixmap(),
 	                              ocularsPlugin->actionShowOcular,
 	                              true); //No background
-	buttonOcular->setToolTip("Ocular");
+	buttonOcular->setToolTip(ocularsPlugin->actionShowOcular->text());
 	//buttonOcular->setBackgroundPixmap(leftBackground);
 	buttonOcular->setParentItem(buttonBar);
 
@@ -81,38 +83,42 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	connect(ocularsPlugin->actionShowOcular, SIGNAL(toggled(bool)),
 	        ocularsPlugin, SLOT(enableOcular(bool)));
 
+	Q_ASSERT(ocularsPlugin->actionShowCrosshairs);
 	buttonCrosshairs = new StelButton(buttonBar,
 	                                  QPixmap(":/ocular/bt_crosshairs_on.png"),
 	                                  QPixmap(":/ocular/bt_crosshairs_off.png"),
 	                                  QPixmap(),
 	                                  ocularsPlugin->actionShowCrosshairs,
 	                                  true);
-	buttonCrosshairs->setToolTip("Crosshairs");
+	buttonCrosshairs->setToolTip(ocularsPlugin->actionShowCrosshairs->text());
 	buttonCrosshairs->setVisible(false);
 
+	Q_ASSERT(ocularsPlugin->actionShowSensor);
 	buttonCcd = new StelButton(buttonBar,
 	                           QPixmap(":/ocular/bt_sensor_on.png"),
 	                           QPixmap(":/ocular/bt_sensor_off.png"),
 	                           QPixmap(),
 	                           ocularsPlugin->actionShowSensor,
 	                           true);
-	buttonCcd->setToolTip("Sensor");
+	buttonCcd->setToolTip(ocularsPlugin->actionShowSensor->text());
 
+	Q_ASSERT(ocularsPlugin->actionShowTelrad);
 	buttonTelrad = new StelButton(buttonBar,
 	                              QPixmap(":/ocular/bt_telrad_on.png"),
 	                              QPixmap(":/ocular/bt_telrad_off.png"),
 	                              QPixmap(),
 	                              ocularsPlugin->actionShowTelrad,
 	                              true);
-	buttonTelrad->setToolTip("Telrad circles");
+	buttonTelrad->setToolTip(ocularsPlugin->actionShowTelrad->text());
 
+	Q_ASSERT(ocularsPlugin->actionConfiguration);
 	buttonConfiguration = new StelButton(buttonBar,
 	                                     QPixmap(":/ocular/bt_settings_on.png"),
 	                                     QPixmap(":/ocular/bt_settings_off.png"),
 	                                     QPixmap(),
 	                                     ocularsPlugin->actionConfiguration,
 	                                     true);
-	buttonConfiguration->setToolTip("Oculars plugin configuration window");
+	buttonConfiguration->setToolTip(ocularsPlugin->actionConfiguration->text());
 
 	qreal buttonHeight = buttonOcular->boundingRect().height();
 	buttonBar->setMinimumHeight(buttonHeight);
@@ -177,37 +183,37 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                  prevArrowOff,
 	                                  QPixmap(),
 	                                  defaultAction);
-	prevOcularButton->setToolTip("Previous ocular");
+	prevOcularButton->setToolTip(q_("Previous ocular"));
 	nextOcularButton = new StelButton(ocularControls,
 	                                  nextArrow,
 	                                  nextArrowOff,
 	                                  QPixmap(),
 	                                  defaultAction);
-	nextOcularButton->setToolTip("Next ocular");
+	nextOcularButton->setToolTip(q_("Next ocular"));
 	prevCcdButton = new StelButton(ccdControls,
 	                               prevArrow,
 	                               prevArrowOff,
 	                               QPixmap(),
 	                               defaultAction);
-	prevCcdButton->setToolTip("Previous CCD frame");
+	prevCcdButton->setToolTip(q_("Previous CCD frame"));
 	nextCcdButton = new StelButton(ccdControls,
 	                               nextArrow,
 	                               nextArrowOff,
 	                               QPixmap(),
 	                               defaultAction);
-	nextCcdButton->setToolTip("Next CCD frame");
+	nextCcdButton->setToolTip(q_("Next CCD frame"));
 	prevTelescopeButton = new StelButton(telescopeControls,
 	                                     prevArrow,
 	                                     prevArrowOff,
 	                                     QPixmap(),
 	                                     defaultAction);
-	prevTelescopeButton->setToolTip("Previous telescope");
+	prevTelescopeButton->setToolTip(q_("Previous telescope"));
 	nextTelescopeButton = new StelButton(telescopeControls,
 	                                     nextArrow,
 	                                     nextArrowOff,
 	                                     QPixmap(),
 	                                     defaultAction);
-	nextTelescopeButton->setToolTip("Next telescope");
+	nextTelescopeButton->setToolTip(q_("Next telescope"));
 
 	connect(nextOcularButton, SIGNAL(triggered()),
 	        ocularsPlugin, SLOT(incrementOcularIndex()));
@@ -236,7 +242,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                        pHover,
 	                                        defaultAction,
 	                                        true);
-	rotateCcdMinus15Button->setToolTip("Rotate the sensor frame 15 degrees counterclockwise");
+	rotateCcdMinus15Button->setToolTip(q_("Rotate the sensor frame 15 degrees counterclockwise"));
 
 	degrees = QString("-5%1").arg(QChar(0x00B0));
 	degreesW = fm.width(degrees);
@@ -249,7 +255,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                       pHover,
 	                                       defaultAction,
                                            true);
-	rotateCcdMinus5Button->setToolTip("Rotate the sensor frame 5 degrees counterclockwise");
+	rotateCcdMinus5Button->setToolTip(q_("Rotate the sensor frame 5 degrees counterclockwise"));
 
 	degrees = QString("-1%1").arg(QChar(0x00B0));
 	degreesW = fm.width(degrees);
@@ -262,7 +268,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                       pHover,
 	                                       defaultAction,
                                            true);
-	rotateCcdMinus1Button->setToolTip("Rotate the sensor frame 1 degree counterclockwise");
+	rotateCcdMinus1Button->setToolTip(q_("Rotate the sensor frame 1 degree counterclockwise"));
 
 	degrees = QString("0%1").arg(QChar(0x00B0));
 	degreesW = fm.width(degrees);
@@ -275,7 +281,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                        pHover,
 	                                        defaultAction,
                                             true);
-	resetCcdRotationButton->setToolTip("Reset the sensor frame rotation");
+	resetCcdRotationButton->setToolTip(q_("Reset the sensor frame rotation"));
 
 	degrees = QString("+1%1").arg(QChar(0x00B0));
 	degreesW = fm.width(degrees);
@@ -288,7 +294,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                      pHover,
                                           defaultAction,
                                           true);
-	rotateCcdPlus1Button->setToolTip("Rotate the sensor frame 1 degree clockwise");
+	rotateCcdPlus1Button->setToolTip(q_("Rotate the sensor frame 1 degree clockwise"));
 
 	degrees = QString("+5%1").arg(QChar(0x00B0));
 	degreesW = fm.width(degrees);
@@ -301,7 +307,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                      pHover,
                                           defaultAction,
                                           true);
-	rotateCcdPlus5Button->setToolTip("Rotate the sensor frame 5 degrees clockwise");
+	rotateCcdPlus5Button->setToolTip(q_("Rotate the sensor frame 5 degrees clockwise"));
 
 	degrees = QString("+15%1").arg(QChar(0x00B0));
 	degreesW = fm.width(degrees);
@@ -314,7 +320,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                       pHover,
 	                                       defaultAction,
                                            true);
-	rotateCcdPlus15Button->setToolTip("Rotate the sensor frame 15 degrees clockwise");
+	rotateCcdPlus15Button->setToolTip(q_("Rotate the sensor frame 15 degrees clockwise"));
 
 	QSignalMapper* sm = ocularsPlugin->ccdRotationSignalMapper;
 	sm->setMapping(rotateCcdMinus15Button, QString("-15"));
@@ -470,11 +476,11 @@ void OcularsGuiPanel::updateOcularControls()
 	QString fullName;
 	if (name.isEmpty())
 	{
-		fullName = QString("Ocular #%1").arg(index);
+		fullName = QString(q_("Ocular #%1")).arg(index);
 	}
 	else
 	{
-		fullName = QString("Ocular #%1: %2").arg(index).arg(name);
+		fullName = QString(q_("Ocular #%1: %2")).arg(index).arg(name);
 	}
 	fieldOcularName->setPlainText(fullName);
 
@@ -511,20 +517,20 @@ void OcularsGuiPanel::updateOcularControls()
 	else
 	{
 		double focalLength = ocular->effectiveFocalLength();
-		QString focalLengthString = QString("Ocular FL: %1mm").arg(focalLength);
+		QString focalLengthString = QString(q_("Ocular FL: %1 mm")).arg(focalLength);
 		fieldOcularFl->setPlainText(focalLengthString);
-		fieldOcularFl->setToolTip("Focal length of the ocular");
+		fieldOcularFl->setToolTip(q_("Effective focal length of the ocular"));
 		fieldOcularFl->setPos(posX, posY);
 		posY += fieldOcularFl->boundingRect().height();
 		widgetHeight += fieldOcularFl->boundingRect().height();
 
 		double apparentFov = ocular->appearentFOV();
-		//TODO: This one could be better. Even in LTR languages the degree sign
-		//is to the right of the value?
-		QString apparentFovString =
-			QString("Ocular aFOV: %1%2").arg(apparentFov).arg(QChar(0x00B0));
-		fieldOcularAfov->setPlainText(apparentFovString);
-		fieldOcularAfov->setToolTip("Apparent field of view of the ocular");
+		QString apparentFovString = QString::number(apparentFov);
+		apparentFovString.append(QChar(0x00B0));// Degree sign
+		QString apparentFovLabel = QString(q_("Ocular aFOV: %1"))
+		                           .arg(apparentFovLabel);
+		fieldOcularAfov->setPlainText(apparentFovLabel);
+		fieldOcularAfov->setToolTip(q_("Apparent field of view of the ocular"));
 		fieldOcularAfov->setPos(posX, posY);
 		widgetHeight += fieldOcularAfov->boundingRect().height();
 
@@ -551,11 +557,11 @@ void OcularsGuiPanel::updateCcdControls()
 	QString fullName;
 	if (name.isEmpty())
 	{
-		fullName = QString("Sensor #%1").arg(index);
+		fullName = QString(q_("Sensor #%1")).arg(index);
 	}
 	else
 	{
-		fullName = QString("Sensor #%1: %2").arg(index).arg(name);
+		fullName = QString(q_("Sensor #%1: %2")).arg(index).arg(name);
 	}
 	fieldCcdName->setPlainText(fullName);
 
@@ -589,15 +595,19 @@ void OcularsGuiPanel::updateCcdControls()
 	Q_ASSERT(telescope);
 	double fovX = ((int)(ccd->getActualFOVx(telescope) * 1000.0)) / 1000.0;
 	double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;
-	//TODO: Again, the symbol could be handled simpler.
-	QString dimensions = QString("Dimensions: %1%2 %3 %4%5").arg(fovX).arg(QChar(0x00B0)).arg(QChar(0x00D7)).arg(fovY).arg(QChar(0x00B0));
-	fieldCcdDimensions->setPlainText(dimensions);
+	QString stringFovX = QString::number(fovX) + QChar(0x00B0);
+	QString stringFovY = QString::number(fovY) + QChar(0x00B0);
+	QString dimensions = stringFovX + QChar(0x00D7) + stringFovY;
+	QString dimensionsLabel = QString(q_("Dimensions: %1")).arg(dimensions);
+	fieldCcdDimensions->setPlainText(dimensionsLabel);
 	fieldCcdDimensions->setPos(posX, posY);
 	posY += fieldCcdDimensions->boundingRect().height();
 	widgetHeight += fieldCcdDimensions->boundingRect().height();
 
-	QString rotation = QString("Rotation (angle): %1%2").arg(ocularsPlugin->ccdRotationAngle, 0, 'f', 2).arg(QChar(0x00B0));
-	fieldCcdRotation->setPlainText(rotation);
+	QString rotation = QString::number(ocularsPlugin->ccdRotationAngle, 'f', 2);
+	rotation.append(QChar(0x00B0));
+	QString rotationLabel = QString(q_("Rotation: %1")).arg(rotation);
+	fieldCcdRotation->setPlainText(rotationLabel);
 	fieldCcdRotation->setPos(posX, posY);
 	posY += fieldCcdRotation->boundingRect().height();
 	widgetHeight += fieldCcdRotation->boundingRect().height();
@@ -643,11 +653,11 @@ void OcularsGuiPanel::updateTelescopeControls()
 	QString fullName;
 	if (name.isEmpty())
 	{
-		fullName = QString("Telescope #%1").arg(index);
+		fullName = QString(q_("Telescope #%1")).arg(index);
 	}
 	else
 	{
-		fullName = QString("Telescope #%1: %2").arg(index).arg(name);
+		fullName = QString(q_("Telescope #%1: %2")).arg(index).arg(name);
 	}
 	fieldTelescopeName->setPlainText(fullName);
 
@@ -690,8 +700,8 @@ void OcularsGuiPanel::updateTelescopeControls()
 			posY = 0.;
 			widgetHeight = 0.;
 
-			fieldMagnification->setToolTip("Magnification provided by these binoculars");
-			fieldFov->setToolTip("Actual field of view provided by these binoculars");
+			fieldMagnification->setToolTip(q_("Magnification provided by these binoculars"));
+			fieldFov->setToolTip(q_("Actual field of view provided by these binoculars"));
 		}
 		else
 		{
@@ -699,24 +709,25 @@ void OcularsGuiPanel::updateTelescopeControls()
 			nextTelescopeButton->setVisible(true);
 			fieldTelescopeName->setVisible(true);
 
-			fieldMagnification->setToolTip("Magnification provided by this ocular/telescope combination");
-			fieldFov->setToolTip("Actual field of view provided by this ocular/telescope combination");
+			fieldMagnification->setToolTip(q_("Magnification provided by this ocular/telescope combination"));
+			fieldFov->setToolTip(q_("Actual field of view provided by this ocular/telescope combination"));
 		}
 
 		//WTF? Rounding?
 		double magnification = ((int)(ocular->magnification(telescope) * 10.0)) / 10.0;
-		//TODO: Again, this can be simpler
-		QString magnificationString =
-			QString("Magnification: %1%2").arg(magnification).arg(QChar(0x00D7));
-		fieldMagnification->setPlainText(magnificationString);
+		QString magnificationString = QString::number(magnification);
+		magnificationString.append(QChar(0x00D7));
+		QString magnificationLabel = QString(q_("Magnification: %1"))
+		                             .arg(magnificationString);
+		fieldMagnification->setPlainText(magnificationLabel);
 		fieldMagnification->setPos(posX, posY);
 		posY += fieldMagnification->boundingRect().height();
 		widgetHeight += fieldMagnification->boundingRect().height();
 
 		double fov = ((int)(ocular->actualFOV(telescope) * 10000.00)) / 10000.0;
-		//TODO: Again, this can be simpler
-		QString fovString = QString("FOV: %1%2").arg(fov).arg(QChar(0x00B0));
-		fieldFov->setPlainText(fovString);
+		QString fovString = QString::number(fov) + QChar(0x00B0);
+		QString fovLabel = QString(q_("FOV: %1")).arg(fovString);
+		fieldFov->setPlainText(fovLabel);
 		fieldFov->setPos(posX, posY);
 		widgetHeight += fieldFov->boundingRect().height();
 
