@@ -71,25 +71,9 @@ OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular 
 }
 
 OcularDialog::~OcularDialog()
-{	
+{
 	delete ui;
 	ui = NULL;
-	
-	if (ocularMapper)
-	{
-		ocularMapper->clearMapping();
-		delete ocularMapper;
-	}
-	if (telescopeMapper)
-	{
-		telescopeMapper->clearMapping();
-		delete telescopeMapper;
-	}
-	if (ccdMapper)
-	{
-		ccdMapper->clearMapping();
-		delete ccdMapper;
-	}
 }
 
 /* ********************************************************************* */
