@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-25 15:47+0200\n"
-"PO-Revision-Date: 2011-11-27 16:22+0000\n"
+"PO-Revision-Date: 2011-11-28 08:16+0000\n"
 "Last-Translator: Jonas Persson <jonas.persson@physics.org>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-28 05:18+0000\n"
-"X-Generator: Launchpad (build 14381)\n"
+"X-Launchpad-Export-Date: 2011-11-29 05:24+0000\n"
+"X-Generator: Launchpad (build 14399)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
 msgid "Meridian"
@@ -567,7 +567,7 @@ msgstr "OSX-utvecklare: %1"
 #: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "Tester: %1"
 
 #: src/gui/StelGui.cpp:98
 msgid "Display Options"
@@ -1712,7 +1712,7 @@ msgstr "Visa grafik"
 #: src/ui_viewDialog.h:1115
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Art brightness:"
-msgstr ""
+msgstr "Ljusstyrka på konst:"
 
 #: src/ui_viewDialog.h:1116
 msgid "Projection"
@@ -2272,15 +2272,18 @@ msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
+"Satellitprogramtillägget förutsäger positionerna till artificiella "
+"satelliter i bana runt jorden."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:216
 msgid "Notes for users"
-msgstr ""
+msgstr "kommentarer till användare"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:217
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
+"Satelliter och deras banor visas bara om observatören befinner sig på jorden."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:218
 msgid ""
@@ -2288,12 +2291,18 @@ msgid ""
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
+"De förutsagda positionerna stämmer bara för en relativt kort tidsperiod ( i "
+"storleksordningen dagar, veckor eller kanske en månad in i framtiden eller "
+"den gångna tiden). Förvänta stora avvik när man observerar utanför denna "
+"tidsperioden."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:219
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
 msgstr ""
+"Bandata blir snabbt inaktuella ( efter några veckor, ibland några dagar). "
+"För att få användbara data, måste du uppdatera TLE-data ofta."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:221
@@ -2309,11 +2318,13 @@ msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
+"Satellitprogramtillägget är under utveckling. Några funktioner är "
+"ofullständiga, saknas eller kan innehålla fel."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:231
 msgid "TLE data updates"
-msgstr ""
+msgstr "Uppdateringar för TLE-data"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:232
 msgid ""
@@ -2321,6 +2332,9 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
+"Satellitprogramtillägget kan lasta ned TLE-data automatiskt från internet, "
+"och programtillägget har som standard att göra detta om de existerande data "
+"är mer än 72 timer. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:233
 #, qt-format
@@ -2329,6 +2343,9 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
+"Omdu deaktiverar internetuppdateringar, kan du oppdatera från en fil på din "
+"datamaskin. Denna filen måste vara i samma format som Celestrak-"
+"uppdateringarna (se %1 för ett exempel)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:234
 msgid ""
@@ -2338,7 +2355,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:237
 msgid "Adding new satellites"
-msgstr ""
+msgstr "Lägger till nya satelliter"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:238
 #, qt-format
@@ -2383,13 +2400,13 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:250
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
-msgstr ""
+msgstr "Om du har några frågor, kan du %1få svar här%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:252
 #, qt-format
 msgid "Bug reports can be made %1here%2."
-msgstr ""
+msgstr "Felrapportering kan göras %1här%2."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
@@ -2400,7 +2417,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:267
 msgid "Internet updates disabled"
-msgstr ""
+msgstr "Internet-uppdatering deaktiverad"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:269
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
@@ -2428,28 +2445,28 @@ msgstr "Uppdatera nu"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:292
 msgid "Update from files"
-msgstr ""
+msgstr "Uppdatera från filer"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:304
 msgid "Update error"
-msgstr ""
+msgstr "Fel vid uppdatering"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:311
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
-msgstr ""
+msgstr "Uppdaterade %1/%2 satellit(er); %3 saknas"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:368
 msgid "[new source]"
-msgstr ""
+msgstr "[ny källa]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 msgid "[all not displayed]"
-msgstr ""
+msgstr "[alla visas inte]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
 msgid "[all displayed]"
-msgstr ""
+msgstr "[alla visas]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:411
 msgid "[all]"
@@ -2457,20 +2474,20 @@ msgstr "[alla]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:467
 msgid "Select TLE Update File"
-msgstr ""
+msgstr "Välj TLE-uppdateringsfil"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:598
 #: plugins/Satellites/src/ui_satellitesDialog.h:599
 msgid "Satellites Configuration"
-msgstr ""
+msgstr "Satellitinställningar"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:601
 msgid "Update TLE lists from Internet sources"
-msgstr ""
+msgstr "Uppdatera TLE-listor från internet"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:602
 msgid "Update from Internet sources"
-msgstr ""
+msgstr "Uppdatera från internet"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:603
 msgid "Last update:"
@@ -2537,7 +2554,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:636
 msgid "Displayed"
-msgstr ""
+msgstr "Visad"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:638
 msgid "Display orbit line(s) for the selected satellite(s)"
@@ -2545,7 +2562,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 msgid "Orbit"
-msgstr ""
+msgstr "Bana"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
 msgid "Satellite ID:"
