@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-30 12:31+0200\n"
-"PO-Revision-Date: 2011-09-24 11:36+0000\n"
+"PO-Revision-Date: 2011-12-01 22:35+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-01 05:19+0000\n"
+"X-Launchpad-Export-Date: 2011-12-02 04:44+0000\n"
 "X-Generator: Launchpad (build 14414)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -336,7 +336,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:712
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "لقد تمت إضافة جميع أدلة النجوم المتاحة"
 
 #: src/gui/ConfigurationDialog.cpp:717
 #, qt-format
@@ -561,12 +561,12 @@ msgstr "المطور :%1"
 #: src/gui/HelpDialog.cpp:307 src/gui/HelpDialog.cpp:308
 #, qt-format
 msgid "OSX Developer: %1"
-msgstr "مطور OSX : %1"
+msgstr "مطور نظام %1 :OSX"
 
 #: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "فاحص: %1"
 
 #: src/gui/StelGui.cpp:98
 msgid "Display Options"
@@ -605,7 +605,7 @@ msgstr "الشبكة الاستوائية"
 #: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1103
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial J2000 grid"
-msgstr "الشبكة الاستوائية (J2000)"
+msgstr "شبكة 2000 الاستوائية"
 
 #: src/gui/StelGui.cpp:107
 msgid "Galactic grid"
@@ -663,7 +663,7 @@ msgstr "النجوم"
 #: src/gui/StelGui.cpp:121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Planet labels"
-msgstr ""
+msgstr "أسماء الكواكب"
 
 #: src/gui/StelGui.cpp:122
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
@@ -1641,7 +1641,7 @@ msgstr "أظهر الغلاف الجوي"
 #: src/ui_viewDialog.h:1084
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Light pollution:"
-msgstr ""
+msgstr "التلوث الضوئي:"
 
 #: src/ui_viewDialog.h:1086
 msgid "pressure, temperature, extinction coefficient"
@@ -1715,7 +1715,7 @@ msgstr "أظهر الرسومات"
 #: src/ui_viewDialog.h:1115
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Art brightness:"
-msgstr ""
+msgstr "سطوع الرسومات:"
 
 #: src/ui_viewDialog.h:1116
 msgid "Projection"
@@ -2000,7 +2000,7 @@ msgstr "أوقف التحميل. تستطيع دائماً أن تبدأ مجد�
 #: src/ui_configurationDialog.h:853
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
 msgid "Cancel"
-msgstr "ألغ"
+msgstr "إلغاء"
 
 #: src/ui_configurationDialog.h:856
 msgid "Close window when script runs"
@@ -3601,55 +3601,55 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 msgid "Solar System body"
-msgstr ""
+msgstr "جرم النظام الشمسي"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:158
 msgid "Current date/time"
-msgstr ""
+msgstr "التاريخ والوقت الحاليين"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:163
 msgid "Set time zone"
-msgstr ""
+msgstr "ضبط المنطقة الزمنية"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:164
 msgid "Day keys"
-msgstr ""
+msgstr "مفاتيح الأيام"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:165
 msgid "Startup date/time preset"
-msgstr ""
+msgstr "الضبط المسبق للتاريخ والوقت عند بدء البرنامج"
 
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "system"
-msgstr ""
+msgstr "استخدم تاريخ ووقت النظام عند البدء"
 
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:174
 msgid "preset"
-msgstr ""
+msgstr "استخدم التاريخ والوقت المضبوطين مسبقاً عند البدء"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "mmddyyyy"
-msgstr ""
+msgstr "ش ش ي ي س س س س"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "ddmmyyyy"
-msgstr ""
+msgstr "ي ي ش ش س س س س"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "yyyymmdd"
-msgstr ""
+msgstr "س س س س ش ش ي ي"
 
 #. TRANSLATORS: 12-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "12h"
-msgstr ""
+msgstr "12 ساعة"
 
 #. TRANSLATORS: 24-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:193
 msgid "24h"
-msgstr ""
+msgstr "24 ساعة"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:218
 msgid "Language"
@@ -3657,91 +3657,91 @@ msgstr "اللغة"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:232
 msgid "Show stars"
-msgstr ""
+msgstr "أظهر النجوم"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Colors"
-msgstr ""
+msgstr "الألوان"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Nebula names"
-msgstr ""
+msgstr "أسماء السدم"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:340
 msgid "Nebula hints"
-msgstr ""
+msgstr "علامات السدم"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:364
 msgid "Effects"
-msgstr ""
+msgstr "التأثيرات"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:378
 msgid "Manual zoom"
-msgstr ""
+msgstr "التقريب والتبعيد اليدوي"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:383
 msgid "Magnitude scaling multiplier"
-msgstr ""
+msgstr "مضاعف درجات قدر اللمعان"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:385
 msgid "Milky Way intensity:"
-msgstr ""
+msgstr "سطوع درب التبانة:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:391
 msgid "Nebula label frequency:"
-msgstr ""
+msgstr "تكرار اسم السديم:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Zoom duration:"
-msgstr ""
+msgstr "مدة التقريب والتبعيد:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Cursor timeout:"
-msgstr ""
+msgstr "مهلة إخفاء المؤشر"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Setting landscape sets location"
-msgstr ""
+msgstr "إمكانية ضبط موقع منظر الرصد"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:419
 msgid "Run local script"
-msgstr ""
+msgstr "تشغيل البرنامج النصي (السكريبت) المحلي"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:425
 msgid "Stop running script"
-msgstr ""
+msgstr "وقف تشغيل البرنامج النصي"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:428
 msgid "CD/DVD script"
-msgstr ""
+msgstr "برنامج نصي موجود على سي دي أو دي في دي"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:435
 msgid "Administration"
-msgstr ""
+msgstr "الإدارة"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:439
 msgid "Load default configuration"
-msgstr ""
+msgstr "حمِّل الإعدادات الافتراضية"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Save current configuration"
-msgstr ""
+msgstr "احفظ الإعدادات الحالية"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:443
 msgid "Shut down"
-msgstr ""
+msgstr "أوقف تشغيل البرنامج"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 msgid "[no TUI node]"
-msgstr ""
+msgstr "[لايوجد طرفية لواجهة المستخدم النصية]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
 msgid "On"
-msgstr ""
+msgstr "نعم"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
 msgid "Off"
-msgstr ""
+msgstr "لا"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format

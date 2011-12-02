@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-30 12:31+0200\n"
-"PO-Revision-Date: 2011-11-25 11:35+0000\n"
+"PO-Revision-Date: 2011-12-01 08:40+0000\n"
 "Last-Translator: forest93 <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-01 05:25+0000\n"
+"X-Launchpad-Export-Date: 2011-12-02 04:44+0000\n"
 "X-Generator: Launchpad (build 14414)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -116,7 +116,7 @@ msgstr "自转轴倾斜（当前日期）：%1"
 #: src/core/modules/Planet.cpp:148
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "距离：%1 天文单位（%2 千米）"
 
 #: src/core/modules/Planet.cpp:155
 #, no-c-format, qt-format
@@ -318,7 +318,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:712
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "所有可用的星体资料均已安装。"
 
 #: src/gui/ConfigurationDialog.cpp:717
 #, qt-format
@@ -539,7 +539,7 @@ msgstr "OSX开发: %1"
 #: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "测试者：%1"
 
 #: src/gui/StelGui.cpp:98
 msgid "Display Options"
@@ -636,7 +636,7 @@ msgstr "天体"
 #: src/gui/StelGui.cpp:121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Planet labels"
-msgstr ""
+msgstr "行星标签"
 
 #: src/gui/StelGui.cpp:122
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
@@ -1609,7 +1609,7 @@ msgstr "显示大气层"
 #: src/ui_viewDialog.h:1084
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Light pollution:"
-msgstr ""
+msgstr "光污染："
 
 #: src/ui_viewDialog.h:1086
 msgid "pressure, temperature, extinction coefficient"
@@ -2084,17 +2084,17 @@ msgstr "角度测量"
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:308
 msgid "The Angle Measure is enabled:"
-msgstr ""
+msgstr "角度测量工具已启用："
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:310
 msgid "Drag with the left button to measure, left-click to clear."
-msgstr ""
+msgstr "按下鼠标左键并拖动以测量，点击鼠标右键以清除测量。"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:312
 msgid "Right-clicking changes the end point only."
-msgstr ""
+msgstr "点击鼠标右键以改变终点。"
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
@@ -2122,19 +2122,19 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:757
 msgid "Please select an object before switching to ocular view."
-msgstr ""
+msgstr "在您启用目镜视图前，请选择一个天体。"
 
 #: plugins/Oculars/src/Oculars.cpp:836
 msgid "&Previous ocular"
-msgstr ""
+msgstr "前一个目镜(&P)"
 
 #: plugins/Oculars/src/Oculars.cpp:837
 msgid "&Next ocular"
-msgstr ""
+msgstr "后一个目镜(&N)"
 
 #: plugins/Oculars/src/Oculars.cpp:838
 msgid "Select &ocular"
-msgstr ""
+msgstr "选择目镜(&O)"
 
 #: plugins/Oculars/src/Oculars.cpp:883
 msgid "Toggle &crosshair"
@@ -2142,7 +2142,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:892
 msgid "Configure &Oculars"
-msgstr ""
+msgstr "设置目镜(&O)"
 
 #: plugins/Oculars/src/Oculars.cpp:901
 msgid "Toggle &CCD"
@@ -2162,15 +2162,15 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:921
 msgid "&Select CCD"
-msgstr ""
+msgstr "选择 CCD(&S)"
 
 #: plugins/Oculars/src/Oculars.cpp:943
 msgid "&Rotate CCD"
-msgstr ""
+msgstr "旋转 CCD(&R)"
 
 #: plugins/Oculars/src/Oculars.cpp:975
 msgid "&Reset rotation"
-msgstr ""
+msgstr "旋转复位(&R)"
 
 #: plugins/Oculars/src/Oculars.cpp:1201
 #: plugins/Oculars/src/ui_ocularDialog.h:872
@@ -2183,7 +2183,7 @@ msgstr "目镜弹出菜单"
 
 #: plugins/Oculars/src/Oculars.cpp:1233
 msgid "Crosshairs"
-msgstr ""
+msgstr "十字准线"
 
 #: plugins/Oculars/src/Oculars.cpp:1241
 msgid "Image sensor frame"
@@ -2195,51 +2195,51 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1257
 msgid "Oculars plugin configuration"
-msgstr ""
+msgstr "目镜插件设置"
 
 #: plugins/Oculars/src/Oculars.cpp:1444
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 #, qt-format
 msgid "Ocular #%1"
-msgstr ""
+msgstr "目镜 #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1449
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 #, qt-format
 msgid "Ocular #%1: %2"
-msgstr ""
+msgstr "目镜 #%1：%2"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:1463
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:520
 #, qt-format
 msgid "Ocular FL: %1 mm"
-msgstr ""
+msgstr "目镜焦距：%1 毫米"
 
 #. TRANSLATORS: aFOV = apparent field of view
 #: plugins/Oculars/src/Oculars.cpp:1470
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:530
 #, qt-format
 msgid "Ocular aFOV: %1"
-msgstr ""
+msgstr "目镜视场：%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1480 plugins/Oculars/src/Oculars.cpp:1542
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
 #, qt-format
 msgid "Telescope #%1"
-msgstr ""
+msgstr "望远镜 #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1485 plugins/Oculars/src/Oculars.cpp:1547
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
 #, qt-format
 msgid "Telescope #%1: %2"
-msgstr ""
+msgstr "望远镜 #%1：%2"
 
 #: plugins/Oculars/src/Oculars.cpp:1496
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
 #, qt-format
 msgid "Magnification: %1"
-msgstr ""
+msgstr "放大倍率：%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1504
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
@@ -2251,108 +2251,108 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
 #, qt-format
 msgid "Dimensions: %1"
-msgstr ""
+msgstr "尺寸：%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1524
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Sensor #%1"
-msgstr ""
+msgstr "传感器 #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1528
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Sensor #%1: %2"
-msgstr ""
+msgstr "传感器 #%1：%2"
 
 #: plugins/Oculars/src/Oculars.cpp:1726
 msgid "&Telescope"
-msgstr ""
+msgstr "望远镜(&T)"
 
 #: plugins/Oculars/src/Oculars.cpp:1727
 msgid "&Previous telescope"
-msgstr ""
+msgstr "前一个望远镜(&P)"
 
 #: plugins/Oculars/src/Oculars.cpp:1728
 msgid "&Next telescope"
-msgstr ""
+msgstr "后一个望远镜(&N)"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
 msgid "Previous ocular"
-msgstr ""
+msgstr "前一个目镜"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
 msgid "Next ocular"
-msgstr ""
+msgstr "后一个目镜"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
 msgid "Previous CCD frame"
-msgstr ""
+msgstr "前一个 CCD 画幅"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
 msgid "Next CCD frame"
-msgstr ""
+msgstr "后一个 CCD 画幅"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Previous telescope"
-msgstr ""
+msgstr "前一个望远镜"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Next telescope"
-msgstr ""
+msgstr "后一个望远镜"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr ""
+msgstr "将图像传感器逆时针旋转 15 度"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:258
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr ""
+msgstr "将图像传感器逆时针旋转 5 度"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:271
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr ""
+msgstr "将图像传感器逆时针旋转 1 度"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
-msgstr ""
+msgstr "重设图像传感器的角度"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr ""
+msgstr "将图像传感器顺时针旋转 1 度"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:310
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr ""
+msgstr "将图像传感器顺时针旋转 5 度"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:323
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr ""
+msgstr "将图像传感器顺时针旋转 15 度"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
 msgid "Effective focal length of the ocular"
-msgstr ""
+msgstr "目镜有效焦距"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:533
 msgid "Apparent field of view of the ocular"
-msgstr ""
+msgstr "目镜视场"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 #, qt-format
 msgid "Rotation: %1"
-msgstr ""
+msgstr "旋转：%1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 msgid "Magnification provided by these binoculars"
-msgstr ""
+msgstr "双目镜的放大倍率"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
 msgid "Actual field of view provided by these binoculars"
-msgstr ""
+msgstr "双目镜的实际视场"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
 msgid "Magnification provided by this ocular/telescope combination"
-msgstr ""
+msgstr "当前目镜/望远镜组合提供的放大倍率"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
 msgid "Actual field of view provided by this ocular/telescope combination"
@@ -2368,56 +2368,56 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:875
 msgid "Key mappings"
-msgstr ""
+msgstr "快捷键"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:876
 msgid "Toggle ocular view:"
-msgstr ""
+msgstr "切换目镜视图："
 
 #: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "Open pop-up navigation menu:"
-msgstr ""
+msgstr "打开弹出式导航菜单"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:879
 msgid "Interface"
-msgstr ""
+msgstr "界面"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "On-screen control panel"
-msgstr ""
+msgstr "屏幕上的控制栏"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:209
 msgid "General"
-msgstr ""
+msgstr "通用"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:882
 #: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Eyepieces"
-msgstr ""
+msgstr "目镜"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:883
 #: plugins/Oculars/src/ui_ocularDialog.h:892
 #: plugins/Oculars/src/ui_ocularDialog.h:903
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Add"
-msgstr ""
+msgstr "添加"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:885
 #: plugins/Oculars/src/ui_ocularDialog.h:894
 #: plugins/Oculars/src/ui_ocularDialog.h:905
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Name:"
-msgstr ""
+msgstr "名称："
 
 #: plugins/Oculars/src/ui_ocularDialog.h:886
 msgid "aFOV:"
-msgstr ""
+msgstr "视场角度："
 
 #: plugins/Oculars/src/ui_ocularDialog.h:887
 #: plugins/Oculars/src/ui_ocularDialog.h:906
 msgid "Focal length:"
-msgstr ""
+msgstr "焦距："
 
 #: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Field stop:"
@@ -2425,47 +2425,47 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Binoculars"
-msgstr ""
+msgstr "双目镜"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:891
 #: plugins/Oculars/src/ui_ocularDialog.h:901
 msgid "Sensors"
-msgstr ""
+msgstr "传感器"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:895
 msgid "Resolution x (pixels):"
-msgstr ""
+msgstr "横向分辨率（像素）："
 
 #: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Resolution y (pixels):"
-msgstr ""
+msgstr "纵向分辨率（像素）："
 
 #: plugins/Oculars/src/ui_ocularDialog.h:897
 msgid "Chip width (mm):"
-msgstr ""
+msgstr "感光芯片宽度（毫米）："
 
 #: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Chip height (mm):"
-msgstr ""
+msgstr "感光芯片高度（毫米）："
 
 #: plugins/Oculars/src/ui_ocularDialog.h:899
 msgid "Pixel width (micron):"
-msgstr ""
+msgstr "像素宽度（微米）："
 
 #: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Pixel height (micron):"
-msgstr ""
+msgstr "像素高度（微米）："
 
 #: plugins/Oculars/src/ui_ocularDialog.h:902
 #: plugins/Oculars/src/ui_ocularDialog.h:910
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Telescopes"
-msgstr ""
+msgstr "望远镜"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:907
 msgid "Diameter:"
-msgstr ""
+msgstr "直径："
 
 #: plugins/Oculars/src/ui_ocularDialog.h:908
 msgid "Horizontal flip"
@@ -2473,7 +2473,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:909
 msgid "Vertical flip"
-msgstr ""
+msgstr "竖直翻转"
 
 #: plugins/Satellites/src/Satellites.cpp:67
 #: plugins/Satellites/src/ui_satellitesDialog.h:657
@@ -2507,7 +2507,7 @@ msgstr "旧版本的 satellites.json 文件已不再适用，将使用默认文�
 #: plugins/Satellites/src/Satellite.cpp:214
 #, qt-format
 msgid "Range (km): %1"
-msgstr ""
+msgstr "倾斜范围（千米）：%1"
 
 #. TRANSLATORS: Rate at which the distance changes
 #: plugins/Satellites/src/Satellite.cpp:217
@@ -2543,7 +2543,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:259
 msgid "The satellite is eclipsed."
-msgstr ""
+msgstr "此卫星被遮挡。"
 
 #: plugins/Satellites/src/Satellite.cpp:262
 msgid "The satellite is not visible"
@@ -2560,7 +2560,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:210
 msgid "Version"
-msgstr ""
+msgstr "版本"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:214
 msgid ""
