@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-30 12:31+0200\n"
-"PO-Revision-Date: 2011-11-30 19:24+0000\n"
+"PO-Revision-Date: 2011-12-01 21:48+0000\n"
 "Last-Translator: Odin <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-01 05:22+0000\n"
+"X-Launchpad-Export-Date: 2011-12-02 04:44+0000\n"
 "X-Generator: Launchpad (build 14414)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
@@ -462,7 +462,7 @@ msgstr "Velg vanlig kjørehastighet for skript"
 #: plugins/Oculars/src/Oculars.cpp:1188
 #: plugins/Satellites/src/Satellites.cpp:130
 msgid "Plugin Key Bindings"
-msgstr "Tastesnarveier for Programtillegg"
+msgstr "Tastesnarveier for programtillegg"
 
 #: src/gui/HelpDialog.cpp:78
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:78
@@ -2179,7 +2179,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:757
 msgid "Please select an object before switching to ocular view."
-msgstr "Vennligst velg et objekt før du bytter til okular visning."
+msgstr "Velg et objekt før du bytter til okularvisning."
 
 #: plugins/Oculars/src/Oculars.cpp:836
 msgid "&Previous ocular"
@@ -2199,7 +2199,7 @@ msgstr "Slå på/av &trådkors"
 
 #: plugins/Oculars/src/Oculars.cpp:892
 msgid "Configure &Oculars"
-msgstr "Konfigurere &Okularer"
+msgstr "Still inn &okularer"
 
 #: plugins/Oculars/src/Oculars.cpp:901
 msgid "Toggle &CCD"
@@ -2223,11 +2223,11 @@ msgstr "&Velg CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:943
 msgid "&Rotate CCD"
-msgstr "&Rotere CCD"
+msgstr "&Roter CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:975
 msgid "&Reset rotation"
-msgstr "&Omjustere rotasjon"
+msgstr "&Tilbakestill rotasjon"
 
 #: plugins/Oculars/src/Oculars.cpp:1201
 #: plugins/Oculars/src/ui_ocularDialog.h:872
@@ -2244,15 +2244,15 @@ msgstr "Trådkors"
 
 #: plugins/Oculars/src/Oculars.cpp:1241
 msgid "Image sensor frame"
-msgstr "Bilde-sensor-ramme"
+msgstr "Bildesensorramme"
 
 #: plugins/Oculars/src/Oculars.cpp:1249
 msgid "Telrad sight"
-msgstr "Telrad sikte"
+msgstr "Telrad-sikte"
 
 #: plugins/Oculars/src/Oculars.cpp:1257
 msgid "Oculars plugin configuration"
-msgstr "Konfigurasjon for Okularer"
+msgstr "Innstilling av programtillegg for okularer"
 
 #: plugins/Oculars/src/Oculars.cpp:1444
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
@@ -2278,7 +2278,7 @@ msgstr "Okularets brennvidde: %1 mm"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:530
 #, qt-format
 msgid "Ocular aFOV: %1"
-msgstr "Okularets tilsynelatende synsfelt: %1"
+msgstr "Okularets tilsynelat. synsfelt: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1480 plugins/Oculars/src/Oculars.cpp:1542
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
@@ -2344,11 +2344,11 @@ msgstr "Neste okular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
 msgid "Previous CCD frame"
-msgstr "Forrige CCD bilde"
+msgstr "Forrige CCD-bilde"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
 msgid "Next CCD frame"
-msgstr "Neste CCD bilde"
+msgstr "Neste CCD-bilde"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Previous telescope"
@@ -2360,31 +2360,31 @@ msgstr "Neste teleskop"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr "Roter sensor rammen 15 grader mot klokken"
+msgstr "Roter sensorrammen 15 grader mot klokken"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:258
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr "Roter sensor rammen 5 grader mot klokken"
+msgstr "Roter sensorrammen 5 grader mot  klokken"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:271
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr "Roter sensor rammen 1 grad mot klokken"
+msgstr "Roter sensorrammen 1 grad mot  klokken"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
-msgstr "Omgjøre sensor ramme rotasjonen"
+msgstr "Tilbakestill rotasjonen til sensorrammen"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr "Roter sensor rammen 1 grad med klokken"
+msgstr "Roter sensorrammen 1 grad med urviseren"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:310
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr "Roter sensor ramme 5 grader med klokken"
+msgstr "Roter sensorrammen 5 grader med klokken"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:323
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr "Roter sensor rammen 15 grader med klokken"
+msgstr "Roter sensorrammen 15 grader med  klokken"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
 msgid "Effective focal length of the ocular"
@@ -2392,7 +2392,7 @@ msgstr "Effektiv brennvidde på okularet"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:533
 msgid "Apparent field of view of the ocular"
-msgstr "Tilsynelatende synsfelt på valgte okular"
+msgstr "Okularets tilsynelatende synsfelt"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 #, qt-format
@@ -2405,15 +2405,15 @@ msgstr "Forstørrelse som leveres av disse kikkertene"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
 msgid "Actual field of view provided by these binoculars"
-msgstr "Faktisk synsfelt som disse kikkertene tilbyr"
+msgstr "Faktisk synsfelt som tilbys av disse kikkertene"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
 msgid "Magnification provided by this ocular/telescope combination"
-msgstr "Forstørrelse som tilbys av denne okular/teleskop kombinasjon"
+msgstr "Forstørrelse som tilbys av denne okular/teleskop-kombinasjonen"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
 msgid "Actual field of view provided by this ocular/telescope combination"
-msgstr "Faktisk synsfelt som tilbys av denne okular/teleskop kombinasjon"
+msgstr "Faktisk synsfelt som tilbys av denne okular/teleskop-kombinasjonen"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:873
 msgid "Enable only if an object is selected"
@@ -2425,15 +2425,15 @@ msgstr "Skaler bildesirkel"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:875
 msgid "Key mappings"
-msgstr "Hoved tilordninger"
+msgstr "Tastetilordninger"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:876
 msgid "Toggle ocular view:"
-msgstr "Slå på/av okular visning"
+msgstr "Slå på/av okularvisning:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "Open pop-up navigation menu:"
-msgstr "Åpne oppspretts navigasjonsmeny:"
+msgstr "Åpne oppsprettsmeny for navigering:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:879
 msgid "Interface"
@@ -2441,7 +2441,7 @@ msgstr "Grensesnitt"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "On-screen control panel"
-msgstr "Skjermbasert kontrollpanelet"
+msgstr "Skjermbasert kontrollpanel"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:209
@@ -2478,7 +2478,7 @@ msgstr "Brennvidde:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Field stop:"
-msgstr "Felt stopp:"
+msgstr "Feltstopp:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Binoculars"
@@ -2499,19 +2499,19 @@ msgstr "Oppløsning y (piksler):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:897
 msgid "Chip width (mm):"
-msgstr "Chip bredde (mm):"
+msgstr "Brikkebredde (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Chip height (mm):"
-msgstr "Chip høyde (mm):"
+msgstr "Brikkehøyde (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:899
 msgid "Pixel width (micron):"
-msgstr "Piksel bredde (micron):"
+msgstr "Pikselbredde (mikrometer):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Pixel height (micron):"
-msgstr "Piksel høyde (micron):"
+msgstr "Pikselhøyde (mikrometer):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:902
 #: plugins/Oculars/src/ui_ocularDialog.h:910
@@ -2526,11 +2526,11 @@ msgstr "Diameter:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:908
 msgid "Horizontal flip"
-msgstr "Horisontal flip"
+msgstr "Horisontal speilvending"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:909
 msgid "Vertical flip"
-msgstr "Vertikal flip"
+msgstr "Vertikal speilvending"
 
 #: plugins/Satellites/src/Satellites.cpp:67
 #: plugins/Satellites/src/ui_satellitesDialog.h:657
@@ -2715,7 +2715,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:237
 msgid "Adding new satellites"
-msgstr "Legger til nye satellitter"
+msgstr "Legge til nye satellitter"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:238
 #, qt-format
@@ -3166,7 +3166,7 @@ msgstr "Skjema"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:282
 msgid "Slew telescope to"
-msgstr "Roter teleskopet til"
+msgstr "Beveg teleskopet til"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:284
 msgid "There are no active devices."
@@ -3174,7 +3174,7 @@ msgstr "Det er ingen aktive enheter."
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:285
 msgid "Slew telescope to coordinates"
-msgstr "Roter teleskopet til koordinatene"
+msgstr "Beveg teleskopet til koordinatene"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:286
 msgid "&Right Ascension (J2000):"
@@ -3210,7 +3210,7 @@ msgstr "D&esimal"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:300
 msgid "&Slew"
-msgstr "&Roter"
+msgstr "&Beveg"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Configure &telescopes..."
@@ -4034,15 +4034,15 @@ msgstr "Kopier solsystemfilen..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Replace the Solar System file..."
-msgstr "Erstatt solsystemfilen..."
+msgstr "Erstatt solsystem-filen..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Configuration file"
-msgstr "Innstillingsfil"
+msgstr "Oppsettsfil"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Add new Solar System objects"
-msgstr "Legg til nye solsystemobjekter"
+msgstr "Legg til nye solsystem-objekter"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
 msgid "Import orbital elements in MPC format..."

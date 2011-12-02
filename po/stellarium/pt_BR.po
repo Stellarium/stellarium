@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-30 12:31+0200\n"
-"PO-Revision-Date: 2011-11-30 21:02+0000\n"
+"PO-Revision-Date: 2011-12-02 01:50+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-01 05:24+0000\n"
+"X-Launchpad-Export-Date: 2011-12-02 04:44+0000\n"
 "X-Generator: Launchpad (build 14414)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -2189,7 +2189,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:757
 msgid "Please select an object before switching to ocular view."
-msgstr ""
+msgstr "Por favor, selecione um objeto antes de mudar para a visão ocular."
 
 #: plugins/Oculars/src/Oculars.cpp:836
 msgid "&Previous ocular"
@@ -2254,204 +2254,205 @@ msgstr "Retículos"
 
 #: plugins/Oculars/src/Oculars.cpp:1241
 msgid "Image sensor frame"
-msgstr ""
+msgstr "Moldura de sensor de imagem"
 
 #: plugins/Oculars/src/Oculars.cpp:1249
 msgid "Telrad sight"
-msgstr ""
+msgstr "Mira Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:1257
 msgid "Oculars plugin configuration"
-msgstr ""
+msgstr "Configuração do pluguim das oculares"
 
 #: plugins/Oculars/src/Oculars.cpp:1444
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 #, qt-format
 msgid "Ocular #%1"
-msgstr ""
+msgstr "Ocular nº %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1449
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 #, qt-format
 msgid "Ocular #%1: %2"
-msgstr ""
+msgstr "Ocular nº %1: %2"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:1463
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:520
 #, qt-format
 msgid "Ocular FL: %1 mm"
-msgstr ""
+msgstr "Distância focal da ocular: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
 #: plugins/Oculars/src/Oculars.cpp:1470
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:530
 #, qt-format
 msgid "Ocular aFOV: %1"
-msgstr ""
+msgstr "Campo de visão aparente da ocular: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1480 plugins/Oculars/src/Oculars.cpp:1542
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
 #, qt-format
 msgid "Telescope #%1"
-msgstr ""
+msgstr "Telescópio nº %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1485 plugins/Oculars/src/Oculars.cpp:1547
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
 #, qt-format
 msgid "Telescope #%1: %2"
-msgstr ""
+msgstr "Telescópio nº %1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1496
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
 #, qt-format
 msgid "Magnification: %1"
-msgstr ""
+msgstr "Magnificação: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1504
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
 #, qt-format
 msgid "FOV: %1"
-msgstr ""
+msgstr "Campo de visão: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1519
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
 #, qt-format
 msgid "Dimensions: %1"
-msgstr ""
+msgstr "Dimensões: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1524
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Sensor #%1"
-msgstr ""
+msgstr "Sensor nº %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1528
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Sensor #%1: %2"
-msgstr ""
+msgstr "Sensor nº %1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1726
 msgid "&Telescope"
-msgstr ""
+msgstr "&Telescópio"
 
 #: plugins/Oculars/src/Oculars.cpp:1727
 msgid "&Previous telescope"
-msgstr ""
+msgstr "Telescópio &anterior"
 
 #: plugins/Oculars/src/Oculars.cpp:1728
 msgid "&Next telescope"
-msgstr ""
+msgstr "Telescópio &seguinte"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
 msgid "Previous ocular"
-msgstr ""
+msgstr "Ocular anterior"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
 msgid "Next ocular"
-msgstr ""
+msgstr "Ocular seguinte"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
 msgid "Previous CCD frame"
-msgstr ""
+msgstr "Moldura de CCD anterior"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
 msgid "Next CCD frame"
-msgstr ""
+msgstr "Moldura de CCD seguinte"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Previous telescope"
-msgstr ""
+msgstr "Telescópio anterior"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Next telescope"
-msgstr ""
+msgstr "Telescópio seguinte"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr ""
+msgstr "Girar a moldura do sensor em 15 graus no sentido anti-horário"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:258
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr ""
+msgstr "Girar a moldura do sensor em 5 graus no sentido anti-horário"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:271
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr ""
+msgstr "Girar a moldura do sensor em 1 grau no sentido anti-horário"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
-msgstr ""
+msgstr "Redefinir a rotação da moldura do sensor"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr ""
+msgstr "Girar a moldura do sensor em 1 grau no sentido horário"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:310
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr ""
+msgstr "Girar a moldura do sensor em 5 graus no sentido horário"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:323
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr ""
+msgstr "Girar a moldura do sensor em 15 graus no sentido horário"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
 msgid "Effective focal length of the ocular"
-msgstr ""
+msgstr "Distância focal efetiva da ocular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:533
 msgid "Apparent field of view of the ocular"
-msgstr ""
+msgstr "Campo de visão aparente da ocular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 #, qt-format
 msgid "Rotation: %1"
-msgstr ""
+msgstr "Rotação: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 msgid "Magnification provided by these binoculars"
-msgstr ""
+msgstr "Magnificação fornecida por este binóculo"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
 msgid "Actual field of view provided by these binoculars"
-msgstr ""
+msgstr "Campo de visão real fornecido por este binóculo"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
 msgid "Magnification provided by this ocular/telescope combination"
-msgstr ""
+msgstr "Magnificação fornecida por esta combinação de ocular/telescópio"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
 msgid "Actual field of view provided by this ocular/telescope combination"
 msgstr ""
+"Campo de visão real fornecido por esta combinação de ocular/telescópio"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:873
 msgid "Enable only if an object is selected"
-msgstr ""
+msgstr "Ativar somente se um objeto estiver selecionado"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:874
 msgid "Scale image circle"
-msgstr ""
+msgstr "Aumentar a escala do círculo da imagem"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:875
 msgid "Key mappings"
-msgstr ""
+msgstr "Mapeamentos de teclas"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:876
 msgid "Toggle ocular view:"
-msgstr ""
+msgstr "Alternar visão ocular:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "Open pop-up navigation menu:"
-msgstr ""
+msgstr "Abrir menu de navegação de popape:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:879
 msgid "Interface"
-msgstr ""
+msgstr "Interface"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "On-screen control panel"
-msgstr ""
+msgstr "Painel de controle na tela"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:209
@@ -2461,7 +2462,7 @@ msgstr "Geral"
 #: plugins/Oculars/src/ui_ocularDialog.h:882
 #: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Eyepieces"
-msgstr ""
+msgstr "Oculares"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:883
 #: plugins/Oculars/src/ui_ocularDialog.h:892
@@ -2479,49 +2480,49 @@ msgstr "Nome:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:886
 msgid "aFOV:"
-msgstr ""
+msgstr "Campo de visão aparente:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:887
 #: plugins/Oculars/src/ui_ocularDialog.h:906
 msgid "Focal length:"
-msgstr ""
+msgstr "Distância focal:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Field stop:"
-msgstr ""
+msgstr "Paragem de campo:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Binoculars"
-msgstr ""
+msgstr "Binóculo"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:891
 #: plugins/Oculars/src/ui_ocularDialog.h:901
 msgid "Sensors"
-msgstr ""
+msgstr "Sensores"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:895
 msgid "Resolution x (pixels):"
-msgstr ""
+msgstr "Resolução x (píxeis):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Resolution y (pixels):"
-msgstr ""
+msgstr "Resolução y (píxeis):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:897
 msgid "Chip width (mm):"
-msgstr ""
+msgstr "Largura do chipe (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Chip height (mm):"
-msgstr ""
+msgstr "Altura do chipe (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:899
 msgid "Pixel width (micron):"
-msgstr ""
+msgstr "Largura do píxel (mícron):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Pixel height (micron):"
-msgstr ""
+msgstr "Altura do píxel (mícron):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:902
 #: plugins/Oculars/src/ui_ocularDialog.h:910
@@ -2532,15 +2533,15 @@ msgstr "Telescópios"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:907
 msgid "Diameter:"
-msgstr ""
+msgstr "Diâmetro:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:908
 msgid "Horizontal flip"
-msgstr ""
+msgstr "Inversão horizontal"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:909
 msgid "Vertical flip"
-msgstr ""
+msgstr "Inversão vertical"
 
 #: plugins/Satellites/src/Satellites.cpp:67
 #: plugins/Satellites/src/ui_satellitesDialog.h:657
