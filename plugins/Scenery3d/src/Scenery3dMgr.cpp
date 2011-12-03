@@ -150,7 +150,12 @@ void Scenery3dMgr::init()
     //Load shadow shader
     shadowShader = new StelShader;
 
-    if (!(shadowShader->load("data/shaders/smap.v.glsl", "data/shaders/smap.f.glsl")))
+    //Alex Wolf loading patch : ) Thanks!
+    QStringList lst =  QStringList(StelFileMgr::findFileInAllPaths("data/shaders/",(StelFileMgr::Flags)(StelFileMgr::Directory)));
+    QByteArray vsshader = (QString(lst.first()) + "smap.v.glsl").toLocal8Bit();
+    QByteArray fsshader = (QString(lst.first()) + "smap.f.glsl").toLocal8Bit();
+
+    if (!(shadowShader->load(vsshader.data(), fsshader.data())))
     {
         qWarning() << "WARNING [Scenery3d]: unable to load shader files.\n";
         shadowShader = 0;
