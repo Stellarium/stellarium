@@ -33,8 +33,7 @@
 #include "StelShader.hpp"
 #include "StelFileMgr.hpp"
 
-static unsigned int loadShader(const char* path, unsigned int type);
-static unsigned int createShader(const char *source, unsigned int type, const char *fileName = 0);
+static unsigned int loadShader(std::string path, unsigned int type);
 static unsigned int createProgram(unsigned int vertexShader, unsigned int pixelShader);
 
 StelShader::StelShader()
@@ -158,21 +157,22 @@ void StelShader::setUniform (int location, float mat[])
         glUniformMatrix4fv(location, 1, GL_FALSE, mat);
 }
 
-bool StelShader::load(const char *vertexFile, const char *pixelFile)
+bool StelShader::load(std::string vertexShaderPath, std::string fragmentShaderPath)
 {
-        if (!(vertexShader = loadShader(vertexFile, GL_VERTEX_SHADER)))
-        {
-                return false;
-        }
-        if (!(pixelShader = loadShader(pixelFile, GL_FRAGMENT_SHADER)))
-        {
-                return false;
-        }
-        if (!(program = createProgram(vertexShader, pixelShader)))
-        {
-                return false;
-        }
-        return true;
+    if(!(vertexShader = loadShader(vertexShaderPath, GL_VERTEX_SHADER)))
+    {
+        return false;
+    }
+
+    if(!(pixelShader = loadShader(fragmentShaderPath, GL_FRAGMENT_SHADER)))
+    {
+        return false;
+    }
+    if(!(program = createProgram(vertexShader, pixelShader)))
+    {
+        return false;
+    }
+    return true;
 }
 
 bool StelShader::use() const
@@ -195,103 +195,98 @@ bool useShader(const StelShader *shader)
         return true;
 }
 
-static unsigned int loadShader(const char* path, unsigned int type)
+static unsigned int loadShader(std::string path, unsigned int type)
 {
-        FILE* fp;
-        char* content;
-        int size;
-        unsigned int shader;
+    int succeeded;
 
-        if (!path)
+    std::ifstream shader_file(path.c_str(), std::ifstream::in);
+    std::string shader_source = std::string(std::istreambuf_iterator<char>(shader_file), std::istreambuf_iterator<char>());
+
+    // create handle
+    unsigned int shader = glCreateShader(type);
+
+    const char *shader_c_str = shader_source.c_str();
+    glShaderSource(shader, 1, &shader_c_str, NULL);
+
+    // compile shader
+    glCompileShader(shader);
+
+    // do error-checking
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &succeeded);
+
+    if (!succeeded || !glIsShader(shader) )
+    {
+            // there was an error
+
+            // get log-length
+            int log_length = 0;
+            glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &log_length);
+
+            // get info-log
+            std::string info_log(log_length, ' ');
+            glGetShaderInfoLog(shader, log_length, NULL, &info_log[0]);
+
+            // print info-log
+            if(type == GL_VERTEX_SHADER)
+            {
+                qWarning() << "Vertex-shader compile error:\n\n";
+            }
+            else
+            {
+                qWarning() << "Fragment-shader compile error:\n\n";
+            }
+
+            qWarning() << info_log.c_str() << "\n";
+    } else
+    {
+        if(type == GL_VERTEX_SHADER)
         {
-                return 0;
+            qWarning() << "Vertex-Shader loaded and compiled successfully.\n";
         }
-
-        if (!(fp = fopen(path, "r")))
+        else
         {
-                qWarning() << "Could not open shader " << path << ": " << strerror(errno);
-                return 0;
+            qWarning() << "Fragment-Shader loaded and compiled successfully.\n";
         }
+    }
 
-        fseek(fp, 0, SEEK_END);
-        size = ftell(fp);
-        rewind(fp);
-
-        if (!(content = (char*) malloc(size + 1)))
-        {
-                qWarning() << "failed to allocate memory";
-                return 0;
-        }
-
-        fread(content, 1, size, fp);
-        content[size] = 0;
-        fclose(fp);
-
-        shader = createShader(content, type, path);
-        free(content);
-        return shader;
-}
-
-static unsigned int createShader(const char *source, unsigned int type, const char *fileName) {
-        unsigned int shader;
-        int status, logLength;
-        char infoLog[512];
-
-        if (!fileName)
-        {
-                fileName = "unknown";
-        }
-
-        if (!source) {
-                return 0;
-        }
-
-        shader = glCreateShader(type);
-        glShaderSource(shader, 1, &source, 0);
-
-        glCompileShader(shader);
-        glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
-        glGetShaderInfoLog(shader, sizeof infoLog, &logLength, infoLog);
-
-        if (status == GL_FALSE)
-        {
-                qWarning() << "Error while compiling " << fileName << ": " << infoLog;
-                glDeleteShader(shader);
-                return 0;
-        }
-        else if (logLength)
-        {
-                qWarning() << fileName << ": " << infoLog;
-        }
-        return shader;
+    return shader;
 }
 
 static unsigned int createProgram(unsigned int vertexShader, unsigned int pixelShader)
 {
-        unsigned int program;
-        int status, logLength;
-        char infoLog[512];
+    int succeeded;
 
-        program = glCreateProgram();
+    // -- link shader-program --
+    int shader_program = glCreateProgram();
 
-        glAttachShader(program, vertexShader);
-        glAttachShader(program, pixelShader);
+    // attach shaders
+    glAttachShader(shader_program, vertexShader);
+    glAttachShader(shader_program, pixelShader);
 
-        glLinkProgram(program);
+    // link
+    glLinkProgram(shader_program);
 
-        glGetProgramiv(program, GL_LINK_STATUS, &status);
-        glGetProgramInfoLog(program, sizeof infoLog, &logLength, infoLog);
+    // check for errors
+    glGetProgramiv(shader_program, GL_LINK_STATUS, &succeeded);
 
-        if (status == GL_FALSE)
-        {
-                qWarning() << "Error while linking shader program:\n" << infoLog << "\n";
-                glDeleteProgram(program);
-                return 0;
-        }
-        else if (logLength)
-        {
-                qWarning() << "\n" << infoLog << "\n";
-        }
+    if (!succeeded || !glIsProgram(shader_program))
+    {
+            // there was an error
 
-        return program;
+            // get log-length
+            int log_length = 0;
+            glGetProgramiv(shader_program, GL_INFO_LOG_LENGTH, &log_length);
+
+            // get info-log
+            std::string info_log(log_length, ' ');
+            glGetProgramInfoLog(shader_program, log_length, NULL, &info_log[0]);
+
+            // print info-log
+            qWarning() << "Shader-program link error:\n\n" << info_log.c_str() << "\n";
+    } else
+    {
+            qWarning() << "Shader-program linked successfully.\n\n";
+    }
+
+    return shader_program;
 }
