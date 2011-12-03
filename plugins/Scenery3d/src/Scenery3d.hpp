@@ -92,6 +92,9 @@ public:
 
     enum shadowCaster { None, Sun, Moon, Venus };
 
+    //Initializes Shadow Mapping
+    void initShadowMapping();
+
 private:
     double eyeLevel;
 
@@ -122,11 +125,11 @@ private:
     OBJ* groundModel;
     Heightmap* heightmap;
     OBJ::vertexOrder objVertexOrder; // some OBJ files have left-handed coordinate counting or swapped axes. Allows accounting for those.
-    GLuint shadowMapTexture;
+
     Mat4f projectionMatrix;
     Mat4f lightViewMatrix;
     Mat4f lightProjectionMatrix;
-    //QGLFramebufferObject* shadowMapFbo;
+    QGLFramebufferObject* shadowMapFbo;
     QGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
     StelVertexArray cubePlaneFront, cubePlaneBack,
                 cubePlaneLeft, cubePlaneRight,
@@ -155,19 +158,18 @@ private:
     // This will be applied to make sure that X=Grid-East, Y=Grid-North, Z=height.
     Mat4d obj2gridMatrix;
 
-    //Shadowmapping shader
     StelShader* shadowShader;
 
-    //Initializes Shadow Mapping
-    void initShadowMapping();
-
     //Shadow Map FBO
-    GLuint shadowMapFbo;
+    GLuint shadowFbo;
+
+    //Depth texture
+    GLuint shadowMapTexture;
 
     //Sets the light position
     GLfloat LightPos[3];
 
-    GLint w_width, w_height;
+    Mat4f M;
 
     void generateCubeMap_drawSecondPassScene(StelPainter& painter);
 };

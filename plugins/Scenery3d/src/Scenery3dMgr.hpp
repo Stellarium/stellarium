@@ -5,11 +5,12 @@
 #include "StelUtils.hpp"
 #include "gui/Scenery3dDialog.hpp"
 #include "StelCore.hpp"
-#include "StelShader.hpp"
 
 #include <QMap>
 #include <QStringList>
 #include <QKeyEvent>
+
+#include "StelShader.hpp"
 
 class Scenery3d;
 class QSettings;

@@ -93,9 +93,9 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, StelShader* shadowShade
             };
             for (int i=0; i<6; i++) {
                 v[i].normalize();
-		cubePlaneFront.vertex << v[i];
+                cubePlaneFront.vertex << v[i];
             }
-	    cubePlaneFront.texCoords << Vec2f(tx0, ty0)
+            cubePlaneFront.texCoords << Vec2f(tx0, ty0)
                                 << Vec2f(tx1, ty0)
                                 << Vec2f(tx1, ty1)
                                 << Vec2f(tx0, ty0)
@@ -106,7 +106,7 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, StelShader* shadowShade
     shadowsEnabled = false;
     Mat4d matrix;
 #define PLANE(_VAR_, _MAT_) matrix=_MAT_; _VAR_=StelVertexArray(cubePlaneFront.vertex,StelVertexArray::Triangles,cubePlaneFront.texCoords);\
-			for(int i=0;i<_VAR_.vertex.size();i++){ matrix.transfo(_VAR_.vertex[i]); }
+                        for(int i=0;i<_VAR_.vertex.size();i++){ matrix.transfo(_VAR_.vertex[i]); }
     PLANE(cubePlaneRight, Mat4d::zrotation(-M_PI_2))
     PLANE(cubePlaneLeft, Mat4d::zrotation(M_PI_2))
     PLANE(cubePlaneBack, Mat4d::zrotation(M_PI))
@@ -115,15 +115,6 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, StelShader* shadowShade
 #undef PLANE
 
     this->shadowShader = shadowShader;
-
-    GLint m_viewport[4];
-    glGetIntegerv(GL_VIEWPORT, m_viewport);
-
-    this->w_width = m_viewport[2];
-    this->w_height = m_viewport[3];
-
-    //Initialize Shadow Mapping
-    initShadowMapping();
 }
 
 Scenery3d::~Scenery3d()
@@ -134,12 +125,11 @@ Scenery3d::~Scenery3d()
     }
     if (location) delete location;
          if (shadowMapTexture != 0)
-	 {
-		 glDeleteTextures(1, &shadowMapTexture);
-		 shadowMapTexture = 0;
-                 //delete shadowMapFbo;
-                 shadowMapFbo = 0;
-	 }
+         {
+                 glDeleteTextures(1, &shadowMapTexture);
+                 shadowMapTexture = 0;
+                 delete shadowMapFbo;
+         }
     for (int i=0; i<6; i++) {
         if (cubeMap[i] != NULL) {
             delete cubeMap[i];
@@ -176,7 +166,7 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
         if (scenery3dIni.contains("location/altitude"))
         {
             if (scenery3dIni.value("location/altitude") == "from_model")
-		location->altitude=FROM_MODEL;
+                location->altitude=FROM_MODEL;
             else
                 location->altitude = scenery3dIni.value("location/altitude", 0).toInt();
         }
@@ -205,34 +195,34 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
     // In case we don't have an axis-aligned OBJ model, this is the chance to correct it.
     if (scenery3dIni.contains("model/obj2grid_trafo"))
     {
-	QString str=scenery3dIni.value("model/obj2grid_trafo").toString();
-	QStringList strList=str.split(",");
-	bool conversionOK[16];
-	if (strList.length()==16)
-	{
-	    obj2gridMatrix.set(strList.at(0).toDouble(&conversionOK[0]),
-			       strList.at(1).toDouble(&conversionOK[1]),
-			       strList.at(2).toDouble(&conversionOK[2]),
-			       strList.at(3).toDouble(&conversionOK[3]),
-			       strList.at(4).toDouble(&conversionOK[4]),
-			       strList.at(5).toDouble(&conversionOK[5]),
-			       strList.at(6).toDouble(&conversionOK[6]),
-			       strList.at(7).toDouble(&conversionOK[7]),
-			       strList.at(8).toDouble(&conversionOK[8]),
-			       strList.at(9).toDouble(&conversionOK[9]),
-			       strList.at(10).toDouble(&conversionOK[10]),
-			       strList.at(11).toDouble(&conversionOK[11]),
-			       strList.at(12).toDouble(&conversionOK[12]),
-			       strList.at(13).toDouble(&conversionOK[13]),
-			       strList.at(14).toDouble(&conversionOK[14]),
-			       strList.at(15).toDouble(&conversionOK[15])
-			       );
-	    for (int i=0; i<16; ++i)
-	    {
-		if (!conversionOK[i]) qDebug() << "WARNING: scenery3d.ini: element " << i+1 << " of obj2grid_trafo invalid, set zo zero.";
-	    }
-	}
-	else qDebug() << "obj2grid_trafo invalid: not 16 comma-separated elements";
+        QString str=scenery3dIni.value("model/obj2grid_trafo").toString();
+        QStringList strList=str.split(",");
+        bool conversionOK[16];
+        if (strList.length()==16)
+        {
+            obj2gridMatrix.set(strList.at(0).toDouble(&conversionOK[0]),
+                               strList.at(1).toDouble(&conversionOK[1]),
+                               strList.at(2).toDouble(&conversionOK[2]),
+                               strList.at(3).toDouble(&conversionOK[3]),
+                               strList.at(4).toDouble(&conversionOK[4]),
+                               strList.at(5).toDouble(&conversionOK[5]),
+                               strList.at(6).toDouble(&conversionOK[6]),
+                               strList.at(7).toDouble(&conversionOK[7]),
+                               strList.at(8).toDouble(&conversionOK[8]),
+                               strList.at(9).toDouble(&conversionOK[9]),
+                               strList.at(10).toDouble(&conversionOK[10]),
+                               strList.at(11).toDouble(&conversionOK[11]),
+                               strList.at(12).toDouble(&conversionOK[12]),
+                               strList.at(13).toDouble(&conversionOK[13]),
+                               strList.at(14).toDouble(&conversionOK[14]),
+                               strList.at(15).toDouble(&conversionOK[15])
+                               );
+            for (int i=0; i<16; ++i)
+            {
+                if (!conversionOK[i]) qDebug() << "WARNING: scenery3d.ini: element " << i+1 << " of obj2grid_trafo invalid, set zo zero.";
+            }
+        }
+        else qDebug() << "obj2grid_trafo invalid: not 16 comma-separated elements";
     }
     // Find a rotation around vertical axis, most likely required by meridian convergence.
     double rot_z=0.0;
@@ -295,10 +285,10 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
     if (scenery3dIni.contains("coord/start_az_alt_fov"))
     {
         qDebug() << "scenery3d.ini: setting initial dir/fov.";
-	//QStringList list=QString(scenery3dIni.value("coord/start_az_alt_fov")).split(",");
-	//lookAt=new Vec3f(list.at(0).toFloat(), list.at(1).toFloat(), list.at(2).toFloat());
-	lookAt_fov=StelUtils::strToVec3f(scenery3dIni.value("coord/start_az_alt_fov").toString());
-	lookAt_fov[0]=180.0f-lookAt_fov[0];
+        //QStringList list=QString(scenery3dIni.value("coord/start_az_alt_fov")).split(",");
+        //lookAt=new Vec3f(list.at(0).toFloat(), list.at(1).toFloat(), list.at(2).toFloat());
+        lookAt_fov=StelUtils::strToVec3f(scenery3dIni.value("coord/start_az_alt_fov").toString());
+        lookAt_fov[0]=180.0f-lookAt_fov[0];
     }
     else qDebug() << "scenery3d.ini: No initial dir/fov given.";
 
@@ -309,11 +299,11 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
 
 void Scenery3d::loadModel()
 {
-	QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
-	qDebug() << "Trying to load OBJ model: " << modelFile;
+        QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
+        qDebug() << "Trying to load OBJ model: " << modelFile;
         objModel->load(modelFile.toAscii(), objVertexOrder);
-	objModel->transform(zRotateMatrix*obj2gridMatrix);
-	objModelArrays = objModel->getStelArrays();
+        objModel->transform(zRotateMatrix*obj2gridMatrix);
+        objModelArrays = objModel->getStelArrays();
 
         /* We could re-create zRotateMatrix here if needed: We may have "default" conditions with landscape coordinates
         // inherited from a landscape, or loaded from scenery3d.ini. In any case, at this point they should have been valid.
@@ -334,26 +324,26 @@ void Scenery3d::loadModel()
             modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelGroundFile);
             qDebug() << "Trying to load ground OBJ model: " << modelFile;
             groundModel->load(modelFile.toAscii(), objVertexOrder);
-	    groundModel->transform(zRotateMatrix*obj2gridMatrix);
-	}
+            groundModel->transform(zRotateMatrix*obj2gridMatrix);
+        }
 
         if (this->hasLocation())
-	{ if (location->altitude==FROM_MODEL) // previouslay marked meaningless
-	    location->altitude=(int) (0.5*(objModel->getMinZ()+objModel->getMaxZ())+modelWorldOffset[2]);
+        { if (location->altitude==FROM_MODEL) // previouslay marked meaningless
+            location->altitude=(int) (0.5*(objModel->getMinZ()+objModel->getMaxZ())+modelWorldOffset[2]);
         }
 
         if (groundNullHeight==MEANINGLESS)
         {
-	    groundNullHeight=((groundModel!=NULL) ? groundModel->getMinZ() : objModel->getMinZ());
-	    qDebug() << "Ground outside model is " << groundNullHeight  << "m high (in model coordinates)";
+            groundNullHeight=((groundModel!=NULL) ? groundModel->getMinZ() : objModel->getMinZ());
+            qDebug() << "Ground outside model is " << groundNullHeight  << "m high (in model coordinates)";
         }
-	else qDebug() << "Ground outside model stays " << groundNullHeight  << "m high (in model coordinates)";
+        else qDebug() << "Ground outside model stays " << groundNullHeight  << "m high (in model coordinates)";
 
-	if (groundModel)
-	{
-	    heightmap = new Heightmap(*groundModel);
-	    heightmap->setNullHeight(groundNullHeight);
-	}
+        if (groundModel)
+        {
+            heightmap = new Heightmap(*groundModel);
+            heightmap->setNullHeight(groundNullHeight);
+        }
 
         if (absolutePosition.v[0]==MEANINGLESS) {
             absolutePosition.v[0] = -(objModel->getMaxX()+objModel->getMinX())/2.0;
@@ -369,8 +359,8 @@ void Scenery3d::loadModel()
         absolutePosition[2] = -groundHeight()-eyeLevel;
         //absolutePosition.transfo4d(zRotateMatrix); // bring this position into rotated space.
 
-	// finally, set core to enable update(). GZ: This was dne in draw() each time, seems unnecessary there!
-	this->core=StelApp::getInstance().getCore();
+        // finally, set core to enable update(). GZ: This was dne in draw() each time, seems unnecessary there!
+        this->core=StelApp::getInstance().getCore();
 }
 
 void Scenery3d::handleKeys(QKeyEvent* e)
@@ -411,7 +401,7 @@ void Scenery3d::update(double deltaTime)
         StelMovementMgr *stelMovementMgr = GETSTELMODULE(StelMovementMgr);
 
         Vec3d viewDirection = core->getMovementMgr()->getViewDirectionJ2000();
-	Vec3d viewDirectionAltAz=core->j2000ToAltAz(viewDirection);
+        Vec3d viewDirectionAltAz=core->j2000ToAltAz(viewDirection);
         double alt, az;
         StelUtils::rectToSphe(&az, &alt, viewDirectionAltAz);
 
@@ -432,7 +422,7 @@ float Scenery3d::groundHeight()
     if (heightmap == NULL) {
         return groundNullHeight;
     } else {
-	return heightmap->getHeight(-absolutePosition.v[0],-absolutePosition.v[1]);
+        return heightmap->getHeight(-absolutePosition.v[0],-absolutePosition.v[1]);
     }
 }
 
@@ -463,37 +453,82 @@ void Scenery3d::generateCubeMap_drawScene(StelPainter& painter, float lightBrigh
     drawArrays(painter);
 }
 
-void Scenery3d::generateCubeMap_drawSecondPassScene(StelPainter& painter){
+void Scenery3d::initShadowMapping()
+{
+    //Generate a FBO - has to be QGLFramebufferObject for some reason... Generating a normal one always lead to bizzare results for me
+    //But we use handle() to get the GLuint id and work as if we created a normal FBO
+    shadowFbo = (new QGLFramebufferObject(shadowmapSize, shadowmapSize, QGLFramebufferObject::Depth, GL_TEXTURE_2D))->handle();
+
+    //Bind the FBO
+    glBindFramebuffer(GL_FRAMEBUFFER, shadowFbo);
+
+    //Generate the depth map
+    glGenTextures(1, &shadowMapTexture);
+
+    //Activate unit 1 - we want to have textures + shadows working so this is crucial
+    glActiveTexture(GL_TEXTURE1);
+
+    //Bind the depth map and alter some parameters
+    glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
+    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+    glTexImage2D (GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+
+    //Attach to the depthmap to the FBO
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapTexture, 0);
+
+    //Done. Unbind and switch to normal texture unit
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glActiveTexture(GL_TEXTURE0);
+}
+
+//Sends the texture to the shader
+void Scenery3d::generateCubeMap_drawSecondPassScene(StelPainter& painter)
+{
     for (unsigned int i=0; i<objModelArrays.size(); i++) {
           OBJ::StelModel& stelModel = objModelArrays[i];
           if (stelModel.texture.data()) {
             stelModel.texture.data()->bind();
+            int location = shadowShader->uniformLocation("texture");
+            shadowShader->setUniform(location, 0);
           } else {
             glBindTexture(GL_TEXTURE_2D, 0);
           }
           glColor3fv(stelModel.color.v);
           painter.setArrays(stelModel.vertices, stelModel.texcoords, __null, stelModel.normals);
-          painter.drawShadowSecondPassFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, shadowShader, stelModel.vertices, stelModel.texcoords, __null, stelModel.normals);
+          painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);
     }
 }
 
-//SECOND PASS
+
 void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float lightBrightness)
 {
+    //Shadow mapping second pass, draw scene using the shadow shader
+
+
     //GZ: to achieve brighter surfaces, we use sqrt(lightBrightness):
     float diffBrightness=std::sqrt(lightBrightness);
 
+    //const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
     const GLfloat LightAmbient[] = {lightBrightness, lightBrightness, lightBrightness, 1.0f};
     const GLfloat LightDiffuse[] = {diffBrightness, diffBrightness, diffBrightness, 1.0f};
 
+    //const GLfloat LightAmbientShadow[] = {0.02f, 0.02f, 0.02f, 1.0f};
+    //const GLfloat LightAmbientShadow[] = {0.12f, 0.12f, 0.12f, 1.0f};
+    //const GLfloat LightDiffuseShadow[] = {0.02f, 0.02f, 0.02f, 1.0f};
+
+    glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
+
+
+    //Use the shadow mapping shader
+    shadowShader->use();
+
     int location = -1;
 
-    location = shadowShader->uniformLocation("ambient_color");
-    shadowShader->setUniform(location, LightAmbient[0], LightAmbient[1], LightAmbient[2], 1.0f);
-
-    location = shadowShader->uniformLocation("diffuse_color");
-    shadowShader->setUniform(location, LightDiffuse[0], LightDiffuse[1], LightDiffuse[2], 1.0f);
-
+    //Set light position
     location = shadowShader->uniformLocation("light_position");
     shadowShader->setUniform(location, LightPos[0], LightPos[1], LightPos[2], 1.0f);
 
@@ -501,43 +536,41 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float
     //This matrix takes us from eye space to the light's clip space
     //It is postmultiplied by the inverse of the current view matrix when specifying texgen
     static Mat4f biasMatrix(0.5f, 0.0f, 0.0f, 0.0f,
-                            0.0f, 0.5f, 0.0f, 0.0f,
-                            0.0f, 0.0f, 0.5f, 0.0f,
-                            0.5f, 0.5f, 0.5f, 1.0f);	//bias from [-1, 1] to [0, 1]
+                         0.0f, 0.5f, 0.0f, 0.0f,
+                         0.0f, 0.0f, 0.5f, 0.0f,
+                         0.5f, 0.5f, 0.5f, 1.0f);	//bias from [-1, 1] to [0, 1]
     Mat4f textureMatrix = biasMatrix * lightProjectionMatrix * lightViewMatrix;
 
-    Vec4f matrixRow[4];
-    for (int i = 0; i < 4; i++)
-    {
-        matrixRow[i].set(textureMatrix[i+0], textureMatrix[i+4], textureMatrix[i+8], textureMatrix[i+12]);
-    }
+// NOT SURE IF THIS IS NEEDED. I DON'T SEE VISIBLE DIFFERENCES
+//    Vec4f matrixRow[4];
+//    for (int i = 0; i < 4; i++)
+//    {
+//        matrixRow[i].set(textureMatrix[i+0], textureMatrix[i+4], textureMatrix[i+8], textureMatrix[i+12]);
+//    }
 
-    //Set up texture coordinate generation.
-    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-    glTexGenfv(GL_S, GL_EYE_PLANE, matrixRow[0]);
-    glEnable(GL_TEXTURE_GEN_S);
+//    //Set up texture coordinate generation.
+//    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+//    glTexGenfv(GL_S, GL_EYE_PLANE, matrixRow[0]);
+//    glEnable(GL_TEXTURE_GEN_S);
 
-    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-    glTexGenfv(GL_T, GL_EYE_PLANE, matrixRow[1]);
-    glEnable(GL_TEXTURE_GEN_T);
+//    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+//    glTexGenfv(GL_T, GL_EYE_PLANE, matrixRow[1]);
+//    glEnable(GL_TEXTURE_GEN_T);
 
-    glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-    glTexGenfv(GL_R, GL_EYE_PLANE, matrixRow[2]);
-    glEnable(GL_TEXTURE_GEN_R);
+//    glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+//    glTexGenfv(GL_R, GL_EYE_PLANE, matrixRow[2]);
+//    glEnable(GL_TEXTURE_GEN_R);
 
-    glTexGeni(GL_Q, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-    glTexGenfv(GL_Q, GL_EYE_PLANE, matrixRow[3]);
-    glEnable(GL_TEXTURE_GEN_Q);
-
-    //Reset viewport size
-    glViewport(0, 0, w_width, w_height);
+//    glTexGeni(GL_Q, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+//    glTexGenfv(GL_Q, GL_EYE_PLANE, matrixRow[3]);
+//    glEnable(GL_TEXTURE_GEN_Q);
 
     //Enable colors
     glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glCullFace(GL_BACK);
 
-    //Bind Shadow Map Texture
+    //Bind depth map texture (again in unit 1 because of multitexturing)
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
 
@@ -545,207 +578,150 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float
     location = shadowShader->uniformLocation("smap");
     shadowShader->setUniform(location, 1);
 
-    //Calculate tex_mat = bias * P_light * V_light * V^-1_ * MV
-    Mat4f ModelViewMatrix;
-    glGetFloatv(GL_MODELVIEW_MATRIX, ModelViewMatrix);
-
-    Mat4f tmp(matrixRow[0][0], matrixRow[0][1], matrixRow[0][2], matrixRow[0][3],
-              matrixRow[1][0], matrixRow[1][1], matrixRow[1][2], matrixRow[1][3],
-              matrixRow[2][0], matrixRow[2][1], matrixRow[2][2], matrixRow[2][3],
-              matrixRow[3][0], matrixRow[3][1], matrixRow[3][2], matrixRow[3][3]);
-
-    Mat4f tex_mat = ModelViewMatrix * tmp;
-
-    //Send to shader
+    //Send to texture matrix to shader
     location = shadowShader->uniformLocation("tex_mat");
     shadowShader->setUniform(location, textureMatrix);
 
-    //Calculate PVM Matrix
-    Mat4f ProjectionMatrix;
-    glGetFloatv(GL_PROJECTION_MATRIX, ProjectionMatrix);
-
-    Mat4f PVM = ProjectionMatrix * ModelViewMatrix;
-
-    //Send to shader
-    location = shadowShader->uniformLocation("PVM");
-    shadowShader->setUniform(location, PVM);
-
     //Activate normal texturing
     glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, 0);
 
     //Draw
     generateCubeMap_drawSecondPassScene(painter);
 
-    glDisable(GL_TEXTURE_GEN_S);
-    glDisable(GL_TEXTURE_GEN_T);
-    glDisable(GL_TEXTURE_GEN_R);
-    glDisable(GL_TEXTURE_GEN_Q);
+// NOT SURE IF THIS IS NEEDED. I DON'T SEE VISIBLE DIFFERENCES
+//    glDisable(GL_TEXTURE_GEN_S);
+//    glDisable(GL_TEXTURE_GEN_T);
+//    glDisable(GL_TEXTURE_GEN_R);
+//    glDisable(GL_TEXTURE_GEN_Q);
 
-    //Done
+    //Done. Unbind shader
     glUseProgram(0);
-    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-//FIRST PASS
 void Scenery3d::generateShadowMap(StelCore* core)
 {
-    //No Objects to draw
-     if (objModelArrays.empty()) {
-         return;
-     }
-
-     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-     StelPainter painter(prj);
-
-     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-
-     //Determine sun position
-     Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
-     sunPosition.normalize();
-
-     //Determine moon position
-     Vec3d moonPosition = ssystem->getMoon()->getAltAzPosAuto(core);
-     moonPosition.normalize();
-
-     //Determine venus position
-     Vec3d venusPosition = ssystem->searchByName("Venus")->getAltAzPosAuto(core);
-     venusPosition.normalize();
+    //Shadow mapping first pass, draw scene using the shadow shader
 
 
-     glEnable(GL_TEXTURE_2D);
-
-     //Bind FBO
-     glBindFramebuffer(GL_FRAMEBUFFER, shadowMapFbo);
-
-     //No shader
-     glUseProgram(0);
-
-     //Render to shadow map
-     glActiveTexture(GL_TEXTURE1);
-     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapTexture, 0);
-
-     //Fix selfshadowing
-     glEnable(GL_POLYGON_OFFSET_FILL);
-     glPolygonOffset(1.1f,4.0f);
-
-     //Set viewport
-     glViewport(0, 0, shadowmapSize, shadowmapSize);
-
-     //Clear everything
-     glClear(GL_DEPTH_BUFFER_BIT);
-
-     //Disable color
-     glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
-     glCullFace(GL_FRONT);
-
-
-     glMatrixMode(GL_PROJECTION);
-     glPushMatrix();
-     glLoadIdentity();
-
-     const GLdouble orthoLeft = -50;
-     const GLdouble orthoRight = 50;
-     const GLdouble orthoBottom = -50;
-     const GLdouble orthoTop = 50;
-     glOrtho(orthoLeft, orthoRight, orthoBottom, orthoTop, -100, 100);
-     glGetFloatv(GL_PROJECTION_MATRIX, lightProjectionMatrix); // save light projection for further render passes
-
-     glMatrixMode(GL_MODELVIEW);
-     glPushMatrix();
-     glLoadIdentity();
-     glRotated(90.0f, -1.0f, 0.0f, 0.0f);
-
-     //front
-     glPushMatrix();
-     glLoadIdentity();
-     if (sunPosition[2]>0)
-     {
-         gluLookAt (sunPosition[0], sunPosition[1], sunPosition[2], 0, 0, 0, 0, 0, 1);
-         LightPos[0] = sunPosition[0];
-         LightPos[1] = sunPosition[1];
-         LightPos[2] = sunPosition[2];
-     }
-     else if (moonPosition[2]>0)
-     {
-         gluLookAt (moonPosition[0], moonPosition[1], moonPosition[2], 0, 0, 0, 0, 0, 1);
-         LightPos[0] = moonPosition[0];
-         LightPos[1] = moonPosition[1];
-         LightPos[2] = moonPosition[2];
-     }
-     else
-     {
-         gluLookAt (venusPosition[0], venusPosition[1], venusPosition[2], 0, 0, 0, 0, 0, 1);
-         LightPos[0] = venusPosition[0];
-         LightPos[1] = venusPosition[1];
-         LightPos[2] = venusPosition[2];
-     }
-
-     /* eyeX,eyeY,eyeZ,centerX,centerY,centerZ,upX,upY,upZ)*/
-     glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix); // save light view for further render passes
-
-     //Draw without textures
-     drawArrays(painter, false);
-
-     glDisable(GL_POLYGON_OFFSET_FILL);
-
-     glPopMatrix();
-     glMatrixMode(GL_MODELVIEW);
-     glPopMatrix();
-     glMatrixMode(GL_PROJECTION);
-     glPopMatrix();
-     glPopAttrib();
-
-     glDepthMask(GL_FALSE);
-     glDisable(GL_DEPTH_TEST);
-     glCullFace(GL_BACK);
-     glDisable(GL_CULL_FACE);
-     glColorMask(1, 1, 1, 1);
-
-     //Unbind
-     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-     glActiveTexture(GL_TEXTURE0);
-}
-
-void Scenery3d::initShadowMapping()
-{
-    glEnable(GL_TEXTURE_2D);
-
-    //Generate FBO
-    glGenFramebuffers(1, &shadowMapFbo);
-    glBindFramebuffer(GL_FRAMEBUFFER, shadowMapFbo);
-
-    //Generate shadow map texture
-    glActiveTexture(GL_TEXTURE1);
-    glGenTextures(1, &shadowMapTexture);
-    glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
-
-    // GL_LINEAR does not make sense for depth texture. However, next tutorial shows usage of GL_LINEAR and PCF
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-    // Remove artefact on the edges of the shadowmap
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
-
-    //Attach to Buffer
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapTexture, 0);
-
-    //Essential for depth-only FBOs
-    glDrawBuffer(GL_NONE);
-    glReadBuffer(GL_NONE);
-
-    //Check FBO status
-    GLenum FBOstatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-    if(FBOstatus != GL_FRAMEBUFFER_COMPLETE)
-    {
-        printf("WARNING [Scenery3d]: FBO failed.\n");
+    //Return if no objects in scene
+    if (objModelArrays.empty()) {
+        return;
     }
 
-    //Unbind again
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+    StelPainter painter(prj);
+
+    //Determine sun position
+    SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+    Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
+    //zRotateMatrix.transfo(sunPosition);
+    sunPosition.normalize();
+    // GZ: at night, a near-full Moon can cast good shadows.
+    Vec3d moonPosition = ssystem->getMoon()->getAltAzPosAuto(core);
+    //zRotateMatrix.transfo(sunPosition);
+    moonPosition.normalize();
+    Vec3d venusPosition = ssystem->searchByName("Venus")->getAltAzPosAuto(core);
+    venusPosition.normalize();
+
+    //No shader needed for generating the depth map
+    glUseProgram(0);
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+    glDepthMask(GL_TRUE);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_FRONT); // cull front faces
+    glColorMask(0, 0, 0, 0); // disable color writes (increase performance?)
+
+    //Adjust viewport
+    glPushAttrib(GL_VIEWPORT_BIT);
+    glViewport(0, 0, shadowmapSize, shadowmapSize);
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+    //glMultMatrixd(projMatd);
+    const GLdouble orthoLeft = -50;
+    const GLdouble orthoRight = 50;
+    const GLdouble orthoBottom = -50;
+    const GLdouble orthoTop = 50;
+    glOrtho(orthoLeft, orthoRight, orthoBottom, orthoTop, -100, 100);
+    glGetFloatv(GL_PROJECTION_MATRIX, lightProjectionMatrix); // save light projection for further render passes
+
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glLoadIdentity();
+    glRotated(90.0f, -1.0f, 0.0f, 0.0f);
+
+    //front
+    glPushMatrix();
+    glLoadIdentity();
+
+    //Select view position based on which planet is visible
+    if (sunPosition[2]>0)
+    {
+        gluLookAt (sunPosition[0], sunPosition[1], sunPosition[2], 0, 0, 0, 0, 0, 1);
+        LightPos[0] = sunPosition[0];
+        LightPos[1] = sunPosition[1];
+        LightPos[2] = sunPosition[2];
+    }
+    else if (moonPosition[2]>0)
+    {
+        gluLookAt (moonPosition[0], moonPosition[1], moonPosition[2], 0, 0, 0, 0, 0, 1);
+        LightPos[2] = moonPosition[0];
+        LightPos[2] = moonPosition[1];
+        LightPos[2] = moonPosition[2];
+    }
+    else
+    {
+        gluLookAt (venusPosition[0], venusPosition[1], venusPosition[2], 0, 0, 0, 0, 0, 1);
+        LightPos[2] = venusPosition[0];
+        LightPos[2] = venusPosition[1];
+        LightPos[2] = venusPosition[2];
+    }
+
+    /* eyeX,eyeY,eyeZ,centerX,centerY,centerZ,upX,upY,upZ)*/
+    glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix); // save light view for further render passes
+
+    //Bind the FBO
+    glBindFramebuffer(GL_FRAMEBUFFER, shadowFbo);
+
+    //Activate texture unit 1 as usual
+    glActiveTexture(GL_TEXTURE1);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapTexture, 0);
+
+    //Fix self-shadowing
+    glEnable(GL_POLYGON_OFFSET_FILL);
+    glPolygonOffset(1.1f, 4.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    //Draw the scene
+    drawArrays(painter);
+
+    //Remove polygon offset again
+    glDisable(GL_POLYGON_OFFSET_FILL);
+
+    //Switch back to normal texturing
     glActiveTexture(GL_TEXTURE0);
+
+    //Unbding
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    glPopMatrix();
+
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glPopAttrib();
+
+    //Reset
+    glDepthMask(GL_FALSE);
+    glDisable(GL_DEPTH_TEST);
+    glCullFace(GL_BACK);
+    glDisable(GL_CULL_FACE);
+    glColorMask(1, 1, 1, 1);
 }
 
 void Scenery3d::generateCubeMap(StelCore* core)
@@ -764,9 +740,8 @@ void Scenery3d::generateCubeMap(StelCore* core)
         }
     }
 
-
     glEnable(GL_BLEND);
-    painter.enableTexture2d(true);
+    glEnable(GL_TEXTURE_2D);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
@@ -895,7 +870,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
     glDisable(GL_LIGHTING);
     glDepthMask(GL_FALSE);
     glDisable(GL_DEPTH_TEST);
-    painter.enableTexture2d(false);
+    glDisable(GL_TEXTURE_2D);
 }
 
 void Scenery3d::drawFromCubeMap(StelCore* core)
@@ -906,7 +881,8 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
 
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
     StelPainter painter(prj);
-    painter.enableTexture2d(true);
+
+    glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_DEPTH_TEST);
@@ -944,9 +920,8 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
     glBindTexture(GL_TEXTURE_2D, cubeMap[5]->texture());
     painter.drawSphericalTriangles(cubePlaneBottom, true, __null, false);
 
-
     glDisable(GL_CULL_FACE);
-    painter.enableTexture2d(false);
+    glDisable(GL_TEXTURE_2D);
     glDisable(GL_DEPTH_TEST);
     //glDisable(GL_BLEND);
 }
@@ -960,7 +935,7 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
 
     //glEnable(GL_MULTISAMPLE); // enabling multisampling aka Anti-Aliasing
     glEnable(GL_BLEND);
-    painter.enableTexture2d(true);
+    glEnable(GL_TEXTURE_2D);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
@@ -985,21 +960,21 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
     shadowCaster shadows = None;
     if(sinSunAngleRad > 0 ) //-0.1/1.5 ) // sun above -8 deg?
     {
-	lightBrightness = (0.1 + 1.5*(sinSunAngleRad)); //+0.1/1.5));
+        lightBrightness = (0.1 + 1.5*(sinSunAngleRad)); //+0.1/1.5));
         if ((shadowsEnabled) && (sunPosition[2]>0.)) shadows = Sun;
     }
     else if (sinMoonAngleRad>0)
     {
-	lightBrightness = 0.1 + 0.2*sinMoonAngleRad; // TODO: dependence on Lunar phase and general sky brightness!
+        lightBrightness = 0.1 + 0.2*sinMoonAngleRad; // TODO: dependence on Lunar phase and general sky brightness!
         if (shadowsEnabled) shadows = Moon;
     }
     else
     {
-	lightBrightness = 0.1; // TODO: dependence on general sky brightness! Landscape had some code, commented out, to provide ambient brightness.
+        lightBrightness = 0.1; // TODO: dependence on general sky brightness! Landscape had some code, commented out, to provide ambient brightness.
     }
 
     Vec3d sunOrMoon = ( (sinSunAngleRad > 0 ) //-0.1/1.5 )
-			? sunPosition : moonPosition);
+                        ? sunPosition : moonPosition);
     const GLfloat LightPosition[]= {-sunOrMoon.v[0], -sunOrMoon.v[1], sunOrMoon.v[2], 0.0f} ;// signs determined by experiment
 
 
@@ -1044,7 +1019,7 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
     glDisable(GL_LIGHTING);
     glDepthMask(GL_FALSE);
     glDisable(GL_DEPTH_TEST);
-    painter.enableTexture2d(false);
+    glDisable(GL_TEXTURE_2D);
     //glDisable(GL_BLEND);
 }
 
@@ -1069,7 +1044,7 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
     Vec3d world_pos= model_pos+modelWorldOffset;
     // problem: long grid names!
     painter.drawText(prj->getViewportWidth()-10-qMax(240, painter.getFontMetrics().boundingRect(gridName).width()),
-		     screen_y, gridName);
+                     screen_y, gridName);
     screen_y -= 17.0f;
     str = QString("East:   %1m").arg(world_pos[0], 10, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
@@ -1100,7 +1075,7 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
     painter.drawText(screen_x, screen_y, str);
     //*/
 }
-	
+
 void Scenery3d::draw(StelCore* core)
 {
     //this->core = core; // GZ: now in loadScenery()
@@ -1115,7 +1090,7 @@ void Scenery3d::draw(StelCore* core)
         drawObjModel(core);
     }
     else
-    {   
+    {
         generateCubeMap(core);
         drawFromCubeMap(core);
     }

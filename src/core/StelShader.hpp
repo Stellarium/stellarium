@@ -20,6 +20,9 @@
 #ifndef STELSHADER_HPP
 #define STELSHADER_HPP
 
+#include <iostream>
+#include <fstream>
+
 //#include "VecMath.hpp"
 
 //! @class StelShader
@@ -57,10 +60,10 @@ public:
         void setUniform (int location, float mat[]);
 
 //! Loads a vertex and a pixel Shader from the vertex and pixel shader files respectively.
-//! @param const char* vertexFile, the path of the vertex shader
-//! @param const char* pixelFile, the path of the fragment shader
+//! @param string vertexFile, the path of the vertex shader
+//! @param string pixelFile, the path of the fragment shader
 //! @return true when both shader files are successfully loaded
-        bool load(const char* vertexFile, const char* pixelFile);
+        bool load(std::string vertexShaderPath, std::string fragmentShaderPath);
 
 //! Use current shader
 //! @return true when the current shader program is successfully used
