@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-30 12:31+0200\n"
-"PO-Revision-Date: 2011-10-13 15:11+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2011-12-02 09:30+0000\n"
+"Last-Translator: Péter Trombitás <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-01 05:21+0000\n"
-"X-Generator: Launchpad (build 14414)\n"
+"X-Launchpad-Export-Date: 2011-12-03 04:51+0000\n"
+"X-Generator: Launchpad (build 14418)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
@@ -153,7 +153,7 @@ msgstr "Parallaxis: %1\""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr ""
+msgstr "Űrhajó"
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
@@ -278,7 +278,7 @@ msgstr "Óraszög, D: %1, %2"
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
-msgstr ""
+msgstr "(geometrikus)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
@@ -564,7 +564,7 @@ msgstr "OSX-es fejlesztő: %1"
 #: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "Tesztelő: %1"
 
 #: src/gui/StelGui.cpp:98
 msgid "Display Options"
@@ -626,7 +626,7 @@ msgstr "Meridiánvonal"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1107
 msgid "Horizon line"
-msgstr ""
+msgstr "Horizontvonal"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1109
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:287
@@ -878,7 +878,7 @@ msgstr ""
 #. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 #: src/gui/AddRemoveLandscapesDialog.cpp:114
 msgid "ZIP archives"
-msgstr ""
+msgstr "ZIP archívumok"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:132
 #, qt-format
@@ -920,13 +920,14 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:193
 #, qt-format
 msgid "Size on disk: %1 MiB"
-msgstr ""
+msgstr "Méret a lemezen: %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
 #: src/gui/AddRemoveLandscapesDialog.cpp:219
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr ""
+"A Stellarium nem tudja megnyitni írásra vagy olvasásra a következőt: %1"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:225
 msgid ""
