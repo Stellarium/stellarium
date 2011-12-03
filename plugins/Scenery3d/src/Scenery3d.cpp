@@ -70,6 +70,7 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, StelShader* shadowShade
         cubeMap[i] = NULL;
     }
     shadowMapFbo = NULL;
+    shadowFbo = 0;
     int sub = 20;
     double d_sub_v = 2.0 / sub;
     double d_sub_tex = 1.0 / sub;
@@ -128,6 +129,7 @@ Scenery3d::~Scenery3d()
          {
                  glDeleteTextures(1, &shadowMapTexture);
                  shadowMapTexture = 0;
+                 shadowFbo = 0;
                  delete shadowMapFbo;
          }
     for (int i=0; i<6; i++) {

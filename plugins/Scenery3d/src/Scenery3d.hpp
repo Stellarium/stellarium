@@ -160,7 +160,7 @@ private:
 
     StelShader* shadowShader;
 
-    //Shadow Map FBO
+    //Shadow Map FBO handle
     GLuint shadowFbo;
 
     //Depth texture
