@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-30 12:31+0200\n"
-"PO-Revision-Date: 2011-11-29 17:31+0000\n"
+"PO-Revision-Date: 2011-12-03 07:24+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-01 05:23+0000\n"
-"X-Generator: Launchpad (build 14414)\n"
+"X-Launchpad-Export-Date: 2011-12-04 04:40+0000\n"
+"X-Generator: Launchpad (build 14418)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
 msgid "Meridian"
@@ -2171,7 +2171,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:757
 msgid "Please select an object before switching to ocular view."
-msgstr ""
+msgstr "Выберите объект до включения вида через окуляр"
 
 #: plugins/Oculars/src/Oculars.cpp:836
 msgid "&Previous ocular"
@@ -2240,11 +2240,11 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1249
 msgid "Telrad sight"
-msgstr ""
+msgstr "Поле зрения Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:1257
 msgid "Oculars plugin configuration"
-msgstr ""
+msgstr "Конфигурация плагина"
 
 #: plugins/Oculars/src/Oculars.cpp:1444
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
@@ -2336,11 +2336,11 @@ msgstr "Следующий окуляр"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
 msgid "Previous CCD frame"
-msgstr ""
+msgstr "Предыдущая рамка ПЗС"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
 msgid "Next CCD frame"
-msgstr ""
+msgstr "Следующая рамка ПЗС"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Previous telescope"
@@ -2352,31 +2352,31 @@ msgstr "Следующий телескоп"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr ""
+msgstr "Повернуть рамку сенсора на 15 градусов против часовой стрелки"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:258
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr ""
+msgstr "Повернуть рамку сенсора на 5 градусов против часовой стрелки"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:271
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr ""
+msgstr "Повернуть рамку сенсора на градус против часовой стрелки"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
-msgstr ""
+msgstr "Сбросить поворот рамки сенсора"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr ""
+msgstr "Повернуть рамку сенсора на градус по часовой стрелке"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:310
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr ""
+msgstr "Повернуть рамку сенсора на 5 градусов по часовой стрелке"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:323
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr ""
+msgstr "Повернуть рамку сенсора на 15 градусов по часовой стрелке"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
 msgid "Effective focal length of the ocular"
@@ -2384,7 +2384,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:533
 msgid "Apparent field of view of the ocular"
-msgstr ""
+msgstr "Видимое поле зрения окуляра"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 #, qt-format
@@ -2393,7 +2393,7 @@ msgstr "Поворот: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 msgid "Magnification provided by these binoculars"
-msgstr ""
+msgstr "Увеличение, даваемое этим биноклем"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
 msgid "Actual field of view provided by these binoculars"
@@ -2401,7 +2401,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
 msgid "Magnification provided by this ocular/telescope combination"
-msgstr ""
+msgstr "Увеличение,  даваемое этой комбинацией телескопа и окуляра"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
 msgid "Actual field of view provided by this ocular/telescope combination"
@@ -2417,7 +2417,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:875
 msgid "Key mappings"
-msgstr ""
+msgstr "Привязка клавиш"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:876
 msgid "Toggle ocular view:"
@@ -2429,11 +2429,11 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:879
 msgid "Interface"
-msgstr ""
+msgstr "Внешний вид"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "On-screen control panel"
-msgstr ""
+msgstr "Экранная панель управления"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:209
@@ -2443,7 +2443,7 @@ msgstr "Основные"
 #: plugins/Oculars/src/ui_ocularDialog.h:882
 #: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Eyepieces"
-msgstr ""
+msgstr "Окуляры"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:883
 #: plugins/Oculars/src/ui_ocularDialog.h:892
@@ -2461,12 +2461,12 @@ msgstr "Название:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:886
 msgid "aFOV:"
-msgstr ""
+msgstr "вПЗ:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:887
 #: plugins/Oculars/src/ui_ocularDialog.h:906
 msgid "Focal length:"
-msgstr ""
+msgstr "Фокусное расстояние:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Field stop:"
@@ -2474,36 +2474,36 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Binoculars"
-msgstr ""
+msgstr "Бинокли"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:891
 #: plugins/Oculars/src/ui_ocularDialog.h:901
 msgid "Sensors"
-msgstr ""
+msgstr "Сенсоры"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:895
 msgid "Resolution x (pixels):"
-msgstr ""
+msgstr "Разрешение по x (пикселы):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Resolution y (pixels):"
-msgstr ""
+msgstr "Разрешение по y (пикселы):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:897
 msgid "Chip width (mm):"
-msgstr ""
+msgstr "Ширина чипа (мм):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Chip height (mm):"
-msgstr ""
+msgstr "Высота чипа (мм):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:899
 msgid "Pixel width (micron):"
-msgstr ""
+msgstr "Ширина пикселя (мкм):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Pixel height (micron):"
-msgstr ""
+msgstr "Высота пикселя (мкм):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:902
 #: plugins/Oculars/src/ui_ocularDialog.h:910
@@ -2514,15 +2514,15 @@ msgstr "Телескопы"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:907
 msgid "Diameter:"
-msgstr ""
+msgstr "Диаметр:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:908
 msgid "Horizontal flip"
-msgstr ""
+msgstr "Горизонтальное отражение"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:909
 msgid "Vertical flip"
-msgstr ""
+msgstr "Вертикальное отражение"
 
 #: plugins/Satellites/src/Satellites.cpp:67
 #: plugins/Satellites/src/ui_satellitesDialog.h:657

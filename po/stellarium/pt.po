@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-30 12:31+0200\n"
-"PO-Revision-Date: 2011-11-17 10:06+0000\n"
+"PO-Revision-Date: 2011-12-03 11:53+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-01 05:23+0000\n"
-"X-Generator: Launchpad (build 14414)\n"
+"X-Launchpad-Export-Date: 2011-12-04 04:40+0000\n"
+"X-Generator: Launchpad (build 14418)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
 msgid "Meridian"
@@ -116,7 +116,7 @@ msgstr "Obliquidade (da data): %1"
 #: src/core/modules/Planet.cpp:148
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "Distância: %1 UA (%2 km)"
 
 #: src/core/modules/Planet.cpp:155
 #, no-c-format, qt-format
@@ -569,7 +569,7 @@ msgstr "Programador OSX: %1"
 #: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "Testador: %1"
 
 #: src/gui/StelGui.cpp:98
 msgid "Display Options"
@@ -2172,54 +2172,55 @@ msgstr ""
 #: plugins/Oculars/src/Oculars.cpp:757
 msgid "Please select an object before switching to ocular view."
 msgstr ""
+"Por favor, seleccione um outro objecto antes de mudar para a visão ocular."
 
 #: plugins/Oculars/src/Oculars.cpp:836
 msgid "&Previous ocular"
-msgstr ""
+msgstr "Ocular &anterior"
 
 #: plugins/Oculars/src/Oculars.cpp:837
 msgid "&Next ocular"
-msgstr ""
+msgstr "Ocular &seguinte"
 
 #: plugins/Oculars/src/Oculars.cpp:838
 msgid "Select &ocular"
-msgstr ""
+msgstr "Seleccionar &ocular"
 
 #: plugins/Oculars/src/Oculars.cpp:883
 msgid "Toggle &crosshair"
-msgstr ""
+msgstr "Alternar &retículo"
 
 #: plugins/Oculars/src/Oculars.cpp:892
 msgid "Configure &Oculars"
-msgstr ""
+msgstr "Configurar &oculares"
 
 #: plugins/Oculars/src/Oculars.cpp:901
 msgid "Toggle &CCD"
-msgstr ""
+msgstr "Alternar &CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:909
 msgid "Toggle &Telrad"
-msgstr ""
+msgstr "Alternar &Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:919
 msgid "&Previous CCD"
-msgstr ""
+msgstr "CCD &anterior"
 
 #: plugins/Oculars/src/Oculars.cpp:920
 msgid "&Next CCD"
-msgstr ""
+msgstr "CCD &seguinte"
 
 #: plugins/Oculars/src/Oculars.cpp:921
 msgid "&Select CCD"
-msgstr ""
+msgstr "&Seleccionar CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:943
 msgid "&Rotate CCD"
-msgstr ""
+msgstr "&Girar CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:975
 msgid "&Reset rotation"
-msgstr ""
+msgstr "&Redefinir rotação"
 
 #: plugins/Oculars/src/Oculars.cpp:1201
 #: plugins/Oculars/src/ui_ocularDialog.h:872
@@ -2232,7 +2233,7 @@ msgstr "Menu de pop-up das oculares"
 
 #: plugins/Oculars/src/Oculars.cpp:1233
 msgid "Crosshairs"
-msgstr ""
+msgstr "Retículos"
 
 #: plugins/Oculars/src/Oculars.cpp:1241
 msgid "Image sensor frame"
@@ -2240,7 +2241,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1249
 msgid "Telrad sight"
-msgstr ""
+msgstr "Mira Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:1257
 msgid "Oculars plugin configuration"
