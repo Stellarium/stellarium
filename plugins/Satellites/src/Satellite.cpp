@@ -220,7 +220,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << QString(q_("Altitude (km): %1")).arg(height, 5, 'f', 2);
 		oss << "<br/>";
 		// TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-		oss << QString("SubPoint (Lat./Long.): %1%2/%3%4")
+		oss << QString(q_("SubPoint (Lat./Long.): %1%2/%3%4"))
 		       .arg(latLongSubPointPosition[0], 5, 'f', 2)
 		       .arg(QChar(0x00B0))
 		       .arg(latLongSubPointPosition[1], 5, 'f', 3)
