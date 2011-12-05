@@ -81,7 +81,7 @@ class Translations
 		// TRANSLATORS: Moon of Pluto (II)
 		N_("Nix");
 		// TRANSLATORS: Moon of Pluto (III)
-		N_("Hydra");
+		N_("Hydra (moon)");
 		N_("Eris");
 		N_("Triton");
 		N_("Nereid");
