@@ -1045,6 +1045,13 @@
                </property>
               </widget>
              </item>
+	     <item>
+	      <widget class="QCheckBox" name="showGalacticGridCheckBox">
+	       <property name="text">
+		<string>Galactic grid</string>
+	       </property>
+	      </widget>
+	     </item>
              <item>
               <widget class="QCheckBox" name="showAzimuthalGridCheckBox">
                <property name="text">
