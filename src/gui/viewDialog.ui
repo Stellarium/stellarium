@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>508</width>
-    <height>517</height>
+    <height>540</height>
    </rect>
   </property>
   <property name="font">
@@ -772,6 +772,12 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>180</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="value">
                 <number>33</number>
                </property>
@@ -795,6 +801,12 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>180</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="value">
                 <number>33</number>
                </property>
@@ -817,6 +829,12 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>180</width>
+                 <height>0</height>
+                </size>
                </property>
                <property name="value">
                 <number>33</number>
@@ -1045,13 +1063,13 @@
                </property>
               </widget>
              </item>
-	         <item>
- 	          <widget class="QCheckBox" name="showGalacticGridCheckBox">
-	           <property name="text">
-		        <string>Galactic grid</string>
-	           </property>
-	          </widget>
-	         </item>
+             <item>
+              <widget class="QCheckBox" name="showGalacticGridCheckBox">
+               <property name="text">
+                <string>Galactic grid</string>
+               </property>
+              </widget>
+             </item>
              <item>
               <widget class="QCheckBox" name="showAzimuthalGridCheckBox">
                <property name="text">
