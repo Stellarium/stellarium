@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-30 12:31+0200\n"
-"PO-Revision-Date: 2011-12-03 06:14+0000\n"
+"POT-Creation-Date: 2011-12-05 16:19+0700\n"
+"PO-Revision-Date: 2011-12-06 03:57+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-04 04:40+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2011-12-06 05:26+0000\n"
+"X-Generator: Launchpad (build 14435)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -1154,8 +1154,8 @@ msgstr "นิกซ์"
 
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
-msgid "Hydra"
-msgstr "ไฮดรา"
+msgid "Hydra (moon)"
+msgstr "ไฮดรา (ดาวบริวาร)"
 
 #: src/translations.h:85
 msgid "Eris"
@@ -2463,7 +2463,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:887
 #: plugins/Oculars/src/ui_ocularDialog.h:906
 msgid "Focal length:"
-msgstr ""
+msgstr "ความยาวโฟกัส:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Field stop:"
@@ -2471,7 +2471,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Binoculars"
-msgstr ""
+msgstr "กล้องสองตา"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:891
 #: plugins/Oculars/src/ui_ocularDialog.h:901
@@ -2511,15 +2511,15 @@ msgstr "กล้องโทรทรรศน์"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:907
 msgid "Diameter:"
-msgstr ""
+msgstr "เส้นผ่านศูนย์กลาง:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:908
 msgid "Horizontal flip"
-msgstr ""
+msgstr "พลิกในแนวนอน"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:909
 msgid "Vertical flip"
-msgstr ""
+msgstr "พลิกในแนวตั้ง"
 
 #: plugins/Satellites/src/Satellites.cpp:67
 #: plugins/Satellites/src/ui_satellitesDialog.h:657
@@ -2566,6 +2566,12 @@ msgstr "อัตราการเปลี่ยนระยะห่าง (�
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "ระดับความสูง (กม.): %1"
+
+#. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
+#: plugins/Satellites/src/Satellite.cpp:223
+#, qt-format
+msgid "SubPoint (Lat./Long.): %1%2/%3%4"
+msgstr ""
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:237
@@ -4096,6 +4102,9 @@ msgstr "ชนิด: %1"
 
 #~ msgid "Arrow down to load list."
 #~ msgstr "ใช้ลูกศรลงเพื่อโหลดรายการ"
+
+#~ msgid "Hydra"
+#~ msgstr "ไฮดรา"
 
 #~ msgid "Select and exit to run."
 #~ msgstr "เลือกและออกเพื่อเริ่มการใช้งาน"
