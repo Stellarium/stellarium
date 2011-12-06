@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-30 12:31+0200\n"
+"POT-Creation-Date: 2011-12-05 16:19+0700\n"
 "PO-Revision-Date: 2011-05-09 01:51+0000\n"
 "Last-Translator: George Machitidze <giomac@gmail.com>\n"
 "Language-Team: Georgian <ka@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-01 05:20+0000\n"
-"X-Generator: Launchpad (build 14414)\n"
+"X-Launchpad-Export-Date: 2011-12-06 05:22+0000\n"
+"X-Generator: Launchpad (build 14435)\n"
 "X-Poedit-Country: GEORGIA\n"
 "X-Poedit-Language: Georgian\n"
 
@@ -1143,7 +1143,7 @@ msgstr ""
 
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
-msgid "Hydra"
+msgid "Hydra (moon)"
 msgstr ""
 
 #: src/translations.h:85
@@ -2546,6 +2546,12 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:220
 #, qt-format
 msgid "Altitude (km): %1"
+msgstr ""
+
+#. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
+#: plugins/Satellites/src/Satellite.cpp:223
+#, qt-format
+msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr ""
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system

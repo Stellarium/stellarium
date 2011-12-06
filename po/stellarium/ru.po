@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-30 12:31+0200\n"
-"PO-Revision-Date: 2011-12-03 07:24+0000\n"
+"POT-Creation-Date: 2011-12-05 16:19+0700\n"
+"PO-Revision-Date: 2011-12-05 13:07+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-04 04:40+0000\n"
-"X-Generator: Launchpad (build 14418)\n"
+"X-Launchpad-Export-Date: 2011-12-06 05:25+0000\n"
+"X-Generator: Launchpad (build 14435)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:541
 msgid "Meridian"
@@ -1153,8 +1153,8 @@ msgstr "Никта"
 
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
-msgid "Hydra"
-msgstr "Гидра"
+msgid "Hydra (moon)"
+msgstr "Гидра (луна)"
 
 #: src/translations.h:85
 msgid "Eris"
@@ -2573,6 +2573,12 @@ msgstr "Скорость изменения дистанции (км/с): %1"
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "Высота (км): %1"
+
+#. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
+#: plugins/Satellites/src/Satellite.cpp:223
+#, qt-format
+msgid "SubPoint (Lat./Long.): %1%2/%3%4"
+msgstr ""
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:237
@@ -4104,6 +4110,9 @@ msgstr "Тип: %1"
 
 #~ msgid "Update me via Internet: "
 #~ msgstr "Обновить через Интернет: "
+
+#~ msgid "Hydra"
+#~ msgstr "Гидра"
 
 #~ msgid "Cardinal Points"
 #~ msgstr "Стороны света"
