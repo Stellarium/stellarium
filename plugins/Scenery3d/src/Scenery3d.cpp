@@ -513,8 +513,9 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float
     //GZ: to achieve brighter surfaces, we use sqrt(lightBrightness):
     float diffBrightness=std::sqrt(lightBrightness);
 
-    //const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
-    const GLfloat LightAmbient[] = {lightBrightness, lightBrightness, lightBrightness, 1.0f};
+    //GZ20111207: It was too bright here...
+    const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
+    //const GLfloat LightAmbient[] = {lightBrightness, lightBrightness, lightBrightness, 1.0f};
     const GLfloat LightDiffuse[] = {diffBrightness, diffBrightness, diffBrightness, 1.0f};
 
     //const GLfloat LightAmbientShadow[] = {0.02f, 0.02f, 0.02f, 1.0f};
