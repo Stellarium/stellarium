@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-06 18:19+0700\n"
+"POT-Creation-Date: 2011-12-07 14:20+0200\n"
 "PO-Revision-Date: 2011-10-18 18:23+0000\n"
 "Last-Translator: Manuel Rosales Graña <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-07 04:43+0000\n"
-"X-Generator: Launchpad (build 14435)\n"
+"X-Launchpad-Export-Date: 2011-12-08 05:22+0000\n"
+"X-Generator: Launchpad (build 14443)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -597,22 +597,22 @@ msgstr "Etiquetas das constelacións"
 msgid "Constellation boundaries"
 msgstr "Límites das constelacións"
 
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1117
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1119
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Azimuthal grid"
 msgstr "Grella azimutal"
 
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1114
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1116
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Equatorial grid"
 msgstr "Grella ecuatorial"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1115
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1117
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial J2000 grid"
 msgstr "Grella de J2000 ecuatorial"
 
-#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1116
+#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1118
 msgid "Galactic grid"
 msgstr "Grella galáctica"
 
@@ -620,26 +620,26 @@ msgstr "Grella galáctica"
 msgid "Galactic plane"
 msgstr ""
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1122
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1124
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Ecliptic line"
 msgstr "Liña eclíptica"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1119
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equator line"
 msgstr "Liña ecuatorial"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1120
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1122
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Meridian line"
 msgstr "Liña do meridiano"
 
-#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1121
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1123
 msgid "Horizon line"
 msgstr "Liña do horizonte"
 
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1123
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1125
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:287
 msgid "Cardinal points"
 msgstr "Puntos cardinais"
@@ -648,7 +648,7 @@ msgstr "Puntos cardinais"
 msgid "Ground"
 msgstr "Chan"
 
-#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1094
+#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1096
 msgid "Atmosphere"
 msgstr "Atmosfera"
 
@@ -656,7 +656,7 @@ msgstr "Atmosfera"
 msgid "Fog"
 msgstr "Néboa"
 
-#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1103
+#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1105
 msgid "Nebulas"
 msgstr "Nebulosas"
 
@@ -664,7 +664,7 @@ msgstr "Nebulosas"
 msgid "Nebulas background images"
 msgstr "Imaxes de nebulosas difusas"
 
-#: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1080 src/ui_viewDialog.h:1102
+#: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1082 src/ui_viewDialog.h:1104
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Stars"
 msgstr "Estrelas"
@@ -1573,197 +1573,197 @@ msgstr "RA/Dec (J2000):"
 msgid "Position"
 msgstr "Posición"
 
-#: src/ui_viewDialog.h:1065
+#: src/ui_viewDialog.h:1067
 msgid "View"
 msgstr "Ver"
 
-#: src/ui_viewDialog.h:1071
+#: src/ui_viewDialog.h:1073
 msgid "Sky"
 msgstr "Ceo"
 
-#: src/ui_viewDialog.h:1073
+#: src/ui_viewDialog.h:1075
 msgid "Markings"
 msgstr "Marcadores"
 
-#: src/ui_viewDialog.h:1075
+#: src/ui_viewDialog.h:1077
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:371
 msgid "Landscape"
 msgstr "Paisaxe"
 
-#: src/ui_viewDialog.h:1077
+#: src/ui_viewDialog.h:1079
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:212
 msgid "Starlore"
 msgstr "Tradición estelar"
 
-#: src/ui_viewDialog.h:1081
+#: src/ui_viewDialog.h:1083
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Absolute scale:"
 msgstr "Escala absoluta:"
 
-#: src/ui_viewDialog.h:1082
+#: src/ui_viewDialog.h:1084
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:236
 msgid "Relative scale:"
 msgstr "Escala relativa:"
 
-#: src/ui_viewDialog.h:1083
+#: src/ui_viewDialog.h:1085
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Twinkle:"
 msgstr "Escintileo:"
 
-#: src/ui_viewDialog.h:1085
+#: src/ui_viewDialog.h:1087
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Atenuar o brillo das estrelas ao lado dun obxecto moi brillante."
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1089
 msgid "Dynamic eye adaptation"
 msgstr "Adaptación dinámica do ollo"
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1090
 msgid "Planets and satellites"
 msgstr "Planetas e satélites"
 
-#: src/ui_viewDialog.h:1089
+#: src/ui_viewDialog.h:1091
 msgid "Show planets"
 msgstr "Amosar planetas"
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:1092
 msgid "Show planet markers"
 msgstr "Amosar etiquetas de planetas"
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:1093
 msgid "Show planet orbits"
 msgstr "Amosar órbitas de planetas"
 
-#: src/ui_viewDialog.h:1092
+#: src/ui_viewDialog.h:1094
 msgid "Simulate light speed"
 msgstr "Simular velocidade da luz"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1095
 msgid "Scale Moon"
 msgstr "Escala da Lúa"
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1097
 msgid "Show atmosphere"
 msgstr "Amosar atmósfera"
 
-#: src/ui_viewDialog.h:1096
+#: src/ui_viewDialog.h:1098
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Light pollution:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1100
 msgid "pressure, temperature, extinction coefficient"
 msgstr "presión, temperatura, coeficiente de extinción"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1102
 msgid "Refraction/Extinction settings..."
 msgstr "Refracción/Configuración de extinción..."
 
-#: src/ui_viewDialog.h:1101
+#: src/ui_viewDialog.h:1103
 msgid "Labels and Markers"
 msgstr "Etiquetas e marcadores"
 
-#: src/ui_viewDialog.h:1104
+#: src/ui_viewDialog.h:1106
 msgid "Planets"
 msgstr "Planetas"
 
-#: src/ui_viewDialog.h:1105
+#: src/ui_viewDialog.h:1107
 msgid "Shooting Stars"
 msgstr "Estrelas fugaces"
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1108
 msgid "Hourly zenith rate:"
 msgstr "Taxa horaria cenital:"
 
-#: src/ui_viewDialog.h:1107
+#: src/ui_viewDialog.h:1109
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:1108
+#: src/ui_viewDialog.h:1110
 msgid "10"
 msgstr "10"
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1111
 msgid "80"
 msgstr "80"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1112
 msgid "10000"
 msgstr "10000"
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1113
 msgid "144000"
 msgstr "144000"
 
-#: src/ui_viewDialog.h:1113
+#: src/ui_viewDialog.h:1115
 msgid "Celestial Sphere"
 msgstr "Esfera celeste"
 
-#: src/ui_viewDialog.h:1118
+#: src/ui_viewDialog.h:1120
 msgid "Galactic plane line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1124
+#: src/ui_viewDialog.h:1126
 msgid "Constellations"
 msgstr "Constelacións"
 
-#: src/ui_viewDialog.h:1125
+#: src/ui_viewDialog.h:1127
 msgid "Show lines"
 msgstr "Amosar liñas"
 
-#: src/ui_viewDialog.h:1126
+#: src/ui_viewDialog.h:1128
 msgid "Show labels"
 msgstr "Amosar etiquetas"
 
-#: src/ui_viewDialog.h:1127
+#: src/ui_viewDialog.h:1129
 msgid "Show boundaries"
 msgstr "Amosar límites"
 
-#: src/ui_viewDialog.h:1128
+#: src/ui_viewDialog.h:1130
 msgid "Show art"
 msgstr "Amoxar debuxos das contelaxións"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1129
+#: src/ui_viewDialog.h:1131
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Art brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1130
+#: src/ui_viewDialog.h:1132
 msgid "Projection"
 msgstr "Proxección"
 
-#: src/ui_viewDialog.h:1131
+#: src/ui_viewDialog.h:1133
 msgid "Add/remove landscapes..."
 msgstr "Engadir/Eliminar paisaxes..."
 
-#: src/ui_viewDialog.h:1132 src/ui_viewDialog.h:1137 src/ui_viewDialog.h:1139
+#: src/ui_viewDialog.h:1134 src/ui_viewDialog.h:1139 src/ui_viewDialog.h:1141
 #: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "Opcións"
 
-#: src/ui_viewDialog.h:1133
+#: src/ui_viewDialog.h:1135
 msgid "Show ground"
 msgstr "Amosar o chan"
 
-#: src/ui_viewDialog.h:1134
+#: src/ui_viewDialog.h:1136
 msgid "Show fog"
 msgstr "Amosar a néboa"
 
-#: src/ui_viewDialog.h:1135
+#: src/ui_viewDialog.h:1137
 msgid "Use associated planet and position"
 msgstr "Usar planeta e posición asociados"
 
-#: src/ui_viewDialog.h:1136
+#: src/ui_viewDialog.h:1138
 msgid "Use this landscape as default"
 msgstr "Usar esta paisaxe por omisión"
 
-#: src/ui_viewDialog.h:1138
+#: src/ui_viewDialog.h:1140
 msgid "Use this sky culture as default"
 msgstr "Usar esta cultura do ceo por omisión"
 
-#: src/ui_viewDialog.h:1140
+#: src/ui_viewDialog.h:1142
 msgid "Visible"
 msgstr "Visible"
 
@@ -2463,7 +2463,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:885
 #: plugins/Oculars/src/ui_ocularDialog.h:894
 #: plugins/Oculars/src/ui_ocularDialog.h:905
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr ""
 
@@ -3125,7 +3125,7 @@ msgid "Select a directory"
 msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:281
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:469
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
 msgid "Form"
 msgstr "Formulario"
@@ -3182,106 +3182,98 @@ msgstr ""
 msgid "Configure &telescopes..."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:470
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope Configuration"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid "Telescope controlled by:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
 msgid "Stellarium, directly through a serial port"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "External software or a remote computer"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Nothing, just simulate one (a moving reticle)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Telescope properties"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid "Connection delay:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:488
 msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
-msgid "s"
-msgstr ""
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Coordinate system:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "J2000 (default)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
 msgid "Equinox of the date (JNow)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:494
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Start/connect at startup"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Device settings"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Serial port:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Device model:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Connection settings"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:502
 msgid "Host:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:503
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:504
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
-msgstr ""
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:505
-msgid "localhost"
 msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506

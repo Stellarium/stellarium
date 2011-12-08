@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-06 18:19+0700\n"
+"POT-Creation-Date: 2011-12-07 14:20+0200\n"
 "PO-Revision-Date: 2011-12-06 12:11+0000\n"
 "Last-Translator: Odin <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-07 04:45+0000\n"
-"X-Generator: Launchpad (build 14435)\n"
+"X-Launchpad-Export-Date: 2011-12-08 05:24+0000\n"
+"X-Generator: Launchpad (build 14443)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -600,22 +600,22 @@ msgstr "Stjernebildenavn"
 msgid "Constellation boundaries"
 msgstr "Stjernebildegrenser"
 
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1117
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1119
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Azimuthal grid"
 msgstr "Asimutnett"
 
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1114
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1116
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Equatorial grid"
 msgstr "Ekvatorialt nett"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1115
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1117
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial J2000 grid"
 msgstr "Ekvatorialt J2000-nett"
 
-#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1116
+#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1118
 msgid "Galactic grid"
 msgstr "Galaktisk nett"
 
@@ -623,26 +623,26 @@ msgstr "Galaktisk nett"
 msgid "Galactic plane"
 msgstr "Galaktisk nivå"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1122
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1124
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Ecliptic line"
 msgstr "Ekliptikken"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1119
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equator line"
 msgstr "Ekvatorlinje"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1120
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1122
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Meridian line"
 msgstr "Meridianlinje"
 
-#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1121
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1123
 msgid "Horizon line"
 msgstr "Horisontlinje"
 
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1123
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1125
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:287
 msgid "Cardinal points"
 msgstr "Himmelretninger"
@@ -651,7 +651,7 @@ msgstr "Himmelretninger"
 msgid "Ground"
 msgstr "Landskap"
 
-#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1094
+#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1096
 msgid "Atmosphere"
 msgstr "Atmosfære"
 
@@ -659,7 +659,7 @@ msgstr "Atmosfære"
 msgid "Fog"
 msgstr "Dis"
 
-#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1103
+#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1105
 msgid "Nebulas"
 msgstr "Stjernetåker"
 
@@ -667,7 +667,7 @@ msgstr "Stjernetåker"
 msgid "Nebulas background images"
 msgstr "Bakgrunnsbilder for stjernetåker"
 
-#: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1080 src/ui_viewDialog.h:1102
+#: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1082 src/ui_viewDialog.h:1104
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Stars"
 msgstr "Stjerner"
@@ -1580,197 +1580,197 @@ msgstr "RA/Dec (J2000):"
 msgid "Position"
 msgstr "Posisjon"
 
-#: src/ui_viewDialog.h:1065
+#: src/ui_viewDialog.h:1067
 msgid "View"
 msgstr "Visning"
 
-#: src/ui_viewDialog.h:1071
+#: src/ui_viewDialog.h:1073
 msgid "Sky"
 msgstr "Himmel"
 
-#: src/ui_viewDialog.h:1073
+#: src/ui_viewDialog.h:1075
 msgid "Markings"
 msgstr "Markeringer"
 
-#: src/ui_viewDialog.h:1075
+#: src/ui_viewDialog.h:1077
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:371
 msgid "Landscape"
 msgstr "Landskap"
 
-#: src/ui_viewDialog.h:1077
+#: src/ui_viewDialog.h:1079
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:212
 msgid "Starlore"
 msgstr "Stjernemyter"
 
-#: src/ui_viewDialog.h:1081
+#: src/ui_viewDialog.h:1083
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Absolute scale:"
 msgstr "Absolutt skala:"
 
-#: src/ui_viewDialog.h:1082
+#: src/ui_viewDialog.h:1084
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:236
 msgid "Relative scale:"
 msgstr "Relativ skala:"
 
-#: src/ui_viewDialog.h:1083
+#: src/ui_viewDialog.h:1085
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Twinkle:"
 msgstr "Blinke:"
 
-#: src/ui_viewDialog.h:1085
+#: src/ui_viewDialog.h:1087
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Demp svake stjerner når et veldig lyst objekt er synlig"
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1089
 msgid "Dynamic eye adaptation"
 msgstr "Dynamisk øyetilpasning"
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1090
 msgid "Planets and satellites"
 msgstr "Planeter og satellitter"
 
-#: src/ui_viewDialog.h:1089
+#: src/ui_viewDialog.h:1091
 msgid "Show planets"
 msgstr "Vis planeter"
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:1092
 msgid "Show planet markers"
 msgstr "Vis planetmarkører"
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:1093
 msgid "Show planet orbits"
 msgstr "Vis planetbaner"
 
-#: src/ui_viewDialog.h:1092
+#: src/ui_viewDialog.h:1094
 msgid "Simulate light speed"
 msgstr "Simuler lyshastighet"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1095
 msgid "Scale Moon"
 msgstr "Forstørr månen"
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1097
 msgid "Show atmosphere"
 msgstr "Vis atmosfære"
 
-#: src/ui_viewDialog.h:1096
+#: src/ui_viewDialog.h:1098
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Light pollution:"
 msgstr "Lysforurensning:"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1100
 msgid "pressure, temperature, extinction coefficient"
 msgstr "trykk, temperatur, ekstinksjonskoeffisient"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1102
 msgid "Refraction/Extinction settings..."
 msgstr "Still inn refraksjon/ekstinksjon"
 
-#: src/ui_viewDialog.h:1101
+#: src/ui_viewDialog.h:1103
 msgid "Labels and Markers"
 msgstr "Påskrifter og markører"
 
-#: src/ui_viewDialog.h:1104
+#: src/ui_viewDialog.h:1106
 msgid "Planets"
 msgstr "Planeter"
 
-#: src/ui_viewDialog.h:1105
+#: src/ui_viewDialog.h:1107
 msgid "Shooting Stars"
 msgstr "Meteorer"
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1108
 msgid "Hourly zenith rate:"
 msgstr "Timerate i senit (ZHR):"
 
-#: src/ui_viewDialog.h:1107
+#: src/ui_viewDialog.h:1109
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:1108
+#: src/ui_viewDialog.h:1110
 msgid "10"
 msgstr "10"
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1111
 msgid "80"
 msgstr "80"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1112
 msgid "10000"
 msgstr "10000"
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1113
 msgid "144000"
 msgstr "144000"
 
-#: src/ui_viewDialog.h:1113
+#: src/ui_viewDialog.h:1115
 msgid "Celestial Sphere"
 msgstr "Himmelhvelving"
 
-#: src/ui_viewDialog.h:1118
+#: src/ui_viewDialog.h:1120
 msgid "Galactic plane line"
 msgstr "Galaktisk nivå-linje"
 
-#: src/ui_viewDialog.h:1124
+#: src/ui_viewDialog.h:1126
 msgid "Constellations"
 msgstr "Stjernebilder"
 
-#: src/ui_viewDialog.h:1125
+#: src/ui_viewDialog.h:1127
 msgid "Show lines"
 msgstr "Vis linjer"
 
-#: src/ui_viewDialog.h:1126
+#: src/ui_viewDialog.h:1128
 msgid "Show labels"
 msgstr "Vis navn"
 
-#: src/ui_viewDialog.h:1127
+#: src/ui_viewDialog.h:1129
 msgid "Show boundaries"
 msgstr "Vis grenser"
 
-#: src/ui_viewDialog.h:1128
+#: src/ui_viewDialog.h:1130
 msgid "Show art"
 msgstr "Vis kunst"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1129
+#: src/ui_viewDialog.h:1131
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Art brightness:"
 msgstr "Lysstyrke på kunst:"
 
-#: src/ui_viewDialog.h:1130
+#: src/ui_viewDialog.h:1132
 msgid "Projection"
 msgstr "Projeksjon"
 
-#: src/ui_viewDialog.h:1131
+#: src/ui_viewDialog.h:1133
 msgid "Add/remove landscapes..."
 msgstr "Legg til/fjern landskaper..."
 
-#: src/ui_viewDialog.h:1132 src/ui_viewDialog.h:1137 src/ui_viewDialog.h:1139
+#: src/ui_viewDialog.h:1134 src/ui_viewDialog.h:1139 src/ui_viewDialog.h:1141
 #: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "Alternativer"
 
-#: src/ui_viewDialog.h:1133
+#: src/ui_viewDialog.h:1135
 msgid "Show ground"
 msgstr "Vis landskap"
 
-#: src/ui_viewDialog.h:1134
+#: src/ui_viewDialog.h:1136
 msgid "Show fog"
 msgstr "Vis dis"
 
-#: src/ui_viewDialog.h:1135
+#: src/ui_viewDialog.h:1137
 msgid "Use associated planet and position"
 msgstr "Bruk tilhørende planet og posisjon"
 
-#: src/ui_viewDialog.h:1136
+#: src/ui_viewDialog.h:1138
 msgid "Use this landscape as default"
 msgstr "Bruk dette landskapet som standard"
 
-#: src/ui_viewDialog.h:1138
+#: src/ui_viewDialog.h:1140
 msgid "Use this sky culture as default"
 msgstr "Bruk denne himmelkulturen som standard"
 
-#: src/ui_viewDialog.h:1140
+#: src/ui_viewDialog.h:1142
 msgid "Visible"
 msgstr "Synlig"
 
@@ -2475,7 +2475,7 @@ msgstr "Legg til"
 #: plugins/Oculars/src/ui_ocularDialog.h:885
 #: plugins/Oculars/src/ui_ocularDialog.h:894
 #: plugins/Oculars/src/ui_ocularDialog.h:905
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr "Navn:"
 
@@ -3177,7 +3177,7 @@ msgid "Select a directory"
 msgstr "Velg en mappe"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:281
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:469
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
 msgid "Form"
 msgstr "Skjema"
@@ -3234,15 +3234,15 @@ msgstr "&Beveg"
 msgid "Configure &telescopes..."
 msgstr "Still inn &teleskoper..."
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:470
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope Configuration"
 msgstr "Teleskopinnstillinger"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid "Telescope controlled by:"
 msgstr "Teleskopet kontrollert av:"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
@@ -3250,11 +3250,11 @@ msgstr ""
 "Et teleskop koblet til denne datamaskinen via en seriell port og kontrollert "
 "direkte av Stellarium."
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
 msgid "Stellarium, directly through a serial port"
 msgstr "Stellarium, direkte gjennom en seriell port"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
@@ -3262,23 +3262,23 @@ msgstr ""
 "Et teleskop som styres av et eksternt program, enten på denne datamaskinen "
 "eller på en ekstern maskin."
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "External software or a remote computer"
 msgstr "Ekstern programvare eller en ekstern datamaskin"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Nothing, just simulate one (a moving reticle)"
 msgstr "Ingenting, bare simuler en (et bevegelig trådkors)"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Telescope properties"
 msgstr "Teleskopegenskaper"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid "Connection delay:"
 msgstr "Tilkoblingsforsinkelse:"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:488
 msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
 "Stellarium.\n"
@@ -3288,23 +3288,19 @@ msgstr ""
 "Stellarium.\n"
 "Øk denne verdien hvis trådkorset er fraværende."
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
-msgid "s"
-msgstr "s"
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Coordinate system:"
 msgstr "Koordinatsystem:"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "J2000 (default)"
 msgstr "J2000 (standard)"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
 msgid "Equinox of the date (JNow)"
 msgstr "Datoens jevndøgn (JNow)"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:494
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
@@ -3312,39 +3308,35 @@ msgstr ""
 "Forsøk automatisk å starte teleskopet eller opprette tilkobling når "
 "Stellarium starter"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Start/connect at startup"
 msgstr "Start/tilkoble ved oppstart"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Device settings"
 msgstr "Enhetsinnstillinger"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Serial port:"
 msgstr "Seriell port:"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Device model:"
 msgstr "Enhetsmodell:"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Connection settings"
 msgstr "Tilkoblingsinnstillinger"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:502
 msgid "Host:"
 msgstr "Vert:"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:503
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:504
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr ""
 "Vertsnavn eller IPv4-adresse til maskinen som er vert for teleskop-serveren"
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:505
-msgid "localhost"
-msgstr "lokalvert"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "TCP port:"
