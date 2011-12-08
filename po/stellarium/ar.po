@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-06 18:19+0700\n"
-"PO-Revision-Date: 2011-12-04 19:56+0000\n"
+"POT-Creation-Date: 2011-12-07 14:20+0200\n"
+"PO-Revision-Date: 2011-12-07 11:19+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-07 04:41+0000\n"
-"X-Generator: Launchpad (build 14435)\n"
+"X-Launchpad-Export-Date: 2011-12-08 05:20+0000\n"
+"X-Generator: Launchpad (build 14443)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -35,7 +35,7 @@ msgstr "الأفق"
 
 #: src/core/modules/GridLinesMgr.cpp:558
 msgid "Galactic Plane"
-msgstr ""
+msgstr "المستوى المجرِّي"
 
 #: src/core/modules/LandscapeMgr.cpp:486
 msgid "Author: "
@@ -596,49 +596,49 @@ msgstr "أسماء المجموعات النجمية"
 msgid "Constellation boundaries"
 msgstr "حدود المجموعات النجمية"
 
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1117
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1119
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Azimuthal grid"
 msgstr "الشبكة السمتية"
 
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1114
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1116
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Equatorial grid"
 msgstr "الشبكة الاستوائية"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1115
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1117
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial J2000 grid"
 msgstr "شبكة 2000 الاستوائية"
 
-#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1116
+#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1118
 msgid "Galactic grid"
 msgstr "شبكة الإحداثيات المجرية"
 
 #: src/gui/StelGui.cpp:108
 msgid "Galactic plane"
-msgstr ""
+msgstr "المستوى المجرِّي"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1122
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1124
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Ecliptic line"
 msgstr "الخط الكسوفي"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1119
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equator line"
 msgstr "خط الاستواء"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1120
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1122
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Meridian line"
 msgstr "خط الزوال"
 
-#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1121
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1123
 msgid "Horizon line"
 msgstr "خط الأفق"
 
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1123
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1125
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:287
 msgid "Cardinal points"
 msgstr "الجهات الاربع"
@@ -647,7 +647,7 @@ msgstr "الجهات الاربع"
 msgid "Ground"
 msgstr "الأرض"
 
-#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1094
+#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1096
 msgid "Atmosphere"
 msgstr "الغلاف الجوي"
 
@@ -655,7 +655,7 @@ msgstr "الغلاف الجوي"
 msgid "Fog"
 msgstr "الضباب"
 
-#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1103
+#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1105
 msgid "Nebulas"
 msgstr "السدم"
 
@@ -663,7 +663,7 @@ msgstr "السدم"
 msgid "Nebulas background images"
 msgstr "صور السدم الخلفية"
 
-#: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1080 src/ui_viewDialog.h:1102
+#: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1082 src/ui_viewDialog.h:1104
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Stars"
 msgstr "النجوم"
@@ -1164,7 +1164,7 @@ msgstr "نكس"
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
 msgid "Hydra (moon)"
-msgstr ""
+msgstr "هايدرا - قمر بلوتو"
 
 #: src/translations.h:85
 msgid "Eris"
@@ -1573,197 +1573,197 @@ msgstr "الميل / المطلع المستقيم (J2000)"
 msgid "Position"
 msgstr "الإحداثيات"
 
-#: src/ui_viewDialog.h:1065
+#: src/ui_viewDialog.h:1067
 msgid "View"
 msgstr "العرض"
 
-#: src/ui_viewDialog.h:1071
+#: src/ui_viewDialog.h:1073
 msgid "Sky"
 msgstr "السماء"
 
-#: src/ui_viewDialog.h:1073
+#: src/ui_viewDialog.h:1075
 msgid "Markings"
 msgstr "التوسيمات"
 
-#: src/ui_viewDialog.h:1075
+#: src/ui_viewDialog.h:1077
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:371
 msgid "Landscape"
 msgstr "منظر الرصد الطبيعي"
 
-#: src/ui_viewDialog.h:1077
+#: src/ui_viewDialog.h:1079
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:212
 msgid "Starlore"
 msgstr "التراث الفلكي"
 
-#: src/ui_viewDialog.h:1081
+#: src/ui_viewDialog.h:1083
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Absolute scale:"
 msgstr "المقياس المطلق"
 
-#: src/ui_viewDialog.h:1082
+#: src/ui_viewDialog.h:1084
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:236
 msgid "Relative scale:"
 msgstr "المقياس النسبي"
 
-#: src/ui_viewDialog.h:1083
+#: src/ui_viewDialog.h:1085
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Twinkle:"
 msgstr "التلألؤ"
 
-#: src/ui_viewDialog.h:1085
+#: src/ui_viewDialog.h:1087
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "تعتيم النجوم الباهتة عندما تكون الأجرام اللامعة منظورة"
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1089
 msgid "Dynamic eye adaptation"
 msgstr "تكيف العين الديناميكي"
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1090
 msgid "Planets and satellites"
 msgstr "الكواكب و التوابع"
 
-#: src/ui_viewDialog.h:1089
+#: src/ui_viewDialog.h:1091
 msgid "Show planets"
 msgstr "أظهر الكواكب"
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:1092
 msgid "Show planet markers"
 msgstr "أظهر علامات الكواكب"
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:1093
 msgid "Show planet orbits"
 msgstr "أظهر مدارات الكواكب"
 
-#: src/ui_viewDialog.h:1092
+#: src/ui_viewDialog.h:1094
 msgid "Simulate light speed"
 msgstr "قم بمحاكاة سرعة الضوء"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1095
 msgid "Scale Moon"
 msgstr "كبِّر الحجم الظاهري للقمر"
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1097
 msgid "Show atmosphere"
 msgstr "أظهر الغلاف الجوي"
 
-#: src/ui_viewDialog.h:1096
+#: src/ui_viewDialog.h:1098
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Light pollution:"
 msgstr "التلوث الضوئي:"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1100
 msgid "pressure, temperature, extinction coefficient"
 msgstr "الضغط، الحرارة، معامل الانقراض"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1102
 msgid "Refraction/Extinction settings..."
 msgstr "إعدادات الانكسار/الانقراض"
 
-#: src/ui_viewDialog.h:1101
+#: src/ui_viewDialog.h:1103
 msgid "Labels and Markers"
 msgstr "الأسماء  والعلامات"
 
-#: src/ui_viewDialog.h:1104
+#: src/ui_viewDialog.h:1106
 msgid "Planets"
 msgstr "الكواكب"
 
-#: src/ui_viewDialog.h:1105
+#: src/ui_viewDialog.h:1107
 msgid "Shooting Stars"
 msgstr "وابل الشهب"
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1108
 msgid "Hourly zenith rate:"
 msgstr "المعدل السمتي لعدد الشهب في الساعة"
 
-#: src/ui_viewDialog.h:1107
+#: src/ui_viewDialog.h:1109
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:1108
+#: src/ui_viewDialog.h:1110
 msgid "10"
 msgstr "10"
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1111
 msgid "80"
 msgstr "80"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1112
 msgid "10000"
 msgstr "10000"
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1113
 msgid "144000"
 msgstr "144000"
 
-#: src/ui_viewDialog.h:1113
+#: src/ui_viewDialog.h:1115
 msgid "Celestial Sphere"
 msgstr "الكرة السماوية"
 
-#: src/ui_viewDialog.h:1118
+#: src/ui_viewDialog.h:1120
 msgid "Galactic plane line"
-msgstr ""
+msgstr "خط المستوى المجرِّي"
 
-#: src/ui_viewDialog.h:1124
+#: src/ui_viewDialog.h:1126
 msgid "Constellations"
 msgstr "المجموعات النجمية"
 
-#: src/ui_viewDialog.h:1125
+#: src/ui_viewDialog.h:1127
 msgid "Show lines"
 msgstr "أظهر الخطوط"
 
-#: src/ui_viewDialog.h:1126
+#: src/ui_viewDialog.h:1128
 msgid "Show labels"
 msgstr "أظهر الأسماء"
 
-#: src/ui_viewDialog.h:1127
+#: src/ui_viewDialog.h:1129
 msgid "Show boundaries"
 msgstr "أظهر الحدود"
 
-#: src/ui_viewDialog.h:1128
+#: src/ui_viewDialog.h:1130
 msgid "Show art"
 msgstr "أظهر الرسومات"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1129
+#: src/ui_viewDialog.h:1131
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Art brightness:"
 msgstr "سطوع الرسومات:"
 
-#: src/ui_viewDialog.h:1130
+#: src/ui_viewDialog.h:1132
 msgid "Projection"
 msgstr "الإسقاط"
 
-#: src/ui_viewDialog.h:1131
+#: src/ui_viewDialog.h:1133
 msgid "Add/remove landscapes..."
 msgstr "أضف/احذف مناظر الرصد الطبيعية"
 
-#: src/ui_viewDialog.h:1132 src/ui_viewDialog.h:1137 src/ui_viewDialog.h:1139
+#: src/ui_viewDialog.h:1134 src/ui_viewDialog.h:1139 src/ui_viewDialog.h:1141
 #: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "الخيارات"
 
-#: src/ui_viewDialog.h:1133
+#: src/ui_viewDialog.h:1135
 msgid "Show ground"
 msgstr "أظهر سطح الأرض"
 
-#: src/ui_viewDialog.h:1134
+#: src/ui_viewDialog.h:1136
 msgid "Show fog"
 msgstr "أظهر الضباب"
 
-#: src/ui_viewDialog.h:1135
+#: src/ui_viewDialog.h:1137
 msgid "Use associated planet and position"
 msgstr "استخدم الكوكب و الموقع للمنظر الطبيعي ليكون هو مكان الراصد"
 
-#: src/ui_viewDialog.h:1136
+#: src/ui_viewDialog.h:1138
 msgid "Use this landscape as default"
 msgstr "اجعل هذا المشهد الطبيعي هو الافتراضي"
 
-#: src/ui_viewDialog.h:1138
+#: src/ui_viewDialog.h:1140
 msgid "Use this sky culture as default"
 msgstr "اجعل التراث الفلكي الحالي هو الافتراضي"
 
-#: src/ui_viewDialog.h:1140
+#: src/ui_viewDialog.h:1142
 msgid "Visible"
 msgstr "مرئي"
 
@@ -2467,7 +2467,7 @@ msgstr "أضف"
 #: plugins/Oculars/src/ui_ocularDialog.h:885
 #: plugins/Oculars/src/ui_ocularDialog.h:894
 #: plugins/Oculars/src/ui_ocularDialog.h:905
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr "الاسم"
 
@@ -3167,7 +3167,7 @@ msgid "Select a directory"
 msgstr "اختر مساراً للملفات"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:281
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:469
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
 msgid "Form"
 msgstr "شكل"
@@ -3224,15 +3224,15 @@ msgstr "&وجِّه"
 msgid "Configure &telescopes..."
 msgstr "هيئ &التلسكوب"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:470
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope Configuration"
 msgstr "تهيئة التلسكوب"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid "Telescope controlled by:"
 msgstr "التحكم بالتلسكوب بواسطة:"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
@@ -3240,34 +3240,34 @@ msgstr ""
 "تلسكوب موصَّل بهذا الحاسب عن طريق منفذ تسلسلي ويتحكم به مباشرة بواسطة "
 "ستيللاريوم"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
 msgid "Stellarium, directly through a serial port"
 msgstr "ستيللاريوم، مباشرة خلال منفذ تسلسلي"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
 "تلسكوب يتحكم به بواسطة برنامج خارجي، في جهاز الحاسب هذا أو جهاز آخر عن بعد."
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "External software or a remote computer"
 msgstr "برنامج خارجي أو حاسب عن بعد"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Nothing, just simulate one (a moving reticle)"
 msgstr "لاشيء، محاكاة فقط للتلسكوب (عدسة متحركة)"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Telescope properties"
 msgstr "خصائص التلسكوب"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid "Connection delay:"
 msgstr "مقدار التأخير في الاتصال"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:488
 msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
 "Stellarium.\n"
@@ -3276,60 +3276,52 @@ msgstr ""
 "الوقت التقريبي لوصول الإشارة من التلسكوب إلى ستيللاريوم.\n"
 "زد هذه القيمة إذا كانت دائرة العدسة تقفز."
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
-msgid "s"
-msgstr "ث"
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Coordinate system:"
 msgstr "نظام الإحداثيات"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "J2000 (default)"
 msgstr "2000 (الافتراضي)"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
 msgid "Equinox of the date (JNow)"
 msgstr "الاعتدال الحالي"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:494
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr "حاول بدء تشغيل التلسكوب أو الاتصال به عند بدء برنامج ستيللاريوم"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Start/connect at startup"
 msgstr "التشغيل/الاتصال عند البدء"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Device settings"
 msgstr "ضبط الجهاز"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Serial port:"
 msgstr "المنفذ التسلسلي"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Device model:"
 msgstr "طراز الجهاز"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Connection settings"
 msgstr "ضبط الاتصال"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:502
 msgid "Host:"
 msgstr "الحاسب المضيف"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:503
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:504
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr "اسم الحاسب المضيف أو عنوان IPv4 للحاسب الذي يستضيف خادم التلسكوبات"
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:505
-msgid "localhost"
-msgstr "خادم _محلي"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "TCP port:"
