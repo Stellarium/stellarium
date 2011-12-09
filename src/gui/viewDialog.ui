@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>508</width>
-    <height>540</height>
+    <width>510</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="font">
@@ -1064,13 +1064,6 @@
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="showGalacticGridCheckBox">
-               <property name="text">
-                <string>Galactic grid</string>
-               </property>
-              </widget>
-             </item>
-             <item>
               <widget class="QCheckBox" name="showAzimuthalGridCheckBox">
                <property name="text">
                 <string>Azimuthal grid</string>
@@ -1078,9 +1071,9 @@
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="showGalacticPlaneLineCheckBox">
+              <widget class="QCheckBox" name="showGalacticGridCheckBox">
                <property name="text">
-                <string>Galactic plane line</string>
+                <string>Galactic grid</string>
                </property>
               </widget>
              </item>
@@ -1109,6 +1102,13 @@
               <widget class="QCheckBox" name="showEclipticLineCheckBox">
                <property name="text">
                 <string>Ecliptic line</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="showGalacticPlaneLineCheckBox">
+               <property name="text">
+                <string>Galactic plane line</string>
                </property>
               </widget>
              </item>
@@ -1651,6 +1651,7 @@
   <tabstop>planetScaleMoonCheckBox</tabstop>
   <tabstop>showAtmosphereCheckBox</tabstop>
   <tabstop>lightPollutionSpinBox</tabstop>
+  <tabstop>pushButtonAtmosphereDetails</tabstop>
   <tabstop>starLabelCheckBox</tabstop>
   <tabstop>starsLabelsHorizontalSlider</tabstop>
   <tabstop>nebulaLabelCheckBox</tabstop>
@@ -1662,10 +1663,15 @@
   <tabstop>zhr80</tabstop>
   <tabstop>zhr10000</tabstop>
   <tabstop>zhr144000</tabstop>
+  <tabstop>showEquatorialGridCheckBox</tabstop>
+  <tabstop>showEquatorialJ2000GridCheckBox</tabstop>
+  <tabstop>showAzimuthalGridCheckBox</tabstop>
+  <tabstop>showGalacticGridCheckBox</tabstop>
   <tabstop>showEquatorLineCheckBox</tabstop>
   <tabstop>showMeridianLineCheckBox</tabstop>
   <tabstop>showHorizonLineCheckBox</tabstop>
   <tabstop>showEclipticLineCheckBox</tabstop>
+  <tabstop>showGalacticPlaneLineCheckBox</tabstop>
   <tabstop>showCardinalPointsCheckBox</tabstop>
   <tabstop>showConstellationLinesCheckBox</tabstop>
   <tabstop>showConstellationLabelsCheckBox</tabstop>
@@ -1674,19 +1680,16 @@
   <tabstop>constellationArtBrightnessSpinBox</tabstop>
   <tabstop>projectionTextBrowser</tabstop>
   <tabstop>landscapeTextBrowser</tabstop>
-  <tabstop>pushButtonAddRemoveLandscapes</tabstop>
   <tabstop>showGroundCheckBox</tabstop>
   <tabstop>showFogCheckBox</tabstop>
   <tabstop>landscapePositionCheckBox</tabstop>
   <tabstop>useAsDefaultLandscapeCheckBox</tabstop>
+  <tabstop>pushButtonAddRemoveLandscapes</tabstop>
   <tabstop>skyCultureTextBrowser</tabstop>
   <tabstop>useAsDefaultSkyCultureCheckBox</tabstop>
   <tabstop>skyLayerListWidget</tabstop>
   <tabstop>skyLayerTextBrowser</tabstop>
   <tabstop>skyLayerEnableCheckBox</tabstop>
-  <tabstop>showAzimuthalGridCheckBox</tabstop>
-  <tabstop>showEquatorialJ2000GridCheckBox</tabstop>
-  <tabstop>showEquatorialGridCheckBox</tabstop>
  </tabstops>
  <resources/>
  <connections/>
