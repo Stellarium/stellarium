@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-07 14:20+0200\n"
-"PO-Revision-Date: 2011-12-06 12:11+0000\n"
-"Last-Translator: Odin <Unknown>\n"
+"PO-Revision-Date: 2011-12-08 16:44+0000\n"
+"Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-08 05:24+0000\n"
-"X-Generator: Launchpad (build 14443)\n"
+"X-Launchpad-Export-Date: 2011-12-09 04:43+0000\n"
+"X-Generator: Launchpad (build 14450)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -38,7 +38,7 @@ msgstr "Horisont"
 
 #: src/core/modules/GridLinesMgr.cpp:558
 msgid "Galactic Plane"
-msgstr "Galaktisk Nivå"
+msgstr "Galaktisk plan"
 
 #: src/core/modules/LandscapeMgr.cpp:486
 msgid "Author: "
@@ -621,7 +621,7 @@ msgstr "Galaktisk nett"
 
 #: src/gui/StelGui.cpp:108
 msgid "Galactic plane"
-msgstr "Galaktisk nivå"
+msgstr "Galaktisk plan"
 
 #: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1124
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
@@ -1708,7 +1708,7 @@ msgstr "Himmelhvelving"
 
 #: src/ui_viewDialog.h:1120
 msgid "Galactic plane line"
-msgstr "Galaktisk nivå-linje"
+msgstr "Linje for det galaktiske planet"
 
 #: src/ui_viewDialog.h:1126
 msgid "Constellations"
@@ -2376,11 +2376,11 @@ msgstr "Roter sensorrammen 15 grader mot klokken"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:258
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr "Roter sensorrammen 5 grader mot  klokken"
+msgstr "Roter sensorrammen 5 grader mot klokken"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:271
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr "Roter sensorrammen 1 grad mot  klokken"
+msgstr "Roter sensorrammen 1 grad mot klokken"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
@@ -2388,7 +2388,7 @@ msgstr "Tilbakestill rotasjonen til sensorrammen"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr "Roter sensorrammen 1 grad med urviseren"
+msgstr "Roter sensorrammen 1 grad med klokken"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:310
 msgid "Rotate the sensor frame 5 degrees clockwise"
@@ -2396,7 +2396,7 @@ msgstr "Roter sensorrammen 5 grader med klokken"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:323
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr "Roter sensorrammen 15 grader med  klokken"
+msgstr "Roter sensorrammen 15 grader med klokken"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
 msgid "Effective focal length of the ocular"
@@ -3132,7 +3132,7 @@ msgstr "lokal, ekstern"
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid "remote, unknown"
-msgstr "fjernkontroll, ukjent"
+msgstr "fjerntilkobling, ukjent"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
@@ -3268,7 +3268,7 @@ msgstr "Ekstern programvare eller en ekstern datamaskin"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr "Ingenting, bare simuler en (et bevegelig trådkors)"
+msgstr "Ingenting, bare en simulering (et bevegelig trådkors)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Telescope properties"
@@ -3284,9 +3284,8 @@ msgid ""
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
-"Den omtrentlige tiden det tar for signalene fra teleskopet for å nå "
-"Stellarium.\n"
-"Øk denne verdien hvis trådkorset er fraværende."
+"Den omtrentlige tiden det tar for signalene fra teleskopet å nå Stellarium.\n"
+"Øk denne verdien hvis trådkorset hopper."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Coordinate system:"
