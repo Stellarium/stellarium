@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-07 14:20+0200\n"
-"PO-Revision-Date: 2011-12-05 12:29+0000\n"
-"Last-Translator: forest93 <Unknown>\n"
+"PO-Revision-Date: 2011-12-10 03:08+0000\n"
+"Last-Translator: Xiaomao Chen <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-08 05:26+0000\n"
-"X-Generator: Launchpad (build 14443)\n"
+"X-Launchpad-Export-Date: 2011-12-10 04:35+0000\n"
+"X-Generator: Launchpad (build 14450)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -35,7 +35,7 @@ msgstr "地平线"
 
 #: src/core/modules/GridLinesMgr.cpp:558
 msgid "Galactic Plane"
-msgstr ""
+msgstr "星系平面"
 
 #: src/core/modules/LandscapeMgr.cpp:486
 msgid "Author: "
@@ -590,7 +590,7 @@ msgstr "银河网格"
 
 #: src/gui/StelGui.cpp:108
 msgid "Galactic plane"
-msgstr ""
+msgstr "星系平面"
 
 #: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1124
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
@@ -1134,7 +1134,7 @@ msgstr "冥卫二"
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
 msgid "Hydra (moon)"
-msgstr ""
+msgstr "冥卫三"
 
 #: src/translations.h:85
 msgid "Eris"
@@ -1669,7 +1669,7 @@ msgstr "天球"
 
 #: src/ui_viewDialog.h:1120
 msgid "Galactic plane line"
-msgstr ""
+msgstr "星系平面线"
 
 #: src/ui_viewDialog.h:1126
 msgid "Constellations"
@@ -2896,19 +2896,19 @@ msgstr "保存改动"
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
-msgstr ""
+msgstr "输入或编辑选中来源的URL，按Enter保存。"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:660
 msgid "Add new source"
-msgstr ""
+msgstr "添加新来源"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:664
 msgid "Remove selected source"
-msgstr ""
+msgstr "删除选定新来源"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:667
 msgid "Sources"
-msgstr ""
+msgstr "来源"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:150
@@ -2937,63 +2937,63 @@ msgstr "将天文望远镜对准某一坐标"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
-msgstr ""
+msgstr "添加新望远镜"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
-msgstr ""
+msgstr "配置望远镜"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
-msgstr ""
+msgstr "不可用"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
 msgid "Starting"
-msgstr ""
+msgstr "正在启动"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:58
 msgid "Connecting"
-msgstr ""
+msgstr "正在连接"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:59
 msgid "Connected"
-msgstr ""
+msgstr "已连接"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:60
 msgid "Disconnected"
-msgstr ""
+msgstr "连接已断开"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:61
 msgid "Stopped"
-msgstr ""
+msgstr "已停止"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
-msgstr ""
+msgstr "望远镜控制插件"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "版本 %1"
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Status"
-msgstr ""
+msgstr "状态"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #, qt-format
@@ -3003,6 +3003,7 @@ msgid ""
 "telescope's number. To slew it to the center of the current view, hold down "
 "the Alt key and press the key with that telescope's number."
 msgstr ""
+"要将望远镜对准一个物体（比如恒星），选中该物体，然后按下%1和带有望远镜序号的键。如果要将其对准当前视图的中心，按下Alt和带有望远镜序号的键."
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
@@ -3016,64 +3017,64 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
-msgstr ""
+msgstr "按下%1键以创建新的望远镜连接。"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid "local, Stellarium"
-msgstr ""
+msgstr "本地，Stellarium"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 msgid "local, external"
-msgstr ""
+msgstr "本地，外部"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid "remote, unknown"
-msgstr ""
+msgstr "远程，未知"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid "virtual"
-msgstr ""
+msgstr "虚拟"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:744
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Start"
-msgstr ""
+msgstr "启动"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:745
 msgid "Start the selected local telescope"
-msgstr ""
+msgstr "启动选中的望远镜"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:750
 msgid "Stop"
-msgstr ""
+msgstr "停止"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:751
 msgid "Stop the selected local telescope"
-msgstr ""
+msgstr "停止选中的望远镜"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:756
 msgid "Connect"
-msgstr ""
+msgstr "连接"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:757
 msgid "Connect to the selected telescope"
-msgstr ""
+msgstr "连接选中的望远镜"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:762
 msgid "Disconnect"
-msgstr ""
+msgstr "断开"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:763
 msgid "Disconnect from the selected telescope"
-msgstr ""
+msgstr "断开选中的望远镜"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:784
 msgid "Select a directory"
-msgstr ""
+msgstr "选择目录"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:281
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
@@ -3083,95 +3084,95 @@ msgstr "格式"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:282
 msgid "Slew telescope to"
-msgstr ""
+msgstr "把望远镜指向"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:284
 msgid "There are no active devices."
-msgstr ""
+msgstr "没有活动设备。"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:285
 msgid "Slew telescope to coordinates"
-msgstr ""
+msgstr "把望远镜指向坐标"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:286
 msgid "&Right Ascension (J2000):"
-msgstr ""
+msgstr "赤经 (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:287
 msgid "De&clination (J2000):"
-msgstr ""
+msgstr "赤纬 (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "Hours-minutes-seconds format"
-msgstr ""
+msgstr "时分秒格式"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:291
 msgid "&HMS"
-msgstr ""
+msgstr "&HMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:293
 msgid "Degrees-minutes-seconds format"
-msgstr ""
+msgstr "度分秒格式"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:295
 msgid "&DMS"
-msgstr ""
+msgstr "&DMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:297
 msgid "Decimal degrees"
-msgstr ""
+msgstr "十进制度"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "D&ecimal"
-msgstr ""
+msgstr "十进制 (&e)"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:300
 msgid "&Slew"
-msgstr ""
+msgstr "指向 (&S)"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Configure &telescopes..."
-msgstr ""
+msgstr "配置望远镜 (%T)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope Configuration"
-msgstr ""
+msgstr "望远镜配置"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid "Telescope controlled by:"
-msgstr ""
+msgstr "望远镜由...控制："
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
-msgstr ""
+msgstr "望远镜通过串口连接到本机，并被Stellarium直接控制。"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
 msgid "Stellarium, directly through a serial port"
-msgstr ""
+msgstr "Stellarium 直接通过串口控制"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
-msgstr ""
+msgstr "望远镜被外部程序控制，不在本机就在远程计算机。"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "External software or a remote computer"
-msgstr ""
+msgstr "外部程序或远程计算机"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr ""
+msgstr "模拟一个"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Telescope properties"
-msgstr ""
+msgstr "望远镜属性"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid "Connection delay:"
-msgstr ""
+msgstr "连接延迟："
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:488
 msgid ""
@@ -3182,58 +3183,58 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Coordinate system:"
-msgstr ""
+msgstr "指标系统："
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "J2000 (default)"
-msgstr ""
+msgstr "J2000 (默认)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
 msgid "Equinox of the date (JNow)"
-msgstr ""
+msgstr "本日历元 (JNow)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
-msgstr ""
+msgstr "启动时自动尝试连接望远镜"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Start/connect at startup"
-msgstr ""
+msgstr "启动时自动连接"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Device settings"
-msgstr ""
+msgstr "设备设置"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Serial port:"
-msgstr ""
+msgstr "串口："
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Device model:"
-msgstr ""
+msgstr "设备型号:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Connection settings"
-msgstr ""
+msgstr "连接设置"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:502
 msgid "Host:"
-msgstr ""
+msgstr "主机："
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:504
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
-msgstr ""
+msgstr "望远镜服务器主机名或IPv4地址"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "TCP port:"
-msgstr ""
+msgstr "TCP端口："
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "User interface settings"
-msgstr ""
+msgstr "用户界面设置"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
 msgid "Show circles with fixed angular size around the telescope reticle"
