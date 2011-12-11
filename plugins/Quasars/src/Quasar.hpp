@@ -90,6 +90,7 @@ private:
 	// Quasar
 	QString designation;		//! The ID of the quasar
 	float VMagnitude;		//! Visual magnitude
+	float AMagnitude;		//! Absolute magnitude
 	float bV;			//! B-V color index
 	double qRA;			//! R.A. J2000 for the quasar
 	double qDE;			//! Dec. J2000 for the quasar	

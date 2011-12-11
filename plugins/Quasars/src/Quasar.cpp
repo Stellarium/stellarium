@@ -44,6 +44,7 @@ Quasar::Quasar(const QVariantMap& map)
 		
 	designation  = map.value("designation").toString();
 	VMagnitude = map.value("Vmag").toFloat();
+	AMagnitude = map.value("Amag").toFloat();
 	bV = map.value("BV").toFloat();
 	qRA = StelUtils::getDecAngle(map.value("RA").toString());
 	qDE = StelUtils::getDecAngle(map.value("DE").toString());	
@@ -62,6 +63,7 @@ QVariantMap Quasar::getMap(void)
 	QVariantMap map;
 	map["designation"] = designation;
 	map["Vmag"] = VMagnitude;
+	map["Amag"] = AMagnitude;
 	map["BV"] = bV;
 	map["RA"] = qRA;
 	map["DE"] = qDE;	
@@ -97,6 +99,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		{
 			oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
 		}
+		oss << q_("Absolute Magnitude: %1").arg(AMagnitude, 0, 'f', 2) << "<br>";
 	}
 
 	// Ra/Dec etc.
@@ -104,6 +107,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Extra1)
 	{
+		oss << q_("Type: quasar") << "<br>";
 		oss << q_("Z (redshift): %1").arg(redshift) << "<br>";
 	}
 
