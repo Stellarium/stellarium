@@ -52,16 +52,22 @@ int Satellite::orbitLineSegmentDuration = 20;
 bool Satellite::orbitLinesFlag = true;
 
 
-Satellite::Satellite(const QVariantMap& map)
+Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 		: initialized(false), visible(true), hintColor(0.0,0.0,0.0), lastUpdated(), pSatWrapper(NULL)
 {
 	// return initialized if the mandatory fields are not present
-	if (!map.contains("designation") || !map.contains("tle1") || !map.contains("tle2"))
+	if (identifier.isEmpty())
+		return;
+	if (!map.contains("name") || !map.contains("tle1") || !map.contains("tle2"))
 		return;
 
 	font.setPixelSize(16);
 
-	designation  = map.value("designation").toString();
+	id = identifier;
+	name  = map.value("name").toString();
+	if (name.isEmpty())
+		return;
+	
 	if (map.contains("description")) description = map.value("description").toString();
 	if (map.contains("visible")) visible = map.value("visible").toBool();
 	if (map.contains("orbitVisible")) orbitVisible = map.value("orbitVisible").toBool();
@@ -128,7 +134,8 @@ Satellite::Satellite(const QVariantMap& map)
 
 	if (map.contains("lastUpdated"))
 	{
-		lastUpdated = map.value("lastUpdated").toDateTime();
+		lastUpdated = QDateTime::fromString(map.value("lastUpdated").toString(),
+		                                    Qt::ISODate);
 	}
 	initialized = true;
 }
@@ -148,7 +155,7 @@ double Satellite::roundToDp(float n, int dp)
 QVariantMap Satellite::getMap(void)
 {
 	QVariantMap map;
-	map["designation"] = designation;
+	map["name"] = name;
 	map["tle1"] = tleElements.first.data();
 	map["tle2"] = tleElements.second.data();
 
@@ -181,7 +188,8 @@ QVariantMap Satellite::getMap(void)
 
 	if (!lastUpdated.isNull())
 	{
-		map["lastUpdated"] = lastUpdated;
+		// A raw QDateTime is not a recognised JSON data type. --BM
+		map["lastUpdated"] = lastUpdated.toString(Qt::ISODate);
 	}
 
 	return map;
@@ -199,10 +207,11 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	
 	if (flags & Name)
 	{
-		oss << "<h2>" << designation << "</h2><br/>";
-		if (description!="")
+		oss << "<h2>" << name << "</h2><br/>";
+		if (!description.isEmpty())
 			oss << description << "<br/>";
 	}
+	//TODO: Display the catalog number somewhere here. --BM
 	
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
@@ -326,7 +335,7 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 	tleElements.second.clear();
 	tleElements.second.append(tle2);
 
-	pSatWrapper = new gSatWrapper(designation, tle1, tle2);
+	pSatWrapper = new gSatWrapper(id, tle1, tle2);
 	orbitPoints.clear();
 }
 
@@ -377,7 +386,7 @@ void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 	{
 		if (Satellite::showLabels)
 		{
-			painter.drawText(xy[0], xy[1], designation, 0, 10, 10, false);
+			painter.drawText(xy[0], xy[1], name, 0, 10, 10, false);
 			Satellite::hintTexture->bind();
 		}
 		painter.drawSprite2dMode(xy[0], xy[1], 11);
