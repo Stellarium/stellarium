@@ -661,7 +661,7 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glPushMatrix();
     glLoadIdentity();
 
-    //Select view position based on which planet is visible
+    //Select view position based on which luminary is casting the strongest shadow
     if (sunPosition[2]>0)
     {
         gluLookAt (sunPosition[0], sunPosition[1], sunPosition[2], 0, 0, 0, 0, 0, 1);
@@ -672,15 +672,15 @@ void Scenery3d::generateShadowMap(StelCore* core)
     else if (moonPosition[2]>0)
     {
         gluLookAt (moonPosition[0], moonPosition[1], moonPosition[2], 0, 0, 0, 0, 0, 1);
-        LightPos[2] = moonPosition[0];
-        LightPos[2] = moonPosition[1];
+        LightPos[0] = moonPosition[0];
+        LightPos[1] = moonPosition[1];
         LightPos[2] = moonPosition[2];
     }
     else
     {
         gluLookAt (venusPosition[0], venusPosition[1], venusPosition[2], 0, 0, 0, 0, 0, 1);
-        LightPos[2] = venusPosition[0];
-        LightPos[2] = venusPosition[1];
+        LightPos[0] = venusPosition[0];
+        LightPos[1] = venusPosition[1];
         LightPos[2] = venusPosition[2];
     }
 
@@ -761,7 +761,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
     zRotateMatrix.transfo(moonPosition); //: GZ: VERIFY THE NECESSITY OF THIS
     moonPosition.normalize();
 
-    // We define the brigthness zero when the sun is 8 degrees below the horizon.
+    // We define the brightness zero when the sun is 8 degrees below the horizon.
     float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+8.*M_PI/180.));
     float sinMoonAngleRad = moonPosition[2];
     float lightBrightness;
@@ -949,37 +949,51 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
 
     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
     Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
-    zRotateMatrix.transfo(sunPosition);
+    //zRotateMatrix.transfo(sunPosition); // GZ 20111212: ???
     sunPosition.normalize();
     Vec3d moonPosition = ssystem->getMoon()->getAltAzPosAuto(core);
-    zRotateMatrix.transfo(moonPosition);
+    //zRotateMatrix.transfo(moonPosition); // GZ 20111212: ???
     moonPosition.normalize();
+    Vec3d venusPosition = ssystem->searchByName("Venus")->getAltAzPosAuto(core);
+    venusPosition.normalize();
 
-    // TODO: INCREASE BRIGHTNESS AT HORIZONTAL-SUN
-    // We define the brigthness zero when the sun is 8 degrees below the horizon.
-    float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+15.*M_PI/180.));
-    float sinMoonAngleRad = moonPosition[2];
+
+    // INCREASE BRIGHTNESS AT HORIZONTAL-SUN
+    // We define the brigthness zero when the sun is 12 degrees below the horizon.
+    float sinSunAngle = sin(qMin(M_PI_2, asin(sunPosition[2])+12.*M_PI/180.));
+    float sinMoonAngle = moonPosition[2];
+    float sinVenusAngle = venusPosition[2];
     float lightBrightness;
     shadowCaster shadows = None;
-    if(sinSunAngleRad > 0 ) //-0.1/1.5 ) // sun above -8 deg?
+    Vec3d illuminatorPosition;
+    if(sinSunAngle > 0 ) // sun above -15 deg?
     {
-        lightBrightness = (0.1 + 1.5*(sinSunAngleRad)); //+0.1/1.5));
+        lightBrightness = 0.1 + 1.5*sinSunAngle;
         if ((shadowsEnabled) && (sunPosition[2]>0.)) shadows = Sun;
+        illuminatorPosition=sunPosition;
     }
-    else if (sinMoonAngleRad>0)
+    else if (sinMoonAngle>0)
     {
-        lightBrightness = 0.1 + 0.2*sinMoonAngleRad; // TODO: dependence on Lunar phase and general sky brightness!
+        lightBrightness = 0.1 + 0.2*sinMoonAngle; // TODO: dependence on Lunar phase and general sky brightness!
         if (shadowsEnabled) shadows = Moon;
+        illuminatorPosition=moonPosition;
+    }
+    else if (sinVenusAngle>0)
+    {
+        lightBrightness = 0.1 + 0.1*sinVenusAngle; // TODO: dependence on Venus phase angle and general sky brightness!
+        if (shadowsEnabled) shadows = Venus;
+        illuminatorPosition=venusPosition;
     }
     else
     {
         lightBrightness = 0.1; // TODO: dependence on general sky brightness! Landscape had some code, commented out, to provide ambient brightness.
+        illuminatorPosition=sunPosition;
     }
 
-    Vec3d sunOrMoon = ( (sinSunAngleRad > 0 ) //-0.1/1.5 )
-                        ? sunPosition : moonPosition);
-    const GLfloat LightPosition[]= {-sunOrMoon.v[0], -sunOrMoon.v[1], sunOrMoon.v[2], 0.0f} ;// signs determined by experiment
+    //Vec3d sunOrMoon = ( (sinSunAngleRad > 0 ) ? sunPosition : moonPosition);
+    //const GLfloat LightPosition[]= {-sunOrMoon.v[0], -sunOrMoon.v[1], sunOrMoon.v[2], 0.0f} ;// signs determined by experiment
 
+    const GLfloat LightPosition[]= {-illuminatorPosition.v[0], -illuminatorPosition.v[1], illuminatorPosition.v[2], 0.0f} ;// signs determined by experiment
 
     glClear(GL_DEPTH_BUFFER_BIT);
 
