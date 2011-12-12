@@ -459,7 +459,7 @@
            <item>
             <widget class="QLabel" name="label">
              <property name="text">
-              <string>Satellite ID:</string>
+              <string>Name:</string>
              </property>
             </widget>
            </item>
@@ -470,6 +470,30 @@
              </property>
              <property name="text">
               <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayoutCatalogNumber">
+           <item>
+            <widget class="QLabel" name="labelCatalogNumber">
+             <property name="text">
+              <string>Catalog number:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEditCatalogNumber">
+             <property name="enabled">
+              <bool>false</bool>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
