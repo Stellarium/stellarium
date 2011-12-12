@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-07 14:20+0200\n"
-"PO-Revision-Date: 2011-12-07 11:02+0000\n"
+"PO-Revision-Date: 2011-12-11 09:34+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-08 05:24+0000\n"
-"X-Generator: Launchpad (build 14443)\n"
+"X-Launchpad-Export-Date: 2011-12-12 05:16+0000\n"
+"X-Generator: Launchpad (build 14458)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -3824,13 +3824,15 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
 msgid "Only one result will be returned if the query is successful."
-msgstr ""
+msgstr "Только один результат будет возвращен, если запрос успешен."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
 msgstr ""
+"Все кометы и астероиды могут быть идентифицированы по их номерам, названиям "
+"(на английском языке) или временным обозначениям."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
 #, qt-format
@@ -3840,6 +3842,10 @@ msgid ""
 "searching for \"%3\" will return %4, Halley's Comet, but a search for \"%5\" "
 "will return the asteroid %6."
 msgstr ""
+"<i>Названия</i> комет должны быть с префиксом %1 или %2. Если такое название "
+"носит более чем одна комета, то будет возвращен только первый результат. "
+"Например, поиск \"%3\" вернет %4 - комету Галлея, но поиск \"%5\" вернет "
+"астероид %6."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:87
