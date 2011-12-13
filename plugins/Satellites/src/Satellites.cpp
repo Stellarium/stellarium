@@ -38,8 +38,6 @@
 #include "LabelMgr.hpp"
 #include "StelTranslator.hpp"
 
-#include <plugin_config.h>
-
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QKeyEvent>
@@ -164,7 +162,7 @@ void Satellites::init()
 	// If the json file does not already exist, create it from the resource in the QT resource
 	if(QFileInfo(satellitesJsonPath).exists())
 	{
-		if (getJsonFileVersion() != PLUGIN_VERSION)
+		if (getJsonFileVersion() != SATELLITES_PLUGIN_VERSION)
 		{
 			displayMessage(q_("The old satellites.json file is no longer compatible - using default file"), "#bb0000");
 			restoreDefaultJsonFile();
@@ -638,7 +636,7 @@ QVariantMap Satellites::getTleMap(void)
 		   << Satellite::roundToDp(defaultHintColor[1],3)
 		   << Satellite::roundToDp(defaultHintColor[2],3);
 
-	map["creator"] = QString("Satellites plugin version %1 (updated)").arg(PLUGIN_VERSION);
+	map["creator"] = QString("Satellites plugin version %1 (updated)").arg(SATELLITES_PLUGIN_VERSION);
 	map["hintColor"] = defHintCol;
 	map["shortName"] = "satellite orbital data";
 	QVariantMap sats;
