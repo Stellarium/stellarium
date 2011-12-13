@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-07 14:20+0200\n"
+"POT-Creation-Date: 2011-12-13 00:59+0700\n"
 "PO-Revision-Date: 2011-12-10 03:10+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-11 05:15+0000\n"
-"X-Generator: Launchpad (build 14450)\n"
+"X-Launchpad-Export-Date: 2011-12-13 04:51+0000\n"
+"X-Generator: Launchpad (build 14458)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -597,22 +597,22 @@ msgstr "ชื่อกลุ่มดาว"
 msgid "Constellation boundaries"
 msgstr "ขอบเขตของกลุ่มดาว"
 
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1119
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Azimuthal grid"
 msgstr "เส้นพิกัดภาคทิศ"
 
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1116
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1119
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Equatorial grid"
 msgstr "กริดศูนย์สูตร"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1117
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1120
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial J2000 grid"
 msgstr "กริดศูนย์สูตร J2000"
 
-#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1118
+#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1122
 msgid "Galactic grid"
 msgstr "กริดกาแล็กซี"
 
@@ -620,26 +620,26 @@ msgstr "กริดกาแล็กซี"
 msgid "Galactic plane"
 msgstr "ระนาบดาราจักร"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1124
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1126
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Ecliptic line"
 msgstr "เส้นสุริยวิถี"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1121
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1123
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equator line"
 msgstr "เส้นศูนย์สูตร"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1122
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1124
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Meridian line"
 msgstr "เส้นเมริเดียน"
 
-#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1123
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1125
 msgid "Horizon line"
 msgstr "เส้นขอบฟ้า"
 
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1125
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1128
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:287
 msgid "Cardinal points"
 msgstr "ทิศทั้งสี่"
@@ -648,7 +648,7 @@ msgstr "ทิศทั้งสี่"
 msgid "Ground"
 msgstr "พื้น"
 
-#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1096
+#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1099
 msgid "Atmosphere"
 msgstr "บรรยากาศ"
 
@@ -656,7 +656,7 @@ msgstr "บรรยากาศ"
 msgid "Fog"
 msgstr "หมอก"
 
-#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1105
+#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1108
 msgid "Nebulas"
 msgstr "เนบิวลา"
 
@@ -664,7 +664,7 @@ msgstr "เนบิวลา"
 msgid "Nebulas background images"
 msgstr "ภาพเบื้องหลังของเนบิวลา"
 
-#: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1082 src/ui_viewDialog.h:1104
+#: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Stars"
 msgstr "ดาวฤกษ์"
@@ -1075,7 +1075,7 @@ msgid "Adrastea"
 msgstr "อะแดรสเทีย"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:110
+#: src/translations.h:61 src/translations.h:119
 msgid "Metis"
 msgstr "มีทิส"
 
@@ -1225,135 +1225,155 @@ msgstr "นีโซ"
 msgid "Solar System Observer"
 msgstr "ดูระบบสุริยะ"
 
-#. TRANSLATORS: Asteroid (5) Astraea
+#. TRANSLATORS: TNO/Asteroid (90377) Sedna
 #: src/translations.h:102
+msgid "Sedna"
+msgstr ""
+
+#. TRANSLATORS: TNO/Asteroid (50000) Quaoar
+#: src/translations.h:104
+msgid "Quaoar"
+msgstr ""
+
+#. TRANSLATORS: TNO/Asteroid (90482) Orcus
+#: src/translations.h:106
+msgid "Orcus"
+msgstr ""
+
+#. TRANSLATORS: TNO/Asteroid (136108) Haumea
+#: src/translations.h:108
+msgid "Haumea"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (5) Astraea
+#: src/translations.h:111
 msgid "Astraea"
 msgstr "แอสเทรีย"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:104
+#: src/translations.h:113
 msgid "Hebe"
 msgstr "ฮีบี"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:106
+#: src/translations.h:115
 msgid "Iris"
 msgstr "ไอริส"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:108
+#: src/translations.h:117
 msgid "Flora"
 msgstr "ฟลอรา"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:112
+#: src/translations.h:121
 msgid "Hygiea"
 msgstr "ไฮเจีย"
 
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:114
+#: src/translations.h:123
 msgid "Amor"
 msgstr "เอมอร์"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:116
+#: src/translations.h:125
 msgid "Apophis"
 msgstr "อะโพฟิส"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:118
+#: src/translations.h:127
 msgid "Chiron"
 msgstr "ไครอน"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:120
+#: src/translations.h:129
 msgid "Eros"
 msgstr "อีรอส"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:122
+#: src/translations.h:131
 msgid "Hektor"
 msgstr "เฮคเตอร์"
 
 #. TRANSLATORS: Name of supernova SN 1572A
-#: src/translations.h:124
+#: src/translations.h:133
 msgid "Tycho's Supernova"
 msgstr "ซูเปอร์โนวาของทีโค"
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: src/translations.h:126
+#: src/translations.h:135
 msgid "Kepler's Supernova"
 msgstr "ซูเปอร์โนวาของเคปเลอร์"
 
-#: src/translations.h:130
+#: src/translations.h:139
 msgid "N"
 msgstr "เหนือ"
 
-#: src/translations.h:131
+#: src/translations.h:140
 msgid "S"
 msgstr "ใต้"
 
-#: src/translations.h:132
+#: src/translations.h:141
 msgid "E"
 msgstr "ตะวันออก"
 
-#: src/translations.h:133
+#: src/translations.h:142
 msgid "W"
 msgstr "ตะวันตก"
 
-#: src/translations.h:136
+#: src/translations.h:145
 msgid "Arabic"
 msgstr "อาหรับ"
 
-#: src/translations.h:137
+#: src/translations.h:146
 msgid "Aztec"
 msgstr "แอซเทก"
 
-#: src/translations.h:138
+#: src/translations.h:147
 msgid "Chinese"
 msgstr "จีน"
 
-#: src/translations.h:139
+#: src/translations.h:148
 msgid "Egyptian"
 msgstr "อียิปต์"
 
-#: src/translations.h:140
+#: src/translations.h:149
 msgid "Inuit"
 msgstr "อินูอิท"
 
-#: src/translations.h:141
+#: src/translations.h:150
 msgid "Korean"
 msgstr "เกาหลี"
 
-#: src/translations.h:142
+#: src/translations.h:151
 msgid "Lakota"
 msgstr "ลาโกตา"
 
-#: src/translations.h:143
+#: src/translations.h:152
 msgid "Maori"
 msgstr "เมารี"
 
-#: src/translations.h:144
+#: src/translations.h:153
 msgid "Navajo"
 msgstr "นาวาโฮ"
 
-#: src/translations.h:145
+#: src/translations.h:154
 msgid "Norse"
 msgstr "นอเวย์"
 
-#: src/translations.h:146
+#: src/translations.h:155
 msgid "Polynesian"
 msgstr "โพลีนีเชีย"
 
-#: src/translations.h:147
+#: src/translations.h:156
 msgid "Sami"
 msgstr "เซมี"
 
-#: src/translations.h:148
+#: src/translations.h:157
 msgid "Tupi-Guarani"
 msgstr "ทูปิ-กวารานิ"
 
-#: src/translations.h:149
+#: src/translations.h:158
 msgid "Western"
 msgstr "ตะวันตก"
 
@@ -1572,197 +1592,197 @@ msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (
 msgid "Position"
 msgstr "ตำแหน่ง"
 
-#: src/ui_viewDialog.h:1067
+#: src/ui_viewDialog.h:1070
 msgid "View"
 msgstr "มุมมอง"
 
-#: src/ui_viewDialog.h:1073
+#: src/ui_viewDialog.h:1076
 msgid "Sky"
 msgstr "ท้องฟ้า"
 
-#: src/ui_viewDialog.h:1075
+#: src/ui_viewDialog.h:1078
 msgid "Markings"
 msgstr "เครื่องหมาย"
 
-#: src/ui_viewDialog.h:1077
+#: src/ui_viewDialog.h:1080
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:371
 msgid "Landscape"
 msgstr "ภูมิทัศน์"
 
-#: src/ui_viewDialog.h:1079
+#: src/ui_viewDialog.h:1082
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:212
 msgid "Starlore"
 msgstr "ตำนานดาว"
 
-#: src/ui_viewDialog.h:1083
+#: src/ui_viewDialog.h:1086
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Absolute scale:"
 msgstr "อัตราส่วนจริง:"
 
-#: src/ui_viewDialog.h:1084
+#: src/ui_viewDialog.h:1087
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:236
 msgid "Relative scale:"
 msgstr "อัตราส่วนสัมพัทธ์"
 
-#: src/ui_viewDialog.h:1085
+#: src/ui_viewDialog.h:1088
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Twinkle:"
 msgstr "กะพริบแสง:"
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1090
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "ลดแสงของดาวที่สว่างน้อย เมื่อมีวัตถุที่สว่างมากอยู่ในเขตการมองเห็น"
 
-#: src/ui_viewDialog.h:1089
+#: src/ui_viewDialog.h:1092
 msgid "Dynamic eye adaptation"
 msgstr "ปรับดวงตาตามสภาพของท้องฟ้า"
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:1093
 msgid "Planets and satellites"
 msgstr "ดาวเคราะห์และบริวาร"
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:1094
 msgid "Show planets"
 msgstr "แสดงดาวเคราะห์"
 
-#: src/ui_viewDialog.h:1092
+#: src/ui_viewDialog.h:1095
 msgid "Show planet markers"
 msgstr "แสดงตัวบ่งชี้ดาวเคราะห์"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1096
 msgid "Show planet orbits"
 msgstr "แสดงวงโคจรของดาวเคราะห์"
 
-#: src/ui_viewDialog.h:1094
+#: src/ui_viewDialog.h:1097
 msgid "Simulate light speed"
 msgstr "จำลองตามความเร็วแสง"
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1098
 msgid "Scale Moon"
 msgstr "ขยายขนาดดวงจันทร์"
 
-#: src/ui_viewDialog.h:1097
+#: src/ui_viewDialog.h:1100
 msgid "Show atmosphere"
 msgstr "แสดงบรรยากาศ"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1101
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Light pollution:"
 msgstr "มลพิษทางแสง:"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1103
 msgid "pressure, temperature, extinction coefficient"
 msgstr "ความกดอากาศ, อุณหภูมิ, สัมประสิทธิ์การสูญหาย"
 
-#: src/ui_viewDialog.h:1102
+#: src/ui_viewDialog.h:1105
 msgid "Refraction/Extinction settings..."
 msgstr "การตั้งค่าการหักเห/การสูญหาย..."
 
-#: src/ui_viewDialog.h:1103
+#: src/ui_viewDialog.h:1106
 msgid "Labels and Markers"
 msgstr "ชื่อ และ เครื่องหมาย"
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1109
 msgid "Planets"
 msgstr "ดาวเคราะห์"
 
-#: src/ui_viewDialog.h:1107
+#: src/ui_viewDialog.h:1110
 msgid "Shooting Stars"
 msgstr "ดาวตก"
 
-#: src/ui_viewDialog.h:1108
+#: src/ui_viewDialog.h:1111
 msgid "Hourly zenith rate:"
 msgstr "อัตราสูงสุดที่เหนือศีรษะ:"
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1112
 msgid "0"
 msgstr "๐"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1113
 msgid "10"
 msgstr "๑๐"
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1114
 msgid "80"
 msgstr "๘๐"
 
-#: src/ui_viewDialog.h:1112
+#: src/ui_viewDialog.h:1115
 msgid "10000"
 msgstr "๑๐๐๐๐"
 
-#: src/ui_viewDialog.h:1113
+#: src/ui_viewDialog.h:1116
 msgid "144000"
 msgstr "๑๔๔๐๐๐"
 
-#: src/ui_viewDialog.h:1115
+#: src/ui_viewDialog.h:1118
 msgid "Celestial Sphere"
 msgstr "ทรงกลมท้องฟ้า"
 
-#: src/ui_viewDialog.h:1120
+#: src/ui_viewDialog.h:1127
 msgid "Galactic plane line"
 msgstr "เส้นระนาบดาราจักร"
 
-#: src/ui_viewDialog.h:1126
+#: src/ui_viewDialog.h:1129
 msgid "Constellations"
 msgstr "กลุ่มดาว"
 
-#: src/ui_viewDialog.h:1127
+#: src/ui_viewDialog.h:1130
 msgid "Show lines"
 msgstr "แสดงเส้น"
 
-#: src/ui_viewDialog.h:1128
+#: src/ui_viewDialog.h:1131
 msgid "Show labels"
 msgstr "แสดงป้ายชื่อ"
 
-#: src/ui_viewDialog.h:1129
+#: src/ui_viewDialog.h:1132
 msgid "Show boundaries"
 msgstr "แสดงขอบเขต"
 
-#: src/ui_viewDialog.h:1130
+#: src/ui_viewDialog.h:1133
 msgid "Show art"
 msgstr "แสดงภาพวาด"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1131
+#: src/ui_viewDialog.h:1134
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Art brightness:"
 msgstr "ความสว่างของภาพกลุ่มดาว:"
 
-#: src/ui_viewDialog.h:1132
+#: src/ui_viewDialog.h:1135
 msgid "Projection"
 msgstr "การฉายภาพ"
 
-#: src/ui_viewDialog.h:1133
+#: src/ui_viewDialog.h:1136
 msgid "Add/remove landscapes..."
 msgstr "เพิ่มหรือลบภูมิทัศน์"
 
-#: src/ui_viewDialog.h:1134 src/ui_viewDialog.h:1139 src/ui_viewDialog.h:1141
+#: src/ui_viewDialog.h:1137 src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
 #: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "ตัวเลือก"
 
-#: src/ui_viewDialog.h:1135
+#: src/ui_viewDialog.h:1138
 msgid "Show ground"
 msgstr "แสดงพื้นดิน"
 
-#: src/ui_viewDialog.h:1136
+#: src/ui_viewDialog.h:1139
 msgid "Show fog"
 msgstr "แสดงหมอก"
 
-#: src/ui_viewDialog.h:1137
+#: src/ui_viewDialog.h:1140
 msgid "Use associated planet and position"
 msgstr "ใช้ดาวเคราะห์ที่เกี่ยวข้องและตำแหน่ง"
 
-#: src/ui_viewDialog.h:1138
+#: src/ui_viewDialog.h:1141
 msgid "Use this landscape as default"
 msgstr "ใช้ภูมิทัศน์นี้เป็นค่าเริ่มต้น"
 
-#: src/ui_viewDialog.h:1140
+#: src/ui_viewDialog.h:1143
 msgid "Use this sky culture as default"
 msgstr "ใช้คุณลักษณะท้องฟ้านี้เป็นค่าเริ่มต้น"
 
-#: src/ui_viewDialog.h:1142
+#: src/ui_viewDialog.h:1145
 msgid "Visible"
 msgstr "มองเห็นได้"
 
