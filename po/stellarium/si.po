@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-12-07 14:20+0200\n"
+"POT-Creation-Date: 2011-12-13 00:59+0700\n"
 "PO-Revision-Date: 2011-09-26 20:27+0000\n"
 "Last-Translator: අනුරාධ Jayathilaka <astroanu2004@yahoo.co.uk>\n"
 "Language-Team: Sinhalese <si@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-08 05:25+0000\n"
-"X-Generator: Launchpad (build 14443)\n"
+"X-Launchpad-Export-Date: 2011-12-13 04:51+0000\n"
+"X-Generator: Launchpad (build 14458)\n"
 "X-Poedit-Country: SRI LANKA\n"
 "X-Poedit-Language: Estonian\n"
 
@@ -582,22 +582,22 @@ msgstr "රාශි ලේබල"
 msgid "Constellation boundaries"
 msgstr "රාශි මායිම්"
 
-#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1119
+#: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Azimuthal grid"
 msgstr "උද්දිගංශ දැල"
 
-#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1116
+#: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1119
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Equatorial grid"
 msgstr "සමක දැල"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1117
+#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1120
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial J2000 grid"
 msgstr "සමක J2000 දැල"
 
-#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1118
+#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1122
 msgid "Galactic grid"
 msgstr "මණ්දාකිණි දැල"
 
@@ -605,26 +605,26 @@ msgstr "මණ්දාකිණි දැල"
 msgid "Galactic plane"
 msgstr ""
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1124
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1126
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Ecliptic line"
 msgstr "ක්‍රාන්තිය"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1121
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1123
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equator line"
 msgstr "සමකය"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1122
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1124
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Meridian line"
 msgstr "මධ්‍යාන රේඛාව"
 
-#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1123
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1125
 msgid "Horizon line"
 msgstr "ක්ෂිතිජ රේඛාව"
 
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1125
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1128
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:287
 msgid "Cardinal points"
 msgstr "දිග්භාග"
@@ -633,7 +633,7 @@ msgstr "දිග්භාග"
 msgid "Ground"
 msgstr "පොළොව"
 
-#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1096
+#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1099
 msgid "Atmosphere"
 msgstr "වායුගෝලය"
 
@@ -641,7 +641,7 @@ msgstr "වායුගෝලය"
 msgid "Fog"
 msgstr "මීදුම"
 
-#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1105
+#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1108
 msgid "Nebulas"
 msgstr "නිහාරිකා"
 
@@ -649,7 +649,7 @@ msgstr "නිහාරිකා"
 msgid "Nebulas background images"
 msgstr "නිහාරිකා පසුබිම් ඡායාරූප"
 
-#: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1082 src/ui_viewDialog.h:1104
+#: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Stars"
 msgstr "තරු"
@@ -1060,7 +1060,7 @@ msgid "Adrastea"
 msgstr "ඇඩ්රස්ටියා"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:110
+#: src/translations.h:61 src/translations.h:119
 msgid "Metis"
 msgstr "මෙටිස්"
 
@@ -1210,135 +1210,155 @@ msgstr "නෙසෝ"
 msgid "Solar System Observer"
 msgstr "සෞරග්‍රහ මන්ඩලයේ නිරීක්ෂකයා"
 
-#. TRANSLATORS: Asteroid (5) Astraea
+#. TRANSLATORS: TNO/Asteroid (90377) Sedna
 #: src/translations.h:102
+msgid "Sedna"
+msgstr ""
+
+#. TRANSLATORS: TNO/Asteroid (50000) Quaoar
+#: src/translations.h:104
+msgid "Quaoar"
+msgstr ""
+
+#. TRANSLATORS: TNO/Asteroid (90482) Orcus
+#: src/translations.h:106
+msgid "Orcus"
+msgstr ""
+
+#. TRANSLATORS: TNO/Asteroid (136108) Haumea
+#: src/translations.h:108
+msgid "Haumea"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (5) Astraea
+#: src/translations.h:111
 msgid "Astraea"
 msgstr "ඔස්ට්‍රේයා"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:104
+#: src/translations.h:113
 msgid "Hebe"
 msgstr "හීබ්"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:106
+#: src/translations.h:115
 msgid "Iris"
 msgstr "අයිරිස්"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:108
+#: src/translations.h:117
 msgid "Flora"
 msgstr "ෆ්ලෝරා"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:112
+#: src/translations.h:121
 msgid "Hygiea"
 msgstr "හයිජියා"
 
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:114
+#: src/translations.h:123
 msgid "Amor"
 msgstr "ආමෝර්"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:116
+#: src/translations.h:125
 msgid "Apophis"
 msgstr "ඇපොෆිස්"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:118
+#: src/translations.h:127
 msgid "Chiron"
 msgstr "චිරෝන්"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:120
+#: src/translations.h:129
 msgid "Eros"
 msgstr "ඊරෝස්"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:122
+#: src/translations.h:131
 msgid "Hektor"
 msgstr "හෙක්ටර්"
 
 #. TRANSLATORS: Name of supernova SN 1572A
-#: src/translations.h:124
+#: src/translations.h:133
 msgid "Tycho's Supernova"
 msgstr "ටයිකෝගේ සුපර්නෝවාව"
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: src/translations.h:126
+#: src/translations.h:135
 msgid "Kepler's Supernova"
 msgstr "කෙප්ලර්ගේ සුපර්නෝවාව"
 
-#: src/translations.h:130
+#: src/translations.h:139
 msgid "N"
 msgstr "උ"
 
-#: src/translations.h:131
+#: src/translations.h:140
 msgid "S"
 msgstr "ද"
 
-#: src/translations.h:132
+#: src/translations.h:141
 msgid "E"
 msgstr "නැ"
 
-#: src/translations.h:133
+#: src/translations.h:142
 msgid "W"
 msgstr "බ"
 
-#: src/translations.h:136
+#: src/translations.h:145
 msgid "Arabic"
 msgstr "අරාබි"
 
-#: src/translations.h:137
+#: src/translations.h:146
 msgid "Aztec"
 msgstr "ඇස්ටෙක්"
 
-#: src/translations.h:138
+#: src/translations.h:147
 msgid "Chinese"
 msgstr "චීන"
 
-#: src/translations.h:139
+#: src/translations.h:148
 msgid "Egyptian"
 msgstr "ඊජිප්තු"
 
-#: src/translations.h:140
+#: src/translations.h:149
 msgid "Inuit"
 msgstr "ඉනුයිට් (එස්කිමෝ)"
 
-#: src/translations.h:141
+#: src/translations.h:150
 msgid "Korean"
 msgstr "කොරියානු"
 
-#: src/translations.h:142
+#: src/translations.h:151
 msgid "Lakota"
 msgstr "ලකෝටා"
 
-#: src/translations.h:143
+#: src/translations.h:152
 msgid "Maori"
 msgstr "මඕරි"
 
-#: src/translations.h:144
+#: src/translations.h:153
 msgid "Navajo"
 msgstr "නවායෝ"
 
-#: src/translations.h:145
+#: src/translations.h:154
 msgid "Norse"
 msgstr "නෝර්ස්"
 
-#: src/translations.h:146
+#: src/translations.h:155
 msgid "Polynesian"
 msgstr "පොලිනීසියානු"
 
-#: src/translations.h:147
+#: src/translations.h:156
 msgid "Sami"
 msgstr "සමී"
 
-#: src/translations.h:148
+#: src/translations.h:157
 msgid "Tupi-Guarani"
 msgstr "ටුපි ගුවාරනි"
 
-#: src/translations.h:149
+#: src/translations.h:158
 msgid "Western"
 msgstr "අපරදිග"
 
@@ -1556,197 +1576,197 @@ msgstr "RA/Dec (J2000):"
 msgid "Position"
 msgstr "පිහිටීම"
 
-#: src/ui_viewDialog.h:1067
+#: src/ui_viewDialog.h:1070
 msgid "View"
 msgstr "දසුන"
 
-#: src/ui_viewDialog.h:1073
+#: src/ui_viewDialog.h:1076
 msgid "Sky"
 msgstr "අහස"
 
-#: src/ui_viewDialog.h:1075
+#: src/ui_viewDialog.h:1078
 msgid "Markings"
 msgstr "සලකුණු කිරීම්"
 
-#: src/ui_viewDialog.h:1077
+#: src/ui_viewDialog.h:1080
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:371
 msgid "Landscape"
 msgstr "භූතලය"
 
-#: src/ui_viewDialog.h:1079
+#: src/ui_viewDialog.h:1082
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:212
 msgid "Starlore"
 msgstr "තරුකතා"
 
-#: src/ui_viewDialog.h:1083
+#: src/ui_viewDialog.h:1086
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:242
 msgid "Absolute scale:"
 msgstr "නිරපේක්ෂ මිනුම:"
 
-#: src/ui_viewDialog.h:1084
+#: src/ui_viewDialog.h:1087
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:236
 msgid "Relative scale:"
 msgstr "සාපේක්ෂ  මිනුම"
 
-#: src/ui_viewDialog.h:1085
+#: src/ui_viewDialog.h:1088
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:248
 msgid "Twinkle:"
 msgstr "බැබලීම:"
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1090
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "දීප්ත වස්තූන් මතුවන විට අදීප්ත වස්තු අදුරු කරන්න"
 
-#: src/ui_viewDialog.h:1089
+#: src/ui_viewDialog.h:1092
 msgid "Dynamic eye adaptation"
 msgstr "ඇස අඳුරට හුරු කරන්න"
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:1093
 msgid "Planets and satellites"
 msgstr "ග්‍රහයින් සහ උපග්‍රහයින්"
 
-#: src/ui_viewDialog.h:1091
+#: src/ui_viewDialog.h:1094
 msgid "Show planets"
 msgstr "ග්‍රහලෝක පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1092
+#: src/ui_viewDialog.h:1095
 msgid "Show planet markers"
 msgstr "ග්‍රහලෝක සලකුණු පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1096
 msgid "Show planet orbits"
 msgstr "ග්‍රහලෝක කක්ෂයන් පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1094
+#: src/ui_viewDialog.h:1097
 msgid "Simulate light speed"
 msgstr "ආලෝකයේ වේගය ප්‍රතිනිර්මාණය කරන්න"
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1098
 msgid "Scale Moon"
 msgstr "චන්ද්‍රයා පරිමාණකරණය කරන්න"
 
-#: src/ui_viewDialog.h:1097
+#: src/ui_viewDialog.h:1100
 msgid "Show atmosphere"
 msgstr "වායුගෝලය පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1101
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Light pollution:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1103
 msgid "pressure, temperature, extinction coefficient"
 msgstr "පීඩනය, උෂ්නත්වය, නෂ්ට සංගුණකය"
 
-#: src/ui_viewDialog.h:1102
+#: src/ui_viewDialog.h:1105
 msgid "Refraction/Extinction settings..."
 msgstr "වර්තන / නෂ්ට සැකසුම්..."
 
-#: src/ui_viewDialog.h:1103
+#: src/ui_viewDialog.h:1106
 msgid "Labels and Markers"
 msgstr "ලේබල් හා සලකුණු"
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1109
 msgid "Planets"
 msgstr "ග්‍රහලෝක"
 
-#: src/ui_viewDialog.h:1107
+#: src/ui_viewDialog.h:1110
 msgid "Shooting Stars"
 msgstr "උල්කාපාත"
 
-#: src/ui_viewDialog.h:1108
+#: src/ui_viewDialog.h:1111
 msgid "Hourly zenith rate:"
 msgstr "අහස් මුදුනේ පැයකට දර්ශණය වන ප්‍රමාණය (ZHR)"
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1112
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1113
 msgid "10"
 msgstr "10"
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1114
 msgid "80"
 msgstr "80"
 
-#: src/ui_viewDialog.h:1112
+#: src/ui_viewDialog.h:1115
 msgid "10000"
 msgstr "10000"
 
-#: src/ui_viewDialog.h:1113
+#: src/ui_viewDialog.h:1116
 msgid "144000"
 msgstr "144000"
 
-#: src/ui_viewDialog.h:1115
+#: src/ui_viewDialog.h:1118
 msgid "Celestial Sphere"
 msgstr "ඛගෝලය"
 
-#: src/ui_viewDialog.h:1120
+#: src/ui_viewDialog.h:1127
 msgid "Galactic plane line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1126
+#: src/ui_viewDialog.h:1129
 msgid "Constellations"
 msgstr "තරුරටා"
 
-#: src/ui_viewDialog.h:1127
+#: src/ui_viewDialog.h:1130
 msgid "Show lines"
 msgstr "රේඛා පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1128
+#: src/ui_viewDialog.h:1131
 msgid "Show labels"
 msgstr "ලේබල පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1129
+#: src/ui_viewDialog.h:1132
 msgid "Show boundaries"
 msgstr "සීමාවන් පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1130
+#: src/ui_viewDialog.h:1133
 msgid "Show art"
 msgstr "රාශිරූප පෙන්වන්න"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1131
+#: src/ui_viewDialog.h:1134
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Art brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1132
+#: src/ui_viewDialog.h:1135
 msgid "Projection"
 msgstr "ප්‍රක්ශේපණය"
 
-#: src/ui_viewDialog.h:1133
+#: src/ui_viewDialog.h:1136
 msgid "Add/remove landscapes..."
 msgstr "ග්‍රහලෝකාගාර පසුබිම් එකතු කරන්න / ඉවත්කරන්න..."
 
-#: src/ui_viewDialog.h:1134 src/ui_viewDialog.h:1139 src/ui_viewDialog.h:1141
+#: src/ui_viewDialog.h:1137 src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
 #: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "විකල්ප"
 
-#: src/ui_viewDialog.h:1135
+#: src/ui_viewDialog.h:1138
 msgid "Show ground"
 msgstr "පොළව පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1136
+#: src/ui_viewDialog.h:1139
 msgid "Show fog"
 msgstr "මීදුම පෙන්වන්න"
 
-#: src/ui_viewDialog.h:1137
+#: src/ui_viewDialog.h:1140
 msgid "Use associated planet and position"
 msgstr "සම්බන්ධිත ග්‍රහලෝක හා ස්ථාන භාවිතා කරන්න"
 
-#: src/ui_viewDialog.h:1138
+#: src/ui_viewDialog.h:1141
 msgid "Use this landscape as default"
 msgstr "සාමාන්‍ය භාවිතය සදහා මේ භූතලය යොදාගන්න"
 
-#: src/ui_viewDialog.h:1140
+#: src/ui_viewDialog.h:1143
 msgid "Use this sky culture as default"
 msgstr "මෙම අහස් කතා සාමාන්‍ය සැකසුම ලෙස භාවිතා කරන්න"
 
-#: src/ui_viewDialog.h:1142
+#: src/ui_viewDialog.h:1145
 msgid "Visible"
 msgstr "දෘශ්‍යමාන"
 
