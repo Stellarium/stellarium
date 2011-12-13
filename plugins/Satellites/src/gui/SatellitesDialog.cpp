@@ -25,7 +25,6 @@
 #include <QFileDialog>
 
 #include "StelApp.hpp"
-#include <plugin_config.h>
 #include "ui_satellitesDialog.h"
 #include "SatellitesDialog.hpp"
 #include "Satellites.hpp"
@@ -232,7 +231,7 @@ void SatellitesDialog::setAboutHtml(void)
 	QString oldJsonFileName("<tt>satellites.json.old</tt>");
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Stellarium Satellites Plugin") + "</h2><table width=\"90%\">";
-	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + "</strong></td><td>" + PLUGIN_VERSION + "</td></td>";
+	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + "</strong></td><td>" + SATELLITES_PLUGIN_VERSION + "</td></td>";
 	html += "<tr><td rowspan=2><strong>" + q_("Authors") + "</strong></td><td>Matthew Gates &lt;matthew@porpoisehead.net&gt;</td></td>";
 	html += "<tr><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></tr></table>";
 
