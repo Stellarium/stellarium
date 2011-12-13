@@ -207,11 +207,10 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	
 	if (flags & Name)
 	{
-		oss << "<h2>" << name << "</h2><br/>";
+		oss << "<h2>" << name << " - NORAD " << id  << "</h2><br/>";
 		if (!description.isEmpty())
 			oss << description << "<br/>";
 	}
-	//TODO: Display the catalog number somewhere here. --BM
 	
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
