@@ -108,6 +108,8 @@ public:
 
 	// when the observer location changes we need to
 	void recalculateOrbitLines(void);
+	
+	static QString extractInternationalDesignator(const QString& tle1);
 
 public:
 	void enableDrawOrbit(bool b);
@@ -135,6 +137,8 @@ private:
 	QString name;
 	//! Longer description of the satellite.
 	QString description;
+	//! International Designator / COSPAR designation / NSSDC ID
+	QString internationalDesignator;
 	//! Contains the J2000 position 
 	Vec3d XYZ;
 	QPair< QByteArray, QByteArray > tleElements;
