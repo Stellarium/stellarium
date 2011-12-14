@@ -38,8 +38,6 @@
 #include "LabelMgr.hpp"
 #include "StelTranslator.hpp"
 
-#include <plugin_config.h>
-
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QKeyEvent>
@@ -164,7 +162,7 @@ void Satellites::init()
 	// If the json file does not already exist, create it from the resource in the QT resource
 	if(QFileInfo(satellitesJsonPath).exists())
 	{
-		if (getJsonFileVersion() != PLUGIN_VERSION)
+		if (getJsonFileVersion() != SATELLITES_PLUGIN_VERSION)
 		{
 			displayMessage(q_("The old satellites.json file is no longer compatible - using default file"), "#bb0000");
 			restoreDefaultJsonFile();
@@ -611,10 +609,9 @@ void Satellites::setTleMap(const QVariantMap& map)
 
 	satellites.clear();
 	QVariantMap satMap = map.value("satellites").toMap();
-        foreach(const QString& designation, satMap.keys())
+	foreach(const QString& satId, satMap.keys())
 	{
-		QVariantMap satData = satMap.value(designation).toMap();
-		satData["designation"] = designation;
+		QVariantMap satData = satMap.value(satId).toMap();
 
 		if (!satData.contains("hintColor"))
 			satData["hintColor"] = defaultHintColorMap;
@@ -622,7 +619,7 @@ void Satellites::setTleMap(const QVariantMap& map)
 		if (!satData.contains("orbitColor"))
 			satData["orbitColor"] = satData["hintColor"];
 
-		SatelliteP sat(new Satellite(satData));
+		SatelliteP sat(new Satellite(satId, satData));
 		if (sat->initialized)
 		{
 			satellites.append(sat);
@@ -639,7 +636,7 @@ QVariantMap Satellites::getTleMap(void)
 		   << Satellite::roundToDp(defaultHintColor[1],3)
 		   << Satellite::roundToDp(defaultHintColor[2],3);
 
-	map["creator"] = QString("Satellites plugin version %1 (updated)").arg(PLUGIN_VERSION);
+	map["creator"] = QString("Satellites plugin version %1 (updated)").arg(SATELLITES_PLUGIN_VERSION);
 	map["hintColor"] = defHintCol;
 	map["shortName"] = "satellite orbital data";
 	QVariantMap sats;
@@ -653,10 +650,7 @@ QVariantMap Satellites::getTleMap(void)
 		if (satMap["hintColor"].toList() == defHintCol)
 			satMap.remove("hintColor");
 
-		if (satMap.contains("designation"))
-			satMap.remove("designation");
-
-		sats[sat->designation] = satMap;
+		sats[sat->id] = satMap;
 	}
 	map["satellites"] = sats;
 	return map;
@@ -679,18 +673,20 @@ QStringList Satellites::getGroups(void) const
 	return groups;
 }
 
-QStringList Satellites::getSatellites(const QString& group, Visibility vis)
+QHash<QString,QString> Satellites::getSatellites(const QString& group, Visibility vis)
 {
-	QStringList result;
+	QHash<QString,QString> result;
 
 	foreach(const SatelliteP& sat, satellites)
 	{
 		if (sat->initialized)
-			if ((group.isEmpty() || sat->groupIDs.contains(group)) && ! result.contains(sat->designation))
+		{
+			if ((group.isEmpty() || sat->groupIDs.contains(group)) && ! result.contains(sat->id))
 			{
 				if (vis==Both || (vis==Visible && sat->visible) || (vis==NotVisible && !sat->visible))
-					result << sat->designation;
+					result.insert(sat->id, sat->name);
 			}
+		}
 	}
 	return result;
 }
@@ -699,7 +695,7 @@ SatelliteP Satellites::getByID(const QString& id)
 {
 	foreach(const SatelliteP& sat, satellites)
 	{
-		if (sat->initialized && sat->designation == id)
+		if (sat->initialized && sat->id == id)
 			return sat;
 	}
 	return SatelliteP();
@@ -880,6 +876,8 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 {
 	// define a map of new TLE data - the key is the satellite designation
 	QMap< QString, QPair<QString, QString> > newTLE;
+	//TODO: Ugly hack, think of something better: --BM
+	QHash<QString, QString> nameFromId;
 
 	if (progressBar)
 	{
@@ -888,24 +886,27 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 		progressBar->setFormat("TLE updating %v/%m");
 	}
 
-        foreach(const QString& tleFilePath, paths)
+	foreach(const QString& tleFilePath, paths)
 	{
 		QFile tleFile(tleFilePath);
 		if (tleFile.open(QIODevice::ReadOnly|QIODevice::Text))
 		{
 			int lineNumber = 0;
-			QString thisSatId("");
+			QString lastId, lastName;
 			QPair<QString, QString> tleLines;
-			while (!tleFile.atEnd()) {
+			
+			while (!tleFile.atEnd())
+			{
 				QString line = QString(tleFile.readLine()).trimmed();
-				if (line.length() < 65) // this is a new designation
+				if (line.length() < 65) // this is title line
 				{
-					if (thisSatId!="" && !tleLines.first.isEmpty() && !tleLines.second.isEmpty())
-					{
-						newTLE[thisSatId] = tleLines;
-					}
-					thisSatId = line;
-					thisSatId.replace(QRegExp("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove things in square brackets
+					// New entry in the list, so prepare all fields
+					lastId.clear();
+					lastName = line;
+					lastName.replace(QRegExp("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove things in square brackets
+					//TODO: We need to think of some kind of ecaping these 
+					//characters in the JSON parser. --BM
+					
 					tleLines.first = QString();
 					tleLines.second = QString();
 				}
@@ -914,14 +915,27 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 					if (QRegExp("^1 .*").exactMatch(line))
 						tleLines.first = line;
 					else if (QRegExp("^2 .*").exactMatch(line))
+					{
 						tleLines.second = line;
+						// The Satellite Catalog Number is the second number
+						// on the second line.
+						lastId = line.split(' ').at(1).trimmed();
+						if (lastId.isEmpty())
+							continue;
+						
+						// This is the second line and there will be no more,
+						// so if everything is OK, save the elements.
+						if (!lastName.isEmpty() &&
+						    !tleLines.first.isEmpty())
+						{
+							newTLE[lastId] = tleLines;
+							nameFromId[lastId] = lastName;
+						}
+						//TODO: Error warnings? --BM
+					}
 					else
 						qDebug() << "Satellites::updateFromFiles(): unprocessed line " << lineNumber <<  " in file " << tleFilePath;
 				}
-			}
-			if (thisSatId!="" && !tleLines.first.isEmpty() && !tleLines.second.isEmpty())
-			{
-				newTLE[thisSatId] = tleLines;
 			}
 			tleFile.close();
 
@@ -941,13 +955,21 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 	foreach(const SatelliteP& sat, satellites)
 	{
 		totalSats++;
-		if (newTLE.contains(sat->designation))
+		QString id = sat->id;
+		if (newTLE.contains(id))
 		{
-			if (   sat->tleElements.first  != newTLE[sat->designation].first
-			    || sat->tleElements.second != newTLE[sat->designation].second)
+			// If it's in the new list, the name should also be there.
+			QString name = nameFromId.value(id);
+			
+			if (sat->tleElements.first  != newTLE[id].first ||
+			    sat->tleElements.second != newTLE[id].second ||
+			    sat->name != name)
 			{
 				// We have updated TLE elements for this satellite
-				sat->setNewTleElements(newTLE[sat->designation].first, newTLE[sat->designation].second);
+				sat->setNewTleElements(newTLE[id].first, newTLE[id].second);
+				
+				// Update the name if it has been changed in the source list
+				sat->name = name;
 
 				// we reset this to "now" when we started the update.
 				sat->lastUpdated = lastUpdate;
@@ -956,7 +978,10 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 		}
 		else
 		{
-			qWarning() << "Satellites: could not update orbital elements for" << sat->designation <<": no entry found in the source TLE lists.";
+			qWarning() << "Satellites: could not update orbital elements for"
+			           << sat->name
+			           << sat->id
+			           << ": no entry found in the source TLE lists.";
 			numMissing++;
 		}
 	}
