@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-13 00:59+0700\n"
-"PO-Revision-Date: 2011-12-12 10:48+0000\n"
-"Last-Translator: Amal Bose <axatrikx@gmail.com>\n"
+"PO-Revision-Date: 2011-12-14 03:09+0000\n"
+"Last-Translator: BRIJESH E.P <Unknown>\n"
 "Language-Team: Malayalam <ml@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-13 04:49+0000\n"
-"X-Generator: Launchpad (build 14458)\n"
+"X-Launchpad-Export-Date: 2011-12-14 04:44+0000\n"
+"X-Generator: Launchpad (build 14487)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -35,7 +35,7 @@ msgstr "ചക്രവാളം"
 
 #: src/core/modules/GridLinesMgr.cpp:558
 msgid "Galactic Plane"
-msgstr ""
+msgstr "താരാപഥ തലം"
 
 #: src/core/modules/LandscapeMgr.cpp:486
 msgid "Author: "
@@ -120,7 +120,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:148
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "ദൂരം: %1AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:155
 #, no-c-format, qt-format
@@ -140,7 +140,7 @@ msgstr "കാന്തിമാനം: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:118
 #, qt-format
 msgid "Spectral Type: %1"
-msgstr "വര്‍ണ്ണരാജി ഗണം: %1"
+msgstr "വര്‍ണരാജി ഗണം: %1"
 
 #: src/core/modules/StarWrapper.cpp:122
 #: plugins/Supernovae/src/Supernova.cpp:108
@@ -212,20 +212,24 @@ msgid ""
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
 msgstr ""
+"മീന്‍‌കണ്‍ ദൃശ്യത്തില്‍, അല്ലെങ്കില്‍ <i>അസിമുതല്‍  തുല്യദൂര ദൃശ്യത്തില്‍ "
+"</i>, നേര്‍ രേഖകള്‍ വളഞ്ഞു കാണപ്പെടാം ."
 
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
-msgstr ""
+msgstr "ഹാമ്മര്‍ ദൃശ്യം"
 
 #: src/core/StelProjectorClasses.cpp:187
 msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
 msgstr ""
+"ഹാമ്മര്‍ ദൃശ്യം തുല്യ വിസ്താരത്തിലുള്ള പ്രൊജക്ഷനാണ്. 1892ല്‍ ഏണസ്റ്റ് "
+"ഹാമ്മര്‍ ആണ് ഇത് വിശദീകരിച്ചത്."
 
 #: src/core/StelProjectorClasses.cpp:223
 msgid "Cylinder"
-msgstr "ഗോളസ്തംഭം"
+msgstr "സിലിണ്ടര്‍"
 
 #: src/core/StelProjectorClasses.cpp:228
 msgid ""
@@ -235,7 +239,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:270
 msgid "Mercator"
-msgstr ""
+msgstr "മെര്‍ക്കാറ്റോര്‍ ദൃശ്യം"
 
 #: src/core/StelProjectorClasses.cpp:275
 msgid ""
@@ -271,7 +275,7 @@ msgstr ""
 
 #: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
 msgid "(geometric)"
-msgstr ""
+msgstr "(ജ്യോമെട്രിക്)"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
 msgid "(apparent)"
@@ -289,7 +293,7 @@ msgstr "സ്ക്രീന്‍ഷോട്ടിനുള്ള ഡയറ�
 #: src/gui/ConfigurationDialog.cpp:478
 #, qt-format
 msgid "Startup FOV: %1%2"
-msgstr ""
+msgstr "തുടക്കത്തിലെ FOV: %1%2"
 
 #: src/gui/ConfigurationDialog.cpp:486
 #, qt-format
@@ -299,11 +303,11 @@ msgstr ""
 #: src/gui/ConfigurationDialog.cpp:525
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:211
 msgid "Authors"
-msgstr ""
+msgstr "രചയിതാക്കള്‍"
 
 #: src/gui/ConfigurationDialog.cpp:529 src/gui/ViewDialog.cpp:382
 msgid "Contact"
-msgstr ""
+msgstr "വിലാസം"
 
 #: src/gui/ConfigurationDialog.cpp:604
 msgid "Author"
@@ -332,12 +336,12 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:714
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "ലഭ്യമായ നക്ഷത്ര കാറ്റലോഗുകള്‍ ഇന്‍സ്റ്റാള്‍ ചെയ്തിരിക്കുന്നു."
 
 #: src/gui/ConfigurationDialog.cpp:719
 #, qt-format
 msgid "Get catalog %1 of %2"
-msgstr "%2 ലെ %1 കാറ്റലോഗ്ഗ് എടുക്കുക"
+msgstr "കാറ്റലോഗ് ലഭ്യമാക്കുന്നു %1 of %2"
 
 #: src/gui/ConfigurationDialog.cpp:726
 #, qt-format
@@ -355,6 +359,9 @@ msgid ""
 "Star count: %2 Million\n"
 "Magnitude range: %3 - %4"
 msgstr ""
+"ഡൌണ്‍ലോഡ്  വലുപ്പം: %1MB\n"
+"നക്ഷത്രങ്ങളുടെ എണ്ണം: %2 മില്യണ്‍\n"
+"കാന്തിമാന പരിധി: %3 - %4"
 
 #: src/gui/ConfigurationDialog.cpp:776 src/gui/ConfigurationDialog.cpp:812
 #, qt-format
@@ -429,7 +436,7 @@ msgstr "തെരഞ്ഞെടുപ്പു് ഒഴിവാക്കു�
 
 #: src/gui/HelpDialog.cpp:71
 msgid "When a Script is Running"
-msgstr ""
+msgstr "ഒരു സ്ക്രിപ്റ്റ് പ്രവര്‍ത്തിച്ചു കൊണ്ടിരിക്കുമ്പോള്‍"
 
 #: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:143
 msgid "Slow down the script execution rate"
@@ -478,7 +485,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:178
 msgid "The Stellarium User Guide"
-msgstr "സ്റ്റെല്ലേറിയ ഉപയോഗ സഹായി"
+msgstr "സ്റ്റെല്ലേറിയം ഉപയോഗ സഹായി"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:182
@@ -522,12 +529,12 @@ msgstr "മറ്റുള്ളവ"
 
 #: src/gui/HelpDialog.cpp:298
 msgid "Developers"
-msgstr ""
+msgstr "നിര്‍മാതാക്കള്‍"
 
 #: src/gui/HelpDialog.cpp:299
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
-msgstr ""
+msgstr "പ്രൊജക്റ്റ്‌ കോ-ഓര്‍ഡിനേറ്റര്‍ & പ്രധാന നിര്‍മാതാവ് : %1"
 
 #: src/gui/HelpDialog.cpp:300
 #, qt-format
@@ -584,12 +591,12 @@ msgstr "നക്ഷത്രരാശിയുടെ അതിരുകള്�
 #: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Azimuthal grid"
-msgstr ""
+msgstr "അഗ്രകോടി വരകള്‍"
 
 #: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1119
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Equatorial grid"
-msgstr ""
+msgstr "ഭൂമധ്യരേഖാപരമായ വരകള്‍"
 
 #: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1120
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
@@ -598,11 +605,11 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1122
 msgid "Galactic grid"
-msgstr ""
+msgstr "ആകാശഗംഗ വരകള്‍"
 
 #: src/gui/StelGui.cpp:108
 msgid "Galactic plane"
-msgstr ""
+msgstr "ആകാശഗംഗ  തലം"
 
 #: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1126
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
@@ -612,16 +619,16 @@ msgstr "ക്രാന്തിവൃത്ത രേഖ"
 #: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1123
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equator line"
-msgstr ""
+msgstr "ഭൂമധ്യരേഖ"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1124
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Meridian line"
-msgstr ""
+msgstr "ഉച്ചസ്ഥാന രേഖ"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1125
 msgid "Horizon line"
-msgstr ""
+msgstr "ചക്രവാളം രേഖ"
 
 #: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1128
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:287
@@ -646,7 +653,7 @@ msgstr "നെബുലകള്‍"
 
 #: src/gui/StelGui.cpp:120
 msgid "Nebulas background images"
-msgstr ""
+msgstr "നെബുലകളുടെ ചിത്രങ്ങള്‍"
 
 #: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
@@ -656,12 +663,12 @@ msgstr "നക്ഷത്രങ്ങള്‍"
 #: src/gui/StelGui.cpp:122
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Planet labels"
-msgstr ""
+msgstr "ഗ്രഹ ലേബലുകള്‍"
 
 #: src/gui/StelGui.cpp:123
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
 msgid "Planet orbits"
-msgstr ""
+msgstr "ഗ്രഹ പ്രദക്ഷിണപഥം"
 
 #: src/gui/StelGui.cpp:124
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:300
@@ -702,7 +709,7 @@ msgstr "തെരച്ചില്‍ ജാലകം"
 
 #: src/gui/StelGui.cpp:135
 msgid "Sky and viewing options window"
-msgstr "ആകാശ-ദൃശ്യ ക്രമീകരണ ജാലകം [F4]"
+msgstr "ആകാശ-ദൃശ്യ ക്രമീകരണ ജാലകം"
 
 #: src/gui/StelGui.cpp:136
 msgid "Date/time window"
@@ -735,11 +742,11 @@ msgstr "സമയവേഗത സാധാരണ നിലയിലാക്ക�
 
 #: src/gui/StelGui.cpp:149
 msgid "Decrease time speed (a little)"
-msgstr ""
+msgstr "സമയവേഗത കുറയ്ക്കുക (ചെറുതായി)"
 
 #: src/gui/StelGui.cpp:150
 msgid "Increase time speed (a little)"
-msgstr ""
+msgstr "സമയവേഗത കൂട്ടുക (ചെറുതായി)"
 
 #: src/gui/StelGui.cpp:151
 msgid "Set time rate to zero"
