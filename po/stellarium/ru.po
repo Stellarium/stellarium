@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-13 00:59+0700\n"
-"PO-Revision-Date: 2011-12-12 20:00+0000\n"
+"PO-Revision-Date: 2011-12-13 17:27+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-13 04:50+0000\n"
-"X-Generator: Launchpad (build 14458)\n"
+"X-Launchpad-Export-Date: 2011-12-14 04:44+0000\n"
+"X-Generator: Launchpad (build 14487)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -2302,7 +2302,7 @@ msgstr "ФР окуляра: %1 мм"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:530
 #, qt-format
 msgid "Ocular aFOV: %1"
-msgstr "ПЗ окуляра: %1"
+msgstr "Видимое ПЗ окуляра: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1480 plugins/Oculars/src/Oculars.cpp:1542
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
@@ -2412,7 +2412,7 @@ msgstr "Повернуть рамку сенсора на 15 градусов п
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
 msgid "Effective focal length of the ocular"
-msgstr "Эффективное фокусное расстояние окуляра"
+msgstr "Эффективный фокус окуляра"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:533
 msgid "Apparent field of view of the ocular"
@@ -2445,7 +2445,7 @@ msgstr "Включить, только если объект выбран"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:874
 msgid "Scale image circle"
-msgstr "Масштабировать изображению по кругу"
+msgstr "Масштабировать изображение по кругу"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:875
 msgid "Key mappings"
@@ -2493,12 +2493,12 @@ msgstr "Название:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:886
 msgid "aFOV:"
-msgstr "вПЗ:"
+msgstr "Видимое поле зрения:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:887
 #: plugins/Oculars/src/ui_ocularDialog.h:906
 msgid "Focal length:"
-msgstr "Фокусное расстояние:"
+msgstr "Фокус:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Field stop:"
@@ -2506,7 +2506,7 @@ msgstr "Полевая диафрагма:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Binoculars"
-msgstr "Бинокли"
+msgstr "Бинокль"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:891
 #: plugins/Oculars/src/ui_ocularDialog.h:901
@@ -2515,11 +2515,11 @@ msgstr "Сенсоры"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:895
 msgid "Resolution x (pixels):"
-msgstr "Разрешение по x (пикселы):"
+msgstr "Разрешение по x (пкс):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Resolution y (pixels):"
-msgstr "Разрешение по y (пикселы):"
+msgstr "Разрешение по y (пкс):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:897
 msgid "Chip width (mm):"
@@ -2829,17 +2829,17 @@ msgstr "Обновляется..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:271
 msgid "Next update: < 1 minute"
-msgstr "Следующее обновление: менее минуты"
+msgstr "Следующее обновление через: менее минуты"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:273
 #, qt-format
 msgid "Next update: %1 minutes"
-msgstr "Следующее обновление: %1 минут"
+msgstr "Следующее обновление через: %1 м."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:275
 #, qt-format
 msgid "Next update: %1 hours"
-msgstr "Следующее обновление: %1 часов"
+msgstr "Следующее обновление через: %1 ч."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
 #: plugins/Satellites/src/ui_satellitesDialog.h:603
@@ -2906,7 +2906,7 @@ msgstr "Названия"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:605
 msgid "Label font size (pixels):"
-msgstr "Размер шрифта названий ИСЗ (в пикселях):"
+msgstr "Размер шрифта названий ИСЗ (пкс):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:606
 msgid "Orbit lines"
@@ -3306,6 +3306,8 @@ msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
+"При запуске Stellarium'а попытаться автоматически установить соединение с "
+"телескопом или запустить его"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Start/connect at startup"
@@ -3360,7 +3362,7 @@ msgstr "Размер круга:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:514
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
-msgstr ""
+msgstr "До десяти десятичных значений в градусах дуги, разделенных запятыми"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "OK"
@@ -3550,7 +3552,7 @@ msgstr "Название часового пояса:"
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "Offset from UTC (hours):"
-msgstr ""
+msgstr "Смещение от UTC (часы):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 msgid "Daylight saving time (summer time)"
@@ -3558,11 +3560,11 @@ msgstr "Летнее время"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
 msgid "DST timezone name:"
-msgstr ""
+msgstr "Название летнего времени часового пояса:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
 msgid "DST offset from UTC (hours):"
-msgstr ""
+msgstr "Смещение летнего времени от UTC (часы):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
 msgid "Daylight saving time start"
@@ -3576,7 +3578,7 @@ msgstr "День:"
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
 msgid "Time of change:"
-msgstr ""
+msgstr "Время перемены:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
@@ -3598,6 +3600,10 @@ msgid ""
 "This behaviour can be changed by changing Stellarium's global time zone "
 "settings."
 msgstr ""
+"По умолчанию Stellarium показывает время, которое интерпретируется как "
+"местное в часовом поясе системы, а не в часовом поясе используемого "
+"географического пункта. Это поведение Stellarium'а можно изменить путём "
+"полного изменения настройки часового пояса."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "Use system settings (default)"
@@ -3622,7 +3628,7 @@ msgstr "Все изменения вступят в силу при следую
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:407
 msgid "Display formats"
-msgstr "Форматы отображения"
+msgstr "Форматы"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid ""
@@ -3690,7 +3696,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:165
 msgid "Startup date/time preset"
-msgstr ""
+msgstr "Предустановленное время и дата"
 
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
@@ -3766,7 +3772,7 @@ msgstr "Частота названий туманностей:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Zoom duration:"
-msgstr ""
+msgstr "Увеличить продолжительность:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Cursor timeout:"
@@ -3840,7 +3846,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
 #, qt-format
 msgid "Query the MPC's %1:"
-msgstr ""
+msgstr "Запрос у сервиса %1:"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
 msgid "Only one result will be returned if the query is successful."
@@ -3881,6 +3887,11 @@ msgid ""
 "objects, download such lists from the Internet or search the online Minor "
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
+"Данные комет и астероидов можно импортировать из файлов, приведенных к "
+"форматам экспорта данных Центра малых планет МАС (%1). Вы можете "
+"импортировать файлы со списками объектов, загружать списки таких объектов из "
+"интернета или искать их с помощью Службы эфемерид малых планеты и комет "
+"(MPES)."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
 msgid "Solar System Editor plug-in"
@@ -3955,6 +3966,12 @@ msgid ""
 "Solar System configuration.<br/>Note that adding a large number of objects "
 "may cause Stellarium to run slowly."
 msgstr ""
+"Отметьте объекты, которые вы хотите импортировать. <i>Курсивом</i> "
+"перечислены названия, совпадающие с названиями уже загруженных объектов. "
+"<b>Полужирным шрифтом</b> перечислены названия объектов, совпадающих с "
+"названиями объектов из изначального файла настроек тел Солнечной системы. "
+"<br/> Заметим, что добавление большого числа объектов может привести к "
+"замедлению работы Stellarium'а."
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Overwrite existing objects"
@@ -3999,6 +4016,9 @@ msgid ""
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
 msgstr ""
+"Этот плагин использует специальный файл настроек тел Солнечной системы. Если "
+"что-то идёт не так и Stellarium аварийно завершает работу и/или не "
+"запускается, то можно вручную удалить этот файл:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid ""
@@ -4011,13 +4031,15 @@ msgstr "Установки по умолчанию"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Copy/replace the Solar System file"
-msgstr "Скопировать/заменить файл Солнечной системы"
+msgstr "Скопировать/заменить файл настроек тел Солнечной системы"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
+"Можно создать резервную копию вашего файла настроек тел Солнечной системы в "
+"удобном для вас месте или заменить его копией."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Copy the Solar System file..."
