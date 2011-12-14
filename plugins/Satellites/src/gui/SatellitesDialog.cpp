@@ -25,7 +25,6 @@
 #include <QFileDialog>
 
 #include "StelApp.hpp"
-#include <plugin_config.h>
 #include "ui_satellitesDialog.h"
 #include "SatellitesDialog.hpp"
 #include "Satellites.hpp"
@@ -111,7 +110,10 @@ void SatellitesDialog::createDialogContent()
 
 
 	// Satellites tab
-	connect(ui->satellitesList, SIGNAL(currentTextChanged(const QString&)), this, SLOT(selectedSatelliteChanged(const QString&)));
+	connect(ui->satellitesList,
+	        SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
+	        this,
+	        SLOT(updateSelectedSatelliteInfo(QListWidgetItem*,QListWidgetItem*)));
 	connect(ui->satellitesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(satelliteDoubleClick(QListWidgetItem*)));
 	connect(ui->groupsCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(groupFilterChanged(int)));
 	connect(ui->saveSatellitesButton, SIGNAL(clicked()), this, SLOT(saveSatellites()));
@@ -135,27 +137,43 @@ void SatellitesDialog::createDialogContent()
 
 void SatellitesDialog::groupFilterChanged(int index)
 {
-	QStringList prevMultiSelection;
+	QVariantList prevMultiSelection;
 	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
 	{
-		prevMultiSelection << i->text();
+		prevMultiSelection << i->data(Qt::UserRole);
 	}
 
 	ui->satellitesList->clear();
-	if (ui->groupsCombo->itemData(index).toString() == "all")
-		ui->satellitesList->insertItems(0,GETSTELMODULE(Satellites)->getSatellites());
-	else if (ui->groupsCombo->itemData(index).toString() == "visible")
-		ui->satellitesList->insertItems(0,GETSTELMODULE(Satellites)->getSatellites(QString(), Satellites::Visible));
-	else if (ui->groupsCombo->itemData(index).toString() == "notvisible")
-		ui->satellitesList->insertItems(0,GETSTELMODULE(Satellites)->getSatellites(QString(), Satellites::NotVisible));
+	QHash<QString,QString> satellites;
+	Satellites* plugin = GETSTELMODULE(Satellites);
+	QString selectedGroup = ui->groupsCombo->itemData(index).toString();
+	if (selectedGroup == "all")
+		satellites = plugin->getSatellites();
+	else if (selectedGroup == "visible")
+		satellites = plugin->getSatellites(QString(), Satellites::Visible);
+	else if (selectedGroup == "notvisible")
+		satellites = plugin->getSatellites(QString(), Satellites::NotVisible);
 	else
-		ui->satellitesList->insertItems(0,GETSTELMODULE(Satellites)->getSatellites(ui->groupsCombo->currentText()));
+		satellites = plugin->getSatellites(ui->groupsCombo->currentText());
+	
+	ui->satellitesList->setSortingEnabled(false);
+	QHashIterator<QString,QString> i(satellites);
+	while (i.hasNext())
+	{
+		i.next();
+		QListWidgetItem* item = new QListWidgetItem(i.value());
+		item->setData(Qt::UserRole, i.key());
+		ui->satellitesList->addItem(item);
+	}
+	ui->satellitesList->sortItems();
 
 	// If any previously selected items are still in the list after the update, select them,
 	QListWidgetItem* item;
 	for (int i=0; (item = ui->satellitesList->item(i))!=NULL; i++)
 	{
-		item->setSelected(prevMultiSelection.contains(item->text()));
+		QVariant id = item->data(Qt::UserRole);
+		if (prevMultiSelection.contains(id))
+			item->setSelected(true);
 	}
 
 	QList<QListWidgetItem*> selectedItems = ui->satellitesList->selectedItems();
@@ -172,10 +190,15 @@ void SatellitesDialog::groupFilterChanged(int index)
 	}
 }
 
-void SatellitesDialog::selectedSatelliteChanged(const QString& id)
+void SatellitesDialog::updateSelectedSatelliteInfo(QListWidgetItem* curItem,
+                                                   QListWidgetItem* prevItem)
 {
-	//qDebug() << "SatellitesDialog::selectedSatelliteChanged for " << id;
-	if (id.isEmpty() || id=="")
+	Q_UNUSED(prevItem);
+	if (!curItem)
+		return;
+	
+	QString id = curItem->data(Qt::UserRole).toString();
+	if (id.isEmpty())
 		return;
 
 	satelliteModified = false;
@@ -185,15 +208,16 @@ void SatellitesDialog::selectedSatelliteChanged(const QString& id)
 		return;
 
 	disconnectSatelliteGuiForm();
-	ui->idLineEdit->setText(sat->designation);
+	ui->idLineEdit->setText(sat->name);
+	ui->lineEditCatalogNumber->setText(sat->id);
 	ui->descriptionTextEdit->setText(sat->description);
 	ui->groupsTextEdit->setText(sat->groupIDs.join(", "));
-	ui->tleTextEdit->setText(QString("%1\n%2").arg(sat->tleElements.first.data()).arg(sat->tleElements.second.data()));
+	QString tleStr = QString("%1\n%2").arg(sat->tleElements.first.data()).arg(sat->tleElements.second.data());
+	ui->tleTextEdit->setText(tleStr);
 	ui->visibleCheckbox->setChecked(sat->visible);
 	ui->orbitCheckbox->setChecked(sat->orbitVisible);
 	ui->commsButton->setEnabled(sat->comms.count()>0);
 	connectSatelliteGuiForm();
-
 }
 
 void SatellitesDialog::saveSatellites(void)
@@ -207,7 +231,7 @@ void SatellitesDialog::setAboutHtml(void)
 	QString oldJsonFileName("<tt>satellites.json.old</tt>");
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Stellarium Satellites Plugin") + "</h2><table width=\"90%\">";
-	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + "</strong></td><td>" + PLUGIN_VERSION + "</td></td>";
+	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + "</strong></td><td>" + SATELLITES_PLUGIN_VERSION + "</td></td>";
 	html += "<tr><td rowspan=2><strong>" + q_("Authors") + "</strong></td><td>Matthew Gates &lt;matthew@porpoisehead.net&gt;</td></td>";
 	html += "<tr><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></tr></table>";
 
@@ -420,7 +444,8 @@ void SatellitesDialog::visibleCheckChanged(int state)
 {
 	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
 	{
-		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(i->text());
+		QString id = i->data(Qt::UserRole).toString();
+		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(id);
 		sat->visible = (state==Qt::Checked);
 	}
 	groupFilterChanged(ui->groupsCombo->currentIndex());
@@ -430,7 +455,8 @@ void SatellitesDialog::orbitCheckChanged(int state)
 {
 	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
 	{
-		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(i->text());
+		QString id = i->data(Qt::UserRole).toString();
+		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(id);
 		sat->orbitVisible = (state==Qt::Checked);
 	}
 	groupFilterChanged(ui->groupsCombo->currentIndex());
@@ -438,8 +464,10 @@ void SatellitesDialog::orbitCheckChanged(int state)
 
 void SatellitesDialog::satelliteDoubleClick(QListWidgetItem* item)
 {
-	qDebug() << "SatellitesDialog::satelliteDoubleClick for " << item->text();
-	GETSTELMODULE(Satellites)->getByID(item->text())->visible = true;
+	//qDebug() << "SatellitesDialog::satelliteDoubleClick for " << item->text();
+	QString id = item->data(Qt::UserRole).toString();
+	GETSTELMODULE(Satellites)->getByID(id)->visible = true;
+	//TODO: We need to find a way to deal with duplicates... --BM
 	if (StelApp::getInstance().getStelObjectMgr().findAndSelect(item->text()))
 	{
 		GETSTELMODULE(StelMovementMgr)->autoZoomIn();

@@ -52,16 +52,22 @@ int Satellite::orbitLineSegmentDuration = 20;
 bool Satellite::orbitLinesFlag = true;
 
 
-Satellite::Satellite(const QVariantMap& map)
+Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 		: initialized(false), visible(true), hintColor(0.0,0.0,0.0), lastUpdated(), pSatWrapper(NULL)
 {
 	// return initialized if the mandatory fields are not present
-	if (!map.contains("designation") || !map.contains("tle1") || !map.contains("tle2"))
+	if (identifier.isEmpty())
+		return;
+	if (!map.contains("name") || !map.contains("tle1") || !map.contains("tle2"))
 		return;
 
 	font.setPixelSize(16);
 
-	designation  = map.value("designation").toString();
+	id = identifier;
+	name  = map.value("name").toString();
+	if (name.isEmpty())
+		return;
+	
 	if (map.contains("description")) description = map.value("description").toString();
 	if (map.contains("visible")) visible = map.value("visible").toBool();
 	if (map.contains("orbitVisible")) orbitVisible = map.value("orbitVisible").toBool();
@@ -124,11 +130,15 @@ Satellite::Satellite(const QVariantMap& map)
 		}
 	}
 
-	setNewTleElements(map.value("tle1").toString(), map.value("tle2").toString());
+	QString line1 = map.value("tle1").toString();
+	QString line2 = map.value("tle2").toString();
+	setNewTleElements(line1, line2);
+	internationalDesignator = extractInternationalDesignator(line1);
 
 	if (map.contains("lastUpdated"))
 	{
-		lastUpdated = map.value("lastUpdated").toDateTime();
+		lastUpdated = QDateTime::fromString(map.value("lastUpdated").toString(),
+		                                    Qt::ISODate);
 	}
 	initialized = true;
 }
@@ -148,7 +158,7 @@ double Satellite::roundToDp(float n, int dp)
 QVariantMap Satellite::getMap(void)
 {
 	QVariantMap map;
-	map["designation"] = designation;
+	map["name"] = name;
 	map["tle1"] = tleElements.first.data();
 	map["tle2"] = tleElements.second.data();
 
@@ -181,7 +191,8 @@ QVariantMap Satellite::getMap(void)
 
 	if (!lastUpdated.isNull())
 	{
-		map["lastUpdated"] = lastUpdated;
+		// A raw QDateTime is not a recognised JSON data type. --BM
+		map["lastUpdated"] = lastUpdated.toString(Qt::ISODate);
 	}
 
 	return map;
@@ -199,9 +210,22 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	
 	if (flags & Name)
 	{
-		oss << "<h2>" << designation << "</h2><br/>";
-		if (description!="")
+		oss << "<h2>" << name << "</h2>";
+		if (!description.isEmpty())
 			oss << description << "<br/>";
+	}
+	
+	if (flags & CatalogNumber)
+	{
+		QString catalogNumbers;
+		if (internationalDesignator.isEmpty())
+			catalogNumbers = QString("Catalog #: %1")
+			                 .arg(id);
+		else
+			catalogNumbers = QString("Catalog #: %1; International Designator: %2")
+			                 .arg(id)
+			                 .arg(internationalDesignator);
+		oss << catalogNumbers << "<br/><br/>";
 	}
 	
 	// Ra/Dec etc.
@@ -209,7 +233,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	
 	if (flags & Extra1)
 	{
-		oss << "<p>";//TODO: I think that this causes too large a margin --BM.
+		oss << "<br/>";
 		// TRANSLATORS: Slant range: distance between the satellite and the observer
 		oss << QString(q_("Range (km): %1")).arg(range, 5, 'f', 2);
 		oss << "<br/>";
@@ -225,7 +249,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		       .arg(QChar(0x00B0))
 		       .arg(latLongSubPointPosition[1], 5, 'f', 3)
 		       .arg(QChar(0x00B0));
-		oss << "</p>";
+		oss << "<br/><br/>";
 		
 		//TODO: This one can be done better
 		const char* xyz = "<b>X:</b> %1, <b>Y:</b> %2, <b>Z:</b> %3";
@@ -281,15 +305,15 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			else
 				sign='+';
 
-			oss << "<p>";
+			oss << "<br/>";
 			if (!c.modulation.isEmpty() && c.modulation != "") oss << "  " << c.modulation;
 			if (!c.description.isEmpty() && c.description != "") oss << "  " << c.description;
-			if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << "<br>";
+			if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << "<br/>";
 			oss << QString(q_("%1 MHz (%2%3 kHz)"))
 			       .arg(c.frequency, 8, 'f', 5)
 			       .arg(sign)
 			       .arg(ddop, 6, 'f', 3);
-			oss << "</p>";
+			oss << "<br/>";
 		}
 	}
 
@@ -326,7 +350,7 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 	tleElements.second.clear();
 	tleElements.second.append(tle2);
 
-	pSatWrapper = new gSatWrapper(designation, tle1, tle2);
+	pSatWrapper = new gSatWrapper(id, tle1, tle2);
 	orbitPoints.clear();
 }
 
@@ -365,6 +389,34 @@ void Satellite::recalculateOrbitLines(void)
 	orbitPoints.clear();
 }
 
+QString Satellite::extractInternationalDesignator(const QString& tle1)
+{
+	QString result;
+	if (tle1.isEmpty())
+		return result;
+	
+	// The designator is encoded as the 3rd group on the first line
+	QString rawString = tle1.split(' ').at(2);
+	if (rawString.isEmpty())
+		return result;
+	
+	//TODO: Use a regular expression?
+	bool ok;
+	int year = rawString.left(2).toInt(&ok);
+	if (!ok)
+		return result;
+	
+	// Y2K bug :) I wonder what NORAD will do in 2057. :)
+	if (year < 57)
+		year += 2000;
+	else
+		year += 1900;
+	
+	result = QString::number(year) + "-" + rawString.right(4);
+	return result;
+}
+
+
 void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 {
 	XYZ = core->altAzToJ2000(elAzPosition);
@@ -377,7 +429,7 @@ void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 	{
 		if (Satellite::showLabels)
 		{
-			painter.drawText(xy[0], xy[1], designation, 0, 10, 10, false);
+			painter.drawText(xy[0], xy[1], name, 0, 10, 10, false);
 			Satellite::hintTexture->bind();
 		}
 		painter.drawSprite2dMode(xy[0], xy[1], 11);

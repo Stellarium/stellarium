@@ -97,6 +97,15 @@ class Translations
 		N_("Laomedeia");
 		N_("Neso");
 		N_("Solar System Observer");
+        //TNO's that are in the default ssystem.ini
+        // TRANSLATORS: TNO/Asteroid (90377) Sedna
+        N_("Sedna");
+        // TRANSLATORS: TNO/Asteroid (50000) Quaoar
+        N_("Quaoar");
+        // TRANSLATORS: TNO/Asteroid (90482) Orcus
+        N_("Orcus");
+        // TRANSLATORS: TNO/Asteroid (136108) Haumea
+        N_("Haumea");
 		//Asteroids that are not in the default ssystem.ini
 		// TRANSLATORS: Asteroid (5) Astraea
 		N_("Astraea");
