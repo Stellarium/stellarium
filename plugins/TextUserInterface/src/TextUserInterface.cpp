@@ -331,16 +331,32 @@ void TextUserInterface::init()
 	                                 gridLinesMgr,
 	                                 SLOT(setColorEclipticLine(Vec3f)),
 	                                 gridLinesMgr->getColorEclipticLine(), 
-	                                 m5, m5_14);
+					 m5, m5_14);
 	NebulaMgr* nebulaMgr = GETSTELMODULE(NebulaMgr);
 	TuiNode* m5_16 = new TuiNodeColor(N_("Nebula names"),
 	                                 nebulaMgr, SLOT(setLabelsColor(Vec3f)),
 	                                 nebulaMgr->getLabelsColor(), 
-	                                 m5, m5_15);
+					 m5, m5_15);
 	TuiNode* m5_17 = new TuiNodeColor(N_("Nebula hints"),
 	                                  nebulaMgr, SLOT(setCirclesColor(Vec3f)),
 	                                  nebulaMgr->getCirclesColor(), 
-	                                  m5, m5_16);
+					  m5, m5_16);
+	TuiNode* m5_18 = new TuiNodeColor(N_("Horizon line"),
+					 gridLinesMgr,
+					 SLOT(setColorHorizonLine(Vec3f)),
+					 gridLinesMgr->getColorHorizonLine(),
+					 m5, m5_17);
+	TuiNode* m5_19 = new TuiNodeColor(N_("Galactic grid"),
+					 gridLinesMgr,
+					 SLOT(setColorGalacticGrid(Vec3f)),
+					 gridLinesMgr->getColorGalacticGrid(),
+					 m5, m5_18);
+	TuiNode* m5_20 = new TuiNodeColor(N_("Galactic plane line"),
+					 gridLinesMgr,
+					 SLOT(setColorGalacticPlaneLine(Vec3f)),
+					 gridLinesMgr->getColorGalacticPlaneLine(),
+					 m5, m5_19);
+
 	m5_1->setNextNode(m5_2);
 	m5_2->setNextNode(m5_3);
 	m5_3->setNextNode(m5_4);
@@ -357,7 +373,10 @@ void TextUserInterface::init()
 	m5_14->setNextNode(m5_15);
 	m5_15->setNextNode(m5_16);
 	m5_16->setNextNode(m5_17);
-	m5_17->setNextNode(m5_1);
+	m5_17->setNextNode(m5_18);
+	m5_18->setNextNode(m5_19);
+	m5_19->setNextNode(m5_20);
+	m5_20->setNextNode(m5_1);
 	m5_1->loopToTheLast();
 	m5->setChildNode(m5_1);
 
