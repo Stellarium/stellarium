@@ -1621,6 +1621,7 @@ void Oculars::unzoomOcular()
 	gridManager->setFlagEquatorLine(flagEquatorLine);
 	gridManager->setFlagEclipticLine(flagEclipticLine);
 	gridManager->setFlagMeridianLine(flagMeridianLine);
+	gridManager->setFlagHorizonLine(flagHorizonLine);
 	gridManager->setFlagGalacticPlaneLine(flagGalacticPlaneLine);
 	movementManager->setFlagTracking(false);
 	movementManager->setFlagEnableZoomKeys(true);
@@ -1652,6 +1653,7 @@ void Oculars::zoom(bool zoomedIn)
 			flagEquatorLine = gridManager->getFlagEquatorLine();
 			flagEclipticLine = gridManager->getFlagEclipticLine();
 			flagMeridianLine = gridManager->getFlagMeridianLine();
+			flagHorizonLine = gridManager->getFlagHorizonLine();
 			flagGalacticPlaneLine = gridManager->getFlagGalacticPlaneLine();
 		}
 
@@ -1677,6 +1679,7 @@ void Oculars::zoomOcular()
 	gridManager->setFlagEquatorLine(false);
 	gridManager->setFlagEclipticLine(false);
 	gridManager->setFlagMeridianLine(false);
+	gridManager->setFlagHorizonLine(false);
 	gridManager->setFlagGalacticPlaneLine(false);
 	
 	movementManager->setFlagTracking(true);
