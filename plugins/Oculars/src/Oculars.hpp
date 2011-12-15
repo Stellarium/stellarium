@@ -187,6 +187,7 @@ private:
 	bool flagEquatorLine;		//!< Flag to track if EquatorLine was displayed at activation.
 	bool flagEclipticLine;		//!< Flag to track if EclipticLine was displayed at activation.
 	bool flagMeridianLine;		//!< Flag to track if MeridianLine was displayed at activation.
+	bool flagHorizonLine;		//!< Flag to track if HorizonLine was displayed at activation.
 	bool flagGalacticPlaneLine;	//!< Flag to track if GalacticPlaneLine was displayed at activation.
 
 	double ccdRotationAngle;	//!< The angle to rotate the CCD bounding box. */
