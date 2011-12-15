@@ -1615,11 +1615,13 @@ void Oculars::unzoomOcular()
 	GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
 
 	gridManager->setFlagAzimuthalGrid(flagAzimuthalGrid);
+	gridManager->setFlagGalacticGrid(flagGalacticGrid);
 	gridManager->setFlagEquatorGrid(flagEquatorGrid);
 	gridManager->setFlagEquatorJ2000Grid(flagEquatorJ2000Grid);
 	gridManager->setFlagEquatorLine(flagEquatorLine);
 	gridManager->setFlagEclipticLine(flagEclipticLine);
 	gridManager->setFlagMeridianLine(flagMeridianLine);
+	gridManager->setFlagGalacticPlaneLine(flagGalacticPlaneLine);
 	movementManager->setFlagTracking(false);
 	movementManager->setFlagEnableZoomKeys(true);
 	movementManager->setFlagEnableMouseNavigation(true);
@@ -1644,11 +1646,13 @@ void Oculars::zoom(bool zoomedIn)
 			GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
 			// Current state
 			flagAzimuthalGrid = gridManager->getFlagAzimuthalGrid();
+			flagGalacticGrid = gridManager->getFlagGalacticGrid();
 			flagEquatorGrid = gridManager->getFlagEquatorGrid();
 			flagEquatorJ2000Grid = gridManager->getFlagEquatorJ2000Grid();
 			flagEquatorLine = gridManager->getFlagEquatorLine();
 			flagEclipticLine = gridManager->getFlagEclipticLine();
 			flagMeridianLine = gridManager->getFlagMeridianLine();
+			flagGalacticPlaneLine = gridManager->getFlagGalacticPlaneLine();
 		}
 
 		// set new state
@@ -1667,11 +1671,13 @@ void Oculars::zoomOcular()
 		(GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
 
 	gridManager->setFlagAzimuthalGrid(false);
+	gridManager->setFlagGalacticGrid(false);
 	gridManager->setFlagEquatorGrid(false);
 	gridManager->setFlagEquatorJ2000Grid(false);
 	gridManager->setFlagEquatorLine(false);
 	gridManager->setFlagEclipticLine(false);
 	gridManager->setFlagMeridianLine(false);
+	gridManager->setFlagGalacticPlaneLine(false);
 	
 	movementManager->setFlagTracking(true);
 	movementManager->setFlagEnableZoomKeys(false);
