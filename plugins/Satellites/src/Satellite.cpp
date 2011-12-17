@@ -378,6 +378,14 @@ void Satellite::update(double)
 			visible = false;
 			orbitVisible = false;
 		}
+		if (epochTime<=2436114.95833)
+		{
+			// Remove satellites before begin space era - 4 Oct 1957
+			qWarning() << "Satellite before begin space era has been removed:" << name;
+			initialized = false;
+			visible = false;
+			orbitVisible = false;
+		}
 
 		elAzPosition             = pSatWrapper->getAltAz();
 		elAzPosition.normalize();
