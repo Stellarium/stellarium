@@ -463,8 +463,11 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("video/fullscreen", StelMainWindow::getInstance().getFullScreen());
 	if (!StelMainWindow::getInstance().getFullScreen())
 	{
-		conf->setValue("video/screen_w", StelMainWindow::getInstance().size().width());
-		conf->setValue("video/screen_h", StelMainWindow::getInstance().size().height());
+		StelMainWindow& mainWindow = StelMainWindow::getInstance();
+		conf->setValue("video/screen_w", mainWindow.size().width());
+		conf->setValue("video/screen_h", mainWindow.size().height());
+		conf->setValue("video/screen_x", mainWindow.x());
+		conf->setValue("video/screen_y", mainWindow.y());
 	}
 
 	// clear the restore defaults flag if it is set.
