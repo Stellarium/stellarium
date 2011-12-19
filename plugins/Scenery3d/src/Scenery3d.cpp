@@ -605,9 +605,9 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glLoadIdentity();
 
     //Select view position based on which planet is visible
-    if (sunPosition[2]>0) { gluLookAt (sunPosition[0], sunPosition[1], sunPosition[2], 0, 0, 0, 0, 0, 1); qWarning() << "SELECTED: sun.\n"; }
-    else if (moonPosition[2]>0) { gluLookAt (moonPosition[0], moonPosition[1], moonPosition[2], 0, 0, 0, 0, 0, 1); qWarning() << "SELECTED: moon.\n"; }
-    else { gluLookAt(venusPosition[0], venusPosition[1], venusPosition[2], 0, 0, 0, 0, 0, 1); qWarning() << "SELECTED: venus.\n"; }
+    if (sunPosition[2]>0) { gluLookAt (sunPosition[0], sunPosition[1], sunPosition[2], 0, 0, 0, 0, 0, 1); }
+    else if (moonPosition[2]>0) { gluLookAt (moonPosition[0], moonPosition[1], moonPosition[2], 0, 0, 0, 0, 0, 1); }
+    else { gluLookAt(venusPosition[0], venusPosition[1], venusPosition[2], 0, 0, 0, 0, 0, 1); }
 
     /* eyeX,eyeY,eyeZ,centerX,centerY,centerZ,upX,upY,upZ)*/
     glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix); // save light view for further render passes
