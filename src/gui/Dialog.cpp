@@ -20,6 +20,7 @@
 #include <QDebug>
 
 #include "Dialog.hpp"
+#include "StelMainWindow.hpp"
 
 void BarFrame::mousePressEvent(QMouseEvent *event)
 {
@@ -37,7 +38,24 @@ void BarFrame::mouseMoveEvent(QMouseEvent *event)
 	if (!moving) return;
 	QPoint dpos = event->pos() - mousePos;
 	QWidget* p = dynamic_cast<QWidget*>(QFrame::parent());
-	p->move(p->pos() + dpos);
+	QPoint targetPos = p->pos() + dpos;
+	
+	// Prevent the title bar from being dragged to an unreachable position.
+	StelMainWindow& mainWindow = StelMainWindow::getInstance();
+	int leftBoundX = 10 - width();
+	int rightBoundX = mainWindow.width() - 10;
+	if (targetPos.x() < leftBoundX)
+		targetPos.setX(leftBoundX);
+	else if (targetPos.x() > rightBoundX)
+		targetPos.setX(rightBoundX);
+	
+	int lowerBoundY = mainWindow.height() - height();
+	if (targetPos.y() < 0)
+		targetPos.setY(0);
+	else if (targetPos.y() > lowerBoundY)
+		targetPos.setY(lowerBoundY);
+	
+	p->move(targetPos);
 }
 
 void ResizeFrame::mouseMoveEvent(QMouseEvent *event)
