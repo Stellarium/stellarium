@@ -65,6 +65,8 @@ public:
     void drawCoordinatesText(StelCore* core);
     //! Draw scenery, called by Scenery3dMgr.
     void draw(StelCore* core);
+    //! Initializes shadow mapping
+    void initShadowMapping();
 
     bool getShadowsEnabled(void) { return shadowsEnabled; }
     void setShadowsEnabled(bool shadowsEnabled) { this->shadowsEnabled = shadowsEnabled; }
@@ -92,9 +94,6 @@ public:
 
     enum shadowCaster { None, Sun, Moon, Venus };
 
-    //Initializes Shadow Mapping
-    void initShadowMapping();
-
 private:
     double eyeLevel;
 
@@ -103,6 +102,7 @@ private:
     void generateCubeMap(StelCore* core);
     void generateCubeMap_drawScene(StelPainter& painter, float lightBrightness);
     void generateCubeMap_drawSceneWithShadows(StelPainter& painter, float lightBrightness);
+    void generateCubeMap_drawSecondPassScene(StelPainter& painter);
     void drawArrays(StelPainter& painter, bool textures=true);
     void drawFromCubeMap(StelCore* core);
 
@@ -158,20 +158,13 @@ private:
     // This will be applied to make sure that X=Grid-East, Y=Grid-North, Z=height.
     Mat4d obj2gridMatrix;
 
+    //Shadow mapping shader + per pixel lighting
     StelShader* shadowShader;
-
-    //Shadow Map FBO handle
-    GLuint shadowFbo;
-
-    //Depth texture
+    //Depth texture id
     GLuint shadowMapTexture;
+    //Shadow Map FBO handle
+    GLuint shadowFBO;
 
-    //Sets the light position
-    GLfloat LightPos[3];
-
-    Mat4f M;
-
-    void generateCubeMap_drawSecondPassScene(StelPainter& painter);
 };
 
 #endif
