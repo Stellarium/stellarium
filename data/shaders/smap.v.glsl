@@ -11,7 +11,7 @@ void main(void)
 	gl_TexCoord[0] = gl_MultiTexCoord0;
 	gl_Position = ftransform();
 
-	vec3 normal = gl_NormalMatrix * gl_Normal;
+	vec3 normal = normalize(gl_NormalMatrix * gl_Normal);
 	vec3 lightVector = normalize(gl_LightSource[0].position.xyz);
 
 	diffuse = gl_LightSource[0].diffuse * max(0.0, dot(normal, lightVector));

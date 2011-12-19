@@ -70,7 +70,7 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, StelShader* shadowShade
         cubeMap[i] = NULL;
     }
     shadowMapFbo = NULL;
-    shadowFbo = 0;
+    shadowFBO = 0;
     int sub = 20;
     double d_sub_v = 2.0 / sub;
     double d_sub_tex = 1.0 / sub;
@@ -129,7 +129,7 @@ Scenery3d::~Scenery3d()
          {
                  glDeleteTextures(1, &shadowMapTexture);
                  shadowMapTexture = 0;
-                 shadowFbo = 0;
+                 shadowFBO = 0;
                  delete shadowMapFbo;
          }
     for (int i=0; i<6; i++) {
@@ -455,37 +455,6 @@ void Scenery3d::generateCubeMap_drawScene(StelPainter& painter, float lightBrigh
     drawArrays(painter);
 }
 
-void Scenery3d::initShadowMapping()
-{
-    //Generate a FBO - has to be QGLFramebufferObject for some reason... Generating a normal one always lead to bizzare results for me
-    //But we use handle() to get the GLuint id and work as if we created a normal FBO
-    shadowFbo = (new QGLFramebufferObject(shadowmapSize, shadowmapSize, QGLFramebufferObject::Depth, GL_TEXTURE_2D))->handle();
-
-    //Bind the FBO
-    glBindFramebuffer(GL_FRAMEBUFFER, shadowFbo);
-
-    //Generate the depth map
-    glGenTextures(1, &shadowMapTexture);
-
-    //Activate unit 1 - we want to have textures + shadows working so this is crucial
-    glActiveTexture(GL_TEXTURE1);
-
-    //Bind the depth map and alter some parameters
-    glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
-    glTexImage2D (GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
-
-    //Attach to the depthmap to the FBO
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapTexture, 0);
-
-    //Done. Unbind and switch to normal texture unit
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glActiveTexture(GL_TEXTURE0);
-}
-
 //Sends the texture to the shader
 void Scenery3d::generateCubeMap_drawSecondPassScene(StelPainter& painter)
 {
@@ -504,36 +473,22 @@ void Scenery3d::generateCubeMap_drawSecondPassScene(StelPainter& painter)
     }
 }
 
-
 void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float lightBrightness)
-{
-    //Shadow mapping second pass, draw scene using the shadow shader
+{    
+//    //GZ: to achieve brighter surfaces, we use sqrt(lightBrightness):
+//    float diffBrightness=std::sqrt(lightBrightness);
 
+//    //const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
+//    const GLfloat LightAmbient[] = {lightBrightness, lightBrightness, lightBrightness, 1.0f};
+//    const GLfloat LightDiffuse[] = {diffBrightness, diffBrightness, diffBrightness, 1.0f};
 
-    //GZ: to achieve brighter surfaces, we use sqrt(lightBrightness):
-    float diffBrightness=std::sqrt(lightBrightness);
-
-    //GZ20111207: It was too bright here...
-    const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
-    //const GLfloat LightAmbient[] = {lightBrightness, lightBrightness, lightBrightness, 1.0f};
-    const GLfloat LightDiffuse[] = {diffBrightness, diffBrightness, diffBrightness, 1.0f};
-
-    //const GLfloat LightAmbientShadow[] = {0.02f, 0.02f, 0.02f, 1.0f};
-    //const GLfloat LightAmbientShadow[] = {0.12f, 0.12f, 0.12f, 1.0f};
-    //const GLfloat LightDiffuseShadow[] = {0.02f, 0.02f, 0.02f, 1.0f};
-
-    glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
-
+//    glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbientShadow);
+//    glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuseShadow);
 
     //Use the shadow mapping shader
     shadowShader->use();
 
     int location = -1;
-
-    //Set light position
-    location = shadowShader->uniformLocation("light_position");
-    shadowShader->setUniform(location, LightPos[0], LightPos[1], LightPos[2], 1.0f);
 
     //Calculate texture matrix for projection
     //This matrix takes us from eye space to the light's clip space
@@ -544,34 +499,28 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float
                          0.5f, 0.5f, 0.5f, 1.0f);	//bias from [-1, 1] to [0, 1]
     Mat4f textureMatrix = biasMatrix * lightProjectionMatrix * lightViewMatrix;
 
-// NOT SURE IF THIS IS NEEDED. I DON'T SEE VISIBLE DIFFERENCES
-//    Vec4f matrixRow[4];
-//    for (int i = 0; i < 4; i++)
-//    {
-//        matrixRow[i].set(textureMatrix[i+0], textureMatrix[i+4], textureMatrix[i+8], textureMatrix[i+12]);
-//    }
+    Vec4f matrixRow[4];
+    for (int i = 0; i < 4; i++)
+    {
+        matrixRow[i].set(textureMatrix[i+0], textureMatrix[i+4], textureMatrix[i+8], textureMatrix[i+12]);
+    }
 
-//    //Set up texture coordinate generation.
-//    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-//    glTexGenfv(GL_S, GL_EYE_PLANE, matrixRow[0]);
-//    glEnable(GL_TEXTURE_GEN_S);
+    //Set up texture coordinate generation.
+    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+    glTexGenfv(GL_S, GL_EYE_PLANE, matrixRow[0]);
+    glEnable(GL_TEXTURE_GEN_S);
 
-//    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-//    glTexGenfv(GL_T, GL_EYE_PLANE, matrixRow[1]);
-//    glEnable(GL_TEXTURE_GEN_T);
+    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+    glTexGenfv(GL_T, GL_EYE_PLANE, matrixRow[1]);
+    glEnable(GL_TEXTURE_GEN_T);
 
-//    glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-//    glTexGenfv(GL_R, GL_EYE_PLANE, matrixRow[2]);
-//    glEnable(GL_TEXTURE_GEN_R);
+    glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+    glTexGenfv(GL_R, GL_EYE_PLANE, matrixRow[2]);
+    glEnable(GL_TEXTURE_GEN_R);
 
-//    glTexGeni(GL_Q, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-//    glTexGenfv(GL_Q, GL_EYE_PLANE, matrixRow[3]);
-//    glEnable(GL_TEXTURE_GEN_Q);
-
-    //Enable colors
-    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glCullFace(GL_BACK);
+    glTexGeni(GL_Q, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+    glTexGenfv(GL_Q, GL_EYE_PLANE, matrixRow[3]);
+    glEnable(GL_TEXTURE_GEN_Q);
 
     //Bind depth map texture (again in unit 1 because of multitexturing)
     glActiveTexture(GL_TEXTURE1);
@@ -592,11 +541,10 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float
     //Draw
     generateCubeMap_drawSecondPassScene(painter);
 
-// NOT SURE IF THIS IS NEEDED. I DON'T SEE VISIBLE DIFFERENCES
-//    glDisable(GL_TEXTURE_GEN_S);
-//    glDisable(GL_TEXTURE_GEN_T);
-//    glDisable(GL_TEXTURE_GEN_R);
-//    glDisable(GL_TEXTURE_GEN_Q);
+    glDisable(GL_TEXTURE_GEN_S);
+    glDisable(GL_TEXTURE_GEN_T);
+    glDisable(GL_TEXTURE_GEN_R);
+    glDisable(GL_TEXTURE_GEN_Q);
 
     //Done. Unbind shader
     glUseProgram(0);
@@ -604,10 +552,7 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float
 
 void Scenery3d::generateShadowMap(StelCore* core)
 {
-    //Shadow mapping first pass, draw scene using the shadow shader
-
-
-    //Return if no objects in scene
+    //First Pass
     if (objModelArrays.empty()) {
         return;
     }
@@ -627,9 +572,6 @@ void Scenery3d::generateShadowMap(StelCore* core)
     Vec3d venusPosition = ssystem->searchByName("Venus")->getAltAzPosAuto(core);
     venusPosition.normalize();
 
-    //No shader needed for generating the depth map
-    glUseProgram(0);
-
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
@@ -638,9 +580,7 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glCullFace(GL_FRONT); // cull front faces
     glColorMask(0, 0, 0, 0); // disable color writes (increase performance?)
 
-    //Adjust viewport
-    glPushAttrib(GL_VIEWPORT_BIT);
-    glViewport(0, 0, shadowmapSize, shadowmapSize);
+    //Setup the matrices needed
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
     glLoadIdentity();
@@ -649,7 +589,10 @@ void Scenery3d::generateShadowMap(StelCore* core)
     const GLdouble orthoRight = 50;
     const GLdouble orthoBottom = -50;
     const GLdouble orthoTop = 50;
-    glOrtho(orthoLeft, orthoRight, orthoBottom, orthoTop, -100, 100);
+    const GLdouble f = 100;
+    const GLdouble n = -100;
+
+    glOrtho(orthoLeft, orthoRight, orthoBottom, orthoTop, n, f);
     glGetFloatv(GL_PROJECTION_MATRIX, lightProjectionMatrix); // save light projection for further render passes
 
     glMatrixMode(GL_MODELVIEW);
@@ -661,62 +604,59 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glPushMatrix();
     glLoadIdentity();
 
-    //Select view position based on which luminary is casting the strongest shadow
-    if (sunPosition[2]>0)
-    {
-        gluLookAt (sunPosition[0], sunPosition[1], sunPosition[2], 0, 0, 0, 0, 0, 1);
-        LightPos[0] = sunPosition[0];
-        LightPos[1] = sunPosition[1];
-        LightPos[2] = sunPosition[2];
-    }
-    else if (moonPosition[2]>0)
-    {
-        gluLookAt (moonPosition[0], moonPosition[1], moonPosition[2], 0, 0, 0, 0, 0, 1);
-        LightPos[0] = moonPosition[0];
-        LightPos[1] = moonPosition[1];
-        LightPos[2] = moonPosition[2];
-    }
-    else
-    {
-        gluLookAt (venusPosition[0], venusPosition[1], venusPosition[2], 0, 0, 0, 0, 0, 1);
-        LightPos[0] = venusPosition[0];
-        LightPos[1] = venusPosition[1];
-        LightPos[2] = venusPosition[2];
-    }
+    //Select view position based on which planet is visible
+    if (sunPosition[2]>0) { gluLookAt (sunPosition[0], sunPosition[1], sunPosition[2], 0, 0, 0, 0, 0, 1); qWarning() << "SELECTED: sun.\n"; }
+    else if (moonPosition[2]>0) { gluLookAt (moonPosition[0], moonPosition[1], moonPosition[2], 0, 0, 0, 0, 0, 1); qWarning() << "SELECTED: moon.\n"; }
+    else { gluLookAt(venusPosition[0], venusPosition[1], venusPosition[2], 0, 0, 0, 0, 0, 1); qWarning() << "SELECTED: venus.\n"; }
 
     /* eyeX,eyeY,eyeZ,centerX,centerY,centerZ,upX,upY,upZ)*/
     glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix); // save light view for further render passes
 
-    //Bind the FBO
-    glBindFramebuffer(GL_FRAMEBUFFER, shadowFbo);
+    //Bind FBO
+    glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
+
+    //No shader needed for generating the depth map
+    glUseProgram(0);
 
     //Activate texture unit 1 as usual
     glActiveTexture(GL_TEXTURE1);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapTexture, 0);
 
-    //Fix self-shadowing
+    //Fix selfshadowing
     glEnable(GL_POLYGON_OFFSET_FILL);
-    glPolygonOffset(1.1f, 4.0f);
+    glPolygonOffset(1.1f,4.0f);
+
+    //Set viewport
+    glPushAttrib(GL_VIEWPORT_BIT);
+    glViewport(0, 0, shadowmapSize, shadowmapSize);
+
+    //Clear everything
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     //Draw the scene
     drawArrays(painter);
 
-    //Remove polygon offset again
+    //glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
+    //glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, shadowmapSize, shadowmapSize);
+
+    //Move polygons back to normal position
     glDisable(GL_POLYGON_OFFSET_FILL);
+
+    //Unbind
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     //Switch back to normal texturing
     glActiveTexture(GL_TEXTURE0);
 
-    //Unbding
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
+    //Reset matrices
     glPopMatrix();
 
     glMatrixMode(GL_MODELVIEW);
     glPopMatrix();
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
+
+    //Reset Viewportbit
     glPopAttrib();
 
     //Reset
@@ -761,7 +701,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
     zRotateMatrix.transfo(moonPosition); //: GZ: VERIFY THE NECESSITY OF THIS
     moonPosition.normalize();
 
-    // We define the brightness zero when the sun is 8 degrees below the horizon.
+    // We define the brigthness zero when the sun is 8 degrees below the horizon.
     float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+8.*M_PI/180.));
     float sinMoonAngleRad = moonPosition[2];
     float lightBrightness;
@@ -949,51 +889,37 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
 
     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
     Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
-    //zRotateMatrix.transfo(sunPosition); // GZ 20111212: ???
+    zRotateMatrix.transfo(sunPosition);
     sunPosition.normalize();
     Vec3d moonPosition = ssystem->getMoon()->getAltAzPosAuto(core);
-    //zRotateMatrix.transfo(moonPosition); // GZ 20111212: ???
+    zRotateMatrix.transfo(moonPosition);
     moonPosition.normalize();
-    Vec3d venusPosition = ssystem->searchByName("Venus")->getAltAzPosAuto(core);
-    venusPosition.normalize();
 
-
-    // INCREASE BRIGHTNESS AT HORIZONTAL-SUN
-    // We define the brigthness zero when the sun is 12 degrees below the horizon.
-    float sinSunAngle = sin(qMin(M_PI_2, asin(sunPosition[2])+12.*M_PI/180.));
-    float sinMoonAngle = moonPosition[2];
-    float sinVenusAngle = venusPosition[2];
+    // TODO: INCREASE BRIGHTNESS AT HORIZONTAL-SUN
+    // We define the brigthness zero when the sun is 8 degrees below the horizon.
+    float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+15.*M_PI/180.));
+    float sinMoonAngleRad = moonPosition[2];
     float lightBrightness;
     shadowCaster shadows = None;
-    Vec3d illuminatorPosition;
-    if(sinSunAngle > 0 ) // sun above -15 deg?
+    if(sinSunAngleRad > 0 ) //-0.1/1.5 ) // sun above -8 deg?
     {
-        lightBrightness = 0.1 + 1.5*sinSunAngle;
+        lightBrightness = (0.1 + 1.5*(sinSunAngleRad)); //+0.1/1.5));
         if ((shadowsEnabled) && (sunPosition[2]>0.)) shadows = Sun;
-        illuminatorPosition=sunPosition;
     }
-    else if (sinMoonAngle>0)
+    else if (sinMoonAngleRad>0)
     {
-        lightBrightness = 0.1 + 0.2*sinMoonAngle; // TODO: dependence on Lunar phase and general sky brightness!
+        lightBrightness = 0.1 + 0.2*sinMoonAngleRad; // TODO: dependence on Lunar phase and general sky brightness!
         if (shadowsEnabled) shadows = Moon;
-        illuminatorPosition=moonPosition;
-    }
-    else if (sinVenusAngle>0)
-    {
-        lightBrightness = 0.1 + 0.1*sinVenusAngle; // TODO: dependence on Venus phase angle and general sky brightness!
-        if (shadowsEnabled) shadows = Venus;
-        illuminatorPosition=venusPosition;
     }
     else
     {
         lightBrightness = 0.1; // TODO: dependence on general sky brightness! Landscape had some code, commented out, to provide ambient brightness.
-        illuminatorPosition=sunPosition;
     }
 
-    //Vec3d sunOrMoon = ( (sinSunAngleRad > 0 ) ? sunPosition : moonPosition);
-    //const GLfloat LightPosition[]= {-sunOrMoon.v[0], -sunOrMoon.v[1], sunOrMoon.v[2], 0.0f} ;// signs determined by experiment
+    Vec3d sunOrMoon = ( (sinSunAngleRad > 0 ) //-0.1/1.5 )
+                        ? sunPosition : moonPosition);
+    const GLfloat LightPosition[]= {-sunOrMoon.v[0], -sunOrMoon.v[1], sunOrMoon.v[2], 0.0f} ;// signs determined by experiment
 
-    const GLfloat LightPosition[]= {-illuminatorPosition.v[0], -illuminatorPosition.v[1], illuminatorPosition.v[2], 0.0f} ;// signs determined by experiment
 
     glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -1091,6 +1017,41 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
     str = QString("groundNullHeight: %1m").arg(groundNullHeight, 7, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
     //*/
+}
+
+void Scenery3d::initShadowMapping()
+{    
+    qWarning() << "CALLED.\N";
+    //Generate FBO - has to be QGLFramebufferObject for some reason.. Generating a normal one lead to bizzare texture results
+    //We use handle() to get the id and work as if we created a normal FBO. This is because QGLFramebufferObject doesn't support attaching a texture to the FBO
+    shadowFBO = (new QGLFramebufferObject(shadowmapSize, shadowmapSize, QGLFramebufferObject::Depth, GL_TEXTURE_2D))->handle();
+
+    //Bind the FBO
+    glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
+
+    //Generate the depth map texture
+    glGenTextures(1, &shadowMapTexture);
+
+    //Activate unit 1 - we want shadows + textures so this is crucial
+    glActiveTexture(GL_TEXTURE1);
+
+    //Bind the depth map and setup the parameters
+    glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+
+    //Attach the depthmap to the Buffer
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapTexture, 0);
+
+    glDrawBuffer(GL_NONE); // essential for depth-only FBOs!!!
+    glReadBuffer(GL_NONE); // essential for depth-only FBOs!!!
+
+    //Done. Unbind and switch to nromal texture unit 0
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glActiveTexture(GL_TEXTURE0);
 }
 
 void Scenery3d::draw(StelCore* core)

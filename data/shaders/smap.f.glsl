@@ -6,7 +6,7 @@ varying vec4 SM_tex_coord;
 
 void main(void)
 {
-	vec4 texColor = texture2D(texture, gl_TexCoord[0].st);
+	vec4 texColor = texture(texture, gl_TexCoord[0].st);
 
 	vec3 tex_coords = SM_tex_coord.xyz/SM_tex_coord.w;
 	
@@ -15,7 +15,7 @@ void main(void)
 	//Shadow factor: 1.0 = light, 0.0 = shadow
     float factor = 0.0;
 	
-	if(depth >= tex_coords.z)
+	if(depth > (tex_coords.z + 0.00001))
 	{
 		//In light!
 		factor = 1.0;
