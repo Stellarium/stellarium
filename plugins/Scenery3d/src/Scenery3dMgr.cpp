@@ -144,11 +144,9 @@ void Scenery3dMgr::init()
             qWarning() << "WARNING: unable to create toolbar buttons for Scenery3d plugin: " << e.what();
     }
 
-    //qDebug() << "past exception.\n";
 
-
-    //Load shadow shader
-    shadowShader = new StelShader;
+    //Create a shadow shader and load the files
+    this->shadowShader = new StelShader();
 
     //Alex Wolf loading patch : ) Thanks!
     QStringList lst =  QStringList(StelFileMgr::findFileInAllPaths("data/shaders/",(StelFileMgr::Flags)(StelFileMgr::Directory)));
