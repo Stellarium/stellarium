@@ -462,7 +462,7 @@ void Scenery3d::generateCubeMap_drawSecondPassScene(StelPainter& painter)
           OBJ::StelModel& stelModel = objModelArrays[i];
           if (stelModel.texture.data()) {
             stelModel.texture.data()->bind();
-            int location = shadowShader->uniformLocation("texture");
+            int location = shadowShader->uniformLocation("tex");
             shadowShader->setUniform(location, 0);
           } else {
             glBindTexture(GL_TEXTURE_2D, 0);
@@ -577,7 +577,8 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glDepthFunc(GL_LESS);
     glDepthMask(GL_TRUE);
     glEnable(GL_CULL_FACE);
-    glCullFace(GL_FRONT); // cull front faces
+    //Backface culling for ESM!
+    glCullFace(GL_BACK);
     glColorMask(0, 0, 0, 0); // disable color writes (increase performance?)
 
     //Setup the matrices needed
@@ -635,9 +636,6 @@ void Scenery3d::generateShadowMap(StelCore* core)
 
     //Draw the scene
     drawArrays(painter);
-
-    //glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
-    //glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, shadowmapSize, shadowmapSize);
 
     //Move polygons back to normal position
     glDisable(GL_POLYGON_OFFSET_FILL);
@@ -1021,7 +1019,6 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
 
 void Scenery3d::initShadowMapping()
 {    
-    qWarning() << "CALLED.\N";
     //Generate FBO - has to be QGLFramebufferObject for some reason.. Generating a normal one lead to bizzare texture results
     //We use handle() to get the id and work as if we created a normal FBO. This is because QGLFramebufferObject doesn't support attaching a texture to the FBO
     shadowFBO = (new QGLFramebufferObject(shadowmapSize, shadowmapSize, QGLFramebufferObject::Depth, GL_TEXTURE_2D))->handle();
