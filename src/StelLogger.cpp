@@ -254,8 +254,9 @@ void StelLogger::init(const QString& logFilePath)
 #elif defined Q_OS_MAC
 	QProcess systemProfiler;
 	systemProfiler.start("/usr/sbin/system_profiler -detailLevel mini SPHardwareDataType SPDisplaysDataType");
-	systemProfiler.waitForFinished(500);
-	const QString systemData(systemProfiler.readAll());
+   systemProfiler.waitForStarted();
+	systemProfiler.waitForFinished();
+	const QString systemData(systemProfiler.readAllStandardOutput());
 	QStringList systemLines = systemData.split('\n', QString::SkipEmptyParts);
 	for (int i = 0; i<systemLines.size(); i++)
 	{
