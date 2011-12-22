@@ -171,7 +171,7 @@ void StelLogger::init(const QString& logFilePath)
 
 	QProcess lspci;
 	lspci.start("lspci -v", QIODevice::ReadOnly);
-	lspci.waitForFinished(200);
+	lspci.waitForFinished(300);
 	const QString pciData(lspci.readAll());
 	QStringList pciLines = pciData.split('\n', QString::SkipEmptyParts);
 	for (int i = 0; i<pciLines.size(); i++)
@@ -257,7 +257,36 @@ void StelLogger::init(const QString& logFilePath)
 		writeLog("Could not get processor info.");
 
 #elif defined Q_OS_MAC
-	writeLog("You look like a Mac user. How would you like to write some system info code here? That would help a lot.");
+	QProcess systemProfiler;
+	systemProfiler.start("/usr/sbin/system_profiler -detailLevel mini SPHardwareDataType SPDisplaysDataType");
+   systemProfiler.waitForStarted();
+	systemProfiler.waitForFinished();
+	const QString systemData(systemProfiler.readAllStandardOutput());
+	QStringList systemLines = systemData.split('\n', QString::SkipEmptyParts);
+	for (int i = 0; i<systemLines.size(); i++)
+	{
+		if(systemLines.at(i).contains("Model"))
+		{
+			writeLog(systemLines.at(i).trimmed());
+		}
+
+		if(systemLines.at(i).contains("Processor"))
+		{
+			writeLog(systemLines.at(i).trimmed());
+		}
+
+		if(systemLines.at(i).contains("Memory"))
+		{
+			writeLog(systemLines.at(i).trimmed());
+		}
+
+		if(systemLines.at(i).contains("VRAM"))
+		{
+			writeLog(systemLines.at(i).trimmed());
+		}
+
+	}
+	//writeLog("You look like a Mac user. How would you like to write some system info code here? That would help a lot.");
 
 #endif
 }
