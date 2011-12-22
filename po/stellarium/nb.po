@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-18 22:08+0700\n"
-"PO-Revision-Date: 2011-12-19 12:53+0000\n"
+"PO-Revision-Date: 2011-12-21 17:56+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-20 04:48+0000\n"
-"X-Generator: Launchpad (build 14538)\n"
+"X-Launchpad-Export-Date: 2011-12-22 05:25+0000\n"
+"X-Generator: Launchpad (build 14560)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -2507,7 +2507,7 @@ msgstr "Navn:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:886
 msgid "aFOV:"
-msgstr "Tilsynelatende synsfelt:"
+msgstr "Tilsynelat. synsfelt:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:887
 #: plugins/Oculars/src/ui_ocularDialog.h:906
@@ -2624,7 +2624,7 @@ msgstr "Høyde (km): %1"
 #: plugins/Satellites/src/Satellite.cpp:247
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
-msgstr "UnderPunkt (Breddegrad./Lengdegrad): %1%2/%3%4"
+msgstr "Underpunkt (Bredde-/Lengdegrad): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:261
@@ -2877,7 +2877,7 @@ msgstr "[ny kilde]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:433
 msgid "[all not displayed]"
-msgstr "[ikke alle vist]"
+msgstr "[alle ikke vist]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:434
 msgid "[all displayed]"
@@ -3294,7 +3294,7 @@ msgstr "Ekstern programvare eller en ekstern datamaskin"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr "Ingenting, bare en simulering (et bevegelig trådkors)"
+msgstr "Ingenting, bare simuler et (et bevegelig trådkors)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Telescope properties"
@@ -3417,7 +3417,7 @@ msgstr "Grafisk brukerflate"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Show telescope labels"
-msgstr "Vis teleskoppåskrifter"
+msgstr "Vis teleskop-påskrifter"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Show telescope reticles"
@@ -3433,7 +3433,7 @@ msgstr "Filer"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Log telescope driver messages to files"
-msgstr "Logg drivermeldinger for teleskop til filer"
+msgstr "Logg meldinger for teleskopdriver til filer"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 msgid "Use telescope server executables (override built-in drivers)"
@@ -4065,7 +4065,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Copy the Solar System file..."
-msgstr "Kopier solsystemfilen..."
+msgstr "Kopier solsystem-filen..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Replace the Solar System file..."
@@ -4073,11 +4073,11 @@ msgstr "Erstatt solsystem-filen..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Configuration file"
-msgstr "Oppsettsfil"
+msgstr "Innstillingsfil"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Add new Solar System objects"
-msgstr "Legg til nye solsystem-objekter"
+msgstr "Legg til nye solsystemobjekter"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
 msgid "Import orbital elements in MPC format..."
