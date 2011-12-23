@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-18 22:08+0700\n"
-"PO-Revision-Date: 2011-12-22 03:54+0000\n"
+"PO-Revision-Date: 2011-12-23 02:54+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-22 05:25+0000\n"
+"X-Launchpad-Export-Date: 2011-12-23 05:33+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -333,11 +333,11 @@ msgstr "Licença"
 
 #: src/gui/ConfigurationDialog.cpp:634
 msgid "Running script: "
-msgstr "Executando cenário: "
+msgstr "Executando apresentação: "
 
 #: src/gui/ConfigurationDialog.cpp:641
 msgid "Running script: [none]"
-msgstr "Executando cenário: [nenhum]"
+msgstr "Executando apresentação: [nenhuma]"
 
 #: src/gui/ConfigurationDialog.cpp:710
 msgid ""
@@ -449,19 +449,19 @@ msgstr "Limpar seleção"
 
 #: src/gui/HelpDialog.cpp:71
 msgid "When a Script is Running"
-msgstr "Quando um cenário estiver sendo executado"
+msgstr "Quando uma apresentação estiver sendo executada"
 
 #: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:143
 msgid "Slow down the script execution rate"
-msgstr "Desacelerar a taxa de execução de cenários"
+msgstr "Desacelerar a taxa de execução de apresentações"
 
 #: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:144
 msgid "Speed up the script execution rate"
-msgstr "Acelerar a taxa de execução de cenários"
+msgstr "Acelerar a taxa de execução de apresentações"
 
 #: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:145
 msgid "Set the normal script execution rate"
-msgstr "Definir a taxa normal de execução de cenários"
+msgstr "Definir a taxa normal de execução de apresentações"
 
 #. TRANSLATORS: Title of a group of key bindings in the Help window
 #: src/gui/HelpDialog.cpp:77 plugins/AngleMeasure/src/AngleMeasure.cpp:126
@@ -512,7 +512,7 @@ msgid ""
 "contributed landscapes and scripts here."
 msgstr ""
 "{The Stellarium Wiki} - Informações gerais. Aqui você também pode encontrar "
-"paisagens e cenários contribuídos por usuários."
+"paisagens e apresentações contribuídas por usuários."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:192
@@ -740,7 +740,7 @@ msgstr "Janela de localização"
 
 #: src/gui/StelGui.cpp:139
 msgid "Script console window"
-msgstr "Janela de console de cenário"
+msgstr "Janela de console de apresentação"
 
 #: src/gui/StelGui.cpp:142 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:156
@@ -2054,15 +2054,15 @@ msgstr "Cancelar"
 
 #: src/ui_configurationDialog.h:856
 msgid "Close window when script runs"
-msgstr "Fechar a janela quando o cenário for executado"
+msgstr "Fechar a janela quando a apresentação for executada"
 
 #: src/ui_configurationDialog.h:858
 msgid "Run the selected script"
-msgstr "Executa o cenário selecionado"
+msgstr "Executa a apresentação selecionada"
 
 #: src/ui_configurationDialog.h:862
 msgid "Stop a running script"
-msgstr "Para um cenário em execução"
+msgstr "Para uma apresentação em execução"
 
 #: src/ui_configurationDialog.h:866
 msgid "Load at startup"
@@ -3056,8 +3056,9 @@ msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
-"Este complemento permite ao Stellarium enviar comandos de \"viragem\" para "
-"um telescópio em uma montagem computadorizada (GoTo)."
+"<p align=\"justify\">Este complemento permite ao Stellarium enviar comandos "
+"de viragem para um telescópio em uma montagem computadorizada (um telescópio "
+"GoTo)."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:155
 #, qt-format
@@ -3840,15 +3841,15 @@ msgstr "Ao definir a paisagem é definida a localização"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:438
 msgid "Run local script"
-msgstr "Executar um cenário local"
+msgstr "Executar uma apresentação local"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:444
 msgid "Stop running script"
-msgstr "Parar de executar um cenário"
+msgstr "Parar de executar uma apresentação"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:447
 msgid "CD/DVD script"
-msgstr "Cenário de CD/DVD"
+msgstr "Apresentação de CD/DVD"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:454
 msgid "Administration"
@@ -3893,9 +3894,10 @@ msgid ""
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
 msgstr ""
-"Uma interface para adicionar asteroides e cometas ao Stellarium. Por meio "
-"dela, é possível baixar listas de objetos do sítio da Minor Planet Center e "
-"realizar buscas em seu banco de dados na rede. Em desenvolvimento."
+"<p align=\"justify\">Uma interface para adicionar asteroides e cometas ao "
+"Stellarium. Por meio dela, é possível baixar listas de objetos do sítio da "
+"Minor Planet Center e realizar buscas em seu banco de dados na rede. Essa "
+"interface é ainda um trabalho em desenvolvimento."
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
@@ -4385,17 +4387,17 @@ msgstr "<i>z</i> (desvio para o vermelho): %1"
 #~ msgid "Date & Time"
 #~ msgstr "Data e hora"
 
-#~ msgid "Scripts "
-#~ msgstr "Cenários "
-
-#~ msgid "Local Script: "
-#~ msgstr "Cenário local: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "Cenário de CD/DVD: "
-
 #~ msgid "Correct for light travel time: "
 #~ msgstr "Corrigir para tempo de viagem à velocidade da luz: "
 
+#~ msgid "Scripts "
+#~ msgstr "Apresentações "
+
+#~ msgid "Local Script: "
+#~ msgstr "Apresentação local: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "Apresentação de CD/DVD: "
+
 #~ msgid "USB Script: "
-#~ msgstr "Cenário de USB: "
+#~ msgstr "Apresentação de USB: "
