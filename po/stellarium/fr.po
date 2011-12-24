@@ -18,14 +18,14 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-18 22:08+0700\n"
-"PO-Revision-Date: 2011-11-19 16:50+0000\n"
-"Last-Translator: Léo POUGHON <Unknown>\n"
+"PO-Revision-Date: 2011-12-23 17:04+0000\n"
+"Last-Translator: Nicolas Delvaux <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-19 04:41+0000\n"
-"X-Generator: Launchpad (build 14525)\n"
+"X-Launchpad-Export-Date: 2011-12-24 05:16+0000\n"
+"X-Generator: Launchpad (build 14560)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -45,15 +45,15 @@ msgstr "Horizon"
 
 #: src/core/modules/GridLinesMgr.cpp:558
 msgid "Galactic Plane"
-msgstr ""
+msgstr "Plan galactique"
 
 #: src/core/modules/LandscapeMgr.cpp:486
 msgid "Author: "
-msgstr "Auteur : "
+msgstr "Auteur : "
 
 #: src/core/modules/LandscapeMgr.cpp:489
 msgid "Location: "
-msgstr "Emplacement : "
+msgstr "Emplacement : "
 
 #: src/core/modules/LandscapeMgr.cpp:494
 #, qt-format
@@ -62,18 +62,18 @@ msgstr ", %1 m"
 
 #: src/core/modules/LandscapeMgr.cpp:498
 msgid "Planet: "
-msgstr "Planète : "
+msgstr "Planète : "
 
 #: src/core/modules/Nebula.cpp:96
 #, qt-format
 msgid "Type: <b>%1</b>"
-msgstr "Type : <b>%1</b>"
+msgstr "Type : <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:121
 #: plugins/Supernovae/src/Supernova.cpp:99 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
-msgstr "Magnitude : <b>%1</b>"
+msgstr "Magnitude : <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:104
 #, qt-format
@@ -116,62 +116,62 @@ msgstr "Type non documenté"
 #: plugins/Quasars/src/Quasar.cpp:104
 #, qt-format
 msgid "Absolute Magnitude: %1"
-msgstr "Magnitude absolue: %1"
+msgstr "Magnitude absolue : %1"
 
 #: src/core/modules/Planet.cpp:137
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr "Repère Géocentrique écliptique (du jour) : %1/%2"
+msgstr "Repère géocentrique écliptique (du jour) : %1/%2"
 
 #: src/core/modules/Planet.cpp:138
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr "Inclinaison de l'axe (du jour): %1"
+msgstr "Inclinaison de l'axe (du jour) : %1"
 
 #: src/core/modules/Planet.cpp:148
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "Distance : %1 UA (%2 km)"
 
 #: src/core/modules/Planet.cpp:155
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
-msgstr "Distance: %1 UA"
+msgstr "Distance: %1 UA"
 
 #: src/core/modules/Planet.cpp:161
 #, qt-format
 msgid "Apparent diameter: %1"
-msgstr "Diamètre apparent: %1"
+msgstr "Diamètre apparent : %1"
 
 #: src/core/modules/StarWrapper.cpp:51 src/core/modules/StarWrapper.cpp:108
 #: plugins/Quasars/src/Quasar.cpp:96
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr "Magnitude: <b>%1</b> (B-V: %2)"
+msgstr "Magnitude : <b>%1</b> (B-V: %2)"
 
 #: src/core/modules/StarWrapper.cpp:118
 #, qt-format
 msgid "Spectral Type: %1"
-msgstr "Type spectral: %1"
+msgstr "Type spectral : %1"
 
 #: src/core/modules/StarWrapper.cpp:122
 #: plugins/Supernovae/src/Supernova.cpp:108
 #, qt-format
 msgid "Distance: %1 Light Years"
-msgstr "Distance: %1 année(s)-lumière"
+msgstr "Distance : %1 années-lumière"
 
 #: src/core/modules/StarWrapper.cpp:125
 #, qt-format
 msgid "Parallax: %1\""
-msgstr "Parallaxe: %1"
+msgstr "Parallaxe : %1"
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr "Avion Spatial"
+msgstr "Vaisseau spatial"
 
 #: src/core/StelProjector.cpp:62
 msgid "Maximum FOV: "
-msgstr "Champ de vision maximal: "
+msgstr "Champ de vision maximal : "
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
