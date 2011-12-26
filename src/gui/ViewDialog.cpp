@@ -349,7 +349,7 @@ void ViewDialog::populateLists()
 
 	// Fill the landscape list
 	l = ui->landscapesListWidget;
-	int selectedLandscape = ui->landscapesListWidget->currentRow();
+	int selectedLandscape = l->currentRow();
 	l->blockSignals(true);
 	l->clear();
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
@@ -359,12 +359,12 @@ void ViewDialog::populateLists()
 		QString label = q_(desc);
 		QListWidgetItem* item = new QListWidgetItem(label);
 		item->setData(Qt::UserRole, desc);
-		ui->landscapesListWidget->addItem(item);
+		l->addItem(item);
 	}
-	if (selectedLandscape >= 0 && selectedLandscape < ui->landscapesListWidget->count())
-		ui->landscapesListWidget->setCurrentRow(selectedLandscape);
+	if (selectedLandscape >= 0 && selectedLandscape < l->count())
+		l->setCurrentRow(selectedLandscape);
 	else
-		ui->landscapesListWidget->setCurrentItem(l->findItems(q_(lmgr->getCurrentLandscapeName()), Qt::MatchExactly).at(0));
+		l->setCurrentItem(l->findItems(q_(lmgr->getCurrentLandscapeName()), Qt::MatchExactly).at(0));
 		
 	l->blockSignals(false);
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
