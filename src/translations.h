@@ -156,5 +156,23 @@ class Translations
 		N_("Sami");
 		N_("Tupi-Guarani");
 		N_("Western");
+
+		// Landscapes names
+        // TRANSLATORS: Name of landscape
+		N_("Guereins");
+        // TRANSLATORS: Name of landscape
+		N_("Trees");
+        // TRANSLATORS: Name of landscape and Earth's satellite
+		N_("Moon");
+        // TRANSLATORS: Name of landscape
+		N_("Hurricane");
+        // TRANSLATORS: Name of landscape
+		N_("Ocean");
+        // TRANSLATORS: Name of landscape
+		N_("Garching");
+        // TRANSLATORS: Name of landscape and planet
+		N_("Mars");
+        // TRANSLATORS: Name of landscape and planet
+		N_("Saturn");
 	}
 };
