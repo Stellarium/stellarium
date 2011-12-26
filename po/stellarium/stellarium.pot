@@ -8,13 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-18 22:08+0700\n"
+"POT-Creation-Date: 2011-12-27 02:30+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -279,64 +279,64 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:478
+#: src/gui/ConfigurationDialog.cpp:481
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:486
+#: src/gui/ConfigurationDialog.cpp:489
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:525
+#: src/gui/ConfigurationDialog.cpp:528
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:235
 msgid "Authors"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:529 src/gui/ViewDialog.cpp:382
+#: src/gui/ConfigurationDialog.cpp:532 src/gui/ViewDialog.cpp:382
 msgid "Contact"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:604
+#: src/gui/ConfigurationDialog.cpp:607
 msgid "Author"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:605
+#: src/gui/ConfigurationDialog.cpp:608
 msgid "License"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:634
+#: src/gui/ConfigurationDialog.cpp:637
 msgid "Running script: "
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:641
+#: src/gui/ConfigurationDialog.cpp:644
 msgid "Running script: [none]"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:710
+#: src/gui/ConfigurationDialog.cpp:713
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:714
+#: src/gui/ConfigurationDialog.cpp:717
 msgid "All available star catalogs have been installed."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:719
+#: src/gui/ConfigurationDialog.cpp:722
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:726
+#: src/gui/ConfigurationDialog.cpp:729
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:733
+#: src/gui/ConfigurationDialog.cpp:736
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -344,18 +344,18 @@ msgid ""
 "Magnitude range: %3 - %4"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:776 src/gui/ConfigurationDialog.cpp:812
+#: src/gui/ConfigurationDialog.cpp:779 src/gui/ConfigurationDialog.cpp:815
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
 "%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:864
+#: src/gui/ConfigurationDialog.cpp:867
 msgid "Verifying file integrity..."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:868
+#: src/gui/ConfigurationDialog.cpp:871
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -843,7 +843,7 @@ msgstr ""
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:367
+#: src/gui/LocationDialog.cpp:399
 msgid "New Location"
 msgstr ""
 
@@ -1341,6 +1341,970 @@ msgstr ""
 msgid "Western"
 msgstr ""
 
+#: src/countries.h:32
+msgid "Andorra"
+msgstr ""
+
+#: src/countries.h:33
+msgid "United Arab Emirates"
+msgstr ""
+
+#: src/countries.h:34
+msgid "Afghanistan"
+msgstr ""
+
+#: src/countries.h:35
+msgid "Antigua and Barbuda"
+msgstr ""
+
+#: src/countries.h:36
+msgid "Anguilla"
+msgstr ""
+
+#: src/countries.h:37
+msgid "Albania"
+msgstr ""
+
+#: src/countries.h:38
+msgid "Armenia"
+msgstr ""
+
+#: src/countries.h:39
+msgid "Netherlands Antilles"
+msgstr ""
+
+#: src/countries.h:40
+msgid "Angola"
+msgstr ""
+
+#: src/countries.h:41
+msgid "Antarctica"
+msgstr ""
+
+#: src/countries.h:42
+msgid "Argentina"
+msgstr ""
+
+#: src/countries.h:43
+msgid "American Samoa"
+msgstr ""
+
+#: src/countries.h:44
+msgid "Austria"
+msgstr ""
+
+#: src/countries.h:45
+msgid "Australia"
+msgstr ""
+
+#: src/countries.h:46
+msgid "Aruba"
+msgstr ""
+
+#: src/countries.h:47
+msgid "Azerbaijan"
+msgstr ""
+
+#: src/countries.h:48
+msgid "Bosnia and Herzegowina"
+msgstr ""
+
+#: src/countries.h:49
+msgid "Barbados"
+msgstr ""
+
+#: src/countries.h:50
+msgid "Bangladesh"
+msgstr ""
+
+#: src/countries.h:51
+msgid "Belgium"
+msgstr ""
+
+#: src/countries.h:52
+msgid "Burkina Faso"
+msgstr ""
+
+#: src/countries.h:53
+msgid "Bulgaria"
+msgstr ""
+
+#: src/countries.h:54
+msgid "Bahrain"
+msgstr ""
+
+#: src/countries.h:55
+msgid "Burundi"
+msgstr ""
+
+#: src/countries.h:56
+msgid "Benin"
+msgstr ""
+
+#: src/countries.h:57
+msgid "Bermuda"
+msgstr ""
+
+#: src/countries.h:58
+msgid "Brunei Darussalam"
+msgstr ""
+
+#: src/countries.h:59
+msgid "Bolivia"
+msgstr ""
+
+#: src/countries.h:60
+msgid "Brazil"
+msgstr ""
+
+#: src/countries.h:61
+msgid "Bahamas"
+msgstr ""
+
+#: src/countries.h:62
+msgid "Bhutan"
+msgstr ""
+
+#: src/countries.h:63
+msgid "Bouvet Island"
+msgstr ""
+
+#: src/countries.h:64
+msgid "Botswana"
+msgstr ""
+
+#: src/countries.h:65
+msgid "Belarus"
+msgstr ""
+
+#: src/countries.h:66
+msgid "Belize"
+msgstr ""
+
+#: src/countries.h:67
+msgid "Canada"
+msgstr ""
+
+#: src/countries.h:68
+msgid "Cocos Islands"
+msgstr ""
+
+#: src/countries.h:69
+msgid "Democratic Republic of the Congo"
+msgstr ""
+
+#: src/countries.h:70
+msgid "Central African Republic"
+msgstr ""
+
+#: src/countries.h:71
+msgid "Republic of the Congo"
+msgstr ""
+
+#: src/countries.h:72
+msgid "Switzerland"
+msgstr ""
+
+#: src/countries.h:73
+msgid "Cote d'Ivoire"
+msgstr ""
+
+#: src/countries.h:74
+msgid "Cook Islands"
+msgstr ""
+
+#: src/countries.h:75
+msgid "Chile"
+msgstr ""
+
+#: src/countries.h:76
+msgid "Cameroon"
+msgstr ""
+
+#: src/countries.h:77
+msgid "China"
+msgstr ""
+
+#: src/countries.h:78
+msgid "Colombia"
+msgstr ""
+
+#: src/countries.h:79
+msgid "Costa Rica"
+msgstr ""
+
+#: src/countries.h:80
+msgid "Serbia and Montenegro"
+msgstr ""
+
+#: src/countries.h:81
+msgid "Cuba"
+msgstr ""
+
+#: src/countries.h:82
+msgid "Cape Verde"
+msgstr ""
+
+#: src/countries.h:83
+msgid "Christmas Island"
+msgstr ""
+
+#: src/countries.h:84
+msgid "Cyprus"
+msgstr ""
+
+#: src/countries.h:85
+msgid "Czech Republic"
+msgstr ""
+
+#: src/countries.h:86
+msgid "Germany"
+msgstr ""
+
+#: src/countries.h:87
+msgid "Djibouti"
+msgstr ""
+
+#: src/countries.h:88
+msgid "Denmark"
+msgstr ""
+
+#: src/countries.h:89
+msgid "Dominica"
+msgstr ""
+
+#: src/countries.h:90
+msgid "Dominican Republic"
+msgstr ""
+
+#: src/countries.h:91
+msgid "Algeria"
+msgstr ""
+
+#: src/countries.h:92
+msgid "Ecuador"
+msgstr ""
+
+#: src/countries.h:93
+msgid "Estonia"
+msgstr ""
+
+#: src/countries.h:94
+msgid "Egypt"
+msgstr ""
+
+#: src/countries.h:95
+msgid "Western Sahara"
+msgstr ""
+
+#: src/countries.h:96
+msgid "Eritrea"
+msgstr ""
+
+#: src/countries.h:97
+msgid "Spain"
+msgstr ""
+
+#: src/countries.h:98
+msgid "Ethiopia"
+msgstr ""
+
+#: src/countries.h:99
+msgid "Finland"
+msgstr ""
+
+#: src/countries.h:100
+msgid "Fiji"
+msgstr ""
+
+#: src/countries.h:101
+msgid "Falkland Islands"
+msgstr ""
+
+#: src/countries.h:102
+msgid "Micronesia"
+msgstr ""
+
+#: src/countries.h:103
+msgid "Faroe Islands"
+msgstr ""
+
+#: src/countries.h:104
+msgid "France"
+msgstr ""
+
+#: src/countries.h:105
+msgid "Gabon"
+msgstr ""
+
+#: src/countries.h:106
+msgid "United Kingdom"
+msgstr ""
+
+#: src/countries.h:107
+msgid "Grenada"
+msgstr ""
+
+#: src/countries.h:108
+msgid "Georgia"
+msgstr ""
+
+#: src/countries.h:109
+msgid "French Guiana"
+msgstr ""
+
+#: src/countries.h:110
+msgid "Ghana"
+msgstr ""
+
+#: src/countries.h:111
+msgid "Gibraltar"
+msgstr ""
+
+#: src/countries.h:112
+msgid "Greenland"
+msgstr ""
+
+#: src/countries.h:113
+msgid "Gambia"
+msgstr ""
+
+#: src/countries.h:114
+msgid "Guinea"
+msgstr ""
+
+#: src/countries.h:115
+msgid "Guadeloupe"
+msgstr ""
+
+#: src/countries.h:116
+msgid "Equatorial Guinea"
+msgstr ""
+
+#: src/countries.h:117
+msgid "Greece"
+msgstr ""
+
+#: src/countries.h:118
+msgid "South Georgia and the South Sandwich Islands"
+msgstr ""
+
+#: src/countries.h:119
+msgid "Guatemala"
+msgstr ""
+
+#: src/countries.h:120
+msgid "Guam"
+msgstr ""
+
+#: src/countries.h:121
+msgid "Guinea-Bissau"
+msgstr ""
+
+#: src/countries.h:122
+msgid "Guyana"
+msgstr ""
+
+#: src/countries.h:123
+msgid "Hong Kong"
+msgstr ""
+
+#: src/countries.h:124
+msgid "Heard Island and McDonald Islands"
+msgstr ""
+
+#: src/countries.h:125
+msgid "Honduras"
+msgstr ""
+
+#: src/countries.h:126
+msgid "Croatia"
+msgstr ""
+
+#: src/countries.h:127
+msgid "Haiti"
+msgstr ""
+
+#: src/countries.h:128
+msgid "Hungary"
+msgstr ""
+
+#: src/countries.h:129
+msgid "Indonesia"
+msgstr ""
+
+#: src/countries.h:130
+msgid "Ireland"
+msgstr ""
+
+#: src/countries.h:131
+msgid "Israel"
+msgstr ""
+
+#: src/countries.h:132
+msgid "India"
+msgstr ""
+
+#: src/countries.h:133
+msgid "British Indian Ocean Territory"
+msgstr ""
+
+#: src/countries.h:134
+msgid "Iraq"
+msgstr ""
+
+#: src/countries.h:135
+msgid "Iran"
+msgstr ""
+
+#: src/countries.h:136
+msgid "Iceland"
+msgstr ""
+
+#: src/countries.h:137
+msgid "Italy"
+msgstr ""
+
+#: src/countries.h:138
+msgid "Jamaica"
+msgstr ""
+
+#: src/countries.h:139
+msgid "Jordan"
+msgstr ""
+
+#: src/countries.h:140
+msgid "Japan"
+msgstr ""
+
+#: src/countries.h:141
+msgid "Kenya"
+msgstr ""
+
+#: src/countries.h:142
+msgid "Kyrgyzstan"
+msgstr ""
+
+#: src/countries.h:143
+msgid "Cambodia"
+msgstr ""
+
+#: src/countries.h:144
+msgid "Kiribati"
+msgstr ""
+
+#: src/countries.h:145
+msgid "Comoros"
+msgstr ""
+
+#: src/countries.h:146
+msgid "Saint Kitts and Nevis"
+msgstr ""
+
+#: src/countries.h:147
+msgid "Democratic People's Republic of Korea"
+msgstr ""
+
+#: src/countries.h:148
+msgid "Republic of Korea"
+msgstr ""
+
+#: src/countries.h:149
+msgid "Kuwait"
+msgstr ""
+
+#: src/countries.h:150
+msgid "Cayman Islands"
+msgstr ""
+
+#: src/countries.h:151
+msgid "Kazakhstan"
+msgstr ""
+
+#: src/countries.h:152
+msgid "Lao"
+msgstr ""
+
+#: src/countries.h:153
+msgid "Lebanon"
+msgstr ""
+
+#: src/countries.h:154
+msgid "Saint Lucia"
+msgstr ""
+
+#: src/countries.h:155
+msgid "Liechtenstein"
+msgstr ""
+
+#: src/countries.h:156
+msgid "Sri Lanka"
+msgstr ""
+
+#: src/countries.h:157
+msgid "Liberia"
+msgstr ""
+
+#: src/countries.h:158
+msgid "Lesotho"
+msgstr ""
+
+#: src/countries.h:159
+msgid "Lithuania"
+msgstr ""
+
+#: src/countries.h:160
+msgid "Luxembourg"
+msgstr ""
+
+#: src/countries.h:161
+msgid "Latvia"
+msgstr ""
+
+#: src/countries.h:162
+msgid "Libyan Arab Jamahiriya"
+msgstr ""
+
+#: src/countries.h:163
+msgid "Morocco"
+msgstr ""
+
+#: src/countries.h:164
+msgid "Monaco"
+msgstr ""
+
+#: src/countries.h:165
+msgid "Moldova"
+msgstr ""
+
+#: src/countries.h:166
+msgid "Madagascar"
+msgstr ""
+
+#: src/countries.h:167
+msgid "Marshall Islands"
+msgstr ""
+
+#: src/countries.h:168
+msgid "Macedonia"
+msgstr ""
+
+#: src/countries.h:169
+msgid "Mali"
+msgstr ""
+
+#: src/countries.h:170
+msgid "Myanmar"
+msgstr ""
+
+#: src/countries.h:171
+msgid "Mongolia"
+msgstr ""
+
+#: src/countries.h:172
+msgid "Macau"
+msgstr ""
+
+#: src/countries.h:173
+msgid "Northern Mariana Islands"
+msgstr ""
+
+#: src/countries.h:174
+msgid "Martinique"
+msgstr ""
+
+#: src/countries.h:175
+msgid "Mauritania"
+msgstr ""
+
+#: src/countries.h:176
+msgid "Montserrat"
+msgstr ""
+
+#: src/countries.h:177
+msgid "Malta"
+msgstr ""
+
+#: src/countries.h:178
+msgid "Mauritius"
+msgstr ""
+
+#: src/countries.h:179
+msgid "Maldives"
+msgstr ""
+
+#: src/countries.h:180
+msgid "Malawi"
+msgstr ""
+
+#: src/countries.h:181
+msgid "Mexico"
+msgstr ""
+
+#: src/countries.h:182
+msgid "Malaysia"
+msgstr ""
+
+#: src/countries.h:183
+msgid "Mozambique"
+msgstr ""
+
+#: src/countries.h:184
+msgid "Namibia"
+msgstr ""
+
+#: src/countries.h:185
+msgid "New Caledonia"
+msgstr ""
+
+#: src/countries.h:186
+msgid "Niger"
+msgstr ""
+
+#: src/countries.h:187
+msgid "Norfolk Island"
+msgstr ""
+
+#: src/countries.h:188
+msgid "Nigeria"
+msgstr ""
+
+#: src/countries.h:189
+msgid "Nicaragua"
+msgstr ""
+
+#: src/countries.h:190
+msgid "Netherlands"
+msgstr ""
+
+#: src/countries.h:191
+msgid "Norway"
+msgstr ""
+
+#: src/countries.h:192
+msgid "Nepal"
+msgstr ""
+
+#: src/countries.h:193
+msgid "Nauru"
+msgstr ""
+
+#: src/countries.h:194
+msgid "Niue"
+msgstr ""
+
+#: src/countries.h:195
+msgid "New Zealand"
+msgstr ""
+
+#: src/countries.h:196
+msgid "Oman"
+msgstr ""
+
+#: src/countries.h:197
+msgid "Panama"
+msgstr ""
+
+#: src/countries.h:198
+msgid "Peru"
+msgstr ""
+
+#: src/countries.h:199
+msgid "French Polynesia"
+msgstr ""
+
+#: src/countries.h:200
+msgid "Papua New Guinea"
+msgstr ""
+
+#: src/countries.h:201
+msgid "Philippines"
+msgstr ""
+
+#: src/countries.h:202
+msgid "Pakistan"
+msgstr ""
+
+#: src/countries.h:203
+msgid "Poland"
+msgstr ""
+
+#: src/countries.h:204
+msgid "Saint Pierre and Miquelon"
+msgstr ""
+
+#: src/countries.h:205
+msgid "Pitcairn"
+msgstr ""
+
+#: src/countries.h:206
+msgid "Puerto Rico"
+msgstr ""
+
+#: src/countries.h:207
+msgid "Palestinian Territories"
+msgstr ""
+
+#: src/countries.h:208
+msgid "Portugal"
+msgstr ""
+
+#: src/countries.h:209
+msgid "Palau"
+msgstr ""
+
+#: src/countries.h:210
+msgid "Paraguay"
+msgstr ""
+
+#: src/countries.h:211
+msgid "Qatar"
+msgstr ""
+
+#: src/countries.h:212
+msgid "Réunion"
+msgstr ""
+
+#: src/countries.h:213
+msgid "Romania"
+msgstr ""
+
+#: src/countries.h:214
+msgid "Serbia"
+msgstr ""
+
+#: src/countries.h:215
+msgid "Russian Federation"
+msgstr ""
+
+#: src/countries.h:216
+msgid "Rwanda"
+msgstr ""
+
+#: src/countries.h:217
+msgid "Saudi Arabia"
+msgstr ""
+
+#: src/countries.h:218
+msgid "Solomon Islands"
+msgstr ""
+
+#: src/countries.h:219
+msgid "Seychelles"
+msgstr ""
+
+#: src/countries.h:220
+msgid "Sudan"
+msgstr ""
+
+#: src/countries.h:221
+msgid "Sweden"
+msgstr ""
+
+#: src/countries.h:222
+msgid "Singapore"
+msgstr ""
+
+#: src/countries.h:223
+msgid "Saint Helena"
+msgstr ""
+
+#: src/countries.h:224
+msgid "Slovenia"
+msgstr ""
+
+#: src/countries.h:225
+msgid "Svalbard and Jan Mayen"
+msgstr ""
+
+#: src/countries.h:226
+msgid "Slovakia"
+msgstr ""
+
+#: src/countries.h:227
+msgid "Sierra Leone"
+msgstr ""
+
+#: src/countries.h:228
+msgid "San Marino"
+msgstr ""
+
+#: src/countries.h:229
+msgid "Senegal"
+msgstr ""
+
+#: src/countries.h:230
+msgid "Somalia"
+msgstr ""
+
+#: src/countries.h:231
+msgid "Suriname"
+msgstr ""
+
+#: src/countries.h:232
+msgid "Sao Tome and Principe"
+msgstr ""
+
+#: src/countries.h:233
+msgid "El Salvador"
+msgstr ""
+
+#: src/countries.h:234
+msgid "Syrian Arab Republic"
+msgstr ""
+
+#: src/countries.h:235
+msgid "Swaziland"
+msgstr ""
+
+#: src/countries.h:236
+msgid "Turks and Caicos Islands"
+msgstr ""
+
+#: src/countries.h:237
+msgid "Chad"
+msgstr ""
+
+#: src/countries.h:238
+msgid "French Southern Territories"
+msgstr ""
+
+#: src/countries.h:239
+msgid "Togo"
+msgstr ""
+
+#: src/countries.h:240
+msgid "Thailand"
+msgstr ""
+
+#: src/countries.h:241
+msgid "Tajikistan"
+msgstr ""
+
+#: src/countries.h:242
+msgid "Tokelau"
+msgstr ""
+
+#: src/countries.h:243
+msgid "East Timor"
+msgstr ""
+
+#: src/countries.h:244
+msgid "Turkmenistan"
+msgstr ""
+
+#: src/countries.h:245
+msgid "Tunisia"
+msgstr ""
+
+#: src/countries.h:246
+msgid "Tonga"
+msgstr ""
+
+#: src/countries.h:247
+msgid "Turkey"
+msgstr ""
+
+#: src/countries.h:248
+msgid "Trinidad and Tobago"
+msgstr ""
+
+#: src/countries.h:249
+msgid "Tuvalu"
+msgstr ""
+
+#: src/countries.h:250
+msgid "Taiwan"
+msgstr ""
+
+#: src/countries.h:251
+msgid "Tanzania"
+msgstr ""
+
+#: src/countries.h:252
+msgid "Ukraine"
+msgstr ""
+
+#: src/countries.h:253
+msgid "Uganda"
+msgstr ""
+
+#: src/countries.h:254
+msgid "United States Minor Outlying Islands"
+msgstr ""
+
+#: src/countries.h:255
+msgid "United States"
+msgstr ""
+
+#: src/countries.h:256
+msgid "Uruguay"
+msgstr ""
+
+#: src/countries.h:257
+msgid "Uzbekistan"
+msgstr ""
+
+#: src/countries.h:258
+msgid "Vatican City State"
+msgstr ""
+
+#: src/countries.h:259
+msgid "Saint Vincent and the Grenadines"
+msgstr ""
+
+#: src/countries.h:260
+msgid "Venezuela"
+msgstr ""
+
+#: src/countries.h:261
+msgid "British Virgin Islands"
+msgstr ""
+
+#: src/countries.h:262
+msgid "United States Virgin Islands"
+msgstr ""
+
+#: src/countries.h:263
+msgid "Viet Nam"
+msgstr ""
+
+#: src/countries.h:264
+msgid "Vanuatu"
+msgstr ""
+
+#: src/countries.h:265
+msgid "Wallis and Futuna"
+msgstr ""
+
+#: src/countries.h:266
+msgid "Samoa"
+msgstr ""
+
+#: src/countries.h:267
+msgid "Yemen"
+msgstr ""
+
+#: src/countries.h:268
+msgid "Mayotte"
+msgstr ""
+
+#: src/countries.h:269
+msgid "Yugoslavia"
+msgstr ""
+
+#: src/countries.h:270
+msgid "South Africa"
+msgstr ""
+
+#: src/countries.h:271
+msgid "Zambia"
+msgstr ""
+
+#: src/countries.h:272
+msgid "Zimbabwe"
+msgstr ""
+
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
 msgstr ""
@@ -1354,7 +2318,7 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: src/ui_helpDialogGui.h:267 plugins/Oculars/src/ui_ocularDialog.h:911
+#: src/ui_helpDialogGui.h:267 plugins/Oculars/src/ui_ocularDialog.h:903
 #: plugins/Satellites/src/ui_satellitesDialog.h:690
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
@@ -1383,9 +2347,9 @@ msgstr ""
 msgid "Use as default"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:393 plugins/Oculars/src/ui_ocularDialog.h:884
-#: plugins/Oculars/src/ui_ocularDialog.h:893
-#: plugins/Oculars/src/ui_ocularDialog.h:904
+#: src/ui_locationDialogGui.h:393 plugins/Oculars/src/ui_ocularDialog.h:876
+#: plugins/Oculars/src/ui_ocularDialog.h:885
+#: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Delete"
 msgstr ""
 
@@ -2133,7 +3097,7 @@ msgid "Compass marks"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:84
-#: plugins/Oculars/src/ui_ocularDialog.h:870
+#: plugins/Oculars/src/ui_ocularDialog.h:862
 msgid "Oculars"
 msgstr ""
 
@@ -2197,7 +3161,7 @@ msgid "&Reset rotation"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1201
-#: plugins/Oculars/src/ui_ocularDialog.h:872
+#: plugins/Oculars/src/ui_ocularDialog.h:864
 msgid "Ocular view"
 msgstr ""
 
@@ -2382,121 +3346,121 @@ msgstr ""
 msgid "Actual field of view provided by this ocular/telescope combination"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:873
+#: plugins/Oculars/src/ui_ocularDialog.h:865
 msgid "Enable only if an object is selected"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:874
+#: plugins/Oculars/src/ui_ocularDialog.h:866
 msgid "Scale image circle"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:875
+#: plugins/Oculars/src/ui_ocularDialog.h:867
 msgid "Key mappings"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:876
+#: plugins/Oculars/src/ui_ocularDialog.h:868
 msgid "Toggle ocular view:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:878
+#: plugins/Oculars/src/ui_ocularDialog.h:870
 msgid "Open pop-up navigation menu:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:879
+#: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Interface"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:880
+#: plugins/Oculars/src/ui_ocularDialog.h:872
 msgid "On-screen control panel"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:881
+#: plugins/Oculars/src/ui_ocularDialog.h:873
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:209
 msgid "General"
 msgstr ""
 
+#: plugins/Oculars/src/ui_ocularDialog.h:874
 #: plugins/Oculars/src/ui_ocularDialog.h:882
-#: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Eyepieces"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:883
-#: plugins/Oculars/src/ui_ocularDialog.h:892
-#: plugins/Oculars/src/ui_ocularDialog.h:903
+#: plugins/Oculars/src/ui_ocularDialog.h:875
+#: plugins/Oculars/src/ui_ocularDialog.h:884
+#: plugins/Oculars/src/ui_ocularDialog.h:895
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Add"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:885
-#: plugins/Oculars/src/ui_ocularDialog.h:894
-#: plugins/Oculars/src/ui_ocularDialog.h:905
+#: plugins/Oculars/src/ui_ocularDialog.h:877
+#: plugins/Oculars/src/ui_ocularDialog.h:886
+#: plugins/Oculars/src/ui_ocularDialog.h:897
 #: plugins/Satellites/src/ui_satellitesDialog.h:660
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:886
+#: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "aFOV:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:887
-#: plugins/Oculars/src/ui_ocularDialog.h:906
+#: plugins/Oculars/src/ui_ocularDialog.h:879
+#: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Focal length:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:888
+#: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "Field stop:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:889
+#: plugins/Oculars/src/ui_ocularDialog.h:881
 msgid "Binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:891
-#: plugins/Oculars/src/ui_ocularDialog.h:901
+#: plugins/Oculars/src/ui_ocularDialog.h:883
+#: plugins/Oculars/src/ui_ocularDialog.h:893
 msgid "Sensors"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:895
+#: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Resolution x (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:896
+#: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Resolution y (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:897
+#: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Chip width (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:898
+#: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Chip height (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:899
+#: plugins/Oculars/src/ui_ocularDialog.h:891
 msgid "Pixel width (micron):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:900
+#: plugins/Oculars/src/ui_ocularDialog.h:892
 msgid "Pixel height (micron):"
 msgstr ""
 
+#: plugins/Oculars/src/ui_ocularDialog.h:894
 #: plugins/Oculars/src/ui_ocularDialog.h:902
-#: plugins/Oculars/src/ui_ocularDialog.h:910
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Telescopes"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:907
+#: plugins/Oculars/src/ui_ocularDialog.h:899
 msgid "Diameter:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:908
+#: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Horizontal flip"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:909
+#: plugins/Oculars/src/ui_ocularDialog.h:901
 msgid "Vertical flip"
 msgstr ""
 
@@ -3959,7 +4923,7 @@ msgstr ""
 msgid "Type: quasar"
 msgstr ""
 
-#: plugins/Quasars/src/Quasar.cpp:114
+#: plugins/Quasars/src/Quasar.cpp:116
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr ""
