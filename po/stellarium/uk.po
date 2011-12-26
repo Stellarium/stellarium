@@ -4,21 +4,22 @@
 # This file is distributed under the same license as the stellarium package.
 #
 #  <dubyk@library.lviv.ua>, 2005.
-# Yuri Chornoivan <yurchor@ukr.net>, 2009.
+# Yuri Chornoivan <yurchor@ukr.net>, 2009, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-18 22:08+0700\n"
-"PO-Revision-Date: 2011-11-10 08:45+0000\n"
-"Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
+"PO-Revision-Date: 2011-12-25 22:01+0000\n"
+"Last-Translator: yurchor <Unknown>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-19 04:45+0000\n"
-"X-Generator: Launchpad (build 14525)\n"
+"X-Launchpad-Export-Date: 2011-12-26 04:50+0000\n"
+"X-Generator: Launchpad (build 14560)\n"
 "X-Poedit-Country: UKRAINE\n"
+"Language: uk\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -40,7 +41,7 @@ msgstr "Горизонт"
 
 #: src/core/modules/GridLinesMgr.cpp:558
 msgid "Galactic Plane"
-msgstr ""
+msgstr "Галактична площина"
 
 #: src/core/modules/LandscapeMgr.cpp:486
 msgid "Author: "
@@ -126,7 +127,7 @@ msgstr "Нахил вісі обертання (для дати): %1"
 #: src/core/modules/Planet.cpp:148
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "Відстань: %1 а.о. (%2 км)"
 
 #: src/core/modules/Planet.cpp:155
 #, no-c-format, qt-format
@@ -348,7 +349,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:714
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "Було встановлено всі доступні зоряні каталоги."
 
 #: src/gui/ConfigurationDialog.cpp:719
 #, qt-format
@@ -361,7 +362,7 @@ msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
-"Звантаження %1...\n"
+"Звантаження %1…\n"
 "(Ви можете закрити це вікно.)"
 
 #: src/gui/ConfigurationDialog.cpp:733
@@ -386,7 +387,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:864
 msgid "Verifying file integrity..."
-msgstr "Перевірка цілісності файлів..."
+msgstr "Перевірка цілісності файлів…"
 
 #: src/gui/ConfigurationDialog.cpp:868
 #, qt-format
@@ -578,7 +579,7 @@ msgstr "Розробник під OSX: %1"
 #: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "Перевірено: %1"
 
 #: src/gui/StelGui.cpp:98
 msgid "Display Options"
@@ -626,7 +627,7 @@ msgstr "Галактична сітка"
 
 #: src/gui/StelGui.cpp:108
 msgid "Galactic plane"
-msgstr ""
+msgstr "Галактична площина"
 
 #: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1126
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
@@ -681,7 +682,7 @@ msgstr "Зірки"
 #: src/gui/StelGui.cpp:122
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Planet labels"
-msgstr ""
+msgstr "Мітки планет"
 
 #: src/gui/StelGui.cpp:123
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
@@ -1172,7 +1173,7 @@ msgstr "Нікта"
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
 msgid "Hydra (moon)"
-msgstr ""
+msgstr "Гідра (місяць)"
 
 #: src/translations.h:85
 msgid "Eris"
@@ -1237,22 +1238,22 @@ msgstr "Оглядач Сонячної системи"
 #. TRANSLATORS: TNO/Asteroid (90377) Sedna
 #: src/translations.h:102
 msgid "Sedna"
-msgstr ""
+msgstr "Седна"
 
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
 #: src/translations.h:104
 msgid "Quaoar"
-msgstr ""
+msgstr "Квавар"
 
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
 #: src/translations.h:106
 msgid "Orcus"
-msgstr ""
+msgstr "Орк"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
 #: src/translations.h:108
 msgid "Haumea"
-msgstr ""
+msgstr "Хаумеа"
 
 #. TRANSLATORS: Asteroid (5) Astraea
 #: src/translations.h:111
@@ -1677,7 +1678,7 @@ msgstr "Показати атмосферу"
 #: src/ui_viewDialog.h:1101
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:385
 msgid "Light pollution:"
-msgstr ""
+msgstr "Забруднення світлом:"
 
 #: src/ui_viewDialog.h:1103
 msgid "pressure, temperature, extinction coefficient"
@@ -1730,7 +1731,7 @@ msgstr "Небесна сфера"
 #: src/ui_viewDialog.h:1127
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Galactic plane line"
-msgstr ""
+msgstr "Лінія площини Галактики"
 
 #: src/ui_viewDialog.h:1129
 msgid "Constellations"
@@ -1756,7 +1757,7 @@ msgstr "Показувати малюнки"
 #: src/ui_viewDialog.h:1134
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Art brightness:"
-msgstr ""
+msgstr "Яскравість малюнків:"
 
 #: src/ui_viewDialog.h:1135
 msgid "Projection"
@@ -2176,17 +2177,19 @@ msgstr "Вимірювання кутів"
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:308
 msgid "The Angle Measure is enabled:"
-msgstr ""
+msgstr "Вимірювання кутів увімкнено:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:310
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
+"Перетягування з натиснутою лівою кнопкою миші вимірює, клацання лівою "
+"кнопкою — скидає."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:312
 msgid "Right-clicking changes the end point only."
-msgstr ""
+msgstr "Клацанням правою кнопкою можна змінити лише кінцеву точку."
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
@@ -2217,55 +2220,55 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:757
 msgid "Please select an object before switching to ocular view."
-msgstr ""
+msgstr "Перед перемиканням на перегляд за допомогою окуляра позначте об’єкт."
 
 #: plugins/Oculars/src/Oculars.cpp:836
 msgid "&Previous ocular"
-msgstr ""
+msgstr "&Попередній окуляр"
 
 #: plugins/Oculars/src/Oculars.cpp:837
 msgid "&Next ocular"
-msgstr ""
+msgstr "&Наступний окуляр"
 
 #: plugins/Oculars/src/Oculars.cpp:838
 msgid "Select &ocular"
-msgstr ""
+msgstr "Вибрати &окуляр"
 
 #: plugins/Oculars/src/Oculars.cpp:883
 msgid "Toggle &crosshair"
-msgstr ""
+msgstr "Увімкнути/Вимкнути пере&хрестя"
 
 #: plugins/Oculars/src/Oculars.cpp:892
 msgid "Configure &Oculars"
-msgstr ""
+msgstr "Налаштувати &окуляри"
 
 #: plugins/Oculars/src/Oculars.cpp:901
 msgid "Toggle &CCD"
-msgstr ""
+msgstr "Пере&мкнути ПЗЗ"
 
 #: plugins/Oculars/src/Oculars.cpp:909
 msgid "Toggle &Telrad"
-msgstr ""
+msgstr "П&еремкнути Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:919
 msgid "&Previous CCD"
-msgstr ""
+msgstr "&Попереднє ПЗЗ"
 
 #: plugins/Oculars/src/Oculars.cpp:920
 msgid "&Next CCD"
-msgstr ""
+msgstr "&Наступне ПЗЗ"
 
 #: plugins/Oculars/src/Oculars.cpp:921
 msgid "&Select CCD"
-msgstr ""
+msgstr "&Вибрати ПЗЗ"
 
 #: plugins/Oculars/src/Oculars.cpp:943
 msgid "&Rotate CCD"
-msgstr ""
+msgstr "&Обернути ПЗЗ"
 
 #: plugins/Oculars/src/Oculars.cpp:975
 msgid "&Reset rotation"
-msgstr ""
+msgstr "С&кинути обертання"
 
 #: plugins/Oculars/src/Oculars.cpp:1201
 #: plugins/Oculars/src/ui_ocularDialog.h:872
@@ -2278,225 +2281,226 @@ msgstr "Контекстне меню окулярів"
 
 #: plugins/Oculars/src/Oculars.cpp:1233
 msgid "Crosshairs"
-msgstr ""
+msgstr "Перехрестя"
 
 #: plugins/Oculars/src/Oculars.cpp:1241
 msgid "Image sensor frame"
-msgstr ""
+msgstr "Рамка датчика зображення"
 
 #: plugins/Oculars/src/Oculars.cpp:1249
 msgid "Telrad sight"
-msgstr ""
+msgstr "Поле зору Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:1257
 msgid "Oculars plugin configuration"
-msgstr ""
+msgstr "Налаштування додатка «Окуляри»"
 
 #: plugins/Oculars/src/Oculars.cpp:1444
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 #, qt-format
 msgid "Ocular #%1"
-msgstr ""
+msgstr "Окуляр %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1449
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 #, qt-format
 msgid "Ocular #%1: %2"
-msgstr ""
+msgstr "Окуляр %1: %2"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:1463
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:520
 #, qt-format
 msgid "Ocular FL: %1 mm"
-msgstr ""
+msgstr "ФВ окуляра: %1 мм"
 
 #. TRANSLATORS: aFOV = apparent field of view
 #: plugins/Oculars/src/Oculars.cpp:1470
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:530
 #, qt-format
 msgid "Ocular aFOV: %1"
-msgstr ""
+msgstr "Видиме ПЗ окуляра: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1480 plugins/Oculars/src/Oculars.cpp:1542
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
 #, qt-format
 msgid "Telescope #%1"
-msgstr ""
+msgstr "Телескоп %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1485 plugins/Oculars/src/Oculars.cpp:1547
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
 #, qt-format
 msgid "Telescope #%1: %2"
-msgstr ""
+msgstr "Телескоп %1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1496
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
 #, qt-format
 msgid "Magnification: %1"
-msgstr ""
+msgstr "Збільшення: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1504
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
 #, qt-format
 msgid "FOV: %1"
-msgstr ""
+msgstr "Поле зору: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1519
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
 #, qt-format
 msgid "Dimensions: %1"
-msgstr ""
+msgstr "Розміри: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1524
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Sensor #%1"
-msgstr ""
+msgstr "Датчик %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1528
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Sensor #%1: %2"
-msgstr ""
+msgstr "Датчик %1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1735
 msgid "&Telescope"
-msgstr ""
+msgstr "&Телескоп"
 
 #: plugins/Oculars/src/Oculars.cpp:1736
 msgid "&Previous telescope"
-msgstr ""
+msgstr "&Попередній телескоп"
 
 #: plugins/Oculars/src/Oculars.cpp:1737
 msgid "&Next telescope"
-msgstr ""
+msgstr "&Наступний телескоп"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
 msgid "Previous ocular"
-msgstr ""
+msgstr "Попередній окуляр"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
 msgid "Next ocular"
-msgstr ""
+msgstr "Наступний окуляр"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
 msgid "Previous CCD frame"
-msgstr ""
+msgstr "Попередня рампа ПЗЗ"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
 msgid "Next CCD frame"
-msgstr ""
+msgstr "Наступна рамка ПЗЗ"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Previous telescope"
-msgstr ""
+msgstr "Попередній телескоп"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Next telescope"
-msgstr ""
+msgstr "Наступний телескоп"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr ""
+msgstr "Повернути рамку датчика на 15° проти годинникової стрілки"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:258
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr ""
+msgstr "Повернути рамку датчика на 5° проти годинникової стрілки"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:271
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr ""
+msgstr "Повернути рамку датчика на 1° проти годинникової стрілки"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
-msgstr ""
+msgstr "Скинути обертання рамки датчика"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr ""
+msgstr "Повернути рамку датчика на 1° за годинниковою стрілкою"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:310
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr ""
+msgstr "Повернути рамку датчика на 5° за годинниковою стрілкою"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:323
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr ""
+msgstr "Повернути рамку датчика на 15° за годинниковою стрілкою"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
 msgid "Effective focal length of the ocular"
-msgstr ""
+msgstr "Ефективна фокусна відстань цього окуляра"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:533
 msgid "Apparent field of view of the ocular"
-msgstr ""
+msgstr "Видиме поле зору цього окуляра"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 #, qt-format
 msgid "Rotation: %1"
-msgstr ""
+msgstr "Обертання: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 msgid "Magnification provided by these binoculars"
-msgstr ""
+msgstr "Збільшення, що забезпечується цим біноклем"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
 msgid "Actual field of view provided by these binoculars"
-msgstr ""
+msgstr "Справжнє поле зору, що забезпечується цим біноклем"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
 msgid "Magnification provided by this ocular/telescope combination"
-msgstr ""
+msgstr "Збільшення, що забезпечується цим поєднанням окуляра і телескопа"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
 msgid "Actual field of view provided by this ocular/telescope combination"
 msgstr ""
+"Справжнє поле зору, що забезпечується цим поєднанням окуляра і телескопа"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:873
 msgid "Enable only if an object is selected"
-msgstr ""
+msgstr "Увімкнути, лише якщо позначено об’єкт"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:874
 msgid "Scale image circle"
-msgstr ""
+msgstr "Масштабувати зображення за колом"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:875
 msgid "Key mappings"
-msgstr ""
+msgstr "Прив’язка клавіш"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:876
 msgid "Toggle ocular view:"
-msgstr ""
+msgstr "Увімкнути/Вимкнути перегляд окуляра:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "Open pop-up navigation menu:"
-msgstr ""
+msgstr "Відкрити контекстне меню навігації:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:879
 msgid "Interface"
-msgstr ""
+msgstr "Інтерфейс"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "On-screen control panel"
-msgstr ""
+msgstr "Екранна панель керування"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:209
 msgid "General"
-msgstr ""
+msgstr "Загальне"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:882
 #: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Eyepieces"
-msgstr ""
+msgstr "Окуляри"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:883
 #: plugins/Oculars/src/ui_ocularDialog.h:892
 #: plugins/Oculars/src/ui_ocularDialog.h:903
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Add"
-msgstr ""
+msgstr "Додати"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:885
 #: plugins/Oculars/src/ui_ocularDialog.h:894
@@ -2504,72 +2508,72 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:660
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
-msgstr ""
+msgstr "Назва:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:886
 msgid "aFOV:"
-msgstr ""
+msgstr "Видиме ПЗ:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:887
 #: plugins/Oculars/src/ui_ocularDialog.h:906
 msgid "Focal length:"
-msgstr ""
+msgstr "Фокусна відстань:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Field stop:"
-msgstr ""
+msgstr "Польова діафрагма:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Binoculars"
-msgstr ""
+msgstr "Бінокль"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:891
 #: plugins/Oculars/src/ui_ocularDialog.h:901
 msgid "Sensors"
-msgstr ""
+msgstr "Датчики"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:895
 msgid "Resolution x (pixels):"
-msgstr ""
+msgstr "Роздільність за x (у пікселях):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Resolution y (pixels):"
-msgstr ""
+msgstr "Роздільність за y (у пікселях):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:897
 msgid "Chip width (mm):"
-msgstr ""
+msgstr "Ширина мікропроцесора (у мм):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Chip height (mm):"
-msgstr ""
+msgstr "Висота мікропроцесора (у мм):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:899
 msgid "Pixel width (micron):"
-msgstr ""
+msgstr "Ширина пікселя (у мікронах):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Pixel height (micron):"
-msgstr ""
+msgstr "Висота пікселя (у мікронах):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:902
 #: plugins/Oculars/src/ui_ocularDialog.h:910
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Telescopes"
-msgstr ""
+msgstr "Телескопи"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:907
 msgid "Diameter:"
-msgstr ""
+msgstr "Діаметр:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:908
 msgid "Horizontal flip"
-msgstr ""
+msgstr "Віддзеркалити горизонтально"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:909
 msgid "Vertical flip"
-msgstr ""
+msgstr "Віддзеркалити вертикально"
 
 #: plugins/Satellites/src/Satellites.cpp:65
 #: plugins/Satellites/src/ui_satellitesDialog.h:677
@@ -2606,81 +2610,85 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:238
 #, qt-format
 msgid "Range (km): %1"
-msgstr ""
+msgstr "Відстань (у км): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
 #: plugins/Satellites/src/Satellite.cpp:241
 #, qt-format
 msgid "Range rate (km/s): %1"
-msgstr ""
+msgstr "Швидкість зміни відстані (у км/с): %1"
 
 #. TRANSLATORS: Satellite altitude
 #: plugins/Satellites/src/Satellite.cpp:244
 #, qt-format
 msgid "Altitude (km): %1"
-msgstr ""
+msgstr "Висота (у км): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
 #: plugins/Satellites/src/Satellite.cpp:247
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
-msgstr ""
+msgstr "Підпункт (Шир./Довг.): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:261
 #, qt-format
 msgid "TEME coordinates (km): %1"
-msgstr ""
+msgstr "Координати TEME (у км): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:269
 #, qt-format
 msgid "TEME velocity (km/s): %1"
-msgstr ""
+msgstr "Швидкість TEME (у км/с): %1"
 
 #: plugins/Satellites/src/Satellite.cpp:277
 msgid "The satellite and the observer are in sunlight."
-msgstr ""
+msgstr "Супутник і спостерігач перебувають на сонячному боці."
 
 #: plugins/Satellites/src/Satellite.cpp:280
 msgid "The satellite is visible."
-msgstr ""
+msgstr "Супутник видно."
 
 #: plugins/Satellites/src/Satellite.cpp:283
 msgid "The satellite is eclipsed."
-msgstr ""
+msgstr "Супутник у тіні."
 
 #: plugins/Satellites/src/Satellite.cpp:286
 msgid "The satellite is not visible"
-msgstr ""
+msgstr "Супутник не видно"
 
 #: plugins/Satellites/src/Satellite.cpp:312
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
-msgstr ""
+msgstr "%1 МГц (%2%3 кГц)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:233
 msgid "Stellarium Satellites Plugin"
-msgstr ""
+msgstr "Додаток «Супутники» Stellarium"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:234
 msgid "Version"
-msgstr ""
+msgstr "Версія"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:238
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
+"Додаток «Супутники» призначено для прогнозування розташування штучних "
+"супутників Землі."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:240
 msgid "Notes for users"
-msgstr ""
+msgstr "Зауваження для користувачів"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:241
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
+"Супутники та їхні орбіти буде показано, лише якщо спостерігача розташовано "
+"на Землі."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:242
 msgid ""
@@ -2688,12 +2696,17 @@ msgid ""
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
+"Прогнозовані розташування є доволі точними лише протягом доволі нетривалого "
+"періоду часу (порядку днів, тижнів або близько місяця за обома напрямками "
+"часу). Поза цим діапазоном часу можливі значні відхилення у даних."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:243
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
 msgstr ""
+"Параметри орбіт доволі швидко застарівають (протягом лічених тижнів, а іноді "
+"днів). Щоб мати точні дані, вам слід регулярно оновлювати дані TLE."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:245
@@ -2703,17 +2716,23 @@ msgid ""
 "the default %3 file.  The old file will be backed up as %4.  This can be "
 "found in the user data directory, under \"modules/Satellites/\"."
 msgstr ""
+"Натискання кнопки «%1» на вкладці «%2» поверне програму до використання "
+"типового файла %3. Програма створить резервну копію попереднього файла з "
+"назвою %4. Цей файл можна буде знайти у каталозі даних користувача, а саме "
+"підкаталозі «modules/Satellites/»."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:251
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
+"Розробка додатка «Супутники» ще далека від завершення. Деякі з можливостей "
+"реалізовано частково, не реалізовано або реалізовано з помилками."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:255
 msgid "TLE data updates"
-msgstr ""
+msgstr "Оновлення даних TLE"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:256
 msgid ""
@@ -2721,6 +2740,9 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
+"Додаток «Супутники» здатен отримувати дані з джерел у інтернеті у "
+"автоматичному режимі. Типово, додаток отримує ці дані, якщо поточні дані є "
+"застарілими на понад 72 години. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:257
 #, qt-format
@@ -2729,16 +2751,22 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
+"Якщо ви вимкнете оновлення даних з інтернету, дані можна буде оновити з "
+"файла на вашому комп’ютері. Цей файл має бути збережено у тому самому "
+"форматі, що і оновлення Celestrak (приклад можна знайти у %1)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:258
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr ""
+"<b>Зауваження:</b> якщо у назві супутника у даних для оновлення наприкінці "
+"вказано якісь дані у квадратних дужках, ці дані буде вилучено до "
+"використання назви."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:261
 msgid "Adding new satellites"
-msgstr ""
+msgstr "Додавання нових супутників"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:262
 #, qt-format
@@ -2746,50 +2774,60 @@ msgid ""
 "At the moment you must manually edit the %1 file to add new satellites to "
 "the database. Making this easier is still on the TODO list..."
 msgstr ""
+"У поточній версії вам доведеться змінити файл %1 вручну, щоб додати нові "
+"супутники до бази даних. Можливо, у майбутніх версіях цю дію можна буде "
+"виконати у простіший спосіб…"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:264
 msgid "Technical notes"
-msgstr ""
+msgstr "Технічні нотатки"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:265
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
 msgstr ""
+"Розташування обчислюються на основі способів SGP4 і SDP4. Початковими даними "
+"є дані TLE NORAD. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:266
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
 msgstr ""
+"Код обчислення орбіт написано Хосе Луїсом Каналесом (Jose Luis Canales) "
+"відповідно до переглянутої доповіді Spacetrack №3 (з даними з доповіді "
+"Spacetrack №6). "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:268
 #, qt-format
 msgid "See %1this document%2 for details."
-msgstr ""
+msgstr "Докладніше про це можна дізнатися з %1документації%2."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:270
 msgid "Links"
-msgstr ""
+msgstr "Посилання"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:271
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
 "plugin\" in the subject when posting."
 msgstr ""
+"Підтримка надається за допомогою сайта Launchpad. У ваших звітах не "
+"забувайте вказати у полі теми «Satellites plugin»."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:274
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
-msgstr ""
+msgstr "Якщо у вас виникло питання, ви можете отримати відповідь %1тут%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:276
 #, qt-format
 msgid "Bug reports can be made %1here%2."
-msgstr ""
+msgstr "Повідомити про помилки можна %1тут%2."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:278
@@ -2797,201 +2835,205 @@ msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr ""
+"Якщо у вас є побажання щодо реалізації можливостей, ви можете створити звіт "
+"щодо вади і вказати у полі важливості (severity) «wishlist»."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:291
 msgid "Internet updates disabled"
-msgstr ""
+msgstr "Оновлення за допомогою інтернету вимкнено"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:293
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:325
 msgid "Updating now..."
-msgstr ""
+msgstr "Оновлення…"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
 msgid "Next update: < 1 minute"
-msgstr ""
+msgstr "До наступного оновлення менше хвилини"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:297
 #, qt-format
 msgid "Next update: %1 minutes"
-msgstr ""
+msgstr "Наступне оновлення за %1 хв."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:299
 #, qt-format
 msgid "Next update: %1 hours"
-msgstr ""
+msgstr "Наступне оновлення за %1 год."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:314
 #: plugins/Satellites/src/ui_satellitesDialog.h:624
 msgid "Update now"
-msgstr ""
+msgstr "Оновити зараз"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:316
 msgid "Update from files"
-msgstr ""
+msgstr "Оновити з файлів"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:328
 msgid "Update error"
-msgstr ""
+msgstr "Помилка оновлення"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:335
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
-msgstr ""
+msgstr "Оновлено дані %1 з %2 супутників; дані для %3 не знайдено"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:392
 msgid "[new source]"
-msgstr ""
+msgstr "[нове джерело]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:433
 msgid "[all not displayed]"
-msgstr ""
+msgstr "[всі не показані]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:434
 msgid "[all displayed]"
-msgstr ""
+msgstr "[всі показані]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:435
 msgid "[all]"
-msgstr ""
+msgstr "[всі]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:495
 msgid "Select TLE Update File"
-msgstr ""
+msgstr "Вибір файла оновлення TLE"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:617
 #: plugins/Satellites/src/ui_satellitesDialog.h:618
 msgid "Satellites Configuration"
-msgstr ""
+msgstr "Налаштування додатка «Супутники»"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:620
 msgid "Update TLE lists from Internet sources"
-msgstr ""
+msgstr "Оновити списки TLE з джерел у інтернеті"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:621
 msgid "Update from Internet sources"
-msgstr ""
+msgstr "Оновити з джерел у інтернеті"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:622
 msgid "Last update:"
-msgstr ""
+msgstr "Попереднє оновлення:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:623
 msgid "Update frequency (hours):"
-msgstr ""
+msgstr "Частота оновлення (у годинах):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:625
 msgid "Labels"
-msgstr ""
+msgstr "Надписи"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:626
 msgid "Label font size (pixels):"
-msgstr ""
+msgstr "Розмір шрифту надписів (у пікселях):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:627
 msgid "Orbit lines"
-msgstr ""
+msgstr "Лінії орбіт"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:629
 #: plugins/Satellites/src/ui_satellitesDialog.h:633
 msgid "Number of segments used to draw the line"
-msgstr ""
+msgstr "Кількість сегменті для малювання лінії орбіти"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:631
 msgid "# segments:"
-msgstr ""
+msgstr "К-ть сегментів:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:636
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 msgid "Number of segments used to draw each end of the line"
-msgstr ""
+msgstr "Кількість сегментів, потрібних для малювання кожного з кінців лінії"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:638
 msgid "Fade length:"
-msgstr ""
+msgstr "Довжина:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:643
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
 msgid "Duration of a single segment in seconds"
-msgstr ""
+msgstr "Тривалість видимості окремого сегмента у секундах"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
 msgid "Length (s):"
-msgstr ""
+msgstr "Тривалість (у с):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:649
 msgid "Restore default settings"
-msgstr ""
+msgstr "Відновити параметри"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:650
 msgid "Save settings as default"
-msgstr ""
+msgstr "Зберегти параметри як типові"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:651
 msgid "Settings"
-msgstr ""
+msgstr "Параметри"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:653
 msgid "Display the selected satellite(s)"
-msgstr ""
+msgstr "Показувати позначені штучні супутники"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:655
 msgid "Displayed"
-msgstr ""
+msgstr "Показано"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:657
 msgid "Display orbit line(s) for the selected satellite(s)"
-msgstr ""
+msgstr "Показувати лінії орбіт для позначених супутників"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:659
 msgid "Orbit"
-msgstr ""
+msgstr "Орбіта"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Catalog number:"
-msgstr ""
+msgstr "Номер у каталозі:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:663
 msgid "Description:"
-msgstr ""
+msgstr "Опис:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:664
 msgid "Groups:"
-msgstr ""
+msgstr "Групи:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:666
 msgid "Comma separated list of groups"
-msgstr ""
+msgstr "Список груп, відокремлених комами"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:668
 msgid "TLE data:"
-msgstr ""
+msgstr "Дані TLE:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:670
 msgid "NORAD two line element orbit data"
-msgstr ""
+msgstr "Дворядкові дані параметрів орбіт NORAD"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:674
 msgid "Save changes"
-msgstr ""
+msgstr "Зберегти зміни"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
 msgstr ""
+"Вкажіть або змініть адресу позначеного джерела. Зміни буде застосовано після "
+"натискання клавіші Enter."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 msgid "Add new source"
-msgstr ""
+msgstr "Додати нове джерело"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:686
 msgid "Remove selected source"
-msgstr ""
+msgstr "Вилучити позначене джерело"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:689
 msgid "Sources"
-msgstr ""
+msgstr "Джерела"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:150
@@ -3022,63 +3064,63 @@ msgstr "Навести телескоп на точку з вказаним на
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
-msgstr ""
+msgstr "Додати новий телескоп"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
-msgstr ""
+msgstr "Налаштування телескопа"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
-msgstr ""
+msgstr "н/д"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
 msgid "Starting"
-msgstr ""
+msgstr "Запуск"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:58
 msgid "Connecting"
-msgstr ""
+msgstr "Встановлення з’єднання"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:59
 msgid "Connected"
-msgstr ""
+msgstr "З’єднано"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:60
 msgid "Disconnected"
-msgstr ""
+msgstr "Роз’єднано"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:61
 msgid "Stopped"
-msgstr ""
+msgstr "Зупинено"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
-msgstr ""
+msgstr "Додаток «Керування телескопом»"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "Версія %1"
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 msgid "#"
-msgstr ""
+msgstr "№"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Status"
-msgstr ""
+msgstr "Стан"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Type"
-msgstr ""
+msgstr "Тип"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
-msgstr ""
+msgstr "Назва"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #, qt-format
@@ -3088,6 +3130,11 @@ msgid ""
 "telescope's number. To slew it to the center of the current view, hold down "
 "the Alt key and press the key with that telescope's number."
 msgstr ""
+"Щоб спрямувати з’єднаний з комп’ютером телескоп на об’єкт (наприклад, "
+"зірку), позначте об’єкт, натисніть і утримуйте клавішу %1, а потім натисніть "
+"клавішу з номером телескопа. Щоб спрямувати телескоп у центральну точку "
+"поточної області перегляду, натисніть клавішу Alt, а потім натисніть клавішу "
+"з номером телескопа."
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
@@ -3096,69 +3143,72 @@ msgid ""
 "control a telescope on its own, but it is still possible to do it through an "
 "external application or to connect to a remote host."
 msgstr ""
+"Не виявлено описів моделі пристрою. Stellarium не зможе керувати цим "
+"телескопом безпосередньо, але керування можна здійснювати за допомогою "
+"зовнішньої програми або з’єднання з іншим комп’ютером."
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
-msgstr ""
+msgstr "Натисніть кнопку «%1», щоб налаштувати нове з’єднання з телескопом."
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid "local, Stellarium"
-msgstr ""
+msgstr "локальне, Stellarium"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 msgid "local, external"
-msgstr ""
+msgstr "локальне, зовнішнє"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid "remote, unknown"
-msgstr ""
+msgstr "віддалене, невідоме"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid "virtual"
-msgstr ""
+msgstr "віртуальне"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:744
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Start"
-msgstr ""
+msgstr "Пуск"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:745
 msgid "Start the selected local telescope"
-msgstr ""
+msgstr "Розпочати роботу з позначеним локальним телескопом"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:750
 msgid "Stop"
-msgstr ""
+msgstr "Зупинити"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:751
 msgid "Stop the selected local telescope"
-msgstr ""
+msgstr "Перервати роботу з позначеним локальним телескопом"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:756
 msgid "Connect"
-msgstr ""
+msgstr "З’єднатися"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:757
 msgid "Connect to the selected telescope"
-msgstr ""
+msgstr "Встановити з’єднання з позначеним телескопом"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:762
 msgid "Disconnect"
-msgstr ""
+msgstr "Роз’єднатися"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:763
 msgid "Disconnect from the selected telescope"
-msgstr ""
+msgstr "Розірвати з’єднання з позначеним телескопом"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:784
 msgid "Select a directory"
-msgstr ""
+msgstr "Вибір каталогу"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:281
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
@@ -3168,95 +3218,98 @@ msgstr "Форма"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:282
 msgid "Slew telescope to"
-msgstr ""
+msgstr "Спрямувати телескоп на"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:284
 msgid "There are no active devices."
-msgstr ""
+msgstr "Немає активних пристроїв."
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:285
 msgid "Slew telescope to coordinates"
-msgstr ""
+msgstr "Спрямувати телескоп за координатами"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:286
 msgid "&Right Ascension (J2000):"
-msgstr ""
+msgstr "&Пряме сходження (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:287
 msgid "De&clination (J2000):"
-msgstr ""
+msgstr "С&хилення (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "Hours-minutes-seconds format"
-msgstr ""
+msgstr "Формат години-хвилини-секунди"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:291
 msgid "&HMS"
-msgstr ""
+msgstr "&ГХС"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:293
 msgid "Degrees-minutes-seconds format"
-msgstr ""
+msgstr "Формат грудуси-хвилини-секунди"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:295
 msgid "&DMS"
-msgstr ""
+msgstr "&ГХС"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:297
 msgid "Decimal degrees"
-msgstr ""
+msgstr "Десяткові градуси"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "D&ecimal"
-msgstr ""
+msgstr "&Десятковий"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:300
 msgid "&Slew"
-msgstr ""
+msgstr "Сп&рямувати"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Configure &telescopes..."
-msgstr ""
+msgstr "Налаштувати &телескопи…"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope Configuration"
-msgstr ""
+msgstr "Налаштування телескопа"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid "Telescope controlled by:"
-msgstr ""
+msgstr "Керування телескопом:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
+"Телескоп з’єднано безпосередньо з цим комп’ютером за допомогою послідовного "
+"порту, ним можна керувати безпосередньо за допомогою Stellarium."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
 msgid "Stellarium, directly through a serial port"
-msgstr ""
+msgstr "Stellarium, безпосередньо через посл. порт"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
+"Телескопом керує зовнішня програма на цьому або на іншому комп’ютері."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "External software or a remote computer"
-msgstr ""
+msgstr "Зовнішнє програмне забезпечення або віддалений комп’ютер"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr ""
+msgstr "Нічого, просто імітувати (рух шаблона)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Telescope properties"
-msgstr ""
+msgstr "Властивості телескопа"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid "Connection delay:"
-msgstr ""
+msgstr "Затримка з’єднання:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:488
 msgid ""
@@ -3264,77 +3317,85 @@ msgid ""
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
+"Приблизний час проходження сигналу від телескопа до Stellarium.\n"
+"Збільшіть це значення, якщо окулярна сітка не рухається разом з телескопом."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Coordinate system:"
-msgstr ""
+msgstr "Система координат:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "J2000 (default)"
-msgstr ""
+msgstr "J2000 (типова)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
 msgid "Equinox of the date (JNow)"
-msgstr ""
+msgstr "Рівнодення на дату (JNow)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
+"Під час запуску Stellarium робити автоматичну спробу розпочати роботу "
+"телескопа або встановити з’єднання з телескопом"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Start/connect at startup"
-msgstr ""
+msgstr "Запускати/З’єднуватися під час запуску"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Device settings"
-msgstr ""
+msgstr "Параметри пристрою"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Serial port:"
-msgstr ""
+msgstr "Послідовний порт:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Device model:"
-msgstr ""
+msgstr "Модель пристрою:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Connection settings"
-msgstr ""
+msgstr "Параметри з’єднання"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:502
 msgid "Host:"
-msgstr ""
+msgstr "Вузол:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:504
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr ""
+"Назва вузла або адреса IPv4 комп’ютера, на якому працює сервер керування "
+"телескопом"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "TCP port:"
-msgstr ""
+msgstr "Порт TCP:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "User interface settings"
-msgstr ""
+msgstr "Параметри інтерфейсу користувача"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
 msgid "Show circles with fixed angular size around the telescope reticle"
 msgstr ""
+"Показувати кола фіксованого кутового розміру поряд з окулярною сіткою "
+"телескопа"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:511
 msgid "Use field of view indicators"
-msgstr ""
+msgstr "Використовувати індикатори поля зору"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:512
 msgid "Circle size(s):"
-msgstr ""
+msgstr "Розмір кола:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:514
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
-msgstr ""
+msgstr "До десяти десяткових значень у кутах дуги, відокремлених комами"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "OK"
@@ -3342,55 +3403,57 @@ msgstr "Гаразд"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
 msgid "Telescopes Controlled"
-msgstr ""
+msgstr "Керовані телескопи"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Configure the selected telescope"
-msgstr ""
+msgstr "Налаштувати позначений телескоп"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Configure"
-msgstr ""
+msgstr "Налаштувати"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Add a new telescope"
-msgstr ""
+msgstr "Додати новий телескоп"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "Remove the selected telescope"
-msgstr ""
+msgstr "Вилучити позначений телескоп"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "GUI"
-msgstr ""
+msgstr "Інтерфейс"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Show telescope labels"
-msgstr ""
+msgstr "Показувати мітки телескопів"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Show telescope reticles"
-msgstr ""
+msgstr "Показувати шаблони телескопа"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Show field of view indicators"
-msgstr ""
+msgstr "Показувати індикатори поля зору"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Files"
-msgstr ""
+msgstr "Файли"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Log telescope driver messages to files"
-msgstr ""
+msgstr "Записувати повідомлення драйверів телескопа до файлів"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 msgid "Use telescope server executables (override built-in drivers)"
 msgstr ""
+"Використовувати виконувані файли з сервера телескопа (перевизначити "
+"вбудовані драйвери)"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
 msgid "Executables directory:"
-msgstr ""
+msgstr "Каталог виконуваних файлів:"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -3408,162 +3471,162 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 msgid "January"
-msgstr ""
+msgstr "січня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 msgid "February"
-msgstr ""
+msgstr "лютого"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 msgid "March"
-msgstr ""
+msgstr "березня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 msgid "April"
-msgstr ""
+msgstr "квітня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 msgid "May"
-msgstr ""
+msgstr "травня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 msgid "June"
-msgstr ""
+msgstr "червня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 msgid "July"
-msgstr ""
+msgstr "липня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 msgid "August"
-msgstr ""
+msgstr "серпня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 msgid "September"
-msgstr ""
+msgstr "вересня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 msgid "October"
-msgstr ""
+msgstr "жовтня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 msgid "November"
-msgstr ""
+msgstr "листопада"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 msgid "December"
-msgstr ""
+msgstr "грудня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:265
 msgid "First week"
-msgstr ""
+msgstr "перший тиждень"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:266
 msgid "Second week"
-msgstr ""
+msgstr "другий тиждень"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:267
 msgid "Third week"
-msgstr ""
+msgstr "третій тиждень"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:268
 msgid "Fourth week"
-msgstr ""
+msgstr "четвертий тиждень"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:269
 msgid "Last week"
-msgstr ""
+msgstr "попереднього тижня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:278
 msgid "Sunday"
-msgstr ""
+msgstr "неділя"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:279
 msgid "Monday"
-msgstr ""
+msgstr "понеділок"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:280
 msgid "Tuesday"
-msgstr ""
+msgstr "вівторок"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:281
 msgid "Wednesday"
-msgstr ""
+msgstr "середа"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:282
 msgid "Thursday"
-msgstr ""
+msgstr "четвер"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:283
 msgid "Friday"
-msgstr ""
+msgstr "п’ятниця"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:284
 msgid "Saturday"
-msgstr ""
+msgstr "субота"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
-msgstr ""
+msgstr "Додаток «Часовий пояс»"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:449
 msgid "Define a time zone"
-msgstr ""
+msgstr "Визначення часового пояса"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
 msgid "Time zone"
-msgstr ""
+msgstr "Часовий пояс"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:452
 msgid "Timezone name:"
-msgstr ""
+msgstr "Назва часового пояса:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "Offset from UTC (hours):"
-msgstr ""
+msgstr "Зсув відносно UTC (у годинах):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 msgid "Daylight saving time (summer time)"
-msgstr ""
+msgstr "Літній час"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
 msgid "DST timezone name:"
-msgstr ""
+msgstr "Назва часового поясу літнього часу:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
 msgid "DST offset from UTC (hours):"
-msgstr ""
+msgstr "Зсув літнього часу від UTC (у годинах):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
 msgid "Daylight saving time start"
-msgstr ""
+msgstr "Початок дії літнього часу"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
 msgid "Day:"
-msgstr ""
+msgstr "День:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
 msgid "Time of change:"
-msgstr ""
+msgstr "Час зміни:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
 msgid "Date:"
-msgstr ""
+msgstr "Дата:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
 msgid "Daylight saving time end"
-msgstr ""
+msgstr "Завершення строку дії літнього часу"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:465
 msgid "Use this definition"
-msgstr ""
+msgstr "Використовувати це визначення"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
 msgid ""
@@ -3572,71 +3635,75 @@ msgid ""
 "This behaviour can be changed by changing Stellarium's global time zone "
 "settings."
 msgstr ""
+"Типово час, показаний у Stellarium, визначається на основі місцевого часу у "
+"часовому поясі системи, а не на основі часового поясу показаного "
+"розташування. Таку поведінку можна змінити за допомогою параметрів "
+"загального часового пояса Stellarium."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "Use system settings (default)"
-msgstr ""
+msgstr "Параметри системи (типовий)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
 msgid "Universal Coordinated Time (UTC)"
-msgstr ""
+msgstr "Універсальний координований час (UTC)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "(offset = local time - UTC time)"
-msgstr ""
+msgstr "(зсув = локальний час - час UTC)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
 msgid "User-defined:"
-msgstr ""
+msgstr "Визначене користувачем:"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
 msgid "Any changes will take effect the next time Stellarium is started."
-msgstr ""
+msgstr "Всі зміни набудуть чинності лише після перезапуску Stellarium."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:407
 msgid "Display formats"
-msgstr ""
+msgstr "Формати показу"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
-msgstr ""
+msgstr "Ці параметри керують способом показу дати і часу на нижній панелі."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:194
 msgid "Time display format"
-msgstr ""
+msgstr "Формат показу часу"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
 msgid "System default"
-msgstr ""
+msgstr "Типовий системний"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "12-hour format"
-msgstr ""
+msgstr "12-годинний формат"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
 msgid "24-hour format"
-msgstr ""
+msgstr "24-годинний формат"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:183
 msgid "Date display format"
-msgstr ""
+msgstr "Формат показу дати"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
 msgid "yyyy-mm-dd (ISO 8601)"
-msgstr ""
+msgstr "рррр-мм-дд (ISO 8601)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 msgid "dd-mm-yyyy"
-msgstr ""
+msgstr "дд-мм-рррр"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
 msgid "mm-dd-yyyy"
-msgstr ""
+msgstr "мм-дд-рррр"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:81
 msgid ""
@@ -3648,55 +3715,55 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 msgid "Solar System body"
-msgstr ""
+msgstr "Об'єкт сонячної системи"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:158
 msgid "Current date/time"
-msgstr ""
+msgstr "Поточна дата і час"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:163
 msgid "Set time zone"
-msgstr ""
+msgstr "Встановити часовий пояс"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:164
 msgid "Day keys"
-msgstr ""
+msgstr "Клавіші днів"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:165
 msgid "Startup date/time preset"
-msgstr ""
+msgstr "Початкова дата і час"
 
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "system"
-msgstr ""
+msgstr "системна"
 
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:174
 msgid "preset"
-msgstr ""
+msgstr "шаблон"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "mmddyyyy"
-msgstr ""
+msgstr "ммддрррр"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "ddmmyyyy"
-msgstr ""
+msgstr "ддммрррр"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "yyyymmdd"
-msgstr ""
+msgstr "ррррммдд"
 
 #. TRANSLATORS: 12-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "12h"
-msgstr ""
+msgstr "12-годинний"
 
 #. TRANSLATORS: 24-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:193
 msgid "24h"
-msgstr ""
+msgstr "24-годинний"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:218
 msgid "Language"
@@ -3704,96 +3771,96 @@ msgstr "Мова"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:232
 msgid "Show stars"
-msgstr ""
+msgstr "Показувати зірки"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:260
 msgid "Colors"
-msgstr ""
+msgstr "Кольори"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Nebula names"
-msgstr ""
+msgstr "Назви туманностей"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:340
 msgid "Nebula hints"
-msgstr ""
+msgstr "Мітки туманностей"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:383
 msgid "Effects"
-msgstr ""
+msgstr "Ефекти"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:397
 msgid "Manual zoom"
-msgstr ""
+msgstr "Ручний масштаб"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Magnitude scaling multiplier"
-msgstr ""
+msgstr "Множник масштабування величин"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:404
 msgid "Milky Way intensity:"
-msgstr ""
+msgstr "Інтенсивність Молочного шляху:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:410
 msgid "Nebula label frequency:"
-msgstr ""
+msgstr "Частота міток туманностей:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:411
 msgid "Zoom duration:"
-msgstr ""
+msgstr "Тривалість зміни масштабу:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:417
 msgid "Cursor timeout:"
-msgstr ""
+msgstr "Затримка вказівника:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:418
 msgid "Setting landscape sets location"
-msgstr ""
+msgstr "Розташування встановлюється за ландшафтом"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:438
 msgid "Run local script"
-msgstr ""
+msgstr "Виконати локальний скрипт"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:444
 msgid "Stop running script"
-msgstr ""
+msgstr "Зупинити виконання локального скрипту"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:447
 msgid "CD/DVD script"
-msgstr ""
+msgstr "Скрипт на CD/DVD"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:454
 msgid "Administration"
-msgstr ""
+msgstr "Адміністрування"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:458
 msgid "Load default configuration"
-msgstr ""
+msgstr "Завантажити типові налаштування"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:459
 msgid "Save current configuration"
-msgstr ""
+msgstr "Зберегти поточні налаштування"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:462
 msgid "Shut down"
-msgstr ""
+msgstr "Завершити роботу"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:480
 msgid "[no TUI node]"
-msgstr ""
+msgstr "[не вузол TUI]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
 msgid "On"
-msgstr ""
+msgstr "Увімкн."
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
 msgid "Off"
-msgstr ""
+msgstr "Вимкн."
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr ""
+msgstr "помилка, невідома частина кольору «%1»"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
@@ -3814,17 +3881,20 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
 #, qt-format
 msgid "Query the MPC's %1:"
-msgstr ""
+msgstr "Запит до служби %1:"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
 msgid "Only one result will be returned if the query is successful."
 msgstr ""
+"Якщо запит буде успішно виконано, буде повернуто лише один результат."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
 msgstr ""
+"Комети і астероїди можна знайти за номером, назвою (англійською мовою) або "
+"тимчасовим позначенням."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
 #, qt-format
@@ -3834,11 +3904,15 @@ msgid ""
 "searching for \"%3\" will return %4, Halley's Comet, but a search for \"%5\" "
 "will return the asteroid %6."
 msgstr ""
+"<i>Назви</i> комет повинні мати префікси %1 або %2. Якщо назві відповідає "
+"декілька комет, буде показано лише перший результат. Наприклад, у результаті "
+"пошуку «%3» буде показано %4, комету Галлея, а у результаті пошуку «%5» — "
+"астероїд %6."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:87
 msgid "website"
-msgstr ""
+msgstr "веб-сайт"
 
 #. TRANSLATORS: IAU = International Astronomical Union
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:91
@@ -3849,71 +3923,75 @@ msgid ""
 "objects, download such lists from the Internet or search the online Minor "
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
+"Ви можете імпортувати дані щодо комет і астероїдів у форматах експорту даних "
+"Центру малих планет МАС (%1). Імпортувати можна файли зі списками об’єктів. "
+"Отримати такі списки можна з інтернету або пошуком за допомогою Служби малих "
+"планет і ефемерид (MPES)."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
 msgid "Solar System Editor plug-in"
-msgstr ""
+msgstr "Додаток «Редагування Сонячної системи»"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
-msgstr ""
+msgstr "Виберіть тип"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Asteroids"
-msgstr ""
+msgstr "Астероїди"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Comets"
-msgstr ""
+msgstr "Комети"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Select the source"
-msgstr ""
+msgstr "Вибір джерела"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Download a list of objects from the Internet"
-msgstr ""
+msgstr "Звантажити список об’єктів з інтернету"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Select a source from the list:"
-msgstr ""
+msgstr "Виберіть джерело зі списку:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Or enter a URL:"
-msgstr ""
+msgstr "Або вкажіть адресу:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Add this URL to the bookmarks list"
-msgstr ""
+msgstr "Додати цю адресу до списку закладок"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Bookmark title:"
-msgstr ""
+msgstr "Назва закладки:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "A file containing a list of objects"
-msgstr ""
+msgstr "Файл зі списком об’єктів"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Get orbital elements"
-msgstr ""
+msgstr "Отримати елементи орбіт"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Abort download"
-msgstr ""
+msgstr "Перервати звантаження"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Lists"
-msgstr ""
+msgstr "Списки"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "Online search"
-msgstr ""
+msgstr "Пошук у мережі"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Objects found"
-msgstr ""
+msgstr "Знайдено об’єкти"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid ""
@@ -3923,43 +4001,49 @@ msgid ""
 "Solar System configuration.<br/>Note that adding a large number of objects "
 "may cause Stellarium to run slowly."
 msgstr ""
+"Позначте об’єкти, дані яких має бути імпортовано. <i>Курсивом</i> у списку "
+"позначено пункти об’єктів, назви яких збігаються з назвами вже завантажених "
+"об’єктів. <b>Напівжирним</b> у списку позначено пункти об’єктів, назви яких "
+"успадковано з типових налаштувань об’єктів Сонячної системи "
+"Stellarium.<br/>Зауважте, що додавання значної кількості об’єктів може "
+"уповільнити роботу Stellarium."
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Overwrite existing objects"
-msgstr ""
+msgstr "Перезаписати дані вже створених об’єктів"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
 msgid "Update existing objects"
-msgstr ""
+msgstr "Оновити дані вже створених об’єктів"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid "Update only the orbital elements"
-msgstr ""
+msgstr "Оновити лише параметри орбіт"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid "Mark all"
-msgstr ""
+msgstr "Позначити всі"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Mark none"
-msgstr ""
+msgstr "Зняти позначення"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Discard"
-msgstr ""
+msgstr "Відкинути"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid "Add objects"
-msgstr ""
+msgstr "Додати об’єкти"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Solar System objects"
-msgstr ""
+msgstr "Об'єкти Сонячної системи"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Warning"
-msgstr ""
+msgstr "Попередження"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid ""
@@ -3967,49 +4051,56 @@ msgid ""
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
 msgstr ""
+"У цьому додатку використовується нетиповий файл налаштувань Сонячної "
+"системи. Якщо щось піде не так, і  Stellarium почне працювати нестабільно "
+"або ви взагалі не зможете запустити програму, просто вилучіть вручну цей "
+"файл:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid ""
 "You can also reset all changes and return to the default configuration:"
-msgstr ""
+msgstr "Ви можете відкинути всі зміни і повернутися до типових налаштувань:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Reset to defaults"
-msgstr ""
+msgstr "Відновити типові"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Copy/replace the Solar System file"
-msgstr ""
+msgstr "Скопіювати/Замінити файл Сонячної системи"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
+"Ви можете створити резервну копію нетипових налаштувань показу об’єктів "
+"Сонячної системи у зручному для вас місці або замінити файл налаштувань "
+"створеною раніше резервною копією."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Copy the Solar System file..."
-msgstr ""
+msgstr "Копіювати файл даних Сонячної системи…"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Replace the Solar System file..."
-msgstr ""
+msgstr "Замінити файл даних Сонячної системи…"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Configuration file"
-msgstr ""
+msgstr "Файл налаштувань"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Add new Solar System objects"
-msgstr ""
+msgstr "Додати нові об’єкти Сонячної системи"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
 msgid "Import orbital elements in MPC format..."
-msgstr ""
+msgstr "Імпортувати елементи орбіт у форматі MPC…"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
 msgid "Solar System"
-msgstr ""
+msgstr "Сонячна система"
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical Supernovae"
@@ -4038,7 +4129,7 @@ msgstr "Тип: %1"
 
 #: plugins/Quasars/src/Quasars.cpp:59
 msgid "Quasars"
-msgstr ""
+msgstr "Квазари"
 
 #: plugins/Quasars/src/Quasars.cpp:62
 msgid ""
@@ -4046,15 +4137,19 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei'' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
+"За допомогою цього додатка можна стежити за деякими квазарами з зоряною "
+"величиною, що перевищує 16. Каталог квазарів створено на основі 13-ої "
+"редакції каталогу «Квазари та активні ядра галактик» (Верон та ін., 2010) "
+"=2010A&A…518A..10V"
 
 #: plugins/Quasars/src/Quasar.cpp:113
 msgid "Type: quasar"
-msgstr ""
+msgstr "Тип: квазар"
 
 #: plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Z (redshift): %1"
-msgstr ""
+msgstr "Z (червоний зсув): %1"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Екваторіальна сітка"
