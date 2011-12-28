@@ -349,23 +349,26 @@ void ViewDialog::populateLists()
 
 	// Fill the landscape list
 	l = ui->landscapesListWidget;
-	int selectedLandscape = l->currentRow();
 	l->blockSignals(true);
 	l->clear();
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	QStringList landscapeList = lmgr->getAllLandscapeNames();
-	foreach (const QString desc, landscapeList)
+	foreach (const QString landscapeId, landscapeList)
 	{
-		QString label = q_(desc);
+		QString label = q_(landscapeId);
 		QListWidgetItem* item = new QListWidgetItem(label);
-		item->setData(Qt::UserRole, desc);
+		item->setData(Qt::UserRole, landscapeId);
 		l->addItem(item);
 	}
-	if (selectedLandscape >= 0 && selectedLandscape < l->count())
-		l->setCurrentRow(selectedLandscape);
-	else
-		l->setCurrentItem(l->findItems(q_(lmgr->getCurrentLandscapeName()), Qt::MatchExactly).at(0));
-		
+	QString selectedLandscapeId = lmgr->getCurrentLandscapeName();
+	for (int i = 0; i < l->count(); i++)
+	{
+		if (l->item(i)->data(Qt::UserRole).toString() == selectedLandscapeId)
+		{
+			l->setCurrentRow(i);
+			break;
+		}
+	}
 	l->blockSignals(false);
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
 	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
