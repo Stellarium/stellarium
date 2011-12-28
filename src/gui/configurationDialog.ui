@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>434</width>
-    <height>453</height>
+    <width>440</width>
+    <height>460</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -133,7 +133,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
-         <number>4</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -342,7 +342,7 @@
                 <string>The width of your view when Stellarium starts</string>
                </property>
                <property name="text">
-                <string>Startup FOV: XX</string>
+                <string notr="true">Startup FOV: XX</string>
                </property>
                <property name="textInteractionFlags">
                 <set>Qt::TextSelectableByMouse</set>
@@ -355,7 +355,7 @@
                 <string>The direction you're looking when Stellarium starts</string>
                </property>
                <property name="text">
-                <string>Startup direction of view: xxxx</string>
+                <string notr="true">Startup direction of view: xxxx</string>
                </property>
                <property name="textInteractionFlags">
                 <set>Qt::TextSelectableByMouse</set>
@@ -470,15 +470,15 @@
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
                  </property>
-                 <property name="currentSectionIndex">
-                  <number>0</number>
-                 </property>
                  <property name="time">
                   <time>
                    <hour>21</hour>
                    <minute>0</minute>
                    <second>0</second>
                   </time>
+                 </property>
+                 <property name="currentSectionIndex">
+                  <number>0</number>
                  </property>
                 </widget>
                </item>
@@ -781,7 +781,7 @@
                 <string>Click here to start downloading</string>
                </property>
                <property name="text">
-                <string>Get catalog x of y</string>
+                <string notr="true">Get catalog x of y</string>
                </property>
                <property name="icon">
                 <iconset resource="../../data/gui/guiRes.qrc">
@@ -795,7 +795,7 @@
              <item>
               <widget class="QLabel" name="downloadLabel">
                <property name="text">
-                <string>xxx</string>
+                <string notr="true">xxx</string>
                </property>
               </widget>
              </item>

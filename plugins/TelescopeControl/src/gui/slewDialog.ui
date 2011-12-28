@@ -187,23 +187,10 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>&amp;Right Ascension</string>
+            <string>&amp;Right Ascension (J2000):</string>
            </property>
            <property name="buddy">
             <cstring>spinBoxRA</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLabel" name="labelJ2000_1">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>(J2000)</string>
            </property>
           </widget>
          </item>
@@ -216,7 +203,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>De&amp;clination</string>
+            <string>De&amp;clination (J2000):</string>
            </property>
            <property name="buddy">
             <cstring>spinBoxDec</cstring>
@@ -224,19 +211,6 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QLabel" name="labelJ2000_2">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>(J2000)</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
           <widget class="AngleSpinBox" name="spinBoxDec">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -246,7 +220,7 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="2">
+         <item row="0" column="1">
           <widget class="AngleSpinBox" name="spinBoxRA">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">

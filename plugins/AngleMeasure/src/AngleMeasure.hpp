@@ -50,6 +50,7 @@ public slots:
 	void enableAngleMeasure(bool b);
 
 private slots:
+	void updateMessageText();
 	void clearMessage();
 
 private:
@@ -58,6 +59,9 @@ private:
 	LinearFader lineVisible;
 	LinearFader messageFader;
 	QTimer* messageTimer;
+	QString messageEnabled;
+	QString messageLeftButton;
+	QString messageRightButton;
 	bool dragging;
 	Vec3d startPoint;
 	Vec3d endPoint;
@@ -71,7 +75,7 @@ private:
 	bool flagUseDmsFormat;
 	StelButton* toolbarButton;
 
-	void calculateEnds(void);
+	void calculateEnds();
 };
 
 

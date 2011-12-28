@@ -1,13 +1,22 @@
-0.11.1 [2011-10-15]
+0.11.2
+Added to the Windows installer options to remove files left over from the previous installation.
+Prevented windows from being dragged to unreachable positions.
+The "Save settings" button now saves the current main window position, too.
+Fixed:
+- Pluto's moon Hydra preventing the constellation from being selected in Search and scripts (LP: #894780)
+
+0.11.1 [2011-11-04]
 Bug fix release.
 Added:
 - new skyculture: Arabic
 - new moons and rings (LP: #815484, #834336)
-- Belarusian translation for landscapes and sky cultures (LP: #849292)
+- new translations for landscapes and sky cultures (LP: #849292)
 - possibility to observate geo-orbiting satellites (LP: #837274)
 - new cities (LP: #856343, #860206)
 Fixed:
+- misspelling on a star name (LP: #884795)
 - location window: map pointer position is updated on longitude/latitude change.
+- location window: fixed checking "Use as default" changing the name of the selected location to "New Location" (LP: #881613)
 - Solar System Editor plug-in: a bug in the parsing of MPC lists: the epoch's Julian Day value was wrong by 0.5 JD (LP: #836839)
 - Solar System Editor plug-in: crash while trying to browse for a local file (LP: #837396)
 - Historical Supernovae plug-in: a bug in plug-in name (LP: #803157)
@@ -20,6 +29,7 @@ Fixed:
 - 0.11.0 will crash if a landscape is selected with misspelled planet name (LP: #835422)
 - crash on selecting off-Earth location in the Location window (LP: #834886)
 - 0.11.0 crashes when switching language while location window is open (LP: #824936)
+- 0.11.0 crashes when trying using custom distortion file (LP: #871313) 
 
 0.11.0
 New feature: atmosphere refraction support.

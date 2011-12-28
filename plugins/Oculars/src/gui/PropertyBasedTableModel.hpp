@@ -40,6 +40,9 @@ public:
 	virtual bool setData(const QModelIndex &index, const QVariant &value, int role=Qt::EditRole);
 	virtual bool removeRows(int position, int rows, const QModelIndex &index=QModelIndex());
 
+	void moveRowUp(int position);
+	void moveRowDown(int position);
+
 private:
 	QList<QObject *>* content;
 	QMap<int, QString> mappings;

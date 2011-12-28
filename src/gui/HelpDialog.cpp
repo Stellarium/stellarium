@@ -72,6 +72,10 @@ HelpDialog::HelpDialog()
 	setKey(group, "", "J", N_("Slow down the script execution rate"));
 	setKey(group, "", "L", N_("Speed up the script execution rate"));
 	setKey(group, "", "K", N_("Set the normal script execution rate"));
+
+        // Add keys for those plugins which do not have GUI actions.
+        group = N_("Plugin Key Bindings");
+        setKey(group, "", "Alt+M", N_("Text User Interface"));
 }
 
 HelpDialog::~HelpDialog()
@@ -297,9 +301,16 @@ void HelpDialog::updateText(void)
 	newHtml += "<li>" + Qt::escape(q_("Graphic/other designer: %1").arg(QString("Johan Meuris"))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Johannes Gajdosik"))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Rob Spearman"))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("OSX Developer: %1").arg(QString("Nigel Kerr"))) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Bogdan Marinov"))) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Timothy Reaves"))) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Guillaume Ch%1reau").arg(QChar(0x00E9)))) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("OSX Developer: %1").arg(QString("Nigel Kerr"))) + "</li>";	
+	newHtml += "<li>" + Qt::escape(q_("OSX Developer: %1").arg(QString("Diego Marcos"))) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Alexander Wolf"))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Andr%1s Mohari").arg(QChar(0x00E1)))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Mike Storm"))) + "</li><ul><p>";
+	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Mike Storm"))) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Tester: %1").arg(QString("Barry Gerdes"))) + "</li>";
+	newHtml += "<li>" + Qt::escape(q_("Tester: %1").arg(QString("Khalid AlAjaji"))) + "</li><ul><p>";
 	ui->aboutBrowser->clear();
 	ui->aboutBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->aboutBrowser->insertHtml(newHtml);

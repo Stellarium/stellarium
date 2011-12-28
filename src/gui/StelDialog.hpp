@@ -23,7 +23,24 @@
 #include <QObject>
 
 //! @class StelDialog
-//! Base class for all the GUI windows in stellarium
+//! Base class for all the GUI windows in Stellarium.
+//! 
+//! Windows in Stellarium are actually basic QWidgets that have to be wrapped in
+//! a QGraphicsProxyWidget (CustomProxy) to be displayed by StelMainGraphicsView
+//! (which is derived from QGraphicsView). See the Qt documentation for details.
+//! 
+//! The base widget needs to be populated with controls in the implementation
+//! of the createDialogContent() function. This can be done either manually, or
+//! by using a .ui file. See the Qt documentation on using Qt Designer .ui files
+//! for details.
+//! 
+//! The createDialogContent() function itself is called automatically the first
+//! time setVisible() is called with "true".
+//! 
+//! Moving a window is done by dragging its title bar, defined in the BarFrame
+//! class. Every derived window class needs a BarFrame object - it
+//! has to be either included in a .ui file, or manually instantiated in
+//! createDialogContent().
 class StelDialog : public QObject
 {
 	Q_OBJECT
@@ -34,15 +51,19 @@ public:
 	bool visible() const;
 
 public slots:
-	//! Retranslate the content of the dialog
+	//! Retranslate the content of the dialog.
+	//! Needs to be re-implemented for every window class and connected to
+	//! StelApp::languageChanged().
 	void languageChanged();
+	//! On the first call with "true" populates the window contents.
 	void setVisible(bool);
+	//! Closes the window (the window widget is not deleted, just not visible).
 	void close();
 signals:
 	void visibleChanged(bool);
 
 protected:
-	//! Initialize the dialog widgets and connect the signals/slots
+	//! Initialize the dialog widgets and connect the signals/slots.
 	virtual void createDialogContent()=0;
 
 	//! The main dialog

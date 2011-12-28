@@ -25,7 +25,20 @@
 #include <QFrame>
 #include <QMouseEvent>
 
-
+//! \class BarFrame
+//! A title bar control used in windows derived from StelDialog.
+//! 
+//! As window classes derived from StelDialog are basic QWidgets, they have no
+//! title bar. A BarFrame control needs to be used in each window's design
+//! to allow the user to move them.
+//! 
+//! Typically, the frame should contain a centered label displaying the window's
+//! title and a button for closing the window (connected to the 
+//! StelDialog::close() slot).
+//! 
+//! To use the default Stellarium style for title bars, the BarFrame object of a
+//! given window should be named "TitleBar". See the normalStyle.css file for
+//! the style sheet description.
 class BarFrame : public QFrame
 {
 Q_OBJECT
