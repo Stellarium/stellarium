@@ -97,15 +97,17 @@ class Translations
 		N_("Laomedeia");
 		N_("Neso");
 		N_("Solar System Observer");
-        //TNO's that are in the default ssystem.ini
-        // TRANSLATORS: TNO/Asteroid (90377) Sedna
-        N_("Sedna");
-        // TRANSLATORS: TNO/Asteroid (50000) Quaoar
-        N_("Quaoar");
-        // TRANSLATORS: TNO/Asteroid (90482) Orcus
-        N_("Orcus");
-        // TRANSLATORS: TNO/Asteroid (136108) Haumea
-        N_("Haumea");
+		
+		//TNO's that are in the default ssystem.ini
+		// TRANSLATORS: TNO/Asteroid (90377) Sedna
+		N_("Sedna");
+		// TRANSLATORS: TNO/Asteroid (50000) Quaoar
+		N_("Quaoar");
+		// TRANSLATORS: TNO/Asteroid (90482) Orcus
+		N_("Orcus");
+		// TRANSLATORS: TNO/Asteroid (136108) Haumea
+		N_("Haumea");
+		
 		//Asteroids that are not in the default ssystem.ini
 		// TRANSLATORS: Asteroid (5) Astraea
 		N_("Astraea");
@@ -129,6 +131,7 @@ class Translations
 		N_("Eros");
 		// TRANSLATORS: Asteroid (624) Hektor
 		N_("Hektor");
+		
 		// TRANSLATORS: Name of supernova SN 1572A
 		N_("Tycho's Supernova");
 		// TRANSLATORS: Name of supernova SN 1604A
@@ -158,21 +161,21 @@ class Translations
 		N_("Western");
 
 		// Landscapes names
-        // TRANSLATORS: Name of landscape
+		// TRANSLATORS: Name of landscape
 		N_("Guereins");
-        // TRANSLATORS: Name of landscape
+		// TRANSLATORS: Name of landscape
 		N_("Trees");
-        // TRANSLATORS: Name of landscape and Earth's satellite
+		// TRANSLATORS: Name of landscape and Earth's satellite
 		N_("Moon");
-        // TRANSLATORS: Name of landscape
+		// TRANSLATORS: Landscape name: Hurricane Ridge
 		N_("Hurricane");
-        // TRANSLATORS: Name of landscape
+		// TRANSLATORS: Name of landscape
 		N_("Ocean");
-        // TRANSLATORS: Name of landscape
+		// TRANSLATORS: Landscape name: Garching bei Munchen
 		N_("Garching");
-        // TRANSLATORS: Name of landscape and planet
+		// TRANSLATORS: Name of landscape and planet
 		N_("Mars");
-        // TRANSLATORS: Name of landscape and planet
+		// TRANSLATORS: Name of landscape and planet
 		N_("Saturn");
 	}
 };
