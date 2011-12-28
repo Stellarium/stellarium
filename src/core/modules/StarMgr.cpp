@@ -129,7 +129,7 @@ StarMgr::StarMgr(void) : hipIndex(new HipIndexStruct[NR_OF_HIP+1])
 	}
 	maxGeodesicGridLevel = -1;
 	lastMaxSearchLevel = -1;
-	starFont.setPixelSize(13.);
+	starFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
 }
@@ -224,7 +224,7 @@ void StarMgr::init()
 	}
 
 	loadData(starSettings);
-	starFont.setPixelSize(13);
+	starFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
@@ -644,9 +644,10 @@ void StarMgr::draw(StelCore* core)
 	skyDrawer->preDrawPointSource(&sPainter);
 
 	// draw all the stars of all the selected zones
-	// GZ: This table must be enlarged from 2x256 to many more entries
+        // GZ: This table must be enlarged from 2x256 to many more entries. CORRELATE IN Zonearray.cpp!
 	//float rcmag_table[2*256];
-	float rcmag_table[2*16384];
+        //float rcmag_table[2*16384];
+        float rcmag_table[2*4096];
 
 	for (ZoneArrayMap::const_iterator it(zoneArrays.constBegin()); it!=zoneArrays.constEnd();++it)
 	{
@@ -654,7 +655,7 @@ void StarMgr::draw(StelCore* core)
 		const float k = (0.001f*it.value()->mag_range)/it.value()->mag_steps; // MagStepIncrement
 		// GZ: add a huge number of entries to rcMag
 		//for (int i=it.value()->mag_steps-1;i>=0;--i)
-		for (int i=16384-1;i>=0;--i)
+                for (int i=4096-1;i>=0;--i)
 		{
 			const float mag = mag_min+k*i;
 			if (skyDrawer->computeRCMag(mag,rcmag_table + 2*i)==false)

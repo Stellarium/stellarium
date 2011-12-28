@@ -29,6 +29,7 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelTranslator.hpp"
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
 
@@ -64,15 +65,12 @@ void SolarSystemManagerWindow::createDialogContent()
 	connect(ui->pushButtonReplaceFile, SIGNAL(clicked()), this, SLOT(replaceConfiguration()));
 	connect(ui->pushButtonRemove, SIGNAL(clicked()), this, SLOT(removeObject()));
 	connect(ui->pushButtonImportMPC, SIGNAL(clicked()), this, SLOT(newImportMPC()));
-	connect(ui->pushButtonManual, SIGNAL(clicked()), this, SLOT(newImportManual()));
+	//connect(ui->pushButtonManual, SIGNAL(clicked()), this, SLOT(newImportManual()));
 
 	connect(ssoManager, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
 	connect(ui->pushButtonReset, SIGNAL(clicked()), ssoManager, SLOT(resetSolarSystemToDefault()));
 
-	ui->labelVersion->setText(QString("Version %1").arg(PLUGIN_VERSION));
-	//Remove the "Data Import" tab
-	//TODO: (temporary, until the ManualImportWindow is finished)
-	ui->tabWidget->removeTab(2);
+	updateTexts();
 
 	Q_ASSERT(mpcImportWindow);
 	//Rebuild the list if any planets have been imported
@@ -82,13 +80,29 @@ void SolarSystemManagerWindow::createDialogContent()
 	populateSolarSystemList();
 }
 
+void SolarSystemManagerWindow::updateTexts()
+{
+	//Solar System tab
+	// TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
+	QString linkText(q_("website"));
+	QString linkCode = QString("<a href=\"http://www.minorplanetcenter.net/\">%1</a>").arg(linkText);
+	       
+	// TRANSLATORS: IAU = International Astronomical Union
+	QString mpcText(q_("You can import comet and asteroid data formatted in the export formats of the IAU's Minor Planet Center (%1). You can import files with lists of objects, download such lists from the Internet or search the online Minor Planet and Comet Ephemeris Service (MPES)."));
+	ui->labelMPC->setText(QString(mpcText).arg(linkCode));
+	
+	//About tab
+	ui->labelTitle->setText(q_("Solar System Editor plug-in"));
+	ui->labelVersion->setText(QString(q_("Version %1")).arg(SOLARSYSTEMEDITOR_VERSION));
+}
+
 void SolarSystemManagerWindow::languageChanged()
 {
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
 		populateSolarSystemList();
-		ui->labelVersion->setText(QString("Version %1").arg(PLUGIN_VERSION));
+		updateTexts();
 	}
 }
 

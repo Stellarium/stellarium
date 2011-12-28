@@ -66,12 +66,6 @@ namespace TelescopeControlGlobals {
 		bool useExecutable;
 	};
 	
-		
-	const QString LABEL_TEXT_CONTROL_TIP = QString("To slew a connected telescope to an object (for example, a star), select that object, then hold down the Ctrl key and press the key with that telescope's number. To slew it to the center of the current view, hold down the Alt key and press the key with that telescope's number.");
-	const QString LABEL_TEXT_NO_DEVICE_MODELS = QString("No device model descriptions are available. Stellarium will not be able to control a telescope on its own, but it is still possible to do it through an external application or to connect to a remote host.");
-	const QString LABEL_TEXT_ADD_TIP = QString("Press the \"Add\" button to set up a new telescope connection.");
-	
-	const QString TOOL_TIP_CONTROL = QString("Select an object, then press <strong>Ctrl+%1</strong> to slew this telescope to that object. Press <strong>Alt+%1</strong> to slew to the center of the current view.");
 	
 	#ifdef Q_OS_WIN32
 	const QStringList SERIAL_PORT_NAMES = QString("COM1 COM2 COM3 COM4").split(' ', QString::SkipEmptyParts);

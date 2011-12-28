@@ -122,6 +122,9 @@
    </item>
    <item>
     <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
      <widget class="QWidget" name="tabConfigurationFile">
       <attribute name="title">
        <string>Configuration file</string>
@@ -263,7 +266,7 @@
           <item>
            <widget class="QLabel" name="labelMPC">
             <property name="text">
-             <string>You can import comet and asteroid data formatted in the export formats of the IAU's &lt;a href=&quot;http://www.minorplanetcenter.net/&quot;&gt;Minor Planet Center&lt;/a&gt; (MPC). You can import files with lists of objects, download such lists from the Internet or search the online Minor Planet and Comet Ephemeris Service (MPES).</string>
+             <string notr="true">You can import comet and asteroid data formatted in the export formats of the IAU's &lt;a href=&quot;http://www.minorplanetcenter.net/&quot;&gt;Minor Planet Center&lt;/a&gt; (MPC). You can import files with lists of objects, download such lists from the Internet or search the online Minor Planet and Comet Ephemeris Service (MPES).</string>
             </property>
             <property name="textFormat">
              <enum>Qt::AutoText</enum>
@@ -301,58 +304,6 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tabDataImport">
-      <attribute name="title">
-       <string>Data import</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayoutTabDataImport">
-       <property name="margin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QGroupBox" name="groupBoxManual">
-         <property name="title">
-          <string>Enter manually a new Solar System object</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayoutManualEntry">
-          <property name="margin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="labelManual">
-            <property name="text">
-             <string>You can add a new object by entering manually the properties used by Stellarium.</string>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButtonManual">
-            <property name="text">
-             <string>Enter manually object properties...</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacerDataImport">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
      <widget class="QWidget" name="tabAbout">
       <attribute name="title">
        <string>About</string>
@@ -366,14 +317,14 @@
 }</string>
          </property>
          <property name="text">
-          <string>Solar System Editor plug-in</string>
+          <string notr="true">Solar System Editor plug-in</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLabel" name="labelVersion">
          <property name="text">
-          <string>Version %1</string>
+          <string notr="true">Version %1</string>
          </property>
         </widget>
        </item>

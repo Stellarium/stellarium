@@ -136,20 +136,34 @@ public slots:
 	//! Set the color of the Horizon Line.
 	void setColorHorizonLine(const Vec3f& v);
 
+	//! Set flag for displaying GalacticPlane Line.
+	void setFlagGalacticPlaneLine(bool b);
+	//! Get flag for displaying GalacticPlane Line.
+	bool getFlagGalacticPlaneLine(void) const;
+	//! Get the current color of the GalacticPlane Line.
+	Vec3f getColorGalacticPlaneLine(void) const;
+	//! Set the color of the GalacticPlane Line.
+	void setColorGalacticPlaneLine(const Vec3f& v);
+
+
 private slots:
 	//! Sets the colors of: grids and great circles, Equatorial Grid, Azimuthal Grid, 
 	//! Meridian Line, Equator Line and Ecliptic Line.
 	void setStelStyle(const QString& section);
+	//! Re-translate the labels of the great circles.
+	//! Contains only calls to SkyLine::updateLabel().
+	void updateLineLabels();
 
 private:
-	SkyGrid * equGrid;      // Equatorial grid
-	SkyGrid * equJ2000Grid; // Equatorial J2000 grid
-	SkyGrid * galacticGrid; // Galactic grid
-	SkyGrid * aziGrid;      // Azimuthal grid
-	SkyLine * equatorLine;  // Celestial Equator line
-	SkyLine * eclipticLine; // Ecliptic line
-	SkyLine * meridianLine; // Meridian line
-	SkyLine * horizonLine;	// Horizon line
+	SkyGrid * equGrid;      	// Equatorial grid
+	SkyGrid * equJ2000Grid; 	// Equatorial J2000 grid
+	SkyGrid * galacticGrid; 	// Galactic grid
+	SkyGrid * aziGrid;      	// Azimuthal grid
+	SkyLine * equatorLine;  	// Celestial Equator line
+	SkyLine * eclipticLine; 	// Ecliptic line
+	SkyLine * meridianLine; 	// Meridian line
+	SkyLine * horizonLine;		// Horizon line
+	SkyLine * galacticPlaneLine;	// line depciting the Galacitc plane as defined by the IAU definition of Galactic coordinates
 };
 
 #endif // _GRIDLINESMGR_HPP_

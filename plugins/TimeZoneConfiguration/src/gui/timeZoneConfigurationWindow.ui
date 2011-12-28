@@ -122,6 +122,9 @@
    </item>
    <item>
     <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
      <widget class="QWidget" name="tabTimeZone">
       <attribute name="title">
        <string>Time zone</string>
@@ -172,7 +175,7 @@
           <item row="3" column="0">
            <widget class="QRadioButton" name="radioButtonOffset">
             <property name="text">
-             <string>Offset from UTC:</string>
+             <string>Offset from UTC (hours):</string>
             </property>
            </widget>
           </item>
@@ -180,9 +183,6 @@
            <widget class="QDoubleSpinBox" name="doubleSpinBoxOffset">
             <property name="wrapping">
              <bool>true</bool>
-            </property>
-            <property name="suffix">
-             <string> hours</string>
             </property>
             <property name="decimals">
              <number>2</number>
@@ -227,7 +227,7 @@
              <item>
               <widget class="QPushButton" name="pushButtonEditTimeZone">
                <property name="text">
-                <string>...</string>
+                <string notr="true">...</string>
                </property>
               </widget>
              </item>
@@ -409,7 +409,14 @@
 }</string>
          </property>
          <property name="text">
-          <string>Time Zone plug-in (version %1)</string>
+          <string notr="true">Time Zone plug-in</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="labelVersion">
+         <property name="text">
+          <string notr="true">Version %1</string>
          </property>
         </widget>
        </item>

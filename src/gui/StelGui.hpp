@@ -78,6 +78,10 @@ public:
 	
 	//! Get the button bar of the left of the screen
 	class LeftStelBar* getWindowsButtonBar();
+
+	//! Get the SkyGui instance (useful for adding other interface elements).
+	//! It will return a valid object only if called after init().
+	class SkyGui* getSkyGui();
 	
 	//! Get whether the buttons toggling image flip are visible
 	bool getFlagShowFlipButtons() {return flagShowFlipButtons;}

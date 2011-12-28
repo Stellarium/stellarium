@@ -126,7 +126,7 @@ public:
 
 	//! get satellite objects filtered by group.  If an empty string is used for the
 	//! group name, return all satallites
-	QStringList getSatellites(const QString& group=QString(), Visibility vis=Both);
+	QHash<QString,QString> getSatellites(const QString& group=QString(), Visibility vis=Both);
 
 	//! get a satellite object by identifier
 	SatelliteP getByID(const QString& id);
@@ -228,14 +228,14 @@ private slots:
 	void setStelStyle(const QString& section);
 
 private:
-	// if existing, delete Satellites section in main config.ini, then create with default values
+	//! if existing, delete Satellites section in main config.ini, then create with default values
 	void restoreDefaultConfigIni(void);
 
-	// replace the json file with the default from the compiled-in resource
+	//! replace the json file with the default from the compiled-in resource
 	void restoreDefaultJsonFile(void);
 
-	// read the json file and create the satellites.  Removes existing satellites first if there are any
-	// this will be done once at init, and also if the defaults are reset.
+	//! read the json file and create the satellites.  Removes existing satellites first if there are any
+	//! this will be done once at init, and also if the defaults are reset.
 	void readJsonFile(void);
 
 	//! Creates a backup of the satellites.json file called satellites.json.old
@@ -250,7 +250,8 @@ private:
 	bool saveTleMap(const QVariantMap& map, QString path=QString());
 	QVariantMap loadTleMap(QString path=QString());
 	void setTleMap(const QVariantMap& map);
-	QVariantMap getTleMap(void);
+	//! Generates a QMap that contains all the data on satellites.
+	QVariantMap getTleMap();
 
 	QString satellitesJsonPath;
 	QList<SatelliteP> satellites;

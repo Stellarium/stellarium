@@ -39,6 +39,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelTranslator.hpp"
+#include "StelUtils.hpp"
 
 Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
@@ -144,8 +145,21 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Distance)
 	{
-		// xgettext:no-c-format
-		oss << q_("Distance: %1AU").arg(getJ2000EquatorialPos(core).length(), 0, 'f', 8) << "<br>";
+		double distanceAu = getJ2000EquatorialPos(core).length();
+		if (distanceAu < 0.1)
+		{
+			double distanceKm = AU * distanceAu;
+			// xgettext:no-c-format
+			oss << QString(q_("Distance: %1AU (%2 km)"))
+			       .arg(distanceAu, 0, 'f', 8)
+			       .arg(distanceKm, 0, 'f', 0);
+		}
+		else
+		{
+			// xgettext:no-c-format
+			oss << q_("Distance: %1AU").arg(distanceAu, 0, 'f', 8);
+		}
+		oss << "<br>";
 	}
 
 	if (flags&Size)
