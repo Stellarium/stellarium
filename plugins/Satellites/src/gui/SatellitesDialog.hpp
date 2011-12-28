@@ -46,7 +46,7 @@ public slots:
 
 private slots:
 	void groupFilterChanged(int index);
-	void selectedSatelliteChanged(const QString& id);
+	void updateSelectedSatelliteInfo(QListWidgetItem* cur, QListWidgetItem* prev);
 	void saveSatellites(void);
 	void setUpdateValues(int hours);
 	void setUpdatesEnabled(int checkState);
@@ -72,8 +72,8 @@ private:
 	bool satelliteModified;
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
+	void populateGroupsList();
 	QTimer* updateTimer;
-
 };
 
 #endif // _SATELLITESDIALOG_HPP_

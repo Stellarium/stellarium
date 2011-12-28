@@ -21,6 +21,7 @@
 #include "DefineTimeZoneWindow.hpp"
 #include "ui_defineTimeZone.h"
 #include "StelApp.hpp"
+#include "StelTranslator.hpp"
 
 #include <cmath>
 #include <QRegExpValidator>
@@ -40,7 +41,26 @@ DefineTimeZoneWindow::~DefineTimeZoneWindow()
 void DefineTimeZoneWindow::languageChanged()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+		int startDateMonthIndex = ui->comboBoxDstStartDateMonth->currentIndex();
+		int startDayIndex = ui->comboBoxDstStartDay->currentIndex();
+		int startMonthIndex = ui->comboBoxDstStartMonth->currentIndex();
+		int startWeekIndex = ui->comboBoxDstStartWeek->currentIndex();
+		int endDateMonthIndex = ui->comboBoxDstEndDateMonth->currentIndex();
+		int endDayIndex = ui->comboBoxDstEndDay->currentIndex();
+		int endMonthIndex = ui->comboBoxDstEndMonth->currentIndex();
+		int endWeekIndex = ui->comboBoxDstEndWeek->currentIndex();
+		populateDateLists();
+		ui->comboBoxDstStartDateMonth->setCurrentIndex(startDateMonthIndex);
+		ui->comboBoxDstStartDay->setCurrentIndex(startDayIndex);
+		ui->comboBoxDstStartMonth->setCurrentIndex(startMonthIndex);
+		ui->comboBoxDstStartWeek->setCurrentIndex(startWeekIndex);
+		ui->comboBoxDstEndDateMonth->setCurrentIndex(endDateMonthIndex);
+		ui->comboBoxDstEndDay->setCurrentIndex(endDayIndex);
+		ui->comboBoxDstEndMonth->setCurrentIndex(endMonthIndex);
+		ui->comboBoxDstEndWeek->setCurrentIndex(endWeekIndex);
+	}
 }
 
 void DefineTimeZoneWindow::createDialogContent()
@@ -219,18 +239,18 @@ void DefineTimeZoneWindow::resetWindowState()
 void DefineTimeZoneWindow::populateDateLists()
 {
 	QStringList monthList;
-	monthList.append("January");
-	monthList.append("February");
-	monthList.append("March");
-	monthList.append("April");
-	monthList.append("May");
-	monthList.append("June");
-	monthList.append("July");
-	monthList.append("August");
-	monthList.append("September");
-	monthList.append("October");
-	monthList.append("November");
-	monthList.append("December");
+	monthList.append(q_("January"));
+	monthList.append(q_("February"));
+	monthList.append(q_("March"));
+	monthList.append(q_("April"));
+	monthList.append(q_("May"));
+	monthList.append(q_("June"));
+	monthList.append(q_("July"));
+	monthList.append(q_("August"));
+	monthList.append(q_("September"));
+	monthList.append(q_("October"));
+	monthList.append(q_("November"));
+	monthList.append(q_("December"));
 
 	ui->comboBoxDstStartMonth->clear();
 	ui->comboBoxDstStartMonth->addItems(monthList);
@@ -241,13 +261,12 @@ void DefineTimeZoneWindow::populateDateLists()
 	ui->comboBoxDstEndDateMonth->clear();
 	ui->comboBoxDstEndDateMonth->addItems(monthList);
 
-	//TODO: For the translators: refers to any day of the week, if not possible, translate as "First week"
 	QStringList weekList;
-	weekList.append("First");
-	weekList.append("Second");
-	weekList.append("Third");
-	weekList.append("Fourth");
-	weekList.append("Last");
+	weekList.append(q_("First week"));
+	weekList.append(q_("Second week"));
+	weekList.append(q_("Third week"));
+	weekList.append(q_("Fourth week"));
+	weekList.append(q_("Last week"));
 
 	ui->comboBoxDstStartWeek->clear();
 	ui->comboBoxDstStartWeek->addItems(weekList);
@@ -256,13 +275,13 @@ void DefineTimeZoneWindow::populateDateLists()
 
 	//Starts from Sunday deliberately
 	QStringList dayList;
-	dayList.append("Sunday");
-	dayList.append("Monday");
-	dayList.append("Tuesday");
-	dayList.append("Wednesday");
-	dayList.append("Thursday");
-	dayList.append("Friday");
-	dayList.append("Saturday");
+	dayList.append(q_("Sunday"));
+	dayList.append(q_("Monday"));
+	dayList.append(q_("Tuesday"));
+	dayList.append(q_("Wednesday"));
+	dayList.append(q_("Thursday"));
+	dayList.append(q_("Friday"));
+	dayList.append(q_("Saturday"));
 
 	ui->comboBoxDstStartDay->clear();
 	ui->comboBoxDstStartDay->addItems(dayList);

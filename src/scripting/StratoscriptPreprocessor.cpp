@@ -115,6 +115,8 @@ bool StelScriptMgr::preprocessStratoScript(QFile& input, QString& output, const 
 				line = QString("LandscapeMgr.setFlagAtmosphere(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "azimuthal_grid")
 				line = QString("GridLinesMgr.setFlagAzimuthalGrid(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "galactic_grid")
+				line = QString("GridLinesMgr.setFlagGalacticGrid(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "cardinal_points")
 				line = QString("LandscapeMgr.setFlagCardinalsPoints(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "constellation_art")
@@ -145,6 +147,10 @@ bool StelScriptMgr::preprocessStratoScript(QFile& input, QString& output, const 
 				line = QString("LandscapeMgr.setFlagLandscapeSetsLocation(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "meridian_line")
 				line = QString("GridLinesMgr.setFlagMeridianLine(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "horizon_line")
+				line = QString("GridLinesMgr.setFlagHorizonLine(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "galactic_plane_line")
+				line = QString("GridLinesMgr.setFlagGalacticPlaneLine(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "milky_way")
 				line = QString("MilkyWay.setFlagShow(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "nebulae")
