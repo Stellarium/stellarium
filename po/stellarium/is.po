@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 090410-lp_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-18 22:08+0700\n"
+"POT-Creation-Date: 2011-12-28 14:04+0200\n"
 "PO-Revision-Date: 2011-09-24 12:09+0000\n"
 "Last-Translator: Sverrir Gudmundsson <Unknown>\n"
 "Language-Team: icelandic <kde-isl@molar.is>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-19 04:42+0000\n"
-"X-Generator: Launchpad (build 14525)\n"
+"X-Launchpad-Export-Date: 2011-12-29 04:40+0000\n"
+"X-Generator: Launchpad (build 14560)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -294,42 +294,42 @@ msgstr "Áttarhorn/Stjörnuhæð: %1/%2"
 msgid "Select screenshot directory"
 msgstr "Velja möppu fyrir skjámyndir"
 
-#: src/gui/ConfigurationDialog.cpp:478
+#: src/gui/ConfigurationDialog.cpp:481
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Sjónsvið við ræsingu: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:486
+#: src/gui/ConfigurationDialog.cpp:489
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Stefna við ræsingu Áttarh/hæð: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:525
+#: src/gui/ConfigurationDialog.cpp:528
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:235
 msgid "Authors"
 msgstr "Höfundar"
 
-#: src/gui/ConfigurationDialog.cpp:529 src/gui/ViewDialog.cpp:382
+#: src/gui/ConfigurationDialog.cpp:532 src/gui/ViewDialog.cpp:397
 msgid "Contact"
 msgstr "Tengiliður"
 
-#: src/gui/ConfigurationDialog.cpp:604
+#: src/gui/ConfigurationDialog.cpp:607
 msgid "Author"
 msgstr "Höfundur"
 
-#: src/gui/ConfigurationDialog.cpp:605
+#: src/gui/ConfigurationDialog.cpp:608
 msgid "License"
 msgstr "Leyfi"
 
-#: src/gui/ConfigurationDialog.cpp:634
+#: src/gui/ConfigurationDialog.cpp:637
 msgid "Running script: "
 msgstr "Keyri skriftu: "
 
-#: src/gui/ConfigurationDialog.cpp:641
+#: src/gui/ConfigurationDialog.cpp:644
 msgid "Running script: [none]"
 msgstr "Keyri skriftu: [engin]"
 
-#: src/gui/ConfigurationDialog.cpp:710
+#: src/gui/ConfigurationDialog.cpp:713
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -337,16 +337,16 @@ msgstr ""
 "Lauk niðurhali á nýjum stjörnuskrám!\n"
 "Endurræstu Stellarium til að sýna þær."
 
-#: src/gui/ConfigurationDialog.cpp:714
+#: src/gui/ConfigurationDialog.cpp:717
 msgid "All available star catalogs have been installed."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:719
+#: src/gui/ConfigurationDialog.cpp:722
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Ná í katalóg %1 af %2"
 
-#: src/gui/ConfigurationDialog.cpp:726
+#: src/gui/ConfigurationDialog.cpp:729
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -355,7 +355,7 @@ msgstr ""
 "Hala niður %1...\n"
 "(Þú mátt loka þessum glugga.)"
 
-#: src/gui/ConfigurationDialog.cpp:733
+#: src/gui/ConfigurationDialog.cpp:736
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -366,7 +366,7 @@ msgstr ""
 "Fjöldi stjarna: %2 milljón\n"
 "Styrksvið: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:776 src/gui/ConfigurationDialog.cpp:812
+#: src/gui/ConfigurationDialog.cpp:779 src/gui/ConfigurationDialog.cpp:815
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -375,11 +375,11 @@ msgstr ""
 "Villa við niðurhal %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:864
+#: src/gui/ConfigurationDialog.cpp:867
 msgid "Verifying file integrity..."
 msgstr "Kanna hvort skrá er rétt formuð..."
 
-#: src/gui/ConfigurationDialog.cpp:868
+#: src/gui/ConfigurationDialog.cpp:871
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -852,27 +852,27 @@ msgstr "Víxla sýnileika viðmótsins"
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:441
+#: src/gui/ViewDialog.cpp:456
 msgid "No description"
 msgstr "Engin lýsing"
 
-#: src/gui/ViewDialog.cpp:525
+#: src/gui/ViewDialog.cpp:540
 msgid "No shooting stars"
 msgstr "Engin stjörnuhröp"
 
-#: src/gui/ViewDialog.cpp:528
+#: src/gui/ViewDialog.cpp:543
 msgid "Normal rate"
 msgstr "Venjuleg tíðni"
 
-#: src/gui/ViewDialog.cpp:531
+#: src/gui/ViewDialog.cpp:546
 msgid "Standard Perseids rate"
 msgstr "Venjuleg tíðni Persíta"
 
-#: src/gui/ViewDialog.cpp:534
+#: src/gui/ViewDialog.cpp:549
 msgid "Exceptional Leonid rate"
 msgstr "Óvenju há tíðni Leoníta"
 
-#: src/gui/ViewDialog.cpp:537
+#: src/gui/ViewDialog.cpp:552
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Hæsta tíðni (Leonítadrífan 1966)"
 
@@ -978,11 +978,13 @@ msgstr "Venus"
 msgid "Earth"
 msgstr "Jörðin"
 
-#: src/translations.h:37
+#. TRANSLATORS: Name of landscape and Earth's satellite
+#: src/translations.h:37 src/translations.h:169
 msgid "Moon"
 msgstr "Tunglið"
 
-#: src/translations.h:38
+#. TRANSLATORS: Name of landscape and planet
+#: src/translations.h:38 src/translations.h:177
 msgid "Mars"
 msgstr "Mars"
 
@@ -1075,11 +1077,12 @@ msgid "Adrastea"
 msgstr "Adrastea"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:119
+#: src/translations.h:61 src/translations.h:121
 msgid "Metis"
 msgstr "Metis"
 
-#: src/translations.h:62
+#. TRANSLATORS: Name of landscape and planet
+#: src/translations.h:62 src/translations.h:179
 msgid "Saturn"
 msgstr "Satúrnus"
 
@@ -1226,156 +1229,181 @@ msgid "Solar System Observer"
 msgstr "Athugandi sólkerfis"
 
 #. TRANSLATORS: TNO/Asteroid (90377) Sedna
-#: src/translations.h:102
+#: src/translations.h:103
 msgid "Sedna"
 msgstr ""
 
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
-#: src/translations.h:104
+#: src/translations.h:105
 msgid "Quaoar"
 msgstr ""
 
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
-#: src/translations.h:106
+#: src/translations.h:107
 msgid "Orcus"
 msgstr ""
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
-#: src/translations.h:108
+#: src/translations.h:109
 msgid "Haumea"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:111
+#: src/translations.h:113
 msgid "Astraea"
 msgstr "Astraea"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:113
+#: src/translations.h:115
 msgid "Hebe"
 msgstr "Heba"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:115
+#: src/translations.h:117
 msgid "Iris"
 msgstr "Íris"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:117
+#: src/translations.h:119
 msgid "Flora"
 msgstr "Flóra"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:121
+#: src/translations.h:123
 msgid "Hygiea"
 msgstr "Hygiea"
 
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:123
+#: src/translations.h:125
 msgid "Amor"
 msgstr "Amor"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:125
+#: src/translations.h:127
 msgid "Apophis"
 msgstr "Apophis"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:127
+#: src/translations.h:129
 msgid "Chiron"
 msgstr "Kíron"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:129
+#: src/translations.h:131
 msgid "Eros"
 msgstr "Eros"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:131
+#: src/translations.h:133
 msgid "Hektor"
 msgstr "Hektor"
 
 #. TRANSLATORS: Name of supernova SN 1572A
-#: src/translations.h:133
+#: src/translations.h:136
 msgid "Tycho's Supernova"
 msgstr "Sprengistjarna Tychos"
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: src/translations.h:135
+#: src/translations.h:138
 msgid "Kepler's Supernova"
 msgstr "Sprengistjarna Keplers"
 
-#: src/translations.h:139
+#: src/translations.h:142
 msgid "N"
 msgstr "N"
 
-#: src/translations.h:140
+#: src/translations.h:143
 msgid "S"
 msgstr "S"
 
-#: src/translations.h:141
+#: src/translations.h:144
 msgid "E"
 msgstr "A"
 
-#: src/translations.h:142
+#: src/translations.h:145
 msgid "W"
 msgstr "V"
 
-#: src/translations.h:145
+#: src/translations.h:148
 msgid "Arabic"
 msgstr "Arabískt"
 
-#: src/translations.h:146
+#: src/translations.h:149
 msgid "Aztec"
 msgstr "Asteka"
 
-#: src/translations.h:147
+#: src/translations.h:150
 msgid "Chinese"
 msgstr "Kínversk"
 
-#: src/translations.h:148
+#: src/translations.h:151
 msgid "Egyptian"
 msgstr "Egypsk"
 
-#: src/translations.h:149
+#: src/translations.h:152
 msgid "Inuit"
 msgstr "Inúíta"
 
-#: src/translations.h:150
+#: src/translations.h:153
 msgid "Korean"
 msgstr "Kóresk"
 
-#: src/translations.h:151
+#: src/translations.h:154
 msgid "Lakota"
 msgstr "Lakóta"
 
-#: src/translations.h:152
+#: src/translations.h:155
 msgid "Maori"
 msgstr "Maórí"
 
-#: src/translations.h:153
+#: src/translations.h:156
 msgid "Navajo"
 msgstr "Navajo"
 
-#: src/translations.h:154
+#: src/translations.h:157
 msgid "Norse"
 msgstr "Norræn"
 
-#: src/translations.h:155
+#: src/translations.h:158
 msgid "Polynesian"
 msgstr "Pólýnesísk"
 
-#: src/translations.h:156
+#: src/translations.h:159
 msgid "Sami"
 msgstr "Samísk"
 
-#: src/translations.h:157
+#: src/translations.h:160
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
-#: src/translations.h:158
+#: src/translations.h:161
 msgid "Western"
 msgstr "Vestræn"
+
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:165
+msgid "Guereins"
+msgstr ""
+
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:167
+msgid "Trees"
+msgstr ""
+
+#. TRANSLATORS: Landscape name: Hurricane Ridge
+#: src/translations.h:171
+msgid "Hurricane"
+msgstr ""
+
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:173
+msgid "Ocean"
+msgstr ""
+
+#. TRANSLATORS: Landscape name: Garching bei Munchen
+#: src/translations.h:175
+msgid "Garching"
+msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -1390,7 +1418,7 @@ msgstr ":"
 msgid "Help"
 msgstr "Hjálp"
 
-#: src/ui_helpDialogGui.h:267 plugins/Oculars/src/ui_ocularDialog.h:911
+#: src/ui_helpDialogGui.h:267 plugins/Oculars/src/ui_ocularDialog.h:903
 #: plugins/Satellites/src/ui_satellitesDialog.h:690
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
@@ -1419,9 +1447,9 @@ msgstr "Upplýsingar um núverandi staðsetningu"
 msgid "Use as default"
 msgstr "Vista sem sjálfgefið"
 
-#: src/ui_locationDialogGui.h:393 plugins/Oculars/src/ui_ocularDialog.h:884
-#: plugins/Oculars/src/ui_ocularDialog.h:893
-#: plugins/Oculars/src/ui_ocularDialog.h:904
+#: src/ui_locationDialogGui.h:393 plugins/Oculars/src/ui_ocularDialog.h:876
+#: plugins/Oculars/src/ui_ocularDialog.h:885
+#: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Delete"
 msgstr "Eyða"
 
@@ -2189,7 +2217,7 @@ msgid "Compass marks"
 msgstr "Áttavitastrik"
 
 #: plugins/Oculars/src/Oculars.cpp:84
-#: plugins/Oculars/src/ui_ocularDialog.h:870
+#: plugins/Oculars/src/ui_ocularDialog.h:862
 msgid "Oculars"
 msgstr "Augngler"
 
@@ -2253,7 +2281,7 @@ msgid "&Reset rotation"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1201
-#: plugins/Oculars/src/ui_ocularDialog.h:872
+#: plugins/Oculars/src/ui_ocularDialog.h:864
 msgid "Ocular view"
 msgstr "Augnglersskoðun"
 
@@ -2438,121 +2466,121 @@ msgstr ""
 msgid "Actual field of view provided by this ocular/telescope combination"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:873
+#: plugins/Oculars/src/ui_ocularDialog.h:865
 msgid "Enable only if an object is selected"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:874
+#: plugins/Oculars/src/ui_ocularDialog.h:866
 msgid "Scale image circle"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:875
+#: plugins/Oculars/src/ui_ocularDialog.h:867
 msgid "Key mappings"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:876
+#: plugins/Oculars/src/ui_ocularDialog.h:868
 msgid "Toggle ocular view:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:878
+#: plugins/Oculars/src/ui_ocularDialog.h:870
 msgid "Open pop-up navigation menu:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:879
+#: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Interface"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:880
+#: plugins/Oculars/src/ui_ocularDialog.h:872
 msgid "On-screen control panel"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:881
+#: plugins/Oculars/src/ui_ocularDialog.h:873
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:209
 msgid "General"
 msgstr ""
 
+#: plugins/Oculars/src/ui_ocularDialog.h:874
 #: plugins/Oculars/src/ui_ocularDialog.h:882
-#: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Eyepieces"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:883
-#: plugins/Oculars/src/ui_ocularDialog.h:892
-#: plugins/Oculars/src/ui_ocularDialog.h:903
+#: plugins/Oculars/src/ui_ocularDialog.h:875
+#: plugins/Oculars/src/ui_ocularDialog.h:884
+#: plugins/Oculars/src/ui_ocularDialog.h:895
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Add"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:885
-#: plugins/Oculars/src/ui_ocularDialog.h:894
-#: plugins/Oculars/src/ui_ocularDialog.h:905
+#: plugins/Oculars/src/ui_ocularDialog.h:877
+#: plugins/Oculars/src/ui_ocularDialog.h:886
+#: plugins/Oculars/src/ui_ocularDialog.h:897
 #: plugins/Satellites/src/ui_satellitesDialog.h:660
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:886
+#: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "aFOV:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:887
-#: plugins/Oculars/src/ui_ocularDialog.h:906
+#: plugins/Oculars/src/ui_ocularDialog.h:879
+#: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Focal length:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:888
+#: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "Field stop:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:889
+#: plugins/Oculars/src/ui_ocularDialog.h:881
 msgid "Binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:891
-#: plugins/Oculars/src/ui_ocularDialog.h:901
+#: plugins/Oculars/src/ui_ocularDialog.h:883
+#: plugins/Oculars/src/ui_ocularDialog.h:893
 msgid "Sensors"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:895
+#: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Resolution x (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:896
+#: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Resolution y (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:897
+#: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Chip width (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:898
+#: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Chip height (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:899
+#: plugins/Oculars/src/ui_ocularDialog.h:891
 msgid "Pixel width (micron):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:900
+#: plugins/Oculars/src/ui_ocularDialog.h:892
 msgid "Pixel height (micron):"
 msgstr ""
 
+#: plugins/Oculars/src/ui_ocularDialog.h:894
 #: plugins/Oculars/src/ui_ocularDialog.h:902
-#: plugins/Oculars/src/ui_ocularDialog.h:910
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Telescopes"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:907
+#: plugins/Oculars/src/ui_ocularDialog.h:899
 msgid "Diameter:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:908
+#: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Horizontal flip"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:909
+#: plugins/Oculars/src/ui_ocularDialog.h:901
 msgid "Vertical flip"
 msgstr ""
 
@@ -4027,7 +4055,7 @@ msgstr ""
 msgid "Type: quasar"
 msgstr ""
 
-#: plugins/Quasars/src/Quasar.cpp:114
+#: plugins/Quasars/src/Quasar.cpp:116
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr ""

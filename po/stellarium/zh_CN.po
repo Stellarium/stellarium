@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-18 22:08+0700\n"
-"PO-Revision-Date: 2011-12-11 08:57+0000\n"
-"Last-Translator: 郭佳鑫 <Unknown>\n"
+"POT-Creation-Date: 2011-12-28 14:04+0200\n"
+"PO-Revision-Date: 2011-12-27 11:57+0000\n"
+"Last-Translator: forest93 <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-19 04:46+0000\n"
-"X-Generator: Launchpad (build 14525)\n"
+"X-Launchpad-Export-Date: 2011-12-29 04:44+0000\n"
+"X-Generator: Launchpad (build 14560)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -279,42 +279,42 @@ msgstr "方位角/高度角: %1/%2"
 msgid "Select screenshot directory"
 msgstr "选择储存截图资料夹"
 
-#: src/gui/ConfigurationDialog.cpp:478
+#: src/gui/ConfigurationDialog.cpp:481
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "启动时的视角: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:486
+#: src/gui/ConfigurationDialog.cpp:489
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "启动时的地平坐标方位角/高度角: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:525
+#: src/gui/ConfigurationDialog.cpp:528
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:235
 msgid "Authors"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:529 src/gui/ViewDialog.cpp:382
+#: src/gui/ConfigurationDialog.cpp:532 src/gui/ViewDialog.cpp:397
 msgid "Contact"
 msgstr "联系信息"
 
-#: src/gui/ConfigurationDialog.cpp:604
+#: src/gui/ConfigurationDialog.cpp:607
 msgid "Author"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:605
+#: src/gui/ConfigurationDialog.cpp:608
 msgid "License"
 msgstr "授权条款"
 
-#: src/gui/ConfigurationDialog.cpp:634
+#: src/gui/ConfigurationDialog.cpp:637
 msgid "Running script: "
 msgstr "执行指令： "
 
-#: src/gui/ConfigurationDialog.cpp:641
+#: src/gui/ConfigurationDialog.cpp:644
 msgid "Running script: [none]"
 msgstr "执行指令：[空白]"
 
-#: src/gui/ConfigurationDialog.cpp:710
+#: src/gui/ConfigurationDialog.cpp:713
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -322,16 +322,16 @@ msgstr ""
 "新的天体目录经已下载完毕！\n"
 "请重新启动 Stellarium 以使用新的目录。"
 
-#: src/gui/ConfigurationDialog.cpp:714
+#: src/gui/ConfigurationDialog.cpp:717
 msgid "All available star catalogs have been installed."
 msgstr "所有可用的星体资料均已安装。"
 
-#: src/gui/ConfigurationDialog.cpp:719
+#: src/gui/ConfigurationDialog.cpp:722
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "在 %2 中取后 %1 目录"
 
-#: src/gui/ConfigurationDialog.cpp:726
+#: src/gui/ConfigurationDialog.cpp:729
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -340,7 +340,7 @@ msgstr ""
 "正在下载 %1……\n"
 "（您可以关闭此窗口）"
 
-#: src/gui/ConfigurationDialog.cpp:733
+#: src/gui/ConfigurationDialog.cpp:736
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -351,7 +351,7 @@ msgstr ""
 "天体数量: %2 百万\n"
 "星等范围: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:776 src/gui/ConfigurationDialog.cpp:812
+#: src/gui/ConfigurationDialog.cpp:779 src/gui/ConfigurationDialog.cpp:815
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -360,11 +360,11 @@ msgstr ""
 "在下载 %1 时发生了错误：\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:864
+#: src/gui/ConfigurationDialog.cpp:867
 msgid "Verifying file integrity..."
 msgstr "正在校验文件..."
 
-#: src/gui/ConfigurationDialog.cpp:868
+#: src/gui/ConfigurationDialog.cpp:871
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -830,27 +830,27 @@ msgstr "显示/隐藏工具栏"
 msgid "%1m"
 msgstr "%1 米"
 
-#: src/gui/ViewDialog.cpp:441
+#: src/gui/ViewDialog.cpp:456
 msgid "No description"
 msgstr "没有描述"
 
-#: src/gui/ViewDialog.cpp:525
+#: src/gui/ViewDialog.cpp:540
 msgid "No shooting stars"
 msgstr "无流星"
 
-#: src/gui/ViewDialog.cpp:528
+#: src/gui/ViewDialog.cpp:543
 msgid "Normal rate"
 msgstr "日常频率"
 
-#: src/gui/ViewDialog.cpp:531
+#: src/gui/ViewDialog.cpp:546
 msgid "Standard Perseids rate"
 msgstr "标准英仙座流星雨频率"
 
-#: src/gui/ViewDialog.cpp:534
+#: src/gui/ViewDialog.cpp:549
 msgid "Exceptional Leonid rate"
 msgstr "超量狮子座流星雨"
 
-#: src/gui/ViewDialog.cpp:537
+#: src/gui/ViewDialog.cpp:552
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "至今最高频率 (1966 狮子座流星雨)"
 
@@ -953,11 +953,13 @@ msgstr "金星"
 msgid "Earth"
 msgstr "地球"
 
-#: src/translations.h:37
+#. TRANSLATORS: Name of landscape and Earth's satellite
+#: src/translations.h:37 src/translations.h:169
 msgid "Moon"
 msgstr "月球"
 
-#: src/translations.h:38
+#. TRANSLATORS: Name of landscape and planet
+#: src/translations.h:38 src/translations.h:177
 msgid "Mars"
 msgstr "火星"
 
@@ -1050,11 +1052,12 @@ msgid "Adrastea"
 msgstr "木卫十五(Adrastea)"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:119
+#: src/translations.h:61 src/translations.h:121
 msgid "Metis"
 msgstr "颖神星(小行星9号)"
 
-#: src/translations.h:62
+#. TRANSLATORS: Name of landscape and planet
+#: src/translations.h:62 src/translations.h:179
 msgid "Saturn"
 msgstr "土星"
 
@@ -1201,156 +1204,181 @@ msgid "Solar System Observer"
 msgstr "太阳系全览点"
 
 #. TRANSLATORS: TNO/Asteroid (90377) Sedna
-#: src/translations.h:102
+#: src/translations.h:103
 msgid "Sedna"
-msgstr ""
+msgstr "赛德娜"
 
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
-#: src/translations.h:104
+#: src/translations.h:105
 msgid "Quaoar"
-msgstr ""
+msgstr "创神星"
 
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
-#: src/translations.h:106
+#: src/translations.h:107
 msgid "Orcus"
-msgstr ""
+msgstr "亡神星"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
-#: src/translations.h:108
+#: src/translations.h:109
 msgid "Haumea"
-msgstr ""
+msgstr "妊神星"
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:111
+#: src/translations.h:113
 msgid "Astraea"
 msgstr "义神星(小行星5号)"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:113
+#: src/translations.h:115
 msgid "Hebe"
 msgstr "韶神星(小行星6号)"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:115
+#: src/translations.h:117
 msgid "Iris"
 msgstr "虹神星(小行星7号)"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:117
+#: src/translations.h:119
 msgid "Flora"
 msgstr "花神星(小行星8号)"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:121
+#: src/translations.h:123
 msgid "Hygiea"
 msgstr "健神星(小行星10号)"
 
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:123
+#: src/translations.h:125
 msgid "Amor"
 msgstr "阿莫尔(小行星1221号)"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:125
+#: src/translations.h:127
 msgid "Apophis"
 msgstr "阿波菲斯(小行星99942号)"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:127
+#: src/translations.h:129
 msgid "Chiron"
 msgstr "喀戎星(小行星2060号)"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:129
+#: src/translations.h:131
 msgid "Eros"
 msgstr "爱神星(小行星433号)"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:131
+#: src/translations.h:133
 msgid "Hektor"
 msgstr "赫克托(小行星624号)"
 
 #. TRANSLATORS: Name of supernova SN 1572A
-#: src/translations.h:133
+#: src/translations.h:136
 msgid "Tycho's Supernova"
 msgstr "SN 1572A"
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: src/translations.h:135
+#: src/translations.h:138
 msgid "Kepler's Supernova"
 msgstr "SN 1604A"
 
-#: src/translations.h:139
+#: src/translations.h:142
 msgid "N"
 msgstr "北"
 
-#: src/translations.h:140
+#: src/translations.h:143
 msgid "S"
 msgstr "南"
 
-#: src/translations.h:141
+#: src/translations.h:144
 msgid "E"
 msgstr "东"
 
-#: src/translations.h:142
+#: src/translations.h:145
 msgid "W"
 msgstr "西"
 
-#: src/translations.h:145
+#: src/translations.h:148
 msgid "Arabic"
 msgstr "阿拉伯语"
 
-#: src/translations.h:146
+#: src/translations.h:149
 msgid "Aztec"
 msgstr "阿兹特克"
 
-#: src/translations.h:147
+#: src/translations.h:150
 msgid "Chinese"
 msgstr "中国"
 
-#: src/translations.h:148
+#: src/translations.h:151
 msgid "Egyptian"
 msgstr "埃及"
 
-#: src/translations.h:149
+#: src/translations.h:152
 msgid "Inuit"
 msgstr "因纽特(爱斯基摩)"
 
-#: src/translations.h:150
+#: src/translations.h:153
 msgid "Korean"
 msgstr "韩语"
 
-#: src/translations.h:151
+#: src/translations.h:154
 msgid "Lakota"
 msgstr "拉科塔"
 
-#: src/translations.h:152
+#: src/translations.h:155
 msgid "Maori"
 msgstr "毛利"
 
-#: src/translations.h:153
+#: src/translations.h:156
 msgid "Navajo"
 msgstr "纳瓦霍"
 
-#: src/translations.h:154
+#: src/translations.h:157
 msgid "Norse"
 msgstr "挪威"
 
-#: src/translations.h:155
+#: src/translations.h:158
 msgid "Polynesian"
 msgstr "波利尼西亚"
 
-#: src/translations.h:156
+#: src/translations.h:159
 msgid "Sami"
 msgstr "萨米"
 
-#: src/translations.h:157
+#: src/translations.h:160
 msgid "Tupi-Guarani"
 msgstr "图皮-瓜拉尼"
 
-#: src/translations.h:158
+#: src/translations.h:161
 msgid "Western"
 msgstr "西方"
+
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:165
+msgid "Guereins"
+msgstr ""
+
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:167
+msgid "Trees"
+msgstr ""
+
+#. TRANSLATORS: Landscape name: Hurricane Ridge
+#: src/translations.h:171
+msgid "Hurricane"
+msgstr ""
+
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:173
+msgid "Ocean"
+msgstr ""
+
+#. TRANSLATORS: Landscape name: Garching bei Munchen
+#: src/translations.h:175
+msgid "Garching"
+msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -1365,7 +1393,7 @@ msgstr ":"
 msgid "Help"
 msgstr "帮助"
 
-#: src/ui_helpDialogGui.h:267 plugins/Oculars/src/ui_ocularDialog.h:911
+#: src/ui_helpDialogGui.h:267 plugins/Oculars/src/ui_ocularDialog.h:903
 #: plugins/Satellites/src/ui_satellitesDialog.h:690
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
@@ -1394,9 +1422,9 @@ msgstr "目前位置资讯"
 msgid "Use as default"
 msgstr "设成预设值"
 
-#: src/ui_locationDialogGui.h:393 plugins/Oculars/src/ui_ocularDialog.h:884
-#: plugins/Oculars/src/ui_ocularDialog.h:893
-#: plugins/Oculars/src/ui_ocularDialog.h:904
+#: src/ui_locationDialogGui.h:393 plugins/Oculars/src/ui_ocularDialog.h:876
+#: plugins/Oculars/src/ui_ocularDialog.h:885
+#: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Delete"
 msgstr "删除"
 
@@ -2146,7 +2174,7 @@ msgid "Compass marks"
 msgstr "罗盘标记"
 
 #: plugins/Oculars/src/Oculars.cpp:84
-#: plugins/Oculars/src/ui_ocularDialog.h:870
+#: plugins/Oculars/src/ui_ocularDialog.h:862
 msgid "Oculars"
 msgstr "目镜效果"
 
@@ -2210,7 +2238,7 @@ msgid "&Reset rotation"
 msgstr "旋转复位(&R)"
 
 #: plugins/Oculars/src/Oculars.cpp:1201
-#: plugins/Oculars/src/ui_ocularDialog.h:872
+#: plugins/Oculars/src/ui_ocularDialog.h:864
 msgid "Ocular view"
 msgstr "目镜视图"
 
@@ -2395,121 +2423,121 @@ msgstr "当前目镜/望远镜组合提供的放大倍率"
 msgid "Actual field of view provided by this ocular/telescope combination"
 msgstr "此目镜/望远镜组合提供的视场"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:873
+#: plugins/Oculars/src/ui_ocularDialog.h:865
 msgid "Enable only if an object is selected"
 msgstr "仅当选中天体时才可用。"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:874
+#: plugins/Oculars/src/ui_ocularDialog.h:866
 msgid "Scale image circle"
 msgstr "缩放图像圈"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:875
+#: plugins/Oculars/src/ui_ocularDialog.h:867
 msgid "Key mappings"
 msgstr "快捷键"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:876
+#: plugins/Oculars/src/ui_ocularDialog.h:868
 msgid "Toggle ocular view:"
 msgstr "切换目镜视图："
 
-#: plugins/Oculars/src/ui_ocularDialog.h:878
+#: plugins/Oculars/src/ui_ocularDialog.h:870
 msgid "Open pop-up navigation menu:"
 msgstr "打开弹出式导航菜单"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:879
+#: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Interface"
 msgstr "界面"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:880
+#: plugins/Oculars/src/ui_ocularDialog.h:872
 msgid "On-screen control panel"
 msgstr "屏幕上的控制栏"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:881
+#: plugins/Oculars/src/ui_ocularDialog.h:873
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:209
 msgid "General"
 msgstr "通用"
 
+#: plugins/Oculars/src/ui_ocularDialog.h:874
 #: plugins/Oculars/src/ui_ocularDialog.h:882
-#: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Eyepieces"
 msgstr "目镜"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:883
-#: plugins/Oculars/src/ui_ocularDialog.h:892
-#: plugins/Oculars/src/ui_ocularDialog.h:903
+#: plugins/Oculars/src/ui_ocularDialog.h:875
+#: plugins/Oculars/src/ui_ocularDialog.h:884
+#: plugins/Oculars/src/ui_ocularDialog.h:895
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Add"
 msgstr "添加"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:885
-#: plugins/Oculars/src/ui_ocularDialog.h:894
-#: plugins/Oculars/src/ui_ocularDialog.h:905
+#: plugins/Oculars/src/ui_ocularDialog.h:877
+#: plugins/Oculars/src/ui_ocularDialog.h:886
+#: plugins/Oculars/src/ui_ocularDialog.h:897
 #: plugins/Satellites/src/ui_satellitesDialog.h:660
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr "名称："
 
-#: plugins/Oculars/src/ui_ocularDialog.h:886
+#: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "aFOV:"
 msgstr "视场角度："
 
-#: plugins/Oculars/src/ui_ocularDialog.h:887
-#: plugins/Oculars/src/ui_ocularDialog.h:906
+#: plugins/Oculars/src/ui_ocularDialog.h:879
+#: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Focal length:"
 msgstr "焦距："
 
-#: plugins/Oculars/src/ui_ocularDialog.h:888
+#: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "Field stop:"
 msgstr "视场光阑："
 
-#: plugins/Oculars/src/ui_ocularDialog.h:889
+#: plugins/Oculars/src/ui_ocularDialog.h:881
 msgid "Binoculars"
 msgstr "双目镜"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:891
-#: plugins/Oculars/src/ui_ocularDialog.h:901
+#: plugins/Oculars/src/ui_ocularDialog.h:883
+#: plugins/Oculars/src/ui_ocularDialog.h:893
 msgid "Sensors"
 msgstr "传感器"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:895
+#: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Resolution x (pixels):"
 msgstr "横向分辨率（像素）："
 
-#: plugins/Oculars/src/ui_ocularDialog.h:896
+#: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Resolution y (pixels):"
 msgstr "纵向分辨率（像素）："
 
-#: plugins/Oculars/src/ui_ocularDialog.h:897
+#: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Chip width (mm):"
 msgstr "感光芯片宽度（毫米）："
 
-#: plugins/Oculars/src/ui_ocularDialog.h:898
+#: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Chip height (mm):"
 msgstr "感光芯片高度（毫米）："
 
-#: plugins/Oculars/src/ui_ocularDialog.h:899
+#: plugins/Oculars/src/ui_ocularDialog.h:891
 msgid "Pixel width (micron):"
 msgstr "像素宽度（微米）："
 
-#: plugins/Oculars/src/ui_ocularDialog.h:900
+#: plugins/Oculars/src/ui_ocularDialog.h:892
 msgid "Pixel height (micron):"
 msgstr "像素高度（微米）："
 
+#: plugins/Oculars/src/ui_ocularDialog.h:894
 #: plugins/Oculars/src/ui_ocularDialog.h:902
-#: plugins/Oculars/src/ui_ocularDialog.h:910
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Telescopes"
 msgstr "望远镜"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:907
+#: plugins/Oculars/src/ui_ocularDialog.h:899
 msgid "Diameter:"
 msgstr "直径："
 
-#: plugins/Oculars/src/ui_ocularDialog.h:908
+#: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Horizontal flip"
 msgstr "水平翻转"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:909
+#: plugins/Oculars/src/ui_ocularDialog.h:901
 msgid "Vertical flip"
 msgstr "竖直翻转"
 
@@ -2892,7 +2920,7 @@ msgstr "轨道"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Catalog number:"
-msgstr ""
+msgstr "编目号："
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:663
 msgid "Description:"
@@ -3037,7 +3065,7 @@ msgid ""
 "No device model descriptions are available. Stellarium will not be able to "
 "control a telescope on its own, but it is still possible to do it through an "
 "external application or to connect to a remote host."
-msgstr ""
+msgstr "目前暂无设备型号的描述符。Stellarium 将无法独自控制望远镜，但您仍可能通过外部程序或者连接至远程主机来完成这一操作。"
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
@@ -3206,6 +3234,8 @@ msgid ""
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
+"望远镜的信号传入 Stellarium 所用的近似时间。\n"
+"如果您发现十字准星在跳动，请增大这一数值。"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Coordinate system:"
@@ -3264,19 +3294,19 @@ msgstr "用户界面设置"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
 msgid "Show circles with fixed angular size around the telescope reticle"
-msgstr ""
+msgstr "在望远镜十字准星周围显示指定视角的圆圈"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:511
 msgid "Use field of view indicators"
-msgstr ""
+msgstr "使用视场标记"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:512
 msgid "Circle size(s):"
-msgstr ""
+msgstr "圆圈大小："
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:514
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
-msgstr ""
+msgstr "最多十个角度，以逗号分隔。"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "OK"
@@ -3316,19 +3346,19 @@ msgstr "显示望远镜十字线"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Show field of view indicators"
-msgstr ""
+msgstr "显示视场标记"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Files"
-msgstr ""
+msgstr "文件"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Log telescope driver messages to files"
-msgstr ""
+msgstr "将望远镜设备消息记录至文件"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 msgid "Use telescope server executables (override built-in drivers)"
-msgstr ""
+msgstr "使用望远镜服务器的可执行文件（用以覆盖内置驱动）"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
 msgid "Executables directory:"
@@ -3471,38 +3501,38 @@ msgstr "日光节约时间（夏令时）"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
 msgid "DST timezone name:"
-msgstr ""
+msgstr "夏令时时区名称："
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
 msgid "DST offset from UTC (hours):"
-msgstr ""
+msgstr "夏令时较UTC的偏移时长（小时）："
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
 msgid "Daylight saving time start"
-msgstr ""
+msgstr "夏令时开始于"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
 msgid "Day:"
-msgstr ""
+msgstr "日："
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
 msgid "Time of change:"
-msgstr ""
+msgstr "启用/停用时间"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
 msgid "Date:"
-msgstr ""
+msgstr "日期："
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
 msgid "Daylight saving time end"
-msgstr ""
+msgstr "夏令时结束于"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:465
 msgid "Use this definition"
-msgstr ""
+msgstr "使用此设置"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
 msgid ""
@@ -3511,10 +3541,12 @@ msgid ""
 "This behaviour can be changed by changing Stellarium's global time zone "
 "settings."
 msgstr ""
+"Stellarium 中显示的时间默认为使用当前系统时区设置的地方时，而不是程序中显示的当前位置的时区。您可以通过更改 Stellarium "
+"的全局时区设置来改变这一情况。"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "Use system settings (default)"
-msgstr ""
+msgstr "使用系统设置（缺省）"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
 msgid "Universal Coordinated Time (UTC)"
@@ -3540,7 +3572,7 @@ msgstr "显示格式"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
-msgstr ""
+msgstr "这些设置能够改变在底部边栏显示时间与日期的格式。"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:194
@@ -3601,7 +3633,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:165
 msgid "Startup date/time preset"
-msgstr ""
+msgstr "启动时的日期与时间"
 
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
@@ -3653,7 +3685,7 @@ msgstr "星云名称"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:340
 msgid "Nebula hints"
-msgstr ""
+msgstr "星云标记"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:383
 msgid "Effects"
@@ -3669,11 +3701,11 @@ msgstr "放大倍数"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:404
 msgid "Milky Way intensity:"
-msgstr ""
+msgstr "银河亮度："
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:410
 msgid "Nebula label frequency:"
-msgstr ""
+msgstr "星云标记数量："
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:411
 msgid "Zoom duration:"
@@ -3681,56 +3713,56 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:417
 msgid "Cursor timeout:"
-msgstr ""
+msgstr "鼠标指针自动隐藏延时："
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:418
 msgid "Setting landscape sets location"
-msgstr ""
+msgstr "设置地景时转到与之关联的位置"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:438
 msgid "Run local script"
-msgstr ""
+msgstr "运行本地脚本"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:444
 msgid "Stop running script"
-msgstr ""
+msgstr "停止运行脚本"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:447
 msgid "CD/DVD script"
-msgstr ""
+msgstr "CD/DVD 脚本"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:454
 msgid "Administration"
-msgstr ""
+msgstr "系统管理"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:458
 msgid "Load default configuration"
-msgstr ""
+msgstr "载入默认设置"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:459
 msgid "Save current configuration"
-msgstr ""
+msgstr "保存当前设置"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:462
 msgid "Shut down"
-msgstr ""
+msgstr "退出程序"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:480
 msgid "[no TUI node]"
-msgstr ""
+msgstr "[无 TUI 节点]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
 msgid "On"
-msgstr ""
+msgstr "开启"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
 msgid "Off"
-msgstr ""
+msgstr "关闭"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr ""
+msgstr "错误，未知的颜色部分“%1%%”"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
@@ -3749,17 +3781,17 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
 #, qt-format
 msgid "Query the MPC's %1:"
-msgstr ""
+msgstr "正在从 MPC 请求 %1："
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
 msgid "Only one result will be returned if the query is successful."
-msgstr ""
+msgstr "如果请求成功，只能返回一个结果。"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
-msgstr ""
+msgstr "彗星与小行星均能通过编号、名称（英文）或天文学临时编号来识别。"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
 #, qt-format
@@ -3769,11 +3801,13 @@ msgid ""
 "searching for \"%3\" will return %4, Halley's Comet, but a search for \"%5\" "
 "will return the asteroid %6."
 msgstr ""
+"彗星<i>名称</i>应当以 %1 或 %2 "
+"为前缀。如果有多个彗星匹配这个名称，则只会返回第一个结果。例如，搜索“%3”将会返回“%4”，即哈雷彗星，但搜索“%5”将会返回小行星“%6”。"
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:87
 msgid "website"
-msgstr ""
+msgstr "网站"
 
 #. TRANSLATORS: IAU = International Astronomical Union
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:91
@@ -3784,71 +3818,73 @@ msgid ""
 "objects, download such lists from the Internet or search the online Minor "
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
+"您可以导入使用国际天文学联合会[IAU]小行星中心[MPC]的输出格式的彗星与小行星数据（%1）。您可以导入列表文件，从互联网下载这种的列表，或是使用在线"
+"的小行星和彗星星历服务[MPES]进行检索。"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
 msgid "Solar System Editor plug-in"
-msgstr ""
+msgstr "太阳系编辑器插件"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
-msgstr ""
+msgstr "选择天体类型"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Asteroids"
-msgstr ""
+msgstr "小行星"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Comets"
-msgstr ""
+msgstr "彗星"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Select the source"
-msgstr ""
+msgstr "选择数据源"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Download a list of objects from the Internet"
-msgstr ""
+msgstr "从互联网下载天体列表"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Select a source from the list:"
-msgstr ""
+msgstr "从列表中选择一个数据源："
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Or enter a URL:"
-msgstr ""
+msgstr "或是键入 URL："
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Add this URL to the bookmarks list"
-msgstr ""
+msgstr "将这个 URL 加入书签列表"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Bookmark title:"
-msgstr ""
+msgstr "书签名："
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "A file containing a list of objects"
-msgstr ""
+msgstr "从包含天体列表的文件导入"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Get orbital elements"
-msgstr ""
+msgstr "获取轨道天体"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Abort download"
-msgstr ""
+msgstr "取消下载"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Lists"
-msgstr ""
+msgstr "列表"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "Online search"
-msgstr ""
+msgstr "在线检索"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Objects found"
-msgstr ""
+msgstr "已找到天体"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid ""
@@ -3858,97 +3894,99 @@ msgid ""
 "Solar System configuration.<br/>Note that adding a large number of objects "
 "may cause Stellarium to run slowly."
 msgstr ""
+"请勾选您想要导入的天体。<i>斜体</i>标出的天体是与已加载的某一天体同名的。<b>粗体</b>标出的天体是与 Stellarium "
+"默认的太阳系配置中的某一天体同名的。<br />注意：导入太多的天体可能导致 Stellarium 运行缓慢。"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Overwrite existing objects"
-msgstr ""
+msgstr "覆盖已存在的天体"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
 msgid "Update existing objects"
-msgstr ""
+msgstr "更新已存在的天体"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid "Update only the orbital elements"
-msgstr ""
+msgstr "仅更新轨道参数"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid "Mark all"
-msgstr ""
+msgstr "全选"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Mark none"
-msgstr ""
+msgstr "取消全选"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Discard"
-msgstr ""
+msgstr "丢弃列表"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid "Add objects"
-msgstr ""
+msgstr "导入天体"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Solar System objects"
-msgstr ""
+msgstr "太阳系的天体"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Warning"
-msgstr ""
+msgstr "警告"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid ""
 "This plug-in uses a custom Solar System configuration file. If something "
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
-msgstr ""
+msgstr "此插件使用了自定义的太阳系配置文件。如果出现错误，导致 Stellarium 崩溃，或是无法启动，那么您可以手动从以下路径删除该文件："
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid ""
 "You can also reset all changes and return to the default configuration:"
-msgstr ""
+msgstr "您同时也可以重置所有修改，恢复默认设置："
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Reset to defaults"
-msgstr ""
+msgstr "恢复默认设置"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Copy/replace the Solar System file"
-msgstr ""
+msgstr "复制/覆盖太阳系配置文件"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
-msgstr ""
+msgstr "您可以为这个自定义的太阳系配置文件在某一便利的位置创建备份，或是使用备份覆盖当前配置。"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Copy the Solar System file..."
-msgstr ""
+msgstr "备份太阳系配置文件..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Replace the Solar System file..."
-msgstr ""
+msgstr "覆盖当前太阳系配置文件..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Configuration file"
-msgstr ""
+msgstr "配置文件"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Add new Solar System objects"
-msgstr ""
+msgstr "新建太阳系天体"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
 msgid "Import orbital elements in MPC format..."
-msgstr ""
+msgstr "导入 MPC 格式的轨道参数..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
 msgid "Solar System"
-msgstr ""
+msgstr "太阳系"
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical Supernovae"
-msgstr ""
+msgstr "历史上的超新星"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
@@ -3959,6 +3997,10 @@ msgid ""
 "1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
 "(13 September)."
 msgstr ""
+"此插件能够显示一些历史上出现的视星等超过 10等的超新星：SN 185A（12月7日）、SN 386A（4月24日）、SN "
+"1006A（4月29日）、SN 1054A（7月3日）、SN 1181A（8月4日）、SN 1572A（11月5日）、SN "
+"1604A（10月8日）、SN 1680A（8月15日）、SN 1885A（8月17日）、SN 1895B（7月5日）、SN "
+"1937C（8月21日）、SN 1972E（5月8日）、SN 1987A（2月24日）和SN 2011FE（9月13日）。"
 
 #: plugins/Supernovae/src/Supernova.cpp:106
 #, qt-format
@@ -3967,7 +4009,7 @@ msgstr "类型： %1"
 
 #: plugins/Quasars/src/Quasars.cpp:59
 msgid "Quasars"
-msgstr ""
+msgstr "类星体"
 
 #: plugins/Quasars/src/Quasars.cpp:62
 msgid ""
@@ -3975,15 +4017,17 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei'' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
+"此插件能够显示一些视星等超过 16等的类星体。使用的类星体目录编译自《类星体和活跃星系核》[Quasars and Active Galactic "
+"Nuclei]（第 13 版）(Veron+ 2010) =2010A&A...518A..10V"
 
 #: plugins/Quasars/src/Quasar.cpp:113
 msgid "Type: quasar"
-msgstr ""
+msgstr "类型：类星体"
 
-#: plugins/Quasars/src/Quasar.cpp:114
+#: plugins/Quasars/src/Quasar.cpp:116
 #, qt-format
 msgid "Z (redshift): %1"
-msgstr ""
+msgstr "Z（红移）：%1"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "赤道坐标网格"
