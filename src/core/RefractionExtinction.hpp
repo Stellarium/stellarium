@@ -41,7 +41,7 @@
 //! All the computations should be in effect
 //! (1) only if atmosphere effects are true
 //! (2) only for terrestrial locations, not on Moon/Mars/Saturn etc
-//! config.ini:astro/subhorizontal_extinction=true|false controls if extinction kills objects below -2 degrees altitude by setting airmass to 42.
+//! config.ini:astro/flag_extinction_below_horizon=true|false controls if extinction kills objects below -2 degrees altitude by setting airmass to 42.
 class Extinction
 {
 public:
