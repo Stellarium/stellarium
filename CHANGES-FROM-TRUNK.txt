@@ -16,12 +16,13 @@ All changes are donated to the Stellarium project for distribution under opensou
 StelObject and derived classes: getVMagnitude() has new optional arg: withExtinction. 
 This should be set to true only for determining magnitude for drawing (draw()) and also for textual info (getInfoString()),
 not e.g. for selection (getSelectPriority()).
-
+It will also only change the result if atmosphere rendering is ON.
 
 StelSkyDrawer::drawPointSource
 StelObject::getVMagnitude
 Satellite::getVMagnitude, ::getInfoString
 Supernova::getVMagnitude, ::getInfoString
+Quasar::getVMagnitude,    ::getInfoString
 Satellite::getVMagnitude
 Planet::getVMagnitude, ::getInfoString
 Comet::getVMagnitude, ::getInfoString
@@ -29,8 +30,7 @@ MinorPlanet::getVMagnitude, ::getInfoString
 Nebula::getVMagnitude, ::getInfoString
 StarWrapper::getInfoString
 
-
-TODO: STARS RENDERING!!
+I currently have no solution for extended objects! Therefore ...
 
 TODO: Milky Way, Nebula figures, Constellations??
 
