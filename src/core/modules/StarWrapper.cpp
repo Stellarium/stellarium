@@ -50,9 +50,12 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 	if (flags&Magnitude)
 	{
 	    oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(core, false), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
-	    oss << q_("Apparent Magnitude: <b>%1</b> (by extinction)").arg(QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
-	}
-	oss << getPositionInfoString(core, flags);
+            if (core->getSkyDrawer()->getFlagHasAtmosphere())
+            {
+                oss << q_("Apparent Magnitude: <b>%1</b> (by extinction)").arg(QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+            }
+        }
+        oss << getPositionInfoString(core, flags);
 
 	StelObject::postProcessInfoString(str, flags);
 
@@ -109,7 +112,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	if (flags&Magnitude)
 	{
 	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		oss << q_("Magnitude: <b>%1</b> (extincted: <b>%2</b> - B-V: <b>%3</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
+                oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
 											      QString::number(getVMagnitude(core, true), 'f', 2),
 											      QString::number(s->getBV(), 'f', 2)) << "<br>";
 	    else

@@ -31,7 +31,7 @@ float Extinction::SUBHORIZONTAL_AIRMASS=0.0f;
 Extinction::Extinction() : ext_coeff(0.20f)
 {
     QSettings* conf = StelApp::getInstance().getSettings();
-    SUBHORIZONTAL_AIRMASS = (conf->value("astro/subhorizontal_extinction", false).toBool()? 42.0f : 0.0f);
+    SUBHORIZONTAL_AIRMASS = (conf->value("astro/flag_extinction_below_horizon", true).toBool()? 42.0f : 0.0f);
 }
 
 //  altAzPos is the NORMALIZED (!!!) star position vector AFTER REFRACTION, and its z component sin(altitude).
