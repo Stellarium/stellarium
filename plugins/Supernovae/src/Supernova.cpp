@@ -77,7 +77,7 @@ QVariantMap Supernova::getMap(void)
 float Supernova::getSelectPriority(const StelCore* core) const
 {
 	//Same as StarWrapper::getSelectPriority()
-	return getVMagnitude(core, true);
+        return getVMagnitude(core, false);
 }
 
 QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
