@@ -75,31 +75,47 @@ QVariantMap Quasar::getMap(void)
 float Quasar::getSelectPriority(const StelCore* core) const
 {
 	//Same as StarWrapper::getSelectPriority()
-	return getVMagnitude(core);
+        return getVMagnitude(core, false);
 }
 
 QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str;
 	QTextStream oss(&str);
-	double mag = getVMagnitude(core);
+        double mag = getVMagnitude(core, false);
 
 	if (flags&Name)
 	{
 		oss << "<h2>" << designation << "</h2>";
 	}
-
 	if (flags&Magnitude && mag <= core->getSkyDrawer()->getLimitMagnitude())
 	{
-		if (bV!=0)
+            if (core->getSkyDrawer()->getFlagHasAtmosphere())
+            {
+                if (bV!=0)
 		{
-			oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(mag, 0, 'f', 2).arg(bV, 0, 'f', 2) << "<br>";
+                        oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)").arg(QString::number(mag, 'f', 2),
+                                                                                                        QString::number(getVMagnitude(core, true),  'f', 2),
+                                                                                                        QString::number(bV, 'f', 2)) << "<br>";
 		}
 		else
 		{
-			oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
+                        oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(mag, 'f', 2),
+                                                                                        QString::number(getVMagnitude(core, true),  'f', 2)) << "<br>";
 		}
-		if (AMagnitude!=0)
+            }
+            else
+            {
+                if (bV!=0)
+                {
+                        oss << q_("Magnitude: <b>%1</b> (B-V: <b>%2</b>)").arg(mag, 0, 'f', 2).arg(bV, 0, 'f', 2) << "<br>";
+                }
+                else
+                {
+                        oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
+                }
+            }
+            if (AMagnitude!=0)
 		{
 			oss << q_("Absolute Magnitude: %1").arg(AMagnitude, 0, 'f', 2) << "<br>";
 		}
@@ -126,9 +142,17 @@ Vec3f Quasar::getInfoColor(void) const
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
 }
 
-float Quasar::getVMagnitude(const StelCore* core) const
+float Quasar::getVMagnitude(const StelCore* core, bool withExtinction) const
 {
-	return VMagnitude;	
+    float extinctionMag=0.0; // track magnitude loss
+    if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
+    {
+        Vec3d altAz=getAltAzPosApparent(core);
+        altAz.normalize();
+        core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
+    }
+
+        return VMagnitude + extinctionMag;
 }
 
 double Quasar::getAngularSize(const StelCore*) const
@@ -150,7 +174,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 	double mag;
 
 	StelUtils::spheToRect(qRA, qDE, XYZ);
-	mag = getVMagnitude(core);
+        mag = getVMagnitude(core, true);
 	
 	if (mag <= sd->getLimitMagnitude())
 	{

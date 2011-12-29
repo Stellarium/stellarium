@@ -53,7 +53,7 @@ public:
 	virtual QString getType() const {return "Nebula";}
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const {return XYZ;}
 	virtual double getCloseViewFov(const StelCore* core = NULL) const;
-	virtual float getVMagnitude(const StelCore* core = NULL) const {Q_UNUSED(core); return mag;}
+	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
 	virtual float getSelectPriority(const StelCore* core) const;
 	virtual Vec3f getInfoColor() const;
 	virtual QString getNameI18n() const {return nameI18;}

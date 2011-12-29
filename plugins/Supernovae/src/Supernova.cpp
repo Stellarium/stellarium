@@ -77,14 +77,14 @@ QVariantMap Supernova::getMap(void)
 float Supernova::getSelectPriority(const StelCore* core) const
 {
 	//Same as StarWrapper::getSelectPriority()
-	return getVMagnitude(core);
+        return getVMagnitude(core, false);
 }
 
 QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str;
 	QTextStream oss(&str);
-	double mag = getVMagnitude(core);
+	double mag = getVMagnitude(core, false);
 
 	if (flags&Name)
 	{
@@ -96,7 +96,13 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	}
 
 	if (flags&Magnitude && mag <= core->getSkyDrawer()->getLimitMagnitude())
+	{
+	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
+									       QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+	    else
 		oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
+	}
 
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
@@ -117,8 +123,16 @@ Vec3f Supernova::getInfoColor(void) const
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
 }
 
-float Supernova::getVMagnitude(const StelCore* core) const
+float Supernova::getVMagnitude(const StelCore* core, bool withExtinction) const
 {
+	float extinctionMag=0.0; // track magnitude loss
+	if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
+	{
+	    Vec3d altAz=getAltAzPosApparent(core);
+	    altAz.normalize();
+	    core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
+	}
+
 	double vmag = 20;
 	double currentJD = core->getJDay();
 	double deltaJD = std::abs(peakJD-currentJD);
@@ -172,7 +186,7 @@ float Supernova::getVMagnitude(const StelCore* core) const
 	if (vmag<maxMagnitude)
 		vmag = maxMagnitude;
 
-	return vmag;	
+	return vmag + extinctionMag;
 }
 
 double Supernova::getAngularSize(const StelCore*) const
@@ -194,7 +208,7 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 	double mag;
 
 	StelUtils::spheToRect(snra, snde, XYZ);
-	mag = getVMagnitude(core);
+	mag = getVMagnitude(core, true);
 	
 	if (mag <= sd->getLimitMagnitude())
 	{
