@@ -352,8 +352,23 @@ void ViewDialog::populateLists()
 	l->blockSignals(true);
 	l->clear();
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-	l->addItems(lmgr->getAllLandscapeNames());
-	l->setCurrentItem(l->findItems(lmgr->getCurrentLandscapeName(), Qt::MatchExactly).at(0));
+	QStringList landscapeList = lmgr->getAllLandscapeNames();
+	foreach (const QString landscapeId, landscapeList)
+	{
+		QString label = q_(landscapeId);
+		QListWidgetItem* item = new QListWidgetItem(label);
+		item->setData(Qt::UserRole, landscapeId);
+		l->addItem(item);
+	}
+	QString selectedLandscapeId = lmgr->getCurrentLandscapeName();
+	for (int i = 0; i < l->count(); i++)
+	{
+		if (l->item(i)->data(Qt::UserRole).toString() == selectedLandscapeId)
+		{
+			l->setCurrentRow(i);
+			break;
+		}
+	}
 	l->blockSignals(false);
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
 	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
@@ -461,7 +476,7 @@ void ViewDialog::projectionChanged(const QString& projectionNameI18n)
 void ViewDialog::landscapeChanged(QListWidgetItem* item)
 {
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-	lmgr->setCurrentLandscapeName(item->text());
+	lmgr->setCurrentLandscapeName(item->data(Qt::UserRole).toString());
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 	ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
