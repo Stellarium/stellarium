@@ -239,7 +239,7 @@ void LandscapeMgr::update(double deltaTime)
 	else
 		landscapeBrightness = (0.01 + 1.5*(sinSunAngleRad+0.1/1.5));
 	if (moonPos[2] > -0.1/1.5)
-		landscapeBrightness += qMax(0.2/-12.*ssystem->getMoon()->getVMagnitude(core),0.)*moonPos[2];
+		landscapeBrightness += qMax(0.2/-12.*ssystem->getMoon()->getVMagnitude(core, true),0.)*moonPos[2];
 
 	// TODO make this more generic for non-atmosphere planets
 	if(atmosphere->getFadeIntensity() == 1)

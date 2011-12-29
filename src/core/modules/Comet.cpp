@@ -115,7 +115,13 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	}
 
 	if (flags&Magnitude)
-		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
+	{
+	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
+									    QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+	    else
+		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core, false), 0, 'f', 2) << "<br>";
+	}
 
 	if (flags&AbsoluteMagnitude)
 	{
@@ -157,13 +163,21 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	return str;
 }
 
-float Comet::getVMagnitude(const StelCore* core) const
+float Comet::getVMagnitude(const StelCore* core, bool withExtinction) const
 {
 	//If the two parameter system is not used,
 	//use the default radius/albedo mechanism
 	if (slopeParameter < 0)
 	{
-		return Planet::getVMagnitude(core);
+		return Planet::getVMagnitude(core, withExtinction);
+	}
+
+	float extinctionMag=0.0; // track magnitude loss
+	if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
+	{
+	    Vec3d altAz=getAltAzPosApparent(core);
+	    altAz.normalize();
+	    core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
 	}
 
 	//Calculate distances
@@ -178,5 +192,5 @@ float Comet::getVMagnitude(const StelCore* core) const
 	//http://www.ayton.id.au/gary/Science/Astronomy/Ast_comets.htm#Comet%20facts:
 	double apparentMagnitude = absoluteMagnitude + 5 * std::log10(observerCometDistance) + 2.5 * slopeParameter * std::log10(cometSunDistance);
 
-	return apparentMagnitude;
+	return apparentMagnitude + extinctionMag;
 }
