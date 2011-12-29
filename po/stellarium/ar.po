@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-18 22:08+0700\n"
-"PO-Revision-Date: 2011-12-21 21:57+0000\n"
+"POT-Creation-Date: 2011-12-28 14:04+0200\n"
+"PO-Revision-Date: 2011-12-28 19:30+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-22 05:24+0000\n"
+"X-Launchpad-Export-Date: 2011-12-29 04:37+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -297,42 +297,42 @@ msgstr "‎ارتفاع زاوي / سمتي:‎ %1/%2"
 msgid "Select screenshot directory"
 msgstr "أختر مجلد حفظ لقطة الشاشة"
 
-#: src/gui/ConfigurationDialog.cpp:478
+#: src/gui/ConfigurationDialog.cpp:481
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "حقل الرؤية عند بدء البرنامج: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:486
+#: src/gui/ConfigurationDialog.cpp:489
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "اتجاه الرؤية عند بدء البرنامج سمت/ارتفاع: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:525
+#: src/gui/ConfigurationDialog.cpp:528
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:235
 msgid "Authors"
 msgstr "<P DIR=RTL>المؤلفون"
 
-#: src/gui/ConfigurationDialog.cpp:529 src/gui/ViewDialog.cpp:382
+#: src/gui/ConfigurationDialog.cpp:532 src/gui/ViewDialog.cpp:397
 msgid "Contact"
 msgstr "<P DIR=RTL>للمراسلة"
 
-#: src/gui/ConfigurationDialog.cpp:604
+#: src/gui/ConfigurationDialog.cpp:607
 msgid "Author"
 msgstr "المؤلف"
 
-#: src/gui/ConfigurationDialog.cpp:605
+#: src/gui/ConfigurationDialog.cpp:608
 msgid "License"
 msgstr "الرخصة"
 
-#: src/gui/ConfigurationDialog.cpp:634
+#: src/gui/ConfigurationDialog.cpp:637
 msgid "Running script: "
 msgstr "البرنامج النصي الشغَال‎: "
 
-#: src/gui/ConfigurationDialog.cpp:641
+#: src/gui/ConfigurationDialog.cpp:644
 msgid "Running script: [none]"
 msgstr "البرنامج النصي الشغَال‎: [لايوجد]"
 
-#: src/gui/ConfigurationDialog.cpp:710
+#: src/gui/ConfigurationDialog.cpp:713
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -340,16 +340,16 @@ msgstr ""
 "أنتهى تحميل أدلة النجوم الجديدة\n"
 "أعد تشغيل برنامج ستيللاريوم لرؤيتها.‏"
 
-#: src/gui/ConfigurationDialog.cpp:714
+#: src/gui/ConfigurationDialog.cpp:717
 msgid "All available star catalogs have been installed."
 msgstr "لقد تمت إضافة جميع أدلة النجوم المتاحة"
 
-#: src/gui/ConfigurationDialog.cpp:719
+#: src/gui/ConfigurationDialog.cpp:722
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "اجلب الدليل %1 من %2"
 
-#: src/gui/ConfigurationDialog.cpp:726
+#: src/gui/ConfigurationDialog.cpp:729
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -358,7 +358,7 @@ msgstr ""
 "جاري التحميل %1 ...‏\n"
 "(تستطيع إغلاق هذه النافذة)"
 
-#: src/gui/ConfigurationDialog.cpp:733
+#: src/gui/ConfigurationDialog.cpp:736
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -369,7 +369,7 @@ msgstr ""
 "عدد النجوم: %2 مليون\n"
 "نطاق قدر لمعان النجوم: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:776 src/gui/ConfigurationDialog.cpp:812
+#: src/gui/ConfigurationDialog.cpp:779 src/gui/ConfigurationDialog.cpp:815
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -378,11 +378,11 @@ msgstr ""
 "خطأ في تحميل %1‎:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:864
+#: src/gui/ConfigurationDialog.cpp:867
 msgid "Verifying file integrity..."
 msgstr "جاري التأكد من صحة الملف...‏"
 
-#: src/gui/ConfigurationDialog.cpp:868
+#: src/gui/ConfigurationDialog.cpp:871
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -857,27 +857,27 @@ msgstr "إظهار وإخفاء شريط الأدوات الرئيس والجا�
 msgid "%1m"
 msgstr "‏%1 متر"
 
-#: src/gui/ViewDialog.cpp:441
+#: src/gui/ViewDialog.cpp:456
 msgid "No description"
 msgstr "لا يوجد وصف"
 
-#: src/gui/ViewDialog.cpp:525
+#: src/gui/ViewDialog.cpp:540
 msgid "No shooting stars"
 msgstr "لا يوجد شهب"
 
-#: src/gui/ViewDialog.cpp:528
+#: src/gui/ViewDialog.cpp:543
 msgid "Normal rate"
 msgstr "المعدل الطبيعي للشهب"
 
-#: src/gui/ViewDialog.cpp:531
+#: src/gui/ViewDialog.cpp:546
 msgid "Standard Perseids rate"
 msgstr "المعدل القياسي للبرشاويات"
 
-#: src/gui/ViewDialog.cpp:534
+#: src/gui/ViewDialog.cpp:549
 msgid "Exceptional Leonid rate"
 msgstr "المعدل الاستثنائي للأسديات"
 
-#: src/gui/ViewDialog.cpp:537
+#: src/gui/ViewDialog.cpp:552
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "المعدل الأعلى (الأسديات لعام 1966)‏"
 
@@ -983,11 +983,13 @@ msgstr "الزهرة"
 msgid "Earth"
 msgstr "الأرض"
 
-#: src/translations.h:37
+#. TRANSLATORS: Name of landscape and Earth's satellite
+#: src/translations.h:37 src/translations.h:169
 msgid "Moon"
 msgstr "القمر‎‏"
 
-#: src/translations.h:38
+#. TRANSLATORS: Name of landscape and planet
+#: src/translations.h:38 src/translations.h:177
 msgid "Mars"
 msgstr "المريخ"
 
@@ -1080,11 +1082,12 @@ msgid "Adrastea"
 msgstr "أدراستيا"
 
 #. TRANSLATORS: Asteroid (9) Metis
-#: src/translations.h:61 src/translations.h:119
+#: src/translations.h:61 src/translations.h:121
 msgid "Metis"
 msgstr "ميتس"
 
-#: src/translations.h:62
+#. TRANSLATORS: Name of landscape and planet
+#: src/translations.h:62 src/translations.h:179
 msgid "Saturn"
 msgstr "زحل"
 
@@ -1231,156 +1234,181 @@ msgid "Solar System Observer"
 msgstr "راصد المجموعة الشمسية"
 
 #. TRANSLATORS: TNO/Asteroid (90377) Sedna
-#: src/translations.h:102
+#: src/translations.h:103
 msgid "Sedna"
 msgstr "سدنا"
 
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
-#: src/translations.h:104
+#: src/translations.h:105
 msgid "Quaoar"
 msgstr "كواأور"
 
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
-#: src/translations.h:106
+#: src/translations.h:107
 msgid "Orcus"
 msgstr "أوركس"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
-#: src/translations.h:108
+#: src/translations.h:109
 msgid "Haumea"
 msgstr "هاوميا"
 
 #. TRANSLATORS: Asteroid (5) Astraea
-#: src/translations.h:111
+#: src/translations.h:113
 msgid "Astraea"
 msgstr "أسترايا"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: src/translations.h:113
+#: src/translations.h:115
 msgid "Hebe"
 msgstr "هيبي"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: src/translations.h:115
+#: src/translations.h:117
 msgid "Iris"
 msgstr "آيريس"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: src/translations.h:117
+#: src/translations.h:119
 msgid "Flora"
 msgstr "فلورا"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: src/translations.h:121
+#: src/translations.h:123
 msgid "Hygiea"
 msgstr "هايجيا"
 
 #. TRANSLATORS: Asteroid (1221) Amor
-#: src/translations.h:123
+#: src/translations.h:125
 msgid "Amor"
 msgstr "آمور"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: src/translations.h:125
+#: src/translations.h:127
 msgid "Apophis"
 msgstr "أبوفيس"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: src/translations.h:127
+#: src/translations.h:129
 msgid "Chiron"
 msgstr "كايرون"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: src/translations.h:129
+#: src/translations.h:131
 msgid "Eros"
 msgstr "إيروس"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: src/translations.h:131
+#: src/translations.h:133
 msgid "Hektor"
 msgstr "هيكتور"
 
 #. TRANSLATORS: Name of supernova SN 1572A
-#: src/translations.h:133
+#: src/translations.h:136
 msgid "Tycho's Supernova"
 msgstr "مستعر تايكو"
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: src/translations.h:135
+#: src/translations.h:138
 msgid "Kepler's Supernova"
 msgstr "مستعر كبلر"
 
-#: src/translations.h:139
+#: src/translations.h:142
 msgid "N"
 msgstr "شمال"
 
-#: src/translations.h:140
+#: src/translations.h:143
 msgid "S"
 msgstr "جنوب"
 
-#: src/translations.h:141
+#: src/translations.h:144
 msgid "E"
 msgstr "شرق"
 
-#: src/translations.h:142
+#: src/translations.h:145
 msgid "W"
 msgstr "غرب"
 
-#: src/translations.h:145
+#: src/translations.h:148
 msgid "Arabic"
 msgstr "العربي"
 
-#: src/translations.h:146
+#: src/translations.h:149
 msgid "Aztec"
 msgstr "الأزتك"
 
-#: src/translations.h:147
+#: src/translations.h:150
 msgid "Chinese"
 msgstr "الصينية"
 
-#: src/translations.h:148
+#: src/translations.h:151
 msgid "Egyptian"
 msgstr "مصري"
 
-#: src/translations.h:149
+#: src/translations.h:152
 msgid "Inuit"
 msgstr "إنيويت"
 
-#: src/translations.h:150
+#: src/translations.h:153
 msgid "Korean"
 msgstr "الكوري"
 
-#: src/translations.h:151
+#: src/translations.h:154
 msgid "Lakota"
 msgstr "لاكوتا"
 
-#: src/translations.h:152
+#: src/translations.h:155
 msgid "Maori"
 msgstr "الماوري"
 
-#: src/translations.h:153
+#: src/translations.h:156
 msgid "Navajo"
 msgstr "النافاهو"
 
-#: src/translations.h:154
+#: src/translations.h:157
 msgid "Norse"
 msgstr "النرويجي"
 
-#: src/translations.h:155
+#: src/translations.h:158
 msgid "Polynesian"
 msgstr "البولونيزي"
 
-#: src/translations.h:156
+#: src/translations.h:159
 msgid "Sami"
 msgstr "السامي"
 
-#: src/translations.h:157
+#: src/translations.h:160
 msgid "Tupi-Guarani"
 msgstr "توبي - جواراني"
 
-#: src/translations.h:158
+#: src/translations.h:161
 msgid "Western"
 msgstr "الغربي"
+
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:165
+msgid "Guereins"
+msgstr "جيرين"
+
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:167
+msgid "Trees"
+msgstr "أشجار"
+
+#. TRANSLATORS: Landscape name: Hurricane Ridge
+#: src/translations.h:171
+msgid "Hurricane"
+msgstr "مرتفع الإعصار"
+
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:173
+msgid "Ocean"
+msgstr "المحيط"
+
+#. TRANSLATORS: Landscape name: Garching bei Munchen
+#: src/translations.h:175
+msgid "Garching"
+msgstr "جارشينج"
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -1395,7 +1423,7 @@ msgstr ":"
 msgid "Help"
 msgstr "مساعدة"
 
-#: src/ui_helpDialogGui.h:267 plugins/Oculars/src/ui_ocularDialog.h:911
+#: src/ui_helpDialogGui.h:267 plugins/Oculars/src/ui_ocularDialog.h:903
 #: plugins/Satellites/src/ui_satellitesDialog.h:690
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
@@ -1424,9 +1452,9 @@ msgstr "معلومات الموقع الحالي"
 msgid "Use as default"
 msgstr "اجعل الموقع الحالي هو الافتراضي"
 
-#: src/ui_locationDialogGui.h:393 plugins/Oculars/src/ui_ocularDialog.h:884
-#: plugins/Oculars/src/ui_ocularDialog.h:893
-#: plugins/Oculars/src/ui_ocularDialog.h:904
+#: src/ui_locationDialogGui.h:393 plugins/Oculars/src/ui_ocularDialog.h:876
+#: plugins/Oculars/src/ui_ocularDialog.h:885
+#: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Delete"
 msgstr "احذف"
 
@@ -2192,7 +2220,7 @@ msgid "Compass marks"
 msgstr "درجات البوصلة"
 
 #: plugins/Oculars/src/Oculars.cpp:84
-#: plugins/Oculars/src/ui_ocularDialog.h:870
+#: plugins/Oculars/src/ui_ocularDialog.h:862
 msgid "Oculars"
 msgstr "العدسة العينية"
 
@@ -2259,7 +2287,7 @@ msgid "&Reset rotation"
 msgstr "&إعادة التدوير للوضع الأصلي"
 
 #: plugins/Oculars/src/Oculars.cpp:1201
-#: plugins/Oculars/src/ui_ocularDialog.h:872
+#: plugins/Oculars/src/ui_ocularDialog.h:864
 msgid "Ocular view"
 msgstr "منظر العدسة العينية"
 
@@ -2444,121 +2472,121 @@ msgstr "التكبير المتاح بهذا التلسكوب باستخدام �
 msgid "Actual field of view provided by this ocular/telescope combination"
 msgstr "حقل الرؤية المتاح بهذا التلسكوب باستخدام هذه العدسة"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:873
+#: plugins/Oculars/src/ui_ocularDialog.h:865
 msgid "Enable only if an object is selected"
 msgstr "فعِّل فقط عند اختيار جرم سماوي"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:874
+#: plugins/Oculars/src/ui_ocularDialog.h:866
 msgid "Scale image circle"
 msgstr "عدّل حجم دائرة المشهد"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:875
+#: plugins/Oculars/src/ui_ocularDialog.h:867
 msgid "Key mappings"
 msgstr "مفاتيح الأوامر"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:876
+#: plugins/Oculars/src/ui_ocularDialog.h:868
 msgid "Toggle ocular view:"
 msgstr "تفعيل المشهد عبر العدسة العينية"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:878
+#: plugins/Oculars/src/ui_ocularDialog.h:870
 msgid "Open pop-up navigation menu:"
 msgstr "فتح قائمة الخيارات المنبثقة"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:879
+#: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Interface"
 msgstr "واجهة الاستخدام"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:880
+#: plugins/Oculars/src/ui_ocularDialog.h:872
 msgid "On-screen control panel"
 msgstr "لوحة تحكم ظاهرة على الشاشة"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:881
+#: plugins/Oculars/src/ui_ocularDialog.h:873
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:209
 msgid "General"
 msgstr "عام"
 
+#: plugins/Oculars/src/ui_ocularDialog.h:874
 #: plugins/Oculars/src/ui_ocularDialog.h:882
-#: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Eyepieces"
 msgstr "العدسات"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:883
-#: plugins/Oculars/src/ui_ocularDialog.h:892
-#: plugins/Oculars/src/ui_ocularDialog.h:903
+#: plugins/Oculars/src/ui_ocularDialog.h:875
+#: plugins/Oculars/src/ui_ocularDialog.h:884
+#: plugins/Oculars/src/ui_ocularDialog.h:895
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Add"
 msgstr "أضف"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:885
-#: plugins/Oculars/src/ui_ocularDialog.h:894
-#: plugins/Oculars/src/ui_ocularDialog.h:905
+#: plugins/Oculars/src/ui_ocularDialog.h:877
+#: plugins/Oculars/src/ui_ocularDialog.h:886
+#: plugins/Oculars/src/ui_ocularDialog.h:897
 #: plugins/Satellites/src/ui_satellitesDialog.h:660
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr "الاسم"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:886
+#: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "aFOV:"
 msgstr "حقل الرؤية الظاهري"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:887
-#: plugins/Oculars/src/ui_ocularDialog.h:906
+#: plugins/Oculars/src/ui_ocularDialog.h:879
+#: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Focal length:"
 msgstr "الطول البؤري"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:888
+#: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "Field stop:"
 msgstr "النسبة البؤرية"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:889
+#: plugins/Oculars/src/ui_ocularDialog.h:881
 msgid "Binoculars"
 msgstr "المنظار الثنائي"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:891
-#: plugins/Oculars/src/ui_ocularDialog.h:901
+#: plugins/Oculars/src/ui_ocularDialog.h:883
+#: plugins/Oculars/src/ui_ocularDialog.h:893
 msgid "Sensors"
 msgstr "المستشعرات"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:895
+#: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Resolution x (pixels):"
 msgstr "الدقة س (بكسل)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:896
+#: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Resolution y (pixels):"
 msgstr "الدقة ص (بكسل)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:897
+#: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Chip width (mm):"
 msgstr "عرض الشريحة (مم)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:898
+#: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Chip height (mm):"
 msgstr "طول الشريحة (مم)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:899
+#: plugins/Oculars/src/ui_ocularDialog.h:891
 msgid "Pixel width (micron):"
 msgstr "عرض البكسل (ميكرون)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:900
+#: plugins/Oculars/src/ui_ocularDialog.h:892
 msgid "Pixel height (micron):"
 msgstr "طول البكسل (ميكرون)"
 
+#: plugins/Oculars/src/ui_ocularDialog.h:894
 #: plugins/Oculars/src/ui_ocularDialog.h:902
-#: plugins/Oculars/src/ui_ocularDialog.h:910
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Telescopes"
 msgstr "التلسكوبات"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:907
+#: plugins/Oculars/src/ui_ocularDialog.h:899
 msgid "Diameter:"
 msgstr "القطر"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:908
+#: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Horizontal flip"
 msgstr "قلب المشهد أفقياً"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:909
+#: plugins/Oculars/src/ui_ocularDialog.h:901
 msgid "Vertical flip"
 msgstr "قلب المشهد رأسياً"
 
@@ -4112,7 +4140,7 @@ msgstr ""
 msgid "Type: quasar"
 msgstr "‎النوع: ‎ كوازار"
 
-#: plugins/Quasars/src/Quasar.cpp:114
+#: plugins/Quasars/src/Quasar.cpp:116
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr "‎ Z (الإزاحة الحمراء‎): %1"
