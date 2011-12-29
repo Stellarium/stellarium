@@ -129,6 +129,7 @@ class Translations
 		N_("Eros");
 		// TRANSLATORS: Asteroid (624) Hektor
 		N_("Hektor");
+		
 		// TRANSLATORS: Name of supernova SN 1572A
 		N_("Tycho's Supernova");
 		// TRANSLATORS: Name of supernova SN 1604A
@@ -156,6 +157,24 @@ class Translations
 		N_("Sami");
 		N_("Tupi-Guarani");
 		N_("Western");
+
+		// Landscapes names
+		// TRANSLATORS: Name of landscape
+		N_("Guereins");
+		// TRANSLATORS: Name of landscape
+		N_("Trees");
+		// TRANSLATORS: Name of landscape and Earth's satellite
+		N_("Moon");
+		// TRANSLATORS: Landscape name: Hurricane Ridge
+		N_("Hurricane");
+		// TRANSLATORS: Name of landscape
+		N_("Ocean");
+		// TRANSLATORS: Landscape name: Garching bei Munchen
+		N_("Garching");
+		// TRANSLATORS: Name of landscape and planet
+		N_("Mars");
+		// TRANSLATORS: Name of landscape and planet
+		N_("Saturn");
 
 		// List of countries
 		N_("Andorra");
@@ -399,5 +418,6 @@ class Translations
 		N_("South Africa");
 		N_("Zambia");
 		N_("Zimbabwe");
+
 	}
 };
