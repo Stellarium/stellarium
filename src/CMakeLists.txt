@@ -232,7 +232,6 @@ SET(stellarium_lib_SRCS
 	CLIProcessor.hpp
 	CLIProcessor.cpp
 	translations.h
-    countries.h
 )
 IF(ENABLE_SCRIPTING)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
