@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-28 14:04+0200\n"
-"PO-Revision-Date: 2011-12-28 17:25+0000\n"
+"POT-Creation-Date: 2011-12-30 00:02+0700\n"
+"PO-Revision-Date: 2011-12-29 18:57+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-29 04:43+0000\n"
+"X-Launchpad-Export-Date: 2011-12-30 05:36+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -65,98 +65,118 @@ msgstr "Планета: "
 msgid "Type: <b>%1</b>"
 msgstr "Тип: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:121
-#: plugins/Supernovae/src/Supernova.cpp:99 plugins/Quasars/src/Quasar.cpp:100
+#: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:123
+#: plugins/Supernovae/src/Supernova.cpp:101 plugins/Quasars/src/Quasar.cpp:103
+#, qt-format
+msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
+msgstr "Величина: <b>%1</b> (зменшилася до <b>%2</b>)"
+
+#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
+#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:115
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Величина: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:104
+#: src/core/modules/Nebula.cpp:109
 #, qt-format
 msgid "Size: %1"
 msgstr "Розмір: %1"
 
-#: src/core/modules/Nebula.cpp:284
+#: src/core/modules/Nebula.cpp:303
 msgid "Galaxy"
 msgstr "Галактика"
 
-#: src/core/modules/Nebula.cpp:287
+#: src/core/modules/Nebula.cpp:306
 msgid "Open cluster"
 msgstr "Розсіяне зоряне скупчення"
 
-#: src/core/modules/Nebula.cpp:290
+#: src/core/modules/Nebula.cpp:309
 msgid "Globular cluster"
 msgstr "Кулясте зоряне скупчення"
 
-#: src/core/modules/Nebula.cpp:293
+#: src/core/modules/Nebula.cpp:312
 msgid "Nebula"
 msgstr "Туманність"
 
-#: src/core/modules/Nebula.cpp:296
+#: src/core/modules/Nebula.cpp:315
 msgid "Planetary nebula"
 msgstr "Планетарна туманність"
 
-#: src/core/modules/Nebula.cpp:299
+#: src/core/modules/Nebula.cpp:318
 msgid "Cluster associated with nebulosity"
 msgstr "Зоряне скупчення, пов'язане з туманністю"
 
-#: src/core/modules/Nebula.cpp:302
+#: src/core/modules/Nebula.cpp:321
 msgid "Unknown"
 msgstr "Невідомо"
 
-#: src/core/modules/Nebula.cpp:305
+#: src/core/modules/Nebula.cpp:324
 msgid "Undocumented type"
 msgstr "Недокументований тип"
 
-#: src/core/modules/Planet.cpp:124 src/core/modules/StarWrapper.cpp:112
-#: plugins/Quasars/src/Quasar.cpp:104
+#: src/core/modules/Planet.cpp:129 src/core/modules/StarWrapper.cpp:124
+#: plugins/Quasars/src/Quasar.cpp:120
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Абсолютна зіркова величина: %1"
 
-#: src/core/modules/Planet.cpp:137
+#: src/core/modules/Planet.cpp:142
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
 msgstr "Екліптичні геоцентричні (для дати): %1/%2"
 
-#: src/core/modules/Planet.cpp:138
+#: src/core/modules/Planet.cpp:143
 #, qt-format
 msgid "Obliquity (of date): %1"
 msgstr "Нахил вісі обертання (для дати): %1"
 
-#: src/core/modules/Planet.cpp:148
+#: src/core/modules/Planet.cpp:153
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Відстань: %1 а.о. (%2 км)"
 
-#: src/core/modules/Planet.cpp:155
+#: src/core/modules/Planet.cpp:160
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr "Відстань: %1 а.о."
 
-#: src/core/modules/Planet.cpp:161
+#: src/core/modules/Planet.cpp:166
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Видимий діаметр: %1"
 
-#: src/core/modules/StarWrapper.cpp:51 src/core/modules/StarWrapper.cpp:108
-#: plugins/Quasars/src/Quasar.cpp:96
+#: src/core/modules/StarWrapper.cpp:52
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
 msgstr "Зоряна величина: <b>%1</b> (B-V: %2)"
 
-#: src/core/modules/StarWrapper.cpp:118
+#: src/core/modules/StarWrapper.cpp:55
+#, qt-format
+msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
+msgstr "Видима величина: <b>%1</b> (після згасання)"
+
+#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:97
+#, qt-format
+msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
+msgstr "Величина: <b>%1</b> (зменшилася до <b>%2</b>. B-V: <b>%3</b>)"
+
+#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:111
+#, qt-format
+msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
+msgstr "Величина: <b>%1</b> (B-V: <b>%2</b>)"
+
+#: src/core/modules/StarWrapper.cpp:130
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Спектральний тип: %1"
 
-#: src/core/modules/StarWrapper.cpp:122
-#: plugins/Supernovae/src/Supernova.cpp:108
+#: src/core/modules/StarWrapper.cpp:134
+#: plugins/Supernovae/src/Supernova.cpp:114
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Відстань: %1 світлових років"
 
-#: src/core/modules/StarWrapper.cpp:125
+#: src/core/modules/StarWrapper.cpp:137
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Паралакс: %1\""
@@ -272,30 +292,32 @@ msgstr ""
 "Ортографічна проекція дуже схожа із проекцією перспективи, але точка "
 "перспективи розташована на нескінченній відстані."
 
-#: src/core/StelObject.cpp:79
+#: src/core/StelObject.cpp:80
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
 msgstr "ПС/Сх (J2000): %1/%2"
 
-#: src/core/StelObject.cpp:86
+#: src/core/StelObject.cpp:87
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
 msgstr "ПС/Сх (дати): %1/%2"
 
-#: src/core/StelObject.cpp:94 src/core/StelObject.cpp:97
+#: src/core/StelObject.cpp:97 src/core/StelObject.cpp:100
+#: src/core/StelObject.cpp:103
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Годинний кут/Сх: %1/%2"
 
-#: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
+#: src/core/StelObject.cpp:97 src/core/StelObject.cpp:116
 msgid "(geometric)"
 msgstr "(геометричні)"
 
-#: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
+#: src/core/StelObject.cpp:100 src/core/StelObject.cpp:122
 msgid "(apparent)"
 msgstr "(видимі)"
 
-#: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
+#: src/core/StelObject.cpp:116 src/core/StelObject.cpp:122
+#: src/core/StelObject.cpp:125
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Аз/Висота: %1/%2"
@@ -4150,7 +4172,7 @@ msgstr ""
 "серпня), SN 1895B (5 липня), SN 1937C (21 серпня), SN 1972E (8 травня), SN "
 "1987A (24 лютого) і SN 2011FE (13 вересня)."
 
-#: plugins/Supernovae/src/Supernova.cpp:106
+#: plugins/Supernovae/src/Supernova.cpp:112
 #, qt-format
 msgid "Type: %1"
 msgstr "Тип: %1"
@@ -4170,11 +4192,11 @@ msgstr ""
 "редакції каталогу «Квазари та активні ядра галактик» (Верон та ін., 2010) "
 "=2010A&A…518A..10V"
 
-#: plugins/Quasars/src/Quasar.cpp:113
+#: plugins/Quasars/src/Quasar.cpp:129
 msgid "Type: quasar"
 msgstr "Тип: квазар"
 
-#: plugins/Quasars/src/Quasar.cpp:116
+#: plugins/Quasars/src/Quasar.cpp:132
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr "Z (червоний зсув): %1"
