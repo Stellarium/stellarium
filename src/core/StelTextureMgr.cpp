@@ -107,7 +107,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 
 		int size;
 		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &size);
-		fprintf(stdout, "image size: %d\n", size);
+		fprintf(stdout, "max texture unit size: %d\n", size);
 		fprintf(stdout, "qImage width: %d\n", tex->qImage.width());
 		fprintf(stdout, "qImage height: %d\n", tex->qImage.height());
 
