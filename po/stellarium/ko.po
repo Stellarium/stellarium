@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-28 14:04+0200\n"
+"POT-Creation-Date: 2011-12-30 00:02+0700\n"
 "PO-Revision-Date: 2011-11-17 12:00+0000\n"
 "Last-Translator: MinSik CHO <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-29 04:41+0000\n"
+"X-Launchpad-Export-Date: 2011-12-30 05:33+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -59,98 +59,118 @@ msgstr "행성: "
 msgid "Type: <b>%1</b>"
 msgstr "유형: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:99 src/core/modules/Planet.cpp:121
-#: plugins/Supernovae/src/Supernova.cpp:99 plugins/Quasars/src/Quasar.cpp:100
+#: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:123
+#: plugins/Supernovae/src/Supernova.cpp:101 plugins/Quasars/src/Quasar.cpp:103
+#, qt-format
+msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
+#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:115
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "등급: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:104
+#: src/core/modules/Nebula.cpp:109
 #, qt-format
 msgid "Size: %1"
 msgstr "크기: %1"
 
-#: src/core/modules/Nebula.cpp:284
+#: src/core/modules/Nebula.cpp:303
 msgid "Galaxy"
 msgstr "은하"
 
-#: src/core/modules/Nebula.cpp:287
+#: src/core/modules/Nebula.cpp:306
 msgid "Open cluster"
 msgstr "산개성단"
 
-#: src/core/modules/Nebula.cpp:290
+#: src/core/modules/Nebula.cpp:309
 msgid "Globular cluster"
 msgstr "구상성단"
 
-#: src/core/modules/Nebula.cpp:293
+#: src/core/modules/Nebula.cpp:312
 msgid "Nebula"
 msgstr "성운"
 
-#: src/core/modules/Nebula.cpp:296
+#: src/core/modules/Nebula.cpp:315
 msgid "Planetary nebula"
 msgstr "행성상성운"
 
-#: src/core/modules/Nebula.cpp:299
+#: src/core/modules/Nebula.cpp:318
 msgid "Cluster associated with nebulosity"
 msgstr "성운과 관련된 성단"
 
-#: src/core/modules/Nebula.cpp:302
+#: src/core/modules/Nebula.cpp:321
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: src/core/modules/Nebula.cpp:305
+#: src/core/modules/Nebula.cpp:324
 msgid "Undocumented type"
 msgstr "자료 없는 유형"
 
-#: src/core/modules/Planet.cpp:124 src/core/modules/StarWrapper.cpp:112
-#: plugins/Quasars/src/Quasar.cpp:104
+#: src/core/modules/Planet.cpp:129 src/core/modules/StarWrapper.cpp:124
+#: plugins/Quasars/src/Quasar.cpp:120
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "절대등급: %1"
 
-#: src/core/modules/Planet.cpp:137
+#: src/core/modules/Planet.cpp:142
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:138
+#: src/core/modules/Planet.cpp:143
 #, qt-format
 msgid "Obliquity (of date): %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:148
+#: src/core/modules/Planet.cpp:153
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:155
+#: src/core/modules/Planet.cpp:160
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr "거리: %1AU"
 
-#: src/core/modules/Planet.cpp:161
+#: src/core/modules/Planet.cpp:166
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "시직경: %1"
 
-#: src/core/modules/StarWrapper.cpp:51 src/core/modules/StarWrapper.cpp:108
-#: plugins/Quasars/src/Quasar.cpp:96
+#: src/core/modules/StarWrapper.cpp:52
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
 msgstr "등급: <b>%1</b>(B-V: %2)"
 
-#: src/core/modules/StarWrapper.cpp:118
+#: src/core/modules/StarWrapper.cpp:55
+#, qt-format
+msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:97
+#, qt-format
+msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:111
+#, qt-format
+msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:130
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "스펙트럼형: %1"
 
-#: src/core/modules/StarWrapper.cpp:122
-#: plugins/Supernovae/src/Supernova.cpp:108
+#: src/core/modules/StarWrapper.cpp:134
+#: plugins/Supernovae/src/Supernova.cpp:114
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "거리: %1 광년"
 
-#: src/core/modules/StarWrapper.cpp:125
+#: src/core/modules/StarWrapper.cpp:137
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "시차: %1\""
@@ -254,30 +274,32 @@ msgid ""
 "of perspective is set to an infinite distance."
 msgstr "정사도법은 투시도법과 비슷하나, 원근점을 무한한 거리에 놓습니다."
 
-#: src/core/StelObject.cpp:79
+#: src/core/StelObject.cpp:80
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
 msgstr "적경/적위 (J2000): %1/%2"
 
-#: src/core/StelObject.cpp:86
+#: src/core/StelObject.cpp:87
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
 msgstr "적경/적위 (날짜): %1/%2"
 
-#: src/core/StelObject.cpp:94 src/core/StelObject.cpp:97
+#: src/core/StelObject.cpp:97 src/core/StelObject.cpp:100
+#: src/core/StelObject.cpp:103
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "시간각/적위: %1/%2"
 
-#: src/core/StelObject.cpp:94 src/core/StelObject.cpp:108
+#: src/core/StelObject.cpp:97 src/core/StelObject.cpp:116
 msgid "(geometric)"
 msgstr "(기하학적)"
 
-#: src/core/StelObject.cpp:97 src/core/StelObject.cpp:114
+#: src/core/StelObject.cpp:100 src/core/StelObject.cpp:122
 msgid "(apparent)"
 msgstr ""
 
-#: src/core/StelObject.cpp:108 src/core/StelObject.cpp:114
+#: src/core/StelObject.cpp:116 src/core/StelObject.cpp:122
+#: src/core/StelObject.cpp:125
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "방위/고도: %1/%2"
@@ -3992,7 +4014,7 @@ msgid ""
 "(13 September)."
 msgstr ""
 
-#: plugins/Supernovae/src/Supernova.cpp:106
+#: plugins/Supernovae/src/Supernova.cpp:112
 #, qt-format
 msgid "Type: %1"
 msgstr ""
@@ -4008,11 +4030,11 @@ msgid ""
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
 
-#: plugins/Quasars/src/Quasar.cpp:113
+#: plugins/Quasars/src/Quasar.cpp:129
 msgid "Type: quasar"
 msgstr ""
 
-#: plugins/Quasars/src/Quasar.cpp:116
+#: plugins/Quasars/src/Quasar.cpp:132
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr ""
