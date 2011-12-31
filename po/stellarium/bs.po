@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-12-30 00:02+0700\n"
-"PO-Revision-Date: 2011-12-29 17:57+0000\n"
+"POT-Creation-Date: 2011-12-30 16:45+0700\n"
+"PO-Revision-Date: 2011-12-30 12:18+0000\n"
 "Last-Translator: Kenan Dervišević <kenan3008@gmail.com>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-30 05:31+0000\n"
+"X-Launchpad-Export-Date: 2011-12-31 05:27+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -63,7 +63,7 @@ msgstr "Tip: <b>%1</b>"
 #: plugins/Supernovae/src/Supernova.cpp:101 plugins/Quasars/src/Quasar.cpp:103
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Veličina: <b>%1</b> (neaktivno do: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:115
@@ -147,17 +147,17 @@ msgstr "Veličina: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "Vidljiva veličina: <b>%1</b> (po neaktivnosti)"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:97
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "Veličina: <b>%1</b> (neaktivno do: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:111
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr ""
+msgstr "Veličina: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
 #, qt-format
@@ -4176,12 +4176,12 @@ msgstr "Kvazari"
 #: plugins/Quasars/src/Quasars.cpp:62
 msgid ""
 "A plugin that shows some quasars brighter than 16 visual magnitude. A "
-"catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei'' "
+"catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
 "Plugin koji prikazuje neke kvazare sjanije od vizuelne veličine vrijednosti "
-"16. Katalog je kreiran na osnovu 'Quasars and Active Galactic Nuclei'' (13. "
-"izdanje) (Veron+ 2010) =2010A&A...518A..10V"
+"16. Katalog kvazara je kreiran na osnovu 'Quasars and Active Galactic "
+"Nuclei' (13. izdanje) (Veron+ 2010) =2010A&A...518A..10V"
 
 #: plugins/Quasars/src/Quasar.cpp:129
 msgid "Type: quasar"

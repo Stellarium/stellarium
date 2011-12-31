@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-30 00:02+0700\n"
-"PO-Revision-Date: 2011-12-19 15:20+0000\n"
+"POT-Creation-Date: 2011-12-30 16:45+0700\n"
+"PO-Revision-Date: 2011-12-30 19:13+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-30 05:31+0000\n"
+"X-Launchpad-Export-Date: 2011-12-31 05:27+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 "X-Poedit-Country: BELARUS\n"
 "Language: be\n"
@@ -67,7 +67,7 @@ msgstr "Тып: <b>%1</b>"
 #: plugins/Supernovae/src/Supernova.cpp:101 plugins/Quasars/src/Quasar.cpp:103
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Велічыня: <b>%1</b> (згасла да: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:115
@@ -151,17 +151,17 @@ msgstr "Велічыня: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "Бачная велічыня: <b>%1</b> (паводле згасласьці)"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:97
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "Велічыня: <b>%1</b> (згасла да: <b>%2</b>. Б-Б: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:111
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr ""
+msgstr "Велічыня: <b>%1</b> (Б-Б: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
 #, qt-format
@@ -1418,27 +1418,27 @@ msgstr "Заходнія"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:165
 msgid "Guereins"
-msgstr ""
+msgstr "Ґерэн"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:167
 msgid "Trees"
-msgstr ""
+msgstr "Дрэвы"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:171
 msgid "Hurricane"
-msgstr ""
+msgstr "Ураган"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:173
 msgid "Ocean"
-msgstr ""
+msgstr "Акіян"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:175
 msgid "Garching"
-msgstr ""
+msgstr "Ґархінґ"
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -4177,7 +4177,7 @@ msgstr "Квазары"
 #: plugins/Quasars/src/Quasars.cpp:62
 msgid ""
 "A plugin that shows some quasars brighter than 16 visual magnitude. A "
-"catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei'' "
+"catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
 "Дадатак, які паказвае некаторыя квазары, ярчэйшыя за 16 бачную велічыню. "
