@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-30 16:45+0700\n"
-"PO-Revision-Date: 2011-12-26 20:00+0000\n"
-"Last-Translator: Gerjet Kleine-Weischede <Unknown>\n"
+"PO-Revision-Date: 2011-12-31 18:49+0000\n"
+"Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-31 05:28+0000\n"
+"X-Launchpad-Export-Date: 2012-01-01 05:28+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -65,7 +65,7 @@ msgstr "Typ: <b>%1</b>"
 #: plugins/Supernovae/src/Supernova.cpp:101 plugins/Quasars/src/Quasar.cpp:103
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Helligkeit: <b>%1</b> (durch Extinktion: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:115
@@ -149,17 +149,17 @@ msgstr "Helligkeit: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "Scheinbare Helligkeit: <b>%1</b> (durch Extinktion)"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:97
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "Helligkeit: <b>%1</b> (durch Extinktion: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:111
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr ""
+msgstr "Helligkeit: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
 #, qt-format
@@ -1267,22 +1267,22 @@ msgstr "Sonnensystembetrachter"
 #. TRANSLATORS: TNO/Asteroid (90377) Sedna
 #: src/translations.h:103
 msgid "Sedna"
-msgstr ""
+msgstr "Sedna"
 
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
 #: src/translations.h:105
 msgid "Quaoar"
-msgstr ""
+msgstr "Quaoar"
 
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
 #: src/translations.h:107
 msgid "Orcus"
-msgstr ""
+msgstr "Orcus"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
 #: src/translations.h:109
 msgid "Haumea"
-msgstr ""
+msgstr "Haumea"
 
 #. TRANSLATORS: Asteroid (5) Astraea
 #: src/translations.h:113
@@ -1419,27 +1419,27 @@ msgstr "Westlich"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:165
 msgid "Guereins"
-msgstr ""
+msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:167
 msgid "Trees"
-msgstr ""
+msgstr "Bäume"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:171
 msgid "Hurricane"
-msgstr ""
+msgstr "Hurricane Ridge"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:173
 msgid "Ocean"
-msgstr ""
+msgstr "Meer"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:175
 msgid "Garching"
-msgstr ""
+msgstr "Garching"
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -2348,7 +2348,7 @@ msgstr "Telrad-Sucher"
 
 #: plugins/Oculars/src/Oculars.cpp:1257
 msgid "Oculars plugin configuration"
-msgstr ""
+msgstr "Okular-Plugin-Konfiguration"
 
 #: plugins/Oculars/src/Oculars.cpp:1444
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
@@ -2404,7 +2404,7 @@ msgstr "Gesichtsfeld: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
 #, qt-format
 msgid "Dimensions: %1"
-msgstr ""
+msgstr "Abmessungen: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1524
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
@@ -2529,7 +2529,7 @@ msgstr "Okularansicht ein/aus"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:870
 msgid "Open pop-up navigation menu:"
-msgstr ""
+msgstr "Öffne Pop-up-Navigationsmenü:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Interface"
@@ -3044,7 +3044,7 @@ msgstr "Umlaufbahn"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Catalog number:"
-msgstr ""
+msgstr "Katalognummer:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:663
 msgid "Description:"
@@ -3197,6 +3197,9 @@ msgid ""
 "control a telescope on its own, but it is still possible to do it through an "
 "external application or to connect to a remote host."
 msgstr ""
+"Keine Gerätemodellbeschreibung verfügbar. Stellarium kann dieses Teleskop "
+"nicht selbst steuern, es ist aber möglich mittels einer externen Anwendung "
+"oder durch Verbindung an einen \"Remote Host\"."
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
@@ -3846,7 +3849,7 @@ msgstr "Manuelle Vergrößerung"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Magnitude scaling multiplier"
-msgstr ""
+msgstr "Magnituden-Verstärkungsfaktor"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:404
 msgid "Milky Way intensity:"
@@ -4178,7 +4181,7 @@ msgstr "Art: %1"
 
 #: plugins/Quasars/src/Quasars.cpp:59
 msgid "Quasars"
-msgstr ""
+msgstr "Quasare"
 
 #: plugins/Quasars/src/Quasars.cpp:62
 msgid ""
@@ -4186,15 +4189,17 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
+"Plugin für einige Quasare heller als 16. Größe. Quasar-Katalog aus 'Quasars "
+"and Active Galactic Nuclei' (13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 
 #: plugins/Quasars/src/Quasar.cpp:129
 msgid "Type: quasar"
-msgstr ""
+msgstr "Typ: Quasar"
 
 #: plugins/Quasars/src/Quasar.cpp:132
 #, qt-format
 msgid "Z (redshift): %1"
-msgstr ""
+msgstr "Z (Rotverschiebung): %1"
 
 #~ msgid "Stars "
 #~ msgstr "Sterne "

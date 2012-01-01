@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-30 16:45+0700\n"
-"PO-Revision-Date: 2011-12-02 09:30+0000\n"
+"PO-Revision-Date: 2011-12-31 10:24+0000\n"
 "Last-Translator: Péter Trombitás <trombipeti@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-31 05:29+0000\n"
+"X-Launchpad-Export-Date: 2012-01-01 05:28+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -65,7 +65,7 @@ msgstr "Típus: <b>%1</b>"
 #: plugins/Supernovae/src/Supernova.cpp:101 plugins/Quasars/src/Quasar.cpp:103
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Magnitúdó: <b>%1</b> (ennyire elhalványulva: <b>%2</b>"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:115
@@ -129,7 +129,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:153
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "Távolság: %1 CSE (%2 km)"
 
 #: src/core/modules/Planet.cpp:160
 #, no-c-format, qt-format
@@ -366,7 +366,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:717
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "Az összes elérhető csillagkatalógus sikeresen telepítve."
 
 #: src/gui/ConfigurationDialog.cpp:722
 #, qt-format
@@ -907,7 +907,7 @@ msgstr "Új helyszín"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
-msgstr ""
+msgstr "Jelöljön ki egy Stellarium tájképet tartalmazó ZIP archívumot"
 
 #. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 #: src/gui/AddRemoveLandscapesDialog.cpp:114
@@ -917,7 +917,7 @@ msgstr "ZIP archívumok"
 #: src/gui/AddRemoveLandscapesDialog.cpp:132
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
-msgstr ""
+msgstr "A(z) \"%1\" tájkép sikeresen telepítve."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:133
 #: src/gui/AddRemoveLandscapesDialog.cpp:160
@@ -929,7 +929,7 @@ msgstr "Sikerült"
 #: src/gui/AddRemoveLandscapesDialog.cpp:225
 #: src/gui/AddRemoveLandscapesDialog.cpp:233
 msgid "No landscape was installed."
-msgstr ""
+msgstr "Nem lett tájkép telepítve."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:147
 #: src/gui/AddRemoveLandscapesDialog.cpp:171
@@ -943,12 +943,12 @@ msgstr "Hiba!"
 #: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
-msgstr ""
+msgstr "A(z) \"%1\" tájkép sikeresen eltávolítva."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:170
 #: src/gui/AddRemoveLandscapesDialog.cpp:240
 msgid "The selected landscape could not be (completely) removed."
-msgstr ""
+msgstr "A tájképet nem sikerült (teljesen) eltávolítani."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:193

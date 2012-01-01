@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-30 16:45+0700\n"
-"PO-Revision-Date: 2011-12-30 17:59+0000\n"
+"PO-Revision-Date: 2011-12-31 11:47+0000\n"
 "Last-Translator: Jonas Persson <jonas.persson@physics.org>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-31 05:31+0000\n"
+"X-Launchpad-Export-Date: 2012-01-01 05:28+0000\n"
 "X-Generator: Launchpad (build 14560)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -2293,23 +2293,23 @@ msgstr "Slå på/av &Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:919
 msgid "&Previous CCD"
-msgstr ""
+msgstr "&Förra CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:920
 msgid "&Next CCD"
-msgstr ""
+msgstr "&Nästa CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:921
 msgid "&Select CCD"
-msgstr ""
+msgstr "&Välj CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:943
 msgid "&Rotate CCD"
-msgstr ""
+msgstr "&Rotera CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:975
 msgid "&Reset rotation"
-msgstr ""
+msgstr "&Återställ rotation"
 
 #: plugins/Oculars/src/Oculars.cpp:1201
 #: plugins/Oculars/src/ui_ocularDialog.h:864
@@ -2353,7 +2353,7 @@ msgstr "Okular #%1: %2"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:520
 #, qt-format
 msgid "Ocular FL: %1 mm"
-msgstr ""
+msgstr "Okularets fokallängd: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
 #: plugins/Oculars/src/Oculars.cpp:1470
@@ -2378,13 +2378,13 @@ msgstr "Teleskop #%1: %2"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
 #, qt-format
 msgid "Magnification: %1"
-msgstr ""
+msgstr "Förstoring: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1504
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
 #, qt-format
 msgid "FOV: %1"
-msgstr ""
+msgstr "FOV: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1519
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
@@ -2396,13 +2396,13 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Sensor #%1"
-msgstr ""
+msgstr "Sensor #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1528
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Sensor #%1: %2"
-msgstr ""
+msgstr "Sensor #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1735
 msgid "&Telescope"
@@ -2414,7 +2414,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1737
 msgid "&Next telescope"
-msgstr ""
+msgstr "&Nästa teleskop"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
 msgid "Previous ocular"
@@ -2422,7 +2422,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
 msgid "Next ocular"
-msgstr ""
+msgstr "Nästa okular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
 msgid "Previous CCD frame"
@@ -2438,7 +2438,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Next telescope"
-msgstr ""
+msgstr "Nästa teleskop"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
@@ -2552,7 +2552,7 @@ msgstr "Namn:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "aFOV:"
-msgstr ""
+msgstr "aFOV:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:879
 #: plugins/Oculars/src/ui_ocularDialog.h:898
@@ -2565,7 +2565,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 msgid "Binoculars"
-msgstr ""
+msgstr "Kikare"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:883
 #: plugins/Oculars/src/ui_ocularDialog.h:893
@@ -2574,11 +2574,11 @@ msgstr "Sensorer"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Resolution x (pixels):"
-msgstr ""
+msgstr "Upplösning x (pixels):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Resolution y (pixels):"
-msgstr ""
+msgstr "Upplösning y (pixels):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Chip width (mm):"
@@ -2983,11 +2983,11 @@ msgstr "Längd (s):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:649
 msgid "Restore default settings"
-msgstr ""
+msgstr "Återställ standardinställningar"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:650
 msgid "Save settings as default"
-msgstr ""
+msgstr "Spara inställningar som standard"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:651
 msgid "Settings"
@@ -2995,7 +2995,7 @@ msgstr "Inställningar"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:653
 msgid "Display the selected satellite(s)"
-msgstr ""
+msgstr "Visa valda satellit(er)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:655
 msgid "Displayed"
@@ -3011,7 +3011,7 @@ msgstr "Bana"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Catalog number:"
-msgstr ""
+msgstr "Katalognummer:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:663
 msgid "Description:"
@@ -3085,11 +3085,11 @@ msgstr "Rikta ett teleskop mot givna koordinater"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
-msgstr ""
+msgstr "Lägg till nytt teleskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
-msgstr ""
+msgstr "Ställ in teleskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
@@ -3247,7 +3247,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:287
 msgid "De&clination (J2000):"
-msgstr ""
+msgstr "De&clination (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "Hours-minutes-seconds format"
@@ -3263,11 +3263,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:295
 msgid "&DMS"
-msgstr ""
+msgstr "&GMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:297
 msgid "Decimal degrees"
-msgstr ""
+msgstr "Decimalgrader"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "D&ecimal"
