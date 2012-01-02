@@ -68,6 +68,13 @@ Vec3d StelObject::getAltAzPosAuto(const StelCore* core) const
 	return core->j2000ToAltAz(getJ2000EquatorialPos(core));
 }
 
+float StelObject::getVMagnitude(const StelCore* core, bool withExtinction) const 
+{
+	Q_UNUSED(core);
+	Q_UNUSED(withExtinction);
+	return 99;
+}
+
 // Format the positional info string contain J2000/of date/altaz/hour angle positions for the object
 QString StelObject::getPositionInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {

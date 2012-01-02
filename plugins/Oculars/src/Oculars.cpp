@@ -1361,8 +1361,9 @@ void Oculars::paintTelrad()
 {
 	if (!flagShowOculars) {
 		const StelProjectorP projector = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
-		StelCore *core = StelApp::getInstance().getCore();
-		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+		// prevent unused warnings -MNG
+		// StelCore *core = StelApp::getInstance().getCore();
+		// StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 
 		// StelPainter drawing
 		StelPainter painter(projector);
