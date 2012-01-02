@@ -120,7 +120,7 @@ public:
 	Vec3d getAltAzPosAuto(const StelCore* core) const;
 
 	//! Return object's apparent V magnitude as seen from observer
-	virtual float getVMagnitude(const StelCore*, bool withExtinction=false) const {return 99;}
+	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
 
 	//! Return a priority value which is used to discriminate objects by priority
 	//! As for magnitudes, the lower is the higher priority
