@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-30 16:45+0700\n"
-"PO-Revision-Date: 2011-12-18 12:22+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2012-01-03 19:33+0000\n"
+"Last-Translator: dalos <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-31 05:27+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-01-04 04:46+0000\n"
+"X-Generator: Launchpad (build 14616)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -117,7 +117,7 @@ msgstr "Absolutní magnituda: %1"
 #: src/core/modules/Planet.cpp:142
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr ""
+msgstr "Ekliptikální geocentrická poloha (k datu): %1/%2"
 
 #: src/core/modules/Planet.cpp:143
 #, qt-format
@@ -127,7 +127,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:153
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "Vzdálenost: %1AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:160
 #, no-c-format, qt-format
@@ -304,11 +304,11 @@ msgstr "Hodinový úhel/Deklinace: %1/%2"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:116
 msgid "(geometric)"
-msgstr ""
+msgstr "(geometrický)"
 
 #: src/core/StelObject.cpp:100 src/core/StelObject.cpp:122
 msgid "(apparent)"
-msgstr ""
+msgstr "(zdánlivý)"
 
 #: src/core/StelObject.cpp:116 src/core/StelObject.cpp:122
 #: src/core/StelObject.cpp:125
@@ -365,7 +365,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:717
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "Všechny dostupné katalogy jsou nainstalovány."
 
 #: src/gui/ConfigurationDialog.cpp:722
 #, qt-format
@@ -663,7 +663,7 @@ msgstr "Poledník"
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1125
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:344
 msgid "Horizon line"
-msgstr ""
+msgstr "Horizont"
 
 #: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1128
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:287
@@ -698,7 +698,7 @@ msgstr "Hvězdy"
 #: src/gui/StelGui.cpp:122
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Planet labels"
-msgstr ""
+msgstr "Názvy planet"
 
 #: src/gui/StelGui.cpp:123
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
@@ -1413,17 +1413,17 @@ msgstr ""
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:167
 msgid "Trees"
-msgstr ""
+msgstr "Stromy"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:171
 msgid "Hurricane"
-msgstr ""
+msgstr "Hurikán"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:173
 msgid "Ocean"
-msgstr ""
+msgstr "Oceán"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:175
@@ -1643,7 +1643,7 @@ msgstr "RA/Dec (J2000):"
 
 #: src/ui_searchDialogGui.h:532
 msgid "Position"
-msgstr ""
+msgstr "Poloha"
 
 #: src/ui_viewDialog.h:1070
 msgid "View"
@@ -1721,7 +1721,7 @@ msgstr "Zobraz atmosféru"
 #: src/ui_viewDialog.h:1101
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:385
 msgid "Light pollution:"
-msgstr ""
+msgstr "Světelné znečištění"
 
 #: src/ui_viewDialog.h:1103
 msgid "pressure, temperature, extinction coefficient"
@@ -1774,7 +1774,7 @@ msgstr "Nebeská sféra"
 #: src/ui_viewDialog.h:1127
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Galactic plane line"
-msgstr ""
+msgstr "Galaktická rovina"
 
 #: src/ui_viewDialog.h:1129
 msgid "Constellations"
@@ -2368,13 +2368,13 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
 #, qt-format
 msgid "Magnification: %1"
-msgstr ""
+msgstr "Zvětšení: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1504
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
 #, qt-format
 msgid "FOV: %1"
-msgstr ""
+msgstr "Zorné pole: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1519
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
@@ -2523,7 +2523,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:874
 #: plugins/Oculars/src/ui_ocularDialog.h:882
 msgid "Eyepieces"
-msgstr ""
+msgstr "Okuláry"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:875
 #: plugins/Oculars/src/ui_ocularDialog.h:884
@@ -2547,7 +2547,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:879
 #: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Focal length:"
-msgstr ""
+msgstr "Ohnisková vzdálenost"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "Field stop:"
@@ -2727,6 +2727,8 @@ msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
 msgstr ""
+"Dráhové elementy velmi rychle zastarávají (někdy po pár týdnech, jindy po "
+"pár dnech). Je nezbytné je pravidelně aktualizovat."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:245
@@ -3092,7 +3094,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "Verze %1"
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
@@ -3211,11 +3213,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:286
 msgid "&Right Ascension (J2000):"
-msgstr ""
+msgstr "&Rektascenze (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:287
 msgid "De&clination (J2000):"
-msgstr ""
+msgstr "De&klinace (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "Hours-minutes-seconds format"
@@ -3439,51 +3441,51 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 msgid "January"
-msgstr ""
+msgstr "Leden"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 msgid "February"
-msgstr ""
+msgstr "Únor"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 msgid "March"
-msgstr ""
+msgstr "Březen"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 msgid "April"
-msgstr ""
+msgstr "Duben"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 msgid "May"
-msgstr ""
+msgstr "Květen"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 msgid "June"
-msgstr ""
+msgstr "Červen"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 msgid "July"
-msgstr ""
+msgstr "Červenec"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 msgid "August"
-msgstr ""
+msgstr "Srpen"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 msgid "September"
-msgstr ""
+msgstr "Září"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 msgid "October"
-msgstr ""
+msgstr "Říjen"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 msgid "November"
-msgstr ""
+msgstr "Listopad"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 msgid "December"
-msgstr ""
+msgstr "Prosinec"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:265
 msgid "First week"
@@ -3507,31 +3509,31 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:278
 msgid "Sunday"
-msgstr ""
+msgstr "Neděle"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:279
 msgid "Monday"
-msgstr ""
+msgstr "Pondělí"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:280
 msgid "Tuesday"
-msgstr ""
+msgstr "Úterý"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:281
 msgid "Wednesday"
-msgstr ""
+msgstr "Středa"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:282
 msgid "Thursday"
-msgstr ""
+msgstr "Čtvrtek"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:283
 msgid "Friday"
-msgstr ""
+msgstr "Pátek"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:284
 msgid "Saturday"
-msgstr ""
+msgstr "Sobota"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
@@ -3546,16 +3548,16 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
 msgid "Time zone"
-msgstr ""
+msgstr "Časové pásmo"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:452
 msgid "Timezone name:"
-msgstr ""
+msgstr "Název časového pásma:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "Offset from UTC (hours):"
-msgstr ""
+msgstr "Posun vůči UTC (v hodinách):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 msgid "Daylight saving time (summer time)"
@@ -3681,7 +3683,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:158
 msgid "Current date/time"
-msgstr ""
+msgstr "Aktální datum/čas"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:163
 msgid "Set time zone"
@@ -3698,34 +3700,34 @@ msgstr ""
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "system"
-msgstr ""
+msgstr "systémový"
 
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:174
 msgid "preset"
-msgstr ""
+msgstr "předvolený"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "mmddyyyy"
-msgstr ""
+msgstr "mmddrrrr"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "ddmmyyyy"
-msgstr ""
+msgstr "ddmmrrrr"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "yyyymmdd"
-msgstr ""
+msgstr "rrrrmmdd"
 
 #. TRANSLATORS: 12-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "12h"
-msgstr ""
+msgstr "12h"
 
 #. TRANSLATORS: 24-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:193
 msgid "24h"
-msgstr ""
+msgstr "24h"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:218
 msgid "Language"
@@ -3797,11 +3799,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:458
 msgid "Load default configuration"
-msgstr ""
+msgstr "Načíst implicitní nastavení"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:459
 msgid "Save current configuration"
-msgstr ""
+msgstr "Uložit aktuální nastavení"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:462
 msgid "Shut down"
@@ -3813,11 +3815,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
 msgid "On"
-msgstr ""
+msgstr "Zapnuto"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
 msgid "Off"
-msgstr ""
+msgstr "Vypnout"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format
@@ -3888,11 +3890,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Asteroids"
-msgstr ""
+msgstr "Asteroidy"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Comets"
-msgstr ""
+msgstr "Komety"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Select the source"
@@ -4003,7 +4005,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Reset to defaults"
-msgstr ""
+msgstr "Obnovit výchozí hodnoty"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Copy/replace the Solar System file"
