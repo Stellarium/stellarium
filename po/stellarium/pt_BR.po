@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-30 16:45+0700\n"
-"PO-Revision-Date: 2011-12-31 00:48+0000\n"
+"PO-Revision-Date: 2012-01-04 03:08+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-01 05:28+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-01-04 04:46+0000\n"
+"X-Generator: Launchpad (build 14616)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -2087,7 +2087,7 @@ msgstr "Baixe este arquivo para ver ainda mais estrelas"
 
 #: src/ui_configurationDialog.h:847
 msgid "Restart the download"
-msgstr "Reiniciar obtenção do catálogo"
+msgstr "Tentar baixar novamente"
 
 #: src/ui_configurationDialog.h:849
 msgid "Retry"
@@ -2137,7 +2137,7 @@ msgstr "Ferramentas"
 #: src/ui_configurationDialog.h:878
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:435
 msgid "Scripts"
-msgstr "Scripts"
+msgstr "Apresentações"
 
 #: src/ui_configurationDialog.h:880
 msgid "Plugins"
@@ -3782,8 +3782,8 @@ msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
-"Implementação do complemento das séries 0.9.x da interface textual (TUI), "
-"utilizada em sistemas de planetário."
+"<p align=\"justify\">Implementação do complemento das séries 0.9.x da "
+"interface textual (TUI), utilizada em sistemas de planetário."
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 msgid "Solar System body"
@@ -4049,7 +4049,7 @@ msgstr "Obter elementos orbitais"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Abort download"
-msgstr "Cancelar obtenção"
+msgstr "Cancelar obtenção de dados"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Lists"
@@ -4210,7 +4210,7 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
-"<p align=\\\"justify\\\">Um complemento que exibe alguns quasares com brilho "
+"<p align=\"justify\">Um complemento que exibe alguns quasares com brilho "
 "superior à magnitude visual 16. Um catálogo de quasares compilado de "
 "“Quasars and Active Galactic Nuclei” (13th Ed.) (Veron+ 2010) "
 "=2010A&A...518A..10V."

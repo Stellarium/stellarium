@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-30 16:45+0700\n"
-"PO-Revision-Date: 2012-01-01 16:49+0000\n"
-"Last-Translator: FreewareTips <Unknown>\n"
+"PO-Revision-Date: 2012-01-03 17:53+0000\n"
+"Last-Translator: Karl Eivind Dahl <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-02 04:58+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-01-04 04:46+0000\n"
+"X-Generator: Launchpad (build 14616)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -458,7 +458,7 @@ msgstr "Panoramavisning av himmelen"
 
 #: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
 msgid "Zoom in/out"
-msgstr "Forstørre/forminske"
+msgstr "Zoom inn/ut"
 
 #: src/gui/HelpDialog.cpp:65
 msgid "Select object"
@@ -844,11 +844,11 @@ msgstr "Følg objekt"
 
 #: src/gui/StelGui.cpp:167
 msgid "Zoom in on selected object"
-msgstr "Forstørre det valgte objektet"
+msgstr "Zoom inn på valgte objekt"
 
 #: src/gui/StelGui.cpp:168
 msgid "Zoom out"
-msgstr "Forminske"
+msgstr "Zoom ut"
 
 #: src/gui/StelGui.cpp:169
 msgid "Set home planet to selected planet"
@@ -1934,7 +1934,7 @@ msgstr "Styring"
 
 #: src/ui_configurationDialog.h:786
 msgid "Allow keyboard to pan and zoom"
-msgstr "Tillat tastaturet å panorere og skalere"
+msgstr "Tillat tastatur å panorere og zoome"
 
 #: src/ui_configurationDialog.h:788
 msgid "Enable keyboard navigation"
@@ -1942,7 +1942,7 @@ msgstr "Aktiver tastenavigering"
 
 #: src/ui_configurationDialog.h:790
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr "Tillat mus å panorere (dra) og skalere (musehjul)"
+msgstr "Tillat mus å panorere (dra) og zoome (musehjul)"
 
 #: src/ui_configurationDialog.h:792
 msgid "Enable mouse navigation"
@@ -2034,12 +2034,12 @@ msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
-"Når aktivert, vil \"auto-skaler ut\" tasten også stille inn den opprinnelige "
-"visningsretningen."
+"Når aktivert, vil tasten \"automatisk utzooming\" også stille inn den "
+"opprinnelige visningsretningen."
 
 #: src/ui_configurationDialog.h:828
 msgid "Auto zoom out returns to initial direction of view"
-msgstr "Auto-forminsking returnerer til opprinnelig visningsretning"
+msgstr "Automatisk utzooming returnerer til opprinnelig visningsretning"
 
 #: src/ui_configurationDialog.h:830
 msgid "Mask out everything outside a central circle in the main view"
@@ -3829,7 +3829,7 @@ msgstr "Effekter"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:397
 msgid "Manual zoom"
-msgstr "Manuell skalering"
+msgstr "Manuell zoom"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Magnitude scaling multiplier"
@@ -3845,7 +3845,7 @@ msgstr "Påskriftfrekvens for tåker:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:411
 msgid "Zoom duration:"
-msgstr "Skalerings varighet:"
+msgstr "Zoom-varighet:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:417
 msgid "Cursor timeout:"
