@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-12-30 16:45+0700\n"
-"PO-Revision-Date: 2012-01-04 03:08+0000\n"
+"PO-Revision-Date: 2012-01-05 01:52+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-04 04:46+0000\n"
-"X-Generator: Launchpad (build 14616)\n"
+"X-Launchpad-Export-Date: 2012-01-05 05:25+0000\n"
+"X-Generator: Launchpad (build 14625)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -63,7 +63,7 @@ msgstr "Tipo: <b>%1</b>"
 #: plugins/Supernovae/src/Supernova.cpp:101 plugins/Quasars/src/Quasar.cpp:103
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Magnitude: <b>%1</b> (extinto para: <b>%2</b>)"
+msgstr "Magnitude: <b>%1</b> (extinta para: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:115
@@ -152,7 +152,7 @@ msgstr "Magnitude aparente: <b>%1</b> (por extinção)"
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:97
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr "Magnitude: <b>%1</b> (extinto para: <b>%2</b>. B-V: <b>%3</b>)"
+msgstr "Magnitude: <b>%1</b> (extinta para: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:111
 #, qt-format
@@ -1734,7 +1734,7 @@ msgstr "Poluição luminosa:"
 
 #: src/ui_viewDialog.h:1103
 msgid "pressure, temperature, extinction coefficient"
-msgstr "Pressão, temperatura, coeficiente de extinção"
+msgstr "Pressão, temperatura e coeficiente de extinção"
 
 #: src/ui_viewDialog.h:1105
 msgid "Refraction/Extinction settings..."
@@ -3113,14 +3113,14 @@ msgstr ""
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:155
 #, qt-format
 msgid "Move telescope #%1 to selected object"
-msgstr "Mover o telescópio #%1 para o objeto selecionado"
+msgstr "Mover o telescópio nº %1 para o objeto selecionado"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:162
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr ""
-"Mover o telescópio #%1 para o ponto que, no presente momento, está no centro "
-"da tela"
+"Mover o telescópio nº %1 para o ponto que, no presente momento, está no "
+"centro da tela"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:173
 msgid "Move a telescope to a given set of coordinates"
