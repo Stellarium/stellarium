@@ -1,8 +1,41 @@
 0.11.2
+The main theme of this version seems to be localization:
+- most of the text used by the default plug-ins is now translateable
+- landscape names are now translatable
+- country names are now translatable
+
+Oculars plug-in:
+- added an optional control panel displayed in the upper-right corner of the screen as an alternative to the pop-up menu that was used to control it in the previous version;
+- overhaul of the pop-up menu, the underlined letters in it can be used as keyboard shortcuts;
+- added the ability to rearrange the items in the lists of oculars, telescopes and sensors;
+- fixed the inappropriate flipping of the binoculars view;
+
+Satellites plug-in:
+- fixed title bar of the Satellites config window not being resized with the rest of the window (LP: #900575)
+- catalog numbers are now used to identify satellites, preventing bugs with duplicate satellites and satellites renamed in the source lists
+- catalog number and international designator are now displayed for each satellite
+
 Added to the Windows installer options to remove files left over from the previous installation.
-Prevented windows from being dragged to unreachable positions.
+Windows no longer can be dragged to unreachable positions.
 The "Save settings" button now saves the current main window position, too.
+The language list is now sorted by language name, not language code.
+The "Reload style" action has been removed, as the underlying feature no longer works. If you decide to design a new visual style for Stellarium, please contact us to give you a version where it works.
+Added distance in km (if the distance is below 0.1 AU) to the information displayed about Solar System objects. (LP: #894472)
+Added the StelGui::getSkyGui() method to allow plug-in developers to create their own toolbars and other GUI elements.
+Added an option to show the galactic coordinates grid and the galactic plane.
+Added several trans-Neptunian objects (TNOs): Sedna, Quaoar, Orcus, Haumea.
+Added the Quasars plug-in.
+More detailed information is now added to the log file for Mac OS X.
+Added (experimental) modelling of athmospheric extinction for point objects.
+
 Fixed:
+- plugin names localization in the Configuration window (LP: #807402)
+- resizing of the tabs in Configuration and View windows on language change (LP: #821386)
+- sky lines' labels not translated on language change (LP: #811659)
+- "Get catalog" button not translated on language change (LP: #890608)
+- last star catalog not being offered for download (LP: #538291, LP: #890789)
+- proxy configuration without username/password
+- Telescope Control plug-in: mishandling of IP connections in the telescope configuration window (LP: #843837)
 - Pluto's moon Hydra preventing the constellation from being selected in Search and scripts (LP: #894780)
 
 0.11.1 [2011-11-04]
@@ -11,7 +44,7 @@ Added:
 - new skyculture: Arabic
 - new moons and rings (LP: #815484, #834336)
 - new translations for landscapes and sky cultures (LP: #849292)
-- possibility to observate geo-orbiting satellites (LP: #837274)
+- geostationary satellites (LP: #837274)
 - new cities (LP: #856343, #860206)
 Fixed:
 - misspelling on a star name (LP: #884795)
@@ -19,21 +52,21 @@ Fixed:
 - location window: fixed checking "Use as default" changing the name of the selected location to "New Location" (LP: #881613)
 - Solar System Editor plug-in: a bug in the parsing of MPC lists: the epoch's Julian Day value was wrong by 0.5 JD (LP: #836839)
 - Solar System Editor plug-in: crash while trying to browse for a local file (LP: #837396)
-- Historical Supernovae plug-in: a bug in plug-in name (LP: #803157)
-- Historical Supernovae plug-in: a bug in selected instead of nearby stars (LP: #835815)
+- Historical Supernovae plug-in: the plug-in's name (LP: #803157)
+- Historical Supernovae plug-in: supernovae selected instead of nearby stars (LP: #835815)
 - doesn't load localised description of skyculture/landscape if applanguage=system_default (LP: #845924)
 - add/remove landscapes dialog bug in OSX 10.6.8 (LP: #812008)
 - horizon line setting not saved (LP: #811945)
-- orbital period totally wrong for Himalia (LP: #806174)
-- flag_show_fps = false & flag_show_fov = flase (LP: #728294)
-- 0.11.0 will crash if a landscape is selected with misspelled planet name (LP: #835422)
+- the orbital period of Himalia (LP: #806174)
+- "flag_show_fps" and "flag_show_fov" had no effect (LP: #728294)
+- crash on selecting a landscape with misspelled planet name (LP: #835422)
 - crash on selecting off-Earth location in the Location window (LP: #834886)
-- 0.11.0 crashes when switching language while location window is open (LP: #824936)
-- 0.11.0 crashes when trying using custom distortion file (LP: #871313) 
+- crash on switching language while the Location window is open (LP: #824936)
+- crash on using custom distortion file (LP: #871313)
 
 0.11.0
 New feature: atmosphere refraction support.
-New plugin: Historical supernova.
+New plugin: Historical Supernovae.
 New translatable strings: landscapes.
 New moons of solar system planets (LP: #730686).
 New feature: using different symbols for nebula icons.
