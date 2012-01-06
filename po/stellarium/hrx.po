@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-12-30 16:45+0700\n"
-"PO-Revision-Date: 2011-11-15 10:47+0000\n"
+"PO-Revision-Date: 2012-01-05 14:52+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Hunsrik <hrx@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-31 05:33+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-01-06 04:49+0000\n"
+"X-Generator: Launchpad (build 14637)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -35,7 +35,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:558
 msgid "Galactic Plane"
-msgstr ""
+msgstr "Kalləksë-plån"
 
 #: src/core/modules/LandscapeMgr.cpp:486
 msgid "Author: "
@@ -63,7 +63,7 @@ msgstr "Sott: <b>%1</b>"
 #: plugins/Supernovae/src/Supernova.cpp:101 plugins/Quasars/src/Quasar.cpp:103
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Krest: <b>%1</b> (gëleʃʃt fǎ: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:115
@@ -106,7 +106,7 @@ msgstr "Unn-pǒk̀annt"
 
 #: src/core/modules/Nebula.cpp:324
 msgid "Undocumented type"
-msgstr ""
+msgstr "Unn-pǒʃrippnë sott"
 
 #: src/core/modules/Planet.cpp:129 src/core/modules/StarWrapper.cpp:124
 #: plugins/Quasars/src/Quasar.cpp:120
@@ -122,12 +122,12 @@ msgstr ""
 #: src/core/modules/Planet.cpp:143
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr ""
+msgstr "Ʃifhet (fømm’m tåx): %1"
 
 #: src/core/modules/Planet.cpp:153
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "Vajt %1 ÅE (%2 km)"
 
 #: src/core/modules/Planet.cpp:160
 #, no-c-format, qt-format
@@ -147,17 +147,17 @@ msgstr "Krest: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "Aws-sinliķķ krest: <b>%1</b> (tørriķķ lɛʒʒuŋŋ)"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:97
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "Krest: <b>%1</b> (gëleʃʃt fǎ: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:111
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr ""
+msgstr "Krest: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
 #, qt-format
@@ -270,32 +270,32 @@ msgstr ""
 #: src/core/StelObject.cpp:80
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
-msgstr ""
+msgstr "Riķķt uff-hevuŋŋ/Aws-ʃiʋuŋŋ (J2000): %1/%2"
 
 #: src/core/StelObject.cpp:87
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr ""
+msgstr "Riķķt uff-hevuŋŋ/Aws-ʃiʋuŋŋ (fømm’m tåx): %1/%2"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:100
 #: src/core/StelObject.cpp:103
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr ""
+msgstr "Ʃtunnë-viŋŋgəl/Aws-ʃiʋuŋŋ: %1/%2"
 
 #: src/core/StelObject.cpp:97 src/core/StelObject.cpp:116
 msgid "(geometric)"
-msgstr ""
+msgstr "(førrmiķķ)"
 
 #: src/core/StelObject.cpp:100 src/core/StelObject.cpp:122
 msgid "(apparent)"
-msgstr ""
+msgstr "(aws-sinliķķ)"
 
 #: src/core/StelObject.cpp:116 src/core/StelObject.cpp:122
 #: src/core/StelObject.cpp:125
 #, qt-format
 msgid "Az/Alt: %1/%2"
-msgstr ""
+msgstr "Azzëmutt/Heķt: %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:306 src/gui/ConfigurationDialog.cpp:308
 msgid "Select screenshot directory"
@@ -357,6 +357,8 @@ msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
+"%1 iss rannǎ-gëlåd’ən-kevvë...\n"
+"(Tǔ k̀annst’dëto lådř tsu-maɠɠë.)"
 
 #: src/gui/ConfigurationDialog.cpp:736
 #, qt-format
@@ -365,6 +367,9 @@ msgid ""
 "Star count: %2 Million\n"
 "Magnitude range: %3 - %4"
 msgstr ""
+"Krest fømm’m rannǎ-låt: %1MB\n"
+"Ʃtɛnnë-fil: %2 mǐļon\n"
+"Aws-vajduŋŋ fønn’ë krest: %3 - %4"
 
 #: src/gui/ConfigurationDialog.cpp:779 src/gui/ConfigurationDialog.cpp:815
 #, qt-format
@@ -372,6 +377,8 @@ msgid ""
 "Error downloading %1:\n"
 "%2"
 msgstr ""
+"To izz’ən felǎ pǎsiřt ivvǎ’m rannǎ-lådë fønn %1:\n"
+"%2"
 
 #: src/gui/ConfigurationDialog.cpp:867
 msgid "Verifying file integrity..."
@@ -383,39 +390,41 @@ msgid ""
 "Error downloading %1:\n"
 "File is corrupted."
 msgstr ""
+"To izz’ən felǎ pǎsiřt ivvǎ’m rannǎ-lådë fønn %1:\n"
+"Dë fajl iss kǎputt."
 
 #: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:328
 #: src/gui/StelGuiItems.cpp:709
 msgid "Space"
-msgstr ""
+msgstr "Platts"
 
 #: src/gui/HelpDialog.cpp:53
 msgid "Arrow keys & left mouse drag"
-msgstr ""
+msgstr "Riķķtuŋŋ-knɛpp unn ʃlebbuŋŋ mymm’m mawzë ‘zajnë liŋŋzë knøpp"
 
 #: src/gui/HelpDialog.cpp:54
 msgid "Page Up/Down"
-msgstr ""
+msgstr "Plåt Ruff/Plåt Ranna"
 
 #: src/gui/HelpDialog.cpp:55
 msgid "CTRL + Up/Down"
-msgstr ""
+msgstr "Ctrl + Ruff/Rannǎ"
 
 #: src/gui/HelpDialog.cpp:56
 msgid "Left click"
-msgstr ""
+msgstr "Liŋŋzë klikk"
 
 #: src/gui/HelpDialog.cpp:57
 msgid "Right click"
-msgstr ""
+msgstr "Reķķtsë klikk"
 
 #: src/gui/HelpDialog.cpp:58
 msgid "CTRL + Left click"
-msgstr ""
+msgstr "Ctrl + Reķķtsë klikk"
 
 #: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:164
 msgid "Movement and Selection"
-msgstr ""
+msgstr "Pǒvejuŋŋ unn aws-suɠɠuŋŋ"
 
 #: src/gui/HelpDialog.cpp:62
 msgid "Pan view around the sky"
@@ -423,15 +432,15 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
 msgid "Zoom in/out"
-msgstr ""
+msgstr "Ån-tsijë/Aws-tsijë"
 
 #: src/gui/HelpDialog.cpp:65
 msgid "Select object"
-msgstr ""
+msgstr "Dë keģë-ʃtannt aws-suɠɠë"
 
 #: src/gui/HelpDialog.cpp:66 src/gui/HelpDialog.cpp:68
 msgid "Clear selection"
-msgstr ""
+msgstr "Dǐ aws-suɠɠuŋŋ savř-maɠɠë"
 
 #: src/gui/HelpDialog.cpp:71
 msgid "When a Script is Running"
@@ -468,7 +477,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:168
 msgid "Keys"
-msgstr ""
+msgstr "Knɛpp"
 
 #: src/gui/HelpDialog.cpp:176
 msgid "Further Reading"
@@ -556,7 +565,7 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "Provǎ: %1"
 
 #: src/gui/StelGui.cpp:98
 msgid "Display Options"
@@ -565,22 +574,22 @@ msgstr ""
 #: src/gui/StelGui.cpp:99
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:263
 msgid "Constellation lines"
-msgstr ""
+msgstr "Gëʃtɛnnë-liņņë"
 
 #: src/gui/StelGui.cpp:100
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:273
 msgid "Constellation art"
-msgstr ""
+msgstr "Gëʃtɛnnë-pilldǎ"
 
 #: src/gui/StelGui.cpp:101
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Constellation labels"
-msgstr ""
+msgstr "Gëʃtɛnnë-nåmë"
 
 #: src/gui/StelGui.cpp:102
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:274
 msgid "Constellation boundaries"
-msgstr ""
+msgstr "Gëʃtɛnnë-krɛnnzë"
 
 #: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
@@ -633,19 +642,19 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:115
 msgid "Ground"
-msgstr ""
+msgstr "Poddəm"
 
 #: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1099
 msgid "Atmosphere"
-msgstr ""
+msgstr "Lufft"
 
 #: src/gui/StelGui.cpp:117
 msgid "Fog"
-msgstr ""
+msgstr "Tusstř"
 
 #: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1108
 msgid "Nebulas"
-msgstr ""
+msgstr "Nevvluŋŋë"
 
 #: src/gui/StelGui.cpp:120
 msgid "Nebulas background images"
@@ -654,54 +663,54 @@ msgstr ""
 #: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Stars"
-msgstr ""
+msgstr "Ʃtɛnnë"
 
 #: src/gui/StelGui.cpp:122
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Planet labels"
-msgstr ""
+msgstr "Nåmë fønn’ë runntlë"
 
 #: src/gui/StelGui.cpp:123
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
 msgid "Planet orbits"
-msgstr ""
+msgstr "Pånë fønn’ë runntlë"
 
 #: src/gui/StelGui.cpp:124
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:300
 msgid "Planet trails"
-msgstr ""
+msgstr "Ʃtriʋë fønn’ë runntlë"
 
 #: src/gui/StelGui.cpp:126
 msgid "Night mode"
-msgstr ""
+msgstr "Naxxts-modë"
 
 #: src/gui/StelGui.cpp:127
 msgid "Full-screen mode"
-msgstr ""
+msgstr "Follë-pillt-modë"
 
 #: src/gui/StelGui.cpp:128
 msgid "Flip scene horizontally"
-msgstr ""
+msgstr "S pillt vowë-reķķt rømm-trejë"
 
 #: src/gui/StelGui.cpp:129
 msgid "Flip scene vertically"
-msgstr ""
+msgstr "S pillt sɛŋŋgəl-reķķt rømm-trejë"
 
 #: src/gui/StelGui.cpp:131
 msgid "Windows"
-msgstr ""
+msgstr "Låtrë"
 
 #: src/gui/StelGui.cpp:132
 msgid "Help window"
-msgstr ""
+msgstr "Lådř fønn hilləf"
 
 #: src/gui/StelGui.cpp:133
 msgid "Configuration window"
-msgstr ""
+msgstr "Lådř fønn ʃtelluŋŋ"
 
 #: src/gui/StelGui.cpp:134
 msgid "Search window"
-msgstr ""
+msgstr "Lådř fønn suɠɠuŋŋ"
 
 #: src/gui/StelGui.cpp:135
 msgid "Sky and viewing options window"
@@ -709,11 +718,11 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:136
 msgid "Date/time window"
-msgstr ""
+msgstr "Lådř fønn tåx unn uř-tsajt"
 
 #: src/gui/StelGui.cpp:137
 msgid "Location window"
-msgstr ""
+msgstr "Lådř fønn’n pǒfinnuŋŋ"
 
 #: src/gui/StelGui.cpp:139
 msgid "Script console window"
@@ -722,59 +731,59 @@ msgstr ""
 #: src/gui/StelGui.cpp:142 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:156
 msgid "Date and Time"
-msgstr ""
+msgstr "Tåx unn uř-tsajt"
 
 #: src/gui/StelGui.cpp:146
 msgid "Decrease time speed"
-msgstr ""
+msgstr "Dǐ tsajt lammzammř rømm-ken maɠɠë"
 
 #: src/gui/StelGui.cpp:147
 msgid "Increase time speed"
-msgstr ""
+msgstr "Dǐ tsajt ʃnellř rømm-ken maɠɠë"
 
 #: src/gui/StelGui.cpp:148
 msgid "Set normal time rate"
-msgstr ""
+msgstr "Fǎ’dǐ norrmall tsajt-taʒʒë hinn-ʃtellë"
 
 #: src/gui/StelGui.cpp:149
 msgid "Decrease time speed (a little)"
-msgstr ""
+msgstr "Dǐ tsajt lammzammř rømm-ken maɠɠë (norë n-pisssjě)"
 
 #: src/gui/StelGui.cpp:150
 msgid "Increase time speed (a little)"
-msgstr ""
+msgstr "Dǐ tsajt ʃnellř rømm-ken maɠɠë (norë n-pisssjě)"
 
 #: src/gui/StelGui.cpp:151
 msgid "Set time rate to zero"
-msgstr ""
+msgstr "Dǐ tsajt-taʒʒë fǎ null ʃtellë"
 
 #: src/gui/StelGui.cpp:152
 msgid "Set time to now"
-msgstr ""
+msgstr "Dǐ tsajt fǎ jetts ʃtellë"
 
 #: src/gui/StelGui.cpp:153
 msgid "Add 1 solar hour"
-msgstr ""
+msgstr "En sunnë-ʃtunn dëpaaj-tun"
 
 #: src/gui/StelGui.cpp:154
 msgid "Subtract 1 solar hour"
-msgstr ""
+msgstr "En sunnë-ʃtunn app-tsijë"
 
 #: src/gui/StelGui.cpp:155
 msgid "Add 1 solar day"
-msgstr ""
+msgstr "Enë sunnë-tåx dëpaaj-tun"
 
 #: src/gui/StelGui.cpp:156
 msgid "Subtract 1 solar day"
-msgstr ""
+msgstr "Enë sunnë-tåx app-tsijë"
 
 #: src/gui/StelGui.cpp:157
 msgid "Add 1 solar week"
-msgstr ""
+msgstr "En sunnë-vuxx dëpaaj-tun"
 
 #: src/gui/StelGui.cpp:158
 msgid "Subtract 1 solar week"
-msgstr ""
+msgstr "En sunnë-vuxx app-tsijë"
 
 #: src/gui/StelGui.cpp:159
 msgid "Add 1 sidereal day"
@@ -798,15 +807,15 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:166
 msgid "Track object"
-msgstr ""
+msgstr "Dë keģë-ʃtannt no-ken"
 
 #: src/gui/StelGui.cpp:167
 msgid "Zoom in on selected object"
-msgstr ""
+msgstr "Dë aws-gësuxxtnë keģë-ʃtannt ån-tsijë"
 
 #: src/gui/StelGui.cpp:168
 msgid "Zoom out"
-msgstr ""
+msgstr "Aws-tsijë"
 
 #: src/gui/StelGui.cpp:169
 msgid "Set home planet to selected planet"
@@ -818,7 +827,7 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:173
 msgid "Quit"
-msgstr ""
+msgstr "Raws-ken"
 
 #: src/gui/StelGui.cpp:174
 msgid "Save screenshot"
