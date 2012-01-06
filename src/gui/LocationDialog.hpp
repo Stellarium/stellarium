@@ -69,6 +69,12 @@ private:
 	//! The original names are kept in the user data field of each QComboBox
 	//! item.
 	void populatePlanetList();
+
+	//! Populates the drop-down list of countries.
+	//! The displayed names are localized in the current interface language.
+	//! The original names are kept in the user data field of each QComboBox
+	//! item.
+	void populateCountryList();
 	
 private slots:
 	//! Update the widget to make sure it is synchrone if the location is changed programmatically
