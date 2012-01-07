@@ -45,6 +45,7 @@ public slots:
 private slots:
 	void getData();
 	void receiveDownload(QNetworkReply* networkReply);
+	void abortDownloads();
 	void acceptNewSatellites();
 	void discardNewSatellites();
 	
@@ -54,10 +55,12 @@ private:
 	
 	void reset();
 	void populateList();
+	void displayMessage(const QString& message);
 	
 	TleDataHash newSatellites;
 	int numberDownloadsComplete;
 	QNetworkAccessManager* downloadMgr;
+	QList<QNetworkReply*> activeDownloads;
 	QStringList sourceUrls;
 	QList<QTemporaryFile*> sourceFiles;
 	QProgressBar* progressBar;
