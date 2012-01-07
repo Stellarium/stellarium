@@ -440,24 +440,24 @@ void SatellitesDialog::saveSettings(void)
 	GETSTELMODULE(Satellites)->saveSettingsToConfig();
 }
 
-void SatellitesDialog::visibleCheckChanged(int state)
+void SatellitesDialog::setDisplayFlag(bool display)
 {
 	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
 	{
 		QString id = i->data(Qt::UserRole).toString();
 		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(id);
-		sat->visible = (state==Qt::Checked);
+		sat->visible = display;
 	}
 	groupFilterChanged(ui->groupsCombo->currentIndex());
 }
 
-void SatellitesDialog::orbitCheckChanged(int state)
+void SatellitesDialog::setOrbitFlag(bool display)
 {
 	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
 	{
 		QString id = i->data(Qt::UserRole).toString();
 		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(id);
-		sat->orbitVisible = (state==Qt::Checked);
+		sat->orbitVisible = display;
 	}
 	groupFilterChanged(ui->groupsCombo->currentIndex());
 }
@@ -503,12 +503,12 @@ void SatellitesDialog::connectSatelliteGuiForm(void)
 {
 	// make sure we don't connect more than once
 	disconnectSatelliteGuiForm();
-	connect(ui->visibleCheckbox, SIGNAL(stateChanged(int)), this, SLOT(visibleCheckChanged(int)));
-	connect(ui->orbitCheckbox, SIGNAL(stateChanged(int)), this, SLOT(orbitCheckChanged(int)));
+	connect(ui->visibleCheckbox, SIGNAL(clicked(bool)), this, SLOT(setDisplayFlag(bool)));
+	connect(ui->orbitCheckbox, SIGNAL(clicked(bool)), this, SLOT(setOrbitFlag(bool)));
 }
 
 void SatellitesDialog::disconnectSatelliteGuiForm(void)
 {
-	disconnect(ui->visibleCheckbox, SIGNAL(stateChanged(int)), this, SLOT(visibleCheckChanged(int)));
-	disconnect(ui->orbitCheckbox, SIGNAL(stateChanged(int)), this, SLOT(orbitCheckChanged(int)));
+	disconnect(ui->visibleCheckbox, SIGNAL(clicked(bool)), this, SLOT(setDisplayFlag(bool)));
+	disconnect(ui->orbitCheckbox, SIGNAL(clicked(bool)), this, SLOT(setOrbitFlag(bool)));
 }
