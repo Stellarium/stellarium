@@ -232,13 +232,14 @@ void SatellitesImportDialog::populateList()
 		
 		TleData tle = i.value();
 		QListWidgetItem* newItem = new QListWidgetItem(tle.name);
+		newItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
+		newItem->setCheckState(Qt::Unchecked);
 		newItem->setData(Qt::UserRole, tle.id);
 		QString text = QString("Catalog Number: %1").arg(tle.id);
 		newItem->setToolTip(text);
-		newItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
 		ui->listWidget->addItem(newItem);
 	}
 	existingIDs.clear();
 	ui->listWidget->sortItems();
-	ui->listWidget->setVisible(true);
+	ui->groupBoxResults->setVisible(true);
 }
