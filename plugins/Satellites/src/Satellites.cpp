@@ -701,7 +701,7 @@ SatelliteP Satellites::getByID(const QString& id)
 	return SatelliteP();
 }
 
-void Satellites::add(const QHash<QString, TleData>& newSatellites)
+void Satellites::add(const TleDataList& newSatellites)
 {
 	//
 }
@@ -905,7 +905,7 @@ void Satellites::saveTleData(QString path)
 void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 {
 	// Container for the new data. 
-	QHash<QString, TleData> newTleSets;
+	TleDataHash newTleSets;
 
 	if (progressBar)
 	{
@@ -988,7 +988,7 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 	emit(tleUpdateComplete(numUpdated, totalSats, numMissing));
 }
 
-void Satellites::parseTleFile(QFile& openFile, QHash<QString, TleData>& tleList)
+void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList)
 {
 	if (!openFile.isOpen() || !openFile.isReadable())
 		return;
