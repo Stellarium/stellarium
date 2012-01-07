@@ -490,12 +490,6 @@
            </item>
            <item>
             <widget class="QLineEdit" name="idLineEdit">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
@@ -517,9 +511,6 @@
            </item>
            <item>
             <widget class="QLineEdit" name="lineEditCatalogNumber">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
