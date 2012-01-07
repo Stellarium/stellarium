@@ -115,8 +115,9 @@ void SatellitesDialog::createDialogContent()
 	        this,
 	        SLOT(updateSelectedSatelliteInfo(QListWidgetItem*,QListWidgetItem*)));
 	connect(ui->satellitesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(satelliteDoubleClick(QListWidgetItem*)));
-	connect(ui->groupsCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(groupFilterChanged(int)));
+	connect(ui->groupsCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(listSatelliteGroup(int)));
 	connect(ui->saveSatellitesButton, SIGNAL(clicked()), this, SLOT(saveSatellites()));
+	connect(ui->removeSatellitesButton, SIGNAL(clicked()), this, SLOT(removeSatellites()));
 	connectSatelliteGuiForm();
 
 	// Sources tab
@@ -135,7 +136,7 @@ void SatellitesDialog::createDialogContent()
 
 }
 
-void SatellitesDialog::groupFilterChanged(int index)
+void SatellitesDialog::listSatelliteGroup(int index)
 {
 	QVariantList prevMultiSelection;
 	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
@@ -188,6 +189,11 @@ void SatellitesDialog::groupFilterChanged(int index)
 		ui->satellitesList->setCurrentRow(0);
 		ui->satellitesList->scrollToTop();
 	}
+}
+
+void SatellitesDialog::reloadSatellitesList()
+{
+	listSatelliteGroup(ui->groupsCombo->currentIndex());
 }
 
 void SatellitesDialog::updateSelectedSatelliteInfo(QListWidgetItem* curItem,
@@ -440,6 +446,21 @@ void SatellitesDialog::saveSettings(void)
 	GETSTELMODULE(Satellites)->saveSettingsToConfig();
 }
 
+void SatellitesDialog::removeSatellites()
+{
+	QStringList idList;
+	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
+	{
+		QString id = i->data(Qt::UserRole).toString();
+		idList.append(id);
+	}
+	if (!idList.isEmpty())
+	{
+		GETSTELMODULE(Satellites)->remove(idList);
+		reloadSatellitesList();
+	}
+}
+
 void SatellitesDialog::setDisplayFlag(bool display)
 {
 	foreach (QListWidgetItem* i, ui->satellitesList->selectedItems())
@@ -448,7 +469,7 @@ void SatellitesDialog::setDisplayFlag(bool display)
 		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(id);
 		sat->visible = display;
 	}
-	groupFilterChanged(ui->groupsCombo->currentIndex());
+	reloadSatellitesList();
 }
 
 void SatellitesDialog::setOrbitFlag(bool display)
@@ -459,7 +480,7 @@ void SatellitesDialog::setOrbitFlag(bool display)
 		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(id);
 		sat->orbitVisible = display;
 	}
-	groupFilterChanged(ui->groupsCombo->currentIndex());
+	reloadSatellitesList();
 }
 
 void SatellitesDialog::satelliteDoubleClick(QListWidgetItem* item)
