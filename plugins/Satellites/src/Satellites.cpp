@@ -874,10 +874,8 @@ void Satellites::saveTleData(QString path)
 
 void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 {
-	// define a map of new TLE data - the key is the satellite designation
-	QMap< QString, QPair<QString, QString> > newTLE;
-	//TODO: Ugly hack, think of something better: --BM
-	QHash<QString, QString> nameFromId;
+	// Container for the new data. 
+	QHash<QString, TleData> newTleSets;
 
 	if (progressBar)
 	{
@@ -891,52 +889,7 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 		QFile tleFile(tleFilePath);
 		if (tleFile.open(QIODevice::ReadOnly|QIODevice::Text))
 		{
-			int lineNumber = 0;
-			QString lastId, lastName;
-			QPair<QString, QString> tleLines;
-			
-			while (!tleFile.atEnd())
-			{
-				QString line = QString(tleFile.readLine()).trimmed();
-				if (line.length() < 65) // this is title line
-				{
-					// New entry in the list, so prepare all fields
-					lastId.clear();
-					lastName = line;
-					lastName.replace(QRegExp("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove things in square brackets
-					//TODO: We need to think of some kind of ecaping these 
-					//characters in the JSON parser. --BM
-					
-					tleLines.first = QString();
-					tleLines.second = QString();
-				}
-				else
-				{
-					if (QRegExp("^1 .*").exactMatch(line))
-						tleLines.first = line;
-					else if (QRegExp("^2 .*").exactMatch(line))
-					{
-						tleLines.second = line;
-						// The Satellite Catalog Number is the second number
-						// on the second line.
-						lastId = line.split(' ').at(1).trimmed();
-						if (lastId.isEmpty())
-							continue;
-						
-						// This is the second line and there will be no more,
-						// so if everything is OK, save the elements.
-						if (!lastName.isEmpty() &&
-						    !tleLines.first.isEmpty())
-						{
-							newTLE[lastId] = tleLines;
-							nameFromId[lastId] = lastName;
-						}
-						//TODO: Error warnings? --BM
-					}
-					else
-						qDebug() << "Satellites::updateFromFiles(): unprocessed line " << lineNumber <<  " in file " << tleFilePath;
-				}
-			}
+			parseTleFile(tleFile, newTleSets);
 			tleFile.close();
 
 			if (deleteFiles)
@@ -956,20 +909,18 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 	{
 		totalSats++;
 		QString id = sat->id;
-		if (newTLE.contains(id))
+		if (newTleSets.contains(id))
 		{
-			// If it's in the new list, the name should also be there.
-			QString name = nameFromId.value(id);
-			
-			if (sat->tleElements.first  != newTLE[id].first ||
-			    sat->tleElements.second != newTLE[id].second ||
-			    sat->name != name)
+			TleData newTle = newTleSets.value(id);
+			if (sat->tleElements.first  != newTle.first ||
+			    sat->tleElements.second != newTle.second ||
+			    sat->name != newTle.name)
 			{
 				// We have updated TLE elements for this satellite
-				sat->setNewTleElements(newTLE[id].first, newTLE[id].second);
+				sat->setNewTleElements(newTle.first, newTle.second);
 				
 				// Update the name if it has been changed in the source list
-				sat->name = name;
+				sat->name = newTle.name;
 
 				// we reset this to "now" when we started the update.
 				sat->lastUpdated = lastUpdate;
@@ -995,7 +946,7 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 	progressBar = NULL;
 
 	qDebug() << "Satellites: updated" << numUpdated << "/" << totalSats
-		 << "satellites.  Update URLs contained" << newTLE.size() << "objects. "
+		 << "satellites.  Update URLs contained" << newTleSets.size() << "objects. "
 		 << "There were" << numMissing << "satellies missing from the update URLs";
 
 	if (numUpdated==0)
@@ -1005,6 +956,58 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 
 	emit(updateStateChanged(updateState));
 	emit(tleUpdateComplete(numUpdated, totalSats, numMissing));
+}
+
+void Satellites::parseTleFile(QFile& openFile, QHash<QString, TleData>& tleList)
+{
+	if (!openFile.isOpen() || !openFile.isReadable())
+		return;
+	
+	// Code mostly re-used from updateFromFiles()
+	int lineNumber = 0;
+	TleData lastData;
+	
+	while (!openFile.atEnd())
+	{
+		QString line = QString(openFile.readLine()).trimmed();
+		if (line.length() < 65) // this is title line
+		{
+			// New entry in the list, so reset all fields
+			lastData = TleData();
+			
+			//TODO: We need to think of some kind of ecaping these 
+			//characters in the JSON parser. --BM
+			line.replace(QRegExp("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove things in square brackets
+			lastData.name = line;
+		}
+		else
+		{
+			if (QRegExp("^1 .*").exactMatch(line))
+				lastData.first = line;
+			else if (QRegExp("^2 .*").exactMatch(line))
+			{
+				lastData.second = line;
+				// The Satellite Catalog Number is the second number
+				// on the second line.
+				QString id = line.split(' ').at(1).trimmed();
+				if (id.isEmpty())
+					continue;
+				lastData.id = id;
+				
+				// This is the second line and there will be no more,
+				// so if everything is OK, save the elements.
+				if (!lastData.name.isEmpty() &&
+				    !lastData.first.isEmpty())
+				{
+					//TODO: This overwrites duplicates. Display warning? --BM
+					tleList.insert(id, lastData);
+				}
+				//TODO: Error warnings? --BM
+			}
+			else
+				qDebug() << "Satellites: unprocessed line " << lineNumber <<  " in file " << openFile.fileName();
+		}
+	}
 }
 
 void Satellites::update(double deltaTime)
