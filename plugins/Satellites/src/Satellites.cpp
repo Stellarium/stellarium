@@ -703,7 +703,40 @@ SatelliteP Satellites::getByID(const QString& id)
 
 void Satellites::add(const TleDataList& newSatellites)
 {
-	//
+	int numAdded = 0;
+	QVariantList defaultHintColorMap;
+	defaultHintColorMap << defaultHintColor[0] << defaultHintColor[1] 
+	                    << defaultHintColor[2];
+	
+	foreach (const TleData& tleSet, newSatellites)
+	{
+		//TODO: Duplicates check? --BM
+		
+		if (tleSet.id.isEmpty() ||
+		    tleSet.name.isEmpty() ||
+		    tleSet.first.isEmpty() ||
+		    tleSet.second.isEmpty())
+			continue;
+		
+		QVariantMap satProperties;
+		satProperties.insert("name", tleSet.name);
+		satProperties.insert("tle1", tleSet.first);
+		satProperties.insert("tle2", tleSet.second);
+		satProperties.insert("hintColor", defaultHintColorMap);
+		//TODO: Decide if newly added satellites are visible by default --BM
+		satProperties.insert("visible", true);
+		
+		SatelliteP sat(new Satellite(tleSet.id, satProperties));
+		if (sat->initialized)
+		{
+			satellites.append(sat);
+			numAdded++;
+		}
+	}
+	qDebug() << "Satellites: "
+	         << newSatellites.count() << "satellites proposed for addition, "
+	         << numAdded << " added, "
+	         << satellites.count() << " total after the operation.";
 }
 
 void Satellites::remove(const QStringList& idList)

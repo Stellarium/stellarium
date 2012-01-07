@@ -446,6 +446,13 @@ void SatellitesDialog::saveSettings(void)
 	GETSTELMODULE(Satellites)->saveSettingsToConfig();
 }
 
+void SatellitesDialog::addSatellites(const TleDataList& newSatellites)
+{
+	//TODO: Enable the things that were disabled
+	GETSTELMODULE(Satellites)->add(newSatellites);
+	//TODO: update the interface (probably needs to be a signal somewhere)
+}
+
 void SatellitesDialog::removeSatellites()
 {
 	QStringList idList;
