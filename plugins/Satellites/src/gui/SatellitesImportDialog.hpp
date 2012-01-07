@@ -24,6 +24,8 @@
 #include "Satellites.hpp"
 
 class Ui_satellitesImportDialog;
+class QTemporaryFile;
+class QNetworkReply;
 
 class SatellitesImportDialog : public StelDialog
 {
@@ -40,7 +42,9 @@ public slots:
 	void languageChanged();
 	void setVisible(bool visible = true){ StelDialog::setVisible(visible); }
 	
+private slots:
 	void getData();
+	void receiveDownload(QNetworkReply* networkReply);
 	void acceptNewSatellites();
 	void discardNewSatellites();
 	
@@ -49,7 +53,14 @@ private:
 	Ui_satellitesImportDialog* ui;
 	
 	void reset();
-	void parseData();
+	void populateList();
+	
+	TleDataHash newSatellites;
+	int numberDownloadsComplete;
+	QNetworkAccessManager* downloadMgr;
+	QStringList sourceUrls;
+	QList<QTemporaryFile*> sourceFiles;
+	QProgressBar* progressBar;
 };
 
 #endif // IMPORTSATELLITESWINDOW_HPP
