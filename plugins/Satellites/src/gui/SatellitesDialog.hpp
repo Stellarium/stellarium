@@ -58,8 +58,8 @@ private slots:
 	void addSourceRow(void);
 	void restoreDefaults(void);
 	void saveSettings(void);
-	void visibleCheckChanged(int state);
-	void orbitCheckChanged(int state);
+	void setDisplayFlag(bool display);
+	void setOrbitFlag(bool display);
 	void satelliteDoubleClick(QListWidgetItem* item);
 	void setOrbitParams(void);
 	void updateTLEs(void);
