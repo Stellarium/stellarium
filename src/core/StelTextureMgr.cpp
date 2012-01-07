@@ -114,12 +114,12 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 
 		if (size < tex->qImage.width())
 		{
-			tex->qImage = tex->qImage.scaledToWidth(size, Qt::FastTransformation);
+			tex->qImage.scaledToWidth(size, Qt::FastTransformation);
 			fprintf(stdout, "qImage resized width: %d\n", tex->qImage.width());
 		}
 		if (size < tex->qImage.height())
 		{
-			tex->qImage = tex->qImage.scaledToHeight(size, Qt::FastTransformation);
+			tex->qImage.scaledToHeight(size, Qt::FastTransformation);
 			fprintf(stdout, "qImage resized height: %d\n", tex->qImage.height());
 		}
 
