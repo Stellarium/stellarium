@@ -40,7 +40,7 @@ signals:
 	
 public slots:
 	void languageChanged();
-	void setVisible(bool visible = true){ StelDialog::setVisible(visible); }
+	void setVisible(bool visible = true);
 	
 private slots:
 	void getData();
@@ -58,6 +58,7 @@ private:
 	void displayMessage(const QString& message);
 	
 	TleDataHash newSatellites;
+	bool isGettingData;
 	int numberDownloadsComplete;
 	QNetworkAccessManager* downloadMgr;
 	QList<QNetworkReply*> activeDownloads;
