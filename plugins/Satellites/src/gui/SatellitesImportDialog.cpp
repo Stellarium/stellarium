@@ -21,15 +21,18 @@
 #include "ui_satellitesImportDialog.h"
 
 #include "StelApp.hpp"
+#include "StelMainGraphicsView.hpp" //for the QFileDialog? Why?
 #include "StelModuleMgr.hpp" // for the GETSTELMODULE macro :(
 
+#include <QDesktopServices>
+#include <QFileDialog>
+#include <QFileInfo>
 #include <QNetworkReply>
 #include <QTemporaryFile>
 
 SatellitesImportDialog::SatellitesImportDialog() :
     downloadMgr(0),
-    progressBar(0),
-    isGettingData(false)
+    progressBar(0)
 {
 	ui = new Ui_satellitesImportDialog;
 }
@@ -92,31 +95,59 @@ void SatellitesImportDialog::getData()
 		connect(downloadMgr, SIGNAL(finished(QNetworkReply*)),
 		        this, SLOT(receiveDownload(QNetworkReply*)));
 	}
-	
 	Satellites* satMgr = GETSTELMODULE(Satellites);
-	sourceUrls = satMgr->getTleSources();
-	qDeleteAll(sourceFiles);
-	sourceFiles.clear();
-	numberDownloadsComplete = 0;
 	
-	// Reusing some code from Satellites::updateTLEs()
-	if (progressBar == 0)
-		progressBar = StelApp::getInstance().getGui()->addProgressBar();
-	progressBar->setValue(0);
-	progressBar->setMaximum(sourceUrls.size());
-	progressBar->setVisible(true);
-	progressBar->setFormat("TLE download %v/%m");
-	
-	ui->pushButtonGetData->setVisible(false);
-	ui->pushButtonAbort->setVisible(true);
-	ui->groupBoxWorking->setTitle("Downloading data...");
-	displayMessage("Stellarium is downloading satellite data from the update sources. Please wait...");
-	
-	for (int i = 0; i < sourceUrls.size(); i++)
+	if (satMgr->getUpdatesEnabled())
 	{
-		QUrl url(sourceUrls.at(i));
-		QNetworkReply* reply = downloadMgr->get(QNetworkRequest(url));
-		activeDownloads.append(reply);
+		sourceUrls = satMgr->getTleSources();
+		qDeleteAll(sourceFiles);
+		sourceFiles.clear();
+		numberDownloadsComplete = 0;
+		
+		// Reusing some code from Satellites::updateTLEs()
+		if (progressBar == 0)
+			progressBar = StelApp::getInstance().getGui()->addProgressBar();
+		progressBar->setValue(0);
+		progressBar->setMaximum(sourceUrls.size());
+		progressBar->setVisible(true);
+		progressBar->setFormat("TLE download %v/%m");
+		
+		ui->pushButtonGetData->setVisible(false);
+		ui->pushButtonAbort->setVisible(true);
+		ui->groupBoxWorking->setTitle("Downloading data...");
+		displayMessage("Stellarium is downloading satellite data from the update sources. Please wait...");
+		
+		for (int i = 0; i < sourceUrls.size(); i++)
+		{
+			QUrl url(sourceUrls.at(i));
+			QNetworkReply* reply = downloadMgr->get(QNetworkRequest(url));
+			activeDownloads.append(reply);
+		}
+	}
+	else
+	{
+		QStringList sourceFilePaths;
+		QString homeDirPath = QDesktopServices::storageLocation(QDesktopServices::HomeLocation);
+		sourceFilePaths = QFileDialog::getOpenFileNames(
+		                      &StelMainGraphicsView::getInstance(),
+		                      "Select TLE source file(s)...",
+		                      homeDirPath, "*.*");
+		if (sourceFilePaths.isEmpty())
+			return;
+		foreach (QString filePath, sourceFilePaths)
+		{
+			QFileInfo fileInfo(filePath);
+			if (fileInfo.exists() && fileInfo.isReadable())
+			{
+				QFile* file = new QFile(filePath);
+				sourceFiles.append(file);
+			}
+		}
+		ui->pushButtonGetData->setVisible(false);
+		ui->pushButtonAbort->setVisible(false);
+		ui->groupBoxWorking->setTitle("Processing data...");
+		displayMessage("Processing data...");
+		populateList();
 	}
 }
 
@@ -255,16 +286,21 @@ void SatellitesImportDialog::populateList()
 	// Load ALL two-line element sets...
 	for (int f = 0; f < sourceFiles.count(); f++)
 	{
-		QTemporaryFile* file = sourceFiles[f];
-		if (file->open())
+		bool open = false;
+		QTemporaryFile* tempFile = dynamic_cast<QTemporaryFile*>(sourceFiles[f]);
+		if (tempFile)
+			open = tempFile->open();
+		else
+			open = sourceFiles[f]->open(QFile::ReadOnly);
+		if (open)
 		{
-			satMgr->parseTleFile(*file, newSatellites);
-			file->close();
+			satMgr->parseTleFile(*sourceFiles[f], newSatellites);
+			sourceFiles[f]->close();
 		}
 		else
 		{
-			qDebug() << "Satellites: skipping temporary file"
-			         << file->fileName();
+			qDebug() << "Satellites: cannot open file"
+			         << sourceFiles[f]->fileName();
 		}
 	}
 	// Clear the disk...
@@ -292,6 +328,7 @@ void SatellitesImportDialog::populateList()
 	}
 	existingIDs.clear();
 	ui->listWidget->sortItems();
+	ui->listWidget->scrollToTop();
 	ui->stackedWidget->setCurrentIndex(1);
 }
 
