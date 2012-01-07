@@ -48,6 +48,7 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelScriptMgr.hpp"
+#include "StelGui.hpp"
 
 #include <QtOpenGL>
 #include <QKeyEvent>
@@ -477,6 +478,19 @@ void TextUserInterface::draw(StelCore* core)
 {
 	if (tuiActive)
 	{
+		int x, y;
+		StelGuiBase* gui = StelApp::getInstance().getGui();
+		if (gui->getVisible())
+		{
+			x = 85;
+			y = 85;
+		}
+		else
+		{
+			x = 25;
+			y = 25;
+		}
+
 		QString tuiText = q_("[no TUI node]");
 		if (currentNode!=NULL)
 			tuiText = currentNode->getDisplayText();
@@ -484,7 +498,7 @@ void TextUserInterface::draw(StelCore* core)
 		StelPainter painter(core->getProjection(StelCore::FrameAltAz));
 		painter.setFont(font);
 		painter.setColor(0.3,1,0.3);
-		painter.drawText(85, 85, tuiText, 0, 0, 0, false);
+		painter.drawText(x, y, tuiText, 0, 0, 0, false);
 	}
 }
 
