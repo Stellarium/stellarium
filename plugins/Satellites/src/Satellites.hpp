@@ -53,6 +53,9 @@ struct TleData
 	QString second;
 };
 
+typedef QList<TleData> TleDataList;
+typedef QHash<QString, TleData> TleDataHash ;
+
 //! @class Satellites
 //! Satellites in low Earth orbit require different orbital calculations from planets, the moon
 //! and so on.  This plugin implements the SGP4/SDP4 algorithms in Stellarium, allowing accurate
@@ -143,7 +146,7 @@ public:
 	SatelliteP getByID(const QString& id);
 	
 	//! Add the given satellites.
-	void add(const QHash<QString,TleData>& newSatellites);
+	void add(const TleDataList& newSatellites);
 	
 	//! Remove the selected satellites.
 	void remove(const QStringList& idList);
@@ -194,7 +197,7 @@ public:
 	//! are overwritten with the new values.
 	//! \param openFile a reference to an \b open file.
 	//! \param tleList a hash with satellite IDs (catalog numbers) as keys.
-	static void parseTleFile(QFile& openFile, QHash<QString, TleData>& tleList);
+	static void parseTleFile(QFile& openFile, TleDataHash& tleList);
 
 signals:
 	//! emitted when the update status changes, e.g. when 
