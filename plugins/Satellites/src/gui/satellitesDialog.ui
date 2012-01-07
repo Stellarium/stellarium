@@ -383,7 +383,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QFrame" name="">
+        <widget class="QFrame" name="frame">
          <layout class="QHBoxLayout" name="horizontalLayout_7">
           <property name="leftMargin">
            <number>9</number>
@@ -639,6 +639,28 @@
               </size>
              </property>
             </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="removeSatellitesButton">
+             <property name="toolTip">
+              <string>Remove the selected satellites</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../../resources/Satellites.qrc">
+               <normaloff>:/satellites/bt_delete.png</normaloff>:/satellites/bt_delete.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="addSatellitesButton">
+             <property name="toolTip">
+              <string>Add more satellites</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../../resources/Satellites.qrc">
+               <normaloff>:/satellites/bt_add.png</normaloff>:/satellites/bt_add.png</iconset>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QPushButton" name="commsButton">
