@@ -642,6 +642,12 @@
            </item>
            <item>
             <widget class="QPushButton" name="removeSatellitesButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="toolTip">
               <string>Remove the selected satellites</string>
              </property>
@@ -653,6 +659,12 @@
            </item>
            <item>
             <widget class="QPushButton" name="addSatellitesButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="toolTip">
               <string>Add more satellites</string>
              </property>
@@ -829,6 +841,8 @@
   <tabstop>descriptionTextEdit</tabstop>
   <tabstop>groupsTextEdit</tabstop>
   <tabstop>tleTextEdit</tabstop>
+  <tabstop>removeSatellitesButton</tabstop>
+  <tabstop>addSatellitesButton</tabstop>
   <tabstop>commsButton</tabstop>
   <tabstop>saveSatellitesButton</tabstop>
   <tabstop>sourceList</tabstop>
