@@ -484,8 +484,7 @@ void TextUserInterface::draw(StelCore* core)
 		StelPainter painter(core->getProjection(StelCore::FrameAltAz));
 		painter.setFont(font);
 		painter.setColor(0.3,1,0.3);
-		painter.drawText(StelMainGraphicsView::getInstance().size().width()*0.6,
-				 50, tuiText, 0, 0, 0, false);
+		painter.drawText(85, 85, tuiText, 0, 0, 0, false);
 	}
 }
 
