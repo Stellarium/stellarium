@@ -28,7 +28,8 @@
 
 SatellitesImportDialog::SatellitesImportDialog() :
     downloadMgr(0),
-    progressBar(0)
+    progressBar(0),
+    isGettingData(false)
 {
 	ui = new Ui_satellitesImportDialog;
 }
@@ -53,13 +54,20 @@ void SatellitesImportDialog::languageChanged()
 	}
 }
 
+void SatellitesImportDialog::setVisible(bool visible)
+{
+	StelDialog::setVisible(visible);
+	if (!isGettingData)
+		getData();
+}
+
 void SatellitesImportDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	
 	connect(ui->closeStelWindow, SIGNAL(clicked()),
 	        this, SLOT(close()));
-	
+
 	connect(ui->pushButtonGetData, SIGNAL(clicked()),
 	        this, SLOT(getData()));
 	connect(ui->pushButtonAbort, SIGNAL(clicked()),
@@ -74,6 +82,10 @@ void SatellitesImportDialog::createDialogContent()
 
 void SatellitesImportDialog::getData()
 {
+	if (isGettingData)
+		return;
+	isGettingData = true;
+	
 	if (!downloadMgr)
 	{
 		downloadMgr = StelApp::getInstance().getNetworkAccessManager();
@@ -97,7 +109,8 @@ void SatellitesImportDialog::getData()
 	
 	ui->pushButtonGetData->setVisible(false);
 	ui->pushButtonAbort->setVisible(true);
-	displayMessage("Downloading...");
+	ui->groupBoxWorking->setTitle("Downloading data...");
+	displayMessage("Stellarium is downloading satellite data from the update sources. Please wait...");
 	
 	for (int i = 0; i < sourceUrls.size(); i++)
 	{
@@ -161,7 +174,8 @@ void SatellitesImportDialog::receiveDownload(QNetworkReply* networkReply)
 		else
 		{
 			ui->pushButtonAbort->setVisible(false);
-			displayMessage("Processing...");
+			ui->groupBoxWorking->setTitle("Processing data...");
+			displayMessage("Processing data...");
 			populateList();
 		}
 	}
@@ -206,10 +220,13 @@ void SatellitesImportDialog::discardNewSatellites()
 void SatellitesImportDialog::reset()
 {
 	// Assuming that everything that needs to be stopped is stopped
+	isGettingData = false;
 	ui->stackedWidget->setCurrentIndex(0);
 	ui->pushButtonGetData->setVisible(true);
 	ui->pushButtonAbort->setVisible(false);
 	ui->labelMessage->setVisible(false);
+	ui->labelMessage->clear();
+	ui->groupBoxWorking->setTitle("Get data");
 	ui->listWidget->clear();
 	
 	newSatellites.clear();
