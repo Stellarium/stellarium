@@ -49,6 +49,7 @@
 #include "StelUtils.hpp"
 #include "StelScriptMgr.hpp"
 #include "StelGui.hpp"
+#include "StelGuiItems.hpp"// Funny thing to include in a TEXT user interface...
 
 #include <QtOpenGL>
 #include <QKeyEvent>
@@ -478,18 +479,18 @@ void TextUserInterface::draw(StelCore* core)
 {
 	if (tuiActive)
 	{
-		int x, y;
-		StelGuiBase* gui = StelApp::getInstance().getGui();
-		if (gui->getVisible())
+		int x = 0, y = 0;
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		if (gui)
 		{
-			x = 85;
-			y = 85;
+			QGraphicsItem* bottomBar = dynamic_cast<QGraphicsItem*>(gui->getButtonBar());
+			LeftStelBar* sideBar = gui->getWindowsButtonBar();
+			x = (sideBar) ? sideBar->boundingRect().right() : 50;
+			y = (bottomBar) ? bottomBar->boundingRect().y() + bottomBar->boundingRect().height() : 50;
 		}
-		else
-		{
-			x = 25;
-			y = 25;
-		}
+		
+		x += 20;
+		y += 20;
 
 		QString tuiText = q_("[no TUI node]");
 		if (currentNode!=NULL)
