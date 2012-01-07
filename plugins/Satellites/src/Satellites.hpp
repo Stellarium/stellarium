@@ -145,6 +145,9 @@ public:
 	//! get a satellite object by identifier
 	SatelliteP getByID(const QString& id);
 	
+	//! Returns a list of all satellite IDs.
+	QStringList getAllIDs();
+	
 	//! Add the given satellites.
 	void add(const TleDataList& newSatellites);
 	
