@@ -481,16 +481,16 @@ void TextUserInterface::draw(StelCore* core)
 	{
 		int x = 0, y = 0;
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		if (gui)
+		if (gui->getVisible())
 		{
 			QGraphicsItem* bottomBar = dynamic_cast<QGraphicsItem*>(gui->getButtonBar());
-			LeftStelBar* sideBar = gui->getWindowsButtonBar();
-			x = (sideBar) ? sideBar->boundingRect().right() : 50;
-			y = (bottomBar) ? bottomBar->boundingRect().y() + bottomBar->boundingRect().height() : 50;
+			LeftStelBar* sideBar = gui->getWindowsButtonBar();			
+			x = (sideBar) ? sideBar->boundingRectNoHelpLabel().right() : 50;
+			y = (bottomBar) ? bottomBar->boundingRect().height() : 50;
 		}
 		
 		x += 20;
-		y += 20;
+		y += 15;
 
 		QString tuiText = q_("[no TUI node]");
 		if (currentNode!=NULL)
