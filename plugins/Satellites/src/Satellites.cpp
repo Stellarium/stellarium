@@ -701,6 +701,36 @@ SatelliteP Satellites::getByID(const QString& id)
 	return SatelliteP();
 }
 
+void Satellites::add(const QHash<QString, TleData>& newSatellites)
+{
+	//
+}
+
+void Satellites::remove(const QStringList& idList)
+{
+	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
+	int numRemoved = 0;
+	for (int i = 0; i < satellites.size(); i++)
+	{
+		const SatelliteP& sat = satellites.at(i);
+		if (idList.contains(sat->id))
+		{
+			QList<StelObjectP> selected = objMgr->getSelectedObject("Satellite");
+			if (selected.contains(sat.staticCast<StelObject>()))
+				objMgr->unSelect();
+			
+			qDebug() << "Satellite removed:" << sat->id << sat->name;
+			satellites.removeAt(i);
+			i--; //Compensate for the change in the array's indexing
+			numRemoved++;
+		}
+	}
+	qDebug() << "Satellites: "
+	         << idList.count() << "satellites proposed for removal, "
+	         << numRemoved << " removed, "
+	         << satellites.count() << " remain.";
+}
+
 int Satellites::getSecondsToUpdate(void)
 {
 	QDateTime nextUpdate = lastUpdate.addSecs(updateFrequencyHours * 3600);

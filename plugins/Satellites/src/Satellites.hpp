@@ -141,6 +141,12 @@ public:
 
 	//! get a satellite object by identifier
 	SatelliteP getByID(const QString& id);
+	
+	//! Add the given satellites.
+	void add(const QHash<QString,TleData>& newSatellites);
+	
+	//! Remove the selected satellites.
+	void remove(const QStringList& idList);
 
 	//! get whether or not the plugin will try to update TLE data from the internet
 	//! @return true if updates are set to be done, false otherwise
