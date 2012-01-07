@@ -63,7 +63,7 @@ private:
 	QNetworkAccessManager* downloadMgr;
 	QList<QNetworkReply*> activeDownloads;
 	QStringList sourceUrls;
-	QList<QTemporaryFile*> sourceFiles;
+	QList<QFile*> sourceFiles;
 	QProgressBar* progressBar;
 };
 
