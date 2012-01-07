@@ -18,7 +18,7 @@
 */
 
 #include "SatellitesImportDialog.hpp"
-#include "ui_importSatellitesWindow.h"
+#include "ui_satellitesImportDialog.h"
 
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp" // for the GETSTELMODULE macro :(
@@ -62,6 +62,8 @@ void SatellitesImportDialog::createDialogContent()
 	
 	connect(ui->pushButtonGetData, SIGNAL(clicked()),
 	        this, SLOT(getData()));
+	connect(ui->pushButtonAbort, SIGNAL(clicked()),
+	        this, SLOT(abortDownloads()));
 	connect(ui->pushButtonAdd, SIGNAL(clicked()),
 	        this, SLOT(acceptNewSatellites()));
 	connect(ui->pushButtonDiscard, SIGNAL(clicked()),
@@ -93,10 +95,15 @@ void SatellitesImportDialog::getData()
 	progressBar->setVisible(true);
 	progressBar->setFormat("TLE download %v/%m");
 	
+	ui->pushButtonGetData->setVisible(false);
+	ui->pushButtonAbort->setVisible(true);
+	displayMessage("Downloading...");
+	
 	for (int i = 0; i < sourceUrls.size(); i++)
 	{
 		QUrl url(sourceUrls.at(i));
-		downloadMgr->get(QNetworkRequest(url));
+		QNetworkReply* reply = downloadMgr->get(QNetworkRequest(url));
+		activeDownloads.append(reply);
 	}
 }
 
@@ -106,13 +113,14 @@ void SatellitesImportDialog::receiveDownload(QNetworkReply* networkReply)
 	
 	// First, check if this one is one of ours
 	QString url = networkReply->request().url().toString();
-	if (!sourceUrls.contains(url))
+	if (!activeDownloads.contains(networkReply))
 	{
-		qDebug() << "Received URL not in the source list:" << url;
+		qDebug() << "Satellites: Received URL not in the source list:" << url;
 		return;
 	}
 	
 	// An error is a completed download, isn't it?
+	activeDownloads.removeAll(networkReply);
 	numberDownloadsComplete++;
 	if (progressBar)
 		progressBar->setValue(numberDownloadsComplete);
@@ -139,16 +147,37 @@ void SatellitesImportDialog::receiveDownload(QNetworkReply* networkReply)
 	
 	if (numberDownloadsComplete >= sourceUrls.count())
 	{
-		ui->pushButtonGetData->setVisible(false);
 		if (progressBar)
 		{
 			delete progressBar;
 			progressBar = 0;
 		}
-		populateList();
+		
+		if (sourceFiles.isEmpty())
+		{
+			reset();
+			displayMessage("No data could be downloaded. Try again later.");
+		}
+		else
+		{
+			ui->pushButtonAbort->setVisible(false);
+			displayMessage("Processing...");
+			populateList();
+		}
 	}
 	
 	networkReply->deleteLater();
+}
+
+void SatellitesImportDialog::abortDownloads()
+{
+	for (int i = 0; i < activeDownloads.count(); i++)
+	{
+		activeDownloads[i]->abort();
+		activeDownloads[i]->deleteLater();
+	}
+	reset();
+	displayMessage("Download aborted.");
 }
 
 void SatellitesImportDialog::acceptNewSatellites()
@@ -176,13 +205,18 @@ void SatellitesImportDialog::discardNewSatellites()
 
 void SatellitesImportDialog::reset()
 {
-	//Assuming that everything that needs to be stopped is stopped
+	// Assuming that everything that needs to be stopped is stopped
+	ui->stackedWidget->setCurrentIndex(0);
 	ui->pushButtonGetData->setVisible(true);
-	ui->groupBoxResults->setVisible(false);
+	ui->pushButtonAbort->setVisible(false);
+	ui->labelMessage->setVisible(false);
 	ui->listWidget->clear();
 	
 	newSatellites.clear();
 	sourceUrls.clear();
+	
+	qDeleteAll(activeDownloads);
+	activeDownloads.clear();
 	
 	qDeleteAll(sourceFiles);
 	sourceFiles.clear();
@@ -232,7 +266,7 @@ void SatellitesImportDialog::populateList()
 		
 		TleData tle = i.value();
 		QListWidgetItem* newItem = new QListWidgetItem(tle.name);
-		newItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
+		newItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
 		newItem->setCheckState(Qt::Unchecked);
 		newItem->setData(Qt::UserRole, tle.id);
 		QString text = QString("Catalog Number: %1").arg(tle.id);
@@ -241,5 +275,14 @@ void SatellitesImportDialog::populateList()
 	}
 	existingIDs.clear();
 	ui->listWidget->sortItems();
-	ui->groupBoxResults->setVisible(true);
+	ui->stackedWidget->setCurrentIndex(1);
+}
+
+void SatellitesImportDialog::displayMessage(const QString& message)
+{
+	if (message.isEmpty())
+		return;
+	
+	ui->labelMessage->setText(message);
+	ui->labelMessage->setVisible(true);
 }
