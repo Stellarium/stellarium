@@ -60,6 +60,7 @@ private slots:
 	void addSourceRow(void);
 	void restoreDefaults(void);
 	void saveSettings(void);
+	void addSatellites(const TleDataList& newSatellites);
 	void removeSatellites();
 	void setDisplayFlag(bool display);
 	void setOrbitFlag(bool display);
