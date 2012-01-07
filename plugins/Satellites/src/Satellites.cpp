@@ -701,6 +701,17 @@ SatelliteP Satellites::getByID(const QString& id)
 	return SatelliteP();
 }
 
+QStringList Satellites::getAllIDs()
+{
+	QStringList result;
+	foreach(const SatelliteP& sat, satellites)
+	{
+		if (sat->initialized)
+			result.append(sat->id);
+	}
+	return result;
+}
+
 void Satellites::add(const TleDataList& newSatellites)
 {
 	int numAdded = 0;
