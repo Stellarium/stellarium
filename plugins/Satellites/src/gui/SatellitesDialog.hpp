@@ -27,6 +27,7 @@
 
 class Ui_satellitesDialog;
 class QTimer;
+class SatellitesImportDialog;
 
 class SatellitesDialog : public StelDialog
 {
@@ -78,6 +79,8 @@ private:
 	void updateGuiFromSettings(void);
 	void populateGroupsList();
 	QTimer* updateTimer;
+	
+	SatellitesImportDialog* importWindow;
 };
 
 #endif // _SATELLITESDIALOG_HPP_
