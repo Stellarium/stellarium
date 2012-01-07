@@ -27,6 +27,7 @@
 #include "StelApp.hpp"
 #include "ui_satellitesDialog.h"
 #include "SatellitesDialog.hpp"
+#include "SatellitesImportDialog.hpp"
 #include "Satellites.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -37,7 +38,7 @@
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
-SatellitesDialog::SatellitesDialog() : updateTimer(NULL)
+SatellitesDialog::SatellitesDialog() : updateTimer(NULL), importWindow(0)
 {
 	ui = new Ui_satellitesDialog;
 }
@@ -50,6 +51,13 @@ SatellitesDialog::~SatellitesDialog()
 		delete updateTimer;
 		updateTimer = NULL;
 	}
+	
+	if (importWindow)
+	{
+		delete importWindow;
+		importWindow = 0;
+	}
+	
 	delete ui;
 }
 
@@ -119,6 +127,12 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->saveSatellitesButton, SIGNAL(clicked()), this, SLOT(saveSatellites()));
 	connect(ui->removeSatellitesButton, SIGNAL(clicked()), this, SLOT(removeSatellites()));
 	connectSatelliteGuiForm();
+	
+	importWindow = new SatellitesImportDialog();
+	connect(ui->addSatellitesButton, SIGNAL(clicked()),
+	        importWindow, SLOT(setVisible()));
+	connect(importWindow, SIGNAL(satellitesAccepted(TleDataList)),
+	        this, SLOT(addSatellites(TleDataList)));
 
 	// Sources tab
 	connect(ui->sourceList, SIGNAL(currentTextChanged(const QString&)), ui->sourceEdit, SLOT(setText(const QString&)));
