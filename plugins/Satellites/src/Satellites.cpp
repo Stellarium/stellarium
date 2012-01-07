@@ -736,10 +736,12 @@ void Satellites::add(const TleDataList& newSatellites)
 		satProperties.insert("hintColor", defaultHintColorMap);
 		//TODO: Decide if newly added satellites are visible by default --BM
 		satProperties.insert("visible", true);
+		satProperties.insert("orbitVisible", false);
 		
 		SatelliteP sat(new Satellite(tleSet.id, satProperties));
 		if (sat->initialized)
 		{
+			qDebug() << "Satellites: added" << tleSet.id << tleSet.name;
 			satellites.append(sat);
 			numAdded++;
 		}
