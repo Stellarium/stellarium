@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-06 20:48+0200\n"
-"PO-Revision-Date: 2012-01-03 17:53+0000\n"
-"Last-Translator: Karl Eivind Dahl <Unknown>\n"
+"POT-Creation-Date: 2012-01-07 22:55+0700\n"
+"PO-Revision-Date: 2012-01-07 14:12+0000\n"
+"Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-07 04:53+0000\n"
+"X-Launchpad-Export-Date: 2012-01-08 04:57+0000\n"
 "X-Generator: Launchpad (build 14640)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
@@ -493,7 +493,7 @@ msgid "Plugin Key Bindings"
 msgstr "Tastesnarveier for programtillegg"
 
 #: src/gui/HelpDialog.cpp:78
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:78
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:80
 msgid "Text User Interface"
 msgstr "Tekst brukergrensesnitt"
 
@@ -605,42 +605,42 @@ msgid "Display Options"
 msgstr "Visningsalternativer"
 
 #: src/gui/StelGui.cpp:99
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:265
 msgid "Constellation lines"
 msgstr "Stjernebildelinjer"
 
 #: src/gui/StelGui.cpp:100
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:273
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
 msgid "Constellation art"
 msgstr "Stjernebildekunst"
 
 #: src/gui/StelGui.cpp:101
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:268
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:270
 msgid "Constellation labels"
 msgstr "Stjernebildenavn"
 
 #: src/gui/StelGui.cpp:102
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:274
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:276
 msgid "Constellation boundaries"
 msgstr "Stjernebildegrenser"
 
 #: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1121
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:310
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Azimuthal grid"
 msgstr "Asimutnett"
 
 #: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1119
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:315
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Equatorial grid"
 msgstr "Ekvatorialt nett"
 
 #: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1120
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:320
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Equatorial J2000 grid"
 msgstr "Ekvatorialt J2000-nett"
 
 #: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1122
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:349
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:351
 msgid "Galactic grid"
 msgstr "Galaktisk nett"
 
@@ -649,27 +649,27 @@ msgid "Galactic plane"
 msgstr "Galaktisk plan"
 
 #: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1126
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:330
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Ecliptic line"
 msgstr "Ekliptikken"
 
 #: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1123
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:325
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equator line"
 msgstr "Ekvatorlinje"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1124
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:305
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:307
 msgid "Meridian line"
 msgstr "Meridianlinje"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1125
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:344
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:346
 msgid "Horizon line"
 msgstr "Horisontlinje"
 
 #: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1128
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:289
 msgid "Cardinal points"
 msgstr "Himmelretninger"
 
@@ -694,22 +694,22 @@ msgid "Nebulas background images"
 msgstr "Bakgrunnsbilder for stjernetåker"
 
 #: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:229
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:231
 msgid "Stars"
 msgstr "Stjerner"
 
 #: src/gui/StelGui.cpp:122
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:292
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:294
 msgid "Planet labels"
 msgstr "Planetnavn"
 
 #: src/gui/StelGui.cpp:123
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:296
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:298
 msgid "Planet orbits"
 msgstr "Planetbaner"
 
 #: src/gui/StelGui.cpp:124
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:300
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:302
 msgid "Planet trails"
 msgstr "Planetspor"
 
@@ -762,7 +762,7 @@ msgid "Script console window"
 msgstr "Skript-konsollvindu"
 
 #: src/gui/StelGui.cpp:142 src/ui_dateTimeDialogGui.h:294
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:156
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:158
 msgid "Date and Time"
 msgstr "Dato og klokkeslett"
 
@@ -1441,967 +1441,967 @@ msgstr "Garching"
 
 #: src/translations.h:180
 msgid "Andorra"
-msgstr ""
+msgstr "Andorra"
 
 #: src/translations.h:181
 msgid "United Arab Emirates"
-msgstr ""
+msgstr "Forente arabiske emirater"
 
 #: src/translations.h:182
 msgid "Afghanistan"
-msgstr ""
+msgstr "Afghanistan"
 
 #: src/translations.h:183
 msgid "Antigua and Barbuda"
-msgstr ""
+msgstr "Antigua og Barbuda"
 
 #: src/translations.h:184
 msgid "Anguilla"
-msgstr ""
+msgstr "Anguilla"
 
 #: src/translations.h:185
 msgid "Albania"
-msgstr ""
+msgstr "Albania"
 
 #: src/translations.h:186
 msgid "Armenia"
-msgstr ""
+msgstr "Armenia"
 
 #: src/translations.h:187
 msgid "Netherlands Antilles"
-msgstr ""
+msgstr "De nederlandske Antillene"
 
 #: src/translations.h:188
 msgid "Angola"
-msgstr ""
+msgstr "Angola"
 
 #: src/translations.h:189
 msgid "Antarctica"
-msgstr ""
+msgstr "Antarktis"
 
 #: src/translations.h:190
 msgid "Argentina"
-msgstr ""
+msgstr "Argentina"
 
 #: src/translations.h:191
 msgid "American Samoa"
-msgstr ""
+msgstr "Amerikansk Samoa"
 
 #: src/translations.h:192
 msgid "Austria"
-msgstr ""
+msgstr "Østerrike"
 
 #: src/translations.h:193
 msgid "Australia"
-msgstr ""
+msgstr "Australia"
 
 #: src/translations.h:194
 msgid "Aruba"
-msgstr ""
+msgstr "Aruba"
 
 #: src/translations.h:195
 msgid "Azerbaijan"
-msgstr ""
+msgstr "Aserbajdsjan"
 
 #: src/translations.h:196
 msgid "Bosnia and Herzegowina"
-msgstr ""
+msgstr "Bosnia-Hercegovina"
 
 #: src/translations.h:197
 msgid "Barbados"
-msgstr ""
+msgstr "Barbados"
 
 #: src/translations.h:198
 msgid "Bangladesh"
-msgstr ""
+msgstr "Bangladesh"
 
 #: src/translations.h:199
 msgid "Belgium"
-msgstr ""
+msgstr "Belgia"
 
 #: src/translations.h:200
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Burkina Faso"
 
 #: src/translations.h:201
 msgid "Bulgaria"
-msgstr ""
+msgstr "Bulgaria"
 
 #: src/translations.h:202
 msgid "Bahrain"
-msgstr ""
+msgstr "Bahrain"
 
 #: src/translations.h:203
 msgid "Burundi"
-msgstr ""
+msgstr "Burundi"
 
 #: src/translations.h:204
 msgid "Benin"
-msgstr ""
+msgstr "Benin"
 
 #: src/translations.h:205
 msgid "Bermuda"
-msgstr ""
+msgstr "Bermuda"
 
 #: src/translations.h:206
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "Brunei"
 
 #: src/translations.h:207
 msgid "Bolivia"
-msgstr ""
+msgstr "Bolivia"
 
 #: src/translations.h:208
 msgid "Brazil"
-msgstr ""
+msgstr "Brasil"
 
 #: src/translations.h:209
 msgid "Bahamas"
-msgstr ""
+msgstr "Bahamas"
 
 #: src/translations.h:210
 msgid "Bhutan"
-msgstr ""
+msgstr "Bhutan"
 
 #: src/translations.h:211
 msgid "Bouvet Island"
-msgstr ""
+msgstr "Bouvetøya"
 
 #: src/translations.h:212
 msgid "Botswana"
-msgstr ""
+msgstr "Botswana"
 
 #: src/translations.h:213
 msgid "Belarus"
-msgstr ""
+msgstr "Hviterussland"
 
 #: src/translations.h:214
 msgid "Belize"
-msgstr ""
+msgstr "Belize"
 
 #: src/translations.h:215
 msgid "Canada"
-msgstr ""
+msgstr "Canada"
 
 #: src/translations.h:216
 msgid "Cocos Islands"
-msgstr ""
+msgstr "Kokosøyene"
 
 #: src/translations.h:217
 msgid "Democratic Republic of the Congo"
-msgstr ""
+msgstr "Den demokratiske republikken Kongo"
 
 #: src/translations.h:218
 msgid "Central African Republic"
-msgstr ""
+msgstr "Den sentralafrikanske republikk"
 
 #: src/translations.h:219
 msgid "Republic of the Congo"
-msgstr ""
+msgstr "Republikken Kongo"
 
 #: src/translations.h:220
 msgid "Switzerland"
-msgstr ""
+msgstr "Sveits"
 
 #: src/translations.h:221
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "Elfenbenskysten"
 
 #: src/translations.h:222
 msgid "Cook Islands"
-msgstr ""
+msgstr "Cookøyene"
 
 #: src/translations.h:223
 msgid "Chile"
-msgstr ""
+msgstr "Chile"
 
 #: src/translations.h:224
 msgid "Cameroon"
-msgstr ""
+msgstr "Kamerun"
 
 #: src/translations.h:225
 msgid "China"
-msgstr ""
+msgstr "Kina"
 
 #: src/translations.h:226
 msgid "Colombia"
-msgstr ""
+msgstr "Colombia"
 
 #: src/translations.h:227
 msgid "Costa Rica"
-msgstr ""
+msgstr "Costa Rica"
 
 #: src/translations.h:228
 msgid "Serbia and Montenegro"
-msgstr ""
+msgstr "Serbia og Montenegro"
 
 #: src/translations.h:229
 msgid "Cuba"
-msgstr ""
+msgstr "Cuba"
 
 #: src/translations.h:230
 msgid "Cape Verde"
-msgstr ""
+msgstr "Kapp Verde"
 
 #: src/translations.h:231
 msgid "Christmas Island"
-msgstr ""
+msgstr "Christmasøya"
 
 #: src/translations.h:232
 msgid "Cyprus"
-msgstr ""
+msgstr "Kypros"
 
 #: src/translations.h:233
 msgid "Czech Republic"
-msgstr ""
+msgstr "Tsjekkia"
 
 #: src/translations.h:234
 msgid "Germany"
-msgstr ""
+msgstr "Tyskland"
 
 #: src/translations.h:235
 msgid "Djibouti"
-msgstr ""
+msgstr "Djibouti"
 
 #: src/translations.h:236
 msgid "Denmark"
-msgstr ""
+msgstr "Danmark"
 
 #: src/translations.h:237
 msgid "Dominica"
-msgstr ""
+msgstr "Dominica"
 
 #: src/translations.h:238
 msgid "Dominican Republic"
-msgstr ""
+msgstr "Den dominikanske republikk"
 
 #: src/translations.h:239
 msgid "Algeria"
-msgstr ""
+msgstr "Algerie"
 
 #: src/translations.h:240
 msgid "Ecuador"
-msgstr ""
+msgstr "Ecuador"
 
 #: src/translations.h:241
 msgid "Estonia"
-msgstr ""
+msgstr "Estland"
 
 #: src/translations.h:242
 msgid "Egypt"
-msgstr ""
+msgstr "Egypt"
 
 #: src/translations.h:243
 msgid "Western Sahara"
-msgstr ""
+msgstr "Vest-Sahara"
 
 #: src/translations.h:244
 msgid "Eritrea"
-msgstr ""
+msgstr "Eritrea"
 
 #: src/translations.h:245
 msgid "Spain"
-msgstr ""
+msgstr "Spania"
 
 #: src/translations.h:246
 msgid "Ethiopia"
-msgstr ""
+msgstr "Etiopia"
 
 #: src/translations.h:247
 msgid "Finland"
-msgstr ""
+msgstr "Finland"
 
 #: src/translations.h:248
 msgid "Fiji"
-msgstr ""
+msgstr "Fiji"
 
 #: src/translations.h:249
 msgid "Falkland Islands"
-msgstr ""
+msgstr "Falklandsøyene"
 
 #: src/translations.h:250
 msgid "Micronesia"
-msgstr ""
+msgstr "Mikronesia"
 
 #: src/translations.h:251
 msgid "Faroe Islands"
-msgstr ""
+msgstr "Færøyene"
 
 #: src/translations.h:252
 msgid "France"
-msgstr ""
+msgstr "Frankrike"
 
 #: src/translations.h:253
 msgid "Gabon"
-msgstr ""
+msgstr "Gabon"
 
 #: src/translations.h:254
 msgid "United Kingdom"
-msgstr ""
+msgstr "Storbritannia"
 
 #: src/translations.h:255
 msgid "Grenada"
-msgstr ""
+msgstr "Grenada"
 
 #: src/translations.h:256
 msgid "Georgia"
-msgstr ""
+msgstr "Georgia"
 
 #: src/translations.h:257
 msgid "French Guiana"
-msgstr ""
+msgstr "Fransk Guyana"
 
 #: src/translations.h:258
 msgid "Ghana"
-msgstr ""
+msgstr "Ghana"
 
 #: src/translations.h:259
 msgid "Gibraltar"
-msgstr ""
+msgstr "Gibraltar"
 
 #: src/translations.h:260
 msgid "Greenland"
-msgstr ""
+msgstr "Grønland"
 
 #: src/translations.h:261
 msgid "Gambia"
-msgstr ""
+msgstr "Gambia"
 
 #: src/translations.h:262
 msgid "Guinea"
-msgstr ""
+msgstr "Guinea"
 
 #: src/translations.h:263
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Guadeloupe"
 
 #: src/translations.h:264
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "Ekvatorial-Guinea"
 
 #: src/translations.h:265
 msgid "Greece"
-msgstr ""
+msgstr "Hellas"
 
 #: src/translations.h:266
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "Sør-Georgia og Sør-Sandwichøyene"
 
 #: src/translations.h:267
 msgid "Guatemala"
-msgstr ""
+msgstr "Guatemala"
 
 #: src/translations.h:268
 msgid "Guam"
-msgstr ""
+msgstr "Guam"
 
 #: src/translations.h:269
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Guinea-Bissau"
 
 #: src/translations.h:270
 msgid "Guyana"
-msgstr ""
+msgstr "Guyana"
 
 #: src/translations.h:271
 msgid "Hong Kong"
-msgstr ""
+msgstr "Hong Kong"
 
 #: src/translations.h:272
 msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgstr "Heard- og McDonaldøyene"
 
 #: src/translations.h:273
 msgid "Honduras"
-msgstr ""
+msgstr "Honduras"
 
 #: src/translations.h:274
 msgid "Croatia"
-msgstr ""
+msgstr "Kroatia"
 
 #: src/translations.h:275
 msgid "Haiti"
-msgstr ""
+msgstr "Haiti"
 
 #: src/translations.h:276
 msgid "Hungary"
-msgstr ""
+msgstr "Ungarn"
 
 #: src/translations.h:277
 msgid "Indonesia"
-msgstr ""
+msgstr "Indonesia"
 
 #: src/translations.h:278
 msgid "Ireland"
-msgstr ""
+msgstr "Irland"
 
 #: src/translations.h:279
 msgid "Israel"
-msgstr ""
+msgstr "Israel"
 
 #: src/translations.h:280
 msgid "India"
-msgstr ""
+msgstr "India"
 
 #: src/translations.h:281
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "Det britiske territoriet i Indiahavet"
 
 #: src/translations.h:282
 msgid "Iraq"
-msgstr ""
+msgstr "Irak"
 
 #: src/translations.h:283
 msgid "Iran"
-msgstr ""
+msgstr "Iran"
 
 #: src/translations.h:284
 msgid "Iceland"
-msgstr ""
+msgstr "Island"
 
 #: src/translations.h:285
 msgid "Italy"
-msgstr ""
+msgstr "Italia"
 
 #: src/translations.h:286
 msgid "Jamaica"
-msgstr ""
+msgstr "Jamaica"
 
 #: src/translations.h:287
 msgid "Jordan"
-msgstr ""
+msgstr "Jordan"
 
 #: src/translations.h:288
 msgid "Japan"
-msgstr ""
+msgstr "Japan"
 
 #: src/translations.h:289
 msgid "Kenya"
-msgstr ""
+msgstr "Kenya"
 
 #: src/translations.h:290
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "Kirgisistan"
 
 #: src/translations.h:291
 msgid "Cambodia"
-msgstr ""
+msgstr "Kambodsja"
 
 #: src/translations.h:292
 msgid "Kiribati"
-msgstr ""
+msgstr "Kiribati"
 
 #: src/translations.h:293
 msgid "Comoros"
-msgstr ""
+msgstr "Komorene"
 
 #: src/translations.h:294
 msgid "Saint Kitts and Nevis"
-msgstr ""
+msgstr "Saint Kitts og Nevis"
 
 #: src/translations.h:295
 msgid "Democratic People's Republic of Korea"
-msgstr ""
+msgstr "Nord-Korea"
 
 #: src/translations.h:296
 msgid "Republic of Korea"
-msgstr ""
+msgstr "Sør-Korea"
 
 #: src/translations.h:297
 msgid "Kuwait"
-msgstr ""
+msgstr "Kuwait"
 
 #: src/translations.h:298
 msgid "Cayman Islands"
-msgstr ""
+msgstr "Caymanøyene"
 
 #: src/translations.h:299
 msgid "Kazakhstan"
-msgstr ""
+msgstr "Kasakhstan"
 
 #: src/translations.h:300
 msgid "Lao"
-msgstr ""
+msgstr "Laos"
 
 #: src/translations.h:301
 msgid "Lebanon"
-msgstr ""
+msgstr "Libanon"
 
 #: src/translations.h:302
 msgid "Saint Lucia"
-msgstr ""
+msgstr "Saint Lucia"
 
 #: src/translations.h:303
 msgid "Liechtenstein"
-msgstr ""
+msgstr "Liechtenstein"
 
 #: src/translations.h:304
 msgid "Sri Lanka"
-msgstr ""
+msgstr "Sri Lanka"
 
 #: src/translations.h:305
 msgid "Liberia"
-msgstr ""
+msgstr "Liberia"
 
 #: src/translations.h:306
 msgid "Lesotho"
-msgstr ""
+msgstr "Lesotho"
 
 #: src/translations.h:307
 msgid "Lithuania"
-msgstr ""
+msgstr "Litauen"
 
 #: src/translations.h:308
 msgid "Luxembourg"
-msgstr ""
+msgstr "Luxembourg"
 
 #: src/translations.h:309
 msgid "Latvia"
-msgstr ""
+msgstr "Latvia"
 
 #: src/translations.h:310
 msgid "Libyan Arab Jamahiriya"
-msgstr ""
+msgstr "Libya"
 
 #: src/translations.h:311
 msgid "Morocco"
-msgstr ""
+msgstr "Marokko"
 
 #: src/translations.h:312
 msgid "Monaco"
-msgstr ""
+msgstr "Monaco"
 
 #: src/translations.h:313
 msgid "Moldova"
-msgstr ""
+msgstr "Moldova"
 
 #: src/translations.h:314
 msgid "Madagascar"
-msgstr ""
+msgstr "Madagaskar"
 
 #: src/translations.h:315
 msgid "Marshall Islands"
-msgstr ""
+msgstr "Marshalløyene"
 
 #: src/translations.h:316
 msgid "Macedonia"
-msgstr ""
+msgstr "Makedonia"
 
 #: src/translations.h:317
 msgid "Mali"
-msgstr ""
+msgstr "Mali"
 
 #: src/translations.h:318
 msgid "Myanmar"
-msgstr ""
+msgstr "Burma"
 
 #: src/translations.h:319
 msgid "Mongolia"
-msgstr ""
+msgstr "Mongolia"
 
 #: src/translations.h:320
 msgid "Macau"
-msgstr ""
+msgstr "Macao"
 
 #: src/translations.h:321
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "Nord-Marianene"
 
 #: src/translations.h:322
 msgid "Martinique"
-msgstr ""
+msgstr "Martinique"
 
 #: src/translations.h:323
 msgid "Mauritania"
-msgstr ""
+msgstr "Mauritania"
 
 #: src/translations.h:324
 msgid "Montserrat"
-msgstr ""
+msgstr "Montserrat"
 
 #: src/translations.h:325
 msgid "Malta"
-msgstr ""
+msgstr "Malta"
 
 #: src/translations.h:326
 msgid "Mauritius"
-msgstr ""
+msgstr "Mauritius"
 
 #: src/translations.h:327
 msgid "Maldives"
-msgstr ""
+msgstr "Maldivene"
 
 #: src/translations.h:328
 msgid "Malawi"
-msgstr ""
+msgstr "Malawi"
 
 #: src/translations.h:329
 msgid "Mexico"
-msgstr ""
+msgstr "Mexico"
 
 #: src/translations.h:330
 msgid "Malaysia"
-msgstr ""
+msgstr "Malaysia"
 
 #: src/translations.h:331
 msgid "Mozambique"
-msgstr ""
+msgstr "Mosambik"
 
 #: src/translations.h:332
 msgid "Namibia"
-msgstr ""
+msgstr "Namibia"
 
 #: src/translations.h:333
 msgid "New Caledonia"
-msgstr ""
+msgstr "Ny-Caledonia"
 
 #: src/translations.h:334
 msgid "Niger"
-msgstr ""
+msgstr "Niger"
 
 #: src/translations.h:335
 msgid "Norfolk Island"
-msgstr ""
+msgstr "Norfolkøya"
 
 #: src/translations.h:336
 msgid "Nigeria"
-msgstr ""
+msgstr "Nigeria"
 
 #: src/translations.h:337
 msgid "Nicaragua"
-msgstr ""
+msgstr "Nicaragua"
 
 #: src/translations.h:338
 msgid "Netherlands"
-msgstr ""
+msgstr "Nederland"
 
 #: src/translations.h:339
 msgid "Norway"
-msgstr ""
+msgstr "Norge"
 
 #: src/translations.h:340
 msgid "Nepal"
-msgstr ""
+msgstr "Nepal"
 
 #: src/translations.h:341
 msgid "Nauru"
-msgstr ""
+msgstr "Nauru"
 
 #: src/translations.h:342
 msgid "Niue"
-msgstr ""
+msgstr "Niue"
 
 #: src/translations.h:343
 msgid "New Zealand"
-msgstr ""
+msgstr "New Zealand"
 
 #: src/translations.h:344
 msgid "Oman"
-msgstr ""
+msgstr "Oman"
 
 #: src/translations.h:345
 msgid "Panama"
-msgstr ""
+msgstr "Panama"
 
 #: src/translations.h:346
 msgid "Peru"
-msgstr ""
+msgstr "Peru"
 
 #: src/translations.h:347
 msgid "French Polynesia"
-msgstr ""
+msgstr "Fransk Polynesia"
 
 #: src/translations.h:348
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "Papua Ny-Guinea"
 
 #: src/translations.h:349
 msgid "Philippines"
-msgstr ""
+msgstr "Filippinene"
 
 #: src/translations.h:350
 msgid "Pakistan"
-msgstr ""
+msgstr "Pakistan"
 
 #: src/translations.h:351
 msgid "Poland"
-msgstr ""
+msgstr "Polen"
 
 #: src/translations.h:352
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "Saint-Pierre og Miquelon"
 
 #: src/translations.h:353
 msgid "Pitcairn"
-msgstr ""
+msgstr "Pitcairnøyene"
 
 #: src/translations.h:354
 msgid "Puerto Rico"
-msgstr ""
+msgstr "Puerto Rico"
 
 #: src/translations.h:355
 msgid "Palestinian Territories"
-msgstr ""
+msgstr "De palestinske territoriene"
 
 #: src/translations.h:356
 msgid "Portugal"
-msgstr ""
+msgstr "Portugal"
 
 #: src/translations.h:357
 msgid "Palau"
-msgstr ""
+msgstr "Palau"
 
 #: src/translations.h:358
 msgid "Paraguay"
-msgstr ""
+msgstr "Paraguay"
 
 #: src/translations.h:359
 msgid "Qatar"
-msgstr ""
+msgstr "Qatar"
 
 #: src/translations.h:360
 msgid "Réunion"
-msgstr ""
+msgstr "Réunion"
 
 #: src/translations.h:361
 msgid "Romania"
-msgstr ""
+msgstr "Romania"
 
 #: src/translations.h:362
 msgid "Serbia"
-msgstr ""
+msgstr "Serbia"
 
 #: src/translations.h:363
 msgid "Russian Federation"
-msgstr ""
+msgstr "Russland"
 
 #: src/translations.h:364
 msgid "Rwanda"
-msgstr ""
+msgstr "Rwanda"
 
 #: src/translations.h:365
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "Saudi-Arabia"
 
 #: src/translations.h:366
 msgid "Solomon Islands"
-msgstr ""
+msgstr "Salomonøyene"
 
 #: src/translations.h:367
 msgid "Seychelles"
-msgstr ""
+msgstr "Seychellene"
 
 #: src/translations.h:368
 msgid "Sudan"
-msgstr ""
+msgstr "Sudan"
 
 #: src/translations.h:369
 msgid "Sweden"
-msgstr ""
+msgstr "Sverige"
 
 #: src/translations.h:370
 msgid "Singapore"
-msgstr ""
+msgstr "Singapore"
 
 #: src/translations.h:371
 msgid "Saint Helena"
-msgstr ""
+msgstr "St. Helena"
 
 #: src/translations.h:372
 msgid "Slovenia"
-msgstr ""
+msgstr "Slovenia"
 
 #: src/translations.h:373
 msgid "Svalbard and Jan Mayen"
-msgstr ""
+msgstr "Svalbard og Jan Mayen"
 
 #: src/translations.h:374
 msgid "Slovakia"
-msgstr ""
+msgstr "Slovakia"
 
 #: src/translations.h:375
 msgid "Sierra Leone"
-msgstr ""
+msgstr "Sierra Leone"
 
 #: src/translations.h:376
 msgid "San Marino"
-msgstr ""
+msgstr "San Marino"
 
 #: src/translations.h:377
 msgid "Senegal"
-msgstr ""
+msgstr "Senegal"
 
 #: src/translations.h:378
 msgid "Somalia"
-msgstr ""
+msgstr "Somalia"
 
 #: src/translations.h:379
 msgid "Suriname"
-msgstr ""
+msgstr "Surinam"
 
 #: src/translations.h:380
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "São Tomé og Príncipe"
 
 #: src/translations.h:381
 msgid "El Salvador"
-msgstr ""
+msgstr "El Salvador"
 
 #: src/translations.h:382
 msgid "Syrian Arab Republic"
-msgstr ""
+msgstr "Syria"
 
 #: src/translations.h:383
 msgid "Swaziland"
-msgstr ""
+msgstr "Swaziland"
 
 #: src/translations.h:384
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "Turks- og Caicosøyene"
 
 #: src/translations.h:385
 msgid "Chad"
-msgstr ""
+msgstr "Tsjad"
 
 #: src/translations.h:386
 msgid "French Southern Territories"
-msgstr ""
+msgstr "De franske sørterritorier"
 
 #: src/translations.h:387
 msgid "Togo"
-msgstr ""
+msgstr "Togo"
 
 #: src/translations.h:388
 msgid "Thailand"
-msgstr ""
+msgstr "Thailand"
 
 #: src/translations.h:389
 msgid "Tajikistan"
-msgstr ""
+msgstr "Tadsjikistan"
 
 #: src/translations.h:390
 msgid "Tokelau"
-msgstr ""
+msgstr "Tokelau"
 
 #: src/translations.h:391
 msgid "East Timor"
-msgstr ""
+msgstr "Øst-Timor"
 
 #: src/translations.h:392
 msgid "Turkmenistan"
-msgstr ""
+msgstr "Turkmenistan"
 
 #: src/translations.h:393
 msgid "Tunisia"
-msgstr ""
+msgstr "Tunisia"
 
 #: src/translations.h:394
 msgid "Tonga"
-msgstr ""
+msgstr "Tonga"
 
 #: src/translations.h:395
 msgid "Turkey"
-msgstr ""
+msgstr "Tyrkia"
 
 #: src/translations.h:396
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "Trinidad og Tobago"
 
 #: src/translations.h:397
 msgid "Tuvalu"
-msgstr ""
+msgstr "Tuvalu"
 
 #: src/translations.h:398
 msgid "Taiwan"
-msgstr ""
+msgstr "Taiwan"
 
 #: src/translations.h:399
 msgid "Tanzania"
-msgstr ""
+msgstr "Tanzania"
 
 #: src/translations.h:400
 msgid "Ukraine"
-msgstr ""
+msgstr "Ukraina"
 
 #: src/translations.h:401
 msgid "Uganda"
-msgstr ""
+msgstr "Uganda"
 
 #: src/translations.h:402
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "USAs ytre småøyer"
 
 #: src/translations.h:403
 msgid "United States"
-msgstr ""
+msgstr "USA"
 
 #: src/translations.h:404
 msgid "Uruguay"
-msgstr ""
+msgstr "Uruguay"
 
 #: src/translations.h:405
 msgid "Uzbekistan"
-msgstr ""
+msgstr "Usbekistan"
 
 #: src/translations.h:406
 msgid "Vatican City State"
-msgstr ""
+msgstr "Vatikanstaten"
 
 #: src/translations.h:407
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "Saint Vincent og Grenadinene"
 
 #: src/translations.h:408
 msgid "Venezuela"
-msgstr ""
+msgstr "Venezuela"
 
 #: src/translations.h:409
 msgid "British Virgin Islands"
-msgstr ""
+msgstr "De britiske jomfruøyene"
 
 #: src/translations.h:410
 msgid "United States Virgin Islands"
-msgstr ""
+msgstr "De amerikanske Jomfruøyene"
 
 #: src/translations.h:411
 msgid "Viet Nam"
-msgstr ""
+msgstr "Vietnam"
 
 #: src/translations.h:412
 msgid "Vanuatu"
-msgstr ""
+msgstr "Vanuatu"
 
 #: src/translations.h:413
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "Wallis- og Futunaøyene"
 
 #: src/translations.h:414
 msgid "Samoa"
-msgstr ""
+msgstr "Samoa"
 
 #: src/translations.h:415
 msgid "Yemen"
-msgstr ""
+msgstr "Jemen"
 
 #: src/translations.h:416
 msgid "Mayotte"
-msgstr ""
+msgstr "Mayotte"
 
 #: src/translations.h:417
 msgid "Yugoslavia"
-msgstr ""
+msgstr "Jugoslavia"
 
 #: src/translations.h:418
 msgid "South Africa"
-msgstr ""
+msgstr "Sør-Afrika"
 
 #: src/translations.h:419
 msgid "Zambia"
-msgstr ""
+msgstr "Zambia"
 
 #: src/translations.h:420
 msgid "Zimbabwe"
-msgstr ""
+msgstr "Zimbabwe"
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -2417,7 +2417,7 @@ msgid "Help"
 msgstr "Hjelp"
 
 #: src/ui_helpDialogGui.h:267 plugins/Oculars/src/ui_ocularDialog.h:903
-#: plugins/Satellites/src/ui_satellitesDialog.h:690
+#: plugins/Satellites/src/ui_satellitesDialog.h:692
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
@@ -2433,7 +2433,7 @@ msgid "Refresh"
 msgstr "Gjenoppfrisk"
 
 #: src/ui_locationDialogGui.h:387
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:129
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:131
 msgid "Location"
 msgstr "Sted"
 
@@ -2456,7 +2456,7 @@ msgid "Add to list"
 msgstr "Legg til på liste"
 
 #: src/ui_locationDialogGui.h:395
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:130
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:132
 msgid "Latitude:"
 msgstr "Breddegrad:"
 
@@ -2469,12 +2469,12 @@ msgstr ""
 "12m 8s"
 
 #: src/ui_locationDialogGui.h:399
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:133
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:135
 msgid "Longitude:"
 msgstr "Lengdegrad:"
 
 #: src/ui_locationDialogGui.h:403
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:136
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:138
 msgid "Altitude:"
 msgstr "Høyde:"
 
@@ -2631,27 +2631,27 @@ msgid "Markings"
 msgstr "Markeringer"
 
 #: src/ui_viewDialog.h:1080
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:390
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Landscape"
 msgstr "Landskap"
 
 #: src/ui_viewDialog.h:1082
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:212
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:214
 msgid "Starlore"
 msgstr "Stjernemyter"
 
 #: src/ui_viewDialog.h:1086
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:242
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:244
 msgid "Absolute scale:"
 msgstr "Absolutt skala:"
 
 #: src/ui_viewDialog.h:1087
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:236
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
 msgid "Relative scale:"
 msgstr "Relativ skala:"
 
 #: src/ui_viewDialog.h:1088
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:248
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:250
 msgid "Twinkle:"
 msgstr "Blinke:"
 
@@ -2692,7 +2692,7 @@ msgid "Show atmosphere"
 msgstr "Vis atmosfære"
 
 #: src/ui_viewDialog.h:1101
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:385
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:387
 msgid "Light pollution:"
 msgstr "Lysforurensning:"
 
@@ -2745,7 +2745,7 @@ msgid "Celestial Sphere"
 msgstr "Himmelhvelving"
 
 #: src/ui_viewDialog.h:1127
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:354
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:356
 msgid "Galactic plane line"
 msgstr "Linje for det galaktiske plan"
 
@@ -2771,7 +2771,7 @@ msgstr "Vis kunst"
 
 #. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1134
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:280
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:282
 msgid "Art brightness:"
 msgstr "Lysstyrke på kunst:"
 
@@ -2913,7 +2913,7 @@ msgid "Enable mouse navigation"
 msgstr "Aktiver musenavigering"
 
 #: src/ui_configurationDialog.h:793
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:177
 msgid "Startup date and time"
 msgstr "Dato og klokkeslett ved oppstart"
 
@@ -3095,7 +3095,7 @@ msgid "Tools"
 msgstr "Verktøy"
 
 #: src/ui_configurationDialog.h:878
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:435
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:437
 msgid "Scripts"
 msgstr "Skript"
 
@@ -3495,7 +3495,7 @@ msgid "On-screen control panel"
 msgstr "Skjermbasert kontrollpanel"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:873
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:209
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:211
 msgid "General"
 msgstr "Generelt"
 
@@ -3514,7 +3514,7 @@ msgstr "Legg til"
 #: plugins/Oculars/src/ui_ocularDialog.h:877
 #: plugins/Oculars/src/ui_ocularDialog.h:886
 #: plugins/Oculars/src/ui_ocularDialog.h:897
-#: plugins/Satellites/src/ui_satellitesDialog.h:660
+#: plugins/Satellites/src/ui_satellitesDialog.h:663
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr "Navn:"
@@ -3585,7 +3585,7 @@ msgid "Vertical flip"
 msgstr "Vertikal speilvending"
 
 #: plugins/Satellites/src/Satellites.cpp:65
-#: plugins/Satellites/src/ui_satellitesDialog.h:677
+#: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "Satellites"
 msgstr "Satellitter"
 
@@ -3868,7 +3868,7 @@ msgid "Next update: %1 hours"
 msgstr "Neste oppdatering: %1 timer"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:314
-#: plugins/Satellites/src/ui_satellitesDialog.h:624
+#: plugins/Satellites/src/ui_satellitesDialog.h:627
 msgid "Update now"
 msgstr "Oppdater nå"
 
@@ -3905,123 +3905,123 @@ msgstr "[alle]"
 msgid "Select TLE Update File"
 msgstr "Velg TLE-oppdateringsfil"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:617
-#: plugins/Satellites/src/ui_satellitesDialog.h:618
+#: plugins/Satellites/src/ui_satellitesDialog.h:620
+#: plugins/Satellites/src/ui_satellitesDialog.h:621
 msgid "Satellites Configuration"
 msgstr "Satellittinnstillinger"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:620
+#: plugins/Satellites/src/ui_satellitesDialog.h:623
 msgid "Update TLE lists from Internet sources"
 msgstr "Oppdater TLE-lister fra internettkilder"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:621
+#: plugins/Satellites/src/ui_satellitesDialog.h:624
 msgid "Update from Internet sources"
 msgstr "Oppdater fra internettkilder"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:622
+#: plugins/Satellites/src/ui_satellitesDialog.h:625
 msgid "Last update:"
 msgstr "Siste oppdatering:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:623
+#: plugins/Satellites/src/ui_satellitesDialog.h:626
 msgid "Update frequency (hours):"
 msgstr "Oppdateringsfrekvens (timer):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:625
+#: plugins/Satellites/src/ui_satellitesDialog.h:628
 msgid "Labels"
 msgstr "Påskrifter"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:626
+#: plugins/Satellites/src/ui_satellitesDialog.h:629
 msgid "Label font size (pixels):"
 msgstr "Skriftstørrelse på påskrift (piksler):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:627
+#: plugins/Satellites/src/ui_satellitesDialog.h:630
 msgid "Orbit lines"
 msgstr "Banelinjer"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:629
-#: plugins/Satellites/src/ui_satellitesDialog.h:633
+#: plugins/Satellites/src/ui_satellitesDialog.h:632
+#: plugins/Satellites/src/ui_satellitesDialog.h:636
 msgid "Number of segments used to draw the line"
 msgstr "Antall segmenter brukt for å tegne linjen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:631
-msgid "# segments:"
+#: plugins/Satellites/src/ui_satellitesDialog.h:634
+msgid "Number of  segments:"
 msgstr "Antall segmenter:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:636
-#: plugins/Satellites/src/ui_satellitesDialog.h:640
-msgid "Number of segments used to draw each end of the line"
-msgstr "Antall segmenter brukt for å tegne hver ende av linjen"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:638
-msgid "Fade length:"
-msgstr "Uttoningslengde:"
-
+#: plugins/Satellites/src/ui_satellitesDialog.h:639
 #: plugins/Satellites/src/ui_satellitesDialog.h:643
-#: plugins/Satellites/src/ui_satellitesDialog.h:647
 msgid "Duration of a single segment in seconds"
 msgstr "Varigheten av et enkelt segment i sekunder"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:645
-msgid "Length (s):"
-msgstr "Lengde (s):"
+#: plugins/Satellites/src/ui_satellitesDialog.h:641
+msgid "Segment length (s):"
+msgstr "Segmentlengde (s):"
 
+#: plugins/Satellites/src/ui_satellitesDialog.h:646
 #: plugins/Satellites/src/ui_satellitesDialog.h:649
+msgid "Number of segments used to draw each end of the line"
+msgstr "Antall segmenter brukt for å tegne hver ende av linjen"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:651
+msgid "Fade length:"
+msgstr "Uttoningslengde:"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:652
 msgid "Restore default settings"
 msgstr "Gjenopprett standardinnstillinger"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:650
+#: plugins/Satellites/src/ui_satellitesDialog.h:653
 msgid "Save settings as default"
 msgstr "Lagre innstillinger som standard"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:651
+#: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:653
+#: plugins/Satellites/src/ui_satellitesDialog.h:656
 msgid "Display the selected satellite(s)"
 msgstr "Vis valgte satellitt(er)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:655
+#: plugins/Satellites/src/ui_satellitesDialog.h:658
 msgid "Displayed"
 msgstr "Vist"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:657
+#: plugins/Satellites/src/ui_satellitesDialog.h:660
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr "Vis banelinje(r) for valgte satellitt(er)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:659
+#: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Orbit"
 msgstr "Bane"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:662
+#: plugins/Satellites/src/ui_satellitesDialog.h:664
 msgid "Catalog number:"
 msgstr "Katalognummer:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:663
+#: plugins/Satellites/src/ui_satellitesDialog.h:665
 msgid "Description:"
 msgstr "Beskrivelse:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:664
+#: plugins/Satellites/src/ui_satellitesDialog.h:666
 msgid "Groups:"
 msgstr "Grupper:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:666
+#: plugins/Satellites/src/ui_satellitesDialog.h:668
 msgid "Comma separated list of groups"
 msgstr "Kommaseparert liste av grupper"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:668
+#: plugins/Satellites/src/ui_satellitesDialog.h:670
 msgid "TLE data:"
 msgstr "TLE-data:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:670
+#: plugins/Satellites/src/ui_satellitesDialog.h:672
 msgid "NORAD two line element orbit data"
 msgstr "NORAD - tolinjers elementbanedata"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:674
+#: plugins/Satellites/src/ui_satellitesDialog.h:676
 msgid "Save changes"
 msgstr "Lagre endringer"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:679
+#: plugins/Satellites/src/ui_satellitesDialog.h:681
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
@@ -4029,15 +4029,15 @@ msgstr ""
 "Angi eller redigere nettadressen til den valgte kilden. Endringene lagres "
 "ved å trykke Enter."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:682
+#: plugins/Satellites/src/ui_satellitesDialog.h:684
 msgid "Add new source"
 msgstr "Legg til ny kilde"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:686
+#: plugins/Satellites/src/ui_satellitesDialog.h:688
 msgid "Remove selected source"
 msgstr "Fjern valgte kilde"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:689
+#: plugins/Satellites/src/ui_satellitesDialog.h:691
 msgid "Sources"
 msgstr "Kilder"
 
@@ -4673,7 +4673,7 @@ msgstr ""
 "Disse innstillingene styrer hvordan klokkeslett og dato vises i bunnlinjen."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:196
 msgid "Time display format"
 msgstr "Tidsvisningsformat"
 
@@ -4691,7 +4691,7 @@ msgid "24-hour format"
 msgstr "24-timers format"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:183
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:185
 msgid "Date display format"
 msgstr "Datovisningsformat"
 
@@ -4707,7 +4707,7 @@ msgstr "dd-mm-åååå"
 msgid "mm-dd-yyyy"
 msgstr "mm-dd-åååå"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:81
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:83
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
@@ -4715,139 +4715,139 @@ msgstr ""
 "Programtillegg-implementering av 0.9.x-seriens brukergrensesnitt i "
 "tekstmodus (TUI), brukt i planetarium-systemer"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:144
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Solar System body"
 msgstr "Solsystemlegeme"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:158
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:160
 msgid "Current date/time"
 msgstr "Gjeldende dato/klokkeslett"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:163
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:165
 msgid "Set time zone"
 msgstr "Still inn tidssone"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:164
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:166
 msgid "Day keys"
 msgstr "Dagtaster"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:165
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:167
 msgid "Startup date/time preset"
 msgstr "Forhåndsinnstilt dato/klokkeslett for oppstart"
 
 #. TRANSLATORS: The current system time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:172
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:174
 msgid "system"
 msgstr "system"
 
 #. TRANSLATORS: A pre-set time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:174
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:176
 msgid "preset"
 msgstr "forhåndsinnstilt"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:184
 msgid "mmddyyyy"
 msgstr "mmddåååå"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:184
 msgid "ddmmyyyy"
 msgstr "ddmmåååå"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:184
 msgid "yyyymmdd"
 msgstr "ååååmmdd"
 
 #. TRANSLATORS: 12-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:193
 msgid "12h"
 msgstr "12t"
 
 #. TRANSLATORS: 24-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:193
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:195
 msgid "24h"
 msgstr "24t"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:218
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:220
 msgid "Language"
 msgstr "Språk"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:232
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Show stars"
 msgstr "Vis stjerner"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:260
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:262
 msgid "Colors"
 msgstr "Farger"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:336
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:338
 msgid "Nebula names"
 msgstr "Stjernetåkenavn"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:340
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Nebula hints"
 msgstr "Stjernetåke-hint"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:383
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:385
 msgid "Effects"
 msgstr "Effekter"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:397
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Manual zoom"
 msgstr "Manuell zoom"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:402
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:404
 msgid "Magnitude scaling multiplier"
 msgstr "Magnitude - skaleringsmultiplikator"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:404
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:406
 msgid "Milky Way intensity:"
 msgstr "Melkevei-intensitet:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:410
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:412
 msgid "Nebula label frequency:"
 msgstr "Påskriftfrekvens for tåker:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:411
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:413
 msgid "Zoom duration:"
 msgstr "Zoom-varighet:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:417
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:419
 msgid "Cursor timeout:"
 msgstr "Tidsavbrudd for markør:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:418
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:420
 msgid "Setting landscape sets location"
 msgstr "Still inn plassering for landskapssett"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:438
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Run local script"
 msgstr "Kjør lokalt skript"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:444
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:446
 msgid "Stop running script"
 msgstr "Stopp kjørende skript"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:449
 msgid "CD/DVD script"
 msgstr "CD/DVD-skript"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:454
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:456
 msgid "Administration"
 msgstr "Administrering"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:458
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 msgid "Load default configuration"
 msgstr "Last standardinnstillinger"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:459
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 msgid "Save current configuration"
 msgstr "Lagre gjeldende innstillinger"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:462
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:464
 msgid "Shut down"
 msgstr "Slå av"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:480
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "[no TUI node]"
 msgstr "[ingen TUI node]"
 
@@ -4863,6 +4863,10 @@ msgstr "Av"
 #, qt-format
 msgid "error, unknown color part \"%1\""
 msgstr "feil, ukjent farge del \"%1\""
+
+#: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
+msgid " [RETURN to activate]"
+msgstr " [Retur-tast for å aktivere]"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"

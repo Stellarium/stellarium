@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-06 20:48+0200\n"
+"POT-Creation-Date: 2012-01-07 22:55+0700\n"
 "PO-Revision-Date: 2011-12-19 00:57+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-07 04:54+0000\n"
+"X-Launchpad-Export-Date: 2012-01-08 04:57+0000\n"
 "X-Generator: Launchpad (build 14640)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -496,7 +496,7 @@ msgid "Plugin Key Bindings"
 msgstr "Powiązane skróty klawiaturowe wtyczki"
 
 #: src/gui/HelpDialog.cpp:78
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:78
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:80
 msgid "Text User Interface"
 msgstr "Tekstowy interfejs użytkownika"
 
@@ -613,42 +613,42 @@ msgid "Display Options"
 msgstr "Ustawienia wyświetlania"
 
 #: src/gui/StelGui.cpp:99
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:265
 msgid "Constellation lines"
 msgstr "Linie gwiazdozbiorów"
 
 #: src/gui/StelGui.cpp:100
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:273
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
 msgid "Constellation art"
 msgstr "Rysunki gwiazdozbiorów"
 
 #: src/gui/StelGui.cpp:101
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:268
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:270
 msgid "Constellation labels"
 msgstr "Nazwy gwiazdozbiorów"
 
 #: src/gui/StelGui.cpp:102
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:274
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:276
 msgid "Constellation boundaries"
 msgstr "Granice gwiazdozbiorów"
 
 #: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1121
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:310
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Azimuthal grid"
 msgstr "Siatka azymutalna"
 
 #: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1119
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:315
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Equatorial grid"
 msgstr "Siatka równikowa"
 
 #: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1120
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:320
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Equatorial J2000 grid"
 msgstr "Siatka równikowa J2000"
 
 #: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1122
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:349
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:351
 msgid "Galactic grid"
 msgstr "Siatka współrzędnych galaktycznych"
 
@@ -657,27 +657,27 @@ msgid "Galactic plane"
 msgstr "Płaszczyzna Galaktyki"
 
 #: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1126
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:330
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Ecliptic line"
 msgstr "Ekliptyka"
 
 #: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1123
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:325
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equator line"
 msgstr "Równik niebieski"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1124
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:305
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:307
 msgid "Meridian line"
 msgstr "Południk niebieski"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1125
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:344
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:346
 msgid "Horizon line"
 msgstr "Linia horyzontu"
 
 #: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1128
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:289
 msgid "Cardinal points"
 msgstr "Punkty kardynalne"
 
@@ -702,22 +702,22 @@ msgid "Nebulas background images"
 msgstr "Zdjęcia mgławic"
 
 #: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:229
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:231
 msgid "Stars"
 msgstr "Gwiazdy"
 
 #: src/gui/StelGui.cpp:122
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:292
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:294
 msgid "Planet labels"
 msgstr "Etykiety planet"
 
 #: src/gui/StelGui.cpp:123
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:296
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:298
 msgid "Planet orbits"
 msgstr "Orbity planet"
 
 #: src/gui/StelGui.cpp:124
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:300
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:302
 msgid "Planet trails"
 msgstr "Ślady planet"
 
@@ -770,7 +770,7 @@ msgid "Script console window"
 msgstr "Okno konsoli skryptu"
 
 #: src/gui/StelGui.cpp:142 src/ui_dateTimeDialogGui.h:294
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:156
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:158
 msgid "Date and Time"
 msgstr "Data i godzina"
 
@@ -2425,7 +2425,7 @@ msgid "Help"
 msgstr "Pomoc"
 
 #: src/ui_helpDialogGui.h:267 plugins/Oculars/src/ui_ocularDialog.h:903
-#: plugins/Satellites/src/ui_satellitesDialog.h:690
+#: plugins/Satellites/src/ui_satellitesDialog.h:692
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
@@ -2441,7 +2441,7 @@ msgid "Refresh"
 msgstr "Odśwież"
 
 #: src/ui_locationDialogGui.h:387
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:129
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:131
 msgid "Location"
 msgstr "Lokalizacja"
 
@@ -2464,7 +2464,7 @@ msgid "Add to list"
 msgstr "Dodaj do listy"
 
 #: src/ui_locationDialogGui.h:395
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:130
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:132
 msgid "Latitude:"
 msgstr "Szerokość geograficzna:"
 
@@ -2477,12 +2477,12 @@ msgstr ""
 "dms (stopnie, minuty, sekundy), np. +1d 12m 8s"
 
 #: src/ui_locationDialogGui.h:399
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:133
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:135
 msgid "Longitude:"
 msgstr "Długość geograficzna:"
 
 #: src/ui_locationDialogGui.h:403
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:136
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:138
 msgid "Altitude:"
 msgstr "Wysokość:"
 
@@ -2639,27 +2639,27 @@ msgid "Markings"
 msgstr "Znaczniki"
 
 #: src/ui_viewDialog.h:1080
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:390
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Landscape"
 msgstr "Krajobraz"
 
 #: src/ui_viewDialog.h:1082
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:212
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:214
 msgid "Starlore"
 msgstr "Historie gwiazdozbiorów"
 
 #: src/ui_viewDialog.h:1086
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:242
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:244
 msgid "Absolute scale:"
 msgstr "Skala bezwzględna:"
 
 #: src/ui_viewDialog.h:1087
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:236
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
 msgid "Relative scale:"
 msgstr "Skala względna:"
 
 #: src/ui_viewDialog.h:1088
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:248
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:250
 msgid "Twinkle:"
 msgstr "Migotanie:"
 
@@ -2700,7 +2700,7 @@ msgid "Show atmosphere"
 msgstr "Pokaż atmosferę"
 
 #: src/ui_viewDialog.h:1101
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:385
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:387
 msgid "Light pollution:"
 msgstr "Zaświetlenie nieba:"
 
@@ -2753,7 +2753,7 @@ msgid "Celestial Sphere"
 msgstr "Sfera niebieska"
 
 #: src/ui_viewDialog.h:1127
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:354
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:356
 msgid "Galactic plane line"
 msgstr ""
 
@@ -2779,7 +2779,7 @@ msgstr "Pokaż rysunki"
 
 #. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1134
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:280
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:282
 msgid "Art brightness:"
 msgstr "Jasność rysunków:"
 
@@ -2923,7 +2923,7 @@ msgid "Enable mouse navigation"
 msgstr "Zezwól na nawigację myszką"
 
 #: src/ui_configurationDialog.h:793
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:177
 msgid "Startup date and time"
 msgstr "Początkowy czas i data"
 
@@ -3106,7 +3106,7 @@ msgid "Tools"
 msgstr "Narzędzia"
 
 #: src/ui_configurationDialog.h:878
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:435
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:437
 msgid "Scripts"
 msgstr "Skrypty"
 
@@ -3510,7 +3510,7 @@ msgid "On-screen control panel"
 msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:873
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:209
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:211
 msgid "General"
 msgstr "Ogólne"
 
@@ -3529,7 +3529,7 @@ msgstr "Dodaj"
 #: plugins/Oculars/src/ui_ocularDialog.h:877
 #: plugins/Oculars/src/ui_ocularDialog.h:886
 #: plugins/Oculars/src/ui_ocularDialog.h:897
-#: plugins/Satellites/src/ui_satellitesDialog.h:660
+#: plugins/Satellites/src/ui_satellitesDialog.h:663
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr "Nazwa:"
@@ -3600,7 +3600,7 @@ msgid "Vertical flip"
 msgstr "Odwrócenie w pionie"
 
 #: plugins/Satellites/src/Satellites.cpp:65
-#: plugins/Satellites/src/ui_satellitesDialog.h:677
+#: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "Satellites"
 msgstr "Satelity"
 
@@ -3888,7 +3888,7 @@ msgid "Next update: %1 hours"
 msgstr "Następna aktualizacja: %1 godz."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:314
-#: plugins/Satellites/src/ui_satellitesDialog.h:624
+#: plugins/Satellites/src/ui_satellitesDialog.h:627
 msgid "Update now"
 msgstr "Zaktualizuj teraz"
 
@@ -3925,123 +3925,123 @@ msgstr "[wszystkie]"
 msgid "Select TLE Update File"
 msgstr "Wybierz plik aktualizacji TLE"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:617
-#: plugins/Satellites/src/ui_satellitesDialog.h:618
+#: plugins/Satellites/src/ui_satellitesDialog.h:620
+#: plugins/Satellites/src/ui_satellitesDialog.h:621
 msgid "Satellites Configuration"
 msgstr "Konfiguracja satelitów"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:620
+#: plugins/Satellites/src/ui_satellitesDialog.h:623
 msgid "Update TLE lists from Internet sources"
 msgstr "Aktualizuj listy TLE przez Internet"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:621
+#: plugins/Satellites/src/ui_satellitesDialog.h:624
 msgid "Update from Internet sources"
 msgstr "Aktualizuj przez Internet"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:622
+#: plugins/Satellites/src/ui_satellitesDialog.h:625
 msgid "Last update:"
 msgstr "Ostatnia aktualizacja:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:623
+#: plugins/Satellites/src/ui_satellitesDialog.h:626
 msgid "Update frequency (hours):"
 msgstr "Częstotliwość aktualizacji (godz.):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:625
+#: plugins/Satellites/src/ui_satellitesDialog.h:628
 msgid "Labels"
 msgstr "Podpisy"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:626
+#: plugins/Satellites/src/ui_satellitesDialog.h:629
 msgid "Label font size (pixels):"
 msgstr "Rozmiar czcionki etykiet (w pikselach):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:627
+#: plugins/Satellites/src/ui_satellitesDialog.h:630
 msgid "Orbit lines"
 msgstr "Orbity"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:629
-#: plugins/Satellites/src/ui_satellitesDialog.h:633
+#: plugins/Satellites/src/ui_satellitesDialog.h:632
+#: plugins/Satellites/src/ui_satellitesDialog.h:636
 msgid "Number of segments used to draw the line"
 msgstr "Liczba odcinków używanych do narysowania linii"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:631
-msgid "# segments:"
-msgstr "liczba odcinków:"
+#: plugins/Satellites/src/ui_satellitesDialog.h:634
+msgid "Number of  segments:"
+msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:636
-#: plugins/Satellites/src/ui_satellitesDialog.h:640
-msgid "Number of segments used to draw each end of the line"
-msgstr "Liczba odcinków używanych do rysowania końców linii"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:638
-msgid "Fade length:"
-msgstr "Długość zaniku:"
-
+#: plugins/Satellites/src/ui_satellitesDialog.h:639
 #: plugins/Satellites/src/ui_satellitesDialog.h:643
-#: plugins/Satellites/src/ui_satellitesDialog.h:647
 msgid "Duration of a single segment in seconds"
 msgstr "Czas trwania pojedynczego odcinka (w sekundach)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:645
-msgid "Length (s):"
-msgstr "Długość (s):"
+#: plugins/Satellites/src/ui_satellitesDialog.h:641
+msgid "Segment length (s):"
+msgstr ""
 
+#: plugins/Satellites/src/ui_satellitesDialog.h:646
 #: plugins/Satellites/src/ui_satellitesDialog.h:649
+msgid "Number of segments used to draw each end of the line"
+msgstr "Liczba odcinków używanych do rysowania końców linii"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:651
+msgid "Fade length:"
+msgstr "Długość zaniku:"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:652
 msgid "Restore default settings"
 msgstr "Przywróć ustawienia domyślne"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:650
+#: plugins/Satellites/src/ui_satellitesDialog.h:653
 msgid "Save settings as default"
 msgstr "Zapisz ustawienia jako domyślne"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:651
+#: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:653
+#: plugins/Satellites/src/ui_satellitesDialog.h:656
 msgid "Display the selected satellite(s)"
 msgstr "Wyświetl wybrane satelity"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:655
+#: plugins/Satellites/src/ui_satellitesDialog.h:658
 msgid "Displayed"
 msgstr "Wyświetlane"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:657
+#: plugins/Satellites/src/ui_satellitesDialog.h:660
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr "Wyświetlaj orbity wybranych satelitów"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:659
+#: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Orbit"
 msgstr "Orbita"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:662
+#: plugins/Satellites/src/ui_satellitesDialog.h:664
 msgid "Catalog number:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:663
+#: plugins/Satellites/src/ui_satellitesDialog.h:665
 msgid "Description:"
 msgstr "Opis:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:664
+#: plugins/Satellites/src/ui_satellitesDialog.h:666
 msgid "Groups:"
 msgstr "Grupy:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:666
+#: plugins/Satellites/src/ui_satellitesDialog.h:668
 msgid "Comma separated list of groups"
 msgstr "Lista grup, oddzielonych przecinkami"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:668
+#: plugins/Satellites/src/ui_satellitesDialog.h:670
 msgid "TLE data:"
 msgstr "Dane TLE:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:670
+#: plugins/Satellites/src/ui_satellitesDialog.h:672
 msgid "NORAD two line element orbit data"
 msgstr "Dwuwierszowe dane elementów orbitalnych NORAD"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:674
+#: plugins/Satellites/src/ui_satellitesDialog.h:676
 msgid "Save changes"
 msgstr "Zapisz zmiany"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:679
+#: plugins/Satellites/src/ui_satellitesDialog.h:681
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
@@ -4049,15 +4049,15 @@ msgstr ""
 "Wprowadź lub zmień adres URL wybranego źródła. Naciśnięcie Enter zapisuje "
 "zmiany."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:682
+#: plugins/Satellites/src/ui_satellitesDialog.h:684
 msgid "Add new source"
 msgstr "Dodaj nowe źródło"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:686
+#: plugins/Satellites/src/ui_satellitesDialog.h:688
 msgid "Remove selected source"
 msgstr "Usuń wybrane źródło"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:689
+#: plugins/Satellites/src/ui_satellitesDialog.h:691
 msgid "Sources"
 msgstr "Źródła"
 
@@ -4698,7 +4698,7 @@ msgstr ""
 "Te ustawienia wpływają na sposób wyświetlania czasu i daty na dolnym pasku."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:196
 msgid "Time display format"
 msgstr "Format wyświetlania czasu"
 
@@ -4716,7 +4716,7 @@ msgid "24-hour format"
 msgstr "Format 24-godzinny"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:183
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:185
 msgid "Date display format"
 msgstr "Format wyświetlania daty"
 
@@ -4732,7 +4732,7 @@ msgstr "dd-mm-rrrr"
 msgid "mm-dd-yyyy"
 msgstr "mm-dd-rrrr"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:81
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:83
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
@@ -4740,139 +4740,139 @@ msgstr ""
 "Tekstowy interfejs użytkownika (taki jak w wersjach 0.9.x) w postaci "
 "wtyczki; używany w systemach planetariów."
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:144
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Solar System body"
 msgstr "Ciało Układu Słonecznego"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:158
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:160
 msgid "Current date/time"
 msgstr "Bieżąca data/czas"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:163
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:165
 msgid "Set time zone"
 msgstr "Ustaw strefę czasową"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:164
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:166
 msgid "Day keys"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:165
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:167
 msgid "Startup date/time preset"
 msgstr "Ustawienie początkowego czasu/daty"
 
 #. TRANSLATORS: The current system time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:172
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:174
 msgid "system"
 msgstr "systemowy"
 
 #. TRANSLATORS: A pre-set time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:174
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:176
 msgid "preset"
 msgstr "konkretny"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:184
 msgid "mmddyyyy"
 msgstr "mmddrrrr"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:184
 msgid "ddmmyyyy"
 msgstr "ddmmrrrr"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:184
 msgid "yyyymmdd"
 msgstr "rrrrmmdd"
 
 #. TRANSLATORS: 12-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:193
 msgid "12h"
 msgstr ""
 
 #. TRANSLATORS: 24-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:193
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:195
 msgid "24h"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:218
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:220
 msgid "Language"
 msgstr "Język"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:232
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Show stars"
 msgstr "Pokaż gwiazdy"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:260
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:262
 msgid "Colors"
 msgstr "Kolory"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:336
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:338
 msgid "Nebula names"
 msgstr "Nazwy mgławic"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:340
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Nebula hints"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:383
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:385
 msgid "Effects"
 msgstr "Efekty"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:397
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Manual zoom"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:402
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:404
 msgid "Magnitude scaling multiplier"
 msgstr "Mnożnik wielkości gwiazdowej"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:404
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:406
 msgid "Milky Way intensity:"
 msgstr "Intensywność Drogi Mlecznej:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:410
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:412
 msgid "Nebula label frequency:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:411
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:413
 msgid "Zoom duration:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:417
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:419
 msgid "Cursor timeout:"
 msgstr "Limit czasu kursora:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:418
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:420
 msgid "Setting landscape sets location"
 msgstr "Ustawiaj lokalizację po wybraniu krajobrazu"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:438
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Run local script"
 msgstr "Uruchom skrypt lokalny"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:444
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:446
 msgid "Stop running script"
 msgstr "Zatrzymaj skrypt lokalny"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:449
 msgid "CD/DVD script"
 msgstr "Skrypt na CD/DVD"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:454
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:456
 msgid "Administration"
 msgstr "Administracja"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:458
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 msgid "Load default configuration"
 msgstr "Załaduj konfigurację domyślną"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:459
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 msgid "Save current configuration"
 msgstr "Zapisz bieżącą konfigurację"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:462
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:464
 msgid "Shut down"
 msgstr "Wyłącz"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:480
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "[no TUI node]"
 msgstr "[brak węzła TUI]"
 
@@ -4887,6 +4887,10 @@ msgstr "Wyłączone"
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format
 msgid "error, unknown color part \"%1\""
+msgstr ""
+
+#: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
+msgid " [RETURN to activate]"
 msgstr ""
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
