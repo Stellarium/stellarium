@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-06 20:48+0200\n"
-"PO-Revision-Date: 2012-01-06 22:57+0000\n"
-"Last-Translator: yurchor <Unknown>\n"
+"POT-Creation-Date: 2012-01-07 22:55+0700\n"
+"PO-Revision-Date: 2012-01-07 14:38+0000\n"
+"Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-07 04:56+0000\n"
+"X-Launchpad-Export-Date: 2012-01-08 04:59+0000\n"
 "X-Generator: Launchpad (build 14640)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -494,7 +494,7 @@ msgid "Plugin Key Bindings"
 msgstr "Прив’язка клавіш у додатках"
 
 #: src/gui/HelpDialog.cpp:78
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:78
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:80
 msgid "Text User Interface"
 msgstr "Текстовий інтерфейс користувача"
 
@@ -608,42 +608,42 @@ msgid "Display Options"
 msgstr "Параметри показу"
 
 #: src/gui/StelGui.cpp:99
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:263
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:265
 msgid "Constellation lines"
 msgstr "Лінії сузір’їв"
 
 #: src/gui/StelGui.cpp:100
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:273
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:275
 msgid "Constellation art"
 msgstr "Зображення сузір’їв"
 
 #: src/gui/StelGui.cpp:101
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:268
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:270
 msgid "Constellation labels"
 msgstr "Мітки сузір’їв"
 
 #: src/gui/StelGui.cpp:102
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:274
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:276
 msgid "Constellation boundaries"
 msgstr "Межі сузір’їв"
 
 #: src/gui/StelGui.cpp:104 src/ui_viewDialog.h:1121
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:310
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Azimuthal grid"
 msgstr "Азимутальна сітка"
 
 #: src/gui/StelGui.cpp:105 src/ui_viewDialog.h:1119
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:315
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Equatorial grid"
 msgstr "Екваторіальна сітка"
 
 #: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1120
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:320
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Equatorial J2000 grid"
 msgstr "Екваторіальна сітка J2000"
 
 #: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1122
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:349
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:351
 msgid "Galactic grid"
 msgstr "Галактична сітка"
 
@@ -652,27 +652,27 @@ msgid "Galactic plane"
 msgstr "Галактична площина"
 
 #: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1126
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:330
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Ecliptic line"
 msgstr "Лінія екліптики"
 
 #: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1123
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:325
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Equator line"
 msgstr "Лінія екватора"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1124
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:305
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:307
 msgid "Meridian line"
 msgstr "Лінія меридіана"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1125
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:344
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:346
 msgid "Horizon line"
 msgstr "Лінія горизонту"
 
 #: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1128
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:287
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:289
 msgid "Cardinal points"
 msgstr "Частини світу"
 
@@ -697,22 +697,22 @@ msgid "Nebulas background images"
 msgstr "Зображення туманностей"
 
 #: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:229
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:231
 msgid "Stars"
 msgstr "Зірки"
 
 #: src/gui/StelGui.cpp:122
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:292
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:294
 msgid "Planet labels"
 msgstr "Мітки планет"
 
 #: src/gui/StelGui.cpp:123
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:296
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:298
 msgid "Planet orbits"
 msgstr "Орбіти планет"
 
 #: src/gui/StelGui.cpp:124
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:300
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:302
 msgid "Planet trails"
 msgstr "Траєкторії планет"
 
@@ -765,7 +765,7 @@ msgid "Script console window"
 msgstr "Вікно консолі скриптів"
 
 #: src/gui/StelGui.cpp:142 src/ui_dateTimeDialogGui.h:294
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:156
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:158
 msgid "Date and Time"
 msgstr "Дата і час"
 
@@ -2415,7 +2415,7 @@ msgid "Help"
 msgstr "Довідка"
 
 #: src/ui_helpDialogGui.h:267 plugins/Oculars/src/ui_ocularDialog.h:903
-#: plugins/Satellites/src/ui_satellitesDialog.h:690
+#: plugins/Satellites/src/ui_satellitesDialog.h:692
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
@@ -2431,7 +2431,7 @@ msgid "Refresh"
 msgstr "Оновити"
 
 #: src/ui_locationDialogGui.h:387
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:129
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:131
 msgid "Location"
 msgstr "Розташування"
 
@@ -2454,7 +2454,7 @@ msgid "Add to list"
 msgstr "Додати до списку"
 
 #: src/ui_locationDialogGui.h:395
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:130
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:132
 msgid "Latitude:"
 msgstr "Широта:"
 
@@ -2467,12 +2467,12 @@ msgstr ""
 "формат,наприклад: +1d 12m 8s"
 
 #: src/ui_locationDialogGui.h:399
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:133
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:135
 msgid "Longitude:"
 msgstr "Довгота:"
 
 #: src/ui_locationDialogGui.h:403
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:136
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:138
 msgid "Altitude:"
 msgstr "Висота:"
 
@@ -2629,27 +2629,27 @@ msgid "Markings"
 msgstr "Розмітка"
 
 #: src/ui_viewDialog.h:1080
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:390
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Landscape"
 msgstr "Ландшафт"
 
 #: src/ui_viewDialog.h:1082
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:212
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:214
 msgid "Starlore"
 msgstr "Зіркова статистика"
 
 #: src/ui_viewDialog.h:1086
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:242
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:244
 msgid "Absolute scale:"
 msgstr "Абсолютна шкала:"
 
 #: src/ui_viewDialog.h:1087
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:236
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:238
 msgid "Relative scale:"
 msgstr "Відносна шкала:"
 
 #: src/ui_viewDialog.h:1088
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:248
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:250
 msgid "Twinkle:"
 msgstr "Мерехтіння:"
 
@@ -2690,7 +2690,7 @@ msgid "Show atmosphere"
 msgstr "Показати атмосферу"
 
 #: src/ui_viewDialog.h:1101
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:385
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:387
 msgid "Light pollution:"
 msgstr "Забруднення світлом:"
 
@@ -2743,7 +2743,7 @@ msgid "Celestial Sphere"
 msgstr "Небесна сфера"
 
 #: src/ui_viewDialog.h:1127
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:354
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:356
 msgid "Galactic plane line"
 msgstr "Лінія площини Галактики"
 
@@ -2769,7 +2769,7 @@ msgstr "Показувати малюнки"
 
 #. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1134
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:280
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:282
 msgid "Art brightness:"
 msgstr "Яскравість малюнків:"
 
@@ -2911,7 +2911,7 @@ msgid "Enable mouse navigation"
 msgstr "Увімкнути навігацію мишею"
 
 #: src/ui_configurationDialog.h:793
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:177
 msgid "Startup date and time"
 msgstr "Дата і час при запуску"
 
@@ -3095,7 +3095,7 @@ msgid "Tools"
 msgstr "Інструменти"
 
 #: src/ui_configurationDialog.h:878
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:435
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:437
 msgid "Scripts"
 msgstr "Скрипти"
 
@@ -3500,7 +3500,7 @@ msgid "On-screen control panel"
 msgstr "Екранна панель керування"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:873
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:209
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:211
 msgid "General"
 msgstr "Загальне"
 
@@ -3519,7 +3519,7 @@ msgstr "Додати"
 #: plugins/Oculars/src/ui_ocularDialog.h:877
 #: plugins/Oculars/src/ui_ocularDialog.h:886
 #: plugins/Oculars/src/ui_ocularDialog.h:897
-#: plugins/Satellites/src/ui_satellitesDialog.h:660
+#: plugins/Satellites/src/ui_satellitesDialog.h:663
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr "Назва:"
@@ -3590,7 +3590,7 @@ msgid "Vertical flip"
 msgstr "Віддзеркалити вертикально"
 
 #: plugins/Satellites/src/Satellites.cpp:65
-#: plugins/Satellites/src/ui_satellitesDialog.h:677
+#: plugins/Satellites/src/ui_satellitesDialog.h:679
 msgid "Satellites"
 msgstr "Супутники"
 
@@ -3876,7 +3876,7 @@ msgid "Next update: %1 hours"
 msgstr "Наступне оновлення за %1 год."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:314
-#: plugins/Satellites/src/ui_satellitesDialog.h:624
+#: plugins/Satellites/src/ui_satellitesDialog.h:627
 msgid "Update now"
 msgstr "Оновити зараз"
 
@@ -3913,123 +3913,123 @@ msgstr "[всі]"
 msgid "Select TLE Update File"
 msgstr "Вибір файла оновлення TLE"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:617
-#: plugins/Satellites/src/ui_satellitesDialog.h:618
+#: plugins/Satellites/src/ui_satellitesDialog.h:620
+#: plugins/Satellites/src/ui_satellitesDialog.h:621
 msgid "Satellites Configuration"
 msgstr "Налаштування додатка «Супутники»"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:620
+#: plugins/Satellites/src/ui_satellitesDialog.h:623
 msgid "Update TLE lists from Internet sources"
 msgstr "Оновити списки TLE з джерел у інтернеті"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:621
+#: plugins/Satellites/src/ui_satellitesDialog.h:624
 msgid "Update from Internet sources"
 msgstr "Оновити з джерел у інтернеті"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:622
+#: plugins/Satellites/src/ui_satellitesDialog.h:625
 msgid "Last update:"
 msgstr "Попереднє оновлення:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:623
+#: plugins/Satellites/src/ui_satellitesDialog.h:626
 msgid "Update frequency (hours):"
 msgstr "Частота оновлення (у годинах):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:625
+#: plugins/Satellites/src/ui_satellitesDialog.h:628
 msgid "Labels"
 msgstr "Надписи"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:626
+#: plugins/Satellites/src/ui_satellitesDialog.h:629
 msgid "Label font size (pixels):"
 msgstr "Розмір шрифту надписів (у пікселях):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:627
+#: plugins/Satellites/src/ui_satellitesDialog.h:630
 msgid "Orbit lines"
 msgstr "Лінії орбіт"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:629
-#: plugins/Satellites/src/ui_satellitesDialog.h:633
+#: plugins/Satellites/src/ui_satellitesDialog.h:632
+#: plugins/Satellites/src/ui_satellitesDialog.h:636
 msgid "Number of segments used to draw the line"
 msgstr "Кількість сегменті для малювання лінії орбіти"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:631
-msgid "# segments:"
-msgstr "К-ть сегментів:"
+#: plugins/Satellites/src/ui_satellitesDialog.h:634
+msgid "Number of  segments:"
+msgstr "Кількість сегментів:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:636
-#: plugins/Satellites/src/ui_satellitesDialog.h:640
-msgid "Number of segments used to draw each end of the line"
-msgstr "Кількість сегментів, потрібних для малювання кожного з кінців лінії"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:638
-msgid "Fade length:"
-msgstr "Довжина:"
-
+#: plugins/Satellites/src/ui_satellitesDialog.h:639
 #: plugins/Satellites/src/ui_satellitesDialog.h:643
-#: plugins/Satellites/src/ui_satellitesDialog.h:647
 msgid "Duration of a single segment in seconds"
 msgstr "Тривалість видимості окремого сегмента у секундах"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:645
-msgid "Length (s):"
-msgstr "Тривалість (у с):"
+#: plugins/Satellites/src/ui_satellitesDialog.h:641
+msgid "Segment length (s):"
+msgstr "Довжина сегментів:"
 
+#: plugins/Satellites/src/ui_satellitesDialog.h:646
 #: plugins/Satellites/src/ui_satellitesDialog.h:649
+msgid "Number of segments used to draw each end of the line"
+msgstr "Кількість сегментів, потрібних для малювання кожного з кінців лінії"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:651
+msgid "Fade length:"
+msgstr "Довжина:"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:652
 msgid "Restore default settings"
 msgstr "Відновити параметри"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:650
+#: plugins/Satellites/src/ui_satellitesDialog.h:653
 msgid "Save settings as default"
 msgstr "Зберегти параметри як типові"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:651
+#: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Settings"
 msgstr "Параметри"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:653
+#: plugins/Satellites/src/ui_satellitesDialog.h:656
 msgid "Display the selected satellite(s)"
 msgstr "Показувати позначені штучні супутники"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:655
+#: plugins/Satellites/src/ui_satellitesDialog.h:658
 msgid "Displayed"
 msgstr "Показано"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:657
+#: plugins/Satellites/src/ui_satellitesDialog.h:660
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr "Показувати лінії орбіт для позначених супутників"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:659
+#: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Orbit"
 msgstr "Орбіта"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:662
+#: plugins/Satellites/src/ui_satellitesDialog.h:664
 msgid "Catalog number:"
 msgstr "Номер у каталозі:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:663
+#: plugins/Satellites/src/ui_satellitesDialog.h:665
 msgid "Description:"
 msgstr "Опис:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:664
+#: plugins/Satellites/src/ui_satellitesDialog.h:666
 msgid "Groups:"
 msgstr "Групи:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:666
+#: plugins/Satellites/src/ui_satellitesDialog.h:668
 msgid "Comma separated list of groups"
 msgstr "Список груп, відокремлених комами"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:668
+#: plugins/Satellites/src/ui_satellitesDialog.h:670
 msgid "TLE data:"
 msgstr "Дані TLE:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:670
+#: plugins/Satellites/src/ui_satellitesDialog.h:672
 msgid "NORAD two line element orbit data"
 msgstr "Дворядкові дані параметрів орбіт NORAD"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:674
+#: plugins/Satellites/src/ui_satellitesDialog.h:676
 msgid "Save changes"
 msgstr "Зберегти зміни"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:679
+#: plugins/Satellites/src/ui_satellitesDialog.h:681
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
@@ -4037,15 +4037,15 @@ msgstr ""
 "Вкажіть або змініть адресу позначеного джерела. Зміни буде застосовано після "
 "натискання клавіші Enter."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:682
+#: plugins/Satellites/src/ui_satellitesDialog.h:684
 msgid "Add new source"
 msgstr "Додати нове джерело"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:686
+#: plugins/Satellites/src/ui_satellitesDialog.h:688
 msgid "Remove selected source"
 msgstr "Вилучити позначене джерело"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:689
+#: plugins/Satellites/src/ui_satellitesDialog.h:691
 msgid "Sources"
 msgstr "Джерела"
 
@@ -4685,7 +4685,7 @@ msgid ""
 msgstr "Ці параметри керують способом показу дати і часу на нижній панелі."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:194
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:196
 msgid "Time display format"
 msgstr "Формат показу часу"
 
@@ -4703,7 +4703,7 @@ msgid "24-hour format"
 msgstr "24-годинний формат"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:183
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:185
 msgid "Date display format"
 msgstr "Формат показу дати"
 
@@ -4719,7 +4719,7 @@ msgstr "дд-мм-рррр"
 msgid "mm-dd-yyyy"
 msgstr "мм-дд-рррр"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:81
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:83
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
@@ -4727,139 +4727,139 @@ msgstr ""
 "Додаток, що реалізує передбачений у версіях 0.9.x текстовий інтерфейс "
 "взаємодії з користувачем, який використовується у системах планетаріїв"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:144
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Solar System body"
 msgstr "Об'єкт сонячної системи"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:158
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:160
 msgid "Current date/time"
 msgstr "Поточна дата і час"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:163
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:165
 msgid "Set time zone"
 msgstr "Встановити часовий пояс"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:164
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:166
 msgid "Day keys"
 msgstr "Клавіші днів"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:165
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:167
 msgid "Startup date/time preset"
 msgstr "Початкова дата і час"
 
 #. TRANSLATORS: The current system time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:172
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:174
 msgid "system"
 msgstr "системна"
 
 #. TRANSLATORS: A pre-set time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:174
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:176
 msgid "preset"
 msgstr "шаблон"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:184
 msgid "mmddyyyy"
 msgstr "ммддрррр"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:184
 msgid "ddmmyyyy"
 msgstr "ддммрррр"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:184
 msgid "yyyymmdd"
 msgstr "ррррммдд"
 
 #. TRANSLATORS: 12-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:193
 msgid "12h"
 msgstr "12-годинний"
 
 #. TRANSLATORS: 24-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:193
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:195
 msgid "24h"
 msgstr "24-годинний"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:218
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:220
 msgid "Language"
 msgstr "Мова"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:232
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Show stars"
 msgstr "Показувати зірки"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:260
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:262
 msgid "Colors"
 msgstr "Кольори"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:336
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:338
 msgid "Nebula names"
 msgstr "Назви туманностей"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:340
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Nebula hints"
 msgstr "Мітки туманностей"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:383
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:385
 msgid "Effects"
 msgstr "Ефекти"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:397
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Manual zoom"
 msgstr "Ручний масштаб"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:402
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:404
 msgid "Magnitude scaling multiplier"
 msgstr "Множник масштабування величин"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:404
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:406
 msgid "Milky Way intensity:"
 msgstr "Інтенсивність Молочного шляху:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:410
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:412
 msgid "Nebula label frequency:"
 msgstr "Частота міток туманностей:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:411
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:413
 msgid "Zoom duration:"
 msgstr "Тривалість зміни масштабу:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:417
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:419
 msgid "Cursor timeout:"
 msgstr "Затримка вказівника:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:418
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:420
 msgid "Setting landscape sets location"
 msgstr "Розташування встановлюється за ландшафтом"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:438
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Run local script"
 msgstr "Виконати локальний скрипт"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:444
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:446
 msgid "Stop running script"
 msgstr "Зупинити виконання локального скрипту"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:449
 msgid "CD/DVD script"
 msgstr "Скрипт на CD/DVD"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:454
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:456
 msgid "Administration"
 msgstr "Адміністрування"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:458
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 msgid "Load default configuration"
 msgstr "Завантажити типові налаштування"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:459
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 msgid "Save current configuration"
 msgstr "Зберегти поточні налаштування"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:462
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:464
 msgid "Shut down"
 msgstr "Завершити роботу"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:480
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "[no TUI node]"
 msgstr "[не вузол TUI]"
 
@@ -4875,6 +4875,10 @@ msgstr "Вимкн."
 #, qt-format
 msgid "error, unknown color part \"%1\""
 msgstr "помилка, невідома частина кольору «%1»"
+
+#: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
+msgid " [RETURN to activate]"
+msgstr " [Enter, щоб задіяти]"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
