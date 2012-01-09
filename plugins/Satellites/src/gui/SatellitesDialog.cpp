@@ -463,9 +463,10 @@ void SatellitesDialog::saveSettings(void)
 void SatellitesDialog::addSatellites(const TleDataList& newSatellites)
 {
 	GETSTELMODULE(Satellites)->add(newSatellites);
-	reloadSatellitesList();
+	saveSatellites();
 	
 	// Select the newly added satellites in the list
+	reloadSatellitesList();
 	ui->satellitesList->clearSelection();
 	QSet<QString> newIds;
 	foreach (const TleData& sat, newSatellites)
@@ -490,6 +491,7 @@ void SatellitesDialog::removeSatellites()
 	{
 		GETSTELMODULE(Satellites)->remove(idList);
 		reloadSatellitesList();
+		saveSatellites();
 	}
 }
 
