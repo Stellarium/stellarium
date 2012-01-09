@@ -28,6 +28,8 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QNetworkReply>
+#include <QSortFilterProxyModel>
+#include <QStandardItemModel>
 #include <QTemporaryFile>
 
 SatellitesImportDialog::SatellitesImportDialog() :
@@ -35,6 +37,7 @@ SatellitesImportDialog::SatellitesImportDialog() :
     progressBar(0)
 {
 	ui = new Ui_satellitesImportDialog;
+	newSatellitesModel = new QStandardItemModel(this);
 }
 
 SatellitesImportDialog::~SatellitesImportDialog()
@@ -46,6 +49,13 @@ SatellitesImportDialog::~SatellitesImportDialog()
 	{
 		delete progressBar;
 		progressBar = 0;
+	}
+	
+	if (newSatellitesModel)
+	{
+		newSatellitesModel->clear();
+		delete newSatellitesModel;
+		newSatellitesModel = 0;
 	}
 }
 
@@ -79,6 +89,13 @@ void SatellitesImportDialog::createDialogContent()
 	        this, SLOT(acceptNewSatellites()));
 	connect(ui->pushButtonDiscard, SIGNAL(clicked()),
 	        this, SLOT(discardNewSatellites()));
+	
+	QSortFilterProxyModel * filterProxyModel = new QSortFilterProxyModel(this);
+	filterProxyModel->setSourceModel(newSatellitesModel);
+	filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+	ui->listView->setModel(filterProxyModel);
+	connect(ui->lineEditSearch, SIGNAL(textChanged(const QString&)),
+	        filterProxyModel, SLOT(setFilterFixedString(const QString&)));
 	
 	reset();
 }
@@ -228,9 +245,9 @@ void SatellitesImportDialog::abortDownloads()
 void SatellitesImportDialog::acceptNewSatellites()
 {
 	TleDataList satellitesToAdd;
-	for (int i = 0; i < ui->listWidget->count(); i++)
+	for (int row = 0; row < newSatellitesModel->rowCount(); row++)
 	{
-		QListWidgetItem* item = ui->listWidget->item(i);
+		QStandardItem* item = newSatellitesModel->item(row);
 		if (item->checkState() == Qt::Checked)
 		{
 			QString id = item->data(Qt::UserRole).toString();
@@ -258,7 +275,8 @@ void SatellitesImportDialog::reset()
 	ui->labelMessage->setVisible(false);
 	ui->labelMessage->clear();
 	ui->groupBoxWorking->setTitle("Get data");
-	ui->listWidget->clear();
+	newSatellitesModel->clear();
+	ui->lineEditSearch->clear();
 	
 	newSatellites.clear();
 	sourceUrls.clear();
@@ -280,7 +298,7 @@ void SatellitesImportDialog::reset()
 void SatellitesImportDialog::populateList()
 {
 	newSatellites.clear();
-	ui->listWidget->clear();
+	newSatellitesModel->clear();
 	Satellites* satMgr = GETSTELMODULE(Satellites);
 	
 	// Load ALL two-line element sets...
@@ -318,17 +336,17 @@ void SatellitesImportDialog::populateList()
 			continue;
 		
 		TleData tle = i.value();
-		QListWidgetItem* newItem = new QListWidgetItem(tle.name);
+		QStandardItem* newItem = new QStandardItem(tle.name);
 		newItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
 		newItem->setCheckState(Qt::Unchecked);
-		newItem->setData(Qt::UserRole, tle.id);
+		newItem->setData(tle.id, Qt::UserRole);
 		QString text = QString("Catalog Number: %1").arg(tle.id);
 		newItem->setToolTip(text);
-		ui->listWidget->addItem(newItem);
+		newSatellitesModel->appendRow(newItem);
 	}
 	existingIDs.clear();
-	ui->listWidget->sortItems();
-	ui->listWidget->scrollToTop();
+	newSatellitesModel->sort(0);
+	ui->listView->scrollToTop();
 	ui->stackedWidget->setCurrentIndex(1);
 }
 
