@@ -462,9 +462,20 @@ void SatellitesDialog::saveSettings(void)
 
 void SatellitesDialog::addSatellites(const TleDataList& newSatellites)
 {
-	//TODO: Enable the things that were disabled
 	GETSTELMODULE(Satellites)->add(newSatellites);
 	reloadSatellitesList();
+	
+	// Select the newly added satellites in the list
+	ui->satellitesList->clearSelection();
+	QSet<QString> newIds;
+	foreach (const TleData& sat, newSatellites)
+		newIds.insert(sat.id);
+	for (int i = 0; i < ui->satellitesList->count(); i++)
+	{
+		QString id = ui->satellitesList->item(i)->data(Qt::UserRole).toString();
+		if (newIds.remove(id))
+			ui->satellitesList->item(i)->setSelected(true);
+	}
 }
 
 void SatellitesDialog::removeSatellites()
