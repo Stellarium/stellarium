@@ -149,9 +149,11 @@ public:
 	QStringList getAllIDs();
 	
 	//! Add the given satellites.
+	//! The changes are not saved to file.
 	void add(const TleDataList& newSatellites);
 	
 	//! Remove the selected satellites.
+	//! The changes are not saved to file.
 	void remove(const QStringList& idList);
 
 	//! get whether or not the plugin will try to update TLE data from the internet
