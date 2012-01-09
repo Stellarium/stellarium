@@ -24,6 +24,7 @@
 #include "Satellites.hpp"
 
 class Ui_satellitesImportDialog;
+class QStandardItemModel;
 class QTemporaryFile;
 class QNetworkReply;
 
@@ -65,6 +66,8 @@ private:
 	QStringList sourceUrls;
 	QList<QFile*> sourceFiles;
 	QProgressBar* progressBar;
+	
+	QStandardItemModel* newSatellitesModel;
 };
 
 #endif // IMPORTSATELLITESWINDOW_HPP
