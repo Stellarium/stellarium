@@ -99,4 +99,4 @@ private:
 	LinearFader labelsFader;
 };
 
-#endif // _SUPERNOVA_HPP_
+#endif // _QUASAR_HPP_
