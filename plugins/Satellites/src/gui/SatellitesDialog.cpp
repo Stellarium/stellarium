@@ -466,17 +466,32 @@ void SatellitesDialog::addSatellites(const TleDataList& newSatellites)
 	saveSatellites();
 	
 	// Select the newly added satellites in the list
+	// Depending on the currently displayed satellite group, they may not be
+	// in the list.
 	reloadSatellitesList();
-	ui->satellitesList->clearSelection();
+	QListWidget* list = ui->satellitesList;
+	list->clearSelection();
+	int firstAddedIndex = -1;
+	bool somethingSelected = false;
 	QSet<QString> newIds;
 	foreach (const TleData& sat, newSatellites)
 		newIds.insert(sat.id);
-	for (int i = 0; i < ui->satellitesList->count(); i++)
+	for (int i = 0; i < list->count(); i++)
 	{
-		QString id = ui->satellitesList->item(i)->data(Qt::UserRole).toString();
+		QString id = list->item(i)->data(Qt::UserRole).toString();
 		if (newIds.remove(id))
-			ui->satellitesList->item(i)->setSelected(true);
+		{
+			list->item(i)->setSelected(true);
+			if (firstAddedIndex < 0)
+				firstAddedIndex = i;
+			somethingSelected = true;
+		}
 	}
+	if (somethingSelected)
+		list->scrollToItem(list->item(firstAddedIndex),
+		                   QAbstractItemView::PositionAtTop);
+	else
+		list->setCurrentRow(0);
 }
 
 void SatellitesDialog::removeSatellites()
