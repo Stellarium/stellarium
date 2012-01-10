@@ -47,7 +47,9 @@
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
+#ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
+#endif
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"// Funny thing to include in a TEXT user interface...
 
@@ -434,8 +436,9 @@ void TextUserInterface::init()
 	m6_1->loopToTheLast();
 	m6->setChildNode(m6_1);
 
+	#ifndef DISABLE_SCRIPTING
 	TuiNode* m7 = new TuiNode(N_("Scripts"), NULL, m6);
-	m6->setNextNode(m7);
+	m6->setNextNode(m7);	
 	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
 	TuiNode* m7_1 = new TuiNodeEnum(N_("Run local script"),
 	                                &scriptMgr,
@@ -453,8 +456,14 @@ void TextUserInterface::init()
 	m7_1->loopToTheLast();
 	m7->setChildNode(m7_1);
 
+
 	TuiNode* m8 = new TuiNode(N_("Administration"), NULL, m7);
 	m7->setNextNode(m8);
+	#endif
+	#ifdef DISABLE_SCRIPTING
+	TuiNode* m8 = new TuiNode(N_("Administration"), NULL, m6);
+	m6->setNextNode(m8);
+	#endif
 	m8->setNextNode(m1);
 	m1->loopToTheLast();
 	TuiNode* m8_1 = new TuiNode(N_("Load default configuration"), m8);

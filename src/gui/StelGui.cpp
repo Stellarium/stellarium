@@ -47,7 +47,9 @@
 #ifdef ENABLE_SCRIPT_CONSOLE
 #include "ScriptConsole.hpp"
 #endif
+#ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
+#endif
 #include "StelAppGraphicsWidget.hpp"
 
 #include <QDebug>
@@ -338,9 +340,11 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiActions("actionAutoHideVerticalButtonBar"), SIGNAL(toggled(bool)), this, SLOT(setAutoHideVerticalButtonBar(bool)));
 	getGuiActions("actionAutoHideVerticalButtonBar")->setChecked(getAutoHideVerticalButtonBar());
 
+#ifndef DISABLE_SCRIPTING
 	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
 	connect(&scriptMgr, SIGNAL(scriptRunning()), this, SLOT(scriptStarted()));
 	connect(&scriptMgr, SIGNAL(scriptStopped()), this, SLOT(scriptStopped()));
+#endif
 
 	///////////////////////////////////////////////////////////////////////////
 	//// QGraphicsView based GUI
@@ -505,7 +509,9 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 
 void StelGui::quit()
 {
+	#ifndef DISABLE_SCRIPTING
 	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();
+	#endif
 	QCoreApplication::exit();
 }
 
@@ -703,6 +709,7 @@ QProgressBar* StelGui::addProgressBar()
 	return skyGui->progressBarMgr->addProgressBar();
 }
 
+#ifndef DISABLE_SCRIPTING
 void StelGui::setScriptKeys(bool b)
 {
 	if (b)
@@ -731,14 +738,15 @@ void StelGui::increaseScriptSpeed()
 }
 
 void StelGui::decreaseScriptSpeed()
-{
+{	
 	StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate()/2);
 }
 
 void StelGui::setRealScriptSpeed()
-{
-	StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(1);
+{	
+	StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(1);	
 }
+#endif
 
 void StelGui::setFlagShowFlipButtons(bool b)
 {
@@ -855,6 +863,7 @@ void StelGui::forceRefreshGui()
   skyGui->updateBarsPos();
 }
 
+#ifndef DISABLE_SCRIPTING
 void StelGui::scriptStarted()
 {
 	setScriptKeys(true);
@@ -864,6 +873,7 @@ void StelGui::scriptStopped()
 {
 	setScriptKeys(false);
 }
+#endif
 
 void StelGui::setGuiVisible(bool b)
 {
