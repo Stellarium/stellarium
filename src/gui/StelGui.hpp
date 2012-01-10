@@ -135,19 +135,23 @@ public slots:
 	//! @param b to hide or not to hide
 	void setAutoHideVerticalButtonBar(bool b);
 
+	#ifndef DISABLE_SCRIPTING
 	//! change keys when a script is running / not running
 	void setScriptKeys(bool b);
 	void increaseScriptSpeed();
 	void decreaseScriptSpeed();
 	void setRealScriptSpeed();
+	#endif
 
 	//! Hide or show the GUI.  Public so it can be called from scripts.
 	void setGuiVisible(bool);
 
 private slots:
 	void reloadStyle();
+	#ifndef DISABLE_SCRIPTING
 	void scriptStarted();
 	void scriptStopped();
+	#endif
 	//! Load color scheme from the given ini file and section name
 	void setStelStyle(const QString& section);
 	void quit();

@@ -112,6 +112,7 @@ private slots:
 	void pluginConfigureCurrentSelection();
 	void loadAtStartupChanged(int);
 
+	#ifndef DISABLE_SCRIPTING
 	//! The selection of script in the script list has changed
 	//! Updates the script information panel
 	void scriptSelectionChanged(const QString& s);
@@ -125,6 +126,7 @@ private slots:
 	void aScriptHasStopped();
 
 	void populateScriptsList();
+	#endif
 	void setFixedDateTimeToCurrent();
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);

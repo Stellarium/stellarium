@@ -44,7 +44,9 @@
 #include "StarMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "GridLinesMgr.hpp"
+#ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
+#endif
 #include "LabelMgr.hpp"
 #include "ScreenImageMgr.hpp"
 #include "SkyGui.hpp"
@@ -86,7 +88,9 @@ void ConfigurationDialog::languageChanged()
 
 		//Script information
 		//(trigger re-displaying the description of the current item)
+		#ifndef DISABLE_SCRIPTING
 		scriptSelectionChanged(ui->scriptListWidget->currentItem()->text());
+		#endif
 
 		//Plug-in information
 		populatePluginsList();
@@ -207,6 +211,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->invertScreenShotColorsCheckBox, SIGNAL(toggled(bool)), &StelMainGraphicsView::getInstance(), SLOT(setFlagInvertScreenShotColors(bool)));
 
 	// script tab controls
+	#ifndef DISABLE_SCRIPTING
 	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
 	connect(ui->scriptListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(scriptSelectionChanged(const QString&)));
 	connect(ui->runScriptButton, SIGNAL(clicked()), this, SLOT(runScriptClicked()));
@@ -220,6 +225,7 @@ void ConfigurationDialog::createDialogContent()
 	ui->scriptListWidget->setSortingEnabled(true);
 	populateScriptsList();
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateScriptsList()));
+	#endif
 
 	// plugins control
 	connect(ui->pluginsListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(pluginsSelectionChanged(const QString&)));
@@ -583,12 +589,13 @@ void ConfigurationDialog::loadAtStartupChanged(int state)
 	}
 }
 
+#ifndef DISABLE_SCRIPTING
 void ConfigurationDialog::populateScriptsList(void)
 {
-	int prevSel = ui->scriptListWidget->currentRow();
-	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
-	ui->scriptListWidget->clear();
-	ui->scriptListWidget->addItems(scriptMgr.getScriptList());
+	int prevSel = ui->scriptListWidget->currentRow();	
+	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();	
+	ui->scriptListWidget->clear();	
+	ui->scriptListWidget->addItems(scriptMgr.getScriptList());	
 	// If we had a valid previous selection (i.e. not first time we populate), restore it
 	if (prevSel >= 0 && prevSel < ui->scriptListWidget->count())
 		ui->scriptListWidget->setCurrentRow(prevSel);
@@ -599,8 +606,8 @@ void ConfigurationDialog::populateScriptsList(void)
 void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 {
 	if (s.isEmpty())
-		return;
-	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
+		return;	
+	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();	
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_(scriptMgr.getName(s)) + "</h2>";
@@ -609,34 +616,33 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 	QString d = scriptMgr.getDescription(s);
 	d.replace("\n", "<br />");
 	html += "<p>" + q_(d) + "</p>";
-	html += "</body></html>";
-	ui->scriptInfoBrowser->setHtml(html);
+	html += "</body></html>";	
+	ui->scriptInfoBrowser->setHtml(html);	
 }
 
 void ConfigurationDialog::runScriptClicked(void)
 {
 	if (ui->closeWindowAtScriptRunCheckbox->isChecked())
-		this->close();
-
+		this->close();	
 	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
 	if (ui->scriptListWidget->currentItem())
 	{
 		scriptMgr.runScript(ui->scriptListWidget->currentItem()->text());
-	}
+	}	
 }
 
 void ConfigurationDialog::stopScriptClicked(void)
 {
 	GETSTELMODULE(LabelMgr)->deleteAllLabels();
-	GETSTELMODULE(ScreenImageMgr)->deleteAllImages();
-	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();
+	GETSTELMODULE(ScreenImageMgr)->deleteAllImages();	
+	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();	
 }
 
 void ConfigurationDialog::aScriptIsRunning(void)
-{
+{	
 	ui->scriptStatusLabel->setText(q_("Running script: ") + StelMainGraphicsView::getInstance().getScriptMgr().runningScriptId());
 	ui->runScriptButton->setEnabled(false);
-	ui->stopScriptButton->setEnabled(true);
+	ui->stopScriptButton->setEnabled(true);	
 }
 
 void ConfigurationDialog::aScriptHasStopped(void)
@@ -645,6 +651,7 @@ void ConfigurationDialog::aScriptHasStopped(void)
 	ui->runScriptButton->setEnabled(true);
 	ui->stopScriptButton->setEnabled(false);
 }
+#endif
 
 
 void ConfigurationDialog::setFixedDateTimeToCurrent(void)
