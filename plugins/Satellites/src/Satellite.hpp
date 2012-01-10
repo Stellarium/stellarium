@@ -109,6 +109,9 @@ public:
 	// when the observer location changes we need to
 	void recalculateOrbitLines(void);
 	
+	void setNew() {newlyAdded = true;}
+	bool isNew() const {return newlyAdded;}
+	
 	static QString extractInternationalDesignator(const QString& tle1);
 
 public:
@@ -127,6 +130,7 @@ private:
 	bool initialized;
 	bool visible;
 	bool orbitVisible;  //draw orbit enabled/disabled
+	bool newlyAdded;
 
 	//! Identifier of the satellite, must be unique within the list.
 	//! Currently, the Satellite Catalog Number is used. It is contained in both
