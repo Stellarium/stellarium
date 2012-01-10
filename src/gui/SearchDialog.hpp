@@ -94,7 +94,10 @@ private slots:
 	
 	//! Called when the user edit the manual position controls
 	void manualPositionChanged();
-	
+
+    //! Whether to use SIMBAD for searches or not.
+    void useSIMBADStateChanged(int state);
+
 private:
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
@@ -104,6 +107,7 @@ private:
 	QString substituteGreek(const QString& keyString);
 	QString getGreekLetterByName(const QString& potentialGreekLetterName);
 	QHash<QString, QString> greekLetters;
+    bool useSIMBAD;
 };
 
 #endif // _SEARCHDIALOG_HPP_
