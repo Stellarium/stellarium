@@ -410,6 +410,7 @@ void Satellites::restoreDefaultConfigIni(void)
 	conf->setValue("tle_url6", "http://celestrak.com/NORAD/elements/iridium.txt");
 	conf->setValue("tle_url7", "http://celestrak.com/NORAD/elements/geo.txt");
 	conf->setValue("tle_url8", "http://celestrak.com/NORAD/elements/tle-new.txt");
+	conf->setValue("tle_url9", "http://celestrak.com/NORAD/elements/science.txt");
 	//TODO: Better? See http://doc.qt.nokia.com/4.7/qsettings.html#beginWriteArray --BM
 	conf->setValue("update_frequency_hours", 72);
 	conf->setValue("orbit_line_flag", true);
