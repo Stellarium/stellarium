@@ -168,6 +168,8 @@ void SatellitesDialog::listSatelliteGroup(int index)
 		satellites = plugin->getSatellites(QString(), Satellites::Visible);
 	else if (selectedGroup == "notvisible")
 		satellites = plugin->getSatellites(QString(), Satellites::NotVisible);
+	else if (selectedGroup == "newlyadded")
+		satellites = plugin->getSatellites(QString(), Satellites::NewlyAdded);
 	else
 		satellites = plugin->getSatellites(ui->groupsCombo->currentText());
 	
@@ -450,6 +452,7 @@ void SatellitesDialog::populateGroupsList()
 	ui->groupsCombo->addItems(GETSTELMODULE(Satellites)->getGroups());
 	// BM: The wording has been changed to prevent confusion with the visibility
 	// status of the actual satellites. I'll leave further changes to Matthew.:)
+	ui->groupsCombo->insertItem(0, q_("[all newly added]"), QVariant("newlyadded"));
 	ui->groupsCombo->insertItem(0, q_("[all not displayed]"), QVariant("notvisible"));
 	ui->groupsCombo->insertItem(0, q_("[all displayed]"), QVariant("visible"));
 	ui->groupsCombo->insertItem(0, q_("[all]"), QVariant("all"));
@@ -465,14 +468,17 @@ void SatellitesDialog::addSatellites(const TleDataList& newSatellites)
 	GETSTELMODULE(Satellites)->add(newSatellites);
 	saveSatellites();
 	
-	// Select the newly added satellites in the list
-	// Depending on the currently displayed satellite group, they may not be
-	// in the list.
-	reloadSatellitesList();
+	// Trigger re-loading the list to display the new satellites
+	int index = ui->groupsCombo->findData(QVariant("newlyadded"));
+	if (ui->groupsCombo->currentIndex() == index)
+		listSatelliteGroup(index);
+	else
+		ui->groupsCombo->setCurrentIndex(index); //Triggers the same operation
+	
+	// Select the satellites that were added just now
 	QListWidget* list = ui->satellitesList;
 	list->clearSelection();
 	int firstAddedIndex = -1;
-	bool somethingSelected = false;
 	QSet<QString> newIds;
 	foreach (const TleData& sat, newSatellites)
 		newIds.insert(sat.id);
@@ -484,10 +490,9 @@ void SatellitesDialog::addSatellites(const TleDataList& newSatellites)
 			list->item(i)->setSelected(true);
 			if (firstAddedIndex < 0)
 				firstAddedIndex = i;
-			somethingSelected = true;
 		}
 	}
-	if (somethingSelected)
+	if (firstAddedIndex >= 0)
 		list->scrollToItem(list->item(firstAddedIndex),
 		                   QAbstractItemView::PositionAtTop);
 	else

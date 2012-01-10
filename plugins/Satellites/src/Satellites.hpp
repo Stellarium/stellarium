@@ -79,7 +79,8 @@ public:
 	{
 		Visible,
 		NotVisible,
-		Both
+		Both,
+		NewlyAdded
 	};
 
 	Satellites();

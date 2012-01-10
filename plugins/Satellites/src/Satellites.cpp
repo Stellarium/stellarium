@@ -685,7 +685,10 @@ QHash<QString,QString> Satellites::getSatellites(const QString& group, Visibilit
 		{
 			if ((group.isEmpty() || sat->groupIDs.contains(group)) && ! result.contains(sat->id))
 			{
-				if (vis==Both || (vis==Visible && sat->visible) || (vis==NotVisible && !sat->visible))
+				if (vis==Both ||
+				        (vis==Visible && sat->visible) ||
+				        (vis==NotVisible && !sat->visible) ||
+				        (vis==NewlyAdded && sat->isNew()))
 					result.insert(sat->id, sat->name);
 			}
 		}
@@ -745,6 +748,7 @@ void Satellites::add(const TleDataList& newSatellites)
 		{
 			qDebug() << "Satellites: added" << tleSet.id << tleSet.name;
 			satellites.append(sat);
+			sat->setNew();
 			numAdded++;
 		}
 	}
