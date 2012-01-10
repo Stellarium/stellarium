@@ -32,6 +32,7 @@
 #include <QFrame>
 #include <QLabel>
 #include <QPushButton>
+#include <QSettings>
 #include <QString>
 #include <QStringList>
 #include <QTextEdit>
@@ -148,6 +149,10 @@ SearchDialog::SearchDialog() : simbadReply(NULL)
 	greekLetters.insert("chi", QString(QChar(0x03C7)));
 	greekLetters.insert("psi", QString(QChar(0x03C8)));
 	greekLetters.insert("omega", QString(QChar(0x03C9)));
+
+    QSettings* conf = StelApp::getInstance().getSettings();
+    Q_ASSERT(conf);
+    useSIMBAD = conf->value("search/useSIMBAD", 1.0).toBool();
 }
 
 SearchDialog::~SearchDialog()
@@ -180,7 +185,6 @@ void SearchDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
-//	setSimpleStyle();
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), 
             this, SLOT(onSearchTextChanged(const QString&)));
@@ -220,6 +224,21 @@ void SearchDialog::createDialogContent()
     connect(ui->chiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
     connect(ui->psiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
     connect(ui->omegaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+
+    connect(ui->checkBoxUseSIMBAD, SIGNAL(stateChanged(int)), this, SLOT(useSIMBADStateChanged(int)));
+    if (useSIMBAD){
+        ui->checkBoxUseSIMBAD->setChecked(true);
+    }
+
+}
+
+void SearchDialog::useSIMBADStateChanged(int state)
+{
+    useSIMBAD = (state == Qt::Checked);
+
+    QSettings* conf = StelApp::getInstance().getSettings();
+    Q_ASSERT(conf);
+    conf->setValue("search/useSIMBAD", useSIMBAD);
 }
 
 void SearchDialog::setVisible(bool v)
@@ -252,37 +271,39 @@ void SearchDialog::manualPositionChanged()
 
 void SearchDialog::onSearchTextChanged(const QString& text)
 {
-	if (simbadReply)
-	{
-		disconnect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
-		delete simbadReply;
-		simbadReply=NULL;
-	}
-	simbadResults.clear();
+    // This block needs to go before the trimmedText.isEmpty() or the SIMBAD result does not
+    // get properly cleared.
+    if (useSIMBAD) {
+        if (simbadReply) {
+            disconnect(simbadReply,
+                       SIGNAL(statusChanged()),
+                       this,
+                       SLOT(onSimbadStatusChanged()));
+            delete simbadReply;
+            simbadReply=NULL;
+        }
+        simbadResults.clear();
+    }
 
-	QString trimmedText = text.trimmed().toLower();
-	if (trimmedText.isEmpty())
-	{
+    QString trimmedText = text.trimmed().toLower();
+    if (trimmedText.isEmpty()) {
 		ui->completionLabel->clearValues();
-		ui->completionLabel->selectFirst();
+        ui->completionLabel->selectFirst();
 		ui->simbadStatusLabel->setText("");
 		ui->pushButtonGotoSearchSkyObject->setEnabled(false);
-	}
-	else
-	{
-		simbadReply = simbadSearcher->lookup(trimmedText, 3);
-		onSimbadStatusChanged();
-		connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
+    } else {
+        if (useSIMBAD) {
+            simbadReply = simbadSearcher->lookup(trimmedText, 3);
+            onSimbadStatusChanged();
+            connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
+        }
 
 		QString greekText = substituteGreek(trimmedText);
 		QStringList matches;
-		if(greekText != trimmedText)
-		{
+        if(greekText != trimmedText) {
 			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 3);
 			matches += objectMgr->listMatchingObjectsI18n(greekText, (5 - matches.size()));
-		}
-		else
-        {
+        } else {
 			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 5);
         }
 
