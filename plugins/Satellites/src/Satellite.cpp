@@ -53,7 +53,7 @@ bool Satellite::orbitLinesFlag = true;
 
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
-		: initialized(false), visible(true), hintColor(0.0,0.0,0.0), lastUpdated(), pSatWrapper(NULL)
+		: initialized(false), visible(true), newlyAdded(false), hintColor(0.0,0.0,0.0), lastUpdated(), pSatWrapper(NULL)
 {
 	// return initialized if the mandatory fields are not present
 	if (identifier.isEmpty())

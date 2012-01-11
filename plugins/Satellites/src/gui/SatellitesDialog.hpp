@@ -27,6 +27,7 @@
 
 class Ui_satellitesDialog;
 class QTimer;
+class SatellitesImportDialog;
 
 class SatellitesDialog : public StelDialog
 {
@@ -45,7 +46,9 @@ public slots:
 	void refreshUpdateValues(void);
 
 private slots:
-	void groupFilterChanged(int index);
+	void listSatelliteGroup(int index);
+	//! Reloads the satellites list with the currently selected group.
+	void reloadSatellitesList();
 	void updateSelectedSatelliteInfo(QListWidgetItem* cur, QListWidgetItem* prev);
 	void saveSatellites(void);
 	void setUpdateValues(int hours);
@@ -58,8 +61,10 @@ private slots:
 	void addSourceRow(void);
 	void restoreDefaults(void);
 	void saveSettings(void);
-	void visibleCheckChanged(int state);
-	void orbitCheckChanged(int state);
+	void addSatellites(const TleDataList& newSatellites);
+	void removeSatellites();
+	void setDisplayFlag(bool display);
+	void setOrbitFlag(bool display);
 	void satelliteDoubleClick(QListWidgetItem* item);
 	void setOrbitParams(void);
 	void updateTLEs(void);
@@ -74,6 +79,8 @@ private:
 	void updateGuiFromSettings(void);
 	void populateGroupsList();
 	QTimer* updateTimer;
+	
+	SatellitesImportDialog* importWindow;
 };
 
 #endif // _SATELLITESDIALOG_HPP_
