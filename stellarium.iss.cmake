@@ -25,12 +25,12 @@ Source: "README"; DestDir: "{app}"; Flags: isreadme; DestName: "README.rtf"
 Source: "INSTALL"; DestDir: "{app}"; DestName: "INSTALL.rtf"
 Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.rtf"
 Source: "AUTHORS"; DestDir: "{app}"; DestName: "AUTHORS.rtf"
-Source: "ChangeLog"; DestDir: "{app}";
+Source: "ChangeLog"; DestDir: "{app}"; DestName: "ChangeLog.rtf"
 Source: "@QT_BINARY_DIR@/../../mingw/bin/libgcc_s_dw2-1.dll"; DestDir: "{app}";
+Source: "@QT_BINARY_DIR@/../../mingw/bin/mingwm10.dll"; DestDir: "{app}";
 Source: "@ICONV_INCLUDE_DIR@/../bin/libiconv2.dll"; DestDir: "{app}";
 Source: "@INTL_INCLUDE_DIR@/../bin/libintl3.dll"; DestDir: "{app}";
 Source: "@ZLIB_INCLUDE_DIR@/../bin/zlib1.dll"; DestDir: "{app}";
-Source: "@QT_BINARY_DIR@/../../mingw/bin/mingwm10.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\phonon4.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\QtSql4.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\QtSvg4.dll"; DestDir: "{app}";
@@ -74,5 +74,6 @@ Name: "{group}\Stellarium (no OpenGL2)"; Filename: "{app}\stellarium.exe"; Param
 Name: "{group}\Uninstall Stellarium"; Filename: "{uninstallexe}"
 Name: "{group}\config.ini"; Filename: "{userappdata}\Stellarium\config.ini"
 Name: "{group}\Last run log"; Filename: "{userappdata}\Stellarium\log.txt"
+Name: "{group}\Change log"; Filename: "{app}\ChangeLog.rtf"
 Name: "{commondesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\common
 Name: "{userdesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\user
