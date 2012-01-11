@@ -1,4 +1,4 @@
-0.11.2
+0.11.2 [in progress]
 The main theme of this version seems to be localization:
 - most of the text used by the default plug-ins is now translateable
 - landscape names are now translatable
@@ -14,6 +14,7 @@ Satellites plug-in:
 - fixed title bar of the Satellites config window not being resized with the rest of the window (LP: #900575)
 - catalog numbers are now used to identify satellites, preventing bugs with duplicate satellites and satellites renamed in the source lists
 - catalog number and international designator are now displayed for each satellite
+- a simple windows to add satellites has been added (LP: #898476)
 
 Added to the Windows installer options to remove files left over from the previous installation.
 Windows no longer can be dragged to unreachable positions.
@@ -27,6 +28,8 @@ Added several trans-Neptunian objects (TNOs): Sedna, Quaoar, Orcus, Haumea.
 Added the Quasars plug-in.
 More detailed information is now added to the log file for Mac OS X.
 Added (experimental) modelling of athmospheric extinction for point objects.
+Changed the position of the text in the Text User Interface plug-in. (LP: #911594)
+Added a checkbox allowing the SIMBAD on-line search to be enabled/disabled.
 
 Fixed:
 - plugin names localization in the Configuration window (LP: #807402)
@@ -37,6 +40,7 @@ Fixed:
 - proxy configuration without username/password
 - Telescope Control plug-in: mishandling of IP connections in the telescope configuration window (LP: #843837)
 - Pluto's moon Hydra preventing the constellation from being selected in Search and scripts (LP: #894780)
+- scripting code still being included despite ENABLE_SCRIPTING set to 0 (LP: #811505)
 
 0.11.1 [2011-11-04]
 Bug fix release.
