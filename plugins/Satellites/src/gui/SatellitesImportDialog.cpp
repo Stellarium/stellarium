@@ -23,6 +23,7 @@
 #include "StelApp.hpp"
 #include "StelMainGraphicsView.hpp" //for the QFileDialog? Why?
 #include "StelModuleMgr.hpp" // for the GETSTELMODULE macro :(
+#include "StelTranslator.hpp"
 
 #include <QDesktopServices>
 #include <QFileDialog>
@@ -131,8 +132,8 @@ void SatellitesImportDialog::getData()
 		
 		ui->pushButtonGetData->setVisible(false);
 		ui->pushButtonAbort->setVisible(true);
-		ui->groupBoxWorking->setTitle("Downloading data...");
-		displayMessage("Stellarium is downloading satellite data from the update sources. Please wait...");
+		ui->groupBoxWorking->setTitle(q_("Downloading data..."));
+		displayMessage(q_("Stellarium is downloading satellite data from the update sources. Please wait..."));
 		
 		for (int i = 0; i < sourceUrls.size(); i++)
 		{
@@ -147,7 +148,7 @@ void SatellitesImportDialog::getData()
 		QString homeDirPath = QDesktopServices::storageLocation(QDesktopServices::HomeLocation);
 		sourceFilePaths = QFileDialog::getOpenFileNames(
 		                      &StelMainGraphicsView::getInstance(),
-		                      "Select TLE source file(s)...",
+		                      q_("Select TLE source file(s)..."),
 		                      homeDirPath, "*.*");
 		if (sourceFilePaths.isEmpty())
 			return;
@@ -162,8 +163,8 @@ void SatellitesImportDialog::getData()
 		}
 		ui->pushButtonGetData->setVisible(false);
 		ui->pushButtonAbort->setVisible(false);
-		ui->groupBoxWorking->setTitle("Processing data...");
-		displayMessage("Processing data...");
+		ui->groupBoxWorking->setTitle(q_("Processing data..."));
+		displayMessage(q_("Processing data..."));
 		populateList();
 	}
 }
@@ -217,13 +218,13 @@ void SatellitesImportDialog::receiveDownload(QNetworkReply* networkReply)
 		if (sourceFiles.isEmpty())
 		{
 			reset();
-			displayMessage("No data could be downloaded. Try again later.");
+			displayMessage(q_("No data could be downloaded. Try again later."));
 		}
 		else
 		{
 			ui->pushButtonAbort->setVisible(false);
-			ui->groupBoxWorking->setTitle("Processing data...");
-			displayMessage("Processing data...");
+			ui->groupBoxWorking->setTitle(q_("Processing data..."));
+			displayMessage(q_("Processing data..."));
 			populateList();
 		}
 	}
@@ -340,7 +341,7 @@ void SatellitesImportDialog::populateList()
 		newItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
 		newItem->setCheckState(Qt::Unchecked);
 		newItem->setData(tle.id, Qt::UserRole);
-		QString text = QString("Catalog Number: %1").arg(tle.id);
+		QString text = QString(q_("Catalog Number: %1")).arg(tle.id);
 		newItem->setToolTip(text);
 		newSatellitesModel->appendRow(newItem);
 	}
