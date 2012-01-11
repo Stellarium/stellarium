@@ -75,7 +75,7 @@ public slots:
 	void languageChanged();
 	//! Add auto focus of the edit line
 	void setVisible(bool);
-    //! This style only displays the text search field and the search button
+	//! This style only displays the text search field and the search button
 	void setSimpleStyle();
 
 protected:
@@ -84,7 +84,7 @@ protected:
 	virtual void createDialogContent();
 
 private slots:
-    void greekLetterClicked();
+	void greekLetterClicked();
 	//! Called when the current simbad query status changes
 	void onSimbadStatusChanged();
 	//! Called when the user changed the input text
@@ -95,8 +95,11 @@ private slots:
 	//! Called when the user edit the manual position controls
 	void manualPositionChanged();
 
-    //! Whether to use SIMBAD for searches or not.
-    void enableSimbadSearch(bool enable);
+	//! Whether to use SIMBAD for searches or not.
+	void enableSimbadSearch(bool enable);
+
+	//! Set flagHasSelectedText as true, if search box has selected text
+	void setHasSelectedFlag();
 
 private:
 	class SimbadSearcher* simbadSearcher;
@@ -108,6 +111,7 @@ private:
 	QString getGreekLetterByName(const QString& potentialGreekLetterName);
 	QHash<QString, QString> greekLetters;
 	bool useSimbad;
+	bool flagHasSelectedText;
 };
 
 #endif // _SEARCHDIALOG_HPP_
