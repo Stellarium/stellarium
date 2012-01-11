@@ -42,6 +42,20 @@ class SatellitesDialog;
 
 typedef QSharedPointer<Satellite> SatelliteP;
 
+//! Data structure containing unvalidated TLE set as read from a TLE list file.
+struct TleData
+{
+	//! NORAD catalog number, as extracted from the TLE set.
+	QString id;
+	//! Human readable name, as extracted from the TLE title line.
+	QString name;
+	QString first;
+	QString second;
+};
+
+typedef QList<TleData> TleDataList;
+typedef QHash<QString, TleData> TleDataHash ;
+
 //! @class Satellites
 //! Satellites in low Earth orbit require different orbital calculations from planets, the moon
 //! and so on.  This plugin implements the SGP4/SDP4 algorithms in Stellarium, allowing accurate
@@ -65,7 +79,8 @@ public:
 	{
 		Visible,
 		NotVisible,
-		Both
+		Both,
+		NewlyAdded
 	};
 
 	Satellites();
@@ -130,6 +145,17 @@ public:
 
 	//! get a satellite object by identifier
 	SatelliteP getByID(const QString& id);
+	
+	//! Returns a list of all satellite IDs.
+	QStringList getAllIDs();
+	
+	//! Add the given satellites.
+	//! The changes are not saved to file.
+	void add(const TleDataList& newSatellites);
+	
+	//! Remove the selected satellites.
+	//! The changes are not saved to file.
+	void remove(const QStringList& idList);
 
 	//! get whether or not the plugin will try to update TLE data from the internet
 	//! @return true if updates are set to be done, false otherwise
@@ -171,6 +197,13 @@ public:
 	//! @param deleteFiles if set, the update files are deleted after
 	//!        they are used, else they are left alone
 	void updateFromFiles(QStringList paths, bool deleteFiles=false);
+	
+	//! Reads a TLE list from a file to the supplied hash.
+	//! If an entry with the same ID exists in the given hash, its contents
+	//! are overwritten with the new values.
+	//! \param openFile a reference to an \b open file.
+	//! \param tleList a hash with satellite IDs (catalog numbers) as keys.
+	static void parseTleFile(QFile& openFile, TleDataHash& tleList);
 
 signals:
 	//! emitted when the update status changes, e.g. when 
