@@ -186,16 +186,6 @@
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="checkBoxUseSIMBAD">
-            <property name="text">
-             <string>SIMBAD</string>
-            </property>
-            <property name="checked">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QPushButton" name="pushButtonGotoSearchSkyObject">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -217,9 +207,6 @@
             </property>
             <property name="focusPolicy">
              <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="text">
-             <string/>
             </property>
             <property name="icon">
              <iconset resource="../../data/gui/guiRes.qrc">
@@ -683,6 +670,20 @@
            </widget>
           </item>
          </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabOptions">
+      <attribute name="title">
+       <string>Options</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QCheckBox" name="checkBoxUseSimbad">
+         <property name="text">
+          <string>Search also in the SIMBAD on-line astronomical database</string>
+         </property>
         </widget>
        </item>
       </layout>
