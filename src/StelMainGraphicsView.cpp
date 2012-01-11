@@ -278,7 +278,7 @@ void StelMainGraphicsView::init(QSettings* conf)
 #ifndef DISABLE_SCRIPTING
 	QString startupScript;
 	if (qApp->property("onetime_startup_script").isValid())
-		qApp->property("onetime_startup_script").toString();
+		startupScript = qApp->property("onetime_startup_script").toString();
 	else
 		startupScript = conf->value("scripts/startup_script", "startup.ssc").toString();
 	scriptMgr->runScript(startupScript);
