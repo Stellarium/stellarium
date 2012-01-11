@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include <QString>
@@ -292,8 +292,8 @@ void HelpDialog::updateText(void)
 	newHtml += "<p>You should have received a copy of the GNU General Public ";
 	newHtml += "License along with this program; if not, write to:</p>";
 	newHtml += "<pre>Free Software Foundation, Inc.\n";
-	newHtml += "59 Temple Place - Suite 330\n";
-	newHtml += "Boston, MA  02111-1307, USA.\n</pre>";
+	newHtml += "51 Franklin Street, Suite 500\n";
+	newHtml += "Boston, MA  02110-1335, USA.\n</pre>";
 	newHtml += "<p><a href=\"http://www.fsf.org\">www.fsf.org</a></p>";
 	newHtml += "<h3>" + Qt::escape(q_("Developers")) + "</h3><ul>";
 	newHtml += "<li>" + Qt::escape(q_("Project coordinator & lead developer: %1").arg(QString("Fabien Ch%1reau").arg(QChar(0x00E9)))) + "</li>";
