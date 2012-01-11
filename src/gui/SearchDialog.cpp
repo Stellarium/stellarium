@@ -150,9 +150,9 @@ SearchDialog::SearchDialog() : simbadReply(NULL)
 	greekLetters.insert("psi", QString(QChar(0x03C8)));
 	greekLetters.insert("omega", QString(QChar(0x03C9)));
 
-    QSettings* conf = StelApp::getInstance().getSettings();
-    Q_ASSERT(conf);
-    useSIMBAD = conf->value("search/useSIMBAD", 1.0).toBool();
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	useSimbad = conf->value("search/flag_search_online", true).toBool();
 }
 
 SearchDialog::~SearchDialog()
@@ -225,20 +225,18 @@ void SearchDialog::createDialogContent()
     connect(ui->psiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
     connect(ui->omegaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 
-    connect(ui->checkBoxUseSIMBAD, SIGNAL(stateChanged(int)), this, SLOT(useSIMBADStateChanged(int)));
-    if (useSIMBAD){
-        ui->checkBoxUseSIMBAD->setChecked(true);
-    }
-
+	connect(ui->checkBoxUseSimbad, SIGNAL(clicked(bool)),
+	        this, SLOT(enableSimbadSearch(bool)));
+	ui->checkBoxUseSimbad->setChecked(useSimbad);
 }
 
-void SearchDialog::useSIMBADStateChanged(int state)
+void SearchDialog::enableSimbadSearch(bool enable)
 {
-    useSIMBAD = (state == Qt::Checked);
-
-    QSettings* conf = StelApp::getInstance().getSettings();
-    Q_ASSERT(conf);
-    conf->setValue("search/useSIMBAD", useSIMBAD);
+	useSimbad = enable;
+	
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	conf->setValue("search/flag_search_online", useSimbad);
 }
 
 void SearchDialog::setVisible(bool v)
@@ -273,7 +271,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 {
     // This block needs to go before the trimmedText.isEmpty() or the SIMBAD result does not
     // get properly cleared.
-    if (useSIMBAD) {
+    if (useSimbad) {
         if (simbadReply) {
             disconnect(simbadReply,
                        SIGNAL(statusChanged()),
@@ -292,7 +290,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		ui->simbadStatusLabel->setText("");
 		ui->pushButtonGotoSearchSkyObject->setEnabled(false);
     } else {
-        if (useSIMBAD) {
+        if (useSimbad) {
             simbadReply = simbadSearcher->lookup(trimmedText, 3);
             onSimbadStatusChanged();
             connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));

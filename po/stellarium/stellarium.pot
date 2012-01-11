@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-11 13:19+0200\n"
+"POT-Creation-Date: 2012-01-11 14:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2448,128 +2448,135 @@ msgstr ""
 msgid "Planet:"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:458
+#: src/ui_searchDialogGui.h:464
 msgid "Find Object"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:459
+#: src/ui_searchDialogGui.h:465
 msgid "Find Object or Position"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:462
-msgid "SIMBAD"
-msgstr ""
-
-#: src/ui_searchDialogGui.h:467
+#: src/ui_searchDialogGui.h:471
 msgid "iota"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:470
+#: src/ui_searchDialogGui.h:474
 msgid "alpha"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:473
+#: src/ui_searchDialogGui.h:477
 msgid "beta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:476
+#: src/ui_searchDialogGui.h:480
 msgid "gamma"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:479
+#: src/ui_searchDialogGui.h:483
 msgid "delta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:482
+#: src/ui_searchDialogGui.h:486
 msgid "epsilon"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:485
+#: src/ui_searchDialogGui.h:489
 msgid "zeta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:488
+#: src/ui_searchDialogGui.h:492
 msgid "eta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:491
+#: src/ui_searchDialogGui.h:495
 msgid "theta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:494
+#: src/ui_searchDialogGui.h:498
 msgid "kappa"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:497
+#: src/ui_searchDialogGui.h:501
 msgid "lambda"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:500
+#: src/ui_searchDialogGui.h:504
 msgid "mu"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:503
+#: src/ui_searchDialogGui.h:507
 msgid "nu"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:506
+#: src/ui_searchDialogGui.h:510
 msgid "xi"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:509
+#: src/ui_searchDialogGui.h:513
 msgid "omicron"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:512
+#: src/ui_searchDialogGui.h:516
 msgid "pi"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:515
+#: src/ui_searchDialogGui.h:519
 msgid "rho"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:518
+#: src/ui_searchDialogGui.h:522
 msgid "sigma"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:521
+#: src/ui_searchDialogGui.h:525
 msgid "tau"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:524
+#: src/ui_searchDialogGui.h:528
 msgid "upsilon"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:527
+#: src/ui_searchDialogGui.h:531
 msgid "phi"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:530
+#: src/ui_searchDialogGui.h:534
 msgid "chi"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:533
+#: src/ui_searchDialogGui.h:537
 msgid "psi"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:536
+#: src/ui_searchDialogGui.h:540
 msgid "omega"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:538
+#: src/ui_searchDialogGui.h:542
 msgid "Greek letters for Bayer designations"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:539
+#: src/ui_searchDialogGui.h:543
 msgid "Object"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:540
+#: src/ui_searchDialogGui.h:544
 msgid "RA/Dec (J2000):"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:541
+#: src/ui_searchDialogGui.h:545
 msgid "Position"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:546
+msgid "Search also in the SIMBAD on-line astronomical database"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:547 src/ui_viewDialog.h:1137
+#: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
+#: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
+msgid "Options"
 msgstr ""
 
 #: src/ui_viewDialog.h:1070
@@ -2735,12 +2742,6 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1136
 msgid "Add/remove landscapes..."
-msgstr ""
-
-#: src/ui_viewDialog.h:1137 src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
-#: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
-msgid "Options"
 msgstr ""
 
 #: src/ui_viewDialog.h:1138
