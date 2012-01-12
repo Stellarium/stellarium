@@ -274,6 +274,7 @@ void LocationDialog::populatePlanetList()
 	//Restore the selection
 	index = planets->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
 	planets->setCurrentIndex(index);
+	planets->model()->sort(0);
 	planets->blockSignals(false);
 }
 
@@ -299,6 +300,7 @@ void LocationDialog::populateCountryList()
 	//Restore the selection
 	index = countries->findData(selectedCountryId, Qt::UserRole, Qt::MatchCaseSensitive);
 	countries->setCurrentIndex(index);
+	countries->model()->sort(0);
 	countries->blockSignals(false);
 
 }
