@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-01-11 14:01+0200\n"
+"POT-Creation-Date: 2012-01-13 23:26+0700\n"
 "PO-Revision-Date: 2011-11-22 15:37+0000\n"
 "Last-Translator: Srivatsan Raghavan <Unknown>\n"
 "Language-Team: Tamil <ta@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-12 05:36+0000\n"
-"X-Generator: Launchpad (build 14640)\n"
+"X-Launchpad-Export-Date: 2012-01-14 04:45+0000\n"
+"X-Generator: Launchpad (build 14664)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -301,46 +301,46 @@ msgstr "(தோற்ற நிலை)"
 msgid "Az/Alt: %1/%2"
 msgstr "திசைவில்/உயரம்: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:312 src/gui/ConfigurationDialog.cpp:314
+#: src/gui/ConfigurationDialog.cpp:313 src/gui/ConfigurationDialog.cpp:315
 msgid "Select screenshot directory"
 msgstr "திரைப்பிடிப்பு அடைவை தேர்வு செய்க"
 
-#: src/gui/ConfigurationDialog.cpp:487
+#: src/gui/ConfigurationDialog.cpp:488
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:495
+#: src/gui/ConfigurationDialog.cpp:496
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "தொடங்களின்ப் பொழுது பார்வை திசை திசைவில்/உயரம்: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:534
+#: src/gui/ConfigurationDialog.cpp:535
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
 msgid "Authors"
 msgstr "படைப்பாளர்கள்"
 
-#: src/gui/ConfigurationDialog.cpp:538 src/gui/ViewDialog.cpp:397
+#: src/gui/ConfigurationDialog.cpp:539 src/gui/ViewDialog.cpp:397
 msgid "Contact"
 msgstr "தொடர்புகொள்"
 
-#: src/gui/ConfigurationDialog.cpp:614
+#: src/gui/ConfigurationDialog.cpp:615
 msgid "Author"
 msgstr "படைப்பாளர்"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:616
 msgid "License"
 msgstr "உரிமம்"
 
-#: src/gui/ConfigurationDialog.cpp:643
+#: src/gui/ConfigurationDialog.cpp:644
 msgid "Running script: "
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:650
+#: src/gui/ConfigurationDialog.cpp:651
 msgid "Running script: [none]"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:720
+#: src/gui/ConfigurationDialog.cpp:721
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -348,16 +348,16 @@ msgstr ""
 "புது நட்சத்திரங்களின் விவர ஏடுகள் பதிவிறக்கம் செய்யப்பட்டுவிட்டது!\n"
 "அவைகளை காட்சிக்கு வைக்க மறுதொடக்கம் செய்யவும்."
 
-#: src/gui/ConfigurationDialog.cpp:724
+#: src/gui/ConfigurationDialog.cpp:725
 msgid "All available star catalogs have been installed."
 msgstr "இருக்ககூடிய எல்லா விண்மீன் விவர ஏடுகளும் உள்ளீடு செய்யப்பட்டுள்ளது."
 
-#: src/gui/ConfigurationDialog.cpp:729
+#: src/gui/ConfigurationDialog.cpp:730
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:736
+#: src/gui/ConfigurationDialog.cpp:737
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -366,7 +366,7 @@ msgstr ""
 "பதிவிறக்கம் நடைப்பெறுகிறது %1 \n"
 "(நீங்கள் இந்த சாளரத்தை மூடலாம்)"
 
-#: src/gui/ConfigurationDialog.cpp:743
+#: src/gui/ConfigurationDialog.cpp:744
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -377,7 +377,7 @@ msgstr ""
 "நட்சத்திர எண்ணிக்கை: %2 மில்லியன் \n"
 "எண் மதிப்பு வரையறை: %3- %4"
 
-#: src/gui/ConfigurationDialog.cpp:786 src/gui/ConfigurationDialog.cpp:822
+#: src/gui/ConfigurationDialog.cpp:787 src/gui/ConfigurationDialog.cpp:823
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -386,11 +386,11 @@ msgstr ""
 "பதிவிறக்கத்தில் பிழை %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:874
+#: src/gui/ConfigurationDialog.cpp:875
 msgid "Verifying file integrity..."
 msgstr "கோப்பு ஒழுங்கமைவு பரிசோதிக்கபடுகிறது..."
 
-#: src/gui/ConfigurationDialog.cpp:878
+#: src/gui/ConfigurationDialog.cpp:879
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -882,7 +882,7 @@ msgstr ""
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:399
+#: src/gui/LocationDialog.cpp:401
 msgid "New Location"
 msgstr "புதிய இடம்"
 
@@ -4869,6 +4869,10 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
 msgid "Solar System Editor plug-in"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
+msgid "Import data"
 msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523

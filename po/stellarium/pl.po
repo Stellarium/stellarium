@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-11 14:01+0200\n"
+"POT-Creation-Date: 2012-01-13 23:26+0700\n"
 "PO-Revision-Date: 2012-01-09 00:58+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-12 05:34+0000\n"
-"X-Generator: Launchpad (build 14640)\n"
+"X-Launchpad-Export-Date: 2012-01-14 04:43+0000\n"
+"X-Generator: Launchpad (build 14664)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -324,46 +324,46 @@ msgstr "(pozorne)"
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Wys: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:312 src/gui/ConfigurationDialog.cpp:314
+#: src/gui/ConfigurationDialog.cpp:313 src/gui/ConfigurationDialog.cpp:315
 msgid "Select screenshot directory"
 msgstr "Wybierz katalog zrzutu ekranu"
 
-#: src/gui/ConfigurationDialog.cpp:487
+#: src/gui/ConfigurationDialog.cpp:488
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Początkowe pole widzenia: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:495
+#: src/gui/ConfigurationDialog.cpp:496
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Początkowy kierunek widzenia Az/Wys: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:534
+#: src/gui/ConfigurationDialog.cpp:535
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
 msgid "Authors"
 msgstr "Autorzy"
 
-#: src/gui/ConfigurationDialog.cpp:538 src/gui/ViewDialog.cpp:397
+#: src/gui/ConfigurationDialog.cpp:539 src/gui/ViewDialog.cpp:397
 msgid "Contact"
 msgstr "Kontakt"
 
-#: src/gui/ConfigurationDialog.cpp:614
+#: src/gui/ConfigurationDialog.cpp:615
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:616
 msgid "License"
 msgstr "Licencja"
 
-#: src/gui/ConfigurationDialog.cpp:643
+#: src/gui/ConfigurationDialog.cpp:644
 msgid "Running script: "
 msgstr "Uruchomiony skrypt: "
 
-#: src/gui/ConfigurationDialog.cpp:650
+#: src/gui/ConfigurationDialog.cpp:651
 msgid "Running script: [none]"
 msgstr "Uruchomiony skrypt: [brak]"
 
-#: src/gui/ConfigurationDialog.cpp:720
+#: src/gui/ConfigurationDialog.cpp:721
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -371,16 +371,16 @@ msgstr ""
 "Zakończono pobieranie nowych katalogów gwiazd!\n"
 "Uruchom ponownie Stellarium aby je wyświetlić."
 
-#: src/gui/ConfigurationDialog.cpp:724
+#: src/gui/ConfigurationDialog.cpp:725
 msgid "All available star catalogs have been installed."
 msgstr "Zainstalowano wszystkie dostępne katalogi gwiazd."
 
-#: src/gui/ConfigurationDialog.cpp:729
+#: src/gui/ConfigurationDialog.cpp:730
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Pobierz katalog %1 z %2"
 
-#: src/gui/ConfigurationDialog.cpp:736
+#: src/gui/ConfigurationDialog.cpp:737
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -389,7 +389,7 @@ msgstr ""
 "Pobieranie %1...\n"
 "(Można zamknąć to okno.)"
 
-#: src/gui/ConfigurationDialog.cpp:743
+#: src/gui/ConfigurationDialog.cpp:744
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -400,7 +400,7 @@ msgstr ""
 "Liczba gwiazd: %2 mln\n"
 "Zakres jasności: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:786 src/gui/ConfigurationDialog.cpp:822
+#: src/gui/ConfigurationDialog.cpp:787 src/gui/ConfigurationDialog.cpp:823
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -409,11 +409,11 @@ msgstr ""
 "Błąd przy pobieraniu %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:874
+#: src/gui/ConfigurationDialog.cpp:875
 msgid "Verifying file integrity..."
 msgstr "Sprawdzanie integralności pliku..."
 
-#: src/gui/ConfigurationDialog.cpp:878
+#: src/gui/ConfigurationDialog.cpp:879
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -915,7 +915,7 @@ msgstr "Wysoka aktywność Leonidów"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Najwyższa zarejestrowana aktywność (Leonidy, 1966 r.)"
 
-#: src/gui/LocationDialog.cpp:399
+#: src/gui/LocationDialog.cpp:401
 msgid "New Location"
 msgstr "Nowe położenie"
 
@@ -5023,6 +5023,10 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
 msgid "Solar System Editor plug-in"
 msgstr "Wtyczka Edytor Układu Słonecznego"
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
+msgid "Import data"
+msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
