@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-01-11 14:01+0200\n"
+"POT-Creation-Date: 2012-01-13 23:26+0700\n"
 "PO-Revision-Date: 2012-01-13 02:31+0000\n"
 "Last-Translator: Kenan Dervišević <kenan3008@gmail.com>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-13 04:36+0000\n"
+"X-Launchpad-Export-Date: 2012-01-14 04:39+0000\n"
 "X-Generator: Launchpad (build 14664)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -316,46 +316,46 @@ msgstr "(vidljiv)"
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:312 src/gui/ConfigurationDialog.cpp:314
+#: src/gui/ConfigurationDialog.cpp:313 src/gui/ConfigurationDialog.cpp:315
 msgid "Select screenshot directory"
 msgstr "Odaberi direktorij za slike ekrana"
 
-#: src/gui/ConfigurationDialog.cpp:487
+#: src/gui/ConfigurationDialog.cpp:488
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Početni ugao pogleda: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:495
+#: src/gui/ConfigurationDialog.cpp:496
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Početni smjer azimuta/visine pogleda: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:534
+#: src/gui/ConfigurationDialog.cpp:535
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
 msgid "Authors"
 msgstr "Autori"
 
-#: src/gui/ConfigurationDialog.cpp:538 src/gui/ViewDialog.cpp:397
+#: src/gui/ConfigurationDialog.cpp:539 src/gui/ViewDialog.cpp:397
 msgid "Contact"
 msgstr "Kontakt"
 
-#: src/gui/ConfigurationDialog.cpp:614
+#: src/gui/ConfigurationDialog.cpp:615
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:616
 msgid "License"
 msgstr "Licenca"
 
-#: src/gui/ConfigurationDialog.cpp:643
+#: src/gui/ConfigurationDialog.cpp:644
 msgid "Running script: "
 msgstr "Skripta koja se izvodi: "
 
-#: src/gui/ConfigurationDialog.cpp:650
+#: src/gui/ConfigurationDialog.cpp:651
 msgid "Running script: [none]"
 msgstr "Skripta koja se izvodi: [nijedna]"
 
-#: src/gui/ConfigurationDialog.cpp:720
+#: src/gui/ConfigurationDialog.cpp:721
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -363,16 +363,16 @@ msgstr ""
 "Završeno preuzimanje novih kataloga sa zvijezdama!\n"
 "Ponovo pokrenite Stellarium za njihov prikaz."
 
-#: src/gui/ConfigurationDialog.cpp:724
+#: src/gui/ConfigurationDialog.cpp:725
 msgid "All available star catalogs have been installed."
 msgstr "Svi dostupni katalozi zvijezda su instalirani."
 
-#: src/gui/ConfigurationDialog.cpp:729
+#: src/gui/ConfigurationDialog.cpp:730
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Dobavi katalog %1 od %2"
 
-#: src/gui/ConfigurationDialog.cpp:736
+#: src/gui/ConfigurationDialog.cpp:737
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -381,7 +381,7 @@ msgstr ""
 "Skidam %1...\n"
 "(Možete zatvoriti ovaj prozor.)"
 
-#: src/gui/ConfigurationDialog.cpp:743
+#: src/gui/ConfigurationDialog.cpp:744
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -392,7 +392,7 @@ msgstr ""
 "Broj zvijezda: %2 miliona\n"
 "Opseg magnitude: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:786 src/gui/ConfigurationDialog.cpp:822
+#: src/gui/ConfigurationDialog.cpp:787 src/gui/ConfigurationDialog.cpp:823
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -401,11 +401,11 @@ msgstr ""
 "Greška pri preuzimanju %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:874
+#: src/gui/ConfigurationDialog.cpp:875
 msgid "Verifying file integrity..."
 msgstr "Provjera ispravnosti datoteke..."
 
-#: src/gui/ConfigurationDialog.cpp:878
+#: src/gui/ConfigurationDialog.cpp:879
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -905,7 +905,7 @@ msgstr "Izuzetna Leonidova učestalost"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Najveća učestalost ikada (1966 Leonids)"
 
-#: src/gui/LocationDialog.cpp:399
+#: src/gui/LocationDialog.cpp:401
 msgid "New Location"
 msgstr "Nova lokacija"
 
@@ -5008,6 +5008,10 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
 msgid "Solar System Editor plug-in"
 msgstr "Plugin Uređivač Sunčevog sistema"
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
+msgid "Import data"
+msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
