@@ -75,6 +75,18 @@ void MTL::load(const char* filename)
                             position = material.texture.find("\\", position + 1);
                         }
                     }
+                } else if (parts[0] == "map_bump" || parts[0] == "bump"){
+                    if (parts.size() > 1){
+                        material.bump_texture = line.substr(line.find(parts[1]));
+
+                        trim_right(material.bump_texture);
+                        size_t position = material.bump_texture.find("\\");
+                        while (position != string::npos)
+                        {
+                            material.bump_texture.replace(position, 1, "/");
+                            position = material.bump_texture.find("\\", position + 1);
+                        }
+                    }
                 } else if (parts[0] == "Ns") {
                     if (parts.size() > 1) {
                         material.shininess = parseInt(parts[1]);
@@ -82,6 +94,7 @@ void MTL::load(const char* filename)
                 }
             }
         }
+
         // GZ bugfix: We may have a material description open. Store it into the map.
         if (!entryStr.empty())
         {
@@ -102,6 +115,12 @@ void MTL::uploadTexturesGL(void)
         if (texture.size() > 0) {
             textureMapGL[texture] = textureMgr.createTexture(QString(absolutePath(texture).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
             //textureMapGL[texture] = load_texture(absolutePath(texture).c_str());
+        }
+
+        string bump = it->second.bump_texture;
+        if(bump.size() > 0)
+        {
+            textureMapGL[bump] = textureMgr.createTexture(QString(absolutePath(bump).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
         }
     }
 }

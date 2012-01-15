@@ -184,15 +184,21 @@ void OBJ::load( const char* filename, const enum vertexOrder order )
 		}
 	    }
         }
+        //Caculate the tangents for each face
+        //Doesnt seem to work right :(
+        //generateTangents(model);
+
         if (model.faces.size() > 0) {
             models.push_back(model);
             model = Model();
         }
+
         loaded = true;
 	qDebug() << vertices.size() << " vertices,";
 	qDebug() << normals.size() << " normals,";
 	qDebug() << totalFaces << " faces,";
 	qDebug() << texcoords.size() << " texture coordinates,";
+        //qDebug() << tangents.size() << " tangents calculated,";
 	qDebug() << models.size() << " models (OBJ groups),";
 	qDebug() << mtlLib.size() << " materials.";
 	qDebug() << filename << " loaded.";
@@ -260,11 +266,20 @@ vector<OBJ::StelModel> OBJ::getStelArrays()
         } else {
             stelModel.texture.clear();
         }
+
+        if (!material.bump_texture.empty()){
+            stelModel.bump_texture = mtlLib.getTexture(material.bump_texture);
+        } else {
+            stelModel.bump_texture.clear();
+        }
+
         stelModel.triangleCount = model.faces.size();
         stelModel.color = Vec3f(material.color.r, material.color.g, material.color.b);
         stelModel.vertices = new Vec3d[stelModel.triangleCount * 3];
         stelModel.texcoords = new Vec2f[stelModel.triangleCount * 3];
         stelModel.normals = new Vec3f[stelModel.triangleCount * 3];
+        //stelModel.tangents = new Vec3f[stelModel.triangleCount * 3];
+
         int i = 0;
         for (FaceList::iterator it2 = model.faces.begin(); it2 != model.faces.end(); it2++) {
             Face& face = *it2;
@@ -285,6 +300,9 @@ vector<OBJ::StelModel> OBJ::getStelArrays()
                 } else {
                     stelModel.texcoords[i] = Vec2f(0.0f, 0.0f);
                 }
+                //Add Tangents
+                //stelModel.tangents[i] = this->tangents[i];
+
                 three++;
                 i++;
             }
@@ -312,3 +330,55 @@ void OBJ::transform(Mat4d mat)
         maxZ = max(it->z, maxZ);
     }
 }
+
+//void OBJ::generateTangents(Model model)
+//{
+
+//    std::list<Face> faces = model.faces;
+
+//    for(FaceList::iterator it = model.faces.begin(); it != model.faces.end(); it++)
+//    {
+//        Face& face = *it;
+//        Vec3f vertices[3];
+//        Vec3f normals[3];
+//        Vec2f texcoords[3];
+//        int i = 0;
+
+//        for(RefList::iterator it2 = face.refs.begin(); it2 != face.refs.end(); it2++)
+//        {
+//            Ref& curRef = *it2;
+//            vertices[i] = Vec3f(this->vertices[curRef.v].x, this->vertices[curRef.v].y, this->vertices[curRef.v].z);
+//            normals[i] = Vec3f(this->normals[curRef.n].x, this->normals[curRef.n].y, this->normals[curRef.n].z);
+//            texcoords[i] = Vec2f(this->texcoords[curRef.t].u, this->texcoords[curRef.t].v);
+//            i++;
+//        }
+
+//        //From "Mathematic for 3D programming" by Eric Lengyel
+//        Vec3f v1 = vertices[2] - vertices[0];
+//        Vec3f v2 = vertices[1] - vertices[0];
+
+//        Vec2f st1 = texcoords[2] - texcoords[0];
+//        Vec2f st2 = texcoords[1] - texcoords[0];
+
+//        float coef = 1/(st1[0]*st2[1] - st2[0]*st1[1]);
+
+//        Vec3f tangent;
+//        tangent[0] = coef*((v1[0]*st2[1]) + (v2[0]*(-st1[1])));
+//        tangent[1] = coef*((v1[1]*st2[1]) + (v2[1]*(-st1[1])));
+//        tangent[2] = coef*((v1[2]*st2[1]) + (v2[2]*(-st1[1])));
+
+
+//        //Normalizing
+//        Vec3f tmp1 = tangent - normals[0] * normals[0].dot(tangent);
+//        tmp1.normalize();
+//        Vec3f tmp2 = tangent - normals[1] * normals[1].dot(tangent);
+//        tmp2.normalize();
+//        Vec3f tmp3 = tangent - normals[2] * normals[2].dot(tangent);
+//        tmp3.normalize();
+
+//        //Add the tangent to the stack
+//        tangents.push_back(tmp1);
+//        tangents.push_back(tmp2);
+//        tangents.push_back(tmp3);
+//    }
+//}

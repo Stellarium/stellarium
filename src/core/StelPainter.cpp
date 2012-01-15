@@ -1901,11 +1901,11 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 
 void StelPainter::setArrays(const Vec3d* vertice, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray)
 {
-	enableClientStates(vertice, texCoords, colorArray, normalArray);
+        enableClientStates(vertice, texCoords, colorArray, normalArray);
 	setVertexPointer(3, GL_DOUBLE, vertice);
 	setTexCoordPointer(2, GL_FLOAT, texCoords);
 	setColorPointer(3, GL_FLOAT, colorArray);
-	setNormalPointer(GL_FLOAT, normalArray);
+        setNormalPointer(GL_FLOAT, normalArray);
 }
 
 void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool normal)
@@ -1913,7 +1913,7 @@ void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool
 	vertexArray.enabled = vertex;
 	texCoordArray.enabled = texture;
 	colorArray.enabled = color;
-	normalArray.enabled = normal;
+        normalArray.enabled = normal;
 }
 
 void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned int* indices)
