@@ -22,11 +22,12 @@ class MTL
 
         //! Struct for holding a material definition.
         struct Material {
-            Material() : color(), ambient(0.f,0.f,0.f), specular(0.f,0.f,0.f), texture(), shininess(0) {}
+            Material() : color(), ambient(0.f,0.f,0.f), specular(0.f,0.f,0.f), texture(), bump_texture(), shininess(0) {}
             Color color; //!< Material diffuse color.
             Color ambient; //!< Ambient color.
             Color specular; //!< Specular color.
             std::string texture; //!< Filename of the texture file.
+            std::string bump_texture; //!< Filename of the bump map texture file.
             int shininess; //!< Material shininess factor.
         };
 

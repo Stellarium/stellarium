@@ -315,14 +315,14 @@ public:
 	void setNormalPointer(int type, const void* pointer)
 	{
 		normalArray.size = 3; normalArray.type = type; normalArray.pointer = pointer;
-	}
+        }
 
 	//! use instead of glEnableClient
 	void enableClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false);
 
 	//! convenience method that enable and set all the given arrays.
 	//! It is equivalent to calling enableClientState and set the array pointer for each arrays.
-	void setArrays(const Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL);
+        void setArrays(const Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL);
 
 	//! Draws primitives using vertices from the arrays specified by setVertexArray().
 	//! The type of primitive to draw is specified by mode.
@@ -420,7 +420,7 @@ private:
 	//! The descriptor for the current opengl normal array
 	ArrayDesc normalArray;
 	//! The descriptor for the current opengl color array
-	ArrayDesc colorArray;
+        ArrayDesc colorArray;
 
 	//! the single light used by the painter
 	StelPainterLight light;

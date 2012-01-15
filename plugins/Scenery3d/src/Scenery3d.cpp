@@ -467,6 +467,18 @@ void Scenery3d::generateCubeMap_drawSecondPassScene(StelPainter& painter)
           } else {
             glBindTexture(GL_TEXTURE_2D, 0);
           }
+
+          if (stelModel.bump_texture.data()){
+              glActiveTexture(GL_TEXTURE2);
+              stelModel.bump_texture.data()->bind();
+
+              int location = shadowShader->uniformLocation("nmap");
+              shadowShader->setUniform(location, 2);
+
+              glActiveTexture(GL_TEXTURE0);
+          } else{
+              glBindTexture(GL_TEXTURE_2D, 0);
+          }
           glColor3fv(stelModel.color.v);
           painter.setArrays(stelModel.vertices, stelModel.texcoords, __null, stelModel.normals);
           painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);
@@ -499,28 +511,28 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float
                          0.5f, 0.5f, 0.5f, 1.0f);	//bias from [-1, 1] to [0, 1]
     Mat4f textureMatrix = biasMatrix * lightProjectionMatrix * lightViewMatrix;
 
-    Vec4f matrixRow[4];
-    for (int i = 0; i < 4; i++)
-    {
-        matrixRow[i].set(textureMatrix[i+0], textureMatrix[i+4], textureMatrix[i+8], textureMatrix[i+12]);
-    }
+//    Vec4f matrixRow[4];
+//    for (int i = 0; i < 4; i++)
+//    {
+//        matrixRow[i].set(textureMatrix[i+0], textureMatrix[i+4], textureMatrix[i+8], textureMatrix[i+12]);
+//    }
 
-    //Set up texture coordinate generation.
-    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-    glTexGenfv(GL_S, GL_EYE_PLANE, matrixRow[0]);
-    glEnable(GL_TEXTURE_GEN_S);
+//    //Set up texture coordinate generation.
+//    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+//    glTexGenfv(GL_S, GL_EYE_PLANE, matrixRow[0]);
+//    glEnable(GL_TEXTURE_GEN_S);
 
-    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-    glTexGenfv(GL_T, GL_EYE_PLANE, matrixRow[1]);
-    glEnable(GL_TEXTURE_GEN_T);
+//    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+//    glTexGenfv(GL_T, GL_EYE_PLANE, matrixRow[1]);
+//    glEnable(GL_TEXTURE_GEN_T);
 
-    glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-    glTexGenfv(GL_R, GL_EYE_PLANE, matrixRow[2]);
-    glEnable(GL_TEXTURE_GEN_R);
+//    glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+//    glTexGenfv(GL_R, GL_EYE_PLANE, matrixRow[2]);
+//    glEnable(GL_TEXTURE_GEN_R);
 
-    glTexGeni(GL_Q, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-    glTexGenfv(GL_Q, GL_EYE_PLANE, matrixRow[3]);
-    glEnable(GL_TEXTURE_GEN_Q);
+//    glTexGeni(GL_Q, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
+//    glTexGenfv(GL_Q, GL_EYE_PLANE, matrixRow[3]);
+//    glEnable(GL_TEXTURE_GEN_Q);
 
     //Bind depth map texture (again in unit 1 because of multitexturing)
     glActiveTexture(GL_TEXTURE1);
@@ -541,10 +553,10 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float
     //Draw
     generateCubeMap_drawSecondPassScene(painter);
 
-    glDisable(GL_TEXTURE_GEN_S);
-    glDisable(GL_TEXTURE_GEN_T);
-    glDisable(GL_TEXTURE_GEN_R);
-    glDisable(GL_TEXTURE_GEN_Q);
+//    glDisable(GL_TEXTURE_GEN_S);
+//    glDisable(GL_TEXTURE_GEN_T);
+//    glDisable(GL_TEXTURE_GEN_R);
+//    glDisable(GL_TEXTURE_GEN_Q);
 
     //Done. Unbind shader
     glUseProgram(0);
@@ -578,7 +590,7 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glDepthMask(GL_TRUE);
     glEnable(GL_CULL_FACE);
     //Backface culling for ESM!
-    glCullFace(GL_BACK);
+    glCullFace(GL_FRONT);
     glColorMask(0, 0, 0, 0); // disable color writes (increase performance?)
 
     //Setup the matrices needed
@@ -635,7 +647,7 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     //Draw the scene
-    drawArrays(painter);
+    drawArrays(painter, false);
 
     //Move polygons back to normal position
     glDisable(GL_POLYGON_OFFSET_FILL);
@@ -1038,7 +1050,7 @@ void Scenery3d::initShadowMapping()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
 
     //Attach the depthmap to the Buffer
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapTexture, 0);
