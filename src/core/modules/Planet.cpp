@@ -715,7 +715,15 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 			ang_dist = 1.f; // if ang_dist == 0, the Planet is sun..
 
 		// by putting here, only draw orbit if Planet is visible for clarity
-		drawOrbit(core);  // TODO - fade in here also...
+		if (maxMagLabels>getVMagnitude(core))
+		{
+			orbitFader=true;
+		}
+		else
+		{
+			orbitFader=false;
+		}
+		drawOrbit(core);
 
 		if (flagLabels && ang_dist>0.25 && maxMagLabels>getVMagnitude(core))
 		{
