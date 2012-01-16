@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-11 14:01+0200\n"
+"POT-Creation-Date: 2012-01-13 23:26+0700\n"
 "PO-Revision-Date: 2011-12-21 12:46+0000\n"
 "Last-Translator: Bogdan Marinov <daggerstab@gmail.com>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-12 05:30+0000\n"
-"X-Generator: Launchpad (build 14640)\n"
+"X-Launchpad-Export-Date: 2012-01-14 04:39+0000\n"
+"X-Generator: Launchpad (build 14664)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -318,46 +318,46 @@ msgstr "(привидни)"
 msgid "Az/Alt: %1/%2"
 msgstr "Азимут/Височина: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:312 src/gui/ConfigurationDialog.cpp:314
+#: src/gui/ConfigurationDialog.cpp:313 src/gui/ConfigurationDialog.cpp:315
 msgid "Select screenshot directory"
 msgstr "Избиране на директория за снимки на екрана"
 
-#: src/gui/ConfigurationDialog.cpp:487
+#: src/gui/ConfigurationDialog.cpp:488
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Зрителен ъгъл (FOV) при стартиране: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:495
+#: src/gui/ConfigurationDialog.cpp:496
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Посока на наблюдение при стартиране (Аз/Вис): %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:534
+#: src/gui/ConfigurationDialog.cpp:535
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
 msgid "Authors"
 msgstr "Автори"
 
-#: src/gui/ConfigurationDialog.cpp:538 src/gui/ViewDialog.cpp:397
+#: src/gui/ConfigurationDialog.cpp:539 src/gui/ViewDialog.cpp:397
 msgid "Contact"
 msgstr "За контакт"
 
-#: src/gui/ConfigurationDialog.cpp:614
+#: src/gui/ConfigurationDialog.cpp:615
 msgid "Author"
 msgstr "Автор"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:616
 msgid "License"
 msgstr "Лиценз"
 
-#: src/gui/ConfigurationDialog.cpp:643
+#: src/gui/ConfigurationDialog.cpp:644
 msgid "Running script: "
 msgstr "Изпълняван скрипт: "
 
-#: src/gui/ConfigurationDialog.cpp:650
+#: src/gui/ConfigurationDialog.cpp:651
 msgid "Running script: [none]"
 msgstr "Изпълняван скрипт: [няма]"
 
-#: src/gui/ConfigurationDialog.cpp:720
+#: src/gui/ConfigurationDialog.cpp:721
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -365,16 +365,16 @@ msgstr ""
 "Изтеглянето на нови каталози приключи!\n"
 "Stellarium трябва да бъде рестартиран, за да се покажат."
 
-#: src/gui/ConfigurationDialog.cpp:724
+#: src/gui/ConfigurationDialog.cpp:725
 msgid "All available star catalogs have been installed."
 msgstr "Всички налични звездни каталози са инсталирани."
 
-#: src/gui/ConfigurationDialog.cpp:729
+#: src/gui/ConfigurationDialog.cpp:730
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Сваляне на каталог %1 от %2"
 
-#: src/gui/ConfigurationDialog.cpp:736
+#: src/gui/ConfigurationDialog.cpp:737
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -383,7 +383,7 @@ msgstr ""
 "Изтегля се %1...\n"
 "(Този прозорец може да бъде затворен.)"
 
-#: src/gui/ConfigurationDialog.cpp:743
+#: src/gui/ConfigurationDialog.cpp:744
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -394,7 +394,7 @@ msgstr ""
 "Брой звезди: %2 милиона\n"
 "Величини: между %3 и %4"
 
-#: src/gui/ConfigurationDialog.cpp:786 src/gui/ConfigurationDialog.cpp:822
+#: src/gui/ConfigurationDialog.cpp:787 src/gui/ConfigurationDialog.cpp:823
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -403,11 +403,11 @@ msgstr ""
 "Грешка при свалянето на %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:874
+#: src/gui/ConfigurationDialog.cpp:875
 msgid "Verifying file integrity..."
 msgstr "Проверка на целостта на файла..."
 
-#: src/gui/ConfigurationDialog.cpp:878
+#: src/gui/ConfigurationDialog.cpp:879
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -906,7 +906,7 @@ msgstr "Изключителна честота на Леонидите"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Най-високата достигната честота (Леонидите през 1966)"
 
-#: src/gui/LocationDialog.cpp:399
+#: src/gui/LocationDialog.cpp:401
 msgid "New Location"
 msgstr "Ново Място"
 
@@ -4982,6 +4982,10 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
 msgid "Solar System Editor plug-in"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
+msgid "Import data"
 msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523

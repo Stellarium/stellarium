@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-01-11 14:01+0200\n"
+"POT-Creation-Date: 2012-01-13 23:26+0700\n"
 "PO-Revision-Date: 2011-12-23 00:19+0000\n"
 "Last-Translator: Aman Sharma <Unknown>\n"
 "Language-Team: Hindi <hi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-12 05:33+0000\n"
-"X-Generator: Launchpad (build 14640)\n"
+"X-Launchpad-Export-Date: 2012-01-14 04:41+0000\n"
+"X-Generator: Launchpad (build 14664)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -303,46 +303,46 @@ msgstr ""
 msgid "Az/Alt: %1/%2"
 msgstr "एज / आल्ट: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:312 src/gui/ConfigurationDialog.cpp:314
+#: src/gui/ConfigurationDialog.cpp:313 src/gui/ConfigurationDialog.cpp:315
 msgid "Select screenshot directory"
 msgstr "स्क्रीनशॉट डायरेक्टरी चुने"
 
-#: src/gui/ConfigurationDialog.cpp:487
+#: src/gui/ConfigurationDialog.cpp:488
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "प्रारंभिक कोणीय दृष्टिक्षेत्र: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:495
+#: src/gui/ConfigurationDialog.cpp:496
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "प्रारंभिक दृश्य दिशा एज/आल्ट: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:534
+#: src/gui/ConfigurationDialog.cpp:535
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
 msgid "Authors"
 msgstr "रचयिता"
 
-#: src/gui/ConfigurationDialog.cpp:538 src/gui/ViewDialog.cpp:397
+#: src/gui/ConfigurationDialog.cpp:539 src/gui/ViewDialog.cpp:397
 msgid "Contact"
 msgstr "सम्पर्क करें"
 
-#: src/gui/ConfigurationDialog.cpp:614
+#: src/gui/ConfigurationDialog.cpp:615
 msgid "Author"
 msgstr "रचयिता"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:616
 msgid "License"
 msgstr "अनुज्ञापत्र (लाइसेंस)"
 
-#: src/gui/ConfigurationDialog.cpp:643
+#: src/gui/ConfigurationDialog.cpp:644
 msgid "Running script: "
 msgstr "सक्रिय स्क्रिप्ट: "
 
-#: src/gui/ConfigurationDialog.cpp:650
+#: src/gui/ConfigurationDialog.cpp:651
 msgid "Running script: [none]"
 msgstr "सक्रिय स्क्रिप्ट: [कोई नहीं]"
 
-#: src/gui/ConfigurationDialog.cpp:720
+#: src/gui/ConfigurationDialog.cpp:721
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -350,16 +350,16 @@ msgstr ""
 "तारों के नए कैटालोग डाऊनलोड हो चुके है!\n"
 "उन्हें देखने के लिए स्टेलारियम पुनः शुरू करें"
 
-#: src/gui/ConfigurationDialog.cpp:724
+#: src/gui/ConfigurationDialog.cpp:725
 msgid "All available star catalogs have been installed."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:729
+#: src/gui/ConfigurationDialog.cpp:730
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%2 में से %1 कैटालोग प्राप्त करें"
 
-#: src/gui/ConfigurationDialog.cpp:736
+#: src/gui/ConfigurationDialog.cpp:737
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -368,7 +368,7 @@ msgstr ""
 "डाउनलोड शुरू %1...\n"
 "(खिडकी बंद कर सकते है)"
 
-#: src/gui/ConfigurationDialog.cpp:743
+#: src/gui/ConfigurationDialog.cpp:744
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -379,7 +379,7 @@ msgstr ""
 "तारों की संख्या: %2 Million\n"
 "तेजस्विता विस्तार: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:786 src/gui/ConfigurationDialog.cpp:822
+#: src/gui/ConfigurationDialog.cpp:787 src/gui/ConfigurationDialog.cpp:823
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -388,11 +388,11 @@ msgstr ""
 "%1 डाउनलोड नही हो पाया:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:874
+#: src/gui/ConfigurationDialog.cpp:875
 msgid "Verifying file integrity..."
 msgstr "फाइल की जांच हो रही है..."
 
-#: src/gui/ConfigurationDialog.cpp:878
+#: src/gui/ConfigurationDialog.cpp:879
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -882,7 +882,7 @@ msgstr "असाधारण लिओनिड दर"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "अधिकतम दर (१९६६ लियोनिड)"
 
-#: src/gui/LocationDialog.cpp:399
+#: src/gui/LocationDialog.cpp:401
 msgid "New Location"
 msgstr "नया स्थल"
 
@@ -4879,6 +4879,10 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
 msgid "Solar System Editor plug-in"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
+msgid "Import data"
 msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
