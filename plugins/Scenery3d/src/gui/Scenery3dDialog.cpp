@@ -25,6 +25,9 @@ void Scenery3dDialog::createDialogContent()
     connect(ui->checkBoxEnableShadows, SIGNAL(stateChanged(int)), this,
             SLOT(renderingOptionsChanged()));
 
+    connect(ui->checkBoxEnableBump, SIGNAL(stateChanged(int)), this,
+            SLOT(renderingBumpChanged()));
+
     // Fill the scenery list
     QListWidget* l = ui->scenery3dListWidget;
     l->blockSignals(true);
@@ -58,4 +61,10 @@ void Scenery3dDialog::renderingOptionsChanged(void)
 {
     Scenery3dMgr* smgr = GETSTELMODULE(Scenery3dMgr);
     smgr->setEnableShadows(ui->checkBoxEnableShadows->isChecked());
+}
+
+void Scenery3dDialog::renderingBumpChanged(void)
+{
+    Scenery3dMgr* smgr = GETSTELMODULE(Scenery3dMgr);
+    smgr->setEnableBumps(ui->checkBoxEnableBump->isChecked());
 }

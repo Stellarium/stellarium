@@ -147,6 +147,9 @@ void Scenery3dMgr::init()
 
     //Create a shadow shader and load the files
     this->shadowShader = new StelShader();
+    this->bumpShader = new StelShader();
+    this->univShader = new StelShader();
+
 
     //Alex Wolf loading patch : ) Thanks!
     QStringList lst =  QStringList(StelFileMgr::findFileInAllPaths("data/shaders/",(StelFileMgr::Flags)(StelFileMgr::Directory)));
@@ -155,12 +158,35 @@ void Scenery3dMgr::init()
 
     if (!(shadowShader->load(vsshader.data(), fsshader.data())))
     {
-        qWarning() << "WARNING [Scenery3d]: unable to load shader files.\n";
+        qWarning() << "WARNING [Scenery3d]: unable to load shadow mapping shader files.\n";
         shadowShader = 0;
     }
 
-    scenery3d = new Scenery3d(cubemapSize, shadowmapSize, shadowShader);
+    lst =  QStringList(StelFileMgr::findFileInAllPaths("data/shaders/",(StelFileMgr::Flags)(StelFileMgr::Directory)));
+    vsshader = (QString(lst.first()) + "bmap.v.glsl").toLocal8Bit();
+    fsshader = (QString(lst.first()) + "bmap.f.glsl").toLocal8Bit();
+
+    if (!(bumpShader->load(vsshader.data(), fsshader.data())))
+    {
+        qWarning() << "WARNING [Scenery3d]: unable to load bump mapping shader files.\n";
+        bumpShader  = 0;
+    }
+
+    lst =  QStringList(StelFileMgr::findFileInAllPaths("data/shaders/",(StelFileMgr::Flags)(StelFileMgr::Directory)));
+    vsshader = (QString(lst.first()) + "univ.v.glsl").toLocal8Bit();
+    fsshader = (QString(lst.first()) + "univ.f.glsl").toLocal8Bit();
+
+    if (!(univShader->load(vsshader.data(), fsshader.data())))
+    {
+        qWarning() << "WARNING [Scenery3d]: unable to load universal shader files.\n";
+        univShader  = 0;
+    }
+
+
+    scenery3d = new Scenery3d(cubemapSize, shadowmapSize);
+    scenery3d->setShaders(shadowShader, bumpShader, univShader);
     scenery3d->setShadowsEnabled(enableShadows);
+    scenery3d->setBumpsEnabled(enableBumps);
 
     //Initialize Shadow Mapping
     scenery3d->initShadowMapping();
@@ -310,8 +336,10 @@ Scenery3d* Scenery3dMgr::createFromFile(const QString& scenery3dFile, const QStr
 {
     QSettings scenery3dIni(scenery3dFile, StelIniFormat);
     QString s;
-    Scenery3d* newScenery3d = new Scenery3d(cubemapSize, shadowmapSize, shadowShader);
+    Scenery3d* newScenery3d = new Scenery3d(cubemapSize, shadowmapSize);
+    newScenery3d->setShaders(shadowShader, bumpShader, univShader);
     newScenery3d->setShadowsEnabled(enableShadows);
+    newScenery3d->setBumpsEnabled(enableBumps);
     newScenery3d->initShadowMapping();
     if (scenery3dIni.status() != QSettings::NoError)
     {
@@ -458,6 +486,15 @@ void Scenery3dMgr::setEnableShadows(bool enableShadows)
     }
 }
 
+void Scenery3dMgr::setEnableBumps(bool enableBumps)
+{
+    this->enableBumps = enableBumps;
+    if(scenery3d != NULL)
+    {
+        scenery3d->setBumpsEnabled(enableBumps);
+    }
+}
+
 /////////////////////////////////////////////////////////////////////
 StelModule* Scenery3dStelPluginInterface::getStelModule() const
 {
@@ -472,7 +509,7 @@ StelPluginInfo Scenery3dStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "Scenery3dMgr";
 	info.displayedName = "Scenery3d";
-        info.authors = "Simon Parzer, Peter Neubauer, Georg Zotti";
+        info.authors = "Simon Parzer, Peter Neubauer, Georg Zotti, Andrei Borza";
         info.contact = "Georg.Zotti@univie.ac.at";
 	info.description = "OBJ landscape renderer.";
 //	info.description = "OBJ landscape renderer. This Beta compiled 2011-06-06 for Maurizio Forte for collaboration on Copan.";
