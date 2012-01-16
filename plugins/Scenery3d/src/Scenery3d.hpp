@@ -43,8 +43,16 @@ class Scenery3d
 public:
     //! Initializes an empty Scenery3d object.
     //! @param cbmSize Size of the cubemap to use for indirect rendering.
-    Scenery3d(int cubemapSize=1024, int shadowmapSize=1024, StelShader* shadowShader = 0);
+    Scenery3d(int cubemapSize=1024, int shadowmapSize=1024);
     virtual ~Scenery3d();
+
+    //! Sets the shaders for the plugin
+    void setShaders(StelShader* shadowShader = 0, StelShader* bumpShader = 0, StelShader* univShader = 0)
+    {
+        this->shadowShader = shadowShader;
+        this->bumpShader = bumpShader;
+        this->univShader = univShader;
+    }
 
     //! Loads configuration values from a scenery3d.ini file.
     void loadConfig(const QSettings& scenery3dIni, const QString& scenery3dID);
@@ -70,6 +78,8 @@ public:
 
     bool getShadowsEnabled(void) { return shadowsEnabled; }
     void setShadowsEnabled(bool shadowsEnabled) { this->shadowsEnabled = shadowsEnabled; }
+    bool getBumpsEnabled(void) { return bumpsEnabled; }
+    void setBumpsEnabled(bool bumpsEnabled) { this->bumpsEnabled = bumpsEnabled; }
 
     //! @return Name of the scenery.
     QString getName() const { return name; }
@@ -93,6 +103,7 @@ public:
 
 
     enum shadowCaster { None, Sun, Moon, Venus };
+    enum effect { No, BumpMapping, ShadowMapping, All };
 
 private:
     double eyeLevel;
@@ -102,7 +113,6 @@ private:
     void generateCubeMap(StelCore* core);
     void generateCubeMap_drawScene(StelPainter& painter, float lightBrightness);
     void generateCubeMap_drawSceneWithShadows(StelPainter& painter, float lightBrightness);
-    void generateCubeMap_drawSecondPassScene(StelPainter& painter);
     void drawArrays(StelPainter& painter, bool textures=true);
     void drawFromCubeMap(StelCore* core);
 
@@ -110,6 +120,7 @@ private:
     float groundHeight();
 
     bool shadowsEnabled;    // switchable value: Use shadow mapping
+    bool bumpsEnabled;      // switchable value: Use bump mapping
     bool textEnabled;       // switchable value: display coordinates on screen
 
     int cubemapSize;        // configurable values, typically 512/1024/2048/4096
@@ -158,12 +169,24 @@ private:
     // This will be applied to make sure that X=Grid-East, Y=Grid-North, Z=height.
     Mat4d obj2gridMatrix;
 
+    //Currently selected Shader
+    StelShader* curShader;
     //Shadow mapping shader + per pixel lighting
     StelShader* shadowShader;
+    //Bump mapping shader
+    StelShader* bumpShader;
+    //Universal shader: shadow + bump mapping
+    StelShader* univShader;
     //Depth texture id
     GLuint shadowMapTexture;
     //Shadow Map FBO handle
     GLuint shadowFBO;
+    //Currently selected effect
+    effect curEffect;
+    //Sends texture data to the shader based on which effect is selected;
+    void sendToShader(OBJ::StelModel& stelModel, effect cur);
+    //Binds the shader for the selected effect
+    void bindShader();
 
 };
 
