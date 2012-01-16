@@ -39,6 +39,9 @@ public:
     //! Use this to set the enableShadows flag.
     //! If set to true, shadow mapping is enabled for the 3D scene.
     void setEnableShadows(bool enableShadows);
+    //! Use this to set the enableBumps flag.
+    //! If set to true, bump mapping is enabled for the 3D scene.
+    void setEnableBumps(bool enableBumps);
 
     static const QString MODULE_PATH;
 
@@ -75,12 +78,15 @@ private:
     QString currentScenery3dID;
     QString defaultScenery3dID;
     bool enableShadows;  // toggle shadow mapping
+    bool enableBumps;    // toggle bump mapping
     StelButton* toolbarEnableButton;
     StelButton* toolbarSettingsButton;
     StelCore::ProjectionType oldProjectionType;
 
     //Shader for shadow mapping
     StelShader* shadowShader;
+    StelShader* bumpShader;
+    StelShader* univShader;
 };
 
 

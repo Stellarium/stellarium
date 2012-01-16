@@ -23,6 +23,7 @@ uniform mat4 tex_mat;
 
 varying vec4 SM_tex_coord;
 varying vec3 vecLight;
+varying vec3 vecPos;
 varying vec3 vecNormal;
 
 void main(void)
@@ -32,7 +33,11 @@ void main(void)
 	
 	gl_TexCoord[0] = gl_MultiTexCoord0;
 	gl_Position = ftransform();
-
+	
+	vec3 lightDir = normalize(gl_LightSource[0].position.xyz);
+	
+	//Multiplication by inverse Normal Matrix fixes a bug - need to investigate this
+	vecLight = normalize(inverse(gl_NormalMatrix) * lightDir);
+	vecPos = gl_Vertex.xyz;
 	vecNormal = normalize(gl_NormalMatrix * gl_Normal);
-	vecLight = normalize(gl_LightSource[0].position.xyz);
 }

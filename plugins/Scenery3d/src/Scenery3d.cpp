@@ -51,7 +51,7 @@
 //const float Scenery3d::MOVE_SPEED = 4.0;
 //const float Scenery3d::MAX_SLOPE = 1.1;
 
-Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, StelShader* shadowShader)
+Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
     :absolutePosition(0.0, 0.0, 0.0), // 1.E-12, 1.E-12, 1.E-12), // these values signify "set default values"
     movement_x(0.0f), movement_y(0.0f), movement_z(0.0f),core(NULL),
     objModel(NULL), groundModel(NULL), heightmap(NULL), location(NULL)
@@ -105,6 +105,9 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, StelShader* shadowShade
         }
     }
     shadowsEnabled = false;
+    bumpsEnabled = false;
+    curEffect = No;
+    curShader = 0;
     Mat4d matrix;
 #define PLANE(_VAR_, _MAT_) matrix=_MAT_; _VAR_=StelVertexArray(cubePlaneFront.vertex,StelVertexArray::Triangles,cubePlaneFront.texCoords);\
                         for(int i=0;i<_VAR_.vertex.size();i++){ matrix.transfo(_VAR_.vertex[i]); }
@@ -114,8 +117,6 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, StelShader* shadowShade
     PLANE(cubePlaneTop, Mat4d::xrotation(-M_PI_2))
     PLANE(cubePlaneBottom, Mat4d::xrotation(M_PI_2))
 #undef PLANE
-
-    this->shadowShader = shadowShader;
 }
 
 Scenery3d::~Scenery3d()
@@ -375,6 +376,7 @@ void Scenery3d::handleKeys(QKeyEvent* e)
         switch (e->key())
         {
             case Qt::Key_Space:     shadowsEnabled = !shadowsEnabled; e->accept(); break;
+            case Qt::Key_B:         bumpsEnabled = !bumpsEnabled; e->accept(); break;
             case Qt::Key_K:         textEnabled = !textEnabled;   e->accept(); break;
             case Qt::Key_PageUp:    movement_z = -1.0f * speedup; e->accept(); break;
             case Qt::Key_PageDown:  movement_z =  1.0f * speedup; e->accept(); break;
@@ -431,20 +433,56 @@ float Scenery3d::groundHeight()
 void Scenery3d::drawArrays(StelPainter& painter, bool textures)
 {
     for (unsigned int i=0; i<objModelArrays.size(); i++) {
-          OBJ::StelModel& stelModel = objModelArrays[i];
-          if (stelModel.texture.data()) {
-                if (textures) stelModel.texture.data()->bind();
-          } else {
-                if (textures) glBindTexture(GL_TEXTURE_2D, 0);
-          }
-          glColor3fv(stelModel.color.v);
-          painter.setArrays(stelModel.vertices, stelModel.texcoords, __null, stelModel.normals);
-          painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);
+        OBJ::StelModel& stelModel = objModelArrays[i];
+        if(textures) sendToShader(stelModel, curEffect);
+        glColor3fv(stelModel.color.v);
+        painter.setArrays(stelModel.vertices, stelModel.texcoords, __null, stelModel.normals);
+        painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);
+    }
+}
+
+void Scenery3d::sendToShader(OBJ::StelModel& stelModel, effect cur)
+{
+    if(cur != No)
+    {
+        if (stelModel.texture.data()) {
+            stelModel.texture.data()->bind();
+            int location = curShader->uniformLocation("tex");
+            curShader->setUniform(location, 0);
+        } else {
+            glBindTexture(GL_TEXTURE_2D, 0);
+        }
+
+        if(cur == BumpMapping || cur == All)
+        {
+            if (stelModel.bump_texture.data()){
+                glActiveTexture(GL_TEXTURE2);
+                stelModel.bump_texture.data()->bind();
+
+                int location = curShader->uniformLocation("bmap");
+                curShader->setUniform(location, 2);
+
+                glActiveTexture(GL_TEXTURE0);
+            } else {
+                glBindTexture(GL_TEXTURE_2D, 0);
+            }
+        }
+    }
+    else
+    {
+        if (stelModel.texture.data()) {
+            stelModel.texture.data()->bind();
+        } else {
+            glBindTexture(GL_TEXTURE_2D, 0);
+        }
     }
 }
 
 void Scenery3d::generateCubeMap_drawScene(StelPainter& painter, float lightBrightness)
 {
+    //Bind shader based on selected effect flags
+    bindShader();
+
     //GZ: to achieve brighter surfaces, we use sqrt(lightBrightness):
     float diffBrightness=std::sqrt(lightBrightness);
     //const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
@@ -452,55 +490,31 @@ void Scenery3d::generateCubeMap_drawScene(StelPainter& painter, float lightBrigh
     const GLfloat LightDiffuse[] = {diffBrightness, diffBrightness, diffBrightness, 1.0f};
     glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
-    drawArrays(painter);
+
+    drawArrays(painter, true);
+
+    //Unbind
+    glUseProgram(0);
 }
 
-//Sends the texture to the shader
-void Scenery3d::generateCubeMap_drawSecondPassScene(StelPainter& painter)
+void Scenery3d::bindShader()
 {
-    for (unsigned int i=0; i<objModelArrays.size(); i++) {
-          OBJ::StelModel& stelModel = objModelArrays[i];
-          if (stelModel.texture.data()) {
-            stelModel.texture.data()->bind();
-            int location = shadowShader->uniformLocation("tex");
-            shadowShader->setUniform(location, 0);
-          } else {
-            glBindTexture(GL_TEXTURE_2D, 0);
-          }
+    //No Shader, No effect
+    curEffect = No;
+    curShader = 0;
 
-          if (stelModel.bump_texture.data()){
-              glActiveTexture(GL_TEXTURE2);
-              stelModel.bump_texture.data()->bind();
+    if(shadowsEnabled && !bumpsEnabled) { curShader = shadowShader; curEffect = ShadowMapping; }
+    else if(!shadowsEnabled && bumpsEnabled) { curShader = bumpShader; curEffect = BumpMapping; }
+    else if(shadowsEnabled && bumpsEnabled) { curShader = univShader; curEffect = All; }
 
-              int location = shadowShader->uniformLocation("nmap");
-              shadowShader->setUniform(location, 2);
-
-              glActiveTexture(GL_TEXTURE0);
-          } else{
-              glBindTexture(GL_TEXTURE_2D, 0);
-          }
-          glColor3fv(stelModel.color.v);
-          painter.setArrays(stelModel.vertices, stelModel.texcoords, __null, stelModel.normals);
-          painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);
-    }
+    //Bind the selected shader
+    if(curShader != 0) curShader->use();
 }
 
 void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float lightBrightness)
 {    
-//    //GZ: to achieve brighter surfaces, we use sqrt(lightBrightness):
-//    float diffBrightness=std::sqrt(lightBrightness);
-
-//    //const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
-//    const GLfloat LightAmbient[] = {lightBrightness, lightBrightness, lightBrightness, 1.0f};
-//    const GLfloat LightDiffuse[] = {diffBrightness, diffBrightness, diffBrightness, 1.0f};
-
-//    glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbientShadow);
-//    glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuseShadow);
-
-    //Use the shadow mapping shader
-    shadowShader->use();
-
-    int location = -1;
+    //Bind the shader
+    bindShader();
 
     //Calculate texture matrix for projection
     //This matrix takes us from eye space to the light's clip space
@@ -511,52 +525,24 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float
                          0.5f, 0.5f, 0.5f, 1.0f);	//bias from [-1, 1] to [0, 1]
     Mat4f textureMatrix = biasMatrix * lightProjectionMatrix * lightViewMatrix;
 
-//    Vec4f matrixRow[4];
-//    for (int i = 0; i < 4; i++)
-//    {
-//        matrixRow[i].set(textureMatrix[i+0], textureMatrix[i+4], textureMatrix[i+8], textureMatrix[i+12]);
-//    }
-
-//    //Set up texture coordinate generation.
-//    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-//    glTexGenfv(GL_S, GL_EYE_PLANE, matrixRow[0]);
-//    glEnable(GL_TEXTURE_GEN_S);
-
-//    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-//    glTexGenfv(GL_T, GL_EYE_PLANE, matrixRow[1]);
-//    glEnable(GL_TEXTURE_GEN_T);
-
-//    glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-//    glTexGenfv(GL_R, GL_EYE_PLANE, matrixRow[2]);
-//    glEnable(GL_TEXTURE_GEN_R);
-
-//    glTexGeni(GL_Q, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-//    glTexGenfv(GL_Q, GL_EYE_PLANE, matrixRow[3]);
-//    glEnable(GL_TEXTURE_GEN_Q);
-
     //Bind depth map texture (again in unit 1 because of multitexturing)
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
 
     //Send Shadow Map to shader
-    location = shadowShader->uniformLocation("smap");
-    shadowShader->setUniform(location, 1);
+    int location = curShader->uniformLocation("smap");
+    curShader->setUniform(location, 1);
 
     //Send to texture matrix to shader
-    location = shadowShader->uniformLocation("tex_mat");
-    shadowShader->setUniform(location, textureMatrix);
+    location = curShader->uniformLocation("tex_mat");
+    curShader->setUniform(location, textureMatrix);
 
     //Activate normal texturing
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, 0);
 
     //Draw
-    generateCubeMap_drawSecondPassScene(painter);
-
-//    glDisable(GL_TEXTURE_GEN_S);
-//    glDisable(GL_TEXTURE_GEN_T);
-//    glDisable(GL_TEXTURE_GEN_R);
-//    glDisable(GL_TEXTURE_GEN_Q);
+    drawArrays(painter, true);
 
     //Done. Unbind shader
     glUseProgram(0);
@@ -758,7 +744,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
     #define DRAW_SCENE  glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);\
                         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);\
                         if(shadows){generateCubeMap_drawSceneWithShadows(painter, lightBrightness);}\
-                        else{generateCubeMap_drawScene(painter, lightBrightness);}
+                        else{generateCubeMap_drawScene(painter, lightBrightness);}\
 
     //front
     glPushMatrix();
