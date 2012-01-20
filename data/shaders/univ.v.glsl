@@ -21,6 +21,8 @@
 //Texture Bias Matrix for Shadow mapping
 uniform mat4 tex_mat;
 
+uniform mat3 NormalMatrix;
+
 varying vec4 SM_tex_coord;
 varying vec3 vecLight;
 varying vec3 vecPos;
@@ -36,8 +38,7 @@ void main(void)
 	
 	vec3 lightDir = normalize(gl_LightSource[0].position.xyz);
 	
-	//Multiplication by inverse Normal Matrix fixes a bug - need to investigate this
-	vecLight = normalize(inverse(gl_NormalMatrix) * lightDir);
+	vecLight = normalize(NormalMatrix * lightDir);
 	vecPos = gl_Vertex.xyz;
-	vecNormal = normalize(gl_NormalMatrix * gl_Normal);
+	vecNormal = gl_Normal;
 }

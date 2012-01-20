@@ -27,6 +27,9 @@ extern void trim_right(std::string& source);
 //! @param source Reference to string. It is modified in place.
 //! @param t Character sequence; characters to remove from source.
 extern void trim_right(std::string& source, const std::string& t);
+//! Generates a normal Matrix from the given 3x3 view matrix
+//! @param mat 3x3 view matrix, will be overwritten to normal matrix
+extern void makeNormalMatrix(std::vector<float>& mat);
 
 #endif
 

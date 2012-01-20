@@ -66,3 +66,7 @@ unsigned int parseInt(const string& str)
     return i;
 }
 
+void makeNormalMatrix(std::vector<float> &mat)
+{
+
+}
