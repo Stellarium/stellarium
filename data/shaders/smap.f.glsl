@@ -38,13 +38,16 @@ void main(void)
 	vec3 tex_coords = SM_tex_coord.xyz/SM_tex_coord.w;
 	float depth = texture(smap, tex_coords.xy).x;
 	
-	float factor = 0.0;
+	vec4 color;
 	if(depth > (tex_coords.z + 0.00001))
 	{
 		//In light!
-		factor = 1.0;
+		color = texColor * (gl_LightSource[0].ambient + diffuse);
 	}
- 
-	vec4 color = texColor * (gl_LightSource[0].ambient + diffuse * factor);
+	else
+	{
+		color = texColor * (gl_LightSource[0].ambient + (diffuse * 0.1));
+	}
+	
 	gl_FragColor = vec4(color.xyz, 1.0);
 }

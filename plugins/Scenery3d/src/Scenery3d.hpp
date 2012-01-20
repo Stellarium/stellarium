@@ -188,6 +188,7 @@ private:
     //Binds the shader for the selected effect
     void bindShader();
 
+    void testMethod();
 };
 
 #endif

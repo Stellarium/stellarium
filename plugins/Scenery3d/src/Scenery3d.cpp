@@ -384,6 +384,7 @@ void Scenery3d::handleKeys(QKeyEvent* e)
             case Qt::Key_Down:      movement_x =  1.0f * speedup; e->accept(); break;
             case Qt::Key_Right:     movement_y = -1.0f * speedup; e->accept(); break;
             case Qt::Key_Left:      movement_y =  1.0f * speedup; e->accept(); break;
+            case Qt::Key_P: testMethod(); e->accept(); break;
         }
     }
     else if ((e->type() == QKeyEvent::KeyRelease) && (e->modifiers() & Qt::ControlModifier))
@@ -396,6 +397,37 @@ void Scenery3d::handleKeys(QKeyEvent* e)
                 e->accept();
             }
     }
+}
+
+void Scenery3d::testMethod()
+{
+    Mat3f mat(5, 8, 7,
+              2, 5, 8,
+              3, 6, 9);
+
+    printf("Matrix:\n");
+    mat.print();
+    printf("\n");
+
+    mat = mat.inverse();
+
+    printf("Inverted:\n");
+    mat.print();
+    printf("\n");
+
+    Mat4f mat2(1, 5, 9, 13,
+               2, 6, 10,14,
+               3, 7, 11,15,
+               4, 8, 12,16);
+
+    Mat3f upperMat = mat2.upper3x3();
+
+    printf("\nUpper Matrix:\n");
+    upperMat.print();
+
+    printf("\nTransposed:\n");
+    upperMat = upperMat.transpose();
+    upperMat.print();
 }
 
 void Scenery3d::update(double deltaTime)
@@ -491,6 +523,22 @@ void Scenery3d::generateCubeMap_drawScene(StelPainter& painter, float lightBrigh
     glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
 
+    if(curShader != 0)
+    {
+        //Compute the Normal Matrix and send to shader
+        //Note: It's sent as 4x4 and in the shader we just use vec4(light3, 0.0)
+        //to compute what we want.
+        //We know that N = (inv(ModelViewMatrix))^T
+        Mat4f modelView;
+        glGetFloatv(GL_MODELVIEW_MATRIX, modelView);
+
+        Mat3f normalMatrix = modelView.upper3x3();
+        normalMatrix = normalMatrix.inverse().transpose();
+
+        int location = curShader->uniformLocation("NormalMatrix");
+        curShader->set3x3Uniform(location, normalMatrix);
+    }
+
     drawArrays(painter, true);
 
     //Unbind
@@ -540,6 +588,19 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float
     //Activate normal texturing
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, 0);
+
+    //Compute the Normal Matrix and send to shader
+    //Note: It's sent as 4x4 and in the shader we just use vec4(light3, 0.0)
+    //to compute what we want.
+    //We know that N = (inv(ModelViewMatrix))^T
+    Mat4f modelView;
+    glGetFloatv(GL_MODELVIEW_MATRIX, modelView);
+
+    Mat3f normalMatrix = modelView.upper3x3();
+    normalMatrix = normalMatrix.inverse().transpose();
+
+    location = curShader->uniformLocation("NormalMatrix");
+    curShader->set3x3Uniform(location, normalMatrix);
 
     //Draw
     drawArrays(painter, true);

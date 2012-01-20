@@ -58,6 +58,8 @@ public:
         void setUniform (int location, float x, float y, float z, float w);
 //! Passes a uniform to the shader program
         void setUniform (int location, float mat[]);
+//! Passes a 3x3 mat uniform to the shader program
+        void set3x3Uniform (int location, float mat[]);
 
 //! Loads a vertex and a pixel Shader from the vertex and pixel shader files respectively.
 //! @param string vertexFile, the path of the vertex shader
