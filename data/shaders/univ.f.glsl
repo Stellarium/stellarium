@@ -29,6 +29,7 @@ varying vec3 vecNormal;
 
 void main(void)
 {
+	//In-shader tangent/binormal calculation by kvark (http://stackoverflow.com/a/5261402)
 	//Derived position
 	vec3 p_dx = dFdx(vecPosition);
 	vec3 p_dy = dFdy(vecPosition);
@@ -49,35 +50,40 @@ void main(void)
 	x = cross(b, n);
 	b = cross(n, x);
 	b = normalize(b);
-	mat3 tbn = mat3(t, b, n);
+	
+	//TBN space matrix
+	mat3 tbnv = mat3(t.x, b.x, n.x,
+					 t.y, b.y, n.y,
+					 t.z, b.z, n.z);
 
-	vecLight = tbn * vecLight;
+	//Bringing the light into TBN space
+	vec3 tbnvLight = tbnv * vecLight;
 
+	//Normal per pixel - map to 0..1 range
 	vec3 normal = texture(bmap, gl_TexCoord[0].st).xyz * 2.0 - 1.0;
 	normal = normalize(normal);
 	
-	vec3 ldir = normalize(vecLight);
+	vec3 ldir = normalize(tbnvLight);
 	
 	vec4 texColor = texture(tex, gl_TexCoord[0].st);
 	
 	vec4 diffuse = gl_LightSource[0].diffuse * max(0.0, dot(normal, ldir));
 	
+	
 	vec3 tex_coords = SM_tex_coord.xyz/SM_tex_coord.w;
 	float depth = texture(smap, tex_coords.xy).x;
 	
-	float factor = 0.0;
+	vec4 color;
+	
 	if(depth > (tex_coords.z + 0.00001))
 	{
 		//In light!
-		factor = 1.0;
+		color = texColor * (gl_LightSource[0].ambient + diffuse);
+	}
+	else
+	{
+		color = texColor * (gl_LightSource[0].ambient + (diffuse * 0.1));
 	}
 	
-	////ESM
-	//float overdark = 80.0f;
-	//float lit = exp(overdark * (depth - tex_coords.z));
-	//lit = clamp(lit, 0.0, 1.0);
- 
- 
-	vec4 color = texColor * (gl_LightSource[0].ambient + diffuse * factor);
 	gl_FragColor = vec4(color.xyz, 1.0);
 }
