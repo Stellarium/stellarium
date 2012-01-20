@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-13 23:26+0700\n"
-"PO-Revision-Date: 2012-01-08 08:40+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2012-01-20 04:35+0000\n"
+"Last-Translator: Jose A. Macas D. <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-14 04:44+0000\n"
-"X-Generator: Launchpad (build 14664)\n"
+"X-Launchpad-Export-Date: 2012-01-20 04:37+0000\n"
+"X-Generator: Launchpad (build 14700)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -151,12 +151,12 @@ msgstr "Magnitud: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "Magnitud aparente: <b>%1</b> (por extinción)"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:97
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "Magnitud: <b>%1</b> (extinguidos: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:111
 #, qt-format
@@ -603,7 +603,7 @@ msgstr "Desarrollador de OSX: %1"
 #: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "Comprobador: %1"
 
 #: src/gui/StelGui.cpp:100
 msgid "Display Options"
@@ -706,7 +706,7 @@ msgstr "Estrellas"
 #: src/gui/StelGui.cpp:124
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
 msgid "Planet labels"
-msgstr ""
+msgstr "Etiqueta de planetas"
 
 #: src/gui/StelGui.cpp:125
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:300
@@ -1422,7 +1422,7 @@ msgstr "Occidental"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:163
 msgid "Guereins"
-msgstr ""
+msgstr "Guéreins"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:165
@@ -1618,7 +1618,7 @@ msgstr ""
 
 #: src/translations.h:223
 msgid "Chile"
-msgstr ""
+msgstr "Chile"
 
 #: src/translations.h:224
 msgid "Cameroon"
@@ -3239,10 +3239,13 @@ msgid ""
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
+"Muestra el cielo como si se estuviese viendo por el ocular de un telescópio "
+"(Sólo el aumento y el campo de visión son simuladas.) También puede mostrar "
+"un cuadro de sensor y un mira Telrad."
 
 #: plugins/Oculars/src/Oculars.cpp:757
 msgid "Please select an object before switching to ocular view."
-msgstr ""
+msgstr "Favor de seleccione un objeto antes de cambiar a mira por ocular."
 
 #: plugins/Oculars/src/Oculars.cpp:836
 msgid "&Previous ocular"
@@ -3365,7 +3368,7 @@ msgstr "Aumento: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
 #, qt-format
 msgid "FOV: %1"
-msgstr ""
+msgstr "CDV: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1520
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
@@ -3455,7 +3458,7 @@ msgstr "Ángulo focal efectivo del ocular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:533
 msgid "Apparent field of view of the ocular"
-msgstr ""
+msgstr "Campo de visión aparente del ocular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 #, qt-format
@@ -4206,6 +4209,7 @@ msgstr ""
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
 msgstr ""
+"Presione el botón \"%1\" para establecer una nueva conexión al telescopio"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
@@ -4939,6 +4943,8 @@ msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
 msgstr ""
+"Ambos cometas y asteroides pueden ser identificados con su número, nombre "
+"(en inglés) o su designación provisional."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
 #, qt-format
@@ -4970,11 +4976,11 @@ msgstr "Plug-in Editor del sistema solar"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Import data"
-msgstr ""
+msgstr "Importar datos"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
-msgstr ""
+msgstr "Seleccione el tipo"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Asteroids"
@@ -4994,7 +5000,7 @@ msgstr "Bajar lista de objetos de internet"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Select a source from the list:"
-msgstr ""
+msgstr "Seleccione un origen de la lista:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Or enter a URL:"
@@ -5010,11 +5016,11 @@ msgstr "Título del marcador:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "A file containing a list of objects"
-msgstr ""
+msgstr "Un archivo que contiene una lista de objetos"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Get orbital elements"
-msgstr ""
+msgstr "Obtener elementos orbitales"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Lists"
@@ -5027,7 +5033,7 @@ msgstr "Búsqueda en línea"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Objects found"
-msgstr ""
+msgstr "Objetos encontrados"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid ""
@@ -5040,15 +5046,15 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Overwrite existing objects"
-msgstr ""
+msgstr "Sobreescribir los objetos existentes"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
 msgid "Update existing objects"
-msgstr ""
+msgstr "Actualizar los objetos existentes"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid "Update only the orbital elements"
-msgstr ""
+msgstr "Actualizar únicamente los elementos orbitales"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid "Mark all"
@@ -5056,7 +5062,7 @@ msgstr "Marcar todos"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Mark none"
-msgstr ""
+msgstr "Marcar ninguno"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid "Add objects"
@@ -5082,6 +5088,8 @@ msgstr ""
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
+"También puede reestablecer todos los cambios y regresar a la configuración "
+"por defecto:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Reset to defaults"
@@ -5096,6 +5104,8 @@ msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
+"Puede crear una copia de seguridad de la configuracion personalizada del "
+"Sistema Solar en un lugar conveniente, o reemplazarlo con otra copia."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Copy the Solar System file..."
@@ -5123,7 +5133,7 @@ msgstr "Sistema Solar"
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical Supernovae"
-msgstr ""
+msgstr "Sopernovas Históricas"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
@@ -5134,6 +5144,12 @@ msgid ""
 "1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
 "(13 September)."
 msgstr ""
+"Un plug-in que muestra algunas supernovas mas brillantes que una magnitud "
+"visual 10: SN 185A (7 de Diciembre), SN 386A (24 de Abril), SN 1006A (29 de "
+"Abril), SN 1054A (3 de Julio), SN 1181A (4 de August), SN 1572A (5 de "
+"Noviembre), SN 1604A (8 de Octubre), SN 1680A (15 de Agosto), SN 1885A (17 "
+"de Agosto), SN 1895B (5 de Julio), SN 1937C (21 de Agosto), SN 1972E (8 de "
+"Mayo), SN 1987A (24 de Febrero) y SN 2011FE (13 de Septiembre)."
 
 #: plugins/Supernovae/src/Supernova.cpp:112
 #, qt-format
@@ -5150,6 +5166,9 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
+"Un plug-in que muestra algunos cuasares mas brillantes que una magntud "
+"visual 16. Un catálogo de cuasares compilado de 'Quasars and Active Galactic "
+"Nuclei' (13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 
 #: plugins/Quasars/src/Quasar.cpp:129
 msgid "Type: quasar"
