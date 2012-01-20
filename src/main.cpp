@@ -299,8 +299,8 @@ int main(int argc, char **argv)
 #ifdef Q_OS_WIN
 	// On windows use Verdana font, to avoid unresolved bug with OpenGL1 Qt paint engine.
 	// See Launchpad question #111823 for more info
-	QFont tmpFont(safeMode ? "Verdana" : "DejaVu Sans");	
-	tmpFont.setStyleHint(QFont::PreferFullHinting, QFont::OpenGLCompatible);
+	QFont tmpFont(safeMode ? "Verdana" : "DejaVu Sans");
+	tmpFont.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);
 
 	// Activate verdana by defaut for all win32 builds to see if it improves things.
 	// -> this seems to bring crippled arabic fonts with OpenGL2 paint engine..
