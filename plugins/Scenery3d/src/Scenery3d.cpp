@@ -46,11 +46,6 @@
 #define FROM_MODEL (MEANINGLESS_INT + 1)
 
 
-
-//float Scenery3d::EYE_LEVEL = 1.65;
-//const float Scenery3d::MOVE_SPEED = 4.0;
-//const float Scenery3d::MAX_SLOPE = 1.1;
-
 Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
     :absolutePosition(0.0, 0.0, 0.0), // 1.E-12, 1.E-12, 1.E-12), // these values signify "set default values"
     movement_x(0.0f), movement_y(0.0f), movement_z(0.0f),core(NULL),
@@ -375,8 +370,8 @@ void Scenery3d::handleKeys(QKeyEvent* e)
         speedup *= ((e->modifiers() & Qt::AltModifier)? 5.0f : 1.0f);
         switch (e->key())
         {
-            case Qt::Key_Space:     shadowsEnabled = !shadowsEnabled; e->accept(); break;
-            case Qt::Key_B:         bumpsEnabled = !bumpsEnabled; e->accept(); break;
+            //case Qt::Key_Space:     shadowsEnabled = !shadowsEnabled; e->accept(); break;
+            //case Qt::Key_B:         bumpsEnabled = !bumpsEnabled; e->accept(); break;
             case Qt::Key_K:         textEnabled = !textEnabled;   e->accept(); break;
             case Qt::Key_PageUp:    movement_z = -1.0f * speedup; e->accept(); break;
             case Qt::Key_PageDown:  movement_z =  1.0f * speedup; e->accept(); break;
