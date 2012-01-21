@@ -21,7 +21,7 @@
 uniform mat3 NormalMatrix;
 
 varying vec3 vecLight;
-varying vec3 vecPos;
+varying vec3 vecPosition;
 varying vec3 vecNormal;
 
 void main(void)
@@ -32,6 +32,6 @@ void main(void)
 	vec3 lightDir = normalize(gl_LightSource[0].position.xyz);
 	
 	vecLight = normalize(NormalMatrix * lightDir);
-	vecPos = gl_Vertex.xyz;
+	vecPosition = gl_Vertex.xyz;
 	vecNormal = gl_Normal;
 }
