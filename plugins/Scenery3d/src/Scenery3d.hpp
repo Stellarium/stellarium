@@ -189,6 +189,10 @@ private:
     void bindShader();
 
     void testMethod();
+    void setLight(float lightBrightness);
+
+    Mat4f modelView;
+    Mat4f mv2;
 };
 
 #endif

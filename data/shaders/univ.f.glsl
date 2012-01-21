@@ -82,7 +82,7 @@ void main(void)
 	}
 	else
 	{
-		color = texColor * (gl_LightSource[0].ambient + (diffuse * 0.1));
+		color = texColor * (gl_LightSource[0].ambient + diffuse*0.3);
 	}
 	
 	gl_FragColor = vec4(color.xyz, 1.0);

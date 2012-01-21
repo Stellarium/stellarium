@@ -399,6 +399,18 @@ void Scenery3d::handleKeys(QKeyEvent* e)
     }
 }
 
+void Scenery3d::setLight(float lightBrightness)
+{
+    lightBrightness *= 0.5f;
+    //GZ: to achieve brighter surfaces, we use sqrt(lightBrightness):
+    float diffBrightness=std::sqrt(lightBrightness);
+    //const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
+    const GLfloat LightAmbient[] = {lightBrightness, lightBrightness, lightBrightness, 1.0f};
+    const GLfloat LightDiffuse[] = {diffBrightness, diffBrightness, diffBrightness, 1.0f};
+    glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
+}
+
 void Scenery3d::testMethod()
 {
     Mat3f mat(5, 8, 7,
@@ -515,21 +527,13 @@ void Scenery3d::generateCubeMap_drawScene(StelPainter& painter, float lightBrigh
     //Bind shader based on selected effect flags
     bindShader();
 
-    //GZ: to achieve brighter surfaces, we use sqrt(lightBrightness):
-    float diffBrightness=std::sqrt(lightBrightness);
-    //const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
-    const GLfloat LightAmbient[] = {lightBrightness, lightBrightness, lightBrightness, 1.0f};
-    const GLfloat LightDiffuse[] = {diffBrightness, diffBrightness, diffBrightness, 1.0f};
-    glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
-
     if(curShader != 0)
     {
         //Compute the Normal Matrix and send to shader
         //Note: It's sent as 4x4 and in the shader we just use vec4(light3, 0.0)
         //to compute what we want.
         //We know that N = (inv(ModelViewMatrix))^T
-        Mat4f modelView;
+        //Mat4f modelView;
         glGetFloatv(GL_MODELVIEW_MATRIX, modelView);
 
         Mat3f normalMatrix = modelView.upper3x3();
@@ -593,7 +597,7 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float
     //Note: It's sent as 4x4 and in the shader we just use vec4(light3, 0.0)
     //to compute what we want.
     //We know that N = (inv(ModelViewMatrix))^T
-    Mat4f modelView;
+    //Mat4f modelView;
     glGetFloatv(GL_MODELVIEW_MATRIX, modelView);
 
     Mat3f normalMatrix = modelView.upper3x3();
@@ -804,6 +808,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
 
     #define DRAW_SCENE  glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);\
                         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);\
+                        setLight(lightBrightness);\
                         if(shadows){generateCubeMap_drawSceneWithShadows(painter, lightBrightness);}\
                         else{generateCubeMap_drawScene(painter, lightBrightness);}\
 
@@ -1057,6 +1062,25 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
     screen_y -= 15.0f;
     str = QString("Eye:    %1m").arg(eyeLevel, 10, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
+
+    screen_y -= 30.0f;
+    screen_x = prj->getViewportWidth() - 450.0f;
+    str = QString("Model View Matrix");
+    painter.drawText(screen_x, screen_y, str)   ;
+
+    screen_y -= 15.0f;
+    str = QString("[%1 %2 %3 %4]").arg(modelView[0], 7, 'f', 2).arg(modelView[4], 7, 'f', 2).arg(modelView[8], 7, 'f', 2).arg(modelView[12], 7, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);
+    screen_y -= 15.0f;
+    str = QString("[%1 %2 %3 %4]").arg(modelView[1], 7, 'f', 2).arg(modelView[5], 7, 'f', 2).arg(modelView[9], 7, 'f', 2).arg(modelView[13], 7, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);
+    screen_y -= 15.0f;
+    str = QString("[%1 %2 %3 %4]").arg(modelView[2], 7, 'f', 2).arg(modelView[6], 7, 'f', 2).arg(modelView[10], 7, 'f', 2).arg(modelView[14], 7, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);
+    screen_y -= 15.0f;
+    str = QString("[%1 %2 %3 %4]").arg(modelView[3], 7, 'f', 2).arg(modelView[7], 7, 'f', 2).arg(modelView[11], 7, 'f', 2).arg(modelView[15], 7, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);
+
     /*// DEBUG AIDS:
     screen_y -= 15.0f;
     str = QString("model_X:%1m").arg(model_pos[0], 10, 'f', 2);
