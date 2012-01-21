@@ -1008,6 +1008,7 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
 
     glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
 
+    setLight(lightBrightness);
     //GZ: The following calls apparently require the full cubemap. TODO: Verify and simplify
     if (shadows) {
         generateCubeMap_drawSceneWithShadows(painter, lightBrightness);
