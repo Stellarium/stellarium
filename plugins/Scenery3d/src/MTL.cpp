@@ -115,12 +115,14 @@ void MTL::uploadTexturesGL(void)
         if (texture.size() > 0) {
             textureMapGL[texture] = textureMgr.createTexture(QString(absolutePath(texture).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
             //textureMapGL[texture] = load_texture(absolutePath(texture).c_str());
+            qDebug() << "[Scenery3d] Loaded Texture: " << texture.c_str();
         }
 
         string bump = it->second.bump_texture;
         if(bump.size() > 0)
         {
             textureMapGL[bump] = textureMgr.createTexture(QString(absolutePath(bump).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+            qDebug() << "[Scenery3d] Loaded Normal Map: " << bump.c_str();
         }
     }
 }
