@@ -1,15 +1,16 @@
 #ifndef _SCENERY3DMGR_HPP_
 #define _SCENERY3DMGR_HPP_
 
+#include <QMap>
+#include <QStringList>
+#include <QKeyEvent>
+#include <QFont>
+
 #include "StelModule.hpp"
 #include "StelUtils.hpp"
 #include "gui/Scenery3dDialog.hpp"
 #include "StelCore.hpp"
-
-#include <QMap>
-#include <QStringList>
-#include <QKeyEvent>
-
+#include "StelFader.hpp"
 #include "StelShader.hpp"
 
 class Scenery3d;
@@ -36,12 +37,14 @@ public:
     bool load(QMap<QString, QString>& param);
     Scenery3d* createFromFile(const QString& file, const QString& id);
 
-    //! Use this to set the enableShadows flag.
+    //! Use this to set/get the enableShadows flag.
     //! If set to true, shadow mapping is enabled for the 3D scene.
     void setEnableShadows(bool enableShadows);
-    //! Use this to set the enableBumps flag.
+    bool getEnableShadows(void){return enableShadows;}
+    //! Use this to set/get the enableBumps flag.
     //! If set to true, bump mapping is enabled for the 3D scene.
     void setEnableBumps(bool enableBumps);
+    bool getEnableBumps(void){return enableBumps;}
 
     static const QString MODULE_PATH;
 
@@ -64,11 +67,16 @@ public slots:
     QString loadScenery3dName(QString scenery3dID);
     quint64 loadScenery3dSize(QString scenery3dID);
 
+private slots:
+    void clearMessage();
 //signals:
 
 private:
     QString nameToID(const QString& name);
     QMap<QString, QString> getNameToDirMap() const;
+
+    //! Display text message on screen, fade out automatically
+    void showMessage(const QString& message);
 
     bool flagEnabled;  // toggle to switch it off completely.
     int cubemapSize;   // configurable via config.ini:Scenery3d/cubemapSize
@@ -87,6 +95,13 @@ private:
     StelShader* shadowShader;
     StelShader* bumpShader;
     StelShader* univShader;
+
+    //screen messages (taken largely from AngleMeasure as of 2012-01-21)
+    LinearFader messageFader;
+    QTimer* messageTimer;
+    Vec3f textColor;
+    QFont font;
+    QString currentMessage;
 };
 
 

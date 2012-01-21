@@ -28,6 +28,15 @@ Scenery3dMgr::Scenery3dMgr() : scenery3d(NULL)
 {
     setObjectName("Scenery3dMgr");
     scenery3dDialog = new Scenery3dDialog();
+    // taken from AngleMeasure:
+    textColor = StelUtils::strToVec3f(StelApp::getInstance().getSettings()->value("options/text_color", "0,0.5,1").toString());
+    font.setPixelSize(16);
+    messageTimer = new QTimer(this);
+    messageTimer->setInterval(2000);
+    messageTimer->setSingleShot(true);
+    connect(messageTimer, SIGNAL(timeout()), this, SLOT(clearMessage()));
+
+
 }
 
 Scenery3dMgr::~Scenery3dMgr()
@@ -70,20 +79,61 @@ void Scenery3dMgr::handleKeys(QKeyEvent* e)
     {
         scenery3d->handleKeys(e);
         if (!e->isAccepted()) {
-            // handle keys
+            // handle keys for CTRL-SPACE and CTRL-B. Allows easier interaction with GUI.
+
+            if ((e->type() == QKeyEvent::KeyPress) && (e->modifiers() & Qt::ControlModifier))
+            {
+                switch (e->key())
+                {
+                    case Qt::Key_Space:
+                        if (shadowmapSize)
+                        {
+                            enableShadows = !enableShadows;
+                            scenery3d->setShadowsEnabled(enableShadows);
+                            showMessage(QString(N_("Shadows %1")).arg(enableShadows? N_("on") : N_("off")));
+                        } else
+                        {
+                            showMessage(QString(N_("Shadows deactivated or not possible.")));
+                        }
+                        e->accept();
+                        break;
+                    case Qt::Key_B:
+                        enableBumps   = !enableBumps;
+                        scenery3d->setBumpsEnabled(enableBumps);
+                        showMessage(QString(N_("Surface bumps %1")).arg(enableBumps? N_("on") : N_("off")));
+                        e->accept();
+                        break;
+                }
+            }
         }
     }
 }
 
+
 void Scenery3dMgr::update(double deltaTime)
 {
-    if (flagEnabled) scenery3d->update(deltaTime);
+    if (flagEnabled)
+    {
+        scenery3d->update(deltaTime);
+        messageFader.update((int)(deltaTime*1000));
+    }
 }
 
 void Scenery3dMgr::draw(StelCore* core)
 {
-    if (flagEnabled) scenery3d->draw(core);
-    //scenery3d->drawCoordinatesText(core);
+    if (flagEnabled)
+    {
+        scenery3d->draw(core);
+        if (messageFader.getInterstate() > 0.000001f)
+        {
+
+            const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
+            StelPainter painter(prj);
+            painter.setFont(font);
+            painter.setColor(textColor[0], textColor[1], textColor[2], messageFader.getInterstate());
+            painter.drawText(83, 120, currentMessage);
+        }
+    }
 }
 
 void Scenery3dMgr::init()
@@ -95,10 +145,14 @@ void Scenery3dMgr::init()
     cubemapSize=conf->value("Scenery3d/cubemapSize", 1024).toInt();
     shadowmapSize=conf->value("Scenery3d/shadowmapSize", 1024).toInt();
 
-    // graphics hardware without FrameBufferObj extension cannot use the cubemap rendering.
+    // graphics hardware without FrameBufferObj extension cannot use the cubemap rendering and shadow mapping.
     // In this case, set cubemapSize to 0 to signal auto-switch to perspective projection.
-    if (! GLEE_EXT_framebuffer_object) cubemapSize=0;
-    //cubemapSize = 0;
+    if (! GLEE_EXT_framebuffer_object) {
+        qWarning() << "Scenery3d: Your hardware does not support EXT_framebuffer_object.";
+        qWarning() << "           Shadow mapping disabled, and display limited to perspective projection.";
+        cubemapSize=0;
+        shadowmapSize=0;
+    }
     // create action for enable/disable & hook up signals
     StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
     Q_ASSERT(gui);
@@ -118,7 +172,6 @@ void Scenery3dMgr::init()
                        true); // checkable; autorepeat=false.
     connect(gui->getGuiActions("actionShow_Scenery3d_window"), SIGNAL(toggled(bool)), scenery3dDialog, SLOT(setVisible(bool)));
     connect(scenery3dDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Scenery3d_window"), SLOT(setChecked(bool)));
-
 
     // Add 2 toolbar buttons (copy/paste widely from AngleMeasure): activate, and settings.
     try
@@ -243,8 +296,10 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
         scenery3d = NULL;
     }
     // Loading may take a while...
+    showMessage(QString(N_("Loading scenery3d. Please be patient!")));
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
     newScenery3d->loadModel();
+    clearMessage();
     QApplication::restoreOverrideCursor();
 
     if (newScenery3d->hasLocation())
@@ -495,6 +550,19 @@ void Scenery3dMgr::setEnableBumps(bool enableBumps)
     }
 }
 
+void Scenery3dMgr::showMessage(const QString& message)
+{
+    currentMessage=message;
+    messageFader=true;
+    messageTimer->start();
+}
+
+void Scenery3dMgr::clearMessage()
+{
+        qDebug() << "Scenery3dMgr::clearMessage";
+        messageFader = false;
+}
+
 /////////////////////////////////////////////////////////////////////
 StelModule* Scenery3dStelPluginInterface::getStelModule() const
 {
@@ -512,7 +580,6 @@ StelPluginInfo Scenery3dStelPluginInterface::getPluginInfo() const
         info.authors = "Simon Parzer, Peter Neubauer, Georg Zotti, Andrei Borza";
         info.contact = "Georg.Zotti@univie.ac.at";
 	info.description = "OBJ landscape renderer.";
-//	info.description = "OBJ landscape renderer. This Beta compiled 2011-06-06 for Maurizio Forte for collaboration on Copan.";
 	return info;
 }
 

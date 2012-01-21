@@ -1,3 +1,5 @@
+#include <QTimer>
+
 #include "Scenery3dDialog.hpp"
 #include "Scenery3dMgr.hpp"
 #include "StelModuleMgr.hpp"
@@ -23,7 +25,7 @@ void Scenery3dDialog::createDialogContent()
             SLOT(scenery3dChanged(QListWidgetItem*)));
 
     connect(ui->checkBoxEnableShadows, SIGNAL(stateChanged(int)), this,
-            SLOT(renderingOptionsChanged()));
+            SLOT(renderingShadowmapChanged()));
 
     connect(ui->checkBoxEnableBump, SIGNAL(stateChanged(int)), this,
             SLOT(renderingBumpChanged()));
@@ -43,7 +45,12 @@ void Scenery3dDialog::createDialogContent()
     //ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
     //ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getDefaultLandscapeID()!=lmgr->getCurrentLandscapeID());
 
-    renderingOptionsChanged();
+    QTimer* refreshTimer = new QTimer(this);
+    connect(refreshTimer, SIGNAL(timeout()), this, SLOT(updateFromProgram()));
+    refreshTimer->start(200);
+
+    //renderingShadowmapChanged();
+    //renderingBumpChanged();
 }
 
 
@@ -57,7 +64,7 @@ void Scenery3dDialog::scenery3dChanged(QListWidgetItem* item)
     ui->scenery3dTextBrowser->setHtml(smgr->getCurrentScenery3dHtmlDescription());
 }
 
-void Scenery3dDialog::renderingOptionsChanged(void)
+void Scenery3dDialog::renderingShadowmapChanged(void)
 {
     Scenery3dMgr* smgr = GETSTELMODULE(Scenery3dMgr);
     smgr->setEnableShadows(ui->checkBoxEnableShadows->isChecked());
@@ -67,4 +74,16 @@ void Scenery3dDialog::renderingBumpChanged(void)
 {
     Scenery3dMgr* smgr = GETSTELMODULE(Scenery3dMgr);
     smgr->setEnableBumps(ui->checkBoxEnableBump->isChecked());
+}
+
+// Update the widget to make sure it is synchrone if a value was changed programmatically
+void Scenery3dDialog::updateFromProgram()
+{
+        if (!dialog->isVisible())
+                return;
+
+    Scenery3dMgr* smgr = GETSTELMODULE(Scenery3dMgr);
+    Q_ASSERT(smgr);
+    ui->checkBoxEnableBump->setChecked(smgr->getEnableBumps());
+    ui->checkBoxEnableShadows->setChecked(smgr->getEnableShadows());
 }
