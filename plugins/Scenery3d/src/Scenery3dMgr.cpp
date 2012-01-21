@@ -98,7 +98,7 @@ void Scenery3dMgr::init()
     // graphics hardware without FrameBufferObj extension cannot use the cubemap rendering.
     // In this case, set cubemapSize to 0 to signal auto-switch to perspective projection.
     if (! GLEE_EXT_framebuffer_object) cubemapSize=0;
-    //cubemapSize = 0;
+    cubemapSize = 0;
     // create action for enable/disable & hook up signals
     StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
     Q_ASSERT(gui);
