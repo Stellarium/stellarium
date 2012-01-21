@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-13 23:26+0700\n"
-"PO-Revision-Date: 2012-01-18 13:40+0000\n"
+"PO-Revision-Date: 2012-01-21 03:33+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-19 04:37+0000\n"
-"X-Generator: Launchpad (build 14692)\n"
+"X-Launchpad-Export-Date: 2012-01-21 05:19+0000\n"
+"X-Generator: Launchpad (build 14700)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -35,7 +35,7 @@ msgstr "Horizon"
 
 #: src/core/modules/GridLinesMgr.cpp:558
 msgid "Galactic Plane"
-msgstr ""
+msgstr "Satah Galaksi"
 
 #: src/core/modules/LandscapeMgr.cpp:486
 msgid "Author: "
@@ -63,7 +63,7 @@ msgstr "Jenis: <b>%1</b>"
 #: plugins/Supernovae/src/Supernova.cpp:101 plugins/Quasars/src/Quasar.cpp:103
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Magnitud: <b>%1</b> (pupus pada: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:115
@@ -127,7 +127,7 @@ msgstr "Keserongan (mengikut tarikh): %1"
 #: src/core/modules/Planet.cpp:153
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "Jarak: %1AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:160
 #, no-c-format, qt-format
@@ -147,12 +147,12 @@ msgstr "Magnitud: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "Magnitude Ketara: <b>%1</b> (oleh kepupusan)"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:97
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "Magnitud: <b>%1</b> (pupus pada: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:111
 #, qt-format
@@ -597,7 +597,7 @@ msgstr "Pembangun OSX: %1"
 #: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "Penguji: %1"
 
 #: src/gui/StelGui.cpp:100
 msgid "Display Options"
@@ -645,7 +645,7 @@ msgstr "Grid Galaksi"
 
 #: src/gui/StelGui.cpp:110
 msgid "Galactic plane"
-msgstr ""
+msgstr "Satah galaktik"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1126
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:334
@@ -2615,7 +2615,7 @@ msgstr "Kedudukan"
 
 #: src/ui_searchDialogGui.h:546
 msgid "Search also in the SIMBAD on-line astronomical database"
-msgstr ""
+msgstr "Gelintar juga dalam pengkalan data asronomi atas-talian SIMBAD"
 
 #: src/ui_searchDialogGui.h:547 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
@@ -2753,7 +2753,7 @@ msgstr "Sfera Cakerawala"
 #: src/ui_viewDialog.h:1127
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:358
 msgid "Galactic plane line"
-msgstr ""
+msgstr "Garis satah galaktik"
 
 #: src/ui_viewDialog.h:1129
 msgid "Constellations"
@@ -3413,7 +3413,7 @@ msgstr "Teleskop berikutnya"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr ""
+msgstr "Putar bingkai penderia 15 darjah melawan jam"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:258
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
