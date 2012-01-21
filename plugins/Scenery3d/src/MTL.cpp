@@ -113,16 +113,24 @@ void MTL::uploadTexturesGL(void)
     for (MaterialMap::iterator it = mtlMap.begin(); it != mtlMap.end(); it++) {
         string texture = it->second.texture;
         if (texture.size() > 0) {
-            textureMapGL[texture] = textureMgr.createTexture(QString(absolutePath(texture).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
-            //textureMapGL[texture] = load_texture(absolutePath(texture).c_str());
-            qDebug() << "[Scenery3d] Loaded Texture: " << texture.c_str();
+            StelTextureSP tex = textureMgr.createTexture(QString(absolutePath(texture).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+
+            if(!tex.isNull()){
+                textureMapGL[texture] = tex;
+                //textureMapGL[texture] = load_texture(absolutePath(texture).c_str());
+                qDebug() << "[Scenery3d] Loaded Texture: " << texture.c_str();
+            }
         }
 
         string bump = it->second.bump_texture;
         if(bump.size() > 0)
         {
-            textureMapGL[bump] = textureMgr.createTexture(QString(absolutePath(bump).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
-            qDebug() << "[Scenery3d] Loaded Normal Map: " << bump.c_str();
+            StelTextureSP bumpTex = textureMgr.createTexture(QString(absolutePath(bump).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+
+            if(!bumpTex.isNull()){
+                textureMapGL[bump] = bumpTex;
+                qDebug() << "[Scenery3d] Loaded Normal Map: " << bump.c_str();
+            }
         }
     }
 }
