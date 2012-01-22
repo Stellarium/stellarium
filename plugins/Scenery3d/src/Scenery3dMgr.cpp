@@ -28,6 +28,8 @@ Scenery3dMgr::Scenery3dMgr() : scenery3d(NULL)
 {
     setObjectName("Scenery3dMgr");
     scenery3dDialog = new Scenery3dDialog();
+    enableShadows=false;
+    enableBumps=false;
     // taken from AngleMeasure:
     textColor = StelUtils::strToVec3f(StelApp::getInstance().getSettings()->value("options/text_color", "0,0.5,1").toString());
     font.setPixelSize(16);
