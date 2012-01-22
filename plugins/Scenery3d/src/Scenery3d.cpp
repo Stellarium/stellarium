@@ -625,13 +625,14 @@ void Scenery3d::generateShadowMap(StelCore* core)
     //Determine sun position
     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
     Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
-    //zRotateMatrix.transfo(sunPosition);
+    //zRotateMatrix.transfo(sunPosition); // GZ: These rotations were commented out - testing 20120122
     sunPosition.normalize();
     // GZ: at night, a near-full Moon can cast good shadows.
     Vec3d moonPosition = ssystem->getMoon()->getAltAzPosAuto(core);
-    //zRotateMatrix.transfo(sunPosition);
+    //zRotateMatrix.transfo(moonPosition);
     moonPosition.normalize();
     Vec3d venusPosition = ssystem->searchByName("Venus")->getAltAzPosAuto(core);
+    //zRotateMatrix.transfo(venusPosition);
     venusPosition.normalize();
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -735,15 +736,16 @@ void Scenery3d::generateShadowMap(StelCore* core)
 {
     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
     Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
-    //zRotateMatrix.transfo(sunPosition); //: GZ: VERIFY THE NECESSITY OF THIS
+    zRotateMatrix.transfo(sunPosition); //: GZ: VERIFIED THE NECESSITY OF THIS
     sunPosition.normalize();
     Vec3d moonPosition = ssystem->getMoon()->getAltAzPosAuto(core);
     float moonPhaseAngle=ssystem->getMoon()->getPhase(core->getObserverHeliocentricEclipticPos());
-    //zRotateMatrix.transfo(moonPosition); //: GZ: VERIFY THE NECESSITY OF THIS
+    zRotateMatrix.transfo(moonPosition); //: GZ: VERIFIED THE NECESSITY OF THIS
     moonPosition.normalize();
     PlanetP venus=ssystem->searchByEnglishName("Venus");
     Vec3d venusPosition = venus->getAltAzPosAuto(core);
     float venusPhaseAngle=venus->getPhase(core->getObserverHeliocentricEclipticPos());
+    zRotateMatrix.transfo(venusPosition); //: GZ: VERIFIED THE NECESSITY OF THIS
     venusPosition.normalize();
 
     // The light model here: ambient light consists of solar twilight and day ambient,
@@ -756,6 +758,7 @@ void Scenery3d::generateShadowMap(StelCore* core)
     // Directional brightness factor: sqrt(sin(alt_sun)) if sin(alt_sun)>0 --> NO: MIN(0.7, sin(sun)+0.1), i.e. sun 6 degrees higher.
     //                                sqrt(sin(alt_moon)*(cos(moon.phase_angle)+1)/2)*LUNAR_BRIGHTNESS_FACTOR if sin(alt_moon)>0
     //                                sqrt(sin(alt_venus)*(cos(venus.phase_angle)+1)/2)*VENUS_BRIGHTNESS_FACTOR[0.15?]
+    // Note the sqrt(sin(alt))-terms: they are to increase brightness sooner than with the Lambert law.
     //float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+8.*M_PI/180.));
     //float sinMoonAngleRad = moonPosition[2];
 
@@ -769,7 +772,6 @@ void Scenery3d::generateShadowMap(StelCore* core)
     QString sunAmbientString;
     QString moonAmbientString;
     QString backgroundAmbientString=QString("%1").arg(ambientBrightness, 6, 'f', 4);
-    //QString directionalStrengthString;
     QString directionalSourceString;
 
     if(sinSunAngle > -0.3f) // sun above -18 deg?
@@ -807,6 +809,8 @@ void Scenery3d::generateShadowMap(StelCore* core)
         lightsourcePosition.set(moonPosition.v[0], moonPosition.v[1], moonPosition.v[2]);
         if (shadowsEnabled) shadowcaster = Moon;
         directionalSourceString="Moon";
+        //Alternately, construct a term around lunar brightness, like
+        // directionalBrightness=(mag/-10)
     }
     else if (sinVenusAngle>0.0f)
     {
@@ -815,6 +819,8 @@ void Scenery3d::generateShadowMap(StelCore* core)
         lightsourcePosition.set(venusPosition.v[0], venusPosition.v[1], venusPosition.v[2]);
         if (shadowsEnabled) shadowcaster = Venus;
         directionalSourceString="Venus";
+        //Alternately, construct a term around Venus brightness, like
+        // directionalBrightness=(mag/-100)
     }
     else
     {   //GZ: this should not matter here, just to make OpenGL happy.
