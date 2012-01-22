@@ -1,7 +1,7 @@
 /*
  * Stellarium Scenery3d Plug-in
  *
- * Copyright (C) 2011 Simon Parzer, Peter Neubauer, Georg Zotti
+ * Copyright (C) 2011-12 Simon Parzer, Peter Neubauer, Andrei Borza, Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -372,6 +372,7 @@ void Scenery3d::handleKeys(QKeyEvent* e)
         {
             //case Qt::Key_Space:     shadowsEnabled = !shadowsEnabled; e->accept(); break;
             //case Qt::Key_B:         bumpsEnabled = !bumpsEnabled; e->accept(); break;
+            case Qt::Key_L:         torchEnabled = !torchEnabled; e->accept(); break;
             case Qt::Key_K:         textEnabled = !textEnabled;   e->accept(); break;
             case Qt::Key_PageUp:    movement_z = -1.0f * speedup; e->accept(); break;
             case Qt::Key_PageDown:  movement_z =  1.0f * speedup; e->accept(); break;
@@ -394,14 +395,15 @@ void Scenery3d::handleKeys(QKeyEvent* e)
     }
 }
 
-void Scenery3d::setLight(float lightBrightness)
-{
-    lightBrightness *= 0.5f;
-    //GZ: to achieve brighter surfaces, we use sqrt(lightBrightness):
-    float diffBrightness=std::sqrt(lightBrightness);
+void Scenery3d::setLights(float ambientBrightness, float diffuseBrightness)
+{   // N.B. ambientBrightness for flat shading, diffuse brightness also casts shadows!
+    bool red=StelApp::getInstance().getVisionModeNight();
+    //lightBrightness *= 0.5f; // GZ: WE WILL SEE...
+    //GZ: to achieve brighter surfaces and shadow effect, we use sqrt(diffuseBrightness):
+    float diffBrightness=std::sqrt(diffuseBrightness);
     //const GLfloat LightAmbient[] = {0.33f, 0.33f, 0.33f, 1.0f};
-    const GLfloat LightAmbient[] = {lightBrightness, lightBrightness, lightBrightness, 1.0f};
-    const GLfloat LightDiffuse[] = {diffBrightness, diffBrightness, diffBrightness, 1.0f};
+    const GLfloat LightAmbient[] = {ambientBrightness, (red? 0 : ambientBrightness), (red? 0 : ambientBrightness), 1.0f};
+    const GLfloat LightDiffuse[] = {diffBrightness, (red? 0 : diffBrightness), (red? 0 : diffBrightness), 1.0f};
     glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
 }
@@ -480,7 +482,7 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
     }
 }
 
-void Scenery3d::sendToShader(OBJ::StelModel& stelModel, effect cur)
+void Scenery3d::sendToShader(OBJ::StelModel& stelModel, Effect cur)
 {
     if(cur != No)
     {
@@ -517,7 +519,8 @@ void Scenery3d::sendToShader(OBJ::StelModel& stelModel, effect cur)
     }
 }
 
-void Scenery3d::generateCubeMap_drawScene(StelPainter& painter, float lightBrightness)
+//void Scenery3d::generateCubeMap_drawScene(StelPainter& painter, float lightBrightness)
+void Scenery3d::generateCubeMap_drawScene(StelPainter& painter, float ambientBrightness, float directionalBrightness)
 {
     //Bind shader based on selected effect flags
     bindShader();
@@ -558,7 +561,8 @@ void Scenery3d::bindShader()
     if(curShader != 0) curShader->use();
 }
 
-void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float lightBrightness)
+//void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float lightBrightness)
+void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float ambientBrightness, float directionalBrightness)
 {    
     //Bind the shader
     bindShader();
@@ -723,6 +727,122 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glColorMask(1, 1, 1, 1);
 }
 
+//const float Scenery3d::TORCH_BRIGHTNESS=0.5f;
+//const float Scenery3d::AMBIENT_BRIGHTNESS_FACTOR=0.1;
+//const float Scenery3d::LUNAR_BRIGHTNESS_FACTOR=0.2;
+//const float Scenery3d::VENUS_BRIGHTNESS_FACTOR=0.15;
+ Scenery3d::ShadowCaster  Scenery3d::setupLights(float &ambientBrightness, float &directionalBrightness, Vec3f &lightsourcePosition)
+{
+    SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+    Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
+    //zRotateMatrix.transfo(sunPosition); //: GZ: VERIFY THE NECESSITY OF THIS
+    sunPosition.normalize();
+    Vec3d moonPosition = ssystem->getMoon()->getAltAzPosAuto(core);
+    float moonPhaseAngle=ssystem->getMoon()->getPhase(core->getObserverHeliocentricEclipticPos());
+    //zRotateMatrix.transfo(moonPosition); //: GZ: VERIFY THE NECESSITY OF THIS
+    moonPosition.normalize();
+    PlanetP venus=ssystem->searchByEnglishName("Venus");
+    Vec3d venusPosition = venus->getAltAzPosAuto(core);
+    float venusPhaseAngle=venus->getPhase(core->getObserverHeliocentricEclipticPos());
+    venusPosition.normalize();
+
+    // The light model here: ambient light consists of solar twilight and day ambient,
+    // plus lunar ambient, plus a base constant AMBIENT_BRIGHTNESS_FACTOR[0.1?],
+    // plus an artificial "torch" that can be toggled via Ctrl-L[ight].
+    // We define the ambient solar brightness zero when the sun is 18 degrees below the horizon, and lift the sun by 18 deg.
+    // ambient brightness component of the sun is then sqrt(sin(max(90, alt_sun+18))) --> NO: MIN(0.3, sin(sun)+0.3)
+    // With the sun above the horizon, we raise only the directional component.
+    // ambient brightness component of the moon is sqrt(sin(alt_moon)*(cos(moon.phase_angle)+1)/2)*LUNAR_BRIGHTNESS_FACTOR[0.2?]
+    // Directional brightness factor: sqrt(sin(alt_sun)) if sin(alt_sun)>0 --> NO: MIN(0.7, sin(sun)+0.1), i.e. sun 6 degrees higher.
+    //                                sqrt(sin(alt_moon)*(cos(moon.phase_angle)+1)/2)*LUNAR_BRIGHTNESS_FACTOR if sin(alt_moon)>0
+    //                                sqrt(sin(alt_venus)*(cos(venus.phase_angle)+1)/2)*VENUS_BRIGHTNESS_FACTOR[0.15?]
+    //float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+8.*M_PI/180.));
+    //float sinMoonAngleRad = moonPosition[2];
+
+    float sinSunAngle  = sunPosition[2];
+    float sinMoonAngle = moonPosition[2];
+    float sinVenusAngle = venusPosition[2];
+    ambientBrightness=AMBIENT_BRIGHTNESS_FACTOR+(torchEnabled? TORCH_BRIGHTNESS : 0);
+    directionalBrightness=0.0f;
+    ShadowCaster shadowcaster = None;
+    // DEBUG AIDS: Helper strings to be displayed
+    QString sunAmbientString;
+    QString moonAmbientString;
+    QString backgroundAmbientString=QString("%1").arg(ambientBrightness, 6, 'f', 4);
+    //QString directionalStrengthString;
+    QString directionalSourceString;
+
+    if(sinSunAngle > -0.3f) // sun above -18 deg?
+    {
+        //ambientBrightness += qMin(0.5, sqrt(sinSunAngle+0.3));
+        ambientBrightness += qMin(0.3, sinSunAngle+0.3);
+        sunAmbientString=QString("%1").arg(qMin(0.3, sinSunAngle+0.3), 6, 'f', 4);
+    }
+    else
+        sunAmbientString=QString("0.0");
+
+    if (sinMoonAngle>0.0f)
+    {
+        ambientBrightness += sqrt(sinMoonAngle * ((std::cos(moonPhaseAngle)+1)/2)) * LUNAR_BRIGHTNESS_FACTOR;
+        moonAmbientString=QString("%1").arg(sqrt(sinMoonAngle * ((std::cos(moonPhaseAngle)+1)/2)) * LUNAR_BRIGHTNESS_FACTOR);
+    }
+    else
+        moonAmbientString=QString("0.0");
+    // Now find shadow caster, if any:
+    // TODO: VERIFY IF THE SIN<LIGHT>ANGLE TERMS ARE REQUIRED; MAYBE THEY CAN BE OMITTED!
+    if (sinSunAngle>0.0f)
+    {
+        //directionalBrightness=sqrt(sinSunAngle);
+        //directionalBrightness=0.7f;
+        //lightBrightness = (0.01 + 1.5*(sinSunAngleRad+0.1/1.5));
+        directionalBrightness=qMin(0.7, sinSunAngle+0.1); // limit to 0.7 in order to keep total below 1.
+        lightsourcePosition.set(sunPosition.v[0], sunPosition.v[1], sunPosition.v[2]);
+        if (shadowsEnabled) shadowcaster = Sun;
+        directionalSourceString="Sun";
+    }
+    else if (sinMoonAngle>0.0f)
+    {
+        //directionalBrightness=sqrt(sinMoonAngle * ((std::cos(moonPhaseAngle)+1)/2) * LUNAR_BRIGHTNESS_FACTOR);
+        directionalBrightness= sqrt(sinMoonAngle) * ((std::cos(moonPhaseAngle)+1)/2) * LUNAR_BRIGHTNESS_FACTOR;
+        lightsourcePosition.set(moonPosition.v[0], moonPosition.v[1], moonPosition.v[2]);
+        if (shadowsEnabled) shadowcaster = Moon;
+        directionalSourceString="Moon";
+    }
+    else if (sinVenusAngle>0.0f)
+    {
+        //directionalBrightness=sqrt(sinVenusAngle * ((std::cos(venusPhaseAngle)+1)/2) * VENUS_BRIGHTNESS_FACTOR);
+        directionalBrightness=sqrt(sinVenusAngle)*((std::cos(venusPhaseAngle)+1)/2) * VENUS_BRIGHTNESS_FACTOR;
+        lightsourcePosition.set(venusPosition.v[0], venusPosition.v[1], venusPosition.v[2]);
+        if (shadowsEnabled) shadowcaster = Venus;
+        directionalSourceString="Venus";
+    }
+    else
+    {   //GZ: this should not matter here, just to make OpenGL happy.
+        lightsourcePosition.set(sunPosition.v[0], sunPosition.v[1], sunPosition.v[2]);
+        directionalSourceString="(Sun, below horiz.)";
+    }
+
+    //Vec3d sunOrMoon = ( (sinSunAngleRad > -0.1/1.5 ) ? sunPosition : moonPosition);
+
+    // DEBUG: Prepare output message
+    QString shadowCasterName;
+    switch (shadowcaster) {
+        case None:  shadowCasterName="None";  break;
+        case Sun:   shadowCasterName="Sun";   break;
+        case Moon:  shadowCasterName="Moon";  break;
+        case Venus: shadowCasterName="Venus"; break;
+        default: shadowCasterName="Error!!!";
+    }
+    lightMessage=QString("Ambient: %1 Directional: %2. Shadows cast by: %3 from %4/%5/%6")
+                 .arg(ambientBrightness, 6, 'f', 4).arg(directionalBrightness, 6, 'f', 4)
+                 .arg(shadowCasterName).arg(lightsourcePosition.v[0], 6, 'f', 4)
+                 .arg(lightsourcePosition.v[1], 6, 'f', 4).arg(lightsourcePosition.v[2], 6, 'f', 4);
+    lightMessage2=QString("Contributions: Ambient     Sun: %1, Moon: %2, Background+^L: %3").arg(sunAmbientString).arg(moonAmbientString).arg(backgroundAmbientString);
+    lightMessage3=QString("               Directional %1 by: %2 ").arg(directionalBrightness, 6, 'f', 4).arg(directionalSourceString);
+
+    return shadowcaster;
+}
+
 void Scenery3d::generateCubeMap(StelCore* core)
 {
     if (objModelArrays.empty()) return;
@@ -749,36 +869,12 @@ void Scenery3d::generateCubeMap(StelCore* core)
     glEnable(GL_LIGHT0);
     glShadeModel(GL_SMOOTH);
 
-    SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-    Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
-    zRotateMatrix.transfo(sunPosition); //: GZ: VERIFY THE NECESSITY OF THIS
-    sunPosition.normalize();
-    Vec3d moonPosition = ssystem->getMoon()->getAltAzPosAuto(core);
-    zRotateMatrix.transfo(moonPosition); //: GZ: VERIFY THE NECESSITY OF THIS
-    moonPosition.normalize();
 
-    // We define the brigthness zero when the sun is 8 degrees below the horizon.
-    float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+8.*M_PI/180.));
-    float sinMoonAngleRad = moonPosition[2];
-    float lightBrightness;
-    shadowCaster shadows = None;
-    if(sinSunAngleRad > -0.1/1.5 ) // sun above -8 deg?
-    {
-        lightBrightness = (0.01 + 1.5*(sinSunAngleRad+0.1/1.5));
-        if ((shadowsEnabled) && (sunPosition[2]>0.)) shadows = Sun;
-    }
-    else if (sinMoonAngleRad>0)
-    {
-        lightBrightness = 0.01 + 0.2*sinMoonAngleRad; // TODO: dependence on Lunar phase and general sky brightness!
-        if (shadowsEnabled) shadows = Moon;
-    }
-    else
-    {
-        lightBrightness = 0.01; // TODO: dependence on general sky brightness!
-    }
+    float ambientBrightness, directionalBrightness; // was: lightBrightness;
+    Vec3f lightsourcePosition;
+    ShadowCaster shadows=setupLights(ambientBrightness, directionalBrightness, lightsourcePosition);
 
-    Vec3d sunOrMoon = ( (sinSunAngleRad > -0.1/1.5 ) ? sunPosition : moonPosition);
-    const GLfloat LightPosition[]= {-sunOrMoon.v[0], -sunOrMoon.v[1], sunOrMoon.v[2], 0.0f} ;// signs determined by experiment
+    const GLfloat LightPosition[]= {-lightsourcePosition.v[0], -lightsourcePosition.v[1], lightsourcePosition.v[2], 0.0f} ;// signs determined by experiment
 
     float fov = 90.0f;
     float aspect = 1.0f;
@@ -803,9 +899,9 @@ void Scenery3d::generateCubeMap(StelCore* core)
 
     #define DRAW_SCENE  glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);\
                         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);\
-                        setLight(lightBrightness);\
-                        if(shadows){generateCubeMap_drawSceneWithShadows(painter, lightBrightness);}\
-                        else{generateCubeMap_drawScene(painter, lightBrightness);}\
+                        setLights(ambientBrightness, directionalBrightness);\
+                        if(shadows){generateCubeMap_drawSceneWithShadows(painter, ambientBrightness, directionalBrightness);}\
+                        else{generateCubeMap_drawScene(painter, ambientBrightness, directionalBrightness);}\
 
     //front
     glPushMatrix();
@@ -944,6 +1040,15 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
     glEnable(GL_LIGHT0);
     glShadeModel(GL_SMOOTH);
 
+
+
+    float ambientBrightness, directionalBrightness; // was: lightBrightness;
+    Vec3f lightsourcePosition;
+    ShadowCaster shadows=setupLights(ambientBrightness, directionalBrightness, lightsourcePosition);
+
+    const GLfloat LightPosition[]= {-lightsourcePosition.v[0], -lightsourcePosition.v[1], lightsourcePosition.v[2], 0.0f} ;// signs determined by experiment
+
+/*
     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
     Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
     zRotateMatrix.transfo(sunPosition);
@@ -957,7 +1062,7 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
     float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+15.*M_PI/180.));
     float sinMoonAngleRad = moonPosition[2];
     float lightBrightness;
-    shadowCaster shadows = None;
+    ShadowCaster shadows = None;
     if(sinSunAngleRad > 0 ) //-0.1/1.5 ) // sun above -8 deg?
     {
         lightBrightness = (0.1 + 1.5*(sinSunAngleRad)); //+0.1/1.5));
@@ -976,7 +1081,7 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
     Vec3d sunOrMoon = ( (sinSunAngleRad > 0 ) //-0.1/1.5 )
                         ? sunPosition : moonPosition);
     const GLfloat LightPosition[]= {-sunOrMoon.v[0], -sunOrMoon.v[1], sunOrMoon.v[2], 0.0f} ;// signs determined by experiment
-
+*/
 
     glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -1003,12 +1108,12 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
 
     glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
 
-    setLight(lightBrightness);
+    setLights(ambientBrightness, directionalBrightness);
     //GZ: The following calls apparently require the full cubemap. TODO: Verify and simplify
     if (shadows) {
-        generateCubeMap_drawSceneWithShadows(painter, lightBrightness);
+        generateCubeMap_drawSceneWithShadows(painter, ambientBrightness, directionalBrightness);
     } else {
-        generateCubeMap_drawScene(painter, lightBrightness);
+        generateCubeMap_drawScene(painter, ambientBrightness, directionalBrightness);
     }
 
     glMatrixMode(GL_MODELVIEW);
@@ -1094,6 +1199,9 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
     str = QString("groundNullHeight: %1m").arg(groundNullHeight, 7, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
     //*/
+    painter.drawText(40, 160, lightMessage);
+    painter.drawText(40, 145, lightMessage2);
+    painter.drawText(40, 130, lightMessage3);
 }
 
 void Scenery3d::initShadowMapping()
@@ -1132,8 +1240,6 @@ void Scenery3d::initShadowMapping()
 
 void Scenery3d::draw(StelCore* core)
 {
-    //this->core = core; // GZ: now in loadScenery()
-
     if (shadowsEnabled)
     {
         generateShadowMap(core);

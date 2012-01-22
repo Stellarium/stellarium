@@ -80,6 +80,8 @@ public:
     void setShadowsEnabled(bool shadowsEnabled) { this->shadowsEnabled = shadowsEnabled; }
     bool getBumpsEnabled(void) { return bumpsEnabled; }
     void setBumpsEnabled(bool bumpsEnabled) { this->bumpsEnabled = bumpsEnabled; }
+    bool getTorchEnabled(void) { return torchEnabled;}
+    void setTorchEnabled(bool torchEnabled) { this->torchEnabled = torchEnabled; }
 
     //! @return Name of the scenery.
     QString getName() const { return name; }
@@ -102,17 +104,22 @@ public:
     const Vec3f& getLookat() const {return lookAt_fov; }
 
 
-    enum shadowCaster { None, Sun, Moon, Venus };
-    enum effect { No, BumpMapping, ShadowMapping, All };
+    enum ShadowCaster { None, Sun, Moon, Venus };
+    enum Effect { No, BumpMapping, ShadowMapping, All };
 
 private:
+    static const float TORCH_BRIGHTNESS=0.5f;
+    static const float AMBIENT_BRIGHTNESS_FACTOR=0.05;
+    static const float LUNAR_BRIGHTNESS_FACTOR=0.2;
+    static const float VENUS_BRIGHTNESS_FACTOR=0.05;
+
     double eyeLevel;
 
     void drawObjModel(StelCore* core);
     void generateShadowMap(StelCore* core);
     void generateCubeMap(StelCore* core);
-    void generateCubeMap_drawScene(StelPainter& painter, float lightBrightness);
-    void generateCubeMap_drawSceneWithShadows(StelPainter& painter, float lightBrightness);
+    void generateCubeMap_drawScene(StelPainter& painter, float ambientBrightness, float directionalBrightness);
+    void generateCubeMap_drawSceneWithShadows(StelPainter& painter, float ambientBrightness, float directionalBrightness);
     void drawArrays(StelPainter& painter, bool textures=true);
     void drawFromCubeMap(StelCore* core);
 
@@ -122,6 +129,7 @@ private:
     bool shadowsEnabled;    // switchable value: Use shadow mapping
     bool bumpsEnabled;      // switchable value: Use bump mapping
     bool textEnabled;       // switchable value: display coordinates on screen
+    bool torchEnabled;      // switchable value: adds artificial ambient light
 
     int cubemapSize;        // configurable values, typically 512/1024/2048/4096
     int shadowmapSize;
@@ -161,6 +169,9 @@ private:
     QString gridName;
     double gridCentralMeridian;
     double groundNullHeight; // Used as height value outside the model ground, or if ground=NULL
+    QString lightMessage; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
+    QString lightMessage2; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
+    QString lightMessage3; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
 
     // used to apply the rotation from model/grid coordinates to Stellarium coordinates.
     // In the OBJ files, X=Grid-East, Y=Grid-North, Z=height.
@@ -182,14 +193,17 @@ private:
     //Shadow Map FBO handle
     GLuint shadowFBO;
     //Currently selected effect
-    effect curEffect;
+    Effect curEffect;
     //Sends texture data to the shader based on which effect is selected;
-    void sendToShader(OBJ::StelModel& stelModel, effect cur);
+    void sendToShader(OBJ::StelModel& stelModel, Effect cur);
     //Binds the shader for the selected effect
     void bindShader();
 
     void testMethod();
-    void setLight(float lightBrightness);
+    //Prepare ambient and directional light components from Sun, Moon, Venus.
+    Scenery3d::ShadowCaster setupLights(float &ambientBrightness, float &diffuseBrightness, Vec3f &lightsourcePosition);
+    //Set independent brightness factors (allow e.g. solar twilight ambient&lunar specular). Call setupLights first!
+    void setLights(float ambientBrightness, float diffuseBrightness);
 
     Mat4f modelView;
     Mat4f mv2;
