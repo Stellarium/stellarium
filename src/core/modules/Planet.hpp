@@ -112,7 +112,8 @@ public:
 	//! - PlainText
         //! - Extra1: Heliocentric Ecliptical Coordinates
         //! - Extra2: Observer-planetocentric Ecliptical Coordinates
-	//! @param core the StelCore object
+        //! - Extra3: Phase angle & elongation from the Sun
+        //! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Planet.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
@@ -160,9 +161,11 @@ public:
 	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
 	void computeTransMatrix(double date);
 
-	// Get the phase angle for an observer at pos obsPos in the heliocentric coordinate (in AU)
-	double getPhase(const Vec3d& obsPos) const;
-	// Get the angular size of the spheroid of the planet (i.e. without the rings)
+        // Get the phase angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
+        double getPhase(const Vec3d& obsPos) const;
+        // Get the elongation angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
+        double getElongation(const Vec3d& obsPos) const;
+        // Get the angular size of the spheroid of the planet (i.e. without the rings)
 	double getSpheroidAngularSize(const StelCore* core) const;
 
 	// Set the orbital elements
