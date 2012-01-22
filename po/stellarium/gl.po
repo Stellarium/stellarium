@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-13 23:26+0700\n"
-"PO-Revision-Date: 2012-01-13 19:55+0000\n"
-"Last-Translator: Manuel Rosales Graña <manuel.rosales@mundo-r.com>\n"
+"PO-Revision-Date: 2012-01-21 22:58+0000\n"
+"Last-Translator: Xosé <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-14 04:41+0000\n"
-"X-Generator: Launchpad (build 14664)\n"
+"X-Launchpad-Export-Date: 2012-01-22 05:29+0000\n"
+"X-Generator: Launchpad (build 14700)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -52,7 +52,7 @@ msgstr ", %1 m"
 
 #: src/core/modules/LandscapeMgr.cpp:498
 msgid "Planet: "
-msgstr "Planeta "
+msgstr "Planeta: "
 
 #: src/core/modules/Nebula.cpp:96
 #, qt-format
@@ -112,7 +112,7 @@ msgstr "Tipo non documentado"
 #: plugins/Quasars/src/Quasar.cpp:120
 #, qt-format
 msgid "Absolute Magnitude: %1"
-msgstr "Absolute Magnitude: %1"
+msgstr "Magnitude absoluta: %1"
 
 #: src/core/modules/Planet.cpp:142
 #, qt-format
@@ -260,7 +260,7 @@ msgid ""
 "projection</i>. With this projection all parallels are equally spaced."
 msgstr ""
 "O nome deste modo de proxección é <i>Proxección cilíndrica equidistante</i>. "
-"Con esta proxección tódalas paralelas se espacian equitativamente."
+"Con esta proxección todas as paralelas se espacian equitativamente."
 
 #: src/core/StelProjectorClasses.cpp:270
 msgid "Mercator"
@@ -272,8 +272,8 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
-"A proxección Mercator é unha das moitas usadas nos mapas do mundo. Preserva "
-"a dirección e a forma, pero distorsiona o tamaño, incrementando o grao de "
+"A proxección Mercator é unha das máis usadas nos mapas do mundo. Preserva a "
+"dirección e a forma, pero distorsiona o tamaño, incrementando o grao de "
 "distancia dende o ecuador."
 
 #: src/core/StelProjectorClasses.cpp:322
@@ -335,7 +335,7 @@ msgstr "Comezar na dirección Az/Alt: %1/%2"
 #: src/gui/ConfigurationDialog.cpp:535
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
 msgid "Authors"
-msgstr "Autores"
+msgstr "Autoría"
 
 #: src/gui/ConfigurationDialog.cpp:539 src/gui/ViewDialog.cpp:397
 msgid "Contact"
@@ -343,7 +343,7 @@ msgstr "Contacto"
 
 #: src/gui/ConfigurationDialog.cpp:615
 msgid "Author"
-msgstr "Autor"
+msgstr "Autoría"
 
 #: src/gui/ConfigurationDialog.cpp:616
 msgid "License"
@@ -367,7 +367,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:725
 msgid "All available star catalogs have been installed."
-msgstr "Instaláronse todos os catálogos de estrelas dispoñibles"
+msgstr "Instaláronse todos os catálogos de estrelas dispoñíbeis"
 
 #: src/gui/ConfigurationDialog.cpp:730
 #, qt-format
@@ -413,8 +413,8 @@ msgid ""
 "Error downloading %1:\n"
 "File is corrupted."
 msgstr ""
-"Erro descargando %1:\n"
-"Ficheiro danado."
+"Erro ao descargar %1:\n"
+"O ficheiro está danado."
 
 #: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:328
 #: src/gui/StelGuiItems.cpp:709
@@ -447,7 +447,7 @@ msgstr "CTRL + clic esquerdo"
 
 #: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:166
 msgid "Movement and Selection"
-msgstr "Movemento e Selección"
+msgstr "Movemento e selección"
 
 #: src/gui/HelpDialog.cpp:62
 msgid "Pan view around the sky"
@@ -471,11 +471,11 @@ msgstr "Cando está funcionando un script"
 
 #: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:145
 msgid "Slow down the script execution rate"
-msgstr "Diminuír o nivel de execución do script"
+msgstr "Demorar o nivel de execución do script"
 
 #: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:146
 msgid "Speed up the script execution rate"
-msgstr "Elevar o nivel de execución do script"
+msgstr "Acelerar o nivel de execución do script"
 
 #: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:147
 msgid "Set the normal script execution rate"
@@ -487,12 +487,12 @@ msgstr "Establecer o nivel normal de execución do script"
 #: plugins/Oculars/src/Oculars.cpp:1188
 #: plugins/Satellites/src/Satellites.cpp:128
 msgid "Plugin Key Bindings"
-msgstr "Plugin de encapsulamento de claves"
+msgstr "Engadido de encapsulamento de claves"
 
 #: src/gui/HelpDialog.cpp:78
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:82
 msgid "Text User Interface"
-msgstr "Texto da interface de usuario"
+msgstr "Interface de usuario de texto"
 
 #: src/gui/HelpDialog.cpp:167
 msgid "Stellarium Help"
@@ -537,8 +537,8 @@ msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr ""
-"{Sistema de axuda} - se precisas axuda usando Stellarium, envíanos un correo-"
-"eil e tentaremos axudarte."
+"{Sistema de axuda} - se precisas axuda usando Stellarium, envíanos un correo "
+"e tentaremos axudarte."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:197
@@ -595,7 +595,7 @@ msgstr "Desenvolvedor OSX: %1"
 #: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Tester: %1"
-msgstr "Tester: %1"
+msgstr "Probador: %1"
 
 #: src/gui/StelGui.cpp:100
 msgid "Display Options"
@@ -728,27 +728,27 @@ msgstr "Inverter verticalmente"
 
 #: src/gui/StelGui.cpp:133
 msgid "Windows"
-msgstr "Ventás"
+msgstr "Xanelas"
 
 #: src/gui/StelGui.cpp:134
 msgid "Help window"
-msgstr "Ventá de axuda"
+msgstr "Xanela de axuda"
 
 #: src/gui/StelGui.cpp:135
 msgid "Configuration window"
-msgstr "Ventá de configuración"
+msgstr "Xanela de configuración"
 
 #: src/gui/StelGui.cpp:136
 msgid "Search window"
-msgstr "Ventá de busca"
+msgstr "Xanela de busca"
 
 #: src/gui/StelGui.cpp:137
 msgid "Sky and viewing options window"
-msgstr "Ventá de ceo e opcións de vista"
+msgstr "Xanela de ceo e opcións de vista"
 
 #: src/gui/StelGui.cpp:138
 msgid "Date/time window"
-msgstr "Ventá de data e hora"
+msgstr "Xanela de data e hora"
 
 #: src/gui/StelGui.cpp:139
 msgid "Location window"
@@ -756,7 +756,7 @@ msgstr "Xanela de localización"
 
 #: src/gui/StelGui.cpp:141
 msgid "Script console window"
-msgstr "Ventá de control do script"
+msgstr "Xanela de control do script"
 
 #: src/gui/StelGui.cpp:144 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:160
@@ -785,7 +785,7 @@ msgstr "Aumentar a velocidade do tempo (un chisco)"
 
 #: src/gui/StelGui.cpp:153
 msgid "Set time rate to zero"
-msgstr "Estabelecer a velociade do tempo a cero"
+msgstr "Estabelecer a velocidade do tempo a cero"
 
 #: src/gui/StelGui.cpp:154
 msgid "Set time to now"
@@ -837,15 +837,15 @@ msgstr "Centrar no obxecto seleccionado"
 
 #: src/gui/StelGui.cpp:168
 msgid "Track object"
-msgstr "Seguir obxecto"
+msgstr "Seguir o obxecto"
 
 #: src/gui/StelGui.cpp:169
 msgid "Zoom in on selected object"
-msgstr "Zoom ao obxecto seleccionado"
+msgstr "Achegar ao obxecto seleccionado"
 
 #: src/gui/StelGui.cpp:170
 msgid "Zoom out"
-msgstr "Diminuír"
+msgstr "Afastar"
 
 #: src/gui/StelGui.cpp:171
 msgid "Set home planet to selected planet"
@@ -873,7 +873,7 @@ msgstr "Agochamento automático da barra vertical"
 
 #: src/gui/StelGui.cpp:185
 msgid "Toggle visibility of GUI"
-msgstr "Alternar a visibilidade de GUI"
+msgstr "Alternar a visibilidade da GUI"
 
 #: src/gui/StelGuiItems.cpp:595
 #, no-c-format, qt-format
@@ -920,7 +920,7 @@ msgstr "Arquivos ZIP"
 #: src/gui/AddRemoveLandscapesDialog.cpp:132
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
-msgstr "A paixase \"%1\" foi correctamente instalada."
+msgstr "A paixase «%1» foi instalada correctamente."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:133
 #: src/gui/AddRemoveLandscapesDialog.cpp:160
@@ -946,7 +946,7 @@ msgstr "Erro!"
 #: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
-msgstr "A paisaxe \"%1\" foi eliminada."
+msgstr "A paisaxe «%1» foi eliminada."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:170
 #: src/gui/AddRemoveLandscapesDialog.cpp:240
@@ -963,14 +963,14 @@ msgstr "Tamaño en disco: %1 MiB"
 #: src/gui/AddRemoveLandscapesDialog.cpp:219
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
-msgstr "Stellarium non pode acceder ó arquivo %1"
+msgstr "Stellarium non pode acceder a %1"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:225
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
 msgstr ""
-"O arquivo seleccionado non é un arquivo ZIP ou non contén unha paisaxe de "
+"O ficheiro seleccionado non é un arquivo ZIP ou non contén unha paisaxe do "
 "Stellarium."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
@@ -1425,7 +1425,7 @@ msgstr "Furacán"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:171
 msgid "Ocean"
-msgstr "Nome da paisaxe"
+msgstr "Océano"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:173
@@ -1474,7 +1474,7 @@ msgstr "Antártida"
 
 #: src/translations.h:190
 msgid "Argentina"
-msgstr "A Arxentina"
+msgstr "Arxentina"
 
 #: src/translations.h:191
 msgid "American Samoa"
@@ -1610,7 +1610,7 @@ msgstr "Chile"
 
 #: src/translations.h:224
 msgid "Cameroon"
-msgstr "O Camerún"
+msgstr "Camerún"
 
 #: src/translations.h:225
 msgid "China"
@@ -1686,7 +1686,7 @@ msgstr "Exipto"
 
 #: src/translations.h:243
 msgid "Western Sahara"
-msgstr "Sahara Occidental"
+msgstr "Sáhara Occidental"
 
 #: src/translations.h:244
 msgid "Eritrea"
@@ -1722,7 +1722,7 @@ msgstr "Illas Feroe"
 
 #: src/translations.h:252
 msgid "France"
-msgstr "Francia"
+msgstr "Franza"
 
 #: src/translations.h:253
 msgid "Gabon"
@@ -1738,11 +1738,11 @@ msgstr "Granada"
 
 #: src/translations.h:256
 msgid "Georgia"
-msgstr "Georgia"
+msgstr "Xeorxia"
 
 #: src/translations.h:257
 msgid "French Guiana"
-msgstr "Güaiana Francesa"
+msgstr "Guaiana Francesa"
 
 #: src/translations.h:258
 msgid "Ghana"
@@ -1870,7 +1870,7 @@ msgstr "Xapón"
 
 #: src/translations.h:289
 msgid "Kenya"
-msgstr "Kenia"
+msgstr "Quenia"
 
 #: src/translations.h:290
 msgid "Kyrgyzstan"
@@ -2066,7 +2066,7 @@ msgstr "Nicaragua"
 
 #: src/translations.h:338
 msgid "Netherlands"
-msgstr "Holanda"
+msgstr "Países Baixos"
 
 #: src/translations.h:339
 msgid "Norway"
@@ -2278,7 +2278,7 @@ msgstr "Toquelau"
 
 #: src/translations.h:391
 msgid "East Timor"
-msgstr "Timor Oriental"
+msgstr "Timor Leste"
 
 #: src/translations.h:392
 msgid "Turkmenistan"
@@ -2286,7 +2286,7 @@ msgstr "Turcomenistán"
 
 #: src/translations.h:393
 msgid "Tunisia"
-msgstr "Tunisia"
+msgstr "Tunicia"
 
 #: src/translations.h:394
 msgid "Tonga"
@@ -2415,7 +2415,7 @@ msgstr "Axuda"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
 msgid "About"
-msgstr "Acerca de"
+msgstr "Sobre"
 
 #: src/ui_helpDialogGui.h:269
 msgid "Log"
@@ -2497,7 +2497,7 @@ msgstr "Buscar un obxecto"
 
 #: src/ui_searchDialogGui.h:465
 msgid "Find Object or Position"
-msgstr "Buscar Obxecto ou Posición"
+msgstr "Buscar un obxecto ou posición"
 
 #: src/ui_searchDialogGui.h:471
 msgid "iota"
