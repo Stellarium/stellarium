@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-13 23:26+0700\n"
-"PO-Revision-Date: 2012-01-21 22:58+0000\n"
+"PO-Revision-Date: 2012-01-22 12:52+0000\n"
 "Last-Translator: Xosé <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-22 05:29+0000\n"
+"X-Launchpad-Export-Date: 2012-01-23 05:18+0000\n"
 "X-Generator: Launchpad (build 14700)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -285,7 +285,7 @@ msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
 msgstr ""
-"A proxección Ortográfica relaciónase coa proxección de perspectiva, pero o "
+"A proxección ortográfica relaciónase coa proxección de perspectiva, pero o "
 "punto de perspectiva sitúase a unha distancia infinita."
 
 #: src/core/StelObject.cpp:87
@@ -511,7 +511,7 @@ msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr ""
-"As seguintes ligazóns son a webs externas, e abrirán o teu navegador.\n"
+"As seguintes ligazóns son a webs externas e abrirán o teu navegador.\n"
 
 #: src/gui/HelpDialog.cpp:178
 msgid "The Stellarium User Guide"
@@ -4121,19 +4121,19 @@ msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
-"Este plugin permítelle a Stellarium enviar comandos \"slew\" a telescopios "
+"Este engadido permítelle a Stellarium enviar comandos \"slew\" a telescopios "
 "con montura computerizada (Telescopios con GoTo)"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:155
 #, qt-format
 msgid "Move telescope #%1 to selected object"
-msgstr "Orientar o telescopio #%1 ó obxecto seleccionado"
+msgstr "Orientar o telescopio nº %1 ao obxecto seleccionado"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:162
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr ""
-"Orientar o telescopio #%1 ó punto que neste momento ocupa o centro da "
+"Orientar o telescopio nº %1 ao punto que neste momento ocupa o centro da "
 "pantalla"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:173
@@ -4142,15 +4142,15 @@ msgstr "Orientar o telescopio a un determinado conxunto de coordenadas"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
-msgstr "Engadir Novo Telescopio"
+msgstr "Engadir un novo telescopio"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
-msgstr "Configurar Telescopio"
+msgstr "Configurar o telescopio"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
-msgstr "Non dispoñible"
+msgstr "Non dispoñíbel"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
 msgid "Starting"
@@ -4174,7 +4174,7 @@ msgstr "Detido"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
-msgstr "Plugín de control do telescopio"
+msgstr "Engadido de control do telescopio"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
@@ -4186,7 +4186,7 @@ msgstr "Versión %1"
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 msgid "#"
-msgstr "#"
+msgstr "Nº"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Status"
@@ -4209,9 +4209,9 @@ msgid ""
 "the Alt key and press the key with that telescope's number."
 msgstr ""
 "Para mover o telescopio a un obxecto (por exemplo, unha estrela), "
-"seleccionar o obxecto, logo manter premida a tecla %1 e premer a tecla do "
-"número do telescopio. Para mover ó centro da visión actual, manter premida a "
-"tecla Alt e premer a tecla co número do telescopio."
+"seleccionar o obxecto, manter premida a tecla %1 e premer a tecla do número "
+"do telescopio. Para mover ao centro da visión actual, manter premida a tecla "
+"Alt e premer a tecla co número do telescopio."
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
@@ -4220,7 +4220,7 @@ msgid ""
 "control a telescope on its own, but it is still possible to do it through an "
 "external application or to connect to a remote host."
 msgstr ""
-"Non está dispoñible a descrición do modelo. Stellarium non poderá controlar "
+"Non está dispoñibel a descrición do modelo. Stellarium non poderá controlar "
 "un telescopio por si mesmo, pero pódese facer a través dunha aplicación "
 "externa ou conectándose a un servidor remoto."
 
@@ -4257,7 +4257,7 @@ msgstr "Comezar"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:745
 msgid "Start the selected local telescope"
-msgstr "Avtivar o telescopio local seleccionado"
+msgstr "Activar o telescopio local seleccionado"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:750
 msgid "Stop"
@@ -4273,7 +4273,7 @@ msgstr "Conectar"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:757
 msgid "Connect to the selected telescope"
-msgstr "Conectar ó telescopio seleccionado"
+msgstr "Conectar ao telescopio seleccionado"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:762
 msgid "Disconnect"
@@ -4281,11 +4281,11 @@ msgstr "Desconectar"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:763
 msgid "Disconnect from the selected telescope"
-msgstr "Desconectar dende o telescopio seleccionado"
+msgstr "Desconectar do telescopio seleccionado"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:784
 msgid "Select a directory"
-msgstr "Escoller un cartafol"
+msgstr "Escoller un directorio"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:281
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
@@ -4303,7 +4303,7 @@ msgstr "Non hai controladores activos."
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:285
 msgid "Slew telescope to coordinates"
-msgstr "Mover o telescopio ás coordinadas"
+msgstr "Mover o telescopio ás coordenadas"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:286
 msgid "&Right Ascension (J2000):"
@@ -4347,7 +4347,7 @@ msgstr "Configurar &telescopios..."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope Configuration"
-msgstr "Configuración do Telescopio"
+msgstr "Configuración do telescopio"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid "Telescope controlled by:"
@@ -4395,7 +4395,7 @@ msgid ""
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
-"Tempo aproximado que necesitan os sinais para chegar ó telescopio dende "
+"Tempo aproximado que necesitan os sinais para chegar ao telescopio dende "
 "Stellarium.\n"
 "Incrementar este valor se o retículo pestanexa."
 
@@ -4405,11 +4405,11 @@ msgstr "Sistema de coordenadas:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "J2000 (default)"
-msgstr "J2000 (defecto)"
+msgstr "J2000 (predefinido)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
 msgid "Equinox of the date (JNow)"
-msgstr "Equinoccio da data (JNow)"
+msgstr "Equinocio da data (JNow)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
 msgid ""
@@ -4421,7 +4421,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Start/connect at startup"
-msgstr "Iniciar/conectar ó empezar"
+msgstr "Iniciar/conectar ao comezar"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Device settings"
@@ -4452,7 +4452,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "TCP port:"
-msgstr "Porto TCP:"
+msgstr "Porto de TCP:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "User interface settings"
@@ -4469,7 +4469,7 @@ msgstr "Usar indicadores do campo de visión"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:512
 msgid "Circle size(s):"
-msgstr "Tamaño do círculo:"
+msgstr "Tamaño(s) do círculo:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:514
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
@@ -4505,23 +4505,23 @@ msgstr "Interface gráfica de usuario"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Show telescope labels"
-msgstr "Mostrar etiquetas do telescopio"
+msgstr "Mostrar as etiquetas do telescopio"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Show telescope reticles"
-msgstr "Mostrar retículos do telescopio"
+msgstr "Mostrar os retículos do telescopio"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Show field of view indicators"
-msgstr "Mostrar indicadores do campo de visión"
+msgstr "Mostrar os indicadores do campo de visión"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Files"
-msgstr "Arquivos"
+msgstr "Ficheiros"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Log telescope driver messages to files"
-msgstr "Rexistrar nun arquivo mensaxes sobre os controladores do telescopio"
+msgstr "Rexistrar en ficheiros as mensaxes dos controladores do telescopio"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 msgid "Use telescope server executables (override built-in drivers)"
@@ -4531,11 +4531,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
 msgid "Executables directory:"
-msgstr "Cartafol dos executables:"
+msgstr "Directorio dos executables:"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
-msgstr "Zona Horaria"
+msgstr "Zona horaria"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:44
 msgid ""
@@ -4645,7 +4645,7 @@ msgstr "Sábado"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
-msgstr "Plugín de Zona horaria"
+msgstr "Engadido de zona horaria"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:449
 msgid "Define a time zone"
@@ -4681,7 +4681,7 @@ msgstr "Desviación DST a partir da UTC (horas)"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
 msgid "Daylight saving time start"
-msgstr "Inciar horario de verán"
+msgstr "Inicio do horario de verán"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
@@ -4713,14 +4713,14 @@ msgid ""
 "This behaviour can be changed by changing Stellarium's global time zone "
 "settings."
 msgstr ""
-"Por defecto o tempo mostrado en Stellarium interprétase como hora local na "
-"zona do sistema de tempo, non na zona da localidade de tempo presentada. "
-"Este comportamento pode ser cambiado alterando a configuración globar da "
-"zona horaria de Stellarium."
+"Por omisión, o tempo mostrado en Stellarium interprétase como hora local na "
+"zona horaria do sistema, non na zona horaria da localidade presentada. Este "
+"comportamento pode ser cambiado alterando a configuración global da zona "
+"horaria de Stellarium."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "Use system settings (default)"
-msgstr "Usar configuración do sistema (defecto)"
+msgstr "Usar a configuración do sistema (predefinido)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
 msgid "Universal Coordinated Time (UTC)"
@@ -4775,23 +4775,23 @@ msgstr "Formato de data"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
 msgid "yyyy-mm-dd (ISO 8601)"
-msgstr "yyyy-mm-dd (ISO 8601)"
+msgstr "aaaa-mm-dd (ISO 8601)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 msgid "dd-mm-yyyy"
-msgstr "dd-mm-yyyy"
+msgstr "dd-mm-aaaa"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
 msgid "mm-dd-yyyy"
-msgstr "mm-dd-yyyy"
+msgstr "mm-dd-aaaa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:85
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
-"Plugin para engadir as series 0.9.x ó Texto da interface de usuario (TIU), "
-"usado en sistemas planetarios"
+"Engadido para incorporar a interface de texto de usuario da serie 0.9.x, "
+"empregada nos sistemas dos planetarios"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:148
 msgid "Solar System body"
@@ -4803,7 +4803,7 @@ msgstr "Data/hora actual"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:167
 msgid "Set time zone"
-msgstr "Establecer zona horaria"
+msgstr "Establecer a zona horaria"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:168
 msgid "Day keys"
@@ -4821,19 +4821,19 @@ msgstr "sistema"
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:178
 msgid "preset"
-msgstr "Programación"
+msgstr "predefinido"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:186
 msgid "mmddyyyy"
-msgstr "mmddyyyy"
+msgstr "mmddaaaa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:186
 msgid "ddmmyyyy"
-msgstr "ddmmyyyy"
+msgstr "ddmmaaaa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:186
 msgid "yyyymmdd"
-msgstr "yyyymmdd"
+msgstr "aaaammdd"
 
 #. TRANSLATORS: 12-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:195
@@ -4847,11 +4847,11 @@ msgstr "24h"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:222
 msgid "Language"
-msgstr "Linguaxe"
+msgstr "Idioma"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:236
 msgid "Show stars"
-msgstr "Mostrar estrelas"
+msgstr "Mostrar as estrelas"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:264
 msgid "Colors"
@@ -4895,11 +4895,11 @@ msgstr "Desaparición do cursor:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:422
 msgid "Setting landscape sets location"
-msgstr "Configuración de paisaxe"
+msgstr "A configuración da paisaxe indica o lugar"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:443
 msgid "Run local script"
-msgstr "Correr un script local"
+msgstr "Executar un script local"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:449
 msgid "Stop running script"
@@ -4907,7 +4907,7 @@ msgstr "Deter o script en curso"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:452
 msgid "CD/DVD script"
-msgstr "Script CD/DVD"
+msgstr "Script de CD/DVD"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:464
@@ -4916,7 +4916,7 @@ msgstr "Administración"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:469
 msgid "Load default configuration"
-msgstr "Cargar a configuración por defecto"
+msgstr "Cargar a configuración por omisión"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:470
 msgid "Save current configuration"
@@ -4928,7 +4928,7 @@ msgstr "Apagar"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:504
 msgid "[no TUI node]"
-msgstr "[non modo TUI]"
+msgstr "[non hai modo texto]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
 msgid "On"
@@ -4941,7 +4941,7 @@ msgstr "Desactivado"
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr "erro, parte \"%1\" de cor descoñecida"
+msgstr "erro, parte «%1» de cor descoñecida"
 
 #: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
 msgid " [RETURN to activate]"
@@ -4957,15 +4957,15 @@ msgid ""
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
 msgstr ""
-"Interface para engadir asteroides e cometas a Stellarium. É posible baixar "
-"listas de obxectos dende o sitio web do Minor Planet Center e realizar "
-"buscas en bases de datos en liña."
+"Interface para engadir asteroides e cometas a Stellarium. É posible "
+"descargar listas de obxectos dende o sitio web do Minor Planet Center e "
+"realizar buscas en bases de datos en liña."
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
 #, qt-format
 msgid "Query the MPC's %1:"
-msgstr "Consulta %1 do MPC:"
+msgstr "Consultar o %1 do MPC:"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
 msgid "Only one result will be returned if the query is successful."
@@ -4989,8 +4989,8 @@ msgid ""
 msgstr ""
 "Os <i>nomes</i> dos cometas necesitan ser prefixados con %1 ou %2. Se se "
 "atopa máis dun cometa co mesmo nome só se devolverá o primeiro resultado. "
-"Por exemplo, buscando \"%3\" devolverá %4, Cometa Halley, pero buscando "
-"\"%5\" devolverá o asteroide %6."
+"Por exemplo, buscando «%3» devolverá %4, Cometa Halley, pero buscando «%5» "
+"devolverá o asteroide %6."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:87
@@ -5007,14 +5007,14 @@ msgid ""
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
 "Pódense importar datos de cometas e asteroides formatados nos formatos de "
-"exportación do Centro de Planetas Menores do IAU (%1). Pódense importar "
+"exportación do Centro de Planetas Menores da IAU (%1). Pódense importar "
 "arquivos con listas de obxectos, descargar as listas de internet ou buscar "
 "en liña mediante o Servidor de Efemérides de Planetas Menores e Cometas "
 "(MPES)."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
 msgid "Solar System Editor plug-in"
-msgstr "Plugin Editor do Sistema Solar"
+msgstr "Engadido Editor do Sistema Solar"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Import data"
@@ -5038,19 +5038,19 @@ msgstr "Seleccionar a fonte"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Download a list of objects from the Internet"
-msgstr "Descargar unhalista de obxectos dende Internet"
+msgstr "Descargar unha lista de obxectos dende Internet"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Select a source from the list:"
-msgstr "Seleccionar unha fonte da lista:"
+msgstr "Selecciona unha fonte da lista:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Or enter a URL:"
-msgstr "Ou inserir a URL:"
+msgstr "Ou escribe un URL:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Add this URL to the bookmarks list"
-msgstr "Engadir esta URL á lista de marcadores"
+msgstr "Engadir este URL á lista de marcadores"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Bookmark title:"
@@ -5058,7 +5058,7 @@ msgstr "Título do marcador:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "A file containing a list of objects"
-msgstr "Un arquivo que contén unha lista de obxectos"
+msgstr "Un ficheiro que contén unha lista de obxectos"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Get orbital elements"
@@ -5086,18 +5086,18 @@ msgid ""
 "may cause Stellarium to run slowly."
 msgstr ""
 "Marcar os obxectos que se queren importar. En <i> cursiva </ i> lístanse os "
-"nomes que corresponden ós nomes de obxectos xa cargados. En <b> negra </ b> "
-"lístanse os nomes dos obxectos herdados da configuración por defecto de "
+"nomes que corresponden aos nomes de obxectos xa cargados. En <b> negra </ b> "
+"lístanse os nomes dos obxectos herdados da configuración por omisión de "
 "Stellarium no Sistema Solar. <br/> Nótese que engadir un gran número de "
 "obxectos pode causar que Stellarium se execute lentamente."
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Overwrite existing objects"
-msgstr "Sobreescribir obxectos existentes"
+msgstr "Substituír os obxectos existentes"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
 msgid "Update existing objects"
-msgstr "Actualizar obxectos existentes"
+msgstr "Actualizar os obxectos existentes"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid "Update only the orbital elements"
@@ -5130,44 +5130,44 @@ msgid ""
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
 msgstr ""
-"Este plugin usa un arquivo de configuración do Sistema Solar personalizado. "
-"Se funciona mal e Stellarium non vai, podes borrar manualmente este arquivo "
-"en:"
+"Este engadido usa un ficheiro de configuración do Sistema Solar "
+"personalizado. Se funciona mal e Stellarium non vai, podes borrar "
+"manualmente este ficheiro de:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
-"Tamén podes desbotar todos os cambios e volver á configuración por defecto:"
+"Tamén podes desbotar todos os cambios e volver á configuración por omisión:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Reset to defaults"
-msgstr "Repor os valores predeterminados"
+msgstr "Repor os valores predefinidos"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Copy/replace the Solar System file"
-msgstr "Copiar/Reemprazar arquivo do Sistema Solar"
+msgstr "Copiar/Substituír o ficheiro do Sistema Solar"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
-"Pódese crear unha copia de seguridade do arquivo de configuración "
-"personalizado do Sistema Solar nunha localización determinada, ou "
-"reemprazalo cunha copia."
+"Pódese crear unha copia de seguranza do ficheiro de configuración "
+"personalizado do Sistema Solar nun lugar determinado ou substituílo con esa "
+"copia."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Copy the Solar System file..."
-msgstr "Copiar arquivo do Sistema Solar..."
+msgstr "Copiar o ficheiro do Sistema Solar..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Replace the Solar System file..."
-msgstr "Reemprazar arquivo do Sistema Solar..."
+msgstr "Substituír o ficheiro do Sistema Solar..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Configuration file"
-msgstr "Arquivo de configuración"
+msgstr "Ficheiro de configuración"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Add new Solar System objects"
@@ -5183,7 +5183,7 @@ msgstr "Sistema Solar"
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical Supernovae"
-msgstr "Supernovas Históricas"
+msgstr "Supernovas históricas"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
@@ -5194,12 +5194,12 @@ msgid ""
 "1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
 "(13 September)."
 msgstr ""
-"Un plugin que mostra algunhas supernovas históricas de brillo superior a 10 "
-"na magnitude visual: SN 185A (7 Decembro), SN 386A (24 Abril), SN 1006A (29 "
-"Abril), SN 1054A (3 Xullo), SN 1181A (4 Agosto), SN 1572A (5 Novembro), SN "
-"1604A (8 Outubro), SN 1680A (15 Agosto), SN 1885A (17 Agosto), SN 1895B (5 "
-"Xullo), SN 1937C (21 Agosto), SN 1972E (8 Maio), SN 1987A (24 Febreiro) and "
-"SN 2011FE (13 Setembro)."
+"Un engadido que mostra algunhas supernovas históricas de brillo superior a "
+"10 na magnitude visual: SN 185A (7 Decembro), SN 386A (24 Abril), SN 1006A "
+"(29 Abril), SN 1054A (3 Xullo), SN 1181A (4 Agosto), SN 1572A (5 Novembro), "
+"SN 1604A (8 Outubro), SN 1680A (15 Agosto), SN 1885A (17 Agosto), SN 1895B "
+"(5 Xullo), SN 1937C (21 Agosto), SN 1972E (8 Maio), SN 1987A (24 Febreiro) "
+"and SN 2011FE (13 Setembro)."
 
 #: plugins/Supernovae/src/Supernova.cpp:112
 #, qt-format
@@ -5216,7 +5216,7 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
-"Un plugin que mostra algúns dos quásars que sobrepasan a magnitude visual "
+"Un engadido que mostra algúns dos quásars que sobrepasan a magnitude visual "
 "16. Un catálogo de quásars compidado a partir de 'Quasars and Active "
 "Galactic Nuclei' (13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 
@@ -5227,7 +5227,7 @@ msgstr "Tipo: quásar"
 #: plugins/Quasars/src/Quasar.cpp:132
 #, qt-format
 msgid "Z (redshift): %1"
-msgstr "Z (redshift): %1"
+msgstr "Z (desprazamento cara o vermello): %1"
 
 #~ msgid "Cardinal Points"
 #~ msgstr "Puntos cardinais"
