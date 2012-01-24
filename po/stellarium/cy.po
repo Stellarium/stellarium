@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-13 23:26+0700\n"
-"PO-Revision-Date: 2010-05-07 21:21+0000\n"
-"Last-Translator: Cadan ap Tomos <cadz123@googlemail.com>\n"
+"PO-Revision-Date: 2012-01-16 06:43+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Welsh <cy@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-14 04:45+0000\n"
-"X-Generator: Launchpad (build 14664)\n"
+"X-Launchpad-Export-Date: 2012-01-17 04:42+0000\n"
+"X-Generator: Launchpad (build 14676)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
-msgstr ""
+msgstr "Meridian"
 
 #: src/core/modules/GridLinesMgr.cpp:546
 msgid "Ecliptic"
@@ -31,7 +31,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:554
 msgid "Horizon"
-msgstr ""
+msgstr "Gorwel"
 
 #: src/core/modules/GridLinesMgr.cpp:558
 msgid "Galactic Plane"
@@ -314,19 +314,19 @@ msgstr ""
 #: src/gui/ConfigurationDialog.cpp:535
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
 msgid "Authors"
-msgstr ""
+msgstr "Awduron"
 
 #: src/gui/ConfigurationDialog.cpp:539 src/gui/ViewDialog.cpp:397
 msgid "Contact"
-msgstr ""
+msgstr "Cyswllt"
 
 #: src/gui/ConfigurationDialog.cpp:615
 msgid "Author"
-msgstr ""
+msgstr "Awdur"
 
 #: src/gui/ConfigurationDialog.cpp:616
 msgid "License"
-msgstr ""
+msgstr "Trwydded"
 
 #: src/gui/ConfigurationDialog.cpp:644
 msgid "Running script: "
@@ -519,11 +519,11 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:337
 #: src/gui/HelpDialog.cpp:339 src/gui/StelGui.cpp:173
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Amrywiol"
 
 #: src/gui/HelpDialog.cpp:298
 msgid "Developers"
-msgstr ""
+msgstr "Datblygwyr"
 
 #: src/gui/HelpDialog.cpp:299
 #, qt-format
@@ -641,7 +641,7 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:119
 msgid "Fog"
-msgstr ""
+msgstr "Niwl"
 
 #: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1108
 msgid "Nebulas"
@@ -654,7 +654,7 @@ msgstr ""
 #: src/gui/StelGui.cpp:123 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:233
 msgid "Stars"
-msgstr ""
+msgstr "Sêr"
 
 #: src/gui/StelGui.cpp:124
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
@@ -689,7 +689,7 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:133
 msgid "Windows"
-msgstr ""
+msgstr "Ffenestri"
 
 #: src/gui/StelGui.cpp:134
 msgid "Help window"
@@ -722,7 +722,7 @@ msgstr ""
 #: src/gui/StelGui.cpp:144 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:160
 msgid "Date and Time"
-msgstr ""
+msgstr "Dyddiad ac Amser"
 
 #: src/gui/StelGui.cpp:148
 msgid "Decrease time speed"
@@ -843,7 +843,7 @@ msgstr ""
 
 #: src/gui/ViewDialog.cpp:456
 msgid "No description"
-msgstr ""
+msgstr "Dim disgrifiad"
 
 #: src/gui/ViewDialog.cpp:540
 msgid "No shooting stars"
@@ -886,7 +886,7 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:133
 #: src/gui/AddRemoveLandscapesDialog.cpp:160
 msgid "Success"
-msgstr ""
+msgstr "Llwyddiant"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:146
 #: src/gui/AddRemoveLandscapesDialog.cpp:216
@@ -902,7 +902,7 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:234
 #: src/gui/AddRemoveLandscapesDialog.cpp:244
 msgid "Error!"
-msgstr ""
+msgstr "Gwall!"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
@@ -950,7 +950,7 @@ msgstr ""
 
 #: src/translations.h:33
 msgid "Sun"
-msgstr ""
+msgstr "Haul"
 
 #: src/translations.h:34
 msgid "Mercury"
@@ -967,7 +967,7 @@ msgstr ""
 #. TRANSLATORS: Name of landscape and Earth's satellite
 #: src/translations.h:37 src/translations.h:167
 msgid "Moon"
-msgstr ""
+msgstr "Lleuad"
 
 #. TRANSLATORS: Name of landscape and planet
 #: src/translations.h:38 src/translations.h:175
@@ -1336,7 +1336,7 @@ msgstr ""
 
 #: src/translations.h:152
 msgid "Lakota"
-msgstr ""
+msgstr "Lakota"
 
 #: src/translations.h:153
 msgid "Maori"
@@ -1429,11 +1429,11 @@ msgstr ""
 
 #: src/translations.h:189
 msgid "Antarctica"
-msgstr ""
+msgstr "Antarctica"
 
 #: src/translations.h:190
 msgid "Argentina"
-msgstr ""
+msgstr "Argentina"
 
 #: src/translations.h:191
 msgid "American Samoa"
@@ -1441,7 +1441,7 @@ msgstr ""
 
 #: src/translations.h:192
 msgid "Austria"
-msgstr ""
+msgstr "Austria"
 
 #: src/translations.h:193
 msgid "Australia"
