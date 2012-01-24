@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-13 23:26+0700\n"
-"PO-Revision-Date: 2012-01-22 20:49+0000\n"
-"Last-Translator: Jose A. Macas D. <josedurazo92@gmail.com>\n"
+"PO-Revision-Date: 2012-01-23 21:22+0000\n"
+"Last-Translator: txelu <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-23 05:18+0000\n"
-"X-Generator: Launchpad (build 14700)\n"
+"X-Launchpad-Export-Date: 2012-01-24 05:28+0000\n"
+"X-Generator: Launchpad (build 14713)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -3240,9 +3240,9 @@ msgid ""
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
-"Muestra el cielo como si se estuviese viendo por el ocular de un telescópio "
-"(Sólo el aumento y el campo de visión son simuladas.) También puede mostrar "
-"un cuadro de sensor y un mira Telrad."
+"Muestra el cielo como si se estuviera mirando a través del ocular de un "
+"telescopio (sólo se simulan el aumento y el campo de visión). También puede "
+"mostrar un cuadro sensor  y una mira Telrad."
 
 #: plugins/Oculars/src/Oculars.cpp:757
 msgid "Please select an object before switching to ocular view."
@@ -3311,7 +3311,7 @@ msgstr "Punto de mira"
 
 #: plugins/Oculars/src/Oculars.cpp:1241
 msgid "Image sensor frame"
-msgstr ""
+msgstr "Cuadro sensor de imagen"
 
 #: plugins/Oculars/src/Oculars.cpp:1249
 msgid "Telrad sight"
@@ -3427,31 +3427,31 @@ msgstr "Siguiente telescopio"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr "Rotar el cuadro sensor 15 grados contra reloj"
+msgstr "Rotar el cuadro sensor 15 grados en sentido antihorario"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:258
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr "Rotar el cuadro sensor 5 grados contra reloj"
+msgstr "Rotar el cuadro sensor 5 grados en sentido antihorario"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:271
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr "Rotar el cuadro sensor 1 grado contra reloj"
+msgstr "Rotar el cuadro sensor 1 grado en sentido antihorario"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
-msgstr "Reestablecer la rotación del cuadro sensor"
+msgstr "Reiniciar la rotación del cuadro sensor"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr ""
+msgstr "Rotar el cuadro sensor 1 grado en sentido horario"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:310
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr ""
+msgstr "Rotar el cuadro sensor 5 grados en sentido horario"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:323
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr ""
+msgstr "Rotar el cuadro sensor 15 grados en sentido horario"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
 msgid "Effective focal length of the ocular"
@@ -4954,11 +4954,11 @@ msgstr "Apagado"
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr ""
+msgstr "error, componente de color desconocida \"%1\""
 
 #: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
 msgid " [RETURN to activate]"
-msgstr ""
+msgstr " [INTRO para activar]"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
@@ -5240,7 +5240,7 @@ msgstr "Tipo: quásar"
 #: plugins/Quasars/src/Quasar.cpp:132
 #, qt-format
 msgid "Z (redshift): %1"
-msgstr ""
+msgstr "Z (desplazamiento al rojo): %1"
 
 #~ msgid "Ecliptic Line"
 #~ msgstr "Eclíptica"
