@@ -35,6 +35,8 @@
 #include <QVariant>
 #include <QList>
 
+StelTextureSP Pulsar::markerTexture;
+
 Pulsar::Pulsar(const QVariantMap& map)
 		: initialized(false)
 {
@@ -94,7 +96,9 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << q_("Barycentric period: %1 s").arg(period) << "<br>";
 		oss << q_("Distance: %1 kpc (%2 ly)").arg(distance).arg(distance*3261.563777) << "<br>";
 		// TODO: Calculate type of pulsar - see note on ntype on http://cdsarc.u-strasbg.fr/viz-bin/Cat?VII/189
-		oss << q_("Pulsar type: %1").arg(ntype) << "<br>";
+		if (ntype>0) {
+			oss << q_("Type: %1").arg(ntype) << "<br>";
+		}
 	}
 
 	postProcessInfoString(str, flags);
@@ -116,7 +120,8 @@ float Pulsar::getVMagnitude(const StelCore* core, bool withExtinction) const
 	    core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
 	}
 
-	float vmag = distance + 5.f; //Calculate fake magnitude as function by distance
+	// Calculate fake visual magnitude as function by distance
+	float vmag = distance + 6.f;
 
 	return vmag + extinctionMag;
 }
@@ -133,24 +138,25 @@ void Pulsar::update(double deltaTime)
 
 void Pulsar::draw(StelCore* core, StelPainter& painter)
 {
-	StelSkyDrawer* sd = core->getSkyDrawer();
+	StelSkyDrawer* sd = core->getSkyDrawer();	
 
-	Vec3f color = Vec3f(1.f,1.f,1.f);
-	float rcMag[2], size, shift;
-	double mag;
+	Vec3f color = Vec3f(0.4f,0.5f,1.2f);
+	double mag = getVMagnitude(core, true);
 
-	StelUtils::spheToRect(RA, DE, XYZ);
-	mag = getVMagnitude(core, true);
-	
+	StelUtils::spheToRect(RA, DE, XYZ);			
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ONE);
+	painter.setColor(color[0], color[1], color[2], 1);
+
 	if (mag <= sd->getLimitMagnitude())
 	{
-		sd->computeRCMag(mag, rcMag);
-		sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, color, false);
-		painter.setColor(color[0], color[1], color[2], 1);
-		size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
-		shift = 6.f + size/1.8f;
+
+		Pulsar::markerTexture->bind();
+		float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
+		float shift = 5.f + size/1.6f;
 		if (labelsFader.getInterstate()<=0.f)
 		{
+			painter.drawSprite2dMode(XYZ, 5);
 			painter.drawText(XYZ, designation, 0, shift, shift, false);
 		}
 	}

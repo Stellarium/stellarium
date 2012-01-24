@@ -85,6 +85,7 @@ Pulsars::~Pulsars()
 
 void Pulsars::deinit()
 {
+	Pulsar::markerTexture.clear();
 	texPointer.clear();
 }
 
@@ -111,6 +112,7 @@ void Pulsars::init()
 		jsonCatalogPath = StelFileMgr::findFile("modules/Pulsars", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/catalog.json";
 
 		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
+		Pulsar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Pulsars/pulsar.png");
 	}
 	catch (std::runtime_error &e)
 	{
