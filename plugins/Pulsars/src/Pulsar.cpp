@@ -92,7 +92,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&Extra1)
 	{
 		oss << q_("Barycentric period: %1 s").arg(period) << "<br>";
-		oss << q_("Distance: %1 kpc").arg(distance) << "<br>";
+		oss << q_("Distance: %1 kpc (%2 ly)").arg(distance).arg(distance*3261.563777) << "<br>";
 		// TODO: Calculate type of pulsar - see note on ntype on http://cdsarc.u-strasbg.fr/viz-bin/Cat?VII/189
 		oss << q_("Pulsar type: %1").arg(ntype) << "<br>";
 	}
