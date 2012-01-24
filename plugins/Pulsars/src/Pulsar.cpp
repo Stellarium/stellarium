@@ -65,7 +65,7 @@ QVariantMap Pulsar::getMap(void)
 	map["RA"] = RA;
 	map["DE"] = DE;
 	map["period"] = period;
-	map["ntype"] = ntype;
+	map["ntype"] = ntype;	
 
 	return map;
 }
