@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-13 23:26+0700\n"
+"POT-Creation-Date: 2012-01-24 22:14+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5043,4 +5043,27 @@ msgstr ""
 #: plugins/Quasars/src/Quasar.cpp:132
 #, qt-format
 msgid "Z (redshift): %1"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsars.cpp:59
+msgid "Pulsars"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsars.cpp:62
+msgid "Add support of 'Catalog of Pulsars'"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:94
+#, qt-format
+msgid "Barycentric period: %1 s"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:95
+#, qt-format
+msgid "Distance: %1 kpc"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:97
+#, qt-format
+msgid "Pulsar type: %1"
 msgstr ""
