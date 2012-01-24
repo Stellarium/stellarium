@@ -92,7 +92,7 @@ private:
 	float RA;			//! J2000 right ascension
 	float DE;			//! J2000 declination
 	double distance;		//! Adopted distance of pulsar in kpc
-	double period;			//! Barycentric period in seconds
+	double period;			//! Barycentric period in seconds	
 	int ntype;			//! Octal code for pulsar type
 
 	LinearFader labelsFader;
