@@ -123,8 +123,10 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (s400>0)
 		{
 			oss << QString("%1 %2%3: %4 %5")
+			       // TRANSLATORS: Full phrase is "Time averaged flux density at 400MHz"
 			       .arg(q_("Time averaged flux density at"))
 			       .arg(400)
+			       // TRANSLATORS: Unit of measurement of frequency
 			       .arg(q_("MHz"))
 			       .arg(QString::number(s400, 'f', 2))
 			       // TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
@@ -133,22 +135,26 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (s600>0)
 		{
 			oss << QString("%1 %2%3: %4 %5")
-			   .arg(q_("Time averaged flux density at"))
-			   .arg(600)
-			   .arg(q_("MHz"))
-			   .arg(QString::number(s600, 'f', 2))
-			   // TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-			   .arg(q_("mJy")) << "<br>";
+			       // TRANSLATORS: Full phrase is "Time averaged flux density at 600MHz"
+			       .arg(q_("Time averaged flux density at"))
+			       .arg(600)
+			       // TRANSLATORS: Unit of measurement of frequency
+			       .arg(q_("MHz"))
+			       .arg(QString::number(s600, 'f', 2))
+			       // TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
+			       .arg(q_("mJy")) << "<br>";
 		}
 		if (s1400>0)
 		{
 			oss << QString("%1 %2%3: %4 %5")
-			   .arg(q_("Time averaged flux density at"))
-			   .arg(1400)
-			   .arg(q_("MHz"))
-			   .arg(QString::number(s1400, 'f', 2))
-			   // TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-			   .arg(q_("mJy")) << "<br>";
+			       // TRANSLATORS: Full phrase is "Time averaged flux density at 1400MHz"
+			       .arg(q_("Time averaged flux density at"))
+			       .arg(1400)
+			       // TRANSLATORS: Unit of measurement of frequency
+			       .arg(q_("MHz"))
+			       .arg(QString::number(s1400, 'f', 2))
+			       // TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
+			       .arg(q_("mJy")) << "<br>";
 		}
 	}
 
