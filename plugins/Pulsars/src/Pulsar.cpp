@@ -123,7 +123,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (s400>0)
 		{
 			oss << QString("%1 %2%3: %4 %5")
-			       // TRANSLATORS: Full phrase is "Time averaged flux density at 400MHz"
+			       // TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 			       .arg(q_("Time averaged flux density at"))
 			       .arg(400)
 			       // TRANSLATORS: Unit of measurement of frequency
@@ -135,7 +135,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (s600>0)
 		{
 			oss << QString("%1 %2%3: %4 %5")
-			       // TRANSLATORS: Full phrase is "Time averaged flux density at 600MHz"
+			       // TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 			       .arg(q_("Time averaged flux density at"))
 			       .arg(600)
 			       // TRANSLATORS: Unit of measurement of frequency
@@ -147,7 +147,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (s1400>0)
 		{
 			oss << QString("%1 %2%3: %4 %5")
-			       // TRANSLATORS: Full phrase is "Time averaged flux density at 1400MHz"
+			       // TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 			       .arg(q_("Time averaged flux density at"))
 			       .arg(1400)
 			       // TRANSLATORS: Unit of measurement of frequency
