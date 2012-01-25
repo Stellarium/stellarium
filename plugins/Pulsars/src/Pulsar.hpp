@@ -138,7 +138,7 @@ private:
 	QString designation;		//! The designation of the pulsar (J2000 pulsar name)
 	float RA;			//! J2000 right ascension
 	float DE;			//! J2000 declination
-	double distance;		//! Adopted distance of pulsar in kpc
+	float distance;		//! Adopted distance of pulsar in kpc
 	double period;			//! Barycentric period in seconds	
 	int ntype;			//! Octal code for pulsar type
 	int survey;			//! Octal code for survey
