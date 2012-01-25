@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-25 19:16+0700\n"
+"POT-Creation-Date: 2012-01-26 01:44+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5020,7 +5020,7 @@ msgid ""
 "(13 September)."
 msgstr ""
 
-#: plugins/Supernovae/src/Supernova.cpp:112 plugins/Pulsars/src/Pulsar.cpp:105
+#: plugins/Supernovae/src/Supernova.cpp:112 plugins/Pulsars/src/Pulsar.cpp:113
 #, qt-format
 msgid "Type: %1"
 msgstr ""
@@ -5056,105 +5056,85 @@ msgid ""
 "Pulsars' (Taylor+ 1995)."
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:98
+#: plugins/Pulsars/src/Pulsar.cpp:106
 #, qt-format
 msgid "Barycentric period: %1 s"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:101
+#: plugins/Pulsars/src/Pulsar.cpp:109
 #, qt-format
 msgid "Distance: %1 kpc (%2 ly)"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:109
+#: plugins/Pulsars/src/Pulsar.cpp:117
 #, qt-format
-msgid "Survey: %1"
+msgid "Equivalent width of the integrated pulse profile: %1 ms"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:121
+#, qt-format
+msgid "Profile width at 50% of peak: %1 ms"
+msgstr ""
+
+#. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
+#: plugins/Pulsars/src/Pulsar.cpp:126
+#, qt-format
+msgid "Time averaged flux density at 400MHz: %1 mJy"
+msgstr ""
+
+#. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
+#: plugins/Pulsars/src/Pulsar.cpp:131
+#, qt-format
+msgid "Time averaged flux density at 600MHz: %1 mJy"
+msgstr ""
+
+#. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
+#: plugins/Pulsars/src/Pulsar.cpp:136
+#, qt-format
+msgid "Time averaged flux density at 1400MHz: %1 mJy"
 msgstr ""
 
 #. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:181
+#: plugins/Pulsars/src/Pulsar.cpp:208
 msgid "globular cluster association"
 msgstr ""
 
 #. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:187
+#: plugins/Pulsars/src/Pulsar.cpp:214
 msgid "SNR association"
 msgstr ""
 
 #. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:193
+#: plugins/Pulsars/src/Pulsar.cpp:220
 msgid "glitches in period"
 msgstr ""
 
 #. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:199
+#: plugins/Pulsars/src/Pulsar.cpp:226
 msgid "binary or multiple pulsar"
 msgstr ""
 
 #. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:205
+#: plugins/Pulsars/src/Pulsar.cpp:232
 msgid "millisecond pulsar"
 msgstr ""
 
 #. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:211
+#: plugins/Pulsars/src/Pulsar.cpp:238
 msgid "recycled pulsar"
 msgstr ""
 
 #. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:217
+#: plugins/Pulsars/src/Pulsar.cpp:244
 msgid "radio interpulse"
 msgstr ""
 
 #. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:223
+#: plugins/Pulsars/src/Pulsar.cpp:250
 msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
 msgstr ""
 
 #. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:229
+#: plugins/Pulsars/src/Pulsar.cpp:256
 msgid "extragalactic (in MC) pulsar"
-msgstr ""
-
-#. TRANSLATORS: Name of survey by radio observatory
-#: plugins/Pulsars/src/Pulsar.cpp:244 plugins/Pulsars/src/Pulsar.cpp:280
-msgid "Molonglo"
-msgstr ""
-
-#: plugins/Pulsars/src/Pulsar.cpp:249 plugins/Pulsars/src/Pulsar.cpp:261
-#: plugins/Pulsars/src/Pulsar.cpp:273 plugins/Pulsars/src/Pulsar.cpp:285
-#: plugins/Pulsars/src/Pulsar.cpp:297 plugins/Pulsars/src/Pulsar.cpp:309
-#: plugins/Pulsars/src/Pulsar.cpp:321 plugins/Pulsars/src/Pulsar.cpp:333
-#: plugins/Pulsars/src/Pulsar.cpp:345 plugins/Pulsars/src/Pulsar.cpp:357
-#: plugins/Pulsars/src/Pulsar.cpp:369 plugins/Pulsars/src/Pulsar.cpp:381
-#: plugins/Pulsars/src/Pulsar.cpp:393 plugins/Pulsars/src/Pulsar.cpp:405
-#: plugins/Pulsars/src/Pulsar.cpp:417 plugins/Pulsars/src/Pulsar.cpp:429
-#: plugins/Pulsars/src/Pulsar.cpp:441 plugins/Pulsars/src/Pulsar.cpp:453
-#: plugins/Pulsars/src/Pulsar.cpp:465
-msgid "MHz"
-msgstr ""
-
-#. TRANSLATORS: Name of survey by radio observatory
-#: plugins/Pulsars/src/Pulsar.cpp:256 plugins/Pulsars/src/Pulsar.cpp:316
-msgid "Jodrell Bank"
-msgstr ""
-
-#. TRANSLATORS: Name of survey by radio observatory
-#: plugins/Pulsars/src/Pulsar.cpp:268 plugins/Pulsars/src/Pulsar.cpp:340
-#: plugins/Pulsars/src/Pulsar.cpp:364 plugins/Pulsars/src/Pulsar.cpp:388
-#: plugins/Pulsars/src/Pulsar.cpp:400 plugins/Pulsars/src/Pulsar.cpp:412
-#: plugins/Pulsars/src/Pulsar.cpp:424 plugins/Pulsars/src/Pulsar.cpp:436
-#: plugins/Pulsars/src/Pulsar.cpp:448
-msgid "Arecibo"
-msgstr ""
-
-#. TRANSLATORS: Name of survey by radio observatory
-#: plugins/Pulsars/src/Pulsar.cpp:292 plugins/Pulsars/src/Pulsar.cpp:304
-#: plugins/Pulsars/src/Pulsar.cpp:328 plugins/Pulsars/src/Pulsar.cpp:460
-msgid "Green Bank"
-msgstr ""
-
-#. TRANSLATORS: Name of survey by radio observatory
-#: plugins/Pulsars/src/Pulsar.cpp:352 plugins/Pulsars/src/Pulsar.cpp:376
-msgid "Parkes"
 msgstr ""

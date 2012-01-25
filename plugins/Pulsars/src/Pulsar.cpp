@@ -50,7 +50,11 @@ Pulsar::Pulsar(const QVariantMap& map)
 	RA = StelUtils::getDecAngle(map.value("RA").toString());
 	DE = StelUtils::getDecAngle(map.value("DE").toString());
 	ntype = map.value("ntype").toInt();
-	survey = map.value("survey").toInt();
+	We = map.value("We").toFloat();
+	w50 = map.value("w50").toFloat();
+	s400 = map.value("s400").toFloat();
+	s600 = map.value("s600").toFloat();
+	s1400 = map.value("s1400").toFloat();
 
 	initialized = true;
 }
@@ -69,7 +73,11 @@ QVariantMap Pulsar::getMap(void)
 	map["DE"] = DE;
 	map["period"] = period;
 	map["ntype"] = ntype;	
-	map["survey"] = survey;
+	map["We"] = We;
+	map["w50"] = w50;
+	map["s400"] = s400;
+	map["s600"] = s600;
+	map["s1400"] = s1400;
 
 	return map;
 }
@@ -104,9 +112,28 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		{
 			oss << q_("Type: %1").arg(getPulsarTypeInfoString(ntype)) << "<br>";
 		}
-		if (survey>0)
+		if (We>0)
 		{
-			oss << q_("Survey: %1").arg(getPulsarSurveyInfoString(survey)) << "<br>";
+			oss << q_("Equivalent width of the integrated pulse profile: %1 ms").arg(QString::number(We, 'f', 2)) << "<br>";
+		}
+		if (w50>0)
+		{
+			oss << q_("Profile width at 50% of peak: %1 ms").arg(QString::number(w50, 'f', 2)) << "<br>";
+		}
+		if (s400>0)
+		{
+			// TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
+			oss << q_("Time averaged flux density at 400MHz: %1 mJy").arg(QString::number(s400, 'f', 2)) << "<br>";
+		}
+		if (s600>0)
+		{
+			// TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
+			oss << q_("Time averaged flux density at 600MHz: %1 mJy").arg(QString::number(s600, 'f', 2)) << "<br>";
+		}
+		if (s1400>0)
+		{
+			// TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
+			oss << q_("Time averaged flux density at 1400MHz: %1 mJy").arg(QString::number(s1400, 'f', 2)) << "<br>";
 		}
 	}
 
@@ -230,267 +257,4 @@ QString Pulsar::getPulsarTypeInfoString(const int flags) const
 	}
 
 	return out.join(", ");
-}
-
-QString Pulsar::getPulsarSurveyInfoString(const int flags) const
-{
-	QStringList out;
-	QString data = "";
-
-	if (flags&Molonglo1)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Molonglo"))
-			   // Survey
-			   .arg(1)
-			   // Frequency in MHz
-			   .arg(408)
-			   .arg(q_("MHz")));
-	}
-
-	if (flags&JodrellBank1)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Jodrell Bank"))
-			   // Survey
-			   .arg(1)
-			   // Frequency in MHz
-			   .arg(408)
-			   .arg(q_("MHz")));
-	}
-
-	if (flags&Arecibo1)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Arecibo"))
-			   // Survey
-			   .arg(1)
-			   // Frequency in MHz
-			   .arg(430)
-			   .arg(q_("MHz")));
-	}
-
-	if (flags&Molonglo2)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Molonglo"))
-			   // Survey
-			   .arg(2)
-			   // Frequency in MHz
-			   .arg(408)
-			   .arg(q_("MHz")));
-	}
-
-	if (flags&GreenBank1)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Green Bank"))
-			   // Survey
-			   .arg(1)
-			   // Frequency in MHz
-			   .arg(400)
-			   .arg(q_("MHz")));
-	}
-
-	if (flags&GreenBank2)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Green Bank"))
-			   // Survey
-			   .arg(2)
-			   // Frequency in MHz
-			   .arg(400)
-			   .arg(q_("MHz")));
-	}
-
-	if (flags&JodrellBank2)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Jodrell Bank"))
-			   // Survey
-			   .arg(2)
-			   // Frequency in MHz
-			   .arg(1400)
-			   .arg(q_("MHz")));
-	}
-
-	if (flags&GreenBank3)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Green Bank"))
-			   // Survey
-			   .arg(3)
-			   // Frequency in MHz
-			   .arg(400)
-			   .arg(q_("MHz")));
-	}
-
-	if (flags&Arecibo2)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Arecibo"))
-			   // Survey
-			   .arg(2)
-			   // Frequency in MHz
-			   .arg(430)
-			   .arg(q_("MHz")));
-	}
-
-	if (flags&Parkes1)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Parkes"))
-			   // Survey
-			   .arg(1)
-			   // Frequency in MHz
-			   .arg(1520)
-			   .arg(q_("MHz")));
-	}
-
-	if (flags&Arecibo3)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Arecibo"))
-			   // Survey
-			   .arg(3)
-			   // Frequency in MHz
-			   .arg(430)
-			   .arg(q_("MHz")));
-	}
-
-	if (flags&Parkes70)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Parkes"))
-			   // Survey
-			   .arg(70)
-			   // Frequency in MHz
-			   .arg(436)
-			   .arg(q_("MHz")));
-	}
-
-	if (flags&Arecibo4a)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Arecibo"))
-			   // Survey
-			   .arg("4a")
-			   // Frequency in MHz
-			   .arg(430)
-			   .arg(q_("MHz")));
-	}
-
-	if (flags&Arecibo4b)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Arecibo"))
-			   // Survey
-			   .arg("4b")
-			   // Frequency in MHz
-			   .arg(430)
-			   .arg(q_("MHz")));
-	}
-
-	if (flags&Arecibo4c)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Arecibo"))
-			   // Survey
-			   .arg("4c")
-			   // Frequency in MHz
-			   .arg(430)
-			   .arg(q_("MHz")));
-	}
-
-	if (flags&Arecibo4d)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Arecibo"))
-			   // Survey
-			   .arg("4d")
-			   // Frequency in MHz
-			   .arg(430)
-			   .arg(q_("MHz")));
-	}
-
-	if (flags&Arecibo4e)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Arecibo"))
-			   // Survey
-			   .arg("4e")
-			   // Frequency in MHz
-			   .arg(430)
-			   .arg(q_("MHz")));
-	}
-
-	if (flags&Arecibo4f)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Arecibo"))
-			   // Survey
-			   .arg("4f")
-			   // Frequency in MHz
-			   .arg(430)
-			   .arg(q_("MHz")));
-	}
-
-	if (flags&GreenBank4)
-	{
-		out.append(QString("%1 %2 (%3 %4)")
-			   // TRANSLATORS: Name of survey by radio observatory
-			   .arg(q_("Green Bank"))
-			   // Survey
-			   .arg(4)
-			   // Frequency in MHz
-			   .arg(370)
-			   .arg(q_("MHz")));
-	}
-
-	if (out.size()>3)
-	{
-		for (int i=0; i<out.size(); ++i)
-		{
-			data += QString(out.at(i).toLocal8Bit().constData());
-			div_t r = div(i, 2);
-			if (r.rem!=0)
-			{
-				if (i!=out.size()-1)
-				{
-					data += ",<br>";
-				}
-			}
-			else
-			{
-				if (i!=out.size()-1)
-				{
-					data += ", ";
-				}
-			}
-		}
-	}
-	else
-	{
-		data = out.join(", ");
-	}
-
-	return data;
 }
