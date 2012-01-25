@@ -42,6 +42,24 @@ class Pulsar : public StelObject
 {
 	friend class Pulsars;
 public:
+	//! @enum pulsarTypeInfoGroup used as named bitfield flags as specifiers to
+	//! filter results of getPulsarTypeInfoString. The precise definition of these should
+	//! be documented in the getPulsarTypeInfoString documentation for the derived classes
+	//! for all specifiers which are defined in that derivative.
+	//! Description of types you can see here - http://cdsarc.u-strasbg.fr/viz-bin/Cat?VII/189
+	enum pulsarTypeInfoGroup
+	{
+		C	= 0x00000001, //!< Globular cluster association
+		S	= 0x00000002, //!< SNR association
+		G	= 0x00000004, //!< Glitches in period
+		B	= 0x00000010, //!< Binary or multiple pulsar
+		M	= 0x00000020, //!< Millisecond pulsar
+		R	= 0x00000040, //!< Recycled pulsar
+		I	= 0x00000100, //!< Radio interpulse
+		H	= 0x00000200, //!< Optical, X-ray or Gamma-ray pulsed emission (high energy)
+		E	= 0x00000400  //!< Extragalactic (in MC) pulsar
+	};
+
 	//! @param id The official designation for a pulsar, e.g. "PSR 1919+21"
 	Pulsar(const QVariantMap& map);
 	~Pulsar();
@@ -97,6 +115,11 @@ private:
 	int ntype;			//! Octal code for pulsar type
 
 	LinearFader labelsFader;
+
+protected:
+
+	QString getPulsarTypeInfoString(const int flags) const;
+
 };
 
 #endif // _PULSAR_HPP_
