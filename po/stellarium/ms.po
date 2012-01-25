@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-13 23:26+0700\n"
-"PO-Revision-Date: 2012-01-23 13:23+0000\n"
+"PO-Revision-Date: 2012-01-25 02:01+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-24 05:28+0000\n"
-"X-Generator: Launchpad (build 14713)\n"
+"X-Launchpad-Export-Date: 2012-01-25 05:24+0000\n"
+"X-Generator: Launchpad (build 14719)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -3417,35 +3417,35 @@ msgstr "Putar bingkai penderia 15 darjah melawan jam"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:258
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr ""
+msgstr "Putar bingkai penderia 5 darjah lawan jam"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:271
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr ""
+msgstr "Putar bingkai penderia 1 darjah lawan jam"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
-msgstr ""
+msgstr "Tetap semula putaran bingkai penderia"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr ""
+msgstr "Putar bingkai penderia 1 darjah ikut jam"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:310
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr ""
+msgstr "Putar bingkai penderia 5 darjah ikut jam"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:323
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr ""
+msgstr "Putar bingkai penderia 15 darjah ikut jam"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
 msgid "Effective focal length of the ocular"
-msgstr ""
+msgstr "Jarak fokus efektif bagi okular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:533
 msgid "Apparent field of view of the ocular"
-msgstr ""
+msgstr "Medan tampan paparan bagi okular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 #, qt-format
@@ -3454,31 +3454,32 @@ msgstr "Putaran: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 msgid "Magnification provided by these binoculars"
-msgstr ""
+msgstr "pembesaran yang disediakan oleh binokular ini"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
 msgid "Actual field of view provided by these binoculars"
-msgstr ""
+msgstr "Medan sebenar bagi paparan yang disediakan oleh binokular ini"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
 msgid "Magnification provided by this ocular/telescope combination"
-msgstr ""
+msgstr "Pembesaran yang disediakan oleh gabungan okular/teleskopik"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
 msgid "Actual field of view provided by this ocular/telescope combination"
 msgstr ""
+"Medan sebenar bagi paparan yang disediakan oleh gabungan okular/teleskop ini"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:865
 msgid "Enable only if an object is selected"
-msgstr ""
+msgstr "Hanya dibenarkan jika objek dipilih"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:866
 msgid "Scale image circle"
-msgstr ""
+msgstr "Skalakan bulatan imej"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:867
 msgid "Key mappings"
-msgstr ""
+msgstr "Pemetaan kekunci"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:868
 msgid "Toggle ocular view:"
@@ -3504,7 +3505,7 @@ msgstr "Am"
 #: plugins/Oculars/src/ui_ocularDialog.h:874
 #: plugins/Oculars/src/ui_ocularDialog.h:882
 msgid "Eyepieces"
-msgstr ""
+msgstr "Kanta mata"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:875
 #: plugins/Oculars/src/ui_ocularDialog.h:884
@@ -3533,7 +3534,7 @@ msgstr "Jarak fokus:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "Field stop:"
-msgstr ""
+msgstr "Hentian medan:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 msgid "Binoculars"
@@ -3639,7 +3640,7 @@ msgstr "Altitud (km): %1"
 #: plugins/Satellites/src/Satellite.cpp:247
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
-msgstr ""
+msgstr "Sub-Titik (Lat./Long.): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:261
@@ -3663,7 +3664,7 @@ msgstr "Satelit kelihatan."
 
 #: plugins/Satellites/src/Satellite.cpp:283
 msgid "The satellite is eclipsed."
-msgstr ""
+msgstr "Satelit bergerak secara elips."
 
 #: plugins/Satellites/src/Satellite.cpp:286
 msgid "The satellite is not visible"
@@ -3713,6 +3714,9 @@ msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
 msgstr ""
+"Unsur orbit luput tarikhnya dengan pantas (lebih kurang seminggu, kadangkala "
+"hari). Untuk dapatkan data yang berguna, anda perlu kemaskini data TLE "
+"secara kerap."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:264
@@ -3742,6 +3746,9 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
+"Pemalam Satelit boleh memuat turun data TLE secara automatik dari sumber "
+"Internet, dan secara lalai pemalam akan lakukan ini jika data sedia ada "
+"berusia lebih dari 72 jam. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:276
 #, qt-format
@@ -3750,12 +3757,17 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
+"Jika anda lumpuhkan kemaskini Internet, anda boleh kemaskini melalui fail "
+"pada komputer anda. Fail ini mestilah mempunyai format yang sama denga "
+"kemaskini Celestrak (rujuk %1 sebagai contoh)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:277
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr ""
+"<b>Perhatian:</b> jika nama satelit dalam data kemaskini mempunyai tanda "
+"kurungan dipenghujungnya, ia akan dibuang sebelum data digunakan."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:280
 msgid "Adding new satellites"
@@ -3787,12 +3799,14 @@ msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
 msgstr ""
+"Kod pengiraan orbital ditulis oleh  jose Canales berdasarkan Laporan "
+"Spacetrack revisi #3 (termasuklah Laporan Spacetrack #6). "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
 #, qt-format
 msgid "See %1this document%2 for details."
-msgstr ""
+msgstr "Rujuk %1 dokumen ini %2 untuk perincian."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Links"
@@ -3803,18 +3817,20 @@ msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
 "plugin\" in the subject when posting."
 msgstr ""
+"Sokongan disediakan melalui laman sesawang Launchpad. Pastikan menulis "
+"\"Satellites plugin\" dalam subjek bila mengepos."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:293
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
-msgstr ""
+msgstr "Jika anda mempunyai soalan, anda boleh %1dapatkan jawapan disini%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
 #, qt-format
 msgid "Bug reports can be made %1here%2."
-msgstr ""
+msgstr "Laporan boleh dibuat %1disini%2."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:297
@@ -3822,6 +3838,8 @@ msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr ""
+"Jika anda hendak meminta fitur, anda boleh cipta laporan pepijat, dan "
+"tetapkan keutamaan ke \"wishlist\"."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:315
 msgid "Internet updates disabled"
@@ -3897,10 +3915,12 @@ msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
 msgstr ""
+"Stellarium sedang memuat turun data satelit dari sumber kemaskini. Tunggu "
+"sebentar..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
 msgid "Select TLE source file(s)..."
-msgstr ""
+msgstr "Pilih fail sumber TLE..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:166
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:167
@@ -3911,7 +3931,7 @@ msgstr "Memproses data..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:221
 msgid "No data could be downloaded. Try again later."
-msgstr ""
+msgstr "Tiada data dapat dimuat turun. Sila cuba lagi nanti."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:344
 #, qt-format
@@ -4028,7 +4048,7 @@ msgstr "Data TLE:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:692
 msgid "NORAD two line element orbit data"
-msgstr ""
+msgstr "Data orbit unsur dua baris NORAD"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:695
 msgid "Remove the selected satellites"
@@ -4047,6 +4067,8 @@ msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
 msgstr ""
+"Masuk atau sunting URL bagi sumber terpilih. Perubahan disimpan dengan "
+"menekan Enter."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:710
 msgid "Add new source"
@@ -4183,12 +4205,15 @@ msgid ""
 "control a telescope on its own, but it is still possible to do it through an "
 "external application or to connect to a remote host."
 msgstr ""
+"Tiada keterangan model tersedia. Stellarium tidak boleh mengawal teleskop "
+"dengan sendirinya, tetapi masih lakukannya melalui aplikasi luaran atau "
+"sambungkan ke hos jauh."
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
-msgstr ""
+msgstr "Tekan butang \"%1\" untuk tetapkan sambungan teleskop baru."
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
@@ -4275,19 +4300,19 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "Hours-minutes-seconds format"
-msgstr ""
+msgstr "Format Jam-minit-saat"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:291
 msgid "&HMS"
-msgstr ""
+msgstr "&JMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:293
 msgid "Degrees-minutes-seconds format"
-msgstr ""
+msgstr "Format darjah-minit-saat"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:295
 msgid "&DMS"
-msgstr ""
+msgstr "&DMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:297
 msgid "Decimal degrees"
@@ -4318,6 +4343,8 @@ msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
+"Satu teleskop bersambung ke komputer ini melalui port serial dan dikawal "
+"secara langsung melalui Stellarium."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
 msgid "Stellarium, directly through a serial port"
@@ -4328,6 +4355,8 @@ msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
+"Satu teleskop dikawal oleh aplikasi luaran, sama ada pada komputer ini atau "
+"pada mesin jauh."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "External software or a remote computer"
@@ -4335,7 +4364,7 @@ msgstr "Perisian luaran atau komputer jauh"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr ""
+msgstr "Tiada apa, hanyalah simulasi (retikel bergerak)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Telescope properties"
@@ -4351,6 +4380,8 @@ msgid ""
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
+"Masa anggaran yang diambil bagi isyarat dari teleskop mencapai Stellarium.\n"
+"Naikkan nilai ini jika retikel dilangkau."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Coordinate system:"
@@ -4369,6 +4400,7 @@ msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
+"Mulakan teleskop secara automatik atau sambungkan bila Stellarium bermula"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Start/connect at startup"
