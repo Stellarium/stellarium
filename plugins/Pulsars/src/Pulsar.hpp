@@ -60,34 +60,6 @@ public:
 		E	= 0x00000400  //!< Extragalactic (in MC) pulsar
 	};
 
-	//! @enum pulsarSurveyInfoGroup used as named bitfield flags as specifiers to
-	//! filter results of getPulsarSurveyInfoString. The precise definition of these should
-	//! be documented in the getPulsarSurveyInfoString documentation for the derived classes
-	//! for all specifiers which are defined in that derivative.
-	//! Description of surveys you can see here - http://cdsarc.u-strasbg.fr/viz-bin/Cat?VII/189
-	enum pulsarSurveyInfoGroup
-	{
-		Molonglo1	= 0x00000001, //!< Molonglo 1, 408 MHz
-		JodrellBank1	= 0x00000002, //!< Jodrell Bank 1, 408 MHz
-		Arecibo1	= 0x00000004, //!< Arecibo 1, 430 MHz
-		Molonglo2	= 0x00000010, //!< Molonglo 2, 408 MHz
-		GreenBank1	= 0x00000020, //!< Green Bank 1, 400 MHz
-		GreenBank2	= 0x00000040, //!< Green Bank 2, 400 MHz
-		JodrellBank2	= 0x00000100, //!< Jodrell Bank 2, 1400 MHz
-		GreenBank3	= 0x00000200, //!< Green Bank 3, 400 MHz
-		Arecibo2	= 0x00000400, //!< Arecibo 2, 430 MHz
-		Parkes1		= 0x00001000, //!< Parkes 1, 1520 MHz
-		Arecibo3	= 0x00002000, //!< Arecibo 3, 430 MHz
-		Parkes70	= 0x00004000, //!< Parkes 70, 436 MHz
-		Arecibo4a	= 0x00010000, //!< Arecibo 4a, 430 MHz
-		Arecibo4b	= 0x00020000, //!< Arecibo 4b, 430 MHz
-		Arecibo4c	= 0x00040000, //!< Arecibo 4c, 430 MHz
-		Arecibo4d	= 0x00100000, //!< Arecibo 4d, 430 MHz
-		Arecibo4e	= 0x00200000, //!< Arecibo 4e, 430 MHz
-		Arecibo4f	= 0x00400000, //!< Arecibo 4f, 430 MHz
-		GreenBank4	= 0x01000000  //!< Green Bank 4, 370 MHz
-	};
-
 	//! @param id The official designation for a pulsar, e.g. "PSR 1919+21"
 	Pulsar(const QVariantMap& map);
 	~Pulsar();
@@ -141,15 +113,17 @@ private:
 	float distance;		//! Adopted distance of pulsar in kpc
 	double period;		//! Barycentric period in seconds
 	int ntype;		//! Octal code for pulsar type
-	int survey;		//! Octal code for survey
+	float We;		//! Equivalent width of the integrated pulse profile in ms
+	float w50;		//! Profile width at 50% of peak in ms
+	float s400;		//! Time averaged flux density at 400MHz in mJy
+	float s600;		//! Time averaged flux density at 600MHz in mJy
+	float s1400;		//! Time averaged flux density at 1400MHz in mJy
 
 	LinearFader labelsFader;
 
 protected:
-
+	//! Get type of pulsar from octal code
 	QString getPulsarTypeInfoString(const int flags) const;
-
-	QString getPulsarSurveyInfoString(const int flags) const;
 
 };
 
