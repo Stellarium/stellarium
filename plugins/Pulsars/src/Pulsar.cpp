@@ -45,7 +45,7 @@ Pulsar::Pulsar(const QVariantMap& map)
 		return;
 		
 	designation  = map.value("designation").toString();
-	distance = map.value("distance").toDouble();
+	distance = map.value("distance").toFloat();
 	period = map.value("period").toDouble();
 	RA = StelUtils::getDecAngle(map.value("RA").toString());
 	DE = StelUtils::getDecAngle(map.value("DE").toString());
@@ -95,12 +95,17 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Extra1)
 	{
-		oss << q_("Barycentric period: %1 s").arg(period) << "<br>";
-		oss << q_("Distance: %1 kpc (%2 ly)").arg(distance).arg(distance*3261.563777) << "<br>";		
-		if (ntype>0) {
+		oss << q_("Barycentric period: %1 s").arg(QString::number(period, 'f', 16)) << "<br>";
+		if (distance>0)
+		{
+			oss << q_("Distance: %1 kpc (%2 ly)").arg(distance).arg(distance*3261.563777) << "<br>";
+		}
+		if (ntype>0)
+		{
 			oss << q_("Type: %1").arg(getPulsarTypeInfoString(ntype)) << "<br>";
 		}
-		if (survey>0) {
+		if (survey>0)
+		{
 			oss << q_("Survey: %1").arg(getPulsarSurveyInfoString(survey)) << "<br>";
 		}
 	}
@@ -124,7 +129,7 @@ float Pulsar::getVMagnitude(const StelCore* core, bool withExtinction) const
 	    core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
 	}
 
-	// Calculate fake visual magnitude as function by distance
+	// Calculate fake visual magnitude as function by distance - minimal magnitude is 6
 	float vmag = distance + 6.f;
 
 	return vmag + extinctionMag;
@@ -221,6 +226,7 @@ QString Pulsar::getPulsarTypeInfoString(const int flags) const
 QString Pulsar::getPulsarSurveyInfoString(const int flags) const
 {
 	QStringList out;
+	QString data = "";
 
 	if (flags&Molonglo1)
 	{
@@ -450,6 +456,32 @@ QString Pulsar::getPulsarSurveyInfoString(const int flags) const
 			   .arg(q_("MHz")));
 	}
 
-	return out.join(", ");
-}
+	if (out.size()>3)
+	{
+		for (int i=0; i<out.size(); ++i)
+		{
+			data += QString(out.at(i).toLocal8Bit().constData());
+			div_t r = div(i, 2);
+			if (r.rem!=0)
+			{
+				if (i!=out.size()-1)
+				{
+					data += ",<br>";
+				}
+			}
+			else
+			{
+				if (i!=out.size()-1)
+				{
+					data += ", ";
+				}
+			}
+		}
+	}
+	else
+	{
+		data = out.join(", ");
+	}
 
+	return data;
+}
