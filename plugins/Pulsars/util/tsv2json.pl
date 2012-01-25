@@ -19,7 +19,7 @@ print JSON "\t{\n";
 
 for ($i=27;$i<scalar(@catalog)-1;$i++) {
 	if ($catalog[$i] !~ /#/) {
-		($RA,$DE,$name,$dist,$period,$ntype) = split(";", $catalog[$i]);
+		($RA,$DE,$name,$survey,$dist,$period,$ntype) = split(";", $catalog[$i]);
 
 		($hour,$min,$sec) = split(" ",$RA);
 		$outRA = $hour."h".$min."m".$sec."s";
@@ -31,6 +31,7 @@ for ($i=27;$i<scalar(@catalog)-1;$i++) {
 		$dist =~ s/(\s+)//gi;
 		$period =~ s/(\s+)//gi;
 		$ntype =~ s/(\s+)//gi;
+		$survey =~ s/(\s+)//gi;
 
 		$out  = "\t\t\"".$name."\":\n";
 		$out .= "\t\t{\n";
@@ -38,7 +39,8 @@ for ($i=27;$i<scalar(@catalog)-1;$i++) {
 		$out .= "\t\t\t\"DE\": \"".$outDE."\",\n";
 		$out .= "\t\t\t\"distance\": ".$dist.",\n";
 		$out .= "\t\t\t\"period\": ".$period.",\n";
-		$out .= "\t\t\t\"ntype\": ".$ntype;
+		$out .= "\t\t\t\"ntype\": ".$ntype.",\n";
+		$out .= "\t\t\t\"survey\": ".$survey;
 		$out .= "\n\t\t}";
 
         if ($i<scalar(@catalog)-2) {
