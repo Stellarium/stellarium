@@ -94,10 +94,9 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&Extra1)
 	{
 		oss << q_("Barycentric period: %1 s").arg(period) << "<br>";
-		oss << q_("Distance: %1 kpc (%2 ly)").arg(distance).arg(distance*3261.563777) << "<br>";
-		// TODO: Calculate type of pulsar - see note on ntype on http://cdsarc.u-strasbg.fr/viz-bin/Cat?VII/189
+		oss << q_("Distance: %1 kpc (%2 ly)").arg(distance).arg(distance*3261.563777) << "<br>";		
 		if (ntype>0) {
-			oss << q_("Type: %1").arg(ntype) << "<br>";
+			oss << q_("Type: %1").arg(getPulsarTypeInfoString(ntype)) << "<br>";
 		}
 	}
 
@@ -161,3 +160,56 @@ void Pulsar::draw(StelCore* core, StelPainter& painter)
 		}
 	}
 }
+
+QString Pulsar::getPulsarTypeInfoString(const int flags) const
+{
+	QStringList out;
+
+	if (flags&C)
+	{
+		out.append(q_("globular cluster association"));
+	}
+
+	if (flags&S)
+	{
+		out.append(q_("SNR association"));
+	}
+
+	if (flags&G)
+	{
+		out.append(q_("glitches in period"));
+	}
+
+	if (flags&B)
+	{
+		out.append(q_("binary or multiple pulsar"));
+	}
+
+	if (flags&M)
+	{
+		out.append(q_("millisecond pulsar"));
+	}
+
+	if (flags&R)
+	{
+		out.append(q_("recycled pulsar"));
+	}
+
+	if (flags&I)
+	{
+		out.append(q_("radio interpulse"));
+	}
+
+	if (flags&H)
+	{
+		out.append(q_("optical, X-ray or Gamma-ray pulsed emission (high energy)"));
+	}
+
+	if (flags&E)
+	{
+		out.append(q_("extragalactic (in MC) pulsar"));
+	}
+
+	return out.join(", ");
+}
+
