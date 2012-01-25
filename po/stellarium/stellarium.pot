@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-26 01:44+0700\n"
+"POT-Creation-Date: 2012-01-26 02:00+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5076,65 +5076,63 @@ msgstr ""
 msgid "Profile width at 50% of peak: %1 ms"
 msgstr ""
 
-#. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:126
-#, qt-format
-msgid "Time averaged flux density at 400MHz: %1 mJy"
+#: plugins/Pulsars/src/Pulsar.cpp:126 plugins/Pulsars/src/Pulsar.cpp:136
+#: plugins/Pulsars/src/Pulsar.cpp:146
+msgid "Time averaged flux density at"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:128 plugins/Pulsars/src/Pulsar.cpp:138
+#: plugins/Pulsars/src/Pulsar.cpp:148
+msgid "MHz"
 msgstr ""
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:131
-#, qt-format
-msgid "Time averaged flux density at 600MHz: %1 mJy"
-msgstr ""
-
-#. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:136
-#, qt-format
-msgid "Time averaged flux density at 1400MHz: %1 mJy"
+#: plugins/Pulsars/src/Pulsar.cpp:131 plugins/Pulsars/src/Pulsar.cpp:141
+#: plugins/Pulsars/src/Pulsar.cpp:151
+msgid "mJy"
 msgstr ""
 
 #. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:208
+#: plugins/Pulsars/src/Pulsar.cpp:223
 msgid "globular cluster association"
 msgstr ""
 
 #. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:214
+#: plugins/Pulsars/src/Pulsar.cpp:229
 msgid "SNR association"
 msgstr ""
 
 #. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:220
+#: plugins/Pulsars/src/Pulsar.cpp:235
 msgid "glitches in period"
 msgstr ""
 
 #. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:226
+#: plugins/Pulsars/src/Pulsar.cpp:241
 msgid "binary or multiple pulsar"
 msgstr ""
 
 #. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:232
+#: plugins/Pulsars/src/Pulsar.cpp:247
 msgid "millisecond pulsar"
 msgstr ""
 
 #. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:238
+#: plugins/Pulsars/src/Pulsar.cpp:253
 msgid "recycled pulsar"
 msgstr ""
 
 #. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:244
+#: plugins/Pulsars/src/Pulsar.cpp:259
 msgid "radio interpulse"
 msgstr ""
 
 #. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:250
+#: plugins/Pulsars/src/Pulsar.cpp:265
 msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
 msgstr ""
 
 #. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:256
+#: plugins/Pulsars/src/Pulsar.cpp:271
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
