@@ -177,46 +177,55 @@ QString Pulsar::getPulsarTypeInfoString(const int flags) const
 
 	if (flags&C)
 	{
+		// TRANSLATORS: Type of pulsar
 		out.append(q_("globular cluster association"));
 	}
 
 	if (flags&S)
 	{
+		// TRANSLATORS: Type of pulsar
 		out.append(q_("SNR association"));
 	}
 
 	if (flags&G)
 	{
+		// TRANSLATORS: Type of pulsar
 		out.append(q_("glitches in period"));
 	}
 
 	if (flags&B)
 	{
+		// TRANSLATORS: Type of pulsar
 		out.append(q_("binary or multiple pulsar"));
 	}
 
 	if (flags&M)
 	{
+		// TRANSLATORS: Type of pulsar
 		out.append(q_("millisecond pulsar"));
 	}
 
 	if (flags&R)
 	{
+		// TRANSLATORS: Type of pulsar
 		out.append(q_("recycled pulsar"));
 	}
 
 	if (flags&I)
 	{
+		// TRANSLATORS: Type of pulsar
 		out.append(q_("radio interpulse"));
 	}
 
 	if (flags&H)
 	{
+		// TRANSLATORS: Type of pulsar
 		out.append(q_("optical, X-ray or Gamma-ray pulsed emission (high energy)"));
 	}
 
 	if (flags&E)
 	{
+		// TRANSLATORS: Type of pulsar
 		out.append(q_("extragalactic (in MC) pulsar"));
 	}
 
