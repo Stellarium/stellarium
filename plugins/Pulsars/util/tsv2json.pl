@@ -32,10 +32,10 @@ for ($i=31;$i<scalar(@catalog)-1;$i++) {
 		$period =~ s/(\s+)//gi;
 		$ntype =~ s/(\s+)//gi;
 		$we =~ s/(\s+)//gi;
-        $w50 =~ s/(\s+)//gi;
-        $s400 =~ s/(\s+)//gi;
-        $s600 =~ s/(\s+)//gi;
-        $s1400 =~ s/(\s+)//gi;
+		$w50 =~ s/(\s+)//gi;
+		$s400 =~ s/(\s+)//gi;
+		$s600 =~ s/(\s+)//gi;
+		$s1400 =~ s/(\s+)//gi;
 
 		$out  = "\t\t\"".$name."\":\n";
 		$out .= "\t\t{\n";
@@ -44,16 +44,16 @@ for ($i=31;$i<scalar(@catalog)-1;$i++) {
 		$out .= "\t\t\t\"distance\": ".$dist.",\n";
 		$out .= "\t\t\t\"period\": ".$period.",\n";
 		$out .= "\t\t\t\"ntype\": ".$ntype.",\n";
-        $out .= "\t\t\t\"We\": ".$we.",\n";
-        $out .= "\t\t\t\"w50\": ".$w50.",\n";
-        $out .= "\t\t\t\"s400\": ".$s400.",\n";
-        $out .= "\t\t\t\"s600\": ".$s600.",\n";
-		$out .= "\t\t\t\"s1400\": ".$s1400;
-		$out .= "\n\t\t}";
+		$out .= "\t\t\t\"We\": ".$we.",\n";
+		$out .= "\t\t\t\"w50\": ".$w50.",\n";
+		$out .= "\t\t\t\"s400\": ".$s400.",\n";
+		$out .= "\t\t\t\"s600\": ".$s600.",\n";
+		$out .= "\t\t\t\"s1400\": ".$s1400."\n";
+		$out .= "\t\t}";
 
-        if ($i<scalar(@catalog)-2) {
-            $out .= ",";
-        }
+		if ($i<scalar(@catalog)-2) {
+			$out .= ",";
+		}
 
 		print JSON $out."\n";
 	}
