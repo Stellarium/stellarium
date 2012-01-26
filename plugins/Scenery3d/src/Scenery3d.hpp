@@ -111,7 +111,7 @@ private:
     static const float TORCH_BRIGHTNESS=0.5f;
     static const float AMBIENT_BRIGHTNESS_FACTOR=0.05;
     static const float LUNAR_BRIGHTNESS_FACTOR=0.2;
-    static const float VENUS_BRIGHTNESS_FACTOR=0.05;
+    static const float VENUS_BRIGHTNESS_FACTOR=0.005;
 
     double eyeLevel;
 
