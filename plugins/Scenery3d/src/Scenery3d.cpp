@@ -791,7 +791,6 @@ void Scenery3d::generateShadowMap(StelCore* core)
     else
         moonAmbientString=QString("0.0");
     // Now find shadow caster, if any:
-    // TODO: VERIFY IF THE SIN<LIGHT>ANGLE TERMS ARE REQUIRED; MAYBE THEY CAN BE OMITTED!
     if (sinSunAngle>0.0f)
     {
         //directionalBrightness=sqrt(sinSunAngle);
@@ -802,13 +801,24 @@ void Scenery3d::generateShadowMap(StelCore* core)
         if (shadowsEnabled) shadowcaster = Sun;
         directionalSourceString="Sun";
     }
+ /*   else if (sinSunAngle> -0.3f) // sun above -18: create shadowless directional pseudo-light from solar azimuth
+    {
+        directionalBrightness=qMin(0.7, sinSunAngle+0.3); // limit to 0.7 in order to keep total below 1.
+        lightsourcePosition.set(sunPosition.v[0], sunPosition.v[1], sinSunAngle+0.3);
+        directionalSourceString="(Sun, below hor.)";
+    }*/
     else if (sinMoonAngle>0.0f)
     {
         //directionalBrightness=sqrt(sinMoonAngle * ((std::cos(moonPhaseAngle)+1)/2) * LUNAR_BRIGHTNESS_FACTOR);
         directionalBrightness= sqrt(sinMoonAngle) * ((std::cos(moonPhaseAngle)+1)/2) * LUNAR_BRIGHTNESS_FACTOR;
-        lightsourcePosition.set(moonPosition.v[0], moonPosition.v[1], moonPosition.v[2]);
-        if (shadowsEnabled) shadowcaster = Moon;
-        directionalSourceString="Moon";
+        directionalBrightness -= (ambientBrightness-0.05)/2.0f;
+        directionalBrightness = qMax(0.0f, directionalBrightness);
+        if (directionalBrightness > 0)
+        {
+            lightsourcePosition.set(moonPosition.v[0], moonPosition.v[1], moonPosition.v[2]);
+            if (shadowsEnabled) shadowcaster = Moon;
+            directionalSourceString="Moon";
+        } else directionalSourceString="Moon";
         //Alternately, construct a term around lunar brightness, like
         // directionalBrightness=(mag/-10)
     }
@@ -816,9 +826,14 @@ void Scenery3d::generateShadowMap(StelCore* core)
     {
         //directionalBrightness=sqrt(sinVenusAngle * ((std::cos(venusPhaseAngle)+1)/2) * VENUS_BRIGHTNESS_FACTOR);
         directionalBrightness=sqrt(sinVenusAngle)*((std::cos(venusPhaseAngle)+1)/2) * VENUS_BRIGHTNESS_FACTOR;
-        lightsourcePosition.set(venusPosition.v[0], venusPosition.v[1], venusPosition.v[2]);
-        if (shadowsEnabled) shadowcaster = Venus;
-        directionalSourceString="Venus";
+        directionalBrightness -= (ambientBrightness-0.05)/2.0f;
+        directionalBrightness = qMax(0.0f, directionalBrightness);
+        if (directionalBrightness > 0)
+        {
+            lightsourcePosition.set(venusPosition.v[0], venusPosition.v[1], venusPosition.v[2]);
+            if (shadowsEnabled) shadowcaster = Venus;
+            directionalSourceString="Venus";
+        } else directionalSourceString="(Venus, flooded by ambient)";
         //Alternately, construct a term around Venus brightness, like
         // directionalBrightness=(mag/-100)
     }
