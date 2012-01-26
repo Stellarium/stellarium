@@ -109,6 +109,10 @@ Q_IMPORT_PLUGIN(Supernovae)
 Q_IMPORT_PLUGIN(Quasars)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_EXOPLANETS
+Q_IMPORT_PLUGIN(Exoplanets)
+#endif
+
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
