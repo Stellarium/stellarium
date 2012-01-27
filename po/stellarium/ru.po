@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-13 23:26+0700\n"
-"PO-Revision-Date: 2012-01-13 17:25+0000\n"
+"POT-Creation-Date: 2012-01-26 18:31+0700\n"
+"PO-Revision-Date: 2012-01-26 11:48+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-14 04:44+0000\n"
-"X-Generator: Launchpad (build 14664)\n"
+"X-Launchpad-Export-Date: 2012-01-27 05:24+0000\n"
+"X-Generator: Launchpad (build 14727)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -54,19 +54,20 @@ msgstr ", %1 м"
 msgid "Planet: "
 msgstr "Планета: "
 
-#: src/core/modules/Nebula.cpp:96
+#: src/core/modules/Nebula.cpp:96 plugins/Supernovae/src/Supernova.cpp:99
+#: plugins/Quasars/src/Quasar.cpp:92
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Тип: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:123
-#: plugins/Supernovae/src/Supernova.cpp:101 plugins/Quasars/src/Quasar.cpp:103
+#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Звёздная величина: <b>%1</b> (ослаблена до <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
-#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:115
+#: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Звёздная величина: <b>%1</b>"
@@ -109,7 +110,7 @@ msgid "Undocumented type"
 msgstr "Недокументированный тип"
 
 #: src/core/modules/Planet.cpp:129 src/core/modules/StarWrapper.cpp:124
-#: plugins/Quasars/src/Quasar.cpp:120
+#: plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Абсолютная звёздная величина: %1"
@@ -149,13 +150,13 @@ msgstr "Звёздная величина: <b>%1</b> (B-V: %2)"
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
 msgstr "Видимая звёздная величина: <b>%1</b> (ослабленная)"
 
-#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:97
+#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 msgstr ""
 "Звёздная величина: <b>%1</b> (ослаблена до <b>%2</b>. B-V: <b>%3</b>)"
 
-#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:111
+#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Звёздная величина: <b>%1</b> (B-V: <b>%2</b>)"
@@ -166,7 +167,7 @@ msgid "Spectral Type: %1"
 msgstr "Спектральный класс: %1"
 
 #: src/core/modules/StarWrapper.cpp:134
-#: plugins/Supernovae/src/Supernova.cpp:114
+#: plugins/Supernovae/src/Supernova.cpp:117
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Расстояние: %1 св. лет"
@@ -5188,10 +5189,14 @@ msgstr ""
 "июля), SN 1937C (21 августа), SN 1972E (8 мая), SN 1987A (24 февраля) и SN "
 "2011FE (13 сентября)."
 
-#: plugins/Supernovae/src/Supernova.cpp:112
+#: plugins/Supernovae/src/Supernova.cpp:99
+msgid "supernova"
+msgstr "сверхновая"
+
+#: plugins/Supernovae/src/Supernova.cpp:115
 #, qt-format
-msgid "Type: %1"
-msgstr "Тип: %1"
+msgid "Type of supernova: %1"
+msgstr "Тип сверхновой: %1"
 
 #: plugins/Quasars/src/Quasars.cpp:59
 msgid "Quasars"
@@ -5207,11 +5212,11 @@ msgstr ""
 "квазаров составлен из 13-й редакции каталога \"Квазары и активные ядра "
 "галактик'' (Верон и др.; 2010) =2010A&A...518A..10V"
 
-#: plugins/Quasars/src/Quasar.cpp:129
-msgid "Type: quasar"
-msgstr "Тип: квазар"
+#: plugins/Quasars/src/Quasar.cpp:92
+msgid "quasar"
+msgstr "квазар"
 
-#: plugins/Quasars/src/Quasar.cpp:132
+#: plugins/Quasars/src/Quasar.cpp:134
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr "Z (красное смещение): %1"

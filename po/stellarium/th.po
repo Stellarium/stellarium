@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-13 23:26+0700\n"
+"POT-Creation-Date: 2012-01-26 18:31+0700\n"
 "PO-Revision-Date: 2012-01-14 05:40+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-15 05:17+0000\n"
-"X-Generator: Launchpad (build 14664)\n"
+"X-Launchpad-Export-Date: 2012-01-27 05:25+0000\n"
+"X-Generator: Launchpad (build 14727)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -56,19 +56,20 @@ msgstr ", %1 ม."
 msgid "Planet: "
 msgstr "ดาวเคราะห์: "
 
-#: src/core/modules/Nebula.cpp:96
+#: src/core/modules/Nebula.cpp:96 plugins/Supernovae/src/Supernova.cpp:99
+#: plugins/Quasars/src/Quasar.cpp:92
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "ชนิด: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:123
-#: plugins/Supernovae/src/Supernova.cpp:101 plugins/Quasars/src/Quasar.cpp:103
+#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "โชติมาตร: <b>%1</b> (จางลงไปที่: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
-#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:115
+#: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "โชติมาตร: <b>%1</b>"
@@ -111,7 +112,7 @@ msgid "Undocumented type"
 msgstr "ยังไม่ได้ระบุในเอกสาร"
 
 #: src/core/modules/Planet.cpp:129 src/core/modules/StarWrapper.cpp:124
-#: plugins/Quasars/src/Quasar.cpp:120
+#: plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "โชติมาตรสัมบูรณ์: %1"
@@ -151,12 +152,12 @@ msgstr "โชติมาตร: <b>%1</b> (B-V: %2)"
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
 msgstr "โชติมาตรปรากฏ: <b>%1</b> (โดยการสูญหายในบรรยากาศ)"
 
-#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:97
+#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 msgstr "โชติมาตร: <b>%1</b> (จางลงไปที่: <b>%2</b>. B-V: <b>%3</b>)"
 
-#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:111
+#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "โชติมาตร : <b>%1</b> (B-V: <b>%2</b>)"
@@ -167,7 +168,7 @@ msgid "Spectral Type: %1"
 msgstr "ชนิดสเปกตรัม: %1"
 
 #: src/core/modules/StarWrapper.cpp:134
-#: plugins/Supernovae/src/Supernova.cpp:114
+#: plugins/Supernovae/src/Supernova.cpp:117
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "ระยะทาง: %1 ปีแสง"
@@ -5135,10 +5136,14 @@ msgstr ""
 "(21 สิงหาคม), SN 1972E (8 พฤษภาคม), SN 1987A (24 กุมภาพันธ์) และ SN 2011FE "
 "(13 กันยายน)"
 
-#: plugins/Supernovae/src/Supernova.cpp:112
+#: plugins/Supernovae/src/Supernova.cpp:99
+msgid "supernova"
+msgstr ""
+
+#: plugins/Supernovae/src/Supernova.cpp:115
 #, qt-format
-msgid "Type: %1"
-msgstr "ชนิด: %1"
+msgid "Type of supernova: %1"
+msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:59
 msgid "Quasars"
@@ -5153,11 +5158,11 @@ msgstr ""
 "ส่วนเสริมสำหรับแสดงเควซาร์ที่สว่างกว่าโชติมาตร 16 ซึ่งรวบรวมจาก 'Quasars and "
 "Active Galactic Nuclei' (13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 
-#: plugins/Quasars/src/Quasar.cpp:129
-msgid "Type: quasar"
-msgstr "ชนิด: เควซาร์"
+#: plugins/Quasars/src/Quasar.cpp:92
+msgid "quasar"
+msgstr ""
 
-#: plugins/Quasars/src/Quasar.cpp:132
+#: plugins/Quasars/src/Quasar.cpp:134
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr "Z (การเลื่อนไปทางแดง): %1"
