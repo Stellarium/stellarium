@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-26 18:31+0700\n"
-"PO-Revision-Date: 2012-01-24 20:45+0000\n"
-"Last-Translator: Paolo Cancedda <paolo.cancedda@gmail.com>\n"
+"PO-Revision-Date: 2012-01-27 15:08+0000\n"
+"Last-Translator: Andrea Amoroso <andrea.amoroso@alice.it>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-27 05:22+0000\n"
+"X-Launchpad-Export-Date: 2012-01-28 04:40+0000\n"
 "X-Generator: Launchpad (build 14727)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -3652,7 +3652,7 @@ msgstr "Altitudine (km): %1"
 #: plugins/Satellites/src/Satellite.cpp:247
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
-msgstr ""
+msgstr "Sottopunto (Lat./Long.): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:261
@@ -4822,7 +4822,7 @@ msgstr "Tasti data"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:169
 msgid "Startup date/time preset"
-msgstr ""
+msgstr "Data/orario di avvio preimpostati"
 
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:176
@@ -4832,7 +4832,7 @@ msgstr "sistema"
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:178
 msgid "preset"
-msgstr ""
+msgstr "preimpostata"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:186
 msgid "mmddyyyy"
@@ -5214,12 +5214,12 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernova.cpp:99
 msgid "supernova"
-msgstr ""
+msgstr "supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:115
 #, qt-format
 msgid "Type of supernova: %1"
-msgstr ""
+msgstr "Tipo di supernova: %1"
 
 #: plugins/Quasars/src/Quasars.cpp:59
 msgid "Quasars"
@@ -5237,7 +5237,7 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasar.cpp:92
 msgid "quasar"
-msgstr ""
+msgstr "quasar"
 
 #: plugins/Quasars/src/Quasar.cpp:134
 #, qt-format
