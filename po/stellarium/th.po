@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-26 18:31+0700\n"
-"PO-Revision-Date: 2012-01-14 05:40+0000\n"
+"PO-Revision-Date: 2012-01-29 02:49+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-27 05:25+0000\n"
+"X-Launchpad-Export-Date: 2012-01-29 05:18+0000\n"
 "X-Generator: Launchpad (build 14727)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -2322,7 +2322,7 @@ msgstr "ยูกันดา"
 
 #: src/translations.h:402
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "เกาะเล็กรอบนอกของสหรัฐอเมริกา"
 
 #: src/translations.h:403
 msgid "United States"
@@ -3360,13 +3360,13 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Sensor #%1"
-msgstr ""
+msgstr "เซนเซอร์ #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1529
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Sensor #%1: %2"
-msgstr ""
+msgstr "เซนเซอร์ #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1736
 msgid "&Telescope"
@@ -3382,27 +3382,27 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
 msgid "Previous ocular"
-msgstr ""
+msgstr "เลนส์ใกล้ตาก่อนหน้า"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
 msgid "Next ocular"
-msgstr ""
+msgstr "เลนส์ใกล้ตาถัดไป"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
 msgid "Previous CCD frame"
-msgstr ""
+msgstr "เฟรมซีซีดีก่อนหน้า"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
 msgid "Next CCD frame"
-msgstr ""
+msgstr "เฟรมซีซีดีถัดไป"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Previous telescope"
-msgstr ""
+msgstr "กล้องโทรทรรศน์ก่อนหน้า"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Next telescope"
-msgstr "กล้องถัดไป"
+msgstr "กล้องโทรทรรศน์ถัดไป"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
@@ -3479,7 +3479,7 @@ msgstr "สลับมุมมองเลนส์ใกล้ตา:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:870
 msgid "Open pop-up navigation menu:"
-msgstr ""
+msgstr "เปิดเมนูนำทางแบบผุดขึ้น:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Interface"
@@ -4006,7 +4006,7 @@ msgstr "แสดงดาวเทียมที่เลือก"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:678
 msgid "Displayed"
-msgstr ""
+msgstr "แสดงผล"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:680
 msgid "Display orbit line(s) for the selected satellite(s)"
@@ -4074,7 +4074,7 @@ msgstr "แหล่งข้อมูล"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:208
 msgid "Get data from update sources"
-msgstr ""
+msgstr "รับข้อมูลที่ทันสมัยจากแหล่งข้อมูล"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:209
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
@@ -4345,7 +4345,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "External software or a remote computer"
-msgstr ""
+msgstr "ซอฟต์แวร์ภายนอกหรือคอมพิวเตอร์ระยะไกล"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Nothing, just simulate one (a moving reticle)"
@@ -4353,7 +4353,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Telescope properties"
-msgstr ""
+msgstr "สมบัติของกล้องโทรทรรศน์"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid "Connection delay:"
@@ -4383,10 +4383,12 @@ msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
+"พยายามเริ่มใช้งานกล้องโทรทรรศน์หรือเชื่อมต่อกับกล้องโดยอัตโนมัติเมื่อเริ่มโปร"
+"แกรม Stellarium"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Start/connect at startup"
-msgstr ""
+msgstr "เริ่ม/เชื่อมต่อ เมื่อเริ่มโปรแกรม"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Device settings"
@@ -4435,7 +4437,7 @@ msgstr "ขนาดวงกลม:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:514
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
-msgstr ""
+msgstr "ค่ามุมองศาในระบบทศนิยม จำนวนไม่เกิน 10 ค่า คั่นด้วยจุลภาค"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "OK"
@@ -4471,7 +4473,7 @@ msgstr "แสดงชื่อกล้องโทรทรรศน์"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Show telescope reticles"
-msgstr ""
+msgstr "แสดงเส้นกรอบในกล้องโทรทรรศน์"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Show field of view indicators"
@@ -4483,7 +4485,7 @@ msgstr "แฟ้ม"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Log telescope driver messages to files"
-msgstr ""
+msgstr "เขียนบันทึกข้อความไดรเวอร์ลงในแฟ้ม"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 msgid "Use telescope server executables (override built-in drivers)"
@@ -4816,11 +4818,11 @@ msgstr "ชื่อเนบิวลา"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:344
 msgid "Nebula hints"
-msgstr ""
+msgstr "เนบิวลา"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:387
 msgid "Effects"
-msgstr ""
+msgstr "เอฟเฟกต์"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:401
 msgid "Manual zoom"
@@ -4836,7 +4838,7 @@ msgstr "ความสว่างของทางช้างเผือก
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:414
 msgid "Nebula label frequency:"
-msgstr ""
+msgstr "ความถี่ของการแสดงชื่อเนบิวลา:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:415
 msgid "Zoom duration:"
