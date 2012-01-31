@@ -1,5 +1,5 @@
 # This is the cmake config file for the AngleMeasure plugin
-SET(ANGLEMEASURE_VERSION "0.1.0")
+SET(ANGLEMEASURE_VERSION "0.2.0")
 
 ADD_SUBDIRECTORY( src )
 
