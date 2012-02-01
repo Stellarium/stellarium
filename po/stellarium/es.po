@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-26 18:31+0700\n"
-"PO-Revision-Date: 2012-01-25 06:24+0000\n"
-"Last-Translator: txelu <Unknown>\n"
+"PO-Revision-Date: 2012-01-30 02:28+0000\n"
+"Last-Translator: Jose A. Macas D. <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-27 05:25+0000\n"
-"X-Generator: Launchpad (build 14727)\n"
+"X-Launchpad-Export-Date: 2012-01-31 04:58+0000\n"
+"X-Generator: Launchpad (build 14734)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -4134,8 +4134,8 @@ msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
-"Este complemento manda mensages \"slew\" a un telescopio en un montaje "
-"computarizado(un telescopio \"GoTo\")"
+"Este complemento permite a Stellarium mandar \"montones\" de mensajes a un "
+"telescopio en un montaje computarizado (un telescopio \"Ir a\")"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:155
 #, qt-format
@@ -4185,7 +4185,7 @@ msgstr "Detenido"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
-msgstr "Plug-in controlador de telescopio"
+msgstr "Complemento controlador de telescopio"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
@@ -4659,7 +4659,7 @@ msgstr "Sábado"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
-msgstr "Plug-in de zona horaria"
+msgstr "Complemento de Zona Horaria"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:449
 msgid "Define a time zone"
@@ -4804,7 +4804,7 @@ msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
-"Implementación en complemento del Interfaz de Usuario en modo Texto serie "
+"Complemento de implementación del Interfaz de Usuario en modo Texto serie "
 "0.9.x, utilizado en sistemas planetarios"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:148
@@ -5027,7 +5027,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
 msgid "Solar System Editor plug-in"
-msgstr "Plug-in Editor del sistema solar"
+msgstr "Complemento Editor del Sistema Solar"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Import data"
@@ -5217,12 +5217,12 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernova.cpp:99
 msgid "supernova"
-msgstr ""
+msgstr "supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:115
 #, qt-format
 msgid "Type of supernova: %1"
-msgstr ""
+msgstr "Tipo de supernova: %1"
 
 #: plugins/Quasars/src/Quasars.cpp:59
 msgid "Quasars"
@@ -5240,7 +5240,7 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasar.cpp:92
 msgid "quasar"
-msgstr ""
+msgstr "cuásar"
 
 #: plugins/Quasars/src/Quasar.cpp:134
 #, qt-format

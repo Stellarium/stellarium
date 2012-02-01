@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-26 18:31+0700\n"
-"PO-Revision-Date: 2012-01-08 16:17+0000\n"
-"Last-Translator: dalos <Unknown>\n"
+"PO-Revision-Date: 2012-01-31 21:55+0000\n"
+"Last-Translator: Zbyněk Schwarz <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-27 05:20+0000\n"
-"X-Generator: Launchpad (build 14727)\n"
+"X-Launchpad-Export-Date: 2012-02-01 04:43+0000\n"
+"X-Generator: Launchpad (build 14734)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -64,7 +64,7 @@ msgstr "Typ: <b>%1</b>"
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Rozsah: <b>%1</b> (Absorbováno do: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
@@ -148,12 +148,12 @@ msgstr "Magnituda: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "Zdánlivý rozsah: <b>%1</b> (podle absorpce)"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "Rozsah <b>%1</b> (absorbováno do: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
@@ -491,7 +491,7 @@ msgstr "Klávesové zkratky pluginu"
 #: src/gui/HelpDialog.cpp:78
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:82
 msgid "Text User Interface"
-msgstr ""
+msgstr "Textové uživatelské rozhraní"
 
 #: src/gui/HelpDialog.cpp:167
 msgid "Stellarium Help"
@@ -596,7 +596,7 @@ msgstr "OSX vývojář: %1"
 #: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "Tester: %1"
 
 #: src/gui/StelGui.cpp:100
 msgid "Display Options"
@@ -1262,17 +1262,17 @@ msgstr "Sedna"
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
 #: src/translations.h:104
 msgid "Quaoar"
-msgstr ""
+msgstr "Quaoar"
 
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
 #: src/translations.h:106
 msgid "Orcus"
-msgstr ""
+msgstr "Orcus"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
 #: src/translations.h:108
 msgid "Haumea"
-msgstr ""
+msgstr "Haumea"
 
 #. TRANSLATORS: Asteroid (5) Astraea
 #: src/translations.h:111
@@ -1409,7 +1409,7 @@ msgstr "západoevropský"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:163
 msgid "Guereins"
-msgstr ""
+msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:165
@@ -1429,11 +1429,11 @@ msgstr "Oceán"
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:173
 msgid "Garching"
-msgstr ""
+msgstr "Garching"
 
 #: src/translations.h:180
 msgid "Andorra"
-msgstr ""
+msgstr "Andorra"
 
 #: src/translations.h:181
 msgid "United Arab Emirates"
@@ -1449,7 +1449,7 @@ msgstr "Antigua a Barbuda"
 
 #: src/translations.h:184
 msgid "Anguilla"
-msgstr ""
+msgstr "Anguilla"
 
 #: src/translations.h:185
 msgid "Albania"
@@ -1913,7 +1913,7 @@ msgstr "Kazachstán"
 
 #: src/translations.h:300
 msgid "Lao"
-msgstr ""
+msgstr "Laos"
 
 #: src/translations.h:301
 msgid "Lebanon"
@@ -1921,7 +1921,7 @@ msgstr "Libanon"
 
 #: src/translations.h:302
 msgid "Saint Lucia"
-msgstr ""
+msgstr "Svatá Lucie"
 
 #: src/translations.h:303
 msgid "Liechtenstein"
@@ -1953,7 +1953,7 @@ msgstr "Lotyšsko"
 
 #: src/translations.h:310
 msgid "Libyan Arab Jamahiriya"
-msgstr ""
+msgstr "Libyjská arabská džamáhíríje"
 
 #: src/translations.h:311
 msgid "Morocco"
@@ -1997,7 +1997,7 @@ msgstr "Macao"
 
 #: src/translations.h:321
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "Severní Mariany"
 
 #: src/translations.h:322
 msgid "Martinique"
@@ -2009,7 +2009,7 @@ msgstr "Mauretánie"
 
 #: src/translations.h:324
 msgid "Montserrat"
-msgstr ""
+msgstr "Montserrat"
 
 #: src/translations.h:325
 msgid "Malta"
@@ -2045,7 +2045,7 @@ msgstr "Namibie"
 
 #: src/translations.h:333
 msgid "New Caledonia"
-msgstr ""
+msgstr "Nová Kaledonie"
 
 #: src/translations.h:334
 msgid "Niger"
@@ -2077,11 +2077,11 @@ msgstr "Nepál"
 
 #: src/translations.h:341
 msgid "Nauru"
-msgstr ""
+msgstr "Nauru"
 
 #: src/translations.h:342
 msgid "Niue"
-msgstr ""
+msgstr "Niue"
 
 #: src/translations.h:343
 msgid "New Zealand"
@@ -2121,11 +2121,11 @@ msgstr "Polsko"
 
 #: src/translations.h:352
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "Svatý Petr a Mikelon"
 
 #: src/translations.h:353
 msgid "Pitcairn"
-msgstr ""
+msgstr "Pitcairnovy ostrovy"
 
 #: src/translations.h:354
 msgid "Puerto Rico"
@@ -2133,7 +2133,7 @@ msgstr "Portoriko"
 
 #: src/translations.h:355
 msgid "Palestinian Territories"
-msgstr ""
+msgstr "Palestinská teritoria"
 
 #: src/translations.h:356
 msgid "Portugal"
@@ -2141,7 +2141,7 @@ msgstr "Portugalsko"
 
 #: src/translations.h:357
 msgid "Palau"
-msgstr ""
+msgstr "Palau"
 
 #: src/translations.h:358
 msgid "Paraguay"
@@ -2153,7 +2153,7 @@ msgstr "Katar"
 
 #: src/translations.h:360
 msgid "Réunion"
-msgstr ""
+msgstr "Réunion"
 
 #: src/translations.h:361
 msgid "Romania"
@@ -2165,7 +2165,7 @@ msgstr "Sbrsko"
 
 #: src/translations.h:363
 msgid "Russian Federation"
-msgstr ""
+msgstr "Ruská federace"
 
 #: src/translations.h:364
 msgid "Rwanda"
@@ -2193,7 +2193,7 @@ msgstr "Švédsko"
 
 #: src/translations.h:370
 msgid "Singapore"
-msgstr ""
+msgstr "Singapur"
 
 #: src/translations.h:371
 msgid "Saint Helena"
@@ -2205,7 +2205,7 @@ msgstr "Slovinsko"
 
 #: src/translations.h:373
 msgid "Svalbard and Jan Mayen"
-msgstr ""
+msgstr "Špicberky a Jan Mayen"
 
 #: src/translations.h:374
 msgid "Slovakia"
@@ -2233,15 +2233,15 @@ msgstr "Surinam"
 
 #: src/translations.h:380
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "Svatý Tomáš a Princův ostrov"
 
 #: src/translations.h:381
 msgid "El Salvador"
-msgstr ""
+msgstr "El Salvador"
 
 #: src/translations.h:382
 msgid "Syrian Arab Republic"
-msgstr ""
+msgstr "Syrská arabská republika"
 
 #: src/translations.h:383
 msgid "Swaziland"
@@ -2249,7 +2249,7 @@ msgstr "Svazijsko"
 
 #: src/translations.h:384
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "Turks a Caicos"
 
 #: src/translations.h:385
 msgid "Chad"
@@ -2257,7 +2257,7 @@ msgstr "Čad"
 
 #: src/translations.h:386
 msgid "French Southern Territories"
-msgstr ""
+msgstr "Francouzská jižní území"
 
 #: src/translations.h:387
 msgid "Togo"
@@ -2273,11 +2273,11 @@ msgstr "Tádžikistán"
 
 #: src/translations.h:390
 msgid "Tokelau"
-msgstr ""
+msgstr "Tokelau"
 
 #: src/translations.h:391
 msgid "East Timor"
-msgstr ""
+msgstr "Východní Timor"
 
 #: src/translations.h:392
 msgid "Turkmenistan"
@@ -2289,7 +2289,7 @@ msgstr "Tunisko"
 
 #: src/translations.h:394
 msgid "Tonga"
-msgstr ""
+msgstr "Tonga"
 
 #: src/translations.h:395
 msgid "Turkey"
@@ -2321,7 +2321,7 @@ msgstr "Uganda"
 
 #: src/translations.h:402
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "Menší odlehlé ostrovy Spojených států amerických"
 
 #: src/translations.h:403
 msgid "United States"
@@ -2353,7 +2353,7 @@ msgstr "Britské panenské ostrovy"
 
 #: src/translations.h:410
 msgid "United States Virgin Islands"
-msgstr ""
+msgstr "Americké Panenské ostrovy"
 
 #: src/translations.h:411
 msgid "Viet Nam"
@@ -2365,7 +2365,7 @@ msgstr "Vanuatu"
 
 #: src/translations.h:413
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "Wallis a Futuna"
 
 #: src/translations.h:414
 msgid "Samoa"
@@ -2377,7 +2377,7 @@ msgstr "Jemen"
 
 #: src/translations.h:416
 msgid "Mayotte"
-msgstr ""
+msgstr "Mayotte"
 
 #: src/translations.h:417
 msgid "Yugoslavia"
@@ -2496,7 +2496,7 @@ msgstr "Najít objekt"
 
 #: src/ui_searchDialogGui.h:465
 msgid "Find Object or Position"
-msgstr ""
+msgstr "Nalézt objekt či pozici"
 
 #: src/ui_searchDialogGui.h:471
 msgid "iota"
@@ -2596,7 +2596,7 @@ msgstr "omega"
 
 #: src/ui_searchDialogGui.h:542
 msgid "Greek letters for Bayer designations"
-msgstr ""
+msgstr "Řecká písmena pro Bayerovo označení"
 
 #: src/ui_searchDialogGui.h:543
 msgid "Object"
@@ -2612,7 +2612,7 @@ msgstr "Poloha"
 
 #: src/ui_searchDialogGui.h:546
 msgid "Search also in the SIMBAD on-line astronomical database"
-msgstr ""
+msgstr "Hledat také v on-line astronomické databázi SIMBAD"
 
 #: src/ui_searchDialogGui.h:547 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
@@ -3137,7 +3137,7 @@ msgstr ""
 
 #: src/ui_AtmosphereDialog.h:167
 msgid "Atmosphere Details"
-msgstr ""
+msgstr "Podrobnosti atmosféry"
 
 #: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
@@ -3170,6 +3170,8 @@ msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
+"Použijte okolo 0.12 pro úžasné vrcholky hor, 0.2 pro dobré venkovské "
+"krajiny, 0.35 pro nejasné podmínky."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -3186,34 +3188,34 @@ msgstr "Měření úhlů"
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:308
 msgid "The Angle Measure is enabled:"
-msgstr ""
+msgstr "Měřní úhlu je povoleno:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:310
 msgid "Drag with the left button to measure, left-click to clear."
-msgstr ""
+msgstr "Táhněte levým tlačítkem pro měření, levým kliknutím pro vyčištění."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:312
 msgid "Right-clicking changes the end point only."
-msgstr ""
+msgstr "Pravé kliknutí změní pouze koncový bod"
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
-msgstr ""
+msgstr "Compass Marks"
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:60
 msgid "Displays compass bearing marks along the horizon"
-msgstr ""
+msgstr "Zobrazí stupnici azimutu kompasu po obzoru"
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:124
 msgid "Compass marks"
-msgstr ""
+msgstr "Značky kompasu"
 
 #: plugins/Oculars/src/Oculars.cpp:84
 #: plugins/Oculars/src/ui_ocularDialog.h:862
 msgid "Oculars"
-msgstr ""
+msgstr "Okuláry"
 
 #: plugins/Oculars/src/Oculars.cpp:87
 msgid ""
@@ -3221,67 +3223,69 @@ msgid ""
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
+"Zobrazí oblohu jako pohledem skrz okulár teleskopu. (Simulováno je pouze "
+"zvětšení a zorné pole.) Může také zobrazit rám senzorů a zaměřovač Telrad."
 
 #: plugins/Oculars/src/Oculars.cpp:757
 msgid "Please select an object before switching to ocular view."
-msgstr ""
+msgstr "Zvolte prosím objekt předtím, než přejdete na okulárové zobrazení."
 
 #: plugins/Oculars/src/Oculars.cpp:836
 msgid "&Previous ocular"
-msgstr ""
+msgstr "&Předchozí okulár"
 
 #: plugins/Oculars/src/Oculars.cpp:837
 msgid "&Next ocular"
-msgstr ""
+msgstr "&Další okulár"
 
 #: plugins/Oculars/src/Oculars.cpp:838
 msgid "Select &ocular"
-msgstr ""
+msgstr "Vybrat &okulár"
 
 #: plugins/Oculars/src/Oculars.cpp:883
 msgid "Toggle &crosshair"
-msgstr ""
+msgstr "Přepnout &zaměřovač"
 
 #: plugins/Oculars/src/Oculars.cpp:892
 msgid "Configure &Oculars"
-msgstr ""
+msgstr "Nastavit &okuláry"
 
 #: plugins/Oculars/src/Oculars.cpp:901
 msgid "Toggle &CCD"
-msgstr ""
+msgstr "Zapnout &CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:909
 msgid "Toggle &Telrad"
-msgstr ""
+msgstr "Zapnout &Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:919
 msgid "&Previous CCD"
-msgstr ""
+msgstr "&Předchozí CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:920
 msgid "&Next CCD"
-msgstr ""
+msgstr "&Další CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:921
 msgid "&Select CCD"
-msgstr ""
+msgstr "&Vybrat CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:943
 msgid "&Rotate CCD"
-msgstr ""
+msgstr "&Otočit CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:975
 msgid "&Reset rotation"
-msgstr ""
+msgstr "&Resetovat otočení"
 
 #: plugins/Oculars/src/Oculars.cpp:1201
 #: plugins/Oculars/src/ui_ocularDialog.h:864
 msgid "Ocular view"
-msgstr ""
+msgstr "Okulárové zobrazení"
 
 #: plugins/Oculars/src/Oculars.cpp:1225
 msgid "Oculars popup menu"
-msgstr ""
+msgstr "Vyskakovací menu okulárů"
 
 #: plugins/Oculars/src/Oculars.cpp:1233
 msgid "Crosshairs"
@@ -3289,53 +3293,53 @@ msgstr "Záměrný kříž"
 
 #: plugins/Oculars/src/Oculars.cpp:1241
 msgid "Image sensor frame"
-msgstr ""
+msgstr "Rám senzorů obrázku"
 
 #: plugins/Oculars/src/Oculars.cpp:1249
 msgid "Telrad sight"
-msgstr ""
+msgstr "Zaměřovač Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:1257
 msgid "Oculars plugin configuration"
-msgstr ""
+msgstr "Nastavení zásuvného modulu okulárů"
 
 #: plugins/Oculars/src/Oculars.cpp:1445
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 #, qt-format
 msgid "Ocular #%1"
-msgstr ""
+msgstr "Okulár #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1450
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 #, qt-format
 msgid "Ocular #%1: %2"
-msgstr ""
+msgstr "Okulár #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:1464
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:520
 #, qt-format
 msgid "Ocular FL: %1 mm"
-msgstr ""
+msgstr "OV okuláru: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
 #: plugins/Oculars/src/Oculars.cpp:1471
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:530
 #, qt-format
 msgid "Ocular aFOV: %1"
-msgstr ""
+msgstr "zZP okuláru: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1481 plugins/Oculars/src/Oculars.cpp:1543
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
 #, qt-format
 msgid "Telescope #%1"
-msgstr ""
+msgstr "Teleskop #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1486 plugins/Oculars/src/Oculars.cpp:1548
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
 #, qt-format
 msgid "Telescope #%1: %2"
-msgstr ""
+msgstr "Teleskop #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1497
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
@@ -3353,19 +3357,19 @@ msgstr "Zorné pole: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
 #, qt-format
 msgid "Dimensions: %1"
-msgstr ""
+msgstr "Rozměry: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1525
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Sensor #%1"
-msgstr ""
+msgstr "Senzor #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1529
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Sensor #%1: %2"
-msgstr ""
+msgstr "Senzor #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1736
 msgid "&Telescope"
@@ -3381,19 +3385,19 @@ msgstr "&Následující dalekohled"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
 msgid "Previous ocular"
-msgstr ""
+msgstr "Předchozí okulár"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
 msgid "Next ocular"
-msgstr ""
+msgstr "Další okulár"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
 msgid "Previous CCD frame"
-msgstr ""
+msgstr "Předchozí snímek CCD"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
 msgid "Next CCD frame"
-msgstr ""
+msgstr "Další snímek CCD"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Previous telescope"
@@ -3405,93 +3409,93 @@ msgstr "Následující dalekohled"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr ""
+msgstr "Otočit rám senzorů o 15 stupňů proti směru hodinových ručiček"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:258
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr ""
+msgstr "Otočit rám senzorů o 5 stupňů proti směru hodinových ručiček"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:271
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr ""
+msgstr "Otočit rám senzorů o 1 stupeň proti směru hodinových ručiček"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
-msgstr ""
+msgstr "Resetovat otočení rámu senzorů"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr ""
+msgstr "Otočit rám senzorů o 1 stupeň ve směru hodinových ručiček"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:310
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr ""
+msgstr "Otočit rám senzorů o 5 stupňů ve směru hodinových ručiček"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:323
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr ""
+msgstr "Otočit rám senzorů o 15 stupňů ve směru hodinových ručiček"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
 msgid "Effective focal length of the ocular"
-msgstr ""
+msgstr "Účinná ohnisková vzdálenost okuláru"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:533
 msgid "Apparent field of view of the ocular"
-msgstr ""
+msgstr "Zdánlivé zorné pole okuláru"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 #, qt-format
 msgid "Rotation: %1"
-msgstr ""
+msgstr "Otočení: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 msgid "Magnification provided by these binoculars"
-msgstr ""
+msgstr "Zvětšení poskytnuté tímto dalekohledem"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
 msgid "Actual field of view provided by these binoculars"
-msgstr ""
+msgstr "Skutečné zorné pole poskytnuté tímto dalekohledem"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
 msgid "Magnification provided by this ocular/telescope combination"
-msgstr ""
+msgstr "Zvětšení poskytnuté touto kombinací okuláru/teleskopu"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
 msgid "Actual field of view provided by this ocular/telescope combination"
-msgstr ""
+msgstr "Skutečné zorné pole poskytnuté touto kombinací okuláru/teleskopu"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:865
 msgid "Enable only if an object is selected"
-msgstr ""
+msgstr "Povolit, pouze když je zvolen objekt"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:866
 msgid "Scale image circle"
-msgstr ""
+msgstr "Změnit velikost obrazového kruhu"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:867
 msgid "Key mappings"
-msgstr ""
+msgstr "Mapování kláves"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:868
 msgid "Toggle ocular view:"
-msgstr ""
+msgstr "Přepnout okulárové zobrazení:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:870
 msgid "Open pop-up navigation menu:"
-msgstr ""
+msgstr "Otevřít vyskakovací menu navigace:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Interface"
-msgstr ""
+msgstr "Rozhraní"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:872
 msgid "On-screen control panel"
-msgstr ""
+msgstr "Kontrolní panel na obrazovce"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:873
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:213
 msgid "General"
-msgstr ""
+msgstr "Obecné"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:874
 #: plugins/Oculars/src/ui_ocularDialog.h:882
@@ -3504,7 +3508,7 @@ msgstr "Okuláry"
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Add"
-msgstr ""
+msgstr "Přidat"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:877
 #: plugins/Oculars/src/ui_ocularDialog.h:886
@@ -3512,11 +3516,11 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:683
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
-msgstr ""
+msgstr "Název:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "aFOV:"
-msgstr ""
+msgstr "zZP:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:879
 #: plugins/Oculars/src/ui_ocularDialog.h:898
@@ -3525,24 +3529,24 @@ msgstr "Ohnisková vzdálenost"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "Field stop:"
-msgstr ""
+msgstr "Clona:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 msgid "Binoculars"
-msgstr ""
+msgstr "Dalekohled"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:883
 #: plugins/Oculars/src/ui_ocularDialog.h:893
 msgid "Sensors"
-msgstr ""
+msgstr "Senzory"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Resolution x (pixels):"
-msgstr ""
+msgstr "Rozlišení x (pixely):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Resolution y (pixels):"
-msgstr ""
+msgstr "Rozlišení y (pixely):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Chip width (mm):"
@@ -3554,18 +3558,18 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:891
 msgid "Pixel width (micron):"
-msgstr ""
+msgstr "Šířka pixelu (mikron)"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:892
 msgid "Pixel height (micron):"
-msgstr ""
+msgstr "Výška pixelu (mikron)"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:894
 #: plugins/Oculars/src/ui_ocularDialog.h:902
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Telescopes"
-msgstr ""
+msgstr "Teleskopy"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:899
 msgid "Diameter:"

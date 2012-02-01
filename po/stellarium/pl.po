@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-26 18:31+0700\n"
-"PO-Revision-Date: 2012-01-28 01:16+0000\n"
+"PO-Revision-Date: 2012-02-01 02:49+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-29 05:18+0000\n"
-"X-Generator: Launchpad (build 14727)\n"
+"X-Launchpad-Export-Date: 2012-02-01 04:43+0000\n"
+"X-Generator: Launchpad (build 14734)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -3918,7 +3918,7 @@ msgstr "[nowe źródło]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:457
 msgid "[all newly added]"
-msgstr ""
+msgstr "[wszystkie ostatnio dodane]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:458
 msgid "[all not displayed]"
@@ -3938,33 +3938,33 @@ msgstr "Wybierz plik aktualizacji TLE"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:135
 msgid "Downloading data..."
-msgstr ""
+msgstr "Pobieranie danych..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:136
 msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
-msgstr ""
+msgstr "Stellarium pobiera aktualne dane satelitów. Proszę czekać..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
 msgid "Select TLE source file(s)..."
-msgstr ""
+msgstr "Wybierz plik(i) źródłowy(-e) TLE..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:166
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:167
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:226
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:227
 msgid "Processing data..."
-msgstr ""
+msgstr "Przetwarzanie danych..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:221
 msgid "No data could be downloaded. Try again later."
-msgstr ""
+msgstr "Pobieranie danych nie powiodło się. Spróbuj ponownie później."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:344
 #, qt-format
 msgid "Catalog Number: %1"
-msgstr ""
+msgstr "Numer katalogowy: %1"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
@@ -4056,7 +4056,7 @@ msgstr "Orbita"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:684
 msgid "Catalog number:"
-msgstr ""
+msgstr "Numer katalogowy:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:685
 msgid "Description:"
@@ -4080,11 +4080,11 @@ msgstr "Dwuwierszowe dane elementów orbitalnych NORAD"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:695
 msgid "Remove the selected satellites"
-msgstr ""
+msgstr "Usuń wybrane satelity"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:698
 msgid "Add more satellites"
-msgstr ""
+msgstr "Dodaj więcej satelitów"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:702
 msgid "Save changes"
@@ -4112,7 +4112,7 @@ msgstr "Źródła"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:208
 msgid "Get data from update sources"
-msgstr ""
+msgstr "Pobierz zaktualizowane dane"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:209
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
@@ -4121,7 +4121,7 @@ msgstr "Przerwij pobieranie"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:210
 msgid "New satellites"
-msgstr ""
+msgstr "Nowe satelity"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:212
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
@@ -4205,7 +4205,7 @@ msgstr "nr"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Status"
-msgstr ""
+msgstr "Stan"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Type"
