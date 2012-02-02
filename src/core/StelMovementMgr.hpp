@@ -87,7 +87,7 @@ public:
 	void setMovementSpeedFactor(float s) {movementsSpeedFactor=s;}
 	float getMovementSpeedFactor() const {return movementsSpeedFactor;}
 
-	void setDragTriggerDistance(float d) {dragTriggerDistance=d;}
+        void setDragTriggerDistance(float d) {dragTriggerDistance=d;}
 
 public slots:
 	//! Toggle current mount mode between equatorial and altazimuthal
@@ -319,7 +319,7 @@ private:
 	// Viewing direction in the mount reference frame.
 	Vec3d viewDirectionMountFrame;
 
-	Vec3d upVectorMountFrame;
+        Vec3d upVectorMountFrame;
 
 	float dragTriggerDistance;
 };
