@@ -992,12 +992,15 @@ void Scenery3d::generateCubeMap(StelCore* core)
 
 void Scenery3d::drawFromCubeMap(StelCore* core)
 {
+
     if (objModelArrays.empty()) {
         return;
     }
 
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
     StelPainter painter(prj);
+
+    view = core->getMovementMgr()->getViewDirectionJ2000();
 
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -1188,19 +1191,26 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
     screen_y -= 30.0f;
     screen_x = prj->getViewportWidth() - 450.0f;
     str = QString("Model View Matrix");
-    painter.drawText(screen_x, screen_y, str)   ;
+    painter.drawText(screen_x, screen_y, str);
 
     screen_y -= 15.0f;
-    str = QString("[%1 %2 %3 %4]").arg(modelView[0], 7, 'f', 2).arg(modelView[4], 7, 'f', 2).arg(modelView[8], 7, 'f', 2).arg(modelView[12], 7, 'f', 2);
+    str = QString("[%1 %2 %3 %4]").arg(mv2[0], 7, 'f', 2).arg(mv2[4], 7, 'f', 2).arg(mv2[8], 7, 'f', 2).arg(mv2[12], 7, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
     screen_y -= 15.0f;
-    str = QString("[%1 %2 %3 %4]").arg(modelView[1], 7, 'f', 2).arg(modelView[5], 7, 'f', 2).arg(modelView[9], 7, 'f', 2).arg(modelView[13], 7, 'f', 2);
+    str = QString("[%1 %2 %3 %4]").arg(mv2[1], 7, 'f', 2).arg(mv2[5], 7, 'f', 2).arg(mv2[9], 7, 'f', 2).arg(mv2[13], 7, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
     screen_y -= 15.0f;
-    str = QString("[%1 %2 %3 %4]").arg(modelView[2], 7, 'f', 2).arg(modelView[6], 7, 'f', 2).arg(modelView[10], 7, 'f', 2).arg(modelView[14], 7, 'f', 2);
+    str = QString("[%1 %2 %3 %4]").arg(mv2[2], 7, 'f', 2).arg(mv2[6], 7, 'f', 2).arg(mv2[10], 7, 'f', 2).arg(mv2[14], 7, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
     screen_y -= 15.0f;
-    str = QString("[%1 %2 %3 %4]").arg(modelView[3], 7, 'f', 2).arg(modelView[7], 7, 'f', 2).arg(modelView[11], 7, 'f', 2).arg(modelView[15], 7, 'f', 2);
+    str = QString("[%1 %2 %3 %4]").arg(mv2[3], 7, 'f', 2).arg(mv2[7], 7, 'f', 2).arg(mv2[11], 7, 'f', 2).arg(mv2[15], 7, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);
+
+    screen_y -= 30.0f;
+    str = QString("up[%1 %2 %3]").arg(up[0], 7, 'f', 2).arg(up[1], 7, 'f', 2).arg(up[2], 7, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);
+    screen_y -= 15.0f;
+    str = QString("view[%1 %2 %3]").arg(view[0], 7, 'f', 2).arg(view[1], 7, 'f', 2).arg(view[2], 7, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
 
     /*// DEBUG AIDS:

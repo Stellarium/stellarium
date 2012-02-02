@@ -207,6 +207,8 @@ private:
 
     Mat4f modelView;
     Mat4f mv2;
+    Vec3d up;
+    Vec3d view;
 };
 
 #endif
