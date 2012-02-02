@@ -244,7 +244,9 @@ void Scenery3dMgr::init()
     scenery3d->setBumpsEnabled(enableBumps);
 
     //Initialize Shadow Mapping
-    scenery3d->initShadowMapping();
+    if(shadowmapSize){
+        scenery3d->initShadowMapping();
+    }
 }
 
 bool Scenery3dMgr::configureGui(bool show)
@@ -397,7 +399,7 @@ Scenery3d* Scenery3dMgr::createFromFile(const QString& scenery3dFile, const QStr
     newScenery3d->setShaders(shadowShader, bumpShader, univShader);
     newScenery3d->setShadowsEnabled(enableShadows);
     newScenery3d->setBumpsEnabled(enableBumps);
-    newScenery3d->initShadowMapping();
+    if(shadowmapSize) newScenery3d->initShadowMapping();
     if (scenery3dIni.status() != QSettings::NoError)
     {
         qWarning() << "ERROR parsing scenery3d.ini file: " << scenery3dFile;
