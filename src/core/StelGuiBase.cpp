@@ -75,6 +75,13 @@ QAction* StelGuiBase::addGuiActions(const QString& actionName, const QString& te
 	return a;
 }
 
+void StelGuiBase::removeGuiAction(QAction* action)
+{
+        stelAppGraphicsWidget->removeAction(action);
+        delete action;
+        action = NULL;
+}
+
 QAction* StelGuiBase::getGuiActions(const QString& actionName)
 {
 	QAction* a = stelAppGraphicsWidget->findChild<QAction*>(actionName);

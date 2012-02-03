@@ -93,6 +93,10 @@ AngleMeasure::AngleMeasure()
 
 AngleMeasure::~AngleMeasure()
 {
+        StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+        Q_ASSERT(gui);
+        gui->getButtonBar()->removeButton(toolbarButton, "065-pluginsGroup");
+        delete toolbarButton;
 }
 
 //! Determine which "layer" the plagin's drawing will happen on.
@@ -143,6 +147,13 @@ void AngleMeasure::init()
 	{
 		qWarning() << "WARNING: unable create toolbar button for AngleMeasure plugin: " << e.what();
 	}
+}
+
+void AngleMeasure::deinit()
+{
+        StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+        Q_ASSERT(gui);
+        gui->removeGuiAction(gui->getGuiActions("actionShow_Angle_Measure"));
 }
 
 void AngleMeasure::update(double deltaTime)

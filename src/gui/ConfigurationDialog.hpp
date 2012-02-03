@@ -109,6 +109,8 @@ private slots:
 
 	void populatePluginsList();
 	void pluginsSelectionChanged(const QString&);
+        void pluginEnableCurrentSelection();
+        void pluginDisableCurrentSelection();
 	void pluginConfigureCurrentSelection();
 	void loadAtStartupChanged(int);
 

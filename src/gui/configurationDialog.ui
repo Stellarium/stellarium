@@ -991,6 +991,20 @@
                 </widget>
                </item>
                <item>
+                <widget class="QPushButton" name="pluginEnableButton">
+                  <property name="text">
+                    <string>enable</string>
+                  </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pluginDisableButton">
+                  <property name="text">
+                    <string>disable</string>
+                  </property>
+                </widget>
+               </item>
+               <item>
                 <widget class="QPushButton" name="pluginConfigureButton">
                  <property name="enabled">
                   <bool>false</bool>

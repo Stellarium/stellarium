@@ -75,6 +75,11 @@ public:
 	//! Get the list of all the currently registered modules
 	QList<StelModule*> getAllModules() {return modules.values();}
 
+        //! Get plugin ID of plugin of displayedName
+        //! @param displayedName the displayedName of the plugin we're
+        //! looking for
+        const QString getIdForName(const QString&);
+
 	//! Get the list of modules in the correct order for calling the given action
 	const QList<StelModule*>& getCallOrders(StelModule::StelModuleActionName action)
 	{

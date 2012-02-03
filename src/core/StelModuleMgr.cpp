@@ -27,7 +27,7 @@
 #include "StelFileMgr.hpp"
 #include "StelPluginInterface.hpp"
 #include "StelIniParser.hpp"
-
+#include "StelTranslator.hpp"
 
 
 StelModuleMgr::StelModuleMgr() : callingListsToRegenerate(true), pluginDescriptorListLoaded(false)
@@ -81,6 +81,7 @@ void StelModuleMgr::unloadModule(const QString& moduleID, bool alsoDelete)
 		qWarning() << "Module \"" << moduleID << "\" is not loaded.";
 		return;
 	}
+        pluginDescriptorList[moduleID].loaded = false;
 	modules.remove(moduleID);
 	m->setParent(NULL);
 	callingListsToRegenerate = true;
@@ -106,6 +107,17 @@ StelModule* StelModuleMgr::getModule(const QString& moduleID, bool noWarning)
 	return iter.value();
 }
 
+const QString StelModuleMgr::getIdForName(const QString& name)
+{
+        QString pluginName;
+        foreach (const PluginDescriptor& desc, getPluginsList())
+        {
+                pluginName = q_(desc.info.displayedName);
+                if (pluginName.compare(name) == 0)
+                        return desc.info.id;
+        }
+        return QString();
+}
 
 /*************************************************************************
  Load an external plugin

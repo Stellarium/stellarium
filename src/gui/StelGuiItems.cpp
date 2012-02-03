@@ -428,6 +428,15 @@ void BottomStelBar::addButton(StelButton* button, const QString& groupName, cons
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
 }
 
+void BottomStelBar::removeButton(StelButton* button, const QString& groupName)
+{
+        button->disconnect();
+        QList<StelButton*>& g = buttonGroups[groupName].elems;
+        int removed = g.removeAll(button);
+        Q_ASSERT(removed > 0);
+        updateButtonsGroups();
+}
+
 StelButton* BottomStelBar::hideButton(const QString& actionName)
 {
 	QString gName;

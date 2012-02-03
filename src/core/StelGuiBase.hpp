@@ -58,6 +58,10 @@ public:
 	//! @param autoRepeat whether the action should be autorepeated
 	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false);
 
+        //! Remove an action from the gui and delete the action
+        //! @param action the action to remove
+        void removeGuiAction(QAction* action);
+
 	//! Get a pointer on an action managed by the GUI
 	//! @param actionName qt object name for this action
 	//! @return a pointer on the QAction object or NULL if don't exist

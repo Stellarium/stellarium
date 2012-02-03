@@ -232,6 +232,8 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->pluginsListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(pluginsSelectionChanged(const QString&)));
 	connect(ui->pluginLoadAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(loadAtStartupChanged(int)));
 	connect(ui->pluginConfigureButton, SIGNAL(clicked()), this, SLOT(pluginConfigureCurrentSelection()));
+        connect(ui->pluginEnableButton, SIGNAL(clicked()), this, SLOT(pluginEnableCurrentSelection()));
+        connect(ui->pluginDisableButton, SIGNAL(clicked()), this, SLOT(pluginDisableCurrentSelection()));
 	populatePluginsList();
 
 
@@ -528,7 +530,7 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
-		if (s==q_(desc.info.displayedName))//TODO: Use ID!
+                if (s==q_(desc.info.displayedName))//TODO: Use ID!
 		{
 			QString html = "<html><head></head><body>";
 			html += "<h2>" + q_(desc.info.displayedName) + "</h2>";
@@ -540,6 +542,9 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 			html += "</body></html>";
 			ui->pluginsInfoBrowser->setHtml(html);
 			ui->pluginLoadAtStartupCheckBox->setChecked(desc.loadAtStartup);
+                        ui->pluginEnableButton->setVisible(!desc.loaded);
+                        ui->pluginDisableButton->setVisible(desc.loaded);
+                        ui->pluginConfigureButton->setVisible(desc.loaded);
 			StelModule* pmod = StelApp::getInstance().getModuleMgr().getModule(desc.info.id, true);
 			if (pmod != NULL)
 				ui->pluginConfigureButton->setEnabled(pmod->configureGui(false));
@@ -625,6 +630,45 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 	html += "<p>" + q_(d) + "</p>";
 	html += "</body></html>";	
 	ui->scriptInfoBrowser->setHtml(html);	
+}
+
+void ConfigurationDialog::pluginEnableCurrentSelection()
+{
+        QString s = ui->pluginsListWidget->currentItem()->text();
+        if (s.isEmpty())
+            return;
+
+        StelModuleMgr *mgr = &StelApp::getInstance().getModuleMgr();
+        QString module = mgr->getIdForName(s);
+
+        if (!module.isEmpty())
+        {
+                qDebug() << "Loading module" << module << "(" << s << ")";
+                StelModule* m = mgr->loadPlugin(module/*,init=true, implies register*/);
+                if (m != NULL)
+                {
+                        mgr->registerModule(m, true);
+                        m->init();
+                        pluginsSelectionChanged(s);
+                }
+        }
+}
+
+void ConfigurationDialog::pluginDisableCurrentSelection()
+{
+        QString s = ui->pluginsListWidget->currentItem()->text();
+        if (s.isEmpty())
+            return;
+
+        StelModuleMgr *mgr = &StelApp::getInstance().getModuleMgr();
+        QString module = mgr->getIdForName(s);
+
+        if (!module.isEmpty())
+        {
+                qDebug() << "Unloading module" << module << "(" << s << ")";
+                mgr->unloadModule(module, /*alsoDelete=*/true);
+                pluginsSelectionChanged(s);
+        }
 }
 
 void ConfigurationDialog::runScriptClicked(void)

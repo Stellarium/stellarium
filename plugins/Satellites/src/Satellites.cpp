@@ -84,10 +84,19 @@ void Satellites::deinit()
 {
 	Satellite::hintTexture.clear();
 	texPointer.clear();
+        StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+        Q_ASSERT(gui);
+        gui->removeGuiAction(gui->getGuiActions("actionShow_Satellite_ConfigDialog"));
+        gui->removeGuiAction(gui->getGuiActions("actionShow_Satellite_Labels"));
+        gui->removeGuiAction(gui->getGuiActions("actionShow_Satellite_Hints"));
 }
 
 Satellites::~Satellites()
 {
+        StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+        Q_ASSERT(gui);
+        gui->getButtonBar()->removeButton(toolbarButton, "065-pluginsGroup");
+        delete toolbarButton;
 	delete configDialog;
 	
 	if (pxmapGlow)
