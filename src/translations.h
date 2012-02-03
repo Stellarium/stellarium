@@ -192,9 +192,10 @@ class Translations
 		N_("Zodiac");
 
 		// Scripts description
-		N_("Look round each installed landscape.");
-		N_("Attempt to re-implement simple script from the old scripting engine. Each old style command is shown first as a command with OLD: at the start of the line to help users of the old scripting engine learn how to use the new one.");
-		N_("A slow, infinite tour of the sky, looking at random objects.");
+		N_("Look around each installed landscape.");
+		N_("Script to demonstrate a partial lunar eclipse.");
+        N_("Script to demonstrate a total lunar eclipse.");
+        N_("A slow, infinite tour of the sky, looking at random objects.");
 		N_("Script to demonstrate a total solar eclipse which will happen in 2009 (location=Rangpur, Bangladesh).");
 		N_("Script which runs automatically at startup");
 		N_("This script displays the constellations of the Zodiac. That means the constellations which lie along the line which the Sun traces accross the celestial sphere over the course of a year.");
