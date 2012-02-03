@@ -135,7 +135,6 @@ class Translations
 		// TRANSLATORS: Name of supernova SN 1604A
 		N_("Kepler's Supernova");
 		
-		
 		// Cardinals names
 		N_("N");	// North
 		N_("S");	// South
@@ -175,6 +174,30 @@ class Translations
 		N_("Mars");
 		// TRANSLATORS: Name of landscape and planet
 		N_("Saturn");
+
+		// Scripts names
+		// TRANSLATORS: Name of script
+		N_("Landscape Tour");
+		// TRANSLATORS: Name of script
+		N_("Partial Lunar Eclipse");
+		// TRANSLATORS: Name of script
+		N_("Total Lunar Eclipse");
+		// TRANSLATORS: Name of script
+		N_("Screensaver");
+		// TRANSLATORS: Name of script
+		N_("Solar Eclipse 2009");
+		// TRANSLATORS: Name of script
+		N_("Startup Script");
+		// TRANSLATORS: Name of script
+		N_("Zodiac");
+
+		// Scripts description
+		N_("Look round each installed landscape.");
+		N_("Attempt to re-implement simple script from the old scripting engine. Each old style command is shown first as a command with OLD: at the start of the line to help users of the old scripting engine learn how to use the new one.");
+		N_("A slow, infinite tour of the sky, looking at random objects.");
+		N_("Script to demonstrate a total solar eclipse which will happen in 2009 (location=Rangpur, Bangladesh).");
+		N_("Script which runs automatically at startup");
+		N_("This script displays the constellations of the Zodiac. That means the constellations which lie along the line which the Sun traces accross the celestial sphere over the course of a year.");
 
 		// List of countries
 		N_("Andorra");
