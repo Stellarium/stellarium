@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-13 23:26+0700\n"
-"PO-Revision-Date: 2011-08-20 08:42+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2012-02-03 23:33+0700\n"
+"PO-Revision-Date: 2012-01-31 14:40+0000\n"
+"Last-Translator: Abdurrahman Naufal <arnaufal7@yahoo.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-14 04:42+0000\n"
-"X-Generator: Launchpad (build 14664)\n"
+"X-Launchpad-Export-Date: 2012-02-04 05:01+0000\n"
+"X-Generator: Launchpad (build 14738)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -35,11 +35,11 @@ msgstr "Garis melintang"
 
 #: src/core/modules/GridLinesMgr.cpp:558
 msgid "Galactic Plane"
-msgstr ""
+msgstr "Bidang Galaksi"
 
 #: src/core/modules/LandscapeMgr.cpp:486
 msgid "Author: "
-msgstr "Pembuat "
+msgstr "Pembuat: "
 
 #: src/core/modules/LandscapeMgr.cpp:489
 msgid "Location: "
@@ -54,19 +54,20 @@ msgstr ", %1 m"
 msgid "Planet: "
 msgstr "Planet: "
 
-#: src/core/modules/Nebula.cpp:96
+#: src/core/modules/Nebula.cpp:96 plugins/Supernovae/src/Supernova.cpp:99
+#: plugins/Quasars/src/Quasar.cpp:92
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Tipe: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:123
-#: plugins/Supernovae/src/Supernova.cpp:101 plugins/Quasars/src/Quasar.cpp:103
+#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Magnitudo: <b>%1</b> (terekstingsi menjadi: <b>%2</b>"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
-#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:115
+#: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnitudo: <b>%1</b>"
@@ -109,7 +110,7 @@ msgid "Undocumented type"
 msgstr "Tipe tidak terdokumentasi"
 
 #: src/core/modules/Planet.cpp:129 src/core/modules/StarWrapper.cpp:124
-#: plugins/Quasars/src/Quasar.cpp:120
+#: plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Magnitudo Mutlak: %1"
@@ -117,17 +118,17 @@ msgstr "Magnitudo Mutlak: %1"
 #: src/core/modules/Planet.cpp:142
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr ""
+msgstr "Geosentris Ekliptika (saat ini): %1/%2"
 
 #: src/core/modules/Planet.cpp:143
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr ""
+msgstr "Kemiringan (saat ini): %1"
 
 #: src/core/modules/Planet.cpp:153
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "Jarak: %1AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:160
 #, no-c-format, qt-format
@@ -147,17 +148,18 @@ msgstr "Magnitudo: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "Magnitudo Semu: <b>%1</b> (oleh ekstingsi)"
 
-#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:97
+#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 msgstr ""
+"Magnitudo: <b>%1</b> (terekstingsi menjadi: <b>%2</b>, B-V: <b>%3</b>)"
 
-#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:111
+#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr ""
+msgstr "Magnitudo: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
 #, qt-format
@@ -165,7 +167,7 @@ msgid "Spectral Type: %1"
 msgstr "Tipe Spektral: %1"
 
 #: src/core/modules/StarWrapper.cpp:134
-#: plugins/Supernovae/src/Supernova.cpp:114
+#: plugins/Supernovae/src/Supernova.cpp:117
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Jarak: %1 Tahun Cahaya"
@@ -305,11 +307,11 @@ msgstr "Sudut jam/DE: %1/%2"
 
 #: src/core/StelObject.cpp:104 src/core/StelObject.cpp:123
 msgid "(geometric)"
-msgstr ""
+msgstr "(geometris)"
 
 #: src/core/StelObject.cpp:107 src/core/StelObject.cpp:129
 msgid "(apparent)"
-msgstr ""
+msgstr "(kentara)"
 
 #: src/core/StelObject.cpp:123 src/core/StelObject.cpp:129
 #: src/core/StelObject.cpp:132
@@ -340,23 +342,23 @@ msgstr "Penulis"
 msgid "Contact"
 msgstr "Kontak"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:617
 msgid "Author"
 msgstr "Penulis"
 
-#: src/gui/ConfigurationDialog.cpp:616
+#: src/gui/ConfigurationDialog.cpp:621
 msgid "License"
 msgstr "Lisensi"
 
-#: src/gui/ConfigurationDialog.cpp:644
+#: src/gui/ConfigurationDialog.cpp:650
 msgid "Running script: "
 msgstr "Menjalankan skrip: "
 
-#: src/gui/ConfigurationDialog.cpp:651
+#: src/gui/ConfigurationDialog.cpp:657
 msgid "Running script: [none]"
 msgstr "Menjalankan skrip: [tidak ada]"
 
-#: src/gui/ConfigurationDialog.cpp:721
+#: src/gui/ConfigurationDialog.cpp:727
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -364,16 +366,16 @@ msgstr ""
 "Telah selesai mengunduh katalog bintang baru!\n"
 "Jalankan ulang Stellarium untuk menampilkannya."
 
-#: src/gui/ConfigurationDialog.cpp:725
+#: src/gui/ConfigurationDialog.cpp:731
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "Seluruh katalog bintang yang tersedia telah dipasang."
 
-#: src/gui/ConfigurationDialog.cpp:730
+#: src/gui/ConfigurationDialog.cpp:736
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Ambil katalog %1 dari %2"
 
-#: src/gui/ConfigurationDialog.cpp:737
+#: src/gui/ConfigurationDialog.cpp:743
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -382,7 +384,7 @@ msgstr ""
 "Mengunduh %1...\n"
 "(Anda dapat menutup jendela ini.)"
 
-#: src/gui/ConfigurationDialog.cpp:744
+#: src/gui/ConfigurationDialog.cpp:750
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -393,7 +395,7 @@ msgstr ""
 "Jumlah bintang: %2 juta\n"
 "Kisaran magnitudo: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:787 src/gui/ConfigurationDialog.cpp:823
+#: src/gui/ConfigurationDialog.cpp:793 src/gui/ConfigurationDialog.cpp:829
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -402,11 +404,11 @@ msgstr ""
 "Kesalahan mengunduh %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:875
+#: src/gui/ConfigurationDialog.cpp:881
 msgid "Verifying file integrity..."
 msgstr "Memverifikasi integritas berkas..."
 
-#: src/gui/ConfigurationDialog.cpp:879
+#: src/gui/ConfigurationDialog.cpp:885
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -646,7 +648,7 @@ msgstr "Grid galaksi"
 
 #: src/gui/StelGui.cpp:110
 msgid "Galactic plane"
-msgstr ""
+msgstr "Bidang galaksi"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1126
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:334
@@ -666,7 +668,7 @@ msgstr "Garis meridian"
 #: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1125
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:348
 msgid "Horizon line"
-msgstr ""
+msgstr "Garis cakrawala"
 
 #: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1128
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:291
@@ -701,7 +703,7 @@ msgstr "Bintang"
 #: src/gui/StelGui.cpp:124
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
 msgid "Planet labels"
-msgstr ""
+msgstr "Nama planet"
 
 #: src/gui/StelGui.cpp:125
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:300
@@ -1008,12 +1010,12 @@ msgid "Earth"
 msgstr "Bumi"
 
 #. TRANSLATORS: Name of landscape and Earth's satellite
-#: src/translations.h:37 src/translations.h:167
+#: src/translations.h:37 src/translations.h:166
 msgid "Moon"
 msgstr "Bulan"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:38 src/translations.h:175
+#: src/translations.h:38 src/translations.h:174
 msgid "Mars"
 msgstr "Mars"
 
@@ -1063,47 +1065,47 @@ msgstr "Callisto"
 
 #: src/translations.h:50
 msgid "Amalthea"
-msgstr ""
+msgstr "Amalthea"
 
 #: src/translations.h:51
 msgid "Himalia"
-msgstr ""
+msgstr "Himalia"
 
 #: src/translations.h:52
 msgid "Elara"
-msgstr ""
+msgstr "Elara"
 
 #: src/translations.h:53
 msgid "Pasiphae"
-msgstr ""
+msgstr "Pasiphae"
 
 #: src/translations.h:54
 msgid "Sinope"
-msgstr ""
+msgstr "Sinope"
 
 #: src/translations.h:55
 msgid "Lysithea"
-msgstr ""
+msgstr "Lysithea"
 
 #: src/translations.h:56
 msgid "Carme"
-msgstr ""
+msgstr "Carme"
 
 #: src/translations.h:57
 msgid "Ananke"
-msgstr ""
+msgstr "Ananke"
 
 #: src/translations.h:58
 msgid "Leda"
-msgstr ""
+msgstr "Leda"
 
 #: src/translations.h:59
 msgid "Thebe"
-msgstr ""
+msgstr "Thebe"
 
 #: src/translations.h:60
 msgid "Adrastea"
-msgstr ""
+msgstr "Andrastea"
 
 #. TRANSLATORS: Asteroid (9) Metis
 #: src/translations.h:61 src/translations.h:119
@@ -1111,7 +1113,7 @@ msgid "Metis"
 msgstr "Metis"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:62 src/translations.h:177
+#: src/translations.h:62 src/translations.h:176
 msgid "Saturn"
 msgstr "Saturnus"
 
@@ -1190,12 +1192,12 @@ msgstr "Charon"
 #. TRANSLATORS: Moon of Pluto (II)
 #: src/translations.h:82
 msgid "Nix"
-msgstr ""
+msgstr "Nix"
 
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
 msgid "Hydra (moon)"
-msgstr ""
+msgstr "Hydra (bulan)"
 
 #: src/translations.h:85
 msgid "Eris"
@@ -1203,55 +1205,55 @@ msgstr "Eris"
 
 #: src/translations.h:86
 msgid "Triton"
-msgstr ""
+msgstr "Triton"
 
 #: src/translations.h:87
 msgid "Nereid"
-msgstr ""
+msgstr "Nereid"
 
 #: src/translations.h:88
 msgid "Naiad"
-msgstr ""
+msgstr "Naiad"
 
 #: src/translations.h:89
 msgid "Thalassa"
-msgstr ""
+msgstr "Thalassa"
 
 #: src/translations.h:90
 msgid "Despina"
-msgstr ""
+msgstr "Despina"
 
 #: src/translations.h:91
 msgid "Galatea"
-msgstr ""
+msgstr "Galatea"
 
 #: src/translations.h:92
 msgid "Larissa"
-msgstr ""
+msgstr "Larissa"
 
 #: src/translations.h:93
 msgid "Proteus"
-msgstr ""
+msgstr "Proteus"
 
 #: src/translations.h:94
 msgid "Halimede"
-msgstr ""
+msgstr "Halimede"
 
 #: src/translations.h:95
 msgid "Psamathe"
-msgstr ""
+msgstr "Psamathe"
 
 #: src/translations.h:96
 msgid "Sao"
-msgstr ""
+msgstr "Sao"
 
 #: src/translations.h:97
 msgid "Laomedeia"
-msgstr ""
+msgstr "Laomedeia"
 
 #: src/translations.h:98
 msgid "Neso"
-msgstr ""
+msgstr "Neso"
 
 #: src/translations.h:99
 msgid "Solar System Observer"
@@ -1260,22 +1262,22 @@ msgstr "Pengamat Tata Surya"
 #. TRANSLATORS: TNO/Asteroid (90377) Sedna
 #: src/translations.h:102
 msgid "Sedna"
-msgstr ""
+msgstr "Sedna"
 
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
 #: src/translations.h:104
 msgid "Quaoar"
-msgstr ""
+msgstr "Quaoar"
 
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
 #: src/translations.h:106
 msgid "Orcus"
-msgstr ""
+msgstr "Orcus"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
 #: src/translations.h:108
 msgid "Haumea"
-msgstr ""
+msgstr "Haumea"
 
 #. TRANSLATORS: Asteroid (5) Astraea
 #: src/translations.h:111
@@ -1330,1073 +1332,1141 @@ msgstr "Hektor"
 #. TRANSLATORS: Name of supernova SN 1572A
 #: src/translations.h:134
 msgid "Tycho's Supernova"
-msgstr ""
+msgstr "Supernova Tycho"
 
 #. TRANSLATORS: Name of supernova SN 1604A
 #: src/translations.h:136
 msgid "Kepler's Supernova"
-msgstr ""
+msgstr "Supernova Kepler"
 
-#: src/translations.h:140
+#: src/translations.h:139
 msgid "N"
 msgstr "U"
 
-#: src/translations.h:141
+#: src/translations.h:140
 msgid "S"
 msgstr "S"
 
-#: src/translations.h:142
+#: src/translations.h:141
 msgid "E"
 msgstr "T"
 
-#: src/translations.h:143
+#: src/translations.h:142
 msgid "W"
 msgstr "B"
 
-#: src/translations.h:146
+#: src/translations.h:145
 msgid "Arabic"
-msgstr ""
+msgstr "Arab"
 
-#: src/translations.h:147
+#: src/translations.h:146
 msgid "Aztec"
 msgstr "Aztec"
 
-#: src/translations.h:148
+#: src/translations.h:147
 msgid "Chinese"
 msgstr "China"
 
-#: src/translations.h:149
+#: src/translations.h:148
 msgid "Egyptian"
 msgstr "Mesir"
 
-#: src/translations.h:150
+#: src/translations.h:149
 msgid "Inuit"
 msgstr "Inuit"
 
-#: src/translations.h:151
+#: src/translations.h:150
 msgid "Korean"
 msgstr "Korea"
 
-#: src/translations.h:152
+#: src/translations.h:151
 msgid "Lakota"
 msgstr "Lakota"
 
-#: src/translations.h:153
+#: src/translations.h:152
 msgid "Maori"
 msgstr "Maori"
 
-#: src/translations.h:154
+#: src/translations.h:153
 msgid "Navajo"
 msgstr "Navajo"
 
-#: src/translations.h:155
+#: src/translations.h:154
 msgid "Norse"
 msgstr "Norwegia"
 
-#: src/translations.h:156
+#: src/translations.h:155
 msgid "Polynesian"
 msgstr "Polinesia"
 
-#: src/translations.h:157
+#: src/translations.h:156
 msgid "Sami"
 msgstr "Sami"
 
-#: src/translations.h:158
+#: src/translations.h:157
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
-#: src/translations.h:159
+#: src/translations.h:158
 msgid "Western"
 msgstr "Barat"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:163
+#: src/translations.h:162
 msgid "Guereins"
-msgstr ""
+msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:165
+#: src/translations.h:164
 msgid "Trees"
-msgstr ""
+msgstr "Pepohonan"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:169
+#: src/translations.h:168
 msgid "Hurricane"
-msgstr ""
+msgstr "Hurricane"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:171
+#: src/translations.h:170
 msgid "Ocean"
-msgstr ""
+msgstr "Samudera"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:173
+#: src/translations.h:172
 msgid "Garching"
-msgstr ""
+msgstr "Garching"
 
+#. TRANSLATORS: Name of script
 #: src/translations.h:180
-msgid "Andorra"
+msgid "Landscape Tour"
 msgstr ""
 
-#: src/translations.h:181
-msgid "United Arab Emirates"
-msgstr ""
-
+#. TRANSLATORS: Name of script
 #: src/translations.h:182
-msgid "Afghanistan"
+msgid "Partial Lunar Eclipse"
 msgstr ""
 
-#: src/translations.h:183
-msgid "Antigua and Barbuda"
-msgstr ""
-
+#. TRANSLATORS: Name of script
 #: src/translations.h:184
-msgid "Anguilla"
+msgid "Total Lunar Eclipse"
 msgstr ""
 
-#: src/translations.h:185
-msgid "Albania"
-msgstr ""
-
+#. TRANSLATORS: Name of script
 #: src/translations.h:186
-msgid "Armenia"
+msgid "Screensaver"
 msgstr ""
 
-#: src/translations.h:187
-msgid "Netherlands Antilles"
-msgstr ""
-
+#. TRANSLATORS: Name of script
 #: src/translations.h:188
-msgid "Angola"
+msgid "Solar Eclipse 2009"
 msgstr ""
 
-#: src/translations.h:189
-msgid "Antarctica"
-msgstr ""
-
+#. TRANSLATORS: Name of script
 #: src/translations.h:190
-msgid "Argentina"
+msgid "Startup Script"
 msgstr ""
 
-#: src/translations.h:191
-msgid "American Samoa"
-msgstr ""
-
+#. TRANSLATORS: Name of script
 #: src/translations.h:192
-msgid "Austria"
-msgstr ""
-
-#: src/translations.h:193
-msgid "Australia"
-msgstr ""
-
-#: src/translations.h:194
-msgid "Aruba"
+msgid "Zodiac"
 msgstr ""
 
 #: src/translations.h:195
-msgid "Azerbaijan"
+msgid "Look around each installed landscape."
 msgstr ""
 
 #: src/translations.h:196
-msgid "Bosnia and Herzegowina"
+msgid "Script to demonstrate a partial lunar eclipse."
 msgstr ""
 
 #: src/translations.h:197
-msgid "Barbados"
+msgid "Script to demonstrate a total lunar eclipse."
 msgstr ""
 
 #: src/translations.h:198
-msgid "Bangladesh"
+msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 
 #: src/translations.h:199
-msgid "Belgium"
+msgid ""
+"Script to demonstrate a total solar eclipse which has happened in 2009 "
+"(location=Rangpur, Bangladesh)."
 msgstr ""
 
 #: src/translations.h:200
-msgid "Burkina Faso"
+msgid "Script which runs automatically at startup"
 msgstr ""
 
 #: src/translations.h:201
-msgid "Bulgaria"
-msgstr ""
-
-#: src/translations.h:202
-msgid "Bahrain"
-msgstr ""
-
-#: src/translations.h:203
-msgid "Burundi"
+msgid ""
+"This script displays the constellations of the Zodiac. That means the "
+"constellations which lie along the line which the Sun traces across the "
+"celestial sphere over the course of a year."
 msgstr ""
 
 #: src/translations.h:204
-msgid "Benin"
-msgstr ""
+msgid "Andorra"
+msgstr "Andorra"
 
 #: src/translations.h:205
-msgid "Bermuda"
-msgstr ""
+msgid "United Arab Emirates"
+msgstr "Uni Emirat Arab"
 
 #: src/translations.h:206
-msgid "Brunei Darussalam"
-msgstr ""
+msgid "Afghanistan"
+msgstr "Afghanistan"
 
 #: src/translations.h:207
-msgid "Bolivia"
-msgstr ""
+msgid "Antigua and Barbuda"
+msgstr "Antigua dan Barbuda"
 
 #: src/translations.h:208
-msgid "Brazil"
-msgstr ""
+msgid "Anguilla"
+msgstr "Anguilla"
 
 #: src/translations.h:209
-msgid "Bahamas"
-msgstr ""
+msgid "Albania"
+msgstr "Albania"
 
 #: src/translations.h:210
-msgid "Bhutan"
-msgstr ""
+msgid "Armenia"
+msgstr "Armenia"
 
 #: src/translations.h:211
-msgid "Bouvet Island"
-msgstr ""
+msgid "Netherlands Antilles"
+msgstr "Antillen Belanda"
 
 #: src/translations.h:212
-msgid "Botswana"
-msgstr ""
+msgid "Angola"
+msgstr "Angola"
 
 #: src/translations.h:213
-msgid "Belarus"
-msgstr ""
+msgid "Antarctica"
+msgstr "Antartika"
 
 #: src/translations.h:214
-msgid "Belize"
-msgstr ""
+msgid "Argentina"
+msgstr "Argentina"
 
 #: src/translations.h:215
-msgid "Canada"
-msgstr ""
+msgid "American Samoa"
+msgstr "Samoa Amerika"
 
 #: src/translations.h:216
-msgid "Cocos Islands"
-msgstr ""
+msgid "Austria"
+msgstr "Austria"
 
 #: src/translations.h:217
-msgid "Democratic Republic of the Congo"
-msgstr ""
+msgid "Australia"
+msgstr "Australia"
 
 #: src/translations.h:218
-msgid "Central African Republic"
-msgstr ""
+msgid "Aruba"
+msgstr "Aruba"
 
 #: src/translations.h:219
-msgid "Republic of the Congo"
-msgstr ""
+msgid "Azerbaijan"
+msgstr "Azerbaijan"
 
 #: src/translations.h:220
-msgid "Switzerland"
-msgstr ""
+msgid "Bosnia and Herzegowina"
+msgstr "Bosnia dan Herzegowina"
 
 #: src/translations.h:221
-msgid "Cote d'Ivoire"
-msgstr ""
+msgid "Barbados"
+msgstr "Barbados"
 
 #: src/translations.h:222
-msgid "Cook Islands"
-msgstr ""
+msgid "Bangladesh"
+msgstr "Bangladesh"
 
 #: src/translations.h:223
-msgid "Chile"
-msgstr ""
+msgid "Belgium"
+msgstr "Belgia"
 
 #: src/translations.h:224
-msgid "Cameroon"
-msgstr ""
+msgid "Burkina Faso"
+msgstr "Burkina Faso"
 
 #: src/translations.h:225
-msgid "China"
-msgstr ""
+msgid "Bulgaria"
+msgstr "Bulgaria"
 
 #: src/translations.h:226
-msgid "Colombia"
-msgstr ""
+msgid "Bahrain"
+msgstr "Bahrain"
 
 #: src/translations.h:227
-msgid "Costa Rica"
-msgstr ""
+msgid "Burundi"
+msgstr "Burundi"
 
 #: src/translations.h:228
-msgid "Serbia and Montenegro"
-msgstr ""
+msgid "Benin"
+msgstr "Benin"
 
 #: src/translations.h:229
-msgid "Cuba"
-msgstr ""
+msgid "Bermuda"
+msgstr "Bermuda"
 
 #: src/translations.h:230
-msgid "Cape Verde"
-msgstr ""
+msgid "Brunei Darussalam"
+msgstr "Brunei Darussalam"
 
 #: src/translations.h:231
-msgid "Christmas Island"
-msgstr ""
+msgid "Bolivia"
+msgstr "Bolivia"
 
 #: src/translations.h:232
-msgid "Cyprus"
-msgstr ""
+msgid "Brazil"
+msgstr "Brasil"
 
 #: src/translations.h:233
-msgid "Czech Republic"
-msgstr ""
+msgid "Bahamas"
+msgstr "Bahama"
 
 #: src/translations.h:234
-msgid "Germany"
-msgstr ""
+msgid "Bhutan"
+msgstr "Bhutan"
 
 #: src/translations.h:235
-msgid "Djibouti"
-msgstr ""
+msgid "Bouvet Island"
+msgstr "Pulau Bouvet"
 
 #: src/translations.h:236
-msgid "Denmark"
-msgstr ""
+msgid "Botswana"
+msgstr "Botswana"
 
 #: src/translations.h:237
-msgid "Dominica"
-msgstr ""
+msgid "Belarus"
+msgstr "Belarusia"
 
 #: src/translations.h:238
-msgid "Dominican Republic"
-msgstr ""
+msgid "Belize"
+msgstr "Belize"
 
 #: src/translations.h:239
-msgid "Algeria"
-msgstr ""
+msgid "Canada"
+msgstr "Kanada"
 
 #: src/translations.h:240
-msgid "Ecuador"
-msgstr ""
+msgid "Cocos Islands"
+msgstr "Kepulauan Cocos"
 
 #: src/translations.h:241
-msgid "Estonia"
-msgstr ""
+msgid "Democratic Republic of the Congo"
+msgstr "Republik Demokratik Kongo"
 
 #: src/translations.h:242
-msgid "Egypt"
-msgstr ""
+msgid "Central African Republic"
+msgstr "Republik Afrika Tengah"
 
 #: src/translations.h:243
-msgid "Western Sahara"
-msgstr ""
+msgid "Republic of the Congo"
+msgstr "Republik Kongo"
 
 #: src/translations.h:244
-msgid "Eritrea"
-msgstr ""
+msgid "Switzerland"
+msgstr "Swiss"
 
 #: src/translations.h:245
-msgid "Spain"
-msgstr ""
+msgid "Cote d'Ivoire"
+msgstr "Pantai Gading"
 
 #: src/translations.h:246
-msgid "Ethiopia"
-msgstr ""
+msgid "Cook Islands"
+msgstr "Kepulauan Cook"
 
 #: src/translations.h:247
-msgid "Finland"
-msgstr ""
+msgid "Chile"
+msgstr "Chile"
 
 #: src/translations.h:248
-msgid "Fiji"
-msgstr ""
+msgid "Cameroon"
+msgstr "Kamerun"
 
 #: src/translations.h:249
-msgid "Falkland Islands"
-msgstr ""
+msgid "China"
+msgstr "Cina"
 
 #: src/translations.h:250
-msgid "Micronesia"
-msgstr ""
+msgid "Colombia"
+msgstr "Kolombia"
 
 #: src/translations.h:251
-msgid "Faroe Islands"
-msgstr ""
+msgid "Costa Rica"
+msgstr "Kosta Rika"
 
 #: src/translations.h:252
-msgid "France"
-msgstr ""
+msgid "Serbia and Montenegro"
+msgstr "Serbia dan Montenegro"
 
 #: src/translations.h:253
-msgid "Gabon"
-msgstr ""
+msgid "Cuba"
+msgstr "Kuba"
 
 #: src/translations.h:254
-msgid "United Kingdom"
-msgstr ""
+msgid "Cape Verde"
+msgstr "Tanjung Verde"
 
 #: src/translations.h:255
-msgid "Grenada"
-msgstr ""
+msgid "Christmas Island"
+msgstr "Pulau Christmas"
 
 #: src/translations.h:256
-msgid "Georgia"
-msgstr ""
+msgid "Cyprus"
+msgstr "Siprus"
 
 #: src/translations.h:257
-msgid "French Guiana"
-msgstr ""
+msgid "Czech Republic"
+msgstr "Repulik Czech"
 
 #: src/translations.h:258
-msgid "Ghana"
-msgstr ""
+msgid "Germany"
+msgstr "Jerman"
 
 #: src/translations.h:259
-msgid "Gibraltar"
-msgstr ""
+msgid "Djibouti"
+msgstr "Djibouti"
 
 #: src/translations.h:260
-msgid "Greenland"
-msgstr ""
+msgid "Denmark"
+msgstr "Denmark"
 
 #: src/translations.h:261
-msgid "Gambia"
-msgstr ""
+msgid "Dominica"
+msgstr "Dominika"
 
 #: src/translations.h:262
-msgid "Guinea"
-msgstr ""
+msgid "Dominican Republic"
+msgstr "Republik Dominika"
 
 #: src/translations.h:263
-msgid "Guadeloupe"
-msgstr ""
+msgid "Algeria"
+msgstr "Aljazair"
 
 #: src/translations.h:264
-msgid "Equatorial Guinea"
-msgstr ""
+msgid "Ecuador"
+msgstr "Ekuador"
 
 #: src/translations.h:265
-msgid "Greece"
-msgstr ""
+msgid "Estonia"
+msgstr "Estonia"
 
 #: src/translations.h:266
-msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgid "Egypt"
+msgstr "Mesir"
 
 #: src/translations.h:267
-msgid "Guatemala"
-msgstr ""
+msgid "Western Sahara"
+msgstr "Sahara Barat"
 
 #: src/translations.h:268
+msgid "Eritrea"
+msgstr "Eritrea"
+
+#: src/translations.h:269
+msgid "Spain"
+msgstr "Spanyol"
+
+#: src/translations.h:270
+msgid "Ethiopia"
+msgstr "Ethiopia"
+
+#: src/translations.h:271
+msgid "Finland"
+msgstr "Finlandia"
+
+#: src/translations.h:272
+msgid "Fiji"
+msgstr "Kepulauan Fiji"
+
+#: src/translations.h:273
+msgid "Falkland Islands"
+msgstr "Kepulauan Falkland"
+
+#: src/translations.h:274
+msgid "Micronesia"
+msgstr "Mikronesia"
+
+#: src/translations.h:275
+msgid "Faroe Islands"
+msgstr "Kepulauan Faroe"
+
+#: src/translations.h:276
+msgid "France"
+msgstr "Perancis"
+
+#: src/translations.h:277
+msgid "Gabon"
+msgstr "Gabon"
+
+#: src/translations.h:278
+msgid "United Kingdom"
+msgstr "Inggris Raya"
+
+#: src/translations.h:279
+msgid "Grenada"
+msgstr "Grenada"
+
+#: src/translations.h:280
+msgid "Georgia"
+msgstr "Georgia"
+
+#: src/translations.h:281
+msgid "French Guiana"
+msgstr "Guyana Perancis"
+
+#: src/translations.h:282
+msgid "Ghana"
+msgstr "Ghana"
+
+#: src/translations.h:283
+msgid "Gibraltar"
+msgstr "Gibraltar"
+
+#: src/translations.h:284
+msgid "Greenland"
+msgstr "Greenland"
+
+#: src/translations.h:285
+msgid "Gambia"
+msgstr "Gambia"
+
+#: src/translations.h:286
+msgid "Guinea"
+msgstr "Guinea"
+
+#: src/translations.h:287
+msgid "Guadeloupe"
+msgstr "Guadeloupe"
+
+#: src/translations.h:288
+msgid "Equatorial Guinea"
+msgstr "Guinea Khatulistiwa"
+
+#: src/translations.h:289
+msgid "Greece"
+msgstr "Yunani"
+
+#: src/translations.h:290
+msgid "South Georgia and the South Sandwich Islands"
+msgstr "Kepulauan Georgia Selatan dan Sandwich Selatan"
+
+#: src/translations.h:291
+msgid "Guatemala"
+msgstr "Guatemala"
+
+#: src/translations.h:292
 msgid "Guam"
 msgstr ""
 
-#: src/translations.h:269
-msgid "Guinea-Bissau"
-msgstr ""
-
-#: src/translations.h:270
-msgid "Guyana"
-msgstr ""
-
-#: src/translations.h:271
-msgid "Hong Kong"
-msgstr ""
-
-#: src/translations.h:272
-msgid "Heard Island and McDonald Islands"
-msgstr ""
-
-#: src/translations.h:273
-msgid "Honduras"
-msgstr ""
-
-#: src/translations.h:274
-msgid "Croatia"
-msgstr ""
-
-#: src/translations.h:275
-msgid "Haiti"
-msgstr ""
-
-#: src/translations.h:276
-msgid "Hungary"
-msgstr ""
-
-#: src/translations.h:277
-msgid "Indonesia"
-msgstr ""
-
-#: src/translations.h:278
-msgid "Ireland"
-msgstr ""
-
-#: src/translations.h:279
-msgid "Israel"
-msgstr ""
-
-#: src/translations.h:280
-msgid "India"
-msgstr ""
-
-#: src/translations.h:281
-msgid "British Indian Ocean Territory"
-msgstr ""
-
-#: src/translations.h:282
-msgid "Iraq"
-msgstr ""
-
-#: src/translations.h:283
-msgid "Iran"
-msgstr ""
-
-#: src/translations.h:284
-msgid "Iceland"
-msgstr ""
-
-#: src/translations.h:285
-msgid "Italy"
-msgstr ""
-
-#: src/translations.h:286
-msgid "Jamaica"
-msgstr ""
-
-#: src/translations.h:287
-msgid "Jordan"
-msgstr ""
-
-#: src/translations.h:288
-msgid "Japan"
-msgstr ""
-
-#: src/translations.h:289
-msgid "Kenya"
-msgstr ""
-
-#: src/translations.h:290
-msgid "Kyrgyzstan"
-msgstr ""
-
-#: src/translations.h:291
-msgid "Cambodia"
-msgstr ""
-
-#: src/translations.h:292
-msgid "Kiribati"
-msgstr ""
-
 #: src/translations.h:293
-msgid "Comoros"
-msgstr ""
+msgid "Guinea-Bissau"
+msgstr "Guinea-Bissau"
 
 #: src/translations.h:294
-msgid "Saint Kitts and Nevis"
-msgstr ""
+msgid "Guyana"
+msgstr "Guyana"
 
 #: src/translations.h:295
-msgid "Democratic People's Republic of Korea"
-msgstr ""
+msgid "Hong Kong"
+msgstr "Hong Kong"
 
 #: src/translations.h:296
-msgid "Republic of Korea"
-msgstr ""
+msgid "Heard Island and McDonald Islands"
+msgstr "Pulau Heard dan Kepulauan McDonald"
 
 #: src/translations.h:297
-msgid "Kuwait"
-msgstr ""
+msgid "Honduras"
+msgstr "Honduras"
 
 #: src/translations.h:298
-msgid "Cayman Islands"
-msgstr ""
+msgid "Croatia"
+msgstr "Kroasia"
 
 #: src/translations.h:299
-msgid "Kazakhstan"
-msgstr ""
+msgid "Haiti"
+msgstr "Haiti"
 
 #: src/translations.h:300
-msgid "Lao"
-msgstr ""
+msgid "Hungary"
+msgstr "Hungaria"
 
 #: src/translations.h:301
-msgid "Lebanon"
-msgstr ""
+msgid "Indonesia"
+msgstr "Indonesia"
 
 #: src/translations.h:302
-msgid "Saint Lucia"
-msgstr ""
+msgid "Ireland"
+msgstr "Irlandia"
 
 #: src/translations.h:303
-msgid "Liechtenstein"
-msgstr ""
+msgid "Israel"
+msgstr "Israel"
 
 #: src/translations.h:304
-msgid "Sri Lanka"
-msgstr ""
+msgid "India"
+msgstr "India"
 
 #: src/translations.h:305
-msgid "Liberia"
-msgstr ""
+msgid "British Indian Ocean Territory"
+msgstr "Wilayah Samudra Hindia Inggris"
 
 #: src/translations.h:306
-msgid "Lesotho"
-msgstr ""
+msgid "Iraq"
+msgstr "Irak"
 
 #: src/translations.h:307
-msgid "Lithuania"
-msgstr ""
+msgid "Iran"
+msgstr "Iran"
 
 #: src/translations.h:308
-msgid "Luxembourg"
-msgstr ""
+msgid "Iceland"
+msgstr "Islandia"
 
 #: src/translations.h:309
-msgid "Latvia"
-msgstr ""
+msgid "Italy"
+msgstr "Italia"
 
 #: src/translations.h:310
-msgid "Libyan Arab Jamahiriya"
-msgstr ""
+msgid "Jamaica"
+msgstr "Jamaika"
 
 #: src/translations.h:311
-msgid "Morocco"
-msgstr ""
+msgid "Jordan"
+msgstr "Yordania"
 
 #: src/translations.h:312
-msgid "Monaco"
-msgstr ""
+msgid "Japan"
+msgstr "Jepang"
 
 #: src/translations.h:313
-msgid "Moldova"
-msgstr ""
+msgid "Kenya"
+msgstr "Kenya"
 
 #: src/translations.h:314
-msgid "Madagascar"
-msgstr ""
+msgid "Kyrgyzstan"
+msgstr "Kirgistan"
 
 #: src/translations.h:315
-msgid "Marshall Islands"
-msgstr ""
+msgid "Cambodia"
+msgstr "Kamboja"
 
 #: src/translations.h:316
-msgid "Macedonia"
-msgstr ""
+msgid "Kiribati"
+msgstr "Kiribati"
 
 #: src/translations.h:317
-msgid "Mali"
-msgstr ""
+msgid "Comoros"
+msgstr "Komoro"
 
 #: src/translations.h:318
-msgid "Myanmar"
-msgstr ""
+msgid "Saint Kitts and Nevis"
+msgstr "Saint Kitts dan Nevis"
 
 #: src/translations.h:319
-msgid "Mongolia"
-msgstr ""
+msgid "Democratic People's Republic of Korea"
+msgstr "Republik Demokrat Rakyat Korea (Korea Utara)"
 
 #: src/translations.h:320
-msgid "Macau"
-msgstr ""
+msgid "Republic of Korea"
+msgstr "Republik Korea (Korea Selatan)"
 
 #: src/translations.h:321
-msgid "Northern Mariana Islands"
-msgstr ""
+msgid "Kuwait"
+msgstr "Kuwait"
 
 #: src/translations.h:322
-msgid "Martinique"
-msgstr ""
+msgid "Cayman Islands"
+msgstr "Kepulauan Cayman"
 
 #: src/translations.h:323
-msgid "Mauritania"
-msgstr ""
+msgid "Kazakhstan"
+msgstr "Kazakhstan"
 
 #: src/translations.h:324
-msgid "Montserrat"
-msgstr ""
+msgid "Lao"
+msgstr "Lao"
 
 #: src/translations.h:325
-msgid "Malta"
-msgstr ""
+msgid "Lebanon"
+msgstr "Lebanon"
 
 #: src/translations.h:326
-msgid "Mauritius"
-msgstr ""
+msgid "Saint Lucia"
+msgstr "Santa Lusia"
 
 #: src/translations.h:327
-msgid "Maldives"
-msgstr ""
+msgid "Liechtenstein"
+msgstr "Liechtenstein"
 
 #: src/translations.h:328
-msgid "Malawi"
-msgstr ""
+msgid "Sri Lanka"
+msgstr "Sri Lanka"
 
 #: src/translations.h:329
-msgid "Mexico"
-msgstr ""
+msgid "Liberia"
+msgstr "Liberia"
 
 #: src/translations.h:330
-msgid "Malaysia"
-msgstr ""
+msgid "Lesotho"
+msgstr "Lesotho"
 
 #: src/translations.h:331
-msgid "Mozambique"
-msgstr ""
+msgid "Lithuania"
+msgstr "Lithuania"
 
 #: src/translations.h:332
-msgid "Namibia"
-msgstr ""
+msgid "Luxembourg"
+msgstr "Luksemburg"
 
 #: src/translations.h:333
-msgid "New Caledonia"
-msgstr ""
+msgid "Latvia"
+msgstr "Latvia"
 
 #: src/translations.h:334
-msgid "Niger"
-msgstr ""
+msgid "Libyan Arab Jamahiriya"
+msgstr "Libya"
 
 #: src/translations.h:335
-msgid "Norfolk Island"
-msgstr ""
+msgid "Morocco"
+msgstr "Maroko"
 
 #: src/translations.h:336
-msgid "Nigeria"
-msgstr ""
+msgid "Monaco"
+msgstr "Monako"
 
 #: src/translations.h:337
-msgid "Nicaragua"
-msgstr ""
+msgid "Moldova"
+msgstr "Moldova"
 
 #: src/translations.h:338
-msgid "Netherlands"
-msgstr ""
+msgid "Madagascar"
+msgstr "Madagaskar"
 
 #: src/translations.h:339
-msgid "Norway"
-msgstr ""
+msgid "Marshall Islands"
+msgstr "Kepulauan Marshall"
 
 #: src/translations.h:340
-msgid "Nepal"
-msgstr ""
+msgid "Macedonia"
+msgstr "Makedonia"
 
 #: src/translations.h:341
-msgid "Nauru"
-msgstr ""
+msgid "Mali"
+msgstr "Mali"
 
 #: src/translations.h:342
-msgid "Niue"
-msgstr ""
+msgid "Myanmar"
+msgstr "Myanmar"
 
 #: src/translations.h:343
-msgid "New Zealand"
-msgstr ""
+msgid "Mongolia"
+msgstr "Mongolia"
 
 #: src/translations.h:344
-msgid "Oman"
-msgstr ""
+msgid "Macau"
+msgstr "Makau"
 
 #: src/translations.h:345
-msgid "Panama"
-msgstr ""
+msgid "Northern Mariana Islands"
+msgstr "Kepulauan Mariana Utara"
 
 #: src/translations.h:346
-msgid "Peru"
-msgstr ""
+msgid "Martinique"
+msgstr "Martinique"
 
 #: src/translations.h:347
-msgid "French Polynesia"
-msgstr ""
+msgid "Mauritania"
+msgstr "Mauritania"
 
 #: src/translations.h:348
-msgid "Papua New Guinea"
-msgstr ""
+msgid "Montserrat"
+msgstr "Montserrat"
 
 #: src/translations.h:349
-msgid "Philippines"
-msgstr ""
+msgid "Malta"
+msgstr "Malta"
 
 #: src/translations.h:350
-msgid "Pakistan"
-msgstr ""
+msgid "Mauritius"
+msgstr "Mauritius"
 
 #: src/translations.h:351
-msgid "Poland"
-msgstr ""
+msgid "Maldives"
+msgstr "Maladewa"
 
 #: src/translations.h:352
-msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgid "Malawi"
+msgstr "Malawi"
 
 #: src/translations.h:353
-msgid "Pitcairn"
-msgstr ""
+msgid "Mexico"
+msgstr "Meksiko"
 
 #: src/translations.h:354
-msgid "Puerto Rico"
-msgstr ""
+msgid "Malaysia"
+msgstr "Malaysia"
 
 #: src/translations.h:355
+msgid "Mozambique"
+msgstr "Mozambik"
+
+#: src/translations.h:356
+msgid "Namibia"
+msgstr "Namibia"
+
+#: src/translations.h:357
+msgid "New Caledonia"
+msgstr "Kaledonia Baru"
+
+#: src/translations.h:358
+msgid "Niger"
+msgstr "Niger"
+
+#: src/translations.h:359
+msgid "Norfolk Island"
+msgstr "Pulau Norfolk"
+
+#: src/translations.h:360
+msgid "Nigeria"
+msgstr "Nigeria"
+
+#: src/translations.h:361
+msgid "Nicaragua"
+msgstr "Nikaragua"
+
+#: src/translations.h:362
+msgid "Netherlands"
+msgstr "Belanda"
+
+#: src/translations.h:363
+msgid "Norway"
+msgstr "Norwegia"
+
+#: src/translations.h:364
+msgid "Nepal"
+msgstr "Nepal"
+
+#: src/translations.h:365
+msgid "Nauru"
+msgstr "Nauru"
+
+#: src/translations.h:366
+msgid "Niue"
+msgstr "Niue"
+
+#: src/translations.h:367
+msgid "New Zealand"
+msgstr "Selandia Baru"
+
+#: src/translations.h:368
+msgid "Oman"
+msgstr "Oman"
+
+#: src/translations.h:369
+msgid "Panama"
+msgstr "Panama"
+
+#: src/translations.h:370
+msgid "Peru"
+msgstr "Peru"
+
+#: src/translations.h:371
+msgid "French Polynesia"
+msgstr "Polinesia Perancis"
+
+#: src/translations.h:372
+msgid "Papua New Guinea"
+msgstr "Papua Nugini"
+
+#: src/translations.h:373
+msgid "Philippines"
+msgstr "Filipina"
+
+#: src/translations.h:374
+msgid "Pakistan"
+msgstr "Pakistan"
+
+#: src/translations.h:375
+msgid "Poland"
+msgstr "Polandia"
+
+#: src/translations.h:376
+msgid "Saint Pierre and Miquelon"
+msgstr "Saint Pierre dan Miquelon"
+
+#: src/translations.h:377
+msgid "Pitcairn"
+msgstr "Pitcairn"
+
+#: src/translations.h:378
+msgid "Puerto Rico"
+msgstr "Puerto Rico"
+
+#: src/translations.h:379
 msgid "Palestinian Territories"
 msgstr ""
 
-#: src/translations.h:356
-msgid "Portugal"
-msgstr ""
-
-#: src/translations.h:357
-msgid "Palau"
-msgstr ""
-
-#: src/translations.h:358
-msgid "Paraguay"
-msgstr ""
-
-#: src/translations.h:359
-msgid "Qatar"
-msgstr ""
-
-#: src/translations.h:360
-msgid "Réunion"
-msgstr ""
-
-#: src/translations.h:361
-msgid "Romania"
-msgstr ""
-
-#: src/translations.h:362
-msgid "Serbia"
-msgstr ""
-
-#: src/translations.h:363
-msgid "Russian Federation"
-msgstr ""
-
-#: src/translations.h:364
-msgid "Rwanda"
-msgstr ""
-
-#: src/translations.h:365
-msgid "Saudi Arabia"
-msgstr ""
-
-#: src/translations.h:366
-msgid "Solomon Islands"
-msgstr ""
-
-#: src/translations.h:367
-msgid "Seychelles"
-msgstr ""
-
-#: src/translations.h:368
-msgid "Sudan"
-msgstr ""
-
-#: src/translations.h:369
-msgid "Sweden"
-msgstr ""
-
-#: src/translations.h:370
-msgid "Singapore"
-msgstr ""
-
-#: src/translations.h:371
-msgid "Saint Helena"
-msgstr ""
-
-#: src/translations.h:372
-msgid "Slovenia"
-msgstr ""
-
-#: src/translations.h:373
-msgid "Svalbard and Jan Mayen"
-msgstr ""
-
-#: src/translations.h:374
-msgid "Slovakia"
-msgstr ""
-
-#: src/translations.h:375
-msgid "Sierra Leone"
-msgstr ""
-
-#: src/translations.h:376
-msgid "San Marino"
-msgstr ""
-
-#: src/translations.h:377
-msgid "Senegal"
-msgstr ""
-
-#: src/translations.h:378
-msgid "Somalia"
-msgstr ""
-
-#: src/translations.h:379
-msgid "Suriname"
-msgstr ""
-
 #: src/translations.h:380
-msgid "Sao Tome and Principe"
-msgstr ""
+msgid "Portugal"
+msgstr "Portugal"
 
 #: src/translations.h:381
-msgid "El Salvador"
-msgstr ""
+msgid "Palau"
+msgstr "Palau"
 
 #: src/translations.h:382
+msgid "Paraguay"
+msgstr "Paraguay"
+
+#: src/translations.h:383
+msgid "Qatar"
+msgstr "Qatar"
+
+#: src/translations.h:384
+msgid "Réunion"
+msgstr "Réunion"
+
+#: src/translations.h:385
+msgid "Romania"
+msgstr "Romania"
+
+#: src/translations.h:386
+msgid "Serbia"
+msgstr "Serbia"
+
+#: src/translations.h:387
+msgid "Russian Federation"
+msgstr "Federasi Rusia"
+
+#: src/translations.h:388
+msgid "Rwanda"
+msgstr "Rwanda"
+
+#: src/translations.h:389
+msgid "Saudi Arabia"
+msgstr "Arab Saudi"
+
+#: src/translations.h:390
+msgid "Solomon Islands"
+msgstr "Kepulauan Solomon"
+
+#: src/translations.h:391
+msgid "Seychelles"
+msgstr "Seychelles"
+
+#: src/translations.h:392
+msgid "Sudan"
+msgstr "Sudan"
+
+#: src/translations.h:393
+msgid "Sweden"
+msgstr "Swedia"
+
+#: src/translations.h:394
+msgid "Singapore"
+msgstr "Singapura"
+
+#: src/translations.h:395
+msgid "Saint Helena"
+msgstr "Saint Helena"
+
+#: src/translations.h:396
+msgid "Slovenia"
+msgstr "Slovenia"
+
+#: src/translations.h:397
+msgid "Svalbard and Jan Mayen"
+msgstr "Svalbard dan Jan Mayen"
+
+#: src/translations.h:398
+msgid "Slovakia"
+msgstr "Slovakia"
+
+#: src/translations.h:399
+msgid "Sierra Leone"
+msgstr "Sierra Leone"
+
+#: src/translations.h:400
+msgid "San Marino"
+msgstr "San Marino"
+
+#: src/translations.h:401
+msgid "Senegal"
+msgstr "Senegal"
+
+#: src/translations.h:402
+msgid "Somalia"
+msgstr "Somalia"
+
+#: src/translations.h:403
+msgid "Suriname"
+msgstr "Suriname"
+
+#: src/translations.h:404
+msgid "Sao Tome and Principe"
+msgstr "Sao Tome dan Principe"
+
+#: src/translations.h:405
+msgid "El Salvador"
+msgstr "El Salvador"
+
+#: src/translations.h:406
 msgid "Syrian Arab Republic"
 msgstr ""
 
-#: src/translations.h:383
+#: src/translations.h:407
 msgid "Swaziland"
-msgstr ""
+msgstr "Swaziland"
 
-#: src/translations.h:384
+#: src/translations.h:408
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "Kepulauan Turks dan Caicos"
 
-#: src/translations.h:385
+#: src/translations.h:409
 msgid "Chad"
-msgstr ""
+msgstr "Chad"
 
-#: src/translations.h:386
+#: src/translations.h:410
 msgid "French Southern Territories"
-msgstr ""
+msgstr "Wilayah Perancis Selatan"
 
-#: src/translations.h:387
+#: src/translations.h:411
 msgid "Togo"
-msgstr ""
+msgstr "Togo"
 
-#: src/translations.h:388
+#: src/translations.h:412
 msgid "Thailand"
-msgstr ""
+msgstr "Thailand"
 
-#: src/translations.h:389
+#: src/translations.h:413
 msgid "Tajikistan"
-msgstr ""
+msgstr "Tajikistan"
 
-#: src/translations.h:390
+#: src/translations.h:414
 msgid "Tokelau"
-msgstr ""
+msgstr "Tokelau"
 
-#: src/translations.h:391
+#: src/translations.h:415
 msgid "East Timor"
-msgstr ""
+msgstr "Timor Timur"
 
-#: src/translations.h:392
+#: src/translations.h:416
 msgid "Turkmenistan"
-msgstr ""
+msgstr "Turkmenistan"
 
-#: src/translations.h:393
+#: src/translations.h:417
 msgid "Tunisia"
-msgstr ""
+msgstr "Tunisia"
 
-#: src/translations.h:394
+#: src/translations.h:418
 msgid "Tonga"
-msgstr ""
+msgstr "Tonga"
 
-#: src/translations.h:395
+#: src/translations.h:419
 msgid "Turkey"
-msgstr ""
+msgstr "Turki"
 
-#: src/translations.h:396
+#: src/translations.h:420
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "Trinidad dan Tobago"
 
-#: src/translations.h:397
+#: src/translations.h:421
 msgid "Tuvalu"
-msgstr ""
+msgstr "Tuvalu"
 
-#: src/translations.h:398
+#: src/translations.h:422
 msgid "Taiwan"
-msgstr ""
+msgstr "Taiwan"
 
-#: src/translations.h:399
+#: src/translations.h:423
 msgid "Tanzania"
-msgstr ""
+msgstr "Tanzania"
 
-#: src/translations.h:400
+#: src/translations.h:424
 msgid "Ukraine"
-msgstr ""
+msgstr "Ukraina"
 
-#: src/translations.h:401
+#: src/translations.h:425
 msgid "Uganda"
-msgstr ""
+msgstr "Uganda"
 
-#: src/translations.h:402
+#: src/translations.h:426
 msgid "United States Minor Outlying Islands"
 msgstr ""
 
-#: src/translations.h:403
+#: src/translations.h:427
 msgid "United States"
-msgstr ""
+msgstr "Amerika Serikat"
 
-#: src/translations.h:404
+#: src/translations.h:428
 msgid "Uruguay"
-msgstr ""
+msgstr "Uruguay"
 
-#: src/translations.h:405
+#: src/translations.h:429
 msgid "Uzbekistan"
-msgstr ""
+msgstr "Uzbekistan"
 
-#: src/translations.h:406
+#: src/translations.h:430
 msgid "Vatican City State"
-msgstr ""
+msgstr "Vatikan"
 
-#: src/translations.h:407
+#: src/translations.h:431
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "St. Vincent dan The Grenadines"
 
-#: src/translations.h:408
+#: src/translations.h:432
 msgid "Venezuela"
-msgstr ""
+msgstr "Venezuela"
 
-#: src/translations.h:409
+#: src/translations.h:433
 msgid "British Virgin Islands"
-msgstr ""
+msgstr "Kepulauan Virgin Inggris"
 
-#: src/translations.h:410
+#: src/translations.h:434
 msgid "United States Virgin Islands"
 msgstr ""
 
-#: src/translations.h:411
+#: src/translations.h:435
 msgid "Viet Nam"
-msgstr ""
+msgstr "Vietnam"
 
-#: src/translations.h:412
+#: src/translations.h:436
 msgid "Vanuatu"
-msgstr ""
+msgstr "Vanuatu"
 
-#: src/translations.h:413
+#: src/translations.h:437
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "Wallis dan Futuna"
 
-#: src/translations.h:414
+#: src/translations.h:438
 msgid "Samoa"
-msgstr ""
+msgstr "Samoa"
 
-#: src/translations.h:415
+#: src/translations.h:439
 msgid "Yemen"
-msgstr ""
+msgstr "Yaman"
 
-#: src/translations.h:416
+#: src/translations.h:440
 msgid "Mayotte"
-msgstr ""
+msgstr "Mayotte"
 
-#: src/translations.h:417
+#: src/translations.h:441
 msgid "Yugoslavia"
-msgstr ""
+msgstr "Yugoslavia"
 
-#: src/translations.h:418
+#: src/translations.h:442
 msgid "South Africa"
-msgstr ""
+msgstr "Afrika Selatan"
 
-#: src/translations.h:419
+#: src/translations.h:443
 msgid "Zambia"
-msgstr ""
+msgstr "Zambia"
 
-#: src/translations.h:420
+#: src/translations.h:444
 msgid "Zimbabwe"
-msgstr ""
+msgstr "Zimbabwe"
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -2499,71 +2569,71 @@ msgstr "Cari Objek"
 
 #: src/ui_searchDialogGui.h:465
 msgid "Find Object or Position"
-msgstr ""
+msgstr "Temukan Objek atau Posisi"
 
 #: src/ui_searchDialogGui.h:471
 msgid "iota"
-msgstr ""
+msgstr "iota"
 
 #: src/ui_searchDialogGui.h:474
 msgid "alpha"
-msgstr ""
+msgstr "alfa"
 
 #: src/ui_searchDialogGui.h:477
 msgid "beta"
-msgstr ""
+msgstr "beta"
 
 #: src/ui_searchDialogGui.h:480
 msgid "gamma"
-msgstr ""
+msgstr "gamma"
 
 #: src/ui_searchDialogGui.h:483
 msgid "delta"
-msgstr ""
+msgstr "delta"
 
 #: src/ui_searchDialogGui.h:486
 msgid "epsilon"
-msgstr ""
+msgstr "epsilon"
 
 #: src/ui_searchDialogGui.h:489
 msgid "zeta"
-msgstr ""
+msgstr "zeta"
 
 #: src/ui_searchDialogGui.h:492
 msgid "eta"
-msgstr ""
+msgstr "eta"
 
 #: src/ui_searchDialogGui.h:495
 msgid "theta"
-msgstr ""
+msgstr "theta"
 
 #: src/ui_searchDialogGui.h:498
 msgid "kappa"
-msgstr ""
+msgstr "kappa"
 
 #: src/ui_searchDialogGui.h:501
 msgid "lambda"
-msgstr ""
+msgstr "lambda"
 
 #: src/ui_searchDialogGui.h:504
 msgid "mu"
-msgstr ""
+msgstr "mu"
 
 #: src/ui_searchDialogGui.h:507
 msgid "nu"
-msgstr ""
+msgstr "nu"
 
 #: src/ui_searchDialogGui.h:510
 msgid "xi"
-msgstr ""
+msgstr "xi"
 
 #: src/ui_searchDialogGui.h:513
 msgid "omicron"
-msgstr ""
+msgstr "omicron"
 
 #: src/ui_searchDialogGui.h:516
 msgid "pi"
-msgstr ""
+msgstr "pi"
 
 #: src/ui_searchDialogGui.h:519
 msgid "rho"
@@ -2571,31 +2641,31 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:522
 msgid "sigma"
-msgstr ""
+msgstr "sigma"
 
 #: src/ui_searchDialogGui.h:525
 msgid "tau"
-msgstr ""
+msgstr "tau"
 
 #: src/ui_searchDialogGui.h:528
 msgid "upsilon"
-msgstr ""
+msgstr "upsilon"
 
 #: src/ui_searchDialogGui.h:531
 msgid "phi"
-msgstr ""
+msgstr "phi"
 
 #: src/ui_searchDialogGui.h:534
 msgid "chi"
-msgstr ""
+msgstr "chi"
 
 #: src/ui_searchDialogGui.h:537
 msgid "psi"
-msgstr ""
+msgstr "psi"
 
 #: src/ui_searchDialogGui.h:540
 msgid "omega"
-msgstr ""
+msgstr "omega"
 
 #: src/ui_searchDialogGui.h:542
 msgid "Greek letters for Bayer designations"
@@ -2603,7 +2673,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:543
 msgid "Object"
-msgstr ""
+msgstr "Objek"
 
 #: src/ui_searchDialogGui.h:544
 msgid "RA/Dec (J2000):"
@@ -2611,7 +2681,7 @@ msgstr "RA/Dec (J2000):"
 
 #: src/ui_searchDialogGui.h:545
 msgid "Position"
-msgstr ""
+msgstr "Posisi"
 
 #: src/ui_searchDialogGui.h:546
 msgid "Search also in the SIMBAD on-line astronomical database"
@@ -2700,7 +2770,7 @@ msgstr "Tampilkan atmosfer"
 #: src/ui_viewDialog.h:1101
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:389
 msgid "Light pollution:"
-msgstr ""
+msgstr "Polusi udara:"
 
 #: src/ui_viewDialog.h:1103
 msgid "pressure, temperature, extinction coefficient"
@@ -2779,7 +2849,7 @@ msgstr "Tampilkan seni"
 #: src/ui_viewDialog.h:1134
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:284
 msgid "Art brightness:"
-msgstr ""
+msgstr "Kecerahan gambar:"
 
 #: src/ui_viewDialog.h:1135
 msgid "Projection"
@@ -3141,26 +3211,26 @@ msgstr ""
 
 #: src/ui_AtmosphereDialog.h:167
 msgid "Atmosphere Details"
-msgstr ""
+msgstr "Kerincian Atmosfer"
 
 #: src/ui_AtmosphereDialog.h:169
 msgid "Refraction Settings"
-msgstr ""
+msgstr "Pengaturan Pembiasan"
 
 #: src/ui_AtmosphereDialog.h:170
 msgid "Pressure (mbar):"
-msgstr ""
+msgstr "Tekanan (mbar):"
 
 #: src/ui_AtmosphereDialog.h:171
 msgid "Temperature (C):"
-msgstr ""
+msgstr "Temperatur (C):"
 
 #: src/ui_AtmosphereDialog.h:176
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
-msgstr ""
+msgstr "Pemadaman adalah hilangnya"
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
@@ -3330,19 +3400,19 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
 #, qt-format
 msgid "Telescope #%1"
-msgstr ""
+msgstr "Teleskop #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1486 plugins/Oculars/src/Oculars.cpp:1548
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
 #, qt-format
 msgid "Telescope #%1: %2"
-msgstr ""
+msgstr "Teleskop #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1497
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
 #, qt-format
 msgid "Magnification: %1"
-msgstr ""
+msgstr "Pembesaran: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1505
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
@@ -3354,23 +3424,23 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
 #, qt-format
 msgid "Dimensions: %1"
-msgstr ""
+msgstr "Dimensi: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1525
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Sensor #%1"
-msgstr ""
+msgstr "Sensor #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1529
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Sensor #%1: %2"
-msgstr ""
+msgstr "Sensor #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1736
 msgid "&Telescope"
-msgstr ""
+msgstr "&Teleskop"
 
 #: plugins/Oculars/src/Oculars.cpp:1737
 msgid "&Previous telescope"
@@ -3398,7 +3468,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Previous telescope"
-msgstr ""
+msgstr "Teleskop sebelumnya"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Next telescope"
@@ -3406,15 +3476,15 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr ""
+msgstr "Putar bingkai sensor 15 derajat berlawanan arah jarum jam"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:258
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr ""
+msgstr "Putar bingkai sensor 5 derajat berlawanan arah jarum jam"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:271
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr ""
+msgstr "Putar bingkai sensor 1 derajat berlawanan arah jarum jam"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
@@ -3422,7 +3492,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr ""
+msgstr "Putar bingkai sensor 1 derajat searah jarum jam"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:310
 msgid "Rotate the sensor frame 5 degrees clockwise"
@@ -3430,7 +3500,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:323
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr ""
+msgstr "Putar bingkai sensor 15 derajat searah jarum jam"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
 msgid "Effective focal length of the ocular"
@@ -3443,7 +3513,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 #, qt-format
 msgid "Rotation: %1"
-msgstr ""
+msgstr "Rotasi: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 msgid "Magnification provided by these binoculars"
@@ -3483,7 +3553,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Interface"
-msgstr ""
+msgstr "Interface"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:872
 msgid "On-screen control panel"
@@ -3492,7 +3562,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:873
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:213
 msgid "General"
-msgstr ""
+msgstr "Umum"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:874
 #: plugins/Oculars/src/ui_ocularDialog.h:882
@@ -3505,7 +3575,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Add"
-msgstr ""
+msgstr "Tambah"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:877
 #: plugins/Oculars/src/ui_ocularDialog.h:886
@@ -3513,7 +3583,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:683
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
-msgstr ""
+msgstr "Nama:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "aFOV:"
@@ -3522,7 +3592,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:879
 #: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Focal length:"
-msgstr ""
+msgstr "Panjang fokus:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "Field stop:"
@@ -3535,15 +3605,15 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:883
 #: plugins/Oculars/src/ui_ocularDialog.h:893
 msgid "Sensors"
-msgstr ""
+msgstr "Sensor"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Resolution x (pixels):"
-msgstr ""
+msgstr "Resolusi x (piksel):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Resolution y (pixels):"
-msgstr ""
+msgstr "Resolusi y (piksel):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Chip width (mm):"
@@ -3555,7 +3625,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:891
 msgid "Pixel width (micron):"
-msgstr ""
+msgstr "Lebar piksel (mikron):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:892
 msgid "Pixel height (micron):"
@@ -3566,11 +3636,11 @@ msgstr ""
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Telescopes"
-msgstr ""
+msgstr "Teleskop"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:899
 msgid "Diameter:"
-msgstr ""
+msgstr "Diameter:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Horizontal flip"
@@ -3614,7 +3684,7 @@ msgstr "Berkas .json satelit lamaa tidak cocok - menggunakan berkas default"
 #: plugins/Satellites/src/Satellite.cpp:238
 #, qt-format
 msgid "Range (km): %1"
-msgstr ""
+msgstr "Rentang (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
 #: plugins/Satellites/src/Satellite.cpp:241
@@ -3626,7 +3696,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:244
 #, qt-format
 msgid "Altitude (km): %1"
-msgstr ""
+msgstr "Ketinggian (km): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
 #: plugins/Satellites/src/Satellite.cpp:247
@@ -3652,7 +3722,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:280
 msgid "The satellite is visible."
-msgstr ""
+msgstr "Satelit dapat terlihat."
 
 #: plugins/Satellites/src/Satellite.cpp:283
 msgid "The satellite is eclipsed."
@@ -3660,7 +3730,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:286
 msgid "The satellite is not visible"
-msgstr ""
+msgstr "Satelit tidak dapat dilihat"
 
 #: plugins/Satellites/src/Satellite.cpp:312
 #, qt-format
@@ -3669,21 +3739,22 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:252
 msgid "Stellarium Satellites Plugin"
-msgstr ""
+msgstr "Plugin Satelit Stellarium"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:253
 msgid "Version"
-msgstr ""
+msgstr "Versi"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:257
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
+"Plugin Satelit memprediksikan posisi satelit-satelit buatan di orbit Bumi."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
 msgid "Notes for users"
-msgstr ""
+msgstr "Catatan untuk pengguna"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid ""
@@ -3717,6 +3788,8 @@ msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
+"Plugin Satelit masih dalam tahap perkembangan. Beberapa fitur masih belum "
+"komplit, hilang, atau bermasalah."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:274
@@ -3746,7 +3819,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:280
 msgid "Adding new satellites"
-msgstr ""
+msgstr "Menambahkan satelit-satelit baru"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
 #, qt-format
@@ -3757,7 +3830,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:283
 msgid "Technical notes"
-msgstr ""
+msgstr "Catatan teknis"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:284
 msgid ""
@@ -3779,7 +3852,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Links"
-msgstr ""
+msgstr "Tautan"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
 msgid ""
@@ -3792,6 +3865,7 @@ msgstr ""
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr ""
+"Jika Anda mempunyai pertanyaan, Anda dapat %1mendapatkan jawaban di sini%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
@@ -3832,7 +3906,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:338
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
 msgid "Update now"
-msgstr ""
+msgstr "Update sekarang"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:340
 msgid "Update from files"
@@ -3865,7 +3939,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:460
 msgid "[all]"
-msgstr ""
+msgstr "[semua]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:572
 msgid "Select TLE Update File"
@@ -3873,7 +3947,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:135
 msgid "Downloading data..."
-msgstr ""
+msgstr "Mengunduh data..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:136
 msgid ""
@@ -3890,11 +3964,11 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:226
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:227
 msgid "Processing data..."
-msgstr ""
+msgstr "Memproses data..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:221
 msgid "No data could be downloaded. Try again later."
-msgstr ""
+msgstr "Tak ada data yang dapat diunduh. Coba lagi nanti."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:344
 #, qt-format
@@ -3904,7 +3978,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
 msgid "Satellites Configuration"
-msgstr ""
+msgstr "Konfigurasi Satelit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:643
 msgid "Update TLE lists from Internet sources"
@@ -3941,7 +4015,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Number of  segments:"
-msgstr ""
+msgstr "Jumlah segmen:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:659
 #: plugins/Satellites/src/ui_satellitesDialog.h:663
@@ -3950,7 +4024,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:661
 msgid "Segment length (s):"
-msgstr ""
+msgstr "Panjang segmen (s):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:666
 #: plugins/Satellites/src/ui_satellitesDialog.h:669
@@ -3963,23 +4037,23 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:672
 msgid "Restore default settings"
-msgstr ""
+msgstr "Kembalikan pengaturan semula"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
 msgid "Save settings as default"
-msgstr ""
+msgstr "Simpan pengaturan sebagai default"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:674
 msgid "Settings"
-msgstr ""
+msgstr "Pengaturan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 msgid "Display the selected satellite(s)"
-msgstr ""
+msgstr "Tampilkan satelit yang dipilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:678
 msgid "Displayed"
-msgstr ""
+msgstr "Ditampilkan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:680
 msgid "Display orbit line(s) for the selected satellite(s)"
@@ -3987,7 +4061,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 msgid "Orbit"
-msgstr ""
+msgstr "Orbit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:684
 msgid "Catalog number:"
@@ -3995,11 +4069,11 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:685
 msgid "Description:"
-msgstr ""
+msgstr "Deskripsi:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:686
 msgid "Groups:"
-msgstr ""
+msgstr "Kelompok:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:688
 msgid "Comma separated list of groups"
@@ -4015,32 +4089,38 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:695
 msgid "Remove the selected satellites"
-msgstr ""
+msgstr "Hilangkan satelit-satelit yang dipilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:698
 msgid "Add more satellites"
-msgstr ""
+msgstr "Tambahkan satelit"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:702
 msgid "Save changes"
-msgstr ""
+msgstr "Simpan perubahan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:707
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
 msgstr ""
+"Masukkan atau ubah URL dari sumber yang dipilih. Perubahan disimpan dengan "
+"menekan Enter."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:710
 msgid "Add new source"
-msgstr ""
+msgstr "TAmbah sumber baru"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Remove selected source"
-msgstr ""
+msgstr "Hilangkan sumber yang dipilih"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:717
 msgid "Sources"
+msgstr "Sumber"
+
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:206
+msgid "More Satellites"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:208
@@ -4050,16 +4130,16 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:209
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Abort download"
-msgstr ""
+msgstr "Batalkan unduhan"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:210
 msgid "New satellites"
-msgstr ""
+msgstr "Satelit baru"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:212
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Discard"
-msgstr ""
+msgstr "Buang"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:150
@@ -4090,7 +4170,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
-msgstr ""
+msgstr "Tambahkan Teleskop Baru"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
@@ -4098,27 +4178,27 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
 msgid "Starting"
-msgstr ""
+msgstr "Memulai"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:58
 msgid "Connecting"
-msgstr ""
+msgstr "Menghubungkan"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:59
 msgid "Connected"
-msgstr ""
+msgstr "Terhubung"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:60
 msgid "Disconnected"
-msgstr ""
+msgstr "Terputus"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:61
 msgid "Stopped"
-msgstr ""
+msgstr "Dihentikan"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
@@ -4129,24 +4209,24 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "Versi %1"
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Type"
-msgstr ""
+msgstr "Tipe"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
-msgstr ""
+msgstr "Nama"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #, qt-format
@@ -5085,9 +5165,13 @@ msgid ""
 "(13 September)."
 msgstr ""
 
-#: plugins/Supernovae/src/Supernova.cpp:112
+#: plugins/Supernovae/src/Supernova.cpp:99
+msgid "supernova"
+msgstr ""
+
+#: plugins/Supernovae/src/Supernova.cpp:115
 #, qt-format
-msgid "Type: %1"
+msgid "Type of supernova: %1"
 msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:59
@@ -5101,11 +5185,11 @@ msgid ""
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
 
-#: plugins/Quasars/src/Quasar.cpp:129
-msgid "Type: quasar"
+#: plugins/Quasars/src/Quasar.cpp:92
+msgid "quasar"
 msgstr ""
 
-#: plugins/Quasars/src/Quasar.cpp:132
+#: plugins/Quasars/src/Quasar.cpp:134
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr ""

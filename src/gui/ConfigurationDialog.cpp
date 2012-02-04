@@ -611,10 +611,16 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();	
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_(scriptMgr.getName(s)) + "</h2>";
-	html += "<h3>" + q_("Author") + ": " + scriptMgr.getAuthor(s) + "</h3>";
-	html += "<h3>" + q_("License") + ": " + scriptMgr.getLicense(s) + "</h3>";
-	QString d = scriptMgr.getDescription(s);
+	html += "<h2>" + q_(scriptMgr.getName(s).trimmed()) + "</h2>";
+	if (!scriptMgr.getAuthor(s).trimmed().isEmpty())
+	{
+		html += "<h3>" + q_("Author") + ": " + scriptMgr.getAuthor(s) + "</h3>";
+	}
+	if (!scriptMgr.getLicense(s).trimmed().isEmpty())
+	{
+		html += "<h3>" + q_("License") + ": " + scriptMgr.getLicense(s) + "</h3>";
+	}
+	QString d = scriptMgr.getDescription(s).trimmed();
 	d.replace("\n", "<br />");
 	html += "<p>" + q_(d) + "</p>";
 	html += "</body></html>";	

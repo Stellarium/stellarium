@@ -88,6 +88,9 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 		oss << "<h2>" << designation << "</h2>";
 	}
+	if (flags&Extra1)
+		oss << q_("Type: <b>%1</b>").arg(q_("quasar")) << "<br />";
+
 	if (flags&Magnitude && mag <= core->getSkyDrawer()->getLimitMagnitude())
 	{
             if (core->getSkyDrawer()->getFlagHasAtmosphere())
@@ -126,11 +129,10 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Extra1)
 	{
-		oss << q_("Type: quasar") << "<br>";
-        if (redshift>0)
-        {
-		    oss << q_("Z (redshift): %1").arg(redshift) << "<br>";
-        }
+		if (redshift>0)
+		{
+			oss << q_("Z (redshift): %1").arg(redshift) << "<br>";
+		}
 	}
 
 	postProcessInfoString(str, flags);
