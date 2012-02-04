@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-13 23:26+0700\n"
-"PO-Revision-Date: 2012-01-14 07:57+0000\n"
+"POT-Creation-Date: 2012-02-03 23:33+0700\n"
+"PO-Revision-Date: 2012-02-03 19:01+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-15 05:17+0000\n"
-"X-Generator: Launchpad (build 14664)\n"
+"X-Launchpad-Export-Date: 2012-02-04 05:05+0000\n"
+"X-Generator: Launchpad (build 14738)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -60,19 +60,20 @@ msgstr ", %1 м"
 msgid "Planet: "
 msgstr "Планета: "
 
-#: src/core/modules/Nebula.cpp:96
+#: src/core/modules/Nebula.cpp:96 plugins/Supernovae/src/Supernova.cpp:99
+#: plugins/Quasars/src/Quasar.cpp:92
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Тип: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:123
-#: plugins/Supernovae/src/Supernova.cpp:101 plugins/Quasars/src/Quasar.cpp:103
+#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Величина: <b>%1</b> (зменшилася до <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
-#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:115
+#: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Величина: <b>%1</b>"
@@ -115,7 +116,7 @@ msgid "Undocumented type"
 msgstr "Недокументований тип"
 
 #: src/core/modules/Planet.cpp:129 src/core/modules/StarWrapper.cpp:124
-#: plugins/Quasars/src/Quasar.cpp:120
+#: plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Абсолютна зіркова величина: %1"
@@ -155,12 +156,12 @@ msgstr "Зоряна величина: <b>%1</b> (B-V: %2)"
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
 msgstr "Видима величина: <b>%1</b> (після згасання)"
 
-#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:97
+#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 msgstr "Величина: <b>%1</b> (зменшилася до <b>%2</b>. B-V: <b>%3</b>)"
 
-#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:111
+#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Величина: <b>%1</b> (B-V: <b>%2</b>)"
@@ -171,7 +172,7 @@ msgid "Spectral Type: %1"
 msgstr "Спектральний тип: %1"
 
 #: src/core/modules/StarWrapper.cpp:134
-#: plugins/Supernovae/src/Supernova.cpp:114
+#: plugins/Supernovae/src/Supernova.cpp:117
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Відстань: %1 світлових років"
@@ -345,23 +346,23 @@ msgstr "Автори"
 msgid "Contact"
 msgstr "Контакти"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:617
 msgid "Author"
 msgstr "Автор"
 
-#: src/gui/ConfigurationDialog.cpp:616
+#: src/gui/ConfigurationDialog.cpp:621
 msgid "License"
 msgstr "Ліцензія"
 
-#: src/gui/ConfigurationDialog.cpp:644
+#: src/gui/ConfigurationDialog.cpp:650
 msgid "Running script: "
 msgstr "Запуск скрипту: "
 
-#: src/gui/ConfigurationDialog.cpp:651
+#: src/gui/ConfigurationDialog.cpp:657
 msgid "Running script: [none]"
 msgstr "Запуск скрипту: [Немає]"
 
-#: src/gui/ConfigurationDialog.cpp:721
+#: src/gui/ConfigurationDialog.cpp:727
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -369,16 +370,16 @@ msgstr ""
 "Завершено завантаження нових каталогів зірок!\n"
 "Перезапустіть Stellarium для їх відображення."
 
-#: src/gui/ConfigurationDialog.cpp:725
+#: src/gui/ConfigurationDialog.cpp:731
 msgid "All available star catalogs have been installed."
 msgstr "Було встановлено всі доступні зоряні каталоги."
 
-#: src/gui/ConfigurationDialog.cpp:730
+#: src/gui/ConfigurationDialog.cpp:736
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Отримати каталог %1 із %2"
 
-#: src/gui/ConfigurationDialog.cpp:737
+#: src/gui/ConfigurationDialog.cpp:743
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -387,7 +388,7 @@ msgstr ""
 "Звантаження %1…\n"
 "(Ви можете закрити це вікно.)"
 
-#: src/gui/ConfigurationDialog.cpp:744
+#: src/gui/ConfigurationDialog.cpp:750
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -398,7 +399,7 @@ msgstr ""
 "Кількість зірок: %2 мільйонів\n"
 "Діапазон зоряних величин: %3-%4"
 
-#: src/gui/ConfigurationDialog.cpp:787 src/gui/ConfigurationDialog.cpp:823
+#: src/gui/ConfigurationDialog.cpp:793 src/gui/ConfigurationDialog.cpp:829
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -407,11 +408,11 @@ msgstr ""
 "Помилка при звантаженні %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:875
+#: src/gui/ConfigurationDialog.cpp:881
 msgid "Verifying file integrity..."
 msgstr "Перевірка цілісності файлів…"
 
-#: src/gui/ConfigurationDialog.cpp:879
+#: src/gui/ConfigurationDialog.cpp:885
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1011,12 +1012,12 @@ msgid "Earth"
 msgstr "Земля"
 
 #. TRANSLATORS: Name of landscape and Earth's satellite
-#: src/translations.h:37 src/translations.h:167
+#: src/translations.h:37 src/translations.h:166
 msgid "Moon"
 msgstr "Місяць"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:38 src/translations.h:175
+#: src/translations.h:38 src/translations.h:174
 msgid "Mars"
 msgstr "Марс"
 
@@ -1114,7 +1115,7 @@ msgid "Metis"
 msgstr "Метида"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:62 src/translations.h:177
+#: src/translations.h:62 src/translations.h:176
 msgid "Saturn"
 msgstr "Сатурн"
 
@@ -1340,1064 +1341,1136 @@ msgstr "Наднова Тіхо"
 msgid "Kepler's Supernova"
 msgstr "Наднова Кеплера"
 
-#: src/translations.h:140
+#: src/translations.h:139
 msgid "N"
 msgstr "Пн"
 
-#: src/translations.h:141
+#: src/translations.h:140
 msgid "S"
 msgstr "Пд"
 
-#: src/translations.h:142
+#: src/translations.h:141
 msgid "E"
 msgstr "Сх"
 
-#: src/translations.h:143
+#: src/translations.h:142
 msgid "W"
 msgstr "Зх"
 
-#: src/translations.h:146
+#: src/translations.h:145
 msgid "Arabic"
 msgstr "Арабська"
 
-#: src/translations.h:147
+#: src/translations.h:146
 msgid "Aztec"
 msgstr "Ацтецька"
 
-#: src/translations.h:148
+#: src/translations.h:147
 msgid "Chinese"
 msgstr "Китайська"
 
-#: src/translations.h:149
+#: src/translations.h:148
 msgid "Egyptian"
 msgstr "Єгипетська"
 
-#: src/translations.h:150
+#: src/translations.h:149
 msgid "Inuit"
 msgstr "Ескімоська"
 
-#: src/translations.h:151
+#: src/translations.h:150
 msgid "Korean"
 msgstr "Корейська"
 
-#: src/translations.h:152
+#: src/translations.h:151
 msgid "Lakota"
 msgstr "Лакота"
 
-#: src/translations.h:153
+#: src/translations.h:152
 msgid "Maori"
 msgstr "Маорійська"
 
-#: src/translations.h:154
+#: src/translations.h:153
 msgid "Navajo"
 msgstr "Навахо"
 
-#: src/translations.h:155
+#: src/translations.h:154
 msgid "Norse"
 msgstr "Скандинавська"
 
-#: src/translations.h:156
+#: src/translations.h:155
 msgid "Polynesian"
 msgstr "Полінезійська"
 
-#: src/translations.h:157
+#: src/translations.h:156
 msgid "Sami"
 msgstr "Саамська"
 
-#: src/translations.h:158
+#: src/translations.h:157
 msgid "Tupi-Guarani"
 msgstr "Тупі-Гуарані"
 
-#: src/translations.h:159
+#: src/translations.h:158
 msgid "Western"
 msgstr "Західна"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:163
+#: src/translations.h:162
 msgid "Guereins"
 msgstr "Геран"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:165
+#: src/translations.h:164
 msgid "Trees"
 msgstr "Дерева"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:169
+#: src/translations.h:168
 msgid "Hurricane"
 msgstr "Буря"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:171
+#: src/translations.h:170
 msgid "Ocean"
 msgstr "Океан"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:173
+#: src/translations.h:172
 msgid "Garching"
 msgstr "Ґаршінґ"
 
+#. TRANSLATORS: Name of script
 #: src/translations.h:180
+msgid "Landscape Tour"
+msgstr "Мандрівка ландшафтами"
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:182
+msgid "Partial Lunar Eclipse"
+msgstr "Часткове місячне затемнення"
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:184
+msgid "Total Lunar Eclipse"
+msgstr "Повне місячне затемнення"
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:186
+msgid "Screensaver"
+msgstr "Зберігач екрана"
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:188
+msgid "Solar Eclipse 2009"
+msgstr "Сонячне затемення 2009 року"
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:190
+msgid "Startup Script"
+msgstr "Скрипт запуску"
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:192
+msgid "Zodiac"
+msgstr "Зодіак"
+
+#: src/translations.h:195
+msgid "Look around each installed landscape."
+msgstr "Оглянути всі доступні ландшафти."
+
+#: src/translations.h:196
+msgid "Script to demonstrate a partial lunar eclipse."
+msgstr "Скрипт демонстрації часткового місячного затемнення."
+
+#: src/translations.h:197
+msgid "Script to demonstrate a total lunar eclipse."
+msgstr "Скрипт демонстрації повного місячного затемнення."
+
+#: src/translations.h:198
+msgid "A slow, infinite tour of the sky, looking at random objects."
+msgstr "Повільна нескічненна мандрівка небом з оглядом випадкових об’єктів."
+
+#: src/translations.h:199
+msgid ""
+"Script to demonstrate a total solar eclipse which has happened in 2009 "
+"(location=Rangpur, Bangladesh)."
+msgstr ""
+"Скрипт демонстрації повного сонячного затемнення, яке сталося у 2009 році "
+"(місце: Рангпур, Бангладеш)"
+
+#: src/translations.h:200
+msgid "Script which runs automatically at startup"
+msgstr "Скрипт, який виконується автоматично під час запуску"
+
+#: src/translations.h:201
+msgid ""
+"This script displays the constellations of the Zodiac. That means the "
+"constellations which lie along the line which the Sun traces across the "
+"celestial sphere over the course of a year."
+msgstr ""
+"Цей скрипт показує сузір’я Зодіаку. До Зодіаку належать сузір’я, які "
+"перебувають на лінії, якою протягом року рухається небесною сферою Сонце."
+
+#: src/translations.h:204
 msgid "Andorra"
 msgstr "Андорра"
 
-#: src/translations.h:181
+#: src/translations.h:205
 msgid "United Arab Emirates"
 msgstr "Об’єднані Арабські Емірати"
 
-#: src/translations.h:182
+#: src/translations.h:206
 msgid "Afghanistan"
 msgstr "Афганістан"
 
-#: src/translations.h:183
+#: src/translations.h:207
 msgid "Antigua and Barbuda"
 msgstr "Антигуа і Барбуда"
 
-#: src/translations.h:184
+#: src/translations.h:208
 msgid "Anguilla"
 msgstr "Ангілья"
 
-#: src/translations.h:185
+#: src/translations.h:209
 msgid "Albania"
 msgstr "Албанія"
 
-#: src/translations.h:186
+#: src/translations.h:210
 msgid "Armenia"
 msgstr "Вірменія"
 
-#: src/translations.h:187
+#: src/translations.h:211
 msgid "Netherlands Antilles"
 msgstr "Нідерландські Антильські Острови"
 
-#: src/translations.h:188
+#: src/translations.h:212
 msgid "Angola"
 msgstr "Ангола"
 
-#: src/translations.h:189
+#: src/translations.h:213
 msgid "Antarctica"
 msgstr "Антарктида"
 
-#: src/translations.h:190
+#: src/translations.h:214
 msgid "Argentina"
 msgstr "Аргентина"
 
-#: src/translations.h:191
+#: src/translations.h:215
 msgid "American Samoa"
 msgstr "Американське Самоа"
 
-#: src/translations.h:192
+#: src/translations.h:216
 msgid "Austria"
 msgstr "Австрія"
 
-#: src/translations.h:193
+#: src/translations.h:217
 msgid "Australia"
 msgstr "Австралія"
 
-#: src/translations.h:194
+#: src/translations.h:218
 msgid "Aruba"
 msgstr "Аруба"
 
-#: src/translations.h:195
+#: src/translations.h:219
 msgid "Azerbaijan"
 msgstr "Азербайджан"
 
-#: src/translations.h:196
+#: src/translations.h:220
 msgid "Bosnia and Herzegowina"
 msgstr "Боснія та Герцеговина"
 
-#: src/translations.h:197
+#: src/translations.h:221
 msgid "Barbados"
 msgstr "Барбадос"
 
-#: src/translations.h:198
+#: src/translations.h:222
 msgid "Bangladesh"
 msgstr "Бангладеш"
 
-#: src/translations.h:199
+#: src/translations.h:223
 msgid "Belgium"
 msgstr "Бельгія"
 
-#: src/translations.h:200
+#: src/translations.h:224
 msgid "Burkina Faso"
 msgstr "Буркіна-Фасо"
 
-#: src/translations.h:201
+#: src/translations.h:225
 msgid "Bulgaria"
 msgstr "Болгарія"
 
-#: src/translations.h:202
+#: src/translations.h:226
 msgid "Bahrain"
 msgstr "Бахрейн"
 
-#: src/translations.h:203
+#: src/translations.h:227
 msgid "Burundi"
 msgstr "Бурунді"
 
-#: src/translations.h:204
+#: src/translations.h:228
 msgid "Benin"
 msgstr "Бенін"
 
-#: src/translations.h:205
+#: src/translations.h:229
 msgid "Bermuda"
 msgstr "Бермуди"
 
-#: src/translations.h:206
+#: src/translations.h:230
 msgid "Brunei Darussalam"
 msgstr "Бруней"
 
-#: src/translations.h:207
+#: src/translations.h:231
 msgid "Bolivia"
 msgstr "Болівія"
 
-#: src/translations.h:208
+#: src/translations.h:232
 msgid "Brazil"
 msgstr "Бразилія"
 
-#: src/translations.h:209
+#: src/translations.h:233
 msgid "Bahamas"
 msgstr "Багамські острови"
 
-#: src/translations.h:210
+#: src/translations.h:234
 msgid "Bhutan"
 msgstr "Бутан"
 
-#: src/translations.h:211
+#: src/translations.h:235
 msgid "Bouvet Island"
 msgstr "Острів Буве"
 
-#: src/translations.h:212
+#: src/translations.h:236
 msgid "Botswana"
 msgstr "Ботсвана"
 
-#: src/translations.h:213
+#: src/translations.h:237
 msgid "Belarus"
 msgstr "Білорусь"
 
-#: src/translations.h:214
+#: src/translations.h:238
 msgid "Belize"
 msgstr "Беліз"
 
-#: src/translations.h:215
+#: src/translations.h:239
 msgid "Canada"
 msgstr "Канада"
 
-#: src/translations.h:216
+#: src/translations.h:240
 msgid "Cocos Islands"
 msgstr "Кокосові острови"
 
-#: src/translations.h:217
+#: src/translations.h:241
 msgid "Democratic Republic of the Congo"
 msgstr "Демократична республіка Конго"
 
-#: src/translations.h:218
+#: src/translations.h:242
 msgid "Central African Republic"
 msgstr "Центральноафриканська Республіка"
 
-#: src/translations.h:219
+#: src/translations.h:243
 msgid "Republic of the Congo"
 msgstr "Республіка Конго"
 
-#: src/translations.h:220
+#: src/translations.h:244
 msgid "Switzerland"
 msgstr "Швейцарія"
 
-#: src/translations.h:221
+#: src/translations.h:245
 msgid "Cote d'Ivoire"
 msgstr "Кот д’Івуар"
 
-#: src/translations.h:222
+#: src/translations.h:246
 msgid "Cook Islands"
 msgstr "Острови Кука"
 
-#: src/translations.h:223
+#: src/translations.h:247
 msgid "Chile"
 msgstr "Чилі"
 
-#: src/translations.h:224
+#: src/translations.h:248
 msgid "Cameroon"
 msgstr "Камерун"
 
-#: src/translations.h:225
+#: src/translations.h:249
 msgid "China"
 msgstr "Китай"
 
-#: src/translations.h:226
+#: src/translations.h:250
 msgid "Colombia"
 msgstr "Колумбія"
 
-#: src/translations.h:227
+#: src/translations.h:251
 msgid "Costa Rica"
 msgstr "Коста-Рика"
 
-#: src/translations.h:228
+#: src/translations.h:252
 msgid "Serbia and Montenegro"
 msgstr "Сербія і Чорногорія"
 
-#: src/translations.h:229
+#: src/translations.h:253
 msgid "Cuba"
 msgstr "Куба"
 
-#: src/translations.h:230
+#: src/translations.h:254
 msgid "Cape Verde"
 msgstr "Кабо-Верде"
 
-#: src/translations.h:231
+#: src/translations.h:255
 msgid "Christmas Island"
 msgstr "Острів Різдва"
 
-#: src/translations.h:232
+#: src/translations.h:256
 msgid "Cyprus"
 msgstr "Кіпр"
 
-#: src/translations.h:233
+#: src/translations.h:257
 msgid "Czech Republic"
 msgstr "Чеська республіка"
 
-#: src/translations.h:234
+#: src/translations.h:258
 msgid "Germany"
 msgstr "Німеччина"
 
-#: src/translations.h:235
+#: src/translations.h:259
 msgid "Djibouti"
 msgstr "Джибуті"
 
-#: src/translations.h:236
+#: src/translations.h:260
 msgid "Denmark"
 msgstr "Данія"
 
-#: src/translations.h:237
+#: src/translations.h:261
 msgid "Dominica"
 msgstr "Домініка"
 
-#: src/translations.h:238
+#: src/translations.h:262
 msgid "Dominican Republic"
 msgstr "Домініканська республіка"
 
-#: src/translations.h:239
+#: src/translations.h:263
 msgid "Algeria"
 msgstr "Алжир"
 
-#: src/translations.h:240
+#: src/translations.h:264
 msgid "Ecuador"
 msgstr "Еквадор"
 
-#: src/translations.h:241
+#: src/translations.h:265
 msgid "Estonia"
 msgstr "Естонія"
 
-#: src/translations.h:242
+#: src/translations.h:266
 msgid "Egypt"
 msgstr "Єгипет"
 
-#: src/translations.h:243
+#: src/translations.h:267
 msgid "Western Sahara"
 msgstr "Західна Сахара"
 
-#: src/translations.h:244
+#: src/translations.h:268
 msgid "Eritrea"
 msgstr "Еритрея"
 
-#: src/translations.h:245
+#: src/translations.h:269
 msgid "Spain"
 msgstr "Іспанія"
 
-#: src/translations.h:246
+#: src/translations.h:270
 msgid "Ethiopia"
 msgstr "Ефіопія"
 
-#: src/translations.h:247
+#: src/translations.h:271
 msgid "Finland"
 msgstr "Фінляндія"
 
-#: src/translations.h:248
+#: src/translations.h:272
 msgid "Fiji"
 msgstr "Фіджі"
 
-#: src/translations.h:249
+#: src/translations.h:273
 msgid "Falkland Islands"
 msgstr "Фолклендські острови"
 
-#: src/translations.h:250
+#: src/translations.h:274
 msgid "Micronesia"
 msgstr "Мікронезія"
 
-#: src/translations.h:251
+#: src/translations.h:275
 msgid "Faroe Islands"
 msgstr "Фарерські острови"
 
-#: src/translations.h:252
+#: src/translations.h:276
 msgid "France"
 msgstr "Франція"
 
-#: src/translations.h:253
+#: src/translations.h:277
 msgid "Gabon"
 msgstr "Габон"
 
-#: src/translations.h:254
+#: src/translations.h:278
 msgid "United Kingdom"
 msgstr "Великобританія"
 
-#: src/translations.h:255
+#: src/translations.h:279
 msgid "Grenada"
 msgstr "Гренада"
 
-#: src/translations.h:256
+#: src/translations.h:280
 msgid "Georgia"
 msgstr "Грузія"
 
-#: src/translations.h:257
+#: src/translations.h:281
 msgid "French Guiana"
 msgstr "Французька Гвіана"
 
-#: src/translations.h:258
+#: src/translations.h:282
 msgid "Ghana"
 msgstr "Гана"
 
-#: src/translations.h:259
+#: src/translations.h:283
 msgid "Gibraltar"
 msgstr "Гібралтар"
 
-#: src/translations.h:260
+#: src/translations.h:284
 msgid "Greenland"
 msgstr "Гренландія"
 
-#: src/translations.h:261
+#: src/translations.h:285
 msgid "Gambia"
 msgstr "Гамбія"
 
-#: src/translations.h:262
+#: src/translations.h:286
 msgid "Guinea"
 msgstr "Гвінея"
 
-#: src/translations.h:263
+#: src/translations.h:287
 msgid "Guadeloupe"
 msgstr "Гваделупа"
 
-#: src/translations.h:264
+#: src/translations.h:288
 msgid "Equatorial Guinea"
 msgstr "Екваторіальна Гвінея"
 
-#: src/translations.h:265
+#: src/translations.h:289
 msgid "Greece"
 msgstr "Греція"
 
-#: src/translations.h:266
+#: src/translations.h:290
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Південна Георгія і Південні Сандвічеві Острови"
 
-#: src/translations.h:267
+#: src/translations.h:291
 msgid "Guatemala"
 msgstr "Гватемала"
 
-#: src/translations.h:268
+#: src/translations.h:292
 msgid "Guam"
 msgstr "Гуам"
 
-#: src/translations.h:269
+#: src/translations.h:293
 msgid "Guinea-Bissau"
 msgstr "Гвінея-Бісау"
 
-#: src/translations.h:270
+#: src/translations.h:294
 msgid "Guyana"
 msgstr "Гайяна"
 
-#: src/translations.h:271
+#: src/translations.h:295
 msgid "Hong Kong"
 msgstr "Гонконг"
 
-#: src/translations.h:272
+#: src/translations.h:296
 msgid "Heard Island and McDonald Islands"
 msgstr "Острови Херд і Мак-Дональд"
 
-#: src/translations.h:273
+#: src/translations.h:297
 msgid "Honduras"
 msgstr "Гондурас"
 
-#: src/translations.h:274
+#: src/translations.h:298
 msgid "Croatia"
 msgstr "Хорватія"
 
-#: src/translations.h:275
+#: src/translations.h:299
 msgid "Haiti"
 msgstr "Гаїті"
 
-#: src/translations.h:276
+#: src/translations.h:300
 msgid "Hungary"
 msgstr "Угорщина"
 
-#: src/translations.h:277
+#: src/translations.h:301
 msgid "Indonesia"
 msgstr "Індонезія"
 
-#: src/translations.h:278
+#: src/translations.h:302
 msgid "Ireland"
 msgstr "Ірландія"
 
-#: src/translations.h:279
+#: src/translations.h:303
 msgid "Israel"
 msgstr "Ізраїль"
 
-#: src/translations.h:280
+#: src/translations.h:304
 msgid "India"
 msgstr "Індія"
 
-#: src/translations.h:281
+#: src/translations.h:305
 msgid "British Indian Ocean Territory"
 msgstr "Британські Території в Індійському океані"
 
-#: src/translations.h:282
+#: src/translations.h:306
 msgid "Iraq"
 msgstr "Ірак"
 
-#: src/translations.h:283
+#: src/translations.h:307
 msgid "Iran"
 msgstr "Іран"
 
-#: src/translations.h:284
+#: src/translations.h:308
 msgid "Iceland"
 msgstr "Ісландія"
 
-#: src/translations.h:285
+#: src/translations.h:309
 msgid "Italy"
 msgstr "Італія"
 
-#: src/translations.h:286
+#: src/translations.h:310
 msgid "Jamaica"
 msgstr "Ямайка"
 
-#: src/translations.h:287
+#: src/translations.h:311
 msgid "Jordan"
 msgstr "Йорданія"
 
-#: src/translations.h:288
+#: src/translations.h:312
 msgid "Japan"
 msgstr "Японія"
 
-#: src/translations.h:289
+#: src/translations.h:313
 msgid "Kenya"
 msgstr "Кенія"
 
-#: src/translations.h:290
+#: src/translations.h:314
 msgid "Kyrgyzstan"
 msgstr "Киргизстан"
 
-#: src/translations.h:291
+#: src/translations.h:315
 msgid "Cambodia"
 msgstr "Камбоджа"
 
-#: src/translations.h:292
+#: src/translations.h:316
 msgid "Kiribati"
 msgstr "Кірибаті"
 
-#: src/translations.h:293
+#: src/translations.h:317
 msgid "Comoros"
 msgstr "Коморські острови"
 
-#: src/translations.h:294
+#: src/translations.h:318
 msgid "Saint Kitts and Nevis"
 msgstr "Сент-Кітс і Невіс"
 
-#: src/translations.h:295
+#: src/translations.h:319
 msgid "Democratic People's Republic of Korea"
 msgstr "Корейська Народно-Демократична Республіка"
 
-#: src/translations.h:296
+#: src/translations.h:320
 msgid "Republic of Korea"
 msgstr "Республіка Корея"
 
-#: src/translations.h:297
+#: src/translations.h:321
 msgid "Kuwait"
 msgstr "Кувейт"
 
-#: src/translations.h:298
+#: src/translations.h:322
 msgid "Cayman Islands"
 msgstr "Кайманові острови"
 
-#: src/translations.h:299
+#: src/translations.h:323
 msgid "Kazakhstan"
 msgstr "Казахстан"
 
-#: src/translations.h:300
+#: src/translations.h:324
 msgid "Lao"
 msgstr "Лаос"
 
-#: src/translations.h:301
+#: src/translations.h:325
 msgid "Lebanon"
 msgstr "Ліван"
 
-#: src/translations.h:302
+#: src/translations.h:326
 msgid "Saint Lucia"
 msgstr "Сент-Люсія"
 
-#: src/translations.h:303
+#: src/translations.h:327
 msgid "Liechtenstein"
 msgstr "Ліхтенштейн"
 
-#: src/translations.h:304
+#: src/translations.h:328
 msgid "Sri Lanka"
 msgstr "Шрі-Ланка"
 
-#: src/translations.h:305
+#: src/translations.h:329
 msgid "Liberia"
 msgstr "Ліберія"
 
-#: src/translations.h:306
+#: src/translations.h:330
 msgid "Lesotho"
 msgstr "Лесото"
 
-#: src/translations.h:307
+#: src/translations.h:331
 msgid "Lithuania"
 msgstr "Литва"
 
-#: src/translations.h:308
+#: src/translations.h:332
 msgid "Luxembourg"
 msgstr "Люксембург"
 
-#: src/translations.h:309
+#: src/translations.h:333
 msgid "Latvia"
 msgstr "Латвія"
 
-#: src/translations.h:310
+#: src/translations.h:334
 msgid "Libyan Arab Jamahiriya"
 msgstr "Лівійська Арабська Джамахірія"
 
-#: src/translations.h:311
+#: src/translations.h:335
 msgid "Morocco"
 msgstr "Марокко"
 
-#: src/translations.h:312
+#: src/translations.h:336
 msgid "Monaco"
 msgstr "Монако"
 
-#: src/translations.h:313
+#: src/translations.h:337
 msgid "Moldova"
 msgstr "Молдова"
 
-#: src/translations.h:314
+#: src/translations.h:338
 msgid "Madagascar"
 msgstr "Мадагаскар"
 
-#: src/translations.h:315
+#: src/translations.h:339
 msgid "Marshall Islands"
 msgstr "Маршаллові острови"
 
-#: src/translations.h:316
+#: src/translations.h:340
 msgid "Macedonia"
 msgstr "Македонія"
 
-#: src/translations.h:317
+#: src/translations.h:341
 msgid "Mali"
 msgstr "Малі"
 
-#: src/translations.h:318
+#: src/translations.h:342
 msgid "Myanmar"
 msgstr "М’янма"
 
-#: src/translations.h:319
+#: src/translations.h:343
 msgid "Mongolia"
 msgstr "Монголія"
 
-#: src/translations.h:320
+#: src/translations.h:344
 msgid "Macau"
 msgstr "Макао"
 
-#: src/translations.h:321
+#: src/translations.h:345
 msgid "Northern Mariana Islands"
 msgstr "Північні Маріанські Острови"
 
-#: src/translations.h:322
+#: src/translations.h:346
 msgid "Martinique"
 msgstr "Мартиніка"
 
-#: src/translations.h:323
+#: src/translations.h:347
 msgid "Mauritania"
 msgstr "Мавританія"
 
-#: src/translations.h:324
+#: src/translations.h:348
 msgid "Montserrat"
 msgstr "Монтсеррат"
 
-#: src/translations.h:325
+#: src/translations.h:349
 msgid "Malta"
 msgstr "Мальта"
 
-#: src/translations.h:326
+#: src/translations.h:350
 msgid "Mauritius"
 msgstr "Маврикій"
 
-#: src/translations.h:327
+#: src/translations.h:351
 msgid "Maldives"
 msgstr "Мальдіви"
 
-#: src/translations.h:328
+#: src/translations.h:352
 msgid "Malawi"
 msgstr "Малаві"
 
-#: src/translations.h:329
+#: src/translations.h:353
 msgid "Mexico"
 msgstr "Мексика"
 
-#: src/translations.h:330
+#: src/translations.h:354
 msgid "Malaysia"
 msgstr "Малайзія"
 
-#: src/translations.h:331
+#: src/translations.h:355
 msgid "Mozambique"
 msgstr "Мозамбік"
 
-#: src/translations.h:332
+#: src/translations.h:356
 msgid "Namibia"
 msgstr "Намібія"
 
-#: src/translations.h:333
+#: src/translations.h:357
 msgid "New Caledonia"
 msgstr "Нова Каледонія"
 
-#: src/translations.h:334
+#: src/translations.h:358
 msgid "Niger"
 msgstr "Нігер"
 
-#: src/translations.h:335
+#: src/translations.h:359
 msgid "Norfolk Island"
 msgstr "Острів Норфолк"
 
-#: src/translations.h:336
+#: src/translations.h:360
 msgid "Nigeria"
 msgstr "Нігерія"
 
-#: src/translations.h:337
+#: src/translations.h:361
 msgid "Nicaragua"
 msgstr "Нікарагуа"
 
-#: src/translations.h:338
+#: src/translations.h:362
 msgid "Netherlands"
 msgstr "Нідерланди"
 
-#: src/translations.h:339
+#: src/translations.h:363
 msgid "Norway"
 msgstr "Норвегія"
 
-#: src/translations.h:340
+#: src/translations.h:364
 msgid "Nepal"
 msgstr "Непал"
 
-#: src/translations.h:341
+#: src/translations.h:365
 msgid "Nauru"
 msgstr "Науру"
 
-#: src/translations.h:342
+#: src/translations.h:366
 msgid "Niue"
 msgstr "Ніуе"
 
-#: src/translations.h:343
+#: src/translations.h:367
 msgid "New Zealand"
 msgstr "Нова Зеландія"
 
-#: src/translations.h:344
+#: src/translations.h:368
 msgid "Oman"
 msgstr "Оман"
 
-#: src/translations.h:345
+#: src/translations.h:369
 msgid "Panama"
 msgstr "Панама"
 
-#: src/translations.h:346
+#: src/translations.h:370
 msgid "Peru"
 msgstr "Перу"
 
-#: src/translations.h:347
+#: src/translations.h:371
 msgid "French Polynesia"
 msgstr "Французька Полінезія"
 
-#: src/translations.h:348
+#: src/translations.h:372
 msgid "Papua New Guinea"
 msgstr "Папуа-Нова Гвінея"
 
-#: src/translations.h:349
+#: src/translations.h:373
 msgid "Philippines"
 msgstr "Філіппіни"
 
-#: src/translations.h:350
+#: src/translations.h:374
 msgid "Pakistan"
 msgstr "Пакистан"
 
-#: src/translations.h:351
+#: src/translations.h:375
 msgid "Poland"
 msgstr "Польща"
 
-#: src/translations.h:352
+#: src/translations.h:376
 msgid "Saint Pierre and Miquelon"
 msgstr "Сен-П'єр і Мікелон"
 
-#: src/translations.h:353
+#: src/translations.h:377
 msgid "Pitcairn"
 msgstr "Піткерн"
 
-#: src/translations.h:354
+#: src/translations.h:378
 msgid "Puerto Rico"
 msgstr "Пуерто-Рико"
 
-#: src/translations.h:355
+#: src/translations.h:379
 msgid "Palestinian Territories"
 msgstr "Палестинська територія"
 
-#: src/translations.h:356
+#: src/translations.h:380
 msgid "Portugal"
 msgstr "Португалія"
 
-#: src/translations.h:357
+#: src/translations.h:381
 msgid "Palau"
 msgstr "Палау"
 
-#: src/translations.h:358
+#: src/translations.h:382
 msgid "Paraguay"
 msgstr "Парагвай"
 
-#: src/translations.h:359
+#: src/translations.h:383
 msgid "Qatar"
 msgstr "Катар"
 
-#: src/translations.h:360
+#: src/translations.h:384
 msgid "Réunion"
 msgstr "Реюньйон"
 
-#: src/translations.h:361
+#: src/translations.h:385
 msgid "Romania"
 msgstr "Румунія"
 
-#: src/translations.h:362
+#: src/translations.h:386
 msgid "Serbia"
 msgstr "Сербія"
 
-#: src/translations.h:363
+#: src/translations.h:387
 msgid "Russian Federation"
 msgstr "Російська Федерація"
 
-#: src/translations.h:364
+#: src/translations.h:388
 msgid "Rwanda"
 msgstr "Руанда"
 
-#: src/translations.h:365
+#: src/translations.h:389
 msgid "Saudi Arabia"
 msgstr "Саудівська Аравія"
 
-#: src/translations.h:366
+#: src/translations.h:390
 msgid "Solomon Islands"
 msgstr "Соломонові Острови"
 
-#: src/translations.h:367
+#: src/translations.h:391
 msgid "Seychelles"
 msgstr "Сейшели"
 
-#: src/translations.h:368
+#: src/translations.h:392
 msgid "Sudan"
 msgstr "Судан"
 
-#: src/translations.h:369
+#: src/translations.h:393
 msgid "Sweden"
 msgstr "Швеція"
 
-#: src/translations.h:370
+#: src/translations.h:394
 msgid "Singapore"
 msgstr "Сінгапур"
 
-#: src/translations.h:371
+#: src/translations.h:395
 msgid "Saint Helena"
 msgstr "Острів Святої Єлени"
 
-#: src/translations.h:372
+#: src/translations.h:396
 msgid "Slovenia"
 msgstr "Словенія"
 
-#: src/translations.h:373
+#: src/translations.h:397
 msgid "Svalbard and Jan Mayen"
 msgstr "Острови Свальбард і Ян Маєн"
 
-#: src/translations.h:374
+#: src/translations.h:398
 msgid "Slovakia"
 msgstr "Словаччина"
 
-#: src/translations.h:375
+#: src/translations.h:399
 msgid "Sierra Leone"
 msgstr "Сьєрра-Леоне"
 
-#: src/translations.h:376
+#: src/translations.h:400
 msgid "San Marino"
 msgstr "Сан-Марино"
 
-#: src/translations.h:377
+#: src/translations.h:401
 msgid "Senegal"
 msgstr "Сенегал"
 
-#: src/translations.h:378
+#: src/translations.h:402
 msgid "Somalia"
 msgstr "Сомалі"
 
-#: src/translations.h:379
+#: src/translations.h:403
 msgid "Suriname"
 msgstr "Суринам"
 
-#: src/translations.h:380
+#: src/translations.h:404
 msgid "Sao Tome and Principe"
 msgstr "Сан-Томе і Принсипі"
 
-#: src/translations.h:381
+#: src/translations.h:405
 msgid "El Salvador"
 msgstr "Сальвадор"
 
-#: src/translations.h:382
+#: src/translations.h:406
 msgid "Syrian Arab Republic"
 msgstr "Сирійська Арабська Республіка"
 
-#: src/translations.h:383
+#: src/translations.h:407
 msgid "Swaziland"
 msgstr "Свазіленд"
 
-#: src/translations.h:384
+#: src/translations.h:408
 msgid "Turks and Caicos Islands"
 msgstr "Острови Теркс і Кайкос"
 
-#: src/translations.h:385
+#: src/translations.h:409
 msgid "Chad"
 msgstr "Чад"
 
-#: src/translations.h:386
+#: src/translations.h:410
 msgid "French Southern Territories"
 msgstr "Французькі Південні Території"
 
-#: src/translations.h:387
+#: src/translations.h:411
 msgid "Togo"
 msgstr "Того"
 
-#: src/translations.h:388
+#: src/translations.h:412
 msgid "Thailand"
 msgstr "Таїланд"
 
-#: src/translations.h:389
+#: src/translations.h:413
 msgid "Tajikistan"
 msgstr "Таджикистан"
 
-#: src/translations.h:390
+#: src/translations.h:414
 msgid "Tokelau"
 msgstr "Токелау"
 
-#: src/translations.h:391
+#: src/translations.h:415
 msgid "East Timor"
 msgstr "Східний Тимор"
 
-#: src/translations.h:392
+#: src/translations.h:416
 msgid "Turkmenistan"
 msgstr "Туркменістан"
 
-#: src/translations.h:393
+#: src/translations.h:417
 msgid "Tunisia"
 msgstr "Туніс"
 
-#: src/translations.h:394
+#: src/translations.h:418
 msgid "Tonga"
 msgstr "Тонга"
 
-#: src/translations.h:395
+#: src/translations.h:419
 msgid "Turkey"
 msgstr "Туреччина"
 
-#: src/translations.h:396
+#: src/translations.h:420
 msgid "Trinidad and Tobago"
 msgstr "Тринідад та Тобаго"
 
-#: src/translations.h:397
+#: src/translations.h:421
 msgid "Tuvalu"
 msgstr "Тувалу"
 
-#: src/translations.h:398
+#: src/translations.h:422
 msgid "Taiwan"
 msgstr "Тайвань"
 
-#: src/translations.h:399
+#: src/translations.h:423
 msgid "Tanzania"
 msgstr "Танзанія"
 
-#: src/translations.h:400
+#: src/translations.h:424
 msgid "Ukraine"
 msgstr "Україна"
 
-#: src/translations.h:401
+#: src/translations.h:425
 msgid "Uganda"
 msgstr "Уганда"
 
-#: src/translations.h:402
+#: src/translations.h:426
 msgid "United States Minor Outlying Islands"
 msgstr "Американські Малі Віддалені Острови"
 
-#: src/translations.h:403
+#: src/translations.h:427
 msgid "United States"
 msgstr "США"
 
-#: src/translations.h:404
+#: src/translations.h:428
 msgid "Uruguay"
 msgstr "Уругвай"
 
-#: src/translations.h:405
+#: src/translations.h:429
 msgid "Uzbekistan"
 msgstr "Узбекистан"
 
-#: src/translations.h:406
+#: src/translations.h:430
 msgid "Vatican City State"
 msgstr "Місто-держава Ватикан"
 
-#: src/translations.h:407
+#: src/translations.h:431
 msgid "Saint Vincent and the Grenadines"
 msgstr "Сент-Вінсент і Гренадини"
 
-#: src/translations.h:408
+#: src/translations.h:432
 msgid "Venezuela"
 msgstr "Венесуела"
 
-#: src/translations.h:409
+#: src/translations.h:433
 msgid "British Virgin Islands"
 msgstr "Віргінські острови (Британія)"
 
-#: src/translations.h:410
+#: src/translations.h:434
 msgid "United States Virgin Islands"
 msgstr "Американські Віргінські Острови"
 
-#: src/translations.h:411
+#: src/translations.h:435
 msgid "Viet Nam"
 msgstr "В'єтнам"
 
-#: src/translations.h:412
+#: src/translations.h:436
 msgid "Vanuatu"
 msgstr "Вануату"
 
-#: src/translations.h:413
+#: src/translations.h:437
 msgid "Wallis and Futuna"
 msgstr "Уолліс і Футуна"
 
-#: src/translations.h:414
+#: src/translations.h:438
 msgid "Samoa"
 msgstr "Самоа"
 
-#: src/translations.h:415
+#: src/translations.h:439
 msgid "Yemen"
 msgstr "Ємен"
 
-#: src/translations.h:416
+#: src/translations.h:440
 msgid "Mayotte"
 msgstr "Майотта"
 
-#: src/translations.h:417
+#: src/translations.h:441
 msgid "Yugoslavia"
 msgstr "Югославія"
 
-#: src/translations.h:418
+#: src/translations.h:442
 msgid "South Africa"
 msgstr "Південна Африка"
 
-#: src/translations.h:419
+#: src/translations.h:443
 msgid "Zambia"
 msgstr "Замбія"
 
-#: src/translations.h:420
+#: src/translations.h:444
 msgid "Zimbabwe"
 msgstr "Зімбабве"
 
@@ -4099,6 +4172,10 @@ msgstr "Вилучити позначене джерело"
 msgid "Sources"
 msgstr "Джерела"
 
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:206
+msgid "More Satellites"
+msgstr "Інші супутники"
+
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:208
 msgid "Get data from update sources"
 msgstr "Отримати дані з джерел оновлення"
@@ -5205,10 +5282,14 @@ msgstr ""
 "серпня), SN 1895B (5 липня), SN 1937C (21 серпня), SN 1972E (8 травня), SN "
 "1987A (24 лютого) і SN 2011FE (13 вересня)."
 
-#: plugins/Supernovae/src/Supernova.cpp:112
+#: plugins/Supernovae/src/Supernova.cpp:99
+msgid "supernova"
+msgstr "наднова"
+
+#: plugins/Supernovae/src/Supernova.cpp:115
 #, qt-format
-msgid "Type: %1"
-msgstr "Тип: %1"
+msgid "Type of supernova: %1"
+msgstr "Тип наднової: %1"
 
 #: plugins/Quasars/src/Quasars.cpp:59
 msgid "Quasars"
@@ -5225,11 +5306,11 @@ msgstr ""
 "видання каталогу «Квазари та активні ядра галактик» (Верон та ін., 2010) "
 "=2010A&A…518A..10V"
 
-#: plugins/Quasars/src/Quasar.cpp:129
-msgid "Type: quasar"
-msgstr "Тип: квазар"
+#: plugins/Quasars/src/Quasar.cpp:92
+msgid "quasar"
+msgstr "квазар"
 
-#: plugins/Quasars/src/Quasar.cpp:132
+#: plugins/Quasars/src/Quasar.cpp:134
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr "Z (червоний зсув): %1"

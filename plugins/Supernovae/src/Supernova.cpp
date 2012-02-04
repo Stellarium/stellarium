@@ -95,6 +95,9 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		oss << "</h2>";
 	}
 
+	if (flags&Extra1)
+		oss << q_("Type: <b>%1</b>").arg(q_("supernova")) << "<br />";
+
 	if (flags&Magnitude && mag <= core->getSkyDrawer()->getLimitMagnitude())
 	{
 	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
@@ -109,7 +112,7 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 
 	if (flags&Extra1)
 	{
-		oss << q_("Type: %1").arg(sntype) << "<br>";
+		oss << q_("Type of supernova: %1").arg(sntype) << "<br>";
 		if (distance>0)
 			oss << q_("Distance: %1 Light Years").arg(distance*1000) << "<br>";
 	}
