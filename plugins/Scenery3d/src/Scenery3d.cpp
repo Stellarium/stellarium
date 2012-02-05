@@ -39,7 +39,7 @@
 #include <stdexcept>
 #include <cmath>
 
-#define SHADOW_DEBUG 0
+#include <limits>
 
 #define MEANINGLESS 1.E34
 #define MEANINGLESS_INT -32767
@@ -54,7 +54,7 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
     this->cubemapSize=cubemapSize;
     this->shadowmapSize=shadowmapSize;
     eyeLevel=1.65;
-    textEnabled=false;
+    //textEnabled=false;
     objModel = new OBJ();
     groundModel = new OBJ();
     zRotateMatrix = Mat4d::identity();
@@ -103,6 +103,8 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
     bumpsEnabled = false;
     curEffect = No;
     curShader = 0;
+    lightCamEnabled = false;
+
     Mat4d matrix;
 #define PLANE(_VAR_, _MAT_) matrix=_MAT_; _VAR_=StelVertexArray(cubePlaneFront.vertex,StelVertexArray::Triangles,cubePlaneFront.texCoords);\
                         for(int i=0;i<_VAR_.vertex.size();i++){ matrix.transfo(_VAR_.vertex[i]); }
@@ -303,6 +305,7 @@ void Scenery3d::loadModel()
         objModel->transform(zRotateMatrix*obj2gridMatrix);
         objModelArrays = objModel->getStelArrays();
 
+
         /* We could re-create zRotateMatrix here if needed: We may have "default" conditions with landscape coordinates
         // inherited from a landscape, or loaded from scenery3d.ini. In any case, at this point they should have been valid.
         // But it turned out that loading/setting the landscape works with a smooth transition, therefore at this point,
@@ -352,10 +355,14 @@ void Scenery3d::loadModel()
             qDebug() << "Setting Northing to BBX center: " << objModel->getMinY() << ".." << objModel->getMaxY() << ": " << -absolutePosition.v[0];
         }
 
-
-
         absolutePosition[2] = -groundHeight()-eyeLevel;
         //absolutePosition.transfo4d(zRotateMatrix); // bring this position into rotated space.
+
+
+        Vec3f vecMin(Vec3f(groundModel->getMinX(),groundModel->getMinY(), groundModel->getMinZ()));
+        Vec3f vecMax(Vec3f(groundModel->getMaxX(),groundModel->getMaxY(), groundModel->getMaxZ()));
+        setSceneAABB(vecMin, vecMax);
+        //expandBoundingBox(Vec3f(objModel->getMinX(),objModel->getMinY(), objModel->getMinZ()), Vec3f(objModel->getMaxX(),objModel->getMaxY(), objModel->getMaxZ()));
 
         // finally, set core to enable update(). GZ: This was dne in draw() each time, seems unnecessary there!
         this->core=StelApp::getInstance().getCore();
@@ -373,14 +380,14 @@ void Scenery3d::handleKeys(QKeyEvent* e)
             //case Qt::Key_Space:     shadowsEnabled = !shadowsEnabled; e->accept(); break;
             //case Qt::Key_B:         bumpsEnabled = !bumpsEnabled; e->accept(); break;
             case Qt::Key_L:         torchEnabled = !torchEnabled; e->accept(); break;
-            case Qt::Key_K:         textEnabled = !textEnabled;   e->accept(); break;
+            case Qt::Key_K:         debugEnabled = !debugEnabled; e->accept(); break;
             case Qt::Key_PageUp:    movement_z = -1.0f * speedup; e->accept(); break;
             case Qt::Key_PageDown:  movement_z =  1.0f * speedup; e->accept(); break;
             case Qt::Key_Up:        movement_x = -1.0f * speedup; e->accept(); break;
             case Qt::Key_Down:      movement_x =  1.0f * speedup; e->accept(); break;
             case Qt::Key_Right:     movement_y = -1.0f * speedup; e->accept(); break;
             case Qt::Key_Left:      movement_y =  1.0f * speedup; e->accept(); break;
-            case Qt::Key_P: testMethod(); e->accept(); break;
+            case Qt::Key_P:         lightCamEnabled = !lightCamEnabled;     e->accept(); break;
         }
     }
     else if ((e->type() == QKeyEvent::KeyRelease) && (e->modifiers() & Qt::ControlModifier))
@@ -408,35 +415,65 @@ void Scenery3d::setLights(float ambientBrightness, float diffuseBrightness)
     glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
 }
 
-void Scenery3d::testMethod()
+void Scenery3d::switchToLightCam()
 {
-    Mat3f mat(5, 8, 7,
-              2, 5, 8,
-              3, 6, 9);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    gluLookAt (sunPosition[0]+30, sunPosition[1]+30, sunPosition[2]+30, 0, 0, 0, 0, 0, 1);
+}
 
-    printf("Matrix:\n");
-    mat.print();
-    printf("\n");
+void Scenery3d::setSceneAABB(Vec3f vecMin, Vec3f vecMax)
+{
+    AABB[0] = Vec3f(vecMin[0], vecMax[1], vecMin[2]); //0topNearLeft
+    AABB[1] = Vec3f(vecMax[0], vecMax[1], vecMin[2]); //1topNearRight
+    AABB[2] = Vec3f(vecMax[0], vecMin[1], vecMin[2]); //2bottomNearRight
+    AABB[3] = Vec3f(vecMin[0], vecMin[1], vecMin[2]); //3bottomNearLeft
+    AABB[4] = Vec3f(vecMin[0], vecMax[1], vecMax[2]); //4topFarLeft
+    AABB[5] = Vec3f(vecMax[0], vecMax[1], vecMax[2]); //5topFarRight
+    AABB[6] = Vec3f(vecMax[0], vecMin[1], vecMax[2]); //6bottomFarRight
+    AABB[7] = Vec3f(vecMin[0], vecMin[1], vecMax[2]); //7bottomFarLeft
+}
 
-    mat = mat.inverse();
-
-    printf("Inverted:\n");
-    mat.print();
-    printf("\n");
-
-    Mat4f mat2(1, 5, 9, 13,
-               2, 6, 10,14,
-               3, 7, 11,15,
-               4, 8, 12,16);
-
-    Mat3f upperMat = mat2.upper3x3();
-
-    printf("\nUpper Matrix:\n");
-    upperMat.print();
-
-    printf("\nTransposed:\n");
-    upperMat = upperMat.transpose();
-    upperMat.print();
+void Scenery3d::renderSceneAABB()
+{
+    glPolygonMode(GL_FRONT, GL_LINE);
+    glPolygonMode(GL_BACK, GL_LINE);
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glLineWidth(5);
+    glBegin(GL_QUADS);
+        //Front
+        glVertex3f(AABB[0][0], AABB[0][1], AABB[0][2]);
+        glVertex3f(AABB[1][0], AABB[1][1], AABB[1][2]);
+        glVertex3f(AABB[2][0], AABB[2][1], AABB[2][2]);
+        glVertex3f(AABB[3][0], AABB[3][1], AABB[3][2]);
+        //Back
+        glVertex3f(AABB[4][0], AABB[4][1], AABB[4][2]);
+        glVertex3f(AABB[5][0], AABB[5][1], AABB[5][2]);
+        glVertex3f(AABB[6][0], AABB[6][1], AABB[6][2]);
+        glVertex3f(AABB[7][0], AABB[7][1], AABB[7][2]);
+        //Left
+        glVertex3f(AABB[4][0], AABB[4][1], AABB[4][2]);
+        glVertex3f(AABB[7][0], AABB[7][1], AABB[7][2]);
+        glVertex3f(AABB[3][0], AABB[3][1], AABB[3][2]);
+        glVertex3f(AABB[0][0], AABB[0][1], AABB[0][2]);
+        //Right
+        glVertex3f(AABB[1][0], AABB[1][1], AABB[1][2]);
+        glVertex3f(AABB[5][0], AABB[5][1], AABB[5][2]);
+        glVertex3f(AABB[6][0], AABB[6][1], AABB[6][2]);
+        glVertex3f(AABB[2][0], AABB[2][1], AABB[2][2]);
+        //Top
+        glVertex3f(AABB[4][0], AABB[4][1], AABB[4][2]);
+        glVertex3f(AABB[5][0], AABB[5][1], AABB[5][2]);
+        glVertex3f(AABB[1][0], AABB[1][1], AABB[1][2]);
+        glVertex3f(AABB[0][0], AABB[0][1], AABB[0][2]);
+        //Bottom
+        glVertex3f(AABB[7][0], AABB[7][1], AABB[7][2]);
+        glVertex3f(AABB[6][0], AABB[6][1], AABB[6][2]);
+        glVertex3f(AABB[2][0], AABB[2][1], AABB[2][2]);
+        glVertex3f(AABB[3][0], AABB[3][1], AABB[3][2]);
+    glEnd();
+    glPolygonMode(GL_FRONT, GL_FILL);
+    glPolygonMode(GL_BACK, GL_FILL);
 }
 
 void Scenery3d::update(double deltaTime)
@@ -449,6 +486,7 @@ void Scenery3d::update(double deltaTime)
         Vec3d viewDirectionAltAz=core->j2000ToAltAz(viewDirection);
         double alt, az;
         StelUtils::rectToSphe(&az, &alt, viewDirectionAltAz);
+
 
         Vec3d move(( movement_x * std::cos(az) + movement_y * std::sin(az)),
                    ( movement_x * std::sin(az) - movement_y * std::cos(az)),
@@ -541,6 +579,9 @@ void Scenery3d::generateCubeMap_drawScene(StelPainter& painter, float ambientBri
         curShader->set3x3Uniform(location, normalMatrix);
     }
 
+    //For debug
+    if(lightCamEnabled) switchToLightCam();
+
     drawArrays(painter, true);
 
     //Unbind
@@ -624,7 +665,7 @@ void Scenery3d::generateShadowMap(StelCore* core)
 
     //Determine sun position
     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-    Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
+    sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
     //zRotateMatrix.transfo(sunPosition); // GZ: These rotations were commented out - testing 20120122
     sunPosition.normalize();
     // GZ: at night, a near-full Moon can cast good shadows.
@@ -648,13 +689,14 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
     glLoadIdentity();
-    //glMultMatrixd(projMatd);
-    const GLdouble orthoLeft = -50;
-    const GLdouble orthoRight = 50;
-    const GLdouble orthoBottom = -50;
-    const GLdouble orthoTop = 50;
-    const GLdouble f = 100;
-    const GLdouble n = -100;
+
+    const GLdouble orthoLeft = AABB[3][0];
+    const GLdouble orthoRight = AABB[5][0];
+    const GLdouble orthoBottom = AABB[3][1];
+    const GLdouble orthoTop = AABB[5][1];
+    //Need to find better values for n/f
+    const GLdouble f = 1000;
+    const GLdouble n = -1000;
 
     glOrtho(orthoLeft, orthoRight, orthoBottom, orthoTop, n, f);
     glGetFloatv(GL_PROJECTION_MATRIX, lightProjectionMatrix); // save light projection for further render passes
@@ -923,6 +965,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
                         setLights(ambientBrightness, directionalBrightness);\
                         if(shadows){generateCubeMap_drawSceneWithShadows(painter, ambientBrightness, directionalBrightness);}\
                         else{generateCubeMap_drawScene(painter, ambientBrightness, directionalBrightness);}\
+                        if(debugEnabled) renderSceneAABB();\
 
     //front
     glPushMatrix();
@@ -1000,8 +1043,6 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
     StelPainter painter(prj);
 
-    view = core->getMovementMgr()->getViewDirectionJ2000();
-
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -1012,12 +1053,24 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
 
     glClear(GL_DEPTH_BUFFER_BIT);
 
-    //front
-#if SHADOW_DEBUG
+    //Show some debug aids
+    if(debugEnabled)
+    {
+        float debugTextureSize = shadowmapSize/8;
+
+        const QFont font("Courier", 12);
+        painter.setFont(font);
+        painter.drawText(prj->getViewportWidth() - 285.0f, prj->getViewportHeight() - 25.0, QString("Shadow Depth Map Texture"));
+
+        float screen_x = prj->getViewportWidth() - debugTextureSize - 30;
+        float screen_y = prj->getViewportHeight() - debugTextureSize - 30;
+
         glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
-#else
-        glBindTexture(GL_TEXTURE_2D, cubeMap[0]->texture());
-#endif
+        painter.drawSprite2dMode(screen_x, screen_y, debugTextureSize);
+    }
+
+    //front
+    glBindTexture(GL_TEXTURE_2D, cubeMap[0]->texture());
     painter.drawSphericalTriangles(cubePlaneFront, true, __null, false);
 
     //right
@@ -1133,12 +1186,17 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
     glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
 
     setLights(ambientBrightness, directionalBrightness);
+
+    //testMethod();
     //GZ: The following calls apparently require the full cubemap. TODO: Verify and simplify
     if (shadows) {
         generateCubeMap_drawSceneWithShadows(painter, ambientBrightness, directionalBrightness);
     } else {
         generateCubeMap_drawScene(painter, ambientBrightness, directionalBrightness);
     }
+
+    //Render the scene's bounding box in debug mode
+    if(debugEnabled) renderSceneAABB();
 
     glMatrixMode(GL_MODELVIEW);
     glPopMatrix();
@@ -1162,8 +1220,8 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
     StelPainter painter(prj);
     const QFont font("Courier", 12);
     painter.setFont(font);
-    float screen_x = prj->getViewportWidth() - 250.0f;
-    float screen_y = prj->getViewportHeight() - 40.0f;
+    float screen_x = prj->getViewportWidth() - 240.0f;
+    float screen_y = prj->getViewportHeight() - (shadowmapSize/4) - 60.0f;
     QString str;
 
     // model_pos is the observer position (camera eye position) in model-grid coordinates
@@ -1186,31 +1244,6 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
     painter.drawText(screen_x, screen_y, str);
     screen_y -= 15.0f;
     str = QString("Eye:    %1m").arg(eyeLevel, 10, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);
-
-    screen_y -= 30.0f;
-    screen_x = prj->getViewportWidth() - 450.0f;
-    str = QString("Model View Matrix");
-    painter.drawText(screen_x, screen_y, str);
-
-    screen_y -= 15.0f;
-    str = QString("[%1 %2 %3 %4]").arg(mv2[0], 7, 'f', 2).arg(mv2[4], 7, 'f', 2).arg(mv2[8], 7, 'f', 2).arg(mv2[12], 7, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
-    str = QString("[%1 %2 %3 %4]").arg(mv2[1], 7, 'f', 2).arg(mv2[5], 7, 'f', 2).arg(mv2[9], 7, 'f', 2).arg(mv2[13], 7, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
-    str = QString("[%1 %2 %3 %4]").arg(mv2[2], 7, 'f', 2).arg(mv2[6], 7, 'f', 2).arg(mv2[10], 7, 'f', 2).arg(mv2[14], 7, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
-    str = QString("[%1 %2 %3 %4]").arg(mv2[3], 7, 'f', 2).arg(mv2[7], 7, 'f', 2).arg(mv2[11], 7, 'f', 2).arg(mv2[15], 7, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);
-
-    screen_y -= 30.0f;
-    str = QString("up[%1 %2 %3]").arg(up[0], 7, 'f', 2).arg(up[1], 7, 'f', 2).arg(up[2], 7, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
-    str = QString("view[%1 %2 %3]").arg(view[0], 7, 'f', 2).arg(view[1], 7, 'f', 2).arg(view[2], 7, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
 
     /*// DEBUG AIDS:
@@ -1285,5 +1318,5 @@ void Scenery3d::draw(StelCore* core)
         generateCubeMap(core);
         drawFromCubeMap(core);
     }
-    if (textEnabled) drawCoordinatesText(core);
+    if (debugEnabled) drawCoordinatesText(core);
 }
