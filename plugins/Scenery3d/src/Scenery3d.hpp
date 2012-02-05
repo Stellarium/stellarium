@@ -106,6 +106,7 @@ public:
 
     enum ShadowCaster { None, Sun, Moon, Venus };
     enum Effect { No, BumpMapping, ShadowMapping, All };
+    Mat4f mv2;
 
 private:
     static const float TORCH_BRIGHTNESS=0.5f;
@@ -128,8 +129,9 @@ private:
 
     bool shadowsEnabled;    // switchable value: Use shadow mapping
     bool bumpsEnabled;      // switchable value: Use bump mapping
-    bool textEnabled;       // switchable value: display coordinates on screen
+    bool debugEnabled;      // switchable value: display coordinates and debug aids on screen
     bool torchEnabled;      // switchable value: adds artificial ambient light
+    bool lightCamEnabled;   // switchable value: switches camera to light camera
 
     int cubemapSize;        // configurable values, typically 512/1024/2048/4096
     int shadowmapSize;
@@ -198,17 +200,22 @@ private:
     void sendToShader(OBJ::StelModel& stelModel, Effect cur);
     //Binds the shader for the selected effect
     void bindShader();
-
-    void testMethod();
     //Prepare ambient and directional light components from Sun, Moon, Venus.
     Scenery3d::ShadowCaster setupLights(float &ambientBrightness, float &diffuseBrightness, Vec3f &lightsourcePosition);
     //Set independent brightness factors (allow e.g. solar twilight ambient&lunar specular). Call setupLights first!
     void setLights(float ambientBrightness, float diffuseBrightness);
-
+    //Current Model View Matrix
     Mat4f modelView;
-    Mat4f mv2;
-    Vec3d up;
-    Vec3d view;
+    //Current sun position
+    Vec3d sunPosition;
+    //Switches the camera to sun position camera for debug purposes
+    void switchToLightCam();
+    //Sets the scenes' min/max vertices for AABB construction
+    void setSceneAABB(Vec3f vecMin, Vec3f vecMax);
+    //Renders the Scene's AABB as wireframe
+    void renderSceneAABB();
+    //Scene AABB
+    Vec3f AABB[8];
 };
 
 #endif
