@@ -45,6 +45,8 @@
 #define MEANINGLESS_INT -32767
 #define FROM_MODEL (MEANINGLESS_INT + 1)
 
+#define GROUND_MODEL 1
+
 
 Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
     :absolutePosition(0.0, 0.0, 0.0), // 1.E-12, 1.E-12, 1.E-12), // these values signify "set default values"
@@ -295,8 +297,6 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
 
 }
 
-
-
 void Scenery3d::loadModel()
 {
         QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
@@ -358,11 +358,14 @@ void Scenery3d::loadModel()
         absolutePosition[2] = -groundHeight()-eyeLevel;
         //absolutePosition.transfo4d(zRotateMatrix); // bring this position into rotated space.
 
+        OBJ* cur = objModel;
+#if GROUND_MODEL
+        cur = groundModel;
+#endif
 
-        Vec3f vecMin(Vec3f(groundModel->getMinX(),groundModel->getMinY(), groundModel->getMinZ()));
-        Vec3f vecMax(Vec3f(groundModel->getMaxX(),groundModel->getMaxY(), groundModel->getMaxZ()));
+        Vec3f vecMin(Vec3f(cur->getMinX(),cur->getMinY(), cur->getMinZ()));
+        Vec3f vecMax(Vec3f(cur->getMaxX(),cur->getMaxY(), cur->getMaxZ()));
         setSceneAABB(vecMin, vecMax);
-        //expandBoundingBox(Vec3f(objModel->getMinX(),objModel->getMinY(), objModel->getMinZ()), Vec3f(objModel->getMaxX(),objModel->getMaxY(), objModel->getMaxZ()));
 
         // finally, set core to enable update(). GZ: This was dne in draw() each time, seems unnecessary there!
         this->core=StelApp::getInstance().getCore();
@@ -387,7 +390,7 @@ void Scenery3d::handleKeys(QKeyEvent* e)
             case Qt::Key_Down:      movement_x =  1.0f * speedup; e->accept(); break;
             case Qt::Key_Right:     movement_y = -1.0f * speedup; e->accept(); break;
             case Qt::Key_Left:      movement_y =  1.0f * speedup; e->accept(); break;
-            case Qt::Key_P:         lightCamEnabled = !lightCamEnabled;     e->accept(); break;
+            case Qt::Key_P:         lightCamEnabled = !lightCamEnabled; e->accept(); break;
         }
     }
     else if ((e->type() == QKeyEvent::KeyRelease) && (e->modifiers() & Qt::ControlModifier))
