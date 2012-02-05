@@ -46,6 +46,9 @@ Scenery3dMgr::~Scenery3dMgr()
     delete scenery3d;
     scenery3d = NULL;
     delete scenery3dDialog;
+    delete shadowShader;
+    delete bumpShader;
+    delete univShader;
 }
 
 void Scenery3dMgr::enableScenery3d(bool enable)
@@ -155,6 +158,7 @@ void Scenery3dMgr::init()
         cubemapSize=0;
         shadowmapSize=0;
     }
+    //cubemapSize=0;
     // create action for enable/disable & hook up signals
     StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
     Q_ASSERT(gui);
