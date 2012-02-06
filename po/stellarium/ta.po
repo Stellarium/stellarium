@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-02-03 23:33+0700\n"
-"PO-Revision-Date: 2012-02-05 03:09+0000\n"
+"PO-Revision-Date: 2012-02-05 19:59+0000\n"
 "Last-Translator: Balaji பாலாஜி <Unknown>\n"
 "Language-Team: Tamil <ta@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-05 04:44+0000\n"
-"X-Generator: Launchpad (build 14738)\n"
+"X-Launchpad-Export-Date: 2012-02-06 04:43+0000\n"
+"X-Generator: Launchpad (build 14747)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -588,7 +588,7 @@ msgstr "நட்சத்திரக்கூட்ட கோடுகள்"
 #: src/gui/StelGui.cpp:102
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:277
 msgid "Constellation art"
-msgstr ""
+msgstr "விண்மீன் குழு கலை"
 
 #: src/gui/StelGui.cpp:103
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:272
@@ -627,7 +627,7 @@ msgstr ""
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1126
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:334
 msgid "Ecliptic line"
-msgstr ""
+msgstr "கிரகணத்திற்குரியகோடு"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1123
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:329
@@ -677,7 +677,7 @@ msgstr "நட்சத்திரங்கள்"
 #: src/gui/StelGui.cpp:124
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
 msgid "Planet labels"
-msgstr ""
+msgstr "கோள் விவரச்சீட்டு"
 
 #: src/gui/StelGui.cpp:125
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:300
@@ -699,11 +699,11 @@ msgstr "முழுத்திரை நிலை"
 
 #: src/gui/StelGui.cpp:130
 msgid "Flip scene horizontally"
-msgstr ""
+msgstr "கிடைமட்டமாக காட்சியை திருப்பு"
 
 #: src/gui/StelGui.cpp:131
 msgid "Flip scene vertically"
-msgstr ""
+msgstr "செங்குத்தாக காட்சியை திருப்பு"
 
 #: src/gui/StelGui.cpp:133
 msgid "Windows"
@@ -1011,11 +1011,11 @@ msgstr ""
 
 #: src/translations.h:43
 msgid "Juno"
-msgstr ""
+msgstr "ஜுனோ"
 
 #: src/translations.h:44
 msgid "Vesta"
-msgstr ""
+msgstr "வெஸ்டா"
 
 #: src/translations.h:45
 msgid "Jupiter"
@@ -1047,7 +1047,7 @@ msgstr "ஹிமாலியா"
 
 #: src/translations.h:52
 msgid "Elara"
-msgstr ""
+msgstr "எலாரா"
 
 #: src/translations.h:53
 msgid "Pasiphae"
@@ -1063,7 +1063,7 @@ msgstr ""
 
 #: src/translations.h:56
 msgid "Carme"
-msgstr ""
+msgstr "கார்மீ"
 
 #: src/translations.h:57
 msgid "Ananke"
@@ -1071,7 +1071,7 @@ msgstr ""
 
 #: src/translations.h:58
 msgid "Leda"
-msgstr ""
+msgstr "லேடா"
 
 #: src/translations.h:59
 msgid "Thebe"
@@ -1097,7 +1097,7 @@ msgstr "மிமாஸ்"
 
 #: src/translations.h:64
 msgid "Enceladus"
-msgstr ""
+msgstr "என்செலாடுஸ்"
 
 #: src/translations.h:65
 msgid "Tethys"
@@ -1109,7 +1109,7 @@ msgstr "டியோன்"
 
 #: src/translations.h:67
 msgid "Rhea"
-msgstr ""
+msgstr "ர்ஹிய"
 
 #: src/translations.h:68
 msgid "Titan"
@@ -1153,7 +1153,7 @@ msgstr "டைடானியா"
 
 #: src/translations.h:78
 msgid "Oberon"
-msgstr ""
+msgstr "ஒபிரான்"
 
 #: src/translations.h:79
 msgid "Pluto"
@@ -1166,7 +1166,7 @@ msgstr "சரோன்"
 #. TRANSLATORS: Moon of Pluto (II)
 #: src/translations.h:82
 msgid "Nix"
-msgstr ""
+msgstr "நிக்ஸ்"
 
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
@@ -1175,7 +1175,7 @@ msgstr ""
 
 #: src/translations.h:85
 msgid "Eris"
-msgstr ""
+msgstr "எரிஸ்"
 
 #: src/translations.h:86
 msgid "Triton"
@@ -1227,7 +1227,7 @@ msgstr ""
 
 #: src/translations.h:98
 msgid "Neso"
-msgstr ""
+msgstr "நிஸோ"
 
 #: src/translations.h:99
 msgid "Solar System Observer"
@@ -1281,22 +1281,22 @@ msgstr ""
 #. TRANSLATORS: Asteroid (1221) Amor
 #: src/translations.h:123
 msgid "Amor"
-msgstr ""
+msgstr "அமோர்"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
 #: src/translations.h:125
 msgid "Apophis"
-msgstr ""
+msgstr "அபோபிஸ்"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
 #: src/translations.h:127
 msgid "Chiron"
-msgstr ""
+msgstr "சிரான்"
 
 #. TRANSLATORS: Asteroid (433) Eros
 #: src/translations.h:129
 msgid "Eros"
-msgstr ""
+msgstr "ஈரோஸ்"
 
 #. TRANSLATORS: Asteroid (624) Hektor
 #: src/translations.h:131
@@ -1496,7 +1496,7 @@ msgstr "ஆன்டிகுவா மற்றும் பார்புட�
 
 #: src/translations.h:208
 msgid "Anguilla"
-msgstr ""
+msgstr "அங்க்யூலா"
 
 #: src/translations.h:209
 msgid "Albania"
@@ -1536,7 +1536,7 @@ msgstr "ஆஸ்த்திரேலியா"
 
 #: src/translations.h:218
 msgid "Aruba"
-msgstr ""
+msgstr "அரூபா"
 
 #: src/translations.h:219
 msgid "Azerbaijan"
@@ -1644,7 +1644,7 @@ msgstr "சுவிட்சர்லாந்து"
 
 #: src/translations.h:245
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "கோட் டில்வொரி"
 
 #: src/translations.h:246
 msgid "Cook Islands"
@@ -1700,7 +1700,7 @@ msgstr "ஜெர்மனி"
 
 #: src/translations.h:259
 msgid "Djibouti"
-msgstr ""
+msgstr "டிஜ்பொட்டி"
 
 #: src/translations.h:260
 msgid "Denmark"
@@ -2040,7 +2040,7 @@ msgstr "மங்கோலியா"
 
 #: src/translations.h:344
 msgid "Macau"
-msgstr ""
+msgstr "மக்காவ்"
 
 #: src/translations.h:345
 msgid "Northern Mariana Islands"
@@ -2052,11 +2052,11 @@ msgstr "மார்டினீக்கு"
 
 #: src/translations.h:347
 msgid "Mauritania"
-msgstr ""
+msgstr "மொரிசியேனியா"
 
 #: src/translations.h:348
 msgid "Montserrat"
-msgstr ""
+msgstr "மோன்ஸிராட்"
 
 #: src/translations.h:349
 msgid "Malta"
@@ -2128,7 +2128,7 @@ msgstr "நௌரு"
 
 #: src/translations.h:366
 msgid "Niue"
-msgstr ""
+msgstr "நீயு"
 
 #: src/translations.h:367
 msgid "New Zealand"
@@ -2148,7 +2148,7 @@ msgstr "பெரு"
 
 #: src/translations.h:371
 msgid "French Polynesia"
-msgstr ""
+msgstr "பிரெஞ்ச் பொலினேஷியா"
 
 #: src/translations.h:372
 msgid "Papua New Guinea"
@@ -2733,7 +2733,7 @@ msgstr "ஒளி வேகத்தை ஒப்புருவாக்கு"
 
 #: src/ui_viewDialog.h:1098
 msgid "Scale Moon"
-msgstr ""
+msgstr "நிலவின் அளவு"
 
 #: src/ui_viewDialog.h:1100
 msgid "Show atmosphere"
@@ -3557,12 +3557,12 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 msgid "Binoculars"
-msgstr ""
+msgstr "இருகண் நோக்கிகள்"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:883
 #: plugins/Oculars/src/ui_ocularDialog.h:893
 msgid "Sensors"
-msgstr ""
+msgstr "உணரிகள்"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Resolution x (pixels):"
@@ -3593,19 +3593,19 @@ msgstr ""
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Telescopes"
-msgstr ""
+msgstr "தொலைநோக்கிகள்"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:899
 msgid "Diameter:"
-msgstr ""
+msgstr "விட்டம்"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Horizontal flip"
-msgstr ""
+msgstr "கிடைமட்டமாக திருப்பு"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:901
 msgid "Vertical flip"
-msgstr ""
+msgstr "செங்குத்தாக திருப்பு"
 
 #: plugins/Satellites/src/Satellites.cpp:65
 #: plugins/Satellites/src/ui_satellitesDialog.h:705
@@ -3620,15 +3620,15 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:130
 msgid "Satellites configuration window"
-msgstr ""
+msgstr "செயற்கைக்கோள் கட்டமைப்பு ஜன்னல்"
 
 #: plugins/Satellites/src/Satellites.cpp:131
 msgid "Satellite hints"
-msgstr ""
+msgstr "செயற்கைக்கோள் குறிப்புகள்"
 
 #: plugins/Satellites/src/Satellites.cpp:133
 msgid "Satellite labels"
-msgstr ""
+msgstr "செயற்கைக்கோள் விவரச்சீட்டுகள்"
 
 #: plugins/Satellites/src/Satellites.cpp:167
 msgid ""
@@ -3651,7 +3651,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:244
 #, qt-format
 msgid "Altitude (km): %1"
-msgstr ""
+msgstr "குத்தியரம் (கி.மி.):%1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
 #: plugins/Satellites/src/Satellite.cpp:247
@@ -3698,7 +3698,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:253
 msgid "Version"
-msgstr ""
+msgstr "பதிப்பு"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:257
 msgid ""
@@ -3708,7 +3708,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
 msgid "Notes for users"
-msgstr ""
+msgstr "பயனர்களுக்கான குறிப்புகள்"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid ""
@@ -3771,7 +3771,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:280
 msgid "Adding new satellites"
-msgstr ""
+msgstr "புதிய செயற்கைகோள்களை சேர்த்தல்"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
 #, qt-format
@@ -3782,7 +3782,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:283
 msgid "Technical notes"
-msgstr ""
+msgstr "தொழில்நுட்ப குறிப்புகள்"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:284
 msgid ""
@@ -3804,7 +3804,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Links"
-msgstr ""
+msgstr "இணைப்புகள்"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
 msgid ""
@@ -3838,7 +3838,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:317
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:349
 msgid "Updating now..."
-msgstr ""
+msgstr "இப்பொழுது புதுப்பிக்கப்படுகிறது"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:319
 msgid "Next update: < 1 minute"
@@ -3857,15 +3857,15 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:338
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
 msgid "Update now"
-msgstr ""
+msgstr "இப்போது புதுப்பி"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:340
 msgid "Update from files"
-msgstr ""
+msgstr "கோப்புகளில் இருந்து புதுப்பி"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:352
 msgid "Update error"
-msgstr ""
+msgstr "புதுப்பித்தல் பிழை"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:359
 #, qt-format
@@ -3898,7 +3898,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:135
 msgid "Downloading data..."
-msgstr ""
+msgstr "தரவுகள் இறக்கப்படுகிறது"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:136
 msgid ""
@@ -3941,7 +3941,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
 msgid "Last update:"
-msgstr ""
+msgstr "கடைசி புதுப்பித்தல்:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:646
 msgid "Update frequency (hours):"
@@ -3949,7 +3949,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:648
 msgid "Labels"
-msgstr ""
+msgstr "விளக்கச்சீட்டுகள்"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:649
 msgid "Label font size (pixels):"
@@ -3996,7 +3996,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:674
 msgid "Settings"
-msgstr ""
+msgstr "அமைவுகள்"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 msgid "Display the selected satellite(s)"
@@ -4004,7 +4004,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:678
 msgid "Displayed"
-msgstr ""
+msgstr "காட்டப்பட்டது"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:680
 msgid "Display orbit line(s) for the selected satellite(s)"
@@ -4012,7 +4012,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 msgid "Orbit"
-msgstr ""
+msgstr "சுற்றுப்பாதை"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:684
 msgid "Catalog number:"
@@ -4020,11 +4020,11 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:685
 msgid "Description:"
-msgstr ""
+msgstr "விவரணம்:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:686
 msgid "Groups:"
-msgstr ""
+msgstr "குழுக்கள்:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:688
 msgid "Comma separated list of groups"
@@ -4040,15 +4040,15 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:695
 msgid "Remove the selected satellites"
-msgstr ""
+msgstr "தேர்ந்தெடுக்கப்பட்ட செயற்கைக்கோளை நீக்கவும்"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:698
 msgid "Add more satellites"
-msgstr ""
+msgstr "மேலும் செயற்கைக்கோள்களை கூட்டவும்"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:702
 msgid "Save changes"
-msgstr ""
+msgstr "மாற்றங்களை சேமி"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:707
 msgid ""
@@ -4058,19 +4058,19 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:710
 msgid "Add new source"
-msgstr ""
+msgstr "புதிய மூலத்தை சேர்க்கவும்"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Remove selected source"
-msgstr ""
+msgstr "தேர்ந்தெடுக்கப்பட்ட மூலங்களை நீக்கவும்"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:717
 msgid "Sources"
-msgstr ""
+msgstr "மூலங்கள்"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:206
 msgid "More Satellites"
-msgstr ""
+msgstr "மேலும் செயற்கைகோள்கள்"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:208
 msgid "Get data from update sources"
@@ -4079,21 +4079,21 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:209
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Abort download"
-msgstr ""
+msgstr "பதிவிறக்கத்தை ரத்து செய்"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:210
 msgid "New satellites"
-msgstr ""
+msgstr "புதிய செயற்கைகோள்கள்"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:212
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Discard"
-msgstr ""
+msgstr "கைவிடு"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:150
 msgid "Telescope Control"
-msgstr ""
+msgstr "தொலைநோக்கி கட்டுப்பாடு"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 msgid ""
@@ -4104,7 +4104,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:155
 #, qt-format
 msgid "Move telescope #%1 to selected object"
-msgstr ""
+msgstr "தேர்ந்தெடுத்த பொருளின் மீது #%1 தொலைநோக்கியை நகர்த்து"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:162
 #, qt-format
@@ -4117,35 +4117,35 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
-msgstr ""
+msgstr "புதிய தொலைநோக்கியை சேர்க்கவும்"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
-msgstr ""
+msgstr "தொலைநோக்கியை கட்டமை"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
-msgstr ""
+msgstr "தகவல் இல்லை"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
 msgid "Starting"
-msgstr ""
+msgstr "துவக்குகிறது"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:58
 msgid "Connecting"
-msgstr ""
+msgstr "இணைக்கப்படுகிறது"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:59
 msgid "Connected"
-msgstr ""
+msgstr "இணைக்கப்பட்டது"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:60
 msgid "Disconnected"
-msgstr ""
+msgstr "துண்டிக்கபட்டது"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:61
 msgid "Stopped"
-msgstr ""
+msgstr "நின்றது"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
@@ -4156,24 +4156,24 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "பதிப்பு %1"
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Status"
-msgstr ""
+msgstr "நிலை"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Type"
-msgstr ""
+msgstr "வகை"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
-msgstr ""
+msgstr "பெயர்"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #, qt-format
@@ -4216,12 +4216,12 @@ msgstr ""
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid "virtual"
-msgstr ""
+msgstr "மெய்நிகர்"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:744
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Start"
-msgstr ""
+msgstr "துவக்கு"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:745
 msgid "Start the selected local telescope"
@@ -4229,7 +4229,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:750
 msgid "Stop"
-msgstr ""
+msgstr "நிறுத்து"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:751
 msgid "Stop the selected local telescope"
@@ -4237,23 +4237,23 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:756
 msgid "Connect"
-msgstr ""
+msgstr "இணைக்க"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:757
 msgid "Connect to the selected telescope"
-msgstr ""
+msgstr "தேர்ந்தெடுக்கப்பட்ட தொலைநோக்கிக்கு இணைக்கவும்"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:762
 msgid "Disconnect"
-msgstr ""
+msgstr "இணைப்பைத் துண்டிக்கவும்"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:763
 msgid "Disconnect from the selected telescope"
-msgstr ""
+msgstr "தேர்ந்தெடுக்கப்பட்ட தொலைநோக்கியில் இருந்து துண்டிக்கவும்"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:784
 msgid "Select a directory"
-msgstr ""
+msgstr "ஓர் அடைவை தேர்ந்தெடு"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:281
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
@@ -4283,7 +4283,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "Hours-minutes-seconds format"
-msgstr ""
+msgstr "மணி-நிமிடம்-நொடி வடிவம்"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:291
 msgid "&HMS"
@@ -4291,7 +4291,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:293
 msgid "Degrees-minutes-seconds format"
-msgstr ""
+msgstr "பாகை-நிமிடம்-நொடி வடிவம்"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:295
 msgid "&DMS"
@@ -4315,7 +4315,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope Configuration"
-msgstr ""
+msgstr "தொலைநோக்கி கட்டமைப்பு"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid "Telescope controlled by:"
@@ -4347,11 +4347,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Telescope properties"
-msgstr ""
+msgstr "தொலைநோக்கியின் பண்புகள்"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid "Connection delay:"
-msgstr ""
+msgstr "இணைப்பு தாமதம்:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:488
 msgid ""
@@ -4362,11 +4362,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Coordinate system:"
-msgstr ""
+msgstr "ஆயம்:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "J2000 (default)"
-msgstr ""
+msgstr "J2000 ( )"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
 msgid "Equinox of the date (JNow)"
@@ -4377,14 +4377,16 @@ msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
+"ஸ்டெல்லெரியம் தொடங்கியவுடன் தானாகவே தொலைநோக்கியை தொடக்க முயற்சிக்கவும் "
+"அல்லது இணைப்பை ஏற்படுத்தவும்"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Start/connect at startup"
-msgstr ""
+msgstr "கணிணி தொடங்கும் பொழுது துவக்கு/இனை"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Device settings"
-msgstr ""
+msgstr "கருவி அமைப்புகள்"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Serial port:"
@@ -4392,15 +4394,15 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Device model:"
-msgstr ""
+msgstr "சாதன மாதிரி:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Connection settings"
-msgstr ""
+msgstr "இனைப்பு அமைப்புகள்"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:502
 msgid "Host:"
-msgstr ""
+msgstr "தருநர்:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:504
 msgid ""
@@ -4413,7 +4415,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "User interface settings"
-msgstr ""
+msgstr "பயணர் இடைமுக அமைப்புகள்"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
 msgid "Show circles with fixed angular size around the telescope reticle"
@@ -4425,7 +4427,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:512
 msgid "Circle size(s):"
-msgstr ""
+msgstr "வட்ட அளவு(கள்):"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:514
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
@@ -4433,27 +4435,27 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "OK"
-msgstr ""
+msgstr "சரி"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
 msgid "Telescopes Controlled"
-msgstr ""
+msgstr "தொலைநோக்கிகள் கட்டுபடுத்தபட்டுள்ளது"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Configure the selected telescope"
-msgstr ""
+msgstr "தேர்ந்தெடுக்கபட்ட தொலைநோக்கியை கட்டமைக்கவும்"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Configure"
-msgstr ""
+msgstr "கட்டமைப்பு"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Add a new telescope"
-msgstr ""
+msgstr "புதிய தொலைநோக்கியை சேர்க்கவும்"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "Remove the selected telescope"
-msgstr ""
+msgstr "தேர்ந்தெடுக்கபட்ட தொலைநோக்கியை நீக்கவும்"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "GUI"
@@ -4461,7 +4463,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Show telescope labels"
-msgstr ""
+msgstr "தொலைநோக்கி தகவல் சீட்டை காட்டவும்"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Show telescope reticles"
@@ -4473,7 +4475,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Files"
-msgstr ""
+msgstr "கோப்புக்கள்"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Log telescope driver messages to files"
@@ -4500,11 +4502,11 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 msgid "January"
-msgstr ""
+msgstr "ஜனவரி"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 msgid "February"
-msgstr ""
+msgstr "பிப்ரவரி"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 msgid "March"
@@ -4516,83 +4518,83 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 msgid "May"
-msgstr ""
+msgstr "மே"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 msgid "June"
-msgstr ""
+msgstr "ஜூன்"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 msgid "July"
-msgstr ""
+msgstr "ஜூலை"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 msgid "August"
-msgstr ""
+msgstr "ஆகஸ்ட்"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 msgid "September"
-msgstr ""
+msgstr "செப்டம்பர்"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 msgid "October"
-msgstr ""
+msgstr "அக்டோபர்"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 msgid "November"
-msgstr ""
+msgstr "நவம்பர்"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 msgid "December"
-msgstr ""
+msgstr "டிசம்பர்"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:265
 msgid "First week"
-msgstr ""
+msgstr "முதல் வாரம்"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:266
 msgid "Second week"
-msgstr ""
+msgstr "இரண்டாம் வாரம்"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:267
 msgid "Third week"
-msgstr ""
+msgstr "மூன்றாம் வாரம்"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:268
 msgid "Fourth week"
-msgstr ""
+msgstr "நான்காம் வாரம்"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:269
 msgid "Last week"
-msgstr ""
+msgstr "கடைசி வாரம்"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:278
 msgid "Sunday"
-msgstr ""
+msgstr "ஞாயிற்றுக்கிழமை"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:279
 msgid "Monday"
-msgstr ""
+msgstr "திங்கட்கிழமை"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:280
 msgid "Tuesday"
-msgstr ""
+msgstr "செவ்வாய்கிழமை"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:281
 msgid "Wednesday"
-msgstr ""
+msgstr "புதன்கிழமை"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:282
 msgid "Thursday"
-msgstr ""
+msgstr "வியாழக்கிழமை"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:283
 msgid "Friday"
-msgstr ""
+msgstr "வெள்ளிக்கிழமை"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:284
 msgid "Saturday"
-msgstr ""
+msgstr "சனிக்கிழமை"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
@@ -4607,11 +4609,11 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
 msgid "Time zone"
-msgstr ""
+msgstr "நேர மண்டலம்"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:452
 msgid "Timezone name:"
-msgstr ""
+msgstr "நேரமண்டல பெயர்:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
@@ -4637,7 +4639,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
 msgid "Day:"
-msgstr ""
+msgstr "கிழமை:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
@@ -4647,7 +4649,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
 msgid "Date:"
-msgstr ""
+msgstr "தேதி:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
 msgid "Daylight saving time end"
@@ -4655,7 +4657,7 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:465
 msgid "Use this definition"
-msgstr ""
+msgstr "இந்த விளக்கத்தை பயண்படுத்து"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
 msgid ""
@@ -4703,24 +4705,24 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
 msgid "System default"
-msgstr ""
+msgstr "கணிணி முன்னிருப்பு"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "12-hour format"
-msgstr ""
+msgstr "12-மணி வடிவமைப்பு"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
 msgid "24-hour format"
-msgstr ""
+msgstr "24-மணி வடிவமைப்பு"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "Date display format"
-msgstr ""
+msgstr "தேதி காட்சி வடிவமைப்பு"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
 msgid "yyyy-mm-dd (ISO 8601)"
-msgstr ""
+msgstr "yyyy-mm-dd (ISO 8601)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 msgid "dd-mm-yyyy"
@@ -4742,11 +4744,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:162
 msgid "Current date/time"
-msgstr ""
+msgstr "தற்போதய தேதி/நேரம்"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:167
 msgid "Set time zone"
-msgstr ""
+msgstr "நேர மண்டலத்தை அமைக்கவும்"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:168
 msgid "Day keys"
@@ -4759,7 +4761,7 @@ msgstr ""
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:176
 msgid "system"
-msgstr ""
+msgstr "கணினி"
 
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:178
@@ -4790,19 +4792,19 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:222
 msgid "Language"
-msgstr ""
+msgstr "மொழி"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:236
 msgid "Show stars"
-msgstr ""
+msgstr "நட்சத்திரங்களை காட்டு"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:264
 msgid "Colors"
-msgstr ""
+msgstr "வண்ணங்கள்"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:340
 msgid "Nebula names"
-msgstr ""
+msgstr "நட்சத்திர கூட்டத்தின் பெயர்கள்"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:344
 msgid "Nebula hints"
@@ -4810,7 +4812,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:387
 msgid "Effects"
-msgstr ""
+msgstr "சிறப்பீடு"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:401
 msgid "Manual zoom"
@@ -4855,7 +4857,7 @@ msgstr ""
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:464
 msgid "Administration"
-msgstr ""
+msgstr "நிர்வாகம்"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:469
 msgid "Load default configuration"
@@ -4863,11 +4865,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:470
 msgid "Save current configuration"
-msgstr ""
+msgstr "தற்போதய கட்டமைப்பை சேமிக்கவும்"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:473
 msgid "Shut down"
-msgstr ""
+msgstr "பணி நிறுத்தம்"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:504
 msgid "[no TUI node]"
@@ -4875,11 +4877,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
 msgid "On"
-msgstr ""
+msgstr "ஆரம்பி"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
 msgid "Off"
-msgstr ""
+msgstr "அணை"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format
@@ -4929,7 +4931,7 @@ msgstr ""
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:87
 msgid "website"
-msgstr ""
+msgstr "இணையத்தளம்"
 
 #. TRANSLATORS: IAU = International Astronomical Union
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:91
@@ -4947,23 +4949,23 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Import data"
-msgstr ""
+msgstr "தரவை இறக்குமதி செய்யவும்"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
-msgstr ""
+msgstr "வகையை தேர்ந்தெடுக்கவும்"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Asteroids"
-msgstr ""
+msgstr "விண்கற்கள்"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Comets"
-msgstr ""
+msgstr "வால் நட்சத்திரங்கள்"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Select the source"
-msgstr ""
+msgstr "மூலத்தை தேர்ந்தெடுக்கவும்"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Download a list of objects from the Internet"
@@ -4975,7 +4977,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Or enter a URL:"
-msgstr ""
+msgstr "அல்லது ஒரு உரலியை உள்ளிடவும்"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Add this URL to the bookmarks list"
@@ -4995,16 +4997,16 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Lists"
-msgstr ""
+msgstr "பட்டியல்கள்"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "Online search"
-msgstr ""
+msgstr "இணைய தேடல்"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Objects found"
-msgstr ""
+msgstr "பொருள்கள் கண்டுபிடிக்கபட்டது"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid ""
@@ -5017,11 +5019,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Overwrite existing objects"
-msgstr ""
+msgstr "இருக்கும் பொருளின் மீது மேலெழுது"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
 msgid "Update existing objects"
-msgstr ""
+msgstr "இருக்கும் பொருளை புதுப்பி"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid "Update only the orbital elements"
@@ -5037,7 +5039,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid "Add objects"
-msgstr ""
+msgstr "பொருளை சேர்க்கவும்"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
@@ -5046,7 +5048,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Warning"
-msgstr ""
+msgstr "எச்சரிக்கை"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid ""
@@ -5062,7 +5064,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Reset to defaults"
-msgstr ""
+msgstr "இயல்புநிலைக்கு மீட்டமை"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Copy/replace the Solar System file"
@@ -5084,11 +5086,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Configuration file"
-msgstr ""
+msgstr "கட்டமைப்பு கோப்பு"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Add new Solar System objects"
-msgstr ""
+msgstr "புதிய சூரிய மண்டல பொருள்களை சேர்க்கவும்"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
 msgid "Import orbital elements in MPC format..."
@@ -5096,7 +5098,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
 msgid "Solar System"
-msgstr ""
+msgstr "சூரிய மண்டலம்"
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical Supernovae"
@@ -5114,12 +5116,12 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernova.cpp:99
 msgid "supernova"
-msgstr ""
+msgstr "பெரு வெடுப்பு"
 
 #: plugins/Supernovae/src/Supernova.cpp:115
 #, qt-format
 msgid "Type of supernova: %1"
-msgstr ""
+msgstr "பெரு வெடுப்பு வகை: %1"
 
 #: plugins/Quasars/src/Quasars.cpp:59
 msgid "Quasars"
