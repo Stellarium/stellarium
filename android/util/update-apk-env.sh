@@ -28,4 +28,4 @@ cp -vrf $INSTALL_DIR/bin $APK_LIBS_DIR
 
 #copy assets to apk 
 rm -vrf $APK_DIR/assets
-cp -vrf $INSTALL_DIR/share $APK_DIR/assets
+cp -vrf $INSTALL_DIR/share/stellarium $APK_DIR/assets
