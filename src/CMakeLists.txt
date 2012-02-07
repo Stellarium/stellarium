@@ -326,6 +326,12 @@ IF(WIN32)
 ENDIF(WIN32)
 
 SET(stellarium_exe_SRCS main.cpp)
+IF (BUILD_FOR_ANDROID)
+    SET(stellarium_exe_SRCS
+        ${stellarium_exe_SRCS}
+        qtmain_android.cpp
+        )
+ENDIF (BUILD_FOR_ANDROID)
 
 ################# compiles resources files ############
 SET(stellarium_RES ${CMAKE_SOURCE_DIR}/data/mainRes.qrc)
@@ -606,20 +612,26 @@ IF(WIN32)
 	SET(extLinkerOption ${extLinkerOption} libwinmm.a)
 ENDIF()
 
-IF(GENERATE_STELMAINLIB)
- ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_RES_CXX})
- TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
- INSTALL(TARGETS stelMain DESTINATION lib)
- ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
- #stelMain should be after the plug-ins, otherwise the build crashes
- TARGET_LINK_LIBRARIES(stellarium ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} stelMain ${extLinkerOption})
-ELSE()
- ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
+IF(BUILD_FOR_ANDROID)
+ #compile as a library (?)
+ ADD_LIBRARY(stellarium SHARED ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
  TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
- IF(APPLE)
-# SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -dylib_file /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/works/OpenGL.framework/Versions/A/Libraries/libGL.dylib -framework Cocoa -framework QtDeclarative")
-SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
+ELSE()
+ IF(GENERATE_STELMAINLIB)
+  ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_RES_CXX})
+  TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
+  INSTALL(TARGETS stelMain DESTINATION lib)
+  ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
+  #stelMain should be after the plug-ins, otherwise the build crashes
+  TARGET_LINK_LIBRARIES(stellarium ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} stelMain ${extLinkerOption})
+ ELSE()
+  ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
+  TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
+  IF(APPLE)
+ # SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -dylib_file /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/works/OpenGL.framework/Versions/A/Libraries/libGL.dylib -framework Cocoa -framework QtDeclarative")
+ SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
 
+  ENDIF()
  ENDIF()
 ENDIF()
 
