@@ -42,6 +42,10 @@ if [ ! -n "${STELLARIUM_ANDROID_CONF_LOADED+x}" ]; then
   # according to necessitas' Windows directory structure; it may break on other OSs
   export WINDOWS=true
   
+  #This is may be set already
+  #if not, set it outside or in here, either way it should point to the JDK root dir, *not* the JRE
+  #export JAVA_HOME=/c/Program\ Files/Java/jdk1.6.0_30/
+  
   #not needed if these are already in your path
   #export PATH=$NECESSITAS_DIR/apache-ant-1.8.2/bin:$NECESSITAS_DIR/android-sdk/tools:$PATH
   
