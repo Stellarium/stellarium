@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-03 23:33+0700\n"
-"PO-Revision-Date: 2012-02-04 21:52+0000\n"
+"PO-Revision-Date: 2012-02-06 06:11+0000\n"
 "Last-Translator: Zbyněk Schwarz <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-05 04:43+0000\n"
-"X-Generator: Launchpad (build 14738)\n"
+"X-Launchpad-Export-Date: 2012-02-07 04:49+0000\n"
+"X-Generator: Launchpad (build 14747)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -4923,52 +4923,52 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:387
 msgid "Effects"
-msgstr ""
+msgstr "Efekty"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:401
 msgid "Manual zoom"
-msgstr ""
+msgstr "Ruční přiblížení"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:406
 msgid "Magnitude scaling multiplier"
-msgstr ""
+msgstr "Násobitel měřítka velikosti"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:408
 msgid "Milky Way intensity:"
-msgstr ""
+msgstr "Intenzita Mléčné Dráhy:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:414
 msgid "Nebula label frequency:"
-msgstr ""
+msgstr "Četnost jmenovek mlhoviny:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:415
 msgid "Zoom duration:"
-msgstr ""
+msgstr "Trvání přiblížení:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:421
 msgid "Cursor timeout:"
-msgstr ""
+msgstr "Časový limit kurzoru:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:422
 msgid "Setting landscape sets location"
-msgstr ""
+msgstr "Nastavení krajiny nastaví umístění"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:443
 msgid "Run local script"
-msgstr ""
+msgstr "Spustit místní skript"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:449
 msgid "Stop running script"
-msgstr ""
+msgstr "Zastavit bežící skript"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:452
 msgid "CD/DVD script"
-msgstr ""
+msgstr "Skript CD/DVD"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:464
 msgid "Administration"
-msgstr ""
+msgstr "Administrace"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:469
 msgid "Load default configuration"
@@ -4980,11 +4980,11 @@ msgstr "Uložit aktuální nastavení"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:473
 msgid "Shut down"
-msgstr ""
+msgstr "Vypnout"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:504
 msgid "[no TUI node]"
-msgstr ""
+msgstr "[žádný režim TUI]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
 msgid "On"
@@ -4997,15 +4997,15 @@ msgstr "Vypnout"
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr ""
+msgstr "chby, neznámá barva část \"%1\""
 
 #: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
 msgid " [RETURN to activate]"
-msgstr ""
+msgstr " [ENTER pro aktivaci]"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
-msgstr ""
+msgstr "Editor sluneční soustavy"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:59
 msgid ""
@@ -5021,17 +5021,19 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
 #, qt-format
 msgid "Query the MPC's %1:"
-msgstr ""
+msgstr "Dotázat se MPC %1:"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
 msgid "Only one result will be returned if the query is successful."
-msgstr ""
+msgstr "Pokud bude dotaz úspěšný, bude vrácen pouze jeden výsledek."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
 msgstr ""
+"Komety i asteroidy mohou být identifikovány podle jejich čísla, názvu (v "
+"angličtině) nebo prozatímní název."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
 #, qt-format
@@ -5045,7 +5047,7 @@ msgstr ""
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:87
 msgid "website"
-msgstr ""
+msgstr "internetová stránka"
 
 #. TRANSLATORS: IAU = International Astronomical Union
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:91
@@ -5063,11 +5065,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Import data"
-msgstr ""
+msgstr "Importovat data"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
-msgstr ""
+msgstr "Zvolte typ"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Asteroids"
@@ -5079,7 +5081,7 @@ msgstr "Komety"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Select the source"
-msgstr ""
+msgstr "Zvolte zdroj"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Download a list of objects from the Internet"
@@ -5087,11 +5089,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Select a source from the list:"
-msgstr ""
+msgstr "Zvolte zdroj ze seznamu:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Or enter a URL:"
-msgstr ""
+msgstr "Nebo zadejte URL:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Add this URL to the bookmarks list"
@@ -5111,7 +5113,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Lists"
-msgstr ""
+msgstr "Seznamy"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
@@ -5120,7 +5122,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Objects found"
-msgstr ""
+msgstr "Nalezené objekty"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid ""
@@ -5145,24 +5147,24 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid "Mark all"
-msgstr ""
+msgstr "Označit vše"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Mark none"
-msgstr ""
+msgstr "Neoznačit nic"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid "Add objects"
-msgstr ""
+msgstr "Přidat objekty"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Solar System objects"
-msgstr ""
+msgstr "Objekty sluneční soustavy"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Warning"
-msgstr ""
+msgstr "Varování"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid ""
@@ -5212,7 +5214,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
 msgid "Solar System"
-msgstr ""
+msgstr "Sluneční soustava"
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical Supernovae"
