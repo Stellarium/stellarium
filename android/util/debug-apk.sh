@@ -1,8 +1,7 @@
 #!/bin/bash
 
 #   ***************************************************************************
-#     necessitas-qtcreator.sh - Run necessitas qtcreator with the config.conf
-#     environment variables set
+#     build-apk.sh - builds the and installs the needed libraries for android QGIS
 #      --------------------------------------
 #
 #      based on Marco Bernasocchi's android QGIS scripts
@@ -16,24 +15,29 @@
 #   *                                                                         *
 #   ***************************************************************************/
 
+set -e
 
 source `dirname $0`/config.conf
+ADB=$ANDROID_SDK_ROOT/platform-tools/adb
+NDKGDB=$ANDROID_NDK_ROOT/ndk-gdb
+$ADB kill-server
 
-export BIN_PATH=$NECESSITAS_DIR/QtCreator/bin/
-export LD_LIBRARY_PATH=$BIN_PATH/../Qt/lib:$LD_LIBRARY_PATH
-export QT_PLUGIN_PATH=$BIN_PATH/../Qt/plugins:$QT_PLUGIN_PATH
-export QT_IMPORT_PATH=$BIN_PATH/../Qt/imports:$QT_IMPORT_PATH
-
-if [ "$WINDOWS" == "true" ]; then
- QTCREATOR=$BIN_PATH/qtcreator.exe
-else
- QTCREATOR=$BIN_PATH/qtcreator
+if [ "$ADB_WIRELESS" != "false" ]; then
+  $ADB connect $ADB_WIRELESS
 fi
 
-$QTCREATOR &
-echo "to import android branch into necessitas do:
-file -> open file or project open CMakeLists.txt
-choose a build dirng
-pass the cmake flags you obtain from echo $MY_CMAKE_FLAGS in build-stel.sh"
- 
+if [ "$WINDOWS" == "true" ]; then
+  $ADB devices
+else
+ sudo $ADB devices
+fi
+
+echo "" > /tmp/logcat.log
+gnome-system-log /tmp/logcat.log &
+$ADB logcat -c
+
+$NDKGDB --project=$APK_DIR
+
+$ADB logcat | tee /tmp/logcat.log
+
 
