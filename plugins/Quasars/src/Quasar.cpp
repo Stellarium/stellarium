@@ -91,7 +91,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&Extra1)
 		oss << q_("Type: <b>%1</b>").arg(q_("quasar")) << "<br />";
 
-	if (flags&Magnitude && mag <= core->getSkyDrawer()->getLimitMagnitude())
+	if (flags&Magnitude)
 	{
             if (core->getSkyDrawer()->getFlagHasAtmosphere())
             {
@@ -99,28 +99,28 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		{
                         oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)").arg(QString::number(mag, 'f', 2),
                                                                                                         QString::number(getVMagnitude(core, true),  'f', 2),
-                                                                                                        QString::number(bV, 'f', 2)) << "<br>";
+													QString::number(bV, 'f', 2)) << "<br />";
 		}
 		else
 		{
                         oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(mag, 'f', 2),
-                                                                                        QString::number(getVMagnitude(core, true),  'f', 2)) << "<br>";
+											QString::number(getVMagnitude(core, true),  'f', 2)) << "<br />";
 		}
             }
             else
             {
                 if (bV!=0)
                 {
-                        oss << q_("Magnitude: <b>%1</b> (B-V: <b>%2</b>)").arg(mag, 0, 'f', 2).arg(bV, 0, 'f', 2) << "<br>";
+			oss << q_("Magnitude: <b>%1</b> (B-V: <b>%2</b>)").arg(mag, 0, 'f', 2).arg(bV, 0, 'f', 2) << "<br />";
                 }
                 else
                 {
-                        oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
+			oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br />";
                 }
             }
             if (AMagnitude!=0)
 		{
-			oss << q_("Absolute Magnitude: %1").arg(AMagnitude, 0, 'f', 2) << "<br>";
+			oss << q_("Absolute Magnitude: %1").arg(AMagnitude, 0, 'f', 2) << "<br />";
 		}
 	}
 
@@ -131,7 +131,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 		if (redshift>0)
 		{
-			oss << q_("Z (redshift): %1").arg(redshift) << "<br>";
+			oss << q_("Z (redshift): %1").arg(redshift) << "<br />";
 		}
 	}
 
@@ -171,17 +171,17 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
 
-	Vec3f color = Vec3f(1.f,1.f,1.f);
+	Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f;
 	float rcMag[2], size, shift;
 	double mag;
 
 	StelUtils::spheToRect(qRA, qDE, XYZ);
-        mag = getVMagnitude(core, true);
+        mag = getVMagnitude(core, true);	
 	
 	if (mag <= sd->getLimitMagnitude())
 	{
 		sd->computeRCMag(mag, rcMag);
-		sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, color, false);
+		sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, sd->indexToColor(BvToColorIndex(bV)), false);
 		painter.setColor(color[0], color[1], color[2], 1);
 		size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 		shift = 6.f + size/1.8f;
@@ -190,4 +190,19 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 			painter.drawText(XYZ, designation, 0, shift, shift, false);
 		}
 	}
+}
+
+unsigned char Quasar::BvToColorIndex(float b_v)
+{
+	double dBV = b_v;
+	dBV *= 1000.0;
+	if (dBV < -500)
+	{
+		dBV = -500;
+	}
+	else if (dBV > 3499)
+	{
+		dBV = 3499;
+	}
+	return (unsigned int)floor(0.5+127.0*((500.0+dBV)/4000.0));
 }
