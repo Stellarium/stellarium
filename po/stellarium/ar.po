@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-13 23:26+0700\n"
-"PO-Revision-Date: 2012-01-08 10:55+0000\n"
+"POT-Creation-Date: 2012-02-03 23:33+0700\n"
+"PO-Revision-Date: 2012-02-02 06:40+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-14 04:38+0000\n"
-"X-Generator: Launchpad (build 14664)\n"
+"X-Launchpad-Export-Date: 2012-02-04 04:57+0000\n"
+"X-Generator: Launchpad (build 14738)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -54,19 +54,20 @@ msgstr ", %1 متر"
 msgid "Planet: "
 msgstr "كوكب: "
 
-#: src/core/modules/Nebula.cpp:96
+#: src/core/modules/Nebula.cpp:96 plugins/Supernovae/src/Supernova.cpp:99
+#: plugins/Quasars/src/Quasar.cpp:92
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "‎النوع:‎ <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:123
-#: plugins/Supernovae/src/Supernova.cpp:101 plugins/Quasars/src/Quasar.cpp:103
+#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "‎القدر‎: <b>%1</b> (منطفيء إلى : <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
-#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:115
+#: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "‎القدر:‎ <b>%1</b>"
@@ -109,7 +110,7 @@ msgid "Undocumented type"
 msgstr "نوع غير موثَق"
 
 #: src/core/modules/Planet.cpp:129 src/core/modules/StarWrapper.cpp:124
-#: plugins/Quasars/src/Quasar.cpp:120
+#: plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "‎القدر المطلق:‎ %1"
@@ -147,17 +148,17 @@ msgstr "‎القدر‎: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "‎القدر الظاهري‎: <b>%1</b> (بسبب الانطفاء‎)"
 
-#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:97
+#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "‎القدر‎: <b>%1</b> (منطفيء إلى‎: <b>%2</b>. B-V: <b>%3</b>)"
 
-#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:111
+#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr ""
+msgstr "‎القدر‎: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
 #, qt-format
@@ -165,7 +166,7 @@ msgid "Spectral Type: %1"
 msgstr "‎النوع الطيفي:‎ %1"
 
 #: src/core/modules/StarWrapper.cpp:134
-#: plugins/Supernovae/src/Supernova.cpp:114
+#: plugins/Supernovae/src/Supernova.cpp:117
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "سنة ضوئية %1 :المسافة"
@@ -338,23 +339,23 @@ msgstr "<P DIR=RTL>المؤلفون"
 msgid "Contact"
 msgstr "<P DIR=RTL>للمراسلة"
 
-#: src/gui/ConfigurationDialog.cpp:615
+#: src/gui/ConfigurationDialog.cpp:617
 msgid "Author"
 msgstr "المؤلف"
 
-#: src/gui/ConfigurationDialog.cpp:616
+#: src/gui/ConfigurationDialog.cpp:621
 msgid "License"
 msgstr "الرخصة"
 
-#: src/gui/ConfigurationDialog.cpp:644
+#: src/gui/ConfigurationDialog.cpp:650
 msgid "Running script: "
 msgstr "البرنامج النصي الشغَال‎: "
 
-#: src/gui/ConfigurationDialog.cpp:651
+#: src/gui/ConfigurationDialog.cpp:657
 msgid "Running script: [none]"
 msgstr "البرنامج النصي الشغَال‎: [لايوجد]"
 
-#: src/gui/ConfigurationDialog.cpp:721
+#: src/gui/ConfigurationDialog.cpp:727
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -362,16 +363,16 @@ msgstr ""
 "أنتهى تحميل أدلة النجوم الجديدة\n"
 "أعد تشغيل برنامج ستيللاريوم لرؤيتها.‏"
 
-#: src/gui/ConfigurationDialog.cpp:725
+#: src/gui/ConfigurationDialog.cpp:731
 msgid "All available star catalogs have been installed."
 msgstr "لقد تمت إضافة جميع أدلة النجوم المتاحة"
 
-#: src/gui/ConfigurationDialog.cpp:730
+#: src/gui/ConfigurationDialog.cpp:736
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "اجلب الدليل %1 من %2"
 
-#: src/gui/ConfigurationDialog.cpp:737
+#: src/gui/ConfigurationDialog.cpp:743
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -380,7 +381,7 @@ msgstr ""
 "جاري التحميل %1 ...‏\n"
 "(تستطيع إغلاق هذه النافذة)"
 
-#: src/gui/ConfigurationDialog.cpp:744
+#: src/gui/ConfigurationDialog.cpp:750
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -391,7 +392,7 @@ msgstr ""
 "عدد النجوم: %2 مليون\n"
 "نطاق قدر لمعان النجوم: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:787 src/gui/ConfigurationDialog.cpp:823
+#: src/gui/ConfigurationDialog.cpp:793 src/gui/ConfigurationDialog.cpp:829
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -400,11 +401,11 @@ msgstr ""
 "خطأ في تحميل %1‎:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:875
+#: src/gui/ConfigurationDialog.cpp:881
 msgid "Verifying file integrity..."
 msgstr "جاري التأكد من صحة الملف...‏"
 
-#: src/gui/ConfigurationDialog.cpp:879
+#: src/gui/ConfigurationDialog.cpp:885
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1006,12 +1007,12 @@ msgid "Earth"
 msgstr "الأرض"
 
 #. TRANSLATORS: Name of landscape and Earth's satellite
-#: src/translations.h:37 src/translations.h:167
+#: src/translations.h:37 src/translations.h:166
 msgid "Moon"
 msgstr "القمر‎‏"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:38 src/translations.h:175
+#: src/translations.h:38 src/translations.h:174
 msgid "Mars"
 msgstr "المريخ"
 
@@ -1109,7 +1110,7 @@ msgid "Metis"
 msgstr "ميتس"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:62 src/translations.h:177
+#: src/translations.h:62 src/translations.h:176
 msgid "Saturn"
 msgstr "زحل"
 
@@ -1335,1066 +1336,1134 @@ msgstr "مستعر تايكو"
 msgid "Kepler's Supernova"
 msgstr "مستعر كبلر"
 
-#: src/translations.h:140
+#: src/translations.h:139
 msgid "N"
 msgstr "شمال"
 
-#: src/translations.h:141
+#: src/translations.h:140
 msgid "S"
 msgstr "جنوب"
 
-#: src/translations.h:142
+#: src/translations.h:141
 msgid "E"
 msgstr "شرق"
 
-#: src/translations.h:143
+#: src/translations.h:142
 msgid "W"
 msgstr "غرب"
 
-#: src/translations.h:146
+#: src/translations.h:145
 msgid "Arabic"
 msgstr "العربي"
 
-#: src/translations.h:147
+#: src/translations.h:146
 msgid "Aztec"
 msgstr "الأزتك"
 
-#: src/translations.h:148
+#: src/translations.h:147
 msgid "Chinese"
 msgstr "الصينية"
 
-#: src/translations.h:149
+#: src/translations.h:148
 msgid "Egyptian"
 msgstr "مصري"
 
-#: src/translations.h:150
+#: src/translations.h:149
 msgid "Inuit"
 msgstr "إنيويت"
 
-#: src/translations.h:151
+#: src/translations.h:150
 msgid "Korean"
 msgstr "الكوري"
 
-#: src/translations.h:152
+#: src/translations.h:151
 msgid "Lakota"
 msgstr "لاكوتا"
 
-#: src/translations.h:153
+#: src/translations.h:152
 msgid "Maori"
 msgstr "الماوري"
 
-#: src/translations.h:154
+#: src/translations.h:153
 msgid "Navajo"
 msgstr "النافاهو"
 
-#: src/translations.h:155
+#: src/translations.h:154
 msgid "Norse"
 msgstr "النرويجي"
 
-#: src/translations.h:156
+#: src/translations.h:155
 msgid "Polynesian"
 msgstr "البولونيزي"
 
-#: src/translations.h:157
+#: src/translations.h:156
 msgid "Sami"
 msgstr "السامي"
 
-#: src/translations.h:158
+#: src/translations.h:157
 msgid "Tupi-Guarani"
 msgstr "توبي - جواراني"
 
-#: src/translations.h:159
+#: src/translations.h:158
 msgid "Western"
 msgstr "الغربي"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:163
+#: src/translations.h:162
 msgid "Guereins"
 msgstr "جيرين"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:165
+#: src/translations.h:164
 msgid "Trees"
 msgstr "أشجار"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:169
+#: src/translations.h:168
 msgid "Hurricane"
 msgstr "مرتفع الإعصار"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:171
+#: src/translations.h:170
 msgid "Ocean"
 msgstr "المحيط"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:173
+#: src/translations.h:172
 msgid "Garching"
 msgstr "جارشينج"
 
+#. TRANSLATORS: Name of script
 #: src/translations.h:180
-msgid "Andorra"
-msgstr "أندورا"
-
-#: src/translations.h:181
-msgid "United Arab Emirates"
-msgstr "الأمارات العربية المتحدة"
-
-#: src/translations.h:182
-msgid "Afghanistan"
-msgstr "أفغانستان"
-
-#: src/translations.h:183
-msgid "Antigua and Barbuda"
-msgstr "[جزر أنتيغوا وباربودا"
-
-#: src/translations.h:184
-msgid "Anguilla"
-msgstr "جزر أنجويللا"
-
-#: src/translations.h:185
-msgid "Albania"
-msgstr "ألبانيا"
-
-#: src/translations.h:186
-msgid "Armenia"
-msgstr "أرمينيا"
-
-#: src/translations.h:187
-msgid "Netherlands Antilles"
+msgid "Landscape Tour"
 msgstr ""
 
+#. TRANSLATORS: Name of script
+#: src/translations.h:182
+msgid "Partial Lunar Eclipse"
+msgstr ""
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:184
+msgid "Total Lunar Eclipse"
+msgstr ""
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:186
+msgid "Screensaver"
+msgstr ""
+
+#. TRANSLATORS: Name of script
 #: src/translations.h:188
-msgid "Angola"
-msgstr "أنجولا"
+msgid "Solar Eclipse 2009"
+msgstr ""
 
-#: src/translations.h:189
-msgid "Antarctica"
-msgstr "أنتاركتيكا - القارة المتجمدة الجنوبية"
-
+#. TRANSLATORS: Name of script
 #: src/translations.h:190
-msgid "Argentina"
-msgstr "الأرجنتين"
+msgid "Startup Script"
+msgstr ""
 
-#: src/translations.h:191
-msgid "American Samoa"
-msgstr "ساموا الأمريكية"
-
+#. TRANSLATORS: Name of script
 #: src/translations.h:192
-msgid "Austria"
-msgstr "النمسا"
-
-#: src/translations.h:193
-msgid "Australia"
-msgstr "أستراليا"
-
-#: src/translations.h:194
-msgid "Aruba"
+msgid "Zodiac"
 msgstr ""
 
 #: src/translations.h:195
-msgid "Azerbaijan"
-msgstr "أذربيجان"
+msgid "Look around each installed landscape."
+msgstr ""
 
 #: src/translations.h:196
-msgid "Bosnia and Herzegowina"
-msgstr "البوسنة والهرسك"
+msgid "Script to demonstrate a partial lunar eclipse."
+msgstr ""
 
 #: src/translations.h:197
-msgid "Barbados"
-msgstr "بربادوس"
+msgid "Script to demonstrate a total lunar eclipse."
+msgstr ""
 
 #: src/translations.h:198
-msgid "Bangladesh"
-msgstr "بنغلادش"
+msgid "A slow, infinite tour of the sky, looking at random objects."
+msgstr ""
 
 #: src/translations.h:199
-msgid "Belgium"
-msgstr "بلجيكا"
+msgid ""
+"Script to demonstrate a total solar eclipse which has happened in 2009 "
+"(location=Rangpur, Bangladesh)."
+msgstr ""
 
 #: src/translations.h:200
-msgid "Burkina Faso"
-msgstr "بوركينا فاسو"
+msgid "Script which runs automatically at startup"
+msgstr ""
 
 #: src/translations.h:201
-msgid "Bulgaria"
-msgstr "بلغاريا"
-
-#: src/translations.h:202
-msgid "Bahrain"
-msgstr "البحرين"
-
-#: src/translations.h:203
-msgid "Burundi"
+msgid ""
+"This script displays the constellations of the Zodiac. That means the "
+"constellations which lie along the line which the Sun traces across the "
+"celestial sphere over the course of a year."
 msgstr ""
 
 #: src/translations.h:204
-msgid "Benin"
-msgstr ""
+msgid "Andorra"
+msgstr "أندورا"
 
 #: src/translations.h:205
-msgid "Bermuda"
-msgstr ""
+msgid "United Arab Emirates"
+msgstr "الأمارات العربية المتحدة"
 
 #: src/translations.h:206
-msgid "Brunei Darussalam"
-msgstr ""
+msgid "Afghanistan"
+msgstr "أفغانستان"
 
 #: src/translations.h:207
-msgid "Bolivia"
-msgstr ""
+msgid "Antigua and Barbuda"
+msgstr "[جزر أنتيغوا وباربودا"
 
 #: src/translations.h:208
-msgid "Brazil"
-msgstr ""
+msgid "Anguilla"
+msgstr "جزر أنجويللا"
 
 #: src/translations.h:209
-msgid "Bahamas"
-msgstr ""
+msgid "Albania"
+msgstr "ألبانيا"
 
 #: src/translations.h:210
-msgid "Bhutan"
-msgstr ""
+msgid "Armenia"
+msgstr "أرمينيا"
 
 #: src/translations.h:211
-msgid "Bouvet Island"
-msgstr ""
+msgid "Netherlands Antilles"
+msgstr "جزر الأنتيل الهولندية"
 
 #: src/translations.h:212
-msgid "Botswana"
-msgstr ""
+msgid "Angola"
+msgstr "أنجولا"
 
 #: src/translations.h:213
-msgid "Belarus"
-msgstr ""
+msgid "Antarctica"
+msgstr "أنتاركتيكا - القارة المتجمدة الجنوبية"
 
 #: src/translations.h:214
-msgid "Belize"
-msgstr ""
+msgid "Argentina"
+msgstr "الأرجنتين"
 
 #: src/translations.h:215
-msgid "Canada"
-msgstr ""
+msgid "American Samoa"
+msgstr "ساموا الأمريكية"
 
 #: src/translations.h:216
-msgid "Cocos Islands"
-msgstr ""
+msgid "Austria"
+msgstr "النمسا"
 
 #: src/translations.h:217
-msgid "Democratic Republic of the Congo"
-msgstr ""
+msgid "Australia"
+msgstr "أستراليا"
 
 #: src/translations.h:218
-msgid "Central African Republic"
-msgstr ""
+msgid "Aruba"
+msgstr "أروبا"
 
 #: src/translations.h:219
-msgid "Republic of the Congo"
-msgstr ""
+msgid "Azerbaijan"
+msgstr "أذربيجان"
 
 #: src/translations.h:220
-msgid "Switzerland"
-msgstr ""
+msgid "Bosnia and Herzegowina"
+msgstr "البوسنة والهرسك"
 
 #: src/translations.h:221
-msgid "Cote d'Ivoire"
-msgstr ""
+msgid "Barbados"
+msgstr "بربادوس"
 
 #: src/translations.h:222
-msgid "Cook Islands"
-msgstr ""
+msgid "Bangladesh"
+msgstr "بنغلادش"
 
 #: src/translations.h:223
-msgid "Chile"
-msgstr ""
+msgid "Belgium"
+msgstr "بلجيكا"
 
 #: src/translations.h:224
-msgid "Cameroon"
-msgstr ""
+msgid "Burkina Faso"
+msgstr "بوركينا فاسو"
 
 #: src/translations.h:225
-msgid "China"
-msgstr ""
+msgid "Bulgaria"
+msgstr "بلغاريا"
 
 #: src/translations.h:226
-msgid "Colombia"
-msgstr ""
+msgid "Bahrain"
+msgstr "البحرين"
 
 #: src/translations.h:227
-msgid "Costa Rica"
-msgstr ""
+msgid "Burundi"
+msgstr "بورندي"
 
 #: src/translations.h:228
-msgid "Serbia and Montenegro"
-msgstr ""
+msgid "Benin"
+msgstr "بينين"
 
 #: src/translations.h:229
-msgid "Cuba"
-msgstr ""
+msgid "Bermuda"
+msgstr "برمودا"
 
 #: src/translations.h:230
-msgid "Cape Verde"
-msgstr ""
+msgid "Brunei Darussalam"
+msgstr "بروناي دار السلام"
 
 #: src/translations.h:231
-msgid "Christmas Island"
-msgstr ""
+msgid "Bolivia"
+msgstr "بوليفيا"
 
 #: src/translations.h:232
-msgid "Cyprus"
-msgstr ""
+msgid "Brazil"
+msgstr "البرازيل"
 
 #: src/translations.h:233
-msgid "Czech Republic"
-msgstr ""
+msgid "Bahamas"
+msgstr "الباهاما"
 
 #: src/translations.h:234
-msgid "Germany"
-msgstr ""
+msgid "Bhutan"
+msgstr "بهوتان"
 
 #: src/translations.h:235
-msgid "Djibouti"
-msgstr ""
+msgid "Bouvet Island"
+msgstr "جزيرة بوفيت"
 
 #: src/translations.h:236
-msgid "Denmark"
-msgstr ""
+msgid "Botswana"
+msgstr "بوتسوانا"
 
 #: src/translations.h:237
-msgid "Dominica"
-msgstr ""
+msgid "Belarus"
+msgstr "بيلاروسيا"
 
 #: src/translations.h:238
-msgid "Dominican Republic"
-msgstr ""
+msgid "Belize"
+msgstr "بيليز"
 
 #: src/translations.h:239
-msgid "Algeria"
-msgstr ""
+msgid "Canada"
+msgstr "كندا"
 
 #: src/translations.h:240
-msgid "Ecuador"
-msgstr ""
+msgid "Cocos Islands"
+msgstr "جزيرة كوكوس"
 
 #: src/translations.h:241
-msgid "Estonia"
-msgstr ""
+msgid "Democratic Republic of the Congo"
+msgstr "جمهورية الكونغو الديموقراطية"
 
 #: src/translations.h:242
-msgid "Egypt"
-msgstr ""
+msgid "Central African Republic"
+msgstr "أفريقيا الوسطى"
 
 #: src/translations.h:243
-msgid "Western Sahara"
-msgstr ""
+msgid "Republic of the Congo"
+msgstr "جمهورية الكونغو"
 
 #: src/translations.h:244
-msgid "Eritrea"
-msgstr ""
+msgid "Switzerland"
+msgstr "سويسرا"
 
 #: src/translations.h:245
-msgid "Spain"
-msgstr ""
+msgid "Cote d'Ivoire"
+msgstr "ساحل العاج"
 
 #: src/translations.h:246
-msgid "Ethiopia"
-msgstr ""
+msgid "Cook Islands"
+msgstr "جزيرة كوك"
 
 #: src/translations.h:247
-msgid "Finland"
-msgstr ""
+msgid "Chile"
+msgstr "تشيلي"
 
 #: src/translations.h:248
-msgid "Fiji"
-msgstr ""
+msgid "Cameroon"
+msgstr "الكاميرون"
 
 #: src/translations.h:249
-msgid "Falkland Islands"
-msgstr ""
+msgid "China"
+msgstr "الصين"
 
 #: src/translations.h:250
-msgid "Micronesia"
-msgstr ""
+msgid "Colombia"
+msgstr "كولومبيا"
 
 #: src/translations.h:251
-msgid "Faroe Islands"
-msgstr ""
+msgid "Costa Rica"
+msgstr "كوستاريكا"
 
 #: src/translations.h:252
-msgid "France"
-msgstr ""
+msgid "Serbia and Montenegro"
+msgstr "الصرب والجبل الأسود"
 
 #: src/translations.h:253
-msgid "Gabon"
-msgstr ""
+msgid "Cuba"
+msgstr "كوبا"
 
 #: src/translations.h:254
-msgid "United Kingdom"
-msgstr ""
+msgid "Cape Verde"
+msgstr "كيب فيردي"
 
 #: src/translations.h:255
-msgid "Grenada"
-msgstr ""
+msgid "Christmas Island"
+msgstr "جزيرة الكريسمس"
 
 #: src/translations.h:256
-msgid "Georgia"
-msgstr ""
+msgid "Cyprus"
+msgstr "قبرص"
 
 #: src/translations.h:257
-msgid "French Guiana"
-msgstr ""
+msgid "Czech Republic"
+msgstr "جمهورية التشيك"
 
 #: src/translations.h:258
-msgid "Ghana"
-msgstr ""
+msgid "Germany"
+msgstr "ألمانيا"
 
 #: src/translations.h:259
-msgid "Gibraltar"
-msgstr ""
+msgid "Djibouti"
+msgstr "جيبوتي"
 
 #: src/translations.h:260
-msgid "Greenland"
-msgstr ""
+msgid "Denmark"
+msgstr "الدانمارك"
 
 #: src/translations.h:261
-msgid "Gambia"
-msgstr ""
+msgid "Dominica"
+msgstr "الدومينيك"
 
 #: src/translations.h:262
-msgid "Guinea"
-msgstr ""
+msgid "Dominican Republic"
+msgstr "جمهورية الدومينيك"
 
 #: src/translations.h:263
-msgid "Guadeloupe"
-msgstr ""
+msgid "Algeria"
+msgstr "الجزائر"
 
 #: src/translations.h:264
-msgid "Equatorial Guinea"
-msgstr ""
+msgid "Ecuador"
+msgstr "الإكوادور"
 
 #: src/translations.h:265
-msgid "Greece"
-msgstr ""
+msgid "Estonia"
+msgstr "إستونيا"
 
 #: src/translations.h:266
-msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgid "Egypt"
+msgstr "مصر"
 
 #: src/translations.h:267
-msgid "Guatemala"
-msgstr ""
+msgid "Western Sahara"
+msgstr "الصحراء الغربية"
 
 #: src/translations.h:268
-msgid "Guam"
-msgstr ""
+msgid "Eritrea"
+msgstr "أرتيريا"
 
 #: src/translations.h:269
-msgid "Guinea-Bissau"
-msgstr ""
+msgid "Spain"
+msgstr "أسبانيا"
 
 #: src/translations.h:270
-msgid "Guyana"
-msgstr ""
+msgid "Ethiopia"
+msgstr "أثيوبيا"
 
 #: src/translations.h:271
-msgid "Hong Kong"
-msgstr ""
+msgid "Finland"
+msgstr "فنلندا"
 
 #: src/translations.h:272
-msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgid "Fiji"
+msgstr "فيجي"
 
 #: src/translations.h:273
-msgid "Honduras"
-msgstr ""
+msgid "Falkland Islands"
+msgstr "جزر الفولكلاند"
 
 #: src/translations.h:274
-msgid "Croatia"
-msgstr ""
+msgid "Micronesia"
+msgstr "ميكرونيجا"
 
 #: src/translations.h:275
-msgid "Haiti"
-msgstr ""
+msgid "Faroe Islands"
+msgstr "جزر الفارو"
 
 #: src/translations.h:276
-msgid "Hungary"
-msgstr ""
+msgid "France"
+msgstr "فرنسا"
 
 #: src/translations.h:277
-msgid "Indonesia"
-msgstr ""
+msgid "Gabon"
+msgstr "الجابون"
 
 #: src/translations.h:278
-msgid "Ireland"
-msgstr ""
+msgid "United Kingdom"
+msgstr "المملكة المتحدة"
 
 #: src/translations.h:279
-msgid "Israel"
-msgstr ""
+msgid "Grenada"
+msgstr "جرانادا"
 
 #: src/translations.h:280
-msgid "India"
-msgstr ""
+msgid "Georgia"
+msgstr "جورجيا"
 
 #: src/translations.h:281
-msgid "British Indian Ocean Territory"
-msgstr ""
+msgid "French Guiana"
+msgstr "غويانا الفرنسية"
 
 #: src/translations.h:282
-msgid "Iraq"
-msgstr ""
+msgid "Ghana"
+msgstr "غانا"
 
 #: src/translations.h:283
-msgid "Iran"
-msgstr ""
+msgid "Gibraltar"
+msgstr "جبل طارق"
 
 #: src/translations.h:284
-msgid "Iceland"
-msgstr ""
+msgid "Greenland"
+msgstr "جرينلاند"
 
 #: src/translations.h:285
-msgid "Italy"
-msgstr ""
+msgid "Gambia"
+msgstr "جامبيا"
 
 #: src/translations.h:286
-msgid "Jamaica"
-msgstr ""
+msgid "Guinea"
+msgstr "جويانا"
 
 #: src/translations.h:287
-msgid "Jordan"
-msgstr ""
+msgid "Guadeloupe"
+msgstr "الجواديلوب"
 
 #: src/translations.h:288
-msgid "Japan"
-msgstr ""
+msgid "Equatorial Guinea"
+msgstr "جويانا الإستوائية"
 
 #: src/translations.h:289
-msgid "Kenya"
-msgstr ""
+msgid "Greece"
+msgstr "اليونان"
 
 #: src/translations.h:290
-msgid "Kyrgyzstan"
-msgstr ""
+msgid "South Georgia and the South Sandwich Islands"
+msgstr "جورجيا الجنوبية وجزر الساندويتش"
 
 #: src/translations.h:291
-msgid "Cambodia"
-msgstr ""
+msgid "Guatemala"
+msgstr "جواتيمالا"
 
 #: src/translations.h:292
-msgid "Kiribati"
-msgstr ""
+msgid "Guam"
+msgstr "جوام"
 
 #: src/translations.h:293
-msgid "Comoros"
-msgstr ""
+msgid "Guinea-Bissau"
+msgstr "غينيا بيساو"
 
 #: src/translations.h:294
-msgid "Saint Kitts and Nevis"
-msgstr ""
+msgid "Guyana"
+msgstr "جويانا"
 
 #: src/translations.h:295
-msgid "Democratic People's Republic of Korea"
-msgstr ""
+msgid "Hong Kong"
+msgstr "هونج كونج"
 
 #: src/translations.h:296
-msgid "Republic of Korea"
-msgstr ""
+msgid "Heard Island and McDonald Islands"
+msgstr "جزر هرد ومكدونالد"
 
 #: src/translations.h:297
-msgid "Kuwait"
-msgstr ""
+msgid "Honduras"
+msgstr "هندوراس"
 
 #: src/translations.h:298
-msgid "Cayman Islands"
-msgstr ""
+msgid "Croatia"
+msgstr "كرواتيا"
 
 #: src/translations.h:299
-msgid "Kazakhstan"
-msgstr ""
+msgid "Haiti"
+msgstr "هايتي"
 
 #: src/translations.h:300
-msgid "Lao"
-msgstr ""
+msgid "Hungary"
+msgstr "المجر"
 
 #: src/translations.h:301
-msgid "Lebanon"
-msgstr ""
+msgid "Indonesia"
+msgstr "أندونيسيا"
 
 #: src/translations.h:302
-msgid "Saint Lucia"
-msgstr ""
+msgid "Ireland"
+msgstr "إيرلندا"
 
 #: src/translations.h:303
-msgid "Liechtenstein"
-msgstr ""
+msgid "Israel"
+msgstr "إسرائيل"
 
 #: src/translations.h:304
-msgid "Sri Lanka"
-msgstr ""
+msgid "India"
+msgstr "الهند"
 
 #: src/translations.h:305
-msgid "Liberia"
-msgstr ""
+msgid "British Indian Ocean Territory"
+msgstr "مقاطعة المحيط الهندي البريطانية"
 
 #: src/translations.h:306
-msgid "Lesotho"
-msgstr ""
+msgid "Iraq"
+msgstr "العراق"
 
 #: src/translations.h:307
-msgid "Lithuania"
-msgstr ""
+msgid "Iran"
+msgstr "إيران"
 
 #: src/translations.h:308
-msgid "Luxembourg"
-msgstr ""
+msgid "Iceland"
+msgstr "ايسلندا"
 
 #: src/translations.h:309
-msgid "Latvia"
-msgstr ""
+msgid "Italy"
+msgstr "إيطاليا"
 
 #: src/translations.h:310
-msgid "Libyan Arab Jamahiriya"
-msgstr ""
+msgid "Jamaica"
+msgstr "جامايكا"
 
 #: src/translations.h:311
-msgid "Morocco"
-msgstr ""
+msgid "Jordan"
+msgstr "الأردن"
 
 #: src/translations.h:312
-msgid "Monaco"
-msgstr ""
+msgid "Japan"
+msgstr "اليابان"
 
 #: src/translations.h:313
-msgid "Moldova"
-msgstr ""
+msgid "Kenya"
+msgstr "كينيا"
 
 #: src/translations.h:314
-msgid "Madagascar"
-msgstr ""
+msgid "Kyrgyzstan"
+msgstr "قرغيزستان"
 
 #: src/translations.h:315
-msgid "Marshall Islands"
-msgstr ""
+msgid "Cambodia"
+msgstr "كمبوديا"
 
 #: src/translations.h:316
-msgid "Macedonia"
-msgstr ""
+msgid "Kiribati"
+msgstr "كيريباتي"
 
 #: src/translations.h:317
-msgid "Mali"
-msgstr ""
+msgid "Comoros"
+msgstr "القمر"
 
 #: src/translations.h:318
-msgid "Myanmar"
-msgstr ""
+msgid "Saint Kitts and Nevis"
+msgstr "سانت كتس ونيفس"
 
 #: src/translations.h:319
-msgid "Mongolia"
-msgstr ""
+msgid "Democratic People's Republic of Korea"
+msgstr "جمهورية كوريا الديموقراطية"
 
 #: src/translations.h:320
-msgid "Macau"
-msgstr ""
+msgid "Republic of Korea"
+msgstr "كوريا"
 
 #: src/translations.h:321
-msgid "Northern Mariana Islands"
-msgstr ""
+msgid "Kuwait"
+msgstr "الكويت"
 
 #: src/translations.h:322
-msgid "Martinique"
-msgstr ""
+msgid "Cayman Islands"
+msgstr "جزر الكايمان"
 
 #: src/translations.h:323
-msgid "Mauritania"
-msgstr ""
+msgid "Kazakhstan"
+msgstr "كازاخستان"
 
 #: src/translations.h:324
-msgid "Montserrat"
-msgstr ""
+msgid "Lao"
+msgstr "لاو"
 
 #: src/translations.h:325
-msgid "Malta"
-msgstr ""
+msgid "Lebanon"
+msgstr "لبنان"
 
 #: src/translations.h:326
-msgid "Mauritius"
-msgstr ""
+msgid "Saint Lucia"
+msgstr "سانت لوتشيا"
 
 #: src/translations.h:327
-msgid "Maldives"
-msgstr ""
+msgid "Liechtenstein"
+msgstr "ليشتنستين"
 
 #: src/translations.h:328
-msgid "Malawi"
-msgstr ""
+msgid "Sri Lanka"
+msgstr "سريلانكا"
 
 #: src/translations.h:329
-msgid "Mexico"
-msgstr ""
+msgid "Liberia"
+msgstr "ليبريا"
 
 #: src/translations.h:330
-msgid "Malaysia"
-msgstr ""
+msgid "Lesotho"
+msgstr "ليسوتو"
 
 #: src/translations.h:331
-msgid "Mozambique"
-msgstr ""
+msgid "Lithuania"
+msgstr "ليتوانيا"
 
 #: src/translations.h:332
-msgid "Namibia"
-msgstr ""
+msgid "Luxembourg"
+msgstr "لوكسمبورج"
 
 #: src/translations.h:333
-msgid "New Caledonia"
-msgstr ""
+msgid "Latvia"
+msgstr "لاتفيا"
 
 #: src/translations.h:334
-msgid "Niger"
-msgstr ""
+msgid "Libyan Arab Jamahiriya"
+msgstr "ليبيا"
 
 #: src/translations.h:335
-msgid "Norfolk Island"
-msgstr ""
+msgid "Morocco"
+msgstr "المغرب"
 
 #: src/translations.h:336
-msgid "Nigeria"
-msgstr ""
+msgid "Monaco"
+msgstr "موناكو"
 
 #: src/translations.h:337
-msgid "Nicaragua"
-msgstr ""
+msgid "Moldova"
+msgstr "مولدوفا"
 
 #: src/translations.h:338
-msgid "Netherlands"
-msgstr ""
+msgid "Madagascar"
+msgstr "مدغشقر"
 
 #: src/translations.h:339
-msgid "Norway"
-msgstr ""
+msgid "Marshall Islands"
+msgstr "جزر المارشال"
 
 #: src/translations.h:340
-msgid "Nepal"
-msgstr ""
+msgid "Macedonia"
+msgstr "مقدونيا"
 
 #: src/translations.h:341
-msgid "Nauru"
-msgstr ""
+msgid "Mali"
+msgstr "مالي"
 
 #: src/translations.h:342
-msgid "Niue"
-msgstr ""
+msgid "Myanmar"
+msgstr "ميانمار"
 
 #: src/translations.h:343
-msgid "New Zealand"
-msgstr ""
+msgid "Mongolia"
+msgstr "منغوليا"
 
 #: src/translations.h:344
-msgid "Oman"
-msgstr ""
+msgid "Macau"
+msgstr "ماو"
 
 #: src/translations.h:345
-msgid "Panama"
-msgstr ""
+msgid "Northern Mariana Islands"
+msgstr "جزر ماريانا الشمالية"
 
 #: src/translations.h:346
-msgid "Peru"
-msgstr ""
+msgid "Martinique"
+msgstr "المارتينيك"
 
 #: src/translations.h:347
-msgid "French Polynesia"
-msgstr ""
+msgid "Mauritania"
+msgstr "موريتانيا"
 
 #: src/translations.h:348
-msgid "Papua New Guinea"
-msgstr ""
+msgid "Montserrat"
+msgstr "مونتيسيرات"
 
 #: src/translations.h:349
-msgid "Philippines"
-msgstr ""
+msgid "Malta"
+msgstr "مالطا"
 
 #: src/translations.h:350
-msgid "Pakistan"
-msgstr ""
+msgid "Mauritius"
+msgstr "موريشيوس"
 
 #: src/translations.h:351
-msgid "Poland"
-msgstr ""
+msgid "Maldives"
+msgstr "المالديف"
 
 #: src/translations.h:352
-msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgid "Malawi"
+msgstr "ملاوي"
 
 #: src/translations.h:353
-msgid "Pitcairn"
-msgstr ""
+msgid "Mexico"
+msgstr "المكسيك"
 
 #: src/translations.h:354
-msgid "Puerto Rico"
-msgstr ""
+msgid "Malaysia"
+msgstr "ماليزيا"
 
 #: src/translations.h:355
-msgid "Palestinian Territories"
-msgstr ""
+msgid "Mozambique"
+msgstr "موزمبيق"
 
 #: src/translations.h:356
-msgid "Portugal"
-msgstr ""
+msgid "Namibia"
+msgstr "ناميبيا"
 
 #: src/translations.h:357
-msgid "Palau"
-msgstr ""
+msgid "New Caledonia"
+msgstr "نيو كالدونيا"
 
 #: src/translations.h:358
-msgid "Paraguay"
-msgstr ""
+msgid "Niger"
+msgstr "النيجر"
 
 #: src/translations.h:359
-msgid "Qatar"
-msgstr ""
+msgid "Norfolk Island"
+msgstr "جزر النورفولك"
 
 #: src/translations.h:360
-msgid "Réunion"
-msgstr ""
+msgid "Nigeria"
+msgstr "نيجيريا"
 
 #: src/translations.h:361
-msgid "Romania"
-msgstr ""
+msgid "Nicaragua"
+msgstr "نيكاراجوا"
 
 #: src/translations.h:362
-msgid "Serbia"
-msgstr ""
+msgid "Netherlands"
+msgstr "هولندا"
 
 #: src/translations.h:363
-msgid "Russian Federation"
-msgstr ""
+msgid "Norway"
+msgstr "النرويج"
 
 #: src/translations.h:364
-msgid "Rwanda"
-msgstr ""
+msgid "Nepal"
+msgstr "نيبال"
 
 #: src/translations.h:365
-msgid "Saudi Arabia"
-msgstr ""
+msgid "Nauru"
+msgstr "ناورو"
 
 #: src/translations.h:366
-msgid "Solomon Islands"
-msgstr ""
+msgid "Niue"
+msgstr "نيو"
 
 #: src/translations.h:367
-msgid "Seychelles"
-msgstr ""
+msgid "New Zealand"
+msgstr "نيوزيلاندا"
 
 #: src/translations.h:368
-msgid "Sudan"
-msgstr ""
+msgid "Oman"
+msgstr "عمان"
 
 #: src/translations.h:369
-msgid "Sweden"
-msgstr ""
+msgid "Panama"
+msgstr "بنما"
 
 #: src/translations.h:370
-msgid "Singapore"
-msgstr ""
+msgid "Peru"
+msgstr "بيرو"
 
 #: src/translations.h:371
-msgid "Saint Helena"
-msgstr ""
+msgid "French Polynesia"
+msgstr "بولونيزا الفرنسية"
 
 #: src/translations.h:372
-msgid "Slovenia"
-msgstr ""
+msgid "Papua New Guinea"
+msgstr "بابوا نيو جويانا"
 
 #: src/translations.h:373
-msgid "Svalbard and Jan Mayen"
-msgstr ""
+msgid "Philippines"
+msgstr "الفلبين"
 
 #: src/translations.h:374
-msgid "Slovakia"
-msgstr ""
+msgid "Pakistan"
+msgstr "باكستان"
 
 #: src/translations.h:375
-msgid "Sierra Leone"
-msgstr ""
+msgid "Poland"
+msgstr "بولندا"
 
 #: src/translations.h:376
-msgid "San Marino"
-msgstr ""
+msgid "Saint Pierre and Miquelon"
+msgstr "سانت بيير وميكويلون"
 
 #: src/translations.h:377
-msgid "Senegal"
-msgstr ""
+msgid "Pitcairn"
+msgstr "بيتكايرن"
 
 #: src/translations.h:378
-msgid "Somalia"
-msgstr ""
+msgid "Puerto Rico"
+msgstr "بورتو ريكو"
 
 #: src/translations.h:379
-msgid "Suriname"
-msgstr ""
+msgid "Palestinian Territories"
+msgstr "فلسطين"
 
 #: src/translations.h:380
-msgid "Sao Tome and Principe"
-msgstr ""
+msgid "Portugal"
+msgstr "البرتغال"
 
 #: src/translations.h:381
-msgid "El Salvador"
-msgstr ""
+msgid "Palau"
+msgstr "بالاو"
 
 #: src/translations.h:382
-msgid "Syrian Arab Republic"
-msgstr ""
+msgid "Paraguay"
+msgstr "باراغواي"
 
 #: src/translations.h:383
-msgid "Swaziland"
-msgstr ""
+msgid "Qatar"
+msgstr "قطر"
 
 #: src/translations.h:384
-msgid "Turks and Caicos Islands"
-msgstr ""
+msgid "Réunion"
+msgstr "ريونيون"
 
 #: src/translations.h:385
-msgid "Chad"
-msgstr ""
+msgid "Romania"
+msgstr "رومانيا"
 
 #: src/translations.h:386
-msgid "French Southern Territories"
-msgstr ""
+msgid "Serbia"
+msgstr "صربيا"
 
 #: src/translations.h:387
-msgid "Togo"
-msgstr ""
+msgid "Russian Federation"
+msgstr "الإتحاد الروسي"
 
 #: src/translations.h:388
-msgid "Thailand"
-msgstr ""
+msgid "Rwanda"
+msgstr "رواندا"
 
 #: src/translations.h:389
-msgid "Tajikistan"
-msgstr ""
+msgid "Saudi Arabia"
+msgstr "السعودية"
 
 #: src/translations.h:390
-msgid "Tokelau"
-msgstr ""
+msgid "Solomon Islands"
+msgstr "جزر سولومن"
 
 #: src/translations.h:391
-msgid "East Timor"
-msgstr ""
+msgid "Seychelles"
+msgstr "سيشل"
 
 #: src/translations.h:392
-msgid "Turkmenistan"
-msgstr ""
+msgid "Sudan"
+msgstr "السودان"
 
 #: src/translations.h:393
-msgid "Tunisia"
-msgstr ""
+msgid "Sweden"
+msgstr "السويد"
 
 #: src/translations.h:394
-msgid "Tonga"
-msgstr ""
+msgid "Singapore"
+msgstr "سنغافورة"
 
 #: src/translations.h:395
-msgid "Turkey"
-msgstr ""
+msgid "Saint Helena"
+msgstr "سانت هيلينا"
 
 #: src/translations.h:396
-msgid "Trinidad and Tobago"
-msgstr ""
+msgid "Slovenia"
+msgstr "سلوفينيا"
 
 #: src/translations.h:397
-msgid "Tuvalu"
-msgstr ""
+msgid "Svalbard and Jan Mayen"
+msgstr "سفالبارد وجان مايين"
 
 #: src/translations.h:398
-msgid "Taiwan"
-msgstr ""
+msgid "Slovakia"
+msgstr "سلوفاكيا"
 
 #: src/translations.h:399
-msgid "Tanzania"
-msgstr ""
+msgid "Sierra Leone"
+msgstr "سيراليون"
 
 #: src/translations.h:400
-msgid "Ukraine"
-msgstr ""
+msgid "San Marino"
+msgstr "سان مارينو"
 
 #: src/translations.h:401
-msgid "Uganda"
-msgstr ""
+msgid "Senegal"
+msgstr "السنغال"
 
 #: src/translations.h:402
-msgid "United States Minor Outlying Islands"
-msgstr ""
+msgid "Somalia"
+msgstr "الصومال"
 
 #: src/translations.h:403
-msgid "United States"
-msgstr ""
+msgid "Suriname"
+msgstr "سورينام"
 
 #: src/translations.h:404
-msgid "Uruguay"
-msgstr ""
+msgid "Sao Tome and Principe"
+msgstr "ساو توم وبرينسيب"
 
 #: src/translations.h:405
-msgid "Uzbekistan"
-msgstr ""
+msgid "El Salvador"
+msgstr "السلفادور"
 
 #: src/translations.h:406
-msgid "Vatican City State"
-msgstr ""
+msgid "Syrian Arab Republic"
+msgstr "سوريا"
 
 #: src/translations.h:407
-msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgid "Swaziland"
+msgstr "سوازيلاند"
 
 #: src/translations.h:408
-msgid "Venezuela"
-msgstr ""
+msgid "Turks and Caicos Islands"
+msgstr "الترك وجزر كايكوس"
 
 #: src/translations.h:409
-msgid "British Virgin Islands"
-msgstr ""
+msgid "Chad"
+msgstr "تشاد"
 
 #: src/translations.h:410
-msgid "United States Virgin Islands"
-msgstr ""
+msgid "French Southern Territories"
+msgstr "المقاطعات الفرنسية الجنوبية"
 
 #: src/translations.h:411
-msgid "Viet Nam"
-msgstr ""
+msgid "Togo"
+msgstr "توجو"
 
 #: src/translations.h:412
-msgid "Vanuatu"
-msgstr ""
+msgid "Thailand"
+msgstr "تايلاند"
 
 #: src/translations.h:413
-msgid "Wallis and Futuna"
-msgstr ""
+msgid "Tajikistan"
+msgstr "طاجيكستان"
 
 #: src/translations.h:414
-msgid "Samoa"
-msgstr ""
+msgid "Tokelau"
+msgstr "توكيلاو"
 
 #: src/translations.h:415
-msgid "Yemen"
-msgstr ""
+msgid "East Timor"
+msgstr "تيمور الشرقية"
 
 #: src/translations.h:416
-msgid "Mayotte"
-msgstr ""
+msgid "Turkmenistan"
+msgstr "تركمانستان"
 
 #: src/translations.h:417
-msgid "Yugoslavia"
-msgstr ""
+msgid "Tunisia"
+msgstr "تونس"
 
 #: src/translations.h:418
-msgid "South Africa"
-msgstr ""
+msgid "Tonga"
+msgstr "تونغا"
 
 #: src/translations.h:419
-msgid "Zambia"
-msgstr ""
+msgid "Turkey"
+msgstr "تركيا"
 
 #: src/translations.h:420
+msgid "Trinidad and Tobago"
+msgstr "ترينيداد وتوباجو"
+
+#: src/translations.h:421
+msgid "Tuvalu"
+msgstr "توفالو"
+
+#: src/translations.h:422
+msgid "Taiwan"
+msgstr "تايوان"
+
+#: src/translations.h:423
+msgid "Tanzania"
+msgstr "تنزانيا"
+
+#: src/translations.h:424
+msgid "Ukraine"
+msgstr "أوكرانيا"
+
+#: src/translations.h:425
+msgid "Uganda"
+msgstr "أوغندا"
+
+#: src/translations.h:426
+msgid "United States Minor Outlying Islands"
+msgstr "جزر الولايات المتحدة البعيدة"
+
+#: src/translations.h:427
+msgid "United States"
+msgstr "الولايات المتحدة"
+
+#: src/translations.h:428
+msgid "Uruguay"
+msgstr "الأوروغواي"
+
+#: src/translations.h:429
+msgid "Uzbekistan"
+msgstr "أزبكستان"
+
+#: src/translations.h:430
+msgid "Vatican City State"
+msgstr "الفاتيكان"
+
+#: src/translations.h:431
+msgid "Saint Vincent and the Grenadines"
+msgstr "سانت فنسنت والجرينادين"
+
+#: src/translations.h:432
+msgid "Venezuela"
+msgstr "فنزويلا"
+
+#: src/translations.h:433
+msgid "British Virgin Islands"
+msgstr "جزر فرجن البريطانية"
+
+#: src/translations.h:434
+msgid "United States Virgin Islands"
+msgstr "جزر فرجن - الولايات المتحدة"
+
+#: src/translations.h:435
+msgid "Viet Nam"
+msgstr "فيتنام"
+
+#: src/translations.h:436
+msgid "Vanuatu"
+msgstr "فانواتو"
+
+#: src/translations.h:437
+msgid "Wallis and Futuna"
+msgstr "واليس وفوتونا"
+
+#: src/translations.h:438
+msgid "Samoa"
+msgstr "ساموا"
+
+#: src/translations.h:439
+msgid "Yemen"
+msgstr "اليمن"
+
+#: src/translations.h:440
+msgid "Mayotte"
+msgstr "مايوت"
+
+#: src/translations.h:441
+msgid "Yugoslavia"
+msgstr "يوغوسلافيا"
+
+#: src/translations.h:442
+msgid "South Africa"
+msgstr "جنوب أفريقيا"
+
+#: src/translations.h:443
+msgid "Zambia"
+msgstr "زامبيا"
+
+#: src/translations.h:444
 msgid "Zimbabwe"
-msgstr ""
+msgstr "زمبابوي"
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -2613,7 +2682,7 @@ msgstr "الإحداثيات"
 
 #: src/ui_searchDialogGui.h:546
 msgid "Search also in the SIMBAD on-line astronomical database"
-msgstr ""
+msgstr "على الإنترنت SIMBAD ابحث أيضاً في قاعدة معلومات"
 
 #: src/ui_searchDialogGui.h:547 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
@@ -2702,11 +2771,11 @@ msgstr "التلوث الضوئي:"
 
 #: src/ui_viewDialog.h:1103
 msgid "pressure, temperature, extinction coefficient"
-msgstr "الضغط، الحرارة، معامل الانقراض"
+msgstr "الضغط، الحرارة، معامل الانطفاء"
 
 #: src/ui_viewDialog.h:1105
 msgid "Refraction/Extinction settings..."
-msgstr "إعدادات الانكسار/الانقراض"
+msgstr "إعدادات الانكسار/الانطفاء"
 
 #: src/ui_viewDialog.h:1106
 msgid "Labels and Markers"
@@ -3155,13 +3224,13 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
-"الانقراض هو الفقد في لمعان النجم بسبب الغلاف الجوي للأرض. وهو يحسب بـ "
+"الانطفاء هو الفقد في لمعان النجم بسبب الغلاف الجوي للأرض. وهو يحسب بـ "
 "القدر/كتلة الهواء ، حيث كتلة الهواء هو الرقم للغلاف الجوي الذي يلزم للضوء "
 "عبوره. (في السمت تكون القيمة 1، وفي الأفق تكون القيمة 40)ـ"
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Extinction Coefficient:"
-msgstr "معامل الانقراض"
+msgstr "معامل الانطفاء"
 
 #: src/ui_AtmosphereDialog.h:180
 msgid ""
@@ -3891,7 +3960,7 @@ msgstr "[مصدر جديد]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:457
 msgid "[all newly added]"
-msgstr ""
+msgstr "[ كل المضافة حديثاً]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:458
 msgid "[all not displayed]"
@@ -3911,33 +3980,33 @@ msgstr "TLE اختر ملف التحديث"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:135
 msgid "Downloading data..."
-msgstr ""
+msgstr "... جاري تنزيل البيانات"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:136
 msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
-msgstr ""
+msgstr "ستيلاريوم يقوم بتنزيل البيانات من مصدر التحديثات. الرجاء الانتظار"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
 msgid "Select TLE source file(s)..."
-msgstr ""
+msgstr "TLE اختر ملفات مصدر"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:166
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:167
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:226
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:227
 msgid "Processing data..."
-msgstr ""
+msgstr "... معالجة المعلومات"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:221
 msgid "No data could be downloaded. Try again later."
-msgstr ""
+msgstr "لم يتمكن ستيللاريوم من تنزيل البيانات. حاول مرة أخرى لاحقاً."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:344
 #, qt-format
 msgid "Catalog Number: %1"
-msgstr ""
+msgstr "رقم الدليل: %1"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
@@ -3979,7 +4048,7 @@ msgstr "عدد القطع المستخدمة لرسم خط المدار"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Number of  segments:"
-msgstr ""
+msgstr "عدد قطع الخطوط"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:659
 #: plugins/Satellites/src/ui_satellitesDialog.h:663
@@ -3988,7 +4057,7 @@ msgstr "مدة كل قطعة بالثواني"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:661
 msgid "Segment length (s):"
-msgstr ""
+msgstr "طول القطعة"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:666
 #: plugins/Satellites/src/ui_satellitesDialog.h:669
@@ -4053,11 +4122,11 @@ msgstr "بيانات العاصر المدارية على شكل سطرين من
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:695
 msgid "Remove the selected satellites"
-msgstr ""
+msgstr "أزل القمر الصناعي المختار"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:698
 msgid "Add more satellites"
-msgstr ""
+msgstr "أضف أقمار صناعية"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:702
 msgid "Save changes"
@@ -4082,9 +4151,13 @@ msgstr "استبعد المصدر المختار"
 msgid "Sources"
 msgstr "المصادر"
 
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:206
+msgid "More Satellites"
+msgstr "أقمار صناعية أكثر"
+
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:208
 msgid "Get data from update sources"
-msgstr ""
+msgstr "أحصل على بيانات محدثة من المصدر"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:209
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
@@ -4093,7 +4166,7 @@ msgstr "أجهض التحميل"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:210
 msgid "New satellites"
-msgstr ""
+msgstr "الأقمار الصناعية الجديدة"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:212
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
@@ -4920,7 +4993,7 @@ msgstr "خطأ، جزء من اللون غير معروف \"%1\""
 
 #: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
 msgid " [RETURN to activate]"
-msgstr ""
+msgstr " [مفتاح الإدخال للتفعيل]"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
@@ -4991,7 +5064,7 @@ msgstr "وظيفة تحرير أجرام النظام الشمسي"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Import data"
-msgstr ""
+msgstr "استورد البيانات"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
@@ -5170,10 +5243,14 @@ msgstr ""
 "1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
 "(13 September)."
 
-#: plugins/Supernovae/src/Supernova.cpp:112
+#: plugins/Supernovae/src/Supernova.cpp:99
+msgid "supernova"
+msgstr "مستعر عظيم"
+
+#: plugins/Supernovae/src/Supernova.cpp:115
 #, qt-format
-msgid "Type: %1"
-msgstr "النوع :%1"
+msgid "Type of supernova: %1"
+msgstr "نوع المستعر: %1"
 
 #: plugins/Quasars/src/Quasars.cpp:59
 msgid "Quasars"
@@ -5185,12 +5262,15 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
+"<P DIR=RTL>برنامج إضافي لإظهار بعض الكوزرات ذات اللمعان الأسطع من القدر 16. "
+"ويحوي مجموعة من الكوزرات مصدرها الطبعة الثالثة عشرة من كتاب 'Quasars and "
+"Active Galactic Nuclei'' (13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 
-#: plugins/Quasars/src/Quasar.cpp:129
-msgid "Type: quasar"
-msgstr "‎النوع: ‎ كوازار"
+#: plugins/Quasars/src/Quasar.cpp:92
+msgid "quasar"
+msgstr "كوازار"
 
-#: plugins/Quasars/src/Quasar.cpp:132
+#: plugins/Quasars/src/Quasar.cpp:134
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr "‎ Z (الإزاحة الحمراء‎): %1"
