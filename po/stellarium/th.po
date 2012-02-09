@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-03 23:33+0700\n"
-"PO-Revision-Date: 2012-02-08 01:04+0000\n"
+"PO-Revision-Date: 2012-02-09 03:58+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-08 04:41+0000\n"
-"X-Generator: Launchpad (build 14747)\n"
+"X-Launchpad-Export-Date: 2012-02-09 05:23+0000\n"
+"X-Generator: Launchpad (build 14763)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -1450,7 +1450,7 @@ msgstr "จันทรุปราคาเต็มดวง"
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
 msgid "Screensaver"
-msgstr ""
+msgstr "ภาพพักหน้าจอ"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:188
@@ -1469,7 +1469,7 @@ msgstr "จักรราศี"
 
 #: src/translations.h:195
 msgid "Look around each installed landscape."
-msgstr ""
+msgstr "ดูแต่ละภูมิทัศน์ที่ติดตั้งไว้"
 
 #: src/translations.h:196
 msgid "Script to demonstrate a partial lunar eclipse."
@@ -1481,7 +1481,7 @@ msgstr "สคริปต์แสดงการเกิดจันทรุ
 
 #: src/translations.h:198
 msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr ""
+msgstr "ท่องไปทั่วท้องฟ้าอย่างช้า ๆ โดยการสุ่มหาวัตถุท้องฟ้า"
 
 #: src/translations.h:199
 msgid ""
@@ -3368,13 +3368,13 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1257
 msgid "Oculars plugin configuration"
-msgstr ""
+msgstr "การตั้งค่าโปรแกรมเสริมเลนส์ใกล้ตา"
 
 #: plugins/Oculars/src/Oculars.cpp:1445
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 #, qt-format
 msgid "Ocular #%1"
-msgstr ""
+msgstr "เลนส์ใกล้ตา #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1450
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
@@ -3609,11 +3609,11 @@ msgstr "เซนเซอร์"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Resolution x (pixels):"
-msgstr ""
+msgstr "ความละเอียด x (จุดภาพ):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Resolution y (pixels):"
-msgstr ""
+msgstr "ความละเอียด y (จุดภาพ):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Chip width (mm):"
@@ -4056,7 +4056,7 @@ msgstr "จำนวนเซกเมนต์ที่ใช้วาดแต
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:671
 msgid "Fade length:"
-msgstr ""
+msgstr "ความยาวของส่วนที่จางลง:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:672
 msgid "Restore default settings"
@@ -4395,27 +4395,31 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope Configuration"
-msgstr ""
+msgstr "การตั้งค่ากล้องโทรทรรศน์"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid "Telescope controlled by:"
-msgstr "ควบคุมกล้องโ๋ทรทรรศน์โดย:"
+msgstr "ควบคุมกล้องโทรทรรศน์โดย:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
+"กล้องโทรทรรศน์เชื่อมต่อกับคอมพิวเตอร์เครื่องนี้ผ่านพอร์ตอนุกรม "
+"และควบคุมโดยตรงด้วย Stellarium"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
 msgid "Stellarium, directly through a serial port"
-msgstr ""
+msgstr "Stellarium, ผ่านพอร์ตอนุกรมโดยตรง"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
+"กล้องโทรทรรศน์ถูกควบคุมโดยโปรแกรมประยุกต์ภายนอก "
+"อาจเป็นคอมพิวเตอร์เครื่องนี้หรือระยะไกล"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "External software or a remote computer"
@@ -4470,7 +4474,7 @@ msgstr "การตั้งค่าอุปกรณ์"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Serial port:"
-msgstr ""
+msgstr "พอร์ตอนุกรม:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Device model:"
@@ -4482,20 +4486,22 @@ msgstr "ตั้งค่าการเชื่อมต่อ"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:502
 msgid "Host:"
-msgstr ""
+msgstr "โฮสต์:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:504
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr ""
+"ชื่อเครื่องโฮสต์หรือที่อยู่ IPv4 "
+"ของเครื่องที่ติดตั้งเซิร์ฟเวอร์ของกล้องโทรทรรศน์"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "TCP port:"
-msgstr ""
+msgstr "พอร์ต TCP:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "User interface settings"
-msgstr ""
+msgstr "การตั้งค่าส่วนต่อประสานกับผู้ใช้"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
 msgid "Show circles with fixed angular size around the telescope reticle"
@@ -4527,7 +4533,7 @@ msgstr "ปรับแต่งกล้องโทรทรรศน์ที
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Configure"
-msgstr ""
+msgstr "ปรับแต่ง"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Add a new telescope"
@@ -4539,7 +4545,7 @@ msgstr "ลบกล้องโทรทรรศน์ที่เลือก
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "GUI"
-msgstr ""
+msgstr "GUI"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Show telescope labels"
@@ -4928,7 +4934,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:443
 msgid "Run local script"
-msgstr ""
+msgstr "เปิดใช้งานสคริปต์ภายใน"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:449
 msgid "Stop running script"
@@ -4941,7 +4947,7 @@ msgstr "สคริปต์จาก CD/DVD"
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:464
 msgid "Administration"
-msgstr ""
+msgstr "ดูแลระบบ"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:469
 msgid "Load default configuration"
@@ -5041,7 +5047,7 @@ msgstr "โปรแกรมเสริมสำหรับการปรั
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Import data"
-msgstr ""
+msgstr "นำเข้าข้อมูล"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
@@ -5081,7 +5087,7 @@ msgstr "ชื่อคั่นหน้า:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "A file containing a list of objects"
-msgstr ""
+msgstr "แฟ้มบรรจุรายชื่อวัตถุต่าง ๆ"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Get orbital elements"
