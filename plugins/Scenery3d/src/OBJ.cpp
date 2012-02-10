@@ -40,16 +40,16 @@ void OBJ::load( const char* filename, const enum vertexOrder order )
                 if (parts[0] == "v") { // vertex (x,y,z)
                     if (parts.size() >= 4) {
                         Vertex v;
-                        switch (order) {
+                        switch (order) { // The first two are common in OBJs, the others may have mirrored coordinates, try them if necessary!
                         case XYZ:
                             v.x = parseFloat(parts[1]);
                             v.y = parseFloat(parts[2]);
                             v.z = parseFloat(parts[3]);
                             break;
                         case XZY:
-                            v.x = parseFloat(parts[1]);
-                            v.z = parseFloat(parts[2]);
-                            v.y = parseFloat(parts[3]);
+                            v.x =  parseFloat(parts[1]);
+                            v.z =  parseFloat(parts[2]);
+                            v.y = -parseFloat(parts[3]);
                             break;
                         case YXZ:
                             v.y = parseFloat(parts[1]);
