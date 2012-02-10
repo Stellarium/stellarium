@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Nigel Kerr
+ * Copyruight (c) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,13 +43,12 @@ public slots:
 
 	void close();
 
-signals:
-	//! signals that a new, valid JD is available.
-	void dateTimeChanged(double newJd);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
+	void connectSpinnerEvents() const;
+	void disconnectSpinnerEvents()const;
 
 private slots:
 	//! year slider or dial changed
