@@ -73,24 +73,24 @@ public:
 	//! @return a pointer to the progress bar
 	class QProgressBar* addProgressBar();
 	
-	//! Get the button bar at the bottom of the screen
-	BottomStelBar* getButtonBar();
+	//! Get the button bar at the bottom of the screensetDateTime
+	BottomStelBar* getButtonBar() const;
 	
 	//! Get the button bar of the left of the screen
-	class LeftStelBar* getWindowsButtonBar();
+	class LeftStelBar* getWindowsButtonBar() const;
 
 	//! Get the SkyGui instance (useful for adding other interface elements).
 	//! It will return a valid object only if called after init().
-	class SkyGui* getSkyGui();
+	class SkyGui* getSkyGui() const;
 	
 	//! Get whether the buttons toggling image flip are visible
-	bool getFlagShowFlipButtons() {return flagShowFlipButtons;}
+	bool getFlagShowFlipButtons() const;
 	
 	//! Get whether the button toggling nebulae background is visible
-	bool getFlagShowNebulaBackgroundButton() {return flagShowNebulaBackgroundButton;}
+	bool getFlagShowNebulaBackgroundButton() const;
 
 	//! returns true if the gui has complted init process.
-	bool initComplete(void) {return initDone;}
+	bool initComplete(void) const;
 
 #ifdef ENABLE_SCRIPT_CONSOLE
 	ScriptConsole* getScriptConsole() {return &scriptConsole;}
@@ -108,7 +108,12 @@ public:
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags);
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const;
 	
-	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false);
+	virtual QAction* addGuiActions(const QString& actionName,
+								   const QString& text,
+								   const QString& shortCut,
+								   const QString& helpGroup,
+								   bool checkable=true,
+								   bool autoRepeat=false);
 	
 public slots:
 	//! Define whether the buttons toggling image flip should be visible
