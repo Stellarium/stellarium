@@ -46,6 +46,8 @@ Scenery3dMgr::~Scenery3dMgr()
     delete scenery3d;
     scenery3d = NULL;
     delete scenery3dDialog;
+    messageTimer->stop();
+    delete messageTimer;
     delete shadowShader;
     delete bumpShader;
     delete univShader;
