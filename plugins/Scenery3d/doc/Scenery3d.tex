@@ -119,17 +119,23 @@ after the conversion.  Note that some texture coordinates may not be
 exported correctly. The setting Photomatched:Yes seems now to have
 corrected this issue, esp. with distorted/manu\-ally shifted textures.
 
-(Almost) Working alternative: \filename{ObjExporter.rb} by author Honing.  Here,
+Recently, another free OBJ exporter has been made available by user
+TIG: \filename{OBJexporter.rb}. This is the only OBJ exporter capable
+of handling large TIN landscapes ($>300.000$ triangles). As of version
+1.6 it appears to have valid texture coordinates, but I have
+experienced problems with black faces which need more
+investigation. Maybe you can combine two OBJ files with another 3D
+editor after creating individual OBJs if this is a problem. This
+exporter swaps Y/Z coordinates, but you can add a key to the config
+file to correct swapped axes, see below. Other exporters may also
+provide coordinates in any order of X, Y, Z -- all those can be
+properly configured.
+
+Another (almost) working alternative: \filename{ObjExporter.rb} by author Honing.  Here,
 export with settings 0xxx00. This will not create a \filename{TX...} folder but
 dump all textures in the same directory as the OBJ and MTL
 files. Unfortunately, this time some material assignments seem to be
-bad. Also, it swaps Y/Z coordinates, but you can add a key to the
-config file to correct swapped axes, see below. Other exporters may
-also provide coordinates in any order of X, Y, Z -- all those can be
-properly configured.
-
-Recently, another free OBJ exporter has been made available by user TIG:
-\filename{OBJexporter.rb}. However, as of version 1.2 it still has bad texture coordinates.
+bad. 
 
 Yet another exporter, \filename{su2objmtl}, does also not provide good texture
 coordinates and cannot be recommended at this time.
