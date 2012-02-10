@@ -240,8 +240,9 @@ bool StelTexture::glLoad()
 	}
 	else
 		glformat = GL_RGB;
-
-	Q_ASSERT(StelPainter::glContext==QGLContext::currentContext());
+#ifndef ANDROID
+        Q_ASSERT(StelPainter::glContext==QGLContext::currentContext());
+#endif
 #ifdef USE_OPENGL_ES2
 	glActiveTexture(GL_TEXTURE0);
 #endif

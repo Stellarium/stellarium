@@ -238,9 +238,7 @@ void StelApp::init(QSettings* conf)
  #endif
 #endif
 
-#ifndef ANDROID
 	loadingBar.draw();
-#endif
 
 	networkAccessManager = new QNetworkAccessManager(this);
 	// Activate http cache if Qt version >= 4.5

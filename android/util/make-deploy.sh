@@ -19,7 +19,7 @@ set -e
 
 source `dirname $0`/config.conf
 
-$SCRIPT_DIR/build-stel.sh
+$SCRIPT_DIR/make-stel.sh
 $SCRIPT_DIR/update-apk-env.sh
 $SCRIPT_DIR/build-apk.sh
-
+$SCRIPT_DIR/install-apk.sh
