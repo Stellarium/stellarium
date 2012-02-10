@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-03 23:33+0700\n"
-"PO-Revision-Date: 2012-02-02 21:56+0000\n"
+"PO-Revision-Date: 2012-02-08 06:57+0000\n"
 "Last-Translator: Zbyněk Schwarz <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-04 04:58+0000\n"
-"X-Generator: Launchpad (build 14738)\n"
+"X-Launchpad-Export-Date: 2012-02-09 05:23+0000\n"
+"X-Generator: Launchpad (build 14763)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -685,7 +685,7 @@ msgstr "Mlha"
 
 #: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1108
 msgid "Nebulas"
-msgstr "Mlhoviny [N]"
+msgstr "Mlhoviny"
 
 #: src/gui/StelGui.cpp:122
 msgid "Nebulas background images"
@@ -1434,63 +1434,65 @@ msgstr "Garching"
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
 msgid "Landscape Tour"
-msgstr ""
+msgstr "Prohlídka povrchu"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
 msgid "Partial Lunar Eclipse"
-msgstr ""
+msgstr "Částečné zatmění Měsíce"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:184
 msgid "Total Lunar Eclipse"
-msgstr ""
+msgstr "Úplné zatmění Měsíce"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
 msgid "Screensaver"
-msgstr ""
+msgstr "Spořič obrazovky"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:188
 msgid "Solar Eclipse 2009"
-msgstr ""
+msgstr "Zatmění Měsíce 2009"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:190
 msgid "Startup Script"
-msgstr ""
+msgstr "Spouštěcí skript"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:192
 msgid "Zodiac"
-msgstr ""
+msgstr "Zvěrokruh"
 
 #: src/translations.h:195
 msgid "Look around each installed landscape."
-msgstr ""
+msgstr "Porozhlédnout se po každém nainstalovaném povrchu."
 
 #: src/translations.h:196
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr ""
+msgstr "Skript pro ukázku částečného zatmění měsíce."
 
 #: src/translations.h:197
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr ""
+msgstr "Skript pro ukázku úplného zatmění měsíce."
 
 #: src/translations.h:198
 msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr ""
+msgstr "Pomalá, nekonečná prohlídka oblohy, pozorování náhodných objektů."
 
 #: src/translations.h:199
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
+"Skript pro ukázku úplného zatmění Měsíce, které se stalo v roce 2009 "
+"(umístění=Rangpur, Bangladéš)."
 
 #: src/translations.h:200
 msgid "Script which runs automatically at startup"
-msgstr ""
+msgstr "Skript, který je automaticky spuštěn při startu."
 
 #: src/translations.h:201
 msgid ""
@@ -1498,6 +1500,8 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
+"Tento skript zobrazuje postavení Zvěrokruhu. To znamená ta postavení, která "
+"leží podél čáry kterou Slunce sleduje po celé hvězdné obloze v průběhu roku."
 
 #: src/translations.h:204
 msgid "Andorra"
@@ -4136,37 +4140,37 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:710
 msgid "Add new source"
-msgstr ""
+msgstr "Přidat nový zdroj"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Remove selected source"
-msgstr ""
+msgstr "Odstranit vybraný zdroj"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:717
 msgid "Sources"
-msgstr ""
+msgstr "Zdroje"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:206
 msgid "More Satellites"
-msgstr ""
+msgstr "Další satelity"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:208
 msgid "Get data from update sources"
-msgstr ""
+msgstr "Získat data ze zdrojů aktualizace"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:209
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Abort download"
-msgstr ""
+msgstr "Přerušit stahování"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:210
 msgid "New satellites"
-msgstr ""
+msgstr "Nové satelity"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:212
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Discard"
-msgstr ""
+msgstr "Zahodit"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:150
@@ -4178,6 +4182,8 @@ msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
+"Tento zásuvný modul umožňuje Stellarium zaslat příkazy \"otočení\" teleskopu "
+"na počítačové montáží (Teleskop \"GoTo\")."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:155
 #, qt-format
@@ -4195,23 +4201,23 @@ msgstr "Posunout dalekohled na dané souřadnice"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
-msgstr ""
+msgstr "Přidat nový teleskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
-msgstr ""
+msgstr "Nastavit teleskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
-msgstr ""
+msgstr "nedostupné"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
 msgid "Starting"
-msgstr ""
+msgstr "Spustění"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:58
 msgid "Connecting"
-msgstr ""
+msgstr "Připojování"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:59
 msgid "Connected"
@@ -4227,7 +4233,7 @@ msgstr "Zastaveno"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
-msgstr ""
+msgstr "Zásuvný modul kontroly teleskopu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
@@ -4239,7 +4245,7 @@ msgstr "Verze %1"
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 msgid "#"
-msgstr ""
+msgstr "č."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Status"
@@ -4251,7 +4257,7 @@ msgstr "Typ"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
-msgstr ""
+msgstr "Název"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #, qt-format
@@ -4261,6 +4267,10 @@ msgid ""
 "telescope's number. To slew it to the center of the current view, hold down "
 "the Alt key and press the key with that telescope's number."
 msgstr ""
+"Pro otočení připojeného teleskopu na objekt (například hvězdu), objekt "
+"vyberte, pak podržte klávesu %1 a stiskněte klávesu s číslem teleskopu. Pro "
+"otočení do středu současného zobrazení, podržte klávesu Alt a stiskněte "
+"klávesu s číslem teleskopu."
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
@@ -4269,69 +4279,72 @@ msgid ""
 "control a telescope on its own, but it is still possible to do it through an "
 "external application or to connect to a remote host."
 msgstr ""
+"Nejsou dostupné žádné popisy modelu zařízení. Stellarium nebude moci samo "
+"zařízení ovládat, ale je stále možné ho ale ovládat pomocí vnější aplikace "
+"nebo se připojit ke vzdálenému hostiteli."
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
-msgstr ""
+msgstr "Stiskněte tlačítko \"%1\" pro nastavení nového připojení teleskopu."
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid "local, Stellarium"
-msgstr ""
+msgstr "místní, Stellarium"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 msgid "local, external"
-msgstr ""
+msgstr "místní, vnější"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid "remote, unknown"
-msgstr ""
+msgstr "vzdálená, neznámá"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid "virtual"
-msgstr ""
+msgstr "virtuální"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:744
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Start"
-msgstr ""
+msgstr "Spustit"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:745
 msgid "Start the selected local telescope"
-msgstr ""
+msgstr "Spustit zvolený místní teleskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:750
 msgid "Stop"
-msgstr ""
+msgstr "Zastavit"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:751
 msgid "Stop the selected local telescope"
-msgstr ""
+msgstr "Zastavit zvolený místní teleskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:756
 msgid "Connect"
-msgstr ""
+msgstr "Připojit"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:757
 msgid "Connect to the selected telescope"
-msgstr ""
+msgstr "Připojit se ke zvolenému teleskopu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:762
 msgid "Disconnect"
-msgstr ""
+msgstr "Odpojit"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:763
 msgid "Disconnect from the selected telescope"
-msgstr ""
+msgstr "Odpojit se od zvoleného teleskopu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:784
 msgid "Select a directory"
-msgstr ""
+msgstr "Zvolte adresář"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:281
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
@@ -4341,15 +4354,15 @@ msgstr "Formulář"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:282
 msgid "Slew telescope to"
-msgstr ""
+msgstr "Otočit teleskop na"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:284
 msgid "There are no active devices."
-msgstr ""
+msgstr "Nejsou žádná aktivní zařízení."
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:285
 msgid "Slew telescope to coordinates"
-msgstr ""
+msgstr "Otočit teleskop na souřadnice"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:286
 msgid "&Right Ascension (J2000):"
@@ -4361,75 +4374,79 @@ msgstr "De&klinace (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "Hours-minutes-seconds format"
-msgstr ""
+msgstr "Formát hodiny-minuty-vteřiny"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:291
 msgid "&HMS"
-msgstr ""
+msgstr "&HMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:293
 msgid "Degrees-minutes-seconds format"
-msgstr ""
+msgstr "Formát stupně-minuty-vteřiny"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:295
 msgid "&DMS"
-msgstr ""
+msgstr "&DMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:297
 msgid "Decimal degrees"
-msgstr ""
+msgstr "Desetinné stupně"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "D&ecimal"
-msgstr ""
+msgstr "D&esetinné"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:300
 msgid "&Slew"
-msgstr ""
+msgstr "&Otočit"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Configure &telescopes..."
-msgstr ""
+msgstr "Nastavit &teleskopy..."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope Configuration"
-msgstr ""
+msgstr "Nastavení teleskopu"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid "Telescope controlled by:"
-msgstr ""
+msgstr "Teleskop je ovládán:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
+"Teleskop připojený k tomuto počítači přes sériový port a přímo ovládán "
+"Stellarium."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
 msgid "Stellarium, directly through a serial port"
-msgstr ""
+msgstr "Stellarium, přímo přes sériový port"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
+"Teleskop ovládáný vnější aplikací, buď v tomto počítači nebo ve vzdáleném "
+"stroji."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "External software or a remote computer"
-msgstr ""
+msgstr "Vnější software nebo vzdálený počítač"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr ""
+msgstr "Nic, jen simulovat (pohybující záměrný kříž)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Telescope properties"
-msgstr ""
+msgstr "Vlastnosti teleskopu"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid "Connection delay:"
-msgstr ""
+msgstr "Zpoždění připojení:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:488
 msgid ""
@@ -4437,6 +4454,8 @@ msgid ""
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
+"Přibližná doba cesty signálu z teleskopu do Stellarium.\n"
+"Tuto volbu zvyšte, pokud záměrný kříž přeskakuje."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Coordinate system:"
@@ -4448,66 +4467,71 @@ msgstr "J2000 (výchozí)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
 msgid "Equinox of the date (JNow)"
-msgstr ""
+msgstr "Rovnodennost data (JNow)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
+"Automaticky se pokusit teleskop spustit nebo navázat spojení při spuštění "
+"Stellarium"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Start/connect at startup"
-msgstr ""
+msgstr "Spustit/přpojit při spuštění"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Device settings"
-msgstr ""
+msgstr "Nastavení zařízení"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Serial port:"
-msgstr ""
+msgstr "Sériový port:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Device model:"
-msgstr ""
+msgstr "Model zařízení:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Connection settings"
-msgstr ""
+msgstr "Nastavení připojení"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:502
 msgid "Host:"
-msgstr ""
+msgstr "Hostitel:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:504
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr ""
+"Jméno hostitele nebo adresa IPv4 stroje, který hostí server teleskopu"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "TCP port:"
-msgstr ""
+msgstr "TCP port:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "User interface settings"
-msgstr ""
+msgstr "Nastavení uživatelského rozhraní:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
 msgid "Show circles with fixed angular size around the telescope reticle"
 msgstr ""
+"Zobrazit kruhy s pevnou velikostí úhlu okolo záměrného kříže teleskopu"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:511
 msgid "Use field of view indicators"
-msgstr ""
+msgstr "Použít pole ukazatelů zobrazení"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:512
 msgid "Circle size(s):"
-msgstr ""
+msgstr "Velikost(i) kruhu:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:514
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
 msgstr ""
+"Až deset desítkových hodnoty ve stupních oblouku, oddělených čárkami."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "OK"
@@ -4515,55 +4539,56 @@ msgstr "OK"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
 msgid "Telescopes Controlled"
-msgstr ""
+msgstr "Kontrolované teleskopy"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Configure the selected telescope"
-msgstr ""
+msgstr "Nastavit zvolený teleskop"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Configure"
-msgstr ""
+msgstr "Nastavit"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Add a new telescope"
-msgstr ""
+msgstr "Přidat nový teleskop"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "Remove the selected telescope"
-msgstr ""
+msgstr "Odstranit zvolený teleskop"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "GUI"
-msgstr ""
+msgstr "GUI"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Show telescope labels"
-msgstr ""
+msgstr "Zobrazit jmenovky teleskopu"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Show telescope reticles"
-msgstr ""
+msgstr "Zobrazit záměrný kříž teleskopu"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Show field of view indicators"
-msgstr ""
+msgstr "Zobrazit pole ukazatelů zobrazení"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Files"
-msgstr ""
+msgstr "Soubory"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Log telescope driver messages to files"
-msgstr ""
+msgstr "Zaznamenat zprávy ovladače teleskopu do souborů"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 msgid "Use telescope server executables (override built-in drivers)"
 msgstr ""
+"Použít spustitelné soubory serveru teleskopu (potlačit zabudované ovladače)"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
 msgid "Executables directory:"
-msgstr ""
+msgstr "Složka spustitelných souborů"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -4629,23 +4654,23 @@ msgstr "Prosinec"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:265
 msgid "First week"
-msgstr ""
+msgstr "První týden"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:266
 msgid "Second week"
-msgstr ""
+msgstr "Druhý týden"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:267
 msgid "Third week"
-msgstr ""
+msgstr "Třetí týden"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:268
 msgid "Fourth week"
-msgstr ""
+msgstr "Čtvrtý týden"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:269
 msgid "Last week"
-msgstr ""
+msgstr "Poslední týden"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:278
 msgid "Sunday"
@@ -4677,11 +4702,11 @@ msgstr "Sobota"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
-msgstr ""
+msgstr "Zásuvný modul časového pásma"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:449
 msgid "Define a time zone"
-msgstr ""
+msgstr "Určit časové pásmo"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
@@ -4701,29 +4726,29 @@ msgstr "Posun vůči UTC (v hodinách):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 msgid "Daylight saving time (summer time)"
-msgstr ""
+msgstr "Letní čas"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
 msgid "DST timezone name:"
-msgstr ""
+msgstr "Jméno časového pásma letního času:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
 msgid "DST offset from UTC (hours):"
-msgstr ""
+msgstr "Odchylka letního času od UTC (v hodinách):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
 msgid "Daylight saving time start"
-msgstr ""
+msgstr "Začátek letního času"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
 msgid "Day:"
-msgstr ""
+msgstr "Den:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
 msgid "Time of change:"
-msgstr ""
+msgstr "Čas změny:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
@@ -4732,11 +4757,11 @@ msgstr "Datum:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
 msgid "Daylight saving time end"
-msgstr ""
+msgstr "Konec letního času"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:465
 msgid "Use this definition"
-msgstr ""
+msgstr "Použít tuto definici"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
 msgid ""
@@ -4745,6 +4770,9 @@ msgid ""
 "This behaviour can be changed by changing Stellarium's global time zone "
 "settings."
 msgstr ""
+"Standardně je čas zobrazený ve Stellarium považován za místní čas v časovém "
+"pásmu systému, ne v časovém pásmu zobrazeného umístění. Toto chování může "
+"být změněno v globálním nastavení časového pásma."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "Use system settings (default)"
@@ -4752,11 +4780,11 @@ msgstr "Použít systémové nastavení (výchozí)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
 msgid "Universal Coordinated Time (UTC)"
-msgstr ""
+msgstr "Koordinovaný světový čas (UTC)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "(offset = local time - UTC time)"
-msgstr ""
+msgstr "(odchylka = místní čas - čas UTC)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
 msgid "User-defined:"
@@ -4769,22 +4797,24 @@ msgstr "Jakékoliv změny se projeví až po restartu aplikace."
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:407
 msgid "Display formats"
-msgstr ""
+msgstr "Formáty zobrazení"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
+"Tato nastavení ovládají způsob, jakým jsou čas a datum zobrazeny ve spodní "
+"liště."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:198
 msgid "Time display format"
-msgstr ""
+msgstr "Formát zobrazení času"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
 msgid "System default"
-msgstr ""
+msgstr "Výchozí systému"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "12-hour format"
@@ -4797,7 +4827,7 @@ msgstr "24-hodinový formát"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "Date display format"
-msgstr ""
+msgstr "Formát zobrazení data"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
 msgid "yyyy-mm-dd (ISO 8601)"
@@ -4816,10 +4846,12 @@ msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
+"Zavedení zásuvného modulu řady 0.9.x textového rozhraní (TUI), použité v "
+"systémech planetária"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:148
 msgid "Solar System body"
-msgstr ""
+msgstr "Těleso sluneční soustavy"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:162
 msgid "Current date/time"
@@ -4827,15 +4859,15 @@ msgstr "Aktální datum/čas"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:167
 msgid "Set time zone"
-msgstr ""
+msgstr "Nastavit časové pásmo"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:168
 msgid "Day keys"
-msgstr ""
+msgstr "Klávesy dne"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:169
 msgid "Startup date/time preset"
-msgstr ""
+msgstr "Přednastavení počátečního dne/času"
 
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:176
@@ -4887,56 +4919,56 @@ msgstr "Názvy mlhovin"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:344
 msgid "Nebula hints"
-msgstr ""
+msgstr "Náznaky mlhoviny"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:387
 msgid "Effects"
-msgstr ""
+msgstr "Efekty"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:401
 msgid "Manual zoom"
-msgstr ""
+msgstr "Ruční přiblížení"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:406
 msgid "Magnitude scaling multiplier"
-msgstr ""
+msgstr "Násobitel měřítka velikosti"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:408
 msgid "Milky Way intensity:"
-msgstr ""
+msgstr "Intenzita Mléčné Dráhy:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:414
 msgid "Nebula label frequency:"
-msgstr ""
+msgstr "Četnost jmenovek mlhoviny:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:415
 msgid "Zoom duration:"
-msgstr ""
+msgstr "Trvání přiblížení:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:421
 msgid "Cursor timeout:"
-msgstr ""
+msgstr "Časový limit kurzoru:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:422
 msgid "Setting landscape sets location"
-msgstr ""
+msgstr "Nastavení krajiny nastaví umístění"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:443
 msgid "Run local script"
-msgstr ""
+msgstr "Spustit místní skript"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:449
 msgid "Stop running script"
-msgstr ""
+msgstr "Zastavit bežící skript"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:452
 msgid "CD/DVD script"
-msgstr ""
+msgstr "Skript CD/DVD"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:464
 msgid "Administration"
-msgstr ""
+msgstr "Administrace"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:469
 msgid "Load default configuration"
@@ -4948,11 +4980,11 @@ msgstr "Uložit aktuální nastavení"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:473
 msgid "Shut down"
-msgstr ""
+msgstr "Vypnout"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:504
 msgid "[no TUI node]"
-msgstr ""
+msgstr "[žádný režim TUI]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
 msgid "On"
@@ -4965,15 +4997,15 @@ msgstr "Vypnout"
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr ""
+msgstr "chby, neznámá barva část \"%1\""
 
 #: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
 msgid " [RETURN to activate]"
-msgstr ""
+msgstr " [ENTER pro aktivaci]"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
-msgstr ""
+msgstr "Editor sluneční soustavy"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:59
 msgid ""
@@ -4989,17 +5021,19 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
 #, qt-format
 msgid "Query the MPC's %1:"
-msgstr ""
+msgstr "Dotázat se MPC %1:"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
 msgid "Only one result will be returned if the query is successful."
-msgstr ""
+msgstr "Pokud bude dotaz úspěšný, bude vrácen pouze jeden výsledek."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
 msgstr ""
+"Komety i asteroidy mohou být identifikovány podle jejich čísla, názvu (v "
+"angličtině) nebo prozatímní název."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
 #, qt-format
@@ -5009,11 +5043,15 @@ msgid ""
 "searching for \"%3\" will return %4, Halley's Comet, but a search for \"%5\" "
 "will return the asteroid %6."
 msgstr ""
+"Kometa <i>název</i> musí mít předponu %1 nebo %2. Pokud se s názvem shoduje "
+"více než jedna kometa, bude nalezen pouze první výsledek. Například, "
+"vyhledáním \"%3\" bude nalezeno %4, Halleyova kometa, ale vyhledáním \"%5\" "
+"bude nalezen asteroid %6."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:87
 msgid "website"
-msgstr ""
+msgstr "internetová stránka"
 
 #. TRANSLATORS: IAU = International Astronomical Union
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:91
@@ -5024,18 +5062,22 @@ msgid ""
 "objects, download such lists from the Internet or search the online Minor "
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
+"Můžete importovat data asteroidů a komet formátovaná v exportních formátech "
+"Minor Planet Center IAU (%1). Můžete importovat soubory se seznamy objektů, "
+"stáhnout si takovéto seznamy z internetu  nebo hledat online pomocí služby "
+"Minor Planet and Comet Ephemeris Service (MPES)."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
 msgid "Solar System Editor plug-in"
-msgstr ""
+msgstr "Zásuvný modul editoru sluneční soustavy"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Import data"
-msgstr ""
+msgstr "Importovat data"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
-msgstr ""
+msgstr "Zvolte typ"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Asteroids"
@@ -5047,48 +5089,48 @@ msgstr "Komety"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Select the source"
-msgstr ""
+msgstr "Zvolte zdroj"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Download a list of objects from the Internet"
-msgstr ""
+msgstr "Stáhnout seznam objektů z internetu"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Select a source from the list:"
-msgstr ""
+msgstr "Zvolte zdroj ze seznamu:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Or enter a URL:"
-msgstr ""
+msgstr "Nebo zadejte URL:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Add this URL to the bookmarks list"
-msgstr ""
+msgstr "Přidat tuto URL do seznamu záložek"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Bookmark title:"
-msgstr ""
+msgstr "Název záložky:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "A file containing a list of objects"
-msgstr ""
+msgstr "Soubor obsahující seznam objektů"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Get orbital elements"
-msgstr ""
+msgstr "Získat prvky oblohy"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Lists"
-msgstr ""
+msgstr "Seznamy"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "Online search"
-msgstr ""
+msgstr "Hledání online"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Objects found"
-msgstr ""
+msgstr "Nalezené objekty"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid ""
@@ -5098,39 +5140,45 @@ msgid ""
 "Solar System configuration.<br/>Note that adding a large number of objects "
 "may cause Stellarium to run slowly."
 msgstr ""
+"Označte objekty, které chcete importovat. <i>Kurzívou</i> jsou zobrazeny "
+"názvy, které se shodují s názvy nalezenými v již  načtených objektech. "
+"<b>Tučně</b> jsou zobrazeny názvy, které se shodují s názvy objektů "
+"zděděných od výchozího nastavení Sluneční soustavy "
+"Stellarium.<br/>Nezapomeňte, že přidáním velkého množství objektů může "
+"způsobit pomalý chod Stellarium."
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Overwrite existing objects"
-msgstr ""
+msgstr "Přepsat existující objekty"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
 msgid "Update existing objects"
-msgstr ""
+msgstr "Aktualizovat existující objekty"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid "Update only the orbital elements"
-msgstr ""
+msgstr "Aktualizovat pouze prvky oblohy"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid "Mark all"
-msgstr ""
+msgstr "Označit vše"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Mark none"
-msgstr ""
+msgstr "Neoznačit nic"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid "Add objects"
-msgstr ""
+msgstr "Přidat objekty"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Solar System objects"
-msgstr ""
+msgstr "Objekty sluneční soustavy"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Warning"
-msgstr ""
+msgstr "Varování"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid ""
@@ -5138,11 +5186,15 @@ msgid ""
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
 msgstr ""
+"Tento zásuvný modul používá vlastní soubor nastavení Sluneční soustavy. "
+"Pokud se něco pokazí a Stellarium se zhroutí a/nebo nespustí se, můžete "
+"tento soubor smazat ručně z:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
+"Můžete také resetovat všechny změny a navrátit se k výchozímu nastavení:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Reset to defaults"
@@ -5150,41 +5202,43 @@ msgstr "Obnovit výchozí hodnoty"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Copy/replace the Solar System file"
-msgstr ""
+msgstr "Kopírovat/nahradit soubor Sluneční soustavy"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
+"Můžete vytvořit záložní kopii vlastního souboru nastavení Sluneční soustavy "
+"ve vhodném umístění, nebo ho nahradit takovouto kopií."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Copy the Solar System file..."
-msgstr ""
+msgstr "Kopírovat soubor Sluneční soustavy..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Replace the Solar System file..."
-msgstr ""
+msgstr "Nahradit soubor Sluneční soustavy..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Configuration file"
-msgstr ""
+msgstr "Konfigurační soubor"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Add new Solar System objects"
-msgstr ""
+msgstr "Přidat nové objekty Sluneční soustavy"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
 msgid "Import orbital elements in MPC format..."
-msgstr ""
+msgstr "Importovat prvky soustavy ve formátu MPC..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
 msgid "Solar System"
-msgstr ""
+msgstr "Sluneční soustava"
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical Supernovae"
-msgstr ""
+msgstr "Historické supernovy"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
@@ -5195,15 +5249,21 @@ msgid ""
 "1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
 "(13 September)."
 msgstr ""
+"Zásuvný modul, který zobrazuje historické supernovy jasněji, než vizuální "
+"velikost 10: SN 185A (7. prosince), SN 386A (24. dubna), SN 1006A (29. "
+"dubna), SN 1054A (3. července), SN 1181A (4. srpna), SN 1572A (5. "
+"listopadu), SN 1604A (8. října), SN 1680A (15. srpna), SN 1885A (17. srpna), "
+"SN 1895B (5. července), SN 1937C (21. srpna), SN 1972E (8. května), SN 1987A "
+"(24. února) a SN 2011FE (13. září)."
 
 #: plugins/Supernovae/src/Supernova.cpp:99
 msgid "supernova"
-msgstr ""
+msgstr "supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:115
 #, qt-format
 msgid "Type of supernova: %1"
-msgstr ""
+msgstr "Typ supernovy: %1"
 
 #: plugins/Quasars/src/Quasars.cpp:59
 msgid "Quasars"
@@ -5215,15 +5275,18 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
+"Zásuvný modul, který zobrazuje kvasary jasněji, než vizuální velkost 16. "
+"Katalog kvasarů sestavený z 'Quasars and Active Galactic Nuclei' (13. "
+"vydání) (Veron+ 2010) =2010A&A...518A..10V"
 
 #: plugins/Quasars/src/Quasar.cpp:92
 msgid "quasar"
-msgstr ""
+msgstr "kvasar"
 
 #: plugins/Quasars/src/Quasar.cpp:134
 #, qt-format
 msgid "Z (redshift): %1"
-msgstr ""
+msgstr "Z (rudý posuv): %1"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Ekvatoriální mřížka"
