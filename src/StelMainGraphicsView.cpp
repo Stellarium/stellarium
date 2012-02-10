@@ -263,8 +263,8 @@ void StelMainGraphicsView::init(QSettings* conf)
 		if (pluginInterface)
 		{
 			gui = pluginInterface->getStelGuiBase();
-		}
-		break;
+                        break;
+                }
 	}
 	Q_ASSERT(gui);	// There was no GUI plugin found
 
