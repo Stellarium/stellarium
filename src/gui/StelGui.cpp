@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
+ * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -699,8 +700,7 @@ void StelGui::update()
 		skyGui->updateBarsPos();
 	}
 
-	if (dateTimeDialog.visible())
-		dateTimeDialog.setDateTime(core->getJDay());
+	dateTimeDialog.setDateTime(core->getJDay());
 }
 
 // Add a new progress bar in the lower right corner of the screen.
