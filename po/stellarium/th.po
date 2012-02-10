@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-03 23:33+0700\n"
-"PO-Revision-Date: 2012-02-09 03:58+0000\n"
+"PO-Revision-Date: 2012-02-10 04:41+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-09 05:23+0000\n"
-"X-Generator: Launchpad (build 14763)\n"
+"X-Launchpad-Export-Date: 2012-02-10 04:42+0000\n"
+"X-Generator: Launchpad (build 14771)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -5000,18 +5000,18 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
 #, qt-format
 msgid "Query the MPC's %1:"
-msgstr ""
+msgstr "สืบค้นข้อมูลใน %1 ของ MPC:"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
 msgid "Only one result will be returned if the query is successful."
-msgstr ""
+msgstr "ผลการสืบค้นเพียงหนึ่งเดียวจะถูกแสดง หากการสืบค้นประสบความสำเร็จ"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
 msgstr ""
-"ดาวหางและดาวเคราะห์น้อยสามารถระบุได้ด้วยหมายเลข, ชื่อ (ในภาษาอังกฤษ) "
+"สามารถระบุดาวหางและดาวเคราะห์น้อยได้ด้วยหมายเลข, ชื่อในภาษาอังกฤษ "
 "หรือชื่อชั่วคราว"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
@@ -5154,11 +5154,15 @@ msgid ""
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
 msgstr ""
+"โปรแกรมเสริมนี้ใช้แฟ้มการปรับแต่งระบบสุริยะแบบกำหนดเอง หากเกิดสิ่งผิดปกติ "
+"ซึ่งทำให้โปรแกรม Stellarium ปิดตัวลง หรือไม่ทำงาน "
+"คุณสามารถลบแฟ้มดังกล่าวออกจาก:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
+"คุณสามารถยกเลิกการเปลี่ยนแปลงทั้งหมด แล้วกลับไปใช้การปรับแต่งแบบปริยาย:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Reset to defaults"
@@ -5173,6 +5177,8 @@ msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
+"คุณสามารถสร้างแฟ้มสำรองของไฟล์การปรับแต่งระบบสุริยะแบบกำหนดเองไว้ในที่ที่ต้อง"
+"การ หรือแทนที่มันด้วยแฟ้มสำรองนั้น"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Copy the Solar System file..."
@@ -5184,7 +5190,7 @@ msgstr "แทนที่แฟ้มข้อมูลระบบสุริ
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Configuration file"
-msgstr ""
+msgstr "แฟ้มการปรับแต่ง"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Add new Solar System objects"
@@ -5220,12 +5226,12 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernova.cpp:99
 msgid "supernova"
-msgstr ""
+msgstr "ซูเปอร์โนวา"
 
 #: plugins/Supernovae/src/Supernova.cpp:115
 #, qt-format
 msgid "Type of supernova: %1"
-msgstr ""
+msgstr "ชนิดของซูเปอร์โนวา: %1"
 
 #: plugins/Quasars/src/Quasars.cpp:59
 msgid "Quasars"
@@ -5242,7 +5248,7 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasar.cpp:92
 msgid "quasar"
-msgstr ""
+msgstr "เควซาร์"
 
 #: plugins/Quasars/src/Quasar.cpp:134
 #, qt-format
