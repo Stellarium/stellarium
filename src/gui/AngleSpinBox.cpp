@@ -422,15 +422,13 @@ void AngleSpinBox::formatText(void)
 			break;
 		}
 		case DecimalDeg:
-		{
-			bool sign=true;
+		{			
 			double angle = radAngle;
 			QString signInd = positivePrefix(currentPrefixType);
 
 			if (radAngle<0)
 			{
-				angle *= -1;
-				sign = false;
+				angle *= -1;				
 				signInd = negativePrefix(currentPrefixType);
 			}
 
