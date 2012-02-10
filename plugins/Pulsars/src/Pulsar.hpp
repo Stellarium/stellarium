@@ -60,7 +60,7 @@ public:
 		E	= 0x00000400  //!< Extragalactic (in MC) pulsar
 	};
 
-	//! @param id The official designation for a pulsar, e.g. "PSR 1919+21"
+	//! @param id The official designation for a pulsar, e.g. "PSR J1919+21"
 	Pulsar(const QVariantMap& map);
 	~Pulsar();
 
@@ -68,6 +68,7 @@ public:
 	//! create a duplicate.
 	QVariantMap getMap(void);
 
+	//! Get the type of object
 	virtual QString getType(void) const
 	{
 		return "Pulsar";
@@ -83,12 +84,16 @@ public:
 	{
 		return XYZ;
 	}
+	//! Get the visual magnitude of pulsar
 	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
+	//! Get the angular size of pulsar
 	virtual double getAngularSize(const StelCore* core) const;
+	//! Get the localized name of pulsar
 	virtual QString getNameI18n(void) const
 	{
 		return designation;
 	}
+	//! Get the english name of pulsar
 	virtual QString getEnglishName(void) const
 	{
 		return designation;
@@ -106,7 +111,7 @@ private:
 
 	void draw(StelCore* core, StelPainter& painter);
 
-	// Pulsar
+	//! Variables for description of properties of pulsars
 	QString designation;	//! The designation of the pulsar (J2000 pulsar name)
 	float RA;		//! J2000 right ascension
 	float DE;		//! J2000 declination
@@ -123,6 +128,7 @@ private:
 
 protected:
 	//! Get type of pulsar from octal code
+	//! @flags a set of flags with information types of pulsar.
 	QString getPulsarTypeInfoString(const int flags) const;
 
 };
