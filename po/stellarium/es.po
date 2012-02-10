@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-03 23:33+0700\n"
-"PO-Revision-Date: 2012-02-04 00:16+0000\n"
+"PO-Revision-Date: 2012-02-07 17:00+0000\n"
 "Last-Translator: Jose A. Macas D. <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-04 05:04+0000\n"
-"X-Generator: Launchpad (build 14738)\n"
+"X-Launchpad-Export-Date: 2012-02-08 04:41+0000\n"
+"X-Generator: Launchpad (build 14747)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -239,7 +239,7 @@ msgid ""
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
 msgstr ""
-"En la proyección de ojo de pez, o <i>proyección acimutal equidistante</i>, "
+"En la proyección de ojo de pez, o <i>proyección azimutal equidistante</i>, "
 "las líneas rectas se convierten en curvas cuando aparecen a una distancia "
 "angular considerable respecto del centro del campo de visión (igual que la "
 "distorsión producida con una lente fotográfica de tipo gran angular potente)."
@@ -712,12 +712,12 @@ msgstr "Etiqueta de planetas"
 #: src/gui/StelGui.cpp:125
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:300
 msgid "Planet orbits"
-msgstr "Orbita planetaria"
+msgstr "Órbitas planetarias"
 
 #: src/gui/StelGui.cpp:126
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Planet trails"
-msgstr "Rastros de planetas"
+msgstr "Rutas de planetas"
 
 #: src/gui/StelGui.cpp:128
 msgid "Night mode"
@@ -1473,7 +1473,7 @@ msgstr "Eclipse solar 2009"
 #. TRANSLATORS: Name of script
 #: src/translations.h:190
 msgid "Startup Script"
-msgstr "Guión de arranque"
+msgstr "Guión de inicio"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:192
@@ -1486,11 +1486,11 @@ msgstr "Mira alrededor cada paisaje instalado."
 
 #: src/translations.h:196
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr "Guión para mostrar un eclipse parcial de luna"
+msgstr "Guión para demostrar un eclipse parcial de luna"
 
 #: src/translations.h:197
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr "Guión para mostrar un eclipse total de luna"
+msgstr "Guión para demostrar un eclipse total de luna"
 
 #: src/translations.h:198
 msgid "A slow, infinite tour of the sky, looking at random objects."
@@ -1502,12 +1502,12 @@ msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
-"Guión para mostrar un eclipse total de Sol que ocurrió en 2009 "
+"Guión para demostrar un eclipse total de Sol que ocurrió en 2009 "
 "(lugar=Rangpur, Bangladesh)."
 
 #: src/translations.h:200
 msgid "Script which runs automatically at startup"
-msgstr "Guión que se ejecuta automáticamente al arrancar"
+msgstr "Guión que se ejecuta automáticamente al inicio"
 
 #: src/translations.h:201
 msgid ""
@@ -2917,7 +2917,7 @@ msgstr "Mostrar toda la información disponible"
 
 #: src/ui_configurationDialog.h:759
 msgid "All available"
-msgstr "Todos disponibles"
+msgstr "Todos los disponibles"
 
 #: src/ui_configurationDialog.h:761
 msgid "Display less information"
@@ -2925,7 +2925,7 @@ msgstr "Mostrar menos información"
 
 #: src/ui_configurationDialog.h:763
 msgid "Short"
-msgstr "Corto"
+msgstr "Corta"
 
 #: src/ui_configurationDialog.h:765
 msgid "Display no information"
@@ -2933,7 +2933,7 @@ msgstr "No mostrar información"
 
 #: src/ui_configurationDialog.h:767
 msgid "None"
-msgstr "Ninguno"
+msgstr "Ninguna"
 
 #: src/ui_configurationDialog.h:768
 msgid "Default options"
@@ -3279,13 +3279,14 @@ msgstr "Medidor de ángulos"
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:308
 msgid "The Angle Measure is enabled:"
-msgstr "El ángulo de medición está activado"
+msgstr "El Medidor de Ángulos está activado:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:310
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
-"Arrastre con el botón izquierdo para medir, botón izquierdo para limpiar"
+"Arrastrar con el botón izquierdo para medir, presionar botón izquierdo para "
+"limpiar"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:312
@@ -5025,11 +5026,11 @@ msgstr "[sin nodo IUT]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
 msgid "On"
-msgstr "Encender"
+msgstr "Activado"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
 msgid "Off"
-msgstr "Apagado"
+msgstr "Desactivado"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format
