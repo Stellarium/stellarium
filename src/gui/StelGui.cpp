@@ -176,11 +176,6 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionQuit_Global", N_("Quit"), "Ctrl+Q", group, false, false);
 	addGuiActions("actionSave_Screenshot_Global", N_("Save screenshot"), "Ctrl+S", group, false, false);
 	
-	// As the stylesheet files are embedded in the resource file and not loaded
-	// from the /data/gui directory any more, this is useless, except
-	// for theoretical special builds. --Bogdan Marinov
-	//addGuiActions("action_Reload_Style", N_("Reload style"), "Ctrl+R", N_("Debug"), false, false);
-
 	addGuiActions("actionAutoHideHorizontalButtonBar", N_("Auto hide horizontal button bar"), "", group, true, false);
 	addGuiActions("actionAutoHideVerticalButtonBar", N_("Auto hide vertical button bar"), "", group, true, false);
 	addGuiActions("actionToggle_GuiHidden_Global", N_("Toggle visibility of GUI"), "Ctrl+T", group, true, false);
@@ -189,12 +184,6 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
 	connect(getGuiActions("actionQuit_Global"), SIGNAL(triggered()), this, SLOT(quit()));
-
-	// Debug
-	// As the stylesheet files are embedded in the resource file and not loaded
-	// from the /data/gui directory any more, this is useless, except
-	// for theoretical special builds. --Bogdan Marinov
-	//connect(getGuiActions("action_Reload_Style"), SIGNAL(triggered()), this, SLOT(reloadStyle()));
 
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 	connect(getGuiActions("actionShow_Constellation_Lines"), SIGNAL(toggled(bool)), cmgr, SLOT(setFlagLines(bool)));
@@ -574,23 +563,18 @@ void StelGui::updateI18n()
 void StelGui::update()
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	if (core->getTimeRate()<-0.99*StelCore::JD_SECOND)
-	{
+	if (core->getTimeRate()<-0.99*StelCore::JD_SECOND) {
 		if (buttonTimeRewind->isChecked()==false)
 			buttonTimeRewind->setChecked(true);
-	}
-	else
-	{
+	} else {
 		if (buttonTimeRewind->isChecked()==true)
 			buttonTimeRewind->setChecked(false);
 	}
-	if (core->getTimeRate()>1.01*StelCore::JD_SECOND)
-	{
-		if (buttonTimeForward->isChecked()==false)
+	if (core->getTimeRate()>1.01*StelCore::JD_SECOND) {
+		if (buttonTimeForward->isChecked()==false) {
 			buttonTimeForward->setChecked(true);
-	}
-	else
-	{
+		}
+	} else {
 		if (buttonTimeForward->isChecked()==true)
 			buttonTimeForward->setChecked(false);
 	}
@@ -604,16 +588,19 @@ void StelGui::update()
 		buttonTimeRealTimeSpeed->setChecked(StelButton::ButtonStateOff);
 	}
 	const bool isTimeNow=core->getIsTimeNow();
-	if (buttonTimeCurrent->isChecked()!=isTimeNow)
+	if (buttonTimeCurrent->isChecked()!=isTimeNow) {
 		buttonTimeCurrent->setChecked(isTimeNow);
+	}
 	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
 	const bool b = mmgr->getFlagTracking();
-	if (buttonGotoSelectedObject->isChecked()!=b)
+	if (buttonGotoSelectedObject->isChecked()!=b) {
 		buttonGotoSelectedObject->setChecked(b);
+	}
 
 	bool flag = GETSTELMODULE(StarMgr)->getFlagStars();
-	if (getGuiActions("actionShow_Stars")->isChecked() != flag)
+	if (getGuiActions("actionShow_Stars")->isChecked() != flag) {
 		getGuiActions("actionShow_Stars")->setChecked(flag);
+	}
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 	flag = cmgr->getFlagLines();
 	if (getGuiActions("actionShow_Constellation_Lines")->isChecked() != flag)
@@ -844,19 +831,55 @@ const StelObject::InfoStringGroup& StelGui::getInfoTextFilters() const
 	return skyGui->infoPanel->getInfoTextFilters();
 }
 
-BottomStelBar* StelGui::getButtonBar() {return skyGui->buttonBar;}
+BottomStelBar* StelGui::getButtonBar() const
+{
+	return skyGui->buttonBar;
+}
 
-LeftStelBar* StelGui::getWindowsButtonBar() {return skyGui->winBar;}
+LeftStelBar* StelGui::getWindowsButtonBar() const
+{
+	return skyGui->winBar;
+}
 
-SkyGui* StelGui::getSkyGui() {return skyGui;}
+SkyGui* StelGui::getSkyGui() const
+{
+	return skyGui;
+}
 
-bool StelGui::getAutoHideHorizontalButtonBar() const {return skyGui->autoHideHorizontalButtonBar;}
+bool StelGui::getAutoHideHorizontalButtonBar() const
+{
+	return skyGui->autoHideHorizontalButtonBar;
+}
 
-void StelGui::setAutoHideHorizontalButtonBar(bool b) {skyGui->autoHideHorizontalButtonBar=b;}
+void StelGui::setAutoHideHorizontalButtonBar(bool b)
+{
+	skyGui->autoHideHorizontalButtonBar=b;
+}
 
-bool StelGui::getAutoHideVerticalButtonBar() const {return skyGui->autoHideVerticalButtonBar;}
+bool StelGui::getAutoHideVerticalButtonBar() const
+{
+	return skyGui->autoHideVerticalButtonBar;
+}
 
-void StelGui::setAutoHideVerticalButtonBar(bool b) {skyGui->autoHideVerticalButtonBar=b;}
+void StelGui::setAutoHideVerticalButtonBar(bool b)
+{
+	skyGui->autoHideVerticalButtonBar=b;
+}
+
+bool StelGui::getFlagShowFlipButtons() const
+{
+	return flagShowFlipButtons;
+}
+
+bool StelGui::getFlagShowNebulaBackgroundButton() const
+{
+	return flagShowNebulaBackgroundButton;
+}
+
+bool StelGui::initComplete(void) const
+{
+	return initDone;
+}
 
 void StelGui::forceRefreshGui()
 {
