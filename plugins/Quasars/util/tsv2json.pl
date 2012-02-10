@@ -28,7 +28,7 @@ for ($i=0;$i<scalar(@catalog);$i++) {
 		$outDE = $deg."d".$min."m".$sec."s";
 
 		$name =~ s/(\s{2,})//gi;
-        $name =~ s/(\s)$//gi;
+		$name =~ s/(\s)$//gi;
 		$z =~ s/(\s+)//gi;
 		$bV =~ s/(\s+)//gi;
 		$Amag =~ s/(\s+)//gi;
