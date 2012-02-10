@@ -55,6 +55,11 @@ IF(BUILD_FOR_MAEMO)
 ENDIF()
 
 SET(BUILD_FOR_ANDROID 1 CACHE BOOL "Set to 1 or true if you want to build for Android target")
+IF(BUILD_FOR_ANDROID)
+  # Optimize for ARM / Android
+  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-omit-frame-pointer -fno-optimize-sibling-calls -D_REENTRANT -DQT_GL_NO_SCISSOR_TEST -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024 -mtune=cortex-a8 -march=armv7-a -ftree-vectorize -mfpu=neon -mfloat-abi=softfp -ffast-math -funroll-loops -DANDROID")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-omit-frame-pointer -fno-optimize-sibling-calls -D_REENTRANT -DQT_GL_NO_SCISSOR_TEST -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024 -mtune=cortex-a8 -march=armv7-a -ftree-vectorize -mfpu=neon -mfloat-abi=softfp -ffast-math -funroll-loops -DANDROID")
+ENDIF()
 
 # best way to get to APPLE?
 IF(APPLE)

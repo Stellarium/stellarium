@@ -31,6 +31,7 @@ cd $STEL_BUILD_DIR
 #
 
 MY_CMAKE_FLAGS=" \
+-DCMAKE_BUILD_TYPE=Debug \
 -DARM_TARGET=$ANDROID_TARGET_ARCH \
 -DCFLAGS='$MY_STD_CFLAGS' \
 -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
@@ -62,7 +63,7 @@ fi
 
 #uncomment the next 2 lines to only get the needed cmake flags echoed
 
-echo $MY_CMAKE_FLAGS
+#echo $MY_CMAKE_FLAGS
 #exit 0
 
 cmake $MY_CMAKE_FLAGS -G"Unix Makefiles" ../.. && make install
