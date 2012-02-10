@@ -18,7 +18,7 @@ print JSON "\t\"pulsars\":\n";
 print JSON "\t{\n";
 
 for ($i=0;$i<scalar(@catalog)-1;$i++) {
-    if ($catalog[$i] != /^([\d]+)/) {
+    if ($catalog[$i] =~ /^(\d+)/) {
 		($RA,$DE,$name,$dist,$period,$ntype,$we,$w50,$s400,$s600,$s1400) = split(";", $catalog[$i]);
 
 		($hour,$min,$sec) = split(" ",$RA);
