@@ -69,8 +69,11 @@ public:
     //! Update method, called by Scenery3dMgr.
     //! Shifts observer position due to movement through the landscape.
     void update(double deltaTime);
-    //! Draw observer grid coordinates as text, called by Scenery3dMgr.
+    //! Draw observer grid coordinates as text.
     void drawCoordinatesText(StelCore* core);
+    //! Draw some text output. This can be filled as needed by development.
+    void drawDebugText(StelCore* core);
+
     //! Draw scenery, called by Scenery3dMgr.
     void draw(StelCore* core);
     //! Initializes shadow mapping
@@ -127,10 +130,11 @@ private:
     //! @return height at -absolutePosition, which is the current eye point.
     float groundHeight();
 
-    bool shadowsEnabled;    // switchable value: Use shadow mapping
-    bool bumpsEnabled;      // switchable value: Use bump mapping
-    bool debugEnabled;      // switchable value: display coordinates and debug aids on screen
-    bool torchEnabled;      // switchable value: adds artificial ambient light
+    bool shadowsEnabled;    // switchable value (^SPACE): Use shadow mapping
+    bool bumpsEnabled;      // switchable value (^B): Use bump mapping
+    bool textEnabled;       // switchable value (^K): display coordinates on screen. THIS IS NOT FOR DEBUGGING, BUT A PROGRAM FEATURE!
+    bool torchEnabled;      // switchable value (^L): adds artificial ambient light
+    bool debugEnabled;      // switchable value (^D): display debug graphics and debug texts on screen
     bool lightCamEnabled;   // switchable value: switches camera to light camera
 
     int cubemapSize;        // configurable values, typically 512/1024/2048/4096
