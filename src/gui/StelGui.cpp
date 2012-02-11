@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
+ * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -14,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "StelGui.hpp"
@@ -47,7 +48,9 @@
 #ifdef ENABLE_SCRIPT_CONSOLE
 #include "ScriptConsole.hpp"
 #endif
+#ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
+#endif
 #include "StelAppGraphicsWidget.hpp"
 
 #include <QDebug>
@@ -105,6 +108,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionShow_Equatorial_Grid", N_("Equatorial grid"), "E", group, true, false);
 	addGuiActions("actionShow_Equatorial_J2000_Grid", N_("Equatorial J2000 grid"), "", group, true, false);
 	addGuiActions("actionShow_Galactic_Grid", N_("Galactic grid"), "", group, true, false);
+	addGuiActions("actionShow_Galactic_Plane_Line", N_("Galactic plane"), "", group, true, false);
 	addGuiActions("actionShow_Ecliptic_Line", N_("Ecliptic line"), ",", group, true, false);
 	addGuiActions("actionShow_Equator_Line", N_("Equator line"), ".", group, true, false);
 	addGuiActions("actionShow_Meridian_Line", N_("Meridian line"), ";", group, true, false);
@@ -118,7 +122,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionShow_Nebulas", N_("Nebulas"), "N", group, true, false);
 	addGuiActions("actionShow_DSS", N_("Nebulas background images"), "", group, true, false);
 	addGuiActions("actionShow_Stars", N_("Stars"), "S", group, true, false);
-	addGuiActions("actionShow_Planets_Labels", N_("Planets labels"), "P", group, true, false);
+	addGuiActions("actionShow_Planets_Labels", N_("Planet labels"), "P", group, true, false);
 	addGuiActions("actionShow_Planets_Orbits", N_("Planet orbits"), "O", group, true, false);
 	addGuiActions("actionShow_Planets_Trails", N_("Planet trails"), "Shift+T", group, true, false);
 
@@ -171,8 +175,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionSwitch_Equatorial_Mount", N_("Switch between equatorial and azimuthal mount"), "Ctrl+M", group, true, false);
 	addGuiActions("actionQuit_Global", N_("Quit"), "Ctrl+Q", group, false, false);
 	addGuiActions("actionSave_Screenshot_Global", N_("Save screenshot"), "Ctrl+S", group, false, false);
-	addGuiActions("action_Reload_Style", "Reload style", "Ctrl+R", "Debug", false, false);
-
+	
 	addGuiActions("actionAutoHideHorizontalButtonBar", N_("Auto hide horizontal button bar"), "", group, true, false);
 	addGuiActions("actionAutoHideVerticalButtonBar", N_("Auto hide vertical button bar"), "", group, true, false);
 	addGuiActions("actionToggle_GuiHidden_Global", N_("Toggle visibility of GUI"), "Ctrl+T", group, true, false);
@@ -181,9 +184,6 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
 	connect(getGuiActions("actionQuit_Global"), SIGNAL(triggered()), this, SLOT(quit()));
-
-	// Debug
-	connect(getGuiActions("action_Reload_Style"), SIGNAL(triggered()), this, SLOT(reloadStyle()));
 
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 	connect(getGuiActions("actionShow_Constellation_Lines"), SIGNAL(toggled(bool)), cmgr, SLOT(setFlagLines(bool)));
@@ -212,6 +212,8 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(gmgr->getFlagEquatorJ2000Grid());
 	connect(getGuiActions("actionShow_Galactic_Grid"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagGalacticGrid(bool)));
 	getGuiActions("actionShow_Galactic_Grid")->setChecked(gmgr->getFlagGalacticGrid());
+	connect(getGuiActions("actionShow_Galactic_Plane_Line"), SIGNAL(toggled(bool)), gmgr, SLOT(setFlagGalacticPlaneLine(bool)));
+	getGuiActions("actionShow_Galactic_Plane_Line")->setChecked(gmgr->getFlagGalacticPlaneLine());
 
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	connect(getGuiActions("actionShow_Ground"), SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscape(bool)));
@@ -328,9 +330,11 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiActions("actionAutoHideVerticalButtonBar"), SIGNAL(toggled(bool)), this, SLOT(setAutoHideVerticalButtonBar(bool)));
 	getGuiActions("actionAutoHideVerticalButtonBar")->setChecked(getAutoHideVerticalButtonBar());
 
+#ifndef DISABLE_SCRIPTING
 	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
 	connect(&scriptMgr, SIGNAL(scriptRunning()), this, SLOT(scriptStarted()));
 	connect(&scriptMgr, SIGNAL(scriptStopped()), this, SLOT(scriptStopped()));
+#endif
 
 	///////////////////////////////////////////////////////////////////////////
 	//// QGraphicsView based GUI
@@ -495,7 +499,9 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 
 void StelGui::quit()
 {
+	#ifndef DISABLE_SCRIPTING
 	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();
+	#endif
 	QCoreApplication::exit();
 }
 
@@ -557,23 +563,18 @@ void StelGui::updateI18n()
 void StelGui::update()
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	if (core->getTimeRate()<-0.99*StelCore::JD_SECOND)
-	{
+	if (core->getTimeRate()<-0.99*StelCore::JD_SECOND) {
 		if (buttonTimeRewind->isChecked()==false)
 			buttonTimeRewind->setChecked(true);
-	}
-	else
-	{
+	} else {
 		if (buttonTimeRewind->isChecked()==true)
 			buttonTimeRewind->setChecked(false);
 	}
-	if (core->getTimeRate()>1.01*StelCore::JD_SECOND)
-	{
-		if (buttonTimeForward->isChecked()==false)
+	if (core->getTimeRate()>1.01*StelCore::JD_SECOND) {
+		if (buttonTimeForward->isChecked()==false) {
 			buttonTimeForward->setChecked(true);
-	}
-	else
-	{
+		}
+	} else {
 		if (buttonTimeForward->isChecked()==true)
 			buttonTimeForward->setChecked(false);
 	}
@@ -587,16 +588,19 @@ void StelGui::update()
 		buttonTimeRealTimeSpeed->setChecked(StelButton::ButtonStateOff);
 	}
 	const bool isTimeNow=core->getIsTimeNow();
-	if (buttonTimeCurrent->isChecked()!=isTimeNow)
+	if (buttonTimeCurrent->isChecked()!=isTimeNow) {
 		buttonTimeCurrent->setChecked(isTimeNow);
+	}
 	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
 	const bool b = mmgr->getFlagTracking();
-	if (buttonGotoSelectedObject->isChecked()!=b)
+	if (buttonGotoSelectedObject->isChecked()!=b) {
 		buttonGotoSelectedObject->setChecked(b);
+	}
 
 	bool flag = GETSTELMODULE(StarMgr)->getFlagStars();
-	if (getGuiActions("actionShow_Stars")->isChecked() != flag)
+	if (getGuiActions("actionShow_Stars")->isChecked() != flag) {
 		getGuiActions("actionShow_Stars")->setChecked(flag);
+	}
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 	flag = cmgr->getFlagLines();
 	if (getGuiActions("actionShow_Constellation_Lines")->isChecked() != flag)
@@ -683,8 +687,7 @@ void StelGui::update()
 		skyGui->updateBarsPos();
 	}
 
-	if (dateTimeDialog.visible())
-		dateTimeDialog.setDateTime(core->getJDay());
+	dateTimeDialog.setDateTime(core->getJDay());
 }
 
 // Add a new progress bar in the lower right corner of the screen.
@@ -693,6 +696,7 @@ QProgressBar* StelGui::addProgressBar()
 	return skyGui->progressBarMgr->addProgressBar();
 }
 
+#ifndef DISABLE_SCRIPTING
 void StelGui::setScriptKeys(bool b)
 {
 	if (b)
@@ -721,14 +725,15 @@ void StelGui::increaseScriptSpeed()
 }
 
 void StelGui::decreaseScriptSpeed()
-{
+{	
 	StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate()/2);
 }
 
 void StelGui::setRealScriptSpeed()
-{
-	StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(1);
+{	
+	StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(1);	
 }
+#endif
 
 void StelGui::setFlagShowFlipButtons(bool b)
 {
@@ -826,23 +831,62 @@ const StelObject::InfoStringGroup& StelGui::getInfoTextFilters() const
 	return skyGui->infoPanel->getInfoTextFilters();
 }
 
-BottomStelBar* StelGui::getButtonBar() {return skyGui->buttonBar;}
+BottomStelBar* StelGui::getButtonBar() const
+{
+	return skyGui->buttonBar;
+}
 
-LeftStelBar* StelGui::getWindowsButtonBar() {return skyGui->winBar;}
+LeftStelBar* StelGui::getWindowsButtonBar() const
+{
+	return skyGui->winBar;
+}
 
-bool StelGui::getAutoHideHorizontalButtonBar() const {return skyGui->autoHideHorizontalButtonBar;}
+SkyGui* StelGui::getSkyGui() const
+{
+	return skyGui;
+}
 
-void StelGui::setAutoHideHorizontalButtonBar(bool b) {skyGui->autoHideHorizontalButtonBar=b;}
+bool StelGui::getAutoHideHorizontalButtonBar() const
+{
+	return skyGui->autoHideHorizontalButtonBar;
+}
 
-bool StelGui::getAutoHideVerticalButtonBar() const {return skyGui->autoHideVerticalButtonBar;}
+void StelGui::setAutoHideHorizontalButtonBar(bool b)
+{
+	skyGui->autoHideHorizontalButtonBar=b;
+}
 
-void StelGui::setAutoHideVerticalButtonBar(bool b) {skyGui->autoHideVerticalButtonBar=b;}
+bool StelGui::getAutoHideVerticalButtonBar() const
+{
+	return skyGui->autoHideVerticalButtonBar;
+}
+
+void StelGui::setAutoHideVerticalButtonBar(bool b)
+{
+	skyGui->autoHideVerticalButtonBar=b;
+}
+
+bool StelGui::getFlagShowFlipButtons() const
+{
+	return flagShowFlipButtons;
+}
+
+bool StelGui::getFlagShowNebulaBackgroundButton() const
+{
+	return flagShowNebulaBackgroundButton;
+}
+
+bool StelGui::initComplete(void) const
+{
+	return initDone;
+}
 
 void StelGui::forceRefreshGui()
 {
   skyGui->updateBarsPos();
 }
 
+#ifndef DISABLE_SCRIPTING
 void StelGui::scriptStarted()
 {
 	setScriptKeys(true);
@@ -852,6 +896,7 @@ void StelGui::scriptStopped()
 {
 	setScriptKeys(false);
 }
+#endif
 
 void StelGui::setGuiVisible(bool b)
 {

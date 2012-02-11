@@ -13,9 +13,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelTranslator.hpp"
 #include "TuiNodeActivate.hpp"
 #include <QKeyEvent>
 
@@ -44,6 +45,6 @@ TuiNodeResponse TuiNodeActivate::handleKey(int key)
 
 QString TuiNodeActivate::getDisplayText() 
 {
-	return displayText + " [RETURN to activate]";
+	return prefixText + q_(displayText) + q_(" [RETURN to activate]");
 }
 

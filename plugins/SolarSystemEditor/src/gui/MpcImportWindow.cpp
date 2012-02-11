@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "SolarSystemEditor.hpp"
@@ -27,6 +27,7 @@
 #include "StelFileMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelTranslator.hpp"
 #include "SolarSystem.hpp"
 
 #include <QApplication>
@@ -70,6 +71,7 @@ MpcImportWindow::~MpcImportWindow()
 {
 	delete ui;
 	delete countdownTimer;
+	candidateObjectsModel->clear();
 	delete candidateObjectsModel;
 	if (downloadReply)
 		downloadReply->deleteLater();
@@ -98,8 +100,6 @@ void MpcImportWindow::createDialogContent()
 	        this, SLOT(discardObjects()));
 
 	connect(ui->pushButtonBrowse, SIGNAL(clicked()), this, SLOT(selectFile()));
-	connect(ui->pushButtonPasteURL, SIGNAL(clicked()),
-	        this, SLOT(pasteClipboardURL()));
 	connect(ui->comboBoxBookmarks, SIGNAL(currentIndexChanged(QString)),
 	        this, SLOT(bookmarkSelected(QString)));
 
@@ -135,9 +135,32 @@ void MpcImportWindow::createDialogContent()
 	        filterProxyModel, SLOT(setFilterFixedString(const QString&)));
 
 	loadBookmarks();
+	updateTexts();
 
 	resetCountdown();
 	resetDialog();
+}
+
+void MpcImportWindow::updateTexts()
+{
+	QString linkText("<a href=\"http://www.minorplanetcenter.net/iau/MPEph/MPEph.html\">Minor Planet &amp; Comet Ephemeris Service</a>");
+	// TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
+	QString queryString(q_("Query the MPC's %1:"));
+	ui->labelQueryLink->setText(QString(queryString).arg(linkText));
+	
+	QString firstLine(q_("Only one result will be returned if the query is successful."));
+	QString secondLine(q_("Both comets and asteroids can be identified with their number, name (in English) or provisional designation."));
+	QString cPrefix("<b>C/</b>");
+	QString pPrefix("<b>P/</b>");
+	QString cometQuery("<tt>C/Halley</tt>");
+	QString cometName("1P/Halley");
+	QString asteroidQuery("<tt>Halley</tt>");
+	QString asteroidName("(2688) Halley");
+	QString nameWarning(q_("Comet <i>names</i> need to be prefixed with %1 or %2. If more than one comet matches a name, only the first result will be returned. For example, searching for \"%3\" will return %4, Halley's Comet, but a search for \"%5\" will return the asteroid %6."));
+	QString thirdLine = QString(nameWarning).arg(cPrefix, pPrefix, cometQuery,
+	                                             cometName, asteroidQuery,
+	                                             asteroidName);
+	ui->labelQueryInstructions->setText(QString("%1<br/>%2<br/>%3").arg(firstLine, secondLine, thirdLine));
 }
 
 void MpcImportWindow::resetDialog()
@@ -174,7 +197,7 @@ void MpcImportWindow::resetDialog()
 void MpcImportWindow::populateBookmarksList()
 {
 	ui->comboBoxBookmarks->clear();
-	ui->comboBoxBookmarks->addItem("Select bookmark...");
+        ui->comboBoxBookmarks->addItem("Select bookmark...");
 	QStringList bookmarkTitles(bookmarks.value(importType).keys());
 	bookmarkTitles.sort();
 	ui->comboBoxBookmarks->addItems(bookmarkTitles);
@@ -183,7 +206,10 @@ void MpcImportWindow::populateBookmarksList()
 void MpcImportWindow::languageChanged()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+		updateTexts();
+	}
 }
 
 void MpcImportWindow::acquireObjectData()
@@ -293,7 +319,7 @@ void MpcImportWindow::selectFile()
 	QString directory = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation);
 	if (directory.isEmpty())
 		directory = QDesktopServices::storageLocation(QDesktopServices::HomeLocation);
-	QString filePath = QFileDialog::getOpenFileName(NULL, "Select a text file", directory);
+        QString filePath = QFileDialog::getOpenFileName(NULL, "Select a text file", directory);
 	ui->lineEditFilePath->setText(filePath);
 }
 
@@ -672,7 +698,7 @@ void MpcImportWindow::sendQuery()
 	queryProgressBar = StelApp::getInstance().getGui()->addProgressBar();
 	queryProgressBar->setValue(0);
 	queryProgressBar->setMaximum(0);
-	queryProgressBar->setFormat("Searching...");
+        queryProgressBar->setFormat("Searching...");
 	queryProgressBar->setVisible(true);
 
 	//TODO: Better handling of the interface
@@ -795,7 +821,7 @@ void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 	}
 	else
 	{
-		ui->labelQueryMessage->setText("Object not found.");
+                ui->labelQueryMessage->setText("Object not found.");
 		ui->labelQueryMessage->setVisible(true);
 		enableInterface(true);
 	}
@@ -884,7 +910,7 @@ void MpcImportWindow::resetCountdown()
 		if (queryReply != 0 && queryReply->isRunning())
 		{
 			abortQuery();
-			ui->labelQueryMessage->setText("The query timed out. You can try again, now or later.");
+                        ui->labelQueryMessage->setText("The query timed out. You can try again, now or later.");
 			ui->labelQueryMessage->setVisible(true);
 		}
 	}

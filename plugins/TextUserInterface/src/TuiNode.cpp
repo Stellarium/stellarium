@@ -13,15 +13,17 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelTranslator.hpp"
 #include "TuiNode.hpp"
 #include <QKeyEvent>
 
 TuiNode::TuiNode(const QString& text, TuiNode* parent, TuiNode* prev)
 	: parentNode(parent), childNode(NULL), prevNode(prev), nextNode(NULL), displayText(text)
 {
+	updateNodeNumber();
 }
 
 TuiNodeResponse TuiNode::handleKey(int key)
@@ -73,7 +75,46 @@ TuiNodeResponse TuiNode::navigation(int key)
 
 QString TuiNode::getDisplayText()
 {
-	return displayText;
+	return prefixText + q_(displayText);
 }
 
+void TuiNode::loopToTheLast()
+{
+	TuiNode* node = nextNode;
+	while (node != NULL && node != this)
+	{
+		prevNode = node;
+		node = node->getNextNode();
+	}
+}
+
+void TuiNode::updateNodeNumber()
+{
+	nodeNumber = 0;
+	ancestorsNumbers.clear();
+	prefixText.clear();
+	
+	if (prevNode == NULL)
+	{
+		nodeNumber = 1;
+	}
+	else
+	{
+		nodeNumber = prevNode->getNodeNumber() + 1;
+	}
+	
+	if (parentNode != NULL)
+	{
+		ancestorsNumbers = parentNode->getAncestorsNumbers();
+	}
+	ancestorsNumbers.append(nodeNumber);
+	
+	//TODO: This probably needs to be made RTL-language-friendly. --BM
+	foreach (int n, ancestorsNumbers)
+	{
+		QString number = QString("%1.").arg(n);
+		prefixText.append(number);
+	}
+	prefixText.append(" ");
+}
 

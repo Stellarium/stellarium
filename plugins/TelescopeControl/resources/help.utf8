@@ -18,8 +18,6 @@
 <li><a href="#commands">Telescope commands</a></li>
 <li><a href="#devices">Supported devices</a></li>
 <li><a href="#virtual_telescope">Virtual telescope</a></li>
-<li><a href="#authors">Authors</a></li>
-<li><a href="#copyright">Copyright</a></li>
 </ul>
 
 <h3><a name="Abilities_and_limitations"/>Abilities and limitations</h3>
@@ -142,30 +140,5 @@
 <p>If you want to test this plug-in without an actual device connected to the computer, choose <b>Nothing, just simulate one (a moving reticle)</b> in the <b>Telescope controlled by:</b> field. It will show a telescope reticle that will react in the same way as the reticle of a real telescope controlled by the plug-in.</p>
 <p>See the section above about <a href="#fovcircles">field of view indicators</a> for a possible practical application (emulating "Telrad" circles).</p>
 <p>This feature is equivalent to the "Dummy" type of telescope supported by <a href="http://stellarium.org/wiki/index.php/Telescope_Control_%28client-server%29" title="Stellarium Wiki: Telescope Control (client-server)">Stellarium's original telescope control feature</a>.</p>
-<p><a href="#top"><small>[Back to top]</small></a><br/></p>
-
-<h3><a name="authors"/>Authors</h3>
-<p>Plug-in and GUI programming: <strong>Bogdan Marinov</strong> (bogdan.marinov84 (at) gmail.com)</p>
-<p>This plug-in is based on and reuses a lot of code under the GNU General Public License and version Lesser General Public License from:</p>
-<ul>
-<li>the Telescope, TelescopeDummy, TelescopeTcp and TelescopeMgr classes in Stellarium's code (the client side of Stellarium's original telescope control feature);</li>
-<li>the telescope server core code (licensed under the LGPL)</li>
-<li>the TelescopeServerLx200 telescope server core code (originally licensed under the LGPL); author of all of the above - the client, the server core, and the LX200 server, along with the Stellarium telescope control network protocol (over TCP/IP), is <b>Johannes Gajdosik</b>.</li>
-<li>the TelescopeServerNexStar telescope server core code (originally licensed under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>.</li>
-</ul>
-<p>See also the AUTHORS files of Stellarium and the Stellarium telescope servers.</p>
-<p><a href="#top"><small>[Back to top]</small></a><br/></p>
-
-<h3><a name="copyright"/>Copyright</h3>
-<p>Telescope Control, a plug-in for Stellarium</p>
-<p>Copyright &copy; 2006 Johannes Gajdosik, Michael Heinz</p>
-<p>Copyright &copy; 2009-2010 Bogdan Marinov</p>
-<p>This plug-in is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.</p>
-<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p>
-<p>You should have received a copy of the GNU General Public License along with this program; if not, write to:</p>
-<address>Free Software Foundation, Inc.<br/>
-51 Franklin Street, Fifth Floor<br/>
-Boston, MA  02110-1301, USA</address>
-<p><a href="http://www.fsf.org">http://www.fsf.org/</a></p>
 <p><a href="#top"><small>[Back to top]</small></a><br/></p>
 

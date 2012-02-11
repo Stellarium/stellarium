@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _STARMGR_HPP_
@@ -82,7 +82,7 @@ public:
 	virtual void init();
 
 	//! Draw the stars and the star selection indicator if necessary.
-	virtual void draw(StelCore* core); //! Draw all the stars
+	virtual void draw(StelCore* core);
 
 	//! Update any time-dependent features.
 	//! Includes fading in and out stars and labels when they are turned on and off.

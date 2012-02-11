@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _STELGUIITEMS_HPP_
@@ -88,11 +88,20 @@ public:
 	//! Get whether the button is checked
 	int isChecked() const {return checked;}
 
+	//! Get the width of the button image.
+	//! The width is based on pixOn.
+	int getButtonPixmapWidth() const {return pixOn.width();}
+
 	//! Set the button opacity
 	void setOpacity(double v) {opacity=v; updateIcon();}
 
 	//! Activate red mode for this button, i.e. will reduce the non red color component of the icon
 	void setRedMode(bool b) {redMode=b; updateIcon();}
+
+	//! Set the background pixmap of the button.
+	//! A variant for night vision mode (pixBackgroundRed) is automatically
+	//! generated from the new background.
+	void setBackgroundPixmap(const QPixmap& newBackground);
 
 	//! Transform the pixmap so that it look red for night vision mode
 	static QPixmap makeRed(const QPixmap& p);

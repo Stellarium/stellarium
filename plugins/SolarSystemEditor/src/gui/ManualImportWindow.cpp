@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "SolarSystemEditor.hpp"
@@ -31,6 +31,7 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
+//#include "StelTranslator.hpp"
 
 
 ManualImportWindow::ManualImportWindow()
@@ -58,9 +59,9 @@ void ManualImportWindow::createDialogContent()
 	connect(ui->pushButtonSelectTexture, SIGNAL(clicked()), this, SLOT(selectPlanetTextureFile()));
 	connect(ui->pushButtonSelectRingTexture, SIGNAL(clicked()), this, SLOT(selectRingTextureFile()));
 
-	ui->labelLongitudeOfTheAscendingNode->setText(QString("Longitude of the ascending node %1:").arg(QChar(0x03A9)));//Capital omega
-	ui->radioButtonArgumentOfPeriapsis->setText(QString("Argument of periapsis %1:").arg(QChar(0x3C9)));//Lowercase omega
-	ui->radioButtonLongitudeOfPeriapsis->setText(QString("Longitude of periapsis %1:").arg(QChar(0x3D6)));
+        ui->labelLongitudeOfTheAscendingNode->setText(QString("Longitude of the ascending node %1:").arg(QChar(0x03A9)));//Capital omega
+        ui->radioButtonArgumentOfPeriapsis->setText(QString("Argument of periapsis %1:").arg(QChar(0x3C9)));//Lowercase omega
+        ui->radioButtonLongitudeOfPeriapsis->setText(QString("Longitude of periapsis %1:").arg(QChar(0x3D6)));
 
 	//TODO: Move to "set defaults" function
 	ui->lineEditColor->setText("1.0, 1.0, 1.0");

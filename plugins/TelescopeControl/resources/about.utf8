@@ -1,0 +1,21 @@
+<p>Copyright &copy; 2006 Johannes Gajdosik, Michael Heinz</p>
+<p>Copyright &copy; 2009-2011 Bogdan Marinov</p>
+<p>This plug-in is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License along with this program; if not, write to:</p>
+<address>Free Software Foundation, Inc.<br/>
+51 Franklin Street, Fifth Floor<br/>
+Boston, MA  02110-1301, USA</address>
+<p><a href="http://www.fsf.org">http://www.fsf.org/</a></p>
+
+<h3><a name="authors"/>Authors</h3>
+<p>Plug-in and GUI programming: <strong>Bogdan Marinov</strong> (bogdan.marinov84 (at) gmail.com)</p>
+<p>This plug-in is based on and reuses a lot of code under the GNU General Public License and version Lesser General Public License from:</p>
+<ul>
+<li>the Telescope, TelescopeDummy, TelescopeTcp and TelescopeMgr classes in Stellarium's code (the client side of Stellarium's original telescope control feature);</li>
+<li>the telescope server core code (licensed under the LGPL)</li>
+<li>the TelescopeServerLx200 telescope server core code (originally licensed under the LGPL); author of all of the above - the client, the server core, and the LX200 server, along with the Stellarium telescope control network protocol (over TCP/IP), is <b>Johannes Gajdosik</b>.</li>
+<li>the TelescopeServerNexStar telescope server core code (originally licensed under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>.</li>
+</ul>
+<p>See also the AUTHORS files of Stellarium and the Stellarium telescope servers.</p>
+
