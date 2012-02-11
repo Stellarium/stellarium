@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "Satellite.hpp"
@@ -26,6 +26,7 @@
 #include "StelTexture.hpp"
 #include "VecMath.hpp"
 #include "StelUtils.hpp"
+#include "StelTranslator.hpp"
 
 #include <QTextStream>
 #include <QRegExp>
@@ -51,16 +52,22 @@ int Satellite::orbitLineSegmentDuration = 20;
 bool Satellite::orbitLinesFlag = true;
 
 
-Satellite::Satellite(const QVariantMap& map)
-		: initialized(false), visible(true), hintColor(0.0,0.0,0.0), lastUpdated(), pSatWrapper(NULL)
+Satellite::Satellite(const QString& identifier, const QVariantMap& map)
+		: initialized(false), visible(true), newlyAdded(false), hintColor(0.0,0.0,0.0), lastUpdated(), pSatWrapper(NULL)
 {
 	// return initialized if the mandatory fields are not present
-	if (!map.contains("designation") || !map.contains("tle1") || !map.contains("tle2"))
+	if (identifier.isEmpty())
+		return;
+	if (!map.contains("name") || !map.contains("tle1") || !map.contains("tle2"))
 		return;
 
 	font.setPixelSize(16);
 
-	designation  = map.value("designation").toString();
+	id = identifier;
+	name  = map.value("name").toString();
+	if (name.isEmpty())
+		return;
+	
 	if (map.contains("description")) description = map.value("description").toString();
 	if (map.contains("visible")) visible = map.value("visible").toBool();
 	if (map.contains("orbitVisible")) orbitVisible = map.value("orbitVisible").toBool();
@@ -103,7 +110,7 @@ Satellite::Satellite(const QVariantMap& map)
 
 	if (map.contains("comms"))
 	{
-                foreach(const QVariant &comm, map.value("comms").toList())
+		foreach(const QVariant &comm, map.value("comms").toList())
 		{
 			QVariantMap commMap = comm.toMap();
 			commLink c;
@@ -116,18 +123,22 @@ Satellite::Satellite(const QVariantMap& map)
 
 	if (map.contains("groups"))
 	{
-                foreach(const QVariant &group, map.value("groups").toList())
+		foreach(const QVariant &group, map.value("groups").toList())
 		{
 			if (!groupIDs.contains(group.toString()))
 				groupIDs << group.toString();
 		}
 	}
 
-	setNewTleElements(map.value("tle1").toString(), map.value("tle2").toString());
+	QString line1 = map.value("tle1").toString();
+	QString line2 = map.value("tle2").toString();
+	setNewTleElements(line1, line2);
+	internationalDesignator = extractInternationalDesignator(line1);
 
 	if (map.contains("lastUpdated"))
 	{
-		lastUpdated = map.value("lastUpdated").toDateTime();
+		lastUpdated = QDateTime::fromString(map.value("lastUpdated").toString(),
+		                                    Qt::ISODate);
 	}
 	initialized = true;
 }
@@ -147,14 +158,14 @@ double Satellite::roundToDp(float n, int dp)
 QVariantMap Satellite::getMap(void)
 {
 	QVariantMap map;
-	map["designation"] = designation;
+	map["name"] = name;
 	map["tle1"] = tleElements.first.data();
 	map["tle2"] = tleElements.second.data();
 
 	if (!description.isEmpty() && description!="")
 		map["description"] = description;
 
-	map["visible"]     = visible;
+	map["visible"] = visible;
 	map["orbitVisible"] = orbitVisible;
 	QVariantList col, orbitCol;
 	col << roundToDp(hintColor[0],3) << roundToDp(hintColor[1], 3) << roundToDp(hintColor[2], 3);
@@ -162,7 +173,7 @@ QVariantMap Satellite::getMap(void)
 	map["hintColor"] = col;
 	map["orbitColor"] = orbitCol;
 	QVariantList commList;
-        foreach(const commLink &c, comms)
+	foreach(const commLink &c, comms)
 	{
 		QVariantMap commMap;
 		commMap["frequency"] = c.frequency;
@@ -172,7 +183,7 @@ QVariantMap Satellite::getMap(void)
 	}
 	map["comms"] = commList;
 	QVariantList groupList;
-        foreach(const QString &g, groupIDs)
+	foreach(const QString &g, groupIDs)
 	{
 		groupList << g;
 	}
@@ -180,7 +191,8 @@ QVariantMap Satellite::getMap(void)
 
 	if (!lastUpdated.isNull())
 	{
-		map["lastUpdated"] = lastUpdated;
+		// A raw QDateTime is not a recognised JSON data type. --BM
+		map["lastUpdated"] = lastUpdated.toString(Qt::ISODate);
 	}
 
 	return map;
@@ -195,60 +207,92 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 {
 	QString str;
 	QTextStream oss(&str);
-
-	if (flags&Name)
+	
+	if (flags & Name)
 	{
-		oss << "<h2>" << designation << "</h2><br>";
-		if (description!="")
-			oss << description << "<br>";
+		oss << "<h2>" << name << "</h2>";
+		if (!description.isEmpty())
+			oss << description << "<br/>";
 	}
-
+	
+	if (flags & CatalogNumber)
+	{
+		QString catalogNumbers;
+		if (internationalDesignator.isEmpty())
+			catalogNumbers = QString("Catalog #: %1")
+			                 .arg(id);
+		else
+			catalogNumbers = QString("Catalog #: %1; International Designator: %2")
+			                 .arg(id)
+			                 .arg(internationalDesignator);
+		oss << catalogNumbers << "<br/><br/>";
+	}
+	
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
-
-	if (flags&Extra1)
+	
+	if (flags & Extra1)
 	{
-		oss << "<p>";
-		oss << QString("Range (km): <b>%1</b>").arg(range, 5, 'f', 2) << "<br>";
-		oss << QString("Range rate (km/s): <b>%1</b>").arg(rangeRate, 5, 'f', 3) << "<br>";
-		oss << QString("Altitude (km): <b>%1</b>").arg(height, 5, 'f', 2) << "<br>";
-                oss << QString("SubPoint Lat/Long(Deg): <b>%1</b>").arg(latLongSubPointPosition[0], 5, 'f', 2) << "/";
-                oss << QString("<b>%1</b>").arg(latLongSubPointPosition[1], 5, 'f', 3);
-		oss << "</p>";
-
-		oss << "TEME Coordinates(km):  ";
-                oss << QString("<b>X:</b> %1 ").arg(position[0], 5, 'f', 2);
-                oss << QString("<b>Y:</b> %1 ").arg(position[1], 5, 'f', 2);
-                oss << QString("<b>Z:</b> %1 ").arg(position[2], 5, 'f', 2) << "<br>";
-		oss << "TEME Vel(km/s):  ";
-                oss << QString("<b>X:</b> %1 ").arg(velocity[0], 5, 'f', 2);
-                oss << QString("<b>Y:</b> %1 ").arg(velocity[1], 5, 'f', 2);
-                oss << QString("<b>Z:</b> %1 ").arg(velocity[2], 5, 'f', 2) << "<br>";
-
-		oss << "Visibility:  ";
-                switch (visibility)
+		oss << "<br/>";
+		// TRANSLATORS: Slant range: distance between the satellite and the observer
+		oss << QString(q_("Range (km): %1")).arg(range, 5, 'f', 2);
+		oss << "<br/>";
+		// TRANSLATORS: Rate at which the distance changes
+		oss << QString(q_("Range rate (km/s): %1")).arg(rangeRate, 5, 'f', 3);
+		oss << "<br/>";
+		// TRANSLATORS: Satellite altitude
+		oss << QString(q_("Altitude (km): %1")).arg(height, 5, 'f', 2);
+		oss << "<br/>";
+		// TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
+		oss << QString(q_("SubPoint (Lat./Long.): %1%2/%3%4"))
+		       .arg(latLongSubPointPosition[0], 5, 'f', 2)
+		       .arg(QChar(0x00B0))
+		       .arg(latLongSubPointPosition[1], 5, 'f', 3)
+		       .arg(QChar(0x00B0));
+		oss << "<br/><br/>";
+		
+		//TODO: This one can be done better
+		const char* xyz = "<b>X:</b> %1, <b>Y:</b> %2, <b>Z:</b> %3";
+		QString temeCoords = QString(xyz)
+		        .arg(position[0], 5, 'f', 2)
+		        .arg(position[1], 5, 'f', 2)
+		        .arg(position[2], 5, 'f', 2);
+		// TRANSLATORS: TEME is an Earth-centered inertial coordinate system
+		oss << QString(q_("TEME coordinates (km): %1")).arg(temeCoords);
+		oss << "<br/>";
+		
+		QString temeVel = QString(xyz)
+		        .arg(velocity[0], 5, 'f', 2)
+		        .arg(velocity[1], 5, 'f', 2)
+		        .arg(velocity[2], 5, 'f', 2);
+		// TRANSLATORS: TEME is an Earth-centered inertial coordinate system
+		oss << QString(q_("TEME velocity (km/s): %1")).arg(temeVel);
+		oss << "<br/>";
+		
+		//Visibility: Full text
+		//TODO: Move to a more prominent place.
+		switch (visibility)
 		{
 		case RADAR_SUN:
-			oss << "Sat&Observer in Sunlit" << "<br>";
+			oss << q_("The satellite and the observer are in sunlight.") << "<br/>";
 			break;
 		case VISIBLE:
-			oss << "Visible" << "<br>";
+			oss << q_("The satellite is visible.") << "<br/>";
 			break;
 		case RADAR_NIGHT:
-			oss << "Sat. Eclipsed" << "<br>";
+			oss << q_("The satellite is eclipsed.") << "<br/>";
 			break;
 		case NOT_VISIBLE:
-			oss << "Sat. Not Visible" << "<br>";
+			oss << q_("The satellite is not visible") << "<br/>";
 			break;
 		default:
 			break;
-
 		}
 	}
 
 	if (flags&Extra2 && comms.size() > 0)
 	{
-                foreach(const commLink &c, comms)
+		foreach(const commLink &c, comms)
 		{
 			double dop = getDoppler(c.frequency);
 			double ddop = dop;
@@ -261,13 +305,15 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			else
 				sign='+';
 
-			oss << "<p>";
+			oss << "<br/>";
 			if (!c.modulation.isEmpty() && c.modulation != "") oss << "  " << c.modulation;
 			if (!c.description.isEmpty() && c.description != "") oss << "  " << c.description;
-			if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << "<br>";
-			oss << QString("%1 MHz (%2%3 kHz)</p>").arg(c.frequency, 8, 'f', 5)
-			.arg(sign)
-			.arg(ddop, 6, 'f', 3);
+			if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << "<br/>";
+			oss << QString(q_("%1 MHz (%2%3 kHz)"))
+			       .arg(c.frequency, 8, 'f', 5)
+			       .arg(sign)
+			       .arg(ddop, 6, 'f', 3);
+			oss << "<br/>";
 		}
 	}
 
@@ -280,9 +326,17 @@ Vec3f Satellite::getInfoColor(void) const
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : hintColor;
 }
 
-float Satellite::getVMagnitude(const StelCore*) const
+float Satellite::getVMagnitude(const StelCore* core, bool withExtinction) const
 {
-	return 5.0;
+    float extinctionMag=0.0; // track magnitude loss
+    if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
+    {
+	Vec3d altAz=getAltAzPosApparent(core);
+	altAz.normalize();
+	core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
+    }
+
+    return 5.0 + extinctionMag;
 }
 
 double Satellite::getAngularSize(const StelCore*) const
@@ -304,7 +358,7 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 	tleElements.second.clear();
 	tleElements.second.append(tle2);
 
-	pSatWrapper = new gSatWrapper(designation, tle1, tle2);
+	pSatWrapper = new gSatWrapper(id, tle1, tle2);
 	orbitPoints.clear();
 }
 
@@ -315,15 +369,29 @@ void Satellite::update(double)
 		epochTime = StelApp::getInstance().getCore()->getJDay();
 
 		pSatWrapper->setEpoch(epochTime);
-                position                 = pSatWrapper->getTEMEPos();
-                velocity                 = pSatWrapper->getTEMEVel();
-                latLongSubPointPosition  = pSatWrapper->getSubPoint();
-                height                   = latLongSubPointPosition[2];
-                elAzPosition             = pSatWrapper->getAltAz();
-                elAzPosition.normalize();
+		position                 = pSatWrapper->getTEMEPos();
+		velocity                 = pSatWrapper->getTEMEVel();
+		latLongSubPointPosition  = pSatWrapper->getSubPoint();
+		height                   = latLongSubPointPosition[2];
+		if (height <= 0.0)
+		{
+			// The orbit is no longer valid.  Causes include very out of date
+			// TLE, system date and time out of a reasonable range, and orbital
+			// degradation and re-entry of a satellite.  In any of these cases
+			// we might end up with a problem - usually a crash of Stellarium
+			// because of a div/0 or something.  To prevent this, we turn off
+			// the satellite.
+			qWarning() << "Satellite with invalid orbit has been removed:" << name;
+			initialized = false;
+			visible = false;
+			orbitVisible = false;
+		}
+
+		elAzPosition             = pSatWrapper->getAltAz();
+		elAzPosition.normalize();
 
 		pSatWrapper->getSlantRange(range, rangeRate);
-                visibility = pSatWrapper->getVisibilityPredict();
+		visibility = pSatWrapper->getVisibilityPredict();
 
 		// Compute orbit points to draw orbit line.
 		if (orbitVisible) computeOrbitPoints();
@@ -334,7 +402,7 @@ double Satellite::getDoppler(double freq) const
 {
 	double result;
 	double f = freq * 1000000;
-        result   = -f*((rangeRate*1000.0)/SPEED_OF_LIGHT);
+	result = -f*((rangeRate*1000.0)/SPEED_OF_LIGHT);
 	return result/1000000;
 }
 
@@ -343,9 +411,37 @@ void Satellite::recalculateOrbitLines(void)
 	orbitPoints.clear();
 }
 
+QString Satellite::extractInternationalDesignator(const QString& tle1)
+{
+	QString result;
+	if (tle1.isEmpty())
+		return result;
+	
+	// The designator is encoded as the 3rd group on the first line
+	QString rawString = tle1.split(' ').at(2);
+	if (rawString.isEmpty())
+		return result;
+	
+	//TODO: Use a regular expression?
+	bool ok;
+	int year = rawString.left(2).toInt(&ok);
+	if (!ok)
+		return result;
+	
+	// Y2K bug :) I wonder what NORAD will do in 2057. :)
+	if (year < 57)
+		year += 2000;
+	else
+		year += 1900;
+	
+	result = QString::number(year) + "-" + rawString.right(4);
+	return result;
+}
+
+
 void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 {
-		XYZ = core->altAzToJ2000(elAzPosition);
+	XYZ = core->altAzToJ2000(elAzPosition);
 	StelApp::getInstance().getVisionModeNight() ? glColor4f(0.6,0.0,0.0,1.0) : glColor4f(hintColor[0],hintColor[1],hintColor[2], Satellite::hintBrightness);
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
@@ -355,7 +451,7 @@ void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 	{
 		if (Satellite::showLabels)
 		{
-			painter.drawText(xy[0], xy[1], designation, 0, 10, 10, false);
+			painter.drawText(xy[0], xy[1], name, 0, 10, 10, false);
 			Satellite::hintTexture->bind();
 		}
 		painter.drawSprite2dMode(xy[0], xy[1], 11);
@@ -367,14 +463,14 @@ void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 
 void Satellite::drawOrbit(StelPainter& painter)
 {
-        Vec3d position,previousPosition;
+	Vec3d position,previousPosition;
 
 	glDisable(GL_TEXTURE_2D);
 
 	QList<Vec3d>::iterator it= orbitPoints.begin();
 
 	//First point projection calculation
-        previousPosition.set(it->operator [](0), it->operator [](1), it->operator [](2));
+	previousPosition.set(it->operator [](0), it->operator [](1), it->operator [](2));
 
 	it++;
 	StelVertexArray vertexArray;
@@ -383,22 +479,22 @@ void Satellite::drawOrbit(StelPainter& painter)
 	//Rest of points
 	for (int i=1; i<orbitPoints.size(); i++)
 	{
-                position.set(it->operator [](0), it->operator [](1), it->operator [](2));
+		position.set(it->operator [](0), it->operator [](1), it->operator [](2));
 		it++;
-                position.normalize();
-                previousPosition.normalize();
-
+		position.normalize();
+		previousPosition.normalize();
+		
 		// Draw end (fading) parts of orbit lines one segment at a time.
 		if (i<=orbitLineFadeSegments || orbitLineSegments-i < orbitLineFadeSegments)
 		{
 			painter.setColor((*orbitColor)[0], (*orbitColor)[1], (*orbitColor)[2], hintBrightness * calculateOrbitSegmentIntensity(i));
-                        painter.drawGreatCircleArc(previousPosition, position, &viewportHalfspace);
+			painter.drawGreatCircleArc(previousPosition, position, &viewportHalfspace);
 		}
 		else
 		{
-                        vertexArray.vertex << previousPosition << position;
+			vertexArray.vertex << previousPosition << position;
 		}
-                previousPosition = position;
+		previousPosition = position;
 	}
 
 	// Draw center section of orbit in one go
@@ -436,22 +532,22 @@ void Satellite::computeOrbitPoints()
 {
 	gTimeSpan computeInterval(0, 0, 0, orbitLineSegmentDuration);
 	gTimeSpan orbitSpan(0, 0, 0, orbitLineSegments*orbitLineSegmentDuration/2);
-	gTime	  epochTm;
-        gTime	  epoch(epochTime);
-	gTime	  lastEpochComp(lastEpochCompForOrbit);
-        Vec3d     elAzVector;
-        int	  diffSlots;
+	gTime epochTm;
+	gTime epoch(epochTime);
+	gTime lastEpochComp(lastEpochCompForOrbit);
+	Vec3d elAzVector;
+	int diffSlots;
 
 
 	if (orbitPoints.isEmpty())//Setup orbitPoins
 	{
-                epochTm  = epoch - orbitSpan;
+		epochTm  = epoch - orbitSpan;
 
 		for (int i=0; i<=orbitLineSegments; i++)
 		{
 			pSatWrapper->setEpoch(epochTm.getGmtTm());
-                        elAzVector  = pSatWrapper->getAltAz();
-                        orbitPoints.append(elAzVector);
+			elAzVector  = pSatWrapper->getAltAz();
+			orbitPoints.append(elAzVector);
 			epochTm    += computeInterval;
 		}
 		lastEpochCompForOrbit = epochTime;
@@ -459,7 +555,7 @@ void Satellite::computeOrbitPoints()
 	else if (epochTime > lastEpochCompForOrbit)
 	{ // compute next orbit point when clock runs forward
 
-                gTimeSpan diffTime = epoch - lastEpochComp;
+		gTimeSpan diffTime = epoch - lastEpochComp;
 		diffSlots          = (int)(diffTime.getDblSeconds()/orbitLineSegmentDuration);
 
 		if (diffSlots > 0)
@@ -467,7 +563,7 @@ void Satellite::computeOrbitPoints()
 			if (diffSlots > orbitLineSegments)
 			{
 				diffSlots = orbitLineSegments + 1;
-                                epochTm  = epoch - orbitSpan;
+				epochTm  = epoch - orbitSpan;
 			}
 			else
 			{
@@ -475,11 +571,12 @@ void Satellite::computeOrbitPoints()
 			}
 
 			for (int i=0; i<diffSlots; i++)
-			{  //remove points at beginning of list and add points at end.
+			{
+				//remove points at beginning of list and add points at end.
 				orbitPoints.removeFirst();
 				pSatWrapper->setEpoch(epochTm.getGmtTm());
-                                elAzVector  = pSatWrapper->getAltAz();
-                                orbitPoints.append(elAzVector);
+				elAzVector  = pSatWrapper->getAltAz();
+				orbitPoints.append(elAzVector);
 				epochTm    += computeInterval;
 			}
 
@@ -488,7 +585,7 @@ void Satellite::computeOrbitPoints()
 	}
 	else if (epochTime < lastEpochCompForOrbit)
 	{ // compute next orbit point when clock runs backward
-                gTimeSpan diffTime = lastEpochComp - epoch;
+		gTimeSpan diffTime = lastEpochComp - epoch;
 		diffSlots          = (int)(diffTime.getDblSeconds()/orbitLineSegmentDuration);
 
 		if (diffSlots > 0)
@@ -496,18 +593,18 @@ void Satellite::computeOrbitPoints()
 			if (diffSlots > orbitLineSegments)
 			{
 				diffSlots = orbitLineSegments + 1;
-                                epochTm   = epoch + orbitSpan;
+				epochTm   = epoch + orbitSpan;
 			}
 			else
 			{
-                                epochTm   = epoch - orbitSpan - computeInterval;
+				epochTm   = epoch - orbitSpan - computeInterval;
 			}
 			for (int i=0; i<diffSlots; i++)
 			{ //remove points at end of list and add points at beginning.
 				orbitPoints.removeLast();
 				pSatWrapper->setEpoch(epochTm.getGmtTm());
-                                elAzVector  = pSatWrapper->getAltAz();
-                                orbitPoints.push_front(elAzVector);
+				elAzVector  = pSatWrapper->getAltAz();
+				orbitPoints.push_front(elAzVector);
 				epochTm -= computeInterval;
 
 			}

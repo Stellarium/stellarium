@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>508</width>
-    <height>517</height>
+    <width>510</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="font">
@@ -645,6 +645,13 @@
           </item>
           <item row="1" column="0">
            <widget class="QGroupBox" name="atmosphereGroupBox">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="title">
              <string>Atmosphere</string>
             </property>
@@ -664,7 +671,7 @@
                <item>
                 <widget class="QLabel" name="label_4">
                  <property name="text">
-                  <string>Light pollution: </string>
+                  <string>Light pollution:</string>
                  </property>
                 </widget>
                </item>
@@ -765,6 +772,12 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>180</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="value">
                 <number>33</number>
                </property>
@@ -788,6 +801,12 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>180</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="value">
                 <number>33</number>
                </property>
@@ -810,6 +829,12 @@
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>180</width>
+                 <height>0</height>
+                </size>
                </property>
                <property name="value">
                 <number>33</number>
@@ -1046,6 +1071,13 @@
               </widget>
              </item>
              <item>
+              <widget class="QCheckBox" name="showGalacticGridCheckBox">
+               <property name="text">
+                <string>Galactic grid</string>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QCheckBox" name="showEquatorLineCheckBox">
                <property name="text">
                 <string>Equator line</string>
@@ -1070,6 +1102,13 @@
               <widget class="QCheckBox" name="showEclipticLineCheckBox">
                <property name="text">
                 <string>Ecliptic line</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="showGalacticPlaneLineCheckBox">
+               <property name="text">
+                <string>Galactic plane line</string>
                </property>
               </widget>
              </item>
@@ -1132,13 +1171,10 @@
              </item>
              <item>
               <layout class="QHBoxLayout">
-               <property name="spacing">
-                <number>0</number>
-               </property>
                <item>
                 <widget class="QLabel" name="label_6">
                  <property name="text">
-                  <string>Art brightness: </string>
+                  <string>Art brightness:</string>
                  </property>
                 </widget>
                </item>
@@ -1615,6 +1651,7 @@
   <tabstop>planetScaleMoonCheckBox</tabstop>
   <tabstop>showAtmosphereCheckBox</tabstop>
   <tabstop>lightPollutionSpinBox</tabstop>
+  <tabstop>pushButtonAtmosphereDetails</tabstop>
   <tabstop>starLabelCheckBox</tabstop>
   <tabstop>starsLabelsHorizontalSlider</tabstop>
   <tabstop>nebulaLabelCheckBox</tabstop>
@@ -1626,10 +1663,15 @@
   <tabstop>zhr80</tabstop>
   <tabstop>zhr10000</tabstop>
   <tabstop>zhr144000</tabstop>
+  <tabstop>showEquatorialGridCheckBox</tabstop>
+  <tabstop>showEquatorialJ2000GridCheckBox</tabstop>
+  <tabstop>showAzimuthalGridCheckBox</tabstop>
+  <tabstop>showGalacticGridCheckBox</tabstop>
   <tabstop>showEquatorLineCheckBox</tabstop>
   <tabstop>showMeridianLineCheckBox</tabstop>
   <tabstop>showHorizonLineCheckBox</tabstop>
   <tabstop>showEclipticLineCheckBox</tabstop>
+  <tabstop>showGalacticPlaneLineCheckBox</tabstop>
   <tabstop>showCardinalPointsCheckBox</tabstop>
   <tabstop>showConstellationLinesCheckBox</tabstop>
   <tabstop>showConstellationLabelsCheckBox</tabstop>
@@ -1638,19 +1680,16 @@
   <tabstop>constellationArtBrightnessSpinBox</tabstop>
   <tabstop>projectionTextBrowser</tabstop>
   <tabstop>landscapeTextBrowser</tabstop>
-  <tabstop>pushButtonAddRemoveLandscapes</tabstop>
   <tabstop>showGroundCheckBox</tabstop>
   <tabstop>showFogCheckBox</tabstop>
   <tabstop>landscapePositionCheckBox</tabstop>
   <tabstop>useAsDefaultLandscapeCheckBox</tabstop>
+  <tabstop>pushButtonAddRemoveLandscapes</tabstop>
   <tabstop>skyCultureTextBrowser</tabstop>
   <tabstop>useAsDefaultSkyCultureCheckBox</tabstop>
   <tabstop>skyLayerListWidget</tabstop>
   <tabstop>skyLayerTextBrowser</tabstop>
   <tabstop>skyLayerEnableCheckBox</tabstop>
-  <tabstop>showAzimuthalGridCheckBox</tabstop>
-  <tabstop>showEquatorialJ2000GridCheckBox</tabstop>
-  <tabstop>showEquatorialGridCheckBox</tabstop>
  </tabstops>
  <resources/>
  <connections/>

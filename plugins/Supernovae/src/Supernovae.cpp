@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "StelProjector.hpp"
@@ -56,10 +56,10 @@ StelPluginInfo SupernovaeStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
 	info.id = "Supernovae";
-	info.displayedName = q_("Historical supernovae");
+	info.displayedName = N_("Historical Supernovae");
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
-	info.description = QString("%1: %2.").arg(q_("The plugin for visualization of some historical supernovae, brighter 10 magnitude")).arg(q_("SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 September)"));
+	info.description = N_("A plugin that shows some historical supernovae brighter than 10 visual magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 September).");
 	return info;
 }
 
@@ -72,7 +72,7 @@ Q_EXPORT_PLUGIN2(Supernovae, SupernovaeStelPluginInterface)
 Supernovae::Supernovae()
 {
 	setObjectName("Supernovae");
-	font.setPixelSize(13);
+	font.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 }
 
 /*
@@ -119,7 +119,7 @@ void Supernovae::init()
 	}
 
 	// If the json file does not already exist, create it from the resource in the Qt resource
-	if(!QFileInfo(sneJsonPath).exists())
+	if(QFileInfo(sneJsonPath).exists())
 	{
 		if (getJsonFileVersion() != PLUGIN_VERSION)
 		{

@@ -14,12 +14,13 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include <QDebug>
 
 #include "Dialog.hpp"
+#include "StelMainWindow.hpp"
 
 void BarFrame::mousePressEvent(QMouseEvent *event)
 {
@@ -37,7 +38,24 @@ void BarFrame::mouseMoveEvent(QMouseEvent *event)
 	if (!moving) return;
 	QPoint dpos = event->pos() - mousePos;
 	QWidget* p = dynamic_cast<QWidget*>(QFrame::parent());
-	p->move(p->pos() + dpos);
+	QPoint targetPos = p->pos() + dpos;
+	
+	// Prevent the title bar from being dragged to an unreachable position.
+	StelMainWindow& mainWindow = StelMainWindow::getInstance();
+	int leftBoundX = 10 - width();
+	int rightBoundX = mainWindow.width() - 10;
+	if (targetPos.x() < leftBoundX)
+		targetPos.setX(leftBoundX);
+	else if (targetPos.x() > rightBoundX)
+		targetPos.setX(rightBoundX);
+	
+	int lowerBoundY = mainWindow.height() - height();
+	if (targetPos.y() < 0)
+		targetPos.setY(0);
+	else if (targetPos.y() > lowerBoundY)
+		targetPos.setY(lowerBoundY);
+	
+	p->move(targetPos);
 }
 
 void ResizeFrame::mouseMoveEvent(QMouseEvent *event)

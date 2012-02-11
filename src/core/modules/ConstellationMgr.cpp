@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include <vector>
@@ -935,7 +935,6 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 
 	QTextStream istr(&dataFile);
 	float DE, RA;
-	float oDE, oRA;
 	Vec3f XYZ;
 	unsigned num, numc;
 	vector<Vec3f> *points = NULL;
@@ -952,9 +951,6 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 		for (j=0;j<num;j++)
 		{
 			istr >> RA >> DE;
-
-			oRA =RA;
-			oDE= DE;
 
 			RA*=M_PI/12.;     // Convert from hours to rad
 			DE*=M_PI/180.;    // Convert from deg to rad

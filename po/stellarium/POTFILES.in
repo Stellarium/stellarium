@@ -1,3 +1,4 @@
+# Core source files
 src/core/modules/ConstellationMgr.cpp
 src/core/modules/StarMgr.cpp
 src/core/modules/GridLinesMgr.cpp
@@ -21,7 +22,11 @@ src/gui/ViewDialog.cpp
 src/gui/LocationDialog.cpp
 src/gui/AddRemoveLandscapesDialog.cpp
 src/main.cpp
+
+# Translations of strings not contained in the source code
 src/translations.h
+
+# Translations of GUI files generated at build time
 src/ui_dateTimeDialogGui.h
 src/ui_helpDialogGui.h
 src/ui_locationDialogGui.h
@@ -30,13 +35,42 @@ src/ui_viewDialog.h
 src/ui_configurationDialog.h
 src/ui_addRemoveLandscapesDialog.h
 src/ui_AtmosphereDialog.h
+
+# Plug-in translations
 plugins/AngleMeasure/src/AngleMeasure.cpp
 plugins/CompassMarks/src/CompassMarks.cpp
 plugins/Oculars/src/Oculars.cpp
+plugins/Oculars/src/gui/OcularsGuiPanel.cpp
+plugins/Oculars/src/ui_ocularDialog.h
 plugins/Satellites/src/Satellites.cpp
+plugins/Satellites/src/Satellite.cpp
+plugins/Satellites/src/gui/SatellitesDialog.cpp
+plugins/Satellites/src/gui/SatellitesImportDialog.cpp
+plugins/Satellites/src/ui_satellitesDialog.h
+plugins/Satellites/src/ui_satellitesImportDialog.h
 plugins/TelescopeControl/src/TelescopeControl.cpp
+plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp
+plugins/TelescopeControl/src/gui/TelescopeDialog.cpp
+plugins/TelescopeControl/src/ui_slewDialog.h
+plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h
+plugins/TelescopeControl/src/ui_telescopeDialog.h
 plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp
+plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp
+plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp
+plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h
+plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h
 plugins/TextUserInterface/src/TextUserInterface.cpp
+plugins/TextUserInterface/src/TuiNodeBool.cpp
+plugins/TextUserInterface/src/TuiNodeColor.cpp
+plugins/TextUserInterface/src/TuiNodeActivate.cpp
 plugins/SolarSystemEditor/src/SolarSystemEditor.cpp
+#plugins/SolarSystemEditor/src/gui/ManualImportWindow.cpp
+plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp
+plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp
+#plugins/SolarSystemEditor/src/ui_manualImportWindow.h
+plugins/SolarSystemEditor/src/ui_mpcImportWindow.h
+plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h
 plugins/Supernovae/src/Supernovae.cpp
 plugins/Supernovae/src/Supernova.cpp
+plugins/Quasars/src/Quasars.cpp
+plugins/Quasars/src/Quasar.cpp
