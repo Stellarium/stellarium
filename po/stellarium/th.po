@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-03 23:33+0700\n"
-"PO-Revision-Date: 2012-02-10 04:41+0000\n"
+"PO-Revision-Date: 2012-02-11 03:29+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-10 04:42+0000\n"
+"X-Launchpad-Export-Date: 2012-02-11 04:42+0000\n"
 "X-Generator: Launchpad (build 14771)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -1435,7 +1435,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
 msgid "Landscape Tour"
-msgstr ""
+msgstr "ท่องภูมิทัศน์"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
@@ -1488,6 +1488,8 @@ msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
+"สคริปต์แสดงการเกิดสุริยุปราคาเต็มดวงที่เกิดขึ้นใน ค.ศ. 2009 (สถานที่=รังปุ, "
+"บังกลาเทศ)"
 
 #: src/translations.h:200
 msgid "Script which runs automatically at startup"
@@ -3488,7 +3490,7 @@ msgstr "หมุนเฟรมเซนเซอร์ 1 องศา ทว�
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
-msgstr ""
+msgstr "ยกเลิกการเปลี่ยนแปลงการหมุนเฟรมเซนเซอร์"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
@@ -3553,7 +3555,7 @@ msgstr "เปิดเมนูนำทางแบบผุดขึ้น:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Interface"
-msgstr ""
+msgstr "ส่วนติดต่อกับผู้ใช้"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:872
 msgid "On-screen control panel"
@@ -4009,7 +4011,7 @@ msgstr "อัปเดตรายชื่อ TLE จากแหล่งข�
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:644
 msgid "Update from Internet sources"
-msgstr "อัีปเดตจากแหล่งข้อมูลบนอินเทอร์เน็ต"
+msgstr "อัปเดตจากแหล่งข้อมูลบนอินเทอร์เน็ต"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
 msgid "Last update:"
@@ -4144,7 +4146,7 @@ msgstr "แหล่งข้อมูล"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:206
 msgid "More Satellites"
-msgstr ""
+msgstr "ดาวเทียมดวงอื่น ๆ"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:208
 msgid "Get data from update sources"
@@ -4435,7 +4437,7 @@ msgstr "สมบัติของกล้องโทรทรรศน์"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid "Connection delay:"
-msgstr ""
+msgstr "เวลาหน่วงการเชื่อมต่อ:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:488
 msgid ""
@@ -4443,6 +4445,8 @@ msgid ""
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
+"เวลาคร่าว ๆ ที่สัญญาณจากกล้องโทรทรรศน์เดินทางถึง Stellarium\n"
+"เพิ่มค่านี้หากมีการกระโดดข้ามเส้นกรอบ"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Coordinate system:"
@@ -4573,7 +4577,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
 msgid "Executables directory:"
-msgstr ""
+msgstr "ไดเร็กทอรีที่ใช้ในการดำเนินการ:"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -4718,7 +4722,7 @@ msgstr "ชื่อเขตเวลาเมื่อใช้เวลาอ
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
 msgid "DST offset from UTC (hours):"
-msgstr ""
+msgstr "ผลต่างของเวลาออมแสงกับเวลาสากลเชิงพิกัด (ชั่วโมง):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
 msgid "Daylight saving time start"
@@ -4754,6 +4758,9 @@ msgid ""
 "This behaviour can be changed by changing Stellarium's global time zone "
 "settings."
 msgstr ""
+"โดยปริยาย เวลาที่แสดงใน Stellarium จะแปลงเป็นเวลาท้องถิ่นตามเขตเวลาของระบบ "
+"ไม่ใช่ตามเขตเวลาของสถานที่ที่แสดงในโปรแกรม "
+"คุณสามารถเปลี่ยนพฤติกรรมนี้ได้โดยการตั้งค่าเขตเวลาใน Stellarium"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "Use system settings (default)"
@@ -4765,7 +4772,7 @@ msgstr "เวลาสากลเชิงพิกัด (UTC)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "(offset = local time - UTC time)"
-msgstr ""
+msgstr "(เวลาผลต่าง = เวลาท้องถิ่น - เวลาสากลเชิงพิกัด)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
 msgid "User-defined:"
@@ -4846,7 +4853,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:169
 msgid "Startup date/time preset"
-msgstr ""
+msgstr "ตั้งวัน/เวลาขณะเริ่มโปรแกรมไว้ล่วงหน้า"
 
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:176
@@ -4930,7 +4937,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:422
 msgid "Setting landscape sets location"
-msgstr ""
+msgstr "ตั้งค่าที่อยู่ของภูมิทัศน์"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:443
 msgid "Run local script"
@@ -4963,7 +4970,7 @@ msgstr "ปิดโปรแกรม"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:504
 msgid "[no TUI node]"
-msgstr ""
+msgstr "[ไม่มีโหนด TUI]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
 msgid "On"
@@ -5091,7 +5098,7 @@ msgstr "แฟ้มบรรจุรายชื่อวัตถุต่า
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Get orbital elements"
-msgstr ""
+msgstr "รับองค์ประกอบวงโคจร"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Lists"
@@ -5114,6 +5121,11 @@ msgid ""
 "Solar System configuration.<br/>Note that adding a large number of objects "
 "may cause Stellarium to run slowly."
 msgstr ""
+"ทำเครื่องหมายวัตถุที่คุณต้องการนำเข้า <i>ตัวเอน</i> "
+"คือวัตถุที่ตรงกับชื่อของวัตถุที่เรียกใช้แล้ว <b>ตัวหนา</b> "
+"คือวัตถุที่ตรงกับชื่อของวัตถุที่มีอยู่ในการตั้งค่าระบบสุริยะของ "
+"Stellarium<br/>หมายเหตุ : การเพิ่มวัตถุจำนวนมาก อาจทำให้ Stellarium "
+"ทำงานช้าลง"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Overwrite existing objects"
