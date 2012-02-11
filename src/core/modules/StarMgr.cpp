@@ -348,7 +348,12 @@ bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc)
 		setCheckFlag(catDesc.value("id").toString(), true);
 	}
 
+//workaround: mmap is failing with "unknown error" on Android
+#ifdef ANDROID
+        ZoneArray* const z = ZoneArray::create(catalogFilePath, false);
+#else
 	ZoneArray* const z = ZoneArray::create(catalogFilePath, true);
+#endif
 	if (z)
 	{
 		if (maxGeodesicGridLevel < z->level)
