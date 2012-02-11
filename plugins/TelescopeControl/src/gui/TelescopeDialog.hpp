@@ -27,8 +27,7 @@
 #include <QModelIndex>
 #include <QStandardItemModel>
 
-//#include "StelDialog.hpp"
-#include "StelDialogTelescopeControl.hpp"
+#include "StelDialog.hpp"
 #include "TelescopeControlGlobals.hpp"
 #include "TelescopeConfigurationDialog.hpp"
 
@@ -38,7 +37,7 @@ class Ui_telescopeDialogForm;
 class TelescopeConfigurationDialog;
 class TelescopeControl;
 
-class TelescopeDialog : public StelDialogTelescopeControl
+class TelescopeDialog : public StelDialog
 {
 	Q_OBJECT
 public:

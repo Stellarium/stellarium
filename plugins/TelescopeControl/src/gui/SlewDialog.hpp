@@ -26,13 +26,12 @@
 #include <QString>
 #include "StelStyle.hpp"
 
-//#include "StelDialog.hpp"
-#include "StelDialogTelescopeControl.hpp"
+#include "StelDialog.hpp"
 
 class Ui_slewDialog;
 class TelescopeControl;
 
-class SlewDialog : public StelDialogTelescopeControl
+class SlewDialog : public StelDialog
 {
 	Q_OBJECT
 public:
