@@ -115,12 +115,18 @@ void StelDialog::setVisible(bool v)
 
 		proxy = new CustomProxy(NULL, Qt::Tool);
 		proxy->setWidget(dialog);
-		QRectF bound = proxy->boundingRect();
+		QSizeF size = proxy->size();
 
 		// centre with dialog according to current window size.
-		proxy->setPos((int)((screenSize.width()-bound.width())/2), (int)((screenSize.height()-bound.height())/2));
+		int newX = (int)((screenSize.width() - size.width())/2);
+		int newY = (int)((screenSize.height() - size.height())/2);
+		// Make sure that the window's title bar is accessible
+		if (newY <-0)
+			newY = 0;
+		proxy->setPos(newX, newY);
 		StelMainGraphicsView::getInstance().scene()->addItem(proxy);
 		proxy->setWindowFrameMargins(2,0,2,2);
+		// (this also changes the bounding rectangle size)
 
 		// The caching is buggy on all plateforms with Qt 4.5.2
 		proxy->setCacheMode(QGraphicsItem::ItemCoordinateCache);
