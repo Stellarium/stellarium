@@ -523,11 +523,11 @@ QGroupBox::indicator:unchecked {
 	image: url(:/graphicGui/checkbox-unchecked.png);
 }
 
-QListWidget::indicator::checked {
+QListWidget::indicator:checked, QListView::indicator:checked {
 	image: url(:/graphicGui/checkbox-checked.png);
 }
 
-QListWidget::indicator:unchecked {
+QListWidget::indicator:unchecked, QListView::indicator:unchecked {
 	image: url(:/graphicGui/checkbox-unchecked.png);
 }
 
@@ -893,3 +893,7 @@ QGraphicsWidget#observationListView  QLabel {
 		font-size: 40px;
 }
 
+/**** The following are used for Satellites ****/
+QListWidget#satellitesList, QListWidget#sourceList {
+		font-size: 8pt;
+}

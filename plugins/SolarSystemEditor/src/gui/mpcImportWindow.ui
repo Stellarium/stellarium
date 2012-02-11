@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>475</height>
+    <width>478</width>
+    <height>490</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -79,7 +79,7 @@
       <item>
        <widget class="QLabel" name="stelWindowTitle">
         <property name="text">
-         <string notr="true" extracomment="The title of the window will be set during runtime">Import data</string>
+	 <string extracomment="The title of the window will be set during runtime">Import data</string>
         </property>
        </widget>
       </item>
@@ -123,6 +123,9 @@
    </item>
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
      <widget class="QWidget" name="pageSource">
       <layout class="QVBoxLayout" name="verticalLayout_7">
        <property name="spacing">
@@ -133,6 +136,9 @@
        </property>
        <item>
         <widget class="QTabWidget" name="tabWidget">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
          <widget class="QWidget" name="tabLists">
           <attribute name="title">
            <string>Lists</string>
@@ -234,13 +240,6 @@
                       </property>
                      </widget>
                     </item>
-                    <item>
-                     <widget class="QPushButton" name="pushButtonPasteURL">
-                      <property name="text">
-                       <string>paste</string>
-                      </property>
-                     </widget>
-                    </item>
                    </layout>
                   </widget>
                  </item>
@@ -298,8 +297,9 @@
                  </item>
                  <item>
                   <widget class="QPushButton" name="pushButtonBrowse">
-                   <property name="text">
-                    <string>...</string>
+                   <property name="icon">
+                    <iconset resource="../../../../data/gui/guiRes.qrc">
+                     <normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
                    </property>
                   </widget>
                  </item>
@@ -368,7 +368,7 @@
               <item>
                <widget class="QLabel" name="labelQueryLink">
                 <property name="text">
-                 <string>Query the MPC's &lt;a href=&quot;http://www.minorplanetcenter.net/iau/MPEph/MPEph.html&quot;&gt;Minor Planet &amp;amp; Comet Ephemeris Service&lt;/a&gt;:</string>
+                 <string notr="true">Query the MPC's &lt;a href=&quot;http://www.minorplanetcenter.net/iau/MPEph/MPEph.html&quot;&gt;Minor Planet &amp;amp; Comet Ephemeris Service&lt;/a&gt;:</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
@@ -422,7 +422,7 @@
               <item>
                <widget class="QLabel" name="labelQueryInstructions">
                 <property name="text">
-                 <string>Only one result will be returned if the query is successful.&lt;br&gt;Both comets and asteroids can be identified with their number, name or provisional designation.&lt;br&gt;Comet &lt;i&gt;names&lt;/i&gt; need to be prefixed with &lt;b&gt;C/&lt;/b&gt; or &lt;b&gt;P/&lt;/b&gt;. If more than one comet matches a name, only the first result will be returned. For example, &quot;C/Halley&quot; will return 1P/Halley, Halley's Comet, but &quot;Halley&quot; will return the asteorid (2688) Halley.</string>
+                 <string notr="true">Only one result will be returned if the query is successful.&lt;br&gt;Both comets and asteroids can be identified with their number, name or provisional designation.&lt;br&gt;Comet &lt;i&gt;names&lt;/i&gt; need to be prefixed with &lt;b&gt;C/&lt;/b&gt; or &lt;b&gt;P/&lt;/b&gt;. If more than one comet matches a name, only the first result will be returned. For example, &quot;C/Halley&quot; will return 1P/Halley, Halley's Comet, but &quot;Halley&quot; will return the asteroid (2688) Halley.</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
@@ -594,7 +594,6 @@
   <tabstop>radioButtonURL</tabstop>
   <tabstop>comboBoxBookmarks</tabstop>
   <tabstop>lineEditURL</tabstop>
-  <tabstop>pushButtonPasteURL</tabstop>
   <tabstop>checkBoxAddBookmark</tabstop>
   <tabstop>lineEditBookmarkTitle</tabstop>
   <tabstop>radioButtonFile</tabstop>

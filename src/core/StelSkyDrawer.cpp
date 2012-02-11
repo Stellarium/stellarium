@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifdef USE_OPENGL_ES2
@@ -106,7 +106,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), flagHasAtmosphere(t
 		ok = true;
 	}
 
-	//GZ: load 3 values from config for now. TODO: make adjustable with GUI!
+	//GZ: load 3 values from config.
 	setExtinctionCoefficient(conf->value("landscape/atmospheric_extinction_coefficient",0.2).toDouble(&ok));
 	if (!ok)
 	{
@@ -241,6 +241,16 @@ void StelSkyDrawer::update(double)
 		if (fov < minAdaptFov)
 			fov = minAdaptFov;
 	}
+
+	// GZ: Light pollution must take global atmosphere setting into acount!
+	// moved parts from setBortleScale() here
+	// These value have been calibrated by hand, looking at the faintest star in stellarium at around 40 deg FOV
+	// They should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
+	static const float bortleToInScale[9] = {2.45, 1.55, 1.0, 0.63, 0.40, 0.24, 0.23, 0.145, 0.09};
+	if (getFlagHasAtmosphere())
+	    setInputScale(bortleToInScale[bortleScaleIndex-1]);
+	else
+	    setInputScale(bortleToInScale[0]);
 
 	// This factor is fully arbitrary. It corresponds to the collecting area x exposure time of the instrument
 	// It is based on a power law, so that it varies progressively with the FOV to smoothly switch from human
@@ -731,11 +741,11 @@ void StelSkyDrawer::setBortleScale(int bIndex)
 	}
 
 	bortleScaleIndex = bIndex;
-
+	// GZ: I moved this block to update()
 	// These value have been calibrated by hand, looking at the faintest star in stellarium at around 40 deg FOV
 	// They should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
-	static const float bortleToInScale[9] = {2.45, 1.55, 1.0, 0.63, 0.40, 0.24, 0.23, 0.145, 0.09};
-	setInputScale(bortleToInScale[bIndex-1]);
+	// static const float bortleToInScale[9] = {2.45, 1.55, 1.0, 0.63, 0.40, 0.24, 0.23, 0.145, 0.09};
+	// setInputScale(bortleToInScale[bIndex-1]);
 }
 
 

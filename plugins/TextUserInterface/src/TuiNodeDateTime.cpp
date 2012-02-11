@@ -13,12 +13,13 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "TuiNodeDateTime.hpp"
 #include "StelUtils.hpp"
 #include "StelCore.hpp"
+#include "StelTranslator.hpp"
 #include <QKeyEvent>
 #include <QDebug>
 #include <QStringList>
@@ -118,20 +119,43 @@ TuiNodeResponse TuiNodeDateTime::handleEditingKey(int key)
 QString TuiNodeDateTime::getDisplayText() 
 {
 	QList<int> parts = getParts(value);
-	if (editing && editingPart==0)
-		return displayText + QString(":  >%1<-%2-%3 %4:%5:%6 UTC").arg(parts.at(0)).arg(parts.at(1), 2, 10, QChar('0')).arg(parts.at(2), 2, 10, QChar('0')).arg(parts.at(3), 2, 10, QChar('0')).arg(parts.at(4), 2, 10, QChar('0')).arg(parts.at(5), 2, 10, QChar('0'));
-	else if (editing && editingPart==1)
-		return displayText + QString(":  %1->%2<-%3 %4:%5:%6 UTC").arg(parts.at(0)).arg(parts.at(1), 2, 10, QChar('0')).arg(parts.at(2), 2, 10, QChar('0')).arg(parts.at(3), 2, 10, QChar('0')).arg(parts.at(4), 2, 10, QChar('0')).arg(parts.at(5), 2, 10, QChar('0'));
-	else if (editing && editingPart==2)
-		return displayText + QString(":  %1-%2->%3< %4:%5:%6 UTC").arg(parts.at(0)).arg(parts.at(1), 2, 10, QChar('0')).arg(parts.at(2), 2, 10, QChar('0')).arg(parts.at(3), 2, 10, QChar('0')).arg(parts.at(4), 2, 10, QChar('0')).arg(parts.at(5), 2, 10, QChar('0'));
-	else if (editing && editingPart==3)
-		return displayText + QString(":  %1-%2-%3 >%4<:%5:%6 UTC").arg(parts.at(0)).arg(parts.at(1), 2, 10, QChar('0')).arg(parts.at(2), 2, 10, QChar('0')).arg(parts.at(3), 2, 10, QChar('0')).arg(parts.at(4), 2, 10, QChar('0')).arg(parts.at(5), 2, 10, QChar('0'));
-	else if (editing && editingPart==4)
-		return displayText + QString(":  %1-%2-%3 %4:>%5<:%6 UTC").arg(parts.at(0)).arg(parts.at(1), 2, 10, QChar('0')).arg(parts.at(2), 2, 10, QChar('0')).arg(parts.at(3), 2, 10, QChar('0')).arg(parts.at(4), 2, 10, QChar('0')).arg(parts.at(5), 2, 10, QChar('0'));
-	else if (editing && editingPart==5)
-		return displayText + QString(":  %1-%2-%3 %4:%5:>%6< UTC").arg(parts.at(0)).arg(parts.at(1), 2, 10, QChar('0')).arg(parts.at(2), 2, 10, QChar('0')).arg(parts.at(3), 2, 10, QChar('0')).arg(parts.at(4), 2, 10, QChar('0')).arg(parts.at(5), 2, 10, QChar('0'));
-	else
-		return displayText + QString(":  %1-%2-%3 %4:%5:%6 UTC").arg(parts.at(0)).arg(parts.at(1), 2, 10, QChar('0')).arg(parts.at(2), 2, 10, QChar('0')).arg(parts.at(3), 2, 10, QChar('0')).arg(parts.at(4), 2, 10, QChar('0')).arg(parts.at(5), 2, 10, QChar('0'));
+	QString yy = QString("%1").arg(parts.at(0));
+	QString mm = QString("%1").arg(parts.at(1), 2, 10, QChar('0'));
+	QString dd = QString("%1").arg(parts.at(2), 2, 10, QChar('0'));
+	QString h = QString("%1").arg(parts.at(3), 2, 10, QChar('0'));
+	QString m = QString("%1").arg(parts.at(4), 2, 10, QChar('0'));
+	QString s = QString("%1").arg(parts.at(5), 2, 10, QChar('0'));
+	
+	//(Default format string when not editing anything)
+	const char* formatString = ":  %1-%2-%3 %4:%5:%6 UTC";
+	if (editing)
+	{
+		switch (editingPart)
+		{
+		case 0:
+			formatString = ":  >%1<-%2-%3 %4:%5:%6 UTC"; //Year
+			break;
+		case 1:
+			formatString = ":  %1->%2<-%3 %4:%5:%6 UTC"; //Month
+			break;
+		case 2:
+			formatString = ":  %1-%2->%3< %4:%5:%6 UTC"; //Day
+			break;
+		case 3:
+			formatString = ":  %1-%2-%3 >%4<:%5:%6 UTC"; //Hour
+			break;
+		case 4:
+			formatString = ":  %1-%2-%3 %4:>%5<:%6 UTC"; //Minute
+			break;
+		case 5:
+			formatString = ":  %1-%2-%3 %4:%5:>%6< UTC"; //Second
+		default:
+			break;
+		}
+	}
+	
+	QString result = prefixText + q_(displayText) + QString (formatString).arg(yy, mm, dd, h, m, s);
+	return result;
 }
 
 void TuiNodeDateTime::incPart(int part, bool add)

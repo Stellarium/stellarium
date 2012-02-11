@@ -30,10 +30,13 @@ SET(Satellites_SRCS
   Satellites.cpp
   gui/SatellitesDialog.hpp
   gui/SatellitesDialog.cpp
+  gui/SatellitesImportDialog.hpp
+  gui/SatellitesImportDialog.cpp
 )
 
 SET(SatellitesDialog_UIS
   gui/satellitesDialog.ui
+  gui/satellitesImportDialog.ui
 )
 QT4_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
 
@@ -45,6 +48,7 @@ QT4_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
 SET(Satellites_MOC_HDRS
   Satellites.hpp
   gui/SatellitesDialog.hpp
+  gui/SatellitesImportDialog.hpp
 )
 
 # After this call, Satellites_MOC_SRCS = moc_Satellites.cxx

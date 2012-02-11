@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "VecMath.hpp"
@@ -54,10 +54,10 @@ StelPluginInfo CompassMarksStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
 	info.id = "CompassMarks";
-	info.displayedName = q_("Compass Marks");
+	info.displayedName = N_("Compass Marks");
 	info.authors = "Matthew Gates";
 	info.contact = "http://porpoisehead.net/";
-	info.description = q_("Displays compass bearing marks along the horizon");
+	info.description = N_("Displays compass bearing marks along the horizon");
 	return info;
 }
 
@@ -84,20 +84,23 @@ CompassMarks::CompassMarks()
 
 CompassMarks::~CompassMarks()
 {
+	if (pxmapGlow!=NULL)
+		delete pxmapGlow;
+	if (pxmapOnIcon!=NULL)
+		delete pxmapOnIcon;
+	if (pxmapOffIcon!=NULL)
+		delete pxmapOffIcon;
+	
 	// TODO (requires work in core API)
 	// 1. Remove button from toolbar
 	// 2. Remove action from GUI
 	// 3. Delete GUI objects.  I'll leave this commented right now because
 	// unloading (when implemented) might cause problems if we do it before we
 	// can do parts 1 and 2.
-	//if (pxmapGlow!=NULL)
-	//	delete pxmapGlow;
-	//if (pxmapOnIcon!=NULL)
-	//	delete pxmapOnIcon;
-	//if (pxmapOffIcon!=NULL)
-	//	delete pxmapOffIcon;
 	//if (toolbarButton!=NULL)
 	//	delete toolbarButton;
+	// BTW, the above remark is from 2009 --BM
+	// See http://stellarium.svn.sourceforge.net/viewvc/stellarium/trunk/extmodules/CompassMarks/src/CompassMarks.cpp?r1=4333&r2=4332&pathrev=4333
 }
 
 //! Determine which "layer" the plugin's drawing will happen on.

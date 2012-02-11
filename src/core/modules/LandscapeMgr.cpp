@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include <QDebug>
@@ -239,7 +239,7 @@ void LandscapeMgr::update(double deltaTime)
 	else
 		landscapeBrightness = (0.01 + 1.5*(sinSunAngleRad+0.1/1.5));
 	if (moonPos[2] > -0.1/1.5)
-		landscapeBrightness += qMax(0.2/-12.*ssystem->getMoon()->getVMagnitude(core),0.)*moonPos[2];
+		landscapeBrightness += qMax(0.2/-12.*ssystem->getMoon()->getVMagnitude(core, true),0.)*moonPos[2];
 
 	// TODO make this more generic for non-atmosphere planets
 	if(atmosphere->getFadeIntensity() == 1)

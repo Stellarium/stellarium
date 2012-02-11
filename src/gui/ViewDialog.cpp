@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
 
@@ -73,6 +73,10 @@ void ViewDialog::languageChanged()
 		ui->retranslateUi(dialog);
 		shootingStarsZHRChanged();
 		populateLists();
+
+		//Hack to shrink the tabs to optimal size after language change
+		//by causing the list items to be laid out again.
+		ui->stackListWidget->setWrapping(false);
 	}
 }
 
@@ -247,6 +251,16 @@ void ViewDialog::createDialogContent()
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorialGridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEquatorialGridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
+	ui->showGalacticGridCheckBox->setChecked(glmgr->getFlagGalacticGrid());
+	a = gui->getGuiActions("actionShow_Galactic_Grid");
+	connect(a, SIGNAL(toggled(bool)), ui->showGalacticGridCheckBox, SLOT(setChecked(bool)));
+	connect(ui->showGalacticGridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+
+	ui->showGalacticPlaneLineCheckBox->setChecked(glmgr->getFlagGalacticPlaneLine());
+	a = gui->getGuiActions("actionShow_Galactic_Plane_Line");
+	connect(a, SIGNAL(toggled(bool)), ui->showGalacticPlaneLineCheckBox, SLOT(setChecked(bool)));
+	connect(ui->showGalacticPlaneLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+
 	ui->showAzimuthalGridCheckBox->setChecked(glmgr->getFlagAzimuthalGrid());
 	a = gui->getGuiActions("actionShow_Azimuthal_Grid");
 	connect(a, SIGNAL(toggled(bool)), ui->showAzimuthalGridCheckBox, SLOT(setChecked(bool)));
@@ -338,8 +352,23 @@ void ViewDialog::populateLists()
 	l->blockSignals(true);
 	l->clear();
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-	l->addItems(lmgr->getAllLandscapeNames());
-	l->setCurrentItem(l->findItems(lmgr->getCurrentLandscapeName(), Qt::MatchExactly).at(0));
+	QStringList landscapeList = lmgr->getAllLandscapeNames();
+	foreach (const QString landscapeId, landscapeList)
+	{
+		QString label = q_(landscapeId);
+		QListWidgetItem* item = new QListWidgetItem(label);
+		item->setData(Qt::UserRole, landscapeId);
+		l->addItem(item);
+	}
+	QString selectedLandscapeId = lmgr->getCurrentLandscapeName();
+	for (int i = 0; i < l->count(); i++)
+	{
+		if (l->item(i)->data(Qt::UserRole).toString() == selectedLandscapeId)
+		{
+			l->setCurrentRow(i);
+			break;
+		}
+	}
 	l->blockSignals(false);
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
 	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
@@ -447,7 +476,7 @@ void ViewDialog::projectionChanged(const QString& projectionNameI18n)
 void ViewDialog::landscapeChanged(QListWidgetItem* item)
 {
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-	lmgr->setCurrentLandscapeName(item->text());
+	lmgr->setCurrentLandscapeName(item->data(Qt::UserRole).toString());
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 	ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));

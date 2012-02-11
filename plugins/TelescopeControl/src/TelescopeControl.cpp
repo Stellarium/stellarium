@@ -22,7 +22,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "TelescopeControl.hpp"
@@ -72,10 +72,10 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
 	info.id = "TelescopeControl";
-	info.displayedName = q_("Telescope Control");
+	info.displayedName = N_("Telescope Control");
 	info.authors = "Bogdan Marinov, Johannes Gajdosik";
 	info.contact = "http://stellarium.org";
-	info.description = q_("This plug-in allows Stellarium to send \"slew\" commands to a telescope on a computerized mount (a \"GoTo telescope\").");
+	info.description = N_("This plug-in allows Stellarium to send \"slew\" commands to a telescope on a computerized mount (a \"GoTo telescope\").");
 	return info;
 }
 
@@ -645,7 +645,7 @@ void TelescopeControl::saveTelescopes()
 		}
 
 		//Add the version:
-		telescopeDescriptions.insert("version", QString(PLUGIN_VERSION));
+		telescopeDescriptions.insert("version", QString(TELESCOPE_CONTROL_VERSION));
 
 		//Convert the tree to JSON
 		StelJsonParser::write(telescopeDescriptions, &telescopesJsonFile);
@@ -697,7 +697,7 @@ void TelescopeControl::loadTelescopes()
 		}
 
 		QString version = map.value("version", "0.0.0").toString();
-		if(version < QString(PLUGIN_VERSION))
+		if(version < QString(TELESCOPE_CONTROL_VERSION))
 		{
 			QString newName = telescopesJsonPath + ".backup." + QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
 			if(telescopesJsonFile.rename(newName))
@@ -1345,7 +1345,7 @@ void TelescopeControl::loadDeviceModels()
 			QVariantMap deviceModelsJsonMap;
 			deviceModelsJsonMap = StelJsonParser::parse(&deviceModelsJsonFile).toMap();
 			QString version = deviceModelsJsonMap.value("version", "0.0.0").toString();
-			if(version < QString(PLUGIN_VERSION))
+			if(version < QString(TELESCOPE_CONTROL_VERSION))
 			{
 				deviceModelsJsonFile.close();
 				QString newName = deviceModelsJsonPath + ".backup." + QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
