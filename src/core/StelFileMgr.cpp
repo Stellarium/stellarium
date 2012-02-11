@@ -74,6 +74,13 @@ void StelFileMgr::init()
 	// OK, now we have the userDir set, add it to the search path
 	fileLocations.append(userDir);
 
+#ifdef ANDROID
+	//necessitas cannot list directory content for directories in assets
+	//as such, data must be duplicated in external storage for now
+	//see: https://sourceforge.net/p/necessitas/tickets/120/
+	fileLocations.append(EXTERNAL_STORAGE);
+#endif
+
 	// Then add the installation directory to the search path
 	try
 	{

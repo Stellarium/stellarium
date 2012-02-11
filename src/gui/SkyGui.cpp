@@ -44,6 +44,10 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 		qWarning() << "config.ini option gui/selected_object_info is invalid, using \"all\"";
 		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
 	}
+
+#ifdef ANDROID
+	setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+#endif
 }
 
 void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)

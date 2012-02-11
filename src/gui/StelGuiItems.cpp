@@ -265,6 +265,10 @@ LeftStelBar::LeftStelBar(QGraphicsItem* parent) : QGraphicsItem(parent)
 	// Create the help label
 	helpLabel = new QGraphicsSimpleTextItem("", this);
 	helpLabel->setBrush(QBrush(QColor::fromRgbF(1,1,1,1)));
+
+#ifdef ANDROID
+	helpLabel->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+#endif
 }
 
 LeftStelBar::~LeftStelBar()
@@ -376,6 +380,16 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 	// Create the help label
 	helpLabel = new QGraphicsSimpleTextItem("", this);
 	helpLabel->setBrush(QBrush(QColor::fromRgbF(1,1,1,1)));
+
+#ifdef ANDROID
+	//Avoids the text corruption bug, may improve performance
+	//(does this need to be ifdef'd?)
+	datetime->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+	location->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+	fov->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+	fps->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+	helpLabel->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+#endif
 
 	QColor color = QColor::fromRgbF(1,1,1,1);
 	setColor(color);

@@ -22,6 +22,10 @@
 
 #define CHECK_FILE "data/ssystem.ini"
 
+#ifdef ANDROID
+#define EXTERNAL_STORAGE "/sdcard/stellarium"
+#endif
+
 #include <stdexcept>
 #include <QSet>
 #include <QString>
