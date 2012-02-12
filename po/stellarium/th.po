@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-03 23:33+0700\n"
-"PO-Revision-Date: 2012-02-11 03:29+0000\n"
+"PO-Revision-Date: 2012-02-12 02:17+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-11 04:42+0000\n"
+"X-Launchpad-Export-Date: 2012-02-12 04:38+0000\n"
 "X-Generator: Launchpad (build 14771)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -1430,7 +1430,7 @@ msgstr "มหาสมุทร"
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:172
 msgid "Garching"
-msgstr ""
+msgstr "การ์ชิง"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
@@ -3952,7 +3952,7 @@ msgstr "[แหล่งข้อมูลใหม่]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:457
 msgid "[all newly added]"
-msgstr ""
+msgstr "[เพิ่มเข้ามาใหม่ทั้งหมด]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:458
 msgid "[all not displayed]"
@@ -4307,7 +4307,7 @@ msgstr "เริ่มต้น"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:745
 msgid "Start the selected local telescope"
-msgstr ""
+msgstr "เริ่มกล้องโทรทรรศน์ท้องถิ่นที่เลือก"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:750
 msgid "Stop"
@@ -4315,7 +4315,7 @@ msgstr "หยุด"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:751
 msgid "Stop the selected local telescope"
-msgstr ""
+msgstr "หยุดกล้องโทรทรรศน์ท้องถิ่นที่เลือก"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:756
 msgid "Connect"
@@ -5047,6 +5047,10 @@ msgid ""
 "objects, download such lists from the Internet or search the online Minor "
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
+"คุณสามารถนำเข้าข้อมูลดาวหางหรือดาวเคราะห์น้อยที่มีรูปแบบตามที่ได้นำออกจากศูนย"
+"์ดาวเคราะห์น้อยแห่งสหพันธ์ดาราศาสตร์สากล (%1) โดยนำเข้าแฟ้มที่มีรายชื่อวัตถุ "
+"ซึ่งรายชื่อดังกล่าวสามารถดาวน์โหลดได้จากอินเทอร์เน็ต หรือค้นหาจาก Minor "
+"Planet and Comet Ephemeris Service (MPES)"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
 msgid "Solar System Editor plug-in"
