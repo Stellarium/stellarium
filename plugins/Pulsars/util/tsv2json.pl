@@ -12,7 +12,7 @@ close TSV;
 
 open (JSON, ">$JSON");
 print JSON "{\n";
-print JSON "\t\"version\": \"0.1.1\",\n";
+print JSON "\t\"version\": \"0.1.2\",\n";
 print JSON "\t\"shortName\": \"A catalogue of pulsars\",\n";
 print JSON "\t\"pulsars\":\n";
 print JSON "\t{\n";
@@ -37,7 +37,7 @@ for ($i=0;$i<scalar(@catalog)-1;$i++) {
 		$s600 =~ s/(\s+)//gi;
 		$s1400 =~ s/(\s+)//gi;
 
-		$out  = "\t\t\"".$name."\":\n";
+		$out  = "\t\t\"PSR J".$name."\":\n";
 		$out .= "\t\t{\n";
 		$out .= "\t\t\t\"RA\": \"".$outRA."\",\n";
 		$out .= "\t\t\t\"DE\": \"".$outDE."\",\n";
