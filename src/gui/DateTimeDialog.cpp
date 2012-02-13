@@ -54,7 +54,7 @@ void DateTimeDialog::createDialogContent()
 	// UTC -> local tz
 	setDateTime(jd + (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0));
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	connectSpinnerEvents();
@@ -107,7 +107,7 @@ bool DateTimeDialog::valid(int y, int m, int d, int h, int min, int s)
 	return true;
 }
 
-void DateTimeDialog::languageChanged()
+void DateTimeDialog::retranslate()
 {
 	if (dialog) {
 		ui->retranslateUi(dialog);

@@ -48,7 +48,7 @@ public:
 	virtual ~MpcImportWindow();
 
 public slots:
-	void languageChanged();
+	void retranslate();
 
 signals:
 	void objectsImported();

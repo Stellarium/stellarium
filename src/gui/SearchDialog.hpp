@@ -72,7 +72,7 @@ public:
 	bool eventFilter(QObject *object, QEvent *event);
 	
 public slots:
-	void languageChanged();
+	void retranslate();
 	//! Add auto focus of the edit line
 	void setVisible(bool);
 	//! This style only displays the text search field and the search button
