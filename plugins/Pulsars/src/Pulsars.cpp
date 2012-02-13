@@ -59,7 +59,7 @@ StelPluginInfo PulsarsStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Pulsars");
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
-	info.description = N_("This is plugin show markers of pulsars and display info about each of those pulsars. Catalog of pulsars for this plugin was created from 'Catalog of Pulsars' (Taylor+ 1995).");
+	info.description = N_("This plugin plots the position of various pulsars, with object information about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ 1995).");
 	return info;
 }
 
