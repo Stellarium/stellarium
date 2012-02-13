@@ -59,6 +59,6 @@ for ($i=0;$i<scalar(@catalog)-1;$i++) {
 	}
 }
 
-print JSON "\t}\n}";
+print JSON "\t}\n}\n";
 
 close JSON;
