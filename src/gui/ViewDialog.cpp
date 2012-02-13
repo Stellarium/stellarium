@@ -66,7 +66,7 @@ ViewDialog::~ViewDialog()
         atmosphereDialog = NULL;
 }
 
-void ViewDialog::languageChanged()
+void ViewDialog::retranslate()
 {
 	if (dialog)
 	{
@@ -91,7 +91,7 @@ void ViewDialog::styleChanged()
 void ViewDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	// Set the Sky tab activated by default
 	ui->stackedWidget->setCurrentIndex(0);

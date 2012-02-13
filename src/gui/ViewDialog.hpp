@@ -39,7 +39,7 @@ public:
 	void styleChanged();
 
 public slots:
-	void languageChanged();
+	void retranslate();
 
 protected:
 	Ui_viewDialogForm* ui;

@@ -42,7 +42,7 @@ public:
 	virtual ~ManualImportWindow();
 
 public slots:
-	void languageChanged();
+	void retranslate();
 
 private slots:
 	//TODO: Object type

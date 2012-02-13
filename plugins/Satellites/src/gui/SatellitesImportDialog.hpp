@@ -40,7 +40,7 @@ signals:
 	void satellitesAccepted(const TleDataList& newSatellites);
 	
 public slots:
-	void languageChanged();
+	void retranslate();
 	void setVisible(bool visible = true);
 	
 private slots:
