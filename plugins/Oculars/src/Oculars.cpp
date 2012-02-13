@@ -1615,15 +1615,15 @@ void Oculars::unzoomOcular()
 	StelMovementMgr *movementManager = core->getMovementMgr();
 	GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
 
-	gridManager->setFlagAzimuthalGrid(flagAzimuthalGrid);
-	gridManager->setFlagGalacticGrid(flagGalacticGrid);
-	gridManager->setFlagEquatorGrid(flagEquatorGrid);
-	gridManager->setFlagEquatorJ2000Grid(flagEquatorJ2000Grid);
-	gridManager->setFlagEquatorLine(flagEquatorLine);
-	gridManager->setFlagEclipticLine(flagEclipticLine);
-	gridManager->setFlagMeridianLine(flagMeridianLine);
-	gridManager->setFlagHorizonLine(flagHorizonLine);
-	gridManager->setFlagGalacticPlaneLine(flagGalacticPlaneLine);
+	gridManager->setAzimuthalGridDisplayed(flagAzimuthalGrid);
+	gridManager->setGalacticGridDisplayed(flagGalacticGrid);
+	gridManager->setEquatorGridDisplayed(flagEquatorGrid);
+	gridManager->setEquatorJ2000GridDisplayed(flagEquatorJ2000Grid);
+	gridManager->setEquatorLineDisplayed(flagEquatorLine);
+	gridManager->setEclipticLineDisplayed(flagEclipticLine);
+	gridManager->setMeridianLineDisplayed(flagMeridianLine);
+	gridManager->setHorizonLineDisplayed(flagHorizonLine);
+	gridManager->setGalacticPlaneLineDisplayed(flagGalacticPlaneLine);
 	movementManager->setFlagTracking(false);
 	movementManager->setFlagEnableZoomKeys(true);
 	movementManager->setFlagEnableMouseNavigation(true);
@@ -1647,15 +1647,15 @@ void Oculars::zoom(bool zoomedIn)
 		if (!zoomedIn)  {
 			GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
 			// Current state
-			flagAzimuthalGrid = gridManager->getFlagAzimuthalGrid();
-			flagGalacticGrid = gridManager->getFlagGalacticGrid();
-			flagEquatorGrid = gridManager->getFlagEquatorGrid();
-			flagEquatorJ2000Grid = gridManager->getFlagEquatorJ2000Grid();
-			flagEquatorLine = gridManager->getFlagEquatorLine();
-			flagEclipticLine = gridManager->getFlagEclipticLine();
-			flagMeridianLine = gridManager->getFlagMeridianLine();
-			flagHorizonLine = gridManager->getFlagHorizonLine();
-			flagGalacticPlaneLine = gridManager->getFlagGalacticPlaneLine();
+			flagAzimuthalGrid = gridManager->isAzimuthalGridDisplayed();
+			flagGalacticGrid = gridManager->isGalacticGridDisplayed();
+			flagEquatorGrid = gridManager->isEquatorGridDisplayed();
+			flagEquatorJ2000Grid = gridManager->isEquatorJ2000GridDisplayed();
+			flagEquatorLine = gridManager->isEquatorLineDisplayed();
+			flagEclipticLine = gridManager->isEclipticLineDisplayed();
+			flagMeridianLine = gridManager->isMeridianLineDisplayed();
+			flagHorizonLine = gridManager->isHorizonLineDisplayed();
+			flagGalacticPlaneLine = gridManager->isGalacticPlaneLineDisplayed();
 		}
 
 		// set new state
@@ -1673,15 +1673,15 @@ void Oculars::zoomOcular()
 	GridLinesMgr *gridManager =
 		(GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
 
-	gridManager->setFlagAzimuthalGrid(false);
-	gridManager->setFlagGalacticGrid(false);
-	gridManager->setFlagEquatorGrid(false);
-	gridManager->setFlagEquatorJ2000Grid(false);
-	gridManager->setFlagEquatorLine(false);
-	gridManager->setFlagEclipticLine(false);
-	gridManager->setFlagMeridianLine(false);
-	gridManager->setFlagHorizonLine(false);
-	gridManager->setFlagGalacticPlaneLine(false);
+	gridManager->setAzimuthalGridDisplayed(false);
+	gridManager->setGalacticGridDisplayed(false);
+	gridManager->setEquatorGridDisplayed(false);
+	gridManager->setEquatorJ2000GridDisplayed(false);
+	gridManager->setEquatorLineDisplayed(false);
+	gridManager->setEclipticLineDisplayed(false);
+	gridManager->setMeridianLineDisplayed(false);
+	gridManager->setHorizonLineDisplayed(false);
+	gridManager->setGalacticPlaneLineDisplayed(false);
 	
 	movementManager->setFlagTracking(true);
 	movementManager->setFlagEnableZoomKeys(false);

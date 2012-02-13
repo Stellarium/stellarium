@@ -32,6 +32,78 @@ class SkyLine;
 class GridLinesMgr : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool azimuthalGridDisplayed
+			   READ isAzimuthalGridDisplayed
+			   WRITE setAzimuthalGridDisplayed
+			   NOTIFY azimuthalGridDisplayedChanged)
+	Q_PROPERTY(Vec3f azimuthalGridColor
+			   READ getAzimuthalGridColor
+			   WRITE setAzimuthalGridColor
+			   NOTIFY azimuthalGridColorChanged)
+	Q_PROPERTY(bool equatorGridDisplayed
+			   READ isEquatorGridDisplayed
+			   WRITE setEquatorGridDisplayed
+			   NOTIFY equatorGridDisplayedChanged)
+	Q_PROPERTY(Vec3f equatorGridColor
+			   READ getEquatorGridColor
+			   WRITE setEquatorGridColor
+			   NOTIFY equatorGridColorChanged)
+	Q_PROPERTY(bool equatorJ2000GridDisplayed
+			   READ isEquatorJ2000GridDisplayed
+			   WRITE setEquatorJ2000GridDisplayed
+			   NOTIFY equatorJ2000GridDisplayedChanged)
+	Q_PROPERTY(Vec3f equatorJ2000GridColor
+			   READ getEquatorJ2000GridColor
+			   WRITE setEquatorJ2000GridColor
+			   NOTIFY equatorJ2000GridColorChanged)
+	Q_PROPERTY(bool galacticGridDisplayed
+			   READ isGalacticGridDisplayed
+			   WRITE setGalacticGridDisplayed
+			   NOTIFY galacticGridDisplayedChanged)
+	Q_PROPERTY(Vec3f galacticGridColor
+			   READ getGalacticGridColor
+			   WRITE setGalacticGridColor
+			   NOTIFY galacticGridColorChanged)
+	Q_PROPERTY(bool equatorLineDisplayed
+			   READ isEquatorLineDisplayed
+			   WRITE setEquatorLineDisplayed
+			   NOTIFY equatorLineDisplayedChanged)
+	Q_PROPERTY(Vec3f equatorLineColor
+			   READ getEquatorLineColor
+			   WRITE setEquatorLineColor
+			   NOTIFY equatorLineColorChanged)
+	Q_PROPERTY(bool eclipticLineDisplayed
+			   READ isEclipticLineDisplayed
+			   WRITE setEclipticLineDisplayed
+			   NOTIFY eclipticLineDisplayedChanged)
+	Q_PROPERTY(Vec3f eclipticLineColor
+			   READ getEclipticLineColor
+			   WRITE setEclipticLineColor
+			   NOTIFY eclipticLineColorChanged)
+	Q_PROPERTY(bool meridianLineDisplayed
+			   READ isMeridianLineDisplayed
+			   WRITE setMeridianLineDisplayed
+			   NOTIFY meridianLineDisplayedChanged)
+	Q_PROPERTY(Vec3f meridianLineColor
+			   READ getMeridianLineColor
+			   WRITE setMeridianLineColor
+			   NOTIFY meridianLineColorChanged)
+	Q_PROPERTY(bool horizonLineDisplayed
+			   READ isHorizonLineDisplayed
+			   WRITE setHorizonLineDisplayed
+			   NOTIFY horizonLineDisplayedChanged)
+	Q_PROPERTY(Vec3f horizonLineColor
+			   READ getHorizonLineColor
+			   WRITE setHorizonLineColor
+			   NOTIFY horizonLineColorChanged)
+	Q_PROPERTY(bool galacticPlaneLineDisplayed
+			   READ isGalacticPlaneLineDisplayed
+			   WRITE setGalacticPlaneLineDisplayed
+			   NOTIFY galacticPlaneLineDisplayedChanged)
+	Q_PROPERTY(Vec3f galacticPlaneLineColor
+			   READ getGalacticPlaneLineColor
+			   WRITE setGalacticPlaneLineColor
+			   NOTIFY galacticPlaneLineColorChanged)
 
 public:
 	GridLinesMgr();
@@ -64,86 +136,105 @@ public:
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Setter and getters
 public slots:
-	//! Set flag for displaying Azimuthal Grid.
-	void setFlagAzimuthalGrid(bool b);
-	//! Get flag for displaying Azimuthal Grid.
-	bool getFlagAzimuthalGrid(void) const;
+	//! Setter for displaying Azimuthal Grid.
+	void setAzimuthalGridDisplayed(const bool displayed);
+	//! Accessor for displaying Azimuthal Grid.
+	bool isAzimuthalGridDisplayed(void) const;
 	//! Get the current color of the Azimuthal Grid.
-	Vec3f getColorAzimuthalGrid(void) const;
+	Vec3f getAzimuthalGridColor(void) const;
 	//! Set the color of the Azimuthal Grid.
-	void setColorAzimuthalGrid(const Vec3f& v);
+	void setAzimuthalGridColor(const Vec3f& newColor);
 
-	//! Set flag for displaying Equatorial Grid.
-	void setFlagEquatorGrid(bool b);
-	//! Get flag for displaying Equatorial Grid.
-	bool getFlagEquatorGrid(void) const;
+	//! Setter for displaying Equatorial Grid.
+	void setEquatorGridDisplayed(const bool displayed);
+	//! Accessor for displaying Equatorial Grid.
+	bool isEquatorGridDisplayed(void) const;
 	//! Get the current color of the Equatorial Grid.
-	Vec3f getColorEquatorGrid(void) const;
+	Vec3f getEquatorGridColor(void) const;
 	//! Set the color of the Equatorial Grid.
-	void setColorEquatorGrid(const Vec3f& v);
+	void setEquatorGridColor(const Vec3f& newColor);
 
-	//! Set flag for displaying Equatorial Grid.
-	void setFlagEquatorJ2000Grid(bool b);
-	//! Get flag for displaying Equatorial Grid.
-	bool getFlagEquatorJ2000Grid(void) const;
+	//! Setter for displaying Equatorial Grid.
+	void setEquatorJ2000GridDisplayed(const bool displayed);
+	//! Accessor for displaying Equatorial Grid.
+	bool isEquatorJ2000GridDisplayed(void) const;
 	//! Get the current color of the Equatorial J2000 Grid.
-	Vec3f getColorEquatorJ2000Grid(void) const;
+	Vec3f getEquatorJ2000GridColor(void) const;
 	//! Set the color of the Equatorial J2000 Grid.
-	void setColorEquatorJ2000Grid(const Vec3f& v);
+	void setEquatorJ2000GridColor(const Vec3f& newColor);
 
-	//! Set flag for displaying Galactic Grid.
-	void setFlagGalacticGrid(bool b);
-	//! Get flag for displaying Galactic Grid.
-	bool getFlagGalacticGrid(void) const;
+	//! Setter for displaying Galactic Grid.
+	void setGalacticGridDisplayed(const bool displayed);
+	//! Accessor for displaying Galactic Grid.
+	bool isGalacticGridDisplayed(void) const;
 	//! Get the current color of the Galactic Grid.
-	Vec3f getColorGalacticGrid(void) const;
+	Vec3f getGalacticGridColor(void) const;
 	//! Set the color of the Galactic Grid.
-	void setColorGalacticGrid(const Vec3f& v);
+	void setGalacticGridColor(const Vec3f& newColor);
 
-	//! Set flag for displaying Equatorial Line.
-	void setFlagEquatorLine(bool b);
-	//! Get flag for displaying Equatorial Line.
-	bool getFlagEquatorLine(void) const;
+	//! Setter for displaying Equatorial Line.
+	void setEquatorLineDisplayed(const bool displayed);
+	//! Accessor for displaying Equatorial Line.
+	bool isEquatorLineDisplayed(void) const;
 	//! Get the current color of the Equatorial Line.
-	Vec3f getColorEquatorLine(void) const;
+	Vec3f getEquatorLineColor(void) const;
 	//! Set the color of the Meridian Line.
-	void setColorEquatorLine(const Vec3f& v);
+	void setEquatorLineColor(const Vec3f& newColor);
 
-	//! Set flag for displaying Ecliptic Line.
-	void setFlagEclipticLine(bool b);
-	//! Get flag for displaying Ecliptic Line.
-	bool getFlagEclipticLine(void) const;
+	//! Setter for displaying Ecliptic Line.
+	void setEclipticLineDisplayed(const bool displayed);
+	//! Accessor for displaying Ecliptic Line.
+	bool isEclipticLineDisplayed(void) const;
 	//! Get the current color of the Ecliptic Line.
-	Vec3f getColorEclipticLine(void) const;
+	Vec3f getEclipticLineColor(void) const;
 	//! Set the color of the Meridian Line.
-	void setColorEclipticLine(const Vec3f& v);
+	void setEclipticLineColor(const Vec3f& newColor);
 
-	//! Set flag for displaying Meridian Line.
-	void setFlagMeridianLine(bool b);
-	//! Get flag for displaying Meridian Line.
-	bool getFlagMeridianLine(void) const;
+	//! Setter for displaying Meridian Line.
+	void setMeridianLineDisplayed(const bool displayed);
+	//! Accessor for displaying Meridian Line.
+	bool isMeridianLineDisplayed(void) const;
 	//! Get the current color of the Meridian Line.
-	Vec3f getColorMeridianLine(void) const;
+	Vec3f getMeridianLineColor(void) const;
 	//! Set the color of the Meridian Line.
-	void setColorMeridianLine(const Vec3f& v);
+	void setMeridianLineColor(const Vec3f& newColor);
 
-	//! Set flag for displaying Horizon Line.
-	void setFlagHorizonLine(bool b);
-	//! Get flag for displaying Horizon Line.
-	bool getFlagHorizonLine(void) const;
+	//! Setter for displaying Horizon Line.
+	void setHorizonLineDisplayed(const bool displayed);
+	//! Accessor for displaying Horizon Line.
+	bool isHorizonLineDisplayed(void) const;
 	//! Get the current color of the Horizon Line.
-	Vec3f getColorHorizonLine(void) const;
+	Vec3f getHorizonLineColor(void) const;
 	//! Set the color of the Horizon Line.
-	void setColorHorizonLine(const Vec3f& v);
+	void setHorizonLineColor(const Vec3f& newColor);
 
-	//! Set flag for displaying GalacticPlane Line.
-	void setFlagGalacticPlaneLine(bool b);
-	//! Get flag for displaying GalacticPlane Line.
-	bool getFlagGalacticPlaneLine(void) const;
+	//! Setter for displaying GalacticPlane Line.
+	void setGalacticPlaneLineDisplayed(const bool displayed);
+	//! Accessor for displaying GalacticPlane Line.
+	bool isGalacticPlaneLineDisplayed(void) const;
 	//! Get the current color of the GalacticPlane Line.
-	Vec3f getColorGalacticPlaneLine(void) const;
+	Vec3f getGalacticPlaneLineColor(void) const;
 	//! Set the color of the GalacticPlane Line.
-	void setColorGalacticPlaneLine(const Vec3f& v);
+	void setGalacticPlaneLineColor(const Vec3f& newColor);
+signals:
+	void azimuthalGridDisplayedChanged(const bool displayed) const;
+	void azimuthalGridColorChanged(const Vec3f& newColor) const;
+	void equatorGridDisplayedChanged(const bool displayed) const;
+	void equatorGridColorChanged(const Vec3f& newColor) const;
+	void equatorJ2000GridDisplayedChanged(const bool displayed) const;
+	void equatorJ2000GridColorChanged(const Vec3f& newColor) const;
+	void galacticGridDisplayedChanged(const bool displayed) const;
+	void galacticGridColorChanged(const Vec3f& newColor) const;
+	void equatorLineDisplayedChanged(const bool displayed) const;
+	void equatorLineColorChanged(const Vec3f& newColor) const;
+	void eclipticLineDisplayedChanged(const bool displayed) const;
+	void eclipticLineColorChanged(const Vec3f& newColor) const;
+	void meridianLineDisplayedChanged(const bool displayed) const;
+	void meridianLineColorChanged(const Vec3f& newColor) const;
+	void horizonLineDisplayedChanged(const bool displayed) const;
+	void horizonLineColorChanged(const Vec3f& newColor) const;
+	void galacticPlaneLineDisplayedChanged(const bool displayed) const;
+	void galacticPlaneLineColorChanged(const Vec3f& newColor) const;
 
 
 private slots:
