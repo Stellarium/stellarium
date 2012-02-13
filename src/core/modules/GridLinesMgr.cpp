@@ -51,8 +51,8 @@ public:
 	const Vec3f& getColor() {return color;}
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
 	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
-	void setFlagshow(bool b){fader = b;}
-	bool getFlagshow(void) const {return fader;}
+	void setDisplayed(const bool displayed){fader = displayed;}
+	bool isDisplayed(void) const {return fader;}
 private:
 	Vec3f color;
 	StelCore::FrameType frameType;
@@ -82,8 +82,8 @@ public:
 	const Vec3f& getColor() {return color;}
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
 	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
-	void setFlagshow(bool b){fader = b;}
-	bool getFlagshow(void) const {return fader;}
+	void setDisplayed(const bool displayed){fader = displayed;}
+	bool isDisplayed(void) const {return fader;}
 	void setFontSize(double newSize);
 	//! Re-translates the label.
 	void updateLabel();
@@ -742,15 +742,15 @@ void GridLinesMgr::updateLineLabels()
 //! Set flag for displaying Azimuthal Grid
 void GridLinesMgr::setAzimuthalGridDisplayed(const bool displayed)
 {
-	if(displayed != aziGrid->getFlagshow()) {
-		aziGrid->setFlagshow(displayed);
+	if(displayed != aziGrid->isDisplayed()) {
+		aziGrid->setDisplayed(displayed);
 		emit azimuthalGridDisplayedChanged(displayed);
 	}
 }
 //! Get flag for displaying Azimuthal Grid
 bool GridLinesMgr::isAzimuthalGridDisplayed(void) const
 {
-	return aziGrid->getFlagshow();
+	return aziGrid->isDisplayed();
 }
 Vec3f GridLinesMgr::getAzimuthalGridColor(void) const
 {
@@ -767,15 +767,15 @@ void GridLinesMgr::setAzimuthalGridColor(const Vec3f& newColor)
 //! Set flag for displaying Equatorial Grid
 void GridLinesMgr::setEquatorGridDisplayed(const bool displayed)
 {
-	if(displayed != equGrid->getFlagshow()) {
-		equGrid->setFlagshow(displayed);
+	if(displayed != equGrid->isDisplayed()) {
+		equGrid->setDisplayed(displayed);
 		emit equatorGridDisplayedChanged(displayed);
 	}
 }
 //! Get flag for displaying Equatorial Grid
 bool GridLinesMgr::isEquatorGridDisplayed(void) const
 {
-	return equGrid->getFlagshow();
+	return equGrid->isDisplayed();
 }
 Vec3f GridLinesMgr::getEquatorGridColor(void) const
 {
@@ -792,15 +792,15 @@ void GridLinesMgr::setEquatorGridColor(const Vec3f& newColor)
 //! Set flag for displaying Equatorial J2000 Grid
 void GridLinesMgr::setEquatorJ2000GridDisplayed(const bool displayed)
 {
-	if(displayed != equJ2000Grid->getFlagshow()) {
-		equJ2000Grid->setFlagshow(displayed);
+	if(displayed != equJ2000Grid->isDisplayed()) {
+		equJ2000Grid->setDisplayed(displayed);
 		emit equatorJ2000GridDisplayedChanged(displayed);
 	}
 }
 //! Get flag for displaying Equatorial J2000 Grid
 bool GridLinesMgr::isEquatorJ2000GridDisplayed(void) const
 {
-	return equJ2000Grid->getFlagshow();
+	return equJ2000Grid->isDisplayed();
 }
 Vec3f GridLinesMgr::getEquatorJ2000GridColor(void) const
 {
@@ -817,15 +817,15 @@ void GridLinesMgr::setEquatorJ2000GridColor(const Vec3f& newColor)
 //! Set flag for displaying Equatorial J2000 Grid
 void GridLinesMgr::setGalacticGridDisplayed(const bool displayed)
 {
-	if(displayed != galacticGrid->getFlagshow()) {
-		galacticGrid->setFlagshow(displayed);
+	if(displayed != galacticGrid->isDisplayed()) {
+		galacticGrid->setDisplayed(displayed);
 		emit galacticGridDisplayedChanged(displayed);
 	}
 }
 //! Get flag for displaying Equatorial J2000 Grid
 bool GridLinesMgr::isGalacticGridDisplayed(void) const
 {
-	return galacticGrid->getFlagshow();
+	return galacticGrid->isDisplayed();
 }
 Vec3f GridLinesMgr::getGalacticGridColor(void) const
 {
@@ -842,15 +842,15 @@ void GridLinesMgr::setGalacticGridColor(const Vec3f& newColor)
 //! Set flag for displaying Equatorial Line
 void GridLinesMgr::setEquatorLineDisplayed(const bool displayed)
 {
-	if(displayed != equatorLine->getFlagshow()) {
-		equatorLine->setFlagshow(displayed);
+	if(displayed != equatorLine->isDisplayed()) {
+		equatorLine->setDisplayed(displayed);
 		emit equatorLineDisplayedChanged(displayed);
 	}
 }
 //! Get flag for displaying Equatorial Line
 bool GridLinesMgr::isEquatorLineDisplayed(void) const
 {
-	return equatorLine->getFlagshow();
+	return equatorLine->isDisplayed();
 }
 Vec3f GridLinesMgr::getEquatorLineColor(void) const
 {
@@ -867,15 +867,15 @@ void GridLinesMgr::setEquatorLineColor(const Vec3f& newColor)
 //! Set flag for displaying Ecliptic Line
 void GridLinesMgr::setEclipticLineDisplayed(const bool displayed)
 {
-	if(displayed != eclipticLine->getFlagshow()) {
-		eclipticLine->setFlagshow(displayed);
+	if(displayed != eclipticLine->isDisplayed()) {
+		eclipticLine->setDisplayed(displayed);
 		emit eclipticLineDisplayedChanged(displayed);
 	}
 }
 //! Get flag for displaying Ecliptic Line
 bool GridLinesMgr::isEclipticLineDisplayed(void) const
 {
-	return eclipticLine->getFlagshow();
+	return eclipticLine->isDisplayed();
 }
 Vec3f GridLinesMgr::getEclipticLineColor(void) const
 {
@@ -893,15 +893,15 @@ void GridLinesMgr::setEclipticLineColor(const Vec3f& newColor)
 //! Set flag for displaying Meridian Line
 void GridLinesMgr::setMeridianLineDisplayed(const bool displayed)
 {
-	if(displayed != meridianLine->getFlagshow()) {
-		meridianLine->setFlagshow(displayed);
+	if(displayed != meridianLine->isDisplayed()) {
+		meridianLine->setDisplayed(displayed);
 		emit meridianLineDisplayedChanged(displayed);
 	}
 }
 //! Get flag for displaying Meridian Line
 bool GridLinesMgr::isMeridianLineDisplayed(void) const
 {
-	return meridianLine->getFlagshow();
+	return meridianLine->isDisplayed();
 }
 Vec3f GridLinesMgr::getMeridianLineColor(void) const
 {
@@ -918,15 +918,15 @@ void GridLinesMgr::setMeridianLineColor(const Vec3f& newColor)
 //! Set flag for displaying Horizon Line
 void GridLinesMgr::setHorizonLineDisplayed(const bool displayed)
 {
-	if(displayed != horizonLine->getFlagshow()) {
-		horizonLine->setFlagshow(displayed);
+	if(displayed != horizonLine->isDisplayed()) {
+		horizonLine->setDisplayed(displayed);
 		emit horizonLineDisplayedChanged(displayed);
 	}
 }
 //! Get flag for displaying Horizon Line
 bool GridLinesMgr::isHorizonLineDisplayed(void) const
 {
-	return horizonLine->getFlagshow();
+	return horizonLine->isDisplayed();
 }
 Vec3f GridLinesMgr::getHorizonLineColor(void) const
 {
@@ -943,15 +943,15 @@ void GridLinesMgr::setHorizonLineColor(const Vec3f& newColor)
 //! Set flag for displaying GalacticPlane Line
 void GridLinesMgr::setGalacticPlaneLineDisplayed(const bool displayed)
 {
-	if(displayed != galacticPlaneLine->getFlagshow()) {
-		galacticPlaneLine->setFlagshow(displayed);
+	if(displayed != galacticPlaneLine->isDisplayed()) {
+		galacticPlaneLine->setDisplayed(displayed);
 		emit galacticPlaneLineDisplayedChanged(displayed);
 	}
 }
 //! Get flag for displaying GalacticPlane Line
 bool GridLinesMgr::isGalacticPlaneLineDisplayed(void) const
 {
-	return galacticPlaneLine->getFlagshow();
+	return galacticPlaneLine->isDisplayed();
 }
 Vec3f GridLinesMgr::getGalacticPlaneLineColor(void) const
 {
