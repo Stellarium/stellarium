@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-02-03 23:33+0700\n"
+"POT-Creation-Date: 2012-02-13 10:58+0700\n"
 "PO-Revision-Date: 2012-01-26 14:00+0000\n"
 "Last-Translator: Ravi Prakash Arya <vedicscience@hotmail.com>\n"
 "Language-Team: Hindi <hi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-04 05:00+0000\n"
-"X-Generator: Launchpad (build 14738)\n"
+"X-Launchpad-Export-Date: 2012-02-13 04:41+0000\n"
+"X-Generator: Launchpad (build 14781)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -55,7 +55,7 @@ msgid "Planet: "
 msgstr "ग्रह: "
 
 #: src/core/modules/Nebula.cpp:96 plugins/Supernovae/src/Supernova.cpp:99
-#: plugins/Quasars/src/Quasar.cpp:92
+#: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:102
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "प्रकार: <b>%1</b>"
@@ -431,7 +431,7 @@ msgstr "राइट-क्लिक"
 msgid "CTRL + Left click"
 msgstr "कंट्रोल + लेफ्ट क्लिक"
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:166
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:167
 msgid "Movement and Selection"
 msgstr "गतिविधि व चयन"
 
@@ -455,15 +455,15 @@ msgstr "चयन को रिक्त करें"
 msgid "When a Script is Running"
 msgstr "जब कोई स्क्रिप्ट कार्यरत हो"
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:145
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:146
 msgid "Slow down the script execution rate"
 msgstr "स्क्रिप्ट की कार्य गती कम करें"
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:146
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:147
 msgid "Speed up the script execution rate"
 msgstr "स्क्रिप्ट की कार्य गती बढ़ाएं"
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:147
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:148
 msgid "Set the normal script execution rate"
 msgstr "स्क्रिप्ट को साधारण गती से चलायें"
 
@@ -535,7 +535,7 @@ msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{फोरम} - दूसरे उपयोगकर्ताओं से स्टेलारियम के बारे में चर्चा करें."
 
 #: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:337
-#: src/gui/HelpDialog.cpp:339 src/gui/StelGui.cpp:173
+#: src/gui/HelpDialog.cpp:339 src/gui/StelGui.cpp:174
 msgid "Miscellaneous"
 msgstr "विविध"
 
@@ -576,281 +576,281 @@ msgstr ""
 msgid "Tester: %1"
 msgstr ""
 
-#: src/gui/StelGui.cpp:100
+#: src/gui/StelGui.cpp:101
 msgid "Display Options"
 msgstr "कंप्यूटर स्क्रीन विकल्प"
 
-#: src/gui/StelGui.cpp:101
+#: src/gui/StelGui.cpp:102
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:267
 msgid "Constellation lines"
 msgstr "तारामंडल की रेखाएं"
 
-#: src/gui/StelGui.cpp:102
+#: src/gui/StelGui.cpp:103
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:277
 msgid "Constellation art"
 msgstr "तारामंडल की चित्रकारी"
 
-#: src/gui/StelGui.cpp:103
+#: src/gui/StelGui.cpp:104
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:272
 msgid "Constellation labels"
 msgstr "तारामंडल की आकृतियों के नाम"
 
-#: src/gui/StelGui.cpp:104
+#: src/gui/StelGui.cpp:105
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:278
 msgid "Constellation boundaries"
 msgstr "तारामंडल की आकृतियों की सीमाएँ"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1121
+#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1121
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:314
 msgid "Azimuthal grid"
 msgstr "ऐज़िमुथल रेखाजाल"
 
-#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1119
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1119
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:319
 msgid "Equatorial grid"
 msgstr "इक्वेटोरिअल रेखाजाल"
 
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1120
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1120
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:324
 msgid "Equatorial J2000 grid"
 msgstr "इक्वेटोरिअल J२००० रेखाजाल"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1122
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1122
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:353
 msgid "Galactic grid"
 msgstr "आकाशगांगेय रेखाजाल"
 
-#: src/gui/StelGui.cpp:110
+#: src/gui/StelGui.cpp:111
 msgid "Galactic plane"
 msgstr ""
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1126
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1126
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:334
 msgid "Ecliptic line"
 msgstr "क्रांतिवृत्त"
 
-#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1123
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1123
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:329
 msgid "Equator line"
 msgstr "खगोलीय भूमध्यरेखा"
 
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1124
+#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1124
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Meridian line"
 msgstr "मध्याह्न रेखा"
 
-#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1125
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1125
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:348
 msgid "Horizon line"
 msgstr ""
 
-#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1128
+#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1128
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:291
 msgid "Cardinal points"
 msgstr "प्रमुख दिशाएं"
 
-#: src/gui/StelGui.cpp:117
+#: src/gui/StelGui.cpp:118
 msgid "Ground"
 msgstr "धरती"
 
-#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1099
+#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1099
 msgid "Atmosphere"
 msgstr "वायुमण्डल"
 
-#: src/gui/StelGui.cpp:119
+#: src/gui/StelGui.cpp:120
 msgid "Fog"
 msgstr "धुंध"
 
-#: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1108
+#: src/gui/StelGui.cpp:122 src/ui_viewDialog.h:1108
 msgid "Nebulas"
 msgstr "निहारिकायें"
 
-#: src/gui/StelGui.cpp:122
+#: src/gui/StelGui.cpp:123
 msgid "Nebulas background images"
 msgstr "निहारिकाओं के पार्श्वभूमी चित्र"
 
-#: src/gui/StelGui.cpp:123 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
+#: src/gui/StelGui.cpp:124 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:233
 msgid "Stars"
 msgstr "तारे"
 
-#: src/gui/StelGui.cpp:124
+#: src/gui/StelGui.cpp:125
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
 msgid "Planet labels"
 msgstr ""
 
-#: src/gui/StelGui.cpp:125
+#: src/gui/StelGui.cpp:126
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:300
 msgid "Planet orbits"
 msgstr "ग्रहों की कक्षा"
 
-#: src/gui/StelGui.cpp:126
+#: src/gui/StelGui.cpp:127
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Planet trails"
 msgstr "ग्रहों के पदचिन्ह"
 
-#: src/gui/StelGui.cpp:128
+#: src/gui/StelGui.cpp:129
 msgid "Night mode"
 msgstr "रात्री उपयोगी मोड"
 
-#: src/gui/StelGui.cpp:129
+#: src/gui/StelGui.cpp:130
 msgid "Full-screen mode"
 msgstr "फुल स्क्रीन मोड"
 
-#: src/gui/StelGui.cpp:130
+#: src/gui/StelGui.cpp:131
 msgid "Flip scene horizontally"
 msgstr "दृश्य को क्षितिज के समांतर दिशा में पलटें"
 
-#: src/gui/StelGui.cpp:131
+#: src/gui/StelGui.cpp:132
 msgid "Flip scene vertically"
 msgstr "दृश्य को लम्बवत पलटें"
 
-#: src/gui/StelGui.cpp:133
+#: src/gui/StelGui.cpp:134
 msgid "Windows"
 msgstr "विभिन्न खिड़कियाँ"
 
-#: src/gui/StelGui.cpp:134
+#: src/gui/StelGui.cpp:135
 msgid "Help window"
 msgstr "सहायता खिडकी"
 
-#: src/gui/StelGui.cpp:135
+#: src/gui/StelGui.cpp:136
 msgid "Configuration window"
 msgstr "विन्यास खिड़की"
 
-#: src/gui/StelGui.cpp:136
+#: src/gui/StelGui.cpp:137
 msgid "Search window"
 msgstr "खोज खिडकी"
 
-#: src/gui/StelGui.cpp:137
+#: src/gui/StelGui.cpp:138
 msgid "Sky and viewing options window"
 msgstr "आकाश व दृश्य व्यवस्था खिडकी"
 
-#: src/gui/StelGui.cpp:138
+#: src/gui/StelGui.cpp:139
 msgid "Date/time window"
 msgstr "तारीख/समय खिडकी"
 
-#: src/gui/StelGui.cpp:139
+#: src/gui/StelGui.cpp:140
 msgid "Location window"
 msgstr "स्थान खिडकी"
 
-#: src/gui/StelGui.cpp:141
+#: src/gui/StelGui.cpp:142
 msgid "Script console window"
 msgstr "स्क्रिप्ट खिडकी"
 
-#: src/gui/StelGui.cpp:144 src/ui_dateTimeDialogGui.h:294
+#: src/gui/StelGui.cpp:145 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:160
 msgid "Date and Time"
 msgstr "तारीख और समय"
 
-#: src/gui/StelGui.cpp:148
+#: src/gui/StelGui.cpp:149
 msgid "Decrease time speed"
 msgstr "समय की गती धीमी करें"
 
-#: src/gui/StelGui.cpp:149
+#: src/gui/StelGui.cpp:150
 msgid "Increase time speed"
 msgstr "समय की गती बढ़ाएं"
 
-#: src/gui/StelGui.cpp:150
+#: src/gui/StelGui.cpp:151
 msgid "Set normal time rate"
 msgstr "सामान्य समय की गती"
 
-#: src/gui/StelGui.cpp:151
+#: src/gui/StelGui.cpp:152
 msgid "Decrease time speed (a little)"
 msgstr "समय की गती धीमी करें (थोड़ी)"
 
-#: src/gui/StelGui.cpp:152
+#: src/gui/StelGui.cpp:153
 msgid "Increase time speed (a little)"
 msgstr "समय की गती बढ़ाएं (थोड़ी)"
 
-#: src/gui/StelGui.cpp:153
+#: src/gui/StelGui.cpp:154
 msgid "Set time rate to zero"
 msgstr "समय की गती को शून्य करें"
 
-#: src/gui/StelGui.cpp:154
+#: src/gui/StelGui.cpp:155
 msgid "Set time to now"
 msgstr "वर्तमान समय लागू' करें"
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:156
 msgid "Add 1 solar hour"
 msgstr "१ सौर घंटा बढ़ाएँ"
 
-#: src/gui/StelGui.cpp:156
+#: src/gui/StelGui.cpp:157
 msgid "Subtract 1 solar hour"
 msgstr "१ सौर घंटा घटाएँ"
 
-#: src/gui/StelGui.cpp:157
+#: src/gui/StelGui.cpp:158
 msgid "Add 1 solar day"
 msgstr "१ सौर दिन बढ़ाएँ"
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:159
 msgid "Subtract 1 solar day"
 msgstr "१ सौर दिन घटाएँ"
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:160
 msgid "Add 1 solar week"
 msgstr "१ सौर सप्ताह बढ़ाएँ"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:161
 msgid "Subtract 1 solar week"
 msgstr "१ सौर सप्ताह घटाएँ"
 
-#: src/gui/StelGui.cpp:161
+#: src/gui/StelGui.cpp:162
 msgid "Add 1 sidereal day"
 msgstr "१ नाक्षत्र दिन बढ़ाएँ"
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:163
 msgid "Subtract 1 sidereal day"
 msgstr "१ नाक्षत्र दिन घटाएँ"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:164
 msgid "Add 1 sidereal week"
 msgstr "१ नाक्षत्र सप्ताह बढ़ाएँ"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:165
 msgid "Subtract 1 sidereal week"
 msgstr "१ नाक्षत्र सप्ताह घटाएँ"
 
-#: src/gui/StelGui.cpp:167
+#: src/gui/StelGui.cpp:168
 msgid "Center on selected object"
 msgstr "चुनी हुई वास्तु पर केंद्रित करें"
 
-#: src/gui/StelGui.cpp:168
+#: src/gui/StelGui.cpp:169
 msgid "Track object"
 msgstr "वस्तु दृश्य रखें"
 
-#: src/gui/StelGui.cpp:169
+#: src/gui/StelGui.cpp:170
 msgid "Zoom in on selected object"
 msgstr "चुनी वस्तु को बड़ा करें"
 
-#: src/gui/StelGui.cpp:170
+#: src/gui/StelGui.cpp:171
 msgid "Zoom out"
 msgstr "आकार छोटा करें"
 
-#: src/gui/StelGui.cpp:171
+#: src/gui/StelGui.cpp:172
 msgid "Set home planet to selected planet"
 msgstr "चुने हुए ग्रह को अपना ग्रह बनाएं"
 
-#: src/gui/StelGui.cpp:174
+#: src/gui/StelGui.cpp:175
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "इक्वेटोरिअल व ऐज़िमुथल माउंट के बीच बदलें"
 
-#: src/gui/StelGui.cpp:175
+#: src/gui/StelGui.cpp:176
 msgid "Quit"
 msgstr "स्टेलारियम बंद करें"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:177
 msgid "Save screenshot"
 msgstr "स्क्रीनशॉट सेव करें"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:179
 msgid "Auto hide horizontal button bar"
 msgstr "सोई बटन तालिका स्वतः अदृश्य करें"
 
-#: src/gui/StelGui.cpp:184
+#: src/gui/StelGui.cpp:180
 msgid "Auto hide vertical button bar"
 msgstr "खड़ी बटन तालिका स्वतः अदृश्य करें"
 
-#: src/gui/StelGui.cpp:185
+#: src/gui/StelGui.cpp:181
 msgid "Toggle visibility of GUI"
 msgstr "GUI को दृश्य / अदृश्य करें"
 
@@ -2661,7 +2661,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:547 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
-#: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
+#: src/ui_configurationDialog.h:855 src/ui_configurationDialog.h:866
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "पर्याय"
@@ -2855,47 +2855,47 @@ msgstr "यह परंपरा प्रारंभ से दिखाए�
 msgid "Visible"
 msgstr "दृश्य"
 
-#: src/ui_configurationDialog.h:752
+#: src/ui_configurationDialog.h:753
 msgid "Configuration"
 msgstr "विन्यास"
 
-#: src/ui_configurationDialog.h:754
+#: src/ui_configurationDialog.h:755
 msgid "Program language"
 msgstr "प्रोग्राम की भाषा"
 
-#: src/ui_configurationDialog.h:755
+#: src/ui_configurationDialog.h:756
 msgid "Selected object information"
 msgstr "चुनी वस्तु की जानकारी देखें"
 
-#: src/ui_configurationDialog.h:757
+#: src/ui_configurationDialog.h:758
 msgid "Display all information available"
 msgstr "पूर्ण जानकारी देखें"
 
-#: src/ui_configurationDialog.h:759
+#: src/ui_configurationDialog.h:760
 msgid "All available"
 msgstr "उपलब्ध सारी"
 
-#: src/ui_configurationDialog.h:761
+#: src/ui_configurationDialog.h:762
 msgid "Display less information"
 msgstr "कम जानकारी देखें"
 
-#: src/ui_configurationDialog.h:763
+#: src/ui_configurationDialog.h:764
 msgid "Short"
 msgstr "थोड़ी सी"
 
-#: src/ui_configurationDialog.h:765
+#: src/ui_configurationDialog.h:766
 msgid "Display no information"
 msgstr "कोई जानकारी न दिखाएँ"
 
-#: src/ui_configurationDialog.h:767
+#: src/ui_configurationDialog.h:768
 msgid "None"
 msgstr "बिलकुल नहीं"
 
-#: src/ui_configurationDialog.h:768
+#: src/ui_configurationDialog.h:769
 msgid "Default options"
 msgstr "शुरूआती विकल्प"
 
-#: src/ui_configurationDialog.h:770
+#: src/ui_configurationDialog.h:771
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -2903,20 +2903,20 @@ msgstr ""
 "इस बार बदले गए विकल्पों को अगली बार स्टेलारियम की शुरुआत में लागू करने के "
 "लिए सेव करें."
 
-#: src/ui_configurationDialog.h:772
+#: src/ui_configurationDialog.h:773
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 msgid "Save settings"
 msgstr "विकल्प सेव करें"
 
-#: src/ui_configurationDialog.h:774
+#: src/ui_configurationDialog.h:775
 msgid "Restore the default settings that came with Stellarium"
 msgstr "स्टेलारियम के साथ आये आरंभिक विकल्प लागु करें"
 
-#: src/ui_configurationDialog.h:776
+#: src/ui_configurationDialog.h:777
 msgid "Restore defaults"
 msgstr "आरंभिक विकल्प लागु करें"
 
-#: src/ui_configurationDialog.h:777
+#: src/ui_configurationDialog.h:778
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -2926,94 +2926,94 @@ msgstr ""
 "वर्तमान विकल्पों में से दृष्टिक्षेत्र व दृश्य की दिशा अगली बार के लिए सेव की "
 "जा रही है."
 
-#: src/ui_configurationDialog.h:779
+#: src/ui_configurationDialog.h:780
 msgid "The width of your view when Stellarium starts"
 msgstr "स्टेलारियम सुरु होते ही दिखने वाले दृश्य की चौड़ाई"
 
-#: src/ui_configurationDialog.h:782
+#: src/ui_configurationDialog.h:783
 msgid "The direction you're looking when Stellarium starts"
 msgstr "स्टेलारियम इस दिशा से शुरू करें"
 
-#: src/ui_configurationDialog.h:784
+#: src/ui_configurationDialog.h:785
 msgid "Control"
 msgstr "संचालन"
 
-#: src/ui_configurationDialog.h:786
+#: src/ui_configurationDialog.h:787
 msgid "Allow keyboard to pan and zoom"
 msgstr "कीबोर्ड से दृश्य घुमाएँ व ज़ूम करें"
 
-#: src/ui_configurationDialog.h:788
+#: src/ui_configurationDialog.h:789
 msgid "Enable keyboard navigation"
 msgstr "कीबोर्ड से आकाश की सैर करें"
 
-#: src/ui_configurationDialog.h:790
+#: src/ui_configurationDialog.h:791
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "माउस से दृश्य घुमाएँ (खिंच कर) तथा ज़ूम करें (स्क्रोल पहिये से)"
 
-#: src/ui_configurationDialog.h:792
+#: src/ui_configurationDialog.h:793
 msgid "Enable mouse navigation"
 msgstr "माउस से आकाश की सैर करें"
 
-#: src/ui_configurationDialog.h:793
+#: src/ui_configurationDialog.h:794
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:179
 msgid "Startup date and time"
 msgstr "प्रारम्भिक तिथि व समय"
 
-#: src/ui_configurationDialog.h:795
+#: src/ui_configurationDialog.h:796
 msgid "Starts Stellarium at system clock date and time"
 msgstr "स्टेलारियम को कंप्यूटर के समय और तिथि के साथ शुरू करें"
 
-#: src/ui_configurationDialog.h:797
+#: src/ui_configurationDialog.h:798
 msgid "System date and time"
 msgstr "कंप्यूटर की तिथि व समय"
 
-#: src/ui_configurationDialog.h:799
+#: src/ui_configurationDialog.h:800
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "अगली बार स्टेलारियम की शुरुआत वर्तमान तिथि के इस समय से करें."
 
-#: src/ui_configurationDialog.h:801
+#: src/ui_configurationDialog.h:802
 msgid "System date at:"
 msgstr "कम्पूटर तिथि का यह समय:"
 
-#: src/ui_configurationDialog.h:803
+#: src/ui_configurationDialog.h:804
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "स्टेलारियम को निर्धारित तिथि और समय में शुरू करें"
 
-#: src/ui_configurationDialog.h:805
+#: src/ui_configurationDialog.h:806
 msgid "Other:"
 msgstr "अन्य:"
 
-#: src/ui_configurationDialog.h:806
+#: src/ui_configurationDialog.h:807
 msgid "use current"
 msgstr "वर्तमानकाल का प्रयोग करें"
 
-#: src/ui_configurationDialog.h:807
+#: src/ui_configurationDialog.h:808
 msgid "Other"
 msgstr "अन्य"
 
-#: src/ui_configurationDialog.h:809
+#: src/ui_configurationDialog.h:810
 msgid "Hides the mouse cursor when inactive"
 msgstr "निष्क्रिय होने पर माउस कर्सर अदृश्य किया जायेगा"
 
-#: src/ui_configurationDialog.h:811
+#: src/ui_configurationDialog.h:812
 msgid "Mouse cursor timeout (seconds):"
 msgstr "माउस कर्सर इतनी देर दिखेगा (सेकंड में):"
 
-#: src/ui_configurationDialog.h:813
+#: src/ui_configurationDialog.h:814
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "दृश्य को लम्बवत व क्षैतिज रूप से पलटने वाली बटन शुरू / बंद करें."
 
-#: src/ui_configurationDialog.h:815
+#: src/ui_configurationDialog.h:816
 msgid "Show flip buttons"
 msgstr "दृश्य पलटने वाली बटन दिखाएँ"
 
-#: src/ui_configurationDialog.h:816
+#: src/ui_configurationDialog.h:817
 msgid "Planetarium options"
 msgstr "ताराघर प्रयोग के विकल्प"
 
-#: src/ui_configurationDialog.h:818
+#: src/ui_configurationDialog.h:819
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -3021,19 +3021,19 @@ msgstr ""
 "गोलाकार दर्पण विरूपण का स्टेलारियम के किसी कम लागत के तारघर में गोलाकार "
 "दर्पण के साथ प्रदर्शन के लिए किया जाता है."
 
-#: src/ui_configurationDialog.h:820
+#: src/ui_configurationDialog.h:821
 msgid "Spheric mirror distortion"
 msgstr "गोलाकार दर्पण विरूपण"
 
-#: src/ui_configurationDialog.h:822
+#: src/ui_configurationDialog.h:823
 msgid "Align labels with the horizon"
 msgstr "नामों को क्षितिज से समांतर लिखें"
 
-#: src/ui_configurationDialog.h:824
+#: src/ui_configurationDialog.h:825
 msgid "Gravity labels"
 msgstr "दृश्य केंद्रित नाम"
 
-#: src/ui_configurationDialog.h:826
+#: src/ui_configurationDialog.h:827
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -3041,105 +3041,105 @@ msgstr ""
 "सक्रिय करने पर \"स्वतः बाहर ज़ूम\" कुंजी ही आरंभिक दृश्य की दिशा भी निर्धारित "
 "करेगी"
 
-#: src/ui_configurationDialog.h:828
+#: src/ui_configurationDialog.h:829
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "स्वतः बाहर ज़ूम होने पर आरंभिक दृश्य की दिशा दिखेगी"
 
-#: src/ui_configurationDialog.h:830
+#: src/ui_configurationDialog.h:831
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "एक केंद्रीय गोल छोड़ अतिरिक्त सारा दृश्य काला करें"
 
-#: src/ui_configurationDialog.h:832
+#: src/ui_configurationDialog.h:833
 msgid "Disc viewport"
 msgstr "चकती जैसा दृश्यपटल"
 
-#: src/ui_configurationDialog.h:834
+#: src/ui_configurationDialog.h:835
 msgid "Hide other constellations when you click one"
 msgstr "एक आकृति चुनते ही दूसरी आकृतियाँ अदृश्य करें"
 
-#: src/ui_configurationDialog.h:836
+#: src/ui_configurationDialog.h:837
 msgid "Select single constellation"
 msgstr "एक आकृति चुने"
 
-#: src/ui_configurationDialog.h:837
+#: src/ui_configurationDialog.h:838
 msgid "Screenshots"
 msgstr "स्क्रीनशॉट"
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:839
 msgid "Screenshot Directory"
 msgstr "स्क्रीनशॉट डायरेक्टरी"
 
-#: src/ui_configurationDialog.h:840
+#: src/ui_configurationDialog.h:841
 msgid "Invert colors"
 msgstr "रंग उल्टे करें"
 
-#: src/ui_configurationDialog.h:841
+#: src/ui_configurationDialog.h:842
 msgid "Star catalog updates"
 msgstr "नवीनतम तारों के कटालोग"
 
-#: src/ui_configurationDialog.h:843
+#: src/ui_configurationDialog.h:844
 msgid "Click here to start downloading"
 msgstr "डाऊनलोड के लिए यहाँ क्लिक करें"
 
-#: src/ui_configurationDialog.h:845
+#: src/ui_configurationDialog.h:846
 msgid "Download this file to view even more stars"
 msgstr "अधिक तारें देखने के लिए यह फाइल डाउनलोड करें"
 
-#: src/ui_configurationDialog.h:847
+#: src/ui_configurationDialog.h:848
 msgid "Restart the download"
 msgstr "डाउनलोड पुनः शुरू करें"
 
-#: src/ui_configurationDialog.h:849
+#: src/ui_configurationDialog.h:850
 msgid "Retry"
 msgstr "फिर से"
 
-#: src/ui_configurationDialog.h:851
+#: src/ui_configurationDialog.h:852
 msgid "Stop the download. You can always restart it later"
 msgstr "डाउन्लोड स्थगित करें. यह बाद में शुरू किया जा सकता है."
 
-#: src/ui_configurationDialog.h:853
+#: src/ui_configurationDialog.h:854
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
 msgid "Cancel"
 msgstr "रद्द करें"
 
-#: src/ui_configurationDialog.h:856
+#: src/ui_configurationDialog.h:857
 msgid "Close window when script runs"
 msgstr "स्क्रिप्ट चलने पर खिडकी बंद करें"
 
-#: src/ui_configurationDialog.h:858
+#: src/ui_configurationDialog.h:859
 msgid "Run the selected script"
 msgstr "चुनी हुई स्क्रिप्ट को चलायें"
 
-#: src/ui_configurationDialog.h:862
+#: src/ui_configurationDialog.h:863
 msgid "Stop a running script"
 msgstr "स्क्रिप्ट चलना बंद करें"
 
-#: src/ui_configurationDialog.h:866
+#: src/ui_configurationDialog.h:867
 msgid "Load at startup"
 msgstr "शुरुआत से इस्तेमाल करें"
 
-#: src/ui_configurationDialog.h:867
+#: src/ui_configurationDialog.h:868
 msgid "configure"
 msgstr "रुचि अनुसार बदलें"
 
-#: src/ui_configurationDialog.h:872
+#: src/ui_configurationDialog.h:873
 msgid "Main"
 msgstr "मुख्य"
 
-#: src/ui_configurationDialog.h:874
+#: src/ui_configurationDialog.h:875
 msgid "Navigation"
 msgstr "भ्रमण"
 
-#: src/ui_configurationDialog.h:876
+#: src/ui_configurationDialog.h:877
 msgid "Tools"
 msgstr "उपकरण"
 
-#: src/ui_configurationDialog.h:878
+#: src/ui_configurationDialog.h:879
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Scripts"
 msgstr "स्क्रिप्ट"
 
-#: src/ui_configurationDialog.h:880
+#: src/ui_configurationDialog.h:881
 msgid "Plugins"
 msgstr "प्लग-इन"
 
@@ -3175,34 +3175,34 @@ msgid ""
 "operation is irreversible."
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:167
+#: src/ui_AtmosphereDialog.h:176
 msgid "Atmosphere Details"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:169
+#: src/ui_AtmosphereDialog.h:178
 msgid "Refraction Settings"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:170
+#: src/ui_AtmosphereDialog.h:179
 msgid "Pressure (mbar):"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:171
+#: src/ui_AtmosphereDialog.h:180
 msgid "Temperature (C):"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:176
+#: src/ui_AtmosphereDialog.h:185
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:178
+#: src/ui_AtmosphereDialog.h:187
 msgid "Extinction Coefficient:"
 msgstr ""
 
-#: src/ui_AtmosphereDialog.h:180
+#: src/ui_AtmosphereDialog.h:189
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
@@ -5148,6 +5148,109 @@ msgstr ""
 #: plugins/Quasars/src/Quasar.cpp:134
 #, qt-format
 msgid "Z (redshift): %1"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsars.cpp:59
+msgid "Pulsars"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsars.cpp:62
+msgid ""
+"This plugin plots the position of various pulsars, with object information "
+"about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
+"1995)."
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:102
+msgid "pulsar"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:109
+#, qt-format
+msgid "Barycentric period: %1 s"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:112
+#, qt-format
+msgid "Distance: %1 kpc (%2 ly)"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:116
+#, qt-format
+msgid "Type of pulsar: %1"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:120
+#, qt-format
+msgid "Equivalent width of the integrated pulse profile: %1 ms"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:124
+#, qt-format
+msgid "Profile width at 50% of peak: %1 ms"
+msgstr ""
+
+#. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
+#: plugins/Pulsars/src/Pulsar.cpp:130 plugins/Pulsars/src/Pulsar.cpp:142
+#: plugins/Pulsars/src/Pulsar.cpp:154
+msgid "Time averaged flux density at"
+msgstr ""
+
+#. TRANSLATORS: Unit of measurement of frequency
+#: plugins/Pulsars/src/Pulsar.cpp:133 plugins/Pulsars/src/Pulsar.cpp:145
+#: plugins/Pulsars/src/Pulsar.cpp:157
+msgid "MHz"
+msgstr ""
+
+#. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
+#: plugins/Pulsars/src/Pulsar.cpp:136 plugins/Pulsars/src/Pulsar.cpp:148
+#: plugins/Pulsars/src/Pulsar.cpp:160
+msgid "mJy"
+msgstr ""
+
+#. TRANSLATORS: Type of pulsar
+#: plugins/Pulsars/src/Pulsar.cpp:232
+msgid "globular cluster association"
+msgstr ""
+
+#. TRANSLATORS: Type of pulsar
+#: plugins/Pulsars/src/Pulsar.cpp:238
+msgid "SNR association"
+msgstr ""
+
+#. TRANSLATORS: Type of pulsar
+#: plugins/Pulsars/src/Pulsar.cpp:244
+msgid "glitches in period"
+msgstr ""
+
+#. TRANSLATORS: Type of pulsar
+#: plugins/Pulsars/src/Pulsar.cpp:250
+msgid "binary or multiple pulsar"
+msgstr ""
+
+#. TRANSLATORS: Type of pulsar
+#: plugins/Pulsars/src/Pulsar.cpp:256
+msgid "millisecond pulsar"
+msgstr ""
+
+#. TRANSLATORS: Type of pulsar
+#: plugins/Pulsars/src/Pulsar.cpp:262
+msgid "recycled pulsar"
+msgstr ""
+
+#. TRANSLATORS: Type of pulsar
+#: plugins/Pulsars/src/Pulsar.cpp:268
+msgid "radio interpulse"
+msgstr ""
+
+#. TRANSLATORS: Type of pulsar
+#: plugins/Pulsars/src/Pulsar.cpp:274
+msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
+msgstr ""
+
+#. TRANSLATORS: Type of pulsar
+#: plugins/Pulsars/src/Pulsar.cpp:280
+msgid "extragalactic (in MC) pulsar"
 msgstr ""
 
 #~ msgid "Date & Time"
