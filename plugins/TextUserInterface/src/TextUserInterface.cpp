@@ -309,32 +309,32 @@ void TextUserInterface::init()
 	TuiNode* m5_10 = new TuiNodeColor(N_("Meridian line"),
 	                                 gridLinesMgr,
 	                                 SLOT(setColorMeridianLine(Vec3f)),
-	                                 gridLinesMgr->getColorMeridianLine(), 
+	                                 gridLinesMgr->getMeridianLineColor(), 
 	                                 m5, m5_9);
 	TuiNode* m5_11 = new TuiNodeColor(N_("Azimuthal grid"),
 	                                 gridLinesMgr,
 	                                 SLOT(setColorAzimuthalGrid(Vec3f)),
-	                                 gridLinesMgr->getColorAzimuthalGrid(), 
+	                                 gridLinesMgr->getAzimuthalGridColor(), 
 	                                 m5, m5_10);
 	TuiNode* m5_12 = new TuiNodeColor(N_("Equatorial grid"),
 	                                 gridLinesMgr,
 	                                 SLOT(setColorEquatorGrid(Vec3f)),
-	                                 gridLinesMgr->getColorEquatorGrid(), 
+	                                 gridLinesMgr->getEquatorGridColor(), 
 	                                 m5, m5_11);
 	TuiNode* m5_13 = new TuiNodeColor(N_("Equatorial J2000 grid"),
 	                                 gridLinesMgr,
 	                                 SLOT(setColorEquatorJ2000Grid(Vec3f)),
-	                                 gridLinesMgr->getColorEquatorJ2000Grid(), 
+	                                 gridLinesMgr->getEquatorJ2000GridColor(), 
 	                                 m5, m5_12);
 	TuiNode* m5_14 = new TuiNodeColor(N_("Equator line"),
 	                                 gridLinesMgr,
 	                                 SLOT(setColorEquatorLine(Vec3f)),
-	                                 gridLinesMgr->getColorEquatorLine(), 
+	                                 gridLinesMgr->getEquatorLineColor(), 
 	                                 m5, m5_13);
 	TuiNode* m5_15 = new TuiNodeColor(N_("Ecliptic line"),
 	                                 gridLinesMgr,
 	                                 SLOT(setColorEclipticLine(Vec3f)),
-	                                 gridLinesMgr->getColorEclipticLine(), 
+	                                 gridLinesMgr->getEclipticLineColor(), 
 					 m5, m5_14);
 	NebulaMgr* nebulaMgr = GETSTELMODULE(NebulaMgr);
 	TuiNode* m5_16 = new TuiNodeColor(N_("Nebula names"),
@@ -348,17 +348,17 @@ void TextUserInterface::init()
 	TuiNode* m5_18 = new TuiNodeColor(N_("Horizon line"),
 					 gridLinesMgr,
 					 SLOT(setColorHorizonLine(Vec3f)),
-					 gridLinesMgr->getColorHorizonLine(),
+					 gridLinesMgr->getHorizonLineColor(),
 					 m5, m5_17);
 	TuiNode* m5_19 = new TuiNodeColor(N_("Galactic grid"),
 					 gridLinesMgr,
 					 SLOT(setColorGalacticGrid(Vec3f)),
-					 gridLinesMgr->getColorGalacticGrid(),
+					 gridLinesMgr->getGalacticGridColor(),
 					 m5, m5_18);
 	TuiNode* m5_20 = new TuiNodeColor(N_("Galactic plane line"),
 					 gridLinesMgr,
 					 SLOT(setColorGalacticPlaneLine(Vec3f)),
-					 gridLinesMgr->getColorGalacticPlaneLine(),
+					 gridLinesMgr->getGalacticPlaneLineColor(),
 					 m5, m5_19);
 
 	m5_1->setNextNode(m5_2);
@@ -696,12 +696,12 @@ void TextUserInterface::saveDefaultSettings(void)
 	conf->setValue("color/planet_names_color", colToConf(ssmgr->getLabelsColor()));
 	conf->setValue("color/planet_orbits_color", colToConf(ssmgr->getOrbitsColor()));
 	conf->setValue("color/object_trails_color", colToConf(ssmgr->getTrailsColor()));
-	conf->setValue("color/meridian_color", colToConf(glmgr->getColorMeridianLine()));
-	conf->setValue("color/azimuthal_color", colToConf(glmgr->getColorAzimuthalGrid()));
-	conf->setValue("color/equator_color", colToConf(glmgr->getColorEquatorGrid()));
-	conf->setValue("color/equatorial_J2000_color", colToConf(glmgr->getColorEquatorJ2000Grid()));
-	conf->setValue("color/equator_color", colToConf(glmgr->getColorEquatorLine()));
-	conf->setValue("color/ecliptic_color", colToConf(glmgr->getColorEclipticLine()));
+	conf->setValue("color/meridian_color", colToConf(glmgr->getMeridianLineColor()));
+	conf->setValue("color/azimuthal_color", colToConf(glmgr->getAzimuthalGridColor()));
+	conf->setValue("color/equator_color", colToConf(glmgr->getEquatorGridColor()));
+	conf->setValue("color/equatorial_J2000_color", colToConf(glmgr->getEquatorJ2000GridColor()));
+	conf->setValue("color/equator_color", colToConf(glmgr->getEquatorLineColor()));
+	conf->setValue("color/ecliptic_color", colToConf(glmgr->getEclipticLineColor()));
 	conf->setValue("color/nebula_label_color", colToConf(nmgr->getLabelsColor()));
 	conf->setValue("color/nebula_circle_color", colToConf(nmgr->getCirclesColor()));
 

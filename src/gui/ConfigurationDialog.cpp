@@ -381,15 +381,15 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/meteor_rate", mmgr->getZHR());
 
 	// view dialog / markings tab settings
-	conf->setValue("viewing/flag_azimuthal_grid", glmgr->getFlagAzimuthalGrid());
-	conf->setValue("viewing/flag_equatorial_grid", glmgr->getFlagEquatorGrid());
-	conf->setValue("viewing/flag_equator_line", glmgr->getFlagEquatorLine());
-	conf->setValue("viewing/flag_ecliptic_line", glmgr->getFlagEclipticLine());
-	conf->setValue("viewing/flag_meridian_line", glmgr->getFlagMeridianLine());
-	conf->setValue("viewing/flag_horizon_line", glmgr->getFlagHorizonLine());
-	conf->setValue("viewing/flag_equatorial_J2000_grid", glmgr->getFlagEquatorJ2000Grid());
-	conf->setValue("viewing/flag_galactic_grid", glmgr->getFlagGalacticGrid());
-	conf->setValue("viewing/flag_galactic_plane_line", glmgr->getFlagGalacticPlaneLine());
+	conf->setValue("viewing/flag_azimuthal_grid", glmgr->isAzimuthalGridDisplayed());
+	conf->setValue("viewing/flag_equatorial_grid", glmgr->isEquatorGridDisplayed());
+	conf->setValue("viewing/flag_equator_line", glmgr->isEquatorLineDisplayed());
+	conf->setValue("viewing/flag_ecliptic_line", glmgr->isEclipticLineDisplayed());
+	conf->setValue("viewing/flag_meridian_line", glmgr->isMeridianLineDisplayed());
+	conf->setValue("viewing/flag_horizon_line", glmgr->isHorizonLineDisplayed());
+	conf->setValue("viewing/flag_equatorial_J2000_grid", glmgr->isEquatorJ2000GridDisplayed());
+	conf->setValue("viewing/flag_galactic_grid", glmgr->isGalacticGridDisplayed());
+	conf->setValue("viewing/flag_galactic_plane_line", glmgr->isGalacticPlaneLineDisplayed());
 	conf->setValue("viewing/flag_cardinal_points", lmgr->getFlagCardinalsPoints());
 	conf->setValue("viewing/flag_constellation_drawing", cmgr->getFlagLines());
 	conf->setValue("viewing/flag_constellation_name", cmgr->getFlagLabels());
