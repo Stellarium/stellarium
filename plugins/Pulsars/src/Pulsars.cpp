@@ -59,7 +59,7 @@ StelPluginInfo PulsarsStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Pulsars");
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
-	info.description = N_("This plugin plots the position of various pulsars, with object information about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ 1995).");
+	info.description = N_("This plugin plots the position of various pulsars, with object information about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ 1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\"");
 	return info;
 }
 
@@ -354,7 +354,7 @@ void Pulsars::setPSRMap(const QVariantMap& map)
 	foreach(QString psrKey, psrMap.keys())
 	{
 		QVariantMap psrData = psrMap.value(psrKey).toMap();
-		psrData["designation"] = QString("PSR J%1").arg(psrKey);
+		psrData["designation"] = psrKey;
 
 		PulsarP pulsar(new Pulsar(psrData));
 		if (pulsar->initialized)
