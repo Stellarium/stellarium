@@ -85,6 +85,7 @@ Pulsars::~Pulsars()
 
 void Pulsars::deinit()
 {
+	psr.clear();
 	Pulsar::markerTexture.clear();
 	texPointer.clear();
 }
