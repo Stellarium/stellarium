@@ -37,7 +37,7 @@ public:
 	//! Notify that the application style changed
 	void styleChanged();
 public slots:
-	void languageChanged();
+	void retranslate();
 	//! update the editing display with new JD.
 	void setDateTime(double newJd);
 

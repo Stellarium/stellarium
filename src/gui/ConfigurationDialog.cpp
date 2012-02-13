@@ -71,7 +71,7 @@ ConfigurationDialog::~ConfigurationDialog()
 	delete ui;
 }
 
-void ConfigurationDialog::languageChanged()
+void ConfigurationDialog::retranslate()
 {
 	if (dialog) {
 		ui->retranslateUi(dialog);
@@ -110,7 +110,7 @@ void ConfigurationDialog::createDialogContent()
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 
 	ui->setupUi(dialog);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	// Set the main tab activated by default
 	ui->configurationStackedWidget->setCurrentIndex(0);
@@ -135,7 +135,7 @@ void ConfigurationDialog::createDialogContent()
 	}
 	if (lt!=-1)
 		cb->setCurrentIndex(lt);
-	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
+	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectLanguage(const QString&)));
 
 	connect(ui->getStarsButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
@@ -239,7 +239,7 @@ void ConfigurationDialog::createDialogContent()
 	updateConfigLabels();
 }
 
-void ConfigurationDialog::languageChanged(const QString& langName)
+void ConfigurationDialog::selectLanguage(const QString& langName)
 {
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);

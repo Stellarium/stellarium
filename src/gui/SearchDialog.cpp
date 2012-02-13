@@ -168,7 +168,7 @@ SearchDialog::~SearchDialog()
 	}
 }
 
-void SearchDialog::languageChanged()
+void SearchDialog::retranslate()
 {
 	if (dialog)
 	{
@@ -187,7 +187,7 @@ void SearchDialog::styleChanged()
 void SearchDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)),
 		this, SLOT(onSearchTextChanged(const QString&)));

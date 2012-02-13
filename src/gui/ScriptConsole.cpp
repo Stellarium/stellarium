@@ -47,7 +47,7 @@ ScriptConsole::~ScriptConsole()
 	delete ui;
 }
 
-void ScriptConsole::languageChanged()
+void ScriptConsole::retranslate()
 {
 	if (dialog)
 		ui->retranslateUi(dialog);
@@ -65,7 +65,7 @@ void ScriptConsole::styleChanged()
 void ScriptConsole::createDialogContent()
 {
 	ui->setupUi(dialog);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	highlighter = new StelScriptSyntaxHighlighter(ui->scriptEdit->document());
 	ui->includeEdit->setText(StelFileMgr::getInstallationDir() + "/scripts");
