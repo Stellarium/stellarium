@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-13 10:58+0700\n"
-"PO-Revision-Date: 2012-02-04 16:51+0000\n"
-"Last-Translator: Anthony Harrington <untaintableangel@hotmail.co.uk>\n"
+"POT-Creation-Date: 2012-02-13 12:32+0700\n"
+"PO-Revision-Date: 2012-02-13 15:31+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-13 04:46+0000\n"
+"X-Launchpad-Export-Date: 2012-02-14 05:40+0000\n"
 "X-Generator: Launchpad (build 14781)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -5296,106 +5296,109 @@ msgstr "Z (redshift): %1"
 
 #: plugins/Pulsars/src/Pulsars.cpp:59
 msgid "Pulsars"
-msgstr ""
+msgstr "Pulsars"
 
 #: plugins/Pulsars/src/Pulsars.cpp:62
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
-"1995)."
+"1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
 msgstr ""
+"This plugin plots the position of various pulsars, with object information "
+"about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
+"1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
 
 #: plugins/Pulsars/src/Pulsar.cpp:102
 msgid "pulsar"
-msgstr ""
+msgstr "pulsar"
 
 #: plugins/Pulsars/src/Pulsar.cpp:109
 #, qt-format
 msgid "Barycentric period: %1 s"
-msgstr ""
+msgstr "Barycentric period: %1 s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:112
 #, qt-format
 msgid "Distance: %1 kpc (%2 ly)"
-msgstr ""
+msgstr "Distance: %1 kpc (%2 ly)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:116
 #, qt-format
 msgid "Type of pulsar: %1"
-msgstr ""
+msgstr "Type of pulsar: %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:120
 #, qt-format
 msgid "Equivalent width of the integrated pulse profile: %1 ms"
-msgstr ""
+msgstr "Equivalent width of the integrated pulse profile: %1 ms"
 
 #: plugins/Pulsars/src/Pulsar.cpp:124
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
-msgstr ""
+msgstr "Profile width at 50% of peak: %1 ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:130 plugins/Pulsars/src/Pulsar.cpp:142
 #: plugins/Pulsars/src/Pulsar.cpp:154
 msgid "Time averaged flux density at"
-msgstr ""
+msgstr "Time averaged flux density at"
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Pulsars/src/Pulsar.cpp:133 plugins/Pulsars/src/Pulsar.cpp:145
 #: plugins/Pulsars/src/Pulsar.cpp:157
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:136 plugins/Pulsars/src/Pulsar.cpp:148
 #: plugins/Pulsars/src/Pulsar.cpp:160
 msgid "mJy"
-msgstr ""
+msgstr "mJy"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:232
 msgid "globular cluster association"
-msgstr ""
+msgstr "globular cluster association"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:238
 msgid "SNR association"
-msgstr ""
+msgstr "SNR association"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:244
 msgid "glitches in period"
-msgstr ""
+msgstr "glitches in period"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:250
 msgid "binary or multiple pulsar"
-msgstr ""
+msgstr "binary or multiple pulsar"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:256
 msgid "millisecond pulsar"
-msgstr ""
+msgstr "millisecond pulsar"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:262
 msgid "recycled pulsar"
-msgstr ""
+msgstr "recycled pulsar"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:268
 msgid "radio interpulse"
-msgstr ""
+msgstr "radio interpulse"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:274
 msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
-msgstr ""
+msgstr "optical, X-ray or Gamma-ray pulsed emission (high energy)"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
-msgstr ""
+msgstr "extragalactic (in MC) pulsar"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Equatorial Grid"
