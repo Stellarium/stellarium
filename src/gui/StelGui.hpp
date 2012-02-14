@@ -176,6 +176,11 @@ private slots:
 	void meridianLineDisplayedUpdated(const bool displayed);
 	void horizonLineDisplayedUpdated(const bool displayed);
 	void galacticPlaneLineDisplayedUpdated(const bool displayed);
+	//! Process changes from the LandscapeMgr
+	void atmosphereDisplayedUpdated(const bool displayed);
+	void cardinalsPointsDisplayedUpdated(const bool displayed);
+	void fogDisplayedUpdated(const bool displayed);
+	void landscapeDisplayedUpdated(const bool displayed);
 
 private:
 	QGraphicsWidget* topLevelGraphicsWidget;
@@ -219,6 +224,9 @@ private:
 
 	// This method is used by init() to initialize the GridLineMgr instance.
 	void initGrindLineMgr();
+
+	// This method is used by init() to initialize the LandscapeMgr instance.
+	void initLandscapeMgr();
 };
 
 //! Allow to load the GUI as a static plugin
