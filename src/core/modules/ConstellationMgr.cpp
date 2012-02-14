@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,10 +47,10 @@ using namespace std;
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars) :
 	hipStarMgr(_hip_stars),
-	flagNames(0),
-	flagLines(0),
-	flagArt(0),
-	flagBoundaries(0)
+	artDisplayed(0),
+	boundariesDisplayed(0),
+	linesDisplayed(0),
+	namesDisplayed(0)
 {
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
@@ -81,13 +82,13 @@ void ConstellationMgr::init()
 
 	lastLoadedSkyCulture = "dummy";
 	asterFont.setPixelSize(conf->value("viewing/constellation_font_size", 16).toInt());
-	setFlagLines(conf->value("viewing/flag_constellation_drawing").toBool());
-	setFlagLabels(conf->value("viewing/flag_constellation_name").toBool());
-	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries",false).toBool());
+	setLinesDisplayed(conf->value("viewing/flag_constellation_drawing").toBool());
+	setNamesDisplayed(conf->value("viewing/flag_constellation_name").toBool());
+	setBoundariesDisplayed(conf->value("viewing/flag_constellation_boundaries",false).toBool());
 	setArtIntensity(conf->value("viewing/constellation_art_intensity", 0.5f).toFloat());
 	setArtFadeDuration(conf->value("viewing/constellation_art_fade_duration",2.f).toFloat());
-	setFlagArt(conf->value("viewing/flag_constellation_art").toBool());
-	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected",
+	setArtDisplayed(conf->value("viewing/flag_constellation_art").toBool());
+	setIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected",
 						   conf->value("viewing/flag_constellation_pick", false).toBool() ).toBool());
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
@@ -171,7 +172,7 @@ void ConstellationMgr::setStelStyle(const QString& section)
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setLinesColor(StelUtils::strToVec3f(conf->value(section+"/const_lines_color", defaultColor).toString()));
 	setBoundariesColor(StelUtils::strToVec3f(conf->value(section+"/const_boundary_color", "0.8,0.3,0.3").toString()));
-	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/const_names_color", defaultColor).toString()));
+	setNamesColor(StelUtils::strToVec3f(conf->value(section+"/const_names_color", defaultColor).toString()));
 }
 
 void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction action)
@@ -237,9 +238,12 @@ void ConstellationMgr::deselectConstellations(void)
 	omgr->setSelectedObject(newSelection, StelModule::ReplaceSelection);
 }
 
-void ConstellationMgr::setLinesColor(const Vec3f& c)
+void ConstellationMgr::setLinesColor(const Vec3f& color)
 {
-	Constellation::lineColor = c;
+	if (color != Constellation::lineColor) {
+		Constellation::lineColor = color;
+		emit linesColorChanged(color);
+	}
 }
 
 Vec3f ConstellationMgr::getLinesColor() const
@@ -247,9 +251,12 @@ Vec3f ConstellationMgr::getLinesColor() const
 	return Constellation::lineColor;
 }
 
-void ConstellationMgr::setBoundariesColor(const Vec3f& c)
+void ConstellationMgr::setBoundariesColor(const Vec3f& color)
 {
-	Constellation::boundaryColor = c;
+	if (Constellation::boundaryColor != color) {
+		Constellation::boundaryColor = color;
+		emit boundariesColorChanged(color);
+	}
 }
 
 Vec3f ConstellationMgr::getBoundariesColor() const
@@ -257,19 +264,25 @@ Vec3f ConstellationMgr::getBoundariesColor() const
 	return Constellation::boundaryColor;
 }
 
-void ConstellationMgr::setLabelsColor(const Vec3f& c)
+void ConstellationMgr::setNamesColor(const Vec3f& color)
 {
-	Constellation::labelColor = c;
+	if (Constellation::labelColor != color) {
+		Constellation::labelColor = color;
+		emit namesColorChanged(color);
+	}
 }
 
-Vec3f ConstellationMgr::getLabelsColor() const
+Vec3f ConstellationMgr::getNamesColor() const
 {
 	return Constellation::labelColor;
 }
 
-void ConstellationMgr::setFontSize(float newFontSize)
+void ConstellationMgr::setFontSize(const float newFontSize)
 {
-	asterFont.setPixelSize(newFontSize);
+	if (asterFont.pixelSize() != newFontSize) {
+		asterFont.setPixelSize(newFontSize);
+		emit fontSizeChanged(newFontSize);
+	}
 }
 
 float ConstellationMgr::getFontSize() const
@@ -319,7 +332,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		cons = new Constellation;
 		if(cons->read(record, hipStarMgr))
 		{
-			cons->artFader.setMaxValue(artMaxIntensity);
+			cons->artFader.setMaxValue(artIntensity);
 			asterisms.push_back(cons);
 			++readOk;
 		}
@@ -333,10 +346,10 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "constellation records successfully for culture" << cultureName;
 
 	// Set current states
-	setFlagArt(flagArt);
-	setFlagLines(flagLines);
-	setFlagLabels(flagNames);
-	setFlagBoundaries(flagBoundaries);
+	setArtDisplayed(artDisplayed);
+	setLinesDisplayed(linesDisplayed);
+	setNamesDisplayed(namesDisplayed);
+	setBoundariesDisplayed(boundariesDisplayed);
 
 	// It's possible to have no art - just constellations
 	if (artfileName.isNull() || artfileName.isEmpty())
@@ -673,108 +686,157 @@ void ConstellationMgr::update(double deltaTime)
 }
 
 
-void ConstellationMgr::setArtIntensity(double _max)
+void ConstellationMgr::setArtIntensity(const double intensity)
 {
-	artMaxIntensity = _max;
-	vector < Constellation * >::const_iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-		(*iter)->artFader.setMaxValue(_max);
-}
-
-void ConstellationMgr::setArtFadeDuration(float duration)
-{
-	artFadeDuration = duration;
-	vector < Constellation * >::const_iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-		(*iter)->artFader.setDuration((int) (duration * 1000.f));
-}
-
-void ConstellationMgr::setFlagLines(bool b)
-{
-	flagLines = b;
-	if (selected.begin() != selected.end()  && isolateSelected)
-	{
+	if (artIntensity != intensity) {
+		artIntensity = intensity;
 		vector < Constellation * >::const_iterator iter;
-		for (iter = selected.begin(); iter != selected.end(); ++iter)
-			(*iter)->setFlagLines(b);
-	}
-	else
-	{
-		vector < Constellation * >::const_iterator iter;
-		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-			(*iter)->setFlagLines(b);
-	}
-}
-
-void ConstellationMgr::setFlagBoundaries(bool b)
-{
-	flagBoundaries = b;
-	if (selected.begin() != selected.end() && isolateSelected)
-	{
-		vector < Constellation * >::const_iterator iter;
-		for (iter = selected.begin(); iter != selected.end(); ++iter)
-			(*iter)->setFlagBoundaries(b);
-	}
-	else
-	{
-		vector < Constellation * >::const_iterator iter;
-		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-			(*iter)->setFlagBoundaries(b);
-	}
-}
-
-void ConstellationMgr::setFlagArt(bool b)
-{
-	flagArt = b;
-	if (selected.begin() != selected.end() && isolateSelected)
-	{
-		vector < Constellation * >::const_iterator iter;
-		for (iter = selected.begin(); iter != selected.end(); ++iter)
-			(*iter)->setFlagArt(b);
-	}
-	else
-	{
-		vector < Constellation * >::const_iterator iter;
-		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-			(*iter)->setFlagArt(b);
-	}
-}
-
-
-void ConstellationMgr::setFlagLabels(bool b)
-{
-	flagNames = b;
-	if (selected.begin() != selected.end() && isolateSelected)
-	{
-		vector < Constellation * >::const_iterator iter;
-		for (iter = selected.begin(); iter != selected.end(); ++iter)
-			(*iter)->setFlagName(b);
-	}
-	else
-	{
-		vector < Constellation * >::const_iterator iter;
-		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-			(*iter)->setFlagName(b);
-	}
-}
-
-void ConstellationMgr::setFlagIsolateSelected(bool s)
-{
-	isolateSelected = s;
-
-	// when turning off isolated selection mode, clear exisiting isolated selections.
-	if (!s)
-	{
-		vector < Constellation * >::const_iterator iter;
-		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-		{
-			(*iter)->setFlagLines(getFlagLines());
-			(*iter)->setFlagName(getFlagLabels());
-			(*iter)->setFlagArt(getFlagArt());
-			(*iter)->setFlagBoundaries(getFlagBoundaries());
+		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter) {
+			(*iter)->artFader.setMaxValue(artIntensity);
 		}
+		emit artIntensityChanged(intensity);
 	}
 }
+double ConstellationMgr::getArtIntensity() const
+{
+	return artIntensity;
+}
+
+void ConstellationMgr::setArtFadeDuration(const float duration)
+{
+	if(artFadeDuration != duration) {
+		artFadeDuration = duration;
+		vector < Constellation * >::const_iterator iter;
+		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter) {
+			(*iter)->artFader.setDuration((int) (duration * 1000.f));
+		}
+		emit artFadeDurationChanged(duration);
+	}
+}
+float ConstellationMgr::getArtFadeDuration() const
+{
+	return artFadeDuration;
+}
+
+void ConstellationMgr::setLinesDisplayed(const bool displayed)
+{
+	if(linesDisplayed != displayed) {
+		linesDisplayed = displayed;
+		if (selected.begin() != selected.end()  && isolateSelected) {
+			vector < Constellation * >::const_iterator iter;
+			for (iter = selected.begin(); iter != selected.end(); ++iter) {
+				(*iter)->setLinesDisplayed(linesDisplayed);
+			}
+		} else {
+			vector < Constellation * >::const_iterator iter;
+			for (iter = asterisms.begin(); iter != asterisms.end(); ++iter) {
+				(*iter)->setLinesDisplayed(linesDisplayed);
+			}
+		}
+		emit linesDisplayedChanged(displayed);
+	}
+}
+
+bool ConstellationMgr::isLinesDisplayed(void) const
+{
+	return linesDisplayed;
+}
+
+
+void ConstellationMgr::setBoundariesDisplayed(const bool displayed)
+{
+	if (boundariesDisplayed != displayed) {
+		boundariesDisplayed = displayed;
+		if (selected.begin() != selected.end() && isolateSelected) {
+			vector < Constellation * >::const_iterator iter;
+			for (iter = selected.begin(); iter != selected.end(); ++iter) {
+				(*iter)->setBoundariesDisplayed(boundariesDisplayed);
+			}
+		} else {
+			vector < Constellation * >::const_iterator iter;
+			for (iter = asterisms.begin(); iter != asterisms.end(); ++iter) {
+				(*iter)->setBoundariesDisplayed(boundariesDisplayed);
+			}
+		}
+		emit boundariesDisplayedChanged(displayed);
+	}
+}
+
+bool ConstellationMgr::isBoundariesDisplayed(void) const
+{
+	return boundariesDisplayed;
+}
+
+void ConstellationMgr::setArtDisplayed(const bool displayed)
+{
+	if (artDisplayed != displayed) {
+		artDisplayed = displayed;
+		if (selected.begin() != selected.end() && isolateSelected) {
+			vector < Constellation * >::const_iterator iter;
+			for (iter = selected.begin(); iter != selected.end(); ++iter) {
+				(*iter)->setArtDisplayed(artDisplayed);
+			}
+		} else {
+			vector < Constellation * >::const_iterator iter;
+			for (iter = asterisms.begin(); iter != asterisms.end(); ++iter) {
+				(*iter)->setArtDisplayed(artDisplayed);
+			}
+		}
+		emit artDisplayedChanged(displayed);
+	}
+}
+bool ConstellationMgr::isArtDisplayed(void) const
+{
+	return artDisplayed;
+}
+
+
+void ConstellationMgr::setNamesDisplayed(bool displayed)
+{
+	if (namesDisplayed != displayed) {
+		namesDisplayed = displayed;
+		if (selected.begin() != selected.end() && isolateSelected) {
+			vector < Constellation * >::const_iterator iter;
+			for (iter = selected.begin(); iter != selected.end(); ++iter)
+				(*iter)->setNamesDisplayed(namesDisplayed);
+		} else {
+			vector < Constellation * >::const_iterator iter;
+			for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+				(*iter)->setNamesDisplayed(namesDisplayed);
+		}
+		emit namesDisplayedChanged(displayed);
+	}
+}
+bool ConstellationMgr::isNamesDisplayed(void) const
+{
+	return namesDisplayed;
+}
+
+
+void ConstellationMgr::setIsolateSelected(const bool isolate)
+{
+	if (isolateSelected != isolate) {
+		isolateSelected = isolate;
+
+		// when turning off isolated selection mode, clear exisiting isolated selections.
+		if (!isolateSelected) {
+			vector < Constellation * >::const_iterator iter;
+			for (iter = asterisms.begin(); iter != asterisms.end(); ++iter) {
+				(*iter)->setLinesDisplayed(isLinesDisplayed());
+				(*iter)->setNamesDisplayed(isNamesDisplayed());
+				(*iter)->setArtDisplayed(isArtDisplayed());
+				(*iter)->setBoundariesDisplayed(isBoundariesDisplayed());
+			}
+		}
+		emit isolateSelectedChanged(isolate);
+	}
+}
+
+bool ConstellationMgr::isIsolateSelected(void) const
+{
+	return isolateSelected;
+}
+
 
 StelObject* ConstellationMgr::getSelected(void) const {
 	return *selected.begin();  // TODO return all or just remove this method
@@ -804,10 +866,10 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 		selected.push_back(c);
 
 		// Propagate current settings to newly selected constellation
-		c->setFlagLines(getFlagLines());
-		c->setFlagName(getFlagLabels());
-		c->setFlagArt(getFlagArt());
-		c->setFlagBoundaries(getFlagBoundaries());
+		c->setLinesDisplayed(isLinesDisplayed());
+		c->setNamesDisplayed(isNamesDisplayed());
+		c->setArtDisplayed(isArtDisplayed());
+		c->setBoundariesDisplayed(isBoundariesDisplayed());
 
 		if (isolateSelected)
 		{
@@ -829,10 +891,10 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 				if(!match)
 				{
 					// Not selected constellation
-					(*iter)->setFlagLines(false);
-					(*iter)->setFlagName(false);
-					(*iter)->setFlagArt(false);
-					(*iter)->setFlagBoundaries(false);
+					(*iter)->setLinesDisplayed(false);
+					(*iter)->setNamesDisplayed(false);
+					(*iter)->setArtDisplayed(false);
+					(*iter)->setBoundariesDisplayed(false);
 					}
 					}
 			Constellation::singleSelected = true;  // For boundaries
@@ -848,10 +910,10 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 		vector < Constellation * >::const_iterator iter;
 		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 		{
-			(*iter)->setFlagLines(getFlagLines());
-			(*iter)->setFlagName(getFlagLabels());
-			(*iter)->setFlagArt(getFlagArt());
-			(*iter)->setFlagBoundaries(getFlagBoundaries());
+			(*iter)->setLinesDisplayed(isLinesDisplayed());
+			(*iter)->setNamesDisplayed(isNamesDisplayed());
+			(*iter)->setArtDisplayed(isArtDisplayed());
+			(*iter)->setBoundariesDisplayed(isBoundariesDisplayed());
 		}
 
 		// And remove all selections
@@ -887,10 +949,10 @@ void ConstellationMgr::unsetSelectedConst(Constellation * c)
 			// Otherwise apply standard flags to all constellations
 			for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 			{
-				(*iter)->setFlagLines(getFlagLines());
-				(*iter)->setFlagName(getFlagLabels());
-				(*iter)->setFlagArt(getFlagArt());
-				(*iter)->setFlagBoundaries(getFlagBoundaries());
+				(*iter)->setLinesDisplayed(isLinesDisplayed());
+				(*iter)->setNamesDisplayed(isNamesDisplayed());
+				(*iter)->setArtDisplayed(isArtDisplayed());
+				(*iter)->setBoundariesDisplayed(isBoundariesDisplayed());
 			}
 
 			Constellation::singleSelected = false; // For boundaries
@@ -898,10 +960,10 @@ void ConstellationMgr::unsetSelectedConst(Constellation * c)
 		} else if(isolateSelected) {
 
 			// No longer selected constellation
-			c->setFlagLines(false);
-			c->setFlagName(false);
-			c->setFlagArt(false);
-			c->setFlagBoundaries(false);
+			c->setLinesDisplayed(false);
+			c->setNamesDisplayed(false);
+			c->setArtDisplayed(false);
+			c->setBoundariesDisplayed(false);
 
 			Constellation::singleSelected = true;  // For boundaries
 		}

@@ -185,16 +185,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	// Connect all the GUI actions signals with the Core of Stellarium
 	connect(getGuiActions("actionQuit_Global"), SIGNAL(triggered()), this, SLOT(quit()));
 
-	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
-	connect(getGuiActions("actionShow_Constellation_Lines"), SIGNAL(toggled(bool)), cmgr, SLOT(setFlagLines(bool)));
-	getGuiActions("actionShow_Constellation_Lines")->setChecked(cmgr->getFlagLines());
-	connect(getGuiActions("actionShow_Constellation_Art"), SIGNAL(toggled(bool)), cmgr, SLOT(setFlagArt(bool)));
-	getGuiActions("actionShow_Constellation_Art")->setChecked(cmgr->getFlagArt());
-	connect(getGuiActions("actionShow_Constellation_Labels"), SIGNAL(toggled(bool)), cmgr, SLOT(setFlagLabels(bool)));
-	getGuiActions("actionShow_Constellation_Labels")->setChecked(cmgr->getFlagLabels());
-	connect(getGuiActions("actionShow_Constellation_Boundaries"), SIGNAL(toggled(bool)), cmgr, SLOT(setFlagBoundaries(bool)));
-	getGuiActions("actionShow_Constellation_Boundaries")->setChecked(cmgr->getFlagBoundaries());
-
+	initConstellationMgr();
 	initGrindLineMgr();
 
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
@@ -479,6 +470,50 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	initDone = true;
 }
 
+void StelGui::initConstellationMgr()
+{
+	ConstellationMgr* constellationMgr = GETSTELMODULE(ConstellationMgr);
+	getGuiActions("actionShow_Constellation_Lines")->setChecked(constellationMgr->isLinesDisplayed());
+	connect(getGuiActions("actionShow_Constellation_Lines"),
+			SIGNAL(toggled(bool)),
+			constellationMgr,
+			SLOT(setLinesDisplayed(bool)));
+	connect(constellationMgr,
+			SIGNAL(linesDisplayedChanged(const bool displayed)),
+			this,
+			SLOT(linesDisplayedUpdated(const bool displayed)));
+
+	getGuiActions("actionShow_Constellation_Art")->setChecked(constellationMgr->isArtDisplayed());
+	connect(getGuiActions("actionShow_Constellation_Art"),
+			SIGNAL(toggled(bool)),
+			constellationMgr,
+			SLOT(setArtDisplayed(bool)));
+	connect(constellationMgr,
+			SIGNAL(artDisplayedChanged(const bool displayed)),
+			this,
+			SLOT(artDisplayedUpdated(const bool displayed)));
+
+	getGuiActions("actionShow_Constellation_Labels")->setChecked(constellationMgr->isNamesDisplayed());
+	connect(getGuiActions("actionShow_Constellation_Labels"),
+			SIGNAL(toggled(bool)),
+			constellationMgr,
+			SLOT(setNamesDisplayed(bool)));
+	connect(constellationMgr,
+			SIGNAL(namesDisplayedChanged(const bool displayed)),
+			this,
+			SLOT(namesDisplayedUpdated(const bool displayed)));
+
+	getGuiActions("actionShow_Constellation_Boundaries")->setChecked(constellationMgr->isBoundariesDisplayed());
+	connect(getGuiActions("actionShow_Constellation_Boundaries"),
+			SIGNAL(toggled(bool)),
+			constellationMgr,
+			SLOT(setBoundariesDisplayed(bool)));
+	connect(constellationMgr,
+			SIGNAL(boundariesDisplayedChanged(const bool displayed)),
+			this,
+			SLOT(boundariesDisplayedUpdated(const bool displayed)));
+}
+
 void StelGui::initGrindLineMgr()
 {
 	GridLinesMgr* gridLineManager = GETSTELMODULE(GridLinesMgr);
@@ -678,19 +713,6 @@ void StelGui::update()
 	if (getGuiActions("actionShow_Stars")->isChecked() != flag) {
 		getGuiActions("actionShow_Stars")->setChecked(flag);
 	}
-	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
-	flag = cmgr->getFlagLines();
-	if (getGuiActions("actionShow_Constellation_Lines")->isChecked() != flag)
-		getGuiActions("actionShow_Constellation_Lines")->setChecked(flag);
-	flag = cmgr->getFlagArt();
-	if (getGuiActions("actionShow_Constellation_Art")->isChecked() != flag)
-		getGuiActions("actionShow_Constellation_Art")->setChecked(flag);
-	flag = cmgr->getFlagLabels();
-	if (getGuiActions("actionShow_Constellation_Labels")->isChecked() != flag)
-		getGuiActions("actionShow_Constellation_Labels")->setChecked(flag);
-	flag = cmgr->getFlagBoundaries();
-	if (getGuiActions("actionShow_Constellation_Boundaries")->isChecked() != flag)
-		getGuiActions("actionShow_Constellation_Boundaries")->setChecked(flag);
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	flag = lmgr->getFlagLandscape();
 	if (getGuiActions("actionShow_Ground")->isChecked() != flag)
@@ -948,6 +970,36 @@ QAction* StelGui::addGuiActions(const QString& actionName, const QString& text, 
 	return StelGuiBase::addGuiActions(actionName, text, shortCut, helpGroup, checkable, autoRepeat);
 }
 
+/* ****************************************************************************************************************** */
+#if 0
+#pragma mark -
+#pragma mark Process changes from the ConstellationMgr
+#endif
+/* ****************************************************************************************************************** */
+void StelGui::artDisplayedUpdated(const bool displayed)
+{
+	if (getGuiActions("actionShow_Constellation_Art")->isChecked() != displayed) {
+		getGuiActions("actionShow_Constellation_Art")->setChecked(displayed);
+	}
+}
+void StelGui::boundariesDisplayedUpdated(const bool displayed)
+{
+	if (getGuiActions("actionShow_Constellation_Boundaries")->isChecked() != displayed) {
+		getGuiActions("actionShow_Constellation_Boundaries")->setChecked(displayed);
+	}
+}
+void StelGui::linesDisplayedUpdated(const bool displayed)
+{
+	if (getGuiActions("actionShow_Constellation_Lines")->isChecked() != displayed) {
+		getGuiActions("actionShow_Constellation_Lines")->setChecked(displayed);
+	}
+}
+void StelGui::namesDisplayedUpdated(const bool displayed)
+{
+	if (getGuiActions("actionShow_Constellation_Labels")->isChecked() != displayed) {
+		getGuiActions("actionShow_Constellation_Labels")->setChecked(displayed);
+	}
+}
 /* ****************************************************************************************************************** */
 #if 0
 #pragma mark -
