@@ -105,9 +105,15 @@ void Scenery3dMgr::handleKeys(QKeyEvent* e)
                         e->accept();
                         break;
                     case Qt::Key_B:
-                        enableBumps   = !enableBumps;
-                        scenery3d->setBumpsEnabled(enableBumps);
-                        showMessage(QString(N_("Surface bumps %1")).arg(enableBumps? N_("on") : N_("off")));
+                        if (GLEE_EXT_framebuffer_object)
+                        {
+                            enableBumps   = !enableBumps;
+                            scenery3d->setBumpsEnabled(enableBumps);
+                            showMessage(QString(N_("Surface bumps %1")).arg(enableBumps? N_("on") : N_("off")));
+                        } else
+                        {
+                            showMessage(QString(N_("Normal mapping not supported on this hardware.")));
+                        }
                         e->accept();
                         break;
                 }
@@ -156,7 +162,7 @@ void Scenery3dMgr::init()
     // In this case, set cubemapSize to 0 to signal auto-switch to perspective projection.
     if (! GLEE_EXT_framebuffer_object) {
         qWarning() << "Scenery3d: Your hardware does not support EXT_framebuffer_object.";
-        qWarning() << "           Shadow mapping disabled, and display limited to perspective projection.";
+        qWarning() << "           Shadow and Normal mapping disabled, and display limited to perspective projection.";
         cubemapSize=0;
         shadowmapSize=0;
     }
@@ -589,7 +595,7 @@ StelPluginInfo Scenery3dStelPluginInterface::getPluginInfo() const
 	info.displayedName = "Scenery3d";
         info.authors = "Simon Parzer, Peter Neubauer, Georg Zotti, Andrei Borza";
         info.contact = "Georg.Zotti@univie.ac.at";
-	info.description = "OBJ landscape renderer.";
+        info.description = "OBJ landscape renderer. Walk around and find possible astronomical alignments in temple models.";
 	return info;
 }
 
