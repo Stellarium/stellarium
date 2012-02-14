@@ -157,7 +157,7 @@ void AngleMeasure::draw(StelCore* core)
 	if (lineVisible.getInterstate() < 0.000001f && messageFader.getInterstate() < 0.000001f)
 		return;
 	
-	const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu, StelCore::RefractionOff); // Maybe conflict with Scenery3d branch. AW20120214
 	StelPainter painter(prj);
 	painter.setFont(font);
 
