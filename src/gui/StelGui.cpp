@@ -479,9 +479,9 @@ void StelGui::initConstellationMgr()
 			constellationMgr,
 			SLOT(setLinesDisplayed(bool)));
 	connect(constellationMgr,
-			SIGNAL(linesDisplayedChanged(const bool displayed)),
+			SIGNAL(linesDisplayedChanged(const bool)),
 			this,
-			SLOT(linesDisplayedUpdated(const bool displayed)));
+			SLOT(linesDisplayedUpdated(const bool)));
 
 	getGuiActions("actionShow_Constellation_Art")->setChecked(constellationMgr->isArtDisplayed());
 	connect(getGuiActions("actionShow_Constellation_Art"),
@@ -489,9 +489,9 @@ void StelGui::initConstellationMgr()
 			constellationMgr,
 			SLOT(setArtDisplayed(bool)));
 	connect(constellationMgr,
-			SIGNAL(artDisplayedChanged(const bool displayed)),
+			SIGNAL(artDisplayedChanged(const bool)),
 			this,
-			SLOT(artDisplayedUpdated(const bool displayed)));
+			SLOT(artDisplayedUpdated(const bool)));
 
 	getGuiActions("actionShow_Constellation_Labels")->setChecked(constellationMgr->isNamesDisplayed());
 	connect(getGuiActions("actionShow_Constellation_Labels"),
@@ -499,9 +499,9 @@ void StelGui::initConstellationMgr()
 			constellationMgr,
 			SLOT(setNamesDisplayed(bool)));
 	connect(constellationMgr,
-			SIGNAL(namesDisplayedChanged(const bool displayed)),
+			SIGNAL(namesDisplayedChanged(const bool)),
 			this,
-			SLOT(namesDisplayedUpdated(const bool displayed)));
+			SLOT(namesDisplayedUpdated(const bool)));
 
 	getGuiActions("actionShow_Constellation_Boundaries")->setChecked(constellationMgr->isBoundariesDisplayed());
 	connect(getGuiActions("actionShow_Constellation_Boundaries"),
@@ -509,9 +509,9 @@ void StelGui::initConstellationMgr()
 			constellationMgr,
 			SLOT(setBoundariesDisplayed(bool)));
 	connect(constellationMgr,
-			SIGNAL(boundariesDisplayedChanged(const bool displayed)),
+			SIGNAL(boundariesDisplayedChanged(const bool)),
 			this,
-			SLOT(boundariesDisplayedUpdated(const bool displayed)));
+			SLOT(boundariesDisplayedUpdated(const bool)));
 }
 
 void StelGui::initGrindLineMgr()
@@ -523,9 +523,9 @@ void StelGui::initGrindLineMgr()
 			gridLineManager,
 			SLOT(setEquatorGridDisplayed(bool)));
 	connect(gridLineManager,
-			SIGNAL(equatorGridDisplayedChanged(const bool displayed)),
+			SIGNAL(equatorGridDisplayedChanged(const bool)),
 			this,
-			SLOT(equatorGridDisplayedUpdated(const bool displayed)));
+			SLOT(equatorGridDisplayedUpdated(const bool)));
 
 	getGuiActions("actionShow_Azimuthal_Grid")->setChecked(gridLineManager->isAzimuthalGridDisplayed());
 	connect(getGuiActions("actionShow_Azimuthal_Grid"),
@@ -533,9 +533,9 @@ void StelGui::initGrindLineMgr()
 			gridLineManager,
 			SLOT(setAzimuthalGridDisplayed(bool)));
 	connect(gridLineManager,
-			SIGNAL(azimuthalGridDisplayedChanged(const bool displayed)),
+			SIGNAL(azimuthalGridDisplayedChanged(const bool)),
 			this,
-			SLOT(azimuthalGridDisplayedUpdated(const bool displayed)));
+			SLOT(azimuthalGridDisplayedUpdated(const bool)));
 
 	getGuiActions("actionShow_Ecliptic_Line")->setChecked(gridLineManager->isEclipticLineDisplayed());
 	connect(getGuiActions("actionShow_Ecliptic_Line"),
@@ -543,9 +543,9 @@ void StelGui::initGrindLineMgr()
 			gridLineManager,
 			SLOT(setEclipticLineDisplayed(bool)));
 	connect(gridLineManager,
-			SIGNAL(eclipticLineDisplayedChanged(const bool displayed)),
+			SIGNAL(eclipticLineDisplayedChanged(const bool)),
 			this,
-			SLOT(eclipticLineDisplayedUpdated(const bool displayed)));
+			SLOT(eclipticLineDisplayedUpdated(const bool)));
 
 	getGuiActions("actionShow_Equator_Line")->setChecked(gridLineManager->isEquatorLineDisplayed());
 	connect(getGuiActions("actionShow_Equator_Line"),
@@ -553,9 +553,9 @@ void StelGui::initGrindLineMgr()
 			gridLineManager,
 			SLOT(setEquatorLineDisplayed(bool)));
 	connect(gridLineManager,
-			SIGNAL(equatorLineDisplayedChanged(const bool displayed)),
+			SIGNAL(equatorLineDisplayedChanged(const bool)),
 			this,
-			SLOT(equatorLineDisplayedUpdated(const bool displayed)));
+			SLOT(equatorLineDisplayedUpdated(const bool)));
 
 	getGuiActions("actionShow_Meridian_Line")->setChecked(gridLineManager->isMeridianLineDisplayed());
 	connect(getGuiActions("actionShow_Meridian_Line"),
@@ -563,9 +563,9 @@ void StelGui::initGrindLineMgr()
 			gridLineManager,
 			SLOT(setMeridianLineDisplayed(bool)));
 	connect(gridLineManager,
-			SIGNAL(meridianLineDisplayedChanged(const bool displayed)),
+			SIGNAL(meridianLineDisplayedChanged(const bool)),
 			this,
-			SLOT(meridianLineDisplayedUpdated(const bool displayed)));
+			SLOT(meridianLineDisplayedUpdated(const bool)));
 
 	getGuiActions("actionShow_Horizon_Line")->setChecked(gridLineManager->isHorizonLineDisplayed());
 	connect(getGuiActions("actionShow_Horizon_Line"),
@@ -573,9 +573,9 @@ void StelGui::initGrindLineMgr()
 			gridLineManager,
 			SLOT(setHorizonLineDisplayed(bool)));
 	connect(gridLineManager,
-			SIGNAL(horizonLineDisplayedChanged(const bool displayed)),
+			SIGNAL(horizonLineDisplayedChanged(const bool)),
 			this,
-			SLOT(horizonLineDisplayedUpdated(const bool displayed)));
+			SLOT(horizonLineDisplayedUpdated(const bool)));
 
 	getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(gridLineManager->isEquatorJ2000GridDisplayed());
 	connect(getGuiActions("actionShow_Equatorial_J2000_Grid"),
@@ -583,9 +583,9 @@ void StelGui::initGrindLineMgr()
 			gridLineManager,
 			SLOT(setEquatorJ2000GridDisplayed(bool)));
 	connect(gridLineManager,
-			SIGNAL(equatorJ2000GridDisplayedChanged(const bool displayed)),
+			SIGNAL(equatorJ2000GridDisplayedChanged(const bool)),
 			this,
-			SLOT(equatorJ2000GridDisplayedUpdated(const bool displayed)));
+			SLOT(equatorJ2000GridDisplayedUpdated(const bool)));
 
 	getGuiActions("actionShow_Galactic_Grid")->setChecked(gridLineManager->isGalacticGridDisplayed());
 	connect(getGuiActions("actionShow_Galactic_Grid"),
@@ -593,9 +593,9 @@ void StelGui::initGrindLineMgr()
 			gridLineManager,
 			SLOT(setGalacticGridDisplayed(bool)));
 	connect(gridLineManager,
-			SIGNAL(galacticGridDisplayedChanged(const bool displayed)),
+			SIGNAL(galacticGridDisplayedChanged(const bool)),
 			this,
-			SLOT(galacticGridDisplayedUpdated(const bool displayed)));
+			SLOT(galacticGridDisplayedUpdated(const bool)));
 
 	getGuiActions("actionShow_Galactic_Plane_Line")->setChecked(gridLineManager->isGalacticPlaneLineDisplayed());
 	connect(getGuiActions("actionShow_Galactic_Plane_Line"),
@@ -603,9 +603,9 @@ void StelGui::initGrindLineMgr()
 			gridLineManager,
 			SLOT(setGalacticPlaneLineDisplayed(bool)));
 	connect(gridLineManager,
-			SIGNAL(galacticPlaneLineDisplayedChanged(const bool displayed)),
+			SIGNAL(galacticPlaneLineDisplayedChanged(const bool)),
 			this,
-			SLOT(galacticPlaneLineDisplayedUpdated(const bool displayed)));
+			SLOT(galacticPlaneLineDisplayedUpdated(const bool)));
 
 }
 

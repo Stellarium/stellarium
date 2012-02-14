@@ -193,13 +193,13 @@ signals:
 	void artDisplayedChanged(const bool displayed) const;
 	void artFadeDurationChanged(const float duration) const;
 	void artIntensityChanged(const double intensity) const;
-	void boundariesColorChanged(const Vec3f& color) const;
+	void boundariesColorChanged(const Vec3f & color) const;
 	void boundariesDisplayedChanged(const bool displayed) const;
 	void fontSizeChanged(const float newSize) const;
 	void isolateSelectedChanged(const bool isolate) const;
-	void linesColorChanged(const Vec3f& color) const;
+	void linesColorChanged(const Vec3f & color) const;
 	void linesDisplayedChanged(const bool displayed) const;
-	void namesColorChanged(const Vec3f& color) const;
+	void namesColorChanged(const Vec3f & color) const;
 	void namesDisplayedChanged(const bool displayed) const;
 
 private slots:

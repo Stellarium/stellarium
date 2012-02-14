@@ -271,7 +271,7 @@ void TextUserInterface::init()
 	                                 m5);
 	TuiNode* m5_2 = new TuiNodeColor(N_("Constellation labels"),
 	                                 constellationMgr,
-	                                 SLOT(setLabelsColor(Vec3f)),
+									 SLOT(setNamesColor(Vec3f)),
 	                                 constellationMgr->getNamesColor(), 
 	                                 m5, m5_1);
 	TuiNode* m5_3 = new TuiNode(N_("Constellation art"), m5, m5_2);
@@ -308,7 +308,7 @@ void TextUserInterface::init()
 	GridLinesMgr* gridLinesMgr = GETSTELMODULE(GridLinesMgr);
 	TuiNode* m5_10 = new TuiNodeColor(N_("Meridian line"),
 	                                 gridLinesMgr,
-	                                 SLOT(setColorMeridianLine(Vec3f)),
+									 SLOT(setMeridianLineColor(Vec3f)),
 	                                 gridLinesMgr->getMeridianLineColor(), 
 	                                 m5, m5_9);
 	TuiNode* m5_11 = new TuiNodeColor(N_("Azimuthal grid"),

@@ -217,24 +217,24 @@ public slots:
 	//! Set the color of the GalacticPlane Line.
 	void setGalacticPlaneLineColor(const Vec3f& newColor);
 signals:
-	void azimuthalGridDisplayedChanged(const bool displayed) const;
-	void azimuthalGridColorChanged(const Vec3f& newColor) const;
+	void azimuthalGridDisplayedChanged(const bool) const;
+	void azimuthalGridColorChanged(const Vec3f & newColor) const;
 	void equatorGridDisplayedChanged(const bool displayed) const;
-	void equatorGridColorChanged(const Vec3f& newColor) const;
+	void equatorGridColorChanged(const Vec3f & newColor) const;
 	void equatorJ2000GridDisplayedChanged(const bool displayed) const;
-	void equatorJ2000GridColorChanged(const Vec3f& newColor) const;
+	void equatorJ2000GridColorChanged(const Vec3f & newColor) const;
 	void galacticGridDisplayedChanged(const bool displayed) const;
-	void galacticGridColorChanged(const Vec3f& newColor) const;
+	void galacticGridColorChanged(const Vec3f & newColor) const;
 	void equatorLineDisplayedChanged(const bool displayed) const;
-	void equatorLineColorChanged(const Vec3f& newColor) const;
+	void equatorLineColorChanged(const Vec3f & newColor) const;
 	void eclipticLineDisplayedChanged(const bool displayed) const;
-	void eclipticLineColorChanged(const Vec3f& newColor) const;
+	void eclipticLineColorChanged(const Vec3f & newColor) const;
 	void meridianLineDisplayedChanged(const bool displayed) const;
-	void meridianLineColorChanged(const Vec3f& newColor) const;
+	void meridianLineColorChanged(const Vec3f & newColor) const;
 	void horizonLineDisplayedChanged(const bool displayed) const;
-	void horizonLineColorChanged(const Vec3f& newColor) const;
+	void horizonLineColorChanged(const Vec3f & newColor) const;
 	void galacticPlaneLineDisplayedChanged(const bool displayed) const;
-	void galacticPlaneLineColorChanged(const Vec3f& newColor) const;
+	void galacticPlaneLineColorChanged(const Vec3f & newColor) const;
 
 
 private slots:
