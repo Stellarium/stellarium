@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2003 Fabien Chereau
+ * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,9 +57,9 @@ public:
 	float getFadeDuration() {return (float)fader.getDuration()/1000.f;}
 
 	//! Define whether to display atmosphere
-	void setFlagShow(bool b){fader = b;}
+	void setShown(bool b){fader = b;}
 	//! Get whether atmosphere is displayed
-	bool getFlagShow() const {return fader;}
+	bool isShown() const {return fader;}
 
 	//! Get the actual atmosphere intensity due to eclipses + fader
 	//! @return the display intensity ranging from 0 to 1

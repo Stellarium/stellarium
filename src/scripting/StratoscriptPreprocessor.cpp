@@ -112,13 +112,13 @@ bool StelScriptMgr::preprocessStratoScript(QFile& input, QString& output, const 
 		else if (args.at(0) == "flag")
 		{
 			if (args.at(1) == "atmosphere")
-				line = QString("LandscapeMgr.setFlagAtmosphere(%1);").arg(strToBool(args.at(2)));
+				line = QString("LandscapeMgr.setAtmosphereDisplayed(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "azimuthal_grid")
 				line = QString("GridLinesMgr.setAzimuthalGridDisplayed(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "galactic_grid")
 				line = QString("GridLinesMgr.setGalacticGridDisplayed(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "cardinal_points")
-				line = QString("LandscapeMgr.setFlagCardinalsPoints(%1);").arg(strToBool(args.at(2)));
+				line = QString("LandscapeMgr.setCardinalsPointsDisplayed(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "constellation_art")
 				line = QString("ConstellationMgr.setArtDisplayed(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "constellation_boundaries")
@@ -136,13 +136,13 @@ bool StelScriptMgr::preprocessStratoScript(QFile& input, QString& output, const 
 			else if (args.at(1) == "equator_grid")
 				line = QString("GridLinesMgr.setEquatorGridDisplayed(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "fog")
-				line = QString("LandscapeMgr.setFlagFog(%1);").arg(strToBool(args.at(2)));
+				line = QString("LandscapeMgr.setFogDisplayed(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "gravity_labels") // TODO when in new script API
 				line = "// untranslated stratoscropt (flag gravity_labels): " + line;
 			else if (args.at(1) == "moon_scaled")
 				line = QString("SolarSystem.setFlagMoonScale(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "landscape")
-				line = QString("LandscapeMgr.setFlagLandscape(%1);").arg(strToBool(args.at(2)));
+				line = QString("LandscapeMgr.setLandscapeDisplayed(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "landscape_sets_location")
 				line = QString("LandscapeMgr.setFlagLandscapeSetsLocation(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "meridian_line")

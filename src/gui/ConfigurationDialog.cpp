@@ -391,7 +391,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_equatorial_J2000_grid", glmgr->isEquatorJ2000GridDisplayed());
 	conf->setValue("viewing/flag_galactic_grid", glmgr->isGalacticGridDisplayed());
 	conf->setValue("viewing/flag_galactic_plane_line", glmgr->isGalacticPlaneLineDisplayed());
-	conf->setValue("viewing/flag_cardinal_points", lmgr->getFlagCardinalsPoints());
+	conf->setValue("viewing/flag_cardinal_points", lmgr->isCardinalsPointsDisplayed());
 	conf->setValue("viewing/flag_constellation_drawing", cmgr->isLinesDisplayed());
 	conf->setValue("viewing/flag_constellation_name", cmgr->isNamesDisplayed());
 	conf->setValue("viewing/flag_constellation_boundaries", cmgr->isBoundariesDisplayed());
@@ -410,9 +410,9 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	// view dialog / landscape tab settings
 	lmgr->setDefaultLandscapeID(lmgr->getCurrentLandscapeID());
 	conf->setValue("landscape/flag_landscape_sets_location", lmgr->getFlagLandscapeSetsLocation());
-	conf->setValue("landscape/flag_landscape", lmgr->getFlagLandscape());
-	conf->setValue("landscape/flag_atmosphere", lmgr->getFlagAtmosphere());
-	conf->setValue("landscape/flag_fog", lmgr->getFlagFog());
+	conf->setValue("landscape/flag_landscape", lmgr->isLandscapeDisplayed());
+	conf->setValue("landscape/flag_atmosphere", lmgr->isAtmosphereDisplayed());
+	conf->setValue("landscape/flag_fog", lmgr->isFogDisplayed());
 	conf->setValue("stars/init_bortle_scale", core->getSkyDrawer()->getBortleScale());
 
 	// view dialog / starlore tab

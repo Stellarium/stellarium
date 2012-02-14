@@ -187,16 +187,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 
 	initConstellationMgr();
 	initGrindLineMgr();
-
-	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-	connect(getGuiActions("actionShow_Ground"), SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscape(bool)));
-	getGuiActions("actionShow_Ground")->setChecked(lmgr->getFlagLandscape());
-	connect(getGuiActions("actionShow_Cardinal_Points"), SIGNAL(toggled(bool)), lmgr, SLOT(setFlagCardinalsPoints(bool)));
-	getGuiActions("actionShow_Cardinal_Points")->setChecked(lmgr->getFlagCardinalsPoints());
-	connect(getGuiActions("actionShow_Atmosphere"), SIGNAL(toggled(bool)), lmgr, SLOT(setFlagAtmosphere(bool)));
-	getGuiActions("actionShow_Atmosphere")->setChecked(lmgr->getFlagAtmosphere());
-	connect(getGuiActions("actionShow_Fog"), SIGNAL(toggled(bool)), lmgr, SLOT(setFlagFog(bool)));
-	getGuiActions("actionShow_Fog")->setChecked(lmgr->getFlagFog());
+	initLandscapeMgr();
 
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 	connect(getGuiActions("actionShow_Nebulas"), SIGNAL(toggled(bool)), nmgr, SLOT(setFlagHints(bool)));
@@ -609,6 +600,50 @@ void StelGui::initGrindLineMgr()
 
 }
 
+void StelGui::initLandscapeMgr()
+{
+	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
+	getGuiActions("actionShow_Ground")->setChecked(landscapeMgr->isLandscapeDisplayed());
+	connect(getGuiActions("actionShow_Ground"),
+			SIGNAL(toggled(bool)),
+			landscapeMgr,
+			SLOT(setLandscapeDisplayed(bool)));
+	connect(landscapeMgr,
+			SIGNAL(landscapeDisplayedChanged(const bool)),
+			this,
+			SLOT(landscapeDisplayedUpdated(const bool)));
+
+	getGuiActions("actionShow_Cardinal_Points")->setChecked(landscapeMgr->isCardinalsPointsDisplayed());
+	connect(getGuiActions("actionShow_Cardinal_Points"),
+			SIGNAL(toggled(bool)),
+			landscapeMgr,
+			SLOT(setCardinalsPointsDisplayed(bool)));
+	connect(landscapeMgr,
+			SIGNAL(cardinalsPointsDisplayedChanged(const bool)),
+			this,
+			SLOT(cardinalsPointsDisplayedUpdated(const bool)));
+
+	getGuiActions("actionShow_Atmosphere")->setChecked(landscapeMgr->isAtmosphereDisplayed());
+	connect(getGuiActions("actionShow_Atmosphere"),
+			SIGNAL(toggled(bool)),
+			landscapeMgr,
+			SLOT(setAtmosphereDisplayed(bool)));
+	connect(landscapeMgr,
+			SIGNAL(atmosphereDisplayedChanged(const bool)),
+			this,
+			SLOT(atmosphereDisplayedUpdated(const bool)));
+
+	getGuiActions("actionShow_Fog")->setChecked(landscapeMgr->isFogDisplayed());
+	connect(getGuiActions("actionShow_Fog"),
+			SIGNAL(toggled(bool)),
+			landscapeMgr,
+			SLOT(setFogDisplayed(bool)));
+	connect(landscapeMgr,
+			SIGNAL(fogDisplayedChanged(const bool)),
+			this,
+			SLOT(fogDisplayedUpdated(const bool)));
+}
+
 void StelGui::quit()
 {
 	#ifndef DISABLE_SCRIPTING
@@ -713,19 +748,6 @@ void StelGui::update()
 	if (getGuiActions("actionShow_Stars")->isChecked() != flag) {
 		getGuiActions("actionShow_Stars")->setChecked(flag);
 	}
-	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-	flag = lmgr->getFlagLandscape();
-	if (getGuiActions("actionShow_Ground")->isChecked() != flag)
-		getGuiActions("actionShow_Ground")->setChecked(flag);
-	flag = lmgr->getFlagCardinalsPoints();
-	if (getGuiActions("actionShow_Cardinal_Points")->isChecked() != flag)
-		getGuiActions("actionShow_Cardinal_Points")->setChecked(flag);
-	flag = lmgr->getFlagAtmosphere();
-	if (getGuiActions("actionShow_Atmosphere")->isChecked() != flag)
-		getGuiActions("actionShow_Atmosphere")->setChecked(flag);
-	flag = lmgr->getFlagFog();
-	if (getGuiActions("actionShow_Fog")->isChecked() != flag)
-		getGuiActions("actionShow_Fog")->setChecked(flag);
 
 	flag = GETSTELMODULE(NebulaMgr)->getFlagHints();
 	if (getGuiActions("actionShow_Nebulas")->isChecked() != flag)
@@ -1072,4 +1094,38 @@ void StelGui::galacticPlaneLineDisplayedUpdated(const bool displayed)
 		getGuiActions("actionShow_Galactic_Plane_Line")->setChecked(displayed);
 	}
 
+}
+
+/* ****************************************************************************************************************** */
+#if 0
+#pragma mark -
+#pragma mark Process changes from the GridLinesMgr
+#endif
+/* ****************************************************************************************************************** */
+void StelGui::atmosphereDisplayedUpdated(const bool displayed)
+{
+	if (getGuiActions("actionShow_Atmosphere")->isChecked() != displayed) {
+		getGuiActions("actionShow_Atmosphere")->setChecked(displayed);
+	}
+}
+
+void StelGui::cardinalsPointsDisplayedUpdated(const bool displayed)
+{
+	if (getGuiActions("actionShow_Cardinal_Points")->isChecked() != displayed) {
+		getGuiActions("actionShow_Cardinal_Points")->setChecked(displayed);
+	}
+}
+
+void StelGui::fogDisplayedUpdated(const bool displayed)
+{
+	if (getGuiActions("actionShow_Fog")->isChecked() != displayed) {
+		getGuiActions("actionShow_Fog")->setChecked(displayed);
+	}
+}
+
+void StelGui::landscapeDisplayedUpdated(const bool displayed)
+{
+	if (getGuiActions("actionShow_Ground")->isChecked() != displayed) {
+		getGuiActions("actionShow_Ground")->setChecked(displayed);
+	}
 }
