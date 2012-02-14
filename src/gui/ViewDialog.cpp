@@ -72,7 +72,7 @@ void ViewDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
-		shootingStarsZHRChanged();
+		setZhrFromControls();
 		populateLists();
 
 		//Hack to shrink the tabs to optimal size after language change
@@ -147,20 +147,14 @@ void ViewDialog::createDialogContent()
 	// Shooting stars section
 	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
 	Q_ASSERT(mmgr);
-	switch(mmgr->getZHR())
-	{
-		case 0: ui->zhrNone->setChecked(true); break;
-		case 80: ui->zhr80->setChecked(true); break;
-		case 10000: ui->zhr10000->setChecked(true); break;
-		case 144000: ui->zhr144000->setChecked(true); break;
-		default: ui->zhr10->setChecked(true); break;
-	}
-	shootingStarsZHRChanged();
-	connect(ui->zhrNone, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
-	connect(ui->zhr10, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
-	connect(ui->zhr80, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
-	connect(ui->zhr10000, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
-	connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(shootingStarsZHRChanged()));
+	updateZhrControls(mmgr->getZHR());
+	connect(mmgr, SIGNAL(zhrChanged(int)),
+	        this, SLOT(updateZhrControls(int)));
+	connect(ui->zhrNone, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
+	connect(ui->zhr10, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
+	connect(ui->zhr80, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
+	connect(ui->zhr10000, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
+	connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
 
 	// Labels section
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
@@ -510,7 +504,7 @@ void ViewDialog::showAtmosphereDialog()
 }
 
 
-void ViewDialog::shootingStarsZHRChanged()
+void ViewDialog::setZhrFromControls()
 {
 	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
 	int zhr=-1;
@@ -535,6 +529,28 @@ void ViewDialog::shootingStarsZHRChanged()
 	{
 		mmgr->setZHR(zhr);
 	}
+	
+	updateZhrDescription(zhr);
+}
+
+void ViewDialog::updateZhrControls(int zhr)
+{
+	// As the radio buttons are tied to the clicked() signal,
+	// it won't be triggered by setting the value programmatically.
+	switch(zhr)
+	{
+		case 0: ui->zhrNone->setChecked(true); break;
+		case 80: ui->zhr80->setChecked(true); break;
+		case 10000: ui->zhr10000->setChecked(true); break;
+		case 144000: ui->zhr144000->setChecked(true); break;
+		default: ui->zhr10->setChecked(true); break;
+	}
+	
+	updateZhrDescription(zhr);
+}
+
+void ViewDialog::updateZhrDescription(int zhr)
+{
 	switch (zhr)
 	{
 		case 0:
@@ -555,7 +571,6 @@ void ViewDialog::shootingStarsZHRChanged()
 		default:
 			ui->zhrLabel->setText(QString("<small><i>")+"Error"+"</i></small>");
 	}
-
 }
 
 void ViewDialog::starsLabelsValueChanged(int v)
