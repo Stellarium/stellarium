@@ -272,7 +272,7 @@ void TextUserInterface::init()
 	TuiNode* m5_2 = new TuiNodeColor(N_("Constellation labels"),
 	                                 constellationMgr,
 	                                 SLOT(setLabelsColor(Vec3f)),
-	                                 constellationMgr->getLabelsColor(), 
+	                                 constellationMgr->getNamesColor(), 
 	                                 m5, m5_1);
 	TuiNode* m5_3 = new TuiNode(N_("Constellation art"), m5, m5_2);
 	TuiNode* m5_4 = new TuiNodeColor(N_("Constellation boundaries"),
@@ -689,7 +689,7 @@ void TextUserInterface::saveDefaultSettings(void)
 
 	// sub-menu 5: colors
 	conf->setValue("color/const_lines_color", colToConf(cmgr->getLinesColor()));
- 	conf->setValue("color/const_names_color", colToConf(cmgr->getLabelsColor()));
+ 	conf->setValue("color/const_names_color", colToConf(cmgr->getNamesColor()));
 	conf->setValue("color/const_boundary_color", colToConf(cmgr->getBoundariesColor()));
 	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
 	conf->setValue("color/cardinal_color", colToConf(lmgr->getColorCardinalPoints()) );

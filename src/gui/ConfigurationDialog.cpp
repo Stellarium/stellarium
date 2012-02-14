@@ -185,7 +185,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
 	ui->gravityLabelCheckbox->setChecked(proj->getFlagGravityLabels());
 	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlagGravityLabels(bool)));
-	ui->selectSingleConstellationButton->setChecked(cmgr->getFlagIsolateSelected());
+	ui->selectSingleConstellationButton->setChecked(cmgr->isIsolateSelected());
 	connect(ui->selectSingleConstellationButton, SIGNAL(toggled(bool)), cmgr, SLOT(setFlagIsolateSelected(bool)));
 	ui->diskViewportCheckbox->setChecked(proj->getMaskType() == StelProjector::MaskDisk);
 	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
@@ -391,11 +391,11 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_galactic_grid", glmgr->isGalacticGridDisplayed());
 	conf->setValue("viewing/flag_galactic_plane_line", glmgr->isGalacticPlaneLineDisplayed());
 	conf->setValue("viewing/flag_cardinal_points", lmgr->getFlagCardinalsPoints());
-	conf->setValue("viewing/flag_constellation_drawing", cmgr->getFlagLines());
-	conf->setValue("viewing/flag_constellation_name", cmgr->getFlagLabels());
-	conf->setValue("viewing/flag_constellation_boundaries", cmgr->getFlagBoundaries());
-	conf->setValue("viewing/flag_constellation_art", cmgr->getFlagArt());
-	conf->setValue("viewing/flag_constellation_isolate_selected", cmgr->getFlagIsolateSelected());
+	conf->setValue("viewing/flag_constellation_drawing", cmgr->isLinesDisplayed());
+	conf->setValue("viewing/flag_constellation_name", cmgr->isNamesDisplayed());
+	conf->setValue("viewing/flag_constellation_boundaries", cmgr->isBoundariesDisplayed());
+	conf->setValue("viewing/flag_constellation_art", cmgr->isArtDisplayed());
+	conf->setValue("viewing/flag_constellation_isolate_selected", cmgr->isIsolateSelected());
 	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
 	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
 	conf->setValue("astro/flag_star_name", smgr->getFlagLabels());

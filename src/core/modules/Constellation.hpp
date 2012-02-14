@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -112,28 +113,28 @@ private:
 	void update(int deltaTime);
 	//! Turn on and off Constellation line rendering.
 	//! @param b new state for line drawing.
-	void setFlagLines(bool b) {lineFader=b;}
+	void setLinesDisplayed(const bool b) {lineFader=b;}
 	//! Turn on and off Constellation boundary rendering.
 	//! @param b new state for boundary drawing.
-	void setFlagBoundaries(bool b) {boundaryFader=b;}
+	void setBoundariesDisplayed(const bool b) {boundaryFader=b;}
 	//! Turn on and off Constellation name label rendering.
 	//! @param b new state for name label drawing.
-	void setFlagName(bool b) {nameFader=b;}
+	void setNamesDisplayed(const bool b) {nameFader=b;}
 	//! Turn on and off Constellation art rendering.
 	//! @param b new state for art drawing.
-	void setFlagArt(bool b) {artFader=b;}
+	void setArtDisplayed(const bool b) {artFader=b;}
 	//! Get the current state of Constellation line rendering.
 	//! @return true if Constellation line rendering it turned on, else false.
-	bool getFlagLines() const {return lineFader;}
+	bool isLinesDisplayed() const {return lineFader;}
 	//! Get the current state of Constellation boundary rendering.
 	//! @return true if Constellation boundary rendering it turned on, else false.
-	bool getFlagBoundaries() const {return boundaryFader;}
+	bool isBoundariesDisplayed() const {return boundaryFader;}
 	//! Get the current state of Constellation name label rendering.
 	//! @return true if Constellation name label rendering it turned on, else false.
-	bool getFlagName() const {return nameFader;}
+	bool isNamesDisplayed() const {return nameFader;}
 	//! Get the current state of Constellation art rendering.
 	//! @return true if Constellation art rendering it turned on, else false.
-	bool getFlagArt() const {return artFader;}
+	bool isArtDisplayed() const {return artFader;}
 
 	//! International name (translated using gettext)
 	QString nameI18;
