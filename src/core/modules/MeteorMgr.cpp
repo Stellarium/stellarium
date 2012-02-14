@@ -75,6 +75,7 @@ double MeteorMgr::getCallOrder(StelModuleActionName actionName) const
 void MeteorMgr::setZHR(int zhr)
 {
 	ZHR = zhr;
+	emit zhrChanged(zhr);
 }
 
 int MeteorMgr::getZHR()
