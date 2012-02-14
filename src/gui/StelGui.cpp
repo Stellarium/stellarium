@@ -726,15 +726,19 @@ void StelGui::update()
 	flag = lmgr->getFlagFog();
 	if (getGuiActions("actionShow_Fog")->isChecked() != flag)
 		getGuiActions("actionShow_Fog")->setChecked(flag);
+
 	flag = GETSTELMODULE(NebulaMgr)->getFlagHints();
 	if (getGuiActions("actionShow_Nebulas")->isChecked() != flag)
 		getGuiActions("actionShow_Nebulas")->setChecked(flag);
+
 	flag = GETSTELMODULE(StelSkyLayerMgr)->getFlagShow();
 	if (getGuiActions("actionShow_DSS")->isChecked() != flag)
 		getGuiActions("actionShow_DSS")->setChecked(flag);
+
 	flag = mmgr->getMountMode() != StelMovementMgr::MountAltAzimuthal;
 	if (getGuiActions("actionSwitch_Equatorial_Mount")->isChecked() != flag)
 		getGuiActions("actionSwitch_Equatorial_Mount")->setChecked(flag);
+
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	flag = ssmgr->getFlagLabels();
 	if (getGuiActions("actionShow_Planets_Labels")->isChecked() != flag)
