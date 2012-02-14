@@ -313,27 +313,27 @@ void TextUserInterface::init()
 	                                 m5, m5_9);
 	TuiNode* m5_11 = new TuiNodeColor(N_("Azimuthal grid"),
 	                                 gridLinesMgr,
-	                                 SLOT(setColorAzimuthalGrid(Vec3f)),
+									 SLOT(setAzimuthalGridColor(Vec3f)),
 	                                 gridLinesMgr->getAzimuthalGridColor(), 
 	                                 m5, m5_10);
 	TuiNode* m5_12 = new TuiNodeColor(N_("Equatorial grid"),
 	                                 gridLinesMgr,
-	                                 SLOT(setColorEquatorGrid(Vec3f)),
+									 SLOT(setEquatorGridColor(Vec3f)),
 	                                 gridLinesMgr->getEquatorGridColor(), 
 	                                 m5, m5_11);
 	TuiNode* m5_13 = new TuiNodeColor(N_("Equatorial J2000 grid"),
 	                                 gridLinesMgr,
-	                                 SLOT(setColorEquatorJ2000Grid(Vec3f)),
+									 SLOT(setEquatorJ2000GridColor(Vec3f)),
 	                                 gridLinesMgr->getEquatorJ2000GridColor(), 
 	                                 m5, m5_12);
 	TuiNode* m5_14 = new TuiNodeColor(N_("Equator line"),
 	                                 gridLinesMgr,
-	                                 SLOT(setColorEquatorLine(Vec3f)),
+									 SLOT(setEquatorLineColor(Vec3f)),
 	                                 gridLinesMgr->getEquatorLineColor(), 
 	                                 m5, m5_13);
 	TuiNode* m5_15 = new TuiNodeColor(N_("Ecliptic line"),
 	                                 gridLinesMgr,
-	                                 SLOT(setColorEclipticLine(Vec3f)),
+									 SLOT(setEclipticLineColor(Vec3f)),
 	                                 gridLinesMgr->getEclipticLineColor(), 
 					 m5, m5_14);
 	NebulaMgr* nebulaMgr = GETSTELMODULE(NebulaMgr);
@@ -347,17 +347,17 @@ void TextUserInterface::init()
 					  m5, m5_16);
 	TuiNode* m5_18 = new TuiNodeColor(N_("Horizon line"),
 					 gridLinesMgr,
-					 SLOT(setColorHorizonLine(Vec3f)),
+					 SLOT(setHorizonLineColor(Vec3f)),
 					 gridLinesMgr->getHorizonLineColor(),
 					 m5, m5_17);
 	TuiNode* m5_19 = new TuiNodeColor(N_("Galactic grid"),
 					 gridLinesMgr,
-					 SLOT(setColorGalacticGrid(Vec3f)),
+					 SLOT(setGalacticGridColor(Vec3f)),
 					 gridLinesMgr->getGalacticGridColor(),
 					 m5, m5_18);
 	TuiNode* m5_20 = new TuiNodeColor(N_("Galactic plane line"),
 					 gridLinesMgr,
-					 SLOT(setColorGalacticPlaneLine(Vec3f)),
+					 SLOT(setGalacticPlaneLineColor(Vec3f)),
 					 gridLinesMgr->getGalacticPlaneLineColor(),
 					 m5, m5_19);
 
