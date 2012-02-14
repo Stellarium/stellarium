@@ -120,15 +120,15 @@ bool StelScriptMgr::preprocessStratoScript(QFile& input, QString& output, const 
 			else if (args.at(1) == "cardinal_points")
 				line = QString("LandscapeMgr.setFlagCardinalsPoints(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "constellation_art")
-				line = QString("ConstellationMgr.setFlagArt(%1);").arg(strToBool(args.at(2)));
+				line = QString("ConstellationMgr.setArtDisplayed(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "constellation_boundaries")
-				line = QString("ConstellationMgr.setFlagBoundaries(%1);").arg(strToBool(args.at(2)));
+				line = QString("ConstellationMgr.setBoundariesDisplayed(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "constellation_drawing" || args.at(1) == "constellations")
-				line = QString("ConstellationMgr.setFlagLines(%1);").arg(strToBool(args.at(2)));
+				line = QString("ConstellationMgr.setLinesDisplayed(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "constellation_names")
-				line = QString("ConstellationMgr.setFlagLabels(%1);").arg(strToBool(args.at(2)));
+				line = QString("ConstellationMgr.setNamesDisplayed(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "constellation_pick")
-				line = QString("ConstellationMgr.setFlagIsolateSelected(%1);").arg(strToBool(args.at(2)));
+				line = QString("ConstellationMgr.setIsolateSelected(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "ecliptic_line")
 				line = QString("GridLinesMgr.setEclipticLineDisplayed(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "equator_line")

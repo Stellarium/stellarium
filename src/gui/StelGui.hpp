@@ -161,6 +161,11 @@ private slots:
 	void setStelStyle(const QString& section);
 	void quit();
 	void updateI18n();
+	//! Process changes from the ConstellationMgr
+	void artDisplayedUpdated(const bool displayed);
+	void boundariesDisplayedUpdated(const bool displayed);
+	void linesDisplayedUpdated(const bool displayed);
+	void namesDisplayedUpdated(const bool displayed);
 	//! Process changes from the GridLinesMgr
 	void azimuthalGridDisplayedUpdated(const bool displayed);
 	void equatorGridDisplayedUpdated(const bool displayed);
@@ -208,6 +213,9 @@ private:
 
 	// Currently used StelStyle
 	StelStyle currentStelStyle;
+
+	// This method is used by init() to initialize the ConstellationMgr instance.
+	void initConstellationMgr();
 
 	// This method is used by init() to initialize the GridLineMgr instance.
 	void initGrindLineMgr();
