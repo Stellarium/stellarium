@@ -30,10 +30,10 @@ StelPluginInfo PrintSkyStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
 	info.id = "PrintSky";
-	info.displayedName =  q_("Print Sky");
+	info.displayedName =  N_("Print Sky");
 	info.authors = "Pep Pujols";
 	info.contact = "maslarocaxica@gmail.com";
-	info.description = q_("Provides a system printing sky");
+	info.description = N_("Provides a system printing sky");
 	return info;
 }
 
@@ -60,7 +60,7 @@ void PrintSky::init()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 
-	gui->addGuiActions("actionInit_Printing_Sky", N_("Printing Sky"), "Ctrl+P", "Plugin Key Bindings", true, false);
+	gui->addGuiActions("actionInit_Printing_Sky", N_("Printing Sky"), "Ctrl+P", N_("Plugin Key Bindings"), true, false);
 	gui->getGuiActions("actionInit_Printing_Sky")->setChecked(true);
 	connect(gui->getGuiActions("actionInit_Printing_Sky"), SIGNAL(triggered()), this, SLOT(initPrintingSky()));
 
