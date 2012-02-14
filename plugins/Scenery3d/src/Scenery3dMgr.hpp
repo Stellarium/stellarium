@@ -3,7 +3,6 @@
 
 #include <QMap>
 #include <QStringList>
-//#include <QKeyEvent> Taken out on Alex Wolf's note. GZ20120122
 #include <QFont>
 
 #include "StelModule.hpp"
