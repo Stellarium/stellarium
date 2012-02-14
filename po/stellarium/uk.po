@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-13 10:58+0700\n"
-"PO-Revision-Date: 2012-02-03 19:01+0000\n"
+"POT-Creation-Date: 2012-02-13 12:32+0700\n"
+"PO-Revision-Date: 2012-02-13 05:55+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-13 04:45+0000\n"
+"X-Launchpad-Export-Date: 2012-02-14 05:40+0000\n"
 "X-Generator: Launchpad (build 14781)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -5317,106 +5317,111 @@ msgstr "Z (червоний зсув): %1"
 
 #: plugins/Pulsars/src/Pulsars.cpp:59
 msgid "Pulsars"
-msgstr ""
+msgstr "Пульсари"
 
 #: plugins/Pulsars/src/Pulsars.cpp:62
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
-"1995)."
+"1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
 msgstr ""
+"Цей додаток призначено для показу розташування різноманітних пульсарів та "
+"даних щодо них. Дані пульсарів запозичено з «Каталогу пульсарів» (Taylor та "
+"інші, 1995).<br><br>Зауваження: ідентифікатори пульсарів мають префікс «PSR»"
 
 #: plugins/Pulsars/src/Pulsar.cpp:102
 msgid "pulsar"
-msgstr ""
+msgstr "пульсар"
 
 #: plugins/Pulsars/src/Pulsar.cpp:109
 #, qt-format
 msgid "Barycentric period: %1 s"
-msgstr ""
+msgstr "Барицентричний період: %1 с"
 
 #: plugins/Pulsars/src/Pulsar.cpp:112
 #, qt-format
 msgid "Distance: %1 kpc (%2 ly)"
-msgstr ""
+msgstr "Відстань: %1 кпк (%2 св. р.)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:116
 #, qt-format
 msgid "Type of pulsar: %1"
-msgstr ""
+msgstr "Тип пульсара: %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:120
 #, qt-format
 msgid "Equivalent width of the integrated pulse profile: %1 ms"
-msgstr ""
+msgstr "Еквівалентна ширина загального профілю пульсації: %1 мс"
 
 #: plugins/Pulsars/src/Pulsar.cpp:124
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
-msgstr ""
+msgstr "Ширина профілю на 50% потужності: %1 мс"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:130 plugins/Pulsars/src/Pulsar.cpp:142
 #: plugins/Pulsars/src/Pulsar.cpp:154
 msgid "Time averaged flux density at"
-msgstr ""
+msgstr "Осереднена щільність потоку при"
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Pulsars/src/Pulsar.cpp:133 plugins/Pulsars/src/Pulsar.cpp:145
 #: plugins/Pulsars/src/Pulsar.cpp:157
 msgid "MHz"
-msgstr ""
+msgstr "МГц"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:136 plugins/Pulsars/src/Pulsar.cpp:148
 #: plugins/Pulsars/src/Pulsar.cpp:160
 msgid "mJy"
-msgstr ""
+msgstr "мЯн"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:232
 msgid "globular cluster association"
-msgstr ""
+msgstr "прив’язка до кульового скупчення"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:238
 msgid "SNR association"
-msgstr ""
+msgstr "прив’язка до залишку наднової"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:244
 msgid "glitches in period"
-msgstr ""
+msgstr "відхилення у періоді"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:250
 msgid "binary or multiple pulsar"
-msgstr ""
+msgstr "подвійний або кратний пульсар"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:256
 msgid "millisecond pulsar"
-msgstr ""
+msgstr "мілісекундний пульсар"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:262
 msgid "recycled pulsar"
-msgstr ""
+msgstr "вторинний пульсар"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:268
 msgid "radio interpulse"
-msgstr ""
+msgstr "радіопульсар"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:274
 msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
 msgstr ""
+"пусаційне випромінювання у оптичному, рентгенівському та гамма-діапазоні "
+"(високоенергетичний)"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
-msgstr ""
+msgstr "позагалактичний пульсар"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Екваторіальна сітка"
