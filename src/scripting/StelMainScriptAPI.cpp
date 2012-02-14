@@ -580,7 +580,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setHorizonLineDisplayed(false);
 		glmgr->setGalacticPlaneLineDisplayed(false);
 		glmgr->setEquatorJ2000GridDisplayed(false);
-		lmgr->setFlagCardinalsPoints(false);
+		lmgr->setCardinalsPointsDisplayed(false);
 		cmgr->setLinesDisplayed(false);
 		cmgr->setNamesDisplayed(false);
 		cmgr->setBoundariesDisplayed(false);
@@ -588,9 +588,9 @@ void StelMainScriptAPI::clear(const QString& state)
 		smgr->setFlagLabels(false);
 		ssmgr->setFlagLabels(false);
 		nmgr->setFlagHints(false);
-		lmgr->setFlagLandscape(true);
-		lmgr->setFlagAtmosphere(true);
-		lmgr->setFlagFog(true);
+		lmgr->setLandscapeDisplayed(true);
+		lmgr->setAtmosphereDisplayed(true);
+		lmgr->setFogDisplayed(true);
 	}
 	else if (state.toLower() == "starchart")
 	{
@@ -612,7 +612,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setHorizonLineDisplayed(false);
 		glmgr->setGalacticPlaneLineDisplayed(false);
 		glmgr->setEquatorJ2000GridDisplayed(false);
-		lmgr->setFlagCardinalsPoints(false);
+		lmgr->setCardinalsPointsDisplayed(false);
 		cmgr->setLinesDisplayed(true);
 		cmgr->setNamesDisplayed(true);
 		cmgr->setBoundariesDisplayed(true);
@@ -620,9 +620,9 @@ void StelMainScriptAPI::clear(const QString& state)
 		smgr->setFlagLabels(true);
 		ssmgr->setFlagLabels(true);
 		nmgr->setFlagHints(true);
-		lmgr->setFlagLandscape(false);
-		lmgr->setFlagAtmosphere(false);
-		lmgr->setFlagFog(false);
+		lmgr->setLandscapeDisplayed(false);
+		lmgr->setAtmosphereDisplayed(false);
+		lmgr->setFogDisplayed(false);
 	}
 	else if (state.toLower() == "deepspace")
 	{
@@ -644,7 +644,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setHorizonLineDisplayed(false);
 		glmgr->setGalacticPlaneLineDisplayed(false);
 		glmgr->setEquatorJ2000GridDisplayed(false);
-		lmgr->setFlagCardinalsPoints(false);
+		lmgr->setCardinalsPointsDisplayed(false);
 		cmgr->setLinesDisplayed(false);
 		cmgr->setNamesDisplayed(false);
 		cmgr->setBoundariesDisplayed(false);
@@ -652,9 +652,9 @@ void StelMainScriptAPI::clear(const QString& state)
 		smgr->setFlagLabels(false);
 		ssmgr->setFlagLabels(false);
 		nmgr->setFlagHints(false);
-		lmgr->setFlagLandscape(false);
-		lmgr->setFlagAtmosphere(false);
-		lmgr->setFlagFog(false);
+		lmgr->setLandscapeDisplayed(false);
+		lmgr->setAtmosphereDisplayed(false);
+		lmgr->setFogDisplayed(false);
 	}
 	else
 	{

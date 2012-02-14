@@ -152,7 +152,7 @@ void MeteorMgr::draw(StelCore* core)
 		return;
 	
 	LandscapeMgr* landmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
-	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
+	if (landmgr->isAtmosphereDisplayed() && landmgr->getLuminance()>5)
 		return;
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameAltAz));
