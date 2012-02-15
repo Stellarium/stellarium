@@ -15,8 +15,8 @@ SET(PrintSky_SRCS
   )
 
 ################# compiles resources files ############
-SET(PrintSky_RES ../PrintSky.qrc)
-QT4_ADD_RESOURCES(PrintSky_RES_CXX ${PrintSky_RES})
+#SET(PrintSky_RES ../PrintSky.qrc)
+#QT4_ADD_RESOURCES(PrintSky_RES_CXX ${PrintSky_RES})
 
 ################# compiles .ui files ############
 SET(PrintSky_UIS
@@ -39,7 +39,7 @@ SET(extLinkerOption ${QT_LIBRARIES} ${FreeType2_LIBRARIES} ${JPEG_LIBRARIES} ${P
 
 ############### For building the dynamic library ######################
 IF(BUILD_DYNAMIC_PLUGINS)
-	ADD_LIBRARY(PrintSky MODULE ${PrintSky_SRCS} ${PrintSky_MOC_SRCS} ${PrintSky_RES_CXX} ${PrintSky_UIS_H})
+        ADD_LIBRARY(PrintSky MODULE ${PrintSky_SRCS} ${PrintSky_MOC_SRCS} ${PrintSky_UIS_H})
 	IF(APPLE)
 		FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
 		MARK_AS_ADVANCED(OPENGL_LIBRARY)
@@ -59,7 +59,7 @@ ENDIF()
 
 ############### For building the static library ######################
 IF(BUILD_STATIC_PLUGINS)
-	ADD_LIBRARY(PrintSky-static STATIC ${PrintSky_SRCS} ${PrintSky_MOC_SRCS} ${PrintSky_RES_CXX} ${PrintSky_UIS_H})
+        ADD_LIBRARY(PrintSky-static STATIC ${PrintSky_SRCS} ${PrintSky_MOC_SRCS} ${PrintSky_UIS_H})
 	# The library target "PrintSky-static" has a default OUTPUT_NAME of "PrintSky-static", so change it.
 	SET_TARGET_PROPERTIES(PrintSky-static PROPERTIES OUTPUT_NAME "PrintSky")
 	TARGET_LINK_LIBRARIES(PrintSky-static ${extLinkerOption})

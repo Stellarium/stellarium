@@ -29,10 +29,6 @@ public:
 	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
 	virtual void setStelStyle(const QString& style);
 
-	//! Returns the module-specific style sheet.
-	//! The main StelStyle instance should be passed.
-	const StelStyle getModuleStyleSheet(const StelStyle& style);
-
 public slots:
 
 	//! Show dialog printing enabling preview and print buttons
@@ -41,11 +37,6 @@ public slots:
 private slots:
 
 private:
-
-	//Styles
-	QByteArray normalStyleSheet;
-	QByteArray nightStyleSheet;
-
 	//Printing options
 	bool useInvertColors, scaleToFit, printData, printSSEphemerides;
 	QString orientation;

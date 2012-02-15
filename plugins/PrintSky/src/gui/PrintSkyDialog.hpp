@@ -77,7 +77,7 @@ private slots:
 	void printSSEphemeridesStateChanged(int state);
 
 private:
-
+	QFont font;
 	//Gui
 	StelGui* gui;
 	bool currentVisibilityGui;
