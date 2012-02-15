@@ -420,7 +420,7 @@ void StelCore::moveObserverToSelected()
 	}
 	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mmgr);
-	mmgr->setFlagTracking(false);
+	mmgr->setTracking(false);
 }
 
 // Get the informations on the current location

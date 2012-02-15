@@ -65,7 +65,7 @@ StelButton::StelButton(QGraphicsItem* parent,
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());
 
-	redMode = StelApp::getInstance().getVisionModeNight();
+	redMode = StelApp::getInstance().isNightVisionMode();
 	pixOnRed = StelButton::makeRed(pixOn);
 	pixOffRed = StelButton::makeRed(pixOff);
 	if (!pixHover.isNull())
@@ -120,7 +120,7 @@ StelButton::StelButton(QGraphicsItem* parent,
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());
 
-	redMode = StelApp::getInstance().getVisionModeNight();
+	redMode = StelApp::getInstance().isNightVisionMode();
 	pixOnRed = StelButton::makeRed(pixOn);
 	pixOffRed = StelButton::makeRed(pixOff);
 	if (isTristate_)

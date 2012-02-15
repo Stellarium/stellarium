@@ -326,7 +326,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 // Draw the atmosphere using the precalc values stored in tab_sky
 void Atmosphere::draw(StelCore* core)
 {
-	if (StelApp::getInstance().getVisionModeNight())
+	if (StelApp::getInstance().isNightVisionMode())
 		return;
 
 	StelToneReproducer* eye = core->getToneReproducer();

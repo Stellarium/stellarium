@@ -326,7 +326,7 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected()){
 		if (flagShowOculars) {
 			// center the selected object in the ocular, and track.
-			movementManager->setFlagTracking(true);
+			movementManager->setTracking(true);
 		} else {
 			// remove the usage label if it is being displayed.
 			hideUsageMessageIfDisplayed();
@@ -591,7 +591,7 @@ void Oculars::setScreenFOVForCCD()
 		if (actualFOVx < actualFOVy) {
 			actualFOVx = actualFOVy;
 		}
-		movementManager->setFlagTracking(true);
+		movementManager->setTracking(true);
 		movementManager->zoomTo(actualFOVx * 3.0, 0.0);
 	}
 }
@@ -1128,7 +1128,7 @@ void Oculars::toggleCCD(bool show)
 		StelCore *core = StelApp::getInstance().getCore();
 		StelMovementMgr *movementManager = core->getMovementMgr();
 		movementManager->zoomTo(movementManager->getInitFov());
-		movementManager->setFlagTracking(false);
+		movementManager->setTracking(false);
 
 		if (guiPanel)
 			guiPanel->foldGui();
@@ -1624,7 +1624,7 @@ void Oculars::unzoomOcular()
 	gridManager->setMeridianLineDisplayed(flagMeridianLine);
 	gridManager->setHorizonLineDisplayed(flagHorizonLine);
 	gridManager->setGalacticPlaneLineDisplayed(flagGalacticPlaneLine);
-	movementManager->setFlagTracking(false);
+	movementManager->setTracking(false);
 	movementManager->setFlagEnableZoomKeys(true);
 	movementManager->setFlagEnableMouseNavigation(true);
 
@@ -1683,7 +1683,7 @@ void Oculars::zoomOcular()
 	gridManager->setHorizonLineDisplayed(false);
 	gridManager->setGalacticPlaneLineDisplayed(false);
 	
-	movementManager->setFlagTracking(true);
+	movementManager->setTracking(true);
 	movementManager->setFlagEnableZoomKeys(false);
 	movementManager->setFlagEnableMouseNavigation(false);
 	
