@@ -105,7 +105,7 @@ void Scenery3dMgr::handleKeys(QKeyEvent* e)
                         e->accept();
                         break;
                     case Qt::Key_B:
-                        if (GLEE_EXT_framebuffer_object)
+                        if (GLEE_VERSION_1_5)
                         {
                             enableBumps   = !enableBumps;
                             scenery3d->setBumpsEnabled(enableBumps);
