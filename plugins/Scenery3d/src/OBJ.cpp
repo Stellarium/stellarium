@@ -260,21 +260,22 @@ vector<OBJ::StelModel> OBJ::getStelArrays()
     StelModel stelModel;
     for (ModelList::iterator it1 = models.begin(); it1 != models.end(); it1++) {
         Model& model = *it1;
-        const MTL::Material& material = mtlLib.getMaterial(model.material);
-        if (!material.texture.empty()) {
-            stelModel.texture = mtlLib.getTexture(material.texture);
+        //const MTL::Material& material = mtlLib.getMaterial(model.material);
+        const MTL::Material* material = mtlLib.getMaterial(model.material);
+        if (!material->texture.empty()) {
+            stelModel.texture = mtlLib.getTexture(material->texture);
         } else {
             stelModel.texture.clear();
         }
 
-        if (!material.bump_texture.empty()){
-            stelModel.bump_texture = mtlLib.getTexture(material.bump_texture);
+        if (!material->bump_texture.empty()){
+            stelModel.bump_texture = mtlLib.getTexture(material->bump_texture);
         } else {
             stelModel.bump_texture.clear();
         }
 
         stelModel.triangleCount = model.faces.size();
-        stelModel.color = Vec3f(material.color.r, material.color.g, material.color.b);
+        stelModel.color = Vec3f(material->color.r, material->color.g, material->color.b);
         stelModel.vertices = new Vec3d[stelModel.triangleCount * 3];
         stelModel.texcoords = new Vec2f[stelModel.triangleCount * 3];
         stelModel.normals = new Vec3f[stelModel.triangleCount * 3];
