@@ -35,3 +35,4 @@ void main(void)
 	vecPosition = gl_Vertex.xyz;
 	vecNormal = gl_Normal;
 }
+
