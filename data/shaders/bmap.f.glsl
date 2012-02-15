@@ -21,11 +21,13 @@
 uniform sampler2D tex;
 uniform sampler2D bmap;
 
+uniform bool boolBump;
+
 varying vec3 vecLight;
 varying vec3 vecPosition;
 varying vec3 vecNormal;
 
-void main(void)
+vec4 getBumpedDiffuse()
 {
 	//In-shader tangent/binormal calculation by kvark (http://stackoverflow.com/a/5261402)
 	//Derived position
@@ -63,10 +65,33 @@ void main(void)
 	
 	vec3 ldir = normalize(tbnvLight);
 	
+	return gl_LightSource[0].diffuse * max(0.0, dot(normal, ldir));
+}
+
+vec4 getDiffuse()
+{
+	vec3 normal = normalize(vecNormal);
+    vec3 light = normalize(vecLight);
+	
+	return gl_LightSource[0].diffuse * max(0.0, dot(normal, light));
+}
+
+vec4 getDiffuseLighting()
+{
+	if(boolBump)
+	{
+		return getBumpedDiffuse();
+	} 
+	else
+	{
+		return getDiffuse();
+	}	
+}
+
+void main(void)
+{
+	vec4 diffuse = getDiffuseLighting();
 	vec4 texColor = texture(tex, gl_TexCoord[0].st);
-	
-	vec4 diffuse = gl_LightSource[0].diffuse * max(0.0, dot(normal, ldir));
-	
 	vec4 color = texColor * (gl_LightSource[0].ambient + diffuse);
 	gl_FragColor = vec4(color.xyz, 1.0);
 }

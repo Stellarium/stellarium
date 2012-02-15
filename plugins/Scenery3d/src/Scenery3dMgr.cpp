@@ -166,7 +166,6 @@ void Scenery3dMgr::init()
         cubemapSize=0;
         shadowmapSize=0;
     }
-    //cubemapSize=0;
     // create action for enable/disable & hook up signals
     StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
     Q_ASSERT(gui);

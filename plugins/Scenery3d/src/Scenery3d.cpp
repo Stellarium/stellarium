@@ -547,9 +547,13 @@ void Scenery3d::sendToShader(OBJ::StelModel& stelModel, Effect cur)
                 int location = curShader->uniformLocation("bmap");
                 curShader->setUniform(location, 2);
 
+                location = curShader->uniformLocation("boolBump");
+                curShader->setUniform(location, true);
+
                 glActiveTexture(GL_TEXTURE0);
             } else {
-                glBindTexture(GL_TEXTURE_2D, 0);
+                int location = curShader->uniformLocation("boolBump");
+                curShader->setUniform(location, false);
             }
         }
     }

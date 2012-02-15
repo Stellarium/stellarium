@@ -43,22 +43,24 @@ class MTL
         //! Returns a stored material definition.
         //! @param matName Name of the material, as defined in the .mtl file.
         //! @return Reference to the material definition.
-        const Material& getMaterial(std::string matName);
+        const Material* getMaterial(std::string matName);
         //! Returns a shared pointer to a StelTexture reference.
         //! Make sure to call uploadTexturesGL() before using this.
         //! @param texName File name of the texture as defined in the .mtl file.
         StelTextureSP getTexture(std::string texName);
         //! @return number of materials in map.
-        int size() { return mtlMap.size(); }
+        int size() { return mMap.size(); }
     private:
         std::string absolutePath(std::string path);
 
         bool loaded;
         std::string basePath;
 
-        typedef std::map<std::string, Material> MaterialMap;
-        MaterialMap mtlMap;
-        std::map<std::string, StelTextureSP> textureMapGL;
+        typedef std::map<std::string, Material*> MatMap;
+        MatMap mMap;
+        //typedef std::map<std::string, Material> MaterialMap;
+        //MaterialMap mtlMap;
+        std::map<std::string, StelTextureSP> textureMapGL; 
 };
 
 #endif

@@ -167,6 +167,16 @@ void StelShader::set3x3Uniform (int location, float mat[])
         glUniformMatrix3fv(location, 1, GL_FALSE, mat);
 }
 
+void StelShader::setUniform(int location, bool flag)
+{
+    if(!use() || location == -1)
+    {
+        return;
+    }
+
+    glUniform1i(location, flag);
+}
+
 bool StelShader::load(std::string vertexShaderPath, std::string fragmentShaderPath)
 {
     if(!(vertexShader = loadShader(vertexShaderPath, GL_VERTEX_SHADER)))
