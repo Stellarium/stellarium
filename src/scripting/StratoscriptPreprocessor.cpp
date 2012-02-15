@@ -172,7 +172,7 @@ bool StelScriptMgr::preprocessStratoScript(QFile& input, QString& output, const 
 			else if (args.at(1) == "star_twinkle") // TODO when in new script API
 				line = "// untranslated stratoscropt (flag star_twinkle): " + line;
 			else if (args.at(1) == "stars")
-				line = QString("StarMgr.setFlagStars(%1);").arg(strToBool(args.at(2)));
+				line = QString("StarMgr.setStarsDisplayed(%1);").arg(strToBool(args.at(2)));
 			else
 				line = "// untranslated stratoscript (flag): " + line;
 		}

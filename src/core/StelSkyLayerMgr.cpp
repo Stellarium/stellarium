@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
+ * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +40,7 @@
 #include <QVariantList>
 #include <QSettings>
 
-StelSkyLayerMgr::StelSkyLayerMgr(void) : flagShow(true)
+StelSkyLayerMgr::StelSkyLayerMgr(void) : displayed(true)
 {
 	setObjectName("StelSkyLayerMgr");
 }
@@ -154,7 +155,7 @@ void StelSkyLayerMgr::removeSkyLayer(StelSkyLayerP l)
 // Draw all the multi-res images collection
 void StelSkyLayerMgr::draw(StelCore* core)
 {
-	if (!flagShow)
+	if (!displayed)
 		return;
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
@@ -330,4 +331,17 @@ StelSkyLayerP StelSkyLayerMgr::getSkyLayer(const QString& key) const
 	if (allSkyLayers.contains(key))
 		return allSkyLayers[key]->layer;
 	return StelSkyLayerP();
+}
+
+void StelSkyLayerMgr::setDisplayed(const bool display)
+{
+	if (displayed != display) {
+		displayed = display;
+		emit displayedChanged(display);
+	}
+}
+
+bool StelSkyLayerMgr::isDisplayed() const
+{
+	return displayed;
 }

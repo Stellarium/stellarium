@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2012 Timothy Reaves
  *
  * The big star catalogue extension to Stellarium:
  * Author and Copyright: Johannes Gajdosik, 2006
@@ -226,7 +227,7 @@ void StarMgr::init()
 	loadData(starSettings);
 	starFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 
-	setFlagStars(conf->value("astro/flag_stars", true).toBool());
+	setStarsDisplayed(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
 	setLabelsAmount(conf->value("stars/labels_amount",3.f).toFloat());
 
@@ -702,7 +703,7 @@ void StarMgr::draw(StelCore* core)
 QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const StelCore* core) const
 {
 	QList<StelObjectP > result;
-	if (!getFlagStars())
+	if (!isStarsDisplayed())
 		return result;
 
 	Vec3d v(vv);
@@ -924,6 +925,18 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	return result;
 }
 
+void StarMgr::setStarsDisplayed(const bool displayed)
+{
+	if (starsFader != displayed) {
+		starsFader=displayed;
+		emit starsDisplayedChanged(displayed);
+	}
+}
+
+bool StarMgr::isStarsDisplayed(void) const
+{
+	return starsFader==true;
+}
 
 //! Define font file name and size to use for star names display
 void StarMgr::setFontSize(double newFontSize)

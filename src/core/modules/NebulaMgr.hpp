@@ -2,6 +2,7 @@
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
  * Copyright (C) 2011 Alexander Wolf
+ * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,6 +45,10 @@ typedef QSharedPointer<Nebula> NebulaP;
 class NebulaMgr : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool hintsDisplayed
+			   READ isHintsDisplayed
+			   WRITE setHintsDisplayed
+			   NOTIFY hintsDisplayedChanged)
 
 public:
 	NebulaMgr();
@@ -110,14 +115,14 @@ public slots:
 	void setHintsFadeDuration(float duration) {hintsFader.setDuration((int) (duration * 1000.f));}
 
 	//! Set flag for displaying Nebulae Hints.
-	void setFlagHints(bool b) {hintsFader=b;}
+	void setHintsDisplayed(const bool displayed);
 	//! Get flag for displaying Nebulae Hints.
-	bool getFlagHints(void) const {return hintsFader;}
+	bool isHintsDisplayed(void) const;
 
 	//! Set flag used to turn on and off Nebula rendering.
-	void setFlagShow(bool b) { flagShow = b; }
+	void setDisplayed(bool b) { flagShow = b; }
 	//! Get value of flag used to turn on and off Nebula rendering.
-	bool getFlagShow(void) const { return flagShow; }
+	bool isDisplayed(void) const { return flagShow; }
 
 	//! Set the color used to draw nebula labels.
 	void setLabelsColor(const Vec3f& c);
@@ -144,6 +149,9 @@ public slots:
 	//! Get the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
 	float getHintsAmount(void) const {return hintsAmount;}
+
+signals:
+	void hintsDisplayedChanged(const bool displayed);
 
 private slots:
 	//! Sets the colors of the Nebula labels and markers according to the

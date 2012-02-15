@@ -2,6 +2,7 @@
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
  * Copyright (c) 2010 Bogdan Marinov
+ * Copyright (c) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,6 +47,50 @@ typedef QSharedPointer<Planet> PlanetP;
 class SolarSystem : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(float fontSize
+			   READ getFontSize
+			   WRITE setFontSize
+			   NOTIFY fontSizeChanged)
+	Q_PROPERTY(bool hintsDisplayed
+			   READ isHintsDisplayed
+			   WRITE setHintsDisplayed
+			   NOTIFY hintsDisplayedChanged)
+	Q_PROPERTY(Vec3f labelsColor
+			   READ getLabelsColor
+			   WRITE setLabelsColor
+			   NOTIFY labelsColorChanged)
+	Q_PROPERTY(bool labelsDisplayed
+			   READ isLabelsDisplayed
+			   WRITE setLabelsDisplayed
+			   NOTIFY labelsDisplayedChanged)
+	Q_PROPERTY(float moonScale
+			   READ getMoonScale
+			   WRITE setMoonScale
+			   NOTIFY moonScaleChanged)
+	Q_PROPERTY(bool moonScaled
+			   READ isMoonScaled
+			   WRITE setMoonScaled
+			   NOTIFY moonScaledChanged)
+	Q_PROPERTY(Vec3f orbitsColor
+			   READ getOrbitsColor
+			   WRITE setOrbitsColor
+			   NOTIFY orbitsColorChanged)
+	Q_PROPERTY(bool orbitsDisplayed
+			   READ isOrbitsDisplayed
+			   WRITE setOrbitsDisplayed
+			   NOTIFY orbitsDisplayedChanged)
+	Q_PROPERTY(bool planetsDisplayed
+			   READ isPlanetsDisplayed
+			   WRITE setPlanetsDisplayed
+			   NOTIFY planetsDisplayedChanged)
+	Q_PROPERTY(Vec3f trailsColor
+			   READ getTrailsColor
+			   WRITE setTrailsColor
+			   NOTIFY trailsColorChanged)
+	Q_PROPERTY(bool trailsDisplayed
+			   READ isTrailsDisplayed
+			   WRITE setTrailsDisplayed
+			   NOTIFY trailsDisplayedChanged)
 
 public:
 	SolarSystem();
@@ -108,74 +153,89 @@ public slots:
 	// Method callable from script and GUI
 	// Properties setters and getters
 	//! Set flag which determines if planets are drawn or hidden.
-	void setFlagPlanets(bool b);
+	void setPlanetsDisplayed(const bool displayed);
 	//! Get the current value of the flag which determines if planet are drawn or hidden.
-	bool getFlagPlanets() const;
+	bool isPlanetsDisplayed() const;
 
 	//! Set flag which determines if planet trails are drawn or hidden.
-	void setFlagTrails(bool b);
+	void setTrailsDisplayed(const bool displayed);
 	//! Get the current value of the flag which determines if planet trails are drawn or hidden.
-	bool getFlagTrails() const;
+	bool isTrailsDisplayed() const;
 
 	//! Set flag which determines if planet hints are drawn or hidden along labels
-	void setFlagHints(bool b);
+	void setHintsDisplayed(const bool displayed);
 	//! Get the current value of the flag which determines if planet hints are drawn or hidden along labels
-	bool getFlagHints() const;
+	bool isHintsDisplayed() const;
 
 	//! Set flag which determines if planet labels are drawn or hidden.
-	void setFlagLabels(bool b);
+	void setLabelsDisplayed(const bool displayed);
 	//! Get the current value of the flag which determines if planet labels are drawn or hidden.
-	bool getFlagLabels() const;
+	bool isLabelsDisplayed() const;
 
 	//! Set the amount of planet labels. The real amount is also proportional with FOV.
 	//! The limit is set in function of the planets magnitude
 	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	void setLabelsAmount(float a) {labelsAmount=a;}
+	void setLabelsAmount(const float a);
 	//! Get the amount of planet labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	float getLabelsAmount(void) const {return labelsAmount;}
+	float getLabelsAmount(void) const;
 
 	//! Set flag which determines if planet orbits are drawn or hidden.
-	void setFlagOrbits(bool b);
+	void setOrbitsDisplayed(const bool displayed);
 	//! Get the current value of the flag which determines if planet orbits are drawn or hidden.
-	bool getFlagOrbits() const {return flagOrbits;}
+	bool isOrbitsDisplayed() const;
 
 	//! Set flag which determines if the light travel time calculation is used or not.
-	void setFlagLightTravelTime(bool b);
+	void setFlagLightTravelTime(const bool displayed);
 	//! Get the current value of the flag which determines if light travel time
 	//! calculation is used or not.
 	bool getFlagLightTravelTime(void) const {return flagLightTravelTime;}
 
 	//! Set planet names font size.
-	void setFontSize(float newFontSize);
+	void setFontSize(const float newFontSize);
+	float getFontSize() const;
 
 	//! Set the color used to draw planet labels.
-	void setLabelsColor(const Vec3f& c);
+	void setLabelsColor(const Vec3f& color);
 	//! Get the current color used to draw planet labels.
 	const Vec3f& getLabelsColor(void) const;
 
 	//! Set the color used to draw planet orbit lines.
-	void setOrbitsColor(const Vec3f& c);
+	void setOrbitsColor(const Vec3f& color);
 	//! Get the current color used to draw planet orbit lines.
 	Vec3f getOrbitsColor(void) const;
 
 	//! Set the color used to draw planet trails lines.
-	void setTrailsColor(const Vec3f& c) {trailColor=c;}
+	void setTrailsColor(const Vec3f& color);
 	//! Get the current color used to draw planet trails lines.
-	Vec3f getTrailsColor() const {return trailColor;}
+	Vec3f getTrailsColor() const;
 
 	//! Set flag which determines if Earth's moon is scaled or not.
-	void setFlagMoonScale(bool b);
+	void setMoonScaled(const bool scaled);
 	//! Get the current value of the flag which determines if Earth's moon is scaled or not.
-	bool getFlagMoonScale(void) const {return flagMoonScale;}
+	bool isMoonScaled(void) const;
 
 	//! Set the display scaling factor for Earth's moon.
-	void setMoonScale(float f);
+	void setMoonScale(const float factor);
 	//! Get the display scaling factor for Earth's oon.
-	float getMoonScale(void) const {return moonScale;}
+	float getMoonScale(void) const;
 
 	//! Translate names. (public so that SolarSystemEditor can call it).
 	void updateI18n();
+
+signals:
+	void fontSizeChanged(const float newSize);
+	void hintsDisplayedChanged(const bool displayed);
+	void labelsColorChanged(const Vec3f & newColor);
+	void labelsDisplayedChanged(const bool displayed);
+	void moonScaleChanged(const float newScale);
+	void moonScaledChanged(const bool scaled);
+	void orbitsColorChanged(const Vec3f & newColor);
+	void orbitsDisplayedChanged(const bool displayed);
+	void planetsDisplayedChanged(const bool displayed);
+	void trailsColorChanged(const Vec3f & newColor);
+	void trailsDisplayedChanged(const bool displayed);
+
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -277,6 +337,9 @@ private:
 	// Moon scale value
 	bool flagMoonScale;
 	float moonScale;
+
+	bool hintsDisplayed;
+	bool labelsDisplayed;
 
 	QFont planetNameFont;
 
