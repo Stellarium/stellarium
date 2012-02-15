@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: po_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-13 12:32+0700\n"
-"PO-Revision-Date: 2012-01-10 23:12+0000\n"
+"PO-Revision-Date: 2012-02-14 17:55+0000\n"
 "Last-Translator: Sverrir Gudmundsson <Unknown>\n"
 "Language-Team: <is@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-14 05:36+0000\n"
+"X-Launchpad-Export-Date: 2012-02-15 05:24+0000\n"
 "X-Generator: Launchpad (build 14781)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -150,17 +150,17 @@ msgstr "Birtustig: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "Sýndarbirtustig: <b>%1</b> (með ljósdeyfingu)"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "Birtustig: <b>%1</b> (með ljósdeyfingu: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr ""
+msgstr "Birtustig: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
 #, qt-format
@@ -1436,22 +1436,22 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
 msgid "Partial Lunar Eclipse"
-msgstr ""
+msgstr "Deildarmyrkvi á tungli"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:184
 msgid "Total Lunar Eclipse"
-msgstr ""
+msgstr "Almyrkvi á tungli"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
 msgid "Screensaver"
-msgstr ""
+msgstr "Skjáhvíla"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:188
 msgid "Solar Eclipse 2009"
-msgstr ""
+msgstr "Sólmyrkvi 2009"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:190
@@ -1461,7 +1461,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:192
 msgid "Zodiac"
-msgstr ""
+msgstr "Dýrahringurinn"
 
 #: src/translations.h:195
 msgid "Look around each installed landscape."
@@ -1550,7 +1550,7 @@ msgstr "Austurríki"
 
 #: src/translations.h:217
 msgid "Australia"
-msgstr ""
+msgstr "Ástralía"
 
 #: src/translations.h:218
 msgid "Aruba"
