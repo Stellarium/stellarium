@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
+ * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,6 +30,14 @@
 class StelMovementMgr : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(MountMode mountMode
+			   READ getMountMode
+			   WRITE setMountMode
+			   NOTIFY mountModeChanged)
+	Q_PROPERTY(bool tracking
+			   READ isTracking
+			   WRITE setTracking
+			   NOTIFY trackingChanged)
 
 public:
 
@@ -92,9 +101,9 @@ public slots:
 	void setEquatorialMount(bool b) {setMountMode(b ? MountEquinoxEquatorial : MountAltAzimuthal);}
 
 	//! Set object tracking on/off and go to selected object
-	void setFlagTracking(bool b=true);
+	void setTracking(const bool track = true);
 	//! Get current object tracking status.
-	bool getFlagTracking(void) const {return flagTracking;}
+	bool isTracking(void) const;
 
 	//! Set whether sky position is to be locked.
 	void setFlagLockEquPos(bool b);
@@ -191,12 +200,16 @@ public slots:
 	void zoomOut(bool);
 
 	//! Set current mount type defining the reference frame in which head movements occur.
-	void setMountMode(MountMode m);
+	void setMountMode(const MountMode mode);
 	//! Get current mount type defining the reference frame in which head movements occur.
-	MountMode getMountMode(void) const {return mountMode;}
+	MountMode getMountMode(void) const;
 
 	void setDragTimeMode(bool b) {dragTimeMode=b;}
 	bool getDragTimeMode() const {return dragTimeMode;}
+
+signals:
+	void trackingChanged(const bool track);
+	void mountModeChanged(const StelMovementMgr::MountMode mode);
 
 private slots:
 	//! Called when the selected object changes.
@@ -230,7 +243,7 @@ private:
 	StelCore* core;          // The core on which the movement are applied
 	class StelObjectMgr* objectMgr;
 	bool flagLockEquPos;     // Define if the equatorial position is locked
-	bool flagTracking;       // Define if the selected object is followed
+	bool tracking;       // Define if the selected object is followed
 
 	// Flags for mouse movements
 	bool isMouseMovingHoriz;

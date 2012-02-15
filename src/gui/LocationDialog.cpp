@@ -43,7 +43,7 @@
 LocationDialog::LocationDialog() : isEditingNew(false)
 {
 	ui = new Ui_locationDialogForm;
-	lastVisionMode = StelApp::getInstance().getVisionModeNight();
+	lastVisionMode = StelApp::getInstance().isNightVisionMode();
 }
 
 LocationDialog::~LocationDialog()
@@ -207,7 +207,7 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 void LocationDialog::setMapForLocation(const StelLocation& loc)
 {
 	// Avoids usless processing
-	if (lastPlanet==loc.planetName && lastVisionMode==StelApp::getInstance().getVisionModeNight())
+	if (lastPlanet==loc.planetName && lastVisionMode==StelApp::getInstance().isNightVisionMode())
 		return;
 
 	QPixmap pixmap;
@@ -237,7 +237,7 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 		}
 	}
 
-	if (StelApp::getInstance().getVisionModeNight())
+	if (StelApp::getInstance().isNightVisionMode())
 	{
 		ui->mapLabel->setPixmap(StelButton::makeRed(pixmap));
 	}
@@ -248,7 +248,7 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 
 	// For caching
 	lastPlanet = loc.planetName;
-	lastVisionMode = StelApp::getInstance().getVisionModeNight();
+	lastVisionMode = StelApp::getInstance().isNightVisionMode();
 }
 
 void LocationDialog::populatePlanetList()

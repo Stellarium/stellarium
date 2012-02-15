@@ -123,7 +123,7 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 
 Vec3f Supernova::getInfoColor(void) const
 {
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
+	return StelApp::getInstance().isNightVisionMode() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
 }
 
 float Supernova::getVMagnitude(const StelCore* core, bool withExtinction) const

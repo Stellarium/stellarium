@@ -129,7 +129,7 @@ float Nebula::getVMagnitude(const StelCore* core, bool withExtinction) const
 
 float Nebula::getSelectPriority(const StelCore* core) const
 {
-	if( ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getFlagHints() )
+	if( ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->isHintsDisplayed() )
 	{
 		// make very easy to select IF LABELED
 		return -10.f;
@@ -143,7 +143,7 @@ float Nebula::getSelectPriority(const StelCore* core) const
 
 Vec3f Nebula::getInfoColor(void) const
 {
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.4) : ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getLabelsColor();
+	return StelApp::getInstance().isNightVisionMode() ? Vec3f(0.6, 0.0, 0.4) : ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getLabelsColor();
 }
 
 double Nebula::getCloseViewFov(const StelCore*) const

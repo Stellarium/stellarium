@@ -77,7 +77,7 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestStopSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(stopSound(const QString&)));
 	connect(this, SIGNAL(requestDropSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(dropSound(const QString&)));
 	connect(this, SIGNAL(requestExit()), this->parent(), SLOT(stopScript()));
-	connect(this, SIGNAL(requestSetNightMode(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
+	connect(this, SIGNAL(requestSetNightMode(bool)), &StelApp::getInstance(), SLOT(setNightVisionMode(bool)));
 	connect(this, SIGNAL(requestSetProjectionMode(QString)), StelApp::getInstance().getCore(), SLOT(setCurrentProjectionTypeKey(QString)));
 	connect(this, SIGNAL(requestSetSkyCulture(QString)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureID(QString)));
 	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelMainGraphicsView::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));
@@ -223,7 +223,7 @@ void StelMainScriptAPI::setMountMode(const QString& mode)
 
 bool StelMainScriptAPI::getNightMode()
 {
-	return StelApp::getInstance().getVisionModeNight();
+	return StelApp::getInstance().isNightVisionMode();
 }
 
 void StelMainScriptAPI::setNightMode(bool b)
@@ -565,11 +565,11 @@ void StelMainScriptAPI::clear(const QString& state)
 		movmgr->setMountMode(StelMovementMgr::MountAltAzimuthal);
 		skyd->setFlagTwinkle(true);
 		skyd->setFlagLuminanceAdaptation(true);
-		ssmgr->setFlagPlanets(true);
-		ssmgr->setFlagHints(false);
-		ssmgr->setFlagOrbits(false);
-		ssmgr->setFlagMoonScale(false);
-		ssmgr->setFlagTrails(false);
+		ssmgr->setPlanetsDisplayed(true);
+		ssmgr->setHintsDisplayed(false);
+		ssmgr->setOrbitsDisplayed(false);
+		ssmgr->setMoonScaled(false);
+		ssmgr->setTrailsDisplayed(false);
 		mmgr->setZHR(10);
 		glmgr->setAzimuthalGridDisplayed(false);
 		glmgr->setGalacticGridDisplayed(false);
@@ -586,8 +586,8 @@ void StelMainScriptAPI::clear(const QString& state)
 		cmgr->setBoundariesDisplayed(false);
 		cmgr->setArtDisplayed(false);
 		smgr->setFlagLabels(false);
-		ssmgr->setFlagLabels(false);
-		nmgr->setFlagHints(false);
+		ssmgr->setLabelsDisplayed(false);
+		nmgr->setHintsDisplayed(false);
 		lmgr->setLandscapeDisplayed(true);
 		lmgr->setAtmosphereDisplayed(true);
 		lmgr->setFogDisplayed(true);
@@ -597,11 +597,11 @@ void StelMainScriptAPI::clear(const QString& state)
 		movmgr->setMountMode(StelMovementMgr::MountEquinoxEquatorial);
 		skyd->setFlagTwinkle(false);
 		skyd->setFlagLuminanceAdaptation(false);
-		ssmgr->setFlagPlanets(true);
-		ssmgr->setFlagHints(false);
-		ssmgr->setFlagOrbits(false);
-		ssmgr->setFlagMoonScale(false);
-		ssmgr->setFlagTrails(false);
+		ssmgr->setPlanetsDisplayed(true);
+		ssmgr->setHintsDisplayed(false);
+		ssmgr->setOrbitsDisplayed(false);
+		ssmgr->setMoonScaled(false);
+		ssmgr->setTrailsDisplayed(false);
 		mmgr->setZHR(0);
 		glmgr->setAzimuthalGridDisplayed(false);
 		glmgr->setGalacticGridDisplayed(false);
@@ -618,8 +618,8 @@ void StelMainScriptAPI::clear(const QString& state)
 		cmgr->setBoundariesDisplayed(true);
 		cmgr->setArtDisplayed(false);
 		smgr->setFlagLabels(true);
-		ssmgr->setFlagLabels(true);
-		nmgr->setFlagHints(true);
+		ssmgr->setLabelsDisplayed(true);
+		nmgr->setHintsDisplayed(true);
 		lmgr->setLandscapeDisplayed(false);
 		lmgr->setAtmosphereDisplayed(false);
 		lmgr->setFogDisplayed(false);
@@ -629,11 +629,11 @@ void StelMainScriptAPI::clear(const QString& state)
 		movmgr->setMountMode(StelMovementMgr::MountEquinoxEquatorial);
 		skyd->setFlagTwinkle(false);
 		skyd->setFlagLuminanceAdaptation(false);
-		ssmgr->setFlagPlanets(false);
-		ssmgr->setFlagHints(false);
-		ssmgr->setFlagOrbits(false);
-		ssmgr->setFlagMoonScale(false);
-		ssmgr->setFlagTrails(false);
+		ssmgr->setPlanetsDisplayed(false);
+		ssmgr->setHintsDisplayed(false);
+		ssmgr->setOrbitsDisplayed(false);
+		ssmgr->setMoonScaled(false);
+		ssmgr->setTrailsDisplayed(false);
 		mmgr->setZHR(0);
 		glmgr->setAzimuthalGridDisplayed(false);
 		glmgr->setGalacticGridDisplayed(false);
@@ -650,8 +650,8 @@ void StelMainScriptAPI::clear(const QString& state)
 		cmgr->setBoundariesDisplayed(false);
 		cmgr->setArtDisplayed(false);
 		smgr->setFlagLabels(false);
-		ssmgr->setFlagLabels(false);
-		nmgr->setFlagHints(false);
+		ssmgr->setLabelsDisplayed(false);
+		nmgr->setHintsDisplayed(false);
 		lmgr->setLandscapeDisplayed(false);
 		lmgr->setAtmosphereDisplayed(false);
 		lmgr->setFogDisplayed(false);
