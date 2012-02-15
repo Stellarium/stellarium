@@ -520,8 +520,15 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
     for (unsigned int i=0; i<objModelArrays.size(); i++) {
         OBJ::StelModel& stelModel = objModelArrays[i];
         if(textures) sendToShader(stelModel, curEffect);
-        glColor3fv(stelModel.color.v);
-        painter.setArrays(stelModel.vertices, stelModel.texcoords, __null, stelModel.normals);
+        //glColor3fv(stelModel.color.v);
+        painter.setColor(stelModel.color.v[0], stelModel.color.v[1], stelModel.color.v[2]);
+        if(stelModel.texture)
+        {
+            painter.setArrays(stelModel.vertices, stelModel.texcoords, __null, stelModel.normals);
+        } else
+        {
+            painter.setArrays(stelModel.vertices, __null, __null, stelModel.normals);
+        }
         painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);
     }
 }
