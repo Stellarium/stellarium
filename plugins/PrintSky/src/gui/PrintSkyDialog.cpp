@@ -317,9 +317,10 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 	StelLocation locationData=core->getCurrentLocation();
 	double jd = core->getJDay();
 
-	font.setPixelSize(printer->pageRect().width()/60);
+	int fontsize = (int)printer->pageRect().width()/60;
+	font.setPixelSize(fontsize);
 	painter.setFont(font);
-	int lineSpacing=font.pixelSize()+5;
+	int lineSpacing=fontsize+5;
 
 	//qDebug() << "PrintSky: printer debugging information:";
 	//qDebug() << "Current printer resolution:" << printer->resolution();
@@ -352,27 +353,33 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 							 .arg(q_("m"));
 		painter.drawText(surfaceData.adjusted(50, lineSpacing, 0, 0), Qt::AlignLeft, location);
 
-		QString time=QString("%1: ").arg(q_("Local time"));
-		QString newDate = StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd) +" "
-							+StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd)+QString(" (GMT%1%2)").arg(StelApp::getInstance().getLocaleMgr().getGMTShift(jd)>=0? '+':'-').arg(StelApp::getInstance().getLocaleMgr().getGMTShift(jd));
-		time+=newDate;
-		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*2, 0, 0), Qt::AlignLeft, time);
+		StelLocaleMgr lmgr = StelApp::getInstance().getLocaleMgr();
+		QString datetime = QString("%1: %2 %3 (UTC%4%5)")
+					.arg(q_("Local time"))
+					.arg(lmgr.getPrintableDateLocal(jd))
+					.arg(lmgr.getPrintableTimeLocal(jd))
+					.arg(lmgr.getGMTShift(jd)>=0? '+':'-')
+					.arg(lmgr.getGMTShift(jd));
+
+		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*2, 0, 0), Qt::AlignLeft, datetime);
 
 		QString str;
 		QTextStream wos(&str);
 		wos << q_("FOV: ") << qSetRealNumberPrecision(3) << core->getMovementMgr()->getCurrentFov() << QChar(0x00B0);
 		painter.drawText(surfaceData.adjusted(50, (lineSpacing)*3, 0, 0), Qt::AlignLeft, *wos.string());
 
-		painter.drawText(surfaceData.adjusted(surfaceData.width()-(15*font.pixelSize()), 0, 0, 0), Qt::AlignLeft, q_("Magnitude"));
+		painter.drawText(surfaceData.adjusted(surfaceData.width()-(15*fontsize), 0, 0, 0), Qt::AlignLeft, q_("Magnitude"));
 
 		QList< QPair<float,float> > listPairsMagnitudesRadius=getListMagnitudeRadius(core);
 
-		int xPos=-(12*font.pixelSize()), yPos=lineSpacing+10;
+		int xPos=-(12*fontsize), yPos=lineSpacing+10;
 		for (int icount=1; icount<=listPairsMagnitudesRadius.count(); ++icount)
 		{
 			painter.drawText(surfaceData.adjusted(surfaceData.width()+xPos, yPos, 0, 0), Qt::AlignLeft, QString("%1").arg(listPairsMagnitudesRadius.at(icount-1).first));
 			painter.setBrush(Qt::SolidPattern);
-			painter.drawEllipse(QPoint(surfaceData.left()+surfaceData.width()+xPos-40, surfaceData.top()+yPos+(font.pixelSize()/2)), std::ceil(listPairsMagnitudesRadius.at(icount-1).second), std::ceil(listPairsMagnitudesRadius.at(icount-1).second));
+			painter.drawEllipse(QPoint(surfaceData.left() + surfaceData.width() + xPos - 40, surfaceData.top() + yPos + (fontsize/2)),
+									  (int) std::ceil(listPairsMagnitudesRadius.at(icount - 1).second), 
+									  (int) std::ceil(listPairsMagnitudesRadius.at(icount - 1).second));
 			yPos+=lineSpacing;
 			if (yPos+lineSpacing>=surfaceData.height())
 			{
@@ -424,20 +431,20 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 				    printer->newPage();
 				    painter.drawText(0, 0, printer->paperRect().width(), yPos, Qt::AlignCenter, q_("SOLAR SYSTEM EPHEMERIDES"));
 
-				    int ratioWidth=300.*(double) font.pixelSize()/45.;
+				    int ratioWidth=300.*(double) fontsize/45.;
 				    int xPos=printer->pageRect().left()-ratioWidth;;
 				    yPos+=(lineSpacing)*2;				    
 
-				    painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, font.pixelSize()), Qt::AlignCenter, q_("Name"));
-				    painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, font.pixelSize()), Qt::AlignCenter, q_("RA"));
-				    painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, font.pixelSize()), Qt::AlignCenter, q_("Dec"));
-				    painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, font.pixelSize()), Qt::AlignCenter, q_("Rising"));
-				    painter.drawText(QRect(xPos, yPos-font.pixelSize()-10, ratioWidth, font.pixelSize()), Qt::AlignCenter, q_("Local Time"));
-				    painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, font.pixelSize()), Qt::AlignCenter, q_("Transit"));
-				    painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, font.pixelSize()), Qt::AlignCenter, q_("Setting"));
-				    painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, font.pixelSize()), Qt::AlignCenter, q_("Dist.(AU)"));
-				    painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, font.pixelSize()), Qt::AlignCenter, q_("Ap.Mag."));
-				    yPos+=lineSpacing;
+				    painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, fontsize), Qt::AlignCenter, q_("Name"));
+				    painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, fontsize), Qt::AlignCenter, q_("RA"));
+				    painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, fontsize), Qt::AlignCenter, q_("Dec"));
+				    painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, fontsize), Qt::AlignCenter, q_("Rising"));
+				    painter.drawText(QRect(xPos, yPos-fontsize-lineSpacing/4, ratioWidth*3, fontsize), Qt::AlignCenter, q_("Local Time"));
+				    painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, fontsize), Qt::AlignCenter, q_("Transit"));
+				    painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, fontsize), Qt::AlignCenter, q_("Setting"));
+				    painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, fontsize), Qt::AlignCenter, q_("Dist.(AU)"));
+				    painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, fontsize), Qt::AlignCenter, q_("Ap.Mag."));
+				    yPos+=(lineSpacing)*1.25;
 				    doHeader=false;
 				}
 
@@ -463,25 +470,25 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 
 				int shift=StelApp::getInstance().getLocaleMgr().getGMTShift(jd);
 
-				int ratioWidth=300.*(double) font.pixelSize()/45.;
+				int ratioWidth=300.*(double) fontsize/45.;
 				int xPos=printer->pageRect().left()-ratioWidth;
 
 				oddLine=!oddLine;
 
 
 				painter.setPen(Qt::NoPen);
-				painter.setBrush((oddLine? Qt::white: Qt::lightGray));
-				painter.drawRect(QRect(xPos+ratioWidth, yPos, ratioWidth*8, font.pixelSize()));
+				painter.setBrush(oddLine? Qt::white: Qt::lightGray);
+				painter.drawRect(QRect(xPos+ratioWidth, yPos, ratioWidth*8, fontsize+lineSpacing));
 				painter.setPen(Qt::SolidLine);
 
-				painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, font.pixelSize()), Qt::AlignLeft, q_(englishName));
-				painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, font.pixelSize()), Qt::AlignRight, QString("%1").arg(StelUtils::radToHmsStr(ra)));
-				painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, font.pixelSize()), Qt::AlignRight, QString("%1").arg(StelUtils::radToDmsStr(dec)));
-				painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, font.pixelSize()), Qt::AlignCenter, QString("%1").arg(printableTime(rising, shift)));
-				painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, font.pixelSize()), Qt::AlignCenter, QString("%1").arg(printableTime(transit, shift)));
-				painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, font.pixelSize()), Qt::AlignCenter, QString("%1").arg(printableTime(setting, shift)));
-				painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, font.pixelSize()), Qt::AlignRight, QString("%1").arg(p->getDistance(), 0, 'f', 5));
-				painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, font.pixelSize()), Qt::AlignRight, QString("%1").arg(p->getVMagnitude(core), 0, 'f', 3));
+				painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, fontsize), Qt::AlignLeft, QString(" %1").arg(q_(englishName)));
+				painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, fontsize), Qt::AlignRight, QString("%1").arg(StelUtils::radToHmsStr(ra)));
+				painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, fontsize), Qt::AlignRight, QString("%1").arg(StelUtils::radToDmsStr(dec)));
+				painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, fontsize), Qt::AlignCenter, QString("%1").arg(printableTime(rising, shift)));
+				painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, fontsize), Qt::AlignCenter, QString("%1").arg(printableTime(transit, shift)));
+				painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, fontsize), Qt::AlignCenter, QString("%1").arg(printableTime(setting, shift)));
+				painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, fontsize), Qt::AlignRight, QString("%1").arg(p->getDistance(), 0, 'f', 5));
+				painter.drawText(QRect(xPos+=ratioWidth, yPos, ratioWidth, fontsize), Qt::AlignRight, QString("%1 ").arg(p->getVMagnitude(core), 0, 'f', 3));
 
 				yPos+=lineSpacing;
 				if (yPos+((lineSpacing)*3)>=printer->pageRect().top()+printer->pageRect().height())
