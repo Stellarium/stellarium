@@ -341,8 +341,8 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 		QString printLatitude=StelUtils::radToDmsStr((std::fabs(locationData.latitude)/180.)*M_PI);
 		QString printLongitude=StelUtils::radToDmsStr((std::fabs(locationData.longitude)/180.)*M_PI);
 
-		QString location = QString("%1 %2,\t%3,\t%4;\t%5\t%6\t%7%8")
-							 .arg(q_("Location:"))
+		QString location = QString("%1: %2,\t%3,\t%4;\t%5\t%6\t%7%8")
+							 .arg(q_("Location"))
 							 .arg(locationData.name)
 							 .arg(q_(locationData.country))
 							 .arg(q_(locationData.planetName))
