@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-02-13 12:32+0700\n"
-"PO-Revision-Date: 2012-02-05 15:15+0000\n"
+"PO-Revision-Date: 2012-02-16 00:38+0000\n"
 "Last-Translator: Kenan Dervišević <kenan3008@gmail.com>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-14 05:34+0000\n"
+"X-Launchpad-Export-Date: 2012-02-16 04:59+0000\n"
 "X-Generator: Launchpad (build 14781)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -5306,7 +5306,7 @@ msgstr "Z (redshift): %1"
 
 #: plugins/Pulsars/src/Pulsars.cpp:59
 msgid "Pulsars"
-msgstr ""
+msgstr "Pulsari"
 
 #: plugins/Pulsars/src/Pulsars.cpp:62
 msgid ""
@@ -5314,98 +5314,101 @@ msgid ""
 "about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
 "1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
 msgstr ""
+"Ovaj plugin iscrtava pozicije raznih pulsara zajedno s informacijama o "
+"svakom od njih. Informacije pulsara preuzete su iz 'Catalog of Pulsars' "
+"(Taylor+ 1995).<br><br>Napomena: identifikatori pulsara imaju prefiks \"PSR\""
 
 #: plugins/Pulsars/src/Pulsar.cpp:102
 msgid "pulsar"
-msgstr ""
+msgstr "pulsar"
 
 #: plugins/Pulsars/src/Pulsar.cpp:109
 #, qt-format
 msgid "Barycentric period: %1 s"
-msgstr ""
+msgstr "Baricentrički period: %1 s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:112
 #, qt-format
 msgid "Distance: %1 kpc (%2 ly)"
-msgstr ""
+msgstr "Udaljenost: %1 kpc (%2 ly)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:116
 #, qt-format
 msgid "Type of pulsar: %1"
-msgstr ""
+msgstr "Vrsta pulsara: %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:120
 #, qt-format
 msgid "Equivalent width of the integrated pulse profile: %1 ms"
-msgstr ""
+msgstr "Ekvivalentna širina integriranog profila pulsa: %1 ms"
 
 #: plugins/Pulsars/src/Pulsar.cpp:124
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
-msgstr ""
+msgstr "Širina profila na 50% maksimuma: %1 ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:130 plugins/Pulsars/src/Pulsar.cpp:142
 #: plugins/Pulsars/src/Pulsar.cpp:154
 msgid "Time averaged flux density at"
-msgstr ""
+msgstr "Vremeski prosjek gustina fluksa na"
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Pulsars/src/Pulsar.cpp:133 plugins/Pulsars/src/Pulsar.cpp:145
 #: plugins/Pulsars/src/Pulsar.cpp:157
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:136 plugins/Pulsars/src/Pulsar.cpp:148
 #: plugins/Pulsars/src/Pulsar.cpp:160
 msgid "mJy"
-msgstr ""
+msgstr "mJy"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:232
 msgid "globular cluster association"
-msgstr ""
+msgstr "loptasta klasterska povezanost"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:238
 msgid "SNR association"
-msgstr ""
+msgstr "SNR povezanost"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:244
 msgid "glitches in period"
-msgstr ""
+msgstr "zastoji u periodu"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:250
 msgid "binary or multiple pulsar"
-msgstr ""
+msgstr "binarni ili višestruki pulsar"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:256
 msgid "millisecond pulsar"
-msgstr ""
+msgstr "milisekundski pulsar"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:262
 msgid "recycled pulsar"
-msgstr ""
+msgstr "prerađeni pulsar"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:268
 msgid "radio interpulse"
-msgstr ""
+msgstr "radio interpuls"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:274
 msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
-msgstr ""
+msgstr "pulsirana optička, X ili emisija gama zraka (visoka energija)"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
-msgstr ""
+msgstr "ekstragalaktički (u MC) pulsar"
 
 #~ msgid "General "
 #~ msgstr "Općenito "
