@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-13 12:32+0700\n"
-"PO-Revision-Date: 2011-11-26 15:48+0000\n"
-"Last-Translator: Onur İ. <Unknown>\n"
+"PO-Revision-Date: 2012-02-15 10:42+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Azerbaijani <az@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-14 05:33+0000\n"
+"X-Launchpad-Export-Date: 2012-02-16 04:59+0000\n"
 "X-Generator: Launchpad (build 14781)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
-msgstr ""
+msgstr "Meridian"
 
 #: src/core/modules/GridLinesMgr.cpp:546
 msgid "Ecliptic"
@@ -75,7 +75,7 @@ msgstr "Böyüklük: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:109
 #, qt-format
 msgid "Size: %1"
-msgstr ""
+msgstr "Böyüklük: %1"
 
 #: src/core/modules/Nebula.cpp:303
 msgid "Galaxy"
@@ -103,7 +103,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:321
 msgid "Unknown"
-msgstr ""
+msgstr "Namə'lum"
 
 #: src/core/modules/Nebula.cpp:324
 msgid "Undocumented type"
@@ -186,7 +186,7 @@ msgstr "ən çox FOV: "
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
-msgstr ""
+msgstr "Perspektv"
 
 #: src/core/StelProjectorClasses.cpp:30
 msgid ""
@@ -315,19 +315,19 @@ msgstr ""
 #: src/gui/ConfigurationDialog.cpp:535
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
 msgid "Authors"
-msgstr ""
+msgstr "Müəlliflər"
 
 #: src/gui/ConfigurationDialog.cpp:539 src/gui/ViewDialog.cpp:397
 msgid "Contact"
-msgstr ""
+msgstr "Əlaqə"
 
 #: src/gui/ConfigurationDialog.cpp:617
 msgid "Author"
-msgstr ""
+msgstr "Müəllif"
 
 #: src/gui/ConfigurationDialog.cpp:621
 msgid "License"
-msgstr ""
+msgstr "Lisenziya"
 
 #: src/gui/ConfigurationDialog.cpp:650
 msgid "Running script: "
@@ -473,7 +473,7 @@ msgstr "Stellarium Kömək"
 
 #: src/gui/HelpDialog.cpp:168
 msgid "Keys"
-msgstr ""
+msgstr "Düymələr"
 
 #: src/gui/HelpDialog.cpp:176
 msgid "Further Reading"
@@ -524,11 +524,11 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:337
 #: src/gui/HelpDialog.cpp:339 src/gui/StelGui.cpp:174
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Digər"
 
 #: src/gui/HelpDialog.cpp:298
 msgid "Developers"
-msgstr ""
+msgstr "İnkişafçılar"
 
 #: src/gui/HelpDialog.cpp:299
 #, qt-format
@@ -565,7 +565,7 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:101
 msgid "Display Options"
-msgstr ""
+msgstr "Görüntü seçimləri"
 
 #: src/gui/StelGui.cpp:102
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:267
@@ -694,7 +694,7 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:134
 msgid "Windows"
-msgstr ""
+msgstr "Pəncərələr"
 
 #: src/gui/StelGui.cpp:135
 msgid "Help window"
@@ -811,7 +811,7 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:171
 msgid "Zoom out"
-msgstr ""
+msgstr "Uzaqlaşdır"
 
 #: src/gui/StelGui.cpp:172
 msgid "Set home planet to selected planet"
@@ -823,11 +823,11 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:176
 msgid "Quit"
-msgstr ""
+msgstr "Çıx"
 
 #: src/gui/StelGui.cpp:177
 msgid "Save screenshot"
-msgstr ""
+msgstr "Ekran görüntüsünü qeyd et"
 
 #: src/gui/StelGui.cpp:179
 msgid "Auto hide horizontal button bar"
@@ -848,7 +848,7 @@ msgstr ""
 
 #: src/gui/ViewDialog.cpp:456
 msgid "No description"
-msgstr ""
+msgstr "Təsvir yoxtu"
 
 #: src/gui/ViewDialog.cpp:540
 msgid "No shooting stars"
@@ -891,7 +891,7 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:133
 #: src/gui/AddRemoveLandscapesDialog.cpp:160
 msgid "Success"
-msgstr ""
+msgstr "Müvəffəqiyyət"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:146
 #: src/gui/AddRemoveLandscapesDialog.cpp:216
@@ -907,7 +907,7 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:234
 #: src/gui/AddRemoveLandscapesDialog.cpp:244
 msgid "Error!"
-msgstr ""
+msgstr "Xəta!"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
