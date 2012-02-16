@@ -539,11 +539,25 @@ void Scenery3d::sendToShader(OBJ::StelModel& stelModel, Effect cur)
     {
         if (stelModel.texture.data()) {
             stelModel.texture.data()->bind();
+
+            //Send texture to shader
             int location = curShader->uniformLocation("tex");
             curShader->setUniform(location, 0);
-        } else {
-            glBindTexture(GL_TEXTURE_2D, 0);
+
+            //Indicate that we are in texture Mode
+            location = curShader->uniformLocation("onlyColor");
+            curShader->setUniform(location, false);
         }
+        else
+        {
+            //No texture, send color and indication
+            int location = curShader->uniformLocation("vecColor");
+            curShader->setUniform(location, stelModel.color.v[0], stelModel.color.v[1], stelModel.color.v[2], 1.0f);
+
+            location = curShader->uniformLocation("onlyColor");
+            curShader->setUniform(location, true);
+        }
+
 
         if(cur == BumpMapping || cur == All)
         {
@@ -568,8 +582,6 @@ void Scenery3d::sendToShader(OBJ::StelModel& stelModel, Effect cur)
     {
         if (stelModel.texture.data()) {
             stelModel.texture.data()->bind();
-        } else {
-            glBindTexture(GL_TEXTURE_2D, 0);
         }
     }
 }

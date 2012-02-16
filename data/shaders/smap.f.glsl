@@ -21,6 +21,9 @@
 uniform sampler2D tex;
 uniform sampler2D smap;
 
+uniform vec4 vecColor;
+uniform bool onlyColor;
+
 varying vec4 SM_tex_coord;
 varying vec3 vecLight;
 varying vec3 vecNormal;
@@ -38,16 +41,20 @@ void main(void)
 	vec3 tex_coords = SM_tex_coord.xyz/SM_tex_coord.w;
 	float depth = texture(smap, tex_coords.xy).x;
 	
-	vec4 color;
+	float factor;
 	if(depth > (tex_coords.z + 0.00001))
 	{
 		//In light!
-		color = texColor * (gl_LightSource[0].ambient + diffuse);
+		factor = 1.0f;
 	}
 	else
 	{
-		color = texColor * (gl_LightSource[0].ambient + diffuse*0.3);
+		factor = 0.3f;
 	}
+	
+	vec4 color;
+	if(onlyColor) color = vecColor * (gl_LightSource[0].ambient + diffuse*factor);
+	else color = texColor * (gl_LightSource[0].ambient + diffuse*factor);
 	
 	gl_FragColor = vec4(color.xyz, 1.0);
 }

@@ -22,6 +22,8 @@ uniform sampler2D tex;
 uniform sampler2D bmap;
 
 uniform bool boolBump;
+uniform vec4 vecColor;
+uniform bool onlyColor;
 
 varying vec3 vecLight;
 varying vec3 vecPosition;
@@ -92,6 +94,10 @@ void main(void)
 {
 	vec4 diffuse = getDiffuseLighting();
 	vec4 texColor = texture(tex, gl_TexCoord[0].st);
-	vec4 color = texColor * (gl_LightSource[0].ambient + diffuse);
+	
+	vec4 color;
+	if(onlyColor) color = vecColor * (gl_LightSource[0].ambient + diffuse);
+	else color = texColor * (gl_LightSource[0].ambient + diffuse);
+	
 	gl_FragColor = vec4(color.xyz, 1.0);
 }
