@@ -46,7 +46,7 @@ void MTL::load(const char *filename)
                 }
                 else if(parts[0] == "Kd" && matOpen)
                 {
-                    if (parts.size() > 4)
+                    if (parts.size() > 3)
                     {
                         curMaterial->color.r = parseFloat(parts[1]);
                         curMaterial->color.g = parseFloat(parts[2]);
@@ -55,7 +55,7 @@ void MTL::load(const char *filename)
                 }
                 else if(parts[0] == "Ka" && matOpen)
                 {
-                    if(parts.size() > 4)
+                    if(parts.size() > 3)
                     {
                         curMaterial->ambient.r = parseFloat(parts[1]);
                         curMaterial->ambient.g = parseFloat(parts[2]);
@@ -64,7 +64,7 @@ void MTL::load(const char *filename)
                 }
                 else if(parts[0] == "Ks" && matOpen)
                 {
-                    if(parts.size() > 4)
+                    if(parts.size() > 3)
                     {
                         curMaterial->specular.r = parseFloat(parts[1]);
                         curMaterial->specular.g = parseFloat(parts[2]);
@@ -137,7 +137,7 @@ void MTL::uploadTexturesGL(void)
         }
 
         std::string bump = it->second->bump_texture;
-        qWarning() << "[Scenery3D]: BUMP: " << bump.c_str();
+        qWarning() << "[Scenery3d]: BUMP: " << bump.c_str();
         if(bump.size() > 0)
         {
             StelTextureSP bumpTex = textureMgr.createTexture(QString(absolutePath(bump).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
@@ -147,6 +147,8 @@ void MTL::uploadTexturesGL(void)
                 qDebug() << "[Scenery3d] Loaded Normal Map: " << bump.c_str();
             }
         }
+
+        qWarning() << "[Scenery3d]: Kd: r" << it->second->color.r << " g" << it->second->color.g << " b" << it->second->color.b;
     }
 }
 
