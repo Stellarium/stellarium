@@ -45,7 +45,7 @@ MY_CMAKE_FLAGS=" \
 -DBUILD_FOR_ANDROID:boolean=true \
 -DOPENGL_MODE=ES2 \
 -DBUILD_STATIC_PLUGINS=false \
--DENABLE_NLS=false"
+-DENABLE_NLS=true"
 
 #CMake isn't finding necessitas' Qt libraries automatically. This *may* just be a Windows-thing
 if [ "$WINDOWS" == "true" ]; then

@@ -28,7 +28,13 @@
 #include "StelUtils.hpp"
 
 // These macro are used as global function replacing standard gettext operation
+#ifndef ANDROID
 #include "gettext.h"
+#else
+//Android lacks native locale/gettext support; use libintl-lite, which works standalone
+#include "libintl-lite.h"
+#define gettext_noop(String) String
+#endif
 
 //! @def q_(str)
 //! Return the gettext translated english text @a str using the current global translator.

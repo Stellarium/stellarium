@@ -215,6 +215,17 @@ STRING(REPLACE "-lGLU " "" QT_LIBRARIES "${QT_LIBRARIES}")
 FIND_PACKAGE(ZLIB)
 
 IF(ENABLE_NLS)
+  IF(BUILD_FOR_ANDROID)
+    ADD_LIBRARY(intllite STATIC "src/core/external/libintl-lite/libintl-lite.cpp")
+	SET(INTL_LIBRARIES ${CMAKE_BINARY_DIR}/libintllite.a)
+	FIND_PACKAGE(XGettext REQUIRED)
+	
+	#assumes these utilities are on the path
+	#we need these utilities, and we need them from the local system, not the NDK
+	#todo: find a better way to do this
+	SET(GETTEXT_MSGFMT_EXECUTABLE msgfmt)
+	SET(GETTEXT_MSGMERGE_EXECUTABLE msgmerge)
+  ELSE()
   FIND_PACKAGE(Iconv REQUIRED)
   FIND_PATH(INTL_INCLUDE_DIR libintl.h
 	PATHS
@@ -228,6 +239,7 @@ IF(ENABLE_NLS)
 	/usr/local/lib) # NO_DEFAULT_PATH
   FIND_PACKAGE(Gettext REQUIRED)
   FIND_PACKAGE(XGettext REQUIRED)
+  ENDIF()
 ENDIF()
 
 
@@ -241,7 +253,10 @@ IF(OPENGL_MODE STREQUAL "ES2")
 ENDIF()
 
 ########### Set some global variables ###########
-IF(UNIX AND NOT WIN32)
+IF(BUILD_FOR_ANDROID)
+  ADD_DEFINITIONS(-DINSTALL_DATADIR="//sdcard/stellarium")
+  ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="//sdcard/stellarium/locale")
+ELSEIF(UNIX AND NOT WIN32)
 IF(APPLE)
   SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
 ELSE(APPLE)

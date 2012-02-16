@@ -122,6 +122,10 @@ void StelTranslator::reload()
 	{
 		qsnprintf(envstr, 128, "LANGUAGE=%s", langName.toUtf8().constData());
 	}
+#elif ANDROID
+	{
+		langName = StelTranslator::systemLangName;
+	}
 #else // UNIX
 	{
 		qsnprintf(envstr, 128, "LANGUAGE=%s", StelTranslator::systemLangName.toUtf8().constData());
@@ -138,9 +142,14 @@ void StelTranslator::reload()
 #else
 	setlocale(LC_CTYPE,"");
 #endif
+
+#ifdef ANDROID
+	loadMessageCatalog(domain.toUtf8().constData(), QFile::encodeName(moDirectory + "/" + langName + "/LC_MESSAGES/" + domain + ".mo").constData());
+#else
 	QString result = bind_textdomain_codeset(domain.toUtf8().constData(), "UTF-8");
 	Q_ASSERT(result=="UTF-8");
 	bindtextdomain (domain.toUtf8().constData(), QFile::encodeName(moDirectory).constData());
+#endif
 	textdomain (domain.toUtf8().constData());
 	StelTranslator::lastUsed = this;
 }
