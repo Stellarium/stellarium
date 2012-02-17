@@ -374,11 +374,11 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("stars/flag_star_twinkle", skyd->getFlagTwinkle());
 	conf->setValue("stars/star_twinkle_amount", skyd->getTwinkleAmount());
 	conf->setValue("viewing/use_luminance_adaptation", skyd->getFlagLuminanceAdaptation());
-	conf->setValue("astro/flag_planets", ssmgr->isPlanetsDisplayed());
-	conf->setValue("astro/flag_planets_hints", ssmgr->isHintsDisplayed());
-	conf->setValue("astro/flag_planets_orbits", ssmgr->isOrbitsDisplayed());
+	conf->setValue("astro/flag_planets", ssmgr->getFlagPlanets());
+	conf->setValue("astro/flag_planets_hints", ssmgr->getFlagHints());
+	conf->setValue("astro/flag_planets_orbits", ssmgr->getFlagOrbits());
 	conf->setValue("astro/flag_light_travel_time", ssmgr->getFlagLightTravelTime());
-	conf->setValue("viewing/flag_moon_scaled", ssmgr->isMoonScaled());
+	conf->setValue("viewing/flag_moon_scaled", ssmgr->getFlagMoonScale());
 	conf->setValue("astro/meteor_rate", mmgr->getZHR());
 
 	// view dialog / markings tab settings
@@ -398,13 +398,13 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_constellation_art", cmgr->isArtDisplayed());
 	conf->setValue("viewing/flag_constellation_isolate_selected", cmgr->isIsolateSelected());
 	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
-	conf->setValue("viewing/flag_night", StelApp::getInstance().isNightVisionMode());
+	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
 	conf->setValue("astro/flag_star_name", smgr->getFlagLabels());
 	conf->setValue("stars/labels_amount", smgr->getLabelsAmount());
-	conf->setValue("astro/flag_planets_labels", ssmgr->isLabelsDisplayed());
+	conf->setValue("astro/flag_planets_labels", ssmgr->getFlagLabels());
 	conf->setValue("astro/labels_amount", ssmgr->getLabelsAmount());
 	conf->setValue("astro/nebula_hints_amount", nmgr->getHintsAmount());
-	conf->setValue("astro/flag_nebula_name", nmgr->isHintsDisplayed());
+	conf->setValue("astro/flag_nebula_name", nmgr->getFlagHints());
 	conf->setValue("projection/type", core->getCurrentProjectionTypeKey());
 
 	// view dialog / landscape tab settings

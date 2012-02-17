@@ -272,7 +272,7 @@ void SearchDialog::manualPositionChanged()
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Vec3d pos;
 	StelUtils::spheToRect(ui->RAAngleSpinBox->valueRadians(), ui->DEAngleSpinBox->valueRadians(), pos);
-	mvmgr->setTracking(false);
+	mvmgr->setFlagTracking(false);
 	mvmgr->moveToJ2000(pos, 0.05);
 }
 
@@ -403,7 +403,7 @@ void SearchDialog::gotoObject()
 			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().name)
 			{
 				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
-				mvmgr->setTracking(true);
+				mvmgr->setFlagTracking(true);
 			}
 			else
 			{

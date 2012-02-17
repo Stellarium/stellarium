@@ -234,8 +234,8 @@ void TextUserInterface::init()
 	m3->setNextNode(m4);
 	StarMgr* starMgr = GETSTELMODULE(StarMgr);
 	TuiNode* m4_1 = new TuiNodeBool(N_("Show stars"),
-									starMgr, SLOT(setStarsDisplayed(bool)),
-	                                starMgr->isStarsDisplayed(), m4);
+	                                starMgr, SLOT(setFlagStars(bool)), 
+	                                starMgr->getFlagStars(), m4);
 	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
 	TuiNode* m4_2 = new TuiNodeDouble(N_("Relative scale:"),
 	                                  skyDrawer,
@@ -682,7 +682,7 @@ void TextUserInterface::saveDefaultSettings(void)
 	conf->setValue("localization/sky_locale", StelTranslator::nativeNameToIso639_1Code(langName));
 
 	// sub-menu 4: stars
-	conf->setValue("astro/flag_stars", smgr->isStarsDisplayed());
+	conf->setValue("astro/flag_stars", smgr->getFlagStars());
 	conf->setValue("stars/absolute_scale", skyd->getAbsoluteStarScale());
 	conf->setValue("stars/relative_scale", skyd->getRelativeStarScale());
 	conf->setValue("stars/flag_star_twinkle", skyd->getFlagTwinkle());

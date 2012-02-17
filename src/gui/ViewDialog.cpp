@@ -129,17 +129,17 @@ void ViewDialog::createDialogContent()
 
 	// Planets section
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	ui->showPlanetCheckBox->setChecked(ssmgr->isPlanetsDisplayed());
-	connect(ui->showPlanetCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setPlanetsDisplayed(bool)));
+	ui->showPlanetCheckBox->setChecked(ssmgr->getFlagPlanets());
+	connect(ui->showPlanetCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagPlanets(bool)));
 
-	ui->planetMarkerCheckBox->setChecked(ssmgr->isHintsDisplayed());
-	connect(ui->planetMarkerCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setHintsDisplayed(bool)));
+	ui->planetMarkerCheckBox->setChecked(ssmgr->getFlagHints());
+	connect(ui->planetMarkerCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagHints(bool)));
 
-	ui->planetScaleMoonCheckBox->setChecked(ssmgr->isMoonScaled());
-	connect(ui->planetScaleMoonCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setMoonScaled(bool)));
+	ui->planetScaleMoonCheckBox->setChecked(ssmgr->getFlagMoonScale());
+	connect(ui->planetScaleMoonCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagMoonScale(bool)));
 
-	ui->planetOrbitCheckBox->setChecked(ssmgr->isOrbitsDisplayed());
-	connect(ui->planetOrbitCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setOrbitsDisplayed(bool)));
+	ui->planetOrbitCheckBox->setChecked(ssmgr->getFlagOrbits());
+	connect(ui->planetOrbitCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagOrbits(bool)));
 
 	ui->planetLightSpeedCheckBox->setChecked(ssmgr->getFlagLightTravelTime());
 	connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLightTravelTime(bool)));
@@ -159,17 +159,17 @@ void ViewDialog::createDialogContent()
 	// Labels section
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
 	ui->starLabelCheckBox->setChecked(smgr->getFlagLabels());
-	connect(ui->starLabelCheckBox, SIGNAL(toggled(bool)), smgr, SLOT(setStarsDisplayed(bool)));
+	connect(ui->starLabelCheckBox, SIGNAL(toggled(bool)), smgr, SLOT(setFlagLabels(bool)));
 
 	StelGuiBase* gui = StelApp::getInstance().getGui();
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
-	ui->nebulaLabelCheckBox->setChecked(nmgr->isHintsDisplayed());
+	ui->nebulaLabelCheckBox->setChecked(nmgr->getFlagHints());
 	a = gui->getGuiActions("actionShow_Nebulas");
 	connect(a, SIGNAL(toggled(bool)), ui->nebulaLabelCheckBox, SLOT(setChecked(bool)));
 	connect(ui->nebulaLabelCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
-	ui->planetLabelCheckBox->setChecked(ssmgr->isLabelsDisplayed());
-	connect(ui->planetLabelCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setLabelsDisplayed(bool)));
+	ui->planetLabelCheckBox->setChecked(ssmgr->getFlagLabels());
+	connect(ui->planetLabelCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLabels(bool)));
 
 	ui->starsLabelsHorizontalSlider->setValue((int)(smgr->getLabelsAmount()*10.f));
 	connect(ui->starsLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(starsLabelsValueChanged(int)));

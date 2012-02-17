@@ -1,7 +1,6 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
- * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,10 +65,6 @@ namespace BigStarCatalogExtension {
 class StarMgr : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool starsDisplayed
-			   READ isStarsDisplayed
-			   WRITE setStarsDisplayed
-			   NOTIFY starsDisplayedChanged)
 
 public:
 	StarMgr(void);
@@ -125,9 +120,9 @@ public slots:
 	Vec3f getLabelColor(void) const {return labelColor;}
 
 	//! Set display flag for Stars.
-	void setStarsDisplayed(const bool displayed);
+	void setFlagStars(bool b) {starsFader=b;}
 	//! Get display flag for Stars
-	bool isStarsDisplayed(void) const;
+	bool getFlagStars(void) const {return starsFader==true;}
 
 	//! Set display flag for Star names (labels).
 	void setFlagLabels(bool b) {labelsFader=b;}
@@ -175,9 +170,6 @@ public:
 	//! Mark it as checked if checksum is correct.
 	//! @return false in case of failure.
 	bool checkAndLoadCatalog(QVariantMap m);
-
-signals:
-	void starsDisplayedChanged(const bool displayed);
 
 private slots:
 	void setStelStyle(const QString& section);

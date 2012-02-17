@@ -549,7 +549,7 @@ void SatellitesDialog::satelliteDoubleClick(QListWidgetItem* item)
 	if (StelApp::getInstance().getStelObjectMgr().findAndSelect(item->text()))
 	{
 		GETSTELMODULE(StelMovementMgr)->autoZoomIn();
-		GETSTELMODULE(StelMovementMgr)->setTracking(true);
+		GETSTELMODULE(StelMovementMgr)->setFlagTracking(true);
 	}
 }
 
