@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2008 Fabien Chereau
- * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,10 +34,6 @@ class QProgressBar;
 class StelSkyLayerMgr : public StelModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool displayed
-			   READ isDisplayed
-			   WRITE setDisplayed
-			   NOTIFY displayedChanged)
 
 public:
 	StelSkyLayerMgr();
@@ -79,9 +74,9 @@ public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 	//! Set whether Sky Background should be displayed
-	void setDisplayed(const bool display);
+	void setFlagShow(bool b) {flagShow = b;}
 	//! Get whether Sky Background should be displayed
-	bool isDisplayed() const;
+	bool getFlagShow() const {return flagShow;}
 
 	//! Load an image from a file. This should not be called directly from
 	//! scripts because it is not thread safe.  Instead use the simiarly
@@ -140,8 +135,6 @@ public slots:
 
 	//! Return the list of all the layer currently loaded.
 	QStringList getAllKeys() const {return allSkyLayers.keys();}
-signals:
-	void displayedChanged(const bool display);
 
 private slots:
 	//! Called when loading of data started or stopped for one collection
@@ -173,7 +166,7 @@ private:
 	QMap<QString, SkyLayerElem*> allSkyLayers;
 
 	// Whether to draw at all
-	bool displayed;
+	bool flagShow;
 };
 
 #endif // _STELSKYLAYERMGR_HPP_

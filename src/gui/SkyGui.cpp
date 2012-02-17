@@ -221,7 +221,6 @@ void SkyGui::updateBarsPos()
 	const qreal newProgressBarY = hh-progressBarMgr->boundingRect().height()+7;
 	progressBarMgr->setPos(newProgressBarX, newProgressBarY);
 	progressBarMgr->setZValue(400);
-//	emit progressBarChanged();
 
 	// Update position of the auto-hide buttons
 	autoHidebts->setPos(0, hh-autoHidebts->childrenBoundingRect().height()+1);

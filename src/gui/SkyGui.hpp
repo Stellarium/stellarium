@@ -63,10 +63,7 @@ public:
 	void init(class StelGui* stelGui);
 	
 	virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget* = 0);
-
-signals:
-	void progressBarChanged();
-
+	
 protected:
 	virtual void resizeEvent(QGraphicsSceneResizeEvent* event);
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event);

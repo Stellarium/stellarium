@@ -187,7 +187,7 @@ QString Planet::getSkyLabel(const StelCore*) const
 
 float Planet::getSelectPriority(const StelCore* core) const
 {
-	if( ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->isHintsDisplayed() )
+	if( ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getFlagHints() )
 	{
 	// easy to select, especially pluto
 		return getVMagnitude(core, false)-15.f;
@@ -200,7 +200,7 @@ float Planet::getSelectPriority(const StelCore* core) const
 
 Vec3f Planet::getInfoColor(void) const
 {
-	return StelApp::getInstance().isNightVisionMode() ? Vec3f(0.8, 0.2, 0.4) : ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getLabelsColor();
+	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.2, 0.4) : ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getLabelsColor();
 }
 
 

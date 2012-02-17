@@ -188,22 +188,18 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	initConstellationMgr();
 	initGrindLineMgr();
 	initLandscapeMgr();
-	initSolarSystem();
-	initStelMovementMgr();
 
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
-	getGuiActions("actionShow_Nebulas")->setChecked(nmgr->isHintsDisplayed());
-	connect(getGuiActions("actionShow_Nebulas"), SIGNAL(toggled(bool)), nmgr, SLOT(setHintsDisplayed(bool)));
-	connect(nmgr, SIGNAL(hintsDisplayedChanged(const bool)), this, SLOT(nebulaHintsDisplayedUpdated(const bool)));
+	connect(getGuiActions("actionShow_Nebulas"), SIGNAL(toggled(bool)), nmgr, SLOT(setFlagHints(bool)));
+	getGuiActions("actionShow_Nebulas")->setChecked(nmgr->getFlagHints());
 
 	StelSkyLayerMgr* imgr = GETSTELMODULE(StelSkyLayerMgr);
-	getGuiActions("actionShow_DSS")->setChecked(imgr->isDisplayed());
-	connect(getGuiActions("actionShow_DSS"), SIGNAL(toggled(bool)), imgr, SLOT(setDisplayed(bool)));
-	connect(imgr, SIGNAL(displayedChanged(const bool)), this, SLOT(skyLayerDisplayedChanged(const bool)));
+	connect(getGuiActions("actionShow_DSS"), SIGNAL(toggled(bool)), imgr, SLOT(setFlagShow(bool)));
+	getGuiActions("actionShow_DSS")->setChecked(imgr->getFlagShow());
 
 
 	StelCore* core = StelApp::getInstance().getCore();
-
+	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
 	connect(getGuiActions("actionIncrease_Script_Speed"), SIGNAL(triggered()), this, SLOT(increaseScriptSpeed()));
 	connect(getGuiActions("actionDecrease_Script_Speed"), SIGNAL(triggered()), this, SLOT(decreaseScriptSpeed()));
 	connect(getGuiActions("actionSet_Real_Script_Speed"), SIGNAL(triggered()), this, SLOT(setRealScriptSpeed()));
@@ -214,6 +210,8 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiActions("actionSet_Real_Time_Speed"), SIGNAL(triggered()), core, SLOT(toggleRealTimeSpeed()));
 	connect(getGuiActions("actionSet_Time_Rate_Zero"), SIGNAL(triggered()), core, SLOT(setZeroTimeSpeed()));
 	connect(getGuiActions("actionReturn_To_Current_Time"), SIGNAL(triggered()), core, SLOT(setTimeNow()));
+	connect(getGuiActions("actionSwitch_Equatorial_Mount"), SIGNAL(toggled(bool)), mmgr, SLOT(setEquatorialMount(bool)));
+	getGuiActions("actionSwitch_Equatorial_Mount")->setChecked(mmgr->getMountMode() != StelMovementMgr::MountAltAzimuthal);
 	connect(getGuiActions("actionAdd_Solar_Hour"), SIGNAL(triggered()), core, SLOT(addHour()));
 	connect(getGuiActions("actionAdd_Solar_Day"), SIGNAL(triggered()), core, SLOT(addDay()));
 	connect(getGuiActions("actionAdd_Solar_Week"), SIGNAL(triggered()), core, SLOT(addWeek()));
@@ -228,12 +226,14 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 
 	// connect the actor after setting the nightmode.
 	// StelApp::init() already set flagNightMode for us, don't do it twice!
-	getGuiActions("actionShow_Night_Mode")->setChecked(StelApp::getInstance().isNightVisionMode());
-	connect(getGuiActions("actionShow_Night_Mode"),
-			SIGNAL(toggled(bool)),
-			&StelApp::getInstance(),
-			SLOT(setNightVisionMode(bool)));
+	getGuiActions("actionShow_Night_Mode")->setChecked(StelApp::getInstance().getVisionModeNight());
+	connect(getGuiActions("actionShow_Night_Mode"), SIGNAL(toggled(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
 
+	connect(getGuiActions("actionGoto_Selected_Object"), SIGNAL(triggered()), mmgr, SLOT(setFlagTracking()));
+	connect(getGuiActions("actionZoom_In_Auto"), SIGNAL(triggered()), mmgr, SLOT(autoZoomIn()));
+	connect(getGuiActions("actionZoom_Out_Auto"), SIGNAL(triggered()), mmgr, SLOT(autoZoomOut()));
+	connect(getGuiActions("actionSet_Tracking"), SIGNAL(toggled(bool)), mmgr, SLOT(setFlagTracking(bool)));
+	getGuiActions("actionSet_Tracking")->setChecked(mmgr->getFlagTracking());
 
 	connect(getGuiActions("actionSet_Full_Screen_Global"), SIGNAL(toggled(bool)), &StelMainWindow::getInstance(), SLOT(setFullScreen(bool)));
 	getGuiActions("actionSet_Full_Screen_Global")->setChecked(StelMainWindow::getInstance().isFullScreen());
@@ -272,9 +272,18 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	getGuiActions("actionVertical_Flip")->setChecked(StelApp::getInstance().getCore()->getFlipVert());
 
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
-	getGuiActions("actionShow_Stars")->setChecked(smgr->isStarsDisplayed());
-	connect(getGuiActions("actionShow_Stars"), SIGNAL(toggled(bool)), smgr, SLOT(setStarsDisplayed(bool)));
-	connect(smgr, SIGNAL(starsDisplayedChanged(const bool)), this, SLOT(starsDisplayedUpdated(const bool)));
+	connect(getGuiActions("actionShow_Stars"), SIGNAL(toggled(bool)), smgr, SLOT(setFlagStars(bool)));
+	getGuiActions("actionShow_Stars")->setChecked(smgr->getFlagStars());
+
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+	connect(getGuiActions("actionShow_Planets_Labels"), SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLabels(bool)));
+	getGuiActions("actionShow_Planets_Labels")->setChecked(ssmgr->getFlagLabels());
+
+	connect(getGuiActions("actionShow_Planets_Orbits"), SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagOrbits(bool)));
+	getGuiActions("actionShow_Planets_Orbits")->setChecked(ssmgr->getFlagOrbits());
+
+	connect(getGuiActions("actionShow_Planets_Trails"), SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagTrails(bool)));
+	getGuiActions("actionShow_Planets_Trails")->setChecked(ssmgr->getFlagTrails());
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -445,9 +454,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 
 	skyGui->setGeometry(stelAppGraphicsWidget->geometry());
 	skyGui->updateBarsPos();
-	// this causes a seg-fault for some reason.  Need to look into it.
-//	connect(skyGui, SIGNAL(progressBarChanged()), this, SLOT(progressBarUpdated()));
-
+	
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
@@ -637,67 +644,6 @@ void StelGui::initLandscapeMgr()
 			SLOT(fogDisplayedUpdated(const bool)));
 }
 
-void StelGui::initSolarSystem()
-{
-	SolarSystem* solarSystem = GETSTELMODULE(SolarSystem);
-	getGuiActions("actionShow_Planets_Labels")->setChecked(solarSystem->isLabelsDisplayed());
-	connect(getGuiActions("actionShow_Planets_Labels"),
-			SIGNAL(toggled(bool)),
-			solarSystem,
-			SLOT(setLabelsDisplayed(bool)));
-	connect(solarSystem,
-			SIGNAL(labelsDisplayedChanged(const bool)),
-			this,
-			SLOT(labelsDisplayedUpdated(const bool)));
-
-	getGuiActions("actionShow_Planets_Orbits")->setChecked(solarSystem->isOrbitsDisplayed());
-	connect(getGuiActions("actionShow_Planets_Orbits"),
-			SIGNAL(toggled(bool)),
-			solarSystem,
-			SLOT(setOrbitsDisplayed(bool)));
-	connect(solarSystem,
-			SIGNAL(orbitsDisplayedChanged(const bool)),
-			this,
-			SLOT(orbitsDisplayedUpdated(const bool)));
-
-	getGuiActions("actionShow_Planets_Trails")->setChecked(solarSystem->isTrailsDisplayed());
-	connect(getGuiActions("actionShow_Planets_Trails"),
-			SIGNAL(toggled(bool)),
-			solarSystem,
-			SLOT(setTrailsDisplayed(bool)));
-	connect(solarSystem,
-			SIGNAL(trailsDisplayedChanged(const bool)),
-			this,
-			SLOT(trailsDisplayedUpdated(const bool)));
-}
-
-void StelGui::initStelMovementMgr()
-{
-	StelMovementMgr* movementMgr = GETSTELMODULE(StelMovementMgr);
-	bool checked = movementMgr->getMountMode() != StelMovementMgr::MountAltAzimuthal;
-	getGuiActions("actionSwitch_Equatorial_Mount")->setChecked(checked);
-	connect(getGuiActions("actionSwitch_Equatorial_Mount"),
-			SIGNAL(toggled(bool)),
-			movementMgr,
-			SLOT(setEquatorialMount(bool)));
-	connect(movementMgr,
-			SIGNAL(mountModeChanged(const StelMovementMgr::MountMode)),
-			this,
-			SLOT(mountModeUpdated(const StelMovementMgr::MountMode)));
-
-	getGuiActions("actionSet_Tracking")->setChecked(movementMgr->isTracking());
-	connect(getGuiActions("actionSet_Tracking"), SIGNAL(toggled(bool)), movementMgr, SLOT(setTracking(bool)));
-	connect(movementMgr,
-			SIGNAL(trackingChanged(const bool)),
-			this,
-			SLOT(trackingUpdated(const bool)));
-
-	connect(getGuiActions("actionGoto_Selected_Object"), SIGNAL(triggered()), movementMgr, SLOT(isTracking()));
-	connect(getGuiActions("actionZoom_In_Auto"), SIGNAL(triggered()), movementMgr, SLOT(autoZoomIn()));
-	connect(getGuiActions("actionZoom_Out_Auto"), SIGNAL(triggered()), movementMgr, SLOT(autoZoomOut()));
-
-}
-
 void StelGui::quit()
 {
 	#ifndef DISABLE_SCRIPTING
@@ -715,21 +661,23 @@ void StelGui::reloadStyle()
 //! Load color scheme from the given ini file and section name
 void StelGui::setStelStyle(const QString& section)
 {
-	if (currentStelStyle.confSectionName!=section) {
+	if (currentStelStyle.confSectionName!=section)
+	{
 		// Load the style sheets
 		currentStelStyle.confSectionName = section;
 
 		QString qtStyleFileName;
 		QString htmlStyleFileName;
 
-		if (section=="night_color") {
+		if (section=="night_color")
+		{
 			qtStyleFileName = ":/graphicGui/nightStyle.css";
 			htmlStyleFileName = ":/graphicGui/nightHtml.css";
-			getGuiActions("actionShow_Night_Mode")->setChecked(true);
-		} else if (section=="color") {
+		}
+		else if (section=="color")
+		{
 			qtStyleFileName = ":/graphicGui/normalStyle.css";
 			htmlStyleFileName = ":/graphicGui/normalHtml.css";
-			getGuiActions("actionShow_Night_Mode")->setChecked(false);
 		}
 
 		// Load Qt style sheet
@@ -790,19 +738,54 @@ void StelGui::update()
 	if (buttonTimeCurrent->isChecked()!=isTimeNow) {
 		buttonTimeCurrent->setChecked(isTimeNow);
 	}
+	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
+	const bool b = mmgr->getFlagTracking();
+	if (buttonGotoSelectedObject->isChecked()!=b) {
+		buttonGotoSelectedObject->setChecked(b);
+	}
 
-	bool flag = StelMainWindow::getInstance().isFullScreen();
+	bool flag = GETSTELMODULE(StarMgr)->getFlagStars();
+	if (getGuiActions("actionShow_Stars")->isChecked() != flag) {
+		getGuiActions("actionShow_Stars")->setChecked(flag);
+	}
+
+	flag = GETSTELMODULE(NebulaMgr)->getFlagHints();
+	if (getGuiActions("actionShow_Nebulas")->isChecked() != flag)
+		getGuiActions("actionShow_Nebulas")->setChecked(flag);
+
+	flag = GETSTELMODULE(StelSkyLayerMgr)->getFlagShow();
+	if (getGuiActions("actionShow_DSS")->isChecked() != flag)
+		getGuiActions("actionShow_DSS")->setChecked(flag);
+
+	flag = mmgr->getMountMode() != StelMovementMgr::MountAltAzimuthal;
+	if (getGuiActions("actionSwitch_Equatorial_Mount")->isChecked() != flag)
+		getGuiActions("actionSwitch_Equatorial_Mount")->setChecked(flag);
+
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+	flag = ssmgr->getFlagLabels();
+	if (getGuiActions("actionShow_Planets_Labels")->isChecked() != flag)
+		getGuiActions("actionShow_Planets_Labels")->setChecked(flag);
+	flag = ssmgr->getFlagOrbits();
+	if (getGuiActions("actionShow_Planets_Orbits")->isChecked() != flag)
+		getGuiActions("actionShow_Planets_Orbits")->setChecked(flag);
+	flag = ssmgr->getFlagTrails();
+	if (getGuiActions("actionShow_Planets_Trails")->isChecked() != flag)
+		getGuiActions("actionShow_Planets_Trails")->setChecked(flag);
+	flag = StelApp::getInstance().getVisionModeNight();
+	if (getGuiActions("actionShow_Night_Mode")->isChecked() != flag)
+		getGuiActions("actionShow_Night_Mode")->setChecked(flag);
+	flag = StelMainWindow::getInstance().isFullScreen();
 	if (getGuiActions("actionSet_Full_Screen_Global")->isChecked() != flag)
 		getGuiActions("actionSet_Full_Screen_Global")->setChecked(flag);
 
-	// The signal/slot version fo this causes a seg-fault.
+	skyGui->infoPanel->setTextFromObjects(GETSTELMODULE(StelObjectMgr)->getSelectedObject());
+
 	// Check if the progressbar window changed, if yes update the whole view
-	if (savedProgressBarSize!=skyGui->progressBarMgr->boundingRect().size()) {
+	if (savedProgressBarSize!=skyGui->progressBarMgr->boundingRect().size())
+	{
 		savedProgressBarSize=skyGui->progressBarMgr->boundingRect().size();
 		skyGui->updateBarsPos();
 	}
-
-	skyGui->infoPanel->setTextFromObjects(GETSTELMODULE(StelObjectMgr)->getSelectedObject());
 
 	dateTimeDialog.setDateTime(core->getJDay());
 }
@@ -1145,106 +1128,4 @@ void StelGui::landscapeDisplayedUpdated(const bool displayed)
 	if (getGuiActions("actionShow_Ground")->isChecked() != displayed) {
 		getGuiActions("actionShow_Ground")->setChecked(displayed);
 	}
-}
-
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Process changes from SolarSystem
-#endif
-/* ****************************************************************************************************************** */
-void StelGui::labelsDisplayedUpdated(const bool displayed)
-{
-	if (getGuiActions("actionShow_Planets_Labels")->isChecked() != displayed) {
-		getGuiActions("actionShow_Planets_Labels")->setChecked(displayed);
-	}
-}
-
-void StelGui::orbitsDisplayedUpdated(const bool displayed)
-{
-	if (getGuiActions("actionShow_Planets_Orbits")->isChecked() != displayed) {
-		getGuiActions("actionShow_Planets_Orbits")->setChecked(displayed);
-	}
-}
-
-void StelGui::trailsDisplayedUpdated(const bool displayed)
-{
-	if (getGuiActions("actionShow_Planets_Trails")->isChecked() != displayed) {
-		getGuiActions("actionShow_Planets_Trails")->setChecked(displayed);
-	}
-}
-
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Process changes from StarMgr
-#endif
-/* ****************************************************************************************************************** */
-void StelGui::starsDisplayedUpdated(const bool displayed)
-{
-	if (getGuiActions("actionShow_Stars")->isChecked() != displayed) {
-		getGuiActions("actionShow_Stars")->setChecked(displayed);
-	}
-
-
-}
-
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Process changes from StelSkyLayerMgr
-#endif
-/* ****************************************************************************************************************** */
-void StelGui::skyLayerDisplayedChanged(const bool displayed)
-{
-	if (getGuiActions("actionShow_DSS")->isChecked() != displayed) {
-		getGuiActions("actionShow_DSS")->setChecked(displayed);
-	}
-
-}
-
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Process changes from NebulaMgr
-#endif
-/* ****************************************************************************************************************** */
-void StelGui::nebulaHintsDisplayedUpdated(const bool displayed)
-{
-	if (getGuiActions("actionShow_Nebulas")->isChecked() != displayed) {
-		getGuiActions("actionShow_Nebulas")->setChecked(displayed);
-	}
-}
-
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Process changes from StelMovementMgr
-#endif
-/* ****************************************************************************************************************** */
-void StelGui::mountModeUpdated(const StelMovementMgr::MountMode mode)
-{
-	bool flag = (mode != StelMovementMgr::MountAltAzimuthal);
-	if (getGuiActions("actionSwitch_Equatorial_Mount")->isChecked() != flag) {
-		getGuiActions("actionSwitch_Equatorial_Mount")->setChecked(flag);
-	}
-}
-
-void StelGui::trackingUpdated(const bool track)
-{
-	if (buttonGotoSelectedObject->isChecked()!=track) {
-		buttonGotoSelectedObject->setChecked(track);
-	}
-}
-
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Process changes from SkyGui
-#endif
-/* ****************************************************************************************************************** */
-void StelGui::progressBarUpdated()
-{
-	savedProgressBarSize=skyGui->progressBarMgr->boundingRect().size();
-	skyGui->updateBarsPos();
 }
