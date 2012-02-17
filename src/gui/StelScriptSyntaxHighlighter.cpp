@@ -158,7 +158,7 @@ void StelScriptSyntaxHighlighter::setFormats(void)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	QString section;
 
-	if (StelApp::getInstance().isNightVisionMode())
+	if (StelApp::getInstance().getVisionModeNight())
 		section = "night_color";
 	else
 		section = "color";

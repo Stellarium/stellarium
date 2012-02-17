@@ -2,7 +2,6 @@
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
  * Copyright (C) 2011 Alexander Wolf
- * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -100,8 +99,8 @@ void NebulaMgr::init()
 	Nebula::texPlanetNebula = StelApp::getInstance().getTextureManager().createTexture("textures/pnb.png");   // Load planetary nebula marker texture
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur5.png");   // Load pointer texture
 
-	setDisplayed(conf->value("astro/flag_nebula",true).toBool());
-	setHintsDisplayed(conf->value("astro/flag_nebula_name",false).toBool());
+	setFlagShow(conf->value("astro/flag_nebula",true).toBool());
+	setFlagHints(conf->value("astro/flag_nebula_name",false).toBool());
 	setHintsAmount(conf->value("astro/nebula_hints_amount", 3).toFloat());
 	setLabelsAmount(conf->value("astro/nebula_labels_amount", 3).toFloat());
 	setCircleScale(conf->value("astro/nebula_scale",1.0f).toFloat());
@@ -273,7 +272,7 @@ NebulaP NebulaMgr::search(const Vec3d& apos)
 QList<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
 {
 	QList<StelObjectP> result;
-	if (!isDisplayed())
+	if (!getFlagShow())
 		return result;
 
 	Vec3d v(av);
@@ -558,19 +557,6 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	}
 
 	return NULL;
-}
-
-void NebulaMgr::setHintsDisplayed(const bool displayed)
-{
-	if (hintsFader!= displayed) {
-		hintsFader=displayed;
-		emit hintsDisplayedChanged(displayed);
-	}
-}
-
-bool NebulaMgr::isHintsDisplayed(void) const
-{
-	return hintsFader;
 }
 
 

@@ -1,7 +1,6 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
- * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +32,7 @@
 
 StelMovementMgr::StelMovementMgr(StelCore* acore) : core(acore),
 	flagLockEquPos(false),
-	tracking(false),
+	flagTracking(false),
 	isMouseMovingHoriz(false),
 	isMouseMovingVert(false),
 	flagEnableMouseNavigation(true),
@@ -103,18 +102,10 @@ void StelMovementMgr::init()
 	}
 }
 
-void StelMovementMgr::setMountMode(const StelMovementMgr::MountMode mode)
+void StelMovementMgr::setMountMode(MountMode m)
 {
-	if (mountMode != mode) {
-		mountMode = mode;
-		setViewDirectionJ2000(viewDirectionJ2000);
-		emit mountModeChanged(mode);
-	}
-}
-
-StelMovementMgr::MountMode StelMovementMgr::getMountMode(void) const
-{
-	return mountMode;
+	mountMode = m;
+	setViewDirectionJ2000(viewDirectionJ2000);
 }
 
 void StelMovementMgr::setFlagLockEquPos(bool b)
@@ -175,7 +166,7 @@ bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons)
 		if (hasDragged || (std::sqrt((float)((x-previousX)*(x-previousX) +(y-previousY)*(y-previousY)))>dragTriggerDistance))
 		{
 			hasDragged = true;
-			setTracking(false);
+			setFlagTracking(false);
 			dragView(previousX, previousY, x, y);
 			previousX = x;
 			previousY = y;
@@ -363,7 +354,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 			#endif
 					if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
 					{
-						setTracking(false);
+						setFlagTracking(false);
 					}
 					event->accept();
 					return;
@@ -376,7 +367,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 				if (objectMgr->getWasSelected())
 				{
 					moveToObject(objectMgr->getSelectedObject()[0],autoMoveDuration);
-					setTracking(true);
+					setFlagTracking(true);
 				}
 			}
 			break;
@@ -400,9 +391,9 @@ void StelMovementMgr::selectedObjectChange(StelModule::StelModuleSelectAction)
 	// If an object was selected keep the earth following
 	if (objectMgr->getWasSelected())
 	{
-		if (isTracking())
+		if (getFlagTracking())
 			setFlagLockEquPos(true);
-		setTracking(false);
+		setFlagTracking(false);
 	}
 }
 
@@ -411,7 +402,7 @@ void StelMovementMgr::turnRight(bool s)
 	if (s && flagEnableMoveKeys)
 	{
 		deltaAz = 1;
-		setTracking(false);
+		setFlagTracking(false);
 		setFlagLockEquPos(false);
 	}
 	else
@@ -423,7 +414,7 @@ void StelMovementMgr::turnLeft(bool s)
 	if (s && flagEnableMoveKeys)
 	{
 		deltaAz = -1;
-		setTracking(false);
+		setFlagTracking(false);
 		setFlagLockEquPos(false);
 	}
 	else
@@ -435,7 +426,7 @@ void StelMovementMgr::turnUp(bool s)
 	if (s && flagEnableMoveKeys)
 	{
 		deltaAlt = 1;
-		setTracking(false);
+		setFlagTracking(false);
 		setFlagLockEquPos(false);
 	}
 	else
@@ -447,7 +438,7 @@ void StelMovementMgr::turnDown(bool s)
 	if (s && flagEnableMoveKeys)
 	{
 		deltaAlt = -1;
-		setTracking(false);
+		setFlagTracking(false);
 		setFlagLockEquPos(false);
 	}
 	else
@@ -611,7 +602,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 	}
 	else
 	{
-		if (tracking && objectMgr->getWasSelected()) // Equatorial vision vector locked on selected object
+		if (flagTracking && objectMgr->getWasSelected()) // Equatorial vision vector locked on selected object
 		{
 			Vec3d v = objectMgr->getSelectedObject()[0]->getAltAzPosAuto(core);
 			setViewDirectionJ2000(core->altAzToJ2000(v, StelCore::RefractionOff));
@@ -641,9 +632,9 @@ void StelMovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 	moveDuration /= movementsSpeedFactor;
 
 	float manualMoveDuration;
-	if (!isTracking())
+	if (!getFlagTracking())
 	{
-		setTracking(true);
+		setFlagTracking(true);
 		moveToObject(objectMgr->getSelectedObject()[0], moveDuration, 1);
 		manualMoveDuration = moveDuration;
 	}
@@ -706,29 +697,25 @@ void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 	if (flagAutoZoomOutResetsDirection)
 	{
 		moveToJ2000(core->altAzToJ2000(getInitViewingDirection(), StelCore::RefractionOff), moveDuration, -1);
-		setTracking(false);
+		setFlagTracking(false);
 		setFlagLockEquPos(false);
 	}
 }
 
 
-void StelMovementMgr::setTracking(const bool track)
+void StelMovementMgr::setFlagTracking(bool b)
 {
-	if (!track || !objectMgr->getWasSelected()) {
-		tracking=false;
-	} else {
-		moveToObject(objectMgr->getSelectedObject()[0], getAutoMoveDuration());
-		tracking=true;
+	if (!b || !objectMgr->getWasSelected())
+	{
+		flagTracking=false;
 	}
-	if (track != tracking) {
-		emit trackingChanged(track);
+	else
+	{
+		moveToObject(objectMgr->getSelectedObject()[0], getAutoMoveDuration());
+		flagTracking=true;
 	}
 }
 
-bool StelMovementMgr::isTracking(void) const
-{
-	return tracking;
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Move to the given J2000 equatorial position
@@ -817,7 +804,7 @@ void StelMovementMgr::panView(double deltaAz, double deltaAlt)
 	// recalc all the position variables
 	if (deltaAz || deltaAlt)
 	{
-		setTracking(false);
+		setFlagTracking(false);
 		Vec3d tmp;
 		StelUtils::spheToRect(azVision, altVision, tmp);
 		setViewDirectionJ2000(mountFrameToJ2000(tmp));
@@ -853,7 +840,7 @@ void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 		StelUtils::rectToSphe(&az2, &alt2, j2000ToMountFrame(tempvec2));
 		panView(az2-az1, alt1-alt2);
 	}
-	setTracking(false);
+	setFlagTracking(false);
 	setFlagLockEquPos(false);
 }
 
@@ -919,4 +906,3 @@ void StelMovementMgr::setMaxFov(double max)
 		setFov(max);
 	}
 }
-

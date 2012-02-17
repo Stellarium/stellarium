@@ -1,7 +1,6 @@
 /*
  * Stellarium
  * Copyright (C) 2006 Fabien Chereau
- * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -320,7 +319,7 @@ void StelApp::init(QSettings* conf)
 	// Initialisation of the color scheme
 	bool tmp = confSettings->value("viewing/flag_night").toBool();
 	flagNightVision=!tmp;  // fool caching
-	setNightVisionMode(tmp);
+	setVisionModeNight(tmp);
 
 	// Proxy Initialisation
 	setupHttpProxy();
@@ -475,11 +474,12 @@ void StelApp::handleKeys(QKeyEvent* event)
 
 
 //! Set flag for activating night vision mode
-void StelApp::setNightVisionMode(const bool useNightVision)
+void StelApp::setVisionModeNight(bool b)
 {
-	if (flagNightVision!=useNightVision) {
-		flagNightVision=useNightVision;
-		emit(colorSchemeChanged(useNightVision ? "night_color" : "color"));
+	if (flagNightVision!=b)
+	{
+		flagNightVision=b;
+		emit(colorSchemeChanged(b ? "night_color" : "color"));
 	}
 }
 

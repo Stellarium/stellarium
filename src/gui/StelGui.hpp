@@ -33,7 +33,6 @@
 #endif
 #include "StelGuiBase.hpp"
 #include "StelStyle.hpp"
-#include "StelMovementMgr.hpp"
 
 #include <QGraphicsTextItem>
 
@@ -182,21 +181,7 @@ private slots:
 	void cardinalsPointsDisplayedUpdated(const bool displayed);
 	void fogDisplayedUpdated(const bool displayed);
 	void landscapeDisplayedUpdated(const bool displayed);
-	//! Process changes from NebulaMgr
-	void nebulaHintsDisplayedUpdated(const bool displayed);
-	//! Process changes from SolarSystem
-	void labelsDisplayedUpdated(const bool displayed);
-	void orbitsDisplayedUpdated(const bool displayed);
-	void trailsDisplayedUpdated(const bool displayed);
-	//! Process changes from StarMgr
-	void starsDisplayedUpdated(const bool displayed);
-	//! Process changes from StelSkyLayerMgr
-	void skyLayerDisplayedChanged(const bool displayed);
-	//! Process changes from StelMovementMgr
-	void mountModeUpdated(const StelMovementMgr::MountMode mode);
-	void trackingUpdated(const bool track);
-	//! Process changes from SkyGui
-	void progressBarUpdated();
+
 private:
 	QGraphicsWidget* topLevelGraphicsWidget;
 			
@@ -242,12 +227,6 @@ private:
 
 	// This method is used by init() to initialize the LandscapeMgr instance.
 	void initLandscapeMgr();
-
-	// This method is used by init() to initialize the LandscapeMgr instance.
-	void initStelMovementMgr();
-
-	// This method is used by init() to initialize the SolarSystem instance.
-	void initSolarSystem();
 };
 
 //! Allow to load the GUI as a static plugin

@@ -1,7 +1,6 @@
 /*
  * Stellarium
  * Copyright (C) 2006 Fabien Chereau
- * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -163,9 +162,9 @@ public:
 public slots:
 
 	//! Set flag for activating night vision mode.
-	void setNightVisionMode(const bool useNightVision);
+	void setVisionModeNight(bool);
 	//! Get flag for activating night vision mode.
-	bool isNightVisionMode() const {return flagNightVision;}
+	bool getVisionModeNight() const {return flagNightVision;}
 
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
