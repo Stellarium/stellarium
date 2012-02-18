@@ -46,6 +46,7 @@
 #include <QDebug>
 #include <QFrame>
 #include <QFile>
+#include <QFileInfo>
 #include <QSettings>
 #include <QTimer>
 #include <QDialog>
@@ -412,37 +413,39 @@ void ViewDialog::skyCultureChanged(const QString& cultureName)
 
 void ViewDialog::updateSkyCultureText()
 {
+	StelApp& app = StelApp::getInstance();
+	QString skyCultureId = app.getSkyCultureMgr().getCurrentSkyCultureID();
 	QString descPath;
 	try
 	{
-                QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-                if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang)) 
-                {
-                        lang = lang.split("_").at(0);
-                }
-                descPath = StelFileMgr::findFile("skycultures/" + StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID() + "/description."+lang+".utf8");
+		QString lang = app.getLocaleMgr().getAppLanguage();
+		if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang)) 
+		{
+			lang = lang.split("_").at(0);
+		}
+		descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description."+lang+".utf8");
 	}
 	catch (std::runtime_error& e)
 	{
 		try
 		{
-			descPath = StelFileMgr::findFile("skycultures/" + StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID() + "/description.en.utf8");
+			descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description.en.utf8");
 		}
 		catch (std::runtime_error& e)
 		{
-			qWarning() << "WARNING: can't find description for skyculture" << StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID();
+			qWarning() << "WARNING: can't find description for skyculture" << skyCultureId;
 		}
 	}
 
 	QStringList searchPaths;
 	try
 	{
-		searchPaths << StelFileMgr::findFile("skycultures/" + StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
+		searchPaths << StelFileMgr::findFile("skycultures/" + skyCultureId);
 	}
 	catch (std::runtime_error& e) {}
 
 	ui->skyCultureTextBrowser->setSearchPaths(searchPaths);
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
 	Q_ASSERT(gui);
 	ui->skyCultureTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
@@ -454,7 +457,14 @@ void ViewDialog::updateSkyCultureText()
 	{
 		QFile f(descPath);
 		f.open(QIODevice::ReadOnly);
-		ui->skyCultureTextBrowser->setHtml(QString::fromUtf8(f.readAll()));
+		QString htmlFile = QString::fromUtf8(f.readAll());
+#if QT_VERSION == 0x040800
+		// Workaround for https://bugreports.qt-project.org/browse/QTBUG-24077
+		QString path = QFileInfo(f).path();
+		QString newtag = "<img src=\"" + path + "/\\1";
+		htmlFile.replace(QRegExp("<img src=\"(\\w)"), newtag);
+#endif
+		ui->skyCultureTextBrowser->setHtml(htmlFile);
 	}
 }
 
