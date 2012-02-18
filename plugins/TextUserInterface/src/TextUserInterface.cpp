@@ -497,6 +497,14 @@ void TextUserInterface::draw(StelCore* core)
 			x = (sideBar) ? sideBar->boundingRectNoHelpLabel().right() : 50;
 			y = (bottomBar) ? bottomBar->boundingRect().height() : 50;
 		}
+
+		// Alternate x,y for Disk viewport
+		if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
+		{
+			StelProjector::StelProjectorParams projParams = core->getCurrentStelProjectorParams();
+			x = projParams.viewportCenter[0] - projParams.viewportFovDiameter/2;
+			y = projParams.viewportCenter[1];
+		}
 		
 		x += 20;
 		y += 15;
