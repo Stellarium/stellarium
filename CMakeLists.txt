@@ -239,6 +239,8 @@ IF(APPLE)
 ELSE(APPLE)
   ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/share/stellarium")
   ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale")
+  # Used in generating the documentation (doc/stellarium.pod.cmake):
+  SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/share/stellarium")
 ENDIF()
 ELSE()
   ADD_DEFINITIONS(-DINSTALL_DATADIR=".")
