@@ -620,9 +620,10 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 	if (!scriptMgr.getLicense(s).trimmed().isEmpty())
 	{
 		html += "<h3>" + q_("License") + ": " + scriptMgr.getLicense(s) + "</h3>";
-	}
+	}	
 	QString d = scriptMgr.getDescription(s).trimmed();
 	d.replace("\n", "<br />");
+	d.replace(QRegExp("\\s{2,}"), " ");
 	html += "<p>" + q_(d) + "</p>";
 	html += "</body></html>";	
 	ui->scriptInfoBrowser->setHtml(html);	
