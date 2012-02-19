@@ -517,17 +517,35 @@ float Scenery3d::groundHeight()
 
 void Scenery3d::drawArrays(StelPainter& painter, bool textures)
 {
+    //glEnable(GL_CULL_FACE); // See if this makes a significant speed difference, and make sure models are correct!
+                            // Maybe make this configurable?
+    // GZ: This should enable specular color effects with colored and textured models.
+    glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SEPARATE_SPECULAR_COLOR); // test how expensive this is.
+    glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 1); // change to 0 if too expensive
+    glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 0); // 0 is OK for "good" models.
+    const GLfloat amb[]={0.025f, 0.025f, 0.025f, 1.0f};
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, amb); // tiny overall background light
+
+
     for (unsigned int i=0; i<objModelArrays.size(); i++) {
         OBJ::StelModel& stelModel = objModelArrays[i];
+
         if(textures) sendToShader(stelModel, curEffect);
-        //glColor3fv(stelModel.color.v);
-        painter.setColor(stelModel.color.v[0], stelModel.color.v[1], stelModel.color.v[2]);
+
+        glMaterialfv(GL_FRONT, GL_DIFFUSE,   stelModel.diffuseColor.v);
+        glMaterialfv(GL_FRONT, GL_AMBIENT,   stelModel.diffuseColor.v);
+        glMaterialfv(GL_FRONT, GL_SPECULAR,  stelModel.specularColor.v);
+        glMateriali( GL_FRONT, GL_SHININESS, stelModel.specularExponent);
+
         if(stelModel.texture)
         {
-            painter.setArrays(stelModel.vertices, stelModel.texcoords, __null, stelModel.normals);
+            painter.enableTexture2d(true);
+            painter.setArrays(stelModel.vertices, stelModel.texcoords, NULL, stelModel.normals);
         } else
         {
-            painter.setArrays(stelModel.vertices, __null, __null, stelModel.normals);
+            //painter.setShadeModel(StelPainter::ShadeModelSmooth); // is default
+            painter.enableTexture2d(false);
+            painter.setArrays(stelModel.vertices, NULL, NULL, stelModel.normals);
         }
         painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);
     }
@@ -537,7 +555,7 @@ void Scenery3d::sendToShader(OBJ::StelModel& stelModel, Effect cur)
 {
     if(cur != No)
     {
-        if (stelModel.texture.data()) {
+        if (stelModel.texture) {
             stelModel.texture.data()->bind();
 
             //Send texture to shader
@@ -552,7 +570,7 @@ void Scenery3d::sendToShader(OBJ::StelModel& stelModel, Effect cur)
         {
             //No texture, send color and indication
             int location = curShader->uniformLocation("vecColor");
-            curShader->setUniform(location, stelModel.color.v[0], stelModel.color.v[1], stelModel.color.v[2], 1.0f);
+            curShader->setUniform(location, stelModel.diffuseColor.v[0], stelModel.diffuseColor.v[1], stelModel.diffuseColor.v[2], 1.0f);
 
             location = curShader->uniformLocation("onlyColor");
             curShader->setUniform(location, true);
@@ -578,9 +596,9 @@ void Scenery3d::sendToShader(OBJ::StelModel& stelModel, Effect cur)
             }
         }
     }
-    else
+    else // No-shader code, more classical OpenGL pipeline
     {
-        if (stelModel.texture.data()) {
+        if (stelModel.texture) {
             stelModel.texture.data()->bind();
         }
     }
@@ -801,16 +819,16 @@ void Scenery3d::generateShadowMap(StelCore* core)
 {
     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
     Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
-    zRotateMatrix.transfo(sunPosition); //: GZ: VERIFIED THE NECESSITY OF THIS
+    //zRotateMatrix.transfo(sunPosition); //: GZ: VERIFIED THE NECESSITY OF THIS. STOP: MAYBE ONLY FOR NON-ROTATED NORMALS.(20120219)
     sunPosition.normalize();
     Vec3d moonPosition = ssystem->getMoon()->getAltAzPosAuto(core);
     float moonPhaseAngle=ssystem->getMoon()->getPhase(core->getObserverHeliocentricEclipticPos());
-    zRotateMatrix.transfo(moonPosition);
+    //zRotateMatrix.transfo(moonPosition);
     moonPosition.normalize();
     PlanetP venus=ssystem->searchByEnglishName("Venus");
     Vec3d venusPosition = venus->getAltAzPosAuto(core);
     float venusPhaseAngle=venus->getPhase(core->getObserverHeliocentricEclipticPos());
-    zRotateMatrix.transfo(venusPosition);
+    //zRotateMatrix.transfo(venusPosition);
     venusPosition.normalize();
 
     // The light model here: ambient light consists of solar twilight and day ambient,
@@ -951,8 +969,8 @@ void Scenery3d::generateCubeMap(StelCore* core)
     float ambientBrightness, directionalBrightness;
     Vec3f lightsourcePosition;
     ShadowCaster shadows=setupLights(ambientBrightness, directionalBrightness, lightsourcePosition);
-
-    const GLfloat LightPosition[]= {-lightsourcePosition.v[0], -lightsourcePosition.v[1], lightsourcePosition.v[2], 0.0f} ;// signs determined by experiment
+    // GZ: These signs were suspiciously -/-/+ before.
+    const GLfloat LightPosition[]= {lightsourcePosition.v[0], lightsourcePosition.v[1], lightsourcePosition.v[2], 0.0f} ;// signs determined by experiment
 
     float fov = 90.0f;
     float aspect = 1.0f;
@@ -1138,7 +1156,8 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
     Vec3f lightsourcePosition;
     ShadowCaster shadows=setupLights(ambientBrightness, directionalBrightness, lightsourcePosition);
 
-    const GLfloat LightPosition[]= {-lightsourcePosition.v[0], -lightsourcePosition.v[1], lightsourcePosition.v[2], 0.0f} ;// signs determined by experiment
+    // GZ: These were -/-/+ before!
+    const GLfloat LightPosition[]= {lightsourcePosition.v[0], lightsourcePosition.v[1], lightsourcePosition.v[2], 0.0f} ;// signs determined by experiment
 
     glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -1290,7 +1309,7 @@ void Scenery3d::initShadowMapping()
     glDrawBuffer(GL_NONE); // essential for depth-only FBOs!!!
     glReadBuffer(GL_NONE); // essential for depth-only FBOs!!!
 
-    //Done. Unbind and switch to nromal texture unit 0
+    //Done. Unbind and switch to normal texture unit 0
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glActiveTexture(GL_TEXTURE0);
 }

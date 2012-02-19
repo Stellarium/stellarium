@@ -48,9 +48,9 @@ void MTL::load(const char *filename)
                 {
                     if (parts.size() > 3)
                     {
-                        curMaterial->color.r = parseFloat(parts[1]);
-                        curMaterial->color.g = parseFloat(parts[2]);
-                        curMaterial->color.b = parseFloat(parts[3]);
+                        curMaterial->diffuse.r = parseFloat(parts[1]);
+                        curMaterial->diffuse.g = parseFloat(parts[2]);
+                        curMaterial->diffuse.b = parseFloat(parts[3]);
                     }
                 }
                 else if(parts[0] == "Ka" && matOpen)
@@ -116,7 +116,7 @@ void MTL::load(const char *filename)
     }
     else
     {
-        qDebug() << "[Scenery3d] MTL ERROR: Couldn't load " <<  filename;
+        qWarning() << "[Scenery3d] MTL ERROR: Couldn't load " <<  filename;
     }
 }
 
@@ -125,15 +125,16 @@ void MTL::uploadTexturesGL(void)
     StelTextureMgr textureMgr;
     for (MatMap::iterator it = mMap.begin(); it != mMap.end(); it++) {
         std::string texture = it->second->texture;
-        qWarning() << "[Scenery3d]: TEX: " << texture.c_str();
+        qDebug() << "[Scenery3d]: TEX: " << texture.c_str();
         if (texture.size() > 0) {
             StelTextureSP tex = textureMgr.createTexture(QString(absolutePath(texture).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
             if(!tex.isNull()){
                 textureMapGL[texture] = tex;
-                //textureMapGL[texture] = load_texture(absolutePath(texture).c_str());
                 //qDebug() << "[Scenery3d] Loaded Texture: " << texture.c_str();
             }
+            else
+                qWarning() << "[Scenery3d] Failed to load Texture: " << texture.c_str();
         }
 
         std::string bump = it->second->bump_texture;
@@ -144,11 +145,13 @@ void MTL::uploadTexturesGL(void)
 
             if(!bumpTex.isNull()){
                 textureMapGL[bump] = bumpTex;
-                qDebug() << "[Scenery3d] Loaded Normal Map: " << bump.c_str();
+                //qDebug() << "[Scenery3d] Loaded Normal Map: " << bump.c_str();
             }
+            else
+                qWarning() << "[Scenery3d] Failed to load Normal Map: " << bump.c_str();
         }
 
-        qWarning() << "[Scenery3d]: Kd: r" << it->second->color.r << " g" << it->second->color.g << " b" << it->second->color.b;
+        qDebug() << "[Scenery3d]: Kd: r" << it->second->diffuse.r << " g" << it->second->diffuse.g << " b" << it->second->diffuse.b;
     }
 }
 

@@ -101,7 +101,7 @@ void OBJ::load( const char* filename, const enum vertexOrder order )
                         case XZY:
                             vn.x = parseFloat(parts[1]);
                             vn.z = parseFloat(parts[2]);
-                            vn.y = parseFloat(parts[3]);
+                            vn.y = -parseFloat(parts[3]);
                             break;
                         case YXZ:
                             vn.y = parseFloat(parts[1]);
@@ -147,19 +147,19 @@ void OBJ::load( const char* filename, const enum vertexOrder order )
                 } else if (parts[0] == "f") { // face
                     Face face;
                     for (unsigned int i=1; i<parts.size(); ++i) {
-                        Ref ref={0, 0, 0, 0, 0};
+                        Ref ref={0, 0, 0, false, false};
                         vector<string> f = splitStr(parts[i], '/');
                         if (f.size() >= 2) { // ONLY for vertices with either texture or texture and normals
                             ref.v = parseInt(f[0]) - 1;
-                            ref.texture = false;
+                            ref.texcoordValid = false;
                             if (f[1].size() > 0) { // if string is valid
                                 ref.t = parseInt(f[1]) - 1;
-                                ref.texture = true;
+                                ref.texcoordValid = true;
                             }
-                            ref.normal = false;
+                            ref.normalValid = false;
                             if (f.size() > 2) {
                                 ref.n = parseInt(f[2]) - 1;
-                                ref.normal = true;
+                                ref.normalValid = true;
                             }
                         }
                         face.refs.push_back(ref);
@@ -210,9 +210,9 @@ void OBJ::load( const char* filename, const enum vertexOrder order )
     }
 }
 
-void OBJ::drawTriGL( void ) // simple triangle renderer
-{
-    /*
+/*
+//void OBJ::drawTriGL( void ) // simple triangle renderer
+//{
     for (ModelList::iterator it1 = models.begin(); it1 != models.end(); it1++) {
         Model& model = *it1;
         const MTL::Material& material = mtlLib.getMaterial(model.material);
@@ -251,8 +251,8 @@ void OBJ::drawTriGL( void ) // simple triangle renderer
         }
         glEnd();
     }
-    */
 }
+*/
 
 vector<OBJ::StelModel> OBJ::getStelArrays()
 {
@@ -260,7 +260,6 @@ vector<OBJ::StelModel> OBJ::getStelArrays()
     StelModel stelModel;
     for (ModelList::iterator it1 = models.begin(); it1 != models.end(); it1++) {
         Model& model = *it1;
-        //const MTL::Material& material = mtlLib.getMaterial(model.material);
         const MTL::Material* material = mtlLib.getMaterial(model.material);
         if (!material->texture.empty()) {
             stelModel.texture = mtlLib.getTexture(material->texture);
@@ -275,10 +274,13 @@ vector<OBJ::StelModel> OBJ::getStelArrays()
         }
 
         stelModel.triangleCount = model.faces.size();
-        stelModel.color = Vec3f(material->color.r, material->color.g, material->color.b);
-        stelModel.vertices = new Vec3d[stelModel.triangleCount * 3];
-        stelModel.texcoords = new Vec2f[stelModel.triangleCount * 3];
-        stelModel.normals = new Vec3f[stelModel.triangleCount * 3];
+        stelModel.diffuseColor  = Vec3f(material->diffuse.r, material->diffuse.g, material->diffuse.b);
+        stelModel.ambientColor  = Vec3f(material->ambient.r, material->ambient.g, material->ambient.b);
+        stelModel.specularColor = Vec3f(material->specular.r, material->specular.g, material->specular.b);
+        stelModel.specularExponent = material->shininess;
+        stelModel.vertices      = new Vec3d[stelModel.triangleCount * 3];
+        stelModel.texcoords     = new Vec2f[stelModel.triangleCount * 3];
+        stelModel.normals       = new Vec3f[stelModel.triangleCount * 3];
         //stelModel.tangents = new Vec3f[stelModel.triangleCount * 3];
 
         int i = 0;
@@ -289,13 +291,13 @@ vector<OBJ::StelModel> OBJ::getStelArrays()
                 Ref& ref = *it3;
                 Vertex& vert = vertices[ref.v];
                 stelModel.vertices[i] = Vec3d(vert.x, vert.y, vert.z);
-                if (ref.normal) {
+                if (ref.normalValid) {
                     Vertex& norm = normals[ref.n];
                     stelModel.normals[i] = Vec3f(norm.x, norm.y, norm.z);
                 } else {
                     stelModel.normals[i] = Vec3f(0.0f, 0.0f, 0.0f);
                 }
-                if (ref.texture) {
+                if (ref.texcoordValid) { // if texture coordinates valid. Face material may still be texture-free!
                     Texcoord& tex = texcoords[ref.t];
                     stelModel.texcoords[i] = Vec2f(tex.u, tex.v);
                 } else {
@@ -307,6 +309,19 @@ vector<OBJ::StelModel> OBJ::getStelArrays()
                 three++;
                 i++;
             }
+            // GZ: RECONSTRUCT 3 VERTEX NORMALS FROM FACE EDGES IF LAST NORMALS ARE 0/0/0.
+            if ((stelModel.normals[i-1]==Vec3f(0.0f, 0.0f, 0.0f)) && (stelModel.normals[i-2]==Vec3f(0.0f, 0.0f, 0.0f)) && (stelModel.normals[i-3]==Vec3f(0.0f, 0.0f, 0.0f) )) {
+                Vec3d edge1=stelModel.vertices[i-2]-stelModel.vertices[i-3];
+                Vec3d edge2=stelModel.vertices[i-1]-stelModel.vertices[i-2];
+                Vec3d edge3=stelModel.vertices[i-3]-stelModel.vertices[i-1];
+                Vec3d nrm=edge1^(-edge3);
+                stelModel.normals[i-3]=Vec3f(nrm[0], nrm[1], nrm[2]);
+                nrm=edge2^(-edge1);
+                stelModel.normals[i-2]=Vec3f(nrm[0], nrm[1], nrm[2]);
+                nrm=edge3^(-edge2);
+                stelModel.normals[i-1]=Vec3f(nrm[0], nrm[1], nrm[2]);
+            }
+
         }
         stelModels.push_back(stelModel);
         stelModel = StelModel();
@@ -329,6 +344,13 @@ void OBJ::transform(Mat4d mat)
         maxX = max(it->x, maxX);
         maxY = max(it->y, maxY);
         maxZ = max(it->z, maxZ);
+    }
+    // GZ 2012-02-19: It seems Normals were never transformed! Puh!
+    for (std::vector<Vertex>::iterator it = normals.begin(); it != normals.end(); it++)
+    {
+        Vec3d v = Vec3d(it->x, it->y, it->z);
+        mat.transfo(v);
+        *it = (Vertex) { v[0], v[1], v[2] };
     }
 }
 
