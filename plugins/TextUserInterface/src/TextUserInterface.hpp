@@ -43,6 +43,11 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	virtual void handleKeys(class QKeyEvent* event);
 
+	///////////////////////////////////////////////////////////////////////////
+	// Methods specific to TextUserInterface
+	//! Loads the module's configuration from the config file.
+	void loadConfiguration(void);
+
 private slots:
 	void setHomePlanet(QString planetName);
 	void setAltitude(int altitude);

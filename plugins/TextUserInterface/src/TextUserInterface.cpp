@@ -95,8 +95,7 @@ Q_EXPORT_PLUGIN2(TextUserInterface, TextUserInterfaceStelPluginInterface)
 TextUserInterface::TextUserInterface()
 	: dummyDialog(this), tuiActive(false), currentNode(NULL)
 {
-	setObjectName("TextUserInterface");
-	font.setPixelSize(15);
+	setObjectName("TextUserInterface");	
 }
 
 /*************************************************************************
@@ -129,6 +128,8 @@ void TextUserInterface::init()
 	//unless you have a good reason. --BM
 	
 	StelCore* core = StelApp::getInstance().getCore();
+	// Main config.
+	loadConfiguration();
 	//Reusing strings from the location dialog
 	TuiNode* m1 = new TuiNode(N_("Location"));
 	TuiNode* m1_1 = new TuiNodeDouble(N_("Latitude:"),
@@ -479,6 +480,17 @@ void TextUserInterface::init()
 
 
 	currentNode = m1;
+}
+
+/*************************************************************************
+ Load settings from configuration file.
+*************************************************************************/
+void TextUserInterface::loadConfiguration(void)
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	font.setPixelSize(conf->value("tui/tui_font_size", 15).toInt());
 }
 
 /*************************************************************************
