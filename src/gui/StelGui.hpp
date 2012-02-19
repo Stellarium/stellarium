@@ -181,6 +181,7 @@ private slots:
 	void cardinalsPointsDisplayedUpdated(const bool displayed);
 	void fogDisplayedUpdated(const bool displayed);
 	void landscapeDisplayedUpdated(const bool displayed);
+	void copySelectedObjectInfo(void);
 
 private:
 	QGraphicsWidget* topLevelGraphicsWidget;
