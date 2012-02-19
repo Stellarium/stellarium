@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-13 12:32+0700\n"
+"POT-Creation-Date: 2012-02-19 03:56+0700\n"
 "PO-Revision-Date: 2012-02-08 06:40+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-14 05:37+0000\n"
-"X-Generator: Launchpad (build 14781)\n"
+"X-Launchpad-Export-Date: 2012-02-19 05:35+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -37,20 +37,20 @@ msgstr "Horizon"
 msgid "Galactic Plane"
 msgstr "Satah Galaksi"
 
-#: src/core/modules/LandscapeMgr.cpp:486
+#: src/core/modules/LandscapeMgr.cpp:493
 msgid "Author: "
 msgstr "Pengarang: "
 
-#: src/core/modules/LandscapeMgr.cpp:489
+#: src/core/modules/LandscapeMgr.cpp:496
 msgid "Location: "
 msgstr "Lokasi: "
 
-#: src/core/modules/LandscapeMgr.cpp:494
+#: src/core/modules/LandscapeMgr.cpp:501
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:498
+#: src/core/modules/LandscapeMgr.cpp:505
 msgid "Planet: "
 msgstr "Planet "
 
@@ -319,46 +319,46 @@ msgstr "(ketara)"
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:313 src/gui/ConfigurationDialog.cpp:315
+#: src/gui/ConfigurationDialog.cpp:314 src/gui/ConfigurationDialog.cpp:316
 msgid "Select screenshot directory"
 msgstr "Pilih direktori cekupan skrin"
 
-#: src/gui/ConfigurationDialog.cpp:488
+#: src/gui/ConfigurationDialog.cpp:489
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Permulaan FOV: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:496
+#: src/gui/ConfigurationDialog.cpp:497
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Arah permulaan bagi paparan Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:535
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
+#: src/gui/ConfigurationDialog.cpp:536
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:255
 msgid "Authors"
 msgstr "Pengarang"
 
-#: src/gui/ConfigurationDialog.cpp:539 src/gui/ViewDialog.cpp:397
+#: src/gui/ConfigurationDialog.cpp:540 src/gui/ViewDialog.cpp:393
 msgid "Contact"
 msgstr "Pautan"
 
-#: src/gui/ConfigurationDialog.cpp:617
+#: src/gui/ConfigurationDialog.cpp:618
 msgid "Author"
 msgstr "Pengarang"
 
-#: src/gui/ConfigurationDialog.cpp:621
+#: src/gui/ConfigurationDialog.cpp:622
 msgid "License"
 msgstr "Lesen"
 
-#: src/gui/ConfigurationDialog.cpp:650
+#: src/gui/ConfigurationDialog.cpp:652
 msgid "Running script: "
 msgstr "Skrip jalan: "
 
-#: src/gui/ConfigurationDialog.cpp:657
+#: src/gui/ConfigurationDialog.cpp:659
 msgid "Running script: [none]"
 msgstr "Skrip jalan: [tiada]"
 
-#: src/gui/ConfigurationDialog.cpp:727
+#: src/gui/ConfigurationDialog.cpp:729
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -366,16 +366,16 @@ msgstr ""
 "Katalog bintang baru sudah selesai dimuat turun!/n\n"
 "Mulakan semula Stellarium untuk paparkannya."
 
-#: src/gui/ConfigurationDialog.cpp:731
+#: src/gui/ConfigurationDialog.cpp:733
 msgid "All available star catalogs have been installed."
 msgstr "Semua katalog bintang yang tersedia telah dipasang."
 
-#: src/gui/ConfigurationDialog.cpp:736
+#: src/gui/ConfigurationDialog.cpp:738
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Dapatkan katalog %1 dari %2"
 
-#: src/gui/ConfigurationDialog.cpp:743
+#: src/gui/ConfigurationDialog.cpp:745
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -384,7 +384,7 @@ msgstr ""
 "Memuat turun %1.../n\n"
 "(Anda boleh tutup tetingkap ini.)"
 
-#: src/gui/ConfigurationDialog.cpp:750
+#: src/gui/ConfigurationDialog.cpp:752
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -395,7 +395,7 @@ msgstr ""
 "Kiraan bintang: %2 juta\n"
 "Jarak Magnitud: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:793 src/gui/ConfigurationDialog.cpp:829
+#: src/gui/ConfigurationDialog.cpp:795 src/gui/ConfigurationDialog.cpp:831
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -404,11 +404,11 @@ msgstr ""
 "Ralat memuat turun %1:/n\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:881
+#: src/gui/ConfigurationDialog.cpp:883
 msgid "Verifying file integrity..."
 msgstr "Mengesahkan Integriti fail..."
 
-#: src/gui/ConfigurationDialog.cpp:885
+#: src/gui/ConfigurationDialog.cpp:887
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -883,27 +883,27 @@ msgstr "Togol ketampakan GUI"
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:456
+#: src/gui/ViewDialog.cpp:454
 msgid "No description"
 msgstr "Tiada keterangan"
 
-#: src/gui/ViewDialog.cpp:540
+#: src/gui/ViewDialog.cpp:567
 msgid "No shooting stars"
 msgstr "Tiada tahi bintang"
 
-#: src/gui/ViewDialog.cpp:543
+#: src/gui/ViewDialog.cpp:570
 msgid "Normal rate"
 msgstr "Kadar Normal"
 
-#: src/gui/ViewDialog.cpp:546
+#: src/gui/ViewDialog.cpp:573
 msgid "Standard Perseids rate"
 msgstr "Kadar Persei Piawai"
 
-#: src/gui/ViewDialog.cpp:549
+#: src/gui/ViewDialog.cpp:576
 msgid "Exceptional Leonid rate"
 msgstr "Kadar Leonid khas"
 
-#: src/gui/ViewDialog.cpp:552
+#: src/gui/ViewDialog.cpp:579
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Kadar yang tertingi (1966 Leonids)"
 
@@ -988,7 +988,7 @@ msgid "You can remove it manually by deleting the following directory: %1"
 msgstr ""
 "Anda boleh membuangnya secara manual dengan padamkan direktori berikut: %1"
 
-#: src/main.cpp:336
+#: src/main.cpp:333
 msgid "This system does not support OpenGL."
 msgstr "Sistem ini tidak menyokong OpenGL."
 
@@ -3744,31 +3744,31 @@ msgstr "Satelit tidak kelihatan"
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:252
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:253
 msgid "Stellarium Satellites Plugin"
 msgstr "Pemalam Satelit Stellarium"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:253
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
 msgid "Version"
 msgstr "Versi"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:257
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:258
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
 "Pemalam Satelit meramal kedudukan satelit buatan manusia dalam orbit Bumi."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Notes for users"
 msgstr "Nota untuk pengguna"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:261
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr "Satelit dan orbitnya hanya dipaparkan bila pemerhati berada di Bumi."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:261
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:262
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
@@ -3778,7 +3778,7 @@ msgstr ""
 "minggu atau mungkin bulan pada masa lepas atau masa akan datang). Jangkakan "
 "perkara pelik berlaku bila melihat tarikh diluar julat ini."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:262
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:263
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
@@ -3788,7 +3788,7 @@ msgstr ""
 "secara kerap."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:264
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:265
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -3799,7 +3799,7 @@ msgstr ""
 "kembalikan ke fail %3 lalai. Fail lama akan disandar sebagai %4. Ia boleh "
 "ditemui dalam direktori data pengguna, dibawah \"modules/Satellites/\"."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:270
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:271
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
@@ -3808,11 +3808,11 @@ msgstr ""
 "lengkap, hilang atau mengandungi pepijat."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:274
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:275
 msgid "TLE data updates"
 msgstr "Kemaskini data TLE"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:275
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:276
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more "
@@ -3822,7 +3822,7 @@ msgstr ""
 "Internet, dan secara lalai pemalam akan lakukan ini jika data sedia ada "
 "berusia lebih dari 72 jam. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:276
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:277
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -3833,7 +3833,7 @@ msgstr ""
 "pada komputer anda. Fail ini mestilah mempunyai format yang sama denga "
 "kemaskini Celestrak (rujuk %1 sebagai contoh)."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:277
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:278
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
@@ -3841,11 +3841,11 @@ msgstr ""
 "<b>Perhatian:</b> jika nama satelit dalam data kemaskini mempunyai tanda "
 "kurungan dipenghujungnya, ia akan dibuang sebelum data digunakan."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:280
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
 msgid "Adding new satellites"
 msgstr "Menambah satelit baru"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:282
 #, qt-format
 msgid ""
 "At the moment you must manually edit the %1 file to add new satellites to "
@@ -3854,11 +3854,11 @@ msgstr ""
 "Buat masa ini, anda mesti sunting fail %1 secara manual untuk tambah satelit "
 "baru ke pengkalan data."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:283
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:284
 msgid "Technical notes"
 msgstr "Nota teknikal"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:284
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:285
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
@@ -3866,7 +3866,7 @@ msgstr ""
 "Kedudukan dikira menggunakan kaedah SGP4 & SDP4, menggunakan data TLE NORAD "
 "sebagai input. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:285
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
@@ -3875,16 +3875,16 @@ msgstr ""
 "Spacetrack revisi #3 (termasuklah Laporan Spacetrack #6). "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 #, qt-format
 msgid "See %1this document%2 for details."
 msgstr "Rujuk %1 dokumen ini %2 untuk perincian."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
 msgid "Links"
 msgstr "Pautan"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:291
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
 "plugin\" in the subject when posting."
@@ -3893,19 +3893,19 @@ msgstr ""
 "\"Satellites plugin\" dalam subjek bila mengepos."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:293
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:294
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Jika anda mempunyai soalan, anda boleh %1dapatkan jawapan disini%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:296
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "Laporan boleh dibuat %1disini%2."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:297
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:298
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -3913,68 +3913,68 @@ msgstr ""
 "Jika anda hendak meminta fitur, anda boleh cipta laporan pepijat, dan "
 "tetapkan keutamaan ke \"wishlist\"."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:315
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:316
 msgid "Internet updates disabled"
 msgstr "Kemaskini Internet dilumpuhkan"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:317
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:349
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:318
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:350
 msgid "Updating now..."
 msgstr "Mengemaskini sekarang..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:319
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:320
 msgid "Next update: < 1 minute"
 msgstr "Kemaskini Berikutnya: < 1 minit"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:322
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "Kemaskini Berikutnya: %1 minit"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:324
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "Kemaskini Berikutnya: %1 jam"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:338
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:339
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
 msgid "Update now"
 msgstr "Kemaskini sekarang"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:340
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:341
 msgid "Update from files"
 msgstr "Kemaskini dari fail"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:352
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:353
 msgid "Update error"
 msgstr "Ralat kemaskini"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:359
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:360
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
 msgstr "Kemaskini %1/%2 satelit; %3 hilang"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:416
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:417
 msgid "[new source]"
 msgstr "[sumber baru]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:457
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:458
 msgid "[all newly added]"
 msgstr "[semua terbaru ditambah]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:458
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:459
 msgid "[all not displayed]"
 msgstr "[semua tidak dipaparkan]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:459
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:460
 msgid "[all displayed]"
 msgstr "[semua dipaparkan]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:460
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
 msgid "[all]"
 msgstr "[semua]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:572
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:573
 msgid "Select TLE Update File"
 msgstr "Pilih Fail Kemaskini TLE"
 
@@ -4243,7 +4243,7 @@ msgstr "Pemalam Kawalan Teleskop"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
 #, qt-format
 msgid "Version %1"
 msgstr "Versi %1"
@@ -4987,7 +4987,7 @@ msgstr "Simpan konfigurasi semasa"
 msgid "Shut down"
 msgstr "Matikan"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:504
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:512
 msgid "[no TUI node]"
 msgstr "[tiada nod TUI]"
 
@@ -5055,12 +5055,12 @@ msgstr ""
 "penggelintaran \"%5\" akan kembalikan asteroid %6."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:87
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:88
 msgid "website"
 msgstr "laman sesawang"
 
 #. TRANSLATORS: IAU = International Astronomical Union
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:91
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:92
 #, qt-format
 msgid ""
 "You can import comet and asteroid data formatted in the export formats of "
@@ -5073,7 +5073,7 @@ msgstr ""
 "objek, muat turun seperti senarai dari Internet atau gelintar perkhidmatan "
 "Planet Kecil fan Ephemeris Komet (MPES)."
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 msgid "Solar System Editor plug-in"
 msgstr "Pemalam Penyunting Sistem Suria"
 

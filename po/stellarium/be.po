@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-13 12:32+0700\n"
+"POT-Creation-Date: 2012-02-19 03:56+0700\n"
 "PO-Revision-Date: 2012-02-15 18:26+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-16 04:59+0000\n"
-"X-Generator: Launchpad (build 14781)\n"
+"X-Launchpad-Export-Date: 2012-02-19 05:31+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 "X-Poedit-Country: BELARUS\n"
 "Language: be\n"
 "X-Poedit-Language: Belarusian\n"
@@ -41,20 +41,20 @@ msgstr "Гарызонт"
 msgid "Galactic Plane"
 msgstr "Ґаляктычная плоскасьць"
 
-#: src/core/modules/LandscapeMgr.cpp:486
+#: src/core/modules/LandscapeMgr.cpp:493
 msgid "Author: "
 msgstr "Стваральнік: "
 
-#: src/core/modules/LandscapeMgr.cpp:489
+#: src/core/modules/LandscapeMgr.cpp:496
 msgid "Location: "
 msgstr "Месца: "
 
-#: src/core/modules/LandscapeMgr.cpp:494
+#: src/core/modules/LandscapeMgr.cpp:501
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 м"
 
-#: src/core/modules/LandscapeMgr.cpp:498
+#: src/core/modules/LandscapeMgr.cpp:505
 msgid "Planet: "
 msgstr "Плянэта: "
 
@@ -324,46 +324,46 @@ msgstr "(бачныя)"
 msgid "Az/Alt: %1/%2"
 msgstr "Азімут/Вышыня: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:313 src/gui/ConfigurationDialog.cpp:315
+#: src/gui/ConfigurationDialog.cpp:314 src/gui/ConfigurationDialog.cpp:316
 msgid "Select screenshot directory"
 msgstr "Выберы каталёґ для здымкаў экрана"
 
-#: src/gui/ConfigurationDialog.cpp:488
+#: src/gui/ConfigurationDialog.cpp:489
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Пачатковае поле зроку: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:496
+#: src/gui/ConfigurationDialog.cpp:497
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Пачатковы напрамак агляду, азімут/вышыня: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:535
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
+#: src/gui/ConfigurationDialog.cpp:536
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:255
 msgid "Authors"
 msgstr "Стваральнікі"
 
-#: src/gui/ConfigurationDialog.cpp:539 src/gui/ViewDialog.cpp:397
+#: src/gui/ConfigurationDialog.cpp:540 src/gui/ViewDialog.cpp:393
 msgid "Contact"
 msgstr "Кантакт"
 
-#: src/gui/ConfigurationDialog.cpp:617
+#: src/gui/ConfigurationDialog.cpp:618
 msgid "Author"
 msgstr "Стваральнік"
 
-#: src/gui/ConfigurationDialog.cpp:621
+#: src/gui/ConfigurationDialog.cpp:622
 msgid "License"
 msgstr "Ліцэнзія"
 
-#: src/gui/ConfigurationDialog.cpp:650
+#: src/gui/ConfigurationDialog.cpp:652
 msgid "Running script: "
 msgstr "Выконваецца сцэнар: "
 
-#: src/gui/ConfigurationDialog.cpp:657
+#: src/gui/ConfigurationDialog.cpp:659
 msgid "Running script: [none]"
 msgstr "Выконваецца сцэнар: [ніякі]"
 
-#: src/gui/ConfigurationDialog.cpp:727
+#: src/gui/ConfigurationDialog.cpp:729
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -371,16 +371,16 @@ msgstr ""
 "Новыя каталёґі зорак загружаныя!\n"
 "Перазапусьці Stellarium, каб адлюстраваць іх."
 
-#: src/gui/ConfigurationDialog.cpp:731
+#: src/gui/ConfigurationDialog.cpp:733
 msgid "All available star catalogs have been installed."
 msgstr "Усе аняўныя каталёґі зорак былі ўсталяваныя."
 
-#: src/gui/ConfigurationDialog.cpp:736
+#: src/gui/ConfigurationDialog.cpp:738
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Загрузка каталёґу %1 з %2"
 
-#: src/gui/ConfigurationDialog.cpp:743
+#: src/gui/ConfigurationDialog.cpp:745
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -389,7 +389,7 @@ msgstr ""
 "Загрузка %1…\n"
 "(Гэтае вакно можна закрыць.)"
 
-#: src/gui/ConfigurationDialog.cpp:750
+#: src/gui/ConfigurationDialog.cpp:752
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -400,7 +400,7 @@ msgstr ""
 "Колькасьць зорак: %2 млн\n"
 "Дыяпазон велічыняў: %3 — %4"
 
-#: src/gui/ConfigurationDialog.cpp:793 src/gui/ConfigurationDialog.cpp:829
+#: src/gui/ConfigurationDialog.cpp:795 src/gui/ConfigurationDialog.cpp:831
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -409,11 +409,11 @@ msgstr ""
 "Не атрымалася загрузіць %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:881
+#: src/gui/ConfigurationDialog.cpp:883
 msgid "Verifying file integrity..."
 msgstr "Правяраецца суцэльнасць файла…"
 
-#: src/gui/ConfigurationDialog.cpp:885
+#: src/gui/ConfigurationDialog.cpp:887
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -889,27 +889,27 @@ msgstr "Пераключыць бачнасьць ҐІК"
 msgid "%1m"
 msgstr "%1 м"
 
-#: src/gui/ViewDialog.cpp:456
+#: src/gui/ViewDialog.cpp:454
 msgid "No description"
 msgstr "Без апісаньня"
 
-#: src/gui/ViewDialog.cpp:540
+#: src/gui/ViewDialog.cpp:567
 msgid "No shooting stars"
 msgstr "Бязь зьнічак"
 
-#: src/gui/ViewDialog.cpp:543
+#: src/gui/ViewDialog.cpp:570
 msgid "Normal rate"
 msgstr "Нармальная часьціня"
 
-#: src/gui/ViewDialog.cpp:546
+#: src/gui/ViewDialog.cpp:573
 msgid "Standard Perseids rate"
 msgstr "Звычайная часьціня Пэрсэідаў"
 
-#: src/gui/ViewDialog.cpp:549
+#: src/gui/ViewDialog.cpp:576
 msgid "Exceptional Leonid rate"
 msgstr "Выключная часьціня Леанідаў"
 
-#: src/gui/ViewDialog.cpp:552
+#: src/gui/ViewDialog.cpp:579
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Найбольшая калі (Леаніды ў 1966)"
 
@@ -994,7 +994,7 @@ msgstr "Краявід з такой самай назвай ці вызначн
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "Яго можна выдаліць уручную, выдаліўшы наступны каталёґ: %1"
 
-#: src/main.cpp:336
+#: src/main.cpp:333
 msgid "This system does not support OpenGL."
 msgstr "Гэтая сыстэма не падтрымлівае OpenGL."
 
@@ -3757,15 +3757,15 @@ msgstr "Спадарожнік ня бачны"
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 МГц (%2%3 кГц)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:252
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:253
 msgid "Stellarium Satellites Plugin"
 msgstr "Дададак Stellarium «Спадарожнікі»"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:253
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
 msgid "Version"
 msgstr "Вэрсія"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:257
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:258
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
@@ -3773,18 +3773,18 @@ msgstr ""
 "Дадатак «Спадарожнікі» прадказвае становішчы штучных спадарожнікаў на арбіце "
 "Зямлі."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Notes for users"
 msgstr "Нататкі для карыстальнікаў"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:261
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
 "Спадарожнікі й іхныя арбіты паказваюцца толькі калі назіральнік знаходзіцца "
 "на Зямлі."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:261
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:262
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
@@ -3794,7 +3794,7 @@ msgstr ""
 "дзён, тыдняў, магчыма, месяца ў мінулае ці будучыню). Па-за гэтым прамежкам "
 "можна пабачыць розныя непаразуменьні."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:262
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:263
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
@@ -3804,7 +3804,7 @@ msgstr ""
 "абнаўляць зьвесткі TLE."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:264
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:265
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -3815,7 +3815,7 @@ msgstr ""
 "прадвызначаны файл «%3». Стары файл будзе захаваны як %4. Яго можна знайсьці "
 "ў каталёґу даньняў карыстальніка ў «modules/Satellites/»."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:270
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:271
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
@@ -3824,11 +3824,11 @@ msgstr ""
 "няскончаныя, адсутныя ці з памылкамі."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:274
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:275
 msgid "TLE data updates"
 msgstr "Абнаўленьні зьвестак TLE"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:275
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:276
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more "
@@ -3838,7 +3838,7 @@ msgstr ""
 "крыніц і, калі не зададзена іншае, ён робіць гэта калі існоўныя зьвесткі "
 "старэйшыя за 72 гадзіны. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:276
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:277
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -3849,7 +3849,7 @@ msgstr ""
 "файла. Гэты файл мусіць мець такі ж фармат, як абнаўленьні Celestrak (гл. "
 "прыклады ў %1)."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:277
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:278
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
@@ -3857,11 +3857,11 @@ msgstr ""
 "<b>Заўвага:</b> калі назва спадарожніка ў абнаўленьнях мае нешта ў "
 "квадратных дужках у канцы, яно будзе выдалена перад выкарыстаньнем зьвестак."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:280
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
 msgid "Adding new satellites"
 msgstr "Дадаваньне новых спадарожнікаў"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:282
 #, qt-format
 msgid ""
 "At the moment you must manually edit the %1 file to add new satellites to "
@@ -3870,11 +3870,11 @@ msgstr ""
 "На гэты момант патрэбна ўручную правіць файл %1 каб дадаць у базу новыя "
 "спадарожнікі. Спрашчэньне гэтага дасюль у нашым сьпісе «ШТО ЗРАБІЦЬ»…"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:283
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:284
 msgid "Technical notes"
 msgstr "Тэхнічныя нататкі"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:284
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:285
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
@@ -3882,7 +3882,7 @@ msgstr ""
 "Становішчы разьлічваюцца паводле мэтадаў SGP4 і SDP4, выкарыстоўваюцчы "
 "зьвесткі NORAD TLE як крыніцу. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:285
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
@@ -3891,16 +3891,16 @@ msgstr ""
 "перагледжаным дакладам аб касьмічных шляхах №3 (які ўключае даклад №6). "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 #, qt-format
 msgid "See %1this document%2 for details."
 msgstr "Глядзі %1гэты дакумэнт%2 дзеля падрабязнасьцяў."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
 msgid "Links"
 msgstr "Спасылкі"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:291
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
 "plugin\" in the subject when posting."
@@ -3909,19 +3909,19 @@ msgstr ""
 "«Satellites plugin» у тэму паведамленьня."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:293
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:294
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Калі маеш пытаньні, можна %1атрымаць адказ тут%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:296
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "Паведамленьні пра хібы можна рабіць %1тут%2."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:297
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:298
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -3929,68 +3929,68 @@ msgstr ""
 "Калі жадаеш прапанаваць нейкую функцыю, можна стварыць паведамленьне аб "
 "хібе, і задаць яе важнасьць як «wishlist»."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:315
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:316
 msgid "Internet updates disabled"
 msgstr "Абнаўленьне празь Сеціва абязьдзейнена"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:317
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:349
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:318
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:350
 msgid "Updating now..."
 msgstr "Адбываецца абнаўленьне…"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:319
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:320
 msgid "Next update: < 1 minute"
 msgstr "Наступнае абнаўленьне: < 1 хвіліну"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:322
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "Наступнае абнаўленьне: %1 хвілін"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:324
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "Наступнае абнаўленьне: %1 гадзін"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:338
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:339
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
 msgid "Update now"
 msgstr "Абнавіць зараз"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:340
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:341
 msgid "Update from files"
 msgstr "Абнавіць з файлаў"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:352
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:353
 msgid "Update error"
 msgstr "Памылка абнаўленьня"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:359
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:360
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
 msgstr "Абноўлена %1/%2 спадарожнікаў; %3 адсутныя"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:416
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:417
 msgid "[new source]"
 msgstr "[новая крыніца]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:457
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:458
 msgid "[all newly added]"
 msgstr "[усе новадададзеныя]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:458
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:459
 msgid "[all not displayed]"
 msgstr "[усе не паказаныя]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:459
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:460
 msgid "[all displayed]"
 msgstr "[усе паказаныя]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:460
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
 msgid "[all]"
 msgstr "[усе]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:572
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:573
 msgid "Select TLE Update File"
 msgstr "Выберы файл з абнаўленьнямі TLE"
 
@@ -4258,7 +4258,7 @@ msgstr "Дадатак кіраваньня тэлескопам"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
 #, qt-format
 msgid "Version %1"
 msgstr "Вэрсія %1"
@@ -5003,7 +5003,7 @@ msgstr "Захаваць цяперашнія настаўленьні"
 msgid "Shut down"
 msgstr "Спыніць працу"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:504
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:512
 msgid "[no TUI node]"
 msgstr "[няма вузла ТІК]"
 
@@ -5069,12 +5069,12 @@ msgstr ""
 "«%3» будзе атрымана %4, камэта Гэйлі, але пры пошуку «%5» — астэроід %6."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:87
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:88
 msgid "website"
 msgstr "пляцоўка"
 
 #. TRANSLATORS: IAU = International Astronomical Union
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:91
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:92
 #, qt-format
 msgid ""
 "You can import comet and asteroid data formatted in the export formats of "
@@ -5087,7 +5087,7 @@ msgstr ""
 "загружаць такія сьпісы зь Сеціва ці рабіць сеціўны пошук у Службе малых "
 "плянэт і эфэмэрыд камэт (MPES)."
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 msgid "Solar System Editor plug-in"
 msgstr "Дадатак рэдактару Сонечнай сыстэмы"
 
