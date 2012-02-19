@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-13 12:32+0700\n"
+"POT-Creation-Date: 2012-02-19 03:56+0700\n"
 "PO-Revision-Date: 2012-01-25 14:29+0000\n"
 "Last-Translator: Asier Iturralde Sarasola <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-14 05:33+0000\n"
-"X-Generator: Launchpad (build 14781)\n"
+"X-Launchpad-Export-Date: 2012-02-19 05:31+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -37,20 +37,20 @@ msgstr "Zerumuga"
 msgid "Galactic Plane"
 msgstr "Galaxia-planoa"
 
-#: src/core/modules/LandscapeMgr.cpp:486
+#: src/core/modules/LandscapeMgr.cpp:493
 msgid "Author: "
 msgstr "Egilea: "
 
-#: src/core/modules/LandscapeMgr.cpp:489
+#: src/core/modules/LandscapeMgr.cpp:496
 msgid "Location: "
 msgstr "Kokalekua: "
 
-#: src/core/modules/LandscapeMgr.cpp:494
+#: src/core/modules/LandscapeMgr.cpp:501
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:498
+#: src/core/modules/LandscapeMgr.cpp:505
 msgid "Planet: "
 msgstr "Planeta: "
 
@@ -318,46 +318,46 @@ msgstr "(itxurazkoa)"
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:313 src/gui/ConfigurationDialog.cpp:315
+#: src/gui/ConfigurationDialog.cpp:314 src/gui/ConfigurationDialog.cpp:316
 msgid "Select screenshot directory"
 msgstr "Hautatu pantaila-argazkien karpeta"
 
-#: src/gui/ConfigurationDialog.cpp:488
+#: src/gui/ConfigurationDialog.cpp:489
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Hasierako ikuseremua: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:496
+#: src/gui/ConfigurationDialog.cpp:497
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Hasierako ikuspuntua Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:535
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
+#: src/gui/ConfigurationDialog.cpp:536
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:255
 msgid "Authors"
 msgstr "Egileak"
 
-#: src/gui/ConfigurationDialog.cpp:539 src/gui/ViewDialog.cpp:397
+#: src/gui/ConfigurationDialog.cpp:540 src/gui/ViewDialog.cpp:393
 msgid "Contact"
 msgstr "Kontaktua"
 
-#: src/gui/ConfigurationDialog.cpp:617
+#: src/gui/ConfigurationDialog.cpp:618
 msgid "Author"
 msgstr "Egilea"
 
-#: src/gui/ConfigurationDialog.cpp:621
+#: src/gui/ConfigurationDialog.cpp:622
 msgid "License"
 msgstr "Lizentzia"
 
-#: src/gui/ConfigurationDialog.cpp:650
+#: src/gui/ConfigurationDialog.cpp:652
 msgid "Running script: "
 msgstr "Scripta exekutatzen: "
 
-#: src/gui/ConfigurationDialog.cpp:657
+#: src/gui/ConfigurationDialog.cpp:659
 msgid "Running script: [none]"
 msgstr "Scripta exekutatzen: [bat ere ez]"
 
-#: src/gui/ConfigurationDialog.cpp:727
+#: src/gui/ConfigurationDialog.cpp:729
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -365,16 +365,16 @@ msgstr ""
 "Izar-katalogo berrien deskarga bukatu da!\n"
 "Berrabiarazi Stellarium bistaratzeko."
 
-#: src/gui/ConfigurationDialog.cpp:731
+#: src/gui/ConfigurationDialog.cpp:733
 msgid "All available star catalogs have been installed."
 msgstr "Eskuragarri zeuden izar-katalogo guztiak instalatu dira."
 
-#: src/gui/ConfigurationDialog.cpp:736
+#: src/gui/ConfigurationDialog.cpp:738
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Eskuratu katalogoa %2tik %1"
 
-#: src/gui/ConfigurationDialog.cpp:743
+#: src/gui/ConfigurationDialog.cpp:745
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -383,7 +383,7 @@ msgstr ""
 "%1 deskargatzen...\n"
 "(Leiho hau itxi dezakezu.)"
 
-#: src/gui/ConfigurationDialog.cpp:750
+#: src/gui/ConfigurationDialog.cpp:752
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -394,7 +394,7 @@ msgstr ""
 "Izar kopurua: %2 Milioi\n"
 "Magnitude tartea: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:793 src/gui/ConfigurationDialog.cpp:829
+#: src/gui/ConfigurationDialog.cpp:795 src/gui/ConfigurationDialog.cpp:831
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -403,11 +403,11 @@ msgstr ""
 "Errorea %1 deskargatzean:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:881
+#: src/gui/ConfigurationDialog.cpp:883
 msgid "Verifying file integrity..."
 msgstr "Fitxategiaren osotasuna egiaztatzen..."
 
-#: src/gui/ConfigurationDialog.cpp:885
+#: src/gui/ConfigurationDialog.cpp:887
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -884,27 +884,27 @@ msgstr "Txandakatu GUI-aren ikusgarritasuna"
 msgid "%1m"
 msgstr "Kopiatu testua \t %1m"
 
-#: src/gui/ViewDialog.cpp:456
+#: src/gui/ViewDialog.cpp:454
 msgid "No description"
 msgstr "Azalpenik ez"
 
-#: src/gui/ViewDialog.cpp:540
+#: src/gui/ViewDialog.cpp:567
 msgid "No shooting stars"
 msgstr "Izar iheskorrik gabe"
 
-#: src/gui/ViewDialog.cpp:543
+#: src/gui/ViewDialog.cpp:570
 msgid "Normal rate"
 msgstr "Abiadura arrunta"
 
-#: src/gui/ViewDialog.cpp:546
+#: src/gui/ViewDialog.cpp:573
 msgid "Standard Perseids rate"
 msgstr "Perseiden agertze-tasa arrunta"
 
-#: src/gui/ViewDialog.cpp:549
+#: src/gui/ViewDialog.cpp:576
 msgid "Exceptional Leonid rate"
 msgstr "Leoniden ohiz kanpoko agertze-tasa"
 
-#: src/gui/ViewDialog.cpp:552
+#: src/gui/ViewDialog.cpp:579
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Inozko agertze-tasarik handiena (1966ko Leonidak)"
 
@@ -990,7 +990,7 @@ msgstr ""
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "Eskuz ezabatu dezakezu ondorengo direktorioa ezabatuz: %1"
 
-#: src/main.cpp:336
+#: src/main.cpp:333
 msgid "This system does not support OpenGL."
 msgstr "Sistema honek ez du OpenGL onartzen"
 
@@ -3749,15 +3749,15 @@ msgstr "Satelitea ez dago ikusgai"
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:252
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:253
 msgid "Stellarium Satellites Plugin"
 msgstr "Stellarium Sateliteak Plugin-a"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:253
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
 msgid "Version"
 msgstr "Bertsioa"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:257
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:258
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
@@ -3765,32 +3765,32 @@ msgstr ""
 "Sateliteak plugin-ak Lurraren orbitan dauden satelite artifizialen posizioa "
 "iragartzen du."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Notes for users"
 msgstr "Erabiltzaileentzako oharrak"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:261
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
 "Sateliteak eta beren orbitak behatzailea Lurrean dagoenean soilik erakusten "
 "dira."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:261
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:262
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:262
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:263
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
 msgstr ""
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:264
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:265
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -3802,7 +3802,7 @@ msgstr ""
 "bezala gordeko da. Hau erabiltzailearen datuen direktorioan aurkitu daiteke, "
 "\"modules/Satellites\" pean."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:270
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:271
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
@@ -3811,11 +3811,11 @@ msgstr ""
 "edo osatugabeak edo akastunak dira."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:274
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:275
 msgid "TLE data updates"
 msgstr "TLE datu eguneraketak"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:275
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:276
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more "
@@ -3824,7 +3824,7 @@ msgstr ""
 "Sateliteak pluginak automatikoki deskargatu ditzake TLE datuak Internetetik, "
 "eta lehenetsia dago halaxe egitea datuak 72 ordu baino zaharragoak badira. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:276
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:277
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -3835,7 +3835,7 @@ msgstr ""
 "fitxategi batetik egin dezakezu eguneraketa. Fitxategi honek Celestrak "
 "eguneraketen formatu berean egon behar du (ikusi %1 adibidetarako)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:277
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:278
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
@@ -3843,11 +3843,11 @@ msgstr ""
 "<b>Oharra:</b> eguneraketa datuetan satelitearen izenak parentesi zuzenen [ "
 "] artean zerbait badu bukaeran, ezabatua izango da datuak erabili aurretik."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:280
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
 msgid "Adding new satellites"
 msgstr "Satelite berriak gehitzen"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:282
 #, qt-format
 msgid ""
 "At the moment you must manually edit the %1 file to add new satellites to "
@@ -3856,11 +3856,11 @@ msgstr ""
 "Oraingoz eskuz editatu behar duzu %1 fitxategia datu-basera satelite berriak "
 "gehitzeko. Prozedura hau erraztea EGITEKOAK zerrendan dago oraindik..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:283
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:284
 msgid "Technical notes"
 msgstr "Ohar teknikoak"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:284
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:285
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
@@ -3868,109 +3868,109 @@ msgstr ""
 "Posizioak SGP4 eta SDP4 metodoak erabiliz kalkulatzen dira, NORAD TLE datuak "
 "erabiliz sarrera bezala. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:285
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 #, qt-format
 msgid "See %1this document%2 for details."
 msgstr "Ikusi %1dokumentu hau%2 xehetasunetarako."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
 msgid "Links"
 msgstr "Estekak"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:291
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
 "plugin\" in the subject when posting."
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:293
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:294
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Galderarik baduzu, %1erantzun bat lor dezakezu hemen%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:296
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "Errore-txostenak egin daitezke %1hemen%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:297
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:298
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:315
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:316
 msgid "Internet updates disabled"
 msgstr "Internet bidezko eguneraketak desgaituta"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:317
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:349
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:318
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:350
 msgid "Updating now..."
 msgstr "Eguneratzen..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:319
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:320
 msgid "Next update: < 1 minute"
 msgstr "Hurrengo eguneraketarako: < minutu 1"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:322
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "Hurrengo eguneraketarako: %1 minutu"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:324
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "Hurrengo eguneraketarako: %1 ordu"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:338
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:339
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
 msgid "Update now"
 msgstr "Eguneratu orain"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:340
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:341
 msgid "Update from files"
 msgstr "Eguneratu fitxategietatik"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:352
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:353
 msgid "Update error"
 msgstr "Eguneraketa errorea"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:359
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:360
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
 msgstr "%1/%2 satelite eguneratua(k); %3 falta d(ir)a"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:416
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:417
 msgid "[new source]"
 msgstr "[iturburu berria]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:457
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:458
 msgid "[all newly added]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:458
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:459
 msgid "[all not displayed]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:459
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:460
 msgid "[all displayed]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:460
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
 msgid "[all]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:572
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:573
 msgid "Select TLE Update File"
 msgstr "Hautatu TLE eguneraketa fitxategia"
 
@@ -4235,7 +4235,7 @@ msgstr "Teleskopioa kontrolatzeko plugin-a"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
 #, qt-format
 msgid "Version %1"
 msgstr "%1 bertsioa"
@@ -4970,7 +4970,7 @@ msgstr "Gorde uneko konfigurazioa"
 msgid "Shut down"
 msgstr "Itzali"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:504
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:512
 msgid "[no TUI node]"
 msgstr "[TUI nodorik ez]"
 
@@ -5031,12 +5031,12 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:87
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:88
 msgid "website"
 msgstr "webgunea"
 
 #. TRANSLATORS: IAU = International Astronomical Union
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:91
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:92
 #, qt-format
 msgid ""
 "You can import comet and asteroid data formatted in the export formats of "
@@ -5045,7 +5045,7 @@ msgid ""
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 msgid "Solar System Editor plug-in"
 msgstr "Eguzki-sistema Editore plugin-a"
 
