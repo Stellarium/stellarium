@@ -24,6 +24,8 @@ uniform sampler2D smap;
 uniform vec4 vecColor;
 uniform bool onlyColor;
 
+uniform float fTransparencyThresh;
+
 varying vec4 SM_tex_coord;
 varying vec3 vecLight;
 varying vec3 vecNormal;
@@ -36,7 +38,9 @@ void main(void)
 	vec4 diffuse = gl_LightSource[0].diffuse * max(0.0, dot(normal, light));
 	
 	vec4 texColor = texture(tex, gl_TexCoord[0].st);
-
+	
+	if(texColor.a < fTransparencyThresh)
+		discard;
 	
 	vec3 tex_coords = SM_tex_coord.xyz/SM_tex_coord.w;
 	float depth = texture(smap, tex_coords.xy).x;

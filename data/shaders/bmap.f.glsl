@@ -25,6 +25,8 @@ uniform bool boolBump;
 uniform vec4 vecColor;
 uniform bool onlyColor;
 
+uniform float fTransparencyThresh;
+
 varying vec3 vecLight;
 varying vec3 vecPosition;
 varying vec3 vecNormal;
@@ -94,6 +96,9 @@ void main(void)
 {
 	vec4 diffuse = getDiffuseLighting();
 	vec4 texColor = texture(tex, gl_TexCoord[0].st);
+	
+	if(texColor.a < fTransparencyThresh)
+		discard;
 	
 	vec4 color;
 	if(onlyColor) color = vecColor * (gl_LightSource[0].ambient + diffuse);

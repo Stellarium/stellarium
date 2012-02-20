@@ -282,7 +282,7 @@ vector<OBJ::StelModel> OBJ::getStelArrays()
         stelModel.vertices      = new Vec3d[stelModel.triangleCount * 3];
         stelModel.texcoords     = new Vec2f[stelModel.triangleCount * 3];
         stelModel.normals       = new Vec3f[stelModel.triangleCount * 3];
-        //stelModel.tangents = new Vec3f[stelModel.triangleCount * 3];
+        stelModel.tangents      = new Vec3f[stelModel.triangleCount * 3];
 
         int i = 0;
         for (FaceList::iterator it2 = model.faces.begin(); it2 != model.faces.end(); it2++) {
@@ -324,6 +324,15 @@ vector<OBJ::StelModel> OBJ::getStelArrays()
             }
 
         }
+
+        StelModel* smPtr = &stelModel;
+        Model *mPtr = &model;
+        //Calculate the tangents for each model that has a bump texture specified
+        if(mtlLib.getMaterial(model.material)->bump_texture.size() > 0)
+        {
+            calcTangents(mPtr, smPtr);
+        }
+
         stelModels.push_back(stelModel);
         stelModel = StelModel();
     }
@@ -353,6 +362,43 @@ void OBJ::transform(Mat4d mat)
         mat.transfo(v);
         *it = (Vertex) { v[0], v[1], v[2] };
     }
+}
+
+void OBJ::calcTangents(Model* model, StelModel* stelModel)
+{
+//    int i = 0;
+//    for (FaceList::iterator it2 = model.faces.begin(); it2 != model.faces.end(); it2++)
+//    {
+//        Face& face = *it2;
+
+//        const Vec3f pVec[3];
+//        const Vec2f tVec[3];
+
+//        int three = 0;
+//        for (RefList::iterator it3 = face.refs.begin(); it3 != face.refs.end() && three < 3; it3++, i++, three++)
+//        {
+//            Ref& ref = *it3;
+//            pVec[three] = stelModel->vertices[ref.v];
+//            tVec[three] = stelModel->texcoords[ref.t];
+
+
+
+//            Vertex& vert = vertices[ref.v];
+//            stelModel.vertices[i] = Vec3d(vert.x, vert.y, vert.z);
+//            if (ref.normalValid) {
+//                Vertex& norm = normals[ref.n];
+//                stelModel.normals[i] = Vec3f(norm.x, norm.y, norm.z);
+//            } else {
+//                stelModel.normals[i] = Vec3f(0.0f, 0.0f, 0.0f);
+//            }
+//            if (ref.texcoordValid) { // if texture coordinates valid. Face material may still be texture-free!
+//                Texcoord& tex = texcoords[ref.t];
+//                stelModel.texcoords[i] = Vec2f(tex.u, tex.v);
+//            } else {
+//                stelModel.texcoords[i] = Vec2f(0.0f, 0.0f);
+//            }
+//        }
+//    }
 }
 
 //void OBJ::generateTangents(Model model)

@@ -130,20 +130,22 @@ private:
     //! @return height at -absolutePosition, which is the current eye point.
     float groundHeight();
 
-    bool shadowsEnabled;    // switchable value (^SPACE): Use shadow mapping
-    bool bumpsEnabled;      // switchable value (^B): Use bump mapping
-    bool textEnabled;       // switchable value (^K): display coordinates on screen. THIS IS NOT FOR DEBUGGING, BUT A PROGRAM FEATURE!
-    bool torchEnabled;      // switchable value (^L): adds artificial ambient light
-    bool debugEnabled;      // switchable value (^D): display debug graphics and debug texts on screen
-    bool lightCamEnabled;   // switchable value: switches camera to light camera
+    bool shadowsEnabled;        // switchable value (^SPACE): Use shadow mapping
+    bool bumpsEnabled;          // switchable value (^B): Use bump mapping
+    bool textEnabled;           // switchable value (^K): display coordinates on screen. THIS IS NOT FOR DEBUGGING, BUT A PROGRAM FEATURE!
+    bool torchEnabled;          // switchable value (^L): adds artificial ambient light
+    bool debugEnabled;          // switchable value (^D): display debug graphics and debug texts on screen
+    bool lightCamEnabled;       // switchable value: switches camera to light camera
 
-    int cubemapSize;        // configurable values, typically 512/1024/2048/4096
+    int cubemapSize;            // configurable values, typically 512/1024/2048/4096
     int shadowmapSize;
 
-    Vec3d absolutePosition; // current eyepoint in model
-    float movement_x;       // speed values for moving around the scenery
+    Vec3d absolutePosition;     // current eyepoint in model
+    float movement_x;           // speed values for moving around the scenery
     float movement_y;
     float movement_z;
+
+    float fTransparencyThresh;  // Threshold for discarding transparent texels
 
     StelCore* core;
     OBJ* objModel;
