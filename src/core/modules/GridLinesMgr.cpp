@@ -672,15 +672,15 @@ void GridLinesMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	setAzimuthalGridDisplayed(conf->value("viewing/flag_azimuthal_grid").toBool());
-	setEquatorGridDisplayed(conf->value("viewing/flag_equatorial_grid").toBool());
-	setEquatorJ2000GridDisplayed(conf->value("viewing/flag_equatorial_J2000_grid").toBool());
-	setGalacticGridDisplayed(conf->value("viewing/flag_galactic_grid").toBool());
-	setEquatorLineDisplayed(conf->value("viewing/flag_equator_line").toBool());
-	setEclipticLineDisplayed(conf->value("viewing/flag_ecliptic_line").toBool());
-	setMeridianLineDisplayed(conf->value("viewing/flag_meridian_line").toBool());
-	setHorizonLineDisplayed(conf->value("viewing/flag_horizon_line").toBool());
-	setGalacticPlaneLineDisplayed(conf->value("viewing/flag_galactic_plane_line").toBool());
+	setFlagAzimuthalGrid(conf->value("viewing/flag_azimuthal_grid").toBool());
+	setFlagEquatorGrid(conf->value("viewing/flag_equatorial_grid").toBool());
+	setFlagEquatorJ2000Grid(conf->value("viewing/flag_equatorial_J2000_grid").toBool());
+	setFlagGalacticGrid(conf->value("viewing/flag_galactic_grid").toBool());
+	setFlagEquatorLine(conf->value("viewing/flag_equator_line").toBool());
+	setFlagEclipticLine(conf->value("viewing/flag_ecliptic_line").toBool());
+	setFlagMeridianLine(conf->value("viewing/flag_meridian_line").toBool());
+	setFlagHorizonLine(conf->value("viewing/flag_horizon_line").toBool());
+	setFlagGalacticPlaneLine(conf->value("viewing/flag_galactic_plane_line").toBool());
 	
 	StelApp& app = StelApp::getInstance();
 	connect(&app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
@@ -740,7 +740,7 @@ void GridLinesMgr::updateLineLabels()
 }
 
 //! Set flag for displaying Azimuthal Grid
-void GridLinesMgr::setAzimuthalGridDisplayed(const bool displayed)
+void GridLinesMgr::setFlagAzimuthalGrid(const bool displayed)
 {
 	if(displayed != aziGrid->isDisplayed()) {
 		aziGrid->setDisplayed(displayed);
@@ -748,7 +748,7 @@ void GridLinesMgr::setAzimuthalGridDisplayed(const bool displayed)
 	}
 }
 //! Get flag for displaying Azimuthal Grid
-bool GridLinesMgr::isAzimuthalGridDisplayed(void) const
+bool GridLinesMgr::getFlagAzimuthalGrid(void) const
 {
 	return aziGrid->isDisplayed();
 }
@@ -765,7 +765,7 @@ void GridLinesMgr::setAzimuthalGridColor(const Vec3f& newColor)
 }
 
 //! Set flag for displaying Equatorial Grid
-void GridLinesMgr::setEquatorGridDisplayed(const bool displayed)
+void GridLinesMgr::setFlagEquatorGrid(const bool displayed)
 {
 	if(displayed != equGrid->isDisplayed()) {
 		equGrid->setDisplayed(displayed);
@@ -773,7 +773,7 @@ void GridLinesMgr::setEquatorGridDisplayed(const bool displayed)
 	}
 }
 //! Get flag for displaying Equatorial Grid
-bool GridLinesMgr::isEquatorGridDisplayed(void) const
+bool GridLinesMgr::getFlagEquatorGrid(void) const
 {
 	return equGrid->isDisplayed();
 }
@@ -790,7 +790,7 @@ void GridLinesMgr::setEquatorGridColor(const Vec3f& newColor)
 }
 
 //! Set flag for displaying Equatorial J2000 Grid
-void GridLinesMgr::setEquatorJ2000GridDisplayed(const bool displayed)
+void GridLinesMgr::setFlagEquatorJ2000Grid(const bool displayed)
 {
 	if(displayed != equJ2000Grid->isDisplayed()) {
 		equJ2000Grid->setDisplayed(displayed);
@@ -798,7 +798,7 @@ void GridLinesMgr::setEquatorJ2000GridDisplayed(const bool displayed)
 	}
 }
 //! Get flag for displaying Equatorial J2000 Grid
-bool GridLinesMgr::isEquatorJ2000GridDisplayed(void) const
+bool GridLinesMgr::getFlagEquatorJ2000Grid(void) const
 {
 	return equJ2000Grid->isDisplayed();
 }
@@ -815,7 +815,7 @@ void GridLinesMgr::setEquatorJ2000GridColor(const Vec3f& newColor)
 }
 
 //! Set flag for displaying Equatorial J2000 Grid
-void GridLinesMgr::setGalacticGridDisplayed(const bool displayed)
+void GridLinesMgr::setFlagGalacticGrid(const bool displayed)
 {
 	if(displayed != galacticGrid->isDisplayed()) {
 		galacticGrid->setDisplayed(displayed);
@@ -823,7 +823,7 @@ void GridLinesMgr::setGalacticGridDisplayed(const bool displayed)
 	}
 }
 //! Get flag for displaying Equatorial J2000 Grid
-bool GridLinesMgr::isGalacticGridDisplayed(void) const
+bool GridLinesMgr::getFlagGalacticGrid(void) const
 {
 	return galacticGrid->isDisplayed();
 }
@@ -840,7 +840,7 @@ void GridLinesMgr::setGalacticGridColor(const Vec3f& newColor)
 }
 
 //! Set flag for displaying Equatorial Line
-void GridLinesMgr::setEquatorLineDisplayed(const bool displayed)
+void GridLinesMgr::setFlagEquatorLine(const bool displayed)
 {
 	if(displayed != equatorLine->isDisplayed()) {
 		equatorLine->setDisplayed(displayed);
@@ -848,7 +848,7 @@ void GridLinesMgr::setEquatorLineDisplayed(const bool displayed)
 	}
 }
 //! Get flag for displaying Equatorial Line
-bool GridLinesMgr::isEquatorLineDisplayed(void) const
+bool GridLinesMgr::getFlagEquatorLine(void) const
 {
 	return equatorLine->isDisplayed();
 }
@@ -865,7 +865,7 @@ void GridLinesMgr::setEquatorLineColor(const Vec3f& newColor)
 }
 
 //! Set flag for displaying Ecliptic Line
-void GridLinesMgr::setEclipticLineDisplayed(const bool displayed)
+void GridLinesMgr::setFlagEclipticLine(const bool displayed)
 {
 	if(displayed != eclipticLine->isDisplayed()) {
 		eclipticLine->setDisplayed(displayed);
@@ -873,7 +873,7 @@ void GridLinesMgr::setEclipticLineDisplayed(const bool displayed)
 	}
 }
 //! Get flag for displaying Ecliptic Line
-bool GridLinesMgr::isEclipticLineDisplayed(void) const
+bool GridLinesMgr::getFlagEclipticLine(void) const
 {
 	return eclipticLine->isDisplayed();
 }
@@ -891,7 +891,7 @@ void GridLinesMgr::setEclipticLineColor(const Vec3f& newColor)
 
 
 //! Set flag for displaying Meridian Line
-void GridLinesMgr::setMeridianLineDisplayed(const bool displayed)
+void GridLinesMgr::setFlagMeridianLine(const bool displayed)
 {
 	if(displayed != meridianLine->isDisplayed()) {
 		meridianLine->setDisplayed(displayed);
@@ -899,7 +899,7 @@ void GridLinesMgr::setMeridianLineDisplayed(const bool displayed)
 	}
 }
 //! Get flag for displaying Meridian Line
-bool GridLinesMgr::isMeridianLineDisplayed(void) const
+bool GridLinesMgr::getFlagMeridianLine(void) const
 {
 	return meridianLine->isDisplayed();
 }
@@ -916,7 +916,7 @@ void GridLinesMgr::setMeridianLineColor(const Vec3f& newColor)
 }
 
 //! Set flag for displaying Horizon Line
-void GridLinesMgr::setHorizonLineDisplayed(const bool displayed)
+void GridLinesMgr::setFlagHorizonLine(const bool displayed)
 {
 	if(displayed != horizonLine->isDisplayed()) {
 		horizonLine->setDisplayed(displayed);
@@ -924,7 +924,7 @@ void GridLinesMgr::setHorizonLineDisplayed(const bool displayed)
 	}
 }
 //! Get flag for displaying Horizon Line
-bool GridLinesMgr::isHorizonLineDisplayed(void) const
+bool GridLinesMgr::getFlagHorizonLine(void) const
 {
 	return horizonLine->isDisplayed();
 }
@@ -941,7 +941,7 @@ void GridLinesMgr::setHorizonLineColor(const Vec3f& newColor)
 }
 
 //! Set flag for displaying GalacticPlane Line
-void GridLinesMgr::setGalacticPlaneLineDisplayed(const bool displayed)
+void GridLinesMgr::setFlagGalacticPlaneLine(const bool displayed)
 {
 	if(displayed != galacticPlaneLine->isDisplayed()) {
 		galacticPlaneLine->setDisplayed(displayed);
@@ -949,7 +949,7 @@ void GridLinesMgr::setGalacticPlaneLineDisplayed(const bool displayed)
 	}
 }
 //! Get flag for displaying GalacticPlane Line
-bool GridLinesMgr::isGalacticPlaneLineDisplayed(void) const
+bool GridLinesMgr::getFlagGalacticPlaneLine(void) const
 {
 	return galacticPlaneLine->isDisplayed();
 }

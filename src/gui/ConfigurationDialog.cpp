@@ -186,8 +186,8 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
 	ui->gravityLabelCheckbox->setChecked(proj->getFlagGravityLabels());
 	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlagGravityLabels(bool)));
-	ui->selectSingleConstellationButton->setChecked(cmgr->isIsolateSelected());
-	connect(ui->selectSingleConstellationButton, SIGNAL(toggled(bool)), cmgr, SLOT(setIsolateSelected(bool)));
+	ui->selectSingleConstellationButton->setChecked(cmgr->getFlagIsolateSelected());
+	connect(ui->selectSingleConstellationButton, SIGNAL(toggled(bool)), cmgr, SLOT(setFlagIsolateSelected(bool)));
 	ui->diskViewportCheckbox->setChecked(proj->getMaskType() == StelProjector::MaskDisk);
 	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 	ui->autoZoomResetsDirectionCheckbox->setChecked(mvmgr->getFlagAutoZoomOutResetsDirection());
@@ -382,21 +382,21 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/meteor_rate", mmgr->getZHR());
 
 	// view dialog / markings tab settings
-	conf->setValue("viewing/flag_azimuthal_grid", glmgr->isAzimuthalGridDisplayed());
-	conf->setValue("viewing/flag_equatorial_grid", glmgr->isEquatorGridDisplayed());
-	conf->setValue("viewing/flag_equator_line", glmgr->isEquatorLineDisplayed());
-	conf->setValue("viewing/flag_ecliptic_line", glmgr->isEclipticLineDisplayed());
-	conf->setValue("viewing/flag_meridian_line", glmgr->isMeridianLineDisplayed());
-	conf->setValue("viewing/flag_horizon_line", glmgr->isHorizonLineDisplayed());
-	conf->setValue("viewing/flag_equatorial_J2000_grid", glmgr->isEquatorJ2000GridDisplayed());
-	conf->setValue("viewing/flag_galactic_grid", glmgr->isGalacticGridDisplayed());
-	conf->setValue("viewing/flag_galactic_plane_line", glmgr->isGalacticPlaneLineDisplayed());
-	conf->setValue("viewing/flag_cardinal_points", lmgr->isCardinalsPointsDisplayed());
-	conf->setValue("viewing/flag_constellation_drawing", cmgr->isLinesDisplayed());
-	conf->setValue("viewing/flag_constellation_name", cmgr->isNamesDisplayed());
-	conf->setValue("viewing/flag_constellation_boundaries", cmgr->isBoundariesDisplayed());
-	conf->setValue("viewing/flag_constellation_art", cmgr->isArtDisplayed());
-	conf->setValue("viewing/flag_constellation_isolate_selected", cmgr->isIsolateSelected());
+	conf->setValue("viewing/flag_azimuthal_grid", glmgr->getFlagAzimuthalGrid());
+	conf->setValue("viewing/flag_equatorial_grid", glmgr->getFlagEquatorGrid());
+	conf->setValue("viewing/flag_equator_line", glmgr->getFlagEquatorLine());
+	conf->setValue("viewing/flag_ecliptic_line", glmgr->getFlagEclipticLine());
+	conf->setValue("viewing/flag_meridian_line", glmgr->getFlagMeridianLine());
+	conf->setValue("viewing/flag_horizon_line", glmgr->getFlagHorizonLine());
+	conf->setValue("viewing/flag_equatorial_J2000_grid", glmgr->getFlagEquatorJ2000Grid());
+	conf->setValue("viewing/flag_galactic_grid", glmgr->getFlagGalacticGrid());
+	conf->setValue("viewing/flag_galactic_plane_line", glmgr->getFlagGalacticPlaneLine());
+	conf->setValue("viewing/flag_cardinal_points", lmgr->getFlagCardinalsPoints());
+	conf->setValue("viewing/flag_constellation_drawing", cmgr->getFlagLines());
+	conf->setValue("viewing/flag_constellation_name", cmgr->getFlagLabels());
+	conf->setValue("viewing/flag_constellation_boundaries", cmgr->getFlagBoundaries());
+	conf->setValue("viewing/flag_constellation_art", cmgr->getFlagArt());
+	conf->setValue("viewing/flag_constellation_isolate_selected", cmgr->getFlagIsolateSelected());
 	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
 	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
 	conf->setValue("astro/flag_star_name", smgr->getFlagLabels());
@@ -410,9 +410,9 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	// view dialog / landscape tab settings
 	lmgr->setDefaultLandscapeID(lmgr->getCurrentLandscapeID());
 	conf->setValue("landscape/flag_landscape_sets_location", lmgr->getFlagLandscapeSetsLocation());
-	conf->setValue("landscape/flag_landscape", lmgr->isLandscapeDisplayed());
-	conf->setValue("landscape/flag_atmosphere", lmgr->isAtmosphereDisplayed());
-	conf->setValue("landscape/flag_fog", lmgr->isFogDisplayed());
+	conf->setValue("landscape/flag_landscape", lmgr->getFlagLandscape());
+	conf->setValue("landscape/flag_atmosphere", lmgr->getFlagAtmosphere());
+	conf->setValue("landscape/flag_fog", lmgr->getFlagFog());
 	conf->setValue("stars/init_bortle_scale", core->getSkyDrawer()->getBortleScale());
 
 	// view dialog / starlore tab
