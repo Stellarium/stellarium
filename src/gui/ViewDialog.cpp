@@ -181,15 +181,15 @@ void ViewDialog::createDialogContent()
 
 	// Landscape section
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-	ui->showGroundCheckBox->setChecked(lmgr->isLandscapeDisplayed());
+	ui->showGroundCheckBox->setChecked(lmgr->getFlagLandscape());
 	a = gui->getGuiActions("actionShow_Ground");
 	connect(a, SIGNAL(toggled(bool)), ui->showGroundCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showGroundCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
-	ui->showFogCheckBox->setChecked(lmgr->isFogDisplayed());
-	connect(ui->showFogCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFogDisplayed(bool)));
+	ui->showFogCheckBox->setChecked(lmgr->getFlagFog());
+	connect(ui->showFogCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagFog(bool)));
 
-	ui->showAtmosphereCheckBox->setChecked(lmgr->isAtmosphereDisplayed());
+	ui->showAtmosphereCheckBox->setChecked(lmgr->getFlagAtmosphere());
 	a = gui->getGuiActions("actionShow_Atmosphere");
 	connect(a, SIGNAL(toggled(bool)), ui->showAtmosphereCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showAtmosphereCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
@@ -267,7 +267,7 @@ void ViewDialog::createDialogContent()
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorialJ2000GridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEquatorialJ2000GridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
-	ui->showCardinalPointsCheckBox->setChecked(lmgr->isCardinalsPointsDisplayed());
+	ui->showCardinalPointsCheckBox->setChecked(lmgr->getFlagCardinalsPoints());
 	a = gui->getGuiActions("actionShow_Cardinal_Points");
 	connect(a, SIGNAL(toggled(bool)), ui->showCardinalPointsCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showCardinalPointsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
@@ -490,7 +490,7 @@ void ViewDialog::landscapeChanged(QListWidgetItem* item)
 	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getDefaultLandscapeID()!=lmgr->getCurrentLandscapeID());
 	//StelSkyDrawer *drawer=StelApp::getInstance().getSkyDrawer();
 	// GZ: Reset values that might have changed.
-	ui->showFogCheckBox->setChecked(lmgr->isFogDisplayed());
+	ui->showFogCheckBox->setChecked(lmgr->getFlagFog());
 	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScale());
 }
 

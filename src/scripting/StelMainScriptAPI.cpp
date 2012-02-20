@@ -580,7 +580,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticPlaneLine(false);
 		glmgr->setFlagEquatorJ2000Grid(false);
-		lmgr->setCardinalsPointsDisplayed(false);
+		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(false);
 		cmgr->setFlagLabels(false);
 		cmgr->setFlagBoundaries(false);
@@ -588,9 +588,9 @@ void StelMainScriptAPI::clear(const QString& state)
 		smgr->setFlagLabels(false);
 		ssmgr->setFlagLabels(false);
 		nmgr->setFlagHints(false);
-		lmgr->setLandscapeDisplayed(true);
-		lmgr->setAtmosphereDisplayed(true);
-		lmgr->setFogDisplayed(true);
+		lmgr->setFlagLandscape(true);
+		lmgr->setFlagAtmosphere(true);
+		lmgr->setFlagFog(true);
 	}
 	else if (state.toLower() == "starchart")
 	{
@@ -612,7 +612,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticPlaneLine(false);
 		glmgr->setFlagEquatorJ2000Grid(false);
-		lmgr->setCardinalsPointsDisplayed(false);
+		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(true);
 		cmgr->setFlagLabels(true);
 		cmgr->setFlagBoundaries(true);
@@ -620,9 +620,9 @@ void StelMainScriptAPI::clear(const QString& state)
 		smgr->setFlagLabels(true);
 		ssmgr->setFlagLabels(true);
 		nmgr->setFlagHints(true);
-		lmgr->setLandscapeDisplayed(false);
-		lmgr->setAtmosphereDisplayed(false);
-		lmgr->setFogDisplayed(false);
+		lmgr->setFlagLandscape(false);
+		lmgr->setFlagAtmosphere(false);
+		lmgr->setFlagFog(false);
 	}
 	else if (state.toLower() == "deepspace")
 	{
@@ -644,7 +644,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticPlaneLine(false);
 		glmgr->setFlagEquatorJ2000Grid(false);
-		lmgr->setCardinalsPointsDisplayed(false);
+		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(false);
 		cmgr->setFlagLabels(false);
 		cmgr->setFlagBoundaries(false);
@@ -652,9 +652,9 @@ void StelMainScriptAPI::clear(const QString& state)
 		smgr->setFlagLabels(false);
 		ssmgr->setFlagLabels(false);
 		nmgr->setFlagHints(false);
-		lmgr->setLandscapeDisplayed(false);
-		lmgr->setAtmosphereDisplayed(false);
-		lmgr->setFogDisplayed(false);
+		lmgr->setFlagLandscape(false);
+		lmgr->setFlagAtmosphere(false);
+		lmgr->setFlagFog(false);
 	}
 	else
 	{

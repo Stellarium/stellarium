@@ -42,20 +42,20 @@ class LandscapeMgr : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool atmosphereDisplayed
-			   READ isAtmosphereDisplayed
-			   WRITE setAtmosphereDisplayed
+			   READ getFlagAtmosphere
+			   WRITE setFlagAtmosphere
 			   NOTIFY atmosphereDisplayedChanged)
 	Q_PROPERTY(bool cardinalsPointsDisplayed
-			   READ isCardinalsPointsDisplayed
-			   WRITE setCardinalsPointsDisplayed
+			   READ getFlagCardinalsPoints
+			   WRITE setFlagCardinalsPoints
 			   NOTIFY cardinalsPointsDisplayedChanged)
 	Q_PROPERTY(bool fogDisplayed
-			   READ isFogDisplayed
-			   WRITE setFogDisplayed
+			   READ getFlagFog
+			   WRITE setFlagFog
 			   NOTIFY fogDisplayedChanged)
 	Q_PROPERTY(bool landscapeDisplayed
-			   READ isLandscapeDisplayed
-			   WRITE setLandscapeDisplayed
+			   READ getFlagLandscape
+			   WRITE setFlagLandscape
 			   NOTIFY landscapeDisplayedChanged)
 
 public:
@@ -149,14 +149,14 @@ public slots:
 	QString getDescription() const;
 
 	//! Get flag for displaying Landscape.
-	bool isLandscapeDisplayed() const;
+	bool getFlagLandscape() const;
 	//! Set flag for displaying Landscape.
-	void setLandscapeDisplayed(const bool displayed);
+	void setFlagLandscape(const bool displayed);
 
 	//! Get flag for displaying Fog.
-	bool isFogDisplayed() const;
+	bool getFlagFog() const;
 	//! Set flag for displaying Fog.
-	void setFogDisplayed(const bool displayed);
+	void setFlagFog(const bool displayed);
 
 	//! Return the value of the flag determining if a change of landscape will update the observer location.
 	bool getFlagLandscapeSetsLocation() const {return flagLandscapeSetsLocation;}
@@ -164,9 +164,9 @@ public slots:
 	void setFlagLandscapeSetsLocation(bool b) {flagLandscapeSetsLocation=b;}
 
 	//! Get flag for displaying Cardinals Points.
-	bool isCardinalsPointsDisplayed() const;
+	bool getFlagCardinalsPoints() const;
 	//! Set flag for displaying Cardinals Points.
-	void setCardinalsPointsDisplayed(const bool displayed);
+	void setFlagCardinalsPoints(const bool displayed);
 
 	//! Get Cardinals Points color.
 	Vec3f getColorCardinalPoints() const;
@@ -174,9 +174,9 @@ public slots:
 	void setColorCardinalPoints(const Vec3f& v);
 
 	//! Get flag for displaying Atmosphere.
-	bool isAtmosphereDisplayed() const;
+	bool getFlagAtmosphere() const;
 	//! Set flag for displaying Atmosphere.
-	void setAtmosphereDisplayed(const bool displayed);
+	void setFlagAtmosphere(const bool displayed);
 
 	//! Get atmosphere fade duration in s.
 	float getAtmosphereFadeDuration() const;
