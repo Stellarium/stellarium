@@ -188,7 +188,7 @@ void CompassMarks::setCompassMarks(bool b)
 	if (markFader)
 	{
 		// Save the display state of the cardinal points
-		cardinalPointsState = GETSTELMODULE(LandscapeMgr)->isCardinalsPointsDisplayed();
+		cardinalPointsState = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
 	}
 	else
 	{
