@@ -275,22 +275,22 @@ void ViewDialog::createDialogContent()
 	// Constellations
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 
-	ui->showConstellationLinesCheckBox->setChecked(cmgr->isLinesDisplayed());
+	ui->showConstellationLinesCheckBox->setChecked(cmgr->getFlagLines());
 	a = gui->getGuiActions("actionShow_Constellation_Lines");
 	connect(a, SIGNAL(toggled(bool)), ui->showConstellationLinesCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showConstellationLinesCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
-	ui->showConstellationLabelsCheckBox->setChecked(cmgr->isNamesDisplayed());
+	ui->showConstellationLabelsCheckBox->setChecked(cmgr->getFlagLabels());
 	a = gui->getGuiActions("actionShow_Constellation_Labels");
 	connect(a, SIGNAL(toggled(bool)), ui->showConstellationLabelsCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showConstellationLabelsCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
-	ui->showConstellationBoundariesCheckBox->setChecked(cmgr->isBoundariesDisplayed());
+	ui->showConstellationBoundariesCheckBox->setChecked(cmgr->getFlagBoundaries());
 	a = gui->getGuiActions("actionShow_Constellation_Boundaries");
 	connect(a, SIGNAL(toggled(bool)), ui->showConstellationBoundariesCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showConstellationBoundariesCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
-	ui->showConstellationArtCheckBox->setChecked(cmgr->isArtDisplayed());
+	ui->showConstellationArtCheckBox->setChecked(cmgr->getFlagArt());
 	a = gui->getGuiActions("actionShow_Constellation_Art");
 	connect(a, SIGNAL(toggled(bool)), ui->showConstellationArtCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showConstellationArtCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
