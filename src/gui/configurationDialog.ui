@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>440</width>
+    <width>521</width>
     <height>460</height>
    </rect>
   </property>
@@ -133,7 +133,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>4</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -997,17 +997,10 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pluginEnableButton">
-                  <property name="text">
-                    <string>enable</string>
-                  </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pluginDisableButton">
-                  <property name="text">
-                    <string>disable</string>
-                  </property>
+                <widget class="QCheckBox" name="pluginLoadedCheckbox">
+                 <property name="text">
+                  <string>Loaded</string>
+                 </property>
                 </widget>
                </item>
                <item>

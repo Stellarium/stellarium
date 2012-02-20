@@ -233,8 +233,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->pluginsListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(pluginsSelectionChanged(const QString&)));
 	connect(ui->pluginLoadAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(loadAtStartupChanged(int)));
 	connect(ui->pluginConfigureButton, SIGNAL(clicked()), this, SLOT(pluginConfigureCurrentSelection()));
-        connect(ui->pluginEnableButton, SIGNAL(clicked()), this, SLOT(pluginEnableCurrentSelection()));
-        connect(ui->pluginDisableButton, SIGNAL(clicked()), this, SLOT(pluginDisableCurrentSelection()));
+	connect(ui->pluginLoadedCheckbox, SIGNAL(clicked(bool)), this, SLOT(pluginSetCurrentLoadedState(bool)));
 	populatePluginsList();
 
 
@@ -543,9 +542,7 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 			html += "</body></html>";
 			ui->pluginsInfoBrowser->setHtml(html);
 			ui->pluginLoadAtStartupCheckBox->setChecked(desc.loadAtStartup);
-                        ui->pluginEnableButton->setVisible(!desc.loaded);
-                        ui->pluginDisableButton->setVisible(desc.loaded);
-                        ui->pluginConfigureButton->setVisible(desc.loaded);
+			ui->pluginLoadedCheckbox->setChecked(desc.loaded);
 			StelModule* pmod = StelApp::getInstance().getModuleMgr().getModule(desc.info.id, true);
 			if (pmod != NULL)
 				ui->pluginConfigureButton->setEnabled(pmod->configureGui(false));
@@ -632,6 +629,12 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 	html += "<p>" + q_(d) + "</p>";
 	html += "</body></html>";	
 	ui->scriptInfoBrowser->setHtml(html);	
+}
+
+void ConfigurationDialog::pluginSetCurrentLoadedState(bool b)
+{
+	if (b) pluginEnableCurrentSelection();
+	else pluginDisableCurrentSelection();
 }
 
 void ConfigurationDialog::pluginEnableCurrentSelection()
