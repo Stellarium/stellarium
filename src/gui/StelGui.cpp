@@ -511,91 +511,91 @@ void StelGui::initConstellationMgr()
 void StelGui::initGrindLineMgr()
 {
 	GridLinesMgr* gridLineManager = GETSTELMODULE(GridLinesMgr);
-	getGuiActions("actionShow_Equatorial_Grid")->setChecked(gridLineManager->isEquatorGridDisplayed());
+	getGuiActions("actionShow_Equatorial_Grid")->setChecked(gridLineManager->getFlagEquatorGrid());
 	connect(getGuiActions("actionShow_Equatorial_Grid"),
 			SIGNAL(toggled(bool)),
 			gridLineManager,
-			SLOT(setEquatorGridDisplayed(bool)));
+			SLOT(setFlagEquatorGrid(bool)));
 	connect(gridLineManager,
 			SIGNAL(equatorGridDisplayedChanged(const bool)),
 			this,
 			SLOT(equatorGridDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Azimuthal_Grid")->setChecked(gridLineManager->isAzimuthalGridDisplayed());
+	getGuiActions("actionShow_Azimuthal_Grid")->setChecked(gridLineManager->getFlagAzimuthalGrid());
 	connect(getGuiActions("actionShow_Azimuthal_Grid"),
 			SIGNAL(toggled(bool)),
 			gridLineManager,
-			SLOT(setAzimuthalGridDisplayed(bool)));
+			SLOT(setFlagAzimuthalGrid(bool)));
 	connect(gridLineManager,
 			SIGNAL(azimuthalGridDisplayedChanged(const bool)),
 			this,
 			SLOT(azimuthalGridDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Ecliptic_Line")->setChecked(gridLineManager->isEclipticLineDisplayed());
+	getGuiActions("actionShow_Ecliptic_Line")->setChecked(gridLineManager->getFlagEclipticLine());
 	connect(getGuiActions("actionShow_Ecliptic_Line"),
 			SIGNAL(toggled(bool)),
 			gridLineManager,
-			SLOT(setEclipticLineDisplayed(bool)));
+			SLOT(setFlagEclipticLine(bool)));
 	connect(gridLineManager,
 			SIGNAL(eclipticLineDisplayedChanged(const bool)),
 			this,
 			SLOT(eclipticLineDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Equator_Line")->setChecked(gridLineManager->isEquatorLineDisplayed());
+	getGuiActions("actionShow_Equator_Line")->setChecked(gridLineManager->getFlagEquatorLine());
 	connect(getGuiActions("actionShow_Equator_Line"),
 			SIGNAL(toggled(bool)),
 			gridLineManager,
-			SLOT(setEquatorLineDisplayed(bool)));
+			SLOT(setFlagEquatorLine(bool)));
 	connect(gridLineManager,
 			SIGNAL(equatorLineDisplayedChanged(const bool)),
 			this,
 			SLOT(equatorLineDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Meridian_Line")->setChecked(gridLineManager->isMeridianLineDisplayed());
+	getGuiActions("actionShow_Meridian_Line")->setChecked(gridLineManager->getFlagMeridianLine());
 	connect(getGuiActions("actionShow_Meridian_Line"),
 			SIGNAL(toggled(bool)),
 			gridLineManager,
-			SLOT(setMeridianLineDisplayed(bool)));
+			SLOT(setFlagMeridianLine(bool)));
 	connect(gridLineManager,
 			SIGNAL(meridianLineDisplayedChanged(const bool)),
 			this,
 			SLOT(meridianLineDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Horizon_Line")->setChecked(gridLineManager->isHorizonLineDisplayed());
+	getGuiActions("actionShow_Horizon_Line")->setChecked(gridLineManager->getFlagHorizonLine());
 	connect(getGuiActions("actionShow_Horizon_Line"),
 			SIGNAL(toggled(bool)),
 			gridLineManager,
-			SLOT(setHorizonLineDisplayed(bool)));
+			SLOT(setFlagHorizonLine(bool)));
 	connect(gridLineManager,
 			SIGNAL(horizonLineDisplayedChanged(const bool)),
 			this,
 			SLOT(horizonLineDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(gridLineManager->isEquatorJ2000GridDisplayed());
+	getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(gridLineManager->getFlagEquatorJ2000Grid());
 	connect(getGuiActions("actionShow_Equatorial_J2000_Grid"),
 			SIGNAL(toggled(bool)),
 			gridLineManager,
-			SLOT(setEquatorJ2000GridDisplayed(bool)));
+			SLOT(setFlagEquatorJ2000Grid(bool)));
 	connect(gridLineManager,
 			SIGNAL(equatorJ2000GridDisplayedChanged(const bool)),
 			this,
 			SLOT(equatorJ2000GridDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Galactic_Grid")->setChecked(gridLineManager->isGalacticGridDisplayed());
+	getGuiActions("actionShow_Galactic_Grid")->setChecked(gridLineManager->getFlagGalacticGrid());
 	connect(getGuiActions("actionShow_Galactic_Grid"),
 			SIGNAL(toggled(bool)),
 			gridLineManager,
-			SLOT(setGalacticGridDisplayed(bool)));
+			SLOT(setFlagGalacticGrid(bool)));
 	connect(gridLineManager,
 			SIGNAL(galacticGridDisplayedChanged(const bool)),
 			this,
 			SLOT(galacticGridDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Galactic_Plane_Line")->setChecked(gridLineManager->isGalacticPlaneLineDisplayed());
+	getGuiActions("actionShow_Galactic_Plane_Line")->setChecked(gridLineManager->getFlagGalacticPlaneLine());
 	connect(getGuiActions("actionShow_Galactic_Plane_Line"),
 			SIGNAL(toggled(bool)),
 			gridLineManager,
-			SLOT(setGalacticPlaneLineDisplayed(bool)));
+			SLOT(setFlagGalacticPlaneLine(bool)));
 	connect(gridLineManager,
 			SIGNAL(galacticPlaneLineDisplayedChanged(const bool)),
 			this,
