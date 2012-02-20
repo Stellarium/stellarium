@@ -606,41 +606,41 @@ void StelGui::initGrindLineMgr()
 void StelGui::initLandscapeMgr()
 {
 	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
-	getGuiActions("actionShow_Ground")->setChecked(landscapeMgr->isLandscapeDisplayed());
+	getGuiActions("actionShow_Ground")->setChecked(landscapeMgr->getFlagLandscape());
 	connect(getGuiActions("actionShow_Ground"),
 			SIGNAL(toggled(bool)),
 			landscapeMgr,
-			SLOT(setLandscapeDisplayed(bool)));
+			SLOT(setFlagLandscape(bool)));
 	connect(landscapeMgr,
 			SIGNAL(landscapeDisplayedChanged(const bool)),
 			this,
 			SLOT(landscapeDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Cardinal_Points")->setChecked(landscapeMgr->isCardinalsPointsDisplayed());
+	getGuiActions("actionShow_Cardinal_Points")->setChecked(landscapeMgr->getFlagCardinalsPoints());
 	connect(getGuiActions("actionShow_Cardinal_Points"),
 			SIGNAL(toggled(bool)),
 			landscapeMgr,
-			SLOT(setCardinalsPointsDisplayed(bool)));
+			SLOT(setFlagCardinalsPoints(bool)));
 	connect(landscapeMgr,
 			SIGNAL(cardinalsPointsDisplayedChanged(const bool)),
 			this,
 			SLOT(cardinalsPointsDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Atmosphere")->setChecked(landscapeMgr->isAtmosphereDisplayed());
+	getGuiActions("actionShow_Atmosphere")->setChecked(landscapeMgr->getFlagAtmosphere());
 	connect(getGuiActions("actionShow_Atmosphere"),
 			SIGNAL(toggled(bool)),
 			landscapeMgr,
-			SLOT(setAtmosphereDisplayed(bool)));
+			SLOT(setFlagAtmosphere(bool)));
 	connect(landscapeMgr,
 			SIGNAL(atmosphereDisplayedChanged(const bool)),
 			this,
 			SLOT(atmosphereDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Fog")->setChecked(landscapeMgr->isFogDisplayed());
+	getGuiActions("actionShow_Fog")->setChecked(landscapeMgr->getFlagFog());
 	connect(getGuiActions("actionShow_Fog"),
 			SIGNAL(toggled(bool)),
 			landscapeMgr,
-			SLOT(setFogDisplayed(bool)));
+			SLOT(setFlagFog(bool)));
 	connect(landscapeMgr,
 			SIGNAL(fogDisplayedChanged(const bool)),
 			this,
