@@ -113,28 +113,28 @@ private:
 	void update(int deltaTime);
 	//! Turn on and off Constellation line rendering.
 	//! @param b new state for line drawing.
-	void setLinesDisplayed(const bool b) {lineFader=b;}
+	void setFlagLines(const bool b) {lineFader=b;}
 	//! Turn on and off Constellation boundary rendering.
 	//! @param b new state for boundary drawing.
-	void setBoundariesDisplayed(const bool b) {boundaryFader=b;}
+	void setFlagBoundaries(const bool b) {boundaryFader=b;}
 	//! Turn on and off Constellation name label rendering.
 	//! @param b new state for name label drawing.
-	void setNamesDisplayed(const bool b) {nameFader=b;}
+	void setFlagLabels(const bool b) {nameFader=b;}
 	//! Turn on and off Constellation art rendering.
 	//! @param b new state for art drawing.
-	void setArtDisplayed(const bool b) {artFader=b;}
+	void setFlagArt(const bool b) {artFader=b;}
 	//! Get the current state of Constellation line rendering.
 	//! @return true if Constellation line rendering it turned on, else false.
-	bool isLinesDisplayed() const {return lineFader;}
+	bool getFlagLines() const {return lineFader;}
 	//! Get the current state of Constellation boundary rendering.
 	//! @return true if Constellation boundary rendering it turned on, else false.
-	bool isBoundariesDisplayed() const {return boundaryFader;}
+	bool getFlagBoundaries() const {return boundaryFader;}
 	//! Get the current state of Constellation name label rendering.
 	//! @return true if Constellation name label rendering it turned on, else false.
-	bool isNamesDisplayed() const {return nameFader;}
+	bool getFlagLabels() const {return nameFader;}
 	//! Get the current state of Constellation art rendering.
 	//! @return true if Constellation art rendering it turned on, else false.
-	bool isArtDisplayed() const {return artFader;}
+	bool getFlagArt() const {return artFader;}
 
 	//! International name (translated using gettext)
 	QString nameI18;

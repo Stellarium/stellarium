@@ -467,41 +467,41 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 void StelGui::initConstellationMgr()
 {
 	ConstellationMgr* constellationMgr = GETSTELMODULE(ConstellationMgr);
-	getGuiActions("actionShow_Constellation_Lines")->setChecked(constellationMgr->isLinesDisplayed());
+	getGuiActions("actionShow_Constellation_Lines")->setChecked(constellationMgr->getFlagLines());
 	connect(getGuiActions("actionShow_Constellation_Lines"),
 			SIGNAL(toggled(bool)),
 			constellationMgr,
-			SLOT(setLinesDisplayed(bool)));
+			SLOT(setFlagLines(bool)));
 	connect(constellationMgr,
 			SIGNAL(linesDisplayedChanged(const bool)),
 			this,
 			SLOT(linesDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Constellation_Art")->setChecked(constellationMgr->isArtDisplayed());
+	getGuiActions("actionShow_Constellation_Art")->setChecked(constellationMgr->getFlagArt());
 	connect(getGuiActions("actionShow_Constellation_Art"),
 			SIGNAL(toggled(bool)),
 			constellationMgr,
-			SLOT(setArtDisplayed(bool)));
+			SLOT(setFlagArt(bool)));
 	connect(constellationMgr,
 			SIGNAL(artDisplayedChanged(const bool)),
 			this,
 			SLOT(artDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Constellation_Labels")->setChecked(constellationMgr->isNamesDisplayed());
+	getGuiActions("actionShow_Constellation_Labels")->setChecked(constellationMgr->getFlagLabels());
 	connect(getGuiActions("actionShow_Constellation_Labels"),
 			SIGNAL(toggled(bool)),
 			constellationMgr,
-			SLOT(setNamesDisplayed(bool)));
+			SLOT(setFlagLabels(bool)));
 	connect(constellationMgr,
 			SIGNAL(namesDisplayedChanged(const bool)),
 			this,
 			SLOT(namesDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Constellation_Boundaries")->setChecked(constellationMgr->isBoundariesDisplayed());
+	getGuiActions("actionShow_Constellation_Boundaries")->setChecked(constellationMgr->getFlagBoundaries());
 	connect(getGuiActions("actionShow_Constellation_Boundaries"),
 			SIGNAL(toggled(bool)),
 			constellationMgr,
-			SLOT(setBoundariesDisplayed(bool)));
+			SLOT(setFlagBoundaries(bool)));
 	connect(constellationMgr,
 			SIGNAL(boundariesDisplayedChanged(const bool)),
 			this,
