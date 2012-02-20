@@ -3,6 +3,7 @@
 
 #include <string>
 #include <map>
+#include "VecMath.hpp"
 #include "StelTextureMgr.hpp"
 
 
@@ -13,17 +14,13 @@
 class MTL
 {
     public:
-        //! Struct for holding a single RGB color.
-        struct Color {
-            Color() : r(1.0f), g(1.0f), b(1.0f) {}
-            Color(float nr, float ng, float nb):  r(nr), g(ng), b(nb){}
-            float r, g, b;
-        };
+        typedef Vec4f Color;
         enum Illum { DIFFUSE, DIFFUSE_AND_AMBIENT, SPECULAR }; //!< Supported OpenGL illumination models. Use specular sparingly!
 
         //! Struct for holding a material definition.
-        struct Material {
-            Material() : diffuse(), ambient(0.f,0.f,0.f), specular(0.f,0.f,0.f), shininess(0.0f), illum(DIFFUSE), texture(), bump_texture() {}
+        struct Material { // The initial values are the OpenGL defaults.
+            Material() : diffuse(0.8f, 0.8f, 0.8f, 1.0f), ambient(0.2f, 0.2f, 0.2f, 1.0f), specular(0.0f,0.0f,0.0f, 1.0f),
+                         shininess(0.0f), illum(DIFFUSE), texture(), bump_texture() {}
             Color diffuse;   //!< Material diffuse color.
             Color ambient;   //!< Ambient color.
             Color specular;  //!< Specular color.

@@ -535,7 +535,7 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
         glMaterialfv(GL_FRONT, GL_SPECULAR,  stelModel.specularColor.v);
         glMaterialf( GL_FRONT, GL_SHININESS, stelModel.shininess);
 
-        if (stelModel.illum == MTL::DIFFUSE){ // typical case: only Kd given.
+        if (stelModel.illum == MTL::DIFFUSE){ // typical case: only Kd given. Here, set ambient=diffuse
         glMaterialfv(GL_FRONT, GL_AMBIENT,   stelModel.diffuseColor.v);
         glMaterialfv(GL_FRONT, GL_SPECULAR,  zero);
         glMaterialf( GL_FRONT, GL_SHININESS, 0.0f);
@@ -544,7 +544,7 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
         glMaterialfv(GL_FRONT, GL_SPECULAR,  zero);
         glMaterialf( GL_FRONT, GL_SHININESS, 0.0f);
         }
-        if (stelModel.illum == MTL::SPECULAR){ // for special cases. Here, set ambient=diffuse
+        if (stelModel.illum == MTL::SPECULAR){ // for special cases.
             // GZ: This should enable specular color effects with colored and textured models.
             glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SEPARATE_SPECULAR_COLOR); // test how expensive this is.
             glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 1); // Useful for Specular effects, change to 0 if too expensive
