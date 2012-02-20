@@ -48,27 +48,27 @@ void MTL::load(const char *filename)
                 {
                     if (parts.size() > 3)
                     {
-                        curMaterial->diffuse.r = parseFloat(parts[1]);
-                        curMaterial->diffuse.g = parseFloat(parts[2]);
-                        curMaterial->diffuse.b = parseFloat(parts[3]);
+                        curMaterial->diffuse.v[0] = parseFloat(parts[1]);
+                        curMaterial->diffuse.v[1] = parseFloat(parts[2]);
+                        curMaterial->diffuse.v[2] = parseFloat(parts[3]);
                     }
                 }
                 else if(parts[0] == "Ka" && matOpen)
                 {
                     if(parts.size() > 3)
                     {
-                        curMaterial->ambient.r = parseFloat(parts[1]);
-                        curMaterial->ambient.g = parseFloat(parts[2]);
-                        curMaterial->ambient.b = parseFloat(parts[3]);
+                        curMaterial->ambient.v[0] = parseFloat(parts[1]);
+                        curMaterial->ambient.v[1] = parseFloat(parts[2]);
+                        curMaterial->ambient.v[2] = parseFloat(parts[3]);
                     }
                 }
                 else if(parts[0] == "Ks" && matOpen)
                 {
                     if(parts.size() > 3)
                     {
-                        curMaterial->specular.r = parseFloat(parts[1]);
-                        curMaterial->specular.g = parseFloat(parts[2]);
-                        curMaterial->specular.b = parseFloat(parts[3]);
+                        curMaterial->specular.v[0] = parseFloat(parts[1]);
+                        curMaterial->specular.v[1] = parseFloat(parts[2]);
+                        curMaterial->specular.v[2] = parseFloat(parts[3]);
                     }
                 }
                 else if (parts[0] == "map_Kd" && matOpen)
@@ -158,7 +158,7 @@ void MTL::uploadTexturesGL(void)
                 qWarning() << "[Scenery3d] Failed to load Normal Map: " << bump.c_str();
         }
 
-        qDebug() << "[Scenery3d]: Kd: r" << it->second->diffuse.r << " g" << it->second->diffuse.g << " b" << it->second->diffuse.b;
+        qDebug() << "[Scenery3d]: Kd: r" << it->second->diffuse.v[0] << " g" << it->second->diffuse.v[1] << " b" << it->second->diffuse.v[2];
     }
 }
 
