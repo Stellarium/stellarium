@@ -34,6 +34,10 @@
 #include <QVarLengthArray>
 #include <QPaintEngine>
 
+#if QT_VERSION >= 0x040800
+#include <QGLFunctions>
+#endif
+
 #ifndef GL_MULTISAMPLE
 #define GL_MULTISAMPLE  0x809D
 #endif
@@ -1818,7 +1822,18 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 	glContext = ctx;
 
 	makeMainGLContextCurrent();
+
+
+
+#ifdef ANDROID
+	//this isn't being reported correctly by QGLFunctions, so for compatibility, assume false
+	isNoPowerOfTwoAllowed = false;
+#elif QT_VERSION >= 0x040800
+	QGLFunctions glFuncs(glContext);
+	isNoPowerOfTwoAllowed = glFuncs.hasOpenGLFeature(QGLFunctions::NPOTTextures);
+#else
 	isNoPowerOfTwoAllowed = QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0);
+#endif
 
 #ifdef STELPAINTER_GL2
 	// Basic shader: just vertex filled with plain color
