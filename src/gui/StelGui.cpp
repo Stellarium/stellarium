@@ -467,41 +467,41 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 void StelGui::initConstellationMgr()
 {
 	ConstellationMgr* constellationMgr = GETSTELMODULE(ConstellationMgr);
-	getGuiActions("actionShow_Constellation_Lines")->setChecked(constellationMgr->isLinesDisplayed());
+	getGuiActions("actionShow_Constellation_Lines")->setChecked(constellationMgr->getFlagLines());
 	connect(getGuiActions("actionShow_Constellation_Lines"),
 			SIGNAL(toggled(bool)),
 			constellationMgr,
-			SLOT(setLinesDisplayed(bool)));
+			SLOT(setFlagLines(bool)));
 	connect(constellationMgr,
 			SIGNAL(linesDisplayedChanged(const bool)),
 			this,
 			SLOT(linesDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Constellation_Art")->setChecked(constellationMgr->isArtDisplayed());
+	getGuiActions("actionShow_Constellation_Art")->setChecked(constellationMgr->getFlagArt());
 	connect(getGuiActions("actionShow_Constellation_Art"),
 			SIGNAL(toggled(bool)),
 			constellationMgr,
-			SLOT(setArtDisplayed(bool)));
+			SLOT(setFlagArt(bool)));
 	connect(constellationMgr,
 			SIGNAL(artDisplayedChanged(const bool)),
 			this,
 			SLOT(artDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Constellation_Labels")->setChecked(constellationMgr->isNamesDisplayed());
+	getGuiActions("actionShow_Constellation_Labels")->setChecked(constellationMgr->getFlagLabels());
 	connect(getGuiActions("actionShow_Constellation_Labels"),
 			SIGNAL(toggled(bool)),
 			constellationMgr,
-			SLOT(setNamesDisplayed(bool)));
+			SLOT(setFlagLabels(bool)));
 	connect(constellationMgr,
 			SIGNAL(namesDisplayedChanged(const bool)),
 			this,
 			SLOT(namesDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Constellation_Boundaries")->setChecked(constellationMgr->isBoundariesDisplayed());
+	getGuiActions("actionShow_Constellation_Boundaries")->setChecked(constellationMgr->getFlagBoundaries());
 	connect(getGuiActions("actionShow_Constellation_Boundaries"),
 			SIGNAL(toggled(bool)),
 			constellationMgr,
-			SLOT(setBoundariesDisplayed(bool)));
+			SLOT(setFlagBoundaries(bool)));
 	connect(constellationMgr,
 			SIGNAL(boundariesDisplayedChanged(const bool)),
 			this,
@@ -511,91 +511,91 @@ void StelGui::initConstellationMgr()
 void StelGui::initGrindLineMgr()
 {
 	GridLinesMgr* gridLineManager = GETSTELMODULE(GridLinesMgr);
-	getGuiActions("actionShow_Equatorial_Grid")->setChecked(gridLineManager->isEquatorGridDisplayed());
+	getGuiActions("actionShow_Equatorial_Grid")->setChecked(gridLineManager->getFlagEquatorGrid());
 	connect(getGuiActions("actionShow_Equatorial_Grid"),
 			SIGNAL(toggled(bool)),
 			gridLineManager,
-			SLOT(setEquatorGridDisplayed(bool)));
+			SLOT(setFlagEquatorGrid(bool)));
 	connect(gridLineManager,
 			SIGNAL(equatorGridDisplayedChanged(const bool)),
 			this,
 			SLOT(equatorGridDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Azimuthal_Grid")->setChecked(gridLineManager->isAzimuthalGridDisplayed());
+	getGuiActions("actionShow_Azimuthal_Grid")->setChecked(gridLineManager->getFlagAzimuthalGrid());
 	connect(getGuiActions("actionShow_Azimuthal_Grid"),
 			SIGNAL(toggled(bool)),
 			gridLineManager,
-			SLOT(setAzimuthalGridDisplayed(bool)));
+			SLOT(setFlagAzimuthalGrid(bool)));
 	connect(gridLineManager,
 			SIGNAL(azimuthalGridDisplayedChanged(const bool)),
 			this,
 			SLOT(azimuthalGridDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Ecliptic_Line")->setChecked(gridLineManager->isEclipticLineDisplayed());
+	getGuiActions("actionShow_Ecliptic_Line")->setChecked(gridLineManager->getFlagEclipticLine());
 	connect(getGuiActions("actionShow_Ecliptic_Line"),
 			SIGNAL(toggled(bool)),
 			gridLineManager,
-			SLOT(setEclipticLineDisplayed(bool)));
+			SLOT(setFlagEclipticLine(bool)));
 	connect(gridLineManager,
 			SIGNAL(eclipticLineDisplayedChanged(const bool)),
 			this,
 			SLOT(eclipticLineDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Equator_Line")->setChecked(gridLineManager->isEquatorLineDisplayed());
+	getGuiActions("actionShow_Equator_Line")->setChecked(gridLineManager->getFlagEquatorLine());
 	connect(getGuiActions("actionShow_Equator_Line"),
 			SIGNAL(toggled(bool)),
 			gridLineManager,
-			SLOT(setEquatorLineDisplayed(bool)));
+			SLOT(setFlagEquatorLine(bool)));
 	connect(gridLineManager,
 			SIGNAL(equatorLineDisplayedChanged(const bool)),
 			this,
 			SLOT(equatorLineDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Meridian_Line")->setChecked(gridLineManager->isMeridianLineDisplayed());
+	getGuiActions("actionShow_Meridian_Line")->setChecked(gridLineManager->getFlagMeridianLine());
 	connect(getGuiActions("actionShow_Meridian_Line"),
 			SIGNAL(toggled(bool)),
 			gridLineManager,
-			SLOT(setMeridianLineDisplayed(bool)));
+			SLOT(setFlagMeridianLine(bool)));
 	connect(gridLineManager,
 			SIGNAL(meridianLineDisplayedChanged(const bool)),
 			this,
 			SLOT(meridianLineDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Horizon_Line")->setChecked(gridLineManager->isHorizonLineDisplayed());
+	getGuiActions("actionShow_Horizon_Line")->setChecked(gridLineManager->getFlagHorizonLine());
 	connect(getGuiActions("actionShow_Horizon_Line"),
 			SIGNAL(toggled(bool)),
 			gridLineManager,
-			SLOT(setHorizonLineDisplayed(bool)));
+			SLOT(setFlagHorizonLine(bool)));
 	connect(gridLineManager,
 			SIGNAL(horizonLineDisplayedChanged(const bool)),
 			this,
 			SLOT(horizonLineDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(gridLineManager->isEquatorJ2000GridDisplayed());
+	getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(gridLineManager->getFlagEquatorJ2000Grid());
 	connect(getGuiActions("actionShow_Equatorial_J2000_Grid"),
 			SIGNAL(toggled(bool)),
 			gridLineManager,
-			SLOT(setEquatorJ2000GridDisplayed(bool)));
+			SLOT(setFlagEquatorJ2000Grid(bool)));
 	connect(gridLineManager,
 			SIGNAL(equatorJ2000GridDisplayedChanged(const bool)),
 			this,
 			SLOT(equatorJ2000GridDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Galactic_Grid")->setChecked(gridLineManager->isGalacticGridDisplayed());
+	getGuiActions("actionShow_Galactic_Grid")->setChecked(gridLineManager->getFlagGalacticGrid());
 	connect(getGuiActions("actionShow_Galactic_Grid"),
 			SIGNAL(toggled(bool)),
 			gridLineManager,
-			SLOT(setGalacticGridDisplayed(bool)));
+			SLOT(setFlagGalacticGrid(bool)));
 	connect(gridLineManager,
 			SIGNAL(galacticGridDisplayedChanged(const bool)),
 			this,
 			SLOT(galacticGridDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Galactic_Plane_Line")->setChecked(gridLineManager->isGalacticPlaneLineDisplayed());
+	getGuiActions("actionShow_Galactic_Plane_Line")->setChecked(gridLineManager->getFlagGalacticPlaneLine());
 	connect(getGuiActions("actionShow_Galactic_Plane_Line"),
 			SIGNAL(toggled(bool)),
 			gridLineManager,
-			SLOT(setGalacticPlaneLineDisplayed(bool)));
+			SLOT(setFlagGalacticPlaneLine(bool)));
 	connect(gridLineManager,
 			SIGNAL(galacticPlaneLineDisplayedChanged(const bool)),
 			this,
@@ -606,41 +606,41 @@ void StelGui::initGrindLineMgr()
 void StelGui::initLandscapeMgr()
 {
 	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
-	getGuiActions("actionShow_Ground")->setChecked(landscapeMgr->isLandscapeDisplayed());
+	getGuiActions("actionShow_Ground")->setChecked(landscapeMgr->getFlagLandscape());
 	connect(getGuiActions("actionShow_Ground"),
 			SIGNAL(toggled(bool)),
 			landscapeMgr,
-			SLOT(setLandscapeDisplayed(bool)));
+			SLOT(setFlagLandscape(bool)));
 	connect(landscapeMgr,
 			SIGNAL(landscapeDisplayedChanged(const bool)),
 			this,
 			SLOT(landscapeDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Cardinal_Points")->setChecked(landscapeMgr->isCardinalsPointsDisplayed());
+	getGuiActions("actionShow_Cardinal_Points")->setChecked(landscapeMgr->getFlagCardinalsPoints());
 	connect(getGuiActions("actionShow_Cardinal_Points"),
 			SIGNAL(toggled(bool)),
 			landscapeMgr,
-			SLOT(setCardinalsPointsDisplayed(bool)));
+			SLOT(setFlagCardinalsPoints(bool)));
 	connect(landscapeMgr,
 			SIGNAL(cardinalsPointsDisplayedChanged(const bool)),
 			this,
 			SLOT(cardinalsPointsDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Atmosphere")->setChecked(landscapeMgr->isAtmosphereDisplayed());
+	getGuiActions("actionShow_Atmosphere")->setChecked(landscapeMgr->getFlagAtmosphere());
 	connect(getGuiActions("actionShow_Atmosphere"),
 			SIGNAL(toggled(bool)),
 			landscapeMgr,
-			SLOT(setAtmosphereDisplayed(bool)));
+			SLOT(setFlagAtmosphere(bool)));
 	connect(landscapeMgr,
 			SIGNAL(atmosphereDisplayedChanged(const bool)),
 			this,
 			SLOT(atmosphereDisplayedUpdated(const bool)));
 
-	getGuiActions("actionShow_Fog")->setChecked(landscapeMgr->isFogDisplayed());
+	getGuiActions("actionShow_Fog")->setChecked(landscapeMgr->getFlagFog());
 	connect(getGuiActions("actionShow_Fog"),
 			SIGNAL(toggled(bool)),
 			landscapeMgr,
-			SLOT(setFogDisplayed(bool)));
+			SLOT(setFlagFog(bool)));
 	connect(landscapeMgr,
 			SIGNAL(fogDisplayedChanged(const bool)),
 			this,

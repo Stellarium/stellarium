@@ -45,8 +45,8 @@ class ConstellationMgr : public StelObjectModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool artDisplayed
-			   READ isArtDisplayed
-			   WRITE setArtDisplayed
+			   READ getFlagArt
+			   WRITE setFlagArt
 			   NOTIFY artDisplayedChanged)
 	Q_PROPERTY(bool artFadeDuration
 			   READ getArtFadeDuration
@@ -61,32 +61,32 @@ class ConstellationMgr : public StelObjectModule
 			   WRITE setBoundariesColor
 			   NOTIFY boundariesColorChanged)
 	Q_PROPERTY(bool boundariesDisplayed
-			   READ isBoundariesDisplayed
-			   WRITE setBoundariesDisplayed
+			   READ getFlagBoundaries
+			   WRITE setFlagBoundaries
 			   NOTIFY boundariesDisplayedChanged)
 	Q_PROPERTY(bool fontSize
 			   READ getFontSize
 			   WRITE setFontSize
 			   NOTIFY fontSizeChanged)
 	Q_PROPERTY(bool isolateSelected
-			   READ isIsolateSelected
-			   WRITE setIsolateSelected
+			   READ getFlagIsolateSelected
+			   WRITE setFlagIsolateSelected
 			   NOTIFY isolateSelectedChanged)
 	Q_PROPERTY(bool linesColor
 			   READ getLinesColor
 			   WRITE setLinesColor
 			   NOTIFY linesColorChanged)
 	Q_PROPERTY(bool linesDisplayed
-			   READ isLinesDisplayed
-			   WRITE setLinesDisplayed
+			   READ getFlagLines
+			   WRITE setFlagLines
 			   NOTIFY linesDisplayedChanged)
 	Q_PROPERTY(bool namesColor
 			   READ getNamesColor
 			   WRITE setNamesColor
 			   NOTIFY namesColorChanged)
 	Q_PROPERTY(bool namesDisplayed
-			   READ isNamesDisplayed
-			   WRITE setNamesDisplayed
+			   READ getFlagLabels
+			   WRITE setFlagLabels
 			   NOTIFY namesDisplayedChanged)
 
 public:
@@ -135,9 +135,9 @@ public:
 	// Properties setters and getters
 public slots:	
 	//! Set whether constellation art will be displayed
-	void setArtDisplayed(const bool displayed);
+	void setFlagArt(const bool displayed);
 	//! Get whether constellation art is displayed
-	bool isArtDisplayed(void) const;
+	bool getFlagArt(void) const;
 
 	//! Set constellation art fade duration in second
 	void setArtFadeDuration(const float duration);
@@ -155,14 +155,14 @@ public slots:
 	Vec3f getBoundariesColor() const;
 
 	//! Set whether constellation boundaries lines will be displayed
-	void setBoundariesDisplayed(const bool displayed);
+	void setFlagBoundaries(const bool displayed);
 	//! Get whether constellation boundaries lines are displayed
-	bool isBoundariesDisplayed(void) const;
+	bool getFlagBoundaries(void) const;
 
 	//! Set whether selected constellation must be displayed alone
-	void setIsolateSelected(const bool isolate);
+	void setFlagIsolateSelected(const bool isolate);
 	//! Get whether selected constellation is displayed alone
-	bool isIsolateSelected(void) const;
+	bool getFlagIsolateSelected(void) const;
 
 	//! Define line color
 	void setLinesColor(const Vec3f& color);
@@ -170,9 +170,9 @@ public slots:
 	Vec3f getLinesColor() const;
 
 	//! Set whether constellation path lines will be displayed
-	void setLinesDisplayed(const bool displayed);
+	void setFlagLines(const bool displayed);
 	//! Get whether constellation path lines are displayed
-	bool isLinesDisplayed(void) const;
+	bool getFlagLines(void) const;
 
 	//! Set label color for names
 	void setNamesColor(const Vec3f& color);
@@ -180,9 +180,9 @@ public slots:
 	Vec3f getNamesColor() const;
 
 	//! Set whether constellation names will be displayed
-	void setNamesDisplayed(bool displayed);
+	void setFlagLabels(bool displayed);
 	//! Set whether constellation names are displayed
-	bool isNamesDisplayed(void) const;
+	bool getFlagLabels(void) const;
 
 	//! Set the font size used for constellation names display
 	void setFontSize(const float newFontSize);
