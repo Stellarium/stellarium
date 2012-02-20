@@ -350,11 +350,11 @@ void Scenery3d::loadModel()
 
         if (absolutePosition.v[0]==MEANINGLESS) {
             absolutePosition.v[0] = -(objModel->getMaxX()+objModel->getMinX())/2.0;
-            qDebug() << "Setting Easting  to BBX center: " << objModel->getMinX() << ".." << objModel->getMaxX() << ": " << absolutePosition.v[1];
+            qDebug() << "Setting Easting  to BBX center: " << objModel->getMinX() << ".." << objModel->getMaxX() << ": " << absolutePosition.v[0];
         }
         if (absolutePosition.v[1]==MEANINGLESS) {
             absolutePosition.v[1] = -(objModel->getMaxY()+objModel->getMinY())/2.0;
-            qDebug() << "Setting Northing to BBX center: " << objModel->getMinY() << ".." << objModel->getMaxY() << ": " << -absolutePosition.v[0];
+            qDebug() << "Setting Northing to BBX center: " << objModel->getMinY() << ".." << objModel->getMaxY() << ": " << -absolutePosition.v[1];
         }
 
         absolutePosition[2] = -groundHeight()-eyeLevel;
@@ -519,10 +519,8 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
 {
     //glEnable(GL_CULL_FACE); // See if this makes a significant speed difference, and make sure models are correct!
                             // Maybe make this configurable?
-    // GZ: This should enable specular color effects with colored and textured models.
-    glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SEPARATE_SPECULAR_COLOR); // test how expensive this is.
-    glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 1); // change to 0 if too expensive
-    glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 0); // 0 is OK for "good" models.
+    //glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 0); // default 0 is OK for "good" models.
+    const GLfloat zero[]={0.0f, 0.0f, 0.0f, 1.0f};
     const GLfloat amb[]={0.025f, 0.025f, 0.025f, 1.0f};
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, amb); // tiny overall background light
 
@@ -533,18 +531,34 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
         if(textures) sendToShader(stelModel, curEffect);
 
         glMaterialfv(GL_FRONT, GL_DIFFUSE,   stelModel.diffuseColor.v);
-        glMaterialfv(GL_FRONT, GL_AMBIENT,   stelModel.diffuseColor.v);
+        glMaterialfv(GL_FRONT, GL_AMBIENT,   stelModel.ambientColor.v);
         glMaterialfv(GL_FRONT, GL_SPECULAR,  stelModel.specularColor.v);
-        glMateriali( GL_FRONT, GL_SHININESS, stelModel.specularExponent);
+        glMaterialf( GL_FRONT, GL_SHININESS, stelModel.shininess);
+
+        if (stelModel.illum == MTL::DIFFUSE){ // typical case: only Kd given.
+        glMaterialfv(GL_FRONT, GL_AMBIENT,   stelModel.diffuseColor.v);
+        glMaterialfv(GL_FRONT, GL_SPECULAR,  zero);
+        glMaterialf( GL_FRONT, GL_SHININESS, 0.0f);
+        }
+        if (stelModel.illum == MTL::DIFFUSE_AND_AMBIENT){ // If you know what you're doing:
+        glMaterialfv(GL_FRONT, GL_SPECULAR,  zero);
+        glMaterialf( GL_FRONT, GL_SHININESS, 0.0f);
+        }
+        if (stelModel.illum == MTL::SPECULAR){ // for special cases. Here, set ambient=diffuse
+            // GZ: This should enable specular color effects with colored and textured models.
+            glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SEPARATE_SPECULAR_COLOR); // test how expensive this is.
+            glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 1); // Useful for Specular effects, change to 0 if too expensive
+
+        } else {
+            glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SINGLE_COLOR); // test how expensive this is.
+            glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 0); // Useful for Specular effects, change to 0 if too expensive
+        }
 
         if(stelModel.texture)
         {
-            painter.enableTexture2d(true);
             painter.setArrays(stelModel.vertices, stelModel.texcoords, NULL, stelModel.normals);
         } else
         {
-            //painter.setShadeModel(StelPainter::ShadeModelSmooth); // is default
-            painter.enableTexture2d(false);
             painter.setArrays(stelModel.vertices, NULL, NULL, stelModel.normals);
         }
         painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);

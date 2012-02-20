@@ -108,7 +108,14 @@ void MTL::load(const char *filename)
                 {
                     if (parts.size() > 1)
                     {
-                        curMaterial->shininess = parseInt(parts[1]);
+                        curMaterial->shininess = parseFloat(parts[1]);
+                    }
+                }
+                else if (parts[0] == "illum" && matOpen)
+                {
+                    if (parts.size() > 1)
+                    {
+                        curMaterial->illum = (MTL::Illum)  qMin((unsigned int)2, parseInt(parts[1]));
                     }
                 }
             }
