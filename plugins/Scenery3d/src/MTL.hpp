@@ -19,14 +19,16 @@ class MTL
             Color(float nr, float ng, float nb):  r(nr), g(ng), b(nb){}
             float r, g, b;
         };
+        enum Illum { DIFFUSE, DIFFUSE_AND_AMBIENT, SPECULAR }; //!< Supported OpenGL illumination models. Use specular sparingly!
 
         //! Struct for holding a material definition.
         struct Material {
-            Material() : diffuse(), ambient(0.f,0.f,0.f), specular(0.f,0.f,0.f), shininess(0), texture(), bump_texture() {}
-            Color diffuse;  //!< Material diffuse color.
-            Color ambient;  //!< Ambient color.
-            Color specular; //!< Specular color.
-            int shininess;  //!< Material shininess factor.
+            Material() : diffuse(), ambient(0.f,0.f,0.f), specular(0.f,0.f,0.f), shininess(0.0f), illum(DIFFUSE), texture(), bump_texture() {}
+            Color diffuse;   //!< Material diffuse color.
+            Color ambient;   //!< Ambient color.
+            Color specular;  //!< Specular color.
+            float shininess; //!< Material shininess factor.
+            Illum illum;     //!< illumination model to be used with this material. See http://en.wikipedia.org/wiki/Wavefront_.obj_file, "illum"
             std::string texture; //!< Filename of the texture file.
             std::string bump_texture; //!< Filename of the bump map texture file.
         };
