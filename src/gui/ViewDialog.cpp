@@ -222,47 +222,47 @@ void ViewDialog::createDialogContent()
 
 	// Grid and lines
 	GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
-	ui->showEquatorLineCheckBox->setChecked(glmgr->isEquatorLineDisplayed());
+	ui->showEquatorLineCheckBox->setChecked(glmgr->getFlagEquatorLine());
 	a = gui->getGuiActions("actionShow_Equator_Line");
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorLineCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEquatorLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
-	ui->showEclipticLineCheckBox->setChecked(glmgr->isEclipticLineDisplayed());
+	ui->showEclipticLineCheckBox->setChecked(glmgr->getFlagEclipticLine());
 	a = gui->getGuiActions("actionShow_Ecliptic_Line");
 	connect(a, SIGNAL(toggled(bool)), ui->showEclipticLineCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEclipticLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
-	ui->showMeridianLineCheckBox->setChecked(glmgr->isMeridianLineDisplayed());
+	ui->showMeridianLineCheckBox->setChecked(glmgr->getFlagMeridianLine());
 	a = gui->getGuiActions("actionShow_Meridian_Line");
 	connect(a, SIGNAL(toggled(bool)), ui->showMeridianLineCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showMeridianLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
-	ui->showHorizonLineCheckBox->setChecked(glmgr->isHorizonLineDisplayed());
+	ui->showHorizonLineCheckBox->setChecked(glmgr->getFlagHorizonLine());
 	a = gui->getGuiActions("actionShow_Horizon_Line");
 	connect(a, SIGNAL(toggled(bool)), ui->showHorizonLineCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showHorizonLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
-	ui->showEquatorialGridCheckBox->setChecked(glmgr->isEquatorGridDisplayed());
+	ui->showEquatorialGridCheckBox->setChecked(glmgr->getFlagEquatorGrid());
 	a = gui->getGuiActions("actionShow_Equatorial_Grid");
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorialGridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEquatorialGridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
-	ui->showGalacticGridCheckBox->setChecked(glmgr->isGalacticGridDisplayed());
+	ui->showGalacticGridCheckBox->setChecked(glmgr->getFlagGalacticGrid());
 	a = gui->getGuiActions("actionShow_Galactic_Grid");
 	connect(a, SIGNAL(toggled(bool)), ui->showGalacticGridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showGalacticGridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
-	ui->showGalacticPlaneLineCheckBox->setChecked(glmgr->isGalacticPlaneLineDisplayed());
+	ui->showGalacticPlaneLineCheckBox->setChecked(glmgr->getFlagGalacticPlaneLine());
 	a = gui->getGuiActions("actionShow_Galactic_Plane_Line");
 	connect(a, SIGNAL(toggled(bool)), ui->showGalacticPlaneLineCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showGalacticPlaneLineCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
-	ui->showAzimuthalGridCheckBox->setChecked(glmgr->isAzimuthalGridDisplayed());
+	ui->showAzimuthalGridCheckBox->setChecked(glmgr->getFlagAzimuthalGrid());
 	a = gui->getGuiActions("actionShow_Azimuthal_Grid");
 	connect(a, SIGNAL(toggled(bool)), ui->showAzimuthalGridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showAzimuthalGridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
-	ui->showEquatorialJ2000GridCheckBox->setChecked(glmgr->isEquatorJ2000GridDisplayed());
+	ui->showEquatorialJ2000GridCheckBox->setChecked(glmgr->getFlagEquatorJ2000Grid());
 	a = gui->getGuiActions("actionShow_Equatorial_J2000_Grid");
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorialJ2000GridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEquatorialJ2000GridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
