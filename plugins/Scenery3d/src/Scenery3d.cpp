@@ -109,6 +109,9 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
     curShader = 0;
     lightCamEnabled = false;
 
+    //Default transparency threshold 0.5
+    //fTransparencyThresh = 0.5f;
+
     Mat4d matrix;
 #define PLANE(_VAR_, _MAT_) matrix=_MAT_; _VAR_=StelVertexArray(cubePlaneFront.vertex,StelVertexArray::Triangles,cubePlaneFront.texCoords);\
                         for(int i=0;i<_VAR_.vertex.size();i++){ matrix.transfo(_VAR_.vertex[i]); }
@@ -152,6 +155,9 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
     description = scenery3dIni.value("model/description").toString();
     landscapeName = scenery3dIni.value("model/landscape").toString();
     modelSceneryFile = scenery3dIni.value("model/scenery").toString();
+    fTransparencyThresh = scenery3dIni.value("general/transparencyThreshold", 0.5f).toFloat();
+    qWarning() << "[Scenery3D] Transparency Threshold: " << fTransparencyThresh;
+
     if (scenery3dIni.contains("model/ground"))
         modelGroundFile = scenery3dIni.value("model/ground").toString();
 
@@ -567,13 +573,18 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
 
 void Scenery3d::sendToShader(OBJ::StelModel& stelModel, Effect cur)
 {
+    int location;
+
     if(cur != No)
     {
+        location = curShader->uniformLocation("fTransparencyThresh");
+        curShader->setUniform(location, fTransparencyThresh);
+
         if (stelModel.texture) {
             stelModel.texture.data()->bind();
 
             //Send texture to shader
-            int location = curShader->uniformLocation("tex");
+            location = curShader->uniformLocation("tex");
             curShader->setUniform(location, 0);
 
             //Indicate that we are in texture Mode
@@ -583,7 +594,7 @@ void Scenery3d::sendToShader(OBJ::StelModel& stelModel, Effect cur)
         else
         {
             //No texture, send color and indication
-            int location = curShader->uniformLocation("vecColor");
+            location = curShader->uniformLocation("vecColor");
             curShader->setUniform(location, stelModel.diffuseColor.v[0], stelModel.diffuseColor.v[1], stelModel.diffuseColor.v[2], 1.0f);
 
             location = curShader->uniformLocation("onlyColor");
@@ -597,7 +608,7 @@ void Scenery3d::sendToShader(OBJ::StelModel& stelModel, Effect cur)
                 glActiveTexture(GL_TEXTURE2);
                 stelModel.bump_texture.data()->bind();
 
-                int location = curShader->uniformLocation("bmap");
+                location = curShader->uniformLocation("bmap");
                 curShader->setUniform(location, 2);
 
                 location = curShader->uniformLocation("boolBump");
@@ -605,7 +616,7 @@ void Scenery3d::sendToShader(OBJ::StelModel& stelModel, Effect cur)
 
                 glActiveTexture(GL_TEXTURE0);
             } else {
-                int location = curShader->uniformLocation("boolBump");
+                location = curShader->uniformLocation("boolBump");
                 curShader->setUniform(location, false);
             }
         }

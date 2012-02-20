@@ -44,7 +44,7 @@ class OBJ
             Vec3d* vertices; //!< Vertices array. Length is triangleCount * 3.
             Vec3f* normals; //!< Normals array. Length is triangleCount * 3.
             Vec2f* texcoords; //!< Texcoords array. Length is triangleCount * 3.
-            //Vec3f* tangents; //!< Tanget array. Length is triangleCount * 3.
+            Vec3f* tangents; //!< Tanget array. Length is triangleCount * 3.
         };
 
         //! Load mesh data from an .obj file.
@@ -111,6 +111,7 @@ class OBJ
         std::vector<Texcoord> texcoords;
         std::vector<Vertex> normals;
         //std::vector<Vec3f> tangents;
+        Vec3f *tangents;
         typedef std::list<Model> ModelList;
         ModelList models;
         MTL mtlLib;
@@ -119,7 +120,7 @@ class OBJ
 
         friend class Heightmap;
 
-        //void generateTangents(Model model);
+        void calcTangents(Model* model, StelModel* stelModel);
 };
 
 #endif
