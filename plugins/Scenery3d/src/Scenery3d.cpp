@@ -109,9 +109,6 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
     curShader = 0;
     lightCamEnabled = false;
 
-    //Default transparency threshold 0.5
-    //fTransparencyThresh = 0.5f;
-
     Mat4d matrix;
 #define PLANE(_VAR_, _MAT_) matrix=_MAT_; _VAR_=StelVertexArray(cubePlaneFront.vertex,StelVertexArray::Triangles,cubePlaneFront.texCoords);\
                         for(int i=0;i<_VAR_.vertex.size();i++){ matrix.transfo(_VAR_.vertex[i]); }
