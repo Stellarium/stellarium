@@ -43,7 +43,7 @@ public:
 	void styleChanged();
 
 public slots:
-	void languageChanged();
+	void retranslate();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -76,7 +76,7 @@ private slots:
 	void setNoSelectedInfo(void);
 	void setAllSelectedInfo(void);
 	void setBriefSelectedInfo(void);
-	void languageChanged(const QString& languageCode);
+	void selectLanguage(const QString& languageCode);
 	void setStartupTimeMode();
 	void setDiskViewport(bool);
 	void setSphericMirror(bool);

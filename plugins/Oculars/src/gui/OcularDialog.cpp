@@ -82,7 +82,7 @@ OcularDialog::~OcularDialog()
 #pragma mark StelModule Methods
 #endif
 /* ********************************************************************* */
-void OcularDialog::languageChanged()
+void OcularDialog::retranslate()
 {
 	if (dialog) {
 		ui->retranslateUi(dialog);
@@ -283,7 +283,8 @@ void OcularDialog::scaleImageCircleStateChanged(int state)
 void OcularDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
+	        this, SLOT(retranslate()));
 	ui->ccdListView->setModel(ccdTableModel);
 	ui->ocularListView->setModel(ocularTableModel);
 	ui->telescopeListView->setModel(telescopeTableModel);

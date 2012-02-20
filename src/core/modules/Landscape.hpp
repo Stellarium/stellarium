@@ -52,16 +52,16 @@ public:
 	}
 
 	//! Set the brightness of the landscape
-	void setBrightness(float b) {skyBrightness = b;}
+	void setBrightness(const float b) {skyBrightness = b;}
 
 	//! Set whether landscape is displayed (does not concern fog)
-	void setFlagShow(bool b) {landFader=b;}
+	void setDisplayed(const bool b) {landFader=b;}
 	//! Get whether landscape is displayed (does not concern fog)
-	bool getFlagShow() const {return (bool)landFader;}
+	bool isDisplayed() const {return (bool)landFader;}
 	//! Set whether fog is displayed
-	void setFlagShowFog(bool b) {fogFader=b;}
+	void setFlagFog(const bool b) {fogFader=b;}
 	//! Get whether fog is displayed
-	bool getFlagShowFog() const {return (bool)fogFader;}
+	bool getFlagFog() const {return (bool)fogFader;}
 	//! Get landscape name
 	QString getName() const {return name;}
 	//! Get landscape author name

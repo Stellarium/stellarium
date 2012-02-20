@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,6 +44,50 @@ class StelPainter;
 class ConstellationMgr : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool artDisplayed
+			   READ getFlagArt
+			   WRITE setFlagArt
+			   NOTIFY artDisplayedChanged)
+	Q_PROPERTY(bool artFadeDuration
+			   READ getArtFadeDuration
+			   WRITE setArtFadeDuration
+			   NOTIFY artFadeDurationChanged)
+	Q_PROPERTY(bool artIntensity
+			   READ getArtIntensity
+			   WRITE setArtIntensity
+			   NOTIFY artIntensityChanged)
+	Q_PROPERTY(bool boundariesColor
+			   READ getBoundariesColor
+			   WRITE setBoundariesColor
+			   NOTIFY boundariesColorChanged)
+	Q_PROPERTY(bool boundariesDisplayed
+			   READ getFlagBoundaries
+			   WRITE setFlagBoundaries
+			   NOTIFY boundariesDisplayedChanged)
+	Q_PROPERTY(bool fontSize
+			   READ getFontSize
+			   WRITE setFontSize
+			   NOTIFY fontSizeChanged)
+	Q_PROPERTY(bool isolateSelected
+			   READ getFlagIsolateSelected
+			   WRITE setFlagIsolateSelected
+			   NOTIFY isolateSelectedChanged)
+	Q_PROPERTY(bool linesColor
+			   READ getLinesColor
+			   WRITE setLinesColor
+			   NOTIFY linesColorChanged)
+	Q_PROPERTY(bool linesDisplayed
+			   READ getFlagLines
+			   WRITE setFlagLines
+			   NOTIFY linesDisplayedChanged)
+	Q_PROPERTY(bool namesColor
+			   READ getNamesColor
+			   WRITE setNamesColor
+			   NOTIFY namesColorChanged)
+	Q_PROPERTY(bool namesDisplayed
+			   READ getFlagLabels
+			   WRITE setFlagLabels
+			   NOTIFY namesDisplayedChanged)
 
 public:
 	//! Constructor
@@ -89,60 +134,73 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:	
-	//! Set constellation art fade duration in second
-	void setArtFadeDuration(float duration);
-	//! Get constellation art fade duration in second
-	float getArtFadeDuration() const {return artFadeDuration;}
-
-	//! Set constellation maximum art intensity (between 0 and 1)
-	void setArtIntensity(double d);
-	//! Set constellation maximum art intensity (between 0 and 1)
-	double getArtIntensity() const {return artMaxIntensity;}
-
 	//! Set whether constellation art will be displayed
-	void setFlagArt(bool b);
+	void setFlagArt(const bool displayed);
 	//! Get whether constellation art is displayed
-	bool getFlagArt(void) const {return flagArt;}
+	bool getFlagArt(void) const;
 
-	//! Set whether constellation path lines will be displayed
-	void setFlagLines(bool b);
-	//! Get whether constellation path lines are displayed
-	bool getFlagLines(void) const {return flagLines;}
+	//! Set constellation art fade duration in second
+	void setArtFadeDuration(const float duration);
+	//! Get constellation art fade duration in second
+	float getArtFadeDuration() const;
 
-	//! Set whether constellation boundaries lines will be displayed
-	void setFlagBoundaries(bool b);
-	//! Get whether constellation boundaries lines are displayed
-	bool getFlagBoundaries(void) const {return flagBoundaries;}
-
-	//! Set whether constellation names will be displayed
-	void setFlagLabels(bool b);
-	//! Set whether constellation names are displayed
-	bool getFlagLabels(void) const {return flagNames;}
-
-	//! Set whether selected constellation must be displayed alone
-	void setFlagIsolateSelected(bool s);
-	//! Get whether selected constellation is displayed alone
-	bool getFlagIsolateSelected(void) const { return isolateSelected;}
-
-	//! Define line color
-	void setLinesColor(const Vec3f& c);
-	//! Get line color
-	Vec3f getLinesColor() const;
+	//! Set constellation maximum art intensity (between 0 and 1)
+	void setArtIntensity(const double intensity);
+	//! Set constellation maximum art intensity (between 0 and 1)
+	double getArtIntensity() const;
 
 	//! Define boundary color
-	void setBoundariesColor(const Vec3f& c);
+	void setBoundariesColor(const Vec3f& color);
 	//! Get current boundary color
 	Vec3f getBoundariesColor() const;
 
+	//! Set whether constellation boundaries lines will be displayed
+	void setFlagBoundaries(const bool displayed);
+	//! Get whether constellation boundaries lines are displayed
+	bool getFlagBoundaries(void) const;
+
+	//! Set whether selected constellation must be displayed alone
+	void setFlagIsolateSelected(const bool isolate);
+	//! Get whether selected constellation is displayed alone
+	bool getFlagIsolateSelected(void) const;
+
+	//! Define line color
+	void setLinesColor(const Vec3f& color);
+	//! Get line color
+	Vec3f getLinesColor() const;
+
+	//! Set whether constellation path lines will be displayed
+	void setFlagLines(const bool displayed);
+	//! Get whether constellation path lines are displayed
+	bool getFlagLines(void) const;
+
 	//! Set label color for names
-	void setLabelsColor(const Vec3f& c);
+	void setNamesColor(const Vec3f& color);
 	//! Get label color for names
-	Vec3f getLabelsColor() const;
+	Vec3f getNamesColor() const;
+
+	//! Set whether constellation names will be displayed
+	void setFlagLabels(bool displayed);
+	//! Set whether constellation names are displayed
+	bool getFlagLabels(void) const;
 
 	//! Set the font size used for constellation names display
-	void setFontSize(float newFontSize);
+	void setFontSize(const float newFontSize);
 	//! Get the font size used for constellation names display
 	float getFontSize() const;
+
+signals:
+	void artDisplayedChanged(const bool displayed) const;
+	void artFadeDurationChanged(const float duration) const;
+	void artIntensityChanged(const double intensity) const;
+	void boundariesColorChanged(const Vec3f & color) const;
+	void boundariesDisplayedChanged(const bool displayed) const;
+	void fontSizeChanged(const float newSize) const;
+	void isolateSelectedChanged(const bool isolate) const;
+	void linesColorChanged(const Vec3f & color) const;
+	void linesDisplayedChanged(const bool displayed) const;
+	void namesColorChanged(const Vec3f & color) const;
+	void namesDisplayedChanged(const bool displayed) const;
 
 private slots:
 	//! Limit the number of constellations to draw based on selected stars.
@@ -230,12 +288,12 @@ private:
 	QString lastLoadedSkyCulture;	// Store the last loaded sky culture directory name
 
 	// These are THE master settings - individual constellation settings can vary based on selection status
-	bool flagNames;
-	bool flagLines;
-	bool flagArt;
-	bool flagBoundaries;
 	float artFadeDuration;
-	float artMaxIntensity;
+	float artIntensity;
+	bool artDisplayed;
+	bool boundariesDisplayed;
+	bool linesDisplayed;
+	bool namesDisplayed;
 };
 
 #endif // _CONSTELLATIONMGR_HPP_

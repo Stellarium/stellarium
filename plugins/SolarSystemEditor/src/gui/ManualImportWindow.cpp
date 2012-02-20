@@ -50,7 +50,8 @@ void ManualImportWindow::createDialogContent()
 	ui->setupUi(dialog);
 
 	//Signals
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
+	        this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	connect(ui->lineEditColor, SIGNAL(textChanged(QString)), this, SLOT(parseColorString(QString)));
@@ -69,7 +70,7 @@ void ManualImportWindow::createDialogContent()
 	ui->lineEditRingTexture->setText("saturn_rings_radial.png");
 }
 
-void ManualImportWindow::languageChanged()
+void ManualImportWindow::retranslate()
 {
 	if (dialog)
 		ui->retranslateUi(dialog);

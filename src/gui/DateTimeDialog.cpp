@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Nigel Kerr
+ * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,20 +51,35 @@ void DateTimeDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	double jd = StelApp::getInstance().getCore()->getJDay();
-	setDateTime(jd + (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0)); // UTC -> local tz
+	// UTC -> local tz
+	setDateTime(jd + (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0));
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
+	connectSpinnerEvents();
+}
+
+void DateTimeDialog::connectSpinnerEvents() const
+{
 	connect(ui->spinner_year, SIGNAL(valueChanged(int)), this, SLOT(yearChanged(int)));
 	connect(ui->spinner_month, SIGNAL(valueChanged(int)), this, SLOT(monthChanged(int)));
 	connect(ui->spinner_day, SIGNAL(valueChanged(int)), this, SLOT(dayChanged(int)));
 	connect(ui->spinner_hour, SIGNAL(valueChanged(int)), this, SLOT(hourChanged(int)));
 	connect(ui->spinner_minute, SIGNAL(valueChanged(int)), this, SLOT(minuteChanged(int)));
 	connect(ui->spinner_second, SIGNAL(valueChanged(int)), this, SLOT(secondChanged(int)));
-
-	connect(this, SIGNAL(dateTimeChanged(double)), StelApp::getInstance().getCore(), SLOT(setJDay(double)));
 }
+
+void DateTimeDialog::disconnectSpinnerEvents()const
+{
+	disconnect(ui->spinner_year, SIGNAL(valueChanged(int)), this, SLOT(yearChanged(int)));
+	disconnect(ui->spinner_month, SIGNAL(valueChanged(int)), this, SLOT(monthChanged(int)));
+	disconnect(ui->spinner_day, SIGNAL(valueChanged(int)), this, SLOT(dayChanged(int)));
+	disconnect(ui->spinner_hour, SIGNAL(valueChanged(int)), this, SLOT(hourChanged(int)));
+	disconnect(ui->spinner_minute, SIGNAL(valueChanged(int)), this, SLOT(minuteChanged(int)));
+	disconnect(ui->spinner_second, SIGNAL(valueChanged(int)), this, SLOT(secondChanged(int)));
+}
+
 
 //! take in values, adjust for calendrical correctness if needed, and push to
 //! the widgets and signals
@@ -71,8 +87,7 @@ bool DateTimeDialog::valid(int y, int m, int d, int h, int min, int s)
 {
 	int dy, dm, dd, dh, dmin, ds;
 
-	if ( ! StelUtils::changeDateTimeForRollover(y, m, d, h, min, s, &dy, &dm, &dd, &dh, &dmin, &ds) )
-	{
+	if (!StelUtils::changeDateTimeForRollover(y, m, d, h, min, s, &dy, &dm, &dd, &dh, &dmin, &ds)) {
 		dy = y;
 		dm = m;
 		dd = d;
@@ -88,14 +103,15 @@ bool DateTimeDialog::valid(int y, int m, int d, int h, int min, int s)
 	minute = dmin;
 	second = ds;
 	pushToWidgets();
-	emit dateTimeChanged(newJd());
+	StelApp::getInstance().getCore()->setJDay(newJd());
 	return true;
 }
 
-void DateTimeDialog::languageChanged()
+void DateTimeDialog::retranslate()
 {
-	if (dialog)
+	if (dialog) {
 		ui->retranslateUi(dialog);
+	}
 }
 
 void DateTimeDialog::styleChanged()
@@ -160,14 +176,22 @@ double DateTimeDialog::newJd()
 
 void DateTimeDialog::pushToWidgets()
 {
-  ui->spinner_year->setValue(year);
-  ui->spinner_month->setValue(month);
-  ui->spinner_day->setValue(day);
-  ui->spinner_hour->setValue(hour);
-  if (!ui->spinner_minute->hasFocus() || (ui->spinner_minute->value() == -1) || (ui->spinner_minute->value() == 60))
-    ui->spinner_minute->setValue(minute);
-  if (!ui->spinner_second->hasFocus() || (ui->spinner_second->value() == -1) || (ui->spinner_second->value() == 60))
-    ui->spinner_second->setValue(second);
+	disconnectSpinnerEvents();
+	ui->spinner_year->setValue(year);
+	ui->spinner_month->setValue(month);
+	ui->spinner_day->setValue(day);
+	ui->spinner_hour->setValue(hour);
+	if (!ui->spinner_minute->hasFocus()
+			|| (ui->spinner_minute->value() == -1)
+			|| (ui->spinner_minute->value() == 60)) {
+	  ui->spinner_minute->setValue(minute);
+	}
+	if (!ui->spinner_second->hasFocus()
+			|| (ui->spinner_second->value() == -1)
+			|| (ui->spinner_second->value() == 60)) {
+	  ui->spinner_second->setValue(second);
+	}
+	connectSpinnerEvents();
 }
 
 /************************************************************************
@@ -175,9 +199,11 @@ Send newJd to spinner_*
  ************************************************************************/
 void DateTimeDialog::setDateTime(double newJd)
 {
-	newJd += (StelApp::getInstance().getLocaleMgr().getGMTShift(newJd)/24.0); // UTC -> local tz
-	StelUtils::getDateFromJulianDay(newJd, &year, &month, &day);
-	StelUtils::getTimeFromJulianDay(newJd, &hour, &minute, &second);
-	pushToWidgets();
+	if (this->visible()) {
+		newJd += (StelApp::getInstance().getLocaleMgr().getGMTShift(newJd)/24.0); // UTC -> local tz
+		StelUtils::getDateFromJulianDay(newJd, &year, &month, &day);
+		StelUtils::getTimeFromJulianDay(newJd, &hour, &minute, &second);
+		pushToWidgets();
+	}
 }
 
