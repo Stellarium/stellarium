@@ -157,15 +157,22 @@ public class QtApplication extends Application
     @Override
     public void onTerminate() {
         if (m_delegateObject != null && m_delegateMethods.containsKey("onTerminate"))
-            invokeDelegate(m_delegateMethods.get("onTerminate"));
+            invokeDelegateMethod(m_delegateMethods.get("onTerminate").get(0));
         super.onTerminate();
     }
 
-    static private int stackDeep=-1;
-    public static boolean invokeDelegate(Object res, Object... args)
+    public static class InvokeResult
     {
+        public boolean invoked = false;
+        public Object methodReturns = null;
+    }
+
+    private static int stackDeep=-1;
+    public static InvokeResult invokeDelegate(Object... args)
+    {
+        InvokeResult result = new InvokeResult();
         if (m_delegateObject==null)
-            return false;
+            return result;
         StackTraceElement[] elements=Thread.currentThread().getStackTrace();
         if (-1 == stackDeep)
         {
@@ -179,18 +186,16 @@ public class QtApplication extends Application
         }
         final String methodName=elements[stackDeep].getMethodName();
         if (-1 == stackDeep || !m_delegateMethods.containsKey(methodName))
-            return false;
+            return result;
 
         for (Method m:m_delegateMethods.get(methodName))
             if (m.getParameterTypes().length == args.length)
             {
-                if (res!=null)
-                    res=invokeDelegateMethod(m, args);
-                else
-                    invokeDelegateMethod(m, args);
-                return true;
+                result.methodReturns=invokeDelegateMethod(m, args);
+                result.invoked=true;
+                return result;
             }
-        return false;
+        return result;
     }
 
     public static Object invokeDelegateMethod(Method m, Object... args)
