@@ -65,7 +65,6 @@ function saveState(stateName)
 	savedStates[stateName]["StelSkyDrawerFlagPointStar"] = StelSkyDrawer.getFlagPointStar();
 	savedStates[stateName]["StelSkyDrawerBortleScale"] = StelSkyDrawer.getBortleScale();
 	savedStates[stateName]["StelSkyDrawerFlagLuminanceAdaptation"] = StelSkyDrawer.getFlagLuminanceAdaptation();
-	savedStates[stateName]["StelSkyImageMgr"] = StelSkyImageMgr.getFlagShow();
 	savedStates[stateName]["MountMode"] = core.getMountMode();
 	savedStates[stateName]["NightMode"] = core.getNightMode();
 	savedStates[stateName]["ProjectionMode"] = core.getProjectionMode();
@@ -167,7 +166,6 @@ function restoreState(stateName, options)
 	StelSkyDrawer.setFlagPointStar(savedStates[stateName]["StelSkyDrawerFlagPointStar"]);
 	StelSkyDrawer.setBortleScale(savedStates[stateName]["StelSkyDrawerBortleScale"]);
 	StelSkyDrawer.setFlagLuminanceAdaptation(savedStates[stateName]["StelSkyDrawerFlagLuminanceAdaptation"]);
-	StelSkyImageMgr.setFlagShow(savedStates[stateName]["StelSkyImageMgr"]);
 	core.setMountMode(savedStates[stateName]["MountMode"]);
 	core.setNightMode(savedStates[stateName]["NightMode"]);
 	core.setProjectionMode(savedStates[stateName]["ProjectionMode"]);
