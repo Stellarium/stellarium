@@ -25,24 +25,23 @@ class OBJ
         //! Only XYZ and XZY may occur in real life, but we can cope with all...
         enum vertexOrder { XYZ, XZY, YXZ, YZX, ZXY, ZYX };
 
-
         //! Structure for holding vertex arrays and OpenGL materials from the MTL for use with Stellarium.
         //! Usually those are generated and returned by calling the .getStelArrays() method.
         //! GZ TODO: Avoid copying MTL Material items into this, just take the Material directly!
         struct StelModel {
-            StelModel() : texture(), bump_texture(), diffuseColor(1.0f, 1.0f, 1.0f, 1.0f),
+            StelModel() : texture(), bump_texture(), diffuseColor(0.8f, 0.8f, 0.8f, 1.0f),
                           ambientColor(0.2f, 0.2f, 0.2f, 1.0f), specularColor(0.0f, 0.0f, 0.0f, 1.0f), shininess(0.0f),
                           vertices(NULL), normals(NULL), texcoords(NULL) {}
             long triangleCount; //!< Total number of triangles in the model.
-            StelTextureSP texture; //!< Shared pointer to texture of the model. This can be null.
+            StelTextureSP texture;      //!< Shared pointer to texture of the model. This can be null.
             StelTextureSP bump_texture; //!< Shared pointer to bump map texture of the model. This can be null.
-            Vec4f diffuseColor;  //!< Directly lit color of the model. The default value is (1.0, 1.0, 1.0, 1.0) and should be set to the MTL Kd
+            Vec4f diffuseColor;  //!< Directly lit color of the model. The default value is (0.8, 0.8, 0.8, 1.0) and should be set to the MTL Kd
             Vec4f ambientColor;  //!< "Background" color of the model. The default value is (0.2, 0.2, 0.2, 1.0) and should be set to the MTL Ka
             Vec4f specularColor; //!< Highlight color of the model. The default value is (0.0, 0.0, 0.0, 1.0) and should be set to the MTL Ks
             float shininess;  //!< Specular exponent of the model. The default value is 0 and should be set to the MTL Ns [0..128]
             MTL::Illum illum; //!< illumination model, copied from Material.
-            Vec3d* vertices; //!< Vertices array. Length is triangleCount * 3.
-            Vec3f* normals; //!< Normals array. Length is triangleCount * 3.
+            Vec3d* vertices;  //!< Vertices array. Length is triangleCount * 3.
+            Vec3f* normals;   //!< Normals array. Length is triangleCount * 3.
             Vec2f* texcoords; //!< Texcoords array. Length is triangleCount * 3.
             Vec3f* tangents; //!< Tanget array. Length is triangleCount * 3.
         };
