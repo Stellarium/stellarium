@@ -274,9 +274,9 @@ vector<OBJ::StelModel> OBJ::getStelArrays()
         }
 
         stelModel.triangleCount = model.faces.size();
-        stelModel.diffuseColor  = Vec3f(material->diffuse.r, material->diffuse.g, material->diffuse.b);
-        stelModel.ambientColor  = Vec3f(material->ambient.r, material->ambient.g, material->ambient.b);
-        stelModel.specularColor = Vec3f(material->specular.r, material->specular.g, material->specular.b);
+        stelModel.diffuseColor  = material->diffuse;
+        stelModel.ambientColor  = material->ambient;
+        stelModel.specularColor = material->specular;
         stelModel.shininess = qMin(128.0f, material->shininess);
         stelModel.illum = material->illum;
         stelModel.vertices      = new Vec3d[stelModel.triangleCount * 3];
