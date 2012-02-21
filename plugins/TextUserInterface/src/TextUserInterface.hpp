@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
  
 #ifndef TEXTUSERINTERFACE_HPP_
@@ -42,6 +42,11 @@ public:
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	virtual void handleKeys(class QKeyEvent* event);
+
+	///////////////////////////////////////////////////////////////////////////
+	// Methods specific to TextUserInterface
+	//! Loads the module's configuration from the config file.
+	void loadConfiguration(void);
 
 private slots:
 	void setHomePlanet(QString planetName);

@@ -15,14 +15,14 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
  
 #include "MinorPlanet.hpp"
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelTranslator.hpp"
@@ -40,7 +40,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 						 const QString& atexMapName,
 						 posFuncType coordFunc,
 						 void* auserDataPtr,
-						 OsulatingFunctType *osculatingFunc,
+						 OsculatingFunctType *osculatingFunc,
 						 bool acloseOrbit,
 						 bool hidden)
 						: Planet (englishName,
@@ -59,7 +59,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 {
 	texMapName = atexMapName;
 	lastOrbitJD =0;
-	deltaJD = JD_SECOND;
+	deltaJD = StelCore::JD_SECOND;
 	orbitCached = 0;
 	closeOrbit = acloseOrbit;
 
@@ -164,7 +164,6 @@ void MinorPlanet::setProvisionalDesignation(QString designation)
 QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
 {
 	//Mostly copied from Planet::getInfoString():
-	const StelNavigator* nav = core->getNavigator();
 
 	QString str;
 	QTextStream oss(&str);
@@ -191,7 +190,14 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	}
 
 	if (flags&Magnitude)
-		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(nav), 0, 'f', 2) << "<br>";
+	{
+	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
+										QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+	    else
+		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core, false), 0, 'f', 2) << "<br>";
+
+	}
 
 	if (flags&AbsoluteMagnitude)
 	{
@@ -199,7 +205,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		//If the H-G system is not used, use the default radius/albedo mechanism
 		if (slopeParameter < 0)
 		{
-			oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(nav) - 5. * (std::log10(getJ2000EquatorialPos(nav).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
+			oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core, false) - 5. * (std::log10(getJ2000EquatorialPos(core).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
 		}
 		else
 		{
@@ -211,8 +217,21 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	if (flags&Distance)
 	{
-		// xgettext:no-c-format
-		oss << q_("Distance: %1AU").arg(getJ2000EquatorialPos(nav).length(), 0, 'f', 8) << "<br>";
+		double distanceAu = getJ2000EquatorialPos(core).length();
+		if (distanceAu < 0.1)
+		{
+			double distanceKm = AU * distanceAu;
+			// xgettext:no-c-format
+			oss << QString(q_("Distance: %1AU (%2 km)"))
+			       .arg(distanceAu, 0, 'f', 8)
+			       .arg(distanceKm, 0, 'f', 0);
+		}
+		else
+		{
+			// xgettext:no-c-format
+			oss << q_("Distance: %1AU").arg(distanceAu, 0, 'f', 8);
+		}
+		oss << "<br>";
 	}
 
 	if (flags&Size)
@@ -229,18 +248,26 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	return str;
 }
 
-float MinorPlanet::getVMagnitude(const StelNavigator *nav) const
+float MinorPlanet::getVMagnitude(const StelCore* core, bool withExtinction) const
 {
+	float extinctionMag=0.0; // track magnitude loss
+	if (withExtinction)
+	{
+	    Vec3d altAz=getAltAzPosApparent(core);
+	    altAz.normalize();
+	    core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
+	}
+
 	//If the H-G system is not used, use the default radius/albedo mechanism
 	if (slopeParameter < 0)
 	{
-		return Planet::getVMagnitude(nav);
+		return Planet::getVMagnitude(core, withExtinction);
 	}
 
 	//Calculate phase angle
 	//(Code copied from Planet::getVMagnitude())
-	//(LOL, this is actually vector substraction + the cosine theorem :))
-	const Vec3d& observerHelioPos = nav->getObserverHeliocentricEclipticPos();
+	//(LOL, this is actually vector subtraction + the cosine theorem :))
+	const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 	const double observerRq = observerHelioPos.lengthSquared();
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
 	const double planetRq = planetHelioPos.lengthSquared();
@@ -258,7 +285,7 @@ float MinorPlanet::getVMagnitude(const StelNavigator *nav) const
 	//TODO: See if you can "collapse" some calculations
 	double apparentMagnitude = reducedMagnitude + 5 * std::log10(std::sqrt(planetRq * observerPlanetRq));
 
-	return apparentMagnitude;
+	return apparentMagnitude+extinctionMag;
 }
 
 void MinorPlanet::translateName(StelTranslator &translator)

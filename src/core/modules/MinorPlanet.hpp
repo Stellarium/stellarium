@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
  
 #ifndef _MINOR_PLANET_HPP_
@@ -46,7 +46,7 @@ public:
 	       const QString& texMapName,
 	       posFuncType _coordFunc,
 	       void* userDataPtr,
-	       OsulatingFunctType *osculatingFunc,
+	       OsculatingFunctType *osculatingFunc,
 	       bool closeOrbit,
 	       bool hidden);
 
@@ -66,9 +66,11 @@ public:
 	//! \param flags a set of InfoStringGroup items to include in the return value.
 	//! \return a QString containing an HMTL encoded description of the MinorPlanet.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup &flags) const;
-	//! \todo Decide if this is going to be "MinorPlanet" or "Asteroid"
-	virtual QString getType() const {return "MinorPlanet";}
-	virtual float getVMagnitude(const StelNavigator *nav) const;
+	//The Comet class inherits the "Planet" type because the SolarSystem class
+	//was not designed to handle different types of objects.
+	// \todo Decide if this is going to be "MinorPlanet" or "Asteroid"
+	//virtual QString getType() const {return "MinorPlanet";}
+	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
 	//! sets the nameI18 property with the appropriate translation.
 	//! Function overriden to handle the problem with name conflicts.
 	virtual void translateName(StelTranslator& trans);

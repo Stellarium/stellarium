@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
 #ifndef _CONFIGURATIONDIALOG_HPP_
@@ -43,7 +43,7 @@ public:
 	void styleChanged();
 
 public slots:
-	void languageChanged();
+	void retranslate();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -53,8 +53,19 @@ protected:
 private:
 	//! Contains the parsed content of the starsConfig.json file
 	QVariantMap nextStarCatalogToDownload;
-	//! Set the content of the "Star catalog updates" box
-	void refreshStarCatalogButton();
+	//! Reset the content of the "Star catalog updates" box.
+	//! Should be called only during initialization or
+	//! after a download is complete.
+	void resetStarCatalogControls();
+	//! Re-translate the contents of the "Star calalogs" box.
+	//! Update the strings according to the state.
+	void updateStarCatalogControlsText();
+	//! True if a star catalog download is in progress.
+	bool isDownloadingStarCatalog;
+	//! Value set by resetStarCatalogControls().
+	int nextStarCatalogToDownloadIndex;
+	//! Value set by resetStarCatalogControls().
+	int starCatalogsCount;
 	//! True when at least one star catalog has been downloaded successfully this session
 	bool hasDownloadedStarCatalog;
 	QNetworkReply* starCatalogDownloadReply;
@@ -65,7 +76,7 @@ private slots:
 	void setNoSelectedInfo(void);
 	void setAllSelectedInfo(void);
 	void setBriefSelectedInfo(void);
-	void languageChanged(const QString& languageCode);
+	void selectLanguage(const QString& languageCode);
 	void setStartupTimeMode();
 	void setDiskViewport(bool);
 	void setSphericMirror(bool);
@@ -101,6 +112,7 @@ private slots:
 	void pluginConfigureCurrentSelection();
 	void loadAtStartupChanged(int);
 
+	#ifndef DISABLE_SCRIPTING
 	//! The selection of script in the script list has changed
 	//! Updates the script information panel
 	void scriptSelectionChanged(const QString& s);
@@ -114,6 +126,7 @@ private slots:
 	void aScriptHasStopped();
 
 	void populateScriptsList();
+	#endif
 	void setFixedDateTimeToCurrent();
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);

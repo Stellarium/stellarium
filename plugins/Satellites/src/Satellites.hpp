@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _SATELLITES_HPP_
@@ -42,6 +42,20 @@ class SatellitesDialog;
 
 typedef QSharedPointer<Satellite> SatelliteP;
 
+//! Data structure containing unvalidated TLE set as read from a TLE list file.
+struct TleData
+{
+	//! NORAD catalog number, as extracted from the TLE set.
+	QString id;
+	//! Human readable name, as extracted from the TLE title line.
+	QString name;
+	QString first;
+	QString second;
+};
+
+typedef QList<TleData> TleDataList;
+typedef QHash<QString, TleData> TleDataHash ;
+
 //! @class Satellites
 //! Satellites in low Earth orbit require different orbital calculations from planets, the moon
 //! and so on.  This plugin implements the SGP4/SDP4 algorithms in Stellarium, allowing accurate
@@ -65,7 +79,8 @@ public:
 	{
 		Visible,
 		NotVisible,
-		Both
+		Both,
+		NewlyAdded
 	};
 
 	Satellites();
@@ -126,10 +141,21 @@ public:
 
 	//! get satellite objects filtered by group.  If an empty string is used for the
 	//! group name, return all satallites
-	QStringList getSatellites(const QString& group=QString(), Visibility vis=Both);
+	QHash<QString,QString> getSatellites(const QString& group=QString(), Visibility vis=Both);
 
 	//! get a satellite object by identifier
 	SatelliteP getByID(const QString& id);
+	
+	//! Returns a list of all satellite IDs.
+	QStringList getAllIDs();
+	
+	//! Add the given satellites.
+	//! The changes are not saved to file.
+	void add(const TleDataList& newSatellites);
+	
+	//! Remove the selected satellites.
+	//! The changes are not saved to file.
+	void remove(const QStringList& idList);
 
 	//! get whether or not the plugin will try to update TLE data from the internet
 	//! @return true if updates are set to be done, false otherwise
@@ -171,6 +197,13 @@ public:
 	//! @param deleteFiles if set, the update files are deleted after
 	//!        they are used, else they are left alone
 	void updateFromFiles(QStringList paths, bool deleteFiles=false);
+	
+	//! Reads a TLE list from a file to the supplied hash.
+	//! If an entry with the same ID exists in the given hash, its contents
+	//! are overwritten with the new values.
+	//! \param openFile a reference to an \b open file.
+	//! \param tleList a hash with satellite IDs (catalog numbers) as keys.
+	static void parseTleFile(QFile& openFile, TleDataHash& tleList);
 
 signals:
 	//! emitted when the update status changes, e.g. when 
@@ -228,14 +261,14 @@ private slots:
 	void setStelStyle(const QString& section);
 
 private:
-	// if existing, delete Satellites section in main config.ini, then create with default values
+	//! if existing, delete Satellites section in main config.ini, then create with default values
 	void restoreDefaultConfigIni(void);
 
-	// replace the json file with the default from the compiled-in resource
+	//! replace the json file with the default from the compiled-in resource
 	void restoreDefaultJsonFile(void);
 
-	// read the json file and create the satellites.  Removes existing satellites first if there are any
-	// this will be done once at init, and also if the defaults are reset.
+	//! read the json file and create the satellites.  Removes existing satellites first if there are any
+	//! this will be done once at init, and also if the defaults are reset.
 	void readJsonFile(void);
 
 	//! Creates a backup of the satellites.json file called satellites.json.old
@@ -250,7 +283,8 @@ private:
 	bool saveTleMap(const QVariantMap& map, QString path=QString());
 	QVariantMap loadTleMap(QString path=QString());
 	void setTleMap(const QVariantMap& map);
-	QVariantMap getTleMap(void);
+	//! Generates a QMap that contains all the data on satellites.
+	QVariantMap getTleMap();
 
 	QString satellitesJsonPath;
 	QList<SatelliteP> satellites;

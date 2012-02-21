@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -14,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include <algorithm>
@@ -26,7 +27,7 @@
 #include "StelProjector.hpp"
 #include "Constellation.hpp"
 #include "StarMgr.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelTexture.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
@@ -88,14 +89,14 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 	XYZname.set(0.,0.,0.);
 	for(unsigned int ii=0;ii<numberOfSegments*2;++ii)
 	{
-		XYZname+= asterism[ii]->getJ2000EquatorialPos(StelApp::getInstance().getCore()->getNavigator());
+		XYZname+= asterism[ii]->getJ2000EquatorialPos(StelApp::getInstance().getCore());
 	}
 	XYZname.normalize();
 
 	return true;
 }
 
-void Constellation::drawOptim(StelPainter& sPainter, const StelNavigator* nav, const SphericalCap& viewportHalfspace) const
+void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const
 {
 	if (lineFader.getInterstate()<=0.0001f)
 		return;
@@ -106,8 +107,8 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelNavigator* nav, c
 	Vec3d star2;
 	for (unsigned int i=0;i<numberOfSegments;++i)
 	{
-		star1=asterism[2*i]->getJ2000EquatorialPos(nav);
-		star2=asterism[2*i+1]->getJ2000EquatorialPos(nav);
+		star1=asterism[2*i]->getJ2000EquatorialPos(core);
+		star2=asterism[2*i+1]->getJ2000EquatorialPos(core);
 		star1.normalize();
 		star2.normalize();
 		sPainter.drawGreatCircleArc(star1, star2, &viewportHalfspace);
@@ -220,7 +221,7 @@ StelObjectP Constellation::getBrightestStarInConstellation(void) const
 	// so check all segment endpoints:
 	for (int i=2*numberOfSegments-1;i>=0;i--)
 	{
-		const float Mag = asterism[i]->getVMagnitude(0);
+		const float Mag = asterism[i]->getVMagnitude(0, false);
 		if (Mag < maxMag)
 		{
 			brightest = asterism[i];

@@ -1,0 +1,62 @@
+EXTINCTION branch:
+
+Introduces changes necessary for extinction effects. 
+
+Status: Partial solution, needs help.
+
+Contributor: Georg.Zotti@univie.ac.at
+All changes are donated to the Stellarium project for distribution under opensource licenses like GNU.
+
+
+
+
+2011-Oct: A new attempt in Extinction:
+=========================================
+
+StelObject and derived classes: getVMagnitude() has new optional arg: withExtinction. 
+This should be set to true only for determining magnitude for drawing (draw()) and also for textual info (getInfoString()),
+not e.g. for selection (getSelectPriority()).
+It will also only change the result if atmosphere rendering is ON.
+
+StelSkyDrawer::drawPointSource
+StelObject::getVMagnitude
+Satellite::getVMagnitude, ::getInfoString
+Supernova::getVMagnitude, ::getInfoString
+Quasar::getVMagnitude,    ::getInfoString
+Satellite::getVMagnitude
+Planet::getVMagnitude, ::getInfoString
+Comet::getVMagnitude, ::getInfoString
+MinorPlanet::getVMagnitude, ::getInfoString
+Nebula::getVMagnitude, ::getInfoString
+StarWrapper::getInfoString
+
+I currently have no solution for extended objects! Therefore ...
+
+TODO: Milky Way, Nebula figures, Constellations??
+
+
+
+================================================================================
+
+TODO, but maybe in yet another branch: See implementation in abandoned refraction branch!
+
+CHANGES IN LANDSCAPE HANDLING:
+1) Moved config.ini:[stars].init_bortle_scale to [landscape] section
+2) Added optional settings to landscape.ini files:
+   landscape.ini:[location].light_pollution (<1: no change; 1..9: Bortle; >9-->9); 
+   landscape.ini:[location].display_fog: -1=no change, 0=off, 1=on
+   landscape.ini:[location].atmospheric_extinction_coefficient (mag/airmass; -1=no change)
+   landscape.ini:[location].atmospheric_temperature (C; -1000=no change) 
+   landscape.ini:[location].atmospheric_pressure    (mbar; -1=auto, <-1 no change)
+
+   LandscapeMgr forwards those settings to the respective recipients. 
+   TODO: make GUI aware of changed values (how?).
+
+
+CHANGES IN ASTR.COMPUTATIONS
+planetsephems/sideral_time.[hc]: added get_mean_ecliptical_obliquity(double JDE), 
+                                 changed correct ecliptic in nutation computation.
+StelUtil::ctRadec2Ecl(): coordinate transformation RA/dec to ecliptical with given ecl. obliquity.
+Planet::getInfoString(): added ecliptical positions for planets if observed from earth.
+                         This helped detect A BUG, apparently ecliptical obliquity does not change, currently.
+

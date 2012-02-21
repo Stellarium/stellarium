@@ -14,7 +14,7 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "LabelMgr.hpp"
@@ -24,7 +24,7 @@
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelProjector.hpp"
 #include "StelModule.hpp"
 #include "StelObject.hpp"
@@ -208,7 +208,7 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 	if(labelFader.getInterstate() <= 0.0)
 		return false;
 
-	Vec3d objectPos = labelObject->getJ2000EquatorialPos(core->getNavigator());
+	Vec3d objectPos = labelObject->getJ2000EquatorialPos(core);
 	Vec3d labelXY;
 	sPainter.getProjector()->project(objectPos,labelXY);
 

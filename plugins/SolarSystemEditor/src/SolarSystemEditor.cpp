@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "SolarSystemEditor.hpp"
@@ -53,10 +53,10 @@ StelPluginInfo SolarSystemEditorStelPluginInterface::getPluginInfo() const
 	
 	StelPluginInfo info;
 	info.id = "SolarSystemEditor";
-	info.displayedName = q_("Solar System Editor");
+	info.displayedName = N_("Solar System Editor");
 	info.authors = "Bogdan Marinov";
 	info.contact = "http://stellarium.org";
-	info.description = q_("An interface for adding asteroids and comets to Stellarium. It can download object lists from the Minor Planet Center's website and perform searches in its online database. Still a work in progress.");
+	info.description = N_("An interface for adding asteroids and comets to Stellarium. It can download object lists from the Minor Planet Center's website and perform searches in its online database. Still a work in progress.");
 	return info;
 }
 
@@ -723,7 +723,9 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 				 << "This is not a valid date for an Epoch.";
 		return SsoElements();
 	}
-	int epochJD = epochDate.toJulianDay();
+	//Epoch is at .0 TT, i.e. midnight
+	double epochJD;
+	StelUtils::getJDFromDate(&epochJD, year, month, day, 0, 0, 0);
 	result.insert("orbit_Epoch", epochJD);
 
 	column = oneLineElements.mid(26, 9).trimmed();

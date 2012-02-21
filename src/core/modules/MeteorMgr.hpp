@@ -14,7 +14,7 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _METEORMGR_HPP_
@@ -26,10 +26,11 @@
 class Meteor;
 
 //! @class MeteorMgr
-//! Simulates meteor showers.
+//! Simulates a meteor shower.
 class MeteorMgr : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(int ZHR READ getZHR WRITE setZHR NOTIFY zhrChanged)
 
 public:
 	//! Construct a MeteorMgr object.
@@ -71,6 +72,9 @@ public slots:
 	
 	//! Set the maximum velocity in km/s
 	void setMaxVelocity(int maxv);
+	
+signals:
+	void zhrChanged(int);
 	
 private:
 	std::vector<Meteor*> active;		// Vector containing all active meteors

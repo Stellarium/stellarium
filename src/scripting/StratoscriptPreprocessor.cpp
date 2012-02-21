@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifdef ENABLE_STRATOSCRIPT_COMPAT
@@ -115,6 +115,8 @@ bool StelScriptMgr::preprocessStratoScript(QFile& input, QString& output, const 
 				line = QString("LandscapeMgr.setFlagAtmosphere(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "azimuthal_grid")
 				line = QString("GridLinesMgr.setFlagAzimuthalGrid(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "galactic_grid")
+				line = QString("GridLinesMgr.setFlagGalacticGrid(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "cardinal_points")
 				line = QString("LandscapeMgr.setFlagCardinalsPoints(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "constellation_art")
@@ -145,6 +147,10 @@ bool StelScriptMgr::preprocessStratoScript(QFile& input, QString& output, const 
 				line = QString("LandscapeMgr.setFlagLandscapeSetsLocation(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "meridian_line")
 				line = QString("GridLinesMgr.setFlagMeridianLine(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "horizon_line")
+				line = QString("GridLinesMgr.setFlagHorizonLine(%1);").arg(strToBool(args.at(2)));
+			else if (args.at(1) == "galactic_plane_line")
+				line = QString("GridLinesMgr.setFlagGalacticPlaneLine(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "milky_way")
 				line = QString("MilkyWay.setFlagShow(%1);").arg(strToBool(args.at(2)));
 			else if (args.at(1) == "nebulae")

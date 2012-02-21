@@ -172,7 +172,7 @@
             <normaloff>:/graphicGui/folder.png</normaloff>:/graphicGui/folder.png</iconset>
           </property>
           <property name="shortcut">
-           <string>Ctrl+O</string>
+           <string notr="true">Ctrl+O</string>
           </property>
          </widget>
         </item>
@@ -201,7 +201,7 @@
             <normaloff>:/graphicGui/filesave.png</normaloff>:/graphicGui/filesave.png</iconset>
           </property>
           <property name="shortcut">
-           <string>Ctrl+S</string>
+           <string notr="true">Ctrl+S</string>
           </property>
          </widget>
         </item>
@@ -243,7 +243,7 @@
            <string>pre-process script using SSC preprocessor</string>
           </property>
           <property name="text">
-           <string>SSC</string>
+           <string notr="true">SSC</string>
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
@@ -263,7 +263,7 @@
            <string>pre-process script using STS preprocessor</string>
           </property>
           <property name="text">
-           <string>STS</string>
+           <string notr="true">STS</string>
           </property>
           <property name="icon">
            <iconset resource="../../data/gui/guiRes.qrc">
@@ -316,7 +316,7 @@
             <normaloff>:/graphicGui/btScriptRun-off.png</normaloff>:/graphicGui/btScriptRun-off.png</iconset>
           </property>
           <property name="shortcut">
-           <string>Ctrl+Return</string>
+           <string notr="true">Ctrl+Return</string>
           </property>
          </widget>
         </item>
@@ -348,7 +348,7 @@
             <normaloff>:/graphicGui/btScriptStop-off.png</normaloff>:/graphicGui/btScriptStop-off.png</iconset>
           </property>
           <property name="shortcut">
-           <string>Ctrl+C</string>
+           <string notr="true">Ctrl+C</string>
           </property>
          </widget>
         </item>
@@ -357,7 +357,7 @@
       <item>
        <widget class="QTabWidget" name="tabs">
         <property name="styleSheet">
-         <string>QTabBar::tab {
+         <string notr="true">QTabBar::tab {
 	min-height: 28px;
 }</string>
         </property>
@@ -450,7 +450,7 @@
            <string>Cursor position</string>
           </property>
           <property name="text">
-           <string>R:0 C:0</string>
+           <string notr="true">R:0 C:0</string>
           </property>
          </widget>
         </item>

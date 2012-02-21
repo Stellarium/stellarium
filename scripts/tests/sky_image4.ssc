@@ -45,24 +45,24 @@ core.loadSkyImage("image4", "../textures/earthmap.png",
 core.wait(1.5);
 
 status("showing image (should fade in)");
-StelSkyImageMgr.showImage("image1", true); 
+ScreenImageMgr.showImage("image1", true); 
 core.wait(0.5);
-StelSkyImageMgr.showImage("image2", true); 
+ScreenImageMgr.showImage("image2", true); 
 core.wait(0.5);
-StelSkyImageMgr.showImage("image3", true); 
+ScreenImageMgr.showImage("image3", true); 
 core.wait(0.5);
-StelSkyImageMgr.showImage("image4", true); 
+ScreenImageMgr.showImage("image4", true); 
 
 core.wait(4.5);
 
 status("hiding image (should fade out)");
-StelSkyImageMgr.showImage("image1", false); 
+ScreenImageMgr.showImage("image1", false); 
 core.wait(0.5);
-StelSkyImageMgr.showImage("image2", false); 
+ScreenImageMgr.showImage("image2", false); 
 core.wait(0.5);
-StelSkyImageMgr.showImage("image3", false); 
+ScreenImageMgr.showImage("image3", false); 
 core.wait(0.5);
-StelSkyImageMgr.showImage("image4", false); 
+ScreenImageMgr.showImage("image4", false); 
 
 core.wait(1.5);
 

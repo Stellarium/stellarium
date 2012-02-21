@@ -21,10 +21,21 @@
 #   - LandscapeKey (empty=auto)
 Mumbai	Maharashtra	in	R	12622,5	18.96N	72.82E	10
 Buenos Aires	Distrito Federal / Buenos Aires	ar	B	11928,4	34.61S	58.37W	44
-Moskva	Moskva	ru	B	11246,6	55.75N	37.62E	140
+Москва	Московская область	ru	B	11246,6	55.75N	37.62E	140
 Karâchi	Sind	pk	R	10807,8	24.86N	67.01E	9
 Dilli	Delhi	in	R	10400,9	28.67N	77.21E	234
 São Paulo	São Paulo	br	R	10333,2	23.53S	46.63W	736
+Altônia	Paraná	br	N	20,5	23.873889S	53.901944W	310
+Corbélia	Paraná	br	N	16,3	24.795384S	53.296051W	895
+Entre Rios do Oeste	Paraná	br	N	3,9	24.703889S	54.242222W	230
+Maripá	Paraná	br	N	5,8	24.417778S	53.830000W	402
+Mercedes	Paraná	br	N	4,6	24.453889S	54.161944W	415
+Nova Santa Rosa	Paraná	br	N	7,1	24.465833S	53.952778W	417
+Pato Bragado	Paraná	br	N	4	24.625833S	54.225000W	563
+Quatro Pontes	Paraná	br	N	3,6	24.575000S	53.976944W	427
+Santa Helena	Paraná	br	N	23,4	24.860019S	54.332832W	258
+São José das Palmeiras	Paraná	br	N	4,1	24.837778S	54.063889W	563
+Terra Roxa	Paraná	br	N	16,3	24.165314S	54.097281W	410
 Manila	National Capital Region	ph	B	10330,1	14.62N	120.97E	11
 Istanbul	Istanbul	tr	R	9631,7	41.01N	28.96E	46
 Seoul	Seoul	kr	B	9551,8	37.56N	126.99E	52
@@ -47,7 +58,7 @@ Rio de Janeiro	Rio de Janeiro	br	R	6211	22.91S	43.20W	7
 Baghdâd	Baghdâd	iq	B	5948,8	33.33N	44.44E	35
 Lahore	Punjab	pk	R	5903,9	31.56N	74.35E	213
 Kolkata	Bangla	in	R	4852,8	22.57N	88.36E	12
-Sankt Peterburg	Sankt-Peterburg	ru	R	4644,9	59.93N	30.32E	13
+Санкт-Петербург	Ленинградская область	ru	R	4644,9	59.93N	30.32E	13
 Toronto	Ontario	ca	R	4558,8	43.65N	79.38W	84.9490280151367
 Bengalûru	Karnataka	in	R	4547,3	12.97N	77.56E	875
 Chennai	Tamil Nadu	in	R	4466,9	13.09N	80.27E	5
@@ -182,7 +193,7 @@ al-Khartûm	al-Khartûm	sd	B	1452,6	15.58N	32.52E	385
 Fushun	Liaoning	cn	N	1449,3	41.87N	123.88E	77
 Taejeon	Taejeon	kr	R	1442,2	36.33N	127.43E	59
 Kuala Lumpur	Kuala Lumpur	my	B	1440,3	3.16N	101.71E	71
-Novosibirsk	Novosibirsk	ru	R	1434,9	55.02N	82.93E	118
+Новосибирск	Новосибирская область	ru	R	1434,9	55.02N	82.93E	118
 Phoenix	Arizona	us	R	1430,9	33.54N	112.07W	363.130218505859
 Kwangju	Kwangju	kr	R	1426	35.16N	126.91E	44
 Belém	Pará	br	R	1421,9	1.44S	48.50W	0
@@ -214,7 +225,7 @@ Douala	Littoral	cm	R	1310,4	4.06N	9.71E	12
 Datong	Shanxi	cn	N	1310,4	40.08N	113.30E	1047
 ŽAmmân	ŽAmmân	jo	B	1308,3	31.95N	35.93E	829
 Anshan	Liaoning	cn	N	1305,7	41.12N	122.95E	24
-Jekaterinburg	Sverdlovsk	ru	R	1300	56.85N	60.60E	252
+Екатеринбург	Свердловская область	ru	R	1300	56.85N	60.60E	252
 Hangzhou	Zhejiang	cn	R	1300	30.25N	120.17E	20
 al-Khartûm Bahrî	al-Khartûm	sd	N	1299,1	15.64N	32.52E	383
 Lusaka	Lusaka	zm	B	1296,1	15.42S	28.29E	1282
@@ -225,7 +236,7 @@ Beograd	Central Serbia	rs	B	1289,7	44.83N	20.50E	67
 Semarang	Jawa Tengah	id	R	1289,5	6.97S	110.42E	6
 Kawasaki	Kanagawa	jp	N	1284,9	35.53N	139.70E	19
 Kampala	Central	ug	B	1280,3	0.32N	32.58E	1242
-Nizhnij Novgorod	Nizhnij Novgorod	ru	R	1268,5	56.32N	44.00E	150
+Нижний Новгород	Нижегородская область	ru	R	1268,5	56.32N	44.00E	150
 Makasar	Sulawesi Selatan	id	R	1268,5	5.14S	119.41E	8
 Stockholm	Stockholm	se	B	1264,8	59.33N	18.07E	30
 Kalyân	Maharashtra	in	N	1264,2	19.25N	73.16E	10
@@ -257,7 +268,7 @@ Mandalay	Mandalay	mm	R	1176,9	21.98N	96.09E	81
 Vârânasî	Uttar Pradesh	in	N	1166,2	25.32N	83.01E	79
 Guiyang	Guizhou	cn	R	1158,6	26.58N	106.72E	1077
 Port-au-Prince	Ouest	ht	B	1156,4	18.54N	72.34W	23
-Samara	Samara	ru	R	1152,8	53.23N	50.17E	103
+Самара	Самарская область	ru	R	1152,8	53.23N	50.17E	103
 Peshâwar	North-West Frontier	pk	R	1152	34.01N	71.54E	348
 Seongnam	Kyeonggi	kr	N	1148,8	37.44N	127.15E	58
 Guarulhos	São Paulo	br	N	1147,1	23.46S	46.49W	737
@@ -272,9 +283,9 @@ Port Harcourt	Rivers	ng	R	1133,4	4.78N	7.00E	3
 Karaj	Tehrân	ir	N	1123,2	35.80N	50.97E	1303
 Farîdâbad	Haryana	in	N	1117,7	28.38N	77.30E	204
 Benin	Edo	ng	R	1113,4	6.34N	5.62E	88
-Rostov	Rostov	ru	R	1112,9	47.23N	39.70E	60
-Omsk	Omsk	ru	R	1110,7	54.98N	73.37E	62
-Kazan	Tatarstan	ru	R	1108,2	55.79N	49.17E	109
+Ростов-на-Дону	Ростовская область	ru	R	1112,9	47.23N	39.70E	60
+Омск	Омская область	ru	R	1110,7	54.98N	73.37E	62
+Казань	Татарстан	ru	R	1108,2	55.79N	49.17E	109
 Glasgow	Scotland	gb	N	1101,4	55.87N	4.27W	30
 København	Københavns Kommune	dk	B	1100,7	55.68N	12.57E	17
 Adelaide	South Australia	au	R	1093,2	34.93S	138.60E	50
@@ -283,7 +294,7 @@ León	Guanajuato	mx	N	1084,4	21.12N	101.69W	1823
 Nanchang	Jiangxi	cn	R	1078,3	28.68N	115.88E	42
 Freetown	Western	sl	B	1070,2	8.49N	13.24W	0
 Hâora	Bangla	in	N	1068,7	22.58N	88.33E	13
-Cheljabinsk	Cheljabinsk	ru	R	1068,7	55.15N	61.44E	221
+Челябинск	Челябинская область	ru	R	1068,7	55.15N	61.44E	221
 Pimpri	Maharashtra	in	N	1066,2	18.62N	73.80E	560
 Urumqi	Xinjiang	cn	R	1063,9	43.80N	87.58E	938
 Allahâbâd	Uttar Pradesh	in	N	1049,2	25.45N	81.84E	101
@@ -292,7 +303,7 @@ Ahvâz	Khûzestân	ir	R	1036,6	31.28N	48.72E	10
 Campinas	São Paulo	br	N	1035,9	22.91S	47.08W	673
 Amritsar	Punjab	in	N	1033,7	31.64N	74.87E	231
 Sendai	Miyagi	jp	R	1032	38.26N	140.89E	39
-Volgograd	Volgograd	ru	R	1028,9	48.71N	44.48E	11
+Волгоград	Волгоградская область	ru	R	1028,9	48.71N	44.48E	11
 Dublin	Dublin	ie	B	1027,9	53.33N	6.25W	13
 Visakhapatnam	Andhra Pradesh	in	N	1027,2	17.73N	83.30E	19
 Ghâziâbâd	Uttar Pradesh	in	N	1026,1	28.66N	77.41E	206
@@ -305,7 +316,7 @@ Fâs	Fès-Boulemane	ma	R	1019,3	34.05N	5.00W	377
 Odesa	Odes'ka	ua	R	1018,8	46.49N	30.73E	46
 Pucheon	Kyeonggi	kr	N	1016,6	37.48N	126.77E	46
 Maiduguri	Borno	ng	R	1016,5	11.85N	13.16E	323
-Ufa	Bashkortostan	ru	R	1012,7	54.81N	56.07E	116
+Уфа	Башкортостан	ru	R	1012,7	54.81N	56.07E	116
 Kitakyûshû	Fukuoka	jp	N	1011	33.88N	130.86E	4
 Mendoza	Mendoza	ar	R	1009,1	32.89S	68.83W	747
 Jabalpur	Madhya Pradesh	in	N	1008	23.17N	79.94E	407
@@ -317,7 +328,7 @@ Ouagadougou	Kadiogo	bf	B	996,5	12.37N	1.53W	300
 Napoli	Campania	it	R	990,7	40.85N	14.27E	6
 Suweon	Kyeonggi	kr	R	985,5	37.26N	127.01E	34
 Brussel	Brussel	be	B	983,9	50.83N	4.33E	23
-Perm	Perm	ru	R	980,2	58.00N	56.23E	133
+Пермь	Пермский край	ru	R	980,2	58.00N	56.23E	133
 Barquisimeto	Lara	ve	R	979,2	10.05N	69.30W	484
 Koyampattur	Tamil Nadu	in	N	977,9	11.01N	76.96E	423
 Madurai	Tamil Nadu	in	N	977,8	9.92N	78.12E	144
@@ -334,7 +345,7 @@ Srînagar	Jammu and Kashmir	in	R	948,1	34.09N	74.79E	1583
 Calgary	Alberta	ca	N	943,4	51.05N	114.06W	1059
 Dubayy	Dubayy	ae	R	940,6	25.27N	55.33E	1
 Qom	Qom	ir	R	935,1	34.65N	50.95E	908
-Krasnojarsk	Krasnojarsk	ru	R	929,4	56.02N	93.06E	153
+Красноярск	Красноярский край	ru	R	929,4	56.02N	93.06E	153
 Xuzhou	Jiangsu	cn	N	926,8	34.27N	117.18E	38
 Cartagena	Bolívar	co	N	925,6	10.40N	75.50W	15
 Sholâpur	Maharashtra	in	N	924,9	17.67N	75.89E	465
@@ -350,7 +361,7 @@ Jodhpur	Rajasthan	in	N	896,7	26.29N	73.02E	253
 Irbîl	Irbîl	iq	R	891,3	36.19N	44.02E	414
 Gwalior	Madhya Pradesh	in	N	876,1	26.23N	78.17E	268
 Vijayawâda	Andhra Pradesh	in	N	874,5	16.52N	80.63E	25
-Saratov	Saratov	ru	R	868,6	51.55N	46.00E	106
+Саратов	Саратовская область	ru	R	868,6	51.55N	46.00E	106
 Naucalpan	México	mx	N	867,9	19.48N	99.23W	2269
 al-Madînah	al-Madînah	sa	R	867,9	24.48N	39.59E	606
 Kunming	Yunnan	cn	R	867,2	25.05N	102.70E	1897
@@ -382,7 +393,7 @@ Aba	Abia	ng	N	820,9	5.10N	7.35E	53
 Ulaanbaatar	Ulaanbaatar	mn	B	819,4	47.93N	106.91E	1305
 Qiqihar	Heilongjiang	cn	N	818,8	47.35N	124.00E	151
 Luoyang	Henan	cn	N	818,3	34.68N	112.47E	147
-Voronezh	Voronezh	ru	R	808,6	51.72N	39.26E	90
+Воронеж	Воронежская область	ru	R	808,6	51.72N	39.26E	90
 Ilorin	Kwara	ng	R	805,8	8.50N	4.53E	322
 Hims	Hims	sy	R	800,9	34.73N	36.72E	513
 Benxi	Liaoning	cn	N	800	41.33N	123.75E	177
@@ -461,7 +472,7 @@ Osasco	São Paulo	br	N	688,7	23.53S	46.78W	731
 Rîga	Rîga	lv	B	687,7	56.97N	24.13E	7
 Bangui	Bangui	cf	B	687,1	4.36N	18.56E	351
 Bhubaneswar	Orissa	in	R	685,8	20.27N	85.84E	49
-Toljatti	Samara	ru	N	685	53.48N	49.51E	52
+Тольятти	Самарская область	ru	N	685	53.48N	49.51E	52
 Libreville	Estuaire	ga	B	684,8	0.39N	9.45E	19
 L'viv	L'vivs'ka	ua	R	684,5	49.84N	24.03E	283
 Santo André	São Paulo	br	N	682,9	23.65S	46.53W	754
@@ -484,7 +495,7 @@ Gorakhpur	Uttar Pradesh	in	N	661,7	26.76N	83.36E	85
 San Luis Potosí	San Luis Potosí	mx	R	659,5	22.16N	100.98W	1866
 Memphis	Tennessee	us	N	653,4	35.11N	90.01W	89.5176086425781
 Quetta	Baluchistan	pk	R	653,3	30.21N	67.02E	1694
-Krasnodar	Krasnodar	ru	R	651,1	45.04N	38.96E	23
+Краснодар	Краснодарский край	ru	R	651,1	45.04N	38.96E	23
 Palermo	Sicilia	it	R	650,9	38.12N	13.36E	27
 Hamilton	Ontario	ca	N	646,1	43.26N	79.85W	80.8473815917969
 Zaragoza	Zaragoza	es	R	646,1	41.65N	0.89W	222
@@ -512,14 +523,14 @@ Kryvyy Rih	Dnipropetrovs'ka	ua	N	624,6	47.90N	33.35E	66
 Chiclayo	Lambayeque	pe	R	620,9	6.76S	79.84W	31
 N'Djaména	Chari-Baguirmi	td	B	617,8	12.11N	15.05E	297
 Islâmâbâd	Federal Capital Area	pk	B	617	33.72N	73.06E	563
-Barnaul	Altaj	ru	R	616	53.35N	83.75E	164
-Izhevsk	Udmurtija	ru	R	612	56.84N	53.19E	95
+Барнаул	Алтайский край	ru	R	616	53.35N	83.75E	164
+Ижевск	Удмуртия	ru	R	612	56.84N	53.19E	95
 Mudanjiang	Heilongjiang	cn	N	611	44.58N	129.60E	239
 Handan	Hebei	cn	N	611	36.58N	114.48E	61
 an-Najaf	an-Najaf	iq	R	609,4	31.99N	44.33E	59
 Surakarta	Jawa Tengah	id	N	606,7	7.57S	110.82E	98
-Uljanovsk	Uljanovsk	ru	R	606,5	54.31N	48.36E	96
-Jaroslavl	Jaroslavl	ru	R	604,6	57.61N	39.85E	91
+Ульяновск	Ульяновская область	ru	R	606,5	54.31N	48.36E	96
+Ярославль	Ярославская область	ru	R	604,6	57.61N	39.85E	91
 Jamshedpur	Jharkhand	in	N	604,2	22.79N	86.20E	171
 Diyarbakir	Diyarbakir	tr	R	604	37.92N	40.23E	671
 Rotterdam	Zuid-Holland	nl	N	603,3	51.93N	4.48E	3
@@ -549,7 +560,7 @@ Boston	Massachusetts	us	R	587,9	42.34N	71.02W	1.33703410625458
 an-Nâsirîyah	Dhî Qâr	iq	R	587	31.04N	46.26E	9
 Bhilai	Chhattisgarh	in	N	586,8	21.21N	81.38E	307
 Liaoyang	Liaoning	cn	N	585,5	41.28N	123.18E	27
-Irkutsk	Irkutsk	ru	R	582,7	52.33N	104.24E	428
+Иркутск	Иркутская область	ru	R	582,7	52.33N	104.24E	428
 Amrâvati	Maharashtra	in	N	582	20.95N	77.76E	346
 Essen	Nordrhein-Westfalen	de	N	581,6	51.47N	7.00E	63
 Anyang	Henan	cn	N	579,6	36.08N	114.35E	72
@@ -560,7 +571,7 @@ Cheongju	Chungcheongbuk	kr	R	576,2	36.64N	127.50E	144
 Hengyang	Hunan	cn	N	575,5	26.97N	112.35E	87
 Morelia	Michoacán	mx	R	574,9	19.72N	101.18W	1889
 Poznań	Wielkopolskie	pl	R	574,1	52.40N	16.90E	92
-Vladivostok	Primorje	ru	R	574,1	43.13N	131.90E	56
+Владивосток	Приморский край	ru	R	574,1	43.13N	131.90E	56
 Nashville	Tennessee	us	R	573,6	36.17N	86.78W	133.904861450195
 Hermosillo	Sonora	mx	R	573,3	29.07N	110.97W	197
 al-Hillah	Bâbil	iq	R	573	32.48N	44.46E	29
@@ -573,7 +584,7 @@ Changzhou	Jiangsu	cn	N	563,4	31.78N	119.97E	5
 Denver	Colorado	us	R	563,3	39.77N	104.87W	1608.83081054688
 Culiacán	Sinaloa	mx	R	563,2	24.80N	107.39W	62
 Blantyre	Blantyre City	mw	R	562,4	15.79S	34.99E	999
-Orenburg	Orenburg	ru	R	562,1	51.78N	55.10E	108
+Оренбург	Оренбургская область	ru	R	562,1	51.78N	55.10E	108
 Bucaramanga	Santander	co	N	561,2	7.13N	73.14W	847
 Pointe Noire	Kouilou	cg	R	561,2	4.77S	11.87E	7
 Pekan Baru	Riau	id	R	561,2	0.56N	101.43E	7
@@ -585,7 +596,7 @@ Warangal	Andhra Pradesh	in	N	560	18.01N	79.58E	254
 Baoding	Hebei	cn	N	559,4	38.87N	115.48E	21
 Dandong	Liaoning	cn	N	558,8	40.13N	124.40E	0
 Funabashi	Chiba	jp	N	558	35.70N	139.99E	5
-Habarovsk	Habarovsk	ru	R	557,8	48.42N	135.12E	56
+Хабаровск	Хабаровский край	ru	R	557,8	48.42N	135.12E	56
 Hachiôji	Tôkyô	jp	N	557,5	35.66N	139.33E	124
 Monrovia	Montserrado	lr	B	557,5	6.31N	10.80W	25
 Abeokuta	Ogun	ng	R	556,4	7.16N	3.35E	92
@@ -609,7 +620,7 @@ Chimalhuacán	México	mx	N	541,3	19.44N	98.96W	2235
 Bhâvnagar	Gujarat	in	N	541,3	21.79N	72.13E	6
 Asunción	Asunción	py	B	539,2	25.30S	57.63W	150
 ŽAdan	ŽAdan	ye	R	537,8	12.79N	45.03E	139
-Novokuzneck	Kemerovo	ru	N	537,7	53.75N	87.11E	204
+Новокузнецк	Кемеровская область	ru	N	537,7	53.75N	87.11E	204
 Onitsha	Anambra	ng	N	536,8	6.16N	6.78E	55
 Kisangani	Haut-Congo	cd	R	536	0.53N	25.19E	398
 Petare	Miranda	ve	N	535,8	10.52N	66.83W	1466
@@ -633,28 +644,28 @@ Torreón	Coahuila	mx	N	521,7	25.55N	103.43W	1126
 Matola	Maputo Provincia	mz	N	520,5	25.97S	32.46E	40
 Xiangtan	Hunan	cn	N	519,2	27.85N	112.90E	29
 Samarinda	Kalimantan Timur	id	R	517,9	0.50S	117.15E	9
-Astrahan	Astrahan	ru	R	517,4	46.37N	48.09E	-22
+Астрахань	Астраханская область	ru	R	517,4	46.37N	48.09E	-22
 Hannover	Niedersachsen	de	N	516,3	52.40N	9.73E	56
 Puente Alto	Metropolitana	cl	N	515,4	33.61S	70.57W	704
 Pontianak	Kalimantan Barat	id	R	515,3	0.02S	109.34E	0
 Asansol	Bangla	in	N	515,2	23.69N	86.98E	111
-Mahackala	Dagestan	ru	R	515	42.98N	47.51E	-1
+Махачкала	Дагестан	ru	R	515	42.98N	47.51E	-1
 Málaga	Málaga	es	R	514,6	36.72N	4.42W	21
 Ajmer	Rajasthan	in	N	514	26.45N	74.64E	477
 Kolhâpur	Maharashtra	in	N	514	16.70N	74.22E	563
 Higashiôsaka	Ôsaka	jp	N	513,8	34.67N	135.59E	3
 San Salvador	San Salvador	sv	B	513,4	13.69N	89.19W	652
 Lilongwe	Lilongwe City	mw	B	512,8	13.97S	33.80E	1026
-Tjumen	Tjumen	ru	R	511,7	57.17N	65.50E	74
+Тюмень	Тюменьская область	ru	R	511,7	57.17N	65.50E	74
 Denpasar	Bali	id	R	511	8.65S	115.22E	32
 San Nicolás de los Garza	Nuevo León	mx	N	510,5	25.75N	100.30W	505
 Zhuzhou	Hunan	cn	N	510,2	27.83N	113.15E	50
 Tuanmun	Xianggang	cn	N	510	22.41N	113.98E	12
 az-Zarqâ'	az-Zarqâ'	jo	R	509,8	32.07N	36.10E	592
-Rjazan	Rjazan	ru	R	509,5	54.60N	39.70E	140
+Рязань	Рязанская область	ru	R	509,5	54.60N	39.70E	140
 Göteborg	Västra Götaland	se	R	509,5	57.72N	12.01E	19
 Pingdingshan	Henan	cn	N	507,4	33.73N	113.30E	87
-Naberezhnyje Chelny	Tatarstan	ru	N	507	55.69N	52.32E	58
+Набережные Челны	Татарстан	ru	N	507	55.69N	52.32E	58
 Duisburg	Nordrhein-Westfalen	de	N	506,7	51.43N	6.75E	32
 Ningbo	Zhejiang	cn	N	506,4	29.88N	121.55E	1
 Santiago	Santiago	do	R	505,6	19.48N	70.69W	185
@@ -667,7 +678,7 @@ Niigata	Niigata	jp	R	504	37.92N	139.04E	2
 Mykolayiv	Mykolayivs'ka	ua	R	503,6	46.96N	32.01E	22
 Maracay	Aragua	ve	R	503,4	10.33N	67.47W	882
 Wenzhou	Zhejiang	cn	N	502,8	28.02N	120.65E	10
-Penza	Penza	ru	R	501,7	53.20N	45.00E	153
+Пенза	Пензенская область	ru	R	501,7	53.20N	45.00E	153
 Ulhâsnagar	Maharashtra	in	N	501,1	19.23N	73.15E	13
 Aracaju	Sergipe	br	R	499,4	10.91S	37.07W	15
 Orûmîyeh	Azarbayjân-e Bakhtari	ir	R	499,1	37.53N	45.00E	1520
@@ -676,11 +687,11 @@ Shilîguri	Bangla	in	N	498,2	26.73N	88.42E	123
 Homjel'	Homjel'	by	R	497,2	52.43N	30.99E	135
 Nürnberg	Bayern	de	N	495,6	49.45N	11.05E	307
 Leipzig	Sachsen	de	N	494,7	51.35N	12.40E	109
-Lipeck	Lipeck	ru	R	493,3	52.62N	39.62E	125
+Липецк	Липецкая область	ru	R	493,3	52.62N	39.62E	125
 Yogyakarta	Yogyakarta	id	R	492,8	7.78S	110.37E	122
 Yichang	Hubei	cn	N	489,7	30.70N	111.28E	74
 Toluca	México	mx	R	489	19.29N	99.67W	2679
-Tomsk	Tomsk	ru	R	488,2	56.48N	84.98E	110
+Томск	Томская область	ru	R	488,2	56.48N	84.98E	110
 Benoni	Gauteng	za	N	487,7	26.15S	28.33E	1661
 Beira	Sofala	mz	R	487,1	19.83S	34.84E	7
 Siâlkot	Punjab	pk	N	486,9	32.52N	74.55E	251
@@ -696,7 +707,7 @@ Cancún	Quintana Roo	mx	N	478,4	21.17N	86.83W	6
 Tlaquepaque	Jalisco	mx	N	477,1	20.64N	103.32W	1566
 Mariupol'	Donets'ka	ua	N	476,6	47.11N	37.59E	4
 Niterói	Rio de Janeiro	br	N	476	22.90S	43.13W	12
-Kemerovo	Kemerovo	ru	R	475,6	55.42N	86.08E	173
+Кемерово	Кемеровская область	ru	R	475,6	55.42N	86.08E	173
 Dehra Dûn	Uttaranchal	in	R	474,4	30.34N	78.05E	702
 Jâmnagar	Gujarat	in	N	474,3	22.47N	70.07E	21
 Okene	Kogi	ng	N	474	7.56N	6.23E	363
@@ -762,14 +773,14 @@ Gold Coast	Queensland	au	N	451,4	28.07S	153.44E	7
 Antwerpen	Antwerpen	be	R	451,2	51.22N	4.42E	9
 ash-Shâriqah	ash-Shâriqah	ae	R	449,9	25.37N	55.41E	5
 Utsunomiya	Tochigi	jp	R	449,3	36.56N	139.89E	124
-Tula	Tula	ru	R	448,6	54.21N	37.60E	155
+Тула	Тульская область	ru	R	448,6	54.21N	37.60E	155
 Mesa	Arizona	us	N	448,3	33.42N	111.74W	399.790924072266
 TaŽizz	TaŽizz	ye	R	448,2	13.60N	44.04E	1255
 Kansas City	Missouri	us	N	446,5	39.12N	94.55W	227.181549072266
 Ananindeua	Pará	br	N	446,5	1.38S	48.38W	29
 Panamá	Panamá	pa	B	445,8	8.97N	79.53W	0
 Luhans'k	Luhans'ka	ua	R	445,8	48.57N	39.31E	100
-Kirov	Kirov	ru	R	444,5	58.60N	49.65E	164
+Киров	Кировская область	ru	R	444,5	58.60N	49.65E	164
 Virginia Beach	Virginia	us	N	444,2	36.74N	76.04W	2.71300005912781
 Lyon	Rhône	fr	R	443,6	45.76N	4.83E	166
 Durango	Durango	mx	R	443,6	24.03N	104.67W	1893
@@ -784,7 +795,7 @@ San Juan	San Juan	pr	B	437,9	18.44N	66.13W	2
 Oshogbo	Osun	ng	R	437,8	7.83N	4.58E	353
 Panjin	Liaoning	cn	N	436,4	41.18N	122.05E	2
 Tirunelveli	Tamil Nadu	in	N	435,7	8.73N	77.69E	45
-Kaliningrad	Kaliningrad	ru	R	435,2	54.72N	20.51E	18
+Калининград	Калининградская область	ru	R	435,2	54.72N	20.51E	18
 Kurashiki	Okayama	jp	N	434,1	34.61N	133.77E	3
 Mâlegaon	Maharashtra	in	N	433,5	20.56N	74.52E	434
 Atlanta	Georgia	us	R	433	33.76N	84.42W	299.546264648438
@@ -797,7 +808,7 @@ Bratislava	Bratislavský	sk	B	428,8	48.16N	17.13E	143
 Rasht	Gîlân	ir	R	428,4	37.30N	49.63E	-8
 Jambi	Jambi	id	R	427,7	1.59S	103.61E	12
 Urfa	Sanliurfa	tr	R	426,6	37.17N	38.79E	553
-Cheboksary	Chuvashija	ru	R	425,5	56.13N	47.24E	83
+Чебоксары	Чувашия	ru	R	425,5	56.13N	47.24E	83
 Akola	Maharashtra	in	N	423,8	20.71N	77.00E	291
 Chitungwiza	Harare	zw	N	423,8	18.00S	31.10E	1452
 East London	Eastern Cape	za	N	423,5	32.97S	27.87E	152
@@ -826,12 +837,12 @@ Murcia	Murcia	es	R	412,9	37.98N	1.13W	55
 Udaipur	Rajasthan	in	N	412,5	24.58N	73.69E	585
 Maheshtala	Bangla	in	N	412,3	22.51N	88.23E	9
 Donghe	Nei Monggol	cn	N	411,9	40.60N	110.00E	1067
-Brjansk	Brjansk	ru	R	411,5	53.26N	34.42E	151
-Magnitogorsk	Cheljabinsk	ru	N	411,1	53.42N	58.97E	392
+Брянск	Брянская область	ru	R	411,5	53.26N	34.42E	151
+Магнитогорск	Челябинская область	ru	N	411,1	53.42N	58.97E	392
 Tanggu	Tianjin	cn	N	411,1	39.00N	117.67E	0
 Hamadân	Hamadân	ir	R	410,9	34.77N	48.58E	1900
 Asyût	Asyût	eg	R	410,5	27.19N	31.18E	61
-Ivanovo	Ivanovo	ru	R	409,9	57.01N	40.99E	127
+Иваново	Ивановская область	ru	R	409,9	57.01N	40.99E	127
 Hsinchu	Hsinchu Shih	tw	R	409,5	24.82N	120.98E	16
 Pohang	Kyeongsangbuk	kr	R	409,3	36.03N	129.37E	3
 Garoua	Nord	cm	R	409	9.30N	13.39E	198
@@ -875,7 +886,7 @@ Diadema	São Paulo	br	N	390,8	23.69S	46.61W	779
 Jâlgaon	Maharashtra	in	N	390,5	21.01N	75.56E	227
 Zhangjiakou	Hebei	cn	N	389,9	40.83N	114.93E	1058
 Manchester	England	gb	N	389,5	53.48N	2.25W	41
-Kursk	Kursk	ru	R	389,3	51.74N	36.19E	234
+Курск	Курская область	ru	R	389,3	51.74N	36.19E	234
 Machida	Tôkyô	jp	N	389,2	35.56N	139.43E	94
 Sineuiju	Pyeonganbukto	kp	R	389,2	40.10N	124.41E	10
 Miami	Florida	us	N	388,4	25.78N	80.21W	1.62900018692017
@@ -887,7 +898,7 @@ Mauá	São Paulo	br	N	387,5	23.66S	46.46W	789
 Akure	Ondo	ng	R	387,4	7.25N	5.20E	347
 Honolulu	Hawaii	us	R	387,4	21.32N	157.80W	94.2328414916992
 Haikou	Hainan	cn	R	387,4	20.05N	110.32E	10
-Nizhnij Tagil	Sverdlovsk	ru	N	387,1	57.93N	60.02E	233
+Нижний Тагил	Свердловская область	ru	N	387,1	57.93N	60.02E	233
 Ciudad Bolívar	Bolívar	ve	R	386,9	8.10N	63.60W	108
 Davanagere	Karnataka	in	N	385,4	14.46N	75.92E	606
 Florianópolis	Santa Catarina	br	R	384,6	27.60S	48.54W	166
@@ -902,7 +913,7 @@ Wakayama	Wakayama	jp	R	381,5	34.22N	135.17E	8
 Soyapango	San Salvador	sv	N	381	13.70N	89.16W	630
 Makiyivka	Donets'ka	ua	N	381	48.04N	37.98E	170
 Fukuyama	Hiroshima	jp	N	380,8	34.50N	133.37E	9
-Tver	Tver	ru	R	380,4	56.86N	35.91E	134
+Тверь	Тверская область	ru	R	380,4	56.86N	35.91E	134
 Kaunas	Kauno	lt	R	380,1	54.90N	23.91E	39
 Bello	Antioquia	co	N	379,9	6.33N	75.57W	1511
 al-Qanitrah	Gharb-Chrarda-Béni Hssen	ma	R	379,3	34.27N	6.58W	8
@@ -941,7 +952,7 @@ Huancayo	Junín	pe	R	365,8	12.07S	75.21W	3248
 Mahiljow	Mahiljow	by	R	365,4	53.90N	30.33E	160
 Arlington	Texas	us	N	365	32.69N	97.13W	208.228118896484
 Carapicuíba	São Paulo	br	N	364,3	23.52S	46.84W	745
-Stavropol	Stavropol	ru	R	364	45.05N	41.97E	519
+Ставрополь	Ставропольский край	ru	R	364	45.05N	41.97E	519
 Nârâyanganj	Nârâyanganj	bd	R	363,6	23.62N	90.50E	12
 Wuppertal	Nordrhein-Westfalen	de	N	362,8	51.26N	7.18E	188
 Andijon	Andijon	uz	R	362,6	40.79N	72.34E	489
@@ -987,7 +998,7 @@ Kassalâ	Kassalâ	sd	R	348,6	15.46N	36.39E	508
 Ndola	Copperbelt	zm	R	348,3	12.97S	28.64E	1292
 Boksburg	Gauteng	za	N	348,1	26.27S	28.23E	1575
 Campina Grande	Paraíba	br	N	347,7	7.23S	35.88W	516
-Ulan-Ude	Burjatija	ru	R	347,1	51.83N	107.60E	535
+Улан-Удэ	Бурятия	ru	R	347,1	51.83N	107.60E	535
 London	Ontario	ca	N	347	42.97N	81.24W	245.773452758789
 San José	San José	cr	B	346,8	9.93N	84.08W	1164
 Ciputat	Banten	id	N	346,7	6.23S	106.68E	22
@@ -1002,7 +1013,7 @@ Las Palmas	Las Palmas	es	R	344,4	28.10N	15.43W	52
 Jinxi	Liaoning	cn	N	344,3	40.75N	120.83E	15
 Piracicaba	São Paulo	br	N	343,9	22.71S	47.64W	527
 Mazatlán	Sinaloa	mx	N	343,8	23.22N	106.42W	10
-Arhangelsk	Arhangelsk	ru	R	343,5	64.54N	40.54E	0	
+Архангельск	Архангельская область	ru	R	343,5	64.54N	40.54E	0	
 Buraydah	Qasîm	sa	R	342,4	26.37N	43.97E	623
 Cusco	Cusco	pe	R	342,1	13.52S	71.99W	3480
 Neiva	Huila	co	N	341,8	2.94N	75.27W	518
@@ -1031,7 +1042,7 @@ Thrissûr	Kerala	in	N	336,3	10.52N	76.21E	18
 Irapuato	Guanajuato	mx	N	335,9	20.68N	101.36W	1723
 Nuevo Laredo	Tamaulipas	mx	N	335,8	27.48N	99.51W	124.971954345703
 Bellary	Karnataka	in	N	335,8	15.14N	76.91E	457
-Belgorod	Belgorod	ru	R	335,8	50.61N	36.58E	170
+Белгород	Белгородская область	ru	R	335,8	50.61N	36.58E	170
 Muzaffarnagar	Uttar Pradesh	in	N	335,3	29.48N	77.69E	247
 Bauru	São Paulo	br	N	335,2	22.33S	49.08W	529
 Kashiwa	Chiba	jp	N	335,1	35.87N	139.97E	10
@@ -1054,11 +1065,11 @@ Jingdezhen	Jiangxi	cn	N	329,5	29.27N	117.18E	33
 Taipo	Xianggang	cn	N	329	22.45N	114.16E	14
 Tampa	Florida	us	N	328,7	27.96N	82.48W	8.31035423278809
 ad-Dawhah	ad-Dawhah	qa	R	328,5	25.30N	51.51E	19
-Kaluga	Kaluga	ru	R	328,5	54.54N	36.29E	195
-Kurgan	Kurgan	ru	R	328,2	55.44N	65.32E	79
+Калуга	Калужская область	ru	R	328,5	54.54N	36.29E	195
+Курган	Курганская область	ru	R	328,2	55.44N	65.32E	79
 São Vicente	São Paulo	br	N	327,7	23.96S	46.39W	9
 Simkent	Ontüstik Kazakstan	kz	R	327	42.32N	69.59E	526
-Volzhskij	Volgograd	ru	N	327	48.82N	44.74E	17
+Волжский	Волгоградская область	ru	N	327	48.82N	44.74E	17
 Hulan Ergi	Heilongjiang	cn	N	327	47.21N	123.61E	155
 Canoas	Rio Grande do Sul	br	N	326,9	29.92S	51.18W	24
 Holguín	Holguín	cu	R	326,6	20.89N	76.25W	142
@@ -1072,7 +1083,7 @@ Pittsburgh	Pennsylvania	us	N	325,2	40.44N	79.98W	270.076232910156
 Jundiaí	São Paulo	br	N	324,7	23.20S	46.88W	720
 Komîllâ	Komîllâ	bd	R	324,3	23.46N	91.17E	17
 Zhongshan	Guangdong	cn	N	324,1	22.53N	113.35E	9
-Vladikavkaz	Alanija	ru	R	323,9	43.03N	44.67E	687
+Владикавказ	Алания	ru	R	323,9	43.03N	44.67E	687
 Raleigh	North Carolina	us	R	323,8	35.82N	78.66W	83.0435638427734
 Bielefeld	Nordrhein-Westfalen	de	N	323,7	52.03N	8.53E	123
 Luzhou	Sichuan	cn	N	323,7	28.88N	105.38E	282
@@ -1080,7 +1091,7 @@ Muzaffarpur	Bihar	in	N	323,6	26.13N	85.38E	53
 Titwân	Tangier-Tétouan	ma	N	323,5	35.58N	5.37W	134
 Maturín	Monagas	ve	R	323,3	9.75N	63.17W	68
 Seremban	Negeri Sembilan	my	R	323	2.71N	101.95E	62
-Orjol	Orjol	ru	R	322,6	52.97N	36.07E	145
+Орёл	Орловская область	ru	R	322,6	52.97N	36.07E	145
 Montes Claros	Minas Gerais	br	N	321,8	16.72S	43.86W	621
 Vitória	Espírito Santo	br	R	321,2	20.31S	40.31W	4
 Kuantan	Pahang	my	R	321,2	3.82N	103.34E	7
@@ -1104,12 +1115,12 @@ Eslâmshahr	Tehrân	ir	N	316,8	35.54N	51.20E	1050
 Mathura	Uttar Pradesh	in	N	316,6	27.50N	77.68E	190
 Leicester	England	gb	N	316,5	52.64N	1.13W	60
 al-Qadârif	al-Qadârif	sd	R	316,4	14.04N	35.38E	596
-Chita	Chita	ru	R	316,1	52.05N	113.46E	646
+Чита	Читинская область	ru	R	316,1	52.05N	113.46E	646
 Anápolis	Goiás	br	N	316	16.32S	48.96W	1032
 Koshigaya	Saitama	jp	N	315,7	35.89N	139.79E	7
 Shâhjahânpur	Uttar Pradesh	in	N	315,6	27.88N	79.90E	152
 Hrodna	Hrodna	by	R	315,5	53.67N	23.83E	107
-Sochi	Krasnodar	ru	N	315,4	43.58N	39.74E	85
+Сочи	Краснодарский край	ru	N	315,4	43.58N	39.74E	85
 Chandrapur	Maharashtra	in	N	315,3	19.96N	79.30E	193
 Lârkâna	Sind	pk	N	315,2	27.56N	68.21E	55
 San Miguelito	Panamá	pa	N	314,8	9.03N	79.50W	43
@@ -1127,7 +1138,7 @@ Villavicencio	Meta	co	N	312,4	4.15N	73.64W	459
 Ni Dilli	Delhi	in	C	312,3	28.60N	77.22E	216
 al-Fayyûm	al-Fayyûm	eg	R	311,9	29.31N	30.84E	32
 BaŽqûbah	Diyalâ	iq	R	311,8	33.75N	44.64E	52
-Murmansk	Murmansk	ru	R	311,8	68.96N	33.08E	0	
+Мурманск	Мурманская область	ru	R	311,8	68.96N	33.08E	0	
 Porto Velho	Rondônia	br	R	311,6	8.76S	63.91W	88
 Bari	Puglia	it	R	311,6	41.12N	16.87E	13
 Noida	Uttar Pradesh	in	N	311,4	28.58N	77.33E	207
@@ -1169,7 +1180,7 @@ Bissau	Bissau	gw	B	305,7	11.87N	15.60W	6
 Sandakan	Sabah	my	N	305,7	5.85N	118.11E	37
 Catania	Sicilia	it	N	305,6	37.50N	15.08E	33
 Kitwe	Copperbelt	zm	N	305,3	12.81S	28.22E	1223
-Smolensk	Smolensk	ru	R	305,1	54.79N	32.05E	182
+Смоленск	Смоленская область	ru	R	305,1	54.79N	32.05E	182
 Posadas	Misiones	ar	R	305	27.40S	55.91W	125
 Denizli	Denizli	tr	R	304,8	37.78N	29.08E	402
 Soacha	Cundinamarca	co	N	304,6	4.58N	74.22W	2564
@@ -1179,7 +1190,7 @@ al-Ismâîlîyah	al-Ismâîlîyah	eg	R	304,1	30.59N	32.26E	12
 Nizâmâbâd	Andhra Pradesh	in	N	304	18.68N	78.10E	389
 Rohtak	Haryana	in	N	303,8	28.90N	76.58E	229
 Alacant	Alacant	es	R	303,6	38.35N	0.48W	82
-Nalchik	Kabardino-Balkarija	ru	R	303,4	43.49N	43.61E	484
+Нальчик	Кабардино-Балкария	ru	R	303,4	43.49N	43.61E	484
 Kherson	Khersons'ka	ua	R	303,4	46.65N	32.60E	49
 Sariweon	Hwanghaebukto	kp	R	303,4	38.51N	125.76E	23
 Zanjân	Zanjân	ir	R	303,3	36.67N	48.50E	1661
@@ -1189,9 +1200,9 @@ Dongying	Shandong	cn	N	302,1	37.50N	118.52E	4
 Guarujá	São Paulo	br	N	301,9	24.00S	46.27W	124
 al-Mubarraz	ash-Sharqîyah	sa	N	301,7	25.43N	49.57E	149
 Okâra	Punjab	pk	N	301,2	30.81N	73.45E	183
-Cherepovec	Vologda	ru	N	301	59.14N	37.91E	130
+Череповец	Вологодская область	ru	N	301	59.14N	37.91E	130
 Ribeirão das Neves	Minas Gerais	br	N	300,2	19.76S	44.08W	796
-Vladimir	Vladimir	ru	R	300,1	56.15N	40.41E	133
+Владимир	Владимирская область	ru	R	300,1	56.15N	40.41E	133
 Khamîs Mushayt	ŽAsîr	sa	N	300	18.31N	42.73E	2001
 Taraz	Taraz	kz	R	299,8	42.90N	71.37E	624
 al-Hufûf	ash-Sharqîyah	sa	N	299,6	25.35N	49.58E	156
@@ -1210,7 +1221,7 @@ Akashi	Hyôgo	jp	N	298,1	34.66N	134.98E	8
 Ôtsu	Shiga	jp	R	297,9	35.01N	135.87E	83
 Celaya	Guanajuato	mx	N	297,8	20.52N	100.82W	1758
 Maroua	Nord Extrème	cm	R	297,6	10.58N	14.33E	397
-Surgut	Hanty-Mansija	ru	N	297,1	61.25N	73.39E	0	
+Сургутt	Ханты-Мансийский АО	ru	N	297,1	61.25N	73.39E	0	
 Bhîlwâra	Rajasthan	in	N	296,8	25.35N	74.63E	425
 Victoria	British Columbia	ca	R	296,7	48.43N	123.37W	14
 Zunyi	Guizhou	cn	N	296,7	27.70N	106.92E	871
@@ -1222,7 +1233,7 @@ Galati	Galati	ro	N	295,6	45.44N	28.04E	58
 Fîrozâbâd	Uttar Pradesh	in	N	295,4	27.15N	78.39E	168
 Wad Madanî	al-Jazîrah	sd	R	295,4	14.40N	33.51E	412
 Kasugai	Aichi	jp	N	294,9	35.24N	136.98E	21
-Saransk	Mordovija	ru	R	294,8	54.18N	45.16E	138
+Саранск	Мордовия	ru	R	294,8	54.18N	45.16E	138
 Elazig	Elazig	tr	R	294,8	38.68N	39.23E	1088
 Yokkaichi	Mie	jp	N	294,5	34.97N	136.64E	1
 Brèst	Brèst	by	R	294,4	52.12N	23.68E	141
@@ -1263,7 +1274,7 @@ Karnûl	Andhra Pradesh	in	N	283,7	15.83N	78.03E	290
 Sumy	Sums'ka	ua	R	283,5	50.93N	34.79E	145
 Quanwan	Xianggang	cn	N	283,5	22.37N	114.11E	35
 Khefa	Khefa	il	R	283,4	32.82N	34.99E	25
-Vologda	Vologda	ru	R	283,2	59.23N	39.90E	118
+Вологда	Вологодская область	ru	R	283,2	59.23N	39.90E	118
 Kuala Terengganu	Terengganu	my	R	283,2	5.33N	103.14E	14
 Pekalongan	Jawa Tengah	id	N	283,1	6.88S	109.66E	7
 Karlsruhe	Baden-Württemberg	de	N	283	49.00N	8.40E	117
@@ -1275,7 +1286,7 @@ Foz do Iguaçu	Paraná	br	N	282,5	25.55S	54.58W	170
 Öskemen	Sigis Kazakstan	kz	R	282,4	49.97N	82.61E	289
 Blumenau	Santa Catarina	br	N	282,4	26.92S	49.09W	21
 Petrópolis	Rio de Janeiro	br	N	282,4	22.51S	43.20W	852
-Taganrog	Rostov	ru	N	282	47.23N	38.90E	21
+Таганрог	Ростовская область	ru	N	282	47.23N	38.90E	21
 Kasûr	Punjab	pk	N	281,8	31.12N	74.45E	215
 Chinju	Kyeongsangnam	kr	N	281,8	35.19N	128.08E	37
 Newark	New Jersey	us	N	281,7	40.72N	74.17W	3.56300020217896
@@ -1295,7 +1306,7 @@ Guantánamo	Guantánamo	cu	R	279,4	20.15N	75.22W	52
 Dasarahalli	Karnataka	in	N	279,3	13.01N	77.49E	887
 Tegucigalpa	Francisco Morazán	hn	B	279	14.09N	87.22W	994
 Ichinomiya	Aichi	jp	N	278,9	35.30N	136.80E	12
-Tambov	Tambov	ru	R	278,7	52.72N	41.42E	141
+Тамбов	Тамбовская область	ru	R	278,7	52.72N	41.42E	141
 Anchorage	Alaska	us	N	278,6	61.18N	149.19W	206.081832885742
 Sivas	Sivas	tr	R	278,5	39.75N	37.02E	1282
 Valparaíso	Valparaíso	cl	R	278	33.04S	71.64W	107
@@ -1342,11 +1353,11 @@ Nanyang	Henan	cn	N	271	33.00N	112.53E	144
 Safâqis	Safâqis	tn	R	271	34.75N	10.72E	15
 Zhytomyr	Zhytomyrs'ka	ua	R	270,8	50.26N	28.66E	221
 Münster	Nordrhein-Westfalen	de	N	270,2	51.96N	7.62E	59
-Komsomolsk-na-Amure	Habarovsk	ru	N	270,1	50.56N	137.00E	35
+Комсомольск-на-Амуре	Хабаровский край	ru	N	270,1	50.56N	137.00E	35
 Barîsâl	Barîsâl	bd	R	269,9	22.70N	90.37E	12
 Nottingham	England	gb	N	269,4	52.97N	1.18W	33
 Itagüí	Antioquia	co	N	269,3	6.17N	75.62W	1595
-Kostroma	Kostroma	ru	R	269,1	57.77N	40.94E	110
+Кострома	Костромская область	ru	R	269,1	57.77N	40.94E	110
 Vigo	Pontevedra	es	N	268,3	42.22N	8.71W	41
 Suihua	Heilongjiang	cn	N	267,9	46.63N	126.98E	181
 Pyeongtaek	Kyeonggi	kr	N	267,8	36.98N	127.10E	10
@@ -1375,7 +1386,7 @@ Bengkulu	Bengkulu	id	R	264,8	3.80S	102.25E	0
 Stoke-on-Trent	England	gb	N	264,5	53.01N	2.19W	115
 Cheju	Cheju	kr	R	264,5	33.51N	126.52E	15
 Heze	Shandong	cn	N	264,4	35.23N	115.45E	55
-Sterlitamak	Bashkortostan	ru	N	263,6	53.64N	55.95E	155
+Стерлитамак	Башкортостан	ru	N	263,6	53.64N	55.95E	155
 Tumkûr	Karnataka	in	N	263,4	13.34N	77.10E	820
 Mönchengladbach	Nordrhein-Westfalen	de	N	263,3	51.20N	6.42E	79
 Yingcheng	Hubei	cn	N	263,2	30.94N	113.57E	31
@@ -1396,7 +1407,7 @@ Bafoussam	Ouest	cm	R	260,6	5.49N	10.41E	1370
 Makurdi	Benue	ng	R	259,4	7.73N	8.53E	111
 Uberaba	Minas Gerais	br	N	259,2	19.76S	47.94W	797
 Purwokerto	Jawa Tengah	id	N	259,2	7.43S	109.24E	78
-Joshkar-Ola	Marij El	ru	R	258,7	56.64N	47.87E	100
+Йошкар-Ола	Марий Эл	ru	R	258,7	56.64N	47.87E	100
 Ljubljana	Osrednjeslovenska	si	B	258,7	46.06N	14.51E	299
 Mianyang	Sichuan	cn	N	258,7	31.47N	104.77E	459
 Changde	Hunan	cn	N	257,9	29.03N	111.68E	27
@@ -1427,7 +1438,7 @@ Sincelejo	Sucre	co	N	252,7	9.29N	75.38W	183
 Ado	Ekiti	ng	R	252,7	7.67N	5.27E	376
 Ensenada	Baja California	mx	N	252,7	31.87N	116.62W	6
 Xuchang	Henan	cn	N	252,6	34.02N	113.82E	75
-Petrozavodsk	Karelija	ru	R	252,5	61.79N	34.34E	0	
+Петрозаводск	Карелия	ru	R	252,5	61.79N	34.34E	0	
 Pematang Siantar	Sumatera Utara	id	N	252,1	2.96N	99.06E	396
 Governador Valadares	Minas Gerais	br	N	252	18.87S	41.97W	174
 Huaiyin	Jiangsu	cn	N	252	33.58N	119.03E	11
@@ -1447,14 +1458,14 @@ Louisville	Kentucky	us	N	250	38.22N	85.74W	145.389602661133
 Cascavel	Paraná	br	N	250	24.96S	53.46W	770
 Chemnitz	Sachsen	de	N	249,9	50.83N	12.92E	302
 Satif	Satif	dz	R	249,7	36.19N	5.41E	1085
-Dzerzhinsk	Nizhnij Novgorod	ru	N	249,7	56.27N	43.40E	104
+Дзержинск	Нижегородская область	ru	N	249,7	56.27N	43.40E	104
 Râmagundam	Andhra Pradesh	in	N	249,5	18.80N	79.45E	147
 Jâlna	Maharashtra	in	N	249,5	19.85N	75.88E	502
 Baicheng	Jilin	cn	N	249,3	45.62N	122.82E	153
 Aachen	Nordrhein-Westfalen	de	N	249,2	50.77N	6.09E	181
 Częstochowa	Śląskie	pl	N	249,2	50.81N	19.13E	247
 Plymouth	England	gb	N	248,7	50.38N	4.16W	54
-Novorossijsk	Krasnodar	ru	N	248,6	44.72N	37.77E	14
+Новороссийск	Краснодарский край	ru	N	248,6	44.72N	37.77E	14
 Jixi	Heilongjiang	cn	N	248,6	45.30N	130.97E	202
 Ede	Osun	ng	N	248,4	7.73N	4.52E	355
 Boa Vista	Roraima	br	R	248,2	2.83N	60.66W	78
@@ -1470,7 +1481,7 @@ Neyagawa	Ôsaka	jp	N	246,8	34.79N	135.64E	39
 Santa Maria	Rio Grande do Sul	br	N	246,5	29.69S	53.83W	96
 Malmö	Skåne	se	R	246,5	55.61N	13.02E	3
 Sâgar	Madhya Pradesh	in	N	246,1	23.85N	78.75E	522
-Nizhnevartovsk	Hanty-Mansija	ru	N	246,1	60.94N	76.54E	0	
+Нижневартовск	Ханты-Мансийский АО	ru	N	246,1	60.94N	76.54E	0	
 Norfolk	Virginia	us	N	246,1	36.92N	76.24W	3.74600005149841
 Welkom	Free State	za	N	246,1	27.97S	26.73E	1372
 Floridablanca	Santander	co	N	245,9	7.07N	73.10W	864
@@ -1483,7 +1494,7 @@ Bârâsat	Bangla	in	N	245,3	22.72N	88.48E	12
 Palmira	Valle del Cauca	co	N	245,2	3.55N	76.30W	1008
 Oshawa	Ontario	ca	N	245,1	43.89N	78.86W	103.822998046875
 Durg	Chhattisgarh	in	N	244,9	21.20N	81.28E	291
-Bratsk	Irkutsk	ru	N	244,9	56.30N	101.71E	397
+Братск	Иркутская область	ru	N	244,9	56.30N	101.71E	397
 Semey	Sigis Kazakstan	kz	N	244,8	50.43N	80.27E	209
 Avadi	Tamil Nadu	in	N	244,6	13.12N	80.11E	29
 Santa Catarina	Nuevo León	mx	N	244,5	25.67N	100.47W	737
@@ -1520,7 +1531,7 @@ Qutubullapur	Andhra Pradesh	in	N	239,2	17.43N	78.47E	512
 Krefeld	Nordrhein-Westfalen	de	N	239	51.33N	6.55E	44
 Satna	Madhya Pradesh	in	N	238,9	24.58N	80.83E	322
 Buenaventura	Valle del Cauca	co	N	238,8	3.89N	77.04W	0
-Groznyj	Chechenija	ru	R	238,8	43.31N	45.68E	129
+Грозный	Чечня	ru	R	238,8	43.31N	45.68E	129
 Ranghulu	Heilongjiang	cn	N	238,7	46.65N	124.86E	152
 Kurume	Fukuoka	jp	N	238,6	33.31N	130.51E	13
 Balikesir	Balikesir	tr	R	238,3	39.65N	27.88E	145
@@ -1531,7 +1542,7 @@ Lincoln	Nebraska	us	R	237,9	40.82N	96.69W	352.781066894531
 Changhwa	Changhwa	tw	R	237,9	24.08N	120.52E	11
 Trabzon	Trabzon	tr	R	237,8	41.00N	39.71E	114
 Los Reyes	México	mx	N	237,7	19.36N	98.98W	2240
-Orsk	Orenburg	ru	N	237,7	51.21N	58.63E	217
+Орск	Оренбургская область	ru	N	237,7	51.21N	58.63E	217
 Kirovohrad	Kirovohrads'ka	ua	R	237,5	48.51N	32.27E	128
 Granada	Granada	es	R	237,5	37.17N	3.59W	704
 L'Hospitalet de Llobregat	Barcelona	es	N	237,4	41.35N	2.10E	13
@@ -1563,7 +1574,7 @@ Udon Thani	Udon Thani	th	R	234,1	17.41N	102.79E	179
 Fuchû	Tôkyô	jp	N	234	35.67N	139.48E	75
 Pondicherry	Pondicherry	in	R	233,9	11.94N	79.83E	9
 Kikwit	Bandundu	cd	N	233,7	5.03S	18.81E	421
-Angarsk	Irkutsk	ru	N	233,5	52.57N	103.91E	428
+Ангарск	Иркутская область	ru	N	233,5	52.57N	103.91E	428
 Damaturu	Yobe	ng	R	233,3	11.75N	11.96E	370
 Hebi	Henan	cn	N	233,2	35.95N	114.22E	202
 North Dum Dum	Bangla	in	N	233,1	22.64N	88.41E	-2
@@ -1589,7 +1600,7 @@ Osh	Osh	kg	R	230,1	40.54N	72.79E	970
 Ploiesti	Prahova	ro	N	230,1	44.94N	26.03E	153
 Tasikmalaya	Jawa Barat	id	N	230,1	7.32S	108.21E	359
 Kajang-Sungai Chua	Selangor	my	N	230,1	2.98N	101.77E	30
-Zeljenograd	Moskva	ru	N	230	55.94N	37.29E	192
+Зеленоград	Московская область	ru	N	230	55.94N	37.29E	192
 Aktöbe	Aktöbe	kz	R	229,9	50.28N	57.17E	212
 Georgetown	Demerara-Mahaica	gy	C	229,6	6.79N	58.16W	4
 Tongchuan	Shaanxi	cn	N	229,4	35.08N	109.03E	938
@@ -1616,7 +1627,7 @@ Ipatinga	Minas Gerais	br	N	227,5	19.48S	42.52W	226
 Gent	Oost-Vlaanderen	be	R	227,5	51.05N	3.72E	9
 Kisumu	Nyanza	ke	R	227,1	0.09S	34.75E	1134
 Chernivtsi	Chernivets'ka	ua	R	227	48.29N	25.95E	194
-Nizhnekamsk	Tatarstan	ru	N	226,9	55.64N	51.79E	95
+Нижнекамск	Татарстан	ru	N	226,9	55.64N	51.79E	95
 Kirikkale	Kirikkale	tr	R	226,9	39.85N	33.52E	751
 Chigasaki	Kanagawa	jp	N	226,8	35.33N	139.41E	9
 Xincheng	Ningxia Hui	cn	N	226,8	38.49N	106.15E	1110
@@ -1639,7 +1650,7 @@ Kostanay	Kostanay	kz	R	224,7	53.22N	63.63E	170
 Baton Rouge	Louisiana	us	R	224,6	30.45N	91.13W	15.0004329681396
 Hâpur	Uttar Pradesh	in	N	224,6	28.73N	77.77E	215
 Tirûvottiyûr	Tamil Nadu	in	N	224,4	13.16N	80.29E	2
-Syktyvkar	Komi	ru	R	224,4	61.67N	50.82E	0	
+Сыктывкар	Коми	ru	R	224,4	61.67N	50.82E	0	
 Garland	Texas	us	N	224,3	32.91N	96.63W	160.519302368164
 Nanchong	Sichuan	cn	N	224,2	30.78N	106.13E	312
 Juazeiro do Norte	Ceará	br	N	224,1	7.21S	39.32W	398
@@ -1668,7 +1679,7 @@ Nâgercoil	Tamil Nadu	in	N	220,5	8.18N	77.43E	50
 Embu	São Paulo	br	N	220,4	23.64S	46.84W	781
 Carltonville	Gauteng	za	N	220,4	26.34S	27.37E	1501
 Kharagpur	Bangla	in	N	220,3	22.34N	87.31E	50
-Shahty	Rostov	ru	N	220,3	47.69N	40.25E	108
+Шахты	Ростовская область	ru	N	220,3	47.69N	40.25E	108
 Takarazuka	Hyôgo	jp	N	220,3	34.80N	135.35E	44
 Gómez Palacio	Durango	mx	N	219,9	25.57N	103.50W	1133
 Buenavista	México	mx	N	219,8	19.55N	99.05W	2240
@@ -1684,7 +1695,7 @@ Dehiwala-Mount Lavinia	Kolamba	lk	N	218,8	6.85N	79.87E	23
 Sumaré	São Paulo	br	N	218,6	22.80S	47.29W	570
 Paramaribo	Paramaribo	sr	B	218,5	5.85N	55.20W	6
 Rancagua	Libertador General Bernardo O'Higgins	cl	R	218,3	34.17S	70.74W	508
-Staryj Oskol	Belgorod	ru	N	218,2	51.30N	37.84E	138
+Старый Оскол	Белгородская область	ru	N	218,2	51.30N	37.84E	138
 Ageo	Saitama	jp	N	218,1	35.95N	139.61E	19
 Lapu-Lapu	Central Visayas	ph	N	218,1	10.33N	123.93E	6
 Râichûr	Karnataka	in	N	217,9	16.21N	77.35E	399
@@ -1697,7 +1708,7 @@ Ikot Ekpene	Akwa Ibom	ng	N	217	5.19N	7.71E	87
 Mbandaka	Équateur	cd	R	217	0.04N	18.26E	317
 Nakhon Ratchasima	Nakhon Ratchasima	th	R	217	15.00N	102.10E	180
 Huaibei	Anhui	cn	N	216,9	33.95N	116.75E	31
-Jakutsk	Saha	ru	R	216,8	62.17N	129.83E	0	
+Якутск	Саха	ru	R	216,8	62.17N	129.83E	0	
 Biñan	Southern Tagalog	ph	N	216,8	14.34N	121.08E	10
 Türkmenabat	Lebap	tm	R	216,7	39.10N	63.57E	191
 Rochester	New York	us	N	216,6	43.17N	77.62W	149.338027954102
@@ -1717,7 +1728,7 @@ Calamba	Southern Tagalog	ph	N	215,6	14.21N	121.15E	27
 Ara	Bihar	in	N	215,5	25.56N	84.66E	64
 Magé	Rio de Janeiro	br	N	215,5	22.65S	43.05W	29
 Tarâbulus ash-Sham	ash-Shamal	lb	R	215,5	34.43N	35.87E	101
-Prokopjevsk	Kemerovo	ru	N	215,4	53.90N	86.71E	330
+Прокопьевск	Кемеровская область	ru	N	215,4	53.90N	86.71E	330
 Mîrpur Khâs	Sind	pk	N	215,1	25.53N	69.01E	20
 Xinpu	Jiangsu	cn	N	215	34.60N	119.17E	6
 Braila	Braila	ro	N	214,8	45.28N	27.97E	18
@@ -1734,7 +1745,7 @@ Taboão da Serra	São Paulo	br	N	213,7	23.60S	46.78W	793
 Nawâbshâh	Sind	pk	N	213,5	26.24N	68.40E	30
 al-Hasakah	al-Hasakah	sy	R	213,5	36.50N	40.76E	296
 Lübeck	Schleswig-Holstein	de	N	213,5	53.87N	10.66E	15
-Bijsk	Altaj	ru	N	213,4	52.53N	85.17E	183
+Бийск	Алтайский край	ru	N	213,4	52.53N	85.17E	183
 Akron	Ohio	us	N	213,4	41.08N	81.52W	288.585174560547
 Daloa	Haut-Sassandra	ci	R	213,4	6.89N	6.45W	274
 Bommanahalli	Karnataka	in	N	213,2	13.01N	77.63E	901
@@ -1746,14 +1757,14 @@ Hyesan	Yanggang	kp	R	212,5	41.40N	128.16E	701
 Sidi Belabbès	Sidi Belabbès	dz	R	212,4	35.19N	0.64W	473
 Freiburg	Baden-Württemberg	de	N	211,9	47.99N	7.85E	276
 General Santos	Southern Mindanao	ph	N	211,9	6.10N	125.25E	3
-Rybinsk	Jaroslavl	ru	N	211,8	58.05N	38.84E	98
+Рыбинск	Ярославская область	ru	N	211,8	58.05N	38.84E	98
 Tiraspol'	Transnistria	md	N	211,8	46.85N	29.63E	37
 Mokolo	Nord Extrème	cm	N	211,8	10.75N	13.81E	868
 Aryânah	Aryânah	tn	R	211,8	36.88N	10.18E	7
 São José dos Pinhais	Paraná	br	N	211,3	25.57S	49.18W	916
 Bayamón	Bayamón	pr	R	211,2	18.35N	66.17W	68.8866500854492
 Matsumoto	Nagano	jp	N	211,2	36.24N	137.97E	597
-Blagoveshchensk	Amur	ru	R	211,2	50.28N	127.54E	130
+Благовещенск	Амурский край	ru	R	211,2	50.28N	127.54E	130
 Gusau	Zamfara	ng	R	211,1	12.17N	6.66E	445
 Sârî	Mâzandarân	ir	R	211	36.55N	53.10E	51
 Dhanbad	Jharkhand	in	N	210,8	23.80N	86.42E	221
@@ -1783,7 +1794,7 @@ Talca	Maule	cl	R	209,1	35.42S	71.66W	104
 Prishtina	Kosovo and Metohija	rs	R	209,1	42.65N	21.17E	644
 Sucre	Chuquisaca	bo	B	209	19.06S	65.26W	2814
 Trieste	Friuli-Venezia Giulia	it	R	209	45.65N	13.77E	16
-Armavir	Krasnodar	ru	N	208,9	44.98N	41.14E	197
+Армавир	Краснодарский край	ru	N	208,9	44.98N	41.14E	197
 ar-Russayfah	az-Zarqâ'	jo	N	208,9	32.02N	36.02E	669
 Los Mochis	Sinaloa	mx	N	208,9	25.79N	109.00W	12
 Lubbock	Texas	us	N	208,8	33.58N	101.88W	981.998596191406
@@ -1802,7 +1813,7 @@ Gândhînagar	Gujarat	in	R	207,5	23.30N	72.63E	80
 Presidente Prudente	São Paulo	br	N	207,5	22.12S	51.39W	467
 Kunsan	Chollabuk	kr	N	207,5	35.99N	126.71E	10
 Mossoró	Rio Grande do Norte	br	N	207,3	5.19S	37.34W	16
-Velikij Novgorod	Novgorod	ru	R	207,2	58.54N	31.26E	29
+Великий Новгород	Новгородская область	ru	R	207,2	58.54N	31.26E	29
 Fuenlabrada	Madrid	es	N	207	40.27N	3.80W	665
 Alor Setar	Kedah	my	R	207	6.11N	100.37E	7
 São Leopoldo	Rio Grande do Sul	br	N	206,6	29.78S	51.15W	26
@@ -1865,7 +1876,7 @@ Agartala	Tripura	in	R	200,6	23.84N	91.27E	17
 Hagen	Nordrhein-Westfalen	de	N	200,6	51.37N	7.46E	105
 Colombo	Paraná	br	N	200,6	25.29S	49.24W	1006
 Zouxian	Shandong	cn	N	200,6	35.41N	116.94E	67
-Pskov	Pskov	ru	R	200,4	57.82N	28.34E	45
+Псков	Псковская область	ru	R	200,4	57.82N	28.34E	45
 Georgetown	Pulau Pinang	my	R	200,4	5.37N	100.31E	19
 Oviedo	Asturias	es	R	200,2	43.35N	5.83W	319
 Kure	Hiroshima	jp	N	199,7	34.25N	132.56E	7
@@ -1909,12 +1920,12 @@ Najafâbâd	Esfahân	ir	N	196,7	32.67N	51.35E	1707
 Americana	São Paulo	br	N	196,7	22.75S	47.33W	583
 Singrauli	Madhya Pradesh	in	N	196,6	23.84N	82.27E	487
 Banja Luka	Republika Srpska	ba	N	196,5	44.78N	17.19E	166
-Petropavlovsk-Kamchatskij	Kamchatka	ru	R	196,5	53.04N	158.64E	249
+Петропавловск-Камчатский	Камчатка	ru	R	196,5	53.04N	158.64E	249
 Owerri	Imo	ng	R	196,3	5.50N	7.02E	55
 Grand Rapids	Michigan	us	N	196,2	42.96N	85.66W	209.77587890625
-Balakovo	Saratov	ru	N	196,2	52.00N	47.78E	30
+Балаково	Саратовская область	ru	N	196,2	52.00N	47.78E	30
 Ijebu Ode	Ogun	ng	N	196,1	6.81N	3.92E	64
-Engels	Saratov	ru	N	196	51.48N	46.13E	31
+Энгельс	Саратовская область	ru	N	196	51.48N	46.13E	31
 Madiun	Jawa Timur	id	N	196	7.63S	111.51E	71
 Sîkar	Rajasthan	in	N	195,9	27.61N	75.13E	433
 Taytay	Southern Tagalog	ph	N	195,9	14.57N	121.13E	11
@@ -1957,7 +1968,7 @@ Winston-Salem	North Carolina	us	N	192,5	36.10N	80.26W	250.829238891602
 Osmaniye	Osmaniye	tr	R	192,5	37.07N	36.25E	132
 Vantaa	Uusimaa	fi	N	192,5	60.29N	25.04E	0	
 Madero	Tamaulipas	mx	N	192,4	22.27N	97.83W	9
-Zlatoust	Cheljabinsk	ru	N	192,3	55.18N	59.64E	486
+Златоуст	Челябинская область	ru	N	192,3	55.18N	59.64E	486
 Nam Dinh	Dong Bang Song Hong	vn	N	192,2	20.43N	106.17E	8
 Yamoussoukro	Lacs	ci	B	192,1	6.82N	5.28W	203
 Novi Sad	Vojvodina	rs	R	192	45.25N	19.85E	84
@@ -2003,7 +2014,7 @@ Alappuzha	Kerala	in	N	187,6	9.50N	76.33E	11
 Jiutai	Jilin	cn	N	187,6	44.15N	125.84E	181
 Brescia	Lombardia	it	N	187,4	45.55N	10.22E	154
 Catamarca	Catamarca	ar	R	187,3	28.47S	65.78W	528
-Syzran	Samara	ru	N	187,3	53.17N	48.45E	53
+Сызрань	Самарская область	ru	N	187,3	53.17N	48.45E	53
 Zaozhuang	Shandong	cn	N	187,3	34.88N	117.57E	78
 Araraquara	São Paulo	br	N	187,2	21.75S	48.13W	756
 Santa Rosa	Southern Tagalog	ph	N	187,1	14.44N	120.88E	5
@@ -2013,7 +2024,7 @@ Bulandshahr	Uttar Pradesh	in	N	186,7	28.41N	77.85E	203
 Marka	Shabêllaha Hôse	so	R	186,6	1.72N	44.76E	75
 Sabadell	Barcelona	es	N	186,6	41.55N	2.10E	193
 Liège	Liège	be	R	186,2	50.64N	5.57E	69
-Severodvinsk	Arhangelsk	ru	N	186,2	64.57N	39.82E	0	
+Северодвинск	Архангельская область	ru	N	186,2	64.57N	39.82E	0	
 Sullana	Piura	pe	N	186,1	4.89S	80.68W	61
 Itaboraí	Rio de Janeiro	br	N	186,1	22.75S	42.87W	15
 Miri	Sarawak	my	N	186	4.40N	113.97E	0
@@ -2062,7 +2073,7 @@ Shihezi	Xinjiang	cn	N	182,2	44.30N	86.03E	471
 Khandwa	Madhya Pradesh	in	N	182,2	21.83N	76.35E	311
 Maoming	Guangdong	cn	N	182,1	21.92N	110.87E	51
 Guacara	Carabobo	ve	N	182	10.24N	67.89W	449
-Kamensk-Uralskij	Sverdlovsk	ru	N	182	56.42N	61.93E	176
+Каменьск-Уральский	Свердловская область	ru	N	182	56.42N	61.93E	176
 Hortolândia	São Paulo	br	N	182	22.85S	47.26W	572
 Jilfah	Jilfah	dz	R	181,8	34.68N	3.25E	1139
 Misrâtah	Misrâtah	ly	R	181,8	32.38N	15.09E	13
@@ -2145,7 +2156,7 @@ Dos Quebradas	Risaralda	co	N	175,9	4.86N	75.67W	1646
 Mitaka	Tôkyô	jp	N	175,9	35.68N	139.57E	54
 Santander	Cantabria	es	R	175,8	43.47N	3.80W	52
 Eloy Alfaro	Guayas	ec	N	175,7	2.17S	79.83W	4
-Podolsk	Moskovskaja Oblast	ru	N	175,7	55.44N	37.57E	154
+Подольск	Московская область	ru	N	175,7	55.44N	37.57E	154
 Bitung	Sulawesi Utara	id	N	175,6	1.46N	125.19E	115
 Portsmouth	England	gb	N	175,2	50.81N	1.09W	2
 Korhogo	Savanes	ci	R	175,1	9.45N	5.65W	484
@@ -2274,7 +2285,7 @@ Gûdalûr	Tamil Nadu	in	N	168	11.76N	79.75E	9
 Getafe	Madrid	es	N	168	40.30N	3.73W	627
 Coquimbo	Coquimbo	cl	N	167,9	29.96S	71.33W	0
 Isparta	Isparta	tr	R	167,9	37.77N	30.55E	1051
-Juzhno-Sahalinsk	Sahalin	ru	R	167,9	46.97N	142.73E	36
+Южно-Сахалинск	Сахалин	ru	R	167,9	46.97N	142.73E	36
 Tall ŽAfar	Ninawa	iq	N	167,8	36.38N	42.45E	407
 Indaiatuba	São Paulo	br	N	167,7	23.09S	47.21W	628
 Chillán	Bío Bío	cl	N	167,6	36.60S	72.11W	121
@@ -2291,7 +2302,7 @@ Breda	Noord-Brabant	nl	N	166,8	51.58N	4.77E	5
 Xiaogan	Hubei	cn	N	166,8	30.92N	113.90E	29
 Chengde	Hebei	cn	N	166,6	41.55N	120.42E	177
 Huntsville	Alabama	us	N	166,5	34.71N	86.63W	199.979827880859
-Berezniki	Perm	ru	N	166,3	59.41N	56.77E	113
+Березники	Пермский край	ru	N	166,3	59.41N	56.77E	113
 Pate	Taoyuan	tw	N	166,3	24.92N	121.28E	156
 Wellington	Wellington	nz	B	166,2	41.28S	174.78E	4
 Aurora	Illinois	us	N	166,1	41.77N	88.29W	214.520004272461
@@ -2319,7 +2330,7 @@ Overland Park	Kansas	us	N	164,9	38.91N	94.68W	301.620025634766
 Madhyamgram	Bangla	in	N	164,7	22.70N	88.45E	10
 Solingen	Nordrhein-Westfalen	de	N	164,6	51.18N	7.06E	192
 Criciúma	Santa Catarina	br	N	164,6	28.68S	49.39W	60
-Novocherkassk	Rostov	ru	N	164,6	47.42N	40.08E	101
+Новочеркасск	Ростовская область	ru	N	164,6	47.42N	40.08E	101
 Comodoro Rivadavia	Chubut	ar	N	164,5	45.86S	67.49W	29
 Tartûs	Tartûs	sy	R	164,3	34.90N	35.89E	40
 Gadag	Karnataka	in	N	164,1	15.44N	75.63E	646
@@ -2346,11 +2357,11 @@ Sujiatun	Liaoning	cn	N	162,8	41.66N	123.34E	46
 Gejiu	Yunnan	cn	N	162,8	23.38N	103.15E	1718
 Klerksdorp	North West	za	N	162,7	26.88S	26.62E	1333
 Midnapur	Bangla	in	N	162,5	22.33N	87.15E	66
-Rubcovsk	Altaj	ru	N	162,5	51.53N	81.20E	219
+Рубцовск	Алтайский край	ru	N	162,5	51.53N	81.20E	219
 Fort Lauderdale	Florida	us	N	162,5	26.14N	80.14W	1.42199993133545
 Ludwigshafen	Rheinland-Pfalz	de	N	162,5	49.48N	8.44E	94
 San-Pédro	Bas Sassandra	ci	R	162,5	4.77N	6.64W	10
-Mytishchi	Moskovskaja Oblast	ru	N	162,5	55.90N	37.75E	153
+Мытищи	Московская область	ru	N	162,5	55.90N	37.75E	153
 Fianarantsoa	Fianarantsoa	mg	R	162,3	21.45S	47.07E	1243
 Linhe	Nei Monggol	cn	N	162,2	40.83N	107.50E	1037
 Kânchipuram	Tamil Nadu	in	N	162,1	12.84N	79.70E	87
@@ -2359,7 +2370,7 @@ Ashikaga	Tochigi	jp	N	162,1	36.35N	139.45E	137
 Sayama	Saitama	jp	N	162,1	35.87N	139.40E	51
 Angren	Toskent	uz	N	162	41.03N	70.15E	980
 Wâdî as-Sîr	ŽAmmân	jo	N	162	31.95N	35.82E	811
-Kolpino	Leningrad	ru	N	161,9	59.75N	30.60E	9
+Колпино	Ленинградская область	ru	N	161,9	59.75N	30.60E	9
 Kangneung	Kangweon	kr	N	161,9	37.76N	128.89E	32
 Basel	Basel-Stadt	ch	R	161,8	47.57N	7.58E	264
 San Nicolás	Buenos Aires	ar	N	161,8	33.33S	60.24W	20
@@ -2376,7 +2387,7 @@ Meiktila	Mandalay	mm	N	161	20.88N	95.85E	240
 Sîtâpur	Uttar Pradesh	in	N	160,9	27.57N	80.69E	133
 Juliaca	Puno	pe	N	160,9	15.50S	70.14W	3900
 Ponce	Ponce	pr	R	160,9	18.02N	66.60W	20
-Volgodonsk	Rostov	ru	N	160,9	47.52N	42.13E	36
+Волгодонск	Ростовская область	ru	N	160,9	47.52N	42.13E	36
 Fatehpur	Uttar Pradesh	in	N	160,8	25.93N	80.81E	121
 Nandyâl	Andhra Pradesh	in	N	160,8	15.49N	78.48E	212
 ŽAjmân	ŽAjman	ae	R	160,8	25.42N	55.43E	0
@@ -2402,17 +2413,17 @@ Morena	Madhya Pradesh	in	N	159,9	26.51N	77.99E	173
 Sapele	Delta	ng	N	159,9	5.90N	5.67E	10
 Geelong	Victoria	au	N	159,9	38.14S	144.32E	64
 Kawanishi	Hyôgo	jp	N	159,9	34.82N	135.42E	21
-Abakan	Hakasija	ru	R	159,8	53.73N	91.44E	247
+Абакан	Хакасия	ru	R	159,8	53.73N	91.44E	247
 Leshan	Sichuan	cn	N	159,8	29.57N	103.74E	393
 Tallahassee	Florida	us	R	159,6	30.46N	84.28W	47.9970016479492
 Bûshehr	Bûshehr	ir	R	159,6	28.92N	50.83E	19
 Serilungampalle	Andhra Pradesh	in	N	159,5	17.48N	78.33E	567
-Salavat	Bashkortostan	ru	N	159,5	53.40N	55.89E	172
+Салават	Башкортостан	ru	N	159,5	53.40N	55.89E	172
 Chungju	Chungcheongbuk	kr	N	159,4	36.98N	127.94E	101
 Nângloi Jât	Delhi	in	N	159,3	28.68N	77.07E	219
 Xinji	Hebei	cn	N	159,3	37.91N	115.19E	40
 Nova Friburgo	Rio de Janeiro	br	N	159,2	22.26S	42.54W	971
-Majkop	Adygeja	ru	R	159,2	44.61N	40.08E	214
+Майкоп	Адыгея	ru	R	159,2	44.61N	40.08E	214
 Uttarpara-Kotrung	Bangla	in	N	159,1	22.66N	88.35E	13
 Waru	Jawa Timur	id	N	159,1	7.38S	112.65E	10
 Brownsville	Texas	us	N	159	25.93N	97.48W	8.31445598602295
@@ -2426,7 +2437,7 @@ Kaili	Guizhou	cn	N	158,6	26.58N	107.92E	704
 Ongole	Andhra Pradesh	in	N	158,5	15.50N	80.05E	18
 Aydin	Aydin	tr	R	158,5	37.86N	27.84E	170
 Santa Rosa	California	us	N	158,4	38.45N	122.70W	57.6668891906738
-Balashiha	Moskovskaja Oblast	ru	N	158,3	55.83N	37.95E	146
+Балашиха	Московская область	ru	N	158,3	55.83N	37.95E	146
 Oyama	Tochigi	jp	N	158,3	36.32N	139.80E	46
 Moreno Valley	California	us	N	158,2	33.93N	117.21W	503.037567138672
 Pomona	California	us	N	158	34.06N	117.76W	260.758880615234
@@ -2465,7 +2476,7 @@ Grenoble	Isère	fr	R	156,2	45.19N	5.72E	216
 Chilpancingo	Guerrero	mx	R	155,9	17.55N	99.50W	1259
 Guangshui	Hubei	cn	N	155,9	31.62N	114.00E	87
 Rondonópolis	Mato Grosso	br	N	155,8	16.47S	54.64W	227
-Ussurijsk	Primorje	ru	N	155,8	43.81N	131.97E	17
+Уссурийск	Приморский край	ru	N	155,8	43.81N	131.97E	17
 Parma	Emilia-Romagna	it	N	155,8	44.81N	10.32E	56
 Coro	Falcón	ve	R	155,7	11.42N	69.68W	15
 Itajaí	Santa Catarina	br	N	155,7	26.90S	48.68W	1
@@ -2497,7 +2508,7 @@ East Los Angeles	California	us	N	154,1	34.03N	118.17W	82.6785354614258
 Swindon	England	gb	N	154	51.57N	1.78W	100
 Chapecó	Santa Catarina	br	N	153,8	27.10S	52.64W	655
 Angers	Maine-et-Loire	fr	R	153,8	47.48N	0.54W	35
-Ljubercy	Moskovskaja Oblast	ru	N	153,7	55.66N	37.95E	135
+Люберцы	Московская область	ru	N	153,7	55.66N	37.95E	135
 Nagareyama	Chiba	jp	N	153,7	35.86N	139.91E	24
 Tangâyal	Tangâyal	bd	R	153,6	24.25N	89.92E	20
 Nossa Senhora do Socorro	Sergipe	br	N	153,6	10.87S	37.12W	18
@@ -2508,7 +2519,7 @@ Enschede	Overijssel	nl	N	153,4	52.22N	6.89E	40
 Kigoma	Kigoma	tz	R	153,3	4.88S	29.61E	767
 Jinhua	Zhejiang	cn	N	153,3	29.12N	119.65E	51
 Jamâlpûr	Jamâlpûr	bd	R	153,1	24.92N	89.94E	20
-Miass	Cheljabinsk	ru	N	153,1	55.00N	60.09E	344
+Миасс	Челябинская область	ru	N	153,1	55.00N	60.09E	344
 Niiza	Saitama	jp	N	153,1	35.81N	139.55E	19
 Zhoukou	Henan	cn	N	153,1	33.64N	114.63E	51
 Rockford	Illinois	us	N	152,9	42.27N	89.06W	247.890701293945
@@ -2548,7 +2559,7 @@ Springfield	Missouri	us	N	151,1	37.20N	93.29W	396.557464599609
 Sîrjân	Kermân	ir	N	151,1	29.47N	55.73E	1784
 Hanam	Kyeonggi	kr	N	151,1	37.53N	127.19E	80
 Silchar	Assam	in	N	150,9	24.83N	92.77E	23
-Korolyov	Moskovskaja Oblast	ru	N	150,9	55.92N	37.82E	166
+Королёв	Московская область	ru	N	150,9	55.92N	37.82E	166
 Saydâ'	al-Janub	lb	R	150,9	33.57N	35.39E	77
 Ôta	Gumma	jp	N	150,9	36.30N	139.38E	42
 Gongzhuling	Jilin	cn	N	150,9	43.51N	124.81E	206
@@ -2557,11 +2568,11 @@ Navoi	Navoi	uz	R	150,7	40.11N	65.35E	363
 Guarapuava	Paraná	br	N	150,7	25.38S	51.48W	1053
 Salamanca	Salamanca	es	R	150,7	40.97N	5.67W	826
 Shimla	Himachal Pradesh	in	R	150,6	31.11N	77.16E	1911
-Kolomna	Moskovskaja Oblast	ru	N	150,6	55.09N	38.79E	116
+Коломна	Московская область	ru	N	150,6	55.09N	38.79E	116
 Chingola	Copperbelt	zm	N	150,6	12.54S	27.85E	1338
 Ôgaki	Gifu	jp	N	150,6	35.37N	136.61E	10
 Masjed-e Soleymân	Khûzestân	ir	N	150,5	31.98N	49.30E	273
-Kovrov	Vladimir	ru	N	150,5	56.37N	41.33E	125
+Ковров	Владимирская область	ru	N	150,5	56.37N	41.33E	125
 Pak Kret	Nonthaburi	th	N	150,5	13.90N	100.51E	6
 Margilon	Fargona	uz	N	150,2	40.47N	71.71E	488
 Melitpol'	Zaporiz'ka	ua	N	150,2	46.85N	35.36E	39
@@ -2619,7 +2630,7 @@ Marabá	Pará	br	N	147,4	5.34S	49.13W	80
 Shangrao	Jiangxi	cn	N	147,4	28.47N	117.97E	100
 Krishnanagar	Bangla	in	N	147,3	23.41N	88.51E	21
 Hampton	Virginia	us	N	147,3	37.05N	76.29W	0.697000026702881
-Himki	Moskovskaja Oblast	ru	N	147,3	55.89N	37.44E	181
+Химки	Московская область	ru	N	147,3	55.89N	37.44E	181
 Otaru	Hokkaido	jp	N	147,3	43.20N	141.00E	10
 Komaki	Aichi	jp	N	147,3	35.30N	136.91E	17
 Chuzhou	Anhui	cn	N	147,3	32.30N	118.30E	30
@@ -2641,10 +2652,10 @@ Anyama	Lagunes	ci	N	146,5	5.50N	4.05W	92
 Blackpool	England	gb	N	146,5	53.82N	3.06W	0
 Shântipur	Bangla	in	N	146,4	23.26N	88.44E	13
 Dijon	Côte-d'Or	fr	R	146,4	47.33N	5.03E	265
-Elektrostal	Moskovskaja Oblast	ru	N	146,4	55.77N	38.47E	146
+Электросталь	Московская область	ru	N	146,4	55.77N	38.47E	146
 Cianjur	Jawa Barat	id	N	146,4	6.82S	107.14E	457
 Bîd	Maharashtra	in	N	146,3	18.99N	75.76E	512
-Pjatigorsk	Stavropol	ru	N	146,2	44.04N	43.06E	516
+Пятигорск	Ставропольский край	ru	N	146,2	44.04N	43.06E	516
 Matanzas	Matanzas	cu	R	146,1	23.06N	81.58W	72
 Kohât	North-West Frontier	pk	N	146,1	33.60N	71.44E	525
 Calbayog	Eastern Visayas	ph	N	146,1	12.07N	124.63E	14
@@ -2723,7 +2734,7 @@ Mallawî	al-Minyâ	eg	N	142,5	27.73N	30.84E	50
 Stara Zagora	Stara Zagora	bg	R	142,5	42.42N	25.63E	195
 Hamilton	Waikato	nz	R	142,5	37.78S	175.28E	25
 Rybnik	Śląskie	pl	N	142,4	50.10N	18.55E	250
-Nahodka	Primorje	ru	N	142,4	42.81N	132.88E	9
+Находка	Приморский край	ru	N	142,4	42.81N	132.88E	9
 Yamaguchi	Yamaguchi	jp	R	142,4	34.18N	131.48E	29
 Paderborn	Nordrhein-Westfalen	de	N	142,3	51.72N	8.74E	113
 Leiyang	Hunan	cn	N	142,3	26.42N	112.84E	92
@@ -2753,8 +2764,8 @@ Calama	Antofagasta	cl	N	140,7	22.45S	68.92W	2277
 Zaanstad	Noord-Holland	nl	N	140,7	52.45N	4.82E	-1
 al-Baydâ	al-Jabal al Akhdar	ly	R	140,7	32.76N	21.62E	488
 Aksu	Xinjiang	cn	N	140,6	41.15N	80.25E	1100
-Almetjevsk	Tatarstan	ru	N	140,4	54.90N	52.31E	137
-Odincovo	Moskovskaja Oblast	ru	N	140,4	55.67N	37.29E	186
+Альметьевск	Татарстан	ru	N	140,4	54.90N	52.31E	137
+Одинцово	Московская область	ru	N	140,4	55.67N	37.29E	186
 Longyan	Fujian	cn	N	140,4	25.18N	117.03E	419
 Lhokseumawe	Aceh	id	N	140,3	5.19N	97.14E	5
 Siverek	Sanliurfa	tr	N	140,3	37.76N	39.33E	807
@@ -2816,7 +2827,7 @@ Haldwâni	Uttaranchal	in	N	136,8	29.23N	79.52E	447
 Bandar Penggaram	Johor	my	N	136,8	1.85N	102.93E	8
 Depok	Yogyakarta	id	N	136,7	7.75S	110.41E	177
 Suq Ahras	Suq Ahras	dz	R	136,6	36.29N	7.95E	711
-Kislovodsk	Stavropol	ru	N	136,6	43.90N	42.71E	875
+Кисловодск	Ставропольский край	ru	N	136,6	43.90N	42.71E	875
 Bat Yam	Tel Aviv	il	N	136,6	32.02N	34.75E	30
 Baia Mare	Maramures	ro	N	136,6	47.66N	23.58E	225
 Kariya	Aichi	jp	N	136,6	34.99N	137.00E	10
@@ -2866,7 +2877,7 @@ Roxas	Western Visayas	ph	N	134,7	11.60N	122.75E	5
 Carmen	Campeche	mx	N	134,6	18.63N	91.83W	0
 Queimados	Rio de Janeiro	br	N	134,6	22.70S	43.58W	35
 Martapura	Kalimantan Selatan	id	N	134,6	3.41S	114.84E	4
-Hasavjurt	Dagestan	ru	N	134,5	43.25N	46.58E	136
+Хасавьюрт	Дагестан	ru	N	134,5	43.25N	46.58E	136
 Benguela	Benguela	ao	R	134,5	12.58S	13.40E	9
 Citeureup	Jawa Barat	id	N	134,5	6.48S	106.86E	134
 's-Hertogenbosch	Noord-Brabant	nl	R	134,4	51.70N	5.31E	8
@@ -2908,7 +2919,7 @@ Fengcheng	Liaoning	cn	N	132,5	40.46N	124.06E	71
 Peoria	Arizona	us	N	132,5	33.69N	112.24W	395.476989746094
 Pemalang	Jawa Tengah	id	N	132,5	6.88S	109.38E	9
 Mesquite	Texas	us	N	132,4	32.77N	96.60W	151.830993652344
-Nevinomyssk	Stavropol	ru	N	132,4	44.64N	41.93E	319
+Невиномысск	Ставропольский край	ru	N	132,4	44.64N	41.93E	319
 Jabâliyah	Ghazzah ash-Shamâliyah	ps	R	132,4	31.53N	34.29E	0
 Coral Springs	Florida	us	N	132,3	26.27N	80.26W	3.13800001144409
 Klaten	Jawa Tengah	id	N	132,3	7.71S	110.59E	161
@@ -2944,7 +2955,7 @@ Matsubara	Ôsaka	jp	N	131,5	34.57N	135.55E	28
 Saharsa	Bihar	in	N	131,4	25.88N	86.59E	47
 Copiapó	Atacama	cl	R	131,4	27.36S	70.34W	396
 Okrika	Rivers	ng	N	131,4	4.74N	7.08E	4
-Serpuhov	Moskovskaja Oblast	ru	N	131,4	54.92N	37.43E	171
+Серпухов	Московская область	ru	N	131,4	54.92N	37.43E	171
 Miyakonojô	Miyazaki	jp	N	131,3	31.72N	131.06E	144
 Licheng	Guangdong	cn	N	131,3	23.30N	113.82E	8
 Pyay	Bago	mm	N	131,2	18.82N	95.21E	19
@@ -2958,10 +2969,10 @@ Randfontein	Gauteng	za	N	131	26.15S	27.70E	1714
 Garza García	Nuevo León	mx	N	131	25.66N	100.38W	610
 North Bârâkpur	Bangla	in	N	130,9	22.78N	88.37E	12
 Pindamonhangaba	São Paulo	br	N	130,9	22.92S	45.47W	534
-Kamyshin	Volgograd	ru	N	130,9	50.10N	45.40E	30
+Камышин	Волгоградская область	ru	N	130,9	50.10N	45.40E	30
 Quilpué	Valparaíso	cl	N	130,8	33.04S	71.50W	66
 Zama	Kanagawa	jp	N	130,8	35.50N	139.40E	85
-Norilsk	Krasnojarsk	ru	N	130,7	69.32N	88.19E	0	
+Норильск	Красноярский край	ru	N	130,7	69.32N	88.19E	0	
 Shuimogou	Xinjiang	cn	N	130,7	43.83N	87.61E	823
 Obosi	Anambra	ng	N	130,7	6.11N	6.87E	121
 Fujieda	Shizuoka	jp	N	130,7	34.88N	138.26E	21
@@ -2973,7 +2984,7 @@ Ipswich	England	gb	N	130,6	52.07N	1.14E	28
 Sayda'	Sayda'	dz	R	130,6	34.84N	0.14E	789
 Valera	Trujillo	ve	N	130,5	9.32N	70.62W	587
 Zâbol	Sîstân-e Balûchestân	ir	N	130,5	31.02N	61.48E	481
-Nazran	Ingusetija	ru	R	130,5	43.21N	44.80E	532
+Назрань	Ингушетия	ru	R	130,5	43.21N	44.80E	532
 Misato	Saitama	jp	N	130,5	35.83N	139.88E	6
 Palmdale	California	us	N	130,5	34.61N	118.09W	778.100891113281
 Riobamba	Chimborazo	ec	R	130,4	1.67S	78.65W	2759
@@ -2992,12 +3003,12 @@ Sapucaia	Rio Grande do Sul	br	N	130	29.83S	51.16W	23
 Wuning	Zhejiang	cn	N	130	29.27N	120.22E	98
 Chitradurga	Karnataka	in	N	129,9	14.23N	76.39E	735
 Dibrugarh	Assam	in	N	129,8	27.49N	94.91E	103
-Novomoskovsk	Tula	ru	N	129,8	54.09N	38.18E	226
+Новомосковск	Тульская область	ru	N	129,8	54.09N	38.18E	226
 al-Qasr-al-Kabîr	Tangier-Tétouan	ma	N	129,7	35.02N	5.91W	23
 Cibinong	Jawa Barat	id	N	129,7	6.44S	106.84E	113
 Apopa	San Salvador	sv	N	129,6	13.80N	89.18W	437
 Chhindwâra	Madhya Pradesh	in	N	129,6	22.07N	78.94E	689
-Pervouralsk	Sverdlovsk	ru	N	129,6	56.91N	59.95E	327
+Первоуральск	Свердловская область	ru	N	129,6	56.91N	59.95E	327
 Jequié	Bahia	br	N	129,6	13.85S	40.08W	206
 Cap-Haïtien	Nord	ht	R	129,5	19.76N	72.20W	11
 Gonda	Uttar Pradesh	in	N	129,4	27.14N	81.95E	108
@@ -3072,16 +3083,16 @@ Ueda	Nagano	jp	N	126,7	36.40N	138.25E	457
 Èkibastuz	Pavlodar	kz	N	126,6	51.73N	75.32E	200
 Murîdke	Punjab	pk	N	126,6	31.81N	74.25E	214
 Lambaré	Central	py	N	126,6	25.33S	57.64W	62
-Neftekamsk	Bashkortostan	ru	N	126,6	56.11N	54.26E	99
+Нефтекамск	Башкортостан	ru	N	126,6	56.11N	54.26E	99
 Chândpûr	Chândpûr	bd	R	126,5	23.22N	90.67E	10
 Deoli	Delhi	in	N	126,5	28.49N	77.22E	245
 Girardot	Cundinamarca	co	N	126,5	4.31N	74.81W	292
 Haarlemmermeer	Noord-Holland	nl	N	126,5	52.30N	4.70E	-4
 Oulu	Pohjois-Pohjanmaa	fi	R	126,5	65.02N	25.47E	0	
 Hâjîpur	Bihar	in	N	126,4	25.68N	85.20E	62
-Murom	Vladimir	ru	N	126,4	55.57N	42.04E	118
+Муром	Владимирская область	ru	N	126,4	55.57N	42.04E	118
 Âdityâpur	Jharkhand	in	N	126,3	22.80N	85.97E	179
-Novocheboksarsk	Chuvashija	ru	N	126,3	56.12N	47.49E	107
+Новочебоксарск	Чувашия	ru	N	126,3	56.12N	47.49E	107
 Desê	Amhara	et	N	126,3	11.13N	39.63E	2556
 Gaozhou	Guangdong	cn	N	126,2	21.93N	110.84E	41
 Acuña	Coahuila	mx	N	126,2	29.32N	100.94W	297.208190917969
@@ -3115,7 +3126,7 @@ Kiziltepe	Mardin	tr	N	125,2	37.19N	40.59E	484
 Laiwu	Shandong	cn	N	125,2	36.20N	117.66E	187
 Quevedo	Los Ríos	ec	N	125,1	1.02S	79.48W	74
 Maicao	La Guajira	co	N	125,1	11.39N	72.24W	52
-Dimitrovgrad	Uljanovsk	ru	N	125,1	54.23N	49.59E	75
+Димитровоград	Ульяновская область	ru	N	125,1	54.23N	49.59E	75
 Tokat	Tokat	tr	R	125,1	40.30N	36.56E	692
 Khanshalah	Khanshalah	dz	R	125	35.44N	7.15E	1078
 Luanshya	Copperbelt	zm	N	125	13.12S	28.39E	1197
@@ -3218,7 +3229,7 @@ Tieli	Heilongjiang	cn	N	121,6	46.95N	128.05E	209
 Vallejo	California	us	N	121,6	38.11N	122.26W	10.5321893692017
 Qundûz	Qundûz	af	R	121,5	36.73N	68.86E	405
 Wencheng	Shandong	cn	N	121,5	37.19N	122.04E	38
-Orehovo-Zujevo	Moskovskaja Oblast	ru	N	121,4	55.80N	38.97E	121
+Орехово-Зуево	Московская область	ru	N	121,4	55.80N	38.97E	121
 al-Manâqil	al-Jazîrah	sd	N	121,4	14.25N	32.98E	412
 MacAllen	Texas	us	N	121,3	26.22N	98.24W	36.4599990844727
 Heilbronn	Baden-Württemberg	de	N	121,3	49.14N	9.22E	169
@@ -3262,7 +3273,7 @@ Alagoinhas	Bahia	br	N	120,2	12.14S	38.43W	135
 Slov'yans'k	Donets'ka	ua	N	120,2	48.85N	37.58E	73
 San Mateo	Southern Tagalog	ph	N	120,2	14.71N	121.13E	19
 Flint	Michigan	us	N	120,1	43.02N	83.69W	216.154205322266
-Shchjolkovo	Moskovskaja Oblast	ru	N	120,1	55.90N	38.02E	150
+Щёлково	Московская область	ru	N	120,1	55.90N	38.02E	150
 Panevėžys	Panevėžio	lt	R	120,1	55.74N	24.37E	52
 Nehe	Heilongjiang	cn	N	120,1	48.49N	124.88E	209
 Rishra	Bangla	in	N	120	22.71N	88.36E	0
@@ -3293,7 +3304,7 @@ Punto Fijo	Falcón	ve	N	119,4	11.72N	70.21W	0
 Ingolstadt	Bayern	de	N	119,3	48.77N	11.43E	380
 Majalaya	Jawa Barat	id	N	119,3	7.05S	107.76E	675
 Hardoî	Uttar Pradesh	in	N	119,2	27.42N	80.12E	150
-Noginsk	Moskovskaja Oblast	ru	N	119,2	55.86N	38.48E	135
+Ногинск	Московская область	ru	N	119,2	55.86N	38.48E	135
 Khairpur	Sind	pk	N	119,1	27.53N	68.74E	56
 Carrollton	Texas	us	N	119	32.99N	96.90W	145.076889038086
 León	León	es	R	119	42.59N	5.57W	824
@@ -3380,7 +3391,7 @@ Meizhou	Guangdong	cn	N	116,5	24.33N	116.12E	90
 Ikoma	Nara	jp	N	116,4	34.70N	135.72E	191
 Imabari	Ehime	jp	N	116,4	34.06N	133.00E	8
 Innsbruck	Tirol	at	R	116,4	47.28N	11.41E	570
-Sergijev Posad	Moskovskaja Oblast	ru	N	116,3	56.32N	38.13E	216
+Сергиев Посад	Московская область	ru	N	116,3	56.32N	38.13E	216
 George	Western Cape	za	N	116,3	33.95S	22.45E	244
 Nyíregyháza	Szabolcs-Szatmár-Bereg	hu	R	116,3	47.96N	21.72E	110
 Dumaguete	Central Visayas	ph	N	116,3	9.32N	123.31E	8
@@ -3388,10 +3399,10 @@ Srîkâkulam	Andhra Pradesh	in	N	116,2	18.30N	83.90E	13
 Tunja	Boyacá	co	N	116,2	5.55N	73.37W	2797
 Pinhais	Paraná	br	N	116,2	25.54S	49.22W	873
 Amaigbo	Abia	ng	N	116,1	5.78N	7.83E	118
-Neftejugansk	Hanty-Mansija	ru	N	116,1	55.10N	54.28E	150
+Нефтеюганск	Ханты-Мансийский АО	ru	N	116,1	55.10N	54.28E	150
 Marv Dasht	Fârs	ir	N	116,1	29.80N	52.83E	1588
 Qalyûb	al-Qalyûbiyah	eg	N	116,1	30.18N	31.20E	12
-Achinsk	Krasnojarsk	ru	N	116	56.27N	90.49E	204
+Ачинск	Красноярский край	ru	N	116	56.27N	90.49E	204
 Ann Arbor	Michigan	us	N	116	42.28N	83.73W	277.426696777344
 Sucheng	Jiangsu	cn	N	116	33.95N	118.29E	26
 Beibei	Chongqing	cn	N	116	29.83N	106.44E	220
@@ -3438,7 +3449,7 @@ Jiangyin	Jiangsu	cn	N	114,6	31.90N	120.26E	6
 Gashua	Yobe	ng	N	114,6	12.88N	11.04E	339
 Dawukou	Ningxia Hui	cn	N	114,6	39.02N	106.36E	1115
 Sâtâra	Maharashtra	in	N	114,5	17.70N	74.00E	673
-Batajsk	Rostov	ru	N	114,5	47.13N	39.75E	5
+Батайск	Ростовская область	ru	N	114,5	47.13N	39.75E	5
 Musoma	Mara	tz	R	114,5	1.49S	33.80E	1134
 Satu Mare	Satu Mare	ro	N	114,5	47.79N	22.89E	121
 Talara	Piura	pe	N	114,4	4.58S	81.28W	2
@@ -3453,7 +3464,7 @@ Didao	Heilongjiang	cn	N	114,2	45.33N	130.87E	194
 Beaumont	Texas	us	N	114,1	30.09N	94.14W	6.01338529586792
 Tanshui	Taipei Hsien	tw	N	114,1	25.19N	121.42E	3
 Bintulu	Sarawak	my	N	114,1	3.17N	113.03E	17
-Jelec	Lipeck	ru	N	114	52.60N	38.51E	124
+Елец	Липецкая область	ru	N	114	52.60N	38.51E	124
 Jirjâ	Sawhâj	eg	N	114	26.33N	31.88E	61
 Bellevue	Washington	us	N	114	47.60N	122.16W	41.3238906860352
 Maymyo	Mandalay	mm	N	113,9	22.04N	96.46E	1079
@@ -3472,7 +3483,7 @@ Ibarra	Imbabura	ec	R	113,8	0.36N	78.13W	2212
 Bandar-e Mâhshahr	Khûzestân	ir	N	113,8	30.65N	49.22E	10
 Durrës	Durrës	al	R	113,8	41.33N	19.45E	2
 Achalpur	Maharashtra	in	N	113,7	21.26N	77.50E	370
-Cherkessk	Karachaj-Cherkessija	ru	R	113,7	44.29N	42.06E	477
+Черкесск	Карачаево-Черкесия	ru	R	113,7	44.29N	42.06E	477
 Kâduqlî	Janûb Kurdufân	sd	R	113,7	11.01N	29.70E	513
 West Valley City	Utah	us	N	113,7	40.69N	112.01W	1320.53393554688
 Behbahân	Khûzestân	ir	N	113,6	30.58N	50.27E	324
@@ -3490,7 +3501,7 @@ Zoetermeer	Zuid-Holland	nl	N	113,2	52.07N	4.49E	-1
 Kiryû	Gumma	jp	N	113,2	36.43N	139.33E	446
 Rongcheng	Hubei	cn	N	113,2	29.82N	112.88E	31
 Yingzhong	Hubei	cn	N	113,2	31.17N	112.58E	48
-Seversk	Tomsk	ru	N	113,1	56.61N	84.87E	93
+Северск	Томская область	ru	N	113,1	56.61N	84.87E	93
 Ubon Ratchathani	Ubon Ratchathani	th	R	113,1	15.25N	104.83E	127
 Rayong	Rayong	th	R	113,1	12.68N	101.28E	12
 Kingston	Ontario	ca	N	112,9	44.23N	76.50W	95.8990249633789
@@ -3578,12 +3589,12 @@ Garanhuns	Pernambuco	br	N	110,5	8.89S	36.50W	813
 Bergamo	Lombardia	it	N	110,4	45.70N	9.67E	264
 Karamay	Xinjiang	cn	N	110,4	45.60N	84.86E	419
 Deoria	Uttar Pradesh	in	N	110,4	26.51N	83.78E	76
-Novokujbyshevsk	Samara	ru	N	110,4	53.10N	49.88E	43
+Новокуйбышевск	Самарская область	ru	N	110,4	53.10N	49.88E	43
 Pouso Alegre	Minas Gerais	br	N	110,4	22.22S	45.94W	898
 Sinnâr	Sinnâr	sd	N	110,4	13.55N	33.60E	428
 Zhuji	Zhejiang	cn	N	110,4	29.71N	120.24E	17
 Salzgitter	Niedersachsen	de	N	110,4	52.17N	10.33E	86
-Leninsk-Kuzneckij	Kemerovo	ru	N	110,3	54.66N	86.16E	248
+Лениск-Кузнецкий	Кемеровская область	ru	N	110,3	54.66N	86.16E	248
 Kadoma	Mashonaland West	zw	N	110,3	18.33S	29.91E	1188
 West Covina	California	us	N	110,3	34.05N	117.91W	146.681549072266
 Panvel	Maharashtra	in	N	110,2	19.00N	73.10E	1
@@ -3603,7 +3614,7 @@ Lae	Morobe	pg	R	109,8	6.72S	146.99E	23
 Iwatsuki	Saitama	jp	N	109,8	35.96N	139.70E	11
 Iguala	Guerrero	mx	N	109,7	18.37N	99.54W	814
 Manchester	New Hampshire	us	N	109,6	42.98N	71.44W	92.2214660644531
-Derbent	Dagestan	ru	N	109,6	42.06N	48.29E	11
+Дербент	Дагестан	ru	N	109,6	42.06N	48.29E	11
 Conselheiro Lafaiete	Minas Gerais	br	N	109,6	20.67S	43.79W	954
 Ifon Osun	Osun	ng	N	109,6	7.87N	4.48E	355
 al-Hawâmidîyah	al-Jîzah	eg	N	109,6	29.90N	31.25E	23
@@ -3671,10 +3682,10 @@ Sutton Coldfield	England	gb	N	107,7	52.56N	1.84W	130
 Tanjung Balai	Sumatera Utara	id	N	107,6	2.97N	99.80E	2
 Bama	Borno	ng	N	107,6	11.52N	13.68E	329
 Motîhâri	Bihar	in	N	107,5	26.66N	84.91E	70
-Arzamas	Nizhnij Novgorod	ru	N	107,5	55.38N	43.83E	118
+Арзамас	Новгородская область	ru	N	107,5	55.38N	43.83E	118
 Rantauprapat	Sumatera Utara	id	N	107,4	2.10N	99.82E	45
 Uromi	Edo	ng	N	107,4	6.72N	6.32E	400
-Zheleznodorozhnyj	Moskovskaja Oblast	ru	N	107,4	55.75N	38.13E	140
+Железнодорожный	Московская область	ru	N	107,4	55.75N	38.13E	140
 Vitória de Santo Antão	Pernambuco	br	N	107,4	8.12S	35.30W	164
 ŽAtbarah	Nahr-an-Nil	sd	N	107,4	17.71N	33.98E	351
 Fujimi	Saitama	jp	N	107,4	35.87N	139.54E	8
@@ -3692,7 +3703,7 @@ Rekhovot	Hamerkaz	il	N	107	31.89N	34.80E	43
 Zonguldak	Zonguldak	tr	R	107	41.46N	31.80E	118
 Ternate	Maluku Utara	id	R	107	0.79N	127.36E	289
 Rewâri	Haryana	in	N	106,9	28.19N	76.60E	246
-Oktjabrskij	Bashkortostan	ru	N	106,8	54.47N	53.46E	125
+Октябрьский	Башкортостан	ru	N	106,8	54.47N	53.46E	125
 Araras	São Paulo	br	N	106,8	22.36S	47.39W	616
 Akishima	Tôkyô	jp	N	106,8	35.70N	139.36E	95
 Pare Pare	Sulawesi Selatan	id	N	106,8	3.87S	119.62E	17
@@ -3704,7 +3715,7 @@ Fairfield	California	us	N	106,7	38.25N	122.04W	4.46192264556885
 South Bend	Indiana	us	N	106,6	41.68N	86.27W	218.179061889648
 Tumbes	Tumbes	pe	R	106,6	3.57S	80.46W	9
 Guaratinguetá	São Paulo	br	N	106,6	22.82S	45.19W	548
-Zhukovskij	Moskovskaja Oblast	ru	N	106,6	55.55N	38.25E	127
+Жуковский	Московская область	ru	N	106,6	55.55N	38.25E	127
 Râmnicu Vâlcea	Vâlcea	ro	N	106,6	45.11N	24.38E	238
 Gera	Thüringen	de	N	106,6	50.88N	12.08E	200
 Palwal	Haryana	in	N	106,5	28.15N	77.32E	196
@@ -3745,7 +3756,7 @@ Manzanillo	Colima	mx	N	105,7	19.05N	104.32W	54
 Jahrom	Fârs	ir	N	105,6	28.55N	53.57E	1029
 Dunedin	Otago	nz	R	105,6	45.88S	170.48E	140
 Pueblo	Colorado	us	N	105,6	38.27N	104.62W	1422.45397949219
-Kyzyl	Tyva	ru	R	105,5	51.71N	94.38E	614
+Кызыл	Тыва	ru	R	105,5	51.71N	94.38E	614
 Bergisch Gladbach	Nordrhein-Westfalen	de	N	105,5	50.98N	7.15E	130
 Bilqâs	ad-Daqahlîyah	eg	N	105,5	31.22N	31.35E	3
 Chhatarpur	Madhya Pradesh	in	N	105,4	24.92N	79.58E	296
@@ -3766,7 +3777,7 @@ Nongan	Jilin	cn	N	105,1	44.43N	125.17E	203
 Rouen	Seine-Maritime	fr	R	105,1	49.44N	1.08E	1
 Katumba	Rukwa	tz	N	105	9.23S	33.62E	1411
 Mâhesana	Gujarat	in	N	104,9	23.60N	72.38E	87
-Uhta	Komi	ru	N	104,9	63.57N	53.72E	0	
+Ухта	Коми	ru	N	104,9	63.57N	53.72E	0	
 Dûmâ	Dimashq	sy	N	104,9	33.58N	36.39E	669
 Idkû	al-Buhayrah	eg	N	104,9	31.31N	30.30E	7
 Thaton	Mon	mm	N	104,8	16.93N	97.36E	19
@@ -3821,12 +3832,12 @@ Delicias	Chihuahua	mx	N	103,5	28.19N	105.47W	1173
 Dumai	Riau	id	N	103,5	1.68N	101.45E	2
 Coimbra	Centro	pt	R	103,4	40.22N	8.43W	30
 Chûru	Rajasthan	in	N	103,4	28.31N	74.96E	285
-Novotroick	Orenburg	ru	N	103,4	51.22N	58.35E	220
+Новотроицк	Оренбургская область	ru	N	103,4	51.22N	58.35E	220
 Mîândoâb	Azarbayjân-e Bakhtari	ir	N	103,4	36.97N	46.10E	1297
 Sawâi Mâdhopur	Rajasthan	in	N	103,3	26.03N	76.34E	262
 Shahr-e Kord	Chahâr Mahâl-e Bakhtiari	ir	R	103,3	32.32N	50.85E	2049
 Ilobu	Osun	ng	N	103,3	7.84N	4.48E	322
-Kiseljovsk	Kemerovo	ru	N	103,2	53.98N	86.65E	312
+Киселёвск	Кемеровская область	ru	N	103,2	53.98N	86.65E	312
 Saint Helens	England	gb	N	103,2	53.46N	2.75W	33
 Funchal	Madeira	pt	R	103,2	32.65N	16.90W	31
 Arvada	Colorado	us	N	103,2	39.82N	105.11W	1649.55249023438
@@ -3836,7 +3847,7 @@ Nancy	Meurthe-et-Moselle	fr	R	103,1	48.69N	6.17E	222
 Tanay	Southern Tagalog	ph	N	103,1	14.50N	121.29E	12
 Witten	Nordrhein-Westfalen	de	N	103	51.44N	7.34E	121
 Santa Cruz do Sul	Rio Grande do Sul	br	N	103	29.71S	52.44W	37
-Obninsk	Kaluga	ru	N	103	55.10N	36.61E	175
+Обнинск	Калужская область	ru	N	103	55.10N	36.61E	175
 Drobeta-Turnu Severin	Mehedinti	ro	N	103	44.64N	22.66E	82
 Tauranga	Bay of Plenty	nz	N	103	37.70S	176.15E	8
 Tuguegarao	Cagayan	ph	R	103	17.62N	121.72E	26
@@ -3847,7 +3858,7 @@ Mormugao	Goa	in	N	102,9	15.42N	73.78E	0
 Shiqiao	Guangdong	cn	N	102,9	22.94N	113.36E	13
 Rûrkî	Uttaranchal	in	N	102,8	29.87N	77.89E	269
 Saham	al-Bâtinah	om	N	102,8	24.18N	56.88E	5
-Elista	Kalmykija	ru	R	102,8	46.32N	44.21E	125
+Элиста	Калмыкия	ru	R	102,8	46.32N	44.21E	125
 Oldham	England	gb	N	102,8	53.55N	2.12W	191
 Louga	Louga	sn	R	102,8	15.61N	16.25W	37
 Hidalgo	Chihuahua	mx	N	102,8	26.93N	105.67W	1720
@@ -3914,11 +3925,11 @@ Edison	New Jersey	us	N	101,3	40.53N	74.37W	36.3683395385742
 Akhmîm	Sawhâj	eg	N	101,3	26.56N	31.75E	55
 Malabo	Bioko Norte	gq	B	101,2	3.74N	8.79E	52
 Viluppuram	Tamil Nadu	in	N	101,1	11.95N	79.49E	47
-Nojabrsk	Jamalo-Nenets	ru	N	101,1	63.17N	75.61E	0	
+Ноябрьск	Ямало-Ненецкий АО	ru	N	101,1	63.17N	75.61E	0	
 Fîrozpur	Punjab	in	N	101,1	30.92N	74.61E	200
 Bandar-e Anzalî	Gîlân	ir	N	101,1	37.47N	49.45E	-27
-Novoshahtinsk	Rostov	ru	N	101,1	47.76N	39.93E	150
-Magadan	Magadan	ru	R	101,1	59.57N	150.79E	78
+Новошахтинск	Ростовская область	ru	N	101,1	47.76N	39.93E	150
+Магадан	Магаданская область	ru	R	101,1	59.57N	150.79E	78
 Enshi	Hubei	cn	N	101,1	30.28N	109.47E	448
 Vinh Long	Dong Bang Song Cuu Long	vn	N	101,1	10.25N	105.97E	7
 Thornton	Colorado	us	N	101,1	39.89N	104.96W	1593.8603515625
@@ -3953,9 +3964,9 @@ Livonia	Michigan	us	N	100,4	42.40N	83.37W	201.017074584961
 Kânpur Cantonment	Uttar Pradesh	in	N	100,4	26.50N	80.28E	123
 Suriâpet	Andhra Pradesh	in	N	100,4	17.15N	79.62E	180
 Trier	Rheinland-Pfalz	de	N	100,4	49.75N	6.63E	133
-Sarapul	Udmurtija	ru	N	100,4	56.47N	53.80E	98
+Сарапул	Удмуртия	ru	N	100,4	56.47N	53.80E	98
 Algeciras	Cádiz	es	N	100,4	36.13N	5.45W	38
-Jessentuki	Stavropol	ru	N	100,4	44.04N	42.85E	614
+Ессентуки	Ставропольский край	ru	N	100,4	44.04N	42.85E	614
 al-Qurayyat	al-Hudûd-ash-Shamâlîyah	sa	N	100,4	31.33N	37.34E	498
 Gary	Indiana	us	N	100,3	41.60N	87.34W	182.798324584961
 Tando Allâh Yâr	Sind	pk	N	100,3	25.46N	68.72E	25
@@ -3977,7 +3988,7 @@ Huaicheng	Jiangsu	cn	N	100,1	33.51N	119.14E	10
 Hoa Binh	Mien Nui Va Trung Du	vn	N	100,1	20.84N	105.33E	47
 Tulancingo	Hidalgo	mx	N	100	20.09N	98.39W	2150
 Nandurbâr	Maharashtra	in	N	100	21.38N	74.23E	191
-Zeljonodolsk	Tatarstan	ru	N	100	55.84N	48.66E	56
+Зеленодольск	Татарстан	ru	N	100	55.84N	48.66E	56
 Votorantim	São Paulo	br	N	100	23.55S	47.43W	578
 Muroran	Hokkaido	jp	N	100	42.34N	141.01E	0
 Ikeda	Ôsaka	jp	N	100	34.82N	135.43E	27
@@ -3985,10 +3996,10 @@ Renqiu	Hebei	cn	N	100	38.70N	116.07E	10
 Petapa	Guatemala	gt	N	99,9	14.50N	90.57W	1283
 Tahoua	Tahoua	ne	R	99,9	14.90N	5.26E	371
 Jena	Thüringen	de	N	99,9	50.93N	11.58E	160
-Kansk	Krasnojarsk	ru	N	99,8	56.21N	95.72E	202
+Канск	Красноярский край	ru	N	99,8	56.21N	95.72E	202
 Cary	North Carolina	us	N	99,8	35.78N	78.80W	142.388488769531
 Ovalle	Coquimbo	cl	N	99,8	30.59S	71.20W	306
-Serov	Sverdlovsk	ru	N	99,8	59.61N	60.58E	123
+Серов	Свердловская область	ru	N	99,8	59.61N	60.58E	123
 Grudziądz	Kujawsko-Pomorskie	pl	N	99,8	53.49N	18.75E	29
 Kônan	Aichi	jp	N	99,8	35.34N	136.86E	15
 Chikushino	Fukuoka	jp	N	99,8	33.48N	130.52E	53
@@ -3996,14 +4007,14 @@ Rialto	California	us	N	99,8	34.11N	117.39W	396.882263183594
 Hepo	Guangdong	cn	N	99,8	23.44N	115.83E	38
 Cambridge	England	gb	N	99,8	52.21N	0.13E	5
 Tartu	Tartu	ee	R	99,7	58.38N	26.71E	72
-Mezhdurechensk	Kemerovo	ru	N	99,6	53.68N	88.09E	248
+Междуреченск	Кемеровская область	ru	N	99,6	53.68N	88.09E	248
 Iranshahr	Sîstân-e Balûchestân	ir	N	99,6	27.20N	60.70E	568
 Harer	Harar	et	R	99,6	9.31N	42.13E	1869
 Sliven	Sliven	bg	R	99,6	42.68N	26.32E	260
 Udagamandalam	Tamil Nadu	in	N	99,5	11.42N	76.69E	2335
 Yenakiyeve	Donets'ka	ua	N	99,5	48.23N	38.23E	198
 Itârsi	Madhya Pradesh	in	N	99,4	22.62N	77.76E	321
-Solikamsk	Perm	ru	N	99,4	59.64N	56.76E	172
+Соликамск	Пермская область	ru	N	99,4	59.64N	56.76E	172
 Zhoucheng	Yunnan	cn	N	99,4	24.36N	102.55E	1641
 Kaiserslautern	Rheinland-Pfalz	de	N	99,3	49.45N	7.75E	261
 Guaíba	Rio Grande do Sul	br	N	99,3	30.11S	51.32W	17
@@ -4044,7 +4055,7 @@ Eastbourne	England	gb	N	98,7	50.78N	0.27E	15
 Granada	Granada	ni	R	98,6	11.94N	85.96W	68
 Narita	Chiba	jp	N	98,6	35.79N	140.32E	15
 Lishu	Heilongjiang	cn	N	98,6	45.09N	130.69E	237
-Usolje-Sibirskoje	Irkutsk	ru	N	98,6	52.76N	103.63E	448
+Усолье-Сибирское	Иркутская область	ru	N	98,6	52.76N	103.63E	448
 Galmûnê	Amparai	lk	N	98,5	7.41N	81.82E	3
 Kâshîpur	Uttaranchal	in	N	98,5	29.22N	78.96E	237
 Liling	Hunan	cn	N	98,5	27.67N	113.49E	70
@@ -4058,7 +4069,7 @@ Northampton	England	gb	N	98,4	52.24N	0.90W	79
 Elgin	Illinois	us	N	98,3	42.04N	88.29W	218.453628540039
 Salto	São Paulo	br	N	98,3	23.19S	47.29W	538
 Shinyanga	Shinyanga	tz	R	98,3	3.66S	33.42E	1132
-Velikije Luki	Pskov	ru	N	98,3	56.34N	30.52E	107
+Великие Луки	Псковская область	ru	N	98,3	56.34N	30.52E	107
 Navapolack	Vicebsk	by	N	98,3	55.54N	28.66E	104
 Darwin	Northern Territory	au	R	98,3	12.43S	130.85E	28
 Bolgatanga	Upper East	gh	R	98,3	10.79N	0.85W	187
@@ -4146,7 +4157,7 @@ Putian	Fujian	cn	N	96,7	25.43N	119.02E	10
 Puerto Princessa	Southern Tagalog	ph	N	96,7	9.74N	118.72E	0
 Tarakan	Kalimantan Timur	id	N	96,7	3.28N	117.62E	26
 Kuningan	Jawa Barat	id	N	96,7	6.98S	108.48E	524
-Glazov	Udmurtija	ru	N	96,6	58.14N	52.64E	156
+Глазов	Удмуртия	ru	N	96,6	58.14N	52.64E	156
 Porto Seguro	Bahia	br	N	96,6	16.43S	39.08W	32
 Thika	Central	ke	N	96,6	1.04S	37.09E	1496
 Ziftâ	al-Gharbîyah	eg	N	96,6	30.70N	31.25E	9
@@ -4170,7 +4181,7 @@ Villa María	Córdoba	ar	N	96,2	32.41S	63.26W	204
 Zárate	Buenos Aires	ar	N	96,2	34.09S	59.04W	27
 Giresun	Giresun	tr	R	96,2	40.92N	38.39E	110
 Jastrzębie-Zdrój	Śląskie	pl	N	96,2	49.99N	18.59E	261
-Ust-Ilimsk	Irkutsk	ru	N	96,2	58.00N	102.66E	285
+Усть-Илимск	Иркутская область	ru	N	96,2	58.00N	102.66E	285
 Pergamino	Buenos Aires	ar	N	96,1	33.90S	60.57W	61
 Gillingham	England	gb	N	96,1	51.39N	0.55E	32
 Puerto Padre	Las Tunas	cu	N	96	21.20N	76.60W	14
@@ -4242,7 +4253,7 @@ New Bedford	Massachusetts	us	N	94,7	41.66N	70.94W	35.7591552734375
 Linköping	Östergötland	se	R	94,7	58.41N	15.63E	51
 Miaoli	Miaoli	tw	R	94,7	24.57N	120.81E	56
 České Budějovice	Jihočeský	cz	R	94,7	48.98N	14.46E	382
-Votkinsk	Udmurtija	ru	N	94,6	57.05N	53.98E	83
+Воткинск	Удмуртия	ru	N	94,6	57.05N	53.98E	83
 Kani	Gifu	jp	N	94,6	35.43N	137.07E	102
 Iriga	Bicol	ph	N	94,6	13.42N	123.40E	15
 Hede	Jiangsu	cn	N	94,6	33.78N	120.25E	2
@@ -4276,19 +4287,19 @@ Waukegan	Illinois	us	N	93,8	42.37N	87.87W	216.37516784668
 Roanoke	Virginia	us	N	93,8	37.28N	79.96W	305.290802001953
 Parli	Maharashtra	in	N	93,8	18.84N	76.54E	466
 Albany	New York	us	R	93,8	42.67N	73.80W	71.2595062255859
-Balashov	Saratov	ru	N	93,8	51.54N	43.17E	154
-Krasnogorsk	Moskovskaja Oblast	ru	N	93,8	55.83N	37.33E	177
+Балашов	Саратовская область	ru	N	93,8	51.54N	43.17E	154
+Красногорск	Московская область	ru	N	93,8	55.83N	37.33E	177
 Yamatokôriyama	Nara	jp	N	93,8	34.64N	135.79E	47
 Licung	Shandong	cn	N	93,8	36.17N	120.41E	18
 Yingtai	Jiangxi	cn	N	93,8	28.25N	117.03E	24
 Margahayu	Jawa Barat	id	N	93,8	6.96S	107.55E	674
 Metro	Lampung	id	N	93,8	5.10S	105.33E	58
-Bugulma	Tatarstan	ru	N	93,7	54.53N	52.80E	298
+Бугульма	Татарстан	ru	N	93,7	54.53N	52.80E	298
 Maizuru	Kyôto	jp	N	93,7	35.45N	135.32E	24
 Kharagpur Railway Settlement	Bangla	in	N	93,6	22.34N	87.26E	61
 Mughal Sarâi	Uttar Pradesh	in	N	93,6	25.30N	83.12E	84
 Huaraz	Ancash	pe	N	93,6	9.53S	77.53W	3060
-Novyj Urengoj	Jamalo-Nenets	ru	N	93,6	66.09N	76.51E	0	
+Новый Уренгой	Ямало-Ненецкий АО	ru	N	93,6	66.09N	76.51E	0	
 Bûndi	Rajasthan	in	N	93,6	25.45N	75.63E	323
 Nâgaur	Rajasthan	in	N	93,6	27.21N	73.73E	292
 Japeri	Rio de Janeiro	br	N	93,6	22.65S	43.66W	62
@@ -4334,7 +4345,7 @@ Battaramulla	Kolamba	lk	N	92,9	6.90N	79.92E	11
 Ushirombo	Shinyanga	tz	N	92,9	3.49S	31.96E	1189
 Hetian	Xinjiang	cn	N	92,8	37.12N	79.92E	1367
 Ranip	Gujarat	in	N	92,8	23.03N	72.54E	53
-Tobolsk	Tjumen	ru	N	92,8	58.19N	68.24E	48
+Тобольск	Тюменская область	ru	N	92,8	58.19N	68.24E	48
 Venlo	Limburg	nl	N	92,8	51.38N	6.17E	28
 Lingdong	Heilongjiang	cn	N	92,8	46.57N	131.14E	149
 Puli	Nantou	tw	N	92,8	23.97N	120.96E	442
@@ -4363,7 +4374,7 @@ Sandy Springs	Georgia	us	N	92,2	33.94N	84.37W	277.341217041016
 Ríohacha	La Guajira	co	N	92,2	11.55N	72.90W	4
 Kot Addu	Punjab	pk	N	92,2	30.46N	70.97E	130
 Lünen	Nordrhein-Westfalen	de	N	92,2	51.62N	7.52E	56
-Klin	Moskovskaja Oblast	ru	N	92,2	56.34N	36.70E	154
+Клин	Московская область	ru	N	92,2	56.34N	36.70E	154
 Southport	England	gb	N	92,2	53.66N	3.01W	0
 Lawton	Oklahoma	us	N	92,1	34.60N	98.42W	339.625885009766
 Châkdaha	Bangla	in	N	92,1	22.48N	88.35E	12
@@ -4427,7 +4438,7 @@ Citrus Heights	California	us	N	91	38.69N	121.29W	43.6023292541504
 Zhangshui	Jiangxi	cn	N	91	28.07N	115.53E	18
 Sunrise	Florida	us	N	90,9	26.15N	80.30W	1.02999997138977
 Baraut	Uttar Pradesh	in	N	90,9	29.10N	77.26E	235
-Michurinsk	Tambov	ru	N	90,9	52.90N	40.47E	160
+Мичуринск	Тамбовская область	ru	N	90,9	52.90N	40.47E	160
 Mbanza-Ngungu	Bas-Congo	cd	N	90,9	5.25S	14.86E	730
 Phan Rang	Duyen Hai Mien Trung	vn	N	90,9	11.57N	109.00E	4
 Cikampek	Jawa Barat	id	N	90,9	6.40S	107.46E	46
@@ -4484,7 +4495,7 @@ Bhandâra	Maharashtra	in	N	90,1	21.18N	79.65E	261
 Mau	Madhya Pradesh	in	N	90,1	22.56N	75.75E	580
 Pesaro	Marche	it	N	90,1	43.92N	12.91E	1
 Santa Barbara	California	us	N	90,1	34.43N	119.72W	45.789249420166
-Zheleznogorsk	Krasnojarsk	ru	N	90	56.33N	93.60E	366
+Железногорск	Красноярский край	ru	N	90	56.33N	93.60E	366
 West Palm Beach	Florida	us	N	90	26.75N	80.13W	4.64355039596558
 Torre del Greco	Campania	it	N	90	40.79N	14.36E	7
 Dashiqiao	Liaoning	cn	N	90	40.64N	122.50E	16
@@ -4494,7 +4505,7 @@ Lynn	Massachusetts	us	N	89,9	42.47N	70.96W	12.4500637054443
 Ubá	Minas Gerais	br	N	89,9	21.12S	42.95W	379
 Chutung	Hsinchu Hsien	tw	N	89,9	24.73N	121.07E	222
 Tuxtepec	Oaxaca	mx	N	89,8	18.09N	96.12W	31
-Anzhero-Sudzhensk	Kemerovo	ru	N	89,8	56.08N	86.02E	205
+Анжеро-Судженск	Кемеровская область	ru	N	89,8	56.08N	86.02E	205
 Hindaun	Rajasthan	in	N	89,8	26.74N	77.02E	231
 Duitama	Boyacá	co	N	89,8	5.83N	73.04W	2563
 Velbert	Nordrhein-Westfalen	de	N	89,8	51.35N	7.04E	215
@@ -4555,8 +4566,8 @@ Francistown	Francistown	bw	R	89,1	21.17S	27.50E	984
 Jiangdu	Jiangsu	cn	N	89,1	32.43N	119.57E	12
 Pompano Beach	Florida	us	N	89	26.24N	80.13W	2.604975938797
 Aruppukkottai	Tamil Nadu	in	N	89	9.51N	78.09E	97
-Novouralsk	Sverdlovsk	ru	N	89	57.25N	59.80E	372
-Kineshma	Ivanovo	ru	N	89	57.45N	42.13E	111
+Новоуральск	Свердловская область	ru	N	89	57.25N	59.80E	372
+Кинешма	Ивановская область	ru	N	89	57.45N	42.13E	111
 Misad	Jilfah	dz	N	89	34.16N	3.50E	760
 Wâw	Gharb Bahr-al-Ghazâl	sd	R	89	7.70N	27.99E	444
 Chingshui	Taichung Hsien	tw	N	89	24.28N	120.57E	6
@@ -4569,7 +4580,7 @@ Xindian	Shandong	cn	N	88,9	36.84N	118.28E	51
 Yima	Henan	cn	N	88,9	34.72N	111.87E	454
 Linxia	Gansu	cn	N	88,9	35.61N	103.21E	1883
 Sujângarh	Rajasthan	in	N	88,8	27.70N	74.46E	318
-Kuzneck	Penza	ru	N	88,8	53.12N	46.57E	243
+Кузнецк	Пензенская область	ru	N	88,8	53.12N	46.57E	243
 Kwacheon	Kyeonggi	kr	N	88,8	37.42N	126.99E	56
 Yongzhou	Hunan	cn	N	88,8	26.23N	111.60E	172
 Lakeland	Florida	us	N	88,7	28.04N	81.96W	51.8519477844238
@@ -4581,7 +4592,7 @@ Kuito	Bié	ao	R	88,7	12.38S	16.94E	1702
 Guozhen	Shaanxi	cn	N	88,7	34.35N	107.38E	541
 Nashua	New Hampshire	us	N	88,6	42.75N	71.49W	56.9981231689453
 Assis	São Paulo	br	N	88,6	22.66S	50.42W	580
-Gubkin	Belgorod	ru	N	88,6	51.28N	37.39E	164
+Губкин	Белгородская область	ru	N	88,6	51.28N	37.39E	164
 Nkayi	Bouenza	cg	N	88,6	4.18S	13.28E	173
 Houma	Shanxi	cn	N	88,6	35.62N	111.21E	440
 Bârmer	Rajasthan	in	N	88,5	25.75N	71.39E	204
@@ -4617,7 +4628,7 @@ Helsingborg	Skåne	se	N	88,2	56.05N	12.70E	40
 Zhengchang	Hubei	cn	N	88,2	30.38N	113.45E	18
 Ludwigsburg	Baden-Württemberg	de	N	88,1	48.90N	9.19E	287
 Ni Bârâkpur	Bangla	in	N	88,1	22.77N	88.36E	14
-Ramenskoje	Moskovskaja Oblast	ru	N	88,1	55.49N	38.35E	111
+Раменское	Московская область	ru	N	88,1	55.49N	38.35E	111
 Shumen	Shumen	bg	R	88,1	43.28N	26.93E	239
 Jelenia Góra	Dolnośląskie	pl	N	88,1	50.91N	15.73E	326
 Pecheng	Jiangsu	cn	N	88,1	34.73N	116.93E	39
@@ -4652,7 +4663,7 @@ Kipushi	Katanga	cd	N	87,6	11.76S	27.25E	1350
 Râjpura	Punjab	in	N	87,5	30.48N	76.59E	273
 El Cafetal	Miranda	ve	N	87,5	10.43N	66.83W	1204
 Mâdabâ	Mâdabâ	jo	R	87,5	31.72N	35.79E	802
-Zheleznogorsk	Kursk	ru	N	87,5	52.35N	35.41E	220
+Железногорск	Курская область	ru	N	87,5	52.35N	35.41E	220
 Darlington	England	gb	N	87,5	54.52N	1.57W	53
 Santiago de Compostela	A Coruña	es	N	87,4	42.88N	8.54W	257
 Surt	Surt	ly	R	87,4	31.21N	16.59E	9
@@ -4682,7 +4693,7 @@ Yumen	Gansu	cn	N	86,9	39.83N	97.73E	2037
 Kalyani	Bangla	in	N	86,9	22.98N	88.48E	12
 Jharia	Jharkhand	in	N	86,9	23.76N	86.42E	202
 Valinhos	São Paulo	br	N	86,9	22.97S	46.99W	712
-Jejsk	Krasnodar	ru	N	86,9	46.70N	38.27E	16
+Ейск	Краснодарский край	ru	N	86,9	46.70N	38.27E	16
 as-Sinbillâwayn	ad-Daqahlîyah	eg	N	86,9	30.88N	31.45E	5
 Gyôda	Saitama	jp	N	86,9	36.14N	139.47E	21
 Gushi	Henan	cn	N	86,9	32.18N	115.67E	57
@@ -4734,7 +4745,7 @@ Worcester	England	gb	N	86,1	52.20N	2.24W	30
 Nanterre	Hauts-de-Seine	fr	R	86,1	48.90N	2.20E	24
 Villa de Alvarez	Colima	mx	N	86,1	19.27N	103.75W	527
 Ishieke	Ebonyi	ng	N	86	6.40N	8.03E	65
-Kaspijsk	Dagestan	ru	N	86	42.89N	47.63E	-17
+Каспийск	Дагестан	ru	N	86	42.89N	47.63E	-17
 Magway	Magway	mm	R	85,9	20.14N	94.92E	33
 Panshi	Jilin	cn	N	85,9	42.94N	126.05E	317
 Duobao	Hubei	cn	N	85,9	30.65N	112.63E	38
@@ -4771,7 +4782,7 @@ Ballarat	Victoria	au	N	85,2	37.56S	143.84E	454
 Hannô	Saitama	jp	N	85,2	35.86N	139.32E	117
 Jati	Jawa Tengah	id	N	85,2	6.84S	110.81E	10
 Mudon	Mon	mm	N	85,1	16.26N	97.72E	17
-Pushkin	Leningrad	ru	N	85,1	59.76N	30.31E	60
+Пушкин	Ленинградская область	ru	N	85,1	59.76N	30.31E	60
 Padalarang	Jawa Barat	id	N	85,1	6.84S	107.48E	691
 Pisa	Toscana	it	N	85,1	43.72N	10.40E	9
 Pyinmana	Mandalay	mm	N	85	19.74N	96.20E	115
@@ -4796,7 +4807,7 @@ Wigan	England	gb	N	84,7	53.55N	2.64W	39
 Yotsukaidô	Chiba	jp	N	84,7	35.68N	140.17E	20
 Rafaela	Santa Fé	ar	N	84,6	31.25S	61.50W	103
 Baydhabo	Bay	so	R	84,6	3.12N	43.64E	452
-Kropotkin	Krasnodar	ru	N	84,6	45.43N	40.56E	78
+Кропоткин	Краснодарский край	ru	N	84,6	45.43N	40.56E	78
 Igarassu	Pernambuco	br	N	84,6	7.83S	34.90W	18
 al-Arbaa	Blidah	dz	N	84,6	36.57N	3.15E	89
 Nowy Sącz	Małopolskie	pl	N	84,6	49.63N	20.70E	283
@@ -4810,7 +4821,7 @@ Munakata	Fukuoka	jp	N	84,5	33.81N	130.55E	4
 Mabalacat	Central Luzon	ph	N	84,5	15.22N	120.57E	114
 Baijiantan	Xinjiang	cn	N	84,4	45.64N	85.18E	267
 Ârifwâla	Punjab	pk	N	84,4	30.30N	73.07E	158
-Ozjorsk	Cheljabinsk	ru	N	84,4	55.77N	60.70E	246
+Озёрск	Челябинская область	ru	N	84,4	55.77N	60.70E	246
 Hücayli	Korakalpogiston	uz	N	84,4	42.41N	59.43E	73
 Bitola	Bitola	mk	R	84,4	41.04N	21.34E	641
 Žilina	Žilinský	sk	R	84,4	49.22N	18.74E	350
@@ -4884,7 +4895,7 @@ Jishui	Henan	cn	N	83,5	33.74N	115.40E	41
 Nanhai	Hubei	cn	N	83,5	30.18N	111.76E	82
 Cárdenas	Tabasco	mx	N	83,4	18.01N	93.37W	26
 Bloomington	Minnesota	us	N	83,4	44.83N	93.32W	246.149429321289
-Berdsk	Novosibirsk	ru	N	83,4	54.76N	83.08E	129
+Бердск	Новосибирская область	ru	N	83,4	54.76N	83.08E	129
 Sangrûr	Punjab	in	N	83,4	30.25N	75.84E	240
 Piedecuesta	Santander	co	N	83,4	6.99N	73.05W	1009
 Ogaminana	Kogi	ng	N	83,4	7.60N	6.23E	224
@@ -4905,13 +4916,13 @@ Qixia	Shandong	cn	N	83,3	37.30N	120.84E	177
 Orem	Utah	us	N	83,3	40.30N	111.70W	1451.62329101563
 Krathum Baen	Samut Sakhon	th	N	83,3	13.65N	100.27E	6
 Apartadó	Antioquia	co	N	83,2	7.89N	76.64W	25
-Buzuluk	Orenburg	ru	N	83,2	52.78N	52.26E	72
+Бузулук	Оренбургская область	ru	N	83,2	52.78N	52.26E	72
 Planaltina	Goiás	br	N	83,2	15.62S	47.67W	955
 Sano	Tochigi	jp	N	83,2	36.32N	139.58E	46
 Effium	Ebonyi	ng	N	83,1	6.63N	8.07E	111
 Fatehpur	Rajasthan	in	N	83,1	27.99N	74.95E	321
 Madgaon	Goa	in	N	83,1	15.28N	73.94E	9
-Azov	Rostov	ru	N	83,1	47.10N	39.43E	43
+Азов	Ростовская область	ru	N	83,1	47.10N	39.43E	43
 Abreu e Lima	Pernambuco	br	N	83,1	7.95S	34.88W	55
 Resita	Caras-Severin	ro	N	83,1	45.30N	21.89E	317
 Gotemba	Shizuoka	jp	N	83,1	35.31N	138.93E	471
@@ -4919,13 +4930,13 @@ Tunxi	Anhui	cn	N	83,1	29.71N	118.30E	133
 Chicoloapan	México	mx	N	83	19.41N	98.92W	2243
 Kâvali	Andhra Pradesh	in	N	83	14.92N	79.99E	21
 Bârân	Rajasthan	in	N	83	25.10N	76.51E	260
-Troick	Cheljabinsk	ru	N	83	54.11N	61.57E	212
+Троицк	Челябинская область	ru	N	83	54.11N	61.57E	212
 Pec	Kosovo and Metohija	rs	N	83	42.66N	20.31E	496
 Lecce	Puglia	it	N	83	40.36N	18.16E	48
 Santa Maria	California	us	N	83	34.94N	120.44W	66.8089981079102
 Cranston	Rhode Island	us	N	82,9	41.77N	71.48W	25.5100250244141
 Cáceres	Cáceres	es	R	82,9	39.47N	6.38W	468
-Chajkovskij	Perm	ru	N	82,9	56.76N	54.08E	72
+Чайковский	Пермская область	ru	N	82,9	56.76N	54.08E	72
 Agboville	Agnéby	ci	R	82,9	5.94N	4.28W	48
 Shulan	Jilin	cn	N	82,9	44.41N	126.94E	246
 Kent	Washington	us	N	82,9	47.39N	122.24W	11.2878160476685
@@ -4943,7 +4954,7 @@ Lahad Datu	Sabah	my	N	82,8	5.03N	118.34E	44
 Taldikorgan	Almati	kz	N	82,7	45.00N	78.40E	618
 Khanîfrah	Meknes-Tafilalet	ma	N	82,7	32.95N	5.67W	844
 Antsiranana	Antsiranana	mg	R	82,7	12.28S	49.28E	30
-Voskresensk	Moskovskaja Oblast	ru	N	82,7	55.31N	38.70E	123
+Воскресенск	Московская область	ru	N	82,7	55.31N	38.70E	123
 Ifo	Ogun	ng	N	82,7	6.82N	3.20E	68
 Ílion	Attikí	gr	N	82,7	38.03N	23.71E	90
 Fangshan	Beijing	cn	N	82,7	39.69N	115.96E	60
@@ -4952,7 +4963,7 @@ South Shields	England	gb	N	82,7	55.00N	1.43W	16
 Ashiaman	Greater Accra	gh	N	82,7	5.70N	0.33W	39
 Davie	Florida	us	N	82,6	26.08N	80.29W	1.01399993896484
 Viedma	Río Negro	ar	R	82,6	40.81S	63.00W	7
-Kirovo-Chepeck	Kirov	ru	N	82,6	58.55N	50.03E	176
+Кирово-Чепецк	Кировская область	ru	N	82,6	58.55N	50.03E	176
 Eunápolis	Bahia	br	N	82,6	16.36S	39.58W	170
 Kefar Sava	Hamerkaz	il	N	82,6	32.19N	34.91E	65
 Coslada	Madrid	es	N	82,6	40.43N	3.57W	626
@@ -5033,7 +5044,7 @@ Pattaya	Chon Buri	th	N	81,6	12.92N	100.90E	22
 Brâjrâjnagar	Orissa	in	N	81,5	21.82N	83.91E	219
 Worms	Rheinland-Pfalz	de	N	81,5	49.64N	8.35E	101
 Mayarí	Santiago de Cuba	cu	N	81,5	20.66N	75.69W	22
-Gatchina	Leningrad	ru	N	81,5	59.56N	30.10E	97
+Гатчина	Ленинградская область	ru	N	81,5	59.56N	30.10E	97
 Kwekwe	Midlands	zw	N	81,5	18.93S	29.80E	1237
 Xinmin	Liaoning	cn	N	81,5	42.00N	122.82E	35
 Bandar Seri Begawan	Brunei-Muara	bn	B	81,5	4.93N	114.95E	20
@@ -5094,7 +5105,7 @@ Gantou	Fujian	cn	N	80,8	26.20N	119.53E	12
 Xingcheng	Guangdong	cn	N	80,8	24.15N	115.73E	120
 Racine	Wisconsin	us	N	80,7	42.73N	87.81W	182.005416870117
 Tuscaloosa	Alabama	us	N	80,7	33.24N	87.54W	72.2406005859375
-Jurga	Kemerovo	ru	N	80,7	55.73N	84.91E	163
+Юрга	Кемеровская область	ru	N	80,7	55.73N	84.91E	163
 Silver Spring	Maryland	us	N	80,7	39.01N	77.02W	79.3255386352539
 Trinidad	Beni	bo	R	80,7	14.84S	64.91W	156
 Shibata	Niigata	jp	N	80,7	37.94N	139.32E	11
@@ -5175,7 +5186,7 @@ Roswell	Georgia	us	N	79,7	34.04N	84.36W	332.865783691406
 Colón	Matanzas	cu	N	79,7	22.73N	80.91W	58
 Kanata	Ontario	ca	N	79,7	45.34N	75.88W	69
 Bhakkar	Punjab	pk	N	79,7	31.63N	71.06E	169
-Chapajevsk	Samara	ru	N	79,7	52.97N	49.69E	31
+Чапаевск	Самарская область	ru	N	79,7	52.97N	49.69E	31
 Ahar	Azarbayjân-e Khavari	ir	N	79,7	38.47N	47.06E	1340
 Créteil	Val-de-Marne	fr	R	79,7	48.79N	2.45E	37
 Xinchengxi	Liaoning	cn	N	79,7	42.05N	123.51E	62
@@ -5200,7 +5211,7 @@ La Libertad	Guayas	ec	N	79,5	2.23S	80.90W	38
 Bâlâghât	Madhya Pradesh	in	N	79,5	21.80N	80.18E	299
 Harihar	Karnataka	in	N	79,5	14.52N	75.80E	543
 Gonaïves	Artibonite	ht	R	79,5	19.45N	72.69W	6
-Vyborg	Leningrad	ru	N	79,5	60.71N	28.76E	0	
+Выборг	Ленинградская область	ru	N	79,5	60.71N	28.76E	0	
 Iizuka	Fukuoka	jp	N	79,5	33.64N	130.69E	6
 Bais	Central Visayas	ph	N	79,5	9.60N	123.12E	2
 Huilong	Jiangsu	cn	N	79,5	31.81N	121.65E	4
@@ -5288,7 +5299,7 @@ Târûdânt	Souss Massa-Draâ	ma	N	78,3	30.48N	8.88W	234
 al-Qasrayn	al-Qasrayn	tn	R	78,3	35.18N	8.83E	647
 Ikom	Cross River	ng	N	78,3	5.97N	8.71E	86
 Alegrete	Rio Grande do Sul	br	N	78,3	29.78S	55.79W	100
-Sarov	Nizhnij Novgorod	ru	N	78,3	55.38N	43.83E	118
+Саров	Новгородская область	ru	N	78,3	55.38N	43.83E	118
 ar-Rass	Qasîm	sa	N	78,3	25.87N	43.50E	696
 Owariashi	Aichi	jp	N	78,3	35.22N	137.03E	69
 Nanma	Shandong	cn	N	78,3	36.18N	118.16E	277
@@ -5358,7 +5369,7 @@ Girona	Girona	es	R	77,4	41.98N	2.81E	81
 Asnières-sur-Seine	Hauts-de-Seine	fr	N	77,4	48.91N	2.29E	40
 Elk Grove	California	us	N	77,4	38.40N	121.37W	13.4774789810181
 Virudunagar	Tamil Nadu	in	N	77,3	9.59N	77.95E	97
-Shadrinsk	Kurgan	ru	N	77,3	56.08N	63.62E	87
+Шадринск	Курганская область	ru	N	77,3	56.08N	63.62E	87
 Açailândia	Maranhão	br	N	77,3	5.06S	47.54W	373
 Sasolburg	Free State	za	N	77,3	26.82S	27.84E	1503
 Chôshi	Chiba	jp	N	77,3	35.75N	140.81E	3
@@ -5380,9 +5391,9 @@ Danané	Dix-huit Montagnes	ci	N	77,1	7.26N	8.16W	360
 Arnsberg	Nordrhein-Westfalen	de	N	77,1	51.41N	8.06E	229
 Sahrisabz	Kaskadar	uz	N	77,1	39.06N	66.83E	632
 Puerto Madryn	Chubut	ar	N	77,1	42.77S	65.04W	12
-Asbest	Sverdlovsk	ru	N	77,1	57.02N	61.46E	213
+Асбест	Свердловская область	ru	N	77,1	57.02N	61.46E	213
 São João da Boa Vista	São Paulo	br	N	77,1	21.98S	46.79W	778
-Mineralnyje Vody	Stavropol	ru	N	77,1	44.21N	43.13E	312
+Минеральные Воды	Ставропольский край	ru	N	77,1	44.21N	43.13E	312
 Bathurst-Orange	New South Wales	au	N	77,1	33.42S	149.57E	678
 Yachimata	Chiba	jp	N	77,1	35.66N	140.31E	47
 Gamboru	Borno	ng	N	77,1	12.37N	14.22E	286
@@ -5400,7 +5411,7 @@ Gucheng	Hubei	cn	N	77	32.26N	111.64E	88
 Prey Veaeng	Prey Veaeng	kh	R	77	11.49N	105.33E	12
 Vîrappanchatram	Tamil Nadu	in	N	76,9	11.40N	77.70E	154
 Mânsa	Punjab	in	N	76,9	29.98N	75.39E	220
-Vorkuta	Komi	ru	N	76,9	67.51N	64.03E	0	
+Воркута	Коми	ru	N	76,9	67.51N	64.03E	0	
 Manzini	Manzini	sz	R	76,9	26.49S	31.38E	596
 Ôbu	Aichi	jp	N	76,9	35.01N	136.96E	11
 Cuautitlán	México	mx	N	76,8	19.67N	99.18W	2261
@@ -5469,7 +5480,7 @@ Maymânah	Faryab	af	R	75,9	35.93N	64.77E	839
 Zhoucheng	Shandong	cn	N	75,9	35.91N	116.30E	44
 Kedungwuni	Jawa Tengah	id	N	75,9	6.97S	109.64E	20
 Katwa	Bangla	in	N	75,8	23.65N	88.13E	21
-Belovo	Kemerovo	ru	N	75,8	54.42N	86.29E	218
+Белово	Кемеровская область	ru	N	75,8	54.42N	86.29E	218
 Kannauj	Uttar Pradesh	in	N	75,8	27.06N	79.91E	142
 Dod Ballâpur	Karnataka	in	N	75,8	13.30N	77.52E	901
 Fatsa	Ordu	tr	N	75,8	41.03N	37.49E	17
@@ -5510,7 +5521,7 @@ Shalu	Taichung Hsien	tw	N	75,4	24.24N	120.55E	7
 Longquan	Yunnan	cn	N	75,4	24.68N	102.15E	1612
 Texmelucan	Puebla	mx	N	75,3	19.28N	98.43W	2250
 Pawtucket	Rhode Island	us	N	75,3	41.87N	71.37W	24.6121883392334
-Jegorjevsk	Moskovskaja Oblast	ru	N	75,3	55.38N	39.03E	144
+Егорьевск	Московская область	ru	N	75,3	55.38N	39.03E	144
 Dondo	Sofala	mz	N	75,3	19.62S	34.73E	38
 Bondoukou	Zanzan	ci	R	75,3	8.03N	2.80W	330
 Piła	Wielkopolskie	pl	N	75,3	53.15N	16.74E	59
@@ -5606,7 +5617,7 @@ Cáceres	Mato Grosso	br	N	74	16.05S	57.51W	368
 Jiexiu	Shanxi	cn	N	74	37.04N	111.90E	739
 Lianyuan	Hunan	cn	N	74	27.66N	111.66E	223
 Pará de Minas	Minas Gerais	br	N	73,9	19.84S	44.61W	773
-Reutov	Moskovskaja Oblast	ru	N	73,9	55.76N	37.87E	164
+Реутов	Московская область	ru	N	73,9	55.76N	37.87E	164
 Kitale	Rift Valley	ke	N	73,9	1.03N	34.99E	1856
 Lisala	Équateur	cd	N	73,9	2.14N	21.51E	341
 Tailai	Heilongjiang	cn	N	73,9	46.39N	123.41E	146
@@ -5614,7 +5625,7 @@ Detmold	Nordrhein-Westfalen	de	N	73,8	51.95N	8.88E	156
 Luján	Mendoza	ar	N	73,8	33.03S	68.90W	976
 Tatvan	Bitlis	tr	N	73,8	38.49N	42.29E	1666
 Ra'anana	Hamerkaz	il	N	73,8	32.19N	34.88E	41
-Birobidzhan	Jevrej	ru	R	73,8	48.80N	132.91E	87
+Биробиджан	Еврейская АО	ru	R	73,8	48.80N	132.91E	87
 Ningan	Heilongjiang	cn	N	73,8	44.34N	129.46E	260
 Fengzhen	Nei Monggol	cn	N	73,8	40.45N	113.14E	1193
 Tanghe	Henan	cn	N	73,8	32.69N	112.82E	105
@@ -5701,7 +5712,7 @@ Rânâghât	Bangla	in	N	72,8	23.19N	88.58E	20
 Valvedditturai	Yâpanaya	lk	N	72,8	9.82N	80.17E	10
 Payyannûr	Kerala	in	N	72,8	12.10N	75.19E	4
 Lawrence	Massachusetts	us	N	72,8	42.70N	71.16W	12.1908235549927
-Beloreck	Bashkortostan	ru	N	72,8	53.97N	58.40E	517
+Белорецк	Башкортостан	ru	N	72,8	53.97N	58.40E	517
 Türkmenbasi	Balkan	tm	N	72,8	40.02N	52.96E	14
 Äli Bayramli	Mugan-Salyan	az	R	72,8	39.93N	48.91E	-22
 Ünye	Ordu	tr	N	72,8	41.13N	37.29E	0
@@ -5710,8 +5721,8 @@ Lubu	Guangdong	cn	N	72,8	23.18N	112.28E	6
 Kuytun	Xinjiang	cn	N	72,7	44.44N	84.89E	466
 Bethlehem	Pennsylvania	us	N	72,7	40.63N	75.37W	103.515068054199
 Caçapava	São Paulo	br	N	72,7	23.10S	45.71W	556
-Kamensk-Shahtinskij	Rostov	ru	N	72,7	48.32N	40.25E	47
-Pushkino	Moskovskaja Oblast	ru	N	72,7	56.00N	37.83E	141
+Каменск-Шахтинский	Ростовская область	ru	N	72,7	48.32N	40.25E	47
+Пушкино	Московская область	ru	N	72,7	56.00N	37.83E	141
 Carlisle	England	gb	N	72,7	54.91N	2.95W	30
 Qasr-al-Bukhari	Midyah	dz	N	72,7	35.89N	2.74E	603
 Yawata	Kyôto	jp	N	72,7	34.87N	135.71E	12
@@ -5763,7 +5774,7 @@ Anklesvar	Gujarat	in	N	72	21.63N	72.98E	14
 New Britain	Connecticut	us	N	72	41.68N	72.79W	78.3197479248047
 Shorkot	North-West Frontier	pk	N	72	31.90N	70.86E	184
 Bandar-e Emam Khomeynî	Khûzestân	ir	N	72	30.43N	49.08E	5
-Prohladnyj	Kabardino-Balkarija	ru	N	72	43.76N	43.99E	212
+Прохладный	Кабардино-Балкария	ru	N	72	43.76N	43.99E	212
 Mardin	Mardin	tr	R	72	37.33N	40.78E	841
 Gouda	Zuid-Holland	nl	N	72	52.02N	4.70E	2
 Champigny-sur-Marne	Val-de-Marne	fr	N	72	48.82N	2.51E	55
@@ -5888,7 +5899,7 @@ San Sebastián de los Reyes	Madrid	es	N	70,7	40.55N	3.62W	660
 Kafue	Lusaka	zm	N	70,7	15.78S	28.18E	987
 Hunedoara	Hunedoara	ro	N	70,7	45.77N	22.92E	240
 Lake Charles	Louisiana	us	N	70,6	30.21N	93.20W	3.91673064231873
-Chernogorsk	Hakasija	ru	N	70,6	53.83N	91.22E	341
+Черногорск	Хакасия	ru	N	70,6	53.83N	91.22E	341
 Champaign	Illinois	us	N	70,6	40.11N	88.26W	236.337936401367
 Belampalli	Andhra Pradesh	in	N	70,6	19.06N	79.49E	210
 Ozubulu	Anambra	ng	N	70,6	5.95N	6.85E	114
@@ -5900,7 +5911,7 @@ Lianzhou	Guangdong	cn	N	70,6	24.79N	112.36E	90
 Sankt Gallen	Sankt Gallen	ch	R	70,5	47.44N	9.36E	579
 Aku	Enugu	ng	N	70,5	6.70N	7.33E	333
 Chacao	Miranda	ve	N	70,5	10.50N	66.85W	894
-Kopejsk	Cheljabinsk	ru	N	70,5	55.13N	61.65E	204
+Копейск	Челябинская область	ru	N	70,5	55.13N	61.65E	204
 Lelystad	Flevoland	nl	R	70,5	52.52N	5.45E	-5
 Gemlik	Bursa	tr	N	70,5	40.43N	29.15E	0
 Union City	California	us	N	70,5	37.60N	122.02W	24.2834300994873
@@ -5924,7 +5935,7 @@ São Cristóvão	Sergipe	br	N	70,3	11.01S	37.21W	4
 Rèchyca	Homjel'	by	N	70,3	52.36N	30.40E	125
 Lamezia Terme	Calabria	it	N	70,3	38.95N	16.29E	111
 Madhubani	Bihar	in	N	70,2	26.37N	86.06E	56
-Dubna	Moskovskaja Oblast	ru	N	70,2	56.75N	37.15E	119
+Дубна	Московская область	ru	N	70,2	56.75N	37.15E	119
 Gniezno	Wielkopolskie	pl	N	70,2	52.53N	17.61E	116
 Tanabe	Wakayama	jp	N	70,2	33.73N	135.39E	22
 Huwei	Yunlin	tw	N	70,2	23.72N	120.39E	19
@@ -5935,7 +5946,7 @@ Karauli	Rajasthan	in	N	70,1	26.50N	77.02E	270
 Antibes	Alpes-Maritimes	fr	N	70,1	43.60N	7.12E	13
 Maiquetía	Vargas	ve	N	70,1	10.60N	66.97W	30
 Kattakürgon	Samarkand	uz	N	70,1	39.90N	66.26E	489
-Ishimbaj	Bashkortostan	ru	N	70,1	53.45N	56.05E	162
+Ишимбай	Башкортостан	ru	N	70,1	53.45N	56.05E	162
 Ayn Tutah	Batnah	dz	N	70,1	35.39N	5.89E	943
 Iguatu	Ceará	br	N	70,1	6.36S	39.30W	220
 Cuamba	Niassa	mz	N	70,1	14.79S	36.54E	560
@@ -5947,8 +5958,8 @@ Xiaolingwei	Jiangsu	cn	N	70,1	32.02N	118.85E	16
 Juxian	Shandong	cn	N	70,1	35.58N	118.82E	106
 Bamberg	Bayern	de	N	70,1	49.90N	10.90E	243
 as-Sawîrah	Marrakech-Tensift-Al Haouz	ma	N	70	31.52N	9.77W	0
-Bujnaksk	Dagestan	ru	N	70	42.83N	47.12E	463
-Dolgoprudnyj	Moskovskaja Oblast	ru	N	70	55.92N	37.51E	181
+Буйнакск	Дагестан	ru	N	70	42.83N	47.12E	463
+Долгопрудный	Московская область	ru	N	70	55.92N	37.51E	181
 Saint-Nazaire	Loire-Atlantique	fr	N	70	47.28N	2.22W	12
 Xiashi	Zhejiang	cn	N	70	30.54N	120.69E	5
 Fuyang	Zhejiang	cn	N	70	30.06N	119.94E	13
@@ -5979,7 +5990,7 @@ Nuneaton	England	gb	N	69,8	52.53N	1.49W	108
 Visnagar	Gujarat	in	N	69,7	23.71N	72.54E	128
 Denau	Surhondar	uz	N	69,7	38.28N	67.89E	512
 Kâshmar	Khorâsân	ir	N	69,7	35.18N	58.45E	991
-Kumertau	Bashkortostan	ru	N	69,7	52.76N	55.78E	317
+Кимертау	Башкортостан	ru	N	69,7	52.76N	55.78E	317
 Lins	São Paulo	br	N	69,7	21.67S	49.76W	470
 Ambovombe	Toliary	mg	N	69,7	25.18S	46.08E	134
 Zugdidi	Samagrelo and Zemo Svaneti	ge	R	69,7	42.50N	41.86E	97
@@ -6008,7 +6019,7 @@ Lalamûsa	Punjab	pk	N	69,4	32.70N	73.96E	254
 Güigüe	Carabobo	ve	N	69,4	10.08N	67.78W	447
 al-Hayy	Wâsit	iq	N	69,4	32.17N	64.03E	1233
 Yacuíba	Tarija	bo	N	69,4	22.03S	63.70W	713
-Kungur	Perm	ru	N	69,4	57.44N	56.94E	120
+Кунгур	Пермская область	ru	N	69,4	57.44N	56.94E	120
 Jaboticabal	São Paulo	br	N	69,4	21.25S	48.33W	589
 Mengyin	Shandong	cn	N	69,4	35.71N	117.92E	181
 Mengcheng	Anhui	cn	N	69,4	33.27N	116.55E	30
@@ -6028,7 +6039,7 @@ Cremona	Lombardia	it	N	69,3	45.15N	10.01E	46
 Kladno	Středočeský	cz	N	69,3	50.15N	14.09E	394
 Kâyankulam	Kerala	in	N	69,2	9.17N	76.49E	0
 Moro	Sind	pk	N	69,2	26.67N	67.99E	38
-Lysva	Perm	ru	N	69,2	58.11N	57.79E	154
+Лысьва	Пермская область	ru	N	69,2	58.11N	57.79E	154
 Hasselt	Limburg	be	R	69,2	50.93N	5.33E	37
 Marivan	Kordestân	ir	N	69,2	35.45N	46.20E	1300
 Alfenas	Minas Gerais	br	N	69,2	21.41S	45.95W	807
@@ -6077,7 +6088,7 @@ Mount Vernon	New York	us	N	68,8	40.91N	73.83W	35.5884323120117
 Goya	Corrientes	ar	N	68,8	29.14S	59.27W	42
 Itatiba	São Paulo	br	N	68,8	22.99S	46.84W	775
 São Sebastião	São Paulo	br	N	68,8	23.79S	45.41W	191
-Tihoreck	Krasnodar	ru	N	68,8	45.85N	40.12E	81
+Тихорецк	Краснодарский край	ru	N	68,8	45.85N	40.12E	81
 Roman	Neamt	ro	N	68,8	46.93N	26.93E	204
 Bufarik	Blidah	dz	N	68,8	36.58N	2.90E	40
 Kiyose	Tôkyô	jp	N	68,8	35.78N	139.53E	51
@@ -6094,7 +6105,7 @@ Deva	Hunedoara	ro	N	68,7	45.89N	22.91E	183
 Hekinan	Aichi	jp	N	68,7	34.89N	136.98E	11
 Tsuruga	Fukui	jp	N	68,7	35.65N	136.07E	3
 Angangxi	Heilongjiang	cn	N	68,7	47.16N	123.80E	149
-Minusinsk	Krasnojarsk	ru	N	68,6	53.71N	91.68E	247
+Минусинск	Красноярский край	ru	N	68,6	53.71N	91.68E	247
 Galway	Galway	ie	R	68,6	53.28N	9.06W	11
 Shahdadpur	Sind	pk	N	68,6	25.92N	68.61E	21
 Kot Abdul Malik	Punjab	pk	N	68,6	30.20N	66.98E	1643
@@ -6102,7 +6113,7 @@ Sverdlovs'k	Luhans'ka	ua	N	68,6	48.09N	39.64E	252
 al-Husaymah	Taza-Al Hoceima-Taounate	ma	N	68,6	35.26N	3.94W	0
 Zadar	Zadar	hr	R	68,6	44.12N	15.24E	18
 Tamano	Okayama	jp	N	68,6	34.51N	133.94E	96
-Nerjungri	Saha	ru	N	68,6	56.68N	124.67E	706
+Нерюнгри	Саха	ru	N	68,6	56.68N	124.67E	706
 Pingzhuang	Nei Monggol	cn	N	68,6	42.03N	119.28E	513
 Putatan	Sabah	my	N	68,6	5.88N	116.05E	7
 Arjawinangun	Jawa Barat	id	N	68,6	6.65S	108.40E	11
@@ -6114,7 +6125,7 @@ Rochester Hills	Michigan	us	N	68,5	42.67N	83.16W	250.638748168945
 Peñaflor	Metropolitana	cl	N	68,5	33.62S	70.92W	358
 Itaituba	Pará	br	N	68,5	4.27S	55.99W	23
 al-Khafjî	ash-Sharqîyah	sa	N	68,5	28.42N	48.51E	9
-Pavlovskij Posad	Moskovskaja Oblast	ru	N	68,5	55.77N	38.67E	142
+Павловский Посад	Московская область	ru	N	68,5	55.77N	38.67E	142
 Santa Cruz do Capibaribe	Pernambuco	br	N	68,5	7.96S	36.21W	437
 Ödemis	Izmir	tr	N	68,5	38.24N	27.96E	134
 Bârlad	Vaslui	ro	N	68,5	46.23N	27.66E	92
@@ -6139,7 +6150,7 @@ Kebomas	Jawa Timur	id	N	68,3	7.16S	112.66E	5
 Jacksonville	North Carolina	us	N	68,2	34.76N	77.40W	6.98764657974243
 Paragominas	Pará	br	N	68,2	2.96S	47.49W	128
 Velsen	Noord-Holland	nl	N	68,2	52.47N	4.63E	-4
-Gukovo	Rostov	ru	N	68,2	48.07N	39.93E	231
+Гуково	Ростовская область	ru	N	68,2	48.07N	39.93E	231
 Feodosiya	Krym	ua	N	68,2	45.04N	35.37E	26
 Novomoskovs'k	Dnipropetrovs'ka	ua	N	68,2	48.65N	35.25E	60
 GaRankuwa	North West	za	N	68,2	25.62S	27.98E	1256
@@ -6151,9 +6162,9 @@ Santa Fe	New Mexico	us	R	68,2	35.68N	105.95W	2119.76416015625
 Guildford	England	gb	N	68,2	51.24N	0.58W	34
 Fenî	Fenî	bd	R	68,1	23.01N	91.39E	12
 Madârîpûr	Madârîpûr	bd	R	68,1	23.18N	90.20E	8
-Leninogorsk	Tatarstan	ru	N	68,1	54.60N	52.45E	249
-Volsk	Saratov	ru	N	68,1	52.05N	47.37E	113
-Georgijevsk	Stavropol	ru	N	68,1	44.14N	43.45E	300
+Лениногорск	Татарстан	ru	N	68,1	54.60N	52.45E	249
+Вольск	Саратовская область	ru	N	68,1	52.05N	47.37E	113
+Георгиевск	Ставропольский край	ru	N	68,1	44.14N	43.45E	300
 Okitipupa	Ondo	ng	N	68,1	6.51N	4.69E	34
 Ichon	Kyeonggi	kr	N	68,1	37.28N	127.45E	63
 Hushitai	Liaoning	cn	N	68,1	41.95N	123.51E	65
@@ -6168,7 +6179,7 @@ Sukagawa	Fukushima	jp	N	68	37.29N	140.37E	250
 Mânikganj	Mânikganj	bd	R	67,9	23.83N	90.09E	12
 Pattoki	Punjab	pk	N	67,9	31.03N	73.85E	195
 Idah	Kogi	ng	N	67,9	7.12N	6.73E	27
-Stupino	Moskovskaja Oblast	ru	N	67,9	54.89N	38.11E	179
+Ступино	Московская область	ru	N	67,9	54.89N	38.11E	179
 Yuncheng	Shandong	cn	N	67,9	35.65N	115.76E	46
 Huaicheng	Guangdong	cn	N	67,9	23.91N	112.18E	59
 Tuy Hoa	Duyen Hai Mien Trung	vn	N	67,9	13.09N	109.30E	8
@@ -6206,7 +6217,7 @@ Beeston and Stapleford	England	gb	N	67,6	52.93N	1.22W	43
 Torrent	Valencia	es	N	67,6	39.44N	0.46W	43
 Lippstadt	Nordrhein-Westfalen	de	N	67,5	51.67N	8.34E	77
 Jaorâ	Madhya Pradesh	in	N	67,5	23.64N	75.11E	474
-Jelabuga	Tatarstan	ru	N	67,5	55.76N	52.07E	67
+Елабуга	Татарстан	ru	N	67,5	55.76N	52.07E	67
 Abnûb	Asyût	eg	N	67,5	27.27N	31.15E	59
 Néa Ionía	Attikí	gr	N	67,5	38.03N	23.75E	159
 Maebaru	Fukuoka	jp	N	67,5	33.56N	130.20E	13
@@ -6221,7 +6232,7 @@ Bargarh	Orissa	in	N	67,4	21.34N	83.61E	167
 Jagüey Grande	Matanzas	cu	N	67,4	22.53N	81.13W	14
 Khuresgan	Esfahân	ir	N	67,4	32.65N	51.75E	1557
 ash-Shaykhân	Ninawa	iq	N	67,4	36.77N	43.45E	599
-Tihvin	Leningrad	ru	N	67,4	59.64N	33.51E	47
+Тихвин	Ленинградская область	ru	N	67,4	59.64N	33.51E	47
 Shrewsbury	England	gb	N	67,4	52.71N	2.75W	70
 Kashiba	Nara	jp	N	67,4	34.55N	135.70E	55
 Tangzhai	Anhui	cn	N	67,4	34.43N	116.60E	43
@@ -6289,8 +6300,8 @@ Nganjuk	Jawa Timur	id	N	66,9	7.59S	111.90E	57
 Kasihan	Yogyakarta	id	N	66,9	7.82S	110.32E	90
 Laibin	Guangxi	cn	N	66,9	23.70N	109.27E	77
 Sughar	Tiyarat	dz	N	66,9	35.20N	1.50E	1091
-Polevskoj	Sverdlovsk	ru	N	66,8	56.45N	60.18E	362
-Tuapse	Krasnodar	ru	N	66,8	44.10N	39.06E	25
+Полевской	Свердловская область	ru	N	66,8	56.45N	60.18E	362
+Туапсе	Краснодарский край	ru	N	66,8	44.10N	39.06E	25
 Kakamega	Western	ke	R	66,8	0.29N	34.73E	1468
 Korosten'	Zhytomyrs'ka	ua	N	66,8	50.95N	28.64E	172
 Stalowa Wola	Podkarpackie	pl	N	66,8	50.57N	22.05E	159
@@ -6310,7 +6321,7 @@ Kârwâr	Karnataka	in	N	66,7	14.82N	74.12E	0
 Kambar	Sind	pk	N	66,7	27.59N	67.99E	49
 Nahâvand	Hamadân	ir	N	66,7	34.20N	48.37E	1705
 Viçosa	Minas Gerais	br	N	66,7	20.76S	42.88W	663
-Gus-Hrustalnyj	Vladimir	ru	N	66,7	55.61N	40.65E	134
+Гусь-Хрустальный	Владимирская область	ru	N	66,7	55.61N	40.65E	134
 Fujiidera	Ôsaka	jp	N	66,7	34.57N	135.60E	22
 Folsom	California	us	N	66,7	38.68N	121.15W	118.551902770996
 Tianpeng	Sichuan	cn	N	66,7	30.99N	103.94E	606
@@ -6321,7 +6332,7 @@ Wâshîm	Maharashtra	in	N	66,6	20.10N	77.13E	541
 Gûjar Khân	Punjab	pk	N	66,6	33.26N	73.30E	465
 Rivadavia	Mendoza	ar	N	66,6	33.19S	68.47W	666
 Le Tampon	Saint-Pierre	re	N	66,6	21.27S	55.53E	695
-Chistopol	Tatarstan	ru	N	66,6	55.37N	50.62E	97
+Чистополь	Татарстан	ru	N	66,6	55.37N	50.62E	97
 Yüksekova	Hakkari	tr	N	66,6	37.57N	44.29E	1895
 Aksehir	Konya	tr	N	66,6	38.36N	31.41E	1034
 Gabrovo	Gabrovo	bg	R	66,6	42.90N	25.31E	438
@@ -6382,7 +6393,7 @@ San Pedro	Buenos Aires	ar	N	66	33.67S	59.69W	26
 Gurupi	Tocantins	br	N	66	11.72S	49.06W	268
 Âddîgrat	Tigray	et	N	66	14.28N	39.47E	2437
 Mocuba	Zambezia	mz	N	66	16.85S	38.26E	80
-Dmitrov	Moskovskaja Oblast	ru	N	66	56.35N	37.53E	134
+Дмитров	Московская область	ru	N	66	56.35N	37.53E	134
 Aflu	al-Aghwat	dz	N	66	34.12N	2.09E	1414
 Sabae	Fukui	jp	N	66	35.95N	136.19E	15
 Lishu	Jilin	cn	N	66	43.31N	124.32E	162
@@ -6395,17 +6406,17 @@ Mingshui	Heilongjiang	cn	N	65,9	47.18N	125.90E	252
 Zhaoyuan	Heilongjiang	cn	N	65,9	45.51N	125.07E	130
 Saliqi	Nei Monggol	cn	N	65,9	40.55N	110.51E	1002
 Massa	Toscana	it	N	65,9	44.06N	10.15E	594
-Iskitim	Novosibirsk	ru	N	65,8	54.64N	83.29E	115
+Искитим	Новосибирская область	ru	N	65,8	54.64N	83.29E	115
 Nârnaul	Haryana	in	N	65,8	28.04N	76.10E	308
 Colmar	Haut-Rhin	fr	R	65,8	48.08N	7.36E	193
 Enugu Ukwu	Anambra	ng	N	65,8	6.17N	7.00E	245
 Dogubeyazit	Agri	tr	N	65,8	39.54N	44.08E	1619
 Shiki	Saitama	jp	N	65,8	35.85N	139.55E	16
-Zelenogorsk	Krasnojarsk	ru	N	65,7	58.13N	94.48E	190
+Зеленогорск	Красноярский край	ru	N	65,7	58.13N	94.48E	190
 Râmanâthapuram	Tamil Nadu	in	N	65,7	9.37N	78.83E	13
 Dundalk	Maryland	us	N	65,7	39.27N	76.50W	11.1684589385986
 San Felipe	Valparaíso	cl	N	65,7	32.75S	70.72W	657
-Pavlovo	Nizhnij Novgorod	ru	N	65,7	55.96N	43.09E	127
+Павлово	Новгородская область	ru	N	65,7	55.96N	43.09E	127
 Gagra	Abkhasia	ge	N	65,7	43.34N	40.24E	581
 Alba Iulia	Alba	ro	N	65,7	46.08N	23.57E	232
 Kongju	Chungcheongnam	kr	N	65,7	36.45N	127.12E	31
@@ -6424,7 +6435,7 @@ Salghum-al-Ayd	Milah	dz	N	65,6	36.16N	6.17E	765
 Burj Minayal	Bumardas	dz	N	65,6	36.73N	3.72E	37
 Fuli	Heilongjiang	cn	N	65,6	46.72N	131.12E	118
 Jingcheng	Jiangsu	cn	N	65,6	32.02N	120.26E	8
-Lesosibirsk	Krasnojarsk	ru	N	65,5	58.24N	92.49E	84
+Лесосибирск	Красноярский край	ru	N	65,5	58.24N	92.49E	84
 Siuri	Bangla	in	N	65,5	23.91N	87.53E	82
 San José de las Lajas	La Habana	cu	N	65,5	22.97N	82.15W	136
 Nuevitas	Camagüey	cu	N	65,5	21.55N	77.27W	31
@@ -6467,7 +6478,7 @@ Pingyin	Shandong	cn	N	65,3	36.28N	116.43E	37
 Pyapon	Ayeyarwady	mm	N	65,2	16.29N	95.68E	6
 Mannârgudi	Tamil Nadu	in	N	65,2	10.67N	79.45E	20
 Cannes	Alpes-Maritimes	fr	N	65,2	43.56N	7.02E	28
-Salsk	Rostov	ru	N	65,2	46.46N	41.53E	40
+Сальск	Ростовская область	ru	N	65,2	46.46N	41.53E	40
 Bukoba	Kagera	tz	R	65,2	1.32S	31.80E	1159
 al-Qanâtir-al-Khayrîyah	al-Qalyûbiyah	eg	N	65,2	30.20N	31.13E	16
 Chiryu	Aichi	jp	N	65,2	35.01N	137.03E	12
@@ -6507,8 +6518,8 @@ Pare	Jawa Timur	id	N	64,8	7.76S	112.19E	130
 Jovellanos	Matanzas	cu	N	64,7	22.80N	81.20W	40
 Faridpur	Uttar Pradesh	in	N	64,7	28.22N	79.53E	168
 Buin	Metropolitana	cl	N	64,7	33.73S	70.75W	482
-Kstovo	Nizhnij Novgorod	ru	N	64,7	56.18N	44.18E	60
-Aleksin	Tula	ru	N	64,7	54.51N	37.07E	135
+Кстово	Новгородская область	ru	N	64,7	56.18N	44.18E	60
+Алексин	Тульская область	ru	N	64,7	54.51N	37.07E	135
 Huangzhai	Henan	cn	N	64,7	33.62N	114.63E	52
 Allende	Guanajuato	mx	N	64,7	20.92N	100.76W	1924
 Amatitlán	Guatemala	gt	N	64,6	14.48N	90.63W	1215
@@ -6529,8 +6540,8 @@ Carol City	Florida	us	N	64,5	25.94N	80.27W	1.0220000743866
 Chopda	Maharashtra	in	N	64,5	21.25N	75.28E	197
 Çust	Namangan	uz	N	64,5	41.00N	71.23E	671
 Itapeva	São Paulo	br	N	64,5	23.98S	48.88W	687
-Labinsk	Krasnodar	ru	N	64,5	44.64N	40.72E	269
-Slavjansk-na-Kubani	Krasnodar	ru	N	64,5	45.25N	38.11E	3
+Лабинск	Краснодарский край	ru	N	64,5	44.64N	40.72E	269
+Славянск-на-Кубани	Краснодарский край	ru	N	64,5	45.25N	38.11E	3
 Villeneuve-d'Ascq	Nord	fr	N	64,5	50.62N	3.14E	33
 Tendô	Yamagata	jp	N	64,5	38.35N	140.38E	223
 Laguna Niguel	California	us	N	64,5	33.53N	117.70W	153.149536132813
@@ -6540,9 +6551,9 @@ Daluguma	Gampaha	lk	N	64,4	6.97N	79.90E	4
 Tirupathur	Tamil Nadu	in	N	64,4	12.50N	78.57E	386
 Châmrâjnagar	Karnataka	in	N	64,4	11.92N	76.95E	722
 Ilo	Moquegua	pe	N	64,4	17.64S	71.34W	28
-Njagan	Hanty-Mansija	ru	N	64,4	62.15N	65.38E	0	
+Нягань	Ханты-Мансийский АО	ru	N	64,4	62.15N	65.38E	0	
 Alvand	Zanjân	ir	N	64,4	36.32N	49.16E	1803
-Budjonnovsk	Stavropol	ru	N	64,4	44.79N	44.14E	131
+Будённовск	Ставропольский край	ru	N	64,4	44.79N	44.14E	131
 Natori	Miyagi	jp	N	64,4	38.16N	140.88E	37
 Bang Kruai	Nonthaburi	th	N	64,4	13.81N	100.45E	6
 Eagan	Minnesota	us	N	64,3	44.82N	93.16W	263.744873046875
@@ -6614,7 +6625,7 @@ Upata	Bolívar	ve	N	63,7	8.02N	62.41W	358
 Tucupita	Delta Amacuro	ve	R	63,7	9.06N	62.06W	4
 Moroni	Njazídja	km	B	63,7	11.74S	43.23E	0
 Virginia	Free State	za	N	63,7	28.09S	26.87E	1299
-Belogorsk	Amur	ru	N	63,7	50.92N	128.46E	166
+Белогорск	Амурская область	ru	N	63,7	50.92N	128.46E	166
 Anxiang	Hunan	cn	N	63,7	29.41N	112.15E	31
 Chengmai	Hainan	cn	N	63,7	19.74N	110.01E	32
 Springfield	Ohio	us	N	63,6	39.93N	83.80W	293.311462402344
@@ -6713,7 +6724,7 @@ Karviná	Moravskoslezský	cz	N	63	49.86N	18.54E	235
 Chiang Rai	Chiang Rai	th	R	62,9	19.91N	99.83E	397
 Greenwich	Connecticut	us	N	62,9	41.04N	73.59W	0
 San Fernando	Libertador General Bernardo O'Higgins	cl	N	62,9	34.58S	70.99W	337
-Tujmazy	Bashkortostan	ru	N	62,9	54.60N	53.70E	122
+Туймазы	Башкортостан	ru	N	62,9	54.60N	53.70E	122
 Golara	Esfahân	ir	N	62,9	32.63N	51.44E	1619
 Zamora	Zamora	es	R	62,9	41.52N	5.75W	667
 Caratinga	Minas Gerais	br	N	62,9	19.79S	42.14W	589
@@ -6754,7 +6765,7 @@ Qurgonteppa	Khatlon	tj	R	62,6	37.84N	68.77E	425
 Caçador	Santa Catarina	br	N	62,6	26.77S	51.02W	945
 Rahîmah	ash-Sharqîyah	sa	N	62,6	26.70N	50.06E	4
 Parsabad	Ardabîl	ir	N	62,6	39.65N	47.93E	44
-Klincy	Brjansk	ru	N	62,6	52.76N	32.23E	168
+Клинцы	Брянская область	ru	N	62,6	52.76N	32.23E	168
 Xinglongshan	Jilin	cn	N	62,6	43.95N	125.48E	221
 Wenshang	Shandong	cn	N	62,6	35.73N	116.48E	44
 Qixingtai	Hubei	cn	N	62,6	30.42N	111.77E	34
@@ -6781,7 +6792,7 @@ North Richland Hills	Texas	us	N	62,3	32.86N	97.22W	190.768447875977
 San Marcos	San Salvador	sv	N	62,3	13.66N	89.19W	731
 Yâdgîr	Karnataka	in	N	62,3	16.77N	77.13E	370
 Panaji	Goa	in	R	62,3	15.50N	73.81E	48
-Meleuz	Bashkortostan	ru	N	62,3	52.97N	55.94E	172
+Мелеуз	Башкортостан	ru	N	62,3	52.97N	55.94E	172
 Subbah-as-Salim	Hawallî	kw	N	62,3	29.26N	48.06E	29
 Kawm Umbû	Aswân	eg	N	62,3	24.47N	32.95E	106
 Kovel'	Volyns'ka	ua	N	62,3	51.22N	24.71E	169
@@ -6807,7 +6818,7 @@ Bir-al-Itir	Tibissah	dz	N	62,1	34.75N	8.05E	885
 Baheri	Uttar Pradesh	in	N	62,1	28.78N	79.50E	194
 Khopoli	Maharashtra	in	N	62,1	18.78N	73.33E	270
 La Dolorita	Miranda	ve	N	62,1	10.48N	66.78W	0	
-Revda	Sverdlovsk	ru	N	62,1	56.81N	59.95E	310
+Ревда	Свердловская область	ru	N	62,1	56.81N	59.95E	310
 Veenendaal	Utrecht	nl	N	62,1	52.02N	5.55E	15
 Ayn Wilman	Satif	dz	N	62,1	35.93N	5.30E	918
 Ouro Preto	Minas Gerais	br	N	62,1	20.38S	43.51W	1130
@@ -6821,11 +6832,11 @@ Victoria	Texas	us	N	62	28.82N	96.98W	30.3892021179199
 Narasapur	Andhra Pradesh	in	N	62	16.45N	81.70E	17
 Khatauli	Uttar Pradesh	in	N	62	29.28N	77.72E	237
 Malappuram	Kerala	in	N	62	11.07N	76.06E	103
-Sosnovyj Bor	Leningrad	ru	N	62	59.90N	29.10E	13
+Сосновый Бор	Ленинградская область	ru	N	62	59.90N	29.10E	13
 Shuizhai	Guangdong	cn	N	62	23.98N	115.60E	162
 Lawang	Jawa Timur	id	N	62	7.83S	112.70E	487
 Xiaoweizhai	Guizhou	cn	N	62	26.23N	107.53E	964
-Cheremhovo	Irkutsk	ru	N	62	53.15N	103.06E	562
+Черемхово	Иркутская область	ru	N	62	53.15N	103.06E	562
 Perai	Pulau Pinang	my	N	62	5.38N	100.38E	5
 Tura	Meghalaya	in	N	61,9	25.52N	90.22E	362
 Mârkâpur	Andhra Pradesh	in	N	61,9	15.73N	79.28E	149
@@ -6839,7 +6850,7 @@ Schwäbisch Gmünd	Baden-Württemberg	de	N	61,8	48.81N	9.79E	422
 Uran Islampur	Maharashtra	in	N	61,8	17.05N	74.27E	594
 Jaisalmer	Rajasthan	in	N	61,8	26.92N	70.90E	233
 Willemstad	Curaçao	an	B	61,8	12.10N	68.93W	0
-Lobnja	Moskovskaja Oblast	ru	N	61,8	56.00N	37.49E	188
+Лобня	Московская область	ru	N	61,8	56.00N	37.49E	188
 Valjevo	Central Serbia	rs	N	61,8	44.28N	19.89E	210
 Keoje	Kyeongsangnam	kr	N	61,8	34.88N	128.63E	11
 Zhenhai	Zhejiang	cn	N	61,8	29.95N	121.73E	66
@@ -6874,7 +6885,7 @@ Bojong Gede	Jawa Barat	id	N	61,6	6.48S	107.78E	40
 Jackson	Tennessee	us	N	61,5	35.63N	88.83W	114.393646240234
 Nipâni	Karnataka	in	N	61,5	16.41N	74.38E	587
 Sûratgarh	Rajasthan	in	N	61,5	29.32N	73.90E	175
-Krasnoturinsk	Sverdlovsk	ru	N	61,5	59.79N	60.48E	121
+Краснотурьинск	Свердловская область	ru	N	61,5	59.79N	60.48E	121
 Sayyân	SanŽâ	ye	N	61,5	15.17N	44.33E	2460
 Vélez-Málaga	Málaga	es	N	61,5	36.79N	4.10W	110
 Singida	Singida	tz	R	61,5	4.82S	34.74E	1503
@@ -6884,7 +6895,7 @@ Royal Tunbridge Wells	England	gb	N	61,5	51.14N	0.26E	127
 Tândûr	Andhra Pradesh	in	N	61,4	17.23N	77.58E	442
 Bayonne	New Jersey	us	N	61,4	40.66N	74.11W	2.47890973091125
 Uga	Anambra	ng	N	61,4	5.93N	7.08E	222
-Aleksandrov	Vladimir	ru	N	61,4	56.40N	38.72E	192
+Александров	Владимирвская область	ru	N	61,4	56.40N	38.72E	192
 Mizusawa	Iwate	jp	N	61,4	39.14N	141.14E	57
 Fukuroi	Shizuoka	jp	N	61,4	34.75N	137.93E	11
 Taikang	Heilongjiang	cn	N	61,4	46.87N	124.43E	149
@@ -6915,14 +6926,14 @@ Thâkurgâon	Thâkurgâon	bd	R	61,2	26.03N	88.46E	58
 Râyagâda	Orissa	in	N	61,2	19.18N	83.41E	231
 Bristol	Connecticut	us	N	61,2	41.68N	72.94W	133.981903076172
 Pirassununga	São Paulo	br	N	61,2	21.99S	47.43W	597
-Borisoglebsk	Voronezh	ru	N	61,2	51.37N	42.09E	106
+Борисоглебск	Воронежская область	ru	N	61,2	51.37N	42.09E	106
 Druzhkivka	Donets'ka	ua	N	61,2	48.63N	37.53E	73
-Chehov	Moskovskaja Oblast	ru	N	61,2	55.14N	37.48E	173
+Чехов	Московская область	ru	N	61,2	55.14N	37.48E	173
 Gravatá	Pernambuco	br	N	61,2	8.19S	35.55W	468
 al-Badrashayn	al-Jîzah	eg	N	61,2	29.85N	31.27E	25
 Mielec	Podkarpackie	pl	N	61,2	50.29N	21.43E	172
 Takaishi	Ôsaka	jp	N	61,2	34.53N	135.44E	3
-Artjom	Primorje	ru	N	61,2	43.36N	132.18E	35
+Артём	Приморский край	ru	N	61,2	43.36N	132.18E	35
 Bayan	Heilongjiang	cn	N	61,2	46.08N	127.40E	137
 Juye	Shandong	cn	N	61,2	35.39N	116.09E	43
 Valle de Santiago	Guanajuato	mx	N	61,2	20.38N	101.20W	1753
@@ -6981,7 +6992,7 @@ al-Buraymi	adh-Dhahîrah	om	R	60,8	24.25N	55.80E	299
 Hânaqîn	Diyalâ	iq	N	60,8	34.35N	45.38E	176
 Antratsyt	Luhans'ka	ua	N	60,8	48.12N	39.09E	253
 Valença	Bahia	br	N	60,8	13.36S	39.08W	36
-Svobodnyj	Amur	ru	N	60,8	51.38N	128.13E	206
+Свободный	Амурская область	ru	N	60,8	51.38N	128.13E	206
 Chaochou	Pingtung	tw	N	60,8	22.55N	120.53E	9
 Cepu	Jawa Tengah	id	N	60,8	7.15S	111.58E	39
 al-Munastîr	al-Munastîr	tn	R	60,8	35.79N	10.82E	0
@@ -7021,13 +7032,13 @@ Eldorado	Misiones	ar	N	60,5	26.20S	54.60W	188
 Landshut	Bayern	de	N	60,5	48.54N	12.14E	393
 Kennewick	Washington	us	N	60,5	46.20N	119.17W	165.474304199219
 Xuanwu	Henan	cn	N	60,5	33.86N	115.47E	44
-Nazarovo	Krasnojarsk	ru	N	60,4	56.01N	90.38E	258
+Назарово	Красноярский край	ru	N	60,4	56.01N	90.38E	258
 Phuntsholing	Samchi	bt	N	60,4	26.85N	89.38E	204
 Ríonegro	Antioquia	co	N	60,4	6.16N	75.39W	2110
 Lâdnûn	Rajasthan	in	N	60,4	27.64N	74.38E	334
 Balsas	Maranhão	br	N	60,4	7.52S	46.05W	273
-Rossosh	Voronezh	ru	N	60,4	50.21N	39.58E	79
-Arsenjev	Primorje	ru	N	60,4	44.16N	133.28E	171
+Россош	Воронежская область	ru	N	60,4	50.21N	39.58E	79
+Арсеньев	Приморский край	ru	N	60,4	44.16N	133.28E	171
 South Whittier	California	us	N	60,4	33.93N	118.03W	56.4436912536621
 Xiaoyi	Henan	cn	N	60,4	34.77N	112.95E	109
 Rio Rancho	New Mexico	us	N	60,4	35.27N	106.66W	1651.18469238281
@@ -7035,7 +7046,7 @@ Kangar	Perlis	my	R	60,4	6.44N	100.19E	6
 Kuniyamuthur	Tamil Nadu	in	N	60,3	10.98N	76.95E	408
 Haveli	Punjab	pk	N	60,3	30.46N	73.70E	177
 Zeist	Utrecht	nl	N	60,3	52.10N	5.23E	13
-Rzhev	Tver	ru	N	60,3	56.26N	34.33E	167
+Ржев	Тверская область	ru	N	60,3	56.26N	34.33E	167
 Wallasey	England	gb	N	60,3	53.43N	3.05W	44
 Aubervillers	Seine-Saint-Denis	fr	N	60,3	48.92N	2.38E	34
 Kuroiso	Tochigi	jp	N	60,3	36.98N	140.05E	287
@@ -7047,7 +7058,7 @@ Zhicheng	Fujian	cn	N	60,3	27.05N	118.31E	105
 Yangshan	Shandong	cn	N	60,3	35.07N	116.30E	41
 Concord	North Carolina	us	N	60,2	35.41N	80.59W	197.655624389648
 Tiruvalla	Kerala	in	N	60,2	9.39N	76.57E	11
-Belebej	Bashkortostan	ru	N	60,2	54.11N	54.11E	311
+Белебей	Башкортостан	ru	N	60,2	54.11N	54.11E	311
 Tahar	Jijel	dz	N	60,2	36.41N	5.94E	534
 Irecê	Bahia	br	N	60,2	11.30S	41.87W	709
 Troyes	Aube	fr	R	60,2	48.30N	4.08E	109
@@ -7058,15 +7069,15 @@ Hancheng	Shaanxi	cn	N	60,2	35.47N	110.43E	401
 Wanning	Hainan	cn	N	60,2	18.80N	110.39E	7
 Suicheng	Guangdong	cn	N	60,2	21.39N	110.24E	5
 North Little Rock	Arkansas	us	N	60,1	34.79N	92.26W	122.886611938477
-Talnah	Krasnojarsk	ru	N	60,1	69.50N	88.45E	0	
+Талнах	Красноярский край	ru	N	60,1	69.50N	88.45E	0	
 Sîtâmarhi	Bihar	in	N	60,1	26.61N	85.48E	66
 Hamilton	Ohio	us	N	60,1	39.39N	84.56W	179.760131835938
 Sangâreddi	Andhra Pradesh	in	N	60,1	17.63N	78.08E	513
-Kogalym	Hanty-Mansija	ru	N	60,1	62.03N	74.50E	0	
+Когалым	Ханты-Мансийский АО	ru	N	60,1	62.03N	74.50E	0	
 São Borja	Rio Grande do Sul	br	N	60,1	28.66S	56.01W	90
 Paulínia	São Paulo	br	N	60,1	22.75S	47.17W	594
 Den Helder	Noord-Holland	nl	N	60,1	52.96N	4.75E	1
-Apatity	Murmansk	ru	N	60,1	67.57N	33.39E	0	
+Апатиты	Мурманская область	ru	N	60,1	67.57N	33.39E	0	
 Lorient	Morbihan	fr	N	60,1	47.74N	3.37W	17
 Tczew	Pomorskie	pl	N	60,1	54.10N	18.78E	20
 Liaozhong	Liaoning	cn	N	60,1	41.51N	122.73E	16
@@ -7085,8 +7096,8 @@ Vrindâvan	Uttar Pradesh	in	N	60	27.58N	77.70E	177
 Haverhill	Massachusetts	us	N	60	42.78N	71.09W	6.71052122116089
 Unaí	Minas Gerais	br	N	60	16.36S	46.90W	594
 Bragança	Pará	br	N	60	1.05S	46.77W	15
-Shuja	Ivanovo	ru	N	60	56.86N	41.35E	94
-Solnechnogorsk	Moskovskaja Oblast	ru	N	60	56.18N	36.95E	191
+Шуя	Ивановская область	ru	N	60	56.86N	41.35E	94
+Солнечногорск	Московская область	ru	N	60	56.18N	36.95E	191
 Kavála	Kavála	gr	R	60	40.94N	24.40E	87
 Kitahiroshima	Hokkaido	jp	N	60	42.99N	141.56E	22
 Jiangkou	Fujian	cn	N	60	25.48N	119.20E	5
@@ -7115,8 +7126,8 @@ Tarma	Junín	pe	N	59,8	11.41S	75.73W	3458
 Nawalgarh	Rajasthan	in	N	59,8	27.85N	75.27E	388
 Telêmaco Borba	Paraná	br	N	59,8	24.33S	50.62W	773
 Rubizhne	Luhans'ka	ua	N	59,8	49.01N	38.39E	67
-Domodedovo	Moskovskaja Oblast	ru	N	59,8	55.43N	37.75E	160
-Shchjokino	Tula	ru	N	59,8	54.01N	37.51E	244
+Домодедово	Московская область	ru	N	59,8	55.43N	37.75E	160
+Щёкино	Тульская область	ru	N	59,8	54.01N	37.51E	244
 Sorgun	Yozgat	tr	N	59,8	39.82N	35.17E	1116
 Qûs	Qinâ	eg	N	59,8	25.91N	32.76E	81
 al-Manshâh	Sawhâj	eg	N	59,8	26.47N	31.81E	67
@@ -7135,7 +7146,7 @@ Saginaw	Michigan	us	N	59,7	43.42N	83.95W	179.326095581055
 Savona	Liguria	it	N	59,7	44.32N	8.46E	145
 Khomeyn	Markazî	ir	N	59,7	33.63N	50.05E	1826
 Takestan	Qazvîn	ir	N	59,7	36.07N	49.70E	1260
-Naro-Fominsk	Moskovskaja Oblast	ru	N	59,7	55.38N	36.74E	159
+Наро-Фоминск	Московская область	ru	N	59,7	55.38N	36.74E	159
 Gaogou	Jiangsu	cn	N	59,7	34.02N	119.19E	6
 Qixia	Jiangsu	cn	N	59,7	32.15N	118.95E	13
 Hushan	Zhejiang	cn	N	59,7	28.72N	118.83E	289
@@ -7180,7 +7191,7 @@ Balkas	Karagandi	kz	N	59,4	46.85N	74.95E	365
 Drummondville	Québec	ca	N	59,4	45.89N	72.49W	73.9418334960938
 Sahrihan	Andijon	uz	N	59,4	40.71N	72.06E	449
 Carazinho	Rio Grande do Sul	br	N	59,4	28.29S	52.80W	575
-Mihajlovka	Volgograd	ru	N	59,4	50.06N	43.22E	76
+Михайловка	Волгоградская область	ru	N	59,4	50.06N	43.22E	76
 Bundaberg	Queensland	au	N	59,4	24.87S	152.35E	9
 Lakewood	Washington	us	N	59,4	47.16N	122.53W	65.0459976196289
 Zhuwang	Shandong	cn	N	59,4	36.91N	121.51E	16
@@ -7219,7 +7230,7 @@ Des Plaines	Illinois	us	N	59,1	42.03N	87.90W	197.723129272461
 Anurâdhapûraya	Anurâdhapûraya	lk	R	59,1	8.32N	80.41E	99
 Tamarac	Florida	us	N	59,1	26.20N	80.26W	2.52999997138977
 Fairfield	Connecticut	us	N	59,1	41.13N	73.26W	5.16053867340088
-Ishim	Tjumen	ru	N	59,1	56.11N	69.46E	85
+Ишим	Тюменская область	ru	N	59,1	56.11N	69.46E	85
 Langenfeld	Nordrhein-Westfalen	de	N	59,1	51.11N	6.95E	53
 al-Khârijah	al-Wadi al-Jadid	eg	R	59,1	25.44N	30.55E	76
 Afragola	Campania	it	N	59,1	40.93N	14.30E	44
@@ -7230,8 +7241,8 @@ Râjsamand	Rajasthan	in	N	59	25.07N	73.88E	547
 Lonâvale	Maharashtra	in	N	59	18.75N	73.42E	621
 Waltham	Massachusetts	us	N	59	42.39N	71.24W	24.4474124908447
 Senador Canedo	Goiás	br	N	59	16.71S	49.10W	770
-Bor	Nizhnij Novgorod	ru	N	59	56.35N	44.08E	85
-Krymsk	Krasnodar	ru	N	59	44.94N	37.97E	45
+Бор	Новгородская область	ru	N	59	56.35N	44.08E	85
+Крымск	Краснодарский край	ru	N	59	44.94N	37.97E	45
 Bibâ	Banî Suwayf	eg	N	59	28.99N	31.03E	31
 Majadahonda	Madrid	es	N	59	40.47N	3.87W	742
 Hyûga	Miyazaki	jp	N	59	32.44N	131.65E	0
@@ -7281,7 +7292,7 @@ Upleta	Gujarat	in	N	58,6	21.75N	70.27E	46
 Sânghar	Sind	pk	N	58,6	26.05N	68.93E	20
 Shinâs	al-Bâtinah	om	N	58,6	24.73N	56.46E	-1
 Saquarema	Rio de Janeiro	br	N	58,6	22.93S	42.53W	6
-Vyksa	Nizhnij Novgorod	ru	N	58,6	55.32N	42.17E	105
+Выкса	Новгородская область	ru	N	58,6	55.32N	42.17E	105
 Molepolole	Kweneng	bw	R	58,6	24.40S	25.51E	1139
 Będzin	Śląskie	pl	N	58,6	50.34N	19.13E	266
 Nago	Okinawa	jp	N	58,6	26.59N	127.99E	10
@@ -7290,7 +7301,7 @@ Guamúchil	Sinaloa	mx	N	58,6	25.47N	108.09W	38
 Terre Haute	Indiana	us	N	58,5	39.47N	87.38W	152.03694152832
 Cutral Có	Neuquén	ar	N	58,5	38.94S	69.24W	635
 Toumodi	Lacs	ci	N	58,5	6.55N	5.03W	161
-Balahna	Nizhnij Novgorod	ru	N	58,5	56.49N	43.63E	61
+Балахна	Новгородская область	ru	N	58,5	56.49N	43.63E	61
 Qasr Shillalah	Tiyarat	dz	N	58,5	35.21N	2.30E	847
 Görlitz	Sachsen	de	N	58,5	51.16N	14.98E	205
 Saijô	Ehime	jp	N	58,5	33.92N	133.17E	1
@@ -7382,7 +7393,7 @@ Gopâlganj	Bihar	in	N	57,7	26.47N	84.43E	68
 Kolonnawa	Kolamba	lk	N	57,7	6.93N	79.88E	10
 Sangala Hill	Punjab	pk	N	57,7	31.72N	73.37E	197
 Yaniyül	Toskent	uz	N	57,7	41.12N	69.05E	356
-Zarechnyj	Penza	ru	N	57,7	53.13N	46.58E	223
+Заречный	Пензенская область	ru	N	57,7	53.13N	46.58E	223
 Formiga	Minas Gerais	br	N	57,7	20.46S	45.43W	871
 Chaqalâwa	Irbîl	iq	N	57,7	35.47N	45.43E	681
 Reyhanli	Hatay	tr	N	57,7	36.30N	36.53E	99
@@ -7396,14 +7407,14 @@ Fundación	Magdalena	co	N	57,6	10.53N	74.19W	41
 Tahiatos	Korakalpogiston	uz	N	57,6	42.34N	59.58E	78
 Tangará da Serra	Mato Grosso	br	N	57,6	14.63S	57.48W	393
 Alcalá de Guadaira	Sevilla	es	N	57,6	37.34N	5.84W	61
-Kotlas	Arhangelsk	ru	N	57,6	61.26N	46.65E	0	
+Котлас	Архангельская область	ru	N	57,6	61.26N	46.65E	0	
 Âsseb	Debub-Keih-Bahri	er	R	57,6	13.01N	42.74E	22
 Basyûn	al-Gharbîyah	eg	N	57,6	30.95N	30.81E	6
 Honiara	Guadalcanal	sb	B	57,6	9.43S	159.91E	38
 Iligan	Central Mindanao	ph	N	57,6	8.17N	124.22E	274
 Lakhimpur	Assam	in	N	57,5	27.24N	94.10E	92
 Soubré	Bas Sassandra	ci	N	57,5	5.79N	6.61W	128
-Sibaj	Bashkortostan	ru	N	57,5	52.72N	58.66E	370
+Субай	Башкортостан	ru	N	57,5	52.72N	58.66E	370
 Cicalengka	Jawa Barat	id	N	57,5	6.99S	107.83E	708
 Sonsonate	Sonsonate	sv	R	57,4	13.72N	89.73W	225
 Rock Hill	South Carolina	us	N	57,4	34.94N	81.03W	208.133712768555
@@ -7411,7 +7422,7 @@ Barranca	Lima y Callao	pe	N	57,4	10.74S	77.77W	63
 Takhat Bhai	North-West Frontier	pk	N	57,4	34.28N	71.93E	357
 Caucagüita	Miranda	ve	N	57,4	10.48N	66.74W	707
 az-Zulfî	ar-Riyâd	sa	N	57,4	26.30N	44.80E	614
-Klimovsk	Moskovskaja Oblast	ru	N	57,4	55.37N	37.54E	176
+Климовск	Московская область	ru	N	57,4	55.37N	37.54E	176
 Prilep	Prilep	mk	R	57,4	41.36N	21.56E	675
 Comayagua	Comayagua	hn	R	57,3	14.46N	87.65W	559
 Râyadrug	Andhra Pradesh	in	N	57,3	14.70N	76.87E	547
@@ -7442,14 +7453,14 @@ Unjha	Gujarat	in	N	57,1	23.81N	72.38E	115
 Brookline	Massachusetts	us	N	57,1	42.32N	71.14W	63.1681060791016
 Azua	Azua	do	R	57,1	18.46N	70.74W	83
 San Fernando	San Fernando	tt	R	57,1	10.25N	61.46W	34
-Kizljar	Dagestan	ru	N	57,1	43.85N	46.71E	-8
+Кизляр	Дагестан	ru	N	57,1	43.85N	46.71E	-8
 Picos	Piauí	br	N	57,1	7.08S	41.44W	209
 Samannûd	al-Gharbîyah	eg	N	57,1	30.96N	31.23E	6
 Banî Walîd	Sawfajjin	ly	R	57,1	31.77N	13.99E	241
 Palo Alto	California	us	N	57,1	37.40N	122.14W	36.3967361450195
 Ungaran	Jawa Tengah	id	N	57,1	7.12S	110.40E	303
 Acámbaro	Guanajuato	mx	N	57,1	20.03N	100.73W	1860
-Novoaltajsk	Altaj	ru	N	57	53.40N	83.93E	135
+Новоалтайск	Алтайский край	ru	N	57	53.40N	83.93E	135
 Gola Gokarannâth	Uttar Pradesh	in	N	57	28.08N	80.47E	162
 Mettûr	Tamil Nadu	in	N	57	11.80N	77.80E	211
 Dabwâli	Haryana	in	N	57	29.95N	74.73E	192
@@ -7466,7 +7477,7 @@ Kimpo	Kyeonggi	kr	N	57	37.64N	126.70E	7
 Madanîyîn	Madanîyîn	tn	R	57	33.35N	10.49E	100
 Teoloyucan	México	mx	N	56,9	19.75N	99.18W	2253
 Sahagún	Córdoba	co	N	56,9	8.95N	75.44W	79
-Volzhsk	Marij El	ru	N	56,9	55.85N	48.51E	101
+Волжск	Марий Эл	ru	N	56,9	55.85N	48.51E	101
 Stryy	L'vivs'ka	ua	N	56,9	49.26N	23.85E	297
 Érd	Pest	hu	N	56,9	47.38N	18.91E	139
 Matera	Basilicata	it	N	56,9	40.67N	16.60E	428
@@ -7509,7 +7520,7 @@ Heva	Horazm	uz	N	56,6	41.39N	60.36E	98
 Damghan	Semnân	ir	N	56,6	36.17N	54.35E	1156
 Caldas Novas	Goiás	br	N	56,6	17.74S	48.62W	673
 Janaúba	Minas Gerais	br	N	56,6	15.80S	43.31W	535
-Anapa	Krasnodar	ru	N	56,6	44.90N	37.32E	5
+Анапа	Краснодарский край	ru	N	56,6	44.90N	37.32E	5
 Chibuto	Gaza	mz	N	56,6	24.68S	33.53E	73
 Kasese	Western	ug	N	56,6	0.22N	30.01E	1676
 Linares	Jaén	es	N	56,6	38.10N	3.63W	424
@@ -7533,7 +7544,7 @@ Asaka	Andijon	uz	N	56,5	40.65N	72.24E	499
 Vacaria	Rio Grande do Sul	br	N	56,5	28.50S	50.94W	949
 Sidi Khalid	Biskrah	dz	N	56,5	34.39N	5.00E	210
 São Sebastião do Paraiso	Minas Gerais	br	N	56,5	20.92S	46.99W	968
-Belorechensk	Krasnodar	ru	N	56,5	44.77N	39.85E	116
+Белореченск	Краснодарский край	ru	N	56,5	44.77N	39.85E	116
 Sinjah	Sinnâr	sd	R	56,5	13.16N	33.93E	437
 Vaasa	Pohjanmaa	fi	R	56,5	63.10N	21.61E	0	
 Fountain Valley	California	us	N	56,5	33.71N	117.95W	10.1338005065918
@@ -7557,7 +7568,7 @@ Duékoué	Moyen-Cavally	ci	N	56,3	6.74N	7.35W	233
 Altagracia de Orituco	Guárico	ve	N	56,3	9.85N	66.38W	338
 Oberá	Misiones	ar	N	56,3	27.48S	55.13W	301
 al-Mighair	al-Wad	dz	N	56,3	33.96N	5.92E	3
-Borovichi	Novgorod	ru	N	56,3	58.40N	33.90E	80
+Боровичи	Новгородская область	ru	N	56,3	58.40N	33.90E	80
 Itoman	Okinawa	jp	N	56,3	26.13N	127.68E	25
 Aprilia	Lazio	it	N	56,3	41.60N	12.65E	82
 Rosemead	California	us	N	56,3	34.07N	118.08W	85.7000350952148
@@ -7632,7 +7643,7 @@ Ramachandrapuram	Andhra Pradesh	in	N	55,7	17.56N	78.04E	534
 Weymouth	Massachusetts	us	N	55,7	42.21N	70.95W	19.7360229492188
 Sankt Augustin	Nordrhein-Westfalen	de	N	55,7	50.78N	7.18E	57
 Azul	Buenos Aires	ar	N	55,7	36.78S	59.87W	140
-Vidnoje	Moskovskaja Oblast	ru	N	55,7	55.54N	37.69E	150
+Видное	Московская область	ru	N	55,7	55.54N	37.69E	150
 Sarcelles	Val-d'Oise	fr	N	55,7	49.00N	2.38E	74
 Okaya	Nagano	jp	N	55,7	36.06N	138.06E	764
 Terbanggi Besar	Lampung	id	N	55,7	4.88S	105.21E	26
@@ -7644,7 +7655,7 @@ Kollegâl	Karnataka	in	N	55,6	12.15N	77.12E	647
 Hujra Shâh Muqîm	Punjab	pk	N	55,6	30.75N	73.82E	178
 Viana	Espírito Santo	br	N	55,6	20.38S	40.51W	18
 Njeru	Central	ug	N	55,6	0.45N	33.18E	1128
-Kirishi	Leningrad	ru	N	55,6	59.46N	32.02E	36
+Кириши	Ленинградская область	ru	N	55,6	59.46N	32.02E	36
 Noisy-le-Grand	Seine-Saint-Denis	fr	N	55,6	48.85N	2.55E	70
 Namwôn	Chollabuk	kr	N	55,6	35.40N	127.37E	91
 Petaluma	California	us	N	55,6	38.24N	122.63W	5.71280145645142
@@ -7669,7 +7680,7 @@ Karîmganj	Assam	in	N	55,4	24.85N	92.36E	18
 Wheaton	Illinois	us	N	55,4	41.86N	88.11W	230.428405761719
 Lancaster	Pennsylvania	us	N	55,4	40.04N	76.30W	122.562393188477
 Segovia	Segovia	es	R	55,4	40.94N	4.11W	1019
-Uzlovaja	Tula	ru	N	55,4	53.99N	38.16E	225
+Узловая	Тульская область	ru	N	55,4	53.99N	38.16E	225
 Vranje	Central Serbia	rs	N	55,4	42.57N	21.91E	650
 Sale	England	gb	N	55,4	53.42N	2.34W	23
 Uzhice	Central Serbia	rs	N	55,4	43.87N	19.84E	607
@@ -7680,7 +7691,7 @@ Kâlna	Bangla	in	N	55,3	23.22N	88.37E	15
 Meerbusch	Nordrhein-Westfalen	de	N	55,3	51.24N	6.73E	37
 Charleville-Mézières	Ardennes	fr	R	55,3	49.75N	4.73E	148
 Snizhne	Donets'ka	ua	N	55,3	48.02N	38.77E	265
-Gelendzhik	Krasnodar	ru	N	55,3	44.56N	38.08E	9
+Геленджик	Краснодарский край	ru	N	55,3	44.56N	38.08E	9
 Caicó	Rio Grande do Norte	br	N	55,3	6.46S	37.10W	156
 Anamur	Içel	tr	N	55,3	36.08N	32.84E	40
 Sur-al-Ghuzlan	Buirah	dz	N	55,3	36.15N	3.68E	901
@@ -7715,13 +7726,13 @@ Saldanha	Western Cape	za	N	55,1	33.01S	17.93E	23
 Takizawa	Iwate	jp	N	55,1	39.75N	141.07E	188
 Maha Sarakham	Maha Sarakham	th	R	55,1	16.18N	103.29E	144
 Cholet	Maine-et-Loire	fr	N	55,1	47.07N	0.88W	116
-Osinniki	Kemerovo	ru	N	55	53.61N	87.33E	230
+Осинники	Кемеровская область	ru	N	55	53.61N	87.33E	230
 Winzah	Tibissah	dz	N	55	35.96N	8.12E	664
 Changanâcheri	Kerala	in	N	55	9.45N	76.54E	12
 Ilkal	Karnataka	in	N	55	15.97N	76.13E	570
 Turbaco	Bolívar	co	N	55	10.34N	75.42W	190
 Pâlitâna	Gujarat	in	N	55	21.52N	71.83E	62
-Timashevsk	Krasnodar	ru	N	55	45.62N	38.94E	21
+Тимашевск	Краснодарский край	ru	N	55	45.62N	38.94E	21
 Shakhtars'k	Donets'ka	ua	N	55	48.05N	38.46E	249
 Roeselare	West-Vlaanderen	be	N	55	50.95N	3.13E	18
 Novi Pazar	Central Serbia	rs	N	55	43.15N	20.52E	512
@@ -7735,7 +7746,7 @@ Saint-Jérôme	Québec	ca	N	54,9	45.78N	74.00W	94.1848526000977
 Moquegua	Moquegua	pe	R	54,9	17.19S	70.94W	1387
 Smallingerland	Friesland	nl	N	54,9	53.11N	6.09E	2
 Cianorte	Paraná	br	N	54,9	23.65S	52.62W	496
-Frjazino	Moskovskaja Oblast	ru	N	54,9	55.95N	38.05E	166
+Фрязино	Московская область	ru	N	54,9	55.95N	38.05E	166
 Nyeri	Central	ke	R	54,9	0.41S	36.95E	1800
 Choma	Southern	zm	N	54,9	16.81S	26.97E	1311
 Suwa	Nagano	jp	N	54,9	36.05N	138.12E	813
@@ -7814,7 +7825,7 @@ Halmstad	Halland	se	R	54,3	56.67N	12.86E	10
 Tanjung Agung	Sumatera Selatan	id	N	54,3	3.93S	103.80E	111
 Tharrawaddy	Bago	mm	N	54,2	17.65N	95.79E	22
 Kâtrâs	Jharkhand	in	N	54,2	23.80N	86.28E	205
-Gorno-Altajsk	Gorno-Altaj	ru	R	54,2	51.96N	85.96E	299
+Горно-Алтайск	Алтай	ru	R	54,2	51.96N	85.96E	299
 Latacunga	Cotopaxi	ec	R	54,2	0.93S	78.61W	2806
 Bîna-Etâwa	Madhya Pradesh	in	N	54,2	24.20N	78.20E	410
 Anjangaon	Maharashtra	in	N	54,2	21.16N	77.31E	339
@@ -7951,7 +7962,7 @@ Tuni	Andhra Pradesh	in	N	53,2	17.35N	82.55E	20
 Bad Homburg	Hessen	de	N	53,2	50.23N	8.62E	171
 Metpalli	Andhra Pradesh	in	N	53,2	18.83N	78.62E	305
 Wanparti	Andhra Pradesh	in	N	53,2	16.37N	78.07E	396
-Buguruslan	Orenburg	ru	N	53,2	53.66N	52.44E	117
+Бугуруслан	Оренбургская область	ru	N	53,2	53.66N	52.44E	117
 Crateús	Ceará	br	N	53,2	5.18S	40.67W	292
 Gbadolite	Équateur	cd	N	53,2	4.29N	21.02E	411
 Dunaújváros	Fejér	hu	N	53,2	46.98N	18.93E	118
@@ -7999,7 +8010,7 @@ Bukit Baru	Melaka	my	N	53	2.22N	102.27E	8
 West Des Moines	Iowa	us	N	52,9	41.57N	93.75W	265.6318359375
 Aspen Hill	Maryland	us	N	52,9	39.09N	77.08W	134.126739501953
 Mao	Valverde	do	R	52,9	19.56N	71.08W	78
-Ivantejevka	Moskovskaja Oblast	ru	N	52,9	52.27N	49.09E	50
+Ивантеевка	Московская область	ru	N	52,9	52.27N	49.09E	50
 Çarsamba	Samsun	tr	N	52,9	41.20N	36.73E	16
 Sirs-al-Layyânah	al-Minûfîyah	eg	N	52,9	30.43N	30.98E	14
 Shoreline	Washington	us	N	52,9	47.75N	122.36W	143.257965087891
@@ -8023,7 +8034,7 @@ Pamplona	Norte de Santander	co	N	52,7	7.39N	72.66W	2661
 Río Tercero	Córdoba	ar	N	52,7	32.18S	64.12W	376
 Rio do Sul	Santa Catarina	br	N	52,7	27.21S	49.65W	339
 Länkäran	Länkäran	az	R	52,7	38.75N	48.84E	-19
-Kanash	Chuvashija	ru	N	52,7	55.51N	47.47E	191
+Канаш	Чувашия	ru	N	52,7	55.51N	47.47E	191
 Yevlax	Mil-Qarabax	az	N	52,7	40.62N	47.14E	14
 Bayjî	Salâh-ad-Dîn	iq	N	52,7	34.94N	43.48E	119
 Sengerama	Mwanza	tz	N	52,7	2.65S	32.64E	1201
@@ -8077,8 +8088,8 @@ Jaén	Cajamarca	pe	N	52,3	5.71S	78.81W	741
 Vâsai	Maharashtra	in	N	52,3	19.36N	72.80E	11
 Mercedes	Buenos Aires	ar	N	52,3	34.66S	59.44W	37
 Arles	Bouches-du-Rhône	fr	N	52,3	43.69N	4.63E	8
-Liski	Voronezh	ru	N	52,3	50.98N	39.56E	125
-Vjazma	Smolensk	ru	N	52,3	55.22N	34.29E	218
+Лиски	Воронежская область	ru	N	52,3	50.98N	39.56E	125
+Вязьма	Смоленская область	ru	N	52,3	55.22N	34.29E	218
 Slonim	Hrodna	by	N	52,3	53.10N	25.32E	130
 Bambari	Ouaka	cf	R	52,3	5.76N	20.67E	429
 Cava de' Tirreni	Campania	it	N	52,3	40.71N	14.69E	260
@@ -8091,7 +8102,7 @@ Dhûri	Punjab	in	N	52,2	30.37N	75.87E	251
 Batatais	São Paulo	br	N	52,2	20.89S	47.59W	852
 Pirapora	Minas Gerais	br	N	52,2	17.33S	44.93W	510
 Mijas	Málaga	es	N	52,2	36.60N	4.64W	559
-Vyshnij Volochok	Tver	ru	N	52,2	57.59N	34.54E	158
+Вышний Волочок	Тверская область	ru	N	52,2	57.59N	34.54E	158
 Tavsanli	Kütahya	tr	N	52,2	39.54N	29.49E	831
 Trani	Puglia	it	N	52,2	41.28N	16.41E	15
 Grays	England	gb	N	52,2	51.48N	0.32E	10
@@ -8115,7 +8126,7 @@ Camaquã	Rio Grande do Sul	br	N	52	30.84S	51.81W	48
 Moçambique	Nampula	mz	N	52	15.04S	40.73E	8
 Buseresere	Kagera	tz	N	52	3.02S	31.87E	1227
 Diyarb Najm	ash-Sharqîyah	eg	N	52	30.75N	31.44E	7
-Kingisepp	Leningrad	ru	N	52	59.38N	28.60E	5
+Кингисепп	Ленинградская область	ru	N	52	59.38N	28.60E	5
 Ouahigouya	Yatenga	bf	R	52	13.57N	2.42W	338
 Modica	Sicilia	it	N	52	36.87N	14.76E	447
 Yuanli	Miaoli	tw	N	52	24.45N	120.65E	14
@@ -8123,7 +8134,7 @@ Tungkang	Pingtung	tw	N	52	22.46N	120.44E	0
 Sragen	Jawa Tengah	id	N	52	7.43S	111.02E	87
 Pirojpûr	Pirojpûr	bd	R	51,9	22.57N	89.99E	7
 Sendhwa	Madhya Pradesh	in	N	51,9	21.68N	75.10E	410
-Verhnjaja Pyshma	Sverdlovsk	ru	N	51,9	56.97N	60.59E	279
+Верхняя Пышма	Свердловская область	ru	N	51,9	56.97N	60.59E	279
 al-Bâb	Halab	sy	N	51,9	36.37N	37.53E	443
 Izyum	Kharkivs'ka	ua	N	51,9	49.22N	37.27E	70
 Mansa	Luapala	zm	R	51,9	11.20S	28.89E	1205
@@ -8134,13 +8145,13 @@ Wuchi	Taichung Hsien	tw	N	51,9	24.27N	120.52E	0
 Caborca	Sonora	mx	N	51,9	30.72N	112.16W	288
 Nuevo Casas Grandes	Chihuahua	mx	N	51,9	30.42N	107.92W	1453
 Goâlpâra	Assam	in	N	51,8	26.18N	90.62E	43
-Zarinsk	Altaj	ru	N	51,8	53.72N	84.93E	164
+Заринск	Алтайский край	ru	N	51,8	53.72N	84.93E	164
 Chitrakût Dham	Uttar Pradesh	in	N	51,8	25.20N	80.84E	144
 North Bay	Ontario	ca	N	51,8	46.30N	79.45W	204
 Rengo	Libertador General Bernardo O'Higgins	cl	N	51,8	34.41S	70.87W	311
 Willich	Nordrhein-Westfalen	de	N	51,8	51.27N	6.55E	40
-Kurganinsk	Krasnodar	ru	N	51,8	44.90N	40.58E	158
-Kimry	Tver	ru	N	51,8	56.88N	37.35E	125
+Курганинск	Краснодарский край	ru	N	51,8	44.90N	40.58E	158
+Кимры	Тверская область	ru	N	51,8	56.88N	37.35E	125
 Morecambe	England	gb	N	51,8	54.08N	2.86W	0
 Cové	Zou	bj	N	51,8	7.24N	2.30E	48
 Ungsang	Kyeongsangnam	kr	N	51,8	35.41N	129.17E	105
@@ -8150,11 +8161,11 @@ Elkhart	Indiana	us	N	51,7	41.69N	85.97W	222.176330566406
 Sandîla	Uttar Pradesh	in	N	51,7	27.08N	80.52E	130
 Idâppâdi	Tamil Nadu	in	N	51,7	11.58N	77.85E	202
 Hiriyûr	Karnataka	in	N	51,7	13.97N	76.60E	627
-Lesnoj	Sverdlovsk	ru	N	51,7	58.67N	59.80E	201
-Krasnokamsk	Perm	ru	N	51,7	58.09N	55.76E	99
+Лесной	Свердловская область	ru	N	51,7	58.67N	59.80E	201
+Краснокамск	Пермская область	ru	N	51,7	58.09N	55.76E	99
 Roven'ky	Luhans'ka	ua	N	51,7	48.09N	39.37E	292
 Bryanka	Luhans'ka	ua	N	51,7	48.51N	38.67E	216
-Lytkarino	Moskovskaja Oblast	ru	N	51,7	55.58N	37.91E	158
+Лыткарино	Московская область	ru	N	51,7	55.58N	37.91E	158
 at-Tall-al-Kabîr	ash-Sharqîyah	eg	N	51,7	30.55N	31.78E	7
 Miura	Kanagawa	jp	N	51,7	35.15N	139.63E	26
 Iwade	Wakayama	jp	N	51,7	34.25N	135.32E	18
@@ -8166,11 +8177,11 @@ Euclid	Ohio	us	N	51,6	41.59N	81.52W	193.861633300781
 San Carlos	Bío Bío	cl	N	51,6	36.42S	71.96W	177
 Cuneo	Piemonte	it	N	51,6	44.39N	7.54E	542
 Zhob	Baluchistan	pk	N	51,6	31.35N	69.44E	1397
-Otradnyj	Samara	ru	N	51,6	53.34N	51.37E	68
+Отрадный	Самарская область	ru	N	51,6	53.34N	51.37E	68
 Belo Jardim	Pernambuco	br	N	51,6	8.33S	36.42W	627
 Bungoma	Western	ke	N	51,6	0.57N	34.56E	1439
 Çubuk	Ankara	tr	N	51,6	40.25N	33.03E	1006
-Roslavl	Smolensk	ru	N	51,6	53.96N	32.86E	208
+Рославль	Смоленская область	ru	N	51,6	53.96N	32.86E	208
 Joensuu	Pohjois-Karjala	fi	R	51,6	62.61N	29.78E	0	
 Asenovgrad	Plovdiv	bg	N	51,6	42.02N	24.88E	223
 Kateríni	Piería	gr	R	51,6	40.27N	22.50E	36
@@ -8190,7 +8201,7 @@ Meshkinshahr	Ardabîl	ir	N	51,5	38.38N	47.68E	1523
 al-Musayyib	Bâbil	iq	N	51,5	32.78N	44.30E	36
 al-Jubayhah	ŽAmmân	jo	N	51,5	32.02N	35.86E	1044
 al-Afrun	Blidah	dz	N	51,5	36.47N	2.61E	92
-Spassk-Dalnij	Primorje	ru	N	51,5	44.60N	132.81E	89
+Спасск-Дальний	Приморский край	ru	N	51,5	44.60N	132.81E	89
 Rowland Heights	California	us	N	51,5	33.98N	117.89W	159.705139160156
 Tantan	Guelmim	ma	N	51,5	28.43N	11.10W	61
 Thai Binh	Dong Bang Song Hong	vn	N	51,5	20.45N	106.34E	5
@@ -8230,11 +8241,11 @@ Mobârakeh	Esfahân	ir	N	51,2	32.49N	51.66E	1909
 ash-Shahir	Hadramaut	ye	N	51,2	14.76N	49.61E	15
 Mirassol	São Paulo	br	N	51,2	20.82S	49.52W	563
 Campos do Jordão	São Paulo	br	N	51,2	22.73S	45.59W	1642
-Malgobek	Ingusetija	ru	N	51,2	43.54N	44.58E	473
+Малгобек	Ингушетия	ru	N	51,2	43.54N	44.58E	473
 Qiryat Gat	Hadarom	il	N	51,2	31.61N	34.76E	134
 Onesti	Bacau	ro	N	51,2	46.26N	26.76E	202
 Tivaouane	Thiès	sn	N	51,2	14.97N	16.83W	63
-Ust-Kut	Irkutsk	ru	N	51,2	56.80N	105.62E	295
+Усть-Кут	Иркутская область	ru	N	51,2	56.80N	105.62E	295
 Minnetonka	Minnesota	us	N	51,1	44.93N	93.46W	304.655181884766
 Bowling Green	Kentucky	us	N	51,1	36.97N	86.44W	160.629592895508
 Riddir	Sigis Kazakstan	kz	N	51,1	50.36N	83.52E	726
@@ -8282,7 +8293,7 @@ Juigalpa	Chontales	ni	R	50,8	12.11N	85.38W	156
 Charleston	West Virginia	us	R	50,8	38.35N	81.63W	181.935745239258
 Sardhana	Uttar Pradesh	in	N	50,8	29.15N	77.62E	233
 Tefé	Amazonas	br	N	50,8	3.36S	64.70W	37
-Chusovoj	Perm	ru	N	50,8	58.29N	57.80E	127
+Чусовой	Пермская область	ru	N	50,8	58.29N	57.80E	127
 Taquaritinga	São Paulo	br	N	50,8	21.41S	48.51W	568
 Amparafaravola	Toamasina	mg	N	50,8	17.59S	48.21E	777
 Dosso	Dosso	ne	R	50,8	13.05N	3.20E	230
@@ -8376,7 +8387,7 @@ Kerkrade	Limburg	nl	N	50,2	50.87N	6.06E	132
 Itauguá	Central	py	N	50,2	25.38S	57.34W	143
 Presidente Franco	Alto Paraná	py	N	50,2	25.57S	54.61W	225
 Krasnodon	Luhans'ka	ua	N	50,2	48.30N	39.74E	138
-Volhov	Leningrad	ru	N	50,2	59.93N	32.34E	30
+Волхов	Ленинградская область	ru	N	50,2	59.93N	32.34E	30
 Ibshawây	al-Fayyûm	eg	N	50,2	29.37N	30.68E	-4
 Mollet del Vallès	Barcelona	es	N	50,2	41.55N	2.21E	95
 Bagheria	Sicilia	it	N	50,2	38.09N	13.51E	53
@@ -8385,7 +8396,7 @@ Bedford	Texas	us	N	50,1	32.85N	97.13W	173.885986328125
 Martínez	Veracruz	mx	N	50,1	20.06N	97.05W	65
 Woodbury	Minnesota	us	N	50,1	44.91N	92.92W	294.548156738281
 Cobán	Alta Verapaz	gt	R	50,1	15.47N	90.38W	1319
-Raduzhnyj	Hanty-Mansija	ru	N	50,1	62.09N	77.23E	0	
+Радужный	Ханты-Мансийский АО	ru	N	50,1	62.09N	77.23E	0	
 Lachhmangarh	Rajasthan	in	N	50,1	27.82N	75.03E	361
 New Brunswick	New Jersey	us	N	50,1	40.49N	74.45W	16.6787166595459
 Âbu Road	Rajasthan	in	N	50,1	24.48N	72.78E	261
@@ -8413,7 +8424,7 @@ Ibbenbüren	Nordrhein-Westfalen	de	N	50	52.29N	7.71E	130
 Biel	Bern	ch	N	50	47.15N	7.24E	683
 Goaigoaza	Carabobo	ve	N	50	10.42N	67.96W	124
 Cetikara	Kostanay	kz	N	50	52.19N	61.24E	260
-Verhnjaja Salda	Sverdlovsk	ru	N	50	58.06N	60.55E	217
+Верхняя Сальда	Свердловская область	ru	N	50	58.06N	60.55E	217
 Belfort	Territoire de Belfort	fr	R	50	47.65N	6.85E	367
 Tacuarembó	Tacuarembó	uy	R	50	31.71S	55.98W	132
 Ponte Nova	Minas Gerais	br	N	50	20.41S	42.90W	403
@@ -8441,9 +8452,9 @@ Zinacantepec	México	mx	N	49,8	19.28N	99.74W	2764
 Kanakapura	Karnataka	in	N	49,8	12.54N	77.42E	635
 Kavundampalayam	Tamil Nadu	in	N	49,8	11.07N	76.91E	485
 Annecy	Haute-Savoie	fr	R	49,8	45.91N	6.12E	457
-Pechora	Komi	ru	N	49,8	65.15N	57.21E	0	
+Печора	Коми	ru	N	49,8	65.15N	57.21E	0	
 Capanema	Pará	br	N	49,8	1.19S	47.18W	17
-Doneck	Rostov	ru	N	49,8	48.35N	40.03E	28
+Донецк	Ростовская область	ru	N	49,8	48.35N	40.03E	28
 Nawâ	DarŽâ	sy	N	49,8	32.90N	36.04E	577
 Tríkala	Tríkala	gr	R	49,8	39.56N	21.77E	112
 Skarżysko-Kamienna	Świętokrzyskie	pl	N	49,8	51.12N	20.88E	233
@@ -8457,8 +8468,8 @@ Dehu Road	Maharashtra	in	N	49,7	18.16N	73.72E	1009
 Sihor	Gujarat	in	N	49,7	21.70N	71.97E	95
 Biguaçu	Santa Catarina	br	N	49,7	27.50S	48.66W	6
 Bitlis	Bitlis	tr	R	49,7	38.43N	42.14E	1650
-Livny	Orjol	ru	N	49,7	52.41N	37.58E	140
-Jarcevo	Smolensk	ru	N	49,7	55.07N	32.68E	175
+Ливны	Орловская область	ru	N	49,7	52.41N	37.58E	140
+Ярцево	Смоленская область	ru	N	49,7	55.07N	32.68E	175
 Kirkcaldy	Scotland	gb	N	49,7	57.14N	3.16W	524
 Kjustendil	Kjustendil	bg	R	49,7	42.30N	22.69E	540
 Cupertino	California	us	N	49,7	37.31N	122.05W	104.352890014648
@@ -8476,7 +8487,7 @@ Dhâmpur	Uttar Pradesh	in	N	49,6	29.32N	78.52E	237
 Arjona	Bolívar	co	N	49,6	10.26N	75.35W	58
 Barnstable Town	Massachusetts	us	N	49,6	41.70N	70.30W	8.3444995880127
 Bûr Hakkaba	Bay	so	N	49,6	2.80N	44.08E	214
-Jefremov	Tula	ru	N	49,6	53.15N	38.13E	150
+Ефремов	Тульская область	ru	N	49,6	53.15N	38.13E	150
 Niksar	Tokat	tr	N	49,6	40.59N	36.95E	355
 'Akko	Hazafon	il	N	49,6	32.94N	35.08E	7
 Suma	Blidah	dz	N	49,6	36.52N	2.92E	152
@@ -8488,7 +8499,7 @@ Tienchung	Changhwa	tw	N	49,6	23.86N	120.57E	47
 Muntilan	Jawa Tengah	id	N	49,6	7.58S	110.27E	328
 Kalasin	Kalasin	th	R	49,6	16.43N	103.50E	146
 Simpang Empat	Perak	my	N	49,6	4.95N	100.63E	5
-Sajanogorsk	Hakasija	ru	N	49,5	53.10N	91.39E	313
+Саяногорск	Хакасия	ru	N	49,5	53.10N	91.39E	313
 Langenhagen	Niedersachsen	de	N	49,5	52.45N	9.74E	57
 Çartak	Namangan	uz	N	49,5	41.07N	71.81E	529
 al-Khabûrah	al-Bâtinah	om	N	49,5	23.99N	57.10E	0
@@ -8503,7 +8514,7 @@ Cathedral City	California	us	N	49,5	33.83N	116.46W	114.860260009766
 Kettering	England	gb	N	49,5	52.40N	0.73W	87
 Jhâlâkâtî	Jhâlâkâtî	bd	R	49,4	22.64N	90.21E	0
 Cuyahoga Falls	Ohio	us	N	49,4	41.17N	81.52W	305.894866943359
-Kujbyshev	Novosibirsk	ru	N	49,4	55.44N	78.30E	103
+Куйбышев	Новосибирская область	ru	N	49,4	55.44N	78.30E	103
 Ellicott City	Maryland	us	N	49,4	39.27N	76.83W	137.65754699707
 Rivoli	Piemonte	it	N	49,4	45.09N	7.51E	342
 Uroteppa	Sughd	tj	N	49,4	39.92N	69.00E	972
@@ -8542,7 +8553,7 @@ al-Hajar	Annabah	dz	N	49,3	36.80N	7.75E	10
 Martaban	Mon	mm	N	49,2	16.53N	97.60E	9
 Huntington	West Virginia	us	N	49,2	38.41N	82.43W	178.182769775391
 Kleve	Nordrhein-Westfalen	de	N	49,2	51.79N	6.12E	83
-Monchegorsk	Murmansk	ru	N	49,2	67.92N	32.82E	0	
+Мончегорск	Мурманская область	ru	N	49,2	67.92N	32.82E	0	
 Orhangazi	Bursa	tr	N	49,2	40.49N	29.31E	116
 Masuda	Shimane	jp	N	49,2	34.68N	131.86E	26
 Velletri	Lazio	it	N	49,2	41.69N	12.76E	356
@@ -8572,7 +8583,7 @@ Uíge	Uíge	ao	R	49	7.62S	15.05E	816
 Marano di Napoli	Campania	it	N	49	40.90N	14.18E	162
 Foligno	Umbria	it	N	49	42.96N	12.70E	239
 Narsimhapur	Madhya Pradesh	in	N	48,9	22.95N	79.20E	359
-Chebarkul	Cheljabinsk	ru	N	48,9	54.98N	60.36E	335
+Чебаркуль	Челябинская область	ru	N	48,9	54.98N	60.36E	335
 al-MasnaŽah	al-Bâtinah	om	N	48,9	23.78N	57.63E	1
 Bunda	Mara	tz	N	48,9	2.05S	33.87E	1175
 Larnaka	Government controlled area	cy	N	48,9	34.92N	33.63E	8
@@ -8605,7 +8616,7 @@ Normal	Illinois	us	N	48,7	40.52N	89.00W	249.569244384766
 Chittaranjan	Bangla	in	N	48,7	23.86N	86.90E	146
 Coari	Amazonas	br	N	48,7	4.08S	63.13W	35
 Goianésia	Goiás	br	N	48,7	15.31S	49.13W	658
-Belaja Kalitva	Rostov	ru	N	48,7	48.18N	40.77E	19
+Белая Калитва	Ростов	ru	N	48,7	48.18N	40.77E	19
 Chalon-sur-Saône	Saône-et-Loire	fr	N	48,7	46.79N	4.84E	189
 Escada	Pernambuco	br	N	48,7	8.36S	35.24W	103
 Svidlovods'k	Kirovohrads'ka	ua	N	48,7	49.06N	33.25E	70
@@ -8618,7 +8629,7 @@ San Jose	Western Visayas	ph	N	48,7	10.76N	121.94E	21
 Keningau	Sabah	my	N	48,7	5.35N	116.15E	322
 Rembang	Jawa Tengah	id	N	48,7	6.71S	111.34E	16
 Siena	Toscana	it	N	48,7	43.33N	11.32E	342
-Shelehov	Irkutsk	ru	N	48,7	52.21N	104.09E	460
+Шелехов	Иркутская область	ru	N	48,7	52.21N	104.09E	460
 Tamlûk	Bangla	in	N	48,6	22.30N	87.92E	11
 Itahari	Koshi	np	N	48,6	26.67N	87.28E	121
 Mishawaka	Indiana	us	N	48,6	41.67N	86.17W	220.196472167969
@@ -8644,7 +8655,7 @@ Saint-Hyacinthe	Québec	ca	N	48,5	45.63N	72.96W	32.859001159668
 Sçuçe	Soltüstik Kazakstan	kz	N	48,5	52.94N	70.18E	406
 Sumayl	ad-Dakhîlîyah	om	N	48,5	23.30N	57.98E	381
 Ibitinga	São Paulo	br	N	48,5	21.76S	48.83W	490
-Ruzajevka	Mordovija	ru	N	48,5	54.07N	44.95E	242
+Рузаевка	Мордовия	ru	N	48,5	54.07N	44.95E	242
 Serrinha	Bahia	br	N	48,5	11.65S	39.01W	375
 Sousa	Paraíba	br	N	48,5	6.76S	38.23W	231
 Barrow-in-Furness	England	gb	N	48,5	54.13N	3.22W	53
@@ -8686,7 +8697,7 @@ Kouandé	Atacora	bj	N	48,3	10.33N	1.70E	421
 Gumia	Jharkhand	in	N	48,2	23.78N	85.82E	247
 Tiruvallûr	Tamil Nadu	in	N	48,2	13.15N	79.92E	38
 Pantalam	Kerala	in	N	48,2	9.32N	76.73E	13
-Satka	Cheljabinsk	ru	N	48,2	55.04N	59.03E	417
+Сатка	Челябинская область	ru	N	48,2	55.04N	59.03E	417
 Ipojuca	Pernambuco	br	N	48,2	8.40S	35.07W	10
 Shirakawa	Fukushima	jp	N	48,2	37.13N	140.21E	356
 Novato	California	us	N	48,2	38.09N	122.56W	4.48460006713867
@@ -8764,14 +8775,14 @@ Sawara	Chiba	jp	N	47,7	35.90N	140.50E	3
 Ami	Ibaraki	jp	N	47,7	36.04N	140.24E	3
 Genteng	Jawa Timur	id	N	47,7	8.36S	114.14E	180
 Diwek	Jawa Timur	id	N	47,7	7.58S	112.23E	55
-Tulun	Irkutsk	ru	N	47,7	54.56N	100.57E	473
+Тулун	Иркутская область	ru	N	47,7	54.56N	100.57E	473
 Clacton-on-Sea	England	gb	N	47,7	51.80N	1.14E	17
 Huesca	Huesca	es	R	47,7	42.14N	0.41W	485
 Chiautempan	Tlaxcala	mx	N	47,6	19.32N	98.18W	2306
 Conway	Arkansas	us	N	47,6	35.09N	92.45W	97.6598205566406
 Baruipur	Bangla	in	N	47,6	22.35N	88.45E	12
 Dumka	Jharkhand	in	N	47,6	24.27N	87.25E	151
-Berjozovskij	Kemerovo	ru	N	47,6	55.67N	86.26E	220
+Берёзовский	Кемеровская область	ru	N	47,6	55.67N	86.26E	220
 Frankenthal	Rheinland-Pfalz	de	N	47,6	49.55N	8.35E	94
 Tigri	Delhi	in	N	47,6	28.82N	78.15E	199
 Charkhi Dâdri	Haryana	in	N	47,6	28.60N	76.27E	218
@@ -8780,14 +8791,14 @@ Bornheim	Nordrhein-Westfalen	de	N	47,6	50.77N	6.98E	56
 Concepción	Concepción	py	R	47,6	23.40S	57.43W	75
 Sartrouville	Yvelines	fr	N	47,6	48.94N	2.18E	56
 Iwakura	Aichi	jp	N	47,6	35.28N	136.86E	11
-Krasnokamensk	Chita	ru	N	47,6	50.07N	118.14E	667
+Краснокаменск	Читинская область	ru	N	47,6	50.07N	118.14E	667
 Maulvi Bâzâr	Maulvi Bâzâr	bd	R	47,5	24.48N	91.76E	16
 Totonicapán	Totonicapán	gt	R	47,5	14.92N	91.36W	2558
 Chesterfield	Missouri	us	N	47,5	38.65N	90.58W	178.345733642578
 Jalor	Rajasthan	in	N	47,5	25.35N	72.62E	163
 Warzazât	Souss Massa-Draâ	ma	N	47,5	30.92N	6.90W	1128
 Sitrah	Sitrah	bh	R	47,5	26.15N	50.63E	0
-Shebekino	Belgorod	ru	N	47,5	50.42N	36.91E	107
+Шебекино	Белгородская область	ru	N	47,5	50.42N	36.91E	107
 Bâniyâs	Tartûs	sy	N	47,5	35.18N	35.96E	106
 Nazerat 'Illit	Hazafon	il	N	47,5	32.72N	35.33E	488
 Hämeenlinna	Kanta-Häme	fi	R	47,5	61.00N	24.45E	0	
@@ -8811,7 +8822,7 @@ Lamía	Fthiótis	gr	R	47,4	38.90N	22.43E	125
 Shahhat	al-Jabal al Akhdar	ly	N	47,4	32.83N	21.86E	476
 Dębica	Podkarpackie	pl	N	47,4	50.06N	21.42E	191
 Whangarei	Northland	nz	R	47,4	35.72S	174.31E	89
-Amursk	Habarovsk	ru	N	47,4	50.23N	136.89E	38
+Амурск	Хабаровский край	ru	N	47,4	50.23N	136.89E	38
 Toyooka	Hyôgo	jp	N	47,4	35.54N	134.82E	33
 Yangsan	Kyeongsangnam	kr	N	47,4	35.34N	129.04E	23
 Boyolali	Jawa Tengah	id	N	47,4	7.52S	110.59E	470
@@ -8841,7 +8852,7 @@ Zaraza	Guárico	ve	N	47,2	9.34N	65.32W	50
 Cosmópolis	São Paulo	br	N	47,2	22.63S	47.20W	573
 Midalt	Meknes-Tafilalet	ma	N	47,2	32.70N	4.74W	1427
 Suluova	Amasya	tr	N	47,2	40.81N	35.66E	508
-Severomorsk	Murmansk	ru	N	47,2	69.07N	33.42E	0	
+Североморск	Мурманская область	ru	N	47,2	69.07N	33.42E	0	
 Tigard	Oregon	us	N	47,2	45.43N	122.77W	51.477970123291
 Civitavecchia	Lazio	it	N	47,2	42.09N	11.78E	0
 Gotha	Thüringen	de	N	47,2	50.95N	10.70E	297
@@ -8852,14 +8863,14 @@ Twante	Yangon	mm	N	47,1	16.72N	95.93E	0
 Tungî Para	Gopâlganj	bd	N	47,1	22.90N	89.91E	5
 Puerto Cortés	Cortés	hn	N	47,1	15.85N	87.94W	6
 Penco	Bío Bío	cl	N	47,1	36.73S	73.00W	0
-Nadym	Jamalo-Nenets	ru	N	47,1	65.53N	72.51E	0	
+Надым	Ямало-Ненецкий АО	ru	N	47,1	65.53N	72.51E	0	
 Itu	Akwa Ibom	ng	N	47,1	5.20N	7.98E	12
 Herzogenrath	Nordrhein-Westfalen	de	N	47,1	50.87N	6.09E	109
 Santiago	Rio Grande do Sul	br	N	47,1	29.18S	54.88W	423
 Sonqor	Kermânshâh	ir	N	47,1	34.78N	47.60E	1694
 Taolanaro	Toliary	mg	N	47,1	25.03S	46.99E	24
 Guaxupé	Minas Gerais	br	N	47,1	21.29S	46.71W	870
-Grjazi	Lipeck	ru	N	47,1	52.49N	39.93E	126
+Грязи	Липецкая область	ru	N	47,1	52.49N	39.93E	126
 Zhovti Vody	Dnipropetrovs'ka	ua	N	47,1	48.36N	33.53E	100
 New Plymouth	Taranaki	nz	N	47,1	39.06S	174.08E	34
 Arrecife	Las Palmas	es	N	47,1	28.96N	13.55W	10
@@ -8893,7 +8904,7 @@ Chone	Manabí	ec	N	46,9	0.69S	80.09W	60
 Nihtaur	Uttar Pradesh	in	N	46,9	29.33N	78.38E	243
 Wilson	North Carolina	us	N	46,9	35.73N	77.92W	39.382568359375
 West New York	New Jersey	us	N	46,9	40.79N	74.01W	53.8462371826172
-Snezhinsk	Cheljabinsk	ru	N	46,9	56.08N	60.72E	284
+Снежинск	Челябинская область	ru	N	46,9	56.08N	60.72E	284
 Villa Constitución	Santa Fé	ar	N	46,9	33.23S	60.35W	23
 Taquara	Rio Grande do Sul	br	N	46,9	29.65S	50.79W	30
 Leopoldina	Minas Gerais	br	N	46,9	21.53S	42.64W	265
@@ -8928,7 +8939,7 @@ Keselwatta	Kalatura	lk	N	46,7	6.60N	79.95E	0
 Villarica	Araucanía	cl	N	46,7	39.28S	72.23W	230
 Wânkâner	Gujarat	in	N	46,7	22.62N	70.93E	81
 Nichelino	Piemonte	it	N	46,7	44.99N	7.63E	235
-Ahtubinsk	Astrahan	ru	N	46,7	48.30N	46.17E	2
+Ахтубинск	Астраханская область	ru	N	46,7	48.30N	46.17E	2
 Marhanets'	Dnipropetrovs'ka	ua	N	46,7	47.67N	34.63E	36
 Utengule Usongwe	Mbeya	tz	N	46,7	8.68S	33.86E	1071
 Cwmbran	Wales	gb	N	46,7	51.65N	3.04W	106
@@ -8988,8 +8999,8 @@ Arkalik	Kostanay	kz	N	46,4	50.25N	66.90E	340
 Jidd Hafs	Jidd Hafs	bh	R	46,4	26.22N	50.53E	12
 São José do Rio Pardo	São Paulo	br	N	46,4	21.59S	46.89W	704
 Dumbarton	Scotland	gb	N	46,4	55.95N	4.57W	6
-Mcensk	Orjol	ru	N	46,4	53.27N	36.57E	154
-Safonovo	Smolensk	ru	N	46,4	55.11N	33.23E	221
+Мценск	Орловская область	ru	N	46,4	53.27N	36.57E	154
+Сафоново	Смоленская область	ru	N	46,4	55.11N	33.23E	221
 Stirling	Scotland	gb	N	46,4	56.12N	3.94W	44
 Évry	Essonne	fr	R	46,4	48.64N	2.44E	79
 Salina	Kansas	us	N	46,3	38.82N	97.62W	375.600036621094
@@ -9000,7 +9011,7 @@ Hadâli	Punjab	pk	N	46,3	32.64N	74.57E	250
 Shâhkot	Punjab	pk	N	46,3	31.57N	73.48E	195
 Kajuru	n.a.	ng	N	46,3	10.32N	7.68E	696
 Zarand	Kermân	ir	N	46,3	30.80N	56.58E	1664
-Zhigulevsk	Samara	ru	N	46,3	53.42N	49.50E	260
+Жигулёвск	Самарская область	ru	N	46,3	53.42N	49.50E	260
 Registro	São Paulo	br	N	46,3	24.49S	47.84W	18
 Elat	Hadarom	il	N	46,3	29.56N	34.95E	64
 Romny	Sums'ka	ua	N	46,3	50.75N	33.48E	156
@@ -9123,7 +9134,7 @@ Alangad	Kerala	in	N	45,5	10.24N	76.27E	13
 Alipur Chatha	Punjab	pk	N	45,5	32.27N	73.81E	213
 Homburg	Saarland	de	N	45,5	49.33N	7.33E	255
 Ayangba	n.a.	ng	N	45,5	7.52N	7.16E	306
-Irbit	Sverdlovsk	ru	N	45,5	57.68N	63.04E	70
+Ирбит	Свердловская область	ru	N	45,5	57.68N	63.04E	70
 San Lorenzo	Corrientes	ar	N	45,5	28.12S	58.77W	62
 Cornélio Procópio	Paraná	br	N	45,5	23.18S	50.65W	663
 Soest	Utrecht	nl	N	45,5	52.18N	5.29E	17
@@ -9140,14 +9151,14 @@ Biella	Piemonte	it	N	45,4	45.58N	8.06E	477
 Kâlpi	Uttar Pradesh	in	N	45,4	26.12N	79.73E	126
 Gulaothi	Uttar Pradesh	in	N	45,4	28.60N	77.78E	211
 Siruguppa	Karnataka	in	N	45,4	15.63N	76.90E	371
-Megion	Hanty-Mansija	ru	N	45,4	61.05N	76.10E	0	
+Мегион	Ханты-Мансийский АО	ru	N	45,4	61.05N	76.10E	0	
 Râmpura	Punjab	in	N	45,4	30.25N	75.23E	219
 Kâhna Nau	Punjab	pk	N	45,4	31.37N	74.38E	211
 Kot Radha Kishan	Punjab	pk	N	45,4	31.17N	74.10E	206
 Settimo Torinese	Piemonte	it	N	45,4	45.15N	7.77E	211
 Tughghurt	Wargla	dz	N	45,4	33.10N	6.06E	74
-Kachkanar	Sverdlovsk	ru	N	45,4	58.70N	59.48E	374
-Mozhga	Udmurtija	ru	N	45,4	56.45N	52.19E	124
+Качканар	Свердловская область	ru	N	45,4	58.70N	59.48E	374
+Можга	Удмуртия	ru	N	45,4	56.45N	52.19E	124
 Beveren	Oost-Vlaanderen	be	N	45,4	51.22N	4.25E	5
 Parys	Free State	za	N	45,4	26.91S	27.46E	1399
 Dimitrovgrad	Haskovo	bg	N	45,4	42.06N	25.61E	95
@@ -9170,7 +9181,7 @@ Chaam	Phetchaburi	th	N	45,2	12.80N	99.97E	5
 Yamethin	Mandalay	mm	N	45,2	20.43N	96.14E	203
 Strongsville	Ohio	us	N	45,2	41.31N	81.83W	284.786041259766
 Colón	Colón	pa	R	45,2	9.36N	79.90W	7
-Alapajevsk	Sverdlovsk	ru	N	45,2	57.85N	61.69E	134
+Алапаевск	Свердловская область	ru	N	45,2	57.85N	61.69E	134
 Goiana	Pernambuco	br	N	45,2	7.56S	35.00W	20
 Kardzhali	Kardzhali	bg	R	45,2	41.65N	25.37E	253
 Taree	New South Wales	au	N	45,2	31.90S	152.47E	16
@@ -9224,7 +9235,7 @@ Kadalundi	Kerala	in	N	44,9	11.15N	75.81E	0
 Dondaicha	Maharashtra	in	N	44,9	21.33N	74.57E	157
 Évora	Alentejo	pt	R	44,9	38.57N	7.91W	290
 Kofarnihon	Karotegin	tj	N	44,9	38.55N	69.01E	866
-Izberbash	Dagestan	ru	N	44,9	42.56N	47.89E	-27
+Избербаш	Дагестан	ru	N	44,9	42.56N	47.89E	-27
 Camocim	Ceará	br	N	44,9	2.90S	40.85W	16
 Llanelli	Wales	gb	N	44,9	51.68N	4.17W	4
 Cruz das Almas	Bahia	br	N	44,9	12.67S	39.11W	227
@@ -9245,9 +9256,9 @@ Bin Sulaymân	Chaouia-Ouardigha	ma	N	44,8	33.63N	7.12W	259
 San Mateo	Aragua	ve	N	44,8	10.22N	67.42W	518
 Chahbahar	Sîstân-e Balûchestân	ir	N	44,8	25.30N	60.63E	20
 Golpâyegân	Esfahân	ir	N	44,8	33.45N	50.28E	1821
-Krasnyj Sulin	Rostov	ru	N	44,8	47.88N	40.06E	153
+Красный Сулин	Ростовская область	ru	N	44,8	47.88N	40.06E	153
 Azazghah	Tizi Wazu	dz	N	44,8	36.75N	4.37E	382
-Ust-Labinsk	Krasnodar	ru	N	44,8	45.21N	39.69E	68
+Усть-Лабинск	Краснодарский край	ru	N	44,8	45.21N	39.69E	68
 Njombe	Iringa	tz	N	44,8	9.33S	34.77E	1896
 Aranjuez	Madrid	es	N	44,8	40.03N	3.61W	495
 Le Blanc-Mesnil	Seine-Saint-Denis	fr	N	44,8	48.96N	2.47E	57
@@ -9392,7 +9403,7 @@ Danli	El Paraíso	hn	N	44	14.04N	86.58W	773
 Bhabua	Bihar	in	N	44	25.05N	83.62E	84
 Kohka	Chhattisgarh	in	N	44	21.22N	81.76E	315
 Charlottesville	Virginia	us	N	44	38.04N	78.49W	150.967269897461
-Langepas	Hanty-Mansija	ru	N	44	61.17N	75.39E	0	
+Лангепас	Ханты-Мансийский АО	ru	N	44	61.17N	75.39E	0	
 Attleboro	Massachusetts	us	N	44	41.93N	71.30W	48.6533241271973
 Brühl	Nordrhein-Westfalen	de	N	44	50.85N	6.90E	74
 Borûjan	Chahâr Mahâl-e Bakhtiari	ir	N	44	31.97N	51.29E	2223
@@ -9401,7 +9412,7 @@ al-Fuhayhîl	al-Ahmadî	kw	N	44	29.10N	48.13E	15
 Lindi	Lindi	tz	R	44	10.00S	39.70E	86
 Râbig	Makkah	sa	N	44	22.80N	39.02E	3
 Pervomays'k	Luhans'ka	ua	N	44	48.64N	38.52E	172
-Kurchatov	Kursk	ru	N	44	51.59N	35.65E	232
+Курчатов	Курская область	ru	N	44	51.59N	35.65E	232
 Karacabey	Bursa	tr	N	44	40.23N	28.37E	9
 Kumatori	Ôsaka	jp	N	44	34.41N	135.37E	48
 Kimje	Chollabuk	kr	N	44	35.80N	126.89E	15
@@ -9430,7 +9441,7 @@ Soroti	Eastern	ug	N	43,9	1.71N	33.60E	1103
 Mut	Içel	tr	N	43,9	36.64N	33.45E	331
 Thohoyandou	Limpopo	za	N	43,9	22.95S	30.48E	720
 Järvenpää	Uusimaa	fi	N	43,9	60.48N	25.10E	0	
-Sovetsk	Kaliningrad	ru	N	43,9	55.08N	21.88E	14
+Советск	Калининградская область	ru	N	43,9	55.08N	21.88E	14
 Shanhwa	Tainan Hsien	tw	N	43,9	23.14N	120.28E	5
 Vernon	British Columbia	ca	N	43,9	50.27N	119.28W	416
 as-Samârah	as-Samârah	eh	R	43,9	26.74N	11.67W	195
@@ -9449,9 +9460,9 @@ Pipariya	Madhya Pradesh	in	N	43,8	22.75N	78.35E	336
 Bloomfield	New Jersey	us	N	43,8	40.81N	74.19W	41.3266067504883
 Castro	Paraná	br	N	43,8	24.79S	50.01W	982
 Amparo	São Paulo	br	N	43,8	22.71S	46.77W	691
-Alatyr	Chuvashija	ru	N	43,8	54.85N	46.57E	85
-Frolovo	Volgograd	ru	N	43,8	49.77N	43.65E	108
-Morshansk	Tambov	ru	N	43,8	53.46N	41.81E	115
+Алатырь	Чувашия	ru	N	43,8	54.85N	46.57E	85
+Фролово	Волгоградская область	ru	N	43,8	49.77N	43.65E	108
+Моршанск	Тамбовская область	ru	N	43,8	53.46N	41.81E	115
 Cajazeiras	Paraíba	br	N	43,8	6.89S	38.56W	305
 Sebinkarahisar	Giresun	tr	N	43,8	40.29N	38.42E	1389
 Moreno	Pernambuco	br	N	43,8	8.11S	35.10W	119
@@ -9487,14 +9498,14 @@ Pithorâgarh	Uttaranchal	in	N	43,6	29.58N	80.22E	1521
 Hâlol	Gujarat	in	N	43,6	22.50N	73.47E	105
 Erkelenz	Nordrhein-Westfalen	de	N	43,6	51.08N	6.32E	99
 Robât Karîm	Tehrân	ir	N	43,6	35.48N	51.08E	1036
-Rtishchevo	Saratov	ru	N	43,6	52.27N	43.78E	210
-Rasskazovo	Tambov	ru	N	43,6	52.66N	41.88E	156
+Ртищево	Саратовская область	ru	N	43,6	52.27N	43.78E	210
+Рассказово	Тамбовская область	ru	N	43,6	52.66N	41.88E	156
 Birecik	Sanliurfa	tr	N	43,6	37.04N	38.00E	445
 Aracati	Ceará	br	N	43,6	4.56S	37.77W	11
 Hihyâ	ash-Sharqîyah	eg	N	43,6	30.67N	31.58E	8
 Quwaysinâ	al-Minûfîyah	eg	N	43,6	30.56N	31.16E	12
 Kanye	Ngwaketse	bw	R	43,6	24.97S	25.34E	1403
-Chernjahovsk	Kaliningrad	ru	N	43,6	54.63N	21.81E	31
+Черняховск	Калининградская область	ru	N	43,6	54.63N	21.81E	31
 Albany	Oregon	us	N	43,6	44.62N	123.09W	70.8947982788086
 Newark	California	us	N	43,6	37.52N	122.03W	5.32087373733521
 Wuradesa	Jawa Tengah	id	N	43,6	6.88S	109.60E	5
@@ -9521,11 +9532,11 @@ Baranoa	Atlántico	co	N	43,4	10.80N	74.92W	124
 Sarâi Âlamgîr	Punjab	pk	N	43,4	32.90N	73.75E	229
 Kosonsoy	Namangan	uz	N	43,4	41.24N	71.55E	878
 Utrera	Sevilla	es	N	43,4	37.18N	5.78W	52
-Mozdok	Alanija	ru	N	43,4	43.73N	44.65E	129
+Моздок	Алания	ru	N	43,4	43.73N	44.65E	129
 Dendermonde	Oost-Vlaanderen	be	N	43,4	51.03N	4.12E	2
 Akçaabat	Trabzon	tr	N	43,4	41.02N	39.56E	89
 Tiberias	Hazafon	il	N	43,4	32.80N	35.53E	-127
-Torzhok	Tver	ru	N	43,4	57.05N	34.96E	150
+Торжок	Тверская область	ru	N	43,4	57.05N	34.96E	150
 Medgidia	Constanta	ro	N	43,4	44.25N	28.28E	3
 Edremit	Balikesir	tr	N	43,4	39.61N	27.02E	177
 Dráma	Dráma	gr	R	43,4	41.15N	24.14E	105
@@ -9566,9 +9577,9 @@ Usulután	Usulután	sv	R	43,2	13.34N	88.44W	82
 Picsi	Lambayeque	pe	N	43,2	6.72S	79.79W	36
 Mustafâbâd	Punjab	pk	N	43,2	30.90N	73.50E	177
 Rigacikun	n.a.	ng	N	43,2	10.64N	7.47E	611
-Inta	Komi	ru	N	43,2	66.04N	60.17E	0	
+Инта	Коми	ru	N	43,2	66.04N	60.17E	0	
 Meybod	Yazd	ir	N	43,2	32.23N	54.01E	1099
-Zavolzhje	Nizhnij Novgorod	ru	N	43,2	56.64N	43.41E	74
+Заволжье	Новгородская область	ru	N	43,2	56.64N	43.41E	74
 Canindé	Ceará	br	N	43,2	4.35S	39.31W	148
 Zvolen	Banskobystrický	sk	N	43,2	48.58N	19.14E	325
 Hilo	Hawaii	us	N	43,2	19.70N	155.09W	88.4687881469727
@@ -9582,7 +9593,7 @@ Nueva Guinea	Atlántico Sur	ni	N	43,1	11.69N	84.46W	195
 Chepén	La Libertad	pe	N	43,1	7.22S	79.42W	187
 Nângal	Punjab	in	N	43,1	31.37N	76.38E	355
 Stepnogorsk	Akmola	kz	N	43,1	52.35N	71.89E	313
-Urjupinsk	Volgograd	ru	N	43,1	50.81N	42.02E	81
+Урюпинск	Волгоградская область	ru	N	43,1	50.81N	42.02E	81
 al-Badârî	Asyût	eg	N	43,1	26.99N	31.41E	62
 Telford	England	gb	N	43,1	52.68N	2.47W	183
 Birâk	ash-Shâti'	ly	R	43,1	27.53N	14.28E	334
@@ -9600,7 +9611,7 @@ al-Qanâyat	ash-Sharqîyah	eg	N	43	30.62N	31.45E	8
 Fort Portal	Western	ug	N	43	0.67N	30.27E	1553
 Delmas	Mpumalanga	za	N	43	26.14S	28.68E	1551
 Iwai	Ibaraki	jp	N	43	36.04N	139.89E	20
-Partizansk	Primorje	ru	N	43	43.15N	133.14E	130
+Партизанск	Приморский край	ru	N	43	43.15N	133.14E	130
 La Puente	California	us	N	43	34.03N	117.95W	103.768508911133
 Majenang	Jawa Tengah	id	N	43	7.30S	108.76E	34
 Cikeruh	Jawa Barat	id	N	43	6.95S	107.76E	686
@@ -9613,7 +9624,7 @@ Jalandhar Cantonment	Punjab	in	N	42,9	31.31N	75.63E	238
 De Bilt	Utrecht	nl	N	42,9	52.12N	5.17E	4
 Monte Alto	São Paulo	br	N	42,9	21.28S	48.49W	658
 Nova Serrana	Minas Gerais	br	N	42,9	19.86S	44.90W	696
-Kashira	Moskovskaja Oblast	ru	N	42,9	54.84N	38.15E	171
+Кашира	Московская область	ru	N	42,9	54.84N	38.15E	171
 Pesqueira	Pernambuco	br	N	42,9	8.35S	36.72W	796
 Islahiye	Gaziantep	tr	N	42,9	37.03N	36.3E	651
 Nioki	Bandundu	cd	N	42,9	2.72S	17.68E	310
@@ -9634,7 +9645,7 @@ Khekra	Uttar Pradesh	in	N	42,8	28.87N	77.28E	221
 Gangâkher	Maharashtra	in	N	42,8	18.95N	76.75E	396
 Sayreville	New Jersey	us	N	42,8	40.47N	74.32W	7.8751974105835
 Steenwijk	Overijssel	nl	N	42,8	52.79N	6.10E	-10
-Zainsk	Tatarstan	ru	N	42,8	55.32N	52.05E	65
+Заинск	Татарстан	ru	N	42,8	55.32N	52.05E	65
 Bemmel	Gelderland	nl	N	42,8	51.90N	5.90E	8
 Penedo	Alagoas	br	N	42,8	10.27S	36.58W	23
 Aboisso	Sud-Comoé	ci	N	42,8	5.47N	3.20W	14
@@ -9660,7 +9671,7 @@ Dhone	Andhra Pradesh	in	N	42,7	15.42N	77.88E	405
 Teaneck	New Jersey	us	N	42,7	40.89N	74.01W	41.9604072570801
 El Tocuyo	Lara	ve	N	42,7	9.78N	69.80W	620
 Bâjil	al-Hudaydah	ye	N	42,7	15.06N	43.28E	186
-Novodvinsk	Arhangelsk	ru	N	42,7	64.42N	40.82E	0	
+Новодвинск	Архангельская область	ru	N	42,7	64.42N	40.82E	0	
 Âlamat'a	Tigray	et	N	42,7	12.42N	39.56E	1566
 Sikéai	Thessaloníki	gr	N	42,7	40.65N	22.95E	103
 Otwock	Mazowieckie	pl	N	42,7	52.11N	21.28E	106
@@ -9712,7 +9723,7 @@ Völklingen	Saarland	de	N	42,4	49.26N	6.86E	234
 Degema	Rivers	ng	N	42,4	4.73N	6.77E	2
 Kaarst	Nordrhein-Westfalen	de	N	42,4	51.24N	6.61E	40
 Khashuri	Shida Kartli	ge	N	42,4	41.99N	43.60E	697
-Tutajev	Jaroslavl	ru	N	42,4	57.89N	39.55E	143
+Тутаев	Ярославская область	ru	N	42,4	57.89N	39.55E	143
 Madînat Sittah Uktubar	al-Jîzah	eg	N	42,4	29.82N	31.05E	120
 Ityây-al-Bârûd	al-Buhayrah	eg	N	42,4	30.88N	30.66E	4
 Bautzen	Sachsen	de	N	42,4	51.18N	14.43E	213
@@ -9726,7 +9737,7 @@ Ahmadnagar Cantonment	Maharashtra	in	N	42,3	19.04N	74.76E	638
 Leominster	Massachusetts	us	N	42,3	42.52N	71.77W	145.978851318359
 Concord	New Hampshire	us	R	42,3	43.23N	71.56W	102.398414611816
 Mgbidi	n.a.	ng	N	42,3	5.72N	6.89E	78
-Krasnoufimsk	Sverdlovsk	ru	N	42,3	56.61N	57.75E	279
+Красноуфимск	Свердловская область	ru	N	42,3	56.61N	57.75E	279
 Le Port	Saint-Denis	re	N	42,3	20.93S	55.30E	12
 Räsulzadä	Abseron	az	N	42,3	40.43N	49.83E	48
 Santos Dumont	Minas Gerais	br	N	42,3	21.46S	43.56W	908
@@ -9751,8 +9762,8 @@ Jaggayyapeta	Andhra Pradesh	in	N	42,2	16.90N	80.10E	59
 Gajraula	Uttar Pradesh	in	N	42,2	28.85N	78.23E	213
 Selu	Maharashtra	in	N	42,2	19.47N	76.47E	417
 Tessaoua	Maradi	ne	N	42,2	13.75N	7.99E	404
-Korenovsk	Krasnodar	ru	N	42,2	45.47N	39.44E	33
-Pereslavl-Zalesskij	Jaroslavl	ru	N	42,2	56.75N	38.84E	134
+Кореновск	Краснодарский край	ru	N	42,2	45.47N	39.44E	33
+Переславль-Залесский	Ярославская область	ru	N	42,2	56.75N	38.84E	134
 Endasilasie	Tigray	et	N	42,2	14.10N	38.28E	1906
 San Fernando de Henares	Madrid	es	N	42,2	40.43N	3.53W	573
 Pozharevac	Central Serbia	rs	N	42,2	44.63N	21.19E	80
@@ -9784,20 +9795,20 @@ Titusville	Florida	us	N	42	28.59N	80.82W	9.79729080200195
 Catonsville	Maryland	us	N	42	39.26N	76.74W	146.546539306641
 Hicksville	New York	us	N	42	40.76N	73.53W	40.9726028442383
 Arlington	Massachusetts	us	N	42	42.42N	71.16W	23.7177066802979
-Uraj	Hanty-Mansija	ru	N	42	60.13N	64.76E	0	
+Урай	Ханты-Мансийский АО	ru	N	42	60.13N	64.76E	0	
 Tiel	Gelderland	nl	N	42	51.91N	5.43E	5
 Jacundá	Pará	br	N	42	4.60S	49.39W	84
 Lagoa da Prata	Minas Gerais	br	N	42	20.02S	45.54W	652
 Rio das Ostras	Rio de Janeiro	br	N	42	22.53S	41.95W	0
 Katwijk	Noord-Holland	nl	N	42	52.21N	4.40E	10
-Kolchugino	Vladimir	ru	N	42	56.31N	39.35E	192
+Кольчугино	Владимирская область	ru	N	42	56.31N	39.35E	192
 Tres Cantos	Madrid	es	N	42	40.61N	3.71W	722
 Tokamachi	Niigata	jp	N	42	37.14N	138.75E	125
 Tay Ninh	Dong Nam Bo	vn	N	42	11.29N	106.13E	15
 San Pedro	Coahuila	mx	N	42	25.43N	103.22W	1130
 Arandas	Jalisco	mx	N	42	20.70N	102.35W	2060
 Kaliganj	Jhanaydâh	bd	N	41,9	23.42N	89.13E	12
-Myski	Kemerovo	ru	N	41,9	53.74N	87.78E	222
+Мыски	Кемеровская область	ru	N	41,9	53.74N	87.78E	222
 Pâthardih	Jharkhand	in	N	41,9	23.67N	86.43E	165
 Koraput	Orissa	in	N	41,9	18.82N	82.72E	857
 Âkivîdu	Andhra Pradesh	in	N	41,9	16.60N	81.38E	4
@@ -9827,14 +9838,14 @@ Heinsberg	Nordrhein-Westfalen	de	N	41,8	51.07N	6.09E	37
 Finidîq	Tangier-Tétouan	ma	N	41,8	35.85N	5.35W	0
 Mongaguá	São Paulo	br	N	41,8	24.10S	46.64W	11
 Mitsukaidô	Ibaraki	jp	N	41,8	36.02N	139.99E	17
-Dalnegorsk	Primorje	ru	N	41,8	44.54N	135.51E	253
+Дальнегорск	Приморский край	ru	N	41,8	44.54N	135.51E	253
 San Gabriel	California	us	N	41,8	34.09N	118.10W	115.205909729004
 Meridian	Idaho	us	N	41,8	43.61N	116.40W	790.630493164063
 Wadi al-Fiddah	ash-Shalif	dz	N	41,8	36.19N	1.52E	173
 Ramu	Koks Bâzâr	bd	N	41,7	21.43N	92.10E	8
 Jalapa	Jalapa	gt	R	41,7	14.63N	90.00W	1392
 Changuinola	Bocas del Toro	pa	N	41,7	9.43N	82.52W	12
-Kamen-na-Obi	Altaj	ru	N	41,7	53.80N	81.32E	127
+Камень-на-Оби	Алтайский край	ru	N	41,7	53.80N	81.32E	127
 Löhne	Nordrhein-Westfalen	de	N	41,7	52.20N	8.72E	61
 al-Mitlawî	Qafsah	tn	N	41,7	34.33N	8.41E	260
 Nâyudupeta	Andhra Pradesh	in	N	41,7	13.90N	79.90E	29
@@ -9853,7 +9864,7 @@ Atami	Shizuoka	jp	N	41,7	35.10N	139.07E	100
 Dipolog	Western Mindanao	ph	N	41,7	8.59N	123.35E	7
 Kanigoro	Jawa Timur	id	N	41,7	8.12S	112.22E	183
 Ebolowa	Sud	cm	R	41,7	2.93N	11.14E	585
-Sajansk	Irkutsk	ru	N	41,7	53.99N	102.10E	443
+Саянск	Иркутская область	ru	N	41,7	53.99N	102.10E	443
 Bietigheim-Bissingen	Baden-Württemberg	de	N	41,6	48.96N	9.13E	187
 Sainthia	Bangla	in	N	41,6	23.95N	87.67E	50
 Altamonte Springs	Florida	us	N	41,6	28.66N	81.40W	25.5087776184082
@@ -9863,14 +9874,14 @@ Wilkes-Barre	Pennsylvania	us	N	41,6	41.25N	75.88W	165.92024230957
 Bhînmâl	Rajasthan	in	N	41,6	25.00N	72.25E	149
 Kitob	Kaskadar	uz	N	41,6	39.12N	66.86E	635
 Bâbol Sar	Mâzandarân	ir	N	41,6	36.71N	52.64E	-29
-Svetlograd	Stavropol	ru	N	41,6	45.35N	42.84E	126
+Светлоград	Ставропольский край	ru	N	41,6	45.35N	42.84E	126
 Tecuci	Galati	ro	N	41,6	45.86N	27.43E	34
 Puteaux	Hauts-de-Seine	fr	N	41,6	48.88N	2.23E	52
 Gavà	Barcelona	es	N	41,6	41.31N	2.00E	43
 Oświęcim	Małopolskie	pl	N	41,6	50.04N	19.26E	246
 Shinjo	Yamagata	jp	N	41,6	38.77N	140.30E	104
 Hisai	Mie	jp	N	41,6	34.67N	136.47E	23
-Lesozavodsk	Primorje	ru	N	41,6	45.49N	133.42E	65
+Лесозаводск	Приморский край	ru	N	41,6	45.49N	133.42E	65
 Samchok	Kangweon	kr	N	41,6	37.45N	129.16E	88
 Laoag	Ilocos	ph	N	41,6	18.20N	120.59E	12
 Lompoc	California	us	N	41,6	34.66N	120.47W	24.7770004272461
@@ -9901,7 +9912,7 @@ Jeluko	Jawa Tengah	id	N	41,5	6.80S	110.92E	18
 Autlán	Jalisco	mx	N	41,5	19.77N	104.37W	916
 Abingdon	England	gb	N	41,5	51.68N	1.29W	61
 Sittingbourne	England	gb	N	41,5	51.35N	0.73E	9
-Sharypovo	Krasnojarsk	ru	N	41,4	55.54N	89.20E	304
+Шарыпово	Красноярский край	ru	N	41,4	55.54N	89.20E	304
 Chirkunda	Jharkhand	in	N	41,4	23.82N	86.42E	242
 Khurda	Orissa	in	N	41,4	20.18N	85.62E	50
 North Miami Beach	Florida	us	N	41,4	25.93N	80.17W	1.11487948894501
@@ -9915,7 +9926,7 @@ Esfarayen	Khorâsân	ir	N	41,4	37.10N	57.50E	1474
 Haugesund	Rogaland	no	N	41,4	59.42N	5.27E	34
 Khorramdarreh	Zanjân	ir	N	41,4	36.20N	49.18E	1582
 Salwâ'	Hawallî	kw	N	41,4	29.28N	48.08E	9
-Kulebaki	Nizhnij Novgorod	ru	N	41,4	55.41N	42.52E	106
+Кулебаки	Новгородская область	ru	N	41,4	55.41N	42.52E	106
 Hâgere Hiywet	Oromia	et	N	41,4	8.98N	37.85E	2110
 Miercurea-Ciuc	Harghita	ro	N	41,4	46.37N	25.81E	681
 Żyrardów	Mazowieckie	pl	N	41,4	52.06N	20.45E	114
@@ -9934,7 +9945,7 @@ Jhajjar	Haryana	in	N	41,3	28.62N	76.65E	218
 San Vicente	Libertador General Bernardo O'Higgins	cl	N	41,3	34.43S	71.08W	209
 Harderwijk	Gelderland	nl	N	41,3	52.35N	5.63E	2
 Bourg-en-Bresse	Ain	fr	R	41,3	46.21N	5.21E	235
-Pugachjov	Saratov	ru	N	41,3	52.02N	48.80E	42
+Пугачёв	Саратовская область	ru	N	41,3	52.02N	48.80E	42
 Porto Nacional	Tocantins	br	N	41,3	10.70S	48.42W	218
 Raydah	al-Bayda	ye	N	41,3	14.43N	44.84E	2119
 Dzerzhyns'k	Donets'ka	ua	N	41,3	48.40N	37.85E	202
@@ -9950,15 +9961,15 @@ Seevetal	Niedersachsen	de	N	41,3	53.39N	10.03E	12
 Las Choapas	Veracruz	mx	N	41,2	17.93N	94.08W	9
 Shibganj	Nawâbganj	bd	N	41,2	24.68N	88.17E	30
 Morâr	Madhya Pradesh	in	N	41,2	26.23N	78.23E	198
-Strezhevoj	Tomsk	ru	N	41,2	60.73N	77.55E	0	
+Стрежевой	Томская область	ru	N	41,2	60.73N	77.55E	0	
 Essex	Maryland	us	N	41,2	39.30N	76.45W	3.14345026016235
 Sojat	Rajasthan	in	N	41,2	25.92N	73.67E	275
 Lampa	Metropolitana	cl	N	41,2	33.28S	70.90W	655
-Hanty-Mansijsk	Hanty-Mansija	ru	R	41,2	60.99N	69.00E	0	
-Tavda	Sverdlovsk	ru	N	41,2	58.05N	65.26E	70
-Gaj	Orjol	ru	N	41,2	51.47N	58.45E	385
+Ханты-Мансийск	Ханты-Мансийский АО	ru	R	41,2	60.99N	69.00E	0	
+Тавда	Свердловская область	ru	N	41,2	58.05N	65.26E	70
+Гай	Орловская область	ru	N	41,2	51.47N	58.45E	385
 Frutal	Minas Gerais	br	N	41,2	20.03S	48.94W	511
-Zeljenokumsk	Stavropol	ru	N	41,2	44.41N	43.86E	148
+Зеленокумск	Ставропольский край	ru	N	41,2	44.41N	43.86E	148
 União dos Palmares	Alagoas	br	N	41,2	9.16S	36.03W	145
 Qiryat Yam	Khefa	il	N	41,2	32.84N	35.06E	10
 Sandikli	Afyon	tr	N	41,2	38.47N	30.27E	1101
@@ -10022,8 +10033,8 @@ Nueva Imperial	Araucanía	cl	N	40,9	38.74S	72.96W	40
 Thun	Bern	ch	N	40,9	46.77N	7.62E	563
 Umarkot	Sind	pk	N	40,9	25.37N	69.73E	8
 Borken	Nordrhein-Westfalen	de	N	40,9	51.85N	6.87E	49
-Usinsk	Komi	ru	N	40,9	65.92N	57.41E	0	
-Sokol	Vologda	ru	N	40,9	59.47N	40.15E	120
+Усинск	Коми	ru	N	40,9	65.92N	57.41E	0	
+Сокол	Вологодская область	ru	N	40,9	59.47N	40.15E	120
 Saint-Priest	Rhône	fr	N	40,9	45.69N	4.93E	207
 Tiassalé	Lagunes	ci	N	40,9	5.88N	4.83W	30
 NajŽ Hammâdî	Qinâ	eg	N	40,9	26.05N	32.24E	76
@@ -10057,7 +10068,7 @@ Uden	Noord-Brabant	nl	N	40,8	51.67N	5.61E	18
 Mafra	Santa Catarina	br	N	40,8	26.11S	49.81W	782
 Chapadinha	Maranhão	br	N	40,8	3.74S	43.36W	107
 ŽÂnah	al-Anbâr	iq	N	40,8	34.47N	41.93E	138
-Vichuga	Ivanovo	ru	N	40,8	57.21N	41.93E	140
+Вичуга	Ивановская область	ru	N	40,8	57.21N	41.93E	140
 Colmenar Viejo	Madrid	es	N	40,8	40.67N	3.76W	874
 Valenciennes	Nord	fr	N	40,8	50.37N	3.52E	19
 Sighetu Marmatiei	Maramures	ro	N	40,8	47.93N	23.91E	275
@@ -10095,7 +10106,7 @@ Faro	Algarve	pt	R	40,6	37.03N	7.94W	16
 Aurich	Niedersachsen	de	N	40,6	53.49N	7.48E	4
 Le Cannet	Alpes-Maritimes	fr	N	40,6	43.59N	7.01E	189
 Mananara	Toamasina	mg	N	40,6	16.16S	49.75E	8
-Kamenka	Penza	ru	N	40,6	53.19N	44.04E	159
+Каменка	Пензенская область	ru	N	40,6	53.19N	44.04E	159
 'Afula	Hazafon	il	N	40,6	32.62N	35.29E	66
 az-Zarqa	Dumyât	eg	N	40,6	31.22N	31.65E	3
 Akoupé	Agnéby	ci	N	40,6	6.38N	3.90W	114
@@ -10161,7 +10172,7 @@ Eqlîd	Fârs	ir	N	40,3	31.01N	52.71E	2132
 Canoinhas	Santa Catarina	br	N	40,3	26.18S	50.40W	782
 Laguna	Santa Catarina	br	N	40,3	28.48S	48.78W	48
 São Lourenço	Minas Gerais	br	N	40,3	22.12S	45.05W	890
-Millerovo	Rostov	ru	N	40,3	48.93N	40.39E	122
+Миллерово	Ростовская область	ru	N	40,3	48.93N	40.39E	122
 Umm-al-Fahm	Khefa	il	N	40,3	32.53N	35.16E	390
 Iganga	Eastern	ug	N	40,3	0.62N	33.47E	1142
 Luga	Leningrad	ru	N	40,3	58.74N	29.84E	63
@@ -22682,3 +22693,120 @@ Venera 11	USSR		L	0	14.00S	61.00W	237	0		Venus
 Venera 12	USSR		L	0	7.00S	66.00W	104	0		Venus
 Venera 13	USSR		L	0	7.50S	57.00W	256	0		Venus
 Venera 14	USSR		L	0	13.25S	50.00W	253	0		Venus
+﻿بيونس آيريس		ar	B	11928,4	34.61S	58.37W	44
+موسكو		ru	B	11246,6	55.75N	37.62E	140
+مانيلا		ph	B	10330,1	14.62N	120.97E	11
+سيئول		kr	B	9551,8	37.56N	126.99E	52
+دكا		bd	B	9363,1	23.70N	90.39E	8
+جاكرتا		id	B	8987,8	6.18S	106.83E	6
+مكسيكو		mx	B	8705,1	19.43N	99.14W	2244
+طوكيو		jp	B	8273,9	35.67N	139.77E	16
+القاهرة		eg	B	8113,6	30.06N	31.25E	29
+طهران		ir	B	8067,6	35.67N	51.43E	1137
+لندن		gb	B	7465,1	51.52N	0.10W	26
+كنشاسا		cd	B	6789,9	4.31S	15.32E	282
+بكين		cn	B	6696,2	39.93N	116.40E	53
+بغداد		iq	B	5948,8	33.33N	44.44E	35
+الدوحة		qa	R	328,5	25.30N	51.51E	19
+الرياض		sa	B	3822,6	24.65N	46.77E	615
+أنقرة		tr	B	3544	39.93N	32.85E	851
+برلين		de	B	3396,3	52.52N	13.38E	36
+مدريد		es	B	3290,9	40.42N	3.71W	658
+جدة		sa	N	2817,7	21.50N	39.17E	5
+أديس أبابا		et	B	2763,5	9.03N	38.74E	2442
+دكار		sn	B	2613,7	14.72N	17.48W	27
+نيروبي		ke	B	2504,4	1.29S	36.82E	1666
+روما		it	B	2453,1	41.89N	12.50E	51
+طاشقند		uz	B	2299,4	41.31N	69.30E	448
+كابل		af	B	2272	34.53N	69.17E	1799
+برازيليا		br	B	2233	15.78S	47.91W	1162
+باريس		fr	B	2107,6	48.86N	2.34E	38
+هراري		zw	B	1976,4	17.82S	31.05E	1493
+كوناكري		gn	B	1851,8	9.55N	13.67W	12
+الجزائر		dz	B	1790,7	36.77N	3.04E	226
+بودابست		hu	B	1729,8	47.51N	19.08E	111
+كراكاس		ve	B	1719,6	10.54N	66.93W	1473
+آكرا		gh	B	1719,1	5.56N	0.20W	31
+دمشق		sy	B	1703,9	33.50N	36.32E	681
+مكة المكرمة		sa	R	1691,1	21.43N	39.82E	329
+الرباط		ma	B	1618,7	34.02N	6.84W	20
+صنعاء		ye	B	1471,3	15.38N	44.21E	2242
+الخرطوم		sd	B	1452,6	15.58N	32.52E	385
+كوالالمبور		my	B	1440,3	3.16N	101.71E	71
+هانوي		vn	B	1420,4	21.03N	105.84E	14
+مونتيفيديو		uy	B	1346,9	34.87S	56.17W	35
+طرابلس		ly	B	1317,8	32.87N	13.18E	15
+عمان		jo	B	1308,3	31.95N	35.93E	829
+لوساكا		zm	B	1296,1	15.42S	28.29E	1282
+كمبالا		ug	B	1280,3	0.32N	32.58E	1242
+ستوكهولم		se	B	1264,8	59.33N	18.07E	30
+مقديشو		so	B	1234,8	2.05N	45.33E	56
+بيروت		lb	B	1185,3	33.88N	35.50E	78
+كوبنهاجن		dk	B	1100,7	55.68N	12.57E	17
+صوفيا		bg	B	1084,7	42.69N	23.31E	566
+المدينة المنورة		sa	R	867,9	24.48N	39.59E	606
+أوتاوا		ca	C	864,3	45.42N	75.71W	42
+أوسلو		no	B	799,2	59.91N	10.75E	10
+الدمام		sa	R	721,1	26.43N	50.10E	8
+تونس		tn	B	704,7	36.84N	10.22E	0
+الطائف		sa	N	688,8	21.26N	40.38E	1721
+نواكشوط		mr	B	678,7	18.09N	15.98W	8
+إسلام أباد		pk	B	617	33.72N	73.06E	563
+سراييفو		ba	B	602,5	43.85N	18.38E	524
+هلسنكي		fi	B	590,6	60.17N	24.94E	0
+واشنطن		us	C	565,4	38.91N	77.02W	24.8883743286133
+لشبونة		pt	B	560,7	38.72N	9.14W	71
+أبو ظبي		ae	B	560,4	24.48N	54.37E	14
+جيبوتي		dj	B	465,3	11.56N	43.15E	-1
+أسمرا		er	B	407,5	15.33N	38.94E	2354
+تبوك		sa	R	402,8	28.39N	36.57E	767
+بريدة		sa	R	342,4	26.37N	43.97E	623
+كانبيرا		au	B	330,7	35.31S	149.13E	582
+المبرز		sa	N	301,7	25.43N	49.57E	149
+خميس مشيط		sa	N	300	18.31N	42.73E	2001
+الهفوف		sa	N	299,6	25.35N	49.58E	156
+القدس		ps	B	247,2	31.78N	35.24E	706
+حائل		sa	R	243,4	27.53N	41.70E	995
+الخرج		sa	N	209,4	24.18N	47.50E	412
+الخبر		sa	N	195,1	26.23N	50.20E	5
+الجبيل		sa	N	193,9	27.01N	49.65E	-1
+حفر الباطن		sa	N	189,7	28.43N	45.96E	314
+الثقبة		sa	N	173	26.27N	50.20E	20
+العيون		eh	B	172,3	27.16N	13.20W	40
+المنامة		bh	B	165,9	26.21N	50.58E	5
+ينبع		sa	N	165	24.09N	38.05E	6
+أبها		sa	R	154,7	18.23N	42.50E	2240
+عرعر		sa	R	148,8	30.99N	41.02E	541
+القطيف		sa	N	136,2	26.52N	50.02E	5
+الهوجاء		sa	N	129,3	28.98N	38.57E	836
+عنيزة		sa	N	125,5	26.09N	43.99E	659
+نجران		sa	R	116,7	17.50N	44.13E	1308
+الظهران		sa	N	101,5	26.29N	50.16E	35
+القريات		sa	N	100,4	31.33N	37.34E	498
+سكاكا		sa	N	90,6	29.97N	40.20E	559
+سيهات		sa	N	79,9	26.47N	50.05E	5
+الرس		sa	N	78,3	25.87N	43.50E	696
+جيزان		sa	R	70,9	16.90N	42.55E	1
+الخفجي		sa	N	68,5	28.42N	48.51E	9
+رحيمة		sa	N	62,6	26.70N	50.06E	4
+بيشة		sa	N	59,9	20.01N	42.60E	1161
+الزلفي		sa	N	57,4	26.30N	44.80E	614
+مسقط		om	C	56,4	23.61N	58.54E	34
+الجوف		sa	R	54,7	29.81N	39.87E	604
+تاروت		sa	N	52,4	26.57N	50.07E	3
+الدوادمي		sa	N	52,1	24.49N	44.38E	984
+صفوى		sa	N	51,3	26.65N	49.96E	19
+شرورة		sa	N	51,1	17.47N	47.12E	728
+أبو عريش		sa	N	48,4	16.97N	42.83E	70
+صبيا		sa	N	48,1	17.15N	42.62E	36
+طريف		sa	N	44,1	31.67N	38.66E	838
+بقيق		sa	N	44	25.93N	49.67E	100
+رابغ		sa	N	44	22.80N	39.02E	3
+رفحا		sa	N	41,5	29.63N	43.50E	452
+الدلم		sa	N	40,7	24.00N	47.17E	445
+عفيف		sa	N	38,6	23.92N	42.93E	1064
+أملج		sa	N	34,9	25.02N	37.27E	12
+الكويت		kw	B	33,1	29.33N	47.97E	20
+ضرية		sa	N	32,4	24.74N	42.92E	1055
+الباحة		sa	R	21,5	20.02N	41.47E	2170
+غزة		ps	R	417	31.53N	34.44E	14
