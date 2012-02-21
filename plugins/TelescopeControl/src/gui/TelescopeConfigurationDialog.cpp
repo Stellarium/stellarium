@@ -1,7 +1,7 @@
 /*
  * Stellarium TelescopeControl Plug-in
  * 
- * Copyright (C) 2009-2010 Bogdan Marinov (this file)
+ * Copyright (C) 2009-2011 Bogdan Marinov (this file)
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -15,7 +15,7 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
 #include "Dialog.hpp"
@@ -28,6 +28,7 @@
 #include "StelFileMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelStyle.hpp"
+#include "StelTranslator.hpp"
 
 #include <QDebug>
 #include <QCompleter>
@@ -60,7 +61,7 @@ TelescopeConfigurationDialog::~TelescopeConfigurationDialog()
 	delete serialPortValidator;
 }
 
-void TelescopeConfigurationDialog::languageChanged()
+void TelescopeConfigurationDialog::retranslate()
 {
 	if (dialog)
 		ui->retranslateUi(dialog);
@@ -72,7 +73,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	ui->setupUi(dialog);
 	
 	//Inherited connect
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(buttonDiscardPressed()));
 	connect(dialog, SIGNAL(rejected()), this, SLOT(buttonDiscardPressed()));
 	
@@ -98,9 +99,6 @@ void TelescopeConfigurationDialog::initConfigurationDialog()
 {
 	//Reusing code used in both methods that call this one
 	deviceModelNames = telescopeManager->getDeviceModels().keys();
-	
-	//Type
-	ui->radioButtonTelescopeLocal->setEnabled(true);
 	
 	//Name
 	ui->lineEditTelescopeName->clear();
@@ -128,15 +126,9 @@ void TelescopeConfigurationDialog::initConfigurationDialog()
 	//FOV circles
 	ui->checkBoxCircles->setChecked(false);
 	ui->lineEditCircleList->clear();
-}
-
-void TelescopeConfigurationDialog::initNewTelescopeConfiguration(int slot)
-{
-	configuredSlot = slot;
-	initConfigurationDialog();
-	ui->stelWindowTitle->setText("Add New Telescope");
-	ui->lineEditTelescopeName->setText(QString("New Telescope %1").arg(QString::number(configuredSlot)));
 	
+	//It is very unlikely that this situation will happen any more due to the
+	//embedded telescope servers.
 	if(deviceModelNames.isEmpty())
 	{
 		ui->radioButtonTelescopeLocal->setEnabled(false);
@@ -149,6 +141,14 @@ void TelescopeConfigurationDialog::initNewTelescopeConfiguration(int slot)
 		ui->radioButtonTelescopeLocal->setChecked(true);
 		toggleTypeLocal(true);//Not called if the button is already checked
 	}
+}
+
+void TelescopeConfigurationDialog::initNewTelescopeConfiguration(int slot)
+{
+	configuredSlot = slot;
+	initConfigurationDialog();
+	ui->stelWindowTitle->setText(q_("Add New Telescope"));
+	ui->lineEditTelescopeName->setText(QString("New Telescope %1").arg(QString::number(configuredSlot)));
 	
 	ui->doubleSpinBoxTelescopeDelay->setValue(SECONDS_FROM_MICROSECONDS(DEFAULT_DELAY));
 }
@@ -157,7 +157,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 {
 	configuredSlot = slot;
 	initConfigurationDialog();
-	ui->stelWindowTitle->setText("Configure Telescope");
+	ui->stelWindowTitle->setText(q_("Configure Telescope"));
 	
 	//Read the telescope properties
 	QString name;
@@ -203,6 +203,11 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	{
 		ui->radioButtonTelescopeConnection->setChecked(true);//Calls toggleTypeConnection(true)
 		ui->lineEditHostName->setText(host);
+	}
+	else if (connectionType == ConnectionLocal)
+	{
+		ui->radioButtonTelescopeConnection->setChecked(true);
+		ui->lineEditHostName->setText("localhost");
 	}
 	else
 	{

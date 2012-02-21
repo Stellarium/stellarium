@@ -1,6 +1,7 @@
 /*
 Copyright (C) 2000 Liam Girdwood <liam@nova-ioe.org>
 Copyright (C) 2003 Fabien Chereau
+Copyright (C) 2010 Georg Zotti (parts)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU Library General Public License as published by
@@ -29,6 +30,8 @@ double get_mean_sidereal_time (double JD);
 
 /* Calculate apparent sidereal time from date.*/
 double get_apparent_sidereal_time (double JD);
+/* Calculate mean ecliptical obliquity in degrees. */
+double get_mean_ecliptical_obliquity(double JDE);
 
 #ifdef __cplusplus
 }

@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "StelTranslator.hpp"
@@ -102,7 +102,7 @@ SphericalRegionP StelProjector::getViewportConvexPolygon(float marginX, float ma
 		{
 			return SphericalRegionP(res);
 		}
-		qDebug() << "!valid";
+		//qDebug() << "!valid";
 		delete res;
 	}
 	//return SphericalRegionP((SphericalRegion*)(new AllSkySphericalRegion()));
@@ -175,15 +175,7 @@ bool StelProjector::unProject(double x, double y, Vec3d &v) const
 	// This looks good for atmosphere rendering, and it helps avoiding
 	// discontinuities when dragging around with the mouse.
 
-	// We need no matrix inversion because we always work with orthogonal matrices (where the transposed is the inverse).
-	//v.transfo4d(inverseModelViewMatrix);
-	x = v[0] - modelViewMatrix.r[12];
-	y = v[1] - modelViewMatrix.r[13];
-	const double z = v[2] - modelViewMatrix.r[14];
-	v[0] = modelViewMatrix.r[0]*x + modelViewMatrix.r[1]*y + modelViewMatrix.r[2]*z;
-	v[1] = modelViewMatrix.r[4]*x + modelViewMatrix.r[5]*y + modelViewMatrix.r[6]*z;
-	v[2] = modelViewMatrix.r[8]*x + modelViewMatrix.r[9]*y + modelViewMatrix.r[10]*z;
-
+	modelViewTransform->backward(v);
 	return rval;
 }
 

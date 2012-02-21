@@ -14,7 +14,7 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
 #ifndef _SEARCHDIALOG_HPP_
@@ -72,10 +72,10 @@ public:
 	bool eventFilter(QObject *object, QEvent *event);
 	
 public slots:
-	void languageChanged();
+	void retranslate();
 	//! Add auto focus of the edit line
 	void setVisible(bool);
-    //! This style only displays the text search field and the search button
+	//! This style only displays the text search field and the search button
 	void setSimpleStyle();
 
 protected:
@@ -84,7 +84,7 @@ protected:
 	virtual void createDialogContent();
 
 private slots:
-    void greekLetterClicked();
+	void greekLetterClicked();
 	//! Called when the current simbad query status changes
 	void onSimbadStatusChanged();
 	//! Called when the user changed the input text
@@ -94,7 +94,13 @@ private slots:
 	
 	//! Called when the user edit the manual position controls
 	void manualPositionChanged();
-	
+
+	//! Whether to use SIMBAD for searches or not.
+	void enableSimbadSearch(bool enable);
+
+	//! Set flagHasSelectedText as true, if search box has selected text
+	void setHasSelectedFlag();
+
 private:
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
@@ -104,6 +110,8 @@ private:
 	QString substituteGreek(const QString& keyString);
 	QString getGreekLetterByName(const QString& potentialGreekLetterName);
 	QHash<QString, QString> greekLetters;
+	bool useSimbad;
+	bool flagHasSelectedText;
 };
 
 #endif // _SEARCHDIALOG_HPP_

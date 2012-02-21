@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _STELUTILS_HPP_
@@ -142,6 +142,11 @@ namespace StelUtils
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
 	void rectToSphe(float *lng, float *lat, const Vec3f& v);
+
+  // GZ: some additions. I need those just for quick conversions for text display.
+  //! Coordinate Transformation from equatorial to ecliptical
+  void ctRadec2Ecl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad);
+  // GZ: done
 
 	//! Convert a string longitude, latitude, RA or Declination angle
 	//! to radians.

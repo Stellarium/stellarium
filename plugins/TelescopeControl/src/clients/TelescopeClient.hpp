@@ -20,7 +20,7 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _TELESCOPE_HPP_
@@ -36,7 +36,6 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp" //Needed for getting StelNavigator instances
 #include "StelObject.hpp"
-#include "StelNavigator.hpp"
 #include "InterpolatedPosition.hpp"
 
 qint64 getNow(void);
@@ -136,7 +135,7 @@ public:
 	{
 		return true;
 	}
-	Vec3d getJ2000EquatorialPos(const StelNavigator*) const
+	Vec3d getJ2000EquatorialPos(const StelCore*) const
 	{
 		return XYZ;
 	}
@@ -167,7 +166,7 @@ public:
 	}
 	
 private:
-	Vec3d getJ2000EquatorialPos(const StelNavigator *nav=0) const;
+	Vec3d getJ2000EquatorialPos(const StelCore* core=0) const;
 	bool prepareCommunication();
 	void performCommunication();
 	void telescopeGoto(const Vec3d &j2000Pos);

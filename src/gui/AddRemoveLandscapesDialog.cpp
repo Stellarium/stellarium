@@ -15,7 +15,7 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 #include "AddRemoveLandscapesDialog.hpp"
 #include "ui_addRemoveLandscapesDialog.h"
@@ -42,7 +42,7 @@ AddRemoveLandscapesDialog::~AddRemoveLandscapesDialog()
 	delete ui;
 }
 
-void AddRemoveLandscapesDialog::languageChanged()
+void AddRemoveLandscapesDialog::retranslate()
 {
 	if (dialog)
 		ui->retranslateUi(dialog);
@@ -54,7 +54,7 @@ void AddRemoveLandscapesDialog::createDialogContent()
 	ui->setupUi(dialog);
 	
 	//Signals and slots
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	connect(ui->pushButtonBrowseForArchive, SIGNAL(clicked()), this, SLOT(browseForArchiveClicked()));
@@ -113,7 +113,12 @@ void AddRemoveLandscapesDialog::browseForArchiveClicked()
 	// TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 	QString filter = q_("ZIP archives");
 	filter += " (*.zip)";
+	#ifdef Q_OS_MAC
+	//work-around for Qt bug - http://bugreports.qt.nokia.com/browse/QTBUG-16722
+	QString sourceArchivePath = QFileDialog::getOpenFileName(NULL, caption, lastUsedDirectoryPath, filter, 0, QFileDialog::DontUseNativeDialog);
+	#else
 	QString sourceArchivePath = QFileDialog::getOpenFileName(NULL, caption, lastUsedDirectoryPath, filter);
+	#endif
 	bool useLandscape = ui->checkBoxUseLandscape->isChecked();
 	if (!sourceArchivePath.isEmpty() && QFile::exists(sourceArchivePath))
 	{

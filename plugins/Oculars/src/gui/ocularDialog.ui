@@ -22,9 +22,6 @@
     <height>320</height>
    </size>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="spacing">
     <number>0</number>
@@ -152,115 +149,149 @@
         <property name="currentIndex">
          <number>0</number>
         </property>
-        <property name="documentMode">
-         <bool>false</bool>
-        </property>
         <widget class="QWidget" name="General">
          <attribute name="title">
           <string>General</string>
          </attribute>
-         <widget class="QCheckBox" name="scaleImageCircleCheckBox">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>10</y>
-            <width>141</width>
-            <height>21</height>
-           </rect>
+         <layout class="QVBoxLayout" name="verticalLayoutTabGeneral">
+          <property name="spacing">
+           <number>0</number>
           </property>
-          <property name="text">
-           <string>Scale Image Circle</string>
+          <property name="margin">
+           <number>0</number>
           </property>
-         </widget>
-         <widget class="QGroupBox" name="groupBox">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>40</y>
-            <width>503</width>
-            <height>121</height>
-           </rect>
-          </property>
-          <property name="title">
-           <string>Key Mappings</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_2">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_11">
-             <property name="text">
-              <string>Toggle Plugin:</string>
+          <item>
+           <widget class="QGroupBox" name="groupBoxOcularOptions">
+            <property name="title">
+             <string>Ocular view</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <property name="margin">
+              <number>0</number>
              </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             <item>
+              <widget class="QCheckBox" name="requireSelectionCheckBox">
+               <property name="text">
+                <string>Enable only if an object is selected</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="scaleImageCircleCheckBox">
+               <property name="text">
+                <string>Scale image circle</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox">
+            <property name="title">
+             <string>Key mappings</string>
+            </property>
+            <layout class="QFormLayout" name="formLayout_3">
+             <property name="margin">
+              <number>0</number>
              </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLineEdit" name="togglePluginLineEdit">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_11">
+               <property name="text">
+                <string>Toggle ocular view:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="togglePluginLineEdit">
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>100</width>
+                 <height>22</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="maxLength">
+                <number>50</number>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="labelPopupMenuShortcut">
+               <property name="text">
+                <string>Open pop-up navigation menu:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="togglePopupNavigatorWindowLineEdit">
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>100</width>
+                 <height>22</height>
+                </size>
+               </property>
+               <property name="maxLength">
+                <number>50</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBoxInterface">
+            <property name="title">
+             <string>Interface</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_8">
+             <property name="margin">
+              <number>0</number>
              </property>
-             <property name="baseSize">
-              <size>
-               <width>100</width>
-               <height>22</height>
-              </size>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="maxLength">
-              <number>50</number>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QLabel" name="label_13">
-             <property name="text">
-              <string>Popup Navigator:</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="3">
-            <widget class="QLineEdit" name="togglePopupNavigatorWindowLineEdit">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="baseSize">
-              <size>
-               <width>100</width>
-               <height>22</height>
-              </size>
-             </property>
-             <property name="maxLength">
-              <number>50</number>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QCheckBox" name="requireSelectionCheckBox">
-          <property name="geometry">
-           <rect>
-            <x>260</x>
-            <y>10</y>
-            <width>201</width>
-            <height>21</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Require selection to enable</string>
-          </property>
-         </widget>
+             <item>
+              <widget class="QCheckBox" name="checkBoxControlPanel">
+               <property name="text">
+                <string>On-screen control panel</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </widget>
         <widget class="QWidget" name="Eyepieces">
          <attribute name="title">
@@ -335,9 +366,6 @@
                 <enum>QFrame::Raised</enum>
                </property>
                <layout class="QHBoxLayout" name="horizontalLayout_2">
-                <property name="spacing">
-                 <number>0</number>
-                </property>
                 <property name="leftMargin">
                  <number>0</number>
                 </property>
@@ -352,29 +380,65 @@
                 </property>
                 <item>
                  <widget class="QPushButton" name="addOcular">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
                   <property name="text">
                    <string>Add</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <spacer name="horizontalSpacer_3">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                 <widget class="QPushButton" name="pushButtonMoveOcularUp">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
                   </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Preferred</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
+                  <property name="minimumSize">
                    <size>
-                    <width>20</width>
-                    <height>20</height>
+                    <width>24</width>
+                    <height>24</height>
                    </size>
                   </property>
-                 </spacer>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButtonMoveOcularDown">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>24</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
+                  </property>
+                 </widget>
                 </item>
                 <item>
                  <widget class="QPushButton" name="deleteOcular">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
                   <property name="text">
                    <string>Delete</string>
                   </property>
@@ -468,7 +532,7 @@
                 <item row="2" column="0">
                  <widget class="QLabel" name="label_5">
                   <property name="text">
-                   <string>Focal Length:</string>
+                   <string>Focal length:</string>
                   </property>
                  </widget>
                 </item>
@@ -488,7 +552,7 @@
                 <item row="3" column="0">
                  <widget class="QLabel" name="label_10">
                   <property name="text">
-                   <string>Field Stop:</string>
+                   <string>Field stop:</string>
                   </property>
                  </widget>
                 </item>
@@ -505,7 +569,7 @@
                   </property>
                  </widget>
                 </item>
-                <item row="4" column="1">
+                <item row="4" column="0" colspan="2">
                  <widget class="QCheckBox" name="binocularsCheckBox">
                   <property name="text">
                    <string>Binoculars</string>
@@ -606,9 +670,6 @@
                 <enum>QFrame::Raised</enum>
                </property>
                <layout class="QHBoxLayout" name="CCD_horizontalLayout_2">
-                <property name="spacing">
-                 <number>0</number>
-                </property>
                 <property name="leftMargin">
                  <number>0</number>
                 </property>
@@ -623,29 +684,65 @@
                 </property>
                 <item>
                  <widget class="QPushButton" name="addCCD">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
                   <property name="text">
                    <string>Add</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <spacer name="horizontalSpacer_add_remove">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                 <widget class="QPushButton" name="pushButtonMoveSensorUp">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
                   </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Preferred</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
+                  <property name="minimumSize">
                    <size>
-                    <width>20</width>
-                    <height>20</height>
+                    <width>24</width>
+                    <height>24</height>
                    </size>
                   </property>
-                 </spacer>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButtonMoveSensorDown">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>24</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
+                  </property>
+                 </widget>
                 </item>
                 <item>
                  <widget class="QPushButton" name="deleteCCD">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
                   <property name="text">
                    <string>Delete</string>
                   </property>
@@ -947,38 +1044,80 @@
              </item>
              <item>
               <widget class="QFrame" name="frame_3">
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
                <layout class="QHBoxLayout" name="horizontalLayout">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>5</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
                 <item>
                  <widget class="QPushButton" name="addTelescope">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
                   <property name="text">
                    <string>Add</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <spacer name="horizontalSpacer">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                 <widget class="QPushButton" name="pushButtonMoveTelescopeUp">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
                   </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Preferred</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
+                  <property name="minimumSize">
                    <size>
-                    <width>20</width>
-                    <height>20</height>
+                    <width>24</width>
+                    <height>24</height>
                    </size>
                   </property>
-                 </spacer>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButtonMoveTelescopeDown">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>24</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
+                  </property>
+                 </widget>
                 </item>
                 <item>
                  <widget class="QPushButton" name="deleteTelescope">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
                   <property name="text">
                    <string>Delete</string>
                   </property>
@@ -1007,22 +1146,7 @@
              </property>
              <item>
               <widget class="QFrame" name="ScopeInfo">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
                <layout class="QFormLayout" name="formLayout_2">
-                <property name="fieldGrowthPolicy">
-                 <enum>QFormLayout::FieldsStayAtSizeHint</enum>
-                </property>
                 <item row="0" column="0">
                  <widget class="QLabel" name="label_8">
                   <property name="text">
@@ -1040,7 +1164,7 @@
                 <item row="1" column="0">
                  <widget class="QLabel" name="label_9">
                   <property name="text">
-                   <string>Focal Length:</string>
+                   <string>Focal length:</string>
                   </property>
                  </widget>
                 </item>
@@ -1065,17 +1189,17 @@
                   </property>
                  </widget>
                 </item>
-                <item row="3" column="1">
+                <item row="3" column="0" colspan="2">
                  <widget class="QCheckBox" name="telescopeHFlip">
                   <property name="text">
-                   <string>Horizontal Flip</string>
+                   <string>Horizontal flip</string>
                   </property>
                  </widget>
                 </item>
-                <item row="4" column="1">
+                <item row="4" column="0" colspan="2">
                  <widget class="QCheckBox" name="telescopeVFlip">
                   <property name="text">
-                   <string>Vertical Flip</string>
+                   <string>Vertical flip</string>
                   </property>
                  </widget>
                 </item>
@@ -1105,42 +1229,13 @@
           <string>About</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout">
-          <property name="leftMargin">
-           <number>12</number>
-          </property>
-          <property name="topMargin">
+          <property name="margin">
            <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>12</number>
-          </property>
-          <property name="bottomMargin">
-           <number>12</number>
           </property>
           <item row="0" column="0">
            <widget class="QTextBrowser" name="textBrowser">
-            <property name="html">
-             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table border=&quot;0&quot; style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
-&lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt;Author: &lt;/span&gt;&lt;a href=&quot;treaves@silverfieldstech.com&quot;&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt; text-decoration: underline; color:#0000ff;&quot;&gt;Timothy Reaves&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt; font-weight:600;&quot;&gt;Overview&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt;This plugin is intended to simulate what you would see through an eyepiece.  This configuration dialog can be used to add, modify, or delete eyepieces and telescopes, as well as CCD Sensors.  Your first time running the app will populate some samples to get your started.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt;You can choose to scale the image you see on the screen.  This is intended to show you a better comparison of what one eyepiece/telescope combination will be like as compared to another.  The same eyepiece in two different telescopes of differing focal length will produce two different exit circles, changing the view someone.  The trade-off of this is that, with the image scaled, a good deal of the screen can be wasted.  Therefor I recommend that you leave it off, unless you feel you have a need of it.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt;You can toggle a crosshair in the view.  Ideally, I wanted this to be aligned to North.  I've been unable to do so.  So currently it aligns to the top of the screen.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt;You can toggle a Telrad finder; this can only be done when you have not turned on the Ocular view.  This feature draws three concentric circles of 0.5°, 2.0°, and 4.0°, helping you see what you would expect to see with the naked eye through the Telrad (or similar) finder.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt;If you find any issues, please let me know.  Enjoy!&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt; font-weight:600;&quot;&gt;Hot Keys&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt;These keys are the default, and can be edited in the General Tab.  If you are not a Mac user, replace the &lt;/span&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt; font-style:italic;&quot;&gt;Command&lt;/span&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt; key with the &lt;/span&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt; font-style:italic;&quot;&gt;CTRL&lt;/span&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt; key.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt; font-weight:600;&quot;&gt;Command-O&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:30px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt;Activate / de-activate the plugin.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt; font-weight:600;&quot;&gt;Alt-O&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:30px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Lucida Grande'; font-size:13pt;&quot;&gt;Shows the popup menu.&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <property name="openExternalLinks">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -1161,6 +1256,48 @@ p, li { white-space: pre-wrap; }
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <tabstops>
+  <tabstop>Tabs</tabstop>
+  <tabstop>requireSelectionCheckBox</tabstop>
+  <tabstop>scaleImageCircleCheckBox</tabstop>
+  <tabstop>togglePluginLineEdit</tabstop>
+  <tabstop>togglePopupNavigatorWindowLineEdit</tabstop>
+  <tabstop>ocularListView</tabstop>
+  <tabstop>addOcular</tabstop>
+  <tabstop>pushButtonMoveOcularUp</tabstop>
+  <tabstop>pushButtonMoveOcularDown</tabstop>
+  <tabstop>deleteOcular</tabstop>
+  <tabstop>ocularName</tabstop>
+  <tabstop>ocularAFov</tabstop>
+  <tabstop>ocularFL</tabstop>
+  <tabstop>ocularFieldStop</tabstop>
+  <tabstop>binocularsCheckBox</tabstop>
+  <tabstop>ccdListView</tabstop>
+  <tabstop>addCCD</tabstop>
+  <tabstop>pushButtonMoveSensorUp</tabstop>
+  <tabstop>pushButtonMoveSensorDown</tabstop>
+  <tabstop>deleteCCD</tabstop>
+  <tabstop>ccdName</tabstop>
+  <tabstop>ccdResX</tabstop>
+  <tabstop>ccdResY</tabstop>
+  <tabstop>ccdChipX</tabstop>
+  <tabstop>ccdChipY</tabstop>
+  <tabstop>ccdPixelX</tabstop>
+  <tabstop>ccdPixelY</tabstop>
+  <tabstop>telescopeListView</tabstop>
+  <tabstop>addTelescope</tabstop>
+  <tabstop>pushButtonMoveTelescopeUp</tabstop>
+  <tabstop>pushButtonMoveTelescopeDown</tabstop>
+  <tabstop>deleteTelescope</tabstop>
+  <tabstop>telescopeName</tabstop>
+  <tabstop>telescopeFL</tabstop>
+  <tabstop>telescopeDiameter</tabstop>
+  <tabstop>telescopeHFlip</tabstop>
+  <tabstop>telescopeVFlip</tabstop>
+  <tabstop>textBrowser</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../../../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections/>
 </ui>

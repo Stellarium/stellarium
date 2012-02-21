@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifdef USE_OPENGL_ES2
@@ -33,7 +33,7 @@
 
 #include "StelSkyDrawer.hpp"
 #include "StelProjector.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelToneReproducer.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelApp.hpp"
@@ -79,7 +79,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), flagHasAtmosphere(t
 	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
 	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
-
+	
 	bool ok=true;
 
 	setBortleScale(conf->value("stars/init_bortle_scale",3).toInt(&ok));
@@ -103,6 +103,29 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), flagHasAtmosphere(t
 	{
 		conf->setValue("stars/absolute_scale",1.0);
 		setAbsoluteStarScale(1.0);
+		ok = true;
+	}
+
+	//GZ: load 3 values from config.
+	setExtinctionCoefficient(conf->value("landscape/atmospheric_extinction_coefficient",0.2).toDouble(&ok));
+	if (!ok)
+	{
+		conf->setValue("landscape/atmospheric_extinction_coefficient",0.2);
+		setExtinctionCoefficient(0.2);
+		ok = true;
+	}
+	setAtmosphereTemperature(conf->value("landscape/temperature_C",15.0).toDouble(&ok));
+	if (!ok)
+	{
+		conf->setValue("landscape/temperature_C",15);
+		setAtmosphereTemperature(15.0);
+		ok = true;
+	}
+	setAtmospherePressure(conf->value("landscape/pressure_mbar",1013.0).toDouble(&ok));
+	if (!ok)
+	{
+		conf->setValue("landscape/pressure_mbar",1013.0);
+		setAtmospherePressure(1013.0);
 		ok = true;
 	}
 
@@ -218,6 +241,16 @@ void StelSkyDrawer::update(double)
 		if (fov < minAdaptFov)
 			fov = minAdaptFov;
 	}
+
+	// GZ: Light pollution must take global atmosphere setting into acount!
+	// moved parts from setBortleScale() here
+	// These value have been calibrated by hand, looking at the faintest star in stellarium at around 40 deg FOV
+	// They should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
+	static const float bortleToInScale[9] = {2.45, 1.55, 1.0, 0.63, 0.40, 0.24, 0.23, 0.145, 0.09};
+	if (getFlagHasAtmosphere())
+	    setInputScale(bortleToInScale[bortleScaleIndex-1]);
+	else
+	    setInputScale(bortleToInScale[0]);
 
 	// This factor is fully arbitrary. It corresponds to the collecting area x exposure time of the instrument
 	// It is based on a power law, so that it varies progressively with the FOV to smoothly switch from human
@@ -459,6 +492,8 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 
 	if (rcMag[0]<=0.f)
 		return false;
+
+	// TODO: compute Vec3f v_refr (position including refraction) --> NO: This is done in ZoneArray!
 
 	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
 		return false;
@@ -706,11 +741,11 @@ void StelSkyDrawer::setBortleScale(int bIndex)
 	}
 
 	bortleScaleIndex = bIndex;
-
+	// GZ: I moved this block to update()
 	// These value have been calibrated by hand, looking at the faintest star in stellarium at around 40 deg FOV
 	// They should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
-	static const float bortleToInScale[9] = {2.45, 1.55, 1.0, 0.63, 0.40, 0.24, 0.23, 0.145, 0.09};
-	setInputScale(bortleToInScale[bIndex-1]);
+	// static const float bortleToInScale[9] = {2.45, 1.55, 1.0, 0.63, 0.40, 0.24, 0.23, 0.145, 0.09};
+	// setInputScale(bortleToInScale[bIndex-1]);
 }
 
 

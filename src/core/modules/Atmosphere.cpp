@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include <QDebug>
@@ -137,7 +137,7 @@ Atmosphere::~Atmosphere(void)
 void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase,
 							   StelCore* core, float latitude, float altitude, float temperature, float relativeHumidity)
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	if (viewport != prj->getViewport())
 	{
 		// The viewport changed: update the number of point of the grid

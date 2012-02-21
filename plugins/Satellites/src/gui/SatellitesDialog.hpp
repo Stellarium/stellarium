@@ -15,7 +15,7 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
 #ifndef _SATELLITESDIALOG_HPP_
@@ -27,6 +27,7 @@
 
 class Ui_satellitesDialog;
 class QTimer;
+class SatellitesImportDialog;
 
 class SatellitesDialog : public StelDialog
 {
@@ -41,12 +42,14 @@ protected:
 	void createDialogContent();
 
 public slots:
-	void languageChanged();
+	void retranslate();
 	void refreshUpdateValues(void);
 
 private slots:
-	void groupFilterChanged(int index);
-	void selectedSatelliteChanged(const QString& id);
+	void listSatelliteGroup(int index);
+	//! Reloads the satellites list with the currently selected group.
+	void reloadSatellitesList();
+	void updateSelectedSatelliteInfo(QListWidgetItem* cur, QListWidgetItem* prev);
 	void saveSatellites(void);
 	void setUpdateValues(int hours);
 	void setUpdatesEnabled(int checkState);
@@ -58,8 +61,10 @@ private slots:
 	void addSourceRow(void);
 	void restoreDefaults(void);
 	void saveSettings(void);
-	void visibleCheckChanged(int state);
-	void orbitCheckChanged(int state);
+	void addSatellites(const TleDataList& newSatellites);
+	void removeSatellites();
+	void setDisplayFlag(bool display);
+	void setOrbitFlag(bool display);
 	void satelliteDoubleClick(QListWidgetItem* item);
 	void setOrbitParams(void);
 	void updateTLEs(void);
@@ -72,8 +77,10 @@ private:
 	bool satelliteModified;
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
+	void populateGroupsList();
 	QTimer* updateTimer;
-
+	
+	SatellitesImportDialog* importWindow;
 };
 
 #endif // _SATELLITESDIALOG_HPP_

@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include <cmath> // std::fmod
@@ -77,7 +77,7 @@ void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
 
 	h = (unsigned int)angle;
 	m = (unsigned int)((angle-h)*60);
-	s = (angle-h)*3600.-60.*m;
+	s = (angle-h)*3600.-60.*m;	
 }
 
 /*************************************************************************
@@ -85,6 +85,7 @@ void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
 *************************************************************************/
 void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double& s)
 {
+	int n;
 	angle = std::fmod(angle,2.0*M_PI);
 	sign=true;
 	if (angle<0)
@@ -94,9 +95,11 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 	}
 	angle *= 180./M_PI;
 
-	d = (unsigned int)angle;
-	m = (unsigned int)((angle - d)*60);
-	s = (angle-d)*3600-60*m;
+	n = (int)std::floor(std::fabs(3600 * angle) + 0.5);
+	s = n % 60;
+	n /= 60;
+	m = (unsigned int)(n % 60);
+	d = (unsigned int)(n / 60);
 }
 
 /*************************************************************************
@@ -348,6 +351,14 @@ void rectToSphe(double *lng, double *lat, const Vec3f& v)
 	*lat = asin(v[2]/r);
 	*lng = atan2(v[1],v[0]);
 }
+
+// GZ: some additions. I need those just for quick conversions for text display.
+void ctRadec2Ecl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad)
+{
+  *lambdaRad=std::atan2(std::sin(raRad)*std::cos(eclRad)+std::tan(decRad)*std::sin(eclRad), std::cos(raRad));
+  *betaRad=std::asin(std::sin(decRad)*std::cos(eclRad)-std::cos(decRad)*std::sin(eclRad)*std::sin(raRad));
+}
+// GZ: done
 
 double getDecAngle(const QString& str)
 {
