@@ -1,7 +1,7 @@
 /*
  * Solar System editor plug-in for Stellarium
  *
- * Copyright (C) 2010 Bogdan Marinov
+ * Copyright (C) 2010-2011 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -15,23 +15,24 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _MPC_IMPORT_WINDOW_
 #define _MPC_IMPORT_WINDOW_
 
 #include <QObject>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QProgressBar>
+#include <QStandardItemModel>
 #include "StelDialog.hpp"
 
 #include "SolarSystemEditor.hpp"
 
 class Ui_mpcImportWindow;
-class QNetworkAccessManager;
-class QNetworkReply;
-class QProgressBar;
 
-/*! \brief Window for importing orbital elements from various sources.
+/*! \brief Window for importing orbital elements from the Minor Planet Center.
   \author Bogdan Marinov
 */
 class MpcImportWindow : public StelDialog
@@ -47,7 +48,7 @@ public:
 	virtual ~MpcImportWindow();
 
 public slots:
-	void languageChanged();
+	void retranslate();
 
 signals:
 	void objectsImported();
@@ -69,6 +70,7 @@ private slots:
 
 	//Online search
 	void sendQuery();
+	void sendQueryToUrl(QUrl url);
 	void abortQuery();
 	void updateCountdown();
 	void resetNotFound();
@@ -77,7 +79,8 @@ private slots:
 	void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 	void updateQueryProgress(qint64 bytesReceived, qint64 bytesTotal);
 	void downloadComplete(QNetworkReply * reply);
-	void queryComplete(QNetworkReply * reply);
+	void receiveQueryReply(QNetworkReply * reply);
+	void readQueryReply(QNetworkReply * reply);
 
 	//! Marks (checks) all items in the results lists
 	void markAll();
@@ -93,8 +96,11 @@ private:
 	SolarSystemEditor * ssoManager;
 	QList<SsoElements> candidatesForAddition;
 	QList<SsoElements> candidatesForUpdate;
+	QStandardItemModel * candidateObjectsModel;
 
 	ImportType importType;
+	
+	void updateTexts();
 
 	//! wrapper for the single object function to allow multiple formats.
 	SsoElements readElementsFromString(QString elements);
@@ -124,6 +130,7 @@ private:
 	void saveBookmarksGroup(Bookmarks & bookmarkGroup, QVariantMap & output);
 
 	//Online search
+	QString query;
 	int countdown;
 	QTimer * countdownTimer;
 	void startCountdown();

@@ -16,7 +16,7 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include <QDebug>
@@ -41,6 +41,12 @@ QString Star1::getNameI18n(void) const {
   return QString();
 }
 
+int Star1::hasComponentID(void) const {
+  if (componentIds) {
+     return componentIds;
+  }
+  return 0;
+}
 
 static
 int UnpackBits(bool fromBe,const char *addr,int bits_begin,

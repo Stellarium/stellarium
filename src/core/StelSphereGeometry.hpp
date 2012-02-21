@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _STELSPHEREGEOMETRY_HPP_
@@ -298,7 +298,7 @@ public:
 
 	// Contain and intersect
 	virtual bool contains(const Vec3d &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.)<0.0000001);return (v*n>=d);}
-	virtual bool contains(const Vec3f &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.f)<0.0000001f);return (v[0]*n[0]+v[1]*n[1]+v[2]*n[2]>=d);}
+	virtual bool contains(const Vec3f &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.f)<0.000001f);return (v[0]*n[0]+v[1]*n[1]+v[2]*n[2]>=d);}
 	virtual bool contains(const SphericalConvexPolygon& r) const;
 	virtual bool contains(const SphericalCap& h) const
 	{

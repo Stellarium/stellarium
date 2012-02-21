@@ -137,7 +137,7 @@
    </item>
    <item>
     <widget class="QTabWidget" name="tabWidget">
-     <widget class="QWidget" name="objectTab" native="true">
+     <widget class="QWidget" name="objectTab">
       <attribute name="title">
        <string>Object</string>
       </attribute>
@@ -207,9 +207,6 @@
             </property>
             <property name="focusPolicy">
              <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="text">
-             <string/>
             </property>
             <property name="icon">
              <iconset resource="../../data/gui/guiRes.qrc">
@@ -673,6 +670,20 @@
            </widget>
           </item>
          </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabOptions">
+      <attribute name="title">
+       <string>Options</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QCheckBox" name="checkBoxUseSimbad">
+         <property name="text">
+          <string>Search also in the SIMBAD on-line astronomical database</string>
+         </property>
         </widget>
        </item>
       </layout>

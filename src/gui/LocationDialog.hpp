@@ -14,7 +14,7 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
 #ifndef _LOCATIONDIALOG_HPP_
@@ -37,7 +37,7 @@ public:
 	void styleChanged();
 
 public slots:
-	void languageChanged();
+	void retranslate();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -63,6 +63,18 @@ private:
 	
 	//! Update the map for the given location.
 	void setMapForLocation(const StelLocation& loc);
+
+	//! Populates the drop-down list of planets.
+	//! The displayed names are localized in the current interface language.
+	//! The original names are kept in the user data field of each QComboBox
+	//! item.
+	void populatePlanetList();
+
+	//! Populates the drop-down list of countries.
+	//! The displayed names are localized in the current interface language.
+	//! The original names are kept in the user data field of each QComboBox
+	//! item.
+	void populateCountryList();
 	
 private slots:
 	//! Update the widget to make sure it is synchrone if the location is changed programmatically

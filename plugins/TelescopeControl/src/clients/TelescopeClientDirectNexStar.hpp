@@ -21,7 +21,7 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _TELESCOPE_CLIENT_DIRECT_NEXSTAR_
@@ -32,7 +32,6 @@
 
 #include "StelApp.hpp"
 #include "StelObject.hpp"
-#include "StelNavigator.hpp"
 
 #include "Server.hpp" //from the telescope server source tree
 #include "TelescopeClient.hpp" //from the plug-in's source tree
@@ -66,7 +65,7 @@ public:
 private:
 	//======================================================================
 	// Methods inherited from TelescopeClient
-	Vec3d getJ2000EquatorialPos(const StelNavigator *nav=0) const;
+	Vec3d getJ2000EquatorialPos(const StelCore* core=0) const;
 	bool prepareCommunication();
 	void performCommunication();
 	void telescopeGoto(const Vec3d &j2000Pos);

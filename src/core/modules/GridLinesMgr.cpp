@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include <set>
@@ -25,7 +25,7 @@
 
 #include "GridLinesMgr.hpp"
 #include "StelApp.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelTranslator.hpp"
 #include "StelProjector.hpp"
 #include "StelFader.hpp"
@@ -34,6 +34,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
+#include "StelSkyDrawer.hpp"
 
 //! @class SkyGrid
 //! Class which manages a grid to display in the sky.
@@ -50,8 +51,8 @@ public:
 	const Vec3f& getColor() {return color;}
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
 	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
-	void setFlagshow(bool b){fader = b;}
-	bool getFlagshow(void) const {return fader;}
+	void setDisplayed(const bool displayed){fader = displayed;}
+	bool isDisplayed(void) const {return fader;}
 private:
 	Vec3f color;
 	StelCore::FrameType frameType;
@@ -69,7 +70,9 @@ public:
 	{
 		EQUATOR,
 		ECLIPTIC,
-		MERIDIAN
+		MERIDIAN,
+		HORIZON,
+		GALACTICPLANE
 	};
 	// Create and precompute positions of a SkyGrid
 	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR);
@@ -79,9 +82,11 @@ public:
 	const Vec3f& getColor() {return color;}
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
 	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
-	void setFlagshow(bool b){fader = b;}
-	bool getFlagshow(void) const {return fader;}
+	void setDisplayed(const bool displayed){fader = displayed;}
+	bool isDisplayed(void) const {return fader;}
 	void setFontSize(double newSize);
+	//! Re-translates the label.
+	void updateLabel();
 private:
 	SKY_LINE_TYPE line_type;
 	Vec3f color;
@@ -188,7 +193,14 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				else
 				{
 					const double delta = raAngle<M_PI ? M_PI : -M_PI;
-					text = StelUtils::radToDmsStrAdapt(raAngle+delta);
+					if (raAngle==2*M_PI && delta==-M_PI)
+					{
+						text = StelUtils::radToDmsStrAdapt(0);
+					}
+					else
+					{
+						text = StelUtils::radToDmsStrAdapt(raAngle+delta);
+					}
 				}
 				break;
 			}
@@ -252,7 +264,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 //! Draw the sky grid in the current frame
 void SkyGrid::draw(const StelCore* core) const
 {
-	const StelProjectorP prj = core->getProjection(frameType);
+	const StelProjectorP prj = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? StelCore::RefractionAuto : StelCore::RefractionOff);
 	if (!fader.getInterstate())
 		return;
 
@@ -509,6 +521,20 @@ SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : color(0.f, 0.f, 1.f)
 	font.setPixelSize(14);
 	line_type = _line_type;
 
+	updateLabel();
+}
+
+SkyLine::~SkyLine()
+{
+}
+
+void SkyLine::setFontSize(double newFontSize)
+{
+	font.setPixelSize(newFontSize);
+}
+
+void SkyLine::updateLabel()
+{
 	switch (line_type)
 	{
 		case MERIDIAN:
@@ -523,16 +549,15 @@ SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : color(0.f, 0.f, 1.f)
 			frameType = StelCore::FrameEquinoxEqu;
 			label = q_("Equator");
 			break;
+		case HORIZON:
+			frameType = StelCore::FrameAltAz;
+			label = q_("Horizon");
+			break;
+		case GALACTICPLANE:
+			frameType = StelCore::FrameGalactic;
+			label = q_("Galactic Plane");
+			break;
 	}
-}
-
-SkyLine::~SkyLine()
-{
-}
-
-void SkyLine::setFontSize(double newFontSize)
-{
-	font.setPixelSize(newFontSize);
 }
 
 void SkyLine::draw(StelCore *core) const
@@ -540,7 +565,7 @@ void SkyLine::draw(StelCore *core) const
 	if (!fader.getInterstate())
 		return;
 
-	StelProjectorP prj = core->getProjection(frameType);
+	StelProjectorP prj = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? StelCore::RefractionAuto : StelCore::RefractionOff);
 
 	// Get the bounding halfspace
 	const SphericalCap& viewPortSphericalCap = prj->getBoundingCap();
@@ -551,18 +576,17 @@ void SkyLine::draw(StelCore *core) const
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
-	Vec4f textColor(color[0], color[1], color[2], 0);
+	Vec4f textColor(color[0], color[1], color[2], 0);	
 	textColor*=2;
 	textColor[3]=fader.getInterstate();
 
-	ViewportEdgeIntersectCallbackData userData(&sPainter);
+	ViewportEdgeIntersectCallbackData userData(&sPainter);	
 	sPainter.setFont(font);
-	userData.textColor = textColor;
+	userData.textColor = textColor;	
 	userData.text = label;
-
 	/////////////////////////////////////////////////
 	// Draw the line
-	SphericalCap meridianSphericalCap(Vec3d(0,0,1), 0);
+	SphericalCap meridianSphericalCap(Vec3d(0,0,1), 0);	
 	Vec3d fpt(1,0,0);
 	if (line_type==MERIDIAN)
 	{
@@ -590,6 +614,7 @@ void SkyLine::draw(StelCore *core) const
 			return;
 	}
 
+
 	Vec3d middlePoint = p1+p2;
 	middlePoint.normalize();
 	if (!viewPortSphericalCap.contains(middlePoint))
@@ -615,6 +640,8 @@ GridLinesMgr::GridLinesMgr()
 	equatorLine = new SkyLine(SkyLine::EQUATOR);
 	eclipticLine = new SkyLine(SkyLine::ECLIPTIC);
 	meridianLine = new SkyLine(SkyLine::MERIDIAN);
+	horizonLine = new SkyLine(SkyLine::HORIZON);
+	galacticPlaneLine = new SkyLine(SkyLine::GALACTICPLANE);
 }
 
 GridLinesMgr::~GridLinesMgr()
@@ -626,6 +653,8 @@ GridLinesMgr::~GridLinesMgr()
 	delete equatorLine;
 	delete eclipticLine;
 	delete meridianLine;
+	delete horizonLine;
+	delete galacticPlaneLine;
 }
 
 /*************************************************************************
@@ -650,7 +679,12 @@ void GridLinesMgr::init()
 	setFlagEquatorLine(conf->value("viewing/flag_equator_line").toBool());
 	setFlagEclipticLine(conf->value("viewing/flag_ecliptic_line").toBool());
 	setFlagMeridianLine(conf->value("viewing/flag_meridian_line").toBool());
-	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+	setFlagHorizonLine(conf->value("viewing/flag_horizon_line").toBool());
+	setFlagGalacticPlaneLine(conf->value("viewing/flag_galactic_plane_line").toBool());
+	
+	StelApp& app = StelApp::getInstance();
+	connect(&app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLineLabels()));
 }
 
 void GridLinesMgr::update(double deltaTime)
@@ -663,6 +697,8 @@ void GridLinesMgr::update(double deltaTime)
 	equatorLine->update(deltaTime);
 	eclipticLine->update(deltaTime);
 	meridianLine->update(deltaTime);
+	horizonLine->update(deltaTime);
+	galacticPlaneLine->update(deltaTime);
 }
 
 void GridLinesMgr::draw(StelCore* core)
@@ -674,6 +710,8 @@ void GridLinesMgr::draw(StelCore* core)
 	equatorLine->draw(core);
 	eclipticLine->draw(core);
 	meridianLine->draw(core);
+	horizonLine->draw(core);
+	galacticPlaneLine->draw(core);
 }
 
 void GridLinesMgr::setStelStyle(const QString& section)
@@ -689,55 +727,240 @@ void GridLinesMgr::setStelStyle(const QString& section)
 	setColorEquatorLine(StelUtils::strToVec3f(conf->value(section+"/equator_color", defaultColor).toString()));
 	setColorEclipticLine(StelUtils::strToVec3f(conf->value(section+"/ecliptic_color", defaultColor).toString()));
 	setColorMeridianLine(StelUtils::strToVec3f(conf->value(section+"/meridian_color", defaultColor).toString()));
+	setColorHorizonLine(StelUtils::strToVec3f(conf->value(section+"/horizon_color", defaultColor).toString()));
+	setColorGalacticPlaneLine(StelUtils::strToVec3f(conf->value(section+"/galactic_plane_color", defaultColor).toString()));
+}
+
+void GridLinesMgr::updateLineLabels()
+{
+	equatorLine->updateLabel();
+	eclipticLine->updateLabel();
+	meridianLine->updateLabel();
+	horizonLine->updateLabel();
 }
 
 //! Set flag for displaying Azimuthal Grid
-void GridLinesMgr::setFlagAzimuthalGrid(bool b) {aziGrid->setFlagshow(b);}
+void GridLinesMgr::setFlagAzimuthalGrid(const bool displayed)
+{
+	if(displayed != aziGrid->isDisplayed()) {
+		aziGrid->setDisplayed(displayed);
+		emit azimuthalGridDisplayedChanged(displayed);
+	}
+}
 //! Get flag for displaying Azimuthal Grid
-bool GridLinesMgr::getFlagAzimuthalGrid(void) const {return aziGrid->getFlagshow();}
-Vec3f GridLinesMgr::getColorAzimuthalGrid(void) const {return aziGrid->getColor();}
+bool GridLinesMgr::getFlagAzimuthalGrid(void) const
+{
+	return aziGrid->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorAzimuthalGrid(void) const
+{
+	return aziGrid->getColor();
+}
+void GridLinesMgr::setColorAzimuthalGrid(const Vec3f& newColor)
+{
+	if(newColor != aziGrid->getColor()) {
+		aziGrid->setColor(newColor);
+		emit azimuthalGridColorChanged(newColor);
+	}
+}
 
 //! Set flag for displaying Equatorial Grid
-void GridLinesMgr::setFlagEquatorGrid(bool b) {equGrid->setFlagshow(b);}
+void GridLinesMgr::setFlagEquatorGrid(const bool displayed)
+{
+	if(displayed != equGrid->isDisplayed()) {
+		equGrid->setDisplayed(displayed);
+		emit equatorGridDisplayedChanged(displayed);
+	}
+}
 //! Get flag for displaying Equatorial Grid
-bool GridLinesMgr::getFlagEquatorGrid(void) const {return equGrid->getFlagshow();}
-Vec3f GridLinesMgr::getColorEquatorGrid(void) const {return equGrid->getColor();}
+bool GridLinesMgr::getFlagEquatorGrid(void) const
+{
+	return equGrid->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorEquatorGrid(void) const
+{
+	return equGrid->getColor();
+}
+void GridLinesMgr::setColorEquatorGrid(const Vec3f& newColor)
+{
+	if(newColor != equGrid->getColor()) {
+		equGrid->setColor(newColor);
+		emit equatorGridColorChanged(newColor);
+	}
+}
 
 //! Set flag for displaying Equatorial J2000 Grid
-void GridLinesMgr::setFlagEquatorJ2000Grid(bool b) {equJ2000Grid->setFlagshow(b);}
+void GridLinesMgr::setFlagEquatorJ2000Grid(const bool displayed)
+{
+	if(displayed != equJ2000Grid->isDisplayed()) {
+		equJ2000Grid->setDisplayed(displayed);
+		emit equatorJ2000GridDisplayedChanged(displayed);
+	}
+}
 //! Get flag for displaying Equatorial J2000 Grid
-bool GridLinesMgr::getFlagEquatorJ2000Grid(void) const {return equJ2000Grid->getFlagshow();}
-Vec3f GridLinesMgr::getColorEquatorJ2000Grid(void) const {return equJ2000Grid->getColor();}
+bool GridLinesMgr::getFlagEquatorJ2000Grid(void) const
+{
+	return equJ2000Grid->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorEquatorJ2000Grid(void) const
+{
+	return equJ2000Grid->getColor();
+}
+void GridLinesMgr::setColorEquatorJ2000Grid(const Vec3f& newColor)
+{
+	if(newColor != equJ2000Grid->getColor()) {
+		equJ2000Grid->setColor(newColor);
+		emit equatorJ2000GridColorChanged(newColor);
+	}
+}
 
 //! Set flag for displaying Equatorial J2000 Grid
-void GridLinesMgr::setFlagGalacticGrid(bool b) {galacticGrid->setFlagshow(b);}
+void GridLinesMgr::setFlagGalacticGrid(const bool displayed)
+{
+	if(displayed != galacticGrid->isDisplayed()) {
+		galacticGrid->setDisplayed(displayed);
+		emit galacticGridDisplayedChanged(displayed);
+	}
+}
 //! Get flag for displaying Equatorial J2000 Grid
-bool GridLinesMgr::getFlagGalacticGrid(void) const {return galacticGrid->getFlagshow();}
-Vec3f GridLinesMgr::getColorGalacticGrid(void) const {return galacticGrid->getColor();}
+bool GridLinesMgr::getFlagGalacticGrid(void) const
+{
+	return galacticGrid->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorGalacticGrid(void) const
+{
+	return galacticGrid->getColor();
+}
+void GridLinesMgr::setColorGalacticGrid(const Vec3f& newColor)
+{
+	if(newColor != galacticGrid->getColor()) {
+		galacticGrid->setColor(newColor);
+		emit galacticGridColorChanged(newColor);
+	}
+}
 
 //! Set flag for displaying Equatorial Line
-void GridLinesMgr::setFlagEquatorLine(bool b) {equatorLine->setFlagshow(b);}
+void GridLinesMgr::setFlagEquatorLine(const bool displayed)
+{
+	if(displayed != equatorLine->isDisplayed()) {
+		equatorLine->setDisplayed(displayed);
+		emit equatorLineDisplayedChanged(displayed);
+	}
+}
 //! Get flag for displaying Equatorial Line
-bool GridLinesMgr::getFlagEquatorLine(void) const {return equatorLine->getFlagshow();}
-Vec3f GridLinesMgr::getColorEquatorLine(void) const {return equatorLine->getColor();}
+bool GridLinesMgr::getFlagEquatorLine(void) const
+{
+	return equatorLine->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorEquatorLine(void) const
+{
+	return equatorLine->getColor();
+}
+void GridLinesMgr::setColorEquatorLine(const Vec3f& newColor)
+{
+	if(newColor != equatorLine->getColor()) {
+		equatorLine->setColor(newColor);
+		emit equatorLineColorChanged(newColor);
+	}
+}
 
 //! Set flag for displaying Ecliptic Line
-void GridLinesMgr::setFlagEclipticLine(bool b) {eclipticLine->setFlagshow(b);}
+void GridLinesMgr::setFlagEclipticLine(const bool displayed)
+{
+	if(displayed != eclipticLine->isDisplayed()) {
+		eclipticLine->setDisplayed(displayed);
+		emit eclipticLineDisplayedChanged(displayed);
+	}
+}
 //! Get flag for displaying Ecliptic Line
-bool GridLinesMgr::getFlagEclipticLine(void) const {return eclipticLine->getFlagshow();}
-Vec3f GridLinesMgr::getColorEclipticLine(void) const {return eclipticLine->getColor();}
+bool GridLinesMgr::getFlagEclipticLine(void) const
+{
+	return eclipticLine->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorEclipticLine(void) const
+{
+	return eclipticLine->getColor();
+}
+void GridLinesMgr::setColorEclipticLine(const Vec3f& newColor)
+{
+	if(newColor != eclipticLine->getColor()) {
+		eclipticLine->setColor(newColor);
+		emit eclipticLineColorChanged(newColor);
+	}
+}
 
 
 //! Set flag for displaying Meridian Line
-void GridLinesMgr::setFlagMeridianLine(bool b) {meridianLine->setFlagshow(b);}
+void GridLinesMgr::setFlagMeridianLine(const bool displayed)
+{
+	if(displayed != meridianLine->isDisplayed()) {
+		meridianLine->setDisplayed(displayed);
+		emit meridianLineDisplayedChanged(displayed);
+	}
+}
 //! Get flag for displaying Meridian Line
-bool GridLinesMgr::getFlagMeridianLine(void) const {return meridianLine->getFlagshow();}
-Vec3f GridLinesMgr::getColorMeridianLine(void) const {return meridianLine->getColor();}
+bool GridLinesMgr::getFlagMeridianLine(void) const
+{
+	return meridianLine->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorMeridianLine(void) const
+{
+	return meridianLine->getColor();
+}
+void GridLinesMgr::setColorMeridianLine(const Vec3f& newColor)
+{
+	if(newColor != meridianLine->getColor()) {
+		meridianLine->setColor(newColor);
+		emit meridianLineColorChanged(newColor);
+	}
+}
 
-void GridLinesMgr::setColorAzimuthalGrid(const Vec3f& v) { aziGrid->setColor(v);}
-void GridLinesMgr::setColorEquatorGrid(const Vec3f& v) { equGrid->setColor(v);}
-void GridLinesMgr::setColorEquatorJ2000Grid(const Vec3f& v) { equJ2000Grid->setColor(v);}
-void GridLinesMgr::setColorGalacticGrid(const Vec3f& v) { galacticGrid->setColor(v);}
-void GridLinesMgr::setColorEquatorLine(const Vec3f& v) { equatorLine->setColor(v);}
-void GridLinesMgr::setColorEclipticLine(const Vec3f& v) { eclipticLine->setColor(v);}
-void GridLinesMgr::setColorMeridianLine(const Vec3f& v) { meridianLine->setColor(v);}
+//! Set flag for displaying Horizon Line
+void GridLinesMgr::setFlagHorizonLine(const bool displayed)
+{
+	if(displayed != horizonLine->isDisplayed()) {
+		horizonLine->setDisplayed(displayed);
+		emit horizonLineDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Horizon Line
+bool GridLinesMgr::getFlagHorizonLine(void) const
+{
+	return horizonLine->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorHorizonLine(void) const
+{
+	return horizonLine->getColor();
+}
+void GridLinesMgr::setColorHorizonLine(const Vec3f& newColor)
+{
+	if(newColor != horizonLine->getColor()) {
+		horizonLine->setColor(newColor);
+		emit horizonLineColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying GalacticPlane Line
+void GridLinesMgr::setFlagGalacticPlaneLine(const bool displayed)
+{
+	if(displayed != galacticPlaneLine->isDisplayed()) {
+		galacticPlaneLine->setDisplayed(displayed);
+		emit galacticPlaneLineDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying GalacticPlane Line
+bool GridLinesMgr::getFlagGalacticPlaneLine(void) const
+{
+	return galacticPlaneLine->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorGalacticPlaneLine(void) const
+{
+	return galacticPlaneLine->getColor();
+}
+void GridLinesMgr::setColorGalacticPlaneLine(const Vec3f& newColor)
+{
+	if(newColor != galacticPlaneLine->getColor()) {
+		galacticPlaneLine->setColor(newColor);
+		emit galacticPlaneLineColorChanged(newColor);
+	}
+}

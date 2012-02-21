@@ -1,7 +1,7 @@
 /*
  * Stellarium Telescope Control Plug-in
  * 
- * Copyright (C) 2009-2010 Bogdan Marinov (this file)
+ * Copyright (C) 2009-2011 Bogdan Marinov (this file)
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -15,7 +15,7 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
 #ifndef _TELESCOPEDIALOG_HPP_
@@ -27,8 +27,7 @@
 #include <QModelIndex>
 #include <QStandardItemModel>
 
-//#include "StelDialog.hpp"
-#include "StelDialogTelescopeControl.hpp"
+#include "StelDialog.hpp"
 #include "TelescopeControlGlobals.hpp"
 #include "TelescopeConfigurationDialog.hpp"
 
@@ -38,7 +37,7 @@ class Ui_telescopeDialogForm;
 class TelescopeConfigurationDialog;
 class TelescopeControl;
 
-class TelescopeDialog : public StelDialogTelescopeControl
+class TelescopeDialog : public StelDialog
 {
 	Q_OBJECT
 public:
@@ -47,7 +46,7 @@ public:
 	void updateStyle();
 
 public slots:
-	void languageChanged();
+	void retranslate();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -55,6 +54,16 @@ protected:
 	Ui_telescopeDialogForm* ui;
 	
 private:
+	enum TelescopeStatus {
+		StatusNA = 0,
+		StatusStarting,
+		StatusConnecting,
+		StatusConnected,
+		StatusDisconnected,
+		StatusStopped,
+		StatusCount
+	};
+	
 	//! Update the text and the tooltip of the ChangeStatus button
 	void updateStatusButtonForSlot(int slot);
 	
@@ -62,6 +71,14 @@ private:
 	void setStatusButtonToStop();
 	void setStatusButtonToConnect();
 	void setStatusButtonToDisconnect();
+	
+	void setAboutText();
+	void setHeaderNames();
+	void updateWarningTexts();
+	
+	QString getTypeLabel(ConnectionType type);
+	void addModelRow(int slotNumber, ConnectionType type, TelescopeStatus status, const QString& name);
+	void updateModelRow(int rowNumber, ConnectionType type, TelescopeStatus status, const QString& name);
 	
 private slots:
 	void buttonChangeStatusPressed(void);
@@ -77,9 +94,6 @@ private slots:
 	//! Slot for receiving information from TelescopeConfigurationDialog
 	void discardChanges(void);
 	
-	void toggleReticles(int);
-	void toggleLabels(int);
-	void toggleCircles(int);
 	void selectTelecope(const QModelIndex &);
 	void configureTelescope(const QModelIndex &);
 	
@@ -87,16 +101,6 @@ private slots:
 	void updateTelescopeStates(void);
 
 private:
-	enum TelescopeStatus {
-		StatusNA = 0,
-		StatusStarting,
-		StatusConnecting,
-		StatusConnected,
-		StatusDisconnected,
-		StatusStopped,
-		StatusCount
-	};
-	
 	//! @enum ModelColumns This enum defines the number and the order of the columns in the table that lists active telescopes
 	enum ModelColumns {
 		ColumnSlot = 0,		//!< slot number column
@@ -114,7 +118,7 @@ private:
 	
 	TelescopeControl * telescopeManager;
 	
-	int telescopeStatus[SLOT_NUMBER_LIMIT];
+	TelescopeStatus telescopeStatus[SLOT_NUMBER_LIMIT];
 	ConnectionType telescopeType[SLOT_NUMBER_LIMIT];
 	
 	int telescopeCount;

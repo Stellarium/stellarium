@@ -17,7 +17,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include <QTextStream>
@@ -32,7 +32,7 @@
 #include "StarMgr.hpp"
 #include "StelObject.hpp"
 #include "StelTexture.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelUtils.hpp"
 #include "StelToneReproducer.hpp"
 #include "StelTranslator.hpp"
@@ -50,6 +50,8 @@
 #include "StelPainter.hpp"
 #include "StelJsonParser.hpp"
 #include "ZoneArray.hpp"
+#include "StelSkyDrawer.hpp"
+#include "RefractionExtinction.hpp"
 
 #include <errno.h>
 #include <unistd.h>
@@ -127,7 +129,7 @@ StarMgr::StarMgr(void) : hipIndex(new HipIndexStruct[NR_OF_HIP+1])
 	}
 	maxGeodesicGridLevel = -1;
 	lastMaxSearchLevel = -1;
-	starFont.setPixelSize(13.);
+	starFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
 }
@@ -222,7 +224,7 @@ void StarMgr::init()
 	}
 
 	loadData(starSettings);
-	starFont.setPixelSize(13);
+	starFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
@@ -243,13 +245,14 @@ void StarMgr::init()
 }
 
 
-void StarMgr::drawPointer(StelPainter& sPainter, const StelNavigator * nav)
+void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 {
 	const QList<StelObjectP> newSelected = objectMgr->getSelectedObject("Star");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
-		Vec3d pos=obj->getJ2000EquatorialPos(nav);
+		Vec3d pos=obj->getJ2000EquatorialPos(core);
+
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
 		if (!sPainter.getProjector()->project(pos, screenpos))
@@ -622,7 +625,6 @@ int StarMgr::getMaxSearchLevel() const
 // Draw all the stars
 void StarMgr::draw(StelCore* core)
 {
-	StelNavigator* nav = core->getNavigator();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
 	// If stars are turned off don't waste time below
@@ -642,13 +644,18 @@ void StarMgr::draw(StelCore* core)
 	skyDrawer->preDrawPointSource(&sPainter);
 
 	// draw all the stars of all the selected zones
-	float rcmag_table[2*256];
+        // GZ: This table must be enlarged from 2x256 to many more entries. CORRELATE IN Zonearray.cpp!
+	//float rcmag_table[2*256];
+        //float rcmag_table[2*16384];
+        float rcmag_table[2*4096];
 
 	for (ZoneArrayMap::const_iterator it(zoneArrays.constBegin()); it!=zoneArrays.constEnd();++it)
 	{
 		const float mag_min = 0.001f*it.value()->mag_min;
-		const float k = (0.001f*it.value()->mag_range)/it.value()->mag_steps;
-		for (int i=it.value()->mag_steps-1;i>=0;--i)
+		const float k = (0.001f*it.value()->mag_range)/it.value()->mag_steps; // MagStepIncrement
+		// GZ: add a huge number of entries to rcMag
+		//for (int i=it.value()->mag_steps-1;i>=0;--i)
+                for (int i=4096-1;i>=0;--i)
 		{
 			const float mag = mag_min+k*i;
 			if (skyDrawer->computeRCMag(mag,rcmag_table + 2*i)==false)
@@ -686,7 +693,7 @@ void StarMgr::draw(StelCore* core)
 	skyDrawer->postDrawPointSource(&sPainter);
 
 	if (objectMgr->getFlagSelectedObjectPointer())
-		drawPointer(sPainter, nav);
+		drawPointer(sPainter, core);
 }
 
 
@@ -750,13 +757,13 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 		int zone;
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it.key());(zone = it1.next()) >= 0;)
 		{
-			it.value()->searchAround(core->getNavigator(), zone,v,f,result);
+			it.value()->searchAround(core, zone,v,f,result);
 			//qDebug() << " " << zone;
 		}
 		//qDebug() << endl << "search border(" << it->first << "):";
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it.key()); (zone = it1.next()) >= 0;)
 		{
-			it.value()->searchAround(core->getNavigator(), zone,v,f,result);
+			it.value()->searchAround(core, zone,v,f,result);
 			//qDebug() << " " << zone;
 		}
 	}

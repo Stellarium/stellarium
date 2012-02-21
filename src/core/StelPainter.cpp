@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "StelPainter.hpp"
@@ -457,8 +457,11 @@ void StelPainter::sRing(float rMin, float rMax, int slices, int stacks, int orie
 	if (isLightOn)
 	{
 		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
-		lightPos3 -= prj->modelViewMatrixf * Vec3f(0.f); // -posCenterEye
-		lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
+		Vec3f tmpv(0.f);
+		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
+		lightPos3 -= tmpv;
+		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
+		prj->getModelViewTransform()->backward(lightPos3);
 		lightPos3.normalize();
 		ambientLight = light.getAmbient();
 		diffuseLight = light.getDiffuse();
@@ -695,7 +698,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 
 			QPainter painter(&strImage);
 			painter.setFont(qPainter->font());
-			painter.setRenderHints(QPainter::TextAntialiasing);
+			painter.setRenderHints(QPainter::TextAntialiasing, true);
 			painter.setPen(Qt::white);
 			painter.drawText(-strRect.x(), -strRect.y(), str);
 
@@ -1583,8 +1586,11 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	if (isLightOn)
 	{
 		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
-		lightPos3 -= prj->modelViewMatrixf * Vec3f(0.f);
-		lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
+		Vec3f tmpv(0.f);
+		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
+		lightPos3 -= tmpv;
+		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
+		prj->getModelViewTransform()->backward(lightPos3);
 		lightPos3.normalize();
 		ambientLight = light.getAmbient();
 		diffuseLight = light.getDiffuse();

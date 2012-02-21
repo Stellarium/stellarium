@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include <QTextStream>
@@ -25,7 +25,7 @@
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
 #include "StelTexture.hpp"
-#include "StelNavigator.hpp"
+
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
@@ -96,8 +96,13 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		oss << q_("Type: <b>%1</b>").arg(getTypeString()) << "<br>";
 
 	if (mag < 50 && flags&Magnitude)
-		oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
-
+	{
+	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
+										QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+	    else
+		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core, false), 0, 'f', 2) << "<br>";
+	}
 	oss << getPositionInfoString(core, flags);
 
 	if (angularSize>0 && flags&Size)
@@ -108,17 +113,31 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	return str;
 }
 
-float Nebula::getSelectPriority(const StelNavigator *nav) const
+float Nebula::getVMagnitude(const StelCore* core, bool withExtinction) const
+{
+    float extinctionMag=0.0; // track magnitude loss
+    if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
+    {
+	Vec3d altAz=getAltAzPosApparent(core);
+	altAz.normalize();
+	core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
+    }
+
+    return mag+extinctionMag;
+}
+
+
+float Nebula::getSelectPriority(const StelCore* core) const
 {
 	if( ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getFlagHints() )
 	{
 		// make very easy to select IF LABELED
-		return -10;
+		return -10.f;
 	}
 	else
 	{
-		if (getVMagnitude(nav)>20) return 20;
-		return getVMagnitude(nav);
+		if (getVMagnitude(core, false)>20.f) return 20.f;
+		return getVMagnitude(core, false);
 	}
 }
 
@@ -127,7 +146,7 @@ Vec3f Nebula::getInfoColor(void) const
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.4) : ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getLabelsColor();
 }
 
-double Nebula::getCloseViewFov(const StelNavigator*) const
+double Nebula::getCloseViewFov(const StelCore*) const
 {
 	return angularSize>0 ? angularSize * 4 : 1;
 }

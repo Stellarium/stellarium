@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -14,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _CONSTELLATION_HPP_
@@ -63,7 +64,7 @@ private:
 	virtual QString getType() const {return "Constellation";}
 
 	//! observer centered J2000 coordinates.
-	virtual Vec3d getJ2000EquatorialPos(const StelNavigator*) const {return XYZname;}
+	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const {return XYZname;}
 
 	virtual double getAngularSize(const StelCore*) const {Q_ASSERT(0); return 0;} // TODO
 
@@ -105,23 +106,23 @@ private:
 	//! Draw the lines for the Constellation.
 	//! This method uses the coords of the stars (optimized for use thru
 	//! the class ConstellationMgr only).
-	void drawOptim(StelPainter& sPainter, const StelNavigator* nav, const SphericalCap& viewportHalfspace) const;
+	void drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const;
 	//! Draw the art texture, optimized function to be called thru a constellation manager only.
 	void drawArtOptim(StelPainter& sPainter, const SphericalRegion& region) const;
 	//! Update fade levels according to time since various events.
 	void update(int deltaTime);
 	//! Turn on and off Constellation line rendering.
 	//! @param b new state for line drawing.
-	void setFlagLines(bool b) {lineFader=b;}
+	void setFlagLines(const bool b) {lineFader=b;}
 	//! Turn on and off Constellation boundary rendering.
 	//! @param b new state for boundary drawing.
-	void setFlagBoundaries(bool b) {boundaryFader=b;}
+	void setFlagBoundaries(const bool b) {boundaryFader=b;}
 	//! Turn on and off Constellation name label rendering.
 	//! @param b new state for name label drawing.
-	void setFlagName(bool b) {nameFader=b;}
+	void setFlagLabels(const bool b) {nameFader=b;}
 	//! Turn on and off Constellation art rendering.
 	//! @param b new state for art drawing.
-	void setFlagArt(bool b) {artFader=b;}
+	void setFlagArt(const bool b) {artFader=b;}
 	//! Get the current state of Constellation line rendering.
 	//! @return true if Constellation line rendering it turned on, else false.
 	bool getFlagLines() const {return lineFader;}
@@ -130,7 +131,7 @@ private:
 	bool getFlagBoundaries() const {return boundaryFader;}
 	//! Get the current state of Constellation name label rendering.
 	//! @return true if Constellation name label rendering it turned on, else false.
-	bool getFlagName() const {return nameFader;}
+	bool getFlagLabels() const {return nameFader;}
 	//! Get the current state of Constellation art rendering.
 	//! @return true if Constellation art rendering it turned on, else false.
 	bool getFlagArt() const {return artFader;}

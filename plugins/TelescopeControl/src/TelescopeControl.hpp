@@ -22,7 +22,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _TELESCOPE_CONTROL_HPP_
@@ -204,7 +204,7 @@ private slots:
 
 private:
 	//! Draw a nice animated pointer around the object if it's selected
-	void drawPointer(const StelProjectorP& prj, const StelNavigator* nav, StelPainter& sPainter);
+	void drawPointer(const StelProjectorP& prj, const StelCore* core, StelPainter& sPainter);
 
 	//! Perform the communication with the telescope servers
 	void communicate(void);
