@@ -63,8 +63,8 @@ public:
 	void updateI18n();
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
 	void set_fade_duration(float duration) {fader.setDuration((int)(duration*1000.f));}
-	void setShown(bool b){fader = b;}
-	bool isShown() const {return fader;}
+	void setFlagShow(bool b){fader = b;}
+	bool getFlagShow() const {return fader;}
 private:
 	float radius;
 	QFont font;
@@ -281,7 +281,7 @@ void LandscapeMgr::init()
 	setAtmosphereFadeDuration(conf->value("landscape/atmosphere_fade_duration",0.5).toFloat());
 	setAtmosphereLightPollutionLuminance(conf->value("viewing/light_pollution_luminance",0.0).toFloat());
 	cardinalsPoints = new Cardinals();
-	cardinalsPoints->setShown(conf->value("viewing/flag_cardinal_points",true).toBool());
+	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
 
 	bool ok =true;
@@ -328,8 +328,8 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 	if (landscape)
 	{
 		// Copy display parameters from previous landscape to new one
-		newLandscape->setDisplayed(landscape->isDisplayed());
-		newLandscape->setFlagFog(landscape->getFlagFog());
+		newLandscape->setFlagShow(landscape->getFlagShow());
+		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
 		delete landscape;
 		landscape = newLandscape;
 	}
@@ -346,7 +346,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 		if (landscape->getDefaultFogSetting() >-1)
 		  {
 			setFlagFog((bool) landscape->getDefaultFogSetting());
-			landscape->setFlagFog((bool) landscape->getDefaultFogSetting());
+			landscape->setFlagShowFog((bool) landscape->getDefaultFogSetting());
 		  }
 		if (landscape->getDefaultBortleIndex() > 0)
 		  {
@@ -414,28 +414,28 @@ void LandscapeMgr::updateI18n()
 
 void LandscapeMgr::setFlagLandscape(const bool displayed)
 {
-	if(landscape->isDisplayed() != displayed) {
-		landscape->setDisplayed(displayed);
+	if(landscape->getFlagShow() != displayed) {
+		landscape->setFlagShow(displayed);
 		emit landscapeDisplayedChanged(displayed);
 	}
 }
 
 bool LandscapeMgr::getFlagLandscape() const
 {
-	return landscape->isDisplayed();
+	return landscape->getFlagShow();
 }
 
 void LandscapeMgr::setFlagFog(const bool displayed)
 {
-	if (landscape->getFlagFog() != displayed) {
-		landscape->setFlagFog(displayed);
+	if (landscape->getFlagShowFog() != displayed) {
+		landscape->setFlagShowFog(displayed);
 		emit fogDisplayedChanged(displayed);
 	}
 }
 
 bool LandscapeMgr::getFlagFog() const
 {
-	return landscape->getFlagFog();
+	return landscape->getFlagShowFog();
 }
 
 /*********************************************************************
@@ -512,8 +512,8 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 //! Set flag for displaying Cardinals Points
 void LandscapeMgr::setFlagCardinalsPoints(const bool displayed)
 {
-	if (cardinalsPoints->isShown() != displayed) {
-		cardinalsPoints->setShown(displayed);
+	if (cardinalsPoints->getFlagShow() != displayed) {
+		cardinalsPoints->setFlagShow(displayed);
 		emit cardinalsPointsDisplayedChanged(displayed);
 	}
 }
@@ -521,7 +521,7 @@ void LandscapeMgr::setFlagCardinalsPoints(const bool displayed)
 //! Get flag for displaying Cardinals Points
 bool LandscapeMgr::getFlagCardinalsPoints() const
 {
-	return cardinalsPoints->isShown();
+	return cardinalsPoints->getFlagShow();
 }
 
 //! Set Cardinals Points color
@@ -541,8 +541,8 @@ Vec3f LandscapeMgr::getColorCardinalPoints() const
 //! Set flag for displaying Atmosphere
 void LandscapeMgr::setFlagAtmosphere(const bool displayed)
 {
-	if (atmosphere->isShown() != displayed) {
-		atmosphere->setShown(displayed);
+	if (atmosphere->getFlagShow() != displayed) {
+		atmosphere->setFlagShow(displayed);
 		StelApp::getInstance().getCore()->getSkyDrawer()->setFlagHasAtmosphere(displayed);
 		emit atmosphereDisplayedChanged(displayed);
 	}
@@ -551,7 +551,7 @@ void LandscapeMgr::setFlagAtmosphere(const bool displayed)
 //! Get flag for displaying Atmosphere
 bool LandscapeMgr::getFlagAtmosphere() const
 {
-	return atmosphere->isShown();
+	return atmosphere->getFlagShow();
 }
 
 //! Set atmosphere fade duration in s
