@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-19 03:56+0700\n"
-"PO-Revision-Date: 2012-02-14 00:57+0000\n"
+"POT-Creation-Date: 2012-02-20 17:27+0700\n"
+"PO-Revision-Date: 2012-02-21 05:21+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-19 05:38+0000\n"
-"X-Generator: Launchpad (build 14814)\n"
+"X-Launchpad-Export-Date: 2012-02-21 05:50+0000\n"
+"X-Generator: Launchpad (build 14838)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -125,7 +125,7 @@ msgstr "พิกัดสุริยวิถีศูนย์โลก (ข�
 #: src/core/modules/Planet.cpp:143
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr "ความเอียง (ของวัน): %1"
+msgstr "ความเอียงของสุริยวิถี (ของวัน): %1"
 
 #: src/core/modules/Planet.cpp:153
 #, no-c-format, qt-format
@@ -339,7 +339,7 @@ msgstr "ผู้สร้าง"
 
 #: src/gui/ConfigurationDialog.cpp:540 src/gui/ViewDialog.cpp:393
 msgid "Contact"
-msgstr "การติดต่อ"
+msgstr "ติดต่อ"
 
 #: src/gui/ConfigurationDialog.cpp:618
 msgid "Author"
@@ -445,7 +445,7 @@ msgstr "คลิกขวา"
 msgid "CTRL + Left click"
 msgstr "CTRL และคลิกซ้าย"
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:167
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:168
 msgid "Movement and Selection"
 msgstr "การเคลื่อนไหวและการเลือก"
 
@@ -469,15 +469,15 @@ msgstr "ล้างการเลือก"
 msgid "When a Script is Running"
 msgstr "เมื่อสคริปต์กำลังทำงาน"
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:146
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:147
 msgid "Slow down the script execution rate"
 msgstr "ลดอัตราการประมวลผลสคริปต์"
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:147
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:148
 msgid "Speed up the script execution rate"
 msgstr "เพิ่มอัตราการประมวลผลสคริปต์"
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:148
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:149
 msgid "Set the normal script execution rate"
 msgstr "ตั้งอัตราการประมวลผลสคริปต์เป็นอัตราปกติ"
 
@@ -557,7 +557,7 @@ msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{กระทู้} - ถกปัญหากับผู้ใช้คนอื่น ๆ  เกี่ยวกับ Stellarium"
 
 #: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:337
-#: src/gui/HelpDialog.cpp:339 src/gui/StelGui.cpp:174
+#: src/gui/HelpDialog.cpp:339 src/gui/StelGui.cpp:175
 msgid "Miscellaneous"
 msgstr "จิปาถะ"
 
@@ -598,281 +598,285 @@ msgstr "นักพัฒนา OSX: %1"
 msgid "Tester: %1"
 msgstr "ผู้ทดสอบ: %1"
 
-#: src/gui/StelGui.cpp:101
+#: src/gui/StelGui.cpp:102
 msgid "Display Options"
 msgstr "ตัวเลือกการแสดงผล"
 
-#: src/gui/StelGui.cpp:102
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
+#: src/gui/StelGui.cpp:103
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Constellation lines"
 msgstr "เส้นกลุ่มดาว"
 
-#: src/gui/StelGui.cpp:103
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:277
+#: src/gui/StelGui.cpp:104
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:278
 msgid "Constellation art"
 msgstr "ภาพกลุ่มดาว"
 
-#: src/gui/StelGui.cpp:104
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:272
+#: src/gui/StelGui.cpp:105
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:273
 msgid "Constellation labels"
 msgstr "ชื่อกลุ่มดาว"
 
-#: src/gui/StelGui.cpp:105
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:278
+#: src/gui/StelGui.cpp:106
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Constellation boundaries"
 msgstr "ขอบเขตของกลุ่มดาว"
 
-#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1121
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:314
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1121
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Azimuthal grid"
 msgstr "เส้นพิกัดภาคทิศ"
 
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1119
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:319
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1119
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial grid"
 msgstr "กริดศูนย์สูตร"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1120
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:324
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1120
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equatorial J2000 grid"
 msgstr "กริดศูนย์สูตร J2000"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1122
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:353
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1122
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Galactic grid"
 msgstr "กริดกาแล็กซี"
 
-#: src/gui/StelGui.cpp:111
+#: src/gui/StelGui.cpp:112
 msgid "Galactic plane"
 msgstr "ระนาบดาราจักร"
 
-#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1126
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:334
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1126
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:335
 msgid "Ecliptic line"
 msgstr "เส้นสุริยวิถี"
 
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1123
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:329
+#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1123
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Equator line"
 msgstr "เส้นศูนย์สูตร"
 
-#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1124
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:309
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1124
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Meridian line"
 msgstr "เส้นเมริเดียน"
 
-#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1125
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:348
+#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1125
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Horizon line"
 msgstr "เส้นขอบฟ้า"
 
-#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1128
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
+#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1128
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Cardinal points"
 msgstr "ทิศทั้งสี่"
 
-#: src/gui/StelGui.cpp:118
+#: src/gui/StelGui.cpp:119
 msgid "Ground"
 msgstr "พื้น"
 
-#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1099
+#: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1099
 msgid "Atmosphere"
 msgstr "บรรยากาศ"
 
-#: src/gui/StelGui.cpp:120
+#: src/gui/StelGui.cpp:121
 msgid "Fog"
 msgstr "หมอก"
 
-#: src/gui/StelGui.cpp:122 src/ui_viewDialog.h:1108
+#: src/gui/StelGui.cpp:123 src/ui_viewDialog.h:1108
 msgid "Nebulas"
 msgstr "เนบิวลา"
 
-#: src/gui/StelGui.cpp:123
+#: src/gui/StelGui.cpp:124
 msgid "Nebulas background images"
 msgstr "ภาพเบื้องหลังของเนบิวลา"
 
-#: src/gui/StelGui.cpp:124 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:233
+#: src/gui/StelGui.cpp:125 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Stars"
 msgstr "ดาวฤกษ์"
 
-#: src/gui/StelGui.cpp:125
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:296
+#: src/gui/StelGui.cpp:126
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Planet labels"
 msgstr "ชื่อดาวเคราะห์"
 
-#: src/gui/StelGui.cpp:126
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:300
+#: src/gui/StelGui.cpp:127
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:301
 msgid "Planet orbits"
 msgstr "วงโคจรดาวเคราะห์"
 
-#: src/gui/StelGui.cpp:127
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:304
+#: src/gui/StelGui.cpp:128
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Planet trails"
 msgstr "รอยการเคลื่อนที่ของดาวเคราะห์"
 
-#: src/gui/StelGui.cpp:129
+#: src/gui/StelGui.cpp:130
 msgid "Night mode"
 msgstr "โหมดกลางคืน"
 
-#: src/gui/StelGui.cpp:130
+#: src/gui/StelGui.cpp:131
 msgid "Full-screen mode"
 msgstr "โหมดเต็มจอ"
 
-#: src/gui/StelGui.cpp:131
+#: src/gui/StelGui.cpp:132
 msgid "Flip scene horizontally"
 msgstr "กลับภาพในแนวนอน"
 
-#: src/gui/StelGui.cpp:132
+#: src/gui/StelGui.cpp:133
 msgid "Flip scene vertically"
 msgstr "กลับภาพในแนวตั้ง"
 
-#: src/gui/StelGui.cpp:134
+#: src/gui/StelGui.cpp:135
 msgid "Windows"
 msgstr "หน้าต่าง"
 
-#: src/gui/StelGui.cpp:135
-msgid "Help window"
-msgstr "หน้าต่างช่วยเหลือ"
-
 #: src/gui/StelGui.cpp:136
+msgid "Help window"
+msgstr "หน้าต่างวิธีใช้"
+
+#: src/gui/StelGui.cpp:137
 msgid "Configuration window"
 msgstr "หน้าต่างการปรับแต่ง"
 
-#: src/gui/StelGui.cpp:137
+#: src/gui/StelGui.cpp:138
 msgid "Search window"
 msgstr "หน้าต่างการค้นหา"
 
-#: src/gui/StelGui.cpp:138
+#: src/gui/StelGui.cpp:139
 msgid "Sky and viewing options window"
 msgstr "หน้าต่างท้องฟ้าและการมองเห็น"
 
-#: src/gui/StelGui.cpp:139
+#: src/gui/StelGui.cpp:140
 msgid "Date/time window"
 msgstr "หน้าต่าง วัน/เวลา"
 
-#: src/gui/StelGui.cpp:140
+#: src/gui/StelGui.cpp:141
 msgid "Location window"
 msgstr "หน้าต่างที่ตั้ง"
 
-#: src/gui/StelGui.cpp:142
+#: src/gui/StelGui.cpp:143
 msgid "Script console window"
 msgstr "หน้าต่างรายการสคริปต์"
 
-#: src/gui/StelGui.cpp:145 src/ui_dateTimeDialogGui.h:294
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:160
+#: src/gui/StelGui.cpp:146 src/ui_dateTimeDialogGui.h:294
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Date and Time"
 msgstr "วันที่ และ เวลา"
 
-#: src/gui/StelGui.cpp:149
+#: src/gui/StelGui.cpp:150
 msgid "Decrease time speed"
 msgstr "เวลาถอยหลัง"
 
-#: src/gui/StelGui.cpp:150
+#: src/gui/StelGui.cpp:151
 msgid "Increase time speed"
 msgstr "เวลาเดินหน้า"
 
-#: src/gui/StelGui.cpp:151
+#: src/gui/StelGui.cpp:152
 msgid "Set normal time rate"
 msgstr "ปรับเวลาเดินตามปกติ"
 
-#: src/gui/StelGui.cpp:152
+#: src/gui/StelGui.cpp:153
 msgid "Decrease time speed (a little)"
 msgstr "เวลาถอยหลัง (เล็กน้อย)"
 
-#: src/gui/StelGui.cpp:153
+#: src/gui/StelGui.cpp:154
 msgid "Increase time speed (a little)"
 msgstr "เวลาเดินหน้า (เล็กน้อย)"
 
-#: src/gui/StelGui.cpp:154
+#: src/gui/StelGui.cpp:155
 msgid "Set time rate to zero"
 msgstr "ตั้งอัตราเวลาไปที่ศูนย์"
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:156
 msgid "Set time to now"
 msgstr "กลับสู่เวลาปัจจุบัน"
 
-#: src/gui/StelGui.cpp:156
+#: src/gui/StelGui.cpp:157
 msgid "Add 1 solar hour"
 msgstr "เพิ่ม ๑ ชั่วโมงสุริยะ"
 
-#: src/gui/StelGui.cpp:157
+#: src/gui/StelGui.cpp:158
 msgid "Subtract 1 solar hour"
 msgstr "ลบ ๑ ชั่วโมงสุริยะ"
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:159
 msgid "Add 1 solar day"
 msgstr "เพิ่ม ๑ วันสุริยะ"
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:160
 msgid "Subtract 1 solar day"
 msgstr "ลบ ๑ วันสุริยะ"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:161
 msgid "Add 1 solar week"
 msgstr "เพิ่ม ๑ สัปดาห์สุริยะ"
 
-#: src/gui/StelGui.cpp:161
+#: src/gui/StelGui.cpp:162
 msgid "Subtract 1 solar week"
 msgstr "ลบ ๑ สัปดาห์สุริยะ"
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:163
 msgid "Add 1 sidereal day"
 msgstr "เพิ่ม ๑ วันดาราคติ"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:164
 msgid "Subtract 1 sidereal day"
 msgstr "ลบ ๑ วันดาราคติ"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:165
 msgid "Add 1 sidereal week"
 msgstr "เพิ่ม ๑ สัปดาห์ดาราคติ"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:166
 msgid "Subtract 1 sidereal week"
 msgstr "ลบ ๑ สัปดาห์ดาราคติ"
 
-#: src/gui/StelGui.cpp:168
+#: src/gui/StelGui.cpp:169
 msgid "Center on selected object"
 msgstr "ทำให้วัตถุที่เลือกมาอยู่กลางจอ"
 
-#: src/gui/StelGui.cpp:169
+#: src/gui/StelGui.cpp:170
 msgid "Track object"
 msgstr "ติดตามวัตถุ"
 
-#: src/gui/StelGui.cpp:170
+#: src/gui/StelGui.cpp:171
 msgid "Zoom in on selected object"
 msgstr "ขยายวัตถุที่เลือก"
 
-#: src/gui/StelGui.cpp:171
+#: src/gui/StelGui.cpp:172
 msgid "Zoom out"
 msgstr "ย่อ"
 
-#: src/gui/StelGui.cpp:172
+#: src/gui/StelGui.cpp:173
 msgid "Set home planet to selected planet"
 msgstr "กำหนดดาวเคราะห์ที่เลือกให้เป็นดาวเคราะห์บ้าน"
 
-#: src/gui/StelGui.cpp:175
+#: src/gui/StelGui.cpp:176
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "สลับระหว่างแนวเชิงศูนย์สูตรกับภาคทิศ"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:177
 msgid "Quit"
 msgstr "ออก"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:178
 msgid "Save screenshot"
 msgstr "บันทึกภาพหน้าจอ"
 
 #: src/gui/StelGui.cpp:179
+msgid "Copy selected object information to clipboard"
+msgstr "คัดลอกข้อมูลของวัตถุที่เลือกไปยังคลิปบอร์ด"
+
+#: src/gui/StelGui.cpp:181
 msgid "Auto hide horizontal button bar"
 msgstr "ซ่อนแถบแนวนอนโดยอัตโนมัติ"
 
-#: src/gui/StelGui.cpp:180
+#: src/gui/StelGui.cpp:182
 msgid "Auto hide vertical button bar"
 msgstr "ซ่อนแถบแนวตั้งโดยอัตโนมัติ"
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:183
 msgid "Toggle visibility of GUI"
 msgstr "สลับการแสดงส่วนต่อประสานกราฟิกกับผู้ใช้"
 
@@ -985,6 +989,30 @@ msgstr "มีภูมิทัศน์ที่ใช้ชื่อเดี
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "คุณสามารถเอามันออกได้ด้วยมือ โดยลบไดเร็กทอรีต่อไปนี้: %1"
 
+#: src/gui/ScriptConsole.cpp:73
+msgid "quickrun..."
+msgstr "ดำเนินงานอย่างรวดเร็ว..."
+
+#: src/gui/ScriptConsole.cpp:74
+msgid "selected text"
+msgstr "ข้อความที่เลือก"
+
+#: src/gui/ScriptConsole.cpp:75
+msgid "clear text"
+msgstr "ล้างข้อความ"
+
+#: src/gui/ScriptConsole.cpp:76
+msgid "clear images"
+msgstr "ล้างรูปภาพ"
+
+#: src/gui/ScriptConsole.cpp:77
+msgid "natural"
+msgstr "ธรรมชาติ"
+
+#: src/gui/ScriptConsole.cpp:78
+msgid "starchart"
+msgstr "แผนที่ดาว"
+
 #: src/main.cpp:333
 msgid "This system does not support OpenGL."
 msgstr "ระบบไม่สนับสนุน OpenGL"
@@ -1057,7 +1085,7 @@ msgstr "แกนีมีด"
 
 #: src/translations.h:49
 msgid "Callisto"
-msgstr "คัสลิสโต"
+msgstr "คัลลิสโต"
 
 #: src/translations.h:50
 msgid "Amalthea"
@@ -2498,7 +2526,7 @@ msgid "Refresh"
 msgstr "เรียกใหม่"
 
 #: src/ui_locationDialogGui.h:387
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:133
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:134
 msgid "Location"
 msgstr "ตำแหน่งที่ตั้ง"
 
@@ -2521,7 +2549,7 @@ msgid "Add to list"
 msgstr "เพิ่มไปยังรายการ"
 
 #: src/ui_locationDialogGui.h:395
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:134
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:135
 msgid "Latitude:"
 msgstr "ละติจูด:"
 
@@ -2534,12 +2562,12 @@ msgstr ""
 "8s"
 
 #: src/ui_locationDialogGui.h:399
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:137
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:138
 msgid "Longitude:"
 msgstr "ลองจิจูด:"
 
 #: src/ui_locationDialogGui.h:403
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:140
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Altitude:"
 msgstr "ระดับความสูง:"
 
@@ -2707,27 +2735,27 @@ msgid "Markings"
 msgstr "เครื่องหมาย"
 
 #: src/ui_viewDialog.h:1080
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:394
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Landscape"
 msgstr "ภูมิทัศน์"
 
 #: src/ui_viewDialog.h:1082
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:216
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:217
 msgid "Starlore"
 msgstr "ตำนานดาว"
 
 #: src/ui_viewDialog.h:1086
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:246
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
 msgid "Absolute scale:"
 msgstr "อัตราส่วนจริง:"
 
 #: src/ui_viewDialog.h:1087
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:240
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Relative scale:"
 msgstr "อัตราส่วนสัมพัทธ์"
 
 #: src/ui_viewDialog.h:1088
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:252
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Twinkle:"
 msgstr "กะพริบแสง:"
 
@@ -2768,7 +2796,7 @@ msgid "Show atmosphere"
 msgstr "แสดงบรรยากาศ"
 
 #: src/ui_viewDialog.h:1101
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:389
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Light pollution:"
 msgstr "มลพิษทางแสง:"
 
@@ -2821,7 +2849,7 @@ msgid "Celestial Sphere"
 msgstr "ทรงกลมท้องฟ้า"
 
 #: src/ui_viewDialog.h:1127
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:358
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Galactic plane line"
 msgstr "เส้นระนาบดาราจักร"
 
@@ -2847,7 +2875,7 @@ msgstr "แสดงภาพวาด"
 
 #. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1134
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:284
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Art brightness:"
 msgstr "ความสว่างของภาพกลุ่มดาว:"
 
@@ -2980,10 +3008,10 @@ msgstr "ใช้เมาส์ในการกวาด (ลากเมา�
 
 #: src/ui_configurationDialog.h:793
 msgid "Enable mouse navigation"
-msgstr "เปิดใช้การนำทางโดยเมาส์"
+msgstr "เปิดใช้การนำทางด้วยเมาส์"
 
 #: src/ui_configurationDialog.h:794
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:179
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Startup date and time"
 msgstr "วันและเวลาเริ่มต้น"
 
@@ -3003,7 +3031,7 @@ msgstr "ตั้งค่าเวลาของการจำลองเห
 
 #: src/ui_configurationDialog.h:802
 msgid "System date at:"
-msgstr "วันที่ระบบคือ:"
+msgstr "เวลาของระบบ:"
 
 #: src/ui_configurationDialog.h:804
 msgid "Use a specific date and time when Stellarium starts up"
@@ -3095,7 +3123,7 @@ msgstr "ภาพหน้าจอ"
 
 #: src/ui_configurationDialog.h:839
 msgid "Screenshot Directory"
-msgstr "ไดเรกทอรี่ภาพหน้าจอที่บันทึก"
+msgstr "ไดเร็กทอรีที่บันทึกภาพหน้าจอ"
 
 #: src/ui_configurationDialog.h:841
 msgid "Invert colors"
@@ -3163,7 +3191,7 @@ msgid "Tools"
 msgstr "เครื่องมือ"
 
 #: src/ui_configurationDialog.h:879
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:441
 msgid "Scripts"
 msgstr "สคริปต์"
 
@@ -3244,6 +3272,62 @@ msgstr ""
 "ใช้ค่าประมาณ 0.12 สำหรับทัศนวิสัยดีเลิศบนยอดเขา, 0.2 "
 "สำหรับทัศนวิสัยดีแบบในชนบท, 0.35 สำหรับทัศนวิสัยที่มืดมัว"
 
+#: src/ui_scriptConsole.h:341
+msgid "Script console"
+msgstr "ส่วนเฝ้าคุมสคริปต์"
+
+#: src/ui_scriptConsole.h:344
+msgid "load script from file"
+msgstr "โหลดสคริปต์จากแฟ้มข้อมูล"
+
+#: src/ui_scriptConsole.h:348
+msgid "save script to file"
+msgstr "บันทึกสคริปต์ลงในแฟ้มข้อมูล"
+
+#: src/ui_scriptConsole.h:352
+msgid "clear script"
+msgstr "ล้างสคริปต์"
+
+#: src/ui_scriptConsole.h:356
+msgid "pre-process script using SSC preprocessor"
+msgstr ""
+
+#: src/ui_scriptConsole.h:359
+msgid "pre-process script using STS preprocessor"
+msgstr ""
+
+#: src/ui_scriptConsole.h:362
+msgid "quickly load and run a utility script"
+msgstr "โหลดสคริปต์เครื่องมืออย่างรวดเร็วและให้สคริปต์ทำงาน"
+
+#: src/ui_scriptConsole.h:365
+msgid "run script"
+msgstr "ให้สคริปต์ดำเนินงาน"
+
+#: src/ui_scriptConsole.h:369
+msgid "stop script"
+msgstr "หยุดสคริปต์"
+
+#: src/ui_scriptConsole.h:372
+msgid "Script"
+msgstr "สคริปต์"
+
+#: src/ui_scriptConsole.h:373
+msgid "Output"
+msgstr "ส่วนนำออก"
+
+#: src/ui_scriptConsole.h:375
+msgid "Cursor position"
+msgstr "ตำแหน่งเคอร์เซอร์"
+
+#: src/ui_scriptConsole.h:377
+msgid "Include dir:"
+msgstr "รวมไดเร็กทอรี:"
+
+#: src/ui_scriptConsole.h:378
+msgid "..."
+msgstr "..."
+
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
 msgstr "วัดมุม"
@@ -3294,6 +3378,9 @@ msgid ""
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
+"แสดงท้องฟ้าเมื่อมองผ่านเลนส์ใกล้ตาของกล้องโทรทรรศน์ "
+"(จำลองเฉพาะกำลังขยายและขอบเขตภาพ) นอกจากนี้ ยังสามารถแสดงเฟรมเซอเซอร์และวง "
+"Telrad ด้วย"
 
 #: plugins/Oculars/src/Oculars.cpp:757
 msgid "Please select an object before switching to ocular view."
@@ -3301,51 +3388,51 @@ msgstr "กรุณาเลือกวัตถุก่อนจะสลั
 
 #: plugins/Oculars/src/Oculars.cpp:836
 msgid "&Previous ocular"
-msgstr ""
+msgstr "เลนส์ใกล้ตา&ก่อนหน้า"
 
 #: plugins/Oculars/src/Oculars.cpp:837
 msgid "&Next ocular"
-msgstr ""
+msgstr "เลนส์ใกล้ตา&ถัดไป"
 
 #: plugins/Oculars/src/Oculars.cpp:838
 msgid "Select &ocular"
-msgstr ""
+msgstr "เลือกเ&ลนส์ใกล้ตา"
 
 #: plugins/Oculars/src/Oculars.cpp:883
 msgid "Toggle &crosshair"
-msgstr ""
+msgstr "สลับ&สายใยเล็ง"
 
 #: plugins/Oculars/src/Oculars.cpp:892
 msgid "Configure &Oculars"
-msgstr ""
+msgstr "&ปรับแต่งเลนส์ใกล้ตา"
 
 #: plugins/Oculars/src/Oculars.cpp:901
 msgid "Toggle &CCD"
-msgstr ""
+msgstr "สลับ&ซีซีดี"
 
 #: plugins/Oculars/src/Oculars.cpp:909
 msgid "Toggle &Telrad"
-msgstr ""
+msgstr "สลับ &Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:919
 msgid "&Previous CCD"
-msgstr ""
+msgstr "ซีซีดี&ก่อนหน้า"
 
 #: plugins/Oculars/src/Oculars.cpp:920
 msgid "&Next CCD"
-msgstr ""
+msgstr "ซีซีดี&ถัดไป"
 
 #: plugins/Oculars/src/Oculars.cpp:921
 msgid "&Select CCD"
-msgstr ""
+msgstr "เ&ลือกซีซีดี"
 
 #: plugins/Oculars/src/Oculars.cpp:943
 msgid "&Rotate CCD"
-msgstr ""
+msgstr "&หมุนซีซีดี"
 
 #: plugins/Oculars/src/Oculars.cpp:975
 msgid "&Reset rotation"
-msgstr ""
+msgstr "&ยกเลิกการหมุน"
 
 #: plugins/Oculars/src/Oculars.cpp:1201
 #: plugins/Oculars/src/ui_ocularDialog.h:864
@@ -3362,11 +3449,11 @@ msgstr "สายใยเล็ง"
 
 #: plugins/Oculars/src/Oculars.cpp:1241
 msgid "Image sensor frame"
-msgstr ""
+msgstr "เฟรมเซนเซอร์ภาพ"
 
 #: plugins/Oculars/src/Oculars.cpp:1249
 msgid "Telrad sight"
-msgstr ""
+msgstr "วง Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:1257
 msgid "Oculars plugin configuration"
@@ -3426,7 +3513,7 @@ msgstr "ขอบเขตภาพ: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
 #, qt-format
 msgid "Dimensions: %1"
-msgstr ""
+msgstr "ขนาด: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1525
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
@@ -3446,11 +3533,11 @@ msgstr "&กล้องโทรทรรศน์"
 
 #: plugins/Oculars/src/Oculars.cpp:1737
 msgid "&Previous telescope"
-msgstr ""
+msgstr "กล้องโทรทรรศน์&ก่อนหน้า"
 
 #: plugins/Oculars/src/Oculars.cpp:1738
 msgid "&Next telescope"
-msgstr ""
+msgstr "กล้องโทรทรรศน์&ถัดไป"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
 msgid "Previous ocular"
@@ -3539,7 +3626,7 @@ msgstr "เปิดใช้งานเฉพาะเมื่อเลือ
 
 #: plugins/Oculars/src/ui_ocularDialog.h:866
 msgid "Scale image circle"
-msgstr ""
+msgstr "วงกลมมาตราส่วนภาพ"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:867
 msgid "Key mappings"
@@ -3562,7 +3649,7 @@ msgid "On-screen control panel"
 msgstr "แผงควบคุมบนหน้าจอ"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:873
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:213
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:214
 msgid "General"
 msgstr "ทั่วไป"
 
@@ -3598,7 +3685,7 @@ msgstr "ความยาวโฟกัส:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "Field stop:"
-msgstr ""
+msgstr "ขั้นช่องจำกัดแสง"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 msgid "Binoculars"
@@ -4283,17 +4370,17 @@ msgstr "กดปุ่ม \"%1\" เพื่อตั้งค่าการ�
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid "local, Stellarium"
-msgstr ""
+msgstr "ท้องถิ่น, Stellarium"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 msgid "local, external"
-msgstr ""
+msgstr "ท้องถิ่น, ภายนอก"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid "remote, unknown"
-msgstr ""
+msgstr "ระยะไกล, ไม่ทราบ"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
@@ -4335,7 +4422,7 @@ msgstr "ตัดการเชื่อมต่อกับกล้องโ
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:784
 msgid "Select a directory"
-msgstr "เลือกไดเรกทอรี"
+msgstr "เลือกไดเร็กทอรี"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:281
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
@@ -4357,11 +4444,11 @@ msgstr "หันกล้องโทรทรรศน์ไปที่พิ
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:286
 msgid "&Right Ascension (J2000):"
-msgstr ""
+msgstr "ไ&รต์แอสเซนชัน (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:287
 msgid "De&clination (J2000):"
-msgstr ""
+msgstr "เ&ดคลิเนชัน (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "Hours-minutes-seconds format"
@@ -4385,7 +4472,7 @@ msgstr "องศาในระบบทศนิยม"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "D&ecimal"
-msgstr ""
+msgstr "&ทศนิยม"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:300
 msgid "&Slew"
@@ -4393,7 +4480,7 @@ msgstr "&หัน"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Configure &telescopes..."
-msgstr ""
+msgstr "ปรับแต่ง&กล้องโทรทรรศน์..."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope Configuration"
@@ -4793,7 +4880,7 @@ msgid ""
 msgstr "การตั้งค่าเหล่านี้จะควบคุมการแสดงวันที่และเวลาบนแถบด้านล่าง"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:198
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "Time display format"
 msgstr "รูปแบบการแสดงเวลา"
 
@@ -4811,7 +4898,7 @@ msgid "24-hour format"
 msgstr "รูปแบบ 24 ชั่วโมง"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:187
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:188
 msgid "Date display format"
 msgstr "รูปแบบการแสดงวันที่"
 
@@ -4835,140 +4922,140 @@ msgstr ""
 "ส่วนต่อประสานผู้ใช้แบบข้อความ (TUI) ซึ่งเป็นโปรแกรมเสริมสำหรับรุ่น 0.9.x "
 "นำมาใช้ในระบบท้องฟ้าจำลอง"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:148
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:149
 msgid "Solar System body"
 msgstr "วัตถุในระบบสุริยะ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:162
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:163
 msgid "Current date/time"
 msgstr "วัน/เวลา ปัจจุบัน"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:167
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:168
 msgid "Set time zone"
 msgstr "ตั้งค่าเขตเวลา"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:168
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:169
 msgid "Day keys"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:169
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:170
 msgid "Startup date/time preset"
 msgstr "ตั้งวัน/เวลาขณะเริ่มโปรแกรมไว้ล่วงหน้า"
 
 #. TRANSLATORS: The current system time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:176
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:177
 msgid "system"
 msgstr "ระบบ"
 
 #. TRANSLATORS: A pre-set time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:178
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:179
 msgid "preset"
 msgstr "ตั้งล่วงหน้า"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:186
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "mmddyyyy"
 msgstr "mmddyyyy"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:186
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "ddmmyyyy"
 msgstr "ddmmyyyy"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:186
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "yyyymmdd"
 msgstr "yyyymmdd"
 
 #. TRANSLATORS: 12-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:195
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:196
 msgid "12h"
 msgstr "12h"
 
 #. TRANSLATORS: 24-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:197
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:198
 msgid "24h"
 msgstr "24h"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:222
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:223
 msgid "Language"
 msgstr "ภาษา"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:236
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:237
 msgid "Show stars"
 msgstr "แสดงดาวฤกษ์"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:264
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:265
 msgid "Colors"
 msgstr "สี"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:340
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:341
 msgid "Nebula names"
 msgstr "ชื่อเนบิวลา"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:344
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:345
 msgid "Nebula hints"
 msgstr "เนบิวลา"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:387
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:388
 msgid "Effects"
 msgstr "เอฟเฟกต์"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:401
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Manual zoom"
 msgstr "ซูมด้วยมือ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:406
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:407
 msgid "Magnitude scaling multiplier"
 msgstr "ตัวคูณการปรับตามโชติมาตร"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:408
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:409
 msgid "Milky Way intensity:"
 msgstr "ความสว่างของทางช้างเผือก:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:414
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:415
 msgid "Nebula label frequency:"
 msgstr "ความถี่ของการแสดงชื่อเนบิวลา:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:415
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Zoom duration:"
 msgstr "ช่วงเวลาซูม:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:421
-msgid "Cursor timeout:"
-msgstr ""
-
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:422
+msgid "Cursor timeout:"
+msgstr "เวลาแสดงเคอร์เซอร์:"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:423
 msgid "Setting landscape sets location"
 msgstr "ตั้งค่าที่อยู่ของภูมิทัศน์"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:443
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:444
 msgid "Run local script"
 msgstr "เปิดใช้งานสคริปต์ภายใน"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:449
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:450
 msgid "Stop running script"
 msgstr "หยุดสคริปต์ที่กำลังทำงาน"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:452
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:453
 msgid "CD/DVD script"
 msgstr "สคริปต์จาก CD/DVD"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:464
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:461
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:465
 msgid "Administration"
 msgstr "ดูแลระบบ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:469
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:470
 msgid "Load default configuration"
 msgstr "โหลดการตั้งค่าปริยาย"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:470
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:471
 msgid "Save current configuration"
 msgstr "บันทึกการตั้งค่าปัจจุบัน"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:473
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:474
 msgid "Shut down"
 msgstr "ปิดโปรแกรม"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:512
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:524
 msgid "[no TUI node]"
 msgstr "[ไม่มีโหนด TUI]"
 
@@ -4983,7 +5070,7 @@ msgstr "ปิด"
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr ""
+msgstr "ผิดพลาด, ไม่รู้จักสี \"%1\""
 
 #: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
 msgid " [RETURN to activate]"
@@ -5318,7 +5405,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:130 plugins/Pulsars/src/Pulsar.cpp:142
 #: plugins/Pulsars/src/Pulsar.cpp:154
 msgid "Time averaged flux density at"
-msgstr ""
+msgstr "ความหนาแน่นฟลักซ์เฉลี่ยเวลาที่"
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Pulsars/src/Pulsar.cpp:133 plugins/Pulsars/src/Pulsar.cpp:145
@@ -5350,7 +5437,7 @@ msgstr ""
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:250
 msgid "binary or multiple pulsar"
-msgstr ""
+msgstr "พัลซาร์คู่หรือระบบหลายพัลซาร์"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:256
@@ -5365,17 +5452,17 @@ msgstr ""
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:268
 msgid "radio interpulse"
-msgstr ""
+msgstr "พัลซาร์แผ่คลื่นวิทยุระหว่างพัลส์"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:274
 msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
-msgstr ""
+msgstr "เชิงแสง, แผ่รังสีเอกซ์หรือรังสีแกมมาเป็นห้วง ๆ (พลังงานสูง)"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
-msgstr ""
+msgstr "พัลซาร์นอกดาราจักรทางช้างเผือก (ในเมฆแมเจลแลน)"
 
 #~ msgid "Ecliptic Line"
 #~ msgstr "เส้นสุริยวิถี"
