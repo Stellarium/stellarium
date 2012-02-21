@@ -272,7 +272,7 @@ void TextUserInterface::init()
 	                                 m5);
 	TuiNode* m5_2 = new TuiNodeColor(N_("Constellation labels"),
 	                                 constellationMgr,
-	                                 SLOT(setNamesColor(Vec3f)),
+					 SLOT(setLabelsColor(Vec3f)),
 	                                 constellationMgr->getLabelsColor(), 
 	                                 m5, m5_1);
 	TuiNode* m5_3 = new TuiNode(N_("Constellation art"), m5, m5_2);
