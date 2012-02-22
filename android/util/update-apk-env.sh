@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #   ***************************************************************************
-#     build-apk.sh - builds the and installs the needed libraries for android QGIS
+#     update-apk-env.sh - copies files into the apk directory
 #      --------------------------------------
 #
 #      based on Marco Bernasocchi's android QGIS scripts
@@ -29,3 +29,4 @@ cp -vrf $INSTALL_DIR/bin $APK_LIBS_DIR
 #copy assets to apk 
 rm -vrf $APK_DIR/assets
 cp -vrf $INSTALL_DIR/share/stellarium $APK_DIR/assets
+cp -vrf $INSTALL_DIR/share/locale $APK_DIR/assets/locale
