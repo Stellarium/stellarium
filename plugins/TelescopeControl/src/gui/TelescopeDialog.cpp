@@ -70,7 +70,7 @@ TelescopeDialog::~TelescopeDialog()
 	delete telescopeListModel;
 }
 
-void TelescopeDialog::languageChanged()
+void TelescopeDialog::retranslate()
 {
 	if (dialog)
 	{
@@ -96,7 +96,7 @@ void TelescopeDialog::createDialogContent()
 	ui->setupUi(dialog);
 	
 	//Inherited connect
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	
 	//Connect: sender, signal, receiver, method

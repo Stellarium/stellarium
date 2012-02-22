@@ -73,24 +73,24 @@ public:
 	//! @return a pointer to the progress bar
 	class QProgressBar* addProgressBar();
 	
-	//! Get the button bar at the bottom of the screen
-	BottomStelBar* getButtonBar();
+	//! Get the button bar at the bottom of the screensetDateTime
+	BottomStelBar* getButtonBar() const;
 	
 	//! Get the button bar of the left of the screen
-	class LeftStelBar* getWindowsButtonBar();
+	class LeftStelBar* getWindowsButtonBar() const;
 
 	//! Get the SkyGui instance (useful for adding other interface elements).
 	//! It will return a valid object only if called after init().
-	class SkyGui* getSkyGui();
+	class SkyGui* getSkyGui() const;
 	
 	//! Get whether the buttons toggling image flip are visible
-	bool getFlagShowFlipButtons() {return flagShowFlipButtons;}
+	bool getFlagShowFlipButtons() const;
 	
 	//! Get whether the button toggling nebulae background is visible
-	bool getFlagShowNebulaBackgroundButton() {return flagShowNebulaBackgroundButton;}
+	bool getFlagShowNebulaBackgroundButton() const;
 
 	//! returns true if the gui has complted init process.
-	bool initComplete(void) {return initDone;}
+	bool initComplete(void) const;
 
 #ifdef ENABLE_SCRIPT_CONSOLE
 	ScriptConsole* getScriptConsole() {return &scriptConsole;}
@@ -108,7 +108,12 @@ public:
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags);
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const;
 	
-	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false);
+	virtual QAction* addGuiActions(const QString& actionName,
+								   const QString& text,
+								   const QString& shortCut,
+								   const QString& helpGroup,
+								   bool checkable=true,
+								   bool autoRepeat=false);
 	
 public slots:
 	//! Define whether the buttons toggling image flip should be visible
@@ -156,7 +161,28 @@ private slots:
 	void setStelStyle(const QString& section);
 	void quit();
 	void updateI18n();
-	
+	//! Process changes from the ConstellationMgr
+	void artDisplayedUpdated(const bool displayed);
+	void boundariesDisplayedUpdated(const bool displayed);
+	void linesDisplayedUpdated(const bool displayed);
+	void namesDisplayedUpdated(const bool displayed);
+	//! Process changes from the GridLinesMgr
+	void azimuthalGridDisplayedUpdated(const bool displayed);
+	void equatorGridDisplayedUpdated(const bool displayed);
+	void equatorJ2000GridDisplayedUpdated(const bool displayed);
+	void galacticGridDisplayedUpdated(const bool displayed);
+	void equatorLineDisplayedUpdated(const bool displayed);
+	void eclipticLineDisplayedUpdated(const bool displayed);
+	void meridianLineDisplayedUpdated(const bool displayed);
+	void horizonLineDisplayedUpdated(const bool displayed);
+	void galacticPlaneLineDisplayedUpdated(const bool displayed);
+	//! Process changes from the LandscapeMgr
+	void atmosphereDisplayedUpdated(const bool displayed);
+	void cardinalsPointsDisplayedUpdated(const bool displayed);
+	void fogDisplayedUpdated(const bool displayed);
+	void landscapeDisplayedUpdated(const bool displayed);
+	void copySelectedObjectInfo(void);
+
 private:
 	QGraphicsWidget* topLevelGraphicsWidget;
 			
@@ -193,6 +219,15 @@ private:
 
 	// Currently used StelStyle
 	StelStyle currentStelStyle;
+
+	// This method is used by init() to initialize the ConstellationMgr instance.
+	void initConstellationMgr();
+
+	// This method is used by init() to initialize the GridLineMgr instance.
+	void initGrindLineMgr();
+
+	// This method is used by init() to initialize the LandscapeMgr instance.
+	void initLandscapeMgr();
 };
 
 //! Allow to load the GUI as a static plugin

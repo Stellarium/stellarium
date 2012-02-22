@@ -95,8 +95,7 @@ Q_EXPORT_PLUGIN2(TextUserInterface, TextUserInterfaceStelPluginInterface)
 TextUserInterface::TextUserInterface()
 	: dummyDialog(this), tuiActive(false), currentNode(NULL)
 {
-	setObjectName("TextUserInterface");
-	font.setPixelSize(15);
+	setObjectName("TextUserInterface");	
 }
 
 /*************************************************************************
@@ -129,6 +128,8 @@ void TextUserInterface::init()
 	//unless you have a good reason. --BM
 	
 	StelCore* core = StelApp::getInstance().getCore();
+	// Main config.
+	loadConfiguration();
 	//Reusing strings from the location dialog
 	TuiNode* m1 = new TuiNode(N_("Location"));
 	TuiNode* m1_1 = new TuiNodeDouble(N_("Latitude:"),
@@ -271,7 +272,7 @@ void TextUserInterface::init()
 	                                 m5);
 	TuiNode* m5_2 = new TuiNodeColor(N_("Constellation labels"),
 	                                 constellationMgr,
-	                                 SLOT(setLabelsColor(Vec3f)),
+					 SLOT(setLabelsColor(Vec3f)),
 	                                 constellationMgr->getLabelsColor(), 
 	                                 m5, m5_1);
 	TuiNode* m5_3 = new TuiNode(N_("Constellation art"), m5, m5_2);
@@ -482,6 +483,17 @@ void TextUserInterface::init()
 }
 
 /*************************************************************************
+ Load settings from configuration file.
+*************************************************************************/
+void TextUserInterface::loadConfiguration(void)
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	font.setPixelSize(conf->value("tui/tui_font_size", 15).toInt());
+}
+
+/*************************************************************************
  Draw our module.
 *************************************************************************/
 void TextUserInterface::draw(StelCore* core)
@@ -496,6 +508,14 @@ void TextUserInterface::draw(StelCore* core)
 			LeftStelBar* sideBar = gui->getWindowsButtonBar();			
 			x = (sideBar) ? sideBar->boundingRectNoHelpLabel().right() : 50;
 			y = (bottomBar) ? bottomBar->boundingRect().height() : 50;
+		}
+
+		// Alternate x,y for Disk viewport
+		if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
+		{
+			StelProjector::StelProjectorParams projParams = core->getCurrentStelProjectorParams();
+			x = projParams.viewportCenter[0] - projParams.viewportFovDiameter/2;
+			y = projParams.viewportCenter[1];
 		}
 		
 		x += 20;

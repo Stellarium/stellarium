@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
+ * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,7 +72,7 @@ ConfigurationDialog::~ConfigurationDialog()
 	delete ui;
 }
 
-void ConfigurationDialog::languageChanged()
+void ConfigurationDialog::retranslate()
 {
 	if (dialog) {
 		ui->retranslateUi(dialog);
@@ -110,7 +111,7 @@ void ConfigurationDialog::createDialogContent()
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 
 	ui->setupUi(dialog);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	// Set the main tab activated by default
 	ui->configurationStackedWidget->setCurrentIndex(0);
@@ -135,7 +136,7 @@ void ConfigurationDialog::createDialogContent()
 	}
 	if (lt!=-1)
 		cb->setCurrentIndex(lt);
-	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
+	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectLanguage(const QString&)));
 
 	connect(ui->getStarsButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
@@ -239,7 +240,7 @@ void ConfigurationDialog::createDialogContent()
 	updateConfigLabels();
 }
 
-void ConfigurationDialog::languageChanged(const QString& langName)
+void ConfigurationDialog::selectLanguage(const QString& langName)
 {
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
@@ -611,11 +612,18 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();	
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_(scriptMgr.getName(s)) + "</h2>";
-	html += "<h3>" + q_("Author") + ": " + scriptMgr.getAuthor(s) + "</h3>";
-	html += "<h3>" + q_("License") + ": " + scriptMgr.getLicense(s) + "</h3>";
-	QString d = scriptMgr.getDescription(s);
+	html += "<h2>" + q_(scriptMgr.getName(s).trimmed()) + "</h2>";
+	if (!scriptMgr.getAuthor(s).trimmed().isEmpty())
+	{
+		html += "<h3>" + q_("Author") + ": " + scriptMgr.getAuthor(s) + "</h3>";
+	}
+	if (!scriptMgr.getLicense(s).trimmed().isEmpty())
+	{
+		html += "<h3>" + q_("License") + ": " + scriptMgr.getLicense(s) + "</h3>";
+	}	
+	QString d = scriptMgr.getDescription(s).trimmed();
 	d.replace("\n", "<br />");
+	d.replace(QRegExp("\\s{2,}"), " ");
 	html += "<p>" + q_(d) + "</p>";
 	html += "</body></html>";	
 	ui->scriptInfoBrowser->setHtml(html);	

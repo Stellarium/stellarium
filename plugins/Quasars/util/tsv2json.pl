@@ -12,13 +12,13 @@ close TSV;
 
 open (JSON, ">$JSON");
 print JSON "{\n";
-print JSON "\t\"version\": \"0.1.0\",\n";
+print JSON "\t\"version\": \"0.1.1\",\n";
 print JSON "\t\"shortName\": \"A catalogue of quasars\",\n";
 print JSON "\t\"quasars\":\n";
 print JSON "\t{\n";
 
-for ($i=15;$i<scalar(@catalog);$i++) {
-	if ($catalog[$i] !~ /#/) {
+for ($i=0;$i<scalar(@catalog);$i++) {
+	if ($catalog[$i] =~ /^([a-zA-Z0-9]+)/) {
 		($name,$RA,$DE,$z,$Vmag,$bV,$Amag) = split(";", $catalog[$i]);
 
 		($hour,$min,$sec) = split(" ",$RA);
@@ -28,6 +28,7 @@ for ($i=15;$i<scalar(@catalog);$i++) {
 		$outDE = $deg."d".$min."m".$sec."s";
 
 		$name =~ s/(\s{2,})//gi;
+		$name =~ s/(\s)$//gi;
 		$z =~ s/(\s+)//gi;
 		$bV =~ s/(\s+)//gi;
 		$Amag =~ s/(\s+)//gi;
