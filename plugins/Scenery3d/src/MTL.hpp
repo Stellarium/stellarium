@@ -15,7 +15,7 @@ class MTL
 {
     public:
         typedef Vec4f Color;
-        enum Illum { DIFFUSE, DIFFUSE_AND_AMBIENT, SPECULAR }; //!< Supported OpenGL illumination models. Use specular sparingly!
+        enum Illum { DIFFUSE, DIFFUSE_AND_AMBIENT, SPECULAR, TRANSLUCENT=9 }; //!< Supported OpenGL illumination models. Use specular sparingly!
 
         //! Struct for holding a material definition.
         struct Material { // The initial values are the OpenGL defaults.
