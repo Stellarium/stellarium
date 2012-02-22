@@ -56,7 +56,7 @@ public:
 	void styleChanged();
 
 public slots:
-	void languageChanged();
+	void retranslate();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots

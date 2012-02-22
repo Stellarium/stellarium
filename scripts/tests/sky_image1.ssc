@@ -27,19 +27,19 @@ core.loadSkyImage("image", "../textures/earthmap.png",
 core.wait(1.5);
 
 status("showing image (should fade in)");
-StelSkyImageMgr.showImage("image", true); 
+ScreenImageMgr.showImage("image", true); 
 core.wait(1.5);
 
 status("hiding image (should fade out)");
-StelSkyImageMgr.showImage("image", false); 
+ScreenImageMgr.showImage("image", false); 
 core.wait(1.5);
 
 status("showing image (should fade in)");
-StelSkyImageMgr.showImage("image", true); 
+ScreenImageMgr.showImage("image", true); 
 core.wait(1.5);
 
 status("hiding image (should fade out)");
-StelSkyImageMgr.showImage("image", false); 
+ScreenImageMgr.showImage("image", false); 
 core.wait(1.5);
 
 status("removing image, kthxbye");

@@ -121,7 +121,7 @@ void CompassMarks::init()
 		pxmapOnIcon = new QPixmap(":/compassMarks/bt_compass_on.png");
 		pxmapOffIcon = new QPixmap(":/compassMarks/bt_compass_off.png");
 
-		gui->addGuiActions("actionShow_Compass_Marks", N_("Compass marks"), "Ctrl+C", N_("Plugin Key Bindings"), true, false);
+		gui->addGuiActions("actionShow_Compass_Marks", N_("Compass marks"), "", N_("Plugin Key Bindings"), true, false);
 		gui->getGuiActions("actionShow_Compass_Marks")->setChecked(markFader);
 		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiActions("actionShow_Compass_Marks"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
@@ -141,7 +141,7 @@ void CompassMarks::draw(StelCore* core)
 	if (markFader.getInterstate() <= 0.0) { return; }
 
 	Vec3d pos;
-	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
+	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff); // Maybe conflict with Scenery3d branch. AW20120214
 	StelPainter painter(prj);
 	painter.setFont(font);
 

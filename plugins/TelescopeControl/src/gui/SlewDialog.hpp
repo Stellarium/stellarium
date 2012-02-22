@@ -26,13 +26,12 @@
 #include <QString>
 #include "StelStyle.hpp"
 
-//#include "StelDialog.hpp"
-#include "StelDialogTelescopeControl.hpp"
+#include "StelDialog.hpp"
 
 class Ui_slewDialog;
 class TelescopeControl;
 
-class SlewDialog : public StelDialogTelescopeControl
+class SlewDialog : public StelDialog
 {
 	Q_OBJECT
 public:
@@ -40,7 +39,7 @@ public:
 	virtual ~SlewDialog();
 
 public slots:
-	void languageChanged();
+	void retranslate();
 	
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
