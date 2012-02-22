@@ -61,7 +61,7 @@ SatellitesDialog::~SatellitesDialog()
 	delete ui;
 }
 
-void SatellitesDialog::languageChanged()
+void SatellitesDialog::retranslate()
 {
 	if (dialog)
 	{
@@ -81,7 +81,8 @@ void SatellitesDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
+	        this, SLOT(retranslate()));
 
 	// Settings tab / updates group
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));

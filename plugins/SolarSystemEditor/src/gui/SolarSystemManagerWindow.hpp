@@ -44,7 +44,7 @@ public:
 	virtual ~SolarSystemManagerWindow();
 
 public slots:
-	void languageChanged();
+	void retranslate();
 
 protected:
 	virtual void createDialogContent();

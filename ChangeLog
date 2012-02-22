@@ -16,6 +16,7 @@ Satellites plug-in:
 - catalog number and international designator are now displayed for each satellite
 - a simple windows to add satellites has been added (LP: #898476)
 
+Added Ctrl+C binding to copy selected object info text to clipboard.
 Added to the Windows installer options to remove files left over from the previous installation.
 Windows no longer can be dragged to unreachable positions.
 The "Save settings" button now saves the current main window position, too.
@@ -26,6 +27,7 @@ Added the StelGui::getSkyGui() method to allow plug-in developers to create thei
 Added an option to show the galactic coordinates grid and the galactic plane.
 Added several trans-Neptunian objects (TNOs): Sedna, Quaoar, Orcus, Haumea.
 Added the Quasars plug-in.
+Added the Pulsars plug-in.
 More detailed information is now added to the log file for Mac OS X.
 Added (experimental) modelling of athmospheric extinction for point objects.
 Changed the position of the text in the Text User Interface plug-in. (LP: #911594)

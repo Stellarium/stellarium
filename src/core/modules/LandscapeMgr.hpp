@@ -2,6 +2,7 @@
  * Stellarium
  * Copyright (C) 2006 Fabien Chereau
  * Copyright (C) 2010 Bogdan Marinov (add/remove landscapes feature)
+ * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,6 +41,22 @@ class QSettings;
 class LandscapeMgr : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool atmosphereDisplayed
+			   READ getFlagAtmosphere
+			   WRITE setFlagAtmosphere
+			   NOTIFY atmosphereDisplayedChanged)
+	Q_PROPERTY(bool cardinalsPointsDisplayed
+			   READ getFlagCardinalsPoints
+			   WRITE setFlagCardinalsPoints
+			   NOTIFY cardinalsPointsDisplayedChanged)
+	Q_PROPERTY(bool fogDisplayed
+			   READ getFlagFog
+			   WRITE setFlagFog
+			   NOTIFY fogDisplayedChanged)
+	Q_PROPERTY(bool landscapeDisplayed
+			   READ getFlagLandscape
+			   WRITE setFlagLandscape
+			   NOTIFY landscapeDisplayedChanged)
 
 public:
 	LandscapeMgr();
@@ -134,12 +151,12 @@ public slots:
 	//! Get flag for displaying Landscape.
 	bool getFlagLandscape() const;
 	//! Set flag for displaying Landscape.
-	void setFlagLandscape(bool b);
+	void setFlagLandscape(const bool displayed);
 
 	//! Get flag for displaying Fog.
 	bool getFlagFog() const;
 	//! Set flag for displaying Fog.
-	void setFlagFog(bool b);
+	void setFlagFog(const bool displayed);
 
 	//! Return the value of the flag determining if a change of landscape will update the observer location.
 	bool getFlagLandscapeSetsLocation() const {return flagLandscapeSetsLocation;}
@@ -149,7 +166,7 @@ public slots:
 	//! Get flag for displaying Cardinals Points.
 	bool getFlagCardinalsPoints() const;
 	//! Set flag for displaying Cardinals Points.
-	void setFlagCardinalsPoints(bool b);
+	void setFlagCardinalsPoints(const bool displayed);
 
 	//! Get Cardinals Points color.
 	Vec3f getColorCardinalPoints() const;
@@ -159,7 +176,7 @@ public slots:
 	//! Get flag for displaying Atmosphere.
 	bool getFlagAtmosphere() const;
 	//! Set flag for displaying Atmosphere.
-	void setFlagAtmosphere(bool b);
+	void setFlagAtmosphere(const bool displayed);
 
 	//! Get atmosphere fade duration in s.
 	float getAtmosphereFadeDuration() const;
@@ -252,6 +269,11 @@ public slots:
 	quint64 loadLandscapeSize(QString landscapeID);
 
 signals:
+	void atmosphereDisplayedChanged(const bool displayed);
+	void cardinalsPointsDisplayedChanged(const bool displayed);
+	void fogDisplayedChanged(const bool displayed);
+	void landscapeDisplayedChanged(const bool displayed);
+
 	//! Emitted when a landscape has been installed or un-installed.
 	//! For example, it is used to update the list of landscapes in
 	//! the Sky and viewing options window (the ViewDialog class)

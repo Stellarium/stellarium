@@ -36,7 +36,7 @@ public:
 	void styleChanged();
 
 public slots:
-	void languageChanged();
+	void retranslate();
 	void runScript();
 	void loadScript();
 	void saveScript();

@@ -86,6 +86,9 @@ private:
 	static StelTextureSP hintTexture;
 
 	void draw(StelCore* core, StelPainter& painter);
+	//! Calculate a color of quasar
+	//! @param b_v value of B-V color index
+	unsigned char BvToColorIndex(float b_v);
 
 	// Quasar
 	QString designation;		//! The ID of the quasar

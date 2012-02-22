@@ -35,6 +35,8 @@ function saveState(stateName)
 	savedStates[stateName]["GridLinesMgrFlagEclipticLine"] = GridLinesMgr.getFlagEclipticLine();
 	savedStates[stateName]["GridLinesMgrFlagMeridianLine"] = GridLinesMgr.getFlagMeridianLine();
 	savedStates[stateName]["GridLinesMgrFlagEquatorJ2000Grid"] = GridLinesMgr.getFlagEquatorJ2000Grid();
+	savedStates[stateName]["GridLinesMgrFlagGalacticGrid"] = GridLinesMgr.getFlagGalacticGrid();
+	savedStates[stateName]["GridLinesMgrFlagGalacticPlaneLine"] = GridLinesMgr.getFlagGalacticPlaneLine();
 	savedStates[stateName]["ConstellationMgrFlagLines"] = ConstellationMgr.getFlagLines();
 	savedStates[stateName]["ConstellationMgrFlagLabels"] = ConstellationMgr.getFlagLabels(); 
 	savedStates[stateName]["ConstellationMgrFlagBoundaries"] = ConstellationMgr.getFlagBoundaries(); 
@@ -63,7 +65,6 @@ function saveState(stateName)
 	savedStates[stateName]["StelSkyDrawerFlagPointStar"] = StelSkyDrawer.getFlagPointStar();
 	savedStates[stateName]["StelSkyDrawerBortleScale"] = StelSkyDrawer.getBortleScale();
 	savedStates[stateName]["StelSkyDrawerFlagLuminanceAdaptation"] = StelSkyDrawer.getFlagLuminanceAdaptation();
-	savedStates[stateName]["StelSkyImageMgr"] = StelSkyImageMgr.getFlagShow();
 	savedStates[stateName]["MountMode"] = core.getMountMode();
 	savedStates[stateName]["NightMode"] = core.getNightMode();
 	savedStates[stateName]["ProjectionMode"] = core.getProjectionMode();
@@ -135,6 +136,8 @@ function restoreState(stateName, options)
 	GridLinesMgr.setFlagEclipticLine(savedStates[stateName]["GridLinesMgrFlagEclipticLine"]);
 	GridLinesMgr.setFlagMeridianLine(savedStates[stateName]["GridLinesMgrFlagMeridianLine"]);
 	GridLinesMgr.setFlagEquatorJ2000Grid(savedStates[stateName]["GridLinesMgrFlagEquatorJ2000Grid"]);
+	GridLinesMgr.setFlagGalacticGrid(savedStates[stateName]["GridLinesMgrFlagGalacticGrid"]);
+	GridLinesMgr.setFlagGalacticPlaneLine(savedStates[stateName]["GridLinesMgrFlagGalacticPlaneLine"]);
 	ConstellationMgr.setFlagLines(savedStates[stateName]["ConstellationMgrFlagLines"]);
 	ConstellationMgr.setFlagLabels(savedStates[stateName]["ConstellationMgrFlagLabels"]);
 	ConstellationMgr.setFlagBoundaries(savedStates[stateName]["ConstellationMgrFlagBoundaries"]);
@@ -163,7 +166,6 @@ function restoreState(stateName, options)
 	StelSkyDrawer.setFlagPointStar(savedStates[stateName]["StelSkyDrawerFlagPointStar"]);
 	StelSkyDrawer.setBortleScale(savedStates[stateName]["StelSkyDrawerBortleScale"]);
 	StelSkyDrawer.setFlagLuminanceAdaptation(savedStates[stateName]["StelSkyDrawerFlagLuminanceAdaptation"]);
-	StelSkyImageMgr.setFlagShow(savedStates[stateName]["StelSkyImageMgr"]);
 	core.setMountMode(savedStates[stateName]["MountMode"]);
 	core.setNightMode(savedStates[stateName]["NightMode"]);
 	core.setProjectionMode(savedStates[stateName]["ProjectionMode"]);

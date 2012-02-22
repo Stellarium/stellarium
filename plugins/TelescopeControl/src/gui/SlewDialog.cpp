@@ -49,7 +49,7 @@ SlewDialog::~SlewDialog()
 	delete ui;
 }
 
-void SlewDialog::languageChanged()
+void SlewDialog::retranslate()
 {
 	if (dialog)
 		ui->retranslateUi(dialog);
@@ -60,7 +60,7 @@ void SlewDialog::createDialogContent()
 	ui->setupUi(dialog);
 	
 	//Inherited connect
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	connect(ui->radioButtonHMS, SIGNAL(toggled(bool)), this, SLOT(setFormatHMS(bool)));
