@@ -226,10 +226,10 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
                                );
             for (int i=0; i<16; ++i)
             {
-                if (!conversionOK[i]) qDebug() << "WARNING: scenery3d.ini: element " << i+1 << " of obj2grid_trafo invalid, set zo zero.";
+                if (!conversionOK[i]) qWarning() << "WARNING: scenery3d.ini: element " << i+1 << " of obj2grid_trafo invalid, set zo zero.";
             }
         }
-        else qDebug() << "obj2grid_trafo invalid: not 16 comma-separated elements";
+        else qWarning() << "obj2grid_trafo invalid: not 16 comma-separated elements";
     }
     // Find a rotation around vertical axis, most likely required by meridian convergence.
     double rot_z=0.0;
@@ -252,12 +252,12 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
             }
             else
             {
-                qDebug() << "scenery3d.ini: Convergence angle \"from_grid\" requires location section!";
+                qWarning() << "scenery3d.ini: Convergence angle \"from_grid\" requires location section!";
             }
         }
         else
         {
-            qDebug() << "scenery3d.ini: Convergence angle \"from_grid\": cannot compute without grid_meridian!";
+            qWarning() << "scenery3d.ini: Convergence angle \"from_grid\": cannot compute without grid_meridian!";
         }
 
 
@@ -266,7 +266,6 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
     }
     // We must apply also a 90 degree rotation, plus convergence(rot_z)
     zRotateMatrix = Mat4d::zrotation(M_PI/2.0 + rot_z);
-    //zRotateMatrix = Mat4d::zrotation( rot_z);
 
     // At last, find start points.
     Vec3d worldPosition;
@@ -551,10 +550,9 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
             // GZ: This should enable specular color effects with colored and textured models.
             glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SEPARATE_SPECULAR_COLOR); // test how expensive this is.
             glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 1); // Useful for Specular effects, change to 0 if too expensive
-
         } else {
-            glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SINGLE_COLOR); // test how expensive this is.
-            glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 0); // Useful for Specular effects, change to 0 if too expensive
+            glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SINGLE_COLOR);
+            glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 0);
         }
 
         if(stelModel.texture)

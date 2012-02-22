@@ -113,20 +113,23 @@ Geometry&Yes\\Lights&Yes\\Clay&No\\Photomatched&Yes\\DefaultUVs&No\\Instanced&No
 
 
 %(Or, with selection enabled, make sure settings are No-Yes-Yes-No-Yes-No-No).  
-You do not have to launch Kerkythea. Then,
-use the \filename{KT2OBJ} converter to create an OBJ.  You can delete the XML
+You do not have to launch Kerkythea unless you want to create nice renderings of your model. 
+Then, use the \filename{KT2OBJ} converter to create an OBJ.  You can delete the XML
 after the conversion.  Note that some texture coordinates may not be
 exported correctly. The setting Photomatched:Yes seems now to have
 corrected this issue, esp. with distorted/manu\-ally shifted textures.
 
-Recently, another free OBJ exporter has been made available by user
-TIG: \filename{OBJexporter.rb}. This is the only OBJ exporter capable
-of handling large TIN landscapes ($>300.000$ triangles). As of version
-1.6 it appears to have valid texture coordinates, but I have
-experienced problems with black faces which need more
-investigation. Maybe you can combine two OBJ files with another 3D
-editor after creating individual OBJs if this is a problem. This
-exporter swaps Y/Z coordinates, but you can add a key to the config
+Recently, another free OBJ exporter has been made available by 
+TIG: \filename{OBJexporter.rb}\footnote{Available from \url{http://forums.sketchucation.com/viewtopic.php?f=323&t=33448}}. 
+This is the only OBJ exporter capable of handling large TIN landscapes ($>450.000$ triangles). 
+As of version 2.6 it seems to be the best OBJ exporter available for Sketchup. 
+
+%As of version 1.6 it appears to have valid texture coordinates, but I have
+%experienced problems with black faces which need more
+%investigation. Maybe you can combine two OBJ files with another 3D
+%editor after creating individual OBJs if this is a problem. 
+
+This exporter swaps Y/Z coordinates, but you can add a key to the config
 file to correct swapped axes, see below. Other exporters may also
 provide coordinates in any order of X, Y, Z -- all those can be
 properly configured.
@@ -144,18 +147,40 @@ coordinates and cannot be recommended at this time.
 \label{sec:OBJlimitations}
 
 The OBJ format supported is only a subset of the full OBJ format: Only
-(textured) triangle meshes are supported, i.e., only lines containing statements:  
+(optionally textured) triangle meshes are supported, i.e., only lines containing statements:  
 \cmd{mtllib}, \cmd{usemtl}, \cmd{v}, \cmd{vn}, \cmd{vt}, \cmd{f} (with three elements only!), \cmd{g}.
 Negative vertex numbers (i.e., a specification of relative positions) are not supported.
 
-A further requirement for correct illumination is that all vertices must have
-vertex normals. Sketchup models exported with the Kerkythea plugin
-should have correct normals. If you model does not provide them, you
-can add vertex normals using e.g. meshlab (\url{http://www.meshlab.org}).  
+A further recommendation for correct illumination is that all vertices should  have
+vertex normals. Sketchup models exported with the Kerkythea or TIG plugins
+should have correct normals. If your model does not provide them, 
+default normals will be reconstructed from the triangle edges, resulting in a faceted look.
 
 Every \cmd{usemtl} statement must come after a \cmd{g} (group) statement and sets
 the material for the respective face group. If necessary, you must
 edit your OBJ file.
+
+The MTL file contains the material parameters. The minimum that should be specified is 
+either \cmd{map\_Kd} or a \cmd{Kd} line specifying color values used for the respective faces. But there are 
+other options in MTL files, and the supported parameters and defaults are listed in Table~\ref{tab:MTL}.
+
+\begin{table}
+\begin{tabular}{llll}
+Parameter&Default      &Range     & Meaning\\
+Ka       &0.2 0.2 0.2  & 0..1 each& R/G/B Ambient color\\
+Kd       &0.8 0.8 0.8  & 0..1 each& R/G/B Diffuse color\\
+Ks       &0.0 0.0 0.0  & 0..1 each& R/G/B Specular color\\
+Ns       &0.0          & 0...128  & shinyness \\
+d        &1.0          & 0..1     & opacity \\
+illum    &0            & 0, 1, 2  & 0: Ka=Kd, Ns=0 \\
+         &             &          & 1: Kd, Ka as given, Ns=0\\
+         &             &          & 2: Kd, Ka, Ks, Ns as given, glossy highlights\\
+map\_Kd  & (none)      & filename & texture map to be mixed with Ka, Kd \\
+map\_bump& (none)      & filename & normal map for surface roughness  
+\end{tabular}
+\caption{MTL parameters evaluated}
+\label{tab:MTL}
+\end{table}
 
 On reasonably good hardware (tested on a notebook PC with NVidia M9800
 GTS), models up to 100.000 triangles are fluent, up to 250.000 are
@@ -400,12 +425,12 @@ AWK.
 
 
 Scenery3d was conceived by Georg Zotti for the Astrosim project. It
-was implemented (mostly) in 2010/2011 by Simon Parzer and Peter
+was implemented originally in 2010/2011 by Simon Parzer and Peter
 Neubauer as student work supervised by Michael Wimmer (TU
 Wien). Improvements in integration, user interaction, .ini option
 handling, OBJ/MTL loader bugfixes and georeference testing by Georg
 Zotti. Andrei Borza (again supervised by Michael Wimmer) in 2011
-further improved rendering quality and speed.
+further improved rendering quality (shadow mapping, normal mapping) and speed.
 
 This work has been created during the ASTROSIM project supported
 2008-2011 by the Austrian Science Fund (FWF) under grant number

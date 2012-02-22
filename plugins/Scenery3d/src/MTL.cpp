@@ -111,6 +111,13 @@ void MTL::load(const char *filename)
                         curMaterial->shininess = parseFloat(parts[1]);
                     }
                 }
+                else if (parts[0] == "d" && matOpen)
+                {
+                    if (parts.size() > 1)
+                    {
+                        curMaterial->opacity = parseFloat(parts[1]);
+                    }
+                }
                 else if (parts[0] == "illum" && matOpen)
                 {
                     if (parts.size() > 1)
