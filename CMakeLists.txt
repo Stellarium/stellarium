@@ -60,7 +60,19 @@ IF(BUILD_FOR_ANDROID)
   #todo: actually optimize. And rip most of the stuff out of the shell scripts that doesn't need to be in there...
   SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DANDROID -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024")
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DANDROID -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024")
+
+  #configure the mobile GUI plugin
+  SET(EXTERNAL_GUI_SRC_PATH "../plugins/MobileGui" CACHE PATH "The location of the plugin main directory i.e. the one containing the top level CMakeLists.txt")
+  SET(GUI_MODE External CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
 ENDIF()
+
+#IF (GUI_MODE STREQUAL "External")
+#	SET(EXTERNAL_GUI_SRC_PATH "../../MyGui/" CACHE PATH "The location of the plugin main directory i.e. the one containing the top level CMakeLists.txt")
+#	ADD_SUBDIRECTORY( ${EXTERNAL_GUI_SRC_PATH} externalGui )
+#	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/src/externalGui/src/libExternalGui.a)
+#	SET(EXTERNAL_GUI_PLUGIN_EXTRALIBS CACHE STRING "Additionnal link options needed for the GUI plugin")
+#	SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} ${EXTERNAL_GUI_PLUGIN_EXTRALIBS})
+#ENDIF()
 
 # best way to get to APPLE?
 IF(APPLE)
