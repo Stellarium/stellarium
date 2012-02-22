@@ -122,7 +122,7 @@ void MTL::load(const char *filename)
                 {
                     if (parts.size() > 1)
                     {
-                        curMaterial->illum = (MTL::Illum)  qMin((unsigned int)2, parseInt(parts[1]));
+                        curMaterial->illum = (MTL::Illum) parseInt(parts[1]); //  qMin((unsigned int)2, parseInt(parts[1]));
                     }
                 }
             }

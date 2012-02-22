@@ -532,37 +532,42 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
 
         if(textures) sendToShader(stelModel, curEffect);
 
-        glMaterialfv(GL_FRONT, GL_DIFFUSE,   stelModel.diffuseColor.v);
-        glMaterialfv(GL_FRONT, GL_AMBIENT,   stelModel.ambientColor.v);
-        glMaterialfv(GL_FRONT, GL_SPECULAR,  stelModel.specularColor.v);
-        glMaterialf( GL_FRONT, GL_SHININESS, stelModel.shininess);
+        if (stelModel.illum == MTL::TRANSLUCENT) {
+            //qDebug() << "Translucent!";
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            glColor4f(stelModel.diffuseColor.v[0], stelModel.diffuseColor.v[1], stelModel.diffuseColor.v[2], 0.1); //stelModel.opacity);
+        } else {
+            glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, stelModel.diffuseColor.v); // most likely
+            glMaterialfv(GL_FRONT, GL_SPECULAR,  zero);
+            glMaterialf( GL_FRONT, GL_SHININESS, 0.0f);
+        }
 
-        if (stelModel.illum == MTL::DIFFUSE){ // typical case: only Kd given. Here, set ambient=diffuse
-        glMaterialfv(GL_FRONT, GL_AMBIENT,   stelModel.diffuseColor.v);
-        glMaterialfv(GL_FRONT, GL_SPECULAR,  zero);
-        glMaterialf( GL_FRONT, GL_SHININESS, 0.0f);
+        if (stelModel.illum == MTL::DIFFUSE_AND_AMBIENT){ // If you know what you're doing! [Note the reversed logic!]
+            glMaterialfv(GL_FRONT, GL_AMBIENT,   stelModel.ambientColor.v);
         }
-        if (stelModel.illum == MTL::DIFFUSE_AND_AMBIENT){ // If you know what you're doing:
-        glMaterialfv(GL_FRONT, GL_SPECULAR,  zero);
-        glMaterialf( GL_FRONT, GL_SHININESS, 0.0f);
-        }
+
         if (stelModel.illum == MTL::SPECULAR){ // for special cases.
             // GZ: This should enable specular color effects with colored and textured models.
+            glMaterialfv(GL_FRONT, GL_SPECULAR,  stelModel.specularColor.v);
+            glMaterialf( GL_FRONT, GL_SHININESS, stelModel.shininess);
             glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SEPARATE_SPECULAR_COLOR); // test how expensive this is.
             glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 1); // Useful for Specular effects, change to 0 if too expensive
         } else {
             glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SINGLE_COLOR);
             glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 0);
         }
-
-        if(stelModel.texture)
-        {
+        if(stelModel.texture) {
             painter.setArrays(stelModel.vertices, stelModel.texcoords, NULL, stelModel.normals);
-        } else
-        {
+        } else if (stelModel.illum == MTL::TRANSLUCENT) {
+            painter.setArrays(stelModel.vertices, NULL, NULL, NULL);
+        } else {
             painter.setArrays(stelModel.vertices, NULL, NULL, stelModel.normals);
         }
         painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);
+        if (stelModel.illum == MTL::TRANSLUCENT){
+            glDisable(GL_BLEND);
+        }
     }
 }
 

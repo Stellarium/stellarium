@@ -365,6 +365,13 @@ void OBJ::transform(Mat4d mat)
         mat.transfo(v);
         *it = (Vertex) { v[0], v[1], v[2] };
     }
+    // GZ 2012-02-21: and tangents...
+    //for (std::vector<Vertex>::iterator it = tangents.begin(); it != tangents.end(); it++)
+    //{
+    //    Vec3d v = Vec3d(it->x, it->y, it->z);
+    //    mat.transfo(v);
+    //    *it = (Vertex) { v[0], v[1], v[2] };
+    //}
 }
 
 void OBJ::calcTangents(Model* model, StelModel* stelModel)
