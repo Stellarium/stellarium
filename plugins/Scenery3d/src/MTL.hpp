@@ -20,11 +20,12 @@ class MTL
         //! Struct for holding a material definition.
         struct Material { // The initial values are the OpenGL defaults.
             Material() : diffuse(0.8f, 0.8f, 0.8f, 1.0f), ambient(0.2f, 0.2f, 0.2f, 1.0f), specular(0.0f,0.0f,0.0f, 1.0f),
-                         shininess(0.0f), illum(DIFFUSE), texture(), bump_texture() {}
+                         shininess(0.0f), opacity(1.0f), illum(DIFFUSE), texture(), bump_texture() {}
             Color diffuse;   //!< Material diffuse color.
             Color ambient;   //!< Ambient color.
             Color specular;  //!< Specular color.
-            float shininess; //!< Material shininess factor.
+            float shininess; //!< Material shininess factor. (0..128)
+            float opacity;   //!< Material opacity (0..1)
             Illum illum;     //!< illumination model to be used with this material. See http://en.wikipedia.org/wiki/Wavefront_.obj_file, "illum"
             std::string texture; //!< Filename of the texture file.
             std::string bump_texture; //!< Filename of the bump map texture file.

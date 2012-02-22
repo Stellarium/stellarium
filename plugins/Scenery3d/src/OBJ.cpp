@@ -277,8 +277,9 @@ vector<OBJ::StelModel> OBJ::getStelArrays()
         stelModel.diffuseColor  = material->diffuse;
         stelModel.ambientColor  = material->ambient;
         stelModel.specularColor = material->specular;
-        stelModel.shininess = qMin(128.0f, material->shininess);
-        stelModel.illum = material->illum;
+        stelModel.shininess     = qMin(128.0f, material->shininess);
+        stelModel.opacity       = material->opacity;
+        stelModel.illum         = material->illum;
         stelModel.vertices      = new Vec3d[stelModel.triangleCount * 3];
         stelModel.texcoords     = new Vec2f[stelModel.triangleCount * 3];
         stelModel.normals       = new Vec3f[stelModel.triangleCount * 3];
@@ -310,7 +311,7 @@ vector<OBJ::StelModel> OBJ::getStelArrays()
                 three++;
                 i++;
             }
-            // GZ: RECONSTRUCT 3 VERTEX NORMALS FROM FACE EDGES IF LAST NORMALS ARE 0/0/0.
+            // GZ: reconstruct 3 vertex normals from face edges if last 3 were 0/0/0.
             if ((stelModel.normals[i-1]==Vec3f(0.0f, 0.0f, 0.0f)) && (stelModel.normals[i-2]==Vec3f(0.0f, 0.0f, 0.0f)) && (stelModel.normals[i-3]==Vec3f(0.0f, 0.0f, 0.0f) )) {
                 Vec3d edge1=stelModel.vertices[i-2]-stelModel.vertices[i-3];
                 Vec3d edge2=stelModel.vertices[i-1]-stelModel.vertices[i-2];
@@ -336,6 +337,8 @@ vector<OBJ::StelModel> OBJ::getStelArrays()
         stelModels.push_back(stelModel);
         stelModel = StelModel();
     }
+    // TODO: SORT stelModels BY DECREASING OPACITY
+
     return stelModels;
 }
 

@@ -30,7 +30,7 @@ class OBJ
         //! GZ TODO: Avoid copying MTL Material items into this, just take the Material directly!
         struct StelModel {
             StelModel() : texture(), bump_texture(), diffuseColor(0.8f, 0.8f, 0.8f, 1.0f),
-                          ambientColor(0.2f, 0.2f, 0.2f, 1.0f), specularColor(0.0f, 0.0f, 0.0f, 1.0f), shininess(0.0f),
+                          ambientColor(0.2f, 0.2f, 0.2f, 1.0f), specularColor(0.0f, 0.0f, 0.0f, 1.0f), shininess(0.0f), opacity(1.0f),
                           vertices(NULL), normals(NULL), texcoords(NULL) {}
             long triangleCount; //!< Total number of triangles in the model.
             StelTextureSP texture;      //!< Shared pointer to texture of the model. This can be null.
@@ -39,11 +39,12 @@ class OBJ
             Vec4f ambientColor;  //!< "Background" color of the model. The default value is (0.2, 0.2, 0.2, 1.0) and should be set to the MTL Ka
             Vec4f specularColor; //!< Highlight color of the model. The default value is (0.0, 0.0, 0.0, 1.0) and should be set to the MTL Ks
             float shininess;  //!< Specular exponent of the model. The default value is 0 and should be set to the MTL Ns [0..128]
+            float opacity;    //!< Opacity of the material. If <1, the resulting color will be mixed with the underlying.
             MTL::Illum illum; //!< illumination model, copied from Material.
             Vec3d* vertices;  //!< Vertices array. Length is triangleCount * 3.
             Vec3f* normals;   //!< Normals array. Length is triangleCount * 3.
             Vec2f* texcoords; //!< Texcoords array. Length is triangleCount * 3.
-            Vec3f* tangents; //!< Tanget array. Length is triangleCount * 3.
+            Vec3f* tangents; //!< Tangent array. Length is triangleCount * 3.
         };
 
         //! Load mesh data from an .obj file.
