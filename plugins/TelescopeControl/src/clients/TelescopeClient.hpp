@@ -34,9 +34,10 @@
 #include <QObject>
 
 #include "StelApp.hpp"
-#include "StelCore.hpp" //Needed for getting StelNavigator instances
 #include "StelObject.hpp"
 #include "InterpolatedPosition.hpp"
+
+class StelCore;
 
 qint64 getNow(void);
 
@@ -91,7 +92,7 @@ protected:
 	const QString name;
 private:
 	virtual bool isInitialized(void) const {return true;}
-	float getSelectPriority(const StelNavigator*) const {return -10.f;}
+	float getSelectPriority(const StelCore* core) const {Q_UNUSED(core); return -10.f;}
 private:
 	QList<double> oculars; // fov of the oculars
 };
