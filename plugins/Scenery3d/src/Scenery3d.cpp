@@ -534,20 +534,25 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
 
         if (stelModel.illum == MTL::TRANSLUCENT) {
             //qDebug() << "Translucent!";
+            glMaterialfv(GL_FRONT, GL_SPECULAR,  zero);
+            glMaterialf( GL_FRONT, GL_SHININESS, 0.0f);
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            glColor4f(stelModel.diffuseColor.v[0], stelModel.diffuseColor.v[1], stelModel.diffuseColor.v[2], 0.1); //stelModel.opacity);
+            glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+            glEnable(GL_COLOR_MATERIAL);
+            glColor4f(stelModel.diffuseColor.v[0], stelModel.diffuseColor.v[1], stelModel.diffuseColor.v[2], stelModel.opacity);
         } else {
             glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, stelModel.diffuseColor.v); // most likely
             glMaterialfv(GL_FRONT, GL_SPECULAR,  zero);
             glMaterialf( GL_FRONT, GL_SHININESS, 0.0f);
         }
 
-        if (stelModel.illum == MTL::DIFFUSE_AND_AMBIENT){ // If you know what you're doing! [Note the reversed logic!]
+        if (stelModel.illum == MTL::DIFFUSE_AND_AMBIENT){ // May make funny effects! [Note the reversed logic!]
             glMaterialfv(GL_FRONT, GL_AMBIENT,   stelModel.ambientColor.v);
         }
 
         if (stelModel.illum == MTL::SPECULAR){ // for special cases.
+            glMaterialfv(GL_FRONT, GL_AMBIENT,   stelModel.ambientColor.v);
             // GZ: This should enable specular color effects with colored and textured models.
             glMaterialfv(GL_FRONT, GL_SPECULAR,  stelModel.specularColor.v);
             glMaterialf( GL_FRONT, GL_SHININESS, stelModel.shininess);
@@ -559,14 +564,15 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
         }
         if(stelModel.texture) {
             painter.setArrays(stelModel.vertices, stelModel.texcoords, NULL, stelModel.normals);
-        } else if (stelModel.illum == MTL::TRANSLUCENT) {
-            painter.setArrays(stelModel.vertices, NULL, NULL, NULL);
+        //} else if (stelModel.illum == MTL::TRANSLUCENT) {
+        //    painter.setArrays(stelModel.vertices, NULL, NULL, NULL);
         } else {
             painter.setArrays(stelModel.vertices, NULL, NULL, stelModel.normals);
         }
         painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);
         if (stelModel.illum == MTL::TRANSLUCENT){
             glDisable(GL_BLEND);
+            glDisable(GL_COLOR_MATERIAL);
         }
     }
 }
