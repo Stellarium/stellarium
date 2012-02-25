@@ -1,3 +1,13 @@
+0.7.1 [2012-01-08]
+Added basic GUI for adding satellites from TLE lists.
+Added CelesTrak's tle-new.txt to the default sources list to make adding fresh
+satellites easier.
+
+0.7.0 [2011-12-13]
+Use catalog number instead of satellite name as an identifier.
+Save dates as proper JSON strings (before they broke stricter parsers).
+Display the catalog number and the International Designator in the info field.
+
 0.6.4 [2010-11-18]
 Add ability to update TLE data from files.
 Better docuentation in the About tab.

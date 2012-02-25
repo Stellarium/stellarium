@@ -524,11 +524,11 @@ QGroupBox::indicator:unchecked {
 	image: url(:/graphicGui/nv_checkbox-unchecked.png);
 }
 
-QListWidget::indicator::checked {
+QListWidget::indicator:checked, QListView::indicator:checked {
 	image: url(:/graphicGui/nv_checkbox-checked.png);
 }
 
-QListWidget::indicator:unchecked {
+QListWidget::indicator:unchecked, QListView::indicator:unchecked {
 	image: url(:/graphicGui/nv_checkbox-unchecked.png);
 }
 
@@ -787,4 +787,8 @@ QHeaderView::section {
 
 QFileDialog {
 	background: rgb(35, 0, 0);
+}
+/**** The following are used for Satellites ****/
+QListWidget#satellitesList, QListWidget#sourceList {
+		font-size: 8pt;
 }

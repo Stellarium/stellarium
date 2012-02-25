@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _LANDSCAPE_HPP_
@@ -52,14 +52,14 @@ public:
 	}
 
 	//! Set the brightness of the landscape
-	void setBrightness(float b) {skyBrightness = b;}
+	void setBrightness(const float b) {skyBrightness = b;}
 
 	//! Set whether landscape is displayed (does not concern fog)
-	void setFlagShow(bool b) {landFader=b;}
+	void setFlagShow(const bool b) {landFader=b;}
 	//! Get whether landscape is displayed (does not concern fog)
 	bool getFlagShow() const {return (bool)landFader;}
 	//! Set whether fog is displayed
-	void setFlagShowFog(bool b) {fogFader=b;}
+	void setFlagShowFog(const bool b) {fogFader=b;}
 	//! Get whether fog is displayed
 	bool getFlagShowFog() const {return (bool)fogFader;}
 	//! Get landscape name

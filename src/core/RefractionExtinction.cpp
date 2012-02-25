@@ -14,23 +14,27 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  *
  * Refraction and extinction computations.
  * Principal implementation: 2010-03-23 GZ=Georg Zotti, Georg.Zotti@univie.ac.at
  */
 
+#include <qsettings.h>
+#include "StelApp.hpp"
 #include "RefractionExtinction.hpp"
 
 
 // To be decided: The following should be either 0 or 40 (or 42? ;-)
-const float Extinction::SUBHORIZONTAL_AIRMASS=0.0f;
+float Extinction::SUBHORIZONTAL_AIRMASS=0.0f;
 
 Extinction::Extinction() : ext_coeff(0.20f)
 {
+    QSettings* conf = StelApp::getInstance().getSettings();
+    SUBHORIZONTAL_AIRMASS = (conf->value("astro/flag_extinction_below_horizon", true).toBool()? 42.0f : 0.0f);
 }
 
-//  altAzPos is the normalized star position vector AFTER REFRACTION, and its z component sin(altitude).
+//  altAzPos is the NORMALIZED (!!!) star position vector AFTER REFRACTION, and its z component sin(altitude).
 void Extinction::forward(const Vec3d *altAzPos, float *mag, const int num) const
 {
 	for (int i=0; i<num; ++i) mag[i] += airmass(altAzPos[i][2], true) * ext_coeff;
@@ -47,6 +51,14 @@ void Extinction::forward(const double *sinAlt, float *mag, const int num) const
 void Extinction::forward(const float *sinAlt, float *mag, const int num) const
 {
 	for (int i=0; i<num; ++i) mag[i] += airmass(sinAlt[i], true) * ext_coeff;
+}
+void Extinction::forward(const double *sinAlt, float *mag) const
+{
+	*mag += airmass(*sinAlt, true) * ext_coeff;
+}
+void Extinction::forward(const float *sinAlt, float *mag) const
+{
+	*mag += airmass(*sinAlt, true) * ext_coeff;
 }
 // from observed magnitude in apparent (observed) altitude to atmosphere-free mag, still in apparent, refracted altitude.
 void Extinction::backward(const Vec3d *altAzPos, float *mag, const int num) const
@@ -70,7 +82,7 @@ void Extinction::backward(const float *sinAlt, float *mag, const int num) const
 // airmass computation for cosine of zenith angle z
 float Extinction::airmass(const float cosZ, const bool apparent_z) const
 {
-	if (cosZ<-0.035f)
+	if (cosZ<-0.035f) // about -2 degrees. Here, RozenbergZ>574 and climbs fast!
 	    return Extinction::SUBHORIZONTAL_AIRMASS; // Safety: 0 or 40 for below -2 degrees.
 
 	float X;
@@ -89,6 +101,7 @@ float Extinction::airmass(const float cosZ, const bool apparent_z) const
 	return X;
 }
 
+/* ***************************************************************************************************** */
 
 // The following 4 are to be configured, the rest is derived.
 // Recommendations: -4.9/-4.3/0.1/0.1: sharp but continuous transition, no effects below -5.

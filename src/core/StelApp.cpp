@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "StelApp.hpp"
@@ -158,14 +158,20 @@ void StelApp::setupHttpProxy()
 			QString proxyString = QString(httpProxyEnv);
 			if (!proxyString.isEmpty())
 			{
-				// Regular expressions with multiple optional sub-expressions are so unreadable  --MNG
-				QRegExp pre("^http://((([^:]+):([^@]+))@)?([^:]+)(:(\\d+))?");
-				if (pre.exactMatch(proxyString))
+				// Handle http_proxy of the form
+				// proto://username:password@fqdn:port
+				// e.g.:
+				// http://usr:pass@proxy.loc:3128/
+				// http://proxy.loc:3128/
+				// http://2001:62a:4:203:6ab5:99ff:fef2:560b:3128/
+				// http://foo:bar@2001:62a:4:203:6ab5:99ff:fef2:560b:3128/
+				QRegExp pre("^([^:]+://)?(?:([^:]+):([^@]*)@)?(.+):([\\d]+)");
+				if (pre.indexIn(proxyString) >= 0)
 				{
-					proxyUser = pre.capturedTexts().at(3);
-					proxyPass = pre.capturedTexts().at(4);
-					proxyHost = pre.capturedTexts().at(5);
-					proxyPort = pre.capturedTexts().at(7);
+					proxyUser = pre.cap(2);
+					proxyPass = pre.cap(3);
+					proxyHost = pre.cap(4);
+					proxyPort = pre.cap(5);
 				}
 				else
 				{
@@ -191,7 +197,7 @@ void StelApp::setupHttpProxy()
 			proxy.setPassword(proxyPass);
 
 		QString ppDisp = proxyPass;
-		ppDisp.replace(QRegExp("."), "x");
+		ppDisp.fill('*');
 		qDebug() << "Using HTTP proxy:" << proxyUser << ppDisp << proxyHost << proxyPort;
 		QNetworkProxy::setApplicationProxy(proxy);
 	}

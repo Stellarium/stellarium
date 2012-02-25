@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _STELOBJECT_HPP_
@@ -25,7 +25,6 @@
 #include "StelObjectType.hpp"
 #include "StelRegionObject.hpp"
 
-class StelNavigator;
 class StelCore;
 
 //! The base abstract class for sky objects used in Stellarium like Stars, Planets, Constellations etc...
@@ -65,7 +64,6 @@ public:
 	virtual ~StelObject() {}
 
 	//! Default implementation of the getRegion method.
-	//! Calling this method on some object will cause an error if they need a valid StelNavigator instance to compute their position.
 	//! Return the spatial region of the object.
 	virtual SphericalRegionP getRegion() const {return SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));}
 
@@ -120,7 +118,7 @@ public:
 	Vec3d getAltAzPosAuto(const StelCore* core) const;
 
 	//! Return object's apparent V magnitude as seen from observer
-	virtual float getVMagnitude(const StelCore*) const {return 99;}
+	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
 
 	//! Return a priority value which is used to discriminate objects by priority
 	//! As for magnitudes, the lower is the higher priority
