@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -14,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "StelMainWindow.hpp"
@@ -259,14 +260,9 @@ int main(int argc, char **argv)
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
-	bool safeMode = false;
-	if (confSettings->value("main/use_qpaintenginegl2", true).toBool() && !qApp->property("onetime_safe_mode").isValid())
-	{
-		// The default is to let Qt choose which paint engine fits the best between OpenGL and OpenGL2.
-		// However it causes troubles on some older hardware, so add an option.
-	}
-	else
-	{
+	bool safeMode = false; // used in Q_OS_WIN, but need the QGL::setPreferredPaintEngine() call here.
+	if (!confSettings->value("main/use_qpaintenginegl2", true).toBool()
+		|| qApp->property("onetime_safe_mode").isValid()) {
 		// The user explicitely request to use the older paint engine.
 		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
 		safeMode = true;
@@ -297,10 +293,11 @@ int main(int argc, char **argv)
 	// Set the default application font and font size.
 	// Note that style sheet will possibly override this setting.
 #ifdef Q_OS_WIN
+
 	// On windows use Verdana font, to avoid unresolved bug with OpenGL1 Qt paint engine.
 	// See Launchpad question #111823 for more info
 	QFont tmpFont(safeMode ? "Verdana" : "DejaVu Sans");
-	tmpFont.setStyleStrategy(QFont::OpenGLCompatible);
+	tmpFont.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);
 
 	// Activate verdana by defaut for all win32 builds to see if it improves things.
 	// -> this seems to bring crippled arabic fonts with OpenGL2 paint engine..

@@ -161,7 +161,7 @@
         <item>
          <widget class="QLabel" name="labelOffset">
           <property name="text">
-           <string>Offset from UTC:</string>
+           <string>Offset from UTC (hours):</string>
           </property>
          </widget>
         </item>
@@ -182,9 +182,6 @@
          <widget class="QDoubleSpinBox" name="doubleSpinBoxOffset">
           <property name="wrapping">
            <bool>true</bool>
-          </property>
-          <property name="suffix">
-           <string> hours</string>
           </property>
           <property name="minimum">
            <double>-24.000000000000000</double>
@@ -259,7 +256,7 @@
               <item>
                <widget class="QCheckBox" name="checkBoxOffsetDst">
                 <property name="text">
-                 <string>DST offset from UTC:</string>
+                 <string>DST offset from UTC (hours):</string>
                 </property>
                </widget>
               </item>
@@ -280,9 +277,6 @@
                <widget class="QDoubleSpinBox" name="doubleSpinBoxOffsetDst">
                 <property name="wrapping">
                  <bool>true</bool>
-                </property>
-                <property name="suffix">
-                 <string> hours</string>
                 </property>
                 <property name="minimum">
                  <double>-24.000000000000000</double>
@@ -322,13 +316,7 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="2">
-             <widget class="QComboBox" name="comboBoxDstStartWeek"/>
-            </item>
-            <item row="1" column="3">
-             <widget class="QComboBox" name="comboBoxDstStartDay"/>
-            </item>
-            <item row="1" column="4">
+            <item row="1" column="5">
              <widget class="QComboBox" name="comboBoxDstStartMonth"/>
             </item>
             <item row="4" column="0" colspan="2">
@@ -338,13 +326,10 @@
               </property>
              </widget>
             </item>
-            <item row="4" column="2" colspan="3">
+            <item row="4" column="2" colspan="4">
              <widget class="QTimeEdit" name="timeEditDstStart">
               <property name="wrapping">
                <bool>true</bool>
-              </property>
-              <property name="displayFormat">
-               <string notr="true">HH:mm:ss</string>
               </property>
               <property name="time">
                <time>
@@ -352,6 +337,9 @@
                 <minute>0</minute>
                 <second>0</second>
                </time>
+              </property>
+              <property name="displayFormat">
+               <string notr="true">HH:mm:ss</string>
               </property>
              </widget>
             </item>
@@ -362,7 +350,7 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="2" colspan="3">
+            <item row="2" column="2" colspan="4">
              <widget class="QFrame" name="frameDstStartDate">
               <layout class="QHBoxLayout" name="horizontalLayout">
                <property name="margin">
@@ -376,6 +364,12 @@
                </item>
               </layout>
              </widget>
+            </item>
+            <item row="1" column="3" colspan="2">
+             <widget class="QComboBox" name="comboBoxDstStartWeek"/>
+            </item>
+            <item row="1" column="2">
+             <widget class="QComboBox" name="comboBoxDstStartDay"/>
             </item>
            </layout>
           </widget>
@@ -402,13 +396,7 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="2">
-             <widget class="QComboBox" name="comboBoxDstEndWeek"/>
-            </item>
-            <item row="1" column="3">
-             <widget class="QComboBox" name="comboBoxDstEndDay"/>
-            </item>
-            <item row="1" column="4">
+            <item row="1" column="5">
              <widget class="QComboBox" name="comboBoxDstEndMonth"/>
             </item>
             <item row="4" column="0" colspan="2">
@@ -418,13 +406,10 @@
               </property>
              </widget>
             </item>
-            <item row="4" column="2" colspan="3">
+            <item row="4" column="2" colspan="4">
              <widget class="QTimeEdit" name="timeEditDstEnd">
               <property name="wrapping">
                <bool>true</bool>
-              </property>
-              <property name="displayFormat">
-               <string notr="true">HH:mm:ss</string>
               </property>
               <property name="time">
                <time>
@@ -432,6 +417,9 @@
                 <minute>0</minute>
                 <second>0</second>
                </time>
+              </property>
+              <property name="displayFormat">
+               <string notr="true">HH:mm:ss</string>
               </property>
              </widget>
             </item>
@@ -442,7 +430,7 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="2" colspan="3">
+            <item row="3" column="2" colspan="4">
              <widget class="QFrame" name="frameDstEndDate">
               <layout class="QHBoxLayout" name="horizontalLayoutDstEndDate">
                <property name="margin">
@@ -456,6 +444,12 @@
                </item>
               </layout>
              </widget>
+            </item>
+            <item row="1" column="3" colspan="2">
+             <widget class="QComboBox" name="comboBoxDstEndWeek"/>
+            </item>
+            <item row="1" column="2">
+             <widget class="QComboBox" name="comboBoxDstEndDay"/>
             </item>
            </layout>
           </widget>
@@ -503,10 +497,10 @@
   <tabstop>lineEditNameDst</tabstop>
   <tabstop>checkBoxOffsetDst</tabstop>
   <tabstop>doubleSpinBoxOffsetDst</tabstop>
-  <tabstop>groupBoxDstStart</tabstop>
   <tabstop>radioButtonDstStartDay</tabstop>
-  <tabstop>comboBoxDstStartWeek</tabstop>
+  <tabstop>groupBoxDstStart</tabstop>
   <tabstop>comboBoxDstStartDay</tabstop>
+  <tabstop>comboBoxDstStartWeek</tabstop>
   <tabstop>comboBoxDstStartMonth</tabstop>
   <tabstop>radioButtonDstStartDate</tabstop>
   <tabstop>spinBoxDstStartDateDay</tabstop>
@@ -515,8 +509,8 @@
   <tabstop>timeEditDstStart</tabstop>
   <tabstop>groupBoxDstEnd</tabstop>
   <tabstop>radioButtonDstEndDay</tabstop>
-  <tabstop>comboBoxDstEndWeek</tabstop>
   <tabstop>comboBoxDstEndDay</tabstop>
+  <tabstop>comboBoxDstEndWeek</tabstop>
   <tabstop>comboBoxDstEndMonth</tabstop>
   <tabstop>radioButtonDstEndDate</tabstop>
   <tabstop>spinBoxDstEndDateDay</tabstop>

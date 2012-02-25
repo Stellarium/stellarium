@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>530</width>
-    <height>501</height>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,12 +22,6 @@
    </property>
    <item>
     <widget class="BarFrame" name="TitleBar">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
      <property name="minimumSize">
       <size>
        <width>530</width>
@@ -36,7 +30,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>530</width>
+       <width>16777215</width>
        <height>25</height>
       </size>
      </property>
@@ -135,11 +129,17 @@
       <attribute name="title">
        <string>Settings</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
+      <layout class="QVBoxLayout" name="verticalLayoutSettungsTab">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="updatesGroup">
          <property name="title">
-          <string>Update TLE elements from Internet sources</string>
+          <string>Update TLE lists from Internet sources</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -148,6 +148,9 @@
           <bool>false</bool>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_12">
+          <property name="margin">
+           <number>0</number>
+          </property>
           <item>
            <widget class="QCheckBox" name="internetUpdatesCheckbox">
             <property name="text">
@@ -200,7 +203,7 @@
             <item row="2" column="0">
              <widget class="QLabel" name="nextUpdateLabel">
               <property name="text">
-               <string>[next update info]</string>
+               <string notr="true">[next update info]</string>
               </property>
              </widget>
             </item>
@@ -240,36 +243,35 @@
          <property name="checkable">
           <bool>true</bool>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_13">
-          <item>
-           <layout class="QGridLayout" name="gridLayout_2">
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_10">
-              <property name="text">
-               <string>Label font size:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QSpinBox" name="fontSizeSpinBox">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimum">
-               <number>-100</number>
-              </property>
-              <property name="maximum">
-               <number>200</number>
-              </property>
-              <property name="value">
-               <number>10</number>
-              </property>
-             </widget>
-            </item>
-           </layout>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>Label font size (pixels):</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QSpinBox" name="fontSizeSpinBox">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimum">
+             <number>-100</number>
+            </property>
+            <property name="maximum">
+             <number>200</number>
+            </property>
+            <property name="value">
+             <number>10</number>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -277,7 +279,7 @@
        <item>
         <widget class="QGroupBox" name="orbitLinesGroup">
          <property name="title">
-          <string>Orbit Lines</string>
+          <string>Orbit lines</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -285,16 +287,25 @@
          <property name="checkable">
           <bool>true</bool>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_6">
-          <item>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
            <widget class="QLabel" name="label_5">
+            <property name="toolTip">
+             <string>Number of segments used to draw the line</string>
+            </property>
             <property name="text">
-             <string># Segments:</string>
+             <string>Number of  segments:</string>
             </property>
            </widget>
           </item>
-          <item>
+          <item row="0" column="1">
            <widget class="QSpinBox" name="orbitSegmentsSpin">
+            <property name="toolTip">
+             <string>Number of segments used to draw the line</string>
+            </property>
             <property name="minimum">
              <number>3</number>
             </property>
@@ -306,32 +317,21 @@
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QLabel" name="label_6">
-            <property name="text">
-             <string>Fade Length:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSpinBox" name="orbitFadeSpin">
-            <property name="maximum">
-             <number>50</number>
-            </property>
-            <property name="value">
-             <number>5</number>
-            </property>
-           </widget>
-          </item>
-          <item>
+          <item row="0" column="2">
            <widget class="QLabel" name="label_8">
+            <property name="toolTip">
+             <string>Duration of a single segment in seconds</string>
+            </property>
             <property name="text">
-             <string>Length:</string>
+             <string extracomment="TRANSLATORS: = &quot;duration&quot;. 's' means seconds">Segment length (s):</string>
             </property>
            </widget>
           </item>
-          <item>
+          <item row="0" column="3">
            <widget class="QSpinBox" name="orbitDurationSpin">
+            <property name="toolTip">
+             <string>Duration of a single segment in seconds</string>
+            </property>
             <property name="minimum">
              <number>5</number>
             </property>
@@ -340,6 +340,29 @@
             </property>
             <property name="value">
              <number>15</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="orbitFadeSpin">
+            <property name="toolTip">
+             <string>Number of segments used to draw each end of the line</string>
+            </property>
+            <property name="maximum">
+             <number>50</number>
+            </property>
+            <property name="value">
+             <number>5</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_6">
+            <property name="toolTip">
+             <string>Number of segments used to draw each end of the line</string>
+            </property>
+            <property name="text">
+             <string>Fade length:</string>
             </property>
            </widget>
           </item>
@@ -353,41 +376,55 @@
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>20</width>
-           <height>120</height>
+           <width>0</width>
+           <height>0</height>
           </size>
          </property>
         </spacer>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_7">
-         <item>
-          <widget class="QPushButton" name="restoreDefaultsButton">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Restore default settings</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="saveSettingsButton">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Save settings as default</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QFrame" name="frame">
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <property name="leftMargin">
+           <number>9</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>9</number>
+          </property>
+          <property name="bottomMargin">
+           <number>9</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="restoreDefaultsButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Restore default settings</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="saveSettingsButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Save settings as default</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -403,9 +440,6 @@
          </item>
          <item>
           <widget class="QListWidget" name="satellitesList">
-           <property name="styleSheet">
-            <string>font: 8pt;</string>
-           </property>
            <property name="selectionMode">
             <enum>QAbstractItemView::ExtendedSelection</enum>
            </property>
@@ -415,8 +449,11 @@
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
             <widget class="QCheckBox" name="visibleCheckbox">
+             <property name="toolTip">
+              <string>Display the selected satellite(s)</string>
+             </property>
              <property name="text">
-              <string>Visible</string>
+              <string>Displayed</string>
              </property>
              <property name="tristate">
               <bool>false</bool>
@@ -425,6 +462,9 @@
            </item>
            <item>
             <widget class="QCheckBox" name="orbitCheckbox">
+             <property name="toolTip">
+              <string>Display orbit line(s) for the selected satellite(s)</string>
+             </property>
              <property name="text">
               <string>Orbit</string>
              </property>
@@ -444,18 +484,33 @@
            <item>
             <widget class="QLabel" name="label">
              <property name="text">
-              <string>Satellite ID:</string>
+              <string>Name:</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QLineEdit" name="idLineEdit">
-             <property name="enabled">
-              <bool>false</bool>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayoutCatalogNumber">
+           <item>
+            <widget class="QLabel" name="labelCatalogNumber">
              <property name="text">
-              <string/>
+              <string>Catalog number:</string>
              </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEditCatalogNumber">
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
@@ -536,7 +591,7 @@
            <item>
             <widget class="QLabel" name="label_2">
              <property name="text">
-              <string>TLE Elements:</string>
+              <string>TLE data:</string>
              </property>
             </widget>
            </item>
@@ -584,6 +639,40 @@
               </size>
              </property>
             </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="removeSatellitesButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Remove the selected satellites</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../../resources/Satellites.qrc">
+               <normaloff>:/satellites/bt_delete.png</normaloff>:/satellites/bt_delete.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="addSatellitesButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Add more satellites</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../../resources/Satellites.qrc">
+               <normaloff>:/satellites/bt_add.png</normaloff>:/satellites/bt_add.png</iconset>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QPushButton" name="commsButton">
@@ -645,9 +734,6 @@
       <layout class="QVBoxLayout" name="verticalLayout_10">
        <item>
         <widget class="QListWidget" name="sourceList">
-         <property name="styleSheet">
-          <string>font: 8pt;</string>
-         </property>
          <property name="editTriggers">
           <set>QAbstractItemView::DoubleClicked</set>
          </property>
@@ -661,7 +747,7 @@
          <item>
           <widget class="QLineEdit" name="sourceEdit">
            <property name="toolTip">
-            <string>edit selected source</string>
+            <string>Enter or edit the URL of the selected source. Changes are saved by pressing Enter.</string>
            </property>
           </widget>
          </item>
@@ -732,6 +818,39 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>tabs</tabstop>
+  <tabstop>internetUpdatesCheckbox</tabstop>
+  <tabstop>lastUpdateDateTimeEdit</tabstop>
+  <tabstop>updateFrequencySpinBox</tabstop>
+  <tabstop>updateButton</tabstop>
+  <tabstop>labelsGroup</tabstop>
+  <tabstop>fontSizeSpinBox</tabstop>
+  <tabstop>orbitLinesGroup</tabstop>
+  <tabstop>orbitSegmentsSpin</tabstop>
+  <tabstop>orbitDurationSpin</tabstop>
+  <tabstop>orbitFadeSpin</tabstop>
+  <tabstop>restoreDefaultsButton</tabstop>
+  <tabstop>saveSettingsButton</tabstop>
+  <tabstop>groupsCombo</tabstop>
+  <tabstop>satellitesList</tabstop>
+  <tabstop>visibleCheckbox</tabstop>
+  <tabstop>orbitCheckbox</tabstop>
+  <tabstop>idLineEdit</tabstop>
+  <tabstop>lineEditCatalogNumber</tabstop>
+  <tabstop>descriptionTextEdit</tabstop>
+  <tabstop>groupsTextEdit</tabstop>
+  <tabstop>tleTextEdit</tabstop>
+  <tabstop>removeSatellitesButton</tabstop>
+  <tabstop>addSatellitesButton</tabstop>
+  <tabstop>commsButton</tabstop>
+  <tabstop>saveSatellitesButton</tabstop>
+  <tabstop>sourceList</tabstop>
+  <tabstop>sourceEdit</tabstop>
+  <tabstop>addSourceButton</tabstop>
+  <tabstop>deleteSourceButton</tabstop>
+  <tabstop>aboutTextBrowser</tabstop>
+ </tabstops>
  <resources>
   <include location="../../../../data/gui/guiRes.qrc"/>
   <include location="../../resources/Satellites.qrc"/>
