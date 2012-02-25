@@ -35,6 +35,7 @@ Changed the position of the text in the Text User Interface plug-in. (LP: #91159
 Added a checkbox allowing the SIMBAD on-line search to be enabled/disabled.
 
 Fixed:
+- startup script crash (LP: #689657)
 - plugin names localization in the Configuration window (LP: #807402)
 - resizing of the tabs in Configuration and View windows on language change (LP: #821386)
 - sky lines' labels not translated on language change (LP: #811659)
