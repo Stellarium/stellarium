@@ -58,12 +58,19 @@ SET(BUILD_FOR_ANDROID 1 CACHE BOOL "Set to 1 or true if you want to build for An
 IF(BUILD_FOR_ANDROID)
   # Optimize for ARM / Android
   #todo: actually optimize. And rip most of the stuff out of the shell scripts that doesn't need to be in there...
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DANDROID -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024")
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DANDROID -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024")
+  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DANDROID -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024  -DQT_GL_NO_SCISSOR_TEST")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DANDROID -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024  -DQT_GL_NO_SCISSOR_TEST")
 
   #configure the mobile GUI plugin
   SET(EXTERNAL_GUI_SRC_PATH "../plugins/MobileGui" CACHE PATH "The location of the plugin main directory i.e. the one containing the top level CMakeLists.txt")
   SET(GUI_MODE External CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
+  
+  #extra QT Mobility libraries; these aren't picked up by cmake's built-in scripts. Setting them manually for now.
+  SET(QTMOBILITY_LIBRARIES "/c/Users/Brady/necessitas/Android/Qt/480/armeabi-v7a/lib/libQtSystemInfo.so" CACHE STRING "The paths to any necessary QtMobility libraries")
+  SET(QTMOBILITY_INCLUDES "-Ic:/Users/Brady/necessitas/Android/Qt/480/armeabi-v7a/include/QtMobility -I/c/Users/Brady/necessitas/Android/Qt/480/armeabi-v7a/include/QtSystemInfo" CACHE STRING "Additional build compiler options for QtMobility include directories")
+
+  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${QTMOBILITY_INCLUDES}")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${QTMOBILITY_INCLUDES}")
 ENDIF()
 
 #IF (GUI_MODE STREQUAL "External")

@@ -613,7 +613,9 @@ IF(WIN32)
 ENDIF()
 
 IF(BUILD_FOR_ANDROID)
- #compile as a library (?)
+  SET(extLinkerOption ${extLinkerOption} ${QTMOBILITY_LIBRARIES})
+
+ #compile as a library
  SET(extLinkerOption -lGLESv1_CM -ldl -llog ${extLinkerOption})
  ADD_LIBRARY(stellarium SHARED ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
  TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})

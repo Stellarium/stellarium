@@ -107,9 +107,9 @@ else
   #preparing environnement
   
   if [ "$WINDOWS" == "true" ]; then
-    start android.bat update project --target android-11 --name Stellarium --path $APK_DIR
+    start android.bat update project --target android-8 --name Stellarium --path $APK_DIR
   else
-    start android update project --target android-11 --name Stellarium --path $APK_DIR
+    start android update project --target android-8 --name Stellarium --path $APK_DIR
   fi
   mkdir -p $STEL_BUILD_DIR
   rm -rf $STEL_BUILD_DIR/*

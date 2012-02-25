@@ -25,6 +25,11 @@
  #include <windows.h>
 #endif
 
+#ifdef ANDROID
+#include <QSystemDisplayInfo>
+QTM_USE_NAMESPACE
+#endif
+
 // Init statics variables.
 QFile StelLogger::logFile;
 QString StelLogger::log;
@@ -113,6 +118,8 @@ void StelLogger::init(const QString& logFilePath)
 		writeLog(version);
 		procVersion.close();
 	}
+#elif defined ANDROID
+	writeLog("Android");
 #else
 	writeLog("Unknown operating system");
 #endif
@@ -288,6 +295,11 @@ void StelLogger::init(const QString& logFilePath)
 	}
 	//writeLog("You look like a Mac user. How would you like to write some system info code here? That would help a lot.");
 
+#elif ANDROID
+	//Write some Android stuff to the log
+	QSystemDisplayInfo displayInfo;
+	writeLog(QString("DPI width x height: %1 x %2").arg(displayInfo.getDPIWidth(0),displayInfo.getDPIHeight(0)));
+	writeLog(QString("Physical (mm) width x height: %1 x %2").arg(displayInfo.physicalWidth(0),displayInfo.physicalHeight(0)));
 #endif
 }
 

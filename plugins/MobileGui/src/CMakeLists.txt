@@ -1,8 +1,8 @@
 SET(stellarium_nogui_SRCS
-	StelNoGui.hpp
-	StelNoGui.cpp)
+	MobileGui.hpp
+	MobileGui.cpp)
 SET(stellarium_nogui_MOC_HDRS
-	StelNoGui.hpp)
+	MobileGui.hpp)
 	
 QT4_WRAP_CPP(stellarium_nogui_MOC_SRCS ${stellarium_nogui_MOC_HDRS})
 

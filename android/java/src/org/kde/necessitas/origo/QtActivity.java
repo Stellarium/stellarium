@@ -69,9 +69,11 @@ import android.view.accessibility.AccessibilityEvent;
 import dalvik.system.DexClassLoader;
 
 //@ANDROID-11
+/*
 import android.app.Fragment;
 import android.view.ActionMode;
 import android.view.ActionMode.Callback;
+*/
 //@ANDROID-11
 
 public class QtActivity extends Activity
@@ -1104,6 +1106,7 @@ public class QtActivity extends Activity
     //////////////// Activity API 11 /////////////
 
 //@ANDROID-11
+/*
     @Override
     public boolean dispatchKeyShortcutEvent(KeyEvent event)
     {
@@ -1197,6 +1200,7 @@ public class QtActivity extends Activity
         return super.onWindowStartingActionMode(callback);
     }
     //---------------------------------------------------------------------------
+*/
 //@ANDROID-11
     //////////////// Activity API 12 /////////////
 
