@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Nigel Kerr
+ * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -14,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
 #ifndef _DATETIMEDIALOG_HPP_
@@ -36,19 +37,18 @@ public:
 	//! Notify that the application style changed
 	void styleChanged();
 public slots:
-	void languageChanged();
+	void retranslate();
 	//! update the editing display with new JD.
 	void setDateTime(double newJd);
 
 	void close();
 
-signals:
-	//! signals that a new, valid JD is available.
-	void dateTimeChanged(double newJd);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
+	void connectSpinnerEvents() const;
+	void disconnectSpinnerEvents()const;
 
 private slots:
 	//! year slider or dial changed

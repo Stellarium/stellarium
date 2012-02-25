@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _SATELLITE_HPP_
@@ -54,10 +54,10 @@ class Satellite : public StelObject
 	friend class Satellites;
 	friend class SatellitesDialog;
 public:
-	//! @param id The official designation for a satellite, e.g. "ZARYA"
-	//! @param conf a pointer to a QSettings object which contains the
-	//! details of the satellite (TLEs, description etc.)
-	Satellite(const QVariantMap& map);
+	//! \param identifier unique identifier (currently the Catalog Number)
+	//! \param data a QMap which contains the details of the satellite
+	//! (TLE set, description etc.)
+	Satellite(const QString& identifier, const QVariantMap& data);
 	~Satellite();
 
 	//! Get a QVariantMap which describes the satellite.  Could be used to
@@ -84,15 +84,15 @@ public:
 	{
 		return XYZ;
 	}
-	virtual float getVMagnitude(const StelCore* core=NULL) const;
+	virtual float getVMagnitude(const StelCore* core=NULL, bool withExtinction=false) const;
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual QString getNameI18n(void) const
 	{
-		return designation;
+		return name;
 	}
 	virtual QString getEnglishName(void) const
 	{
-		return designation;
+		return name;
 	}
 
 	//! Set new tleElements.  This assumes the designation is already set, populates
@@ -108,6 +108,11 @@ public:
 
 	// when the observer location changes we need to
 	void recalculateOrbitLines(void);
+	
+	void setNew() {newlyAdded = true;}
+	bool isNew() const {return newlyAdded;}
+	
+	static QString extractInternationalDesignator(const QString& tle1);
 
 public:
 	void enableDrawOrbit(bool b);
@@ -125,10 +130,21 @@ private:
 	bool initialized;
 	bool visible;
 	bool orbitVisible;  //draw orbit enabled/disabled
+	bool newlyAdded;
 
-	QString designation;               // The ID of the satellite
-	QString description;               // longer description of spacecraft
-	Vec3d XYZ;                         // holds J2000 position
+	//! Identifier of the satellite, must be unique within the list.
+	//! Currently, the Satellite Catalog Number is used. It is contained in both
+	//! numbered lines of TLE sets.
+	QString id;
+	//! Human-readable name of the satellite.
+	//! Usually the string in the "Title line" of TLE sets.
+	QString name;
+	//! Longer description of the satellite.
+	QString description;
+	//! International Designator / COSPAR designation / NSSDC ID
+	QString internationalDesignator;
+	//! Contains the J2000 position 
+	Vec3d XYZ;
 	QPair< QByteArray, QByteArray > tleElements;
 	double height, range, rangeRate;
 	QList<commLink> comms;

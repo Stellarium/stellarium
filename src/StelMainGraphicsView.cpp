@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "StelMainGraphicsView.hpp"
@@ -103,6 +103,14 @@ Q_IMPORT_PLUGIN(TimeZoneConfiguration)
 
 #ifdef USE_STATIC_PLUGIN_SUPERNOVAE
 Q_IMPORT_PLUGIN(Supernovae)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_QUASARS
+Q_IMPORT_PLUGIN(Quasars)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_PULSARS
+Q_IMPORT_PLUGIN(Pulsars)
 #endif
 
 // Initialize static variables
@@ -274,7 +282,7 @@ void StelMainGraphicsView::init(QSettings* conf)
 #ifndef DISABLE_SCRIPTING
 	QString startupScript;
 	if (qApp->property("onetime_startup_script").isValid())
-		qApp->property("onetime_startup_script").toString();
+		startupScript = qApp->property("onetime_startup_script").toString();
 	else
 		startupScript = conf->value("scripts/startup_script", "startup.ssc").toString();
 	scriptMgr->runScript(startupScript);

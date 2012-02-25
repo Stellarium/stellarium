@@ -593,17 +593,27 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tabAbout">
+     <widget class="QWidget" name="tabHelp">
       <attribute name="title">
        <string>Help</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_5">
+      <layout class="QVBoxLayout" name="verticalLayoutHelp">
        <item>
-        <widget class="QTextBrowser" name="textBrowserAbout">
+        <widget class="QTextBrowser" name="textBrowserHelp">
          <property name="openExternalLinks">
           <bool>true</bool>
          </property>
         </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabAbout">
+      <attribute name="title">
+       <string>About</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QTextBrowser" name="textBrowserAbout"/>
        </item>
       </layout>
      </widget>

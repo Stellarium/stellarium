@@ -14,7 +14,7 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
- *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
+ *   51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.           *
  ***************************************************************************/
 
 #include "AngleSpinBox.hpp"
@@ -127,8 +127,7 @@ void AngleSpinBox::stepBy (int steps)
 			radAngle = -radAngle;
 			break;
 		}
-		case SectionDegreesHours:
-		case SectionNone:
+		case SectionDegreesHours:		
 		{
 			if (angleSpinBoxFormat==DMSLetters || angleSpinBoxFormat==DMSSymbols || angleSpinBoxFormat==DecimalDeg)
 				radAngle += M_PI/180.*steps;
@@ -145,6 +144,7 @@ void AngleSpinBox::stepBy (int steps)
 			break;
 		}
 		case SectionSeconds:
+		case SectionNone:
 		{
 			if (angleSpinBoxFormat==DMSLetters || angleSpinBoxFormat==DMSSymbols || angleSpinBoxFormat==DecimalDeg)
 				radAngle += M_PI/180.*steps/3600.;
@@ -422,15 +422,13 @@ void AngleSpinBox::formatText(void)
 			break;
 		}
 		case DecimalDeg:
-		{
-			bool sign=true;
+		{			
 			double angle = radAngle;
 			QString signInd = positivePrefix(currentPrefixType);
 
 			if (radAngle<0)
 			{
-				angle *= -1;
-				sign = false;
+				angle *= -1;				
 				signInd = negativePrefix(currentPrefixType);
 			}
 

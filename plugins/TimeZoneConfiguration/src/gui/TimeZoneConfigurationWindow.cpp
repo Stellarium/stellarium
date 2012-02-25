@@ -40,17 +40,20 @@ TimeZoneConfigurationWindow::~TimeZoneConfigurationWindow()
 		delete defineTimeZoneWindow;
 }
 
-void TimeZoneConfigurationWindow::languageChanged()
+void TimeZoneConfigurationWindow::retranslate()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+		updateAboutText();
+	}
 }
 
 void TimeZoneConfigurationWindow::createDialogContent()
 {
 	ui->setupUi(dialog);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveTimeZoneSettings()));
 	connect(ui->pushButtonEditTimeZone, SIGNAL(clicked()), this, SLOT(openDefineTimeZoneWindow()));
@@ -93,8 +96,14 @@ void TimeZoneConfigurationWindow::createDialogContent()
 		ui->radioButtonUserDefined->setChecked(true);
 	}
 
-	QString version = QString("Time Zone plug-in (version %1)").arg(TIME_ZONE_CONFIGURATION_VERSION);
-	ui->labelTitle->setText(version);
+	updateAboutText();
+}
+
+void TimeZoneConfigurationWindow::updateAboutText()
+{
+	ui->labelTitle->setText(q_("Time Zone plug-in"));
+	QString version = QString(q_("Version %1")).arg(TIME_ZONE_CONFIGURATION_VERSION);
+	ui->labelVersion->setText(version);
 }
 
 void TimeZoneConfigurationWindow::saveTimeZoneSettings()

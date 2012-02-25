@@ -55,7 +55,7 @@ public:
 	static QString getTzOffsetStringFrom(QDoubleSpinBox * spinBox);
 
 public slots:
-	void languageChanged();
+	void retranslate();
 
 protected:
 	void createDialogContent();
@@ -64,6 +64,8 @@ private:
 	Ui_timeZoneConfigurationWindowForm * ui;
 	DefineTimeZoneWindow * defineTimeZoneWindow;
 	TimeZoneConfiguration * timeZoneConfiguration;
+	
+	void updateAboutText();
 
 private slots:
 	void saveTimeZoneSettings();
