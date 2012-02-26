@@ -224,11 +224,14 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	{
 		QString catalogNumbers;
 		if (internationalDesignator.isEmpty())
-			catalogNumbers = QString("Catalog #: %1")
-			                 .arg(id);
+			catalogNumbers = QString("%1: %2")
+					 .arg(q_("Catalog #"))
+					 .arg(id);
 		else
-			catalogNumbers = QString("Catalog #: %1; International Designator: %2")
+			catalogNumbers = QString("%1: %2; %2: %3")
+					 .arg(q_("Catalog #"))
 			                 .arg(id)
+					 .arg(q_("International Designator"))
 			                 .arg(internationalDesignator);
 		oss << catalogNumbers << "<br/><br/>";
 	}
