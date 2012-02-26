@@ -228,7 +228,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 					 .arg(q_("Catalog #"))
 					 .arg(id);
 		else
-			catalogNumbers = QString("%1: %2; %2: %3")
+			catalogNumbers = QString("%1: %2; %3: %4")
 					 .arg(q_("Catalog #"))
 			                 .arg(id)
 					 .arg(q_("International Designator"))
