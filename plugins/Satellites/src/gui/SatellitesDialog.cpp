@@ -1,7 +1,7 @@
 /*
  * Stellarium Satellites plugin config dialog
  *
- * Copyright (C) 2009 Matthew Gates
+ * Copyright (C) 2009, 2012 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -125,6 +125,7 @@ void SatellitesDialog::createDialogContent()
 	        SLOT(updateSelectedSatelliteInfo(QListWidgetItem*,QListWidgetItem*)));
 	connect(ui->satellitesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(satelliteDoubleClick(QListWidgetItem*)));
 	connect(ui->groupsCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(listSatelliteGroup(int)));
+	connect(ui->saveSatellitesButton, SIGNAL(clicked()), this, SLOT(saveSatellites()));
 	connect(ui->removeSatellitesButton, SIGNAL(clicked()), this, SLOT(removeSatellites()));
 	connectSatelliteGuiForm();
 	
@@ -283,7 +284,7 @@ void SatellitesDialog::setAboutHtml(void)
 	html += "</p>";
 
 	html += "<h3>" + q_("Adding new satellites") + "</h3>";
-	html += "<p>" + QString(q_("At the moment you must manually edit the %1 file to add new satellites to the database. Making this easier is still on the TODO list...")).arg(jsonFileName) + "</p>";
+	html += "<p>" + QString(q_("1. Make sure the satellite(s) you wish to add are included in one of the URLs listed in the Sources tab of the satellites configuration dialog. 2. Go to the Satellites tab, and click the '+' button.  Select the satellite(s) you wish to add and select the \"add\" button.")) + "</p>";
 
 	html += "<h3>" + q_("Technical notes") + "</h3>";
 	html += "<p>" + q_("Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data as the input. ");
@@ -560,7 +561,13 @@ void SatellitesDialog::satelliteDoubleClick(QListWidgetItem* item)
 	sat->visible = true;
 
 	// If Satellites are not currently displayed, make them visible.
-	SatellitesMgr->setFlagHints(true);
+	if (!SatellitesMgr->getFlagHints())
+	{
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		QAction* setHintsAction = gui->getGuiActions("actionShow_Satellite_Hints");
+		Q_ASSERT(setHintsAction);
+		setHintsAction->setChecked(true);
+	}
 
 	//TODO: We need to find a way to deal with duplicates... --BM
 	if (StelApp::getInstance().getStelObjectMgr().findAndSelect(item->text()))
