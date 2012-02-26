@@ -75,12 +75,13 @@ public:
 		OtherError            //!< Other error
 	};
 
-	enum Visibility
+	enum Status
 	{
 		Visible,
 		NotVisible,
 		Both,
-		NewlyAdded
+		NewlyAdded,
+		OrbitError
 	};
 
 	Satellites();
@@ -141,7 +142,7 @@ public:
 
 	//! get satellite objects filtered by group.  If an empty string is used for the
 	//! group name, return all satallites
-	QHash<QString,QString> getSatellites(const QString& group=QString(), Visibility vis=Both);
+	QHash<QString,QString> getSatellites(const QString& group=QString(), Status vis=Both);
 
 	//! get a satellite object by identifier
 	SatelliteP getByID(const QString& id);
