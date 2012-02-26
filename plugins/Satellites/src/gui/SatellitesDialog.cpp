@@ -125,7 +125,6 @@ void SatellitesDialog::createDialogContent()
 	        SLOT(updateSelectedSatelliteInfo(QListWidgetItem*,QListWidgetItem*)));
 	connect(ui->satellitesList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(satelliteDoubleClick(QListWidgetItem*)));
 	connect(ui->groupsCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(listSatelliteGroup(int)));
-	connect(ui->saveSatellitesButton, SIGNAL(clicked()), this, SLOT(saveSatellites()));
 	connect(ui->removeSatellitesButton, SIGNAL(clicked()), this, SLOT(removeSatellites()));
 	connectSatelliteGuiForm();
 	
@@ -168,6 +167,8 @@ void SatellitesDialog::listSatelliteGroup(int index)
 		satellites = plugin->getSatellites(QString(), Satellites::NotVisible);
 	else if (selectedGroup == "newlyadded")
 		satellites = plugin->getSatellites(QString(), Satellites::NewlyAdded);
+	else if (selectedGroup == "orbiterror")
+		satellites = plugin->getSatellites(QString(), Satellites::OrbitError);
 	else
 		satellites = plugin->getSatellites(ui->groupsCombo->currentText());
 	
@@ -224,6 +225,9 @@ void SatellitesDialog::updateSelectedSatelliteInfo(QListWidgetItem* curItem,
 	satelliteModified = false;
 
 	SatelliteP sat = GETSTELMODULE(Satellites)->getByID(id);
+	if (sat.isNull())
+		return;
+
 	if (!sat->initialized)
 		return;
 
@@ -453,8 +457,7 @@ void SatellitesDialog::populateGroupsList()
 {
 	ui->groupsCombo->clear();
 	ui->groupsCombo->addItems(GETSTELMODULE(Satellites)->getGroups());
-	// BM: The wording has been changed to prevent confusion with the visibility
-	// status of the actual satellites. I'll leave further changes to Matthew.:)
+	ui->groupsCombo->insertItem(0, q_("[orbit calculation error]"), QVariant("orbiterror"));
 	ui->groupsCombo->insertItem(0, q_("[all newly added]"), QVariant("newlyadded"));
 	ui->groupsCombo->insertItem(0, q_("[all not displayed]"), QVariant("notvisible"));
 	ui->groupsCombo->insertItem(0, q_("[all displayed]"), QVariant("visible"));
@@ -543,9 +546,22 @@ void SatellitesDialog::setOrbitFlag(bool display)
 
 void SatellitesDialog::satelliteDoubleClick(QListWidgetItem* item)
 {
-	//qDebug() << "SatellitesDialog::satelliteDoubleClick for " << item->text();
+	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
+	Q_ASSERT(SatellitesMgr);
 	QString id = item->data(Qt::UserRole).toString();
-	GETSTELMODULE(Satellites)->getByID(id)->visible = true;
+	SatelliteP sat = SatellitesMgr->getByID(id);
+	if (sat.isNull())
+		return;
+
+	if (!sat->orbitValid)
+		return;
+
+	// Turn on Satellite rendering if it is not already on
+	sat->visible = true;
+
+	// If Satellites are not currently displayed, make them visible.
+	SatellitesMgr->setFlagHints(true);
+
 	//TODO: We need to find a way to deal with duplicates... --BM
 	if (StelApp::getInstance().getStelObjectMgr().findAndSelect(item->text()))
 	{

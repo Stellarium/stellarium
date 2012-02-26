@@ -129,8 +129,9 @@ private:
 private:
 	bool initialized;
 	bool visible;
-	bool orbitVisible;  //draw orbit enabled/disabled
+	bool orbitVisible;  // draw orbit enabled/disabled
 	bool newlyAdded;
+	bool orbitValid;
 
 	//! Identifier of the satellite, must be unique within the list.
 	//! Currently, the Satellite Catalog Number is used. It is contained in both
