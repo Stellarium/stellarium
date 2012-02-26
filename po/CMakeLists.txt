@@ -82,7 +82,11 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _domain _firstLang)
             VERBATIM
         )
 
-        INSTALL(FILES ${_gmoFile} DESTINATION share/locale/${_lang}/LC_MESSAGES RENAME ${_domain}.mo)
+		IF(BUILD_FOR_ANDROID)
+		  INSTALL(FILES ${_gmoFile} DESTINATION share/stellarium/locale/${_lang}/LC_MESSAGES RENAME ${_domain}.mo)
+		ELSE()
+          INSTALL(FILES ${_gmoFile} DESTINATION share/locale/${_lang}/LC_MESSAGES RENAME ${_domain}.mo)
+		ENDIF()
         SET(_gmoFiles ${_gmoFiles} ${_gmoFile})
 
    ENDFOREACH (_lang)

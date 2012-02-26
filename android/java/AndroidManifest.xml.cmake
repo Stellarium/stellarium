@@ -1,5 +1,9 @@
-<?xml version='1.0' encoding='utf-8'?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="org.stellarium.stellarium">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="org.stellarium.stellarium"
+      android:sharedUserId="org.stellarium.stellarium"
+      android:versionCode="1"
+      android:versionName="@ANDROID_VERSION_NAME@">
     <application android:name="org.kde.necessitas.origo.QtApplication" android:icon="@drawable/icon" android:label="@string/app_name" android:debuggable="true">
         <activity android:name="org.kde.necessitas.origo.QtActivity" android:label="@string/app_name" android:configChanges="orientation|locale|fontScale|keyboard|keyboardHidden" >
             <intent-filter>
@@ -19,8 +23,10 @@
             <!-- Splash screen -->
         </activity>
     </application>
-    <supports-screens android:largeScreens="true" android:normalScreens="true" android:anyDensity="true" android:smallScreens="true"/>
+    <uses-sdk android:minSdkVersion="@ANDROID_API_LEVEL@"/>
+    <supports-screens android:smallScreens="true" android:normalScreens="true" android:largeScreens="true" android:resizeable="true" android:anyDensity="true"/>
+    @ANDROID_PERMISSIONS@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>	
-</manifest>
+</manifest> 

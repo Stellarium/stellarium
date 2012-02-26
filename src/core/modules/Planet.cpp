@@ -390,6 +390,15 @@ void Planet::computeTransMatrix(double jd)
 	}
 }
 
+#ifdef ANDROID
+/* This is kind of ugly, but I'm hitting a GCC bug
+  in this code if it tries to optimize it. This bug
+  _may_ be fixed in the GCC included in newer versions
+  of the NDK. */
+#pragma GCC push_options
+#pragma GCC optimize ("O0")
+#endif
+
 Mat4d Planet::getRotEquatorialToVsop87(void) const
 {
 	Mat4d rval = rotLocalToParent;
@@ -411,6 +420,10 @@ void Planet::setRotEquatorialToVsop87(const Mat4d &m)
 	}
 	rotLocalToParent = a.transpose() * m;
 }
+
+#ifdef ANDROID
+#pragma GCC pop_options
+#endif
 
 
 // Compute the z rotation to use from equatorial to geographic coordinates

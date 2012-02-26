@@ -56,12 +56,26 @@ ENDIF()
 
 SET(BUILD_FOR_ANDROID 1 CACHE BOOL "Set to 1 or true if you want to build for Android target")
 IF(BUILD_FOR_ANDROID)
-  # Optimize for ARM / Android
-  #todo: actually optimize. And rip most of the stuff out of the shell scripts that doesn't need to be in there...
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DANDROID -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024  -DQT_GL_NO_SCISSOR_TEST")
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DANDROID -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024  -DQT_GL_NO_SCISSOR_TEST")
+  #android-specific defaults
+  SET(OPENGL_MODE ES2 CACHE STRING "Choose the type of openGL to use, options are: Desktop, ES2")
+  SET(BUILD_STATIC_PLUGINS 0 CACHE BOOL "Define whether plugins should be compiled statically and linked to the main program")
+  
+  #c/o Navit project
+  FIND_HOST_PROGRAM(ANDROID_LOCATION NAMES android android.bat)
+  FIND_HOST_PROGRAM(ANT_LOCATION NAMES ant)
+  
+  if (NOT ANT_LOCATION)
+    message(FATAL_ERROR "Could not find ant. Please install ant and add it to the search path.")
+  endif()
+  if (NOT ANDROID_LOCATION)
+    message(FATAL_ERROR "Could not find 'Android SDK and AVD Manager'. Please install the android sdk and add the <android-sdk>/tools directory to the search path.")
+  endif()
 
-  #configure the mobile GUI plugin
+  #-fno-tree-fre to workaround what appears to be a gcc bug (may be fixed in a newer version of gcc than what's in the ndk...)
+  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024  -DQT_GL_NO_SCISSOR_TEST -O3 -fno-tree-fre")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024  -DQT_GL_NO_SCISSOR_TEST -O3 -fno-tree-fre")
+
+  #configure the mobile GUI plugin. Android defaults:
   SET(EXTERNAL_GUI_SRC_PATH "../plugins/MobileGui" CACHE PATH "The location of the plugin main directory i.e. the one containing the top level CMakeLists.txt")
   SET(GUI_MODE External CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
   
@@ -71,6 +85,16 @@ IF(BUILD_FOR_ANDROID)
 
   SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${QTMOBILITY_INCLUDES}")
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${QTMOBILITY_INCLUDES}")
+  
+  #and CMake doesn't seem to find the rest of Qt automatically either. Is Necessitas using odd locations?...
+  SET(NECESSITAS_QT_ROOT "C:/Users/Brady/necessitas/Android/Qt/480" CACHE STRING "Android: Location of necessitas Qt")
+  
+  SET(NECESSITAS_QT_ROOT_ARCH "${NECESSITAS_QT_ROOT}/${ARM_TARGET}")
+  #SET(QT_QMAKE_EXECUTABLE ${NECESSITAS_QT_ROOT_ARCH}/bin/qmake${TOOL_OS_SUFFIX})
+  SET(QT_QMAKE_EXECUTABLE "${NECESSITAS_QT_ROOT_ARCH}/bin/qmake")
+  SET(CMAKE_FIND_ROOT_PATH ${CMAKE_FIND_ROOT_PATH} ${NECESSITAS_QT_ROOT_ARCH})
+  #message(FATAL_ERROR "${CMAKE_FIND_ROOT_PATH}")
+  
 ENDIF()
 
 #IF (GUI_MODE STREQUAL "External")
@@ -237,13 +261,18 @@ IF(ENABLE_NLS)
   IF(BUILD_FOR_ANDROID)
     ADD_LIBRARY(intllite STATIC "src/core/external/libintl-lite/libintl-lite.cpp")
 	SET(INTL_LIBRARIES ${CMAKE_BINARY_DIR}/libintllite.a)
-	FIND_PACKAGE(XGettext REQUIRED)
+	
+	FIND_HOST_PACKAGE(Gettext REQUIRED)
+	FIND_HOST_PACKAGE(XGettext REQUIRED)
 	
 	#assumes these utilities are on the path
 	#we need these utilities, and we need them from the local system, not the NDK
 	#todo: find a better way to do this
-	SET(GETTEXT_MSGFMT_EXECUTABLE msgfmt)
-	SET(GETTEXT_MSGMERGE_EXECUTABLE msgmerge)
+	#SET(GETTEXT_MSGFMT_EXECUTABLE msgfmt)
+	#SET(GETTEXT_MSGMERGE_EXECUTABLE msgmerge)
+	
+    #FIND_HOST_PROGRAM(GETTEXT_MSGFMT_EXECUTABLE NAMES msgfmt msgfmt.exe)
+    #FIND_HOST_PROGRAM(GETTEXT_MSGMERGE_EXECUTABLE NAMES msgmerge msgmerge.exe)
   ELSE()
   FIND_PACKAGE(Iconv REQUIRED)
   FIND_PATH(INTL_INCLUDE_DIR libintl.h
@@ -275,6 +304,7 @@ ENDIF()
 IF(BUILD_FOR_ANDROID)
   ADD_DEFINITIONS(-DINSTALL_DATADIR="//sdcard/stellarium")
   ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="//sdcard/stellarium/locale")
+  SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium-apk")
 ELSEIF(UNIX AND NOT WIN32)
 IF(APPLE)
   SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
@@ -384,7 +414,6 @@ INCLUDE_DIRECTORIES(
 	${QT_QTTEST_INCLUDE_DIR}
 	${QT_DECLARATIVE_INCLUDE_DIR}
 )
-
 ########### Subdirectories ###############
 ADD_SUBDIRECTORY( data )
 ADD_SUBDIRECTORY( src )
@@ -401,3 +430,6 @@ IF(ENABLE_SCRIPTING)
 ENDIF()
 ADD_SUBDIRECTORY( stars )
 ADD_SUBDIRECTORY( plugins )
+IF(BUILD_FOR_ANDROID)
+  ADD_SUBDIRECTORY( android )
+ENDIF()
