@@ -698,29 +698,6 @@
              </property>
             </widget>
            </item>
-           <item>
-            <widget class="QPushButton" name="saveSatellitesButton">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="toolTip">
-              <string>Save changes</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="../../../../data/gui/guiRes.qrc">
-               <normaloff>:/graphicGui/filesave.png</normaloff>:/graphicGui/filesave.png</iconset>
-             </property>
-            </widget>
-           </item>
           </layout>
          </item>
         </layout>
@@ -844,7 +821,6 @@
   <tabstop>removeSatellitesButton</tabstop>
   <tabstop>addSatellitesButton</tabstop>
   <tabstop>commsButton</tabstop>
-  <tabstop>saveSatellitesButton</tabstop>
   <tabstop>sourceList</tabstop>
   <tabstop>sourceEdit</tabstop>
   <tabstop>addSourceButton</tabstop>
@@ -852,7 +828,6 @@
   <tabstop>aboutTextBrowser</tabstop>
  </tabstops>
  <resources>
-  <include location="../../../../data/gui/guiRes.qrc"/>
   <include location="../../resources/Satellites.qrc"/>
  </resources>
  <connections/>

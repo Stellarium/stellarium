@@ -53,7 +53,7 @@ bool Satellite::orbitLinesFlag = true;
 
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
-		: initialized(false), visible(true), newlyAdded(false), hintColor(0.0,0.0,0.0), lastUpdated(), pSatWrapper(NULL)
+		: initialized(false), visible(true), newlyAdded(false), orbitValid(false), hintColor(0.0,0.0,0.0), lastUpdated(), pSatWrapper(NULL)
 {
 	// return initialized if the mandatory fields are not present
 	if (identifier.isEmpty())
@@ -140,13 +140,18 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 		lastUpdated = QDateTime::fromString(map.value("lastUpdated").toString(),
 		                                    Qt::ISODate);
 	}
+	orbitValid = true;
 	initialized = true;
 }
 
 Satellite::~Satellite()
 {
 	if (pSatWrapper != NULL)
+	{
+
 		delete pSatWrapper;
+		pSatWrapper = NULL;
+	}
 }
 
 double Satellite::roundToDp(float n, int dp)
@@ -364,7 +369,7 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 
 void Satellite::update(double)
 {
-	if (pSatWrapper)
+	if (pSatWrapper && orbitValid)
 	{
 		epochTime = StelApp::getInstance().getCore()->getJDay();
 
@@ -381,10 +386,9 @@ void Satellite::update(double)
 			// we might end up with a problem - usually a crash of Stellarium
 			// because of a div/0 or something.  To prevent this, we turn off
 			// the satellite.
-			qWarning() << "Satellite with invalid orbit has been removed:" << name;
-			initialized = false;
-			visible = false;
-			orbitVisible = false;
+			qWarning() << "Satellite has invalid orbit:" << name;
+			orbitValid = false;
+			return;
 		}
 
 		elAzPosition             = pSatWrapper->getAltAz();
