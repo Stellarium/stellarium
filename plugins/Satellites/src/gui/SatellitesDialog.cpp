@@ -535,7 +535,8 @@ void SatellitesDialog::setOrbitFlag(bool display)
 	{
 		QString id = i->data(Qt::UserRole).toString();
 		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(id);
-		sat->orbitVisible = display;
+		if (sat)
+			sat->orbitVisible = display;
 	}
 	reloadSatellitesList();
 }
