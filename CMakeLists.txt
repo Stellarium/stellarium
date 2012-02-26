@@ -71,9 +71,8 @@ IF(BUILD_FOR_ANDROID)
     message(FATAL_ERROR "Could not find 'Android SDK and AVD Manager'. Please install the android sdk and add the <android-sdk>/tools directory to the search path.")
   endif()
 
-  #-fno-tree-fre to workaround what appears to be a gcc bug (may be fixed in a newer version of gcc than what's in the ndk...)
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024  -DQT_GL_NO_SCISSOR_TEST -O3 -fno-tree-fre")
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024  -DQT_GL_NO_SCISSOR_TEST -O3 -fno-tree-fre")
+  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024  -DQT_GL_NO_SCISSOR_TEST")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024  -DQT_GL_NO_SCISSOR_TEST")
 
   #configure the mobile GUI plugin. Android defaults:
   SET(EXTERNAL_GUI_SRC_PATH "../plugins/MobileGui" CACHE PATH "The location of the plugin main directory i.e. the one containing the top level CMakeLists.txt")

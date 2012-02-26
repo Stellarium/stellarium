@@ -6,6 +6,7 @@
 #export PATH=/c/Users/Brady/necessitas/apache-ant-1.8.2/bin:/c/Users/Brady/necessitas/android-sdk/tools:$PATH
 
 MY_CMAKE_FLAGS=" \
--DCMAKE_TOOLCHAIN_FILE=../../android/android.toolchain.cmake"
+-DCMAKE_TOOLCHAIN_FILE=../../android/android.toolchain.cmake
+-DCMAKE_VERBOSE_MAKEFILE=ON"
 
 cmake $MY_CMAKE_FLAGS -G"Unix Makefiles" ../..
