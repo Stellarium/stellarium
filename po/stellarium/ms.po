@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-20 17:27+0700\n"
-"PO-Revision-Date: 2012-02-08 06:40+0000\n"
-"Last-Translator: abuyop <Unknown>\n"
+"PO-Revision-Date: 2012-02-25 18:12+0000\n"
+"Last-Translator: Mohd Rizuan Ali <ibnu_ali_87@yahoo.com>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-21 05:48+0000\n"
-"X-Generator: Launchpad (build 14838)\n"
+"X-Launchpad-Export-Date: 2012-02-26 04:51+0000\n"
+"X-Generator: Launchpad (build 14860)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -83,11 +83,11 @@ msgstr "Galaksi"
 
 #: src/core/modules/Nebula.cpp:306
 msgid "Open cluster"
-msgstr "Gugusan Serentak"
+msgstr "Gugusan bintang terbuka"
 
 #: src/core/modules/Nebula.cpp:309
 msgid "Globular cluster"
-msgstr "Gugusan Bundar"
+msgstr "gugusan bintang kelompok"
 
 #: src/core/modules/Nebula.cpp:312
 msgid "Nebula"
@@ -95,11 +95,11 @@ msgstr "Nebula"
 
 #: src/core/modules/Nebula.cpp:315
 msgid "Planetary nebula"
-msgstr "Nebula planet"
+msgstr "Nebula planetari"
 
 #: src/core/modules/Nebula.cpp:318
 msgid "Cluster associated with nebulosity"
-msgstr "Gugusan yang berkaitan dengan kenebulaan"
+msgstr "Gugusan bintang dengan gas nebulasiti"
 
 #: src/core/modules/Nebula.cpp:321
 msgid "Unknown"
@@ -321,7 +321,7 @@ msgstr "Az/Alt: %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:314 src/gui/ConfigurationDialog.cpp:316
 msgid "Select screenshot directory"
-msgstr "Pilih direktori cekupan skrin"
+msgstr "pilih direktori skrin yang dirakam"
 
 #: src/gui/ConfigurationDialog.cpp:489
 #, qt-format
@@ -340,7 +340,7 @@ msgstr "Pengarang"
 
 #: src/gui/ConfigurationDialog.cpp:540 src/gui/ViewDialog.cpp:393
 msgid "Contact"
-msgstr "Pautan"
+msgstr "Hubungi"
 
 #: src/gui/ConfigurationDialog.cpp:618
 msgid "Author"
@@ -352,11 +352,11 @@ msgstr "Lesen"
 
 #: src/gui/ConfigurationDialog.cpp:652
 msgid "Running script: "
-msgstr "Skrip jalan: "
+msgstr "Skrip yang digunakan "
 
 #: src/gui/ConfigurationDialog.cpp:659
 msgid "Running script: [none]"
-msgstr "Skrip jalan: [tiada]"
+msgstr "Skrip yang digunakan"
 
 #: src/gui/ConfigurationDialog.cpp:729
 msgid ""
@@ -364,7 +364,7 @@ msgid ""
 "Restart Stellarium to display them."
 msgstr ""
 "Katalog bintang baru sudah selesai dimuat turun!/n\n"
-"Mulakan semula Stellarium untuk paparkannya."
+"Tutup dan buka semula Stellarium untuk paparkannya."
 
 #: src/gui/ConfigurationDialog.cpp:733
 msgid "All available star catalogs have been installed."
@@ -420,7 +420,7 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:328
 #: src/gui/StelGuiItems.cpp:709
 msgid "Space"
-msgstr "Space"
+msgstr "ruang"
 
 #: src/gui/HelpDialog.cpp:53
 msgid "Arrow keys & left mouse drag"
@@ -428,7 +428,7 @@ msgstr "kekunci Arah & leretan kiri tetikus"
 
 #: src/gui/HelpDialog.cpp:54
 msgid "Page Up/Down"
-msgstr "Page Up/Down"
+msgstr "gerak paparan ke atas/bawah"
 
 #: src/gui/HelpDialog.cpp:55
 msgid "CTRL + Up/Down"
@@ -868,7 +868,7 @@ msgstr "Simpan cekupan skrin"
 
 #: src/gui/StelGui.cpp:179
 msgid "Copy selected object information to clipboard"
-msgstr ""
+msgstr "salin informasi objek"
 
 #: src/gui/StelGui.cpp:181
 msgid "Auto hide horizontal button bar"
@@ -994,27 +994,27 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:73
 msgid "quickrun..."
-msgstr ""
+msgstr "mula dengan pantas"
 
 #: src/gui/ScriptConsole.cpp:74
 msgid "selected text"
-msgstr ""
+msgstr "perkataan yang dipilih"
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "clear text"
-msgstr ""
+msgstr "kosongkan teks"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "clear images"
-msgstr ""
+msgstr "kosongkan imej"
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
-msgstr ""
+msgstr "semula jadi"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
-msgstr ""
+msgstr "peta bintang"
 
 #: src/main.cpp:333
 msgid "This system does not support OpenGL."
@@ -1030,7 +1030,7 @@ msgstr "Utarid"
 
 #: src/translations.h:35
 msgid "Venus"
-msgstr "Zurah"
+msgstr "Zuhrah"
 
 #: src/translations.h:36
 msgid "Earth"
@@ -1072,7 +1072,7 @@ msgstr "Vesta"
 
 #: src/translations.h:45
 msgid "Jupiter"
-msgstr "Mustari"
+msgstr "Musytari"
 
 #: src/translations.h:46
 msgid "Io"
@@ -1142,7 +1142,7 @@ msgstr "Metis"
 #. TRANSLATORS: Name of landscape and planet
 #: src/translations.h:62 src/translations.h:176
 msgid "Saturn"
-msgstr "Saturn"
+msgstr "Zuhal"
 
 #: src/translations.h:63
 msgid "Mimas"
@@ -1466,17 +1466,17 @@ msgstr "Garching"
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
 msgid "Landscape Tour"
-msgstr ""
+msgstr "mengenal lanskap"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
 msgid "Partial Lunar Eclipse"
-msgstr ""
+msgstr "gerhana bulan separa"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:184
 msgid "Total Lunar Eclipse"
-msgstr ""
+msgstr "gerhana bulan penuh"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
@@ -1486,7 +1486,7 @@ msgstr "Penyelamat Skrin"
 #. TRANSLATORS: Name of script
 #: src/translations.h:188
 msgid "Solar Eclipse 2009"
-msgstr ""
+msgstr "gerhana matahari 2009"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:190
@@ -1500,29 +1500,31 @@ msgstr "Zodiak"
 
 #: src/translations.h:195
 msgid "Look around each installed landscape."
-msgstr ""
+msgstr "lihat lanskap yang tersedia"
 
 #: src/translations.h:196
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr ""
+msgstr "skrip untuk demonstrasi gerhana bulan separa"
 
 #: src/translations.h:197
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr ""
+msgstr "skrip untuk demonstrasi gerhana bulan penuh"
 
 #: src/translations.h:198
 msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr ""
+msgstr "melihat objek langit secara random"
 
 #: src/translations.h:199
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
+"skrip untuk demonstrasi gerhana matahari penuh yang berlaku pada 2009 di "
+"Rangpur, Bangladesh"
 
 #: src/translations.h:200
 msgid "Script which runs automatically at startup"
-msgstr ""
+msgstr "skrip supaya mula dengan automatik pada startup"
 
 #: src/translations.h:201
 msgid ""
@@ -1530,6 +1532,8 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
+"skrip ini memaparkan buruj buruj zodiak. Buruj zodiak ialah 12 buruj yang "
+"dilalui oleh orbit matahari dalam masa setahun"
 
 #: src/translations.h:204
 msgid "Andorra"
@@ -3275,59 +3279,59 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
-msgstr ""
+msgstr "konsol skrip"
 
 #: src/ui_scriptConsole.h:344
 msgid "load script from file"
-msgstr ""
+msgstr "muatkan skrip dari fail anda"
 
 #: src/ui_scriptConsole.h:348
 msgid "save script to file"
-msgstr ""
+msgstr "simpan skrip kepada fail"
 
 #: src/ui_scriptConsole.h:352
 msgid "clear script"
-msgstr ""
+msgstr "kosongkan skrip"
 
 #: src/ui_scriptConsole.h:356
 msgid "pre-process script using SSC preprocessor"
-msgstr ""
+msgstr "proses awal skrip menggunakan SSC preprocessor"
 
 #: src/ui_scriptConsole.h:359
 msgid "pre-process script using STS preprocessor"
-msgstr ""
+msgstr "proses awal skrip menggunakan STS prepocessor"
 
 #: src/ui_scriptConsole.h:362
 msgid "quickly load and run a utility script"
-msgstr ""
+msgstr "mula dengan cepat dan jalankan skrip utiliti"
 
 #: src/ui_scriptConsole.h:365
 msgid "run script"
-msgstr ""
+msgstr "jalankan skrip"
 
 #: src/ui_scriptConsole.h:369
 msgid "stop script"
-msgstr ""
+msgstr "hentikan skrip"
 
 #: src/ui_scriptConsole.h:372
 msgid "Script"
-msgstr ""
+msgstr "Skrip"
 
 #: src/ui_scriptConsole.h:373
 msgid "Output"
-msgstr ""
+msgstr "Hasil"
 
 #: src/ui_scriptConsole.h:375
 msgid "Cursor position"
-msgstr ""
+msgstr "Posisi kursor"
 
 #: src/ui_scriptConsole.h:377
 msgid "Include dir:"
-msgstr ""
+msgstr "gunakan dir:"
 
 #: src/ui_scriptConsole.h:378
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -5380,7 +5384,7 @@ msgstr "Z (anjakan merah): %1"
 
 #: plugins/Pulsars/src/Pulsars.cpp:59
 msgid "Pulsars"
-msgstr ""
+msgstr "pulsar"
 
 #: plugins/Pulsars/src/Pulsars.cpp:62
 msgid ""
@@ -5388,25 +5392,29 @@ msgid ""
 "about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
 "1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
 msgstr ""
+"Plugin ini meletakkan kedudukan  pelbagai jenis pulsar, dengan informasi "
+"untuk setiap satunya. Data pulsar adalah diambil dari 'Catalog of Pulsars' "
+"(Taylor+ 1995).<br><br>Perhatian : setiap perkataan pulsar dikenalpasti "
+"dengan awalan \"PSR\""
 
 #: plugins/Pulsars/src/Pulsar.cpp:102
 msgid "pulsar"
-msgstr ""
+msgstr "pulsar"
 
 #: plugins/Pulsars/src/Pulsar.cpp:109
 #, qt-format
 msgid "Barycentric period: %1 s"
-msgstr ""
+msgstr "Tempoh masa Barycentric: %1 s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:112
 #, qt-format
 msgid "Distance: %1 kpc (%2 ly)"
-msgstr ""
+msgstr "Jarak: %1 kpc (%2 tahun cahaya)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:116
 #, qt-format
 msgid "Type of pulsar: %1"
-msgstr ""
+msgstr "Jenis pulsar : %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:120
 #, qt-format
@@ -5428,7 +5436,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:133 plugins/Pulsars/src/Pulsar.cpp:145
 #: plugins/Pulsars/src/Pulsar.cpp:157
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:136 plugins/Pulsars/src/Pulsar.cpp:148
@@ -5439,47 +5447,47 @@ msgstr ""
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:232
 msgid "globular cluster association"
-msgstr ""
+msgstr "kelompokan bintang"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:238
 msgid "SNR association"
-msgstr ""
+msgstr "dengan SNR"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:244
 msgid "glitches in period"
-msgstr ""
+msgstr "perbezaan tempoh masa"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:250
 msgid "binary or multiple pulsar"
-msgstr ""
+msgstr "pulsar kembar atau lebih"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:256
 msgid "millisecond pulsar"
-msgstr ""
+msgstr "pulsar milisaat"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:262
 msgid "recycled pulsar"
-msgstr ""
+msgstr "pulsar berkitaran"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:268
 msgid "radio interpulse"
-msgstr ""
+msgstr "antara-gelombang radio"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:274
 msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
-msgstr ""
+msgstr "sinaran optikal, x-ray atau gamma (tenaga tinggi)"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
-msgstr ""
+msgstr "pulsar diluar galaksi"
 
 #~ msgid "Set Location "
 #~ msgstr "Tentukan Lokasi "
