@@ -21,10 +21,19 @@ if (BUILD_FOR_ANDROID)
 
    add_custom_target( android_resources
       DEPENDS build.xml stellarium
+	  COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/assets
       COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/assets
       COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/libs/${ARM_TARGET}
       COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_INSTALL_PREFIX}/bin/libstellarium.so ${CMAKE_CURRENT_BINARY_DIR}/libs/${ARM_TARGET}/
       COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_INSTALL_PREFIX}/share ${CMAKE_CURRENT_BINARY_DIR}/assets
+   )
+   
+   add_custom_target( android_resources_no_assets
+      DEPENDS build.xml stellarium
+	  COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/assets
+      COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/assets
+      COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/libs/${ARM_TARGET}
+      COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_INSTALL_PREFIX}/bin/libstellarium.so ${CMAKE_CURRENT_BINARY_DIR}/libs/${ARM_TARGET}/
    )
    
    add_custom_target ( build_apk_debug
@@ -34,8 +43,13 @@ if (BUILD_FOR_ANDROID)
    add_custom_target ( build_apk_release
       COMMAND ant release
    )
+   
+   add_custom_target ( build_apk_debug_no_assets
+      COMMAND ant debug
+   )
 
    add_dependencies(build_apk_debug android_resources)
    add_dependencies(build_apk_release android_resources)
+   add_dependencies(build_apk_debug_no_assets android_resources_no_assets)
    
 endif(BUILD_FOR_ANDROID)
