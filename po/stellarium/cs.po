@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-20 17:27+0700\n"
-"PO-Revision-Date: 2012-02-20 21:49+0000\n"
+"POT-Creation-Date: 2012-02-27 04:57+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: Zbyněk Schwarz <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-21 05:44+0000\n"
-"X-Generator: Launchpad (build 14838)\n"
+"X-Launchpad-Export-Date: 2012-02-27 05:33+0000\n"
+"X-Generator: Launchpad (build 14868)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -332,7 +332,7 @@ msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Směr pohledu při spuštění (azimut/výška): %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:536
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:255
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Autoři"
 
@@ -3770,88 +3770,97 @@ msgid ""
 msgstr ""
 "Starý soubor satellites.json již není kompatibilní - je použit výchozí soubor"
 
+#: plugins/Satellites/src/Satellite.cpp:228
+#: plugins/Satellites/src/Satellite.cpp:232
+msgid "Catalog #"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:234
+msgid "International Designator"
+msgstr ""
+
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:238
+#: plugins/Satellites/src/Satellite.cpp:246
 #, qt-format
 msgid "Range (km): %1"
 msgstr "Vzdálenost (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:241
+#: plugins/Satellites/src/Satellite.cpp:249
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "Míra rychlosti (km/s): %1"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:244
+#: plugins/Satellites/src/Satellite.cpp:252
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "Výška (km): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:247
+#: plugins/Satellites/src/Satellite.cpp:255
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr "Podbod (Šíř./Délka): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:261
+#: plugins/Satellites/src/Satellite.cpp:269
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "Souřadnice TEME (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:269
+#: plugins/Satellites/src/Satellite.cpp:277
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "Rychlost TEME (km/s): %1"
 
-#: plugins/Satellites/src/Satellite.cpp:277
+#: plugins/Satellites/src/Satellite.cpp:285
 msgid "The satellite and the observer are in sunlight."
 msgstr "Satelit a pozorovatel jsou ve slunečním světle."
 
-#: plugins/Satellites/src/Satellite.cpp:280
+#: plugins/Satellites/src/Satellite.cpp:288
 msgid "The satellite is visible."
 msgstr "Satelit je viditelný."
 
-#: plugins/Satellites/src/Satellite.cpp:283
+#: plugins/Satellites/src/Satellite.cpp:291
 msgid "The satellite is eclipsed."
 msgstr "Satelit je zastíněn."
 
-#: plugins/Satellites/src/Satellite.cpp:286
+#: plugins/Satellites/src/Satellite.cpp:294
 msgid "The satellite is not visible"
 msgstr "Satelit není viditelný"
 
-#: plugins/Satellites/src/Satellite.cpp:312
+#: plugins/Satellites/src/Satellite.cpp:320
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:253
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:258
 msgid "Stellarium Satellites Plugin"
 msgstr "Zásuvný modul satelitů Stellarium"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
 msgid "Version"
 msgstr "Verze"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:258
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:263
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr "Plugin předpovídá polohu umělých družic."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:265
 msgid "Notes for users"
 msgstr "Poznámky pro uživatele"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:261
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:266
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
 "Družice a jejich dráhy se zobrazují pouze pokud je pozorovatel na Zemi."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:262
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:267
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
@@ -3861,7 +3870,7 @@ msgstr ""
 "dnů, týdnů či třeba měsíců do minulosti a budoucnosti). Mimo tento rozsah "
 "očekávejte vysoké množství podivností."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:263
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:268
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
@@ -3870,7 +3879,7 @@ msgstr ""
 "pár dnech). Je nezbytné je pravidelně aktualizovat."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:265
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:270
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -3881,7 +3890,7 @@ msgstr ""
 "znovu používat výchozí soubor %3. Starý soubor bude zálohován jako %4. "
 "Můžete ho nalézt v uživatelské složce pod \"modules/Satellites/\"."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:271
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:276
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
@@ -3890,11 +3899,11 @@ msgstr ""
 "dokončeny nebo mají chyby."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:275
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:280
 msgid "TLE data updates"
 msgstr "Aktualizace dat TLA"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:276
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more "
@@ -3904,7 +3913,7 @@ msgstr ""
 "zdrojů a toto modul standardně provede, pokud jsou data starší vice než 72 "
 "hodin. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:277
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:282
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -3915,7 +3924,7 @@ msgstr ""
 "Vašem počítači. Soubor musí být ve stejném formátu jako aktualizace "
 "Celestrak (viz %1 pro příklad)."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:278
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:283
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
@@ -3923,24 +3932,23 @@ msgstr ""
 "<b>Poznámka:</b> pokud název satelitu v aktualizovaných datech má cokoliv na "
 "konci umístěno v hranatých závorkách, budou před použitím obsah odstraněn."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
 msgid "Adding new satellites"
 msgstr "Přidání nových satelitů"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:282
-#, qt-format
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
 msgid ""
-"At the moment you must manually edit the %1 file to add new satellites to "
-"the database. Making this easier is still on the TODO list..."
+"1. Make sure the satellite(s) you wish to add are included in one of the "
+"URLs listed in the Sources tab of the satellites configuration dialog. 2. Go "
+"to the Satellites tab, and click the '+' button.  Select the satellite(s) "
+"you wish to add and select the \"add\" button."
 msgstr ""
-"V současnosti musíte pro přidání nových satelitů do databáze upravit soubor "
-"%1. Je v plánu tento krok ulehčit..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:284
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
 msgstr "Technické poznámky"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:285
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
@@ -3948,7 +3956,7 @@ msgstr ""
 "Pozice jsou vypočítávány pomocí metod SGP4 a SDP4 za pomoc vstupních dat "
 "NORAD TLE. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:291
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
@@ -3957,16 +3965,16 @@ msgstr ""
 "Spacetrack #3 (zahrnuto je i hlášení Spacetrack #6). "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:293
 #, qt-format
 msgid "See %1this document%2 for details."
 msgstr "Viz %1tento dokument%2 pro podrobnosti."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
 msgid "Links"
 msgstr "Odkazy"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:291
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:296
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
 "plugin\" in the subject when posting."
@@ -3975,19 +3983,19 @@ msgstr ""
 "do předmětu vložíte \"Satellites plugin\"."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:294
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:299
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Pokud máte otázky, můžete na ně %1zde dostat odpovědi%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:296
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "Hlášení o chybě můžete provést %1zde%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:298
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:303
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -3995,68 +4003,72 @@ msgstr ""
 "Pokud chcete zažádat o novou funkci, můžete vytvořit hlášení o chybě a "
 "vážnost nastavit na \"wishlist\"."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:316
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
 msgid "Internet updates disabled"
 msgstr "Aktualizace přes internet zakázány"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:318
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:350
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:355
 msgid "Updating now..."
 msgstr "Probíhá aktualizace..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:320
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:325
 msgid "Next update: < 1 minute"
 msgstr "Další aktualizace: < 1 minuta"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:322
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "Další aktualizace:  %1 minut"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:324
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "Další aktualizace: %1 hodin"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:339
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
 msgid "Update now"
 msgstr "Aktualizovat nyni"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:341
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:346
 msgid "Update from files"
 msgstr "Aktualizovat ze souborů"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:353
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:358
 msgid "Update error"
 msgstr "Chyba aktualizace"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:360
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:365
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
 msgstr "Aktualizováno %1/%2 satelit(ů); %3 chybí"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:417
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:422
 msgid "[new source]"
 msgstr "[nový zdroj]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:458
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
+msgid "[orbit calculation error]"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"
 msgstr "[všechny nově přidané]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:459
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:463
 msgid "[all not displayed]"
 msgstr "[všechny nezobrazené]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:460
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:464
 msgid "[all displayed]"
 msgstr "[všechny zobrazené]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:465
 msgid "[all]"
 msgstr "[všechny]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:573
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:597
 msgid "Select TLE Update File"
 msgstr "Vyberte aktualizační soubor TLE"
 
@@ -5479,230 +5491,10 @@ msgstr ""
 msgid "extragalactic (in MC) pulsar"
 msgstr "extragalaktický (v MC) pulsar"
 
-#~ msgid "Equatorial Grid"
-#~ msgstr "Ekvatoriální mřížka"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Azimutální mřížka"
-
-#~ msgid "Equator Line"
-#~ msgstr "Rovník"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Ekliptika"
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Světové strany"
-
-#~ msgid "Sky Language: "
-#~ msgstr "Jazyk: "
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Kultura: "
-
-#~ msgid "Date & Time"
-#~ msgstr "Datum a čas"
-
-#~ msgid "Set Location "
-#~ msgstr "Nastavení polohy "
-
-#~ msgid "Set Time "
-#~ msgstr "Nastavení času "
-
-#~ msgid "General "
-#~ msgstr "Obecné "
-
-#~ msgid "Stars "
-#~ msgstr "Hvězdy "
-
-#~ msgid "Colors "
-#~ msgstr "Barvy "
-
-#~ msgid "Effects "
-#~ msgstr "Efekty "
-
-#~ msgid "Scripts "
-#~ msgstr "Skripty "
-
-#~ msgid "Administration "
-#~ msgstr "Administrace "
-
-#~ msgid "Latitude: "
-#~ msgstr "Šířka: "
-
-#~ msgid "Longitude: "
-#~ msgstr "Délka: "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Nadm. výška (m): "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Těleso sluneční soustavy: "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Hvězdný čas: "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Nastavení časového pásma: "
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Přednastavený hvězdný čas: "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Výchozí hvězdný čas: "
-
-#~ msgid "Actual Time"
-#~ msgstr "Aktuální čas"
-
-#~ msgid "Preset Time"
-#~ msgstr "Nastavit čas"
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Formát času: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Formát datumu: "
-
-#~ msgid "Show: "
-#~ msgstr "Zobrazovat: "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "Jména do magnitudy: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "Mihotání: "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Ohraničující čáry souhvězdí"
-
-#~ msgid "Constellation Names"
-#~ msgstr "Názvy souhvězdí"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Intenzita obrázků souhvězdí"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Hranice souhvězdí"
-
-#~ msgid "Planet Names"
-#~ msgstr "Názvy planet"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Oběžné dráhy planet"
-
-#~ msgid "Planet Trails"
-#~ msgstr "Dráhy planet"
-
-#~ msgid "Meridian Line"
-#~ msgstr "Poledník"
-
-#~ msgid "Nebula Names"
-#~ msgstr "Názvy mlhovin"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Kroužky mlhovin"
-
-#~ msgid "Landscape: "
-#~ msgstr "Krajina: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Manuální zoom: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Velikost objektů: "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Intenzita Mléčné dráhy: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "Jména mlhovin do magnitudy: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Rychlost zoomu: "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Skrytí kurzoru: "
-
-#~ msgid "Local Script: "
-#~ msgstr "Lokální skript: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "CD/DVD skript: "
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Nahrát výchozí nastavení: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Uložit aktuální nastavení jako výchozí: "
-
-#~ msgid "Shut Down: "
-#~ msgstr "Vypnout: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Aktualizovat přes Internet: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Nastavit jazyk uživatelského rozhraní: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Stikněte šipku dolů pro načtení seznamu."
-
-#~ msgid "Hydra"
-#~ msgstr "Hydra"
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Vyber a opusť pro spuštění."
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Násobič magnitudy: "
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "Jas světelného znečištění "
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "Násobič jasu hvězd "
-
-#~ msgid "Sidereal"
-#~ msgstr "siderické"
-
-#~ msgid "Calendar"
-#~ msgstr "kalendářní"
-
-#~ msgid "Day keys: "
-#~ msgstr "Typ dnů "
-
-#~ msgid "USB Script: "
-#~ msgstr "USB skript: "
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Mezní hvězdná velikost (limitní magnituda) "
-
-#~ msgid "Light pollution: "
-#~ msgstr "Světelný smog "
-
-#~ msgid "Art brightness: "
-#~ msgstr "Jas kreseb: "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "Násobič vykreslování magnitud "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "Oprava na konečnou rychlost světla "
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "Zorné pole při spuštění: XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "Směr pohledu při spuštění: xxxx"
-
-#~ msgid "Planets labels"
-#~ msgstr "Popisky planet"
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "Získat katalog x z y"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "Stahování všech katalogů hvězd dokončeno!"
+#, qt-format
+#~ msgid ""
+#~ "At the moment you must manually edit the %1 file to add new satellites to "
+#~ "the database. Making this easier is still on the TODO list..."
+#~ msgstr ""
+#~ "V současnosti musíte pro přidání nových satelitů do databáze upravit soubor "
+#~ "%1. Je v plánu tento krok ulehčit..."
