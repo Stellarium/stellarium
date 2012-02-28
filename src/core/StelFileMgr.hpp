@@ -35,7 +35,7 @@
 //! The concept is that the StelFileMgr will be asked for a named path, and it
 //! will try to locate that path within each of the search directories.
 //! @author Lippo Huhtala <lippo.huhtala@meridea.com>
-//! @author Matthew Gates <matthew@porpoisehead.net>
+//! @author Matthew Gates <matthewg42@gmail.com>
 //! @sa @ref fileStructure description.
 class StelFileMgr
 {
