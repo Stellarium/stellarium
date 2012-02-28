@@ -7,3 +7,20 @@ Exec=env LD_LIBRARY_PATH=/opt/qt4-maemo5/lib /opt/stellarium/bin/stellarium
 Icon=stellarium
 X-Icon-path=/usr/share/icons/
 X-Window-Icon=stellarium
+
+X-Ayatana-Desktop-Shortcuts=Screen;Window
+
+[Window Group]
+Name=Open in window
+Exec=stellarium -f no
+TargetEnvironment=Unity
+
+[Fullscreen Group]
+Name=Open in fullscreen
+Exec=stellarium -f yes
+TargetEnvironment=Unity
+
+[Safemode Group]
+Name=Open in safe mode
+Exec=stellarium --safe-mode
+TargetEnvironment=Unity
