@@ -130,6 +130,7 @@ private:
     //! @return height at -absolutePosition, which is the current eye point.
     float groundHeight();
 
+    bool hasModels;             // flag to see if there's anything to draw
     bool shadowsEnabled;        // switchable value (^SPACE): Use shadow mapping
     bool bumpsEnabled;          // switchable value (^B): Use bump mapping
     bool textEnabled;           // switchable value (^K): display coordinates on screen. THIS IS NOT FOR DEBUGGING, BUT A PROGRAM FEATURE!
@@ -203,7 +204,7 @@ private:
     //Currently selected effect
     Effect curEffect;
     //Sends texture data to the shader based on which effect is selected;
-    void sendToShader(OBJ::StelModel& stelModel, Effect cur);
+    void sendToShader(const OBJ::StelModel* pStelModel, Effect cur);
     //Binds the shader for the selected effect
     void bindShader();
     //Prepare ambient and directional light components from Sun, Moon, Venus.

@@ -24,7 +24,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
-#include "StelFileMgr.hpp"
+//#include "StelFileMgr.hpp"
 #include "Scenery3dMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelUtils.hpp"
@@ -108,6 +108,7 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
     curEffect = No;
     curShader = 0;
     lightCamEnabled = false;
+    hasModels = false;
 
     Mat4d matrix;
 #define PLANE(_VAR_, _MAT_) matrix=_MAT_; _VAR_=StelVertexArray(cubePlaneFront.vertex,StelVertexArray::Triangles,cubePlaneFront.texCoords);\
@@ -304,10 +305,11 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
 void Scenery3d::loadModel()
 {
         QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
-        qDebug() << "Trying to load OBJ model: " << modelFile;
-        objModel->load(modelFile.toAscii(), objVertexOrder);
+        if(!objModel->load(modelFile.toAscii(), objVertexOrder))
+            throw std::runtime_error("Failed to load OBJ file.");
+
+        hasModels = objModel->hasStelModels();
         objModel->transform(zRotateMatrix*obj2gridMatrix);
-        objModelArrays = objModel->getStelArrays();
 
 
         /* We could re-create zRotateMatrix here if needed: We may have "default" conditions with landscape coordinates
@@ -327,19 +329,23 @@ void Scenery3d::loadModel()
         else
         {
             modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelGroundFile);
-            qDebug() << "Trying to load ground OBJ model: " << modelFile;
-            groundModel->load(modelFile.toAscii(), objVertexOrder);
+            if(!groundModel->load(modelFile.toAscii(), objVertexOrder))
+                throw std::runtime_error("Failed to load OBJ file.");
+
             groundModel->transform(zRotateMatrix*obj2gridMatrix);
         }
 
         if (this->hasLocation())
         { if (location->altitude==FROM_MODEL) // previouslay marked meaningless
-            location->altitude=(int) (0.5*(objModel->getMinZ()+objModel->getMaxZ())+modelWorldOffset[2]);
+          {
+                location->altitude=static_cast<int>(0.5*(objModel->getBoundingBox()->min[2]+objModel->getBoundingBox()->max[2])+modelWorldOffset[2]);
+          }
         }
 
         if (groundNullHeight==MEANINGLESS)
         {
-            groundNullHeight=((groundModel!=NULL) ? groundModel->getMinZ() : objModel->getMinZ());
+            groundNullHeight=((groundModel!=NULL) ? groundModel->getBoundingBox()->min[2] : objModel->getBoundingBox()->min[2]);
+            //groundNullHeight = objModel->getBoundingBox()->min[2];
             qDebug() << "Ground outside model is " << groundNullHeight  << "m high (in model coordinates)";
         }
         else qDebug() << "Ground outside model stays " << groundNullHeight  << "m high (in model coordinates)";
@@ -351,12 +357,12 @@ void Scenery3d::loadModel()
         }
 
         if (absolutePosition.v[0]==MEANINGLESS) {
-            absolutePosition.v[0] = -(objModel->getMaxX()+objModel->getMinX())/2.0;
-            qDebug() << "Setting Easting  to BBX center: " << objModel->getMinX() << ".." << objModel->getMaxX() << ": " << absolutePosition.v[0];
+            absolutePosition.v[0] = -(objModel->getBoundingBox()->max[0]+objModel->getBoundingBox()->min[0])/2.0;
+            qDebug() << "Setting Easting  to BBX center: " << objModel->getBoundingBox()->min[0] << ".." << objModel->getBoundingBox()->max[0] << ": " << absolutePosition.v[0];
         }
         if (absolutePosition.v[1]==MEANINGLESS) {
-            absolutePosition.v[1] = -(objModel->getMaxY()+objModel->getMinY())/2.0;
-            qDebug() << "Setting Northing to BBX center: " << objModel->getMinY() << ".." << objModel->getMaxY() << ": " << -absolutePosition.v[1];
+            absolutePosition.v[1] = -(objModel->getBoundingBox()->max[1]+objModel->getBoundingBox()->min[1])/2.0;
+            qDebug() << "Setting Northing to BBX center: " << objModel->getBoundingBox()->min[1] << ".." << objModel->getBoundingBox()->max[1] << ": " << -absolutePosition.v[1];
         }
 
         absolutePosition[2] = -groundHeight()-eyeLevel;
@@ -367,8 +373,8 @@ void Scenery3d::loadModel()
         cur = groundModel;
 #endif
 
-        Vec3f vecMin(Vec3f(cur->getMinX(),cur->getMinY(), cur->getMinZ()));
-        Vec3f vecMax(Vec3f(cur->getMaxX(),cur->getMaxY(), cur->getMaxZ()));
+        Vec3f vecMin = cur->getBoundingBox()->min;
+        Vec3f vecMax = cur->getBoundingBox()->max;
         setSceneAABB(vecMin, vecMax);
 
         // finally, set core to enable update().
@@ -527,57 +533,102 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, amb); // tiny overall background light
 
 
-    for (unsigned int i=0; i<objModelArrays.size(); i++) {
-        OBJ::StelModel& stelModel = objModelArrays[i];
+    for(int i=0; i<objModel->getNumberOfStelModels(); ++i)
+    {
+        const OBJ::StelModel* pStelModel = &objModel->getStelModel(i);
 
-        if(textures) sendToShader(stelModel, curEffect);
+        if(textures) sendToShader(pStelModel, curEffect);
 
-        if (stelModel.illum == MTL::TRANSLUCENT) {
-            //qDebug() << "Translucent!";
-            glMaterialfv(GL_FRONT, GL_SPECULAR,  zero);
-            glMaterialf( GL_FRONT, GL_SHININESS, 0.0f);
+        if(pStelModel->pMaterial->illum == OBJ::TRANSLUCENT)
+        {
+            glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR,  zero);
+            glMaterialf( GL_FRONT_AND_BACK, GL_SHININESS, 0.0f);
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+            glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
             glEnable(GL_COLOR_MATERIAL);
-            glColor4f(stelModel.diffuseColor.v[0], stelModel.diffuseColor.v[1], stelModel.diffuseColor.v[2], stelModel.opacity);
-        } else {
-            glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, stelModel.diffuseColor.v); // most likely
-            glMaterialfv(GL_FRONT, GL_SPECULAR,  zero);
-            glMaterialf( GL_FRONT, GL_SHININESS, 0.0f);
+            glColor4f(pStelModel->pMaterial->diffuse[0], pStelModel->pMaterial->diffuse[1], pStelModel->pMaterial->diffuse[2], pStelModel->pMaterial->alpha);
+        }
+        else
+        {
+            glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, pStelModel->pMaterial->diffuse); // most likely
+            glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR,  zero);
+            glMaterialf( GL_FRONT_AND_BACK, GL_SHININESS, 0.0f);
         }
 
-        if (stelModel.illum == MTL::DIFFUSE_AND_AMBIENT){ // May make funny effects! [Note the reversed logic!]
-            glMaterialfv(GL_FRONT, GL_AMBIENT,   stelModel.ambientColor.v);
+        if (pStelModel->pMaterial->illum == OBJ::DIFFUSE_AND_AMBIENT){ // May make funny effects! [Note the reversed logic!]
+            glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, pStelModel->pMaterial->ambient);
         }
 
-        if (stelModel.illum == MTL::SPECULAR){ // for special cases.
-            glMaterialfv(GL_FRONT, GL_AMBIENT,   stelModel.ambientColor.v);
+        if (pStelModel->pMaterial->illum == OBJ::SPECULAR){ // for special cases.
+            glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, pStelModel->pMaterial->ambient);
             // GZ: This should enable specular color effects with colored and textured models.
-            glMaterialfv(GL_FRONT, GL_SPECULAR,  stelModel.specularColor.v);
-            glMaterialf( GL_FRONT, GL_SHININESS, stelModel.shininess);
+            glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, pStelModel->pMaterial->specular);
+            glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, pStelModel->pMaterial->shininess * 128.0f);
             glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SEPARATE_SPECULAR_COLOR); // test how expensive this is.
             glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 1); // Useful for Specular effects, change to 0 if too expensive
         } else {
             glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SINGLE_COLOR);
             glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 0);
         }
-        if(stelModel.texture) {
-            painter.setArrays(stelModel.vertices, stelModel.texcoords, NULL, stelModel.normals);
-        //} else if (stelModel.illum == MTL::TRANSLUCENT) {
-        //    painter.setArrays(stelModel.vertices, NULL, NULL, NULL);
-        } else {
-            painter.setArrays(stelModel.vertices, NULL, NULL, stelModel.normals);
+
+//        painter.setArrays(&objModel->getVertexArray()->position, &objModel->getVertexArray()->texCoord, NULL, &objModel->getVertexArray()->normal);
+//        painter.drawFromArray(StelPainter::Triangles, pStelModel->triangleCount*3, pStelModel->startIndex, false, objModel->getIndexArray());
+
+        if (objModel->hasPositions())
+        {
+            glEnableClientState(GL_VERTEX_ARRAY);
+            glVertexPointer(3, GL_DOUBLE, objModel->getVertexSize(), objModel->getVertexArray()->position);
         }
-        painter.drawFromArray(StelPainter::Triangles, stelModel.triangleCount * 3, 0, false);
-        if (stelModel.illum == MTL::TRANSLUCENT){
+
+        if (objModel->hasTextureCoords())
+        {
+            glClientActiveTexture(GL_TEXTURE0);
+            glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+            glTexCoordPointer(2, GL_FLOAT, objModel->getVertexSize(), objModel->getVertexArray()->texCoord);
+        }
+
+        if (objModel->hasNormals())
+        {
+            glEnableClientState(GL_NORMAL_ARRAY);
+            glNormalPointer(GL_FLOAT, objModel->getVertexSize(), objModel->getVertexArray()->normal);
+        }
+
+        if (objModel->hasTangents())
+        {
+            glClientActiveTexture(GL_TEXTURE3);
+            glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+            glTexCoordPointer(4, GL_FLOAT, objModel->getVertexSize(), objModel->getVertexArray()->tangent);
+        }
+
+        glDrawElements(GL_TRIANGLES, pStelModel->triangleCount*3, GL_UNSIGNED_INT, objModel->getIndexArray()+pStelModel->startIndex);
+
+        if (objModel->hasTangents())
+        {
+            glClientActiveTexture(GL_TEXTURE3);
+            glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        }
+
+        if (objModel->hasNormals())
+            glDisableClientState(GL_NORMAL_ARRAY);
+
+        if (objModel->hasTextureCoords())
+        {
+            glClientActiveTexture(GL_TEXTURE0);
+            glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        }
+
+        if (objModel->hasPositions())
+            glDisableClientState(GL_VERTEX_ARRAY);
+
+        if (pStelModel->pMaterial->illum == OBJ::TRANSLUCENT){
             glDisable(GL_BLEND);
             glDisable(GL_COLOR_MATERIAL);
         }
     }
 }
 
-void Scenery3d::sendToShader(OBJ::StelModel& stelModel, Effect cur)
+void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur)
 {
     int location;
 
@@ -586,8 +637,9 @@ void Scenery3d::sendToShader(OBJ::StelModel& stelModel, Effect cur)
         location = curShader->uniformLocation("fTransparencyThresh");
         curShader->setUniform(location, fTransparencyThresh);
 
-        if (stelModel.texture) {
-            stelModel.texture.data()->bind();
+        if (pStelModel->pMaterial->texture)
+        {
+            pStelModel->pMaterial->texture.data()->bind();
 
             //Send texture to shader
             location = curShader->uniformLocation("tex");
@@ -601,7 +653,7 @@ void Scenery3d::sendToShader(OBJ::StelModel& stelModel, Effect cur)
         {
             //No texture, send color and indication
             location = curShader->uniformLocation("vecColor");
-            curShader->setUniform(location, stelModel.diffuseColor.v[0], stelModel.diffuseColor.v[1], stelModel.diffuseColor.v[2], 1.0f);
+            curShader->setUniform(location, pStelModel->pMaterial->diffuse[0], pStelModel->pMaterial->diffuse[1], pStelModel->pMaterial->diffuse[2], pStelModel->pMaterial->diffuse[3]);
 
             location = curShader->uniformLocation("onlyColor");
             curShader->setUniform(location, true);
@@ -610,9 +662,10 @@ void Scenery3d::sendToShader(OBJ::StelModel& stelModel, Effect cur)
 
         if(cur == BumpMapping || cur == All)
         {
-            if (stelModel.bump_texture.data()){
+            if (pStelModel->pMaterial->bump_texture.data())
+            {
                 glActiveTexture(GL_TEXTURE2);
-                stelModel.bump_texture.data()->bind();
+                pStelModel->pMaterial->bump_texture.data()-> bind();
 
                 location = curShader->uniformLocation("bmap");
                 curShader->setUniform(location, 2);
@@ -629,8 +682,9 @@ void Scenery3d::sendToShader(OBJ::StelModel& stelModel, Effect cur)
     }
     else // No-shader code, more classical OpenGL pipeline
     {
-        if (stelModel.texture) {
-            stelModel.texture.data()->bind();
+        if (pStelModel->pMaterial->texture)
+        {
+            pStelModel->pMaterial->texture.data()->bind();
         }
     }
 }
@@ -639,22 +693,6 @@ void Scenery3d::generateCubeMap_drawScene(StelPainter& painter, float ambientBri
 {
     //Bind shader based on selected effect flags
     bindShader();
-
-    if(curShader != 0)
-    {
-        //Compute the Normal Matrix and send to shader
-        //Note: It's sent as 4x4 and in the shader we just use vec4(light3, 0.0)
-        //to compute what we want.
-        //We know that N = (inv(ModelViewMatrix))^T
-        //Mat4f modelView;
-        glGetFloatv(GL_MODELVIEW_MATRIX, modelView);
-
-        Mat3f normalMatrix = modelView.upper3x3();
-        normalMatrix = normalMatrix.inverse().transpose();
-
-        int location = curShader->uniformLocation("NormalMatrix");
-        curShader->set3x3Uniform(location, normalMatrix);
-    }
 
     //For debug
     if(lightCamEnabled) switchToLightCam();
@@ -709,19 +747,6 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, 0);
 
-    //Compute the Normal Matrix and send to shader
-    //Note: It's sent as 4x4 and in the shader we just use vec4(light3, 0.0)
-    //to compute what we want.
-    //We know that N = (inv(ModelViewMatrix))^T
-    //Mat4f modelView;
-    glGetFloatv(GL_MODELVIEW_MATRIX, modelView);
-
-    Mat3f normalMatrix = modelView.upper3x3();
-    normalMatrix = normalMatrix.inverse().transpose();
-
-    location = curShader->uniformLocation("NormalMatrix");
-    curShader->set3x3Uniform(location, normalMatrix);
-
     //Draw
     drawArrays(painter, true);
 
@@ -732,9 +757,8 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float
 void Scenery3d::generateShadowMap(StelCore* core)
 {
     //First Pass
-    if (objModelArrays.empty()) {
+    if(!hasModels)
         return;
-    }
 
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
     StelPainter painter(prj);
@@ -846,7 +870,7 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glColorMask(1, 1, 1, 1);
 }
 
- Scenery3d::ShadowCaster  Scenery3d::setupLights(float &ambientBrightness, float &directionalBrightness, Vec3f &lightsourcePosition)
+Scenery3d::ShadowCaster  Scenery3d::setupLights(float &ambientBrightness, float &directionalBrightness, Vec3f &lightsourcePosition)
 {
     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
     Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
@@ -972,7 +996,8 @@ void Scenery3d::generateShadowMap(StelCore* core)
 
 void Scenery3d::generateCubeMap(StelCore* core)
 {
-    if (objModelArrays.empty()) return;
+    if(!hasModels)
+        return;
 
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
     StelPainter painter(prj);
@@ -1099,10 +1124,8 @@ void Scenery3d::generateCubeMap(StelCore* core)
 
 void Scenery3d::drawFromCubeMap(StelCore* core)
 {
-
-    if (objModelArrays.empty()) {
+    if(!hasModels)
         return;
-    }
 
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
     StelPainter painter(prj);
@@ -1165,7 +1188,8 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
 
 void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
 {
-    if (objModelArrays.empty()) return;
+    if(!hasModels)
+        return;
 
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
     StelPainter painter(prj);
@@ -1243,9 +1267,9 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
 
 void Scenery3d::drawCoordinatesText(StelCore* core)
 {
-    if (objModelArrays.empty()) {
+    if(!hasModels)
         return;
-    }
+
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
     StelPainter painter(prj);
     const QFont font("Courier", 12);
@@ -1297,9 +1321,9 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
 
 void Scenery3d::drawDebugText(StelCore* core)
 {
-    if (objModelArrays.empty()) {
+    if(!hasModels)
         return;
-    }
+
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
     StelPainter painter(prj);
     const QFont font("Courier", 12);

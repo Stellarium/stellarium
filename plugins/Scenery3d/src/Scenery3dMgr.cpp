@@ -15,7 +15,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelFileMgr.hpp"
+//#include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
 #include "StelPainter.hpp"
 #include "StelModuleMgr.hpp"
