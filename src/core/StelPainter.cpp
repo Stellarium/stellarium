@@ -1916,14 +1916,14 @@ void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool
         normalArray.enabled = normal;
 }
 
-void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned int* indices)
+void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned int* indices, int stride)
 {
 	ArrayDesc projectedVertexArray = vertexArray;
 	if (doProj)
 	{
 		// Project the vertex array using current projection
 		if (indices)
-			projectedVertexArray = projectArray(vertexArray, 0, count, indices + offset);
+                        projectedVertexArray = projectArray(vertexArray, stride, count, indices + offset);
 		else
 			projectedVertexArray = projectArray(vertexArray, offset, count, NULL);
 	}
@@ -1933,25 +1933,25 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	Q_ASSERT(projectedVertexArray.enabled);
 	Q_ASSERT(projectedVertexArray.pointer);
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(projectedVertexArray.size, projectedVertexArray.type, 0, projectedVertexArray.pointer);
+        glVertexPointer(projectedVertexArray.size, projectedVertexArray.type, stride, projectedVertexArray.pointer);
 	if (texCoordArray.enabled)
 	{
 		Q_ASSERT(texCoordArray.pointer);
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glTexCoordPointer(texCoordArray.size, texCoordArray.type, 0, texCoordArray.pointer);
+                glTexCoordPointer(texCoordArray.size, texCoordArray.type, stride, texCoordArray.pointer);
 	}
 	if (normalArray.enabled)
 	{
 		Q_ASSERT(normalArray.pointer);
 		glEnableClientState(GL_NORMAL_ARRAY);
-		glNormalPointer(normalArray.type, 0, normalArray.pointer);
+                glNormalPointer(normalArray.type, stride, normalArray.pointer);
 	}
 	if (colorArray.enabled)
 	{
 		Q_ASSERT(colorArray.pointer);
 		glEnableClientState(GL_COLOR_ARRAY);
-		glColorPointer(colorArray.size, colorArray.type, 0, colorArray.pointer);
-	}
+                glColorPointer(colorArray.size, colorArray.type, stride, colorArray.pointer);
+        }
 #else
 	QGLShaderProgram* pr=NULL;
 
@@ -1962,7 +1962,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	{
 		pr = basicShaderProgram;
 		pr->bind();
-		pr->setAttributeArray(basicShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
+                pr->setAttributeArray(basicShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size, stride);
 		pr->enableAttributeArray(basicShaderVars.vertex);
 		pr->setUniformValue(basicShaderVars.projectionMatrix, qMat);
 		pr->setUniformValue(basicShaderVars.color, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
@@ -1971,24 +1971,24 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	{
 		pr = texturesShaderProgram;
 		pr->bind();
-		pr->setAttributeArray(texturesShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
+                pr->setAttributeArray(texturesShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size, stride);
 		pr->enableAttributeArray(texturesShaderVars.vertex);
 		pr->setUniformValue(texturesShaderVars.projectionMatrix, qMat);
 		pr->setUniformValue(texturesShaderVars.texColor, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
-		pr->setAttributeArray(texturesShaderVars.texCoord, (const GLfloat*)texCoordArray.pointer, 2);
+                pr->setAttributeArray(texturesShaderVars.texCoord, (const GLfloat*)texCoordArray.pointer, 2, stride);
 		pr->enableAttributeArray(texturesShaderVars.texCoord);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
 	}
 	else if (texCoordArray.enabled && colorArray.enabled && !normalArray.enabled)
 	{
-		pr = texturesColorShaderProgram;
+                pr = texturesColorShaderProgram;
 		pr->bind();
-		pr->setAttributeArray(texturesColorShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
+                pr->setAttributeArray(texturesColorShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size, stride);
 		pr->enableAttributeArray(texturesColorShaderVars.vertex);
 		pr->setUniformValue(texturesColorShaderVars.projectionMatrix, qMat);
-		pr->setAttributeArray(texturesColorShaderVars.texCoord, (const GLfloat*)texCoordArray.pointer, 2);
+                pr->setAttributeArray(texturesColorShaderVars.texCoord, (const GLfloat*)texCoordArray.pointer, 2, stride);
 		pr->enableAttributeArray(texturesColorShaderVars.texCoord);
-		pr->setAttributeArray(texturesColorShaderVars.color, (const GLfloat*)colorArray.pointer, colorArray.size);
+                pr->setAttributeArray(texturesColorShaderVars.color, (const GLfloat*)colorArray.pointer, colorArray.size, stride);
 		pr->enableAttributeArray(texturesColorShaderVars.color);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
 	}

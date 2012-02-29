@@ -532,39 +532,39 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
     const GLfloat amb[]={0.025f, 0.025f, 0.025f, 1.0f};
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, amb); // tiny overall background light
 
+    bool tangEnabled = false;
+    int tangLocation;
 
     for(int i=0; i<objModel->getNumberOfStelModels(); ++i)
     {
         const OBJ::StelModel* pStelModel = &objModel->getStelModel(i);
 
-        if(textures) sendToShader(pStelModel, curEffect);
+        if(textures) sendToShader(pStelModel, curEffect, tangEnabled, tangLocation);
 
-        if(pStelModel->pMaterial->illum == OBJ::TRANSLUCENT)
-        {
-            glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR,  zero);
-            glMaterialf( GL_FRONT_AND_BACK, GL_SHININESS, 0.0f);
+        if (pStelModel->pMaterial->illum == OBJ::TRANSLUCENT) {
+            //qDebug() << "Translucent!";
+            glMaterialfv(GL_FRONT, GL_SPECULAR,  zero);
+            glMaterialf( GL_FRONT, GL_SHININESS, 0.0f);
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+            glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
             glEnable(GL_COLOR_MATERIAL);
             glColor4f(pStelModel->pMaterial->diffuse[0], pStelModel->pMaterial->diffuse[1], pStelModel->pMaterial->diffuse[2], pStelModel->pMaterial->alpha);
-        }
-        else
-        {
-            glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, pStelModel->pMaterial->diffuse); // most likely
-            glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR,  zero);
-            glMaterialf( GL_FRONT_AND_BACK, GL_SHININESS, 0.0f);
+        } else {
+            glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, pStelModel->pMaterial->diffuse); // most likely
+            glMaterialfv(GL_FRONT, GL_SPECULAR,  zero);
+            glMaterialf( GL_FRONT, GL_SHININESS, 0.0f);
         }
 
         if (pStelModel->pMaterial->illum == OBJ::DIFFUSE_AND_AMBIENT){ // May make funny effects! [Note the reversed logic!]
-            glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, pStelModel->pMaterial->ambient);
+            glMaterialfv(GL_FRONT, GL_AMBIENT, pStelModel->pMaterial->ambient);
         }
 
         if (pStelModel->pMaterial->illum == OBJ::SPECULAR){ // for special cases.
-            glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, pStelModel->pMaterial->ambient);
+            glMaterialfv(GL_FRONT, GL_AMBIENT, pStelModel->pMaterial->ambient);
             // GZ: This should enable specular color effects with colored and textured models.
-            glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, pStelModel->pMaterial->specular);
-            glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, pStelModel->pMaterial->shininess * 128.0f);
+            glMaterialfv(GL_FRONT, GL_SPECULAR, pStelModel->pMaterial->specular);
+            glMaterialf( GL_FRONT, GL_SHININESS, pStelModel->pMaterial->shininess);
             glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SEPARATE_SPECULAR_COLOR); // test how expensive this is.
             glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 1); // Useful for Specular effects, change to 0 if too expensive
         } else {
@@ -572,65 +572,25 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
             glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 0);
         }
 
-//        painter.setArrays(&objModel->getVertexArray()->position, &objModel->getVertexArray()->texCoord, NULL, &objModel->getVertexArray()->normal);
-//        painter.drawFromArray(StelPainter::Triangles, pStelModel->triangleCount*3, pStelModel->startIndex, false, objModel->getIndexArray());
-
-        if (objModel->hasPositions())
-        {
-            glEnableClientState(GL_VERTEX_ARRAY);
-            glVertexPointer(3, GL_DOUBLE, objModel->getVertexSize(), objModel->getVertexArray()->position);
-        }
-
-        if (objModel->hasTextureCoords())
-        {
-            glClientActiveTexture(GL_TEXTURE0);
-            glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-            glTexCoordPointer(2, GL_FLOAT, objModel->getVertexSize(), objModel->getVertexArray()->texCoord);
-        }
-
-        if (objModel->hasNormals())
-        {
-            glEnableClientState(GL_NORMAL_ARRAY);
-            glNormalPointer(GL_FLOAT, objModel->getVertexSize(), objModel->getVertexArray()->normal);
-        }
-
-        if (objModel->hasTangents())
-        {
-            glClientActiveTexture(GL_TEXTURE3);
-            glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-            glTexCoordPointer(4, GL_FLOAT, objModel->getVertexSize(), objModel->getVertexArray()->tangent);
-        }
-
-        glDrawElements(GL_TRIANGLES, pStelModel->triangleCount*3, GL_UNSIGNED_INT, objModel->getIndexArray()+pStelModel->startIndex);
-
-        if (objModel->hasTangents())
-        {
-            glClientActiveTexture(GL_TEXTURE3);
-            glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-        }
-
-        if (objModel->hasNormals())
-            glDisableClientState(GL_NORMAL_ARRAY);
-
-        if (objModel->hasTextureCoords())
-        {
-            glClientActiveTexture(GL_TEXTURE0);
-            glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-        }
-
-        if (objModel->hasPositions())
-            glDisableClientState(GL_VERTEX_ARRAY);
+        painter.setArrays(&objModel->getVertexArray()->position, &objModel->getVertexArray()->texCoord, NULL, &objModel->getVertexArray()->normal);
+        painter.drawFromArray(StelPainter::Triangles, pStelModel->triangleCount*3, pStelModel->startIndex, false, objModel->getIndexArray(), objModel->getVertexSize());
 
         if (pStelModel->pMaterial->illum == OBJ::TRANSLUCENT){
             glDisable(GL_BLEND);
             glDisable(GL_COLOR_MATERIAL);
         }
+
+        if(tangEnabled)
+        {
+             glDisableVertexAttribArray(tangLocation);
+        }
     }
 }
 
-void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur)
+void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool& tangEnabled, int& tangLocation)
 {
     int location;
+    tangEnabled = false;
 
     if(cur != No)
     {
@@ -672,6 +632,14 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur)
 
                 location = curShader->uniformLocation("boolBump");
                 curShader->setUniform(location, true);
+
+                if(objModel->hasTangents())
+                {
+                    tangLocation = curShader->attributeLocation("vecTangent");
+                    glEnableVertexAttribArray(tangLocation);
+                    glVertexAttribPointer(tangLocation, 4, GL_FLOAT, 0, objModel->getVertexSize(), objModel->getVertexArray()->tangent);
+                    tangEnabled = true;
+                }
 
                 glActiveTexture(GL_TEXTURE0);
             } else {
