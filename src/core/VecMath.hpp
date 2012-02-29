@@ -81,6 +81,7 @@ template<class T> class Vector2
 {
 public:
 	inline Vector2();
+        inline Vector2(T);
 	inline Vector2(T, T);
 
 	inline Vector2& operator=(const T*);
@@ -336,6 +337,11 @@ template<class T> QDataStream& operator>>(QDataStream& in, Matrix3<T>& m) {in >>
 ////////////////////////// Vector2 class methods ///////////////////////////////
 
 template<class T> Vector2<T>::Vector2() {}
+
+template<class T> Vector2<T>::Vector2(T x)
+{
+        v[0]=x; v[1]=x;
+}
 
 template<class T> Vector2<T>::Vector2(T x, T y)
 {

@@ -66,11 +66,17 @@ public:
     //! A vertex struct holds the vertex itself (position), corresponding texture coordinates, normals, tangents and bitangents
     struct Vertex
     {
-        double position[3];
-        float  texCoord[2];
-        float  normal[3];
-        float  tangent[4];
-        float  bitangent[3];
+        Vertex() : position(0.0f), texCoord(0.0f), normal(0.0f), tangent(0.0f), bitangent(0.0f) {}
+        Vec3d position;
+        Vec2f texCoord;
+        Vec3f normal;
+        Vec4f tangent;
+        Vec3f bitangent;
+//        double position[3];
+//        float  texCoord[2];
+//        float  normal[3];
+//        float  tangent[4];
+//        float  bitangent[3];
     };
 
     //! Structure for a Mesh, will be used with Stellarium to render
