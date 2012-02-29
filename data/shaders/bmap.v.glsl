@@ -18,21 +18,26 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-uniform mat3 NormalMatrix;
-
 varying vec3 vecLight;
-varying vec3 vecPosition;
-varying vec3 vecNormal;
+varying vec3 vecHalf;
 
 void main(void)
 {
 	gl_TexCoord[0] = gl_MultiTexCoord0;
 	gl_Position = ftransform();
 	
-	vec3 lightDir = normalize(gl_LightSource[0].position.xyz);
+	vec3 n = normalize(gl_NormalMatrix * gl_Normal);
+	vec3 t = normalize(gl_NormalMatrix * gl_MultiTexCoord3.xyz);
+	vec3 b = cross(n, t);
 	
-	vecLight = normalize(NormalMatrix * lightDir);
-	vecPosition = gl_Vertex.xyz;
-	vecNormal = gl_Normal;
+	mat3 tbnv = mat3(t.x, b.x, n.x,
+					 t.y, b.y, n.y,
+					 t.z, b.z, n.z);
+	
+	vecLight = gl_LightSource[0].position.xyz;
+	vecLight = tbnv * vecLight;
+	
+	vecHalf = gl_LightSource[0].halfVector.xyz;
+	vecHalf = tbnv * vecHalf; 
 }
 
