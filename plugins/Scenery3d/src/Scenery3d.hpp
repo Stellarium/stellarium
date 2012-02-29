@@ -204,7 +204,7 @@ private:
     //Currently selected effect
     Effect curEffect;
     //Sends texture data to the shader based on which effect is selected;
-    void sendToShader(const OBJ::StelModel* pStelModel, Effect cur);
+    void sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool& tangEnabled, int& tangLocation);
     //Binds the shader for the selected effect
     void bindShader();
     //Prepare ambient and directional light components from Sun, Moon, Venus.

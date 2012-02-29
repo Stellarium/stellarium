@@ -17,6 +17,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+ 
+attribute vec4 vecTangent;
 
 varying vec3 vecLight;
 varying vec3 vecHalf;
@@ -27,8 +29,8 @@ void main(void)
 	gl_Position = ftransform();
 	
 	vec3 n = normalize(gl_NormalMatrix * gl_Normal);
-	vec3 t = normalize(gl_NormalMatrix * gl_MultiTexCoord3.xyz);
-	vec3 b = cross(n, t);
+	vec3 t = normalize(gl_NormalMatrix * vecTangent.xyz);
+	vec3 b = cross(n, t) * vecTangent.w;
 	
 	mat3 tbnv = mat3(t.x, b.x, n.x,
 					 t.y, b.y, n.y,

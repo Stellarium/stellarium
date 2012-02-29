@@ -126,12 +126,13 @@ bool OBJ::load(const char* filename, const enum vertexOrder order, bool rebuildN
 
 void OBJ::addTrianglePos(unsigned int index, int material, int v0, int v1, int v2)
 {
-    Vertex vertex =
-    {
-        {0.0, 0.0, 0.0},
-        {0.0f, 0.0f},
-        {0.0f, 0.0f, 0.0f}
-    };
+    Vertex vertex;
+//            =
+//    {
+//        {0.0, 0.0, 0.0},
+//        {0.0f, 0.0f},
+//        {0.0f, 0.0f, 0.0f}
+//    };
 
     //Add the material index to the index for grouping models
     m_attributeArray[index] = material;
@@ -157,13 +158,14 @@ void OBJ::addTrianglePos(unsigned int index, int material, int v0, int v1, int v
 
 void OBJ::addTrianglePosNormal(unsigned int index, int material, int v0, int v1, int v2, int vn0, int vn1, int vn2)
 {
-    Vertex vertex =
-    {
-        {0.0, 0.0, 0.0},
-        {0.0f, 0.0f},
-        {0.0f, 0.0f, 0.0f},
-        {0.0f, 0.0f, 0.0f}
-    };
+    Vertex vertex;
+//            =
+//    {
+//        {0.0, 0.0, 0.0},
+//        {0.0f, 0.0f},
+//        {0.0f, 0.0f, 0.0f},
+//        {0.0f, 0.0f, 0.0f}
+//    };
 
     //Add the material index to the index for grouping models
     m_attributeArray[index] = material;
@@ -198,13 +200,14 @@ void OBJ::addTrianglePosNormal(unsigned int index, int material, int v0, int v1,
 
 void OBJ::addTrianglePosTexCoord(unsigned int index, int material, int v0, int v1, int v2, int vt0, int vt1, int vt2)
 {
-    Vertex vertex =
-    {
-        {0.0, 0.0, 0.0},
-        {0.0f, 0.0f},
-        {0.0f, 0.0f, 0.0f},
-        {0.0f, 0.0f, 0.0f}
-    };
+    Vertex vertex;
+//            =
+//    {
+//        {0.0, 0.0, 0.0},
+//        {0.0f, 0.0f},
+//        {0.0f, 0.0f, 0.0f},
+//        {0.0f, 0.0f, 0.0f}
+//    };
 
     //Add the material index to the index for grouping models
     m_attributeArray[index] = material;
@@ -236,13 +239,14 @@ void OBJ::addTrianglePosTexCoord(unsigned int index, int material, int v0, int v
 
 void OBJ::addTrianglePosTexCoordNormal(unsigned int index, int material, int v0, int v1, int v2, int vt0, int vt1, int vt2, int vn0, int vn1, int vn2)
 {
-    Vertex vertex =
-    {
-        {0.0, 0.0, 0.0},
-        {0.0f, 0.0f},
-        {0.0f, 0.0f, 0.0f},
-        {0.0f, 0.0f, 0.0f}
-    };
+    Vertex vertex;
+//    =
+//    {
+//        {0.0, 0.0, 0.0},
+//        {0.0f, 0.0f},
+//        {0.0f, 0.0f, 0.0f},
+//        {0.0f, 0.0f, 0.0f}
+//    };
 
     //Add the material index to the index for grouping models
     m_attributeArray[index] = material;

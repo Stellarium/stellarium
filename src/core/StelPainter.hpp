@@ -318,7 +318,7 @@ public:
         }
 
 	//! use instead of glEnableClient
-	void enableClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false);
+        void enableClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false);
 
 	//! convenience method that enable and set all the given arrays.
 	//! It is equivalent to calling enableClientState and set the array pointer for each arrays.
@@ -329,7 +329,7 @@ public:
 	//! If indices is NULL, this operation will consume count values from the enabled arrays, starting at offset.
 	//! Else it will consume count elements of indices, starting at offset, which are used to index into the
 	//! enabled arrays.
-	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned int* indices=NULL);
+        void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned int* indices=NULL, int stride=0);
 
 	//! Draws the primitives defined in the StelVertexArray.
 	//! @param checkDiscontinuity will check and suppress discontinuities if necessary.
