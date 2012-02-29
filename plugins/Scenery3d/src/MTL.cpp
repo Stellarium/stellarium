@@ -139,7 +139,7 @@ void MTL::uploadTexturesGL(void)
     StelTextureMgr textureMgr;
     for (MatMap::iterator it = mMap.begin(); it != mMap.end(); it++) {
         std::string texture = it->second->texture;
-        qDebug() << "[Scenery3d]: TEX: " << texture.c_str();
+        //qDebug() << "[Scenery3d]: TEX: " << texture.c_str();
         if (texture.size() > 0) {
             StelTextureSP tex = textureMgr.createTexture(QString(absolutePath(texture).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
@@ -152,7 +152,7 @@ void MTL::uploadTexturesGL(void)
         }
 
         std::string bump = it->second->bump_texture;
-        qWarning() << "[Scenery3d]: BUMP: " << bump.c_str();
+        //qWarning() << "[Scenery3d]: BUMP: " << bump.c_str();
         if(bump.size() > 0)
         {
             StelTextureSP bumpTex = textureMgr.createTexture(QString(absolutePath(bump).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));

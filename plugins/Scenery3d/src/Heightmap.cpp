@@ -7,27 +7,26 @@
 #define INF (std::numeric_limits<float>::max())
 #define NO_HEIGHT (-INF)
 
-Heightmap::Heightmap(const OBJ& obj) : obj(obj), nullHeight(0)
+Heightmap::Heightmap(OBJ& obj) : obj(obj), nullHeight(0)
 {
-   this->xMin = INF;
-   this->xMax = -INF;
-   this->yMin = INF;
-   this->yMax = -INF;
-   
-   for (std::vector<OBJ::Vertex>::const_iterator it = obj.vertices.begin(); it != obj.vertices.end(); it++)
-   {
-      if (it->x < xMin) xMin = it->x;
-      if (it->y < yMin) yMin = it->y;
-      if (it->x > xMax) xMax = it->x;
-      if (it->y > yMax) yMax = it->y;
-   }
-   
-   this->initGrid();
+    this->xMin = INF;
+    this->xMax = -INF;
+    this->yMin = INF;
+    this->yMax = -INF;
+
+    this->obj = obj;
+
+    xMin = std::min(obj.pBoundingBox->min[0], xMin);
+    yMin = std::min(obj.pBoundingBox->min[1], yMin);
+    xMax = std::max(obj.pBoundingBox->max[0], xMax);
+    yMax = std::max(obj.pBoundingBox->max[1], yMax);
+
+    this->initGrid();
 }
 
 Heightmap::~Heightmap()
 {
-   delete[] grid;
+    delete[] grid;
 }
 
 /**
@@ -37,23 +36,23 @@ Heightmap::~Heightmap()
  */
 float Heightmap::getHeight(const float x, const float y) const
 {
-   Heightmap::GridSpace* space = getSpace(x, y);
-   if (space == NULL) 
-   {
-       return nullHeight;
-   }
-   else
-   {
-       float h = space->getHeight(obj, x, y);
-       if (h == NO_HEIGHT)
-	{
-	    return nullHeight;
-	}
-	else
-	{
-	    return h;
-	}
-   }
+    Heightmap::GridSpace* space = getSpace(x, y);
+    if (space == NULL)
+    {
+        return nullHeight;
+    }
+    else
+    {
+        float h = space->getHeight(obj, x, y);
+        if (h == NO_HEIGHT)
+        {
+            return nullHeight;
+        }
+        else
+        {
+            return h;
+        }
+    }
 }
 
 /**
@@ -61,20 +60,22 @@ float Heightmap::getHeight(const float x, const float y) const
  * for intersection with the observer coords is limited to faces
  * intersecting this grid space.
  */
-float Heightmap::GridSpace::getHeight(const OBJ& obj, const float x, const float y) const
+float Heightmap::GridSpace::getHeight(OBJ& obj, const float x, const float y) const
 {
     float h = NO_HEIGHT;
 
-    for (size_t i = 0; i < faces.size(); i++)
+    for(unsigned int i=0; i<obj.m_numberOfTriangles; ++i)
     {
-	const OBJ::Face* face = faces[i];
-	float face_h = face_height_at(obj, face, x, y);
-	if (face_h > h)
-	{
-	    h = face_h;
-	}
+        unsigned int* pTriangle = &obj.m_indexArray[i*3];
+
+        float face_h = face_height_at(obj, pTriangle, x, y);
+        if(face_h > h)
+        {
+            h = face_h;
+        }
     }
-   return h;
+
+    return h;
 }
 
 /**
@@ -84,28 +85,28 @@ float Heightmap::GridSpace::getHeight(const OBJ& obj, const float x, const float
 void Heightmap::initGrid()
 {
     grid = new GridSpace[GRID_LENGTH*GRID_LENGTH];
-   
+
     for (int y = 0; y < GRID_LENGTH; y++)
-    for (int x = 0; x < GRID_LENGTH; x++)
     {
-	float xmin = this->xMin + (x * (this->xMax - this->xMin)) / GRID_LENGTH;
-	float ymin = this->yMin + (y * (this->yMax - this->yMin)) / GRID_LENGTH;
-	float xmax = this->xMin + ((x+1) * (this->xMax - this->xMin)) / GRID_LENGTH;
-	float ymax = this->yMin + ((y+1) * (this->yMax - this->yMin)) / GRID_LENGTH;
-      
-	FaceVector* faces = &grid[y*GRID_LENGTH + x].faces;
-      
-	for (OBJ::ModelList::const_iterator m = obj.models.begin(); m != obj.models.end(); m++)
-	{
-	    for (OBJ::FaceList::const_iterator face = m->faces.begin(); face != m->faces.end(); face++)
-	    {
-		if (face_in_area (&(*face), xmin, ymin, xmax, ymax))
-		    {
-			faces->push_back(&(*face));
-		    }
-	    }
-	}
-   }
+        for (int x = 0; x < GRID_LENGTH; x++)
+        {
+            float xmin = this->xMin + (x * (this->xMax - this->xMin)) / GRID_LENGTH;
+            float ymin = this->yMin + (y * (this->yMax - this->yMin)) / GRID_LENGTH;
+            float xmax = this->xMin + ((x+1) * (this->xMax - this->xMin)) / GRID_LENGTH;
+            float ymax = this->yMin + ((y+1) * (this->yMax - this->yMin)) / GRID_LENGTH;
+
+            FaceVector* faces = &grid[y*GRID_LENGTH + x].faces;
+
+            for(unsigned int i=0; i<obj.m_numberOfTriangles; ++i)
+            {
+                unsigned int* pTriangle = &obj.m_indexArray[i*3];
+                if(face_in_area(obj, pTriangle, xmin, ymin, xmax, ymax))
+                {
+                    faces->push_back(*pTriangle);
+                }
+            }
+        }
+    }
 }
 
 /**
@@ -118,11 +119,11 @@ Heightmap::GridSpace* Heightmap::getSpace(const float x, const float y) const
 
     if ((ix < 0) || (ix >= GRID_LENGTH) || (iy < 0) || (iy >= GRID_LENGTH))
     {
-	return NULL;
+        return NULL;
     }
     else
     {
-	return &grid[iy*GRID_LENGTH + ix];
+        return &grid[iy*GRID_LENGTH + ix];
     }
 }
 
@@ -130,65 +131,83 @@ Heightmap::GridSpace* Heightmap::getSpace(const float x, const float y) const
  * Returns the height of the face at the given point or -inf if
  * the coordinates are outside the bounds of the face.
  */
-float Heightmap::GridSpace::face_height_at(const OBJ& obj, const OBJ::Face* face, const float x, const float y)
+float Heightmap::GridSpace::face_height_at(OBJ& obj, unsigned int* pTriangle, const float x, const float y)
 {
-	Q_ASSERT(face->refs.size() == 3); // There are only triangles in our models, nothing else
+    //Vertices in triangle
+    OBJ::Vertex* pV0 = &obj.m_vertexArray[pTriangle[0]];
+    OBJ::Vertex* pV1 = &obj.m_vertexArray[pTriangle[1]];
+    OBJ::Vertex* pV2 = &obj.m_vertexArray[pTriangle[2]];
 
-	// Get vertices in triangle
-	struct { float x,y,z; } p[3];
-	int i = 0;
-	for (OBJ::RefList::const_iterator it = face->refs.begin(); it != face->refs.end(); it++)
-	{
-		const OBJ::Vertex& vert = obj.vertices[it->v];
-		p[i].x = vert.x;
-		p[i].y = vert.y;
-		p[i].z = vert.z;
-		i++;
-	}
+    float pVertex0[3];
+    pVertex0[0] = static_cast<float>(pV0->position[0]);
+    pVertex0[1] = static_cast<float>(pV0->position[1]);
+    pVertex0[2] = static_cast<float>(pV0->position[2]);
 
-	// Weight of those vertices is used to calculate exact height at (x,y), using barycentric coordinates, see also
-	// http://en.wikipedia.org/wiki/Barycentric_coordinate_system_(mathematics)#Converting_to_barycentric_coordinates
-	float det_T = (p[1].y - p[2].y) * (p[0].x - p[2].x) + (p[2].x - p[1].x) * (p[0].y - p[2].y);
-	float l1 = ( (p[1].y - p[2].y) * (x - p[2].x) + (p[2].x - p[1].x) * (y - p[2].y) ) / det_T;
-	float l2 = ( (p[2].y - p[0].y) * (x - p[2].x) + (p[0].x - p[2].x) * (y - p[2].y) ) / det_T;
-	float l3 = 1. - l1 - l2;
+    float pVertex1[3];
+    pVertex1[0] = static_cast<float>(pV1->position[0]);
+    pVertex1[1] = static_cast<float>(pV1->position[1]);
+    pVertex1[2] = static_cast<float>(pV1->position[2]);
 
-	if ((l1 < 0) || (l2 < 0) || (l3 < 0))
-	{
-		return NO_HEIGHT; // (x,y) out of face bounds
-	}
-	else
-	{
-		return l1 * p[0].z + l2 * p[1].z + l3 * p[2].z;
-	}
+    float pVertex2[3];
+    pVertex2[0] = static_cast<float>(pV2->position[0]);
+    pVertex2[1] = static_cast<float>(pV2->position[1]);
+    pVertex2[2] = static_cast<float>(pV2->position[2]);
+
+    // Weight of those vertices is used to calculate exact height at (x,y), using barycentric coordinates, see also
+    // http://en.wikipedia.org/wiki/Barycentric_coordinate_system_(mathematics)#Converting_to_barycentric_coordinates
+    float det_T = (pVertex1[1]-pVertex2[1]) *
+                  (pVertex0[0]-pVertex2[0]) +
+                  (pVertex2[0]-pVertex1[0]) *
+                  (pVertex0[1]-pVertex2[1]);
+
+    float l1 = ((pVertex1[1]-pVertex2[1]) *
+                (x-pVertex2[0]) +
+                (pVertex2[0]-pVertex1[0]) *
+                (y-pVertex2[1]))/det_T;
+
+    float l2 = ((pVertex2[1]-pVertex0[1]) *
+                (x-pVertex2[0]) +
+                (pVertex0[0]-pVertex2[0]) *
+                (y-pVertex2[1]))/det_T;
+
+    float l3 = 1.0f - l1 - l2;
+
+    if ((l1 < 0) || (l2 < 0) || (l3 < 0))
+    {
+        return NO_HEIGHT; // (x,y) out of face bounds
+    }
+    else
+    {
+        return l1*pVertex0[2] + l2*pVertex1[2] + l3*pVertex2[2];
+    }
 }
 
 /**
  * Returns true if the given face intersects the given area.
  */
-bool Heightmap::face_in_area (const OBJ::Face* face, const float xmin, const float ymin, const float xmax, const float ymax) const
+bool Heightmap::face_in_area(OBJ& obj, const unsigned int* pTriangle, const float xmin, const float ymin, const float xmax, const float ymax) const
 {
-   // current implementation: use face's bounding box
-   float f_xmin = xmax;
-   float f_ymin = ymax;
-   float f_xmax = xmin;
-   float f_ymax = ymin;
-   
-   for (OBJ::RefList::const_iterator r = face->refs.begin(); r != face->refs.end(); r++)
-   {
-	OBJ::Vertex vertex = obj.vertices[r->v];
-	if (vertex.x < f_xmin) f_xmin = vertex.x;
-	if (vertex.y < f_ymin) f_ymin = vertex.y;
-	if (vertex.x > f_xmax) f_xmax = vertex.x;
-	if (vertex.y > f_ymax) f_ymax = vertex.y;
-   }
-   
-   if ((f_xmin < xmax) && (f_ymin < ymax) && (f_xmax > xmin) && (f_ymax > ymin))
-   {
-      return true;
-   }
-   else
-   {
-      return false;
-   }
+    // current implementation: use face's bounding box
+    double f_xmin = xmax;
+    double f_ymin = ymax;
+    double f_xmax = xmin;
+    double f_ymax = ymin;
+
+    for(int i=0; i<3; i++)
+    {
+        OBJ::Vertex* pVertex = &obj.m_vertexArray[pTriangle[i]];
+        if(pVertex->position[0] < f_xmin) f_xmin = pVertex->position[0];
+        if(pVertex->position[1] < f_ymin) f_ymin = pVertex->position[1];
+        if(pVertex->position[0] > f_xmax) f_xmax = pVertex->position[0];
+        if(pVertex->position[1] > f_ymax) f_ymax = pVertex->position[1];
+    }
+
+    if ((f_xmin < xmax) && (f_ymin < ymax) && (f_xmax > xmin) && (f_ymax > ymin))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

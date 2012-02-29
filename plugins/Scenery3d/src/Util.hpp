@@ -4,6 +4,10 @@
 #include <string>
 #include <vector>
 
+#include <QString>
+#include <QDebug>
+#include <QTime>
+
 //! Split string into list of strings.
 //! Example: splitStr("Hello World!", " ") results in {"Hello", "World!"}.
 //! @param line String to split.
@@ -30,6 +34,9 @@ extern void trim_right(std::string& source, const std::string& t);
 //! Generates a normal Matrix from the given 3x3 view matrix
 //! @param mat 3x3 view matrix, will be overwritten to normal matrix
 extern void makeNormalMatrix(std::vector<float>& mat);
-
+//! Returns the current time string as char array
+extern const char* getTime();
+//! Parses a texture string ready for loading
+extern void parseTextureString(std::string in, std::string& out);
 #endif
 

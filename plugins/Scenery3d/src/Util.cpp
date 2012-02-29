@@ -70,3 +70,30 @@ void makeNormalMatrix(std::vector<float> &mat)
 {
 
 }
+
+const char* getTime()
+{
+    QByteArray byteArray = QDateTime::currentDateTime().toString(Qt::ISODate).toUtf8();
+    const char* cString = byteArray.constData();
+    return cString;
+}
+
+void parseTextureString(std::string in, std::string &out)
+{
+    //Copy in into out
+    out = in;
+    //Remove leading space
+    if(out.at(0) == ' ')
+        out = out.substr(1, out.length()-1);
+
+    //Remove trailing space
+    trim_right(out);
+
+    //Replace black slashes with slashes
+    size_t position = out.find("\\");
+    while (position != std::string::npos)
+    {
+        out.replace(position, 1, "/");
+        position = out.find("\\", position + 1);
+    }
+}
