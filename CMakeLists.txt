@@ -54,7 +54,6 @@ IF(BUILD_FOR_MAEMO)
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-omit-frame-pointer -fno-optimize-sibling-calls -D_REENTRANT -DQT_GL_NO_SCISSOR_TEST -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024 -mtune=cortex-a8 -march=armv7-a -ftree-vectorize -mfpu=neon -mfloat-abi=softfp -ffast-math -funroll-loops -DBUILD_FOR_MAEMO")
 ENDIF()
 
-SET(BUILD_FOR_ANDROID 1 CACHE BOOL "Set to 1 or true if you want to build for Android target")
 IF(BUILD_FOR_ANDROID)
   #android-specific defaults
   SET(OPENGL_MODE ES2 CACHE STRING "Choose the type of openGL to use, options are: Desktop, ES2")
@@ -77,15 +76,8 @@ IF(BUILD_FOR_ANDROID)
   #configure the mobile GUI plugin. Android defaults:
   SET(EXTERNAL_GUI_SRC_PATH "../plugins/MobileGui" CACHE PATH "The location of the plugin main directory i.e. the one containing the top level CMakeLists.txt")
   SET(GUI_MODE External CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
-  
-  #extra QT Mobility libraries; these aren't picked up by cmake's built-in scripts. Setting them manually for now.
-  SET(QTMOBILITY_LIBRARIES "/c/Users/Brady/necessitas/Android/Qt/480/armeabi-v7a/lib/libQtSystemInfo.so" CACHE STRING "The paths to any necessary QtMobility libraries")
-  SET(QTMOBILITY_INCLUDES "-Ic:/Users/Brady/necessitas/Android/Qt/480/armeabi-v7a/include/QtMobility -I/c/Users/Brady/necessitas/Android/Qt/480/armeabi-v7a/include/QtSystemInfo" CACHE STRING "Additional build compiler options for QtMobility include directories")
-
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${QTMOBILITY_INCLUDES}")
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${QTMOBILITY_INCLUDES}")
-  
-  #and CMake doesn't seem to find the rest of Qt automatically either. Is Necessitas using odd locations?...
+    
+  #force CMAKE to find QT
   SET(NECESSITAS_QT_ROOT "C:/Users/Brady/necessitas/Android/Qt/480" CACHE STRING "Android: Location of necessitas Qt")
   
   SET(NECESSITAS_QT_ROOT_ARCH "${NECESSITAS_QT_ROOT}/${ARM_TARGET}")
@@ -254,12 +246,21 @@ STRING(REPLACE "${QT_QTTEST_LIBRARY}" "" QT_LIBRARIES "${QT_LIBRARIES}")
 # Get rid of the GLU dependency, it's not needed in stellarium.
 STRING(REPLACE "-lGLU " "" QT_LIBRARIES "${QT_LIBRARIES}")
 
+IF(BUILD_FOR_ANDROID)
+ FIND_LIBRARY(QT_SYSTEM_INFO_LIB QtSystemInfo)
+ SET(QT_LIBRARIES ${QT_LIBRARIES} ${QT_SYSTEM_INFO_LIB})
+ 
+ INCLUDE_DIRECTORIES(${NECESSITAS_QT_ROOT_ARCH}/include/QtMobility ${NECESSITAS_QT_ROOT_ARCH}/include/QtSystemInfo)
+ENDIF()
+
 FIND_PACKAGE(ZLIB)
 
 IF(ENABLE_NLS)
   IF(BUILD_FOR_ANDROID)
     ADD_LIBRARY(intllite STATIC "src/core/external/libintl-lite/libintl-lite.cpp")
 	SET(INTL_LIBRARIES ${CMAKE_BINARY_DIR}/libintllite.a)
+	
+	ADD_DEPENDENCIES(AllStaticPlugins intllite)
 	
 	FIND_HOST_PACKAGE(Gettext REQUIRED)
 	FIND_HOST_PACKAGE(XGettext REQUIRED)

@@ -348,6 +348,7 @@ set( CMAKE_EXE_LINKER_FLAGS "${LINKER_FLAGS}" CACHE STRING "linker flags" FORCE 
 #set these global flags for cmake client scripts to change behavior
 set( ANDROID True )
 set( BUILD_ANDROID True )
+set( BUILD_FOR_ANDROID True )
 
 #macro to find packages on the host OS
 macro(find_host_package)
