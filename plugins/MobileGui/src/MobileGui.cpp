@@ -19,9 +19,15 @@
 
 #include "MobileGui.hpp"
 #include <QProgressBar>
+#include <QtDeclarative/QDeclarativeEngine>
+#include <QtDeclarative/QDeclarativeComponent>
+#include <QGraphicsObject>
+#include <QGraphicsWidget>
+#include <QDebug>
 
 StelGuiBase* StelMobileGuiPluginInterface::getStelGuiBase() const
 {
+	Q_INIT_RESOURCE(qmlResources);
 	return new MobileGui();
 }
 Q_EXPORT_PLUGIN2(StelGui, StelMobileGuiPluginInterface)
@@ -40,16 +46,26 @@ void MobileGui::init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraph
 {
 	this->topLevelGraphicsWidget = topLevelGraphicsWidget;
 	StelGuiBase::init(topLevelGraphicsWidget, stelAppGraphicsWidget);
-	/*
-	QGraphicsScene* scene = myExistingGraphicsScene();
-	 QDeclarativeEngine *engine = new QDeclarativeEngine;
-	 QDeclarativeComponent component(engine, QUrl::fromLocalFile("myqml.qml"));
-	 QGraphicsObject *object =
-		 qobject_cast<QGraphicsObject *>(component.create());
-	 scene->addItem(object);
 
-	QDeclarativeEngine *engine = new QDeclarativeEngine;
-	QDeclarativeComponent component(*/
+	//QGraphicsScene* scene = myExistingGraphicsScene();
+
+	QDeclarativeEngine *engine = new QDeclarativeEngine();
+
+	QDeclarativeComponent component(engine, QUrl("qrc:/qml/MobileGui.qml"));
+
+	if(component.isError())
+	{
+		qDebug() << "QDeclarativeComponent errors: " << component.errors();
+		qDebug() << "We might crash now.";
+	}
+	else
+	{
+		 qDebug() << "QDeclarativeComponent loaded in without complaint";
+		 QGraphicsObject *object =
+			 qobject_cast<QGraphicsObject *>(component.create());
+		 object->setParentItem(topLevelGraphicsWidget);
+		 //scene->addItem(object);
+	}
 }
 
 //! Get a pointer on the info panel used to display selected object info

@@ -14,7 +14,7 @@ if (BUILD_FOR_ANDROID)
 
    add_custom_command (
       OUTPUT build.xml
-      DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/AndroidManifest.xml ${SRC_FILES}
+	  DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/AndroidManifest.xml ${SRC_FILES}
       COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
       COMMAND android update project -t android-${ANDROID_API_LEVEL} --name Stellarium -p ${CMAKE_CURRENT_BINARY_DIR}
    )
