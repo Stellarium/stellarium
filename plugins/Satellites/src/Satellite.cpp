@@ -442,7 +442,9 @@ QString Satellite::extractInternationalDesignator(const QString& tle1)
 void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 {
 	XYZ = core->altAzToJ2000(elAzPosition);
-	StelApp::getInstance().getVisionModeNight() ? glColor4f(0.6,0.0,0.0,1.0) : glColor4f(hintColor[0],hintColor[1],hintColor[2], Satellite::hintBrightness);
+    Vec3f drawColor;
+    (visibility==RADAR_NIGHT) ? drawColor = Vec3f(0.2f,0.2f,0.2f) : drawColor = hintColor;
+    StelApp::getInstance().getVisionModeNight() ? glColor4f(0.6,0.0,0.0,1.0) : glColor4f(drawColor[0],drawColor[1],drawColor[2], Satellite::hintBrightness);
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
