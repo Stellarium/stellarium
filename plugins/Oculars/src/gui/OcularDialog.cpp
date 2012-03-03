@@ -186,7 +186,7 @@ void OcularDialog::moveUpSelectedOcular()
 
 void OcularDialog::moveUpSelectedTelescope()
 {
-	int index = ui->ocularListView->currentIndex().row();
+	int index = ui->telescopeListView->currentIndex().row();
 	if (index > 0)
 	{
 		telescopeTableModel->moveRowUp(index);
