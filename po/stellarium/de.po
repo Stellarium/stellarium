@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-27 04:57+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
-"Last-Translator: Dennis Baudys <Unknown>\n"
+"POT-Creation-Date: 2012-02-20 17:27+0700\n"
+"PO-Revision-Date: 2012-02-28 12:21+0000\n"
+"Last-Translator: Daniel Dietrich <Unknown>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-27 05:34+0000\n"
-"X-Generator: Launchpad (build 14868)\n"
+"X-Launchpad-Export-Date: 2012-02-29 04:39+0000\n"
+"X-Generator: Launchpad (build 14874)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -870,7 +870,7 @@ msgstr "Screenshot speichern"
 
 #: src/gui/StelGui.cpp:179
 msgid "Copy selected object information to clipboard"
-msgstr ""
+msgstr "Kopiere ausgewählte Objektinformation in die Zwischenablage"
 
 #: src/gui/StelGui.cpp:181
 msgid "Auto hide horizontal button bar"
@@ -1005,15 +1005,15 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:74
 msgid "selected text"
-msgstr ""
+msgstr "ausgewählter Text"
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "clear text"
-msgstr ""
+msgstr "Text entfernen"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "clear images"
-msgstr ""
+msgstr "Bilder entfernen"
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
@@ -1478,17 +1478,17 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
 msgid "Partial Lunar Eclipse"
-msgstr ""
+msgstr "Partielle Mondfinsternis"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:184
 msgid "Total Lunar Eclipse"
-msgstr ""
+msgstr "Totale Mondfinsternis"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
 msgid "Screensaver"
-msgstr ""
+msgstr "Bildschirmschoner"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:188
@@ -1511,11 +1511,11 @@ msgstr ""
 
 #: src/translations.h:196
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr ""
+msgstr "Skript zum Demonstrieren einer partiellen Mondfinsternis."
 
 #: src/translations.h:197
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr ""
+msgstr "Skript zum Demonstrieren einer totalen Mondfinsternis."
 
 #: src/translations.h:198
 msgid "A slow, infinite tour of the sky, looking at random objects."
@@ -1526,6 +1526,8 @@ msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
+"Skript zum Demonstrieren der totalen Sonnenfinsternis im Jahr 2009 (Ort= "
+"Ranpur, Bangladesch)"
 
 #: src/translations.h:200
 msgid "Script which runs automatically at startup"
@@ -3783,15 +3785,6 @@ msgstr ""
 "Das alte Format der Datei satellites.json ist nicht mehr gültig - Standard-"
 "Datei wird verwendet"
 
-#: plugins/Satellites/src/Satellite.cpp:228
-#: plugins/Satellites/src/Satellite.cpp:232
-msgid "Catalog #"
-msgstr ""
-
-#: plugins/Satellites/src/Satellite.cpp:234
-msgid "International Designator"
-msgstr ""
-
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:246
 #, qt-format
@@ -3956,13 +3949,15 @@ msgstr ""
 msgid "Adding new satellites"
 msgstr "Neue Satelliten hinzufügen"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
+#, qt-format
 msgid ""
-"1. Make sure the satellite(s) you wish to add are included in one of the "
-"URLs listed in the Sources tab of the satellites configuration dialog. 2. Go "
-"to the Satellites tab, and click the '+' button.  Select the satellite(s) "
-"you wish to add and select the \"add\" button."
+"At the moment you must manually edit the %1 file to add new satellites to "
+"the database. Making this easier is still on the TODO list..."
 msgstr ""
+"Um einen neuen Satelliten zur Datenbank hinzuzufügen, müssen Sie momentan "
+"noch die Datei %1 manuell ergänzen. Es ist bereits geplant, dies zukünftig "
+"zu vereinfachen …"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
@@ -4067,10 +4062,6 @@ msgstr "%1/%2 Satellit(en) aktualisiert; %3 fehlt/fehlen"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:422
 msgid "[new source]"
 msgstr "[neue Quelle]"
-
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
-msgid "[orbit calculation error]"
-msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"
@@ -5510,11 +5501,230 @@ msgstr ""
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
 
-#, qt-format
-#~ msgid ""
-#~ "At the moment you must manually edit the %1 file to add new satellites to "
-#~ "the database. Making this easier is still on the TODO list..."
-#~ msgstr ""
-#~ "Um einen neuen Satelliten zur Datenbank hinzuzufügen, müssen Sie momentan "
-#~ "noch die Datei %1 manuell ergänzen. Es ist bereits geplant, dies zukünftig "
-#~ "zu vereinfachen …"
+#~ msgid "Stars "
+#~ msgstr "Sterne "
+
+#~ msgid "Colors "
+#~ msgstr "Farben "
+
+#~ msgid "Effects "
+#~ msgstr "Effekte "
+
+#~ msgid "Scripts "
+#~ msgstr "Skripte "
+
+#~ msgid "Landscape: "
+#~ msgstr "Landschaft: "
+
+#~ msgid "Cardinal Points"
+#~ msgstr "Himmelsrichtungen"
+
+#~ msgid "Sky Language: "
+#~ msgstr "Himmelssprache: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "Kulturkreis: "
+
+#~ msgid "Date & Time"
+#~ msgstr "Datum & Zeit"
+
+#~ msgid "Set Location "
+#~ msgstr "Standort festlegen "
+
+#~ msgid "General "
+#~ msgstr "Allgemein "
+
+#~ msgid "Administration "
+#~ msgstr "Verwaltung "
+
+#~ msgid "Latitude: "
+#~ msgstr "Breitengrad: "
+
+#~ msgid "Longitude: "
+#~ msgstr "Längengrad: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Sternzeit: "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Zeitzone festlegen: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Sternzeit voreinstellen: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Sternzeit beim Start: "
+
+#~ msgid "Actual Time"
+#~ msgstr "Aktuelle Zeit"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "Zeitformat: "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Datumsformat: "
+
+#~ msgid "Show: "
+#~ msgstr "Anzeigen: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "Funkeln: "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "Sternbildlinien"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Sternbildgrenzen"
+
+#~ msgid "Planet Names"
+#~ msgstr "Planetennamen"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Planetenbahnen"
+
+#~ msgid "Planet Trails"
+#~ msgstr "Planetenspuren"
+
+#~ msgid "Nebula Names"
+#~ msgstr "Nebelnamen"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Nebelkreise"
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Regel für Objektgröße: "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Helligkeit der Milchstraße: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Namensanzeige bei Nebeln bis Helligkeit: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Mauszeiger ausblenden: "
+
+#~ msgid "Local Script: "
+#~ msgstr "Lokales Skript: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Standardkonfiguration laden: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Aktuelle Konfiguration als Standard speichern: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Internet-Update starten: "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Helligkeits-Verstärkungsfaktor: "
+
+#~ msgid "Sidereal"
+#~ msgstr "Stern-"
+
+#~ msgid "Calendar"
+#~ msgstr "Kalender"
+
+#~ msgid "Day keys: "
+#~ msgstr "Tagestasten: "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "Grenzhelligkeit: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "Lichtlaufzeit-Korrektur: "
+
+#~ msgid "USB Script: "
+#~ msgstr "USB-Skript: "
+
+#~ msgid "Light pollution: "
+#~ msgstr "Lichtverschmutzung: "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "Regler für Größenskalierung: "
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "Stärke der Lichtverschmutzung: "
+
+#~ msgid "Art brightness: "
+#~ msgstr "Helligkeit der Sternbildfiguren: "
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "Anfängliches Gesichtsfeld: XX"
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "Anfängliche Blickrichtung: xxxx"
+
+#~ msgid "Meridian Line"
+#~ msgstr "Meridianlinie"
+
+#~ msgid "Planets labels"
+#~ msgstr "Planetenbeschriftungen"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "Katalog x von y holen"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "Äquatoriales Raster"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "Azimutales Raster"
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "Sternwerte Multiplikator "
+
+#~ msgid "Set Time "
+#~ msgstr "Uhrzeit einstellen "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Höhe (m): "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Himmelskörper des Sonnensystems: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Maximalgröße der Beschriftungen: "
+
+#~ msgid "Constellation Names"
+#~ msgstr "Sternbildnamen"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Deutlichkeit der künstlerischen Sternbilder"
+
+#~ msgid "Equator Line"
+#~ msgstr "Himmelsäquator"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "Ekliptik"
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Manuelle Vergrößerung: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Vergrößerungsdauer: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "CD/DVD-Skript: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "Pfeiltaste abwärts, um Liste zu laden."
+
+#~ msgid "Select and exit to run."
+#~ msgstr "Wählen und verlassen, um auszuführen."
+
+#~ msgid "Shut Down: "
+#~ msgstr "Beenden: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Setze Menüsprache: "
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "Alle Sternkataloge sind heruntergeladen!"
+
+#~ msgid "Preset Time"
+#~ msgstr "Aktuelle Zeit"
+
+#~ msgid "Hydra"
+#~ msgstr "Hydra"
