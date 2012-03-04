@@ -45,7 +45,7 @@
 #define MEANINGLESS_INT -32767
 #define FROM_MODEL (MEANINGLESS_INT + 1)
 
-#define GROUND_MODEL 1
+#define GROUND_MODEL 0
 
 
 Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
@@ -645,7 +645,7 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
         //Bump Mapping
         if(cur == BumpMapping || cur == All)
         {
-            if (pStelModel->pMaterial->bump_texture.data())
+            if (pStelModel->pMaterial->bump_texture)
             {
                 glActiveTexture(GL_TEXTURE2);
                 pStelModel->pMaterial->bump_texture.data()-> bind();
