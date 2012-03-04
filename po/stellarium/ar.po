@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-20 17:27+0700\n"
+"POT-Creation-Date: 2012-02-27 04:57+0700\n"
 "PO-Revision-Date: 2012-02-26 01:24+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-27 04:48+0000\n"
-"X-Generator: Launchpad (build 14868)\n"
+"X-Launchpad-Export-Date: 2012-03-04 04:50+0000\n"
+"X-Generator: Launchpad (build 14886)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -3770,6 +3770,15 @@ msgstr ""
 "satellites.json \n"
 "لم يعد متوافقاً مع البرنامج - سوف يستخدم الملف الافتراضي"
 
+#: plugins/Satellites/src/Satellite.cpp:228
+#: plugins/Satellites/src/Satellite.cpp:232
+msgid "Catalog #"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:234
+msgid "International Designator"
+msgstr ""
+
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:246
 #, qt-format
@@ -3930,15 +3939,13 @@ msgstr ""
 msgid "Adding new satellites"
 msgstr "<P DIR=RTL>إضافة أقمار صناعية جديدة"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
-#, qt-format
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
 msgid ""
-"At the moment you must manually edit the %1 file to add new satellites to "
-"the database. Making this easier is still on the TODO list..."
+"1. Make sure the satellite(s) you wish to add are included in one of the "
+"URLs listed in the Sources tab of the satellites configuration dialog. 2. Go "
+"to the Satellites tab, and click the '+' button.  Select the satellite(s) "
+"you wish to add and select the \"add\" button."
 msgstr ""
-"<P DIR=RTL>في الوقت الحالي، يلزمك تحرير الملف %1 يدوياً لإضافة قمر صناعي "
-"جديد إلى قاعدة البيانات. وتسهيل هذه المهمة هو من ضمن قائمة التحسينات "
-"المستقبلية."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
@@ -4043,6 +4050,10 @@ msgstr "تم تحديث %1 من %2 من الأقمار الصناعية؛ و %3 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:422
 msgid "[new source]"
 msgstr "[مصدر جديد]"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
+msgid "[orbit calculation error]"
+msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-02-20 17:27+0700\n"
+"POT-Creation-Date: 2012-02-27 04:57+0700\n"
 "PO-Revision-Date: 2012-02-28 16:08+0000\n"
 "Last-Translator: Kenan Dervišević <kenan3008@gmail.com>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-29 04:39+0000\n"
-"X-Generator: Launchpad (build 14874)\n"
+"X-Launchpad-Export-Date: 2012-03-04 04:50+0000\n"
+"X-Generator: Launchpad (build 14886)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -3777,6 +3777,15 @@ msgstr ""
 "Stara satellites.json datoteka više nije kompatibilna - koristim početnu "
 "datoteku"
 
+#: plugins/Satellites/src/Satellite.cpp:228
+#: plugins/Satellites/src/Satellite.cpp:232
+msgid "Catalog #"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:234
+msgid "International Designator"
+msgstr ""
+
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:246
 #, qt-format
@@ -3937,15 +3946,13 @@ msgstr ""
 msgid "Adding new satellites"
 msgstr "Dodajem nove satelite"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
-#, qt-format
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
 msgid ""
-"At the moment you must manually edit the %1 file to add new satellites to "
-"the database. Making this easier is still on the TODO list..."
+"1. Make sure the satellite(s) you wish to add are included in one of the "
+"URLs listed in the Sources tab of the satellites configuration dialog. 2. Go "
+"to the Satellites tab, and click the '+' button.  Select the satellite(s) "
+"you wish to add and select the \"add\" button."
 msgstr ""
-"Trenutno, morate ručno urediti %1 datoteku kako biste dodali nove satelite u "
-"bazu podataka. Poboljšanje ove mogućnosti je na našoj listi budućih "
-"nadogradnji..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
@@ -4050,6 +4057,10 @@ msgstr "Ažurirano %1/%2 satelita; %3 nedostaje"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:422
 msgid "[new source]"
 msgstr "[novi izvor]"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
+msgid "[orbit calculation error]"
+msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"
