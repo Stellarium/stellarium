@@ -137,6 +137,8 @@ private:
     bool torchEnabled;          // switchable value (^L): adds artificial ambient light
     bool debugEnabled;          // switchable value (^D): display debug graphics and debug texts on screen
     bool lightCamEnabled;       // switchable value: switches camera to light camera
+    bool sceneryGenNormals;     // Config flag, true generates normals for the given OBJ
+    bool groundGenNormals;      // Config flag, true generates normals for the given ground Model
 
     int cubemapSize;            // configurable values, typically 512/1024/2048/4096
     int shadowmapSize;

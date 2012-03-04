@@ -109,6 +109,8 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
     curShader = 0;
     lightCamEnabled = false;
     hasModels = false;
+    sceneryGenNormals = false;
+    groundGenNormals = false;
 
     Mat4d matrix;
 #define PLANE(_VAR_, _MAT_) matrix=_MAT_; _VAR_=StelVertexArray(cubePlaneFront.vertex,StelVertexArray::Triangles,cubePlaneFront.texCoords);\
@@ -153,8 +155,10 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
     description = scenery3dIni.value("model/description").toString();
     landscapeName = scenery3dIni.value("model/landscape").toString();
     modelSceneryFile = scenery3dIni.value("model/scenery").toString();
-    fTransparencyThresh = scenery3dIni.value("general/transparencyThreshold", 0.5f).toFloat();
+    fTransparencyThresh = scenery3dIni.value("general/transparency_threshold", 0.5f).toFloat();
     qWarning() << "[Scenery3D] Transparency Threshold: " << fTransparencyThresh;
+    sceneryGenNormals = scenery3dIni.value("general/scenery_generate_normals", false).toBool();
+    groundGenNormals = scenery3dIni.value("general/ground_generate_normals", false).toBool();
 
     if (scenery3dIni.contains("model/ground"))
         modelGroundFile = scenery3dIni.value("model/ground").toString();
@@ -305,7 +309,7 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
 void Scenery3d::loadModel()
 {
         QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
-        if(!objModel->load(modelFile.toAscii(), objVertexOrder))
+        if(!objModel->load(modelFile.toAscii(), objVertexOrder, sceneryGenNormals))
             throw std::runtime_error("Failed to load OBJ file.");
 
         hasModels = objModel->hasStelModels();
@@ -329,7 +333,7 @@ void Scenery3d::loadModel()
         else
         {
             modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelGroundFile);
-            if(!groundModel->load(modelFile.toAscii(), objVertexOrder))
+            if(!groundModel->load(modelFile.toAscii(), objVertexOrder, groundGenNormals))
                 throw std::runtime_error("Failed to load OBJ file.");
 
             groundModel->transform(zRotateMatrix*obj2gridMatrix);
@@ -525,65 +529,80 @@ float Scenery3d::groundHeight()
 
 void Scenery3d::drawArrays(StelPainter& painter, bool textures)
 {
-    //glEnable(GL_CULL_FACE); // See if this makes a significant speed difference, and make sure models are correct!
-                            // Maybe make this configurable?
-    //glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 0); // default 0 is OK for "good" models.
-    const GLfloat zero[]={0.0f, 0.0f, 0.0f, 1.0f};
-    const GLfloat amb[]={0.025f, 0.025f, 0.025f, 1.0f};
+    const GLfloat zero[] = {0.0f, 0.0f, 0.0f, 1.0f};
+    const GLfloat amb[] = {0.025f, 0.025f, 0.025f, 1.0f};
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, amb); // tiny overall background light
 
     bool tangEnabled = false;
     int tangLocation;
 
-    for(int i=0; i<objModel->getNumberOfStelModels(); ++i)
+    for(int i=0; i<objModel->getNumberOfStelModels(); i++)
     {
         const OBJ::StelModel* pStelModel = &objModel->getStelModel(i);
+        const OBJ::Material* pMaterial = pStelModel->pMaterial;
 
-        if(textures) sendToShader(pStelModel, curEffect, tangEnabled, tangLocation);
+        if(textures)
+        {
+            sendToShader(pStelModel, curEffect, tangEnabled, tangLocation);
+        }
 
-        if (pStelModel->pMaterial->illum == OBJ::TRANSLUCENT) {
-            //qDebug() << "Translucent!";
-            glMaterialfv(GL_FRONT, GL_SPECULAR,  zero);
-            glMaterialf( GL_FRONT, GL_SHININESS, 0.0f);
+        if(pMaterial->illum == OBJ::TRANSLUCENT)
+        {
+            glMaterialfv(GL_FRONT, GL_SPECULAR, zero);
+            glMaterialf(GL_FRONT, GL_SHININESS, 0.0f);
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
             glEnable(GL_COLOR_MATERIAL);
-            glColor4f(pStelModel->pMaterial->diffuse[0], pStelModel->pMaterial->diffuse[1], pStelModel->pMaterial->diffuse[2], pStelModel->pMaterial->alpha);
-        } else {
-            glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, pStelModel->pMaterial->diffuse); // most likely
-            glMaterialfv(GL_FRONT, GL_SPECULAR,  zero);
-            glMaterialf( GL_FRONT, GL_SHININESS, 0.0f);
+            glColor4f(pMaterial->diffuse[0], pMaterial->diffuse[1], pMaterial->diffuse[2], pMaterial->alpha);
+        }
+        else
+        {
+            glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, pMaterial->diffuse);
+            glMaterialfv(GL_FRONT, GL_SPECULAR, zero);
+            glMaterialf(GL_FRONT, GL_SHININESS, 0.0f);
         }
 
-        if (pStelModel->pMaterial->illum == OBJ::DIFFUSE_AND_AMBIENT){ // May make funny effects! [Note the reversed logic!]
-            glMaterialfv(GL_FRONT, GL_AMBIENT, pStelModel->pMaterial->ambient);
+        if(pMaterial->illum == OBJ::DIFFUSE_AND_AMBIENT) // May make funny effects! [Note the reversed logic!]
+        {
+            glMaterialfv(GL_FRONT, GL_AMBIENT, pMaterial->ambient);
         }
 
-        if (pStelModel->pMaterial->illum == OBJ::SPECULAR){ // for special cases.
-            glMaterialfv(GL_FRONT, GL_AMBIENT, pStelModel->pMaterial->ambient);
+        if(pMaterial->illum == OBJ::SPECULAR)
+        {
+            glMaterialfv(GL_FRONT, GL_AMBIENT, pMaterial->ambient);
             // GZ: This should enable specular color effects with colored and textured models.
-            glMaterialfv(GL_FRONT, GL_SPECULAR, pStelModel->pMaterial->specular);
-            glMaterialf( GL_FRONT, GL_SHININESS, pStelModel->pMaterial->shininess);
+            glMaterialfv(GL_FRONT, GL_SPECULAR, pMaterial->specular);
+            glMaterialf(GL_FRONT, GL_SHININESS, pMaterial->shininess);
             glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SEPARATE_SPECULAR_COLOR); // test how expensive this is.
             glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 1); // Useful for Specular effects, change to 0 if too expensive
-        } else {
+        }
+        else
+        {
             glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SINGLE_COLOR);
             glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 0);
+        }        
+
+        if(pStelModel->pMaterial->texture)
+        {
+            painter.setArrays(&objModel->getVertexArray()->position, &objModel->getVertexArray()->texCoord, NULL, &objModel->getVertexArray()->normal);
+        } else {
+            painter.setArrays(&objModel->getVertexArray()->position, NULL, NULL, &objModel->getVertexArray()->normal);
         }
 
-        painter.setArrays(&objModel->getVertexArray()->position, &objModel->getVertexArray()->texCoord, NULL, &objModel->getVertexArray()->normal);
         painter.drawFromArray(StelPainter::Triangles, pStelModel->triangleCount*3, pStelModel->startIndex, false, objModel->getIndexArray(), objModel->getVertexSize());
 
-        if (pStelModel->pMaterial->illum == OBJ::TRANSLUCENT){
+        if(pMaterial->illum == OBJ::TRANSLUCENT)
+        {
             glDisable(GL_BLEND);
             glDisable(GL_COLOR_MATERIAL);
         }
 
         if(tangEnabled)
         {
-             glDisableVertexAttribArray(tangLocation);
+            glDisableVertexAttribArray(tangLocation);
         }
+
     }
 }
 
@@ -596,6 +615,9 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
     {
         location = curShader->uniformLocation("fTransparencyThresh");
         curShader->setUniform(location, fTransparencyThresh);
+
+        location = curShader->uniformLocation("alpha");
+        curShader->setUniform(location, pStelModel->pMaterial->alpha);
 
         if (pStelModel->pMaterial->texture)
         {
@@ -620,6 +642,7 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
         }
 
 
+        //Bump Mapping
         if(cur == BumpMapping || cur == All)
         {
             if (pStelModel->pMaterial->bump_texture.data())
@@ -627,12 +650,15 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
                 glActiveTexture(GL_TEXTURE2);
                 pStelModel->pMaterial->bump_texture.data()-> bind();
 
+                //Send bump map to shader
                 location = curShader->uniformLocation("bmap");
                 curShader->setUniform(location, 2);
 
+                //Flag for bumped lighting
                 location = curShader->uniformLocation("boolBump");
                 curShader->setUniform(location, true);
 
+                //Send tangents to shader
                 if(objModel->hasTangents())
                 {
                     tangLocation = curShader->attributeLocation("vecTangent");
@@ -642,7 +668,9 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
                 }
 
                 glActiveTexture(GL_TEXTURE0);
-            } else {
+            }
+            else
+            {
                 location = curShader->uniformLocation("boolBump");
                 curShader->setUniform(location, false);
             }
@@ -1088,6 +1116,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
     glDepthMask(GL_FALSE);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_TEXTURE_2D);
+    glDisable(GL_BLEND);
 }
 
 void Scenery3d::drawFromCubeMap(StelCore* core)

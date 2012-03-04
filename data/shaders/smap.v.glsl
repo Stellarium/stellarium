@@ -17,12 +17,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+#version 110 
 
 //Texture Bias Matrix for Shadow mapping
 uniform mat4 tex_mat;
 
 varying vec4 SM_tex_coord;
 varying vec3 vecLight;
+varying vec3 vecEye;
 varying vec3 vecNormal;
 
 void main(void)
@@ -30,9 +32,12 @@ void main(void)
 	//Shadow texture coords in projected light space
 	SM_tex_coord = tex_mat * gl_Vertex;
 	
-	gl_TexCoord[0] = gl_MultiTexCoord0;
-	gl_Position = ftransform();
+	vec3 v = vec3(gl_ModelViewMatrix * gl_Vertex);
 
 	vecNormal = normalize(gl_NormalMatrix * gl_Normal);
 	vecLight = normalize(gl_LightSource[0].position.xyz);
+	vecEye = normalize(-v);
+	
+	gl_TexCoord[0] = gl_MultiTexCoord0;
+	gl_Position = ftransform();
 }
