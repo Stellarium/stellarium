@@ -1,6 +1,9 @@
 /*
  * Stellarium Scenery3d Plug-in
  *
+ /*
+ * Stellarium Scenery3d Plug-in
+ *
  * Copyright (C) 2011 Simon Parzer, Peter Neubauer, Georg Zotti, Andrei Borza
  *
  * This program is free software; you can redistribute it and/or
@@ -18,40 +21,79 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#version 110
+ 
 uniform sampler2D tex;
 uniform sampler2D bmap;
 
 uniform bool boolBump;
 uniform vec4 vecColor;
 uniform bool onlyColor;
-
+ 
 uniform float fTransparencyThresh;
-
+uniform float alpha;
+ 
 varying vec3 vecLight;
-varying vec3 vecHalf;
-
+varying vec3 vecEye;
+varying vec3 vecNormal;
+  
+vec4 getLighting()
+{
+	//Ambient part
+	vec4 color = (gl_FrontLightModelProduct.sceneColor * gl_FrontMaterial.ambient) + (gl_LightSource[0].ambient * gl_FrontMaterial.ambient);
+	
+	//For bump mapping, the normal comes from the bump map texture lookup
+	vec3 n = vec3(0.0f);
+	if(boolBump)
+	{
+		n = normalize(texture(bmap, gl_TexCoord[0].st).xyz * 2.0 - 1.0);
+	}
+	else
+	{
+		n = normalize(vecNormal);
+	}
+	
+	vec3 l = normalize(vecLight);
+	
+	//Lambert term
+	float NdotL = dot(n, l);
+	
+	if(NdotL > 0.0f)
+	{
+		//Diffuse part
+		color += gl_LightSource[0].diffuse * gl_FrontMaterial.diffuse * NdotL;
+		
+		//Specular part
+		vec3 e = normalize(vecEye);
+		vec3 r = reflect(-l, n);
+		
+		float spec = pow(max(0.0, dot(r, e)), gl_FrontMaterial.shininess);
+		
+		color += gl_LightSource[0].specular * gl_FrontMaterial.specular * spec;
+	}		
+	
+	return color;
+} 
+  
 void main(void)
 {
-	vec4 texColor = texture(tex, gl_TexCoord[0].st);
-	
-	if(texColor.a < fTransparencyThresh)
+	vec4 texel = texture(tex, gl_TexCoord[0].st);
+	if(texel.a < fTransparencyThresh)
 		discard;
-		
-	vec3 n = normalize(texture(bmap, gl_TexCoord[0].st).xyz * 2.0 - 1.0);
-	vec3 l = normalize(vecLight);
-	vec3 h = normalize(vecHalf);
 	
-	float NdotL = max(0.0, dot(n, l));
-	float NdotH = max(0.0, dot(n, h));
-	float p = (NdotL == 0.0) ? 0.0 : pow(gl_FrontMaterial.shininess, NdotH);
+	//Get shading
+    vec4 color = getLighting();
 	
-	vec4 ambient = gl_FrontLightProduct[0].ambient;
-    vec4 diffuse = gl_FrontLightProduct[0].diffuse * NdotL;
-	vec4 specular = gl_FrontLightProduct[0].specular * p;
-	
-	vec4 color;
-	if(onlyColor) color = vecColor * (gl_LightSource[0].ambient + diffuse + specular);
-	else color = texColor * (gl_LightSource[0].ambient + diffuse + specular);
-    
-    gl_FragColor = color;
+	//Color only mode?
+	if(onlyColor)
+	{
+		color = vecColor * color;
+	}
+	else
+	{
+		color = texel * color;
+	}	
+
+	//Set fragment color, alpha comes from MTL file
+	gl_FragColor = vec4(color.xyz, alpha);
 }

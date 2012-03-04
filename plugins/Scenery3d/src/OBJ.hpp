@@ -4,6 +4,7 @@
 #include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "StelLogger.hpp"
 #include "VecMath.hpp"
 #include "Util.hpp"
 
@@ -47,7 +48,7 @@ public:
         float ambient[4];
         float diffuse[4];
         float specular[4];
-        //! Shininess
+        //! Shininess [0..128]
         float shininess;
         //! Transparency [0..1]
         float alpha;
@@ -72,11 +73,6 @@ public:
         Vec3f normal;
         Vec4f tangent;
         Vec3f bitangent;
-//        double position[3];
-//        float  texCoord[2];
-//        float  normal[3];
-//        float  tangent[4];
-//        float  bitangent[3];
     };
 
     //! Structure for a Mesh, will be used with Stellarium to render
