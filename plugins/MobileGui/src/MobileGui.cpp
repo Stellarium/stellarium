@@ -21,9 +21,16 @@
 #include <QProgressBar>
 #include <QtDeclarative/QDeclarativeEngine>
 #include <QtDeclarative/QDeclarativeComponent>
+#include <QDeclarativeContext>
 #include <QGraphicsObject>
 #include <QGraphicsWidget>
 #include <QDebug>
+
+#include <QGraphicsScene>
+#include <QMessageBox>
+#include <QAction>
+
+#include "systemdisplayinfo.hpp"
 
 StelGuiBase* StelMobileGuiPluginInterface::getStelGuiBase() const
 {
@@ -32,14 +39,19 @@ StelGuiBase* StelMobileGuiPluginInterface::getStelGuiBase() const
 }
 Q_EXPORT_PLUGIN2(StelGui, StelMobileGuiPluginInterface)
 
-MobileGui::MobileGui() : topLevelGraphicsWidget(NULL)
+MobileGui::MobileGui() : topLevelGraphicsWidget(NULL),
+	engine(NULL), component(NULL), rootObject(NULL), displayInfo(NULL)
 {
 
 }
 
 MobileGui::~MobileGui()
 {
-
+	delete topLevelGraphicsWidget; topLevelGraphicsWidget = NULL;
+	delete engine; engine = NULL;
+	delete component; component = NULL;
+	delete rootObject; rootObject = NULL;
+	delete displayInfo; displayInfo = NULL;
 }
 
 void MobileGui::init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraphicsWidget* stelAppGraphicsWidget)
@@ -49,34 +61,42 @@ void MobileGui::init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraph
 
 	//QGraphicsScene* scene = myExistingGraphicsScene();
 
-	QDeclarativeEngine *engine = new QDeclarativeEngine();
+	engine = new QDeclarativeEngine();
 
-	QDeclarativeComponent component(engine, QUrl("qrc:/qml/MobileGui.qml"));
+	displayInfo = new SystemDisplayInfo();
+	engine->rootContext()->setContextProperty("DisplayInfo", displayInfo);
 
-	if(component.isError())
+
+	component = new QDeclarativeComponent(engine, QUrl("qrc:/qml/MobileGui.qml"));
+
+	if(component->isError())
 	{
-		qDebug() << "QDeclarativeComponent errors: " << component.errors();
-		qDebug() << "We might crash now.";
+		qDebug() << "QDeclarativeComponent errors: " << component->errors();
+		//an end-user should *never* see this, but make it _slightly_ friendly just in case
+		topLevelGraphicsWidget->scene()->addWidget(new QMessageBox(QMessageBox::Critical, "Error", "An error has occured while loading. \nDetails: The QML failed to load. Check the log file for details."));
 	}
 	else
 	{
 		 qDebug() << "QDeclarativeComponent loaded in without complaint";
-		 QGraphicsObject *object =
-			 qobject_cast<QGraphicsObject *>(component.create());
-		 object->setParentItem(topLevelGraphicsWidget);
+		 rootObject =
+			 qobject_cast<QGraphicsObject *>(component->create());
+		 rootObject->setProperty("width",topLevelGraphicsWidget->size().width());
+		 rootObject->setProperty("height",topLevelGraphicsWidget->size().height());
+		 rootObject->setParentItem(topLevelGraphicsWidget);
 		 //scene->addItem(object);
+
 	}
 }
 
 //! Get a pointer on the info panel used to display selected object info
 void MobileGui::setInfoTextFilters(const StelObject::InfoStringGroup& aflags)
 {
-
+	infoTextFilters = aflags;
 }
 
 const StelObject::InfoStringGroup& MobileGui::getInfoTextFilters() const
 {
-
+	return infoTextFilters;
 }
 
 //! Add a new progress bar in the lower right corner of the screen.
@@ -97,8 +117,16 @@ QProgressBar* MobileGui::addProgressBar()
 //! @param autoRepeat whether the action should be autorepeated
 QAction* MobileGui::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat)
 {
-	return StelGuiBase::addGuiActions(actionName, text, shortCut, helpGroup, checkable, autoRepeat);
+	QAction* a = StelGuiBase::addGuiActions(actionName, text, shortCut, helpGroup, checkable, autoRepeat);
+
+	//add the action to the engine's context so we can see it within the qml code
+	engine->rootContext()->setContextProperty(QString("action_") + actionName, qobject_cast<QObject*>(a));
+
+	return a;
 }
+
+//void MobileGui::addButton(...)
+//add a new element to the listview corresponding to the button's category
 
 void MobileGui::forceRefreshGui()
 {
@@ -108,7 +136,7 @@ void MobileGui::forceRefreshGui()
 //! Get the current visible status of the GUI.
 bool MobileGui::getVisible() const
 {
-	return true;
+	return rootObject->isVisible();
 }
 //! Show wether the Gui is currently used.
 //! This can then be used to optimize the rendering to increase reactivity.
@@ -121,7 +149,7 @@ bool MobileGui::isCurrentlyUsed() const
 //! @param b when true, GUI will be shown, else it will be hidden.
 void MobileGui::setVisible(bool b)
 {
-
+	rootObject->setVisible(b);
 }
 
 //! Translate all texts to the new Locale.

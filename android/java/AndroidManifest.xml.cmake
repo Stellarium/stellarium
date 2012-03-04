@@ -5,7 +5,7 @@
       android:versionCode="1"
       android:versionName="@ANDROID_VERSION_NAME@">
     <application android:name="org.kde.necessitas.origo.QtApplication" android:icon="@drawable/icon" android:label="@string/app_name" android:debuggable="true">
-        <activity android:name="org.kde.necessitas.origo.QtActivity" android:label="@string/app_name" android:configChanges="orientation|locale|fontScale|keyboard|keyboardHidden" >
+        <activity android:name="org.kde.necessitas.origo.QtActivity" android:label="@string/app_name" android:configChanges="orientation|locale|fontScale|keyboard|keyboardHidden" android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

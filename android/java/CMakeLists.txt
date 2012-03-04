@@ -36,17 +36,36 @@ if (BUILD_FOR_ANDROID)
       COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_INSTALL_PREFIX}/bin/libstellarium.so ${CMAKE_CURRENT_BINARY_DIR}/libs/${ARM_TARGET}/
    )
    
+   FIND_HOST_PROGRAM(ADB_LOCATION NAMES adb)
+  
+   if (NOT ADB_LOCATION)
+     message(WARNING "Could not find adb. Add it to the path if you want to use the deploy/run_apk targets")
+   endif()
+  
    add_custom_target ( build_apk_debug
-      COMMAND ant debug
+      COMMAND ${ANT_LOCATION} debug
    )
    
    add_custom_target ( build_apk_release
-      COMMAND ant release
+      COMMAND ${ANT_LOCATION} release
    )
    
    add_custom_target ( build_apk_debug_no_assets
-      COMMAND ant debug
+      COMMAND ${ANT_LOCATION} debug
    )
+   
+   add_custom_target ( deploy_debug_apk
+      COMMAND ${ADB_LOCATION} uninstall org.stellarium.stellarium
+      COMMAND ${ADB_LOCATION} install -r ${CMAKE_CURRENT_BINARY_DIR}/bin/Stellarium-debug.apk
+	)
+	
+   add_custom_target ( run_apk
+      COMMAND ${ADB_LOCATION} shell am start -n org.stellarium.stellarium/org.kde.necessitas.origo.QtActivity && ${ADB_LOCATION} logcat
+	)
+	
+	#also possible:
+	#$ADB clear org.stellarium.stellarium
+    #$ADB shell am start -n org.stellarium.stellarium/org.kde.necessitas.origo.FirstRunActivity
 
    add_dependencies(build_apk_debug android_resources)
    add_dependencies(build_apk_release android_resources)

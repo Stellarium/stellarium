@@ -106,7 +106,11 @@ void StelLogger::init(const QString& logFilePath)
 			break;
 	}
 
-#elif defined Q_OS_LINUX
+#elif defined Q_OS_LINUX || defined ANDROID
+
+#ifdef ANDROID
+	writeLog("Android"); //todo: JNI to get Android version # (when necessitas is fixed to allow JNI again)
+#endif
 	QFile procVersion("/proc/version");
 	if(!procVersion.open(QIODevice::ReadOnly | QIODevice::Text))
 		writeLog("Unknown Linux version");
@@ -118,8 +122,6 @@ void StelLogger::init(const QString& logFilePath)
 		writeLog(version);
 		procVersion.close();
 	}
-#elif defined ANDROID
-	writeLog("Android");
 #else
 	writeLog("Unknown operating system");
 #endif
@@ -143,7 +145,7 @@ void StelLogger::init(const QString& logFilePath)
 #endif
 
 	// write memory and CPU info
-#ifdef Q_OS_LINUX
+#if defined Q_OS_LINUX || defined ANDROID
 
 #ifndef BUILD_FOR_MAEMO
 	QFile infoFile("/proc/meminfo");
@@ -176,6 +178,7 @@ void StelLogger::init(const QString& logFilePath)
 		infoFile.close();
 	}
 
+#ifndef ANDROID
 	QProcess lspci;
 	lspci.start("lspci -v", QIODevice::ReadOnly);
 	lspci.waitForFinished(300);
@@ -197,6 +200,12 @@ void StelLogger::init(const QString& logFilePath)
 			}
 		}
 	}
+#else
+	//ANDROID
+	QSystemDisplayInfo displayInfo;
+	writeLog(QString("DPI width x height: %1 x %2").arg(displayInfo.getDPIWidth(0),displayInfo.getDPIHeight(0)));
+	writeLog(QString("Physical (mm) width x height: %1 x %2").arg(displayInfo.physicalWidth(0),displayInfo.physicalHeight(0)));
+#endif
 #endif
 
 	// Aargh Windows API
@@ -294,12 +303,6 @@ void StelLogger::init(const QString& logFilePath)
 
 	}
 	//writeLog("You look like a Mac user. How would you like to write some system info code here? That would help a lot.");
-
-#elif ANDROID
-	//Write some Android stuff to the log
-	QSystemDisplayInfo displayInfo;
-	writeLog(QString("DPI width x height: %1 x %2").arg(displayInfo.getDPIWidth(0),displayInfo.getDPIHeight(0)));
-	writeLog(QString("Physical (mm) width x height: %1 x %2").arg(displayInfo.physicalWidth(0),displayInfo.physicalHeight(0)));
 #endif
 }
 

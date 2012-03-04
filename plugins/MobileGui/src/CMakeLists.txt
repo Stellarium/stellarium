@@ -4,9 +4,12 @@ endif()
 
 SET(mobilegui_SRCS
 	MobileGui.hpp
-	MobileGui.cpp)
+	MobileGui.cpp
+	systemdisplayinfo.hpp
+	systemdisplayinfo.cpp)
 SET(mobilegui_MOC_HDRS
-	MobileGui.hpp)
+	MobileGui.hpp
+	systemdisplayinfo.hpp)
 
 SET(mobilegui_RES qml/qmlResources.qrc)
 QT4_ADD_RESOURCES(mobilegui_RES_CXX ${mobilegui_RES})

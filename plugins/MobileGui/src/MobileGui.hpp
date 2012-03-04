@@ -22,6 +22,13 @@
 
 #include "StelGuiBase.hpp"
 
+//Forward declarations
+class QGraphicsWidget;
+class QDeclarativeEngine;
+class QDeclarativeComponent;
+class QGraphicsObject;
+class SystemDisplayInfo;
+
 //! @class MobileGui
 //! Main class for the MobileGui, using QML/QDeclarative on top of the QGraphicsView
 class MobileGui : public QObject, public StelGuiBase
@@ -49,7 +56,7 @@ public:
 	virtual class QProgressBar* addProgressBar();
 
 	//! Add a new action managed by the GUI. This method should be used to add new shortcuts to the program
-	//! @param actionName qt object name. Used as a reference for later uses
+	//! @param actionName the action's name. Used as a reference for later uses
 	//! @param text the text to display when hovering, or in the help window
 	//! @param shortCut the qt shortcut to use
 	//! @param helpGroup hint on how to group the text in the help window
@@ -70,6 +77,9 @@ public slots:
 	//! @param b when true, GUI will be shown, else it will be hidden.
 	virtual void setVisible(bool b);
 
+signals:
+	void updated(); //signal an update to the GUI
+
 
 protected:
 	class StelAppGraphicsWidget* stelAppGraphicsWidget;
@@ -78,6 +88,12 @@ protected:
 
 private:
 	QGraphicsWidget* topLevelGraphicsWidget;
+	QDeclarativeEngine* engine;
+	QDeclarativeComponent* component;
+	QGraphicsObject* rootObject;
+	SystemDisplayInfo * displayInfo; //worth keeping in memory?
+
+	StelObject::InfoStringGroup infoTextFilters;
 };
 
 //! Allow to load the GUI as a static plugin
