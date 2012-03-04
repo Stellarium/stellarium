@@ -2114,26 +2114,26 @@ void StelPainterLight::disable()
 
 // material functions
 StelPainterMaterial::StelPainterMaterial()
-	: specular(0, 0, 0, 1), ambient(0.2, 0.2, 0.2, 1.0), emission(0, 0, 0, 1), shininess(0)
+        : specular(0, 0, 0, 1), ambient(0.2, 0.2, 0.2, 1.0), emission(0, 0, 0, 1), shininess(0)
 {
 }
 
 void StelPainterMaterial::setSpecular(const Vec4f& v)
 {
-	specular = v;
+        specular = v;
 }
 
 void StelPainterMaterial::setAmbient(const Vec4f& v)
 {
-	ambient = v;
+        ambient = v;
 }
 
 void StelPainterMaterial::setEmission(const Vec4f& v)
 {
-	emission = v;
+        emission = v;
 }
 
 void StelPainterMaterial::setShininess(float v)
 {
-	shininess = v;
+        shininess = v;
 }

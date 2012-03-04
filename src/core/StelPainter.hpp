@@ -74,24 +74,24 @@ private:
 class StelPainterMaterial
 {
 public:
-	StelPainterMaterial();
+        StelPainterMaterial();
 
-	void setSpecular(const Vec4f& v);
+        void setSpecular(const Vec4f& v);
 	Vec4f& getSpecular() {return specular;}
 
-	void setAmbient(const Vec4f& v);
-	Vec4f& getAmbient() {return ambient;}
+        void setAmbient(const Vec4f& v);
+        Vec4f& getAmbient() {return ambient;}
 
-	void setEmission(const Vec4f& v);
+        void setEmission(const Vec4f& v);
 	Vec4f& getEmission() {return emission;}
 
 	void setShininess(float v);
-	float getShininess() {return shininess;}
+        float getShininess() {return shininess;}
 private:
 	Vec4f specular;
-	Vec4f ambient;
-	Vec4f emission;
-	float shininess;
+        Vec4f ambient;
+        Vec4f emission;
+        float shininess;
 };
 
 //! @class StelPainter

@@ -78,6 +78,10 @@ public:
             specular[1] = 0.0f;
             specular[2] = 0.0f;
             specular[3] = 1.0f;
+            emission[0] = 0.0f;
+            emission[1] = 0.0f;
+            emission[2] = 0.0f;
+            emission[3] = 0.0f;
             shininess = 0.0f;
             alpha = 0.0f;
             illum = DIFFUSE;
@@ -88,10 +92,11 @@ public:
         }
         //! Material name
         std::string name;
-        //! Ka, Kd, Ks
+        //! Ka, Kd, Ks, Ke
         float ambient[4];
         float diffuse[4];
         float specular[4];
+        float emission[4];
         //! Shininess [0..128]
         float shininess;
         //! Transparency [0..1]

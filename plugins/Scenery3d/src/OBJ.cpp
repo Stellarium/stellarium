@@ -1046,6 +1046,14 @@ bool OBJ::importMaterials(const char *filename)
                 pMaterial->specular[3] = 1.0f;
                 break;
 
+            case 'e': //! Ke
+                fscanf(pFile, "%f %f %f",
+                       &pMaterial->emission[0],
+                       &pMaterial->emission[1],
+                       &pMaterial->emission[2]);
+                pMaterial->emission[3] = 1.0f;
+                break;
+
             default:
                 fgets(buffer, sizeof(buffer), pFile);
                 break;
@@ -1057,7 +1065,6 @@ bool OBJ::importMaterials(const char *filename)
             {
             case 'r': //! Tr
                 fscanf(pFile, "%f", &pMaterial->alpha);
-                pMaterial->alpha = 1.0f - pMaterial->alpha;
                 break;
 
             default:
