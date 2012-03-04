@@ -127,12 +127,6 @@ bool OBJ::load(const char* filename, const enum vertexOrder order, bool rebuildN
 void OBJ::addTrianglePos(unsigned int index, int material, int v0, int v1, int v2)
 {
     Vertex vertex;
-//            =
-//    {
-//        {0.0, 0.0, 0.0},
-//        {0.0f, 0.0f},
-//        {0.0f, 0.0f, 0.0f}
-//    };
 
     //Add the material index to the index for grouping models
     m_attributeArray[index] = material;
@@ -159,13 +153,6 @@ void OBJ::addTrianglePos(unsigned int index, int material, int v0, int v1, int v
 void OBJ::addTrianglePosNormal(unsigned int index, int material, int v0, int v1, int v2, int vn0, int vn1, int vn2)
 {
     Vertex vertex;
-//            =
-//    {
-//        {0.0, 0.0, 0.0},
-//        {0.0f, 0.0f},
-//        {0.0f, 0.0f, 0.0f},
-//        {0.0f, 0.0f, 0.0f}
-//    };
 
     //Add the material index to the index for grouping models
     m_attributeArray[index] = material;
@@ -201,13 +188,6 @@ void OBJ::addTrianglePosNormal(unsigned int index, int material, int v0, int v1,
 void OBJ::addTrianglePosTexCoord(unsigned int index, int material, int v0, int v1, int v2, int vt0, int vt1, int vt2)
 {
     Vertex vertex;
-//            =
-//    {
-//        {0.0, 0.0, 0.0},
-//        {0.0f, 0.0f},
-//        {0.0f, 0.0f, 0.0f},
-//        {0.0f, 0.0f, 0.0f}
-//    };
 
     //Add the material index to the index for grouping models
     m_attributeArray[index] = material;
@@ -240,13 +220,6 @@ void OBJ::addTrianglePosTexCoord(unsigned int index, int material, int v0, int v
 void OBJ::addTrianglePosTexCoordNormal(unsigned int index, int material, int v0, int v1, int v2, int vt0, int vt1, int vt2, int vn0, int vn1, int vn2)
 {
     Vertex vertex;
-//    =
-//    {
-//        {0.0, 0.0, 0.0},
-//        {0.0f, 0.0f},
-//        {0.0f, 0.0f, 0.0f},
-//        {0.0f, 0.0f, 0.0f}
-//    };
 
     //Add the material index to the index for grouping models
     m_attributeArray[index] = material;
@@ -988,9 +961,18 @@ bool OBJ::importMaterials(const char *filename)
     {
         switch (buffer[0])
         {
-        case 'N': //! Ns
-            fscanf(pFile, "%f", &pMaterial->shininess);
-            pMaterial->shininess /= 1000.0f;
+        case 'N':
+            switch (buffer[1])
+            {
+            case 's': //! Ns
+                fscanf(pFile, "%f", &pMaterial->shininess);
+                pMaterial->shininess = qMin(128.0f, pMaterial->shininess);
+                break;
+
+            default:
+                break;
+            }
+
             break;
 
         case 'K': // Ka, Kd, or Ks
@@ -1124,6 +1106,14 @@ void OBJ::uploadTexturesGL()
     {
         Material* pMaterial = &getMaterial(i);
 
+//        qDebug() << getTime() << "[Scenery3d]" << pMaterial->name.c_str();
+//        qDebug() << getTime() << "[Scenery3d] Ka:" << pMaterial->ambient[0] << "," << pMaterial->ambient[1] << "," << pMaterial->ambient[2] << "," << pMaterial->ambient[3];
+//        qDebug() << getTime() << "[Scenery3d] Kd:" << pMaterial->diffuse[0] << "," << pMaterial->diffuse[1] << "," << pMaterial->diffuse[2] << "," << pMaterial->diffuse[3];
+//        qDebug() << getTime() << "[Scenery3d] Ks:" << pMaterial->specular[0] << "," << pMaterial->specular[1] << "," << pMaterial->specular[2] << "," << pMaterial->specular[3];
+//        qDebug() << getTime() << "[Scenery3d] Shininess:" << pMaterial->shininess;
+//        qDebug() << getTime() << "[Scenery3d] Alpha:" << pMaterial->alpha;
+//        qDebug() << getTime() << "[Scenery3d] Illum:" << pMaterial->illum;
+
         qDebug() << getTime() << "[Scenery3d] Uploading textures for Material: " << pMaterial->name.c_str();
         qDebug() << getTime() << "[Scenery3d] Texture:" << pMaterial->textureName.c_str();
         if(!pMaterial->textureName.empty())
@@ -1171,25 +1161,23 @@ void OBJ::transform(Mat4d mat)
         pVertex->position[1] = pos[1];
         pVertex->position[2] = pos[2];
 
-        Vec3d normal = Vec3d(pVertex->normal[0], pVertex->normal[1], pVertex->normal[2]);
-        mat.transfo(normal);
-        pVertex->normal[0] = static_cast<float>(normal[0]);
-        pVertex->normal[1] = static_cast<float>(normal[1]);
-        pVertex->normal[2] = static_cast<float>(normal[2]);
+        Vec3d nor = Vec3d(pVertex->normal[0], pVertex->normal[1], pVertex->normal[2]);
+        mat.transfo(nor);
+        pVertex->normal[0] = nor[0];
+        pVertex->normal[1] = nor[1];
+        pVertex->normal[2] = nor[2];
 
-        Vec3d bitangent = Vec3d(pVertex->bitangent[0], pVertex->bitangent[1], pVertex->bitangent[2]);
-        mat.transfo(bitangent);
-        pVertex->bitangent[0] = static_cast<float>(bitangent[0]);
-        pVertex->bitangent[1] = static_cast<float>(bitangent[1]);
-        pVertex->bitangent[2] = static_cast<float>(bitangent[2]);
+        Vec3d tan = Vec3d(pVertex->tangent[0], pVertex->tangent[1], pVertex->tangent[2]);
+        mat.transfo(tan);
+        pVertex->tangent[0] = tan[0];
+        pVertex->tangent[1] = tan[1];
+        pVertex->tangent[2] = tan[2];
 
-        //Since tangent is a 4-component vector, just transform xyz
-        Vec3d tangent = Vec3d(pVertex->tangent[0], pVertex->tangent[1], pVertex->tangent[2]);
-        mat.transfo(tangent);
-        pVertex->tangent[0] = static_cast<float>(tangent[0]);
-        pVertex->tangent[1] = static_cast<float>(tangent[1]);
-        pVertex->tangent[2] = static_cast<float>(tangent[2]);
-
+        Vec3d biTan = Vec3d(pVertex->bitangent[0], pVertex->bitangent[1], pVertex->bitangent[2]);
+        mat.transfo(biTan);
+        pVertex->bitangent[0] = biTan[0];
+        pVertex->bitangent[1] = biTan[1];
+        pVertex->bitangent[2] = biTan[2];
 
         //Update bounding box in case it changed
         pBoundingBox->min = Vec3f(std::min(static_cast<float>(pVertex->position[0]), pBoundingBox->min[0]),
