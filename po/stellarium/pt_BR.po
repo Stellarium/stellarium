@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-27 04:57+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
+"PO-Revision-Date: 2012-03-04 04:31+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-27 05:40+0000\n"
-"X-Generator: Launchpad (build 14868)\n"
+"X-Launchpad-Export-Date: 2012-03-05 04:40+0000\n"
+"X-Generator: Launchpad (build 14900)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -3300,23 +3300,23 @@ msgstr "Console de apresentações"
 
 #: src/ui_scriptConsole.h:344
 msgid "load script from file"
-msgstr "carregar apresentação de um arquivo"
+msgstr "Carrega a apresentação de um arquivo"
 
 #: src/ui_scriptConsole.h:348
 msgid "save script to file"
-msgstr "salvar apresentação em um arquivo"
+msgstr "Salva a apresentação em um arquivo"
 
 #: src/ui_scriptConsole.h:352
 msgid "clear script"
-msgstr "limpar apresentação"
+msgstr "Limpa a apresentação"
 
 #: src/ui_scriptConsole.h:356
 msgid "pre-process script using SSC preprocessor"
-msgstr "pré-processar a apresentação utilizando um pré-processador SSC"
+msgstr "Pré-processa a apresentação utilizando um pré-processador SSC"
 
 #: src/ui_scriptConsole.h:359
 msgid "pre-process script using STS preprocessor"
-msgstr "pré-processar a apresentação utilizando um pré-processador STS"
+msgstr "Pré-processa a apresentação utilizando um pré-processador STS"
 
 #: src/ui_scriptConsole.h:362
 msgid "quickly load and run a utility script"
@@ -3324,11 +3324,11 @@ msgstr "rapidamente carregar e executar uma apresentação utilitária"
 
 #: src/ui_scriptConsole.h:365
 msgid "run script"
-msgstr "executar apresentação"
+msgstr "Executa a apresentação"
 
 #: src/ui_scriptConsole.h:369
 msgid "stop script"
-msgstr "parar apresentação"
+msgstr "Para a apresentação"
 
 #: src/ui_scriptConsole.h:372
 msgid "Script"
@@ -3344,7 +3344,7 @@ msgstr "Posição do cursor"
 
 #: src/ui_scriptConsole.h:377
 msgid "Include dir:"
-msgstr "Incluir diretório:"
+msgstr "Incluir o diretório:"
 
 #: src/ui_scriptConsole.h:378
 msgid "..."
@@ -3801,11 +3801,11 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:228
 #: plugins/Satellites/src/Satellite.cpp:232
 msgid "Catalog #"
-msgstr ""
+msgstr "Catálogo nº"
 
 #: plugins/Satellites/src/Satellite.cpp:234
 msgid "International Designator"
-msgstr ""
+msgstr "Designador internacional"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:246
@@ -3979,6 +3979,10 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
+"1. Certifique-se de que o(s) satélite(s) que você deseja adicionar estão "
+"incluídos em uma das URLs listadas na aba ‘Fontes’ da janela de configuração "
+"de satélites. 2. Vá até a aba ‘Satélites’, e clique no botão ‘+’. Selecione "
+"o(s) satélite(s) que você deseja adicionar e clique no botão “Adicionar”."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
@@ -4087,7 +4091,7 @@ msgstr "[nova fonte]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
 msgid "[orbit calculation error]"
-msgstr ""
+msgstr "[erro de cálculo da órbita]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"
@@ -5555,11 +5559,230 @@ msgstr ""
 msgid "extragalactic (in MC) pulsar"
 msgstr "pulsar extragaláctico (nas Nuvens de Magalhães)"
 
-#, qt-format
-#~ msgid ""
-#~ "At the moment you must manually edit the %1 file to add new satellites to "
-#~ "the database. Making this easier is still on the TODO list..."
-#~ msgstr ""
-#~ "No momento, você precisa editar manualmente o arquivo %1 para adicionar "
-#~ "novos satélites ao banco de dados. Tornar isso mais fácil ainda está na "
-#~ "lista de coisas a fazer..."
+#~ msgid "Equatorial Grid"
+#~ msgstr "Grade equatorial"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "Grade azimutal"
+
+#~ msgid "Sky Language: "
+#~ msgstr "Idioma dos elementos do céu: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "Cultura do céu: "
+
+#~ msgid "General "
+#~ msgstr "Geral "
+
+#~ msgid "Stars "
+#~ msgstr "Estrelas "
+
+#~ msgid "Colors "
+#~ msgstr "Cores "
+
+#~ msgid "Effects "
+#~ msgstr "Efeitos "
+
+#~ msgid "Administration "
+#~ msgstr "Administração "
+
+#~ msgid "Latitude: "
+#~ msgstr "Latitude: "
+
+#~ msgid "Longitude: "
+#~ msgstr "Longitude: "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Altitude (m): "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Corpo do sistema solar: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Hora celeste: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Hora celeste ao iniciar: "
+
+#~ msgid "Actual Time"
+#~ msgstr "Hora atual"
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Formato de exibição da data: "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "Linhas das constelações"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Nomes das constelações"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Intensidade das imagens das constelações"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Limites das constelações"
+
+#~ msgid "Planet Names"
+#~ msgstr "Nomes dos planetas"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Órbitas dos planetas"
+
+#~ msgid "Meridian Line"
+#~ msgstr "Linha meridiana"
+
+#~ msgid "Nebula Names"
+#~ msgstr "Nomes das nebulosas"
+
+#~ msgid "Landscape: "
+#~ msgstr "Paisagem: "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Intensidade da Via Láctea: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "Desligar: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Atualize-me via Internet: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "Seta para baixo para carregar a lista."
+
+#~ msgid "Hydra"
+#~ msgstr "Hidra"
+
+#~ msgid "Select and exit to run."
+#~ msgstr "Selecione e saia para executar."
+
+#~ msgid "Calendar"
+#~ msgstr "Calendário"
+
+#~ msgid "Sidereal"
+#~ msgstr "Sideral"
+
+#~ msgid "Twinkling: "
+#~ msgstr "Cintilação: "
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Set Location "
+#~ msgstr "Definir a localização "
+
+#~ msgid "Set Time "
+#~ msgstr "Definir a hora "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Definir o fuso horário: "
+
+#~ msgid "Show: "
+#~ msgstr "Exibir: "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "Multiplicador do valor estelar: "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Multiplicador do dimensionamento da magnitude: "
+
+#~ msgid "Cardinal Points"
+#~ msgstr "Pontos cardeais"
+
+#~ msgid "Planet Trails"
+#~ msgstr "Rastros dos planetas"
+
+#~ msgid "Equator Line"
+#~ msgstr "Linha do Equador"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "Linha da eclíptica"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Círculos nas nebulosas"
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Zum manual: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Regra para o dimensionamento de objetos: "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "Multiplicador da escala de magnitude: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Duração do zum: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Carregar a configuração padrão: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Salvar a configuração atual como padrão: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Definir o idioma da interface de usuário: "
+
+#~ msgid "Light pollution: "
+#~ msgstr "Poluição luminosa: "
+
+#~ msgid "Art brightness: "
+#~ msgstr "Brilho das imagens: "
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "Direção da visualização ao iniciar: xxxx"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "Obter o catálogo x de y"
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "Todos os catálogos estelares foram baixados!"
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "Campo de visão a ser utilizado ao iniciar: XX"
+
+#~ msgid "Planets labels"
+#~ msgstr "Nomes dos planetas"
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Predefinir a hora celeste: "
+
+#~ msgid "Preset Time"
+#~ msgstr "Predefinir a hora"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "Formato de exibição da hora: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Magnitude máxima a ser identificada: "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "Magnitude limite: "
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "Luminância da poluição luminosa: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Magnitude máxima de nebulosas a ser identificada: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Tempo limite para o cursor ser ocultado: "
+
+#~ msgid "Day keys: "
+#~ msgstr "Chaves de dias: "
+
+#~ msgid "Date & Time"
+#~ msgstr "Data e hora"
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "Corrigir para tempo de viagem à velocidade da luz: "
+
+#~ msgid "Scripts "
+#~ msgstr "Apresentações "
+
+#~ msgid "Local Script: "
+#~ msgstr "Apresentação local: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "Apresentação de CD/DVD: "
+
+#~ msgid "USB Script: "
+#~ msgstr "Apresentação de USB: "
