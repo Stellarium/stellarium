@@ -21,6 +21,7 @@
 #define _MOBILEGUI_HPP_
 
 #include "StelGuiBase.hpp"
+#include <QSize>
 
 //Forward declarations
 class QGraphicsWidget;
@@ -28,6 +29,7 @@ class QDeclarativeEngine;
 class QDeclarativeComponent;
 class QGraphicsObject;
 class SystemDisplayInfo;
+class SkyInfoWrapper;
 
 //! @class MobileGui
 //! Main class for the MobileGui, using QML/QDeclarative on top of the QGraphicsView
@@ -72,10 +74,21 @@ public:
 	//! This can then be used to optimize the rendering to increase reactivity.
 	virtual bool isCurrentlyUsed() const;
 
+	//! Get a pointer on an action managed by the GUI
+	//! @param actionName qt object name for this action
+	//! @return a pointer on the QAction object or NULL if don't exist
+	Q_INVOKABLE QAction* getGuiActions(const QString& actionName);
+
+	/* things to access from QML */
+	//Q_INVOKABLE QVariant getAction(const QString& actionName);
+
 public slots:
 	//! Show whether the GUI is visible.
 	//! @param b when true, GUI will be shown, else it will be hidden.
 	virtual void setVisible(bool b);
+
+	//! Update the GUI
+	void updateGui();
 
 signals:
 	void updated(); //signal an update to the GUI
@@ -92,8 +105,8 @@ private:
 	QDeclarativeComponent* component;
 	QGraphicsObject* rootObject;
 	SystemDisplayInfo * displayInfo; //worth keeping in memory?
-
-	StelObject::InfoStringGroup infoTextFilters;
+	SkyInfoWrapper * skyInfoWrapper;
+	QSize guiSize;
 };
 
 //! Allow to load the GUI as a static plugin

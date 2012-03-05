@@ -36,7 +36,7 @@ if (BUILD_FOR_ANDROID)
       COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_INSTALL_PREFIX}/bin/libstellarium.so ${CMAKE_CURRENT_BINARY_DIR}/libs/${ARM_TARGET}/
    )
    
-   FIND_HOST_PROGRAM(ADB_LOCATION NAMES adb)
+   FIND_HOST_PROGRAM(ADB_LOCATION NAMES adb adb.exe)
   
    if (NOT ADB_LOCATION)
      message(WARNING "Could not find adb. Add it to the path if you want to use the deploy/run_apk targets")
@@ -60,7 +60,7 @@ if (BUILD_FOR_ANDROID)
 	)
 	
    add_custom_target ( run_apk
-      COMMAND ${ADB_LOCATION} shell am start -n org.stellarium.stellarium/org.kde.necessitas.origo.QtActivity && ${ADB_LOCATION} logcat
+	  COMMAND ${ADB_LOCATION} shell am start -n org.stellarium.stellarium/org.kde.necessitas.origo.QtActivity
 	)
 	
 	#also possible:

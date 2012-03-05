@@ -31,6 +31,8 @@
 #include <QAction>
 
 #include "systemdisplayinfo.hpp"
+#include "updatesignallingitem.hpp"
+#include "skyinfowrapper.hpp"
 
 StelGuiBase* StelMobileGuiPluginInterface::getStelGuiBase() const
 {
@@ -40,7 +42,8 @@ StelGuiBase* StelMobileGuiPluginInterface::getStelGuiBase() const
 Q_EXPORT_PLUGIN2(StelGui, StelMobileGuiPluginInterface)
 
 MobileGui::MobileGui() : topLevelGraphicsWidget(NULL),
-	engine(NULL), component(NULL), rootObject(NULL), displayInfo(NULL)
+	engine(NULL), component(NULL), rootObject(NULL), displayInfo(NULL),
+	skyInfoWrapper(NULL)
 {
 
 }
@@ -52,6 +55,7 @@ MobileGui::~MobileGui()
 	delete component; component = NULL;
 	delete rootObject; rootObject = NULL;
 	delete displayInfo; displayInfo = NULL;
+	delete skyInfoWrapper; skyInfoWrapper = NULL;
 }
 
 void MobileGui::init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraphicsWidget* stelAppGraphicsWidget)
@@ -59,12 +63,19 @@ void MobileGui::init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraph
 	this->topLevelGraphicsWidget = topLevelGraphicsWidget;
 	StelGuiBase::init(topLevelGraphicsWidget, stelAppGraphicsWidget);
 
+	UpdateSignallingItem * signaller = new UpdateSignallingItem(topLevelGraphicsWidget, this);
+	Q_UNUSED(signaller)
+
 	//QGraphicsScene* scene = myExistingGraphicsScene();
 
 	engine = new QDeclarativeEngine();
 
 	displayInfo = new SystemDisplayInfo();
-	engine->rootContext()->setContextProperty("DisplayInfo", displayInfo);
+	skyInfoWrapper = new SkyInfoWrapper();
+
+	engine->rootContext()->setContextProperty("displayInfo", displayInfo);
+	engine->rootContext()->setContextProperty("skyInfo", skyInfoWrapper);
+	engine->rootContext()->setContextProperty("baseGui", this);
 
 
 	component = new QDeclarativeComponent(engine, QUrl("qrc:/qml/MobileGui.qml"));
@@ -80,8 +91,10 @@ void MobileGui::init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraph
 		 qDebug() << "QDeclarativeComponent loaded in without complaint";
 		 rootObject =
 			 qobject_cast<QGraphicsObject *>(component->create());
-		 rootObject->setProperty("width",topLevelGraphicsWidget->size().width());
-		 rootObject->setProperty("height",topLevelGraphicsWidget->size().height());
+		 guiSize.setWidth(topLevelGraphicsWidget->size().width());
+		 guiSize.setHeight(topLevelGraphicsWidget->size().height());
+		 rootObject->setProperty("width",guiSize.width());
+		 rootObject->setProperty("height",guiSize.height());
 		 rootObject->setParentItem(topLevelGraphicsWidget);
 		 //scene->addItem(object);
 
@@ -91,12 +104,12 @@ void MobileGui::init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraph
 //! Get a pointer on the info panel used to display selected object info
 void MobileGui::setInfoTextFilters(const StelObject::InfoStringGroup& aflags)
 {
-	infoTextFilters = aflags;
+	skyInfoWrapper->setInfoTextFilters(aflags);
 }
 
 const StelObject::InfoStringGroup& MobileGui::getInfoTextFilters() const
 {
-	return infoTextFilters;
+	return skyInfoWrapper->getInfoTextFilters();
 }
 
 //! Add a new progress bar in the lower right corner of the screen.
@@ -125,12 +138,26 @@ QAction* MobileGui::addGuiActions(const QString& actionName, const QString& text
 	return a;
 }
 
+QAction* MobileGui::getGuiActions(const QString &actionName)
+{
+	return StelGuiBase::getGuiActions(actionName);
+}
+
+/*QVariant MobileGui::getAction(const QString &actionName)
+{
+	QVariant action = engine->rootContext()->contextProperty("action_" + actionName);
+	if(qobject_cast<QObject*>(action) == NULL)
+	{
+		qWarning(QString("Could not find guiAction ").append(actionName));
+	}
+}*/
+
 //void MobileGui::addButton(...)
 //add a new element to the listview corresponding to the button's category
 
 void MobileGui::forceRefreshGui()
 {
-
+	updateGui();
 }
 
 //! Get the current visible status of the GUI.
@@ -156,4 +183,16 @@ void MobileGui::setVisible(bool b)
 void MobileGui::updateI18n()
 {
 
+}
+
+void MobileGui::updateGui()
+{
+	if(guiSize != topLevelGraphicsWidget->size())
+	{
+		guiSize.setWidth(topLevelGraphicsWidget->size().width());
+		guiSize.setHeight(topLevelGraphicsWidget->size().height());
+		rootObject->setProperty("width",guiSize.width());
+		rootObject->setProperty("height",guiSize.height());
+	}
+	updated(); //signal the QML-side to update itself
 }

@@ -6,10 +6,16 @@ SET(mobilegui_SRCS
 	MobileGui.hpp
 	MobileGui.cpp
 	systemdisplayinfo.hpp
-	systemdisplayinfo.cpp)
+	systemdisplayinfo.cpp
+	skyinfowrapper.hpp
+	skyinfowrapper.cpp
+	updatesignallingitem.hpp
+	updatesignallingitem.cpp)
 SET(mobilegui_MOC_HDRS
 	MobileGui.hpp
-	systemdisplayinfo.hpp)
+	systemdisplayinfo.hpp
+	skyinfowrapper.hpp
+	updatesignallingitem.hpp)
 
 SET(mobilegui_RES qml/qmlResources.qrc)
 QT4_ADD_RESOURCES(mobilegui_RES_CXX ${mobilegui_RES})

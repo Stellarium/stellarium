@@ -203,8 +203,8 @@ void StelLogger::init(const QString& logFilePath)
 #else
 	//ANDROID
 	QSystemDisplayInfo displayInfo;
-	writeLog(QString("DPI width x height: %1 x %2").arg(displayInfo.getDPIWidth(0),displayInfo.getDPIHeight(0)));
-	writeLog(QString("Physical (mm) width x height: %1 x %2").arg(displayInfo.physicalWidth(0),displayInfo.physicalHeight(0)));
+	writeLog(QString("DPI width x height: %1 x %2").arg(displayInfo.getDPIWidth(0)).arg(displayInfo.getDPIHeight(0)));
+	writeLog(QString("Physical (mm) width x height: %1 x %2").arg(displayInfo.physicalWidth(0)).arg(displayInfo.physicalHeight(0)));
 #endif
 #endif
 
