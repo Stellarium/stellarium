@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-27 04:57+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
-"Last-Translator: Dennis Baudys <Unknown>\n"
+"PO-Revision-Date: 2012-03-04 11:34+0000\n"
+"Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-27 05:34+0000\n"
-"X-Generator: Launchpad (build 14868)\n"
+"X-Launchpad-Export-Date: 2012-03-05 04:40+0000\n"
+"X-Generator: Launchpad (build 14900)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -120,12 +120,12 @@ msgstr "Absolute Helligkeit: %1"
 #: src/core/modules/Planet.cpp:142
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr "Ekliptik/Geozentrik (des Datums) %1/%2"
+msgstr "Geozentrisch ekliptikal (zum Datum): %1/%2"
 
 #: src/core/modules/Planet.cpp:143
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr "Schiefe (des Datums): %1"
+msgstr "Ekliptikschiefe (des Datums): %1"
 
 #: src/core/modules/Planet.cpp:153
 #, no-c-format, qt-format
@@ -870,7 +870,7 @@ msgstr "Screenshot speichern"
 
 #: src/gui/StelGui.cpp:179
 msgid "Copy selected object information to clipboard"
-msgstr ""
+msgstr "Kopiere ausgewählte Objektinformation in die Zwischenablage"
 
 #: src/gui/StelGui.cpp:181
 msgid "Auto hide horizontal button bar"
@@ -1001,27 +1001,27 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:73
 msgid "quickrun..."
-msgstr ""
+msgstr "Schnell-Ausführung..."
 
 #: src/gui/ScriptConsole.cpp:74
 msgid "selected text"
-msgstr ""
+msgstr "ausgewählter Text"
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "clear text"
-msgstr ""
+msgstr "Text entfernen"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "clear images"
-msgstr ""
+msgstr "Bilder entfernen"
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
-msgstr ""
+msgstr "natürlich"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
-msgstr ""
+msgstr "Sternkarte"
 
 #: src/main.cpp:333
 msgid "This system does not support OpenGL."
@@ -1473,63 +1473,65 @@ msgstr "Garching"
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
 msgid "Landscape Tour"
-msgstr ""
+msgstr "Landschaftstour"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
 msgid "Partial Lunar Eclipse"
-msgstr ""
+msgstr "Partielle Mondfinsternis"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:184
 msgid "Total Lunar Eclipse"
-msgstr ""
+msgstr "Totale Mondfinsternis"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
 msgid "Screensaver"
-msgstr ""
+msgstr "Bildschirmschoner"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:188
 msgid "Solar Eclipse 2009"
-msgstr ""
+msgstr "Sonnenfinsternis 2009"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:190
 msgid "Startup Script"
-msgstr ""
+msgstr "Start-Skript"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:192
 msgid "Zodiac"
-msgstr ""
+msgstr "Tierkreis"
 
 #: src/translations.h:195
 msgid "Look around each installed landscape."
-msgstr ""
+msgstr "Ein Rundblick durch alle installierten Landschaften."
 
 #: src/translations.h:196
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr ""
+msgstr "Skript zum Demonstrieren einer partiellen Mondfinsternis."
 
 #: src/translations.h:197
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr ""
+msgstr "Skript zum Demonstrieren einer totalen Mondfinsternis."
 
 #: src/translations.h:198
 msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr ""
+msgstr "Endlos-Show durch zufällig angesteuerte Hmmelsobjekte."
 
 #: src/translations.h:199
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
+"Skript zum Demonstrieren der totalen Sonnenfinsternis im Jahr 2009 (Ort= "
+"Ranpur, Bangladesch)"
 
 #: src/translations.h:200
 msgid "Script which runs automatically at startup"
-msgstr ""
+msgstr "Skript, das zum Programmstart ausgeführt wird."
 
 #: src/translations.h:201
 msgid ""
@@ -1537,6 +1539,8 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
+"Dieses Skript zeigt die Sternbilder des Tierkreises, das sind die "
+"Sternbilder entlang der scheinbaren Jahresbahn der Sonne."
 
 #: src/translations.h:204
 msgid "Andorra"
@@ -3287,59 +3291,59 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
-msgstr ""
+msgstr "Skript-Konsole"
 
 #: src/ui_scriptConsole.h:344
 msgid "load script from file"
-msgstr ""
+msgstr "Lade Skript aus Datei"
 
 #: src/ui_scriptConsole.h:348
 msgid "save script to file"
-msgstr ""
+msgstr "Speichere Skript in Datei"
 
 #: src/ui_scriptConsole.h:352
 msgid "clear script"
-msgstr ""
+msgstr "Skript löschen"
 
 #: src/ui_scriptConsole.h:356
 msgid "pre-process script using SSC preprocessor"
-msgstr ""
+msgstr "Skript durch SSC-Präprozessor schicken"
 
 #: src/ui_scriptConsole.h:359
 msgid "pre-process script using STS preprocessor"
-msgstr ""
+msgstr "Skript durch STS-Präprozessor schicken"
 
 #: src/ui_scriptConsole.h:362
 msgid "quickly load and run a utility script"
-msgstr ""
+msgstr "Ein Skript schnell laden und ausführen"
 
 #: src/ui_scriptConsole.h:365
 msgid "run script"
-msgstr ""
+msgstr "Skript ausführen"
 
 #: src/ui_scriptConsole.h:369
 msgid "stop script"
-msgstr ""
+msgstr "Skript anhalten"
 
 #: src/ui_scriptConsole.h:372
 msgid "Script"
-msgstr ""
+msgstr "Skript"
 
 #: src/ui_scriptConsole.h:373
 msgid "Output"
-msgstr ""
+msgstr "Ausgabe"
 
 #: src/ui_scriptConsole.h:375
 msgid "Cursor position"
-msgstr ""
+msgstr "Cursor-Position"
 
 #: src/ui_scriptConsole.h:377
 msgid "Include dir:"
-msgstr ""
+msgstr "Verzeichnis einschließen:"
 
 #: src/ui_scriptConsole.h:378
 msgid "..."
-msgstr ""
+msgstr "…"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -3462,7 +3466,7 @@ msgstr "Fadenkreuz"
 
 #: plugins/Oculars/src/Oculars.cpp:1241
 msgid "Image sensor frame"
-msgstr ""
+msgstr "Bildsensor-Rahmen"
 
 #: plugins/Oculars/src/Oculars.cpp:1249
 msgid "Telrad sight"
@@ -3639,7 +3643,7 @@ msgstr "Nur aktivieren mit ausgewähltem Objekt"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:866
 msgid "Scale image circle"
-msgstr ""
+msgstr "Bildkreis skalieren"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:867
 msgid "Key mappings"
@@ -3786,11 +3790,11 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:228
 #: plugins/Satellites/src/Satellite.cpp:232
 msgid "Catalog #"
-msgstr ""
+msgstr "Katalognummer"
 
 #: plugins/Satellites/src/Satellite.cpp:234
 msgid "International Designator"
-msgstr ""
+msgstr "Internationale Bezeichnung"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:246
@@ -3963,6 +3967,11 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
+"1. Stelle sicher, daß Daten für die aufzunehmenden Satelliten an den URLs "
+"verfügbar sind, die im Quellen-Tab des Satelliten-Konfigurationsdialogs "
+"genannt sind.\r\n"
+"2. Wechsle zum Satelliten-Tab und klicke die Schaltfläche '+'. \r\n"
+"3. Wähle den/die gewünschten Satelliten und drücke 'hinzufügen'."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
@@ -4070,7 +4079,7 @@ msgstr "[neue Quelle]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
 msgid "[orbit calculation error]"
-msgstr ""
+msgstr "[Fehler bei der Bahnberechnung]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"
@@ -4123,7 +4132,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:344
 #, qt-format
 msgid "Catalog Number: %1"
-msgstr ""
+msgstr "Katalognummer: %1"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
@@ -4271,7 +4280,7 @@ msgstr "Quellen"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:206
 msgid "More Satellites"
-msgstr ""
+msgstr "Mehr Satelliten"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:208
 msgid "Get data from update sources"
@@ -5378,12 +5387,12 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernova.cpp:99
 msgid "supernova"
-msgstr ""
+msgstr "Supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:115
 #, qt-format
 msgid "Type of supernova: %1"
-msgstr ""
+msgstr "Supernova-Typ: %1"
 
 #: plugins/Quasars/src/Quasars.cpp:59
 msgid "Quasars"
@@ -5400,7 +5409,7 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasar.cpp:92
 msgid "quasar"
-msgstr ""
+msgstr "Quasar"
 
 #: plugins/Quasars/src/Quasar.cpp:134
 #, qt-format
@@ -5409,7 +5418,7 @@ msgstr "Z (Rotverschiebung): %1"
 
 #: plugins/Pulsars/src/Pulsars.cpp:59
 msgid "Pulsars"
-msgstr ""
+msgstr "Pulsare"
 
 #: plugins/Pulsars/src/Pulsars.cpp:62
 msgid ""
@@ -5417,104 +5426,326 @@ msgid ""
 "about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
 "1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
 msgstr ""
+"Dieses Plugin zeigt die Positionen und Information zu verschiedenen Pulsare. "
+"Daten aus dem  'Catalog of Pulsars' (Taylor+ 1995).<br><br>Beachte: Pulsare "
+"tragen eine Bezeichnung mit dem vorgesetzten Kürzel \"PSR\""
 
 #: plugins/Pulsars/src/Pulsar.cpp:102
 msgid "pulsar"
-msgstr ""
+msgstr "Pulsar"
 
 #: plugins/Pulsars/src/Pulsar.cpp:109
 #, qt-format
 msgid "Barycentric period: %1 s"
-msgstr ""
+msgstr "Baryzentrische Rotationsdauer: %1 s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:112
 #, qt-format
 msgid "Distance: %1 kpc (%2 ly)"
-msgstr ""
+msgstr "Entfernung: %1 kpc (%2 LJ)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:116
 #, qt-format
 msgid "Type of pulsar: %1"
-msgstr ""
+msgstr "Pulsar-Typ: %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:120
 #, qt-format
 msgid "Equivalent width of the integrated pulse profile: %1 ms"
-msgstr ""
+msgstr "Äquivalentbreite des integrierten Puls-Profils: %1 ms"
 
 #: plugins/Pulsars/src/Pulsar.cpp:124
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
-msgstr ""
+msgstr "Profilbreite bei 50% des Spitzenwerts: %1 ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:130 plugins/Pulsars/src/Pulsar.cpp:142
 #: plugins/Pulsars/src/Pulsar.cpp:154
 msgid "Time averaged flux density at"
-msgstr ""
+msgstr "Zeitlich gemittelte Flußdichte bei"
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Pulsars/src/Pulsar.cpp:133 plugins/Pulsars/src/Pulsar.cpp:145
 #: plugins/Pulsars/src/Pulsar.cpp:157
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:136 plugins/Pulsars/src/Pulsar.cpp:148
 #: plugins/Pulsars/src/Pulsar.cpp:160
 msgid "mJy"
-msgstr ""
+msgstr "mJy"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:232
 msgid "globular cluster association"
-msgstr ""
+msgstr "Assoziiert mit Kugelsternhaufen"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:238
 msgid "SNR association"
-msgstr ""
+msgstr "Assoziiert mit SNR"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:244
 msgid "glitches in period"
-msgstr ""
+msgstr "Pulsations-Sprünge"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:250
 msgid "binary or multiple pulsar"
-msgstr ""
+msgstr "Doppel- oder Mehrfachpulsar"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:256
 msgid "millisecond pulsar"
-msgstr ""
+msgstr "Millisekunden-Pulsar"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:262
 msgid "recycled pulsar"
-msgstr ""
+msgstr "Wiederbeschleunigter (\"Recycled\") Pulsar"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:268
 msgid "radio interpulse"
-msgstr ""
+msgstr "Radio-Zwischenpuls"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:274
 msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
-msgstr ""
+msgstr "Gepulste optische, Röntgen- oder Gamma-Emission (hochenergetisch)"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
-msgstr ""
+msgstr "Extragalaktischer Pulsar (in Magell. Wolken)"
 
-#, qt-format
-#~ msgid ""
-#~ "At the moment you must manually edit the %1 file to add new satellites to "
-#~ "the database. Making this easier is still on the TODO list..."
-#~ msgstr ""
-#~ "Um einen neuen Satelliten zur Datenbank hinzuzufügen, müssen Sie momentan "
-#~ "noch die Datei %1 manuell ergänzen. Es ist bereits geplant, dies zukünftig "
-#~ "zu vereinfachen …"
+#~ msgid "Stars "
+#~ msgstr "Sterne "
+
+#~ msgid "Colors "
+#~ msgstr "Farben "
+
+#~ msgid "Effects "
+#~ msgstr "Effekte "
+
+#~ msgid "Scripts "
+#~ msgstr "Skripte "
+
+#~ msgid "Landscape: "
+#~ msgstr "Landschaft: "
+
+#~ msgid "Cardinal Points"
+#~ msgstr "Himmelsrichtungen"
+
+#~ msgid "Sky Language: "
+#~ msgstr "Himmelssprache: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "Kulturkreis: "
+
+#~ msgid "Date & Time"
+#~ msgstr "Datum & Zeit"
+
+#~ msgid "Set Location "
+#~ msgstr "Standort festlegen "
+
+#~ msgid "General "
+#~ msgstr "Allgemein "
+
+#~ msgid "Administration "
+#~ msgstr "Verwaltung "
+
+#~ msgid "Latitude: "
+#~ msgstr "Breitengrad: "
+
+#~ msgid "Longitude: "
+#~ msgstr "Längengrad: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Sternzeit: "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Zeitzone festlegen: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Sternzeit voreinstellen: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Sternzeit beim Start: "
+
+#~ msgid "Actual Time"
+#~ msgstr "Aktuelle Zeit"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "Zeitformat: "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Datumsformat: "
+
+#~ msgid "Show: "
+#~ msgstr "Anzeigen: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "Funkeln: "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "Sternbildlinien"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Sternbildgrenzen"
+
+#~ msgid "Planet Names"
+#~ msgstr "Planetennamen"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Planetenbahnen"
+
+#~ msgid "Planet Trails"
+#~ msgstr "Planetenspuren"
+
+#~ msgid "Nebula Names"
+#~ msgstr "Nebelnamen"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Nebelkreise"
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Regel für Objektgröße: "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Helligkeit der Milchstraße: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Namensanzeige bei Nebeln bis Helligkeit: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Mauszeiger ausblenden: "
+
+#~ msgid "Local Script: "
+#~ msgstr "Lokales Skript: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Standardkonfiguration laden: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Aktuelle Konfiguration als Standard speichern: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Internet-Update starten: "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Helligkeits-Verstärkungsfaktor: "
+
+#~ msgid "Sidereal"
+#~ msgstr "Stern-"
+
+#~ msgid "Calendar"
+#~ msgstr "Kalender"
+
+#~ msgid "Day keys: "
+#~ msgstr "Tagestasten: "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "Grenzhelligkeit: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "Lichtlaufzeit-Korrektur: "
+
+#~ msgid "USB Script: "
+#~ msgstr "USB-Skript: "
+
+#~ msgid "Light pollution: "
+#~ msgstr "Lichtverschmutzung: "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "Regler für Größenskalierung: "
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "Stärke der Lichtverschmutzung: "
+
+#~ msgid "Art brightness: "
+#~ msgstr "Helligkeit der Sternbildfiguren: "
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "Anfängliches Gesichtsfeld: XX"
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "Anfängliche Blickrichtung: xxxx"
+
+#~ msgid "Meridian Line"
+#~ msgstr "Meridianlinie"
+
+#~ msgid "Planets labels"
+#~ msgstr "Planetenbeschriftungen"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "Katalog x von y holen"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "Äquatoriales Raster"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "Azimutales Raster"
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "Sternwerte Multiplikator "
+
+#~ msgid "Set Time "
+#~ msgstr "Uhrzeit einstellen "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Höhe (m): "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Himmelskörper des Sonnensystems: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Maximalgröße der Beschriftungen: "
+
+#~ msgid "Constellation Names"
+#~ msgstr "Sternbildnamen"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Deutlichkeit der künstlerischen Sternbilder"
+
+#~ msgid "Equator Line"
+#~ msgstr "Himmelsäquator"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "Ekliptik"
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Manuelle Vergrößerung: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Vergrößerungsdauer: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "CD/DVD-Skript: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "Pfeiltaste abwärts, um Liste zu laden."
+
+#~ msgid "Select and exit to run."
+#~ msgstr "Wählen und verlassen, um auszuführen."
+
+#~ msgid "Shut Down: "
+#~ msgstr "Beenden: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Setze Menüsprache: "
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "Alle Sternkataloge sind heruntergeladen!"
+
+#~ msgid "Preset Time"
+#~ msgstr "Aktuelle Zeit"
+
+#~ msgid "Hydra"
+#~ msgstr "Hydra"
