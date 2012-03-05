@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-27 04:57+0700\n"
-"PO-Revision-Date: 2012-02-21 07:55+0000\n"
+"PO-Revision-Date: 2012-03-05 02:32+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-04 04:56+0000\n"
-"X-Generator: Launchpad (build 14886)\n"
+"X-Launchpad-Export-Date: 2012-03-05 04:40+0000\n"
+"X-Generator: Launchpad (build 14900)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -3770,11 +3770,11 @@ msgstr "แฟ้ม satellites.json แฟ้มเก่าเข้ากั�
 #: plugins/Satellites/src/Satellite.cpp:228
 #: plugins/Satellites/src/Satellite.cpp:232
 msgid "Catalog #"
-msgstr ""
+msgstr "หมายเลขในแค็ตตาล็อก"
 
 #: plugins/Satellites/src/Satellite.cpp:234
 msgid "International Designator"
-msgstr ""
+msgstr "ชื่อเรียกสากล"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:246
@@ -3939,6 +3939,10 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
+"1. โปรดแน่ใจว่าดาวเทียมที่คุณต้องการจะเพิ่มนั้น มีอยู่ใน URL "
+"อันใดอันหนึ่งของรายชื่อในแท็บแหล่งข้อมูล "
+"ซึ่งอยู่ในหน้าต่างการตั้งค่าดาวเทียม 2. ไปที่แท็บดาวเทียม แล้วคลิกปุ่ม '+' "
+"จากนั้น เลือกดาวเทียมที่คุณต้องการจะเพิ่ม แล้วคลิกปุ่ม \"เพิ่ม\""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
@@ -4046,7 +4050,7 @@ msgstr "[แหล่งข้อมูลใหม่]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
 msgid "[orbit calculation error]"
-msgstr ""
+msgstr "[เกิดความผิดพลาดในการคำนวณวงโคจร]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"
