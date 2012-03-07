@@ -101,6 +101,8 @@ private slots:
 	//! Set flagHasSelectedText as true, if search box has selected text
 	void setHasSelectedFlag();
 
+	void mirrorBoxChanged(const QString&);
+
 private:
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
@@ -112,6 +114,9 @@ private:
 	QHash<QString, QString> greekLetters;
 	bool useSimbad;
 	bool flagHasSelectedText;
+	QString useMirror;
+
+	void populateMirrorList();
 };
 
 #endif // _SEARCHDIALOG_HPP_
