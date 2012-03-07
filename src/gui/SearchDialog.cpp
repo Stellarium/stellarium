@@ -24,6 +24,7 @@
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelTranslator.hpp"
 
 #include "StelObjectMgr.hpp"
 #include "StelUtils.hpp"
@@ -37,6 +38,7 @@
 #include <QStringList>
 #include <QTextEdit>
 #include <QLineEdit>
+#include <QComboBox>
 
 #include "SimbadSearcher.hpp"
 
@@ -155,7 +157,8 @@ SearchDialog::SearchDialog() : simbadReply(NULL)
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-	useSimbad = conf->value("search/flag_search_online", true).toBool();
+	useSimbad = conf->value("search/flag_search_online", true).toBool();	
+	useMirror = conf->value("search/use_simbad_mirror_url", "http://simbad.u-strasbg.fr/").toString();
 }
 
 SearchDialog::~SearchDialog()
@@ -175,6 +178,7 @@ void SearchDialog::retranslate()
 		QString text(ui->lineEditSearchSkyObject->text());
 		ui->retranslateUi(dialog);
 		ui->lineEditSearchSkyObject->setText(text);
+		populateMirrorList();
 	}
 }
 
@@ -232,6 +236,16 @@ void SearchDialog::createDialogContent()
 	connect(ui->checkBoxUseSimbad, SIGNAL(clicked(bool)),
 		this, SLOT(enableSimbadSearch(bool)));
 	ui->checkBoxUseSimbad->setChecked(useSimbad);
+
+	populateMirrorList();
+	int idx = ui->useSimbadMirrorComboBox->findData(useMirror, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use University of Strasbourg as default
+		idx = ui->useSimbadMirrorComboBox->findData(QVariant("http://simbad.u-strasbg.fr/"), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->useSimbadMirrorComboBox->setCurrentIndex(idx);
+	connect(ui->useSimbadMirrorComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(mirrorBoxChanged(const QString&)));
 }
 
 void SearchDialog::setHasSelectedFlag()
@@ -245,7 +259,7 @@ void SearchDialog::enableSimbadSearch(bool enable)
 	
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-	conf->setValue("search/flag_search_online", useSimbad);
+	conf->setValue("search/flag_search_online", useSimbad);	
 }
 
 void SearchDialog::setVisible(bool v)
@@ -300,7 +314,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		ui->pushButtonGotoSearchSkyObject->setEnabled(false);
 	} else {
 		if (useSimbad) {
-			simbadReply = simbadSearcher->lookup(trimmedText, 3);
+			simbadReply = simbadSearcher->lookup(useMirror, trimmedText, 3);
 			onSimbadStatusChanged();
 			connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
 		}
@@ -467,4 +481,40 @@ QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterNa
 	}
 
 	return potentialGreekLetterName;
+}
+
+void SearchDialog::populateMirrorList()
+{
+	Q_ASSERT(ui);
+	Q_ASSERT(ui->useSimbadMirrorComboBox);
+
+	QComboBox* mirrors = ui->useSimbadMirrorComboBox;
+	//Save the current selection to be restored later
+	mirrors->blockSignals(true);
+	int index = mirrors->currentIndex();
+	QVariant selectedMirrorId = mirrors->itemData(index);
+	mirrors->clear();
+	//For each mirror, display the localized description and store the URL as user data.
+	mirrors->addItem(q_("SIMBAD - University of Strasbourg"), "http://simbad.u-strasbg.fr/");
+	mirrors->addItem(q_("SIMBAD - Harvard University"), "http://simbad.harvard.edu/");
+
+	//Restore the selection
+	index = mirrors->findData(selectedMirrorId, Qt::UserRole, Qt::MatchCaseSensitive);
+	mirrors->setCurrentIndex(index);
+	mirrors->model()->sort(0);
+	mirrors->blockSignals(false);
+}
+
+// Called when the mirror is changed by hand
+void SearchDialog::mirrorBoxChanged(const QString&)
+{
+	int index = ui->useSimbadMirrorComboBox->currentIndex();
+	if (index < 0)
+		useMirror = QString();//As returned by QComboBox::currentText()
+	else
+		useMirror = ui->useSimbadMirrorComboBox->itemData(index).toString();
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	conf->setValue("search/use_simbad_mirror_url", useMirror);
 }
