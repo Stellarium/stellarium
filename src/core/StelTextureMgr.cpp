@@ -102,31 +102,6 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 		if (tex->qImage.isNull())
 			return StelTextureSP();
 
-// minor change added by Eleni Maria Stea for the case that a texture is larger than
-// the GPU maximum texture unit supported
-
-		int size;
-		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &size);
-		fprintf(stdout, "max texture unit size: %d\n", size);
-		fprintf(stdout, "qImage width: %d\n", tex->qImage.width());
-		fprintf(stdout, "qImage height: %d\n", tex->qImage.height());
-
-
-		if (size < tex->qImage.width())
-		{
-			tex->qImage.scaledToWidth(size, Qt::FastTransformation);
-			fprintf(stdout, "qImage resized width: %d\n", tex->qImage.width());
-		}
-		if (size < tex->qImage.height())
-		{
-			tex->qImage.scaledToHeight(size, Qt::FastTransformation);
-			fprintf(stdout, "qImage resized height: %d\n", tex->qImage.height());
-		}
-
-		if (tex->qImage.isNull() || size < 2)
-			return StelTextureSP();
-//
-
 		tex->loadParams = params;
 		tex->downloaded = true;
 
