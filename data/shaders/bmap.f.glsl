@@ -43,10 +43,10 @@ vec4 getLighting()
 	vec4 color = (gl_FrontLightModelProduct.sceneColor * gl_FrontMaterial.ambient) + (gl_LightSource[0].ambient * gl_FrontMaterial.ambient);
 	
 	//For bump mapping, the normal comes from the bump map texture lookup
-	vec3 n = vec3(0.0f);
+	vec3 n = vec3(0.0);
 	if(boolBump)
 	{
-		n = normalize(texture(bmap, gl_TexCoord[0].st).xyz * 2.0 - 1.0);
+		n = normalize(texture2D(bmap, gl_TexCoord[0].st).xyz * 2.0 - 1.0);
 	}
 	else
 	{
@@ -58,7 +58,7 @@ vec4 getLighting()
 	//Lambert term
 	float NdotL = dot(n, l);
 	
-	if(NdotL > 0.0f)
+	if(NdotL > 0.0)
 	{
 		//Diffuse part
 		color += gl_LightSource[0].diffuse * gl_FrontMaterial.diffuse * NdotL;
@@ -77,7 +77,7 @@ vec4 getLighting()
   
 void main(void)
 {
-	vec4 texel = texture(tex, gl_TexCoord[0].st);
+	vec4 texel = texture2D(tex, gl_TexCoord[0].st);
 	if(texel.a < fTransparencyThresh)
 		discard;
 	

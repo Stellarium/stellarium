@@ -47,23 +47,23 @@ vec4 getLighting()
 	
 	//Traditional shadow mapping
 	vec3 tex_coords = SM_tex_coord.xyz/SM_tex_coord.w;
-	float depth = texture(smap, tex_coords.xy).x;
+	float depth = texture2D(smap, tex_coords.xy).x;
 	
 	float shadowFactor;
 	if(depth > (tex_coords.z + 0.00001))
 	{
 		//In light!
-		shadowFactor = 1.0f;
+		shadowFactor = 1.0;
 	}
 	else
 	{
-		shadowFactor = 0.3f;
+		shadowFactor = 0.3;
 	}
 	
 	//Lambert term
 	float NdotL = dot(n, l);
 	
-	if(NdotL > 0.0f)
+	if(NdotL > 0.0)
 	{
 		//Diffuse part
 		color += gl_LightSource[0].diffuse * gl_FrontMaterial.diffuse * NdotL * shadowFactor;
@@ -82,7 +82,7 @@ vec4 getLighting()
   
 void main(void)
 {
-	vec4 texel = texture(tex, gl_TexCoord[0].st);
+	vec4 texel = texture2D(tex, gl_TexCoord[0].st);
 	if(texel.a < fTransparencyThresh)
 		discard;
 	
