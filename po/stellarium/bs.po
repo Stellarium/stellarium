@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-02-27 04:57+0700\n"
-"PO-Revision-Date: 2012-02-28 16:08+0000\n"
+"PO-Revision-Date: 2012-03-08 21:28+0000\n"
 "Last-Translator: Kenan Dervišević <kenan3008@gmail.com>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-04 04:50+0000\n"
-"X-Generator: Launchpad (build 14886)\n"
+"X-Launchpad-Export-Date: 2012-03-09 04:50+0000\n"
+"X-Generator: Launchpad (build 14914)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -3780,11 +3780,11 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:228
 #: plugins/Satellites/src/Satellite.cpp:232
 msgid "Catalog #"
-msgstr ""
+msgstr "Katalog #"
 
 #: plugins/Satellites/src/Satellite.cpp:234
 msgid "International Designator"
-msgstr ""
+msgstr "Internacionalna odrednica"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:246
@@ -3953,6 +3953,10 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
+"1. Provjerite da li su sateliti koje želite dodati uvršteni u neki od URL-"
+"ova u tabu sa izvorima u konfiguraciji satelita. 2. Otvorite tab za satelite "
+"i kliknite na dugme '+'. Odaberite satelite koje želite dodati i kliknite na "
+"dugme za dodavanje."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
@@ -4060,7 +4064,7 @@ msgstr "[novi izvor]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
 msgid "[orbit calculation error]"
-msgstr ""
+msgstr "[greška u proračunu orbite]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"
