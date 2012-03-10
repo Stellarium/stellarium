@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-27 04:57+0700\n"
-"PO-Revision-Date: 2012-01-31 14:40+0000\n"
+"POT-Creation-Date: 2012-03-09 20:51+0700\n"
+"PO-Revision-Date: 2012-03-08 08:16+0000\n"
 "Last-Translator: Abdurrahman Naufal <arnaufal7@yahoo.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-04 04:53+0000\n"
-"X-Generator: Launchpad (build 14886)\n"
+"X-Launchpad-Export-Date: 2012-03-10 05:13+0000\n"
+"X-Generator: Launchpad (build 14914)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -600,7 +600,7 @@ msgstr "Pengembang OSX: %1"
 #: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "Penguji: %1"
 
 #: src/gui/StelGui.cpp:102
 msgid "Display Options"
@@ -2234,7 +2234,7 @@ msgstr "Puerto Rico"
 
 #: src/translations.h:379
 msgid "Palestinian Territories"
-msgstr ""
+msgstr "Wilayah Palestina"
 
 #: src/translations.h:380
 msgid "Portugal"
@@ -2342,7 +2342,7 @@ msgstr "El Salvador"
 
 #: src/translations.h:406
 msgid "Syrian Arab Republic"
-msgstr ""
+msgstr "Republik Arab Suriah"
 
 #: src/translations.h:407
 msgid "Swaziland"
@@ -2422,7 +2422,7 @@ msgstr "Uganda"
 
 #: src/translations.h:426
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "Kepulauan Kecil Luar Amerika Serikat"
 
 #: src/translations.h:427
 msgid "United States"
@@ -2454,7 +2454,7 @@ msgstr "Kepulauan Virgin Inggris"
 
 #: src/translations.h:434
 msgid "United States Virgin Islands"
-msgstr ""
+msgstr "Kepulauan Virgin Amerika Serikat"
 
 #: src/translations.h:435
 msgid "Viet Nam"
@@ -2713,7 +2713,7 @@ msgstr "Posisi"
 
 #: src/ui_searchDialogGui.h:546
 msgid "Search also in the SIMBAD on-line astronomical database"
-msgstr ""
+msgstr "Cari juga di SIMBAD database astronomis online"
 
 #: src/ui_searchDialogGui.h:547 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
@@ -2802,11 +2802,11 @@ msgstr "Polusi udara:"
 
 #: src/ui_viewDialog.h:1103
 msgid "pressure, temperature, extinction coefficient"
-msgstr ""
+msgstr "tekanan, temperatur, koefisien pemadaman"
 
 #: src/ui_viewDialog.h:1105
 msgid "Refraction/Extinction settings..."
-msgstr ""
+msgstr "Pengaturan Pembiasan/Pemadaman..."
 
 #: src/ui_viewDialog.h:1106
 msgid "Labels and Markers"
@@ -2851,7 +2851,7 @@ msgstr "Bola Langit"
 #: src/ui_viewDialog.h:1127
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Galactic plane line"
-msgstr ""
+msgstr "Garis bidang galaksi"
 
 #: src/ui_viewDialog.h:1129
 msgid "Constellations"
@@ -3391,7 +3391,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:838
 msgid "Select &ocular"
-msgstr ""
+msgstr "Pilih &okular"
 
 #: plugins/Oculars/src/Oculars.cpp:883
 msgid "Toggle &crosshair"
@@ -5394,231 +5394,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
-
-#~ msgid "Sky Language: "
-#~ msgstr "Bahasa Langit: "
-
-#~ msgid "Date & Time"
-#~ msgstr "Tanggal & Waktu"
-
-#~ msgid "General "
-#~ msgstr "Umum "
-
-#~ msgid "Effects "
-#~ msgstr "Efek "
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Format Tampilan Waktu: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Format Tampilan Tanggal: "
-
-#~ msgid "Hydra"
-#~ msgstr "Hydra"
-
-#~ msgid "Colors "
-#~ msgstr "Warna "
-
-#~ msgid "Stars "
-#~ msgstr "Bintang "
-
-#~ msgid "Administration "
-#~ msgstr "Administrasi "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Waktu Langit: "
-
-#~ msgid "Planet Names"
-#~ msgstr "Nama Planet"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Orbit Planet"
-
-#~ msgid "Meridian Line"
-#~ msgstr "Garis Meridian"
-
-#~ msgid "Nebula Names"
-#~ msgstr "Nama Nebula"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Lingkaran Nebula"
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Batas Waktu Kursor: "
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "Pengali Nilai Bintang: "
-
-#~ msgid "Sidereal"
-#~ msgstr "Sideris"
-
-#~ msgid "Calendar"
-#~ msgstr "Kalender"
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "Pengali Skala Magnitudo: "
-
-#~ msgid "Show: "
-#~ msgstr "Tampilkan: "
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "Ambil katalog x dari y"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "Day keys: "
-#~ msgstr "Tombol hari: "
-
-#~ msgid "Set Location "
-#~ msgstr "Tentukan Lokasi "
-
-#~ msgid "Longitude: "
-#~ msgstr "Bujur: "
-
-#~ msgid "Latitude: "
-#~ msgstr "Lintang: "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Ketinggian (m): "
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Waktu Langit yang Telah Ditentukan: "
-
-#~ msgid "Preset Time"
-#~ msgstr "Waktu yang Telah Ditentukan"
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Durasi Zoom: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Mutakhirkan saya via Internet: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Tentukan Lokalisasi Antarmuka: "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Badan Tata Surya: "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Waktu Langit Saat Mulai: "
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Budaya Langit: "
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Pengali Ukuran Magnitudo: "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "Magnitudo Maksimum untuk Label: "
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Magnitudo Pembatas: "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Garis Rasi Bintang"
-
-#~ msgid "Constellation Names"
-#~ msgstr "Nama Rasi Bintang"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Intensitas Seni Rasi Bintang"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Batas Rasi Bintang"
-
-#~ msgid "Planet Trails"
-#~ msgstr "Jejak Planet"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Grid Azimutal"
-
-#~ msgid "Equator Line"
-#~ msgstr "Garis Ekuator"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Garis Ekliptika"
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Garis Ukuran Objek: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "Magnitudo Nebula Maksimum untuk Label: "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "Koreksi untuk waktu perjalanan cahaya: "
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "Telah selesai mengunduh semua katalog bintang!"
-
-#~ msgid "Planets labels"
-#~ msgstr "Label planet"
-
-#~ msgid "Light pollution: "
-#~ msgstr "Polusi cahaya: "
-
-#~ msgid "Art brightness: "
-#~ msgstr "Kecerahan seni: "
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "Medan pandang saat mulai: XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "Arah pandang saat mulai: xxxx"
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Atur Zona Waktu: "
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "Luminansi Polusi Cahaya: "
-
-#~ msgid "Landscape: "
-#~ msgstr "Lanskap: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Zum manual: "
-
-#~ msgid "Set Time "
-#~ msgstr "Tentukan Waktu "
-
-#~ msgid "Scripts "
-#~ msgstr "Skrip "
-
-#~ msgid "Actual Time"
-#~ msgstr "Waktu Sebenarnya"
-
-#~ msgid "Twinkling: "
-#~ msgstr "Kelipan: "
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Titik Mata Angin"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "Grid Ekuatorial"
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Intensitas Bimasakti: "
-
-#~ msgid "Local Script: "
-#~ msgstr "Skrip Lokal: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "Skrip CD/DVD: "
-
-#~ msgid "USB Script: "
-#~ msgstr "Skrip USB: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Panah bawah untuk memuat daftar."
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Pilih dan keluar untuk menjalankan."
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Muat Konfigurasi Standar: "
-
-#~ msgid "Shut Down: "
-#~ msgstr "Tutup: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Simpan Konfigurasi sebagaimana mulanya "
