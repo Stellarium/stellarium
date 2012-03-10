@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-02-27 04:57+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
-"Last-Translator: Balaji பாலாஜி <Unknown>\n"
+"POT-Creation-Date: 2012-03-09 20:51+0700\n"
+"PO-Revision-Date: 2012-03-04 20:05+0000\n"
+"Last-Translator: Sarrvesh <sarrfriend@gmail.com>\n"
 "Language-Team: Tamil <ta@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-27 05:39+0000\n"
-"X-Generator: Launchpad (build 14868)\n"
+"X-Launchpad-Export-Date: 2012-03-10 05:16+0000\n"
+"X-Generator: Launchpad (build 14914)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -128,7 +128,7 @@ msgstr "சரிவுத்தன்மை (தேதியுடையது)
 #: src/core/modules/Planet.cpp:153
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "தொலைவு: %1 AU (%2 கி.மீ.)"
 
 #: src/core/modules/Planet.cpp:160
 #, no-c-format, qt-format
@@ -985,11 +985,11 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
-msgstr ""
+msgstr "இயல்பான"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
-msgstr ""
+msgstr "நட்சத்திர வரைபடம்"
 
 #: src/main.cpp:333
 msgid "This system does not support OpenGL."
@@ -1264,7 +1264,7 @@ msgstr "சூரிய மண்டல பார்வையாளர்"
 #. TRANSLATORS: TNO/Asteroid (90377) Sedna
 #: src/translations.h:102
 msgid "Sedna"
-msgstr ""
+msgstr "செட்னா"
 
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
 #: src/translations.h:104
@@ -1274,7 +1274,7 @@ msgstr ""
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
 #: src/translations.h:106
 msgid "Orcus"
-msgstr ""
+msgstr "ஆர்கஸ்"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
 #: src/translations.h:108
@@ -1294,7 +1294,7 @@ msgstr ""
 #. TRANSLATORS: Asteroid (7) Iris
 #: src/translations.h:115
 msgid "Iris"
-msgstr ""
+msgstr "ஐரிஸ்"
 
 #. TRANSLATORS: Asteroid (8) Flora
 #: src/translations.h:117
@@ -1329,7 +1329,7 @@ msgstr "ஈரோஸ்"
 #. TRANSLATORS: Asteroid (624) Hektor
 #: src/translations.h:131
 msgid "Hektor"
-msgstr ""
+msgstr "ஹெக்டர்"
 
 #. TRANSLATORS: Name of supernova SN 1572A
 #: src/translations.h:134
@@ -1494,6 +1494,8 @@ msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
+"2009ல் நடந்த முழு சூரிய கிறகணத்தின் தொகுப்பு (நடைபெற்ற இடம்: இரங்கபூர், "
+"வங்காளதேசம்)"
 
 #: src/translations.h:200
 msgid "Script which runs automatically at startup"
@@ -2869,7 +2871,7 @@ msgstr "முடுபனியை காட்டு"
 
 #: src/ui_viewDialog.h:1140
 msgid "Use associated planet and position"
-msgstr ""
+msgstr "சார்ந்த கிரகத்தையும் அதன் இடத்தையும் பயன்படுத்து"
 
 #: src/ui_viewDialog.h:1141
 msgid "Use this landscape as default"
@@ -3441,13 +3443,13 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
 #, qt-format
 msgid "Telescope #%1"
-msgstr ""
+msgstr "தொலைநோக்கி #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1486 plugins/Oculars/src/Oculars.cpp:1548
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
 #, qt-format
 msgid "Telescope #%1: %2"
-msgstr ""
+msgstr "தொலைநோக்கி #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1497
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
@@ -3465,7 +3467,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
 #, qt-format
 msgid "Dimensions: %1"
-msgstr ""
+msgstr "அளவு  %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1525
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
@@ -3509,11 +3511,11 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Previous telescope"
-msgstr ""
+msgstr "முந்தைய தொலைநோக்கி"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Next telescope"
-msgstr ""
+msgstr "அதுத்த தொலைநோக்கி"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
@@ -3774,11 +3776,11 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:291
 msgid "The satellite is eclipsed."
-msgstr ""
+msgstr "சையர்கைக்கோள் மறைக்கப்பட்டுள்ளது"
 
 #: plugins/Satellites/src/Satellite.cpp:294
 msgid "The satellite is not visible"
-msgstr ""
+msgstr "சையர்கைக்கோள் தென்படவில்லை"
 
 #: plugins/Satellites/src/Satellite.cpp:320
 #, qt-format
@@ -3894,7 +3896,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:293
 #, qt-format
 msgid "See %1this document%2 for details."
-msgstr ""
+msgstr "மேலும் விபரங்களுக்கு இந்த %1 ஆவணத்தைப் %2 பார்க்கவும்"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
 msgid "Links"
@@ -3910,7 +3912,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:299
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
-msgstr ""
+msgstr "கேள்விகள் இருந்தால் அதற்கான பதிலை %1இங்கே%2 பெறலாம்"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
@@ -3964,7 +3966,7 @@ msgstr "புதுப்பித்தல் பிழை"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:365
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
-msgstr ""
+msgstr "%1/%2 செயற்கைகோள்(கள்) புதுபிகப்படன; %3 ஐ காணவில்லை"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:422
 msgid "[new source]"
@@ -4294,7 +4296,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
-msgstr ""
+msgstr "புது தொலைநோக்கியுடன் இணைய \"%1\" ஐ அழுத்தவும்"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
@@ -4417,7 +4419,7 @@ msgstr "தொலைநோக்கி கட்டமைப்பு"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid "Telescope controlled by:"
-msgstr ""
+msgstr "தொலைநோக்கியை இயக்குவது:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
 msgid ""
@@ -5142,7 +5144,7 @@ msgstr "பொருளை சேர்க்கவும்"
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Solar System objects"
-msgstr ""
+msgstr "சூரிய குடும்பத்தில் இருக்கும் பொருட்கள்"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Warning"
@@ -5264,12 +5266,12 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:112
 #, qt-format
 msgid "Distance: %1 kpc (%2 ly)"
-msgstr ""
+msgstr "தொலைவு: %1 kpc (%2 ly)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:116
 #, qt-format
 msgid "Type of pulsar: %1"
-msgstr ""
+msgstr "பல்சாரின் வகை: %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:120
 #, qt-format
@@ -5291,7 +5293,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:133 plugins/Pulsars/src/Pulsar.cpp:145
 #: plugins/Pulsars/src/Pulsar.cpp:157
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:136 plugins/Pulsars/src/Pulsar.cpp:148
@@ -5302,7 +5304,7 @@ msgstr ""
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:232
 msgid "globular cluster association"
-msgstr ""
+msgstr "உருண்ட நட்சதிரக்கூடமைப்பு"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:238
@@ -5342,4 +5344,4 @@ msgstr ""
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
-msgstr ""
+msgstr "வேற்றுப்  பேரடையில்  இருக்கும் பல்சார்கள்"

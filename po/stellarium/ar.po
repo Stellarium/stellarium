@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-20 17:27+0700\n"
-"PO-Revision-Date: 2012-02-26 01:24+0000\n"
+"POT-Creation-Date: 2012-03-09 20:51+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-26 04:51+0000\n"
-"X-Generator: Launchpad (build 14860)\n"
+"X-Launchpad-Export-Date: 2012-03-10 05:11+0000\n"
+"X-Generator: Launchpad (build 14914)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -331,7 +331,7 @@ msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "اتجاه الرؤية عند بدء البرنامج سمت/ارتفاع: %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:536
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:255
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "<P DIR=RTL>المؤلفون"
 
@@ -3770,72 +3770,81 @@ msgstr ""
 "satellites.json \n"
 "لم يعد متوافقاً مع البرنامج - سوف يستخدم الملف الافتراضي"
 
+#: plugins/Satellites/src/Satellite.cpp:228
+#: plugins/Satellites/src/Satellite.cpp:232
+msgid "Catalog #"
+msgstr "الدليل رقم"
+
+#: plugins/Satellites/src/Satellite.cpp:234
+msgid "International Designator"
+msgstr "التصنيف العالمي"
+
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:238
+#: plugins/Satellites/src/Satellite.cpp:246
 #, qt-format
 msgid "Range (km): %1"
 msgstr "‎البعد عن الراصد بالكيلومترات: ‎%1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:241
+#: plugins/Satellites/src/Satellite.cpp:249
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "‎معدل تغير السرعة كم/ث: ‎%1"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:244
+#: plugins/Satellites/src/Satellite.cpp:252
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "‎الارتفاع بالكيلومتر: ‎%1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:247
+#: plugins/Satellites/src/Satellite.cpp:255
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr "‎ إحداثيات الموقع الأرضي تحت القمر مباشرة - الطول/العرض: ‎%1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:261
+#: plugins/Satellites/src/Satellite.cpp:269
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "‎TEME الإحداثيات بالكيلومتر حسب: ‎%1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:269
+#: plugins/Satellites/src/Satellite.cpp:277
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "‎TEME السرعة كم/ث حسب:‎%1"
 
-#: plugins/Satellites/src/Satellite.cpp:277
+#: plugins/Satellites/src/Satellite.cpp:285
 msgid "The satellite and the observer are in sunlight."
 msgstr "القمر الصناعي والراصد في ضوء الشمس"
 
-#: plugins/Satellites/src/Satellite.cpp:280
+#: plugins/Satellites/src/Satellite.cpp:288
 msgid "The satellite is visible."
 msgstr "القمر الصناعي ممكن أن يرى"
 
-#: plugins/Satellites/src/Satellite.cpp:283
+#: plugins/Satellites/src/Satellite.cpp:291
 msgid "The satellite is eclipsed."
 msgstr "القمر الصناعي في ظل الأرض"
 
-#: plugins/Satellites/src/Satellite.cpp:286
+#: plugins/Satellites/src/Satellite.cpp:294
 msgid "The satellite is not visible"
 msgstr "القمر الصناعي لايمكن رؤيته"
 
-#: plugins/Satellites/src/Satellite.cpp:312
+#: plugins/Satellites/src/Satellite.cpp:320
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 ‎ميجا هرتز ‎(%2%3 ‎كيلوهرتز ‎)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:253
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:258
 msgid "Stellarium Satellites Plugin"
 msgstr "<P DIR=RTL>ميزة الأقمار الصناعية الإضافية لبرنامج ستيللاريوم"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
 msgid "Version"
 msgstr "</P><P DIR=RTL>الإصدار"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:258
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:263
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
@@ -3843,18 +3852,18 @@ msgstr ""
 "<P DIR=RTL>ميزة الأقمار الصناعية تتنبأ بموقع القمر الصناعي في مداره حول "
 "الأرض."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:265
 msgid "Notes for users"
 msgstr "<P DIR=RTL>ملاحظات للمستخدمين"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:261
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:266
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
 "<P DIR=RTL>الأقمار الصناعية ومداراتها تظهر فقط عندما يكون الراصد على كوكب "
 "الأرض."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:262
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:267
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
@@ -3864,7 +3873,7 @@ msgstr ""
 "قصير، أيام معدودة أو أسابيع أو على الأكثر شهر في الماضي والمستقبل. توقع أن "
 "تجد تنبؤات غريبة جداً خارج نطاق هذا الوقت."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:263
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:268
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
@@ -3873,7 +3882,7 @@ msgstr ""
 "وللحصول على بيانات نافعة، يلزمك تحديث بيانات TLE بصفة متكررة."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:265
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:270
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -3884,7 +3893,7 @@ msgstr ""
 "الافتراضي %3. الملف القديم سيحفظ بنسخة احتياطية اسمها %4. وستجده على مسار "
 "معلومات المستخدم، تحت \"modules/Satellites/\"</P>"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:271
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:276
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
@@ -3893,11 +3902,11 @@ msgstr ""
 "ناقصة أو غير موجودة أو فيها بعض الأخطاء."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:275
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:280
 msgid "TLE data updates"
 msgstr "<P DIR=RTL>تحديث بيانات TLE"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:276
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more "
@@ -3907,7 +3916,7 @@ msgstr ""
 "من مصادرها في الإنترنت. والوقت الافتراضي لتحديث هذه البيانات هو بعد مرور 72 "
 "ساعة على آخر تحديث. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:277
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:282
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -3918,7 +3927,7 @@ msgstr ""
 "حاسبك الشخصي. يجب أن يكون تنسيق الملف مثل التحديثات الموجودة على Celestrak "
 "(انظر %1 كمثال على ذلك)."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:278
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:283
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
@@ -3926,25 +3935,27 @@ msgstr ""
 "<P DIR=RTL><b>ملاحظة:</b>إذا كان اسم القمر الصناعي في بيانات التحديث يحتوي "
 "أي عبارة بين قوسين مربعين فسوف تحذف هذه المعلومة قبل استخدام البيانات."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
 msgid "Adding new satellites"
 msgstr "<P DIR=RTL>إضافة أقمار صناعية جديدة"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:282
-#, qt-format
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
 msgid ""
-"At the moment you must manually edit the %1 file to add new satellites to "
-"the database. Making this easier is still on the TODO list..."
+"1. Make sure the satellite(s) you wish to add are included in one of the "
+"URLs listed in the Sources tab of the satellites configuration dialog. 2. Go "
+"to the Satellites tab, and click the '+' button.  Select the satellite(s) "
+"you wish to add and select the \"add\" button."
 msgstr ""
-"<P DIR=RTL>في الوقت الحالي، يلزمك تحرير الملف %1 يدوياً لإضافة قمر صناعي "
-"جديد إلى قاعدة البيانات. وتسهيل هذه المهمة هو من ضمن قائمة التحسينات "
-"المستقبلية."
+"1. تأكد أن الأقمار الصناعية التي ترغب في إضافتها موجودة ضمن أحد الروابط تحت "
+"علامة التبويب \"المصادر\" في نافذة إعدادات الأقمار الصناعية. 2. اذهب إلى "
+"علامة التبويب \"الأقمار الصناعية\" واضغط على زر \"+\". اختر الأقمار الصناعية "
+"التي تريد إضافتها واضغط على زر \"أضف\"."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:284
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
 msgstr "<P DIR=RTL>ملاحظات تقنية"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:285
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
@@ -3952,7 +3963,7 @@ msgstr ""
 "<P DIR=RTL>يتم حساب الموقع باستخدام طريقة SGP4 & SDP4 وباستخدام بيانات NORAD "
 "TLE كمدخلات. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:291
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
@@ -3961,16 +3972,16 @@ msgstr ""
 "Spacetrack Report # 3 (ويحتوي على Spacetrack Report #6). "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:293
 #, qt-format
 msgid "See %1this document%2 for details."
 msgstr "<P DIR=RTL>انظر %1هذه الوثيقة%2 للتفاصيل."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
 msgid "Links"
 msgstr "<P DIR=RTL>روابط"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:291
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:296
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
 "plugin\" in the subject when posting."
@@ -3979,19 +3990,19 @@ msgstr ""
 "plugin\" في عنوان الموضوع."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:294
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:299
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "<P DIR=RTL>إذا كان لديك سؤال يمكنك %1الحصول على جواب هنا%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:296
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "<P DIR=RTL> تستطيع التبليغ عن أخطاء البرنامج %1هنا%2."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:298
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:303
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -3999,68 +4010,72 @@ msgstr ""
 "<P DIR=RTL> إذا رغبت في طلب ميزة جديدة، يمكنك التبليغ عن مشكلة وتحديد "
 "المستوى (severity) بكلمة \"wishlist\"."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:316
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
 msgid "Internet updates disabled"
 msgstr "التحديث عبر الإنترنت غير مفعَّل"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:318
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:350
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:355
 msgid "Updating now..."
 msgstr "التحديث يتم حالياً..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:320
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:325
 msgid "Next update: < 1 minute"
 msgstr "التحديث التالي: أقل من دقيقة"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:322
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "التحديث التالي: %1 دقيقة"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:324
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "التحديث التالي: %1 ساعة"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:339
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
 msgid "Update now"
 msgstr "حدِّث البيانات الآن"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:341
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:346
 msgid "Update from files"
 msgstr "حدِّث من الملفات"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:353
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:358
 msgid "Update error"
 msgstr "حصل خطأ في التحديث"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:360
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:365
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
 msgstr "تم تحديث %1 من %2 من الأقمار الصناعية؛ و %3 مفقودة"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:417
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:422
 msgid "[new source]"
 msgstr "[مصدر جديد]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:458
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
+msgid "[orbit calculation error]"
+msgstr "[خطأ في حساب المدار]"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"
 msgstr "[ كل المضافة حديثاً]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:459
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:463
 msgid "[all not displayed]"
 msgstr "[كل التي لاتظهر في البرنامج]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:460
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:464
 msgid "[all displayed]"
 msgstr "[كل التي تظهر في البرنامج]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:465
 msgid "[all]"
 msgstr "[الكل]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:573
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:597
 msgid "Select TLE Update File"
 msgstr "TLE اختر ملف التحديث"
 
@@ -5466,231 +5481,3 @@ msgstr "إطلاق نبضي ضوئي أو لأشعة إكس أو أشعة جام
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr "نجم نابض خارج المجرة في السحابة الماجلانية"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "الشبكة الاستوائية"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "الشبكة السمتية"
-
-#~ msgid "Equator Line"
-#~ msgstr "خط الاستواء"
-
-#~ msgid "Cardinal Points"
-#~ msgstr "الجهات الاربع"
-
-#~ msgid "Date & Time"
-#~ msgstr "التاريخ و التوقيت"
-
-#~ msgid "Set Location "
-#~ msgstr "حدد الموقع "
-
-#~ msgid "Set Time "
-#~ msgstr "حدد الوقت "
-
-#~ msgid "General "
-#~ msgstr "عام "
-
-#~ msgid "Stars "
-#~ msgstr "النجوم "
-
-#~ msgid "Effects "
-#~ msgstr "المؤثرات "
-
-#~ msgid "Actual Time"
-#~ msgstr "الوقت الفعلي"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "مدارات الكواكب"
-
-#~ msgid "Meridian Line"
-#~ msgstr "خط دائرة نصف النهار"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "دوائر السدم السماوية"
-
-#~ msgid "Hydra"
-#~ msgstr "الشجاع"
-
-#~ msgid "Light pollution: "
-#~ msgstr "التلوث الضوئي "
-
-#~ msgid "Planets labels"
-#~ msgstr "أسماء الكواكب"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "Colors "
-#~ msgstr "الألوان "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "خطوط الكوكبات"
-
-#~ msgid "Constellation Names"
-#~ msgstr "اسماء الكوكبات"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "سطوع الرسوم الفنية للكوكبات"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "حدود الكوكبات"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "خط الدائرةالكسوفية"
-
-#~ msgid "Nebula Names"
-#~ msgstr "أسماء السدم"
-
-#~ msgid "Landscape: "
-#~ msgstr "المناظر الطبيعية‎: "
-
-#~ msgid "Latitude: "
-#~ msgstr "خط العرض‎: "
-
-#~ msgid "Longitude: "
-#~ msgstr "خط الطول‎: "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "(الارتفاع (م ‎: "
-
-#~ msgid "Sky Time: "
-#~ msgstr "توقيت السماء‎: "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "حدد المنطقة الزمنية‎: "
-
-#~ msgid "Day keys: "
-#~ msgstr "مفاتيح اليوم‎: "
-
-#~ msgid "Calendar"
-#~ msgstr "تقويم"
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "(حدد الوقت المضبوط مسبقاً (في حالة عدم اختيار التوقيت الفعلي‎: "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "توقيت السماء عند البدء‎: "
-
-#~ msgid "Preset Time"
-#~ msgstr "الوقت المضبوط مسبقاً"
-
-#~ msgid "Time Display Format: "
-#~ msgstr "نمط عرض الوقت ‎: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "نمط عرض التاريخ‎: "
-
-#~ msgid "Sky Culture: "
-#~ msgstr "التراث الفلكي‎: "
-
-#~ msgid "Sky Language: "
-#~ msgstr "اللغة‎: "
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "مضاعف قيمة النجم‎: "
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "مضاعف حجم قدر السطوع‎: "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "إظهار أسماء النجوم الأكثر سطوعاً من القدر‎: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "التلألؤ "
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "القدرالمحدد‎: "
-
-#~ msgid "Planet Names"
-#~ msgstr "أسماء الكواكب"
-
-#~ msgid "Planet Trails"
-#~ msgstr "مسار  الكوكب"
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "مستوى التلوث الضوئي‎: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "التقريب اليدوي‎: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "قاعدة تقدير حجم الجرم‎: "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "مضاعف مقياس القدر‎: "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "سطوع رسم درب التبانة‎: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "إظهار أسماء السدم عندما يكون قدر السطوع أكثر من‎: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "مدة التقريب‎: "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "مهلة المؤشر‎: "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "صحح لسرعة انتقال الضوء‎: "
-
-#~ msgid "Local Script: "
-#~ msgstr "نص برمجي محلي‎: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "نص برمجي في قرص مدمج أو ضوئي‎: "
-
-#~ msgid "USB Script: "
-#~ msgstr "نص برمجي في المنفذ التسلسلي‎: "
-
-#~ msgid "Select and exit to run."
-#~ msgstr "اختر واخرج من البرنامج للتنفيذ.‏"
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "حمل الإعدادات الأصلية‎: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "حدد لغة واجهة المستخدم‎: "
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "انتهى تحميل جميع أدلة النجوم!‏"
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "حقل الرؤية عند التشغيل :XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "إتجاه الرؤية الذي يظهر عند التشغيل :XX"
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "اجلب الدليل x من y"
-
-#~ msgid "Administration "
-#~ msgstr "الإدارة "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "جرم من المجموعة الشمسية‎: "
-
-#~ msgid "Sidereal"
-#~ msgstr "نجمي"
-
-#~ msgid "Show: "
-#~ msgstr "أظهر‎: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr ".مفتاح السهم السفلي لتحميل القائمة"
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "احفظ الإعدادات الحالية كأساسية‎: "
-
-#~ msgid "Shut Down: "
-#~ msgstr "إغلاق‎: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "حدث بواسطة الإنترنت‎: "
-
-#~ msgid "Scripts "
-#~ msgstr "البرامج النصية "
-
-#~ msgid "Art brightness: "
-#~ msgstr "سطوع الرسومات "
