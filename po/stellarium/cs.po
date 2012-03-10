@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-27 04:57+0700\n"
+"POT-Creation-Date: 2012-03-09 20:51+0700\n"
 "PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: Zbyněk Schwarz <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-27 05:33+0000\n"
-"X-Generator: Launchpad (build 14868)\n"
+"X-Launchpad-Export-Date: 2012-03-10 05:12+0000\n"
+"X-Generator: Launchpad (build 14914)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -3773,11 +3773,11 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:228
 #: plugins/Satellites/src/Satellite.cpp:232
 msgid "Catalog #"
-msgstr ""
+msgstr "Č. katalogu"
 
 #: plugins/Satellites/src/Satellite.cpp:234
 msgid "International Designator"
-msgstr ""
+msgstr "Mezinárosní označení"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:246
@@ -3943,6 +3943,10 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
+"1. Ujistěte se, že satelity, které si přejete přidat, jsou zahrnuty do jedné "
+"z URL vypsaných v kartě zdroje v dialogovém okně nastavení satelitů. 2. "
+"Přejdete na kartu Satelity a klikněte na tlačítko '+'. Vyberte satelity, "
+"které si přejete přidat a stiskněte tlačítko \"add\"."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
@@ -4050,7 +4054,7 @@ msgstr "[nový zdroj]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
 msgid "[orbit calculation error]"
-msgstr ""
+msgstr "[chyba výpočtu oběžné dráhy]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"
@@ -5490,11 +5494,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr "extragalaktický (v MC) pulsar"
-
-#, qt-format
-#~ msgid ""
-#~ "At the moment you must manually edit the %1 file to add new satellites to "
-#~ "the database. Making this easier is still on the TODO list..."
-#~ msgstr ""
-#~ "V současnosti musíte pro přidání nových satelitů do databáze upravit soubor "
-#~ "%1. Je v plánu tento krok ulehčit..."
