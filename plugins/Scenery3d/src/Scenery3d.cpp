@@ -980,6 +980,13 @@ Scenery3d::ShadowCaster  Scenery3d::setupLights(float &ambientBrightness, float 
         directionalSourceString="(Sun, below horiz.)";
     }
 
+    // correct light mixture. Directional is good to increase for sunrise/sunset shadow casting.
+    if (shadowcaster)
+    {
+        ambientBrightness-=(torchEnabled? TORCH_BRIGHTNESS*0.8 : 0);
+        directionalBrightness+=(torchEnabled? TORCH_BRIGHTNESS*0.8 : 0);
+    }
+
     // DEBUG: Prepare output message
     QString shadowCasterName;
     switch (shadowcaster) {
