@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-27 04:57+0700\n"
+"POT-Creation-Date: 2012-03-10 17:34+0700\n"
 "PO-Revision-Date: 2012-03-05 02:32+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-06 04:46+0000\n"
-"X-Generator: Launchpad (build 14900)\n"
+"X-Launchpad-Export-Date: 2012-03-11 04:42+0000\n"
+"X-Generator: Launchpad (build 14914)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -1013,7 +1013,15 @@ msgstr "ธรรมชาติ"
 msgid "starchart"
 msgstr "แผนที่ดาว"
 
-#: src/main.cpp:333
+#: src/gui/SearchDialog.cpp:498
+msgid "SIMBAD - University of Strasbourg"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:499
+msgid "SIMBAD - Harvard University"
+msgstr ""
+
+#: src/main.cpp:337
 msgid "This system does not support OpenGL."
 msgstr "ระบบไม่สนับสนุน OpenGL"
 
@@ -2591,131 +2599,135 @@ msgstr "ประเทศ:"
 msgid "Planet:"
 msgstr "ดาวเคราะห์:"
 
-#: src/ui_searchDialogGui.h:464
+#: src/ui_searchDialogGui.h:495
 msgid "Find Object"
 msgstr "ค้นหาวัตถุท้องฟ้า"
 
-#: src/ui_searchDialogGui.h:465
+#: src/ui_searchDialogGui.h:496
 msgid "Find Object or Position"
 msgstr "ค้นหาวัตถุหรือตำแหน่ง"
 
-#: src/ui_searchDialogGui.h:471
+#: src/ui_searchDialogGui.h:502
 msgid "iota"
 msgstr "ไอโอตา"
 
-#: src/ui_searchDialogGui.h:474
+#: src/ui_searchDialogGui.h:505
 msgid "alpha"
 msgstr "แอลฟา"
 
-#: src/ui_searchDialogGui.h:477
+#: src/ui_searchDialogGui.h:508
 msgid "beta"
 msgstr "บีตา"
 
-#: src/ui_searchDialogGui.h:480
+#: src/ui_searchDialogGui.h:511
 msgid "gamma"
 msgstr "แกมมา"
 
-#: src/ui_searchDialogGui.h:483
+#: src/ui_searchDialogGui.h:514
 msgid "delta"
 msgstr "เดลตา"
 
-#: src/ui_searchDialogGui.h:486
+#: src/ui_searchDialogGui.h:517
 msgid "epsilon"
 msgstr "เอปไซลอน"
 
-#: src/ui_searchDialogGui.h:489
+#: src/ui_searchDialogGui.h:520
 msgid "zeta"
 msgstr "ซีตา"
 
-#: src/ui_searchDialogGui.h:492
+#: src/ui_searchDialogGui.h:523
 msgid "eta"
 msgstr "อีตา"
 
-#: src/ui_searchDialogGui.h:495
+#: src/ui_searchDialogGui.h:526
 msgid "theta"
 msgstr "ทีตา"
 
-#: src/ui_searchDialogGui.h:498
+#: src/ui_searchDialogGui.h:529
 msgid "kappa"
 msgstr "แคปปา"
 
-#: src/ui_searchDialogGui.h:501
+#: src/ui_searchDialogGui.h:532
 msgid "lambda"
 msgstr "แลมบ์ดา"
 
-#: src/ui_searchDialogGui.h:504
+#: src/ui_searchDialogGui.h:535
 msgid "mu"
 msgstr "มิว"
 
-#: src/ui_searchDialogGui.h:507
+#: src/ui_searchDialogGui.h:538
 msgid "nu"
 msgstr "นิว"
 
-#: src/ui_searchDialogGui.h:510
+#: src/ui_searchDialogGui.h:541
 msgid "xi"
 msgstr "ไซ"
 
-#: src/ui_searchDialogGui.h:513
+#: src/ui_searchDialogGui.h:544
 msgid "omicron"
 msgstr "โอไมครอน"
 
-#: src/ui_searchDialogGui.h:516
+#: src/ui_searchDialogGui.h:547
 msgid "pi"
 msgstr "พาย"
 
-#: src/ui_searchDialogGui.h:519
+#: src/ui_searchDialogGui.h:550
 msgid "rho"
 msgstr "โร"
 
-#: src/ui_searchDialogGui.h:522
+#: src/ui_searchDialogGui.h:553
 msgid "sigma"
 msgstr "ซิกมา"
 
-#: src/ui_searchDialogGui.h:525
+#: src/ui_searchDialogGui.h:556
 msgid "tau"
 msgstr "เทา"
 
-#: src/ui_searchDialogGui.h:528
+#: src/ui_searchDialogGui.h:559
 msgid "upsilon"
 msgstr "อิปไซลอน"
 
-#: src/ui_searchDialogGui.h:531
+#: src/ui_searchDialogGui.h:562
 msgid "phi"
 msgstr "ฟาย"
 
-#: src/ui_searchDialogGui.h:534
+#: src/ui_searchDialogGui.h:565
 msgid "chi"
 msgstr "ไค"
 
-#: src/ui_searchDialogGui.h:537
+#: src/ui_searchDialogGui.h:568
 msgid "psi"
 msgstr "ซาย"
 
-#: src/ui_searchDialogGui.h:540
+#: src/ui_searchDialogGui.h:571
 msgid "omega"
 msgstr "โอเมกา"
 
-#: src/ui_searchDialogGui.h:542
+#: src/ui_searchDialogGui.h:573
 msgid "Greek letters for Bayer designations"
 msgstr "อักษรกรีกสำหรับระบบของเบเยอร์"
 
-#: src/ui_searchDialogGui.h:543
+#: src/ui_searchDialogGui.h:574
 msgid "Object"
 msgstr "วัตถุ"
 
-#: src/ui_searchDialogGui.h:544
+#: src/ui_searchDialogGui.h:575
 msgid "RA/Dec (J2000):"
 msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000):"
 
-#: src/ui_searchDialogGui.h:545
+#: src/ui_searchDialogGui.h:576
 msgid "Position"
 msgstr "ตำแหน่ง"
 
-#: src/ui_searchDialogGui.h:546
+#: src/ui_searchDialogGui.h:577
 msgid "Search also in the SIMBAD on-line astronomical database"
 msgstr "ค้นหาในฐานข้อมูลดาราศาสตร์ออนไลน์ SIMBAD ด้วย"
 
-#: src/ui_searchDialogGui.h:547 src/ui_viewDialog.h:1137
+#: src/ui_searchDialogGui.h:578
+msgid "Use mirror:"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:579 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
 #: src/ui_configurationDialog.h:855 src/ui_configurationDialog.h:866
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
