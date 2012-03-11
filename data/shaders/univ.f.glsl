@@ -21,7 +21,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#version 130
+#version 110
  
 uniform sampler2D tex;
 uniform sampler2D smap;
@@ -57,7 +57,7 @@ vec4 getLighting()
 	
 		//Traditional shadow mapping
 	vec3 tex_coords = SM_tex_coord.xyz/SM_tex_coord.w;
-	float depth = texture(smap, tex_coords.xy).x;
+	float depth = texture2D(smap, tex_coords.xy).x;
 	
 	float shadowFactor;
 	if(depth > (tex_coords.z + 0.00001))
