@@ -38,42 +38,42 @@ Item
 			{
 				anchors.top: parent.top
 				anchors.bottom: parent.bottom
-				width: Math.min(mmX(8.6),parent.width / 6)
+				width: parent.width / 6
 				labelText: "A"
 			}
 			Button
 			{
 				anchors.top: parent.top
 				anchors.bottom: parent.bottom
-				width: Math.min(mmX(8.6),parent.width / 6)
+				width: parent.width / 6
 				labelText: "B"
 			}
 			Button
 			{
 				anchors.top: parent.top
 				anchors.bottom: parent.bottom
-				width: Math.min(mmX(8.6),parent.width / 6)
+				width: parent.width / 6
 				labelText: "C"
 			}
 			Button
 			{
 				anchors.top: parent.top
 				anchors.bottom: parent.bottom
-				width: Math.min(mmX(8.6),parent.width / 6)
+				width: parent.width / 6
 				labelText: "D"
 			}
 			Button
 			{
 				anchors.top: parent.top
 				anchors.bottom: parent.bottom
-				width: Math.min(mmX(8.6),parent.width / 6)
+				width: parent.width / 6
 				labelText: "E"
 			}
 			Button
 			{
 				anchors.top: parent.top
 				anchors.bottom: parent.bottom
-				width: Math.min(mmX(8.6),parent.width / 6)
+				width: parent.width / 6
 				labelText: "F"
 			}
 		}

@@ -11,6 +11,8 @@ Item {
 	property string labelText: "test"
 	property string imageSource: ""
 
+	property real bgOpacity: 0.5
+
 	signal clicked()
 
 	PropertyAnimation
@@ -18,8 +20,8 @@ Item {
 		id: highlightFadeIn;
 		target: bgFill;
 		properties: "opacity";
-		to: 1;
-		duration: 100
+		to: bgOpacity;
+		duration: 80
 
 		easing {type: Easing.OutQuad;}
 	}
@@ -29,7 +31,7 @@ Item {
 		target: bgFill;
 		properties: "opacity";
 		to: 0;
-		duration: 100
+		duration: 200
 
 		easing {type: Easing.InQuad;}
 	}
