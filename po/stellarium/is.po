@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: po_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-09 20:51+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
-"Last-Translator: Sverrir Gudmundsson <Unknown>\n"
+"POT-Creation-Date: 2012-03-10 17:34+0700\n"
+"PO-Revision-Date: 2012-03-07 11:52+0000\n"
+"Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
 "Language-Team: <is@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-10 05:13+0000\n"
+"X-Launchpad-Export-Date: 2012-03-11 04:39+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -1009,7 +1009,15 @@ msgstr ""
 msgid "starchart"
 msgstr ""
 
-#: src/main.cpp:333
+#: src/gui/SearchDialog.cpp:498
+msgid "SIMBAD - University of Strasbourg"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:499
+msgid "SIMBAD - Harvard University"
+msgstr ""
+
+#: src/main.cpp:337
 msgid "This system does not support OpenGL."
 msgstr "Stýrikerfið styður ekki OpenGL"
 
@@ -2583,131 +2591,135 @@ msgstr "Land:"
 msgid "Planet:"
 msgstr "Reikistjarna:"
 
-#: src/ui_searchDialogGui.h:464
+#: src/ui_searchDialogGui.h:495
 msgid "Find Object"
 msgstr "Finna fyrirbæri"
 
-#: src/ui_searchDialogGui.h:465
+#: src/ui_searchDialogGui.h:496
 msgid "Find Object or Position"
 msgstr "Leita að fyrirbæri eða eftir staðsetningu"
 
-#: src/ui_searchDialogGui.h:471
+#: src/ui_searchDialogGui.h:502
 msgid "iota"
 msgstr "jóta"
 
-#: src/ui_searchDialogGui.h:474
+#: src/ui_searchDialogGui.h:505
 msgid "alpha"
 msgstr "alfa"
 
-#: src/ui_searchDialogGui.h:477
+#: src/ui_searchDialogGui.h:508
 msgid "beta"
 msgstr "beta"
 
-#: src/ui_searchDialogGui.h:480
+#: src/ui_searchDialogGui.h:511
 msgid "gamma"
 msgstr "gamma"
 
-#: src/ui_searchDialogGui.h:483
+#: src/ui_searchDialogGui.h:514
 msgid "delta"
 msgstr "delta"
 
-#: src/ui_searchDialogGui.h:486
+#: src/ui_searchDialogGui.h:517
 msgid "epsilon"
 msgstr "epsilon"
 
-#: src/ui_searchDialogGui.h:489
+#: src/ui_searchDialogGui.h:520
 msgid "zeta"
 msgstr "zeta"
 
-#: src/ui_searchDialogGui.h:492
+#: src/ui_searchDialogGui.h:523
 msgid "eta"
 msgstr "eta"
 
-#: src/ui_searchDialogGui.h:495
+#: src/ui_searchDialogGui.h:526
 msgid "theta"
 msgstr "þeta"
 
-#: src/ui_searchDialogGui.h:498
+#: src/ui_searchDialogGui.h:529
 msgid "kappa"
 msgstr "kappa"
 
-#: src/ui_searchDialogGui.h:501
+#: src/ui_searchDialogGui.h:532
 msgid "lambda"
 msgstr "lambda"
 
-#: src/ui_searchDialogGui.h:504
+#: src/ui_searchDialogGui.h:535
 msgid "mu"
 msgstr "mí"
 
-#: src/ui_searchDialogGui.h:507
+#: src/ui_searchDialogGui.h:538
 msgid "nu"
 msgstr "ní"
 
-#: src/ui_searchDialogGui.h:510
+#: src/ui_searchDialogGui.h:541
 msgid "xi"
 msgstr "ksí"
 
-#: src/ui_searchDialogGui.h:513
+#: src/ui_searchDialogGui.h:544
 msgid "omicron"
 msgstr "omikron"
 
-#: src/ui_searchDialogGui.h:516
+#: src/ui_searchDialogGui.h:547
 msgid "pi"
 msgstr "pí"
 
-#: src/ui_searchDialogGui.h:519
+#: src/ui_searchDialogGui.h:550
 msgid "rho"
 msgstr "ró"
 
-#: src/ui_searchDialogGui.h:522
+#: src/ui_searchDialogGui.h:553
 msgid "sigma"
 msgstr "sigma"
 
-#: src/ui_searchDialogGui.h:525
+#: src/ui_searchDialogGui.h:556
 msgid "tau"
 msgstr "tá"
 
-#: src/ui_searchDialogGui.h:528
+#: src/ui_searchDialogGui.h:559
 msgid "upsilon"
 msgstr "ypsilon"
 
-#: src/ui_searchDialogGui.h:531
+#: src/ui_searchDialogGui.h:562
 msgid "phi"
 msgstr "fí"
 
-#: src/ui_searchDialogGui.h:534
+#: src/ui_searchDialogGui.h:565
 msgid "chi"
 msgstr "kí"
 
-#: src/ui_searchDialogGui.h:537
+#: src/ui_searchDialogGui.h:568
 msgid "psi"
 msgstr "psí"
 
-#: src/ui_searchDialogGui.h:540
+#: src/ui_searchDialogGui.h:571
 msgid "omega"
 msgstr "ómega"
 
-#: src/ui_searchDialogGui.h:542
+#: src/ui_searchDialogGui.h:573
 msgid "Greek letters for Bayer designations"
 msgstr "Grískir stafir í Bayer nafnakerfinu"
 
-#: src/ui_searchDialogGui.h:543
+#: src/ui_searchDialogGui.h:574
 msgid "Object"
 msgstr "Fyrirbæri"
 
-#: src/ui_searchDialogGui.h:544
+#: src/ui_searchDialogGui.h:575
 msgid "RA/Dec (J2000):"
 msgstr "Stjörnulengd/Stjörnubreidd (J2000):"
 
-#: src/ui_searchDialogGui.h:545
+#: src/ui_searchDialogGui.h:576
 msgid "Position"
 msgstr "Staða"
 
-#: src/ui_searchDialogGui.h:546
+#: src/ui_searchDialogGui.h:577
 msgid "Search also in the SIMBAD on-line astronomical database"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:547 src/ui_viewDialog.h:1137
+#: src/ui_searchDialogGui.h:578
+msgid "Use mirror:"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:579 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
 #: src/ui_configurationDialog.h:855 src/ui_configurationDialog.h:866
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
@@ -5399,3 +5411,231 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "Sjónbaugshnit"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "Miðbaugshnit"
+
+#~ msgid "Date & Time"
+#~ msgstr "Dagur og tími"
+
+#~ msgid "Colors "
+#~ msgstr "Litir "
+
+#~ msgid "Stars "
+#~ msgstr "Stjörnur "
+
+#~ msgid "General "
+#~ msgstr "Almennt "
+
+#~ msgid "Latitude: "
+#~ msgstr "Breiddargráða: "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Hæð (m): "
+
+#~ msgid "Longitude: "
+#~ msgstr "Lengdargráða: "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Hnöttur í sólkerfinu: "
+
+#~ msgid "Calendar"
+#~ msgstr "Dagatal"
+
+#~ msgid "Preset Time"
+#~ msgstr "Forstilltur tími"
+
+#~ msgid "Show: "
+#~ msgstr "Sýna: "
+
+#~ msgid "Meridian Line"
+#~ msgstr "Hádegisbaugur"
+
+#~ msgid "Landscape: "
+#~ msgstr "Landslag: "
+
+#~ msgid "Planet Names"
+#~ msgstr "Nöfn reikistjarna"
+
+#~ msgid "Equator Line"
+#~ msgstr "Miðbaugslína"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "Sólbraut"
+
+#~ msgid "Cardinal Points"
+#~ msgstr "Höfuðáttir"
+
+#~ msgid "Sky Language: "
+#~ msgstr "Tungumál á himni: "
+
+#~ msgid "Set Location "
+#~ msgstr "Stilla staðsetningu "
+
+#~ msgid "Set Time "
+#~ msgstr "Stilla tíma "
+
+#~ msgid "Effects "
+#~ msgstr "Áhrif "
+
+#~ msgid "Scripts "
+#~ msgstr "Skriftur "
+
+#~ msgid "Administration "
+#~ msgstr "Kerfisstjórnun "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Himintími: "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Stilla tímabelti: "
+
+#~ msgid "Day keys: "
+#~ msgstr "Dagalyklar: "
+
+#~ msgid "Sidereal"
+#~ msgstr "Stjarnbundinn"
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Forstilltur himintími: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Himintími við ræsingu: "
+
+#~ msgid "Actual Time"
+#~ msgstr "Rauntími"
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Sýnisnið dagsetningar: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Merkja að hámarksbirtustigi: "
+
+#~ msgid "Constellation Names"
+#~ msgstr "Nöfn stjörnumerkja"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Baugar stjörnuþoka"
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Handvirkur aðdráttur: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Tímalengd aðdráttar: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Tímamörk bendils: "
+
+#~ msgid "Local Script: "
+#~ msgstr "Staðvær skrifta: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "CD/DVD skrifta: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Vista núverandi stillingar sem sjálfgefnar: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "Slökkva: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Uppfæra mig um Internetið: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Stilla staðfærslu viðmóts: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "Ör niður til að hlaða inn lista."
+
+#~ msgid "Hydra"
+#~ msgstr "Vatnaskrímslið"
+
+#~ msgid "USB Script: "
+#~ msgstr "USB skrifta: "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "Margfaldari stjörnugilda: "
+
+#~ msgid "Planet Trails"
+#~ msgstr "Ferlar reikistjarna"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Brautir reikistjarna"
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "Ljómi vegna ljósmengunar "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Bjarmi Vetrarbrautarinnar "
+
+#~ msgid "Select and exit to run."
+#~ msgstr "Velja og fara út úr til að keyra"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Mörk stjörnumerkja"
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Merkja stjörnuþokur að birtustigi: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "Stjörnumerkjakerfi: "
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Styrkur stjörnumerkjamynda"
+
+#~ msgid "Twinkling: "
+#~ msgstr "Stjörnublik "
+
+#~ msgid "Light pollution: "
+#~ msgstr "Ljósmengun: "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "Birtustigsmörk: "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Margfaldari stjörnustærða "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "Margfaldari birtustigs: "
+
+#~ msgid "Art brightness: "
+#~ msgstr "Ljósstyrkur mynda: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "Leiðrétta vegna ferðatíma ljóss: "
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "Sjónsvið við ræsingu: XX"
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "Stefna við ræsingu: xxxx"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Planets labels"
+#~ msgstr "Merkingar á reikistjörnum"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "Tímasnið: "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "Stjörnumerkjalínur"
+
+#~ msgid "Nebula Names"
+#~ msgstr "Nöfn geimþoka"
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Stærð stjarna: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Hlaða inn sjálfgefnar stillingar: "
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "Lauk við að ná í allar stjörnuskrár!"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "Ná í skrá x af y"

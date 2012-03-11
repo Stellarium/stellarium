@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-03-09 20:51+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
+"POT-Creation-Date: 2012-03-10 17:34+0700\n"
+"PO-Revision-Date: 2012-02-22 20:10+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Asturian <ast@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-10 05:11+0000\n"
+"X-Launchpad-Export-Date: 2012-03-11 04:36+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -1016,7 +1016,15 @@ msgstr ""
 msgid "starchart"
 msgstr ""
 
-#: src/main.cpp:333
+#: src/gui/SearchDialog.cpp:498
+msgid "SIMBAD - University of Strasbourg"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:499
+msgid "SIMBAD - Harvard University"
+msgstr ""
+
+#: src/main.cpp:337
 msgid "This system does not support OpenGL."
 msgstr "Esti sistema nun permite OpenGL."
 
@@ -2590,131 +2598,135 @@ msgstr "País:"
 msgid "Planet:"
 msgstr "Planeta:"
 
-#: src/ui_searchDialogGui.h:464
+#: src/ui_searchDialogGui.h:495
 msgid "Find Object"
 msgstr "Guetar Oxetu"
 
-#: src/ui_searchDialogGui.h:465
+#: src/ui_searchDialogGui.h:496
 msgid "Find Object or Position"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:471
+#: src/ui_searchDialogGui.h:502
 msgid "iota"
 msgstr "iota"
 
-#: src/ui_searchDialogGui.h:474
+#: src/ui_searchDialogGui.h:505
 msgid "alpha"
 msgstr "alpha"
 
-#: src/ui_searchDialogGui.h:477
+#: src/ui_searchDialogGui.h:508
 msgid "beta"
 msgstr "beta"
 
-#: src/ui_searchDialogGui.h:480
+#: src/ui_searchDialogGui.h:511
 msgid "gamma"
 msgstr "gamma"
 
-#: src/ui_searchDialogGui.h:483
+#: src/ui_searchDialogGui.h:514
 msgid "delta"
 msgstr "delta"
 
-#: src/ui_searchDialogGui.h:486
+#: src/ui_searchDialogGui.h:517
 msgid "epsilon"
 msgstr "epsilon"
 
-#: src/ui_searchDialogGui.h:489
+#: src/ui_searchDialogGui.h:520
 msgid "zeta"
 msgstr "zeta"
 
-#: src/ui_searchDialogGui.h:492
+#: src/ui_searchDialogGui.h:523
 msgid "eta"
 msgstr "eta"
 
-#: src/ui_searchDialogGui.h:495
+#: src/ui_searchDialogGui.h:526
 msgid "theta"
 msgstr "theta"
 
-#: src/ui_searchDialogGui.h:498
+#: src/ui_searchDialogGui.h:529
 msgid "kappa"
 msgstr "kappa"
 
-#: src/ui_searchDialogGui.h:501
+#: src/ui_searchDialogGui.h:532
 msgid "lambda"
 msgstr "lambda"
 
-#: src/ui_searchDialogGui.h:504
+#: src/ui_searchDialogGui.h:535
 msgid "mu"
 msgstr "mu"
 
-#: src/ui_searchDialogGui.h:507
+#: src/ui_searchDialogGui.h:538
 msgid "nu"
 msgstr "nu"
 
-#: src/ui_searchDialogGui.h:510
+#: src/ui_searchDialogGui.h:541
 msgid "xi"
 msgstr "xi"
 
-#: src/ui_searchDialogGui.h:513
+#: src/ui_searchDialogGui.h:544
 msgid "omicron"
 msgstr "omicron"
 
-#: src/ui_searchDialogGui.h:516
+#: src/ui_searchDialogGui.h:547
 msgid "pi"
 msgstr "pi"
 
-#: src/ui_searchDialogGui.h:519
+#: src/ui_searchDialogGui.h:550
 msgid "rho"
 msgstr "rho"
 
-#: src/ui_searchDialogGui.h:522
+#: src/ui_searchDialogGui.h:553
 msgid "sigma"
 msgstr "sigma"
 
-#: src/ui_searchDialogGui.h:525
+#: src/ui_searchDialogGui.h:556
 msgid "tau"
 msgstr "tau"
 
-#: src/ui_searchDialogGui.h:528
+#: src/ui_searchDialogGui.h:559
 msgid "upsilon"
 msgstr "upsilon"
 
-#: src/ui_searchDialogGui.h:531
+#: src/ui_searchDialogGui.h:562
 msgid "phi"
 msgstr "phi"
 
-#: src/ui_searchDialogGui.h:534
+#: src/ui_searchDialogGui.h:565
 msgid "chi"
 msgstr "chi"
 
-#: src/ui_searchDialogGui.h:537
+#: src/ui_searchDialogGui.h:568
 msgid "psi"
 msgstr "psi"
 
-#: src/ui_searchDialogGui.h:540
+#: src/ui_searchDialogGui.h:571
 msgid "omega"
 msgstr "omega"
 
-#: src/ui_searchDialogGui.h:542
+#: src/ui_searchDialogGui.h:573
 msgid "Greek letters for Bayer designations"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:543
+#: src/ui_searchDialogGui.h:574
 msgid "Object"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:544
+#: src/ui_searchDialogGui.h:575
 msgid "RA/Dec (J2000):"
 msgstr "RA/Dec (J2000):"
 
-#: src/ui_searchDialogGui.h:545
+#: src/ui_searchDialogGui.h:576
 msgid "Position"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:546
+#: src/ui_searchDialogGui.h:577
 msgid "Search also in the SIMBAD on-line astronomical database"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:547 src/ui_viewDialog.h:1137
+#: src/ui_searchDialogGui.h:578
+msgid "Use mirror:"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:579 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
 #: src/ui_configurationDialog.h:855 src/ui_configurationDialog.h:866
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
@@ -5397,3 +5409,225 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "¡Finó la descarga de tolos catálogos d'estrelles!"
+
+#~ msgid "Planets labels"
+#~ msgstr "Etiquetes de plantetes"
+
+#~ msgid "Set Location "
+#~ msgstr "Afitar Allugamientu "
+
+#~ msgid "Set Time "
+#~ msgstr "Afitar Hora "
+
+#~ msgid "General "
+#~ msgstr "Xeneral "
+
+#~ msgid "Stars "
+#~ msgstr "Estrelles "
+
+#~ msgid "Effects "
+#~ msgstr "Efeutos "
+
+#~ msgid "Administration "
+#~ msgstr "Alministración "
+
+#~ msgid "Colors "
+#~ msgstr "Colores "
+
+#~ msgid "Scripts "
+#~ msgstr "Scripts "
+
+#~ msgid "Longitude: "
+#~ msgstr "Llonxitú: "
+
+#~ msgid "Latitude: "
+#~ msgstr "Llatitú: "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Cuerpu del Sistema Solar: "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Altitú (m): "
+
+#~ msgid "Sidereal"
+#~ msgstr "Sideral"
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Afitar Zona Horaria: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Hora Sideral: "
+
+#~ msgid "Calendar"
+#~ msgstr "Calendariu"
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Hora sideral afitada: "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "Llinies de Constelaciones"
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Magnitú Másima a Etiquetar: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "Centelléu: "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "Multiplicador del Valor Estelar: "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Multiplicador de la Magintú Tamañu: "
+
+#~ msgid "Show: "
+#~ msgstr "Amosar: "
+
+#~ msgid "Sky Language: "
+#~ msgstr "Llingua Estelar: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "Cielu según Cultura: "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Formatu de Data: "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "Magnitú Llímite: "
+
+#~ msgid "Planet Trails"
+#~ msgstr "Trazes de Planetes"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Nomes de Constelaciones"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Intensidá de Figures de Constelaciones"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "Cuadrícula Ecuatorial"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "Cuadrícula Azimutal"
+
+#~ msgid "Meridian Line"
+#~ msgstr "Llinia del Meridianu"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Órbites Planetaries"
+
+#~ msgid "Planet Names"
+#~ msgstr "Nomes de los Planetes"
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Rellumu de la Vía Lláctea: "
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "Rellumu de la Contaminación Llumínica: "
+
+#~ msgid "Landscape: "
+#~ msgstr "Paisaxe: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Zoom Manual: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Regla de Tamañu d'Oxetos: "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "Multiplicador de la Escala de la Magnitú: "
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "Llinia Eclíptica"
+
+#~ msgid "Equator Line"
+#~ msgstr "Llinia Ecuatorial"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Círculos de Nebuloses"
+
+#~ msgid "Nebula Names"
+#~ msgstr "Nomes de Nebuloses"
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Llímite de Tiempu del Cursor: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "Correxir según retardu de la lluz: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Magnitú Máxima de Nebuloses a Etiquetar: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Duración del Zoom: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "Script CD/DVD: "
+
+#~ msgid "Local Script: "
+#~ msgstr "Script llocal: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "Flecha de cursor abaxo pa cargar la llista."
+
+#~ msgid "USB Script: "
+#~ msgstr "Script USB: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Cargar Configuración Predeterminada: "
+
+#~ msgid "Select and exit to run."
+#~ msgstr "Seleiciona y sal pa executar."
+
+#~ msgid "Shut Down: "
+#~ msgstr "Apagar: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Guardar la Configuración Actual como Predeterminada: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Afitar UI Llocal: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Anovar per Internet: "
+
+#~ msgid "Cardinal Points"
+#~ msgstr "Puntos Cardinales"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "Formatu d'Hora: "
+
+#~ msgid "Preset Time"
+#~ msgstr "Hora Afitada"
+
+#~ msgid "Actual Time"
+#~ msgstr "Hora Actual"
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Hora Sideral al Aniciu: "
+
+#~ msgid "Light pollution: "
+#~ msgstr "Contaminación llumínica "
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "Campu de visión (FOV) al aniciu: XX"
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "Direición de la vista d'aniciu: xxx"
+
+#~ msgid "Art brightness: "
+#~ msgstr "Rellumu de les figures: "
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "Obtener catálogu x de y"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Llendes de Constelaciones"
+
+#~ msgid "Day keys: "
+#~ msgstr "Tipu de díes: "

@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-27 04:57+0700\n"
-"PO-Revision-Date: 2012-03-09 15:09+0000\n"
+"POT-Creation-Date: 2012-03-10 17:34+0700\n"
+"PO-Revision-Date: 2012-03-10 13:59+0000\n"
 "Last-Translator: Marc Coll Carrillo <Unknown>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-10 04:44+0000\n"
+"X-Launchpad-Export-Date: 2012-03-11 04:37+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -1021,7 +1021,15 @@ msgstr "natural"
 msgid "starchart"
 msgstr "mapa d'estels"
 
-#: src/main.cpp:333
+#: src/gui/SearchDialog.cpp:498
+msgid "SIMBAD - University of Strasbourg"
+msgstr "SIMBAD - Universitat d'Estrasburg"
+
+#: src/gui/SearchDialog.cpp:499
+msgid "SIMBAD - Harvard University"
+msgstr "SIMBAD - Universitat de Harvard"
+
+#: src/main.cpp:337
 msgid "This system does not support OpenGL."
 msgstr "Aquest sistema no suporta OpenGL"
 
@@ -2600,131 +2608,135 @@ msgstr "País:"
 msgid "Planet:"
 msgstr "Planeta:"
 
-#: src/ui_searchDialogGui.h:464
+#: src/ui_searchDialogGui.h:495
 msgid "Find Object"
 msgstr "Cerca l'objecte"
 
-#: src/ui_searchDialogGui.h:465
+#: src/ui_searchDialogGui.h:496
 msgid "Find Object or Position"
 msgstr "Troba objecte o posició"
 
-#: src/ui_searchDialogGui.h:471
+#: src/ui_searchDialogGui.h:502
 msgid "iota"
 msgstr "iota"
 
-#: src/ui_searchDialogGui.h:474
+#: src/ui_searchDialogGui.h:505
 msgid "alpha"
 msgstr "alfa"
 
-#: src/ui_searchDialogGui.h:477
+#: src/ui_searchDialogGui.h:508
 msgid "beta"
 msgstr "beta"
 
-#: src/ui_searchDialogGui.h:480
+#: src/ui_searchDialogGui.h:511
 msgid "gamma"
 msgstr "gamma"
 
-#: src/ui_searchDialogGui.h:483
+#: src/ui_searchDialogGui.h:514
 msgid "delta"
 msgstr "delta"
 
-#: src/ui_searchDialogGui.h:486
+#: src/ui_searchDialogGui.h:517
 msgid "epsilon"
 msgstr "èpsilon"
 
-#: src/ui_searchDialogGui.h:489
+#: src/ui_searchDialogGui.h:520
 msgid "zeta"
 msgstr "zeta"
 
-#: src/ui_searchDialogGui.h:492
+#: src/ui_searchDialogGui.h:523
 msgid "eta"
 msgstr "eta"
 
-#: src/ui_searchDialogGui.h:495
+#: src/ui_searchDialogGui.h:526
 msgid "theta"
 msgstr "theta"
 
-#: src/ui_searchDialogGui.h:498
+#: src/ui_searchDialogGui.h:529
 msgid "kappa"
 msgstr "kappa"
 
-#: src/ui_searchDialogGui.h:501
+#: src/ui_searchDialogGui.h:532
 msgid "lambda"
 msgstr "lambda"
 
-#: src/ui_searchDialogGui.h:504
+#: src/ui_searchDialogGui.h:535
 msgid "mu"
 msgstr "mu"
 
-#: src/ui_searchDialogGui.h:507
+#: src/ui_searchDialogGui.h:538
 msgid "nu"
 msgstr "ni"
 
-#: src/ui_searchDialogGui.h:510
+#: src/ui_searchDialogGui.h:541
 msgid "xi"
 msgstr "ksi"
 
-#: src/ui_searchDialogGui.h:513
+#: src/ui_searchDialogGui.h:544
 msgid "omicron"
 msgstr "òmicron"
 
-#: src/ui_searchDialogGui.h:516
+#: src/ui_searchDialogGui.h:547
 msgid "pi"
 msgstr "pi"
 
-#: src/ui_searchDialogGui.h:519
+#: src/ui_searchDialogGui.h:550
 msgid "rho"
 msgstr "ro"
 
-#: src/ui_searchDialogGui.h:522
+#: src/ui_searchDialogGui.h:553
 msgid "sigma"
 msgstr "sigma"
 
-#: src/ui_searchDialogGui.h:525
+#: src/ui_searchDialogGui.h:556
 msgid "tau"
 msgstr "tau"
 
-#: src/ui_searchDialogGui.h:528
+#: src/ui_searchDialogGui.h:559
 msgid "upsilon"
 msgstr "ípsilon"
 
-#: src/ui_searchDialogGui.h:531
+#: src/ui_searchDialogGui.h:562
 msgid "phi"
 msgstr "fi"
 
-#: src/ui_searchDialogGui.h:534
+#: src/ui_searchDialogGui.h:565
 msgid "chi"
 msgstr "khi"
 
-#: src/ui_searchDialogGui.h:537
+#: src/ui_searchDialogGui.h:568
 msgid "psi"
 msgstr "psi"
 
-#: src/ui_searchDialogGui.h:540
+#: src/ui_searchDialogGui.h:571
 msgid "omega"
 msgstr "omega"
 
-#: src/ui_searchDialogGui.h:542
+#: src/ui_searchDialogGui.h:573
 msgid "Greek letters for Bayer designations"
 msgstr "Lletres gregues per les designacions de Bayer"
 
-#: src/ui_searchDialogGui.h:543
+#: src/ui_searchDialogGui.h:574
 msgid "Object"
 msgstr "Objecte"
 
-#: src/ui_searchDialogGui.h:544
+#: src/ui_searchDialogGui.h:575
 msgid "RA/Dec (J2000):"
 msgstr "AR/DEC (J2000):"
 
-#: src/ui_searchDialogGui.h:545
+#: src/ui_searchDialogGui.h:576
 msgid "Position"
 msgstr "Posició"
 
-#: src/ui_searchDialogGui.h:546
+#: src/ui_searchDialogGui.h:577
 msgid "Search also in the SIMBAD on-line astronomical database"
 msgstr "Cerca també en la base de dades astronòmica en línia SIMBAD"
 
-#: src/ui_searchDialogGui.h:547 src/ui_viewDialog.h:1137
+#: src/ui_searchDialogGui.h:578
+msgid "Use mirror:"
+msgstr "Utilitza la rèplica:"
+
+#: src/ui_searchDialogGui.h:579 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
 #: src/ui_configurationDialog.h:855 src/ui_configurationDialog.h:866
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
@@ -3110,7 +3122,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:829
 msgid "Auto zoom out returns to initial direction of view"
-msgstr "L'allunyament automàtic tornar a la direcció inicial de la vista"
+msgstr "L'allunyament automàtic torna a la direcció inicial de la vista"
 
 #: src/ui_configurationDialog.h:831
 msgid "Mask out everything outside a central circle in the main view"
@@ -3639,7 +3651,7 @@ msgstr "Habilita només si hi ha un objecte seleccionat"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:866
 msgid "Scale image circle"
-msgstr ""
+msgstr "Canvia l'escala del cercle d'imatge"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:867
 msgid "Key mappings"
@@ -3923,6 +3935,9 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
+"El connector de satèl·lits pot descarregar automàticament dades TLE a través "
+"d'Internet, i per defecte ho farà si les dades existents són més antigues de "
+"72 hores. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:282
 #, qt-format
@@ -3931,6 +3946,9 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
+"Si deshabiliteu les actualitzacions per Internet podeu actualitzar-vos a "
+"partir d'un fitxer en el vostre ordinador. Aquest fitxer ha d'estar en el "
+"mateix format que les actualitzacions Celestrak (veieu %1 com a exemple)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:283
 msgid ""
@@ -4081,6 +4099,8 @@ msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
 msgstr ""
+"Stellarium està descarregant dades de satèl·lits des de la font "
+"d'actualització. Espereu, si us plau..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
 msgid "Select TLE source file(s)..."
@@ -4204,7 +4224,7 @@ msgstr "Grups:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:688
 msgid "Comma separated list of groups"
-msgstr ""
+msgstr "Llista de grups separats per comes"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:690
 msgid "TLE data:"
@@ -4231,14 +4251,16 @@ msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
 msgstr ""
+"Introduïu o editeu la URL de la font seleccionada. Els canvis es desen "
+"prement la tecla 'Retorn'."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:710
 msgid "Add new source"
-msgstr ""
+msgstr "Afegeix nova font"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Remove selected source"
-msgstr ""
+msgstr "Elimina la font seleccionada"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:717
 msgid "Sources"
@@ -4250,7 +4272,7 @@ msgstr "Més satèl·lits"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:208
 msgid "Get data from update sources"
-msgstr ""
+msgstr "Obtén dades de les fonts d'actualització"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:209
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
@@ -4307,7 +4329,7 @@ msgstr "N/D"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
 msgid "Starting"
-msgstr ""
+msgstr "S'està iniciant"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:58
 msgid "Connecting"
@@ -4361,6 +4383,11 @@ msgid ""
 "telescope's number. To slew it to the center of the current view, hold down "
 "the Alt key and press the key with that telescope's number."
 msgstr ""
+"Per apuntar un telescopi connectat cap a un objecte (per exemple, una "
+"estrella), seleccioneu l'objecte, després mantingueu premuda la tecla %1, i "
+"pitgeu la tecla amb el nombre del telescopi. Per apuntar-lo al centre de la "
+"vista actual, mantingueu premuda la tecla Alt i pitgeu la tecla amb el "
+"nombre del telescopi."
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
@@ -4374,7 +4401,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
-msgstr ""
+msgstr "Premeu el botó \"%1\" per configurar una nova connexió de telescopi."
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
@@ -4533,7 +4560,7 @@ msgstr "Propietats del telescopi"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid "Connection delay:"
-msgstr ""
+msgstr "Retard de la connexió"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:488
 msgid ""
@@ -4541,6 +4568,9 @@ msgid ""
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
+"El temps aproximat que triguen els senyals del telescopi en arribar a "
+"Stellarium.\n"
+"Incrementeu-lo si la retícula va a salts."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Coordinate system:"
@@ -4559,10 +4589,12 @@ msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
+"Intentar iniciar o establir la connexió amb el telescopi automàticament a "
+"l'inici de Stellarium."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Start/connect at startup"
-msgstr ""
+msgstr "Inicia/connecta a l'inici"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Device settings"
@@ -4612,7 +4644,7 @@ msgstr "Mida dels cercles:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:514
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
-msgstr ""
+msgstr "Fins a deu valors decimals en graus d'arc, separats per comes"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "OK"
@@ -4620,7 +4652,7 @@ msgstr "Acceptar"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
 msgid "Telescopes Controlled"
-msgstr ""
+msgstr "Telescopis controlats"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Configure the selected telescope"
@@ -4660,15 +4692,17 @@ msgstr "Fitxers"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Log telescope driver messages to files"
-msgstr ""
+msgstr "Registra els missatges del controlador del telescopi en fitxers"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 msgid "Use telescope server executables (override built-in drivers)"
 msgstr ""
+"Fes servir els executables del servidor de telescopi (omet els controladors "
+"integrats)"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
 msgid "Executables directory:"
-msgstr ""
+msgstr "Directori dels executables:"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -4810,11 +4844,11 @@ msgstr "Horari d'estiu"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
 msgid "DST timezone name:"
-msgstr ""
+msgstr "Nom de l'horari d'estiu:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
 msgid "DST offset from UTC (hours):"
-msgstr ""
+msgstr "Diferència de l'horari d'estiu amb UTC (hores):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
 msgid "Daylight saving time start"
@@ -4875,12 +4909,14 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:407
 msgid "Display formats"
-msgstr ""
+msgstr "Format de visualització"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
+"Aquests paràmetres controlen la manera com es mostren la data i l'hora a la "
+"barra inferior."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:199
@@ -5027,7 +5063,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:423
 msgid "Setting landscape sets location"
-msgstr ""
+msgstr "Establir el paisatge estableix la ubicació"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:444
 msgid "Run local script"
@@ -5097,7 +5133,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
 #, qt-format
 msgid "Query the MPC's %1:"
-msgstr ""
+msgstr "Consulta el %1 de l'MPC:"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
 msgid "Only one result will be returned if the query is successful."

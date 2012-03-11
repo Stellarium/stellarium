@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-03-09 20:51+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
+"POT-Creation-Date: 2012-03-10 17:34+0700\n"
+"PO-Revision-Date: 2011-11-14 06:31+0000\n"
 "Last-Translator: Harshal Raje <Unknown>\n"
 "Language-Team: Marathi <mr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-10 05:14+0000\n"
+"X-Launchpad-Export-Date: 2012-03-11 04:40+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -1013,7 +1013,15 @@ msgstr ""
 msgid "starchart"
 msgstr ""
 
-#: src/main.cpp:333
+#: src/gui/SearchDialog.cpp:498
+msgid "SIMBAD - University of Strasbourg"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:499
+msgid "SIMBAD - Harvard University"
+msgstr ""
+
+#: src/main.cpp:337
 msgid "This system does not support OpenGL."
 msgstr "हा संगणक ओपनजीएल कार्यप्रणालीशी सुसंगत नाही."
 
@@ -2587,131 +2595,135 @@ msgstr "देश:"
 msgid "Planet:"
 msgstr "ग्रह:"
 
-#: src/ui_searchDialogGui.h:464
+#: src/ui_searchDialogGui.h:495
 msgid "Find Object"
 msgstr "आकाशस्थ वस्तूचा शोध"
 
-#: src/ui_searchDialogGui.h:465
+#: src/ui_searchDialogGui.h:496
 msgid "Find Object or Position"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:471
+#: src/ui_searchDialogGui.h:502
 msgid "iota"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:474
+#: src/ui_searchDialogGui.h:505
 msgid "alpha"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:477
+#: src/ui_searchDialogGui.h:508
 msgid "beta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:480
+#: src/ui_searchDialogGui.h:511
 msgid "gamma"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:483
+#: src/ui_searchDialogGui.h:514
 msgid "delta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:486
+#: src/ui_searchDialogGui.h:517
 msgid "epsilon"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:489
+#: src/ui_searchDialogGui.h:520
 msgid "zeta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:492
+#: src/ui_searchDialogGui.h:523
 msgid "eta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:495
+#: src/ui_searchDialogGui.h:526
 msgid "theta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:498
+#: src/ui_searchDialogGui.h:529
 msgid "kappa"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:501
+#: src/ui_searchDialogGui.h:532
 msgid "lambda"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:504
+#: src/ui_searchDialogGui.h:535
 msgid "mu"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:507
+#: src/ui_searchDialogGui.h:538
 msgid "nu"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:510
+#: src/ui_searchDialogGui.h:541
 msgid "xi"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:513
+#: src/ui_searchDialogGui.h:544
 msgid "omicron"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:516
+#: src/ui_searchDialogGui.h:547
 msgid "pi"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:519
+#: src/ui_searchDialogGui.h:550
 msgid "rho"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:522
+#: src/ui_searchDialogGui.h:553
 msgid "sigma"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:525
+#: src/ui_searchDialogGui.h:556
 msgid "tau"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:528
+#: src/ui_searchDialogGui.h:559
 msgid "upsilon"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:531
+#: src/ui_searchDialogGui.h:562
 msgid "phi"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:534
+#: src/ui_searchDialogGui.h:565
 msgid "chi"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:537
+#: src/ui_searchDialogGui.h:568
 msgid "psi"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:540
+#: src/ui_searchDialogGui.h:571
 msgid "omega"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:542
+#: src/ui_searchDialogGui.h:573
 msgid "Greek letters for Bayer designations"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:543
+#: src/ui_searchDialogGui.h:574
 msgid "Object"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:544
+#: src/ui_searchDialogGui.h:575
 msgid "RA/Dec (J2000):"
 msgstr "RA/Dec (J2000)"
 
-#: src/ui_searchDialogGui.h:545
+#: src/ui_searchDialogGui.h:576
 msgid "Position"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:546
+#: src/ui_searchDialogGui.h:577
 msgid "Search also in the SIMBAD on-line astronomical database"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:547 src/ui_viewDialog.h:1137
+#: src/ui_searchDialogGui.h:578
+msgid "Use mirror:"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:579 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
 #: src/ui_configurationDialog.h:855 src/ui_configurationDialog.h:866
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
@@ -5377,3 +5389,225 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
+
+#~ msgid "Set Location "
+#~ msgstr "स्थान निश्चित करा "
+
+#~ msgid "Set Time "
+#~ msgstr "वेळ निर्धारीत करा "
+
+#~ msgid "General "
+#~ msgstr "सामान्य "
+
+#~ msgid "Stars "
+#~ msgstr "तारे "
+
+#~ msgid "Colors "
+#~ msgstr "रंग "
+
+#~ msgid "Effects "
+#~ msgstr "परिणाम "
+
+#~ msgid "Scripts "
+#~ msgstr "आज्ञावली "
+
+#~ msgid "Administration "
+#~ msgstr "व्यवस्थापन "
+
+#~ msgid "Latitude: "
+#~ msgstr "अक्षांश: "
+
+#~ msgid "Longitude: "
+#~ msgstr "रेखांश: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "अवकाश वेळ: "
+
+#~ msgid "Day keys: "
+#~ msgstr "दिवस कळ: "
+
+#~ msgid "Sidereal"
+#~ msgstr "नाक्षत्रवर्ष"
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "सुरुवात होतांनांची अवकाश वेळ: "
+
+#~ msgid "Show: "
+#~ msgstr "दर्शवा: "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "प्रत आकार गुणक: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "लुकलुकणारे: "
+
+#~ msgid "Constellation Names"
+#~ msgstr "तारकापुंजाची नावे"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "ताराकापुंज सीमा"
+
+#~ msgid "Cardinal Points"
+#~ msgstr "प्रमाणक बिंदू"
+
+#~ msgid "Planet Names"
+#~ msgstr "ग्रहांची नावे"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "ग्रहांच्या कक्षा"
+
+#~ msgid "Planet Trails"
+#~ msgstr "ग्रहाची मागरेष"
+
+#~ msgid "Meridian Line"
+#~ msgstr "मध्यानवृत्त"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "दिगंश"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "विषुवांश"
+
+#~ msgid "Equator Line"
+#~ msgstr "विषुववृत्त रेषा"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "अयनवृत्त"
+
+#~ msgid "Nebula Names"
+#~ msgstr "तेजोमेघाचे नाव"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "तेजोमेघ वर्तृळ"
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "प्रकाश प्रदूषण दिप्ती: "
+
+#~ msgid "Landscape: "
+#~ msgstr "देखावा: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "स्वहस्ते निकटन/दुरावलोकन: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "चित्र मोठे करण्याचा काल: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "कर्सर वेळमर्यादा: "
+
+#~ msgid "Local Script: "
+#~ msgstr "स्थानिक आज्ञावली: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "सीडी/ डीव्हीडी आज्ञावली: "
+
+#~ msgid "USB Script: "
+#~ msgstr "यू एस बी आज्ञावली: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "यादी भरण्यासासाठी  खालच्या दिशेची कळ दाबा."
+
+#~ msgid "Select and exit to run."
+#~ msgstr "सुरू करण्यासाठी निवडा व बाहेर पडा."
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "सध्याची संरचना मूळ म्हणून साठवा: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "बंद करा: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "UI Locale निश्चित करा: "
+
+#~ msgid "Planets labels"
+#~ msgstr "ग्रहांची नावे"
+
+#~ msgid "Light pollution: "
+#~ msgstr "प्रकाश प्रदुषण: "
+
+#~ msgid "Art brightness: "
+#~ msgstr "चित्र तिव्रता: "
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "सुरुवातीचे दृष्टीक्षेत्र: XX"
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "सुरु होतांनाची बघण्याची दिशा: xxxx"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Altitude (m): "
+#~ msgstr "उंची (m): "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "कालक्षेत्र निश्चित करा "
+
+#~ msgid "Calendar"
+#~ msgstr "दिनदर्शिका"
+
+#~ msgid "Sky Language: "
+#~ msgstr "आकाशाची भाषा: "
+
+#~ msgid "Time Display Format: "
+#~ msgstr "वेळ दर्शविण्याची पद्धत: "
+
+#~ msgid "Preset Time"
+#~ msgstr "पूर्वनिर्धारित वेळ"
+
+#~ msgid "Sky Culture: "
+#~ msgstr "अवकाश संस्कृती "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "दिनांक दर्शविण्याची पद्धत: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "पूर्वनिर्धारित अवकाश वेळ "
+
+#~ msgid "Actual Time"
+#~ msgstr "आताची वेळ"
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "नुसत्या डोळ्याने दिसणारी जास्तीत जास्त प्रत "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "तारकापुंज रेषा"
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "तारकामूल्य गुणक: "
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "ताराकापुंज चित्राची दीप्ती"
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "नाव दर्शविण्यासाठीची जास्तीत जास्त प्रत: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "वस्तूचा आकार ठरविण्याचे नियम "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "प्रत कमीजास्त करण्याचा गुणक "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "आकाशगंगेची दीप्ती: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "तेजोमेघाचे नाव दर्शविण्यासाठीची जास्तीत जास्त प्रत: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "प्रकाशाच्या मार्गक्रमणाचा वेळ ध्यानात घेवून दुरुस्ती करा: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "मूळ संरचना भरा: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "इंटरनेटद्वारे अद्यायावत करा: "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "सूर्यमालेतील वस्तू "
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "y ची x सुची मिळवा"
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "सर्व तारकासुची डाउनलोड झाल्या आहेत!"
