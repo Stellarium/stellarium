@@ -24,13 +24,19 @@ SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 ########### Main global variables ###########
 IF(NOT CMAKE_BUILD_TYPE)
-  SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel." FORCE)
+  SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Release RelWithDebInfo MinSizeRel." FORCE)
+ENDIF()
+
+# Add gprof build options if necessary.  Note gmon.out will be created in working directory when Stellarium is executed
+IF(${CMAKE_BUILD_TYPE} MATCHES "GProf")
+ SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs")
+ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs")
+ SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
 ENDIF()
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   SET(APPLE 1)
 ENDIF()
-
 
 IF(UNIX AND NOT WIN32)
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-parameter")       # additional C compile flags
@@ -365,3 +371,4 @@ IF(ENABLE_SCRIPTING)
 ENDIF()
 ADD_SUBDIRECTORY( stars )
 ADD_SUBDIRECTORY( plugins )
+
