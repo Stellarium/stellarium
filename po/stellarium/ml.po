@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-09 20:51+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
+"POT-Creation-Date: 2012-03-10 17:34+0700\n"
+"PO-Revision-Date: 2011-12-14 17:51+0000\n"
 "Last-Translator: BRIJESH E.P <Unknown>\n"
 "Language-Team: Malayalam <ml@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-10 05:14+0000\n"
+"X-Launchpad-Export-Date: 2012-03-11 04:39+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -1003,7 +1003,15 @@ msgstr ""
 msgid "starchart"
 msgstr ""
 
-#: src/main.cpp:333
+#: src/gui/SearchDialog.cpp:498
+msgid "SIMBAD - University of Strasbourg"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:499
+msgid "SIMBAD - Harvard University"
+msgstr ""
+
+#: src/main.cpp:337
 msgid "This system does not support OpenGL."
 msgstr "ഈ സിസ്റ്റം OpenGL പിന്താങ്ങുന്നില്ല"
 
@@ -2577,131 +2585,135 @@ msgstr "രാജ്യം:"
 msgid "Planet:"
 msgstr "ഗ്രഹം:"
 
-#: src/ui_searchDialogGui.h:464
+#: src/ui_searchDialogGui.h:495
 msgid "Find Object"
 msgstr "വസ്തുവിനെ തെരയുക"
 
-#: src/ui_searchDialogGui.h:465
+#: src/ui_searchDialogGui.h:496
 msgid "Find Object or Position"
 msgstr "വസ്തുവോ സ്ഥാനമോ കണ്ടെത്തുക"
 
-#: src/ui_searchDialogGui.h:471
+#: src/ui_searchDialogGui.h:502
 msgid "iota"
 msgstr "അയോട്ട"
 
-#: src/ui_searchDialogGui.h:474
+#: src/ui_searchDialogGui.h:505
 msgid "alpha"
 msgstr "ആല്‍ഫ"
 
-#: src/ui_searchDialogGui.h:477
+#: src/ui_searchDialogGui.h:508
 msgid "beta"
 msgstr "ബീറ്റ"
 
-#: src/ui_searchDialogGui.h:480
+#: src/ui_searchDialogGui.h:511
 msgid "gamma"
 msgstr "ഗാമ്മാ"
 
-#: src/ui_searchDialogGui.h:483
+#: src/ui_searchDialogGui.h:514
 msgid "delta"
 msgstr "ഡെല്‍റ്റ"
 
-#: src/ui_searchDialogGui.h:486
+#: src/ui_searchDialogGui.h:517
 msgid "epsilon"
 msgstr "എപ്സിലോണ്‍"
 
-#: src/ui_searchDialogGui.h:489
+#: src/ui_searchDialogGui.h:520
 msgid "zeta"
 msgstr "സീറ്റ"
 
-#: src/ui_searchDialogGui.h:492
+#: src/ui_searchDialogGui.h:523
 msgid "eta"
 msgstr "ഈറ്റ"
 
-#: src/ui_searchDialogGui.h:495
+#: src/ui_searchDialogGui.h:526
 msgid "theta"
 msgstr "തീറ്റ"
 
-#: src/ui_searchDialogGui.h:498
+#: src/ui_searchDialogGui.h:529
 msgid "kappa"
 msgstr "കാപ്പ"
 
-#: src/ui_searchDialogGui.h:501
+#: src/ui_searchDialogGui.h:532
 msgid "lambda"
 msgstr "ലാംഡ"
 
-#: src/ui_searchDialogGui.h:504
+#: src/ui_searchDialogGui.h:535
 msgid "mu"
 msgstr "മ്യു"
 
-#: src/ui_searchDialogGui.h:507
+#: src/ui_searchDialogGui.h:538
 msgid "nu"
 msgstr "ന്യു"
 
-#: src/ui_searchDialogGui.h:510
+#: src/ui_searchDialogGui.h:541
 msgid "xi"
 msgstr "ക്സൈ"
 
-#: src/ui_searchDialogGui.h:513
+#: src/ui_searchDialogGui.h:544
 msgid "omicron"
 msgstr "ഒമൈക്രോണ്‍"
 
-#: src/ui_searchDialogGui.h:516
+#: src/ui_searchDialogGui.h:547
 msgid "pi"
 msgstr "പൈ"
 
-#: src/ui_searchDialogGui.h:519
+#: src/ui_searchDialogGui.h:550
 msgid "rho"
 msgstr "റോ"
 
-#: src/ui_searchDialogGui.h:522
+#: src/ui_searchDialogGui.h:553
 msgid "sigma"
 msgstr "സിഗ്മ"
 
-#: src/ui_searchDialogGui.h:525
+#: src/ui_searchDialogGui.h:556
 msgid "tau"
 msgstr "ടോ"
 
-#: src/ui_searchDialogGui.h:528
+#: src/ui_searchDialogGui.h:559
 msgid "upsilon"
 msgstr "അപ്സിലോണ്‍"
 
-#: src/ui_searchDialogGui.h:531
+#: src/ui_searchDialogGui.h:562
 msgid "phi"
 msgstr "ഫൈ"
 
-#: src/ui_searchDialogGui.h:534
+#: src/ui_searchDialogGui.h:565
 msgid "chi"
 msgstr "ചൈ"
 
-#: src/ui_searchDialogGui.h:537
+#: src/ui_searchDialogGui.h:568
 msgid "psi"
 msgstr "പ്സൈ"
 
-#: src/ui_searchDialogGui.h:540
+#: src/ui_searchDialogGui.h:571
 msgid "omega"
 msgstr "ഒമേഗ"
 
-#: src/ui_searchDialogGui.h:542
+#: src/ui_searchDialogGui.h:573
 msgid "Greek letters for Bayer designations"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:543
+#: src/ui_searchDialogGui.h:574
 msgid "Object"
 msgstr "വസ്തു"
 
-#: src/ui_searchDialogGui.h:544
+#: src/ui_searchDialogGui.h:575
 msgid "RA/Dec (J2000):"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:545
+#: src/ui_searchDialogGui.h:576
 msgid "Position"
 msgstr "സ്ഥാനം"
 
-#: src/ui_searchDialogGui.h:546
+#: src/ui_searchDialogGui.h:577
 msgid "Search also in the SIMBAD on-line astronomical database"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:547 src/ui_viewDialog.h:1137
+#: src/ui_searchDialogGui.h:578
+msgid "Use mirror:"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:579 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
 #: src/ui_configurationDialog.h:855 src/ui_configurationDialog.h:866
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
@@ -5377,3 +5389,219 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
+
+#~ msgid "Date & Time"
+#~ msgstr "തീയതിയും സമയവും"
+
+#~ msgid "Set Time "
+#~ msgstr "സമയം ഉറപ്പിക്കുക "
+
+#~ msgid "General "
+#~ msgstr "പൊതുവായത് "
+
+#~ msgid "Stars "
+#~ msgstr "നക്ഷത്രങ്ങള്‍ "
+
+#~ msgid "Colors "
+#~ msgstr "നിറങ്ങള്‍ "
+
+#~ msgid "Effects "
+#~ msgstr "ഫലങ്ങള്‍ "
+
+#~ msgid "Scripts "
+#~ msgstr "സ്ക്രിപ്റ്റുകള്‍ "
+
+#~ msgid "Administration "
+#~ msgstr "മേല്‍നോട്ടം "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "സമയ മേഖല ഉറപ്പിക്കുക: "
+
+#~ msgid "Time Display Format: "
+#~ msgstr "സമയം കാണിക്കേണ്ട വിധം: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "എത്ര കാന്തിമാനം വരെയുള്ളതിനു പേര് കാണിക്കണം: "
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "നക്ഷത്രരാശിയുടെ കലാരൂപത്തിന്റെ തീവ്രത"
+
+#~ msgid "Planet Names"
+#~ msgstr "ഗ്രഹങ്ങളുടെ പേരുകള്‍"
+
+#~ msgid "Planet Trails"
+#~ msgstr "ഗ്രഹത്തിന്റെ നിഴല്‍പ്പാടുകള്‍"
+
+#~ msgid "Landscape: "
+#~ msgstr "പ്രകൃതി ദൃശ്യം "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "മാനുഷിക പര്‍വ്വതീകരണം: "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "ആകാശ ഗംഗയുടെ തീവ്രത: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "എത്ര കാന്തിമാനം വരെയുള്ള നെബുലയുടെ പേര് കാണിക്കണം: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "സൂചിനി ടൈം ഔട്ട് "
+
+#~ msgid "Local Script: "
+#~ msgstr "ലോക്കല്‍ സ്ക്രിപ്റ്റ്: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "CD/DVD സ്ക്രിപ്റ്റ്: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "തനത് ക്രമീകരണം ലോഡ് ചെയ്യുക: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "ഇപ്പോഴത്തെ ക്രമീകരണം തനത് ക്രമീകരണം ആക്കുക: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "നിര്‍ത്തുക: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "പുതിയ വിവരങ്ങള്‍ എന്നെ ഇന്റര്‍നെറ്റില്‍ കൂടി അറിയിക്കുക "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "സെറ്റ് UI ലോക്കലെ (Set UI Locale): "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "പട്ടിക ലോഡ് ചെയ്യാന്‍ കീഴ് ദിശാ കട്ട അമര്‍ത്തുക."
+
+#~ msgid "Hydra"
+#~ msgstr "ആയില്യന്‍"
+
+#~ msgid "Select and exit to run."
+#~ msgstr "തുടങ്ങാന്‍ തിരഞ്ഞെടുത്ത് പുറത്ത് കടക്കുക."
+
+#~ msgid "Set Location "
+#~ msgstr "സ്ഥാനം ഉറപ്പിക്കുക "
+
+#~ msgid "Calendar"
+#~ msgstr "കലണ്ടര്‍"
+
+#~ msgid "Preset Time"
+#~ msgstr "മുന്‍ കൂട്ടിയുള്ള സമയം"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "നക്ഷത്രരാശിയുടെ അതിരുകള്‍"
+
+#~ msgid "Constellation Names"
+#~ msgstr "നക്ഷത്രരാശിയുടെ നാമങ്ങള്‍"
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "മിതപ്പെടുത്തേണ്ട കാന്തിമാനം: "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "നക്ഷത്രരാശിയുടെ വരകള്‍"
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "നക്ഷത്രമൂല്യ വര്‍ദ്ധനി: "
+
+#~ msgid "Show: "
+#~ msgstr "കാണിക്കുക: "
+
+#~ msgid "Cardinal Points"
+#~ msgstr "ദിശാ ബിന്ദുക്കള്‍"
+
+#~ msgid "Equator Line"
+#~ msgstr "ഭൂമദ്ധ്യരേഖ"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "ക്രാന്തിവൃത്ത രേഖ"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "ഭൂമദ്ധ്യരേഖാ ചട്ടക്കൂട്"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "അഗ്രകോടി ചട്ടക്കൂട്"
+
+#~ msgid "Meridian Line"
+#~ msgstr "മദ്ധ്യാഹ്നികരേഖ"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "ഗ്രഹ പ്രദക്ഷിണ പഥങ്ങള്‍"
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "പ്രകാശ മലിനീകരണ തീവ്രത "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "കാന്തിമാന വലിപ്പ വര്‍ദ്ധിനി: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "പര്‍വ്വതീകരണ ഇടവേള: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "പ്രകാശ സഞ്ചാരസമയത്തിന് വെണ്ടി കൃത്യമാക്കുക: "
+
+#~ msgid "USB Script: "
+#~ msgstr "യു.എസ്.ബി. സ്ക്രിപ്റ്റ്: "
+
+#~ msgid "Sidereal"
+#~ msgstr "സൂര്യനുമായി ബന്ധപ്പെട്ടത്"
+
+#~ msgid "Day keys: "
+#~ msgstr "ദിവസ സൂചികകള്‍: "
+
+#~ msgid "Planets labels"
+#~ msgstr "ഗ്രഹങ്ങളുടെ പേരുകള്‍"
+
+#~ msgid "Light pollution: "
+#~ msgstr "പ്രകാശ മലിനീകരണം: "
+
+#~ msgid "Art brightness: "
+#~ msgstr "കാലാരൂപത്തിന്റെ തീവ്രത: "
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "ദര്‍ശനത്തിന്റെ ആരംഭദിശ: xxxx"
+
+#~ msgid "Twinkling: "
+#~ msgstr "മിന്നുന്നു: "
+
+#~ msgid "Latitude: "
+#~ msgstr "അക്ഷാംശം: "
+
+#~ msgid "Longitude: "
+#~ msgstr "രേഖാംശം: "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "സമുദ്രനിരപ്പില്‍ നിന്നുള്ള ഉയരം (മീറ്ററില്‍) : "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "സൗരയൂഥ വസ്തു: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "ആകാശ സമയം: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "ആകാശ സമയം മുന്‍‌കൂട്ടി സെറ്റ് ചെയ്യുക: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "ആരംഭത്തില്‍ ആകാശ സമയം "
+
+#~ msgid "Actual Time"
+#~ msgstr "ശരിയായ സമയം"
+
+#~ msgid "Date Display Format: "
+#~ msgstr "തിയ്യതി കാണിക്കേണ്ട വിധം: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "ആകാശ സംസ്കാരം: "
+
+#~ msgid "Sky Language: "
+#~ msgstr "ആകാശത്തില്‍ ഉപയോഗിക്കേണ്ട ഭാഷ: "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "കാന്തിമാന വലിപ്പ വര്‍ദ്ധിനി: "
+
+#~ msgid "Nebula Names"
+#~ msgstr "നീഹാരിക നാമങ്ങള്‍"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "നീഹാരിക വൃത്തങ്ങള്‍"
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "വസ്തുവിന്റെ വലിപ്പം മാറ്റുന്നതിനുള്ള നിയമം: "
