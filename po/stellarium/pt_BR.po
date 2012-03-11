@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-09 20:51+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
+"POT-Creation-Date: 2012-03-10 17:34+0700\n"
+"PO-Revision-Date: 2012-03-10 23:50+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-10 05:16+0000\n"
+"X-Launchpad-Export-Date: 2012-03-11 04:42+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -428,7 +428,7 @@ msgstr "Espaço"
 
 #: src/gui/HelpDialog.cpp:53
 msgid "Arrow keys & left mouse drag"
-msgstr "Setas do teclado e arrasto com o botão esquerdo do mouse"
+msgstr "Setas do teclado e arrasto com o botão esquerdo do mause"
 
 #: src/gui/HelpDialog.cpp:54
 msgid "Page Up/Down"
@@ -1021,7 +1021,15 @@ msgstr "natural"
 msgid "starchart"
 msgstr "carta celeste"
 
-#: src/main.cpp:333
+#: src/gui/SearchDialog.cpp:498
+msgid "SIMBAD - University of Strasbourg"
+msgstr "SIMBAD - Universidade de Estrasburgo"
+
+#: src/gui/SearchDialog.cpp:499
+msgid "SIMBAD - Harvard University"
+msgstr "SIMBAD - Universidade de Harvard"
+
+#: src/main.cpp:337
 msgid "This system does not support OpenGL."
 msgstr "Este sistema não suporta o OpenGL."
 
@@ -2606,131 +2614,135 @@ msgstr "País:"
 msgid "Planet:"
 msgstr "Planeta:"
 
-#: src/ui_searchDialogGui.h:464
+#: src/ui_searchDialogGui.h:495
 msgid "Find Object"
 msgstr "Encontrar objeto"
 
-#: src/ui_searchDialogGui.h:465
+#: src/ui_searchDialogGui.h:496
 msgid "Find Object or Position"
 msgstr "Encontrar objeto ou posição"
 
-#: src/ui_searchDialogGui.h:471
+#: src/ui_searchDialogGui.h:502
 msgid "iota"
 msgstr "iota"
 
-#: src/ui_searchDialogGui.h:474
+#: src/ui_searchDialogGui.h:505
 msgid "alpha"
 msgstr "alfa"
 
-#: src/ui_searchDialogGui.h:477
+#: src/ui_searchDialogGui.h:508
 msgid "beta"
 msgstr "beta"
 
-#: src/ui_searchDialogGui.h:480
+#: src/ui_searchDialogGui.h:511
 msgid "gamma"
 msgstr "gama"
 
-#: src/ui_searchDialogGui.h:483
+#: src/ui_searchDialogGui.h:514
 msgid "delta"
 msgstr "delta"
 
-#: src/ui_searchDialogGui.h:486
+#: src/ui_searchDialogGui.h:517
 msgid "epsilon"
 msgstr "épsilon"
 
-#: src/ui_searchDialogGui.h:489
+#: src/ui_searchDialogGui.h:520
 msgid "zeta"
 msgstr "zeta"
 
-#: src/ui_searchDialogGui.h:492
+#: src/ui_searchDialogGui.h:523
 msgid "eta"
 msgstr "eta"
 
-#: src/ui_searchDialogGui.h:495
+#: src/ui_searchDialogGui.h:526
 msgid "theta"
 msgstr "teta"
 
-#: src/ui_searchDialogGui.h:498
+#: src/ui_searchDialogGui.h:529
 msgid "kappa"
 msgstr "capa"
 
-#: src/ui_searchDialogGui.h:501
+#: src/ui_searchDialogGui.h:532
 msgid "lambda"
 msgstr "lambda"
 
-#: src/ui_searchDialogGui.h:504
+#: src/ui_searchDialogGui.h:535
 msgid "mu"
 msgstr "mi"
 
-#: src/ui_searchDialogGui.h:507
+#: src/ui_searchDialogGui.h:538
 msgid "nu"
 msgstr "ni"
 
-#: src/ui_searchDialogGui.h:510
+#: src/ui_searchDialogGui.h:541
 msgid "xi"
 msgstr "csi"
 
-#: src/ui_searchDialogGui.h:513
+#: src/ui_searchDialogGui.h:544
 msgid "omicron"
 msgstr "ómicron"
 
-#: src/ui_searchDialogGui.h:516
+#: src/ui_searchDialogGui.h:547
 msgid "pi"
 msgstr "pi"
 
-#: src/ui_searchDialogGui.h:519
+#: src/ui_searchDialogGui.h:550
 msgid "rho"
 msgstr "rô"
 
-#: src/ui_searchDialogGui.h:522
+#: src/ui_searchDialogGui.h:553
 msgid "sigma"
 msgstr "sigma"
 
-#: src/ui_searchDialogGui.h:525
+#: src/ui_searchDialogGui.h:556
 msgid "tau"
 msgstr "tau"
 
-#: src/ui_searchDialogGui.h:528
+#: src/ui_searchDialogGui.h:559
 msgid "upsilon"
 msgstr "ípsilon"
 
-#: src/ui_searchDialogGui.h:531
+#: src/ui_searchDialogGui.h:562
 msgid "phi"
 msgstr "fi"
 
-#: src/ui_searchDialogGui.h:534
+#: src/ui_searchDialogGui.h:565
 msgid "chi"
 msgstr "chi"
 
-#: src/ui_searchDialogGui.h:537
+#: src/ui_searchDialogGui.h:568
 msgid "psi"
 msgstr "psi"
 
-#: src/ui_searchDialogGui.h:540
+#: src/ui_searchDialogGui.h:571
 msgid "omega"
 msgstr "ômega"
 
-#: src/ui_searchDialogGui.h:542
+#: src/ui_searchDialogGui.h:573
 msgid "Greek letters for Bayer designations"
 msgstr "Letras gregas para as designações de Bayer"
 
-#: src/ui_searchDialogGui.h:543
+#: src/ui_searchDialogGui.h:574
 msgid "Object"
 msgstr "Objeto"
 
-#: src/ui_searchDialogGui.h:544
+#: src/ui_searchDialogGui.h:575
 msgid "RA/Dec (J2000):"
 msgstr "Ascensão reta/Declinação (J2000):"
 
-#: src/ui_searchDialogGui.h:545
+#: src/ui_searchDialogGui.h:576
 msgid "Position"
 msgstr "Posição"
 
-#: src/ui_searchDialogGui.h:546
+#: src/ui_searchDialogGui.h:577
 msgid "Search also in the SIMBAD on-line astronomical database"
 msgstr "Procurar também no banco de dados astronômicos na rede SIMBAD"
 
-#: src/ui_searchDialogGui.h:547 src/ui_viewDialog.h:1137
+#: src/ui_searchDialogGui.h:578
+msgid "Use mirror:"
+msgstr "Utilizar espelho:"
+
+#: src/ui_searchDialogGui.h:579 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
 #: src/ui_configurationDialog.h:855 src/ui_configurationDialog.h:866
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
@@ -3014,7 +3026,7 @@ msgstr "Controle"
 
 #: src/ui_configurationDialog.h:787
 msgid "Allow keyboard to pan and zoom"
-msgstr "Possibilita visão panorâmica e zoom com o teclado"
+msgstr "Possibilita visão panorâmica e zum com o teclado"
 
 #: src/ui_configurationDialog.h:789
 msgid "Enable keyboard navigation"
@@ -3023,11 +3035,11 @@ msgstr "Habilitar navegação com o teclado"
 #: src/ui_configurationDialog.h:791
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
-"Possibilita visão panorâmica (arrasto) e zoom (botão de rolagem) com o mouse"
+"Possibilita visão panorâmica (arrasto) e zum (botão de rolagem) com o mause"
 
 #: src/ui_configurationDialog.h:793
 msgid "Enable mouse navigation"
-msgstr "Habilitar navegação com o mouse"
+msgstr "Habilitar navegação com o mause"
 
 #: src/ui_configurationDialog.h:794
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
@@ -5558,3 +5570,231 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr "pulsar extragaláctico (nas Nuvens de Magalhães)"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "Grade equatorial"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "Grade azimutal"
+
+#~ msgid "Sky Language: "
+#~ msgstr "Idioma dos elementos do céu: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "Cultura do céu: "
+
+#~ msgid "General "
+#~ msgstr "Geral "
+
+#~ msgid "Stars "
+#~ msgstr "Estrelas "
+
+#~ msgid "Colors "
+#~ msgstr "Cores "
+
+#~ msgid "Effects "
+#~ msgstr "Efeitos "
+
+#~ msgid "Administration "
+#~ msgstr "Administração "
+
+#~ msgid "Latitude: "
+#~ msgstr "Latitude: "
+
+#~ msgid "Longitude: "
+#~ msgstr "Longitude: "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Altitude (m): "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Corpo do sistema solar: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Hora celeste: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Hora celeste ao iniciar: "
+
+#~ msgid "Actual Time"
+#~ msgstr "Hora atual"
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Formato de exibição da data: "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "Linhas das constelações"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Nomes das constelações"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Intensidade das imagens das constelações"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Limites das constelações"
+
+#~ msgid "Planet Names"
+#~ msgstr "Nomes dos planetas"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Órbitas dos planetas"
+
+#~ msgid "Meridian Line"
+#~ msgstr "Linha meridiana"
+
+#~ msgid "Nebula Names"
+#~ msgstr "Nomes das nebulosas"
+
+#~ msgid "Landscape: "
+#~ msgstr "Paisagem: "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Intensidade da Via Láctea: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "Desligar: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Atualize-me via Internet: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "Seta para baixo para carregar a lista."
+
+#~ msgid "Hydra"
+#~ msgstr "Hidra"
+
+#~ msgid "Select and exit to run."
+#~ msgstr "Selecione e saia para executar."
+
+#~ msgid "Calendar"
+#~ msgstr "Calendário"
+
+#~ msgid "Sidereal"
+#~ msgstr "Sideral"
+
+#~ msgid "Twinkling: "
+#~ msgstr "Cintilação: "
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Set Location "
+#~ msgstr "Definir a localização "
+
+#~ msgid "Set Time "
+#~ msgstr "Definir a hora "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Definir o fuso horário: "
+
+#~ msgid "Show: "
+#~ msgstr "Exibir: "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "Multiplicador do valor estelar: "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Multiplicador do dimensionamento da magnitude: "
+
+#~ msgid "Cardinal Points"
+#~ msgstr "Pontos cardeais"
+
+#~ msgid "Planet Trails"
+#~ msgstr "Rastros dos planetas"
+
+#~ msgid "Equator Line"
+#~ msgstr "Linha do Equador"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "Linha da eclíptica"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Círculos nas nebulosas"
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Zum manual: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Regra para o dimensionamento de objetos: "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "Multiplicador da escala de magnitude: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Duração do zum: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Carregar a configuração padrão: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Salvar a configuração atual como padrão: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Definir o idioma da interface de usuário: "
+
+#~ msgid "Light pollution: "
+#~ msgstr "Poluição luminosa: "
+
+#~ msgid "Art brightness: "
+#~ msgstr "Brilho das imagens: "
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "Direção da visualização ao iniciar: xxxx"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "Obter o catálogo x de y"
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "Todos os catálogos estelares foram baixados!"
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "Campo de visão a ser utilizado ao iniciar: XX"
+
+#~ msgid "Planets labels"
+#~ msgstr "Nomes dos planetas"
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Predefinir a hora celeste: "
+
+#~ msgid "Preset Time"
+#~ msgstr "Predefinir a hora"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "Formato de exibição da hora: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Magnitude máxima a ser identificada: "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "Magnitude limite: "
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "Luminância da poluição luminosa: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Magnitude máxima de nebulosas a ser identificada: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Tempo limite para o cursor ser ocultado: "
+
+#~ msgid "Day keys: "
+#~ msgstr "Chaves de dias: "
+
+#~ msgid "Date & Time"
+#~ msgstr "Data e hora"
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "Corrigir para tempo de viagem à velocidade da luz: "
+
+#~ msgid "Scripts "
+#~ msgstr "Apresentações "
+
+#~ msgid "Local Script: "
+#~ msgstr "Apresentação local: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "Apresentação de CD/DVD: "
+
+#~ msgid "USB Script: "
+#~ msgstr "Apresentação de USB: "

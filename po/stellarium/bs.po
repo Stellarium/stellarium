@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-03-09 20:51+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
+"POT-Creation-Date: 2012-03-10 17:34+0700\n"
+"PO-Revision-Date: 2012-03-10 17:07+0000\n"
 "Last-Translator: Kenan Dervišević <kenan3008@gmail.com>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-10 05:11+0000\n"
+"X-Launchpad-Export-Date: 2012-03-11 04:36+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -1013,7 +1013,15 @@ msgstr "prirodno"
 msgid "starchart"
 msgstr "mapa zvijezda"
 
-#: src/main.cpp:333
+#: src/gui/SearchDialog.cpp:498
+msgid "SIMBAD - University of Strasbourg"
+msgstr "SIMBAD - University of Strasbourg"
+
+#: src/gui/SearchDialog.cpp:499
+msgid "SIMBAD - Harvard University"
+msgstr "SIMBAD - Harvard University"
+
+#: src/main.cpp:337
 msgid "This system does not support OpenGL."
 msgstr "Sistem ne podržava OpenGL."
 
@@ -2591,131 +2599,135 @@ msgstr "Država:"
 msgid "Planet:"
 msgstr "Planeta:"
 
-#: src/ui_searchDialogGui.h:464
+#: src/ui_searchDialogGui.h:495
 msgid "Find Object"
 msgstr "Pronađi objekat"
 
-#: src/ui_searchDialogGui.h:465
+#: src/ui_searchDialogGui.h:496
 msgid "Find Object or Position"
 msgstr "Nađi objekat ili poziciju"
 
-#: src/ui_searchDialogGui.h:471
+#: src/ui_searchDialogGui.h:502
 msgid "iota"
 msgstr "jota"
 
-#: src/ui_searchDialogGui.h:474
+#: src/ui_searchDialogGui.h:505
 msgid "alpha"
 msgstr "alfa"
 
-#: src/ui_searchDialogGui.h:477
+#: src/ui_searchDialogGui.h:508
 msgid "beta"
 msgstr "beta"
 
-#: src/ui_searchDialogGui.h:480
+#: src/ui_searchDialogGui.h:511
 msgid "gamma"
 msgstr "gama"
 
-#: src/ui_searchDialogGui.h:483
+#: src/ui_searchDialogGui.h:514
 msgid "delta"
 msgstr "delta"
 
-#: src/ui_searchDialogGui.h:486
+#: src/ui_searchDialogGui.h:517
 msgid "epsilon"
 msgstr "epsilon"
 
-#: src/ui_searchDialogGui.h:489
+#: src/ui_searchDialogGui.h:520
 msgid "zeta"
 msgstr "zeta"
 
-#: src/ui_searchDialogGui.h:492
+#: src/ui_searchDialogGui.h:523
 msgid "eta"
 msgstr "eta"
 
-#: src/ui_searchDialogGui.h:495
+#: src/ui_searchDialogGui.h:526
 msgid "theta"
 msgstr "teta"
 
-#: src/ui_searchDialogGui.h:498
+#: src/ui_searchDialogGui.h:529
 msgid "kappa"
 msgstr "kapa"
 
-#: src/ui_searchDialogGui.h:501
+#: src/ui_searchDialogGui.h:532
 msgid "lambda"
 msgstr "lambda"
 
-#: src/ui_searchDialogGui.h:504
+#: src/ui_searchDialogGui.h:535
 msgid "mu"
 msgstr "mi"
 
-#: src/ui_searchDialogGui.h:507
+#: src/ui_searchDialogGui.h:538
 msgid "nu"
 msgstr "ni"
 
-#: src/ui_searchDialogGui.h:510
+#: src/ui_searchDialogGui.h:541
 msgid "xi"
 msgstr "ksi"
 
-#: src/ui_searchDialogGui.h:513
+#: src/ui_searchDialogGui.h:544
 msgid "omicron"
 msgstr "omikron"
 
-#: src/ui_searchDialogGui.h:516
+#: src/ui_searchDialogGui.h:547
 msgid "pi"
 msgstr "pi"
 
-#: src/ui_searchDialogGui.h:519
+#: src/ui_searchDialogGui.h:550
 msgid "rho"
 msgstr "ro"
 
-#: src/ui_searchDialogGui.h:522
+#: src/ui_searchDialogGui.h:553
 msgid "sigma"
 msgstr "sigma"
 
-#: src/ui_searchDialogGui.h:525
+#: src/ui_searchDialogGui.h:556
 msgid "tau"
 msgstr "tau"
 
-#: src/ui_searchDialogGui.h:528
+#: src/ui_searchDialogGui.h:559
 msgid "upsilon"
 msgstr "ipsilon"
 
-#: src/ui_searchDialogGui.h:531
+#: src/ui_searchDialogGui.h:562
 msgid "phi"
 msgstr "fi"
 
-#: src/ui_searchDialogGui.h:534
+#: src/ui_searchDialogGui.h:565
 msgid "chi"
 msgstr "hi"
 
-#: src/ui_searchDialogGui.h:537
+#: src/ui_searchDialogGui.h:568
 msgid "psi"
 msgstr "psi"
 
-#: src/ui_searchDialogGui.h:540
+#: src/ui_searchDialogGui.h:571
 msgid "omega"
 msgstr "omega"
 
-#: src/ui_searchDialogGui.h:542
+#: src/ui_searchDialogGui.h:573
 msgid "Greek letters for Bayer designations"
 msgstr "Grčka slova sa Bayerovim oznakama"
 
-#: src/ui_searchDialogGui.h:543
+#: src/ui_searchDialogGui.h:574
 msgid "Object"
 msgstr "Objekat"
 
-#: src/ui_searchDialogGui.h:544
+#: src/ui_searchDialogGui.h:575
 msgid "RA/Dec (J2000):"
 msgstr "RA/Dec (J2000):"
 
-#: src/ui_searchDialogGui.h:545
+#: src/ui_searchDialogGui.h:576
 msgid "Position"
 msgstr "Položaj"
 
-#: src/ui_searchDialogGui.h:546
+#: src/ui_searchDialogGui.h:577
 msgid "Search also in the SIMBAD on-line astronomical database"
 msgstr "Pretražite i SIMBAD online astronomsku bazu"
 
-#: src/ui_searchDialogGui.h:547 src/ui_viewDialog.h:1137
+#: src/ui_searchDialogGui.h:578
+msgid "Use mirror:"
+msgstr "Koristi mirror:"
+
+#: src/ui_searchDialogGui.h:579 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
 #: src/ui_configurationDialog.h:855 src/ui_configurationDialog.h:866
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
@@ -5507,3 +5519,228 @@ msgstr "pulsirana optička, X ili emisija gama zraka (visoka energija)"
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr "ekstragalaktički (u MC) pulsar"
+
+#~ msgid "General "
+#~ msgstr "Općenito "
+
+#~ msgid "Stars "
+#~ msgstr "Zvijezde "
+
+#~ msgid "Set Location "
+#~ msgstr "Podesi lokaciju "
+
+#~ msgid "Set Time "
+#~ msgstr "Podesi vrijeme "
+
+#~ msgid "Colors "
+#~ msgstr "Boje "
+
+#~ msgid "Administration "
+#~ msgstr "Administracija "
+
+#~ msgid "Scripts "
+#~ msgstr "Skripte "
+
+#~ msgid "Longitude: "
+#~ msgstr "Geografska dužina: "
+
+#~ msgid "Latitude: "
+#~ msgstr "Geografska širina: "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Tijelo sunčevog sistema: "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Nadmorska visina (m): "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Postavi vremensku zonu: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Zvjezdano vrijeme: "
+
+#~ msgid "Day keys: "
+#~ msgstr "Dnevni ključevi: "
+
+#~ msgid "Sidereal"
+#~ msgstr "Zvjezdani"
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Zvjezdano vrijeme pri pokretanju: "
+
+#~ msgid "Calendar"
+#~ msgstr "Kalendar"
+
+#~ msgid "Sky Language: "
+#~ msgstr "Jezik sazviježda: "
+
+#~ msgid "Time Display Format: "
+#~ msgstr "Oblik prikaza vremena: "
+
+#~ msgid "Preset Time"
+#~ msgstr "Postavljeno vrijeme"
+
+#~ msgid "Sky Culture: "
+#~ msgstr "Kultura sazviježđa: "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Oblik prikaza datuma: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Unaprijed zadano zvjezdano vrijeme: "
+
+#~ msgid "Actual Time"
+#~ msgstr "Stvarno vrijeme"
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Množitelj veličine uvećavanja: "
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Granice sazviježđa"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Imena sazvježđa"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Sjajnost slika sazviježđa"
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "Granična veličina: "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "Linije sazviježđa"
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Prikaži maglice do veličine: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "Treperenje: "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "Množitelj vrijednosti zvijezde: "
+
+#~ msgid "Show: "
+#~ msgstr "Prikaži: "
+
+#~ msgid "Cardinal Points"
+#~ msgstr "Strane svijeta"
+
+#~ msgid "Planet Names"
+#~ msgstr "Imena planeta"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "Ekliptika"
+
+#~ msgid "Equator Line"
+#~ msgstr "Ekvatorska linija"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "Ekvatorska mreža"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "Azimutna mreža"
+
+#~ msgid "Meridian Line"
+#~ msgstr "Meridijanska linija"
+
+#~ msgid "Planet Trails"
+#~ msgstr "Putanje planeta"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Orbite planeta"
+
+#~ msgid "Nebula Names"
+#~ msgstr "Imena maglica"
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Trajanje uvećanja: "
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "Intenzitet svjetlosnog zagađenja: "
+
+#~ msgid "Landscape: "
+#~ msgstr "Krajolik: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Ručno uvećavanje: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Pravilo uvećavanja objekta: "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "Množitelj razmjere uvećavanja: "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Sjajnost Mliječnog puta: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Prikaži imena za maglice do veličine: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Vrijeme do nestanka pokazivača miša: "
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Magličini krugovi"
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "CD/DVD skripta: "
+
+#~ msgid "Local Script: "
+#~ msgstr "Lokalna skripta: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "Strelica dole za učitavanje liste."
+
+#~ msgid "USB Script: "
+#~ msgstr "USB skripta: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Učitaj početne postavke: "
+
+#~ msgid "Select and exit to run."
+#~ msgstr "Odaberite i izađite za pokretanje."
+
+#~ msgid "Shut Down: "
+#~ msgstr "Ugasi: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Snimi trenutne postavke kao početne: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Nadogradi me putem interneta: "
+
+#~ msgid "Planets labels"
+#~ msgstr "Nazivi planeta"
+
+#~ msgid "Light pollution: "
+#~ msgstr "Svjetlosno zagađenje: "
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "Pokretanje FOV: XX"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "Dobavi katog x od y"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "Završeno preuzimanje svi kataloga sa zvijezdama!"
+
+#~ msgid "Effects "
+#~ msgstr "Efekti "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "Ispravka vremena putovanja svjetlosti: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Postavi lokalizaciju: "
+
+#~ msgid "Art brightness: "
+#~ msgstr "Sjajnost slika: "
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "Početni pogled na odredište: xxxx"
+
+#~ msgid "Hydra"
+#~ msgstr "Hydra"

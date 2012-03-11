@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-09 20:51+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
+"POT-Creation-Date: 2012-03-10 17:34+0700\n"
+"PO-Revision-Date: 2011-07-18 20:26+0000\n"
 "Last-Translator: Kiril <Unknown>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-10 05:13+0000\n"
+"X-Launchpad-Export-Date: 2012-03-11 04:38+0000\n"
 "X-Generator: Launchpad (build 14914)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -1002,7 +1002,15 @@ msgstr ""
 msgid "starchart"
 msgstr ""
 
-#: src/main.cpp:333
+#: src/gui/SearchDialog.cpp:498
+msgid "SIMBAD - University of Strasbourg"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:499
+msgid "SIMBAD - Harvard University"
+msgstr ""
+
+#: src/main.cpp:337
 msgid "This system does not support OpenGL."
 msgstr "מערכת זו אינו תומכת בOpenGL."
 
@@ -2574,131 +2582,135 @@ msgstr "ארץ:"
 msgid "Planet:"
 msgstr "כוכב לכת:"
 
-#: src/ui_searchDialogGui.h:464
+#: src/ui_searchDialogGui.h:495
 msgid "Find Object"
 msgstr "מצא עצם"
 
-#: src/ui_searchDialogGui.h:465
+#: src/ui_searchDialogGui.h:496
 msgid "Find Object or Position"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:471
+#: src/ui_searchDialogGui.h:502
 msgid "iota"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:474
+#: src/ui_searchDialogGui.h:505
 msgid "alpha"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:477
+#: src/ui_searchDialogGui.h:508
 msgid "beta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:480
+#: src/ui_searchDialogGui.h:511
 msgid "gamma"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:483
+#: src/ui_searchDialogGui.h:514
 msgid "delta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:486
+#: src/ui_searchDialogGui.h:517
 msgid "epsilon"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:489
+#: src/ui_searchDialogGui.h:520
 msgid "zeta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:492
+#: src/ui_searchDialogGui.h:523
 msgid "eta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:495
+#: src/ui_searchDialogGui.h:526
 msgid "theta"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:498
+#: src/ui_searchDialogGui.h:529
 msgid "kappa"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:501
+#: src/ui_searchDialogGui.h:532
 msgid "lambda"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:504
+#: src/ui_searchDialogGui.h:535
 msgid "mu"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:507
+#: src/ui_searchDialogGui.h:538
 msgid "nu"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:510
+#: src/ui_searchDialogGui.h:541
 msgid "xi"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:513
+#: src/ui_searchDialogGui.h:544
 msgid "omicron"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:516
+#: src/ui_searchDialogGui.h:547
 msgid "pi"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:519
+#: src/ui_searchDialogGui.h:550
 msgid "rho"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:522
+#: src/ui_searchDialogGui.h:553
 msgid "sigma"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:525
+#: src/ui_searchDialogGui.h:556
 msgid "tau"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:528
+#: src/ui_searchDialogGui.h:559
 msgid "upsilon"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:531
+#: src/ui_searchDialogGui.h:562
 msgid "phi"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:534
+#: src/ui_searchDialogGui.h:565
 msgid "chi"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:537
+#: src/ui_searchDialogGui.h:568
 msgid "psi"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:540
+#: src/ui_searchDialogGui.h:571
 msgid "omega"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:542
+#: src/ui_searchDialogGui.h:573
 msgid "Greek letters for Bayer designations"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:543
+#: src/ui_searchDialogGui.h:574
 msgid "Object"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:544
+#: src/ui_searchDialogGui.h:575
 msgid "RA/Dec (J2000):"
 msgstr "עלייה ישרה/נטייה (ינואר2000):"
 
-#: src/ui_searchDialogGui.h:545
+#: src/ui_searchDialogGui.h:576
 msgid "Position"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:546
+#: src/ui_searchDialogGui.h:577
 msgid "Search also in the SIMBAD on-line astronomical database"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:547 src/ui_viewDialog.h:1137
+#: src/ui_searchDialogGui.h:578
+msgid "Use mirror:"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:579 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
 #: src/ui_configurationDialog.h:855 src/ui_configurationDialog.h:866
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
@@ -5358,3 +5370,231 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "רשת משוונית"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "רשת אזימוטלית"
+
+#~ msgid "Equator Line"
+#~ msgstr "קו המשווה"
+
+#~ msgid "Sky Language: "
+#~ msgstr "שפת שמיים: "
+
+#~ msgid "Date & Time"
+#~ msgstr "תאריך ושעה"
+
+#~ msgid "Set Location "
+#~ msgstr "קבע מיקום "
+
+#~ msgid "Set Time "
+#~ msgstr "קבע זמן "
+
+#~ msgid "General "
+#~ msgstr "כללי "
+
+#~ msgid "Stars "
+#~ msgstr "כוכבים "
+
+#~ msgid "Colors "
+#~ msgstr "צבעים "
+
+#~ msgid "Effects "
+#~ msgstr "אפקטים "
+
+#~ msgid "Scripts "
+#~ msgstr "סקריפטים "
+
+#~ msgid "Latitude: "
+#~ msgstr "קו רוחב: "
+
+#~ msgid "Longitude: "
+#~ msgstr "קו אורך: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "זמן שמיים: "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "קבע אזור זמן: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "זמן שמיים קבוע מראש: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "זמן שמיים באתחול: "
+
+#~ msgid "Preset Time"
+#~ msgstr "זמן קבוע מראש"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "פורמט זמן: "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "פורמט תאריך: "
+
+#~ msgid "Show: "
+#~ msgstr "הצג: "
+
+#~ msgid "Nebula Names"
+#~ msgstr "שמות ערפיליות"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "מעגלי ערפיליות"
+
+#~ msgid "Landscape: "
+#~ msgstr "נוף: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "זום ידני: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "עוצמת ערפילית מירבית לסימון: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "משך זמן לזום: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "גבול זמן לסמן: "
+
+#~ msgid "Local Script: "
+#~ msgstr "סקריפט מקומי: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "טען קונפיגורציית ברירת מחדל: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "שמור קונפיגורציה נוכחית כברירת מחדל: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "כיבוי: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "עדכן אותי דרך אינטרנט: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "קבע שפת ממשק: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "לחץ על חץ למטה כדי לטעון רשימה."
+
+#~ msgid "Hydra"
+#~ msgstr "נחש מים"
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "מכפיל מגניטודה: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "כלל להגדלת עצם: "
+
+#~ msgid "Select and exit to run."
+#~ msgstr "בחר וצא להרצה"
+
+#~ msgid "Sidereal"
+#~ msgstr "סידרי"
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "מכפיל סקאלת בהירות "
+
+#~ msgid "Calendar"
+#~ msgstr "לוח שנה"
+
+#~ msgid "Day keys: "
+#~ msgstr "מקשי יום: "
+
+#~ msgid "USB Script: "
+#~ msgstr "סקריפט USB "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "שמיים לפי תרבות: "
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "עוצמת זיהום אור: "
+
+#~ msgid "Light pollution: "
+#~ msgstr "זיהום אור: "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "בהירות מגבילה: "
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "הורדת כל קטלוגי הכוכבים הסתיימה!"
+
+#~ msgid "Planets labels"
+#~ msgstr "שמות כוכבי הלכת"
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "שדה ראייה באתחול: XX"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "הורד קטלוג x מתוך y"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Art brightness: "
+#~ msgstr "בהירות האומנות "
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "כיוון הסתכלות בהפעלה: xxx"
+
+#~ msgid "Administration "
+#~ msgstr "ניהול "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "גובה (מטרים): "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "עצם במערכת שמש: "
+
+#~ msgid "Actual Time"
+#~ msgstr "זמן נוכחי"
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "מכפיל ערך כוכב: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "מגניטודת כוכב מירבית לסימון: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "ניצנוץ: "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "קווי קבוצות כוכבים"
+
+#~ msgid "Constellation Names"
+#~ msgstr "שמות קבוצות כוכבים"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "עוצמת הגרפיקה של קבוצות כוכבים"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "גבולות קבוצות כוכבים"
+
+#~ msgid "Cardinal Points"
+#~ msgstr "נקודות חשובות"
+
+#~ msgid "Planet Names"
+#~ msgstr "שמות כוכבי לכת"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "מסלולי כוכבי לכת"
+
+#~ msgid "Planet Trails"
+#~ msgstr "עקבות כוכבי לכת"
+
+#~ msgid "Meridian Line"
+#~ msgstr "קו המרידיאן"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "קו המילקה"
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "עוצמת הארה של שביל החלב: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "סקריפט CD/DVD : "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "תיקון עבור זמן מסע של אור: "
