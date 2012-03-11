@@ -18,7 +18,16 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+// GZ: Apparently Qt4.8 conflicts with GLee, but provides QGLFunctions.
+// Currently this compiles, but program crashes at launch. We stay at 4.7 for now.
+#if QT_VERSION >= 0x040800
+#include <GL/gl.h>
+#include <GL/glext.h>
+#include <GL/glu.h>
+#else
 #include <GLee.h>
+#endif
+
 #include "Scenery3d.hpp"
 
 #include "StelApp.hpp"
@@ -1353,7 +1362,9 @@ void Scenery3d::initShadowMapping()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+    //glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+    // GZ This should be even better.
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32_ARB, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
 
     //Attach the depthmap to the Buffer
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapTexture, 0);

@@ -32,13 +32,21 @@
 #include <QString>
 #include <vector>
 #include <QGLFramebufferObject>
-
+// This is a tentative preparation for some changes to come with Qt4.8+.
+// Currently this does not work after compilation!
+#if QT_VERSION >= 0x040800
+#include <QGLFunctions>
+#endif
 #include "StelShader.hpp"
 
 using std::vector;
 
 //! Representation of a complete 3D scenery
+#if QT_VERSION >= 0x040800
+class Scenery3d: protected QGLFunctions
+#else
 class Scenery3d
+#endif
 {
 public:
     //! Initializes an empty Scenery3d object.
