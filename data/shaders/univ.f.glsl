@@ -32,6 +32,7 @@ uniform vec4 vecColor;
 uniform bool onlyColor;
  
 uniform float fTransparencyThresh;
+uniform float fShininess;
 uniform float alpha;
 
 varying vec4 SM_tex_coord; 
@@ -82,9 +83,9 @@ vec4 getLighting()
 		
 		//Specular part
 		vec3 e = normalize(vecEye);
-		vec3 r = reflect(-l, n);
+		vec3 r = normalize(-reflect(l,n));
 		
-		float spec = pow(max(0.0, dot(r, e)), gl_FrontMaterial.shininess);
+		float spec = pow(max(0.0, dot(r, e)), fShininess);
 		
 		color += gl_LightSource[0].specular * gl_FrontMaterial.specular * spec;
 	}		
