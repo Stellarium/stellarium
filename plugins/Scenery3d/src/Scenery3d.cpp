@@ -628,6 +628,9 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
         location = curShader->uniformLocation("alpha");
         curShader->setUniform(location, pStelModel->pMaterial->alpha);
 
+        location = curShader->uniformLocation("fShininess");
+        curShader->setUniform(location, pStelModel->pMaterial->shininess);
+
         if (pStelModel->pMaterial->texture)
         {
             pStelModel->pMaterial->texture.data()->bind();
