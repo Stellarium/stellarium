@@ -15,8 +15,7 @@ Item {
 
 	signal clicked()
 
-	PropertyAnimation
-	{
+	PropertyAnimation {
 		id: highlightFadeIn;
 		target: bgFill;
 		properties: "opacity";
@@ -25,8 +24,7 @@ Item {
 
 		easing {type: Easing.OutQuad;}
 	}
-	PropertyAnimation
-	{
+	PropertyAnimation {
 		id: highlightFadeOut;
 		target: bgFill;
 		properties: "opacity";
@@ -35,31 +33,27 @@ Item {
 
 		easing {type: Easing.InQuad;}
 	}
-	Rectangle
-	{
+	Rectangle {
 		id: bgFill
 		anchors.fill: parent
 		opacity: 0
 		color: highlightColor
 	}
 
-	Text
-	{
+	Text {
 		id: label
 		anchors.centerIn: parent
 		text: labelText
 		color: "white"
 	}
 
-	Image
-	{
+	Image {
 		id: image
 		fillMode: Image.PreserveAspectFit
 		source: imageSource
 	}
 
-	onActionChanged :
-	{
+	onActionChanged : {
 		clicked.connect(baseGui.getGuiActions(action).trigger());
 		baseGui.getGuiActions(action).onTriggered.connect(doSomething);
 	}
@@ -84,8 +78,7 @@ Item {
 		onTriggered: color = red
 	}*/
 
-	MouseArea
-	{
+	MouseArea {
 		anchors.fill: parent
 		onClicked: processClick()
 		onPressed: highlightFadeIn.start()

@@ -1,7 +1,6 @@
 import QtQuick 1.0
 
-Item
-{
+Item {
 	//smallScreen: touchscreen phone sized
 	// <right here: 5" mini tablets?>
 	//mediumScreen: ~7" tablets
@@ -9,19 +8,23 @@ Item
 	property int mediumScreenSizemm: 290
 	property int largeScreenSizemm: 440
 
-	function mmX(number) {
+	function mmX(number)
+	{
 		return Math.round(number * displayInfo.getDPIWidth() / 25.4)
 	}
 
-	function mmY(number) {
+	function mmY(number)
+	{
 		return Math.round(number * displayInfo.getDPIHeight() / 25.4)
 	}
 
-	function dpX(number) {
+	function dpX(number)
+	{
 		return Math.round(number * displayInfo.getDPIWidth() / 160)
 	}
 
-	function dpY(number) {
+	function dpY(number)
+	{
 		return Math.round(number * displayInfo.getDPIHeight() / 160)
 	}
 
@@ -49,8 +52,7 @@ Item
 		}
 	}
 
-	Keys.onPressed:
-	{
+	Keys.onPressed: {
 		if(event.key == Qt.Key_MediaPrevious)
 		{
 			//hack: this is (or, will be) the Android 'back' button; see
@@ -58,15 +60,11 @@ Item
 			event.accepted = true;
 			console.log("Qt.Key_MediaPrevious !");
 		}
-		if(event.key == Qt.Key_Menu)
-		{
-			event.accepted = true;
-			console.log("Qt.Key_Menu !");
-		}
+
+		console.log("Key pressed: " + event.key);
 	}
 
-	Loader
-	{
+	Loader {
 		id: layoutLoader
 		anchors.fill: parent
 		source: chooseLayout()

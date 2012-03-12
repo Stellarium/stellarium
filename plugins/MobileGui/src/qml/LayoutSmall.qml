@@ -1,7 +1,6 @@
 import QtQuick 1.1
 
-Item
-{
+Item {
 	id: layout
 
 	implicitHeight: 700
@@ -9,8 +8,7 @@ Item
 
 	anchors.fill: parent
 
-	Item
-	{
+	Item {
 		id: bottomBar
 
 		anchors.left: parent.left
@@ -19,8 +17,7 @@ Item
 		implicitHeight: 100
 		height: mmY(8.6)
 
-		Rectangle
-		{
+		Rectangle {
 			anchors.fill: parent
 			color: "black"
 			opacity: 0.3
@@ -29,48 +26,60 @@ Item
 		/* Buttons should be, at most, 8.6mm wide,
 			but they can shrink to fit the screen */
 
-		Row
-		{
-			id: buttonsList
+		Row {
+			id: buttonBar
 			anchors.fill: parent
-			layoutDirection: Qt.RightToLeft
-			Button
-			{
+			state: "SHOWN"
+
+			states: [
+				State {
+					name: "SHOWN"
+					PropertyChanges {
+						target: buttonBar
+						opacity: 1
+					}
+				}
+				State {
+					name: "HIDDEN"
+					PropertyChanges {
+						target: buttonBar
+						opacity: 0
+					}
+				}
+
+			]
+
+			Button {
 				anchors.top: parent.top
 				anchors.bottom: parent.bottom
 				width: parent.width / 6
 				labelText: "A"
 			}
-			Button
-			{
+			Button {
 				anchors.top: parent.top
 				anchors.bottom: parent.bottom
 				width: parent.width / 6
 				labelText: "B"
 			}
-			Button
-			{
+			Button {
 				anchors.top: parent.top
 				anchors.bottom: parent.bottom
 				width: parent.width / 6
 				labelText: "C"
 			}
-			Button
-			{
+			Button {
 				anchors.top: parent.top
 				anchors.bottom: parent.bottom
 				width: parent.width / 6
 				labelText: "D"
 			}
-			Button
-			{
+			Button {
 				anchors.top: parent.top
 				anchors.bottom: parent.bottom
 				width: parent.width / 6
 				labelText: "E"
 			}
-			Button
-			{
+			Button {
 				anchors.top: parent.top
 				anchors.bottom: parent.bottom
 				width: parent.width / 6
@@ -78,40 +87,67 @@ Item
 			}
 		}
 
+		Row {
+			id: timeBar
+			anchors.fill: parent
+			opacity: 0`
+
+			Button {
+				anchors.top: parent.top
+				anchors.bottom: parent.bottom
+				width: parent.width / 6
+				labelText: "RW"
+			}
+			Button {
+				anchors.top: parent.top
+				anchors.bottom: parent.bottom
+				width: parent.width / 6
+				labelText: "PLAY"
+			}
+			Button {
+				anchors.top: parent.top
+				anchors.bottom: parent.bottom
+				width: parent.width / 6
+				labelText: "NOW"
+			}
+			Button {
+				anchors.top: parent.top
+				anchors.bottom: parent.bottom
+				width: parent.width / 6
+				labelText: "FF"
+			}
+			Button {
+				anchors.top: parent.top
+				anchors.bottom: parent.bottom
+				width: parent.width / 6
+				labelText: "DATE/TIME"
+			}
+		}
 	}
 
 
-	Rectangle
-	{
+	Rectangle {
 		id: infoBox
 		anchors.left: parent.left
 		anchors.top: parent.top
 		anchors.right: parent.right
 
-		Connections
-		{
+		Connections	{
 			target: baseGui
-			onUpdated:
-			{
-				title.text = skyInfo.getInfoText()
-			}
+			onUpdated: title.text = skyInfo.getInfoText()
 		}
 
-		Column
-		{
-			Text
-			{
+		Column {
+			Text {
 				id: title
 				text: ""
 				color: "white"
 			}
-			Text
-			{
+			Text {
 				id: body
 				text: ""
 				color: "white"
 			}
 		}
-
 	}
 }
