@@ -773,6 +773,9 @@ void OBJ::importSecondPass(FILE *pFile, const vertexOrder order)
     std::string name;
     std::map<std::string, int>::const_iterator iter;
 
+    float fTmp[3] = {0.0f};
+    double dTmp[3] = {0.0};
+
     while (fscanf(pFile, "%s", buffer) != EOF)
     {
         switch (buffer[0])
@@ -788,7 +791,7 @@ void OBJ::importSecondPass(FILE *pFile, const vertexOrder order)
             {
                 sscanf(buffer, "%d//%d", &v[0], &vn[0]);
                 fscanf(pFile, "%d//%d", &v[1], &vn[1]);
-                fscanf(pFile, "%d//%d", &v[2], &vn[2]);
+                fscanf(pFile, "%d//%d", &v[2], &vn[2]);                
 
                 v[0] = (v[0] < 0) ? v[0]+numVertices-1 : v[0]-1;
                 v[1] = (v[1] < 0) ? v[1]+numVertices-1 : v[1]-1;
@@ -930,18 +933,44 @@ void OBJ::importSecondPass(FILE *pFile, const vertexOrder order)
             switch (buffer[1])
             {
             case '\0': //! v
-                fscanf(pFile, "%lf %lf %lf",
-                       &m_vertexCoords[3*numVertices],
-                       &m_vertexCoords[3*numVertices+1],
-                       &m_vertexCoords[3*numVertices+2]);
+                fscanf(pFile, "%lf %lf %lf", &dTmp[0], &dTmp[1], &dTmp[2]);
+
+                switch(order)
+                {
+                case XZY:
+                    m_vertexCoords[3*numVertices] = dTmp[0];
+                    m_vertexCoords[3*numVertices+1] = -dTmp[2];
+                    m_vertexCoords[3*numVertices+2] = dTmp[1];
+                    break;
+
+                default: //! XYZ
+                    m_vertexCoords[3*numVertices] = dTmp[0];
+                    m_vertexCoords[3*numVertices+1] = dTmp[1];
+                    m_vertexCoords[3*numVertices+2] = dTmp[2];
+                    break;
+                }
+
                 ++numVertices;
                 break;
 
             case 'n': //! vn
-                fscanf(pFile, "%f %f %f",
-                       &m_normals[3*numNormals],
-                       &m_normals[3*numNormals+1],
-                       &m_normals[3*numNormals+2]);
+                fscanf(pFile, "%f %f %f", &fTmp[0], &fTmp[1], &fTmp[2]);
+
+                switch(order)
+                {
+                case XZY:
+                    m_normals[3*numNormals] = fTmp[0];
+                    m_normals[3*numNormals+1] = -fTmp[2];
+                    m_normals[3*numNormals+2] = fTmp[1];
+                    break;
+
+                default: //! XYZ
+                    m_normals[3*numNormals] = fTmp[0];
+                    m_normals[3*numNormals+1] = fTmp[1];
+                    m_normals[3*numNormals+2] = fTmp[2];
+                    break;
+                }
+
                 ++numNormals;
                 break;
 
