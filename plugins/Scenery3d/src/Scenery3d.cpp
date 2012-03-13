@@ -54,7 +54,7 @@
 #define MEANINGLESS_INT -32767
 #define FROM_MODEL (MEANINGLESS_INT + 1)
 
-#define GROUND_MODEL 0
+#define GROUND_MODEL 1
 
 
 Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
@@ -1349,6 +1349,12 @@ void Scenery3d::drawDebugText(StelCore* core)
     painter.drawText(20, 145, lightMessage2);
     painter.drawText(20, 130, lightMessage3);
     // PRINT OTHER MESSAGES HERE:
+
+    float screen_x = prj->getViewportWidth()  - 400.0f;
+    float screen_y = prj->getViewportHeight() - 400.0f;
+
+    QString str = "Test matrix";
+    painter.drawText(screen_x, screen_y, str);
 }
 
 void Scenery3d::initShadowMapping()
