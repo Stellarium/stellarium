@@ -30,7 +30,10 @@ class Meteor;
 class MeteorMgr : public StelModule
 {
 	Q_OBJECT
-	Q_PROPERTY(int ZHR READ getZHR WRITE setZHR NOTIFY zhrChanged)
+	Q_PROPERTY(int ZHR
+		   READ getZHR
+		   WRITE setZHR
+		   NOTIFY zhrChanged)
 
 public:
 	//! Construct a MeteorMgr object.
