@@ -500,8 +500,8 @@ void SearchDialog::populateSimbadServerList()
 	QVariant selectedUrl = servers->itemData(index);
 	servers->clear();
 	//For each server, display the localized description and store the URL as user data.
-	servers->addItem(q_("SIMBAD - University of Strasbourg (France)"), DEF_SIMBAD_URL);
-	servers->addItem(q_("SIMBAD - Harvard University (USA)"), "http://simbad.harvard.edu/");
+	servers->addItem(q_("University of Strasbourg (France)"), DEF_SIMBAD_URL);
+	servers->addItem(q_("Harvard University (USA)"), "http://simbad.harvard.edu/");
 
 	//Restore the selection
 	index = servers->findData(selectedUrl, Qt::UserRole, Qt::MatchCaseSensitive);
