@@ -691,7 +691,7 @@
        <item>
         <widget class="QGroupBox" name="simbadGroupBox">
          <property name="title">
-          <string>SIMBAD</string>
+	  <string>On-line astronomical database SIMBAD</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <property name="margin">
@@ -700,7 +700,7 @@
           <item>
            <widget class="QCheckBox" name="checkBoxUseSimbad">
             <property name="text">
-             <string>Search also in the SIMBAD on-line astronomical database</string>
+	     <string>Extend search with SIMBAD</string>
             </property>
            </widget>
           </item>
