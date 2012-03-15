@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-10 17:34+0700\n"
+"POT-Creation-Date: 2012-03-14 22:39+0700\n"
 "PO-Revision-Date: 2012-02-24 05:21+0000\n"
 "Last-Translator: zhanshime <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-11 04:42+0000\n"
-"X-Generator: Launchpad (build 14914)\n"
+"X-Launchpad-Export-Date: 2012-03-15 04:44+0000\n"
+"X-Generator: Launchpad (build 14933)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -302,42 +302,42 @@ msgstr "方位角/高度角: %1/%2"
 msgid "Select screenshot directory"
 msgstr "选择储存截图资料夹"
 
-#: src/gui/ConfigurationDialog.cpp:489
+#: src/gui/ConfigurationDialog.cpp:492
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "启动时的视角: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:497
+#: src/gui/ConfigurationDialog.cpp:500
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "启动时的地平坐标方位角/高度角: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:536
+#: src/gui/ConfigurationDialog.cpp:539
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:540 src/gui/ViewDialog.cpp:393
+#: src/gui/ConfigurationDialog.cpp:543 src/gui/ViewDialog.cpp:393
 msgid "Contact"
 msgstr "联系信息"
 
-#: src/gui/ConfigurationDialog.cpp:618
+#: src/gui/ConfigurationDialog.cpp:621
 msgid "Author"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:622
+#: src/gui/ConfigurationDialog.cpp:625
 msgid "License"
 msgstr "授权条款"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:655
 msgid "Running script: "
 msgstr "执行指令： "
 
-#: src/gui/ConfigurationDialog.cpp:659
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "Running script: [none]"
 msgstr "执行指令：[空白]"
 
-#: src/gui/ConfigurationDialog.cpp:729
+#: src/gui/ConfigurationDialog.cpp:732
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -345,16 +345,16 @@ msgstr ""
 "新的天体目录经已下载完毕！\n"
 "请重新启动 Stellarium 以使用新的目录。"
 
-#: src/gui/ConfigurationDialog.cpp:733
+#: src/gui/ConfigurationDialog.cpp:736
 msgid "All available star catalogs have been installed."
 msgstr "所有可用的星体资料均已安装。"
 
-#: src/gui/ConfigurationDialog.cpp:738
+#: src/gui/ConfigurationDialog.cpp:741
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "在 %2 中取后 %1 目录"
 
-#: src/gui/ConfigurationDialog.cpp:745
+#: src/gui/ConfigurationDialog.cpp:748
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -363,7 +363,7 @@ msgstr ""
 "正在下载 %1……\n"
 "（您可以关闭此窗口）"
 
-#: src/gui/ConfigurationDialog.cpp:752
+#: src/gui/ConfigurationDialog.cpp:755
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -374,7 +374,7 @@ msgstr ""
 "天体数量: %2 百万\n"
 "星等范围: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:795 src/gui/ConfigurationDialog.cpp:831
+#: src/gui/ConfigurationDialog.cpp:798 src/gui/ConfigurationDialog.cpp:834
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -383,11 +383,11 @@ msgstr ""
 "在下载 %1 时发生了错误：\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:883
+#: src/gui/ConfigurationDialog.cpp:886
 msgid "Verifying file integrity..."
 msgstr "正在校验文件..."
 
-#: src/gui/ConfigurationDialog.cpp:887
+#: src/gui/ConfigurationDialog.cpp:890
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -984,12 +984,12 @@ msgstr ""
 msgid "starchart"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:498
-msgid "SIMBAD - University of Strasbourg"
+#: src/gui/SearchDialog.cpp:503
+msgid "University of Strasbourg (France)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:499
-msgid "SIMBAD - Harvard University"
+#: src/gui/SearchDialog.cpp:504
+msgid "Harvard University (USA)"
 msgstr ""
 
 #: src/main.cpp:337
@@ -2564,135 +2564,139 @@ msgstr "国家/地区:"
 msgid "Planet:"
 msgstr "行星:"
 
-#: src/ui_searchDialogGui.h:495
+#: src/ui_searchDialogGui.h:504
 msgid "Find Object"
 msgstr "寻找天体"
 
-#: src/ui_searchDialogGui.h:496
+#: src/ui_searchDialogGui.h:505
 msgid "Find Object or Position"
 msgstr "查找物体或位置"
 
-#: src/ui_searchDialogGui.h:502
+#: src/ui_searchDialogGui.h:511
 msgid "iota"
 msgstr "ι"
 
-#: src/ui_searchDialogGui.h:505
+#: src/ui_searchDialogGui.h:514
 msgid "alpha"
 msgstr "α"
 
-#: src/ui_searchDialogGui.h:508
+#: src/ui_searchDialogGui.h:517
 msgid "beta"
 msgstr "β"
 
-#: src/ui_searchDialogGui.h:511
+#: src/ui_searchDialogGui.h:520
 msgid "gamma"
 msgstr "γ"
 
-#: src/ui_searchDialogGui.h:514
+#: src/ui_searchDialogGui.h:523
 msgid "delta"
 msgstr "δ"
 
-#: src/ui_searchDialogGui.h:517
+#: src/ui_searchDialogGui.h:526
 msgid "epsilon"
 msgstr "ε"
 
-#: src/ui_searchDialogGui.h:520
+#: src/ui_searchDialogGui.h:529
 msgid "zeta"
 msgstr "ζ"
 
-#: src/ui_searchDialogGui.h:523
+#: src/ui_searchDialogGui.h:532
 msgid "eta"
 msgstr "η"
 
-#: src/ui_searchDialogGui.h:526
+#: src/ui_searchDialogGui.h:535
 msgid "theta"
 msgstr "θ"
 
-#: src/ui_searchDialogGui.h:529
+#: src/ui_searchDialogGui.h:538
 msgid "kappa"
 msgstr "κ"
 
-#: src/ui_searchDialogGui.h:532
+#: src/ui_searchDialogGui.h:541
 msgid "lambda"
 msgstr "λ"
 
-#: src/ui_searchDialogGui.h:535
+#: src/ui_searchDialogGui.h:544
 msgid "mu"
 msgstr "µ"
 
-#: src/ui_searchDialogGui.h:538
+#: src/ui_searchDialogGui.h:547
 msgid "nu"
 msgstr "ν"
 
-#: src/ui_searchDialogGui.h:541
+#: src/ui_searchDialogGui.h:550
 msgid "xi"
 msgstr "ξ"
 
-#: src/ui_searchDialogGui.h:544
+#: src/ui_searchDialogGui.h:553
 msgid "omicron"
 msgstr "ο"
 
-#: src/ui_searchDialogGui.h:547
+#: src/ui_searchDialogGui.h:556
 msgid "pi"
 msgstr "π"
 
-#: src/ui_searchDialogGui.h:550
+#: src/ui_searchDialogGui.h:559
 msgid "rho"
 msgstr "ρ"
 
-#: src/ui_searchDialogGui.h:553
+#: src/ui_searchDialogGui.h:562
 msgid "sigma"
 msgstr "σ"
 
-#: src/ui_searchDialogGui.h:556
+#: src/ui_searchDialogGui.h:565
 msgid "tau"
 msgstr "τ"
 
-#: src/ui_searchDialogGui.h:559
+#: src/ui_searchDialogGui.h:568
 msgid "upsilon"
 msgstr "υ"
 
-#: src/ui_searchDialogGui.h:562
+#: src/ui_searchDialogGui.h:571
 msgid "phi"
 msgstr "φ"
 
-#: src/ui_searchDialogGui.h:565
+#: src/ui_searchDialogGui.h:574
 msgid "chi"
 msgstr "χ"
 
-#: src/ui_searchDialogGui.h:568
+#: src/ui_searchDialogGui.h:577
 msgid "psi"
 msgstr "ψ"
 
-#: src/ui_searchDialogGui.h:571
+#: src/ui_searchDialogGui.h:580
 msgid "omega"
 msgstr "ω"
 
-#: src/ui_searchDialogGui.h:573
+#: src/ui_searchDialogGui.h:582
 msgid "Greek letters for Bayer designations"
 msgstr "拜耳命名法的希腊字母"
 
-#: src/ui_searchDialogGui.h:574
+#: src/ui_searchDialogGui.h:583
 msgid "Object"
 msgstr "物件"
 
-#: src/ui_searchDialogGui.h:575
+#: src/ui_searchDialogGui.h:584
 msgid "RA/Dec (J2000):"
 msgstr "RA/DEC (J2000):"
 
-#: src/ui_searchDialogGui.h:576
+#: src/ui_searchDialogGui.h:585
 msgid "Position"
 msgstr "位置"
 
-#: src/ui_searchDialogGui.h:577
+#: src/ui_searchDialogGui.h:586
+msgid "SIMBAD"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:587
 msgid "Search also in the SIMBAD on-line astronomical database"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:578
-msgid "Use mirror:"
+#: src/ui_searchDialogGui.h:588
+msgid "Server:"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:579 src/ui_viewDialog.h:1137
+#: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
 #: src/ui_configurationDialog.h:855 src/ui_configurationDialog.h:866
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
