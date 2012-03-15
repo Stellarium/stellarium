@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-10 17:34+0700\n"
+"POT-Creation-Date: 2012-03-14 22:39+0700\n"
 "PO-Revision-Date: 2011-12-14 17:51+0000\n"
 "Last-Translator: BRIJESH E.P <Unknown>\n"
 "Language-Team: Malayalam <ml@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-11 04:39+0000\n"
-"X-Generator: Launchpad (build 14914)\n"
+"X-Launchpad-Export-Date: 2012-03-15 04:41+0000\n"
+"X-Generator: Launchpad (build 14933)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -315,42 +315,42 @@ msgstr "Az/Alt: %1/%2"
 msgid "Select screenshot directory"
 msgstr "സ്ക്രീന്‍ഷോട്ടിനുള്ള ഡയറക്ടറി തിരഞ്ഞെടുക്കുക"
 
-#: src/gui/ConfigurationDialog.cpp:489
+#: src/gui/ConfigurationDialog.cpp:492
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "തുടക്കത്തിലെ FOV: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:497
+#: src/gui/ConfigurationDialog.cpp:500
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "തുടക്കത്തിലെ വീക്ഷണ ദിശ Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:536
+#: src/gui/ConfigurationDialog.cpp:539
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "രചയിതാക്കള്‍"
 
-#: src/gui/ConfigurationDialog.cpp:540 src/gui/ViewDialog.cpp:393
+#: src/gui/ConfigurationDialog.cpp:543 src/gui/ViewDialog.cpp:393
 msgid "Contact"
 msgstr "വിലാസം"
 
-#: src/gui/ConfigurationDialog.cpp:618
+#: src/gui/ConfigurationDialog.cpp:621
 msgid "Author"
 msgstr "രചയിതാവ്"
 
-#: src/gui/ConfigurationDialog.cpp:622
+#: src/gui/ConfigurationDialog.cpp:625
 msgid "License"
 msgstr "അനുമതിപത്രം"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:655
 msgid "Running script: "
 msgstr "പ്രവര്‍ത്തിച്ചുകൊണ്ടിരിക്കുന്ന സ്ക്രിപ്റ്റ്: "
 
-#: src/gui/ConfigurationDialog.cpp:659
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "Running script: [none]"
 msgstr "പ്രവര്‍ത്തിച്ചുകൊണ്ടിരിക്കുന്ന സ്ക്രിപ്റ്റ്: [ശൂന്യം]"
 
-#: src/gui/ConfigurationDialog.cpp:729
+#: src/gui/ConfigurationDialog.cpp:732
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -359,16 +359,16 @@ msgstr ""
 "പൂര്‍ത്തീകരിച്ചിരിക്കുന്നു!\n"
 "അവ പ്രദര്‍ശിപ്പിക്കുവാന്‍ സ്റ്റെല്ലേറിയം റീസ്റ്റാര്‍ട്ട് ചെയ്യുക."
 
-#: src/gui/ConfigurationDialog.cpp:733
+#: src/gui/ConfigurationDialog.cpp:736
 msgid "All available star catalogs have been installed."
 msgstr "ലഭ്യമായ നക്ഷത്ര കാറ്റലോഗുകള്‍ ഇന്‍സ്റ്റാള്‍ ചെയ്തിരിക്കുന്നു."
 
-#: src/gui/ConfigurationDialog.cpp:738
+#: src/gui/ConfigurationDialog.cpp:741
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "കാറ്റലോഗ് ലഭ്യമാക്കുന്നു %1 of %2"
 
-#: src/gui/ConfigurationDialog.cpp:745
+#: src/gui/ConfigurationDialog.cpp:748
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -377,7 +377,7 @@ msgstr ""
 "%1 ഡൌണ്‍ലോഡ് ചെയ്തുകൊണ്ടിരിക്കുന്നു...\n"
 "(ഈ ജാലകം അടക്കുന്നതിന് കുഴപ്പമില്ല.)"
 
-#: src/gui/ConfigurationDialog.cpp:752
+#: src/gui/ConfigurationDialog.cpp:755
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -388,7 +388,7 @@ msgstr ""
 "നക്ഷത്രങ്ങളുടെ എണ്ണം: %2 മില്യണ്‍\n"
 "കാന്തിമാന പരിധി: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:795 src/gui/ConfigurationDialog.cpp:831
+#: src/gui/ConfigurationDialog.cpp:798 src/gui/ConfigurationDialog.cpp:834
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -397,11 +397,11 @@ msgstr ""
 "%1 ഡൌണ്‍ലോഡ് ചെയ്യുന്നതില്‍ പിഴവ്:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:883
+#: src/gui/ConfigurationDialog.cpp:886
 msgid "Verifying file integrity..."
 msgstr "പ്രമാണത്തിന്റെ സാധുത പരിശോധിച്ചുകൊണ്ടിരിക്കുന്നു"
 
-#: src/gui/ConfigurationDialog.cpp:887
+#: src/gui/ConfigurationDialog.cpp:890
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1003,12 +1003,12 @@ msgstr ""
 msgid "starchart"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:498
-msgid "SIMBAD - University of Strasbourg"
+#: src/gui/SearchDialog.cpp:503
+msgid "University of Strasbourg (France)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:499
-msgid "SIMBAD - Harvard University"
+#: src/gui/SearchDialog.cpp:504
+msgid "Harvard University (USA)"
 msgstr ""
 
 #: src/main.cpp:337
@@ -2585,135 +2585,139 @@ msgstr "രാജ്യം:"
 msgid "Planet:"
 msgstr "ഗ്രഹം:"
 
-#: src/ui_searchDialogGui.h:495
+#: src/ui_searchDialogGui.h:504
 msgid "Find Object"
 msgstr "വസ്തുവിനെ തെരയുക"
 
-#: src/ui_searchDialogGui.h:496
+#: src/ui_searchDialogGui.h:505
 msgid "Find Object or Position"
 msgstr "വസ്തുവോ സ്ഥാനമോ കണ്ടെത്തുക"
 
-#: src/ui_searchDialogGui.h:502
+#: src/ui_searchDialogGui.h:511
 msgid "iota"
 msgstr "അയോട്ട"
 
-#: src/ui_searchDialogGui.h:505
+#: src/ui_searchDialogGui.h:514
 msgid "alpha"
 msgstr "ആല്‍ഫ"
 
-#: src/ui_searchDialogGui.h:508
+#: src/ui_searchDialogGui.h:517
 msgid "beta"
 msgstr "ബീറ്റ"
 
-#: src/ui_searchDialogGui.h:511
+#: src/ui_searchDialogGui.h:520
 msgid "gamma"
 msgstr "ഗാമ്മാ"
 
-#: src/ui_searchDialogGui.h:514
+#: src/ui_searchDialogGui.h:523
 msgid "delta"
 msgstr "ഡെല്‍റ്റ"
 
-#: src/ui_searchDialogGui.h:517
+#: src/ui_searchDialogGui.h:526
 msgid "epsilon"
 msgstr "എപ്സിലോണ്‍"
 
-#: src/ui_searchDialogGui.h:520
+#: src/ui_searchDialogGui.h:529
 msgid "zeta"
 msgstr "സീറ്റ"
 
-#: src/ui_searchDialogGui.h:523
+#: src/ui_searchDialogGui.h:532
 msgid "eta"
 msgstr "ഈറ്റ"
 
-#: src/ui_searchDialogGui.h:526
+#: src/ui_searchDialogGui.h:535
 msgid "theta"
 msgstr "തീറ്റ"
 
-#: src/ui_searchDialogGui.h:529
+#: src/ui_searchDialogGui.h:538
 msgid "kappa"
 msgstr "കാപ്പ"
 
-#: src/ui_searchDialogGui.h:532
+#: src/ui_searchDialogGui.h:541
 msgid "lambda"
 msgstr "ലാംഡ"
 
-#: src/ui_searchDialogGui.h:535
+#: src/ui_searchDialogGui.h:544
 msgid "mu"
 msgstr "മ്യു"
 
-#: src/ui_searchDialogGui.h:538
+#: src/ui_searchDialogGui.h:547
 msgid "nu"
 msgstr "ന്യു"
 
-#: src/ui_searchDialogGui.h:541
+#: src/ui_searchDialogGui.h:550
 msgid "xi"
 msgstr "ക്സൈ"
 
-#: src/ui_searchDialogGui.h:544
+#: src/ui_searchDialogGui.h:553
 msgid "omicron"
 msgstr "ഒമൈക്രോണ്‍"
 
-#: src/ui_searchDialogGui.h:547
+#: src/ui_searchDialogGui.h:556
 msgid "pi"
 msgstr "പൈ"
 
-#: src/ui_searchDialogGui.h:550
+#: src/ui_searchDialogGui.h:559
 msgid "rho"
 msgstr "റോ"
 
-#: src/ui_searchDialogGui.h:553
+#: src/ui_searchDialogGui.h:562
 msgid "sigma"
 msgstr "സിഗ്മ"
 
-#: src/ui_searchDialogGui.h:556
+#: src/ui_searchDialogGui.h:565
 msgid "tau"
 msgstr "ടോ"
 
-#: src/ui_searchDialogGui.h:559
+#: src/ui_searchDialogGui.h:568
 msgid "upsilon"
 msgstr "അപ്സിലോണ്‍"
 
-#: src/ui_searchDialogGui.h:562
+#: src/ui_searchDialogGui.h:571
 msgid "phi"
 msgstr "ഫൈ"
 
-#: src/ui_searchDialogGui.h:565
+#: src/ui_searchDialogGui.h:574
 msgid "chi"
 msgstr "ചൈ"
 
-#: src/ui_searchDialogGui.h:568
+#: src/ui_searchDialogGui.h:577
 msgid "psi"
 msgstr "പ്സൈ"
 
-#: src/ui_searchDialogGui.h:571
+#: src/ui_searchDialogGui.h:580
 msgid "omega"
 msgstr "ഒമേഗ"
 
-#: src/ui_searchDialogGui.h:573
+#: src/ui_searchDialogGui.h:582
 msgid "Greek letters for Bayer designations"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:574
+#: src/ui_searchDialogGui.h:583
 msgid "Object"
 msgstr "വസ്തു"
 
-#: src/ui_searchDialogGui.h:575
+#: src/ui_searchDialogGui.h:584
 msgid "RA/Dec (J2000):"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:576
+#: src/ui_searchDialogGui.h:585
 msgid "Position"
 msgstr "സ്ഥാനം"
 
-#: src/ui_searchDialogGui.h:577
+#: src/ui_searchDialogGui.h:586
+msgid "SIMBAD"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:587
 msgid "Search also in the SIMBAD on-line astronomical database"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:578
-msgid "Use mirror:"
+#: src/ui_searchDialogGui.h:588
+msgid "Server:"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:579 src/ui_viewDialog.h:1137
+#: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
 #: src/ui_configurationDialog.h:855 src/ui_configurationDialog.h:866
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
