@@ -354,6 +354,11 @@ int main(int argc, char **argv)
 		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
 	}
 
+#ifdef ANDROID
+	//avoid font corruption bug, perhaps at a cost of memory
+	qputenv("QML_ENABLE_TEXT_IMAGE_CACHE", "true");
+#endif
+
 	StelMainWindow mainWin;
 	mainWin.init(confSettings);
 	app.exec();
