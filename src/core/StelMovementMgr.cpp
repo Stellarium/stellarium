@@ -181,6 +181,7 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 {
 	if (event->type() == QEvent::KeyPress)
 	{
+		qDebug() << "Key: " << event->key();
 		// Direction and zoom deplacements
 		switch (event->key())
 		{

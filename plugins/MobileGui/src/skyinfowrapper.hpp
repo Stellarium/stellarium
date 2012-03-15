@@ -17,6 +17,7 @@ public:
 
 	/* Q_INVOKABLE methods (accessible from QML) */
 	Q_INVOKABLE QString getInfoText();
+	Q_INVOKABLE void toggleAllInfo();
 
 signals:
 

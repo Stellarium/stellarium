@@ -7,7 +7,7 @@
 SkyInfoWrapper::SkyInfoWrapper(QObject *parent) :
     QObject(parent)
 {
-	infoTextFilters = static_cast<StelObject::InfoStringGroup>(StelObject::Magnitude|StelObject::RaDecJ2000|StelObject::AltAzi|StelObject::Distance|StelObject::Size|StelObject::Extra1|StelObject::Extra2|StelObject::Extra3);
+	infoTextFilters = StelObject::AllInfo;
 }
 
 //! Get a pointer on the info panel used to display selected object info
@@ -21,6 +21,10 @@ const StelObject::InfoStringGroup& SkyInfoWrapper::getInfoTextFilters() const
 	return infoTextFilters;
 }
 
+void SkyInfoWrapper::toggleAllInfo()
+{
+	infoTextFilters = infoTextFilters == StelObject::AllInfo ? StelObject::ShortInfo : StelObject::AllInfo;
+}
 QString SkyInfoWrapper::getInfoText()
 {
 	QList<StelObjectP> selected = GETSTELMODULE(StelObjectMgr)->getSelectedObject();

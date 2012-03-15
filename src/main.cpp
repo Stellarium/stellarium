@@ -280,6 +280,23 @@ int main(int argc, char **argv)
 
 // On maemo we'll use the standard OS font
 #ifndef BUILD_FOR_MAEMO
+
+//Android uses Roboto for an Androidy look
+#ifdef ANDROID
+	try
+	{
+		const QString& fName = StelFileMgr::findFile("data/Roboto-Regular.ttf");
+		if (!fName.isEmpty())
+			QFontDatabase::addApplicationFont(fName);
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "ERROR while loading font Roboto : " << e.what();
+	}
+
+	QFont tmpFont("Roboto Regular");
+#else
+
 	// Add the DejaVu font that we use everywhere in the program
 	try
 	{
@@ -310,6 +327,7 @@ int main(int argc, char **argv)
 	QFont tmpFont("Verdana");
 #else
 	QFont tmpFont("DejaVu Sans");
+#endif
 #endif
 #endif
 	tmpFont.setPixelSize(confSettings->value("gui/base_font_size", 13).toInt());

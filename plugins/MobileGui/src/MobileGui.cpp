@@ -96,6 +96,7 @@ void MobileGui::init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraph
 		 rootObject->setProperty("width",guiSize.width());
 		 rootObject->setProperty("height",guiSize.height());
 		 rootObject->setParentItem(topLevelGraphicsWidget);
+		 rootObject->setFocus();
 		 //scene->addItem(object);
 
 	}

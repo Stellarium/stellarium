@@ -1,12 +1,18 @@
 import QtQuick 1.0
 
 Item {
+	//minimum dp for each category
+
 	//smallScreen: touchscreen phone sized
-	// <right here: 5" mini tablets?>
+	//tweenerScreenDp: ~5" mini tablets/phablets
 	//mediumScreen: ~7" tablets
 	//largeScreen: ~10" tablets
-	property int mediumScreenSizemm: 290
-	property int largeScreenSizemm: 440
+	property int normalPhoneScreenDp: 290
+	property int tweenerScreenDp: 460
+	property int mediumScreenDp: 580
+	property int largeScreenDp: 700
+
+	focus: true
 
 	function mmX(number)
 	{
@@ -28,6 +34,11 @@ Item {
 		return Math.round(number * displayInfo.getDPIHeight() / 160)
 	}
 
+	function totalDpWidth()
+	{
+		return width * 160 / displayInfo.getDPIHeight()
+	}
+
 	/* Placeholder values so the designer can be used;
 	  these are set to fill 100% of the screen by the
 	  MobileGui C++ class */
@@ -37,12 +48,23 @@ Item {
 	/* Choose a layout based on the screen size */
 	function chooseLayout()
 	{
-		var screenWidth = displayInfo.physicalWidth();
-		if(screenWidth < mediumScreenSizemm || true)
+		var screenWidth = totalDpWidth();
+		return "LayoutSmall.qml";
+
+		if(screenWidth < normalPhoneScreenDp)
+		{
+			return "LayoutExtraSmall.qml";
+		}
+		else if(screenWidth < tweenerScreenDp)
 		{
 			return "LayoutSmall.qml";
 		}
-		else if(screenWidth < largeScreenSizemm)
+		else if(screenWidth < mediumScreenDp)
+		{
+			return "LayoutSmall.qml";
+			//return "LayoutTweener.qml";
+		}
+		else if(screenWidth < largeScreenDp)
 		{
 			return "LayoutMedium.qml";
 		}
@@ -50,18 +72,6 @@ Item {
 		{
 			return "LayoutLarge.qml";
 		}
-	}
-
-	Keys.onPressed: {
-		if(event.key == Qt.Key_MediaPrevious)
-		{
-			//hack: this is (or, will be) the Android 'back' button; see
-			//http://stackoverflow.com/questions/9219747/how-to-block-the-back-key-in-android-when-using-qt
-			event.accepted = true;
-			console.log("Qt.Key_MediaPrevious !");
-		}
-
-		console.log("Key pressed: " + event.key);
 	}
 
 	Loader {

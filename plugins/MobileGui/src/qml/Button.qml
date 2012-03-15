@@ -6,14 +6,20 @@ Item {
 	implicitWidth: 50
 	implicitHeight: 50
 
-	property color highlightColor: "#3E78AB"
+	//ICS blue:
+	//#7cf1ff
+	//#33B5E5
+	//#0099CC
+	property color highlightColor: "#33B5E5"
 	property string action: ""
 	property string labelText: "test"
 	property string imageSource: ""
 
-	property real bgOpacity: 0.5
+	property real bgOpacity: 0.3
 
 	signal clicked()
+	signal pressed()
+	signal released()
 
 	PropertyAnimation {
 		id: highlightFadeIn;
@@ -70,6 +76,10 @@ Item {
 			//baseGui.getGuiActions(action).trigger();
 		}
 		clicked();
+
+		// Possible to get stuck in an unreleased state
+		button.released();
+		highlightFadeOut.start();
 	}
 
 	/*Connections
@@ -81,7 +91,13 @@ Item {
 	MouseArea {
 		anchors.fill: parent
 		onClicked: processClick()
-		onPressed: highlightFadeIn.start()
-		onReleased: highlightFadeOut.start()
+		onPressed: {
+			button.pressed();
+			highlightFadeIn.start();
+		}
+		onReleased: {
+			button.released();
+			highlightFadeOut.start();
+		}
 	}
 }
