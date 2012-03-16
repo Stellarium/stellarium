@@ -226,22 +226,22 @@ void StelApp::init(QSettings* conf)
 	textureMgr = new StelTextureMgr();
 	textureMgr->init();
 
-	QString logoFileName = "textures/logo24bits.png";
-	if (STELLARIUM_LOGO=="Development")
-		logoFileName = "textures/logo24bits_dev.png";
+	QString splashFileName = "textures/logo24bits.png";
+	if (STELLARIUM_SPLASH=="Development")
+		splashFileName = "textures/logo24bits_dev.png";
 
-	if (STELLARIUM_LOGO=="ReleaseCandidate")
-		logoFileName = "textures/logo24bits_rc.png";
+	if (STELLARIUM_SPLASH=="ReleaseCandidate")
+		splashFileName = "textures/logo24bits_rc.png";
 
 #ifdef BUILD_FOR_MAEMO
-	StelLoadingBar loadingBar(logoFileName, "", 25, 320, 101, 800, 400);
+	StelLoadingBar loadingBar(splashFileName, "", 25, 320, 101, 800, 400);
 #else
  #ifdef BZR_REVISION
-	StelLoadingBar loadingBar(logoFileName, QString("BZR r%1").arg(BZR_REVISION), 25, 320, 101);
+	StelLoadingBar loadingBar(splashFileName, QString("BZR r%1").arg(BZR_REVISION), 25, 320, 101);
  #elif SVN_REVISION
-	StelLoadingBar loadingBar(logoFileName, QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
+	StelLoadingBar loadingBar(splashFileName, QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
  #else
-	StelLoadingBar loadingBar(logoFileName, PACKAGE_VERSION, 45, 320, 121);
+	StelLoadingBar loadingBar(splashFileName, PACKAGE_VERSION, 45, 320, 121);
  #endif
 #endif
 	loadingBar.draw();
