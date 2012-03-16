@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-14 22:39+0700\n"
-"PO-Revision-Date: 2012-02-15 10:26+0000\n"
+"POT-Creation-Date: 2012-03-15 17:25+0700\n"
+"PO-Revision-Date: 2012-03-15 09:12+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-15 04:40+0000\n"
-"X-Generator: Launchpad (build 14933)\n"
+"X-Launchpad-Export-Date: 2012-03-16 04:41+0000\n"
+"X-Generator: Launchpad (build 14951)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -872,7 +872,7 @@ msgstr "Salva schermata"
 
 #: src/gui/StelGui.cpp:179
 msgid "Copy selected object information to clipboard"
-msgstr ""
+msgstr "Copia le informazioni selezionate sull'oggetto negli appunti"
 
 #: src/gui/StelGui.cpp:181
 msgid "Auto hide horizontal button bar"
@@ -1003,19 +1003,19 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:74
 msgid "selected text"
-msgstr ""
+msgstr "testo selezionato"
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "clear text"
-msgstr ""
+msgstr "pulisci testo"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "clear images"
-msgstr ""
+msgstr "pulisci immagini"
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
-msgstr ""
+msgstr "naturale"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
@@ -1027,7 +1027,7 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:504
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "Università di Harvard (Stati Uniti d'America)"
 
 #: src/main.cpp:337
 msgid "This system does not support OpenGL."
@@ -2724,16 +2724,16 @@ msgid "Position"
 msgstr "Posizione"
 
 #: src/ui_searchDialogGui.h:586
-msgid "SIMBAD"
+msgid "On-line astronomical database SIMBAD"
 msgstr ""
 
 #: src/ui_searchDialogGui.h:587
-msgid "Search also in the SIMBAD on-line astronomical database"
-msgstr "Cerca anche nel database astronomico on-line SIMBAD"
+msgid "Extend search with SIMBAD"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:588
 msgid "Server:"
-msgstr ""
+msgstr "Server:"
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
@@ -3299,19 +3299,19 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
-msgstr ""
+msgstr "Console script"
 
 #: src/ui_scriptConsole.h:344
 msgid "load script from file"
-msgstr ""
+msgstr "carica script da file"
 
 #: src/ui_scriptConsole.h:348
 msgid "save script to file"
-msgstr ""
+msgstr "salva script su file"
 
 #: src/ui_scriptConsole.h:352
 msgid "clear script"
-msgstr ""
+msgstr "pulisci script"
 
 #: src/ui_scriptConsole.h:356
 msgid "pre-process script using SSC preprocessor"
@@ -3327,23 +3327,23 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:365
 msgid "run script"
-msgstr ""
+msgstr "esegui script"
 
 #: src/ui_scriptConsole.h:369
 msgid "stop script"
-msgstr ""
+msgstr "interrompi script"
 
 #: src/ui_scriptConsole.h:372
 msgid "Script"
-msgstr ""
+msgstr "Script"
 
 #: src/ui_scriptConsole.h:373
 msgid "Output"
-msgstr ""
+msgstr "Output"
 
 #: src/ui_scriptConsole.h:375
 msgid "Cursor position"
-msgstr ""
+msgstr "Posizione del cursore"
 
 #: src/ui_scriptConsole.h:377
 msgid "Include dir:"
@@ -3351,7 +3351,7 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:378
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -3712,7 +3712,7 @@ msgstr "Lunghezza focale"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "Field stop:"
-msgstr ""
+msgstr "Interruzione del campo:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 msgid "Binoculars"
@@ -3801,11 +3801,11 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:228
 #: plugins/Satellites/src/Satellite.cpp:232
 msgid "Catalog #"
-msgstr ""
+msgstr "N° del catalogo"
 
 #: plugins/Satellites/src/Satellite.cpp:234
 msgid "International Designator"
-msgstr ""
+msgstr "Designante internazionale"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:246
@@ -4084,7 +4084,7 @@ msgstr "[nuova fonte]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
 msgid "[orbit calculation error]"
-msgstr ""
+msgstr "[errore di calcolazione dell'orbita]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"
@@ -5455,7 +5455,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:116
 #, qt-format
 msgid "Type of pulsar: %1"
-msgstr ""
+msgstr "Tipo di pulsar: %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:120
 #, qt-format
@@ -5757,3 +5757,6 @@ msgstr ""
 
 #~ msgid "Finished downloading all star catalogs!"
 #~ msgstr "Scaricamento di tutti i cataloghi di stelle completato."
+
+#~ msgid "Search also in the SIMBAD on-line astronomical database"
+#~ msgstr "Cerca anche nel database astronomico on-line SIMBAD"
