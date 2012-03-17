@@ -30,9 +30,19 @@
 #include <QMessageBox>
 #include <QAction>
 
+#include <QGraphicsSceneMouseEvent>
+
+#include <QApplication>
+#include <QPoint>
+
 #include "systemdisplayinfo.hpp"
 #include "updatesignallingitem.hpp"
-#include "skyinfowrapper.hpp"
+#include "stelwrapper.hpp"
+
+#include "../../../src/core/StelModuleMgr.hpp"
+#include "../../../src/core/StelApp.hpp"
+#include "../../../src/core/StelMovementMgr.hpp"
+#include "../../../src/core/StelAppGraphicsWidget.hpp"
 
 StelGuiBase* StelMobileGuiPluginInterface::getStelGuiBase() const
 {
@@ -43,7 +53,7 @@ Q_EXPORT_PLUGIN2(StelGui, StelMobileGuiPluginInterface)
 
 MobileGui::MobileGui() : topLevelGraphicsWidget(NULL),
 	engine(NULL), component(NULL), rootObject(NULL), displayInfo(NULL),
-	skyInfoWrapper(NULL)
+	stelWrapper(NULL)
 {
 
 }
@@ -55,7 +65,7 @@ MobileGui::~MobileGui()
 	delete component; component = NULL;
 	delete rootObject; rootObject = NULL;
 	delete displayInfo; displayInfo = NULL;
-	delete skyInfoWrapper; skyInfoWrapper = NULL;
+	delete stelWrapper; stelWrapper = NULL;
 }
 
 void MobileGui::init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraphicsWidget* stelAppGraphicsWidget)
@@ -71,10 +81,10 @@ void MobileGui::init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraph
 	engine = new QDeclarativeEngine();
 
 	displayInfo = new SystemDisplayInfo();
-	skyInfoWrapper = new SkyInfoWrapper();
+	stelWrapper = new StelWrapper();
 
 	engine->rootContext()->setContextProperty("displayInfo", displayInfo);
-	engine->rootContext()->setContextProperty("skyInfo", skyInfoWrapper);
+	engine->rootContext()->setContextProperty("stel", stelWrapper);
 	engine->rootContext()->setContextProperty("baseGui", this);
 
 
@@ -98,19 +108,21 @@ void MobileGui::init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraph
 		 rootObject->setParentItem(topLevelGraphicsWidget);
 		 rootObject->setFocus();
 		 //scene->addItem(object);
-
 	}
+
+	connectSignals();
+	initActions();
 }
 
 //! Get a pointer on the info panel used to display selected object info
 void MobileGui::setInfoTextFilters(const StelObject::InfoStringGroup& aflags)
 {
-	skyInfoWrapper->setInfoTextFilters(aflags);
+	stelWrapper->setInfoTextFilters(aflags);
 }
 
 const StelObject::InfoStringGroup& MobileGui::getInfoTextFilters() const
 {
-	return skyInfoWrapper->getInfoTextFilters();
+	return stelWrapper->getInfoTextFilters();
 }
 
 //! Add a new progress bar in the lower right corner of the screen.
@@ -196,4 +208,42 @@ void MobileGui::updateGui()
 		rootObject->setProperty("height",guiSize.height());
 	}
 	updated(); //signal the QML-side to update itself
+}
+
+void MobileGui::mousePress(int x, int y, int button, int buttons, int modifiers)
+{
+	stelAppGraphicsWidget->handleMousePress(QPointF(x, y), static_cast<Qt::MouseButton>(button),
+											static_cast<Qt::MouseButtons>(buttons),
+											static_cast<Qt::KeyboardModifiers>(modifiers));
+
+}
+
+void MobileGui::mouseRelease(int x, int y, int button, int buttons, int modifiers)
+{
+	stelAppGraphicsWidget->handleMouseRelease(QPointF(x, y), static_cast<Qt::MouseButton>(button),
+											static_cast<Qt::MouseButtons>(buttons),
+											static_cast<Qt::KeyboardModifiers>(modifiers));
+
+}
+
+void MobileGui::mouseMove(int x, int y, int button, int buttons, int modifiers)
+{
+	Q_UNUSED(button)
+	Q_UNUSED(modifiers)
+	stelAppGraphicsWidget->handleMouseMove(QPointF(x, y), static_cast<Qt::MouseButtons>(buttons));
+}
+
+
+void MobileGui::connectSignals()
+{
+	QObject::connect(rootObject, SIGNAL(fovChanged(qreal)), stelWrapper, SLOT(setFov(qreal)));
+
+	QObject::connect(rootObject, SIGNAL(mousePressed(int, int, int, int, int)), this, SLOT(mousePress(int,int,int,int,int)));
+	QObject::connect(rootObject, SIGNAL(mouseReleased(int, int, int, int, int)), this, SLOT(mouseRelease(int,int,int,int,int)));
+	QObject::connect(rootObject, SIGNAL(mouseMoved(int, int, int, int, int)), this, SLOT(mouseMove(int,int,int,int,int)));
+}
+
+void MobileGui::initActions()
+{
+
 }

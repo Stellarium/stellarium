@@ -1,15 +1,15 @@
-#ifndef SKYINFOWRAPPER_HPP
-#define SKYINFOWRAPPER_HPP
+#ifndef STELWRAPPER_HPP
+#define STELWRAPPER_HPP
 
 #include <QObject>
 #include "../../../src/core/StelObject.hpp"
 
 //! @class Allows QML access to information about the world
-class SkyInfoWrapper : public QObject
+class StelWrapper : public QObject
 {
     Q_OBJECT
 public:
-    explicit SkyInfoWrapper(QObject *parent = 0);
+	explicit StelWrapper(QObject *parent = 0);
 
 	//! Get a pointer on the info panel used to display selected object info
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags);
@@ -18,14 +18,16 @@ public:
 	/* Q_INVOKABLE methods (accessible from QML) */
 	Q_INVOKABLE QString getInfoText();
 	Q_INVOKABLE void toggleAllInfo();
+	Q_INVOKABLE double getCurrentFov();
 
 signals:
 
 public slots:
+	void setFov(qreal f);
 
 private:
 	StelObject::InfoStringGroup infoTextFilters;
 
 };
 
-#endif // SKYINFOWRAPPER_HPP
+#endif // INFOWRAPPER_HPP

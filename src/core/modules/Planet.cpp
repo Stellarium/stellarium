@@ -395,7 +395,6 @@ void Planet::computeTransMatrix(double jd)
   in this code if it tries to optimize it. This bug
   _may_ be fixed in the GCC included in newer versions
   of the NDK. */
-#pragma GCC push_options
 #pragma GCC optimize ("O0")
 #endif
 
@@ -422,7 +421,7 @@ void Planet::setRotEquatorialToVsop87(const Mat4d &m)
 }
 
 #ifdef ANDROID
-#pragma GCC pop_options
+#pragma GCC reset_options
 #endif
 
 

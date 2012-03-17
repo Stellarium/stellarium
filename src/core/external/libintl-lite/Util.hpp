@@ -160,8 +160,8 @@ static bool loadMoFileStringsToArray(FILE* moFile,
 		return false;
 	}
 
-	uint32_t firstStringOffset;
-	uint32_t lastStringOffset;
+	uint32_t firstStringOffset = 0;
+	uint32_t lastStringOffset = 0;
 	{
 		uint32_t currentStringLength;
 		uint32_t currentStringOffset;

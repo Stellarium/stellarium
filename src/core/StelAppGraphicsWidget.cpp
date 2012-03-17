@@ -229,35 +229,52 @@ void StelAppGraphicsWidget::initBuffers()
 	}
 }
 
-void StelAppGraphicsWidget::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+void StelAppGraphicsWidget::handleMouseMove(QPointF pos, Qt::MouseButtons buttons)
 {
 	// Apply distortion on the mouse position.
-	QPointF pos = event->scenePos();
 	distortPos(&pos);
 	pos.setY(scene()->height() - 1 - pos.y());
-	stelApp->handleMove(pos.x(), pos.y(), event->buttons());
+	stelApp->handleMove(pos.x(), pos.y(), buttons);
 }
 
-void StelAppGraphicsWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)
+void StelAppGraphicsWidget::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+	QPointF pos = event->scenePos();
+	handleMouseMove(pos, event->buttons());
+}
+
+void StelAppGraphicsWidget::handleMousePress(QPointF pos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers)
 {
 	// Apply distortion on the mouse position.
 	// Widget gets focus on clicked
 	setFocus();
-	QPointF pos = event->scenePos();
 	distortPos(&pos);
 	pos.setY(scene()->height() - 1 - pos.y());
-	QMouseEvent newEvent(QEvent::MouseButtonPress, QPoint(pos.x(),pos.y()), event->button(), event->buttons(), event->modifiers());
+	QMouseEvent newEvent(QEvent::MouseButtonPress, QPoint(pos.x(),pos.y()), button, buttons, modifiers);
+	stelApp->handleClick(&newEvent);
+}
+
+void StelAppGraphicsWidget::mousePressEvent(QGraphicsSceneMouseEvent* event)
+{
+	QPointF pos = event->scenePos();
+	handleMousePress(pos, event->button(), event->buttons(), event->modifiers());
+}
+
+void StelAppGraphicsWidget::handleMouseRelease(QPointF pos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers)
+{
+	// Apply distortion on the mouse position.
+	// Widget gets focus on clicked
+	setFocus();
+	distortPos(&pos);
+	pos.setY(scene()->height() - 1 - pos.y());
+	QMouseEvent newEvent(QEvent::MouseButtonRelease, QPoint(pos.x(),pos.y()), button, buttons, modifiers);
 	stelApp->handleClick(&newEvent);
 }
 
 void StelAppGraphicsWidget::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
-	// Apply distortion on the mouse position.
 	QPointF pos = event->scenePos();
-	distortPos(&pos);
-	pos.setY(scene()->height() - 1 - pos.y());
-	QMouseEvent newEvent(QEvent::MouseButtonRelease, QPoint(pos.x(),pos.y()), event->button(), event->buttons(), event->modifiers());
-	stelApp->handleClick(&newEvent);
+	handleMouseRelease(pos, event->button(), event->buttons(), event->modifiers());
 }
 
 void StelAppGraphicsWidget::wheelEvent(QGraphicsSceneWheelEvent* event)

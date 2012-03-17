@@ -50,7 +50,11 @@ public:
 
 	//! Set whether widget repaint are necessary.
 	void setDoPaint(bool b) {doPaint=b;}
-	
+
+	void handleMousePress(QPointF pos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers);
+	void handleMouseRelease(QPointF pos, Qt::MouseButton button, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers);
+	void handleMouseMove(QPointF pos, Qt::MouseButtons buttons);
+
 protected:
 	virtual void keyPressEvent(QKeyEvent* event);
 	virtual void keyReleaseEvent(QKeyEvent* event);

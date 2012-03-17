@@ -198,6 +198,15 @@ public slots:
 	void setDragTimeMode(bool b) {dragTimeMode=b;}
 	bool getDragTimeMode() const {return dragTimeMode;}
 
+	void setFov(double f)
+	{
+		currentFov = f;
+		if (f>maxFov)
+			currentFov = maxFov;
+		if (f<minFov)
+			currentFov = minFov;
+	}
+
 private slots:
 	//! Called when the selected object changes.
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
@@ -211,14 +220,6 @@ private:
 	double minFov;     // Minimum FOV in degree
 	double maxFov;     // Maximum FOV in degree
 
-	void setFov(double f)
-	{
-		currentFov = f;
-		if (f>maxFov)
-			currentFov = maxFov;
-		if (f<minFov)
-			currentFov = minFov;
-	}
 	void changeFov(double deltaFov);
 
 	void updateVisionVector(double deltaTime);

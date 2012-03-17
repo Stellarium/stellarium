@@ -336,7 +336,7 @@ Item {
 
 		Connections	{
 			target: baseGui
-			onUpdated: title.text = skyInfo.getInfoText()
+			onUpdated: title.text = stel.getInfoText()
 		}
 
 		Column {

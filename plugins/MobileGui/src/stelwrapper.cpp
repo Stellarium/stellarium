@@ -1,31 +1,34 @@
-#include "skyinfowrapper.hpp"
+#include "stelwrapper.hpp"
 
 #include "../../../src/core/StelModuleMgr.hpp"
 #include "../../../src/core/StelApp.hpp"
 #include "../../../src/core/StelObjectMgr.hpp"
+#include "../../../src/core/StelMovementMgr.hpp"
+#include "MobileGui.hpp"
 
-SkyInfoWrapper::SkyInfoWrapper(QObject *parent) :
+StelWrapper::StelWrapper(QObject *parent) :
     QObject(parent)
 {
 	infoTextFilters = StelObject::AllInfo;
 }
 
 //! Get a pointer on the info panel used to display selected object info
-void SkyInfoWrapper::setInfoTextFilters(const StelObject::InfoStringGroup& aflags)
+void StelWrapper::setInfoTextFilters(const StelObject::InfoStringGroup& aflags)
 {
 	infoTextFilters = aflags;
 }
 
-const StelObject::InfoStringGroup& SkyInfoWrapper::getInfoTextFilters() const
+const StelObject::InfoStringGroup& StelWrapper::getInfoTextFilters() const
 {
 	return infoTextFilters;
 }
 
-void SkyInfoWrapper::toggleAllInfo()
+void StelWrapper::toggleAllInfo()
 {
 	infoTextFilters = infoTextFilters == StelObject::AllInfo ? StelObject::ShortInfo : StelObject::AllInfo;
 }
-QString SkyInfoWrapper::getInfoText()
+
+QString StelWrapper::getInfoText()
 {
 	QList<StelObjectP> selected = GETSTELMODULE(StelObjectMgr)->getSelectedObject();
 	if(selected.isEmpty())
@@ -36,4 +39,14 @@ QString SkyInfoWrapper::getInfoText()
 	{
 		return selected[0]->getInfoString(StelApp::getInstance().getCore(), static_cast<StelObject::InfoStringGroup>(infoTextFilters));
 	}
+}
+
+double StelWrapper::getCurrentFov()
+{
+	return GETSTELMODULE(StelMovementMgr)->getCurrentFov();
+}
+
+void StelWrapper::setFov(qreal f)
+{
+	GETSTELMODULE(StelMovementMgr)->setFov(static_cast<double>(f));
 }

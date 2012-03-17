@@ -29,7 +29,7 @@ class QDeclarativeEngine;
 class QDeclarativeComponent;
 class QGraphicsObject;
 class SystemDisplayInfo;
-class SkyInfoWrapper;
+class StelWrapper;
 
 //! @class MobileGui
 //! Main class for the MobileGui, using QML/QDeclarative on top of the QGraphicsView
@@ -90,12 +90,15 @@ public slots:
 	//! Update the GUI
 	void updateGui();
 
+	void mousePress(int x, int y, int button, int buttons, int modifiers);
+	void mouseRelease(int x, int y, int button, int buttons, int modifiers);
+	void mouseMove(int x, int y, int button, int buttons, int modifiers);
+
 signals:
 	void updated(); //signal an update to the GUI
 
 
 protected:
-	class StelAppGraphicsWidget* stelAppGraphicsWidget;
 	//! Translate all texts to the new Locale.
 	void updateI18n();
 
@@ -105,8 +108,11 @@ private:
 	QDeclarativeComponent* component;
 	QGraphicsObject* rootObject;
 	SystemDisplayInfo * displayInfo; //worth keeping in memory?
-	SkyInfoWrapper * skyInfoWrapper;
+	StelWrapper * stelWrapper;
 	QSize guiSize;
+
+	void connectSignals();
+	void initActions();
 };
 
 //! Allow to load the GUI as a static plugin
