@@ -85,7 +85,6 @@ void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
 *************************************************************************/
 void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double& s)
 {
-	int n;
 	angle = std::fmod(angle,2.0*M_PI);
 	sign=true;
 	if (angle<0)
@@ -95,11 +94,26 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 	}
 	angle *= 180./M_PI;
 
-	n = (int)std::floor(std::fabs(3600 * angle) + 0.5);
-	s = n % 60;
-	n /= 60;
-	m = (unsigned int)(n % 60);
-	d = (unsigned int)(n / 60);
+	d = (unsigned int)angle;
+	m = (unsigned int)((angle - d)*60);
+	s = (angle-d)*3600-60*m;
+	// workaround for rounding numbers
+	if (s>59.9)
+	{
+		s = 0.;
+		if (sign)
+			m += 1;
+		else
+			m -= 1;
+	}
+	if (m==60)
+	{
+		m = 0.;
+		if (sign)
+			d += 1;
+		else
+			d -= 1;
+	}
 }
 
 /*************************************************************************
@@ -245,7 +259,13 @@ QString radToDmsStr(double angle, bool decimal, bool useD)
 		os << qSetRealNumberPrecision(0);
 		width = 2;
 	}
-	os << fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
+	os << fixed << qSetFieldWidth(width) << qSetPadChar('0');
+	if (s<=0.1)
+		os << QString("%1").arg(s, 0, 'f', 2);
+	else
+		os << s;
+
+	os << qSetFieldWidth(0) << '\"';
 
 	return str;
 }

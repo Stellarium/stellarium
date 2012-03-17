@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-03 23:33+0700\n"
-"PO-Revision-Date: 2012-01-29 02:49+0000\n"
+"POT-Creation-Date: 2012-03-15 17:25+0700\n"
+"PO-Revision-Date: 2012-03-15 00:22+0000\n"
 "Last-Translator: Worachate <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-04 05:04+0000\n"
-"X-Generator: Launchpad (build 14738)\n"
+"X-Launchpad-Export-Date: 2012-03-16 04:43+0000\n"
+"X-Generator: Launchpad (build 14951)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -39,25 +39,25 @@ msgstr "ขอบฟ้า"
 msgid "Galactic Plane"
 msgstr "ระนาบดาราจักร"
 
-#: src/core/modules/LandscapeMgr.cpp:486
+#: src/core/modules/LandscapeMgr.cpp:493
 msgid "Author: "
 msgstr "ผู้สร้าง: "
 
-#: src/core/modules/LandscapeMgr.cpp:489
+#: src/core/modules/LandscapeMgr.cpp:496
 msgid "Location: "
 msgstr "สถานที่: "
 
-#: src/core/modules/LandscapeMgr.cpp:494
+#: src/core/modules/LandscapeMgr.cpp:501
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 ม."
 
-#: src/core/modules/LandscapeMgr.cpp:498
+#: src/core/modules/LandscapeMgr.cpp:505
 msgid "Planet: "
 msgstr "ดาวเคราะห์: "
 
 #: src/core/modules/Nebula.cpp:96 plugins/Supernovae/src/Supernova.cpp:99
-#: plugins/Quasars/src/Quasar.cpp:92
+#: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:102
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "ชนิด: <b>%1</b>"
@@ -81,7 +81,7 @@ msgstr "ขนาด: %1"
 
 #: src/core/modules/Nebula.cpp:303
 msgid "Galaxy"
-msgstr "กาแล็กซี"
+msgstr "ดาราจักร"
 
 #: src/core/modules/Nebula.cpp:306
 msgid "Open cluster"
@@ -101,7 +101,7 @@ msgstr "เนบิวลาดาวเคราะห์"
 
 #: src/core/modules/Nebula.cpp:318
 msgid "Cluster associated with nebulosity"
-msgstr "กระจุกที่เกี่ยวข้องกับกลุ่มก๊าซ"
+msgstr "กระจุกที่เกี่ยวข้องกับกลุ่มแก๊ส"
 
 #: src/core/modules/Nebula.cpp:321
 msgid "Unknown"
@@ -125,7 +125,7 @@ msgstr "พิกัดสุริยวิถีศูนย์โลก (ข�
 #: src/core/modules/Planet.cpp:143
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr "ความเอียง (ของวัน): %1"
+msgstr "ความเอียงของสุริยวิถี (ของวัน): %1"
 
 #: src/core/modules/Planet.cpp:153
 #, no-c-format, qt-format
@@ -302,7 +302,7 @@ msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (
 #: src/core/StelObject.cpp:110
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr "มุมชั่วโมง/เดคลิเนชัน %1/%2"
+msgstr "มุมชั่วโมง/เดคลิเนชัน: %1/%2"
 
 #: src/core/StelObject.cpp:104 src/core/StelObject.cpp:123
 msgid "(geometric)"
@@ -318,46 +318,46 @@ msgstr "(ปรากฏ)"
 msgid "Az/Alt: %1/%2"
 msgstr "มุมทิศ/มุมเงย: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:313 src/gui/ConfigurationDialog.cpp:315
+#: src/gui/ConfigurationDialog.cpp:314 src/gui/ConfigurationDialog.cpp:316
 msgid "Select screenshot directory"
 msgstr "เลือกไดเร็กทอรีสำหรับเก็บภาพหน้าจอ"
 
-#: src/gui/ConfigurationDialog.cpp:488
+#: src/gui/ConfigurationDialog.cpp:492
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "พื้นที่การมองเห็นเริ่มต้น: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:496
+#: src/gui/ConfigurationDialog.cpp:500
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "ทิศทางการเริ่มต้นของการมองมุมทิศ/มุมเงย: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:535
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:254
+#: src/gui/ConfigurationDialog.cpp:539
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "ผู้สร้าง"
 
-#: src/gui/ConfigurationDialog.cpp:539 src/gui/ViewDialog.cpp:397
+#: src/gui/ConfigurationDialog.cpp:543 src/gui/ViewDialog.cpp:393
 msgid "Contact"
-msgstr "การติดต่อ"
+msgstr "ติดต่อ"
 
-#: src/gui/ConfigurationDialog.cpp:617
+#: src/gui/ConfigurationDialog.cpp:621
 msgid "Author"
 msgstr "ผู้สร้าง"
 
-#: src/gui/ConfigurationDialog.cpp:621
+#: src/gui/ConfigurationDialog.cpp:625
 msgid "License"
 msgstr "สัญญาอนุญาต"
 
-#: src/gui/ConfigurationDialog.cpp:650
+#: src/gui/ConfigurationDialog.cpp:655
 msgid "Running script: "
 msgstr "สคริปต์ที่กำลังดำเนินงานอยู่: "
 
-#: src/gui/ConfigurationDialog.cpp:657
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "Running script: [none]"
 msgstr "สคริปต์ที่กำลังดำเนินงานอยู่: [ไม่มี]"
 
-#: src/gui/ConfigurationDialog.cpp:727
+#: src/gui/ConfigurationDialog.cpp:732
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -365,16 +365,16 @@ msgstr ""
 "เสร็จสิ้นการดาวน์โหลดแค็ตตาล็อกดาวใหม่!\n"
 "เริ่ม Stellarium ใหม่เพื่อแสดง"
 
-#: src/gui/ConfigurationDialog.cpp:731
+#: src/gui/ConfigurationDialog.cpp:736
 msgid "All available star catalogs have been installed."
 msgstr "แค็ตตาล็อกดาวฤกษ์ที่มีอยู่ทั้งหมดได้รับการติดตั้งแล้ว"
 
-#: src/gui/ConfigurationDialog.cpp:736
+#: src/gui/ConfigurationDialog.cpp:741
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "รับวัตถุหรือดวงดาว %1 จาก %2"
 
-#: src/gui/ConfigurationDialog.cpp:743
+#: src/gui/ConfigurationDialog.cpp:748
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -383,7 +383,7 @@ msgstr ""
 "กำลังดาวน์โหลด %1...\n"
 "(คุณสามารถปิดหน้าต่างนี้ได้)"
 
-#: src/gui/ConfigurationDialog.cpp:750
+#: src/gui/ConfigurationDialog.cpp:755
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -394,7 +394,7 @@ msgstr ""
 "จำนวนดาว: %2 ล้านดวง\n"
 "พิสัยโชติมาตร: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:793 src/gui/ConfigurationDialog.cpp:829
+#: src/gui/ConfigurationDialog.cpp:798 src/gui/ConfigurationDialog.cpp:834
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -403,11 +403,11 @@ msgstr ""
 "เกิดข้อผิดพลาดในการดาวน์โหลด %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:881
+#: src/gui/ConfigurationDialog.cpp:886
 msgid "Verifying file integrity..."
 msgstr "กำลังทวนสอบบูรณภาพของแฟ้มข้อมูล..."
 
-#: src/gui/ConfigurationDialog.cpp:885
+#: src/gui/ConfigurationDialog.cpp:890
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -445,7 +445,7 @@ msgstr "คลิกขวา"
 msgid "CTRL + Left click"
 msgstr "CTRL และคลิกซ้าย"
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:166
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:168
 msgid "Movement and Selection"
 msgstr "การเคลื่อนไหวและการเลือก"
 
@@ -469,15 +469,15 @@ msgstr "ล้างการเลือก"
 msgid "When a Script is Running"
 msgstr "เมื่อสคริปต์กำลังทำงาน"
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:145
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:147
 msgid "Slow down the script execution rate"
 msgstr "ลดอัตราการประมวลผลสคริปต์"
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:146
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:148
 msgid "Speed up the script execution rate"
 msgstr "เพิ่มอัตราการประมวลผลสคริปต์"
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:147
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:149
 msgid "Set the normal script execution rate"
 msgstr "ตั้งอัตราการประมวลผลสคริปต์เป็นอัตราปกติ"
 
@@ -557,7 +557,7 @@ msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{กระทู้} - ถกปัญหากับผู้ใช้คนอื่น ๆ  เกี่ยวกับ Stellarium"
 
 #: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:337
-#: src/gui/HelpDialog.cpp:339 src/gui/StelGui.cpp:173
+#: src/gui/HelpDialog.cpp:339 src/gui/StelGui.cpp:175
 msgid "Miscellaneous"
 msgstr "จิปาถะ"
 
@@ -598,281 +598,285 @@ msgstr "นักพัฒนา OSX: %1"
 msgid "Tester: %1"
 msgstr "ผู้ทดสอบ: %1"
 
-#: src/gui/StelGui.cpp:100
+#: src/gui/StelGui.cpp:102
 msgid "Display Options"
 msgstr "ตัวเลือกการแสดงผล"
 
-#: src/gui/StelGui.cpp:101
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:267
+#: src/gui/StelGui.cpp:103
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Constellation lines"
 msgstr "เส้นกลุ่มดาว"
 
-#: src/gui/StelGui.cpp:102
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:277
+#: src/gui/StelGui.cpp:104
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:278
 msgid "Constellation art"
 msgstr "ภาพกลุ่มดาว"
 
-#: src/gui/StelGui.cpp:103
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:272
+#: src/gui/StelGui.cpp:105
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:273
 msgid "Constellation labels"
 msgstr "ชื่อกลุ่มดาว"
 
-#: src/gui/StelGui.cpp:104
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:278
+#: src/gui/StelGui.cpp:106
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Constellation boundaries"
 msgstr "ขอบเขตของกลุ่มดาว"
 
-#: src/gui/StelGui.cpp:106 src/ui_viewDialog.h:1121
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:314
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1121
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Azimuthal grid"
 msgstr "เส้นพิกัดภาคทิศ"
 
-#: src/gui/StelGui.cpp:107 src/ui_viewDialog.h:1119
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:319
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1119
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial grid"
 msgstr "กริดศูนย์สูตร"
 
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1120
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:324
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1120
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equatorial J2000 grid"
 msgstr "กริดศูนย์สูตร J2000"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1122
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:353
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1122
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Galactic grid"
 msgstr "กริดกาแล็กซี"
 
-#: src/gui/StelGui.cpp:110
+#: src/gui/StelGui.cpp:112
 msgid "Galactic plane"
 msgstr "ระนาบดาราจักร"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1126
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:334
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1126
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:335
 msgid "Ecliptic line"
 msgstr "เส้นสุริยวิถี"
 
-#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1123
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:329
+#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1123
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Equator line"
 msgstr "เส้นศูนย์สูตร"
 
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1124
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:309
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1124
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Meridian line"
 msgstr "เส้นเมริเดียน"
 
-#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1125
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:348
+#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1125
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Horizon line"
 msgstr "เส้นขอบฟ้า"
 
-#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1128
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
+#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1128
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Cardinal points"
 msgstr "ทิศทั้งสี่"
 
-#: src/gui/StelGui.cpp:117
+#: src/gui/StelGui.cpp:119
 msgid "Ground"
 msgstr "พื้น"
 
-#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1099
+#: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1099
 msgid "Atmosphere"
 msgstr "บรรยากาศ"
 
-#: src/gui/StelGui.cpp:119
+#: src/gui/StelGui.cpp:121
 msgid "Fog"
 msgstr "หมอก"
 
-#: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1108
+#: src/gui/StelGui.cpp:123 src/ui_viewDialog.h:1108
 msgid "Nebulas"
 msgstr "เนบิวลา"
 
-#: src/gui/StelGui.cpp:122
+#: src/gui/StelGui.cpp:124
 msgid "Nebulas background images"
 msgstr "ภาพเบื้องหลังของเนบิวลา"
 
-#: src/gui/StelGui.cpp:123 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:233
+#: src/gui/StelGui.cpp:125 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Stars"
 msgstr "ดาวฤกษ์"
 
-#: src/gui/StelGui.cpp:124
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:296
+#: src/gui/StelGui.cpp:126
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Planet labels"
 msgstr "ชื่อดาวเคราะห์"
 
-#: src/gui/StelGui.cpp:125
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:300
+#: src/gui/StelGui.cpp:127
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:301
 msgid "Planet orbits"
 msgstr "วงโคจรดาวเคราะห์"
 
-#: src/gui/StelGui.cpp:126
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:304
+#: src/gui/StelGui.cpp:128
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Planet trails"
 msgstr "รอยการเคลื่อนที่ของดาวเคราะห์"
 
-#: src/gui/StelGui.cpp:128
+#: src/gui/StelGui.cpp:130
 msgid "Night mode"
 msgstr "โหมดกลางคืน"
 
-#: src/gui/StelGui.cpp:129
+#: src/gui/StelGui.cpp:131
 msgid "Full-screen mode"
 msgstr "โหมดเต็มจอ"
 
-#: src/gui/StelGui.cpp:130
+#: src/gui/StelGui.cpp:132
 msgid "Flip scene horizontally"
 msgstr "กลับภาพในแนวนอน"
 
-#: src/gui/StelGui.cpp:131
+#: src/gui/StelGui.cpp:133
 msgid "Flip scene vertically"
 msgstr "กลับภาพในแนวตั้ง"
 
-#: src/gui/StelGui.cpp:133
+#: src/gui/StelGui.cpp:135
 msgid "Windows"
 msgstr "หน้าต่าง"
 
-#: src/gui/StelGui.cpp:134
+#: src/gui/StelGui.cpp:136
 msgid "Help window"
-msgstr "หน้าต่างช่วยเหลือ"
+msgstr "หน้าต่างวิธีใช้"
 
-#: src/gui/StelGui.cpp:135
+#: src/gui/StelGui.cpp:137
 msgid "Configuration window"
 msgstr "หน้าต่างการปรับแต่ง"
 
-#: src/gui/StelGui.cpp:136
+#: src/gui/StelGui.cpp:138
 msgid "Search window"
 msgstr "หน้าต่างการค้นหา"
 
-#: src/gui/StelGui.cpp:137
+#: src/gui/StelGui.cpp:139
 msgid "Sky and viewing options window"
 msgstr "หน้าต่างท้องฟ้าและการมองเห็น"
 
-#: src/gui/StelGui.cpp:138
+#: src/gui/StelGui.cpp:140
 msgid "Date/time window"
 msgstr "หน้าต่าง วัน/เวลา"
 
-#: src/gui/StelGui.cpp:139
+#: src/gui/StelGui.cpp:141
 msgid "Location window"
 msgstr "หน้าต่างที่ตั้ง"
 
-#: src/gui/StelGui.cpp:141
+#: src/gui/StelGui.cpp:143
 msgid "Script console window"
 msgstr "หน้าต่างรายการสคริปต์"
 
-#: src/gui/StelGui.cpp:144 src/ui_dateTimeDialogGui.h:294
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:160
+#: src/gui/StelGui.cpp:146 src/ui_dateTimeDialogGui.h:294
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Date and Time"
 msgstr "วันที่ และ เวลา"
 
-#: src/gui/StelGui.cpp:148
+#: src/gui/StelGui.cpp:150
 msgid "Decrease time speed"
 msgstr "เวลาถอยหลัง"
 
-#: src/gui/StelGui.cpp:149
+#: src/gui/StelGui.cpp:151
 msgid "Increase time speed"
 msgstr "เวลาเดินหน้า"
 
-#: src/gui/StelGui.cpp:150
+#: src/gui/StelGui.cpp:152
 msgid "Set normal time rate"
 msgstr "ปรับเวลาเดินตามปกติ"
 
-#: src/gui/StelGui.cpp:151
+#: src/gui/StelGui.cpp:153
 msgid "Decrease time speed (a little)"
 msgstr "เวลาถอยหลัง (เล็กน้อย)"
 
-#: src/gui/StelGui.cpp:152
+#: src/gui/StelGui.cpp:154
 msgid "Increase time speed (a little)"
 msgstr "เวลาเดินหน้า (เล็กน้อย)"
 
-#: src/gui/StelGui.cpp:153
+#: src/gui/StelGui.cpp:155
 msgid "Set time rate to zero"
 msgstr "ตั้งอัตราเวลาไปที่ศูนย์"
 
-#: src/gui/StelGui.cpp:154
+#: src/gui/StelGui.cpp:156
 msgid "Set time to now"
 msgstr "กลับสู่เวลาปัจจุบัน"
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:157
 msgid "Add 1 solar hour"
 msgstr "เพิ่ม ๑ ชั่วโมงสุริยะ"
 
-#: src/gui/StelGui.cpp:156
+#: src/gui/StelGui.cpp:158
 msgid "Subtract 1 solar hour"
 msgstr "ลบ ๑ ชั่วโมงสุริยะ"
 
-#: src/gui/StelGui.cpp:157
+#: src/gui/StelGui.cpp:159
 msgid "Add 1 solar day"
 msgstr "เพิ่ม ๑ วันสุริยะ"
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:160
 msgid "Subtract 1 solar day"
 msgstr "ลบ ๑ วันสุริยะ"
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:161
 msgid "Add 1 solar week"
 msgstr "เพิ่ม ๑ สัปดาห์สุริยะ"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:162
 msgid "Subtract 1 solar week"
 msgstr "ลบ ๑ สัปดาห์สุริยะ"
 
-#: src/gui/StelGui.cpp:161
+#: src/gui/StelGui.cpp:163
 msgid "Add 1 sidereal day"
 msgstr "เพิ่ม ๑ วันดาราคติ"
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:164
 msgid "Subtract 1 sidereal day"
 msgstr "ลบ ๑ วันดาราคติ"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:165
 msgid "Add 1 sidereal week"
 msgstr "เพิ่ม ๑ สัปดาห์ดาราคติ"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:166
 msgid "Subtract 1 sidereal week"
 msgstr "ลบ ๑ สัปดาห์ดาราคติ"
 
-#: src/gui/StelGui.cpp:167
+#: src/gui/StelGui.cpp:169
 msgid "Center on selected object"
 msgstr "ทำให้วัตถุที่เลือกมาอยู่กลางจอ"
 
-#: src/gui/StelGui.cpp:168
+#: src/gui/StelGui.cpp:170
 msgid "Track object"
 msgstr "ติดตามวัตถุ"
 
-#: src/gui/StelGui.cpp:169
+#: src/gui/StelGui.cpp:171
 msgid "Zoom in on selected object"
 msgstr "ขยายวัตถุที่เลือก"
 
-#: src/gui/StelGui.cpp:170
+#: src/gui/StelGui.cpp:172
 msgid "Zoom out"
 msgstr "ย่อ"
 
-#: src/gui/StelGui.cpp:171
+#: src/gui/StelGui.cpp:173
 msgid "Set home planet to selected planet"
 msgstr "กำหนดดาวเคราะห์ที่เลือกให้เป็นดาวเคราะห์บ้าน"
 
-#: src/gui/StelGui.cpp:174
+#: src/gui/StelGui.cpp:176
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "สลับระหว่างแนวเชิงศูนย์สูตรกับภาคทิศ"
 
-#: src/gui/StelGui.cpp:175
+#: src/gui/StelGui.cpp:177
 msgid "Quit"
 msgstr "ออก"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:178
 msgid "Save screenshot"
 msgstr "บันทึกภาพหน้าจอ"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:179
+msgid "Copy selected object information to clipboard"
+msgstr "คัดลอกข้อมูลของวัตถุที่เลือกไปยังคลิปบอร์ด"
+
+#: src/gui/StelGui.cpp:181
 msgid "Auto hide horizontal button bar"
 msgstr "ซ่อนแถบแนวนอนโดยอัตโนมัติ"
 
-#: src/gui/StelGui.cpp:184
+#: src/gui/StelGui.cpp:182
 msgid "Auto hide vertical button bar"
 msgstr "ซ่อนแถบแนวตั้งโดยอัตโนมัติ"
 
-#: src/gui/StelGui.cpp:185
+#: src/gui/StelGui.cpp:183
 msgid "Toggle visibility of GUI"
 msgstr "สลับการแสดงส่วนต่อประสานกราฟิกกับผู้ใช้"
 
@@ -881,27 +885,27 @@ msgstr "สลับการแสดงส่วนต่อประสาน
 msgid "%1m"
 msgstr "%1 ม."
 
-#: src/gui/ViewDialog.cpp:456
+#: src/gui/ViewDialog.cpp:454
 msgid "No description"
 msgstr "ไม่มีคำบรรยาย"
 
-#: src/gui/ViewDialog.cpp:540
+#: src/gui/ViewDialog.cpp:567
 msgid "No shooting stars"
 msgstr "ไม่มีดาวตก"
 
-#: src/gui/ViewDialog.cpp:543
+#: src/gui/ViewDialog.cpp:570
 msgid "Normal rate"
 msgstr "อัตราปกติ"
 
-#: src/gui/ViewDialog.cpp:546
+#: src/gui/ViewDialog.cpp:573
 msgid "Standard Perseids rate"
 msgstr "อัตราฝนดาวตกเพอร์ซิอัสมาตรฐาน"
 
-#: src/gui/ViewDialog.cpp:549
+#: src/gui/ViewDialog.cpp:576
 msgid "Exceptional Leonid rate"
 msgstr "อัตราฝนดาวตกสิงโตระดับสูง"
 
-#: src/gui/ViewDialog.cpp:552
+#: src/gui/ViewDialog.cpp:579
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "อัตราตกสูงสุดเท่าที่เคยมีมา (ฝนดาวตกสิงโต ค.ศ. ๑๙๖๖)"
 
@@ -985,9 +989,41 @@ msgstr "มีภูมิทัศน์ที่ใช้ชื่อเดี
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "คุณสามารถเอามันออกได้ด้วยมือ โดยลบไดเร็กทอรีต่อไปนี้: %1"
 
-#: src/main.cpp:336
+#: src/gui/ScriptConsole.cpp:73
+msgid "quickrun..."
+msgstr "ดำเนินงานอย่างรวดเร็ว..."
+
+#: src/gui/ScriptConsole.cpp:74
+msgid "selected text"
+msgstr "ข้อความที่เลือก"
+
+#: src/gui/ScriptConsole.cpp:75
+msgid "clear text"
+msgstr "ล้างข้อความ"
+
+#: src/gui/ScriptConsole.cpp:76
+msgid "clear images"
+msgstr "ล้างรูปภาพ"
+
+#: src/gui/ScriptConsole.cpp:77
+msgid "natural"
+msgstr "ธรรมชาติ"
+
+#: src/gui/ScriptConsole.cpp:78
+msgid "starchart"
+msgstr "แผนที่ดาว"
+
+#: src/gui/SearchDialog.cpp:503
+msgid "University of Strasbourg (France)"
+msgstr "มหาวิทยาลัยสทราซบูร์ (ฝรั่งเศส)"
+
+#: src/gui/SearchDialog.cpp:504
+msgid "Harvard University (USA)"
+msgstr "มหาวิทยาลัยฮาร์วาร์ด (สหรัฐอเมริกา)"
+
+#: src/main.cpp:337
 msgid "This system does not support OpenGL."
-msgstr "ระบบไม่สนับสนุน OpenGL"
+msgstr "ระบบนี้ไม่รองรับ OpenGL"
 
 #: src/translations.h:33
 msgid "Sun"
@@ -1057,7 +1093,7 @@ msgstr "แกนีมีด"
 
 #: src/translations.h:49
 msgid "Callisto"
-msgstr "คัสลิสโต"
+msgstr "คัลลิสโต"
 
 #: src/translations.h:50
 msgid "Amalthea"
@@ -1430,68 +1466,70 @@ msgstr "มหาสมุทร"
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:172
 msgid "Garching"
-msgstr ""
+msgstr "การ์ชิง"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
 msgid "Landscape Tour"
-msgstr ""
+msgstr "ท่องภูมิทัศน์"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
 msgid "Partial Lunar Eclipse"
-msgstr ""
+msgstr "จันทรุปราคาบางส่วน"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:184
 msgid "Total Lunar Eclipse"
-msgstr ""
+msgstr "จันทรุปราคาเต็มดวง"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
 msgid "Screensaver"
-msgstr ""
+msgstr "ภาพพักหน้าจอ"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:188
 msgid "Solar Eclipse 2009"
-msgstr ""
+msgstr "สุริยุปราคา ค.ศ. 2009"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:190
 msgid "Startup Script"
-msgstr ""
+msgstr "สคริปต์เริ่มต้น"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:192
 msgid "Zodiac"
-msgstr ""
+msgstr "จักรราศี"
 
 #: src/translations.h:195
 msgid "Look around each installed landscape."
-msgstr ""
+msgstr "ดูแต่ละภูมิทัศน์ที่ติดตั้งไว้"
 
 #: src/translations.h:196
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr ""
+msgstr "สคริปต์แสดงการเกิดจันทรุปราคาบางส่วน"
 
 #: src/translations.h:197
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr ""
+msgstr "สคริปต์แสดงการเกิดจันทรุปราคาเต็มดวง"
 
 #: src/translations.h:198
 msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr ""
+msgstr "ท่องไปทั่วท้องฟ้าอย่างช้า ๆ โดยการสุ่มหาวัตถุท้องฟ้า"
 
 #: src/translations.h:199
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
+"สคริปต์แสดงการเกิดสุริยุปราคาเต็มดวงที่เกิดขึ้นใน ค.ศ. 2009 (สถานที่=รังปุ, "
+"บังกลาเทศ)"
 
 #: src/translations.h:200
 msgid "Script which runs automatically at startup"
-msgstr ""
+msgstr "สคริปต์ที่ทำงานโดยอัตโนมัติเมื่อเริ่มโปรแกรม"
 
 #: src/translations.h:201
 msgid ""
@@ -1499,6 +1537,8 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
+"สคริปต์แสดงกลุ่มดาวจักรราศี "
+"ซึ่งเป็นกลุ่มดาวที่อยู่ในแนวที่ดวงอาทิตย์เคลื่อนผ่านบนทรงกลมฟ้าในรอบปี"
 
 #: src/translations.h:204
 msgid "Andorra"
@@ -2494,7 +2534,7 @@ msgid "Refresh"
 msgstr "เรียกใหม่"
 
 #: src/ui_locationDialogGui.h:387
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:133
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:134
 msgid "Location"
 msgstr "ตำแหน่งที่ตั้ง"
 
@@ -2517,7 +2557,7 @@ msgid "Add to list"
 msgstr "เพิ่มไปยังรายการ"
 
 #: src/ui_locationDialogGui.h:395
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:134
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:135
 msgid "Latitude:"
 msgstr "ละติจูด:"
 
@@ -2530,12 +2570,12 @@ msgstr ""
 "8s"
 
 #: src/ui_locationDialogGui.h:399
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:137
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:138
 msgid "Longitude:"
 msgstr "ลองจิจูด:"
 
 #: src/ui_locationDialogGui.h:403
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:140
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Altitude:"
 msgstr "ระดับความสูง:"
 
@@ -2559,133 +2599,141 @@ msgstr "ประเทศ:"
 msgid "Planet:"
 msgstr "ดาวเคราะห์:"
 
-#: src/ui_searchDialogGui.h:464
+#: src/ui_searchDialogGui.h:504
 msgid "Find Object"
 msgstr "ค้นหาวัตถุท้องฟ้า"
 
-#: src/ui_searchDialogGui.h:465
+#: src/ui_searchDialogGui.h:505
 msgid "Find Object or Position"
 msgstr "ค้นหาวัตถุหรือตำแหน่ง"
 
-#: src/ui_searchDialogGui.h:471
+#: src/ui_searchDialogGui.h:511
 msgid "iota"
 msgstr "ไอโอตา"
 
-#: src/ui_searchDialogGui.h:474
+#: src/ui_searchDialogGui.h:514
 msgid "alpha"
 msgstr "แอลฟา"
 
-#: src/ui_searchDialogGui.h:477
+#: src/ui_searchDialogGui.h:517
 msgid "beta"
 msgstr "บีตา"
 
-#: src/ui_searchDialogGui.h:480
+#: src/ui_searchDialogGui.h:520
 msgid "gamma"
 msgstr "แกมมา"
 
-#: src/ui_searchDialogGui.h:483
+#: src/ui_searchDialogGui.h:523
 msgid "delta"
 msgstr "เดลตา"
 
-#: src/ui_searchDialogGui.h:486
+#: src/ui_searchDialogGui.h:526
 msgid "epsilon"
 msgstr "เอปไซลอน"
 
-#: src/ui_searchDialogGui.h:489
+#: src/ui_searchDialogGui.h:529
 msgid "zeta"
 msgstr "ซีตา"
 
-#: src/ui_searchDialogGui.h:492
+#: src/ui_searchDialogGui.h:532
 msgid "eta"
 msgstr "อีตา"
 
-#: src/ui_searchDialogGui.h:495
+#: src/ui_searchDialogGui.h:535
 msgid "theta"
 msgstr "ทีตา"
 
-#: src/ui_searchDialogGui.h:498
+#: src/ui_searchDialogGui.h:538
 msgid "kappa"
 msgstr "แคปปา"
 
-#: src/ui_searchDialogGui.h:501
+#: src/ui_searchDialogGui.h:541
 msgid "lambda"
 msgstr "แลมบ์ดา"
 
-#: src/ui_searchDialogGui.h:504
+#: src/ui_searchDialogGui.h:544
 msgid "mu"
 msgstr "มิว"
 
-#: src/ui_searchDialogGui.h:507
+#: src/ui_searchDialogGui.h:547
 msgid "nu"
 msgstr "นิว"
 
-#: src/ui_searchDialogGui.h:510
+#: src/ui_searchDialogGui.h:550
 msgid "xi"
 msgstr "ไซ"
 
-#: src/ui_searchDialogGui.h:513
+#: src/ui_searchDialogGui.h:553
 msgid "omicron"
 msgstr "โอไมครอน"
 
-#: src/ui_searchDialogGui.h:516
+#: src/ui_searchDialogGui.h:556
 msgid "pi"
 msgstr "พาย"
 
-#: src/ui_searchDialogGui.h:519
+#: src/ui_searchDialogGui.h:559
 msgid "rho"
 msgstr "โร"
 
-#: src/ui_searchDialogGui.h:522
+#: src/ui_searchDialogGui.h:562
 msgid "sigma"
 msgstr "ซิกมา"
 
-#: src/ui_searchDialogGui.h:525
+#: src/ui_searchDialogGui.h:565
 msgid "tau"
 msgstr "เทา"
 
-#: src/ui_searchDialogGui.h:528
+#: src/ui_searchDialogGui.h:568
 msgid "upsilon"
 msgstr "อิปไซลอน"
 
-#: src/ui_searchDialogGui.h:531
+#: src/ui_searchDialogGui.h:571
 msgid "phi"
 msgstr "ฟาย"
 
-#: src/ui_searchDialogGui.h:534
+#: src/ui_searchDialogGui.h:574
 msgid "chi"
 msgstr "ไค"
 
-#: src/ui_searchDialogGui.h:537
+#: src/ui_searchDialogGui.h:577
 msgid "psi"
 msgstr "ซาย"
 
-#: src/ui_searchDialogGui.h:540
+#: src/ui_searchDialogGui.h:580
 msgid "omega"
 msgstr "โอเมกา"
 
-#: src/ui_searchDialogGui.h:542
+#: src/ui_searchDialogGui.h:582
 msgid "Greek letters for Bayer designations"
 msgstr "อักษรกรีกสำหรับระบบของเบเยอร์"
 
-#: src/ui_searchDialogGui.h:543
+#: src/ui_searchDialogGui.h:583
 msgid "Object"
 msgstr "วัตถุ"
 
-#: src/ui_searchDialogGui.h:544
+#: src/ui_searchDialogGui.h:584
 msgid "RA/Dec (J2000):"
 msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000):"
 
-#: src/ui_searchDialogGui.h:545
+#: src/ui_searchDialogGui.h:585
 msgid "Position"
 msgstr "ตำแหน่ง"
 
-#: src/ui_searchDialogGui.h:546
-msgid "Search also in the SIMBAD on-line astronomical database"
-msgstr "ค้นหาในฐานข้อมูลดาราศาสตร์ออนไลน์ SIMBAD ด้วย"
+#: src/ui_searchDialogGui.h:586
+msgid "On-line astronomical database SIMBAD"
+msgstr ""
 
-#: src/ui_searchDialogGui.h:547 src/ui_viewDialog.h:1137
+#: src/ui_searchDialogGui.h:587
+msgid "Extend search with SIMBAD"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:588
+msgid "Server:"
+msgstr "เซิร์ฟเวอร์:"
+
+#: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
-#: src/ui_configurationDialog.h:854 src/ui_configurationDialog.h:865
+#: src/ui_configurationDialog.h:855 src/ui_configurationDialog.h:866
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "ตัวเลือก"
@@ -2703,27 +2751,27 @@ msgid "Markings"
 msgstr "เครื่องหมาย"
 
 #: src/ui_viewDialog.h:1080
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:394
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Landscape"
 msgstr "ภูมิทัศน์"
 
 #: src/ui_viewDialog.h:1082
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:216
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:217
 msgid "Starlore"
 msgstr "ตำนานดาว"
 
 #: src/ui_viewDialog.h:1086
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:246
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:247
 msgid "Absolute scale:"
 msgstr "อัตราส่วนจริง:"
 
 #: src/ui_viewDialog.h:1087
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:240
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Relative scale:"
 msgstr "อัตราส่วนสัมพัทธ์"
 
 #: src/ui_viewDialog.h:1088
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:252
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Twinkle:"
 msgstr "กะพริบแสง:"
 
@@ -2764,7 +2812,7 @@ msgid "Show atmosphere"
 msgstr "แสดงบรรยากาศ"
 
 #: src/ui_viewDialog.h:1101
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:389
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Light pollution:"
 msgstr "มลพิษทางแสง:"
 
@@ -2817,7 +2865,7 @@ msgid "Celestial Sphere"
 msgstr "ทรงกลมท้องฟ้า"
 
 #: src/ui_viewDialog.h:1127
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:358
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Galactic plane line"
 msgstr "เส้นระนาบดาราจักร"
 
@@ -2843,7 +2891,7 @@ msgstr "แสดงภาพวาด"
 
 #. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1134
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:284
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Art brightness:"
 msgstr "ความสว่างของภาพกลุ่มดาว:"
 
@@ -2879,47 +2927,47 @@ msgstr "ใช้คุณลักษณะท้องฟ้านี้เป
 msgid "Visible"
 msgstr "มองเห็นได้"
 
-#: src/ui_configurationDialog.h:752
+#: src/ui_configurationDialog.h:753
 msgid "Configuration"
 msgstr "การตั้งค่า"
 
-#: src/ui_configurationDialog.h:754
+#: src/ui_configurationDialog.h:755
 msgid "Program language"
 msgstr "ภาษาของโปรแกรม"
 
-#: src/ui_configurationDialog.h:755
+#: src/ui_configurationDialog.h:756
 msgid "Selected object information"
 msgstr "ข้อมูลวัตถุที่เลือก"
 
-#: src/ui_configurationDialog.h:757
+#: src/ui_configurationDialog.h:758
 msgid "Display all information available"
 msgstr "แสดงข้อมูลทั้งหมด"
 
-#: src/ui_configurationDialog.h:759
+#: src/ui_configurationDialog.h:760
 msgid "All available"
 msgstr "ทั้งหมดที่มี"
 
-#: src/ui_configurationDialog.h:761
+#: src/ui_configurationDialog.h:762
 msgid "Display less information"
 msgstr "แสดงข้อมูลโดยสังเขป"
 
-#: src/ui_configurationDialog.h:763
+#: src/ui_configurationDialog.h:764
 msgid "Short"
 msgstr "สั้น"
 
-#: src/ui_configurationDialog.h:765
+#: src/ui_configurationDialog.h:766
 msgid "Display no information"
 msgstr "ไม่แสดงข้อมูล"
 
-#: src/ui_configurationDialog.h:767
+#: src/ui_configurationDialog.h:768
 msgid "None"
 msgstr "ไม่มี"
 
-#: src/ui_configurationDialog.h:768
+#: src/ui_configurationDialog.h:769
 msgid "Default options"
 msgstr "ตัวเลือกปริยาย"
 
-#: src/ui_configurationDialog.h:770
+#: src/ui_configurationDialog.h:771
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -2927,20 +2975,20 @@ msgstr ""
 "บันทึกการตั้งค่าที่คุณได้เปลี่ยนแปลงนี้ ให้เป็นแบบเดียวกันเมื่อเริ่ม "
 "Stellarium ในครั้งต่อไป"
 
-#: src/ui_configurationDialog.h:772
+#: src/ui_configurationDialog.h:773
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 msgid "Save settings"
 msgstr "บันทึกการตั้งค่าต่าง ๆ"
 
-#: src/ui_configurationDialog.h:774
+#: src/ui_configurationDialog.h:775
 msgid "Restore the default settings that came with Stellarium"
 msgstr "คืนค่าเดิมที่มาพร้อมกับ Stellarium"
 
-#: src/ui_configurationDialog.h:776
+#: src/ui_configurationDialog.h:777
 msgid "Restore defaults"
 msgstr "คืนค่าเริ่มต้นเดิม"
 
-#: src/ui_configurationDialog.h:777
+#: src/ui_configurationDialog.h:778
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -2950,94 +2998,94 @@ msgstr ""
 "บันทึกทุกตัวเลือกปัจจุบัน รวมทั้งพื้นที่การมองเห็น "
 "และทิศทางของมุมมองสำหรับใช้ในการเริ่มต้นถัดไป"
 
-#: src/ui_configurationDialog.h:779
+#: src/ui_configurationDialog.h:780
 msgid "The width of your view when Stellarium starts"
 msgstr "ความกว้างของมุมมองเมื่อเริ่มต้น Stellarium"
 
-#: src/ui_configurationDialog.h:782
+#: src/ui_configurationDialog.h:783
 msgid "The direction you're looking when Stellarium starts"
 msgstr "ทิศทางที่คุณต้องการเมื่อเริ่ม Stellarium"
 
-#: src/ui_configurationDialog.h:784
+#: src/ui_configurationDialog.h:785
 msgid "Control"
 msgstr "ควบคุม"
 
-#: src/ui_configurationDialog.h:786
+#: src/ui_configurationDialog.h:787
 msgid "Allow keyboard to pan and zoom"
 msgstr "ใช้แป้นพิมพ์เพื่อกวาดและซูม"
 
-#: src/ui_configurationDialog.h:788
+#: src/ui_configurationDialog.h:789
 msgid "Enable keyboard navigation"
 msgstr "เปิดใช้การนำทางผ่านแป้นพิมพ์"
 
-#: src/ui_configurationDialog.h:790
+#: src/ui_configurationDialog.h:791
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "ใช้เมาส์ในการกวาด (ลากเมาส์) และซูม (หมุนล้อของเมาส์)"
 
-#: src/ui_configurationDialog.h:792
-msgid "Enable mouse navigation"
-msgstr "เปิดใช้การนำทางโดยเมาส์"
-
 #: src/ui_configurationDialog.h:793
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:179
+msgid "Enable mouse navigation"
+msgstr "เปิดใช้การนำทางด้วยเมาส์"
+
+#: src/ui_configurationDialog.h:794
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Startup date and time"
 msgstr "วันและเวลาเริ่มต้น"
 
-#: src/ui_configurationDialog.h:795
+#: src/ui_configurationDialog.h:796
 msgid "Starts Stellarium at system clock date and time"
 msgstr "เริ่ม Stellarium ตามวันและเวลาของระบบ"
 
-#: src/ui_configurationDialog.h:797
+#: src/ui_configurationDialog.h:798
 msgid "System date and time"
 msgstr "ใช้วันที่และเวลาของระบบ"
 
-#: src/ui_configurationDialog.h:799
+#: src/ui_configurationDialog.h:800
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "ตั้งค่าเวลาของการจำลองเหตุการณ์หากวันที่ตรงกับการใช้งาน Stellarium"
 
-#: src/ui_configurationDialog.h:801
+#: src/ui_configurationDialog.h:802
 msgid "System date at:"
-msgstr "วันที่ระบบคือ:"
+msgstr "เวลาของระบบ:"
 
-#: src/ui_configurationDialog.h:803
+#: src/ui_configurationDialog.h:804
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "ใช้วันที่และเวลาที่เจาะจงเมื่อเริ่ม Stellarium"
 
-#: src/ui_configurationDialog.h:805
+#: src/ui_configurationDialog.h:806
 msgid "Other:"
 msgstr "อื่น ๆ :"
 
-#: src/ui_configurationDialog.h:806
+#: src/ui_configurationDialog.h:807
 msgid "use current"
 msgstr "ใช้ค่าขณะนี้"
 
-#: src/ui_configurationDialog.h:807
+#: src/ui_configurationDialog.h:808
 msgid "Other"
 msgstr "อื่น ๆ"
 
-#: src/ui_configurationDialog.h:809
+#: src/ui_configurationDialog.h:810
 msgid "Hides the mouse cursor when inactive"
 msgstr "ซ่อนตัวชี้เมาส์เมื่อไม่มีการใช้งาน"
 
-#: src/ui_configurationDialog.h:811
+#: src/ui_configurationDialog.h:812
 msgid "Mouse cursor timeout (seconds):"
 msgstr "เวลาปรากฎตัวชี้เมาส์ (วินาที):"
 
-#: src/ui_configurationDialog.h:813
+#: src/ui_configurationDialog.h:814
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "สลับปุ่มพลิกภาพแนวตั้งและแนวนอน"
 
-#: src/ui_configurationDialog.h:815
+#: src/ui_configurationDialog.h:816
 msgid "Show flip buttons"
 msgstr "แสดงปุ่มพลิก"
 
-#: src/ui_configurationDialog.h:816
+#: src/ui_configurationDialog.h:817
 msgid "Planetarium options"
 msgstr "ตัวเลือกท้องฟ้าจำลอง"
 
-#: src/ui_configurationDialog.h:818
+#: src/ui_configurationDialog.h:819
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -3045,19 +3093,19 @@ msgstr ""
 "ปรับภาพเป็นการสะท้อนผิวโค้งสำหรับการใช้ในการฉายภาพลงบนกระจกโค้งของระบบท้องฟ้า"
 "จำลองราคาประหยัด"
 
-#: src/ui_configurationDialog.h:820
+#: src/ui_configurationDialog.h:821
 msgid "Spheric mirror distortion"
 msgstr "ปรับภาพให้เหมือนสะท้อนกระจกโค้งทรงกลม"
 
-#: src/ui_configurationDialog.h:822
+#: src/ui_configurationDialog.h:823
 msgid "Align labels with the horizon"
 msgstr "วางป้ายอักษรให้อยู่ในแนวขนานกับขอบฟ้า"
 
-#: src/ui_configurationDialog.h:824
+#: src/ui_configurationDialog.h:825
 msgid "Gravity labels"
 msgstr "ป้ายแสดงความโน้มถ่วง"
 
-#: src/ui_configurationDialog.h:826
+#: src/ui_configurationDialog.h:827
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -3065,105 +3113,105 @@ msgstr ""
 "เมื่อกำหนดให้ทำงาน, ปุ่ม \"ย่อภาพอัตโนมัติ\" "
 "จะถูกกำหนดเป็นค่าเริ่มต้นในทิศทางการมอง"
 
-#: src/ui_configurationDialog.h:828
+#: src/ui_configurationDialog.h:829
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "ซูมออกอัตโนมัติเพื่อกลับไปยังทิศทางของมุมมองเริ่มต้น"
 
-#: src/ui_configurationDialog.h:830
+#: src/ui_configurationDialog.h:831
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "บังส่วนที่อยู่นอกมุมมองรูปวงกลม"
 
-#: src/ui_configurationDialog.h:832
+#: src/ui_configurationDialog.h:833
 msgid "Disc viewport"
 msgstr "มุมมองรูปวงกลม"
 
-#: src/ui_configurationDialog.h:834
+#: src/ui_configurationDialog.h:835
 msgid "Hide other constellations when you click one"
 msgstr "ซ่อนกลุ่มดาวอื่นเมื่อคลิกที่กลุ่มดาวกลุ่มหนึ่ง"
 
-#: src/ui_configurationDialog.h:836
+#: src/ui_configurationDialog.h:837
 msgid "Select single constellation"
 msgstr "เลือกกลุ่มดาวหนึ่ง"
 
-#: src/ui_configurationDialog.h:837
+#: src/ui_configurationDialog.h:838
 msgid "Screenshots"
 msgstr "ภาพหน้าจอ"
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:839
 msgid "Screenshot Directory"
-msgstr "ไดเรกทอรี่ภาพหน้าจอที่บันทึก"
+msgstr "ไดเร็กทอรีที่บันทึกภาพหน้าจอ"
 
-#: src/ui_configurationDialog.h:840
+#: src/ui_configurationDialog.h:841
 msgid "Invert colors"
 msgstr "กลับสี"
 
-#: src/ui_configurationDialog.h:841
+#: src/ui_configurationDialog.h:842
 msgid "Star catalog updates"
 msgstr "ปรับปรุงแค็ตตาล็อกดาว"
 
-#: src/ui_configurationDialog.h:843
+#: src/ui_configurationDialog.h:844
 msgid "Click here to start downloading"
 msgstr "คลิกที่นี่เพื่อเริ่มการดาวน์โหลด"
 
-#: src/ui_configurationDialog.h:845
+#: src/ui_configurationDialog.h:846
 msgid "Download this file to view even more stars"
 msgstr "ดาวน์โหลดแฟ้มนี้เพื่อเพิ่มจำนวนดาวให้มากขึ้น"
 
-#: src/ui_configurationDialog.h:847
+#: src/ui_configurationDialog.h:848
 msgid "Restart the download"
 msgstr "เริ่มต้นการดาวน์โหลดใหม่"
 
-#: src/ui_configurationDialog.h:849
+#: src/ui_configurationDialog.h:850
 msgid "Retry"
 msgstr "ลองซ้ำ"
 
-#: src/ui_configurationDialog.h:851
+#: src/ui_configurationDialog.h:852
 msgid "Stop the download. You can always restart it later"
 msgstr "หยุดการดาวน์โหลด คุณสามารถเริ่มต้นใหม่ได้ในภายหลัง"
 
-#: src/ui_configurationDialog.h:853
+#: src/ui_configurationDialog.h:854
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
 msgid "Cancel"
 msgstr "ยกเลิก"
 
-#: src/ui_configurationDialog.h:856
+#: src/ui_configurationDialog.h:857
 msgid "Close window when script runs"
 msgstr "ปิดหน้าต่างเมื่อสคริปต์ทำงาน"
 
-#: src/ui_configurationDialog.h:858
+#: src/ui_configurationDialog.h:859
 msgid "Run the selected script"
 msgstr "สั่งให้สคริปต์ที่เลือกไว้ทำงาน"
 
-#: src/ui_configurationDialog.h:862
+#: src/ui_configurationDialog.h:863
 msgid "Stop a running script"
 msgstr "หยุดสคริปต์ที่กำลังทำงานอยู่"
 
-#: src/ui_configurationDialog.h:866
+#: src/ui_configurationDialog.h:867
 msgid "Load at startup"
 msgstr "โหลดเมื่อเริ่มต้นระบบ"
 
-#: src/ui_configurationDialog.h:867
+#: src/ui_configurationDialog.h:868
 msgid "configure"
 msgstr "ปรับแต่ง"
 
-#: src/ui_configurationDialog.h:872
+#: src/ui_configurationDialog.h:873
 msgid "Main"
 msgstr "หลัก"
 
-#: src/ui_configurationDialog.h:874
+#: src/ui_configurationDialog.h:875
 msgid "Navigation"
 msgstr "นำทาง"
 
-#: src/ui_configurationDialog.h:876
+#: src/ui_configurationDialog.h:877
 msgid "Tools"
 msgstr "เครื่องมือ"
 
-#: src/ui_configurationDialog.h:878
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
+#: src/ui_configurationDialog.h:879
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:441
 msgid "Scripts"
 msgstr "สคริปต์"
 
-#: src/ui_configurationDialog.h:880
+#: src/ui_configurationDialog.h:881
 msgid "Plugins"
 msgstr "โปรแกรมเสริม"
 
@@ -3201,23 +3249,23 @@ msgstr ""
 "คำเตือน: การถอดถอนภูมิทัศน์ที่เลือกไว้คือการลบแฟ้มที่เกี่ยวข้อง "
 "โดยไม่สามารถย้อนกลับได้"
 
-#: src/ui_AtmosphereDialog.h:167
+#: src/ui_AtmosphereDialog.h:176
 msgid "Atmosphere Details"
 msgstr "สภาพบรรยากาศ"
 
-#: src/ui_AtmosphereDialog.h:169
+#: src/ui_AtmosphereDialog.h:178
 msgid "Refraction Settings"
 msgstr "การตั้งค่าการหักเหแสง"
 
-#: src/ui_AtmosphereDialog.h:170
+#: src/ui_AtmosphereDialog.h:179
 msgid "Pressure (mbar):"
 msgstr "ความกดอากาศ (มิลลิบาร์)"
 
-#: src/ui_AtmosphereDialog.h:171
+#: src/ui_AtmosphereDialog.h:180
 msgid "Temperature (C):"
 msgstr "อุณหภูมิ (องศาเซลเซียส)"
 
-#: src/ui_AtmosphereDialog.h:176
+#: src/ui_AtmosphereDialog.h:185
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
 "given in mag/airmass, where airmass is number of atmospheres light has to "
@@ -3228,17 +3276,73 @@ msgstr ""
 "คือปริมาณบรรยากาศที่แสงเดินทางผ่าน (จุดเหนือศีรษะมีค่าเท่ากับ 1; "
 "ขอบฟ้ามีค่าประมาณ 40)"
 
-#: src/ui_AtmosphereDialog.h:178
+#: src/ui_AtmosphereDialog.h:187
 msgid "Extinction Coefficient:"
 msgstr "สัมประสิทธิ์การสูญหาย:"
 
-#: src/ui_AtmosphereDialog.h:180
+#: src/ui_AtmosphereDialog.h:189
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
 "ใช้ค่าประมาณ 0.12 สำหรับทัศนวิสัยดีเลิศบนยอดเขา, 0.2 "
 "สำหรับทัศนวิสัยดีแบบในชนบท, 0.35 สำหรับทัศนวิสัยที่มืดมัว"
+
+#: src/ui_scriptConsole.h:341
+msgid "Script console"
+msgstr "ส่วนเฝ้าคุมสคริปต์"
+
+#: src/ui_scriptConsole.h:344
+msgid "load script from file"
+msgstr "โหลดสคริปต์จากแฟ้มข้อมูล"
+
+#: src/ui_scriptConsole.h:348
+msgid "save script to file"
+msgstr "บันทึกสคริปต์ลงในแฟ้มข้อมูล"
+
+#: src/ui_scriptConsole.h:352
+msgid "clear script"
+msgstr "ล้างสคริปต์"
+
+#: src/ui_scriptConsole.h:356
+msgid "pre-process script using SSC preprocessor"
+msgstr ""
+
+#: src/ui_scriptConsole.h:359
+msgid "pre-process script using STS preprocessor"
+msgstr ""
+
+#: src/ui_scriptConsole.h:362
+msgid "quickly load and run a utility script"
+msgstr "โหลดสคริปต์เครื่องมืออย่างรวดเร็วและให้สคริปต์ทำงาน"
+
+#: src/ui_scriptConsole.h:365
+msgid "run script"
+msgstr "ให้สคริปต์ดำเนินงาน"
+
+#: src/ui_scriptConsole.h:369
+msgid "stop script"
+msgstr "หยุดสคริปต์"
+
+#: src/ui_scriptConsole.h:372
+msgid "Script"
+msgstr "สคริปต์"
+
+#: src/ui_scriptConsole.h:373
+msgid "Output"
+msgstr "ส่วนนำออก"
+
+#: src/ui_scriptConsole.h:375
+msgid "Cursor position"
+msgstr "ตำแหน่งเคอร์เซอร์"
+
+#: src/ui_scriptConsole.h:377
+msgid "Include dir:"
+msgstr "รวมไดเร็กทอรี:"
+
+#: src/ui_scriptConsole.h:378
+msgid "..."
+msgstr "..."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -3290,6 +3394,9 @@ msgid ""
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
+"แสดงท้องฟ้าเมื่อมองผ่านเลนส์ใกล้ตาของกล้องโทรทรรศน์ "
+"(จำลองเฉพาะกำลังขยายและขอบเขตภาพ) นอกจากนี้ ยังสามารถแสดงเฟรมเซอเซอร์และวง "
+"Telrad ด้วย"
 
 #: plugins/Oculars/src/Oculars.cpp:757
 msgid "Please select an object before switching to ocular view."
@@ -3297,51 +3404,51 @@ msgstr "กรุณาเลือกวัตถุก่อนจะสลั
 
 #: plugins/Oculars/src/Oculars.cpp:836
 msgid "&Previous ocular"
-msgstr ""
+msgstr "เลนส์ใกล้ตา&ก่อนหน้า"
 
 #: plugins/Oculars/src/Oculars.cpp:837
 msgid "&Next ocular"
-msgstr ""
+msgstr "เลนส์ใกล้ตา&ถัดไป"
 
 #: plugins/Oculars/src/Oculars.cpp:838
 msgid "Select &ocular"
-msgstr ""
+msgstr "เลือกเ&ลนส์ใกล้ตา"
 
 #: plugins/Oculars/src/Oculars.cpp:883
 msgid "Toggle &crosshair"
-msgstr ""
+msgstr "สลับ&สายใยเล็ง"
 
 #: plugins/Oculars/src/Oculars.cpp:892
 msgid "Configure &Oculars"
-msgstr ""
+msgstr "&ปรับแต่งเลนส์ใกล้ตา"
 
 #: plugins/Oculars/src/Oculars.cpp:901
 msgid "Toggle &CCD"
-msgstr ""
+msgstr "สลับ&ซีซีดี"
 
 #: plugins/Oculars/src/Oculars.cpp:909
 msgid "Toggle &Telrad"
-msgstr ""
+msgstr "สลับ &Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:919
 msgid "&Previous CCD"
-msgstr ""
+msgstr "ซีซีดี&ก่อนหน้า"
 
 #: plugins/Oculars/src/Oculars.cpp:920
 msgid "&Next CCD"
-msgstr ""
+msgstr "ซีซีดี&ถัดไป"
 
 #: plugins/Oculars/src/Oculars.cpp:921
 msgid "&Select CCD"
-msgstr ""
+msgstr "เ&ลือกซีซีดี"
 
 #: plugins/Oculars/src/Oculars.cpp:943
 msgid "&Rotate CCD"
-msgstr ""
+msgstr "&หมุนซีซีดี"
 
 #: plugins/Oculars/src/Oculars.cpp:975
 msgid "&Reset rotation"
-msgstr ""
+msgstr "&ยกเลิกการหมุน"
 
 #: plugins/Oculars/src/Oculars.cpp:1201
 #: plugins/Oculars/src/ui_ocularDialog.h:864
@@ -3358,21 +3465,21 @@ msgstr "สายใยเล็ง"
 
 #: plugins/Oculars/src/Oculars.cpp:1241
 msgid "Image sensor frame"
-msgstr ""
+msgstr "เฟรมเซนเซอร์ภาพ"
 
 #: plugins/Oculars/src/Oculars.cpp:1249
 msgid "Telrad sight"
-msgstr ""
+msgstr "วง Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:1257
 msgid "Oculars plugin configuration"
-msgstr ""
+msgstr "การตั้งค่าโปรแกรมเสริมเลนส์ใกล้ตา"
 
 #: plugins/Oculars/src/Oculars.cpp:1445
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 #, qt-format
 msgid "Ocular #%1"
-msgstr ""
+msgstr "เลนส์ใกล้ตา #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1450
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
@@ -3422,7 +3529,7 @@ msgstr "ขอบเขตภาพ: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
 #, qt-format
 msgid "Dimensions: %1"
-msgstr ""
+msgstr "ขนาด: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1525
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
@@ -3442,11 +3549,11 @@ msgstr "&กล้องโทรทรรศน์"
 
 #: plugins/Oculars/src/Oculars.cpp:1737
 msgid "&Previous telescope"
-msgstr ""
+msgstr "กล้องโทรทรรศน์&ก่อนหน้า"
 
 #: plugins/Oculars/src/Oculars.cpp:1738
 msgid "&Next telescope"
-msgstr ""
+msgstr "กล้องโทรทรรศน์&ถัดไป"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
 msgid "Previous ocular"
@@ -3486,7 +3593,7 @@ msgstr "หมุนเฟรมเซนเซอร์ 1 องศา ทว�
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
-msgstr ""
+msgstr "ยกเลิกการเปลี่ยนแปลงการหมุนเฟรมเซนเซอร์"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
@@ -3535,7 +3642,7 @@ msgstr "เปิดใช้งานเฉพาะเมื่อเลือ
 
 #: plugins/Oculars/src/ui_ocularDialog.h:866
 msgid "Scale image circle"
-msgstr ""
+msgstr "วงกลมมาตราส่วนภาพ"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:867
 msgid "Key mappings"
@@ -3551,14 +3658,14 @@ msgstr "เปิดเมนูนำทางแบบผุดขึ้น:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Interface"
-msgstr ""
+msgstr "ส่วนติดต่อกับผู้ใช้"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:872
 msgid "On-screen control panel"
 msgstr "แผงควบคุมบนหน้าจอ"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:873
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:213
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:214
 msgid "General"
 msgstr "ทั่วไป"
 
@@ -3594,7 +3701,7 @@ msgstr "ความยาวโฟกัส:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "Field stop:"
-msgstr ""
+msgstr "ขั้นช่องจำกัดแสง"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 msgid "Binoculars"
@@ -3607,11 +3714,11 @@ msgstr "เซนเซอร์"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Resolution x (pixels):"
-msgstr ""
+msgstr "ความละเอียด x (จุดภาพ):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Resolution y (pixels):"
-msgstr ""
+msgstr "ความละเอียด y (จุดภาพ):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Chip width (mm):"
@@ -3676,87 +3783,96 @@ msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr "แฟ้ม satellites.json แฟ้มเก่าเข้ากันไม่ได้แล้ว กำลังใช้แฟ้มปริยาย"
 
+#: plugins/Satellites/src/Satellite.cpp:228
+#: plugins/Satellites/src/Satellite.cpp:232
+msgid "Catalog #"
+msgstr "หมายเลขในแค็ตตาล็อก"
+
+#: plugins/Satellites/src/Satellite.cpp:234
+msgid "International Designator"
+msgstr "ชื่อเรียกสากล"
+
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:238
+#: plugins/Satellites/src/Satellite.cpp:246
 #, qt-format
 msgid "Range (km): %1"
 msgstr "ระยะห่าง (กม.): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:241
+#: plugins/Satellites/src/Satellite.cpp:249
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "อัตราการเปลี่ยนระยะห่าง (กม./วินาที): %1"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:244
+#: plugins/Satellites/src/Satellite.cpp:252
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "ระดับความสูง (กม.): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:247
+#: plugins/Satellites/src/Satellite.cpp:255
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr "จุดใต้ดาวเทียม (ละติจูด/ลองจิจูด): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:261
+#: plugins/Satellites/src/Satellite.cpp:269
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "พิกัด TEME (กม.): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:269
+#: plugins/Satellites/src/Satellite.cpp:277
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "ความเร็ว TEME (กม./วินาที): %1"
 
-#: plugins/Satellites/src/Satellite.cpp:277
+#: plugins/Satellites/src/Satellite.cpp:285
 msgid "The satellite and the observer are in sunlight."
 msgstr "ดาวเทียมและผู้สังเกตอยู่ในแสงอาทิตย์"
 
-#: plugins/Satellites/src/Satellite.cpp:280
+#: plugins/Satellites/src/Satellite.cpp:288
 msgid "The satellite is visible."
 msgstr "สามารถเห็นดาวเทียมได้"
 
-#: plugins/Satellites/src/Satellite.cpp:283
+#: plugins/Satellites/src/Satellite.cpp:291
 msgid "The satellite is eclipsed."
 msgstr "ดาวเทียมอยู่ในเงามืด"
 
-#: plugins/Satellites/src/Satellite.cpp:286
+#: plugins/Satellites/src/Satellite.cpp:294
 msgid "The satellite is not visible"
 msgstr "ไม่สามารถเห็นดาวเทียมได้"
 
-#: plugins/Satellites/src/Satellite.cpp:312
+#: plugins/Satellites/src/Satellite.cpp:320
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:252
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:258
 msgid "Stellarium Satellites Plugin"
 msgstr "โปรแกรมเสริมดาวเทียม"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:253
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
 msgid "Version"
 msgstr "รุ่น"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:257
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:263
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr "โปรแกรมเสริมดาวเทียมใช้พยากรณ์ตำแหน่งของดาวเทียมในวงโคจรรอบโลก"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:265
 msgid "Notes for users"
 msgstr "หมายเหตุสำหรับผู้ใช้"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:266
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr "ดาวเทียมและวงโคจรของดาวเทียมจะแสดงเฉพาะเมื่อผู้สังเกตอยู่บนโลก"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:261
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:267
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
@@ -3765,7 +3881,7 @@ msgstr ""
 "ตำแหน่งที่พยากรณ์จะมีความแม่นยำในช่วงเวลาสั้น ๆ (อาจเป็นวัน สัปดาห์ "
 "หรือเดือนหนึ่ง ย้อนไปในอดีตหรืออนาคต) นอกกรอบเวลานี้ จะแสดงผลผิดพลาดได้"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:262
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:268
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
@@ -3775,7 +3891,7 @@ msgstr ""
 "เพื่อให้ได้ข้อมูลที่ถูกต้อง"
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:264
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:270
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -3785,7 +3901,7 @@ msgstr ""
 "คลิกปุ่ม \"%1\" ในแท็บ \"%2\" ของกล่องโต้ตอบนี้ จะย้อนไปใช้แฟ้ม %3 เริ่มต้น "
 "แฟ้มเก่าจะถูกสำรองเป็น %4 ซึ่งอยู่ในไดเร็กทอรีผู้ใช้ \"modules/Satellites/\""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:270
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:276
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
@@ -3794,11 +3910,11 @@ msgstr ""
 "หรืออาจเกิดความผิดพลาดได้"
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:274
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:280
 msgid "TLE data updates"
 msgstr "การอัปเดตข้อมูล TLE"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:275
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more "
@@ -3808,7 +3924,7 @@ msgstr ""
 "ค่าเริ่มต้นได้กำหนดให้ทำการอัปเดตเมื่อข้อมูลที่มีอยู่ล้าสมัยเกินกว่า 72 "
 "ชั่วโมง "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:276
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:282
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -3819,7 +3935,7 @@ msgstr ""
 "คุณอาจอัปเดตข้อมูลจากแฟ้มข้อมูลในคอมพิวเตอร์ของคุณ "
 "แฟ้มข้อมูลนี้ต้องมีรูปแบบเดียวกับเว็บไซต์ Celestrak (ดู %1)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:277
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:283
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
@@ -3828,25 +3944,27 @@ msgstr ""
 "หากท้ายชื่อดาวเทียมในข้อมูลที่ปรับปรุงใหม่มีอักขระภายในวงเล็บเหลี่ยม "
 "มันจะถูกลบออกก่อนที่ข้อมูลจะถูกนำไปใช้"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:280
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
 msgid "Adding new satellites"
 msgstr "เพิ่มดาวเทียมดวงใหม่"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
-#, qt-format
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
 msgid ""
-"At the moment you must manually edit the %1 file to add new satellites to "
-"the database. Making this easier is still on the TODO list..."
+"1. Make sure the satellite(s) you wish to add are included in one of the "
+"URLs listed in the Sources tab of the satellites configuration dialog. 2. Go "
+"to the Satellites tab, and click the '+' button.  Select the satellite(s) "
+"you wish to add and select the \"add\" button."
 msgstr ""
-"ตอนนี้หากต้องการเพิ่มดาวเทียมดวงใหม่ลงในฐานข้อมูล คุณต้องแก้ไขแฟ้ม %1 "
-"เองด้วยมือ ผู้พัฒนามีแผนจะทำให้มันง่ายขึ้น "
-"แต่ขณะนี้ยังอยู่ในรายการสิ่งที่จะทำ..."
+"1. โปรดแน่ใจว่าดาวเทียมที่คุณต้องการจะเพิ่มนั้น มีอยู่ใน URL "
+"อันใดอันหนึ่งของรายชื่อในแท็บแหล่งข้อมูล "
+"ซึ่งอยู่ในหน้าต่างการตั้งค่าดาวเทียม 2. ไปที่แท็บดาวเทียม แล้วคลิกปุ่ม '+' "
+"จากนั้น เลือกดาวเทียมที่คุณต้องการจะเพิ่ม แล้วคลิกปุ่ม \"เพิ่ม\""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:283
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
 msgstr "บันทึกทางเทคนิค"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:284
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
@@ -3854,7 +3972,7 @@ msgstr ""
 "ตำแหน่งดาวเทียมคำนวณด้วยวิธี SGP4 และ SDP4 โดยใช้ข้อมูลวงโคจร (TLE) จาก "
 "NORAD "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:285
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:291
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
@@ -3863,16 +3981,16 @@ msgstr ""
 "Report #3 ฉบับปรับปรุง (รวมถึง Spacetrack Report #6) "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:293
 #, qt-format
 msgid "See %1this document%2 for details."
 msgstr "ดู %1เอกสารนี้%2 สำหรับรายละเอียด"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
 msgid "Links"
 msgstr "ลิงก์"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:296
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
 "plugin\" in the subject when posting."
@@ -3881,19 +3999,19 @@ msgstr ""
 "\"Satellites plugin\" ไว้ในหัวข้อ"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:293
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:299
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "หากมีคำถาม คุณสามารถ%1ถามได้ที่นี่%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "รายงานข้อผิดพลาดได้%1ที่นี่%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:297
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:303
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -3901,68 +4019,72 @@ msgstr ""
 "หากต้องการให้โปรแกรมมีความสามารถอื่น ๆ เพิ่มเติม "
 "คุณสามารถร้องขอโดยสร้างรายงานข้อผิดพลาด แล้วตั้งค่าเป็น \"wishlist\""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:315
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
 msgid "Internet updates disabled"
 msgstr "การอัปเดตจากอินเทอร์เน็ตถูกปิดการใช้งาน"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:317
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:349
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:355
 msgid "Updating now..."
 msgstr "กำลังอัปเดต..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:319
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:325
 msgid "Next update: < 1 minute"
 msgstr "อัปเดตครั้งถัดไป: < 1 นาที"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "อัปเดตครั้งถัดไป: %1 นาที"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "อัปเดตครั้งถัดไป: %1 ชั่วโมง"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:338
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
 msgid "Update now"
 msgstr "อัปเดตเดี๋ยวนี้"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:340
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:346
 msgid "Update from files"
 msgstr "อัปเดตจากแฟ้มข้อมูล"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:352
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:358
 msgid "Update error"
 msgstr "มีข้อผิดพลาดในการอัปเดต"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:359
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:365
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
 msgstr "อัปเดตดาวเทียม %1/%2 ดวง; ไม่พบ %3 ดวง"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:416
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:422
 msgid "[new source]"
 msgstr "[แหล่งข้อมูลใหม่]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:457
-msgid "[all newly added]"
-msgstr ""
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
+msgid "[orbit calculation error]"
+msgstr "[เกิดความผิดพลาดในการคำนวณวงโคจร]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:458
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
+msgid "[all newly added]"
+msgstr "[เพิ่มเข้ามาใหม่ทั้งหมด]"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:463
 msgid "[all not displayed]"
 msgstr "[ไม่ได้แสดงข้อมูลทั้งหมด]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:459
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:464
 msgid "[all displayed]"
 msgstr "[แสดงข้อมูลทั้งหมด]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:460
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:465
 msgid "[all]"
 msgstr "[ทั้งหมด]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:572
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:597
 msgid "Select TLE Update File"
 msgstr "เลือกแฟ้มข้อมูล TLE ที่จะอัปเดต"
 
@@ -4007,7 +4129,7 @@ msgstr "อัปเดตรายชื่อ TLE จากแหล่งข�
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:644
 msgid "Update from Internet sources"
-msgstr "อัีปเดตจากแหล่งข้อมูลบนอินเทอร์เน็ต"
+msgstr "อัปเดตจากแหล่งข้อมูลบนอินเทอร์เน็ต"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
 msgid "Last update:"
@@ -4054,7 +4176,7 @@ msgstr "จำนวนเซกเมนต์ที่ใช้วาดแต
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:671
 msgid "Fade length:"
-msgstr ""
+msgstr "ความยาวของส่วนที่จางลง:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:672
 msgid "Restore default settings"
@@ -4142,7 +4264,7 @@ msgstr "แหล่งข้อมูล"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:206
 msgid "More Satellites"
-msgstr ""
+msgstr "ดาวเทียมดวงอื่น ๆ"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:208
 msgid "Get data from update sources"
@@ -4227,7 +4349,7 @@ msgstr "โปรแกรมเสริมควบคุมกล้องโ
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
 #, qt-format
 msgid "Version %1"
 msgstr "รุ่น %1"
@@ -4269,6 +4391,9 @@ msgid ""
 "control a telescope on its own, but it is still possible to do it through an "
 "external application or to connect to a remote host."
 msgstr ""
+"ไม่มีคำอธิบายสำหรับอุปกรณ์รุ่นนี้ Stellarium "
+"จะไม่สามารถควบคุมกล้องโทรทรรศน์ได้เอง แต่ทำได้โดยผ่านโปรแกรมประยุกต์ภายนอก "
+"หรือเชื่อมต่อผ่านเครื่องระยะไกล"
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
@@ -4279,17 +4404,17 @@ msgstr "กดปุ่ม \"%1\" เพื่อตั้งค่าการ�
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid "local, Stellarium"
-msgstr ""
+msgstr "ท้องถิ่น, Stellarium"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 msgid "local, external"
-msgstr ""
+msgstr "ท้องถิ่น, ภายนอก"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid "remote, unknown"
-msgstr ""
+msgstr "ระยะไกล, ไม่ทราบ"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
@@ -4303,7 +4428,7 @@ msgstr "เริ่มต้น"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:745
 msgid "Start the selected local telescope"
-msgstr ""
+msgstr "เริ่มกล้องโทรทรรศน์ท้องถิ่นที่เลือก"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:750
 msgid "Stop"
@@ -4311,7 +4436,7 @@ msgstr "หยุด"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:751
 msgid "Stop the selected local telescope"
-msgstr ""
+msgstr "หยุดกล้องโทรทรรศน์ท้องถิ่นที่เลือก"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:756
 msgid "Connect"
@@ -4331,7 +4456,7 @@ msgstr "ตัดการเชื่อมต่อกับกล้องโ
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:784
 msgid "Select a directory"
-msgstr "เลือกไดเรกทอรี"
+msgstr "เลือกไดเร็กทอรี"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:281
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
@@ -4353,11 +4478,11 @@ msgstr "หันกล้องโทรทรรศน์ไปที่พิ
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:286
 msgid "&Right Ascension (J2000):"
-msgstr ""
+msgstr "ไ&รต์แอสเซนชัน (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:287
 msgid "De&clination (J2000):"
-msgstr ""
+msgstr "เ&ดคลิเนชัน (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "Hours-minutes-seconds format"
@@ -4381,7 +4506,7 @@ msgstr "องศาในระบบทศนิยม"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "D&ecimal"
-msgstr ""
+msgstr "&ทศนิยม"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:300
 msgid "&Slew"
@@ -4389,31 +4514,35 @@ msgstr "&หัน"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Configure &telescopes..."
-msgstr ""
+msgstr "ปรับแต่ง&กล้องโทรทรรศน์..."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope Configuration"
-msgstr ""
+msgstr "การตั้งค่ากล้องโทรทรรศน์"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid "Telescope controlled by:"
-msgstr "ควบคุมกล้องโ๋ทรทรรศน์โดย:"
+msgstr "ควบคุมกล้องโทรทรรศน์โดย:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
+"กล้องโทรทรรศน์เชื่อมต่อกับคอมพิวเตอร์เครื่องนี้ผ่านพอร์ตอนุกรม "
+"และควบคุมโดยตรงด้วย Stellarium"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
 msgid "Stellarium, directly through a serial port"
-msgstr ""
+msgstr "Stellarium, ผ่านพอร์ตอนุกรมโดยตรง"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
+"กล้องโทรทรรศน์ถูกควบคุมโดยโปรแกรมประยุกต์ภายนอก "
+"อาจเป็นคอมพิวเตอร์เครื่องนี้หรือระยะไกล"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "External software or a remote computer"
@@ -4429,7 +4558,7 @@ msgstr "สมบัติของกล้องโทรทรรศน์"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid "Connection delay:"
-msgstr ""
+msgstr "เวลาหน่วงการเชื่อมต่อ:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:488
 msgid ""
@@ -4437,6 +4566,8 @@ msgid ""
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
+"เวลาคร่าว ๆ ที่สัญญาณจากกล้องโทรทรรศน์เดินทางถึง Stellarium\n"
+"เพิ่มค่านี้หากมีการกระโดดข้ามเส้นกรอบ"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Coordinate system:"
@@ -4468,7 +4599,7 @@ msgstr "การตั้งค่าอุปกรณ์"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Serial port:"
-msgstr ""
+msgstr "พอร์ตอนุกรม:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Device model:"
@@ -4480,20 +4611,22 @@ msgstr "ตั้งค่าการเชื่อมต่อ"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:502
 msgid "Host:"
-msgstr ""
+msgstr "โฮสต์:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:504
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr ""
+"ชื่อเครื่องโฮสต์หรือที่อยู่ IPv4 "
+"ของเครื่องที่ติดตั้งเซิร์ฟเวอร์ของกล้องโทรทรรศน์"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "TCP port:"
-msgstr ""
+msgstr "พอร์ต TCP:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "User interface settings"
-msgstr ""
+msgstr "การตั้งค่าส่วนต่อประสานกับผู้ใช้"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
 msgid "Show circles with fixed angular size around the telescope reticle"
@@ -4525,7 +4658,7 @@ msgstr "ปรับแต่งกล้องโทรทรรศน์ที
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Configure"
-msgstr ""
+msgstr "ปรับแต่ง"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Add a new telescope"
@@ -4537,7 +4670,7 @@ msgstr "ลบกล้องโทรทรรศน์ที่เลือก
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "GUI"
-msgstr ""
+msgstr "GUI"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Show telescope labels"
@@ -4565,7 +4698,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
 msgid "Executables directory:"
-msgstr ""
+msgstr "ไดเร็กทอรีที่ใช้ในการดำเนินการ:"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -4710,7 +4843,7 @@ msgstr "ชื่อเขตเวลาเมื่อใช้เวลาอ
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
 msgid "DST offset from UTC (hours):"
-msgstr ""
+msgstr "ผลต่างของเวลาออมแสงกับเวลาสากลเชิงพิกัด (ชั่วโมง):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
 msgid "Daylight saving time start"
@@ -4746,6 +4879,9 @@ msgid ""
 "This behaviour can be changed by changing Stellarium's global time zone "
 "settings."
 msgstr ""
+"โดยปริยาย เวลาที่แสดงใน Stellarium จะแปลงเป็นเวลาท้องถิ่นตามเขตเวลาของระบบ "
+"ไม่ใช่ตามเขตเวลาของสถานที่ที่แสดงในโปรแกรม "
+"คุณสามารถเปลี่ยนพฤติกรรมนี้ได้โดยการตั้งค่าเขตเวลาใน Stellarium"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "Use system settings (default)"
@@ -4757,7 +4893,7 @@ msgstr "เวลาสากลเชิงพิกัด (UTC)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "(offset = local time - UTC time)"
-msgstr ""
+msgstr "(เวลาผลต่าง = เวลาท้องถิ่น - เวลาสากลเชิงพิกัด)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
 msgid "User-defined:"
@@ -4778,7 +4914,7 @@ msgid ""
 msgstr "การตั้งค่าเหล่านี้จะควบคุมการแสดงวันที่และเวลาบนแถบด้านล่าง"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:198
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "Time display format"
 msgstr "รูปแบบการแสดงเวลา"
 
@@ -4796,7 +4932,7 @@ msgid "24-hour format"
 msgstr "รูปแบบ 24 ชั่วโมง"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:187
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:188
 msgid "Date display format"
 msgstr "รูปแบบการแสดงวันที่"
 
@@ -4820,142 +4956,142 @@ msgstr ""
 "ส่วนต่อประสานผู้ใช้แบบข้อความ (TUI) ซึ่งเป็นโปรแกรมเสริมสำหรับรุ่น 0.9.x "
 "นำมาใช้ในระบบท้องฟ้าจำลอง"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:148
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:149
 msgid "Solar System body"
 msgstr "วัตถุในระบบสุริยะ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:162
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:163
 msgid "Current date/time"
 msgstr "วัน/เวลา ปัจจุบัน"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:167
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:168
 msgid "Set time zone"
 msgstr "ตั้งค่าเขตเวลา"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:168
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:169
 msgid "Day keys"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:169
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:170
 msgid "Startup date/time preset"
-msgstr ""
+msgstr "ตั้งวัน/เวลาขณะเริ่มโปรแกรมไว้ล่วงหน้า"
 
 #. TRANSLATORS: The current system time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:176
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:177
 msgid "system"
 msgstr "ระบบ"
 
 #. TRANSLATORS: A pre-set time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:178
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:179
 msgid "preset"
 msgstr "ตั้งล่วงหน้า"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:186
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "mmddyyyy"
 msgstr "mmddyyyy"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:186
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "ddmmyyyy"
 msgstr "ddmmyyyy"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:186
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "yyyymmdd"
 msgstr "yyyymmdd"
 
 #. TRANSLATORS: 12-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:195
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:196
 msgid "12h"
 msgstr "12h"
 
 #. TRANSLATORS: 24-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:197
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:198
 msgid "24h"
 msgstr "24h"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:222
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:223
 msgid "Language"
 msgstr "ภาษา"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:236
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:237
 msgid "Show stars"
 msgstr "แสดงดาวฤกษ์"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:264
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:265
 msgid "Colors"
 msgstr "สี"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:340
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:341
 msgid "Nebula names"
 msgstr "ชื่อเนบิวลา"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:344
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:345
 msgid "Nebula hints"
 msgstr "เนบิวลา"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:387
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:388
 msgid "Effects"
 msgstr "เอฟเฟกต์"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:401
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Manual zoom"
 msgstr "ซูมด้วยมือ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:406
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:407
 msgid "Magnitude scaling multiplier"
 msgstr "ตัวคูณการปรับตามโชติมาตร"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:408
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:409
 msgid "Milky Way intensity:"
 msgstr "ความสว่างของทางช้างเผือก:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:414
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:415
 msgid "Nebula label frequency:"
 msgstr "ความถี่ของการแสดงชื่อเนบิวลา:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:415
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Zoom duration:"
 msgstr "ช่วงเวลาซูม:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:421
-msgid "Cursor timeout:"
-msgstr ""
-
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:422
+msgid "Cursor timeout:"
+msgstr "เวลาแสดงเคอร์เซอร์:"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:423
 msgid "Setting landscape sets location"
-msgstr ""
+msgstr "ตั้งค่าที่อยู่ของภูมิทัศน์"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:443
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:444
 msgid "Run local script"
-msgstr ""
+msgstr "เปิดใช้งานสคริปต์ภายใน"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:449
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:450
 msgid "Stop running script"
 msgstr "หยุดสคริปต์ที่กำลังทำงาน"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:452
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:453
 msgid "CD/DVD script"
 msgstr "สคริปต์จาก CD/DVD"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:464
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:461
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:465
 msgid "Administration"
-msgstr ""
+msgstr "ดูแลระบบ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:469
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:470
 msgid "Load default configuration"
 msgstr "โหลดการตั้งค่าปริยาย"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:470
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:471
 msgid "Save current configuration"
 msgstr "บันทึกการตั้งค่าปัจจุบัน"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:473
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:474
 msgid "Shut down"
 msgstr "ปิดโปรแกรม"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:504
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:524
 msgid "[no TUI node]"
-msgstr ""
+msgstr "[ไม่มีโหนด TUI]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
 msgid "On"
@@ -4968,7 +5104,7 @@ msgstr "ปิด"
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr ""
+msgstr "ผิดพลาด, ไม่รู้จักสี \"%1\""
 
 #: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
 msgid " [RETURN to activate]"
@@ -4992,18 +5128,18 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
 #, qt-format
 msgid "Query the MPC's %1:"
-msgstr ""
+msgstr "สืบค้นข้อมูลใน %1 ของ MPC:"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
 msgid "Only one result will be returned if the query is successful."
-msgstr ""
+msgstr "ผลการสืบค้นเพียงหนึ่งเดียวจะถูกแสดง หากการสืบค้นประสบความสำเร็จ"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
 msgstr ""
-"ดาวหางและดาวเคราะห์น้อยสามารถระบุได้ด้วยหมายเลข, ชื่อ (ในภาษาอังกฤษ) "
+"สามารถระบุดาวหางและดาวเคราะห์น้อยได้ด้วยหมายเลข, ชื่อในภาษาอังกฤษ "
 "หรือชื่อชั่วคราว"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
@@ -5019,12 +5155,12 @@ msgstr ""
 "ซึ่งก็คือดาวหางแฮลลีย์ แต่การค้นหา \"%5\" จะแสดงดาวเคราะห์น้อย %6"
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:87
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:88
 msgid "website"
 msgstr "เว็บไซต์"
 
 #. TRANSLATORS: IAU = International Astronomical Union
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:91
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:92
 #, qt-format
 msgid ""
 "You can import comet and asteroid data formatted in the export formats of "
@@ -5032,14 +5168,18 @@ msgid ""
 "objects, download such lists from the Internet or search the online Minor "
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
+"คุณสามารถนำเข้าข้อมูลดาวหางหรือดาวเคราะห์น้อยที่มีรูปแบบตามที่ได้นำออกจากศูนย"
+"์ดาวเคราะห์น้อยแห่งสหพันธ์ดาราศาสตร์สากล (%1) โดยนำเข้าแฟ้มที่มีรายชื่อวัตถุ "
+"ซึ่งรายชื่อดังกล่าวสามารถดาวน์โหลดได้จากอินเทอร์เน็ต หรือค้นหาจาก Minor "
+"Planet and Comet Ephemeris Service (MPES)"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:95
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 msgid "Solar System Editor plug-in"
 msgstr "โปรแกรมเสริมสำหรับการปรับแต่งระบบสุริยะ"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Import data"
-msgstr ""
+msgstr "นำเข้าข้อมูล"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
@@ -5079,11 +5219,11 @@ msgstr "ชื่อคั่นหน้า:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "A file containing a list of objects"
-msgstr ""
+msgstr "แฟ้มบรรจุรายชื่อวัตถุต่าง ๆ"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Get orbital elements"
-msgstr ""
+msgstr "รับองค์ประกอบวงโคจร"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Lists"
@@ -5106,6 +5246,11 @@ msgid ""
 "Solar System configuration.<br/>Note that adding a large number of objects "
 "may cause Stellarium to run slowly."
 msgstr ""
+"ทำเครื่องหมายวัตถุที่คุณต้องการนำเข้า <i>ตัวเอน</i> "
+"คือวัตถุที่ตรงกับชื่อของวัตถุที่เรียกใช้แล้ว <b>ตัวหนา</b> "
+"คือวัตถุที่ตรงกับชื่อของวัตถุที่มีอยู่ในการตั้งค่าระบบสุริยะของ "
+"Stellarium<br/>หมายเหตุ : การเพิ่มวัตถุจำนวนมาก อาจทำให้ Stellarium "
+"ทำงานช้าลง"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Overwrite existing objects"
@@ -5146,11 +5291,15 @@ msgid ""
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
 msgstr ""
+"โปรแกรมเสริมนี้ใช้แฟ้มการปรับแต่งระบบสุริยะแบบกำหนดเอง หากเกิดสิ่งผิดปกติ "
+"ซึ่งทำให้โปรแกรม Stellarium ปิดตัวลง หรือไม่ทำงาน "
+"คุณสามารถลบแฟ้มดังกล่าวออกจาก:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
+"คุณสามารถยกเลิกการเปลี่ยนแปลงทั้งหมด แล้วกลับไปใช้การปรับแต่งแบบปริยาย:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Reset to defaults"
@@ -5165,6 +5314,8 @@ msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
+"คุณสามารถสร้างแฟ้มสำรองของไฟล์การปรับแต่งระบบสุริยะแบบกำหนดเองไว้ในที่ที่ต้อง"
+"การ หรือแทนที่มันด้วยแฟ้มสำรองนั้น"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Copy the Solar System file..."
@@ -5176,7 +5327,7 @@ msgstr "แทนที่แฟ้มข้อมูลระบบสุริ
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Configuration file"
-msgstr ""
+msgstr "แฟ้มการปรับแต่ง"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Add new Solar System objects"
@@ -5212,12 +5363,12 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernova.cpp:99
 msgid "supernova"
-msgstr ""
+msgstr "ซูเปอร์โนวา"
 
 #: plugins/Supernovae/src/Supernova.cpp:115
 #, qt-format
 msgid "Type of supernova: %1"
-msgstr ""
+msgstr "ชนิดของซูเปอร์โนวา: %1"
 
 #: plugins/Quasars/src/Quasars.cpp:59
 msgid "Quasars"
@@ -5234,12 +5385,118 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasar.cpp:92
 msgid "quasar"
-msgstr ""
+msgstr "เควซาร์"
 
 #: plugins/Quasars/src/Quasar.cpp:134
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr "Z (การเลื่อนไปทางแดง): %1"
+
+#: plugins/Pulsars/src/Pulsars.cpp:59
+msgid "Pulsars"
+msgstr "พัลซาร์"
+
+#: plugins/Pulsars/src/Pulsars.cpp:62
+msgid ""
+"This plugin plots the position of various pulsars, with object information "
+"about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
+"1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
+msgstr ""
+"โปรแกรมเสริมสำหรับลงตำแหน่งพัลซาร์และข้อมูลของแต่ละพัลซาร์ ข้อมูลจาก "
+"'Catalog of Pulsars' (Taylor+ 1995).<br><br>หมายเหตุ: พัลซาร์ขึ้นต้นด้วย "
+"\"PSR\""
+
+#: plugins/Pulsars/src/Pulsar.cpp:102
+msgid "pulsar"
+msgstr "พัลซาร์"
+
+#: plugins/Pulsars/src/Pulsar.cpp:109
+#, qt-format
+msgid "Barycentric period: %1 s"
+msgstr "คาบศูนย์ระบบมวล: %1 วินาที"
+
+#: plugins/Pulsars/src/Pulsar.cpp:112
+#, qt-format
+msgid "Distance: %1 kpc (%2 ly)"
+msgstr "ระยะห่าง: %1 กิโลพาร์เซก (%2 ปีแสง)"
+
+#: plugins/Pulsars/src/Pulsar.cpp:116
+#, qt-format
+msgid "Type of pulsar: %1"
+msgstr "ชนิดของพัลซาร์: %1"
+
+#: plugins/Pulsars/src/Pulsar.cpp:120
+#, qt-format
+msgid "Equivalent width of the integrated pulse profile: %1 ms"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:124
+#, qt-format
+msgid "Profile width at 50% of peak: %1 ms"
+msgstr ""
+
+#. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
+#: plugins/Pulsars/src/Pulsar.cpp:130 plugins/Pulsars/src/Pulsar.cpp:142
+#: plugins/Pulsars/src/Pulsar.cpp:154
+msgid "Time averaged flux density at"
+msgstr "ความหนาแน่นฟลักซ์เฉลี่ยเวลาที่"
+
+#. TRANSLATORS: Unit of measurement of frequency
+#: plugins/Pulsars/src/Pulsar.cpp:133 plugins/Pulsars/src/Pulsar.cpp:145
+#: plugins/Pulsars/src/Pulsar.cpp:157
+msgid "MHz"
+msgstr "MHz"
+
+#. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
+#: plugins/Pulsars/src/Pulsar.cpp:136 plugins/Pulsars/src/Pulsar.cpp:148
+#: plugins/Pulsars/src/Pulsar.cpp:160
+msgid "mJy"
+msgstr "mJy"
+
+#. TRANSLATORS: Type of pulsar
+#: plugins/Pulsars/src/Pulsar.cpp:232
+msgid "globular cluster association"
+msgstr "ชุมนุมกระจุกดาวทรงกลม"
+
+#. TRANSLATORS: Type of pulsar
+#: plugins/Pulsars/src/Pulsar.cpp:238
+msgid "SNR association"
+msgstr "ชุมนุมซากซูเปอร์โนวา"
+
+#. TRANSLATORS: Type of pulsar
+#: plugins/Pulsars/src/Pulsar.cpp:244
+msgid "glitches in period"
+msgstr ""
+
+#. TRANSLATORS: Type of pulsar
+#: plugins/Pulsars/src/Pulsar.cpp:250
+msgid "binary or multiple pulsar"
+msgstr "พัลซาร์คู่หรือระบบหลายพัลซาร์"
+
+#. TRANSLATORS: Type of pulsar
+#: plugins/Pulsars/src/Pulsar.cpp:256
+msgid "millisecond pulsar"
+msgstr "พัลซาร์มิลลิวินาที"
+
+#. TRANSLATORS: Type of pulsar
+#: plugins/Pulsars/src/Pulsar.cpp:262
+msgid "recycled pulsar"
+msgstr ""
+
+#. TRANSLATORS: Type of pulsar
+#: plugins/Pulsars/src/Pulsar.cpp:268
+msgid "radio interpulse"
+msgstr "พัลซาร์แผ่คลื่นวิทยุระหว่างพัลส์"
+
+#. TRANSLATORS: Type of pulsar
+#: plugins/Pulsars/src/Pulsar.cpp:274
+msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
+msgstr "เชิงแสง, แผ่รังสีเอกซ์หรือรังสีแกมมาเป็นห้วง ๆ (พลังงานสูง)"
+
+#. TRANSLATORS: Type of pulsar
+#: plugins/Pulsars/src/Pulsar.cpp:280
+msgid "extragalactic (in MC) pulsar"
+msgstr "พัลซาร์นอกดาราจักรทางช้างเผือก (ในเมฆแมเจลแลน)"
 
 #~ msgid "Ecliptic Line"
 #~ msgstr "เส้นสุริยวิถี"
@@ -5468,3 +5725,6 @@ msgstr "Z (การเลื่อนไปทางแดง): %1"
 
 #~ msgid "Get catalog x of y"
 #~ msgstr "รับแค็ตตาล็อกดาว x จาก y"
+
+#~ msgid "Search also in the SIMBAD on-line astronomical database"
+#~ msgstr "ค้นหาในฐานข้อมูลดาราศาสตร์ออนไลน์ SIMBAD ด้วย"

@@ -24,6 +24,7 @@
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelTranslator.hpp"
 
 #include "StelObjectMgr.hpp"
 #include "StelUtils.hpp"
@@ -37,6 +38,7 @@
 #include <QStringList>
 #include <QTextEdit>
 #include <QLineEdit>
+#include <QComboBox>
 
 #include "SimbadSearcher.hpp"
 
@@ -115,6 +117,9 @@ void CompletionLabel::updateText()
 }
 
 // Start of members for class SearchDialog
+
+const char* SearchDialog::DEF_SIMBAD_URL = "http://simbad.u-strasbg.fr/";
+
 SearchDialog::SearchDialog() : simbadReply(NULL)
 {
 	ui = new Ui_searchDialogForm;
@@ -155,7 +160,8 @@ SearchDialog::SearchDialog() : simbadReply(NULL)
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-	useSimbad = conf->value("search/flag_search_online", true).toBool();
+	useSimbad = conf->value("search/flag_search_online", true).toBool();	
+	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
 }
 
 SearchDialog::~SearchDialog()
@@ -168,13 +174,14 @@ SearchDialog::~SearchDialog()
 	}
 }
 
-void SearchDialog::languageChanged()
+void SearchDialog::retranslate()
 {
 	if (dialog)
 	{
 		QString text(ui->lineEditSearchSkyObject->text());
 		ui->retranslateUi(dialog);
 		ui->lineEditSearchSkyObject->setText(text);
+		populateSimbadServerList();
 	}
 }
 
@@ -187,7 +194,7 @@ void SearchDialog::styleChanged()
 void SearchDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)),
 		this, SLOT(onSearchTextChanged(const QString&)));
@@ -232,6 +239,17 @@ void SearchDialog::createDialogContent()
 	connect(ui->checkBoxUseSimbad, SIGNAL(clicked(bool)),
 		this, SLOT(enableSimbadSearch(bool)));
 	ui->checkBoxUseSimbad->setChecked(useSimbad);
+
+	populateSimbadServerList();
+	int idx = ui->serverListComboBox->findData(simbadServerUrl, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use University of Strasbourg as default
+		idx = ui->serverListComboBox->findData(QVariant(DEF_SIMBAD_URL), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->serverListComboBox->setCurrentIndex(idx);
+	connect(ui->serverListComboBox, SIGNAL(currentIndexChanged(int)),
+	        this, SLOT(selectSimbadServer(int)));
 }
 
 void SearchDialog::setHasSelectedFlag()
@@ -245,7 +263,7 @@ void SearchDialog::enableSimbadSearch(bool enable)
 	
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-	conf->setValue("search/flag_search_online", useSimbad);
+	conf->setValue("search/flag_search_online", useSimbad);	
 }
 
 void SearchDialog::setVisible(bool v)
@@ -299,8 +317,9 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		ui->simbadStatusLabel->setText("");
 		ui->pushButtonGotoSearchSkyObject->setEnabled(false);
 	} else {
-		if (useSimbad) {
-			simbadReply = simbadSearcher->lookup(trimmedText, 3);
+		if (useSimbad)
+		{
+			simbadReply = simbadSearcher->lookup(simbadServerUrl, trimmedText, 3);
 			onSimbadStatusChanged();
 			connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
 		}
@@ -467,4 +486,38 @@ QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterNa
 	}
 
 	return potentialGreekLetterName;
+}
+
+void SearchDialog::populateSimbadServerList()
+{
+	Q_ASSERT(ui);
+	Q_ASSERT(ui->serverListComboBox);
+
+	QComboBox* servers = ui->serverListComboBox;
+	//Save the current selection to be restored later
+	servers->blockSignals(true);
+	int index = servers->currentIndex();
+	QVariant selectedUrl = servers->itemData(index);
+	servers->clear();
+	//For each server, display the localized description and store the URL as user data.
+	servers->addItem(q_("University of Strasbourg (France)"), DEF_SIMBAD_URL);
+	servers->addItem(q_("Harvard University (USA)"), "http://simbad.harvard.edu/");
+
+	//Restore the selection
+	index = servers->findData(selectedUrl, Qt::UserRole, Qt::MatchCaseSensitive);
+	servers->setCurrentIndex(index);
+	servers->model()->sort(0);
+	servers->blockSignals(false);
+}
+
+void SearchDialog::selectSimbadServer(int index)
+{
+	if (index < 0)
+		simbadServerUrl = DEF_SIMBAD_URL;
+	else
+		simbadServerUrl = ui->serverListComboBox->itemData(index).toString();
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	conf->setValue("search/simbad_server_url", simbadServerUrl);
 }

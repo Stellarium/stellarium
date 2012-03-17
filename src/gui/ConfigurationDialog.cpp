@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
+ * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,7 +72,7 @@ ConfigurationDialog::~ConfigurationDialog()
 	delete ui;
 }
 
-void ConfigurationDialog::languageChanged()
+void ConfigurationDialog::retranslate()
 {
 	if (dialog) {
 		ui->retranslateUi(dialog);
@@ -110,7 +111,7 @@ void ConfigurationDialog::createDialogContent()
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 
 	ui->setupUi(dialog);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	// Set the main tab activated by default
 	ui->configurationStackedWidget->setCurrentIndex(0);
@@ -135,7 +136,7 @@ void ConfigurationDialog::createDialogContent()
 	}
 	if (lt!=-1)
 		cb->setCurrentIndex(lt);
-	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(languageChanged(const QString&)));
+	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectLanguage(const QString&)));
 
 	connect(ui->getStarsButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
@@ -239,7 +240,7 @@ void ConfigurationDialog::createDialogContent()
 	updateConfigLabels();
 }
 
-void ConfigurationDialog::languageChanged(const QString& langName)
+void ConfigurationDialog::selectLanguage(const QString& langName)
 {
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
@@ -413,6 +414,9 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("landscape/flag_atmosphere", lmgr->getFlagAtmosphere());
 	conf->setValue("landscape/flag_fog", lmgr->getFlagFog());
 	conf->setValue("stars/init_bortle_scale", core->getSkyDrawer()->getBortleScale());
+        conf->setValue("landscape/atmospheric_extinction_coefficient", core->getSkyDrawer()->getExtinctionCoefficient());
+        conf->setValue("landscape/pressure_mbar", core->getSkyDrawer()->getAtmospherePressure());
+        conf->setValue("landscape/temperature_C", core->getSkyDrawer()->getAtmosphereTemperature());
 
 	// view dialog / starlore tab
 	StelApp::getInstance().getSkyCultureMgr().setDefaultSkyCultureID(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
@@ -619,9 +623,10 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 	if (!scriptMgr.getLicense(s).trimmed().isEmpty())
 	{
 		html += "<h3>" + q_("License") + ": " + scriptMgr.getLicense(s) + "</h3>";
-	}
+	}	
 	QString d = scriptMgr.getDescription(s).trimmed();
 	d.replace("\n", "<br />");
+	d.replace(QRegExp("\\s{2,}"), " ");
 	html += "<p>" + q_(d) + "</p>";
 	html += "</body></html>";	
 	ui->scriptInfoBrowser->setHtml(html);	

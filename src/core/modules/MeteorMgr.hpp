@@ -26,10 +26,14 @@
 class Meteor;
 
 //! @class MeteorMgr
-//! Simulates meteor showers.
+//! Simulates a meteor shower.
 class MeteorMgr : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(int ZHR
+		   READ getZHR
+		   WRITE setZHR
+		   NOTIFY zhrChanged)
 
 public:
 	//! Construct a MeteorMgr object.
@@ -71,6 +75,9 @@ public slots:
 	
 	//! Set the maximum velocity in km/s
 	void setMaxVelocity(int maxv);
+	
+signals:
+	void zhrChanged(int);
 	
 private:
 	std::vector<Meteor*> active;		// Vector containing all active meteors

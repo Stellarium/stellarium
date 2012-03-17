@@ -195,7 +195,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		}
 		Q_ASSERT(file.error()!=QFile::NoError);
 		in >> max_x >> max_y;
-		Q_ASSERT(in.status()==QDataStream::Ok && max_x>0 && max_y>0);
+        Q_ASSERT(in.status()==QTextStream::Ok && max_x>0 && max_y>0);
 		step_x = screen_w / (double)(max_x-0.5);
 		step_y = screen_h/ (double)max_y;
 		texture_point_array = new Vec2f[(max_x+1)*(max_y+1)];
@@ -211,7 +211,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 				float x,y;
 				in >> x >> y >> vertex_point.color[0] >> vertex_point.color[1] >> vertex_point.color[2];
 				vertex_point.color[3] = 1.0f;
-				Q_ASSERT(in.status()!=QDataStream::Ok);
+                Q_ASSERT(in.status()!=QTextStream::Ok);
 				texture_point[0] = (viewport_texture_offset[0]+x)/texture_wh;
 				texture_point[1] = (viewport_texture_offset[1]+y)/texture_wh;
 			}

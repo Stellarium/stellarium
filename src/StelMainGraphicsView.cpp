@@ -109,6 +109,10 @@ Q_IMPORT_PLUGIN(Supernovae)
 Q_IMPORT_PLUGIN(Quasars)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_PULSARS
+Q_IMPORT_PLUGIN(Pulsars)
+#endif
+
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
@@ -281,7 +285,13 @@ void StelMainGraphicsView::init(QSettings* conf)
 		startupScript = qApp->property("onetime_startup_script").toString();
 	else
 		startupScript = conf->value("scripts/startup_script", "startup.ssc").toString();
-	scriptMgr->runScript(startupScript);
+
+	// Use a queued slot call to start the script only once the main qApp event loop is running...
+	QMetaObject::invokeMethod(scriptMgr,
+				  "runScript",
+				  Qt::QueuedConnection,
+				  Q_ARG(QString, startupScript));
+
 #endif
 
 	QThread::currentThread()->setPriority(QThread::HighestPriority);

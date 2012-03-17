@@ -99,7 +99,9 @@ int link(const char *__name1, const char *__name2);
 
 int pipe(int *fd);
 
+#ifndef __MINGW64__
 pid_t fork(void);
+#endif
 
 pid_t setsid(void);
 
