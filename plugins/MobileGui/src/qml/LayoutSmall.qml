@@ -20,7 +20,7 @@ Item {
 
 	function logoWidth()
 	{
-		return Math.min(parent.width / 5, dpX(48))
+		return Math.min(parent.width / 5, dpX(56))
 	}
 
 	function searchFieldWidth()
