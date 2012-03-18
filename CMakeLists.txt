@@ -24,7 +24,7 @@ SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 ########### Main global variables ###########
 IF(NOT CMAKE_BUILD_TYPE)
-  SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Release RelWithDebInfo MinSizeRel." FORCE)
+  SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
 ENDIF()
 
 # Add gprof build options if necessary.  Note gmon.out will be created in working directory when Stellarium is executed
@@ -32,6 +32,12 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "GProf")
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs")
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs")
  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
+ENDIF()
+
+# Add valgrind build options if necessary
+IF(${CMAKE_BUILD_TYPE} MATCHES "Valgrind")
+ SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O0")
+ SET(CMAEK_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0")
 ENDIF()
 
 IF(NOT STELLARIUM_SPLASH)
