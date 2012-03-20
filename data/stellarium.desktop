@@ -8,19 +8,19 @@ Icon=stellarium
 X-Icon-path=/usr/share/icons/
 X-Window-Icon=stellarium
 
-X-Ayatana-Desktop-Shortcuts=Screen;Window
+Actions=Window;Fullscreen;Safemode
 
-[Window Group]
+[Desktop Action Window]
 Name=Open in window
 Exec=stellarium -f no
-TargetEnvironment=Unity
+OnlyShowIn=Unity
 
-[Fullscreen Group]
+[Desktop Action Fullscreen]
 Name=Open in fullscreen
 Exec=stellarium -f yes
-TargetEnvironment=Unity
+OnlyShowIn=Unity
 
-[Safemode Group]
+[Desktop Action Safemode]
 Name=Open in safe mode
 Exec=stellarium --safe-mode
-TargetEnvironment=Unity
+OnlyShowIn=Unity
