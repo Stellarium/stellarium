@@ -306,7 +306,7 @@ void HelpDialog::updateText(void)
 	newHtml += "<li>" + Qt::escape(q_("Tester: %1").arg(QString("Barry Gerdes"))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Tester: %1").arg(QString("Khalid AlAjaji"))) + "</li></ul>";
 	newHtml += "<h3>" + Qt::escape(q_("Past Developers")) + "</h3>";
-	newHtml += "<p>"  + Qt::escape(q_("Several people have made significant contributions but no longer active. Their work has made a big different to the project:")) + "</p><ul>";
+	newHtml += "<p>"  + Qt::escape(q_("Several people have made significant contributions, but are no longer active. Their work has made a big difference to the project:")) + "</p><ul>";
 	newHtml += "<li>" + Qt::escape(q_("Graphic/other designer: %1").arg(QString("Johan Meuris"))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Johannes Gajdosik"))) + "</li>";
 	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Rob Spearman"))) + "</li>";
