@@ -177,6 +177,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 
 	StelUtils::spheToRect(qRA, qDE, XYZ);
         mag = getVMagnitude(core, true);	
+	sd->preDrawPointSource(&painter);
 	
 	if (mag <= sd->getLimitMagnitude())
 	{
@@ -190,6 +191,8 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 			painter.drawText(XYZ, designation, 0, shift, shift, false);
 		}
 	}
+
+	sd->postDrawPointSource(&painter);
 }
 
 unsigned char Quasar::BvToColorIndex(float b_v)
