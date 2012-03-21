@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-20 18:20+0700\n"
+"POT-Creation-Date: 2012-03-21 19:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -135,7 +135,12 @@ msgstr ""
 msgid "Distance: %1AU"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:166
+#: src/core/modules/Planet.cpp:171
+#, qt-format
+msgid "Apparent diameter: %1, with rings: %2"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:176
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr ""
