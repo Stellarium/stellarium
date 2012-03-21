@@ -126,6 +126,7 @@ public:
 	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
 	virtual QString getEnglishName(void) const {return englishName;}
 	virtual QString getNameI18n(void) const {return nameI18;}
+	// Get the angular size of the spheroid of the planet (i.e. without the rings)
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
 
@@ -162,8 +163,6 @@ public:
 
 	// Get the phase angle for an observer at pos obsPos in the heliocentric coordinate (in AU)
 	double getPhase(const Vec3d& obsPos) const;
-	// Get the angular size of the spheroid of the planet (i.e. without the rings)
-	double getSpheroidAngularSize(const StelCore* core) const;
 
 	// Set the orbital elements
 	void setRotationElements(float _period, float _offset, double _epoch,
