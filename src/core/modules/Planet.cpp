@@ -163,7 +163,18 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	}
 
 	if (flags&Size)
-		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(2.*getAngularSize(core)*M_PI/180., true));
+	{
+		double angularSize = 2.*getAngularSize(core)*M_PI/180.;
+		if (rings)
+		{
+			double withoutRings = 2.*getSpheroidAngularSize(core)*M_PI/180.;
+			oss << q_("Apparent diameter: %1, with rings: %2")
+			       .arg(StelUtils::radToDmsStr(withoutRings, true),
+			            StelUtils::radToDmsStr(angularSize, true));
+		}
+		else
+			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
+	}
 
 	postProcessInfoString(str, flags);
 
@@ -659,6 +670,15 @@ float Planet::getVMagnitude(const StelCore* core, bool withExtinction) const
 
 double Planet::getAngularSize(const StelCore* core) const
 {
+	double rad = radius;
+	if (rings)
+		rad = rings->getSize();
+	return std::atan2(rad*sphereScale,getJ2000EquatorialPos(core).length()) * 180./M_PI;
+}
+
+
+double Planet::getSpheroidAngularSize(const StelCore* core) const
+{
 	return std::atan2(radius*sphereScale,getJ2000EquatorialPos(core).length()) * 180./M_PI;
 }
 
@@ -815,7 +835,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	// Draw the halo
 
 	// Prepare openGL lighting parameters according to luminance
-	float surfArcMin2 = getAngularSize(core)*60;
+	float surfArcMin2 = getSpheroidAngularSize(core)*60;
 	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI; // the total illuminated area in arcmin^2
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
