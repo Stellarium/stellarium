@@ -14,6 +14,8 @@ Item {
 	property string action: ""
 	property string labelText: "test"
 	property string imageSource: ""
+	property string enabledImageSource: ""
+	property string disabledImageSource: ""
 
 	property real bgOpacity: 0.3
 
@@ -60,13 +62,20 @@ Item {
 	}
 
 	onActionChanged : {
+		clicked.connect(baseGui.getGuiActions(action).toggle());
 		clicked.connect(baseGui.getGuiActions(action).trigger());
-		baseGui.getGuiActions(action).onTriggered.connect(doSomething);
-	}
 
-	function doSomething()
-	{
-		color = "red";
+		if(baseGui.getGuiActions(action).checkable)
+		{
+			if(baseGui.getGuiActions(action).checked)
+			{
+				label.color = "red";
+			}
+			else
+			{
+				label.color = "blue";
+			}
+		}
 	}
 
 	function processClick()
@@ -85,7 +94,21 @@ Item {
 	Connections
 	{
 		target: baseGui.getGuiActions(action)
-		onTriggered: color = "green";
+		onToggled: {
+			console.log(label.text + " - we've been " + baseGui.getGuiActions(action).checked);
+			if(baseGui.getGuiActions(action).checked)
+			{
+				label.color = "red";
+			}
+			else
+			{
+				label.color = "blue";
+			}
+		}
+
+		onTriggered: {
+			console.log("we've been triggered without a checkable");
+		}
 	}
 
 	MouseArea {

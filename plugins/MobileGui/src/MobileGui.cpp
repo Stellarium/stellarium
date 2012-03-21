@@ -209,6 +209,14 @@ void MobileGui::updateGui()
 		rootObject->setProperty("width",guiSize.width());
 		rootObject->setProperty("height",guiSize.height());
 	}
+
+	StelCore* core = StelApp::getInstance().getCore();
+
+	getGuiActions("actionDecrease_Time_Speed")->setChecked(core->getTimeRate()<-0.99*StelCore::JD_SECOND);
+	getGuiActions("actionIncrease_Time_Speed")->setChecked(core->getTimeRate()>1.01*StelCore::JD_SECOND);
+	getGuiActions("actionSet_Real_Time_Speed")->setChecked(core->getRealTimeSpeed());
+	getGuiActions("actionReturn_To_Current_Time")->setChecked(core->getIsTimeNow());
+
 	updated(); //signal the QML-side to update itself
 }
 
@@ -250,13 +258,16 @@ void MobileGui::connectSignals()
 	QObject::connect(getGuiActions("actionDecrease_Time_Speed"), SIGNAL(triggered()), core, SLOT(decreaseTimeSpeed()));
 	QObject::connect(getGuiActions("actionSet_Real_Time_Speed"), SIGNAL(triggered()), core, SLOT(toggleRealTimeSpeed()));
 	QObject::connect(getGuiActions("actionReturn_To_Current_Time"), SIGNAL(triggered()), core, SLOT(setTimeNow()));
+	getGuiActions("actionReturn_To_Current_Time")->trigger(); //HACK: why is the app starting a few seconds behind real time?
 }
 
 void MobileGui::initActions()
 {
+	StelCore* core = StelApp::getInstance().getCore();
+
 	QString group = N_("Date and Time");
-	addGuiActions("actionDecrease_Time_Speed", N_("Decrease time speed"), "J", group, false, false);
-	addGuiActions("actionIncrease_Time_Speed", N_("Increase time speed"), "L", group, false, false);
-	addGuiActions("actionSet_Real_Time_Speed", N_("Set normal time rate"), "K", group, false, false);
-	addGuiActions("actionReturn_To_Current_Time", N_("Set time to now"), "8", group, false, false);
+	addGuiActions("actionDecrease_Time_Speed", N_("Decrease time speed"), "J", group, true, false)->setChecked(core->getTimeRate()<-0.99*StelCore::JD_SECOND);
+	addGuiActions("actionIncrease_Time_Speed", N_("Increase time speed"), "L", group, true, false)->setChecked(core->getTimeRate()>1.01*StelCore::JD_SECOND);
+	addGuiActions("actionSet_Real_Time_Speed", N_("Set normal time rate"), "K", group, true, false)->setChecked(core->getRealTimeSpeed());
+	addGuiActions("actionReturn_To_Current_Time", N_("Set time to now"), "8", group, true, false)->setChecked(core->getIsTimeNow());
 }
