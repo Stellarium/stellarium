@@ -166,7 +166,7 @@ Item {
 					anchors.bottom: parent.bottom
 					width: stretchButtonWidth()
 					labelText: "Play"
-					onPressed: {buttonBar.state = "SHOWN"; fadeTimer.stop(); buttonRows.state = "PLAYBACK"}
+					onPressed: {buttonBar.state = "SHOWN"; fadeTimer.stop()}
 					onClicked: buttonRows.state = "PLAYBACK"
 					onReleased: fadeTimer.restart();
 				}
@@ -208,6 +208,7 @@ Item {
 					labelText: "RW"
 					onPressed: {buttonBar.state = "SHOWN"; fadeTimer.stop()}
 					onReleased: fadeTimer.restart();
+					action: "actionDecrease_Time_Speed"
 				}
 				Button {
 					anchors.top: parent.top
@@ -216,6 +217,7 @@ Item {
 					labelText: "Play"
 					onPressed: {buttonBar.state = "SHOWN"; fadeTimer.stop()}
 					onReleased: fadeTimer.restart();
+					action: "actionSet_Real_Time_Speed"
 				}
 				Button {
 					anchors.top: parent.top
@@ -224,6 +226,7 @@ Item {
 					labelText: "Now"
 					onPressed: {buttonBar.state = "SHOWN"; fadeTimer.stop()}
 					onReleased: fadeTimer.restart();
+					action: "actionReturn_To_Current_Time"
 				}
 				Button {
 					anchors.top: parent.top
@@ -232,6 +235,7 @@ Item {
 					labelText: "FF"
 					onPressed: {buttonBar.state = "SHOWN"; fadeTimer.stop()}
 					onReleased: fadeTimer.restart();
+					action: "actionIncrease_Time_Speed"
 				}
 			}
 

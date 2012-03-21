@@ -73,7 +73,7 @@ Item {
 	{
 		if(action != "")
 		{
-			//baseGui.getGuiActions(action).trigger();
+			baseGui.getGuiActions(action).trigger();
 		}
 		clicked();
 
@@ -82,11 +82,11 @@ Item {
 		highlightFadeOut.start();
 	}
 
-	/*Connections
+	Connections
 	{
 		target: baseGui.getGuiActions(action)
-		onTriggered: color = red
-	}*/
+		onTriggered: color = "green";
+	}
 
 	MouseArea {
 		anchors.fill: parent

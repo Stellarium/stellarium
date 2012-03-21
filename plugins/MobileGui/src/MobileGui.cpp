@@ -43,6 +43,8 @@
 #include "../../../src/core/StelApp.hpp"
 #include "../../../src/core/StelMovementMgr.hpp"
 #include "../../../src/core/StelAppGraphicsWidget.hpp"
+#include "../../../src/core/StelTranslator.hpp"
+#include "../../../src/core/StelCore.hpp"
 
 StelGuiBase* StelMobileGuiPluginInterface::getStelGuiBase() const
 {
@@ -87,6 +89,7 @@ void MobileGui::init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraph
 	engine->rootContext()->setContextProperty("stel", stelWrapper);
 	engine->rootContext()->setContextProperty("baseGui", this);
 
+	initActions();
 
 	component = new QDeclarativeComponent(engine, QUrl("qrc:/qml/MobileGui.qml"));
 
@@ -111,7 +114,6 @@ void MobileGui::init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraph
 	}
 
 	connectSignals();
-	initActions();
 }
 
 //! Get a pointer on the info panel used to display selected object info
@@ -236,14 +238,25 @@ void MobileGui::mouseMove(int x, int y, int button, int buttons, int modifiers)
 
 void MobileGui::connectSignals()
 {
+	StelCore* core = StelApp::getInstance().getCore();
+
 	QObject::connect(rootObject, SIGNAL(fovChanged(qreal)), stelWrapper, SLOT(setFov(qreal)));
 
 	QObject::connect(rootObject, SIGNAL(mousePressed(int, int, int, int, int)), this, SLOT(mousePress(int,int,int,int,int)));
 	QObject::connect(rootObject, SIGNAL(mouseReleased(int, int, int, int, int)), this, SLOT(mouseRelease(int,int,int,int,int)));
 	QObject::connect(rootObject, SIGNAL(mouseMoved(int, int, int, int, int)), this, SLOT(mouseMove(int,int,int,int,int)));
+
+	QObject::connect(getGuiActions("actionIncrease_Time_Speed"), SIGNAL(triggered()), core, SLOT(increaseTimeSpeed()));
+	QObject::connect(getGuiActions("actionDecrease_Time_Speed"), SIGNAL(triggered()), core, SLOT(decreaseTimeSpeed()));
+	QObject::connect(getGuiActions("actionSet_Real_Time_Speed"), SIGNAL(triggered()), core, SLOT(toggleRealTimeSpeed()));
+	QObject::connect(getGuiActions("actionReturn_To_Current_Time"), SIGNAL(triggered()), core, SLOT(setTimeNow()));
 }
 
 void MobileGui::initActions()
 {
-
+	QString group = N_("Date and Time");
+	addGuiActions("actionDecrease_Time_Speed", N_("Decrease time speed"), "J", group, false, false);
+	addGuiActions("actionIncrease_Time_Speed", N_("Increase time speed"), "L", group, false, false);
+	addGuiActions("actionSet_Real_Time_Speed", N_("Set normal time rate"), "K", group, false, false);
+	addGuiActions("actionReturn_To_Current_Time", N_("Set time to now"), "8", group, false, false);
 }
