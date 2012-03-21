@@ -259,13 +259,7 @@ QString radToDmsStr(double angle, bool decimal, bool useD)
 		os << qSetRealNumberPrecision(0);
 		width = 2;
 	}
-	os << fixed << qSetFieldWidth(width) << qSetPadChar('0');
-	if (s<=0.1)
-		os << QString("%1").arg(s, 0, 'f', 2);
-	else
-		os << s;
-
-	os << qSetFieldWidth(0) << '\"';
+	os << fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
 
 	return str;
 }
