@@ -121,8 +121,6 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 				fprintf(stdout, "qImage resized height: %d\n", tex->qImage.height());
         }
 
-		if (tex->qImage.isNull() || size < 64)
-			return StelTextureSP();
 
 		// end of check - hikiko
 
