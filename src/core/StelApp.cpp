@@ -227,11 +227,6 @@ void StelApp::init(QSettings* conf)
 	textureMgr->init();
 
 	QString splashFileName = "textures/logo24bits.png";
-	if (STELLARIUM_SPLASH=="Development")
-		splashFileName = "textures/logo24bits_dev.png";
-
-	if (STELLARIUM_SPLASH=="ReleaseCandidate")
-		splashFileName = "textures/logo24bits_rc.png";
 
 #ifdef BUILD_FOR_MAEMO
 	StelLoadingBar loadingBar(splashFileName, "", 25, 320, 101, 800, 400);
