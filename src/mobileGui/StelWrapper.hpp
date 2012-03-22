@@ -2,7 +2,7 @@
 #define STELWRAPPER_HPP
 
 #include <QObject>
-#include "../../../src/core/StelObject.hpp"
+#include "StelObject.hpp"
 
 //! @class Allows QML access to information about the world
 class StelWrapper : public QObject

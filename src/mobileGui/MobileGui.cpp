@@ -35,16 +35,16 @@
 #include <QApplication>
 #include <QPoint>
 
-#include "systemdisplayinfo.hpp"
-#include "updatesignallingitem.hpp"
-#include "stelwrapper.hpp"
+#include "SystemDisplayInfo.hpp"
+#include "UpdateSignallingItem.hpp"
+#include "StelWrapper.hpp"
 
-#include "../../../src/core/StelModuleMgr.hpp"
-#include "../../../src/core/StelApp.hpp"
-#include "../../../src/core/StelMovementMgr.hpp"
-#include "../../../src/core/StelAppGraphicsWidget.hpp"
-#include "../../../src/core/StelTranslator.hpp"
-#include "../../../src/core/StelCore.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelApp.hpp"
+#include "StelMovementMgr.hpp"
+#include "StelAppGraphicsWidget.hpp"
+#include "StelTranslator.hpp"
+#include "StelCore.hpp"
 
 StelGuiBase* StelMobileGuiPluginInterface::getStelGuiBase() const
 {

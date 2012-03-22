@@ -500,6 +500,34 @@ IF (GUI_MODE STREQUAL "None")
 	ADD_DEPENDENCIES(AllStaticPlugins StelNoGuiLib)
 ENDIF()
 
+#############################################################################################
+############################# Mobile GUI plugin compilation #################################
+#############################################################################################
+IF (GUI_MODE STREQUAL "Mobile")
+	SET(mobilegui_SRCS
+		mobileGui/MobileGui.hpp
+		mobileGui/MobileGui.cpp
+		mobileGui/SystemDisplayInfo.hpp
+		mobileGui/SystemDisplayInfo.cpp
+		mobileGui/StelWrapper.hpp
+		mobileGui/StelWrapper.cpp
+		mobileGui/UpdateSignallingItem.hpp
+		mobileGui/UpdateSignallingItem.cpp)
+	SET(mobilegui_MOC_HDRS
+		mobileGui/MobileGui.hpp
+		mobileGui/SystemDisplayInfo.hpp
+		mobileGui/StelWrapper.hpp)
+	SET(mobilegui_RES
+		mobileGui/qml/qmlResources.qrc)
+	QT4_ADD_RESOURCES(mobilegui_RES_CXX ${mobilegui_RES})
+	QT4_WRAP_CPP(mobilegui_MOC_SRCS ${mobilegui_MOC_HDRS})
+	ADD_LIBRARY(MobileGuiLib STATIC ${mobilegui_SRCS} ${mobilegui_MOC_SRCS} ${mobilegui_RES_CXX})
+	TARGET_LINK_LIBRARIES(MobileGuiLib ${extLinkerOption})
+	SET_TARGET_PROPERTIES(MobileGuiLib PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/src/libMobileGuiLib.a)
+	ADD_DEPENDENCIES(AllStaticPlugins MobileGuiLib)
+ENDIF()
+
 
 #############################################################################################
 ############################# External GUI plugin compilation ###############################
