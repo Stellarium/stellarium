@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-20 18:20+0700\n"
+"POT-Creation-Date: 2012-03-21 19:59+0200\n"
 "PO-Revision-Date: 2012-03-20 04:08+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-21 04:57+0000\n"
+"X-Launchpad-Export-Date: 2012-03-22 04:53+0000\n"
 "X-Generator: Launchpad (build 14981)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -137,7 +137,12 @@ msgstr "ระยะห่าง: %1 หน่วยดาราศาสตร�
 msgid "Distance: %1AU"
 msgstr "ระยะทาง: %1 หน่วยดาราศาสตร์"
 
-#: src/core/modules/Planet.cpp:166
+#: src/core/modules/Planet.cpp:171
+#, qt-format
+msgid "Apparent diameter: %1, with rings: %2"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:176
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "เส้นผ่านศูนย์กลางปรากฏ: %1"

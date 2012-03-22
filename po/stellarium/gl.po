@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-20 18:20+0700\n"
-"PO-Revision-Date: 2012-03-20 17:17+0000\n"
-"Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>\n"
+"POT-Creation-Date: 2012-03-21 19:59+0200\n"
+"PO-Revision-Date: 2012-03-21 06:33+0000\n"
+"Last-Translator: Manuel Rosales Graña <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-21 04:54+0000\n"
+"X-Launchpad-Export-Date: 2012-03-22 04:49+0000\n"
 "X-Generator: Launchpad (build 14981)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -135,7 +135,12 @@ msgstr "Distancia: %1UA (%2 km)"
 msgid "Distance: %1AU"
 msgstr "Distancia: %1UA"
 
-#: src/core/modules/Planet.cpp:166
+#: src/core/modules/Planet.cpp:171
+#, qt-format
+msgid "Apparent diameter: %1, with rings: %2"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:176
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Diámetro aparente: %1"
@@ -591,13 +596,15 @@ msgstr "Probador: %1"
 
 #: src/gui/HelpDialog.cpp:308
 msgid "Past Developers"
-msgstr ""
+msgstr "Últimos desenvolvedores"
 
 #: src/gui/HelpDialog.cpp:309
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
+"Moitas persoas fixeron contribucións significativas, pero xa non están "
+"activos. O seu traballo marcou unha gran diferenza para o proxecto:"
 
 #: src/gui/HelpDialog.cpp:310
 #, qt-format
@@ -1027,11 +1034,11 @@ msgstr "gráfico de estrelas"
 
 #: src/gui/SearchDialog.cpp:503
 msgid "University of Strasbourg (France)"
-msgstr ""
+msgstr "Universidade de Strasbourg (Francia)"
 
 #: src/gui/SearchDialog.cpp:504
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "Universidade de Harvard (USA)"
 
 #: src/main.cpp:337
 msgid "This system does not support OpenGL."
@@ -2734,15 +2741,15 @@ msgstr "Posición"
 
 #: src/ui_searchDialogGui.h:586
 msgid "On-line astronomical database SIMBAD"
-msgstr ""
+msgstr "Base de datos astronómica on-line SIMBAD"
 
 #: src/ui_searchDialogGui.h:587
 msgid "Extend search with SIMBAD"
-msgstr ""
+msgstr "Busca estendida con SIMBAD"
 
 #: src/ui_searchDialogGui.h:588
 msgid "Server:"
-msgstr ""
+msgstr "Servidor:"
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
@@ -3803,11 +3810,11 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:228
 #: plugins/Satellites/src/Satellite.cpp:232
 msgid "Catalog #"
-msgstr ""
+msgstr "Catálogo #"
 
 #: plugins/Satellites/src/Satellite.cpp:234
 msgid "International Designator"
-msgstr ""
+msgstr "Deseñador internacional"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:246
@@ -3985,6 +3992,10 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
+"1. Asegúrate de que o satélite (s) que quere engadir se inclúen nunha das "
+"URLs listadas na guía Fontes da ventá de configuración de satélites. 2. Vai "
+"á pestana Satélites, e preme o botón \"+\". Selecciona o satélite (s) que "
+"quere engadir e preme o botón \"Add\"."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
@@ -4092,7 +4103,7 @@ msgstr "[nova fonte]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
 msgid "[orbit calculation error]"
-msgstr ""
+msgstr "[erro calculado da órbita]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"
