@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-20 18:20+0700\n"
+"POT-Creation-Date: 2012-03-21 19:59+0200\n"
 "PO-Revision-Date: 2012-01-09 16:28+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-21 04:56+0000\n"
+"X-Launchpad-Export-Date: 2012-03-22 04:51+0000\n"
 "X-Generator: Launchpad (build 14981)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -136,7 +136,12 @@ msgstr ""
 msgid "Distance: %1AU"
 msgstr "واحد نجومی %1 : فاصله"
 
-#: src/core/modules/Planet.cpp:166
+#: src/core/modules/Planet.cpp:171
+#, qt-format
+msgid "Apparent diameter: %1, with rings: %2"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:176
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "%1 : قطر ظاهری"
