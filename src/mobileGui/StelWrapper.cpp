@@ -25,7 +25,7 @@ const StelObject::InfoStringGroup& StelWrapper::getInfoTextFilters() const
 
 void StelWrapper::toggleAllInfo()
 {
-//	infoTextFilters = infoTextFilters == StelObject::AllInfo ? StelObject::ShortInfo : StelObject::AllInfo;
+	infoTextFilters = infoTextFilters == StelObject::AllInfo ? StelObject::ShortInfo : StelObject::AllInfo;
 }
 
 QString StelWrapper::getInfoText()
