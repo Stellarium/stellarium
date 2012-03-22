@@ -101,25 +101,6 @@ Planet::Planet(const QString& englishName,
 	flagLabels = true;
 }
 
-static QString getPrefix()
-{
-        int size;
-        QString prefix;
-		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &size);
-        if(size <=  512) {
-                prefix="small";
-        }
-        else if (size <= 1024) {
-                prefix="medium";
-        }
-        else if (size >= 2048) {
-                prefix="";
-        }
-
-        fprintf(stdout, "max tex unit size: %d\n", size);
-        return prefix;
-}
-
 Planet::Planet(const QString& englishName,
 			   int flagLighting,
 			   double radius,
@@ -156,9 +137,8 @@ Planet::Planet(const QString& englishName,
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
-	QString prefix = getPrefix();
-	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+prefix+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
-	normalMap = StelApp::getInstance().getTextureManager().createTexture("textures/"+prefix+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	normalMap = StelApp::getInstance().getTextureManager().createTexture("textures/"+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	nameI18 = englishName;
 	if (englishName!="Pluto")
