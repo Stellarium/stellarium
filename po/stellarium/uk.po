@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-20 18:20+0700\n"
-"PO-Revision-Date: 2012-03-16 05:33+0000\n"
-"Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
+"POT-Creation-Date: 2012-03-21 19:59+0200\n"
+"PO-Revision-Date: 2012-03-21 10:34+0000\n"
+"Last-Translator: Andriy Volkov <volkov.andriy@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-21 04:58+0000\n"
+"X-Launchpad-Export-Date: 2012-03-22 04:53+0000\n"
 "X-Generator: Launchpad (build 14981)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -141,7 +141,12 @@ msgstr "Відстань: %1 а.о. (%2 км)"
 msgid "Distance: %1AU"
 msgstr "Відстань: %1 а.о."
 
-#: src/core/modules/Planet.cpp:166
+#: src/core/modules/Planet.cpp:171
+#, qt-format
+msgid "Apparent diameter: %1, with rings: %2"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:176
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Видимий діаметр: %1"
@@ -604,6 +609,8 @@ msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
+"Деякі люди зробили значний внесок, але тепер ці люди більше не активні. Їхня "
+"робота зробила значні зміни в проекті."
 
 #: src/gui/HelpDialog.cpp:310
 #, qt-format
