@@ -38,7 +38,7 @@ public:
 	virtual ~AddRemoveLandscapesDialog();
 
 public slots:
-	void languageChanged();
+	void retranslate();
 	//! This function overrides the non-virtual StelDialog::setVisible()
 	//! to allow the current landscape to be selected in the list of user
 	//! landscapes (if it is in the list) every time the dialog is displayed.

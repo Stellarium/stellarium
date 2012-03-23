@@ -1,8 +1,9 @@
-0.11.2 [in progress]
+0.11.2 [2012-03-10]
 The main theme of this version seems to be localization:
-- most of the text used by the default plug-ins is now translateable
+- most of the text used by the default plug-ins is now translatable
 - landscape names are now translatable
 - country names are now translatable
+- scripts names and descriptions are now translatable
 
 Oculars plug-in:
 - added an optional control panel displayed in the upper-right corner of the screen as an alternative to the pop-up menu that was used to control it in the previous version;
@@ -16,22 +17,26 @@ Satellites plug-in:
 - catalog number and international designator are now displayed for each satellite
 - a simple windows to add satellites has been added (LP: #898476)
 
-Added to the Windows installer options to remove files left over from the previous installation.
-Windows no longer can be dragged to unreachable positions.
-The "Save settings" button now saves the current main window position, too.
-The language list is now sorted by language name, not language code.
-The "Reload style" action has been removed, as the underlying feature no longer works. If you decide to design a new visual style for Stellarium, please contact us to give you a version where it works.
-Added distance in km (if the distance is below 0.1 AU) to the information displayed about Solar System objects. (LP: #894472)
-Added the StelGui::getSkyGui() method to allow plug-in developers to create their own toolbars and other GUI elements.
-Added an option to show the galactic coordinates grid and the galactic plane.
-Added several trans-Neptunian objects (TNOs): Sedna, Quaoar, Orcus, Haumea.
-Added the Quasars plug-in.
-More detailed information is now added to the log file for Mac OS X.
-Added (experimental) modelling of athmospheric extinction for point objects.
-Changed the position of the text in the Text User Interface plug-in. (LP: #911594)
-Added a checkbox allowing the SIMBAD on-line search to be enabled/disabled.
+Added:
+- Ctrl+C binding to copy selected object info text to clipboard.
+- to the Windows installer options to remove files left over from the previous installation.
+- windows no longer can be dragged to unreachable positions.
+- the "Save settings" button now saves the current main window position, too.
+- the language list is now sorted by language name, not language code.
+- the "Reload style" action has been removed, as the underlying feature no longer works. If you decide to design a new visual style for Stellarium, please contact us to give you a version where it works.
+- distance in km (if the distance is below 0.1 AU) to the information displayed about Solar System objects. (LP: #894472)
+- the StelGui::getSkyGui() method to allow plug-in developers to create their own toolbars and other GUI elements.
+- an option to show the galactic coordinates grid and the galactic plane.
+- several trans-Neptunian objects (TNOs): Sedna, Quaoar, Orcus, Haumea.
+- the Quasars plug-in.
+- the Pulsars plug-in.
+- more detailed information is now added to the log file for Mac OS X.
+- (experimental) modelling of atmospheric extinction for point objects.
+- changed the position of the text in the Text User Interface plug-in. (LP: #911594)
+- a checkbox allowing the SIMBAD on-line search to be enabled/disabled.
 
 Fixed:
+- startup script crash (LP: #689657)
 - plugin names localization in the Configuration window (LP: #807402)
 - resizing of the tabs in Configuration and View windows on language change (LP: #821386)
 - sky lines' labels not translated on language change (LP: #811659)
@@ -41,6 +46,8 @@ Fixed:
 - Telescope Control plug-in: mishandling of IP connections in the telescope configuration window (LP: #843837)
 - Pluto's moon Hydra preventing the constellation from being selected in Search and scripts (LP: #894780)
 - scripting code still being included despite ENABLE_SCRIPTING set to 0 (LP: #811505)
+- constellations lines and names not displayed (LP: #945146)
+- newly created location cannot be set as default (LP: #889931)
 
 0.11.1 [2011-11-04]
 Bug fix release.

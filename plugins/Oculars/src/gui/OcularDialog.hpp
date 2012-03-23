@@ -66,7 +66,7 @@ public slots:
 	void moveDownSelectedSensor();
 	void moveDownSelectedOcular();
 	void moveDownSelectedTelescope();
-	void languageChanged();
+	void retranslate();
 
 signals:
 	void requireSelectionChanged(bool state);

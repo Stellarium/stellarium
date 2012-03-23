@@ -38,7 +38,7 @@ DefineTimeZoneWindow::~DefineTimeZoneWindow()
 	delete timeZoneNameValidator;
 }
 
-void DefineTimeZoneWindow::languageChanged()
+void DefineTimeZoneWindow::retranslate()
 {
 	if (dialog)
 	{
@@ -67,7 +67,7 @@ void DefineTimeZoneWindow::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-	        this, SLOT(languageChanged()));
+	        this, SLOT(retranslate()));
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->pushButtonUseDefinition, SIGNAL(clicked()),

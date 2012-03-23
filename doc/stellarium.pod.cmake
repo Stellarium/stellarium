@@ -25,6 +25,10 @@ Print program name and version and exit.
 
 Print a brief synopsis of program options and exit.
 
+=item B<--safe-mode>
+
+Do not use OpenGL2 features (such as shaders). Useful on systems that report support for OpenGL 2, but its implementation is buggy. Used as a work-around for the "broken fonts" bug.
+
 =item B<-c, --config-file> I<file>
 
 Use I<file> for the config filename instead of the default F<config.ini>.

@@ -73,6 +73,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), flagHasAtmosphere(t
 	QSettings* conf = StelApp::getInstance().getSettings();
 	initColorTableFromConfigFile(conf);
 
+        setFlagHasAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
 	setTwinkleAmount(conf->value("stars/star_twinkle_amount",0.3).toFloat());
 	setFlagTwinkle(conf->value("stars/flag_star_twinkle",true).toBool());
 	setFlagPointStar(conf->value("stars/flag_point_star",false).toBool());
@@ -200,7 +201,7 @@ void StelSkyDrawer::init()
 			qWarning() << "Warnings while compiling vertex shader: " << vShader->log();
 		}
 		QGLShader* fShader = new QGLShader(QGLShader::Fragment);
-		if (!fShader->compileSourceCode(
+                if (!fShader->compileSourceCode("#version 120\n"
 				"uniform sampler2D tex;\n"
 				"varying mediump vec4 outColor;\n"
 				"void main(){gl_FragColor = texture2D(tex,gl_PointCoord)*outColor;}"))
