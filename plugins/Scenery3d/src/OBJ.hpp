@@ -61,7 +61,7 @@ public:
     //! Only XYZ and XZY may occur in real life, but we can cope with all...
     enum vertexOrder { XYZ, XZY, YXZ, YZX, ZXY, ZYX };
     //!< Supported OpenGL illumination models. Use specular sparingly!
-    enum Illum { DIFFUSE, DIFFUSE_AND_AMBIENT, SPECULAR, TRANSLUCENT=9 }; //!< Supported OpenGL illumination models. Use specular sparingly!
+    enum Illum { DIFFUSE, DIFFUSE_AND_AMBIENT, SPECULAR, TRANSLUCENT=9 };
 
     struct Material
     {
@@ -101,7 +101,7 @@ public:
         float shininess;
         //! Transparency [0..1]
         float alpha;
-        //!< illumination model, copied from Material.
+        //!< illumination model, copied from MTL.
         Illum illum;
         //! Texture name
         std::string textureName;
@@ -125,7 +125,7 @@ public:
     };
 
     //! Structure for a Mesh, will be used with Stellarium to render
-    //! Holds the starting index, the amount of triangles and a pointer to the MTL
+    //! Holds the starting index, the number of triangles and a pointer to the MTL
     struct StelModel
     {
         int startIndex, triangleCount;

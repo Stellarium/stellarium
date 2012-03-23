@@ -51,7 +51,7 @@ LocationDialog::~LocationDialog()
 	delete ui;
 }
 
-void LocationDialog::languageChanged()
+void LocationDialog::retranslate()
 {
 	if (dialog)
 	{
@@ -74,7 +74,7 @@ void LocationDialog::createDialogContent()
 	// We try to directly connect to the observer slots as much as we can
 	ui->setupUi(dialog);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	// Init the SpinBox entries
 	ui->longitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->longitudeSpinBox->setPrefixType(AngleSpinBox::Longitude);
@@ -425,6 +425,9 @@ void LocationDialog::addCurrentLocationToList()
 			ui->citiesListView->scrollTo(model->index(i,0));
 			ui->citiesListView->selectionModel()->select(model->index(i,0), QItemSelectionModel::ClearAndSelect|QItemSelectionModel::Rows);
 			listItemActivated(model->index(i,0));
+			disconnectEditSignals();
+			ui->citySearchLineEdit->setFocus();
+			connectEditSignals();
 			break;
 		}
 	}

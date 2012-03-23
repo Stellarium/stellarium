@@ -80,6 +80,7 @@ private:
     bool flagEnabled;  // toggle to switch it off completely.
     int cubemapSize;   // configurable via config.ini:Scenery3d/cubemapSize
     int shadowmapSize; // configurable via config.ini:Scenery3d/shadowmapSize
+    float torchBrightness; // configurable via config.ini:Scenery3d/extralight_brightness
     Scenery3d* scenery3d;
     Scenery3dDialog* scenery3dDialog;
     QString currentScenery3dID;

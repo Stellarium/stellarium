@@ -39,7 +39,7 @@ public:
 	void styleChanged();
 
 public slots:
-	void languageChanged();
+	void retranslate();
 
 protected:
 	Ui_viewDialogForm* ui;
@@ -50,7 +50,9 @@ private slots:
 	void skyCultureChanged(const QString& cultureName);
 	void projectionChanged(const QString& projectionName);
 	void landscapeChanged(QListWidgetItem* item);
-	void shootingStarsZHRChanged();
+	void setZhrFromControls();
+	void updateZhrControls(int zhr);
+	void updateZhrDescription(int zhr);
 	void planetsLabelsValueChanged(int);
 	void nebulasLabelsValueChanged(int);
 	void starsLabelsValueChanged(int);

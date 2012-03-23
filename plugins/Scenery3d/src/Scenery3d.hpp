@@ -51,7 +51,7 @@ class Scenery3d
 public:
     //! Initializes an empty Scenery3d object.
     //! @param cbmSize Size of the cubemap to use for indirect rendering.
-    Scenery3d(int cubemapSize=1024, int shadowmapSize=1024);
+    Scenery3d(int cubemapSize=1024, int shadowmapSize=1024, float torchBrightness=0.5f);
     virtual ~Scenery3d();
 
     //! Sets the shaders for the plugin
@@ -120,12 +120,12 @@ public:
     Mat4f mv2;
 
 private:
-    static const float TORCH_BRIGHTNESS=0.5f;
     static const float AMBIENT_BRIGHTNESS_FACTOR=0.05;
     static const float LUNAR_BRIGHTNESS_FACTOR=0.2;
     static const float VENUS_BRIGHTNESS_FACTOR=0.005;
 
     double eyeLevel;
+    float torchBrightness; // ^L toggle light brightness
 
     void drawObjModel(StelCore* core);
     void generateShadowMap(StelCore* core);
