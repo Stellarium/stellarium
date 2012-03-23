@@ -1,7 +1,7 @@
 /*
  * Stellarium Satellites plugin config dialog
  *
- * Copyright (C) 2009 Matthew Gates
+ * Copyright (C) 2009, 2012 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,7 +61,7 @@ SatellitesDialog::~SatellitesDialog()
 	delete ui;
 }
 
-void SatellitesDialog::languageChanged()
+void SatellitesDialog::retranslate()
 {
 	if (dialog)
 	{
@@ -81,7 +81,8 @@ void SatellitesDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
+	        this, SLOT(retranslate()));
 
 	// Settings tab / updates group
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
@@ -167,6 +168,8 @@ void SatellitesDialog::listSatelliteGroup(int index)
 		satellites = plugin->getSatellites(QString(), Satellites::NotVisible);
 	else if (selectedGroup == "newlyadded")
 		satellites = plugin->getSatellites(QString(), Satellites::NewlyAdded);
+	else if (selectedGroup == "orbiterror")
+		satellites = plugin->getSatellites(QString(), Satellites::OrbitError);
 	else
 		satellites = plugin->getSatellites(ui->groupsCombo->currentText());
 	
@@ -223,6 +226,9 @@ void SatellitesDialog::updateSelectedSatelliteInfo(QListWidgetItem* curItem,
 	satelliteModified = false;
 
 	SatelliteP sat = GETSTELMODULE(Satellites)->getByID(id);
+	if (sat.isNull())
+		return;
+
 	if (!sat->initialized)
 		return;
 
@@ -251,7 +257,7 @@ void SatellitesDialog::setAboutHtml(void)
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Stellarium Satellites Plugin") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + "</strong></td><td>" + SATELLITES_PLUGIN_VERSION + "</td></td>";
-	html += "<tr><td rowspan=2><strong>" + q_("Authors") + "</strong></td><td>Matthew Gates &lt;matthew@porpoisehead.net&gt;</td></td>";
+	html += "<tr><td rowspan=2><strong>" + q_("Authors") + "</strong></td><td>Matthew Gates &lt;matthewg42@gmail.com&gt;</td></td>";
 	html += "<tr><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></tr></table>";
 
 	html += "<p>" + q_("The Satellites plugin predicts the positions of artificial satellites in Earth orbit.") + "</p>";
@@ -278,7 +284,7 @@ void SatellitesDialog::setAboutHtml(void)
 	html += "</p>";
 
 	html += "<h3>" + q_("Adding new satellites") + "</h3>";
-	html += "<p>" + QString(q_("At the moment you must manually edit the %1 file to add new satellites to the database. Making this easier is still on the TODO list...")).arg(jsonFileName) + "</p>";
+	html += "<p>" + QString(q_("1. Make sure the satellite(s) you wish to add are included in one of the URLs listed in the Sources tab of the satellites configuration dialog. 2. Go to the Satellites tab, and click the '+' button.  Select the satellite(s) you wish to add and select the \"add\" button.")) + "</p>";
 
 	html += "<h3>" + q_("Technical notes") + "</h3>";
 	html += "<p>" + q_("Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data as the input. ");
@@ -452,8 +458,7 @@ void SatellitesDialog::populateGroupsList()
 {
 	ui->groupsCombo->clear();
 	ui->groupsCombo->addItems(GETSTELMODULE(Satellites)->getGroups());
-	// BM: The wording has been changed to prevent confusion with the visibility
-	// status of the actual satellites. I'll leave further changes to Matthew.:)
+	ui->groupsCombo->insertItem(0, q_("[orbit calculation error]"), QVariant("orbiterror"));
 	ui->groupsCombo->insertItem(0, q_("[all newly added]"), QVariant("newlyadded"));
 	ui->groupsCombo->insertItem(0, q_("[all not displayed]"), QVariant("notvisible"));
 	ui->groupsCombo->insertItem(0, q_("[all displayed]"), QVariant("visible"));
@@ -534,16 +539,36 @@ void SatellitesDialog::setOrbitFlag(bool display)
 	{
 		QString id = i->data(Qt::UserRole).toString();
 		SatelliteP sat = GETSTELMODULE(Satellites)->getByID(id);
-		sat->orbitVisible = display;
+		if (sat)
+			sat->orbitVisible = display;
 	}
 	reloadSatellitesList();
 }
 
 void SatellitesDialog::satelliteDoubleClick(QListWidgetItem* item)
 {
-	//qDebug() << "SatellitesDialog::satelliteDoubleClick for " << item->text();
+	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
+	Q_ASSERT(SatellitesMgr);
 	QString id = item->data(Qt::UserRole).toString();
-	GETSTELMODULE(Satellites)->getByID(id)->visible = true;
+	SatelliteP sat = SatellitesMgr->getByID(id);
+	if (sat.isNull())
+		return;
+
+	if (!sat->orbitValid)
+		return;
+
+	// Turn on Satellite rendering if it is not already on
+	sat->visible = true;
+
+	// If Satellites are not currently displayed, make them visible.
+	if (!SatellitesMgr->getFlagHints())
+	{
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		QAction* setHintsAction = gui->getGuiActions("actionShow_Satellite_Hints");
+		Q_ASSERT(setHintsAction);
+		setHintsAction->setChecked(true);
+	}
+
 	//TODO: We need to find a way to deal with duplicates... --BM
 	if (StelApp::getInstance().getStelObjectMgr().findAndSelect(item->text()))
 	{

@@ -157,16 +157,16 @@ void Scenery3dMgr::init()
     Q_ASSERT(conf);
     cubemapSize=conf->value("Scenery3d/cubemapSize", 1024).toInt();
     shadowmapSize=conf->value("Scenery3d/shadowmapSize", 1024).toInt();
+    torchBrightness=conf->value("Scenery3d/extralight_brightness", 0.5f).toFloat();
 
     // graphics hardware without FrameBufferObj extension cannot use the cubemap rendering and shadow mapping.
     // In this case, set cubemapSize to 0 to signal auto-switch to perspective projection.
     if (! GLEE_EXT_framebuffer_object) {
         qWarning() << "Scenery3d: Your hardware does not support EXT_framebuffer_object.";
-        qWarning() << "           Shadow and Normal mapping disabled, and display limited to perspective projection.";
+        qWarning() << "           Shadow mapping disabled, and display limited to perspective projection.";
         cubemapSize=0;
         shadowmapSize=0;
     }
-    //cubemapSize = 0;
     // create action for enable/disable & hook up signals
     StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
     Q_ASSERT(gui);
@@ -250,7 +250,7 @@ void Scenery3dMgr::init()
     }
 
 
-    scenery3d = new Scenery3d(cubemapSize, shadowmapSize);
+    scenery3d = new Scenery3d(cubemapSize, shadowmapSize, torchBrightness);
     scenery3d->setShaders(shadowShader, bumpShader, univShader);
     scenery3d->setShadowsEnabled(enableShadows);
     scenery3d->setBumpsEnabled(enableBumps);
@@ -407,7 +407,7 @@ Scenery3d* Scenery3dMgr::createFromFile(const QString& scenery3dFile, const QStr
 {
     QSettings scenery3dIni(scenery3dFile, StelIniFormat);
     QString s;
-    Scenery3d* newScenery3d = new Scenery3d(cubemapSize, shadowmapSize);
+    Scenery3d* newScenery3d = new Scenery3d(cubemapSize, shadowmapSize, torchBrightness);
     newScenery3d->setShaders(shadowShader, bumpShader, univShader);
     newScenery3d->setShadowsEnabled(enableShadows);
     newScenery3d->setBumpsEnabled(enableBumps);

@@ -25,8 +25,7 @@
 #include <QHash>
 #include <QIntValidator>
 #include <QStringList>
-//#include "StelDialog.hpp"
-#include "StelDialogTelescopeControl.hpp"
+#include "StelDialog.hpp"
 #include "TelescopeControlGlobals.hpp"
 
 using namespace TelescopeControlGlobals;
@@ -35,7 +34,7 @@ class Ui_telescopeConfigurationDialog;
 class TelescopeControl;
 class StelStyle;
 
-class TelescopeConfigurationDialog : public StelDialogTelescopeControl
+class TelescopeConfigurationDialog : public StelDialog
 {
 	Q_OBJECT
 public:
@@ -46,7 +45,7 @@ public:
 	void initNewTelescopeConfiguration(int slot);
 
 public slots:
-	void languageChanged();
+	void retranslate();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots

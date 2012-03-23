@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2012 Timothy Reaves
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -112,16 +113,16 @@ private:
 	void update(int deltaTime);
 	//! Turn on and off Constellation line rendering.
 	//! @param b new state for line drawing.
-	void setFlagLines(bool b) {lineFader=b;}
+	void setFlagLines(const bool b) {lineFader=b;}
 	//! Turn on and off Constellation boundary rendering.
 	//! @param b new state for boundary drawing.
-	void setFlagBoundaries(bool b) {boundaryFader=b;}
+	void setFlagBoundaries(const bool b) {boundaryFader=b;}
 	//! Turn on and off Constellation name label rendering.
 	//! @param b new state for name label drawing.
-	void setFlagName(bool b) {nameFader=b;}
+	void setFlagLabels(const bool b) {nameFader=b;}
 	//! Turn on and off Constellation art rendering.
 	//! @param b new state for art drawing.
-	void setFlagArt(bool b) {artFader=b;}
+	void setFlagArt(const bool b) {artFader=b;}
 	//! Get the current state of Constellation line rendering.
 	//! @return true if Constellation line rendering it turned on, else false.
 	bool getFlagLines() const {return lineFader;}
@@ -130,7 +131,7 @@ private:
 	bool getFlagBoundaries() const {return boundaryFader;}
 	//! Get the current state of Constellation name label rendering.
 	//! @return true if Constellation name label rendering it turned on, else false.
-	bool getFlagName() const {return nameFader;}
+	bool getFlagLabels() const {return nameFader;}
 	//! Get the current state of Constellation art rendering.
 	//! @return true if Constellation art rendering it turned on, else false.
 	bool getFlagArt() const {return artFader;}

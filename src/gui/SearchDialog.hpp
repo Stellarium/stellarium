@@ -72,7 +72,7 @@ public:
 	bool eventFilter(QObject *object, QEvent *event);
 	
 public slots:
-	void languageChanged();
+	void retranslate();
 	//! Add auto focus of the edit line
 	void setVisible(bool);
 	//! This style only displays the text search field and the search button
@@ -101,6 +101,8 @@ private slots:
 	//! Set flagHasSelectedText as true, if search box has selected text
 	void setHasSelectedFlag();
 
+	void mirrorBoxChanged(const QString&);
+
 private:
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
@@ -112,6 +114,9 @@ private:
 	QHash<QString, QString> greekLetters;
 	bool useSimbad;
 	bool flagHasSelectedText;
+	QString useMirror;
+
+	void populateMirrorList();
 };
 
 #endif // _SEARCHDIALOG_HPP_
