@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-21 19:59+0200\n"
-"PO-Revision-Date: 2012-03-19 21:47+0000\n"
+"PO-Revision-Date: 2012-03-22 17:36+0000\n"
 "Last-Translator: Kārlis Goba <karlis.goba@gmail.com>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-22 04:50+0000\n"
-"X-Generator: Launchpad (build 14981)\n"
+"X-Launchpad-Export-Date: 2012-03-23 04:39+0000\n"
+"X-Generator: Launchpad (build 14996)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -367,7 +367,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:736
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "Visi pieejamie zvaigžņu katalogi ir uzstādīti."
 
 #: src/gui/ConfigurationDialog.cpp:741
 #, qt-format
@@ -427,11 +427,11 @@ msgstr "Bultiņu taustiņi un vilkšana ar peles kreiso pogu"
 
 #: src/gui/HelpDialog.cpp:54
 msgid "Page Up/Down"
-msgstr ""
+msgstr "Page Up/Down"
 
 #: src/gui/HelpDialog.cpp:55
 msgid "CTRL + Up/Down"
-msgstr ""
+msgstr "CTRL + Up/Down"
 
 #: src/gui/HelpDialog.cpp:56
 msgid "Left click"
@@ -467,19 +467,19 @@ msgstr "Notīrīt izvēli"
 
 #: src/gui/HelpDialog.cpp:71
 msgid "When a Script is Running"
-msgstr ""
+msgstr "Skripta darbības laikā"
 
 #: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:147
 msgid "Slow down the script execution rate"
-msgstr ""
+msgstr "Samazināt skripta izpildes ātrumu"
 
 #: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:148
 msgid "Speed up the script execution rate"
-msgstr ""
+msgstr "Palielināt skripta izpildes ātrumu"
 
 #: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:149
 msgid "Set the normal script execution rate"
-msgstr ""
+msgstr "Normāls skripta izpildes ātrums"
 
 #. TRANSLATORS: Title of a group of key bindings in the Help window
 #: src/gui/HelpDialog.cpp:77 plugins/AngleMeasure/src/AngleMeasure.cpp:126
@@ -886,7 +886,7 @@ msgstr ""
 #: src/gui/StelGuiItems.cpp:595
 #, no-c-format, qt-format
 msgid "%1m"
-msgstr ""
+msgstr "%1m"
 
 #: src/gui/ViewDialog.cpp:454
 msgid "No description"
@@ -918,7 +918,7 @@ msgstr "Jauna atrašanās vieta"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
-msgstr ""
+msgstr "Izvēlieties ZIP arhīvu, kurš satur Stellarium ainavu"
 
 #. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 #: src/gui/AddRemoveLandscapesDialog.cpp:114
@@ -928,7 +928,7 @@ msgstr "ZIP arhīvi"
 #: src/gui/AddRemoveLandscapesDialog.cpp:132
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
-msgstr ""
+msgstr "Ainava \"%1\" ir veiksmīgi uzstādīta."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:133
 #: src/gui/AddRemoveLandscapesDialog.cpp:160
@@ -940,7 +940,7 @@ msgstr "Veiksmīgi"
 #: src/gui/AddRemoveLandscapesDialog.cpp:225
 #: src/gui/AddRemoveLandscapesDialog.cpp:233
 msgid "No landscape was installed."
-msgstr ""
+msgstr "Ainava netika uzstādīta."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:147
 #: src/gui/AddRemoveLandscapesDialog.cpp:171
@@ -954,12 +954,12 @@ msgstr "Kļūda!"
 #: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
-msgstr ""
+msgstr "Ainava \"%1\" ir veiksmīgi noņemta."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:170
 #: src/gui/AddRemoveLandscapesDialog.cpp:240
 msgid "The selected landscape could not be (completely) removed."
-msgstr ""
+msgstr "Izvēlēto ainavu nevarēja pilnībā noņemt."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:193
@@ -971,29 +971,29 @@ msgstr "Izmērs uz diska: %1 MiB"
 #: src/gui/AddRemoveLandscapesDialog.cpp:219
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
-msgstr ""
+msgstr "Stellarium nevar atvērt failu %1 lasīšanai vai rakstīšanai"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:225
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
-msgstr ""
+msgstr "Izvēlētais fails nav ZIP arhīvs vai nesatur Stellarium ainavu."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
 #: src/gui/AddRemoveLandscapesDialog.cpp:232
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
-msgstr ""
+msgstr "Ainava ar šādu nosaukumu vai identifikatoru (%1) jau eksistē."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
 #: src/gui/AddRemoveLandscapesDialog.cpp:243
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
-msgstr ""
+msgstr "To var noņemt, izdzēšot mapi %1"
 
 #: src/gui/ScriptConsole.cpp:73
 msgid "quickrun..."
-msgstr ""
+msgstr "ātrā palaišana..."
 
 #: src/gui/ScriptConsole.cpp:74
 msgid "selected text"
@@ -1001,15 +1001,15 @@ msgstr "iezīmētais teksts"
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "clear text"
-msgstr ""
+msgstr "notīrīt tekstu"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "clear images"
-msgstr ""
+msgstr "notīrīt attēlus"
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
-msgstr ""
+msgstr "dabisks"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
@@ -1075,7 +1075,7 @@ msgstr "Junona"
 
 #: src/translations.h:44
 msgid "Vesta"
-msgstr ""
+msgstr "Vesta"
 
 #: src/translations.h:45
 msgid "Jupiter"
@@ -1231,7 +1231,7 @@ msgstr ""
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
 msgid "Hydra (moon)"
-msgstr ""
+msgstr "Hidra (mēnesis)"
 
 #: src/translations.h:85
 msgid "Eris"
@@ -1296,7 +1296,7 @@ msgstr "Saules sistēmas novērtotājs"
 #. TRANSLATORS: TNO/Asteroid (90377) Sedna
 #: src/translations.h:102
 msgid "Sedna"
-msgstr ""
+msgstr "Sedna"
 
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
 #: src/translations.h:104
@@ -1515,7 +1515,7 @@ msgstr ""
 
 #: src/translations.h:197
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr ""
+msgstr "Skripts, kurš demonstrē pilnu Mēness aptumsumu."
 
 #: src/translations.h:198
 msgid "A slow, infinite tour of the sky, looking at random objects."
@@ -1648,19 +1648,19 @@ msgstr ""
 
 #: src/translations.h:231
 msgid "Bolivia"
-msgstr ""
+msgstr "Bolīvija"
 
 #: src/translations.h:232
 msgid "Brazil"
-msgstr ""
+msgstr "Brazīlija"
 
 #: src/translations.h:233
 msgid "Bahamas"
-msgstr ""
+msgstr "Bahamas"
 
 #: src/translations.h:234
 msgid "Bhutan"
-msgstr ""
+msgstr "Butāna"
 
 #: src/translations.h:235
 msgid "Bouvet Island"
@@ -1668,11 +1668,11 @@ msgstr ""
 
 #: src/translations.h:236
 msgid "Botswana"
-msgstr ""
+msgstr "Botsvana"
 
 #: src/translations.h:237
 msgid "Belarus"
-msgstr ""
+msgstr "Baltkrievija"
 
 #: src/translations.h:238
 msgid "Belize"
@@ -1680,7 +1680,7 @@ msgstr ""
 
 #: src/translations.h:239
 msgid "Canada"
-msgstr ""
+msgstr "Kanāda"
 
 #: src/translations.h:240
 msgid "Cocos Islands"
@@ -1688,7 +1688,7 @@ msgstr ""
 
 #: src/translations.h:241
 msgid "Democratic Republic of the Congo"
-msgstr ""
+msgstr "Kongo Demokrātiskā Republika"
 
 #: src/translations.h:242
 msgid "Central African Republic"
@@ -1696,47 +1696,47 @@ msgstr ""
 
 #: src/translations.h:243
 msgid "Republic of the Congo"
-msgstr ""
+msgstr "Kongo Republika"
 
 #: src/translations.h:244
 msgid "Switzerland"
-msgstr ""
+msgstr "Šveice"
 
 #: src/translations.h:245
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "Ziloņkaula krasts"
 
 #: src/translations.h:246
 msgid "Cook Islands"
-msgstr ""
+msgstr "Kuka salas"
 
 #: src/translations.h:247
 msgid "Chile"
-msgstr ""
+msgstr "Čīle"
 
 #: src/translations.h:248
 msgid "Cameroon"
-msgstr ""
+msgstr "Kamerūna"
 
 #: src/translations.h:249
 msgid "China"
-msgstr ""
+msgstr "Ķīna"
 
 #: src/translations.h:250
 msgid "Colombia"
-msgstr ""
+msgstr "Kolumbija"
 
 #: src/translations.h:251
 msgid "Costa Rica"
-msgstr ""
+msgstr "Kostarika"
 
 #: src/translations.h:252
 msgid "Serbia and Montenegro"
-msgstr ""
+msgstr "Serbija un Melnkalne"
 
 #: src/translations.h:253
 msgid "Cuba"
-msgstr ""
+msgstr "Kuba"
 
 #: src/translations.h:254
 msgid "Cape Verde"
@@ -1756,7 +1756,7 @@ msgstr ""
 
 #: src/translations.h:258
 msgid "Germany"
-msgstr ""
+msgstr "Vācija"
 
 #: src/translations.h:259
 msgid "Djibouti"
