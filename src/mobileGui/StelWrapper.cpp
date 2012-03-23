@@ -1,9 +1,9 @@
-#include "stelwrapper.hpp"
+#include "StelWrapper.hpp"
 
-#include "../../../src/core/StelModuleMgr.hpp"
-#include "../../../src/core/StelApp.hpp"
-#include "../../../src/core/StelObjectMgr.hpp"
-#include "../../../src/core/StelMovementMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelApp.hpp"
+#include "StelObjectMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "MobileGui.hpp"
 
 StelWrapper::StelWrapper(QObject *parent) :

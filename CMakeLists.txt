@@ -89,8 +89,7 @@ IF(BUILD_FOR_ANDROID)
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024  -DQT_GL_NO_SCISSOR_TEST")
 
   #configure the mobile GUI plugin. Android defaults:
-  SET(EXTERNAL_GUI_SRC_PATH "../plugins/MobileGui" CACHE PATH "The location of the plugin main directory i.e. the one containing the top level CMakeLists.txt")
-  SET(GUI_MODE External CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
+  SET(GUI_MODE Mobile CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External, Mobile")
     
   #force CMAKE to find QT
   SET(NECESSITAS_QT_ROOT "C:/Users/Brady/necessitas/Android/Qt/480" CACHE STRING "Android: Location of necessitas Qt")
@@ -164,7 +163,7 @@ ELSE()
 ENDIF()
 
 
-SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
+SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External, Mobile")
 SET(OPENGL_MODE Desktop CACHE STRING "Choose the type of openGL to use, options are: Desktop, ES2")
 
 SET(GENERATE_PACKAGE_TARGET 1 CACHE BOOL "Set to 1 or true if you want to have make package target")
@@ -429,6 +428,7 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_SOURCE_DIR}/src/core/external/glues_stel/source/
 	${CMAKE_SOURCE_DIR}/src/core/external/glues_stel/source/libtess
 	${CMAKE_SOURCE_DIR}/src/gui
+	${CMAKE_SOURCE_DIR}/src/mobileGui
 	${CMAKE_SOURCE_DIR}/src/scripting
 	${OPENGL_INCLUDE_DIR}
 	${ICONV_INCLUDE_DIR}

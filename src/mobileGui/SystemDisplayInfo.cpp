@@ -1,4 +1,4 @@
-#include "systemdisplayinfo.hpp"
+#include "SystemDisplayInfo.hpp"
 
 QTM_USE_NAMESPACE
 

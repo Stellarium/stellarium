@@ -1,4 +1,4 @@
-#include "updatesignallingitem.hpp"
+#include "UpdateSignallingItem.hpp"
 #include "MobileGui.hpp"
 
 UpdateSignallingItem::UpdateSignallingItem(QGraphicsItem * parent, MobileGui *gui) :
