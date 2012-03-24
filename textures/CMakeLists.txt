@@ -9,3 +9,4 @@ ELSEIF(${STELLARIUM_SPLASH} STREQUAL "ReleaseCandidate")
 ELSE()
   INSTALL(FILES logo24bits_rel.png DESTINATION share/${PACKAGE}/textures RENAME logo24bits.png)
 ENDIF()
+
