@@ -8,14 +8,20 @@ Item {
 	////////////////////////
 
 	//Minimum dp for each category
-	// smallScreen: touchscreen phone sized
+	// microPhoneScreen: small phones
+	// normalPhoneScreen: average phone
 	// tweenerScreenDp: ~5" mini tablets/phablets
 	// mediumScreen: ~7" tablets
 	// largeScreen: ~10" tablets
-	property int normalPhoneScreenDp: 290
-	property int tweenerScreenDp: 460
-	property int mediumScreenDp: 580
-	property int largeScreenDp: 700
+
+	// microPhoneScreen: < 280 dp
+	property int normalPhoneScreenDp: 280
+	property int tweenerScreenDp: 448
+	property int mediumScreenDp: 560
+	property int largeScreenDp: 672
+
+	//currently divided on button width, rather than Android screen size divisions
+	//if a button is 56dp wide, we get <5, 5, 8, 10, 12 buttons
 
 	focus: true
 
@@ -40,56 +46,33 @@ Item {
 	//////////////////////////////////
 
 	// Layouts should use these functions rather than using pixels directly.
-	// For instance -   width: dpX(32)
+	// For instance -   width: dp(32)
 
 	// dp are density-independent pixels
 	// 1dp is equal to 1 pixel on a 160 pixels-per-inch display
 
-	// millimetres can also be used; however, the Android design docs
-	// prefer dp and so dp should be used most frequently
-
 	// The Wiki does (or will) contain information on standard spacing and sizes,
 	// or refer to the Android design guidelines for ideas
 
-	// Convert from millimetres along the display's width to pixels
-	function mmX(number)
-	{
-		return Math.round(number * displayInfo.getDPIWidth() / 25.4)
-	}
-
-	// Convert from millimetres along the display's height to pixels
-	function mmY(number)
-	{
-		return Math.round(number * displayInfo.getDPIHeight() / 25.4)
-	}
+	property real density: displayInfo.density
 
 	// Convert from dp (density-independent pixels) along the display width to pixels
-	function dpX(number)
+	function dp(number)
 	{
-		return Math.round(number * displayInfo.getDPIWidth() / 160)
+		return Math.round(number * density)
 	}
 
-	// As above, but height-wise
-	function dpY(number)
-	{
-		return Math.round(number * displayInfo.getDPIHeight() / 160)
-	}
-
-	// Width of the display in dp; that is, it gives us an indication of physical with.
+	// Width of the display in dp; that is, it gives us an indication of physical width.
 	// This is higher for larger displays, but equal for displays of the same size but
 	// different densities.
 	function totalDpWidth()
 	{
-		return width * 160 / displayInfo.getDPIHeight()
+		return width / density;
 	}
 
 	////////////////////////
 	// Other functions
 	////////////////////////
-
-
-
-
 
 
 	/* Choose a layout based on the screen size */

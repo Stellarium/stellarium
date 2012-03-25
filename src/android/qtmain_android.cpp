@@ -36,9 +36,11 @@
 
 #include <jni.h>
 
-static JavaVM *m_javaVM = NULL;
+JavaVM *m_javaVM = NULL;
 static JNIEnv *m_env = NULL;
-static jobject objptr;
+jobject objptr;
+jobject customClassPtr;
+static const char * const customClass = "org/kde/necessitas/origo/JavaFacade";
 static QSemaphore m_quitAppSemaphore;
 static QList<QByteArray> m_applicationParams;
 static const char * const QtNativeClassPathName = "org/kde/necessitas/industrius/QtNative";
@@ -99,6 +101,30 @@ static jboolean startQtApp(JNIEnv* env, jobject /*object*/, jstring paramsString
     return pthread_create(&appThread, NULL, startMainMethod, NULL)==0;
 }
 
+static int saveCustomClass(JNIEnv* env, const char* className)
+{
+	jclass clazz=env->FindClass(className);
+
+	if (clazz == NULL)
+	{
+		__android_log_print(ANDROID_LOG_FATAL,"Qt", "Custom Native registration unable to find class '%s'", className);
+		return JNI_FALSE;
+	}
+
+	jmethodID constr = env->GetMethodID(clazz, "<init>", "()V");
+
+	if(!constr) {
+		__android_log_print(ANDROID_LOG_FATAL,"Qt", "Custom Native registration unable to find  constructor for class '%s'", className);
+		return JNI_FALSE;;
+	}
+
+	jobject obj = env->NewObject(clazz, constr);
+
+	customClassPtr = env->NewGlobalRef(obj);
+
+	return JNI_TRUE;
+}
+
 
 static JNINativeMethod methods[] = {
     {"startQtApp", "(Ljava/lang/String;Ljava/lang/String;)V", (void *)startQtApp}
@@ -149,10 +175,10 @@ typedef union {
 
 Q_DECL_EXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* /*reserved*/)
 {
-    __android_log_print(ANDROID_LOG_INFO,"Qt", "qt start");
-    UnionJNIEnvToVoid uenv;
+	__android_log_print(ANDROID_LOG_INFO,"Qt", "qt start");
+	UnionJNIEnvToVoid uenv;
     uenv.venv = NULL;
-    m_javaVM = 0;
+	m_javaVM = 0;
 
     if (vm->GetEnv(&uenv.venv, JNI_VERSION_1_4) != JNI_OK)
     {
@@ -165,6 +191,11 @@ Q_DECL_EXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* /*reserved*/)
         __android_log_print(ANDROID_LOG_FATAL, "Qt", "registerNatives failed");
         return -1;
     }
-    m_javaVM = vm;
+	if (!saveCustomClass(m_env, customClass))
+	{
+		__android_log_print(ANDROID_LOG_FATAL, "Qt", "Custom registerNatives failed");
+		return -1;
+	}
+	m_javaVM = vm;
     return JNI_VERSION_1_4;
 }

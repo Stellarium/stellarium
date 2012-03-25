@@ -42,7 +42,11 @@ if (BUILD_FOR_ANDROID)
      message(WARNING "Could not find adb. Add it to the path if you want to use the deploy/run_apk targets")
    endif()
   
-   add_custom_target ( build_apk_debug
+   add_custom_target ( build_apk_debug	  
+	  #copy the library to obj, then strip the symbols from it
+	  COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/obj/local/${ARM_TARGET}/
+	  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/libs/${ARM_TARGET}/libstellarium.so ./obj/local/${ARM_TARGET}/
+	  COMMAND ${CMAKE_STRIP} ${CMAKE_CURRENT_BINARY_DIR}/libs/${ARM_TARGET}/libstellarium.so
       COMMAND ${ANT_LOCATION} debug
    )
    
@@ -51,6 +55,10 @@ if (BUILD_FOR_ANDROID)
    )
    
    add_custom_target ( build_apk_debug_no_assets
+	  #copy the library to obj, then strip the symbols from it
+	  COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/obj/local/${ARM_TARGET}/
+	  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/libs/${ARM_TARGET}/libstellarium.so ./obj/local/${ARM_TARGET}/
+	  COMMAND ${CMAKE_STRIP} ${CMAKE_CURRENT_BINARY_DIR}/libs/${ARM_TARGET}/libstellarium.so
       COMMAND ${ANT_LOCATION} debug
    )
    
@@ -62,6 +70,20 @@ if (BUILD_FOR_ANDROID)
    add_custom_target ( run_apk
 	  COMMAND ${ADB_LOCATION} shell am start -n org.stellarium.stellarium/org.kde.necessitas.origo.QtActivity
 	)
+	
+	IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")	
+		# 1. generate a fake Android.mk
+		file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/jni/Android.mk "APP_ABI := ${ARM_TARGET}\n")
+
+		# 2. generate gdb.setup
+		get_directory_property(INCLUDE_DIRECTORIES DIRECTORY . INCLUDE_DIRECTORIES)
+		string(REGEX REPLACE ";" " " INCLUDE_DIRECTORIES "${INCLUDE_DIRECTORIES}")
+		file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/libs/${ARM_TARGET}/gdb.setup "set solib-search-path ${CMAKE_CURRENT_BINARY_DIR}/obj/local/${ARM_TARGET}\n")
+		file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/libs/${ARM_TARGET}/gdb.setup "directory ${INCLUDE_DIRECTORIES}\n")
+
+		# 3. copy gdbserver executable
+		file(COPY ${ANDROID_NDK}/toolchains/arm-linux-androideabi-4.4.3/prebuilt/gdbserver DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/libs/${ARM_TARGET}/)
+	ENDIF()
 	
 	#also possible:
 	#$ADB clear org.stellarium.stellarium

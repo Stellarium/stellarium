@@ -3,12 +3,25 @@
 
 #include <QSystemDisplayInfo>
 
+#define STANDARD_DPI 160
+
 //! @class SystemDisplayInfo
 //! Just a QML-accessible version of SystemDisplayInfo
 class SystemDisplayInfo : public QtMobility::QSystemDisplayInfo
 {
-    Q_OBJECT
+	Q_OBJECT
+	Q_PROPERTY(DpiBucket dpiBucket READ dpiBucket)
+	Q_PROPERTY(float density READ density NOTIFY densityChanged)
+	Q_ENUMS(DpiBucket)
 public:
+	enum DpiBucket
+	{
+		LOW_DPI = 120,
+		MEDIUM_DPI = 160,
+		HIGH_DPI = 240,
+		XHIGH_DPI = 320
+	};
+
     explicit SystemDisplayInfo(QObject *parent = 0);
 	virtual ~SystemDisplayInfo() {}
 
@@ -23,8 +36,14 @@ public:
 	Q_INVOKABLE int physicalWidth();
 	Q_INVOKABLE QSystemDisplayInfo::BacklightState backlightStatus();
 
+
+	Q_INVOKABLE int dpToPixels(int dp); //convert from Dp to pixels
+	DpiBucket dpiBucket();
+	float density();
+
 signals:
 	void orientationChanged ( QSystemDisplayInfo::DisplayOrientation orientation );
+	void densityChanged();
 
 public slots:
 	//! Tell the SystemDisplayInfo that the orientation has switched. This lets us detect it
@@ -36,6 +55,8 @@ public slots:
 
 private:
 	QSystemDisplayInfo::DisplayOrientation currOrientation;
+	float m_density; //factor to multiply
+	DpiBucket m_dpiBucket; //current DPI bucket
 };
 
 #endif // SYSTEMDISPLAYINFO_HPP

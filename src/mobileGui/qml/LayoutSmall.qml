@@ -8,55 +8,24 @@ Item {
 
 	anchors.fill: parent
 
-	function stretchButtonWidth()
+	function spacerWidth()
 	{
-		return (parent.width - logoWidth()) / 4
+		return (parent.width - logoWidth() - 4 * minButtonWidth())
 	}
 
 	function minButtonWidth()
 	{
-		return Math.min(parent.width / 5, dpX(48))
+		return Math.min((parent.width - logoWidth()) / 4, dp(56))
 	}
 
 	function logoWidth()
 	{
-		return Math.min(parent.width / 5, dpX(56))
+		return Math.min(parent.width / 5, dp(56))
 	}
 
 	function searchFieldWidth()
 	{
 		return (parent.width - logoWidth() - minButtonWidth())
-	}
-
-	Timer {
-		id: fadeTimer
-		interval: 1000
-		running: true
-		repeat : false
-		onTriggered: {
-			if(buttonBar.state == "SHOWN")
-			{
-				buttonBar.state = "FADED"
-			}
-		}
-	}
-
-	function freezeShowButtonBar()
-	{
-		buttonBar.state = "SHOWN";
-		fadeTimer.stop();
-	}
-
-	function showButtonBar()
-	{
-		buttonBar.state = "SHOWN";
-		fadeTimer.restart();
-	}
-
-	function hideButtonBar()
-	{
-		buttonBar.state = "HIDDEN";
-		fadeTimer.stop();
 	}
 
 	Item {
@@ -68,36 +37,7 @@ Item {
 		anchors.right: parent.right
 		implicitHeight: 100
 		//48dp is Android's magic grid size number
-		height: dpY(48)
-		state: "SHOWN"
-
-		states: [
-			State {
-				name: "SHOWN"
-				PropertyChanges {
-					target: buttonBar
-					opacity: 1
-				}
-			},
-			State {
-				name: "FADED"
-				PropertyChanges {
-					target: buttonBar
-					opacity: 0.3
-				}
-			}
-		]
-
-		transitions: [
-			Transition {
-				to: "SHOWN"
-				NumberAnimation { target: buttonBar; property: "opacity"; duration: 0 }
-			},
-			Transition {
-				to: "FADED"
-				NumberAnimation { target: buttonBar; property: "opacity"; duration: 200 }
-			}
-		]
+		height: dp(48)
 
 		Rectangle {
 			anchors.fill: parent
@@ -149,42 +89,38 @@ Item {
 					anchors.bottom: parent.bottom
 					width: logoWidth()
 					labelText: " Logo"
-					onPressed: {buttonBar.state = "SHOWN"; fadeTimer.stop()}
-					onReleased: fadeTimer.restart();
+					bgOpacity: 0
+				}
+				Item {
+					anchors.top: parent.top
+					anchors.bottom: parent.bottom
+					width: spacerWidth();
 				}
 				Button {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
-					width: stretchButtonWidth()
+					width: minButtonWidth()
 					labelText: "Srch"
-					onPressed: {buttonBar.state = "SHOWN"; fadeTimer.stop()}
-					onReleased: fadeTimer.restart();
 					onClicked: buttonRows.state = "SEARCH"
 				}
 				Button {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
-					width: stretchButtonWidth()
+					width: minButtonWidth()
 					labelText: "Play"
-					onPressed: {buttonBar.state = "SHOWN"; fadeTimer.stop()}
 					onClicked: buttonRows.state = "PLAYBACK"
-					onReleased: fadeTimer.restart();
 				}
 				Button {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
-					width: stretchButtonWidth()
+					width: minButtonWidth()
 					labelText: "Accl"
-					onPressed: {buttonBar.state = "SHOWN"; fadeTimer.stop()}
-					onReleased: fadeTimer.restart();
 				}
 				Button {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
-					width: stretchButtonWidth()
+					width: minButtonWidth()
 					labelText: ". . ."
-					onPressed: {buttonBar.state = "SHOWN"; fadeTimer.stop()}
-					onReleased: fadeTimer.restart();
 				}
 			}
 
@@ -197,44 +133,39 @@ Item {
 					anchors.bottom: parent.bottom
 					width: logoWidth()
 					labelText: "<Logo"
-					onPressed: {buttonBar.state = "SHOWN"; fadeTimer.stop()}
 					onClicked: buttonRows.state = "START"
-					onReleased: fadeTimer.restart();
+				}
+				Item {
+					anchors.top: parent.top
+					anchors.bottom: parent.bottom
+					width: spacerWidth();
 				}
 				Button {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
-					width: stretchButtonWidth()
+					width: minButtonWidth()
 					labelText: "RW"
-					onPressed: {buttonBar.state = "SHOWN"; fadeTimer.stop()}
-					onReleased: fadeTimer.restart();
 					action: "actionDecrease_Time_Speed"
 				}
 				Button {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
-					width: stretchButtonWidth()
+					width: minButtonWidth()
 					labelText: "Play"
-					onPressed: {buttonBar.state = "SHOWN"; fadeTimer.stop()}
-					onReleased: fadeTimer.restart();
 					action: "actionSet_Real_Time_Speed"
 				}
 				Button {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
-					width: stretchButtonWidth()
+					width: minButtonWidth()
 					labelText: "Now"
-					onPressed: {buttonBar.state = "SHOWN"; fadeTimer.stop()}
-					onReleased: fadeTimer.restart();
 					action: "actionReturn_To_Current_Time"
 				}
 				Button {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
-					width: stretchButtonWidth()
+					width: minButtonWidth()
 					labelText: "FF"
-					onPressed: {buttonBar.state = "SHOWN"; fadeTimer.stop()}
-					onReleased: fadeTimer.restart();
 					action: "actionIncrease_Time_Speed"
 				}
 			}
@@ -248,9 +179,7 @@ Item {
 					anchors.bottom: parent.bottom
 					width: logoWidth()
 					labelText: "<Logo"
-					onPressed: {buttonBar.state = "SHOWN"; fadeTimer.stop()}
 					onClicked: buttonRows.state = "START"
-					onReleased: fadeTimer.restart();
 				}
 				Button {
 					id: goButton
@@ -258,8 +187,6 @@ Item {
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
 					labelText: "Go"
-					onPressed: {buttonBar.state = "SHOWN"; fadeTimer.stop()}
-					onReleased: fadeTimer.restart();
 				}
 				Item
 				{
@@ -271,7 +198,7 @@ Item {
 						color: "white"
 						opacity: 0.3
 						anchors.fill: parent
-						anchors.margins: dpX(8)
+						anchors.margins: dp(8)
 					}
 
 					Flickable
@@ -280,7 +207,7 @@ Item {
 						id: flickBox
 
 						anchors.fill: parent
-						anchors.margins: dpX(8)
+						anchors.margins: dp(8)
 						width: parent.width; height: parent.height
 						interactive: true
 
@@ -332,8 +259,8 @@ Item {
 		id: infoBox
 		anchors.bottom: parent.bottom
 		anchors.left: parent.left
-		anchors.bottomMargin: dpY(16)
-		anchors.leftMargin: dpX(16)
+		anchors.bottomMargin: dp(16)
+		anchors.leftMargin: dp(16)
 
 		width: childrenRect.width
 		height: childrenRect.height
@@ -348,11 +275,13 @@ Item {
 				id: title
 				text: ""
 				color: "white"
+				style: Text.Raised; styleColor: "#000000"
 			}
 			Text {
 				id: body
 				text: ""
 				color: "white"
+				style: Text.Raised; styleColor: "#000000"
 			}
 		}
 	}

@@ -105,9 +105,13 @@ public class QtActivity extends Activity
     private DexClassLoader m_classLoader = null; // loader object
     private String[] m_qtLibs = null; // required qt libs
 
+	// Static instance to access from outside
+	public static QtActivity sInstance;
+
     // this function is used to load and start the loader
     private void loadApplication(Bundle loaderParams)
     {
+		sInstance = this;
         try
         {
             if (loaderParams.getInt(ERROR_CODE_KEY) != 0)

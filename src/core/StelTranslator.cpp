@@ -33,6 +33,10 @@
 #include "StelTranslator.hpp"
 #include "StelFileMgr.hpp"
 
+#ifdef ANDROID
+#include "android/JavaWrapper.hpp"
+#endif
+
 // Init static members
 StelTranslator* StelTranslator::lastUsed = NULL;
 QMap<QString, QString> StelTranslator::iso639codes;
@@ -58,6 +62,9 @@ void StelTranslator::init(const QString& fileName)
 //! Try to determine system language from system configuration
 void StelTranslator::initSystemLanguage(void)
 {
+#ifdef ANDROID
+	systemLangName = JavaWrapper::getLocaleString();
+#else
 	char* lang = getenv("LANGUAGE");
 	if (lang) systemLangName = lang;
 	else
@@ -82,6 +89,7 @@ void StelTranslator::initSystemLanguage(void)
 #endif
 		}
 	}
+#endif //ANDROID-else
 
 	if (systemLangName.isEmpty())
 		systemLangName = "en";

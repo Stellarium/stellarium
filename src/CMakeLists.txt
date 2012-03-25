@@ -329,7 +329,9 @@ SET(stellarium_exe_SRCS main.cpp)
 IF (BUILD_FOR_ANDROID)
     SET(stellarium_exe_SRCS
         ${stellarium_exe_SRCS}
-        qtmain_android.cpp
+		android/qtmain_android.cpp
+		android/JavaWrapper.hpp
+		android/JavaWrapper.cpp
         )
 ENDIF (BUILD_FOR_ANDROID)
 

@@ -45,6 +45,7 @@
 #include "StelAppGraphicsWidget.hpp"
 #include "StelTranslator.hpp"
 #include "StelCore.hpp"
+#include "../android/JavaWrapper.hpp"
 
 StelGuiBase* StelMobileGuiPluginInterface::getStelGuiBase() const
 {
@@ -114,6 +115,8 @@ void MobileGui::init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraph
 	}
 
 	connectSignals();
+
+	qDebug() << JavaWrapper::getLocaleString();;
 }
 
 //! Get a pointer on the info panel used to display selected object info

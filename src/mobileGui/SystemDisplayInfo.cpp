@@ -1,11 +1,48 @@
 #include "SystemDisplayInfo.hpp"
 
+#ifdef ANDROID
+#include "../android/JavaWrapper.hpp"
+#endif
+
 QTM_USE_NAMESPACE
+
 
 SystemDisplayInfo::SystemDisplayInfo(QObject *parent) :
 	QSystemDisplayInfo(parent)
 {
 	currOrientation = QSystemDisplayInfo::orientation(0);
+
+	//Calculate screen density
+	int dpi;
+
+#ifdef ANDROID
+	//if using Android, get the abstract density scale via JNI
+
+	dpi = JavaWrapper::getDensityDpi();
+	m_density = JavaWrapper::getDensity();
+#else
+	dpi = (getDPIWidth() + getDPIHeight()) / 2;
+	m_density = getDPIWidth() / static_cast<float>(STANDARD_DPI);
+#endif
+
+	if(dpi < MEDIUM_DPI)
+	{
+		m_dpiBucket = LOW_DPI;
+	}
+	else if(dpi < HIGH_DPI)
+	{
+		m_dpiBucket = MEDIUM_DPI;
+	}
+	else if(dpi < XHIGH_DPI)
+	{
+		m_dpiBucket = HIGH_DPI;
+	}
+	else
+	{
+		m_dpiBucket = XHIGH_DPI;
+	}
+
+	densityChanged();
 }
 
 int SystemDisplayInfo::displayBrightness()
@@ -56,4 +93,19 @@ QSystemDisplayInfo::BacklightState SystemDisplayInfo::backlightStatus()
 void SystemDisplayInfo::changeOrientation(QSystemDisplayInfo::DisplayOrientation orientation)
 {
 	this->currOrientation = orientation;
+}
+
+SystemDisplayInfo::DpiBucket SystemDisplayInfo::dpiBucket()
+{
+	return m_dpiBucket;
+}
+
+float SystemDisplayInfo::density()
+{
+	return m_density;
+}
+
+int SystemDisplayInfo::dpToPixels(int dp)
+{
+	return static_cast<int>(dp * m_density);
 }
