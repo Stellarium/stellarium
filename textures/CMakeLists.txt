@@ -7,6 +7,6 @@ INSTALL(FILES amalthea.png proteus.png triton.png mercury.png venus.png earth-cl
 #ELSEIF(${STELLARIUM_SPLASH} STREQUAL "ReleaseCandidate")
 #  INSTALL(FILES logo24bits_rc.png DESTINATION share/${PACKAGE}/textures RENAME logo24bits.png)
 #ELSE()
-#  INSTALL(FILES logo24bits_rel.png DESTINATION share/${PACKAGE}/textures RENAME logo24bits.png)
+#  INSTALL(FILES logo24bits.png DESTINATION share/${PACKAGE}/textures)
 #ENDIF()
 
