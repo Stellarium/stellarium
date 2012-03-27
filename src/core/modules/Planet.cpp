@@ -173,7 +173,23 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			            StelUtils::radToDmsStr(angularSize, true));
 		}
 		else
+		{
 			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
+		}
+		oss << "<br>";
+	}
+
+	if (flags&Extra1)
+	{
+		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
+		const double observerRq = observerHelioPos.lengthSquared();
+		const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
+		const double planetRq = planetHelioPos.lengthSquared();
+		const double observerPlanetRq = (observerHelioPos - planetHelioPos).lengthSquared();
+		const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
+		float planetPhase = 0.5f * std::abs(1.f + cos_chi);
+		oss << QString(q_("Phase: %1")).arg(planetPhase, 0, 'f', 2) << "<br>";
+		oss << QString(q_("Illuminated: %1%")).arg(planetPhase * 100, 0, 'f', 1) << "<br>";
 	}
 
 	postProcessInfoString(str, flags);
