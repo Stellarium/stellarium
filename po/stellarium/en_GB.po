@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-21 19:59+0200\n"
-"PO-Revision-Date: 2012-03-10 10:47+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2012-03-26 13:13+0000\n"
+"Last-Translator: Anthony Harrington <untaintableangel@hotmail.co.uk>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-22 04:53+0000\n"
-"X-Generator: Launchpad (build 14981)\n"
+"X-Launchpad-Export-Date: 2012-03-27 04:49+0000\n"
+"X-Generator: Launchpad (build 15011)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -138,7 +138,7 @@ msgstr "Distance: %1AU"
 #: src/core/modules/Planet.cpp:171
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "Apparent diameter: %1, with rings: %2"
 
 #: src/core/modules/Planet.cpp:176
 #, qt-format
@@ -597,13 +597,15 @@ msgstr "Tester: %1"
 
 #: src/gui/HelpDialog.cpp:308
 msgid "Past Developers"
-msgstr ""
+msgstr "Past Developers"
 
 #: src/gui/HelpDialog.cpp:309
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
+"Several people have made significant contributions, but are no longer "
+"active. Their work has made a big difference to the project:"
 
 #: src/gui/HelpDialog.cpp:310
 #, qt-format
@@ -1033,11 +1035,11 @@ msgstr "starchart"
 
 #: src/gui/SearchDialog.cpp:503
 msgid "University of Strasbourg (France)"
-msgstr ""
+msgstr "University of Strasbourg (France)"
 
 #: src/gui/SearchDialog.cpp:504
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "Harvard University (USA)"
 
 #: src/main.cpp:337
 msgid "This system does not support OpenGL."
@@ -2740,15 +2742,15 @@ msgstr "Position"
 
 #: src/ui_searchDialogGui.h:586
 msgid "On-line astronomical database SIMBAD"
-msgstr ""
+msgstr "On-line astronomical database SIMBAD"
 
 #: src/ui_searchDialogGui.h:587
 msgid "Extend search with SIMBAD"
-msgstr ""
+msgstr "Extend search with SIMBAD"
 
 #: src/ui_searchDialogGui.h:588
 msgid "Server:"
-msgstr ""
+msgstr "Server:"
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
