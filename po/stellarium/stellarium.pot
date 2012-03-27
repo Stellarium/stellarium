@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-21 19:59+0200\n"
+"POT-Creation-Date: 2012-03-27 21:44+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -140,9 +140,19 @@ msgstr ""
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:176
+#: src/core/modules/Planet.cpp:177
 #, qt-format
 msgid "Apparent diameter: %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:191
+#, qt-format
+msgid "Phase: %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:192
+#, qt-format
+msgid "Illuminated: %1%"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:52
