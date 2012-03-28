@@ -449,7 +449,7 @@ void StelPainter::sRing(float rMin, float rMax, int slices, int stacks, int orie
 	float x,y;
 	int j;
 
-	static Vec3f lightPos3;
+	static Vec3d lightPos3;
 	static Vec4f ambientLight;
 	static Vec4f diffuseLight;
 	float c;
@@ -459,8 +459,9 @@ void StelPainter::sRing(float rMin, float rMax, int slices, int stacks, int orie
 		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
 		Vec3f tmpv(0.f);
 		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
-		lightPos3 -= tmpv;
+		//lightPos3 -= tmpv;
 		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
+		prj->getModelViewTransform()->getApproximateLinearTransfo().transpose().multiplyWithoutTranslation(lightPos3);
 		prj->getModelViewTransform()->backward(lightPos3);
 		lightPos3.normalize();
 		ambientLight = light.getAmbient();
@@ -1578,7 +1579,7 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	// It is really good for performance to have Vec4f,Vec3f objects
 	// static rather than on the stack. But why?
 	// Is the constructor/destructor so expensive?
-	static Vec3f lightPos3;
+	static Vec3d lightPos3;
 	static Vec4f ambientLight;
 	static Vec4f diffuseLight;
 	float c;
@@ -1588,8 +1589,9 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
 		Vec3f tmpv(0.f);
 		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
-		lightPos3 -= tmpv;
+		//lightPos3 -= tmpv;
 		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
+		prj->getModelViewTransform()->getApproximateLinearTransfo().transpose().multiplyWithoutTranslation(lightPos3);
 		prj->getModelViewTransform()->backward(lightPos3);
 		lightPos3.normalize();
 		ambientLight = light.getAmbient();

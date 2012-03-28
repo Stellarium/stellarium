@@ -151,7 +151,7 @@ int main(int argc, char **argv)
 	// OK we start the full program.
 	// Print the console splash and get on with loading the program
 	QString versionLine = QString("This is %1 - http://www.stellarium.org").arg(StelUtils::getApplicationName());
-	QString copyrightLine = QString("Copyright (C) 2000-2011 Fabien Chereau et al");
+	QString copyrightLine = QString("Copyright (C) 2000-2012 Fabien Chereau et al");
 	int maxLength = qMax(versionLine.size(), copyrightLine.size());
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
 	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
@@ -260,12 +260,16 @@ int main(int argc, char **argv)
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
+#ifdef Q_OS_WIN
 	bool safeMode = false; // used in Q_OS_WIN, but need the QGL::setPreferredPaintEngine() call here.
+#endif
 	if (!confSettings->value("main/use_qpaintenginegl2", true).toBool()
 		|| qApp->property("onetime_safe_mode").isValid()) {
 		// The user explicitely request to use the older paint engine.
 		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
+#ifdef Q_OS_WIN
 		safeMode = true;
+#endif
 	}
 
 #ifdef Q_OS_MAC
