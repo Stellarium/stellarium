@@ -212,10 +212,11 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 
 	StelUtils::spheToRect(snra, snde, XYZ);
 	mag = getVMagnitude(core, true);
+	sd->preDrawPointSource(&painter);
 	
 	if (mag <= sd->getLimitMagnitude())
 	{
-		sd->computeRCMag(mag, rcMag);
+		sd->computeRCMag(mag, rcMag);		
 		sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, color, false);
 		painter.setColor(color[0], color[1], color[2], 1);
 		size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
@@ -225,4 +226,6 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 			painter.drawText(XYZ, designation, 0, shift, shift, false);
 		}
 	}
+
+	sd->postDrawPointSource(&painter);
 }

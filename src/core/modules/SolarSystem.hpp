@@ -35,7 +35,6 @@ class StelTranslator;
 class StelObject;
 class StelCore;
 class StelProjector;
-class StelNavigator;
 class QSettings;
 
 typedef QSharedPointer<Planet> PlanetP;
@@ -219,7 +218,6 @@ public:
 	//! @param observerPos Position of the observer in heliocentric ecliptic frame (Required for light travel time computation).
 	//! @param date the date in JDay
 	//! \deprecated ??? In the "deprecated" section, but used in SolarSystem::init()
-	//! and StelNavigator::updateTime()
 	void computePositions(double date, const Vec3d& observerPos = Vec3d(0.));
 
 	//! Get the list of all the bodies of the solar system.
