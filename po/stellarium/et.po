@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: po_stellarium-et\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-21 19:59+0200\n"
+"POT-Creation-Date: 2012-03-27 21:44+0700\n"
 "PO-Revision-Date: 2012-01-14 15:35+0000\n"
 "Last-Translator: Merike <Unknown>\n"
 "Language-Team: Estonian <kde-i18n-doc@lists.kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-22 04:48+0000\n"
-"X-Generator: Launchpad (build 14981)\n"
+"X-Launchpad-Export-Date: 2012-03-28 04:37+0000\n"
+"X-Generator: Launchpad (build 15027)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -142,10 +142,20 @@ msgstr "Kaugus: %1 aü"
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:176
+#: src/core/modules/Planet.cpp:177
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Näiv läbimõõt: %1"
+
+#: src/core/modules/Planet.cpp:191
+#, qt-format
+msgid "Phase: %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:192
+#, qt-format
+msgid "Illuminated: %1%"
+msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
