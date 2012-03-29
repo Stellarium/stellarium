@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-15 17:25+0700\n"
-"PO-Revision-Date: 2012-01-31 14:40+0000\n"
-"Last-Translator: Abdurrahman Naufal <arnaufal7@yahoo.com>\n"
+"POT-Creation-Date: 2012-03-27 21:44+0700\n"
+"PO-Revision-Date: 2012-03-23 06:36+0000\n"
+"Last-Translator: Y4n <Unknown>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-16 04:41+0000\n"
-"X-Generator: Launchpad (build 14951)\n"
+"X-Launchpad-Export-Date: 2012-03-28 04:39+0000\n"
+"X-Generator: Launchpad (build 15027)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -23,7 +23,7 @@ msgstr "Meridian"
 
 #: src/core/modules/GridLinesMgr.cpp:546
 msgid "Ecliptic"
-msgstr "Ecliptic"
+msgstr "Ekliptika"
 
 #: src/core/modules/GridLinesMgr.cpp:550
 msgid "Equator"
@@ -31,7 +31,7 @@ msgstr "Ekuator"
 
 #: src/core/modules/GridLinesMgr.cpp:554
 msgid "Horizon"
-msgstr "Garis melintang"
+msgstr "Cakrawala"
 
 #: src/core/modules/GridLinesMgr.cpp:558
 msgid "Galactic Plane"
@@ -58,7 +58,7 @@ msgstr "Planet: "
 #: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:102
 #, qt-format
 msgid "Type: <b>%1</b>"
-msgstr "Tipe: <b>%1</b>"
+msgstr "Jenis: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:123
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
@@ -135,10 +135,25 @@ msgstr "Jarak: %1AU (%2 km)"
 msgid "Distance: %1AU"
 msgstr "Jarak: %1SA"
 
-#: src/core/modules/Planet.cpp:166
+#: src/core/modules/Planet.cpp:171
+#, qt-format
+msgid "Apparent diameter: %1, with rings: %2"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:177
 #, qt-format
 msgid "Apparent diameter: %1"
-msgstr "Diameter pandang: %1"
+msgstr "Diameter tampak: %1"
+
+#: src/core/modules/Planet.cpp:191
+#, qt-format
+msgid "Phase: %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:192
+#, qt-format
+msgid "Illuminated: %1%"
+msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -336,7 +351,7 @@ msgstr "Arah pandang saat mulai Azimut/Ketinggian: %1/%2"
 #: src/gui/ConfigurationDialog.cpp:539
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
-msgstr "Penulis"
+msgstr "Pembuat"
 
 #: src/gui/ConfigurationDialog.cpp:543 src/gui/ViewDialog.cpp:393
 msgid "Contact"
@@ -344,7 +359,7 @@ msgstr "Kontak"
 
 #: src/gui/ConfigurationDialog.cpp:621
 msgid "Author"
-msgstr "Penulis"
+msgstr "Pembuat"
 
 #: src/gui/ConfigurationDialog.cpp:625
 msgid "License"
@@ -352,11 +367,11 @@ msgstr "Lisensi"
 
 #: src/gui/ConfigurationDialog.cpp:655
 msgid "Running script: "
-msgstr "Menjalankan skrip: "
+msgstr "Skrip yang sedang berjalan: "
 
 #: src/gui/ConfigurationDialog.cpp:662
 msgid "Running script: [none]"
-msgstr "Menjalankan skrip: [tidak ada]"
+msgstr "Skrip yang sedang berjalan: [tidak ada]"
 
 #: src/gui/ConfigurationDialog.cpp:732
 msgid ""
@@ -560,8 +575,8 @@ msgstr ""
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forum} - diskusikan Stellarium bersama pengguna lainnya."
 
-#: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:337
-#: src/gui/HelpDialog.cpp:339 src/gui/StelGui.cpp:175
+#: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:341
+#: src/gui/HelpDialog.cpp:343 src/gui/StelGui.cpp:175
 msgid "Miscellaneous"
 msgstr "Lain-lain"
 
@@ -579,28 +594,39 @@ msgstr "Koordinator proyek dan pengembang utama: %1"
 msgid "Doc author/developer: %1"
 msgstr "Penulis/pengembang dokumentasi: %1"
 
-#: src/gui/HelpDialog.cpp:301
-#, qt-format
-msgid "Graphic/other designer: %1"
-msgstr "Desainer grafis/lainnya: %1"
-
-#: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
-#: src/gui/HelpDialog.cpp:304 src/gui/HelpDialog.cpp:305
-#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:309
-#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
+#: src/gui/HelpDialog.cpp:303 src/gui/HelpDialog.cpp:304
+#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "Developer: %1"
 msgstr "Pengembang: %1"
 
-#: src/gui/HelpDialog.cpp:307 src/gui/HelpDialog.cpp:308
-#, qt-format
-msgid "OSX Developer: %1"
-msgstr "Pengembang OSX: %1"
-
-#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:307
 #, qt-format
 msgid "Tester: %1"
 msgstr "Penguji: %1"
+
+#: src/gui/HelpDialog.cpp:308
+msgid "Past Developers"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:309
+msgid ""
+"Several people have made significant contributions, but are no longer "
+"active. Their work has made a big difference to the project:"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:310
+#, qt-format
+msgid "Graphic/other designer: %1"
+msgstr "Desainer grafis/lainnya: %1"
+
+#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#, qt-format
+msgid "OSX Developer: %1"
+msgstr "Pengembang OSX: %1"
 
 #: src/gui/StelGui.cpp:102
 msgid "Display Options"
@@ -870,7 +896,7 @@ msgstr "Simpan tangkapan layar"
 
 #: src/gui/StelGui.cpp:179
 msgid "Copy selected object information to clipboard"
-msgstr ""
+msgstr "Salin informasi objek terpilih"
 
 #: src/gui/StelGui.cpp:181
 msgid "Auto hide horizontal button bar"
@@ -999,31 +1025,31 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:74
 msgid "selected text"
-msgstr ""
+msgstr "teks terpilih"
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "clear text"
-msgstr ""
+msgstr "hapus teks"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "clear images"
-msgstr ""
+msgstr "hapus gambar"
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
-msgstr ""
+msgstr "alami"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
-msgstr ""
+msgstr "peta bintang"
 
 #: src/gui/SearchDialog.cpp:503
 msgid "University of Strasbourg (France)"
-msgstr ""
+msgstr "Universitas Strasbourg (Perancis)"
 
 #: src/gui/SearchDialog.cpp:504
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "Universitas Harvard (USA)"
 
 #: src/main.cpp:337
 msgid "This system does not support OpenGL."
@@ -1475,27 +1501,27 @@ msgstr "Garching"
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
 msgid "Landscape Tour"
-msgstr ""
+msgstr "Tur Pemandangan"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
 msgid "Partial Lunar Eclipse"
-msgstr ""
+msgstr "Gerhana Bulan Sebagian"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:184
 msgid "Total Lunar Eclipse"
-msgstr ""
+msgstr "Gerhana Bulan Total"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
 msgid "Screensaver"
-msgstr ""
+msgstr "Screensaver"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:188
 msgid "Solar Eclipse 2009"
-msgstr ""
+msgstr "Gerhana Matahari 2009"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:190
@@ -1505,33 +1531,35 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:192
 msgid "Zodiac"
-msgstr ""
+msgstr "Zodiak"
 
 #: src/translations.h:195
 msgid "Look around each installed landscape."
-msgstr ""
+msgstr "Lihat seluruh pemandangan yang terpasang."
 
 #: src/translations.h:196
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr ""
+msgstr "Skrip untuk mendemonstrasikan gerhana Bulan sebagian."
 
 #: src/translations.h:197
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr ""
+msgstr "Skrip untuk mendemonstrasikan gerhana Bulan total."
 
 #: src/translations.h:198
 msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr ""
+msgstr "Melihat-lihat langit secara acak."
 
 #: src/translations.h:199
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
+"Skrip untuk mendemonstrasikan gerhana Matahari total pada tahun 2009 di "
+"Rangpur, Bangladesh."
 
 #: src/translations.h:200
 msgid "Script which runs automatically at startup"
-msgstr ""
+msgstr "Skrip yang jalan secara otomatis saat startup."
 
 #: src/translations.h:201
 msgid ""
@@ -1539,6 +1567,8 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
+"Skrip i ni menampilkan rasi-rasi zodiak, yaitu rasi-rasi yang terletak di "
+"garis ekliptika pada bola langit."
 
 #: src/translations.h:204
 msgid "Andorra"
@@ -1894,7 +1924,7 @@ msgstr "Guatemala"
 
 #: src/translations.h:292
 msgid "Guam"
-msgstr ""
+msgstr "Guam"
 
 #: src/translations.h:293
 msgid "Guinea-Bissau"
@@ -2673,7 +2703,7 @@ msgstr "pi"
 
 #: src/ui_searchDialogGui.h:559
 msgid "rho"
-msgstr ""
+msgstr "rho"
 
 #: src/ui_searchDialogGui.h:562
 msgid "sigma"
@@ -2705,7 +2735,7 @@ msgstr "omega"
 
 #: src/ui_searchDialogGui.h:582
 msgid "Greek letters for Bayer designations"
-msgstr ""
+msgstr "Abjad Yunani untuk penamaan Bayer"
 
 #: src/ui_searchDialogGui.h:583
 msgid "Object"
@@ -2721,15 +2751,15 @@ msgstr "Posisi"
 
 #: src/ui_searchDialogGui.h:586
 msgid "On-line astronomical database SIMBAD"
-msgstr ""
+msgstr "Basis data astronomi dalam jaringan SIMBAD"
 
 #: src/ui_searchDialogGui.h:587
 msgid "Extend search with SIMBAD"
-msgstr ""
+msgstr "Pencarian lanjutan dengan SIMBAD"
 
 #: src/ui_searchDialogGui.h:588
 msgid "Server:"
-msgstr ""
+msgstr "Server:"
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
@@ -3278,29 +3308,31 @@ msgstr "Pemadaman adalah hilangnya"
 
 #: src/ui_AtmosphereDialog.h:187
 msgid "Extinction Coefficient:"
-msgstr ""
+msgstr "Koefisien ekstingsi:"
 
 #: src/ui_AtmosphereDialog.h:189
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
+"Gunakan sekitar 0,12 untuk puncak gunung, 0,2 untuk pedesaan, 0,35 untuk "
+"keadaan berkabut."
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
-msgstr ""
+msgstr "Konsol skrip"
 
 #: src/ui_scriptConsole.h:344
 msgid "load script from file"
-msgstr ""
+msgstr "Muat skrip dari berkas"
 
 #: src/ui_scriptConsole.h:348
 msgid "save script to file"
-msgstr ""
+msgstr "simpan skrip menjadi berkas"
 
 #: src/ui_scriptConsole.h:352
 msgid "clear script"
-msgstr ""
+msgstr "hapus skrip"
 
 #: src/ui_scriptConsole.h:356
 msgid "pre-process script using SSC preprocessor"
@@ -3316,23 +3348,23 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:365
 msgid "run script"
-msgstr ""
+msgstr "jalankan skrip"
 
 #: src/ui_scriptConsole.h:369
 msgid "stop script"
-msgstr ""
+msgstr "hentikan skrip"
 
 #: src/ui_scriptConsole.h:372
 msgid "Script"
-msgstr ""
+msgstr "Skrip"
 
 #: src/ui_scriptConsole.h:373
 msgid "Output"
-msgstr ""
+msgstr "Keluaran"
 
 #: src/ui_scriptConsole.h:375
 msgid "Cursor position"
-msgstr ""
+msgstr "Posisi kursor"
 
 #: src/ui_scriptConsole.h:377
 msgid "Include dir:"
@@ -3340,7 +3372,7 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:378
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -3357,17 +3389,19 @@ msgstr "Ukuran sudut"
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:308
 msgid "The Angle Measure is enabled:"
-msgstr ""
+msgstr "Pengukur jarak sudut diaktifkan:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:310
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
+"Seret dengan tombol kiri tetikus untuk mengukur jarak sudut, klik kiri untuk "
+"menghapus."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:312
 msgid "Right-clicking changes the end point only."
-msgstr ""
+msgstr "Klik kanan akan mengganti titik akhir."
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
@@ -3392,18 +3426,21 @@ msgid ""
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
+"Memperlihatkan langit bagai saat dilihat melalui eyepiece teleskop. (Hanya "
+"perbesaran dan medan pandang yang disimulasikan.) Plugin ini juga dapat "
+"menampilkan medan pandang sensor dan Telrad."
 
 #: plugins/Oculars/src/Oculars.cpp:757
 msgid "Please select an object before switching to ocular view."
-msgstr ""
+msgstr "Pilih sebuah objek sebelum mengaktifkan tampilan okular."
 
 #: plugins/Oculars/src/Oculars.cpp:836
 msgid "&Previous ocular"
-msgstr ""
+msgstr "&Okular sebelumnya"
 
 #: plugins/Oculars/src/Oculars.cpp:837
 msgid "&Next ocular"
-msgstr ""
+msgstr "&Okular selanjutnya"
 
 #: plugins/Oculars/src/Oculars.cpp:838
 msgid "Select &ocular"
@@ -3415,7 +3452,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:892
 msgid "Configure &Oculars"
-msgstr ""
+msgstr "Atur &okular"
 
 #: plugins/Oculars/src/Oculars.cpp:901
 msgid "Toggle &CCD"
@@ -3427,23 +3464,23 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:919
 msgid "&Previous CCD"
-msgstr ""
+msgstr "&CCD sebelumnya"
 
 #: plugins/Oculars/src/Oculars.cpp:920
 msgid "&Next CCD"
-msgstr ""
+msgstr "&CCD selanjutnya"
 
 #: plugins/Oculars/src/Oculars.cpp:921
 msgid "&Select CCD"
-msgstr ""
+msgstr "&Pilih CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:943
 msgid "&Rotate CCD"
-msgstr ""
+msgstr "&Putar CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:975
 msgid "&Reset rotation"
-msgstr ""
+msgstr "&Reset putaran"
 
 #: plugins/Oculars/src/Oculars.cpp:1201
 #: plugins/Oculars/src/ui_ocularDialog.h:864
@@ -3452,7 +3489,7 @@ msgstr "Penglihatan okuler"
 
 #: plugins/Oculars/src/Oculars.cpp:1225
 msgid "Oculars popup menu"
-msgstr ""
+msgstr "Menu pop-up okuler"
 
 #: plugins/Oculars/src/Oculars.cpp:1233
 msgid "Crosshairs"
@@ -3460,7 +3497,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1241
 msgid "Image sensor frame"
-msgstr ""
+msgstr "Frame sensor citra"
 
 #: plugins/Oculars/src/Oculars.cpp:1249
 msgid "Telrad sight"
@@ -3468,33 +3505,33 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1257
 msgid "Oculars plugin configuration"
-msgstr ""
+msgstr "Pengaturan plugin okuler"
 
 #: plugins/Oculars/src/Oculars.cpp:1445
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 #, qt-format
 msgid "Ocular #%1"
-msgstr ""
+msgstr "Okuler #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1450
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 #, qt-format
 msgid "Ocular #%1: %2"
-msgstr ""
+msgstr "Okuler #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:1464
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:520
 #, qt-format
 msgid "Ocular FL: %1 mm"
-msgstr ""
+msgstr "Panjang fokus okuler: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
 #: plugins/Oculars/src/Oculars.cpp:1471
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:530
 #, qt-format
 msgid "Ocular aFOV: %1"
-msgstr ""
+msgstr "Medan pandang tampak okular: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1481 plugins/Oculars/src/Oculars.cpp:1543
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
@@ -3518,7 +3555,7 @@ msgstr "Pembesaran: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
 #, qt-format
 msgid "FOV: %1"
-msgstr ""
+msgstr "Medan pandang: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1520
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
@@ -3544,27 +3581,27 @@ msgstr "&Teleskop"
 
 #: plugins/Oculars/src/Oculars.cpp:1737
 msgid "&Previous telescope"
-msgstr ""
+msgstr "&Teleskop sebelumnya"
 
 #: plugins/Oculars/src/Oculars.cpp:1738
 msgid "&Next telescope"
-msgstr ""
+msgstr "&Teleskop selanjutnya"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
 msgid "Previous ocular"
-msgstr ""
+msgstr "Okular sebelumnya"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
 msgid "Next ocular"
-msgstr ""
+msgstr "Okilar selanjutnya"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
 msgid "Previous CCD frame"
-msgstr ""
+msgstr "CCD sebelumnya"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
 msgid "Next CCD frame"
-msgstr ""
+msgstr "CCD selanjutnya"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Previous telescope"
@@ -3572,7 +3609,7 @@ msgstr "Teleskop sebelumnya"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Next telescope"
-msgstr ""
+msgstr "Teleskop selanjutnya"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
@@ -3588,7 +3625,7 @@ msgstr "Putar bingkai sensor 1 derajat berlawanan arah jarum jam"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
-msgstr ""
+msgstr "Reset pemutaran bingkai sensor"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
@@ -3596,7 +3633,7 @@ msgstr "Putar bingkai sensor 1 derajat searah jarum jam"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:310
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr ""
+msgstr "Putar bingkai sensor 5 derajat searah jarum jam"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:323
 msgid "Rotate the sensor frame 15 degrees clockwise"
@@ -3604,11 +3641,11 @@ msgstr "Putar bingkai sensor 15 derajat searah jarum jam"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
 msgid "Effective focal length of the ocular"
-msgstr ""
+msgstr "Panjang fokus efektif dari okular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:533
 msgid "Apparent field of view of the ocular"
-msgstr ""
+msgstr "Medan pandang tampak dari okular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 #, qt-format
@@ -3617,23 +3654,23 @@ msgstr "Rotasi: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 msgid "Magnification provided by these binoculars"
-msgstr ""
+msgstr "Perbesaran binokular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
 msgid "Actual field of view provided by these binoculars"
-msgstr ""
+msgstr "Medan pandang sebenarnya dari binokular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
 msgid "Magnification provided by this ocular/telescope combination"
-msgstr ""
+msgstr "Perbesaran dari kombinasi teleskop-okular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
 msgid "Actual field of view provided by this ocular/telescope combination"
-msgstr ""
+msgstr "Medan pandang sebenarnya dari kombinasi teleskop-okular"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:865
 msgid "Enable only if an object is selected"
-msgstr ""
+msgstr "Hanya aktifkan jika sebuah objek dipilih"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:866
 msgid "Scale image circle"
@@ -3667,7 +3704,7 @@ msgstr "Umum"
 #: plugins/Oculars/src/ui_ocularDialog.h:874
 #: plugins/Oculars/src/ui_ocularDialog.h:882
 msgid "Eyepieces"
-msgstr ""
+msgstr "Eyepiece"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:875
 #: plugins/Oculars/src/ui_ocularDialog.h:884
@@ -3687,7 +3724,7 @@ msgstr "Nama:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "aFOV:"
-msgstr ""
+msgstr "Medan pandang tampak"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:879
 #: plugins/Oculars/src/ui_ocularDialog.h:898
@@ -3700,7 +3737,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 msgid "Binoculars"
-msgstr ""
+msgstr "Binokular"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:883
 #: plugins/Oculars/src/ui_ocularDialog.h:893
@@ -3717,11 +3754,11 @@ msgstr "Resolusi y (piksel):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Chip width (mm):"
-msgstr ""
+msgstr "Panjang sensor (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Chip height (mm):"
-msgstr ""
+msgstr "Lebar sensor (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:891
 msgid "Pixel width (micron):"
@@ -3729,7 +3766,7 @@ msgstr "Lebar piksel (mikron):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:892
 msgid "Pixel height (micron):"
-msgstr ""
+msgstr "Panjang piksel (mikron):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:894
 #: plugins/Oculars/src/ui_ocularDialog.h:902

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-15 17:25+0700\n"
-"PO-Revision-Date: 2012-02-26 07:52+0000\n"
+"POT-Creation-Date: 2012-03-27 21:44+0700\n"
+"PO-Revision-Date: 2012-03-21 06:33+0000\n"
 "Last-Translator: Manuel Rosales Graña <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-16 04:40+0000\n"
-"X-Generator: Launchpad (build 14951)\n"
+"X-Launchpad-Export-Date: 2012-03-28 04:38+0000\n"
+"X-Generator: Launchpad (build 15027)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -135,10 +135,25 @@ msgstr "Distancia: %1UA (%2 km)"
 msgid "Distance: %1AU"
 msgstr "Distancia: %1UA"
 
-#: src/core/modules/Planet.cpp:166
+#: src/core/modules/Planet.cpp:171
+#, qt-format
+msgid "Apparent diameter: %1, with rings: %2"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:177
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Diámetro aparente: %1"
+
+#: src/core/modules/Planet.cpp:191
+#, qt-format
+msgid "Phase: %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:192
+#, qt-format
+msgid "Illuminated: %1%"
+msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -556,8 +571,8 @@ msgstr ""
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Foros} - fala sobre Stellarium con outros usuarios."
 
-#: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:337
-#: src/gui/HelpDialog.cpp:339 src/gui/StelGui.cpp:175
+#: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:341
+#: src/gui/HelpDialog.cpp:343 src/gui/StelGui.cpp:175
 msgid "Miscellaneous"
 msgstr "Varios"
 
@@ -575,28 +590,41 @@ msgstr "Coordinador do proxecto e director de desenvolvemento: %1"
 msgid "Doc author/developer: %1"
 msgstr "Autor do documento/desenvolvedor: %1"
 
-#: src/gui/HelpDialog.cpp:301
-#, qt-format
-msgid "Graphic/other designer: %1"
-msgstr "Deseñador gráfico/outro: %1"
-
-#: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
-#: src/gui/HelpDialog.cpp:304 src/gui/HelpDialog.cpp:305
-#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:309
-#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
+#: src/gui/HelpDialog.cpp:303 src/gui/HelpDialog.cpp:304
+#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "Developer: %1"
 msgstr "Desenvolvedor: %1"
 
-#: src/gui/HelpDialog.cpp:307 src/gui/HelpDialog.cpp:308
-#, qt-format
-msgid "OSX Developer: %1"
-msgstr "Desenvolvedor OSX: %1"
-
-#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:307
 #, qt-format
 msgid "Tester: %1"
 msgstr "Probador: %1"
+
+#: src/gui/HelpDialog.cpp:308
+msgid "Past Developers"
+msgstr "Últimos desenvolvedores"
+
+#: src/gui/HelpDialog.cpp:309
+msgid ""
+"Several people have made significant contributions, but are no longer "
+"active. Their work has made a big difference to the project:"
+msgstr ""
+"Moitas persoas fixeron contribucións significativas, pero xa non están "
+"activos. O seu traballo marcou unha gran diferenza para o proxecto:"
+
+#: src/gui/HelpDialog.cpp:310
+#, qt-format
+msgid "Graphic/other designer: %1"
+msgstr "Deseñador gráfico/outro: %1"
+
+#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#, qt-format
+msgid "OSX Developer: %1"
+msgstr "Desenvolvedor OSX: %1"
 
 #: src/gui/StelGui.cpp:102
 msgid "Display Options"
@@ -1016,11 +1044,11 @@ msgstr "gráfico de estrelas"
 
 #: src/gui/SearchDialog.cpp:503
 msgid "University of Strasbourg (France)"
-msgstr ""
+msgstr "Universidade de Strasbourg (Francia)"
 
 #: src/gui/SearchDialog.cpp:504
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "Universidade de Harvard (USA)"
 
 #: src/main.cpp:337
 msgid "This system does not support OpenGL."
@@ -2723,15 +2751,15 @@ msgstr "Posición"
 
 #: src/ui_searchDialogGui.h:586
 msgid "On-line astronomical database SIMBAD"
-msgstr ""
+msgstr "Base de datos astronómica on-line SIMBAD"
 
 #: src/ui_searchDialogGui.h:587
 msgid "Extend search with SIMBAD"
-msgstr ""
+msgstr "Busca estendida con SIMBAD"
 
 #: src/ui_searchDialogGui.h:588
 msgid "Server:"
-msgstr ""
+msgstr "Servidor:"
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
@@ -3342,7 +3370,7 @@ msgstr "Incluír cartafol:"
 
 #: src/ui_scriptConsole.h:378
 msgid "..."
-msgstr "…"
+msgstr "..."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -3792,11 +3820,11 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:228
 #: plugins/Satellites/src/Satellite.cpp:232
 msgid "Catalog #"
-msgstr ""
+msgstr "Catálogo #"
 
 #: plugins/Satellites/src/Satellite.cpp:234
 msgid "International Designator"
-msgstr ""
+msgstr "Deseñador internacional"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:246
@@ -3974,6 +4002,10 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
+"1. Asegúrate de que o satélite (s) que quere engadir se inclúen nunha das "
+"URLs listadas na guía Fontes da ventá de configuración de satélites. 2. Vai "
+"á pestana Satélites, e preme o botón \"+\". Selecciona o satélite (s) que "
+"quere engadir e preme o botón \"Add\"."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
@@ -4081,7 +4113,7 @@ msgstr "[nova fonte]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
 msgid "[orbit calculation error]"
-msgstr ""
+msgstr "[erro calculado da órbita]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"
