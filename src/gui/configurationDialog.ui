@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>440</width>
-    <height>460</height>
+    <width>436</width>
+    <height>475</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -238,6 +238,16 @@
                </property>
                <property name="text">
                 <string>None</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="customSelectedInfoRadio">
+               <property name="toolTip">
+                <string>Display user settings information</string>
+               </property>
+               <property name="text">
+                <string>Custom</string>
                </property>
               </widget>
              </item>
