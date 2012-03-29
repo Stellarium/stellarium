@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-27 21:44+0700\n"
-"PO-Revision-Date: 2012-03-22 23:24+0000\n"
+"PO-Revision-Date: 2012-03-28 23:55+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-28 04:41+0000\n"
-"X-Generator: Launchpad (build 15027)\n"
+"X-Launchpad-Export-Date: 2012-03-29 04:32+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -153,12 +153,12 @@ msgstr "Średnica widoma: %1"
 #: src/core/modules/Planet.cpp:191
 #, qt-format
 msgid "Phase: %1"
-msgstr ""
+msgstr "Faza: %1"
 
 #: src/core/modules/Planet.cpp:192
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr ""
+msgstr "Oświetlone: %1%"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -2768,15 +2768,15 @@ msgstr "Położenie"
 
 #: src/ui_searchDialogGui.h:586
 msgid "On-line astronomical database SIMBAD"
-msgstr ""
+msgstr "Internetowa astronomiczna baza danych SIMBAD"
 
 #: src/ui_searchDialogGui.h:587
 msgid "Extend search with SIMBAD"
-msgstr ""
+msgstr "Rozszerz wyszukiwanie za pomocą SIMBAD"
 
 #: src/ui_searchDialogGui.h:588
 msgid "Server:"
-msgstr ""
+msgstr "Serwer:"
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
@@ -4029,6 +4029,10 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
+"1. Upewnij się, że satelity, które chcesz dodać, znajdują się pod jednym z "
+"adresów URL wymienionych na karcie Źródła okna konfiguracji satelitów. 2. "
+"Przejdź na kartę Satelity i kliknij przycisk '+'. Wybierz satelity, które "
+"chcesz dodać, i naciśnij przycisk \"dodaj\"."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
