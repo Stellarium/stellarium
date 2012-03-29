@@ -186,7 +186,7 @@ of this page.
 Fabien Chéreau, Rob Spearman, Johan Meuris, Matthew Gates, 
 Johannes Gajdosik, Nigel Kerr, Andras Mohari, Bogdan Marinov, 
 Timothy Reaves, Mike Storm, Diego Marcos, Guillaume Chéreau, 
-Alexander Wolf
+Alexander Wolf, Georg Zotti
 
 x14817
 
