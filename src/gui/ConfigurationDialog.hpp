@@ -76,6 +76,7 @@ private slots:
 	void setNoSelectedInfo(void);
 	void setAllSelectedInfo(void);
 	void setBriefSelectedInfo(void);
+	void setCustomSelectedInfo(void);
 	void selectLanguage(const QString& languageCode);
 	void setStartupTimeMode();
 	void setDiskViewport(bool);
