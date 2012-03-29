@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-27 21:44+0700\n"
-"PO-Revision-Date: 2012-03-22 12:26+0000\n"
-"Last-Translator: Guybrush88 <Unknown>\n"
+"PO-Revision-Date: 2012-03-28 13:20+0000\n"
+"Last-Translator: Andrea Amoroso <andrea.amoroso@alice.it>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-28 04:39+0000\n"
-"X-Generator: Launchpad (build 15027)\n"
+"X-Launchpad-Export-Date: 2012-03-29 04:32+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -148,12 +148,12 @@ msgstr "Diametro apparente: %1"
 #: src/core/modules/Planet.cpp:191
 #, qt-format
 msgid "Phase: %1"
-msgstr ""
+msgstr "Fase: %1"
 
 #: src/core/modules/Planet.cpp:192
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr ""
+msgstr "Illuminato: %1%"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -1047,7 +1047,7 @@ msgstr "naturale"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
-msgstr ""
+msgstr "carta stellare"
 
 #: src/gui/SearchDialog.cpp:503
 msgid "University of Strasbourg (France)"
@@ -1507,7 +1507,7 @@ msgstr "Garching"
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
 msgid "Landscape Tour"
-msgstr ""
+msgstr "Tour Panorama"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
@@ -1541,11 +1541,11 @@ msgstr "Zodiac"
 
 #: src/translations.h:195
 msgid "Look around each installed landscape."
-msgstr ""
+msgstr "Guarda intorno ad ogni panorama installato."
 
 #: src/translations.h:196
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr ""
+msgstr "Script per mostrare una parziale eclissi lunare."
 
 #: src/translations.h:197
 msgid "Script to demonstrate a total lunar eclipse."
@@ -1553,13 +1553,15 @@ msgstr "Script per dimostrare un'eclissi lunare totale."
 
 #: src/translations.h:198
 msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr ""
+msgstr "Un lento, infinito tour del cielo, con oggetti scelti casualmente."
 
 #: src/translations.h:199
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
+"Script per mostrare una eclissi solare totale che è accaduta nel 2009 "
+"(posizione=Rangpur, Bangladesh)."
 
 #: src/translations.h:200
 msgid "Script which runs automatically at startup"
@@ -1571,6 +1573,9 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
+"Questo script mostra le costellazioni dello Zodiaco, ovvero le costellazioni "
+"che giacciono intorno alla linea che il Sole traccia attraverso la sfera "
+"celeste nel corso dell'anno."
 
 #: src/translations.h:204
 msgid "Andorra"
@@ -2753,7 +2758,7 @@ msgstr "Posizione"
 
 #: src/ui_searchDialogGui.h:586
 msgid "On-line astronomical database SIMBAD"
-msgstr ""
+msgstr "Database astronomico on-line SIMBAD"
 
 #: src/ui_searchDialogGui.h:587
 msgid "Extend search with SIMBAD"
@@ -3343,15 +3348,15 @@ msgstr "pulisci script"
 
 #: src/ui_scriptConsole.h:356
 msgid "pre-process script using SSC preprocessor"
-msgstr ""
+msgstr "script di pre-processamento che utilizza il pre-processore SSC"
 
 #: src/ui_scriptConsole.h:359
 msgid "pre-process script using STS preprocessor"
-msgstr ""
+msgstr "script di pre-processamento che utilizza il pre-processore STS"
 
 #: src/ui_scriptConsole.h:362
 msgid "quickly load and run a utility script"
-msgstr ""
+msgstr "Carica ed esegue rapidamente uno scipt di utilità"
 
 #: src/ui_scriptConsole.h:365
 msgid "run script"
@@ -3375,7 +3380,7 @@ msgstr "Posizione del cursore"
 
 #: src/ui_scriptConsole.h:377
 msgid "Include dir:"
-msgstr ""
+msgstr "Includi la cartella:"
 
 #: src/ui_scriptConsole.h:378
 msgid "..."
@@ -5556,7 +5561,7 @@ msgstr ""
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
-msgstr ""
+msgstr "pulsar extra-galattico (in MC)"
 
 #~ msgid "Equator Line"
 #~ msgstr "Linea dell'Equatore"
