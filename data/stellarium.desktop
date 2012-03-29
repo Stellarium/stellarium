@@ -1,26 +1,35 @@
 [Desktop Entry]
 Encoding=UTF-8
-Version=0.11.3-1
+Version=0.11.3
 Type=Application
 Name=Stellarium
-Exec=env LD_LIBRARY_PATH=/opt/qt4-maemo5/lib /opt/stellarium/bin/stellarium
+GenericName=Desktop planetarium
+GenericName[ru]=Настольный планетарий
+Exec=stellarium
 Icon=stellarium
-X-Icon-path=/usr/share/icons/
-X-Window-Icon=stellarium
+StartupNotify=false
+Terminal=false
+Categories=Astronomy;Education;Science;
+Comment=Planetarium
+Comment[fr]=Planétarium
+Comment[ru]=Планетарий
 
-X-Ayatana-Desktop-Shortcuts=Screen;Window
+Actions=Window;Fullscreen;Safemode
 
-[Window Group]
+[Desktop Action Window]
 Name=Open in window
+Name[ru]=Открыть в окне
 Exec=stellarium -f no
-TargetEnvironment=Unity
+OnlyShowIn=Unity
 
-[Fullscreen Group]
+[Desktop Action Fullscreen]
 Name=Open in fullscreen
+Name[ru]=Открыть в полноэкранном режиме
 Exec=stellarium -f yes
-TargetEnvironment=Unity
+OnlyShowIn=Unity
 
-[Safemode Group]
+[Desktop Action Safemode]
 Name=Open in safe mode
+Name[ru]=Открыть в безопасном режиме
 Exec=stellarium --safe-mode
-TargetEnvironment=Unity
+OnlyShowIn=Unity
