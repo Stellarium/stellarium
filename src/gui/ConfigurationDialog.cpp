@@ -147,12 +147,15 @@ void ConfigurationDialog::createDialogContent()
 	if (gui->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
 		ui->noSelectedInfoRadio->setChecked(true);
 	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
-		ui->briefSelectedInfoRadio->setChecked(true);
-	else
+		ui->briefSelectedInfoRadio->setChecked(true);	
+	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::AllInfo))
 		ui->allSelectedInfoRadio->setChecked(true);
+	else
+		ui->customSelectedInfoRadio->setChecked(true);
 	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
+	connect(ui->customSelectedInfoRadio, SIGNAL(released()), this, SLOT(setCustomSelectedInfo()));
 
 	// Navigation tab
 	// Startup time
@@ -300,6 +303,107 @@ void ConfigurationDialog::setBriefSelectedInfo(void)
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
 }
 
+void ConfigurationDialog::setCustomSelectedInfo(void)
+{
+
+	bool Name, CatalogNumber, Magnitude, RaDecJ2000, RaDecOfDate, AltAz, Distance, Size, Extra1, Extra2, Extra3, HourAngle, AbsoluteMagnitude;
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Name = conf->value("custom_selected_info/flag_show_name", false).toBool();
+	CatalogNumber = conf->value("custom_selected_info/flag_show_catalognumber", false).toBool();
+	Magnitude = conf->value("custom_selected_info/flag_show_magnitude", false).toBool();
+	RaDecJ2000 = conf->value("custom_selected_info/flag_show_radecj2000", false).toBool();
+	RaDecOfDate = conf->value("custom_selected_info/flag_show_radecofdate", false).toBool();
+	AltAz = conf->value("custom_selected_info/flag_show_altaz", false).toBool();
+	Distance = conf->value("custom_selected_info/flag_show_distance", false).toBool();
+	Size = conf->value("custom_selected_info/flag_show_size", false).toBool();
+	Extra1 = conf->value("custom_selected_info/flag_show_extra1", false).toBool();
+	Extra2 = conf->value("custom_selected_info/flag_show_extra2", false).toBool();
+	Extra3 = conf->value("custom_selected_info/flag_show_extra3", false).toBool();
+	HourAngle = conf->value("custom_selected_info/flag_show_hourangle", false).toBool();
+	AbsoluteMagnitude = conf->value("custom_selected_info/flag_show_absolutemagnitude", false).toBool();
+
+	int NameOct;
+	if (Name)
+		NameOct = StelObject::Name;
+	else
+		NameOct = 0x00000000;
+
+	int CatalogNumberOct;
+	if (CatalogNumber)
+		CatalogNumberOct = StelObject::CatalogNumber;
+	else
+		CatalogNumberOct = 0x00000000;
+
+	int MagnitudeOct;
+	if (Magnitude)
+		MagnitudeOct = StelObject::Magnitude;
+	else
+		MagnitudeOct = 0x00000000;
+
+	int RaDecJ2000Oct;
+	if (RaDecJ2000)
+		RaDecJ2000Oct = StelObject::RaDecJ2000;
+	else
+		RaDecJ2000Oct = 0x00000000;
+
+	int RaDecOfDateOct;
+	if (RaDecOfDate)
+		RaDecOfDateOct = StelObject::RaDecOfDate;
+	else
+		RaDecOfDateOct = 0x00000000;
+
+	int AltAzOct;
+	if (AltAz)
+		AltAzOct = StelObject::AltAzi;
+	else
+		AltAzOct = 0x00000000;
+
+	int DistanceOct;
+	if (Distance)
+		DistanceOct = StelObject::Distance;
+	else
+		DistanceOct = 0x00000000;
+
+	int SizeOct;
+	if (Size)
+		SizeOct = StelObject::Size;
+	else
+		SizeOct = 0x00000000;
+
+	int Extra1Oct;
+	if (Extra1)
+		Extra1Oct = StelObject::Extra1;
+	else
+		Extra1Oct = 0x00000000;
+
+	int Extra2Oct;
+	if (Extra2)
+		Extra2Oct = StelObject::Extra2;
+	else
+		Extra2Oct = 0x00000000;
+
+	int Extra3Oct;
+	if (Extra3)
+		Extra3Oct = StelObject::Extra3;
+	else
+		Extra3Oct = 0x00000000;
+
+	int HourAngleOct;
+	if (HourAngle)
+		HourAngleOct = StelObject::HourAngle;
+	else
+		HourAngleOct = 0x00000000;
+
+	int AbsoluteMagnitudeOct;
+	if (AbsoluteMagnitude)
+		AbsoluteMagnitudeOct = StelObject::AbsoluteMagnitude;
+	else
+		AbsoluteMagnitudeOct = 0x00000000;
+
+	gui->setInfoTextFilters(StelObject::InfoStringGroup(NameOct|CatalogNumberOct|MagnitudeOct|RaDecJ2000Oct|RaDecOfDateOct|AltAzOct|DistanceOct|SizeOct|Extra1Oct|Extra2Oct|Extra3Oct|HourAngleOct|AbsoluteMagnitudeOct));
+}
+
+
 void ConfigurationDialog::cursorTimeOutChanged()
 {
 	StelMainGraphicsView::getInstance().setFlagCursorTimeout(ui->mouseTimeoutCheckbox->isChecked());
@@ -434,8 +538,10 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		conf->setValue("gui/selected_object_info", "none");
 	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
 		conf->setValue("gui/selected_object_info", "short");
-	else
+	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::AllInfo))
 		conf->setValue("gui/selected_object_info", "all");
+	else
+		conf->setValue("gui/selected_object_info", "custom");
 
 	// toolbar auto-hide status
 	conf->setValue("gui/auto_hide_horizontal_toolbar", gui->getAutoHideHorizontalButtonBar());
