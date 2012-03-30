@@ -28,9 +28,10 @@
 #include "Landscape.hpp"
 #include "OBJ.hpp"
 #include "Heightmap.hpp"
+#include "Frustum.hpp"
 
 #include <QString>
-#include <vector>
+//#include <vector>
 #include <QGLFramebufferObject>
 // This is a tentative preparation for some changes to come with Qt4.8+.
 // Currently this does not work after compilation!
@@ -117,7 +118,12 @@ public:
 
     enum ShadowCaster { None, Sun, Moon, Venus };
     enum Effect { No, BumpMapping, ShadowMapping, All };
-    Mat4f mv2;
+    Mat4d mv;
+    Mat4d mp;
+    Vec3d viewUp;
+    Vec3d viewDir;
+    Vec3d viewPos;
+    int drawn;
 
 private:
     static const float TORCH_BRIGHTNESS=0.5f;
@@ -232,7 +238,10 @@ private:
     //Renders the Scene's AABB as wireframe
     void renderSceneAABB();
     //Scene AABB
-    Vec3f AABB[8];
+    Vec3f aabb[8];
+    //Camera Frustum
+    Frustum cFrust;
+    Vec3f nbl;
 };
 
 #endif

@@ -51,6 +51,7 @@
 #include "StelLogger.hpp"
 #include "VecMath.hpp"
 #include "Util.hpp"
+#include "AABB.hpp"
 
 class Heightmap;
 
@@ -130,9 +131,10 @@ public:
     {
         int startIndex, triangleCount;
         const Material* pMaterial;
+        AABB* bbox;
     };
 
-    //! Bounding box extremes
+    //! Bounding box extremes to the entire scene
     struct BoundingBox
     {
         Vec3f max, min;
@@ -182,6 +184,8 @@ public:
 
     //! Returns the bounding box for this OBJ
     const BoundingBox* getBoundingBox() const;
+
+    void renderAABBs();
 
 private:
     void addTrianglePos(unsigned int index, int material, int v0, int v1, int v2);
