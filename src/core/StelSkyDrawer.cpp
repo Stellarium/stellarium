@@ -485,9 +485,9 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 	nbPointSources = 0;
 }
 
-static Vec3f win;
+static Vec3d win;
 // Draw a point source halo.
-bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const float rcMag[2], const Vec3f& color, bool checkInScreen)
+bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const float rcMag[2], const Vec3f& color, bool checkInScreen)
 {
 	Q_ASSERT(sPainter);
 
@@ -548,15 +548,17 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 			v->set(win[0]+radius,win[1]+radius); ++v;
 			v->set(win[0]-radius,win[1]+radius); ++v;
 
-			win = color;
-			win*=tw;
+			Vec3f w = color;
+			w = color;
+			w*=tw;
 			Vec3f* cv = &(colorGrid[nbPointSources*6]);
-			*cv = win; ++cv;
-			*cv = win; ++cv;
-			*cv = win; ++cv;
-			*cv = win; ++cv;
-			*cv = win; ++cv;
-			*cv = win; ++cv;
+			*cv = w; ++cv;
+			*cv = w; ++cv;
+			*cv = w; ++cv;
+			*cv = w; ++cv;
+			*cv = w; ++cv;
+			*cv = w; ++cv;
+			win = Vec3d(w[0],w[1],w[2]);
 		}
 	}
 #endif
@@ -572,7 +574,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 
 
 // Terminate drawing of a 3D model, draw the halo
-void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, float illuminatedArea, float mag, const Vec3f& color)
+void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color)
 {
 	const float pixPerRad = painter->getProjector()->getPixelPerRadAtCenter();
 	// Assume a disk shape
