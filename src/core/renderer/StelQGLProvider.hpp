@@ -151,7 +151,7 @@ public:
 	
 private:
 	//! Asserts that we're in a valid state.
-	void invariant()
+	void invariant() const
 	{
 		Q_ASSERT_X(NULL != glWidget && NULL != glContext, "StelQGLProvider::invariant()", 
 		           "destroyed StelQGLProvider");
