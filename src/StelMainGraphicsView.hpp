@@ -150,9 +150,8 @@ private:
 	QGraphicsWidget* backItem;
 	class StelAppGraphicsWidget* mainSkyItem;
 
-	//! The openGL window
-	StelQGLWidget* glWidget;
-	class QGLContext* glContext;
+	//! Handles all rendering (e.g. GL) functionality.
+	class StelRenderer* renderer;
 
 	StelGuiBase* gui;
 

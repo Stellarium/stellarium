@@ -22,16 +22,15 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
+#include "StelGL2Renderer.hpp"
+#include "StelQGLProvider.hpp"
 #include "StelProjector.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelGuiBase.hpp"
 #include "StelMainWindow.hpp"
 
-#include <QGLFormat>
-#include <QPaintEngine>
 #include <QGraphicsView>
-#include <QGLWidget>
 #include <QResizeEvent>
 #include <QSettings>
 #include <QApplication>
@@ -116,48 +115,6 @@ Q_IMPORT_PLUGIN(Pulsars)
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
-class StelQGLWidget : public QGLWidget
-{
-public:
-	StelQGLWidget(QGLContext* ctx, QWidget* parent) : QGLWidget(ctx, parent)
-	{
-		setAttribute(Qt::WA_PaintOnScreen);
-		setAttribute(Qt::WA_NoSystemBackground);
-		setAttribute(Qt::WA_OpaquePaintEvent);
-		//setAutoFillBackground(false);
-		setBackgroundRole(QPalette::Window);
-	}
-
-protected:
-	virtual void initializeGL()
-	{
-		qDebug() << "OpenGL supported version: " << QString((char*)glGetString(GL_VERSION));
-
-		QGLWidget::initializeGL();
-
-		if (!format().stencil())
-			qWarning("Could not get stencil buffer; results will be suboptimal");
-		if (!format().depth())
-			qWarning("Could not get depth buffer; results will be suboptimal");
-		if (!format().doubleBuffer())
-			qWarning("Could not get double buffer; results will be suboptimal");
-
-		QString paintEngineStr;
-		switch (paintEngine()->type())
-		{
-		case QPaintEngine::OpenGL:
-			paintEngineStr = "OpenGL";
-			break;
-		case QPaintEngine::OpenGL2:
-			paintEngineStr = "OpenGL2";
-			break;
-		default:
-			paintEngineStr = "Other";
-		}
-		qDebug() << "Qt GL paint engine is: " << paintEngineStr;
-	}
-};
-
 StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 	: QGraphicsView(parent), backItem(NULL), gui(NULL),
 #ifndef DISABLE_SCRIPTING
@@ -197,12 +154,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 
 	lastEventTimeSec = 0;
 
-	// Create an openGL viewport
-	QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer | QGL::DoubleBuffer);
-	glContext = new QGLContext(glFormat);
-	glWidget = new StelQGLWidget(glContext, this);
-	glWidget->updateGL();
-	setViewport(glWidget);
+	renderer = new StelGL2Renderer(new StelQGLProvider(this));
 
 	// This line seems to cause font aliasing troubles on win32
 	// setOptimizationFlags(QGraphicsView::DontSavePainterState);
@@ -216,13 +168,11 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 
 StelMainGraphicsView::~StelMainGraphicsView()
 {
+	delete renderer;
 }
 
 void StelMainGraphicsView::init(QSettings* conf)
 {
-	Q_ASSERT(glWidget->isValid());
-	glWidget->makeCurrent();
-
 	// Create the main widget for stellarium, which in turn creates the main StelApp instance.
 	mainSkyItem = new StelAppGraphicsWidget();
 	mainSkyItem->setZValue(-10);
@@ -244,16 +194,12 @@ void StelMainGraphicsView::init(QSettings* conf)
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toFloat());
 	maxfps = conf->value("video/maximum_fps",10000.f).toFloat();
 	minfps = conf->value("video/minimum_fps",10000.f).toFloat();
-
-	StelPainter::initSystemGLInfo(glContext);
-
-	QPainter qPainter(glWidget);
-	StelPainter::setQPainter(&qPainter);
+	
+	renderer->init();
+	renderer->enablePainting();
 
 	// Initialize the core, including the StelApp instance.
 	mainSkyItem->init(conf);
-	// Prevent flickering on mac Leopard/Snow Leopard
-	glWidget->setAutoFillBackground (false);
 
 #ifndef DISABLE_SCRIPTING
 	scriptAPIProxy = new StelMainScriptAPIProxy(this);
@@ -295,7 +241,9 @@ void StelMainGraphicsView::init(QSettings* conf)
 #endif
 
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
-        StelPainter::setQPainter(NULL);
+	
+	renderer->disablePainting();
+	
 	startMainLoop();
 }
 
@@ -424,7 +372,7 @@ void StelMainGraphicsView::saveScreenShot(const QString& filePrefix, const QStri
 void StelMainGraphicsView::doScreenshot(void)
 {
 	QFileInfo shotDir;
-	QImage im = glWidget->grabFrameBuffer();
+	QImage im = renderer->screenshot();
 	if (flagInvertScreenShotColors)
 		im.invertPixels();
 

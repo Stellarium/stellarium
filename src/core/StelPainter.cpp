@@ -57,6 +57,7 @@ bool StelPainter::isNoPowerOfTwoAllowed;
  StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
 #endif
 
+		//QPainter qPainter(glWidget);
 void StelPainter::setQPainter(QPainter* p)
 {
 	qPainter=p;
@@ -122,6 +123,7 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	glLoadIdentity();
+	
 
 	glDisable(GL_LIGHTING);
 	glDisable(GL_MULTISAMPLE);
