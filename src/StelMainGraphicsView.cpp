@@ -174,7 +174,7 @@ StelMainGraphicsView::~StelMainGraphicsView()
 void StelMainGraphicsView::init(QSettings* conf)
 {
 	// Create the main widget for stellarium, which in turn creates the main StelApp instance.
-	mainSkyItem = new StelAppGraphicsWidget();
+	mainSkyItem = new StelAppGraphicsWidget(renderer);
 	mainSkyItem->setZValue(-10);
 	mainSkyItem->setContentsMargins(0,0,0,0);
 	QGraphicsGridLayout* l = new QGraphicsGridLayout(backItem);

@@ -21,6 +21,7 @@
 #include "StelCore.hpp"
 #include "StelAppGraphicsWidget.hpp"
 #include "StelPainter.hpp"
+#include "StelRenderer.hpp"
 #include "StelGuiBase.hpp"
 #include "StelViewportEffect.hpp"
 
@@ -31,8 +32,11 @@
 #include <QGLFramebufferObject>
 #include <QSettings>
 
-StelAppGraphicsWidget::StelAppGraphicsWidget()
-	: paintState(0), useBuffers(false), backgroundBuffer(NULL), foregroundBuffer(NULL), viewportEffect(NULL), doPaint(true)
+StelAppGraphicsWidget::StelAppGraphicsWidget(StelRenderer* renderer)
+	: paintState(0), 
+	  renderer(renderer),
+	  viewportEffect(NULL), 
+	  doPaint(true)
 {
 	previousPaintTime = StelApp::getTotalRunTime();
 	setFocusPolicy(Qt::StrongFocus);
@@ -43,10 +47,7 @@ StelAppGraphicsWidget::~StelAppGraphicsWidget()
 {
 	delete stelApp;
 	stelApp = NULL;
-	if (backgroundBuffer) delete backgroundBuffer;
-	backgroundBuffer = NULL;
-	if (foregroundBuffer) delete foregroundBuffer;
-	foregroundBuffer = NULL;
+	
 	if (viewportEffect) delete viewportEffect;
 	viewportEffect = NULL;
 	
@@ -58,14 +59,13 @@ void StelAppGraphicsWidget::init(QSettings* conf)
 	stelApp->init(conf);
 	Q_ASSERT(viewportEffect==NULL);
 	setViewportEffect(conf->value("video/viewport_effect", "none").toString());
-	
+	renderer->viewportHasBeenResized(scene()->sceneRect().size().toSize());
 	//previousPaintTime needs to be updated after the time zone is set
 	//in StelLocaleMgr::init(), otherwise this causes an invalid value of
 	//deltaT the first time it is calculated in paintPartial(), which in
 	//turn causes Stellarium to start with a wrong time.
 	previousPaintTime = StelApp::getTotalRunTime();
 }
-
 
 void StelAppGraphicsWidget::setViewportEffect(const QString& name)
 {
@@ -76,32 +76,19 @@ void StelAppGraphicsWidget::setViewportEffect(const QString& name)
 		delete viewportEffect;
 		viewportEffect=NULL;
 	}
-	if (name=="none")
-	{
-		useBuffers = false;
-		return;
-	}
-	if (!QGLFramebufferObject::hasOpenGLFramebufferObjects())
-	{
-		qWarning() << "Don't support OpenGL framebuffer objects, can't use Viewport effect: " << name;
-		useBuffers = false;
-		return;
-	}
-
-	qDebug() << "Use OpenGL framebuffer objects for viewport effect: " << name;
-	useBuffers = true;
-	if (name == "framebufferOnly")
+	
+	if (name == "framebufferOnly" || name == "none")
 	{
 		viewportEffect = new StelViewportEffect();
 	}
 	else if (name == "sphericMirrorDistorter")
 	{
-		viewportEffect = new StelViewportDistorterFisheyeToSphericMirror(size().width(), size().height());
+		viewportEffect = new StelViewportDistorterFisheyeToSphericMirror(size().width(),
+		                                                                 size().height());
 	}
 	else
 	{
 		qWarning() << "Unknown viewport effect name: " << name;
-		useBuffers=false;
 	}
 }
 
@@ -159,74 +146,35 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 	// Don't even try to draw if we don't have a core yet (fix a bug during splash screen)
 	if (!stelApp || !stelApp->getCore() || !doPaint)
 		return;
+		
+	renderer->setDefaultPainter(painter);
+	renderer->startDrawing();
 	
-	StelPainter::setQPainter(painter);
-
-	if (useBuffers)
+	
+	// When using the GUI, try to have the best reactivity, 
+	// even if we need to lower the FPS.
+	int minFps = StelApp::getInstance().getGui()->isCurrentlyUsed() ? 16 : 2;
+	while (true)
 	{
-		StelPainter::makeMainGLContextCurrent();
-		initBuffers();
-		backgroundBuffer->bind();
-		QPainter* pa = new QPainter(backgroundBuffer);
-		StelPainter::setQPainter(pa);
-
-		// If we are using the gui, then we try to have the best reactivity, even if we need to lower the fps for that.
-		int minFps = StelApp::getInstance().getGui()->isCurrentlyUsed() ? 16 : 2;
-		while (true)
+		bool keep = paintPartial();
+		if (!keep) // The paint is done
 		{
-			bool keep = paintPartial();
-			if (!keep) // The paint is done
-			{
-				delete pa;
-				backgroundBuffer->release();
-				swapBuffers();
-				break;
-			}
-			double spentTime = StelApp::getTotalRunTime() - previousPaintFrameTime;
-			if (1. / spentTime <= minFps) // we spent too much time
-			{
-				// We stop the painting operation for now
-				delete pa;
-				backgroundBuffer->release();
-				break;
-			}
+			renderer->finishDrawing();
+			break;
 		}
-		Q_ASSERT(!backgroundBuffer->isBound());
-		Q_ASSERT(!foregroundBuffer->isBound());
-		// Paint the last completed painted buffer
-		StelPainter::setQPainter(painter);
-		viewportEffect->paintViewportBuffer(foregroundBuffer);
+		double spentTime = StelApp::getTotalRunTime() - previousPaintFrameTime;
+		if (1. / spentTime <= minFps) // we spent too much time
+		{
+			// We stop the painting operation for now
+			renderer->suspendDrawing();
+			break;
+		}
 	}
-	else
-	{
-		while (paintPartial()) {;}
-	}
-	StelPainter::setQPainter(NULL);
+	
+	renderer->drawWindow(viewportEffect);
+	renderer->setDefaultPainter(NULL);
+	
 	previousPaintFrameTime = StelApp::getTotalRunTime();
-}
-
-//! Swap the buffers
-//! this should be called after we finish the paint
-void StelAppGraphicsWidget::swapBuffers()
-{
-	Q_ASSERT(useBuffers);
-	QGLFramebufferObject* tmp = backgroundBuffer;
-	backgroundBuffer = foregroundBuffer;
-	foregroundBuffer = tmp;
-}
-
-//! Initialize the opengl buffer objects.
-void StelAppGraphicsWidget::initBuffers()
-{
-	Q_ASSERT(useBuffers);
-	Q_ASSERT(QGLFramebufferObject::hasOpenGLFramebufferObjects());
-	if (!backgroundBuffer)
-	{
-		backgroundBuffer = new QGLFramebufferObject(scene()->sceneRect().size().toSize(), QGLFramebufferObject::CombinedDepthStencil);
-		foregroundBuffer = new QGLFramebufferObject(scene()->sceneRect().size().toSize(), QGLFramebufferObject::CombinedDepthStencil);
-		Q_ASSERT(backgroundBuffer->isValid());
-		Q_ASSERT(foregroundBuffer->isValid());
-	}
 }
 
 void StelAppGraphicsWidget::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
@@ -283,15 +231,11 @@ void StelAppGraphicsWidget::keyReleaseEvent(QKeyEvent* event)
 void StelAppGraphicsWidget::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
 	QGraphicsWidget::resizeEvent(event);
-	stelApp->glWindowHasBeenResized(scenePos().x(), scene()->sceneRect().height()-(scenePos().y()+geometry().height()), geometry().width(), geometry().height());
-	if (backgroundBuffer)
-	{
-		delete backgroundBuffer;
-		backgroundBuffer = NULL;
-	}
-	if (foregroundBuffer)
-	{
-		delete foregroundBuffer;
-		foregroundBuffer = NULL;
-	}
+	const float w = geometry().width();
+	const float h = geometry().height();
+	const float x = scenePos().x();
+	const float y = scene()->sceneRect().height() - (scenePos().y() + geometry().height());
+	
+	stelApp->glWindowHasBeenResized(x, y, w, h);
+	renderer->viewportHasBeenResized(scene()->sceneRect().size().toSize());
 }
