@@ -1188,6 +1188,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
                     0, 0, (zFar + zNear) / (zNear - zFar), 2.0 * zFar * zNear / (zNear - zFar),
                     0, 0, -1, 0);
 
+
     cFrust.setCamInternals(prj->getFov(), aspect, zNear, zFar);
 
     glPushAttrib(GL_VIEWPORT_BIT);
