@@ -7,6 +7,12 @@ INCLUDE_DIRECTORIES(
 LINK_DIRECTORIES(/src)
 
 SET(Scenery3d_SRCS
+	AABB.hpp
+	AABB.cpp
+	Frustum.hpp
+	Frustum.cpp
+	Plane.hpp
+	Plane.cpp
     Scenery3d.hpp
     Scenery3d.cpp
     Scenery3dMgr.hpp

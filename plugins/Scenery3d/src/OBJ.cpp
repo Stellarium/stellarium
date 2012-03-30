@@ -1272,6 +1272,7 @@ void OBJ::transform(Mat4d mat)
 
 void OBJ::bounds()
 {
+    //Find Bounding Box for entire Scene
     pBoundingBox->min = Vec3f(std::numeric_limits<float>::max());
     pBoundingBox->max = Vec3f(-std::numeric_limits<float>::max());
 
@@ -1286,5 +1287,35 @@ void OBJ::bounds()
         pBoundingBox->max = Vec3f(std::max(static_cast<float>(pVertex->position[0]), pBoundingBox->max[0]),
                                   std::max(static_cast<float>(pVertex->position[1]), pBoundingBox->max[1]),
                                   std::max(static_cast<float>(pVertex->position[2]), pBoundingBox->max[2]));
+    }
+
+    //Find AABB per Stel Model
+    for(int i=0; i<m_numberOfStelModels; ++i)
+    {
+        StelModel* pStelModel = &m_stelModels[i];
+        pStelModel->bbox = new AABB(Vec3f(std::numeric_limits<float>::max()), Vec3f(-std::numeric_limits<float>::max()));
+
+        for(int j=pStelModel->startIndex; j<pStelModel->triangleCount*3; ++j)
+        {
+            unsigned int vertexIndex = m_indexArray[j];
+            Vertex* pVertex = &m_vertexArray[vertexIndex];
+
+            pStelModel->bbox->min = Vec3f(std::min(static_cast<float>(pVertex->position[0]), pStelModel->bbox->min[0]),
+                                          std::min(static_cast<float>(pVertex->position[1]), pStelModel->bbox->min[1]),
+                                          std::min(static_cast<float>(pVertex->position[2]), pStelModel->bbox->min[2]));
+
+            pStelModel->bbox->max = Vec3f(std::max(static_cast<float>(pVertex->position[0]), pStelModel->bbox->max[0]),
+                                          std::max(static_cast<float>(pVertex->position[1]), pStelModel->bbox->max[1]),
+                                          std::max(static_cast<float>(pVertex->position[2]), pStelModel->bbox->max[2]));
+        }
+    }
+}
+
+void OBJ::renderAABBs()
+{
+    for(int i=0; i<m_numberOfStelModels; ++i)
+    {
+        StelModel* pStelModel = &m_stelModels[i];
+        pStelModel->bbox->render();
     }
 }

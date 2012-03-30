@@ -8,6 +8,8 @@
 #include <QDebug>
 #include <QTime>
 
+#include "VecMath.hpp"
+
 //! Split string into list of strings.
 //! Example: splitStr("Hello World!", " ") results in {"Hello", "World!"}.
 //! @param line String to split.
@@ -38,5 +40,8 @@ extern void makeNormalMatrix(std::vector<float>& mat);
 extern const char* getTime();
 //! Parses a texture string ready for loading
 extern void parseTextureString(std::string in, std::string& out);
+//! Casts a Vec3d to Vec3f;
+extern Vec3f vecdToFloat(Vec3d v);
+extern Vec3d vecfToDouble(Vec3f v);
 #endif
 

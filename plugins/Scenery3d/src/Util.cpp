@@ -97,3 +97,24 @@ void parseTextureString(std::string in, std::string &out)
         position = out.find("\\", position + 1);
     }
 }
+
+Vec3f vecdToFloat(Vec3d v)
+{
+    Vec3f out;
+    out.v[0] = static_cast<float>(v.v[0]);
+    out.v[1] = static_cast<float>(v.v[1]);
+    out.v[2] = static_cast<float>(v.v[2]);
+
+    return out;
+}
+
+Vec3d vecfToDouble(Vec3f v)
+{
+    Vec3d out;
+    out.v[0] = static_cast<double>(v.v[0]);
+    out.v[1] = static_cast<double>(v.v[1]);
+    out.v[2] = static_cast<double>(v.v[2]);
+
+    return out;
+}
+
