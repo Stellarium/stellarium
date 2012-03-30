@@ -2,8 +2,6 @@
 #include "Util.hpp"
 #include <QtOpenGL>
 
-#define ANG2RAD 3.14159265358979323846/180.0
-
 Frustum::Frustum()
 {
     for(unsigned int i=0; i<CORNERCOUNT; i++)
@@ -37,37 +35,73 @@ const Plane& Frustum::getPlane(FrustumPlane plane) const
 
 void Frustum::calcFrustum(Vec3d &p, Vec3d &l, Vec3d &u)
 {
-    //Compute right vector
-    Vec3d r = u^l;
+    Vec3d ntl, ntr, nbl, nbr, ftl, ftr, fbr, fbl;
 
-    //Compute height and width of boundary on the near/far plane
-    float Hnear = tanf((static_cast<float>(M_PI)/360.0f)*fov)*zNear;
-    float Wnear = Hnear*aspect;
+    Vec3d X = l^u;
+    X.normalize();
 
-    float Hfar = tanf((static_cast<float>(M_PI)/360.0f)*fov)*zFar;
-    float Wfar = Hfar*aspect;
+    Vec3d Z = l^X;
+    Z.normalize();
 
-    Vec3d nearCenter = p + l*zNear;
-    Vec3d nbr = nearCenter - (u*Hnear) + (r*Wnear);
-    Vec3d ntr = nearCenter + (u*Hnear) + (r*Wnear);
-    Vec3d ntl = nearCenter + (u*Hnear) - (r*Wnear);
-    Vec3d nbl = nearCenter - (u*Hnear) - (r*Wnear);
+    float tang = tanf((static_cast<float>(M_PI)/360.0f)*fov);
+    float nh = zNear * tang;
+    float nw = nh * aspect;
+    float fh = zFar * tang;
+    float fw = fh * aspect;
 
-    Vec3d farCenter = p + l*zFar;
-    Vec3d fbr = farCenter - (u*Hfar) + (r*Wfar);
-    Vec3d ftr = farCenter + (u*Hfar) + (r*Wfar);
-    Vec3d ftl = farCenter + (u*Hfar) - (r*Wfar);
-    Vec3d fbl = farCenter - (u*Hfar) - (r*Wfar);
+    Vec3d nc = p + l*zNear;
+    Vec3d fc = p + l*zFar;
 
-    //Cast to float and save corners
+    ntl = nc + Z * nh - X * nw;
+    ntr = nc + Z * nh + X * nw;
+    nbl = nc - Z * nh - X * nw;
+    nbr = nc - Z * nh + X * nw;
+
+    ftl = fc + Z * fh - X * fw;
+    ftr = fc + Z * fh + X * fw;
+    fbl = fc - Z * fh - X * fw;
+    fbr = fc - Z * fh + X * fw;
+
+    corners[NTL] = vecdToFloat(ntl);
+    corners[NTR] = vecdToFloat(ntr);
     corners[NBL] = vecdToFloat(nbl);
     corners[NBR] = vecdToFloat(nbr);
-    corners[NTR] = vecdToFloat(ntr);
-    corners[NTL] = vecdToFloat(ntl);
+    corners[FTL] = vecdToFloat(ftl);
+    corners[FTR] = vecdToFloat(ftr);
     corners[FBL] = vecdToFloat(fbl);
     corners[FBR] = vecdToFloat(fbr);
-    corners[FTR] = vecdToFloat(ftr);
-    corners[FTL] = vecdToFloat(ftl);
+
+//    //Compute right vector
+//    Vec3d r = u^l;
+
+//    //Compute height and width of boundary on the near/far plane
+//    float Hnear = tanf((static_cast<float>(M_PI)/360.0f)*fov)*zNear;
+//    float Wnear = Hnear*aspect;
+
+//    float Hfar = tanf((static_cast<float>(M_PI)/360.0f)*fov)*zFar;
+//    float Wfar = Hfar*aspect;
+
+//    Vec3d nearCenter = p + l*zNear;
+//    Vec3d nbr = nearCenter - (u*Hnear) + (r*Wnear);
+//    Vec3d ntr = nearCenter + (u*Hnear) + (r*Wnear);
+//    Vec3d ntl = nearCenter + (u*Hnear) - (r*Wnear);
+//    Vec3d nbl = nearCenter - (u*Hnear) - (r*Wnear);
+
+//    Vec3d farCenter = p + l*zFar;
+//    Vec3d fbr = farCenter - (u*Hfar) + (r*Wfar);
+//    Vec3d ftr = farCenter + (u*Hfar) + (r*Wfar);
+//    Vec3d ftl = farCenter + (u*Hfar) - (r*Wfar);
+//    Vec3d fbl = farCenter - (u*Hfar) - (r*Wfar);
+
+//    //Cast to float and save corners
+//    corners[NBL] = vecdToFloat(nbl);
+//    corners[NBR] = vecdToFloat(nbr);
+//    corners[NTR] = vecdToFloat(ntr);
+//    corners[NTL] = vecdToFloat(ntl);
+//    corners[FBL] = vecdToFloat(fbl);
+//    corners[FBR] = vecdToFloat(fbr);
+//    corners[FTR] = vecdToFloat(ftr);
+//    corners[FTL] = vecdToFloat(ftl);
 
     planes[TOP] = Plane(corners[NTR], corners[NTL], corners[FTL]);
     planes[BOTTOM] = Plane(corners[NBL], corners[NBR], corners[FBR]);
