@@ -211,6 +211,7 @@ bool StelTexture::getDimensions(int &awidth, int &aheight)
 {
 	if (width<0 || height<0)
 	{
+
 		if (!qImage.isNull())
 		{
 			width = qImage.width();
@@ -228,6 +229,7 @@ bool StelTexture::getDimensions(int &awidth, int &aheight)
 			width = size.width();
 			height = size.height();
 		}
+
 	}
 	awidth = width;
 	aheight = height;
@@ -243,6 +245,21 @@ bool StelTexture::glLoad()
 		reportError("Unknown error");
 		return false;
 	}
+
+	//hikiko - case that max texture unit supported < qImage size
+	int size;
+	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &size);
+
+	if (size < qImage.width())
+	{
+			qImage = qImage.scaledToWidth(size, Qt::FastTransformation);
+	}
+	if (size < qImage.height())
+	{
+			qImage = qImage.scaledToHeight(size, Qt::FastTransformation);
+	}
+
+	//end hikiko
 
 	QGLContext::BindOptions opt = QGLContext::InvertedYBindOption;
 	if (loadParams.filtering==GL_LINEAR)
