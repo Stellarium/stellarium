@@ -132,6 +132,11 @@ SET(stellarium_lib_SRCS
 	core/StelLoadingBar.cpp
 	core/StelLoadingBar.hpp
 
+	core/renderer/StelRenderer.hpp
+	core/renderer/StelGL2Renderer.hpp
+	core/renderer/StelGLProvider.hpp
+	core/renderer/StelQGLProvider.hpp
+
 	${gl_lib_SRCS}
 	core/external/fixx11h.h
 	core/external/gettext.h
