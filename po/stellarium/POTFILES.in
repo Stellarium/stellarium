@@ -21,6 +21,8 @@ src/gui/StelGuiItems.cpp
 src/gui/ViewDialog.cpp
 src/gui/LocationDialog.cpp
 src/gui/AddRemoveLandscapesDialog.cpp
+src/gui/ScriptConsole.cpp
+src/gui/SearchDialog.cpp
 src/main.cpp
 
 # Translations of strings not contained in the source code
@@ -35,6 +37,7 @@ src/ui_viewDialog.h
 src/ui_configurationDialog.h
 src/ui_addRemoveLandscapesDialog.h
 src/ui_AtmosphereDialog.h
+src/ui_scriptConsole.h
 
 # Plug-in translations
 plugins/AngleMeasure/src/AngleMeasure.cpp
@@ -74,3 +77,5 @@ plugins/Supernovae/src/Supernovae.cpp
 plugins/Supernovae/src/Supernova.cpp
 plugins/Quasars/src/Quasars.cpp
 plugins/Quasars/src/Quasar.cpp
+plugins/Pulsars/src/Pulsars.cpp
+plugins/Pulsars/src/Pulsar.cpp

@@ -42,7 +42,7 @@ protected:
 	void createDialogContent();
 
 public slots:
-	void languageChanged();
+	void retranslate();
 	void refreshUpdateValues(void);
 
 private slots:

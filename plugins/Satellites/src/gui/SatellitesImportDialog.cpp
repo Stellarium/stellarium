@@ -60,7 +60,7 @@ SatellitesImportDialog::~SatellitesImportDialog()
 	}
 }
 
-void SatellitesImportDialog::languageChanged()
+void SatellitesImportDialog::retranslate()
 {
 	if (dialog)
 	{

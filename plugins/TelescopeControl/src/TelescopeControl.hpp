@@ -48,7 +48,6 @@
 #include <QTextStream>
 #include <QVariant>
 
-class StelNavigator;
 class StelObject;
 class StelPainter;
 class StelProjector;

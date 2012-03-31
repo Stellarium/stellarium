@@ -59,13 +59,14 @@
 #define GROUND_MODEL 1
 
 
-Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize)
+Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
     :absolutePosition(0.0, 0.0, 0.0), // 1.E-12, 1.E-12, 1.E-12), // these values signify "set default values"
     movement_x(0.0f), movement_y(0.0f), movement_z(0.0f),core(NULL),
     objModel(NULL), groundModel(NULL), heightmap(NULL), location(NULL)
 {
     this->cubemapSize=cubemapSize;
     this->shadowmapSize=shadowmapSize;
+    this->torchBrightness=torchBrightness;
     eyeLevel=1.65;
     objModel = new OBJ();
     groundModel = new OBJ();
@@ -1048,7 +1049,7 @@ Scenery3d::ShadowCaster  Scenery3d::setupLights(float &ambientBrightness, float 
     float sinSunAngle  = sunPosition[2];
     float sinMoonAngle = moonPosition[2];
     float sinVenusAngle = venusPosition[2];
-    ambientBrightness=AMBIENT_BRIGHTNESS_FACTOR+(torchEnabled? TORCH_BRIGHTNESS : 0);
+    ambientBrightness=AMBIENT_BRIGHTNESS_FACTOR+(torchEnabled? torchBrightness : 0);
     directionalBrightness=0.0f;
     ShadowCaster shadowcaster = None;
     // DEBUG AIDS: Helper strings to be displayed
@@ -1123,8 +1124,8 @@ Scenery3d::ShadowCaster  Scenery3d::setupLights(float &ambientBrightness, float 
     // correct light mixture. Directional is good to increase for sunrise/sunset shadow casting.
     if (shadowcaster)
     {
-        ambientBrightness-=(torchEnabled? TORCH_BRIGHTNESS*0.8 : 0);
-        directionalBrightness+=(torchEnabled? TORCH_BRIGHTNESS*0.8 : 0);
+        ambientBrightness-=(torchEnabled? torchBrightness*0.8 : 0);
+        directionalBrightness+=(torchEnabled? torchBrightness*0.8 : 0);
     }
 
     // DEBUG: Prepare output message
@@ -1157,6 +1158,9 @@ void Scenery3d::generateCubeMap(StelCore* core)
     for (int i=0; i<6; i++) {
         if (cubeMap[i] == NULL) {
             cubeMap[i] = new QGLFramebufferObject(cubemapSize, cubemapSize, QGLFramebufferObject::Depth, GL_TEXTURE_2D);
+            if (cubeMap[i]->attachment() != QGLFramebufferObject::Depth){
+                qWarning()<< "Scenery3d: Framebuffer failed to aquire depth buffer. Try smaller cubemap_size!";
+            }
             glBindTexture(GL_TEXTURE_2D, cubeMap[i]->texture());
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -1547,6 +1551,10 @@ void Scenery3d::initShadowMapping()
     //Generate FBO - has to be QGLFramebufferObject for some reason.. Generating a normal one lead to bizzare texture results
     //We use handle() to get the id and work as if we created a normal FBO. This is because QGLFramebufferObject doesn't support attaching a texture to the FBO
     shadowFBO = (new QGLFramebufferObject(shadowmapSize, shadowmapSize, QGLFramebufferObject::Depth, GL_TEXTURE_2D))->handle();
+
+    //if (shadowFBO->attachment() != QGLFramebufferObject::Depth){
+    //    qWarning()<< "Scenery3d: Framebuffer failed to aquire depth buffer. Try smaller shadowmap_size!";
+    //}
 
     //Bind the FBO
     glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);

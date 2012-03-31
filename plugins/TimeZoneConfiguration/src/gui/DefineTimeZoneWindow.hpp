@@ -39,7 +39,7 @@ public:
 	void setTimeZone(QString timeZoneString);
 
 public slots:
-	void languageChanged();
+	void retranslate();
 
 signals:
 	void timeZoneDefined(QString timeZoneString);
