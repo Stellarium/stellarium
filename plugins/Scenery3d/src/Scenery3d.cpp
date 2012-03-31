@@ -551,10 +551,13 @@ void Scenery3d::update(double deltaTime)
         //View Direction
         viewDir = core->getMovementMgr()->getViewDirectionJ2000();
         viewDir = core->j2000ToAltAz(viewDir);
-        //Switch new.x = old.y, new.y = -old.x, new.z = new.z
 
         //View Position
         viewPos = -absolutePosition;
+
+//        m.transfo(viewUp);
+//        m.transfo(viewDir);
+//        m.transfo(viewPos);
 
         //Calculate the Frustum for the current camera
         cFrust.calcFrustum(viewPos, viewDir, viewUp);
@@ -654,7 +657,7 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
 
     }
 
-    //objModel->renderAABBs();
+    objModel->renderAABBs();
     cFrust.drawFrustum();
 
 
@@ -1180,8 +1183,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
     float fov = 90.0f;
     float aspect = 1.0f;
     float zNear = 1.0f;
-    //float zFar = 10000.0f;
-    float zFar = 100.0f;
+    float zFar = 10000.0f;
     float f = 2.0 / tan(fov * M_PI / 360.0);
     Mat4d projMatd(f / aspect, 0, 0, 0,
                     0, f, 0, 0,
@@ -1189,7 +1191,8 @@ void Scenery3d::generateCubeMap(StelCore* core)
                     0, 0, -1, 0);
 
 
-    cFrust.setCamInternals(prj->getFov(), aspect, zNear, zFar);
+    StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
+    cFrust.setCamInternals(projectorParams.fov, aspect, projectorParams.zNear, projectorParams.zFar);
 
     glPushAttrib(GL_VIEWPORT_BIT);
     glViewport(0, 0, cubemapSize, cubemapSize);
@@ -1373,15 +1376,15 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
     float fov = prj->getFov();
     float aspect = (float)prj->getViewportWidth() / (float)prj->getViewportHeight();
     float zNear = 1.0f;
-    //float zFar = 10000.0f;
-    float zFar = 100.0f;
+    float zFar = 10000.0f;
     float f = 2.0 / tan(fov * M_PI / 360.0);
     Mat4d projMatd(f / aspect, 0, 0, 0,
                    0, f, 0, 0,
                    0, 0, (zFar + zNear) / (zNear - zFar), 2.0 * zFar * zNear / (zNear - zFar),
                    0, 0, -1, 0);
 
-    cFrust.setCamInternals(fov, aspect, zNear, zFar);
+    StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
+    cFrust.setCamInternals(projectorParams.fov, aspect, projectorParams.zNear, projectorParams.zFar);
 
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
