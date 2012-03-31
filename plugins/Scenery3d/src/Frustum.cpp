@@ -162,6 +162,15 @@ void Frustum::drawFrustum()
     Vec3d fbl = vecfToDouble(drawCorners[FBL]);
     Vec3d fbr = vecfToDouble(drawCorners[FBR]);
 
+//    m.transfo(ntl);
+//    m.transfo(ntr);
+//    m.transfo(nbr);
+//    m.transfo(nbl);
+//    m.transfo(ftr);
+//    m.transfo(ftl);
+//    m.transfo(fbl);
+//    m.transfo(fbr);
+
     glColor3f(1.0f, 1.0f, 1.0f);
     glLineWidth(5);
 
