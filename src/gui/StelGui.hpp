@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
@@ -109,11 +109,12 @@ public:
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const;
 	
 	virtual QAction* addGuiActions(const QString& actionName,
-								   const QString& text,
-								   const QString& shortCut,
-								   const QString& helpGroup,
-								   bool checkable=true,
-								   bool autoRepeat=false);
+									 const QString& text,
+									 const QString& shortCut,
+									 const QString& helpGroup,
+									 bool checkable=true,
+									 bool autoRepeat=false,
+									 bool global = false);
 	
 public slots:
 	//! Define whether the buttons toggling image flip should be visible
@@ -126,16 +127,16 @@ public slots:
 	bool getAutoHideHorizontalButtonBar() const;
 	//! Set the auto-hide status of the horizontal toolbar.
 	//! When set to true, the horizontal toolbar will auto-hide itself, only
-	//! making an appearance when the mouse is nearby.  When false, it will 
+	//! making an appearance when the mouse is nearby.  When false, it will
 	//! remain on screen.
-	//! @param b to hide or not to hide	
+	//! @param b to hide or not to hide
 	void setAutoHideHorizontalButtonBar(bool b);
 	
 	//! Get the auto-hide status of the vertical toolbar.
 	bool getAutoHideVerticalButtonBar() const;
 	//! Set the auto-hide status of the vertical toolbar.
 	//! When set to true, the vertical toolbar will auto-hide itself, only
-	//! making an appearance when the mouse is nearby.  When false, it will 
+	//! making an appearance when the mouse is nearby.  When false, it will
 	//! remain on screen.
 	//! @param b to hide or not to hide
 	void setAutoHideVerticalButtonBar(bool b);
@@ -185,7 +186,7 @@ private slots:
 
 private:
 	QGraphicsWidget* topLevelGraphicsWidget;
-			
+
 	class SkyGui* skyGui;
 	
 	StelButton* buttonTimeRewind;
