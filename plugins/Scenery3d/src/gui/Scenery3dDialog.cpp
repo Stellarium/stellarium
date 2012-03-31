@@ -11,6 +11,12 @@ Scenery3dDialog::Scenery3dDialog()
     ui = new Ui_scenery3dDialogForm;
 }
 
+void Scenery3dDialog::retranslate()
+{
+        if (dialog)
+                ui->retranslateUi(dialog);
+}
+
 void Scenery3dDialog::languageChanged()
 {
 

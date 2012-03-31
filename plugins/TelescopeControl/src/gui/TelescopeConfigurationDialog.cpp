@@ -61,7 +61,7 @@ TelescopeConfigurationDialog::~TelescopeConfigurationDialog()
 	delete serialPortValidator;
 }
 
-void TelescopeConfigurationDialog::languageChanged()
+void TelescopeConfigurationDialog::retranslate()
 {
 	if (dialog)
 		ui->retranslateUi(dialog);
@@ -73,7 +73,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	ui->setupUi(dialog);
 	
 	//Inherited connect
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(buttonDiscardPressed()));
 	connect(dialog, SIGNAL(rejected()), this, SLOT(buttonDiscardPressed()));
 	

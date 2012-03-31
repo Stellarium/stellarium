@@ -40,7 +40,7 @@ TimeZoneConfigurationWindow::~TimeZoneConfigurationWindow()
 		delete defineTimeZoneWindow;
 }
 
-void TimeZoneConfigurationWindow::languageChanged()
+void TimeZoneConfigurationWindow::retranslate()
 {
 	if (dialog)
 	{
@@ -53,7 +53,7 @@ void TimeZoneConfigurationWindow::createDialogContent()
 {
 	ui->setupUi(dialog);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveTimeZoneSettings()));
 	connect(ui->pushButtonEditTimeZone, SIGNAL(clicked()), this, SLOT(openDefineTimeZoneWindow()));

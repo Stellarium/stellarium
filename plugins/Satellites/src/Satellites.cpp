@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 Matthew Gates
+ * Copyright (C) 2009, 2012 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -676,7 +676,7 @@ QStringList Satellites::getGroups(void) const
 	return groups;
 }
 
-QHash<QString,QString> Satellites::getSatellites(const QString& group, Visibility vis)
+QHash<QString,QString> Satellites::getSatellites(const QString& group, Status vis)
 {
 	QHash<QString,QString> result;
 
@@ -689,7 +689,8 @@ QHash<QString,QString> Satellites::getSatellites(const QString& group, Visibilit
 				if (vis==Both ||
 				        (vis==Visible && sat->visible) ||
 				        (vis==NotVisible && !sat->visible) ||
-				        (vis==NewlyAdded && sat->isNew()))
+					(vis==OrbitError && !sat->orbitValid) ||
+					(vis==NewlyAdded && sat->isNew()))
 					result.insert(sat->id, sat->name);
 			}
 		}
@@ -778,6 +779,7 @@ void Satellites::remove(const QStringList& idList)
 			numRemoved++;
 		}
 	}
+
 	qDebug() << "Satellites: "
 	         << idList.count() << "satellites proposed for removal, "
 	         << numRemoved << " removed, "

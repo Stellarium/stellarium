@@ -28,28 +28,28 @@ for(i=0; i<15; i++)
 {
 	core.wait(0.1);
 	if (i%3==0) { 
-		StelSkyImageMgr.showImage("image1", true); 
-		StelSkyImageMgr.showImage("image2", false); 
-		StelSkyImageMgr.showImage("image3", false); 
+		ScreenImageMgr.showImage("image1", true); 
+		ScreenImageMgr.showImage("image2", false); 
+		ScreenImageMgr.showImage("image3", false); 
 	}
 	else if ((i+1)%3==0) {
-		StelSkyImageMgr.showImage("image1", false); 
-		StelSkyImageMgr.showImage("image2", true); 
-		StelSkyImageMgr.showImage("image3", false); 
+		ScreenImageMgr.showImage("image1", false); 
+		ScreenImageMgr.showImage("image2", true); 
+		ScreenImageMgr.showImage("image3", false); 
 	}
 	else if ((i+2)%3==0) {
-		StelSkyImageMgr.showImage("image1", false); 
-		StelSkyImageMgr.showImage("image2", false); 
-		StelSkyImageMgr.showImage("image3", true); 
+		ScreenImageMgr.showImage("image1", false); 
+		ScreenImageMgr.showImage("image2", false); 
+		ScreenImageMgr.showImage("image3", true); 
 	}
 }
 
 status("turn off the images (fade would be nice)...");
-StelSkyImageMgr.showImage("image1", true); 
+ScreenImageMgr.showImage("image1", true); 
 core.wait(0.5);
-StelSkyImageMgr.showImage("image2", true); 
+ScreenImageMgr.showImage("image2", true); 
 core.wait(0.5);
-StelSkyImageMgr.showImage("image3", true); 
+ScreenImageMgr.showImage("image3", true); 
 core.wait(1);
 status("unloading images...");
 core.removeSkyImage("image1");

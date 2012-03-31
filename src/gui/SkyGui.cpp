@@ -61,6 +61,11 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 	}
 }
 
+const QString InfoPanel::getSelectedText(void)
+{
+	return toPlainText();
+}
+
 SkyGui::SkyGui(QGraphicsItem * parent): QGraphicsWidget(parent), stelGui(NULL)
 {
 	setObjectName("StelSkyGui");

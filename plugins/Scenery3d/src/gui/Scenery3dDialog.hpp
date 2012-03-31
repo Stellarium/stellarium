@@ -14,6 +14,9 @@ public:
     virtual void languageChanged();
     virtual void createDialogContent();
 
+public slots:
+        void retranslate();
+
 private slots:
     void scenery3dChanged(QListWidgetItem* item);
     void renderingShadowmapChanged(void);
