@@ -42,7 +42,7 @@ AddRemoveLandscapesDialog::~AddRemoveLandscapesDialog()
 	delete ui;
 }
 
-void AddRemoveLandscapesDialog::languageChanged()
+void AddRemoveLandscapesDialog::retranslate()
 {
 	if (dialog)
 		ui->retranslateUi(dialog);
@@ -54,7 +54,7 @@ void AddRemoveLandscapesDialog::createDialogContent()
 	ui->setupUi(dialog);
 	
 	//Signals and slots
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	connect(ui->pushButtonBrowseForArchive, SIGNAL(clicked()), this, SLOT(browseForArchiveClicked()));

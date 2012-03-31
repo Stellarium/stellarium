@@ -194,8 +194,8 @@ class Translations
 		// Scripts description
 		N_("Look around each installed landscape.");
 		N_("Script to demonstrate a partial lunar eclipse.");
-        N_("Script to demonstrate a total lunar eclipse.");
-        N_("A slow, infinite tour of the sky, looking at random objects.");
+                N_("Script to demonstrate a total lunar eclipse.");
+                N_("A slow, infinite tour of the sky, looking at random objects.");
 		N_("Script to demonstrate a total solar eclipse which has happened in 2009 (location=Rangpur, Bangladesh).");
 		N_("Script which runs automatically at startup");
 		N_("This script displays the constellations of the Zodiac. That means the constellations which lie along the line which the Sun traces across the celestial sphere over the course of a year.");

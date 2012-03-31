@@ -52,9 +52,16 @@ public:
 
 public slots:
 	//! Retranslate the content of the dialog.
-	//! Needs to be re-implemented for every window class and connected to
-	//! StelApp::languageChanged().
-	void languageChanged();
+	//! Needs to be connected to StelApp::languageChanged().
+	//! At the very least, if the window is
+	//! <a href="http://doc.qt.nokia.com/stable/designer-using-a-ui-file.html">
+	//! based on a Qt Designer file (.ui)</a>, the implementation needs to call
+	//! the generated class' retranslateUi() method, like this:
+	//! \code
+	//! if (dialog) 
+	//! 	ui->retranslateUi(dialog);
+	//! \endcode
+	virtual void retranslate() = 0;
 	//! On the first call with "true" populates the window contents.
 	void setVisible(bool);
 	//! Closes the window (the window widget is not deleted, just not visible).
