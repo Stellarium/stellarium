@@ -15,7 +15,7 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
 #include "ScriptConsole.hpp"
@@ -47,7 +47,7 @@ ScriptConsole::~ScriptConsole()
 	delete ui;
 }
 
-void ScriptConsole::languageChanged()
+void ScriptConsole::retranslate()
 {
 	if (dialog)
 		ui->retranslateUi(dialog);
@@ -65,7 +65,7 @@ void ScriptConsole::styleChanged()
 void ScriptConsole::createDialogContent()
 {
 	ui->setupUi(dialog);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	highlighter = new StelScriptSyntaxHighlighter(ui->scriptEdit->document());
 	ui->includeEdit->setText(StelFileMgr::getInstallationDir() + "/scripts");

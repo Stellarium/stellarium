@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  *
  * Refraction and extinction computations.
  * Implementation: 2010-03-23 GZ=Georg Zotti, Georg.Zotti@univie.ac.at
@@ -31,41 +31,39 @@
 #include "VecMath.hpp"
 #include "StelProjector.hpp"
 
-//! @class RefractionExtinction
-//! This class performs refraction and extinction computations, following literature from atmospheric optics and astronomy.
-//! Airmass computations are limited to meaningful altitudes,
-//! and refraction solutions can only be aproximate, given the turbulent, unpredictable real atmosphere.
+//! @class Extinction
+//! This class performs extinction computations, following literature from atmospheric optics and astronomy.
+//! Airmass computations are limited to meaningful altitudes.
 //! The solution provided here will [hopefully!] result in a visible "zone of avoidance" near the horizon down to altitude -2,
-//! and will show stars in their full brightness at their geometrical positions below -5 degrees.
-//! Of course, plotting stars below the horizon could be coupled to setting of horizon foreground,
-//! it's another usability issue. Typical horizons do not go down below -1, so strange effects between -2 and -5 should be covered.
+//! and may show stars in their full brightness below -2 degrees.
+//! Typical horizons do not go down below -1, so all natural sites should be covered.
 //! Note that forward/backward are no absolute reverse operations!
 //! All the computations should be in effect
 //! (1) only if atmosphere effects are true
-//! (2) only for celestial objects, never for landscape coordinates
-//! (3) only for terrestrial locations, not on Moon/Mars/Saturn etc
+//! (2) only for terrestrial locations, not on Moon/Mars/Saturn etc
+//! config.ini:astro/flag_extinction_below_horizon=true|false controls if extinction kills objects below -2 degrees altitude by setting airmass to 42.
 class Extinction
 {
 public:
 	Extinction();
 	//! Compute extinction effect for arrays of size @param num position vectors and magnitudes.
-	//! @param altAzPos are the normalized (apparent) star position vectors, and their z components sin(apparent_altitude).
+	//! @param altAzPos are the NORMALIZED (!!) (apparent) star position vectors, and their z components sin(apparent_altitude).
 	//! This call must therefore be done after application of Refraction, and only if atmospheric effects are on.
 	//! Note that forward/backward are no absolute reverse operations!
-	void forward(const Vec3d *altAzPos, float *mag, const int num) const;
-	void forward(const Vec3f *altAzPos, float *mag, const int num) const;
-	//! Convenience method for the same
+	void forward(const Vec3d *altAzPos, float *mag, const int num=1) const;
+	void forward(const Vec3f *altAzPos, float *mag, const int num=1) const;
 	void forward(const double *sinAlt,  float *mag, const int num) const;
 	void forward(const float  *sinAlt,  float *mag, const int num) const;
+	void forward(const double *sinAlt,  float *mag) const;
+	void forward(const float  *sinAlt,  float *mag) const;
 
-	//! Compute extinction effect for arrays of size @param size position vectors and magnitudes.
-	//! @param altAzPos are the normalized (apparent) star position vectors, and their z components sin(apparent_altitude).
+	//! Compute inverse extinction effect for arrays of size @param num position vectors and magnitudes.
+	//! @param altAzPos are the NORMALIZED (!!) (apparent) star position vectors, and their z components sin(apparent_altitude).
 	//! Note that forward/backward are no absolute reverse operations!
-	void backward(const Vec3d *altAzPos, float *mag, const int num) const;
-	void backward(const Vec3f *altAzPos, float *mag, const int num) const;
-	//! Convenience method for the same
-	void backward(const double *sinAlt,  float *mag, const int num) const;
-	void backward(const float  *sinAlt,  float *mag, const int num) const;
+	void backward(const Vec3d *altAzPos, float *mag, const int num=1) const;
+	void backward(const Vec3f *altAzPos, float *mag, const int num=1) const;
+	void backward(const double *sinAlt,  float *mag, const int num=1) const;
+	void backward(const float  *sinAlt,  float *mag, const int num=1) const;
 
 	//! Set visual extinction coefficient (mag/airmass), influences extinction computation.
 	//! @param k= 0.1 for highest mountains, 0.2 for very good lowland locations, 0.35 for typical lowland, 0.5 in humid climates.
@@ -84,11 +82,20 @@ private:
 
 	//! k, magnitudes/airmass, in [0.00, ... 1.00], (default 0.20).
 	float ext_coeff;
-	//! should be either 0.0 (stars visible in full brightness below horizon) or 40.0 (practically invisible)
+	//! should be either 0.0 (stars visible in full brightness below horizon) or 40.0 (or 42? ;-) practically invisible)
 	//! Maybe make this a user-configurable option?
-	static const float SUBHORIZONTAL_AIRMASS;
+	static float SUBHORIZONTAL_AIRMASS;
 };
 
+//! @class Refraction
+//! This class performs refraction computations, following literature from atmospheric optics and astronomy.
+//! Refraction solutions can only be aproximate, given the turbulent, unpredictable real atmosphere.
+//! Typical horizons do not go down below -1, so strange effects (distortion) between -2 and -5 should be covered.
+//! Note that forward/backward are no absolute reverse operations!
+//! All the computations should be in effect
+//! (1) only if atmosphere effects are true
+//! (2) only for celestial objects, never for landscape images
+//! (3) only for terrestrial locations, not on Moon/Mars/Saturn etc
 
 class Refraction: public StelProjector::ModelViewTranform
 {

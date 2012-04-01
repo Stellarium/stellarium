@@ -30,10 +30,13 @@ SET(Satellites_SRCS
   Satellites.cpp
   gui/SatellitesDialog.hpp
   gui/SatellitesDialog.cpp
+  gui/SatellitesImportDialog.hpp
+  gui/SatellitesImportDialog.cpp
 )
 
 SET(SatellitesDialog_UIS
   gui/satellitesDialog.ui
+  gui/satellitesImportDialog.ui
 )
 QT4_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
 
@@ -45,6 +48,7 @@ QT4_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
 SET(Satellites_MOC_HDRS
   Satellites.hpp
   gui/SatellitesDialog.hpp
+  gui/SatellitesImportDialog.hpp
 )
 
 # After this call, Satellites_MOC_SRCS = moc_Satellites.cxx
@@ -78,7 +82,7 @@ IF(BUILD_STATIC_PLUGINS)
 	# The library target "Satellites-static" has a default OUTPUT_NAME of "Satellites-static", so change it.
 	SET_TARGET_PROPERTIES(Satellites-static PROPERTIES OUTPUT_NAME "Satellites")
 	TARGET_LINK_LIBRARIES(Satellites-static ${StelMain} ${extLinkerOption})
-	SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
+	SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN -Wno-unused-parameter -Wno-unused-but-set-parameter -Wno-unused-but-set-variable")
 	ADD_DEPENDENCIES(AllStaticPlugins Satellites-static)
 ENDIF()
 

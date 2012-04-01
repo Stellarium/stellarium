@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
 #include "Dialog.hpp"
@@ -51,12 +51,13 @@ LocationDialog::~LocationDialog()
 	delete ui;
 }
 
-void LocationDialog::languageChanged()
+void LocationDialog::retranslate()
 {
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
 		populatePlanetList();
+		populateCountryList();
 	}
 }
 
@@ -73,7 +74,7 @@ void LocationDialog::createDialogContent()
 	// We try to directly connect to the observer slots as much as we can
 	ui->setupUi(dialog);
 
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	// Init the SpinBox entries
 	ui->longitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->longitudeSpinBox->setPrefixType(AngleSpinBox::Longitude);
@@ -87,7 +88,7 @@ void LocationDialog::createDialogContent()
 	ui->citiesListView->setModel(proxyModel);
 
 	populatePlanetList();
-	ui->countryNameComboBox->insertItems(0, StelLocaleMgr::getAllCountryNames());
+	populateCountryList();
 
 	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 	connect(ui->citiesListView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(listItemActivated(const QModelIndex&)));
@@ -172,11 +173,11 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	disconnectEditSignals();
 
 	ui->cityNameLineEdit->setText(loc.name);
-	int idx = ui->countryNameComboBox->findText(loc.country);
+	int idx = ui->countryNameComboBox->findData(loc.country, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
 		// Use France as default
-		ui->countryNameComboBox->findText("France", Qt::MatchCaseSensitive);
+		ui->countryNameComboBox->findData(QVariant("France"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->countryNameComboBox->setCurrentIndex(idx);
 
@@ -273,7 +274,35 @@ void LocationDialog::populatePlanetList()
 	//Restore the selection
 	index = planets->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
 	planets->setCurrentIndex(index);
+	planets->model()->sort(0);
 	planets->blockSignals(false);
+}
+
+void LocationDialog::populateCountryList()
+{
+	Q_ASSERT(ui);
+	Q_ASSERT(ui->countryNameComboBox);
+	
+	QComboBox* countries = ui->countryNameComboBox;
+	QStringList countryNames(StelLocaleMgr::getAllCountryNames());
+
+	//Save the current selection to be restored later
+	countries->blockSignals(true);
+	int index = countries->currentIndex();
+	QVariant selectedCountryId = countries->itemData(index);
+	countries->clear();
+	//For each country, display the localized name and store the original as user
+	//data. Unfortunately, there's no other way to do this than with a cycle.
+	foreach(const QString& name, countryNames)
+	{
+		countries->addItem(q_(name), name);
+	}
+	//Restore the selection
+	index = countries->findData(selectedCountryId, Qt::UserRole, Qt::MatchCaseSensitive);
+	countries->setCurrentIndex(index);
+	countries->model()->sort(0);
+	countries->blockSignals(false);
+
 }
 
 // Create a StelLocation instance from the fields
@@ -289,7 +318,12 @@ StelLocation LocationDialog::locationFromFields() const
 	loc.latitude = ui->latitudeSpinBox->valueDegrees();
 	loc.longitude = ui->longitudeSpinBox->valueDegrees();
 	loc.altitude = ui->altitudeSpinBox->value();
-	loc.country = ui->countryNameComboBox->currentText();
+	index = ui->countryNameComboBox->currentIndex();
+	if (index < 0)
+		loc.country = QString();//As returned by QComboBox::currentText()
+	else
+		loc.country = ui->countryNameComboBox->itemData(index).toString();
+	
 	return loc;
 }
 
@@ -391,6 +425,9 @@ void LocationDialog::addCurrentLocationToList()
 			ui->citiesListView->scrollTo(model->index(i,0));
 			ui->citiesListView->selectionModel()->select(model->index(i,0), QItemSelectionModel::ClearAndSelect|QItemSelectionModel::Rows);
 			listItemActivated(model->index(i,0));
+			disconnectEditSignals();
+			ui->citySearchLineEdit->setFocus();
+			connectEditSignals();
 			break;
 		}
 	}

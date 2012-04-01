@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "TextUserInterface.hpp"
@@ -47,7 +47,11 @@
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
+#ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
+#endif
+#include "StelGui.hpp"
+#include "StelGuiItems.hpp"// Funny thing to include in a TEXT user interface...
 
 #include <QtOpenGL>
 #include <QKeyEvent>
@@ -91,8 +95,7 @@ Q_EXPORT_PLUGIN2(TextUserInterface, TextUserInterfaceStelPluginInterface)
 TextUserInterface::TextUserInterface()
 	: dummyDialog(this), tuiActive(false), currentNode(NULL)
 {
-	setObjectName("TextUserInterface");
-	font.setPixelSize(15);
+	setObjectName("TextUserInterface");	
 }
 
 /*************************************************************************
@@ -125,6 +128,8 @@ void TextUserInterface::init()
 	//unless you have a good reason. --BM
 	
 	StelCore* core = StelApp::getInstance().getCore();
+	// Main config.
+	loadConfiguration();
 	//Reusing strings from the location dialog
 	TuiNode* m1 = new TuiNode(N_("Location"));
 	TuiNode* m1_1 = new TuiNodeDouble(N_("Latitude:"),
@@ -267,7 +272,7 @@ void TextUserInterface::init()
 	                                 m5);
 	TuiNode* m5_2 = new TuiNodeColor(N_("Constellation labels"),
 	                                 constellationMgr,
-	                                 SLOT(setLabelsColor(Vec3f)),
+					 SLOT(setLabelsColor(Vec3f)),
 	                                 constellationMgr->getLabelsColor(), 
 	                                 m5, m5_1);
 	TuiNode* m5_3 = new TuiNode(N_("Constellation art"), m5, m5_2);
@@ -331,16 +336,32 @@ void TextUserInterface::init()
 	                                 gridLinesMgr,
 	                                 SLOT(setColorEclipticLine(Vec3f)),
 	                                 gridLinesMgr->getColorEclipticLine(), 
-	                                 m5, m5_14);
+					 m5, m5_14);
 	NebulaMgr* nebulaMgr = GETSTELMODULE(NebulaMgr);
 	TuiNode* m5_16 = new TuiNodeColor(N_("Nebula names"),
 	                                 nebulaMgr, SLOT(setLabelsColor(Vec3f)),
 	                                 nebulaMgr->getLabelsColor(), 
-	                                 m5, m5_15);
+					 m5, m5_15);
 	TuiNode* m5_17 = new TuiNodeColor(N_("Nebula hints"),
 	                                  nebulaMgr, SLOT(setCirclesColor(Vec3f)),
 	                                  nebulaMgr->getCirclesColor(), 
-	                                  m5, m5_16);
+					  m5, m5_16);
+	TuiNode* m5_18 = new TuiNodeColor(N_("Horizon line"),
+					 gridLinesMgr,
+					 SLOT(setColorHorizonLine(Vec3f)),
+					 gridLinesMgr->getColorHorizonLine(),
+					 m5, m5_17);
+	TuiNode* m5_19 = new TuiNodeColor(N_("Galactic grid"),
+					 gridLinesMgr,
+					 SLOT(setColorGalacticGrid(Vec3f)),
+					 gridLinesMgr->getColorGalacticGrid(),
+					 m5, m5_18);
+	TuiNode* m5_20 = new TuiNodeColor(N_("Galactic plane line"),
+					 gridLinesMgr,
+					 SLOT(setColorGalacticPlaneLine(Vec3f)),
+					 gridLinesMgr->getColorGalacticPlaneLine(),
+					 m5, m5_19);
+
 	m5_1->setNextNode(m5_2);
 	m5_2->setNextNode(m5_3);
 	m5_3->setNextNode(m5_4);
@@ -357,7 +378,10 @@ void TextUserInterface::init()
 	m5_14->setNextNode(m5_15);
 	m5_15->setNextNode(m5_16);
 	m5_16->setNextNode(m5_17);
-	m5_17->setNextNode(m5_1);
+	m5_17->setNextNode(m5_18);
+	m5_18->setNextNode(m5_19);
+	m5_19->setNextNode(m5_20);
+	m5_20->setNextNode(m5_1);
 	m5_1->loopToTheLast();
 	m5->setChildNode(m5_1);
 
@@ -413,8 +437,9 @@ void TextUserInterface::init()
 	m6_1->loopToTheLast();
 	m6->setChildNode(m6_1);
 
+	#ifndef DISABLE_SCRIPTING
 	TuiNode* m7 = new TuiNode(N_("Scripts"), NULL, m6);
-	m6->setNextNode(m7);
+	m6->setNextNode(m7);	
 	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
 	TuiNode* m7_1 = new TuiNodeEnum(N_("Run local script"),
 	                                &scriptMgr,
@@ -432,8 +457,14 @@ void TextUserInterface::init()
 	m7_1->loopToTheLast();
 	m7->setChildNode(m7_1);
 
+
 	TuiNode* m8 = new TuiNode(N_("Administration"), NULL, m7);
 	m7->setNextNode(m8);
+	#endif
+	#ifdef DISABLE_SCRIPTING
+	TuiNode* m8 = new TuiNode(N_("Administration"), NULL, m6);
+	m6->setNextNode(m8);
+	#endif
 	m8->setNextNode(m1);
 	m1->loopToTheLast();
 	TuiNode* m8_1 = new TuiNode(N_("Load default configuration"), m8);
@@ -452,12 +483,44 @@ void TextUserInterface::init()
 }
 
 /*************************************************************************
+ Load settings from configuration file.
+*************************************************************************/
+void TextUserInterface::loadConfiguration(void)
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	font.setPixelSize(conf->value("tui/tui_font_size", 15).toInt());
+}
+
+/*************************************************************************
  Draw our module.
 *************************************************************************/
 void TextUserInterface::draw(StelCore* core)
 {
 	if (tuiActive)
 	{
+		int x = 0, y = 0;
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		if (gui->getVisible())
+		{
+			QGraphicsItem* bottomBar = dynamic_cast<QGraphicsItem*>(gui->getButtonBar());
+			LeftStelBar* sideBar = gui->getWindowsButtonBar();			
+			x = (sideBar) ? sideBar->boundingRectNoHelpLabel().right() : 50;
+			y = (bottomBar) ? bottomBar->boundingRect().height() : 50;
+		}
+
+		// Alternate x,y for Disk viewport
+		if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
+		{
+			StelProjector::StelProjectorParams projParams = core->getCurrentStelProjectorParams();
+			x = projParams.viewportCenter[0] - projParams.viewportFovDiameter/2;
+			y = projParams.viewportCenter[1];
+		}
+		
+		x += 20;
+		y += 15;
+
 		QString tuiText = q_("[no TUI node]");
 		if (currentNode!=NULL)
 			tuiText = currentNode->getDisplayText();
@@ -465,8 +528,7 @@ void TextUserInterface::draw(StelCore* core)
 		StelPainter painter(core->getProjection(StelCore::FrameAltAz));
 		painter.setFont(font);
 		painter.setColor(0.3,1,0.3);
-		painter.drawText(StelMainGraphicsView::getInstance().size().width()*0.6,
-				 50, tuiText, 0, 0, 0, false);
+		painter.drawText(x, y, tuiText, 0, 0, 0, false);
 	}
 }
 

@@ -55,7 +55,7 @@ public:
 	static QString getTzOffsetStringFrom(QDoubleSpinBox * spinBox);
 
 public slots:
-	void languageChanged();
+	void retranslate();
 
 protected:
 	void createDialogContent();

@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "SolarSystem.hpp"
@@ -1065,12 +1065,16 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 	v.normalize();
 	double cosLimFov = std::cos(limitFov * M_PI/180.);
 	Vec3d equPos;
+	double cosAngularSize;
 
 	foreach (const PlanetP& p, systemPlanets)
 	{
 		equPos = p->getEquinoxEquatorialPos(core);
 		equPos.normalize();
-		if (equPos*v>=cosLimFov)
+
+		cosAngularSize = std::cos(p->getSpheroidAngularSize(core) * M_PI/180.);
+
+		if (equPos*v>=std::min(cosLimFov, cosAngularSize))
 		{
 			result.append(qSharedPointerCast<StelObject>(p));
 		}

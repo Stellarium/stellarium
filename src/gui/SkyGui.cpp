@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "SkyGui.hpp"
@@ -59,6 +59,11 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 		QString s = selected[0]->getInfoString(StelApp::getInstance().getCore(), infoTextFilters);
 		setHtml(s);
 	}
+}
+
+const QString InfoPanel::getSelectedText(void)
+{
+	return toPlainText();
 }
 
 SkyGui::SkyGui(QGraphicsItem * parent): QGraphicsWidget(parent), stelGui(NULL)
