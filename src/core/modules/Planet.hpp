@@ -177,6 +177,9 @@ public:
 
 	// Return the heliocentric ecliptical position
 	Vec3d getHeliocentricEclipticPos() const;
+
+	// Return the heliocentric transformation for local coordinate
+	Vec3d getHeliocentricPos(Vec3d) const;
 	void setHeliocentricEclipticPos(const Vec3d &pos);
 
 	// Compute the distance to the given position in heliocentric coordinate (in AU)
@@ -211,6 +214,7 @@ public:
 	// draw orbital path of Planet
 	void drawOrbit(const StelCore*);
 	Vec3d orbit[ORBIT_SEGMENTS+1];   // store heliocentric coordinates for drawing the orbit
+	Vec3d orbitP[ORBIT_SEGMENTS+1];  // store local coordinate for orbit
 	double lastOrbitJD;
 	double deltaJD;
 	double deltaOrbitJD;
