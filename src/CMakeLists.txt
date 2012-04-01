@@ -37,6 +37,8 @@ IF(OPENGL_MODE STREQUAL "ES2")
 ENDIF()
 
 SET(stellarium_lib_SRCS
+	core/StelShader.hpp
+	core/StelShader.cpp
 	core/StelAudioMgr.hpp
 	core/StelAudioMgr.cpp
 	core/StelGeodesicGrid.cpp

@@ -69,7 +69,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), starsShaderProgram(
 	starLinearScale = 19.569f;
 
 	big3dModelHaloRadius = 150.f;
-	
+
 	QSettings* conf = StelApp::getInstance().getSettings();
 	initColorTableFromConfigFile(conf);
 
@@ -80,7 +80,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), starsShaderProgram(
 	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
 	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
-	
+
 	bool ok=true;
 
 	setBortleScale(conf->value("stars/init_bortle_scale",3).toInt(&ok));
@@ -427,7 +427,6 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 
 	if (nbPointSources==0)
 		return;
-
 	texHalo->bind();
 	sPainter->enableTexture2d(true);
 	glBlendFunc(GL_ONE, GL_ONE);
