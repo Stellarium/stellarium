@@ -260,7 +260,6 @@ bool ZoneArray::readFile(QFile& file, void *data, qint64 size)
 	if (part_size < 64*1024)
 	{
 		part_size = 64*1024;
-		parts = (size + (part_size>>1)) / part_size;
 	}
 	float i = 0.f;
 	i += 1.f;

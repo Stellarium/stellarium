@@ -1246,7 +1246,6 @@ void Planet::drawEarthShadow(StelCore* core, StelPainter* sPainter)
 		return;   // not visible so don't bother drawing
 
 	shadow = mh + mdist*mscale;
-	r_penumbra *= mscale;
 
 	StelProjectorP saveProj = sPainter->getProjector();
 	sPainter->setProjector(core->getProjection(StelCore::FrameHeliocentricEcliptic));
