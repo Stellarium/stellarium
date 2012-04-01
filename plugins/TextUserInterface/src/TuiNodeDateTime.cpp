@@ -47,7 +47,6 @@ TuiNodeResponse TuiNodeDateTime::handleEditingKey(int key)
 			editingPart--;
 		}
 		response.accepted = true;
-		response.newNode = this;
 		if (!editing)
 		{
 			emit(setValue(value));
@@ -60,7 +59,6 @@ TuiNodeResponse TuiNodeDateTime::handleEditingKey(int key)
 		editing = false;
 		editingPart = 0;
 		response.accepted = true;
-		response.newNode = this;
 		emit(setValue(value));
 		return response;
 	}
@@ -72,7 +70,6 @@ TuiNodeResponse TuiNodeDateTime::handleEditingKey(int key)
 			editingPart++;
 		}
 		response.accepted = true;
-		response.newNode = this;
 		return response;
 	}
 	if (key==Qt::Key_Up)
@@ -80,7 +77,6 @@ TuiNodeResponse TuiNodeDateTime::handleEditingKey(int key)
 		typing = false;
 		incPart(editingPart, true);
 		response.accepted = true;
-		response.newNode = this;
 		emit(setValue(value));
 		return response;
 	}
@@ -89,7 +85,6 @@ TuiNodeResponse TuiNodeDateTime::handleEditingKey(int key)
 		typing = false;
 		incPart(editingPart, false);
 		response.accepted = true;
-		response.newNode = this;
 		emit(setValue(value));
 		return response;
 	}
