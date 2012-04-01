@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "StelObserver.hpp"
@@ -201,8 +201,8 @@ Mat4d StelObserver::getRotAltAzToEquatorial(double jd) const
 	// TODO: Figure out how to keep continuity in sky as reach poles
 	// otherwise sky jumps in rotation when reach poles in equatorial mode
 	// This is a kludge
-	if( lat > 89.5 )  lat = 89.5;
-	if( lat < -89.5 ) lat = -89.5;
+	if( lat > 90.0 )  lat = 90.0;
+	if( lat < -90.0 ) lat = -90.0;
 	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+currentLocation.longitude)*M_PI/180.)
 		* Mat4d::yrotation((90.-lat)*M_PI/180.);
 }

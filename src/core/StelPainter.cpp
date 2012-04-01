@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 //remove
@@ -472,8 +472,9 @@ void StelPainter::sRing(float rMin, float rMax, int slices, int stacks, int orie
 		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
 		Vec3f tmpv(0.f);
 		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
-		lightPos3 -= tmpv;
+		//lightPos3 -= tmpv;
 		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
+		prj->getModelViewTransform()->getApproximateLinearTransfo().transpose().multiplyWithoutTranslation(Vec3d(lightPos3[0], lightPos3[1], lightPos3[2]));
 		prj->getModelViewTransform()->backward(lightPos3);
 		lightPos3.normalize();
 		ambientLight = light.getAmbient();
@@ -1601,9 +1602,9 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
 		Vec3f tmpv(0.f);
 		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
-
-		lightPos3 -= tmpv;
+		//lightPos3 -= tmpv;
 		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
+		prj->getModelViewTransform()->getApproximateLinearTransfo().transpose().multiplyWithoutTranslation(Vec3d(lightPos3[0], lightPos3[1], lightPos3[2]));
 		prj->getModelViewTransform()->backward(lightPos3);
 		lightPos3.normalize();
 		ambientLight = light.getAmbient();
@@ -1728,10 +1729,10 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
             Vec3f tmpv(0.f);
             //transforms to world coord system
             prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
-
-            lightPos3 -= tmpv;
+            //lightPos3 -= tmpv;
             //lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
             //transforms back to view space
+            prj->getModelViewTransform()->getApproximateLinearTransfo().transpose().multiplyWithoutTranslation(Vec3d(lightPos3[0], lightPos3[1], lightPos3[2]));
             prj->getModelViewTransform()->backward(lightPos3);
             lightPos3.normalize();
             ambientLight = light.getAmbient();

@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "StelApp.hpp"
@@ -226,15 +226,17 @@ void StelApp::init(QSettings* conf)
 	textureMgr = new StelTextureMgr();
 	textureMgr->init();
 
+	QString splashFileName = "textures/logo24bits.png";
+
 #ifdef BUILD_FOR_MAEMO
-	StelLoadingBar loadingBar("textures/logo24bits.png", "", 25, 320, 101, 800, 400);
+	StelLoadingBar loadingBar(splashFileName, "", 25, 320, 101, 800, 400);
 #else
  #ifdef BZR_REVISION
-	StelLoadingBar loadingBar("textures/logo24bits.png", QString("BZR r%1").arg(BZR_REVISION), 25, 320, 101);
+	StelLoadingBar loadingBar(splashFileName, QString("BZR r%1").arg(BZR_REVISION), 25, 320, 101);
  #elif SVN_REVISION
-	StelLoadingBar loadingBar("textures/logo24bits.png", QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
+	StelLoadingBar loadingBar(splashFileName, QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
  #else
-	StelLoadingBar loadingBar("textures/logo24bits.png", PACKAGE_VERSION, 45, 320, 121);
+	StelLoadingBar loadingBar(splashFileName, PACKAGE_VERSION, 45, 320, 121);
  #endif
 #endif
 	loadingBar.draw();

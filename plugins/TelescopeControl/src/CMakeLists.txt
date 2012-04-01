@@ -24,8 +24,6 @@ SET(TelescopeControl_SRCS
   gui/TelescopeDialog.cpp
   gui/TelescopeConfigurationDialog.hpp
   gui/TelescopeConfigurationDialog.cpp
-  gui/StelDialogTelescopeControl.hpp
-  gui/StelDialogTelescopeControl.cpp
   servers/LogFile.hpp
   servers/LogFile.cpp
   servers/Socket.hpp
@@ -61,7 +59,6 @@ QT4_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
 # Add here all the files which require moc compilation
 # that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
 SET(TelescopeControl_MOC_HDRS
-  gui/StelDialogTelescopeControl.hpp
   gui/TelescopeConfigurationDialog.hpp
   gui/TelescopeDialog.hpp
   gui/SlewDialog.hpp

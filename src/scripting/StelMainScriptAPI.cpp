@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "StelMainScriptAPI.hpp"
@@ -572,10 +572,13 @@ void StelMainScriptAPI::clear(const QString& state)
 		ssmgr->setFlagTrails(false);
 		mmgr->setZHR(10);
 		glmgr->setFlagAzimuthalGrid(false);
+		glmgr->setFlagGalacticGrid(false);
 		glmgr->setFlagEquatorGrid(false);
 		glmgr->setFlagEquatorLine(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagHorizonLine(false);
+		glmgr->setFlagGalacticPlaneLine(false);
 		glmgr->setFlagEquatorJ2000Grid(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(false);
@@ -601,10 +604,13 @@ void StelMainScriptAPI::clear(const QString& state)
 		ssmgr->setFlagTrails(false);
 		mmgr->setZHR(0);
 		glmgr->setFlagAzimuthalGrid(false);
+		glmgr->setFlagGalacticGrid(false);
 		glmgr->setFlagEquatorGrid(true);
 		glmgr->setFlagEquatorLine(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagHorizonLine(false);
+		glmgr->setFlagGalacticPlaneLine(false);
 		glmgr->setFlagEquatorJ2000Grid(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(true);
@@ -630,10 +636,13 @@ void StelMainScriptAPI::clear(const QString& state)
 		ssmgr->setFlagTrails(false);
 		mmgr->setZHR(0);
 		glmgr->setFlagAzimuthalGrid(false);
+		glmgr->setFlagGalacticGrid(false);
 		glmgr->setFlagEquatorGrid(false);
 		glmgr->setFlagEquatorLine(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagHorizonLine(false);
+		glmgr->setFlagGalacticPlaneLine(false);
 		glmgr->setFlagEquatorJ2000Grid(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(false);

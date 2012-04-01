@@ -15,7 +15,7 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
 #ifndef _SLEWDIALOG_HPP_
@@ -26,13 +26,12 @@
 #include <QString>
 #include "StelStyle.hpp"
 
-//#include "StelDialog.hpp"
-#include "StelDialogTelescopeControl.hpp"
+#include "StelDialog.hpp"
 
 class Ui_slewDialog;
 class TelescopeControl;
 
-class SlewDialog : public StelDialogTelescopeControl
+class SlewDialog : public StelDialog
 {
 	Q_OBJECT
 public:
@@ -40,7 +39,7 @@ public:
 	virtual ~SlewDialog();
 
 public slots:
-	void languageChanged();
+	void retranslate();
 	
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots

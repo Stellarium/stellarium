@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _SOLARSYSTEM_HPP_
@@ -36,7 +36,6 @@ class StelTranslator;
 class StelObject;
 class StelCore;
 class StelProjector;
-class StelNavigator;
 class QSettings;
 
 typedef QSharedPointer<Planet> PlanetP;
@@ -220,7 +219,6 @@ public:
 	//! @param observerPos Position of the observer in heliocentric ecliptic frame (Required for light travel time computation).
 	//! @param date the date in JDay
 	//! \deprecated ??? In the "deprecated" section, but used in SolarSystem::init()
-	//! and StelNavigator::updateTime()
 	void computePositions(double date, const Vec3d& observerPos = Vec3d(0.));
 
 	//! Get the list of all the bodies of the solar system.

@@ -15,7 +15,7 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
 #ifndef _TELESCOPECONFIGURATIONDIALOG_HPP_
@@ -25,8 +25,7 @@
 #include <QHash>
 #include <QIntValidator>
 #include <QStringList>
-//#include "StelDialog.hpp"
-#include "StelDialogTelescopeControl.hpp"
+#include "StelDialog.hpp"
 #include "TelescopeControlGlobals.hpp"
 
 using namespace TelescopeControlGlobals;
@@ -35,7 +34,7 @@ class Ui_telescopeConfigurationDialog;
 class TelescopeControl;
 class StelStyle;
 
-class TelescopeConfigurationDialog : public StelDialogTelescopeControl
+class TelescopeConfigurationDialog : public StelDialog
 {
 	Q_OBJECT
 public:
@@ -46,7 +45,7 @@ public:
 	void initNewTelescopeConfiguration(int slot);
 
 public slots:
-	void languageChanged();
+	void retranslate();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots

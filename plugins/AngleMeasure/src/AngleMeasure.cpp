@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "StelProjector.hpp"
@@ -86,9 +86,9 @@ AngleMeasure::AngleMeasure()
 		conf->setValue("AngleMeasure/line_color", "0,0.5,1");
 	}
 
-	flagUseDmsFormat = conf->value("options/angle_format_dms", false).toBool();
-	textColor = StelUtils::strToVec3f(conf->value("options/text_color", "0,0.5,1").toString());
-	lineColor = StelUtils::strToVec3f(conf->value("options/line_color", "0,0.5,1").toString());
+	flagUseDmsFormat = conf->value("AngleMeasure/angle_format_dms", false).toBool();
+	textColor = StelUtils::strToVec3f(conf->value("AngleMeasure/text_color", "0,0.5,1").toString());
+	lineColor = StelUtils::strToVec3f(conf->value("AngleMeasure/line_color", "0,0.5,1").toString());
 }
 
 AngleMeasure::~AngleMeasure()
