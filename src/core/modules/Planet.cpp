@@ -329,11 +329,13 @@ void Planet::computePosition(const double date)
 					{
 						coordFunc(calc_date, eclipticPos, userDataPtr);
 					}
+					orbitP[d] = eclipticPos;
 					orbit[d] = getHeliocentricEclipticPos();
 				}
 				else
 				{
-					orbit[d] = orbit[d+delta_points];
+					orbitP[d] = orbitP[d+delta_points];
+					orbit[d] = getHeliocentricPos(orbitP[d]);
 				}
 			}
 
@@ -357,11 +359,13 @@ void Planet::computePosition(const double date)
 					{
 						coordFunc(calc_date, eclipticPos, userDataPtr);
 					}
+					orbitP[d] = eclipticPos;
 					orbit[d] = getHeliocentricEclipticPos();
 				}
 				else
 				{
-					orbit[d] = orbit[d+delta_points];
+					orbitP[d] = orbitP[d+delta_points];
+					orbit[d] = getHeliocentricPos(orbitP[d]);
 				}
 			}
 
@@ -384,6 +388,7 @@ void Planet::computePosition(const double date)
 				{
 					coordFunc(calc_date, eclipticPos, userDataPtr);
 				}
+				orbitP[d] = eclipticPos;
 				orbit[d] = getHeliocentricEclipticPos();
 			}
 
@@ -402,6 +407,8 @@ void Planet::computePosition(const double date)
 	{
 		// calculate actual Planet position
 		coordFunc(date, eclipticPos, userDataPtr);
+		for( int d=0; d<ORBIT_SEGMENTS; d++ )
+			orbit[d]=getHeliocentricPos(orbitP[d]);
 		lastJD = date;
 	}
 
@@ -469,6 +476,22 @@ Vec3d Planet::getEclipticPos() const
 Vec3d Planet::getHeliocentricEclipticPos() const
 {
 	Vec3d pos = eclipticPos;
+	PlanetP pp = parent;
+	if (pp)
+	{
+		while (pp->parent)
+		{
+			pos += pp->eclipticPos;
+			pp = pp->parent;
+		}
+	}
+	return pos;
+}
+
+// Return heliocentric coordinate of p
+Vec3d Planet::getHeliocentricPos(Vec3d p) const
+{
+	Vec3d pos = p;
 	PlanetP pp = parent;
 	if (pp)
 	{
