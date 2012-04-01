@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "SolarSystemEditor.hpp"
@@ -59,7 +59,8 @@ void SolarSystemManagerWindow::createDialogContent()
 	ui->setupUi(dialog);
 
 	//Signals
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
+	        this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->pushButtonCopyFile, SIGNAL(clicked()), this, SLOT(copyConfiguration()));
 	connect(ui->pushButtonReplaceFile, SIGNAL(clicked()), this, SLOT(replaceConfiguration()));
@@ -96,7 +97,7 @@ void SolarSystemManagerWindow::updateTexts()
 	ui->labelVersion->setText(QString(q_("Version %1")).arg(SOLARSYSTEMEDITOR_VERSION));
 }
 
-void SolarSystemManagerWindow::languageChanged()
+void SolarSystemManagerWindow::retranslate()
 {
 	if (dialog)
 	{

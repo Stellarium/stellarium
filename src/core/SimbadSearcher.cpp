@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "SimbadSearcher.hpp"
@@ -142,10 +142,11 @@ SimbadSearcher::SimbadSearcher(QObject* parent) : QObject(parent)
 }
 
 // Lookup in Simbad for the passed object name.
-SimbadLookupReply* SimbadSearcher::lookup(const QString& objectName, int maxNbResult, int delayMs)
+SimbadLookupReply* SimbadSearcher::lookup(const QString& serverUrl, const QString& objectName, int maxNbResult, int delayMs)
 {
 	// Create the Simbad query
-	QString url("http://simbad.u-strasbg.fr/simbad/sim-script?script=format object \"%COO(d;A D)\\n%IDLIST(1)\"\n");
+	QString url(serverUrl);
+	url += "simbad/sim-script?script=format object \"%COO(d;A D)\\n%IDLIST(1)\"\n";
 	url += QString("set epoch J2000\nset limit %1\n query id ").arg(maxNbResult);
 	url += objectName;
 	return new SimbadLookupReply(url, networkMgr, delayMs);

@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _NEBULA_HPP_
@@ -53,7 +53,7 @@ public:
 	virtual QString getType() const {return "Nebula";}
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const {return XYZ;}
 	virtual double getCloseViewFov(const StelCore* core = NULL) const;
-	virtual float getVMagnitude(const StelCore* core = NULL) const {Q_UNUSED(core); return mag;}
+	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
 	virtual float getSelectPriority(const StelCore* core) const;
 	virtual Vec3f getInfoColor() const;
 	virtual QString getNameI18n() const {return nameI18;}

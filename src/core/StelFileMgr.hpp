@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _STELFILEMGR_HPP
@@ -35,7 +35,7 @@
 //! The concept is that the StelFileMgr will be asked for a named path, and it
 //! will try to locate that path within each of the search directories.
 //! @author Lippo Huhtala <lippo.huhtala@meridea.com>
-//! @author Matthew Gates <matthew@porpoisehead.net>
+//! @author Matthew Gates <matthewg42@gmail.com>
 //! @sa @ref fileStructure description.
 class StelFileMgr
 {

@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
 #include "Dialog.hpp"
@@ -24,6 +24,7 @@
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelTranslator.hpp"
 
 #include "StelObjectMgr.hpp"
 #include "StelUtils.hpp"
@@ -32,9 +33,12 @@
 #include <QFrame>
 #include <QLabel>
 #include <QPushButton>
+#include <QSettings>
 #include <QString>
 #include <QStringList>
 #include <QTextEdit>
+#include <QLineEdit>
+#include <QComboBox>
 
 #include "SimbadSearcher.hpp"
 
@@ -113,12 +117,17 @@ void CompletionLabel::updateText()
 }
 
 // Start of members for class SearchDialog
+
+const char* SearchDialog::DEF_SIMBAD_URL = "http://simbad.u-strasbg.fr/";
+
 SearchDialog::SearchDialog() : simbadReply(NULL)
 {
 	ui = new Ui_searchDialogForm;
 	simbadSearcher = new SimbadSearcher(this);
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
+
+	flagHasSelectedText = false;
 
 	greekLetters.insert("alpha", QString(QChar(0x03B1)));
 	greekLetters.insert("beta", QString(QChar(0x03B2)));
@@ -132,22 +141,27 @@ SearchDialog::SearchDialog() : simbadReply(NULL)
 	greekLetters.insert("iota", QString(QChar(0x03B9)));
 	greekLetters.insert("kappa", QString(QChar(0x03BA)));
 	
-    greekLetters.insert("lambda", QString(QChar(0x03BB)));
+	greekLetters.insert("lambda", QString(QChar(0x03BB)));
 	greekLetters.insert("mu", QString(QChar(0x03BC)));
 	greekLetters.insert("nu", QString(QChar(0x03BD)));
 	greekLetters.insert("xi", QString(QChar(0x03BE)));
 	greekLetters.insert("omicron", QString(QChar(0x03BF)));
 	
-    greekLetters.insert("pi", QString(QChar(0x03C0)));
+	greekLetters.insert("pi", QString(QChar(0x03C0)));
 	greekLetters.insert("rho", QString(QChar(0x03C1)));
 	greekLetters.insert("sigma", QString(QChar(0x03C3))); // second lower-case sigma shouldn't affect anything
 	greekLetters.insert("tau", QString(QChar(0x03C4)));
 	greekLetters.insert("upsilon", QString(QChar(0x03C5)));
 	
-    greekLetters.insert("phi", QString(QChar(0x03C6)));
+	greekLetters.insert("phi", QString(QChar(0x03C6)));
 	greekLetters.insert("chi", QString(QChar(0x03C7)));
 	greekLetters.insert("psi", QString(QChar(0x03C8)));
 	greekLetters.insert("omega", QString(QChar(0x03C9)));
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	useSimbad = conf->value("search/flag_search_online", true).toBool();	
+	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
 }
 
 SearchDialog::~SearchDialog()
@@ -160,13 +174,14 @@ SearchDialog::~SearchDialog()
 	}
 }
 
-void SearchDialog::languageChanged()
+void SearchDialog::retranslate()
 {
 	if (dialog)
 	{
 		QString text(ui->lineEditSearchSkyObject->text());
 		ui->retranslateUi(dialog);
 		ui->lineEditSearchSkyObject->setText(text);
+		populateSimbadServerList();
 	}
 }
 
@@ -179,14 +194,14 @@ void SearchDialog::styleChanged()
 void SearchDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
-//	setSimpleStyle();
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), 
-            this, SLOT(onSearchTextChanged(const QString&)));
+	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)),
+		this, SLOT(onSearchTextChanged(const QString&)));
 	connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
 	onSearchTextChanged(ui->lineEditSearchSkyObject->text());
 	connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
+	connect(ui->lineEditSearchSkyObject, SIGNAL(selectionChanged()), this, SLOT(setHasSelectedFlag()));
 
 	ui->lineEditSearchSkyObject->installEventFilter(this);
 	ui->RAAngleSpinBox->setDisplayFormat(AngleSpinBox::HMSLetters);
@@ -196,30 +211,59 @@ void SearchDialog::createDialogContent()
 	connect(ui->RAAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->DEAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
     
-    connect(ui->alphaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->betaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->gammaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->deltaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->epsilonPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->zetaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->etaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->thetaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->iotaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->kappaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->lambdaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->muPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->nuPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->xiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->omicronPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->piPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->rhoPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->sigmaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->tauPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->upsilonPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->phiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->chiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->psiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
-    connect(ui->omegaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->alphaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->betaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->gammaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->deltaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->epsilonPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->zetaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->etaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->thetaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->iotaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->kappaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->lambdaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->muPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->nuPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->xiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->omicronPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->piPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->rhoPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->sigmaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->tauPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->upsilonPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->phiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->chiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->psiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+	connect(ui->omegaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
+
+	connect(ui->checkBoxUseSimbad, SIGNAL(clicked(bool)),
+		this, SLOT(enableSimbadSearch(bool)));
+	ui->checkBoxUseSimbad->setChecked(useSimbad);
+
+	populateSimbadServerList();
+	int idx = ui->serverListComboBox->findData(simbadServerUrl, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use University of Strasbourg as default
+		idx = ui->serverListComboBox->findData(QVariant(DEF_SIMBAD_URL), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->serverListComboBox->setCurrentIndex(idx);
+	connect(ui->serverListComboBox, SIGNAL(currentIndexChanged(int)),
+	        this, SLOT(selectSimbadServer(int)));
+}
+
+void SearchDialog::setHasSelectedFlag()
+{
+	flagHasSelectedText = true;
+}
+
+void SearchDialog::enableSimbadSearch(bool enable)
+{
+	useSimbad = enable;
+	
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	conf->setValue("search/flag_search_online", useSimbad);	
 }
 
 void SearchDialog::setVisible(bool v)
@@ -252,39 +296,42 @@ void SearchDialog::manualPositionChanged()
 
 void SearchDialog::onSearchTextChanged(const QString& text)
 {
-	if (simbadReply)
-	{
-		disconnect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
-		delete simbadReply;
-		simbadReply=NULL;
+	// This block needs to go before the trimmedText.isEmpty() or the SIMBAD result does not
+	// get properly cleared.
+	if (useSimbad) {
+		if (simbadReply) {
+			disconnect(simbadReply,
+				   SIGNAL(statusChanged()),
+				   this,
+				   SLOT(onSimbadStatusChanged()));
+			delete simbadReply;
+			simbadReply=NULL;
+		}
+		simbadResults.clear();
 	}
-	simbadResults.clear();
 
 	QString trimmedText = text.trimmed().toLower();
-	if (trimmedText.isEmpty())
-	{
+	if (trimmedText.isEmpty()) {
 		ui->completionLabel->clearValues();
 		ui->completionLabel->selectFirst();
 		ui->simbadStatusLabel->setText("");
 		ui->pushButtonGotoSearchSkyObject->setEnabled(false);
-	}
-	else
-	{
-		simbadReply = simbadSearcher->lookup(trimmedText, 3);
-		onSimbadStatusChanged();
-		connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
+	} else {
+		if (useSimbad)
+		{
+			simbadReply = simbadSearcher->lookup(simbadServerUrl, trimmedText, 3);
+			onSimbadStatusChanged();
+			connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
+		}
 
 		QString greekText = substituteGreek(trimmedText);
 		QStringList matches;
-		if(greekText != trimmedText)
-		{
+		if(greekText != trimmedText) {
 			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 3);
 			matches += objectMgr->listMatchingObjectsI18n(greekText, (5 - matches.size()));
-		}
-		else
-        {
+		} else {
 			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 5);
-        }
+		}
 
 		ui->completionLabel->setValues(matches);
 		ui->completionLabel->selectFirst();
@@ -332,11 +379,18 @@ void SearchDialog::onSimbadStatusChanged()
 
 void SearchDialog::greekLetterClicked()
 {
-    QPushButton *sender = reinterpret_cast<QPushButton *>(this->sender());
-    if (sender) {
-        ui->lineEditSearchSkyObject->setText(ui->lineEditSearchSkyObject->text() + sender->text());
-    }
-    ui->lineEditSearchSkyObject->setFocus();
+	QPushButton *sender = reinterpret_cast<QPushButton *>(this->sender());
+	QLineEdit* sso = ui->lineEditSearchSkyObject;
+	if (sender) {
+		if (flagHasSelectedText)
+		{
+			sso->setText(sender->text());
+			flagHasSelectedText = false;
+		}
+		else
+			sso->setText(sso->text() + sender->text());
+	}
+	sso->setFocus();
 }
 
 void SearchDialog::gotoObject()
@@ -432,4 +486,38 @@ QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterNa
 	}
 
 	return potentialGreekLetterName;
+}
+
+void SearchDialog::populateSimbadServerList()
+{
+	Q_ASSERT(ui);
+	Q_ASSERT(ui->serverListComboBox);
+
+	QComboBox* servers = ui->serverListComboBox;
+	//Save the current selection to be restored later
+	servers->blockSignals(true);
+	int index = servers->currentIndex();
+	QVariant selectedUrl = servers->itemData(index);
+	servers->clear();
+	//For each server, display the localized description and store the URL as user data.
+	servers->addItem(q_("University of Strasbourg (France)"), DEF_SIMBAD_URL);
+	servers->addItem(q_("Harvard University (USA)"), "http://simbad.harvard.edu/");
+
+	//Restore the selection
+	index = servers->findData(selectedUrl, Qt::UserRole, Qt::MatchCaseSensitive);
+	servers->setCurrentIndex(index);
+	servers->model()->sort(0);
+	servers->blockSignals(false);
+}
+
+void SearchDialog::selectSimbadServer(int index)
+{
+	if (index < 0)
+		simbadServerUrl = DEF_SIMBAD_URL;
+	else
+		simbadServerUrl = ui->serverListComboBox->itemData(index).toString();
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	conf->setValue("search/simbad_server_url", simbadServerUrl);
 }
