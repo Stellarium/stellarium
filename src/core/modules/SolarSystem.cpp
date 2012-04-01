@@ -61,6 +61,8 @@ SolarSystem::SolarSystem() : moonScale(1.),	flagOrbits(false), flagLightTravelTi
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 	setObjectName("SolarSystem");
+
+	nMapShader = 0;
 }
 
 void SolarSystem::setFontSize(float newFontSize)
@@ -85,12 +87,13 @@ SolarSystem::~SolarSystem()
 
 	delete allTrails;
 	allTrails = NULL;
-	
+
 	// Get rid of circular reference between the shared pointers which prevent proper destruction of the Planet objects.
 	foreach (PlanetP p, systemPlanets)
 	{
 		p->satellites.clear();
 	}
+	delete nMapShader;
 }
 
 /*************************************************************************
@@ -131,7 +134,7 @@ void SolarSystem::init()
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
-	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), 
+	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur4.png");
@@ -140,6 +143,20 @@ void SolarSystem::init()
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+
+	nMapShader = new StelShader;
+
+	//using stellarium find path functions thank you alexwolf for noticing and corrections :-)
+    QStringList lst =  QStringList(StelFileMgr::findFileInAllPaths("data/shaders/",
+          (StelFileMgr::Flags)(StelFileMgr::Directory)));
+	QByteArray vshader = (QString(lst.first()) + "nmap.v.glsl").toLocal8Bit();
+	QByteArray fshader = (QString(lst.first()) + "nmap.f.glsl").toLocal8Bit();
+
+	if (!(nMapShader->load(vshader.data(), fshader.data())))
+	{
+			qWarning() << "Could not load shader files";
+	        nMapShader = 0;
+	}
 }
 
 void SolarSystem::recreateTrails()
@@ -784,8 +801,14 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			               pd.value(secname+"/radius").toDouble()/AU,
 			               pd.value(secname+"/oblateness", 0.0).toDouble(),
 			               StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
+			               StelUtils::strToVec3f(pd.value(secname+"/cloud_color").toString()),
+			               pd.value(secname+"/cloud_density").toFloat(),
+			               pd.value(secname+"/cloud_scale").toFloat(),
+			               pd.value(secname+"/cloud_sharpness").toFloat(),
+			               StelUtils::strToVec3f(pd.value(secname+"/cloud_vel").toString()),
 			               pd.value(secname+"/albedo").toFloat(),
 			               pd.value(secname+"/tex_map").toString(),
+			               pd.value(secname+"/normal_map").toString(),
 			               posfunc,
 			               userDataPtr,
 			               osculatingFunc,
