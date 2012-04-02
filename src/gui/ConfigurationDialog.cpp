@@ -153,6 +153,7 @@ void ConfigurationDialog::createDialogContent()
 		ui->allSelectedInfoRadio->setChecked(true);
 	else
 		ui->customSelectedInfoRadio->setChecked(true);
+
 	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
