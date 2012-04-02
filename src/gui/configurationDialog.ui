@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>434</width>
-    <height>475</height>
+    <width>430</width>
+    <height>473</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -212,44 +212,63 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QRadioButton" name="allSelectedInfoRadio">
-               <property name="toolTip">
-                <string>Display all information available</string>
-               </property>
-               <property name="text">
-                <string>All available</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_13">
+               <item>
+                <widget class="QRadioButton" name="allSelectedInfoRadio">
+                 <property name="toolTip">
+                  <string>Display all information available</string>
+                 </property>
+                 <property name="text">
+                  <string>All available</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="briefSelectedInfoRadio">
+                 <property name="toolTip">
+                  <string>Display less information</string>
+                 </property>
+                 <property name="text">
+                  <string>Short</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item>
-              <widget class="QRadioButton" name="briefSelectedInfoRadio">
-               <property name="toolTip">
-                <string>Display less information</string>
-               </property>
-               <property name="text">
-                <string>Short</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="noSelectedInfoRadio">
-               <property name="toolTip">
-                <string>Display no information</string>
-               </property>
-               <property name="text">
-                <string>None</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="customSelectedInfoRadio">
-               <property name="toolTip">
-                <string>Display user settings information</string>
-               </property>
-               <property name="text">
-                <string>Custom settings</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_14">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_16">
+                 <item>
+                  <widget class="QRadioButton" name="customSelectedInfoRadio">
+                   <property name="toolTip">
+                    <string>Display user settings information</string>
+                   </property>
+                   <property name="text">
+                    <string>Custom settings</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButtonCustomInfoDialog">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="noSelectedInfoRadio">
+                 <property name="toolTip">
+                  <string>Display no information</string>
+                 </property>
+                 <property name="text">
+                  <string>None</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
