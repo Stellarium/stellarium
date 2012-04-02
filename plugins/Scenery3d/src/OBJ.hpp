@@ -183,7 +183,8 @@ public:
     bool hasStelModels() const;
 
     //! Returns the bounding box for this OBJ
-    const BoundingBox* getBoundingBox() const;
+    //const BoundingBox* getBoundingBox() const;
+    AABB* getBoundingBox();
 
     void renderAABBs();
 
@@ -234,7 +235,9 @@ private:
     int m_numberOfStelModels;
 
     //! Bounding box
-    BoundingBox* pBoundingBox;
+    //BoundingBox* pBoundingBox;
+    //! Bounding box for the entire scene
+    AABB* pBoundingBox;
 
     //! Base path to this file
     std::string m_basePath;
@@ -290,7 +293,8 @@ inline bool OBJ::hasTextureCoords() const { return m_hasTextureCoords; }
 
 inline bool OBJ::hasStelModels() const { return m_hasStelModels; }
 
-inline const OBJ::BoundingBox* OBJ::getBoundingBox() const { return pBoundingBox; }
+//inline const OBJ::BoundingBox* OBJ::getBoundingBox() const { return pBoundingBox; }
+inline AABB* OBJ::getBoundingBox() {return pBoundingBox; }
 
 inline std::string OBJ::absolutePath(std::string path) { return m_basePath + path; }
 

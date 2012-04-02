@@ -204,6 +204,8 @@ private:
     // if only a non-georeferenced OBJ can be provided, you can specify a matrix via .ini/[model]/obj_world_trafo.
     // This will be applied to make sure that X=Grid-East, Y=Grid-North, Z=height.
     Mat4d obj2gridMatrix;
+    //Combines the two previous matrices into one
+    Mat4d zRot2Grid;
 
     //Currently selected Shader
     StelShader* curShader;
@@ -233,15 +235,14 @@ private:
     Vec3d sunPosition;
     //Switches the camera to sun position camera for debug purposes
     void switchToLightCam();
-    //Sets the scenes' min/max vertices for AABB construction
-    void setSceneAABB(Vec3f vecMin, Vec3f vecMax);
-    //Renders the Scene's AABB as wireframe
+    //Sets the scenes' AABB
+    void setSceneAABB(AABB* bbox);
+    //Renders the Scene's AABB
     void renderSceneAABB();
     //Scene AABB
-    Vec3f aabb[8];
+    AABB* sceneBoundingBox;
     //Camera Frustum
     Frustum cFrust;
-    Vec3f nbl;
 };
 
 #endif

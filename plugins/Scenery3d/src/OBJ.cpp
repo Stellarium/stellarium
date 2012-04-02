@@ -71,9 +71,10 @@ OBJ::OBJ()
     m_numberOfMaterials = 0;
     m_numberOfStelModels = 0;
 
-    pBoundingBox = new BoundingBox();
-    pBoundingBox->min = Vec3f(0.0f);
-    pBoundingBox->max = Vec3f(0.0f);
+    pBoundingBox = new AABB(Vec3f(0.0f), Vec3f(0.0f));
+//    pBoundingBox = new BoundingBox();
+//    pBoundingBox->min = Vec3f(0.0f);
+//    pBoundingBox->max = Vec3f(0.0f);
 }
 
 OBJ::~OBJ()
@@ -95,8 +96,7 @@ void OBJ::clean()
     m_numberOfMaterials = 0;
     m_numberOfStelModels = 0;
 
-    pBoundingBox->min = Vec3f(0.0f);
-    pBoundingBox->max = Vec3f(0.0f);
+    delete pBoundingBox;
 
     m_stelModels.clear();
     m_materials.clear();
