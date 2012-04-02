@@ -40,10 +40,10 @@ public:
         this->zFar = zFar;
     }
 
-    void calcFrustum(Vec3d& p, Vec3d& l, Vec3d& u);
+    void calcFrustum(Vec3d p, Vec3d l, Vec3d u);
     const Vec3f& getCorner(Corner corner) const;
     const Plane& getPlane(FrustumPlane plane) const;
-    int pointInFrustum(Vec3f& p);
+    int pointInFrustum(Vec3f p);
     int boxInFrustum(const AABB* bbox);
 
     void drawFrustum();
@@ -53,12 +53,14 @@ public:
     float zNear;
     float zFar;
     Mat4d m;
+    AABB* bbox;
 
 private:
 
     std::vector<Vec3f> corners;
     std::vector<Vec3f> drawCorners;
     std::vector<Plane> planes;
+    AABB* drawBbox;
 };
 
 #endif
