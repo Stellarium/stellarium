@@ -20,6 +20,7 @@
 
 #include "Dialog.hpp"
 #include "ConfigurationDialog.hpp"
+#include "CustomInfoDialog.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelMainWindow.hpp"
 #include "ui_configurationDialog.h"
@@ -156,6 +157,8 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
 	connect(ui->customSelectedInfoRadio, SIGNAL(released()), this, SLOT(setCustomSelectedInfo()));
+
+	connect(ui->pushButtonCustomInfoDialog, SIGNAL(clicked()), this, SLOT(showCustomInfoDialog()));
 
 	// Navigation tab
 	// Startup time
@@ -305,100 +308,101 @@ void ConfigurationDialog::setBriefSelectedInfo(void)
 
 void ConfigurationDialog::setCustomSelectedInfo(void)
 {
-
-	bool Name, CatalogNumber, Magnitude, RaDecJ2000, RaDecOfDate, AltAz, Distance, Size, Extra1, Extra2, Extra3, HourAngle, AbsoluteMagnitude;
 	QSettings* conf = StelApp::getInstance().getSettings();
-	Name = conf->value("custom_selected_info/flag_show_name", false).toBool();
-	CatalogNumber = conf->value("custom_selected_info/flag_show_catalognumber", false).toBool();
-	Magnitude = conf->value("custom_selected_info/flag_show_magnitude", false).toBool();
-	RaDecJ2000 = conf->value("custom_selected_info/flag_show_radecj2000", false).toBool();
-	RaDecOfDate = conf->value("custom_selected_info/flag_show_radecofdate", false).toBool();
-	AltAz = conf->value("custom_selected_info/flag_show_altaz", false).toBool();
-	Distance = conf->value("custom_selected_info/flag_show_distance", false).toBool();
-	Size = conf->value("custom_selected_info/flag_show_size", false).toBool();
-	Extra1 = conf->value("custom_selected_info/flag_show_extra1", false).toBool();
-	Extra2 = conf->value("custom_selected_info/flag_show_extra2", false).toBool();
-	Extra3 = conf->value("custom_selected_info/flag_show_extra3", false).toBool();
-	HourAngle = conf->value("custom_selected_info/flag_show_hourangle", false).toBool();
-	AbsoluteMagnitude = conf->value("custom_selected_info/flag_show_absolutemagnitude", false).toBool();
+
+	bool Name = conf->value("custom_selected_info/flag_show_name", false).toBool();
+	bool CatalogNumber = conf->value("custom_selected_info/flag_show_catalognumber", false).toBool();
+	bool Magnitude = conf->value("custom_selected_info/flag_show_magnitude", false).toBool();
+	bool RaDecJ2000 = conf->value("custom_selected_info/flag_show_radecj2000", false).toBool();
+	bool RaDecOfDate = conf->value("custom_selected_info/flag_show_radecofdate", false).toBool();
+	bool AltAz = conf->value("custom_selected_info/flag_show_altaz", false).toBool();
+	bool Distance = conf->value("custom_selected_info/flag_show_distance", false).toBool();
+	bool Size = conf->value("custom_selected_info/flag_show_size", false).toBool();
+	bool Extra1 = conf->value("custom_selected_info/flag_show_extra1", false).toBool();
+	bool Extra2 = conf->value("custom_selected_info/flag_show_extra2", false).toBool();
+	bool Extra3 = conf->value("custom_selected_info/flag_show_extra3", false).toBool();
+	bool HourAngle = conf->value("custom_selected_info/flag_show_hourangle", false).toBool();
+	bool AbsoluteMagnitude = conf->value("custom_selected_info/flag_show_absolutemagnitude", false).toBool();
+
+	int OctZero = 0x00000000;
 
 	int NameOct;
 	if (Name)
 		NameOct = StelObject::Name;
 	else
-		NameOct = 0x00000000;
+		NameOct = OctZero;
 
 	int CatalogNumberOct;
 	if (CatalogNumber)
 		CatalogNumberOct = StelObject::CatalogNumber;
 	else
-		CatalogNumberOct = 0x00000000;
+		CatalogNumberOct = OctZero;
 
 	int MagnitudeOct;
 	if (Magnitude)
 		MagnitudeOct = StelObject::Magnitude;
 	else
-		MagnitudeOct = 0x00000000;
+		MagnitudeOct = OctZero;
 
 	int RaDecJ2000Oct;
 	if (RaDecJ2000)
 		RaDecJ2000Oct = StelObject::RaDecJ2000;
 	else
-		RaDecJ2000Oct = 0x00000000;
+		RaDecJ2000Oct = OctZero;
 
 	int RaDecOfDateOct;
 	if (RaDecOfDate)
 		RaDecOfDateOct = StelObject::RaDecOfDate;
 	else
-		RaDecOfDateOct = 0x00000000;
+		RaDecOfDateOct = OctZero;
 
 	int AltAzOct;
 	if (AltAz)
 		AltAzOct = StelObject::AltAzi;
 	else
-		AltAzOct = 0x00000000;
+		AltAzOct = OctZero;
 
 	int DistanceOct;
 	if (Distance)
 		DistanceOct = StelObject::Distance;
 	else
-		DistanceOct = 0x00000000;
+		DistanceOct = OctZero;
 
 	int SizeOct;
 	if (Size)
 		SizeOct = StelObject::Size;
 	else
-		SizeOct = 0x00000000;
+		SizeOct = OctZero;
 
 	int Extra1Oct;
 	if (Extra1)
 		Extra1Oct = StelObject::Extra1;
 	else
-		Extra1Oct = 0x00000000;
+		Extra1Oct = OctZero;
 
 	int Extra2Oct;
 	if (Extra2)
 		Extra2Oct = StelObject::Extra2;
 	else
-		Extra2Oct = 0x00000000;
+		Extra2Oct = OctZero;
 
 	int Extra3Oct;
 	if (Extra3)
 		Extra3Oct = StelObject::Extra3;
 	else
-		Extra3Oct = 0x00000000;
+		Extra3Oct = OctZero;
 
 	int HourAngleOct;
 	if (HourAngle)
 		HourAngleOct = StelObject::HourAngle;
 	else
-		HourAngleOct = 0x00000000;
+		HourAngleOct = OctZero;
 
 	int AbsoluteMagnitudeOct;
 	if (AbsoluteMagnitude)
 		AbsoluteMagnitudeOct = StelObject::AbsoluteMagnitude;
 	else
-		AbsoluteMagnitudeOct = 0x00000000;
+		AbsoluteMagnitudeOct = OctZero;
 
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(NameOct|CatalogNumberOct|MagnitudeOct|RaDecJ2000Oct|RaDecOfDateOct|AltAzOct|DistanceOct|SizeOct|Extra1Oct|Extra2Oct|Extra3Oct|HourAngleOct|AbsoluteMagnitudeOct));
 }
@@ -1003,4 +1007,12 @@ void ConfigurationDialog::downloadFinished()
 	}
 
 	resetStarCatalogControls();
+}
+
+void ConfigurationDialog::showCustomInfoDialog()
+{
+	if(customInfoDialog == NULL)
+		customInfoDialog = new CustomInfoDialog();
+
+	customInfoDialog->setVisible(true);
 }

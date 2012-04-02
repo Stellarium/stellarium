@@ -32,6 +32,7 @@ class QDataStream;
 class QNetworkAccessManager;
 class QListWidgetItem;
 class StelGui;
+class CustomInfoDialog;
 
 class ConfigurationDialog : public StelDialog
 {
@@ -132,10 +133,14 @@ private slots:
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 
+	void showCustomInfoDialog();
+
 private:
 	StelGui* gui;
 
 	int savedProjectionType;
+
+	CustomInfoDialog * customInfoDialog;
 };
 
 #endif // _CONFIGURATIONDIALOG_HPP_
