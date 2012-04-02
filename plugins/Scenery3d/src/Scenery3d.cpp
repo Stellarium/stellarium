@@ -158,6 +158,7 @@ Scenery3d::~Scenery3d()
     }
     if (groundModel != objModel) delete groundModel;
     delete objModel;
+    delete sceneBoundingBox;
 }
 
 void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery3dID)
@@ -315,8 +316,6 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
         lookAt_fov[0]=180.0f-lookAt_fov[0];
     }
     else qDebug() << "scenery3d.ini: No initial dir/fov given.";
-
-
 }
 
 void Scenery3d::loadModel()
@@ -390,9 +389,8 @@ void Scenery3d::loadModel()
         cur = groundModel;
 #endif
 
-        Vec3f vecMin = cur->getBoundingBox()->min;
-        Vec3f vecMax = cur->getBoundingBox()->max;
-        setSceneAABB(vecMin, vecMax);
+        //Set the scene's AABB
+        setSceneAABB(cur->getBoundingBox());
 
         // finally, set core to enable update().
         this->core=StelApp::getInstance().getCore();
@@ -456,58 +454,14 @@ void Scenery3d::switchToLightCam()
     gluLookAt (sunPosition[0]+30, sunPosition[1]+30, sunPosition[2]+30, 0, 0, 0, 0, 0, 1);
 }
 
-void Scenery3d::setSceneAABB(Vec3f vecMin, Vec3f vecMax)
+void Scenery3d::setSceneAABB(AABB* bbox)
 {
-    aabb[0] = Vec3f(vecMin[0], vecMax[1], vecMin[2]); //0topNearLeft
-    aabb[1] = Vec3f(vecMax[0], vecMax[1], vecMin[2]); //1topNearRight
-    aabb[2] = Vec3f(vecMax[0], vecMin[1], vecMin[2]); //2bottomNearRight
-    aabb[3] = Vec3f(vecMin[0], vecMin[1], vecMin[2]); //3bottomNearLeft
-    aabb[4] = Vec3f(vecMin[0], vecMax[1], vecMax[2]); //4topFarLeft
-    aabb[5] = Vec3f(vecMax[0], vecMax[1], vecMax[2]); //5topFarRight
-    aabb[6] = Vec3f(vecMax[0], vecMin[1], vecMax[2]); //6bottomFarRight
-    aabb[7] = Vec3f(vecMin[0], vecMin[1], vecMax[2]); //7bottomFarLeft
+    sceneBoundingBox = bbox;
 }
 
 void Scenery3d::renderSceneAABB()
 {
-    glPolygonMode(GL_FRONT, GL_LINE);
-    glPolygonMode(GL_BACK, GL_LINE);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    glLineWidth(5);
-    glBegin(GL_QUADS);
-        //Front
-        glVertex3f(aabb[0][0], aabb[0][1], aabb[0][2]);
-        glVertex3f(aabb[1][0], aabb[1][1], aabb[1][2]);
-        glVertex3f(aabb[2][0], aabb[2][1], aabb[2][2]);
-        glVertex3f(aabb[3][0], aabb[3][1], aabb[3][2]);
-        //Back
-        glVertex3f(aabb[4][0], aabb[4][1], aabb[4][2]);
-        glVertex3f(aabb[5][0], aabb[5][1], aabb[5][2]);
-        glVertex3f(aabb[6][0], aabb[6][1], aabb[6][2]);
-        glVertex3f(aabb[7][0], aabb[7][1], aabb[7][2]);
-        //Left
-        glVertex3f(aabb[4][0], aabb[4][1], aabb[4][2]);
-        glVertex3f(aabb[7][0], aabb[7][1], aabb[7][2]);
-        glVertex3f(aabb[3][0], aabb[3][1], aabb[3][2]);
-        glVertex3f(aabb[0][0], aabb[0][1], aabb[0][2]);
-        //Right
-        glVertex3f(aabb[1][0], aabb[1][1], aabb[1][2]);
-        glVertex3f(aabb[5][0], aabb[5][1], aabb[5][2]);
-        glVertex3f(aabb[6][0], aabb[6][1], aabb[6][2]);
-        glVertex3f(aabb[2][0], aabb[2][1], aabb[2][2]);
-        //Top
-        glVertex3f(aabb[4][0], aabb[4][1], aabb[4][2]);
-        glVertex3f(aabb[5][0], aabb[5][1], aabb[5][2]);
-        glVertex3f(aabb[1][0], aabb[1][1], aabb[1][2]);
-        glVertex3f(aabb[0][0], aabb[0][1], aabb[0][2]);
-        //Bottom
-        glVertex3f(aabb[7][0], aabb[7][1], aabb[7][2]);
-        glVertex3f(aabb[6][0], aabb[6][1], aabb[6][2]);
-        glVertex3f(aabb[2][0], aabb[2][1], aabb[2][2]);
-        glVertex3f(aabb[3][0], aabb[3][1], aabb[3][2]);
-    glEnd();           
-    glPolygonMode(GL_FRONT, GL_FILL);
-    glPolygonMode(GL_BACK, GL_FILL);
+    sceneBoundingBox->render();
 }
 
 void Scenery3d::update(double deltaTime)
@@ -521,8 +475,6 @@ void Scenery3d::update(double deltaTime)
         double alt, az;
         StelUtils::rectToSphe(&az, &alt, viewDirectionAltAz);
 
-        Mat4d m = zRotateMatrix*obj2gridMatrix;
-
         Vec3d move(( movement_x * std::cos(az) + movement_y * std::sin(az)),
                    ( movement_x * std::sin(az) - movement_y * std::cos(az)),
                    movement_z);
@@ -534,20 +486,10 @@ void Scenery3d::update(double deltaTime)
         eyeLevel -= move.v[2];
         absolutePosition.v[2] = -groundHeight()-eyeLevel;
 
-
-        //ModelView Matrix
-        mv = core->getJ2000ModelViewTransform(StelCore::RefractionOff)->getApproximateLinearTransfo();
-
-        //Retrive view vector
-        viewUp = core->getMovementMgr()->getViewUpVectorJ2000();
-        //Transform into observer coordinates
-        mv.transfo(viewUp);
-
-        //Switch new.x = old.z, new.y = old.x, new.z = old.y
-        Vec3d tmp = viewUp;
-        viewUp.v[0] = tmp.v[2];
-        viewUp.v[1] = tmp.v[0];
-        viewUp.v[2] = tmp.v[1];
+        //View Up in our case always pointing positive up
+        viewUp.v[0] = 0;
+        viewUp.v[1] = 0;
+        viewUp.v[2] = 1;
 
         //View Direction
         viewDir = core->getMovementMgr()->getViewDirectionJ2000();
@@ -556,12 +498,11 @@ void Scenery3d::update(double deltaTime)
         //View Position
         viewPos = -absolutePosition;
 
-//        m.transfo(viewUp);
-//        m.transfo(viewDir);
-//        m.transfo(viewPos);
-
         //Calculate the Frustum for the current camera
         cFrust.calcFrustum(viewPos, viewDir, viewUp);
+
+        //ModelView Matrix
+        mv = core->getJ2000ModelViewTransform(StelCore::RefractionOff)->getApproximateLinearTransfo();
     }
 }
 
@@ -660,97 +601,6 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
 
     objModel->renderAABBs();
     cFrust.drawFrustum();
-
-
-
-//    Vec3d test = Vec3d(-4.2, 9.0, 1.3);
-
-
-
-//    glBegin(GL_LINE_LOOP);
-//        glVertex3d(0, 0, 0);
-//        glVertex3d(test[0], test[1], test[2]);
-//    glEnd();
-
-//    Vec3d tmp = test;
-//    test.v[0] = tmp.v[1];
-//    test.v[1] = -tmp.v[0];
-//    Mat4d m = zRotateMatrix*obj2gridMatrix;
-
-//    m.transfo(test);
-
-//    glBegin(GL_LINE_LOOP);
-//        glVertex3d(0, 0, 0);
-//        glVertex3d(test[0], test[1], test[2]);
-//    glEnd();
-
-//    m.transfo(nbl);
-//    m.transfo(nbr);
-//    m.transfo(ntr);
-//    m.transfo(ntl);
-//    m.transfo(fbl);
-//    m.transfo(fbr);
-//    m.transfo(ftr);
-//    m.transfo(ftl);
-
-//    glBegin(GL_LINE_LOOP);
-//        glVertex3d(nbl[0], nbl[1], nbl[2]);
-//        glVertex3d(nbr[0], nbr[1], nbr[2]);
-//        glVertex3d(ntr[0], ntr[1], ntr[2]);
-//        glVertex3d(ntl[0], ntl[1], ntl[2]);
-//    glEnd();
-//    glBegin(GL_LINE_LOOP);
-//        glVertex3d(fbl[0], fbl[1], fbl[2]);
-//        glVertex3d(fbr[0], fbr[1], fbr[2]);
-//        glVertex3d(ftr[0], ftr[1], ftr[2]);
-//        glVertex3d(ftl[0], ftl[1], ftl[2]);
-//    glEnd();
-
-//    glBegin(GL_LINE_LOOP);
-//        //bottom plane
-//        glVertex3f(nbl.v[0],nbl.v[1],nbl.v[2]);
-//        glVertex3f(nbr.v[0],nbr.v[1],nbr.v[2]);
-//        glVertex3f(fbr.v[0],fbr.v[1],fbr.v[2]);
-//        glVertex3f(fbl.v[0],fbl.v[1],fbl.v[2]);
-//    glEnd();
-
-//    glBegin(GL_LINE_LOOP);
-//        //top plane
-//        glVertex3f(ntr.v[0],ntr.v[1],ntr.v[2]);
-//        glVertex3f(ntl.v[0],ntl.v[1],ntl.v[2]);
-//        glVertex3f(ftl.v[0],ftl.v[1],ftl.v[2]);
-//        glVertex3f(ftr.v[0],ftr.v[1],ftr.v[2]);
-//    glEnd();
-
-//    glBegin(GL_LINE_LOOP);
-//        //left plane
-//        glVertex3f(ntl.v[0],ntl.v[1],ntl.v[2]);
-//        glVertex3f(nbl.v[0],nbl.v[1],nbl.v[2]);
-//        glVertex3f(fbl.v[0],fbl.v[1],fbl.v[2]);
-//        glVertex3f(ftl.v[0],ftl.v[1],ftl.v[2]);
-//    glEnd();
-
-//    glBegin(GL_LINE_LOOP);
-//        // right plane
-//        glVertex3f(nbr.v[0],nbr.v[1],nbr.v[2]);
-//        glVertex3f(ntr.v[0],ntr.v[1],ntr.v[2]);
-//        glVertex3f(ftr.v[0],ftr.v[1],ftr.v[2]);
-//        glVertex3f(fbr.v[0],fbr.v[1],fbr.v[2]);
-//    glEnd();
-
-//    Vec3d viewUp = Vec3d(10, 0, 10);
-
-//    glLineWidth(10);
-//    glBegin(GL_LINE_LOOP);
-//        glVertex3d(0, 0, 0);
-//        glVertex3d(viewUp.v[0], viewUp.v[1], viewUp.v[2]);
-//    glEnd();
-
-//    m.transfo(viewUp);
-//    glBegin(GL_LINE_LOOP);
-//        glVertex3d(0, 0, 0);
-//        glVertex3d(viewUp.v[0], viewUp.v[1], viewUp.v[2]);
-//    glEnd();
 }
 
 void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool& tangEnabled, int& tangLocation)
@@ -936,10 +786,10 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glPushMatrix();
     glLoadIdentity();
 
-    const GLdouble orthoLeft = aabb[3][0];
-    const GLdouble orthoRight = aabb[5][0];
-    const GLdouble orthoBottom = aabb[3][1];
-    const GLdouble orthoTop = aabb[5][1];
+    const GLdouble orthoLeft = sceneBoundingBox->min.v[0];
+    const GLdouble orthoRight = sceneBoundingBox->max.v[0];
+    const GLdouble orthoBottom = sceneBoundingBox->min.v[1];
+    const GLdouble orthoTop = sceneBoundingBox->max.v[1];
     //Need to find better values for n/f
     const GLdouble f = 1000;
     const GLdouble n = -1000;
@@ -1531,18 +1381,19 @@ void Scenery3d::drawDebugText(StelCore* core)
     str = QString("%1 %2 %3 %4").arg(cFrust.fov, 7, 'f', 2).arg(cFrust.aspect, 7, 'f', 2).arg(cFrust.zNear, 7, 'f', 2).arg(cFrust.zFar, 7, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
 
+    screen_y -= 30.0f;
 
-//    str = QString("%1 %2 %3 %4").arg(mv2[0], 7, 'f', 2).arg(mv2[4], 7, 'f', 2).arg(mv2[8], 7, 'f', 2).arg(mv2[12], 7, 'f', 2);
-//    painter.drawText(screen_x, screen_y, str);
-//    screen_y -= 15.0f;
-//    str = QString("%1 %2 %3 %4").arg(mv2[1], 7, 'f', 2).arg(mv2[5], 7, 'f', 2).arg(mv2[9], 7, 'f', 2).arg(mv2[13], 7, 'f', 2);
-//    painter.drawText(screen_x, screen_y, str);
-//    screen_y -= 15.0f;
-//    str = QString("%1 %2 %3 %4").arg(mv2[2], 7, 'f', 2).arg(mv2[6], 7, 'f', 2).arg(mv2[10], 7, 'f', 2).arg(mv2[14], 7, 'f', 2);
-//    painter.drawText(screen_x, screen_y, str);
-//    screen_y -= 15.0f;
-//    str = QString("%1 %2 %3 %4").arg(mv2[3], 7, 'f', 2).arg(mv2[7], 7, 'f', 2).arg(mv2[11], 7, 'f', 2).arg(mv2[15], 7, 'f', 2);
-//    painter.drawText(screen_x, screen_y, str);
+    str = QString("%1 %2 %3 %4").arg(mv[0], 7, 'f', 2).arg(mv[4], 7, 'f', 2).arg(mv[8], 7, 'f', 2).arg(mv[12], 7, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);
+    screen_y -= 15.0f;
+    str = QString("%1 %2 %3 %4").arg(mv[1], 7, 'f', 2).arg(mv[5], 7, 'f', 2).arg(mv[9], 7, 'f', 2).arg(mv[13], 7, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);
+    screen_y -= 15.0f;
+    str = QString("%1 %2 %3 %4").arg(mv[2], 7, 'f', 2).arg(mv[6], 7, 'f', 2).arg(mv[10], 7, 'f', 2).arg(mv[14], 7, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);
+    screen_y -= 15.0f;
+    str = QString("%1 %2 %3 %4").arg(mv[3], 7, 'f', 2).arg(mv[7], 7, 'f', 2).arg(mv[11], 7, 'f', 2).arg(mv[15], 7, 'f', 2);
+    painter.drawText(screen_x, screen_y, str);
 
 }
 
