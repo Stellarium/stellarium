@@ -413,6 +413,8 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/AddRemoveLandscapesDialog.cpp
 		gui/AtmosphereDialog.hpp
 		gui/AtmosphereDialog.cpp
+                gui/CustomInfoDialog.hpp
+                gui/CustomInfoDialog.cpp
 		gui/StelDialog.hpp
 		gui/StelDialog.cpp)
 
@@ -432,6 +434,7 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/ConfigurationDialog.hpp
 		gui/AddRemoveLandscapesDialog.hpp
 		gui/AtmosphereDialog.hpp
+                gui/CustomInfoDialog.hpp
 		gui/StelDialog.hpp)
 
 	################# compiles .ui files ############
@@ -443,6 +446,7 @@ IF (GUI_MODE STREQUAL "Standard")
 	gui/searchDialogGui.ui
 	gui/configurationDialog.ui
 	gui/AtmosphereDialog.ui
+        gui/CustomInfoDialog.ui
 	gui/addRemoveLandscapesDialog.ui)
 
 	IF(ENABLE_SCRIPT_CONSOLE)
