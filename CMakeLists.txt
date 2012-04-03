@@ -206,7 +206,7 @@ ENDIF()
 ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 
 ########### Find packages ###########
-SET(QT_MIN_VERSION "4.7.0")
+SET(QT_MIN_VERSION "4.6.2")
 FIND_PACKAGE(Qt4 REQUIRED)
 SET(QT_USE_QTOPENGL TRUE)
 IF(ENABLE_SCRIPTING)
@@ -225,7 +225,7 @@ STRING(REPLACE "${QT_QTTEST_LIBRARY}" "" QT_LIBRARIES "${QT_LIBRARIES}")
 # Get rid of the GLU dependency, it's not needed in stellarium.
 STRING(REPLACE "-lGLU " "" QT_LIBRARIES "${QT_LIBRARIES}")
 
-FIND_PACKAGE(OpenGL)
+FIND_PACKAGE(OpenGL) # Introduced in revision 5284, may cause problems when compiling in OpenGL ES mode - see lines 248-255 below. --BM
 FIND_PACKAGE(ZLIB)
 
 IF(ENABLE_NLS)
