@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-27 21:44+0700\n"
-"PO-Revision-Date: 2012-03-14 14:18+0000\n"
-"Last-Translator: অনির্বাণ আইন <anirbanain@gmail.com>\n"
+"PO-Revision-Date: 2012-04-03 04:44+0000\n"
+"Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Bengali <bn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-28 04:36+0000\n"
-"X-Generator: Launchpad (build 15027)\n"
+"X-Launchpad-Export-Date: 2012-04-03 04:52+0000\n"
+"X-Generator: Launchpad (build 15052)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
-msgstr "মেরিডিয়ান"
+msgstr "মূলমধ্য রেখা"
 
 #: src/core/modules/GridLinesMgr.cpp:546
 msgid "Ecliptic"
@@ -64,13 +64,13 @@ msgstr "ধরন: <b>%1</b>"
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "ঔজ্জ্বল্য: <b>%1</b> (extincted to: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
-msgstr "প্রভাঙ্ক: <b>%1</b>"
+msgstr "ঔজ্জ্বল্য: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:109
 #, qt-format
@@ -87,7 +87,7 @@ msgstr "মুক্ত তারকা গুচ্ছ"
 
 #: src/core/modules/Nebula.cpp:309
 msgid "Globular cluster"
-msgstr "বদ্ধ তারকা গুচ্ছ"
+msgstr "সংবদ্ধ তারকা গুচ্ছ"
 
 #: src/core/modules/Nebula.cpp:312
 msgid "Nebula"
@@ -95,11 +95,11 @@ msgstr "নীহারিকা"
 
 #: src/core/modules/Nebula.cpp:315
 msgid "Planetary nebula"
-msgstr "গ্রহ নীহারিকা"
+msgstr "গ্রহবৎ নীহারিকা"
 
 #: src/core/modules/Nebula.cpp:318
 msgid "Cluster associated with nebulosity"
-msgstr ""
+msgstr "নীহারিকা সংলগ্ন তারকা গুচ্ছ"
 
 #: src/core/modules/Nebula.cpp:321
 msgid "Unknown"
@@ -113,22 +113,22 @@ msgstr "নথিভুক্ত না করা বস্তু"
 #: plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
-msgstr "পরম প্রভা: %1"
+msgstr "পরম ঔজ্জ্বল্য: %1"
 
 #: src/core/modules/Planet.cpp:142
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr ""
+msgstr "সৌরকেন্দ্রিক অবস্থান ( তারিখে ): %1/%2"
 
 #: src/core/modules/Planet.cpp:143
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr ""
+msgstr "ভূঅক্ষের তীর্যকতা ( তারিখে ): %1"
 
 #: src/core/modules/Planet.cpp:153
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "দূরত্ব: %1AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:160
 #, no-c-format, qt-format
@@ -138,7 +138,7 @@ msgstr "দূরত্ব: %1AU"
 #: src/core/modules/Planet.cpp:171
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "অাপাত ব্যাস: %1, বলয় সহ: %2"
 
 #: src/core/modules/Planet.cpp:177
 #, qt-format
@@ -148,32 +148,32 @@ msgstr "আপাত ব্যাস: %1"
 #: src/core/modules/Planet.cpp:191
 #, qt-format
 msgid "Phase: %1"
-msgstr ""
+msgstr "দশা: %1"
 
 #: src/core/modules/Planet.cpp:192
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr ""
+msgstr "ঔজ্জ্বল্য: %1%"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr "প্রভাঙ্ক: <b>%1</b> (B-V: %2)"
+msgstr "ঔজ্জ্বল্য: <b>%1</b> (B-V: %2)"
 
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "অাপাত ঔজ্জ্বল্য: <b>%1</b> (by extinction)"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "ঔজ্জ্বল্য: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr ""
+msgstr "ঔজ্জ্বল্য: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
 #, qt-format
@@ -201,27 +201,31 @@ msgstr "সর্বোচ্চ দৃষ্টিসীমা "
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
-msgstr "দৃষ্টিকোণ"
+msgstr "দৃষ্টিকোণ (Perspective)"
 
 #: src/core/StelProjectorClasses.cpp:30
 msgid ""
 "Perspective projection keeps the horizon a straight line. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"এই নকশা পদ্ধতি দিগন্তকে একটি সরলরেখায় পরিণত করে । এই পদ্ধতির গাণিতিক নাম হল "
+"<i>gnomonic নকশা পদ্ধতি</i>."
 
 #: src/core/StelProjectorClasses.cpp:63
 msgid "Equal Area"
-msgstr "সমান ক্ষেত্রফল"
+msgstr "সমক্ষেত্র (Equal Area)"
 
 #: src/core/StelProjectorClasses.cpp:68
 msgid ""
 "The full name of this projection method is, <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
+"এই নকশা পদ্ধতির নাম হল, <i>Lambert azimuthal equal-area নকশা পদ্ধতি</i> । এই "
+"পদ্ধতিতে ক্ষেত্রফল ধ্রুবক হলেও কোন একই হয় না ।"
 
 #: src/core/StelProjectorClasses.cpp:108
 msgid "Stereographic"
-msgstr "নিরেট"
+msgstr "নিরেট (Stereographic)"
 
 #: src/core/StelProjectorClasses.cpp:113
 msgid ""
@@ -229,10 +233,12 @@ msgid ""
 "known as the planisphere projection. It preserves the angles at which curves "
 "cross each other but it does not preserve area."
 msgstr ""
+"এই নকশা পদ্ধতি দূর অতীতেও জানা ছিল এবং এই পদ্ধতিকে planisphere নকশা পদ্ধতি "
+"বলা হত । এই পদ্ধতিতে কোণ ধ্রুবক হলেও ক্ষেত্রফল একই হয় না ।"
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Fish-eye"
-msgstr "মত্স চক্ষু"
+msgstr "মৎস চক্ষু (Fish-eye)"
 
 #: src/core/StelProjectorClasses.cpp:150
 msgid ""
@@ -241,30 +247,38 @@ msgid ""
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
 msgstr ""
+"এই নকশা পদ্ধতি, অথবা <i>azimuthal equidistant নকশা "
+"পদ্ধতিতে</i>,দৃষ্টিক্ষেত্রে সরলরেখা  যদি  খুব বেশি দূরত্বে থাকে তাহলে তা "
+"বক্ররেখায় পরিণত হয় (যেমন খুব wide angle camera lense দিয়ে দেখলে ছবির যে "
+"বিকৃতি ঘটে )।"
 
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
-msgstr ""
+msgstr "সমক্ষেত্র (Hammer-Aitoff)"
 
 #: src/core/StelProjectorClasses.cpp:187
 msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
 msgstr ""
+"এই নকশা পদ্ধতি হল একটি সমক্ষেত্র নকশা পদ্ধতি, ১৮৯২ সালে Ernst Hammer 'Aitoff "
+"নকশা পদ্ধতি' থেকে অনুপ্রাণিত হয়ে এটির প্রবর্তন করেন ।"
 
 #: src/core/StelProjectorClasses.cpp:223
 msgid "Cylinder"
-msgstr "চোঙ"
+msgstr "চোঙ (Cylinder)"
 
 #: src/core/StelProjectorClasses.cpp:228
 msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
 msgstr ""
+"এই নকশা পদ্ধতির নাম <i>cylindrical equidistant নকশা পদ্ধতি<i> । এই নকশা "
+"পদ্ধতিতে সমস্ত সমান্তরাল রেখারা সম দূরত্বে থাকে ।"
 
 #: src/core/StelProjectorClasses.cpp:270
 msgid "Mercator"
-msgstr ""
+msgstr "বানিজ্যিক (Mercator)"
 
 #: src/core/StelProjectorClasses.cpp:275
 msgid ""
@@ -272,16 +286,20 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
+"এই নকশা পদ্ধতি অন্যতম বহুল ব্যবহৃত একটি পদ্ধতি । এই পদ্ধতিতে অক্ষাংশ "
+"বৃদ্ধিতে দিক ধ্রুবক থাকলেও অাকার বিকৃত হয় ।"
 
 #: src/core/StelProjectorClasses.cpp:322
 msgid "Orthographic"
-msgstr ""
+msgstr "লম্বন (Orthographic)"
 
 #: src/core/StelProjectorClasses.cpp:327
 msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
 msgstr ""
+"এই নকশা পদ্ধতি perspective নকশা পদ্ধতির মতই তবে এখানে অসীমে perspective "
+"বিন্দুগুলিকে নেওয়া হয় ।"
 
 #: src/core/StelObject.cpp:87
 #, qt-format
