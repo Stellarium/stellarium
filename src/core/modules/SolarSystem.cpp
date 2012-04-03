@@ -1311,15 +1311,20 @@ QStringList SolarSystem::getAllPlanetLocalizedNames() const
 
 void SolarSystem::reloadPlanets()
 {
-	//Save flag states
+	// Save flag states
 	bool flagScaleMoon = getFlagMoonScale();
 	float moonScale = getMoonScale();
 	bool flagPlanets = getFlagPlanets();
 	bool flagHints = getFlagHints();
 	bool flagLabels = getFlagLabels();
 	bool flagOrbits = getFlagOrbits();
+	
+	// Save observer location (fix for LP bug # 969211)
+	// TODO: This can probably be done better with a better understanding of StelObserver --BM
+	StelCore* core = StelApp::getInstance().getCore();
+	StelLocation loc = core->getCurrentLocation();
 
-	//Unload all Solar System objects
+	// Unload all Solar System objects
 	selected.clear();//Release the selected one
 	foreach (Orbit* orb, orbits)
 	{
@@ -1342,15 +1347,18 @@ void SolarSystem::reloadPlanets()
 		p.clear();
 	}
 	systemPlanets.clear();
-	//Memory leak? What's the proper way of cleaning shared pointers?
+	// Memory leak? What's the proper way of cleaning shared pointers?
 
-	//Re-load the ssystem.ini file
+	// Re-load the ssystem.ini file
 	loadPlanets();
 	computePositions(StelUtils::getJDFromSystem());
 	setSelected("");
 	recreateTrails();
+	
+	// Restore observer location
+	core->moveObserverTo(loc, 0., 0.);
 
-	//Restore flag states
+	// Restore flag states
 	setFlagMoonScale(flagScaleMoon);
 	setMoonScale(moonScale);
 	setFlagPlanets(flagPlanets);
@@ -1358,6 +1366,6 @@ void SolarSystem::reloadPlanets()
 	setFlagLabels(flagLabels);
 	setFlagOrbits(flagOrbits);
 
-	//Restore translations
+	// Restore translations
 	updateI18n();
 }
