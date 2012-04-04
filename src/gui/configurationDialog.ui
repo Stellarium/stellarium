@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>430</width>
-    <height>473</height>
+    <width>428</width>
+    <height>469</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -245,12 +245,15 @@
                     <string>Display user settings information</string>
                    </property>
                    <property name="text">
-                    <string>Custom settings</string>
+                    <string>Customized</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QPushButton" name="pushButtonCustomInfoDialog">
+                   <property name="enabled">
+                    <bool>true</bool>
+                   </property>
                    <property name="text">
                     <string>...</string>
                    </property>
