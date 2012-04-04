@@ -151,63 +151,23 @@ public:
 	//! Get vision direction
 	void lookAtJ2000(const Vec3d& pos, const Vec3d& up);
 
-	Vec3d altAzToEquinoxEqu(const Vec3d& v, RefractionMode refMode=RefractionAuto) const
-	{
-		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-			return matAltAzToEquinoxEqu*v;
-		Vec3d r(v);
-		skyDrawer->getRefraction().backward(r);
-		r.transfo4d(matAltAzToEquinoxEqu);
-		return r;
-	}
-	Vec3d equinoxEquToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const
-	{
-		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-			return matEquinoxEquToAltAz*v;
-		Vec3d r(v);
-		r.transfo4d(matEquinoxEquToAltAz);
-		skyDrawer->getRefraction().forward(r);
-		return r;
-	}
-	Vec3d altAzToJ2000(const Vec3d& v, RefractionMode refMode=RefractionAuto) const
-	{
-		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-			return matEquinoxEquToJ2000*matAltAzToEquinoxEqu*v;
-		Vec3d r(v);
-		skyDrawer->getRefraction().backward(r);
-		r.transfo4d(matEquinoxEquToJ2000*matAltAzToEquinoxEqu);
-		return r;
-	}
-	Vec3d j2000ToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const
-	{
-		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-			return matJ2000ToAltAz*v;
-		Vec3d r(v);
-		r.transfo4d(matJ2000ToAltAz);
-		skyDrawer->getRefraction().forward(r);
-		return r;
-	}
-	Vec3d galacticToJ2000(const Vec3d& v) const {return matGalacticToJ2000*v;}
-	Vec3d equinoxEquToJ2000(const Vec3d& v) const {return matEquinoxEquToJ2000*v;}
-	Vec3d j2000ToEquinoxEqu(const Vec3d& v) const {return matJ2000ToEquinoxEqu*v;}
-	Vec3d j2000ToGalactic(const Vec3d& v) const {return matJ2000ToGalactic*v;}
+	Vec3d altAzToEquinoxEqu(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
+	Vec3d equinoxEquToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
+	Vec3d altAzToJ2000(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
+	Vec3d j2000ToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
+	Vec3d galacticToJ2000(const Vec3d& v) const;
+	Vec3d equinoxEquToJ2000(const Vec3d& v) const;
+	Vec3d j2000ToEquinoxEqu(const Vec3d& v) const;
+	Vec3d j2000ToGalactic(const Vec3d& v) const;
 
 	//! Transform vector from heliocentric ecliptic coordinate to altazimuthal
-	Vec3d heliocentricEclipticToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const
-	{
-		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-			return matHeliocentricEclipticToAltAz*v;
-		Vec3d r(v);
-		r.transfo4d(matHeliocentricEclipticToAltAz);
-		skyDrawer->getRefraction().forward(r);
-		return r;
-	}
+	Vec3d heliocentricEclipticToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 
 	//! Transform from heliocentric coordinate to equatorial at current equinox (for the planet where the observer stands)
-	Vec3d heliocentricEclipticToEquinoxEqu(const Vec3d& v) const {return matHeliocentricEclipticToEquinoxEqu*v;}
+	Vec3d heliocentricEclipticToEquinoxEqu(const Vec3d& v) const;
 	//! Transform vector from heliocentric coordinate to false equatorial : equatorial
 	//! coordinate but centered on the observer position (usefull for objects close to earth)
-	Vec3d heliocentricEclipticToEarthPosEquinoxEqu(const Vec3d& v) const {return matAltAzToEquinoxEqu*matHeliocentricEclipticToAltAz*v;}
+	Vec3d heliocentricEclipticToEarthPosEquinoxEqu(const Vec3d& v) const;
 
 	//! Get the modelview matrix for heliocentric ecliptic (Vsop87) drawing
 	StelProjector::ModelViewTranformP getHeliocentricEclipticModelViewTransform(RefractionMode refMode=RefractionAuto) const
