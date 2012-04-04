@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2003 Fabien Chereau
+ * Copyright (C) 2012 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -450,9 +451,9 @@ void StelCore::lookAtJ2000(const Vec3d& pos, const Vec3d& aup)
 	Vec3d u(s^f);	// Up vector in AltAz coordinates
 	u.normalize();
 	matAltAzModelView.set(s[0],u[0],-f[0],0.,
-						 s[1],u[1],-f[1],0.,
-						 s[2],u[2],-f[2],0.,
-						 0.,0.,0.,1.);
+			      s[1],u[1],-f[1],0.,
+			      s[2],u[2],-f[2],0.,
+			      0.,0.,0.,1.);
 	invertMatAltAzModelView = matAltAzModelView.inverse();
 }
 
@@ -578,9 +579,12 @@ StelProjector::ModelViewTranformP StelCore::getEquinoxEquModelViewTransform(Refr
 //! Get the modelview matrix for observer-centric altazimuthal drawing
 StelProjector::ModelViewTranformP StelCore::getAltAzModelViewTransform(RefractionMode refMode) const
 {
-	qDebug() << "StelProjector::ModelViewTranformP mode:" << refMode;
 	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+	{
+		// Catch problem with improperly initialized matAltAzModelView
+		Q_ASSERT(matAltAzModelView[0]==matAltAzModelView[0]);
 		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView));
+	}
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
 	refr->setPostTransfoMat(matAltAzModelView);
