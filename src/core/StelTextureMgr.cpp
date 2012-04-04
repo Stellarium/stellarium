@@ -22,6 +22,7 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelPainter.hpp"
+#include <QtOpenGL>
 
 #include <QHttp>
 #include <QFileInfo>
@@ -100,6 +101,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 		tex->qImage = QImage(tex->fullPath);
 		if (tex->qImage.isNull())
 			return StelTextureSP();
+
 		tex->loadParams = params;
 		tex->downloaded = true;
 
