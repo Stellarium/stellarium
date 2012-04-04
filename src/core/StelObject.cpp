@@ -27,10 +27,10 @@
 #include "StelSkyDrawer.hpp"
 #include "RefractionExtinction.hpp"
 #include "StelLocation.hpp"
+#include "QSettings"
 
 #include <QRegExp>
 #include <QDebug>
-
 
 Vec3d StelObject::getEquinoxEquatorialPos(const StelCore* core) const
 {
@@ -154,3 +154,4 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		str.append(QString("</font>"));
 	}
 }
+

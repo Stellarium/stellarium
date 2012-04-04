@@ -143,10 +143,10 @@ namespace StelUtils
 	//! @param v the input 3D vector
 	void rectToSphe(float *lng, float *lat, const Vec3f& v);
 
-  // GZ: some additions. I need those just for quick conversions for text display.
-  //! Coordinate Transformation from equatorial to ecliptical
-  void ctRadec2Ecl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad);
-  // GZ: done
+	// GZ: some additions. I need those just for quick conversions for text display.
+	//! Coordinate Transformation from equatorial to ecliptical
+	void ctRadec2Ecl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad);
+	// GZ: done
 
 	//! Convert a string longitude, latitude, RA or Declination angle
 	//! to radians.

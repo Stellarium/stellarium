@@ -10,6 +10,7 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelGui.hpp"
 #include "QSettings"
 #include "CustomInfoDialog.hpp"
 #include "ui_CustomInfoDialog.h"
@@ -95,7 +96,7 @@ void CustomInfoDialog::setNameCustomInfoFlag(bool flag)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("custom_selected_info/flag_show_name", flag);
-
+	StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getCore()->getCustomInfoString()));
 }
 
 bool CustomInfoDialog::getCatalogNumberCustomInfoFlag()
@@ -108,6 +109,7 @@ void CustomInfoDialog::setCatalogNumberCustomInfoFlag(bool flag)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("custom_selected_info/flag_show_catalognumber", flag);
+	StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getCore()->getCustomInfoString()));
 }
 
 bool CustomInfoDialog::getMagnitudeCustomInfoFlag()
@@ -120,6 +122,7 @@ void CustomInfoDialog::setMagnitudeCustomInfoFlag(bool flag)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("custom_selected_info/flag_show_magnitude", flag);
+	StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getCore()->getCustomInfoString()));
 }
 
 bool CustomInfoDialog::getRaDecJ2000CustomInfoFlag()
@@ -132,6 +135,7 @@ void CustomInfoDialog::setRaDecJ2000CustomInfoFlag(bool flag)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("custom_selected_info/flag_show_radecj2000", flag);
+	StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getCore()->getCustomInfoString()));
 }
 
 bool CustomInfoDialog::getRaDecOfDateCustomInfoFlag()
@@ -144,6 +148,7 @@ void CustomInfoDialog::setRaDecOfDateCustomInfoFlag(bool flag)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("custom_selected_info/flag_show_radecofdate", flag);
+	StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getCore()->getCustomInfoString()));
 }
 
 bool CustomInfoDialog::getAltAzCustomInfoFlag()
@@ -156,6 +161,7 @@ void CustomInfoDialog::setAltAzCustomInfoFlag(bool flag)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("custom_selected_info/flag_show_altaz", flag);
+	StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getCore()->getCustomInfoString()));
 }
 
 bool CustomInfoDialog::getDistanceCustomInfoFlag()
@@ -168,6 +174,7 @@ void CustomInfoDialog::setDistanceCustomInfoFlag(bool flag)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("custom_selected_info/flag_show_distance", flag);
+	StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getCore()->getCustomInfoString()));
 }
 
 bool CustomInfoDialog::getSizeCustomInfoFlag()
@@ -180,6 +187,7 @@ void CustomInfoDialog::setSizeCustomInfoFlag(bool flag)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("custom_selected_info/flag_show_size", flag);
+	StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getCore()->getCustomInfoString()));
 }
 
 bool CustomInfoDialog::getExtra1CustomInfoFlag()
@@ -192,6 +200,7 @@ void CustomInfoDialog::setExtra1CustomInfoFlag(bool flag)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("custom_selected_info/flag_show_extra1", flag);
+	StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getCore()->getCustomInfoString()));
 }
 
 bool CustomInfoDialog::getExtra2CustomInfoFlag()
@@ -204,6 +213,7 @@ void CustomInfoDialog::setExtra2CustomInfoFlag(bool flag)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("custom_selected_info/flag_show_extra2", flag);
+	StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getCore()->getCustomInfoString()));
 }
 
 bool CustomInfoDialog::getExtra3CustomInfoFlag()
@@ -216,6 +226,7 @@ void CustomInfoDialog::setExtra3CustomInfoFlag(bool flag)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("custom_selected_info/flag_show_extra3", flag);
+	StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getCore()->getCustomInfoString()));
 }
 
 bool CustomInfoDialog::getHourAngleCustomInfoFlag()
@@ -228,6 +239,7 @@ void CustomInfoDialog::setHourAngleCustomInfoFlag(bool flag)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("custom_selected_info/flag_show_hourangle", flag);
+	StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getCore()->getCustomInfoString()));
 }
 
 bool CustomInfoDialog::getAbsoluteMagnitudeCustomInfoFlag()
@@ -240,5 +252,6 @@ void CustomInfoDialog::setAbsoluteMagnitudeCustomInfoFlag(bool flag)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("custom_selected_info/flag_show_absolutemagnitude", flag);
+	StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getCore()->getCustomInfoString()));
 }
 
