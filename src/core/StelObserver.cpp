@@ -201,8 +201,8 @@ Mat4d StelObserver::getRotAltAzToEquatorial(double jd) const
 	// TODO: Figure out how to keep continuity in sky as reach poles
 	// otherwise sky jumps in rotation when reach poles in equatorial mode
 	// This is a kludge
-	if( lat > 89.5 )  lat = 89.5;
-	if( lat < -89.5 ) lat = -89.5;
+	if( lat > 90.0 )  lat = 90.0;
+	if( lat < -90.0 ) lat = -90.0;
 	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+currentLocation.longitude)*M_PI/180.)
 		* Mat4d::yrotation((90.-lat)*M_PI/180.);
 }

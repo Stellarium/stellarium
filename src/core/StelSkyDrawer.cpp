@@ -51,7 +51,7 @@
 #define EYE_RESOLUTION (0.25f)
 #define MAX_LINEAR_RADIUS 8.f
 
-StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), flagHasAtmosphere(true), starsShaderProgram(NULL)
+StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), starsShaderProgram(NULL)
 {
 	eye = core->getToneReproducer();
 
@@ -69,17 +69,18 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), flagHasAtmosphere(t
 	starLinearScale = 19.569f;
 
 	big3dModelHaloRadius = 150.f;
-	
+
 	QSettings* conf = StelApp::getInstance().getSettings();
 	initColorTableFromConfigFile(conf);
 
+	setFlagHasAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
 	setTwinkleAmount(conf->value("stars/star_twinkle_amount",0.3).toFloat());
 	setFlagTwinkle(conf->value("stars/flag_star_twinkle",true).toBool());
 	setFlagPointStar(conf->value("stars/flag_point_star",false).toBool());
 	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
 	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
-	
+
 	bool ok=true;
 
 	setBortleScale(conf->value("stars/init_bortle_scale",3).toInt(&ok));
@@ -426,7 +427,6 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 
 	if (nbPointSources==0)
 		return;
-
 	texHalo->bind();
 	sPainter->enableTexture2d(true);
 	glBlendFunc(GL_ONE, GL_ONE);
@@ -484,9 +484,9 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 	nbPointSources = 0;
 }
 
-static Vec3f win;
+static Vec3d win;
 // Draw a point source halo.
-bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const float rcMag[2], const Vec3f& color, bool checkInScreen)
+bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const float rcMag[2], const Vec3f& color, bool checkInScreen)
 {
 	Q_ASSERT(sPainter);
 
@@ -547,15 +547,17 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 			v->set(win[0]+radius,win[1]+radius); ++v;
 			v->set(win[0]-radius,win[1]+radius); ++v;
 
-			win = color;
-			win*=tw;
+			Vec3f w = color;
+			w = color;
+			w*=tw;
 			Vec3f* cv = &(colorGrid[nbPointSources*6]);
-			*cv = win; ++cv;
-			*cv = win; ++cv;
-			*cv = win; ++cv;
-			*cv = win; ++cv;
-			*cv = win; ++cv;
-			*cv = win; ++cv;
+			*cv = w; ++cv;
+			*cv = w; ++cv;
+			*cv = w; ++cv;
+			*cv = w; ++cv;
+			*cv = w; ++cv;
+			*cv = w; ++cv;
+			win = Vec3d(w[0],w[1],w[2]);
 		}
 	}
 #endif
@@ -571,7 +573,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 
 
 // Terminate drawing of a 3D model, draw the halo
-void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, float illuminatedArea, float mag, const Vec3f& color)
+void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color)
 {
 	const float pixPerRad = painter->getProjector()->getPixelPerRadAtCenter();
 	// Assume a disk shape

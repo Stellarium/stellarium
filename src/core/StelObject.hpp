@@ -25,7 +25,6 @@
 #include "StelObjectType.hpp"
 #include "StelRegionObject.hpp"
 
-class StelNavigator;
 class StelCore;
 
 //! The base abstract class for sky objects used in Stellarium like Stars, Planets, Constellations etc...
@@ -65,7 +64,6 @@ public:
 	virtual ~StelObject() {}
 
 	//! Default implementation of the getRegion method.
-	//! Calling this method on some object will cause an error if they need a valid StelNavigator instance to compute their position.
 	//! Return the spatial region of the object.
 	virtual SphericalRegionP getRegion() const {return SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));}
 
