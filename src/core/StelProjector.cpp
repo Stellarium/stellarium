@@ -26,6 +26,67 @@
 #include <QDebug>
 #include <QString>
 
+StelProjector::Mat4dTransform::Mat4dTransform(const Mat4d& m)
+    : transfoMat(m),
+      transfoMatf(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11], m[12], m[13], m[14], m[15])
+{
+	Q_ASSERT(m[0]==m[0]); // prelude to assert later in Atmosphere rendering... still investigating
+}
+
+void StelProjector::Mat4dTransform::forward(Vec3d& v) const
+{
+	v.transfo4d(transfoMat);
+}
+
+void StelProjector::Mat4dTransform::backward(Vec3d& v) const
+{
+	// We need no matrix inversion because we always work with orthogonal matrices (where the transposed is the inverse).
+	//v.transfo4d(inverseTransfoMat);
+	const double x = v[0] - transfoMat.r[12];
+	const double y = v[1] - transfoMat.r[13];
+	const double z = v[2] - transfoMat.r[14];
+	v[0] = transfoMat.r[0]*x + transfoMat.r[1]*y + transfoMat.r[2]*z;
+	v[1] = transfoMat.r[4]*x + transfoMat.r[5]*y + transfoMat.r[6]*z;
+	v[2] = transfoMat.r[8]*x + transfoMat.r[9]*y + transfoMat.r[10]*z;
+}
+
+void StelProjector::Mat4dTransform::forward(Vec3f& v) const
+{
+	v.transfo4d(transfoMatf);
+}
+
+void StelProjector::Mat4dTransform::backward(Vec3f& v) const
+{
+	// We need no matrix inversion because we always work with orthogonal matrices (where the transposed is the inverse).
+	//v.transfo4d(inverseTransfoMat);
+	const float x = v[0] - transfoMatf.r[12];
+	const float y = v[1] - transfoMatf.r[13];
+	const float z = v[2] - transfoMatf.r[14];
+	v[0] = transfoMatf.r[0]*x + transfoMatf.r[1]*y + transfoMatf.r[2]*z;
+	v[1] = transfoMatf.r[4]*x + transfoMatf.r[5]*y + transfoMatf.r[6]*z;
+	v[2] = transfoMatf.r[8]*x + transfoMatf.r[9]*y + transfoMatf.r[10]*z;
+}
+
+void StelProjector::Mat4dTransform::combine(const Mat4d& m)
+{
+	Mat4f mf(m[0],  m[1] ,  m[2],  m[3],
+		 m[4],  m[5],   m[6],  m[7],
+		 m[8],  m[9],   m[10], m[11],
+		 m[12], m[13],  m[14], m[15]);
+	transfoMat=transfoMat*m;
+	transfoMatf=transfoMatf*mf;
+}
+
+Mat4d StelProjector::Mat4dTransform::getApproximateLinearTransfo() const
+{
+	return transfoMat;
+}
+
+StelProjector::ModelViewTranformP StelProjector::Mat4dTransform::clone() const
+{
+	return ModelViewTranformP(new Mat4dTransform(transfoMat));
+}
+
 const QString StelProjector::maskTypeToString(StelProjectorMaskType type)
 {
 	if (type == MaskDisk )
@@ -159,6 +220,7 @@ void StelProjector::computeBoundingCap()
 	h = boundingCap.n*e5;
 	if (boundingCap.d > h)
 		boundingCap.d=h;
+
 }
 
 /*************************************************************************
