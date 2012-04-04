@@ -107,6 +107,8 @@ public:
 	
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags);
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const;
+
+	int getCustomInfoString(void);
 	
 	virtual QAction* addGuiActions(const QString& actionName,
 								   const QString& text,
