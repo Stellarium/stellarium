@@ -31,7 +31,7 @@
 
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();	
+	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	QString objectInfo = conf->value("gui/selected_object_info", "all").toString();
 	if (objectInfo == "all")
