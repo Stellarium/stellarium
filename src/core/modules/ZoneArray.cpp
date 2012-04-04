@@ -260,7 +260,6 @@ bool ZoneArray::readFile(QFile& file, void *data, qint64 size)
 	if (part_size < 64*1024)
 	{
 		part_size = 64*1024;
-		parts = (size + (part_size>>1)) / part_size;
 	}
 	float i = 0.f;
 	i += 1.f;
@@ -506,7 +505,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_insi
 	    tmpRcmag = rcmag_table+2*(s->mag+extMagShiftStep);
 	}
 
-	if (drawer->drawPointSource(sPainter, vf, tmpRcmag, s->bV, !is_inside) && s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
+	if (drawer->drawPointSource(sPainter, Vec3d(vf[0], vf[1], vf[2]), tmpRcmag, s->bV, !is_inside) && s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
 	{
 	    const float offset = *tmpRcmag*0.7f;
 	    const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.2f, 0.2f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;
