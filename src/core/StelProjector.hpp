@@ -130,25 +130,8 @@ public:
 	//! Determine whether a great circle connection p1 and p2 intersects with a projection discontinuity.
 	//! For many projections without discontinuity, this should return always false, but for other like
 	//! cylindrical projection it will return true if the line cuts the wrap-around line (i.e. at lon=180 if the observer look at lon=0).
-	bool intersectViewportDiscontinuity(const Vec3d& p1, const Vec3d& p2) const
-	{
-		if (hasDiscontinuity()==false)
-			return false;
-		Vec3d v1(p1);
-		modelViewTransform->forward(v1);
-		Vec3d v2(p2);
-		modelViewTransform->forward(v2);
-		return intersectViewportDiscontinuityInternal(v1, v2);
-	}
-
-	bool intersectViewportDiscontinuity(const SphericalCap& cap) const
-	{
-		if (hasDiscontinuity()==false)
-			return false;
-		Vec3d v1(cap.n);
-		modelViewTransform->forward(v1);
-		return intersectViewportDiscontinuityInternal(v1, cap.d);
-	}
+	bool intersectViewportDiscontinuity(const Vec3d& p1, const Vec3d& p2) const;
+	bool intersectViewportDiscontinuity(const SphericalCap& cap) const;
 
 	//! Convert a Field Of View radius value in radians in ViewScalingFactor (used internally)
 	virtual float fovToViewScalingFactor(float fov) const = 0;
@@ -158,25 +141,22 @@ public:
 	//! Get the current state of the flag which decides whether to
 	//! arrage labels so that they are aligned with the bottom of a 2d
 	//! screen, or a 3d dome.
-	bool getFlagGravityLabels() const { return gravityLabels; }
+	bool getFlagGravityLabels() const;
 
 	//! Get the lower left corner of the viewport and the width, height.
-	const Vec4i& getViewport() const {return viewportXywh;}
+	const Vec4i& getViewport() const;
 
 	//! Get the center of the viewport relative to the lower left corner of the screen.
-	Vec2f getViewportCenter() const
-	{
-		return Vec2f(viewportCenter[0]-viewportXywh[0],viewportCenter[1]-viewportXywh[1]);
-	}
+	Vec2f getViewportCenter() const;
 
 	//! Get the horizontal viewport offset in pixels.
-	int getViewportPosX() const {return viewportXywh[0];}
+	int getViewportPosX() const;
 	//! Get the vertical viewport offset in pixels.
-	int getViewportPosY() const {return viewportXywh[1];}
+	int getViewportPosY() const;
 	//! Get the viewport width in pixels.
-	int getViewportWidth() const {return viewportXywh[2];}
+	int getViewportWidth() const;
 	//! Get the viewport height in pixels.
-	int getViewportHeight() const {return viewportXywh[3];}
+	int getViewportHeight() const;
 
 	//! Return a convex polygon on the sphere which includes the viewport in the current frame.
 	//! @param marginX an extra margin in pixel which extends the polygon size in the X direction.
@@ -186,153 +166,74 @@ public:
 	SphericalRegionP getViewportConvexPolygon(float marginX=0., float marginY=0.) const;
 
 	//! Return a SphericalCap containing the whole viewport
-	const SphericalCap& getBoundingCap() const {return boundingCap;}
+	const SphericalCap& getBoundingCap() const;
 
 	//! Get size of a radian in pixels at the center of the viewport disk
-	float getPixelPerRadAtCenter() const {return pixelPerRad;}
+	float getPixelPerRadAtCenter() const;
 
-	//! Get the current FOV diameter in degree
-	float getFov() const {return 360.f/M_PI*viewScalingFactorToFov(0.5f*viewportFovDiameter/pixelPerRad);}
+	//! Get the current FOV diameter in degrees
+	float getFov() const;
 
 	//! Get whether front faces need to be oriented in the clockwise direction
-	bool needGlFrontFaceCW() const {return (flipHorz*flipVert < 0.f);}
+	bool needGlFrontFaceCW() const;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Full projection methods
 	//! Check to see if a 2d position is inside the viewport.
 	//! TODO Optimize by storing viewportXywh[1] + viewportXywh[3] and viewportXywh[0] + viewportXywh[2] already computed
-	bool checkInViewport(const Vec3d& pos) const
-	{
-		return (pos[1]>=viewportXywh[1] && pos[0]>=viewportXywh[0] &&
-			pos[1]<=(viewportXywh[1] + viewportXywh[3]) && pos[0]<=(viewportXywh[0] + viewportXywh[2]));
-	}
+	bool checkInViewport(const Vec3d& pos) const;
 
 	//! Check to see if a 2d position is inside the viewport.
 	//! TODO Optimize by storing viewportXywh[1] + viewportXywh[3] and viewportXywh[0] + viewportXywh[2] already computed
-	bool checkInViewport(const Vec3f& pos) const
-	{
-		return (pos[1]>=viewportXywh[1] && pos[0]>=viewportXywh[0] &&
-			pos[1]<=(viewportXywh[1] + viewportXywh[3]) && pos[0]<=(viewportXywh[0] + viewportXywh[2]));
-	}
+	bool checkInViewport(const Vec3f& pos) const;
 
 	//! Return the position where the 2 2D point p1 and p2 cross the viewport edge
 	//! P1 must be inside the viewport and P2 outside (check with checkInViewport() before calling this method)
-	Vec3d viewPortIntersect(const Vec3d& p1, const Vec3d& p2) const
-	{
-		Vec3d v1=p1;
-		Vec3d v2=p2;
-		Vec3d v;
-		for (int i=0;i<8;++i)
-		{
-			v=(v1+v2)*0.5;
-			if (!checkInViewport(v))
-				v2=v;
-			else
-				v1=v;
-		}
-		return v;
-	}
+	Vec3d viewPortIntersect(const Vec3d& p1, const Vec3d& p2) const;
 
 	//! Project the vector v from the current frame into the viewport.
 	//! @param v the vector in the current frame.
 	//! @param win the projected vector in the viewport 2D frame.
 	//! @return true if the projected coordinate is valid.
-	inline bool project(const Vec3d& v, Vec3d& win) const
-	{
-		win = v;
-		return projectInPlace(win);
-	}
+	bool project(const Vec3d& v, Vec3d& win) const;
 
 	//! Project the vector v from the current frame into the viewport.
 	//! @param v the vector in the current frame.
 	//! @param win the projected vector in the viewport 2D frame.
 	//! @return true if the projected coordinate is valid.
-	inline bool project(const Vec3f& v, Vec3f& win) const
-	{
-		win = v;
-		return projectInPlace(win);
-	}
+	bool project(const Vec3f& v, Vec3f& win) const;
 
-	virtual void project(int n, const Vec3d* in, Vec3f* out)
-	{
-		Vec3d v;
-		for (int i = 0; i < n; ++i, ++out)
-		{
-			v = in[i];
-			modelViewTransform->forward(v);
-			out->set(v[0], v[1], v[2]);
-			forward(*out);
-			out->set(viewportCenter[0] + flipHorz * pixelPerRad * (*out)[0],
-				viewportCenter[1] + flipVert * pixelPerRad * (*out)[1],
-				((*out)[2] - zNear) * oneOverZNearMinusZFar);
-		}
-	}
+	virtual void project(int n, const Vec3d* in, Vec3f* out);
 
-	virtual void project(int n, const Vec3f* in, Vec3f* out)
-	{
-		for (int i = 0; i < n; ++i, ++out)
-		{
-			*out=in[i];
-			modelViewTransform->forward(*out);
-			forward(*out);
-			out->set(viewportCenter[0] + flipHorz * pixelPerRad * (*out)[0],
-				viewportCenter[1] + flipVert * pixelPerRad * (*out)[1],
-				((*out)[2] - zNear) * oneOverZNearMinusZFar);
-		}
-	}
+	virtual void project(int n, const Vec3f* in, Vec3f* out);
 
 	//! Project the vector v from the current frame into the viewport.
 	//! @param vd the vector in the current frame.
 	//! @return true if the projected coordinate is valid.
-	inline bool projectInPlace(Vec3d& vd) const
-	{
-		modelViewTransform->forward(vd);
-		Vec3f v(vd[0], vd[1], vd[2]);
-		const bool rval = forward(v);
-		// very important: even when the projected point comes from an
-		// invisible region of the sky (rval=false), we must finish
-		// reprojecting, so that OpenGl can successfully eliminate
-		// polygons by culling.
-		vd[0] = viewportCenter[0] + flipHorz * pixelPerRad * v[0];
-		vd[1] = viewportCenter[1] + flipVert * pixelPerRad * v[1];
-		vd[2] = (v[2] - zNear) * oneOverZNearMinusZFar;
-		return rval;
-	}
+	bool projectInPlace(Vec3d& vd) const;
 
 	//! Project the vector v from the current frame into the viewport.
 	//! @param v the vector in the current frame.
 	//! @return true if the projected coordinate is valid.
-	inline bool projectInPlace(Vec3f& v) const
-	{
-		modelViewTransform->forward(v);
-		const bool rval = forward(v);
-		// very important: even when the projected point comes from an
-		// invisible region of the sky (rval=false), we must finish
-		// reprojecting, so that OpenGl can successfully eliminate
-		// polygons by culling.
-		v[0] = viewportCenter[0] + flipHorz * pixelPerRad * v[0];
-		v[1] = viewportCenter[1] + flipVert * pixelPerRad * v[1];
-		v[2] = (v[2] - zNear) * oneOverZNearMinusZFar;
-		return rval;
-	}
+	bool projectInPlace(Vec3f& v) const;
 
 	//! Project the vector v from the current frame into the viewport.
 	//! @param v the direction vector in the current frame. Does not need to be normalized.
 	//! @param win the projected vector in the viewport 2D frame. win[0] and win[1] are in screen pixels, win[2] is unused.
 	//! @return true if the projected point is inside the viewport.
-	bool projectCheck(const Vec3d& v, Vec3d& win) const {return (project(v, win) && checkInViewport(win));}
+	bool projectCheck(const Vec3d& v, Vec3d& win) const;
 
 	//! Project the vector v from the current frame into the viewport.
 	//! @param v the direction vector in the current frame. Does not need to be normalized.
 	//! @param win the projected vector in the viewport 2D frame. win[0] and win[1] are in screen pixels, win[2] is unused.
 	//! @return true if the projected point is inside the viewport.
-	bool projectCheck(const Vec3f& v, Vec3f& win) const {return (project(v, win) && checkInViewport(win));}
+	bool projectCheck(const Vec3f& v, Vec3f& win) const;
 
 	//! Project the vector v from the viewport frame into the current frame.
 	//! @param win the vector in the viewport 2D frame. win[0] and win[1] are in screen pixels, win[2] is unused.
 	//! @param v the unprojected direction vector in the current frame.
 	//! @return true if the projected coordinate is valid.
-	bool unProject(const Vec3d& win, Vec3d& v) const {return unProject(win[0], win[1], v);}
+	bool unProject(const Vec3d& win, Vec3d& v) const;
 	bool unProject(double x, double y, Vec3d& v) const;
 
 	//! Project the vectors v1 and v2 from the current frame into the viewport.
@@ -341,14 +242,13 @@ public:
 	//! @param win1 the first projected vector in the viewport 2D frame.
 	//! @param win2 the second projected vector in the viewport 2D frame.
 	//! @return true if at least one of the projected vector is within the viewport.
-	bool projectLineCheck(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
-		{return project(v1, win1) && project(v2, win2) && (checkInViewport(win1) || checkInViewport(win2));}
+	bool projectLineCheck(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const;
 
 	//! Get the current model view matrix.
-	ModelViewTranformP getModelViewTransform() const {return modelViewTransform;}
+	ModelViewTranformP getModelViewTransform() const;
 
 	//! Get the current projection matrix.
-	Mat4f getProjectionMatrix() const {return Mat4f(2.f/viewportXywh[2], 0, 0, 0, 0, 2.f/viewportXywh[3], 0, 0, 0, 0, -1., 0., -(2.f*viewportXywh[0] + viewportXywh[2])/viewportXywh[2], -(2.f*viewportXywh[1] + viewportXywh[3])/viewportXywh[3], 0, 1);}
+	Mat4f getProjectionMatrix() const;
 
 	///////////////////////////////////////////////////////////////////////////
 	//! Get a string description of a StelProjectorMaskType.
@@ -357,7 +257,7 @@ public:
 	static StelProjectorMaskType stringToMaskType(const QString &s);
 
 	//! Get the current type of the mask if any.
-	StelProjectorMaskType getMaskType(void) const {return maskType;}
+	StelProjectorMaskType getMaskType(void) const;
 
 protected:
 	//! Private constructor. Only StelCore can create instances of StelProjector.
