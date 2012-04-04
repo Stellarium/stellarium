@@ -101,6 +101,9 @@ private slots:
 	//! Set flagHasSelectedText as true, if search box has selected text
 	void setHasSelectedFlag();
 
+	//! Called when a SIMBAD server is selected in the list.
+	void selectSimbadServer(int index);
+
 private:
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
@@ -110,8 +113,15 @@ private:
 	QString substituteGreek(const QString& keyString);
 	QString getGreekLetterByName(const QString& potentialGreekLetterName);
 	QHash<QString, QString> greekLetters;
-	bool useSimbad;
+	//! Used when substituting text with a Greek letter.
 	bool flagHasSelectedText;
+	
+	bool useSimbad;
+	//! URL of the server used for SIMBAD queries. 
+	QString simbadServerUrl;
+	void populateSimbadServerList();
+	//! URL of the default SIMBAD server (Strasbourg).
+	static const char* DEF_SIMBAD_URL;
 };
 
 #endif // _SEARCHDIALOG_HPP_

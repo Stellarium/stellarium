@@ -1,6 +1,8 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2011 Eleni Maria Stea (Planet rendering using normal mapping
+ * and clouds)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,17 +20,24 @@
  */
 
 #include <iomanip>
-
+#include <QtCore/QtCore>
+#include <QtGui/QtGui>
 #include <QTextStream>
 #include <QString>
 #include <QDebug>
+#include <QObject>
+#include <QVariant>
 #include <QVarLengthArray>
+#include <QDateTime>
+
+#include <GLee.h>
+#include "StelShader.hpp"
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelTexture.hpp"
 #include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
-#include "StelTexture.hpp"
 #include "Planet.hpp"
 
 #include "StelProjector.hpp"
@@ -41,11 +50,14 @@
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 
+
+static unsigned int permMap;
+static unsigned int createPermTexture();
+
 Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
 StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
-
 Planet::Planet(const QString& englishName,
 			   int flagLighting,
 			   double radius,
@@ -81,6 +93,106 @@ Planet::Planet(const QString& englishName,
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+
+	nameI18 = englishName;
+	if (englishName!="Pluto")
+	{
+		deltaJD = 0.001*StelCore::JD_SECOND;
+	}
+	flagLabels = true;
+}
+
+Planet::Planet(const QString& englishName,
+			   int flagLighting,
+			   double radius,
+			   double oblateness,
+			   Vec3f color,
+			   float albedo,
+			   const QString& atexMapName,
+			   const QString& anormalMapName,
+			   posFuncType coordFunc,
+			   void* auserDataPtr,
+			   OsculatingFunctType *osculatingFunc,
+			   bool acloseOrbit,
+			   bool hidden,
+			   bool hasAtmosphere)
+	: englishName(englishName),
+	  flagLighting(flagLighting),
+	  radius(radius), oneMinusOblateness(1.0-oblateness),
+	  color(color), albedo(albedo), axisRotation(0.), rings(NULL),
+	  sphereScale(1.f),
+	  lastJD(J2000),
+	  coordFunc(coordFunc),
+	  userDataPtr(auserDataPtr),
+	  osculatingFunc(osculatingFunc),
+	  parent(NULL),
+	  hidden(hidden),
+	  atmosphere(hasAtmosphere)
+{
+	texMapName = atexMapName;
+	normalMapName = anormalMapName;
+	lastOrbitJD =0;
+	deltaJD = StelCore::JD_SECOND;
+	orbitCached = 0;
+	closeOrbit = acloseOrbit;
+
+	eclipticPos=Vec3d(0.,0.,0.);
+	rotLocalToParent = Mat4d::identity();
+	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	normalMap = StelApp::getInstance().getTextureManager().createTexture("textures/"+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+
+	nameI18 = englishName;
+	if (englishName!="Pluto")
+	{
+		deltaJD = 0.001*StelCore::JD_SECOND;
+	}
+	flagLabels = true;
+}
+
+Planet::Planet(const QString& englishName,
+			   int flagLighting,
+			   double radius,
+			   double oblateness,
+			   Vec3f color,
+			   Vec3f cloudColor,
+			   float cloudDensity,
+			   float cloudScale,
+			   float cloudSharpness,
+			   Vec3f cloudVel,
+			   float albedo,
+			   const QString& atexMapName,
+			   const QString& anormalMapName,
+			   posFuncType coordFunc,
+			   void* auserDataPtr,
+			   OsculatingFunctType *osculatingFunc,
+			   bool acloseOrbit,
+			   bool hidden,
+			   bool hasAtmosphere)
+	: englishName(englishName),
+	  flagLighting(flagLighting),
+	  radius(radius), oneMinusOblateness(1.0-oblateness),
+	  color(color), cloudColor(cloudColor), cloudDensity(cloudDensity), cloudScale(cloudScale), cloudSharpness(cloudSharpness), cloudVel(cloudVel), albedo(albedo), axisRotation(0.), rings(NULL),
+	  sphereScale(1.f),
+	  lastJD(J2000),
+	  coordFunc(coordFunc),
+	  userDataPtr(auserDataPtr),
+	  osculatingFunc(osculatingFunc),
+	  parent(NULL),
+	  hidden(hidden),
+	  atmosphere(hasAtmosphere)
+{
+	texMapName = atexMapName;
+	normalMapName = anormalMapName;
+
+	lastOrbitJD =0;
+	deltaJD = StelCore::JD_SECOND;
+	orbitCached = 0;
+	closeOrbit = acloseOrbit;
+
+	eclipticPos=Vec3d(0.,0.,0.);
+	rotLocalToParent = Mat4d::identity();
+	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	normalMap = StelApp::getInstance().getTextureManager().createTexture("textures/"+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	nameI18 = englishName;
 	if (englishName!="Pluto")
@@ -163,7 +275,37 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	}
 
 	if (flags&Size)
-		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(2.*getAngularSize(core)*M_PI/180., true));
+	{
+		double angularSize = 2.*getAngularSize(core)*M_PI/180.;
+		if (rings)
+		{
+			double withoutRings = 2.*getSpheroidAngularSize(core)*M_PI/180.;
+			oss << q_("Apparent diameter: %1, with rings: %2")
+			       .arg(StelUtils::radToDmsStr(withoutRings, true),
+			            StelUtils::radToDmsStr(angularSize, true));
+		}
+		else
+		{
+			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
+		}
+		oss << "<br>";
+	}
+
+	if (flags&Extra1)
+	{
+		if (englishName!="Sun")
+		{
+			const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
+			const double observerRq = observerHelioPos.lengthSquared();
+			const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
+			const double planetRq = planetHelioPos.lengthSquared();
+			const double observerPlanetRq = (observerHelioPos - planetHelioPos).lengthSquared();
+			const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
+			float planetPhase = 0.5f * std::abs(1.f + cos_chi);
+			oss << QString(q_("Phase: %1")).arg(planetPhase, 0, 'f', 2) << "<br>";
+			oss << QString(q_("Illuminated: %1%")).arg(planetPhase * 100, 0, 'f', 1) << "<br>";
+		}
+	}
 
 	postProcessInfoString(str, flags);
 
@@ -299,11 +441,13 @@ void Planet::computePosition(const double date)
 					{
 						coordFunc(calc_date, eclipticPos, userDataPtr);
 					}
+					orbitP[d] = eclipticPos;
 					orbit[d] = getHeliocentricEclipticPos();
 				}
 				else
 				{
-					orbit[d] = orbit[d+delta_points];
+					orbitP[d] = orbitP[d+delta_points];
+					orbit[d] = getHeliocentricPos(orbitP[d]);
 				}
 			}
 
@@ -327,11 +471,13 @@ void Planet::computePosition(const double date)
 					{
 						coordFunc(calc_date, eclipticPos, userDataPtr);
 					}
+					orbitP[d] = eclipticPos;
 					orbit[d] = getHeliocentricEclipticPos();
 				}
 				else
 				{
-					orbit[d] = orbit[d+delta_points];
+					orbitP[d] = orbitP[d+delta_points];
+					orbit[d] = getHeliocentricPos(orbitP[d]);
 				}
 			}
 
@@ -354,6 +500,7 @@ void Planet::computePosition(const double date)
 				{
 					coordFunc(calc_date, eclipticPos, userDataPtr);
 				}
+				orbitP[d] = eclipticPos;
 				orbit[d] = getHeliocentricEclipticPos();
 			}
 
@@ -372,6 +519,8 @@ void Planet::computePosition(const double date)
 	{
 		// calculate actual Planet position
 		coordFunc(date, eclipticPos, userDataPtr);
+		for( int d=0; d<ORBIT_SEGMENTS; d++ )
+			orbit[d]=getHeliocentricPos(orbitP[d]);
 		lastJD = date;
 	}
 
@@ -439,6 +588,22 @@ Vec3d Planet::getEclipticPos() const
 Vec3d Planet::getHeliocentricEclipticPos() const
 {
 	Vec3d pos = eclipticPos;
+	PlanetP pp = parent;
+	if (pp)
+	{
+		while (pp->parent)
+		{
+			pos += pp->eclipticPos;
+			pp = pp->parent;
+		}
+	}
+	return pos;
+}
+
+// Return heliocentric coordinate of p
+Vec3d Planet::getHeliocentricPos(Vec3d p) const
+{
+	Vec3d pos = p;
 	PlanetP pp = parent;
 	if (pp)
 	{
@@ -813,7 +978,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			else
 			{
 				// Normal planet
-				drawSphere(sPainter, screenSz);
+				drawNMapSphere(sPainter, screenSz);
 			}
 		}
 		if (sPainter)
@@ -829,7 +994,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	Vec3d tmp = getJ2000EquatorialPos(core);
-	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitude(core, true), color);
+	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, getVMagnitude(core, true), color);
 }
 
 
@@ -839,9 +1004,10 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	{
 		// For lazy loading, return if texture not yet loaded
 		if (!texMap->bind())
+		{
 			return;
+		}
 	}
-
 	painter->enableTexture2d(true);
 	glDisable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
@@ -855,9 +1021,196 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	// Rotate and add an extra quarter rotation so that the planet texture map
 	// fits to the observers position. No idea why this is necessary,
 	// perhaps some openGl strangeness, or confusing sin/cos.
+
 	painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
 	painter->setShadeModel(StelPainter::ShadeModelFlat);
 	glDisable(GL_CULL_FACE);
+}
+
+
+static int perm[256] = {
+	151,160,137,91,90,15,
+	131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,
+	190, 6,148,247,120,234,75,0,26,197,62,94,252,219,203,117,35,11,32,57,177,33,
+	88,237,149,56,87,174,20,125,136,171,168, 68,175,74,165,71,134,139,48,27,166,
+	77,146,158,231,83,111,229,122,60,211,133,230,220,105,92,41,55,46,245,40,244,
+	102,143,54, 65,25,63,161, 1,216,80,73,209,76,132,187,208, 89,18,169,200,196,
+	135,130,116,188,159,86,164,100,109,198,173,186, 3,64,52,217,226,250,124,123,
+	5,202,38,147,118,126,255,82,85,212,207,206,59,227,47,16,58,17,182,189,28,42,
+	223,183,170,213,119,248,152, 2,44,154,163, 70,221,153,101,155,167, 43,172,9,
+	129,22,39,253, 19,98,108,110,79,113,224,232,178,185, 112,104,218,246,97,228,
+	251,34,242,193,238,210,144,12,191,179,162,241, 81,51,145,235,249,14,239,107,
+	49,192,214, 31,181,199,106,157,184, 84,204,176,115,121,50,45,127, 4,150,254,
+	138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180
+};
+
+static int grad3[16][3] = {
+	{0,1,1},{0,1,-1},{0,-1,1},{0,-1,-1},
+	{1,0,1},{1,0,-1},{-1,0,1},{-1,0,-1},
+	{1,1,0},{1,-1,0},{-1,1,0},{-1,-1,0},
+	{1,0,-1},{-1,0,-1},{0,-1,1},{0,1,1}
+};
+
+// Procedural texture
+static unsigned int createPermTexture()
+{
+	unsigned int tex;
+
+	unsigned char *pixels = new unsigned char[256 * 256 * 4];
+
+	for(int i=0; i<256; i++) {
+		for(int j=0; j<256; j++) {
+			int offset = (i * 256 + j) * 4;
+			char value = perm[(j+perm[i]) & 0xff];
+			pixels[offset+0] = grad3[value & 0xf][0] * 64 + 64;	/* Gradient x */
+			pixels[offset+1] = grad3[value & 0xf][1] * 64 + 64;	/* Gradient y */
+			pixels[offset+2] = grad3[value & 0xf][2] * 64 + 64;	/* Gradient z */
+			pixels[offset+3] = value;							/* Permuted index */
+		}
+	}
+
+	glGenTextures(1, &tex);
+	glBindTexture(GL_TEXTURE_2D, tex);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 256, 256, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+
+	delete [] pixels;
+
+	return tex;
+}
+
+
+//! draws the planet when normal map is used
+//! @param StelPainter* (pointer to the painter used)
+//! @param float (screen size)
+
+void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
+{
+    if (texMap)
+    {
+        if (!texMap->bind())
+        {
+            return;
+        }
+        painter->enableTexture2d(true);
+    }
+    glDisable(GL_BLEND);
+    glEnable(GL_CULL_FACE);
+
+    // Draw the spheroid itself
+    // Adapt the number of facets according with the size of the sphere for optimization
+    int nb_facet = (int)(screenSz * 40/50);	// 40 facets for 1024 pixels diameter on screen
+    if (nb_facet<10) nb_facet = 10;
+    if (nb_facet>40) nb_facet = 40;
+    painter->setShadeModel(StelPainter::ShadeModelSmooth);
+    // Rotate and add an extra quarter rotation so that the planet texture map
+    // fits to the observers position. No idea why this is necessary,
+    // perhaps some openGl strangeness, or confusing sin/cos.
+
+    //the following lines are compatible to opengl es but have not been tested in an opengl es machine
+#ifndef USE_OPENGL_ES2
+	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+    if (ssm->nMapShader != 0)
+    {
+			if (normalMap)
+			{
+				if (!normalMap->bind(1))
+				{
+					painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+				}
+				else
+				{
+					painter->enableTexture2d(true, 1);
+
+					if (!permMap) {
+				        permMap = createPermTexture();
+					}
+
+                    glActiveTexture(GL_TEXTURE2);
+                    glEnable(GL_TEXTURE_2D);
+                    glBindTexture(GL_TEXTURE_2D, permMap);
+
+					if (!(cloudColor && cloudDensity && cloudSharpness && cloudScale && cloudVel)) {
+					        cloudColor = Vec3f(0.0, 0.0, 0.0);
+					        cloudVel = Vec3f(0.0, 0.5, 0.5);
+					        cloudDensity = 0;
+					        cloudSharpness = 0;
+					        cloudScale = 1;
+					}
+
+					int location = -1;
+
+			        location = ssm->nMapShader->uniformLocation("ccolor");
+			        ssm->nMapShader->setUniform(location, cloudColor[0], cloudColor[1], cloudColor[2]);
+
+					location = ssm->nMapShader->uniformLocation("cdensity");
+			        ssm->nMapShader->setUniform(location, cloudDensity);
+
+					location = ssm->nMapShader->uniformLocation("cscale");
+			        ssm->nMapShader->setUniform(location, cloudScale);
+
+					location = ssm->nMapShader->uniformLocation("csharp");
+			        ssm->nMapShader->setUniform(location, cloudSharpness);
+
+					ssm->nMapShader->use();
+
+					location = ssm->nMapShader->uniformLocation("tex");
+					ssm->nMapShader->setUniform(location, 0);
+
+					location = ssm->nMapShader->uniformLocation("nmap");
+					ssm->nMapShader->setUniform(location, 1);
+
+			        location = ssm->nMapShader->uniformLocation("permap");
+			        ssm->nMapShader->setUniform(location, 2);
+
+			        float pixw = 1.0 / 256.0;
+			        location = ssm->nMapShader->uniformLocation("pixw");
+			        ssm->nMapShader->setUniform(location, pixw);
+
+
+			        float halfpixw = 0.5 / 256.0;
+					location = ssm->nMapShader->uniformLocation("halfpixw");
+					ssm->nMapShader->setUniform(location, halfpixw);
+
+					location = ssm->nMapShader->uniformLocation("cvel");
+					ssm->nMapShader->setUniform(location, cloudVel[0], cloudVel[1], cloudVel[2]);
+
+					QTime dat;
+					float t = (float) ((float)dat.msecsTo(QTime::currentTime()) / 1000.0);
+
+					location = ssm->nMapShader->uniformLocation("t");
+					ssm->nMapShader->setUniform(location, t);
+
+					painter->nmSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, ssm);
+
+//					useShader(0);
+					glActiveTexture(GL_TEXTURE2);
+					glDisable(GL_TEXTURE_2D);
+					painter->enableTexture2d(false, 1);
+				}
+			}
+			else
+			{
+				painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+			}
+	}
+	else
+	{
+		painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+	}
+#else
+	painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+#endif
+
+    painter->setShadeModel(StelPainter::ShadeModelFlat);
+    glDisable(GL_CULL_FACE);
+
+    if (texMap) {
+		painter->enableTexture2d(false, 0);
+	}
 }
 
 
@@ -893,7 +1246,6 @@ void Planet::drawEarthShadow(StelCore* core, StelPainter* sPainter)
 		return;   // not visible so don't bother drawing
 
 	shadow = mh + mdist*mscale;
-	r_penumbra *= mscale;
 
 	StelProjectorP saveProj = sPainter->getProjector();
 	sPainter->setProjector(core->getProjection(StelCore::FrameHeliocentricEcliptic));
@@ -1050,6 +1402,7 @@ void Planet::drawOrbit(const StelCore* core)
 	QVarLengthArray<float, 1024> vertexArray;
 
 	sPainter.enableClientStates(true, false, false);
+
 	for (int n=0; n<=nbIter; ++n)
 	{
 		if (prj->project(orbit[n],onscreen) && (vertexArray.size()==0 || !prj->intersectViewportDiscontinuity(orbit[n-1], orbit[n])))

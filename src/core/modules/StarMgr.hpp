@@ -30,7 +30,6 @@
 class StelObject;
 class StelToneReproducer;
 class StelProjector;
-class StelNavigator;
 class StelPainter;
 class QSettings;
 
