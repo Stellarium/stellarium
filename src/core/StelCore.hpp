@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2003 Fabien Chereau
+ * Copyright (C) 2012 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -148,7 +149,7 @@ public:
 	//! Set the set of parameters to use when creating a new StelProjector.
 	void setCurrentStelProjectorParams(const StelProjector::StelProjectorParams& newParams);
 
-	//! Get vision direction
+	//! Set vision direction
 	void lookAtJ2000(const Vec3d& pos, const Vec3d& up);
 
 	Vec3d altAzToEquinoxEqu(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
@@ -376,17 +377,17 @@ private:
 	void updateTime(double deltaTime);
 
 	// Matrices used for every coordinate transfo
-	Mat4d matHeliocentricEclipticToAltAz;	// Transform from heliocentric ecliptic (Vsop87) to observer-centric altazimuthal coordinate
-	Mat4d matAltAzToHeliocentricEcliptic;	// Transform from observer-centric altazimuthal coordinate to heliocentric ecliptic (Vsop87)
-	Mat4d matAltAzToEquinoxEqu;				// Transform from observer-centric altazimuthal coordinate to Earth Equatorial
-	Mat4d matEquinoxEquToAltAz;				// Transform from observer-centric altazimuthal coordinate to Earth Equatorial
-	Mat4d matHeliocentricEclipticToEquinoxEqu;// Transform from heliocentric ecliptic (Vsop87) to earth equatorial coordinate
+	Mat4d matHeliocentricEclipticToAltAz;      // Transform from heliocentric ecliptic (Vsop87) to observer-centric altazimuthal coordinate
+	Mat4d matAltAzToHeliocentricEcliptic;	   // Transform from observer-centric altazimuthal coordinate to heliocentric ecliptic (Vsop87)
+	Mat4d matAltAzToEquinoxEqu;                // Transform from observer-centric altazimuthal coordinate to Earth Equatorial
+	Mat4d matEquinoxEquToAltAz;                // Transform from observer-centric altazimuthal coordinate to Earth Equatorial
+	Mat4d matHeliocentricEclipticToEquinoxEqu; // Transform from heliocentric ecliptic (Vsop87) to earth equatorial coordinate
 	Mat4d matEquinoxEquToJ2000;
 	Mat4d matJ2000ToEquinoxEqu;
 	Mat4d matJ2000ToAltAz;
 
-	Mat4d matAltAzModelView;				// Modelview matrix for observer-centric altazimuthal drawing
-	Mat4d invertMatAltAzModelView;			// Inverted modelview matrix for observer-centric altazimuthal drawing
+	Mat4d matAltAzModelView;           // Modelview matrix for observer-centric altazimuthal drawing
+	Mat4d invertMatAltAzModelView;     // Inverted modelview matrix for observer-centric altazimuthal drawing
 
 	// Position variables
 	StelObserver* position;
@@ -394,8 +395,8 @@ private:
 	QString defaultLocationID;
 
 	// Time variables
-	double timeSpeed;                       // Positive : forward, Negative : Backward, 1 = 1sec/sec
-	double JDay;                            // Curent time in Julian day
+	double timeSpeed;                  // Positive : forward, Negative : Backward, 1 = 1sec/sec
+	double JDay;                       // Curent time in Julian day
 	double presetSkyTime;
 	QTime initTodayTime;
 	QString startupTimeMode;
