@@ -363,6 +363,89 @@ void StelCore::lookAtJ2000(const Vec3d& pos, const Vec3d& aup)
 	invertMatAltAzModelView = matAltAzModelView.inverse();
 }
 
+Vec3d StelCore::altAzToEquinoxEqu(const Vec3d& v, RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return matAltAzToEquinoxEqu*v;
+	Vec3d r(v);
+	skyDrawer->getRefraction().backward(r);
+	r.transfo4d(matAltAzToEquinoxEqu);
+	return r;
+}
+
+Vec3d StelCore::equinoxEquToAltAz(const Vec3d& v, RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return matEquinoxEquToAltAz*v;
+	Vec3d r(v);
+	r.transfo4d(matEquinoxEquToAltAz);
+	skyDrawer->getRefraction().forward(r);
+	return r;
+}
+
+Vec3d StelCore::altAzToJ2000(const Vec3d& v, RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return matEquinoxEquToJ2000*matAltAzToEquinoxEqu*v;
+	Vec3d r(v);
+	skyDrawer->getRefraction().backward(r);
+	r.transfo4d(matEquinoxEquToJ2000*matAltAzToEquinoxEqu);
+	return r;
+}
+
+Vec3d StelCore::j2000ToAltAz(const Vec3d& v, RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return matJ2000ToAltAz*v;
+	Vec3d r(v);
+	r.transfo4d(matJ2000ToAltAz);
+	skyDrawer->getRefraction().forward(r);
+	return r;
+}
+
+Vec3d StelCore::galacticToJ2000(const Vec3d& v) const
+{
+	return matGalacticToJ2000*v;
+}
+
+Vec3d StelCore::equinoxEquToJ2000(const Vec3d& v) const
+{
+	return matEquinoxEquToJ2000*v;
+}
+
+Vec3d StelCore::j2000ToEquinoxEqu(const Vec3d& v) const
+{
+	return matJ2000ToEquinoxEqu*v;
+}
+
+Vec3d StelCore::j2000ToGalactic(const Vec3d& v) const
+{
+	return matJ2000ToGalactic*v;
+}
+
+//! Transform vector from heliocentric ecliptic coordinate to altazimuthal
+Vec3d StelCore::heliocentricEclipticToAltAz(const Vec3d& v, RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return matHeliocentricEclipticToAltAz*v;
+	Vec3d r(v);
+	r.transfo4d(matHeliocentricEclipticToAltAz);
+	skyDrawer->getRefraction().forward(r);
+	return r;
+}
+
+//! Transform from heliocentric coordinate to equatorial at current equinox (for the planet where the observer stands)
+Vec3d StelCore::heliocentricEclipticToEquinoxEqu(const Vec3d& v) const
+{
+	return matHeliocentricEclipticToEquinoxEqu*v;
+}
+
+//! Transform vector from heliocentric coordinate to false equatorial : equatorial
+//! coordinate but centered on the observer position (usefull for objects close to earth)
+Vec3d StelCore::heliocentricEclipticToEarthPosEquinoxEqu(const Vec3d& v) const
+{
+	return matAltAzToEquinoxEqu*matHeliocentricEclipticToAltAz*v;
+}
 
 void StelCore::updateTransformMatrices()
 {
