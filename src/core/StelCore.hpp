@@ -115,27 +115,27 @@ public:
 	StelProjectorP getProjection(StelProjector::ModelViewTranformP modelViewTransform, ProjectionType projType=(ProjectionType)1000) const;
 
 	//! Get the current tone reproducer used in the core.
-	StelToneReproducer* getToneReproducer() {return toneConverter;}
+	StelToneReproducer* getToneReproducer();
 	//! Get the current tone reproducer used in the core.
-	const StelToneReproducer* getToneReproducer() const {return toneConverter;}
+	const StelToneReproducer* getToneReproducer() const;
 
 	//! Get the current StelSkyDrawer used in the core.
-	StelSkyDrawer* getSkyDrawer() {return skyDrawer;}
+	StelSkyDrawer* getSkyDrawer();
 	//! Get the current StelSkyDrawer used in the core.
-	const StelSkyDrawer* getSkyDrawer() const {return skyDrawer;}
+	const StelSkyDrawer* getSkyDrawer() const;
 
 	//! Get an instance of StelGeodesicGrid which is garanteed to allow for at least maxLevel levels
 	const StelGeodesicGrid* getGeodesicGrid(int maxLevel) const;
 
 	//! Get the instance of movement manager.
-	StelMovementMgr* getMovementMgr() {return movementMgr;}
+	StelMovementMgr* getMovementMgr();
 	//! Get the const instance of movement manager.
-	const StelMovementMgr* getMovementMgr() const {return movementMgr;}
+	const StelMovementMgr* getMovementMgr() const;
 
 	//! Set the near and far clipping planes.
-	void setClippingPlanes(double znear, double zfar) {currentProjectorParams.zNear=znear;currentProjectorParams.zFar=zfar;}
+	void setClippingPlanes(double znear, double zfar);
 	//! Get the near and far clipping planes.
-	void getClippingPlanes(double* zn, double* zf) const {*zn = currentProjectorParams.zNear; *zf = currentProjectorParams.zFar;}
+	void getClippingPlanes(double* zn, double* zf) const;
 
 	//! Get the translated projection name from its TypeKey for the current locale.
 	QString projectionTypeKeyToNameI18n(const QString& key) const;
@@ -144,9 +144,9 @@ public:
 	QString projectionNameI18nToTypeKey(const QString& nameI18n) const;
 
 	//! Get the current set of parameters to use when creating a new StelProjector.
-	StelProjector::StelProjectorParams getCurrentStelProjectorParams() const {return currentProjectorParams;}
+	StelProjector::StelProjectorParams getCurrentStelProjectorParams() const;
 	//! Set the set of parameters to use when creating a new StelProjector.
-	void setCurrentStelProjectorParams(const StelProjector::StelProjectorParams& newParams) {currentProjectorParams=newParams;}
+	void setCurrentStelProjectorParams(const StelProjector::StelProjectorParams& newParams);
 
 	//! Get vision direction
 	void lookAtJ2000(const Vec3d& pos, const Vec3d& up);
@@ -170,75 +170,22 @@ public:
 	Vec3d heliocentricEclipticToEarthPosEquinoxEqu(const Vec3d& v) const;
 
 	//! Get the modelview matrix for heliocentric ecliptic (Vsop87) drawing
-	StelProjector::ModelViewTranformP getHeliocentricEclipticModelViewTransform(RefractionMode refMode=RefractionAuto) const
-	{
-		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-			return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matHeliocentricEclipticToAltAz));
-		Refraction* refr = new Refraction(skyDrawer->getRefraction());
-		// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
-		refr->setPreTransfoMat(matHeliocentricEclipticToAltAz);
-		refr->setPostTransfoMat(matAltAzModelView);
-		return StelProjector::ModelViewTranformP(refr);
-	}
+	StelProjector::ModelViewTranformP getHeliocentricEclipticModelViewTransform(RefractionMode refMode=RefractionAuto) const;
 
 	//! Get the modelview matrix for observer-centric ecliptic (Vsop87) drawing
-	StelProjector::ModelViewTranformP getObservercentricEclipticModelViewTransform(RefractionMode refMode=RefractionAuto) const
-	{
-		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-			return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matJ2000ToAltAz*matVsop87ToJ2000));
-		Refraction* refr = new Refraction(skyDrawer->getRefraction());
-		// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
-		refr->setPreTransfoMat(matJ2000ToAltAz*matVsop87ToJ2000);
-		refr->setPostTransfoMat(matAltAzModelView);
-		return StelProjector::ModelViewTranformP(refr);
-	}
+	StelProjector::ModelViewTranformP getObservercentricEclipticModelViewTransform(RefractionMode refMode=RefractionAuto) const;
 
 	//! Get the modelview matrix for observer-centric equatorial at equinox drawing
-	StelProjector::ModelViewTranformP getEquinoxEquModelViewTransform(RefractionMode refMode=RefractionAuto) const
-	{
-		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-			return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz));
-		Refraction* refr = new Refraction(skyDrawer->getRefraction());
-		// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
-		refr->setPreTransfoMat(matEquinoxEquToAltAz);
-		refr->setPostTransfoMat(matAltAzModelView);
-		return StelProjector::ModelViewTranformP(refr);
-	}
+	StelProjector::ModelViewTranformP getEquinoxEquModelViewTransform(RefractionMode refMode=RefractionAuto) const;
 
 	//! Get the modelview matrix for observer-centric altazimuthal drawing
-	StelProjector::ModelViewTranformP getAltAzModelViewTransform(RefractionMode refMode=RefractionAuto) const
-	{
-		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-			return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView));
-		Refraction* refr = new Refraction(skyDrawer->getRefraction());
-		// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
-		refr->setPostTransfoMat(matAltAzModelView);
-		return StelProjector::ModelViewTranformP(refr);
-	}
+	StelProjector::ModelViewTranformP getAltAzModelViewTransform(RefractionMode refMode=RefractionAuto) const;
 
 	//! Get the modelview matrix for observer-centric J2000 equatorial drawing
-	StelProjector::ModelViewTranformP getJ2000ModelViewTransform(RefractionMode refMode=RefractionAuto) const
-	{
-		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-			return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu));
-		Refraction* refr = new Refraction(skyDrawer->getRefraction());
-		// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
-		refr->setPreTransfoMat(matEquinoxEquToAltAz*matJ2000ToEquinoxEqu);
-		refr->setPostTransfoMat(matAltAzModelView);
-		return StelProjector::ModelViewTranformP(refr);
-	}
+	StelProjector::ModelViewTranformP getJ2000ModelViewTransform(RefractionMode refMode=RefractionAuto) const;
 
 	//! Get the modelview matrix for observer-centric Galactic equatorial drawing
-	StelProjector::ModelViewTranformP getGalacticModelViewTransform(RefractionMode refMode=RefractionAuto) const
-	{
-		if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-			return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matGalacticToJ2000));
-		Refraction* refr = new Refraction(skyDrawer->getRefraction());
-		// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
-		refr->setPreTransfoMat(matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matGalacticToJ2000);
-		refr->setPostTransfoMat(matAltAzModelView);
-		return StelProjector::ModelViewTranformP(refr);
-	}
+	StelProjector::ModelViewTranformP getGalacticModelViewTransform(RefractionMode refMode=RefractionAuto) const;
 
 	//! Rotation matrix from equatorial J2000 to ecliptic (Vsop87)
 	static const Mat4d matJ2000ToVsop87;
@@ -276,13 +223,13 @@ public:
 	double getLocalSideralDayLength() const;
 
 	//! Return the startup mode, can be preset|Preset or anything else
-	QString getStartupTimeMode() {return startupTimeMode;}
+	QString getStartupTimeMode();
 	void setStartupTimeMode(const QString& s);
 
 public slots:
 	//! Set the current ProjectionType to use
 	void setCurrentProjectionType(ProjectionType type);
-	ProjectionType getCurrentProjectionType() const {return currentProjectionType;}
+	ProjectionType getCurrentProjectionType() const;
 
 	//! Get the current Mapping used by the Projection
 	QString getCurrentProjectionTypeKey(void) const;
@@ -293,46 +240,45 @@ public slots:
 	QStringList getAllProjectionTypeKeys() const;
 
 	//! Set the mask type.
-	void setMaskType(StelProjector::StelProjectorMaskType m) {currentProjectorParams.maskType = m; }
+	void setMaskType(StelProjector::StelProjectorMaskType m);
 
 	//! Set the flag with decides whether to arrage labels so that
 	//! they are aligned with the bottom of a 2d screen, or a 3d dome.
-	void setFlagGravityLabels(bool gravity) { currentProjectorParams.gravityLabels = gravity; }
+	void setFlagGravityLabels(bool gravity);
 	//! Set the offset rotation angle in degree to apply to gravity text (only if gravityLabels is set to false).
-	void setDefautAngleForGravityText(float a) { currentProjectorParams.defautAngleForGravityText = a; }
+	void setDefautAngleForGravityText(float a);
 	//! Set the horizontal flip status.
 	//! @param flip The new value (true = flipped, false = unflipped).
-	void setFlipHorz(bool flip) {currentProjectorParams.flipHorz = flip;}
+	void setFlipHorz(bool flip);
 	//! Set the vertical flip status.
 	//! @param flip The new value (true = flipped, false = unflipped).
-	void setFlipVert(bool flip) {currentProjectorParams.flipVert = flip;}
+	void setFlipVert(bool flip);
 	//! Get the state of the horizontal flip.
 	//! @return True if flipped horizontally, else false.
-	bool getFlipHorz(void) const {return currentProjectorParams.flipHorz;}
+	bool getFlipHorz(void) const;
 	//! Get the state of the vertical flip.
 	//! @return True if flipped vertically, else false.
-	bool getFlipVert(void) const {return currentProjectorParams.flipVert;}
+	bool getFlipVert(void) const;
 
 	//! Get the location used by default at startup
-	QString getDefaultLocationID() const {return defaultLocationID;}
+	QString getDefaultLocationID() const;
 	//! Set the location to use by default at startup
 	void setDefaultLocationID(const QString& id);
 
-
 	//! Set the current date in Julian Day
-	void setJDay(double JD) {JDay=JD;}
+	void setJDay(double JD);
 	//! Get the current date in Julian Day
-	double getJDay() const {return JDay;}
+	double getJDay() const;
 
 	//! Return the preset sky time in JD
-	double getPresetSkyTime() const {return presetSkyTime;}
+	double getPresetSkyTime() const;
 	//! Set the preset sky time from a JD
-	void setPresetSkyTime(double d) {presetSkyTime=d;}
+	void setPresetSkyTime(double d);
 
 	//! Set time speed in JDay/sec
-	void setTimeRate(double ts) {timeSpeed=ts; emit timeRateChanged(timeSpeed);}
+	void setTimeRate(double ts);
 	//! Get time speed in JDay/sec
-	double getTimeRate() const {return timeSpeed;}
+	double getTimeRate() const;
 
 	//! Increase the time speed
 	void increaseTimeSpeed();
@@ -344,13 +290,13 @@ public slots:
 	void decreaseTimeSpeedLess();
 
 	//! Set time speed to 0, i.e. freeze the passage of simulation time
-	void setZeroTimeSpeed() {setTimeRate(0);}
+	void setZeroTimeSpeed();
 	//! Set real time speed, i.e. 1 sec/sec
-	void setRealTimeSpeed() {setTimeRate(JD_SECOND);}
+	void setRealTimeSpeed();
 	//! Set real time speed or pause simulation if we are already in realtime speed.
-	void toggleRealTimeSpeed() {(!getRealTimeSpeed()) ? setRealTimeSpeed() : setZeroTimeSpeed();}
+	void toggleRealTimeSpeed();
 	//! Get whether it is real time speed, i.e. 1 sec/sec
-	bool getRealTimeSpeed() const {return (fabs(timeSpeed-JD_SECOND)<0.0000001);}
+	bool getRealTimeSpeed() const;
 
 	//! Set stellarium time to current real world time
 	void setTimeNow();
@@ -360,39 +306,39 @@ public slots:
 	bool getIsTimeNow() const;
 
 	//! get the initial "today time" from the config file
-	QTime getInitTodayTime(void) {return initTodayTime;}
+	QTime getInitTodayTime(void);
 	//! set the initial "today time" from the config file
-	void setInitTodayTime(const QTime& t) {initTodayTime=t;}
+	void setInitTodayTime(const QTime& t);
 	//! Set the preset sky time from a QDateTime
 	void setPresetSkyTime(QDateTime dt);
 
 	//! Add one [Earth, solar] hour to the current simulation time.
-	void addHour() {addSolarDays(0.04166666666666666667);}
+	void addHour();
 	//! Add one [Earth, solar] day to the current simulation time.
-	void addDay() {addSolarDays(1.0);}
+	void addDay();
 	//! Add one [Earth, solar] week to the current simulation time.
-	void addWeek() {addSolarDays(7.0);}
+	void addWeek();
 
 	//! Add one sidereal day to the simulation time. The length of time depends
 	//! on the current planetary body on which the observer is located.
-	void addSiderealDay() {addSiderealDays(1.0);}
+	void addSiderealDay();
 	//! Add one sidereal week to the simulation time. The length of time depends
 	//! on the current planetary body on which the observer is located.
-	void addSiderealWeek() {addSiderealDays(7.0);}
+	void addSiderealWeek();
 
 	//! Subtract one [Earth, solar] hour to the current simulation time.
-	void subtractHour() {addSolarDays(-0.04166666666666666667);}
+	void subtractHour();
 	//! Subtract one [Earth, solar] day to the current simulation time.
-	void subtractDay() {addSolarDays(-1.0);}
+	void subtractDay();
 	//! Subtract one [Earth, solar] week to the current simulation time.
-	void subtractWeek() {addSolarDays(-7.0);}
+	void subtractWeek();
 
 	//! Subtract one sidereal week to the simulation time. The length of time depends
 	//! on the current planetary body on which the observer is located.
-	void subtractSiderealDay() {addSiderealDays(-1.0);}
+	void subtractSiderealDay();
 	//! Subtract one sidereal week to the simulation time. The length of time depends
 	//! on the current planetary body on which the observer is located.
-	void subtractSiderealWeek() {addSiderealDays(-7.0);}
+	void subtractSiderealWeek();
 
 	//! Add a number of Earth Solar days to the current simulation time
 	//! @param d the decimal number of days to add (use negative values to subtract)
