@@ -1921,7 +1921,7 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
         int pVecLocation = ssm->nMapShader->attributeLocation("pvec");
         //FIXME: after fully migrate to Qt 4.8 this condition need drop
         #if QT_VERSION>=0x040800
-        QGLFunctions functions = QGLFunctions();
+        QGLFunctions functions(QGLContext::currentContext());
         functions.glEnableVertexAttribArray(pVecLocation);
         functions.glVertexAttribPointer(pVecLocation, projectedVertexArray.size, projectedVertexArray.type, 0, 0, projectedVertexArray.pointer);
         #else
