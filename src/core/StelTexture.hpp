@@ -25,10 +25,6 @@
 #include <QObject>
 #include <QImage>
 #include <QtOpenGL>
-//FIXME: after fully migrate to Qt 4.8 this condition need drop
-#if QT_VERSION>=0x040800
-#include <QGLFunctions>
-#endif
 
 class QFile;
 class StelTextureMgr;
@@ -69,13 +65,7 @@ private:
 //! @class StelTexture
 //! Base texture class. For creating an instance, use StelTextureMgr::createTexture() and StelTextureMgr::createTextureThread()
 //! @sa StelTextureSP
-class StelTexture
-//FIXME: after fully migrate to Qt 4.8 this condition need drop
-#if QT_VERSION>=0x040800
-        : public QObject, protected QGLFunctions
-#else
-        : public QObject
-#endif
+class StelTexture : public QObject
 {
 	Q_OBJECT
 
