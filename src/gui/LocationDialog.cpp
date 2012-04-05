@@ -425,6 +425,9 @@ void LocationDialog::addCurrentLocationToList()
 			ui->citiesListView->scrollTo(model->index(i,0));
 			ui->citiesListView->selectionModel()->select(model->index(i,0), QItemSelectionModel::ClearAndSelect|QItemSelectionModel::Rows);
 			listItemActivated(model->index(i,0));
+			disconnectEditSignals();
+			ui->citySearchLineEdit->setFocus();
+			connectEditSignals();
 			break;
 		}
 	}

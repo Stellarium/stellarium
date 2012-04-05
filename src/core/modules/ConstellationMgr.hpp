@@ -34,7 +34,6 @@ class StelToneReproducer;
 class StarMgr;
 class Constellation;
 class StelProjector;
-class StelNavigator;
 class StelPainter;
 
 //! @class ConstellationMgr
