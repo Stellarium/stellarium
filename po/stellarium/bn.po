@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-27 21:44+0700\n"
-"PO-Revision-Date: 2012-04-05 13:24+0000\n"
+"PO-Revision-Date: 2012-04-06 04:59+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Bengali <bn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-06 04:35+0000\n"
+"X-Launchpad-Export-Date: 2012-04-07 04:36+0000\n"
 "X-Generator: Launchpad (build 15060)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -2891,7 +2891,7 @@ msgstr "খগোল"
 #: src/ui_viewDialog.h:1127
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Galactic plane line"
-msgstr ""
+msgstr "মহাজাগতিক সমতল রেখা"
 
 #: src/ui_viewDialog.h:1129
 msgid "Constellations"
@@ -3330,7 +3330,7 @@ msgstr "ফাইলে স্ক্রিপ্ট সংরক্ষন কর
 
 #: src/ui_scriptConsole.h:352
 msgid "clear script"
-msgstr ""
+msgstr "স্ক্রিপ্ট পরিষ্কার"
 
 #: src/ui_scriptConsole.h:356
 msgid "pre-process script using SSC preprocessor"
@@ -3509,13 +3509,13 @@ msgstr "'চাক্ষুষ বিন্যাস' প্লাগইন ব�
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 #, qt-format
 msgid "Ocular #%1"
-msgstr ""
+msgstr "চাক্ষুষ বিন্যাস #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1450
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 #, qt-format
 msgid "Ocular #%1: %2"
-msgstr ""
+msgstr "চাক্ষুষ বিন্যাস #%1:%2"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:1464
@@ -4043,7 +4043,7 @@ msgstr "এ ব্যাপারে আপনার সব প্রশ্ন�
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
 #, qt-format
 msgid "Bug reports can be made %1here%2."
-msgstr ""
+msgstr "বাগ প্রতিবেদন %1এখানে%2 করা যাবে ।"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:303
@@ -4815,7 +4815,7 @@ msgstr "৪র্থ সপ্তাহ"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:269
 msgid "Last week"
-msgstr ""
+msgstr "শেষ সপ্তাহ"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:278
 msgid "Sunday"
@@ -5464,12 +5464,12 @@ msgstr "পালসারের ধরণ: %1"
 #: plugins/Pulsars/src/Pulsar.cpp:120
 #, qt-format
 msgid "Equivalent width of the integrated pulse profile: %1 ms"
-msgstr ""
+msgstr "সমন্বিত স্পন্দন পরিলেখর তুল্য প্রস্থ: %1 মিলিসেকেন্ড"
 
 #: plugins/Pulsars/src/Pulsar.cpp:124
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
-msgstr ""
+msgstr "৫০% শীর্ষে পরিলেখ প্রস্থ: %1 মিলিসেকেন্ড"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:130 plugins/Pulsars/src/Pulsar.cpp:142
