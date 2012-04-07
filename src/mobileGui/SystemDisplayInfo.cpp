@@ -17,30 +17,33 @@ SystemDisplayInfo::SystemDisplayInfo(QObject *parent) :
 
 #ifdef ANDROID
 	//if using Android, get the abstract density scale via JNI
-
 	dpi = JavaWrapper::getDensityDpi();
-	m_density = JavaWrapper::getDensity();
 #else
+	//if not, figure it out the straight-forward way
 	dpi = (getDPIWidth() + getDPIHeight()) / 2;
-	m_density = getDPIWidth() / static_cast<float>(STANDARD_DPI);
 #endif
 
 	if(dpi < MEDIUM_DPI)
 	{
+		m_density = LOW_DPI_DENSITY;
 		m_dpiBucket = LOW_DPI;
 	}
 	else if(dpi < HIGH_DPI)
 	{
+		m_density = MEDIUM_DPI_DENSITY;
 		m_dpiBucket = MEDIUM_DPI;
 	}
 	else if(dpi < XHIGH_DPI)
 	{
+		m_density = HIGH_DPI_DENSITY;
 		m_dpiBucket = HIGH_DPI;
 	}
 	else
 	{
+		m_density = XHIGH_DPI_DENSITY;
 		m_dpiBucket = XHIGH_DPI;
 	}
+
 
 	densityChanged();
 }

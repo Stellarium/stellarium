@@ -37,6 +37,8 @@
 
 #include "SystemDisplayInfo.hpp"
 #include "UpdateSignallingItem.hpp"
+#include "MobileImageProvider.hpp"
+
 #include "StelWrapper.hpp"
 
 #include "StelModuleMgr.hpp"
@@ -45,7 +47,6 @@
 #include "StelAppGraphicsWidget.hpp"
 #include "StelTranslator.hpp"
 #include "StelCore.hpp"
-#include "../android/JavaWrapper.hpp"
 
 StelGuiBase* StelMobileGuiPluginInterface::getStelGuiBase() const
 {
@@ -86,6 +87,8 @@ void MobileGui::init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraph
 	displayInfo = new SystemDisplayInfo();
 	stelWrapper = new StelWrapper();
 
+	engine->addImageProvider("mobileGui", new MobileImageProvider(displayInfo->dpiBucket()));
+
 	engine->rootContext()->setContextProperty("displayInfo", displayInfo);
 	engine->rootContext()->setContextProperty("stel", stelWrapper);
 	engine->rootContext()->setContextProperty("baseGui", this);
@@ -115,8 +118,6 @@ void MobileGui::init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraph
 	}
 
 	connectSignals();
-
-	qDebug() << JavaWrapper::getLocaleString();;
 }
 
 //! Get a pointer on the info panel used to display selected object info

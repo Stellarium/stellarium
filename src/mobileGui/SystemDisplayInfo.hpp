@@ -3,10 +3,9 @@
 
 #include <QSystemDisplayInfo>
 
-#define STANDARD_DPI 160
-
 //! @class SystemDisplayInfo
-//! Just a QML-accessible version of SystemDisplayInfo
+//! A QML-accessible version of SystemDisplayInfo
+//! Also stores the device's density scale for layout scaling
 class SystemDisplayInfo : public QtMobility::QSystemDisplayInfo
 {
 	Q_OBJECT
@@ -14,16 +13,25 @@ class SystemDisplayInfo : public QtMobility::QSystemDisplayInfo
 	Q_PROPERTY(float density READ density NOTIFY densityChanged)
 	Q_ENUMS(DpiBucket)
 public:
+#define LOW_DPI_DENSITY 0.75
+#define MEDIUM_DPI_DENSITY 1.00
+#define HIGH_DPI_DENSITY 1.50
+#define XHIGH_DPI_DENSITY 2.00
+
 	enum DpiBucket
 	{
-		LOW_DPI = 120,
-		MEDIUM_DPI = 160,
-		HIGH_DPI = 240,
-		XHIGH_DPI = 320
+		INVALID_DPI = -1,
+		LOW_DPI = 120,    //density = 0.75
+		MEDIUM_DPI = 160, //density = 1.00
+		HIGH_DPI = 240,   //density = 1.50
+		XHIGH_DPI = 320   //density = 2.00
 	};
 
     explicit SystemDisplayInfo(QObject *parent = 0);
 	virtual ~SystemDisplayInfo() {}
+
+
+	//These are from QSystemDisplayInfo, just made invokable:
 
 	Q_INVOKABLE static int displayBrightness();
 	Q_INVOKABLE static int colorDepth();
@@ -36,9 +44,18 @@ public:
 	Q_INVOKABLE int physicalWidth();
 	Q_INVOKABLE QSystemDisplayInfo::BacklightState backlightStatus();
 
+	//These are new:
 
+	//! Convert from density-independent pixels (dp) to screen pixels
+	//! @param dp a measurement in dp
+	//! @return   the dp given, converted to pixels
 	Q_INVOKABLE int dpToPixels(int dp); //convert from Dp to pixels
+
+	//! @return the abstract density bucket to which the screen belongs
 	DpiBucket dpiBucket();
+
+	//! @return the conversion factor from density-independent pixels to
+	//!         screen pixels. Higher for denser screens.
 	float density();
 
 signals:
@@ -55,7 +72,7 @@ public slots:
 
 private:
 	QSystemDisplayInfo::DisplayOrientation currOrientation;
-	float m_density; //factor to multiply
+	float m_density; //factor to multiply dp by
 	DpiBucket m_dpiBucket; //current DPI bucket
 };
 

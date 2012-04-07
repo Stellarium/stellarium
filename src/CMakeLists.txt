@@ -514,7 +514,9 @@ IF (GUI_MODE STREQUAL "Mobile")
 		mobileGui/StelWrapper.hpp
 		mobileGui/StelWrapper.cpp
 		mobileGui/UpdateSignallingItem.hpp
-		mobileGui/UpdateSignallingItem.cpp)
+		mobileGui/UpdateSignallingItem.cpp
+		mobileGui/MobileImageProvider.hpp
+		mobileGui/MobileImageProvider.cpp)
 	SET(mobilegui_MOC_HDRS
 		mobileGui/MobileGui.hpp
 		mobileGui/SystemDisplayInfo.hpp

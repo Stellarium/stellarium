@@ -8,20 +8,26 @@ Item {
 	////////////////////////
 
 	//Minimum dp for each category
-	// microPhoneScreen: small phones
-	// normalPhoneScreen: average phone
-	// tweenerScreenDp: ~5" mini tablets/phablets
-	// mediumScreen: ~7" tablets
-	// largeScreen: ~10" tablets
+	// microPhoneScreen: small phones (do these exist? example?)
+	// normalPhoneScreen: average phone (e.g. Nexus S)
+	// tweenerScreenDp: ~5" mini tablets/phablets (e.g. Galaxy Note)
+	// mediumScreen: ~7" tablets (e.g. Amazon Kindle)
+	// largeScreen: ~10" tablets (e.g. Galaxy Tab 10.1)
 
-	// microPhoneScreen: < 280 dp
-	property int normalPhoneScreenDp: 280
-	property int tweenerScreenDp: 448
-	property int mediumScreenDp: 560
-	property int largeScreenDp: 672
+	//Portrait screen width:
+	// microPhoneScreen: < 280 dp // < 5 buttons @ 56dp wide
+	property int normalPhoneScreenDp: 280 //5 buttons @ 56dp wide
+	property int tweenerScreenDp: 448 //8 buttons @ 56dp wide
+
+	//Landscape screen width:
+	property int mediumScreenDp: 640 //10 buttons @ 64dp wide
+	property int largeScreenDp: 960 //15 buttons @ 64dp wide
 
 	//currently divided on button width, rather than Android screen size divisions
-	//if a button is 56dp wide, we get <5, 5, 8, 10, 12 buttons
+	//if a button is 56dp wide, we get <5, 5, 8 buttons for the first three
+	//Tablet buttons should be 64dp wide, giving 10 and 15 buttons for the next two.
+	//Note that the tablet sizes are a *big* jump. This is partly because these
+	//layouts should be landscape instead of portrait. And because they're tablets.
 
 	focus: true
 
@@ -76,6 +82,10 @@ Item {
 
 
 	/* Choose a layout based on the screen size */
+	/* NOTE FOR FUTURE: take the larger of height and width. If it's past the
+	   threshold for the first tablet layout, then lock in landscape orientation
+	   and choose a tablet layout. Otherwise, lock in portrait orientation and
+	   choose a phone / phablet layout */
 	function chooseLayout()
 	{
 		var screenWidth = totalDpWidth();
