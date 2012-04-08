@@ -31,7 +31,16 @@
 #include <QVarLengthArray>
 
 #include <GLee.h>
-#include <OpenGL/gl.h>
+
+#ifdef WIN32
+	#include <GL/gl.h>
+#elif defined(__APPLE__) || defined(__APPLE_CC__)
+	#include <OpenGL/gl.h>
+#else
+	#include <GL/gl.h>
+#endif
+
+
 #include "StelPainter.hpp"
 #include <QtOpenGL>
 //FIXME: After fully migrate to Qt 4.8 this condition need drop
