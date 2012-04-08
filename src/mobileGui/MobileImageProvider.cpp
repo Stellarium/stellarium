@@ -6,52 +6,58 @@
 #include <QDebug>
 
 MobileImageProvider::MobileImageProvider(SystemDisplayInfo::DpiBucket bucket) :
-	QDeclarativeImageProvider(QDeclarativeImageProvider::Pixmap),
+	QDeclarativeImageProvider(QDeclarativeImageProvider::Image),
 	bucket(bucket)
 {
 
 }
 
-QPixmap MobileImageProvider::requestPixmap(const QString &id, QSize *size, const QSize &requestedSize)
+QImage MobileImageProvider::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
 {
 	QString imagePath = findPath(id, bucket);
-	QPixmap pixmap;
+	QImage image;
 	if(imagePath == "")
 	{
 		qWarning() << "MobileImageProvider couldn't find image " << id;
-		pixmap = generatePixmap(findFile(QString(MISSING_IMAGE)), requestedSize);
+		image = generateImage(findFile(QString(MISSING_IMAGE)), requestedSize);
 	}
 	else
 	{
-		pixmap = generatePixmap(imagePath, requestedSize);
-		if(pixmap.size() != requestedSize)
+		image = generateImage(imagePath, requestedSize);
+		if(image.size() != requestedSize)
 		{
+			qDebug() << "not the size we wanted";
 			QString scaledImagePath = findFile(DEFAULT_DPI_PREFIX % id, QString(VECTOR_POSTFIX));
 			if(scaledImagePath != "")
 			{
-				pixmap = generatePixmap(scaledImagePath, requestedSize);
+				image = generateImage(scaledImagePath, requestedSize);
+			}
+			else
+			{
+				image = image.scaled(requestedSize);
 			}
 		}
 	}
 
-	size->setHeight(pixmap.height());
-	size->setWidth(pixmap.width());
-	return pixmap;
+	size->setHeight(image.height());
+	size->setWidth(image.width());
+	return image;
 }
 
-QPixmap MobileImageProvider::generatePixmap(QString path, const QSize &requestedSize)
+QImage MobileImageProvider::generateImage(QString path, const QSize &requestedSize)
 {
 	if(path.endsWith(QString(RASTER_POSTFIX), Qt::CaseInsensitive))
 	{
-		return QPixmap(path);
+		return QImage(path);
 	}
 
-	Q_ASSERT_X(path.endsWith(QString(VECTOR_POSTFIX), Qt::CaseInsensitive), "MobileImageProvider::generatePixmap", QString("has an invalid path! " % path).toAscii());
+	Q_ASSERT_X(path.endsWith(QString(VECTOR_POSTFIX), Qt::CaseInsensitive), "MobileImageProvider::generateImage", QString("has an invalid path! " % path).toAscii());
 
 	QSvgRenderer svgRenderer(path);
-	QPixmap pixmap(requestedSize);
-	svgRenderer.render(new QPainter(&pixmap));
-	return pixmap;
+	QImage image(requestedSize, QImage::Format_ARGB32);
+	image.fill(0);
+	svgRenderer.render(new QPainter(&image));
+	return image;
 }
 
 QString MobileImageProvider::findFile(QString stelPath, QString extension)

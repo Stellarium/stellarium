@@ -73,7 +73,7 @@
 //!		    density bucket (either LOW or XHIGH)
 //!
 //! Instead, just do the lazy thing: use the vector image, if one exists.
-//! Otherwise, just scale the pixmap.
+//! Otherwise, just scale the image.
 //!
 //! Images in the NOSCALE_PREFIX directory are special. These will
 //! _never_ be scaled. You shouldn't include a file in NOSCALE_PREFIX under
@@ -98,14 +98,14 @@ public:
 	//! @param size           will be set to the original size of the image; this will resize the Image element if
 	//!                       its size wasn't already set
 	//! @return               the requested image, at the requested size (if possible)
-	QPixmap requestPixmap ( const QString & id, QSize * size, const QSize & requestedSize );
+	QImage requestImage ( const QString & id, QSize * size, const QSize & requestedSize );
 
 	//! Actually look for the image.
 	//! Uses the strategy described in the class comments, but stops before 8.; instead, returns
 	//! an empty string if it's unable to find anything.
 	//!
-	//! @param id            requested image source, as from requestPixmap
-	//! @param requestedSize the requested size, again as from requestPixmap
+	//! @param id            requested image source, as from requestImage
+	//! @param requestedSize the requested size, again as from requestImage
 	//! @param testBucket    the bucket we're going to base our search around (assume this is the screen's size).
 	//!                      Iff testBucket == this.bucket we might try searching another if we hit case 2. of the
 	//!                      "wrong size" scenario describe in the class comments above.
@@ -122,10 +122,10 @@ public:
 	//! @param extension if not an empty string, check only for this extension
 	QString findFile(QString stelPath, QString extension = "");
 
-	//! Actually generate a pixmap. Either load in a raster image, or render an SVG
+	//! Actually generate an image. Either load in a raster image, or render an SVG
 	//! @param path the path to load the image from
-	//! @return     a pixmap corresponding to the file loaded
-	QPixmap generatePixmap(QString path, const QSize &requestedSize);
+	//! @return     an image corresponding to the file loaded
+	QImage generateImage(QString path, const QSize &requestedSize);
 private:
 	//! The screen device's DPI bucket, wherein we search for an image
 	SystemDisplayInfo::DpiBucket bucket;

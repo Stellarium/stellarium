@@ -12,10 +12,11 @@ Item {
 	//#0099CC
 	property color highlightColor: "#33B5E5"
 	property string action: ""
-	property string labelText: "test"
+	property string labelText: ""
 	property string imageSource: ""
 	property string enabledImageSource: ""
 	property string disabledImageSource: ""
+	property int imageSize
 
 	property real bgOpacity: 0.3
 
@@ -58,6 +59,10 @@ Item {
 	Image {
 		id: image
 		fillMode: Image.PreserveAspectFit
+		sourceSize.width: imageSize
+		sourceSize.height: imageSize
+		anchors.centerIn: parent
+		opacity: 0.8
 		source: imageSource
 	}
 
@@ -70,10 +75,12 @@ Item {
 			if(baseGui.getGuiActions(action).checked)
 			{
 				label.color = "red";
+				image.opacity = 0.8;
 			}
 			else
 			{
 				label.color = "blue";
+				image.opacity = 0.3;
 			}
 		}
 	}
@@ -95,14 +102,15 @@ Item {
 	{
 		target: baseGui.getGuiActions(action)
 		onToggled: {
-			console.log(label.text + " - we've been " + baseGui.getGuiActions(action).checked);
 			if(baseGui.getGuiActions(action).checked)
 			{
 				label.color = "red";
+				image.opacity = 0.8;
 			}
 			else
 			{
 				label.color = "blue";
+				image.opacity = 0.3;
 			}
 		}
 

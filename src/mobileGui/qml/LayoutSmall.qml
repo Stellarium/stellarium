@@ -100,27 +100,31 @@ Item {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
-					labelText: "Srch"
+					imageSource: "image://mobileGui/search"
+					imageSize: dp(32)
 					onClicked: buttonRows.state = "SEARCH"
 				}
 				Button {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
-					labelText: "Play"
+					imageSource: "image://mobileGui/playback"
+					imageSize: dp(32)
 					onClicked: buttonRows.state = "PLAYBACK"
 				}
 				Button {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
-					labelText: "Accl"
+					imageSource: "image://mobileGui/accelerometer"
+					imageSize: dp(32)
 				}
 				Button {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
-					labelText: ". . ."
+					imageSource: "image://mobileGui/menu"
+					imageSize: dp(32)
 				}
 			}
 
@@ -144,28 +148,32 @@ Item {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
-					labelText: "RW"
+					imageSource: "image://mobileGui/rewind"
+					imageSize: dp(32)
 					action: "actionDecrease_Time_Speed"
 				}
 				Button {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
-					labelText: "Play"
+					imageSource: "image://mobileGui/play"
+					imageSize: dp(32)
 					action: "actionSet_Real_Time_Speed"
 				}
 				Button {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
-					labelText: "Now"
+					imageSource: "image://mobileGui/currenttime"
+					imageSize: dp(32)
 					action: "actionReturn_To_Current_Time"
 				}
 				Button {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
-					labelText: "FF"
+					imageSource: "image://mobileGui/fastforward"
+					imageSize: dp(32)
 					action: "actionIncrease_Time_Speed"
 				}
 			}

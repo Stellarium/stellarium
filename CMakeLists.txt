@@ -247,6 +247,7 @@ IF(GUI_MODE STREQUAL "Mobile")
   SET(QT_MIN_VERSION "4.8.0")
   SET(QT_USE_QTDECLARATIVE TRUE) #requires a recentish cmake version
   SET(QT_USE_QTSVG TRUE)
+  SET(QT_USE_QTXML TRUE)
 ENDIF()
 
 FIND_PACKAGE(Qt4 REQUIRED)
@@ -323,8 +324,8 @@ ENDIF()
 
 ########### Set some global variables ###########
 IF(BUILD_FOR_ANDROID)
-  ADD_DEFINITIONS(-DINSTALL_DATADIR="//sdcard/stellarium")
-  ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="//sdcard/stellarium/locale")
+  ADD_DEFINITIONS(-DINSTALL_DATADIR="/sdcard/stellarium")
+  ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="/sdcard/stellarium/locale")
   SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium-apk")
 ELSEIF(UNIX AND NOT WIN32)
 IF(APPLE)
