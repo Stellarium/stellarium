@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-27 21:44+0700\n"
-"PO-Revision-Date: 2012-01-08 09:01+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2012-04-08 14:50+0000\n"
+"Last-Translator: Ioannis Katsenos <Unknown>\n"
 "Language-Team: Greek, Modern (1453-) <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-28 04:38+0000\n"
-"X-Generator: Launchpad (build 15027)\n"
+"X-Launchpad-Export-Date: 2012-04-09 04:37+0000\n"
+"X-Generator: Launchpad (build 15060)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -128,7 +128,7 @@ msgstr "Αξονική κλίση (ημερομηνίας): %1"
 #: src/core/modules/Planet.cpp:153
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "Απόσταση: %1AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:160
 #, no-c-format, qt-format
@@ -138,7 +138,7 @@ msgstr "Απόσταση: %1ΑΜ"
 #: src/core/modules/Planet.cpp:171
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "Φαινόμενη διάμετρος: : %1, με δακτύλιους: %2"
 
 #: src/core/modules/Planet.cpp:177
 #, qt-format
@@ -148,7 +148,7 @@ msgstr "Φαινόμενη διάμετρος: %1"
 #: src/core/modules/Planet.cpp:191
 #, qt-format
 msgid "Phase: %1"
-msgstr ""
+msgstr "Φάση: %1"
 
 #: src/core/modules/Planet.cpp:192
 #, qt-format
@@ -382,7 +382,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:736
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "Εγκαταστάθηκαν όλοι οι διαθέσιμοι αστρικοί κατάλογοι"
 
 #: src/gui/ConfigurationDialog.cpp:741
 #, qt-format
@@ -613,6 +613,8 @@ msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
+"Πολλά άτομα έχουν συνεισφέρει σημαντικά. αλλά δεν είναι πλέον ενεργά. Η "
+"εργασία τους έκανε τη μεγάλη διαφορά σε αυτό το έργο:"
 
 #: src/gui/HelpDialog.cpp:310
 #, qt-format
@@ -892,7 +894,7 @@ msgstr "Αποθήκευση στιγμιότυπου οθόνης"
 
 #: src/gui/StelGui.cpp:179
 msgid "Copy selected object information to clipboard"
-msgstr ""
+msgstr "Αντιγραφή επιλεγμένων πληροφοριών του αντικειμένου στο πρόχειρο"
 
 #: src/gui/StelGui.cpp:181
 msgid "Auto hide horizontal button bar"
@@ -1025,15 +1027,15 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:74
 msgid "selected text"
-msgstr ""
+msgstr "επιλεγμένο κείμενο"
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "clear text"
-msgstr ""
+msgstr "εκκαθάριση κειμένου"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "clear images"
-msgstr ""
+msgstr "εκκαθάριση εικόνων"
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
@@ -1045,11 +1047,11 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:503
 msgid "University of Strasbourg (France)"
-msgstr ""
+msgstr "Πανεπιστήμιο του Στρασβούργου (Γαλλία)"
 
 #: src/gui/SearchDialog.cpp:504
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "Πανεπιστήμιο Harvard (ΗΠΑ)"
 
 #: src/main.cpp:337
 msgid "This system does not support OpenGL."
@@ -1506,22 +1508,22 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
 msgid "Partial Lunar Eclipse"
-msgstr ""
+msgstr "Μερική Έκλειψη Σελήνης"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:184
 msgid "Total Lunar Eclipse"
-msgstr ""
+msgstr "Ολική Έκλειψη Σελήνης"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
 msgid "Screensaver"
-msgstr ""
+msgstr "Προφύλαξη Οθόνης"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:188
 msgid "Solar Eclipse 2009"
-msgstr ""
+msgstr "Ηλιακή Έκλειψη"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:190
@@ -1535,7 +1537,7 @@ msgstr ""
 
 #: src/translations.h:195
 msgid "Look around each installed landscape."
-msgstr ""
+msgstr "Περιήγηση σε κάθε εγκατεστημένο τοπίο"
 
 #: src/translations.h:196
 msgid "Script to demonstrate a partial lunar eclipse."
@@ -1632,7 +1634,7 @@ msgstr "Αζερμπαϊτζάν"
 
 #: src/translations.h:220
 msgid "Bosnia and Herzegowina"
-msgstr ""
+msgstr "Βοσνία-Ερζεγοβίνη"
 
 #: src/translations.h:221
 msgid "Barbados"
@@ -1732,7 +1734,7 @@ msgstr "Ελβετία"
 
 #: src/translations.h:245
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "Ακτή Ελεφαντοστού"
 
 #: src/translations.h:246
 msgid "Cook Islands"
@@ -1828,7 +1830,7 @@ msgstr "Ερυθραία"
 
 #: src/translations.h:269
 msgid "Spain"
-msgstr ""
+msgstr "Ισπανία"
 
 #: src/translations.h:270
 msgid "Ethiopia"
@@ -1844,7 +1846,7 @@ msgstr "Φίτζι"
 
 #: src/translations.h:273
 msgid "Falkland Islands"
-msgstr ""
+msgstr "Νησιά Φώκλαντ"
 
 #: src/translations.h:274
 msgid "Micronesia"
@@ -2112,7 +2114,7 @@ msgstr "Νήσοι Μάρσαλ"
 
 #: src/translations.h:340
 msgid "Macedonia"
-msgstr ""
+msgstr "FYROM"
 
 #: src/translations.h:341
 msgid "Mali"
@@ -2268,7 +2270,7 @@ msgstr "Πουέρτο Ρίκο"
 
 #: src/translations.h:379
 msgid "Palestinian Territories"
-msgstr ""
+msgstr "Παλαιστίνη"
 
 #: src/translations.h:380
 msgid "Portugal"
@@ -2751,11 +2753,11 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:587
 msgid "Extend search with SIMBAD"
-msgstr ""
+msgstr "Εκτεταμένη αναζήτηση με SIMBAD"
 
 #: src/ui_searchDialogGui.h:588
 msgid "Server:"
-msgstr ""
+msgstr "Εξυπηρετητής:"
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
@@ -2841,7 +2843,7 @@ msgstr "Εμφάνιση ατμόσφαιρας"
 #: src/ui_viewDialog.h:1101
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Light pollution:"
-msgstr ""
+msgstr "Φωτορύπανση"
 
 #: src/ui_viewDialog.h:1103
 msgid "pressure, temperature, extinction coefficient"
@@ -3397,11 +3399,12 @@ msgstr ""
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:310
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
+"Σύρετε με το αριστερό πλήκτρο για να μετρήσετε, αριστερό κλικ για εκκαθάριση"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:312
 msgid "Right-clicking changes the end point only."
-msgstr ""
+msgstr "Με δεξί-κλικ αλλάζει μόνο το τελικό σημείο."
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
@@ -3534,13 +3537,13 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
 #, qt-format
 msgid "Telescope #%1"
-msgstr ""
+msgstr "Τηλεσκόπιο #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1486 plugins/Oculars/src/Oculars.cpp:1548
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
 #, qt-format
 msgid "Telescope #%1: %2"
-msgstr ""
+msgstr "Τηλεσκόπιο #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1497
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
@@ -3558,7 +3561,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
 #, qt-format
 msgid "Dimensions: %1"
-msgstr ""
+msgstr "Διαστάσεις: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1525
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
@@ -3574,15 +3577,15 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1736
 msgid "&Telescope"
-msgstr ""
+msgstr "&Τηλεσκόπιο"
 
 #: plugins/Oculars/src/Oculars.cpp:1737
 msgid "&Previous telescope"
-msgstr ""
+msgstr "&Προηγούμενο Τηλεσκόπιο"
 
 #: plugins/Oculars/src/Oculars.cpp:1738
 msgid "&Next telescope"
-msgstr ""
+msgstr "&Επόμενο Τηλεσκόπιο"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
 msgid "Previous ocular"
@@ -3602,23 +3605,23 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Previous telescope"
-msgstr ""
+msgstr "Προηγούμενο Τηλεσκόπιο"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Next telescope"
-msgstr ""
+msgstr "Επόμενο Τηλεσκόπιο"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr ""
+msgstr "Περιστρέψτε το πλαίσιο του αισθητήρα αριστερόστροφα 15 μοίρες"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:258
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr ""
+msgstr "Περιστρέψτε το πλαίσιο του αισθητήρα αριστερόστροφα 5 μοίρες"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:271
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr ""
+msgstr "Περιστρέψτε το πλαίσιο του αισθητήρα αριστερόστροφα 1 μοίρα"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
@@ -3626,15 +3629,15 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr ""
+msgstr "Περιστρέψτε το πλαίσιο του αισθητήρα δεξιόστροφα 1 μοίρα"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:310
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr ""
+msgstr "Περιστρέψτε το πλαίσιο του αισθητήρα δεξιόστροφα 5 μοίρες"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:323
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr ""
+msgstr "Περιστρέψτε το πλαίσιο του αισθητήρα δεξιόστροφα 15 μοίρες"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
 msgid "Effective focal length of the ocular"
@@ -3687,7 +3690,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Interface"
-msgstr ""
+msgstr "Διεπαφή"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:872
 msgid "On-screen control panel"
@@ -3726,7 +3729,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:879
 #: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Focal length:"
-msgstr ""
+msgstr "Εστιακή απόσταση:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "Field stop:"
@@ -3743,11 +3746,11 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Resolution x (pixels):"
-msgstr ""
+msgstr "Οριζόντια Ανάλυση (pixels):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Resolution y (pixels):"
-msgstr ""
+msgstr "Κατακόρυφη Ανάλυση (pixels):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Chip width (mm):"
@@ -3774,7 +3777,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:899
 msgid "Diameter:"
-msgstr ""
+msgstr "Διάμετρος:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Horizontal flip"
@@ -3867,7 +3870,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:288
 msgid "The satellite is visible."
-msgstr ""
+msgstr "Ο δορυφόρος είναι ορατός."
 
 #: plugins/Satellites/src/Satellite.cpp:291
 msgid "The satellite is eclipsed."
@@ -3875,7 +3878,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:294
 msgid "The satellite is not visible"
-msgstr ""
+msgstr "Ο δορυφόρος δεν είναι ορατός."
 
 #: plugins/Satellites/src/Satellite.cpp:320
 #, qt-format
@@ -3888,7 +3891,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
 msgid "Version"
-msgstr ""
+msgstr "Έκδοση"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:263
 msgid ""
@@ -3898,12 +3901,14 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:265
 msgid "Notes for users"
-msgstr ""
+msgstr "Σημειώσεις για τους χρήστες"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:266
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
+"Οι δορυφόροι και οι τροχιές τους είναι ορατά μόνο όταν ο παρατηρητής είναι "
+"στη Γη"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:267
 msgid ""
@@ -3961,7 +3966,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
 msgid "Adding new satellites"
-msgstr ""
+msgstr "Προσθήκη νέων δορυφόρων"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
 msgid ""
@@ -3973,7 +3978,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
-msgstr ""
+msgstr "Τεχνικές σημειώσεις"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
 msgid ""
@@ -3995,7 +4000,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
 msgid "Links"
-msgstr ""
+msgstr "Σύνδεσμοι"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:296
 msgid ""
@@ -4029,34 +4034,34 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:355
 msgid "Updating now..."
-msgstr ""
+msgstr "Ενημέρωση...."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:325
 msgid "Next update: < 1 minute"
-msgstr ""
+msgstr "Επόμενη ενημέρωση:΅< 1 λεπτό"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
 #, qt-format
 msgid "Next update: %1 minutes"
-msgstr ""
+msgstr "Επόμενη ενημέρωση: %1 λεπτά"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
 #, qt-format
 msgid "Next update: %1 hours"
-msgstr ""
+msgstr "Επόμενη ενημέρωση: %1 ώρες"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
 msgid "Update now"
-msgstr ""
+msgstr "Ενημέρωσε τώρα"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:346
 msgid "Update from files"
-msgstr ""
+msgstr "Ενημέρωση από αρχεία"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:358
 msgid "Update error"
-msgstr ""
+msgstr "Σφάλμα ενημέρωσης"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:365
 #, qt-format
@@ -4093,13 +4098,15 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:135
 msgid "Downloading data..."
-msgstr ""
+msgstr "Λήψη δεδομένων..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:136
 msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
 msgstr ""
+"Το Stellarium λαμβάνει δεδομένα από πηγές ενημερώσεων. Παρακαλούμε να "
+"περιμένετε...."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
 msgid "Select TLE source file(s)..."
@@ -4110,7 +4117,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:226
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:227
 msgid "Processing data..."
-msgstr ""
+msgstr "Επεξεργασία δεδομένων...."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:221
 msgid "No data could be downloaded. Try again later."
@@ -4136,7 +4143,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
 msgid "Last update:"
-msgstr ""
+msgstr "Τελευταία ενημέρωση:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:646
 msgid "Update frequency (hours):"
@@ -4203,11 +4210,11 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:680
 msgid "Display orbit line(s) for the selected satellite(s)"
-msgstr ""
+msgstr "Επίδειξη τροχιάς επιλεγμένου(ων) δορυφόρου(ων)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 msgid "Orbit"
-msgstr ""
+msgstr "Τροχιά"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:684
 msgid "Catalog number:"
@@ -4215,11 +4222,11 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:685
 msgid "Description:"
-msgstr ""
+msgstr "Περιγραφή"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:686
 msgid "Groups:"
-msgstr ""
+msgstr "Ομάδες:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:688
 msgid "Comma separated list of groups"
@@ -4235,15 +4242,15 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:695
 msgid "Remove the selected satellites"
-msgstr ""
+msgstr "Απομάκρυνση των επιλεγμένων δορυφόρων"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:698
 msgid "Add more satellites"
-msgstr ""
+msgstr "Προσθήκη δορυφόρων"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:702
 msgid "Save changes"
-msgstr ""
+msgstr "Αποθήκευση αλλαγών"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:707
 msgid ""
@@ -4253,19 +4260,19 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:710
 msgid "Add new source"
-msgstr ""
+msgstr "Προσθήκη νέας πηγής"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Remove selected source"
-msgstr ""
+msgstr "Απομάκρυνση επιλεγμένης πηγής"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:717
 msgid "Sources"
-msgstr ""
+msgstr "Πηγές"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:206
 msgid "More Satellites"
-msgstr ""
+msgstr "Περισσότεροι Δορυφόροι"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:208
 msgid "Get data from update sources"
@@ -4278,12 +4285,12 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:210
 msgid "New satellites"
-msgstr ""
+msgstr "Νέοι δοευφόροι"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:212
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Discard"
-msgstr ""
+msgstr "Παράληψη"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:150
@@ -4320,7 +4327,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
-msgstr ""
+msgstr "Διαμόρφωση Τηλεσκοπίου"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
@@ -4332,19 +4339,19 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:58
 msgid "Connecting"
-msgstr ""
+msgstr "Γίνεται σύνδεση"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:59
 msgid "Connected"
-msgstr ""
+msgstr "Σε σύνδεση"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:60
 msgid "Disconnected"
-msgstr ""
+msgstr "Σε αποσύνδεση"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:61
 msgid "Stopped"
-msgstr ""
+msgstr "Σε διακοπή"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
@@ -4355,7 +4362,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "Έκδοση %1"
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
@@ -4364,15 +4371,15 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Status"
-msgstr ""
+msgstr "Κατάσταση"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Type"
-msgstr ""
+msgstr "Τύπος"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #, qt-format
@@ -4420,7 +4427,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:744
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Start"
-msgstr ""
+msgstr "Έναρξη"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:745
 msgid "Start the selected local telescope"
@@ -4444,15 +4451,15 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:762
 msgid "Disconnect"
-msgstr ""
+msgstr "Αποσύνδεση"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:763
 msgid "Disconnect from the selected telescope"
-msgstr ""
+msgstr "Αποσύνδεση από το επιλεγμένο τηλεσκόπιο"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:784
 msgid "Select a directory"
-msgstr ""
+msgstr "Επιλογή φακέλου"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:281
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
@@ -4466,7 +4473,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:284
 msgid "There are no active devices."
-msgstr ""
+msgstr "Δεν υπάρχουν ενεργές συσκευές"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:285
 msgid "Slew telescope to coordinates"
