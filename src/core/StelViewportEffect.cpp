@@ -195,7 +195,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		}
 		Q_ASSERT(file.error()!=QFile::NoError);
 		in >> max_x >> max_y;
-        Q_ASSERT(in.status()==QTextStream::Ok && max_x>0 && max_y>0);
+		Q_ASSERT(in.status()==QTextStream::Ok && max_x>0 && max_y>0);
 		step_x = screen_w / (double)(max_x-0.5);
 		step_y = screen_h/ (double)max_y;
 		texture_point_array = new Vec2f[(max_x+1)*(max_y+1)];
