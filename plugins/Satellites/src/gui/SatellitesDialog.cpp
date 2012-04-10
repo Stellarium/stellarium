@@ -51,13 +51,13 @@ SatellitesDialog::~SatellitesDialog()
 		delete updateTimer;
 		updateTimer = NULL;
 	}
-	
+
 	if (importWindow)
 	{
 		delete importWindow;
 		importWindow = 0;
 	}
-	
+
 	delete ui;
 }
 
