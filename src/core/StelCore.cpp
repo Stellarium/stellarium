@@ -110,7 +110,9 @@ void StelCore::init()
 	QString presetTimeStr = conf->value("navigation/preset_sky_time",2451545.).toString();
 	presetSkyTime = presetTimeStr.toDouble(&ok);
 	if (ok)
+	{
 		qDebug() << "navigation/preset_sky_time is a double - treating as jday:" << presetSkyTime;
+	}
 	else
 	{
 		qDebug() << "navigation/preset_sky_time was not a double, treating as string date:" << presetTimeStr;
@@ -792,7 +794,7 @@ void StelCore::setPresetSkyTime(QDateTime dt)
 
 void StelCore::addHour()
 {
-	addSolarDays(0.04166666666666666667);
+	addSolarDays(JD_HOUR);
 }
 
 void StelCore::addDay()
@@ -817,7 +819,7 @@ void StelCore::addSiderealWeek()
 
 void StelCore::subtractHour()
 {
-	addSolarDays(-0.04166666666666666667);
+	addSolarDays(-JD_HOUR);
 }
 
 void StelCore::subtractDay()
