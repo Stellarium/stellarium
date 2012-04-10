@@ -211,7 +211,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 				float x,y;
 				in >> x >> y >> vertex_point.color[0] >> vertex_point.color[1] >> vertex_point.color[2];
 				vertex_point.color[3] = 1.0f;
-                Q_ASSERT(in.status()!=QTextStream::Ok);
+				Q_ASSERT(in.status()!=QTextStream::Ok);
 				texture_point[0] = (viewport_texture_offset[0]+x)/texture_wh;
 				texture_point[1] = (viewport_texture_offset[1]+y)/texture_wh;
 			}
