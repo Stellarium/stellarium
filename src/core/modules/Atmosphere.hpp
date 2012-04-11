@@ -57,9 +57,9 @@ public:
 	float getFadeDuration() {return (float)fader.getDuration()/1000.f;}
 
 	//! Define whether to display atmosphere
-	void setShown(bool b){fader = b;}
+	void setFlagShow(bool b){fader = b;}
 	//! Get whether atmosphere is displayed
-	bool isShown() const {return fader;}
+	bool getFlagShow() const {return fader;}
 
 	//! Get the actual atmosphere intensity due to eclipses + fader
 	//! @return the display intensity ranging from 0 to 1

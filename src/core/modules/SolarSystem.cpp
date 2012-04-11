@@ -61,6 +61,8 @@ SolarSystem::SolarSystem() : moonScale(1.),	flagOrbits(false), flagLightTravelTi
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 	setObjectName("SolarSystem");
+
+	nMapShader = 0;
 }
 
 void SolarSystem::setFontSize(float newFontSize)
@@ -85,12 +87,13 @@ SolarSystem::~SolarSystem()
 
 	delete allTrails;
 	allTrails = NULL;
-	
+
 	// Get rid of circular reference between the shared pointers which prevent proper destruction of the Planet objects.
 	foreach (PlanetP p, systemPlanets)
 	{
 		p->satellites.clear();
 	}
+	delete nMapShader;
 }
 
 /*************************************************************************
@@ -131,7 +134,7 @@ void SolarSystem::init()
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
-	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), 
+	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur4.png");
@@ -140,6 +143,20 @@ void SolarSystem::init()
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+
+	nMapShader = new StelShader;
+
+	//using stellarium find path functions thank you alexwolf for noticing and corrections :-)
+    QStringList lst =  QStringList(StelFileMgr::findFileInAllPaths("data/shaders/",
+          (StelFileMgr::Flags)(StelFileMgr::Directory)));
+	QByteArray vshader = (QString(lst.first()) + "nmap.v.glsl").toLocal8Bit();
+	QByteArray fshader = (QString(lst.first()) + "nmap.f.glsl").toLocal8Bit();
+
+	if (!(nMapShader->load(vshader.data(), fshader.data())))
+	{
+			qWarning() << "Could not load shader files";
+	        nMapShader = 0;
+	}
 }
 
 void SolarSystem::recreateTrails()
@@ -784,8 +801,14 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			               pd.value(secname+"/radius").toDouble()/AU,
 			               pd.value(secname+"/oblateness", 0.0).toDouble(),
 			               StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
+			               StelUtils::strToVec3f(pd.value(secname+"/cloud_color").toString()),
+			               pd.value(secname+"/cloud_density").toFloat(),
+			               pd.value(secname+"/cloud_scale").toFloat(),
+			               pd.value(secname+"/cloud_sharpness").toFloat(),
+			               StelUtils::strToVec3f(pd.value(secname+"/cloud_vel").toString()),
 			               pd.value(secname+"/albedo").toFloat(),
 			               pd.value(secname+"/tex_map").toString(),
+			               pd.value(secname+"/normal_map").toString(),
 			               posfunc,
 			               userDataPtr,
 			               osculatingFunc,
@@ -1042,12 +1065,16 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 	v.normalize();
 	double cosLimFov = std::cos(limitFov * M_PI/180.);
 	Vec3d equPos;
+	double cosAngularSize;
 
 	foreach (const PlanetP& p, systemPlanets)
 	{
 		equPos = p->getEquinoxEquatorialPos(core);
 		equPos.normalize();
-		if (equPos*v>=cosLimFov)
+
+		cosAngularSize = std::cos(p->getSpheroidAngularSize(core) * M_PI/180.);
+
+		if (equPos*v>=std::min(cosLimFov, cosAngularSize))
 		{
 			result.append(qSharedPointerCast<StelObject>(p));
 		}
@@ -1284,15 +1311,20 @@ QStringList SolarSystem::getAllPlanetLocalizedNames() const
 
 void SolarSystem::reloadPlanets()
 {
-	//Save flag states
+	// Save flag states
 	bool flagScaleMoon = getFlagMoonScale();
 	float moonScale = getMoonScale();
 	bool flagPlanets = getFlagPlanets();
 	bool flagHints = getFlagHints();
 	bool flagLabels = getFlagLabels();
 	bool flagOrbits = getFlagOrbits();
+	
+	// Save observer location (fix for LP bug # 969211)
+	// TODO: This can probably be done better with a better understanding of StelObserver --BM
+	StelCore* core = StelApp::getInstance().getCore();
+	StelLocation loc = core->getCurrentLocation();
 
-	//Unload all Solar System objects
+	// Unload all Solar System objects
 	selected.clear();//Release the selected one
 	foreach (Orbit* orb, orbits)
 	{
@@ -1315,15 +1347,18 @@ void SolarSystem::reloadPlanets()
 		p.clear();
 	}
 	systemPlanets.clear();
-	//Memory leak? What's the proper way of cleaning shared pointers?
+	// Memory leak? What's the proper way of cleaning shared pointers?
 
-	//Re-load the ssystem.ini file
+	// Re-load the ssystem.ini file
 	loadPlanets();
 	computePositions(StelUtils::getJDFromSystem());
 	setSelected("");
 	recreateTrails();
+	
+	// Restore observer location
+	core->moveObserverTo(loc, 0., 0.);
 
-	//Restore flag states
+	// Restore flag states
 	setFlagMoonScale(flagScaleMoon);
 	setMoonScale(moonScale);
 	setFlagPlanets(flagPlanets);
@@ -1331,6 +1366,6 @@ void SolarSystem::reloadPlanets()
 	setFlagLabels(flagLabels);
 	setFlagOrbits(flagOrbits);
 
-	//Restore translations
+	// Restore translations
 	updateI18n();
 }

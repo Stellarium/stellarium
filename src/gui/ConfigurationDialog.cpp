@@ -310,12 +310,7 @@ void ConfigurationDialog::cursorTimeOutChanged()
 void ConfigurationDialog::browseForScreenshotDir()
 {
 	QString oldScreenshorDir = StelFileMgr::getScreenshotDir();
-	#ifdef Q_OS_MAC
-	//work-around for Qt bug -  http://bugreports.qt.nokia.com/browse/QTBUG-16722
-	QString newScreenshotDir = QFileDialog::getExistingDirectory(NULL, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::DontUseNativeDialog);
-	#else
 	QString newScreenshotDir = QFileDialog::getExistingDirectory(NULL, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::ShowDirsOnly);
-	#endif
 
 	if (!newScreenshotDir.isEmpty()) {
 		// remove trailing slash
@@ -415,6 +410,9 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("landscape/flag_atmosphere", lmgr->getFlagAtmosphere());
 	conf->setValue("landscape/flag_fog", lmgr->getFlagFog());
 	conf->setValue("stars/init_bortle_scale", core->getSkyDrawer()->getBortleScale());
+        conf->setValue("landscape/atmospheric_extinction_coefficient", core->getSkyDrawer()->getExtinctionCoefficient());
+        conf->setValue("landscape/pressure_mbar", core->getSkyDrawer()->getAtmospherePressure());
+        conf->setValue("landscape/temperature_C", core->getSkyDrawer()->getAtmosphereTemperature());
 
 	// view dialog / starlore tab
 	StelApp::getInstance().getSkyCultureMgr().setDefaultSkyCultureID(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());

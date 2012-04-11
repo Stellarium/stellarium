@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2009 Matthew Gates
+ * Copyright (C) 2009, 2012 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ bool Satellite::orbitLinesFlag = true;
 
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
-		: initialized(false), visible(true), newlyAdded(false), hintColor(0.0,0.0,0.0), lastUpdated(), pSatWrapper(NULL)
+		: initialized(false), visible(true), newlyAdded(false), orbitValid(false), hintColor(0.0,0.0,0.0), lastUpdated(), pSatWrapper(NULL)
 {
 	// return initialized if the mandatory fields are not present
 	if (identifier.isEmpty())
@@ -140,13 +140,20 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 		lastUpdated = QDateTime::fromString(map.value("lastUpdated").toString(),
 		                                    Qt::ISODate);
 	}
+	orbitValid = true;
 	initialized = true;
+
+	update(0.);
 }
 
 Satellite::~Satellite()
 {
 	if (pSatWrapper != NULL)
+	{
+
 		delete pSatWrapper;
+		pSatWrapper = NULL;
+	}
 }
 
 double Satellite::roundToDp(float n, int dp)
@@ -219,11 +226,14 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	{
 		QString catalogNumbers;
 		if (internationalDesignator.isEmpty())
-			catalogNumbers = QString("Catalog #: %1")
-			                 .arg(id);
+			catalogNumbers = QString("%1: %2")
+					 .arg(q_("Catalog #"))
+					 .arg(id);
 		else
-			catalogNumbers = QString("Catalog #: %1; International Designator: %2")
+			catalogNumbers = QString("%1: %2; %3: %4")
+					 .arg(q_("Catalog #"))
 			                 .arg(id)
+					 .arg(q_("International Designator"))
 			                 .arg(internationalDesignator);
 		oss << catalogNumbers << "<br/><br/>";
 	}
@@ -321,6 +331,11 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	return str;
 }
 
+Vec3d Satellite::getJ2000EquatorialPos(const StelCore* core) const
+{
+	return core->altAzToJ2000(elAzPosition);;
+}
+
 Vec3f Satellite::getInfoColor(void) const
 {
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : hintColor;
@@ -364,7 +379,7 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 
 void Satellite::update(double)
 {
-	if (pSatWrapper)
+	if (pSatWrapper && orbitValid)
 	{
 		epochTime = StelApp::getInstance().getCore()->getJDay();
 
@@ -381,10 +396,9 @@ void Satellite::update(double)
 			// we might end up with a problem - usually a crash of Stellarium
 			// because of a div/0 or something.  To prevent this, we turn off
 			// the satellite.
-			qWarning() << "Satellite with invalid orbit has been removed:" << name;
-			initialized = false;
-			visible = false;
-			orbitVisible = false;
+			qWarning() << "Satellite has invalid orbit:" << name;
+			orbitValid = false;
+			return;
 		}
 
 		elAzPosition             = pSatWrapper->getAltAz();
@@ -441,8 +455,10 @@ QString Satellite::extractInternationalDesignator(const QString& tle1)
 
 void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 {
-	XYZ = core->altAzToJ2000(elAzPosition);
-	StelApp::getInstance().getVisionModeNight() ? glColor4f(0.6,0.0,0.0,1.0) : glColor4f(hintColor[0],hintColor[1],hintColor[2], Satellite::hintBrightness);
+	XYZ = getJ2000EquatorialPos(core);
+	Vec3f drawColor;
+	(visibility==RADAR_NIGHT) ? drawColor = Vec3f(0.2f,0.2f,0.2f) : drawColor = hintColor;
+	StelApp::getInstance().getVisionModeNight() ? glColor4f(0.6,0.0,0.0,1.0) : glColor4f(drawColor[0],drawColor[1],drawColor[2], Satellite::hintBrightness);
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 

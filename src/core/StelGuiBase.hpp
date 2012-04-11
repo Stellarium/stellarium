@@ -56,7 +56,8 @@ public:
 	//! @param helpGroup hint on how to group the text in the help window
 	//! @param checkable whether the action should be checkable
 	//! @param autoRepeat whether the action should be autorepeated
-	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false);
+	//! @param global whether the action should be global (affect in dialogs)
+	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false, bool global=false);
 
         //! Remove an action from the gui and delete the action
         //! @param action the action to remove

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>624</width>
-    <height>434</height>
+    <width>700</width>
+    <height>452</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -332,9 +332,6 @@
          <property name="margin">
           <number>0</number>
          </property>
-         <property name="spacing">
-          <number>6</number>
-         </property>
          <item row="2" column="0" colspan="3">
           <widget class="QFrame" name="frame_3">
            <property name="minimumSize">
@@ -431,11 +428,11 @@
             <enum>QFrame::Raised</enum>
            </property>
            <layout class="QGridLayout" name="gridLayout_4">
-            <property name="margin">
-             <number>0</number>
-            </property>
             <property name="horizontalSpacing">
              <number>6</number>
+            </property>
+            <property name="margin">
+             <number>0</number>
             </property>
             <item row="0" column="0">
              <widget class="QLabel" name="label_5">
@@ -448,7 +445,7 @@
              <widget class="AngleSpinBox" name="latitudeSpinBox">
               <property name="minimumSize">
                <size>
-                <width>140</width>
+                <width>180</width>
                 <height>24</height>
                </size>
               </property>

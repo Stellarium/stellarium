@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2009 Matthew Gates
+ * Copyright (C) 2009, 2012 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,10 +80,7 @@ public:
 	//! - Extra2: Comms frequencies, modulation types and so on.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const
-	{
-		return XYZ;
-	}
+	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const;
 	virtual float getVMagnitude(const StelCore* core=NULL, bool withExtinction=false) const;
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual QString getNameI18n(void) const
@@ -129,8 +126,9 @@ private:
 private:
 	bool initialized;
 	bool visible;
-	bool orbitVisible;  //draw orbit enabled/disabled
+	bool orbitVisible;  // draw orbit enabled/disabled
 	bool newlyAdded;
+	bool orbitValid;
 
 	//! Identifier of the satellite, must be unique within the list.
 	//! Currently, the Satellite Catalog Number is used. It is contained in both

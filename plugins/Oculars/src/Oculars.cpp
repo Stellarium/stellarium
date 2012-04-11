@@ -1506,7 +1506,7 @@ void Oculars::paintText(const StelCore* core)
 			double fov = ((int)(ocular->actualFOV(telescope) * 10000.00)) / 10000.0;
 			QString fovString = QString::number(fov);
 			fovString.append(QChar(0x00B0));//Degree sign
-			QString fovLabel = QString(q_("FOV: %1")).append(fovString);
+			QString fovLabel = QString(q_("FOV: %1")).arg(fovString);
 			painter.drawText(xPosition, yPosition, fovLabel);
 		}
 	}
@@ -1554,7 +1554,6 @@ void Oculars::paintText(const StelCore* core)
 			                       .arg(telescopeName);
 		}
 		painter.drawText(xPosition, yPosition, telescopeNumberLabel);
-		yPosition-=lineHeight;
 	}
 	
 }

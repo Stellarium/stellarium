@@ -34,7 +34,6 @@ class StelToneReproducer;
 class StarMgr;
 class Constellation;
 class StelProjector;
-class StelNavigator;
 class StelPainter;
 
 //! @class ConstellationMgr
@@ -81,8 +80,8 @@ class ConstellationMgr : public StelObjectModule
 			   WRITE setFlagLines
 			   NOTIFY linesDisplayedChanged)
 	Q_PROPERTY(bool namesColor
-			   READ getNamesColor
-			   WRITE setNamesColor
+			   READ getLabelsColor
+			   WRITE setLabelsColor
 			   NOTIFY namesColorChanged)
 	Q_PROPERTY(bool namesDisplayed
 			   READ getFlagLabels
@@ -175,9 +174,9 @@ public slots:
 	bool getFlagLines(void) const;
 
 	//! Set label color for names
-	void setNamesColor(const Vec3f& color);
+	void setLabelsColor(const Vec3f& color);
 	//! Get label color for names
-	Vec3f getNamesColor() const;
+	Vec3f getLabelsColor() const;
 
 	//! Set whether constellation names will be displayed
 	void setFlagLabels(bool displayed);
