@@ -23,6 +23,10 @@
 #define _PLANET_HPP_
 
 #include <QString>
+//FIXME: After fully migrate to Qt 4.8 this condition need drop
+#if QT_VERSION>=0x040800
+#include <QGLFunctions>
+#endif
 
 #include "StelObject.hpp"
 #include "StelProjector.hpp"
@@ -81,7 +85,13 @@ private:
 };
 
 
-class Planet : public StelObject
+class Planet
+//FIXME: After fully migrate to Qt 4.8 this condition need drop
+#if QT_VERSION>=0x040800
+		: public StelObject, protected QGLFunctions
+#else
+		: public StelObject
+#endif
 {
 public:
 	friend class SolarSystem;
