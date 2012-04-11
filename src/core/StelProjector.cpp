@@ -280,21 +280,13 @@ Vec3d StelProjector::viewPortIntersect(const Vec3d& p1, const Vec3d& p2) const
 	return v;
 }
 
-//! Project the vector v from the current frame into the viewport.
-//! @param v the vector in the current frame.
-//! @param win the projected vector in the viewport 2D frame.
-//! @return true if the projected coordinate is valid.
-inline bool StelProjector::project(const Vec3d& v, Vec3d& win) const
+bool StelProjector::project(const Vec3d& v, Vec3d& win) const
 {
 	win = v;
 	return projectInPlace(win);
 }
 
-//! Project the vector v from the current frame into the viewport.
-//! @param v the vector in the current frame.
-//! @param win the projected vector in the viewport 2D frame.
-//! @return true if the projected coordinate is valid.
-inline bool StelProjector::project(const Vec3f& v, Vec3f& win) const
+bool StelProjector::project(const Vec3f& v, Vec3f& win) const
 {
 	win = v;
 	return projectInPlace(win);
@@ -328,10 +320,7 @@ void StelProjector::project(int n, const Vec3f* in, Vec3f* out)
 	}
 }
 
-//! Project the vector v from the current frame into the viewport.
-//! @param vd the vector in the current frame.
-//! @return true if the projected coordinate is valid.
-inline bool StelProjector::projectInPlace(Vec3d& vd) const
+bool StelProjector::projectInPlace(Vec3d& vd) const
 {
 	modelViewTransform->forward(vd);
 	Vec3f v(vd[0], vd[1], vd[2]);
@@ -346,10 +335,7 @@ inline bool StelProjector::projectInPlace(Vec3d& vd) const
 	return rval;
 }
 
-//! Project the vector v from the current frame into the viewport.
-//! @param v the vector in the current frame.
-//! @return true if the projected coordinate is valid.
-inline bool StelProjector::projectInPlace(Vec3f& v) const
+bool StelProjector::projectInPlace(Vec3f& v) const
 {
 	modelViewTransform->forward(v);
 	const bool rval = forward(v);
