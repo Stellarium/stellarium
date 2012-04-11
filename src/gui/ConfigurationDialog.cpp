@@ -645,7 +645,7 @@ void ConfigurationDialog::pluginEnableCurrentSelection()
         QString module = mgr->getIdForName(s);
 
         if (!module.isEmpty())
-        {
+	{
                 qDebug() << "Loading module" << module << "(" << s << ")";
                 StelModule* m = mgr->loadPlugin(module/*,init=true, implies register*/);
                 if (m != NULL)
@@ -659,19 +659,19 @@ void ConfigurationDialog::pluginEnableCurrentSelection()
 
 void ConfigurationDialog::pluginDisableCurrentSelection()
 {
-        QString s = ui->pluginsListWidget->currentItem()->text();
-        if (s.isEmpty())
-            return;
+	QString s = ui->pluginsListWidget->currentItem()->text();
+	if (s.isEmpty())
+		return;
 
-        StelModuleMgr *mgr = &StelApp::getInstance().getModuleMgr();
-        QString module = mgr->getIdForName(s);
+	StelModuleMgr *mgr = &StelApp::getInstance().getModuleMgr();
+	QString module = mgr->getIdForName(s);
 
-        if (!module.isEmpty())
-        {
-                qDebug() << "Unloading module" << module << "(" << s << ")";
-                mgr->unloadModule(module, /*alsoDelete=*/true);
-                pluginsSelectionChanged(s);
-        }
+	if (!module.isEmpty())
+	{
+		qDebug() << "Unloading module" << module << "(" << s << ")";
+		mgr->unloadModule(module, /*alsoDelete=*/true);
+		pluginsSelectionChanged(s);
+	}
 }
 
 void ConfigurationDialog::runScriptClicked(void)

@@ -63,6 +63,12 @@ public:
         //! @param action the action to remove
         void removeGuiAction(QAction* action);
 
+	//! Remove an action by name. This operation will remove an action, it's keyboard shortcuts and
+	//! any state from Stellarium.  The intention is to use this when un-loading plugins.
+	//! @param actionName the identifier for the action to be removed
+	//! @returns true if the named action was found and removed, false otherwise
+	virtual bool removeGuiAction(const QString& actionName);
+
 	//! Get a pointer on an action managed by the GUI
 	//! @param actionName qt object name for this action
 	//! @return a pointer on the QAction object or NULL if don't exist

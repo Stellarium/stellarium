@@ -83,32 +83,33 @@ CompassMarks::CompassMarks()
 }
 
 CompassMarks::~CompassMarks()
-{
-	// TODO (requires work in core API)
-	// 1. Remove button from toolbar
-        // 2. Remove action from GUI; done at deinit()
-        StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-        Q_ASSERT(gui);
-        gui->getButtonBar()->removeButton(toolbarButton, "065-pluginsGroup");
-	// 3. Delete GUI objects.  I'll leave this commented right now because
-	// unloading (when implemented) might cause problems if we do it before we
-	// can do parts 1 and 2.
-        if (pxmapGlow!=NULL)
-                delete pxmapGlow;
+{	
+	// 2. Remove button from toolbar
+	if (toolbarButton != NULL)
+	{
+		toolbarButton->deleteLater();
+		toolbarButton = NULL;
+	}
 
-        if (pxmapOnIcon!=NULL)
-                delete pxmapOnIcon;
+ 	if (pxmapGlow!=NULL)
+	{
+ 		delete pxmapGlow;
+		pxmapGlow = NULL;
+	}
 
-        if (pxmapOffIcon!=NULL)
-                delete pxmapOffIcon;
+ 	if (pxmapOnIcon!=NULL)
+	{
+ 		delete pxmapOnIcon;
+		pxmapOnIcon = NULL;
+	}
+ 	if (pxmapOffIcon!=NULL)
+	{
+ 		delete pxmapOffIcon;
+		pxmapOffIcon = NULL;
+	}
 
-        if (toolbarButton!=NULL)
-                delete toolbarButton;
-
-	// BTW, the above remark is from 2009 --BM
-	// See http://stellarium.svn.sourceforge.net/viewvc/stellarium/trunk/extmodules/CompassMarks/src/CompassMarks.cpp?r1=4333&r2=4332&pathrev=4333
 }
-
+ 
 //! Determine which "layer" the plugin's drawing will happen on.
 double CompassMarks::getCallOrder(StelModuleActionName actionName) const
 {
@@ -143,9 +144,12 @@ void CompassMarks::init()
 
 void CompassMarks::deinit()
 {
-        StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-        Q_ASSERT(gui);
-        gui->removeGuiAction(gui->getGuiActions("actionShow_Compass_Marks"));
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	bool marksDisplayed = gui->getGuiActions("actionShow_Compass_Marks")->isChecked();
+	gui->getGuiActions("actionShow_Compass_Marks")->setChecked(false);
+	gui->getGuiActions("actionShow_Cardinal_Points")->setChecked(marksDisplayed);
+	gui->removeGuiAction("actionShow_Compass_Marks");
+	gui->getButtonBar()->hideButton("actionShow_Compass_Marks");
 }
 
 //! Draw any parts on the screen which are for our module
