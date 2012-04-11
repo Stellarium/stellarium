@@ -84,6 +84,10 @@ Planet::Planet(const QString& englishName,
 	  hidden(hidden),
 	  atmosphere(hasAtmosphere)
 {
+	//FIXME: After fully migrate to Qt 4.8 this condition need drop
+	#if QT_VERSION>=0x040800
+	initializeGLFunctions();
+	#endif
 	texMapName = atexMapName;
 	lastOrbitJD =0;
 	deltaJD = StelCore::JD_SECOND;
@@ -129,6 +133,10 @@ Planet::Planet(const QString& englishName,
 	  hidden(hidden),
 	  atmosphere(hasAtmosphere)
 {
+	//FIXME: After fully migrate to Qt 4.8 this condition need drop
+	#if QT_VERSION>=0x040800
+	initializeGLFunctions();
+	#endif
 	texMapName = atexMapName;
 	normalMapName = anormalMapName;
 	lastOrbitJD =0;
@@ -181,6 +189,10 @@ Planet::Planet(const QString& englishName,
 	  hidden(hidden),
 	  atmosphere(hasAtmosphere)
 {
+	//FIXME: After fully migrate to Qt 4.8 this condition need drop
+	#if QT_VERSION>=0x040800
+	initializeGLFunctions();
+	#endif
 	texMapName = atexMapName;
 	normalMapName = anormalMapName;
 
