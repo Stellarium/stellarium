@@ -675,6 +675,10 @@ SET(tests_testStelSphereGeometry_SRCS
 	core/StelJsonParser.cpp
 	core/StelUtils.cpp
 	core/StelUtils.hpp
+	core/StelProjector.cpp
+	core/StelProjector.hpp
+	core/StelTranslator.cpp
+	core/StelTranslator.hpp
 	${glues_lib_SRCS})
 QT4_WRAP_CPP(testStelSphereGeometry_MOC_SRCS tests/testStelSphereGeometry.hpp)
 ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS} ${testStelSphereGeometry_MOC_SRCS})
@@ -696,6 +700,10 @@ SET(tests_testStelSphericalIndex_SRCS
 	core/StelJsonParser.cpp
 	core/StelUtils.cpp
 	core/StelUtils.hpp
+	core/StelProjector.cpp
+	core/StelProjector.hpp
+	core/StelTranslator.cpp
+	core/StelTranslator.hpp
 	${glues_lib_SRCS})
 QT4_WRAP_CPP(tests_testStelSphericalIndex_MOC_SRCS tests/testStelSphericalIndex.hpp)
 ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS} ${tests_testStelSphericalIndex_MOC_SRCS})
