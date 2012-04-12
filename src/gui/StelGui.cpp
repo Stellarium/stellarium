@@ -27,6 +27,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelIniParser.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelMainWindow.hpp"
 #include "StelObjectMgr.hpp"
@@ -99,6 +100,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
+	loadShortcuts();
 	QString group = N_("Display Options");
 	addGuiActions("actionShow_Constellation_Lines", N_("Constellation lines"), "C", group, true, false);
 	addGuiActions("actionShow_Constellation_Art", N_("Constellation art"), "R", group, true, false);
@@ -1136,4 +1138,77 @@ void StelGui::landscapeDisplayedUpdated(const bool displayed)
 void StelGui::copySelectedObjectInfo(void)
 {
 	QApplication::clipboard()->setText(skyGui->infoPanel->getSelectedText());
+}
+
+bool StelGui::loadShortcuts(const QString &filePath)
+{
+	QSettings scs(filePath, StelIniFormat);
+	if (scs.status() != QSettings::NoError)
+	{
+		qWarning() << "ERROR while parsing" << filePath;
+		return false;
+	}
+	// Shortcuts format example:
+	// [search]
+	// name = actionShow_Search_Window_Global
+	// text = Search window
+	// shortcuts = F3; Ctrl+F
+	// group = Display Options
+	// checkable = 1
+	// autorepeat = 0
+	// global = 1
+	QStringList sections = scs.childGroups();
+	foreach (QString section, sections)
+	{
+		QString name = scs.value(section + "/name").toString();
+		QString text = scs.value(section + "/text").toString();
+		QString shortcuts = scs.value(section + "/shortcuts").toString();
+		QString group = scs.value(section + "/group").toString();
+		// TODO: add true/false, on/off, yes/no, y/n cases (not only 1/0) for bool values
+		bool checkable = scs.value(section + "/checkable", QVariant("1")).toString().toInt();
+		bool autorepeat = scs.value(section + "/autorepeat", QVariant("0")).toString().toInt();
+		bool global = scs.value(section + "/global", QVariant("0")).toString().toInt();
+		if (name == "")
+		{
+			qWarning() << "Name missing in " << section << " shortcut, parsing wasn't done";
+			continue;
+		}
+		qDebug() << "Shortcut " << name << ", shortcuts: " << shortcuts << endl;
+		addGuiActions(name, text, shortcuts, group, checkable, autorepeat, global);
+	}
+	return true;
+}
+
+void StelGui::loadShortcuts()
+{
+	qDebug() << "Loading shortcuts ...";
+	QStringList shortcutFiles;
+	try
+	{
+		shortcutFiles = StelFileMgr::findFileInAllPaths("data/shortcuts.ini");
+	}
+	catch(std::runtime_error& e)
+	{
+		qWarning() << "ERROR while loading shortcuts.ini (unable to find data/shortcuts.ini): " << e.what() << endl;
+		return;
+	}
+	foreach (QString shortcutFile, shortcutFiles)
+	{
+		if (loadShortcuts(shortcutFile))
+			break;
+		else
+		{
+			if (shortcutFile.contains(StelFileMgr::getUserDir()))
+			{
+				QString newName = QString("%1/data/shortcuts-%2.ini").arg(StelFileMgr::getUserDir()).arg(QDateTime::currentDateTime().toString("yyyyMMddThhmmss"));
+				if (QFile::rename(shortcutFile, newName))
+					qWarning() << "Invalid shortcuts file" << shortcutFile << "has been renamed to" << newName;
+				else
+				{
+					qWarning() << "Invalid shortcuts file" << shortcutFile << "cannot be removed!";
+					qWarning() << "Please either delete it, rename it or move it elsewhere.";
+				}
+			}
+		}
+	}
 }
