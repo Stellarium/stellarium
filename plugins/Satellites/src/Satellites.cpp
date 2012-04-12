@@ -57,16 +57,16 @@ StelModule* SatellitesStelPluginInterface::getStelModule() const
 
 StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 {
-		// Allow to load the resources when used as a static plugin
-		Q_INIT_RESOURCE(Satellites);
+	// Allow to load the resources when used as a static plugin
+	Q_INIT_RESOURCE(Satellites);
 
-		StelPluginInfo info;
-		info.id = "Satellites";
-		info.displayedName = N_("Satellites");
-		info.authors = "Matthew Gates, Jose Luis Canales";
-		info.contact = "http://stellarium.org/";
-		info.description = N_("Prediction of artificial satellite positions in Earth orbit based on NORAD TLE data");
-		return info;
+	StelPluginInfo info;
+	info.id = "Satellites";
+	info.displayedName = N_("Satellites");
+	info.authors = "Matthew Gates, Jose Luis Canales";
+	info.contact = "http://stellarium.org/";
+	info.description = N_("Prediction of artificial satellite positions in Earth orbit based on NORAD TLE data");
+	return info;
 }
 
 Q_EXPORT_PLUGIN2(Satellites, SatellitesStelPluginInterface)
@@ -82,31 +82,62 @@ Satellites::Satellites()
 
 void Satellites::deinit()
 {
+	// deselect any selected satellite
+	if (!GETSTELMODULE(StelObjectMgr)->getSelectedObject("Pulsar").empty())
+		GETSTELMODULE(StelObjectMgr)->unSelect();
+
+	// delete the actual Satellite list
+	satellites.clear();
+
+	// delete actions
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	Q_ASSERT(gui);
+	gui->getGuiActions("actionShow_Satellite_ConfigDialog_Global")->setChecked(false);
+	gui->removeGuiAction(gui->getGuiActions("actionShow_Satellite_ConfigDialog_Global"));
+
+	gui->getGuiActions("actionShow_Satellite_Labels")->setChecked(false);
+	gui->removeGuiAction(gui->getGuiActions("actionShow_Satellite_Labels"));
+
+	gui->getButtonBar()->hideButton("actionShow_Satellite_Hints");
+	gui->getGuiActions("actionShow_Satellite_Hints")->setChecked(false);
+	gui->removeGuiAction(gui->getGuiActions("actionShow_Satellite_Hints"));
+
+	// unregister module so that it won't be used in searches after it's been uninitialized
+	GETSTELMODULE(StelObjectMgr)->unregisterStelObjectMgr(this);
 	Satellite::hintTexture.clear();
 	texPointer.clear();
-        StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-        Q_ASSERT(gui);
-        gui->removeGuiAction(gui->getGuiActions("actionShow_Satellite_ConfigDialog"));
-        gui->removeGuiAction(gui->getGuiActions("actionShow_Satellite_Labels"));
-        gui->removeGuiAction(gui->getGuiActions("actionShow_Satellite_Hints"));
 }
 
 Satellites::~Satellites()
 {
-        StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-        Q_ASSERT(gui);
-        gui->getButtonBar()->removeButton(toolbarButton, "065-pluginsGroup");
-        delete toolbarButton;
-	delete configDialog;
-	
-	if (pxmapGlow)
-		delete pxmapGlow;
-	if (pxmapOnIcon)
-		delete pxmapOnIcon;
-	if (pxmapOffIcon)
-		delete pxmapOffIcon;
-}
+	if (toolbarButton)
+	{
+		toolbarButton->deleteLater();
+		toolbarButton = NULL;
+	}
 
+	if (configDialog)
+	{
+		configDialog->deleteLater();
+		configDialog = NULL;
+	}
+
+	if (pxmapGlow)
+	{
+		delete pxmapGlow;
+		pxmapGlow = NULL;
+	}
+	if (pxmapOnIcon)
+	{
+		delete pxmapOnIcon;
+		pxmapOnIcon = NULL;
+	}
+	if (pxmapOffIcon)
+	{
+		delete pxmapOffIcon;
+		pxmapOffIcon = NULL;
+	}
+}
 
 void Satellites::init()
 {
