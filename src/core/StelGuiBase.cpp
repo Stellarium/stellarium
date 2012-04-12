@@ -61,7 +61,7 @@ QAction* StelGuiBase::addGuiActions(const QString& actionName, const QString& te
 	a->setObjectName(actionName);
 	a->setText(q_(text));
 	QList<QKeySequence> keySeqs;
-	QRegExp shortCutSplitRegEx(";"); // was ",(?!,|$)" before storing in ini file
+	QRegExp shortCutSplitRegEx(";(?!;|$)"); // was ",(?!,|$)" before storing in ini file
 	QStringList shortcutStrings = shortcuts.split(shortCutSplitRegEx);
 	foreach (QString shortcut, shortcutStrings)
 	{
