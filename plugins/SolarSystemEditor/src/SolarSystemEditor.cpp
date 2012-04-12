@@ -124,8 +124,8 @@ void SolarSystemEditor::init()
 void SolarSystemEditor::deinit()
 {
 	if (mainWindow)
-		mainWindow->close();
-
+		if (mainWindow->visible())
+			mainWindow->close();
 }
 
 void SolarSystemEditor::update(double) //deltaTime

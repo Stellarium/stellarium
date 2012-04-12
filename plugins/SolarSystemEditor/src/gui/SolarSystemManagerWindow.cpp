@@ -51,12 +51,14 @@ SolarSystemManagerWindow::~SolarSystemManagerWindow()
 
 	if (mpcImportWindow)
 	{
-		mpcImportWindow->close();
+		if (mpcImportWindow->visible())
+				mpcImportWindow->close();
 		delete mpcImportWindow;
 	}
 	if (manualImportWindow)
 	{
-		manualImportWindow->close();
+		if (manualImportWindow->visible())
+			manualImportWindow->close();
 		delete manualImportWindow;
 	}
 }
