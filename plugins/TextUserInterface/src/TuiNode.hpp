@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 Matthew Gates
+ * Copyright (C) 2009, 2012 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,6 +49,7 @@ public:
 	//! @param prev the previous node in the current menu (typically 
 	//! shares the same parent)
 	TuiNode(const QString& text, TuiNode* parent=NULL, TuiNode* prev=NULL);
+	virtual ~TuiNode();
 	virtual TuiNodeResponse handleKey(int key);
 	virtual TuiNodeResponse navigation(int key);
 	virtual QString getDisplayText();

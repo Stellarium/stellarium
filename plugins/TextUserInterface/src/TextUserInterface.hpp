@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 Matthew Gates
+ * Copyright (C) 2009, 2012 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,8 +24,11 @@
 #include <QObject>
 #include <QString>
 #include <QFont>
+#include <QSharedPointer>
 
 class TuiNode;
+
+typedef QSharedPointer<TuiNode> TuiNodeP;
 
 //! This is an example of a plug-in which can be dynamically loaded into stellarium
 class TextUserInterface : public StelModule
@@ -38,6 +41,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init();
+	virtual void deinit();
 	virtual void update(double) {;}
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
@@ -65,11 +69,12 @@ private:
 	QFont font;
 	bool tuiActive;
 	TuiNode* currentNode;
+	QList<TuiNodeP> tuiNodes;
 
 	double getLatitude(void);
 	double getLongitude(void);
+	void addNode(TuiNode*);
 };
-
 
 #include "fixx11h.h"
 #include <QObject>
