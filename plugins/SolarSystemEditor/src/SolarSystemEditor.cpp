@@ -85,6 +85,7 @@ SolarSystemEditor::~SolarSystemEditor()
 	if (mainWindow)
 	{
 		delete mainWindow;
+		mainWindow = NULL;
 	}
 }
 

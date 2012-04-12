@@ -50,13 +50,15 @@ Q_EXPORT_PLUGIN2(TimeZoneConfiguration, TimeZoneConfigurationStelPluginInterface
 TimeZoneConfiguration::TimeZoneConfiguration()
 {
 	setObjectName("TimeZoneConfiguration");
-
-	//
 }
 
 TimeZoneConfiguration::~TimeZoneConfiguration()
 {
-	//
+	if (mainWindow)
+	{
+		delete mainWindow;
+		mainWindow = NULL;
+	}
 }
 
 void TimeZoneConfiguration::init()
@@ -66,7 +68,8 @@ void TimeZoneConfiguration::init()
 
 void TimeZoneConfiguration::deinit()
 {
-	delete mainWindow;
+	if (mainWindow->visible())
+		mainWindow->close();
 }
 
 double TimeZoneConfiguration::getCallOrder(StelModuleActionName) const
