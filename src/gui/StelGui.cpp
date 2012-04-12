@@ -101,40 +101,40 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
 	loadShortcuts();
-	QString group = N_("Display Options");
-	addGuiActions("actionShow_Constellation_Lines", N_("Constellation lines"), "C", group, true, false);
-	addGuiActions("actionShow_Constellation_Art", N_("Constellation art"), "R", group, true, false);
-	addGuiActions("actionShow_Constellation_Labels", N_("Constellation labels"), "V", group, true, false);
-	addGuiActions("actionShow_Constellation_Boundaries", N_("Constellation boundaries"), "B", group, true, false);
+//	QString group = N_("Display Options");
+//	addGuiActions("actionShow_Constellation_Lines", N_("Constellation lines"), "C", group, true, false);
+//	addGuiActions("actionShow_Constellation_Art", N_("Constellation art"), "R", group, true, false);
+//	addGuiActions("actionShow_Constellation_Labels", N_("Constellation labels"), "V", group, true, false);
+//	addGuiActions("actionShow_Constellation_Boundaries", N_("Constellation boundaries"), "B", group, true, false);
 
-	addGuiActions("actionShow_Azimuthal_Grid", N_("Azimuthal grid"), "Z", group, true, false);
-	addGuiActions("actionShow_Equatorial_Grid", N_("Equatorial grid"), "E", group, true, false);
-	addGuiActions("actionShow_Equatorial_J2000_Grid", N_("Equatorial J2000 grid"), "", group, true, false);
-	addGuiActions("actionShow_Galactic_Grid", N_("Galactic grid"), "", group, true, false);
-	addGuiActions("actionShow_Galactic_Plane_Line", N_("Galactic plane"), "", group, true, false);
-	addGuiActions("actionShow_Ecliptic_Line", N_("Ecliptic line"), ",", group, true, false);
-	addGuiActions("actionShow_Equator_Line", N_("Equator line"), ".", group, true, false);
-	addGuiActions("actionShow_Meridian_Line", N_("Meridian line"), ";", group, true, false);
-	addGuiActions("actionShow_Horizon_Line", N_("Horizon line"), "", group, true, false);
-	addGuiActions("actionShow_Cardinal_Points", N_("Cardinal points"), "Q", group, true, false);
+//	addGuiActions("actionShow_Azimuthal_Grid", N_("Azimuthal grid"), "Z", group, true, false);
+//	addGuiActions("actionShow_Equatorial_Grid", N_("Equatorial grid"), "E", group, true, false);
+//	addGuiActions("actionShow_Equatorial_J2000_Grid", N_("Equatorial J2000 grid"), "", group, true, false);
+//	addGuiActions("actionShow_Galactic_Grid", N_("Galactic grid"), "", group, true, false);
+//	addGuiActions("actionShow_Galactic_Plane_Line", N_("Galactic plane"), "", group, true, false);
+//	addGuiActions("actionShow_Ecliptic_Line", N_("Ecliptic line"), ",", group, true, false);
+//	addGuiActions("actionShow_Equator_Line", N_("Equator line"), ".", group, true, false);
+//	addGuiActions("actionShow_Meridian_Line", N_("Meridian line"), ";", group, true, false);
+//	addGuiActions("actionShow_Horizon_Line", N_("Horizon line"), "", group, true, false);
+//	addGuiActions("actionShow_Cardinal_Points", N_("Cardinal points"), "Q", group, true, false);
 
-	addGuiActions("actionShow_Ground", N_("Ground"), "G", group, true, false);
-	addGuiActions("actionShow_Atmosphere", N_("Atmosphere"), "A", group, true, false);
-	addGuiActions("actionShow_Fog", N_("Fog"), "F", group, true, false);
+//	addGuiActions("actionShow_Ground", N_("Ground"), "G", group, true, false);
+//	addGuiActions("actionShow_Atmosphere", N_("Atmosphere"), "A", group, true, false);
+//	addGuiActions("actionShow_Fog", N_("Fog"), "F", group, true, false);
 
-	addGuiActions("actionShow_Nebulas", N_("Nebulas"), "N", group, true, false);
-	addGuiActions("actionShow_DSS", N_("Nebulas background images"), "", group, true, false);
-	addGuiActions("actionShow_Stars", N_("Stars"), "S", group, true, false);
-	addGuiActions("actionShow_Planets_Labels", N_("Planet labels"), "P", group, true, false);
-	addGuiActions("actionShow_Planets_Orbits", N_("Planet orbits"), "O", group, true, false);
-	addGuiActions("actionShow_Planets_Trails", N_("Planet trails"), "Shift+T", group, true, false);
+//	addGuiActions("actionShow_Nebulas", N_("Nebulas"), "N", group, true, false);
+//	addGuiActions("actionShow_DSS", N_("Nebulas background images"), "", group, true, false);
+//	addGuiActions("actionShow_Stars", N_("Stars"), "S", group, true, false);
+//	addGuiActions("actionShow_Planets_Labels", N_("Planet labels"), "P", group, true, false);
+//	addGuiActions("actionShow_Planets_Orbits", N_("Planet orbits"), "O", group, true, false);
+//	addGuiActions("actionShow_Planets_Trails", N_("Planet trails"), "Shift+T", group, true, false);
 
-	addGuiActions("actionShow_Night_Mode", N_("Night mode"), "", group, true, false);
-	addGuiActions("actionSet_Full_Screen_Global", N_("Full-screen mode"), "F11", group, true, false, true);
-	addGuiActions("actionHorizontal_Flip", N_("Flip scene horizontally"), "Ctrl+Shift+H", group, true, false);
-	addGuiActions("actionVertical_Flip", N_("Flip scene vertically"), "Ctrl+Shift+V", group, true, false);
+//	addGuiActions("actionShow_Night_Mode", N_("Night mode"), "", group, true, false);
+//	addGuiActions("actionSet_Full_Screen_Global", N_("Full-screen mode"), "F11", group, true, false, true);
+//	addGuiActions("actionHorizontal_Flip", N_("Flip scene horizontally"), "Ctrl+Shift+H", group, true, false);
+//	addGuiActions("actionVertical_Flip", N_("Flip scene vertically"), "Ctrl+Shift+V", group, true, false);
 
-	group = N_("Windows");
+	QString group = N_("Windows");
 	addGuiActions("actionShow_Help_Window_Global", N_("Help window"), "F1", group, true, false, true);
 	addGuiActions("actionShow_Configuration_Window_Global", N_("Configuration window"), "F2", group, true, false, true);
 	addGuiActions("actionShow_Search_Window_Global", N_("Search window"), "F3, Ctrl+F", group, true, false, true);
