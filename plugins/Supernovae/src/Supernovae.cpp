@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 Alexander Wolf
+ * Copyright (C) 2012 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,12 +81,21 @@ Supernovae::Supernovae()
 */
 Supernovae::~Supernovae()
 {
-	//
+	if (!texPointer.isNull())
+	{
+		texPointer->deleteLater();
+	}
 }
 
 void Supernovae::deinit()
 {
-	texPointer.clear();
+	// if any pulsar is selected, de-select it
+	if (!GETSTELMODULE(StelObjectMgr)->getSelectedObject("Supernova").empty())
+		GETSTELMODULE(StelObjectMgr)->unSelect();
+
+	snstar.clear();
+
+	GETSTELMODULE(StelObjectMgr)->unregisterStelObjectMgr(this);
 }
 
 /*
@@ -346,6 +356,9 @@ QVariantMap Supernovae::loadSNeMap(QString path)
 */
 void Supernovae::setSNeMap(const QVariantMap& map)
 {
+	if (!GETSTELMODULE(StelObjectMgr)->getSelectedObject("Supernova").empty())
+		GETSTELMODULE(StelObjectMgr)->unSelect();
+
 	snstar.clear();
 	QVariantMap sneMap = map.value("supernova").toMap();
 	foreach(QString sneKey, sneMap.keys())
