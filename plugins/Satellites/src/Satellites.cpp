@@ -80,34 +80,6 @@ Satellites::Satellites()
 	configDialog = new SatellitesDialog();
 }
 
-void Satellites::deinit()
-{
-	// deselect any selected satellite
-	if (!GETSTELMODULE(StelObjectMgr)->getSelectedObject("Pulsar").empty())
-		GETSTELMODULE(StelObjectMgr)->unSelect();
-
-	// delete the actual Satellite list
-	satellites.clear();
-
-	// delete actions
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	gui->getGuiActions("actionShow_Satellite_ConfigDialog_Global")->setChecked(false);
-	gui->removeGuiAction(gui->getGuiActions("actionShow_Satellite_ConfigDialog_Global"));
-
-	gui->getGuiActions("actionShow_Satellite_Labels")->setChecked(false);
-	gui->removeGuiAction(gui->getGuiActions("actionShow_Satellite_Labels"));
-
-	gui->getButtonBar()->hideButton("actionShow_Satellite_Hints");
-	gui->getGuiActions("actionShow_Satellite_Hints")->setChecked(false);
-	gui->removeGuiAction(gui->getGuiActions("actionShow_Satellite_Hints"));
-
-	// unregister module so that it won't be used in searches after it's been uninitialized
-	GETSTELMODULE(StelObjectMgr)->unregisterStelObjectMgr(this);
-	Satellite::hintTexture.clear();
-	texPointer.clear();
-}
-
 Satellites::~Satellites()
 {
 	if (toolbarButton)
@@ -251,6 +223,34 @@ void Satellites::init()
 	styleSheetFile.close();
 
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+}
+
+void Satellites::deinit()
+{
+	// deselect any selected satellite
+	if (!GETSTELMODULE(StelObjectMgr)->getSelectedObject("Satellite").empty())
+		GETSTELMODULE(StelObjectMgr)->unSelect();
+
+	// delete the actual Satellite list
+	satellites.clear();
+
+	// delete actions
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	Q_ASSERT(gui);
+	gui->getGuiActions("actionShow_Satellite_ConfigDialog_Global")->setChecked(false);
+	gui->removeGuiAction(gui->getGuiActions("actionShow_Satellite_ConfigDialog_Global"));
+
+	gui->getGuiActions("actionShow_Satellite_Labels")->setChecked(false);
+	gui->removeGuiAction(gui->getGuiActions("actionShow_Satellite_Labels"));
+
+	gui->getButtonBar()->hideButton("actionShow_Satellite_Hints");
+	gui->getGuiActions("actionShow_Satellite_Hints")->setChecked(false);
+	gui->removeGuiAction(gui->getGuiActions("actionShow_Satellite_Hints"));
+
+	// unregister module so that it won't be used in searches after it's been uninitialized
+	GETSTELMODULE(StelObjectMgr)->unregisterStelObjectMgr(this);
+	Satellite::hintTexture.clear();
+	texPointer.clear();
 }
 
 bool Satellites::backupJsonFile(bool deleteOriginal)
@@ -650,7 +650,9 @@ void Satellites::setTleMap(const QVariantMap& map)
 		defaultHintColor.set(defaultHintColorMap.at(0).toDouble(), defaultHintColorMap.at(1).toDouble(), defaultHintColorMap.at(2).toDouble());
 	}
 
+	// de-select any selected satellites
 	satellites.clear();
+
 	QVariantMap satMap = map.value("satellites").toMap();
 	foreach(const QString& satId, satMap.keys())
 	{
