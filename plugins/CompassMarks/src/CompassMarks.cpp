@@ -148,8 +148,8 @@ void CompassMarks::deinit()
 	bool marksDisplayed = gui->getGuiActions("actionShow_Compass_Marks")->isChecked();
 	gui->getGuiActions("actionShow_Compass_Marks")->setChecked(false);
 	gui->getGuiActions("actionShow_Cardinal_Points")->setChecked(marksDisplayed);
-	gui->removeGuiAction("actionShow_Compass_Marks");
 	gui->getButtonBar()->hideButton("actionShow_Compass_Marks");
+	gui->removeGuiAction("actionShow_Compass_Marks");
 }
 
 //! Draw any parts on the screen which are for our module

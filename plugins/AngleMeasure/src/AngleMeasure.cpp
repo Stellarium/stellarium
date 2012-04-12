@@ -155,8 +155,8 @@ void AngleMeasure::deinit()
         StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
         Q_ASSERT(gui);
 	gui->getGuiActions("actionShow_Angle_Measure")->setChecked(false);
-	gui->removeGuiAction("actionShow_Angle_Measure");
 	gui->getButtonBar()->hideButton("actionShow_Angle_Measure");
+	gui->removeGuiAction("actionShow_Angle_Measure");
 }
 
 void AngleMeasure::update(double deltaTime)
