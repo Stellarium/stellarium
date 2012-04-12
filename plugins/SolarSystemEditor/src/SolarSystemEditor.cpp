@@ -2,6 +2,7 @@
  * Solar System editor plug-in for Stellarium
  * 
  * Copyright (C) 2010 Bogdan Marinov
+ * Copyright (C) 2012 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,9 +79,12 @@ SolarSystemEditor::SolarSystemEditor()
 
 SolarSystemEditor::~SolarSystemEditor()
 {
-	if (solarSystemConfigurationFile != NULL)
+	if (solarSystemConfigurationFile)
+		solarSystemConfigurationFile->deleteLater();
+
+	if (mainWindow)
 	{
-		delete solarSystemConfigurationFile;
+		delete mainWindow;
 	}
 }
 
@@ -119,7 +123,9 @@ void SolarSystemEditor::init()
 
 void SolarSystemEditor::deinit()
 {
-	//
+	if (mainWindow)
+		mainWindow->close();
+
 }
 
 void SolarSystemEditor::update(double) //deltaTime

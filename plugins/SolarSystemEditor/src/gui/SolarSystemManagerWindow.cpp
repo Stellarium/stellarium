@@ -2,6 +2,7 @@
  * Solar System editor plug-in for Stellarium
  *
  * Copyright (C) 2010 Bogdan Marinov
+ * Copyright (C) 2012 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,9 +50,15 @@ SolarSystemManagerWindow::~SolarSystemManagerWindow()
 	delete ui;
 
 	if (mpcImportWindow)
+	{
+		mpcImportWindow->close();
 		delete mpcImportWindow;
+	}
 	if (manualImportWindow)
+	{
+		manualImportWindow->close();
 		delete manualImportWindow;
+	}
 }
 
 void SolarSystemManagerWindow::createDialogContent()
