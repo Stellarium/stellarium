@@ -152,11 +152,20 @@ Oculars::~Oculars()
 		delete guiPanel;
 	
 	if (pxmapGlow)
+	{
 		delete pxmapGlow;
+		pxmapGlow = NULL;
+	}
 	if (pxmapOnIcon)
+	{
 		delete pxmapOnIcon;
+		pxmapOnIcon = NULL;
+	}
 	if (pxmapOffIcon)
+	{
 		delete pxmapOffIcon;
+		pxmapOffIcon = NULL;
+	}
 	
 	qDeleteAll(ccds);
 	ccds.clear();
