@@ -53,20 +53,21 @@ void StelGuiBase::updateI18n()
 // Note: "text" and "helpGroup" must be in English -- this method and the help
 // dialog take care of translating them. Of course, they still have to be
 // marked for translation using the N_() macro.
-QAction* StelGuiBase::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat, bool global)
+QAction* StelGuiBase::addGuiActions(const QString& actionName, const QString& text, const QString& shortcuts, const QString& helpGroup, bool checkable, bool autoRepeat, bool global)
 {
 	Q_UNUSED(helpGroup);
 	QAction* a;
 	a = new QAction(stelAppGraphicsWidget);
 	a->setObjectName(actionName);
 	a->setText(q_(text));
-	QList<QKeySequence> shortcuts;
-	QRegExp shortCutSplitRegEx(",(?!,|$)");
-	QStringList shortcutStrings = shortCut.split(shortCutSplitRegEx);
-	for (int i = 0; i < shortcutStrings.size(); ++i)
-		shortcuts << QKeySequence(shortcutStrings.at(i).trimmed());
-
-	a->setShortcuts(shortcuts);
+	QList<QKeySequence> keySeqs;
+	QRegExp shortCutSplitRegEx(";"); // was ",(?!,|$)" before storing in ini file
+	QStringList shortcutStrings = shortcuts.split(shortCutSplitRegEx);
+	foreach (QString shortcut, shortcutStrings)
+	{
+		keySeqs << QKeySequence(shortcut.remove(QRegExp("\\s+")));
+	}
+	a->setShortcuts(keySeqs);
 	a->setCheckable(checkable);
 	a->setAutoRepeat(autoRepeat);
 	a->setProperty("englishText", QVariant(text));
