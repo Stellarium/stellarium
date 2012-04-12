@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-27 21:44+0700\n"
+"POT-Creation-Date: 2012-04-11 16:29+0700\n"
 "PO-Revision-Date: 2012-01-27 15:59+0000\n"
 "Last-Translator: Jeong, Tae-Min <jtm71@chollian.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-28 04:39+0000\n"
-"X-Generator: Launchpad (build 15027)\n"
+"X-Launchpad-Export-Date: 2012-04-12 04:44+0000\n"
+"X-Generator: Launchpad (build 15070)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -60,13 +60,13 @@ msgstr "행성: "
 msgid "Type: <b>%1</b>"
 msgstr "유형: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:123
+#: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:247
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
+#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:250
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
@@ -109,50 +109,60 @@ msgstr "알 수 없음"
 msgid "Undocumented type"
 msgstr "자료 없는 유형"
 
-#: src/core/modules/Planet.cpp:129 src/core/modules/StarWrapper.cpp:124
+#: src/core/modules/Planet.cpp:253 src/core/modules/StarWrapper.cpp:124
 #: plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "절대등급: %1"
 
-#: src/core/modules/Planet.cpp:142
+#: src/core/modules/Planet.cpp:266
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:143
+#: src/core/modules/Planet.cpp:267
 #, qt-format
 msgid "Obliquity (of date): %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:153
+#: src/core/modules/Planet.cpp:277
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:160
+#: src/core/modules/Planet.cpp:284
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr "거리: %1AU"
 
-#: src/core/modules/Planet.cpp:171
+#: src/core/modules/Planet.cpp:295
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:177
+#: src/core/modules/Planet.cpp:301
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "시직경: %1"
 
-#: src/core/modules/Planet.cpp:191
+#: src/core/modules/Planet.cpp:315
 #, qt-format
 msgid "Phase: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:192
+#: src/core/modules/Planet.cpp:316
 #, qt-format
 msgid "Illuminated: %1%"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:317
+#, qt-format
+msgid "Elongation: %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:318
+#, qt-format
+msgid "Phase Angle: %1"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:52
@@ -195,7 +205,7 @@ msgstr "시차: %1\""
 msgid "SpaceShip"
 msgstr "우주선"
 
-#: src/core/StelProjector.cpp:62
+#: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
 msgstr "최대 화각: "
 
@@ -320,46 +330,46 @@ msgstr ""
 msgid "Az/Alt: %1/%2"
 msgstr "방위/고도: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:314 src/gui/ConfigurationDialog.cpp:316
+#: src/gui/ConfigurationDialog.cpp:312
 msgid "Select screenshot directory"
 msgstr "스크린샷 경로 선택"
 
-#: src/gui/ConfigurationDialog.cpp:492
+#: src/gui/ConfigurationDialog.cpp:487
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "시작시 화각: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:500
+#: src/gui/ConfigurationDialog.cpp:495
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "시작시 시야 방향 방위/고도: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:539
+#: src/gui/ConfigurationDialog.cpp:534
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "저작자"
 
-#: src/gui/ConfigurationDialog.cpp:543 src/gui/ViewDialog.cpp:393
+#: src/gui/ConfigurationDialog.cpp:538 src/gui/ViewDialog.cpp:393
 msgid "Contact"
 msgstr "연락처"
 
-#: src/gui/ConfigurationDialog.cpp:621
+#: src/gui/ConfigurationDialog.cpp:616
 msgid "Author"
 msgstr "작성자"
 
-#: src/gui/ConfigurationDialog.cpp:625
+#: src/gui/ConfigurationDialog.cpp:620
 msgid "License"
 msgstr "라이선스"
 
-#: src/gui/ConfigurationDialog.cpp:655
+#: src/gui/ConfigurationDialog.cpp:650
 msgid "Running script: "
 msgstr "실행 중인 스크립트: "
 
-#: src/gui/ConfigurationDialog.cpp:662
+#: src/gui/ConfigurationDialog.cpp:657
 msgid "Running script: [none]"
 msgstr "실행 중인 스크립트: [없음]"
 
-#: src/gui/ConfigurationDialog.cpp:732
+#: src/gui/ConfigurationDialog.cpp:727
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -367,16 +377,16 @@ msgstr ""
 "새 별 목록을 모두 내려받았습니다!\n"
 "내려받은 별을 표시하려면 스텔라리움을 재시작하세요."
 
-#: src/gui/ConfigurationDialog.cpp:736
+#: src/gui/ConfigurationDialog.cpp:731
 msgid "All available star catalogs have been installed."
 msgstr "사용할 수 있는 모든 별 카탈로그가 설치되었습니다."
 
-#: src/gui/ConfigurationDialog.cpp:741
+#: src/gui/ConfigurationDialog.cpp:736
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%2 중 %1의 목록을 받음"
 
-#: src/gui/ConfigurationDialog.cpp:748
+#: src/gui/ConfigurationDialog.cpp:743
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -385,7 +395,7 @@ msgstr ""
 "내려받는 중... %1\n"
 "(창을 닫아도 됩니다.)"
 
-#: src/gui/ConfigurationDialog.cpp:755
+#: src/gui/ConfigurationDialog.cpp:750
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -396,7 +406,7 @@ msgstr ""
 "별 갯수: %2 100만\n"
 "광도 범위: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:798 src/gui/ConfigurationDialog.cpp:834
+#: src/gui/ConfigurationDialog.cpp:793 src/gui/ConfigurationDialog.cpp:829
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -405,11 +415,11 @@ msgstr ""
 "%1을 내려받는 중 오류 발생:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:886
+#: src/gui/ConfigurationDialog.cpp:881
 msgid "Verifying file integrity..."
 msgstr "파일 무결성 검사 중..."
 
-#: src/gui/ConfigurationDialog.cpp:890
+#: src/gui/ConfigurationDialog.cpp:885
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -931,68 +941,68 @@ msgstr "Stellarium 전망 자료를 담고 있는 ZIP 압축 파일을 선택합
 msgid "ZIP archives"
 msgstr "ZIP 압축 파일"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:132
+#: src/gui/AddRemoveLandscapesDialog.cpp:127
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
 msgstr "\"%1\" 전망 자료를 무사히 설치하였습니다."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:133
-#: src/gui/AddRemoveLandscapesDialog.cpp:160
+#: src/gui/AddRemoveLandscapesDialog.cpp:128
+#: src/gui/AddRemoveLandscapesDialog.cpp:155
 msgid "Success"
 msgstr "성공"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:146
-#: src/gui/AddRemoveLandscapesDialog.cpp:216
-#: src/gui/AddRemoveLandscapesDialog.cpp:225
-#: src/gui/AddRemoveLandscapesDialog.cpp:233
+#: src/gui/AddRemoveLandscapesDialog.cpp:141
+#: src/gui/AddRemoveLandscapesDialog.cpp:211
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:228
 msgid "No landscape was installed."
 msgstr "전망 자료를 전혀 설치하지 않았습니다."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:147
-#: src/gui/AddRemoveLandscapesDialog.cpp:171
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-#: src/gui/AddRemoveLandscapesDialog.cpp:226
-#: src/gui/AddRemoveLandscapesDialog.cpp:234
-#: src/gui/AddRemoveLandscapesDialog.cpp:244
+#: src/gui/AddRemoveLandscapesDialog.cpp:142
+#: src/gui/AddRemoveLandscapesDialog.cpp:166
+#: src/gui/AddRemoveLandscapesDialog.cpp:215
+#: src/gui/AddRemoveLandscapesDialog.cpp:221
+#: src/gui/AddRemoveLandscapesDialog.cpp:229
+#: src/gui/AddRemoveLandscapesDialog.cpp:239
 msgid "Error!"
 msgstr "오류!"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:159
+#: src/gui/AddRemoveLandscapesDialog.cpp:154
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "\"%1\" 전망 자료를 무사히 제거하였습니다"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:170
-#: src/gui/AddRemoveLandscapesDialog.cpp:240
+#: src/gui/AddRemoveLandscapesDialog.cpp:165
+#: src/gui/AddRemoveLandscapesDialog.cpp:235
 msgid "The selected landscape could not be (completely) removed."
 msgstr "선택한 전망 자료는 (완전히) 제거할 수 없습니다."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:193
+#: src/gui/AddRemoveLandscapesDialog.cpp:188
 #, qt-format
 msgid "Size on disk: %1 MiB"
 msgstr "디스크 상의 용량: %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:219
+#: src/gui/AddRemoveLandscapesDialog.cpp:214
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr "Stellarium에서 %1을(를) 읽거나 쓰기 위하여 열수 없습니다."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:225
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
 msgstr "선택하 파일은 ZIP 압축 파일이 아니거나 Stellarium 전망 자료를 담고 있지 않습니다."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:232
+#: src/gui/AddRemoveLandscapesDialog.cpp:227
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr "같은 이름의 전망 자료이거나 식별자(%1)가 이미 존재합니다."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:243
+#: src/gui/AddRemoveLandscapesDialog.cpp:238
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "다음 디렉토리를 삭제하여 수동으로 제거할 수 있습니다.: %1"
@@ -2537,67 +2547,67 @@ msgstr "로그"
 msgid "Refresh"
 msgstr "새로 고침"
 
-#: src/ui_locationDialogGui.h:387
+#: src/ui_locationDialogGui.h:384
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:134
 msgid "Location"
 msgstr "위치"
 
-#: src/ui_locationDialogGui.h:391
+#: src/ui_locationDialogGui.h:388
 msgid "Current location information"
 msgstr "현재 위치 정보"
 
-#: src/ui_locationDialogGui.h:392
+#: src/ui_locationDialogGui.h:389
 msgid "Use as default"
 msgstr "기본값으로 사용"
 
-#: src/ui_locationDialogGui.h:393 plugins/Oculars/src/ui_ocularDialog.h:876
+#: src/ui_locationDialogGui.h:390 plugins/Oculars/src/ui_ocularDialog.h:876
 #: plugins/Oculars/src/ui_ocularDialog.h:885
 #: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Delete"
 msgstr "삭제"
 
-#: src/ui_locationDialogGui.h:394
+#: src/ui_locationDialogGui.h:391
 msgid "Add to list"
 msgstr "목록에 추가"
 
-#: src/ui_locationDialogGui.h:395
+#: src/ui_locationDialogGui.h:392
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:135
 msgid "Latitude:"
 msgstr "위도:"
 
-#: src/ui_locationDialogGui.h:397 src/ui_locationDialogGui.h:401
+#: src/ui_locationDialogGui.h:394 src/ui_locationDialogGui.h:398
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr "소수점을 사용하거나 dms 형식을 사용할 수 있습니다. 예) +1d 12m 8s"
 
-#: src/ui_locationDialogGui.h:399
+#: src/ui_locationDialogGui.h:396
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:138
 msgid "Longitude:"
 msgstr "경도:"
 
-#: src/ui_locationDialogGui.h:403
+#: src/ui_locationDialogGui.h:400
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Altitude:"
 msgstr "고도:"
 
-#: src/ui_locationDialogGui.h:405
+#: src/ui_locationDialogGui.h:402
 msgid "Enter the altitude in meter"
 msgstr "고도를 입력하세요. (단위:m)"
 
-#: src/ui_locationDialogGui.h:407
+#: src/ui_locationDialogGui.h:404
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:408
+#: src/ui_locationDialogGui.h:405
 msgid "Name/City:"
 msgstr "이름/나라:"
 
-#: src/ui_locationDialogGui.h:409
+#: src/ui_locationDialogGui.h:406
 msgid "Country:"
 msgstr "나라:"
 
-#: src/ui_locationDialogGui.h:410
+#: src/ui_locationDialogGui.h:407
 msgid "Planet:"
 msgstr "행성:"
 
@@ -3527,15 +3537,15 @@ msgstr ""
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1736
+#: plugins/Oculars/src/Oculars.cpp:1735
 msgid "&Telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1737
+#: plugins/Oculars/src/Oculars.cpp:1736
 msgid "&Previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1738
+#: plugins/Oculars/src/Oculars.cpp:1737
 msgid "&Next telescope"
 msgstr ""
 
@@ -3767,68 +3777,68 @@ msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:228
-#: plugins/Satellites/src/Satellite.cpp:232
+#: plugins/Satellites/src/Satellite.cpp:230
+#: plugins/Satellites/src/Satellite.cpp:234
 msgid "Catalog #"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:234
+#: plugins/Satellites/src/Satellite.cpp:236
 msgid "International Designator"
 msgstr ""
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:246
+#: plugins/Satellites/src/Satellite.cpp:248
 #, qt-format
 msgid "Range (km): %1"
 msgstr ""
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:249
+#: plugins/Satellites/src/Satellite.cpp:251
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr ""
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:252
+#: plugins/Satellites/src/Satellite.cpp:254
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr ""
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:255
+#: plugins/Satellites/src/Satellite.cpp:257
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr ""
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:269
+#: plugins/Satellites/src/Satellite.cpp:271
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr ""
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:277
+#: plugins/Satellites/src/Satellite.cpp:279
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:285
+#: plugins/Satellites/src/Satellite.cpp:287
 msgid "The satellite and the observer are in sunlight."
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:288
+#: plugins/Satellites/src/Satellite.cpp:290
 msgid "The satellite is visible."
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:291
+#: plugins/Satellites/src/Satellite.cpp:293
 msgid "The satellite is eclipsed."
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:294
+#: plugins/Satellites/src/Satellite.cpp:296
 msgid "The satellite is not visible"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:320
+#: plugins/Satellites/src/Satellite.cpp:322
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr ""
@@ -5019,15 +5029,15 @@ msgstr ""
 msgid "[no TUI node]"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
 msgid "Off"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
+#: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
 msgid "error, unknown color part \"%1\""
 msgstr ""

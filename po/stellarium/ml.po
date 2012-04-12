@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-27 21:44+0700\n"
+"POT-Creation-Date: 2012-04-11 16:29+0700\n"
 "PO-Revision-Date: 2011-12-14 17:51+0000\n"
 "Last-Translator: BRIJESH E.P <Unknown>\n"
 "Language-Team: Malayalam <ml@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-28 04:40+0000\n"
-"X-Generator: Launchpad (build 15027)\n"
+"X-Launchpad-Export-Date: 2012-04-12 04:44+0000\n"
+"X-Generator: Launchpad (build 15070)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -60,13 +60,13 @@ msgstr "ഗ്രഹം: "
 msgid "Type: <b>%1</b>"
 msgstr "തരം: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:123
+#: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:247
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
+#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:250
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
@@ -109,50 +109,60 @@ msgstr "അജ്ഞാതം"
 msgid "Undocumented type"
 msgstr "രേഖപ്പെടുത്താത്ത തരം"
 
-#: src/core/modules/Planet.cpp:129 src/core/modules/StarWrapper.cpp:124
+#: src/core/modules/Planet.cpp:253 src/core/modules/StarWrapper.cpp:124
 #: plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "കേവല കാന്തിമാനം: %1"
 
-#: src/core/modules/Planet.cpp:142
+#: src/core/modules/Planet.cpp:266
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:143
+#: src/core/modules/Planet.cpp:267
 #, qt-format
 msgid "Obliquity (of date): %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:153
+#: src/core/modules/Planet.cpp:277
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "ദൂരം: %1AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:160
+#: src/core/modules/Planet.cpp:284
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr "ദൂരം: %1AU"
 
-#: src/core/modules/Planet.cpp:171
+#: src/core/modules/Planet.cpp:295
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:177
+#: src/core/modules/Planet.cpp:301
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "ദൃശ്യ വ്യാസം: %1"
 
-#: src/core/modules/Planet.cpp:191
+#: src/core/modules/Planet.cpp:315
 #, qt-format
 msgid "Phase: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:192
+#: src/core/modules/Planet.cpp:316
 #, qt-format
 msgid "Illuminated: %1%"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:317
+#, qt-format
+msgid "Elongation: %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:318
+#, qt-format
+msgid "Phase Angle: %1"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:52
@@ -195,7 +205,7 @@ msgstr "ദൃഗ്‌ഭ്രംശം: %1"
 msgid "SpaceShip"
 msgstr "ആകാശകപ്പല്‍"
 
-#: src/core/StelProjector.cpp:62
+#: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
 msgstr "കൂടിയ FOV "
 
@@ -326,46 +336,46 @@ msgstr "(പ്രത്യക്ഷമായ)"
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:314 src/gui/ConfigurationDialog.cpp:316
+#: src/gui/ConfigurationDialog.cpp:312
 msgid "Select screenshot directory"
 msgstr "സ്ക്രീന്‍ഷോട്ടിനുള്ള ഡയറക്ടറി തിരഞ്ഞെടുക്കുക"
 
-#: src/gui/ConfigurationDialog.cpp:492
+#: src/gui/ConfigurationDialog.cpp:487
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "തുടക്കത്തിലെ FOV: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:500
+#: src/gui/ConfigurationDialog.cpp:495
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "തുടക്കത്തിലെ വീക്ഷണ ദിശ Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:539
+#: src/gui/ConfigurationDialog.cpp:534
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "രചയിതാക്കള്‍"
 
-#: src/gui/ConfigurationDialog.cpp:543 src/gui/ViewDialog.cpp:393
+#: src/gui/ConfigurationDialog.cpp:538 src/gui/ViewDialog.cpp:393
 msgid "Contact"
 msgstr "വിലാസം"
 
-#: src/gui/ConfigurationDialog.cpp:621
+#: src/gui/ConfigurationDialog.cpp:616
 msgid "Author"
 msgstr "രചയിതാവ്"
 
-#: src/gui/ConfigurationDialog.cpp:625
+#: src/gui/ConfigurationDialog.cpp:620
 msgid "License"
 msgstr "അനുമതിപത്രം"
 
-#: src/gui/ConfigurationDialog.cpp:655
+#: src/gui/ConfigurationDialog.cpp:650
 msgid "Running script: "
 msgstr "പ്രവര്‍ത്തിച്ചുകൊണ്ടിരിക്കുന്ന സ്ക്രിപ്റ്റ്: "
 
-#: src/gui/ConfigurationDialog.cpp:662
+#: src/gui/ConfigurationDialog.cpp:657
 msgid "Running script: [none]"
 msgstr "പ്രവര്‍ത്തിച്ചുകൊണ്ടിരിക്കുന്ന സ്ക്രിപ്റ്റ്: [ശൂന്യം]"
 
-#: src/gui/ConfigurationDialog.cpp:732
+#: src/gui/ConfigurationDialog.cpp:727
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -374,16 +384,16 @@ msgstr ""
 "പൂര്‍ത്തീകരിച്ചിരിക്കുന്നു!\n"
 "അവ പ്രദര്‍ശിപ്പിക്കുവാന്‍ സ്റ്റെല്ലേറിയം റീസ്റ്റാര്‍ട്ട് ചെയ്യുക."
 
-#: src/gui/ConfigurationDialog.cpp:736
+#: src/gui/ConfigurationDialog.cpp:731
 msgid "All available star catalogs have been installed."
 msgstr "ലഭ്യമായ നക്ഷത്ര കാറ്റലോഗുകള്‍ ഇന്‍സ്റ്റാള്‍ ചെയ്തിരിക്കുന്നു."
 
-#: src/gui/ConfigurationDialog.cpp:741
+#: src/gui/ConfigurationDialog.cpp:736
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "കാറ്റലോഗ് ലഭ്യമാക്കുന്നു %1 of %2"
 
-#: src/gui/ConfigurationDialog.cpp:748
+#: src/gui/ConfigurationDialog.cpp:743
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -392,7 +402,7 @@ msgstr ""
 "%1 ഡൌണ്‍ലോഡ് ചെയ്തുകൊണ്ടിരിക്കുന്നു...\n"
 "(ഈ ജാലകം അടക്കുന്നതിന് കുഴപ്പമില്ല.)"
 
-#: src/gui/ConfigurationDialog.cpp:755
+#: src/gui/ConfigurationDialog.cpp:750
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -403,7 +413,7 @@ msgstr ""
 "നക്ഷത്രങ്ങളുടെ എണ്ണം: %2 മില്യണ്‍\n"
 "കാന്തിമാന പരിധി: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:798 src/gui/ConfigurationDialog.cpp:834
+#: src/gui/ConfigurationDialog.cpp:793 src/gui/ConfigurationDialog.cpp:829
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -412,11 +422,11 @@ msgstr ""
 "%1 ഡൌണ്‍ലോഡ് ചെയ്യുന്നതില്‍ പിഴവ്:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:886
+#: src/gui/ConfigurationDialog.cpp:881
 msgid "Verifying file integrity..."
 msgstr "പ്രമാണത്തിന്റെ സാധുത പരിശോധിച്ചുകൊണ്ടിരിക്കുന്നു"
 
-#: src/gui/ConfigurationDialog.cpp:890
+#: src/gui/ConfigurationDialog.cpp:885
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -939,68 +949,68 @@ msgstr "സ്റ്റെല്ലേറിയം പ്രകൃതിദൃ�
 msgid "ZIP archives"
 msgstr "zip പ്രമാണങ്ങള്‍"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:132
+#: src/gui/AddRemoveLandscapesDialog.cpp:127
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
 msgstr "പ്രകൃതിദൃശ്യം  \"%1\" വിജയകരമായി ഇന്‍സ്റ്റാള്‍  ചെയ്തു"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:133
-#: src/gui/AddRemoveLandscapesDialog.cpp:160
+#: src/gui/AddRemoveLandscapesDialog.cpp:128
+#: src/gui/AddRemoveLandscapesDialog.cpp:155
 msgid "Success"
 msgstr "വിജയിച്ചു"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:146
-#: src/gui/AddRemoveLandscapesDialog.cpp:216
-#: src/gui/AddRemoveLandscapesDialog.cpp:225
-#: src/gui/AddRemoveLandscapesDialog.cpp:233
+#: src/gui/AddRemoveLandscapesDialog.cpp:141
+#: src/gui/AddRemoveLandscapesDialog.cpp:211
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:228
 msgid "No landscape was installed."
 msgstr "ഒരു പ്രകൃതിദൃശ്യവും ഇന്‍സ്റ്റാള്‍  ചെയ്തില്ല"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:147
-#: src/gui/AddRemoveLandscapesDialog.cpp:171
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-#: src/gui/AddRemoveLandscapesDialog.cpp:226
-#: src/gui/AddRemoveLandscapesDialog.cpp:234
-#: src/gui/AddRemoveLandscapesDialog.cpp:244
+#: src/gui/AddRemoveLandscapesDialog.cpp:142
+#: src/gui/AddRemoveLandscapesDialog.cpp:166
+#: src/gui/AddRemoveLandscapesDialog.cpp:215
+#: src/gui/AddRemoveLandscapesDialog.cpp:221
+#: src/gui/AddRemoveLandscapesDialog.cpp:229
+#: src/gui/AddRemoveLandscapesDialog.cpp:239
 msgid "Error!"
 msgstr "പിശക്!"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:159
+#: src/gui/AddRemoveLandscapesDialog.cpp:154
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "പ്രകൃതിദൃശ്യം  \"%1\" വിജയകരമായി നീക്കം ചെയ്ത"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:170
-#: src/gui/AddRemoveLandscapesDialog.cpp:240
+#: src/gui/AddRemoveLandscapesDialog.cpp:165
+#: src/gui/AddRemoveLandscapesDialog.cpp:235
 msgid "The selected landscape could not be (completely) removed."
 msgstr "തിരഞ്ഞെടുത്ത പ്രകൃതിദൃശ്യം പൂര്‍ണ്ണമായി നീക്കം ചെയ്തില്ല."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:193
+#: src/gui/AddRemoveLandscapesDialog.cpp:188
 #, qt-format
 msgid "Size on disk: %1 MiB"
 msgstr "ഡിസ്കിലെ ഉള്‍ക്കൊള്ളുന്ന സ്ഥലം : %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:219
+#: src/gui/AddRemoveLandscapesDialog.cpp:214
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:225
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
 msgstr "തിരഞ്ഞെടുത്ത zip പ്രമാണത്തില്‍ പ്രകൃതിദൃശ്യം അടങ്ങിയിട്ടില്ല."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:232
+#: src/gui/AddRemoveLandscapesDialog.cpp:227
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr "പ്രകൃതിദൃശ്യം നിലവിലുണ്ട് (%1)"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:243
+#: src/gui/AddRemoveLandscapesDialog.cpp:238
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr ""
@@ -2545,35 +2555,35 @@ msgstr "സംഭവരേഖ"
 msgid "Refresh"
 msgstr "പുനര്‍വിന്യസിക്കുക"
 
-#: src/ui_locationDialogGui.h:387
+#: src/ui_locationDialogGui.h:384
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:134
 msgid "Location"
 msgstr "സ്ഥലം"
 
-#: src/ui_locationDialogGui.h:391
+#: src/ui_locationDialogGui.h:388
 msgid "Current location information"
 msgstr "നിലവിലെ സ്ഥാനത്തെപ്പറ്റിയുള്ള വിവരം"
 
-#: src/ui_locationDialogGui.h:392
+#: src/ui_locationDialogGui.h:389
 msgid "Use as default"
 msgstr "സ്വതവേയായി ഉപയോഗിക്കുക"
 
-#: src/ui_locationDialogGui.h:393 plugins/Oculars/src/ui_ocularDialog.h:876
+#: src/ui_locationDialogGui.h:390 plugins/Oculars/src/ui_ocularDialog.h:876
 #: plugins/Oculars/src/ui_ocularDialog.h:885
 #: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Delete"
 msgstr "മായ്ക്കുക"
 
-#: src/ui_locationDialogGui.h:394
+#: src/ui_locationDialogGui.h:391
 msgid "Add to list"
 msgstr "പട്ടികയിലേക്ക് ചേര്‍ക്കുക"
 
-#: src/ui_locationDialogGui.h:395
+#: src/ui_locationDialogGui.h:392
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:135
 msgid "Latitude:"
 msgstr "അക്ഷാംശം:"
 
-#: src/ui_locationDialogGui.h:397 src/ui_locationDialogGui.h:401
+#: src/ui_locationDialogGui.h:394 src/ui_locationDialogGui.h:398
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
@@ -2581,33 +2591,33 @@ msgstr ""
 "വിലകള്‍ നിങ്ങള്‍ക്ക് ദശാംശ ഡിഗ്രികളായോ dms രൂപത്തിലോ (ഉദാഹരണത്തിന്: +1d 12m "
 "8s) നല്‍കാവുന്നതാണ്"
 
-#: src/ui_locationDialogGui.h:399
+#: src/ui_locationDialogGui.h:396
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:138
 msgid "Longitude:"
 msgstr "രേഖാംശം:"
 
-#: src/ui_locationDialogGui.h:403
+#: src/ui_locationDialogGui.h:400
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Altitude:"
 msgstr "സമുദ്രനിരപ്പില്‍ നിന്നുള്ള ഉയരം:"
 
-#: src/ui_locationDialogGui.h:405
+#: src/ui_locationDialogGui.h:402
 msgid "Enter the altitude in meter"
 msgstr "സമുദ്രനിരപ്പില്‍ നിന്നുള്ള ഉയരം മീറ്ററില്‍ നല്‍കുക:"
 
-#: src/ui_locationDialogGui.h:407
+#: src/ui_locationDialogGui.h:404
 msgid " m"
 msgstr " മീ"
 
-#: src/ui_locationDialogGui.h:408
+#: src/ui_locationDialogGui.h:405
 msgid "Name/City:"
 msgstr "പേര്/നഗരം:"
 
-#: src/ui_locationDialogGui.h:409
+#: src/ui_locationDialogGui.h:406
 msgid "Country:"
 msgstr "രാജ്യം:"
 
-#: src/ui_locationDialogGui.h:410
+#: src/ui_locationDialogGui.h:407
 msgid "Planet:"
 msgstr "ഗ്രഹം:"
 
@@ -3552,15 +3562,15 @@ msgstr ""
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1736
+#: plugins/Oculars/src/Oculars.cpp:1735
 msgid "&Telescope"
 msgstr "& ടെലിസ്കോപ്പ്"
 
-#: plugins/Oculars/src/Oculars.cpp:1737
+#: plugins/Oculars/src/Oculars.cpp:1736
 msgid "&Previous telescope"
 msgstr "& മുന്‍പത്തെ ടെലിസ്കോപ്പ്"
 
-#: plugins/Oculars/src/Oculars.cpp:1738
+#: plugins/Oculars/src/Oculars.cpp:1737
 msgid "&Next telescope"
 msgstr "& അടുത്ത ടെലിസ്കോപ്പ്"
 
@@ -3792,68 +3802,68 @@ msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:228
-#: plugins/Satellites/src/Satellite.cpp:232
+#: plugins/Satellites/src/Satellite.cpp:230
+#: plugins/Satellites/src/Satellite.cpp:234
 msgid "Catalog #"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:234
+#: plugins/Satellites/src/Satellite.cpp:236
 msgid "International Designator"
 msgstr ""
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:246
+#: plugins/Satellites/src/Satellite.cpp:248
 #, qt-format
 msgid "Range (km): %1"
 msgstr "പരിധി (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:249
+#: plugins/Satellites/src/Satellite.cpp:251
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "പരിധി നിരക്ക് (km/s): %1"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:252
+#: plugins/Satellites/src/Satellite.cpp:254
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "ഉയരം (km): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:255
+#: plugins/Satellites/src/Satellite.cpp:257
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr ""
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:269
+#: plugins/Satellites/src/Satellite.cpp:271
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr ""
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:277
+#: plugins/Satellites/src/Satellite.cpp:279
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:285
+#: plugins/Satellites/src/Satellite.cpp:287
 msgid "The satellite and the observer are in sunlight."
 msgstr "കൃത്രിമോപഗ്രഹവും വീക്ഷിക്കുന്നയാളും സൂര്യപ്രകാശത്തിലാണ്."
 
-#: plugins/Satellites/src/Satellite.cpp:288
+#: plugins/Satellites/src/Satellite.cpp:290
 msgid "The satellite is visible."
 msgstr "കൃത്രിമോപഗ്രഹം ദൃശ്യമാണ്."
 
-#: plugins/Satellites/src/Satellite.cpp:291
+#: plugins/Satellites/src/Satellite.cpp:293
 msgid "The satellite is eclipsed."
 msgstr "കൃത്രിമോപഗ്രഹം മറയ്ക്കപ്പെട്ടിരിക്കുന്നു."
 
-#: plugins/Satellites/src/Satellite.cpp:294
+#: plugins/Satellites/src/Satellite.cpp:296
 msgid "The satellite is not visible"
 msgstr "കൃത്രിമോപഗ്രഹം ദൃശ്യമല്ല."
 
-#: plugins/Satellites/src/Satellite.cpp:320
+#: plugins/Satellites/src/Satellite.cpp:322
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr ""
@@ -5049,15 +5059,15 @@ msgstr "അടയ്ക്കുക"
 msgid "[no TUI node]"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
 msgstr "ഓണ്‍"
 
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
 msgid "Off"
 msgstr "ഓഫ്"
 
-#: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
+#: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
 msgid "error, unknown color part \"%1\""
 msgstr ""
