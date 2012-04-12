@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-27 21:44+0700\n"
-"PO-Revision-Date: 2012-04-11 00:25+0000\n"
+"POT-Creation-Date: 2012-04-11 16:29+0700\n"
+"PO-Revision-Date: 2012-04-11 13:43+0000\n"
 "Last-Translator: kulkke <Unknown>\n"
 "Language-Team: <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-11 04:37+0000\n"
+"X-Launchpad-Export-Date: 2012-04-12 04:46+0000\n"
 "X-Generator: Launchpad (build 15070)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
@@ -60,13 +60,13 @@ msgstr "Gezegen: "
 msgid "Type: <b>%1</b>"
 msgstr "Türü: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:123
+#: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:247
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
+#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:250
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
@@ -109,51 +109,61 @@ msgstr "Bilinmeyen"
 msgid "Undocumented type"
 msgstr "Belgelenmemiş tür"
 
-#: src/core/modules/Planet.cpp:129 src/core/modules/StarWrapper.cpp:124
+#: src/core/modules/Planet.cpp:253 src/core/modules/StarWrapper.cpp:124
 #: plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Mutlak Parlaklık: %1"
 
-#: src/core/modules/Planet.cpp:142
+#: src/core/modules/Planet.cpp:266
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:143
+#: src/core/modules/Planet.cpp:267
 #, qt-format
 msgid "Obliquity (of date): %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:153
+#: src/core/modules/Planet.cpp:277
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Uzaklık: %1AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:160
+#: src/core/modules/Planet.cpp:284
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr "Uzaklık: %1 AU (1 AU = 149,597,870.691 kilometre)"
 
-#: src/core/modules/Planet.cpp:171
+#: src/core/modules/Planet.cpp:295
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:177
+#: src/core/modules/Planet.cpp:301
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Görünürdeki Çap: %1"
 
-#: src/core/modules/Planet.cpp:191
+#: src/core/modules/Planet.cpp:315
 #, qt-format
 msgid "Phase: %1"
 msgstr "Evre: %1"
 
-#: src/core/modules/Planet.cpp:192
+#: src/core/modules/Planet.cpp:316
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Aydınlamış: %%1"
+
+#: src/core/modules/Planet.cpp:317
+#, qt-format
+msgid "Elongation: %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:318
+#, qt-format
+msgid "Phase Angle: %1"
+msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -195,7 +205,7 @@ msgstr "Iraklık açısı: %1\""
 msgid "SpaceShip"
 msgstr "Uzay Aracı"
 
-#: src/core/StelProjector.cpp:62
+#: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
 msgstr "Maksimum Görünür Alan: "
 
@@ -332,46 +342,46 @@ msgstr "(açık)"
 msgid "Az/Alt: %1/%2"
 msgstr "Ufuk açısı/Yükseklik %1 %2"
 
-#: src/gui/ConfigurationDialog.cpp:314 src/gui/ConfigurationDialog.cpp:316
+#: src/gui/ConfigurationDialog.cpp:312
 msgid "Select screenshot directory"
 msgstr "Ekran görüntüsü dizinini seçin"
 
-#: src/gui/ConfigurationDialog.cpp:492
+#: src/gui/ConfigurationDialog.cpp:487
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Baslangıç FOV: %1 %2"
 
-#: src/gui/ConfigurationDialog.cpp:500
+#: src/gui/ConfigurationDialog.cpp:495
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr "Görünümün başlangıç yönü Az/Alt:%1/%2"
+msgstr "Görünümün başlangıç yönü Az/Yük:%1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:539
+#: src/gui/ConfigurationDialog.cpp:534
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Y"
 
-#: src/gui/ConfigurationDialog.cpp:543 src/gui/ViewDialog.cpp:393
+#: src/gui/ConfigurationDialog.cpp:538 src/gui/ViewDialog.cpp:393
 msgid "Contact"
 msgstr "İletişim"
 
-#: src/gui/ConfigurationDialog.cpp:621
+#: src/gui/ConfigurationDialog.cpp:616
 msgid "Author"
 msgstr "Yazar"
 
-#: src/gui/ConfigurationDialog.cpp:625
+#: src/gui/ConfigurationDialog.cpp:620
 msgid "License"
 msgstr "Lisans"
 
-#: src/gui/ConfigurationDialog.cpp:655
+#: src/gui/ConfigurationDialog.cpp:650
 msgid "Running script: "
 msgstr "Script Çalıştırılıyor: "
 
-#: src/gui/ConfigurationDialog.cpp:662
+#: src/gui/ConfigurationDialog.cpp:657
 msgid "Running script: [none]"
 msgstr "Script Çalıştırılıyor: [Hiçbiri]"
 
-#: src/gui/ConfigurationDialog.cpp:732
+#: src/gui/ConfigurationDialog.cpp:727
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -379,23 +389,23 @@ msgstr ""
 "Yeni yıldız kataloglarını indirme tamamlandı! Bunları görmek için "
 "Stellarium'u yeniden başlatın."
 
-#: src/gui/ConfigurationDialog.cpp:736
+#: src/gui/ConfigurationDialog.cpp:731
 msgid "All available star catalogs have been installed."
 msgstr "Tüm erişilebilir yıldız katalogları yüklendi."
 
-#: src/gui/ConfigurationDialog.cpp:741
+#: src/gui/ConfigurationDialog.cpp:736
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%1 'nin %2 fihristini al"
 
-#: src/gui/ConfigurationDialog.cpp:748
+#: src/gui/ConfigurationDialog.cpp:743
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr "%1 indiriliyor..."
 
-#: src/gui/ConfigurationDialog.cpp:755
+#: src/gui/ConfigurationDialog.cpp:750
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -406,7 +416,7 @@ msgstr ""
 "Yıldız sayısı: %2 Million\n"
 "Parlaklık menzili: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:798 src/gui/ConfigurationDialog.cpp:834
+#: src/gui/ConfigurationDialog.cpp:793 src/gui/ConfigurationDialog.cpp:829
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -415,11 +425,11 @@ msgstr ""
 "%1 Dosyası indirilirken hata yaşandı:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:886
+#: src/gui/ConfigurationDialog.cpp:881
 msgid "Verifying file integrity..."
 msgstr "Dosya bütünlüğü kontrol ediliyor..."
 
-#: src/gui/ConfigurationDialog.cpp:890
+#: src/gui/ConfigurationDialog.cpp:885
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -479,7 +489,7 @@ msgstr "Seçimi temizle"
 
 #: src/gui/HelpDialog.cpp:71
 msgid "When a Script is Running"
-msgstr "Bir Yazılım Çalışırken"
+msgstr "Bir Betik Çalışırken"
 
 #: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:147
 msgid "Slow down the script execution rate"
@@ -605,7 +615,7 @@ msgstr "Tecrübe: %1"
 
 #: src/gui/HelpDialog.cpp:308
 msgid "Past Developers"
-msgstr ""
+msgstr "Önceki Geliştiriciler"
 
 #: src/gui/HelpDialog.cpp:309
 msgid ""
@@ -710,11 +720,11 @@ msgstr "Sis"
 
 #: src/gui/StelGui.cpp:123 src/ui_viewDialog.h:1108
 msgid "Nebulas"
-msgstr "Nebula"
+msgstr "Bulutsular"
 
 #: src/gui/StelGui.cpp:124
 msgid "Nebulas background images"
-msgstr "Nebula artalan goruntuleri"
+msgstr "Bulutsu artalan görüntuleri"
 
 #: src/gui/StelGui.cpp:125 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:234
@@ -746,7 +756,7 @@ msgstr "Tam ekran modu"
 
 #: src/gui/StelGui.cpp:132
 msgid "Flip scene horizontally"
-msgstr "Goruntuyu yatay olarak cevir"
+msgstr "Görüntüyü yatay olarak çevir"
 
 #: src/gui/StelGui.cpp:133
 msgid "Flip scene vertically"
@@ -770,7 +780,7 @@ msgstr "Arama penceresi"
 
 #: src/gui/StelGui.cpp:139
 msgid "Sky and viewing options window"
-msgstr "Gokyuzu ve goruntuleme secenekleri penceresi"
+msgstr "Gökyüzü ve görüntüleme seçenekleri penceresi"
 
 #: src/gui/StelGui.cpp:140
 msgid "Date/time window"
@@ -947,55 +957,55 @@ msgstr "Bir Stellarium alan haritası içeren bir ZIP arşivi seçin"
 msgid "ZIP archives"
 msgstr "ZIP arşivleri"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:132
+#: src/gui/AddRemoveLandscapesDialog.cpp:127
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
 msgstr "Alan haritası \"%1\" başarıyla kuruldu."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:133
-#: src/gui/AddRemoveLandscapesDialog.cpp:160
+#: src/gui/AddRemoveLandscapesDialog.cpp:128
+#: src/gui/AddRemoveLandscapesDialog.cpp:155
 msgid "Success"
 msgstr "Başarı"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:146
-#: src/gui/AddRemoveLandscapesDialog.cpp:216
-#: src/gui/AddRemoveLandscapesDialog.cpp:225
-#: src/gui/AddRemoveLandscapesDialog.cpp:233
+#: src/gui/AddRemoveLandscapesDialog.cpp:141
+#: src/gui/AddRemoveLandscapesDialog.cpp:211
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:228
 msgid "No landscape was installed."
 msgstr "Hiçbir alan haritası kurulmadı."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:147
-#: src/gui/AddRemoveLandscapesDialog.cpp:171
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-#: src/gui/AddRemoveLandscapesDialog.cpp:226
-#: src/gui/AddRemoveLandscapesDialog.cpp:234
-#: src/gui/AddRemoveLandscapesDialog.cpp:244
+#: src/gui/AddRemoveLandscapesDialog.cpp:142
+#: src/gui/AddRemoveLandscapesDialog.cpp:166
+#: src/gui/AddRemoveLandscapesDialog.cpp:215
+#: src/gui/AddRemoveLandscapesDialog.cpp:221
+#: src/gui/AddRemoveLandscapesDialog.cpp:229
+#: src/gui/AddRemoveLandscapesDialog.cpp:239
 msgid "Error!"
 msgstr "Hata!"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:159
+#: src/gui/AddRemoveLandscapesDialog.cpp:154
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "Alan haritası \"%1\" başarıyla kaldırıldı."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:170
-#: src/gui/AddRemoveLandscapesDialog.cpp:240
+#: src/gui/AddRemoveLandscapesDialog.cpp:165
+#: src/gui/AddRemoveLandscapesDialog.cpp:235
 msgid "The selected landscape could not be (completely) removed."
 msgstr "Seçilen alan haritası (tamamen) silinemedi."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:193
+#: src/gui/AddRemoveLandscapesDialog.cpp:188
 #, qt-format
 msgid "Size on disk: %1 MiB"
 msgstr "Diskteki boyut: %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:219
+#: src/gui/AddRemoveLandscapesDialog.cpp:214
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr "Stellarium okumak ve yazmak için açamıyor %1"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:225
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
@@ -1004,13 +1014,13 @@ msgstr ""
 "içermiyor."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:232
+#: src/gui/AddRemoveLandscapesDialog.cpp:227
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr "Aynı isim veya tanımlayıcıya (%1) sahip bir alan haritası zaten var."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:243
+#: src/gui/AddRemoveLandscapesDialog.cpp:238
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "%1 diznini silerek elle kaldırabilirsiniz."
@@ -1764,7 +1774,7 @@ msgstr "Küba"
 
 #: src/translations.h:254
 msgid "Cape Verde"
-msgstr "Yeşil Burun Adaları"
+msgstr "Yeşil Burun"
 
 #: src/translations.h:255
 msgid "Christmas Island"
@@ -1836,7 +1846,7 @@ msgstr "Finlandiya"
 
 #: src/translations.h:272
 msgid "Fiji"
-msgstr ""
+msgstr "Fiji"
 
 #: src/translations.h:273
 msgid "Falkland Islands"
@@ -1864,7 +1874,7 @@ msgstr "Birleşik Krallık"
 
 #: src/translations.h:279
 msgid "Grenada"
-msgstr ""
+msgstr "Grenada"
 
 #: src/translations.h:280
 msgid "Georgia"
@@ -1888,7 +1898,7 @@ msgstr "Grönland"
 
 #: src/translations.h:285
 msgid "Gambia"
-msgstr ""
+msgstr "Gambiya"
 
 #: src/translations.h:286
 msgid "Guinea"
@@ -1968,7 +1978,7 @@ msgstr "Hindistan"
 
 #: src/translations.h:305
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "Britanya Hint Okyanusu Toprakları"
 
 #: src/translations.h:306
 msgid "Iraq"
@@ -1976,7 +1986,7 @@ msgstr "Irak"
 
 #: src/translations.h:307
 msgid "Iran"
-msgstr ""
+msgstr "İran"
 
 #: src/translations.h:308
 msgid "Iceland"
@@ -2012,7 +2022,7 @@ msgstr "Kamboçya"
 
 #: src/translations.h:316
 msgid "Kiribati"
-msgstr ""
+msgstr "Kiribati"
 
 #: src/translations.h:317
 msgid "Comoros"
@@ -2036,7 +2046,7 @@ msgstr "Kuveyt"
 
 #: src/translations.h:322
 msgid "Cayman Islands"
-msgstr ""
+msgstr "Cayman Adaları"
 
 #: src/translations.h:323
 msgid "Kazakhstan"
@@ -2256,7 +2266,7 @@ msgstr ""
 
 #: src/translations.h:377
 msgid "Pitcairn"
-msgstr ""
+msgstr "Pitcairn"
 
 #: src/translations.h:378
 msgid "Puerto Rico"
@@ -2264,7 +2274,7 @@ msgstr "Porto Riko"
 
 #: src/translations.h:379
 msgid "Palestinian Territories"
-msgstr ""
+msgstr "Filistin Toprakları"
 
 #: src/translations.h:380
 msgid "Portugal"
@@ -2388,7 +2398,7 @@ msgstr "Çad"
 
 #: src/translations.h:410
 msgid "French Southern Territories"
-msgstr ""
+msgstr "Fransız Güney Toprakları"
 
 #: src/translations.h:411
 msgid "Togo"
@@ -2480,11 +2490,11 @@ msgstr "Venezuela"
 
 #: src/translations.h:433
 msgid "British Virgin Islands"
-msgstr ""
+msgstr "Britanya Virgin Adaları"
 
 #: src/translations.h:434
 msgid "United States Virgin Islands"
-msgstr ""
+msgstr "Birleşik Devletler Virgin Adaları"
 
 #: src/translations.h:435
 msgid "Viet Nam"
@@ -2555,35 +2565,35 @@ msgstr "Kayıtlar"
 msgid "Refresh"
 msgstr "Yenile"
 
-#: src/ui_locationDialogGui.h:387
+#: src/ui_locationDialogGui.h:384
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:134
 msgid "Location"
 msgstr "Konum"
 
-#: src/ui_locationDialogGui.h:391
+#: src/ui_locationDialogGui.h:388
 msgid "Current location information"
 msgstr "Mevcut konum bilgileri"
 
-#: src/ui_locationDialogGui.h:392
+#: src/ui_locationDialogGui.h:389
 msgid "Use as default"
 msgstr "Varsayilan olarak kullan."
 
-#: src/ui_locationDialogGui.h:393 plugins/Oculars/src/ui_ocularDialog.h:876
+#: src/ui_locationDialogGui.h:390 plugins/Oculars/src/ui_ocularDialog.h:876
 #: plugins/Oculars/src/ui_ocularDialog.h:885
 #: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Delete"
 msgstr "Sil"
 
-#: src/ui_locationDialogGui.h:394
+#: src/ui_locationDialogGui.h:391
 msgid "Add to list"
 msgstr "Listeye ekle"
 
-#: src/ui_locationDialogGui.h:395
+#: src/ui_locationDialogGui.h:392
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:135
 msgid "Latitude:"
 msgstr "Enlem:"
 
-#: src/ui_locationDialogGui.h:397 src/ui_locationDialogGui.h:401
+#: src/ui_locationDialogGui.h:394 src/ui_locationDialogGui.h:398
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
@@ -2591,33 +2601,33 @@ msgstr ""
 "Degerleri ondalik derecelerle veya dms formati kullanarak girebilirsiniz. "
 "Ornegin; +1d 12m 8s"
 
-#: src/ui_locationDialogGui.h:399
+#: src/ui_locationDialogGui.h:396
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:138
 msgid "Longitude:"
 msgstr "Boylam:"
 
-#: src/ui_locationDialogGui.h:403
+#: src/ui_locationDialogGui.h:400
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Altitude:"
-msgstr "Yukseklik"
+msgstr "Yükseklik:"
 
-#: src/ui_locationDialogGui.h:405
+#: src/ui_locationDialogGui.h:402
 msgid "Enter the altitude in meter"
-msgstr "Yuksekligi metre cinsinden giriniz"
+msgstr "Yüksekliği metre cinsinden giriniz"
 
-#: src/ui_locationDialogGui.h:407
+#: src/ui_locationDialogGui.h:404
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:408
+#: src/ui_locationDialogGui.h:405
 msgid "Name/City:"
 msgstr "Isim/Sehir"
 
-#: src/ui_locationDialogGui.h:409
+#: src/ui_locationDialogGui.h:406
 msgid "Country:"
 msgstr "Ülke:"
 
-#: src/ui_locationDialogGui.h:410
+#: src/ui_locationDialogGui.h:407
 msgid "Planet:"
 msgstr "Gezegen"
 
@@ -2751,7 +2761,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:588
 msgid "Server:"
-msgstr ""
+msgstr "Sunucu:"
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
@@ -2890,7 +2900,7 @@ msgstr "Goksel kure"
 #: src/ui_viewDialog.h:1127
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Galactic plane line"
-msgstr ""
+msgstr "Gökada düzlem çizgisi"
 
 #: src/ui_viewDialog.h:1129
 msgid "Constellations"
@@ -3309,19 +3319,19 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
-msgstr ""
+msgstr "Betik konsolu"
 
 #: src/ui_scriptConsole.h:344
 msgid "load script from file"
-msgstr ""
+msgstr "betiği dosyadan kaydet"
 
 #: src/ui_scriptConsole.h:348
 msgid "save script to file"
-msgstr ""
+msgstr "betiği dosyaya kaydet"
 
 #: src/ui_scriptConsole.h:352
 msgid "clear script"
-msgstr ""
+msgstr "betiği temizle"
 
 #: src/ui_scriptConsole.h:356
 msgid "pre-process script using SSC preprocessor"
@@ -3341,19 +3351,19 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:369
 msgid "stop script"
-msgstr ""
+msgstr "betiği durdur"
 
 #: src/ui_scriptConsole.h:372
 msgid "Script"
-msgstr ""
+msgstr "Betik"
 
 #: src/ui_scriptConsole.h:373
 msgid "Output"
-msgstr ""
+msgstr "Çıktı"
 
 #: src/ui_scriptConsole.h:375
 msgid "Cursor position"
-msgstr ""
+msgstr "İmleç konumu"
 
 #: src/ui_scriptConsole.h:377
 msgid "Include dir:"
@@ -3361,7 +3371,7 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:378
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -3420,15 +3430,15 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:836
 msgid "&Previous ocular"
-msgstr ""
+msgstr "&Önceki oküler"
 
 #: plugins/Oculars/src/Oculars.cpp:837
 msgid "&Next ocular"
-msgstr ""
+msgstr "&Sonraki oküler"
 
 #: plugins/Oculars/src/Oculars.cpp:838
 msgid "Select &ocular"
-msgstr ""
+msgstr "&Oküler seç"
 
 #: plugins/Oculars/src/Oculars.cpp:883
 msgid "Toggle &crosshair"
@@ -3436,7 +3446,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:892
 msgid "Configure &Oculars"
-msgstr ""
+msgstr "&Okülerleri Yapılandır"
 
 #: plugins/Oculars/src/Oculars.cpp:901
 msgid "Toggle &CCD"
@@ -3448,15 +3458,15 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:919
 msgid "&Previous CCD"
-msgstr ""
+msgstr "&Önceki CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:920
 msgid "&Next CCD"
-msgstr ""
+msgstr "&Sonraki CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:921
 msgid "&Select CCD"
-msgstr ""
+msgstr "CCD S&eç"
 
 #: plugins/Oculars/src/Oculars.cpp:943
 msgid "&Rotate CCD"
@@ -3473,7 +3483,7 @@ msgstr "Öküler görüş"
 
 #: plugins/Oculars/src/Oculars.cpp:1225
 msgid "Oculars popup menu"
-msgstr ""
+msgstr "Okülerler açılır menüsü"
 
 #: plugins/Oculars/src/Oculars.cpp:1233
 msgid "Crosshairs"
@@ -3489,19 +3499,19 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1257
 msgid "Oculars plugin configuration"
-msgstr ""
+msgstr "Öküler eklenti yapılandırması"
 
 #: plugins/Oculars/src/Oculars.cpp:1445
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 #, qt-format
 msgid "Ocular #%1"
-msgstr ""
+msgstr "Oküler #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1450
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 #, qt-format
 msgid "Ocular #%1: %2"
-msgstr ""
+msgstr "Oküler #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:1464
@@ -3527,7 +3537,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
 #, qt-format
 msgid "Telescope #%1: %2"
-msgstr ""
+msgstr "Teleskop #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1497
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
@@ -3539,7 +3549,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
 #, qt-format
 msgid "FOV: %1"
-msgstr ""
+msgstr "FOV: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1520
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
@@ -3559,25 +3569,25 @@ msgstr ""
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1736
+#: plugins/Oculars/src/Oculars.cpp:1735
 msgid "&Telescope"
-msgstr ""
+msgstr "&Teleskop"
+
+#: plugins/Oculars/src/Oculars.cpp:1736
+msgid "&Previous telescope"
+msgstr "&Önceki teleskop"
 
 #: plugins/Oculars/src/Oculars.cpp:1737
-msgid "&Previous telescope"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1738
 msgid "&Next telescope"
-msgstr ""
+msgstr "&Sonraki teleskop"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
 msgid "Previous ocular"
-msgstr ""
+msgstr "Önceki oküler"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
 msgid "Next ocular"
-msgstr ""
+msgstr "Sonraki oküler"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
 msgid "Previous CCD frame"
@@ -3674,7 +3684,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Interface"
-msgstr ""
+msgstr "Arayüz"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:872
 msgid "On-screen control panel"
@@ -3683,7 +3693,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:873
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:214
 msgid "General"
-msgstr ""
+msgstr "Genel"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:874
 #: plugins/Oculars/src/ui_ocularDialog.h:882
@@ -3696,7 +3706,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Add"
-msgstr ""
+msgstr "Ekle"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:877
 #: plugins/Oculars/src/ui_ocularDialog.h:886
@@ -3704,7 +3714,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:683
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
-msgstr ""
+msgstr "Ad:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "aFOV:"
@@ -3713,7 +3723,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:879
 #: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Focal length:"
-msgstr ""
+msgstr "Odak uzaklığı:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "Field stop:"
@@ -3721,7 +3731,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 msgid "Binoculars"
-msgstr ""
+msgstr "Dürbünler"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:883
 #: plugins/Oculars/src/ui_ocularDialog.h:893
@@ -3799,68 +3809,68 @@ msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:228
-#: plugins/Satellites/src/Satellite.cpp:232
+#: plugins/Satellites/src/Satellite.cpp:230
+#: plugins/Satellites/src/Satellite.cpp:234
 msgid "Catalog #"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:234
+#: plugins/Satellites/src/Satellite.cpp:236
 msgid "International Designator"
 msgstr ""
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:246
+#: plugins/Satellites/src/Satellite.cpp:248
 #, qt-format
 msgid "Range (km): %1"
 msgstr "Menzil (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:249
+#: plugins/Satellites/src/Satellite.cpp:251
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr ""
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:252
+#: plugins/Satellites/src/Satellite.cpp:254
 #, qt-format
 msgid "Altitude (km): %1"
-msgstr "Rakım (km): %1"
+msgstr "Yükseklik (km): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:255
+#: plugins/Satellites/src/Satellite.cpp:257
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr ""
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:269
+#: plugins/Satellites/src/Satellite.cpp:271
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "TEME koordinatları (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:277
+#: plugins/Satellites/src/Satellite.cpp:279
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "TEME hızı (km/s): %1"
 
-#: plugins/Satellites/src/Satellite.cpp:285
+#: plugins/Satellites/src/Satellite.cpp:287
 msgid "The satellite and the observer are in sunlight."
 msgstr "Uydu ve gözlemci güneş ışığında."
 
-#: plugins/Satellites/src/Satellite.cpp:288
+#: plugins/Satellites/src/Satellite.cpp:290
 msgid "The satellite is visible."
 msgstr "Uydu görünür durumda."
 
-#: plugins/Satellites/src/Satellite.cpp:291
+#: plugins/Satellites/src/Satellite.cpp:293
 msgid "The satellite is eclipsed."
 msgstr "Uydu gölgede."
 
-#: plugins/Satellites/src/Satellite.cpp:294
+#: plugins/Satellites/src/Satellite.cpp:296
 msgid "The satellite is not visible"
 msgstr "Uydu görünmüyor."
 
-#: plugins/Satellites/src/Satellite.cpp:320
+#: plugins/Satellites/src/Satellite.cpp:322
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
@@ -5037,7 +5047,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:450
 msgid "Stop running script"
-msgstr ""
+msgstr "Çalışan betiği durdur"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:453
 msgid "CD/DVD script"
@@ -5064,15 +5074,15 @@ msgstr "Kapat"
 msgid "[no TUI node]"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
 msgid "Off"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
+#: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
 msgid "error, unknown color part \"%1\""
 msgstr ""
