@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 Alexander Wolf
+ * Copyright (C) 2012 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,7 +62,6 @@ Pulsar::Pulsar(const QVariantMap& map)
 
 Pulsar::~Pulsar()
 {
-	//
 }
 
 QVariantMap Pulsar::getMap(void)
@@ -99,7 +99,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	}
 
 	if (flags&Extra1)
-	    oss << q_("Type: <b>%1</b>").arg(q_("pulsar")) << "<br />";
+		oss << q_("Type: <b>%1</b>").arg(q_("pulsar")) << "<br />";
 
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
@@ -175,9 +175,9 @@ float Pulsar::getVMagnitude(const StelCore* core, bool withExtinction) const
 	float extinctionMag=0.0; // track magnitude loss
 	if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
 	{
-	    Vec3d altAz=getAltAzPosApparent(core);
-	    altAz.normalize();
-	    core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
+		Vec3d altAz=getAltAzPosApparent(core);
+		altAz.normalize();
+		core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
 	}
 
 	// Calculate fake visual magnitude as function by distance - minimal magnitude is 6

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 Alexander Wolf
+ * Copyright (C) 2012 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,14 +81,23 @@ Pulsars::Pulsars()
 */
 Pulsars::~Pulsars()
 {
-	//
+	Pulsar::markerTexture.clear();
+
+	if (!texPointer.isNull())
+	{
+		texPointer->deleteLater();
+	}
 }
 
 void Pulsars::deinit()
 {
+	// if any pulsar is selected, de-select it
+	if (!GETSTELMODULE(StelObjectMgr)->getSelectedObject("Pulsar").empty())
+		GETSTELMODULE(StelObjectMgr)->unSelect();
+
 	psr.clear();
-	Pulsar::markerTexture.clear();
-	texPointer.clear();
+
+	GETSTELMODULE(StelObjectMgr)->unregisterStelObjectMgr(this);
 }
 
 /*
@@ -164,8 +174,6 @@ void Pulsars::draw(StelCore* core)
 
 void Pulsars::drawPointer(StelCore* core, StelPainter& painter)
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Pulsar");
 	if (!newSelected.empty())
 	{
@@ -349,7 +357,11 @@ QVariantMap Pulsars::loadPSRMap(QString path)
 */
 void Pulsars::setPSRMap(const QVariantMap& map)
 {
+	// if any pulsars already exist, unselect and delete them
+	if (!GETSTELMODULE(StelObjectMgr)->getSelectedObject("Pulsar").empty())
+		GETSTELMODULE(StelObjectMgr)->unSelect();
 	psr.clear();
+
 	QVariantMap psrMap = map.value("pulsars").toMap();
 	foreach(QString psrKey, psrMap.keys())
 	{

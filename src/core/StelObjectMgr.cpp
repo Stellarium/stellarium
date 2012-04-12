@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
+ * Copyright (C) 2012 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,6 +52,10 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* mgr)
 	objectsModule.push_back(mgr);
 }
 
+void StelObjectMgr::unregisterStelObjectMgr(StelObjectModule* mgr)
+{
+	objectsModule.removeAll(mgr);
+}
 
 StelObjectP StelObjectMgr::searchByNameI18n(const QString &name) const
 {

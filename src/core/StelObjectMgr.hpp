@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
+ * Copyright (C) 2012 Matthew Gates
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,6 +50,10 @@ public:
 	//! Add a new StelObject manager into the list of supported modules.
 	//! Registered modules can have selected objects
 	void registerStelObjectMgr(StelObjectModule* mgr);
+
+	//! Remove a StelObjectModule from the list of active StelObjectModules
+	//! This should be done when a StelObjectModule is unloaded
+	void unregisterStelObjectMgr(StelObjectModule* mgr);
 
 	//! Find and select an object near given equatorial J2000 position.
 	//! @param core the StelCore instance to use for computations
