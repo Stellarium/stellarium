@@ -92,11 +92,12 @@ AngleMeasure::AngleMeasure()
 }
 
 AngleMeasure::~AngleMeasure()
-{
-        StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-        Q_ASSERT(gui);
-        gui->getButtonBar()->removeButton(toolbarButton, "065-pluginsGroup");
-        delete toolbarButton;
+{	
+	if (toolbarButton != NULL)
+	{
+		toolbarButton->deleteLater();
+		toolbarButton = NULL;
+	}
 }
 
 //! Determine which "layer" the plagin's drawing will happen on.
@@ -140,7 +141,7 @@ void AngleMeasure::init()
 	// Add a toolbar button
 	try
 	{
-		toolbarButton = new StelButton(NULL, QPixmap(":/angleMeasure/bt_anglemeasure_on.png"), QPixmap(":/angleMeasure/bt_anglemeasure_off.png"), QPixmap(":/graphicGui/glow32x32.png"), gui->getGuiActions("actionShow_Angle_Measure"));
+		toolbarButton = new StelButton(NULL, QPixmap(":/angleMeasure/bt_anglemeasure_on.png"), QPixmap(":/angleMeasure/bt_anglemeasure_off.png"), QPixmap(":/graphicGui/glow32x32.png"), action);
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
 	catch (std::runtime_error& e)
@@ -153,7 +154,9 @@ void AngleMeasure::deinit()
 {
         StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
         Q_ASSERT(gui);
-        gui->removeGuiAction(gui->getGuiActions("actionShow_Angle_Measure"));
+	gui->getGuiActions("actionShow_Angle_Measure")->setChecked(false);
+	gui->removeGuiAction("actionShow_Angle_Measure");
+	gui->getButtonBar()->hideButton("actionShow_Angle_Measure");
 }
 
 void AngleMeasure::update(double deltaTime)
