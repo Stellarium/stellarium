@@ -43,10 +43,6 @@
 
 #include "StelPainter.hpp"
 #include <QtOpenGL>
-//FIXME: After fully migrate to Qt 4.8 this condition need drop
-#if QT_VERSION>=0x040800
-#include <QGLFunctions>
-#endif
 
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
@@ -120,6 +116,11 @@ void StelPainter::swapBuffer()
 StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 {
 	Q_ASSERT(proj);
+
+	//FIXME: After fully migrate to Qt 4.8 this condition need drop
+	#if QT_VERSION>=0x040800
+	initializeGLFunctions();
+	#endif
 
 #ifndef NDEBUG
 	Q_ASSERT(globalMutex);
@@ -1926,28 +1927,15 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
 		glEnableClientState(GL_NORMAL_ARRAY);
 		glNormalPointer(normalArray.type, 0, normalArray.pointer);
 
-	//vertex attributes projected and tangent array
+		//vertex attributes projected and tangent array
 
 		int pVecLocation = ssm->nMapShader->attributeLocation("pvec");
-		//FIXME: after fully migrate to Qt 4.8 this condition need drop
-		#if QT_VERSION>=0x040800
-		QGLFunctions functions(QGLContext::currentContext());
-		functions.glEnableVertexAttribArray(pVecLocation);
-		functions.glVertexAttribPointer(pVecLocation, projectedVertexArray.size, projectedVertexArray.type, 0, 0, projectedVertexArray.pointer);
-		#else
 		glEnableVertexAttribArray(pVecLocation);
 		glVertexAttribPointer(pVecLocation, projectedVertexArray.size, projectedVertexArray.type, 0, 0, projectedVertexArray.pointer);
-		#endif
 
 		int tangentLocation = ssm->nMapShader->attributeLocation("tang");
-		//FIXME: after fully migrate to Qt 4.8 this condition need drop
-		#if QT_VERSION>=0x040800
-		functions.glEnableVertexAttribArray(tangentLocation);
-		functions.glVertexAttribPointer(tangentLocation, 3, GL_FLOAT, 0, 0, tangentArr.constData());
-		#else
-	glEnableVertexAttribArray(tangentLocation);
-	glVertexAttribPointer(tangentLocation, 3, GL_FLOAT, 0, 0, tangentArr.constData());
-	#endif
+		glEnableVertexAttribArray(tangentLocation);
+		glVertexAttribPointer(tangentLocation, 3, GL_FLOAT, 0, 0, tangentArr.constData());
 
 //uniform light position
 		int lposLocation = ssm->nMapShader->uniformLocation("lpos");
@@ -1960,19 +1948,13 @@ void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, i
 		ssm->nMapShader->setUniform(diffuseLocation, diffuseLight[0], diffuseLight[1], diffuseLight[2], diffuseLight[3]);
 
 //drawing
-	glDrawElements(GL_TRIANGLES, indiceArr.size(), GL_UNSIGNED_INT, indiceArr.constData());
+		glDrawElements(GL_TRIANGLES, indiceArr.size(), GL_UNSIGNED_INT, indiceArr.constData());
 
-	glDisableClientState(GL_NORMAL_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	glDisableClientState(GL_VERTEX_ARRAY);
-		//FIXME: after fully migrate to Qt 4.8 this condition need drop
-	#if QT_VERSION>=0x040800
-	functions.glDisableVertexAttribArray(tangentLocation);
-	functions.glDisableVertexAttribArray(pVecLocation);
-	#else
+		glDisableClientState(GL_NORMAL_ARRAY);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableVertexAttribArray(tangentLocation);
-		glDisableVertexAttribArray(pVecLocation);
-		#endif
+		glDisableVertexAttribArray(pVecLocation);		
 	}
 	else
 	{
