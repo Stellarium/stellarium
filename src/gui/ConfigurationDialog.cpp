@@ -64,14 +64,18 @@
 ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
 {
 	ui = new Ui_configurationDialogForm;
+	customInfoDialog = NULL;
 	hasDownloadedStarCatalog = false;
 	isDownloadingStarCatalog = false;
-	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();
+	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();	
 }
 
 ConfigurationDialog::~ConfigurationDialog()
 {
 	delete ui;
+	ui=NULL;
+	delete customInfoDialog;
+	customInfoDialog = NULL;
 }
 
 void ConfigurationDialog::retranslate()
