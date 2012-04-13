@@ -18,6 +18,7 @@
  */
 
 #include "SkyGui.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelGuiItems.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
@@ -41,7 +42,7 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 	else if (objectInfo == "none")
 		infoTextFilters = StelObject::InfoStringGroup(0);
 	else if (objectInfo == "custom")
-		infoTextFilters = StelObject::InfoStringGroup(StelApp::getInstance().getCore()->getCustomInfoString());
+		infoTextFilters = StelObject::InfoStringGroup(StelApp::getInstance().getStelObjectMgr().getCustomInfoString());
 	else
 	{
 		qWarning() << "config.ini option gui/selected_object_info is invalid, using \"all\"";
