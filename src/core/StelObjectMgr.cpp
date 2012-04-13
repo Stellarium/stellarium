@@ -268,81 +268,133 @@ int StelObjectMgr::getCustomInfoString(void)
 
 	int NameOct;
 	if (Name)
+	{
 		NameOct = StelObject::Name;
+	}
 	else
+	{
 		NameOct = OctZero;
+	}
 
 	int CatalogNumberOct;
 	if (CatalogNumber)
+	{
 		CatalogNumberOct = StelObject::CatalogNumber;
+	}
 	else
+	{
 		CatalogNumberOct = OctZero;
+	}
 
 	int MagnitudeOct;
 	if (Magnitude)
+	{
 		MagnitudeOct = StelObject::Magnitude;
+	}
 	else
+	{
 		MagnitudeOct = OctZero;
+	}
 
 	int RaDecJ2000Oct;
 	if (RaDecJ2000)
+	{
 		RaDecJ2000Oct = StelObject::RaDecJ2000;
+	}
 	else
+	{
 		RaDecJ2000Oct = OctZero;
+	}
 
 	int RaDecOfDateOct;
 	if (RaDecOfDate)
+	{
 		RaDecOfDateOct = StelObject::RaDecOfDate;
+	}
 	else
+	{
 		RaDecOfDateOct = OctZero;
+	}
 
 	int AltAzOct;
 	if (AltAz)
+	{
 		AltAzOct = StelObject::AltAzi;
+	}
 	else
+	{
 		AltAzOct = OctZero;
+	}
 
 	int DistanceOct;
 	if (Distance)
+	{
 		DistanceOct = StelObject::Distance;
+	}
 	else
+	{
 		DistanceOct = OctZero;
+	}
 
 	int SizeOct;
 	if (Size)
+	{
 		SizeOct = StelObject::Size;
+	}
 	else
+	{
 		SizeOct = OctZero;
+	}
 
 	int Extra1Oct;
 	if (Extra1)
+	{
 		Extra1Oct = StelObject::Extra1;
+	}
 	else
+	{
 		Extra1Oct = OctZero;
+	}
 
 	int Extra2Oct;
 	if (Extra2)
+	{
 		Extra2Oct = StelObject::Extra2;
+	}
 	else
+	{
 		Extra2Oct = OctZero;
+	}
 
 	int Extra3Oct;
 	if (Extra3)
+	{
 		Extra3Oct = StelObject::Extra3;
+	}
 	else
+	{
 		Extra3Oct = OctZero;
+	}
 
 	int HourAngleOct;
 	if (HourAngle)
+	{
 		HourAngleOct = StelObject::HourAngle;
+	}
 	else
+	{
 		HourAngleOct = OctZero;
+	}
 
 	int AbsoluteMagnitudeOct;
 	if (AbsoluteMagnitude)
+	{
 		AbsoluteMagnitudeOct = StelObject::AbsoluteMagnitude;
+	}
 	else
+	{
 		AbsoluteMagnitudeOct = OctZero;
+	}
 
 	return (NameOct|CatalogNumberOct|MagnitudeOct|RaDecJ2000Oct|RaDecOfDateOct|AltAzOct|DistanceOct|SizeOct|Extra1Oct|Extra2Oct|Extra3Oct|HourAngleOct|AbsoluteMagnitudeOct);
 }
