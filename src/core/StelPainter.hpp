@@ -30,6 +30,11 @@
 #include <QVarLengthArray>
 #include <QFontMetrics>
 
+//FIXME: After fully migrate to Qt 4.8 this condition need drop
+#if QT_VERSION>=0x040800
+#include <QGLFunctions>
+#endif
+
 #ifdef USE_OPENGL_ES2
  #define STELPAINTER_GL2 1
 #endif
@@ -103,6 +108,10 @@ private:
 //! As a coding rule, no openGL calls should be performed when no instance of StelPainter exist.
 //! Typical usage is to create a local instance of StelPainter where drawing operations are needed.
 class StelPainter
+//FIXME: After fully migrate to Qt 4.8 this condition need drop
+#if QT_VERSION>=0x040800
+		: protected QGLFunctions
+#endif
 {
 public:
 	friend class VertexArrayProjector;
