@@ -23,7 +23,9 @@
 #define _CUSTOMINFODIALOG_HPP_
 
 #include <QObject>
+#include <QSettings>
 #include "StelDialog.hpp"
+#include "StelGui.hpp"
 
 class Ui_CustomInfoDialogForm;
 
@@ -82,6 +84,11 @@ protected:
         //! Initialize the dialog widgets and connect the signals/slots.
         virtual void createDialogContent();
 	Ui_CustomInfoDialogForm *ui;
+
+private:
+	StelGuiBase* gui;
+	QSettings* conf;
+
 };
 
 #endif // _CUSTOMINFODIALOG_HPP_

@@ -30,6 +30,7 @@
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
+#include "StelObjectMgr.hpp"
 
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
@@ -324,7 +325,7 @@ void ConfigurationDialog::setBriefSelectedInfo(void)
 
 void ConfigurationDialog::setCustomSelectedInfo(void)
 {
-	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getCore()->getCustomInfoString()));
+	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getStelObjectMgr().getCustomInfoString()));
 	ui->pushButtonCustomInfoDialog->setEnabled(true);
 }
 
