@@ -27,6 +27,7 @@ CustomInfoDialog::CustomInfoDialog()
 CustomInfoDialog::~CustomInfoDialog()
 {	
 	delete ui;
+	ui=NULL;
 }
 
 void CustomInfoDialog::retranslate()

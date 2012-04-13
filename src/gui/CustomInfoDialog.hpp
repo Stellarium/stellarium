@@ -29,6 +29,7 @@
 
 class Ui_CustomInfoDialogForm;
 
+//! @class CustomInfoDialog
 class CustomInfoDialog : public StelDialog
 {
     Q_OBJECT
@@ -41,6 +42,12 @@ public slots:
         void retranslate();
 	void setVisible(bool);
 
+protected:
+	//! Initialize the dialog widgets and connect the signals/slots.
+	virtual void createDialogContent();
+	Ui_CustomInfoDialogForm *ui;
+
+private slots:
 	bool getNameCustomInfoFlag();
 	void setNameCustomInfoFlag(bool flag);
 
@@ -79,11 +86,6 @@ public slots:
 
 	bool getAbsoluteMagnitudeCustomInfoFlag();
 	void setAbsoluteMagnitudeCustomInfoFlag(bool flag);
-
-protected:
-        //! Initialize the dialog widgets and connect the signals/slots.
-        virtual void createDialogContent();
-	Ui_CustomInfoDialogForm *ui;
 
 private:
 	StelGuiBase* gui;

@@ -140,7 +140,7 @@ private:
 
 	int savedProjectionType;
 
-	CustomInfoDialog * customInfoDialog;
+	CustomInfoDialog* customInfoDialog;
 };
 
 #endif // _CONFIGURATIONDIALOG_HPP_
