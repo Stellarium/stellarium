@@ -446,8 +446,6 @@ public slots:
 	//! the selected object is of the correct type - i.e. a planet.
 	void moveObserverToSelected();
 
-	int getCustomInfoString(void);
-
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(StelLocation);

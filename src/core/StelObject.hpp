@@ -139,8 +139,6 @@ public:
 	//! @return radius in degree. This value is the apparent angular size of the object, and is independent of the current FOV.
 	virtual double getAngularSize(const StelCore* core) const = 0;
 
-	int getCustomInfo(void);
-
 protected:
 
 	//! Format the positional info string contain J2000/of date/altaz/hour angle positions for the object
