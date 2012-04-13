@@ -117,6 +117,9 @@ void StelTexture::setImage(QImage* img)
 StelTexture::StelTexture() : loader(NULL), downloaded(false), isLoadingImage(false),
 				   errorOccured(false), id(0), avgLuminance(-1.f)
 {
+	#if QT_VERSION>=0x040800
+	initializeGLFunctions();
+	#endif
 	width = -1;
 	height = -1;
 }
