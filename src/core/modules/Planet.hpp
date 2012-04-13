@@ -23,6 +23,10 @@
 #define _PLANET_HPP_
 
 #include <QString>
+//FIXME: After fully migrate to Qt 4.8 this condition need drop
+#if QT_VERSION>=0x040800
+#include <QGLFunctions>
+#endif
 
 #include "StelObject.hpp"
 #include "StelProjector.hpp"
@@ -81,7 +85,13 @@ private:
 };
 
 
-class Planet : public StelObject
+class Planet
+//FIXME: After fully migrate to Qt 4.8 this condition need drop
+#if QT_VERSION>=0x040800
+		: public StelObject, protected QGLFunctions
+#else
+		: public StelObject
+#endif
 {
 public:
 	friend class SolarSystem;
@@ -149,6 +159,7 @@ public:
 	//! - PlainText
         //! - Extra1: Heliocentric Ecliptical Coordinates
         //! - Extra2: Observer-planetocentric Ecliptical Coordinates
+	//! - Extra3: Phase, illumination, phase angle & elongation from the Sun
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Planet.
@@ -198,8 +209,10 @@ public:
 	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
 	void computeTransMatrix(double date);
 
-	// Get the phase angle for an observer at pos obsPos in the heliocentric coordinate (in AU)
+	// Get the phase angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getPhase(const Vec3d& obsPos) const;
+	// Get the elongation angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
+	double getElongation(const Vec3d& obsPos) const;
 	// Get the angular size of the spheroid of the planet (i.e. without the rings)
 	double getSpheroidAngularSize(const StelCore* core) const;
 
