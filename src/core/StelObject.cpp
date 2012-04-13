@@ -27,7 +27,6 @@
 #include "StelSkyDrawer.hpp"
 #include "RefractionExtinction.hpp"
 #include "StelLocation.hpp"
-#include "QSettings"
 
 #include <QRegExp>
 #include <QDebug>
