@@ -36,13 +36,21 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 	Q_ASSERT(conf);
 	QString objectInfo = conf->value("gui/selected_object_info", "all").toString();
 	if (objectInfo == "all")
+	{
 		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
+	}
 	else if (objectInfo == "short")
+	{
 		infoTextFilters = StelObject::InfoStringGroup(StelObject::ShortInfo);
+	}
 	else if (objectInfo == "none")
+	{
 		infoTextFilters = StelObject::InfoStringGroup(0);
+	}
 	else if (objectInfo == "custom")
+	{
 		infoTextFilters = StelObject::InfoStringGroup(StelApp::getInstance().getStelObjectMgr().getCustomInfoString());
+	}
 	else
 	{
 		qWarning() << "config.ini option gui/selected_object_info is invalid, using \"all\"";
