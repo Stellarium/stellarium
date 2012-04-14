@@ -85,13 +85,13 @@ IF(APPLE)
  #SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.5.sdk/")
  #SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.6")
  #SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.6.sdk/")
- 
+
  # uncomment one of the following, depending on what platforms you want.
  # NOTE: Qt build for Cocoa is Intel only.  Qt with Carbon is both, but does not seem
  # to handle 64bit well.
  #SET(CMAKE_OSX_ARCHITECTURES "i386;x86_64;ppc;ppc64")
  #SET(CMAKE_OSX_ARCHITECTURES "i386;x86_64")
- #SET(CMAKE_OSX_ARCHITECTURES "x86_64")
+ SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 ENDIF()
 
 ########### Check functions ###########
@@ -206,7 +206,7 @@ ENDIF()
 ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 
 ########### Find packages ###########
-SET(QT_MIN_VERSION "4.6.0")
+SET(QT_MIN_VERSION "4.6.2")
 FIND_PACKAGE(Qt4 REQUIRED)
 SET(QT_USE_QTOPENGL TRUE)
 IF(ENABLE_SCRIPTING)
@@ -225,6 +225,7 @@ STRING(REPLACE "${QT_QTTEST_LIBRARY}" "" QT_LIBRARIES "${QT_LIBRARIES}")
 # Get rid of the GLU dependency, it's not needed in stellarium.
 STRING(REPLACE "-lGLU " "" QT_LIBRARIES "${QT_LIBRARIES}")
 
+FIND_PACKAGE(OpenGL) # Introduced in revision 5284, may cause problems when compiling in OpenGL ES mode - see lines 248-255 below. --BM
 FIND_PACKAGE(ZLIB)
 
 IF(ENABLE_NLS)
@@ -331,15 +332,14 @@ IF(GENERATE_PACKAGE_TARGET)
 ENDIF()
 
 ########### Macosx Bundling ###############
-IF(APPLE)
-ADD_CUSTOM_TARGET(macosx_bundle bash util/macosx_bundle.sh ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} DEPENDS install WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "making the macosx bundle." VERBATIM)
-ENDIF()
+#IF(APPLE)
+#ADD_CUSTOM_TARGET(macosx_bundle bash util/macosx_bundle.sh ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} DEPENDS install WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "making the macosx bundle." VERBATIM)
+#ENDIF()
 
 
 ########### Generate doxygen doc ###############
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/Doxyfile.cmake ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
 ADD_CUSTOM_TARGET(apidoc doxygen ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc directory.")
-
 
 ########### Top level include directories ###########
 # This will be used for all compilations in sub-directories
@@ -356,15 +356,8 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_SOURCE_DIR}/src/core/external/glues_stel/source/libtess
 	${CMAKE_SOURCE_DIR}/src/gui
 	${CMAKE_SOURCE_DIR}/src/scripting
-	${OPENGL_INCLUDE_DIR}
-	${ICONV_INCLUDE_DIR}
 	${INTL_INCLUDE_DIR}
-	${ZLIB_INCLUDE_DIR}
-	${QT_INCLUDE_DIR}/QtScript
-	${QT_QTSCRIPT_INCLUDE_DIR}
 	${CMAKE_BINARY_DIR}/src
-	${QT_QTTEST_INCLUDE_DIR}
-	${QT_DECLARATIVE_INCLUDE_DIR}
 )
 
 ########### Subdirectories ###############
