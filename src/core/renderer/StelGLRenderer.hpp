@@ -1,16 +1,12 @@
-#ifndef _STELGL2RENDERER_HPP_
-#define _STELGL2RENDERER_HPP_
+#ifndef _STELGLRENDERER_HPP_
+#define _STELGLRENDERER_HPP_
 
 #include <QGLFramebufferObject>
 #include <QImage>
 #include <QPainter>
 #include <QSize>
 
-#include "StelGLProvider.hpp"
-#include "StelQGLProvider.hpp"
 #include "StelRenderer.hpp"
-
-#include "StelPainter.hpp"
 
 
 //TODO At the moment, we're always using FBOs when supported.
@@ -22,20 +18,12 @@
 //That could be refactored into a parent class.
 
 //! Renderer based on OpenGL 2.x .
-class StelGL2Renderer : public StelRenderer
+class StelGLRenderer : public StelRenderer
 {
 public:
-	//! Construct a StelGL2Renderer using specified GL provider to initialize GL context.
-	//!
-	//! Right now, StelGL2Renderer can only be constructed from a StelQGLProvider - 
-	//! this is because StelGL2Renderer depends on Qt-specific handling
-	//! of GL context at the moment.
-	//!
-	//! That could be changed if we use features such as FBOs directly without
-	//! using Qt wrappers.
-	StelGL2Renderer(StelQGLProvider* provider)
-	    : provider(provider)
-		, fboSupported(false)
+	//! Construct a StelGL2Renderer.
+	StelGLRenderer()
+		: fboSupported(false)
 		, fboDisabled(false)
 		, sceneSize(QSize())
 		, frontBuffer(NULL)
@@ -46,7 +34,7 @@ public:
 	{
 	}
 	
-	virtual ~StelGL2Renderer()
+	virtual ~StelGLRenderer()
 	{
 		if(NULL != frontBuffer)
 		{
@@ -62,7 +50,6 @@ public:
 	
 	virtual void init()
 	{
-		provider->init();
 		fboSupported = QGLFramebufferObject::hasOpenGLFramebufferObjects();
 		if (!useFBO())
 		{
@@ -71,19 +58,9 @@ public:
 		}
 	}
 	
-	virtual QImage screenshot()
-	{
-		return provider->grabFrameBuffer();
-	}
-	
 	virtual void enablePainting()
 	{
-		provider->enablePainting(defaultPainter);
-	}
-	
-	virtual void disablePainting()
-	{
-		provider->disablePainting();
+		enablePainting(defaultPainter);
 	}
 	
 	virtual void viewportHasBeenResized(QSize size)
@@ -113,20 +90,21 @@ public:
 	virtual void startDrawing()
 	{
 		invariant();
-		drawing = true;
 		
+		makeGLContextCurrent();
+		
+		drawing = true;
 		if (useFBO())
 		{
 			//Draw to backBuffer.
-			StelPainter::makeMainGLContextCurrent();
 			initFBO();
 			backBuffer->bind();
 			backBufferPainter = new QPainter(backBuffer);
-			provider->enablePainting(backBufferPainter);
+			enablePainting(backBufferPainter);
 		}
 		else
 		{
-			provider->enablePainting(defaultPainter);
+			enablePainting(defaultPainter);
 		}
 		invariant();
 	}
@@ -134,7 +112,7 @@ public:
 	virtual void suspendDrawing()
 	{
 		invariant();
-		provider->disablePainting();
+		disablePainting();
 		
 		if (useFBO())
 		{
@@ -151,7 +129,7 @@ public:
 	virtual void finishDrawing()
 	{
 		invariant();
-		provider->disablePainting();
+		disablePainting();
 		
 		if (useFBO())
 		{
@@ -182,17 +160,70 @@ public:
 			Q_ASSERT_X(!backBuffer->isBound() && !frontBuffer->isBound(),
 			           "StelGL2Renderer::drawWindow", 
 			           "Framebuffer objects weren't released before drawing the result");
-			provider->enablePainting(defaultPainter);
+			enablePainting(defaultPainter);
 			effect->paintViewportBuffer(frontBuffer);
-			provider->disablePainting();
+			disablePainting();
 		}
 		invariant();
 	}
 	
-private:
-	//! Provides GL context and platform (e.g. Qt) specific functionality.
-	StelGLProvider* provider;
+protected:
+	//! Make Stellarium GL context the currently used GL context. Call this before GL calls.
+	virtual void makeGLContextCurrent() = 0;
 	
+protected:
+	//! Enable painting, using specified painter.
+	virtual void enablePainting(QPainter* painter) = 0;
+	
+	//! Asserts that we're in a valid state.
+	//!
+	//! Overriding methods should also call StelGLRenderer::invariant().
+	virtual void invariant() const
+	{
+		Q_ASSERT_X(sceneSize.isValid(), "StelGL2Renderer::invariant",
+		           "Invalid scene size");
+		const bool fbo = useFBO();
+		Q_ASSERT_X(NULL == backBuffer || fbo, "StelGL2Renderer::invariant",
+		           "We have a backbuffer even though we're not using FBO");
+		Q_ASSERT_X(NULL == frontBuffer || fbo, "StelGL2Renderer::invariant",
+		           "We have a frontbuffer even though we're not using FBO");
+		Q_ASSERT_X(NULL == backBufferPainter || fbo, "StelGL2Renderer::invariant",
+		           "We have a backbuffer painter even though we're not using FBO");
+		Q_ASSERT_X(drawing && fbo ? backBuffer != NULL : true,
+		           "StelGL2Renderer::invariant",
+		           "We're drawing and using FBOs, but the backBuffer is NULL");
+		Q_ASSERT_X(drawing && fbo ? frontBuffer != NULL : true,
+		           "StelGL2Renderer::invariant",
+		           "We're drawing and using FBOs, but the frontBuffer is NULL");
+		Q_ASSERT_X(drawing && fbo ? backBufferPainter != NULL : true,
+		           "StelGL2Renderer::invariant",
+		           "We're drawing and using FBOs, but the backBufferPainter is NULL");
+	}
+	
+	//! Check for any OpenGL errors. Useful for detecting incorrect GL code.
+	void checkGLErrors() const
+	{
+		GLenum glError = glGetError();
+		switch(glError)
+		{
+			case GL_NO_ERROR: 
+				break;
+			case GL_INVALID_ENUM: 
+				qWarning() << "OpenGL error detected: GL_INVALID_ENUM"; break;
+			case GL_INVALID_VALUE:
+				qWarning() << "OpenGL error detected: GL_INVALID_VALUE"; break;
+			case GL_INVALID_OPERATION:
+				qWarning() << "OpenGL error detected: GL_INVALID_OPERATION"; break;
+			case GL_INVALID_FRAMEBUFFER_OPERATION:
+				qWarning() << "OpenGL error detected: GL_INVALID_FRAMEBUFFER_OPERATION"; break;
+			case GL_OUT_OF_MEMORY:
+				qWarning() << "OpenGL error detected: GL_OUT_OF_MEMORY"; break;
+			default:
+				Q_ASSERT_X(false, "GL2Renderer::checkGLErrors", "Unknown GL error");
+		}
+	}
+	
+private:
 	//! Are frame buffer objects supported on this system?
 	bool fboSupported;
 	
@@ -251,54 +282,6 @@ private:
 		backBuffer = frontBuffer;
 		frontBuffer = tmp;
 	}
-	
-	//! Asserts that we're in a valid state.
-	void invariant() const
-	{
-		Q_ASSERT_X(provider != NULL, "StelGL2Renderer::invariant",
-		           "GL2Renderer needs a GLProvider to function");
-		Q_ASSERT_X(sceneSize.isValid(), "StelGL2Renderer::invariant",
-		           "Invalid scene size");
-		const bool fbo = useFBO();
-		Q_ASSERT_X(NULL == backBuffer || fbo, "StelGL2Renderer::invariant",
-		           "We have a backbuffer even though we're not using FBO");
-		Q_ASSERT_X(NULL == frontBuffer || fbo, "StelGL2Renderer::invariant",
-		           "We have a frontbuffer even though we're not using FBO");
-		Q_ASSERT_X(NULL == backBufferPainter || fbo, "StelGL2Renderer::invariant",
-		           "We have a backbuffer painter even though we're not using FBO");
-		Q_ASSERT_X(drawing && fbo ? backBuffer != NULL : true,
-		           "StelGL2Renderer::invariant",
-		           "We're drawing and using FBOs, but the backBuffer is NULL");
-		Q_ASSERT_X(drawing && fbo ? frontBuffer != NULL : true,
-		           "StelGL2Renderer::invariant",
-		           "We're drawing and using FBOs, but the frontBuffer is NULL");
-		Q_ASSERT_X(drawing && fbo ? backBufferPainter != NULL : true,
-		           "StelGL2Renderer::invariant",
-		           "We're drawing and using FBOs, but the backBufferPainter is NULL");
-	}
-	
-	//! Check for any OpenGL errors. Useful for detecting incorrect GL code.
-	void checkGLErrors() const
-	{
-		GLenum glError = glGetError();
-		switch(glError)
-		{
-			case GL_NO_ERROR: 
-				break;
-			case GL_INVALID_ENUM: 
-				qWarning() << "OpenGL error detected: GL_INVALID_ENUM"; break;
-			case GL_INVALID_VALUE:
-				qWarning() << "OpenGL error detected: GL_INVALID_VALUE"; break;
-			case GL_INVALID_OPERATION:
-				qWarning() << "OpenGL error detected: GL_INVALID_OPERATION"; break;
-			case GL_INVALID_FRAMEBUFFER_OPERATION:
-				qWarning() << "OpenGL error detected: GL_INVALID_FRAMEBUFFER_OPERATION"; break;
-			case GL_OUT_OF_MEMORY:
-				qWarning() << "OpenGL error detected: GL_OUT_OF_MEMORY"; break;
-			default:
-				Q_ASSERT_X(false, "GL2Renderer::checkGLErrors", "Unknown GL error");
-		}
-	}
 };
 
-#endif // _STELGL2RENDERER_HPP_
+#endif // _STELGLRENDERER_HPP_

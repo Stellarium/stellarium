@@ -22,8 +22,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
-#include "StelGL2Renderer.hpp"
-#include "StelQGLProvider.hpp"
+#include "StelQGL2Renderer.hpp"
 #include "StelProjector.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
@@ -154,7 +153,7 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 
 	lastEventTimeSec = 0;
 
-	renderer = new StelGL2Renderer(new StelQGLProvider(this));
+	renderer = new StelQGL2Renderer(this);
 
 	// This line seems to cause font aliasing troubles on win32
 	// setOptimizationFlags(QGraphicsView::DontSavePainterState);
