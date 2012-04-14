@@ -1,6 +1,8 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2011 Eleni Maria Stea (planet rendering using normal mapping
+ * and clouds)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +23,10 @@
 #define _PLANET_HPP_
 
 #include <QString>
+//FIXME: After fully migrate to Qt 4.8 this condition need drop
+#if QT_VERSION>=0x040800
+#include <QGLFunctions>
+#endif
 
 #include "StelObject.hpp"
 #include "StelProjector.hpp"
@@ -79,7 +85,13 @@ private:
 };
 
 
-class Planet : public StelObject
+class Planet
+//FIXME: After fully migrate to Qt 4.8 this condition need drop
+#if QT_VERSION>=0x040800
+		: public StelObject, protected QGLFunctions
+#else
+		: public StelObject
+#endif
 {
 public:
 	friend class SolarSystem;
@@ -97,6 +109,41 @@ public:
 		   bool hidden,
 		   bool hasAtmosphere);
 
+	Planet(const QString& englishName,
+		   int flagLighting,
+		   double radius,
+		   double oblateness,
+		   Vec3f color,
+		   float albedo,
+		   const QString& texMapName,
+		   const QString& normalMapName,
+		   posFuncType _coordFunc,
+		   void* userDataPtr,
+		   OsculatingFunctType *osculatingFunc,
+		   bool closeOrbit,
+		   bool hidden,
+		   bool hasAtmosphere);
+
+    Planet(const QString& englishName,
+			int flagLighting,
+			double radius,
+			double oblateness,
+			Vec3f color,
+			Vec3f cloudColor,
+			float cloudDensity,
+			float cloudScale,
+			float cloudSharpness,
+			Vec3f cloudVel,
+			float albedo,
+			const QString& texMapName,
+			const QString& normalMapName,
+			posFuncType _coordFunc,
+			void* userDataPtr,
+			OsculatingFunctType *osculatingFunc,
+			bool closeOrbit,
+			bool hidden,
+			bool hasAtmosphere);
+
 	~Planet();
 
 	///////////////////////////////////////////////////////////////////////////
@@ -112,6 +159,7 @@ public:
 	//! - PlainText
         //! - Extra1: Heliocentric Ecliptical Coordinates
         //! - Extra2: Observer-planetocentric Ecliptical Coordinates
+	//! - Extra3: Phase, illumination, phase angle & elongation from the Sun
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Planet.
@@ -145,6 +193,7 @@ public:
 	double getSiderealDay(void) const {return re.period;}
 
 	const QString& getTextMapName() const {return texMapName;}
+	const QString& getNormalMapName() const {return normalMapName;}
 
 	// Compute the z rotation to use from equatorial to geographic coordinates
 	double getSiderealTime(double jd) const;
@@ -160,8 +209,10 @@ public:
 	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
 	void computeTransMatrix(double date);
 
-	// Get the phase angle for an observer at pos obsPos in the heliocentric coordinate (in AU)
+	// Get the phase angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getPhase(const Vec3d& obsPos) const;
+	// Get the elongation angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
+	double getElongation(const Vec3d& obsPos) const;
 	// Get the angular size of the spheroid of the planet (i.e. without the rings)
 	double getSpheroidAngularSize(const StelCore* core) const;
 
@@ -177,6 +228,9 @@ public:
 
 	// Return the heliocentric ecliptical position
 	Vec3d getHeliocentricEclipticPos() const;
+
+	// Return the heliocentric transformation for local coordinate
+	Vec3d getHeliocentricPos(Vec3d) const;
 	void setHeliocentricEclipticPos(const Vec3d &pos);
 
 	// Compute the distance to the given position in heliocentric coordinate (in AU)
@@ -211,6 +265,7 @@ public:
 	// draw orbital path of Planet
 	void drawOrbit(const StelCore*);
 	Vec3d orbit[ORBIT_SEGMENTS+1];   // store heliocentric coordinates for drawing the orbit
+	Vec3d orbitP[ORBIT_SEGMENTS+1];  // store local coordinate for orbit
 	double lastOrbitJD;
 	double deltaJD;
 	double deltaOrbitJD;
@@ -238,12 +293,16 @@ protected:
 	// Draw the 3D sphere
 	void drawSphere(StelPainter* painter, float screenSz);
 
+	// Draw the 3d sphere when normal mapping is used
+	void drawNMapSphere(StelPainter* painter, float screenSz);
+
 	// Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, const QFont& planetNameFont);
 
 	QString englishName;             // english planet name
 	QString nameI18;                 // International translated name
 	QString texMapName;              // Texture file path
+	QString normalMapName;           // Normal Map texture file path
 	int flagLighting;                // Set whether light computation has to be proceed
 	RotationElements re;             // Rotation param
 	double radius;                   // Planet radius in AU
@@ -253,10 +312,20 @@ protected:
 	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen
 	Vec3d previousScreenPos;         // The position of this planet in the previous frame.
 	Vec3f color;
+
+	Vec3f cloudColor;                // main cloud color
+	float cloudDensity;              // how cloudy atmosphere
+	float cloudScale;                // how much planet surface the cloud cover
+	float cloudSharpness;            // how sharp clouds - for fading effect
+	Vec3f cloudVel;                  // cloudVel[0] = u coord velocity, cloudVel[1] = v coord velocity,
+	                                 // cloudVel[2] = cloud animation speed
+
 	float albedo;                    // Planet albedo
 	Mat4d rotLocalToParent;
 	float axisRotation;              // Rotation angle of the Planet on it's axis
 	StelTextureSP texMap;            // Planet map texture
+	StelTextureSP normalMap;         // Planet normal map texture
+
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
 					 // it is used for sorting while drawing

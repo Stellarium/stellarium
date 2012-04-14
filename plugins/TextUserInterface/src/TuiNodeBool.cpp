@@ -36,7 +36,6 @@ TuiNodeResponse TuiNodeBool::handleEditingKey(int key)
 	{
 		editing = false;
 		response.accepted = true;
-		response.newNode = this;
 		emit(setValue(state));
 		return response;
 	}
@@ -44,7 +43,6 @@ TuiNodeResponse TuiNodeBool::handleEditingKey(int key)
 	{
 		state = !state;
 		response.accepted = true;
-		response.newNode = this;
 		emit(setValue(state));
 		return response;
 	}
@@ -53,7 +51,6 @@ TuiNodeResponse TuiNodeBool::handleEditingKey(int key)
 		state = true;
 		emit(setValue(state));
 		response.accepted = true;
-		response.newNode = this;
 		emit(setValue(state));
 		return response;
 	}
@@ -62,7 +59,6 @@ TuiNodeResponse TuiNodeBool::handleEditingKey(int key)
 		state = false;
 		emit(setValue(state));
 		response.accepted = true;
-		response.newNode = this;
 		emit(setValue(state));
 		return response;
 	}

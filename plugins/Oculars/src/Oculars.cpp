@@ -1550,7 +1550,6 @@ void Oculars::paintText(const StelCore* core)
 			                       .arg(telescopeName);
 		}
 		painter.drawText(xPosition, yPosition, telescopeNumberLabel);
-		yPosition-=lineHeight;
 	}
 	
 }
