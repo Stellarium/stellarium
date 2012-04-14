@@ -3,14 +3,10 @@
 
 Plane::Plane()
 {
-    //normal = Vec3f(0.0f, 0.0f, 0.0f);
-    //p = Vec3f(0.0f, 0.0f, 0.0f);
 }
 
 Plane::Plane(Vec3f &v1, Vec3f &v2, Vec3f &v3)
 {
-    //normal = Vec3f(0.0f, 0.0f, 0.0f);
-    //p = Vec3f(0.0f, 0.0f, 0.0f);
     setPoints(v1, v2, v3);
 }
 
@@ -24,7 +20,7 @@ void Plane::setPoints(Vec3f &v1, Vec3f &v2, Vec3f &v3)
     normal = edge2^edge1;
     normal.normalize();
 
-    p = v2;
+    p = Vec3f(v2.v[0], v2.v[1], v2.v[2]);
     distance = -(normal.dot(p));
 }
 
