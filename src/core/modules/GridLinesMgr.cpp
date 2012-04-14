@@ -737,6 +737,7 @@ void GridLinesMgr::updateLineLabels()
 	eclipticLine->updateLabel();
 	meridianLine->updateLabel();
 	horizonLine->updateLabel();
+	galacticPlaneLine->updateLabel();
 }
 
 //! Set flag for displaying Azimuthal Grid

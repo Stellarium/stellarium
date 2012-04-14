@@ -38,7 +38,6 @@ TuiNodeResponse TuiNodeInt::handleEditingKey(int key)
 		editing = false;
 		typing = false;
 		response.accepted = true;
-		response.newNode = this;
 		emit(setValue(value));
 		return response;
 	}
@@ -49,7 +48,6 @@ TuiNodeResponse TuiNodeInt::handleEditingKey(int key)
 		if (value > maximum)
 			value = maximum;
 		response.accepted = true;
-		response.newNode = this;
 		emit(setValue(value));
 		return response;
 	}
@@ -60,7 +58,6 @@ TuiNodeResponse TuiNodeInt::handleEditingKey(int key)
 		if (value < minimum)
 			value = minimum;
 		response.accepted = true;
-		response.newNode = this;
 		emit(setValue(value));
 		return response;
 	}
@@ -119,7 +116,6 @@ TuiNodeResponse TuiNodeInt::handleEditingKey(int key)
 		if (i>=minimum && i<=maximum)
 			value = i;
 		response.accepted = true;
-		response.newNode = this;
 		emit(setValue(value));
 		return response;
 	}

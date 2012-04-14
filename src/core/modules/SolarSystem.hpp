@@ -26,6 +26,7 @@
 #endif
 
 #include <QFont>
+#include "StelShader.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
 #include "Planet.hpp"
@@ -223,6 +224,8 @@ public:
 	//! Get the list of all the bodies of the solar system.
 	//! \deprecated Used in LandscapeMgr::update(), but commented out.
 	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}
+
+	StelShader* nMapShader;
 
 private slots:
 	//! Called when a new object is selected.

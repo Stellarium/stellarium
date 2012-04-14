@@ -25,6 +25,10 @@
 #include <QObject>
 #include <QImage>
 #include <QtOpenGL>
+//FIXME: After fully migrate to Qt 4.8 this condition need drop
+#if QT_VERSION>=0x040800
+#include <QGLFunctions>
+#endif
 
 class QFile;
 class StelTextureMgr;
@@ -65,7 +69,13 @@ private:
 //! @class StelTexture
 //! Base texture class. For creating an instance, use StelTextureMgr::createTexture() and StelTextureMgr::createTextureThread()
 //! @sa StelTextureSP
-class StelTexture : public QObject
+class StelTexture
+//FIXME: After fully migrate to Qt 4.8 this condition need drop
+#if QT_VERSION>=0x040800
+		: public QObject, protected QGLFunctions
+#else
+		: public QObject
+#endif
 {
 	Q_OBJECT
 
@@ -90,8 +100,13 @@ public:
 
 	//! Bind the texture so that it can be used for openGL drawing (calls glBindTexture).
 	//! If the texture is lazyly loaded, this starts the loading and return false immediately.
+	//! @param int texture unit (default is 0)
 	//! @return true if the binding successfully occured, false if the texture is not yet loaded.
-	bool bind();
+	
+	//minor change by Eleni Maria Stea:
+	//added texture unit (useful when multiple textures are used)
+	//this change doesn't affect the previous calls of the function!
+	bool bind(int texunit = 0);
 
 	//! Return whether the texture can be binded, i.e. it is fully loaded
 	bool canBind() const {return id!=0;}
@@ -114,6 +129,7 @@ public:
 	//! This function uses openGL routines and must be called in the main thread
 	//! @return false if an error occured
 	bool glLoad();
+	void setImage(QImage* img);
 
 signals:
 	//! Emitted when the texture is ready to be bind(), i.e. when downloaded, imageLoading and	glLoading is over
