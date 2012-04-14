@@ -125,10 +125,6 @@ int Frustum::boxInFrustum(const AABB* bbox)
         {
             return OUTSIDE;
         }
-        else if(planes[i].isBehind(bbox->negativeVertex(planes[i].normal)))
-        {
-            return INTERSECT;
-        }
     }
 
     return result;

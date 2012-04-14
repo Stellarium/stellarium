@@ -240,7 +240,7 @@ private:
     //Renders the Scene's AABB
     void renderSceneAABB();
     //Scene AABB
-    AABB* sceneBoundingBox;
+    AABB sceneBoundingBox;
     //Camera Frustum
     Frustum cFrust;
 };

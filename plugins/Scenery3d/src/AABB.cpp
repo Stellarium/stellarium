@@ -1,5 +1,10 @@
 #include "AABB.hpp"
 
+AABB::AABB()
+{
+    AABB(Vec3f(0.0f), Vec3f(0.0f));
+}
+
 AABB::AABB(Vec3f min, Vec3f max)
 {
     this->min = min;
@@ -56,6 +61,7 @@ Vec3f AABB::getCorner(Corner corner) const
 Vec3f AABB::positiveVertex(Vec3f& normal) const
 {
     Vec3f out = min;
+
     if(normal.v[0] >= 0.0f)
         out.v[0] = max.v[0];
     if(normal.v[1] >= 0.0f)
@@ -80,16 +86,31 @@ Vec3f AABB::negativeVertex(Vec3f& normal) const
     return out;
 }
 
-void AABB::render()
+void AABB::render(Mat4d* pMat)
 {
-    Vec3f ntl = getCorner(MinMaxMin);
-    Vec3f ntr = getCorner(MaxMaxMin);
-    Vec3f nbr = getCorner(MaxMinMin);
-    Vec3f nbl = getCorner(MinMinMin);
-    Vec3f ftr = getCorner(MaxMaxMax);
-    Vec3f ftl = getCorner(MinMaxMax);
-    Vec3f fbl = getCorner(MinMinMax);
-    Vec3f fbr = getCorner(MaxMinMax);
+    Vec3d ntl = vecfToDouble(getCorner(MinMaxMin));
+    Vec3d ntr = vecfToDouble(getCorner(MaxMaxMin));
+    Vec3d nbr = vecfToDouble(getCorner(MaxMinMin));
+    Vec3d nbl = vecfToDouble(getCorner(MinMinMin));
+    Vec3d ftr = vecfToDouble(getCorner(MaxMaxMax));
+    Vec3d ftl = vecfToDouble(getCorner(MinMaxMax));
+    Vec3d fbl = vecfToDouble(getCorner(MinMinMax));
+    Vec3d fbr = vecfToDouble(getCorner(MaxMinMax));
+
+
+    //Transform to pMat-space if needed
+    if(pMat)
+    {
+        pMat->transfo(ntl);
+        pMat->transfo(ntr);
+        pMat->transfo(nbr);
+        pMat->transfo(nbl);
+        pMat->transfo(ftl);
+        pMat->transfo(ftr);
+        pMat->transfo(fbr);
+        pMat->transfo(fbl);
+    }
+
 
     glColor3f(1.0f, 1.0f, 1.0f);
     glLineWidth(5);
