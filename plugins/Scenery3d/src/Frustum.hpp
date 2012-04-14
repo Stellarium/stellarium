@@ -55,12 +55,13 @@ public:
     Mat4d m;
     AABB* bbox;
 
-private:
-
-    std::vector<Vec3f> corners;
     std::vector<Vec3f> drawCorners;
-    std::vector<Plane> planes;
     AABB* drawBbox;
+
+private:
+    std::vector<Vec3f> corners;
+    std::vector<Plane> planes;
+
 };
 
 #endif

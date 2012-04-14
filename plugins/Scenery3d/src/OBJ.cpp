@@ -72,9 +72,6 @@ OBJ::OBJ()
     m_numberOfStelModels = 0;
 
     pBoundingBox = new AABB(Vec3f(0.0f), Vec3f(0.0f));
-//    pBoundingBox = new BoundingBox();
-//    pBoundingBox->min = Vec3f(0.0f);
-//    pBoundingBox->max = Vec3f(0.0f);
 }
 
 OBJ::~OBJ()
@@ -1227,6 +1224,7 @@ void OBJ::uploadTexturesGL()
 
 void OBJ::transform(Mat4d mat)
 {
+    m = mat;
     pBoundingBox->min = Vec3f(std::numeric_limits<float>::max());
     pBoundingBox->max = Vec3f(-std::numeric_limits<float>::max());
 
@@ -1316,6 +1314,6 @@ void OBJ::renderAABBs()
     for(int i=0; i<m_numberOfStelModels; ++i)
     {
         StelModel* pStelModel = &m_stelModels[i];
-        pStelModel->bbox->render();
+        pStelModel->bbox->render(&m);
     }
 }

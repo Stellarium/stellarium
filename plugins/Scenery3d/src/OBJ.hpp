@@ -134,12 +134,6 @@ public:
         AABB* bbox;
     };
 
-    //! Bounding box extremes to the entire scene
-    struct BoundingBox
-    {
-        Vec3f max, min;
-    };
-
     //! Initializes values
     OBJ();
     //! Destructor
@@ -234,10 +228,9 @@ private:
     int m_numberOfMaterials;
     int m_numberOfStelModels;
 
-    //! Bounding box
-    //BoundingBox* pBoundingBox;
     //! Bounding box for the entire scene
     AABB* pBoundingBox;
+    Mat4d m;
 
     //! Base path to this file
     std::string m_basePath;

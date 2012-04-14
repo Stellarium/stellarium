@@ -67,9 +67,9 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
     this->cubemapSize=cubemapSize;
     this->shadowmapSize=shadowmapSize;
     this->torchBrightness=torchBrightness;
-    eyeLevel=1.65;
     objModel = new OBJ();
     groundModel = new OBJ();
+    eyeLevel=1.65;
     zRotateMatrix = Mat4d::identity();
     obj2gridMatrix = Mat4d::identity();
     shadowMapTexture = 0;
@@ -123,6 +123,7 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
     hasModels = false;
     sceneryGenNormals = false;
     groundGenNormals = false;
+    sceneBoundingBox = AABB(Vec3f(0.0f), Vec3f(0.0f));
 
 
     Mat4d matrix;
@@ -149,6 +150,7 @@ Scenery3d::~Scenery3d()
                  shadowMapTexture = 0;
                  shadowFBO = 0;
                  delete shadowMapFbo;
+                 shadowMapFbo = NULL;
          }
     for (int i=0; i<6; i++) {
         if (cubeMap[i] != NULL) {
@@ -156,9 +158,17 @@ Scenery3d::~Scenery3d()
             cubeMap[i] = NULL;
         }
     }
-    if (groundModel != objModel) delete groundModel;
-    delete objModel;
-    delete sceneBoundingBox;
+    if (groundModel != objModel)
+    {
+        delete groundModel;
+        groundModel = NULL;
+    }
+
+    if (objModel)
+    {
+        delete objModel;
+        objModel = NULL;
+    }
 }
 
 void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery3dID)
@@ -320,6 +330,12 @@ void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery
 
 void Scenery3d::loadModel()
 {
+        if(objModel != NULL)
+        {
+            objModel->clean();
+            objModel = new OBJ();
+        }
+
         QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
         if(!objModel->load(modelFile.toAscii(), objVertexOrder, sceneryGenNormals))
             throw std::runtime_error("Failed to load OBJ file.");
@@ -344,6 +360,12 @@ void Scenery3d::loadModel()
             groundModel=NULL;
         else
         {
+            if(groundModel != NULL)
+            {
+                groundModel->clean();
+                groundModel = new OBJ();
+            }
+
             modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelGroundFile);
             if(!groundModel->load(modelFile.toAscii(), objVertexOrder, groundGenNormals))
                 throw std::runtime_error("Failed to load OBJ file.");
@@ -392,10 +414,12 @@ void Scenery3d::loadModel()
         //Set the scene's AABB
         setSceneAABB(cur->getBoundingBox());
 
-        // finally, set core to enable update().
+        //finally, set core to enable update().
         this->core=StelApp::getInstance().getCore();
 
-        cFrust.m = zRotateMatrix*obj2gridMatrix;
+        //Add matrix to get into grid space
+        zRot2Grid = zRotateMatrix*obj2gridMatrix;
+        cFrust.m = zRot2Grid;
 }
 
 void Scenery3d::handleKeys(QKeyEvent* e)
@@ -413,10 +437,10 @@ void Scenery3d::handleKeys(QKeyEvent* e)
             case Qt::Key_K:         textEnabled  = !textEnabled;  e->accept(); break;
             case Qt::Key_PageUp:    movement_z = -1.0f * speedup; e->accept(); break;
             case Qt::Key_PageDown:  movement_z =  1.0f * speedup; e->accept(); break;
-            case Qt::Key_Up:        movement_x = -1.0f * speedup; e->accept(); break;
-            case Qt::Key_Down:      movement_x =  1.0f * speedup; e->accept(); break;
-            case Qt::Key_Right:     movement_y = -1.0f * speedup; e->accept(); break;
-            case Qt::Key_Left:      movement_y =  1.0f * speedup; e->accept(); break;
+            case Qt::Key_Up:        movement_y = -1.0f * speedup; e->accept(); break;
+            case Qt::Key_Down:      movement_y =  1.0f * speedup; e->accept(); break;
+            case Qt::Key_Right:     movement_x =  1.0f * speedup; e->accept(); break;
+            case Qt::Key_Left:      movement_x = -1.0f * speedup; e->accept(); break;
             //case Qt::Key_P:         lightCamEnabled = !lightCamEnabled; e->accept(); break;
             case Qt::Key_P: cFrust.saveCorners(); e->accept(); break;
             case Qt::Key_D:         debugEnabled = !debugEnabled; e->accept(); break;
@@ -456,12 +480,12 @@ void Scenery3d::switchToLightCam()
 
 void Scenery3d::setSceneAABB(AABB* bbox)
 {
-    sceneBoundingBox = bbox;
+    sceneBoundingBox = AABB(bbox->min, bbox->max);
 }
 
 void Scenery3d::renderSceneAABB()
 {
-    sceneBoundingBox->render();
+    sceneBoundingBox.render(&zRot2Grid);
 }
 
 void Scenery3d::update(double deltaTime)
@@ -481,6 +505,9 @@ void Scenery3d::update(double deltaTime)
 
         move *= deltaTime * 0.01 * qMax(5.0, stelMovementMgr->getCurrentFov());
 
+        //Bring move into world-grid space
+        zRot2Grid.transfo(move);
+
         absolutePosition.v[0] += move.v[0];
         absolutePosition.v[1] += move.v[1];
         eyeLevel -= move.v[2];
@@ -494,15 +521,18 @@ void Scenery3d::update(double deltaTime)
         //View Direction
         viewDir = core->getMovementMgr()->getViewDirectionJ2000();
         viewDir = core->j2000ToAltAz(viewDir);
+        //Bring viewDir into world-grid space
+        zRot2Grid.transfo(viewDir);
+        //Switch components as they aren't correct anymore
+        Vec3d tmp = viewDir;
+        viewDir.v[0] = tmp.v[1];
+        viewDir.v[1] = -tmp.v[0];
 
-        //View Position
+        //View Position is already in world-grid space
         viewPos = -absolutePosition;
 
         //Calculate the Frustum for the current camera
         cFrust.calcFrustum(viewPos, viewDir, viewUp);
-
-        //ModelView Matrix
-        mv = core->getJ2000ModelViewTransform(StelCore::RefractionOff)->getApproximateLinearTransfo();
     }
 }
 
@@ -580,11 +610,7 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
             painter.setArrays(&objModel->getVertexArray()->position, NULL, NULL, &objModel->getVertexArray()->normal);
         }
 
-        //if(cFrust.boxInFrustum(pStelModel->bbox) != Frustum::OUTSIDE)
-        //{
-            painter.drawFromArray(StelPainter::Triangles, pStelModel->triangleCount*3, pStelModel->startIndex, false, objModel->getIndexArray(), objModel->getVertexSize());
-        //    drawn++;
-        //}
+        painter.drawFromArray(StelPainter::Triangles, pStelModel->triangleCount*3, pStelModel->startIndex, false, objModel->getIndexArray(), objModel->getVertexSize());
 
         if(pMaterial->illum == OBJ::TRANSLUCENT)
         {
@@ -599,7 +625,6 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
 
     }
 
-    objModel->renderAABBs();
     cFrust.drawFrustum();
 }
 
@@ -786,10 +811,34 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glPushMatrix();
     glLoadIdentity();
 
-    const GLdouble orthoLeft = sceneBoundingBox->min.v[0];
-    const GLdouble orthoRight = sceneBoundingBox->max.v[0];
-    const GLdouble orthoBottom = sceneBoundingBox->min.v[1];
-    const GLdouble orthoTop = sceneBoundingBox->max.v[1];
+
+    //Bring frustum corners into light space
+    Vec3f corners[Frustum::CORNERCOUNT];
+    for(unsigned int i=0; i<Frustum::CORNERCOUNT; i++)
+    {
+        Vec3f tmp = cFrust.getCorner(Frustum::Corner(i));
+        lightViewMatrix.transfo(tmp);
+        corners[i] = tmp;
+    }
+
+    //Find the AABB in light space
+    AABB* box = new AABB(Vec3f(std::numeric_limits<float>::max()), Vec3f(-std::numeric_limits<float>::max()));
+    for(int i=0; i<Frustum::CORNERCOUNT; i++)
+    {
+        box->min.v[0] = std::min(static_cast<float>(corners[i][0]), box->min[0]);
+        box->min.v[1] = std::min(static_cast<float>(corners[i][1]), box->min[1]);
+        box->min.v[2] = std::min(static_cast<float>(corners[i][2]), box->min[2]);
+
+        box->max.v[0] = std::max(static_cast<float>(corners[i][0]), box->max[0]);
+        box->max.v[1] = std::max(static_cast<float>(corners[i][1]), box->max[1]);
+        box->max.v[2] = std::max(static_cast<float>(corners[i][2]), box->max[2]);
+    }
+
+    //Fit the light frustum to the view frustum
+    const GLdouble orthoLeft = box->min.v[0];
+    const GLdouble orthoRight = box->max.v[0];
+    const GLdouble orthoBottom = box->min.v[1];
+    const GLdouble orthoTop = box->max.v[1];
     //Need to find better values for n/f
     const GLdouble f = 1000;
     const GLdouble n = -1000;
@@ -1037,7 +1086,7 @@ void Scenery3d::generateCubeMap(StelCore* core)
     float fov = 90.0f;
     float aspect = 1.0f;
     float zNear = 1.0f;
-    float zFar = 10000.0f;
+    float zFar = 1000.0f;
     float f = 2.0 / tan(fov * M_PI / 360.0);
     Mat4d projMatd(f / aspect, 0, 0, 0,
                     0, f, 0, 0,
@@ -1046,7 +1095,8 @@ void Scenery3d::generateCubeMap(StelCore* core)
 
 
     StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
-    cFrust.setCamInternals(projectorParams.fov, aspect, projectorParams.zNear, projectorParams.zFar);
+    cFrust.setCamInternals(fov, aspect, 1.0, 30);
+
 
     glPushAttrib(GL_VIEWPORT_BIT);
     glViewport(0, 0, cubemapSize, cubemapSize);
@@ -1230,7 +1280,7 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
     float fov = prj->getFov();
     float aspect = (float)prj->getViewportWidth() / (float)prj->getViewportHeight();
     float zNear = 1.0f;
-    float zFar = 10000.0f;
+    float zFar = 1000.0f;
     float f = 2.0 / tan(fov * M_PI / 360.0);
     Mat4d projMatd(f / aspect, 0, 0, 0,
                    0, f, 0, 0,
@@ -1238,7 +1288,7 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
                    0, 0, -1, 0);
 
     StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
-    cFrust.setCamInternals(projectorParams.fov, aspect, projectorParams.zNear, projectorParams.zFar);
+    cFrust.setCamInternals(projectorParams.fov, aspect, projectorParams.zNear, 30);
 
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
@@ -1381,19 +1431,19 @@ void Scenery3d::drawDebugText(StelCore* core)
     str = QString("%1 %2 %3 %4").arg(cFrust.fov, 7, 'f', 2).arg(cFrust.aspect, 7, 'f', 2).arg(cFrust.zNear, 7, 'f', 2).arg(cFrust.zFar, 7, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
 
-    screen_y -= 30.0f;
+//    screen_y -= 30.0f;
 
-    str = QString("%1 %2 %3 %4").arg(mv[0], 7, 'f', 2).arg(mv[4], 7, 'f', 2).arg(mv[8], 7, 'f', 2).arg(mv[12], 7, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
-    str = QString("%1 %2 %3 %4").arg(mv[1], 7, 'f', 2).arg(mv[5], 7, 'f', 2).arg(mv[9], 7, 'f', 2).arg(mv[13], 7, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
-    str = QString("%1 %2 %3 %4").arg(mv[2], 7, 'f', 2).arg(mv[6], 7, 'f', 2).arg(mv[10], 7, 'f', 2).arg(mv[14], 7, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
-    str = QString("%1 %2 %3 %4").arg(mv[3], 7, 'f', 2).arg(mv[7], 7, 'f', 2).arg(mv[11], 7, 'f', 2).arg(mv[15], 7, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);
+//    str = QString("%1 %2 %3 %4").arg(mv[0], 7, 'f', 2).arg(mv[4], 7, 'f', 2).arg(mv[8], 7, 'f', 2).arg(mv[12], 7, 'f', 2);
+//    painter.drawText(screen_x, screen_y, str);
+//    screen_y -= 15.0f;
+//    str = QString("%1 %2 %3 %4").arg(mv[1], 7, 'f', 2).arg(mv[5], 7, 'f', 2).arg(mv[9], 7, 'f', 2).arg(mv[13], 7, 'f', 2);
+//    painter.drawText(screen_x, screen_y, str);
+//    screen_y -= 15.0f;
+//    str = QString("%1 %2 %3 %4").arg(mv[2], 7, 'f', 2).arg(mv[6], 7, 'f', 2).arg(mv[10], 7, 'f', 2).arg(mv[14], 7, 'f', 2);
+//    painter.drawText(screen_x, screen_y, str);
+//    screen_y -= 15.0f;
+//    str = QString("%1 %2 %3 %4").arg(mv[3], 7, 'f', 2).arg(mv[7], 7, 'f', 2).arg(mv[11], 7, 'f', 2).arg(mv[15], 7, 'f', 2);
+//    painter.drawText(screen_x, screen_y, str);
 
 }
 
@@ -1416,15 +1466,15 @@ void Scenery3d::initShadowMapping()
     //Activate unit 1 - we want shadows + textures so this is crucial
     glActiveTexture(GL_TEXTURE1);
 
-    //Bind the depth map and setup the parameters
+    //Bind the depth map and setup the parameters 
     glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    //glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
-    // GZ This should be even better.
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32_ARB, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+    float ones[] = {1.0f, 1.0f, 1.0f, 1.0f};
+    glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
 
     //Attach the depthmap to the Buffer
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapTexture, 0);
