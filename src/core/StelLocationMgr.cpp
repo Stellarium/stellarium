@@ -124,7 +124,7 @@ QMap<QString, StelLocation> StelLocationMgr::loadCities(const QString& fileName,
 	while (!sourcestream.atEnd())
 	{
 		const QString& rawline=sourcestream.readLine();
-		if (rawline.isEmpty() || rawline.startsWith('#'))
+		if (rawline.isEmpty() || rawline.startsWith('#') || (rawline.split("\t").count() < 8))
 			continue;
 		loc = StelLocation::createFromLine(rawline);
 		loc.isUserLocation = isUserLocation;
