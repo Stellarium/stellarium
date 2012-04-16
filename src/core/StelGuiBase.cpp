@@ -65,7 +65,7 @@ QAction* StelGuiBase::addGuiActions(const QString& actionName, const QString& te
 	QStringList shortcutStrings = shortcuts.split(shortCutSplitRegEx);
 	foreach (QString shortcut, shortcutStrings)
 	{
-		keySeqs << QKeySequence(shortcut.remove(QRegExp("\\s+")));
+		keySeqs << QKeySequence(shortcut.remove(QRegExp("\\s+")).remove(QRegExp("^\"|\"$")));
 	}
 	a->setShortcuts(keySeqs);
 	a->setCheckable(checkable);
