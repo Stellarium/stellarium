@@ -84,7 +84,9 @@ void StelFileMgr::init()
 		qWarning() << "WARNING: could not locate installation directory";
 	}
 
-#if defined(Q_OS_WIN) || defined(Q_OS_MAC)
+#if defined(Q_OS_WIN)
+	screenshotDir = getMyPicturesDir();
+#elif defined(Q_OS_MAC)
 	screenshotDir = getDesktopDir();
 #else
 	screenshotDir = QDir::homePath();
@@ -361,12 +363,14 @@ bool StelFileMgr::fileFlagsCheck(const QString& path, const Flags& flags)
 	return true;
 }
 
+QString StelFileMgr::getMyPicturesDir()
+{
+	return getWin32SpecialDirPath(CSIDL_MYPICTURES);
+}
+
 QString StelFileMgr::getDesktopDir()
 {
 	QString result;
-#ifdef Q_OS_WIN
-	result = getWin32SpecialDirPath(CSIDL_DESKTOPDIRECTORY);
-#else
 	// TODO: this is not going to work for machines which are non-English...
 	// For Linux and perhaps some BSDs, we can call the external program
 	// "xdg-user-dir DESKTOP" if it exists, but I'm not sure about OSX.
