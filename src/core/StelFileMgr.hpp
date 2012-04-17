@@ -162,7 +162,7 @@ public:
 	//!            OS doesn't provide one.
 	static QString getDesktopDir();
 
-	#if Q_OS_WIN
+	#ifdef Q_OS_WIN
 	//! Get the user's My Pictures directory.
 	static QString getMyPicturesDir();
 	#endif
