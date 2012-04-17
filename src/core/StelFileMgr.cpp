@@ -363,10 +363,12 @@ bool StelFileMgr::fileFlagsCheck(const QString& path, const Flags& flags)
 	return true;
 }
 
+#if defined(Q_OS_WIN)
 QString StelFileMgr::getMyPicturesDir()
 {
 	return getWin32SpecialDirPath(CSIDL_MYPICTURES);
 }
+#endif
 
 QString StelFileMgr::getDesktopDir()
 {
@@ -376,7 +378,7 @@ QString StelFileMgr::getDesktopDir()
 	// "xdg-user-dir DESKTOP" if it exists, but I'm not sure about OSX.
 	result = QFile::decodeName(getenv("HOME"));
 	result += "/Desktop";
-#endif
+
 	if (!QFileInfo(result).isDir())
 	{
 		throw std::runtime_error("Can't find Desktop directory");
