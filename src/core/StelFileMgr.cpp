@@ -84,16 +84,13 @@ void StelFileMgr::init()
 		qWarning() << "WARNING: could not locate installation directory";
 	}
 
-#if defined(Q_OS_WIN)
+#if Q_OS_WIN
 	screenshotDir = getMyPicturesDir();
-#elif defined(Q_OS_MAC)
+#elif Q_OS_MAC
 	screenshotDir = getDesktopDir();
+	QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath());
 #else
 	screenshotDir = QDir::homePath();
-#endif
-
-#ifdef Q_OS_MAC
-	QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath());
 #endif
 }
 
