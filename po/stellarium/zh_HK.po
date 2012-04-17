@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-04-11 16:29+0700\n"
-"PO-Revision-Date: 2012-01-27 06:13+0000\n"
-"Last-Translator: henrysky <Unknown>\n"
+"PO-Revision-Date: 2012-04-17 03:51+0000\n"
+"Last-Translator: Allen Zhong <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-12 04:47+0000\n"
-"X-Generator: Launchpad (build 15070)\n"
+"X-Launchpad-Export-Date: 2012-04-17 04:48+0000\n"
+"X-Generator: Launchpad (build 15099)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -372,7 +372,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:731
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "所有可用目錄均已安裝"
 
 #: src/gui/ConfigurationDialog.cpp:736
 #, qt-format
@@ -495,7 +495,7 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:78
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:82
 msgid "Text User Interface"
-msgstr ""
+msgstr "文本用戶界面"
 
 #: src/gui/HelpDialog.cpp:167
 msgid "Stellarium Help"
@@ -582,11 +582,11 @@ msgstr "開發者: %1"
 #: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:307
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "測試者：%1"
 
 #: src/gui/HelpDialog.cpp:308
 msgid "Past Developers"
-msgstr ""
+msgstr "既往開發者"
 
 #: src/gui/HelpDialog.cpp:309
 msgid ""
@@ -705,7 +705,7 @@ msgstr "星"
 #: src/gui/StelGui.cpp:126
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Planet labels"
-msgstr ""
+msgstr "行星標籤"
 
 #: src/gui/StelGui.cpp:127
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:301
@@ -1000,15 +1000,15 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:74
 msgid "selected text"
-msgstr ""
+msgstr "選中文字"
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "clear text"
-msgstr ""
+msgstr "清除文本"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "clear images"
-msgstr ""
+msgstr "清除圖畫"
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
@@ -1016,7 +1016,7 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
-msgstr ""
+msgstr "星圖"
 
 #: src/gui/SearchDialog.cpp:503
 msgid "University of Strasbourg (France)"
@@ -1024,7 +1024,7 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:504
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "哈佛大學（美國）"
 
 #: src/main.cpp:337
 msgid "This system does not support OpenGL."
@@ -2994,7 +2994,7 @@ msgstr "恢復預設設定需要重新啟動Stellarium。儲存包含目前視�
 
 #: src/ui_configurationDialog.h:780
 msgid "The width of your view when Stellarium starts"
-msgstr ""
+msgstr "Stellarium 啟動時的視場大小"
 
 #: src/ui_configurationDialog.h:783
 msgid "The direction you're looking when Stellarium starts"
