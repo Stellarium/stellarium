@@ -752,7 +752,3 @@ ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelVertexArray WORKING
 # ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testRefractionExtinction WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_DEPENDENCIES(tests buildTests)
 
-IF(WIN32)
-ADD_CUSTOM_COMMAND(TARGET stellarium POST_BUILD COMMAND ${CMAKE_SOURCE_DIR}/util/mt.exe ARGS -nologo -manifest "${CMAKE_SOURCE_DIR}/util/stellarium.exe.manifest" -outputresource:"${CMAKE_BINARY_DIR}/src/stellarium.exe")
-ENDIF(WIN32)
-

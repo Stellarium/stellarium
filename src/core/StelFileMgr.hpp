@@ -162,6 +162,9 @@ public:
 	//!            OS doesn't provide one.
 	static QString getDesktopDir();
 
+	//! Get the user's My Pictures directory.
+	static QString getMyPicturesDir();
+
 	//! Returns the path to the user directory.
 	//! This is the directory where we expect to find the [default] writable
 	//! configuration file, user versions of scripts, nebulae, stars, skycultures etc.
