@@ -22,13 +22,20 @@ IF(GUI_MODE STREQUAL "Mobile")
   INSTALL(FILES ${mobileGuiFiles} DESTINATION share/${PACKAGE}/gui/images-xhdpi)
 ENDIF()
 
+INSTALL(FILES shaders/nmap.v.glsl shaders/nmap.f.glsl DESTINATION share/${PACKAGE}/data/shaders)
+
 IF (BUILD_FOR_MAEMO)
-  INSTALL(FILES stellarium.desktop DESTINATION /usr/share/applications/hildon)
-  INSTALL(FILES stellarium.png DESTINATION /usr/share/icons/hicolor/48x48/apps)
+  INSTALL(FILES maemo/stellarium.desktop DESTINATION /usr/share/applications/hildon)
+  INSTALL(FILES maemo/stellarium.png DESTINATION /usr/share/icons/hicolor/48x48/apps)
+ENDIF()
+
+IF(UNIX AND NOT APPLE)
+  INSTALL(FILES stellarium.desktop DESTINATION share/applications)
+  INSTALL(FILES stellarium.xpm DESTINATION share/pixmaps)
 ENDIF()
 
 IF(MACOSX)
-INSTALL(FILES Icon.icns DESTINATION share )
-INSTALL(FILES Info.plist PkgInfo DESTINATION . )
+  INSTALL(FILES Icon.icns DESTINATION share )
+  INSTALL(FILES Info.plist PkgInfo DESTINATION . )
 ENDIF(MACOSX)
 

@@ -96,7 +96,7 @@ private:
 	QDataWidgetMapper*			telescopeMapper;
 	QList<Telescope *>*			telescopes;
 	PropertyBasedTableModel*	telescopeTableModel;
-	QIntValidator*					validatorOcularAFOV;
+	QDoubleValidator*				validatorOcularAFOV;
 	QDoubleValidator*				validatorOcularEFL;
 	QDoubleValidator*				validatorTelescopeDiameter;
 	QDoubleValidator*				validatorTelescopeFL;

@@ -1,6 +1,8 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
+ * Copyright (C) 2011 Eleni Maria Stea (planet rendering using normal mapping
+ * and clouds)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +19,33 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelPainter.hpp"
+//remove
+#include <iomanip>
+#include <QtCore/QtCore>
+#include <QtGui/QtGui>
+#include <QTextStream>
+#include <QString>
+#include <QDebug>
+#include <QObject>
+#include <QVariant>
+#include <QVarLengthArray>
 
+#ifdef USE_OPENGL_ES2
+ #include "GLES2/gl2.h"
+#else
+#include <GLee.h>
+
+#ifdef WIN32
+	#include <GL/gl.h>
+#elif defined(__APPLE__) || defined(__APPLE_CC__)
+	#include <OpenGL/gl.h>
+#else
+	#include <GL/gl.h>
+#endif
+#endif //USE_OPENGL_ES2
+
+
+#include "StelPainter.hpp"
 #include <QtOpenGL>
 
 #include "StelProjector.hpp"
@@ -97,6 +124,11 @@ void StelPainter::swapBuffer()
 StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 {
 	Q_ASSERT(proj);
+
+	//FIXME: After fully migrate to Qt 4.8 this condition need drop
+	#if QT_VERSION>=0x040800
+	initializeGLFunctions();
+	#endif
 
 #ifndef NDEBUG
 	Q_ASSERT(globalMutex);
@@ -463,8 +495,9 @@ void StelPainter::sRing(float rMin, float rMax, int slices, int stacks, int orie
 		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
 		Vec3f tmpv(0.f);
 		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
-		lightPos3 -= tmpv;
+		//lightPos3 -= tmpv;
 		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
+		prj->getModelViewTransform()->getApproximateLinearTransfo().transpose().multiplyWithoutTranslation(Vec3d(lightPos3[0], lightPos3[1], lightPos3[2]));
 		prj->getModelViewTransform()->backward(lightPos3);
 		lightPos3.normalize();
 		ambientLight = light.getAmbient();
@@ -628,7 +661,7 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 
 	float initX = x + xshift*cosr - yshift*sinr;
 	float initY = y + yshift*sinr + yshift*cosr;
-	
+
 	for (int i=0;i<ws.length();++i)
 	{
 		drawText(initX, initY, ws[i], -theta*180./M_PI+psi*i, 0., 0.);
@@ -751,7 +784,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 
 
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);		
+		glEnable(GL_BLEND);
 		enableClientStates(true, true);
 		setVertexPointer(2, GL_FLOAT, vertexData);
 
@@ -1592,8 +1625,9 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
 		Vec3f tmpv(0.f);
 		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
-		lightPos3 -= tmpv;
+		//lightPos3 -= tmpv;
 		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
+		prj->getModelViewTransform()->getApproximateLinearTransfo().transpose().multiplyWithoutTranslation(Vec3d(lightPos3[0], lightPos3[1], lightPos3[2]));
 		prj->getModelViewTransform()->backward(lightPos3);
 		lightPos3.normalize();
 		ambientLight = light.getAmbient();
@@ -1638,10 +1672,12 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	static QVector<float> texCoordArr;
 	static QVector<float> colorArr;
 	static QVector<unsigned int> indiceArr;
+
 	texCoordArr.resize(0);
 	vertexArr.resize(0);
 	colorArr.resize(0);
 	indiceArr.resize(0);
+
 	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
 	{
 		s = !flipTexture ? 0.f : 1.f;
@@ -1686,6 +1722,256 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	else
 		setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
 	drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
+}
+
+//! drawing method for sphere when normal map is going to be used - eg in planet rendering
+//! the method is similar to the sSphere but it calculates tangent vectors for each point as well
+//! @param ellipsoid radius (float)
+//! @param 1 - oblateness (float)
+//! @param number of slices (float)
+//! @param number of stacks (float)
+//! @param pointer to the solar system (SolarSystem*)
+//! @param orientation: inside or not (int)
+//! @param flip texture or not (int)
+Vec3f cross(Vec3f a, Vec3f b) {
+	return Vec3f(a[1]*b[2] - a[2]*b[1], a[2]*b[0] - a[0]*b[2], a[0]*b[1] - a[1]*b[0]);
+}
+
+void StelPainter::nmSphere(float radius, float oneMinusOblateness, int slices, int stacks, SolarSystem* ssm, int orientInside, bool flipTexture)
+{
+
+	static Vec3f lightPos3;
+	static Vec4f ambientLight;
+	static Vec4f diffuseLight;
+	float c;
+	const bool isLightOn = light.isEnabled();
+
+	if (isLightOn)
+	{
+			lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
+			Vec3f tmpv(0.f);
+			//transforms to world coord system
+			prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
+			//lightPos3 -= tmpv;
+			//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
+			//transforms back to view space
+			prj->getModelViewTransform()->getApproximateLinearTransfo().transpose().multiplyWithoutTranslation(Vec3d(lightPos3[0], lightPos3[1], lightPos3[2]));
+			prj->getModelViewTransform()->backward(lightPos3);
+			lightPos3.normalize();
+			ambientLight = light.getAmbient();
+			diffuseLight = light.getDiffuse();
+	}
+
+	GLfloat x, y, z;
+	GLfloat s=0.f, t=0.f;
+	GLint i, j;
+	GLfloat nsign;
+
+	if (orientInside)
+	{
+			nsign = -1.f;
+			t=0.f; // from inside texture is reversed
+	}
+	else
+	{
+			nsign = 1.f;
+			t=1.f;
+	}
+
+	const float drho = M_PI / stacks;
+	Q_ASSERT(stacks<=MAX_STACKS);
+	ComputeCosSinRho(drho,stacks);
+	float* cos_sin_rho_p;
+
+	const float dtheta = 2.f * M_PI / slices;
+	Q_ASSERT(slices<=MAX_SLICES);
+	ComputeCosSinTheta(dtheta,slices);
+	const float *cos_sin_theta_p;
+
+	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
+	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
+	// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
+	// If the texture is flipped, we iterate the coordinates backward.
+	const GLfloat ds = (flipTexture ? -1.f : 1.f) / slices;
+	const GLfloat dt = nsign / stacks; // from inside texture is reversed
+
+	// draw intermediate  as quad strips
+	static QVector<double> vertexArr;
+	static QVector<float> texCoordArr;
+	static QVector<float> normalArr;
+	static QVector<float> colorArr;
+	static QVector<float> tangentArr;        //tangent array
+	static QVector<unsigned int> indiceArr;
+
+	texCoordArr.resize(0);
+	vertexArr.resize(0);
+	normalArr.resize(0);
+	indiceArr.resize(0);
+	tangentArr.resize(0);
+	colorArr.resize(0);
+
+	static QVector<Vec3f> tArr1, tArr2;
+	tArr1.resize(0);
+	tArr2.resize(0);
+//	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
+ //   {
+			Vec3f up = Vec3f(0.0, 0.0, 1.0);
+			cos_sin_rho_p = cos_sin_rho + stacks;
+
+			for (j = 0,cos_sin_theta_p = cos_sin_theta; j<= slices;++j,cos_sin_theta_p+=2)
+			{
+				Vec3f vector, normal, tangent;
+
+/* FIRST POINT */
+				x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
+				y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
+				z = nsign * cos_sin_rho_p[0];
+
+				vector = Vec3f(x * radius, y * radius, z * oneMinusOblateness * radius);
+				normal = Vec3f(x * oneMinusOblateness, y * oneMinusOblateness, z);
+				normal.normalize();
+
+				tangent = cross(up, normal);
+				tangent.normalize();
+
+				tArr1 << tangent;
+
+/* SECOND POINT */
+				x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
+				y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
+				z = nsign * cos_sin_rho_p[2];
+
+				vector = Vec3f(x * radius, y * radius, z * oneMinusOblateness * radius);
+				normal = Vec3f(x * oneMinusOblateness, y * oneMinusOblateness, z);
+				normal.normalize();
+
+				tangent = cross(up, normal);
+				tangent.normalize();
+
+				tArr2 << tangent;
+			}
+	//	}
+//	}
+
+	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
+	{
+			s = !flipTexture ? 0.f : 1.f;
+			for (j = 0,cos_sin_theta_p = cos_sin_theta; j<= slices;++j,cos_sin_theta_p+=2)
+			{
+					Vec3f vector, normal, tangent, nextv, prevv;
+
+					x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
+					y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
+					z = nsign * cos_sin_rho_p[0];
+
+					if (isLightOn)
+					{
+							c = nsign * (lightPos3[0]*x*oneMinusOblateness + lightPos3[1]*y*oneMinusOblateness + lightPos3[2]*z);
+							if (c<0) {c=0;}
+							colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
+					}
+
+					vector = Vec3f(x * radius, y * radius, z * oneMinusOblateness * radius);
+					normal = Vec3f(x * oneMinusOblateness, y * oneMinusOblateness, z);
+					normal.normalize();
+
+					texCoordArr << s << t;
+					vertexArr << vector[0] << vector[1] << vector[2];
+					normalArr << normal[0] << normal[1] << normal[2];
+
+					Vec3f tang = tArr1[j];
+					tangentArr << tang[0] << tang[1] << tang[2];
+
+					x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
+					y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
+					z = nsign * cos_sin_rho_p[2];
+
+					if (isLightOn)
+					{
+							c = nsign * (lightPos3[0]*x*oneMinusOblateness + lightPos3[1]*y*oneMinusOblateness + lightPos3[2]*z);
+							if (c<0) {c=0;}
+							colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
+					}
+
+					vector = Vec3f(x * radius, y * radius, z * oneMinusOblateness * radius);
+					normal = Vec3f(x * oneMinusOblateness, y * oneMinusOblateness, z);
+					normal.normalize();
+
+					texCoordArr << s << t - dt;
+					vertexArr << vector[0] << vector[1] << vector[2];
+					normalArr << normal[0] << normal[1] << normal[2];
+
+					tang = tArr2[j];
+					tangentArr << tang[0] << tang[1] << tang[2];
+
+					s += ds;
+			}
+
+			unsigned int offset = i*(slices+1)*2;
+			for (j = 2;j<slices*2+2;j+=2)
+			{
+					indiceArr << offset+j-2 << offset+j-1 << offset+j;
+					indiceArr << offset+j << offset+j-1 << offset+j+1;
+			}
+			t -= dt;
+	}
+
+	// Draw the array now
+
+
+	if (isLightOn)
+	{
+#ifndef USE_OPENGL_ES2
+		setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData(), (Vec3f*) normalArr.constData());
+
+		ArrayDesc projectedVertexArray = vertexArray;
+		projectedVertexArray = projectArray(vertexArray, 0, indiceArr.size(), indiceArr.constData());
+
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glTexCoordPointer(texCoordArray.size, texCoordArray.type, 0, texCoordArray.pointer);
+
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glVertexPointer(vertexArray.size, vertexArray.type, 0, vertexArray.pointer);
+
+		glEnableClientState(GL_NORMAL_ARRAY);
+		glNormalPointer(normalArray.type, 0, normalArray.pointer);
+
+		//vertex attributes projected and tangent array
+
+		int pVecLocation = ssm->nMapShader->attributeLocation("pvec");
+		glEnableVertexAttribArray(pVecLocation);
+		glVertexAttribPointer(pVecLocation, projectedVertexArray.size, projectedVertexArray.type, 0, 0, projectedVertexArray.pointer);
+
+		int tangentLocation = ssm->nMapShader->attributeLocation("tang");
+		glEnableVertexAttribArray(tangentLocation);
+		glVertexAttribPointer(tangentLocation, 3, GL_FLOAT, 0, 0, tangentArr.constData());
+
+//uniform light position
+		int lposLocation = ssm->nMapShader->uniformLocation("lpos");
+		ssm->nMapShader->setUniform(lposLocation, lightPos3[0], lightPos3[1], lightPos3[2]);
+
+		int ambientLocation = ssm->nMapShader->uniformLocation("ambient");
+		ssm->nMapShader->setUniform(ambientLocation, ambientLight[0], ambientLight[1], ambientLight[2], ambientLight[3]);
+
+		int diffuseLocation = ssm->nMapShader->uniformLocation("diffuse");
+		ssm->nMapShader->setUniform(diffuseLocation, diffuseLight[0], diffuseLight[1], diffuseLight[2], diffuseLight[3]);
+
+//drawing
+		glDrawElements(GL_TRIANGLES, indiceArr.size(), GL_UNSIGNED_INT, indiceArr.constData());
+
+		glDisableClientState(GL_NORMAL_ARRAY);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableVertexAttribArray(tangentLocation);
+		glDisableVertexAttribArray(pVecLocation);
+#endif
+	}
+	else
+	{
+		useShader(0);
+		setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
+		drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
+	}
 }
 
 StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
@@ -1804,8 +2090,13 @@ void StelPainter::setShadeModel(ShadeModel m)
 #endif
 }
 
-void StelPainter::enableTexture2d(bool b)
+void StelPainter::enableTexture2d(bool b, int texunit)
 {
+#ifndef USE_OPENGL_ES2
+	if(GLEE_ARB_multitexture)
+#endif
+		glActiveTexture(GL_TEXTURE0 + texunit);
+
 #ifndef STELPAINTER_GL2
 	if (b)
 		glEnable(GL_TEXTURE_2D);
@@ -1956,6 +2247,14 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 	texturesColorShaderVars.vertex = texturesColorShaderProgram->attributeLocation("vertex");
 	texturesColorShaderVars.color = texturesColorShaderProgram->attributeLocation("color");
 	texturesColorShaderVars.texture = texturesColorShaderProgram->uniformLocation("tex");
+
+	//initialize a normal map shader: at the moment a shader class is used
+	//this will be replaced with qt functions
+	 //   Shader* nMapShader = new Shader;
+	   // if (!nMapShader->load("data/shaders/nmap.v.glsl", "data/shaders/nmap.f.glsl"))
+		 //       return;
+	   // }
+
 #endif
 }
 
@@ -2012,6 +2311,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		glEnableClientState(GL_COLOR_ARRAY);
 		glColorPointer(colorArray.size, colorArray.type, 0, colorArray.pointer);
 	}
+
 #else
 	QGLShaderProgram* pr=NULL;
 
@@ -2091,6 +2391,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->release();
 #endif
 }
+
 
 StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& array, int offset, int count, const unsigned int* indices)
 {

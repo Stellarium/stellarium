@@ -24,7 +24,7 @@ SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 ########### Main global variables ###########
 IF(NOT CMAKE_BUILD_TYPE)
-  SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Release RelWithDebInfo MinSizeRel." FORCE)
+  SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
 ENDIF()
 
 # Add gprof build options if necessary.  Note gmon.out will be created in working directory when Stellarium is executed
@@ -32,6 +32,12 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "GProf")
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs")
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs")
  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
+ENDIF()
+
+# Add valgrind build options if necessary
+IF(${CMAKE_BUILD_TYPE} MATCHES "Valgrind")
+ SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O0")
+ SET(CMAEK_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0")
 ENDIF()
 
 IF(NOT STELLARIUM_SPLASH)
@@ -89,8 +95,7 @@ IF(BUILD_FOR_ANDROID)
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DQT_DEFAULT_TEXTURE_GLYPH_CACHE_WIDTH=1024  -DQT_GL_NO_SCISSOR_TEST")
 
   #configure the mobile GUI plugin. Android defaults:
-  SET(EXTERNAL_GUI_SRC_PATH "../plugins/MobileGui" CACHE PATH "The location of the plugin main directory i.e. the one containing the top level CMakeLists.txt")
-  SET(GUI_MODE External CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
+  SET(GUI_MODE Mobile CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External, Mobile")
     
   #force CMAKE to find QT
   SET(NECESSITAS_QT_ROOT "C:/Users/Brady/necessitas/Android/Qt/480" CACHE STRING "Android: Location of necessitas Qt")
@@ -121,13 +126,13 @@ IF(APPLE)
  #SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.5.sdk/")
  #SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.6")
  #SET(CMAKE_OSX_SYSROOT "/Developer/SDKs/MacOSX10.6.sdk/")
- 
+
  # uncomment one of the following, depending on what platforms you want.
  # NOTE: Qt build for Cocoa is Intel only.  Qt with Carbon is both, but does not seem
  # to handle 64bit well.
  #SET(CMAKE_OSX_ARCHITECTURES "i386;x86_64;ppc;ppc64")
  #SET(CMAKE_OSX_ARCHITECTURES "i386;x86_64")
- #SET(CMAKE_OSX_ARCHITECTURES "x86_64")
+ SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 ENDIF()
 
 ########### Check functions ###########
@@ -164,7 +169,7 @@ ELSE()
 ENDIF()
 
 
-SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
+SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External, Mobile")
 SET(OPENGL_MODE Desktop CACHE STRING "Choose the type of openGL to use, options are: Desktop, ES2")
 
 SET(GENERATE_PACKAGE_TARGET 1 CACHE BOOL "Set to 1 or true if you want to have make package target")
@@ -242,7 +247,14 @@ ENDIF()
 ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 
 ########### Find packages ###########
-SET(QT_MIN_VERSION "4.6.0")
+SET(QT_MIN_VERSION "4.6.2")
+
+IF(GUI_MODE STREQUAL "Mobile")
+  SET(QT_MIN_VERSION "4.8.0")
+  SET(QT_USE_QTDECLARATIVE TRUE) #requires a recentish cmake version
+  SET(QT_USE_QTSVG TRUE)
+  SET(QT_USE_QTXML TRUE)
+ENDIF()
 
 FIND_PACKAGE(Qt4 REQUIRED)
 SET(QT_USE_QTOPENGL TRUE)
@@ -262,19 +274,13 @@ STRING(REPLACE "${QT_QTTEST_LIBRARY}" "" QT_LIBRARIES "${QT_LIBRARIES}")
 # Get rid of the GLU dependency, it's not needed in stellarium.
 STRING(REPLACE "-lGLU " "" QT_LIBRARIES "${QT_LIBRARIES}")
 
+FIND_PACKAGE(OpenGL) # Introduced in revision 5284, may cause problems when compiling in OpenGL ES mode - see lines 248-255 below. --BM
+
 IF(BUILD_FOR_ANDROID)
  FIND_LIBRARY(QT_SYSTEM_INFO_LIB QtSystemInfo)
  SET(QT_LIBRARIES ${QT_LIBRARIES} ${QT_SYSTEM_INFO_LIB})
  
  INCLUDE_DIRECTORIES(${NECESSITAS_QT_ROOT_ARCH}/include/QtMobility ${NECESSITAS_QT_ROOT_ARCH}/include/QtSystemInfo)
-
-
- #for the GUI; should be moved out to use GUI w/ other platforms
-
- FIND_LIBRARY(QT_DECLARATIVE_LIB QtDeclarative)
- SET(QT_LIBRARIES ${QT_LIBRARIES} ${QT_DECLARATIVE_LIB})
-
- INCLUDE_DIRECTORIES(${NECESSITAS_QT_ROOT_ARCH}/include/QtDeclarative)
 ENDIF()
 
 FIND_PACKAGE(ZLIB)
@@ -326,8 +332,8 @@ ENDIF()
 
 ########### Set some global variables ###########
 IF(BUILD_FOR_ANDROID)
-  ADD_DEFINITIONS(-DINSTALL_DATADIR="//sdcard/stellarium")
-  ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="//sdcard/stellarium/locale")
+  ADD_DEFINITIONS(-DINSTALL_DATADIR="/sdcard/stellarium")
+  ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="/sdcard/stellarium/locale")
   SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium-apk")
 ELSEIF(UNIX AND NOT WIN32)
 IF(APPLE)
@@ -415,7 +421,6 @@ ENDIF()
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/Doxyfile.cmake ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
 ADD_CUSTOM_TARGET(apidoc doxygen ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc directory.")
 
-
 ########### Top level include directories ###########
 # This will be used for all compilations in sub-directories
 INCLUDE_DIRECTORIES(
@@ -429,16 +434,10 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_SOURCE_DIR}/src/core/external/glues_stel/source/
 	${CMAKE_SOURCE_DIR}/src/core/external/glues_stel/source/libtess
 	${CMAKE_SOURCE_DIR}/src/gui
+	${CMAKE_SOURCE_DIR}/src/mobileGui
 	${CMAKE_SOURCE_DIR}/src/scripting
-	${OPENGL_INCLUDE_DIR}
-	${ICONV_INCLUDE_DIR}
 	${INTL_INCLUDE_DIR}
-	${ZLIB_INCLUDE_DIR}
-	${QT_INCLUDE_DIR}/QtScript
-	${QT_QTSCRIPT_INCLUDE_DIR}
 	${CMAKE_BINARY_DIR}/src
-	${QT_QTTEST_INCLUDE_DIR}
-	${QT_DECLARATIVE_INCLUDE_DIR}
 )
 ########### Subdirectories ###############
 ADD_SUBDIRECTORY( data )

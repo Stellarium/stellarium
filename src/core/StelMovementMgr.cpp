@@ -63,9 +63,9 @@ void StelMovementMgr::init()
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(conf);
 	Q_ASSERT(objectMgr);
-	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), 
+	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
-	
+
 	movementsSpeedFactor=1.;
 	flagEnableMoveAtScreenEdge = conf->value("navigation/flag_enable_move_at_screen_edge",false).toBool();
 	mouseZoomSpeed = conf->value("navigation/mouse_zoom",30).toInt();
@@ -190,12 +190,18 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 			case Qt::Key_Right:
 				turnRight(true); break;
 			case Qt::Key_Up:
-				if (event->modifiers().testFlag(Qt::ControlModifier)) zoomIn(true);
-				else turnUp(true);
+				if (event->modifiers().testFlag(Qt::ControlModifier)){
+					zoomIn(true);
+				} else {
+					turnUp(true);
+				}
 				break;
 			case Qt::Key_Down:
-				if (event->modifiers().testFlag(Qt::ControlModifier)) zoomOut(true);
-				else turnDown(true);
+				if (event->modifiers().testFlag(Qt::ControlModifier)) {
+					zoomOut(true);
+				} else {
+					turnDown(true);
+				}
 				break;
 			case Qt::Key_PageUp:
 				zoomIn(true); break;
@@ -235,6 +241,14 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 			case Qt::Key_Shift:
 				moveSlow(false); break;
 			case Qt::Key_Control:
+				// This an be all that is seen for anything with control, so stop them all.
+				// This is true for 4.8.1
+				turnRight(false);
+				turnLeft(false);
+				zoomIn(false);
+				zoomOut(false);
+				turnDown(false);
+				turnUp(false);
 				setDragTimeMode(false);
 				break;
 			default:
@@ -586,6 +600,8 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		StelUtils::rectToSphe(&ra_start, &de_start, tmpStart);
 		StelUtils::rectToSphe(&ra_aim, &de_aim, tmpAim);
 
+		// Make sure the position of the object to be aimed at is defined...
+		Q_ASSERT(move.aim[0]==move.aim[0] && move.aim[1]==move.aim[1] && move.aim[2]==move.aim[2]);
 		// Trick to choose the good moving direction and never travel on a distance > PI
 		if (ra_aim-ra_start > M_PI)
 		{

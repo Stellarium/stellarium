@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-15 17:25+0700\n"
-"PO-Revision-Date: 2012-03-15 19:16+0000\n"
+"POT-Creation-Date: 2012-03-27 21:44+0700\n"
+"PO-Revision-Date: 2012-03-29 11:57+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-16 04:42+0000\n"
-"X-Generator: Launchpad (build 14951)\n"
+"X-Launchpad-Export-Date: 2012-03-30 04:32+0000\n"
+"X-Generator: Launchpad (build 15032)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -135,10 +135,25 @@ msgstr "Расстояние: %1 а.е. (%2 км)"
 msgid "Distance: %1AU"
 msgstr "Расстояние: %1 а.е."
 
-#: src/core/modules/Planet.cpp:166
+#: src/core/modules/Planet.cpp:171
+#, qt-format
+msgid "Apparent diameter: %1, with rings: %2"
+msgstr "Видимый диаметр: %1, с кольцами: %2"
+
+#: src/core/modules/Planet.cpp:177
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Видимый диаметр: %1"
+
+#: src/core/modules/Planet.cpp:191
+#, qt-format
+msgid "Phase: %1"
+msgstr "Фаза: %1"
+
+#: src/core/modules/Planet.cpp:192
+#, qt-format
+msgid "Illuminated: %1%"
+msgstr "Освещено: %1%"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -556,8 +571,8 @@ msgstr ""
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Форумы} - обсудите Stellarium с другими пользователями."
 
-#: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:337
-#: src/gui/HelpDialog.cpp:339 src/gui/StelGui.cpp:175
+#: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:341
+#: src/gui/HelpDialog.cpp:343 src/gui/StelGui.cpp:175
 msgid "Miscellaneous"
 msgstr "Прочее"
 
@@ -575,28 +590,41 @@ msgstr "Координатор проекта и ведущий разработ
 msgid "Doc author/developer: %1"
 msgstr "Автор документации/разработчик: %1"
 
-#: src/gui/HelpDialog.cpp:301
-#, qt-format
-msgid "Graphic/other designer: %1"
-msgstr "Дизайнер графики/прочего: %1"
-
-#: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
-#: src/gui/HelpDialog.cpp:304 src/gui/HelpDialog.cpp:305
-#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:309
-#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
+#: src/gui/HelpDialog.cpp:303 src/gui/HelpDialog.cpp:304
+#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "Developer: %1"
 msgstr "Разработчик: %1"
 
-#: src/gui/HelpDialog.cpp:307 src/gui/HelpDialog.cpp:308
-#, qt-format
-msgid "OSX Developer: %1"
-msgstr "OSX-разработчик: %1"
-
-#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:307
 #, qt-format
 msgid "Tester: %1"
 msgstr "Тестер: %1"
+
+#: src/gui/HelpDialog.cpp:308
+msgid "Past Developers"
+msgstr "Бывшие разработчики"
+
+#: src/gui/HelpDialog.cpp:309
+msgid ""
+"Several people have made significant contributions, but are no longer "
+"active. Their work has made a big difference to the project:"
+msgstr ""
+"Несколько человек сделали значительный вклад в развтие проекта, но ныне они "
+"не активны:"
+
+#: src/gui/HelpDialog.cpp:310
+#, qt-format
+msgid "Graphic/other designer: %1"
+msgstr "Дизайнер графики/прочего: %1"
+
+#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#, qt-format
+msgid "OSX Developer: %1"
+msgstr "OSX-разработчик: %1"
 
 #: src/gui/StelGui.cpp:102
 msgid "Display Options"
@@ -2819,11 +2847,11 @@ msgstr "Засветка:"
 
 #: src/ui_viewDialog.h:1103
 msgid "pressure, temperature, extinction coefficient"
-msgstr "давление, температура, коэффициент угасания"
+msgstr "давление, температура, коэффициент экстинкции"
 
 #: src/ui_viewDialog.h:1105
 msgid "Refraction/Extinction settings..."
-msgstr "Настройки рефракции/угасания..."
+msgstr "Настройки рефракции/экстинкции..."
 
 #: src/ui_viewDialog.h:1106
 msgid "Labels and Markers"
@@ -2946,7 +2974,7 @@ msgstr "Отобразить всю известную информацию"
 
 #: src/ui_configurationDialog.h:760
 msgid "All available"
-msgstr "Все доступные"
+msgstr "Вся доступная"
 
 #: src/ui_configurationDialog.h:762
 msgid "Display less information"
@@ -2954,7 +2982,7 @@ msgstr "Отобразить краткую информацию"
 
 #: src/ui_configurationDialog.h:764
 msgid "Short"
-msgstr "Короткий"
+msgstr "Краткая"
 
 #: src/ui_configurationDialog.h:766
 msgid "Display no information"
@@ -2962,7 +2990,7 @@ msgstr "Не отображать информации"
 
 #: src/ui_configurationDialog.h:768
 msgid "None"
-msgstr "Ничего"
+msgstr "Отключена"
 
 #: src/ui_configurationDialog.h:769
 msgid "Default options"
@@ -3272,14 +3300,14 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
-"Угасание это потеря блеска звезды из-за атмосферы Земли. Она находится "
+"Экстинкция это потеря блеска звезды из-за атмосферы Земли. Она находится "
 "отношением звёздной величины к воздушной массе, где воздушная масса является "
 "толщей атмосферы, через которую должен пройти свет. (в зените: 1; у "
 "горизонта: около 40)"
 
 #: src/ui_AtmosphereDialog.h:187
 msgid "Extinction Coefficient:"
-msgstr "Коэфф. угасания"
+msgstr "Коэфф. экстинкции:"
 
 #: src/ui_AtmosphereDialog.h:189
 msgid ""
