@@ -84,11 +84,11 @@ Item {
 				id: startRow
 				anchors.fill: parent
 
-				Button {
+				BarIcon {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: logoWidth()
-					labelText: " Logo"
+					imageSource: "image://mobileGui/barlogo"
 					bgOpacity: 0
 				}
 				Item {
@@ -96,7 +96,7 @@ Item {
 					anchors.bottom: parent.bottom
 					width: spacerWidth();
 				}
-				Button {
+				BarIcon {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
@@ -104,7 +104,7 @@ Item {
 					imageSize: dp(32)
 					onClicked: buttonRows.state = "SEARCH"
 				}
-				Button {
+				BarIcon {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
@@ -112,14 +112,14 @@ Item {
 					imageSize: dp(32)
 					onClicked: buttonRows.state = "PLAYBACK"
 				}
-				Button {
+				BarIcon {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
 					imageSource: "image://mobileGui/accelerometer"
 					imageSize: dp(32)
 				}
-				Button {
+				BarIcon {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
@@ -132,11 +132,11 @@ Item {
 				id: playbackRow
 				anchors.fill: parent
 
-				Button {
+				BarIcon {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: logoWidth()
-					labelText: "<Logo"
+					imageSource: "image://mobileGui/barlogo"
 					onClicked: buttonRows.state = "START"
 				}
 				Item {
@@ -144,7 +144,7 @@ Item {
 					anchors.bottom: parent.bottom
 					width: spacerWidth();
 				}
-				Button {
+				BarIcon {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
@@ -152,7 +152,7 @@ Item {
 					imageSize: dp(32)
 					action: "actionDecrease_Time_Speed"
 				}
-				Button {
+				BarIcon {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
@@ -160,7 +160,7 @@ Item {
 					imageSize: dp(32)
 					action: "actionSet_Real_Time_Speed"
 				}
-				Button {
+				BarIcon {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
@@ -168,7 +168,7 @@ Item {
 					imageSize: dp(32)
 					action: "actionReturn_To_Current_Time"
 				}
-				Button {
+				BarIcon {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
@@ -182,19 +182,19 @@ Item {
 				id: searchRow
 				anchors.fill: parent
 
-				Button {
+				BarIcon {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: logoWidth()
-					labelText: "<Logo"
+					imageSource: "image://mobileGui/barlogo"
 					onClicked: buttonRows.state = "START"
 				}
-				Button {
+				BarIcon {
 					id: goButton
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
-					labelText: "Go"
+					imageSource: "image://mobileGui/search"
 				}
 				Item
 				{

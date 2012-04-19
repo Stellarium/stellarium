@@ -1,7 +1,13 @@
 import QtQuick 1.1
 
+//A clickable is an abstract Item with partially-defined appearance.
+//A clickable handles click events, and can (optionally) contain actions.
+//Clicks are passed to actions, and actions can tell the clickable whether it's "checked" or not.
+//Subclassed items are expected to use the "checked" status if they want it; clickable does nothing with it.
+//Clickable's only appearance is that of a background highlight which appears if the clickable is clicked.
+// (So far, every clickable thing needs that highlighting, no sense in breaking it apart further)
 Item {
-	id: button
+	id: clickable
 
 	implicitWidth: 50
 	implicitHeight: 50
@@ -12,17 +18,15 @@ Item {
 	//#0099CC
 	property color highlightColor: "#33B5E5"
 	property string action: ""
-	property string labelText: ""
-	property string imageSource: ""
-	property string enabledImageSource: ""
-	property string disabledImageSource: ""
-	property int imageSize
 
 	property real bgOpacity: 0.3
 
 	signal clicked()
 	signal pressed()
 	signal released()
+
+	property bool checked: true
+	property bool checkable: false
 
 	PropertyAnimation {
 		id: highlightFadeIn;
@@ -49,39 +53,19 @@ Item {
 		color: highlightColor
 	}
 
-	Text {
-		id: label
-		anchors.centerIn: parent
-		text: labelText
-		color: "white"
-	}
-
-	Image {
-		id: image
-		fillMode: Image.PreserveAspectFit
-		sourceSize.width: imageSize
-		sourceSize.height: imageSize
-		anchors.centerIn: parent
-		opacity: 0.8
-		source: imageSource
-	}
-
 	onActionChanged : {
 		clicked.connect(baseGui.getGuiActions(action).toggle());
 		clicked.connect(baseGui.getGuiActions(action).trigger());
 
-		if(baseGui.getGuiActions(action).checkable)
+		checkable = baseGui.getGuiActions(action).checkable;
+
+		if(baseGui.getGuiActions(action).checked)
 		{
-			if(baseGui.getGuiActions(action).checked)
-			{
-				label.color = "red";
-				image.opacity = 0.8;
-			}
-			else
-			{
-				label.color = "blue";
-				image.opacity = 0.3;
-			}
+			checked = true;
+		}
+		else
+		{
+			checked = false;
 		}
 	}
 
@@ -94,7 +78,7 @@ Item {
 		clicked();
 
 		// Possible to get stuck in an unreleased state
-		button.released();
+		clickable.released();
 		highlightFadeOut.start();
 	}
 
@@ -102,20 +86,21 @@ Item {
 	{
 		target: baseGui.getGuiActions(action)
 		onToggled: {
+			//checkable = baseGui.getGuiActions(action).checkable;
+
 			if(baseGui.getGuiActions(action).checked)
 			{
-				label.color = "red";
-				image.opacity = 0.8;
+				checked = true
 			}
 			else
 			{
-				label.color = "blue";
-				image.opacity = 0.3;
+				checked = false;
 			}
 		}
 
 		onTriggered: {
-			console.log("we've been triggered without a checkable");
+			//Flash the highlight or something?
+			//checkable = baseGui.getGuiActions(action).checkable;
 		}
 	}
 
@@ -123,11 +108,12 @@ Item {
 		anchors.fill: parent
 		onClicked: processClick()
 		onPressed: {
-			button.pressed();
-			highlightFadeIn.start();
+			clickable.pressed();
+			//highlightFadeIn.start(); //trying without the fade-in: appears more responsive to the user
+			bgFill.opacity = bgOpacity;
 		}
 		onReleased: {
-			button.released();
+			clickable.released();
 			highlightFadeOut.start();
 		}
 	}
