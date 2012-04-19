@@ -2,8 +2,6 @@
 
 INSTALL(FILES stellarium.ico ssystem.ini base_locations.bin.gz DejaVuSans.ttf default_config.ini DejaVuSansMono.ttf constellations_boundaries.dat iso639-1.utf8 iso3166-1-alpha-2.utf8 countryCodes.dat DESTINATION share/${PACKAGE}/data)
 
-INSTALL(FILES shaders/nmap.v.glsl shaders/nmap.f.glsl DESTINATION share/${PACKAGE}/data/shaders)
-
 IF (BUILD_FOR_MAEMO)
   INSTALL(FILES maemo/stellarium.desktop DESTINATION /usr/share/applications/hildon)
   INSTALL(FILES maemo/stellarium.png DESTINATION /usr/share/icons/hicolor/48x48/apps)
