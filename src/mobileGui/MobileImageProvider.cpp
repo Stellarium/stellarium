@@ -53,7 +53,12 @@ QImage MobileImageProvider::generateImage(QString path, const QSize &requestedSi
 
 	Q_ASSERT_X(path.endsWith(QString(VECTOR_POSTFIX), Qt::CaseInsensitive), "MobileImageProvider::generateImage", QString("has an invalid path! " % path).toAscii());
 
+
 	QSvgRenderer svgRenderer(path);
+	if(requestedSize.width() == 0 || requestedSize.height() == 0)
+	{
+		requestedSize == svgRenderer.viewBox().size();
+	}
 	QImage image(requestedSize, QImage::Format_ARGB32);
 	image.fill(0);
 	svgRenderer.render(new QPainter(&image));

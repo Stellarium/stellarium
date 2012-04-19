@@ -89,6 +89,7 @@ Item {
 					anchors.bottom: parent.bottom
 					width: logoWidth()
 					imageSource: "image://mobileGui/barlogo"
+					imageSize: dp(32)
 					bgOpacity: 0
 				}
 				Item {
@@ -137,6 +138,7 @@ Item {
 					anchors.bottom: parent.bottom
 					width: logoWidth()
 					imageSource: "image://mobileGui/barlogo"
+					imageSize: dp(32)
 					onClicked: buttonRows.state = "START"
 				}
 				Item {
@@ -187,6 +189,7 @@ Item {
 					anchors.bottom: parent.bottom
 					width: logoWidth()
 					imageSource: "image://mobileGui/barlogo"
+					imageSize: dp(32)
 					onClicked: buttonRows.state = "START"
 				}
 				BarIcon {
@@ -195,6 +198,7 @@ Item {
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
 					imageSource: "image://mobileGui/search"
+					imageSize: dp(32)
 				}
 				Item
 				{
