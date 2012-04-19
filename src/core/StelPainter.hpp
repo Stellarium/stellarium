@@ -1,8 +1,6 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
- * Copyright (C) 2011 Eleni Maria Stea (planet rendering using normal mapping
- * and clouds)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,18 +20,12 @@
 #ifndef _STELPAINTER_HPP_
 #define _STELPAINTER_HPP_
 #include "VecMath.hpp"
-#include "SolarSystem.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelProjectorType.hpp"
 #include "StelProjector.hpp"
 #include <QString>
 #include <QVarLengthArray>
 #include <QFontMetrics>
-
-//FIXME: After fully migrate to Qt 4.8 this condition need drop
-#if QT_VERSION>=0x040800
-#include <QGLFunctions>
-#endif
 
 #ifdef USE_OPENGL_ES2
  #define STELPAINTER_GL2 1
@@ -108,10 +100,6 @@ private:
 //! As a coding rule, no openGL calls should be performed when no instance of StelPainter exist.
 //! Typical usage is to create a local instance of StelPainter where drawing operations are needed.
 class StelPainter
-//FIXME: After fully migrate to Qt 4.8 this condition need drop
-#if QT_VERSION>=0x040800
-		: protected QGLFunctions
-#endif
 {
 public:
 	friend class VertexArrayProjector;
@@ -237,7 +225,6 @@ public:
 
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
 	void sSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
-	void nmSphere(float radius, float oneMinusOblateness, int slices, int stacks,  SolarSystem* ssm, int orientInside = 0, bool flipTexture = false);
 
 	//! Generate a StelVertexArray for a sphere.
 	static StelVertexArray computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
@@ -303,7 +290,7 @@ public:
 	void setShadeModel(ShadeModel m);
 
 	//! Set whether texturing is enabled.
-	void enableTexture2d(bool b, int texunit = 0);
+	void enableTexture2d(bool b);
 
 	// Thoses methods should eventually be replaced by a single setVertexArray
 	//! use instead of glVertexPointer
@@ -329,22 +316,12 @@ public:
 		normalArray.size = 3; normalArray.type = type; normalArray.pointer = pointer;
 	}
 
-	// tangent
-	void setTangentPointer(int type, const void* pointer)
-	{
-        tangentArray.size = 3; tangentArray.type = type; tangentArray.pointer = pointer;
-    }
-
 	//! use instead of glEnableClient
 	void enableClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false);
-        void enableNMapClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false, bool tangent=false);
 
 	//! convenience method that enable and set all the given arrays.
 	//! It is equivalent to calling enableClientState and set the array pointer for each arrays.
 	void setArrays(const Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL);
-
-	// there are conflicts if we name the function setArrays
-	void setNMapArrays(const Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL, const Vec3f* tangentArray=NULL);
 
 	//! Draws primitives using vertices from the arrays specified by setVertexArray().
 	//! The type of primitive to draw is specified by mode.
@@ -352,7 +329,6 @@ public:
 	//! Else it will consume count elements of indices, starting at offset, which are used to index into the
 	//! enabled arrays.
 	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned int* indices=NULL);
-	void drawFromArrayNMap(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned int* indices=NULL);
 
 	//! Draws the primitives defined in the StelVertexArray.
 	//! @param checkDiscontinuity will check and suppress discontinuities if necessary.
@@ -447,8 +423,6 @@ private:
 	ArrayDesc normalArray;
 	//! The descriptor for the current opengl color array
 	ArrayDesc colorArray;
-        //! The descriptor for the current opengl tangent array
-        ArrayDesc tangentArray;
 
 	//! the single light used by the painter
 	StelPainterLight light;
