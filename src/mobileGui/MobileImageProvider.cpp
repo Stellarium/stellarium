@@ -57,7 +57,7 @@ QImage MobileImageProvider::generateImage(QString path, const QSize &requestedSi
 	QSvgRenderer svgRenderer(path);
 	if(requestedSize.width() == 0 || requestedSize.height() == 0)
 	{
-		requestedSize == svgRenderer.viewBox().size();
+		requestedSize = svgRenderer.viewBox().size();
 	}
 	QImage image(requestedSize, QImage::Format_ARGB32);
 	image.fill(0);
