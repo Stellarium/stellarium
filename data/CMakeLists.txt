@@ -22,8 +22,6 @@ IF(GUI_MODE STREQUAL "Mobile")
   INSTALL(FILES ${mobileGuiFiles} DESTINATION share/${PACKAGE}/gui/images-xhdpi)
 ENDIF()
 
-INSTALL(FILES shaders/nmap.v.glsl shaders/nmap.f.glsl DESTINATION share/${PACKAGE}/data/shaders)
-
 IF (BUILD_FOR_MAEMO)
   INSTALL(FILES maemo/stellarium.desktop DESTINATION /usr/share/applications/hildon)
   INSTALL(FILES maemo/stellarium.png DESTINATION /usr/share/icons/hicolor/48x48/apps)

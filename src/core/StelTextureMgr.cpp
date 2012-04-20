@@ -22,7 +22,6 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelPainter.hpp"
-#include <QtOpenGL>
 
 #include <QHttp>
 #include <QFileInfo>
