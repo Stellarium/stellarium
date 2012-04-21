@@ -63,20 +63,21 @@ vec4 getLighting()
 	
 	//Lambert term
 	float NdotL = dot(n, l);
+	color += gl_LightSource[0].diffuse * gl_FrontMaterial.diffuse * max(0.0, NdotL) * shadowFactor;
 	
+	//Reflection term
 	if(NdotL > 0.0)
-	{
-		//Diffuse part
-		color += gl_LightSource[0].diffuse * gl_FrontMaterial.diffuse * NdotL * shadowFactor;
-		
-		//Specular part
+	{		
 		vec3 e = normalize(vecEye);
-		vec3 r = normalize(-reflect(l,n));
+		vec3 r = normalize(-reflect(l,n));  
 		
-		float spec = pow(max(0.0, dot(r, e)), fShininess);
-		
-		color += gl_LightSource[0].specular * gl_FrontMaterial.specular * spec;
-	}		
+		//Hack, it seems that 0.0f is not sent correctly into the shader on nvidia cards
+		if(fShininess > 0.0)
+		{
+			float spec = pow(max(0.0, dot(r, e)), fShininess);		
+			color += gl_LightSource[0].specular * gl_FrontMaterial.specular * spec;
+		}
+	}	
 	
 	return color;
 } 

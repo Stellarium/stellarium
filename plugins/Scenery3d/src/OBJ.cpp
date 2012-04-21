@@ -1191,8 +1191,8 @@ void OBJ::uploadTexturesGL()
 //        qDebug() << getTime() << "[Scenery3d] Alpha:" << pMaterial->alpha;
 //        qDebug() << getTime() << "[Scenery3d] Illum:" << pMaterial->illum;
 
-        qDebug() << getTime() << "[Scenery3d] Uploading textures for Material: " << pMaterial->name.c_str();
-        qDebug() << getTime() << "[Scenery3d] Texture:" << pMaterial->textureName.c_str();
+//        qDebug() << getTime() << "[Scenery3d] Uploading textures for Material: " << pMaterial->name.c_str();
+//        qDebug() << getTime() << "[Scenery3d] Texture:" << pMaterial->textureName.c_str();
         if(!pMaterial->textureName.empty())
         {
             StelTextureSP tex = textureMgr.createTexture(QString(absolutePath(pMaterial->textureName).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
