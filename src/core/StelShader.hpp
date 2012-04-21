@@ -74,11 +74,11 @@ public:
         bool use() const;
 
         friend bool useShader (const StelShader *shader);
-
+        unsigned int program;
 private:
         unsigned int vertexShader;
         unsigned int pixelShader;
-        unsigned int program;
+
 };
 
 bool useShader(const StelShader *shader);
