@@ -44,33 +44,30 @@ vec4 getLighting()
 	vec4 color = (gl_FrontLightModelProduct.sceneColor * gl_FrontMaterial.ambient) + (gl_LightSource[0].ambient * gl_FrontMaterial.ambient);
 	
 	//For bump mapping, the normal comes from the bump map texture lookup
-	vec3 n = vec3(0.0);
+	vec3 n = normalize(vecNormal);
 	if(boolBump)
 	{
 		n = normalize(texture2D(bmap, gl_TexCoord[0].st).xyz * 2.0 - 1.0);
-	}
-	else
-	{
-		n = normalize(vecNormal);
 	}
 	
 	vec3 l = normalize(vecLight);
 	
 	//Lambert term
 	float NdotL = dot(n, l);
+	color += gl_LightSource[0].diffuse * gl_FrontMaterial.diffuse * max(0.0, NdotL);
 	
+	//Reflection term
 	if(NdotL > 0.0)
-	{
-		//Diffuse part
-		color += gl_LightSource[0].diffuse * gl_FrontMaterial.diffuse * NdotL;
-		
-		//Specular part
+	{		
 		vec3 e = normalize(vecEye);
 		vec3 r = normalize(-reflect(l,n));  
 		
-		float spec = pow(max(0.0, dot(r, e)), fShininess);
-		
-		color += gl_LightSource[0].specular * gl_FrontMaterial.specular * spec;
+		//Hack, it seems that 0.0f is not sent correctly into the shader on nvidia cards
+		if(fShininess > 0.0)
+		{
+			float spec = pow(max(0.0, dot(r, e)), fShininess);		
+			color += gl_LightSource[0].specular * gl_FrontMaterial.specular * spec;
+		}
 	}
 	
 	return color;
@@ -88,11 +85,11 @@ void main(void)
 	//Color only mode?
 	if(onlyColor)
 	{
-		color = vecColor * color;
+		color *= vecColor;
 	}
 	else
 	{
-		color = texel * color;
+		color *= texel;
 	}	
 
 	//Set fragment color, alpha comes from MTL file
