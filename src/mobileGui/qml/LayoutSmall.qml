@@ -124,6 +124,7 @@ Item {
 					anchors.top: parent.top
 					anchors.bottom: parent.bottom
 					width: minButtonWidth()
+					onClicked: barMenu.opacity = 1
 					imageSource: "image://mobileGui/menu"
 					imageSize: dp(32)
 				}
@@ -264,6 +265,22 @@ Item {
 			}
 		}
 
+	}
+
+	PopupMenu
+	{
+		id: barMenu
+		lineHeight: dp(48)
+		menuWidth: dp(200)
+		menuHeight: dp(48) * 2
+		opacity: 0 //hook this up to state change for pretty anims?
+		model:
+			ListModel {
+				ListElement { action: ""
+							  text: "Test1"}
+				ListElement { action: ""
+							  text: "Test2"}
+			}
 	}
 
 

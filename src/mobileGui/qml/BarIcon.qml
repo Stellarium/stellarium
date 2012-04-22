@@ -5,9 +5,22 @@ Clickable {
 	id: barIcon
 
 	property string imageSource: ""
-	property string enabledImageSource: ""
-	property string disabledImageSource: ""
 	property int imageSize
+
+	state: "ENABLED"
+
+	states: [
+		State {
+			name: "ENABLED"
+			when: barIcon.checked
+			PropertyChanges { target: image; opacity: 0.8}
+		},
+		State {
+			name: "DISABLED"
+			when: !barIcon.checked
+			PropertyChanges { target: image; opacity: 0.3}
+		}
+	]
 
 	Image {
 		id: image
@@ -15,7 +28,6 @@ Clickable {
 		sourceSize.width: imageSize
 		sourceSize.height: imageSize
 		anchors.centerIn: parent
-		opacity: 0.8
 		source: imageSource
 	}
 }
