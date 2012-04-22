@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-04-11 16:29+0700\n"
-"PO-Revision-Date: 2012-03-28 12:00+0000\n"
+"PO-Revision-Date: 2012-04-21 05:27+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-12 04:44+0000\n"
-"X-Generator: Launchpad (build 15070)\n"
+"X-Launchpad-Export-Date: 2012-04-22 04:41+0000\n"
+"X-Generator: Launchpad (build 15120)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -138,7 +138,7 @@ msgstr "Jarak: %1AU"
 #: src/core/modules/Planet.cpp:295
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "Diameter ketara: %1, dengan gelang: %2"
 
 #: src/core/modules/Planet.cpp:301
 #, qt-format
@@ -148,22 +148,22 @@ msgstr "Diameter ketara: %1"
 #: src/core/modules/Planet.cpp:315
 #, qt-format
 msgid "Phase: %1"
-msgstr ""
+msgstr "Fasa: %1"
 
 #: src/core/modules/Planet.cpp:316
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr ""
+msgstr "Disinari: %1%"
 
 #: src/core/modules/Planet.cpp:317
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "Pemanjangan: %1"
 
 #: src/core/modules/Planet.cpp:318
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "Sudut Fasa: %1"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -618,13 +618,16 @@ msgstr "Penguji: %1"
 
 #: src/gui/HelpDialog.cpp:308
 msgid "Past Developers"
-msgstr ""
+msgstr "Pembangun Terdahulu"
 
 #: src/gui/HelpDialog.cpp:309
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
+"Beberapa individu telah melakukan sumbangan yang tidak boleh diupakan, "
+"walaupun mereka tidak lagi aktif. Usaha mereka telah membuat perbezaan yang "
+"ketara terhadap projek ini:"
 
 #: src/gui/HelpDialog.cpp:310
 #, qt-format
@@ -1054,11 +1057,11 @@ msgstr "peta bintang"
 
 #: src/gui/SearchDialog.cpp:503
 msgid "University of Strasbourg (France)"
-msgstr ""
+msgstr "Universiti Strasbourg (Perancis)"
 
 #: src/gui/SearchDialog.cpp:504
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "Universiti Harvad (AS)"
 
 #: src/main.cpp:337
 msgid "This system does not support OpenGL."
@@ -2760,15 +2763,15 @@ msgstr "Kedudukan"
 
 #: src/ui_searchDialogGui.h:586
 msgid "On-line astronomical database SIMBAD"
-msgstr ""
+msgstr "Pangkalan data astronomi atas-talian SIMBAD"
 
 #: src/ui_searchDialogGui.h:587
 msgid "Extend search with SIMBAD"
-msgstr ""
+msgstr "Lanjutkan gelintar dengan SIMBAD"
 
 #: src/ui_searchDialogGui.h:588
 msgid "Server:"
-msgstr ""
+msgstr "Pelayan:"
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1137
 #: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
@@ -3830,11 +3833,11 @@ msgstr "Fail satelit.json lama tidak lagi serasi - menggunakan fail lalai"
 #: plugins/Satellites/src/Satellite.cpp:230
 #: plugins/Satellites/src/Satellite.cpp:234
 msgid "Catalog #"
-msgstr ""
+msgstr "Katalog #"
 
 #: plugins/Satellites/src/Satellite.cpp:236
 msgid "International Designator"
-msgstr ""
+msgstr "Pereka Antarabangsa"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:248
@@ -4001,6 +4004,10 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
+"1. Pastikan satelit yang anda ingin tambah disertakan dalam salah satu URL "
+"tersenarai dalam tab Sumber pada dialog konfigurasi. 2. Pergi ke tab "
+"Satelit, dan klik butang '+'. Kemudian pilih satelit yang anda ingin tambah "
+"dan pilih butang \"tambah\"."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
@@ -4108,7 +4115,7 @@ msgstr "[sumber baru]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
 msgid "[orbit calculation error]"
-msgstr ""
+msgstr "[ralat pengiraan orbit]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"
@@ -5483,18 +5490,18 @@ msgstr "Jenis pulsar : %1"
 #: plugins/Pulsars/src/Pulsar.cpp:120
 #, qt-format
 msgid "Equivalent width of the integrated pulse profile: %1 ms"
-msgstr ""
+msgstr "Lebar setara bagi profil denyut tersepadu: %1 ms"
 
 #: plugins/Pulsars/src/Pulsar.cpp:124
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
-msgstr ""
+msgstr "Lebar profil pada 50% puncak: %1 ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:130 plugins/Pulsars/src/Pulsar.cpp:142
 #: plugins/Pulsars/src/Pulsar.cpp:154
 msgid "Time averaged flux density at"
-msgstr ""
+msgstr "Ketumpatan fluks terpurata masa pada"
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Pulsars/src/Pulsar.cpp:133 plugins/Pulsars/src/Pulsar.cpp:145
@@ -5506,7 +5513,7 @@ msgstr "MHz"
 #: plugins/Pulsars/src/Pulsar.cpp:136 plugins/Pulsars/src/Pulsar.cpp:148
 #: plugins/Pulsars/src/Pulsar.cpp:160
 msgid "mJy"
-msgstr ""
+msgstr "mJy"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:232
