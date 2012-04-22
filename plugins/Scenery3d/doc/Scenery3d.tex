@@ -64,7 +64,7 @@ i.e., it must support the OpenGL extension called
 or ATI/AMD) support this extension. In case your graphics hardware
 does not suppport it, it still works, but you are limited to
 perspective projection, and the program will switch to it as soon as
-you switch on, and switch back once you switch off the the Scenery3d
+you switch on, and switch back once you switch off the Scenery3d
 plugin.
 
 You can influence rendering quality, but also speed, with 2 config
@@ -171,10 +171,12 @@ Ka       &0.2 0.2 0.2  & 0..1 each& R/G/B Ambient color\\
 Kd       &0.8 0.8 0.8  & 0..1 each& R/G/B Diffuse color\\
 Ks       &0.0 0.0 0.0  & 0..1 each& R/G/B Specular color\\
 Ns       &0.0          & 0...128  & shinyness \\
-d        &1.0          & 0..1     & opacity \\
+d or Tr  &1.0          & 0..1     & opacity \\
 illum    &0            & 0, 1, 2  & 0: Ka=Kd, Ns=0 \\
          &             &          & 1: Kd, Ka as given, Ns=0\\
          &             &          & 2: Kd, Ka, Ks, Ns as given, glossy highlights\\
+         &             &          & 9: Only Kd and d evaluated.\\
+         &             &          & \hphantom{9:} allows semitransparent objects, limited application.\\
 map\_Kd  & (none)      & filename & texture map to be mixed with Ka, Kd \\
 map\_bump& (none)      & filename & normal map for surface roughness  
 \end{tabular}
@@ -184,8 +186,8 @@ map\_bump& (none)      & filename & normal map for surface roughness
 
 On reasonably good hardware (tested on a notebook PC with NVidia M9800
 GTS), models up to 100.000 triangles are fluent, up to 250.000 are
-still "interactive".  If display is too slow, switch to perspective
-projection. All other projections require sixfold effort! 
+still ``interactive''.  If display is too slow, switch to perspective
+projection: all other projections require almost sixfold effort! 
 
 
 \subsection{Configuring OBJ for Scenery3d}
@@ -303,7 +305,7 @@ survey (world) coordinate system, like UTM or Gauss-Krueger.
 \begin{verbatim}
 grid_name=<string> 
 \end{verbatim}
-Name of grid coordinates, e.g. \texttt{``UTM 33 U (WGS 84)''}, \texttt{``Gauss-Krüger M34''} or \verb|``Relative to <Center>''| 
+Name of grid coordinates, e.g. \texttt{``UTM 33 U (WGS 84)''}, \texttt{``Gauss-Krï¿½ger M34''} or \verb|``Relative to <Center>''| 
                        This name is only displayed, there is no evaluation of its contents.
 
 \begin{verbatim}
@@ -311,7 +313,7 @@ orig_E=<double> | (Easting)  East-West-distance to zone central meridian
 orig_N=<double> | (Northing) North distance from Equator
 orig_H=<double> | (Height)   Altitude above Mean Sea Level of model origin
 \end{verbatim}
-These entries describe the offset, in metres, of the model coordinates relative to coordinates in a geographic grid, like Gauss-Krüger.
+These entries describe the offset, in metres, of the model coordinates relative to coordinates in a geographic grid, like Gauss-Krï¿½ger.
 If you have your model vertices specified in grid coordinates, do not specify \verb|orig_...| data, 
 but please add \verb|start_...| data, below. 
 
@@ -329,7 +331,7 @@ is known as meridian convergence.
 This amount can be given in \verb|convergence_angle|
 (degrees), so that your model will be aligned with True North\footnote{%
 \url{http://en.wikipedia.org/wiki/Transverse_Mercator_projection}}.
-Central meridian $\lambda_0$ of grid zone, e.g. for UTM or Gauss-Krüger. 
+Central meridian $\lambda_0$ of grid zone, e.g. for UTM or Gauss-Krï¿½ger. 
 \verb|grid_meridian| is  only required to compute convergence angle if \verb|convergence_angle="from_grid"|
 
 \begin{verbatim}
@@ -395,9 +397,10 @@ Then, you select the OBJ group, open \cmd{Windows->Ruby Console} and call
 of selected group (e.g., from PhotoFly import)}.
 
 On the Ruby console, you will find a line of numbers (the $4\times4$ transformation matrix) which you
-copy/paste into the \filename{[model]} section in \filename{scenery3d.ini}. 
+copy/paste (all in one line!) into the \filename{[model]} section in \filename{scenery3d.ini}. 
 \begin{verbatim}
-obj2grid_trafo=<a11>,<a12>,<a13>,<a14>,<a21>,<a22>,<a23>,<a24>,<a31>,<a32>,<a33>,<a34>,<a41>,<a42>,<a43>,<a44>
+obj2grid_trafo=<a11>,<a12>,<a13>,<a14>,<a21>,<a22>,<a23>,<a24>,
+               <a31>,<a32>,<a33>,<a34>,<a41>,<a42>,<a43>,<a44>
 \end{verbatim}
 You edit the \filename{scenery3d.ini} to use your full (unmodified)
 PhotoFly model and, if you don't have a panorama, take \filename{Zero}
@@ -429,11 +432,11 @@ was implemented originally in 2010/2011 by Simon Parzer and Peter
 Neubauer as student work supervised by Michael Wimmer (TU
 Wien). Improvements in integration, user interaction, .ini option
 handling, OBJ/MTL loader bugfixes and georeference testing by Georg
-Zotti. Andrei Borza (again supervised by Michael Wimmer) in 2011
+Zotti. Andrei Borza (again supervised by Michael Wimmer) in 2011/12
 further improved rendering quality (shadow mapping, normal mapping) and speed.
 
 This work has been created during the ASTROSIM project supported
-2008-2011 by the Austrian Science Fund (FWF) under grant number
+2008-2012 by the Austrian Science Fund (FWF) under grant number
 P~21208-G19. 
 
 
