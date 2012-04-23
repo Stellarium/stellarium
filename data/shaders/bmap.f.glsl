@@ -31,8 +31,8 @@ uniform vec4 vecColor;
 uniform bool onlyColor;
  
 uniform float fTransparencyThresh;
-uniform float fShininess;
 uniform float alpha;
+uniform int iIllum;
  
 varying vec3 vecLight;
 varying vec3 vecEye;
@@ -56,17 +56,20 @@ vec4 getLighting()
 	float NdotL = dot(n, l);
 	color += gl_LightSource[0].diffuse * gl_FrontMaterial.diffuse * max(0.0, NdotL);
 	
-	//Reflection term
-	if(NdotL > 0.0)
-	{		
-		vec3 e = normalize(vecEye);
-		vec3 r = normalize(-reflect(l,n)); 
-		float RdotE = max(0.0, dot(r, e));
-		
-		if (RdotE > 0.0)
-		{
-			float spec = pow(RdotE, fShininess);		
-			color += gl_LightSource[0].specular * gl_FrontMaterial.specular * spec;
+	if(iIllum == 2)
+	{
+		//Reflection term
+		if(NdotL > 0.0)
+		{		
+			vec3 e = normalize(vecEye);
+			vec3 r = normalize(-reflect(l,n)); 
+			float RdotE = max(0.0, dot(r, e));
+			
+			if (RdotE > 0.0)
+			{
+				float spec = pow(RdotE, gl_FrontMaterial.shininess);		
+				color += gl_LightSource[0].specular * gl_FrontMaterial.specular * spec;
+			}
 		}
 	}
 	
