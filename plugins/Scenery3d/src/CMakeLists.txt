@@ -21,8 +21,6 @@ SET(Scenery3d_SRCS
     gui/Scenery3dDialog.cpp
     OBJ.hpp
     OBJ.cpp
-    MTL.hpp
-    MTL.cpp
     Util.hpp
     Util.cpp
     Heightmap.hpp
