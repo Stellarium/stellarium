@@ -1228,7 +1228,6 @@ void OBJ::transform(Mat4d mat)
     pBoundingBox->min = Vec3f(std::numeric_limits<float>::max());
     pBoundingBox->max = Vec3f(-std::numeric_limits<float>::max());
 
-
     //Transform all vertices and normals by mat
     for(int i=0; i<getNumberOfVertices(); ++i)
     {
@@ -1274,7 +1273,7 @@ void OBJ::bounds()
     pBoundingBox->min = Vec3f(std::numeric_limits<float>::max());
     pBoundingBox->max = Vec3f(-std::numeric_limits<float>::max());
 
-    for(int i=0; i<m_numberOfVertexCoords; ++i)
+    for(int i=0; i<getNumberOfVertices(); ++i)
     {
         Vertex* pVertex = &m_vertexArray[i];
 
