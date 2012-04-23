@@ -111,7 +111,7 @@ void MTL::load(const char *filename)
                         curMaterial->shininess = parseFloat(parts[1]);
                     }
                 }
-                else if (parts[0] == "d" && matOpen)
+                else if ((parts[0] == "d" || parts[0]== "Tr") && matOpen)
                 {
                     if (parts.size() > 1)
                     {
