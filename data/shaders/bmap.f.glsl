@@ -60,12 +60,12 @@ vec4 getLighting()
 	if(NdotL > 0.0)
 	{		
 		vec3 e = normalize(vecEye);
-		vec3 r = normalize(-reflect(l,n));  
+		vec3 r = normalize(-reflect(l,n)); 
+		float RdotE = max(0.0, dot(r, e));
 		
-		//Hack, it seems that 0.0f is not sent correctly into the shader on nvidia cards
-		if(fShininess > 0.0)
+		if (RdotE > 0.0)
 		{
-			float spec = pow(max(0.0, dot(r, e)), fShininess);		
+			float spec = pow(RdotE, fShininess);		
 			color += gl_LightSource[0].specular * gl_FrontMaterial.specular * spec;
 		}
 	}

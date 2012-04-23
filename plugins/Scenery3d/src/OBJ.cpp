@@ -1228,34 +1228,34 @@ void OBJ::transform(Mat4d mat)
     pBoundingBox->min = Vec3f(std::numeric_limits<float>::max());
     pBoundingBox->max = Vec3f(-std::numeric_limits<float>::max());
 
+
     //Transform all vertices and normals by mat
-    for(int i=0; i<m_numberOfVertexCoords; ++i)
+    for(int i=0; i<getNumberOfVertices(); ++i)
     {
         Vertex *pVertex = &m_vertexArray[i];
 
-        Vec3d pos = Vec3d(pVertex->position[0], pVertex->position[1], pVertex->position[2]);
+        Vec3d pos = Vec3d(pVertex->position.v[0], pVertex->position.v[1], pVertex->position.v[2]);
         mat.transfo(pos);
-        pVertex->position[0] = pos[0];
-        pVertex->position[1] = pos[1];
-        pVertex->position[2] = pos[2];
+        pVertex->position.v[0] = pos.v[0];
+        pVertex->position.v[1] = pos.v[1];
+        pVertex->position.v[2] = pos.v[2];
 
-        Vec3d nor = Vec3d(pVertex->normal[0], pVertex->normal[1], pVertex->normal[2]);
+        Vec3d nor = Vec3d(pVertex->normal.v[0], pVertex->normal.v[1], pVertex->normal.v[2]);
         mat.transfo(nor);
-        pVertex->normal[0] = nor[0];
-        pVertex->normal[1] = nor[1];
-        pVertex->normal[2] = nor[2];
+        pVertex->normal.v[0] = nor.v[0];
+        pVertex->normal.v[1] = nor.v[1];
+        pVertex->normal.v[2] = nor.v[2];
 
-        Vec3d tan = Vec3d(pVertex->tangent[0], pVertex->tangent[1], pVertex->tangent[2]);
-        mat.transfo(tan);
-        pVertex->tangent[0] = tan[0];
-        pVertex->tangent[1] = tan[1];
-        pVertex->tangent[2] = tan[2];
+        Vec3d tang = Vec3d(pVertex->tangent.v[0], pVertex->tangent.v[1], pVertex->tangent.v[2]);
+        mat.transfo(tang);
+        pVertex->tangent.v[0] = tang.v[0];
+        pVertex->tangent.v[1] = tang.v[1];
+        pVertex->tangent.v[2] = tang.v[2];
 
-        Vec3d biTan = Vec3d(pVertex->bitangent[0], pVertex->bitangent[1], pVertex->bitangent[2]);
-        mat.transfo(biTan);
-        pVertex->bitangent[0] = biTan[0];
-        pVertex->bitangent[1] = biTan[1];
-        pVertex->bitangent[2] = biTan[2];
+        Vec3d biTang = Vec3d(pVertex->bitangent.v[0], pVertex->bitangent.v[1], pVertex->bitangent.v[2]);
+        pVertex->bitangent.v[0] = biTang.v[0];
+        pVertex->bitangent.v[1] = biTang.v[1];
+        pVertex->bitangent.v[2] = biTang.v[2];
 
         //Update bounding box in case it changed
         pBoundingBox->min = Vec3f(std::min(static_cast<float>(pVertex->position[0]), pBoundingBox->min[0]),
