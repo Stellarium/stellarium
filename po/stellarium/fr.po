@@ -18,14 +18,14 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-04-11 16:29+0700\n"
-"PO-Revision-Date: 2012-03-25 21:37+0000\n"
-"Last-Translator: xemard.nicolas <Unknown>\n"
+"PO-Revision-Date: 2012-04-22 19:56+0000\n"
+"Last-Translator: François Laurent <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-12 04:42+0000\n"
-"X-Generator: Launchpad (build 15070)\n"
+"X-Launchpad-Export-Date: 2012-04-23 04:43+0000\n"
+"X-Generator: Launchpad (build 15135)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -148,7 +148,7 @@ msgstr "Distance: %1 UA"
 #: src/core/modules/Planet.cpp:295
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "Diamètre apparent : %1, avec anneaux : %2"
 
 #: src/core/modules/Planet.cpp:301
 #, qt-format
@@ -158,12 +158,12 @@ msgstr "Diamètre apparent : %1"
 #: src/core/modules/Planet.cpp:315
 #, qt-format
 msgid "Phase: %1"
-msgstr ""
+msgstr "Phase : %1"
 
 #: src/core/modules/Planet.cpp:316
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr ""
+msgstr "Luminosité :%1%"
 
 #: src/core/modules/Planet.cpp:317
 #, qt-format
@@ -183,17 +183,17 @@ msgstr "Magnitude : <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "Magnitude apparente : <b>%1%</b> (par extinction)"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr "Magnitude: <b>%1</b> (extinction à : <b>%2</b>. B-V: <b>%3</b>)"
+msgstr "Magnitude : <b>%1</b> (extinction à  : <b>%2</b>. B-V : <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
+msgstr "Magnitude : <b>%1</b> (B-V : <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
 #, qt-format
