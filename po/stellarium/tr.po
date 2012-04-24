@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-04-11 16:29+0700\n"
-"PO-Revision-Date: 2012-04-16 09:51+0000\n"
-"Last-Translator: kulkke <Unknown>\n"
+"PO-Revision-Date: 2012-04-23 08:51+0000\n"
+"Last-Translator: Onur İ. <Unknown>\n"
 "Language-Team: <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-17 04:48+0000\n"
-"X-Generator: Launchpad (build 15099)\n"
+"X-Launchpad-Export-Date: 2012-04-24 04:51+0000\n"
+"X-Generator: Launchpad (build 15135)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -64,7 +64,7 @@ msgstr "Türü: <b>%1</b>"
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Büyüklük: <b>%1</b> (Sönümlenen değer: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:250
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
@@ -158,12 +158,12 @@ msgstr "Aydınlamış: %%1"
 #: src/core/modules/Planet.cpp:317
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "Uzama: %1"
 
 #: src/core/modules/Planet.cpp:318
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "Faz Açısı: %1"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -173,17 +173,17 @@ msgstr "Parlaklık: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "Görünen büyüklük: <b>%1</b> (sönümlenme ile birlikte)"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "Büyüklük: <b>%1</b> (Sönümlenen değer: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr ""
+msgstr "Büyüklük: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
 #, qt-format
@@ -509,7 +509,7 @@ msgstr "Normal yazılım hızı ayarına geçiniz"
 #: plugins/Oculars/src/Oculars.cpp:1188
 #: plugins/Satellites/src/Satellites.cpp:128
 msgid "Plugin Key Bindings"
-msgstr ""
+msgstr "Eklenti Anahtarı Bağlantıları"
 
 #: src/gui/HelpDialog.cpp:78
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:82
@@ -901,7 +901,7 @@ msgstr "Ekran görüntüsünü kaydet"
 
 #: src/gui/StelGui.cpp:179
 msgid "Copy selected object information to clipboard"
-msgstr ""
+msgstr "Seçili nesne bilgilerini panoya koplayala"
 
 #: src/gui/StelGui.cpp:181
 msgid "Auto hide horizontal button bar"
@@ -1027,7 +1027,7 @@ msgstr "%1 diznini silerek elle kaldırabilirsiniz."
 
 #: src/gui/ScriptConsole.cpp:73
 msgid "quickrun..."
-msgstr ""
+msgstr "hızlı çalıştır..."
 
 #: src/gui/ScriptConsole.cpp:74
 msgid "selected text"
@@ -1039,7 +1039,7 @@ msgstr "metni temizle"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "clear images"
-msgstr ""
+msgstr "görüntüleri temizle"
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
@@ -1047,7 +1047,7 @@ msgstr "doğal"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
-msgstr ""
+msgstr "yıldıztablosu"
 
 #: src/gui/SearchDialog.cpp:503
 msgid "University of Strasbourg (France)"
@@ -1507,7 +1507,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
 msgid "Landscape Tour"
-msgstr ""
+msgstr "Manzara Turu"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
@@ -1532,7 +1532,7 @@ msgstr "2009 Güneş Tutulması"
 #. TRANSLATORS: Name of script
 #: src/translations.h:190
 msgid "Startup Script"
-msgstr ""
+msgstr "Başlangıç Komutu"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:192
@@ -1545,11 +1545,11 @@ msgstr ""
 
 #: src/translations.h:196
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr ""
+msgstr "Kısmi ay tutulmasını görüntülemek için gerekli komut."
 
 #: src/translations.h:197
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr ""
+msgstr "Tam ay tutulmasını göstermek için gerekli komut."
 
 #: src/translations.h:198
 msgid "A slow, infinite tour of the sky, looking at random objects."
@@ -1563,7 +1563,7 @@ msgstr ""
 
 #: src/translations.h:200
 msgid "Script which runs automatically at startup"
-msgstr ""
+msgstr "Başlangıçta otomatik olarak çalışan komutlar"
 
 #: src/translations.h:201
 msgid ""
@@ -2753,11 +2753,11 @@ msgstr "Konum"
 
 #: src/ui_searchDialogGui.h:586
 msgid "On-line astronomical database SIMBAD"
-msgstr ""
+msgstr "Çevrimiçi astronomik veritabanı SIMBAD"
 
 #: src/ui_searchDialogGui.h:587
 msgid "Extend search with SIMBAD"
-msgstr ""
+msgstr "SINBAD ile araştırmayı genişlet"
 
 #: src/ui_searchDialogGui.h:588
 msgid "Server:"
@@ -2855,7 +2855,7 @@ msgstr "basınç, sıcaklık, sönüm katsayısı"
 
 #: src/ui_viewDialog.h:1105
 msgid "Refraction/Extinction settings..."
-msgstr ""
+msgstr "Kırılma/Yok olma ayarları..."
 
 #: src/ui_viewDialog.h:1106
 msgid "Labels and Markers"
@@ -3290,7 +3290,7 @@ msgstr "Atmosfer Ayrıntıları"
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Refraction Settings"
-msgstr ""
+msgstr "Kırılma Ayarları"
 
 #: src/ui_AtmosphereDialog.h:179
 msgid "Pressure (mbar):"
@@ -3306,6 +3306,9 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
+"Sönümlenme, yıldız parlaklığının Dünya'nın atmosferine göre azalmasıdır. "
+"Mag/hava-kütle cinsinden verillir. Hava-kütle ise ışığın geçmesi gereken "
+"atmosfer sayısını veren bir birimdir. (zenit: 1, yatay: 40 civarı)"
 
 #: src/ui_AtmosphereDialog.h:187
 msgid "Extinction Coefficient:"
@@ -3347,7 +3350,7 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:365
 msgid "run script"
-msgstr ""
+msgstr "komut çalıştır"
 
 #: src/ui_scriptConsole.h:369
 msgid "stop script"
@@ -3495,7 +3498,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1249
 msgid "Telrad sight"
-msgstr ""
+msgstr "Telrad görüşü"
 
 #: plugins/Oculars/src/Oculars.cpp:1257
 msgid "Oculars plugin configuration"
@@ -3561,13 +3564,13 @@ msgstr "Ebatlar: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Sensor #%1"
-msgstr ""
+msgstr "Algılayıcı #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1529
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Sensor #%1: %2"
-msgstr ""
+msgstr "Algılayıcı #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1735
 msgid "&Telescope"
@@ -3591,11 +3594,11 @@ msgstr "Sonraki oküler"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
 msgid "Previous CCD frame"
-msgstr ""
+msgstr "Önceki CCD çerçevesi"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
 msgid "Next CCD frame"
-msgstr ""
+msgstr "Sıradaki CCD çerçevesi"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Previous telescope"
@@ -3607,15 +3610,15 @@ msgstr "Sonraki teleskop"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr ""
+msgstr "Algılayıcının çerçevesini saat yönünün tersine 15 derece döndür"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:258
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr ""
+msgstr "Algılayıcının çerçevesini saat yönünün tersine 5 derece döndür"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:271
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr ""
+msgstr "Algılayıcının çerçevesini saat yönünün tersine 1 derece döndür"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
@@ -3623,15 +3626,15 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr ""
+msgstr "Algılayıcının çerçevesini saat yönünde 1 derece döndür"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:310
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr ""
+msgstr "Algılayıcının çerçevesini saat yönünde 5 derece döndür"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:323
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr ""
+msgstr "Algılayıcının çerçevesini saat yönünde 15 derece döndür"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
 msgid "Effective focal length of the ocular"
@@ -3648,7 +3651,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 msgid "Magnification provided by these binoculars"
-msgstr ""
+msgstr "Dürbün ile sağlanmış büyüklük"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
 msgid "Actual field of view provided by these binoculars"
@@ -3656,7 +3659,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
 msgid "Magnification provided by this ocular/telescope combination"
-msgstr ""
+msgstr "Öküler/teleskop birleşimi ile sağlanmış büyüklük"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
 msgid "Actual field of view provided by this ocular/telescope combination"
