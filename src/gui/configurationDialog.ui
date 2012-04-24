@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>440</width>
-    <height>460</height>
+    <width>428</width>
+    <height>467</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -212,34 +212,66 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QRadioButton" name="allSelectedInfoRadio">
-               <property name="toolTip">
-                <string>Display all information available</string>
-               </property>
-               <property name="text">
-                <string>All available</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_13">
+               <item>
+                <widget class="QRadioButton" name="allSelectedInfoRadio">
+                 <property name="toolTip">
+                  <string>Display all information available</string>
+                 </property>
+                 <property name="text">
+                  <string>All available</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="briefSelectedInfoRadio">
+                 <property name="toolTip">
+                  <string>Display less information</string>
+                 </property>
+                 <property name="text">
+                  <string>Short</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item>
-              <widget class="QRadioButton" name="briefSelectedInfoRadio">
-               <property name="toolTip">
-                <string>Display less information</string>
-               </property>
-               <property name="text">
-                <string>Short</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="noSelectedInfoRadio">
-               <property name="toolTip">
-                <string>Display no information</string>
-               </property>
-               <property name="text">
-                <string>None</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_14">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_16">
+                 <item>
+                  <widget class="QRadioButton" name="customSelectedInfoRadio">
+                   <property name="toolTip">
+                    <string>Display user settings information</string>
+                   </property>
+                   <property name="text">
+                    <string>Customized</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButtonCustomInfoDialog">
+                   <property name="enabled">
+                    <bool>true</bool>
+                   </property>
+                   <property name="text">
+                    <string notr="true">...</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="noSelectedInfoRadio">
+                 <property name="toolTip">
+                  <string>Display no information</string>
+                 </property>
+                 <property name="text">
+                  <string>None</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
