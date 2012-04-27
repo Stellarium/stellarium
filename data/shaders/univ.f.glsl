@@ -42,59 +42,61 @@ varying vec3 vecNormal;
   
 vec4 getLighting()
 {
-	//Ambient part
-	vec4 color = (gl_FrontLightModelProduct.sceneColor * gl_FrontMaterial.ambient) + (gl_LightSource[0].ambient * gl_FrontMaterial.ambient);
-	
-	//For bump mapping, the normal comes from the bump map texture lookup
-	vec3 n = vec3(0.0);
-	if(boolBump)
+	if(iIllum > 0)
 	{
-		n = normalize(texture2D(bmap, gl_TexCoord[0].st).xyz * 2.0 - 1.0);
-	}
-	else
-	{
-		n = normalize(vecNormal);
-	}
-	
+		//Ka * Ia
+		vec4 color = (gl_FrontLightModelProduct.sceneColor * gl_FrontMaterial.ambient) + (gl_LightSource[0].ambient * gl_FrontMaterial.ambient);
+		
+		//For bump mapping, the normal comes from the bump map texture lookup
+		vec3 n = normalize(vecNormal);
+		if(boolBump)
+		{
+			n = normalize(texture2D(bmap, gl_TexCoord[0].st).xyz * 2.0 - 1.0);
+		}
+		
 		//Traditional shadow mapping
-	vec3 tex_coords = SM_tex_coord.xyz/SM_tex_coord.w;
-	float depth = texture2D(smap, tex_coords.xy).x;
+		vec3 tex_coords = SM_tex_coord.xyz/SM_tex_coord.w;
+		float depth = texture2D(smap, tex_coords.xy).x;
+		
+		float shadowFactor;
+		if(depth > (tex_coords.z + 0.00001))
+		{
+			//In light!
+			shadowFactor = 1.0;
+		}
+		else
+		{
+			shadowFactor = 0.3;
+		}
 	
-	float shadowFactor;
-	if(depth > (tex_coords.z + 0.00001))
-	{
-		//In light!
-		shadowFactor = 1.0;
-	}
-	else
-	{
-		shadowFactor = 0.3;
-	}
+		vec3 l = normalize(vecLight);
 	
-	vec3 l = normalize(vecLight);
-	
-	//Lambert term
-	float NdotL = dot(n, l);
-	color += gl_LightSource[0].diffuse * gl_FrontMaterial.diffuse * max(0.0, NdotL) * shadowFactor;;
-	
-	if(iIllum == 2)
-	{
-		//Reflection term
-		if(NdotL > 0.0)
-		{		
-			vec3 e = normalize(vecEye);
-			vec3 r = normalize(-reflect(l,n)); 
-			float RdotE = max(0.0, dot(r, e));
-			
-			if (RdotE > 0.0)
-			{
-				float spec = pow(RdotE, gl_FrontMaterial.shininess);		
-				color += gl_LightSource[0].specular * gl_FrontMaterial.specular * spec;
+		//Lambert term
+		float NdotL = dot(n, l);
+		color += gl_LightSource[0].diffuse * gl_FrontMaterial.diffuse * max(0.0, NdotL) * shadowFactor;
+		
+		if(iIllum == 2 && shadowFactor > 0.3)
+		{
+			//Reflection term
+			if(NdotL > 0.0)
+			{		
+				vec3 e = normalize(vecEye);
+				vec3 r = normalize(-reflect(l,n)); 
+				float RdotE = max(0.0, dot(r, e));
+					
+				if (RdotE > 0.0)
+				{
+					float spec = pow(RdotE, gl_FrontMaterial.shininess);		
+					color += gl_LightSource[0].specular * gl_FrontMaterial.specular * spec;
+				}
 			}
 		}
-	}		
+		
+		return color;
+	}
 	
-	return color;
+	//Illum 0 - KD only
+	return gl_FrontMaterial.diffuse;
 } 
   
 void main(void)
@@ -116,6 +118,12 @@ void main(void)
 		color = texel * color;
 	}	
 
-	//Set fragment color, alpha comes from MTL file
-	gl_FragColor = vec4(color.xyz, alpha);
+	if(iIllum == 9)
+	{
+		gl_FragColor = vec4(color.xyz, alpha);
+	}
+	else
+	{
+		gl_FragColor = vec4(color.xyz, 1.0);
+	}
 }
