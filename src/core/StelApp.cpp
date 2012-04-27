@@ -218,6 +218,15 @@ void StelApp::init(QSettings* conf)
 
 	// We use OpenGL 2.1 features in our shaders
 	useGLShaders = useGLShaders && (QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_1) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0));
+
+	//GL-REFACTOR: useGLShaders will be removed completely,
+	//and the decision to use shaders will be made by the Renderer implementation.
+	//In our case, GL2Renderer uses shaders, GL1Renderer does not.
+	//Even when Qt5 removes GL1 support,
+	//we can use GL1Renderer when shaders are not wanted, as GL2 
+	//is backward compatible with GL1.
+	useGLShaders = true;
+	
 #else
 	useGLShaders = true;
 #endif
