@@ -7,7 +7,6 @@
 
 #include <QGLWidget>
 
-//THEN TODO: PULL THE NEWEST CHANGES
 
 //! GLWidget specialized for Stellarium, mostly to provide better debugging information.
 class StelQGLWidget : public QGLWidget
@@ -56,15 +55,6 @@ protected:
 //TODO get rid of all StelPainter calls (gradually)
 
 
-//TODO:
-//GL2 can use non-power-of-two textures.
-//GL1 can not.
-//However even on modern hardware, npot textures are a bad idea as they might end
-//up in POT storage anyway. Consider virtualizing
-//textures instead, if we have enough time.
-//
-//Also, note that on R300, NPOT don't work with mipmaps, and on GeForceFX, they are emulated.
-
 //! Base class for renderer based on OpenGL and at the same time Qt's QGL.
 class StelQGLRenderer : public StelGLRenderer
 {
@@ -93,17 +83,17 @@ public:
 		glWidget    = NULL;
 	}
 	
-	virtual void init()
+	virtual bool init()
 	{
 		Q_ASSERT_X(glWidget->isValid(), "StelQGLRenderer::init()", 
 		           "Invalid glWidget (maybe there is no OpenGL support?)");
 		
-		glWidget->makeCurrent();
-		
+		//TODO Remove after StelPainter is no longer used.
 		StelPainter::initSystemGLInfo(glContext);
+		
 		// Prevent flickering on mac Leopard/Snow Leopard
 		glWidget->setAutoFillBackground(false);
-		StelGLRenderer::init();
+		return StelGLRenderer::init();
 	}
 	
 	
@@ -155,6 +145,15 @@ protected:
 		invariant();
 		glContext->makeCurrent();
 		invariant();
+	}
+	
+protected:
+	//! Used to access the GL context. 
+	//!
+	//! Safer than making glContext protected as derived classes can't overwrite it.
+	QGLContext* getGLContext()
+	{
+		return glContext;
 	}
 	
 	virtual void invariant()

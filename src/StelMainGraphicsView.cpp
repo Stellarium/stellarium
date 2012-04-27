@@ -115,7 +115,7 @@ Q_IMPORT_PLUGIN(Pulsars)
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
 StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
-	: QGraphicsView(parent), backItem(NULL), gui(NULL),
+	: QGraphicsView(parent), backItem(NULL), renderer(NULL), gui(NULL), 
 #ifndef DISABLE_SCRIPTING
 	scriptAPIProxy(NULL), scriptMgr(NULL),
 #endif
@@ -153,7 +153,6 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 
 	lastEventTimeSec = 0;
 
-	renderer = new StelQGL2Renderer(this);
 
 	// This line seems to cause font aliasing troubles on win32
 	// setOptimizationFlags(QGraphicsView::DontSavePainterState);
@@ -167,11 +166,23 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 
 StelMainGraphicsView::~StelMainGraphicsView()
 {
-	delete renderer;
+	if(NULL != renderer)
+	{
+		delete renderer;
+	}
 }
 
 void StelMainGraphicsView::init(QSettings* conf)
 {
+	// GL-REFACTOR: Once we have GL2 and GL1 implementations, this code should
+	// try to init StelQGL2Renderer, and if that fails, init a StelQGL1Renderer.
+	renderer = new StelQGL2Renderer(this);
+	if(!renderer->init())
+	{
+		Q_ASSERT_X(false, "StelMainGraphicsView::init", 
+		           "Fallback renderer not yet implemented");
+	}
+	
 	// Create the main widget for stellarium, which in turn creates the main StelApp instance.
 	mainSkyItem = new StelAppGraphicsWidget(renderer);
 	mainSkyItem->setZValue(-10);
@@ -185,7 +196,7 @@ void StelMainGraphicsView::init(QSettings* conf)
 
 	// Activate the resizing caused by the layout
 	QCoreApplication::processEvents();
-
+	
 	mainSkyItem->setFocus();
 
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
@@ -194,7 +205,6 @@ void StelMainGraphicsView::init(QSettings* conf)
 	maxfps = conf->value("video/maximum_fps",10000.f).toFloat();
 	minfps = conf->value("video/minimum_fps",10000.f).toFloat();
 	
-	renderer->init();
 	renderer->enablePainting();
 
 	// Initialize the core, including the StelApp instance.
