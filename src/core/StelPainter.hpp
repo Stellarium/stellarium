@@ -35,6 +35,10 @@
 #include <QGLFunctions>
 #endif
 
+
+//GL-REFACTOR: This will be defined while we refactor the GL2 code.
+#define STELPAINTER_GL2 1
+ 
 #ifdef USE_OPENGL_ES2
  #define STELPAINTER_GL2 1
 #endif
@@ -283,6 +287,15 @@ public:
 	//! This method needs to be called once at init.
 	static void initSystemGLInfo(QGLContext* ctx);
 
+	//GL-REFACTOR: Sets shader globals used by StelPainter. 
+	//Will be removed as StelPainter is refactored.
+#ifdef STELPAINTER_GL2
+	static void TEMPSpecifyShaders(QGLShaderProgram *plain,
+	                               QGLShaderProgram *color,
+	                               QGLShaderProgram *texture,
+	                               QGLShaderProgram *colorTexture);
+#endif
+	
 	//! Set the QPainter to use for performing some drawing operations.
 	static void setQPainter(QPainter* qPainter);
 
