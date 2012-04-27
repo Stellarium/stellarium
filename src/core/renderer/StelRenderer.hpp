@@ -34,8 +34,12 @@
 class StelRenderer
 {
 public:
-	//! Initialize the renderer. Must be called before any other methods.
-	virtual void init() = 0;
+	//! Initialize the renderer. 
+	//! 
+	//! Must be called before any other methods.
+	//!
+	//! @return true on success, false if there was an error.
+	virtual bool init() = 0;
 	
 	//! Take a screenshot and return it.
 	virtual QImage screenshot() = 0;

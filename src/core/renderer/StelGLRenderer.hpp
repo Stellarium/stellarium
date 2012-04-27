@@ -12,12 +12,7 @@
 //TODO At the moment, we're always using FBOs when supported.
 //     We need a config file for Renderer implementation to disable it.
 
-//Development notes:
-//
-//Much of this code might end up being identical with GL1Renderer.
-//That could be refactored into a parent class.
-
-//! Renderer based on OpenGL 2.x .
+//! Base class for OpenGL based renderers.
 class StelGLRenderer : public StelRenderer
 {
 public:
@@ -48,7 +43,7 @@ public:
 		}
 	}
 	
-	virtual void init()
+	virtual bool init()
 	{
 		fboSupported = QGLFramebufferObject::hasOpenGLFramebufferObjects();
 		if (!useFBO())
@@ -56,6 +51,7 @@ public:
 			qWarning() << "OpenGL framebuffer objects are disabled or not supported. "
 			              "Can't use Viewport effects.";
 		}
+		return true;
 	}
 	
 	virtual void enablePainting()
@@ -65,9 +61,12 @@ public:
 	
 	virtual void viewportHasBeenResized(QSize size)
 	{
-		//Can't check invariant before this as the user must set viewport size at start.
-		sceneSize = size;
 		invariant();
+		//Can't check this in invariant because Renderer is initialized before 
+		//AppGraphicsWidget sets its viewport size
+		Q_ASSERT_X(size.isValid(), "StelQGLRenderer::viewportHasBeenResized",
+		           "Invalid scene size");
+		sceneSize = size;
 		//We'll need FBOs of different size so get rid of the current FBOs.
 		if (NULL != backBuffer)
 		{
@@ -180,23 +179,21 @@ protected:
 	//! Overriding methods should also call StelGLRenderer::invariant().
 	virtual void invariant() const
 	{
-		Q_ASSERT_X(sceneSize.isValid(), "StelGL2Renderer::invariant",
-		           "Invalid scene size");
 		const bool fbo = useFBO();
-		Q_ASSERT_X(NULL == backBuffer || fbo, "StelGL2Renderer::invariant",
+		Q_ASSERT_X(NULL == backBuffer || fbo, "StelQGLRenderer::invariant",
 		           "We have a backbuffer even though we're not using FBO");
-		Q_ASSERT_X(NULL == frontBuffer || fbo, "StelGL2Renderer::invariant",
+		Q_ASSERT_X(NULL == frontBuffer || fbo, "StelQGLRenderer::invariant",
 		           "We have a frontbuffer even though we're not using FBO");
-		Q_ASSERT_X(NULL == backBufferPainter || fbo, "StelGL2Renderer::invariant",
+		Q_ASSERT_X(NULL == backBufferPainter || fbo, "StelQGLRenderer::invariant",
 		           "We have a backbuffer painter even though we're not using FBO");
 		Q_ASSERT_X(drawing && fbo ? backBuffer != NULL : true,
-		           "StelGL2Renderer::invariant",
+		           "StelQGLRenderer::invariant",
 		           "We're drawing and using FBOs, but the backBuffer is NULL");
 		Q_ASSERT_X(drawing && fbo ? frontBuffer != NULL : true,
-		           "StelGL2Renderer::invariant",
+		           "StelQGLRenderer::invariant",
 		           "We're drawing and using FBOs, but the frontBuffer is NULL");
 		Q_ASSERT_X(drawing && fbo ? backBufferPainter != NULL : true,
-		           "StelGL2Renderer::invariant",
+		           "StelQGLRenderer::invariant",
 		           "We're drawing and using FBOs, but the backBufferPainter is NULL");
 	}
 	

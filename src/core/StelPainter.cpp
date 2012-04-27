@@ -2099,145 +2099,50 @@ void StelPainter::enableTexture2d(bool b, int texunit)
 #endif
 }
 
+//GL-REFACTOR: This has been refactored into QGL2Renderer and will be removed after 
+//the rest of StelPainter is refactored.
 void StelPainter::initSystemGLInfo(QGLContext* ctx)
 {
+	
 	Q_ASSERT(glContext==NULL);
 	glContext = ctx;
 
 	makeMainGLContextCurrent();
 	isNoPowerOfTwoAllowed = QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_0) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0);
+}
 
 #ifdef STELPAINTER_GL2
-	// Basic shader: just vertex filled with plain color
-	QGLShader *vshader3 = new QGLShader(QGLShader::Vertex);
-	const char *vsrc3 =
-		"attribute mediump vec3 vertex;\n"
-		"uniform mediump mat4 projectionMatrix;\n"
-		"void main(void)\n"
-		"{\n"
-		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
-		"}\n";
-	vshader3->compileSourceCode(vsrc3);
-	QGLShader *fshader3 = new QGLShader(QGLShader::Fragment);
-	const char *fsrc3 =
-		"uniform mediump vec4 color;\n"
-		"void main(void)\n"
-		"{\n"
-		"    gl_FragColor = color;\n"
-		"}\n";
-	fshader3->compileSourceCode(fsrc3);
-	basicShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
-	basicShaderProgram->addShader(vshader3);
-	basicShaderProgram->addShader(fshader3);
-	basicShaderProgram->link();
+void StelPainter::TEMPSpecifyShaders(QGLShaderProgram *plain,
+                                     QGLShaderProgram *color,
+                                     QGLShaderProgram *texture,
+                                     QGLShaderProgram *colorTexture)
+{
+	basicShaderProgram = plain;
 	basicShaderVars.projectionMatrix = basicShaderProgram->uniformLocation("projectionMatrix");
 	basicShaderVars.color = basicShaderProgram->uniformLocation("color");
 	basicShaderVars.vertex = basicShaderProgram->attributeLocation("vertex");
 
-	// Color shader program: color specified per vertex
-	QGLShader *vshader1 = new QGLShader(QGLShader::Vertex);
-	const char *vsrc1 =
-		"attribute highp vec3 vertex;\n"
-		"attribute mediump vec4 color;\n"
-		"uniform mediump mat4 projectionMatrix;\n"
-		"varying mediump vec4 outColor;\n"
-		"void main(void)\n"
-		"{\n"
-		"    outColor = color;\n"
-		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
-		"}\n";
-	vshader1->compileSourceCode(vsrc1);
-	QGLShader *fshader1 = new QGLShader(QGLShader::Fragment);
-	const char *fsrc1 =
-		"varying mediump vec4 outColor;\n"
-		"void main(void)\n"
-		"{\n"
-		"    gl_FragColor = outColor;\n"
-		"}\n";
-	fshader1->compileSourceCode(fsrc1);
-	colorShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
-	colorShaderProgram->addShader(vshader1);
-	colorShaderProgram->addShader(fshader1);
-	colorShaderProgram->link();
+	colorShaderProgram = color;
 
-	// Basic texture shader program
-	QGLShader *vshader2 = new QGLShader(QGLShader::Vertex);
-	const char *vsrc2 =
-		"attribute highp vec3 vertex;\n"
-		"attribute mediump vec2 texCoord;\n"
-		"uniform mediump mat4 projectionMatrix;\n"
-		"varying mediump vec2 texc;\n"
-		"void main(void)\n"
-		"{\n"
-		"    gl_Position = projectionMatrix * vec4(vertex, 1.);\n"
-		"    texc = texCoord;\n"
-		"}\n";
-	vshader2->compileSourceCode(vsrc2);
-	QGLShader *fshader2 = new QGLShader(QGLShader::Fragment);
-	const char *fsrc2 =
-		"varying mediump vec2 texc;\n"
-		"uniform sampler2D tex;\n"
-		"uniform mediump vec4 texColor;\n"
-		"void main(void)\n"
-		"{\n"
-		"    gl_FragColor = texture2D(tex, texc)*texColor;\n"
-		"}\n";
-	fshader2->compileSourceCode(fsrc2);
-	texturesShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
-	texturesShaderProgram->addShader(vshader2);
-	texturesShaderProgram->addShader(fshader2);
-	texturesShaderProgram->link();
-	texturesShaderVars.projectionMatrix = texturesShaderProgram->uniformLocation("projectionMatrix");
+	texturesShaderProgram = texture;
+	texturesShaderVars.projectionMatrix = texturesShaderProgram->
+	                                      uniformLocation("projectionMatrix");
 	texturesShaderVars.texCoord = texturesShaderProgram->attributeLocation("texCoord");
 	texturesShaderVars.vertex = texturesShaderProgram->attributeLocation("vertex");
 	texturesShaderVars.texColor = texturesShaderProgram->uniformLocation("texColor");
 	texturesShaderVars.texture = texturesShaderProgram->uniformLocation("tex");
-
-	// Texture shader program + interpolated color per vertex
-	QGLShader *vshader4 = new QGLShader(QGLShader::Vertex);
-	const char *vsrc4 =
-		"attribute highp vec3 vertex;\n"
-		"attribute mediump vec2 texCoord;\n"
-		"attribute mediump vec4 color;\n"
-		"uniform mediump mat4 projectionMatrix;\n"
-		"varying mediump vec2 texc;\n"
-		"varying mediump vec4 outColor;\n"
-		"void main(void)\n"
-		"{\n"
-		"    gl_Position = projectionMatrix * vec4(vertex, 1.);\n"
-		"    texc = texCoord;\n"
-		"    outColor = color;\n"
-		"}\n";
-	vshader4->compileSourceCode(vsrc4);
-	QGLShader *fshader4 = new QGLShader(QGLShader::Fragment);
-	const char *fsrc4 =
-		"varying mediump vec2 texc;\n"
-		"varying mediump vec4 outColor;\n"
-		"uniform sampler2D tex;\n"
-		"void main(void)\n"
-		"{\n"
-		"    gl_FragColor = texture2D(tex, texc)*outColor;\n"
-		"}\n";
-	fshader4->compileSourceCode(fsrc4);
-	texturesColorShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
-	texturesColorShaderProgram->addShader(vshader4);
-	texturesColorShaderProgram->addShader(fshader4);
-	texturesColorShaderProgram->link();
-	texturesColorShaderVars.projectionMatrix = texturesColorShaderProgram->uniformLocation("projectionMatrix");
-	texturesColorShaderVars.texCoord = texturesColorShaderProgram->attributeLocation("texCoord");
+	
+	texturesColorShaderProgram = colorTexture;
+	texturesColorShaderVars.projectionMatrix = texturesColorShaderProgram->
+	                                           uniformLocation("projectionMatrix");
+	texturesColorShaderVars.texCoord = texturesColorShaderProgram->
+	                                   attributeLocation("texCoord");
 	texturesColorShaderVars.vertex = texturesColorShaderProgram->attributeLocation("vertex");
 	texturesColorShaderVars.color = texturesColorShaderProgram->attributeLocation("color");
 	texturesColorShaderVars.texture = texturesColorShaderProgram->uniformLocation("tex");
-
-	//initialize a normal map shader: at the moment a shader class is used
-	//this will be replaced with qt functions
-	 //   Shader* nMapShader = new Shader;
-	   // if (!nMapShader->load("data/shaders/nmap.v.glsl", "data/shaders/nmap.f.glsl"))
-		 //       return;
-	   // }
-
-#endif
 }
+#endif
+
 
 void StelPainter::setArrays(const Vec3d* vertice, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray)
 {
