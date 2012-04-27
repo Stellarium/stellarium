@@ -118,4 +118,72 @@ QString JavaWrapper::getLocaleString()
 	}
 }
 
+QString JavaWrapper::getExternalStorageDirectory()
+{
+	JNIEnv* env = NULL;
+	jclass javaClass = NULL;
+	if (m_javaVM->AttachCurrentThread(&env, NULL)<0)
+	{
+		qCritical()<<"JavaWrapper::getExternalStorageDirectory - AttachCurrentThread failed";
+		javaClass = NULL;
+		return QString("/mnt/sdcard");
+	}
+
+	javaClass = env->GetObjectClass(customClassPtr);
+
+	if(javaClass)
+	{
+		jmethodID getExternalStorageDirectory = env->GetStaticMethodID(javaClass,"getExternalStorageDirectory", "()Ljava/lang/String;");
+		jstring javaString = static_cast<jstring>(env->CallStaticObjectMethod(javaClass, getExternalStorageDirectory));
+
+		jboolean isCopy;
+		const char* cString = env->GetStringUTFChars(javaString,&isCopy);
+
+		if(!cString)
+		{
+			qCritical() << "JavaWrapper::getExternalStorageDirectory - String failed to load!";
+			return QString("/mnt/sdcard");
+		}
+
+		QString qtString(cString);
+		env->ReleaseStringUTFChars(javaString, cString);
+		m_javaVM->DetachCurrentThread();
+		return qtString;
+	}
+	else
+	{
+		qCritical() << "JavaWrapper::getExternalStorageDirectory - Java class failed to load!";
+		m_javaVM->DetachCurrentThread();
+		return QString("/mnt/sdcard");
+	}
+}
+
+bool JavaWrapper::isExternalStorageReady()
+{
+	JNIEnv* env = NULL;
+	jclass javaClass = NULL;
+	if (m_javaVM->AttachCurrentThread(&env, NULL)<0)
+	{
+		qCritical()<<"JavaWrapper::isExternalStorageReady - AttachCurrentThread failed";
+		javaClass = NULL;
+		return false;
+	}
+
+	javaClass = env->GetObjectClass(customClassPtr);
+
+	if(javaClass)
+	{
+		jmethodID isExternalStorageReady = env->GetStaticMethodID(javaClass,"isExternalStorageReady", "()Z");
+		bool result = static_cast<bool>(env->CallStaticObjectMethod(javaClass, isExternalStorageReady));
+		m_javaVM->DetachCurrentThread();
+		return result;
+	}
+	else
+	{
+		qCritical() << "JavaWrapper::getExternalStorageDirectory - Java class failed to load!";
+		m_javaVM->DetachCurrentThread();
+		return false;
+	}
+}
+
 #endif // ANDROID

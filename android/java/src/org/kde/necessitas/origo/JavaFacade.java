@@ -1,6 +1,7 @@
 package org.kde.necessitas.origo;
 
 import android.util.DisplayMetrics;
+import android.os.Environment;
 import java.util.Locale;
 
 public class JavaFacade
@@ -31,5 +32,15 @@ public class JavaFacade
 	{
 		Locale currentLocale = Locale.getDefault();
 		return currentLocale.toString();
+	}
+
+	public static String getExternalStorageDirectory()
+	{
+		return Environment.getExternalStorageDirectory().getPath();
+	}
+
+	public static boolean isExternalStorageReady()
+	{
+		return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
 	}
 }

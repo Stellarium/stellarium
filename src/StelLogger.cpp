@@ -109,7 +109,7 @@ void StelLogger::init(const QString& logFilePath)
 #elif defined Q_OS_LINUX || defined ANDROID
 
 #ifdef ANDROID
-	writeLog("Android"); //todo: JNI to get Android version # (when necessitas is fixed to allow JNI again)
+	writeLog("Android"); //todo: JNI to get Android version #
 #endif
 	QFile procVersion("/proc/version");
 	if(!procVersion.open(QIODevice::ReadOnly | QIODevice::Text))

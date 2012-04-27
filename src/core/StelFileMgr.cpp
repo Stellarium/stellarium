@@ -35,6 +35,10 @@
 # endif
 #endif
 
+#ifdef ANDROID
+#include "android/JavaWrapper.hpp"
+#endif
+
 #include "StelFileMgr.hpp"
 
 // Initialize static members.
@@ -53,6 +57,22 @@ void StelFileMgr::init()
 	}
 #elif defined(Q_OS_MAC)
 	userDir = QDir::homePath() + "/Library/Application Support/Stellarium";
+#elif defined(ANDROID)
+	//necessitas cannot list directory content for directories in assets
+	//as such, data must be duplicated in external storage for now
+	//see: https://sourceforge.net/p/necessitas/tickets/120/
+	//note: is this still true? Stellarium Mobile worked around it somehow, but
+	//      as its source hasn't been posted, I can't see how
+	//
+	//Another reason for using the external storage is so that the log is
+	//user-visible without having root, which is nice for troubleshooting
+	userDir = JavaWrapper::getExternalStorageDirectory() + "/stellarium";
+	if(!JavaWrapper::isExternalStorageReady())
+	{
+		//We should set a flag here, and warn the user once we're in the UI that external storage is inaccessible. Maybe. Maybe not?
+		qWarning() << "StelFileMgr - Android external storage IS NOT READY";
+		userDir = QDir::homePath() + "/.stellarium";
+	}
 #else
 	userDir = QDir::homePath() + "/.stellarium";
 #endif
@@ -73,13 +93,6 @@ void StelFileMgr::init()
 
 	// OK, now we have the userDir set, add it to the search path
 	fileLocations.append(userDir);
-
-#ifdef ANDROID
-	//necessitas cannot list directory content for directories in assets
-	//as such, data must be duplicated in external storage for now
-	//see: https://sourceforge.net/p/necessitas/tickets/120/
-	fileLocations.append(EXTERNAL_STORAGE);
-#endif
 
 	// Then add the installation directory to the search path
 	try
