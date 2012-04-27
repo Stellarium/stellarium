@@ -1,49 +1,49 @@
-# Gujarati translation for stellarium
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# Kirghiz translation for stellarium
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
 # This file is distributed under the same license as the stellarium package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-04-24 23:27+0700\n"
-"PO-Revision-Date: 2010-01-28 20:20+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Gujarati <gu@li.org>\n"
+"PO-Revision-Date: 2012-04-19 18:08+0000\n"
+"Last-Translator: chingis <chingis091@gmail.com>\n"
+"Language-Team: Kirghiz <ky@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-25 04:39+0000\n"
+"X-Launchpad-Export-Date: 2012-04-25 04:40+0000\n"
 "X-Generator: Launchpad (build 15139)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
-msgstr ""
+msgstr "Меридиан"
 
 #: src/core/modules/GridLinesMgr.cpp:546
 msgid "Ecliptic"
-msgstr ""
+msgstr "Эклиптика"
 
 #: src/core/modules/GridLinesMgr.cpp:550
 msgid "Equator"
-msgstr ""
+msgstr "Экватор"
 
 #: src/core/modules/GridLinesMgr.cpp:554
 msgid "Horizon"
-msgstr ""
+msgstr "Горизонт"
 
 #: src/core/modules/GridLinesMgr.cpp:558
 msgid "Galactic Plane"
-msgstr ""
+msgstr "Галактика тегиздиги"
 
 #: src/core/modules/LandscapeMgr.cpp:493
 msgid "Author: "
-msgstr "લેખક "
+msgstr "Автор: "
 
 #: src/core/modules/LandscapeMgr.cpp:496
 msgid "Location: "
-msgstr "સ્‍થાન "
+msgstr "Жайгашуу: "
 
 #: src/core/modules/LandscapeMgr.cpp:501
 #, qt-format
@@ -52,98 +52,98 @@ msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:505
 msgid "Planet: "
-msgstr "ગ્રહ "
+msgstr "Планета: "
 
 #: src/core/modules/Nebula.cpp:96 plugins/Supernovae/src/Supernova.cpp:99
 #: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:102
 #, qt-format
 msgid "Type: <b>%1</b>"
-msgstr ""
+msgstr "Түр: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Чоңдук: <b>%1</b> (жоголгон: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
-msgstr ""
+msgstr "Чоңдук: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:109
 #, qt-format
 msgid "Size: %1"
-msgstr ""
+msgstr "Чени: %1"
 
 #: src/core/modules/Nebula.cpp:303
 msgid "Galaxy"
-msgstr "આકાશગંગા"
+msgstr "Галактика"
 
 #: src/core/modules/Nebula.cpp:306
 msgid "Open cluster"
-msgstr ""
+msgstr "Ачык чогулуш"
 
 #: src/core/modules/Nebula.cpp:309
 msgid "Globular cluster"
-msgstr ""
+msgstr "Топтук чогулуш"
 
 #: src/core/modules/Nebula.cpp:312
 msgid "Nebula"
-msgstr "નિહારિકા"
+msgstr "Жыбыраган калың жылдыз"
 
 #: src/core/modules/Nebula.cpp:315
 msgid "Planetary nebula"
-msgstr ""
+msgstr "Планетардык жыбыраган калың жылдыз"
 
 #: src/core/modules/Nebula.cpp:318
 msgid "Cluster associated with nebulosity"
-msgstr ""
+msgstr "Жыбыраган калың жылдыз менен бириккен чогулуш"
 
 #: src/core/modules/Nebula.cpp:321
 msgid "Unknown"
-msgstr "અજ્ઞાત"
+msgstr "Белгисиз"
 
 #: src/core/modules/Nebula.cpp:324
 msgid "Undocumented type"
-msgstr ""
+msgstr "Документтелбеген түр"
 
 #: src/core/modules/Planet.cpp:127 src/core/modules/StarWrapper.cpp:124
 #: plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
-msgstr ""
+msgstr "Накта чоңдук: %1"
 
 #: src/core/modules/Planet.cpp:140
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr ""
+msgstr "Геоборбордук эклиптика (күнү): %1/%2"
 
 #: src/core/modules/Planet.cpp:141
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr ""
+msgstr "Эңкейиш (күнү): %1"
 
 #: src/core/modules/Planet.cpp:151
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "Аралык: %1AU(%2 km)"
 
 #: src/core/modules/Planet.cpp:158
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
-msgstr ""
+msgstr "Аралык: %1AU"
 
 #: src/core/modules/Planet.cpp:169
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "Көрүнүүчү диаметр: %1, with rings: %2"
 
 #: src/core/modules/Planet.cpp:175
 #, qt-format
 msgid "Apparent diameter: %1"
-msgstr ""
+msgstr "Көрүнүүчү диаметр: %1"
 
 #: src/core/modules/Planet.cpp:189
 #, qt-format
@@ -158,12 +158,12 @@ msgstr ""
 #: src/core/modules/Planet.cpp:191
 #, qt-format
 msgid "Phase: %1"
-msgstr ""
+msgstr "Кез: %1"
 
 #: src/core/modules/Planet.cpp:192
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr ""
+msgstr "Жаркыраганы: %1%"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -264,7 +264,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:223
 msgid "Cylinder"
-msgstr "નળાકાર"
+msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:228
 msgid ""
@@ -352,7 +352,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:656
 msgid "License"
-msgstr "પારવાનો"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:686
 msgid "Running script: "
@@ -413,7 +413,7 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:328
 #: src/gui/StelGuiItems.cpp:709
 msgid "Space"
-msgstr "અવકાશ"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:53
 msgid "Arrow keys & left mouse drag"
@@ -5484,21 +5484,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
-
-#~ msgid "Stars "
-#~ msgstr "તારા "
-
-#~ msgid "Colors "
-#~ msgstr "રંગ "
-
-#~ msgid "Calendar"
-#~ msgstr "તારીખયુ"
-
-#~ msgid "Constellation Names"
-#~ msgstr "તારા જુથનું નામ"
-
-#~ msgid "Constellation Lines"
-#~ msgstr "તારા જુથ રેખા"
-
-#~ msgid "Nebula Names"
-#~ msgstr "નિહારિકાના નામ"
