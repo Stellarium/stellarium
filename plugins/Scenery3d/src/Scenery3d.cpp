@@ -641,8 +641,19 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
         location = curShader->uniformLocation("alpha");
         curShader->setUniform(location, pStelModel->pMaterial->alpha);
 
+        int iIllum = pStelModel->pMaterial->illum;
+        if(iIllum < 0 || iIllum > 2)
+        {
+            if(iIllum != 9)
+            {
+                //Map to default
+                iIllum = 0;
+                qWarning() << "[Scenery3D] Illumination model was invalid. Forced to Illumination model 0.";
+            }
+        }
+
         location = curShader->uniformLocation("iIllum");
-        curShader->setUniform(location, pStelModel->pMaterial->illum);
+        curShader->setUniform(location, iIllum);
 
         if (pStelModel->pMaterial->texture)
         {
