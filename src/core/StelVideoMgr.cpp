@@ -60,42 +60,60 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, float x
 void StelVideoMgr::playVideo(const QString& id)
 {
 	if (videoObjects.contains(id))
+	{
 		if (videoObjects[id]->player!=NULL)
 		{
 			// if already playing, stop and play from the start
 			if (videoObjects[id]->player->isPlaying() == true)
+			{
 				videoObjects[id]->player->stop();
+			}
 
 			// otherwise just play it
 			videoObjects[id]->player->play();
 		}
+	}
 }
 
 void StelVideoMgr::pauseVideo(const QString& id)
 {
 	if (videoObjects.contains(id))
+	{
 		if (videoObjects[id]->player!=NULL)
+		{
 			videoObjects[id]->player->pause();
+		}
+	}
 }
 
 void StelVideoMgr::stopVideo(const QString& id)
 {
 	if (videoObjects.contains(id))
+	{
 		if (videoObjects[id]->player!=NULL)
+		{
 			videoObjects[id]->player->stop();
+		}
+	}
 }
 
 void StelVideoMgr::seekVideo(const QString& id, qint64 ms)
 {
 	if (videoObjects.contains(id))
+	{
 		if (videoObjects[id]->player!=NULL) 
 		{
 			if (videoObjects[id]->player->mediaObject()->isSeekable())
+			{
 				videoObjects[id]->player->seek(ms);
-			// Seek capability depends on the backend used.
+				// Seek capability depends on the backend used.
+			}
 			else
+			{
 				qDebug() << "[StelVideoMgr] Cannot seek media source.";
+			}
 		}
+	}
 }
 
 void StelVideoMgr::dropVideo(const QString& id)
@@ -116,33 +134,47 @@ void StelVideoMgr::dropVideo(const QString& id)
 void StelVideoMgr::setVideoXY(const QString& id, float x, float y)
 {
 	if (videoObjects.contains(id))
+	{
 		if (videoObjects[id]->pWidget!=NULL)
+		{
 			videoObjects[id]->pWidget->setPos(x, y);
+		}
+	}
 
 }
 
 void StelVideoMgr::setVideoAlpha(const QString& id, float alpha)
 {
 	if (videoObjects.contains(id))
+	{
 		if (videoObjects[id]->pWidget!=NULL)
+		{
 			videoObjects[id]->pWidget->setOpacity(alpha);
+		}
+	}
 }
 
 void StelVideoMgr::resizeVideo(const QString& id, float w, float h)
 {
 	if (videoObjects.contains(id))
+	{
 		if (videoObjects[id]->pWidget!=NULL)
 		{
 			videoObjects[id]->pWidget->resize(w, h); 
 			videoObjects[id]->player->resize(w, h); 
 		}
+	}
 }
 
 void StelVideoMgr::showVideo(const QString& id, bool show) 
 {
 	if (videoObjects.contains(id))
+	{
 		if (videoObjects[id]->pWidget!=NULL)
+		{
 			videoObjects[id]->pWidget->setVisible(show);
+		}
+	}
 }
 
 #else  // HAVE_QT_PHONON
