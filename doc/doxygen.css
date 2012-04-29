@@ -112,8 +112,9 @@ A.el {
 	text-decoration: none; 
 	font-weight: bold 
 }
-A.elRef { 
-	font-weight: bold 
+A.elRef {
+	text-decoration: none;  
+	/*font-weight: bold */
 }
 A.code:link { 
 	text-decoration: none; 
@@ -126,10 +127,12 @@ A.code:visited {
 	color: #0000FF
 }
 A.codeRef:link { 
+	text-decoration: none;
 	font-weight: normal; 
 	color: #0000FF
 }
 A.codeRef:visited { 
+	text-decoration: none;
 	font-weight: normal; 
 	color: #0000FF
 }

@@ -1345,7 +1345,9 @@ SKIP_FUNCTION_MACROS   = NO
 # If a tag file is not located in the directory in which doxygen
 # is run, you must also specify the path to the tagfile here.
 
-TAGFILES               =
+TAGFILES               = "../../doc/qt.tag=http://doc.qt.nokia.com/stable/"
+# BM: A tag file for Qt can be found in KDE's API documentation tarbal:
+# http://api.kde.org/kdereview-api/kdereview.tar.gz 
 
 # When a file name is specified after GENERATE_TAGFILE, doxygen will create
 # a tag file that is based on the input files it reads.
