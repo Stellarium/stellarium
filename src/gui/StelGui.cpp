@@ -590,7 +590,7 @@ void StelGui::initGrindLineMgr()
 	connect(gridLineManager,
 			SIGNAL(eclipticJ2000GridDisplayedChanged(const bool)),
 			this,
-			SLOT(eclipticJ2000GridDisplayedChanged(const bool)));
+			SLOT(eclipticJ2000GridDisplayedUpdated(const bool)));
 
 	getGuiActions("actionShow_Galactic_Grid")->setChecked(gridLineManager->getFlagGalacticGrid());
 	connect(getGuiActions("actionShow_Galactic_Grid"),
