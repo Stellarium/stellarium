@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-04-24 23:27+0700\n"
-"PO-Revision-Date: 2012-04-08 01:15+0000\n"
+"PO-Revision-Date: 2012-04-29 23:54+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-25 04:43+0000\n"
-"X-Generator: Launchpad (build 15139)\n"
+"X-Launchpad-Export-Date: 2012-04-30 04:39+0000\n"
+"X-Generator: Launchpad (build 15171)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -150,12 +150,12 @@ msgstr "เส้นผ่านศูนย์กลางปรากฏ: %1"
 #: src/core/modules/Planet.cpp:189
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "มุมดิถี: %1"
 
 #: src/core/modules/Planet.cpp:190
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "มุมห่าง: %1"
 
 #: src/core/modules/Planet.cpp:191
 #, qt-format
@@ -2993,11 +2993,11 @@ msgstr "สั้น"
 
 #: src/ui_configurationDialog.h:798
 msgid "Display user settings information"
-msgstr ""
+msgstr "แสดงข้อมูลการตั้งค่าโดยผู้ใช้"
 
 #: src/ui_configurationDialog.h:800
 msgid "Customized"
-msgstr ""
+msgstr "ได้รับการปรับแต่ง"
 
 #: src/ui_configurationDialog.h:802
 msgid "Display no information"
@@ -3338,83 +3338,83 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:196
 msgid "Display info about an object's name"
-msgstr ""
+msgstr "แสดงข้อมูลเกี่ยวกับชื่อของวัตถุ"
 
 #: src/ui_CustomInfoDialog.h:198
 msgid "An object's name"
-msgstr ""
+msgstr "ชื่อของวัตถุ"
 
 #: src/ui_CustomInfoDialog.h:200
 msgid "Display  info about a catalog numbers"
-msgstr ""
+msgstr "แสดงข้อมูลเกี่ยวกับหมายเลขแค็ตตาล็อก"
 
 #: src/ui_CustomInfoDialog.h:202
 msgid "Catalog numbers"
-msgstr ""
+msgstr "หมายเลขแค็ตตาล็อก"
 
 #: src/ui_CustomInfoDialog.h:204
 msgid "Display  info about a visual magnitude"
-msgstr ""
+msgstr "แสดงข้อมูลเกี่ยวกับโชติมาตรปรากฏ"
 
 #: src/ui_CustomInfoDialog.h:206
 msgid "Visual magnitude"
-msgstr ""
+msgstr "โชติมาตรปรากฏ"
 
 #: src/ui_CustomInfoDialog.h:208
 msgid "Display  info about an absolute magnitude"
-msgstr ""
+msgstr "แสดงข้อมูลเกี่ยวกับโชติมาตรสัมบูรณ์"
 
 #: src/ui_CustomInfoDialog.h:210
 msgid "Absolute magnitude"
-msgstr ""
+msgstr "โชติมาตรสัมบูรณ์"
 
 #: src/ui_CustomInfoDialog.h:212
 msgid "Display the equatorial position (J2000 ref)"
-msgstr ""
+msgstr "แสดงตำแหน่งในระบบพิกัดศูนย์สูตร (กรอบอ้างอิง J2000)"
 
 #: src/ui_CustomInfoDialog.h:214
 msgid "The equatorial coordinates (J2000 ref)"
-msgstr ""
+msgstr "พิกัดศูนย์สูตร (กรอบอ้างอิง J2000)"
 
 #: src/ui_CustomInfoDialog.h:216
 msgid "Display the equatorial position (of date)"
-msgstr ""
+msgstr "แสดงตำแหน่งในระบบพิกัดศูนย์สูตร (กรอบอ้างอิงของวัน)"
 
 #: src/ui_CustomInfoDialog.h:218
 msgid "The equatorial coordinates (of date)"
-msgstr ""
+msgstr "พิกัดศูนย์สูตร (กรอบอ้างอิงของวัน)"
 
 #: src/ui_CustomInfoDialog.h:220
 msgid "Display the altitude and azimuth position"
-msgstr ""
+msgstr "แสดงตำแหน่งเป็นมุมเงยและมุมทิศ"
 
 #: src/ui_CustomInfoDialog.h:222
 msgid "The alt-azimuthal coordinates"
-msgstr ""
+msgstr "พิกัดมุมเงยมุมทิศ"
 
 #: src/ui_CustomInfoDialog.h:224
 msgid "Display the hour angle + DE (of date)"
-msgstr ""
+msgstr "แสดงมุมชั่วโมง + เดคลิเนชัน (ของวัน)"
 
 #: src/ui_CustomInfoDialog.h:226
 msgid "The hour angle"
-msgstr ""
+msgstr "มุมชั่วโมง"
 
 #: src/ui_CustomInfoDialog.h:228
 msgid "Display info about an object's distance"
-msgstr ""
+msgstr "แสดงข้อมูลเกี่ยวกับระยะห่างของวัตถุ"
 
 #: src/ui_CustomInfoDialog.h:230
 msgid "Object's distance"
-msgstr ""
+msgstr "ระยะห่างของวัตถุ"
 
 #: src/ui_CustomInfoDialog.h:232
 msgid "Display info about an object's size"
-msgstr ""
+msgstr "แสดงข้อมูลเกี่ยวกับขนาดของวัตถุ"
 
 #: src/ui_CustomInfoDialog.h:234
 msgid "Object's size"
-msgstr ""
+msgstr "ขนาดของวัตถุ"
 
 #: src/ui_CustomInfoDialog.h:236 src/ui_CustomInfoDialog.h:240
 #: src/ui_CustomInfoDialog.h:244
@@ -3423,15 +3423,15 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:238
 msgid "Additional info (Extra 1)"
-msgstr ""
+msgstr "ข้อมูลเพิ่มเติม (1)"
 
 #: src/ui_CustomInfoDialog.h:242
 msgid "Additional info (Extra 2)"
-msgstr ""
+msgstr "ข้อมูลเพิ่มเติม (2)"
 
 #: src/ui_CustomInfoDialog.h:246
 msgid "Additional info (Extra 3)"
-msgstr ""
+msgstr "ข้อมูลเพิ่มเติม (3)"
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
