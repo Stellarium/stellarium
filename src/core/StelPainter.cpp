@@ -20,6 +20,8 @@
 #include "StelPainter.hpp"
 #include <QtOpenGL>
 
+#include "StelApp.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
 #include "StelUtils.hpp"
@@ -625,12 +627,26 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	float initX = x + xshift*cosr - yshift*sinr;
 	float initY = y + yshift*sinr + yshift*cosr;
 
-	for (int i=0;i<ws.length();++i)
+	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	if (!QString("ar fa ur he yi").contains(lang)) {
+		for (int i=0;i<ws.length();++i)
+		{
+			drawText(initX, initY, ws[i], -theta*180./M_PI+psi*i, 0., 0.);
+			xshift = (float)qPainter->fontMetrics().width(ws.mid(i,1)) * 1.05;
+			initX+=xshift*std::cos(-theta+psi*i * M_PI/180.);
+			initY+=xshift*std::sin(-theta+psi*i * M_PI/180.);
+		}
+	}
+	else
 	{
-		drawText(initX, initY, ws[i], -theta*180./M_PI+psi*i, 0., 0.);
-		xshift = (float)qPainter->fontMetrics().width(ws.mid(i,1)) * 1.05;
-		initX+=xshift*std::cos(-theta+psi*i * M_PI/180.);
-		initY+=xshift*std::sin(-theta+psi*i * M_PI/180.);
+		int slen = ws.length();
+		for (int i=0;i<slen;i++)
+		{
+			drawText(initX, initY, ws[slen-1-i], -theta*180./M_PI+psi*i, 0., 0.);
+			xshift = (float)qPainter->fontMetrics().width(ws.mid(slen-1-i,1)) * 1.05;
+			initX+=xshift*std::cos(-theta+psi*i * M_PI/180.);
+			initY+=xshift*std::sin(-theta+psi*i * M_PI/180.);
+		}
 	}
 }
 
