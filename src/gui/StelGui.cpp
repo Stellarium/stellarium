@@ -108,6 +108,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionShow_Azimuthal_Grid", N_("Azimuthal grid"), "Z", group, true, false);
 	addGuiActions("actionShow_Equatorial_Grid", N_("Equatorial grid"), "E", group, true, false);
 	addGuiActions("actionShow_Equatorial_J2000_Grid", N_("Equatorial J2000 grid"), "", group, true, false);
+	addGuiActions("actionShow_Ecliptic_J2000_Grid", N_("Ecliptic J2000 grid"), "", group, true, false);
 	addGuiActions("actionShow_Galactic_Grid", N_("Galactic grid"), "", group, true, false);
 	addGuiActions("actionShow_Galactic_Plane_Line", N_("Galactic plane"), "", group, true, false);
 	addGuiActions("actionShow_Ecliptic_Line", N_("Ecliptic line"), ",", group, true, false);
@@ -580,6 +581,16 @@ void StelGui::initGrindLineMgr()
 			SIGNAL(equatorJ2000GridDisplayedChanged(const bool)),
 			this,
 			SLOT(equatorJ2000GridDisplayedUpdated(const bool)));
+
+	getGuiActions("actionShow_Ecliptic_J2000_Grid")->setChecked(gridLineManager->getFlagEclipticJ2000Grid());
+	connect(getGuiActions("actionShow_Ecliptic_J2000_Grid"),
+			SIGNAL(toggled(bool)),
+			gridLineManager,
+			SLOT(setFlagEclipticJ2000Grid(bool)));
+	connect(gridLineManager,
+			SIGNAL(eclipticJ2000GridDisplayedChanged(const bool)),
+			this,
+			SLOT(eclipticJ2000GridDisplayedChanged(const bool)));
 
 	getGuiActions("actionShow_Galactic_Grid")->setChecked(gridLineManager->getFlagGalacticGrid());
 	connect(getGuiActions("actionShow_Galactic_Grid"),
@@ -1055,6 +1066,14 @@ void StelGui::equatorJ2000GridDisplayedUpdated(const bool displayed)
 		getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(displayed);
 	}
 }
+
+void StelGui::eclipticJ2000GridDisplayedUpdated(const bool displayed)
+{
+	if (getGuiActions("actionShow_Ecliptic_J2000_Grid")->isChecked() != displayed) {
+		getGuiActions("actionShow_Ecliptic_J2000_Grid")->setChecked(displayed);
+	}
+}
+
 
 void StelGui::galacticGridDisplayedUpdated(const bool displayed)
 {

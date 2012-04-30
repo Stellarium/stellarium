@@ -328,7 +328,7 @@
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout">
@@ -1060,6 +1060,13 @@
               <widget class="QCheckBox" name="showEquatorialJ2000GridCheckBox">
                <property name="text">
                 <string>Equatorial J2000 grid</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="showEclipticGridJ2000CheckBox">
+               <property name="text">
+                <string>Ecliptic J2000 grid</string>
                </property>
               </widget>
              </item>
