@@ -165,6 +165,10 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionSubtract_Sidereal_Day", N_("Subtract 1 sidereal day"), "Alt+-", group, false, true);
 	addGuiActions("actionAdd_Sidereal_Week", N_("Add 1 sidereal week"), "Alt+]", group, false, true);
 	addGuiActions("actionSubtract_Sidereal_Week", N_("Subtract 1 sidereal week"), "Alt+[", group, false, true);
+	addGuiActions("actionAdd_Sidereal_Month", N_("Add 1 sidereal month"), "Alt+Shift+]", group, false, true);
+	addGuiActions("actionSubtract_Sidereal_Month", N_("Subtract 1 sidereal month"), "Alt+Shift+[", group, false, true);
+	addGuiActions("actionAdd_Sidereal_Year", N_("Add 1 sidereal year"), "Ctrl+Alt+Shift+]", group, false, true);
+	addGuiActions("actionSubtract_Sidereal_Year", N_("Subtract 1 sidereal year"), "Ctrl+Alt+Shift+[", group, false, true);
 
 	group = N_("Movement and Selection");
 	addGuiActions("actionGoto_Selected_Object", N_("Center on selected object"), "Space", group, false, false);
@@ -223,8 +227,12 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiActions("actionSubtract_Solar_Week"), SIGNAL(triggered()), core, SLOT(subtractWeek()));
 	connect(getGuiActions("actionAdd_Sidereal_Day"), SIGNAL(triggered()), core, SLOT(addSiderealDay()));
 	connect(getGuiActions("actionAdd_Sidereal_Week"), SIGNAL(triggered()), core, SLOT(addSiderealWeek()));
+	connect(getGuiActions("actionAdd_Sidereal_Month"), SIGNAL(triggered()), core, SLOT(addSiderealMonth()));
+	connect(getGuiActions("actionAdd_Sidereal_Year"), SIGNAL(triggered()), core, SLOT(addSiderealYear()));
 	connect(getGuiActions("actionSubtract_Sidereal_Day"), SIGNAL(triggered()), core, SLOT(subtractSiderealDay()));
 	connect(getGuiActions("actionSubtract_Sidereal_Week"), SIGNAL(triggered()), core, SLOT(subtractSiderealWeek()));
+	connect(getGuiActions("actionSubtract_Sidereal_Month"), SIGNAL(triggered()), core, SLOT(subtractSiderealMonth()));
+	connect(getGuiActions("actionSubtract_Sidereal_Year"), SIGNAL(triggered()), core, SLOT(subtractSiderealYear()));
 	connect(getGuiActions("actionSet_Home_Planet_To_Selected"), SIGNAL(triggered()), core, SLOT(moveObserverToSelected()));
 
 	// connect the actor after setting the nightmode.

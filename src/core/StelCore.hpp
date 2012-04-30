@@ -326,6 +326,12 @@ public slots:
 	//! Add one sidereal week to the simulation time. The length of time depends
 	//! on the current planetary body on which the observer is located.
 	void addSiderealWeek();
+	//! Add one sidereal month to the simulation time. The length of time depends
+	//! on the current planetary body on which the observer is located.
+	void addSiderealMonth();
+	//! Add one sidereal year to the simulation time. The length of time depends
+	//! on the current planetary body on which the observer is located.
+	void addSiderealYear();
 
 	//! Subtract one [Earth, solar] hour to the current simulation time.
 	void subtractHour();
@@ -334,12 +340,18 @@ public slots:
 	//! Subtract one [Earth, solar] week to the current simulation time.
 	void subtractWeek();
 
-	//! Subtract one sidereal week to the simulation time. The length of time depends
+	//! Subtract one sidereal day to the simulation time. The length of time depends
 	//! on the current planetary body on which the observer is located.
 	void subtractSiderealDay();
 	//! Subtract one sidereal week to the simulation time. The length of time depends
 	//! on the current planetary body on which the observer is located.
 	void subtractSiderealWeek();
+	//! Subtract one sidereal month to the simulation time. The length of time depends
+	//! on the current planetary body on which the observer is located.
+	void subtractSiderealMonth();
+	//! Subtract one sidereal year to the simulation time. The length of time depends
+	//! on the current planetary body on which the observer is located.
+	void subtractSiderealYear();
 
 	//! Add a number of Earth Solar days to the current simulation time
 	//! @param d the decimal number of days to add (use negative values to subtract)

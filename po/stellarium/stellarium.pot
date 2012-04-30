@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-30 13:06+0700\n"
+"POT-Creation-Date: 2012-04-30 18:18+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -439,7 +439,7 @@ msgstr ""
 msgid "CTRL + Left click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:169
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:173
 msgid "Movement and Selection"
 msgstr ""
 
@@ -543,7 +543,7 @@ msgid "{Forums} - discuss Stellarium with other users."
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:341
-#: src/gui/HelpDialog.cpp:343 src/gui/StelGui.cpp:176
+#: src/gui/HelpDialog.cpp:343 src/gui/StelGui.cpp:180
 msgid "Miscellaneous"
 msgstr ""
 
@@ -833,51 +833,67 @@ msgstr ""
 msgid "Subtract 1 sidereal week"
 msgstr ""
 
+#: src/gui/StelGui.cpp:168
+msgid "Add 1 sidereal month"
+msgstr ""
+
+#: src/gui/StelGui.cpp:169
+msgid "Subtract 1 sidereal month"
+msgstr ""
+
 #: src/gui/StelGui.cpp:170
-msgid "Center on selected object"
+msgid "Add 1 sidereal year"
 msgstr ""
 
 #: src/gui/StelGui.cpp:171
-msgid "Track object"
-msgstr ""
-
-#: src/gui/StelGui.cpp:172
-msgid "Zoom in on selected object"
-msgstr ""
-
-#: src/gui/StelGui.cpp:173
-msgid "Zoom out"
+msgid "Subtract 1 sidereal year"
 msgstr ""
 
 #: src/gui/StelGui.cpp:174
-msgid "Set home planet to selected planet"
+msgid "Center on selected object"
+msgstr ""
+
+#: src/gui/StelGui.cpp:175
+msgid "Track object"
+msgstr ""
+
+#: src/gui/StelGui.cpp:176
+msgid "Zoom in on selected object"
 msgstr ""
 
 #: src/gui/StelGui.cpp:177
-msgid "Switch between equatorial and azimuthal mount"
+msgid "Zoom out"
 msgstr ""
 
 #: src/gui/StelGui.cpp:178
-msgid "Quit"
+msgid "Set home planet to selected planet"
 msgstr ""
 
-#: src/gui/StelGui.cpp:179
-msgid "Save screenshot"
-msgstr ""
-
-#: src/gui/StelGui.cpp:180
-msgid "Copy selected object information to clipboard"
+#: src/gui/StelGui.cpp:181
+msgid "Switch between equatorial and azimuthal mount"
 msgstr ""
 
 #: src/gui/StelGui.cpp:182
-msgid "Auto hide horizontal button bar"
+msgid "Quit"
 msgstr ""
 
 #: src/gui/StelGui.cpp:183
-msgid "Auto hide vertical button bar"
+msgid "Save screenshot"
 msgstr ""
 
 #: src/gui/StelGui.cpp:184
+msgid "Copy selected object information to clipboard"
+msgstr ""
+
+#: src/gui/StelGui.cpp:186
+msgid "Auto hide horizontal button bar"
+msgstr ""
+
+#: src/gui/StelGui.cpp:187
+msgid "Auto hide vertical button bar"
+msgstr ""
+
+#: src/gui/StelGui.cpp:188
 msgid "Toggle visibility of GUI"
 msgstr ""
 
@@ -3626,15 +3642,15 @@ msgstr ""
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1738
+#: plugins/Oculars/src/Oculars.cpp:1735
 msgid "&Telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1739
+#: plugins/Oculars/src/Oculars.cpp:1736
 msgid "&Previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1740
+#: plugins/Oculars/src/Oculars.cpp:1737
 msgid "&Next telescope"
 msgstr ""
 
