@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-24 23:27+0700\n"
+"POT-Creation-Date: 2012-04-30 18:18+0700\n"
 "PO-Revision-Date: 2011-12-14 17:51+0000\n"
 "Last-Translator: BRIJESH E.P <Unknown>\n"
 "Language-Team: Malayalam <ml@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-25 04:40+0000\n"
-"X-Generator: Launchpad (build 15139)\n"
+"X-Launchpad-Export-Date: 2012-05-01 05:24+0000\n"
+"X-Generator: Launchpad (build 15171)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -355,7 +355,7 @@ msgstr "തുടക്കത്തിലെ വീക്ഷണ ദിശ Az/Alt
 msgid "Authors"
 msgstr "രചയിതാക്കള്‍"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:393
+#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "വിലാസം"
 
@@ -464,7 +464,7 @@ msgstr "വലത് ഞെക്കല്‍"
 msgid "CTRL + Left click"
 msgstr "CTRL + Left click"
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:168
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:173
 msgid "Movement and Selection"
 msgstr "ചലനവും തെരഞ്ഞെടുപ്പും"
 
@@ -488,15 +488,15 @@ msgstr "തെരഞ്ഞെടുപ്പു് ഒഴിവാക്കു�
 msgid "When a Script is Running"
 msgstr "ഒരു സ്ക്രിപ്റ്റ് പ്രവര്‍ത്തിച്ചു കൊണ്ടിരിക്കുമ്പോള്‍"
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:147
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:148
 msgid "Slow down the script execution rate"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:148
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:149
 msgid "Speed up the script execution rate"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:149
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:150
 msgid "Set the normal script execution rate"
 msgstr ""
 
@@ -573,7 +573,7 @@ msgstr ""
 "{Forums} - സ്റ്റെല്ലേറിയത്തെക്കുറിച്ച് മറ്റുപയോക്താക്കളുമായി സംവദിക്കുക."
 
 #: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:341
-#: src/gui/HelpDialog.cpp:343 src/gui/StelGui.cpp:175
+#: src/gui/HelpDialog.cpp:343 src/gui/StelGui.cpp:180
 msgid "Miscellaneous"
 msgstr "മറ്റുള്ളവ"
 
@@ -649,261 +649,281 @@ msgstr "നക്ഷത്രരാശിയുടെ ലേബല്‍"
 msgid "Constellation boundaries"
 msgstr "നക്ഷത്രരാശിയുടെ അതിരുകള്‍"
 
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1121
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1128
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Azimuthal grid"
 msgstr "അഗ്രകോടി വരകള്‍"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1119
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1125
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial grid"
 msgstr "ഭൂമധ്യരേഖാപരമായ വരകള്‍"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1120
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1126
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equatorial J2000 grid"
 msgstr ""
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1122
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1127
+msgid "Ecliptic J2000 grid"
+msgstr ""
+
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1129
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Galactic grid"
 msgstr "ആകാശഗംഗ വരകള്‍"
 
-#: src/gui/StelGui.cpp:112
+#: src/gui/StelGui.cpp:113
 msgid "Galactic plane"
 msgstr "ആകാശഗംഗ  തലം"
 
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1126
+#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1133
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
 msgid "Ecliptic line"
 msgstr "ക്രാന്തിവൃത്ത രേഖ"
 
-#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1123
+#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1130
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Equator line"
 msgstr "ഭൂമധ്യരേഖ"
 
-#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1124
+#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1131
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Meridian line"
 msgstr "ഉച്ചസ്ഥാന രേഖ"
 
-#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1125
+#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1132
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Horizon line"
 msgstr "ചക്രവാളം രേഖ"
 
-#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1128
+#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1135
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Cardinal points"
 msgstr "ദിശാ സൂചകങ്ങള്‍"
 
-#: src/gui/StelGui.cpp:119
+#: src/gui/StelGui.cpp:120
 msgid "Ground"
 msgstr "ഭൗമോപരിതലം"
 
-#: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1099
+#: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1105
 msgid "Atmosphere"
 msgstr "അന്തരീക്ഷം"
 
-#: src/gui/StelGui.cpp:121
+#: src/gui/StelGui.cpp:122
 msgid "Fog"
 msgstr "മൂടല്‍ മഞ്ഞ്"
 
-#: src/gui/StelGui.cpp:123 src/ui_viewDialog.h:1108
+#: src/gui/StelGui.cpp:124 src/ui_viewDialog.h:1114
 msgid "Nebulas"
 msgstr "നെബുലകള്‍"
 
-#: src/gui/StelGui.cpp:124
+#: src/gui/StelGui.cpp:125
 msgid "Nebulas background images"
 msgstr "നെബുലകളുടെ ചിത്രങ്ങള്‍"
 
-#: src/gui/StelGui.cpp:125 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
+#: src/gui/StelGui.cpp:126 src/ui_viewDialog.h:1091 src/ui_viewDialog.h:1113
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Stars"
 msgstr "നക്ഷത്രങ്ങള്‍"
 
-#: src/gui/StelGui.cpp:126
+#: src/gui/StelGui.cpp:127
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Planet labels"
 msgstr "ഗ്രഹങ്ങളുടെ പേര് കാണിക്കുക"
 
-#: src/gui/StelGui.cpp:127
+#: src/gui/StelGui.cpp:128
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:301
 msgid "Planet orbits"
 msgstr "ഗ്രഹ പ്രദക്ഷിണപഥം"
 
-#: src/gui/StelGui.cpp:128
+#: src/gui/StelGui.cpp:129
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Planet trails"
 msgstr ""
 
-#: src/gui/StelGui.cpp:130
+#: src/gui/StelGui.cpp:131
 msgid "Night mode"
 msgstr "രാത്രിദൃശ്യം"
 
-#: src/gui/StelGui.cpp:131
+#: src/gui/StelGui.cpp:132
 msgid "Full-screen mode"
 msgstr "ഫുള്‍-സ്ക്രീന്‍ മോഡ്"
 
-#: src/gui/StelGui.cpp:132
+#: src/gui/StelGui.cpp:133
 msgid "Flip scene horizontally"
 msgstr "തിരശ്ശീല തിരശ്ചീനദിശയില്‍ വിപരീതമാക്കുക"
 
-#: src/gui/StelGui.cpp:133
+#: src/gui/StelGui.cpp:134
 msgid "Flip scene vertically"
 msgstr "ആകാശ ക്രമീകരണ ജാലകം [F4]"
 
-#: src/gui/StelGui.cpp:135
+#: src/gui/StelGui.cpp:136
 msgid "Windows"
 msgstr "ജാലകങ്ങള്‍"
 
-#: src/gui/StelGui.cpp:136
+#: src/gui/StelGui.cpp:137
 msgid "Help window"
 msgstr "സഹായ ജാലകം"
 
-#: src/gui/StelGui.cpp:137
+#: src/gui/StelGui.cpp:138
 msgid "Configuration window"
 msgstr "ക്രമീകരണ ജാലകം"
 
-#: src/gui/StelGui.cpp:138
+#: src/gui/StelGui.cpp:139
 msgid "Search window"
 msgstr "തെരച്ചില്‍ ജാലകം"
 
-#: src/gui/StelGui.cpp:139
+#: src/gui/StelGui.cpp:140
 msgid "Sky and viewing options window"
 msgstr "ആകാശ-ദൃശ്യ ക്രമീകരണ ജാലകം"
 
-#: src/gui/StelGui.cpp:140
+#: src/gui/StelGui.cpp:141
 msgid "Date/time window"
 msgstr "തീയതി/സമയ ജാലകം"
 
-#: src/gui/StelGui.cpp:141
+#: src/gui/StelGui.cpp:142
 msgid "Location window"
 msgstr "സ്ഥാന ജാലകം"
 
-#: src/gui/StelGui.cpp:143
+#: src/gui/StelGui.cpp:144
 msgid "Script console window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:146 src/ui_dateTimeDialogGui.h:294
+#: src/gui/StelGui.cpp:147 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Date and Time"
 msgstr "തീയതിയും സമയവും"
 
-#: src/gui/StelGui.cpp:150
+#: src/gui/StelGui.cpp:151
 msgid "Decrease time speed"
 msgstr "സമയവേഗത കുറയ്ക്കുക"
 
-#: src/gui/StelGui.cpp:151
+#: src/gui/StelGui.cpp:152
 msgid "Increase time speed"
 msgstr "സമയവേഗത കൂട്ടുക"
 
-#: src/gui/StelGui.cpp:152
+#: src/gui/StelGui.cpp:153
 msgid "Set normal time rate"
 msgstr "സമയവേഗത സാധാരണ നിലയിലാക്കുക"
 
-#: src/gui/StelGui.cpp:153
+#: src/gui/StelGui.cpp:154
 msgid "Decrease time speed (a little)"
 msgstr "സമയവേഗത കുറയ്ക്കുക (ചെറുതായി)"
 
-#: src/gui/StelGui.cpp:154
+#: src/gui/StelGui.cpp:155
 msgid "Increase time speed (a little)"
 msgstr "സമയവേഗത കൂട്ടുക (ചെറുതായി)"
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:156
 msgid "Set time rate to zero"
 msgstr "സമയവേഗതയിലെ നിരക്ക് പൂജ്യമാക്കുക"
 
-#: src/gui/StelGui.cpp:156
+#: src/gui/StelGui.cpp:157
 msgid "Set time to now"
 msgstr "സമയം നിലവിലെ സമയമാക്കുക"
 
-#: src/gui/StelGui.cpp:157
+#: src/gui/StelGui.cpp:158
 msgid "Add 1 solar hour"
 msgstr "1 സൗരമണിക്കൂര്‍ കൂട്ടുക"
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:159
 msgid "Subtract 1 solar hour"
 msgstr "1 സൗരമണിക്കൂര്‍ കുറയ്ക്കുക"
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:160
 msgid "Add 1 solar day"
 msgstr "1 സൗരദിനം കൂട്ടുക"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:161
 msgid "Subtract 1 solar day"
 msgstr "1 സൗരദിനം കുറയ്ക്കുക"
 
-#: src/gui/StelGui.cpp:161
+#: src/gui/StelGui.cpp:162
 msgid "Add 1 solar week"
 msgstr "1 സൗരആഴ്ച കൂട്ടുക"
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:163
 msgid "Subtract 1 solar week"
 msgstr "1 സൗരആഴ്ച കുറയ്ക്കുക"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:164
 msgid "Add 1 sidereal day"
 msgstr "1 സൈഡീരിയല്‍ ദിവസം കൂട്ടുക"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:165
 msgid "Subtract 1 sidereal day"
 msgstr "1 സൈഡീരിയല്‍ ദിവസം കുറയ്ക്കുക"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:166
 msgid "Add 1 sidereal week"
 msgstr "1 സൈഡീരിയല്‍ ആഴ്ച കൂട്ടുക"
 
-#: src/gui/StelGui.cpp:166
+#: src/gui/StelGui.cpp:167
 msgid "Subtract 1 sidereal week"
 msgstr "1 സൈഡീരിയല്‍ ആഴ്ച കുറയ്ക്കുക"
 
+#: src/gui/StelGui.cpp:168
+msgid "Add 1 sidereal month"
+msgstr ""
+
 #: src/gui/StelGui.cpp:169
+msgid "Subtract 1 sidereal month"
+msgstr ""
+
+#: src/gui/StelGui.cpp:170
+msgid "Add 1 sidereal year"
+msgstr ""
+
+#: src/gui/StelGui.cpp:171
+msgid "Subtract 1 sidereal year"
+msgstr ""
+
+#: src/gui/StelGui.cpp:174
 msgid "Center on selected object"
 msgstr "തിരഞ്ഞെടുത്ത വസ്തുവിനെ മധ്യത്തിലാക്കി പ്രദര്‍ശിപ്പിക്കുക"
 
-#: src/gui/StelGui.cpp:170
+#: src/gui/StelGui.cpp:175
 msgid "Track object"
 msgstr "വസ്തുവിനെ പിന്തുടരുക"
 
-#: src/gui/StelGui.cpp:171
+#: src/gui/StelGui.cpp:176
 msgid "Zoom in on selected object"
 msgstr "തിരഞ്ഞെടുത്ത വസ്തുവിനെ കേന്ദ്രീകരിച്ചു വലുതാക്കി കാണിക്കുക"
 
-#: src/gui/StelGui.cpp:172
+#: src/gui/StelGui.cpp:177
 msgid "Zoom out"
 msgstr "വലുതാക്കുക"
 
-#: src/gui/StelGui.cpp:173
+#: src/gui/StelGui.cpp:178
 msgid "Set home planet to selected planet"
 msgstr "തെരഞ്ഞെടുത്ത ഗ്രഹത്തെ സ്വഗ്രഹമായി ക്രമീകരിക്കുക"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:181
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "ഭൂമധ്യരേഖാ/അഗ്രകോടി രീതിയിലേക്കോ മാറുക"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:182
 msgid "Quit"
 msgstr "പുറത്ത് കടക്കുക"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:183
 msgid "Save screenshot"
 msgstr "സ്ക്രീന്‍ ഷോട്ട് സംരക്ഷിക്കുക"
 
-#: src/gui/StelGui.cpp:179
+#: src/gui/StelGui.cpp:184
 msgid "Copy selected object information to clipboard"
 msgstr ""
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:186
 msgid "Auto hide horizontal button bar"
 msgstr "വിലങ്ങനെയുള്ള ബട്ടണ്‍ ബാര്‍ തനിയെ മറയ്ക്കുക"
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:187
 msgid "Auto hide vertical button bar"
 msgstr "കുത്തനെയുള്ള ബട്ടണ്‍ ബാര്‍ തനിയെ മറയ്ക്കുക"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:188
 msgid "Toggle visibility of GUI"
 msgstr ""
 
@@ -912,27 +932,27 @@ msgstr ""
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:454
+#: src/gui/ViewDialog.cpp:459
 msgid "No description"
 msgstr "വിശദീകരണം ലഭ്യമല്ല"
 
-#: src/gui/ViewDialog.cpp:567
+#: src/gui/ViewDialog.cpp:572
 msgid "No shooting stars"
 msgstr "കൊള്ളിമീനുകള്‍ ഇല്ല"
 
-#: src/gui/ViewDialog.cpp:570
+#: src/gui/ViewDialog.cpp:575
 msgid "Normal rate"
 msgstr "സാധാരണ നിരക്ക്"
 
-#: src/gui/ViewDialog.cpp:573
+#: src/gui/ViewDialog.cpp:578
 msgid "Standard Perseids rate"
 msgstr "ശരാശരി Perseids നിരക്ക്"
 
-#: src/gui/ViewDialog.cpp:576
+#: src/gui/ViewDialog.cpp:581
 msgid "Exceptional Leonid rate"
 msgstr "അസാധാരണ ലിയനോയിഡ് നിരക്ക്"
 
-#: src/gui/ViewDialog.cpp:579
+#: src/gui/ViewDialog.cpp:584
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "ഏറ്റവും കൂടിയ നിരക്ക് (1966 ലെ ലിയനോയിഡ് )"
 
@@ -2753,201 +2773,201 @@ msgstr ""
 msgid "Server:"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1137
-#: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
+#: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1144
+#: src/ui_viewDialog.h:1149 src/ui_viewDialog.h:1151
 #: src/ui_configurationDialog.h:891 src/ui_configurationDialog.h:902
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "ഐച്ഛികങ്ങള്‍"
 
-#: src/ui_viewDialog.h:1070
+#: src/ui_viewDialog.h:1076
 msgid "View"
 msgstr "ദൃശ്യം"
 
-#: src/ui_viewDialog.h:1076
+#: src/ui_viewDialog.h:1082
 msgid "Sky"
 msgstr "ആകാശം"
 
-#: src/ui_viewDialog.h:1078
+#: src/ui_viewDialog.h:1084
 msgid "Markings"
 msgstr "രേഖപ്പെടുത്തലുകള്‍"
 
-#: src/ui_viewDialog.h:1080
+#: src/ui_viewDialog.h:1086
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Landscape"
 msgstr "പ്രകൃതിദൃശ്യം"
 
-#: src/ui_viewDialog.h:1082
+#: src/ui_viewDialog.h:1088
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:217
 msgid "Starlore"
 msgstr "സ്റ്റാര്‍ലോറെ"
 
-#: src/ui_viewDialog.h:1086
+#: src/ui_viewDialog.h:1092
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:247
 msgid "Absolute scale:"
 msgstr "കേവല അനുപാതം:"
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1093
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Relative scale:"
 msgstr "താരതമ്യ അനുപാതം:"
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1094
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Twinkle:"
 msgstr "മിന്നിതിളങ്ങുക:"
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:1096
 msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
 "തീവ്രതയുള്ള വസ്തുക്കള്‍ ദൃശ്യമാകുമ്പോള്‍ ദ്യോതി കുറഞ്ഞ നക്ഷത്രങ്ങളെ "
 "മങ്ങിപ്പിക്കുക"
 
-#: src/ui_viewDialog.h:1092
+#: src/ui_viewDialog.h:1098
 msgid "Dynamic eye adaptation"
 msgstr "കണ്ണിന്റെ സ്വഭാവത്തിന്റെ അനുരൂപീകരണം"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1099
 msgid "Planets and satellites"
 msgstr "ഗ്രഹങ്ങളും ഉപഗ്രഹങ്ങളും"
 
-#: src/ui_viewDialog.h:1094
+#: src/ui_viewDialog.h:1100
 msgid "Show planets"
 msgstr "ഗ്രഹങ്ങളെ കാണിക്കുക"
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1101
 msgid "Show planet markers"
 msgstr "ഗ്രഹങ്ങളുടെ അടയാളങ്ങള്‍ കാണിക്കുക"
 
-#: src/ui_viewDialog.h:1096
+#: src/ui_viewDialog.h:1102
 msgid "Show planet orbits"
 msgstr "ഗ്രഹങ്ങളുടെ പ്രദക്ഷിണപഥം കാണിക്കുക"
 
-#: src/ui_viewDialog.h:1097
+#: src/ui_viewDialog.h:1103
 msgid "Simulate light speed"
 msgstr "പ്രകാശവേഗതയെ അനുകരിക്കുക"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1104
 msgid "Scale Moon"
 msgstr "ചന്ദ്രനെ അനുപാതത്തിലാക്കുക"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1106
 msgid "Show atmosphere"
 msgstr "അന്തരീക്ഷം കാണിക്കുക"
 
-#: src/ui_viewDialog.h:1101
+#: src/ui_viewDialog.h:1107
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Light pollution:"
 msgstr "പ്രകാശ മലിനീകരണം:"
 
-#: src/ui_viewDialog.h:1103
+#: src/ui_viewDialog.h:1109
 msgid "pressure, temperature, extinction coefficient"
 msgstr "മര്‍ദ്ദം, താപനില, extinction coefficient"
 
-#: src/ui_viewDialog.h:1105
+#: src/ui_viewDialog.h:1111
 msgid "Refraction/Extinction settings..."
 msgstr "അപവര്‍ത്തനം/Extinction  ക്രമീകരണങ്ങള്‍..."
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1112
 msgid "Labels and Markers"
 msgstr "പേരുകുറികളും രേഖപ്പെടുത്തലുകളും"
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1115
 msgid "Planets"
 msgstr "ഗ്രഹങ്ങള്‍"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1116
 msgid "Shooting Stars"
 msgstr "കൊള്ളിമീന്‍"
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1117
 msgid "Hourly zenith rate:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1112
+#: src/ui_viewDialog.h:1118
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:1113
+#: src/ui_viewDialog.h:1119
 msgid "10"
 msgstr "10"
 
-#: src/ui_viewDialog.h:1114
+#: src/ui_viewDialog.h:1120
 msgid "80"
 msgstr "80"
 
-#: src/ui_viewDialog.h:1115
+#: src/ui_viewDialog.h:1121
 msgid "10000"
 msgstr "10000"
 
-#: src/ui_viewDialog.h:1116
+#: src/ui_viewDialog.h:1122
 msgid "144000"
 msgstr "144000"
 
-#: src/ui_viewDialog.h:1118
+#: src/ui_viewDialog.h:1124
 msgid "Celestial Sphere"
 msgstr "ഖഗോളം"
 
-#: src/ui_viewDialog.h:1127
+#: src/ui_viewDialog.h:1134
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Galactic plane line"
 msgstr "ആകാശഗംഗ-തലത്തിലെ രേഖ"
 
-#: src/ui_viewDialog.h:1129
+#: src/ui_viewDialog.h:1136
 msgid "Constellations"
 msgstr "നക്ഷത്രരാശികള്‍"
 
-#: src/ui_viewDialog.h:1130
+#: src/ui_viewDialog.h:1137
 msgid "Show lines"
 msgstr "വരകള്‍ കാണിക്കുക"
 
-#: src/ui_viewDialog.h:1131
+#: src/ui_viewDialog.h:1138
 msgid "Show labels"
 msgstr "കുറിമാനം കാട്ടുക"
 
-#: src/ui_viewDialog.h:1132
+#: src/ui_viewDialog.h:1139
 msgid "Show boundaries"
 msgstr "അതിരുകള്‍ കാട്ടുക"
 
-#: src/ui_viewDialog.h:1133
+#: src/ui_viewDialog.h:1140
 msgid "Show art"
 msgstr "കലാരൂപങ്ങള്‍ കാണിക്കുക"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1134
+#: src/ui_viewDialog.h:1141
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Art brightness:"
 msgstr "കലാരൂപത്തിന്റെ തിളക്കം"
 
-#: src/ui_viewDialog.h:1135
+#: src/ui_viewDialog.h:1142
 msgid "Projection"
 msgstr "പ്രക്ഷേപണം"
 
-#: src/ui_viewDialog.h:1136
+#: src/ui_viewDialog.h:1143
 msgid "Add/remove landscapes..."
 msgstr "പ്രകൃതിദൃശ്യങ്ങള്‍ ചേര്‍ക്കുക/ഒഴിവാക്കുക"
 
-#: src/ui_viewDialog.h:1138
+#: src/ui_viewDialog.h:1145
 msgid "Show ground"
 msgstr "ഭൗമോപരിതലം കാട്ടുക"
 
-#: src/ui_viewDialog.h:1139
+#: src/ui_viewDialog.h:1146
 msgid "Show fog"
 msgstr "പൊടിപടലം, മഞ്ഞ് കാണിക്കുക"
 
-#: src/ui_viewDialog.h:1140
+#: src/ui_viewDialog.h:1147
 msgid "Use associated planet and position"
 msgstr "ബന്ധപ്പെട്ട ഗ്രഹവും സ്ഥാനവും ഉപയോഗിക്കുക"
 
-#: src/ui_viewDialog.h:1141
+#: src/ui_viewDialog.h:1148
 msgid "Use this landscape as default"
 msgstr "ഈ പ്രകൃതിദൃശ്യം സ്വതവേയായി ഉപയോഗിക്കുക"
 
-#: src/ui_viewDialog.h:1143
+#: src/ui_viewDialog.h:1150
 msgid "Use this sky culture as default"
 msgstr "ഈ ആകാശസംസ്കാരം സ്വതവേയായി ഉപയോഗിക്കുക"
 
-#: src/ui_viewDialog.h:1145
+#: src/ui_viewDialog.h:1152
 msgid "Visible"
 msgstr "ദൃശ്യമായതു്"
 
