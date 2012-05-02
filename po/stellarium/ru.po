@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-30 18:18+0700\n"
-"PO-Revision-Date: 2012-04-30 06:47+0000\n"
+"POT-Creation-Date: 2012-05-02 10:28+0700\n"
+"PO-Revision-Date: 2012-05-02 03:45+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-01 05:25+0000\n"
-"X-Generator: Launchpad (build 15171)\n"
+"X-Launchpad-Export-Date: 2012-05-02 05:22+0000\n"
+"X-Generator: Launchpad (build 15177)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -343,6 +343,30 @@ msgstr "(видимые)"
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Азимут/высота: %1/%2"
+
+#: src/core/SimbadSearcher.cpp:55
+msgid "Network error"
+msgstr "Ошибка сети"
+
+#: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
+msgid "Error parsing position"
+msgstr "Ошибка разбора местоположения"
+
+#: src/core/SimbadSearcher.cpp:130
+msgid "Querying"
+msgstr "Выполнение запроса"
+
+#: src/core/SimbadSearcher.cpp:132
+msgid "Error"
+msgstr "Ошибка"
+
+#: src/core/SimbadSearcher.cpp:134
+msgid "Not found"
+msgstr "Совпадений не найдено"
+
+#: src/core/SimbadSearcher.cpp:134
+msgid "Found"
+msgstr "Найдено совпадение"
 
 #: src/gui/ConfigurationDialog.cpp:346
 msgid "Select screenshot directory"
@@ -876,19 +900,19 @@ msgstr "Вычесть 1 звёздную неделю"
 
 #: src/gui/StelGui.cpp:168
 msgid "Add 1 sidereal month"
-msgstr ""
+msgstr "Добавить 1 звёздный месяц"
 
 #: src/gui/StelGui.cpp:169
 msgid "Subtract 1 sidereal month"
-msgstr ""
+msgstr "Вычесть 1 звёздный месяц"
 
 #: src/gui/StelGui.cpp:170
 msgid "Add 1 sidereal year"
-msgstr ""
+msgstr "Добавить 1 звёздный год"
 
 #: src/gui/StelGui.cpp:171
 msgid "Subtract 1 sidereal year"
-msgstr ""
+msgstr "Вычесть 1 звёздный год"
 
 #: src/gui/StelGui.cpp:174
 msgid "Center on selected object"
@@ -1071,11 +1095,19 @@ msgstr "обычный вид"
 msgid "starchart"
 msgstr "звёздная карта"
 
-#: src/gui/SearchDialog.cpp:503
+#: src/gui/SearchDialog.cpp:351
+msgid "Simbad Lookup Error"
+msgstr "Ошибка поиска SIMBAD"
+
+#: src/gui/SearchDialog.cpp:359
+msgid "Simbad Lookup"
+msgstr "Поиск SIMBAD"
+
+#: src/gui/SearchDialog.cpp:507
 msgid "University of Strasbourg (France)"
 msgstr "Университет Страсбурга (Франция)"
 
-#: src/gui/SearchDialog.cpp:504
+#: src/gui/SearchDialog.cpp:508
 msgid "Harvard University (USA)"
 msgstr "Гарвардский университет (США)"
 
