@@ -200,11 +200,6 @@ class Translations
 		N_("Script which runs automatically at startup");
 		N_("This script displays the constellations of the Zodiac. That means the constellations which lie along the line which the Sun traces across the celestial sphere over the course of a year.");
 
-		// List of errors/statuses of SIMBAD
-		N_("Not found");
-		N_("Querying");
-		N_("Found");
-
 		// List of countries
 		N_("Andorra");
 		N_("United Arab Emirates");
