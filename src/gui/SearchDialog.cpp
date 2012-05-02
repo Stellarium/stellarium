@@ -349,7 +349,7 @@ void SearchDialog::onSimbadStatusChanged()
 	{
 		ui->simbadStatusLabel->setText(QString("%1: %2")
 					       .arg(q_("Simbad Lookup Error"))
-					       .arg(q_(simbadReply->getErrorString())));
+					       .arg(simbadReply->getErrorString()));
 		if (ui->completionLabel->isEmpty())
 			ui->pushButtonGotoSearchSkyObject->setEnabled(false);
 	}
@@ -357,7 +357,7 @@ void SearchDialog::onSimbadStatusChanged()
 	{
 		ui->simbadStatusLabel->setText(QString("%1: %2")
 					       .arg(q_("Simbad Lookup"))
-					       .arg(q_(simbadReply->getCurrentStatusString())));
+					       .arg(simbadReply->getCurrentStatusString()));
 		// Query not over, don't disable button
 		ui->pushButtonGotoSearchSkyObject->setEnabled(true);
 	}
