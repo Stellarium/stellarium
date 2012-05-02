@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-04-30 18:18+0700\n"
+"POT-Creation-Date: 2012-05-02 10:28+0700\n"
 "PO-Revision-Date: 2012-04-26 22:24+0000\n"
 "Last-Translator: Kenan Dervišević <kenan3008@gmail.com>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-01 05:21+0000\n"
-"X-Generator: Launchpad (build 15171)\n"
+"X-Launchpad-Export-Date: 2012-05-02 05:18+0000\n"
+"X-Generator: Launchpad (build 15177)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542
 msgid "Meridian"
@@ -341,6 +341,30 @@ msgstr "(vidljiv)"
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
+
+#: src/core/SimbadSearcher.cpp:55
+msgid "Network error"
+msgstr ""
+
+#: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
+msgid "Error parsing position"
+msgstr ""
+
+#: src/core/SimbadSearcher.cpp:130
+msgid "Querying"
+msgstr ""
+
+#: src/core/SimbadSearcher.cpp:132
+msgid "Error"
+msgstr ""
+
+#: src/core/SimbadSearcher.cpp:134
+msgid "Not found"
+msgstr ""
+
+#: src/core/SimbadSearcher.cpp:134
+msgid "Found"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:346
 msgid "Select screenshot directory"
@@ -1071,11 +1095,19 @@ msgstr "prirodno"
 msgid "starchart"
 msgstr "mapa zvijezda"
 
-#: src/gui/SearchDialog.cpp:503
+#: src/gui/SearchDialog.cpp:351
+msgid "Simbad Lookup Error"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:359
+msgid "Simbad Lookup"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:507
 msgid "University of Strasbourg (France)"
 msgstr "Univerzitetu u Starzburu (Francuska)"
 
-#: src/gui/SearchDialog.cpp:504
+#: src/gui/SearchDialog.cpp:508
 msgid "Harvard University (USA)"
 msgstr "Harvard University (USA)"
 
