@@ -1195,22 +1195,22 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QCheckBox" name="showEclipticLineCheckBox">
-                   <property name="toolTip">
-                    <string>Show ecliptic line</string>
-                   </property>
-                   <property name="text">
-                    <string>Ecliptic</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
                   <widget class="QCheckBox" name="showHorizonLineCheckBox">
                    <property name="toolTip">
                     <string>Show horizon line</string>
                    </property>
                    <property name="text">
                     <string>Horizon</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="showEclipticLineCheckBox">
+                   <property name="toolTip">
+                    <string>Show ecliptic line</string>
+                   </property>
+                   <property name="text">
+                    <string>Ecliptic</string>
                    </property>
                   </widget>
                  </item>
@@ -1699,6 +1699,17 @@
   <tabstop>zhr80</tabstop>
   <tabstop>zhr10000</tabstop>
   <tabstop>zhr144000</tabstop>
+  <tabstop>showEquatorialJ2000GridCheckBox</tabstop>
+  <tabstop>showEquatorialGridCheckBox</tabstop>
+  <tabstop>showEclipticGridJ2000CheckBox</tabstop>
+  <tabstop>showAzimuthalGridCheckBox</tabstop>
+  <tabstop>showGalacticGridCheckBox</tabstop>
+  <tabstop>showCardinalPointsCheckBox</tabstop>
+  <tabstop>showEquatorLineCheckBox</tabstop>
+  <tabstop>showMeridianLineCheckBox</tabstop>
+  <tabstop>showHorizonLineCheckBox</tabstop>
+  <tabstop>showEclipticLineCheckBox</tabstop>
+  <tabstop>showGalacticPlaneLineCheckBox</tabstop>
   <tabstop>showConstellationLinesCheckBox</tabstop>
   <tabstop>showConstellationLabelsCheckBox</tabstop>
   <tabstop>showConstellationBoundariesCheckBox</tabstop>
