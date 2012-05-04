@@ -14,6 +14,7 @@ src/core/StelCore.cpp
 src/core/StelProjector.cpp
 src/core/StelProjectorClasses.cpp
 src/core/StelObject.cpp
+src/core/SimbadSearcher.cpp
 src/gui/ConfigurationDialog.cpp
 src/gui/HelpDialog.cpp
 src/gui/StelGui.cpp
@@ -22,6 +23,7 @@ src/gui/ViewDialog.cpp
 src/gui/LocationDialog.cpp
 src/gui/AddRemoveLandscapesDialog.cpp
 src/gui/ScriptConsole.cpp
+src/gui/SearchDialog.cpp
 src/main.cpp
 
 # Translations of strings not contained in the source code
@@ -36,6 +38,7 @@ src/ui_viewDialog.h
 src/ui_configurationDialog.h
 src/ui_addRemoveLandscapesDialog.h
 src/ui_AtmosphereDialog.h
+src/ui_CustomInfoDialog.h
 src/ui_scriptConsole.h
 
 # Plug-in translations

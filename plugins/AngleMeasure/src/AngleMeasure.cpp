@@ -86,9 +86,9 @@ AngleMeasure::AngleMeasure()
 		conf->setValue("AngleMeasure/line_color", "0,0.5,1");
 	}
 
-	flagUseDmsFormat = conf->value("options/angle_format_dms", false).toBool();
-	textColor = StelUtils::strToVec3f(conf->value("options/text_color", "0,0.5,1").toString());
-	lineColor = StelUtils::strToVec3f(conf->value("options/line_color", "0,0.5,1").toString());
+	flagUseDmsFormat = conf->value("AngleMeasure/angle_format_dms", false).toBool();
+	textColor = StelUtils::strToVec3f(conf->value("AngleMeasure/text_color", "0,0.5,1").toString());
+	lineColor = StelUtils::strToVec3f(conf->value("AngleMeasure/line_color", "0,0.5,1").toString());
 }
 
 AngleMeasure::~AngleMeasure()

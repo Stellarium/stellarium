@@ -48,7 +48,9 @@
 #include <stdio.h>
 #define SGP4Version  "SGP4 Version 2008-11-03"
 
-#define pi 3.14159265358979323846
+#ifndef M_PI
+#define M_PI		3.14159265358979323846
+#endif
 
 // -------------------------- structure declarations ----------------------------
 typedef enum

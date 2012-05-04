@@ -39,7 +39,6 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 		typedDecimal = false;
 		editing = false;
 		response.accepted = true;
-		response.newNode = this;
 		stringValue.setNum(value,'g',-1);
 		emit(setValue(value));
 		return response;
@@ -52,7 +51,6 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 		if (value > maximum)
 			value = maximum;
 		response.accepted = true;
-		response.newNode = this;
 		stringValue.setNum(value,'g',-1);
 		emit(setValue(value));
 		return response;
@@ -65,7 +63,6 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 		if (value < minimum)
 			value = minimum;
 		response.accepted = true;
-		response.newNode = this;
 		stringValue.setNum(value,'g',-1);
 		emit(setValue(value));
 		return response;
@@ -88,7 +85,6 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 			}
 		}
 		response.accepted = true;
-		response.newNode = this;
 	}
 	else if (key>=Qt::Key_0 && key<=Qt::Key_9)
 	{
@@ -129,7 +125,6 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 			}
 		}
 		response.accepted = true;
-		response.newNode = this;
 		emit(setValue(value));
 		return response;
 	}
@@ -141,7 +136,6 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 			value = i;
 		stringValue.setNum(value,'g',-1);;
 		response.accepted = true;
-		response.newNode = this;
 		emit(setValue(value));
 		return response;
 	}

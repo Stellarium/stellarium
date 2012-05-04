@@ -151,7 +151,9 @@ unsigned alarm(unsigned __secs )
   return 1;
 }
 
+#ifndef __MINGW64__
 typedef unsigned int size_t;
+#endif
 
 /*#define INCL_WINSOCK_API_PROTOTYPES 0
 #include "kdewin32/winsock2.h"*/
