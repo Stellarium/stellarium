@@ -18,7 +18,6 @@
  */
 
 #include <iomanip>
-
 #include <QTextStream>
 #include <QString>
 #include <QDebug>
@@ -26,9 +25,9 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelTexture.hpp"
 #include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
-#include "StelTexture.hpp"
 #include "Planet.hpp"
 
 #include "StelProjector.hpp"
@@ -45,7 +44,6 @@ Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
 StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
-
 Planet::Planet(const QString& englishName,
 			   int flagLighting,
 			   double radius,
@@ -130,7 +128,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	oss << getPositionInfoString(core, flags);
 
-	if ((flags&Extra2) && (core->getCurrentLocation().planetName=="Earth"))
+	if ((flags&Extra1) && (core->getCurrentLocation().planetName=="Earth"))
 	{
 		//static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 		//double ecl= -(ssystem->getEarth()->getRotObliquity()); // BUG DETECTED! Earth's obliquity is apparently reported constant.
@@ -163,7 +161,36 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	}
 
 	if (flags&Size)
-		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(2.*getAngularSize(core)*M_PI/180., true));
+	{
+		double angularSize = 2.*getAngularSize(core)*M_PI/180.;
+		if (rings)
+		{
+			double withoutRings = 2.*getSpheroidAngularSize(core)*M_PI/180.;
+			oss << q_("Apparent diameter: %1, with rings: %2")
+			       .arg(StelUtils::radToDmsStr(withoutRings, true),
+			            StelUtils::radToDmsStr(angularSize, true));
+		}
+		else
+		{
+			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
+		}
+		oss << "<br>";
+	}
+
+	if ((flags&Extra2) && (englishName.compare("Sun")!=0))
+	{
+		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
+		const double observerRq = observerHelioPos.lengthSquared();
+		const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
+		const double planetRq = planetHelioPos.lengthSquared();
+		const double observerPlanetRq = (observerHelioPos - planetHelioPos).lengthSquared();
+		const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
+		float planetPhase = 0.5f * std::abs(1.f + cos_chi);
+		oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhase(core->getObserverHeliocentricEclipticPos()))) << "<br>";
+		oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(getElongation(core->getObserverHeliocentricEclipticPos()))) << "<br>";
+		oss << QString(q_("Phase: %1")).arg(planetPhase, 0, 'f', 2) << "<br>";
+		oss << QString(q_("Illuminated: %1%")).arg(planetPhase * 100, 0, 'f', 1) << "<br>";		
+	}
 
 	postProcessInfoString(str, flags);
 
@@ -299,11 +326,13 @@ void Planet::computePosition(const double date)
 					{
 						coordFunc(calc_date, eclipticPos, userDataPtr);
 					}
+					orbitP[d] = eclipticPos;
 					orbit[d] = getHeliocentricEclipticPos();
 				}
 				else
 				{
-					orbit[d] = orbit[d+delta_points];
+					orbitP[d] = orbitP[d+delta_points];
+					orbit[d] = getHeliocentricPos(orbitP[d]);
 				}
 			}
 
@@ -327,11 +356,13 @@ void Planet::computePosition(const double date)
 					{
 						coordFunc(calc_date, eclipticPos, userDataPtr);
 					}
+					orbitP[d] = eclipticPos;
 					orbit[d] = getHeliocentricEclipticPos();
 				}
 				else
 				{
-					orbit[d] = orbit[d+delta_points];
+					orbitP[d] = orbitP[d+delta_points];
+					orbit[d] = getHeliocentricPos(orbitP[d]);
 				}
 			}
 
@@ -354,6 +385,7 @@ void Planet::computePosition(const double date)
 				{
 					coordFunc(calc_date, eclipticPos, userDataPtr);
 				}
+				orbitP[d] = eclipticPos;
 				orbit[d] = getHeliocentricEclipticPos();
 			}
 
@@ -372,6 +404,8 @@ void Planet::computePosition(const double date)
 	{
 		// calculate actual Planet position
 		coordFunc(date, eclipticPos, userDataPtr);
+		for( int d=0; d<ORBIT_SEGMENTS; d++ )
+			orbit[d]=getHeliocentricPos(orbitP[d]);
 		lastJD = date;
 	}
 
@@ -451,6 +485,22 @@ Vec3d Planet::getHeliocentricEclipticPos() const
 	return pos;
 }
 
+// Return heliocentric coordinate of p
+Vec3d Planet::getHeliocentricPos(Vec3d p) const
+{
+	Vec3d pos = p;
+	PlanetP pp = parent;
+	if (pp)
+	{
+		while (pp->parent)
+		{
+			pos += pp->eclipticPos;
+			pp = pp->parent;
+		}
+	}
+	return pos;
+}
+
 void Planet::setHeliocentricEclipticPos(const Vec3d &pos)
 {
 	eclipticPos = pos;
@@ -472,14 +522,25 @@ double Planet::computeDistance(const Vec3d& obsHelioPos)
 	return distance;
 }
 
-// Get the phase angle for an observer at pos obsPos in the heliocentric coordinate (dist in AU)
+// Get the phase angle (radians) for an observer at pos obsPos in heliocentric coordinates (dist in AU)
 double Planet::getPhase(const Vec3d& obsPos) const
 {
 	const double observerRq = obsPos.lengthSquared();
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
 	const double planetRq = planetHelioPos.lengthSquared();
 	const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
-	return std::acos(observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
+	//return std::acos(observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
+	return std::acos((observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq)));
+}
+
+// Get the elongation angle (radians) for an observer at pos obsPos in heliocentric coordinates (dist in AU)
+double Planet::getElongation(const Vec3d& obsPos) const
+{
+	const double observerRq = obsPos.lengthSquared();
+	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
+	const double planetRq = planetHelioPos.lengthSquared();
+	const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
+	return std::acos((observerPlanetRq  + observerRq - planetRq)/(2.0*sqrt(observerPlanetRq*observerRq)));
 }
 
 // Computation of the visual magnitude (V band) of the planet.
@@ -829,7 +890,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	Vec3d tmp = getJ2000EquatorialPos(core);
-	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitude(core, true), color);
+	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, getVMagnitude(core, true), color);
 }
 
 
@@ -839,9 +900,10 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	{
 		// For lazy loading, return if texture not yet loaded
 		if (!texMap->bind())
+		{
 			return;
+		}
 	}
-
 	painter->enableTexture2d(true);
 	glDisable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
@@ -855,11 +917,11 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	// Rotate and add an extra quarter rotation so that the planet texture map
 	// fits to the observers position. No idea why this is necessary,
 	// perhaps some openGl strangeness, or confusing sin/cos.
+
 	painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
 	painter->setShadeModel(StelPainter::ShadeModelFlat);
 	glDisable(GL_CULL_FACE);
 }
-
 
 // draws earth shadow overlapping the moon using stencil buffer
 // umbra and penumbra are sized separately for accuracy
@@ -893,7 +955,6 @@ void Planet::drawEarthShadow(StelCore* core, StelPainter* sPainter)
 		return;   // not visible so don't bother drawing
 
 	shadow = mh + mdist*mscale;
-	r_penumbra *= mscale;
 
 	StelProjectorP saveProj = sPainter->getProjector();
 	sPainter->setProjector(core->getProjection(StelCore::FrameHeliocentricEcliptic));
@@ -1050,6 +1111,7 @@ void Planet::drawOrbit(const StelCore* core)
 	QVarLengthArray<float, 1024> vertexArray;
 
 	sPainter.enableClientStates(true, false, false);
+
 	for (int n=0; n<=nbIter; ++n)
 	{
 		if (prj->project(orbit[n],onscreen) && (vertexArray.size()==0 || !prj->intersectViewportDiscontinuity(orbit[n-1], orbit[n])))

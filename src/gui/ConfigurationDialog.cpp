@@ -20,6 +20,7 @@
 
 #include "Dialog.hpp"
 #include "ConfigurationDialog.hpp"
+#include "CustomInfoDialog.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelMainWindow.hpp"
 #include "ui_configurationDialog.h"
@@ -29,6 +30,7 @@
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
+#include "StelObjectMgr.hpp"
 
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
@@ -62,14 +64,18 @@
 ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
 {
 	ui = new Ui_configurationDialogForm;
+	customInfoDialog = NULL;
 	hasDownloadedStarCatalog = false;
 	isDownloadingStarCatalog = false;
-	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();
+	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();	
 }
 
 ConfigurationDialog::~ConfigurationDialog()
 {
 	delete ui;
+	ui=NULL;
+	delete customInfoDialog;
+	customInfoDialog = NULL;
 }
 
 void ConfigurationDialog::retranslate()
@@ -145,14 +151,32 @@ void ConfigurationDialog::createDialogContent()
 
 	// Selected object info
 	if (gui->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
+	{
 		ui->noSelectedInfoRadio->setChecked(true);
+		ui->pushButtonCustomInfoDialog->setEnabled(false);
+	}
 	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
-		ui->briefSelectedInfoRadio->setChecked(true);
-	else
+	{
+		ui->briefSelectedInfoRadio->setChecked(true);	
+		ui->pushButtonCustomInfoDialog->setEnabled(false);
+	}
+	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::AllInfo))
+	{
 		ui->allSelectedInfoRadio->setChecked(true);
+		ui->pushButtonCustomInfoDialog->setEnabled(false);
+	}
+	else
+	{
+		ui->customSelectedInfoRadio->setChecked(true);
+		ui->pushButtonCustomInfoDialog->setEnabled(true);
+	}
+
 	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
+	connect(ui->customSelectedInfoRadio, SIGNAL(released()), this, SLOT(setCustomSelectedInfo()));
+
+	connect(ui->pushButtonCustomInfoDialog, SIGNAL(clicked()), this, SLOT(showCustomInfoDialog()));
 
 	// Navigation tab
 	// Startup time
@@ -288,17 +312,27 @@ void ConfigurationDialog::setSphericMirror(bool b)
 void ConfigurationDialog::setNoSelectedInfo(void)
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(0));
+	ui->pushButtonCustomInfoDialog->setEnabled(false);
 }
 
 void ConfigurationDialog::setAllSelectedInfo(void)
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
+	ui->pushButtonCustomInfoDialog->setEnabled(false);
 }
 
 void ConfigurationDialog::setBriefSelectedInfo(void)
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
+	ui->pushButtonCustomInfoDialog->setEnabled(false);
 }
+
+void ConfigurationDialog::setCustomSelectedInfo(void)
+{
+	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getStelObjectMgr().getCustomInfoString()));
+	ui->pushButtonCustomInfoDialog->setEnabled(true);
+}
+
 
 void ConfigurationDialog::cursorTimeOutChanged()
 {
@@ -309,12 +343,7 @@ void ConfigurationDialog::cursorTimeOutChanged()
 void ConfigurationDialog::browseForScreenshotDir()
 {
 	QString oldScreenshorDir = StelFileMgr::getScreenshotDir();
-	#ifdef Q_OS_MAC
-	//work-around for Qt bug -  http://bugreports.qt.nokia.com/browse/QTBUG-16722
-	QString newScreenshotDir = QFileDialog::getExistingDirectory(NULL, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::DontUseNativeDialog);
-	#else
 	QString newScreenshotDir = QFileDialog::getExistingDirectory(NULL, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::ShowDirsOnly);
-	#endif
 
 	if (!newScreenshotDir.isEmpty()) {
 		// remove trailing slash
@@ -414,6 +443,9 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("landscape/flag_atmosphere", lmgr->getFlagAtmosphere());
 	conf->setValue("landscape/flag_fog", lmgr->getFlagFog());
 	conf->setValue("stars/init_bortle_scale", core->getSkyDrawer()->getBortleScale());
+        conf->setValue("landscape/atmospheric_extinction_coefficient", core->getSkyDrawer()->getExtinctionCoefficient());
+        conf->setValue("landscape/pressure_mbar", core->getSkyDrawer()->getAtmospherePressure());
+        conf->setValue("landscape/temperature_C", core->getSkyDrawer()->getAtmosphereTemperature());
 
 	// view dialog / starlore tab
 	StelApp::getInstance().getSkyCultureMgr().setDefaultSkyCultureID(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
@@ -431,8 +463,10 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		conf->setValue("gui/selected_object_info", "none");
 	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
 		conf->setValue("gui/selected_object_info", "short");
-	else
+	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::AllInfo))
 		conf->setValue("gui/selected_object_info", "all");
+	else
+		conf->setValue("gui/selected_object_info", "custom");
 
 	// toolbar auto-hide status
 	conf->setValue("gui/auto_hide_horizontal_toolbar", gui->getAutoHideHorizontalButtonBar());
@@ -894,4 +928,12 @@ void ConfigurationDialog::downloadFinished()
 	}
 
 	resetStarCatalogControls();
+}
+
+void ConfigurationDialog::showCustomInfoDialog()
+{
+	if(customInfoDialog == NULL)
+		customInfoDialog = new CustomInfoDialog();
+
+	customInfoDialog->setVisible(true);
 }

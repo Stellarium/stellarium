@@ -318,7 +318,7 @@ try here: http://www.gnu.org/copyleft/gpl.html
 
 =head1 AUTHOR
 
-Matthew Gates <matthew@porpoisehead.net>
+Matthew Gates <matthewg42@gmail.com>
 
 http://porpoisehead.net/
 

@@ -80,8 +80,8 @@ void twoline2rv
       elsetrec& satrec
      )
      {
-       const double deg2rad  =   pi / 180.0;         //   0.0174532925199433
-       const double xpdotp   =  1440.0 / (2.0 *pi);  // 229.1831180523293
+       const double deg2rad  =   M_PI / 180.0;         //   0.0174532925199433
+       const double xpdotp   =  1440.0 / (2.0 *M_PI);  // 229.1831180523293
 
        double sec, mu, radiusearthkm, tumin, xke, j2, j3, j4, j3oj2;
        int cardnumb, numb, j;

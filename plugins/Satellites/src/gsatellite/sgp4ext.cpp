@@ -283,7 +283,7 @@ void newtonnu
              // -------------------- hyperbolic  --------------------
              if ( ecc > 1.0 + small  )
                {
-                 if ((ecc > 1.0 ) && (fabs(nu)+0.00001 < pi-acos(1.0 /ecc)))
+                 if ((ecc > 1.0 ) && (fabs(nu)+0.00001 < M_PI-acos(1.0 /ecc)))
                    {
                      sine= ( sqrt( ecc*ecc-1.0  ) * sin(nu) ) / ( 1.0  + ecc*cos(nu) );
                      e0  = asinh( sine );
@@ -292,7 +292,7 @@ void newtonnu
                 }
                else
                  // ----------------- parabolic ---------------------
-                 if ( fabs(nu) < 168.0*pi/180.0  )
+                 if ( fabs(nu) < 168.0*M_PI/180.0  )
                    {
                      e0= tan( nu*0.5  );
                      m = e0 + (e0*e0*e0)/3.0;
@@ -300,10 +300,10 @@ void newtonnu
 
      if ( ecc < 1.0  )
        {
-         m = fmod( m,2.0 *pi );
+         m = fmod( m,2.0 *M_PI );
          if ( m < 0.0  )
-             m = m + 2.0 *pi;
-         e0 = fmod( e0,2.0 *pi );
+             m = m + 2.0 *M_PI;
+         e0 = fmod( e0,2.0 *M_PI );
        }
    }  // end newtonnu
 
@@ -378,8 +378,8 @@ void rv2coe
        int i;
        char typeorbit[3];
 
-     twopi  = 2.0 * pi;
-     halfpi = 0.5 * pi;
+     twopi  = 2.0 * M_PI;
+     halfpi = 0.5 * M_PI;
      small  = 0.00000001;
      undefined = 999999.1;
      infinite  = 999999.9;
@@ -421,7 +421,7 @@ void rv2coe
          if ( ecc < small )
            {
              // ----------------  circular equatorial ---------------
-             if  ((incl<small) | (fabs(incl-pi)<small))
+             if  ((incl<small) | (fabs(incl-M_PI)<small))
                  strcpy(typeorbit,"ce");
                else
                  // --------------  circular inclined ---------------
@@ -430,7 +430,7 @@ void rv2coe
            else
            {
              // - elliptical, parabolic, hyperbolic equatorial --
-             if  ((incl<small) | (fabs(incl-pi)<small))
+             if  ((incl<small) | (fabs(incl-M_PI)<small))
                  strcpy(typeorbit,"ee");
            }
 

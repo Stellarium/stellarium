@@ -127,7 +127,7 @@ void Satellites::init()
 		// TRANSLATORS: Title of a group of key bindings in the Help window
 		QString groupName = N_("Plugin Key Bindings");
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->addGuiActions("actionShow_Satellite_ConfigDialog", N_("Satellites configuration window"), "Alt+Z", groupName, true);
+		gui->addGuiActions("actionShow_Satellite_ConfigDialog_Global", N_("Satellites configuration window"), "Alt+Z", groupName, true, false, true);
 		gui->addGuiActions("actionShow_Satellite_Hints", N_("Satellite hints"), "Ctrl+Z", groupName, true, false);
 		gui->getGuiActions("actionShow_Satellite_Hints")->setChecked(getFlagHints());
 		gui->addGuiActions("actionShow_Satellite_Labels", N_("Satellite labels"), "Shift+Z", groupName, true, false);
@@ -140,8 +140,8 @@ void Satellites::init()
 		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiActions("actionShow_Satellite_Hints"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 
-		connect(gui->getGuiActions("actionShow_Satellite_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
-		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Satellite_ConfigDialog"), SLOT(setChecked(bool)));
+		connect(gui->getGuiActions("actionShow_Satellite_ConfigDialog_Global"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
+		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Satellite_ConfigDialog_Global"), SLOT(setChecked(bool)));
 		connect(gui->getGuiActions("actionShow_Satellite_Hints"), SIGNAL(toggled(bool)), this, SLOT(setFlagHints(bool)));
 		connect(gui->getGuiActions("actionShow_Satellite_Labels"), SIGNAL(toggled(bool)), this, SLOT(setFlagLabels(bool)));
 
@@ -374,7 +374,7 @@ bool Satellites::configureGui(bool show)
 	if (show)
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiActions("actionShow_Satellite_ConfigDialog")->setChecked(true);
+		gui->getGuiActions("actionShow_Satellite_ConfigDialog_Global")->setChecked(true);
 	}
 
 	return true;

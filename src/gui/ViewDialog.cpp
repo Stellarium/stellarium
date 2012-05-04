@@ -267,6 +267,11 @@ void ViewDialog::createDialogContent()
 	connect(a, SIGNAL(toggled(bool)), ui->showEquatorialJ2000GridCheckBox, SLOT(setChecked(bool)));
 	connect(ui->showEquatorialJ2000GridCheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
 
+	ui->showEclipticGridJ2000CheckBox->setChecked(glmgr->getFlagEclipticJ2000Grid());
+	a = gui->getGuiActions("actionShow_Ecliptic_J2000_Grid");
+	connect(a, SIGNAL(toggled(bool)), ui->showEclipticGridJ2000CheckBox, SLOT(setChecked(bool)));
+	connect(ui->showEclipticGridJ2000CheckBox, SIGNAL(toggled(bool)), a, SLOT(setChecked(bool)));
+
 	ui->showCardinalPointsCheckBox->setChecked(lmgr->getFlagCardinalsPoints());
 	a = gui->getGuiActions("actionShow_Cardinal_Points");
 	connect(a, SIGNAL(toggled(bool)), ui->showCardinalPointsCheckBox, SLOT(setChecked(bool)));

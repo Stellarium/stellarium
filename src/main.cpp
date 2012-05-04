@@ -260,12 +260,16 @@ int main(int argc, char **argv)
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
+#ifdef Q_OS_WIN
 	bool safeMode = false; // used in Q_OS_WIN, but need the QGL::setPreferredPaintEngine() call here.
+#endif
 	if (!confSettings->value("main/use_qpaintenginegl2", true).toBool()
 		|| qApp->property("onetime_safe_mode").isValid()) {
 		// The user explicitely request to use the older paint engine.
 		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
+#ifdef Q_OS_WIN
 		safeMode = true;
+#endif
 	}
 
 #ifdef Q_OS_MAC

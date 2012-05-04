@@ -142,6 +142,8 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	}
 	orbitValid = true;
 	initialized = true;
+
+	update(0.);
 }
 
 Satellite::~Satellite()
@@ -329,6 +331,11 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	return str;
 }
 
+Vec3d Satellite::getJ2000EquatorialPos(const StelCore* core) const
+{
+	return core->altAzToJ2000(elAzPosition);;
+}
+
 Vec3f Satellite::getInfoColor(void) const
 {
 	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : hintColor;
@@ -448,8 +455,10 @@ QString Satellite::extractInternationalDesignator(const QString& tle1)
 
 void Satellite::draw(const StelCore* core, StelPainter& painter, float)
 {
-	XYZ = core->altAzToJ2000(elAzPosition);
-	StelApp::getInstance().getVisionModeNight() ? glColor4f(0.6,0.0,0.0,1.0) : glColor4f(hintColor[0],hintColor[1],hintColor[2], Satellite::hintBrightness);
+	XYZ = getJ2000EquatorialPos(core);
+	Vec3f drawColor;
+	(visibility==RADAR_NIGHT) ? drawColor = Vec3f(0.2f,0.2f,0.2f) : drawColor = hintColor;
+	StelApp::getInstance().getVisionModeNight() ? glColor4f(0.6,0.0,0.0,1.0) : glColor4f(drawColor[0],drawColor[1],drawColor[2], Satellite::hintBrightness);
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
