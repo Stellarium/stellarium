@@ -7,29 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-09 20:51+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
+"POT-Creation-Date: 2012-05-04 02:16+0700\n"
+"PO-Revision-Date: 2012-01-18 15:28+0000\n"
 "Last-Translator: vine_user <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-10 05:13+0000\n"
-"X-Generator: Launchpad (build 14914)\n"
+"X-Launchpad-Export-Date: 2012-05-04 04:41+0000\n"
+"X-Generator: Launchpad (build 15195)\n"
 
-#: src/core/modules/GridLinesMgr.cpp:542
+#: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
 msgstr "メリディアン"
 
-#: src/core/modules/GridLinesMgr.cpp:546
+#: src/core/modules/GridLinesMgr.cpp:546 src/ui_viewDialog.h:1176
 msgid "Ecliptic"
 msgstr "黄道"
 
-#: src/core/modules/GridLinesMgr.cpp:550
+#: src/core/modules/GridLinesMgr.cpp:550 src/ui_viewDialog.h:1164
 msgid "Equator"
 msgstr "天の赤道"
 
-#: src/core/modules/GridLinesMgr.cpp:554
+#: src/core/modules/GridLinesMgr.cpp:554 src/ui_viewDialog.h:1172
 msgid "Horizon"
 msgstr "地平線"
 
@@ -60,13 +60,13 @@ msgstr "惑星: "
 msgid "Type: <b>%1</b>"
 msgstr "種類: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:123
+#: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
+#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
@@ -109,36 +109,61 @@ msgstr "不明"
 msgid "Undocumented type"
 msgstr "未登録"
 
-#: src/core/modules/Planet.cpp:129 src/core/modules/StarWrapper.cpp:124
+#: src/core/modules/Planet.cpp:127 src/core/modules/StarWrapper.cpp:124
 #: plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "絶対等級: %1"
 
-#: src/core/modules/Planet.cpp:142
+#: src/core/modules/Planet.cpp:140
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:143
+#: src/core/modules/Planet.cpp:141
 #, qt-format
 msgid "Obliquity (of date): %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:153
+#: src/core/modules/Planet.cpp:151
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:160
+#: src/core/modules/Planet.cpp:158
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr "距離: %1天文単位"
 
-#: src/core/modules/Planet.cpp:166
+#: src/core/modules/Planet.cpp:169
+#, qt-format
+msgid "Apparent diameter: %1, with rings: %2"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:175
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "見かけの直径: %1"
+
+#: src/core/modules/Planet.cpp:189
+#, qt-format
+msgid "Phase Angle: %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:190
+#, qt-format
+msgid "Elongation: %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:191
+#, qt-format
+msgid "Phase: %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:192
+#, qt-format
+msgid "Illuminated: %1%"
+msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -180,7 +205,7 @@ msgstr "両眼視差: %1\""
 msgid "SpaceShip"
 msgstr "宇宙船"
 
-#: src/core/StelProjector.cpp:62
+#: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
 msgstr "最大視野: "
 
@@ -277,76 +302,100 @@ msgid ""
 "of perspective is set to an infinite distance."
 msgstr "正投影図は遠近法に似ていますが視点は無限遠からになります。"
 
-#: src/core/StelObject.cpp:87
+#: src/core/StelObject.cpp:86
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
 msgstr "赤経/赤緯（J2000）: %1/%2"
 
-#: src/core/StelObject.cpp:94
+#: src/core/StelObject.cpp:93
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
 msgstr "赤経/赤緯（日付）: %1/%2"
 
-#: src/core/StelObject.cpp:104 src/core/StelObject.cpp:107
-#: src/core/StelObject.cpp:110
+#: src/core/StelObject.cpp:103 src/core/StelObject.cpp:106
+#: src/core/StelObject.cpp:109
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "時角: %1/%2"
 
-#: src/core/StelObject.cpp:104 src/core/StelObject.cpp:123
+#: src/core/StelObject.cpp:103 src/core/StelObject.cpp:122
 msgid "(geometric)"
 msgstr "幾何学の"
 
-#: src/core/StelObject.cpp:107 src/core/StelObject.cpp:129
+#: src/core/StelObject.cpp:106 src/core/StelObject.cpp:128
 msgid "(apparent)"
 msgstr ""
 
-#: src/core/StelObject.cpp:123 src/core/StelObject.cpp:129
-#: src/core/StelObject.cpp:132
+#: src/core/StelObject.cpp:122 src/core/StelObject.cpp:128
+#: src/core/StelObject.cpp:131
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "方位角/高度: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:314 src/gui/ConfigurationDialog.cpp:316
+#: src/core/SimbadSearcher.cpp:55
+msgid "Network error"
+msgstr ""
+
+#: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
+msgid "Error parsing position"
+msgstr ""
+
+#: src/core/SimbadSearcher.cpp:130
+msgid "Querying"
+msgstr ""
+
+#: src/core/SimbadSearcher.cpp:132
+msgid "Error"
+msgstr ""
+
+#: src/core/SimbadSearcher.cpp:134
+msgid "Not found"
+msgstr ""
+
+#: src/core/SimbadSearcher.cpp:134
+msgid "Found"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:346
 msgid "Select screenshot directory"
 msgstr "スクリーンショットを保存するディレクトリを選択"
 
-#: src/gui/ConfigurationDialog.cpp:489
+#: src/gui/ConfigurationDialog.cpp:523
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "起動時の視野: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:497
+#: src/gui/ConfigurationDialog.cpp:531
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "起動時の方位: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:536
+#: src/gui/ConfigurationDialog.cpp:570
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:540 src/gui/ViewDialog.cpp:393
+#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "連絡先"
 
-#: src/gui/ConfigurationDialog.cpp:618
+#: src/gui/ConfigurationDialog.cpp:652
 msgid "Author"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:622
+#: src/gui/ConfigurationDialog.cpp:656
 msgid "License"
 msgstr "ライセンス"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:686
 msgid "Running script: "
 msgstr "実行中のスクリプト: "
 
-#: src/gui/ConfigurationDialog.cpp:659
+#: src/gui/ConfigurationDialog.cpp:693
 msgid "Running script: [none]"
 msgstr "実行中のスクリプト: [なし]"
 
-#: src/gui/ConfigurationDialog.cpp:729
+#: src/gui/ConfigurationDialog.cpp:763
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -354,16 +403,16 @@ msgstr ""
 "新しいスターカタログのダウンロードが終了しました！\n"
 "表示するには Stellarium を再起動してください。"
 
-#: src/gui/ConfigurationDialog.cpp:733
+#: src/gui/ConfigurationDialog.cpp:767
 msgid "All available star catalogs have been installed."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:738
+#: src/gui/ConfigurationDialog.cpp:772
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "カタログの取得 %1 / %2"
 
-#: src/gui/ConfigurationDialog.cpp:745
+#: src/gui/ConfigurationDialog.cpp:779
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -372,7 +421,7 @@ msgstr ""
 "ダウンロード中 %1...\n"
 "(このウィンドウを閉じても構いません)"
 
-#: src/gui/ConfigurationDialog.cpp:752
+#: src/gui/ConfigurationDialog.cpp:786
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -383,7 +432,7 @@ msgstr ""
 "星の数: %2 Million\n"
 "等級: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:795 src/gui/ConfigurationDialog.cpp:831
+#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -392,11 +441,11 @@ msgstr ""
 "ダウンロード中にエラーが発生しました %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:883
+#: src/gui/ConfigurationDialog.cpp:917
 msgid "Verifying file integrity..."
 msgstr "ファイルの整合性を確認しています..."
 
-#: src/gui/ConfigurationDialog.cpp:887
+#: src/gui/ConfigurationDialog.cpp:921
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -434,7 +483,7 @@ msgstr "右クリック"
 msgid "CTRL + Left click"
 msgstr "CTRL + 左クリック"
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:168
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:173
 msgid "Movement and Selection"
 msgstr "動きと選択"
 
@@ -458,15 +507,15 @@ msgstr "選択解除"
 msgid "When a Script is Running"
 msgstr "スクリプトの実行中に"
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:147
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:148
 msgid "Slow down the script execution rate"
 msgstr "スクリプトの実行レートを遅める"
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:148
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:149
 msgid "Speed up the script execution rate"
 msgstr "スクリプトのギロチンレートを早める"
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:149
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:150
 msgid "Set the normal script execution rate"
 msgstr "スクリプトのギロチンレートにする"
 
@@ -541,8 +590,8 @@ msgstr ""
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forums} - Stellarium に関する議論を他のユーザと行ないます。"
 
-#: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:337
-#: src/gui/HelpDialog.cpp:339 src/gui/StelGui.cpp:175
+#: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:341
+#: src/gui/HelpDialog.cpp:343 src/gui/StelGui.cpp:180
 msgid "Miscellaneous"
 msgstr "その他"
 
@@ -560,28 +609,39 @@ msgstr "プロジェクトコーディネーターと開発リーダー: %1"
 msgid "Doc author/developer: %1"
 msgstr "ドキュメント作者/開発者: %1"
 
-#: src/gui/HelpDialog.cpp:301
-#, qt-format
-msgid "Graphic/other designer: %1"
-msgstr "グラフィック/その他のデザイナ: %1"
-
-#: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
-#: src/gui/HelpDialog.cpp:304 src/gui/HelpDialog.cpp:305
-#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:309
-#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
+#: src/gui/HelpDialog.cpp:303 src/gui/HelpDialog.cpp:304
+#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "Developer: %1"
 msgstr "開発者: %1"
 
-#: src/gui/HelpDialog.cpp:307 src/gui/HelpDialog.cpp:308
-#, qt-format
-msgid "OSX Developer: %1"
-msgstr "OSX 開発者: %1"
-
-#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:307
 #, qt-format
 msgid "Tester: %1"
 msgstr ""
+
+#: src/gui/HelpDialog.cpp:308
+msgid "Past Developers"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:309
+msgid ""
+"Several people have made significant contributions, but are no longer "
+"active. Their work has made a big difference to the project:"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:310
+#, qt-format
+msgid "Graphic/other designer: %1"
+msgstr "グラフィック/その他のデザイナ: %1"
+
+#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#, qt-format
+msgid "OSX Developer: %1"
+msgstr "OSX 開発者: %1"
 
 #: src/gui/StelGui.cpp:102
 msgid "Display Options"
@@ -607,261 +667,281 @@ msgstr "星座名"
 msgid "Constellation boundaries"
 msgstr "星座の境界線"
 
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1121
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Azimuthal grid"
 msgstr "方位角の表示"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1119
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial grid"
 msgstr "赤経/赤緯"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1120
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equatorial J2000 grid"
 msgstr "赤経/赤緯 (J2000)"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1122
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1158
+msgid "Ecliptic J2000 grid"
+msgstr ""
+
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Galactic grid"
 msgstr "銀河角"
 
-#: src/gui/StelGui.cpp:112
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
 msgstr ""
 
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1126
+#: src/gui/StelGui.cpp:114
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
 msgid "Ecliptic line"
 msgstr "黄道線"
 
-#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1123
+#: src/gui/StelGui.cpp:115
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Equator line"
 msgstr "天の赤道"
 
-#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1124
+#: src/gui/StelGui.cpp:116
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Meridian line"
 msgstr "子午線"
 
-#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1125
+#: src/gui/StelGui.cpp:117
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Horizon line"
 msgstr "地平線"
 
-#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1128
+#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Cardinal points"
 msgstr "方位"
 
-#: src/gui/StelGui.cpp:119
+#: src/gui/StelGui.cpp:120
 msgid "Ground"
 msgstr "地表"
 
-#: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1099
+#: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1130
 msgid "Atmosphere"
 msgstr "大気"
 
-#: src/gui/StelGui.cpp:121
+#: src/gui/StelGui.cpp:122
 msgid "Fog"
 msgstr "もや"
 
-#: src/gui/StelGui.cpp:123 src/ui_viewDialog.h:1108
+#: src/gui/StelGui.cpp:124 src/ui_viewDialog.h:1139
 msgid "Nebulas"
 msgstr "星雲"
 
-#: src/gui/StelGui.cpp:124
+#: src/gui/StelGui.cpp:125
 msgid "Nebulas background images"
 msgstr "星雲の背景"
 
-#: src/gui/StelGui.cpp:125 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
+#: src/gui/StelGui.cpp:126 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Stars"
 msgstr "恒星"
 
-#: src/gui/StelGui.cpp:126
+#: src/gui/StelGui.cpp:127
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Planet labels"
 msgstr ""
 
-#: src/gui/StelGui.cpp:127
+#: src/gui/StelGui.cpp:128
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:301
 msgid "Planet orbits"
 msgstr "惑星軌道"
 
-#: src/gui/StelGui.cpp:128
+#: src/gui/StelGui.cpp:129
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Planet trails"
 msgstr "惑星の足跡"
 
-#: src/gui/StelGui.cpp:130
+#: src/gui/StelGui.cpp:131
 msgid "Night mode"
 msgstr "夜間照明"
 
-#: src/gui/StelGui.cpp:131
+#: src/gui/StelGui.cpp:132
 msgid "Full-screen mode"
 msgstr "全画面表示"
 
-#: src/gui/StelGui.cpp:132
+#: src/gui/StelGui.cpp:133
 msgid "Flip scene horizontally"
 msgstr "左右の切り替え"
 
-#: src/gui/StelGui.cpp:133
+#: src/gui/StelGui.cpp:134
 msgid "Flip scene vertically"
 msgstr "上下の切り替え"
 
-#: src/gui/StelGui.cpp:135
+#: src/gui/StelGui.cpp:136
 msgid "Windows"
 msgstr "ウィンドウ"
 
-#: src/gui/StelGui.cpp:136
+#: src/gui/StelGui.cpp:137
 msgid "Help window"
 msgstr "ヘルプ画面"
 
-#: src/gui/StelGui.cpp:137
+#: src/gui/StelGui.cpp:138
 msgid "Configuration window"
 msgstr "設定画面"
 
-#: src/gui/StelGui.cpp:138
+#: src/gui/StelGui.cpp:139
 msgid "Search window"
 msgstr "検索画面"
 
-#: src/gui/StelGui.cpp:139
+#: src/gui/StelGui.cpp:140
 msgid "Sky and viewing options window"
 msgstr "空と見た目の設定"
 
-#: src/gui/StelGui.cpp:140
+#: src/gui/StelGui.cpp:141
 msgid "Date/time window"
 msgstr "日付/時刻"
 
-#: src/gui/StelGui.cpp:141
+#: src/gui/StelGui.cpp:142
 msgid "Location window"
 msgstr "現在位置"
 
-#: src/gui/StelGui.cpp:143
+#: src/gui/StelGui.cpp:144
 msgid "Script console window"
 msgstr "スクリプトコンソール画面"
 
-#: src/gui/StelGui.cpp:146 src/ui_dateTimeDialogGui.h:294
+#: src/gui/StelGui.cpp:147 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Date and Time"
 msgstr "日付と時刻"
 
-#: src/gui/StelGui.cpp:150
+#: src/gui/StelGui.cpp:151
 msgid "Decrease time speed"
 msgstr "時間を戻す"
 
-#: src/gui/StelGui.cpp:151
+#: src/gui/StelGui.cpp:152
 msgid "Increase time speed"
 msgstr "時間を進める"
 
-#: src/gui/StelGui.cpp:152
+#: src/gui/StelGui.cpp:153
 msgid "Set normal time rate"
 msgstr "標準の時間の進みにする"
 
-#: src/gui/StelGui.cpp:153
+#: src/gui/StelGui.cpp:154
 msgid "Decrease time speed (a little)"
 msgstr "時間を戻す (少し)"
 
-#: src/gui/StelGui.cpp:154
+#: src/gui/StelGui.cpp:155
 msgid "Increase time speed (a little)"
 msgstr "時間を進める (少し)"
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:156
 msgid "Set time rate to zero"
 msgstr "時間の進みを止める"
 
-#: src/gui/StelGui.cpp:156
+#: src/gui/StelGui.cpp:157
 msgid "Set time to now"
 msgstr "現在時刻に設定"
 
-#: src/gui/StelGui.cpp:157
+#: src/gui/StelGui.cpp:158
 msgid "Add 1 solar hour"
 msgstr "太陽時で1時間進む"
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:159
 msgid "Subtract 1 solar hour"
 msgstr "太陽時で一時間戻る"
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:160
 msgid "Add 1 solar day"
 msgstr "太陽時で一日進む"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:161
 msgid "Subtract 1 solar day"
 msgstr "太陽時で一日戻る"
 
-#: src/gui/StelGui.cpp:161
+#: src/gui/StelGui.cpp:162
 msgid "Add 1 solar week"
 msgstr "太陽時で一週間進む"
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:163
 msgid "Subtract 1 solar week"
 msgstr "太陽時で一週間戻る"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:164
 msgid "Add 1 sidereal day"
 msgstr "恒星時で一日進む"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:165
 msgid "Subtract 1 sidereal day"
 msgstr "恒星時で一日戻る"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:166
 msgid "Add 1 sidereal week"
 msgstr "恒星時で一週間進む"
 
-#: src/gui/StelGui.cpp:166
+#: src/gui/StelGui.cpp:167
 msgid "Subtract 1 sidereal week"
 msgstr "恒星時で一週間戻る"
 
+#: src/gui/StelGui.cpp:168
+msgid "Add 1 sidereal month"
+msgstr ""
+
 #: src/gui/StelGui.cpp:169
+msgid "Subtract 1 sidereal month"
+msgstr ""
+
+#: src/gui/StelGui.cpp:170
+msgid "Add 1 sidereal year"
+msgstr ""
+
+#: src/gui/StelGui.cpp:171
+msgid "Subtract 1 sidereal year"
+msgstr ""
+
+#: src/gui/StelGui.cpp:174
 msgid "Center on selected object"
 msgstr "対象を画面中心へ"
 
-#: src/gui/StelGui.cpp:170
+#: src/gui/StelGui.cpp:175
 msgid "Track object"
 msgstr "対象を追尾"
 
-#: src/gui/StelGui.cpp:171
+#: src/gui/StelGui.cpp:176
 msgid "Zoom in on selected object"
 msgstr "対象にズームイン"
 
-#: src/gui/StelGui.cpp:172
+#: src/gui/StelGui.cpp:177
 msgid "Zoom out"
 msgstr "ズームアウト"
 
-#: src/gui/StelGui.cpp:173
+#: src/gui/StelGui.cpp:178
 msgid "Set home planet to selected planet"
 msgstr "選択した惑星を母星とする"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:181
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "赤道儀、経緯台"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:182
 msgid "Quit"
 msgstr "終了"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:183
 msgid "Save screenshot"
 msgstr "スクリーンショットを保存"
 
-#: src/gui/StelGui.cpp:179
+#: src/gui/StelGui.cpp:184
 msgid "Copy selected object information to clipboard"
 msgstr ""
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:186
 msgid "Auto hide horizontal button bar"
 msgstr "横メニューを自動で隠す"
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:187
 msgid "Auto hide vertical button bar"
 msgstr "縦メニューを自動で隠す"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:188
 msgid "Toggle visibility of GUI"
 msgstr "GUI 表示の切り替え"
 
@@ -870,27 +950,27 @@ msgstr "GUI 表示の切り替え"
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:454
+#: src/gui/ViewDialog.cpp:459
 msgid "No description"
 msgstr "説明がありません"
 
-#: src/gui/ViewDialog.cpp:567
+#: src/gui/ViewDialog.cpp:572
 msgid "No shooting stars"
 msgstr "流れ星を表示しない"
 
-#: src/gui/ViewDialog.cpp:570
+#: src/gui/ViewDialog.cpp:575
 msgid "Normal rate"
 msgstr "通常"
 
-#: src/gui/ViewDialog.cpp:573
+#: src/gui/ViewDialog.cpp:578
 msgid "Standard Perseids rate"
 msgstr "通常のペルセウス流星群"
 
-#: src/gui/ViewDialog.cpp:576
+#: src/gui/ViewDialog.cpp:581
 msgid "Exceptional Leonid rate"
 msgstr "しし座流星群の多いとき"
 
-#: src/gui/ViewDialog.cpp:579
+#: src/gui/ViewDialog.cpp:584
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "1966年のしし座流星群"
 
@@ -907,68 +987,68 @@ msgstr "Stellarium の背景を含む ZIP アーカイブを選択"
 msgid "ZIP archives"
 msgstr "ZIP アーカイブ"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:132
+#: src/gui/AddRemoveLandscapesDialog.cpp:127
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
 msgstr "背景 \"%1\" のインストールに成功しました。"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:133
-#: src/gui/AddRemoveLandscapesDialog.cpp:160
+#: src/gui/AddRemoveLandscapesDialog.cpp:128
+#: src/gui/AddRemoveLandscapesDialog.cpp:155
 msgid "Success"
 msgstr "成功しました"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:146
-#: src/gui/AddRemoveLandscapesDialog.cpp:216
-#: src/gui/AddRemoveLandscapesDialog.cpp:225
-#: src/gui/AddRemoveLandscapesDialog.cpp:233
+#: src/gui/AddRemoveLandscapesDialog.cpp:141
+#: src/gui/AddRemoveLandscapesDialog.cpp:211
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:228
 msgid "No landscape was installed."
 msgstr "背景はインストールされませんでした。"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:147
-#: src/gui/AddRemoveLandscapesDialog.cpp:171
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-#: src/gui/AddRemoveLandscapesDialog.cpp:226
-#: src/gui/AddRemoveLandscapesDialog.cpp:234
-#: src/gui/AddRemoveLandscapesDialog.cpp:244
+#: src/gui/AddRemoveLandscapesDialog.cpp:142
+#: src/gui/AddRemoveLandscapesDialog.cpp:166
+#: src/gui/AddRemoveLandscapesDialog.cpp:215
+#: src/gui/AddRemoveLandscapesDialog.cpp:221
+#: src/gui/AddRemoveLandscapesDialog.cpp:229
+#: src/gui/AddRemoveLandscapesDialog.cpp:239
 msgid "Error!"
 msgstr "エラー!"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:159
+#: src/gui/AddRemoveLandscapesDialog.cpp:154
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "背景 \"%1\" の削除に成功しました。"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:170
-#: src/gui/AddRemoveLandscapesDialog.cpp:240
+#: src/gui/AddRemoveLandscapesDialog.cpp:165
+#: src/gui/AddRemoveLandscapesDialog.cpp:235
 msgid "The selected landscape could not be (completely) removed."
 msgstr "選択された背景は (完全には) 削除できませんでした。"
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:193
+#: src/gui/AddRemoveLandscapesDialog.cpp:188
 #, qt-format
 msgid "Size on disk: %1 MiB"
 msgstr "ディスク上のサイズ: %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:219
+#: src/gui/AddRemoveLandscapesDialog.cpp:214
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr "Stellarium は %1 を読み書き用にオープンできません。"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:225
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
 msgstr "選択されたファイルは ZIP アーカイブでないか、Stellarium の背景が含まれていません。"
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:232
+#: src/gui/AddRemoveLandscapesDialog.cpp:227
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr "同じ名前またはID (%1) の背景がすでに存在します。"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:243
+#: src/gui/AddRemoveLandscapesDialog.cpp:238
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "以下のディレクトリを削除することで手動で削除できます: %1"
@@ -997,7 +1077,23 @@ msgstr ""
 msgid "starchart"
 msgstr ""
 
-#: src/main.cpp:333
+#: src/gui/SearchDialog.cpp:351
+msgid "Simbad Lookup Error"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:359
+msgid "Simbad Lookup"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:507
+msgid "University of Strasbourg (France)"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:508
+msgid "Harvard University (USA)"
+msgstr ""
+
+#: src/main.cpp:337
 msgid "This system does not support OpenGL."
 msgstr "このシステムは Open GL に対応していません."
 
@@ -2505,450 +2601,481 @@ msgstr "ログ"
 msgid "Refresh"
 msgstr "更新"
 
-#: src/ui_locationDialogGui.h:387
+#: src/ui_locationDialogGui.h:384
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:134
 msgid "Location"
 msgstr "観測場所"
 
-#: src/ui_locationDialogGui.h:391
+#: src/ui_locationDialogGui.h:388
 msgid "Current location information"
 msgstr "現在位置の情報"
 
-#: src/ui_locationDialogGui.h:392
+#: src/ui_locationDialogGui.h:389
 msgid "Use as default"
 msgstr "デフォルトとして利用する"
 
-#: src/ui_locationDialogGui.h:393 plugins/Oculars/src/ui_ocularDialog.h:876
+#: src/ui_locationDialogGui.h:390 plugins/Oculars/src/ui_ocularDialog.h:876
 #: plugins/Oculars/src/ui_ocularDialog.h:885
 #: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Delete"
 msgstr "削除"
 
-#: src/ui_locationDialogGui.h:394
+#: src/ui_locationDialogGui.h:391
 msgid "Add to list"
 msgstr "リストに追加する"
 
-#: src/ui_locationDialogGui.h:395
+#: src/ui_locationDialogGui.h:392
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:135
 msgid "Latitude:"
 msgstr "緯度:"
 
-#: src/ui_locationDialogGui.h:397 src/ui_locationDialogGui.h:401
+#: src/ui_locationDialogGui.h:394 src/ui_locationDialogGui.h:398
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr "10進法での度数、またはdms形式を使用して値を入れることができます。例 +1d 12m 8s"
 
-#: src/ui_locationDialogGui.h:399
+#: src/ui_locationDialogGui.h:396
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:138
 msgid "Longitude:"
 msgstr "経度:"
 
-#: src/ui_locationDialogGui.h:403
+#: src/ui_locationDialogGui.h:400
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Altitude:"
 msgstr "高度:"
 
-#: src/ui_locationDialogGui.h:405
+#: src/ui_locationDialogGui.h:402
 msgid "Enter the altitude in meter"
 msgstr "高度をメートル法で入力"
 
-#: src/ui_locationDialogGui.h:407
+#: src/ui_locationDialogGui.h:404
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:408
+#: src/ui_locationDialogGui.h:405
 msgid "Name/City:"
 msgstr "都市名:"
 
-#: src/ui_locationDialogGui.h:409
+#: src/ui_locationDialogGui.h:406
 msgid "Country:"
 msgstr "国:"
 
-#: src/ui_locationDialogGui.h:410
+#: src/ui_locationDialogGui.h:407
 msgid "Planet:"
 msgstr "惑星:"
 
-#: src/ui_searchDialogGui.h:464
+#: src/ui_searchDialogGui.h:504
 msgid "Find Object"
 msgstr "天体を検索"
 
-#: src/ui_searchDialogGui.h:465
+#: src/ui_searchDialogGui.h:505
 msgid "Find Object or Position"
 msgstr "物体それとも位置が探すまで"
 
-#: src/ui_searchDialogGui.h:471
+#: src/ui_searchDialogGui.h:511
 msgid "iota"
 msgstr "イオタ"
 
-#: src/ui_searchDialogGui.h:474
+#: src/ui_searchDialogGui.h:514
 msgid "alpha"
 msgstr "アルファ"
 
-#: src/ui_searchDialogGui.h:477
+#: src/ui_searchDialogGui.h:517
 msgid "beta"
 msgstr "ベータ"
 
-#: src/ui_searchDialogGui.h:480
+#: src/ui_searchDialogGui.h:520
 msgid "gamma"
 msgstr "ガンマ"
 
-#: src/ui_searchDialogGui.h:483
+#: src/ui_searchDialogGui.h:523
 msgid "delta"
 msgstr "デルタ"
 
-#: src/ui_searchDialogGui.h:486
+#: src/ui_searchDialogGui.h:526
 msgid "epsilon"
 msgstr "エプシロン"
 
-#: src/ui_searchDialogGui.h:489
+#: src/ui_searchDialogGui.h:529
 msgid "zeta"
 msgstr "ゼータ"
 
-#: src/ui_searchDialogGui.h:492
+#: src/ui_searchDialogGui.h:532
 msgid "eta"
 msgstr "エータ"
 
-#: src/ui_searchDialogGui.h:495
+#: src/ui_searchDialogGui.h:535
 msgid "theta"
 msgstr "シータ"
 
-#: src/ui_searchDialogGui.h:498
+#: src/ui_searchDialogGui.h:538
 msgid "kappa"
 msgstr "カッパ"
 
-#: src/ui_searchDialogGui.h:501
+#: src/ui_searchDialogGui.h:541
 msgid "lambda"
 msgstr "ラムダ"
 
-#: src/ui_searchDialogGui.h:504
+#: src/ui_searchDialogGui.h:544
 msgid "mu"
 msgstr "ミュー"
 
-#: src/ui_searchDialogGui.h:507
+#: src/ui_searchDialogGui.h:547
 msgid "nu"
 msgstr "ニュー"
 
-#: src/ui_searchDialogGui.h:510
+#: src/ui_searchDialogGui.h:550
 msgid "xi"
 msgstr "クサイ"
 
-#: src/ui_searchDialogGui.h:513
+#: src/ui_searchDialogGui.h:553
 msgid "omicron"
 msgstr "オミクロン"
 
-#: src/ui_searchDialogGui.h:516
+#: src/ui_searchDialogGui.h:556
 msgid "pi"
 msgstr "パイ"
 
-#: src/ui_searchDialogGui.h:519
+#: src/ui_searchDialogGui.h:559
 msgid "rho"
 msgstr "ロー"
 
-#: src/ui_searchDialogGui.h:522
+#: src/ui_searchDialogGui.h:562
 msgid "sigma"
 msgstr "シグマ"
 
-#: src/ui_searchDialogGui.h:525
+#: src/ui_searchDialogGui.h:565
 msgid "tau"
 msgstr "タウ"
 
-#: src/ui_searchDialogGui.h:528
+#: src/ui_searchDialogGui.h:568
 msgid "upsilon"
 msgstr "ウプシロン"
 
-#: src/ui_searchDialogGui.h:531
+#: src/ui_searchDialogGui.h:571
 msgid "phi"
 msgstr "ファイ"
 
-#: src/ui_searchDialogGui.h:534
+#: src/ui_searchDialogGui.h:574
 msgid "chi"
 msgstr "カイ"
 
-#: src/ui_searchDialogGui.h:537
+#: src/ui_searchDialogGui.h:577
 msgid "psi"
 msgstr "プシー"
 
-#: src/ui_searchDialogGui.h:540
+#: src/ui_searchDialogGui.h:580
 msgid "omega"
 msgstr "オメガ"
 
-#: src/ui_searchDialogGui.h:542
+#: src/ui_searchDialogGui.h:582
 msgid "Greek letters for Bayer designations"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:543
+#: src/ui_searchDialogGui.h:583
 msgid "Object"
 msgstr "天体"
 
-#: src/ui_searchDialogGui.h:544
+#: src/ui_searchDialogGui.h:584
 msgid "RA/Dec (J2000):"
 msgstr "赤経/赤緯 (J2000):"
 
-#: src/ui_searchDialogGui.h:545
+#: src/ui_searchDialogGui.h:585
 msgid "Position"
 msgstr "位置"
 
-#: src/ui_searchDialogGui.h:546
-msgid "Search also in the SIMBAD on-line astronomical database"
+#: src/ui_searchDialogGui.h:586
+msgid "On-line astronomical database SIMBAD"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:547 src/ui_viewDialog.h:1137
-#: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
-#: src/ui_configurationDialog.h:855 src/ui_configurationDialog.h:866
+#: src/ui_searchDialogGui.h:587
+msgid "Extend search with SIMBAD"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:588
+msgid "Server:"
+msgstr ""
+
+#: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1184
+#: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
+#: src/ui_configurationDialog.h:891 src/ui_configurationDialog.h:902
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "オプション"
 
-#: src/ui_viewDialog.h:1070
+#: src/ui_viewDialog.h:1101
 msgid "View"
 msgstr "表示"
 
-#: src/ui_viewDialog.h:1076
+#: src/ui_viewDialog.h:1107
 msgid "Sky"
 msgstr "天空"
 
-#: src/ui_viewDialog.h:1078
+#: src/ui_viewDialog.h:1109
 msgid "Markings"
 msgstr "表示方法"
 
-#: src/ui_viewDialog.h:1080
+#: src/ui_viewDialog.h:1111
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Landscape"
 msgstr "背景"
 
-#: src/ui_viewDialog.h:1082
+#: src/ui_viewDialog.h:1113
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:217
 msgid "Starlore"
 msgstr "星の文化"
 
-#: src/ui_viewDialog.h:1086
+#: src/ui_viewDialog.h:1117
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:247
 msgid "Absolute scale:"
 msgstr "絶対等級:"
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1118
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Relative scale:"
 msgstr "相対値:"
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1119
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Twinkle:"
 msgstr "またたき:"
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:1121
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "非常に明るい天体がある場合、暗い天体を見えにくくする"
 
-#: src/ui_viewDialog.h:1092
+#: src/ui_viewDialog.h:1123
 msgid "Dynamic eye adaptation"
 msgstr "明暗の再現"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1124
 msgid "Planets and satellites"
 msgstr "惑星と衛星"
 
-#: src/ui_viewDialog.h:1094
+#: src/ui_viewDialog.h:1125
 msgid "Show planets"
 msgstr "惑星を表示"
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1126
 msgid "Show planet markers"
 msgstr "惑星マーカーを表示"
 
-#: src/ui_viewDialog.h:1096
+#: src/ui_viewDialog.h:1127
 msgid "Show planet orbits"
 msgstr "惑星の軌道を表示"
 
-#: src/ui_viewDialog.h:1097
+#: src/ui_viewDialog.h:1128
 msgid "Simulate light speed"
 msgstr "光の到達時間の予測"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1129
 msgid "Scale Moon"
 msgstr "月を拡大"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1131
 msgid "Show atmosphere"
 msgstr "大気を表示"
 
-#: src/ui_viewDialog.h:1101
+#: src/ui_viewDialog.h:1132
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Light pollution:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1103
+#: src/ui_viewDialog.h:1134
 msgid "pressure, temperature, extinction coefficient"
 msgstr "圧力, 温度, 吸光度"
 
-#: src/ui_viewDialog.h:1105
+#: src/ui_viewDialog.h:1136
 msgid "Refraction/Extinction settings..."
 msgstr "屈折/吸光の設定..."
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1137
 msgid "Labels and Markers"
 msgstr "名前とマーカー"
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1140
 msgid "Planets"
 msgstr "惑星"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1141
 msgid "Shooting Stars"
 msgstr "流れ星"
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1142
 msgid "Hourly zenith rate:"
 msgstr "1時間あたりの流星の数:"
 
-#: src/ui_viewDialog.h:1112
+#: src/ui_viewDialog.h:1143
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:1113
+#: src/ui_viewDialog.h:1144
 msgid "10"
 msgstr "10"
 
-#: src/ui_viewDialog.h:1114
+#: src/ui_viewDialog.h:1145
 msgid "80"
 msgstr "80"
 
-#: src/ui_viewDialog.h:1115
+#: src/ui_viewDialog.h:1146
 msgid "10000"
 msgstr "10000"
 
-#: src/ui_viewDialog.h:1116
+#: src/ui_viewDialog.h:1147
 msgid "144000"
 msgstr "144000"
 
-#: src/ui_viewDialog.h:1118
-msgid "Celestial Sphere"
-msgstr "天球"
-
-#: src/ui_viewDialog.h:1127
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:359
-msgid "Galactic plane line"
-msgstr ""
-
-#: src/ui_viewDialog.h:1129
+#: src/ui_viewDialog.h:1149
 msgid "Constellations"
 msgstr "星座"
 
-#: src/ui_viewDialog.h:1130
+#: src/ui_viewDialog.h:1150
 msgid "Show lines"
 msgstr "星座線の表示"
 
-#: src/ui_viewDialog.h:1131
+#: src/ui_viewDialog.h:1151
 msgid "Show labels"
 msgstr "名前の表示"
 
-#: src/ui_viewDialog.h:1132
+#: src/ui_viewDialog.h:1152
 msgid "Show boundaries"
 msgstr "星座の境界線"
 
-#: src/ui_viewDialog.h:1133
+#: src/ui_viewDialog.h:1153
 msgid "Show art"
 msgstr "星座絵の表示"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1134
+#: src/ui_viewDialog.h:1154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Art brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1135
+#: src/ui_viewDialog.h:1155
+msgid "Celestial Sphere"
+msgstr "天球"
+
+#: src/ui_viewDialog.h:1162
+msgid "Show equator line"
+msgstr ""
+
+#: src/ui_viewDialog.h:1166
+msgid "Show meridian line"
+msgstr ""
+
+#: src/ui_viewDialog.h:1170
+msgid "Show horizon line"
+msgstr ""
+
+#: src/ui_viewDialog.h:1174
+msgid "Show ecliptic line"
+msgstr ""
+
+#: src/ui_viewDialog.h:1178
+msgid "Show Galactic plane line"
+msgstr ""
+
+#: src/ui_viewDialog.h:1182
 msgid "Projection"
 msgstr "投影法"
 
-#: src/ui_viewDialog.h:1136
+#: src/ui_viewDialog.h:1183
 msgid "Add/remove landscapes..."
 msgstr "背景の追加/削除..."
 
-#: src/ui_viewDialog.h:1138
+#: src/ui_viewDialog.h:1185
 msgid "Show ground"
 msgstr "地表を表示"
 
-#: src/ui_viewDialog.h:1139
+#: src/ui_viewDialog.h:1186
 msgid "Show fog"
 msgstr "霧を表示"
 
-#: src/ui_viewDialog.h:1140
+#: src/ui_viewDialog.h:1187
 msgid "Use associated planet and position"
 msgstr "関連する惑星と位置を使う"
 
-#: src/ui_viewDialog.h:1141
+#: src/ui_viewDialog.h:1188
 msgid "Use this landscape as default"
 msgstr "この場所をデフォルトに設定"
 
-#: src/ui_viewDialog.h:1143
+#: src/ui_viewDialog.h:1190
 msgid "Use this sky culture as default"
 msgstr "この星の文化をデフォルトに設定"
 
-#: src/ui_viewDialog.h:1145
+#: src/ui_viewDialog.h:1192
 msgid "Visible"
 msgstr "表示"
 
-#: src/ui_configurationDialog.h:753
+#: src/ui_configurationDialog.h:785
 msgid "Configuration"
 msgstr "環境設定"
 
-#: src/ui_configurationDialog.h:755
+#: src/ui_configurationDialog.h:787
 msgid "Program language"
 msgstr "プログラムの言語"
 
-#: src/ui_configurationDialog.h:756
+#: src/ui_configurationDialog.h:788 src/ui_CustomInfoDialog.h:192
 msgid "Selected object information"
 msgstr "選択された天体の情報"
 
-#: src/ui_configurationDialog.h:758
+#: src/ui_configurationDialog.h:790
 msgid "Display all information available"
 msgstr "全ての情報を表示する"
 
-#: src/ui_configurationDialog.h:760
+#: src/ui_configurationDialog.h:792
 msgid "All available"
 msgstr "可能なものすべて"
 
-#: src/ui_configurationDialog.h:762
+#: src/ui_configurationDialog.h:794
 msgid "Display less information"
 msgstr "一部の情報を表示"
 
-#: src/ui_configurationDialog.h:764
+#: src/ui_configurationDialog.h:796
 msgid "Short"
 msgstr "短い"
 
-#: src/ui_configurationDialog.h:766
+#: src/ui_configurationDialog.h:798
+msgid "Display user settings information"
+msgstr ""
+
+#: src/ui_configurationDialog.h:800
+msgid "Customized"
+msgstr ""
+
+#: src/ui_configurationDialog.h:802
 msgid "Display no information"
 msgstr "情報を表示しない"
 
-#: src/ui_configurationDialog.h:768
+#: src/ui_configurationDialog.h:804
 msgid "None"
 msgstr "なし"
 
-#: src/ui_configurationDialog.h:769
+#: src/ui_configurationDialog.h:805
 msgid "Default options"
 msgstr "デフォルトオプション"
 
-#: src/ui_configurationDialog.h:771
+#: src/ui_configurationDialog.h:807
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr "今回変更した設定を保存して、次回の Stellarium 起動時に同じ設定にする"
 
-#: src/ui_configurationDialog.h:773
+#: src/ui_configurationDialog.h:809
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 msgid "Save settings"
 msgstr "設定を保存"
 
-#: src/ui_configurationDialog.h:775
+#: src/ui_configurationDialog.h:811
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Stellarium のデフォルトの設定に戻す"
 
-#: src/ui_configurationDialog.h:777
+#: src/ui_configurationDialog.h:813
 msgid "Restore defaults"
 msgstr "デフォルトに戻す"
 
-#: src/ui_configurationDialog.h:778
+#: src/ui_configurationDialog.h:814
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -2956,216 +3083,216 @@ msgid ""
 msgstr ""
 "デフォルト設定に戻すと Stellarium の再起動が必要になります。次に起動した時のために、現在の視野や方位を含むすべてのオプションを保存します。"
 
-#: src/ui_configurationDialog.h:780
+#: src/ui_configurationDialog.h:816
 msgid "The width of your view when Stellarium starts"
 msgstr "Stellarium 起動時の視界の幅"
 
-#: src/ui_configurationDialog.h:783
+#: src/ui_configurationDialog.h:819
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Stellarium 起動時の視点の方向"
 
-#: src/ui_configurationDialog.h:785
+#: src/ui_configurationDialog.h:821
 msgid "Control"
 msgstr "Control"
 
-#: src/ui_configurationDialog.h:787
+#: src/ui_configurationDialog.h:823
 msgid "Allow keyboard to pan and zoom"
 msgstr "矢印キーで視点の移動とズーム"
 
-#: src/ui_configurationDialog.h:789
+#: src/ui_configurationDialog.h:825
 msgid "Enable keyboard navigation"
 msgstr "キーボード操作を有効にする"
 
-#: src/ui_configurationDialog.h:791
+#: src/ui_configurationDialog.h:827
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "マウスのドラッグで視点の移動、ホイールでズーム"
 
-#: src/ui_configurationDialog.h:793
+#: src/ui_configurationDialog.h:829
 msgid "Enable mouse navigation"
 msgstr "マウス操作を有効にする"
 
-#: src/ui_configurationDialog.h:794
+#: src/ui_configurationDialog.h:830
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Startup date and time"
 msgstr "起動時の日付と時刻"
 
-#: src/ui_configurationDialog.h:796
+#: src/ui_configurationDialog.h:832
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Stellarium をシステム時計の日付と時刻で起動する"
 
-#: src/ui_configurationDialog.h:798
+#: src/ui_configurationDialog.h:834
 msgid "System date and time"
 msgstr "システムの日付と時刻"
 
-#: src/ui_configurationDialog.h:800
+#: src/ui_configurationDialog.h:836
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "次の起動からこの時間で固定して表示を開始する。"
 
-#: src/ui_configurationDialog.h:802
+#: src/ui_configurationDialog.h:838
 msgid "System date at:"
 msgstr "システムの日付:"
 
-#: src/ui_configurationDialog.h:804
+#: src/ui_configurationDialog.h:840
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "起動時の日付と時刻を固定する"
 
-#: src/ui_configurationDialog.h:806
+#: src/ui_configurationDialog.h:842
 msgid "Other:"
 msgstr "その他:"
 
-#: src/ui_configurationDialog.h:807
+#: src/ui_configurationDialog.h:843
 msgid "use current"
 msgstr "現在の設定を維持"
 
-#: src/ui_configurationDialog.h:808
+#: src/ui_configurationDialog.h:844
 msgid "Other"
 msgstr "その他"
 
-#: src/ui_configurationDialog.h:810
+#: src/ui_configurationDialog.h:846
 msgid "Hides the mouse cursor when inactive"
 msgstr "マウスカーソルを時間と共に消す"
 
-#: src/ui_configurationDialog.h:812
+#: src/ui_configurationDialog.h:848
 msgid "Mouse cursor timeout (seconds):"
 msgstr "カーソルを消すまでの時間"
 
-#: src/ui_configurationDialog.h:814
+#: src/ui_configurationDialog.h:850
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "上下左右切り替えボタンを下のメニューへ表示する"
 
-#: src/ui_configurationDialog.h:816
+#: src/ui_configurationDialog.h:852
 msgid "Show flip buttons"
 msgstr "上下左右切り替えボタン表示"
 
-#: src/ui_configurationDialog.h:817
+#: src/ui_configurationDialog.h:853
 msgid "Planetarium options"
 msgstr "プラネタリウム設定"
 
-#: src/ui_configurationDialog.h:819
+#: src/ui_configurationDialog.h:855
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr "球面へ投影する時に球面効果を出す。"
 
-#: src/ui_configurationDialog.h:821
+#: src/ui_configurationDialog.h:857
 msgid "Spheric mirror distortion"
 msgstr "球面鏡効果"
 
-#: src/ui_configurationDialog.h:823
+#: src/ui_configurationDialog.h:859
 msgid "Align labels with the horizon"
 msgstr "表示を地平線と平行にする"
 
-#: src/ui_configurationDialog.h:825
+#: src/ui_configurationDialog.h:861
 msgid "Gravity labels"
 msgstr "重力表示"
 
-#: src/ui_configurationDialog.h:827
+#: src/ui_configurationDialog.h:863
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr "\"自動ズームアウト\"ボタンを押すと、起動時の視野と方位へ戻ります"
 
-#: src/ui_configurationDialog.h:829
+#: src/ui_configurationDialog.h:865
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "自動視点、元の方位に戻す"
 
-#: src/ui_configurationDialog.h:831
+#: src/ui_configurationDialog.h:867
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "望遠鏡などで覗いたときのように円形の縁を表示する"
 
-#: src/ui_configurationDialog.h:833
+#: src/ui_configurationDialog.h:869
 msgid "Disc viewport"
 msgstr "表示領域を円形に"
 
-#: src/ui_configurationDialog.h:835
+#: src/ui_configurationDialog.h:871
 msgid "Hide other constellations when you click one"
 msgstr "星座の選択時に他を隠す"
 
-#: src/ui_configurationDialog.h:837
+#: src/ui_configurationDialog.h:873
 msgid "Select single constellation"
 msgstr "一つの星座を選択"
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:874
 msgid "Screenshots"
 msgstr "スクリーンショット"
 
-#: src/ui_configurationDialog.h:839
+#: src/ui_configurationDialog.h:875
 msgid "Screenshot Directory"
 msgstr "保存先"
 
-#: src/ui_configurationDialog.h:841
+#: src/ui_configurationDialog.h:877
 msgid "Invert colors"
 msgstr "色の反転"
 
-#: src/ui_configurationDialog.h:842
+#: src/ui_configurationDialog.h:878
 msgid "Star catalog updates"
 msgstr "スターカタログのアップデート"
 
-#: src/ui_configurationDialog.h:844
+#: src/ui_configurationDialog.h:880
 msgid "Click here to start downloading"
 msgstr "クリックするとダウンロードを開始します"
 
-#: src/ui_configurationDialog.h:846
+#: src/ui_configurationDialog.h:882
 msgid "Download this file to view even more stars"
 msgstr "多くの星を表示するためこのファイルをダウンロード"
 
-#: src/ui_configurationDialog.h:848
+#: src/ui_configurationDialog.h:884
 msgid "Restart the download"
 msgstr "ダウンロードを再開"
 
-#: src/ui_configurationDialog.h:850
+#: src/ui_configurationDialog.h:886
 msgid "Retry"
 msgstr "再試行"
 
-#: src/ui_configurationDialog.h:852
+#: src/ui_configurationDialog.h:888
 msgid "Stop the download. You can always restart it later"
 msgstr "ダウンロードを停止します。後でいつでも再開できます。"
 
-#: src/ui_configurationDialog.h:854
+#: src/ui_configurationDialog.h:890
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: src/ui_configurationDialog.h:857
+#: src/ui_configurationDialog.h:893
 msgid "Close window when script runs"
 msgstr "スクリプトの実行時にウィンドウを閉じる"
 
-#: src/ui_configurationDialog.h:859
+#: src/ui_configurationDialog.h:895
 msgid "Run the selected script"
 msgstr "選択したスクリプトを実行"
 
-#: src/ui_configurationDialog.h:863
+#: src/ui_configurationDialog.h:899
 msgid "Stop a running script"
 msgstr "実行中のスクリプトを停止"
 
-#: src/ui_configurationDialog.h:867
+#: src/ui_configurationDialog.h:903
 msgid "Load at startup"
 msgstr "起動時に実行"
 
-#: src/ui_configurationDialog.h:868
+#: src/ui_configurationDialog.h:904
 msgid "configure"
 msgstr "設定"
 
-#: src/ui_configurationDialog.h:873
+#: src/ui_configurationDialog.h:909
 msgid "Main"
 msgstr "メイン"
 
-#: src/ui_configurationDialog.h:875
+#: src/ui_configurationDialog.h:911
 msgid "Navigation"
 msgstr "ナビゲーション"
 
-#: src/ui_configurationDialog.h:877
+#: src/ui_configurationDialog.h:913
 msgid "Tools"
 msgstr "ツール"
 
-#: src/ui_configurationDialog.h:879
+#: src/ui_configurationDialog.h:915
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:441
 msgid "Scripts"
 msgstr "スクリプト"
 
-#: src/ui_configurationDialog.h:881
+#: src/ui_configurationDialog.h:917
 msgid "Plugins"
 msgstr "プラグイン"
 
@@ -3232,6 +3359,107 @@ msgstr "吸光度"
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:194
+msgid "Custom Info Settings"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:196
+msgid "Display info about an object's name"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:198
+msgid "An object's name"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:200
+msgid "Display  info about a catalog numbers"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:202
+msgid "Catalog numbers"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:204
+msgid "Display  info about a visual magnitude"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:206
+msgid "Visual magnitude"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:208
+msgid "Display  info about an absolute magnitude"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:210
+msgid "Absolute magnitude"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:212
+msgid "Display the equatorial position (J2000 ref)"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:214
+msgid "The equatorial coordinates (J2000 ref)"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:216
+msgid "Display the equatorial position (of date)"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:218
+msgid "The equatorial coordinates (of date)"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:220
+msgid "Display the altitude and azimuth position"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:222
+msgid "The alt-azimuthal coordinates"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:224
+msgid "Display the hour angle + DE (of date)"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:226
+msgid "The hour angle"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:228
+msgid "Display info about an object's distance"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:230
+msgid "Object's distance"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:232
+msgid "Display info about an object's size"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:234
+msgid "Object's size"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:236 src/ui_CustomInfoDialog.h:240
+#: src/ui_CustomInfoDialog.h:244
+msgid "Display a derived class-specific extra fields"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:238
+msgid "Additional info (Extra 1)"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:242
+msgid "Additional info (Extra 2)"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:246
+msgid "Additional info (Extra 3)"
 msgstr ""
 
 #: src/ui_scriptConsole.h:341
@@ -3486,15 +3714,15 @@ msgstr ""
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1736
+#: plugins/Oculars/src/Oculars.cpp:1735
 msgid "&Telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1737
+#: plugins/Oculars/src/Oculars.cpp:1736
 msgid "&Previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1738
+#: plugins/Oculars/src/Oculars.cpp:1737
 msgid "&Next telescope"
 msgstr ""
 
@@ -3726,68 +3954,68 @@ msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:228
-#: plugins/Satellites/src/Satellite.cpp:232
+#: plugins/Satellites/src/Satellite.cpp:230
+#: plugins/Satellites/src/Satellite.cpp:234
 msgid "Catalog #"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:234
+#: plugins/Satellites/src/Satellite.cpp:236
 msgid "International Designator"
 msgstr ""
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:246
+#: plugins/Satellites/src/Satellite.cpp:248
 #, qt-format
 msgid "Range (km): %1"
 msgstr ""
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:249
+#: plugins/Satellites/src/Satellite.cpp:251
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr ""
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:252
+#: plugins/Satellites/src/Satellite.cpp:254
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr ""
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:255
+#: plugins/Satellites/src/Satellite.cpp:257
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr ""
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:269
+#: plugins/Satellites/src/Satellite.cpp:271
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr ""
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:277
+#: plugins/Satellites/src/Satellite.cpp:279
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:285
+#: plugins/Satellites/src/Satellite.cpp:287
 msgid "The satellite and the observer are in sunlight."
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:288
+#: plugins/Satellites/src/Satellite.cpp:290
 msgid "The satellite is visible."
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:291
+#: plugins/Satellites/src/Satellite.cpp:293
 msgid "The satellite is eclipsed."
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:294
+#: plugins/Satellites/src/Satellite.cpp:296
 msgid "The satellite is not visible"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:320
+#: plugins/Satellites/src/Satellite.cpp:322
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr ""
@@ -4913,6 +5141,10 @@ msgstr ""
 msgid "Nebula hints"
 msgstr ""
 
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:359
+msgid "Galactic plane line"
+msgstr ""
+
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:388
 msgid "Effects"
 msgstr ""
@@ -4978,15 +5210,15 @@ msgstr ""
 msgid "[no TUI node]"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
 msgstr "オン"
 
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
 msgid "Off"
 msgstr "オフ"
 
-#: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
+#: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
 msgid "error, unknown color part \"%1\""
 msgstr ""
@@ -5348,3 +5580,231 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "赤道座標"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "地平座標"
+
+#~ msgid "Equator Line"
+#~ msgstr "赤道線"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "黄道線"
+
+#~ msgid "Cardinal Points"
+#~ msgstr "方位"
+
+#~ msgid "Sky Language: "
+#~ msgstr "天体名の言語: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "星座の地域: "
+
+#~ msgid "Date & Time"
+#~ msgstr "日付と時刻"
+
+#~ msgid "Set Time "
+#~ msgstr "時刻の設定 "
+
+#~ msgid "General "
+#~ msgstr "一般 "
+
+#~ msgid "Stars "
+#~ msgstr "恒星 "
+
+#~ msgid "Colors "
+#~ msgstr "色 "
+
+#~ msgid "Effects "
+#~ msgstr "効果 "
+
+#~ msgid "Scripts "
+#~ msgstr "スクリプト "
+
+#~ msgid "Administration "
+#~ msgstr "管理 "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "標高(m): "
+
+#~ msgid "Sky Time: "
+#~ msgstr "天の時間 : "
+
+#~ msgid "Actual Time"
+#~ msgstr "現在の時刻"
+
+#~ msgid "Preset Time"
+#~ msgstr "設定された時刻"
+
+#~ msgid "Constellation Lines"
+#~ msgstr "星座線"
+
+#~ msgid "Constellation Names"
+#~ msgstr "星座名"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "星座絵の明るさ"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "星座の境界線"
+
+#~ msgid "Planet Names"
+#~ msgstr "惑星の名前"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "惑星の軌道"
+
+#~ msgid "Planet Trails"
+#~ msgstr "惑星の通った跡"
+
+#~ msgid "Meridian Line"
+#~ msgstr "子午線"
+
+#~ msgid "Nebula Names"
+#~ msgstr "星雲の名前"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "星雲の円"
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "操作パネルの言語: "
+
+#~ msgid "Hydra"
+#~ msgstr "うみへび"
+
+#~ msgid "Select and exit to run."
+#~ msgstr "選択しメニューを抜けるとスタートします。"
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "等級による倍率 : "
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "光害の明るさ: "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "星の明るさの倍率: "
+
+#~ msgid "Sidereal"
+#~ msgstr "恒星時"
+
+#~ msgid "USB Script: "
+#~ msgstr "USBスクリプト: "
+
+#~ msgid "Calendar"
+#~ msgstr "カレンダー"
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "起動時の限界視野: XX"
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "起動時の方位: xxxx"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "すべてのスターカタログのダウンロードが終了しました！"
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "名前を表示する最大等級: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "名前を表示する星雲・星団の最大等級: "
+
+#~ msgid "Planets labels"
+#~ msgstr "惑星名"
+
+#~ msgid "Set Location "
+#~ msgstr "場所の設定 "
+
+#~ msgid "Longitude: "
+#~ msgstr "経度: "
+
+#~ msgid "Latitude: "
+#~ msgstr "緯度: "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "太陽系惑星・天体: "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "タイムゾーンの設定: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "天の時間の設定: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "起動時の天の時間: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "またたき: "
+
+#~ msgid "Show: "
+#~ msgstr "表示: "
+
+#~ msgid "Time Display Format: "
+#~ msgstr "時間の表示形式: "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "日付の表示形式: "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "限界等級: "
+
+#~ msgid "Landscape: "
+#~ msgstr "背景: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "手動ズーム: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "天体の大きさの設定: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "カーソル表示時間: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "光の到達時間を補正する: "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "等級による倍率: "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "天の川の明るさ: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "ズーム時間: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "CD/DVD スクリプト: "
+
+#~ msgid "Local Script: "
+#~ msgstr "ローカルスクリプト: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "下矢印キーで一覧を表示します。"
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "デフォルトの設定を読み込む: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "終了: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "現在の設定をデフォルトとして保存 : "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "インターネット経由で更新: "
+
+#~ msgid "Light pollution: "
+#~ msgstr "光害: "
+
+#~ msgid "Art brightness: "
+#~ msgstr "星座絵の明るさ: "
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "カタログ x / y を取得"
+
+#~ msgid "Day keys: "
+#~ msgstr "日付キー: "

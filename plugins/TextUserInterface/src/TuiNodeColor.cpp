@@ -42,7 +42,6 @@ TuiNodeResponse TuiNodeColor::handleEditingKey(int key)
 			editingPart--;
 		}
 		response.accepted = true;
-		response.newNode = this;
 		if (!editing) 
 		{
 			emit(setValue(value));
@@ -54,7 +53,6 @@ TuiNodeResponse TuiNodeColor::handleEditingKey(int key)
 		editing = false;
 		editingPart = 0;
 		response.accepted = true;
-		response.newNode = this;
 		emit(setValue(value));
 		return response;
 	}
@@ -65,14 +63,12 @@ TuiNodeResponse TuiNodeColor::handleEditingKey(int key)
 			editingPart++;
 		}
 		response.accepted = true;
-		response.newNode = this;
 		return response;
 	}
 	if (key==Qt::Key_Up)
 	{
 		incPart(editingPart, true);
 		response.accepted = true;
-		response.newNode = this;
 		emit(setValue(value));
 		return response;
 	}
@@ -80,7 +76,6 @@ TuiNodeResponse TuiNodeColor::handleEditingKey(int key)
 	{
 		incPart(editingPart, false);
 		response.accepted = true;
-		response.newNode = this;
 		emit(setValue(value));
 		return response;
 	}

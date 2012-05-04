@@ -149,7 +149,7 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	}
 
 	// TODO: do we need to have an else { clearBoundaries(); } ?
-	if (skyCultureDir=="western")
+        if (skyCultureDir.startsWith("western"))
 	{
 		try
 		{

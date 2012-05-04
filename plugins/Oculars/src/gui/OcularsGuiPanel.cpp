@@ -857,7 +857,6 @@ void OcularsGuiPanel::updateMainButtonsPositions()
 	buttonTelrad->setPos(posX, posY);
 	posX += buttonTelrad->getButtonPixmapWidth() + spacing;
 	buttonConfiguration->setPos(posX, posY);
-	posX += buttonConfiguration->getButtonPixmapWidth() + spacing;
 }
 
 void OcularsGuiPanel::setControlsColor(const QColor& color)
