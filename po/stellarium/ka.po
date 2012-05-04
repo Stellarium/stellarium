@@ -7,31 +7,31 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-24 23:27+0700\n"
+"POT-Creation-Date: 2012-05-04 02:16+0700\n"
 "PO-Revision-Date: 2011-05-09 01:51+0000\n"
 "Last-Translator: George Machitidze <giomac@gmail.com>\n"
 "Language-Team: Georgian <ka@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-25 04:38+0000\n"
-"X-Generator: Launchpad (build 15139)\n"
+"X-Launchpad-Export-Date: 2012-05-04 04:39+0000\n"
+"X-Generator: Launchpad (build 15195)\n"
 "X-Poedit-Country: GEORGIA\n"
 "X-Poedit-Language: Georgian\n"
 
-#: src/core/modules/GridLinesMgr.cpp:542
+#: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
 msgstr "მერიდიანი"
 
-#: src/core/modules/GridLinesMgr.cpp:546
+#: src/core/modules/GridLinesMgr.cpp:546 src/ui_viewDialog.h:1176
 msgid "Ecliptic"
 msgstr "ელიფსური"
 
-#: src/core/modules/GridLinesMgr.cpp:550
+#: src/core/modules/GridLinesMgr.cpp:550 src/ui_viewDialog.h:1164
 msgid "Equator"
 msgstr "ეკვატორი"
 
-#: src/core/modules/GridLinesMgr.cpp:554
+#: src/core/modules/GridLinesMgr.cpp:554 src/ui_viewDialog.h:1172
 msgid "Horizon"
 msgstr ""
 
@@ -340,6 +340,30 @@ msgstr ""
 msgid "Az/Alt: %1/%2"
 msgstr "აზიმუტი/სიმაღლე: %1/%2"
 
+#: src/core/SimbadSearcher.cpp:55
+msgid "Network error"
+msgstr ""
+
+#: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
+msgid "Error parsing position"
+msgstr ""
+
+#: src/core/SimbadSearcher.cpp:130
+msgid "Querying"
+msgstr ""
+
+#: src/core/SimbadSearcher.cpp:132
+msgid "Error"
+msgstr ""
+
+#: src/core/SimbadSearcher.cpp:134
+msgid "Not found"
+msgstr ""
+
+#: src/core/SimbadSearcher.cpp:134
+msgid "Found"
+msgstr ""
+
 #: src/gui/ConfigurationDialog.cpp:346
 msgid "Select screenshot directory"
 msgstr "ეკრანთა ანაბეჭდების დასტის არჩევა"
@@ -359,7 +383,7 @@ msgstr "ხედვის საწყისი მიმართულებ�
 msgid "Authors"
 msgstr "ავტორები"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:393
+#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "კონტაქტი"
 
@@ -464,7 +488,7 @@ msgstr "მარჯვენა დაწკაპვა"
 msgid "CTRL + Left click"
 msgstr "CTRL + მარცხენა დაწკაპვა"
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:168
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:173
 msgid "Movement and Selection"
 msgstr "მოძრაობა და მონიშვნა"
 
@@ -488,15 +512,15 @@ msgstr "მონიშვნის მოხსნა"
 msgid "When a Script is Running"
 msgstr "როცა სკრიპტი გაშვებულია"
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:147
+#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:148
 msgid "Slow down the script execution rate"
 msgstr "სკრიპტის შესრულების სიხშირის შემცირება"
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:148
+#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:149
 msgid "Speed up the script execution rate"
 msgstr "სკრიპტის შესრულების სიხშირის გაზრდა"
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:149
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:150
 msgid "Set the normal script execution rate"
 msgstr "სკრიპტის შესრულების სიხშირის ნორმალიზება"
 
@@ -572,7 +596,7 @@ msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{ფორუმები} - განიხილეთ Stellarium სხვა მომხმარებლებთან ერთად."
 
 #: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:341
-#: src/gui/HelpDialog.cpp:343 src/gui/StelGui.cpp:175
+#: src/gui/HelpDialog.cpp:343 src/gui/StelGui.cpp:180
 msgid "Miscellaneous"
 msgstr "სხვადასხვა"
 
@@ -648,261 +672,281 @@ msgstr "ხომლთა წარწერები"
 msgid "Constellation boundaries"
 msgstr "ხომლთა საზღვრები"
 
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1121
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Azimuthal grid"
 msgstr "აზიმუტური ბადე"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1119
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial grid"
 msgstr "ეკვატორული ბადე"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1120
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equatorial J2000 grid"
 msgstr "ეკვატორული J2000 ბადე"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1122
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1158
+msgid "Ecliptic J2000 grid"
+msgstr ""
+
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Galactic grid"
 msgstr "გალაქტიკური ბადე"
 
-#: src/gui/StelGui.cpp:112
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
 msgstr ""
 
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1126
+#: src/gui/StelGui.cpp:114
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
 msgid "Ecliptic line"
 msgstr "ეკლიპტიკის ხაზი"
 
-#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1123
+#: src/gui/StelGui.cpp:115
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Equator line"
 msgstr "ეკვატორის ხაზი"
 
-#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1124
+#: src/gui/StelGui.cpp:116
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Meridian line"
 msgstr "მერიდიანის ხაზი"
 
-#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1125
+#: src/gui/StelGui.cpp:117
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Horizon line"
 msgstr ""
 
-#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1128
+#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Cardinal points"
 msgstr "ქვეყნის მხარეები"
 
-#: src/gui/StelGui.cpp:119
+#: src/gui/StelGui.cpp:120
 msgid "Ground"
 msgstr "მიწა"
 
-#: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1099
+#: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1130
 msgid "Atmosphere"
 msgstr "ატმოსფერო"
 
-#: src/gui/StelGui.cpp:121
+#: src/gui/StelGui.cpp:122
 msgid "Fog"
 msgstr "ნისლი"
 
-#: src/gui/StelGui.cpp:123 src/ui_viewDialog.h:1108
+#: src/gui/StelGui.cpp:124 src/ui_viewDialog.h:1139
 msgid "Nebulas"
 msgstr "ნისლეულები"
 
-#: src/gui/StelGui.cpp:124
+#: src/gui/StelGui.cpp:125
 msgid "Nebulas background images"
 msgstr "ნისლეულთა ფონების ნახატები"
 
-#: src/gui/StelGui.cpp:125 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
+#: src/gui/StelGui.cpp:126 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Stars"
 msgstr "ვარსკვლავები"
 
-#: src/gui/StelGui.cpp:126
+#: src/gui/StelGui.cpp:127
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Planet labels"
 msgstr ""
 
-#: src/gui/StelGui.cpp:127
+#: src/gui/StelGui.cpp:128
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:301
 msgid "Planet orbits"
 msgstr "პლანეტების ორბიტები"
 
-#: src/gui/StelGui.cpp:128
+#: src/gui/StelGui.cpp:129
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Planet trails"
 msgstr "პლანეტების კვალი"
 
-#: src/gui/StelGui.cpp:130
+#: src/gui/StelGui.cpp:131
 msgid "Night mode"
 msgstr "ღამის რეჟიმი"
 
-#: src/gui/StelGui.cpp:131
+#: src/gui/StelGui.cpp:132
 msgid "Full-screen mode"
 msgstr "სრული ეკრანის რეჟიმი"
 
-#: src/gui/StelGui.cpp:132
+#: src/gui/StelGui.cpp:133
 msgid "Flip scene horizontally"
 msgstr "განივი დასარკვა"
 
-#: src/gui/StelGui.cpp:133
+#: src/gui/StelGui.cpp:134
 msgid "Flip scene vertically"
 msgstr "სცენის მართობული ამოტრიალება"
 
-#: src/gui/StelGui.cpp:135
+#: src/gui/StelGui.cpp:136
 msgid "Windows"
 msgstr "სარკმლები"
 
-#: src/gui/StelGui.cpp:136
+#: src/gui/StelGui.cpp:137
 msgid "Help window"
 msgstr "დახმარების სარკმელი"
 
-#: src/gui/StelGui.cpp:137
+#: src/gui/StelGui.cpp:138
 msgid "Configuration window"
 msgstr "კონფიგურაციის სარკმელი"
 
-#: src/gui/StelGui.cpp:138
+#: src/gui/StelGui.cpp:139
 msgid "Search window"
 msgstr "ძიების სარკმელი"
 
-#: src/gui/StelGui.cpp:139
+#: src/gui/StelGui.cpp:140
 msgid "Sky and viewing options window"
 msgstr "ცისა და ჩვენების პარამეტრების სარკმელი"
 
-#: src/gui/StelGui.cpp:140
+#: src/gui/StelGui.cpp:141
 msgid "Date/time window"
 msgstr "თარიღისა და დროის სარკმელი"
 
-#: src/gui/StelGui.cpp:141
+#: src/gui/StelGui.cpp:142
 msgid "Location window"
 msgstr "მდებარეობის სარკმელი"
 
-#: src/gui/StelGui.cpp:143
+#: src/gui/StelGui.cpp:144
 msgid "Script console window"
 msgstr "სკრიპტის კონსოლის ფანჯარა"
 
-#: src/gui/StelGui.cpp:146 src/ui_dateTimeDialogGui.h:294
+#: src/gui/StelGui.cpp:147 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Date and Time"
 msgstr "თარიღი და დრო"
 
-#: src/gui/StelGui.cpp:150
+#: src/gui/StelGui.cpp:151
 msgid "Decrease time speed"
 msgstr "დროის შენელება/უკუსვლა"
 
-#: src/gui/StelGui.cpp:151
+#: src/gui/StelGui.cpp:152
 msgid "Increase time speed"
 msgstr "დროის დაჩქარება"
 
-#: src/gui/StelGui.cpp:152
+#: src/gui/StelGui.cpp:153
 msgid "Set normal time rate"
 msgstr "დროის ნორმალური სვლა"
 
-#: src/gui/StelGui.cpp:153
+#: src/gui/StelGui.cpp:154
 msgid "Decrease time speed (a little)"
 msgstr "დროის სიჩქარის შემცირება"
 
-#: src/gui/StelGui.cpp:154
+#: src/gui/StelGui.cpp:155
 msgid "Increase time speed (a little)"
 msgstr "დროის სიჩქარის გაზრდა"
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:156
 msgid "Set time rate to zero"
 msgstr "დროის სიჩქარის განულება"
 
-#: src/gui/StelGui.cpp:156
+#: src/gui/StelGui.cpp:157
 msgid "Set time to now"
 msgstr "მიმდინარე დროის მითითება"
 
-#: src/gui/StelGui.cpp:157
+#: src/gui/StelGui.cpp:158
 msgid "Add 1 solar hour"
 msgstr "1 მზის საათის დამატება"
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:159
 msgid "Subtract 1 solar hour"
 msgstr "1 მზის საათის გამოკლება"
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:160
 msgid "Add 1 solar day"
 msgstr "1 მზის დღის დამატება"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:161
 msgid "Subtract 1 solar day"
 msgstr "1 მზის დღის გამოკლება"
 
-#: src/gui/StelGui.cpp:161
+#: src/gui/StelGui.cpp:162
 msgid "Add 1 solar week"
 msgstr "1 მზის კვირის დამატება"
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:163
 msgid "Subtract 1 solar week"
 msgstr "1 მზის კვირის გამოკლება"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:164
 msgid "Add 1 sidereal day"
 msgstr "1 ვარსკვლავური დღის დამატება"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:165
 msgid "Subtract 1 sidereal day"
 msgstr "1 ვარსკვლავური დღის გამოკლება"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:166
 msgid "Add 1 sidereal week"
 msgstr "1 ვარსკვლავური კვირის დამატება"
 
-#: src/gui/StelGui.cpp:166
+#: src/gui/StelGui.cpp:167
 msgid "Subtract 1 sidereal week"
 msgstr "1 ვარსკვლავური კვირის გამოკლება"
 
+#: src/gui/StelGui.cpp:168
+msgid "Add 1 sidereal month"
+msgstr ""
+
 #: src/gui/StelGui.cpp:169
+msgid "Subtract 1 sidereal month"
+msgstr ""
+
+#: src/gui/StelGui.cpp:170
+msgid "Add 1 sidereal year"
+msgstr ""
+
+#: src/gui/StelGui.cpp:171
+msgid "Subtract 1 sidereal year"
+msgstr ""
+
+#: src/gui/StelGui.cpp:174
 msgid "Center on selected object"
 msgstr "ცენტრირება შერჩეულ ობიექტზე"
 
-#: src/gui/StelGui.cpp:170
+#: src/gui/StelGui.cpp:175
 msgid "Track object"
 msgstr "ობიექტის თვალმიდევნება"
 
-#: src/gui/StelGui.cpp:171
+#: src/gui/StelGui.cpp:176
 msgid "Zoom in on selected object"
 msgstr "შერჩეული ობიექტის მოახლოება"
 
-#: src/gui/StelGui.cpp:172
+#: src/gui/StelGui.cpp:177
 msgid "Zoom out"
 msgstr "დაშორება"
 
-#: src/gui/StelGui.cpp:173
+#: src/gui/StelGui.cpp:178
 msgid "Set home planet to selected planet"
 msgstr "შერჩეული პლანეტის საკუთარ პლანეტად მითითება"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:181
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "გადართვა ეკვატორულ და აზიმუტურ ხედებს შორის"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:182
 msgid "Quit"
 msgstr "დასრულება"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:183
 msgid "Save screenshot"
 msgstr "ანაბეჭდის შენახვა"
 
-#: src/gui/StelGui.cpp:179
+#: src/gui/StelGui.cpp:184
 msgid "Copy selected object information to clipboard"
 msgstr ""
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:186
 msgid "Auto hide horizontal button bar"
 msgstr "ღილაკების განივი პანელის თვითდამალვა"
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:187
 msgid "Auto hide vertical button bar"
 msgstr "ღილაკების მართობული პანელის თვითდამალვა"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:188
 msgid "Toggle visibility of GUI"
 msgstr "ინტერფეისის ხილვადობის გადართვა"
 
@@ -911,27 +955,27 @@ msgstr "ინტერფეისის ხილვადობის გა�
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:454
+#: src/gui/ViewDialog.cpp:459
 msgid "No description"
 msgstr "აღწერილობის გარეშე"
 
-#: src/gui/ViewDialog.cpp:567
+#: src/gui/ViewDialog.cpp:572
 msgid "No shooting stars"
 msgstr "მეტეორები არაა"
 
-#: src/gui/ViewDialog.cpp:570
+#: src/gui/ViewDialog.cpp:575
 msgid "Normal rate"
 msgstr "ჩვეულებრივი სვლა"
 
-#: src/gui/ViewDialog.cpp:573
+#: src/gui/ViewDialog.cpp:578
 msgid "Standard Perseids rate"
 msgstr "პერსეიდების სტანდარტული ნაკადი"
 
-#: src/gui/ViewDialog.cpp:576
+#: src/gui/ViewDialog.cpp:581
 msgid "Exceptional Leonid rate"
 msgstr "ლეონიდების განსაკუთრებული ნაკადი"
 
-#: src/gui/ViewDialog.cpp:579
+#: src/gui/ViewDialog.cpp:584
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "მაქსიმალური ნაკადი (1966 ლეონიდები)"
 
@@ -1038,11 +1082,19 @@ msgstr ""
 msgid "starchart"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:503
+#: src/gui/SearchDialog.cpp:351
+msgid "Simbad Lookup Error"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:359
+msgid "Simbad Lookup"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:507
 msgid "University of Strasbourg (France)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:504
+#: src/gui/SearchDialog.cpp:508
 msgid "Harvard University (USA)"
 msgstr ""
 
@@ -2752,199 +2804,214 @@ msgstr ""
 msgid "Server:"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1137
-#: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
+#: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1184
+#: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
 #: src/ui_configurationDialog.h:891 src/ui_configurationDialog.h:902
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "პარამეტრები"
 
-#: src/ui_viewDialog.h:1070
+#: src/ui_viewDialog.h:1101
 msgid "View"
 msgstr "ხედი"
 
-#: src/ui_viewDialog.h:1076
+#: src/ui_viewDialog.h:1107
 msgid "Sky"
 msgstr "ცა"
 
-#: src/ui_viewDialog.h:1078
+#: src/ui_viewDialog.h:1109
 msgid "Markings"
 msgstr "ნიშნულები"
 
-#: src/ui_viewDialog.h:1080
+#: src/ui_viewDialog.h:1111
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Landscape"
 msgstr "პეიზაჟი"
 
-#: src/ui_viewDialog.h:1082
+#: src/ui_viewDialog.h:1113
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:217
 msgid "Starlore"
 msgstr "ცოდნა ვარსკვლავების შესახებ"
 
-#: src/ui_viewDialog.h:1086
+#: src/ui_viewDialog.h:1117
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:247
 msgid "Absolute scale:"
 msgstr "აბსოლუტური მასშტაბი:"
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1118
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Relative scale:"
 msgstr "ფარდობითი მასშტაბი:"
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1119
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Twinkle:"
 msgstr "ციმციმი:"
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:1121
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "მცირე ვარკვლავების ჩამუქება ნათელი ობიექტის მახლობლად"
 
-#: src/ui_viewDialog.h:1092
+#: src/ui_viewDialog.h:1123
 msgid "Dynamic eye adaptation"
 msgstr "თვალის დინამიკური ადაპტაცია"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1124
 msgid "Planets and satellites"
 msgstr "პლანეტები და თანამგზავრები"
 
-#: src/ui_viewDialog.h:1094
+#: src/ui_viewDialog.h:1125
 msgid "Show planets"
 msgstr "პლანეტების ჩვენება"
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1126
 msgid "Show planet markers"
 msgstr "პლანეტების ნიშნულების ჩვენება"
 
-#: src/ui_viewDialog.h:1096
+#: src/ui_viewDialog.h:1127
 msgid "Show planet orbits"
 msgstr "პლანეტათა ორბიტების ჩვენება"
 
-#: src/ui_viewDialog.h:1097
+#: src/ui_viewDialog.h:1128
 msgid "Simulate light speed"
 msgstr "სინათლის სიჩქარის სიმულაცია"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1129
 msgid "Scale Moon"
 msgstr "მთვარის მასშტაბი"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1131
 msgid "Show atmosphere"
 msgstr "ატმოსფეროს ჩვენება"
 
-#: src/ui_viewDialog.h:1101
+#: src/ui_viewDialog.h:1132
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Light pollution:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1103
+#: src/ui_viewDialog.h:1134
 msgid "pressure, temperature, extinction coefficient"
 msgstr ""
 
-#: src/ui_viewDialog.h:1105
+#: src/ui_viewDialog.h:1136
 msgid "Refraction/Extinction settings..."
 msgstr ""
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1137
 msgid "Labels and Markers"
 msgstr "წარწერები და ნიშნები"
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1140
 msgid "Planets"
 msgstr "პლანეტები"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1141
 msgid "Shooting Stars"
 msgstr "მეტეორები"
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1142
 msgid "Hourly zenith rate:"
 msgstr "ზენიტის საათობრივი სვლა:"
 
-#: src/ui_viewDialog.h:1112
+#: src/ui_viewDialog.h:1143
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:1113
+#: src/ui_viewDialog.h:1144
 msgid "10"
 msgstr "10"
 
-#: src/ui_viewDialog.h:1114
+#: src/ui_viewDialog.h:1145
 msgid "80"
 msgstr "80"
 
-#: src/ui_viewDialog.h:1115
+#: src/ui_viewDialog.h:1146
 msgid "10000"
 msgstr "10000"
 
-#: src/ui_viewDialog.h:1116
+#: src/ui_viewDialog.h:1147
 msgid "144000"
 msgstr "144000"
 
-#: src/ui_viewDialog.h:1118
-msgid "Celestial Sphere"
-msgstr "ციური სფერო"
-
-#: src/ui_viewDialog.h:1127
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:359
-msgid "Galactic plane line"
-msgstr ""
-
-#: src/ui_viewDialog.h:1129
+#: src/ui_viewDialog.h:1149
 msgid "Constellations"
 msgstr "ხომლები"
 
-#: src/ui_viewDialog.h:1130
+#: src/ui_viewDialog.h:1150
 msgid "Show lines"
 msgstr "ხაზების ჩვენება"
 
-#: src/ui_viewDialog.h:1131
+#: src/ui_viewDialog.h:1151
 msgid "Show labels"
 msgstr "წარწერების ჩვენება"
 
-#: src/ui_viewDialog.h:1132
+#: src/ui_viewDialog.h:1152
 msgid "Show boundaries"
 msgstr "საზღვრების ჩვენება"
 
-#: src/ui_viewDialog.h:1133
+#: src/ui_viewDialog.h:1153
 msgid "Show art"
 msgstr "ნახატების ჩვენება"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1134
+#: src/ui_viewDialog.h:1154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Art brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1135
+#: src/ui_viewDialog.h:1155
+msgid "Celestial Sphere"
+msgstr "ციური სფერო"
+
+#: src/ui_viewDialog.h:1162
+msgid "Show equator line"
+msgstr ""
+
+#: src/ui_viewDialog.h:1166
+msgid "Show meridian line"
+msgstr ""
+
+#: src/ui_viewDialog.h:1170
+msgid "Show horizon line"
+msgstr ""
+
+#: src/ui_viewDialog.h:1174
+msgid "Show ecliptic line"
+msgstr ""
+
+#: src/ui_viewDialog.h:1178
+msgid "Show Galactic plane line"
+msgstr ""
+
+#: src/ui_viewDialog.h:1182
 msgid "Projection"
 msgstr "პროექცია"
 
-#: src/ui_viewDialog.h:1136
+#: src/ui_viewDialog.h:1183
 msgid "Add/remove landscapes..."
 msgstr ""
 
-#: src/ui_viewDialog.h:1138
+#: src/ui_viewDialog.h:1185
 msgid "Show ground"
 msgstr "მიწის ჩვენება"
 
-#: src/ui_viewDialog.h:1139
+#: src/ui_viewDialog.h:1186
 msgid "Show fog"
 msgstr "ნისლის ჩვენება"
 
-#: src/ui_viewDialog.h:1140
+#: src/ui_viewDialog.h:1187
 msgid "Use associated planet and position"
 msgstr "შეაბამისი პლანეტით და პოზიციით სარგებლობა"
 
-#: src/ui_viewDialog.h:1141
+#: src/ui_viewDialog.h:1188
 msgid "Use this landscape as default"
 msgstr "ამ პეიზაჟის ნაგულისხმებად გამოყენება"
 
-#: src/ui_viewDialog.h:1143
+#: src/ui_viewDialog.h:1190
 msgid "Use this sky culture as default"
 msgstr "ამ ციური კულტურის ნაგულისხმებად გამოყენება"
 
-#: src/ui_viewDialog.h:1145
+#: src/ui_viewDialog.h:1192
 msgid "Visible"
 msgstr "ხილული"
 
@@ -5087,6 +5154,10 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:345
 msgid "Nebula hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:359
+msgid "Galactic plane line"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:388
