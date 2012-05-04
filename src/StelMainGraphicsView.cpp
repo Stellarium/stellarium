@@ -113,6 +113,11 @@ Q_IMPORT_PLUGIN(Quasars)
 Q_IMPORT_PLUGIN(Pulsars)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_OBSERVABILITY
+Q_IMPORT_PLUGIN(Observability)
+#endif
+
+
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
