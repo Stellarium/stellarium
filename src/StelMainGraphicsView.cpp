@@ -25,7 +25,6 @@
 #include "StelQGL2Renderer.hpp"
 #include "StelProjector.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelPainter.hpp"
 #include "StelGuiBase.hpp"
 #include "StelMainWindow.hpp"
 

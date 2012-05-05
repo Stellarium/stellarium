@@ -49,26 +49,31 @@ public:
 class StelViewportDistorterFisheyeToSphericMirror : public StelViewportEffect
 {
 public:
-	StelViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h);
+	StelViewportDistorterFisheyeToSphericMirror(int screenWidth,int screenHeight);
 	~StelViewportDistorterFisheyeToSphericMirror();
 	virtual QString getName() {return "sphericMirrorDistorter";}
 	virtual void paintViewportBuffer(const QGLFramebufferObject* buf) const;
 	virtual void distortXY(float& x, float& y) const;
 private:
-	const int screen_w;
-	const int screen_h;
+	const int screenWidth;
+	const int screenHeight;
 	const StelProjector::StelProjectorParams originalProjectorParams;
 	StelProjector::StelProjectorParams newProjectorParams;
-	int viewport_texture_offset[2];
+	int viewportTextureOffset[2];
 	int texture_wh;
 
-	Vec2f *texture_point_array;
-	int max_x,max_y;
-	double step_x,step_y;
+	Vec2f *texturePointGrid;
+	int maxGridX,maxGridY;
+	double stepX,stepY;
 
 	QVector<Vec2f> displayVertexList;
 	QVector<Vec4f> displayColorList;
 	QVector<Vec2f> displayTexCoordList;
+	
+	void constructVertexBuffer(const class VertexPoint * const vertexGrid);
+	void generateDistortion(const class QSettings& conf, const StelProjectorP& proj, 
+	                        const double distorterMaxFOV);
+	bool loadDistortionFromFile(const QString & fileName);
 };
 
 #endif // _STELVIEWPORTEFFECT_HPP_
