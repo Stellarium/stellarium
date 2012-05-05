@@ -20,7 +20,6 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelAppGraphicsWidget.hpp"
-#include "StelPainter.hpp"
 #include "StelRenderer.hpp"
 #include "StelGuiBase.hpp"
 #include "StelViewportEffect.hpp"
@@ -79,10 +78,12 @@ void StelAppGraphicsWidget::setViewportEffect(const QString& name)
 	
 	if (name == "framebufferOnly" || name == "none")
 	{
+		qDebug() << "Setting default viewport effect";
 		viewportEffect = new StelViewportEffect();
 	}
 	else if (name == "sphericMirrorDistorter")
 	{
+		qDebug() << "Setting sphericMirrorDistorter viewport effect";
 		viewportEffect = new StelViewportDistorterFisheyeToSphericMirror(size().width(),
 		                                                                 size().height());
 	}
