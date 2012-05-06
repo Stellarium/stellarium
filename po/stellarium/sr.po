@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-05-03 12:41+0000\n"
+"PO-Revision-Date: 2012-05-05 15:16+0000\n"
 "Last-Translator: Иван Старчевић <ivanstar61@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:42+0000\n"
+"X-Launchpad-Export-Date: 2012-05-06 04:37+0000\n"
 "X-Generator: Launchpad (build 15195)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -905,11 +905,11 @@ msgstr "Додај 1 звездани месец"
 
 #: src/gui/StelGui.cpp:169
 msgid "Subtract 1 sidereal month"
-msgstr ""
+msgstr "Одузми 1 звездани месец"
 
 #: src/gui/StelGui.cpp:170
 msgid "Add 1 sidereal year"
-msgstr ""
+msgstr "Додај 1 звездану годину"
 
 #: src/gui/StelGui.cpp:171
 msgid "Subtract 1 sidereal year"
@@ -1363,7 +1363,7 @@ msgstr "Халимеда"
 
 #: src/translations.h:95
 msgid "Psamathe"
-msgstr ""
+msgstr "Псамафа"
 
 #: src/translations.h:96
 msgid "Sao"
@@ -1394,12 +1394,12 @@ msgstr "Quaoar"
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
 #: src/translations.h:106
 msgid "Orcus"
-msgstr ""
+msgstr "Орк"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
 #: src/translations.h:108
 msgid "Haumea"
-msgstr ""
+msgstr "Хаумеа"
 
 #. TRANSLATORS: Asteroid (5) Astraea
 #: src/translations.h:111
@@ -1536,7 +1536,7 @@ msgstr "Западњачки"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:162
 msgid "Guereins"
-msgstr ""
+msgstr "Герен"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:164
@@ -1556,22 +1556,22 @@ msgstr "Океан"
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:172
 msgid "Garching"
-msgstr ""
+msgstr "Гархинг"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
 msgid "Landscape Tour"
-msgstr ""
+msgstr "Преглед путовања"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
 msgid "Partial Lunar Eclipse"
-msgstr ""
+msgstr "Делимично помрачење Месеца"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:184
 msgid "Total Lunar Eclipse"
-msgstr ""
+msgstr "Потпуно помрачење Месеца"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
@@ -1581,12 +1581,12 @@ msgstr "Чувар екрана"
 #. TRANSLATORS: Name of script
 #: src/translations.h:188
 msgid "Solar Eclipse 2009"
-msgstr ""
+msgstr "Помрачење Сунца 2009"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:190
 msgid "Startup Script"
-msgstr ""
+msgstr "Покретање скрипте"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:192
@@ -1595,29 +1595,31 @@ msgstr "Зодијак"
 
 #: src/translations.h:195
 msgid "Look around each installed landscape."
-msgstr ""
+msgstr "Осврните се око сваког инсталираног пејзажа."
 
 #: src/translations.h:196
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr ""
+msgstr "Скрипта приказује делимично помрачење Месеца."
 
 #: src/translations.h:197
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr ""
+msgstr "Скрипта приказује потпуну помрачење Месеца."
 
 #: src/translations.h:198
 msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr ""
+msgstr "Спори, бесконачни преглед неба с приказом случајних објеката."
 
 #: src/translations.h:199
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
+"Скрипта која демонстрира потпуно помрачење Сунца које се десило 2009. године "
+"(место=Рангпур, Бангладеш)."
 
 #: src/translations.h:200
 msgid "Script which runs automatically at startup"
-msgstr ""
+msgstr "Скрипта која се аутоматски покреће при покретању"
 
 #: src/translations.h:201
 msgid ""
