@@ -12,9 +12,6 @@
 //
 //enable/disablePainting are temporary and will be removed
 //    once painting is done through StelRenderer.
-//    Once that is the case, painting at startup can seamlessly construct/destroy
-//    a QPainter to glWidget in QGLProvider, and painting during runtime
-//    can utilize user-specified default painter or backBufferPainter in the implementation.
 //
 //FPS balancing, currently in StelAppGraphicsWidget, might be moved into StelRenderer
 //    implementation.
