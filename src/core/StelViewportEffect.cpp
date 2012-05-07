@@ -61,9 +61,15 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	// maximum FOV value of the not yet distorted image
 	double distorterMaxFOV = conf.value("spheric_mirror/distorter_max_fov",175.f).toFloat();
 	if (distorterMaxFOV > 240.f)
+	{
+		qDebug() << "spheric_mirror/distorter_max_fov too high : setting to 240.0";
 		distorterMaxFOV = 240.f;
+	}
 	else if (distorterMaxFOV < 120.f)
+	{
+		qDebug() << "spheric_mirror/distorter_max_fov too low : setting to 120.0";
 		distorterMaxFOV = 120.f;
+	}
 	if (distorterMaxFOV > core->getMovementMgr()->getMaxFov())
 		distorterMaxFOV = core->getMovementMgr()->getMaxFov();
 
@@ -187,8 +193,8 @@ void StelViewportDistorterFisheyeToSphericMirror::generateDistortion
 	
 	const float viewScalingFactor = 0.5 * newProjectorParams.viewportFovDiameter /
 	                                proj->fovToViewScalingFactor(distorterMaxFOV*(M_PI/360.0));
-	texturePointGrid = new Vec2f[cols*rows];
-	VertexPoint *const vertexGrid = new VertexPoint[cols*rows];
+	texturePointGrid = new Vec2f[cols * rows];
+	VertexPoint *const vertexGrid = new VertexPoint[cols * rows];
 	double maxH = 0;
 	SphericMirrorCalculator calc(conf);
 	
@@ -229,10 +235,10 @@ void StelViewportDistorterFisheyeToSphericMirror::generateDistortion
 			//      else if (y > newProjectorParams.viewportXywh[3])
 			//          {y=newProjectorParams.viewportXywh[3];vertexPoint.h=0;}
 
-			texturePoint[0] = (viewportTextureOffset[0]+x)/texture_wh;
-			texturePoint[1] = (viewportTextureOffset[1]+y)/texture_wh;
+			texturePoint[0] = (viewportTextureOffset[0] + x) / texture_wh;
+			texturePoint[1] = (viewportTextureOffset[1] + y) / texture_wh;
 
-			if (vertexPoint.h > maxH) maxH = vertexPoint.h;
+			maxH = qMax(vertexPoint.h, maxH);
 		}
 	}
 	
@@ -241,11 +247,11 @@ void StelViewportDistorterFisheyeToSphericMirror::generateDistortion
 	{
 		for (int col = 0; col <= maxGridX; col++)
 		{
-			VertexPoint &vertexPoint(vertexGrid[(row * (maxGridX + 1) + col)]);
+			VertexPoint &vertexPoint(vertexGrid[row * cols + col]);
 			Vec4f &color(vertexPoint.color);
-			color[0] = color[1] = color[2] = (vertexPoint.h <= 0.0) 
-			                               ? 0.0 
-			                               : exp(gamma * log(vertexPoint.h / maxH));
+			const float gray = (vertexPoint.h <= 0.0)  ? 0.0 
+			                                           : exp(gamma * log(vertexPoint.h / maxH));
+			color[0] = color[1] = color[2] = gray;
 			color[3] = 1.0f;
 		}
 	}
@@ -291,8 +297,8 @@ bool StelViewportDistorterFisheyeToSphericMirror::loadDistortionFromFile
 	{
 		for (int col = 0; col <= maxGridX; col++)
 		{
-			VertexPoint &vertexPoint(vertexGrid[(row * cols + col)]);
-			Vec2f &texturePoint(texturePointGrid[(row * cols + col)]);
+			VertexPoint &vertexPoint(vertexGrid[row * cols + col]);
+			Vec2f &texturePoint(texturePointGrid[row * cols + col]);
 			// Clamp to screen extents.
 			vertexPoint.ver_xy[0] = ((col == 0)        ? 0.f : 
 			                         (col == maxGridX) ? screenWidth :
@@ -356,7 +362,7 @@ void StelViewportDistorterFisheyeToSphericMirror::constructVertexBuffer
 
 void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) const
 {
-	float texture_x,texture_y;
+	float textureX, textureY;
 
 	// find the triangle and interpolate accordingly:
 	float dy = y / stepY;
@@ -375,8 +381,8 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 				dx -= 0.5f*(1.f-dy);
 				dx *= 2.f;
 			}
-			texture_x = t[0][0] + dx * (t[1][0]-t[0][0]) + dy * (t[maxGridX+1][0]-t[0][0]);
-			texture_y = t[0][1] + dx * (t[1][1]-t[0][1]) + dy * (t[maxGridX+1][1]-t[0][1]);
+			textureX = t[0][0] + dx * (t[1][0]-t[0][0]) + dy * (t[maxGridX+1][0]-t[0][0]);
+			textureY = t[0][1] + dx * (t[1][1]-t[0][1]) + dy * (t[maxGridX+1][1]-t[0][1]);
 		}
 		else
 		{
@@ -385,9 +391,9 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 				dx -= 0.5f*(1.f-dy);
 				dx *= 2.f;
 			}
-			texture_x = t[maxGridX+2][0] + (1.f-dy) * (t[1][0]-t[maxGridX+2][0]) + (1.f-dx) *
+			textureX = t[maxGridX+2][0] + (1.f-dy) * (t[1][0]-t[maxGridX+2][0]) + (1.f-dx) *
 			                                          (t[maxGridX+1][0]-t[maxGridX+2][0]);
-			texture_y = t[maxGridX+2][1] + (1.f-dy) * (t[1][1]-t[maxGridX+2][1]) + (1.f-dx) *
+			textureY = t[maxGridX+2][1] + (1.f-dy) * (t[1][1]-t[maxGridX+2][1]) + (1.f-dx) *
 			                                          (t[maxGridX+1][1]-t[maxGridX+2][1]);
 		}
 	}
@@ -404,10 +410,10 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 				dx -= 0.5f*dy;
 				dx *= 2.f;
 			}
-			texture_x = t[1][0] + (1.f-dx) * (t[0][0]-t[1][0]) + dy *
-			                                 (t[maxGridX+2][0]-t[1][0]);
-			texture_y = t[1][1] + (1.f-dx) * (t[0][1]-t[1][1]) + dy *
-			                                 (t[maxGridX+2][1]-t[1][1]);
+			textureX = t[1][0] + (1.f-dx) * (t[0][0]-t[1][0]) + dy *
+			                                (t[maxGridX+2][0]-t[1][0]);
+			textureY = t[1][1] + (1.f-dx) * (t[0][1]-t[1][1]) + dy *
+			                                (t[maxGridX+2][1]-t[1][1]);
 		}
 		else
 		{
@@ -416,15 +422,15 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 				dx -= 0.5f*dy;
 				dx *= 2.f;
 			}
-			texture_x = t[maxGridX+1][0] + (1.f-dy) * (t[0][0]-t[maxGridX+1][0]) + dx *
-			                                          (t[maxGridX+2][0]-t[maxGridX+1][0]);
-			texture_y = t[maxGridX+1][1] + (1.f-dy) * (t[0][1]-t[maxGridX+1][1]) + dx *
-			                                          (t[maxGridX+2][1]-t[maxGridX+1][1]);
+			textureX = t[maxGridX+1][0] + (1.f-dy) * (t[0][0]-t[maxGridX+1][0]) + dx *
+			                                         (t[maxGridX+2][0]-t[maxGridX+1][0]);
+			textureY = t[maxGridX+1][1] + (1.f-dy) * (t[0][1]-t[maxGridX+1][1]) + dx *
+			                                         (t[maxGridX+2][1]-t[maxGridX+1][1]);
 		}
 	}
 
-	x = texture_wh*texture_x - viewportTextureOffset[0] + newProjectorParams.viewportXywh[0];
-	y = texture_wh*texture_y - viewportTextureOffset[1] + newProjectorParams.viewportXywh[1];
+	x = texture_wh*textureX - viewportTextureOffset[0] + newProjectorParams.viewportXywh[0];
+	y = texture_wh*textureY - viewportTextureOffset[1] + newProjectorParams.viewportXywh[1];
 }
 
 
