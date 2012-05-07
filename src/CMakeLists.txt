@@ -137,6 +137,9 @@ SET(stellarium_lib_SRCS
 	core/renderer/StelGLRenderer.hpp
 	core/renderer/StelQGLRenderer.hpp
 	core/renderer/StelQGL2Renderer.hpp
+	
+	core/renderer/StelVertexBuffer.hpp
+	core/renderer/StelTestGLVertexBuffer.hpp
 
 	${gl_lib_SRCS}
 	core/external/fixx11h.h
@@ -733,6 +736,18 @@ QT4_WRAP_CPP(tests_testStelVertexArray_MOC_SRCS tests/testStelVertexArray.hpp)
 ADD_EXECUTABLE(testStelVertexArray EXCLUDE_FROM_ALL ${tests_testStelVertexArray_SRCS} ${tests_testStelVertexArray_MOC_SRCS})
 TARGET_LINK_LIBRARIES(testStelVertexArray ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelVertexArray)
+
+
+SET(tests_testStelVertexBuffer_SRCS
+  tests/testStelVertexBuffer.hpp
+  tests/testStelVertexBuffer.cpp
+  core/renderer/StelVertexBuffer.hpp
+  core/renderer/StelTestGLVertexBuffer.hpp)
+QT4_WRAP_CPP(tests_testStelVertexBuffer_MOC_SRCS tests/testStelVertexBuffer.hpp)
+ADD_EXECUTABLE(testStelVertexBuffer EXCLUDE_FROM_ALL ${tests_testStelVertexBuffer_SRCS}
+${tests_testStelVertexBuffer_MOC_SRCS})
+TARGET_LINK_LIBRARIES(testStelVertexBuffer ${extLinkerOptionTest})
+ADD_DEPENDENCIES(buildTests testStelVertexBuffer)
 
 #
 # Temporary disable RefractionExtinction test because now we have two classes:  Refraction and Extinction
