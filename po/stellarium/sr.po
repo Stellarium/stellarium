@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-05-05 15:16+0000\n"
+"PO-Revision-Date: 2012-05-06 15:20+0000\n"
 "Last-Translator: Иван Старчевић <ivanstar61@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-06 04:37+0000\n"
+"X-Launchpad-Export-Date: 2012-05-07 04:37+0000\n"
 "X-Generator: Launchpad (build 15195)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -265,7 +265,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
-msgstr "Hammer-Aitoff"
+msgstr "Хамер-Ајтоф"
 
 #: src/core/StelProjectorClasses.cpp:187
 msgid ""
@@ -289,7 +289,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:270
 msgid "Mercator"
-msgstr "Меркаторова"
+msgstr "Меркатор"
 
 #: src/core/StelProjectorClasses.cpp:275
 msgid ""
@@ -1389,7 +1389,7 @@ msgstr "Седна"
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
 #: src/translations.h:104
 msgid "Quaoar"
-msgstr "Quaoar"
+msgstr "Квавар"
 
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
 #: src/translations.h:106
@@ -1541,7 +1541,7 @@ msgstr "Герен"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:164
 msgid "Trees"
-msgstr ""
+msgstr "Дрвеће"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:168
@@ -1627,6 +1627,8 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
+"Ова скрипта приказује сазвежђа на Зодијака. То су сазвежђа која леже дуж "
+"линије коју прави Сунце на небеском своду током целе године."
 
 #: src/translations.h:204
 msgid "Andorra"
@@ -1822,7 +1824,7 @@ msgstr "Костарика"
 
 #: src/translations.h:252
 msgid "Serbia and Montenegro"
-msgstr "Србија"
+msgstr "Србија и Црна Гора"
 
 #: src/translations.h:253
 msgid "Cuba"
@@ -2034,7 +2036,7 @@ msgstr "Индија"
 
 #: src/translations.h:305
 msgid "British Indian Ocean Territory"
-msgstr "Британско Индијска Океанска Територија"
+msgstr "Британско територија у Индијском океану"
 
 #: src/translations.h:306
 msgid "Iraq"
@@ -2330,7 +2332,7 @@ msgstr "Порторико"
 
 #: src/translations.h:379
 msgid "Palestinian Territories"
-msgstr ""
+msgstr "Палестинске територије"
 
 #: src/translations.h:380
 msgid "Portugal"
@@ -2350,7 +2352,7 @@ msgstr "Катар"
 
 #: src/translations.h:384
 msgid "Réunion"
-msgstr "Реинион"
+msgstr "Реунион"
 
 #: src/translations.h:385
 msgid "Romania"
@@ -2438,11 +2440,11 @@ msgstr "Салвадор"
 
 #: src/translations.h:406
 msgid "Syrian Arab Republic"
-msgstr "Сиријска Арапска Република"
+msgstr "Сирија"
 
 #: src/translations.h:407
 msgid "Swaziland"
-msgstr ""
+msgstr "Свазиленд"
 
 #: src/translations.h:408
 msgid "Turks and Caicos Islands"
@@ -2619,7 +2621,7 @@ msgstr "Дневник"
 
 #: src/ui_helpDialogGui.h:272
 msgid "Refresh"
-msgstr "Освежавање"
+msgstr "Освежи"
 
 #: src/ui_locationDialogGui.h:384
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:134
@@ -2693,7 +2695,7 @@ msgstr "Нађи објекат"
 
 #: src/ui_searchDialogGui.h:505
 msgid "Find Object or Position"
-msgstr ""
+msgstr "Пронађи објекат или место"
 
 #: src/ui_searchDialogGui.h:511
 msgid "iota"
@@ -2793,7 +2795,7 @@ msgstr "омега"
 
 #: src/ui_searchDialogGui.h:582
 msgid "Greek letters for Bayer designations"
-msgstr ""
+msgstr "Грчка слова за Бајеровим ознакама"
 
 #: src/ui_searchDialogGui.h:583
 msgid "Object"
@@ -2809,11 +2811,11 @@ msgstr "Положај"
 
 #: src/ui_searchDialogGui.h:586
 msgid "On-line astronomical database SIMBAD"
-msgstr ""
+msgstr "Астрономска база података SIMBAD на мрежи"
 
 #: src/ui_searchDialogGui.h:587
 msgid "Extend search with SIMBAD"
-msgstr ""
+msgstr "Прошири претрагу помоћу SIMBAD-а"
 
 #: src/ui_searchDialogGui.h:588
 msgid "Server:"
@@ -2902,7 +2904,7 @@ msgstr "Прикажи атмосферу"
 #: src/ui_viewDialog.h:1132
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Light pollution:"
-msgstr ""
+msgstr "Светлосна загађеност:"
 
 #: src/ui_viewDialog.h:1134
 msgid "pressure, temperature, extinction coefficient"
@@ -2910,7 +2912,7 @@ msgstr "притисак, температура, коефицијент изу�
 
 #: src/ui_viewDialog.h:1136
 msgid "Refraction/Extinction settings..."
-msgstr ""
+msgstr "Поставке преламања/пригушивања..."
 
 #: src/ui_viewDialog.h:1137
 msgid "Labels and Markers"
@@ -2980,7 +2982,7 @@ msgstr "Небеска сфера"
 
 #: src/ui_viewDialog.h:1162
 msgid "Show equator line"
-msgstr ""
+msgstr "Прикажи линију Екватора"
 
 #: src/ui_viewDialog.h:1166
 msgid "Show meridian line"
@@ -2988,15 +2990,15 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1170
 msgid "Show horizon line"
-msgstr ""
+msgstr "Прикажи линију хоризонта"
 
 #: src/ui_viewDialog.h:1174
 msgid "Show ecliptic line"
-msgstr ""
+msgstr "Прикажи еклиптичку линију"
 
 #: src/ui_viewDialog.h:1178
 msgid "Show Galactic plane line"
-msgstr ""
+msgstr "Прикажи линију Галактичке равни"
 
 #: src/ui_viewDialog.h:1182
 msgid "Projection"
@@ -3060,11 +3062,11 @@ msgstr "Кратко"
 
 #: src/ui_configurationDialog.h:798
 msgid "Display user settings information"
-msgstr ""
+msgstr "Приказ информације о подешавањима за употребу"
 
 #: src/ui_configurationDialog.h:800
 msgid "Customized"
-msgstr ""
+msgstr "Прилагођено"
 
 #: src/ui_configurationDialog.h:802
 msgid "Display no information"
@@ -3156,6 +3158,8 @@ msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
+"Поставља опонашајуће време на следећу појаву тог доба дана када се покрене "
+"Стеларијум"
 
 #: src/ui_configurationDialog.h:838
 msgid "System date at:"
@@ -3202,8 +3206,8 @@ msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr ""
-"Deformisanje sfernog ogledala se koristi kada se Stellarium projektuje na "
-"sferno ogledalo niskobudžetnih planetarijuma."
+"Изобличење сферног огледала користи се при пројекцији Стеларијума на сферно "
+"огледало код јефтиних планетарних  система."
 
 #: src/ui_configurationDialog.h:857
 msgid "Spheric mirror distortion"
@@ -3222,10 +3226,11 @@ msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
+"Када је омогућено, \"самоумањивање\" биће постављено на почетни смер погледа"
 
 #: src/ui_configurationDialog.h:865
 msgid "Auto zoom out returns to initial direction of view"
-msgstr ""
+msgstr "Самоумањивање враћа на почетни смер погледа"
 
 #: src/ui_configurationDialog.h:867
 msgid "Mask out everything outside a central circle in the main view"
@@ -3233,7 +3238,7 @@ msgstr "Замаскирај све ван централног круга у г
 
 #: src/ui_configurationDialog.h:869
 msgid "Disc viewport"
-msgstr ""
+msgstr "Кружни поглед"
 
 #: src/ui_configurationDialog.h:871
 msgid "Hide other constellations when you click one"
@@ -3253,7 +3258,7 @@ msgstr "Директоријум снимака екрана"
 
 #: src/ui_configurationDialog.h:877
 msgid "Invert colors"
-msgstr "Извртање боја"
+msgstr "Изврни боје"
 
 #: src/ui_configurationDialog.h:878
 msgid "Star catalog updates"
@@ -3361,11 +3366,11 @@ msgstr ""
 
 #: src/ui_AtmosphereDialog.h:176
 msgid "Atmosphere Details"
-msgstr ""
+msgstr "Детаљи о атмосфери"
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Refraction Settings"
-msgstr ""
+msgstr "Поставке преламања"
 
 #: src/ui_AtmosphereDialog.h:179
 msgid "Pressure (mbar):"
@@ -3381,133 +3386,138 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
+"Пригушење је губитак сјаја звезде услед Земљине атмосфере. Дато је као "
+"величина/зрачна маса, где је зрачна маса број атмосфера коју светлост треба "
+"да прође. (највиша тачка: 1; видокруг: око 40)"
 
 #: src/ui_AtmosphereDialog.h:187
 msgid "Extinction Coefficient:"
-msgstr ""
+msgstr "Коефицијент пригушења:"
 
 #: src/ui_AtmosphereDialog.h:189
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
+"Користите око 0.12 за планинске врхове, 0.2 за добар сеоски пејзаж, 0.35 за "
+"тамне прилике."
 
 #: src/ui_CustomInfoDialog.h:194
 msgid "Custom Info Settings"
-msgstr ""
+msgstr "Поставке жељених података"
 
 #: src/ui_CustomInfoDialog.h:196
 msgid "Display info about an object's name"
-msgstr ""
+msgstr "Приказивање информација о имену објекта"
 
 #: src/ui_CustomInfoDialog.h:198
 msgid "An object's name"
-msgstr ""
+msgstr "Назив објекта"
 
 #: src/ui_CustomInfoDialog.h:200
 msgid "Display  info about a catalog numbers"
-msgstr ""
+msgstr "Прикажи информације о броју каталога"
 
 #: src/ui_CustomInfoDialog.h:202
 msgid "Catalog numbers"
-msgstr ""
+msgstr "Бројеви каталога"
 
 #: src/ui_CustomInfoDialog.h:204
 msgid "Display  info about a visual magnitude"
-msgstr ""
+msgstr "Прикажи информације о визуелној величини"
 
 #: src/ui_CustomInfoDialog.h:206
 msgid "Visual magnitude"
-msgstr ""
+msgstr "Визуелна величина"
 
 #: src/ui_CustomInfoDialog.h:208
 msgid "Display  info about an absolute magnitude"
-msgstr ""
+msgstr "Приказивање информација о апсолутној величини"
 
 #: src/ui_CustomInfoDialog.h:210
 msgid "Absolute magnitude"
-msgstr ""
+msgstr "Апсолутна величина"
 
 #: src/ui_CustomInfoDialog.h:212
 msgid "Display the equatorial position (J2000 ref)"
-msgstr ""
+msgstr "Прикажи екваторијалну позицију (J2000 релативно)"
 
 #: src/ui_CustomInfoDialog.h:214
 msgid "The equatorial coordinates (J2000 ref)"
-msgstr ""
+msgstr "Екваторијалне координате (J2000 релативно)"
 
 #: src/ui_CustomInfoDialog.h:216
 msgid "Display the equatorial position (of date)"
-msgstr ""
+msgstr "Прикажи екваторијалну позицију (датум)"
 
 #: src/ui_CustomInfoDialog.h:218
 msgid "The equatorial coordinates (of date)"
-msgstr ""
+msgstr "Екваторијалне координате (датум)"
 
 #: src/ui_CustomInfoDialog.h:220
 msgid "Display the altitude and azimuth position"
-msgstr ""
+msgstr "Прикажи висину и азимуталну позицију"
 
 #: src/ui_CustomInfoDialog.h:222
 msgid "The alt-azimuthal coordinates"
-msgstr ""
+msgstr "Хоризонтална координата"
 
 #: src/ui_CustomInfoDialog.h:224
 msgid "Display the hour angle + DE (of date)"
-msgstr ""
+msgstr "Прикажите сатни угао и деклинацију (до сада)"
 
 #: src/ui_CustomInfoDialog.h:226
 msgid "The hour angle"
-msgstr ""
+msgstr "Сатни угао"
 
 #: src/ui_CustomInfoDialog.h:228
 msgid "Display info about an object's distance"
-msgstr ""
+msgstr "Приказивање информација о удаљености објекта"
 
 #: src/ui_CustomInfoDialog.h:230
 msgid "Object's distance"
-msgstr ""
+msgstr "Удаљеност објекта"
 
 #: src/ui_CustomInfoDialog.h:232
 msgid "Display info about an object's size"
-msgstr ""
+msgstr "Приказивање информација о величини објекта"
 
 #: src/ui_CustomInfoDialog.h:234
 msgid "Object's size"
-msgstr ""
+msgstr "Величина објекта"
 
 #: src/ui_CustomInfoDialog.h:236 src/ui_CustomInfoDialog.h:240
 #: src/ui_CustomInfoDialog.h:244
 msgid "Display a derived class-specific extra fields"
-msgstr ""
+msgstr "Прикажи изведена додатна поља специфичне класе"
 
 #: src/ui_CustomInfoDialog.h:238
 msgid "Additional info (Extra 1)"
-msgstr ""
+msgstr "Додатне информације (Додатне 1)"
 
 #: src/ui_CustomInfoDialog.h:242
 msgid "Additional info (Extra 2)"
-msgstr ""
+msgstr "Додатне информације (Додатне 2)"
 
 #: src/ui_CustomInfoDialog.h:246
 msgid "Additional info (Extra 3)"
-msgstr ""
+msgstr "Додатне информације (Додатне 3)"
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
-msgstr ""
+msgstr "Конзола скрипте"
 
 #: src/ui_scriptConsole.h:344
 msgid "load script from file"
-msgstr ""
+msgstr "учитавање скрипте из датотеке"
 
 #: src/ui_scriptConsole.h:348
 msgid "save script to file"
-msgstr ""
+msgstr "сачувај скрипту у датотеци"
 
 #: src/ui_scriptConsole.h:352
 msgid "clear script"
-msgstr ""
+msgstr "очисти скрипту"
 
 #: src/ui_scriptConsole.h:356
 msgid "pre-process script using SSC preprocessor"

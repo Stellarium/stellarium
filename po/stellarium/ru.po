@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-05-03 18:56+0000\n"
+"PO-Revision-Date: 2012-05-06 16:48+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:42+0000\n"
+"X-Launchpad-Export-Date: 2012-05-07 04:37+0000\n"
 "X-Generator: Launchpad (build 15195)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -3094,11 +3094,11 @@ msgstr "Сохранить настройки"
 
 #: src/ui_configurationDialog.h:811
 msgid "Restore the default settings that came with Stellarium"
-msgstr "Восстановить стандартные настройки"
+msgstr "Первоначальные настройки"
 
 #: src/ui_configurationDialog.h:813
 msgid "Restore defaults"
-msgstr "Восстановить настройки по умолчанию"
+msgstr "Первоначальные настройки"
 
 #: src/ui_configurationDialog.h:814
 msgid ""
@@ -3106,9 +3106,9 @@ msgid ""
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr ""
-"Восстановление настроек по умолчанию требует перезапуска Stellarium. "
-"Сохранение всех текущих настроек, включая поле и направление обзора, для "
-"использования при следующем запуске."
+"Восстановление первоначальных настроек требует перезапуска Stellarium. "
+"Сохранение всех текущих настроек, включая поле зрения и направление обзора, "
+"для использования при следующем запуске."
 
 #: src/ui_configurationDialog.h:816
 msgid "The width of your view when Stellarium starts"
@@ -4407,7 +4407,7 @@ msgstr "Длина:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:672
 msgid "Restore default settings"
-msgstr "Восстановить настройки"
+msgstr "Первоначальные настройки"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
 msgid "Save settings as default"
@@ -5967,6 +5967,3 @@ msgstr "внегалактический (в МО) пульсар"
 
 #~ msgid "Sky Language: "
 #~ msgstr "Язык небесных названий: "
-
-#~ msgid "Search also in the SIMBAD on-line astronomical database"
-#~ msgstr "Поиск также в астрономической базе данных SIMBAD"
