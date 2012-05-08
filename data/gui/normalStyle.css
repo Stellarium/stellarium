@@ -19,7 +19,7 @@ QDockWidget {
 }
 
 QWidget {
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(86, 87, 90), stop: 1 rgb(48, 49, 52));
+        background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(86, 87, 90), stop: 1 rgb(48, 49, 52));
 	selection-background-color: rgb(253, 216, 134);
 	selection-color: rgb(3, 3, 3);
 }
@@ -150,7 +150,7 @@ QTextEdit {
 
 QTextBrowser {
 	border: 0px solid rgb(0, 0, 0);
-	background: rgb(86, 87, 90);
+        background: rgb(86, 87, 90);
 	color: rgb(3, 3, 3);
 }
 
