@@ -51,19 +51,18 @@ protected:
 	}
 };
 
-
 //TODO get rid of all StelPainter calls (gradually)
-
 
 //! Base class for renderer based on OpenGL and at the same time Qt's QGL.
 class StelQGLRenderer : public StelGLRenderer
 {
 public:
-    StelQGLRenderer(QGraphicsView* parent)
+	//! Construct a StelQGLRenderer whose GL widget will be a child of specified QGraphicsView.
+	StelQGLRenderer(QGraphicsView* parent)
 		: glContext(new QGLContext(QGLFormat(QGL::StencilBuffer | 
 		                                     QGL::DepthBuffer   |
 		                                     QGL::DoubleBuffer)))
-	    , glWidget(new StelQGLWidget(glContext, parent))
+		, glWidget(new StelQGLWidget(glContext, parent))
 		, painter(NULL)
 	{
 		glWidget->updateGL();
@@ -95,7 +94,6 @@ public:
 		glWidget->setAutoFillBackground(false);
 		return StelGLRenderer::init();
 	}
-	
 	
 	virtual QImage screenshot()
 	{
@@ -166,7 +164,7 @@ protected:
 	}
 	
 private:
-	//! OpenGL context of Stellarium.
+	//! OpenGL context..
 	QGLContext* glContext;
 	//! Widget we're drawing to with OpenGL.
 	StelQGLWidget* glWidget;

@@ -449,7 +449,8 @@ void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer
 	for (int row = 0; row < maxGridY; row++)
 	{
 		sPainter.drawFromArray(StelPainter::TriangleStrip, 
-		                       (maxGridX + 1) * 2, row * (maxGridX + 1) * 2,
+		                       (maxGridX + 1) * 2, 
+		                       row * (maxGridX + 1) * 2,
 		                       false);
 	}
 	sPainter.enableClientStates(false);

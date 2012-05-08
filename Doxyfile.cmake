@@ -67,7 +67,7 @@ OUTPUT_LANGUAGE        = English
 # the file and class documentation (similar to JavaDoc).
 # Set to NO to disable this.
 
-BRIEF_MEMBER_DESC      = NO
+BRIEF_MEMBER_DESC      = YES
 
 # If the REPEAT_BRIEF tag is set to YES (the default) Doxygen will prepend
 # the brief description of a member or function before the detailed description.
@@ -102,7 +102,7 @@ ABBREVIATE_BRIEF       = "The $name class" \
 # Doxygen will generate a detailed section even if there is only a brief
 # description.
 
-ALWAYS_DETAILED_SEC    = NO
+ALWAYS_DETAILED_SEC    = YES
 
 # If the INLINE_INHERITED_MEMB tag is set to YES, doxygen will show all
 # inherited members of a class in the documentation of that class as if those

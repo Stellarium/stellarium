@@ -24,15 +24,10 @@ struct TestVertex1
 	
 	bool operator == (const TestVertex1& rhs) const {return vertex == rhs.vertex;}
 	
-	static const uint attributeCount = 1;
-	static const AttributeType attributeType[attributeCount];
-	static const AttributeInterpretation attributeInterpretation[attributeCount];
+	static const QVector<VertexAttribute> attributes;
 };
-const AttributeType TestVertex1::attributeType[TestVertex1::attributeCount] = 
-	{AT_Vec3f};
-const AttributeInterpretation TestVertex1::attributeInterpretation[TestVertex1::attributeCount] =
-	{Position};
-
+const QVector<VertexAttribute> TestVertex1::attributes = 
+	(QVector<VertexAttribute>() << VertexAttribute(AT_Vec3f, Position));
 
 //! Test vertex with a position and a texcoord.
 struct TestVertex2
@@ -51,14 +46,11 @@ struct TestVertex2
 		return vertex == rhs.vertex && texCoord == rhs.texCoord;
 	}
 	
-	static const uint attributeCount = 2;
-	static const AttributeType attributeType[attributeCount];
-	static const AttributeInterpretation attributeInterpretation[attributeCount];
+	static const QVector<VertexAttribute> attributes;
 };
-const AttributeType TestVertex2::attributeType[TestVertex2::attributeCount] = 
-	{AT_Vec3f, AT_Vec2f};
-const AttributeInterpretation TestVertex2::attributeInterpretation[TestVertex2::attributeCount] =
-	{Position, TexCoord};
+const QVector<VertexAttribute> TestVertex2::attributes = 
+	(QVector<VertexAttribute>() << VertexAttribute(AT_Vec3f, Position)
+	                            << VertexAttribute(AT_Vec2f, TexCoord));
 
 //! Test vertex with a position, texcoord, normal and color.
 struct TestVertex3
@@ -84,23 +76,19 @@ struct TestVertex3
 		       color == rhs.color;
 	}
 	
-	static const uint attributeCount = 4;
-	static const AttributeType attributeType[attributeCount];
-	static const AttributeInterpretation attributeInterpretation[attributeCount];
+	static const QVector<VertexAttribute> attributes;
 };
-const AttributeType TestVertex3::attributeType[TestVertex3::attributeCount] = 
-	{AT_Vec3f, AT_Vec2f, AT_Vec3f, AT_Vec4f};
-const AttributeInterpretation TestVertex3::attributeInterpretation[TestVertex3::attributeCount] =
-	{Position, TexCoord, Normal, Color};
+const QVector<VertexAttribute> TestVertex3::attributes = 
+	(QVector<VertexAttribute>() << VertexAttribute(AT_Vec3f, Position)
+	                            << VertexAttribute(AT_Vec2f, TexCoord)
+	                            << VertexAttribute(AT_Vec3f, Normal)
+	                            << VertexAttribute(AT_Vec4f, Color));
 	
-	
-//! Test specified StelVertexBuffer implementation with specified vertex type.
-//!
-//! @tparam Buffer Vertex buffer type, already parametrized by the vertex type.
-//! @tparam Vertex Vertex type stored in the buffer. Must match the vertex type parameter of Buffer.
-template<class Buffer, class Vertex> void testVertexBuffer()
+template<class BufferBackend, class Vertex> 
+void TestStelVertexBuffer::testVertexBuffer()
 {
-	StelVertexBuffer<Vertex>* buffer = new Buffer(Triangles);
+	StelVertexBuffer<Vertex>* buffer = 
+		new StelVertexBuffer<Vertex>(new BufferBackend(Triangles, Vertex::attributes));
 	
 	// Make sure the buffer was initialized correctly.
 	QCOMPARE(buffer->locked(), false);
@@ -145,7 +133,7 @@ template<class Buffer, class Vertex> void testVertexBuffer()
 
 void TestStelVertexBuffer::testStelTestGLVertexBuffer()
 {
-	testVertexBuffer<StelTestGLVertexBuffer<TestVertex1>, TestVertex1>();
-	testVertexBuffer<StelTestGLVertexBuffer<TestVertex2>, TestVertex2>();
-	testVertexBuffer<StelTestGLVertexBuffer<TestVertex3>, TestVertex3>();
+	testVertexBuffer<StelTestGLVertexBufferBackend, TestVertex1>();
+	testVertexBuffer<StelTestGLVertexBufferBackend, TestVertex2>();
+	testVertexBuffer<StelTestGLVertexBufferBackend, TestVertex3>();
 }

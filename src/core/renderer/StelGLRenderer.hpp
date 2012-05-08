@@ -8,11 +8,17 @@
 
 #include "StelRenderer.hpp"
 
+#include "StelVertexBuffer.hpp"
+#include "StelTestGLVertexBufferBackend.hpp"
+
 
 //TODO At the moment, we're always using FBOs when supported.
 //     We need a config file for Renderer implementation to disable it.
 
+//TODO move QGL FBO (and maybe QPainter?) code to QGLRenderer
+
 //! Base class for OpenGL based renderers.
+//!
 class StelGLRenderer : public StelRenderer
 {
 public:
@@ -26,6 +32,7 @@ public:
 		, backBufferPainter(NULL)
 		, defaultPainter(NULL)
 		, drawing(false)
+		
 	{
 	}
 	
@@ -158,8 +165,9 @@ public:
 		{
 			Q_ASSERT_X(!backBuffer->isBound() && !frontBuffer->isBound(),
 			           "StelGL2Renderer::drawWindow", 
-			           "Framebuffer objects weren't released before drawing the result");
+			           "Framebuffer objects loadweren't released before drawing the result");
 			enablePainting(defaultPainter);
+			
 			effect->paintViewportBuffer(frontBuffer);
 			disablePainting();
 		}
@@ -167,6 +175,12 @@ public:
 	}
 	
 protected:
+	virtual StelVertexBufferBackend* createVertexBufferBackend
+		(const PrimitiveType primitiveType, const QVector<VertexAttribute>& attributes)
+	{
+		return new StelTestGLVertexBufferBackend(primitiveType, attributes);
+	}
+	
 	//! Make Stellarium GL context the currently used GL context. Call this before GL calls.
 	virtual void makeGLContextCurrent() = 0;
 	
