@@ -27,6 +27,7 @@
 class StelQGL2Renderer : public StelQGLRenderer
 {
 public:
+	//! Construct a StelQGL2Renderer whose GL widget will be a child of specified QGraphicsView.
 	StelQGL2Renderer(QGraphicsView* parent)
 		: StelQGLRenderer(parent)
 		, initialized(false)

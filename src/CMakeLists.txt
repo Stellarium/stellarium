@@ -139,7 +139,8 @@ SET(stellarium_lib_SRCS
 	core/renderer/StelQGL2Renderer.hpp
 	
 	core/renderer/StelVertexBuffer.hpp
-	core/renderer/StelTestGLVertexBuffer.hpp
+	core/renderer/StelVertexBufferBackend.hpp
+	core/renderer/StelTestGLVertexBufferBackend.hpp
 
 	${gl_lib_SRCS}
 	core/external/fixx11h.h
@@ -742,7 +743,8 @@ SET(tests_testStelVertexBuffer_SRCS
   tests/testStelVertexBuffer.hpp
   tests/testStelVertexBuffer.cpp
   core/renderer/StelVertexBuffer.hpp
-  core/renderer/StelTestGLVertexBuffer.hpp)
+  core/renderer/StelVertexBufferBackend.hpp
+  core/renderer/StelTestGLVertexBufferBackend.hpp)
 QT4_WRAP_CPP(tests_testStelVertexBuffer_MOC_SRCS tests/testStelVertexBuffer.hpp)
 ADD_EXECUTABLE(testStelVertexBuffer EXCLUDE_FROM_ALL ${tests_testStelVertexBuffer_SRCS}
 ${tests_testStelVertexBuffer_MOC_SRCS})
