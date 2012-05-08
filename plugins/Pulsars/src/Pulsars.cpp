@@ -143,7 +143,7 @@ void Pulsars::init()
 }
 
 /*
- Draw our module. This should print name of first SNe in the main window
+ Draw our module. This should print name of first PSR in the main window
 */
 void Pulsars::draw(StelCore* core)
 {
