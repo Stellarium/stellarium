@@ -2,55 +2,9 @@
 #define _STELVERTEXBUFFER_HPP_
 
 #include "core/VecMath.hpp"
+#include "StelVertexBufferBackend.hpp"
+#include "VertexAttribute.hpp"
 
-
-//! Vertex attribute types. 
-//!
-//! Used to specify data type of a vertex attribute in a vertex struct used with VertexBuffer.
-enum AttributeType
-{
-	//! Represents Vec4f (4D float vector).
-	AT_Vec4f,
-	//! Represents Vec3f (3D float vector).
-	AT_Vec3f,
-	//! Represents Vec2f (2D float vector).
-	AT_Vec2f
-};
-
-//! Get size of a vertex attribute of specified type.
-//!
-//! @param type Attribute type to get size of (e.g. Vec2f).
-//! @return Size of the vertex attribute in bytes.
-static size_t attributeSize(const AttributeType type)
-{
-	switch(type)
-	{
-		case AT_Vec2f: return sizeof(Vec2f);
-		case AT_Vec3f: return sizeof(Vec3f);
-		case AT_Vec4f: return sizeof(Vec4f);
-	}
-	Q_ASSERT_X(false, "Unknown vertex attribute type",
-				"StelQGLVertexBuffer::attributeSize");
-	
-	// Prevents GCC from complaining about exiting a non-void function:
-	return -1;
-}
-
-//! Vertex attribute interpretations. 
-//!
-//! Used to specify how Renderer should interpret a vertex attribute
-//! in a vertex struct used with VertexBuffer.
-enum AttributeInterpretation
-{
-	//! Vertex position.
-	Position,
-	//! Color of the vertex.
-	Color,
-	//! Normal of the vertex.
-	Normal,
-	//! Texture coordinate of the vertex.
-	TexCoord
-};
 
 //! Graphics primitive types. 
 //!
@@ -68,10 +22,15 @@ enum PrimitiveType
 
 //! Vertex buffer interface.
 //!
-//! Each StelRenderer backend might have its own vertex buffer, created by its
-//! createVertexBuffer method.
+//! Each StelRenderer backend might have its own vertex buffer backend.
+//! StelVertexBuffer is created through StelRenderer's createVertexBuffer function
+//! and wraps this backend.
 //! 
 //! StelVertexBuffer supports basic operations such as adding, reading and modifying vertices.
+//! 
+//! It can also be locked to allow uploading the data to the GPU, or unlocked
+//! to allow manipulation of the data.
+//!
 //! In order to be drawn (by a Renderer), the vertex buffer has to be locked. 
 //! To access/modify vertices, it must be unlocked.
 //! A newly created vertex buffer is always unlocked.
@@ -88,34 +47,25 @@ enum PrimitiveType
 //! struct MyVertex
 //! {
 //! 	// Vertex data members (attributes). 
-//! 	Vec2f vertex;
+//! 	Vec3f position;
 //! 	Vec2f texCoord;
-//! 	Vec4f color;
 //! 	
-//! 	// Number of vertex attributes. Must match the number of vertex data members.
-//! 	static const uint attributeCount = 3;
-//! 	
-//! 	// Specifies type of each attribute. Length of this array must be attributeCount.
-//! 	// Attribute type specifies if it's e.g. a Vec2f or Vec4f.
-//! 	// Array contents are specified below the class .
-//! 	// (C++ doesn't allow static array definitions inside the class)
-//! 	static const AttributeType attributeType[attributeCount];
-//! 	
-//! 	// Specifies interpretation of each attribute. Length of this array must be attributeCount.
-//! 	// Interpretation specifies how the Renderer should interpret this attribute
-//! 	// (normal, texcoord, vertex, etc.)
-//! 	// 2 attributes must never have the same interpretation.
-//! 	// Array contents are specified below the class .
-//! 	static const AttributeInterpretation attributeInterpretation[attributeCount];
+//! 	// Specifies data type and interpretation of each attribute.
+//! 	// Data type can be AT_Vec2f, AT_Vec3f or AT_Vec4f.
+//! 	// Interpretation can be Position, TexCoord, Normal or Color.
+//! 	// Two attributes must never have the same interpretation
+//! 	// (this is asserted by the vertex buffer backend at run time).
+//! 	//
+//! 	// The vector contents are defined below the class 
+//! 	// (C++ doesn't allow non-integer static const data members).
+//! 	static const QVector<VertexAttribute> attributes;
 //! };
-//!
-//! // Contents of attributeType and attributeInterpretation
-//! const AttributeType MyVertex::attributeType[MyVertex::attributeCount] = {V2f, V2f, V4f};
-//! const AttributeInterpretation MyVertex::attributeInterpretation[MyVertex::attributeCount] =
-//! 	{Vertex, TexCoord, Color};
+//! const QVector<VertexAttribute> MyVertex::attributes = 
+//! 	(QVector<VertexAttribute>() << VertexAttribute(AT_Vec3f, Position)
+//! 	                            << VertexAttribute(AT_Vec2f, TexCoord));
 //! @endcode
 //!
-//! @see AttributeType, AttributeInterpretation, StelRenderer
+//! @see AttributeType, AttributeInterpretation, VertexAttribute, StelRenderer
 //!
 //! @section apinotes API design notes
 //!
@@ -143,18 +93,31 @@ enum PrimitiveType
 //!
 //! An alternative, possibly better (especially with C++11) option for modifying vertices
 //! would be to use a function pointer / function object to process each vertex.
+//!
+//! @subsection apinotes_backend Vertex buffer backend
+//!
+//! VertexBuffer is currently separated into frontend (StelVertexBuffer), 
+//! which allows type-safe vertex buffer construction thanks to templates,
+//! and backend, which doesn't know vertex type directly and works on raw 
+//! data described by attributes static data member of the vertex struct.
+//! 
+//! This is because a virtual method can't be templated at the same time.
+//! There might be a possible workaround around this, but I'm not aware of that
+//! at the moment. C++11 might make it possible for the backend to at least
+//! re-create Vertex struct as a tuple in its functions using variadic recursive 
+//! templates, but that might be too complex/hacky to be worth the benefit.
 template<class V> class StelVertexBuffer
 {
+//! Only Renderer can construct a vertex buffer, and we also need unittesting.
+friend class StelRenderer;
+friend class TestStelVertexBuffer;
+
 public:
-	StelVertexBuffer()
-		: locked_(false)
-		, vertexCount(0)
+	//! Destroy the vertex buffer. StelVertexBuffer must be destroyed by the user, not Renderer.
+	~StelVertexBuffer()
 	{
-		validateVertexType();
+		delete backend;
 	}
-	
-	//! Required to ensure that derived classes get properly deallocated.
-	virtual ~StelVertexBuffer(){};
 	
 	//! Add a new vertex to the end of the buffer.
 	//!
@@ -165,7 +128,7 @@ public:
 	{
 		Q_ASSERT_X(!locked_, "Trying to add a vertex to a locked vertex buffer",
 		           "StelVertexBuffer::addVertex");
-		addVertex_(vertex);
+		backend->addVertex(reinterpret_cast<const quint8*>(&vertex));
 		++vertexCount;
 	}
 	
@@ -181,7 +144,9 @@ public:
 		           "StelVertexBuffer::getVertex");
 		Q_ASSERT_X(index < vertexCount, "Vertex index out of bounds",
 		           "StelVertexBuffer::getVertex");
-		return getVertex_(index);
+		V result;
+		backend->getVertex(index, reinterpret_cast<quint8*>(&result));
+		return result;
 	}
 	
 	//! Set a vertex at specified index in the buffer.
@@ -196,20 +161,20 @@ public:
 		           "StelVertexBuffer::setVertex");
 		Q_ASSERT_X(index < vertexCount, "Vertex index out of bounds",
 		           "StelVertexBuffer::setVertex");
-		setVertex_(index, vertex);
+		backend->setVertex(index, reinterpret_cast<const quint8*>(&vertex));
 	}
 	
 	//! Lock the buffer. Must be called before drawing.
 	void lock() 
 	{
 		locked_ = true;
-		lock_();
+		backend->lock();
 	}
 	
 	//! Unlock the buffer. Must be called to modify the buffer after drawing.
 	void unlock()
 	{
-		unlock_();
+		backend->unlock();
 		locked_ = false;
 	}
 	
@@ -225,91 +190,24 @@ public:
 		return vertexCount;
 	}
 	
-protected:
-	//! Called when the buffer is locked. This can be used e.g. to upload vertex data to the GPU.
-	virtual void lock_(){}
-	
-	//! Called when the buffer is unlocked. This can be used e.g. to map a GPU vertex buffer to RAM.
-	virtual void unlock_(){}
-	
-	//! Add a vertex to the buffer. The buffer is guaranteed to be unlocked at call.
-	virtual void addVertex_(const V& vertex) = 0;
-	
-	//! Return a vertex from the buffer. The buffer is guaranteed to be unlocked at call.
-	virtual V getVertex_(const uint index) = 0;
-	
-	//! Set a vertex in the buffer. The buffer is guaranteed to be unlocked at call.
-	virtual void setVertex_(const uint index, const V& vertex) = 0;
-	
 private:
+	//! Construct a StelVertexBuffer wrapping specified backend. Only Renderer can do that.
+	StelVertexBuffer(StelVertexBufferBackend* backend)
+		: locked_(false)
+		, vertexCount(0)
+		, backend(backend)
+	{
+		backend->validateVertexType(sizeof(V));
+	}
+	
 	//! Is the buffer locked (i.e. ready to draw, possibly in GPU memory) ?
 	bool locked_;
 	
 	//! Number of vertices in the buffer.
 	uint vertexCount;
 	
-	//! Assert that the user-specified vertex type is valid.
-	//!
-	//! For instance, assert that there is no more than 1 attribute with
-	//! a particular interpretation (e.g. color, normal),
-	//! and that total size of attributes in bytes matches size
-	//! of the vertex.
-	void validateVertexType()
-	{
-		// We have no way of looking at each data member of the vertex type, 
-		// but we can at least enforce that their total length matches.
-		uint bytes = 0;
-		
-		for(uint attrib = 0; attrib < V::attributeCount; ++attrib)
-		{
-			bytes += attributeSize(V::attributeType[attrib]);
-		}
-		
-		Q_ASSERT_X(bytes == sizeof(V), 
-		           "Size of the vertex type in bytes doesn't match the sum of sizes of "
-		           "all vertex attributes as reported by attributeType() method.",
-		           "StelVertexBuffer::validateVertexType");
-		
-		
-		bool vertex, texCoord, normal, color;
-		vertex = texCoord = normal = color = false;
-		
-		// Ensure that every kind of vertex attribute is present at most once.
-		for(uint attrib = 0; attrib < V::attributeCount; ++attrib)
-		{
-			switch(V::attributeInterpretation[attrib])
-			{
-				case Position:
-					Q_ASSERT_X(!vertex, 
-					           "Vertex type has more than one vertex position attribute",
-					           "StelVertexBuffer::validateVertexType");
-					vertex = true;
-					break;
-				case TexCoord:
-					Q_ASSERT_X(!texCoord, 
-					           "Vertex type has more than one texture coordinate attribute",
-					           "StelVertexBuffer::validateVertexType");
-					texCoord = true;
-					break;
-				case Normal:
-					Q_ASSERT_X(!normal, 
-					           "Vertex type has more than one normal attribute",
-					           "StelVertexBuffer::validateVertexType");
-					normal = true;
-					break;
-				case Color:
-					Q_ASSERT_X(!color, 
-					           "Vertex type has more than one color attribute",
-					           "StelVertexBuffer::validateVertexType");
-					color = true;
-					break;
-				default:
-					Q_ASSERT_X(false, "Unknown vertex attribute interpretation",
-					           "StelVertexBuffer::validateVertexType");
-			}
-		}
-	}
+	//! Vertex buffer backend.
+	StelVertexBufferBackend* backend;
 };
-
 
 #endif // _STELVERTEXBUFFER_HPP_

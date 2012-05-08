@@ -5,6 +5,7 @@
 #include <QPainter>
 #include <QSize>
 
+#include "StelVertexBuffer.hpp"
 #include "StelViewportEffect.hpp"
 
 
@@ -23,6 +24,8 @@
 
 //TODO If Renderer implementation now decides whether or not to use VisualEffects,
 //     "framebufferOnly" makes no sense, and should be removed.
+
+
 
 //! Handles all graphics related functionality.
 //! 
@@ -61,6 +64,41 @@ public:
 	//! Must be called once at startup and on every GL viewport resize, specifying new size.
 	virtual void viewportHasBeenResized(QSize size) = 0;
 	
+	//! Create an empty vertex buffer and return a pointer to it.
+	//!
+	//! The vertex buffer must be deleted by the user once it is not used
+	//! (and before the Renderer is destroyed).
+	//!
+	//! @tparam V Vertex type. See the example in StelVertexBuffer documentation
+	//!           on how to define a vertex type.
+	//! @param primitiveType Graphics primitive type stored in the buffer.
+	//!
+	//! @return New vertex buffer storing vertices of type V.
+	template<class V>
+	StelVertexBuffer<V>* createVertexBuffer(const PrimitiveType primitiveType)
+	{
+		return StelVertexBuffer<V>(createVertexBufferBackend(primitiveType, V::attributes));
+	}
+	
+	//! Draw contents of a vertex buffer.
+	//!
+	//! @param vertexBuffer Vertex buffer to draw.
+	//! @param indexBuffer  Index buffer specifying which vertices from the buffer to draw.
+	//!                     If NULL, indexing will not be used and vertices will be drawn
+	//!                     directly in order they are in the buffer.
+	//! @param projector    Projector to project vertices' positions before drawing.
+	//!                     If NULL, no projection will be done and the vertices will be drawn
+	//!                     directly.
+	//!
+	//! @todo This member function is still not implemented.
+	template<class V>
+	void drawVertexBuffer(StelVertexBuffer<V>* vertexBuffer, 
+	                      class StelIndexBuffer* indexBuffer = NULL,
+	                      StelProjectorP projector = NULL)
+	{
+		Q_ASSERT_X(false, "TODO - Implement this method", "StelRenderer::drawVertexBuffer");
+	}
+	
 	//! Start using drawing calls.
 	virtual void startDrawing() = 0;
 	
@@ -72,6 +110,18 @@ public:
 	
 	//! Draw the result of drawing commands to the window, applying given effect if possible.
 	virtual void drawWindow(StelViewportEffect* effect) = 0;
+	
+protected:
+	//! Create a vertex buffer backend. Used by createVertexBuffer.
+	//!
+	//! This allows each Renderer backend to create its own vertex buffer backend.
+	//!
+	//! @param primitiveType Graphics primitive type stored in the buffer.
+	//! @param attributes    Descriptions of all attributes of the vertex type stored in the buffer.
+	//!
+	//! @return Pointer to a vertex buffer backend specific to the Renderer backend.
+	virtual StelVertexBufferBackend* createVertexBufferBackend
+		(const PrimitiveType primitiveType, const QVector<VertexAttribute>& attributes) = 0;
 };
 
 #endif // _STELRENDERER_HPP_
