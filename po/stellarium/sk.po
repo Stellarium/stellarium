@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2011-07-19 12:46+0000\n"
+"PO-Revision-Date: 2012-05-07 08:26+0000\n"
 "Last-Translator: Juraj Kubica <Juraj.Kubica@seznam.cz>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:43+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-08 04:48+0000\n"
+"X-Generator: Launchpad (build 15204)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -35,7 +35,7 @@ msgstr "Obzor"
 
 #: src/core/modules/GridLinesMgr.cpp:558
 msgid "Galactic Plane"
-msgstr ""
+msgstr "Galaktická rovina"
 
 #: src/core/modules/LandscapeMgr.cpp:493
 msgid "Author: "
@@ -64,7 +64,7 @@ msgstr "Druh: <b>%1</b>"
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Jasnosť (mag): <b>%1</b> (extinkcia do: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
@@ -128,7 +128,7 @@ msgstr "Sklon ekliptiky (pre dátum): %1"
 #: src/core/modules/Planet.cpp:151
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "Vzdialenosť: %1AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:158
 #, no-c-format, qt-format
@@ -138,7 +138,7 @@ msgstr "Vzdialenosť: %1 AU"
 #: src/core/modules/Planet.cpp:169
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "Zdanlivý priemer: %1, s kruhmi: %2"
 
 #: src/core/modules/Planet.cpp:175
 #, qt-format
@@ -148,22 +148,22 @@ msgstr "Uhlový priemer: %1"
 #: src/core/modules/Planet.cpp:189
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "Fázový uhol: %1"
 
 #: src/core/modules/Planet.cpp:190
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "Elongácia: %1"
 
 #: src/core/modules/Planet.cpp:191
 #, qt-format
 msgid "Phase: %1"
-msgstr ""
+msgstr "Fáza: %1"
 
 #: src/core/modules/Planet.cpp:192
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr ""
+msgstr "Osvetlených: %1%"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -173,17 +173,17 @@ msgstr "Jasnosť: <b>%1 m</b> (B-V index: %2)"
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "Zdanlivá jasnosť (mag): <b>%1</b> (podľa extinkcie)"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "Jasnosť (mag): <b>%1</b> (extinkcia do: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr ""
+msgstr "Jasnosť (mag): <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
 #, qt-format
@@ -203,7 +203,7 @@ msgstr "Paralaxa: %1\""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr ""
+msgstr "Kozmická loď"
 
 #: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
@@ -346,7 +346,7 @@ msgstr "Azimut/výška: %1/%2"
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
-msgstr ""
+msgstr "Chyba siete"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
