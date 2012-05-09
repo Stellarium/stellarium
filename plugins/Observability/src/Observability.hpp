@@ -60,35 +60,39 @@ public:
 //! Computes the RA, Dec and Rise/Set Sid. times of the selected planet for each day of the current year.
 //! @param core the current Stellarium core.
 //! @param Name name of the currently selected planet. 
-	void PlanetRADec(StelCore *core, QString Name);
+	virtual void PlanetRADec(StelCore *core, QString Name);
 
 //! Computes the Sun's RA and Dec for each day of a given year/
 //! @param Year the year to be analyzed.
-	void SunRADec(StelCore* core);
+	virtual void SunRADec(StelCore* core);
 
 //! Computes the Sun's Sid. Times at astronomical twilight (for each year's day)
-	void SunHTwi();
+	virtual void SunHTwi();
 
 //! Vector to store the Julian Dates for the current year:
-	double yearJD[365];
+	double yearJD[366];
+
+//! Check if a source is observable during a given date:
+//! @aparm i the day of the year.
+	virtual bool CheckRise(int i);
 
 //! Some useful constants (self-explanatory).
 	double Rad2Deg, Rad2Hr, AstroTwiAlti;
 
 //! RA, Dec, observer latitude, object's elevation, and Hour Angle at horizon.
-	double selRA, selDec, mylat, alti, horizH, myJD;
+	double selRA, selDec, mylat, mylon, alti, horizH, myJD;
 
 //! Vectors to store Sun's RA, Dec, and Sid. Time at astronomical twilight.
-	double SunRA[365], SunDec[365], SunSidT[2][365];
+	double SunRA[366], SunDec[366], SunSidT[2][366];
 
 //! Vectors to store planet's RA, Dec, and Sid. Time at rise/set.
-	double ObjectRA[365], ObjectDec[365], ObjectSidT[2][365];
+	double ObjectRA[366], ObjectDec[366], ObjectH0[366], ObjectSidT[2][366];
 
 //! Vector of Earth position through the year.
-	Vec3d EarthPos[365];
+	Vec3d EarthPos[366];
 
-//! Cumulative sum of days of year (for each month) and current simulation year;
-	int cumsum[13], currYear;
+//! Current simulation year and number of days in the year.;
+	int currYear, nDays;
 
 //! Useful auxiliary strings, to help checking changes in source/observer. Also to store results that must survive between iterations.
 	QString selName, bestNight, ObsRange, objname;
@@ -99,6 +103,7 @@ public:
 //! Equatorial coordinates of currently-selected source.
 	Vec3d EquPos;
 
+//! Some booleans to check the kind of source selected.
 	bool isStar,isMoon,isSun,isScreen;
 
 private:
