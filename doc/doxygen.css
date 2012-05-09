@@ -7,10 +7,10 @@ BODY,TD {
 
 table.stel
 {
-  padding: 0;
-  border: 0;
-  background: none;
-  max-width: 1000px;
+	padding: 0;
+	border: 0;
+	background: none;
+	max-width: 1000px;
 }
 
 tr.stel
@@ -27,10 +27,10 @@ tr.header
 
 td
 {
-  border: 0;
+	border: 0;
 }
 
-H1 {
+H1,DIV.title {
 	text-align: center;
 	font-size: 160%;
 }
@@ -43,6 +43,11 @@ H3 {
 
 H3.version {
 	text-align: center;
+}
+
+DIV.summary {
+	text-align: center;
+	margin: 0.5em 0;
 }
 
 CAPTION { 
