@@ -1004,6 +1004,14 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 	return StelObjectP();
 }
 
+float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) const
+{
+	PlanetP p = searchByEnglishName(planetName);
+	float r = 0.f;
+	r = p->getVMagnitude(StelApp::getInstance().getCore(), withExtinction);
+	return r;
+}
+
 // Search if any Planet is close to position given in earth equatorial position and return the distance
 StelObjectP SolarSystem::search(Vec3d pos, const StelCore* core) const
 {
