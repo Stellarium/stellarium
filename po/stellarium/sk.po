@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-05-07 08:26+0000\n"
+"PO-Revision-Date: 2012-05-09 08:43+0000\n"
 "Last-Translator: Juraj Kubica <Juraj.Kubica@seznam.cz>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-08 04:48+0000\n"
-"X-Generator: Launchpad (build 15204)\n"
+"X-Launchpad-Export-Date: 2012-05-10 05:18+0000\n"
+"X-Generator: Launchpad (build 15213)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -350,23 +350,23 @@ msgstr "Chyba siete"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
-msgstr ""
+msgstr "Chyba pri spracovaní polohy"
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
-msgstr ""
+msgstr "Zisťuje sa"
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "Chyba"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr ""
+msgstr "Nenájdené"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
-msgstr ""
+msgstr "Nájdené"
 
 #: src/gui/ConfigurationDialog.cpp:346
 msgid "Select screenshot directory"
@@ -417,7 +417,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:767
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "Všetky dostupné hviezdne katalógy sú nainštalované."
 
 #: src/gui/ConfigurationDialog.cpp:772
 #, qt-format
@@ -638,17 +638,19 @@ msgstr "Vývojár: %1"
 #: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:307
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "Tester: %1"
 
 #: src/gui/HelpDialog.cpp:308
 msgid "Past Developers"
-msgstr ""
+msgstr "Minulí vývojári"
 
 #: src/gui/HelpDialog.cpp:309
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
+"Mnoho ľudí významne prispelo, ale už nie sú aktívni. Ich prínos výrazne "
+"pomohol projektu:"
 
 #: src/gui/HelpDialog.cpp:310
 #, qt-format
@@ -701,7 +703,7 @@ msgstr "Ekvatoriálna sieť (epocha J2000)"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
-msgstr ""
+msgstr "Ekliptická sieť J2000"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354

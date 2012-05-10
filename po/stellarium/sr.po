@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-05-07 15:32+0000\n"
+"PO-Revision-Date: 2012-05-09 20:26+0000\n"
 "Last-Translator: Иван Старчевић <ivanstar61@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-08 04:48+0000\n"
-"X-Generator: Launchpad (build 15204)\n"
+"X-Launchpad-Export-Date: 2012-05-10 05:18+0000\n"
+"X-Generator: Launchpad (build 15213)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -2986,7 +2986,7 @@ msgstr "Прикажи линију Екватора"
 
 #: src/ui_viewDialog.h:1166
 msgid "Show meridian line"
-msgstr ""
+msgstr "Прикажи линију меридијана"
 
 #: src/ui_viewDialog.h:1170
 msgid "Show horizon line"
@@ -3745,7 +3745,7 @@ msgstr "FOV: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
 #, qt-format
 msgid "Dimensions: %1"
-msgstr ""
+msgstr "Величина: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1525
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
@@ -3957,7 +3957,7 @@ msgstr "Висина тачкица (микрона):"
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Telescopes"
-msgstr ""
+msgstr "Телескопи"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:899
 msgid "Diameter:"
@@ -4085,7 +4085,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:265
 msgid "Notes for users"
-msgstr ""
+msgstr "Напомене за кориснике"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:266
 msgid ""
@@ -4123,7 +4123,7 @@ msgstr ""
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:280
 msgid "TLE data updates"
-msgstr ""
+msgstr "TLE ажурирање података"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
 msgid ""
@@ -4148,7 +4148,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
 msgid "Adding new satellites"
-msgstr ""
+msgstr "Додавање нових сателита"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
 msgid ""
@@ -4160,7 +4160,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
-msgstr ""
+msgstr "Техничке напомене"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
 msgid ""
@@ -4211,26 +4211,26 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
 msgid "Internet updates disabled"
-msgstr ""
+msgstr "Интернет исправке су онемогућене"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:355
 msgid "Updating now..."
-msgstr ""
+msgstr "Ажурирање сада..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:325
 msgid "Next update: < 1 minute"
-msgstr ""
+msgstr "Следеће ажурирање за: < 1 минут"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
 #, qt-format
 msgid "Next update: %1 minutes"
-msgstr ""
+msgstr "Следеће ажурирање за: %1 минута"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
 #, qt-format
 msgid "Next update: %1 hours"
-msgstr ""
+msgstr "Следеће ажурирање: %1 сати"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
@@ -4239,11 +4239,11 @@ msgstr "Ажурирај сад"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:346
 msgid "Update from files"
-msgstr ""
+msgstr "Ажурирање из датотека"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:358
 msgid "Update error"
-msgstr ""
+msgstr "Грешка при ажурирању"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:365
 #, qt-format
@@ -4252,7 +4252,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:422
 msgid "[new source]"
-msgstr ""
+msgstr "[нови извор]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
 msgid "[orbit calculation error]"
@@ -4260,19 +4260,19 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"
-msgstr ""
+msgstr "[Све ново додато]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:463
 msgid "[all not displayed]"
-msgstr ""
+msgstr "[није све приказано]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:464
 msgid "[all displayed]"
-msgstr ""
+msgstr "[све је приказано]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:465
 msgid "[all]"
-msgstr ""
+msgstr "[све]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:597
 msgid "Select TLE Update File"
@@ -4280,7 +4280,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:135
 msgid "Downloading data..."
-msgstr ""
+msgstr "Преузимање података..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:136
 msgid ""
@@ -4297,7 +4297,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:226
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:227
 msgid "Processing data..."
-msgstr ""
+msgstr "Обрада података..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:221
 msgid "No data could be downloaded. Try again later."
@@ -4306,7 +4306,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:344
 #, qt-format
 msgid "Catalog Number: %1"
-msgstr ""
+msgstr "Каталошки број: %1"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
@@ -4319,15 +4319,15 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:644
 msgid "Update from Internet sources"
-msgstr ""
+msgstr "Ажурирање из интернет извора"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
 msgid "Last update:"
-msgstr ""
+msgstr "Последња допуна:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:646
 msgid "Update frequency (hours):"
-msgstr ""
+msgstr "Учесталост ажурирања (сати):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:648
 msgid "Labels"
@@ -4335,29 +4335,29 @@ msgstr "Ознаке"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:649
 msgid "Label font size (pixels):"
-msgstr ""
+msgstr "Ознака величине словолика (тачкица) :"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:650
 msgid "Orbit lines"
-msgstr ""
+msgstr "Орбиталне линије"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:652
 #: plugins/Satellites/src/ui_satellitesDialog.h:656
 msgid "Number of segments used to draw the line"
-msgstr ""
+msgstr "Број сегмената који ће се користити за исцртавање линије"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Number of  segments:"
-msgstr ""
+msgstr "Број сегмената:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:659
 #: plugins/Satellites/src/ui_satellitesDialog.h:663
 msgid "Duration of a single segment in seconds"
-msgstr ""
+msgstr "Трајање једног сегмента у секунди"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:661
 msgid "Segment length (s):"
-msgstr ""
+msgstr "Дужина сегмента (s):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:666
 #: plugins/Satellites/src/ui_satellitesDialog.h:669
@@ -4366,15 +4366,15 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:671
 msgid "Fade length:"
-msgstr ""
+msgstr "Дужина изблеђивања:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:672
 msgid "Restore default settings"
-msgstr ""
+msgstr "Враћање подразумеване поставке"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
 msgid "Save settings as default"
-msgstr ""
+msgstr "Сачувај подешавања као подразумевана"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:674
 msgid "Settings"
@@ -4382,7 +4382,7 @@ msgstr "Поставке"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 msgid "Display the selected satellite(s)"
-msgstr ""
+msgstr "Приказ изабраних сателита"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:678
 msgid "Displayed"
@@ -4394,7 +4394,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 msgid "Orbit"
-msgstr ""
+msgstr "Орбита"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:684
 msgid "Catalog number:"
@@ -4410,11 +4410,11 @@ msgstr "Групе:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:688
 msgid "Comma separated list of groups"
-msgstr ""
+msgstr "Зарезом одвојена листа група"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:690
 msgid "TLE data:"
-msgstr ""
+msgstr "TLE подаци:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:692
 msgid "NORAD two line element orbit data"
@@ -4422,11 +4422,11 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:695
 msgid "Remove the selected satellites"
-msgstr ""
+msgstr "Уклони изабране сателите"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:698
 msgid "Add more satellites"
-msgstr ""
+msgstr "Додај још сателита"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:702
 msgid "Save changes"
@@ -4440,11 +4440,11 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:710
 msgid "Add new source"
-msgstr ""
+msgstr "Додај нови извор"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Remove selected source"
-msgstr ""
+msgstr "Уклони изабрани извор"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:717
 msgid "Sources"
@@ -4452,7 +4452,7 @@ msgstr "Извори"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:206
 msgid "More Satellites"
-msgstr ""
+msgstr "Више сателита"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:208
 msgid "Get data from update sources"
