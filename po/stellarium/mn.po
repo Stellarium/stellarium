@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-05-08 17:21+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2012-05-09 09:20+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-09 04:42+0000\n"
+"X-Launchpad-Export-Date: 2012-05-10 05:18+0000\n"
 "X-Generator: Launchpad (build 15213)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -103,7 +103,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:321
 msgid "Unknown"
-msgstr ""
+msgstr "Мэдэгдэхгүй"
 
 #: src/core/modules/Nebula.cpp:324
 msgid "Undocumented type"
@@ -337,11 +337,11 @@ msgstr ""
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "Алдаа"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr ""
+msgstr "Байхгүй байна"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
@@ -364,19 +364,19 @@ msgstr ""
 #: src/gui/ConfigurationDialog.cpp:570
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
-msgstr ""
+msgstr "Зохиогчид"
 
 #: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
 msgid "Contact"
-msgstr ""
+msgstr "Харьцах хүн"
 
 #: src/gui/ConfigurationDialog.cpp:652
 msgid "Author"
-msgstr ""
+msgstr "Зохиогч"
 
 #: src/gui/ConfigurationDialog.cpp:656
 msgid "License"
-msgstr ""
+msgstr "Лиценз"
 
 #: src/gui/ConfigurationDialog.cpp:686
 msgid "Running script: "
@@ -569,11 +569,11 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:341
 #: src/gui/HelpDialog.cpp:343 src/gui/StelGui.cpp:180
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Төрөл бvрийн"
 
 #: src/gui/HelpDialog.cpp:298
 msgid "Developers"
-msgstr ""
+msgstr "Хөгжүүлэгчид"
 
 #: src/gui/HelpDialog.cpp:299
 #, qt-format
@@ -621,7 +621,7 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:102
 msgid "Display Options"
-msgstr ""
+msgstr "Дэлгэцийн тохируулга"
 
 #: src/gui/StelGui.cpp:103
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:268
@@ -887,7 +887,7 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:177
 msgid "Zoom out"
-msgstr ""
+msgstr "Жижигрүүлэх"
 
 #: src/gui/StelGui.cpp:178
 msgid "Set home planet to selected planet"
@@ -899,7 +899,7 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:182
 msgid "Quit"
-msgstr ""
+msgstr "Дуусгах"
 
 #: src/gui/StelGui.cpp:183
 msgid "Save screenshot"
@@ -971,7 +971,7 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:128
 #: src/gui/AddRemoveLandscapesDialog.cpp:155
 msgid "Success"
-msgstr ""
+msgstr "Амжилттай"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:141
 #: src/gui/AddRemoveLandscapesDialog.cpp:211
@@ -987,7 +987,7 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:229
 #: src/gui/AddRemoveLandscapesDialog.cpp:239
 msgid "Error!"
-msgstr ""
+msgstr "Алдаа!"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:154
 #, qt-format
@@ -1437,7 +1437,7 @@ msgstr ""
 
 #: src/translations.h:145
 msgid "Arabic"
-msgstr ""
+msgstr "Араб"
 
 #: src/translations.h:146
 msgid "Aztec"
@@ -1445,7 +1445,7 @@ msgstr ""
 
 #: src/translations.h:147
 msgid "Chinese"
-msgstr ""
+msgstr "Хятад"
 
 #: src/translations.h:148
 msgid "Egyptian"
@@ -1465,7 +1465,7 @@ msgstr ""
 
 #: src/translations.h:152
 msgid "Maori"
-msgstr ""
+msgstr "Маори"
 
 #: src/translations.h:153
 msgid "Navajo"
@@ -1489,7 +1489,7 @@ msgstr ""
 
 #: src/translations.h:158
 msgid "Western"
-msgstr ""
+msgstr "Өрнөд"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:162
@@ -1534,7 +1534,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
 msgid "Screensaver"
-msgstr ""
+msgstr "Дэлгэц гамнагч"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:188
@@ -1586,15 +1586,15 @@ msgstr ""
 
 #: src/translations.h:204
 msgid "Andorra"
-msgstr ""
+msgstr "Андорра"
 
 #: src/translations.h:205
 msgid "United Arab Emirates"
-msgstr ""
+msgstr "Арабын Нэгдсэн Эмират"
 
 #: src/translations.h:206
 msgid "Afghanistan"
-msgstr ""
+msgstr "Афганстан"
 
 #: src/translations.h:207
 msgid "Antigua and Barbuda"
@@ -1602,51 +1602,51 @@ msgstr ""
 
 #: src/translations.h:208
 msgid "Anguilla"
-msgstr ""
+msgstr "Ангол"
 
 #: src/translations.h:209
 msgid "Albania"
-msgstr ""
+msgstr "Албани"
 
 #: src/translations.h:210
 msgid "Armenia"
-msgstr ""
+msgstr "Армени"
 
 #: src/translations.h:211
 msgid "Netherlands Antilles"
-msgstr ""
+msgstr "Нидерландын Антилын арлууд"
 
 #: src/translations.h:212
 msgid "Angola"
-msgstr ""
+msgstr "Ангол"
 
 #: src/translations.h:213
 msgid "Antarctica"
-msgstr ""
+msgstr "Антарктид"
 
 #: src/translations.h:214
 msgid "Argentina"
-msgstr ""
+msgstr "Аргентин"
 
 #: src/translations.h:215
 msgid "American Samoa"
-msgstr ""
+msgstr "Америкийн Самоа"
 
 #: src/translations.h:216
 msgid "Austria"
-msgstr ""
+msgstr "Австри"
 
 #: src/translations.h:217
 msgid "Australia"
-msgstr ""
+msgstr "Австрали"
 
 #: src/translations.h:218
 msgid "Aruba"
-msgstr ""
+msgstr "Аруб"
 
 #: src/translations.h:219
 msgid "Azerbaijan"
-msgstr ""
+msgstr "Азербайжан"
 
 #: src/translations.h:220
 msgid "Bosnia and Herzegowina"
@@ -1654,59 +1654,59 @@ msgstr ""
 
 #: src/translations.h:221
 msgid "Barbados"
-msgstr ""
+msgstr "Барбадос"
 
 #: src/translations.h:222
 msgid "Bangladesh"
-msgstr ""
+msgstr "Бангладеш"
 
 #: src/translations.h:223
 msgid "Belgium"
-msgstr ""
+msgstr "Белги"
 
 #: src/translations.h:224
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Буркина Фасо"
 
 #: src/translations.h:225
 msgid "Bulgaria"
-msgstr ""
+msgstr "Болгар"
 
 #: src/translations.h:226
 msgid "Bahrain"
-msgstr ""
+msgstr "Бахрейн"
 
 #: src/translations.h:227
 msgid "Burundi"
-msgstr ""
+msgstr "Бурунди"
 
 #: src/translations.h:228
 msgid "Benin"
-msgstr ""
+msgstr "Бенин"
 
 #: src/translations.h:229
 msgid "Bermuda"
-msgstr ""
+msgstr "Бермуд"
 
 #: src/translations.h:230
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "Бруней"
 
 #: src/translations.h:231
 msgid "Bolivia"
-msgstr ""
+msgstr "Боливи"
 
 #: src/translations.h:232
 msgid "Brazil"
-msgstr ""
+msgstr "Бразил"
 
 #: src/translations.h:233
 msgid "Bahamas"
-msgstr ""
+msgstr "Багамийн арлууд"
 
 #: src/translations.h:234
 msgid "Bhutan"
-msgstr ""
+msgstr "Бутан"
 
 #: src/translations.h:235
 msgid "Bouvet Island"
@@ -1714,19 +1714,19 @@ msgstr ""
 
 #: src/translations.h:236
 msgid "Botswana"
-msgstr ""
+msgstr "Ботсван"
 
 #: src/translations.h:237
 msgid "Belarus"
-msgstr ""
+msgstr "Беларус"
 
 #: src/translations.h:238
 msgid "Belize"
-msgstr ""
+msgstr "Белиз"
 
 #: src/translations.h:239
 msgid "Canada"
-msgstr ""
+msgstr "Канад"
 
 #: src/translations.h:240
 msgid "Cocos Islands"
@@ -1738,7 +1738,7 @@ msgstr ""
 
 #: src/translations.h:242
 msgid "Central African Republic"
-msgstr ""
+msgstr "Төв Африкийн Бүгд Найрамдах Улс"
 
 #: src/translations.h:243
 msgid "Republic of the Congo"
@@ -1746,199 +1746,199 @@ msgstr ""
 
 #: src/translations.h:244
 msgid "Switzerland"
-msgstr ""
+msgstr "Швейцарь"
 
 #: src/translations.h:245
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "Кот-д'Ивуар"
 
 #: src/translations.h:246
 msgid "Cook Islands"
-msgstr ""
+msgstr "Кукийн арлууд"
 
 #: src/translations.h:247
 msgid "Chile"
-msgstr ""
+msgstr "Чили"
 
 #: src/translations.h:248
 msgid "Cameroon"
-msgstr ""
+msgstr "Камерун"
 
 #: src/translations.h:249
 msgid "China"
-msgstr ""
+msgstr "Хятад"
 
 #: src/translations.h:250
 msgid "Colombia"
-msgstr ""
+msgstr "Колумб"
 
 #: src/translations.h:251
 msgid "Costa Rica"
-msgstr ""
+msgstr "Коста Рика"
 
 #: src/translations.h:252
 msgid "Serbia and Montenegro"
-msgstr ""
+msgstr "Солонгос ард улс"
 
 #: src/translations.h:253
 msgid "Cuba"
-msgstr ""
+msgstr "Куб"
 
 #: src/translations.h:254
 msgid "Cape Verde"
-msgstr ""
+msgstr "Кэйп Вэрде"
 
 #: src/translations.h:255
 msgid "Christmas Island"
-msgstr ""
+msgstr "Кристмас исланд"
 
 #: src/translations.h:256
 msgid "Cyprus"
-msgstr ""
+msgstr "Кипр"
 
 #: src/translations.h:257
 msgid "Czech Republic"
-msgstr ""
+msgstr "Чех"
 
 #: src/translations.h:258
 msgid "Germany"
-msgstr ""
+msgstr "Герман"
 
 #: src/translations.h:259
 msgid "Djibouti"
-msgstr ""
+msgstr "Джибут"
 
 #: src/translations.h:260
 msgid "Denmark"
-msgstr ""
+msgstr "Дани"
 
 #: src/translations.h:261
 msgid "Dominica"
-msgstr ""
+msgstr "Доминик"
 
 #: src/translations.h:262
 msgid "Dominican Republic"
-msgstr ""
+msgstr "Доминик ард улс"
 
 #: src/translations.h:263
 msgid "Algeria"
-msgstr ""
+msgstr "Алжир"
 
 #: src/translations.h:264
 msgid "Ecuador"
-msgstr ""
+msgstr "Эквадор"
 
 #: src/translations.h:265
 msgid "Estonia"
-msgstr ""
+msgstr "Эстони"
 
 #: src/translations.h:266
 msgid "Egypt"
-msgstr ""
+msgstr "Египет"
 
 #: src/translations.h:267
 msgid "Western Sahara"
-msgstr ""
+msgstr "Баруун сахар"
 
 #: src/translations.h:268
 msgid "Eritrea"
-msgstr ""
+msgstr "Эритрея"
 
 #: src/translations.h:269
 msgid "Spain"
-msgstr ""
+msgstr "Испани"
 
 #: src/translations.h:270
 msgid "Ethiopia"
-msgstr ""
+msgstr "Этиоп"
 
 #: src/translations.h:271
 msgid "Finland"
-msgstr ""
+msgstr "Финланд"
 
 #: src/translations.h:272
 msgid "Fiji"
-msgstr ""
+msgstr "Фиджи"
 
 #: src/translations.h:273
 msgid "Falkland Islands"
-msgstr ""
+msgstr "Фолклендын арлууд"
 
 #: src/translations.h:274
 msgid "Micronesia"
-msgstr ""
+msgstr "Микронези"
 
 #: src/translations.h:275
 msgid "Faroe Islands"
-msgstr ""
+msgstr "Фарерын арлууд"
 
 #: src/translations.h:276
 msgid "France"
-msgstr ""
+msgstr "Франц"
 
 #: src/translations.h:277
 msgid "Gabon"
-msgstr ""
+msgstr "Габон"
 
 #: src/translations.h:278
 msgid "United Kingdom"
-msgstr ""
+msgstr "Их Британи"
 
 #: src/translations.h:279
 msgid "Grenada"
-msgstr ""
+msgstr "Гренада"
 
 #: src/translations.h:280
 msgid "Georgia"
-msgstr ""
+msgstr "Гурж"
 
 #: src/translations.h:281
 msgid "French Guiana"
-msgstr ""
+msgstr "Франц гана"
 
 #: src/translations.h:282
 msgid "Ghana"
-msgstr ""
+msgstr "Гана"
 
 #: src/translations.h:283
 msgid "Gibraltar"
-msgstr ""
+msgstr "Гибралтар"
 
 #: src/translations.h:284
 msgid "Greenland"
-msgstr ""
+msgstr "Греенланд"
 
 #: src/translations.h:285
 msgid "Gambia"
-msgstr ""
+msgstr "Гамби"
 
 #: src/translations.h:286
 msgid "Guinea"
-msgstr ""
+msgstr "Гвиней"
 
 #: src/translations.h:287
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Гваделупа"
 
 #: src/translations.h:288
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "Экваторын Гвиней"
 
 #: src/translations.h:289
 msgid "Greece"
-msgstr ""
+msgstr "Грек"
 
 #: src/translations.h:290
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "Өмнөд георги ба өмнөд завсрын арлууд"
 
 #: src/translations.h:291
 msgid "Guatemala"
-msgstr ""
+msgstr "Гватемал"
 
 #: src/translations.h:292
 msgid "Guam"
-msgstr ""
+msgstr "Гуам"
 
 #: src/translations.h:293
 msgid "Guinea-Bissau"
@@ -1946,11 +1946,11 @@ msgstr ""
 
 #: src/translations.h:294
 msgid "Guyana"
-msgstr ""
+msgstr "Гайана"
 
 #: src/translations.h:295
 msgid "Hong Kong"
-msgstr ""
+msgstr "Хонг Конг"
 
 #: src/translations.h:296
 msgid "Heard Island and McDonald Islands"
@@ -1958,87 +1958,87 @@ msgstr ""
 
 #: src/translations.h:297
 msgid "Honduras"
-msgstr ""
+msgstr "Хондурас"
 
 #: src/translations.h:298
 msgid "Croatia"
-msgstr ""
+msgstr "Хорват"
 
 #: src/translations.h:299
 msgid "Haiti"
-msgstr ""
+msgstr "Гаити"
 
 #: src/translations.h:300
 msgid "Hungary"
-msgstr ""
+msgstr "Унгар"
 
 #: src/translations.h:301
 msgid "Indonesia"
-msgstr ""
+msgstr "Индонез"
 
 #: src/translations.h:302
 msgid "Ireland"
-msgstr ""
+msgstr "Ирланд"
 
 #: src/translations.h:303
 msgid "Israel"
-msgstr ""
+msgstr "Израйл"
 
 #: src/translations.h:304
 msgid "India"
-msgstr ""
+msgstr "Энэтхэг"
 
 #: src/translations.h:305
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "Британий энэтхэгийн далайн нутаг"
 
 #: src/translations.h:306
 msgid "Iraq"
-msgstr ""
+msgstr "Ирак"
 
 #: src/translations.h:307
 msgid "Iran"
-msgstr ""
+msgstr "Иран"
 
 #: src/translations.h:308
 msgid "Iceland"
-msgstr ""
+msgstr "Исланд"
 
 #: src/translations.h:309
 msgid "Italy"
-msgstr ""
+msgstr "Итали"
 
 #: src/translations.h:310
 msgid "Jamaica"
-msgstr ""
+msgstr "Ямайка"
 
 #: src/translations.h:311
 msgid "Jordan"
-msgstr ""
+msgstr "Иордан"
 
 #: src/translations.h:312
 msgid "Japan"
-msgstr ""
+msgstr "Япон"
 
 #: src/translations.h:313
 msgid "Kenya"
-msgstr ""
+msgstr "Кениа"
 
 #: src/translations.h:314
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "Киргиз"
 
 #: src/translations.h:315
 msgid "Cambodia"
-msgstr ""
+msgstr "Камбож"
 
 #: src/translations.h:316
 msgid "Kiribati"
-msgstr ""
+msgstr "Кирибати"
 
 #: src/translations.h:317
 msgid "Comoros"
-msgstr ""
+msgstr "Коморск"
 
 #: src/translations.h:318
 msgid "Saint Kitts and Nevis"
@@ -2054,55 +2054,55 @@ msgstr ""
 
 #: src/translations.h:321
 msgid "Kuwait"
-msgstr ""
+msgstr "Кувейт"
 
 #: src/translations.h:322
 msgid "Cayman Islands"
-msgstr ""
+msgstr "Кайманы арлууд"
 
 #: src/translations.h:323
 msgid "Kazakhstan"
-msgstr ""
+msgstr "Казакстан"
 
 #: src/translations.h:324
 msgid "Lao"
-msgstr ""
+msgstr "Лао"
 
 #: src/translations.h:325
 msgid "Lebanon"
-msgstr ""
+msgstr "Либони"
 
 #: src/translations.h:326
 msgid "Saint Lucia"
-msgstr ""
+msgstr "Санта лучиа"
 
 #: src/translations.h:327
 msgid "Liechtenstein"
-msgstr ""
+msgstr "Лейхтенштайн"
 
 #: src/translations.h:328
 msgid "Sri Lanka"
-msgstr ""
+msgstr "Шриланк"
 
 #: src/translations.h:329
 msgid "Liberia"
-msgstr ""
+msgstr "Либери"
 
 #: src/translations.h:330
 msgid "Lesotho"
-msgstr ""
+msgstr "Лесото"
 
 #: src/translations.h:331
 msgid "Lithuania"
-msgstr ""
+msgstr "Литва"
 
 #: src/translations.h:332
 msgid "Luxembourg"
-msgstr ""
+msgstr "Люксембург"
 
 #: src/translations.h:333
 msgid "Latvia"
-msgstr ""
+msgstr "Латви"
 
 #: src/translations.h:334
 msgid "Libyan Arab Jamahiriya"
@@ -2110,11 +2110,11 @@ msgstr ""
 
 #: src/translations.h:335
 msgid "Morocco"
-msgstr ""
+msgstr "Морокко"
 
 #: src/translations.h:336
 msgid "Monaco"
-msgstr ""
+msgstr "Монако"
 
 #: src/translations.h:337
 msgid "Moldova"
@@ -2122,155 +2122,155 @@ msgstr ""
 
 #: src/translations.h:338
 msgid "Madagascar"
-msgstr ""
+msgstr "Мадагаскар"
 
 #: src/translations.h:339
 msgid "Marshall Islands"
-msgstr ""
+msgstr "Маршалын арлууд"
 
 #: src/translations.h:340
 msgid "Macedonia"
-msgstr ""
+msgstr "Македони"
 
 #: src/translations.h:341
 msgid "Mali"
-msgstr ""
+msgstr "Мали"
 
 #: src/translations.h:342
 msgid "Myanmar"
-msgstr ""
+msgstr "Мянмар"
 
 #: src/translations.h:343
 msgid "Mongolia"
-msgstr ""
+msgstr "Монгол"
 
 #: src/translations.h:344
 msgid "Macau"
-msgstr ""
+msgstr "Макау"
 
 #: src/translations.h:345
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "Хойд марианы арлууд"
 
 #: src/translations.h:346
 msgid "Martinique"
-msgstr ""
+msgstr "Мартиник"
 
 #: src/translations.h:347
 msgid "Mauritania"
-msgstr ""
+msgstr "Мавритани"
 
 #: src/translations.h:348
 msgid "Montserrat"
-msgstr ""
+msgstr "Монтсеррат"
 
 #: src/translations.h:349
 msgid "Malta"
-msgstr ""
+msgstr "Малта"
 
 #: src/translations.h:350
 msgid "Mauritius"
-msgstr ""
+msgstr "Маврик"
 
 #: src/translations.h:351
 msgid "Maldives"
-msgstr ""
+msgstr "Мальдивын арлууд"
 
 #: src/translations.h:352
 msgid "Malawi"
-msgstr ""
+msgstr "Малави"
 
 #: src/translations.h:353
 msgid "Mexico"
-msgstr ""
+msgstr "Мексик"
 
 #: src/translations.h:354
 msgid "Malaysia"
-msgstr ""
+msgstr "Малайз"
 
 #: src/translations.h:355
 msgid "Mozambique"
-msgstr ""
+msgstr "Мозамбик"
 
 #: src/translations.h:356
 msgid "Namibia"
-msgstr ""
+msgstr "Намиби"
 
 #: src/translations.h:357
 msgid "New Caledonia"
-msgstr ""
+msgstr "Шинэ калдени"
 
 #: src/translations.h:358
 msgid "Niger"
-msgstr ""
+msgstr "Негр"
 
 #: src/translations.h:359
 msgid "Norfolk Island"
-msgstr ""
+msgstr "Норфолкын арлууд"
 
 #: src/translations.h:360
 msgid "Nigeria"
-msgstr ""
+msgstr "Нигер"
 
 #: src/translations.h:361
 msgid "Nicaragua"
-msgstr ""
+msgstr "Никрагуа"
 
 #: src/translations.h:362
 msgid "Netherlands"
-msgstr ""
+msgstr "Нидерланд"
 
 #: src/translations.h:363
 msgid "Norway"
-msgstr ""
+msgstr "Норвеги"
 
 #: src/translations.h:364
 msgid "Nepal"
-msgstr ""
+msgstr "Непал"
 
 #: src/translations.h:365
 msgid "Nauru"
-msgstr ""
+msgstr "Науру"
 
 #: src/translations.h:366
 msgid "Niue"
-msgstr ""
+msgstr "Ниу"
 
 #: src/translations.h:367
 msgid "New Zealand"
-msgstr ""
+msgstr "Шинэ зеланд"
 
 #: src/translations.h:368
 msgid "Oman"
-msgstr ""
+msgstr "Оман"
 
 #: src/translations.h:369
 msgid "Panama"
-msgstr ""
+msgstr "Панама"
 
 #: src/translations.h:370
 msgid "Peru"
-msgstr ""
+msgstr "Перу"
 
 #: src/translations.h:371
 msgid "French Polynesia"
-msgstr ""
+msgstr "Францын Полинези"
 
 #: src/translations.h:372
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "Папуа Шинэ Гвиней"
 
 #: src/translations.h:373
 msgid "Philippines"
-msgstr ""
+msgstr "Флиппен"
 
 #: src/translations.h:374
 msgid "Pakistan"
-msgstr ""
+msgstr "Пакистан"
 
 #: src/translations.h:375
 msgid "Poland"
-msgstr ""
+msgstr "Польш"
 
 #: src/translations.h:376
 msgid "Saint Pierre and Miquelon"
@@ -2282,7 +2282,7 @@ msgstr ""
 
 #: src/translations.h:378
 msgid "Puerto Rico"
-msgstr ""
+msgstr "Пуэрто Рико"
 
 #: src/translations.h:379
 msgid "Palestinian Territories"
@@ -2290,19 +2290,19 @@ msgstr ""
 
 #: src/translations.h:380
 msgid "Portugal"
-msgstr ""
+msgstr "Португаль"
 
 #: src/translations.h:381
 msgid "Palau"
-msgstr ""
+msgstr "Палау"
 
 #: src/translations.h:382
 msgid "Paraguay"
-msgstr ""
+msgstr "Прагвай"
 
 #: src/translations.h:383
 msgid "Qatar"
-msgstr ""
+msgstr "Катар"
 
 #: src/translations.h:384
 msgid "Réunion"
@@ -2310,51 +2310,51 @@ msgstr ""
 
 #: src/translations.h:385
 msgid "Romania"
-msgstr ""
+msgstr "Румын"
 
 #: src/translations.h:386
 msgid "Serbia"
-msgstr ""
+msgstr "Серби"
 
 #: src/translations.h:387
 msgid "Russian Federation"
-msgstr ""
+msgstr "Оросын холбооны улс"
 
 #: src/translations.h:388
 msgid "Rwanda"
-msgstr ""
+msgstr "Руанда"
 
 #: src/translations.h:389
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "Саудын Араб"
 
 #: src/translations.h:390
 msgid "Solomon Islands"
-msgstr ""
+msgstr "Соломоны арлууд"
 
 #: src/translations.h:391
 msgid "Seychelles"
-msgstr ""
+msgstr "Сейшелийн арлууд"
 
 #: src/translations.h:392
 msgid "Sudan"
-msgstr ""
+msgstr "Судан"
 
 #: src/translations.h:393
 msgid "Sweden"
-msgstr ""
+msgstr "Швед"
 
 #: src/translations.h:394
 msgid "Singapore"
-msgstr ""
+msgstr "Сингапур"
 
 #: src/translations.h:395
 msgid "Saint Helena"
-msgstr ""
+msgstr "Сэйнт Хелена"
 
 #: src/translations.h:396
 msgid "Slovenia"
-msgstr ""
+msgstr "Словени"
 
 #: src/translations.h:397
 msgid "Svalbard and Jan Mayen"
@@ -2366,23 +2366,23 @@ msgstr ""
 
 #: src/translations.h:399
 msgid "Sierra Leone"
-msgstr ""
+msgstr "Сьерра-Леоне"
 
 #: src/translations.h:400
 msgid "San Marino"
-msgstr ""
+msgstr "Сан марино"
 
 #: src/translations.h:401
 msgid "Senegal"
-msgstr ""
+msgstr "Сенегал"
 
 #: src/translations.h:402
 msgid "Somalia"
-msgstr ""
+msgstr "Сомали"
 
 #: src/translations.h:403
 msgid "Suriname"
-msgstr ""
+msgstr "Суринам"
 
 #: src/translations.h:404
 msgid "Sao Tome and Principe"
@@ -2390,7 +2390,7 @@ msgstr ""
 
 #: src/translations.h:405
 msgid "El Salvador"
-msgstr ""
+msgstr "Эл салвадор"
 
 #: src/translations.h:406
 msgid "Syrian Arab Republic"
@@ -2398,7 +2398,7 @@ msgstr ""
 
 #: src/translations.h:407
 msgid "Swaziland"
-msgstr ""
+msgstr "Свазиленд"
 
 #: src/translations.h:408
 msgid "Turks and Caicos Islands"
@@ -2406,71 +2406,71 @@ msgstr ""
 
 #: src/translations.h:409
 msgid "Chad"
-msgstr ""
+msgstr "Чад"
 
 #: src/translations.h:410
 msgid "French Southern Territories"
-msgstr ""
+msgstr "Францын өмнөд бүс нутаг"
 
 #: src/translations.h:411
 msgid "Togo"
-msgstr ""
+msgstr "Того"
 
 #: src/translations.h:412
 msgid "Thailand"
-msgstr ""
+msgstr "Тайланд"
 
 #: src/translations.h:413
 msgid "Tajikistan"
-msgstr ""
+msgstr "Тажикстан"
 
 #: src/translations.h:414
 msgid "Tokelau"
-msgstr ""
+msgstr "Токелау"
 
 #: src/translations.h:415
 msgid "East Timor"
-msgstr ""
+msgstr "Зүүн Тимор"
 
 #: src/translations.h:416
 msgid "Turkmenistan"
-msgstr ""
+msgstr "Туркменстан"
 
 #: src/translations.h:417
 msgid "Tunisia"
-msgstr ""
+msgstr "Тунис"
 
 #: src/translations.h:418
 msgid "Tonga"
-msgstr ""
+msgstr "Тонга"
 
 #: src/translations.h:419
 msgid "Turkey"
-msgstr ""
+msgstr "Турк"
 
 #: src/translations.h:420
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "Тринидад болон Табаго"
 
 #: src/translations.h:421
 msgid "Tuvalu"
-msgstr ""
+msgstr "Тували"
 
 #: src/translations.h:422
 msgid "Taiwan"
-msgstr ""
+msgstr "Тайвань"
 
 #: src/translations.h:423
 msgid "Tanzania"
-msgstr ""
+msgstr "Танзани"
 
 #: src/translations.h:424
 msgid "Ukraine"
-msgstr ""
+msgstr "Украйн"
 
 #: src/translations.h:425
 msgid "Uganda"
-msgstr ""
+msgstr "Уганда"
 
 #: src/translations.h:426
 msgid "United States Minor Outlying Islands"
@@ -2478,15 +2478,15 @@ msgstr ""
 
 #: src/translations.h:427
 msgid "United States"
-msgstr ""
+msgstr "Америкын нэгдсэн улс"
 
 #: src/translations.h:428
 msgid "Uruguay"
-msgstr ""
+msgstr "Уругвай"
 
 #: src/translations.h:429
 msgid "Uzbekistan"
-msgstr ""
+msgstr "Узбекистан"
 
 #: src/translations.h:430
 msgid "Vatican City State"
@@ -2498,7 +2498,7 @@ msgstr ""
 
 #: src/translations.h:432
 msgid "Venezuela"
-msgstr ""
+msgstr "Венесуэль"
 
 #: src/translations.h:433
 msgid "British Virgin Islands"
@@ -2514,7 +2514,7 @@ msgstr ""
 
 #: src/translations.h:436
 msgid "Vanuatu"
-msgstr ""
+msgstr "Вануату"
 
 #: src/translations.h:437
 msgid "Wallis and Futuna"
@@ -2522,11 +2522,11 @@ msgstr ""
 
 #: src/translations.h:438
 msgid "Samoa"
-msgstr ""
+msgstr "Самоа"
 
 #: src/translations.h:439
 msgid "Yemen"
-msgstr ""
+msgstr "Иемэн"
 
 #: src/translations.h:440
 msgid "Mayotte"
@@ -2534,32 +2534,32 @@ msgstr ""
 
 #: src/translations.h:441
 msgid "Yugoslavia"
-msgstr ""
+msgstr "Югослав"
 
 #: src/translations.h:442
 msgid "South Africa"
-msgstr ""
+msgstr "Өмнөд африк"
 
 #: src/translations.h:443
 msgid "Zambia"
-msgstr ""
+msgstr "Замби"
 
 #: src/translations.h:444
 msgid "Zimbabwe"
-msgstr ""
+msgstr "Зимбаб"
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
-msgstr ""
+msgstr "/"
 
 #: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:422
 msgid "Help"
-msgstr ""
+msgstr "Тусламж"
 
 #: src/ui_helpDialogGui.h:267 plugins/Oculars/src/ui_ocularDialog.h:903
 #: plugins/Satellites/src/ui_satellitesDialog.h:718
@@ -2567,20 +2567,20 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
 msgid "About"
-msgstr ""
+msgstr "Тухай"
 
 #: src/ui_helpDialogGui.h:269
 msgid "Log"
-msgstr ""
+msgstr "Лог"
 
 #: src/ui_helpDialogGui.h:272
 msgid "Refresh"
-msgstr ""
+msgstr "Шинэчил"
 
 #: src/ui_locationDialogGui.h:384
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:134
 msgid "Location"
-msgstr ""
+msgstr "Байрлал"
 
 #: src/ui_locationDialogGui.h:388
 msgid "Current location information"
@@ -2594,7 +2594,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:885
 #: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Delete"
-msgstr ""
+msgstr "Устгах"
 
 #: src/ui_locationDialogGui.h:391
 msgid "Add to list"
@@ -2635,7 +2635,7 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:406
 msgid "Country:"
-msgstr ""
+msgstr "Улс:"
 
 #: src/ui_locationDialogGui.h:407
 msgid "Planet:"
@@ -2751,7 +2751,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:583
 msgid "Object"
-msgstr ""
+msgstr "Объект"
 
 #: src/ui_searchDialogGui.h:584
 msgid "RA/Dec (J2000):"
@@ -2759,7 +2759,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:585
 msgid "Position"
-msgstr ""
+msgstr "Ажлын байр"
 
 #: src/ui_searchDialogGui.h:586
 msgid "On-line astronomical database SIMBAD"
@@ -2771,22 +2771,22 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:588
 msgid "Server:"
-msgstr ""
+msgstr "Сервер:"
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
 #: src/ui_configurationDialog.h:891 src/ui_configurationDialog.h:902
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
-msgstr ""
+msgstr "Параметрууд"
 
 #: src/ui_viewDialog.h:1101
 msgid "View"
-msgstr ""
+msgstr "Харах"
 
 #: src/ui_viewDialog.h:1107
 msgid "Sky"
-msgstr ""
+msgstr "Тэнгэр"
 
 #: src/ui_viewDialog.h:1109
 msgid "Markings"
@@ -2795,7 +2795,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1111
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Landscape"
-msgstr ""
+msgstr "Хэвтээ хэлбэр"
 
 #: src/ui_viewDialog.h:1113
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:217
@@ -2884,23 +2884,23 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1143
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: src/ui_viewDialog.h:1144
 msgid "10"
-msgstr ""
+msgstr "10"
 
 #: src/ui_viewDialog.h:1145
 msgid "80"
-msgstr ""
+msgstr "80"
 
 #: src/ui_viewDialog.h:1146
 msgid "10000"
-msgstr ""
+msgstr "10000"
 
 #: src/ui_viewDialog.h:1147
 msgid "144000"
-msgstr ""
+msgstr "144000"
 
 #: src/ui_viewDialog.h:1149
 msgid "Constellations"
@@ -2982,11 +2982,11 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1192
 msgid "Visible"
-msgstr ""
+msgstr "Үзэгддэг"
 
 #: src/ui_configurationDialog.h:785
 msgid "Configuration"
-msgstr ""
+msgstr "Тоноглол"
 
 #: src/ui_configurationDialog.h:787
 msgid "Program language"
@@ -3010,7 +3010,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:796
 msgid "Short"
-msgstr ""
+msgstr "Богино"
 
 #: src/ui_configurationDialog.h:798
 msgid "Display user settings information"
@@ -3026,7 +3026,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:804
 msgid "None"
-msgstr ""
+msgstr "Алга"
 
 #: src/ui_configurationDialog.h:805
 msgid "Default options"
@@ -3068,7 +3068,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:821
 msgid "Control"
-msgstr ""
+msgstr "Контрол"
 
 #: src/ui_configurationDialog.h:823
 msgid "Allow keyboard to pan and zoom"
@@ -3115,7 +3115,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:842
 msgid "Other:"
-msgstr ""
+msgstr "Бусад:"
 
 #: src/ui_configurationDialog.h:843
 msgid "use current"
@@ -3123,7 +3123,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:844
 msgid "Other"
-msgstr ""
+msgstr "Бусад"
 
 #: src/ui_configurationDialog.h:846
 msgid "Hides the mouse cursor when inactive"
@@ -3219,7 +3219,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:886
 msgid "Retry"
-msgstr ""
+msgstr "Дахин оролдох"
 
 #: src/ui_configurationDialog.h:888
 msgid "Stop the download. You can always restart it later"
@@ -3228,7 +3228,7 @@ msgstr ""
 #: src/ui_configurationDialog.h:890
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
 msgid "Cancel"
-msgstr ""
+msgstr "Цуцал"
 
 #: src/ui_configurationDialog.h:893
 msgid "Close window when script runs"
@@ -3256,11 +3256,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:911
 msgid "Navigation"
-msgstr ""
+msgstr "Навигаци"
 
 #: src/ui_configurationDialog.h:913
 msgid "Tools"
-msgstr ""
+msgstr "Багаж"
 
 #: src/ui_configurationDialog.h:915
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:441
@@ -3269,7 +3269,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:917
 msgid "Plugins"
-msgstr ""
+msgstr "Өргөтгөлүүд"
 
 #: src/ui_addRemoveLandscapesDialog.h:266
 msgid "Add/Remove Landscapes"
@@ -3295,7 +3295,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Remove"
-msgstr ""
+msgstr "Зайлуулах"
 
 #: src/ui_addRemoveLandscapesDialog.h:276
 msgid ""
@@ -3475,15 +3475,15 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:372
 msgid "Script"
-msgstr ""
+msgstr "Скрипт"
 
 #: src/ui_scriptConsole.h:373
 msgid "Output"
-msgstr ""
+msgstr "Гаралт"
 
 #: src/ui_scriptConsole.h:375
 msgid "Cursor position"
-msgstr ""
+msgstr "Түүчээний байрлал"
 
 #: src/ui_scriptConsole.h:377
 msgid "Include dir:"
@@ -3491,7 +3491,7 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:378
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -3804,7 +3804,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Interface"
-msgstr ""
+msgstr "Залгах хэсэг"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:872
 msgid "On-screen control panel"
@@ -3813,7 +3813,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:873
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:214
 msgid "General"
-msgstr ""
+msgstr "Ерөнхий"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:874
 #: plugins/Oculars/src/ui_ocularDialog.h:882
@@ -3826,7 +3826,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Add"
-msgstr ""
+msgstr "Нэмэх"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:877
 #: plugins/Oculars/src/ui_ocularDialog.h:886
@@ -3834,7 +3834,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:683
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
-msgstr ""
+msgstr "Нэр:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "aFOV:"
@@ -3856,7 +3856,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:883
 #: plugins/Oculars/src/ui_ocularDialog.h:893
 msgid "Sensors"
-msgstr ""
+msgstr "Сензорууд"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Resolution x (pixels):"
@@ -4001,7 +4001,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
 msgid "Version"
-msgstr ""
+msgstr "Хувилбар"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:263
 msgid ""
@@ -4108,7 +4108,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
 msgid "Links"
-msgstr ""
+msgstr "Холбоосууд"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:296
 msgid ""
@@ -4249,7 +4249,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
 msgid "Last update:"
-msgstr ""
+msgstr "Сүүлийн шинэчлэл:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:646
 msgid "Update frequency (hours):"
@@ -4257,7 +4257,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:648
 msgid "Labels"
-msgstr ""
+msgstr "Нэршилүүд"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:649
 msgid "Label font size (pixels):"
@@ -4304,7 +4304,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:674
 msgid "Settings"
-msgstr ""
+msgstr "Тохиргоо"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 msgid "Display the selected satellite(s)"
@@ -4328,7 +4328,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:685
 msgid "Description:"
-msgstr ""
+msgstr "Тодорхойлолт:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:686
 msgid "Groups:"
@@ -4396,7 +4396,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:212
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Discard"
-msgstr ""
+msgstr "Хэрэгсэхгүй"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:150
@@ -4433,27 +4433,27 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
-msgstr ""
+msgstr "Н/Д"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
 msgid "Starting"
-msgstr ""
+msgstr "Эхэлж байна"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:58
 msgid "Connecting"
-msgstr ""
+msgstr "Холбож байна"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:59
 msgid "Connected"
-msgstr ""
+msgstr "Холбогдсон"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:60
 msgid "Disconnected"
-msgstr ""
+msgstr "Салсан"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:61
 msgid "Stopped"
-msgstr ""
+msgstr "Зогссон"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
@@ -4469,19 +4469,19 @@ msgstr ""
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Status"
-msgstr ""
+msgstr "Төлөв"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Type"
-msgstr ""
+msgstr "Төрөл"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
-msgstr ""
+msgstr "Нэр"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #, qt-format
@@ -4529,7 +4529,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:744
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
 msgid "Start"
-msgstr ""
+msgstr "Эхлэх"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:745
 msgid "Start the selected local telescope"
@@ -4537,7 +4537,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:750
 msgid "Stop"
-msgstr ""
+msgstr "Зогсох"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:751
 msgid "Stop the selected local telescope"
@@ -4545,7 +4545,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:756
 msgid "Connect"
-msgstr ""
+msgstr "Холбогдох"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:757
 msgid "Connect to the selected telescope"
@@ -4553,7 +4553,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:762
 msgid "Disconnect"
-msgstr ""
+msgstr "Салгах"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:763
 msgid "Disconnect from the selected telescope"
@@ -4567,7 +4567,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
 msgid "Form"
-msgstr ""
+msgstr "Форм"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:282
 msgid "Slew telescope to"
@@ -4692,7 +4692,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Device settings"
-msgstr ""
+msgstr "Төхөөрөмжийн тохиргоо"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Serial port:"
@@ -4708,7 +4708,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:502
 msgid "Host:"
-msgstr ""
+msgstr "Машины нэр:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:504
 msgid ""
@@ -4741,7 +4741,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "OK"
-msgstr ""
+msgstr "Тийм"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
 msgid "Telescopes Controlled"
@@ -4753,7 +4753,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Configure"
-msgstr ""
+msgstr "Тохируулга"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Add a new telescope"
@@ -4765,7 +4765,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "GUI"
-msgstr ""
+msgstr "График гадаргуу"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Show telescope labels"
@@ -4781,7 +4781,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Files"
-msgstr ""
+msgstr "Файлууд"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Log telescope driver messages to files"
@@ -4797,7 +4797,7 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
-msgstr ""
+msgstr "Цагийн бүс"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:44
 msgid ""
@@ -4808,51 +4808,51 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 msgid "January"
-msgstr ""
+msgstr "Хулгана сарын"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 msgid "February"
-msgstr ""
+msgstr "Үхэр сарын"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 msgid "March"
-msgstr ""
+msgstr "Бар сарын"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 msgid "April"
-msgstr ""
+msgstr "Туулай сарын"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 msgid "May"
-msgstr ""
+msgstr "Луу сарын"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 msgid "June"
-msgstr ""
+msgstr "Могой сарын"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 msgid "July"
-msgstr ""
+msgstr "Морь сарын"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 msgid "August"
-msgstr ""
+msgstr "Наймдугаар сар"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 msgid "September"
-msgstr ""
+msgstr "Есдүгээр сар"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 msgid "October"
-msgstr ""
+msgstr "10-р сар"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 msgid "November"
-msgstr ""
+msgstr "11-р сар"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 msgid "December"
-msgstr ""
+msgstr "12-р сар"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:265
 msgid "First week"
@@ -4876,31 +4876,31 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:278
 msgid "Sunday"
-msgstr ""
+msgstr "Ням"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:279
 msgid "Monday"
-msgstr ""
+msgstr "Даваа"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:280
 msgid "Tuesday"
-msgstr ""
+msgstr "Мягмар"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:281
 msgid "Wednesday"
-msgstr ""
+msgstr "Лхагва"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:282
 msgid "Thursday"
-msgstr ""
+msgstr "Пүрэв"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:283
 msgid "Friday"
-msgstr ""
+msgstr "Баасан"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:284
 msgid "Saturday"
-msgstr ""
+msgstr "Бямба"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
@@ -4955,7 +4955,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
 msgid "Date:"
-msgstr ""
+msgstr "Огноо:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
 msgid "Daylight saving time end"
@@ -5011,7 +5011,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
 msgid "System default"
-msgstr ""
+msgstr "Системийн стандарт"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "12-hour format"
@@ -5098,7 +5098,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:223
 msgid "Language"
-msgstr ""
+msgstr "Хэлнүүд"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:237
 msgid "Show stars"
@@ -5106,7 +5106,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:265
 msgid "Colors"
-msgstr ""
+msgstr "Өнгүүд"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:341
 msgid "Nebula names"
@@ -5122,7 +5122,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:388
 msgid "Effects"
-msgstr ""
+msgstr "Нөлөө"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Manual zoom"
@@ -5167,7 +5167,7 @@ msgstr ""
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:465
 msgid "Administration"
-msgstr ""
+msgstr "Удирдлага"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:470
 msgid "Load default configuration"
@@ -5187,11 +5187,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
-msgstr ""
+msgstr "Идэвхитэй"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
 msgid "Off"
-msgstr ""
+msgstr "Хаалттай"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
@@ -5358,7 +5358,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Warning"
-msgstr ""
+msgstr "Анхааруулга"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid ""

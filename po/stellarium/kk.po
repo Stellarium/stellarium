@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-05-08 17:18+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2012-05-09 17:54+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Kazakh <kk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-09 04:42+0000\n"
+"X-Launchpad-Export-Date: 2012-05-10 05:17+0000\n"
 "X-Generator: Launchpad (build 15213)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -27,7 +27,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:550 src/ui_viewDialog.h:1164
 msgid "Equator"
-msgstr ""
+msgstr "Экватор"
 
 #: src/core/modules/GridLinesMgr.cpp:554 src/ui_viewDialog.h:1172
 msgid "Horizon"
@@ -43,7 +43,7 @@ msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:496
 msgid "Location: "
-msgstr ""
+msgstr "Орыны: "
 
 #: src/core/modules/LandscapeMgr.cpp:501
 #, qt-format
@@ -75,11 +75,11 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:109
 #, qt-format
 msgid "Size: %1"
-msgstr ""
+msgstr "Өлшемі: %1"
 
 #: src/core/modules/Nebula.cpp:303
 msgid "Galaxy"
-msgstr ""
+msgstr "Галактика"
 
 #: src/core/modules/Nebula.cpp:306
 msgid "Open cluster"
@@ -103,7 +103,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:321
 msgid "Unknown"
-msgstr ""
+msgstr "Беймәлім"
 
 #: src/core/modules/Nebula.cpp:324
 msgid "Undocumented type"
@@ -264,7 +264,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:223
 msgid "Cylinder"
-msgstr ""
+msgstr "Цилиндр"
 
 #: src/core/StelProjectorClasses.cpp:228
 msgid ""
@@ -274,7 +274,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:270
 msgid "Mercator"
-msgstr ""
+msgstr "Меркатор"
 
 #: src/core/StelProjectorClasses.cpp:275
 msgid ""
@@ -325,7 +325,7 @@ msgstr ""
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
-msgstr ""
+msgstr "Желі қатесі"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
@@ -341,7 +341,7 @@ msgstr ""
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr ""
+msgstr "Табылмаған"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
@@ -364,19 +364,19 @@ msgstr ""
 #: src/gui/ConfigurationDialog.cpp:570
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
-msgstr ""
+msgstr "Авторы"
 
 #: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
 msgid "Contact"
-msgstr ""
+msgstr "Контакт"
 
 #: src/gui/ConfigurationDialog.cpp:652
 msgid "Author"
-msgstr ""
+msgstr "Автор"
 
 #: src/gui/ConfigurationDialog.cpp:656
 msgid "License"
-msgstr ""
+msgstr "Лицензия"
 
 #: src/gui/ConfigurationDialog.cpp:686
 msgid "Running script: "
@@ -473,7 +473,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:63 src/gui/HelpDialog.cpp:64
 msgid "Zoom in/out"
-msgstr ""
+msgstr "Жақындау/Алыстау"
 
 #: src/gui/HelpDialog.cpp:65
 msgid "Select object"
@@ -481,7 +481,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:66 src/gui/HelpDialog.cpp:68
 msgid "Clear selection"
-msgstr ""
+msgstr "Таңдаудан айну"
 
 #: src/gui/HelpDialog.cpp:71
 msgid "When a Script is Running"
@@ -569,7 +569,7 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:341
 #: src/gui/HelpDialog.cpp:343 src/gui/StelGui.cpp:180
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Басқалар"
 
 #: src/gui/HelpDialog.cpp:298
 msgid "Developers"
@@ -621,7 +621,7 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:102
 msgid "Display Options"
-msgstr ""
+msgstr "Көрсету параметрлері"
 
 #: src/gui/StelGui.cpp:103
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:268
@@ -706,7 +706,7 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:122
 msgid "Fog"
-msgstr ""
+msgstr "Тұман"
 
 #: src/gui/StelGui.cpp:124 src/ui_viewDialog.h:1139
 msgid "Nebulas"
@@ -719,7 +719,7 @@ msgstr ""
 #: src/gui/StelGui.cpp:126 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Stars"
-msgstr ""
+msgstr "Жұлдыздар"
 
 #: src/gui/StelGui.cpp:127
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
@@ -754,7 +754,7 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:136
 msgid "Windows"
-msgstr ""
+msgstr "Терезелер"
 
 #: src/gui/StelGui.cpp:137
 msgid "Help window"
@@ -787,7 +787,7 @@ msgstr ""
 #: src/gui/StelGui.cpp:147 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Date and Time"
-msgstr ""
+msgstr "Күн мен уақыт"
 
 #: src/gui/StelGui.cpp:151
 msgid "Decrease time speed"
@@ -887,7 +887,7 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:177
 msgid "Zoom out"
-msgstr ""
+msgstr "Алыстау"
 
 #: src/gui/StelGui.cpp:178
 msgid "Set home planet to selected planet"
@@ -928,7 +928,7 @@ msgstr ""
 
 #: src/gui/ViewDialog.cpp:459
 msgid "No description"
-msgstr ""
+msgstr "Анықтамасы жоқ"
 
 #: src/gui/ViewDialog.cpp:572
 msgid "No shooting stars"
@@ -971,7 +971,7 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:128
 #: src/gui/AddRemoveLandscapesDialog.cpp:155
 msgid "Success"
-msgstr ""
+msgstr "Сәтті болды"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:141
 #: src/gui/AddRemoveLandscapesDialog.cpp:211
@@ -1075,29 +1075,29 @@ msgstr ""
 
 #: src/translations.h:33
 msgid "Sun"
-msgstr ""
+msgstr "Күн"
 
 #: src/translations.h:34
 msgid "Mercury"
-msgstr ""
+msgstr "Меркурий"
 
 #: src/translations.h:35
 msgid "Venus"
-msgstr ""
+msgstr "Шолпан"
 
 #: src/translations.h:36
 msgid "Earth"
-msgstr ""
+msgstr "Жер"
 
 #. TRANSLATORS: Name of landscape and Earth's satellite
 #: src/translations.h:37 src/translations.h:166
 msgid "Moon"
-msgstr ""
+msgstr "Ай"
 
 #. TRANSLATORS: Name of landscape and planet
 #: src/translations.h:38 src/translations.h:174
 msgid "Mars"
-msgstr ""
+msgstr "Марс"
 
 #: src/translations.h:39
 msgid "Deimos"
@@ -1125,7 +1125,7 @@ msgstr ""
 
 #: src/translations.h:45
 msgid "Jupiter"
-msgstr ""
+msgstr "Юпитер"
 
 #: src/translations.h:46
 msgid "Io"
@@ -1195,7 +1195,7 @@ msgstr ""
 #. TRANSLATORS: Name of landscape and planet
 #: src/translations.h:62 src/translations.h:176
 msgid "Saturn"
-msgstr ""
+msgstr "Сатурн"
 
 #: src/translations.h:63
 msgid "Mimas"
@@ -1235,15 +1235,15 @@ msgstr ""
 
 #: src/translations.h:72
 msgid "Neptune"
-msgstr ""
+msgstr "Нептун"
 
 #: src/translations.h:73
 msgid "Uranus"
-msgstr ""
+msgstr "Уран"
 
 #: src/translations.h:74
 msgid "Miranda"
-msgstr ""
+msgstr "Миранда"
 
 #: src/translations.h:75
 msgid "Ariel"
@@ -1263,7 +1263,7 @@ msgstr ""
 
 #: src/translations.h:79
 msgid "Pluto"
-msgstr ""
+msgstr "Плутон"
 
 #: src/translations.h:80
 msgid "Charon"
@@ -1309,7 +1309,7 @@ msgstr ""
 
 #: src/translations.h:92
 msgid "Larissa"
-msgstr ""
+msgstr "Ларисса"
 
 #: src/translations.h:93
 msgid "Proteus"
@@ -1421,35 +1421,35 @@ msgstr ""
 
 #: src/translations.h:139
 msgid "N"
-msgstr ""
+msgstr "С"
 
 #: src/translations.h:140
 msgid "S"
-msgstr ""
+msgstr "О"
 
 #: src/translations.h:141
 msgid "E"
-msgstr ""
+msgstr "Ш"
 
 #: src/translations.h:142
 msgid "W"
-msgstr ""
+msgstr "Б"
 
 #: src/translations.h:145
 msgid "Arabic"
-msgstr ""
+msgstr "Араб"
 
 #: src/translations.h:146
 msgid "Aztec"
-msgstr ""
+msgstr "Ацтек"
 
 #: src/translations.h:147
 msgid "Chinese"
-msgstr ""
+msgstr "Қытайша"
 
 #: src/translations.h:148
 msgid "Egyptian"
-msgstr ""
+msgstr "Мысырша"
 
 #: src/translations.h:149
 msgid "Inuit"
@@ -1457,7 +1457,7 @@ msgstr ""
 
 #: src/translations.h:150
 msgid "Korean"
-msgstr ""
+msgstr "Корей"
 
 #: src/translations.h:151
 msgid "Lakota"
@@ -1465,11 +1465,11 @@ msgstr ""
 
 #: src/translations.h:152
 msgid "Maori"
-msgstr ""
+msgstr "Маори"
 
 #: src/translations.h:153
 msgid "Navajo"
-msgstr ""
+msgstr "Навахо"
 
 #: src/translations.h:154
 msgid "Norse"
@@ -1489,7 +1489,7 @@ msgstr ""
 
 #: src/translations.h:158
 msgid "Western"
-msgstr ""
+msgstr "Батыс өлкесі"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:162
@@ -1504,12 +1504,12 @@ msgstr ""
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:168
 msgid "Hurricane"
-msgstr ""
+msgstr "Дауыл"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:170
 msgid "Ocean"
-msgstr ""
+msgstr "Мұхит"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:172
@@ -1534,7 +1534,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
 msgid "Screensaver"
-msgstr ""
+msgstr "ЭкранСақтаушысы"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:188
@@ -1586,7 +1586,7 @@ msgstr ""
 
 #: src/translations.h:204
 msgid "Andorra"
-msgstr ""
+msgstr "Андорра"
 
 #: src/translations.h:205
 msgid "United Arab Emirates"
@@ -1602,11 +1602,11 @@ msgstr ""
 
 #: src/translations.h:208
 msgid "Anguilla"
-msgstr ""
+msgstr "Ангилья"
 
 #: src/translations.h:209
 msgid "Albania"
-msgstr ""
+msgstr "Албания"
 
 #: src/translations.h:210
 msgid "Armenia"
@@ -1614,7 +1614,7 @@ msgstr ""
 
 #: src/translations.h:211
 msgid "Netherlands Antilles"
-msgstr ""
+msgstr "Нидерландияның Антиль ар-ы"
 
 #: src/translations.h:212
 msgid "Angola"
@@ -1622,7 +1622,7 @@ msgstr ""
 
 #: src/translations.h:213
 msgid "Antarctica"
-msgstr ""
+msgstr "Антарктида"
 
 #: src/translations.h:214
 msgid "Argentina"
@@ -1630,23 +1630,23 @@ msgstr ""
 
 #: src/translations.h:215
 msgid "American Samoa"
-msgstr ""
+msgstr "Шығыс Самоа"
 
 #: src/translations.h:216
 msgid "Austria"
-msgstr ""
+msgstr "Аустрия"
 
 #: src/translations.h:217
 msgid "Australia"
-msgstr ""
+msgstr "Австралия"
 
 #: src/translations.h:218
 msgid "Aruba"
-msgstr ""
+msgstr "Аруба аралдары"
 
 #: src/translations.h:219
 msgid "Azerbaijan"
-msgstr ""
+msgstr "Әзірбайжан"
 
 #: src/translations.h:220
 msgid "Bosnia and Herzegowina"
@@ -1662,11 +1662,11 @@ msgstr ""
 
 #: src/translations.h:223
 msgid "Belgium"
-msgstr ""
+msgstr "Бельгия"
 
 #: src/translations.h:224
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Буркина Фасо"
 
 #: src/translations.h:225
 msgid "Bulgaria"
@@ -1682,7 +1682,7 @@ msgstr ""
 
 #: src/translations.h:228
 msgid "Benin"
-msgstr ""
+msgstr "Бенин"
 
 #: src/translations.h:229
 msgid "Bermuda"
@@ -1690,7 +1690,7 @@ msgstr ""
 
 #: src/translations.h:230
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "Бруней Даруссалам"
 
 #: src/translations.h:231
 msgid "Bolivia"
@@ -1698,19 +1698,19 @@ msgstr ""
 
 #: src/translations.h:232
 msgid "Brazil"
-msgstr ""
+msgstr "Бразилия"
 
 #: src/translations.h:233
 msgid "Bahamas"
-msgstr ""
+msgstr "Багам аралдары"
 
 #: src/translations.h:234
 msgid "Bhutan"
-msgstr ""
+msgstr "Бутан"
 
 #: src/translations.h:235
 msgid "Bouvet Island"
-msgstr ""
+msgstr "Буве аралдары"
 
 #: src/translations.h:236
 msgid "Botswana"
@@ -1718,7 +1718,7 @@ msgstr ""
 
 #: src/translations.h:237
 msgid "Belarus"
-msgstr ""
+msgstr "Белорусь"
 
 #: src/translations.h:238
 msgid "Belize"
@@ -1730,11 +1730,11 @@ msgstr ""
 
 #: src/translations.h:240
 msgid "Cocos Islands"
-msgstr ""
+msgstr "Кокос ар-ы"
 
 #: src/translations.h:241
 msgid "Democratic Republic of the Congo"
-msgstr ""
+msgstr "Конго Демократикалық Республикасы"
 
 #: src/translations.h:242
 msgid "Central African Republic"
@@ -1742,23 +1742,23 @@ msgstr ""
 
 #: src/translations.h:243
 msgid "Republic of the Congo"
-msgstr ""
+msgstr "Конго Республикасы"
 
 #: src/translations.h:244
 msgid "Switzerland"
-msgstr ""
+msgstr "Швецария"
 
 #: src/translations.h:245
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "Кот-д'Ивуар"
 
 #: src/translations.h:246
 msgid "Cook Islands"
-msgstr ""
+msgstr "Кук аралдары"
 
 #: src/translations.h:247
 msgid "Chile"
-msgstr ""
+msgstr "Чили"
 
 #: src/translations.h:248
 msgid "Cameroon"
@@ -1766,19 +1766,19 @@ msgstr ""
 
 #: src/translations.h:249
 msgid "China"
-msgstr ""
+msgstr "Қытай"
 
 #: src/translations.h:250
 msgid "Colombia"
-msgstr ""
+msgstr "Колумбия"
 
 #: src/translations.h:251
 msgid "Costa Rica"
-msgstr ""
+msgstr "Коста Рика"
 
 #: src/translations.h:252
 msgid "Serbia and Montenegro"
-msgstr ""
+msgstr "Сербия мен Черногория"
 
 #: src/translations.h:253
 msgid "Cuba"
@@ -1790,7 +1790,7 @@ msgstr ""
 
 #: src/translations.h:255
 msgid "Christmas Island"
-msgstr ""
+msgstr "Рождество аралы"
 
 #: src/translations.h:256
 msgid "Cyprus"
@@ -1798,7 +1798,7 @@ msgstr ""
 
 #: src/translations.h:257
 msgid "Czech Republic"
-msgstr ""
+msgstr "Чехия"
 
 #: src/translations.h:258
 msgid "Germany"
@@ -1814,7 +1814,7 @@ msgstr ""
 
 #: src/translations.h:261
 msgid "Dominica"
-msgstr ""
+msgstr "Доминика"
 
 #: src/translations.h:262
 msgid "Dominican Republic"
@@ -1822,11 +1822,11 @@ msgstr ""
 
 #: src/translations.h:263
 msgid "Algeria"
-msgstr ""
+msgstr "Алжир"
 
 #: src/translations.h:264
 msgid "Ecuador"
-msgstr ""
+msgstr "Экуадор"
 
 #: src/translations.h:265
 msgid "Estonia"
@@ -1834,11 +1834,11 @@ msgstr ""
 
 #: src/translations.h:266
 msgid "Egypt"
-msgstr ""
+msgstr "Мысыр"
 
 #: src/translations.h:267
 msgid "Western Sahara"
-msgstr ""
+msgstr "Батыс Сахара"
 
 #: src/translations.h:268
 msgid "Eritrea"
@@ -1862,7 +1862,7 @@ msgstr ""
 
 #: src/translations.h:273
 msgid "Falkland Islands"
-msgstr ""
+msgstr "Фолкленд (Мальвин) ар-ы"
 
 #: src/translations.h:274
 msgid "Micronesia"
@@ -1870,31 +1870,31 @@ msgstr ""
 
 #: src/translations.h:275
 msgid "Faroe Islands"
-msgstr ""
+msgstr "Фарер аралдары"
 
 #: src/translations.h:276
 msgid "France"
-msgstr ""
+msgstr "Франция"
 
 #: src/translations.h:277
 msgid "Gabon"
-msgstr ""
+msgstr "Габон"
 
 #: src/translations.h:278
 msgid "United Kingdom"
-msgstr ""
+msgstr "Ұлыбритания"
 
 #: src/translations.h:279
 msgid "Grenada"
-msgstr ""
+msgstr "Гренада"
 
 #: src/translations.h:280
 msgid "Georgia"
-msgstr ""
+msgstr "Гүржістан"
 
 #: src/translations.h:281
 msgid "French Guiana"
-msgstr ""
+msgstr "Францияның Гвианасы"
 
 #: src/translations.h:282
 msgid "Ghana"
@@ -1918,7 +1918,7 @@ msgstr ""
 
 #: src/translations.h:287
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Гваделупа"
 
 #: src/translations.h:288
 msgid "Equatorial Guinea"
@@ -1930,7 +1930,7 @@ msgstr ""
 
 #: src/translations.h:290
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "Оңтүстік Георгия  және Оңтүстік Сандвич ар-ы"
 
 #: src/translations.h:291
 msgid "Guatemala"
@@ -1942,7 +1942,7 @@ msgstr ""
 
 #: src/translations.h:293
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Гвинея-Бисау"
 
 #: src/translations.h:294
 msgid "Guyana"
@@ -1950,11 +1950,11 @@ msgstr ""
 
 #: src/translations.h:295
 msgid "Hong Kong"
-msgstr ""
+msgstr "Гонконг"
 
 #: src/translations.h:296
 msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgstr "Хеард пен Макдональд аралдары"
 
 #: src/translations.h:297
 msgid "Honduras"
@@ -1974,7 +1974,7 @@ msgstr ""
 
 #: src/translations.h:301
 msgid "Indonesia"
-msgstr ""
+msgstr "Индонезия"
 
 #: src/translations.h:302
 msgid "Ireland"
@@ -1986,11 +1986,11 @@ msgstr ""
 
 #: src/translations.h:304
 msgid "India"
-msgstr ""
+msgstr "Үндістан"
 
 #: src/translations.h:305
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "Британияның Үнді мұхиттағы жері"
 
 #: src/translations.h:306
 msgid "Iraq"
@@ -1998,7 +1998,7 @@ msgstr ""
 
 #: src/translations.h:307
 msgid "Iran"
-msgstr ""
+msgstr "Иран"
 
 #: src/translations.h:308
 msgid "Iceland"
@@ -2006,7 +2006,7 @@ msgstr ""
 
 #: src/translations.h:309
 msgid "Italy"
-msgstr ""
+msgstr "Италия"
 
 #: src/translations.h:310
 msgid "Jamaica"
@@ -2014,11 +2014,11 @@ msgstr ""
 
 #: src/translations.h:311
 msgid "Jordan"
-msgstr ""
+msgstr "Хордан"
 
 #: src/translations.h:312
 msgid "Japan"
-msgstr ""
+msgstr "Жапония"
 
 #: src/translations.h:313
 msgid "Kenya"
@@ -2026,11 +2026,11 @@ msgstr ""
 
 #: src/translations.h:314
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "Қырғызстан"
 
 #: src/translations.h:315
 msgid "Cambodia"
-msgstr ""
+msgstr "Камбоджа"
 
 #: src/translations.h:316
 msgid "Kiribati"
@@ -2038,19 +2038,19 @@ msgstr ""
 
 #: src/translations.h:317
 msgid "Comoros"
-msgstr ""
+msgstr "Комор аралдары"
 
 #: src/translations.h:318
 msgid "Saint Kitts and Nevis"
-msgstr ""
+msgstr "Сент-Китс және Невис"
 
 #: src/translations.h:319
 msgid "Democratic People's Republic of Korea"
-msgstr ""
+msgstr "Корей Халық Демократиялық Республикасы"
 
 #: src/translations.h:320
 msgid "Republic of Korea"
-msgstr ""
+msgstr "Корея Республикасы"
 
 #: src/translations.h:321
 msgid "Kuwait"
@@ -2058,7 +2058,7 @@ msgstr ""
 
 #: src/translations.h:322
 msgid "Cayman Islands"
-msgstr ""
+msgstr "Кайман аралдары"
 
 #: src/translations.h:323
 msgid "Kazakhstan"
@@ -2066,7 +2066,7 @@ msgstr ""
 
 #: src/translations.h:324
 msgid "Lao"
-msgstr ""
+msgstr "Лао"
 
 #: src/translations.h:325
 msgid "Lebanon"
@@ -2074,11 +2074,11 @@ msgstr ""
 
 #: src/translations.h:326
 msgid "Saint Lucia"
-msgstr ""
+msgstr "Сент-Люсия"
 
 #: src/translations.h:327
 msgid "Liechtenstein"
-msgstr ""
+msgstr "Лихтенштейн"
 
 #: src/translations.h:328
 msgid "Sri Lanka"
@@ -2106,7 +2106,7 @@ msgstr ""
 
 #: src/translations.h:334
 msgid "Libyan Arab Jamahiriya"
-msgstr ""
+msgstr "Ливия Араб Жамахириясы"
 
 #: src/translations.h:335
 msgid "Morocco"
@@ -2118,15 +2118,15 @@ msgstr ""
 
 #: src/translations.h:337
 msgid "Moldova"
-msgstr ""
+msgstr "Молдова"
 
 #: src/translations.h:338
 msgid "Madagascar"
-msgstr ""
+msgstr "Мадагаскар"
 
 #: src/translations.h:339
 msgid "Marshall Islands"
-msgstr ""
+msgstr "Маршалл аралдары"
 
 #: src/translations.h:340
 msgid "Macedonia"
@@ -2138,11 +2138,11 @@ msgstr ""
 
 #: src/translations.h:342
 msgid "Myanmar"
-msgstr ""
+msgstr "Мьянмалық"
 
 #: src/translations.h:343
 msgid "Mongolia"
-msgstr ""
+msgstr "Монғолия"
 
 #: src/translations.h:344
 msgid "Macau"
@@ -2150,7 +2150,7 @@ msgstr ""
 
 #: src/translations.h:345
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "Солтүстік Марианна Аралдары"
 
 #: src/translations.h:346
 msgid "Martinique"
@@ -2162,7 +2162,7 @@ msgstr ""
 
 #: src/translations.h:348
 msgid "Montserrat"
-msgstr ""
+msgstr "Монсеррат"
 
 #: src/translations.h:349
 msgid "Malta"
@@ -2174,7 +2174,7 @@ msgstr ""
 
 #: src/translations.h:351
 msgid "Maldives"
-msgstr ""
+msgstr "Мальдив аралдары"
 
 #: src/translations.h:352
 msgid "Malawi"
@@ -2182,7 +2182,7 @@ msgstr ""
 
 #: src/translations.h:353
 msgid "Mexico"
-msgstr ""
+msgstr "Мексика"
 
 #: src/translations.h:354
 msgid "Malaysia"
@@ -2202,11 +2202,11 @@ msgstr ""
 
 #: src/translations.h:358
 msgid "Niger"
-msgstr ""
+msgstr "Нигер"
 
 #: src/translations.h:359
 msgid "Norfolk Island"
-msgstr ""
+msgstr "Норфолк аралы"
 
 #: src/translations.h:360
 msgid "Nigeria"
@@ -2218,7 +2218,7 @@ msgstr ""
 
 #: src/translations.h:362
 msgid "Netherlands"
-msgstr ""
+msgstr "Нидерландия"
 
 #: src/translations.h:363
 msgid "Norway"
@@ -2230,19 +2230,19 @@ msgstr ""
 
 #: src/translations.h:365
 msgid "Nauru"
-msgstr ""
+msgstr "Науру"
 
 #: src/translations.h:366
 msgid "Niue"
-msgstr ""
+msgstr "Ниуэ"
 
 #: src/translations.h:367
 msgid "New Zealand"
-msgstr ""
+msgstr "Жаңа Зеландия"
 
 #: src/translations.h:368
 msgid "Oman"
-msgstr ""
+msgstr "Оман"
 
 #: src/translations.h:369
 msgid "Panama"
@@ -2254,7 +2254,7 @@ msgstr ""
 
 #: src/translations.h:371
 msgid "French Polynesia"
-msgstr ""
+msgstr "Polinezia franceză"
 
 #: src/translations.h:372
 msgid "Papua New Guinea"
@@ -2266,7 +2266,7 @@ msgstr ""
 
 #: src/translations.h:374
 msgid "Pakistan"
-msgstr ""
+msgstr "Пәкістан"
 
 #: src/translations.h:375
 msgid "Poland"
@@ -2274,11 +2274,11 @@ msgstr ""
 
 #: src/translations.h:376
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "Сен-Пьер және Микелон"
 
 #: src/translations.h:377
 msgid "Pitcairn"
-msgstr ""
+msgstr "Питкэрн аралдары"
 
 #: src/translations.h:378
 msgid "Puerto Rico"
@@ -2298,7 +2298,7 @@ msgstr ""
 
 #: src/translations.h:382
 msgid "Paraguay"
-msgstr ""
+msgstr "Парагвай"
 
 #: src/translations.h:383
 msgid "Qatar"
@@ -2306,7 +2306,7 @@ msgstr ""
 
 #: src/translations.h:384
 msgid "Réunion"
-msgstr ""
+msgstr "Реюньион"
 
 #: src/translations.h:385
 msgid "Romania"
@@ -2314,11 +2314,11 @@ msgstr ""
 
 #: src/translations.h:386
 msgid "Serbia"
-msgstr ""
+msgstr "Сербия"
 
 #: src/translations.h:387
 msgid "Russian Federation"
-msgstr ""
+msgstr "Ресей Федерациясы"
 
 #: src/translations.h:388
 msgid "Rwanda"
@@ -2330,11 +2330,11 @@ msgstr ""
 
 #: src/translations.h:390
 msgid "Solomon Islands"
-msgstr ""
+msgstr "Соломон аралдары"
 
 #: src/translations.h:391
 msgid "Seychelles"
-msgstr ""
+msgstr "Сейшел аралдары"
 
 #: src/translations.h:392
 msgid "Sudan"
@@ -2350,7 +2350,7 @@ msgstr ""
 
 #: src/translations.h:395
 msgid "Saint Helena"
-msgstr ""
+msgstr "Әулие Елена ар."
 
 #: src/translations.h:396
 msgid "Slovenia"
@@ -2358,7 +2358,7 @@ msgstr ""
 
 #: src/translations.h:397
 msgid "Svalbard and Jan Mayen"
-msgstr ""
+msgstr "Шпицберген мен Ян Майен"
 
 #: src/translations.h:398
 msgid "Slovakia"
@@ -2366,11 +2366,11 @@ msgstr ""
 
 #: src/translations.h:399
 msgid "Sierra Leone"
-msgstr ""
+msgstr "Съера-Леоне"
 
 #: src/translations.h:400
 msgid "San Marino"
-msgstr ""
+msgstr "Сан-Марино"
 
 #: src/translations.h:401
 msgid "Senegal"
@@ -2382,11 +2382,11 @@ msgstr ""
 
 #: src/translations.h:403
 msgid "Suriname"
-msgstr ""
+msgstr "Суринам"
 
 #: src/translations.h:404
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "Сан-Томе және Принсипи"
 
 #: src/translations.h:405
 msgid "El Salvador"
@@ -2394,7 +2394,7 @@ msgstr ""
 
 #: src/translations.h:406
 msgid "Syrian Arab Republic"
-msgstr ""
+msgstr "Сирия Араб Республикасы"
 
 #: src/translations.h:407
 msgid "Swaziland"
@@ -2402,7 +2402,7 @@ msgstr ""
 
 #: src/translations.h:408
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "Теркс және Кайкос аралдары"
 
 #: src/translations.h:409
 msgid "Chad"
@@ -2410,7 +2410,7 @@ msgstr ""
 
 #: src/translations.h:410
 msgid "French Southern Territories"
-msgstr ""
+msgstr "Францияның солтүстік аймақтары"
 
 #: src/translations.h:411
 msgid "Togo"
@@ -2422,19 +2422,19 @@ msgstr ""
 
 #: src/translations.h:413
 msgid "Tajikistan"
-msgstr ""
+msgstr "Тәжікстан"
 
 #: src/translations.h:414
 msgid "Tokelau"
-msgstr ""
+msgstr "Токелау"
 
 #: src/translations.h:415
 msgid "East Timor"
-msgstr ""
+msgstr "Шығыс Тимор"
 
 #: src/translations.h:416
 msgid "Turkmenistan"
-msgstr ""
+msgstr "Түрікменстан"
 
 #: src/translations.h:417
 msgid "Tunisia"
@@ -2442,7 +2442,7 @@ msgstr ""
 
 #: src/translations.h:418
 msgid "Tonga"
-msgstr ""
+msgstr "Тонга"
 
 #: src/translations.h:419
 msgid "Turkey"
@@ -2454,11 +2454,11 @@ msgstr ""
 
 #: src/translations.h:421
 msgid "Tuvalu"
-msgstr ""
+msgstr "Тувалу"
 
 #: src/translations.h:422
 msgid "Taiwan"
-msgstr ""
+msgstr "Тайван"
 
 #: src/translations.h:423
 msgid "Tanzania"
@@ -2474,11 +2474,11 @@ msgstr ""
 
 #: src/translations.h:426
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "АҚШ шағын сыртқы аралдары"
 
 #: src/translations.h:427
 msgid "United States"
-msgstr ""
+msgstr "Құрама Штаттар"
 
 #: src/translations.h:428
 msgid "Uruguay"
@@ -2494,7 +2494,7 @@ msgstr ""
 
 #: src/translations.h:431
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "Сент-Винсент және Гренадин"
 
 #: src/translations.h:432
 msgid "Venezuela"
@@ -2502,7 +2502,7 @@ msgstr ""
 
 #: src/translations.h:433
 msgid "British Virgin Islands"
-msgstr ""
+msgstr "Виргин аралдары, Ұлыбритания"
 
 #: src/translations.h:434
 msgid "United States Virgin Islands"
@@ -2510,7 +2510,7 @@ msgstr ""
 
 #: src/translations.h:435
 msgid "Viet Nam"
-msgstr ""
+msgstr "Вьетнам"
 
 #: src/translations.h:436
 msgid "Vanuatu"
@@ -2518,7 +2518,7 @@ msgstr ""
 
 #: src/translations.h:437
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "Уоллис және Футуна"
 
 #: src/translations.h:438
 msgid "Samoa"
@@ -2530,7 +2530,7 @@ msgstr ""
 
 #: src/translations.h:440
 msgid "Mayotte"
-msgstr ""
+msgstr "Майотта"
 
 #: src/translations.h:441
 msgid "Yugoslavia"
@@ -2538,7 +2538,7 @@ msgstr ""
 
 #: src/translations.h:442
 msgid "South Africa"
-msgstr ""
+msgstr "Оңтүстік Африка"
 
 #: src/translations.h:443
 msgid "Zambia"
@@ -2550,11 +2550,11 @@ msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
-msgstr ""
+msgstr "/"
 
 #: src/ui_dateTimeDialogGui.h:298 src/ui_dateTimeDialogGui.h:299
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:422
@@ -2567,15 +2567,15 @@ msgstr "Анықтама"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
 msgid "About"
-msgstr ""
+msgstr "Осы туралы"
 
 #: src/ui_helpDialogGui.h:269
 msgid "Log"
-msgstr ""
+msgstr "Журнал"
 
 #: src/ui_helpDialogGui.h:272
 msgid "Refresh"
-msgstr ""
+msgstr "Баптаулар"
 
 #: src/ui_locationDialogGui.h:384
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:134
@@ -2594,7 +2594,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:885
 #: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Delete"
-msgstr ""
+msgstr "Өшіру"
 
 #: src/ui_locationDialogGui.h:391
 msgid "Add to list"
@@ -2603,7 +2603,7 @@ msgstr ""
 #: src/ui_locationDialogGui.h:392
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:135
 msgid "Latitude:"
-msgstr ""
+msgstr "Ендігі:"
 
 #: src/ui_locationDialogGui.h:394 src/ui_locationDialogGui.h:398
 msgid ""
@@ -2614,7 +2614,7 @@ msgstr ""
 #: src/ui_locationDialogGui.h:396
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:138
 msgid "Longitude:"
-msgstr ""
+msgstr "Бойлығы:"
 
 #: src/ui_locationDialogGui.h:400
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:141
@@ -2635,7 +2635,7 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:406
 msgid "Country:"
-msgstr ""
+msgstr "Ел:"
 
 #: src/ui_locationDialogGui.h:407
 msgid "Planet:"
@@ -2751,7 +2751,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:583
 msgid "Object"
-msgstr ""
+msgstr "Объект"
 
 #: src/ui_searchDialogGui.h:584
 msgid "RA/Dec (J2000):"
@@ -2759,7 +2759,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:585
 msgid "Position"
-msgstr ""
+msgstr "Орналасуы"
 
 #: src/ui_searchDialogGui.h:586
 msgid "On-line astronomical database SIMBAD"
@@ -2771,18 +2771,18 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:588
 msgid "Server:"
-msgstr ""
+msgstr "Сервер:"
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
 #: src/ui_configurationDialog.h:891 src/ui_configurationDialog.h:902
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
-msgstr ""
+msgstr "Опциялар"
 
 #: src/ui_viewDialog.h:1101
 msgid "View"
-msgstr ""
+msgstr "Түрі"
 
 #: src/ui_viewDialog.h:1107
 msgid "Sky"
@@ -2795,7 +2795,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1111
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Landscape"
-msgstr ""
+msgstr "Көлденең"
 
 #: src/ui_viewDialog.h:1113
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:217
@@ -2884,23 +2884,23 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1143
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: src/ui_viewDialog.h:1144
 msgid "10"
-msgstr ""
+msgstr "10"
 
 #: src/ui_viewDialog.h:1145
 msgid "80"
-msgstr ""
+msgstr "80"
 
 #: src/ui_viewDialog.h:1146
 msgid "10000"
-msgstr ""
+msgstr "10000"
 
 #: src/ui_viewDialog.h:1147
 msgid "144000"
-msgstr ""
+msgstr "144000"
 
 #: src/ui_viewDialog.h:1149
 msgid "Constellations"
