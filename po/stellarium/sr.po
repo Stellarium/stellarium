@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-05-03 12:41+0000\n"
+"PO-Revision-Date: 2012-05-09 20:26+0000\n"
 "Last-Translator: Иван Старчевић <ivanstar61@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:42+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-10 05:18+0000\n"
+"X-Generator: Launchpad (build 15213)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -265,7 +265,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
-msgstr "Hammer-Aitoff"
+msgstr "Хамер-Ајтоф"
 
 #: src/core/StelProjectorClasses.cpp:187
 msgid ""
@@ -289,7 +289,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:270
 msgid "Mercator"
-msgstr "Меркаторова"
+msgstr "Меркатор"
 
 #: src/core/StelProjectorClasses.cpp:275
 msgid ""
@@ -905,11 +905,11 @@ msgstr "Додај 1 звездани месец"
 
 #: src/gui/StelGui.cpp:169
 msgid "Subtract 1 sidereal month"
-msgstr ""
+msgstr "Одузми 1 звездани месец"
 
 #: src/gui/StelGui.cpp:170
 msgid "Add 1 sidereal year"
-msgstr ""
+msgstr "Додај 1 звездану годину"
 
 #: src/gui/StelGui.cpp:171
 msgid "Subtract 1 sidereal year"
@@ -1363,7 +1363,7 @@ msgstr "Халимеда"
 
 #: src/translations.h:95
 msgid "Psamathe"
-msgstr ""
+msgstr "Псамафа"
 
 #: src/translations.h:96
 msgid "Sao"
@@ -1389,17 +1389,17 @@ msgstr "Седна"
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
 #: src/translations.h:104
 msgid "Quaoar"
-msgstr "Quaoar"
+msgstr "Квавар"
 
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
 #: src/translations.h:106
 msgid "Orcus"
-msgstr ""
+msgstr "Орк"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
 #: src/translations.h:108
 msgid "Haumea"
-msgstr ""
+msgstr "Хаумеа"
 
 #. TRANSLATORS: Asteroid (5) Astraea
 #: src/translations.h:111
@@ -1536,12 +1536,12 @@ msgstr "Западњачки"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:162
 msgid "Guereins"
-msgstr ""
+msgstr "Герен"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:164
 msgid "Trees"
-msgstr ""
+msgstr "Дрвеће"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:168
@@ -1556,22 +1556,22 @@ msgstr "Океан"
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:172
 msgid "Garching"
-msgstr ""
+msgstr "Гархинг"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
 msgid "Landscape Tour"
-msgstr ""
+msgstr "Преглед путовања"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
 msgid "Partial Lunar Eclipse"
-msgstr ""
+msgstr "Делимично помрачење Месеца"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:184
 msgid "Total Lunar Eclipse"
-msgstr ""
+msgstr "Потпуно помрачење Месеца"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
@@ -1581,12 +1581,12 @@ msgstr "Чувар екрана"
 #. TRANSLATORS: Name of script
 #: src/translations.h:188
 msgid "Solar Eclipse 2009"
-msgstr ""
+msgstr "Помрачење Сунца 2009"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:190
 msgid "Startup Script"
-msgstr ""
+msgstr "Покретање скрипте"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:192
@@ -1595,29 +1595,31 @@ msgstr "Зодијак"
 
 #: src/translations.h:195
 msgid "Look around each installed landscape."
-msgstr ""
+msgstr "Осврните се око сваког инсталираног пејзажа."
 
 #: src/translations.h:196
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr ""
+msgstr "Скрипта приказује делимично помрачење Месеца."
 
 #: src/translations.h:197
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr ""
+msgstr "Скрипта приказује потпуну помрачење Месеца."
 
 #: src/translations.h:198
 msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr ""
+msgstr "Спори, бесконачни преглед неба с приказом случајних објеката."
 
 #: src/translations.h:199
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
+"Скрипта која демонстрира потпуно помрачење Сунца које се десило 2009. године "
+"(место=Рангпур, Бангладеш)."
 
 #: src/translations.h:200
 msgid "Script which runs automatically at startup"
-msgstr ""
+msgstr "Скрипта која се аутоматски покреће при покретању"
 
 #: src/translations.h:201
 msgid ""
@@ -1625,6 +1627,8 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
+"Ова скрипта приказује сазвежђа на Зодијака. То су сазвежђа која леже дуж "
+"линије коју прави Сунце на небеском своду током целе године."
 
 #: src/translations.h:204
 msgid "Andorra"
@@ -1820,7 +1824,7 @@ msgstr "Костарика"
 
 #: src/translations.h:252
 msgid "Serbia and Montenegro"
-msgstr "Србија"
+msgstr "Србија и Црна Гора"
 
 #: src/translations.h:253
 msgid "Cuba"
@@ -2032,7 +2036,7 @@ msgstr "Индија"
 
 #: src/translations.h:305
 msgid "British Indian Ocean Territory"
-msgstr "Британско Индијска Океанска Територија"
+msgstr "Британско територија у Индијском океану"
 
 #: src/translations.h:306
 msgid "Iraq"
@@ -2328,7 +2332,7 @@ msgstr "Порторико"
 
 #: src/translations.h:379
 msgid "Palestinian Territories"
-msgstr ""
+msgstr "Палестинске територије"
 
 #: src/translations.h:380
 msgid "Portugal"
@@ -2348,7 +2352,7 @@ msgstr "Катар"
 
 #: src/translations.h:384
 msgid "Réunion"
-msgstr "Реинион"
+msgstr "Реунион"
 
 #: src/translations.h:385
 msgid "Romania"
@@ -2436,11 +2440,11 @@ msgstr "Салвадор"
 
 #: src/translations.h:406
 msgid "Syrian Arab Republic"
-msgstr "Сиријска Арапска Република"
+msgstr "Сирија"
 
 #: src/translations.h:407
 msgid "Swaziland"
-msgstr ""
+msgstr "Свазиленд"
 
 #: src/translations.h:408
 msgid "Turks and Caicos Islands"
@@ -2617,7 +2621,7 @@ msgstr "Дневник"
 
 #: src/ui_helpDialogGui.h:272
 msgid "Refresh"
-msgstr "Освежавање"
+msgstr "Освежи"
 
 #: src/ui_locationDialogGui.h:384
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:134
@@ -2691,7 +2695,7 @@ msgstr "Нађи објекат"
 
 #: src/ui_searchDialogGui.h:505
 msgid "Find Object or Position"
-msgstr ""
+msgstr "Пронађи објекат или место"
 
 #: src/ui_searchDialogGui.h:511
 msgid "iota"
@@ -2791,7 +2795,7 @@ msgstr "омега"
 
 #: src/ui_searchDialogGui.h:582
 msgid "Greek letters for Bayer designations"
-msgstr ""
+msgstr "Грчка слова за Бајеровим ознакама"
 
 #: src/ui_searchDialogGui.h:583
 msgid "Object"
@@ -2807,11 +2811,11 @@ msgstr "Положај"
 
 #: src/ui_searchDialogGui.h:586
 msgid "On-line astronomical database SIMBAD"
-msgstr ""
+msgstr "Астрономска база података SIMBAD на мрежи"
 
 #: src/ui_searchDialogGui.h:587
 msgid "Extend search with SIMBAD"
-msgstr ""
+msgstr "Прошири претрагу помоћу SIMBAD-а"
 
 #: src/ui_searchDialogGui.h:588
 msgid "Server:"
@@ -2900,7 +2904,7 @@ msgstr "Прикажи атмосферу"
 #: src/ui_viewDialog.h:1132
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Light pollution:"
-msgstr ""
+msgstr "Светлосна загађеност:"
 
 #: src/ui_viewDialog.h:1134
 msgid "pressure, temperature, extinction coefficient"
@@ -2908,7 +2912,7 @@ msgstr "притисак, температура, коефицијент изу�
 
 #: src/ui_viewDialog.h:1136
 msgid "Refraction/Extinction settings..."
-msgstr ""
+msgstr "Поставке преламања/пригушивања..."
 
 #: src/ui_viewDialog.h:1137
 msgid "Labels and Markers"
@@ -2978,23 +2982,23 @@ msgstr "Небеска сфера"
 
 #: src/ui_viewDialog.h:1162
 msgid "Show equator line"
-msgstr ""
+msgstr "Прикажи линију Екватора"
 
 #: src/ui_viewDialog.h:1166
 msgid "Show meridian line"
-msgstr ""
+msgstr "Прикажи линију меридијана"
 
 #: src/ui_viewDialog.h:1170
 msgid "Show horizon line"
-msgstr ""
+msgstr "Прикажи линију хоризонта"
 
 #: src/ui_viewDialog.h:1174
 msgid "Show ecliptic line"
-msgstr ""
+msgstr "Прикажи еклиптичку линију"
 
 #: src/ui_viewDialog.h:1178
 msgid "Show Galactic plane line"
-msgstr ""
+msgstr "Прикажи линију Галактичке равни"
 
 #: src/ui_viewDialog.h:1182
 msgid "Projection"
@@ -3058,11 +3062,11 @@ msgstr "Кратко"
 
 #: src/ui_configurationDialog.h:798
 msgid "Display user settings information"
-msgstr ""
+msgstr "Приказ информације о подешавањима за употребу"
 
 #: src/ui_configurationDialog.h:800
 msgid "Customized"
-msgstr ""
+msgstr "Прилагођено"
 
 #: src/ui_configurationDialog.h:802
 msgid "Display no information"
@@ -3154,6 +3158,8 @@ msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
+"Поставља опонашајуће време на следећу појаву тог доба дана када се покрене "
+"Стеларијум"
 
 #: src/ui_configurationDialog.h:838
 msgid "System date at:"
@@ -3200,8 +3206,8 @@ msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr ""
-"Deformisanje sfernog ogledala se koristi kada se Stellarium projektuje na "
-"sferno ogledalo niskobudžetnih planetarijuma."
+"Изобличење сферног огледала користи се при пројекцији Стеларијума на сферно "
+"огледало код јефтиних планетарних  система."
 
 #: src/ui_configurationDialog.h:857
 msgid "Spheric mirror distortion"
@@ -3220,10 +3226,11 @@ msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
+"Када је омогућено, \"самоумањивање\" биће постављено на почетни смер погледа"
 
 #: src/ui_configurationDialog.h:865
 msgid "Auto zoom out returns to initial direction of view"
-msgstr ""
+msgstr "Самоумањивање враћа на почетни смер погледа"
 
 #: src/ui_configurationDialog.h:867
 msgid "Mask out everything outside a central circle in the main view"
@@ -3231,7 +3238,7 @@ msgstr "Замаскирај све ван централног круга у г
 
 #: src/ui_configurationDialog.h:869
 msgid "Disc viewport"
-msgstr ""
+msgstr "Кружни поглед"
 
 #: src/ui_configurationDialog.h:871
 msgid "Hide other constellations when you click one"
@@ -3251,7 +3258,7 @@ msgstr "Директоријум снимака екрана"
 
 #: src/ui_configurationDialog.h:877
 msgid "Invert colors"
-msgstr "Извртање боја"
+msgstr "Изврни боје"
 
 #: src/ui_configurationDialog.h:878
 msgid "Star catalog updates"
@@ -3359,11 +3366,11 @@ msgstr ""
 
 #: src/ui_AtmosphereDialog.h:176
 msgid "Atmosphere Details"
-msgstr ""
+msgstr "Детаљи о атмосфери"
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Refraction Settings"
-msgstr ""
+msgstr "Поставке преламања"
 
 #: src/ui_AtmosphereDialog.h:179
 msgid "Pressure (mbar):"
@@ -3379,157 +3386,162 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
+"Пригушење је губитак сјаја звезде услед Земљине атмосфере. Дато је као "
+"величина/зрачна маса, где је зрачна маса број атмосфера коју светлост треба "
+"да прође. (највиша тачка: 1; видокруг: око 40)"
 
 #: src/ui_AtmosphereDialog.h:187
 msgid "Extinction Coefficient:"
-msgstr ""
+msgstr "Коефицијент пригушења:"
 
 #: src/ui_AtmosphereDialog.h:189
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
+"Користите око 0.12 за планинске врхове, 0.2 за добар сеоски пејзаж, 0.35 за "
+"тамне прилике."
 
 #: src/ui_CustomInfoDialog.h:194
 msgid "Custom Info Settings"
-msgstr ""
+msgstr "Поставке жељених података"
 
 #: src/ui_CustomInfoDialog.h:196
 msgid "Display info about an object's name"
-msgstr ""
+msgstr "Приказивање информација о имену објекта"
 
 #: src/ui_CustomInfoDialog.h:198
 msgid "An object's name"
-msgstr ""
+msgstr "Назив објекта"
 
 #: src/ui_CustomInfoDialog.h:200
 msgid "Display  info about a catalog numbers"
-msgstr ""
+msgstr "Прикажи информације о броју каталога"
 
 #: src/ui_CustomInfoDialog.h:202
 msgid "Catalog numbers"
-msgstr ""
+msgstr "Бројеви каталога"
 
 #: src/ui_CustomInfoDialog.h:204
 msgid "Display  info about a visual magnitude"
-msgstr ""
+msgstr "Прикажи информације о визуелној величини"
 
 #: src/ui_CustomInfoDialog.h:206
 msgid "Visual magnitude"
-msgstr ""
+msgstr "Визуелна величина"
 
 #: src/ui_CustomInfoDialog.h:208
 msgid "Display  info about an absolute magnitude"
-msgstr ""
+msgstr "Приказивање информација о апсолутној величини"
 
 #: src/ui_CustomInfoDialog.h:210
 msgid "Absolute magnitude"
-msgstr ""
+msgstr "Апсолутна величина"
 
 #: src/ui_CustomInfoDialog.h:212
 msgid "Display the equatorial position (J2000 ref)"
-msgstr ""
+msgstr "Прикажи екваторијалну позицију (J2000 релативно)"
 
 #: src/ui_CustomInfoDialog.h:214
 msgid "The equatorial coordinates (J2000 ref)"
-msgstr ""
+msgstr "Екваторијалне координате (J2000 релативно)"
 
 #: src/ui_CustomInfoDialog.h:216
 msgid "Display the equatorial position (of date)"
-msgstr ""
+msgstr "Прикажи екваторијалну позицију (датум)"
 
 #: src/ui_CustomInfoDialog.h:218
 msgid "The equatorial coordinates (of date)"
-msgstr ""
+msgstr "Екваторијалне координате (датум)"
 
 #: src/ui_CustomInfoDialog.h:220
 msgid "Display the altitude and azimuth position"
-msgstr ""
+msgstr "Прикажи висину и азимуталну позицију"
 
 #: src/ui_CustomInfoDialog.h:222
 msgid "The alt-azimuthal coordinates"
-msgstr ""
+msgstr "Хоризонтална координата"
 
 #: src/ui_CustomInfoDialog.h:224
 msgid "Display the hour angle + DE (of date)"
-msgstr ""
+msgstr "Прикажите сатни угао и деклинацију (до сада)"
 
 #: src/ui_CustomInfoDialog.h:226
 msgid "The hour angle"
-msgstr ""
+msgstr "Сатни угао"
 
 #: src/ui_CustomInfoDialog.h:228
 msgid "Display info about an object's distance"
-msgstr ""
+msgstr "Приказивање информација о удаљености објекта"
 
 #: src/ui_CustomInfoDialog.h:230
 msgid "Object's distance"
-msgstr ""
+msgstr "Удаљеност објекта"
 
 #: src/ui_CustomInfoDialog.h:232
 msgid "Display info about an object's size"
-msgstr ""
+msgstr "Приказивање информација о величини објекта"
 
 #: src/ui_CustomInfoDialog.h:234
 msgid "Object's size"
-msgstr ""
+msgstr "Величина објекта"
 
 #: src/ui_CustomInfoDialog.h:236 src/ui_CustomInfoDialog.h:240
 #: src/ui_CustomInfoDialog.h:244
 msgid "Display a derived class-specific extra fields"
-msgstr ""
+msgstr "Прикажи изведена додатна поља специфичне класе"
 
 #: src/ui_CustomInfoDialog.h:238
 msgid "Additional info (Extra 1)"
-msgstr ""
+msgstr "Додатне информације (Додатне 1)"
 
 #: src/ui_CustomInfoDialog.h:242
 msgid "Additional info (Extra 2)"
-msgstr ""
+msgstr "Додатне информације (Додатне 2)"
 
 #: src/ui_CustomInfoDialog.h:246
 msgid "Additional info (Extra 3)"
-msgstr ""
+msgstr "Додатне информације (Додатне 3)"
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
-msgstr ""
+msgstr "Конзола скрипте"
 
 #: src/ui_scriptConsole.h:344
 msgid "load script from file"
-msgstr ""
+msgstr "учитавање скрипте из датотеке"
 
 #: src/ui_scriptConsole.h:348
 msgid "save script to file"
-msgstr ""
+msgstr "сачувај скрипту у датотеци"
 
 #: src/ui_scriptConsole.h:352
 msgid "clear script"
-msgstr ""
+msgstr "очисти скрипту"
 
 #: src/ui_scriptConsole.h:356
 msgid "pre-process script using SSC preprocessor"
-msgstr ""
+msgstr "процесирај скрипту користећи SSC препроцесор"
 
 #: src/ui_scriptConsole.h:359
 msgid "pre-process script using STS preprocessor"
-msgstr ""
+msgstr "процесирај скрипту користећи STS препроцесор"
 
 #: src/ui_scriptConsole.h:362
 msgid "quickly load and run a utility script"
-msgstr ""
+msgstr "брзо ичитај и покрени скрипту за помоћ"
 
 #: src/ui_scriptConsole.h:365
 msgid "run script"
-msgstr ""
+msgstr "покрени скрипту"
 
 #: src/ui_scriptConsole.h:369
 msgid "stop script"
-msgstr ""
+msgstr "заустави скрипту"
 
 #: src/ui_scriptConsole.h:372
 msgid "Script"
-msgstr ""
+msgstr "Скрипта"
 
 #: src/ui_scriptConsole.h:373
 msgid "Output"
@@ -3541,7 +3553,7 @@ msgstr "Положај показивача"
 
 #: src/ui_scriptConsole.h:377
 msgid "Include dir:"
-msgstr ""
+msgstr "Укључи фасциклу:"
 
 #: src/ui_scriptConsole.h:378
 msgid "..."
@@ -3562,7 +3574,7 @@ msgstr "Мера угла"
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:308
 msgid "The Angle Measure is enabled:"
-msgstr ""
+msgstr "Мера угла је омогућена:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:310
@@ -3598,58 +3610,61 @@ msgid ""
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
+"Приказује небо као да гледате кроз окулар телескопа. (Симулира се само "
+"видокруг и увећање). Такође је могуће приказати оквир сензора и Телрадов "
+"видокруг."
 
 #: plugins/Oculars/src/Oculars.cpp:757
 msgid "Please select an object before switching to ocular view."
-msgstr ""
+msgstr "Изаберите објекат пре преласка на окуларни приказ."
 
 #: plugins/Oculars/src/Oculars.cpp:836
 msgid "&Previous ocular"
-msgstr ""
+msgstr "&Претходни окулар"
 
 #: plugins/Oculars/src/Oculars.cpp:837
 msgid "&Next ocular"
-msgstr ""
+msgstr "&Следећи окулар"
 
 #: plugins/Oculars/src/Oculars.cpp:838
 msgid "Select &ocular"
-msgstr ""
+msgstr "Изабери &окулар"
 
 #: plugins/Oculars/src/Oculars.cpp:883
 msgid "Toggle &crosshair"
-msgstr ""
+msgstr "(Де)активирај &нишан"
 
 #: plugins/Oculars/src/Oculars.cpp:892
 msgid "Configure &Oculars"
-msgstr ""
+msgstr "Подеси &окулар"
 
 #: plugins/Oculars/src/Oculars.cpp:901
 msgid "Toggle &CCD"
-msgstr ""
+msgstr "(Де)активирај &CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:909
 msgid "Toggle &Telrad"
-msgstr ""
+msgstr "(Де)активирај &Телрад"
 
 #: plugins/Oculars/src/Oculars.cpp:919
 msgid "&Previous CCD"
-msgstr ""
+msgstr "&Претходни CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:920
 msgid "&Next CCD"
-msgstr ""
+msgstr "&Следећи CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:921
 msgid "&Select CCD"
-msgstr ""
+msgstr "&Изабери CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:943
 msgid "&Rotate CCD"
-msgstr ""
+msgstr "&Окрени CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:975
 msgid "&Reset rotation"
-msgstr ""
+msgstr "&Поништи окретање"
 
 #: plugins/Oculars/src/Oculars.cpp:1201
 #: plugins/Oculars/src/ui_ocularDialog.h:864
@@ -3658,7 +3673,7 @@ msgstr "Окуларни поглед"
 
 #: plugins/Oculars/src/Oculars.cpp:1225
 msgid "Oculars popup menu"
-msgstr ""
+msgstr "Искачући изборник окулара"
 
 #: plugins/Oculars/src/Oculars.cpp:1233
 msgid "Crosshairs"
@@ -3666,155 +3681,155 @@ msgstr "Нишан"
 
 #: plugins/Oculars/src/Oculars.cpp:1241
 msgid "Image sensor frame"
-msgstr ""
+msgstr "Оквир сензора слике"
 
 #: plugins/Oculars/src/Oculars.cpp:1249
 msgid "Telrad sight"
-msgstr ""
+msgstr "Телрадов видокруг"
 
 #: plugins/Oculars/src/Oculars.cpp:1257
 msgid "Oculars plugin configuration"
-msgstr ""
+msgstr "Подеси додатак за окуларе"
 
 #: plugins/Oculars/src/Oculars.cpp:1445
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 #, qt-format
 msgid "Ocular #%1"
-msgstr ""
+msgstr "Окулар #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1450
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 #, qt-format
 msgid "Ocular #%1: %2"
-msgstr ""
+msgstr "Окулар #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:1464
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:520
 #, qt-format
 msgid "Ocular FL: %1 mm"
-msgstr ""
+msgstr "Окулар FL: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
 #: plugins/Oculars/src/Oculars.cpp:1471
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:530
 #, qt-format
 msgid "Ocular aFOV: %1"
-msgstr ""
+msgstr "Окулар aFOV: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1481 plugins/Oculars/src/Oculars.cpp:1543
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
 #, qt-format
 msgid "Telescope #%1"
-msgstr ""
+msgstr "Телескоп #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1486 plugins/Oculars/src/Oculars.cpp:1548
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
 #, qt-format
 msgid "Telescope #%1: %2"
-msgstr ""
+msgstr "Телескоп #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1497
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
 #, qt-format
 msgid "Magnification: %1"
-msgstr ""
+msgstr "Увећање: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1505
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
 #, qt-format
 msgid "FOV: %1"
-msgstr ""
+msgstr "FOV: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1520
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
 #, qt-format
 msgid "Dimensions: %1"
-msgstr ""
+msgstr "Величина: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1525
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Sensor #%1"
-msgstr ""
+msgstr "Давач #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1529
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Sensor #%1: %2"
-msgstr ""
+msgstr "Давач #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1735
 msgid "&Telescope"
-msgstr ""
+msgstr "&Телескоп"
 
 #: plugins/Oculars/src/Oculars.cpp:1736
 msgid "&Previous telescope"
-msgstr ""
+msgstr "&Претходни телескоп"
 
 #: plugins/Oculars/src/Oculars.cpp:1737
 msgid "&Next telescope"
-msgstr ""
+msgstr "&Следећи телескоп"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
 msgid "Previous ocular"
-msgstr ""
+msgstr "Претходни окулар"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
 msgid "Next ocular"
-msgstr ""
+msgstr "Следећи окулар"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
 msgid "Previous CCD frame"
-msgstr ""
+msgstr "Претходни CCD оквир"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
 msgid "Next CCD frame"
-msgstr ""
+msgstr "Следећи CCD оквир"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Previous telescope"
-msgstr ""
+msgstr "Претходни телескоп"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Next telescope"
-msgstr ""
+msgstr "Следећи телескоп"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr ""
+msgstr "Окрени оквир давача за 15 степени у лево"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:258
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr ""
+msgstr "Окрени оквир сензора за 5 степени у лево"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:271
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr ""
+msgstr "Окрени оквир давача за 1 степен у лево"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
-msgstr ""
+msgstr "Поништи окретање оквира давача"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr ""
+msgstr "Окрени оквир давача за 1 степен у десно"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:310
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr ""
+msgstr "Окрени оквир давача за 5 степени у десно"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:323
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr ""
+msgstr "Окрени оквир давача за 15 степени у десно"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
 msgid "Effective focal length of the ocular"
-msgstr ""
+msgstr "Постојећа жижна даљина на окулару"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:533
 msgid "Apparent field of view of the ocular"
-msgstr ""
+msgstr "Видно поље на окулару"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 #, qt-format
@@ -3823,39 +3838,39 @@ msgstr "Окретање: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 msgid "Magnification provided by these binoculars"
-msgstr ""
+msgstr "Увећање предвиђено овим двогледом"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
 msgid "Actual field of view provided by these binoculars"
-msgstr ""
+msgstr "Стварно видно поље предвиђено овим двогледом"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
 msgid "Magnification provided by this ocular/telescope combination"
-msgstr ""
+msgstr "Увећање омогућено комбинацијом овог окулара/телескопа"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
 msgid "Actual field of view provided by this ocular/telescope combination"
-msgstr ""
+msgstr "Стварно видно поље предвиђено комбинацијом овог окулара/телескопа"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:865
 msgid "Enable only if an object is selected"
-msgstr ""
+msgstr "Омогућите само ако је објекат изабран"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:866
 msgid "Scale image circle"
-msgstr ""
+msgstr "Размера слике круга"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:867
 msgid "Key mappings"
-msgstr ""
+msgstr "Распоређивање тастера"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:868
 msgid "Toggle ocular view:"
-msgstr ""
+msgstr "Де(активирај) приказ окулара:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:870
 msgid "Open pop-up navigation menu:"
-msgstr ""
+msgstr "Отвори искачуће навигациони изборник :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Interface"
@@ -3863,7 +3878,7 @@ msgstr "Сучеље"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:872
 msgid "On-screen control panel"
-msgstr ""
+msgstr "Контролна табла на екрану"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:873
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:214
@@ -3873,7 +3888,7 @@ msgstr "Опште"
 #: plugins/Oculars/src/ui_ocularDialog.h:874
 #: plugins/Oculars/src/ui_ocularDialog.h:882
 msgid "Eyepieces"
-msgstr ""
+msgstr "Очна сочива"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:875
 #: plugins/Oculars/src/ui_ocularDialog.h:884
@@ -3893,7 +3908,7 @@ msgstr "Назив:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "aFOV:"
-msgstr ""
+msgstr "aFOV:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:879
 #: plugins/Oculars/src/ui_ocularDialog.h:898
@@ -3902,59 +3917,59 @@ msgstr "Жижна даљина:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "Field stop:"
-msgstr ""
+msgstr "Крај поља:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 msgid "Binoculars"
-msgstr ""
+msgstr "Двогледи"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:883
 #: plugins/Oculars/src/ui_ocularDialog.h:893
 msgid "Sensors"
-msgstr "Сензори"
+msgstr "Давачи"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Resolution x (pixels):"
-msgstr ""
+msgstr "Резолуција x (тачкица):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Resolution y (pixels):"
-msgstr ""
+msgstr "Резолуција y (тачкица):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Chip width (mm):"
-msgstr ""
+msgstr "Ширина чипа (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:890
 msgid "Chip height (mm):"
-msgstr ""
+msgstr "Висина чипа (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:891
 msgid "Pixel width (micron):"
-msgstr ""
+msgstr "Ширина тачкица (микрона):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:892
 msgid "Pixel height (micron):"
-msgstr ""
+msgstr "Висина тачкица (микрона):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:894
 #: plugins/Oculars/src/ui_ocularDialog.h:902
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Telescopes"
-msgstr ""
+msgstr "Телескопи"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:899
 msgid "Diameter:"
-msgstr ""
+msgstr "Пречник:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Horizontal flip"
-msgstr ""
+msgstr "Водоравно преокретање"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:901
 msgid "Vertical flip"
-msgstr ""
+msgstr "Усправно преокретање"
 
 #: plugins/Satellites/src/Satellites.cpp:65
 #: plugins/Satellites/src/ui_satellitesDialog.h:705
@@ -3966,6 +3981,8 @@ msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
 msgstr ""
+"Предвиђање положаја вештачких сателита у орбити Земље на основу података "
+"NORAD TLE"
 
 #: plugins/Satellites/src/Satellites.cpp:130
 msgid "Satellites configuration window"
@@ -3989,72 +4006,72 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:230
 #: plugins/Satellites/src/Satellite.cpp:234
 msgid "Catalog #"
-msgstr ""
+msgstr "Списак #"
 
 #: plugins/Satellites/src/Satellite.cpp:236
 msgid "International Designator"
-msgstr ""
+msgstr "Међународна ознака"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:248
 #, qt-format
 msgid "Range (km): %1"
-msgstr ""
+msgstr "Домет (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
 #: plugins/Satellites/src/Satellite.cpp:251
 #, qt-format
 msgid "Range rate (km/s): %1"
-msgstr ""
+msgstr "Брзина домета (km/s): %1"
 
 #. TRANSLATORS: Satellite altitude
 #: plugins/Satellites/src/Satellite.cpp:254
 #, qt-format
 msgid "Altitude (km): %1"
-msgstr ""
+msgstr "Висина (km): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
 #: plugins/Satellites/src/Satellite.cpp:257
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
-msgstr ""
+msgstr "Подтачка (Шир./Дуж.): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:271
 #, qt-format
 msgid "TEME coordinates (km): %1"
-msgstr ""
+msgstr "Координате ТЕМЕ (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:279
 #, qt-format
 msgid "TEME velocity (km/s): %1"
-msgstr ""
+msgstr "Брзина ТЕМЕ (km/s): %1"
 
 #: plugins/Satellites/src/Satellite.cpp:287
 msgid "The satellite and the observer are in sunlight."
-msgstr ""
+msgstr "Сателит и посматрач су изложени сунчевој светлости."
 
 #: plugins/Satellites/src/Satellite.cpp:290
 msgid "The satellite is visible."
-msgstr ""
+msgstr "Сателит је видљив"
 
 #: plugins/Satellites/src/Satellite.cpp:293
 msgid "The satellite is eclipsed."
-msgstr ""
+msgstr "Сателит је замрачен"
 
 #: plugins/Satellites/src/Satellite.cpp:296
 msgid "The satellite is not visible"
-msgstr ""
+msgstr "Сателит није видљив"
 
 #: plugins/Satellites/src/Satellite.cpp:322
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
-msgstr ""
+msgstr "%1 MHz (%2%3 kHz)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:258
 msgid "Stellarium Satellites Plugin"
-msgstr ""
+msgstr "Додати сателити"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
 msgid "Version"
@@ -4068,7 +4085,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:265
 msgid "Notes for users"
-msgstr ""
+msgstr "Напомене за кориснике"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:266
 msgid ""
@@ -4106,7 +4123,7 @@ msgstr ""
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:280
 msgid "TLE data updates"
-msgstr ""
+msgstr "TLE ажурирање података"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
 msgid ""
@@ -4131,7 +4148,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
 msgid "Adding new satellites"
-msgstr ""
+msgstr "Додавање нових сателита"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
 msgid ""
@@ -4143,7 +4160,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
-msgstr ""
+msgstr "Техничке напомене"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
 msgid ""
@@ -4194,26 +4211,26 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
 msgid "Internet updates disabled"
-msgstr ""
+msgstr "Интернет исправке су онемогућене"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:355
 msgid "Updating now..."
-msgstr ""
+msgstr "Ажурирање сада..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:325
 msgid "Next update: < 1 minute"
-msgstr ""
+msgstr "Следеће ажурирање за: < 1 минут"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
 #, qt-format
 msgid "Next update: %1 minutes"
-msgstr ""
+msgstr "Следеће ажурирање за: %1 минута"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
 #, qt-format
 msgid "Next update: %1 hours"
-msgstr ""
+msgstr "Следеће ажурирање: %1 сати"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
@@ -4222,11 +4239,11 @@ msgstr "Ажурирај сад"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:346
 msgid "Update from files"
-msgstr ""
+msgstr "Ажурирање из датотека"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:358
 msgid "Update error"
-msgstr ""
+msgstr "Грешка при ажурирању"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:365
 #, qt-format
@@ -4235,7 +4252,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:422
 msgid "[new source]"
-msgstr ""
+msgstr "[нови извор]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
 msgid "[orbit calculation error]"
@@ -4243,19 +4260,19 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"
-msgstr ""
+msgstr "[Све ново додато]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:463
 msgid "[all not displayed]"
-msgstr ""
+msgstr "[није све приказано]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:464
 msgid "[all displayed]"
-msgstr ""
+msgstr "[све је приказано]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:465
 msgid "[all]"
-msgstr ""
+msgstr "[све]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:597
 msgid "Select TLE Update File"
@@ -4263,7 +4280,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:135
 msgid "Downloading data..."
-msgstr ""
+msgstr "Преузимање података..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:136
 msgid ""
@@ -4280,7 +4297,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:226
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:227
 msgid "Processing data..."
-msgstr ""
+msgstr "Обрада података..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:221
 msgid "No data could be downloaded. Try again later."
@@ -4289,7 +4306,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:344
 #, qt-format
 msgid "Catalog Number: %1"
-msgstr ""
+msgstr "Каталошки број: %1"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
@@ -4302,15 +4319,15 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:644
 msgid "Update from Internet sources"
-msgstr ""
+msgstr "Ажурирање из интернет извора"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
 msgid "Last update:"
-msgstr ""
+msgstr "Последња допуна:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:646
 msgid "Update frequency (hours):"
-msgstr ""
+msgstr "Учесталост ажурирања (сати):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:648
 msgid "Labels"
@@ -4318,29 +4335,29 @@ msgstr "Ознаке"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:649
 msgid "Label font size (pixels):"
-msgstr ""
+msgstr "Ознака величине словолика (тачкица) :"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:650
 msgid "Orbit lines"
-msgstr ""
+msgstr "Орбиталне линије"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:652
 #: plugins/Satellites/src/ui_satellitesDialog.h:656
 msgid "Number of segments used to draw the line"
-msgstr ""
+msgstr "Број сегмената који ће се користити за исцртавање линије"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Number of  segments:"
-msgstr ""
+msgstr "Број сегмената:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:659
 #: plugins/Satellites/src/ui_satellitesDialog.h:663
 msgid "Duration of a single segment in seconds"
-msgstr ""
+msgstr "Трајање једног сегмента у секунди"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:661
 msgid "Segment length (s):"
-msgstr ""
+msgstr "Дужина сегмента (s):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:666
 #: plugins/Satellites/src/ui_satellitesDialog.h:669
@@ -4349,15 +4366,15 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:671
 msgid "Fade length:"
-msgstr ""
+msgstr "Дужина изблеђивања:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:672
 msgid "Restore default settings"
-msgstr ""
+msgstr "Враћање подразумеване поставке"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
 msgid "Save settings as default"
-msgstr ""
+msgstr "Сачувај подешавања као подразумевана"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:674
 msgid "Settings"
@@ -4365,7 +4382,7 @@ msgstr "Поставке"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 msgid "Display the selected satellite(s)"
-msgstr ""
+msgstr "Приказ изабраних сателита"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:678
 msgid "Displayed"
@@ -4377,7 +4394,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 msgid "Orbit"
-msgstr ""
+msgstr "Орбита"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:684
 msgid "Catalog number:"
@@ -4393,11 +4410,11 @@ msgstr "Групе:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:688
 msgid "Comma separated list of groups"
-msgstr ""
+msgstr "Зарезом одвојена листа група"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:690
 msgid "TLE data:"
-msgstr ""
+msgstr "TLE подаци:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:692
 msgid "NORAD two line element orbit data"
@@ -4405,11 +4422,11 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:695
 msgid "Remove the selected satellites"
-msgstr ""
+msgstr "Уклони изабране сателите"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:698
 msgid "Add more satellites"
-msgstr ""
+msgstr "Додај још сателита"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:702
 msgid "Save changes"
@@ -4423,11 +4440,11 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:710
 msgid "Add new source"
-msgstr ""
+msgstr "Додај нови извор"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "Remove selected source"
-msgstr ""
+msgstr "Уклони изабрани извор"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:717
 msgid "Sources"
@@ -4435,7 +4452,7 @@ msgstr "Извори"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:206
 msgid "More Satellites"
-msgstr ""
+msgstr "Више сателита"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:208
 msgid "Get data from update sources"
