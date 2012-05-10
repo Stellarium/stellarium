@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-04-08 14:50+0000\n"
-"Last-Translator: Ioannis Katsenos <Unknown>\n"
+"PO-Revision-Date: 2012-05-08 16:34+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Greek, Modern (1453-) <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:40+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-09 04:42+0000\n"
+"X-Generator: Launchpad (build 15213)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -153,7 +153,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:190
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "Αποχή: %1"
 
 #: src/core/modules/Planet.cpp:191
 #, qt-format
@@ -345,7 +345,7 @@ msgstr "Αζ/Υψ: %1/%2"
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
-msgstr ""
+msgstr "Σφάλμα δικτύου"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
@@ -353,19 +353,19 @@ msgstr ""
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
-msgstr ""
+msgstr "Αναζήτηση"
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "Λάθος"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr ""
+msgstr "Δεν βρέθηκε"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
-msgstr ""
+msgstr "Βρέθηκαν"
 
 #: src/gui/ConfigurationDialog.cpp:346
 msgid "Select screenshot directory"
@@ -1323,7 +1323,7 @@ msgstr "Νύξ"
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
 msgid "Hydra (moon)"
-msgstr ""
+msgstr "Ύδρα (δορυφόρος)"
 
 #: src/translations.h:85
 msgid "Eris"
@@ -1388,22 +1388,22 @@ msgstr "Παρατηρητής Ηλιακού Συστήματος"
 #. TRANSLATORS: TNO/Asteroid (90377) Sedna
 #: src/translations.h:102
 msgid "Sedna"
-msgstr ""
+msgstr "Σέντνα"
 
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
 #: src/translations.h:104
 msgid "Quaoar"
-msgstr ""
+msgstr "Κουάοαρ"
 
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
 #: src/translations.h:106
 msgid "Orcus"
-msgstr ""
+msgstr "Όρκος"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
 #: src/translations.h:108
 msgid "Haumea"
-msgstr ""
+msgstr "Χαουμέια"
 
 #. TRANSLATORS: Asteroid (5) Astraea
 #: src/translations.h:111
@@ -1545,12 +1545,12 @@ msgstr ""
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:164
 msgid "Trees"
-msgstr ""
+msgstr "Δέντρα"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:168
 msgid "Hurricane"
-msgstr ""
+msgstr "Τυφώνας"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:170
@@ -1595,7 +1595,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:192
 msgid "Zodiac"
-msgstr ""
+msgstr "Ζωδιακός"
 
 #: src/translations.h:195
 msgid "Look around each installed landscape."
@@ -3433,7 +3433,7 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:206
 msgid "Visual magnitude"
-msgstr ""
+msgstr "Οπτικό μέγεθος"
 
 #: src/ui_CustomInfoDialog.h:208
 msgid "Display  info about an absolute magnitude"
@@ -3441,7 +3441,7 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:210
 msgid "Absolute magnitude"
-msgstr ""
+msgstr "Απόλυτο μέγεθος"
 
 #: src/ui_CustomInfoDialog.h:212
 msgid "Display the equatorial position (J2000 ref)"
@@ -3550,11 +3550,11 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:373
 msgid "Output"
-msgstr ""
+msgstr "Έξοδος"
 
 #: src/ui_scriptConsole.h:375
 msgid "Cursor position"
-msgstr ""
+msgstr "Θέση δρομέα"
 
 #: src/ui_scriptConsole.h:377
 msgid "Include dir:"
@@ -3885,7 +3885,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:873
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:214
 msgid "General"
-msgstr ""
+msgstr "Γενικός"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:874
 #: plugins/Oculars/src/ui_ocularDialog.h:882
@@ -3898,7 +3898,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Add"
-msgstr ""
+msgstr "Πρόσθεση"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:877
 #: plugins/Oculars/src/ui_ocularDialog.h:886
@@ -3906,7 +3906,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:683
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
-msgstr ""
+msgstr "Όνομα :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "aFOV:"
@@ -3928,7 +3928,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:883
 #: plugins/Oculars/src/ui_ocularDialog.h:893
 msgid "Sensors"
-msgstr ""
+msgstr "Ανιχνευτές"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Resolution x (pixels):"
@@ -4337,7 +4337,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:648
 msgid "Labels"
-msgstr ""
+msgstr "Ετικέτες"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:649
 msgid "Label font size (pixels):"
@@ -4384,7 +4384,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:674
 msgid "Settings"
-msgstr ""
+msgstr "Ρυθμίσεις"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:676
 msgid "Display the selected satellite(s)"
@@ -4392,7 +4392,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:678
 msgid "Displayed"
-msgstr ""
+msgstr "Εμφάνιση"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:680
 msgid "Display orbit line(s) for the selected satellite(s)"
@@ -4517,11 +4517,11 @@ msgstr "Διαμόρφωση Τηλεσκοπίου"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
-msgstr ""
+msgstr "Δεν ισχύει"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
 msgid "Starting"
-msgstr ""
+msgstr "Εκκίνηση..."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:58
 msgid "Connecting"
@@ -4608,7 +4608,7 @@ msgstr ""
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid "virtual"
-msgstr ""
+msgstr "εικονικά"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:744
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
@@ -4621,7 +4621,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:750
 msgid "Stop"
-msgstr ""
+msgstr "Σταματάω"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:751
 msgid "Stop the selected local telescope"
@@ -4629,7 +4629,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:756
 msgid "Connect"
-msgstr ""
+msgstr "Συνδεση"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:757
 msgid "Connect to the selected telescope"
@@ -4691,7 +4691,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:297
 msgid "Decimal degrees"
-msgstr ""
+msgstr "Δεκαδικές μοίρες"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "D&ecimal"
@@ -4776,7 +4776,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Device settings"
-msgstr ""
+msgstr "Ρυθμίσεις συσκευής"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Serial port:"
@@ -4784,7 +4784,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Device model:"
-msgstr ""
+msgstr "Μοντέλο συσκευής:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Connection settings"
@@ -4792,7 +4792,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:502
 msgid "Host:"
-msgstr ""
+msgstr "Υπολογιστής:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:504
 msgid ""
@@ -4837,7 +4837,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Configure"
-msgstr ""
+msgstr "Διαμόρφωση"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Add a new telescope"
@@ -4849,7 +4849,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "GUI"
-msgstr ""
+msgstr "Γραφικό περιβάλλον"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Show telescope labels"
@@ -4865,7 +4865,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Files"
-msgstr ""
+msgstr "Αρχεία"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Log telescope driver messages to files"
@@ -4895,51 +4895,51 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 msgid "January"
-msgstr ""
+msgstr "Ιανουάριος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 msgid "February"
-msgstr ""
+msgstr "Φεβρουάριος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 msgid "March"
-msgstr ""
+msgstr "Μάρτιος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 msgid "April"
-msgstr ""
+msgstr "Απρίλιος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 msgid "May"
-msgstr ""
+msgstr "Μάϊος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 msgid "June"
-msgstr ""
+msgstr "Ιούνιος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 msgid "July"
-msgstr ""
+msgstr "Ιούλιος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 msgid "August"
-msgstr ""
+msgstr "Αύγουστος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 msgid "September"
-msgstr ""
+msgstr "Σεπτέμβριος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 msgid "October"
-msgstr ""
+msgstr "Οκτώβριος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 msgid "November"
-msgstr ""
+msgstr "Νοέμβριος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 msgid "December"
-msgstr ""
+msgstr "Δεκέμβριος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:265
 msgid "First week"
@@ -4959,35 +4959,35 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:269
 msgid "Last week"
-msgstr ""
+msgstr "Τελευταία εβδομάδα"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:278
 msgid "Sunday"
-msgstr ""
+msgstr "Κυριακή"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:279
 msgid "Monday"
-msgstr ""
+msgstr "Δευτέρα"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:280
 msgid "Tuesday"
-msgstr ""
+msgstr "Τρίτη"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:281
 msgid "Wednesday"
-msgstr ""
+msgstr "Τετάρτη"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:282
 msgid "Thursday"
-msgstr ""
+msgstr "Πέμπτη"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:283
 msgid "Friday"
-msgstr ""
+msgstr "Παρασκευή"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:284
 msgid "Saturday"
-msgstr ""
+msgstr "Σάββατο"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
@@ -5002,7 +5002,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
 msgid "Time zone"
-msgstr ""
+msgstr "Ζώνη ώρας"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:452
 msgid "Timezone name:"
@@ -5032,7 +5032,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
 msgid "Day:"
-msgstr ""
+msgstr "Ημέρα:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
@@ -5042,7 +5042,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
 msgid "Date:"
-msgstr ""
+msgstr "Ημερομηνία:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
 msgid "Daylight saving time end"
@@ -5098,7 +5098,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
 msgid "System default"
-msgstr ""
+msgstr "Προεπιλογή συστήματος"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "12-hour format"
@@ -5119,11 +5119,11 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 msgid "dd-mm-yyyy"
-msgstr ""
+msgstr "ηη-μμ-εεεε"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
 msgid "mm-dd-yyyy"
-msgstr ""
+msgstr "μμ-ηη-εεεε"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:85
 msgid ""
@@ -5156,7 +5156,7 @@ msgstr ""
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:177
 msgid "system"
-msgstr ""
+msgstr "σύστημα"
 
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:179
@@ -5165,15 +5165,15 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "mmddyyyy"
-msgstr ""
+msgstr "μμηηεεεε"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "ddmmyyyy"
-msgstr ""
+msgstr "ηημμεεεε"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "yyyymmdd"
-msgstr ""
+msgstr "εεεεμμηη"
 
 #. TRANSLATORS: 12-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:196
@@ -5191,7 +5191,7 @@ msgstr "Γλώσσα"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:237
 msgid "Show stars"
-msgstr ""
+msgstr "Προβολή Αστέρων"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:265
 msgid "Colors"
@@ -5211,7 +5211,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:388
 msgid "Effects"
-msgstr ""
+msgstr "Οπτικά εφέ"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Manual zoom"
@@ -5256,7 +5256,7 @@ msgstr ""
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:465
 msgid "Administration"
-msgstr ""
+msgstr "Διαχείριση"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:470
 msgid "Load default configuration"
@@ -5268,7 +5268,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:474
 msgid "Shut down"
-msgstr ""
+msgstr "Τερματισμός λειτουργίας"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:524
 msgid "[no TUI node]"
@@ -5276,11 +5276,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
-msgstr ""
+msgstr "Ενεργό"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
 msgid "Off"
-msgstr ""
+msgstr "Ανενεργό"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
@@ -5334,7 +5334,7 @@ msgstr ""
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:88
 msgid "website"
-msgstr ""
+msgstr "ιστότοπος"
 
 #. TRANSLATORS: IAU = International Astronomical Union
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:92
@@ -5400,7 +5400,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Lists"
-msgstr ""
+msgstr "Λίστες"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
@@ -5451,7 +5451,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Warning"
-msgstr ""
+msgstr "Προσοχή"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid ""
@@ -5467,7 +5467,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Reset to defaults"
-msgstr ""
+msgstr "Επαναφορά προεπιλογών"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Copy/replace the Solar System file"
@@ -5489,7 +5489,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Configuration file"
-msgstr ""
+msgstr "Αρχείο ρυθμίσεων"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Add new Solar System objects"
@@ -5501,7 +5501,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
 msgid "Solar System"
-msgstr ""
+msgstr "Ηλιακό Σύστημα"
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical Supernovae"
