@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-04-23 08:51+0000\n"
-"Last-Translator: Onur İ. <Unknown>\n"
+"PO-Revision-Date: 2012-05-09 06:07+0000\n"
+"Last-Translator: kulkke <Unknown>\n"
 "Language-Team: <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:44+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-10 05:18+0000\n"
+"X-Generator: Launchpad (build 15213)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -344,7 +344,7 @@ msgstr "Ufuk açısı/Yükseklik %1 %2"
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
-msgstr ""
+msgstr "Ağ hatası"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
@@ -352,11 +352,11 @@ msgstr ""
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
-msgstr ""
+msgstr "Sorgulanıyor"
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "Hata"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
@@ -698,7 +698,7 @@ msgstr "Ekvatoral J2000 ızgarası"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
-msgstr ""
+msgstr "Ekliptik J2000 ızgarası"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
@@ -897,23 +897,23 @@ msgstr "1 yildiz haftasi cikar"
 
 #: src/gui/StelGui.cpp:168
 msgid "Add 1 sidereal month"
-msgstr ""
+msgstr "1 yıldız ayı ekle"
 
 #: src/gui/StelGui.cpp:169
 msgid "Subtract 1 sidereal month"
-msgstr ""
+msgstr "1 yıldız ayı çıkar"
 
 #: src/gui/StelGui.cpp:170
 msgid "Add 1 sidereal year"
-msgstr ""
+msgstr "Bir yıldız yılı ekle"
 
 #: src/gui/StelGui.cpp:171
 msgid "Subtract 1 sidereal year"
-msgstr ""
+msgstr "Bir yıldız yılı çıkar"
 
 #: src/gui/StelGui.cpp:174
 msgid "Center on selected object"
-msgstr "Seçili nesneye ortala"
+msgstr "Seçili cismi ortala"
 
 #: src/gui/StelGui.cpp:175
 msgid "Track object"
@@ -945,7 +945,7 @@ msgstr "Ekran görüntüsünü kaydet"
 
 #: src/gui/StelGui.cpp:184
 msgid "Copy selected object information to clipboard"
-msgstr "Seçili nesne bilgilerini panoya koplayala"
+msgstr "Seçili cisim bilgilerini panoya koplayala"
 
 #: src/gui/StelGui.cpp:186
 msgid "Auto hide horizontal button bar"
@@ -1539,22 +1539,22 @@ msgstr "Guereins"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:164
 msgid "Trees"
-msgstr ""
+msgstr "Ağaçlar"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:168
 msgid "Hurricane"
-msgstr ""
+msgstr "Kasırga"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:170
 msgid "Ocean"
-msgstr ""
+msgstr "Okyanus"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:172
 msgid "Garching"
-msgstr ""
+msgstr "Garching"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
@@ -2977,23 +2977,23 @@ msgstr "Goksel kure"
 
 #: src/ui_viewDialog.h:1162
 msgid "Show equator line"
-msgstr ""
+msgstr "Ekvator çizgisini göster"
 
 #: src/ui_viewDialog.h:1166
 msgid "Show meridian line"
-msgstr ""
+msgstr "Meridyen çizgisini göster"
 
 #: src/ui_viewDialog.h:1170
 msgid "Show horizon line"
-msgstr ""
+msgstr "Ufuk çizgisini göster"
 
 #: src/ui_viewDialog.h:1174
 msgid "Show ecliptic line"
-msgstr ""
+msgstr "Ekliptik çizgisini göster"
 
 #: src/ui_viewDialog.h:1178
 msgid "Show Galactic plane line"
-msgstr ""
+msgstr "Gökadasal düzlem çizgisini göster"
 
 #: src/ui_viewDialog.h:1182
 msgid "Projection"
@@ -3037,7 +3037,7 @@ msgstr "Program dili"
 
 #: src/ui_configurationDialog.h:788 src/ui_CustomInfoDialog.h:192
 msgid "Selected object information"
-msgstr "Seçili nesne bilgisi"
+msgstr "Seçili cisim bilgisi"
 
 #: src/ui_configurationDialog.h:790
 msgid "Display all information available"
@@ -3405,7 +3405,7 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:198
 msgid "An object's name"
-msgstr ""
+msgstr "Bir cismin adı"
 
 #: src/ui_CustomInfoDialog.h:200
 msgid "Display  info about a catalog numbers"
@@ -3413,7 +3413,7 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:202
 msgid "Catalog numbers"
-msgstr ""
+msgstr "Katolog numraları"
 
 #: src/ui_CustomInfoDialog.h:204
 msgid "Display  info about a visual magnitude"
@@ -3469,7 +3469,7 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:230
 msgid "Object's distance"
-msgstr ""
+msgstr "Cismin uzaklığı"
 
 #: src/ui_CustomInfoDialog.h:232
 msgid "Display info about an object's size"
@@ -3477,7 +3477,7 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:234
 msgid "Object's size"
-msgstr ""
+msgstr "Cismin boyutu"
 
 #: src/ui_CustomInfoDialog.h:236 src/ui_CustomInfoDialog.h:240
 #: src/ui_CustomInfoDialog.h:244
@@ -3843,7 +3843,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:865
 msgid "Enable only if an object is selected"
-msgstr ""
+msgstr "Yalnızca cisim seçili iken etkinleştir"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:866
 msgid "Scale image circle"
@@ -4482,7 +4482,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:155
 #, qt-format
 msgid "Move telescope #%1 to selected object"
-msgstr ""
+msgstr "%1 numaralı teleskopu seçili cisme hareket ettir"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:162
 #, qt-format

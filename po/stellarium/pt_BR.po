@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-05-03 21:44+0000\n"
+"PO-Revision-Date: 2012-05-09 18:19+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:44+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-10 05:18+0000\n"
+"X-Generator: Launchpad (build 15213)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -477,7 +477,7 @@ msgstr "Espaço"
 
 #: src/gui/HelpDialog.cpp:53
 msgid "Arrow keys & left mouse drag"
-msgstr "Setas do teclado e arrasto com o botão esquerdo do mause"
+msgstr "Teclas direcionais e arrasto com o botão esquerdo do mause"
 
 #: src/gui/HelpDialog.cpp:54
 msgid "Page Up/Down"
@@ -707,7 +707,7 @@ msgstr "Grade equatorial J2000"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
-msgstr "Grade da Eclíptica J2000"
+msgstr "Grade eclíptica J2000"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
@@ -906,19 +906,19 @@ msgstr "Retroceder uma semana sideral"
 
 #: src/gui/StelGui.cpp:168
 msgid "Add 1 sidereal month"
-msgstr "Adicionar 1 mês sideral"
+msgstr "Avançar um mês sideral"
 
 #: src/gui/StelGui.cpp:169
 msgid "Subtract 1 sidereal month"
-msgstr "Subtrair 1 mês sideral"
+msgstr "Retroceder um mês sideral"
 
 #: src/gui/StelGui.cpp:170
 msgid "Add 1 sidereal year"
-msgstr "Adicionar 1 ano sideral"
+msgstr "Avançar um ano sideral"
 
 #: src/gui/StelGui.cpp:171
 msgid "Subtract 1 sidereal year"
-msgstr "Subtrair 1 ano sideral"
+msgstr "Retroceder um ano sideral"
 
 #: src/gui/StelGui.cpp:174
 msgid "Center on selected object"
@@ -3082,7 +3082,7 @@ msgstr "Exibir informações de configurações do usuário"
 
 #: src/ui_configurationDialog.h:800
 msgid "Customized"
-msgstr "Personalizada"
+msgstr "Informações personalizadas"
 
 #: src/ui_configurationDialog.h:802
 msgid "Display no information"
@@ -5591,7 +5591,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Reset to defaults"
-msgstr "Resetar para as configurações padrão"
+msgstr "Restaurar as configurações padrão"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Copy/replace the Solar System file"
@@ -6014,9 +6014,6 @@ msgstr "pulsar extragaláctico (nas Nuvens de Magalhães)"
 
 #~ msgid "USB Script: "
 #~ msgstr "Apresentação de USB: "
-
-#~ msgid "Search also in the SIMBAD on-line astronomical database"
-#~ msgstr "Procurar também no banco de dados astronômicos na rede SIMBAD"
 
 #~ msgid "Cursor Timeout: "
 #~ msgstr "Tempo limite para ocultar o cursor: "

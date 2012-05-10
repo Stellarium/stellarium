@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-04-27 13:08+0000\n"
+"PO-Revision-Date: 2012-05-07 16:03+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:42+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-08 04:48+0000\n"
+"X-Generator: Launchpad (build 15204)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -349,27 +349,27 @@ msgstr "Az/Alt: %1/%2"
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
-msgstr ""
+msgstr "Nettverksfeil"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
-msgstr ""
+msgstr "Feil ved analysering av posisjon"
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
-msgstr ""
+msgstr "Spør"
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "Feil"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr ""
+msgstr "Ikke funnet"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
-msgstr ""
+msgstr "Funnet"
 
 #: src/gui/ConfigurationDialog.cpp:346
 msgid "Select screenshot directory"
@@ -704,7 +704,7 @@ msgstr "Ekvatorialt J2000-nett"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
-msgstr ""
+msgstr "Ekliptisk J2000-nett"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
@@ -903,19 +903,19 @@ msgstr "Trekk fra 1 stjerneuke"
 
 #: src/gui/StelGui.cpp:168
 msgid "Add 1 sidereal month"
-msgstr ""
+msgstr "Legg til 1 siderisk måned"
 
 #: src/gui/StelGui.cpp:169
 msgid "Subtract 1 sidereal month"
-msgstr ""
+msgstr "Trekk fra 1 siderisk måned"
 
 #: src/gui/StelGui.cpp:170
 msgid "Add 1 sidereal year"
-msgstr ""
+msgstr "Legg til 1 siderisk år"
 
 #: src/gui/StelGui.cpp:171
 msgid "Subtract 1 sidereal year"
-msgstr ""
+msgstr "Trekk fra 1 siderisk år"
 
 #: src/gui/StelGui.cpp:174
 msgid "Center on selected object"
@@ -1101,11 +1101,11 @@ msgstr "stjernekart"
 
 #: src/gui/SearchDialog.cpp:351
 msgid "Simbad Lookup Error"
-msgstr ""
+msgstr "Simbad søkefeil"
 
 #: src/gui/SearchDialog.cpp:359
 msgid "Simbad Lookup"
-msgstr ""
+msgstr "Simbad-oppslag"
 
 #: src/gui/SearchDialog.cpp:507
 msgid "University of Strasbourg (France)"
@@ -2992,23 +2992,23 @@ msgstr "Himmelhvelving"
 
 #: src/ui_viewDialog.h:1162
 msgid "Show equator line"
-msgstr ""
+msgstr "Vis ekvatorlinje"
 
 #: src/ui_viewDialog.h:1166
 msgid "Show meridian line"
-msgstr ""
+msgstr "Vis meridianlinje"
 
 #: src/ui_viewDialog.h:1170
 msgid "Show horizon line"
-msgstr ""
+msgstr "Vis horisontlinje"
 
 #: src/ui_viewDialog.h:1174
 msgid "Show ecliptic line"
-msgstr ""
+msgstr "Vis ekliptikken"
 
 #: src/ui_viewDialog.h:1178
 msgid "Show Galactic plane line"
-msgstr ""
+msgstr "Vis linje for det galaktiske plan"
 
 #: src/ui_viewDialog.h:1182
 msgid "Projection"
@@ -3418,23 +3418,23 @@ msgstr "Tilpassede informasjonsinnstillinger"
 
 #: src/ui_CustomInfoDialog.h:196
 msgid "Display info about an object's name"
-msgstr ""
+msgstr "Vis navn på objektet"
 
 #: src/ui_CustomInfoDialog.h:198
 msgid "An object's name"
-msgstr ""
+msgstr "Navn på objektet"
 
 #: src/ui_CustomInfoDialog.h:200
 msgid "Display  info about a catalog numbers"
-msgstr ""
+msgstr "Vis katalognummer"
 
 #: src/ui_CustomInfoDialog.h:202
 msgid "Catalog numbers"
-msgstr ""
+msgstr "Katalognummer"
 
 #: src/ui_CustomInfoDialog.h:204
 msgid "Display  info about a visual magnitude"
-msgstr ""
+msgstr "Vis visuell magnitude"
 
 #: src/ui_CustomInfoDialog.h:206
 msgid "Visual magnitude"
@@ -3442,7 +3442,7 @@ msgstr "Visuell magnitude"
 
 #: src/ui_CustomInfoDialog.h:208
 msgid "Display  info about an absolute magnitude"
-msgstr ""
+msgstr "Vis absolutt magnitude"
 
 #: src/ui_CustomInfoDialog.h:210
 msgid "Absolute magnitude"
@@ -3482,36 +3482,36 @@ msgstr "Timevinkelen"
 
 #: src/ui_CustomInfoDialog.h:228
 msgid "Display info about an object's distance"
-msgstr ""
+msgstr "Vis avstand til objektet"
 
 #: src/ui_CustomInfoDialog.h:230
 msgid "Object's distance"
-msgstr ""
+msgstr "Avstand til objektet"
 
 #: src/ui_CustomInfoDialog.h:232
 msgid "Display info about an object's size"
-msgstr ""
+msgstr "Vis størrelse på objektet"
 
 #: src/ui_CustomInfoDialog.h:234
 msgid "Object's size"
-msgstr ""
+msgstr "Størrelse på objektet"
 
 #: src/ui_CustomInfoDialog.h:236 src/ui_CustomInfoDialog.h:240
 #: src/ui_CustomInfoDialog.h:244
 msgid "Display a derived class-specific extra fields"
-msgstr ""
+msgstr "Vis objekttype-spesifikk tilleggsinformasjon"
 
 #: src/ui_CustomInfoDialog.h:238
 msgid "Additional info (Extra 1)"
-msgstr "Tilleggsinformasjon (Ekstra 1)"
+msgstr "Tilleggsinformasjon 1"
 
 #: src/ui_CustomInfoDialog.h:242
 msgid "Additional info (Extra 2)"
-msgstr "Tilleggsinformasjon (Ekstra 2)"
+msgstr "Tilleggsinformasjon 2"
 
 #: src/ui_CustomInfoDialog.h:246
 msgid "Additional info (Extra 3)"
-msgstr "Tilleggsinformasjon (Ekstra 3)"
+msgstr "Tilleggsinformasjon 3"
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
@@ -5965,6 +5965,3 @@ msgstr "ekstragalaktisk pulsar (i magellanske sky)"
 
 #~ msgid "Zoom Duration: "
 #~ msgstr "Trinn for skalering "
-
-#~ msgid "Search also in the SIMBAD on-line astronomical database"
-#~ msgstr "Søk også i den nettbaserte astronomidatabasen SIMBAD"
