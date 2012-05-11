@@ -688,7 +688,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	}
 	else
 	{
-		static const int cacheLimitByte = 7000000;
+		static const int cacheLimitByte = 10000000;
 		static QCache<QByteArray,StringTexture> texCache(cacheLimitByte);
 		int pixelSize = qPainter->font().pixelSize();
 		QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);
