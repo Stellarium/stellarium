@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-05-09 06:07+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: kulkke <Unknown>\n"
 "Language-Team: <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-10 05:18+0000\n"
-"X-Generator: Launchpad (build 15213)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:09+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -370,42 +370,42 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr "Ekran görüntüsü dizinini seçin"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Baslangıç FOV: %1 %2"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Görünümün başlangıç yönü Az/Yük:%1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Y"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "İletişim"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "Yazar"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "Lisans"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "Script Çalıştırılıyor: "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "Script Çalıştırılıyor: [Hiçbiri]"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -413,23 +413,23 @@ msgstr ""
 "Yeni yıldız kataloglarını indirme tamamlandı! Bunları görmek için "
 "Stellarium'u yeniden başlatın."
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr "Tüm erişilebilir yıldız katalogları yüklendi."
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%1 'nin %2 fihristini al"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr "%1 indiriliyor..."
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -440,7 +440,7 @@ msgstr ""
 "Yıldız sayısı: %2 Million\n"
 "Parlaklık menzili: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -449,11 +449,11 @@ msgstr ""
 "%1 Dosyası indirilirken hata yaşandı:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "Dosya bütünlüğü kontrol ediliyor..."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5627,231 +5627,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "İnternet aracılığı ile güncelle: "
-
-#~ msgid "Local Script: "
-#~ msgstr "Yerel Betik: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "CD/DVD Betikleri: "
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Öntanımlı Yapılandırmayı Yükle: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Mevcut Yapılandırmayı Öntanımlı Olarak Ata: "
-
-#~ msgid "Equator Line"
-#~ msgstr "Ekvator Çizgisi"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Yörünge Çizgisi"
-
-#~ msgid "Administration "
-#~ msgstr "Yönetim "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Rakım (m): "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Gök Zamanı: "
-
-#~ msgid "Latitude: "
-#~ msgstr "Enlem: "
-
-#~ msgid "Longitude: "
-#~ msgstr "Boylam: "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Açılışta Gök Zamanı: "
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Zaman Gösterim Biçimi: "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Zaman Dilimini Ayarla: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Cisim Boyutlama Kuralı: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Elle büyütme: "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Samanyolu Yoğunluğu: "
-
-#~ msgid "Date & Time"
-#~ msgstr "Yer ve Zaman"
-
-#~ msgid "Effects "
-#~ msgstr "Efektler "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Tarih Gösterim Biçimi: "
-
-#~ msgid "Show: "
-#~ msgstr "Göster: "
-
-#~ msgid "Sky Language: "
-#~ msgstr "Gök Dili: "
-
-#~ msgid "Stars "
-#~ msgstr "Yıldızlar "
-
-#~ msgid "General "
-#~ msgstr "Genel "
-
-#~ msgid "Set Time "
-#~ msgstr "Saati Ayarla "
-
-#~ msgid "Set Location "
-#~ msgstr "Konumu Ayarla "
-
-#~ msgid "Twinkling: "
-#~ msgstr "Pırıldama: "
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Ana Yönler"
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Gök Kültürü: "
-
-#~ msgid "Colors "
-#~ msgstr "Renkler "
-
-#~ msgid "Actual Time"
-#~ msgstr "Şu anki zaman"
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Takımyıldızı Çizgileri"
-
-#~ msgid "Constellation Names"
-#~ msgstr "Takımyıldızı Adları"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Takımyıldızı Göstergesi Yoğunluğu"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Takımyıldızı Sınırları"
-
-#~ msgid "Planet Names"
-#~ msgstr "Gezegen Adları"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Gezegen Yörüngeleri"
-
-#~ msgid "Planet Trails"
-#~ msgstr "Gezegen İzleri"
-
-#~ msgid "Nebula Names"
-#~ msgstr "Bulutsu Adları"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Bulutsu Çemberleri"
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Büyütme Süresi: "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "İmleç Gecikmesi: "
-
-#~ msgid "Shut Down: "
-#~ msgstr "Kapat: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Yerel Saate Ayarla: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Listeyi görüntülemek için aşağı yön tuşuna basın."
-
-#~ msgid "Hydra"
-#~ msgstr "Su Yılanı"
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Başlatmak için seç ve çık"
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "Işık Kirliliği Parlaklığı: "
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "Yıldız Değeri Çarpanı: "
-
-#~ msgid "Calendar"
-#~ msgstr "Takvim"
-
-#~ msgid "USB Script: "
-#~ msgstr "USB Betiği: "
-
-#~ msgid "Light pollution: "
-#~ msgstr "Isik kirliligi "
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "Baslangic FOV: XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "Goruntunun baslangic yonu: xxxx"
-
-#~ msgid "Art brightness: "
-#~ msgstr "Gorsel parlakligi "
-
-#~ msgid "Preset Time"
-#~ msgstr "Saat Ön Ayarı"
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Gök Zamanı Ön Ayarı: "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "Işık seyahat süresi için düzeltiniz. "
-
-#~ msgid "Planets labels"
-#~ msgstr "Gezegen etiketleri"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "y 'nin x fihristini al"
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "Tüm yıldız kataloglarının indirilmesi tamamlandı!"
-
-#~ msgid "Scripts "
-#~ msgstr "Betikler "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Güneş Sistemi Nesnesi "
-
-#~ msgid "Day keys: "
-#~ msgstr "Gün anahtarları "
-
-#~ msgid "Sidereal"
-#~ msgstr "Yıldızlara İlişkin"
-
-#~ msgid "Meridian Line"
-#~ msgstr "Meridyen Çizgisi"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "Ekvatoral Izgara"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Azimutal Izgara"
-
-#~ msgid "Landscape: "
-#~ msgstr "Alan Haritası: "
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Parlaklık Sınırı "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "En Yüksek Parlaklık Oranı: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "En Yüksek Bulutsu Parlaklık: "
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Parlaklı Boyutlandırma Çarpanı: "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "Parlaklık Ölçekleme Çarpanı: "

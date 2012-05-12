@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-02-22 20:10+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Asturian <ast@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:37+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:01+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -373,42 +373,42 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr "Seleiciona'l direutoriu pa captures de pantalla"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Campu de visión d'aniciu: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Puntu de vista al aniciu Az/Alt: %1 %2"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Autores"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "Contautu"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "Llicencia"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "Script corriendo: "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "Script corriendo: [nengún]"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -416,16 +416,16 @@ msgstr ""
 "¡Finó la descarga de los catálogos nuevos d'estrelles!\n"
 "Reanicia Stellarium p'amosalos."
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Obtener catálogu %1 de %2"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -434,7 +434,7 @@ msgstr ""
 "Descargando %1...\n"
 "(Pues zarrar esta ventana)."
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -445,7 +445,7 @@ msgstr ""
 "Cuenta d'estrelles: %2 Millones\n"
 "Rangu de Magnitú: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -454,11 +454,11 @@ msgstr ""
 "Fallu descargando %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "Verificando la integridá del ficheru..."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5629,225 +5629,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "¡Finó la descarga de tolos catálogos d'estrelles!"
-
-#~ msgid "Planets labels"
-#~ msgstr "Etiquetes de plantetes"
-
-#~ msgid "Set Location "
-#~ msgstr "Afitar Allugamientu "
-
-#~ msgid "Set Time "
-#~ msgstr "Afitar Hora "
-
-#~ msgid "General "
-#~ msgstr "Xeneral "
-
-#~ msgid "Stars "
-#~ msgstr "Estrelles "
-
-#~ msgid "Effects "
-#~ msgstr "Efeutos "
-
-#~ msgid "Administration "
-#~ msgstr "Alministración "
-
-#~ msgid "Colors "
-#~ msgstr "Colores "
-
-#~ msgid "Scripts "
-#~ msgstr "Scripts "
-
-#~ msgid "Longitude: "
-#~ msgstr "Llonxitú: "
-
-#~ msgid "Latitude: "
-#~ msgstr "Llatitú: "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Cuerpu del Sistema Solar: "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Altitú (m): "
-
-#~ msgid "Sidereal"
-#~ msgstr "Sideral"
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Afitar Zona Horaria: "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Hora Sideral: "
-
-#~ msgid "Calendar"
-#~ msgstr "Calendariu"
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Hora sideral afitada: "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Llinies de Constelaciones"
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "Magnitú Másima a Etiquetar: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "Centelléu: "
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "Multiplicador del Valor Estelar: "
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Multiplicador de la Magintú Tamañu: "
-
-#~ msgid "Show: "
-#~ msgstr "Amosar: "
-
-#~ msgid "Sky Language: "
-#~ msgstr "Llingua Estelar: "
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Cielu según Cultura: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Formatu de Data: "
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Magnitú Llímite: "
-
-#~ msgid "Planet Trails"
-#~ msgstr "Trazes de Planetes"
-
-#~ msgid "Constellation Names"
-#~ msgstr "Nomes de Constelaciones"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Intensidá de Figures de Constelaciones"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "Cuadrícula Ecuatorial"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Cuadrícula Azimutal"
-
-#~ msgid "Meridian Line"
-#~ msgstr "Llinia del Meridianu"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Órbites Planetaries"
-
-#~ msgid "Planet Names"
-#~ msgstr "Nomes de los Planetes"
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Rellumu de la Vía Lláctea: "
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "Rellumu de la Contaminación Llumínica: "
-
-#~ msgid "Landscape: "
-#~ msgstr "Paisaxe: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Zoom Manual: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Regla de Tamañu d'Oxetos: "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "Multiplicador de la Escala de la Magnitú: "
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Llinia Eclíptica"
-
-#~ msgid "Equator Line"
-#~ msgstr "Llinia Ecuatorial"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Círculos de Nebuloses"
-
-#~ msgid "Nebula Names"
-#~ msgstr "Nomes de Nebuloses"
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Llímite de Tiempu del Cursor: "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "Correxir según retardu de la lluz: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "Magnitú Máxima de Nebuloses a Etiquetar: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Duración del Zoom: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "Script CD/DVD: "
-
-#~ msgid "Local Script: "
-#~ msgstr "Script llocal: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Flecha de cursor abaxo pa cargar la llista."
-
-#~ msgid "USB Script: "
-#~ msgstr "Script USB: "
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Cargar Configuración Predeterminada: "
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Seleiciona y sal pa executar."
-
-#~ msgid "Shut Down: "
-#~ msgstr "Apagar: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Guardar la Configuración Actual como Predeterminada: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Afitar UI Llocal: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Anovar per Internet: "
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Puntos Cardinales"
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Formatu d'Hora: "
-
-#~ msgid "Preset Time"
-#~ msgstr "Hora Afitada"
-
-#~ msgid "Actual Time"
-#~ msgstr "Hora Actual"
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Hora Sideral al Aniciu: "
-
-#~ msgid "Light pollution: "
-#~ msgstr "Contaminación llumínica "
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "Campu de visión (FOV) al aniciu: XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "Direición de la vista d'aniciu: xxx"
-
-#~ msgid "Art brightness: "
-#~ msgstr "Rellumu de les figures: "
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "Obtener catálogu x de y"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Llendes de Constelaciones"
-
-#~ msgid "Day keys: "
-#~ msgstr "Tipu de díes: "

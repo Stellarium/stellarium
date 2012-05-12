@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-05-04 08:33+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: Kenan Dervišević <kenan3008@gmail.com>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-05 04:39+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:02+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -370,42 +370,42 @@ msgstr "Pronađeno"
 msgid "Select screenshot directory"
 msgstr "Odaberi direktorij za slike ekrana"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Početni ugao pogleda: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Početni smjer azimuta/visine pogleda: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Autori"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "Kontakt"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "Licenca"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "Skripta koja se izvodi: "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "Skripta koja se izvodi: [nijedna]"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -413,16 +413,16 @@ msgstr ""
 "Završeno preuzimanje novih kataloga sa zvijezdama!\n"
 "Ponovo pokrenite Stellarium za njihov prikaz."
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr "Svi dostupni katalozi zvijezda su instalirani."
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Dobavi katalog %1 od %2"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -431,7 +431,7 @@ msgstr ""
 "Skidam %1...\n"
 "(Možete zatvoriti ovaj prozor.)"
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -442,7 +442,7 @@ msgstr ""
 "Broj zvijezda: %2 miliona\n"
 "Opseg magnitude: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -451,11 +451,11 @@ msgstr ""
 "Greška pri preuzimanju %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "Provjera ispravnosti datoteke..."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5741,228 +5741,3 @@ msgstr "pulsirana optička, X ili emisija gama zraka (visoka energija)"
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr "ekstragalaktički (u MC) pulsar"
-
-#~ msgid "General "
-#~ msgstr "Općenito "
-
-#~ msgid "Stars "
-#~ msgstr "Zvijezde "
-
-#~ msgid "Set Location "
-#~ msgstr "Podesi lokaciju "
-
-#~ msgid "Set Time "
-#~ msgstr "Podesi vrijeme "
-
-#~ msgid "Colors "
-#~ msgstr "Boje "
-
-#~ msgid "Administration "
-#~ msgstr "Administracija "
-
-#~ msgid "Scripts "
-#~ msgstr "Skripte "
-
-#~ msgid "Longitude: "
-#~ msgstr "Geografska dužina: "
-
-#~ msgid "Latitude: "
-#~ msgstr "Geografska širina: "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Tijelo sunčevog sistema: "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Nadmorska visina (m): "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Postavi vremensku zonu: "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Zvjezdano vrijeme: "
-
-#~ msgid "Day keys: "
-#~ msgstr "Dnevni ključevi: "
-
-#~ msgid "Sidereal"
-#~ msgstr "Zvjezdani"
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Zvjezdano vrijeme pri pokretanju: "
-
-#~ msgid "Calendar"
-#~ msgstr "Kalendar"
-
-#~ msgid "Sky Language: "
-#~ msgstr "Jezik sazviježda: "
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Oblik prikaza vremena: "
-
-#~ msgid "Preset Time"
-#~ msgstr "Postavljeno vrijeme"
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Kultura sazviježđa: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Oblik prikaza datuma: "
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Unaprijed zadano zvjezdano vrijeme: "
-
-#~ msgid "Actual Time"
-#~ msgstr "Stvarno vrijeme"
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Množitelj veličine uvećavanja: "
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Granice sazviježđa"
-
-#~ msgid "Constellation Names"
-#~ msgstr "Imena sazvježđa"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Sjajnost slika sazviježđa"
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Granična veličina: "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Linije sazviježđa"
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "Prikaži maglice do veličine: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "Treperenje: "
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "Množitelj vrijednosti zvijezde: "
-
-#~ msgid "Show: "
-#~ msgstr "Prikaži: "
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Strane svijeta"
-
-#~ msgid "Planet Names"
-#~ msgstr "Imena planeta"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Ekliptika"
-
-#~ msgid "Equator Line"
-#~ msgstr "Ekvatorska linija"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "Ekvatorska mreža"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Azimutna mreža"
-
-#~ msgid "Meridian Line"
-#~ msgstr "Meridijanska linija"
-
-#~ msgid "Planet Trails"
-#~ msgstr "Putanje planeta"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Orbite planeta"
-
-#~ msgid "Nebula Names"
-#~ msgstr "Imena maglica"
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Trajanje uvećanja: "
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "Intenzitet svjetlosnog zagađenja: "
-
-#~ msgid "Landscape: "
-#~ msgstr "Krajolik: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Ručno uvećavanje: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Pravilo uvećavanja objekta: "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "Množitelj razmjere uvećavanja: "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Sjajnost Mliječnog puta: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "Prikaži imena za maglice do veličine: "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Vrijeme do nestanka pokazivača miša: "
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Magličini krugovi"
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "CD/DVD skripta: "
-
-#~ msgid "Local Script: "
-#~ msgstr "Lokalna skripta: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Strelica dole za učitavanje liste."
-
-#~ msgid "USB Script: "
-#~ msgstr "USB skripta: "
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Učitaj početne postavke: "
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Odaberite i izađite za pokretanje."
-
-#~ msgid "Shut Down: "
-#~ msgstr "Ugasi: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Snimi trenutne postavke kao početne: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Nadogradi me putem interneta: "
-
-#~ msgid "Planets labels"
-#~ msgstr "Nazivi planeta"
-
-#~ msgid "Light pollution: "
-#~ msgstr "Svjetlosno zagađenje: "
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "Pokretanje FOV: XX"
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "Dobavi katog x od y"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "Završeno preuzimanje svi kataloga sa zvijezdama!"
-
-#~ msgid "Effects "
-#~ msgstr "Efekti "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "Ispravka vremena putovanja svjetlosti: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Postavi lokalizaciju: "
-
-#~ msgid "Art brightness: "
-#~ msgstr "Sjajnost slika: "
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "Početni pogled na odredište: xxxx"
-
-#~ msgid "Hydra"
-#~ msgstr "Hydra"
