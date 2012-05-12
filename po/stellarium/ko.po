@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-01-27 15:59+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: Jeong, Tae-Min <jtm71@chollian.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:41+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:05+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -358,42 +358,42 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr "스크린샷 경로 선택"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "시작시 화각: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "시작시 시야 방향 방위/고도: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "저작자"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "연락처"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "작성자"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "라이선스"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "실행 중인 스크립트: "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "실행 중인 스크립트: [없음]"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -401,16 +401,16 @@ msgstr ""
 "새 별 목록을 모두 내려받았습니다!\n"
 "내려받은 별을 표시하려면 스텔라리움을 재시작하세요."
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr "사용할 수 있는 모든 별 카탈로그가 설치되었습니다."
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%2 중 %1의 목록을 받음"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -419,7 +419,7 @@ msgstr ""
 "내려받는 중... %1\n"
 "(창을 닫아도 됩니다.)"
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -430,7 +430,7 @@ msgstr ""
 "별 갯수: %2 100만\n"
 "광도 범위: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -439,11 +439,11 @@ msgstr ""
 "%1을 내려받는 중 오류 발생:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "파일 무결성 검사 중..."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5579,231 +5579,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "적위 격자"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "방위 격자"
-
-#~ msgid "Equator Line"
-#~ msgstr "적도"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "황도"
-
-#~ msgid "Cardinal Points"
-#~ msgstr "방위기점"
-
-#~ msgid "Sky Language: "
-#~ msgstr "하늘 언어: "
-
-#~ msgid "Sky Culture: "
-#~ msgstr "하늘 문화: "
-
-#~ msgid "Date & Time"
-#~ msgstr "날짜 & 시간"
-
-#~ msgid "Set Location "
-#~ msgstr "위치 설정 "
-
-#~ msgid "Set Time "
-#~ msgstr "시간 설정 "
-
-#~ msgid "General "
-#~ msgstr "일반 "
-
-#~ msgid "Stars "
-#~ msgstr "별 "
-
-#~ msgid "Colors "
-#~ msgstr "색깔 "
-
-#~ msgid "Effects "
-#~ msgstr "효과 "
-
-#~ msgid "Scripts "
-#~ msgstr "스크립트 "
-
-#~ msgid "Administration "
-#~ msgstr "관리 "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "고도 (m): "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "태양계 천체: "
-
-#~ msgid "Sky Time: "
-#~ msgstr "하늘 시간: "
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "하늘 시간 미리 설정: "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "시작시 하늘 시간 적용: "
-
-#~ msgid "Actual Time"
-#~ msgstr "실제 시간"
-
-#~ msgid "Time Display Format: "
-#~ msgstr "시간 표시 형식: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "날짜 표시 형식: "
-
-#~ msgid "Show: "
-#~ msgstr "보이기: "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "이름표가 붙는 최대 등급: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "깜박임: "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "별자리 선"
-
-#~ msgid "Constellation Names"
-#~ msgstr "별자리 이름"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "별자리 그림 명암도"
-
-#~ msgid "Planet Names"
-#~ msgstr "행성 이름"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "행성 궤도"
-
-#~ msgid "Planet Trails"
-#~ msgstr "행성 궤적"
-
-#~ msgid "Meridian Line"
-#~ msgstr "자오선"
-
-#~ msgid "Nebula Names"
-#~ msgstr "성운 이름"
-
-#~ msgid "Manual zoom: "
-#~ msgstr "수동 확대: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "천체 크기 자(尺): "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "은하수 농도: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "확대 지속: "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "커서 타임아웃: "
-
-#~ msgid "Local Script: "
-#~ msgstr "로컬 스크립트: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "CD/DVD 스크립트: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "아래 화살표로 목록을 부르세요."
-
-#~ msgid "USB Script: "
-#~ msgstr "USB 스크립트: "
-
-#~ msgid "Sidereal"
-#~ msgstr "항성의"
-
-#~ msgid "Calendar"
-#~ msgstr "달력"
-
-#~ msgid "Hydra"
-#~ msgstr "바다뱀"
-
-#~ msgid "Day keys: "
-#~ msgstr "날짜 키: "
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "광공해 밝기: "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "빛의 여행 시간에 맞게 고치세요: "
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "한계등급 "
-
-#~ msgid "Light pollution: "
-#~ msgstr "광공해: "
-
-#~ msgid "Art brightness: "
-#~ msgstr "그림 밝기: "
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "시작시 화각: XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "시작시 시야 방향: xxxx"
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "y 의 x 목록 가져오기"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "Planets labels"
-#~ msgstr "행성 이름표"
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "모든 별 목록의 다운로드가 끝났습니다!"
-
-#~ msgid "Latitude: "
-#~ msgstr "위도: "
-
-#~ msgid "Longitude: "
-#~ msgstr "경도: "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "시간대 설정: "
-
-#~ msgid "Preset Time"
-#~ msgstr "미리 설정된 시간"
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "밝기에 의한 배율: "
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "등급에 의한 배율: "
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "별자리 경계선"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "성운 영역"
-
-#~ msgid "Landscape: "
-#~ msgstr "풍경: "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "등급에 비례한 배율: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "성운에 이름표가 붙는 최대 등급: "
-
-#~ msgid "Select and exit to run."
-#~ msgstr "선택-종료하고 실행하세요."
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "설정 기본값 불러오기: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "현재 설정을 기본값으로 저장: "
-
-#~ msgid "Shut Down: "
-#~ msgstr "종료: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "인터넷으로 프로그램 업데이트: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "인터페이스 지역 설정: "

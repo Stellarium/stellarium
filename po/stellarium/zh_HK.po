@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-04-17 03:51+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: Allen Zhong <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:44+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:09+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -351,42 +351,42 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr "選擇儲存截圖資料夾"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "啟動時視野:%1%2"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "啟動時的地平坐標方位角/高度角: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "著作群"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "聯繫"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "授權條款"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "執行指令： "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "執行指令：[空白]"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -394,23 +394,23 @@ msgstr ""
 "新的恆星目錄經已下載完畢！\n"
 "請重新啟動 Stellarium 以使用新的目錄。"
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr "所有可用目錄均已安裝"
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "取得星表 %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr "下載中 %1 ..."
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -421,7 +421,7 @@ msgstr ""
 "星體數量:%2 百萬\n"
 "星等範圍: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -430,11 +430,11 @@ msgstr ""
 "錯誤！下載中 %1：\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "正在檢查檔案完整性..."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5566,231 +5566,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "赤道座標系統"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "地平座標系統"
-
-#~ msgid "Equator Line"
-#~ msgstr "赤道"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "黃道"
-
-#~ msgid "Date & Time"
-#~ msgstr "日期與時間"
-
-#~ msgid "Set Location "
-#~ msgstr "位置設定 "
-
-#~ msgid "Set Time "
-#~ msgstr "時間設定 "
-
-#~ msgid "General "
-#~ msgstr "一般設定 "
-
-#~ msgid "Stars "
-#~ msgstr "恆星設定 "
-
-#~ msgid "Colors "
-#~ msgstr "顏色設定 "
-
-#~ msgid "Effects "
-#~ msgstr "效果設定 "
-
-#~ msgid "Administration "
-#~ msgstr "管理設定 "
-
-#~ msgid "Latitude: "
-#~ msgstr "緯度: "
-
-#~ msgid "Longitude: "
-#~ msgstr "經度: "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "海拔: "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "觀測者所處星體: "
-
-#~ msgid "Sky Time: "
-#~ msgstr "星空時間: "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "時區設定: "
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "預設星空時間: "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "程式開始時之星空時間: "
-
-#~ msgid "Time Display Format: "
-#~ msgstr "時間顯示格式: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "日期顯示格式: "
-
-#~ msgid "Show: "
-#~ msgstr "顯示: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "星光閃爍程度: "
-
-#~ msgid "Constellation Names"
-#~ msgstr "星座名稱"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "星座繪圖光暗度"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "星座界線"
-
-#~ msgid "Planet Names"
-#~ msgstr "行星名稱"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "行星軌道"
-
-#~ msgid "Planet Trails"
-#~ msgstr "行星跡"
-
-#~ msgid "Meridian Line"
-#~ msgstr "子午線"
-
-#~ msgid "Nebula Names"
-#~ msgstr "星雲名稱"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "星雲標記"
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "變焦過程長度: "
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "載入預設值: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "儲存現有設定為預設值: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "自網路進行更新: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "選擇界面語言 "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "按下箭頭顯示清單"
-
-#~ msgid "Hydra"
-#~ msgstr "長蛇座"
-
-#~ msgid "Select and exit to run."
-#~ msgstr "選擇及離開執行"
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "星等成像加成: "
-
-#~ msgid "Calendar"
-#~ msgstr "月曆"
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "光污染程度: "
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "星等限制: "
-
-#~ msgid "Light pollution: "
-#~ msgstr "光污染: "
-
-#~ msgid "Day keys: "
-#~ msgstr "时间定义: "
-
-#~ msgid "Art brightness: "
-#~ msgstr "图绘亮度: "
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "启动时的视角: XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "启动时观看的方向: xxxx"
-
-#~ msgid "Planets labels"
-#~ msgstr "行星標籤"
-
-#~ msgid "USB Script: "
-#~ msgstr "USB 指令： "
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "星體值倍數： "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "星等放大基數： "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "光行進時間修正： "
-
-#~ msgid "Sidereal"
-#~ msgstr "恆星日"
-
-#~ msgid "Actual Time"
-#~ msgstr "現在時間"
-
-#~ msgid "Scripts "
-#~ msgstr "指令 "
-
-#~ msgid "Preset Time"
-#~ msgstr "預設時間"
-
-#~ msgid "Sky Culture: "
-#~ msgstr "星空文化插圖: "
-
-#~ msgid "Sky Language: "
-#~ msgstr "星空術語： "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "星座連線"
-
-#~ msgid "Cardinal Points"
-#~ msgstr "方位座標"
-
-#~ msgid "Manual zoom: "
-#~ msgstr "人手縮放: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "天體成像大小： "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "滑鼠指標自動隱藏: "
-
-#~ msgid "Local Script: "
-#~ msgstr "本機指令： "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "CD/DVD 指令： "
-
-#~ msgid "Shut Down: "
-#~ msgstr "關閉程式: "
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "已完成下載所有的星表！"
-
-#~ msgid "Landscape: "
-#~ msgstr "地形: "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "顯示星名的最高星等: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "顯示星雲的最高星等: "
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "下載星表之x,  總共y"
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "銀河光度: "
-
-#~ msgid "xxx"
-#~ msgstr "xxx"

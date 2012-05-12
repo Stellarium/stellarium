@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2011-11-14 06:31+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: Harshal Raje <Unknown>\n"
 "Language-Team: Marathi <mr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:41+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:06+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -371,42 +371,42 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr "पटलचित्र संचिका निवडा"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "सुरु होतांनाचे दृष्टीक्षेत्र: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "सुरु होतांनाच्या दिगंश/उन्न्तांशची दिशा: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "लेखक"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "संपर्क"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "लेखक"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "परवाना"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "आज्ञावली सुरू: "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "आज्ञावली सुरु: [नाही]"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -414,16 +414,16 @@ msgstr ""
 "नवीन तारकासुची डाउनलोड झाली आहे!\n"
 "ती पाहण्यासाठी स्टेलेरीअम पुन्हा सुरु करा."
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%2  पैकी %1 वी सूची मिळवा"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -432,7 +432,7 @@ msgstr ""
 "%1... उतरवून घेतले जात आहेत\n"
 "(तुम्ही ही खिडकी बंद करू शकता.)"
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -443,7 +443,7 @@ msgstr ""
 "एकुण तारे: %2 Million\n"
 "प्रकाशप्रत आवक : %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -452,11 +452,11 @@ msgstr ""
 "%1:\n"
 "उतरवून घेण्यात तृटी%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "फाइलची एकात्मता तपासली जात आहे...."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5609,225 +5609,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
-
-#~ msgid "Set Location "
-#~ msgstr "स्थान निश्चित करा "
-
-#~ msgid "Set Time "
-#~ msgstr "वेळ निर्धारीत करा "
-
-#~ msgid "General "
-#~ msgstr "सामान्य "
-
-#~ msgid "Stars "
-#~ msgstr "तारे "
-
-#~ msgid "Colors "
-#~ msgstr "रंग "
-
-#~ msgid "Effects "
-#~ msgstr "परिणाम "
-
-#~ msgid "Scripts "
-#~ msgstr "आज्ञावली "
-
-#~ msgid "Administration "
-#~ msgstr "व्यवस्थापन "
-
-#~ msgid "Latitude: "
-#~ msgstr "अक्षांश: "
-
-#~ msgid "Longitude: "
-#~ msgstr "रेखांश: "
-
-#~ msgid "Sky Time: "
-#~ msgstr "अवकाश वेळ: "
-
-#~ msgid "Day keys: "
-#~ msgstr "दिवस कळ: "
-
-#~ msgid "Sidereal"
-#~ msgstr "नाक्षत्रवर्ष"
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "सुरुवात होतांनांची अवकाश वेळ: "
-
-#~ msgid "Show: "
-#~ msgstr "दर्शवा: "
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "प्रत आकार गुणक: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "लुकलुकणारे: "
-
-#~ msgid "Constellation Names"
-#~ msgstr "तारकापुंजाची नावे"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "ताराकापुंज सीमा"
-
-#~ msgid "Cardinal Points"
-#~ msgstr "प्रमाणक बिंदू"
-
-#~ msgid "Planet Names"
-#~ msgstr "ग्रहांची नावे"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "ग्रहांच्या कक्षा"
-
-#~ msgid "Planet Trails"
-#~ msgstr "ग्रहाची मागरेष"
-
-#~ msgid "Meridian Line"
-#~ msgstr "मध्यानवृत्त"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "दिगंश"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "विषुवांश"
-
-#~ msgid "Equator Line"
-#~ msgstr "विषुववृत्त रेषा"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "अयनवृत्त"
-
-#~ msgid "Nebula Names"
-#~ msgstr "तेजोमेघाचे नाव"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "तेजोमेघ वर्तृळ"
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "प्रकाश प्रदूषण दिप्ती: "
-
-#~ msgid "Landscape: "
-#~ msgstr "देखावा: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "स्वहस्ते निकटन/दुरावलोकन: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "चित्र मोठे करण्याचा काल: "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "कर्सर वेळमर्यादा: "
-
-#~ msgid "Local Script: "
-#~ msgstr "स्थानिक आज्ञावली: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "सीडी/ डीव्हीडी आज्ञावली: "
-
-#~ msgid "USB Script: "
-#~ msgstr "यू एस बी आज्ञावली: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "यादी भरण्यासासाठी  खालच्या दिशेची कळ दाबा."
-
-#~ msgid "Select and exit to run."
-#~ msgstr "सुरू करण्यासाठी निवडा व बाहेर पडा."
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "सध्याची संरचना मूळ म्हणून साठवा: "
-
-#~ msgid "Shut Down: "
-#~ msgstr "बंद करा: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "UI Locale निश्चित करा: "
-
-#~ msgid "Planets labels"
-#~ msgstr "ग्रहांची नावे"
-
-#~ msgid "Light pollution: "
-#~ msgstr "प्रकाश प्रदुषण: "
-
-#~ msgid "Art brightness: "
-#~ msgstr "चित्र तिव्रता: "
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "सुरुवातीचे दृष्टीक्षेत्र: XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "सुरु होतांनाची बघण्याची दिशा: xxxx"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "Altitude (m): "
-#~ msgstr "उंची (m): "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "कालक्षेत्र निश्चित करा "
-
-#~ msgid "Calendar"
-#~ msgstr "दिनदर्शिका"
-
-#~ msgid "Sky Language: "
-#~ msgstr "आकाशाची भाषा: "
-
-#~ msgid "Time Display Format: "
-#~ msgstr "वेळ दर्शविण्याची पद्धत: "
-
-#~ msgid "Preset Time"
-#~ msgstr "पूर्वनिर्धारित वेळ"
-
-#~ msgid "Sky Culture: "
-#~ msgstr "अवकाश संस्कृती "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "दिनांक दर्शविण्याची पद्धत: "
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "पूर्वनिर्धारित अवकाश वेळ "
-
-#~ msgid "Actual Time"
-#~ msgstr "आताची वेळ"
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "नुसत्या डोळ्याने दिसणारी जास्तीत जास्त प्रत "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "तारकापुंज रेषा"
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "तारकामूल्य गुणक: "
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "ताराकापुंज चित्राची दीप्ती"
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "नाव दर्शविण्यासाठीची जास्तीत जास्त प्रत: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "वस्तूचा आकार ठरविण्याचे नियम "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "प्रत कमीजास्त करण्याचा गुणक "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "आकाशगंगेची दीप्ती: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "तेजोमेघाचे नाव दर्शविण्यासाठीची जास्तीत जास्त प्रत: "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "प्रकाशाच्या मार्गक्रमणाचा वेळ ध्यानात घेवून दुरुस्ती करा: "
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "मूळ संरचना भरा: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "इंटरनेटद्वारे अद्यायावत करा: "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "सूर्यमालेतील वस्तू "
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "y ची x सुची मिळवा"
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "सर्व तारकासुची डाउनलोड झाल्या आहेत!"
