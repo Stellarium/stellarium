@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-02-20 08:32+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: de tran <Unknown>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:44+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:09+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -371,64 +371,64 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr "Chọn thư mục chứa hình"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Trường nhìn khởi phát: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Hướng nhìn ban đầu Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Các tác giả"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "Liên hệ"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "Tác giả"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "Giấy Phép"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "Script thực thi: "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "Script thực thi: [không]"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr "Hoàn tất việc tải các catalô sao mới"
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Lấy catalog thứ %1 trong %2"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr "Đang tải %1..."
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -439,7 +439,7 @@ msgstr ""
 "Số lượng sao: %2 Million\n"
 "Khoảng độ sáng: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -448,11 +448,11 @@ msgstr ""
 "Lỗi khi đang tải xuống %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "Kiểm tra sự toàn vẹn của tập tin..."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5593,195 +5593,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Lưới phương vị"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Đường hoàng đạo"
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Điểm phương hướng"
-
-#~ msgid "Date & Time"
-#~ msgstr "Ngày & Giờ"
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Chòm sao theo : "
-
-#~ msgid "Sky Language: "
-#~ msgstr "Ngôn ngữ cho giao diện bầu trời: "
-
-#~ msgid "Colors "
-#~ msgstr "Màu sắc "
-
-#~ msgid "Stars "
-#~ msgstr "Các ngôi sao "
-
-#~ msgid "General "
-#~ msgstr "Tổng quát "
-
-#~ msgid "Effects "
-#~ msgstr "Hiệu ứng "
-
-#~ msgid "Administration "
-#~ msgstr "Quản trị "
-
-#~ msgid "Scripts "
-#~ msgstr "Kịch bản "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Những vật thể thuộc hệ mặt trời: "
-
-#~ msgid "Latitude: "
-#~ msgstr "Vĩ độ: "
-
-#~ msgid "Longitude: "
-#~ msgstr "Kinh độ: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Dạng ngày hiển thị: "
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Độ đậm hình vẽ chòm sao"
-
-#~ msgid "Constellation Names"
-#~ msgstr "Tên các chòm sao"
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Đường nối chòm sao"
-
-#~ msgid "Planet Names"
-#~ msgstr "Tên các hành tinh"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Ranh giới các chòm sao"
-
-#~ msgid "Meridian Line"
-#~ msgstr "Đường kinh tuyến"
-
-#~ msgid "Twinkling: "
-#~ msgstr "Nhấp nháy: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Quy luật thay đổi cỡ vật thể: "
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Vòng bao tinh vân"
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Cập nhật qua Internet: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Nhấn phím mủi tên xuống để tải danh sách."
-
-#~ msgid "Hydra"
-#~ msgstr "Rắn Biển"
-
-#~ msgid "Local Script: "
-#~ msgstr "Kịch bản cục bộ: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "Kịch bản cho CD/DVD: "
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Nạp cấu hình mặc định: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Lưu cấu hình hiện tại thành mặc định: "
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Chọn và thoát để chạy."
-
-#~ msgid "Shut Down: "
-#~ msgstr "Tắt: "
-
-#~ msgid "Equator Line"
-#~ msgstr "Đường quỹ đạo"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "Lưới quỹ đạo"
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Tăng cường độ: "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Độ cao (mét): "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Thời gian bầu trời: "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Thiết lập múi thời gian: "
-
-#~ msgid "Show: "
-#~ msgstr "Xem: "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "Hiện tên vật thể sáng tối đa: "
-
-#~ msgid "Planet Trails"
-#~ msgstr "Vết các hành tinh"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Quỹ đạo các hành tinh"
-
-#~ msgid "Nebula Names"
-#~ msgstr "Tên các chòm sao"
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Zoom thủ công: "
-
-#~ msgid "Landscape: "
-#~ msgstr "Phong cảnh: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "Hiện tên đám tinh vân có độ sáng đến: "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Mật độ dãi Ngân Hà "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Thiết lập nơi xảy ra UI "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Thời gian dấu con chuột: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Khoảng thời gian phóng to/thu nhỏ: "
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Độ sáng giới hạn: "
-
-#~ msgid "Calendar"
-#~ msgstr "Lịch"
-
-#~ msgid "Day keys: "
-#~ msgstr "Các khóa ngày: "
-
-#~ msgid "Set Location "
-#~ msgstr "Đặt Địa điểm "
-
-#~ msgid "Set Time "
-#~ msgstr "Đặt Giờ "
-
-#~ msgid "USB Script: "
-#~ msgstr "USB Script: "
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "Đã hoàn tất việc tải xuống các catalog sao"
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Thời gian bầu trời lúc bắt đầu: "
-
-#~ msgid "Actual Time"
-#~ msgstr "Thời gian thực"
-
-#~ msgid "Preset Time"
-#~ msgstr "Chỉnh thời gian"
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Dạng thời gian hiển thị: "
-
-#~ msgid "xxx"
-#~ msgstr "xxx"

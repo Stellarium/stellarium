@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-03-22 17:36+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: Kārlis Goba <karlis.goba@gmail.com>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:41+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:05+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -368,57 +368,57 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr "Izvēlēties ekrāna attēlu direktoriju"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Sākotnējais redzes leņķis (FOV): %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Sākotnējais skata virziens az./augst.: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Autori"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "Kontakts"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "Autors"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "Licence"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr "Visi pieejamie zvaigžņu katalogi ir uzstādīti."
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Iegūst katalogu %1 no %2"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -427,7 +427,7 @@ msgstr ""
 "Lejupielādē %1...\n"
 "(Varat aizvērt šo logu.)"
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -438,7 +438,7 @@ msgstr ""
 "Zvaigžņu skaits: %2 miljoni\n"
 "Zvaigžņlieluma diapazons: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -447,11 +447,11 @@ msgstr ""
 "Kļūda lejupielādējot %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "Pārbauda faila pareizumu..."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5583,207 +5583,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "Ekvatoriālais tīkls"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Azimutālais tīkls"
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Debess puses"
-
-#~ msgid "Sky Language: "
-#~ msgstr "Debesu valoda: "
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Debesu kultūra: "
-
-#~ msgid "Date & Time"
-#~ msgstr "Laiks un Datums"
-
-#~ msgid "Set Time "
-#~ msgstr "Iestatīt laiku "
-
-#~ msgid "General "
-#~ msgstr "Vispārīgi "
-
-#~ msgid "Stars "
-#~ msgstr "Zvaigznes "
-
-#~ msgid "Colors "
-#~ msgstr "Krāsas "
-
-#~ msgid "Effects "
-#~ msgstr "Efekti "
-
-#~ msgid "Administration "
-#~ msgstr "Administrācija "
-
-#~ msgid "Latitude: "
-#~ msgstr "Ģeog.plat.: "
-
-#~ msgid "Longitude: "
-#~ msgstr "Ģeog.gar.: "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Augst.vjl.(m): "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Saules sistēmas objekts: "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Debesu laiks: "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Iestatīt laika zonu: "
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Šobrīdējais debess laiks: "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Debess laiks sākumā: "
-
-#~ msgid "Actual Time"
-#~ msgstr "Reālais Laiks"
-
-#~ msgid "Preset Time"
-#~ msgstr "Iestatītais Laiks"
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Laika formāts: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Datuma formāts: "
-
-#~ msgid "Show: "
-#~ msgstr "Parādīt: "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "Nosaukumi līdz zvaigžņlielumam: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "Mirgošana: "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Zvaigznāju līnijas"
-
-#~ msgid "Constellation Names"
-#~ msgstr "Zvaigznāju nosaukumi"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Planētu orbītas"
-
-#~ msgid "Planet Trails"
-#~ msgstr "Planētu ceļi"
-
-#~ msgid "Meridian Line"
-#~ msgstr "Meridiāna līnija"
-
-#~ msgid "Landscape: "
-#~ msgstr "Ainava: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Manuālā tuvināšana: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Objekta izmēri pēc: "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Piena Ceļa intensitāte: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "Nosaukt miglājus līdz zvaigžņliel.: "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Kursora taimauts: "
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Ielādēt noklusējuma konfigurāciju: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Saglabāt šo konfigurāciju kā noklusējuma: "
-
-#~ msgid "Shut Down: "
-#~ msgstr "Izslēgt: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Atjaunot no interneta: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Bultiņa uz leju ielādē sarakstu."
-
-#~ msgid "Hydra"
-#~ msgstr "Hidra"
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Izvēlieties un izejiet lai palaistu."
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Zvaigžņlieluma mērogošanas reizinātājs: "
-
-#~ msgid "Sidereal"
-#~ msgstr "Zvaigžņu laiks"
-
-#~ msgid "Calendar"
-#~ msgstr "Kalendārs"
-
-#~ msgid "Day keys: "
-#~ msgstr "Dienu atslēgtas: "
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "Zvaigžņu vērtības reizinātājs: "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "Zvaigžņlieluma mērogošanas reizinātājs: "
-
-#~ msgid "USB Script: "
-#~ msgstr "USB scenārijs: "
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Limitējošais zvaigžņlielums: "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "Koriģēt atbilstoši gaismas ceļošanas ilgumam: "
-
-#~ msgid "Set Location "
-#~ msgstr "Norādīt vietu "
-
-#~ msgid "Scripts "
-#~ msgstr "Scenāriji "
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Zvaigznāju mākslas intensitāte"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Zvaigznāju robežas"
-
-#~ msgid "Planet Names"
-#~ msgstr "Planētu nosaukumi"
-
-#~ msgid "Equator Line"
-#~ msgstr "Ekvatora plakne"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Ekliptikas plakne"
-
-#~ msgid "Nebula Names"
-#~ msgstr "Miglāju nosaukumi"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Miglāju apļi"
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "Gaismas piesārņojuma apjoms: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Tuvināšanas ilgums: "
-
-#~ msgid "Local Script: "
-#~ msgstr "Lokālais scenārijs: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "CD/DVD scenārijs: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Iestatīt interfeisa valodu: "

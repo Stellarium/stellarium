@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-02-19 16:22+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-05-11 13:01+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: English (Canada) <en_CA@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:45+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:10+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -371,42 +371,42 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr "Select screenshot directory"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Startup FOV: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Startup direction of view Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Authors"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "Contact"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "Author"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "License"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "Running script: "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "Running script: [none]"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -414,16 +414,16 @@ msgstr ""
 "Finished downloading new star catalogues!\n"
 "Restart Stellarium to display them."
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr "All available star catalogs have been installed."
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Get catalogue %1 of %2"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -432,7 +432,7 @@ msgstr ""
 "Downloading %1...\n"
 "(You can close this window.)"
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -443,7 +443,7 @@ msgstr ""
 "Star count: %2 Million\n"
 "Magnitude range: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -452,11 +452,11 @@ msgstr ""
 "Error downloading %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "Verifying file integrity..."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5670,231 +5670,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
-
-#~ msgid "General "
-#~ msgstr "General "
-
-#~ msgid "Stars "
-#~ msgstr "Stars "
-
-#~ msgid "Set Location "
-#~ msgstr "Set Location "
-
-#~ msgid "Colors "
-#~ msgstr "Colours "
-
-#~ msgid "Effects "
-#~ msgstr "Effects "
-
-#~ msgid "Set Time "
-#~ msgstr "Set Time "
-
-#~ msgid "Administration "
-#~ msgstr "Administration "
-
-#~ msgid "Scripts "
-#~ msgstr "Scripts "
-
-#~ msgid "Longitude: "
-#~ msgstr "Longitude: "
-
-#~ msgid "Latitude: "
-#~ msgstr "Latitude: "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Solar System Body: "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Altitude (m): "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Set Time Zone: "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Sky Time: "
-
-#~ msgid "Calendar"
-#~ msgstr "Calendar"
-
-#~ msgid "Day keys: "
-#~ msgstr "Day keys: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Date Display Format: "
-
-#~ msgid "Show: "
-#~ msgstr "Show: "
-
-#~ msgid "Sky Language: "
-#~ msgstr "Sky Language: "
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Time Display Format: "
-
-#~ msgid "Preset Time"
-#~ msgstr "Preset Time"
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Preset Sky Time: "
-
-#~ msgid "Sidereal"
-#~ msgstr "Sidereal"
-
-#~ msgid "Actual Time"
-#~ msgstr "Actual Time"
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Sky Time At Start-up: "
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Sky Culture: "
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Constellation Boundaries"
-
-#~ msgid "Constellation Names"
-#~ msgstr "Constellation Names"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Constellation Art Intensity"
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Limiting Magnitude: "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Constellation Lines"
-
-#~ msgid "Twinkling: "
-#~ msgstr "Twinkling: "
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "Star Value Multiplier: "
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Magnitude Sizing Multiplier: "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "Maximum Magnitude to Label: "
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Cardinal Points"
-
-#~ msgid "Nebula Names"
-#~ msgstr "Nebula Names"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Ecliptic Line"
-
-#~ msgid "Equator Line"
-#~ msgstr "Equator Line"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "Equatorial Grid"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Azimuthal Grid"
-
-#~ msgid "Meridian Line"
-#~ msgstr "Meridian Line"
-
-#~ msgid "Planet Trails"
-#~ msgstr "Planet Trails"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Planet Orbits"
-
-#~ msgid "Planet Names"
-#~ msgstr "Planet Names"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Nebula Circles"
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Cursor Timeout: "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "Correct for light travel time: "
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "Light Pollution Luminance: "
-
-#~ msgid "Landscape: "
-#~ msgstr "Landscape: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Object Sizing Rule: "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "Magnitude Scaling Multiplier: "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Milky Way intensity: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "Maximum Nebula Magnitude to Label: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Zoom Duration: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Manual zoom: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "CD/DVD Script: "
-
-#~ msgid "Local Script: "
-#~ msgstr "Local Script: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Arrow down to load list."
-
-#~ msgid "USB Script: "
-#~ msgstr "USB Script: "
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Load Default Configuration: "
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Select and exit to run."
-
-#~ msgid "Shut Down: "
-#~ msgstr "Shut Down: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Save Current Configuration as Default: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Set UI Locale: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Update me via Internet: "
-
-#~ msgid "Art brightness: "
-#~ msgstr "Art brightness: "
-
-#~ msgid "Light pollution: "
-#~ msgstr "Light pollution: "
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "Startup FOV: XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "Startup direction of view: xxxx"
-
-#~ msgid "Planets labels"
-#~ msgstr "Planet labels"
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "Get catalogue x of y"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "Finished downloading all star catalogues!"
-
-#~ msgid "Hydra"
-#~ msgstr "Hydra"
-
-#~ msgid "Search also in the SIMBAD on-line astronomical database"
-#~ msgstr "Search also in the SIMBAD on-line astronomical database"
