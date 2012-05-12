@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2011-11-10 13:25+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: Vaidotas <Unknown>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:41+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:05+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -372,42 +372,42 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr "Nurodykite katalogą ekrano nuotraukoms"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Pradinis apžvalgos laukas: %1 %2"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Pradinė Az/Alt vaizdo kryptis: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Autoriai"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "Susisiekite"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "Autorius"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "Licencija"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "Vykdomas scenarijus: "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "Vykdomas scenarijus: [nėra]"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -415,16 +415,16 @@ msgstr ""
 "Naujų žvaigždžių katalogų siuntimas baigtas.\n"
 "Norėdami juos pamatyti, paleiskite Stellarium iš naujo."
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Parsiųsti katalogą %1 iš %2"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -433,7 +433,7 @@ msgstr ""
 "Siunčiama %1...\n"
 "(Jūs galite uždaryti šį langą.)"
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -444,7 +444,7 @@ msgstr ""
 "Žvaigždžių skaičius: %2 milijonai\n"
 "Ryškio intervalas: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -453,11 +453,11 @@ msgstr ""
 "Klaida siunčiant %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "Tikrinamas failų vientisumas..."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5624,231 +5624,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Pasaulio kryptis"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Azimutinį tinklelį"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "Ekvatorinį tinklelį"
-
-#~ msgid "Sky Language: "
-#~ msgstr "Dangaus kūnų pavadinimai: "
-
-#~ msgid "Date & Time"
-#~ msgstr "Data ir laikas"
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Pavadinimai pagal kultūrą: "
-
-#~ msgid "Set Location "
-#~ msgstr "Nurodyti vietovę "
-
-#~ msgid "Effects "
-#~ msgstr "Efektai "
-
-#~ msgid "Colors "
-#~ msgstr "Spalvos "
-
-#~ msgid "Stars "
-#~ msgstr "Žvaigždės "
-
-#~ msgid "General "
-#~ msgstr "Bendri "
-
-#~ msgid "Set Time "
-#~ msgstr "Nurodyti laiką "
-
-#~ msgid "Administration "
-#~ msgstr "Valdymas "
-
-#~ msgid "Scripts "
-#~ msgstr "Scenarijai "
-
-#~ msgid "Latitude: "
-#~ msgstr "Platuma: "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Aukštis (m): "
-
-#~ msgid "Longitude: "
-#~ msgstr "Ilguma: "
-
-#~ msgid "Preset Time"
-#~ msgstr "Numatytas laikas"
-
-#~ msgid "Actual Time"
-#~ msgstr "Dabartinis laikas"
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Datos formatas: "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Saulės sistemos kūnas: "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Dangaus laikas: "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Pradinis dangaus laikas: "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Nurodyti laiko juostą: "
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Numatytas dangaus laikas: "
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Laiko formatas: "
-
-#~ msgid "Show: "
-#~ msgstr "Rodyti: "
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Žvaigždynų paveikslų ryškumas"
-
-#~ msgid "Constellation Names"
-#~ msgstr "Žvaigždynų pavadinimai"
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Žvaigždynų kontūrai"
-
-#~ msgid "Planet Names"
-#~ msgstr "Planetų pavadinimai"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Žvaigždynų ribos"
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "Maksimalus pavadinimo dydis: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "Mirgėjimas: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Objektų dydžio keitimo taisyklė: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Rankinis mastelis: "
-
-#~ msgid "Landscape: "
-#~ msgstr "Kraštovaizdis: "
-
-#~ msgid "Planet Trails"
-#~ msgstr "Planetų pėdsakai"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Planetų orbitos"
-
-#~ msgid "Nebula Names"
-#~ msgstr "Ūkų pavadinimai"
-
-#~ msgid "Meridian Line"
-#~ msgstr "Dienovidinio linija"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Ūkų orbitos"
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Atnaujinti internetu: "
-
-#~ msgid "Local Script: "
-#~ msgstr "Vietinis scenarijus: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "CD/DVD scenarijus: "
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Įkelti numatytąsias nuostatas: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Išsaugoti nuostatas kaip numatytąsias: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Priartinimo trukmė: "
-
-#~ msgid "Shut Down: "
-#~ msgstr "Išjungti kompiuterį: "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Slėpti kursorių po: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "Maksimalus ūko pavadinimo dydis: "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Paukščių tako ryškumas: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Nustatyti VI lokalę: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Rodyklė žemyn įkels sarašą."
-
-#~ msgid "Hydra"
-#~ msgstr "Hidra"
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Pasirinkite ir baikite darbą norėdami paleisti."
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "Šviesos taršos skaistis: "
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "Žvaigždžių kiekio reikšmė "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "Dydžio pagal ryškį reikšmė: "
-
-#~ msgid "Sidereal"
-#~ msgstr "Žvaigždinis"
-
-#~ msgid "Calendar"
-#~ msgstr "Kalendorius"
-
-#~ msgid "Day keys: "
-#~ msgstr "Mygtukai dienoms: "
-
-#~ msgid "USB Script: "
-#~ msgstr "USB Scenarijus: "
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Ribojantis ryškis: "
-
-#~ msgid "Art brightness: "
-#~ msgstr "Piešinių ryškumas: "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "Kelionės šviesos greičiu pataisa: "
-
-#~ msgid "Light pollution: "
-#~ msgstr "Šviesos tarša: "
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "Pradinis apžvalgos laukas: XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "Pradinė vaizdo kryptis: xxxx"
-
-#~ msgid "Planets labels"
-#~ msgstr "Planetų antraštės"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "Parsiųsti katalogą x iš y"
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "Visi žvaigždžių katalogai parsiųsti"
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Ryškio dydžio daugiklis: "
-
-#~ msgid "Equator Line"
-#~ msgstr "Pusiaujo liniją"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Ekliptikos liniją"
