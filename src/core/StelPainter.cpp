@@ -635,9 +635,6 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 			drawText(x, y, ws[i], 90. + theta*180./M_PI, 0., 0.);
 			// Compute how much the character contributes to the angle
 			theta += psi * M_PI/180. * (1 + ((float)qPainter->fontMetrics().width(ws[i]) - cWidth)/ cWidth);
-			// Lengthy string. Text wraps around!
-			if (theta > 2. * M_PI)
-				theta -= 2.*M_PI;
 		}
 	}
 	else
@@ -649,8 +646,6 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 			y = d * std::sin (theta) + yVc; 
 			drawText(x, y, ws[slen-1-i], 90. + theta*180./M_PI, 0., 0.);
 			theta += psi * M_PI/180. * (1 + ((float)qPainter->fontMetrics().width(ws[slen-1-i]) - cWidth)/ cWidth);
-			if (theta > 2. * M_PI)
-				theta -= 2.*M_PI;
 		}
 	}
 }
