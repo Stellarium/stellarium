@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-05-07 16:03+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-08 04:48+0000\n"
-"X-Generator: Launchpad (build 15204)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:06+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -375,42 +375,42 @@ msgstr "Funnet"
 msgid "Select screenshot directory"
 msgstr "Velg skjermbildemappe"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Synsfelt ved oppstart: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Visningsretning ved oppstart Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Utviklere"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "Kontakt"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "Utvikler"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "Lisens"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "Kjører skript: "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "Kjører skript: [ingen]"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -418,16 +418,16 @@ msgstr ""
 "Stjernekatalogene er ferdig nedlastet!\n"
 "Start Stellarium på nytt for å vise de."
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr "Alle tilgjengelige stjernekataloger er installert."
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Hent katalog %1 av %2"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -436,7 +436,7 @@ msgstr ""
 "Laster ned %1...\n"
 "(Du kan lukke dette vinduet)"
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -447,7 +447,7 @@ msgstr ""
 "Antall stjerner: %2 Millioner\n"
 "Magnitudeområde: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -456,11 +456,11 @@ msgstr ""
 "Feil ved nedlasting av %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "Verifiserer filintegritet..."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5737,231 +5737,3 @@ msgstr "pulserende optisk, røntgen- eller gamma-utstråling (høyenergetisk)"
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr "ekstragalaktisk pulsar (i magellanske sky)"
-
-#~ msgid "Equator Line"
-#~ msgstr "Ekvatorlinje"
-
-#~ msgid "General "
-#~ msgstr "Generelt "
-
-#~ msgid "Stars "
-#~ msgstr "Stjerner "
-
-#~ msgid "Effects "
-#~ msgstr "Effekter "
-
-#~ msgid "Scripts "
-#~ msgstr "Skript "
-
-#~ msgid "Administration "
-#~ msgstr "Administrasjon "
-
-#~ msgid "Latitude: "
-#~ msgstr "Breddegrad: "
-
-#~ msgid "Longitude: "
-#~ msgstr "Lengdegrad: "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Høyde (m): "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Himmeltid ved oppstart: "
-
-#~ msgid "Show: "
-#~ msgstr "Vis: "
-
-#~ msgid "Landscape: "
-#~ msgstr "Landskap: "
-
-#~ msgid "Local Script: "
-#~ msgstr "Lokalt skript: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "CD/DVD skript: "
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Himmelretninger"
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Stjernebilder utfra kultur: "
-
-#~ msgid "Date & Time"
-#~ msgstr "Dato og tid"
-
-#~ msgid "Colors "
-#~ msgstr "Farger "
-
-#~ msgid "Actual Time"
-#~ msgstr "Faktisk tid"
-
-#~ msgid "Planet Names"
-#~ msgstr "Planetnavn"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Planetbaner"
-
-#~ msgid "Planet Trails"
-#~ msgstr "Planetspor"
-
-#~ msgid "Meridian Line"
-#~ msgstr "Meridianlinje"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Stjernetåkesirkler"
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Intensitet for Melkeveien: "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Markør fjernes etter: "
-
-#~ msgid "Shut Down: "
-#~ msgstr "Avslutte: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Språk i programmet: "
-
-#~ msgid "Calendar"
-#~ msgstr "Kalender"
-
-#~ msgid "USB Script: "
-#~ msgstr "USB-skript: "
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Format for tidsvisning: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Format for datovisning: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Oppdater meg via internett: "
-
-#~ msgid "Preset Time"
-#~ msgstr "Forhåndsinnstilt tid"
-
-#~ msgid "Light pollution: "
-#~ msgstr "Lysforurensing: "
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "Visningsretning ved oppstart: xxxx"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "Hent katalog x av y"
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "Ferdig med nedlasting av alle stjernekataloger!"
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "Styrke på lysforurensing: "
-
-#~ msgid "Planets labels"
-#~ msgstr "Planetnavn"
-
-#~ msgid "Set Location "
-#~ msgstr "Still inn sted "
-
-#~ msgid "Set Time "
-#~ msgstr "Still inn tidspunkt "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Solsystemlegeme: "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Stjernetid: "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Still inn tidssone: "
-
-#~ msgid "Day keys: "
-#~ msgstr "Dag-taster: "
-
-#~ msgid "Sidereal"
-#~ msgstr "Siderisk"
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Forhåndsinnstilt himmeltid: "
-
-#~ msgid "Sky Language: "
-#~ msgstr "Språk for objektbeskrivelse: "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "Maksimum magnitude for å bli påskrevet: "
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Grensemagnitude: "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Stjernebildelinjer"
-
-#~ msgid "Constellation Names"
-#~ msgstr "Stjernebildenavn"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Stjernebildekunstens intensitet"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Stjernebildegrenser"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Asimutnett"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "Ekvatorialt nett"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Ekliptikklinje"
-
-#~ msgid "Nebula Names"
-#~ msgstr "Stjernetåkenavn"
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "Maksimum magnitude på stjernetåke for å bli påskrevet: "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "Korriger for lysreisetid: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Pil ned for å laste liste."
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Velg og avslutt for å kjøre."
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Last standardinnstillinger: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Lagre gjeldende innstillinger som standard: "
-
-#~ msgid "Art brightness: "
-#~ msgstr "Lysstyrke til stjernebildekunst: "
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "Synsfelt ved oppstart: XX"
-
-#~ msgid "Hydra"
-#~ msgstr "Hydra"
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "Stjerneverdi-multiplikator: "
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Magnitude - dimensjoneringsmultiplikator: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Regel for objektstørrelse: "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "Magnitude - skaleringsmultiplikator: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "Blinking: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Manuell skalering "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Trinn for skalering "
