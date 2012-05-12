@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2010-05-07 20:28+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: Christian Reis <kiko@async.com.br>\n"
 "Language-Team: Maltese <mt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:42+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:06+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -351,64 +351,64 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -416,18 +416,18 @@ msgid ""
 "Magnitude range: %3 - %4"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
 "%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5555,180 +5555,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "Grid Ekwatorjali"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Grid Ażimutali"
-
-#~ msgid "Equator Line"
-#~ msgstr "Linja ta' l-Ekwatur"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Linja ta' l-Ellittiku"
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Punti tal-Kumpass"
-
-#~ msgid "Sky Language: "
-#~ msgstr "Lingwa tas-Sema: "
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Kultura tas-sema: "
-
-#~ msgid "Date & Time"
-#~ msgstr "Data u Ħin"
-
-#~ msgid "Set Location "
-#~ msgstr "Post "
-
-#~ msgid "Set Time "
-#~ msgstr "Ħin "
-
-#~ msgid "General "
-#~ msgstr "Ġenerali "
-
-#~ msgid "Stars "
-#~ msgstr "Stilel "
-
-#~ msgid "Colors "
-#~ msgstr "Kuluri "
-
-#~ msgid "Effects "
-#~ msgstr "Effetti "
-
-#~ msgid "Scripts "
-#~ msgstr "Skripts "
-
-#~ msgid "Administration "
-#~ msgstr "Amministrazzjoni "
-
-#~ msgid "Latitude: "
-#~ msgstr "Latitudni: "
-
-#~ msgid "Longitude: "
-#~ msgstr "Lonġitudni: "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Altitudni (m): "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Oġġett fis-Sistema Solari: "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Ħin: "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Zona tal-Ħin: "
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Ħin Pre-settjat: "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Ħin fil-Bidu: "
-
-#~ msgid "Actual Time"
-#~ msgstr "Ħin Bħalissa"
-
-#~ msgid "Preset Time"
-#~ msgstr "Ħin Pre-settjat"
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Format tal-Ħin: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Format tad-Data: "
-
-#~ msgid "Show: "
-#~ msgstr "Uri: "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "L-Ogħa Manjitudni x'timmarka: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "Teptip: "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Linji tal-Kostellazzjonijiet"
-
-#~ msgid "Constellation Names"
-#~ msgstr "Ismijiet tal-Kostellazzjonijiet"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Qawwa ta' l-istampi tal-Kostellazzjonijiet"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Borduri tal-Kostellazzjonijiet"
-
-#~ msgid "Planet Names"
-#~ msgstr "Ismijiet tal-Pjaneti"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Orbiti tal-Pjaneti"
-
-#~ msgid "Planet Trails"
-#~ msgstr "Mixjiet tal-Pjaneti"
-
-#~ msgid "Meridian Line"
-#~ msgstr "Linja tal-Meridjan"
-
-#~ msgid "Nebula Names"
-#~ msgstr "Ismijiet tan-Nebuli"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Ċrieki tan-Nebuli"
-
-#~ msgid "Landscape: "
-#~ msgstr "Pajsaġġ: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Żum Manwali: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Regola tat-tibdil tad-Daqs ta' l-Oġġett: "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Intensità tat-Triq ta' Sant'Anna: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "L-Ogħla Manjitudni tan-Nebula li tista' timmarka: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Tul ta' l-Iżżumjar: "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Cursor Timeout: "
-
-#~ msgid "Local Script: "
-#~ msgstr "Skript Lokali: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "Skript tas-CD/DVD: "
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Konfigurazzjoni Fissa tat-Tniżżil: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Issejvja l-Konfigurazzjoni ta' Bħalissa bħala Fissa: "
-
-#~ msgid "Shut Down: "
-#~ msgstr "Itfi: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Aġġornani bl-Internet: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Il-Lokal UI: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Vlegga 'l isfel biex ittella' l-lista."
-
-#~ msgid "Hydra"
-#~ msgstr "Hydra"
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Aghzel u ohrog biex thaddimha."
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Multiplikatur tal-manjitudni: "

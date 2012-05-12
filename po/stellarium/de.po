@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-05-07 09:21+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-08 04:48+0000\n"
-"X-Generator: Launchpad (build 15204)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:03+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -375,42 +375,42 @@ msgstr "Gefunden"
 msgid "Select screenshot directory"
 msgstr "Screenshot-Verzeichnis auswählen"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Anfängliches Gesichtsfeld: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Anfängliche Blickrichtung in Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Autoren"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "Ansprechpartner"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "Lizenz"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "Ausgeführtes Skript: "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "Ausgeführtes Skript: [keines]"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -418,16 +418,16 @@ msgstr ""
 "Herunterladen neuer Sternkataloge beendet!\n"
 "Starten Sie Stellarium neu, um sie anzuzeigen."
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr "Alle verfügbaren Sternkataloge wurden installiert."
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Empfange Katalog %1 von %2"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -436,7 +436,7 @@ msgstr ""
 "Lade %1...\n"
 "(Sie können dieses Fenster schließen.)"
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -447,7 +447,7 @@ msgstr ""
 "Anzahl der Sterne: %2 Millionen\n"
 "Magnitudenspanne: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -456,11 +456,11 @@ msgstr ""
 "Fehler beim Herunterladen von %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "Überprüfe Dateiintegrität..."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5756,231 +5756,3 @@ msgstr "Gepulste optische, Röntgen- oder Gamma-Emission (hochenergetisch)"
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr "Extragalaktischer Pulsar (in Magell. Wolken)"
-
-#~ msgid "Stars "
-#~ msgstr "Sterne "
-
-#~ msgid "Colors "
-#~ msgstr "Farben "
-
-#~ msgid "Effects "
-#~ msgstr "Effekte "
-
-#~ msgid "Scripts "
-#~ msgstr "Skripte "
-
-#~ msgid "Landscape: "
-#~ msgstr "Landschaft: "
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Himmelsrichtungen"
-
-#~ msgid "Sky Language: "
-#~ msgstr "Himmelssprache: "
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Kulturkreis: "
-
-#~ msgid "Date & Time"
-#~ msgstr "Datum & Zeit"
-
-#~ msgid "Set Location "
-#~ msgstr "Standort festlegen "
-
-#~ msgid "General "
-#~ msgstr "Allgemein "
-
-#~ msgid "Administration "
-#~ msgstr "Verwaltung "
-
-#~ msgid "Latitude: "
-#~ msgstr "Breitengrad: "
-
-#~ msgid "Longitude: "
-#~ msgstr "Längengrad: "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Sternzeit: "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Zeitzone festlegen: "
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Sternzeit voreinstellen: "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Sternzeit beim Start: "
-
-#~ msgid "Actual Time"
-#~ msgstr "Aktuelle Zeit"
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Zeitformat: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Datumsformat: "
-
-#~ msgid "Show: "
-#~ msgstr "Anzeigen: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "Funkeln: "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Sternbildlinien"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Sternbildgrenzen"
-
-#~ msgid "Planet Names"
-#~ msgstr "Planetennamen"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Planetenbahnen"
-
-#~ msgid "Planet Trails"
-#~ msgstr "Planetenspuren"
-
-#~ msgid "Nebula Names"
-#~ msgstr "Nebelnamen"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Nebelkreise"
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Regel für Objektgröße: "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Helligkeit der Milchstraße: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "Namensanzeige bei Nebeln bis Helligkeit: "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Mauszeiger ausblenden: "
-
-#~ msgid "Local Script: "
-#~ msgstr "Lokales Skript: "
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Standardkonfiguration laden: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Aktuelle Konfiguration als Standard speichern: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Internet-Update starten: "
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Helligkeits-Verstärkungsfaktor: "
-
-#~ msgid "Sidereal"
-#~ msgstr "Stern-"
-
-#~ msgid "Calendar"
-#~ msgstr "Kalender"
-
-#~ msgid "Day keys: "
-#~ msgstr "Tagestasten: "
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Grenzhelligkeit: "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "Lichtlaufzeit-Korrektur: "
-
-#~ msgid "USB Script: "
-#~ msgstr "USB-Skript: "
-
-#~ msgid "Light pollution: "
-#~ msgstr "Lichtverschmutzung: "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "Regler für Größenskalierung: "
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "Stärke der Lichtverschmutzung: "
-
-#~ msgid "Art brightness: "
-#~ msgstr "Helligkeit der Sternbildfiguren: "
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "Anfängliches Gesichtsfeld: XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "Anfängliche Blickrichtung: xxxx"
-
-#~ msgid "Meridian Line"
-#~ msgstr "Meridianlinie"
-
-#~ msgid "Planets labels"
-#~ msgstr "Planetenbeschriftungen"
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "Katalog x von y holen"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "Äquatoriales Raster"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Azimutales Raster"
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "Sternwerte Multiplikator "
-
-#~ msgid "Set Time "
-#~ msgstr "Uhrzeit einstellen "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Höhe (m): "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Himmelskörper des Sonnensystems: "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "Maximalgröße der Beschriftungen: "
-
-#~ msgid "Constellation Names"
-#~ msgstr "Sternbildnamen"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Deutlichkeit der künstlerischen Sternbilder"
-
-#~ msgid "Equator Line"
-#~ msgstr "Himmelsäquator"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Ekliptik"
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Manuelle Vergrößerung: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Vergrößerungsdauer: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "CD/DVD-Skript: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Pfeiltaste abwärts, um Liste zu laden."
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Wählen und verlassen, um auszuführen."
-
-#~ msgid "Shut Down: "
-#~ msgstr "Beenden: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Setze Menüsprache: "
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "Alle Sternkataloge sind heruntergeladen!"
-
-#~ msgid "Preset Time"
-#~ msgstr "Aktuelle Zeit"
-
-#~ msgid "Hydra"
-#~ msgstr "Hydra"

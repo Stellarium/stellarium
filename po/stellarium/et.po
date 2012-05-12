@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: po_stellarium-et\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-01-14 15:35+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: Merike <Unknown>\n"
 "Language-Team: Estonian <kde-i18n-doc@lists.kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:39+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:03+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -374,42 +374,42 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr "Vali kuvatõmmiste kataloog"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Käivitamisel kasutatav vaatenurk: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Käivitamisel kasutatava vaatesuuna asimuut/kõrgus: %1 / %2"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Autorid"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "Kontakt"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "Litsents"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "Töötav skript: "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "Töötav skript: [puudub]"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -417,16 +417,16 @@ msgstr ""
 "Uute tähekataloogide alla laadimine õnnestus!\n"
 "Nende kuvamiseks taaskäivita Stellarium."
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Kataloogi hankimine %1 %2st"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -435,7 +435,7 @@ msgstr ""
 "Laaditakse alla %1...\n"
 "(Võid selle akna sulgeda.)"
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -446,7 +446,7 @@ msgstr ""
 "Tähtede arv: %2 miljonit\n"
 "Tähesuuruste vahemik: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -455,11 +455,11 @@ msgstr ""
 "Viga %1 alla laadimisel:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "Kontrollitakse faili terviklikkust..."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5612,231 +5612,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
-
-#~ msgid "Date & Time"
-#~ msgstr "Kuupäev & Aeg"
-
-#~ msgid "Set Location "
-#~ msgstr "Määra asukoht "
-
-#~ msgid "Set Time "
-#~ msgstr "Määra aeg "
-
-#~ msgid "General "
-#~ msgstr "Üldine "
-
-#~ msgid "Stars "
-#~ msgstr "Tähed "
-
-#~ msgid "Colors "
-#~ msgstr "Värvid "
-
-#~ msgid "Effects "
-#~ msgstr "Efektid "
-
-#~ msgid "Sky Language: "
-#~ msgstr "Taeva keel: "
-
-#~ msgid "Latitude: "
-#~ msgstr "Laiuskraad: "
-
-#~ msgid "Longitude: "
-#~ msgstr "Pikkuskraad: "
-
-#~ msgid "Show: "
-#~ msgstr "Näita: "
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Planeetide orbiidid"
-
-#~ msgid "Constellation Names"
-#~ msgstr "Tähtkujude nimed"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Tähtkujude piirid"
-
-#~ msgid "Planet Names"
-#~ msgstr "Planeetide nimed"
-
-#~ msgid "Nebula Names"
-#~ msgstr "Udukogude nimed"
-
-#~ msgid "Landscape: "
-#~ msgstr "Maastik: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "Vilkumine: "
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Ekliptika"
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Kõrgus (m): "
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Taevakultuur: "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Päikesesüsteemi taevakeha: "
-
-#~ msgid "Actual Time"
-#~ msgstr "Tegelik aeg"
-
-#~ msgid "Sky Time: "
-#~ msgstr "Taeva aeg: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Suurenduse kestus: "
-
-#~ msgid "Hydra"
-#~ msgstr "Hüdra"
-
-#~ msgid "Scripts "
-#~ msgstr "Skriptid "
-
-#~ msgid "Administration "
-#~ msgstr "Administreerimine "
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Ilmakaared"
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Taeva aeg käivitamisel: "
-
-#~ msgid "Meridian Line"
-#~ msgstr "Meridiaan"
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Käsitsi suurendus: "
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Tähtkujupiltide intensiivsus"
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Uuenda mind interneti abil: "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Kursori aegumine: "
-
-#~ msgid "Local Script: "
-#~ msgstr "Lokaalne skript: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "CD/DVD skript: "
-
-#~ msgid "Day keys: "
-#~ msgstr "Päevade klahvid: "
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Udukogude ringid"
-
-#~ msgid "Preset Time"
-#~ msgstr "Ettemääratud aeg"
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Ettemääratud taevaaeg: "
-
-#~ msgid "Calendar"
-#~ msgstr "kalender"
-
-#~ msgid "Sidereal"
-#~ msgstr "sideeriline"
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Linnutee intensiivsus: "
-
-#~ msgid "USB Script: "
-#~ msgstr "USB skript: "
-
-#~ msgid "Planets labels"
-#~ msgstr "Planeetide nimed"
-
-#~ msgid "Art brightness: "
-#~ msgstr "Piltide heledus "
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Aja kuvamise formaat: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Kuupäeva kuvamise formaat: "
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Tähesuuruse kordisti "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Taevakeha suuruse reegel: "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "Paranda valguse levimisaja suhtes: "
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Piirtähesuurus: "
-
-#~ msgid "Light pollution: "
-#~ msgstr "Valgusreostus: "
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "Vaateväli käivitamisel: XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "Vaate suund käivitamisel: xxxx"
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "Tõmba x kataloog y-st"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "Kõigi tähekataloogide allalaadimine lõpetati!"
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Määra ajavöönd: "
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "Tähtede arvu kordisti "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "Suurim tähesuurus, mille korral nimi kuvatakse: "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Tähtkujude nimikujutised"
-
-#~ msgid "Planet Trails"
-#~ msgstr "Planeetide teekonnad"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Horisondilised koordinaadid"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "Ekvaatorilised koordinaadid"
-
-#~ msgid "Equator Line"
-#~ msgstr "Taevaekvaator"
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "Valgusreostuse tugevus: "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "Suuruse kordisti "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "Suurim tähesuurus, mille korral udukogu nimi kuvatakse: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Nimekirja laadimiseks vajuta nool alla"
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Vali ja välju kävitamiseks."
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Laadi vaikimisi seaded: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Salvesta praegused seaded vaikimisi seadetema: "
-
-#~ msgid "Shut Down: "
-#~ msgstr "Sulge: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Määra kasutajaliidese lokaat: "
