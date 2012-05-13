@@ -685,7 +685,24 @@ void OcularsGuiPanel::updateTelescopeControls()
 	posY += fieldTelescopeName->boundingRect().height();
 	widgetHeight += fieldTelescopeName->boundingRect().height();
 
-	if (ocularsPlugin->flagShowOculars)
+	if (ocularsPlugin->flagShowCCD)
+	{
+		int index = ocularsPlugin->selectedCCDIndex;
+		CCD* ccd = ocularsPlugin->ccds[index];
+		Q_ASSERT(ccd);
+
+		double fovX = ((int)(ccd->getActualFOVx(telescope) * 1000.0)) / 1000.0;
+		double fovY = ((int)(ccd->getActualFOVy(telescope) * 1000.0)) / 1000.0;
+		QString stringFovX = QString::number(fovX) + QChar(0x00B0);
+		QString stringFovY = QString::number(fovY) + QChar(0x00B0);
+		QString dimensions = stringFovX + QChar(0x00D7) + stringFovY;
+		QString dimensionsLabel = QString(q_("Dimensions: %1")).arg(dimensions);
+		fieldCcdDimensions->setPlainText(dimensionsLabel);
+
+		fieldMagnification->setVisible(false);
+		fieldFov->setVisible(false);
+	}
+	else if (ocularsPlugin->flagShowOculars)
 	{
 		//We need the current ocular
 		int index = ocularsPlugin->selectedOcularIndex;
