@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-10 19:57+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
+"POT-Creation-Date: 2012-05-04 02:16+0700\n"
+"PO-Revision-Date: 2012-05-12 19:17+0000\n"
 "Last-Translator: Иван Старчевић <ivanstar61@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-12 06:07+0000\n"
+"X-Launchpad-Export-Date: 2012-05-13 04:40+0000\n"
 "X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -4456,16 +4456,16 @@ msgstr "Више сателита"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:208
 msgid "Get data from update sources"
-msgstr ""
+msgstr "Набавите податаке из извора за ажурирање"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:209
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Abort download"
-msgstr ""
+msgstr "Прекини преузимање"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:210
 msgid "New satellites"
-msgstr ""
+msgstr "Нови сателити"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:212
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
@@ -4486,28 +4486,28 @@ msgstr ""
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:155
 #, qt-format
 msgid "Move telescope #%1 to selected object"
-msgstr ""
+msgstr "Помери телескоп #%1 на изабрани објекат"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:162
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
-msgstr ""
+msgstr "Помери телескоп #%1 на тачку која је тренутно у средишту екрана"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:173
 msgid "Move a telescope to a given set of coordinates"
-msgstr ""
+msgstr "Премести телескоп на дати скуп координата"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:150
 msgid "Add New Telescope"
-msgstr ""
+msgstr "Додај нови телескоп"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
-msgstr ""
+msgstr "Подеси телескоп"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
-msgstr "N/A"
+msgstr "Недоступно"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:57
 msgid "Starting"
@@ -4531,7 +4531,7 @@ msgstr "Заустављено"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
-msgstr ""
+msgstr "Додатни контролни телескоп"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
@@ -4547,7 +4547,7 @@ msgstr "#"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Status"
-msgstr ""
+msgstr "Стање"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Type"
@@ -4583,17 +4583,17 @@ msgstr ""
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid "local, Stellarium"
-msgstr ""
+msgstr "локални, Stellarium"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 msgid "local, external"
-msgstr ""
+msgstr "локални, спољни"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid "remote, unknown"
-msgstr ""
+msgstr "даљински, непознато"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
@@ -4607,7 +4607,7 @@ msgstr "Започни"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:745
 msgid "Start the selected local telescope"
-msgstr ""
+msgstr "Покрени изабрани локални телескоп"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:750
 msgid "Stop"
@@ -4615,7 +4615,7 @@ msgstr "Заустави"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:751
 msgid "Stop the selected local telescope"
-msgstr ""
+msgstr "Заустави изабрани локални телескоп"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:756
 msgid "Connect"
@@ -4623,7 +4623,7 @@ msgstr "Повежи"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:757
 msgid "Connect to the selected telescope"
-msgstr ""
+msgstr "Повежи одабрани телескоп"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:762
 msgid "Disconnect"
@@ -4631,7 +4631,7 @@ msgstr "Прекини"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:763
 msgid "Disconnect from the selected telescope"
-msgstr ""
+msgstr "Прекини везе са изабраног телескопа"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:784
 msgid "Select a directory"
@@ -4641,47 +4641,47 @@ msgstr "Изаберите фасциклу"
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
 msgid "Form"
-msgstr "Obrazac"
+msgstr "Образац"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:282
 msgid "Slew telescope to"
-msgstr ""
+msgstr "Окрени телескоп на"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:284
 msgid "There are no active devices."
-msgstr ""
+msgstr "Нема активних уређаја"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:285
 msgid "Slew telescope to coordinates"
-msgstr ""
+msgstr "Окрени телескоп на координате"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:286
 msgid "&Right Ascension (J2000):"
-msgstr ""
+msgstr "&Десно успињање (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:287
 msgid "De&clination (J2000):"
-msgstr ""
+msgstr "Од&ступање (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "Hours-minutes-seconds format"
-msgstr ""
+msgstr "Формат: сати-минутi-секунде"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:291
 msgid "&HMS"
-msgstr ""
+msgstr "&ЧМС"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:293
 msgid "Degrees-minutes-seconds format"
-msgstr ""
+msgstr "Формат: степени-минути-секунде"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:295
 msgid "&DMS"
-msgstr ""
+msgstr "&СМС"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:297
 msgid "Decimal degrees"
-msgstr ""
+msgstr "Децимални степени"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "D&ecimal"
@@ -5629,3 +5629,228 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
+
+#~ msgid "Date & Time"
+#~ msgstr "Datum i vreme"
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Тело Сунчевог система: "
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Орбите планета"
+
+#~ msgid "Nebula Names"
+#~ msgstr "Имена маглина"
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "Осветљеност светлосног загађења: "
+
+#~ msgid "Light pollution: "
+#~ msgstr "Светлосно загађење: "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Наглашеност Млечног Пута "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "Стрелица надоле да се учита листа."
+
+#~ msgid "General "
+#~ msgstr "Опште "
+
+#~ msgid "Stars "
+#~ msgstr "Звезде "
+
+#~ msgid "Set Time "
+#~ msgstr "Подеси време "
+
+#~ msgid "Colors "
+#~ msgstr "Боје "
+
+#~ msgid "Effects "
+#~ msgstr "Ефекти "
+
+#~ msgid "Administration "
+#~ msgstr "Администрација "
+
+#~ msgid "Scripts "
+#~ msgstr "Скрипте "
+
+#~ msgid "Longitude: "
+#~ msgstr "Дужина: "
+
+#~ msgid "Latitude: "
+#~ msgstr "Ширина: "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Висина (m): "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Подеси временску зону: "
+
+#~ msgid "Day keys: "
+#~ msgstr "Тастери дана: "
+
+#~ msgid "Sidereal"
+#~ msgstr "Звездани"
+
+#~ msgid "Calendar"
+#~ msgstr "Календар"
+
+#~ msgid "Sky Language: "
+#~ msgstr "Језик неба: "
+
+#~ msgid "Time Display Format: "
+#~ msgstr "Формат приказивања времена: "
+
+#~ msgid "Preset Time"
+#~ msgstr "Преподешено време"
+
+#~ msgid "Sky Culture: "
+#~ msgstr "Култура неба: "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Формат приказивања датума: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Преподешено време неба: "
+
+#~ msgid "Actual Time"
+#~ msgstr "Текуће време"
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Време неба при старту: "
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Границе сазвежђа"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Наглашеност изгледа сазвежђа"
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "Ограничавање магнитуде: "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "Линије сазвежђа:"
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Максимум магнитуде до ознаке: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "Треперење: "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "Множилац звездане вредности: "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Множилац магнитудног увећања: "
+
+#~ msgid "Show: "
+#~ msgstr "Прикажи: "
+
+#~ msgid "Cardinal Points"
+#~ msgstr "Кључне тачке"
+
+#~ msgid "Equator Line"
+#~ msgstr "Линија екватора"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "Азимутна мрежа"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "Еклиптичка линија"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "Екваторијална мрежа"
+
+#~ msgid "Meridian Line"
+#~ msgstr "Линија меридијана"
+
+#~ msgid "Planet Trails"
+#~ msgstr "Трагови планета"
+
+#~ msgid "Planet Names"
+#~ msgstr "Имена планета"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Кругови маглина"
+
+#~ msgid "Select and exit to run."
+#~ msgstr "Изаберите и изађите да би извршили"
+
+#~ msgid "Set Location "
+#~ msgstr "Подеси положај "
+
+#~ msgid "Constellation Names"
+#~ msgstr "Имена сазвежђа"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "Завршено преузимање свих каталога звезда!"
+
+#~ msgid "Planets labels"
+#~ msgstr "Ознаке планета"
+
+#~ msgid "Sky Time: "
+#~ msgstr "Небеско време: "
+
+#~ msgid "Landscape: "
+#~ msgstr "Пејзаж: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Ручно увећање/смањење: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Правило величине објекта: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Највећи ред величине маглине до ознаке: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Истицање времена за курсор: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "Исправка за време путовања светлости: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Трајање увећања/умањења: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "CD/DVD скрипта: "
+
+#~ msgid "Local Script: "
+#~ msgstr "Локална скрипта: "
+
+#~ msgid "USB Script: "
+#~ msgstr "USB скрипта: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Учитајте стандардну конфигурацију: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Снимите тренутну конфигурацију као стандардну: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "Искључите: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Подесите локални кориснички интерфејс: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Ажурирајте путем интернета: "
+
+#~ msgid "Art brightness: "
+#~ msgstr "Осветљеност уметничког приказа: "
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "Почетно видно поље: XX"
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "Почетни правац гледања: xxxx"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "Преузми каталог x од y"
+
+#~ msgid "Hydra"
+#~ msgstr "Хидра"
