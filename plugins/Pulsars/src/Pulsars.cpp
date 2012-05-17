@@ -59,7 +59,7 @@ StelPluginInfo PulsarsStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Pulsars");
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
-	info.description = N_("This plugin plots the position of various pulsars, with object information about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ 1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\"");
+	info.description = N_("This plugin plots the position of various pulsars, with object information about each one. Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) (astro-ph/0412641)).<br><br>Note: pulsar identifiers have the prefix 'PSR'");
 	return info;
 }
 
