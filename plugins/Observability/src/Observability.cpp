@@ -66,7 +66,7 @@ StelPluginInfo ObservabilityStelPluginInterface::getPluginInfo() const
         info.displayedName = q_("Observability analysis");
         info.authors = "Ivan Marti-Vidal (Onsala Space Observatory)";
         info.contact = "i.martividal@gmail.com";
-        info.description = q_("Reports an analysis of source observability, based on coordinates and epoch of the year. It assumes that a source is observable if it is above horizon before/after the astronomical rise/set twilight. It also gives the rise/set times and the days of Heliacal rise/set.");
+        info.description = q_("Reports an analysis of source observability (rise, set, and transit times), as well as the epochs of year when the source is best observed. It assumes that a source is observable if it is above the horizon before/after the astronomical rise/set twilight. The scripts also gives the day of Sun's opposition and the Heliacal rise/set days.");
         return info;
 }
 
