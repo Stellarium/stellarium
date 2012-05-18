@@ -113,58 +113,58 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 		}
 	}
 
-	if (($outRA ne '') && ($outDE ne '') && ($flag == 1)) {
-		$out  = "\t\t\"PSR J".$name."\":\n";
-		$out .= "\t\t{\n";
-		if ($parallax > 0) {
-			$out .= "\t\t\t\"parallax\": ".$parallax.",\n";
-		}
-		if ($distance > 0) {
-			$out .= "\t\t\t\"distance\": ".$distance.",\n";
-		}
-		if ($period > 0) {
-			$out .= "\t\t\t\"period\": ".$period.",\n";
-		}
-		if ($bperiod > 0) {
-			$out .= "\t\t\t\"bperiod\": ".$bperiod.",\n";
-		}
-		if ($eccentricity > 0) {
-			$out .= "\t\t\t\"eccentricity\": ".$eccentricity.",\n";
-		}
-		if ($pderivative > 0) {
-			$out .= "\t\t\t\"pderivative\": ".$pderivative.",\n";
-		}
-		if ($dmeasure > 0) {
-			$out .= "\t\t\t\"dmeasure\": ".$dmeasure.",\n";
-		}
-		if ($frequency > 0) {
-			$out .= "\t\t\t\"frequency\": ".$frequency.",\n";
-		}
-		if ($edot > 0) {
-			$out .= "\t\t\t\"edot\": ".$edot.",\n";
-		}
-		if ($w50 > 0) {
-			$out .= "\t\t\t\"w50\": ".$w50.",\n";
-		}
-		if ($s400 > 0) {
-			$out .= "\t\t\t\"s400\": ".$s400.",\n";
-		}
-		if ($s600 > 0) {
-			$out .= "\t\t\t\"s600\": ".$s600.",\n";
-		}
-		if ($s1400 > 0) {
-			$out .= "\t\t\t\"s1400\": ".$s1400.",\n";
-		}
-		$out .= "\t\t\t\"RA\": \"".$outRA."\",\n";
-		$out .= "\t\t\t\"DE\": \"".$outDE."\"\n";
-		$out .= "\t\t}";
-
-		if ($i<scalar(@cat)-2) {
-			$out .= ",";
-		}
+	$out  = "\t\t\"PSR J".$name."\":\n";
+	$out .= "\t\t{\n";
+	if ($parallax > 0) {
+		$out .= "\t\t\t\"parallax\": ".$parallax.",\n";
 	}
+	if ($distance > 0) {
+		$out .= "\t\t\t\"distance\": ".$distance.",\n";
+	}
+	if ($period > 0) {
+		$out .= "\t\t\t\"period\": ".$period.",\n";
+	}
+	if ($bperiod > 0) {
+		$out .= "\t\t\t\"bperiod\": ".$bperiod.",\n";
+	}
+	if ($eccentricity > 0) {
+		$out .= "\t\t\t\"eccentricity\": ".$eccentricity.",\n";
+	}
+	if ($pderivative > 0) {
+		$out .= "\t\t\t\"pderivative\": ".$pderivative.",\n";
+	}
+	if ($dmeasure > 0) {
+		$out .= "\t\t\t\"dmeasure\": ".$dmeasure.",\n";
+	}
+	if ($frequency > 0) {
+		$out .= "\t\t\t\"frequency\": ".$frequency.",\n";
+	}
+	if ($edot > 0) {
+		$out .= "\t\t\t\"edot\": ".$edot.",\n";
+	}
+	if ($w50 > 0) {
+		$out .= "\t\t\t\"w50\": ".$w50.",\n";
+	}
+	if ($s400 > 0) {
+		$out .= "\t\t\t\"s400\": ".$s400.",\n";
+	}
+	if ($s600 > 0) {
+		$out .= "\t\t\t\"s600\": ".$s600.",\n";
+	}
+	if ($s1400 > 0) {
+		$out .= "\t\t\t\"s1400\": ".$s1400.",\n";
+	}
+	$out .= "\t\t\t\"RA\": \"".$outRA."\",\n";
+	$out .= "\t\t\t\"DE\": \"".$outDE."\"\n";
+	$out .= "\t\t}";
 
-	print JSON $out."\n";
+	if ($i<scalar(@cat)-2) {
+		$out .= ",";
+	}
+	
+	if (($outRA ne '') && ($outDE ne '') && ($flag == 1)) {
+	    print JSON $out."\n";
+	}
 }
 
 print JSON "\t}\n}\n";
