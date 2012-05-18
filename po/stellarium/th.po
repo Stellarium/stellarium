@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-10 19:57+0700\n"
-"PO-Revision-Date: 2012-05-11 13:43+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2012-05-04 02:16+0700\n"
+"PO-Revision-Date: 2012-05-17 02:33+0000\n"
+"Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-12 06:08+0000\n"
-"X-Generator: Launchpad (build 15225)\n"
+"X-Launchpad-Export-Date: 2012-05-18 04:38+0000\n"
+"X-Generator: Launchpad (build 15259)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -345,7 +345,7 @@ msgstr "มุมทิศ/มุมเงย: %1/%2"
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
-msgstr ""
+msgstr "ข้อผิดพลาดเกี่ยวกับเครือข่าย"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
@@ -353,19 +353,19 @@ msgstr ""
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
-msgstr ""
+msgstr "กำลังสืบค้น"
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "เกิดข้อผิดพลาด"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr ""
+msgstr "หาไม่พบ"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
-msgstr ""
+msgstr "พบ"
 
 #: src/gui/ConfigurationDialog.cpp:346
 msgid "Select screenshot directory"
@@ -898,19 +898,19 @@ msgstr "ลบ ๑ สัปดาห์ดาราคติ"
 
 #: src/gui/StelGui.cpp:168
 msgid "Add 1 sidereal month"
-msgstr ""
+msgstr "เพิ่ม 1 เดือนดาราคติ"
 
 #: src/gui/StelGui.cpp:169
 msgid "Subtract 1 sidereal month"
-msgstr ""
+msgstr "ลด 1 เดือนดาราคติ"
 
 #: src/gui/StelGui.cpp:170
 msgid "Add 1 sidereal year"
-msgstr ""
+msgstr "เพิ่ม 1 ปีดาราคติ"
 
 #: src/gui/StelGui.cpp:171
 msgid "Subtract 1 sidereal year"
-msgstr ""
+msgstr "ลด 1 ปีดาราคติ"
 
 #: src/gui/StelGui.cpp:174
 msgid "Center on selected object"
@@ -2980,23 +2980,23 @@ msgstr "ทรงกลมท้องฟ้า"
 
 #: src/ui_viewDialog.h:1162
 msgid "Show equator line"
-msgstr ""
+msgstr "แสดงเส้นศูนย์สูตร"
 
 #: src/ui_viewDialog.h:1166
 msgid "Show meridian line"
-msgstr ""
+msgstr "แสดงเส้นเมริเดียน"
 
 #: src/ui_viewDialog.h:1170
 msgid "Show horizon line"
-msgstr ""
+msgstr "แสดงเส้นขอบฟ้า"
 
 #: src/ui_viewDialog.h:1174
 msgid "Show ecliptic line"
-msgstr ""
+msgstr "แสดงเส้นสุริยวิถี"
 
 #: src/ui_viewDialog.h:1178
 msgid "Show Galactic plane line"
-msgstr ""
+msgstr "แสดงเส้นระนาบดาราจักร"
 
 #: src/ui_viewDialog.h:1182
 msgid "Projection"
@@ -5713,3 +5713,231 @@ msgstr "เชิงแสง, แผ่รังสีเอกซ์หรื�
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr "พัลซาร์นอกดาราจักรทางช้างเผือก (ในเมฆแมเจลแลน)"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "เส้นสุริยวิถี"
+
+#~ msgid "Sky Language: "
+#~ msgstr "ภาษาบนท้องฟ้า: "
+
+#~ msgid "Date & Time"
+#~ msgstr "วันและเวลา"
+
+#~ msgid "Set Location "
+#~ msgstr "ตั้งตำแหน่ง "
+
+#~ msgid "Set Time "
+#~ msgstr "ตั้งเวลา "
+
+#~ msgid "General "
+#~ msgstr "ทั่วไป "
+
+#~ msgid "Colors "
+#~ msgstr "สี "
+
+#~ msgid "Effects "
+#~ msgstr "เอฟเฟค "
+
+#~ msgid "Scripts "
+#~ msgstr "สคริปต์ "
+
+#~ msgid "Administration "
+#~ msgstr "ผู้บริหาร "
+
+#~ msgid "Latitude: "
+#~ msgstr "ละติจูด: "
+
+#~ msgid "Longitude: "
+#~ msgstr "ลองจิจูด : "
+
+#~ msgid "Sky Time: "
+#~ msgstr "เวลาท้องฟ้า: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "เวลาท้องฟ้าเมื่อเริ่มต้น: "
+
+#~ msgid "Actual Time"
+#~ msgstr "เวลาจริง"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "รูปแบบเวลา: "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "รูปแบบวันที่: "
+
+#~ msgid "Show: "
+#~ msgstr "แสดง: "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "เส้นกลุ่มดาว"
+
+#~ msgid "Constellation Names"
+#~ msgstr "ชื่อของกลุ่มดาว"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "อาณาเขตกลุ่มดาว"
+
+#~ msgid "Planet Names"
+#~ msgstr "ชื่อดาวเคราะห์"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "วงโคจรดาวเคราะห์"
+
+#~ msgid "Planet Trails"
+#~ msgstr "ทางเดินของดาวเคราะห์"
+
+#~ msgid "Nebula Names"
+#~ msgstr "ชื่อเนบิวลา"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "วงกลมเนบิวลา"
+
+#~ msgid "Manual zoom: "
+#~ msgstr "ซูมด้วยมือ: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "ใช้ลูกศรลงเพื่อโหลดรายการ"
+
+#~ msgid "Hydra"
+#~ msgstr "ไฮดรา"
+
+#~ msgid "Select and exit to run."
+#~ msgstr "เลือกและออกเพื่อเริ่มการใช้งาน"
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "ตัวคูณความใหญ่ซึ่งจัดกลุ่มตามขนาด : "
+
+#~ msgid "Calendar"
+#~ msgstr "ปฏิทิน"
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "ปริมาณมลภาวะทางแสง: "
+
+#~ msgid "Planets labels"
+#~ msgstr "ชื่อดาวเคราะห์"
+
+#~ msgid "Light pollution: "
+#~ msgstr "มลภาวะทางแสง: "
+
+#~ msgid "Art brightness: "
+#~ msgstr "ความสว่างของภาพวาด: "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "การจำกัดค่าความสว่าง "
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "ทิศทางการเริ่มต้นของการดู: xxxx"
+
+#~ msgid "Landscape: "
+#~ msgstr "ภูมิทัศน์: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "โหลดค่าเริ่มต้น: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "บันทึกค่าปัจจุบันเป็นค่าเริ่มต้น: "
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "พื้นที่การมองเห็นเริ่มต้น: XX"
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "การดาวน์โหลดแค็ตตาล็อกดาวเสร็จสมบูรณ์"
+
+#~ msgid "Stars "
+#~ msgstr "ดาวฤกษ์ "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "ระดับความสูง (ม.): "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "วัตถุในระบบสุริยะ "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "เขตเวลามาตรฐาน: "
+
+#~ msgid "Sidereal"
+#~ msgstr "เวลาดาราคติ"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "ความเข้มของภาพกลุ่มดาว"
+
+#~ msgid "Cardinal Points"
+#~ msgstr "ทิศทั้งสี่"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "กริดพิกัดศูนย์สูตร"
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "ความสว่างของทางช้างเผือก "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "เวลาปรากฏเคอร์เซอร์ "
+
+#~ msgid "Day keys: "
+#~ msgstr "กำหนดชนิดของวัน "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "ตั้งเวลาท้องฟ้าล่วงหน้า: "
+
+#~ msgid "Preset Time"
+#~ msgstr "เวลาที่ตั้งไว้ล่วงหน้า"
+
+#~ msgid "Sky Culture: "
+#~ msgstr "แสดงกลุ่มดาวตามวัฒนธรรม: "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "ตัวคูณค่าความสว่างของดาวฤกษ์: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "การกะพริบ: "
+
+#~ msgid "Equator Line"
+#~ msgstr "เส้นศูนย์สูตรฟ้า"
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "เกณฑ์การแสดงขนาดของวัตถุ: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "ช่วงเวลาการซูม: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "ปรับแก้โดยคำนึงถึงการเดินทางของแสง: "
+
+#~ msgid "Local Script: "
+#~ msgstr "สคริปต์ที่มีอยู่ในโปรแกรม: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "สคริปต์ที่มีอยู่ใน CD/DVD: "
+
+#~ msgid "USB Script: "
+#~ msgstr "สคริปต์ที่มีอยู่ใน USB: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "ปิดโปรแกรม: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "อัปเดตผ่านอินเทอร์เน็ต: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "เลือกภาษา: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "โชติมาตรสูงสุดที่จะแสดงชื่อ: "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "ตัวคูณการปรับตามโชติมาตร: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "โชติมาตรสูงสุดของเนบิวลาที่จะแสดงชื่อ: "
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "กริดมุมเงยมุมทิศ"
+
+#~ msgid "Meridian Line"
+#~ msgstr "เส้นเมริเดียน"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "รับแค็ตตาล็อกดาว x จาก y"
