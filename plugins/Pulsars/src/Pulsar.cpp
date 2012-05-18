@@ -120,13 +120,9 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		{
 			oss << q_("Barycentric period: %1 s").arg(QString::number(period, 'f', 16)) << "<br>";
 		}
-		if (frequency>0)
+		if (frequency>0 && period==0)
 		{
 			oss << q_("Barycentric rotation frequency: %1 Hz").arg(QString::number(frequency, 'f', 10)) << "<br>";
-		}
-		if (bperiod>0)
-		{
-			oss << q_("Binary period of pulsar: %1 days").arg(QString::number(bperiod, 'f', 12)) << "<br>";
 		}
 		if (pderivative>0)
 		{
@@ -144,13 +140,17 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			       .arg(q_("pc"));
 			oss << "<br>";
 		}
-		if (eccentricity>0)
-		{
-			oss << q_("Eccentricity: %1").arg(QString::number(eccentricity, 'f', 10)) << "<br>";
-		}
 		if (edot>0)
 		{
 			oss << q_("Spin down energy loss rate: %1 ergs/s").arg(QString::number(edot, 'f', 5)) << "<br>";
+		}
+		if (bperiod>0)
+		{
+			oss << q_("Binary period of pulsar: %1 days").arg(QString::number(bperiod, 'f', 12)) << "<br>";
+		}		
+		if (eccentricity>0)
+		{
+			oss << q_("Eccentricity: %1").arg(QString::number(eccentricity, 'f', 10)) << "<br>";
 		}
 		if (parallax>0)
 		{
