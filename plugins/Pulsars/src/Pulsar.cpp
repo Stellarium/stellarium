@@ -45,16 +45,21 @@ Pulsar::Pulsar(const QVariantMap& map)
 		return;
 		
 	designation  = map.value("designation").toString();
-	distance = map.value("distance").toFloat();
+	parallax = map.value("parallax").toFloat();
 	period = map.value("period").toDouble();
+	bperiod = map.value("bperiod").toDouble();
+	frequency = map.value("frequency").toDouble();
+	pderivative = map.value("pderivative").toDouble();
+	dmeasure = map.value("dmeasure").toDouble();
+	eccentricity = map.value("eccentricity").toDouble();
+	edot = map.value("edot").toDouble();
 	RA = StelUtils::getDecAngle(map.value("RA").toString());
-	DE = StelUtils::getDecAngle(map.value("DE").toString());
-	ntype = map.value("ntype").toInt();
-	We = map.value("We").toFloat();
+	DE = StelUtils::getDecAngle(map.value("DE").toString());	
 	w50 = map.value("w50").toFloat();
 	s400 = map.value("s400").toFloat();
 	s600 = map.value("s600").toFloat();
 	s1400 = map.value("s1400").toFloat();
+	distance = map.value("distance").toFloat();
 
 	initialized = true;
 }
@@ -68,16 +73,21 @@ QVariantMap Pulsar::getMap(void)
 {
 	QVariantMap map;
 	map["designation"] = designation;
-	map["distance"] = distance;
+	map["parallax"] = parallax;
+	map["bperiod"] = bperiod;
+	map["frequency"] = frequency;
+	map["pderivative"] = pderivative;
+	map["dmeasure"] = dmeasure;
+	map["eccentricity"] = eccentricity;
+	map["edot"] = edot;
 	map["RA"] = RA;
 	map["DE"] = DE;
-	map["period"] = period;
-	map["ntype"] = ntype;	
-	map["We"] = We;
+	map["period"] = period;	
 	map["w50"] = w50;
 	map["s400"] = s400;
 	map["s600"] = s600;
 	map["s1400"] = s1400;
+	map["distance"] = distance;
 
 	return map;
 }
@@ -106,19 +116,46 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Extra1)
 	{
-		oss << q_("Barycentric period: %1 s").arg(QString::number(period, 'f', 16)) << "<br>";
-		if (distance>0)
+		if (period>0)
 		{
-			oss << q_("Distance: %1 kpc (%2 ly)").arg(distance).arg(distance*3261.563777) << "<br>";
+			oss << q_("Barycentric period: %1 s").arg(QString::number(period, 'f', 16)) << "<br>";
 		}
-		if (ntype>0)
+		if (frequency>0)
 		{
-			oss << q_("Type of pulsar: %1").arg(getPulsarTypeInfoString(ntype)) << "<br>";
+			oss << q_("Barycentric rotation frequency: %1 Hz").arg(QString::number(frequency, 'f', 10)) << "<br>";
 		}
-		if (We>0)
+		if (bperiod>0)
 		{
-			oss << q_("Equivalent width of the integrated pulse profile: %1 ms").arg(QString::number(We, 'f', 2)) << "<br>";
+			oss << q_("Binary period of pulsar: %1 days").arg(QString::number(bperiod, 'f', 12)) << "<br>";
 		}
+		if (pderivative>0)
+		{
+			oss << q_("Time derivative of barcycentric period: %1").arg(QString::number(pderivative, 'e', 5)) << "<br>";
+		}
+		if (dmeasure>0)
+		{
+			oss << QString("%1 %2 %3<sup>-3</sup> %4 %5")
+			       .arg(q_("Dispersion measure:"))
+			       .arg(QString::number(dmeasure, 'f', 3))
+			       //TRANSLATORS: Unit of measurements (centimeners)
+			       .arg(q_("cm"))
+			       .arg(QChar(0x00B7))
+			       //TRANSLATORS: Unit of measurements (parsec)
+			       .arg(q_("pc"));
+			oss << "<br>";
+		}
+		if (eccentricity>0)
+		{
+			oss << q_("Eccentricity: %1").arg(QString::number(eccentricity, 'f', 10)) << "<br>";
+		}
+		if (edot>0)
+		{
+			oss << q_("Spin down energy loss rate: %1 ergs/s").arg(QString::number(edot, 'f', 5)) << "<br>";
+		}
+		if (parallax>0)
+		{
+			oss << q_("Annual parallax: %1 mas").arg(parallax) << "<br>";
+		}		
 		if (w50>0)
 		{
 			oss << q_("Profile width at 50% of peak: %1 ms").arg(QString::number(w50, 'f', 2)) << "<br>";
@@ -220,65 +257,4 @@ void Pulsar::draw(StelCore* core, StelPainter& painter)
 			painter.drawText(XYZ, designation, 0, shift, shift, false);
 		}
 	}
-}
-
-QString Pulsar::getPulsarTypeInfoString(const int flags) const
-{
-	QStringList out;
-
-	if (flags&C)
-	{
-		// TRANSLATORS: Type of pulsar
-		out.append(q_("globular cluster association"));
-	}
-
-	if (flags&S)
-	{
-		// TRANSLATORS: Type of pulsar
-		out.append(q_("SNR association"));
-	}
-
-	if (flags&G)
-	{
-		// TRANSLATORS: Type of pulsar
-		out.append(q_("glitches in period"));
-	}
-
-	if (flags&B)
-	{
-		// TRANSLATORS: Type of pulsar
-		out.append(q_("binary or multiple pulsar"));
-	}
-
-	if (flags&M)
-	{
-		// TRANSLATORS: Type of pulsar
-		out.append(q_("millisecond pulsar"));
-	}
-
-	if (flags&R)
-	{
-		// TRANSLATORS: Type of pulsar
-		out.append(q_("recycled pulsar"));
-	}
-
-	if (flags&I)
-	{
-		// TRANSLATORS: Type of pulsar
-		out.append(q_("radio interpulse"));
-	}
-
-	if (flags&H)
-	{
-		// TRANSLATORS: Type of pulsar
-		out.append(q_("optical, X-ray or Gamma-ray pulsed emission (high energy)"));
-	}
-
-	if (flags&E)
-	{
-		// TRANSLATORS: Type of pulsar
-		out.append(q_("extragalactic (in MC) pulsar"));
-	}
-
-	return out.join(", ");
 }
