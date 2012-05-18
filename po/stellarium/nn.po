@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-10 19:57+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
+"POT-Creation-Date: 2012-05-04 02:16+0700\n"
+"PO-Revision-Date: 2012-05-13 06:57+0000\n"
 "Last-Translator: Håkon Malmedal <hmalmedal@gmail.com>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-12 06:06+0000\n"
-"X-Generator: Launchpad (build 15225)\n"
+"X-Launchpad-Export-Date: 2012-05-14 04:42+0000\n"
+"X-Generator: Launchpad (build 15238)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -148,7 +148,7 @@ msgstr "Tilsynelatande diameter: %1"
 #: src/core/modules/Planet.cpp:189
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "Fasevinkel: %1"
 
 #: src/core/modules/Planet.cpp:190
 #, qt-format
@@ -1567,12 +1567,12 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
 msgid "Partial Lunar Eclipse"
-msgstr ""
+msgstr "Delvis månemørking"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:184
 msgid "Total Lunar Eclipse"
-msgstr ""
+msgstr "Total månemørking"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
@@ -1582,7 +1582,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:188
 msgid "Solar Eclipse 2009"
-msgstr ""
+msgstr "Solmørking 2009"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:190
@@ -1592,7 +1592,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:192
 msgid "Zodiac"
-msgstr ""
+msgstr "Dyrekrinsen"
 
 #: src/translations.h:195
 msgid "Look around each installed landscape."
@@ -5598,3 +5598,207 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "Sylinderprojisert rutenett"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "Planprojisert rutenett"
+
+#~ msgid "Equator Line"
+#~ msgstr "Ekvatorline"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "Ekliptisk line"
+
+#~ msgid "Cardinal Points"
+#~ msgstr "Himmelretningar"
+
+#~ msgid "Sky Language: "
+#~ msgstr "Språk på himmelen: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "Stjernebilete utfrå kultur: "
+
+#~ msgid "Date & Time"
+#~ msgstr "Dato og klokkeslett"
+
+#~ msgid "General "
+#~ msgstr "Generelt "
+
+#~ msgid "Stars "
+#~ msgstr "Stjerner "
+
+#~ msgid "Colors "
+#~ msgstr "Fargar "
+
+#~ msgid "Effects "
+#~ msgstr "Effekter "
+
+#~ msgid "Scripts "
+#~ msgstr "Skript "
+
+#~ msgid "Administration "
+#~ msgstr "Administrasjon "
+
+#~ msgid "Latitude: "
+#~ msgstr "Breiddegrad: "
+
+#~ msgid "Longitude: "
+#~ msgstr "Lengdegrad: "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Høgde (m): "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Heimeplanet i solsystemet: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Himmeltid: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Førehandsvald himmeltid: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Himmeltid ved oppstart: "
+
+#~ msgid "Actual Time"
+#~ msgstr "Faktisk tid"
+
+#~ msgid "Preset Time"
+#~ msgstr "Førehandsvald tid"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "Vising av tid: "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Vising av dato: "
+
+#~ msgid "Show: "
+#~ msgstr "Vis: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Maks lysstyrke før vising: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "Funkling: "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "Liner i stjernebilete"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Namn på stjernebilete"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Intensitet til stjernebilete - grafikk"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Grenser til stjernebilete"
+
+#~ msgid "Planet Names"
+#~ msgstr "Planetnamn"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Planetbanar"
+
+#~ msgid "Planet Trails"
+#~ msgstr "Planetspor"
+
+#~ msgid "Meridian Line"
+#~ msgstr "Meridianline"
+
+#~ msgid "Nebula Names"
+#~ msgstr "Namn på stjernetåker"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Stjernetåkesirklar"
+
+#~ msgid "Landscape: "
+#~ msgstr "Landskap: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Manuell zoom: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Regel for storleik på objekt: "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Intensitet for Mjølkevegen "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Maks lysstyrke på stjernetåke før vising: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Steg for zoom: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Fjern markør etter: "
+
+#~ msgid "Local Script: "
+#~ msgstr "Lokalt skript: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "CD/DVD-skript: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Hent standard oppsett: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Lagre dette oppsettet som standard: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "Avslutte: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Oppdater programmet via internett: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Språk i programmet: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "Pil ned for å vise liste."
+
+#~ msgid "Hydra"
+#~ msgstr "Vatnslangen"
+
+#~ msgid "Select and exit to run."
+#~ msgstr "Vel og lukk for å utføre."
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Multiplikator for lysstyrke: "
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "Lysstyrke på lysforureining: "
+
+#~ msgid "Calendar"
+#~ msgstr "Kalender"
+
+#~ msgid "USB Script: "
+#~ msgstr "USB-skript: "
+
+#~ msgid "Day keys: "
+#~ msgstr "Info om dagen: "
+
+#~ msgid "Sidereal"
+#~ msgstr "Kosmisk (sidereal)"
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "Faktor for forstørring: "
+
+#~ msgid "Light pollution: "
+#~ msgstr "Lysforureining: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "Korriger for lysfart: "
+
+#~ msgid "Planets labels"
+#~ msgstr "Planetnamn"
+
+#~ msgid "Set Location "
+#~ msgstr "Oppgje stad "
+
+#~ msgid "Set Time "
+#~ msgstr "Oppgje tid "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Oppgje tidssone: "

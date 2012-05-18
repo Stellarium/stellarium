@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-10 19:57+0700\n"
-"PO-Revision-Date: 2012-05-11 13:08+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2012-05-04 02:16+0700\n"
+"PO-Revision-Date: 2012-05-17 22:53+0000\n"
+"Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-12 06:00+0000\n"
-"X-Generator: Launchpad (build 15225)\n"
+"X-Launchpad-Export-Date: 2012-05-18 04:37+0000\n"
+"X-Generator: Launchpad (build 15259)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -4502,7 +4502,7 @@ msgstr "الأقمار الصناعية الجديدة"
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:212
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Discard"
-msgstr "لاتحتفظ"
+msgstr "أهمل هذه القائمة"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:150
@@ -5484,11 +5484,11 @@ msgstr "حدِّث العناصر المدارية فقط"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid "Mark all"
-msgstr "اختر الكل"
+msgstr "تحديد كل الأجرام"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Mark none"
-msgstr "لاتختر أحداً"
+msgstr "ألغ تحديد كل الأجرام"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid "Add objects"
@@ -5715,3 +5715,231 @@ msgstr "إطلاق نبضي ضوئي أو لأشعة إكس أو أشعة جام
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr "نجم نابض خارج المجرة في السحابة الماجلانية"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "الشبكة الاستوائية"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "الشبكة السمتية"
+
+#~ msgid "Equator Line"
+#~ msgstr "خط الاستواء"
+
+#~ msgid "Cardinal Points"
+#~ msgstr "الجهات الاربع"
+
+#~ msgid "Date & Time"
+#~ msgstr "التاريخ و التوقيت"
+
+#~ msgid "Set Location "
+#~ msgstr "حدد الموقع "
+
+#~ msgid "Set Time "
+#~ msgstr "حدد الوقت "
+
+#~ msgid "General "
+#~ msgstr "عام "
+
+#~ msgid "Stars "
+#~ msgstr "النجوم "
+
+#~ msgid "Effects "
+#~ msgstr "المؤثرات "
+
+#~ msgid "Actual Time"
+#~ msgstr "الوقت الفعلي"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "مدارات الكواكب"
+
+#~ msgid "Meridian Line"
+#~ msgstr "خط دائرة نصف النهار"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "دوائر السدم السماوية"
+
+#~ msgid "Hydra"
+#~ msgstr "الشجاع"
+
+#~ msgid "Light pollution: "
+#~ msgstr "التلوث الضوئي "
+
+#~ msgid "Planets labels"
+#~ msgstr "أسماء الكواكب"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Colors "
+#~ msgstr "الألوان "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "خطوط الكوكبات"
+
+#~ msgid "Constellation Names"
+#~ msgstr "اسماء الكوكبات"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "سطوع الرسوم الفنية للكوكبات"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "حدود الكوكبات"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "خط الدائرةالكسوفية"
+
+#~ msgid "Nebula Names"
+#~ msgstr "أسماء السدم"
+
+#~ msgid "Landscape: "
+#~ msgstr "المناظر الطبيعية‎: "
+
+#~ msgid "Latitude: "
+#~ msgstr "خط العرض‎: "
+
+#~ msgid "Longitude: "
+#~ msgstr "خط الطول‎: "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "(الارتفاع (م ‎: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "توقيت السماء‎: "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "حدد المنطقة الزمنية‎: "
+
+#~ msgid "Day keys: "
+#~ msgstr "مفاتيح اليوم‎: "
+
+#~ msgid "Calendar"
+#~ msgstr "تقويم"
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "(حدد الوقت المضبوط مسبقاً (في حالة عدم اختيار التوقيت الفعلي‎: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "توقيت السماء عند البدء‎: "
+
+#~ msgid "Preset Time"
+#~ msgstr "الوقت المضبوط مسبقاً"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "نمط عرض الوقت ‎: "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "نمط عرض التاريخ‎: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "التراث الفلكي‎: "
+
+#~ msgid "Sky Language: "
+#~ msgstr "اللغة‎: "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "مضاعف قيمة النجم‎: "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "مضاعف حجم قدر السطوع‎: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "إظهار أسماء النجوم الأكثر سطوعاً من القدر‎: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "التلألؤ "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "القدرالمحدد‎: "
+
+#~ msgid "Planet Names"
+#~ msgstr "أسماء الكواكب"
+
+#~ msgid "Planet Trails"
+#~ msgstr "مسار  الكوكب"
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "مستوى التلوث الضوئي‎: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "التقريب اليدوي‎: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "قاعدة تقدير حجم الجرم‎: "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "مضاعف مقياس القدر‎: "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "سطوع رسم درب التبانة‎: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "إظهار أسماء السدم عندما يكون قدر السطوع أكثر من‎: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "مدة التقريب‎: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "مهلة المؤشر‎: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "صحح لسرعة انتقال الضوء‎: "
+
+#~ msgid "Local Script: "
+#~ msgstr "نص برمجي محلي‎: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "نص برمجي في قرص مدمج أو ضوئي‎: "
+
+#~ msgid "USB Script: "
+#~ msgstr "نص برمجي في المنفذ التسلسلي‎: "
+
+#~ msgid "Select and exit to run."
+#~ msgstr "اختر واخرج من البرنامج للتنفيذ.‏"
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "حمل الإعدادات الأصلية‎: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "حدد لغة واجهة المستخدم‎: "
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "انتهى تحميل جميع أدلة النجوم!‏"
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "حقل الرؤية عند التشغيل :XX"
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "إتجاه الرؤية الذي يظهر عند التشغيل :XX"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "اجلب الدليل x من y"
+
+#~ msgid "Administration "
+#~ msgstr "الإدارة "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "جرم من المجموعة الشمسية‎: "
+
+#~ msgid "Sidereal"
+#~ msgstr "نجمي"
+
+#~ msgid "Show: "
+#~ msgstr "أظهر‎: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr ".مفتاح السهم السفلي لتحميل القائمة"
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "احفظ الإعدادات الحالية كأساسية‎: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "إغلاق‎: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "حدث بواسطة الإنترنت‎: "
+
+#~ msgid "Scripts "
+#~ msgstr "البرامج النصية "
+
+#~ msgid "Art brightness: "
+#~ msgstr "سطوع الرسومات "

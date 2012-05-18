@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-05-10 19:57+0700\n"
-"PO-Revision-Date: 2012-04-19 17:33+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2012-05-04 02:16+0700\n"
+"PO-Revision-Date: 2012-05-15 20:31+0000\n"
+"Last-Translator: chingis <chingis091@gmail.com>\n"
 "Language-Team: Kirghiz <ky@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-12 06:05+0000\n"
-"X-Generator: Launchpad (build 15225)\n"
+"X-Launchpad-Export-Date: 2012-05-16 04:48+0000\n"
+"X-Generator: Launchpad (build 15247)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -48,7 +48,7 @@ msgstr "Жайгашуу: "
 #: src/core/modules/LandscapeMgr.cpp:501
 #, qt-format
 msgid ", %1 m"
-msgstr ""
+msgstr ", %1 м"
 
 #: src/core/modules/LandscapeMgr.cpp:505
 msgid "Planet: "
@@ -75,7 +75,7 @@ msgstr "Чоңдук: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:109
 #, qt-format
 msgid "Size: %1"
-msgstr "Чени: %1"
+msgstr "Чен: %1"
 
 #: src/core/modules/Nebula.cpp:303
 msgid "Galaxy"
@@ -148,17 +148,17 @@ msgstr "Көрүнүүчү диаметр: %1"
 #: src/core/modules/Planet.cpp:189
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "Фаза бурчу: %1"
 
 #: src/core/modules/Planet.cpp:190
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "Узартуу: %1"
 
 #: src/core/modules/Planet.cpp:191
 #, qt-format
 msgid "Phase: %1"
-msgstr "Кез: %1"
+msgstr "Фаза: %1"
 
 #: src/core/modules/Planet.cpp:192
 #, qt-format
@@ -168,50 +168,50 @@ msgstr "Жаркыраганы: %1%"
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr ""
+msgstr "Чоңдук: <b>%1</b> (B-V: %2)"
 
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "Көрүнүүчү чоңдугу: <b>%1</b> (өчүү боюнча)"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "Чоңдук: <b>%1</b> (<b>%2</b>. B-V: <b>%3</b> өчүү)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr ""
+msgstr "Чоңдук: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
 #, qt-format
 msgid "Spectral Type: %1"
-msgstr ""
+msgstr "Спектрдик түр: %1"
 
 #: src/core/modules/StarWrapper.cpp:134
 #: plugins/Supernovae/src/Supernova.cpp:117
 #, qt-format
 msgid "Distance: %1 Light Years"
-msgstr ""
+msgstr "Ара: %1 жарык жылы"
 
 #: src/core/modules/StarWrapper.cpp:137
 #, qt-format
 msgid "Parallax: %1\""
-msgstr ""
+msgstr "Параллакс:%1\""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr ""
+msgstr "Аалам кемеси"
 
 #: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
-msgstr ""
+msgstr "Жогорчек кароо бурчу: "
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
-msgstr ""
+msgstr "Перспектива"
 
 #: src/core/StelProjectorClasses.cpp:30
 msgid ""
@@ -221,7 +221,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:63
 msgid "Equal Area"
-msgstr ""
+msgstr "Чоңдугу бирдей"
 
 #: src/core/StelProjectorClasses.cpp:68
 msgid ""
@@ -231,7 +231,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:108
 msgid "Stereographic"
-msgstr ""
+msgstr "Стереографиктик"
 
 #: src/core/StelProjectorClasses.cpp:113
 msgid ""
@@ -242,7 +242,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Fish-eye"
-msgstr ""
+msgstr "Балык көз"
 
 #: src/core/StelProjectorClasses.cpp:150
 msgid ""
