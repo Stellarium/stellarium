@@ -118,11 +118,16 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 		if (period>0)
 		{
+			//TRANSLATORS: Unit of measure for period - seconds
 			oss << q_("Barycentric period: %1 s").arg(QString::number(period, 'f', 16)) << "<br>";
 		}
 		if (frequency>0 && period==0)
 		{
 			oss << q_("Barycentric rotation frequency: %1 Hz").arg(QString::number(frequency, 'f', 10)) << "<br>";
+		}
+		if (bperiod>0)
+		{
+			oss << q_("Binary period of pulsar: %1 days").arg(QString::number(bperiod, 'f', 12)) << "<br>";
 		}
 		if (pderivative>0)
 		{
@@ -133,27 +138,24 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << QString("%1 %2 %3<sup>-3</sup> %4 %5")
 			       .arg(q_("Dispersion measure:"))
 			       .arg(QString::number(dmeasure, 'f', 3))
-			       //TRANSLATORS: Unit of measurements (centimeners)
+			       //TRANSLATORS: Unit of measure for distance - centimeters
 			       .arg(q_("cm"))
 			       .arg(QChar(0x00B7))
-			       //TRANSLATORS: Unit of measurements (parsec)
+			       //TRANSLATORS: Unit of measure for distance - parsecs
 			       .arg(q_("pc"));
 			oss << "<br>";
+		}
+		if (eccentricity>0)
+		{
+			oss << q_("Eccentricity: %1").arg(QString::number(eccentricity, 'f', 10)) << "<br>";
 		}
 		if (edot>0)
 		{
 			oss << q_("Spin down energy loss rate: %1 ergs/s").arg(QString::number(edot, 'f', 5)) << "<br>";
 		}
-		if (bperiod>0)
-		{
-			oss << q_("Binary period of pulsar: %1 days").arg(QString::number(bperiod, 'f', 12)) << "<br>";
-		}		
-		if (eccentricity>0)
-		{
-			oss << q_("Eccentricity: %1").arg(QString::number(eccentricity, 'f', 10)) << "<br>";
-		}
 		if (parallax>0)
 		{
+			//TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 			oss << q_("Annual parallax: %1 mas").arg(parallax) << "<br>";
 		}		
 		if (w50>0)
