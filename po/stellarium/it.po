@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-10 19:57+0700\n"
-"PO-Revision-Date: 2012-05-11 12:53+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2012-05-04 02:16+0700\n"
+"PO-Revision-Date: 2012-05-16 15:27+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-12 06:05+0000\n"
-"X-Generator: Launchpad (build 15225)\n"
+"X-Launchpad-Export-Date: 2012-05-17 04:35+0000\n"
+"X-Generator: Launchpad (build 15259)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -148,7 +148,7 @@ msgstr "Diametro apparente: %1"
 #: src/core/modules/Planet.cpp:189
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "Angolo di fase: %1"
 
 #: src/core/modules/Planet.cpp:190
 #, qt-format
@@ -347,7 +347,7 @@ msgstr "Az/Alt: %1/%2"
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
-msgstr ""
+msgstr "Errore di rete"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
@@ -355,19 +355,19 @@ msgstr ""
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
-msgstr ""
+msgstr "Interrogazione in corso"
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "Errore"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr ""
+msgstr "Non trovato"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
-msgstr ""
+msgstr "Trovato"
 
 #: src/gui/ConfigurationDialog.cpp:346
 msgid "Select screenshot directory"
@@ -707,7 +707,7 @@ msgstr "Griglia equatoriale (J2000)"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
-msgstr ""
+msgstr "Griglia ellittica J2000"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
@@ -5752,3 +5752,231 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr "pulsar extra-galattico (in MC)"
+
+#~ msgid "Equator Line"
+#~ msgstr "Linea dell'Equatore"
+
+#~ msgid "Cardinal Points"
+#~ msgstr "Punti Cardinali"
+
+#~ msgid "Date & Time"
+#~ msgstr "Data & Ora"
+
+#~ msgid "General "
+#~ msgstr "Generale "
+
+#~ msgid "Stars "
+#~ msgstr "Stelle "
+
+#~ msgid "Colors "
+#~ msgstr "Colori "
+
+#~ msgid "Effects "
+#~ msgstr "Effetti "
+
+#~ msgid "Administration "
+#~ msgstr "Amministrazione "
+
+#~ msgid "Latitude: "
+#~ msgstr "Latitudine: "
+
+#~ msgid "Longitude: "
+#~ msgstr "Longitudine: "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Altitudine (m): "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Ora Celeste: "
+
+#~ msgid "Show: "
+#~ msgstr "Mostra: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "Scintillìo: "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "Linee delle Costellazioni"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Nomi delle Costellazioni"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Intensità delle Figure delle Costellazioni"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Confini delle Costellazioni"
+
+#~ msgid "Planet Names"
+#~ msgstr "Nomi dei Pianeti"
+
+#~ msgid "Planet Trails"
+#~ msgstr "Traiettorie dei Pianeti"
+
+#~ msgid "Nebula Names"
+#~ msgstr "Nomi delle Nebulose"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Cerchi delle Nebulose"
+
+#~ msgid "Landscape: "
+#~ msgstr "Paesaggio: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Zoom manuale: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Regola di dimensionamento dell'oggetto "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Intensità della Via Lattea: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Durata dello Zoom: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Scadenza cursore: "
+
+#~ msgid "Local Script: "
+#~ msgstr "Script locale: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "Script CD/DVD: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "Spegni: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Aggiornami via Internet: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Imposta UI Locale: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "Freccia in giù per caricare la lista."
+
+#~ msgid "Hydra"
+#~ msgstr "Idra"
+
+#~ msgid "Select and exit to run."
+#~ msgstr "Seleziona ed esci per avviare."
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "Moltiplicatore di scala di magnitudine: "
+
+#~ msgid "Sidereal"
+#~ msgstr "Siderale"
+
+#~ msgid "Calendar"
+#~ msgstr "Calendario"
+
+#~ msgid "Set Time "
+#~ msgstr "Imposta l'ora "
+
+#~ msgid "Day keys: "
+#~ msgstr "Tasti dei giorni "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "Moltiplicatore del valore della Stella "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Ora celeste all'avvio: "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "Magnitudine limitata a: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "Correggi per il tempo del viaggio della luce: "
+
+#~ msgid "Art brightness: "
+#~ msgstr "Luminosità delle figure: "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Corpo Del Sistema Solare: "
+
+#~ msgid "Light pollution: "
+#~ msgstr "Inquinamento luminoso: "
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "Direzione di visualizzazione all'avvio: xxxx"
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "Direzione di vista all'avvio: XX"
+
+#~ msgid "Planets labels"
+#~ msgstr "Nomi dei pianeti"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "Scarica il catalogo x di y"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Actual Time"
+#~ msgstr "Ora presente"
+
+#~ msgid "Set Location "
+#~ msgstr "Imposta la località "
+
+#~ msgid "Scripts "
+#~ msgstr "Script "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Imposta Fuso Orario: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Pre-imposta Ora Celeste: "
+
+#~ msgid "Preset Time"
+#~ msgstr "Regolazione Ora"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "Formato ora "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Formato data "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "Cultura del Cielo: "
+
+#~ msgid "Sky Language: "
+#~ msgstr "Lingua Del Cielo: "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Moltiplicatore del valore di magnitudine: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Visualizzare il nome delle stelle fino alla magnitudine: "
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Orbite dei Pianeti"
+
+#~ msgid "Meridian Line"
+#~ msgstr "Meridiano Locale"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "Griglia Azimutale"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "Griglia Equatoriale"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "Eclittica"
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "Intensità dell'inquinamento luminoso: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Visualizzare i nomi delle nebulose fino alla magnitudine: "
+
+#~ msgid "USB Script: "
+#~ msgstr "Script USB "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Carica la configurazione predefinita: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Salva l'attuale configurazione come predefinita: "
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "Scaricamento di tutti i cataloghi di stelle completato."

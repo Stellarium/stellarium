@@ -17,15 +17,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-10 19:57+0700\n"
-"PO-Revision-Date: 2012-05-11 12:57+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2012-05-04 02:16+0700\n"
+"PO-Revision-Date: 2012-05-17 14:37+0000\n"
+"Last-Translator: xemard.nicolas <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-12 06:03+0000\n"
-"X-Generator: Launchpad (build 15225)\n"
+"X-Launchpad-Export-Date: 2012-05-18 04:38+0000\n"
+"X-Generator: Launchpad (build 15259)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -369,7 +369,7 @@ msgstr ""
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "Erreur"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
@@ -5737,12 +5737,12 @@ msgstr ""
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:250
 msgid "binary or multiple pulsar"
-msgstr ""
+msgstr "pulsar binaire ou multiple"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:256
 msgid "millisecond pulsar"
-msgstr ""
+msgstr "pulsar milliseconde"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:262
@@ -5765,3 +5765,231 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
+
+#~ msgid "Date & Time"
+#~ msgstr "Date & Heure"
+
+#~ msgid "General "
+#~ msgstr "Général "
+
+#~ msgid "Colors "
+#~ msgstr "Couleurs "
+
+#~ msgid "Effects "
+#~ msgstr "Effets "
+
+#~ msgid "Scripts "
+#~ msgstr "Scripts "
+
+#~ msgid "Administration "
+#~ msgstr "Administration "
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "Écliptique"
+
+#~ msgid "Cardinal Points"
+#~ msgstr "Points cardinaux"
+
+#~ msgid "Stars "
+#~ msgstr "Étoiles "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Temps sidéral : "
+
+#~ msgid "Actual Time"
+#~ msgstr "Heure actuelle"
+
+#~ msgid "Constellation Lines"
+#~ msgstr "Lignes des constellations"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Noms des constellations"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Limites des constellations"
+
+#~ msgid "Planet Names"
+#~ msgstr "Noms des planètes"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Orbites des planètes"
+
+#~ msgid "Planet Trails"
+#~ msgstr "Traînées des planètes"
+
+#~ msgid "Nebula Names"
+#~ msgstr "Noms des nébuleuses"
+
+#~ msgid "Select and exit to run."
+#~ msgstr "Sélectionner et quitter pour lancer."
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Rapport taille/magnitude : "
+
+#~ msgid "Sidereal"
+#~ msgstr "Sidéral"
+
+#~ msgid "Calendar"
+#~ msgstr "Calendrier"
+
+#~ msgid "USB Script: "
+#~ msgstr "Script USB: "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Intensité lumineuse de la Voie Lactée: "
+
+#~ msgid "Local Script: "
+#~ msgstr "Scripts locaux: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Taille des objets : "
+
+#~ msgid "Art brightness: "
+#~ msgstr "Luminosité des dessins : "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "Multiplicateur de luminosité des étoiles: "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "Limiter la magnitude: "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "Coefficient magnitude/taille: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Temps sidéral au démarrage: "
+
+#~ msgid "Show: "
+#~ msgstr "Afficher: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Langue: "
+
+#~ msgid "Light pollution: "
+#~ msgstr "Pollution lumineuse: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "Correction de voyage en temp lumière "
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "FOV au démarrage: XX"
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "Direction au démarrage: xxx"
+
+#~ msgid "Planets labels"
+#~ msgstr "Noms des planètes"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "Obtenir le catalogue x sur y"
+
+#~ msgid "Set Location "
+#~ msgstr "Paramétrer le lieu "
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "Téléchargement des catalogues stellaires achevé!"
+
+#~ msgid "Set Time "
+#~ msgstr "Paramétrer l'Heure "
+
+#~ msgid "Latitude: "
+#~ msgstr "Latitude: "
+
+#~ msgid "Longitude: "
+#~ msgstr "Longitude: "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Altitude (m): "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Corps céleste du Système Solaire: "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Définir le fuseau horaire: "
+
+#~ msgid "Day keys: "
+#~ msgstr "Touches des jours: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Temps sidéral prédéfini: "
+
+#~ msgid "Preset Time"
+#~ msgstr "Heure prédéfinie"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "Format d'affichage de l'heure: "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Format d'affichage de la date: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "Culture céleste: "
+
+#~ msgid "Sky Language: "
+#~ msgstr "Langue céleste: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Magnitude maximale à étiqueter: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "Scintillement: "
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Intensité des dessins des constellations"
+
+#~ msgid "Meridian Line"
+#~ msgstr "Ligne Méridienne"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "Grille Azimutale"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "Grille Équatoriale"
+
+#~ msgid "Equator Line"
+#~ msgstr "Equateur Céleste"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Nébuleuses cerclées"
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "Intensité de la pollution lumineuse: "
+
+#~ msgid "Landscape: "
+#~ msgstr "Paysage: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Zoom manuel: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Magnitude maximum des nébuleuses à étiqueter: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Durée du zoom: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Délai de validité du curseur: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "Scripts CD/DVD: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "Flèche bas pour charger la liste."
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Charger la configuration par défaut: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Utiliser la configuration courante comme configuration par défaut: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "Éteindre: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Mise à jour via Internet: "
+
+#~ msgid "Hydra"
+#~ msgstr "Hydra"
