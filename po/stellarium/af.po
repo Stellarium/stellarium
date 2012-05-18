@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-01-24 21:36+0000\n"
-"Last-Translator: Heinrich Kruger <heinrichk@gmail.com>\n"
+"PO-Revision-Date: 2012-05-11 09:46+0000\n"
+"Last-Translator: Marius Loots <Unknown>\n"
 "Language-Team: Afrikaans <af@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:37+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-12 05:12+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -128,7 +128,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:151
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "Afstand: %1AE (%2km)"
 
 #: src/core/modules/Planet.cpp:158
 #, no-c-format, qt-format
@@ -148,22 +148,22 @@ msgstr "Ooglopende deursnit: %1"
 #: src/core/modules/Planet.cpp:189
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "Fase hoek: %1"
 
 #: src/core/modules/Planet.cpp:190
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "Verlenging: %1"
 
 #: src/core/modules/Planet.cpp:191
 #, qt-format
 msgid "Phase: %1"
-msgstr ""
+msgstr "Fase: %1"
 
 #: src/core/modules/Planet.cpp:192
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr ""
+msgstr "Belig: %1%"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -371,42 +371,42 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr "Kies skermskoot vouer"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Aanvangs Oogveld: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Rigting van aanvangsoogpunt Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Outeurs"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "Kontak"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "Outeur"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "Lisensie"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "Loop skrip: "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "Loop skrip: [geen]"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -414,16 +414,16 @@ msgstr ""
 "Klaar nuwe sterkatalogusse afgelaai!\n"
 "Begin Stellarium weer om hulle te vertoon."
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Kry katalogus %1 of %2"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -432,7 +432,7 @@ msgstr ""
 "Aflaai %1...\n"
 "(Jy kan hierdie venster toemaak.)"
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -443,7 +443,7 @@ msgstr ""
 "Stertelling: %2 Miljoen\n"
 "Grootte reeks: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -452,11 +452,11 @@ msgstr ""
 "Fout met aflaai %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "Verifieer legger integriteit..."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -764,7 +764,7 @@ msgstr "Sterre"
 #: src/gui/StelGui.cpp:127
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Planet labels"
-msgstr ""
+msgstr "Planeet merkers"
 
 #: src/gui/StelGui.cpp:128
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:301
@@ -1091,11 +1091,11 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
-msgstr ""
+msgstr "natuurlik"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
-msgstr ""
+msgstr "sterre kaart"
 
 #: src/gui/SearchDialog.cpp:351
 msgid "Simbad Lookup Error"
@@ -1107,11 +1107,11 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:507
 msgid "University of Strasbourg (France)"
-msgstr ""
+msgstr "Universiteit  Strasbourg (Frankryk)"
 
 #: src/gui/SearchDialog.cpp:508
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "Harvard Universiteit (VSA)"
 
 #: src/main.cpp:337
 msgid "This system does not support OpenGL."
@@ -1553,7 +1553,7 @@ msgstr ""
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:170
 msgid "Ocean"
-msgstr ""
+msgstr "Oseaan"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:172
@@ -1563,7 +1563,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
 msgid "Landscape Tour"
-msgstr ""
+msgstr "Landskap toer"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
@@ -1578,7 +1578,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
 msgid "Screensaver"
-msgstr ""
+msgstr "Sluimerskerm"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:188
@@ -1750,11 +1750,11 @@ msgstr "Bahamas"
 
 #: src/translations.h:234
 msgid "Bhutan"
-msgstr ""
+msgstr "Bhutan"
 
 #: src/translations.h:235
 msgid "Bouvet Island"
-msgstr ""
+msgstr "Bouveteiland"
 
 #: src/translations.h:236
 msgid "Botswana"
@@ -1762,11 +1762,11 @@ msgstr "Botswana"
 
 #: src/translations.h:237
 msgid "Belarus"
-msgstr ""
+msgstr "Belarus"
 
 #: src/translations.h:238
 msgid "Belize"
-msgstr ""
+msgstr "Belize"
 
 #: src/translations.h:239
 msgid "Canada"
@@ -1778,7 +1778,7 @@ msgstr ""
 
 #: src/translations.h:241
 msgid "Democratic Republic of the Congo"
-msgstr ""
+msgstr "Demokratiese Republief van die Kongo"
 
 #: src/translations.h:242
 msgid "Central African Republic"
@@ -1790,7 +1790,7 @@ msgstr "Republiek van die Kongo"
 
 #: src/translations.h:244
 msgid "Switzerland"
-msgstr ""
+msgstr "Switserland"
 
 #: src/translations.h:245
 msgid "Cote d'Ivoire"
@@ -1798,15 +1798,15 @@ msgstr "Ivoorkus"
 
 #: src/translations.h:246
 msgid "Cook Islands"
-msgstr ""
+msgstr "Cook Eilande"
 
 #: src/translations.h:247
 msgid "Chile"
-msgstr ""
+msgstr "Chile"
 
 #: src/translations.h:248
 msgid "Cameroon"
-msgstr ""
+msgstr "Kameroen"
 
 #: src/translations.h:249
 msgid "China"
@@ -1814,59 +1814,59 @@ msgstr "China"
 
 #: src/translations.h:250
 msgid "Colombia"
-msgstr ""
+msgstr "Colombië"
 
 #: src/translations.h:251
 msgid "Costa Rica"
-msgstr ""
+msgstr "Costa Rica"
 
 #: src/translations.h:252
 msgid "Serbia and Montenegro"
-msgstr ""
+msgstr "Serwië en Montenegro"
 
 #: src/translations.h:253
 msgid "Cuba"
-msgstr ""
+msgstr "Kuba"
 
 #: src/translations.h:254
 msgid "Cape Verde"
-msgstr ""
+msgstr "Kaap Verde"
 
 #: src/translations.h:255
 msgid "Christmas Island"
-msgstr ""
+msgstr "Kersfees Eiland"
 
 #: src/translations.h:256
 msgid "Cyprus"
-msgstr ""
+msgstr "Ciprus"
 
 #: src/translations.h:257
 msgid "Czech Republic"
-msgstr ""
+msgstr "Tjeggiese Republiek"
 
 #: src/translations.h:258
 msgid "Germany"
-msgstr ""
+msgstr "Duitsland"
 
 #: src/translations.h:259
 msgid "Djibouti"
-msgstr ""
+msgstr "Djibouti"
 
 #: src/translations.h:260
 msgid "Denmark"
-msgstr ""
+msgstr "Denemarke"
 
 #: src/translations.h:261
 msgid "Dominica"
-msgstr ""
+msgstr "Dominika"
 
 #: src/translations.h:262
 msgid "Dominican Republic"
-msgstr ""
+msgstr "Dominikaanse Republiek"
 
 #: src/translations.h:263
 msgid "Algeria"
-msgstr ""
+msgstr "Algerië"
 
 #: src/translations.h:264
 msgid "Ecuador"
@@ -1878,55 +1878,55 @@ msgstr ""
 
 #: src/translations.h:266
 msgid "Egypt"
-msgstr ""
+msgstr "Egipte"
 
 #: src/translations.h:267
 msgid "Western Sahara"
-msgstr ""
+msgstr "Wes-Sahara"
 
 #: src/translations.h:268
 msgid "Eritrea"
-msgstr ""
+msgstr "Eritrea"
 
 #: src/translations.h:269
 msgid "Spain"
-msgstr ""
+msgstr "Spanje"
 
 #: src/translations.h:270
 msgid "Ethiopia"
-msgstr ""
+msgstr "Ethiopië"
 
 #: src/translations.h:271
 msgid "Finland"
-msgstr ""
+msgstr "Finland"
 
 #: src/translations.h:272
 msgid "Fiji"
-msgstr ""
+msgstr "Fiji"
 
 #: src/translations.h:273
 msgid "Falkland Islands"
-msgstr ""
+msgstr "Falklandeilande"
 
 #: src/translations.h:274
 msgid "Micronesia"
-msgstr ""
+msgstr "Mikronesië"
 
 #: src/translations.h:275
 msgid "Faroe Islands"
-msgstr ""
+msgstr "Faroe Eilande"
 
 #: src/translations.h:276
 msgid "France"
-msgstr ""
+msgstr "Frankryk"
 
 #: src/translations.h:277
 msgid "Gabon"
-msgstr ""
+msgstr "Gabon"
 
 #: src/translations.h:278
 msgid "United Kingdom"
-msgstr ""
+msgstr "Verenigde Koninkryk"
 
 #: src/translations.h:279
 msgid "Grenada"
@@ -1934,43 +1934,43 @@ msgstr ""
 
 #: src/translations.h:280
 msgid "Georgia"
-msgstr ""
+msgstr "Georgië"
 
 #: src/translations.h:281
 msgid "French Guiana"
-msgstr ""
+msgstr "Frans-Guinee"
 
 #: src/translations.h:282
 msgid "Ghana"
-msgstr ""
+msgstr "Ghana"
 
 #: src/translations.h:283
 msgid "Gibraltar"
-msgstr ""
+msgstr "Gibraltar"
 
 #: src/translations.h:284
 msgid "Greenland"
-msgstr ""
+msgstr "Groenland"
 
 #: src/translations.h:285
 msgid "Gambia"
-msgstr ""
+msgstr "Gambië"
 
 #: src/translations.h:286
 msgid "Guinea"
-msgstr ""
+msgstr "Guinea"
 
 #: src/translations.h:287
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Guadeloupe"
 
 #: src/translations.h:288
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "Ekwatoriaal Guinea"
 
 #: src/translations.h:289
 msgid "Greece"
-msgstr ""
+msgstr "Griekeland"
 
 #: src/translations.h:290
 msgid "South Georgia and the South Sandwich Islands"
@@ -1978,23 +1978,23 @@ msgstr ""
 
 #: src/translations.h:291
 msgid "Guatemala"
-msgstr ""
+msgstr "Gautemala"
 
 #: src/translations.h:292
 msgid "Guam"
-msgstr ""
+msgstr "Guam"
 
 #: src/translations.h:293
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Guinea-Bissau"
 
 #: src/translations.h:294
 msgid "Guyana"
-msgstr ""
+msgstr "Guyana"
 
 #: src/translations.h:295
 msgid "Hong Kong"
-msgstr ""
+msgstr "Hong Kong"
 
 #: src/translations.h:296
 msgid "Heard Island and McDonald Islands"
@@ -2002,7 +2002,7 @@ msgstr ""
 
 #: src/translations.h:297
 msgid "Honduras"
-msgstr ""
+msgstr "Honduras"
 
 #: src/translations.h:298
 msgid "Croatia"
@@ -2010,27 +2010,27 @@ msgstr ""
 
 #: src/translations.h:299
 msgid "Haiti"
-msgstr ""
+msgstr "Haïti"
 
 #: src/translations.h:300
 msgid "Hungary"
-msgstr ""
+msgstr "Hongarye"
 
 #: src/translations.h:301
 msgid "Indonesia"
-msgstr ""
+msgstr "Indonesië"
 
 #: src/translations.h:302
 msgid "Ireland"
-msgstr ""
+msgstr "Ierland"
 
 #: src/translations.h:303
 msgid "Israel"
-msgstr ""
+msgstr "Israel"
 
 #: src/translations.h:304
 msgid "India"
-msgstr ""
+msgstr "Indië"
 
 #: src/translations.h:305
 msgid "British Indian Ocean Territory"
@@ -2038,19 +2038,19 @@ msgstr ""
 
 #: src/translations.h:306
 msgid "Iraq"
-msgstr ""
+msgstr "Irak"
 
 #: src/translations.h:307
 msgid "Iran"
-msgstr ""
+msgstr "Iran"
 
 #: src/translations.h:308
 msgid "Iceland"
-msgstr ""
+msgstr "Ysland"
 
 #: src/translations.h:309
 msgid "Italy"
-msgstr ""
+msgstr "Italië"
 
 #: src/translations.h:310
 msgid "Jamaica"
@@ -2058,11 +2058,11 @@ msgstr ""
 
 #: src/translations.h:311
 msgid "Jordan"
-msgstr ""
+msgstr "Jordanië"
 
 #: src/translations.h:312
 msgid "Japan"
-msgstr ""
+msgstr "Japan"
 
 #: src/translations.h:313
 msgid "Kenya"
@@ -2070,7 +2070,7 @@ msgstr ""
 
 #: src/translations.h:314
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "Kyrgyzstan"
 
 #: src/translations.h:315
 msgid "Cambodia"
@@ -2098,7 +2098,7 @@ msgstr ""
 
 #: src/translations.h:321
 msgid "Kuwait"
-msgstr ""
+msgstr "Koeweit"
 
 #: src/translations.h:322
 msgid "Cayman Islands"
@@ -2106,15 +2106,15 @@ msgstr ""
 
 #: src/translations.h:323
 msgid "Kazakhstan"
-msgstr ""
+msgstr "Kazakhstan"
 
 #: src/translations.h:324
 msgid "Lao"
-msgstr ""
+msgstr "Lao"
 
 #: src/translations.h:325
 msgid "Lebanon"
-msgstr ""
+msgstr "Libanon"
 
 #: src/translations.h:326
 msgid "Saint Lucia"
@@ -2122,23 +2122,23 @@ msgstr ""
 
 #: src/translations.h:327
 msgid "Liechtenstein"
-msgstr ""
+msgstr "Liechtenstein"
 
 #: src/translations.h:328
 msgid "Sri Lanka"
-msgstr ""
+msgstr "Sri Lanka"
 
 #: src/translations.h:329
 msgid "Liberia"
-msgstr ""
+msgstr "Liberië"
 
 #: src/translations.h:330
 msgid "Lesotho"
-msgstr ""
+msgstr "Lesotho"
 
 #: src/translations.h:331
 msgid "Lithuania"
-msgstr ""
+msgstr "Lithuanië"
 
 #: src/translations.h:332
 msgid "Luxembourg"
@@ -2146,7 +2146,7 @@ msgstr ""
 
 #: src/translations.h:333
 msgid "Latvia"
-msgstr ""
+msgstr "Latvia"
 
 #: src/translations.h:334
 msgid "Libyan Arab Jamahiriya"
@@ -2154,11 +2154,11 @@ msgstr ""
 
 #: src/translations.h:335
 msgid "Morocco"
-msgstr ""
+msgstr "Morokko"
 
 #: src/translations.h:336
 msgid "Monaco"
-msgstr ""
+msgstr "Monako"
 
 #: src/translations.h:337
 msgid "Moldova"
@@ -2166,11 +2166,11 @@ msgstr ""
 
 #: src/translations.h:338
 msgid "Madagascar"
-msgstr ""
+msgstr "Madagaskar"
 
 #: src/translations.h:339
 msgid "Marshall Islands"
-msgstr ""
+msgstr "Marshall EIlande"
 
 #: src/translations.h:340
 msgid "Macedonia"
@@ -2178,15 +2178,15 @@ msgstr ""
 
 #: src/translations.h:341
 msgid "Mali"
-msgstr ""
+msgstr "Mali"
 
 #: src/translations.h:342
 msgid "Myanmar"
-msgstr ""
+msgstr "Myanmar"
 
 #: src/translations.h:343
 msgid "Mongolia"
-msgstr ""
+msgstr "Mongolië"
 
 #: src/translations.h:344
 msgid "Macau"
@@ -2206,11 +2206,11 @@ msgstr ""
 
 #: src/translations.h:348
 msgid "Montserrat"
-msgstr ""
+msgstr "Montserrat"
 
 #: src/translations.h:349
 msgid "Malta"
-msgstr ""
+msgstr "Malta"
 
 #: src/translations.h:350
 msgid "Mauritius"
@@ -2222,7 +2222,7 @@ msgstr ""
 
 #: src/translations.h:352
 msgid "Malawi"
-msgstr ""
+msgstr "Malawi"
 
 #: src/translations.h:353
 msgid "Mexico"
@@ -2234,11 +2234,11 @@ msgstr ""
 
 #: src/translations.h:355
 msgid "Mozambique"
-msgstr ""
+msgstr "Mosambiek"
 
 #: src/translations.h:356
 msgid "Namibia"
-msgstr ""
+msgstr "Namibië"
 
 #: src/translations.h:357
 msgid "New Caledonia"
@@ -2246,15 +2246,15 @@ msgstr ""
 
 #: src/translations.h:358
 msgid "Niger"
-msgstr ""
+msgstr "Niger"
 
 #: src/translations.h:359
 msgid "Norfolk Island"
-msgstr ""
+msgstr "Norfolk Eiland"
 
 #: src/translations.h:360
 msgid "Nigeria"
-msgstr ""
+msgstr "Nigerië"
 
 #: src/translations.h:361
 msgid "Nicaragua"
@@ -2262,19 +2262,19 @@ msgstr ""
 
 #: src/translations.h:362
 msgid "Netherlands"
-msgstr ""
+msgstr "Nederland"
 
 #: src/translations.h:363
 msgid "Norway"
-msgstr ""
+msgstr "Noorweë"
 
 #: src/translations.h:364
 msgid "Nepal"
-msgstr ""
+msgstr "Nepal"
 
 #: src/translations.h:365
 msgid "Nauru"
-msgstr ""
+msgstr "Nauru"
 
 #: src/translations.h:366
 msgid "Niue"
@@ -2282,19 +2282,19 @@ msgstr ""
 
 #: src/translations.h:367
 msgid "New Zealand"
-msgstr ""
+msgstr "Nieu-Seeland"
 
 #: src/translations.h:368
 msgid "Oman"
-msgstr ""
+msgstr "Oman"
 
 #: src/translations.h:369
 msgid "Panama"
-msgstr ""
+msgstr "Panama"
 
 #: src/translations.h:370
 msgid "Peru"
-msgstr ""
+msgstr "Peru"
 
 #: src/translations.h:371
 msgid "French Polynesia"
@@ -2306,15 +2306,15 @@ msgstr ""
 
 #: src/translations.h:373
 msgid "Philippines"
-msgstr ""
+msgstr "Fillipyne"
 
 #: src/translations.h:374
 msgid "Pakistan"
-msgstr ""
+msgstr "Pakistan"
 
 #: src/translations.h:375
 msgid "Poland"
-msgstr ""
+msgstr "Pole"
 
 #: src/translations.h:376
 msgid "Saint Pierre and Miquelon"
@@ -5488,7 +5488,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:59
 msgid "Historical Supernovae"
-msgstr ""
+msgstr "Historiese Supernovas"
 
 #: plugins/Supernovae/src/Supernovae.cpp:62
 msgid ""
@@ -5502,12 +5502,12 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernova.cpp:99
 msgid "supernova"
-msgstr ""
+msgstr "supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:115
 #, qt-format
 msgid "Type of supernova: %1"
-msgstr ""
+msgstr "Tipe supernova: %1"
 
 #: plugins/Quasars/src/Quasars.cpp:59
 msgid "Quasars"
@@ -5567,7 +5567,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:124
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
-msgstr ""
+msgstr "Profiel wydte by 50% van piek: %1 ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:130 plugins/Pulsars/src/Pulsar.cpp:142
@@ -5579,13 +5579,13 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:133 plugins/Pulsars/src/Pulsar.cpp:145
 #: plugins/Pulsars/src/Pulsar.cpp:157
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:136 plugins/Pulsars/src/Pulsar.cpp:148
 #: plugins/Pulsars/src/Pulsar.cpp:160
 msgid "mJy"
-msgstr ""
+msgstr "mJy"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:232

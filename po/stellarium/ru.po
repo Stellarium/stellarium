@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-05-03 18:56+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-05-06 15:03+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:42+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:07+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -372,42 +372,42 @@ msgstr "Найдено совпадение"
 msgid "Select screenshot directory"
 msgstr "Выберите папку для снимков экрана"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Начальное поле зрения: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Начальное направление обзора аз/выс: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Разработчики"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "Обратная связь"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "Автор"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "Лицензия"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "Запущенный сценарий: "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "Запущенный сценарий: [нет]"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -415,16 +415,16 @@ msgstr ""
 "Загрузка новых каталогов звёзд завершена.\n"
 "Перезапустите Stellarium для их отображения."
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr "Все доступные звёздные каталоги установлены."
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Получение каталога %1 из %2"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -433,7 +433,7 @@ msgstr ""
 "Загрузка %1...\n"
 "(Вы можете закрыть это окно.)"
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -444,7 +444,7 @@ msgstr ""
 "Количество звёзд: %2 миллиона\n"
 "Диапазон звёздных величин: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -453,11 +453,11 @@ msgstr ""
 "Ошибка при загрузке %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "Проверка целостности файлов..."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2133,7 +2133,7 @@ msgstr "Шри-Ланка"
 
 #: src/translations.h:329
 msgid "Liberia"
-msgstr "Ливия"
+msgstr "Либерия"
 
 #: src/translations.h:330
 msgid "Lesotho"
@@ -3094,11 +3094,11 @@ msgstr "Сохранить настройки"
 
 #: src/ui_configurationDialog.h:811
 msgid "Restore the default settings that came with Stellarium"
-msgstr "Восстановить стандартные настройки"
+msgstr "Первоначальные настройки"
 
 #: src/ui_configurationDialog.h:813
 msgid "Restore defaults"
-msgstr "Восстановить настройки по умолчанию"
+msgstr "Первоначальные настройки"
 
 #: src/ui_configurationDialog.h:814
 msgid ""
@@ -3106,9 +3106,9 @@ msgid ""
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr ""
-"Восстановление настроек по умолчанию требует перезапуска Stellarium. "
-"Сохранение всех текущих настроек, включая поле и направление обзора, для "
-"использования при следующем запуске."
+"Восстановление первоначальных настроек требует перезапуска Stellarium. "
+"Сохранение всех текущих настроек, включая поле зрения и направление обзора, "
+"для использования при следующем запуске."
 
 #: src/ui_configurationDialog.h:816
 msgid "The width of your view when Stellarium starts"
@@ -4407,7 +4407,7 @@ msgstr "Длина:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:672
 msgid "Restore default settings"
-msgstr "Восстановить настройки"
+msgstr "Первоначальные настройки"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
 msgid "Save settings as default"
@@ -5739,234 +5739,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr "внегалактический (в МО) пульсар"
-
-#~ msgid "Equator Line"
-#~ msgstr "Линия экватора"
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Культура неба : "
-
-#~ msgid "Date & Time"
-#~ msgstr "Дата и Время"
-
-#~ msgid "Set Location "
-#~ msgstr "Задать местоположение "
-
-#~ msgid "General "
-#~ msgstr "Общее "
-
-#~ msgid "Colors "
-#~ msgstr "Цвета "
-
-#~ msgid "Effects "
-#~ msgstr "Эффекты "
-
-#~ msgid "Scripts "
-#~ msgstr "Сценарии "
-
-#~ msgid "Administration "
-#~ msgstr "Администрирование "
-
-#~ msgid "Latitude: "
-#~ msgstr "Широта: "
-
-#~ msgid "Longitude: "
-#~ msgstr "Долгота: "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Высота (м): "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Астрономич. время: "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Установить часовой пояс: "
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Заданное астрономич. время: "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Астрономич. время при загрузке: "
-
-#~ msgid "Preset Time"
-#~ msgstr "Заданное время"
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Формат отображения времени: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Формат отображения даты: "
-
-#~ msgid "Show: "
-#~ msgstr "Показать: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "Мерцание: "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Линии созвездий"
-
-#~ msgid "Constellation Names"
-#~ msgstr "Названия созвездий"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Яркость изображения созвездий"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Границы созвездий"
-
-#~ msgid "Planet Names"
-#~ msgstr "Названия планет"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Орбиты планет"
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Яркость Млечного Пути: "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Простой курсора: "
-
-#~ msgid "Local Script: "
-#~ msgstr "Локальный сценарий: "
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Загрузить настройки по умолчанию: "
-
-#~ msgid "Shut Down: "
-#~ msgstr "Завершение работы: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Обновить через Интернет: "
-
-#~ msgid "Hydra"
-#~ msgstr "Гидра"
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Стороны света"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Азимутальная сетка"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "Экваториальная сетка"
-
-#~ msgid "Set Time "
-#~ msgstr "Задать время "
-
-#~ msgid "Nebula Names"
-#~ msgstr "Названия туманностей"
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "Яркость светового загрязнения: "
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "Множитель яркости звёзд: "
-
-#~ msgid "Calendar"
-#~ msgstr "Календарь"
-
-#~ msgid "Day keys: "
-#~ msgstr "Подсказки по дням "
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Линия эклиптики"
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Тело Солнечной системы: "
-
-#~ msgid "Landscape: "
-#~ msgstr "Ландшафт: "
-
-#~ msgid "Art brightness: "
-#~ msgstr "Яркость изображений: "
-
-#~ msgid "Light pollution: "
-#~ msgstr "Световое загрязнение: "
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "Начальное поле зрения: XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "Начальное направление обзора: xxxx"
-
-#~ msgid "Planets labels"
-#~ msgstr "Метки планет"
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "Корректировка на скорость света "
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Предельная звёздная величина: "
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "Получить каталог x из y"
-
-#~ msgid "Meridian Line"
-#~ msgstr "Меридиан"
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "Загрузка всех звёздных каталогов закончена!"
-
-#~ msgid "Stars "
-#~ msgstr "Звёзды "
-
-#~ msgid "Sidereal"
-#~ msgstr "Звёздный (сидерический)"
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Масштабный коэфф. звёздной величины "
-
-#~ msgid "Planet Trails"
-#~ msgstr "Траектории планет"
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Правило масштабирования объектов: "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "Масштабный коэффициент яркости звезд : "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "Наиб. звёздн. вел. туманностей для обозначения: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "CD/DVD-сценарий: "
-
-#~ msgid "USB Script: "
-#~ msgstr "USB-сценарий: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Стрелка вниз для загрузки списка."
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Выбрать и выйти для запуска."
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Сохранить текущие настройки как используемые по умолчанию: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Локаль пользовательского интерфейса: "
-
-#~ msgid "Actual Time"
-#~ msgstr "Фактическое время"
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Ручное масштабирование: "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "Макс. звёздная величина для подписей: "
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Окружности вокруг туманностей"
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Продолжительность масштабирования: "
-
-#~ msgid "Sky Language: "
-#~ msgstr "Язык небесных названий: "
-
-#~ msgid "Search also in the SIMBAD on-line astronomical database"
-#~ msgstr "Поиск также в астрономической базе данных SIMBAD"

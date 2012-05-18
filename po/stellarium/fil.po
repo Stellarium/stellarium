@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2011-04-14 15:33+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: Ron Philip Gutierrez <iamronipe@gmail.com>\n"
 "Language-Team: Filipino <fil@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:45+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:10+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -367,42 +367,42 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr "Piliin ang directory para sa mga screenshot"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Mga May-Akda"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "May-akdâ"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "Pahintulot"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "Running script: "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "Pinatatakbo ang script: [wala]"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -410,23 +410,23 @@ msgstr ""
 "Tapos nang i-download ang mga bagong talaan ng mga bituin!\n"
 "Isara at buksan muli ang Stellarium upang makita ang mga ito."
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Kinukuha ang talaan %1 ng %2"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -434,7 +434,7 @@ msgid ""
 "Magnitude range: %3 - %4"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -443,11 +443,11 @@ msgstr ""
 "Pagkakamali sa pag-download %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5585,198 +5585,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Mga Direksyon"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Azimuthal Grid"
-
-#~ msgid "Equator Line"
-#~ msgstr "Linya ng Equator"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Linya ng Ecliptic"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "Equatorial Grid"
-
-#~ msgid "Sky Language: "
-#~ msgstr "Wika ng Langit: "
-
-#~ msgid "Date & Time"
-#~ msgstr "Petsa &Oras"
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Multiplier para sa Paglaki: "
-
-#~ msgid "Effects "
-#~ msgstr "Mga Effect "
-
-#~ msgid "Stars "
-#~ msgstr "Mga Bituin "
-
-#~ msgid "General "
-#~ msgstr "Pangkalahatan "
-
-#~ msgid "Scripts "
-#~ msgstr "Mga Script "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Taas (m): "
-
-#~ msgid "Latitude: "
-#~ msgstr "Latitude: "
-
-#~ msgid "Longitude: "
-#~ msgstr "Longitude: "
-
-#~ msgid "Actual Time"
-#~ msgstr "Kasalukuyang Oras"
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Paraan ng Pagpapakita ng Petsa: "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Solar System Body: "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Oras ng Kalangitan: "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Oras ng Kalangitan sa Pagsimula: "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Ibigay ang Time Zone: "
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Paunang Oras ng Kalangitan: "
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Paraan ng Pagpapakita ng Oras: "
-
-#~ msgid "Show: "
-#~ msgstr "Ipakita: "
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Liwanag ng Larawan ng mga Konstelasyon"
-
-#~ msgid "Planet Names"
-#~ msgstr "Pangalan ng mga Planeta"
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "Pinakamaliwanag para sa Pangalan: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "Pagkutitap: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Gabay sa Pagpapalaki ng mga Bagay "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Manual zoom: "
-
-#~ msgid "Landscape: "
-#~ msgstr "Tanawin: "
-
-#~ msgid "Nebula Names"
-#~ msgstr "Pangalan ng mga Nebula"
-
-#~ msgid "Meridian Line"
-#~ msgstr "Linya ng Meridian"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Lipon ng mga Nebula"
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Mag-Update mula sa Internet: "
-
-#~ msgid "Local Script: "
-#~ msgstr "Local Script: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "CD/DVD Script: "
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Gamitin ang Default na Kaayusan: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "I-save ang Kasalukuyang Kaayusan bilang Default: "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Timeout ng Cursor: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Tagal ng pag-Zoom: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "Pinakamaliwanag ng Nebula sa Pangalan: "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Liwanag ng Milky Way "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Ibigay ang UI Locale: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Mag-arrow down para ipakita ang listahan."
-
-#~ msgid "Hydra"
-#~ msgstr "Hydra"
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "Light Pollution Luminance: "
-
-#~ msgid "Calendar"
-#~ msgstr "Kalendaryo"
-
-#~ msgid "Set Location "
-#~ msgstr "Itakdâ ang Kinaroroónan "
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Hangganan ng mga Konstelasyon"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Mga Orbit ng mga Planéta"
-
-#~ msgid "Light pollution: "
-#~ msgstr "Polusyon ng liwánag: "
-
-#~ msgid "Art brightness: "
-#~ msgstr "Liwanag ng sining: "
-
-#~ msgid "Preset Time"
-#~ msgstr "Kasalukuyang Oras"
-
-#~ msgid "Constellation Names"
-#~ msgstr "Mga Pangalan ng Konstelasyon"
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Mga Guhit ng Konstelasyon"
-
-#~ msgid "USB Script: "
-#~ msgstr "USB Script: "
-
-#~ msgid "Set Time "
-#~ msgstr "Itakdâ ang Oras "
-
-#~ msgid "Colors "
-#~ msgstr "Mga Kúlay "
-
-#~ msgid "Administration "
-#~ msgstr "Pamamahálâ "
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Kalinangan ng Langit: "
-
-#~ msgid "Planet Trails"
-#~ msgstr "Pinagdaanan ng mga Planeta"
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Pumili at lumabas upang patakbuhin."
-
-#~ msgid "Shut Down: "
-#~ msgstr "Patayin "
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "Tapos nang i-download ang lahat ng mga star catalog"
