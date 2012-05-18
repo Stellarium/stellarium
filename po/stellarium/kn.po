@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-01-26 05:28+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: Ajju Bengalooru <ajju.blr@gmail.com>\n"
 "Language-Team: Kannada <kn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:41+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:05+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -351,64 +351,64 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr "ತೆರೆಚಿತ್ರದ ಕೈಪಿಡಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "ಲೇಖಕರು"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "ಸಂಪರ್ಕ ವಿಳಾಸ"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "ಕರ್ತೃ"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "ಪರವಾನಗಿ"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -416,18 +416,18 @@ msgid ""
 "Magnitude range: %3 - %4"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
 "%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5567,192 +5567,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
-
-#~ msgid "Date & Time"
-#~ msgstr "ದಿನಾಂಕ ಹಾಗು ಸಮಯ"
-
-#~ msgid "Stars "
-#~ msgstr "ನಕ್ಷತ್ರಗಳು "
-
-#~ msgid "Colors "
-#~ msgstr "ಬಣ್ಣಗಳು "
-
-#~ msgid "Set Location "
-#~ msgstr "ಸ್ಥಳವನ್ನು ನಿಗದಿಗೊಳಿಸು "
-
-#~ msgid "Set Time "
-#~ msgstr "ವೇಳೆಯನ್ನು ನಿಗದಿಗೊಳಿಸು "
-
-#~ msgid "Effects "
-#~ msgstr "ಪರಿಣಾಮ "
-
-#~ msgid "Administration "
-#~ msgstr "ಕಾರ್ಯ ನಿರ್ವಹಣೆ "
-
-#~ msgid "Latitude: "
-#~ msgstr "ಅಕ್ಷಾಂಶ: "
-
-#~ msgid "Longitude: "
-#~ msgstr "ರೇಖಾಂಶ: "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "ಸೌರವ್ಯೂಹದ ಕಾಯಕ: "
-
-#~ msgid "Sky Time: "
-#~ msgstr "ಆಕಾಶ ವೇಳೆ: "
-
-#~ msgid "Calendar"
-#~ msgstr "ದಿನದರ್ಶಿ"
-
-#~ msgid "Actual Time"
-#~ msgstr "ಸರಿಯಾದ ವೇಳೆ"
-
-#~ msgid "Sky Culture: "
-#~ msgstr "ಖಗೋಳ ಸಂಸ್ಕೃತಿ: "
-
-#~ msgid "Sky Language: "
-#~ msgstr "ಖಗೋಳ ಭಾಷೆ: "
-
-#~ msgid "Show: "
-#~ msgstr "ತೋರಿಸು: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "ಮಿನುಗುವಿಕೆ: "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "ತಾರಾಗಣ ರೇಖೆ"
-
-#~ msgid "Constellation Names"
-#~ msgstr "ತಾರಾಗಣದ ಹೆಸರುಗಳು"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "ತಾರಾಗಣದ ಚಿತ್ರಕಲೆಯ ತೀಕ್ಷ್ಣತೆ"
-
-#~ msgid "Planet Names"
-#~ msgstr "ಗ್ರಹದ ಹೆಸರುಗಳು"
-
-#~ msgid "Planet Trails"
-#~ msgstr "ಗ್ರಹದ ಜಾಡು"
-
-#~ msgid "Equator Line"
-#~ msgstr "ಭೂಮಧ್ಯ ರೇಖೆ"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "ನೀಹಾರಿಕಾ ವೃತ್ತಗಳು"
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "ಬೆಳಕು ಮಾಲಿನ್ಯದ ತೀಕ್ಷ್ಣತೆ: "
-
-#~ msgid "Landscape: "
-#~ msgstr "ಭೂದೃಶ್ಯ: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "ದೊಡ್ಡದಾಗಿಸು: "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "ಕ್ಷೀರಪಥದ ತೀಕ್ಷ್ಣತೆ: "
-
-#~ msgid "Shut Down: "
-#~ msgstr "ಮುಚ್ಚು "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "ಭಾಷಾ ಆಯ್ಕೆ: "
-
-#~ msgid "Meridian Line"
-#~ msgstr "ಮಧ್ಯ ರೇಖೆ"
-
-#~ msgid "Scripts "
-#~ msgstr "ಲಿಪಿ "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "ವಲಯದ ವೇಳೆ ನಿಯಮಿಸಿ: "
-
-#~ msgid "Time Display Format: "
-#~ msgstr "ವೇಳೆ ಪ್ರದರ್ಶಿಸುವ ಮಾದರಿ: "
-
-#~ msgid "Preset Time"
-#~ msgstr "ಪ್ರಸ್ತುತ ಸಮಯ"
-
-#~ msgid "Date Display Format: "
-#~ msgstr "ದಿನಾಂಕ  ಪ್ರದರ್ಶಿಸುವ ಮಾದರಿ: "
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "ಪ್ರಸ್ತುತ ಆಕಾಶ ವೇಳೆ: "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "ಪ್ರಾರಂಭದಲ್ಲಿ ಆಕಾಶ ವೇಳೆ: "
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "ಪರಿಮಾಣದ ಸೀಮೆ: "
-
-#~ msgid "Cardinal Points"
-#~ msgstr "ಮೂಲಾಂಕ ಬಿಂದುಗಳು"
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "ದೊಡ್ಡದಾಗಿ ಇರಬೇಕಾದ ವೇಳೆ: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "ಸಿಡಿ/ಡಿವಿಡಿ ಲಿಪಿ: "
-
-#~ msgid "Local Script: "
-#~ msgstr "ಸ್ಥಳೀಯ ಲಿಪಿ: "
-
-#~ msgid "Select and exit to run."
-#~ msgstr "ನಿರ್ವಹಿಸಲು ಅಯ್ಕೆ ಮಾಡಿ ನಿರ್ಗಮಿಸಿ."
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "ಅಂತರ್ಜಾಲದ ಮೂಲಕ ನವೀಕರಿಸು: "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "ಎತ್ತರ (ಮೀ): "
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "ತಾರಾಗಣದ ಗಡಿ"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "ಗ್ರಹಕಕ್ಷೆಗಳು"
-
-#~ msgid "Nebula Names"
-#~ msgstr "ನೀಹಾರಿಕೆಯ ಹೆಸರುಗಳು"
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "ವಸ್ತುವಿನ ಗಾತ್ರ ನಿಯಮ: "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "ಪರಿಮಾಣ ಗುಣಿತಾಂಕ "
-
-#~ msgid "USB Script: "
-#~ msgstr "ಯು.ಎಸ್.ಬಿ. ಲಿಪಿ: "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "ಜ್ಯೋತಿರ್ ಪ್ರಯಾಣದ ಸಮಯಕ್ಕೆ ವಜಾ: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "ಪಟ್ಟಿ  ತೋರಿಸಲು ಡೌನ್ ಕೀಲಿಯನ್ನು  ಒತ್ತಿ."
-
-#~ msgid "General "
-#~ msgstr "ಸಾಮಾನ್ಯ "
-
-#~ msgid "Planets labels"
-#~ msgstr "ಗ್ರಹಗಳ ಹೆಸರು"
-
-#~ msgid "Day keys: "
-#~ msgstr "ದಿನದ ಕೀಲಿ: "
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "ಗ್ರಹಣ ರೇಖೆ"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "ಸಮಭಾಜಕ ಜಾಲ"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "ದಿಗಂಶ ಜಾಲ"
-
-#~ msgid "Light pollution: "
-#~ msgstr "ಬೆಳಕಿನ ಮಾಲಿನ್ಯ: "
-
-#~ msgid "Art brightness: "
-#~ msgstr "ಚಿತ್ರಗಳ ಪ್ರಕಾಶ: "
-
-#~ msgid "Sidereal"
-#~ msgstr "ಸ್ಥಿರ ನಕ್ಷತ್ರ ಪುಂಜ"

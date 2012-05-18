@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2011-07-19 12:46+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: Juraj Kubica <Juraj.Kubica@seznam.cz>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:43+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:07+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -35,7 +35,7 @@ msgstr "Obzor"
 
 #: src/core/modules/GridLinesMgr.cpp:558
 msgid "Galactic Plane"
-msgstr ""
+msgstr "Galaktická rovina"
 
 #: src/core/modules/LandscapeMgr.cpp:493
 msgid "Author: "
@@ -64,7 +64,7 @@ msgstr "Druh: <b>%1</b>"
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Jasnosť (mag): <b>%1</b> (extinkcia do: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
@@ -128,7 +128,7 @@ msgstr "Sklon ekliptiky (pre dátum): %1"
 #: src/core/modules/Planet.cpp:151
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "Vzdialenosť: %1AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:158
 #, no-c-format, qt-format
@@ -138,7 +138,7 @@ msgstr "Vzdialenosť: %1 AU"
 #: src/core/modules/Planet.cpp:169
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "Zdanlivý priemer: %1, s kruhmi: %2"
 
 #: src/core/modules/Planet.cpp:175
 #, qt-format
@@ -148,22 +148,22 @@ msgstr "Uhlový priemer: %1"
 #: src/core/modules/Planet.cpp:189
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "Fázový uhol: %1"
 
 #: src/core/modules/Planet.cpp:190
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "Elongácia: %1"
 
 #: src/core/modules/Planet.cpp:191
 #, qt-format
 msgid "Phase: %1"
-msgstr ""
+msgstr "Fáza: %1"
 
 #: src/core/modules/Planet.cpp:192
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr ""
+msgstr "Osvetlených: %1%"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -173,17 +173,17 @@ msgstr "Jasnosť: <b>%1 m</b> (B-V index: %2)"
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "Zdanlivá jasnosť (mag): <b>%1</b> (podľa extinkcie)"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "Jasnosť (mag): <b>%1</b> (extinkcia do: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr ""
+msgstr "Jasnosť (mag): <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
 #, qt-format
@@ -203,7 +203,7 @@ msgstr "Paralaxa: %1\""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr ""
+msgstr "Kozmická loď"
 
 #: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
@@ -346,68 +346,68 @@ msgstr "Azimut/výška: %1/%2"
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
-msgstr ""
+msgstr "Chyba siete"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
-msgstr ""
+msgstr "Chyba pri spracovaní polohy"
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
-msgstr ""
+msgstr "Zisťuje sa"
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "Chyba"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr ""
+msgstr "Nenájdené"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
-msgstr ""
+msgstr "Nájdené"
 
 #: src/gui/ConfigurationDialog.cpp:346
 msgid "Select screenshot directory"
 msgstr "Vybrať adresár pre snímky obrazu"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Šírka zorného poľa pri spustení: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Smer pohľadu pri spustení (azimut/výška): %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Autori"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "Kontakt"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "Licencia"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "Spustený skript: "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "Spustený skript: [žiadny]"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -415,16 +415,16 @@ msgstr ""
 "Sťahovanie nových katalógov hviezd je dokončené!\n"
 "Reštartujte Stellarium pre ich zobrazenie."
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "Všetky dostupné hviezdne katalógy sú nainštalované."
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Získať katalóg %1 z %2"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -433,7 +433,7 @@ msgstr ""
 "Sťahuje sa %1...\n"
 "(Toto okno môžete zatvoriť)"
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -444,7 +444,7 @@ msgstr ""
 "Počet hviezd: %2 miliónov\n"
 "Rozsah veľkostí: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -453,11 +453,11 @@ msgstr ""
 "Chyba pri sťahovaní %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "Kontroluje sa celistvosť súboru..."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -638,17 +638,19 @@ msgstr "Vývojár: %1"
 #: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:307
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "Tester: %1"
 
 #: src/gui/HelpDialog.cpp:308
 msgid "Past Developers"
-msgstr ""
+msgstr "Minulí vývojári"
 
 #: src/gui/HelpDialog.cpp:309
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
+"Mnoho ľudí významne prispelo, ale už nie sú aktívni. Ich prínos výrazne "
+"pomohol projektu:"
 
 #: src/gui/HelpDialog.cpp:310
 #, qt-format
@@ -701,7 +703,7 @@ msgstr "Ekvatoriálna sieť (epocha J2000)"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
-msgstr ""
+msgstr "Ekliptická sieť J2000"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
@@ -5629,231 +5631,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Svetové strany"
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Kultúra (týka sa súhvezdí): "
-
-#~ msgid "Date & Time"
-#~ msgstr "Dátum a čas"
-
-#~ msgid "General "
-#~ msgstr "Hlavné "
-
-#~ msgid "Stars "
-#~ msgstr "Hviezdy "
-
-#~ msgid "Colors "
-#~ msgstr "Farby "
-
-#~ msgid "Effects "
-#~ msgstr "Efekty "
-
-#~ msgid "Scripts "
-#~ msgstr "Skripty "
-
-#~ msgid "Administration "
-#~ msgstr "Administrácia "
-
-#~ msgid "Latitude: "
-#~ msgstr "Zemepisná šírka: "
-
-#~ msgid "Longitude: "
-#~ msgstr "Zemepisná dĺžka: "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Výška (m): "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Teleso Slnečnej sústavy: "
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Prednastavený čas oblohy: "
-
-#~ msgid "Actual Time"
-#~ msgstr "Aktuálny čas"
-
-#~ msgid "Preset Time"
-#~ msgstr "Prednastaviť čas"
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Formát zobrazovania času: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Formát zobrazovania dátumu: "
-
-#~ msgid "Show: "
-#~ msgstr "Ukázať: "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "Popisky iba do magnitúdy: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "Mihotanie: "
-
-#~ msgid "Constellation Names"
-#~ msgstr "Názvy súhvezdí"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Intenzita kresieb súhvezdí"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Hranice súhvezdí"
-
-#~ msgid "Planet Names"
-#~ msgstr "Názvy planét"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Dráhy planét"
-
-#~ msgid "Planet Trails"
-#~ msgstr "Stopy planét"
-
-#~ msgid "Landscape: "
-#~ msgstr "Terén: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Ručné zväčšenie: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Pravidlo pre zmenu veľkosti objektu: "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Miznutie kurzora (sekundy): "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "Skript z CD/DVD: "
-
-#~ msgid "Shut Down: "
-#~ msgstr "Vypnúť: "
-
-#~ msgid "Hydra"
-#~ msgstr "Hydra"
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "Jas svetelneho znečistenia: "
-
-#~ msgid "Calendar"
-#~ msgstr "Kalendár"
-
-#~ msgid "Sidereal"
-#~ msgstr "Siderický"
-
-#~ msgid "Day keys: "
-#~ msgstr "Kľúče dní: "
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Limitná magnitúda: "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "Oprava na rýchlosť svetla: "
-
-#~ msgid "Light pollution: "
-#~ msgstr "Svetelné znečistenie: "
-
-#~ msgid "Art brightness: "
-#~ msgstr "Jas kresieb: "
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "Šírka zorného poľa pri spustení: XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "Smer pohľadu pri spustení: xxxx"
-
-#~ msgid "Planets labels"
-#~ msgstr "Popisky planét"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "Získať katalóg x z y"
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "Stahovanie všetkých hviezdnych katalógov ukončené!"
-
-#~ msgid "Set Location "
-#~ msgstr "Zadajte polohu "
-
-#~ msgid "Set Time "
-#~ msgstr "Nastavte čas "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Čas na oblohe: "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Nastaviť časové pásmo: "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Čas oblohy pri spustení: "
-
-#~ msgid "Sky Language: "
-#~ msgstr "Jazyk popisu oblohy: "
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "Faktor jasu hviezd "
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Faktor hviezdnych veľkostí "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Spojnice súhvezdí"
-
-#~ msgid "Meridian Line"
-#~ msgstr "Miestny poludník"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Azimutálna sieť"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "Ekvatoriálna sieť"
-
-#~ msgid "Equator Line"
-#~ msgstr "Rovník"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Ekliptika"
-
-#~ msgid "Nebula Names"
-#~ msgstr "Názvy Deep-Sky objektov"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Značky Deep-Sky objektov"
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "Faktor hviezdnej veľkosti: "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Jas Mliečnej dráhy "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "Popisky Deep-Sky objektov do magnitúdy: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Čas potrebný na zväčšenie: "
-
-#~ msgid "Local Script: "
-#~ msgstr "Miestny skript: "
-
-#~ msgid "USB Script: "
-#~ msgstr "Skript z USB: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Zoznam sa nahrá šípkou dolu."
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Spustíte vybratím a ukončením."
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Nahrať predvolené nastavenie: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Uložiť aktuálne nastavenie ako predvolené: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Aktualizovať cez internet: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Nastavenie jazyka aplikácie: "

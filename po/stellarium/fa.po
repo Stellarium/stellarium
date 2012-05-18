@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-04-14 15:04+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-02-25 10:00+0000\n"
 "Last-Translator: Mehdi Mansourian <mehdi31188111166@yahoo.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:42+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-12 06:07+0000\n"
+"X-Generator: Launchpad (build 15225)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -370,42 +370,42 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr "آدرس ( ذخیرۀ ) عکس صفحه را انتخاب کنید ."
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "%1%2 : میدان دید هنگام راه اندازی"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "%2/%1 : جهت دید ارتفاع/سمت هنگام راه اندازی"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "نویسندگان‌"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "تماس"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "نویسنده"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "گواهی"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr ": اسکریپت در حال اجرا "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "[هیچ] : اسکریپت در حال اجرا"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -413,16 +413,16 @@ msgstr ""
 "بارگیری ستاره‌نامه‌های جدید تمام شد!\n"
 "برای نمایش آنها ، استلاریوم را دوباره راه انداری کنید."
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr "زيج همه ستارگان نصب شد"
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "بارگیری ستاره‌نامهٔ %1 از %2"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -431,7 +431,7 @@ msgstr ""
 "... %1 در حال بارگیری\n"
 "(می‌توانید این پنجره را ببندید)"
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -442,7 +442,7 @@ msgstr ""
 "میلیون %2 : شمار ستارگان\n"
 "%4 - %3 : حد قدر"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -451,11 +451,11 @@ msgstr ""
 ":%1 خطا در بارگیری\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "اعتبارسنجی یک‌پارچگی پرونده..."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -5605,231 +5605,3 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
-
-#~ msgid "Equator Line"
-#~ msgstr "خط استوای سماوی"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "خط دایرة‌البروج"
-
-#~ msgid "Cardinal Points"
-#~ msgstr "چهارجهت اصلی"
-
-#~ msgid "Sky Language: "
-#~ msgstr ":زبان آسمان "
-
-#~ msgid "Sky Culture: "
-#~ msgstr ":فرهنگ آسمان "
-
-#~ msgid "Date & Time"
-#~ msgstr "تاریخ و زمان"
-
-#~ msgid "Set Time "
-#~ msgstr "زمان را تنظیم کنید "
-
-#~ msgid "General "
-#~ msgstr "عمومی "
-
-#~ msgid "Stars "
-#~ msgstr "ستارگان "
-
-#~ msgid "Colors "
-#~ msgstr "رنگ‌ها "
-
-#~ msgid "Effects "
-#~ msgstr "جلوه‌ها "
-
-#~ msgid "Administration "
-#~ msgstr "مدیریت "
-
-#~ msgid "Latitude: "
-#~ msgstr ":عرض جغرافیایی "
-
-#~ msgid "Longitude: "
-#~ msgstr ":طول جغرافیایی "
-
-#~ msgid "Sky Time: "
-#~ msgstr ":زمان آسمان "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr ":تنظیم منطقه زمانی "
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr ":پیش‌تنظیم زمان آسمان "
-
-#~ msgid "Time Display Format: "
-#~ msgstr ":قالب نمایش زمان "
-
-#~ msgid "Date Display Format: "
-#~ msgstr ":قالب نمایش تاریخ "
-
-#~ msgid "Show: "
-#~ msgstr ":نمایش "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr ":قانون اندازه‌گذاری جرم "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "مهلت مکان‌نما: "
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr ":بارگیری پیکربندی پیش‌فرض "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr ":ذخیره پیکربندی فعلی به عنوان پیش‌فرض "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr ":بروزرسانی از راه اینترنت "
-
-#~ msgid "Hydra"
-#~ msgstr "شَجاع"
-
-#~ msgid "Constellation Lines"
-#~ msgstr "خطوط صورت‌های فلکی"
-
-#~ msgid "Constellation Names"
-#~ msgstr "نام صورت‌های فلکی‌"
-
-#~ msgid "Planet Names"
-#~ msgstr "نام سیاره‌ها"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "مدار سیاره‌ها"
-
-#~ msgid "Planet Trails"
-#~ msgstr "دنبالهٔ سیاره‌ها"
-
-#~ msgid "Meridian Line"
-#~ msgstr "خط نصف‌النهار"
-
-#~ msgid "Nebula Names"
-#~ msgstr "نام سحابی‌ها"
-
-#~ msgid "Calendar"
-#~ msgstr "تقویم"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "Day keys: "
-#~ msgstr "کلیدهای روز : "
-
-#~ msgid "Sidereal"
-#~ msgstr "نجومی"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "مرزهای صورت فلکی"
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "افزاینده تعداد ستاره "
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "افزاینده میزان قدر "
-
-#~ msgid "Actual Time"
-#~ msgstr "زمان جاری"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "شبکه استوائی"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "شبکه سمتی"
-
-#~ msgid "Select and exit to run."
-#~ msgstr "برای اجرا انتخاب کنید و خارج شوید."
-
-#~ msgid "Shut Down: "
-#~ msgstr "بستن "
-
-#~ msgid "Planets labels"
-#~ msgstr "نام سيارات"
-
-#~ msgid "Landscape: "
-#~ msgstr "چشم‌انداز: "
-
-#~ msgid "Scripts "
-#~ msgstr "برنامه‌ها "
-
-#~ msgid "Local Script: "
-#~ msgstr "برنامه محلي: "
-
-#~ msgid "USB Script: "
-#~ msgstr "برنامه USB: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "برنامه سي‌دي: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "درشت‌نمايي دستي: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "مدت درشت‌نمايي: "
-
-#~ msgid "Set Location "
-#~ msgstr "تعيين موقعيت "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "زمان پيش‌فرض آسمان "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "بدنه منظومه شمسي "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "ارتفاع (متر) "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "قدر براي نمايش نام: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "چشمك: "
-
-#~ msgid "Preset Time"
-#~ msgstr "زمان پيش‌فرض"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "وضوح طرح صورت فلكي"
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "حد قدر: "
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "شدت آلودگي نوري: "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "ضريب مقياس قدر: "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "اصلاح زمان حركت نور: "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "غلظت راه شيري: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "قدر سحابي براي نمايش نام: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "براي بارگذاري، كليد فلش پايين را فشار دهيد."
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "تنظيم رابط كاربر زبان: "
-
-#~ msgid "Light pollution: "
-#~ msgstr "آلودگي نوري: "
-
-#~ msgid "Art brightness: "
-#~ msgstr "روشنايي طرح هنري "
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "FOV آغازين: XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "راستاي نگاه آغازين: xxxx"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "نشانگر سحابي‌ها"
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "گرفتن زيج x از y"
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "بارگیری همۀ ستاره‌نامه‌ها تمام شد!"
