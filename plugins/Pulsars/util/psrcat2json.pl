@@ -41,6 +41,7 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 	$outRA = "";
 	$outDE = "";
 	$flag = 0;
+	$notes = "";
 	for ($j=0;$j<scalar(@lines);$j++) {
 		if ($lines[$j] =~ /^PSRJ(\s+)J([\d]{4})([\+\-]{1})([\d]{2,4})([\w]{0,1})(\s+)/) {
 			$name = $2.$3.$4.$5;
@@ -106,6 +107,11 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 		if ($lines[$j] =~ /^ECC(\s+)([\d\.\-E]+)/) {
 			$eccentricity = $2;
 		}
+		
+		if ($lines[$j] =~ /^TYPE(\s+)([\w\,]+)/)
+		{
+			$notes = $2;
+		}
 	}
 
 	$out  = "\t\t\"PSR J".$name."\":\n";
@@ -145,6 +151,10 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 	}
 	if ($s1400 > 0) {
 		$out .= "\t\t\t\"s1400\": ".$s1400.",\n";
+	}
+	if ($notes ne '')
+	{
+		$out .= "\t\t\t\"notes\": \"".$notes."\",\n";
 	}
 	$out .= "\t\t\t\"RA\": \"".$outRA."\",\n";
 	$out .= "\t\t\t\"DE\": \"".$outDE."\"\n";
