@@ -35,6 +35,8 @@
 #include <QVariant>
 #include <QList>
 
+#define PSR_INERTIA 1.0e45 /* Typical moment of inertia for a pulsar */
+
 StelTextureSP Pulsar::markerTexture;
 
 Pulsar::Pulsar(const QVariantMap& map)
@@ -51,8 +53,7 @@ Pulsar::Pulsar(const QVariantMap& map)
 	frequency = map.value("frequency").toDouble();
 	pderivative = map.value("pderivative").toDouble();
 	dmeasure = map.value("dmeasure").toDouble();
-	eccentricity = map.value("eccentricity").toDouble();
-	edot = map.value("edot").toDouble();
+	eccentricity = map.value("eccentricity").toDouble();	
 	RA = StelUtils::getDecAngle(map.value("RA").toString());
 	DE = StelUtils::getDecAngle(map.value("DE").toString());	
 	w50 = map.value("w50").toFloat();
@@ -60,6 +61,12 @@ Pulsar::Pulsar(const QVariantMap& map)
 	s600 = map.value("s600").toFloat();
 	s1400 = map.value("s1400").toFloat();
 	distance = map.value("distance").toFloat();
+
+	// If baricentric period not set then calculate it
+	if (period==0 && frequency>0)
+	{
+		period = 1/frequency;
+	}
 
 	initialized = true;
 }
@@ -78,8 +85,7 @@ QVariantMap Pulsar::getMap(void)
 	map["frequency"] = frequency;
 	map["pderivative"] = pderivative;
 	map["dmeasure"] = dmeasure;
-	map["eccentricity"] = eccentricity;
-	map["edot"] = edot;
+	map["eccentricity"] = eccentricity;	
 	map["RA"] = RA;
 	map["DE"] = DE;
 	map["period"] = period;	
@@ -121,10 +127,6 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			//TRANSLATORS: Unit of measure for period - seconds
 			oss << q_("Barycentric period: %1 s").arg(QString::number(period, 'f', 16)) << "<br>";
 		}
-		if (frequency>0 && period==0)
-		{
-			oss << q_("Barycentric rotation frequency: %1 Hz").arg(QString::number(frequency, 'f', 10)) << "<br>";
-		}
 		if (pderivative>0)
 		{
 			oss << q_("Time derivative of barcycentric period: %1").arg(QString::number(pderivative, 'e', 5)) << "<br>";
@@ -141,9 +143,10 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			       .arg(q_("pc"));
 			oss << "<br>";
 		}
+		double edot = getEdot(period, pderivative);
 		if (edot>0)
 		{
-			oss << q_("Spin down energy loss rate: %1 ergs/s").arg(QString::number(edot, 'f', 5)) << "<br>";
+			oss << q_("Spin down energy loss rate: %1 ergs/s").arg(QString::number(edot, 'e', 5)) << "<br>";
 		}
 		if (bperiod>0)
 		{
@@ -157,7 +160,11 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		{
 			//TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 			oss << q_("Annual parallax: %1 mas").arg(parallax) << "<br>";
-		}		
+		}
+		if (distance>0)
+		{
+			oss << q_("Distance based on electron density model: %1 kpc (%2 ly)").arg(distance).arg(distance*3261.563777) << "<br>";
+		}
 		if (w50>0)
 		{
 			oss << q_("Profile width at 50% of peak: %1 ms").arg(QString::number(w50, 'f', 2)) << "<br>";
@@ -223,6 +230,19 @@ float Pulsar::getVMagnitude(const StelCore* core, bool withExtinction) const
 	float vmag = distance + 6.f;
 
 	return vmag + extinctionMag;
+}
+
+double Pulsar::getEdot(double p0, double p1) const
+{
+	if (p0>0 && p1>0)
+	{
+		// Calculate spin down energy loss rate (ergs/s)
+		return 4.0 * M_PI * M_PI * PSR_INERTIA * p1 / pow(p0,3);
+	}
+	else
+	{
+		return 0.0;
+	}
 }
 
 double Pulsar::getAngularSize(const StelCore*) const

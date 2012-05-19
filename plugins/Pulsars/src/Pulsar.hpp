@@ -103,15 +103,19 @@ private:
 	double pderivative;	//! Time derivative of barcycentric period (dimensionless)
 	double dmeasure;	//! Dispersion measure (cm-3 pc)
 	double bperiod;		//! Binary period of pulsar (days)
-	double eccentricity;	//! Eccentricity
-	double edot;		//! Spin down energy loss rate (ergs/s)
+	double eccentricity;	//! Eccentricity	
 	float w50;		//! Profile width at 50% of peak in ms
 	float s400;		//! Time averaged flux density at 400MHz in mJy
 	float s600;		//! Time averaged flux density at 600MHz in mJy
 	float s1400;		//! Time averaged flux density at 1400MHz in mJy
-	float distance;
+	float distance;		//! Distance based on electron density model in kpc
 
 	LinearFader labelsFader;
+
+	//! Calculate and get spin down energy loss rate (ergs/s)
+	//! @param p0 - barycentric period of the pulsar (s)
+	//! @param p1 - time derivative of barcycentric period (dimensionless)
+	double getEdot(double p0, double p1) const;
 
 };
 
