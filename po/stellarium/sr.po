@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
-"PO-Revision-Date: 2012-05-12 19:17+0000\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
+"PO-Revision-Date: 2012-05-19 04:34+0000\n"
 "Last-Translator: Иван Старчевић <ivanstar61@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-13 04:40+0000\n"
-"X-Generator: Launchpad (build 15225)\n"
+"X-Launchpad-Export-Date: 2012-05-19 04:46+0000\n"
+"X-Generator: Launchpad (build 15259)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -2974,7 +2974,7 @@ msgstr "Прикажи уметнички приказ"
 #: src/ui_viewDialog.h:1154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Art brightness:"
-msgstr ""
+msgstr "Уметност осветљења:"
 
 #: src/ui_viewDialog.h:1155
 msgid "Celestial Sphere"
@@ -4082,6 +4082,7 @@ msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
+"Додатак за сателите предвиђа позиција вештачких сателита у Земљиној орбити."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:265
 msgid "Notes for users"
@@ -4091,6 +4092,7 @@ msgstr "Напомене за кориснике"
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
+"Сателити и њихове орбите су приказане само када је посматрач на Земљи."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:267
 msgid ""
@@ -4200,7 +4202,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
 #, qt-format
 msgid "Bug reports can be made %1here%2."
-msgstr ""
+msgstr "Извештаји о грешци могу бити %1овде%2."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:303
@@ -4248,7 +4250,7 @@ msgstr "Грешка при ажурирању"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:365
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
-msgstr ""
+msgstr "Ажурирано %1/%2 сателита; %3 недостају"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:422
 msgid "[new source]"
@@ -4256,7 +4258,7 @@ msgstr "[нови извор]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
 msgid "[orbit calculation error]"
-msgstr ""
+msgstr "[грешка у прорачуну орбите]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"
@@ -4276,7 +4278,7 @@ msgstr "[све]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:597
 msgid "Select TLE Update File"
-msgstr ""
+msgstr "Изабери TLE датотеку за ажурирање"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:135
 msgid "Downloading data..."
@@ -4287,10 +4289,12 @@ msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
 msgstr ""
+"Stellarium преузима сателитске податке од извора ажурирања. Молим "
+"сачекајте..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
 msgid "Select TLE source file(s)..."
-msgstr ""
+msgstr "Изабери TLE изворне датотеке..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:166
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:167
@@ -4311,7 +4315,7 @@ msgstr "Каталошки број: %1"
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
 msgid "Satellites Configuration"
-msgstr ""
+msgstr "Подешавања сателита"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:643
 msgid "Update TLE lists from Internet sources"
@@ -4398,7 +4402,7 @@ msgstr "Орбита"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:684
 msgid "Catalog number:"
-msgstr ""
+msgstr "Каталошки број:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:685
 msgid "Description:"
@@ -4685,55 +4689,59 @@ msgstr "Децимални степени"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:299
 msgid "D&ecimal"
-msgstr ""
+msgstr "Д&ецималан"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:300
 msgid "&Slew"
-msgstr ""
+msgstr "&Заокрет"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Configure &telescopes..."
-msgstr ""
+msgstr "Подеси &телескопе..."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope Configuration"
-msgstr ""
+msgstr "Подешавање телескопа"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid "Telescope controlled by:"
-msgstr ""
+msgstr "Телескоп контролише:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
+"Телескоп је повезан са овим рачунаром преко серијског прикључка и "
+"контролисан је  од Stellarium-а"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
 msgid "Stellarium, directly through a serial port"
-msgstr ""
+msgstr "Stellarium, директно преко серијског прикључка"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
+"Телескоп контролисан помоћу спољашње апликације, било на овом рачунару или "
+"на удаљеној машини"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "External software or a remote computer"
-msgstr ""
+msgstr "Спољни софтвер или удаљени рачунар"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr ""
+msgstr "Ништа, само имитирај један (покретна мрежа)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Telescope properties"
-msgstr ""
+msgstr "Својства телескопа"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid "Connection delay:"
-msgstr ""
+msgstr "Кашњење везе:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:488
 msgid ""
@@ -4741,28 +4749,32 @@ msgid ""
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
+"Приближно време које је потребно за сигнале из телескопа до Stellarium.\n"
+"Повећај ову вредност ако мрежа врши прескакање."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Coordinate system:"
-msgstr ""
+msgstr "Координатни систем :"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:492
 msgid "J2000 (default)"
-msgstr ""
+msgstr "J2000 (подразумевано)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
 msgid "Equinox of the date (JNow)"
-msgstr ""
+msgstr "Датум равнодневнице (JNow)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
+"Аутоматски покушај  покретање телескопа или успостави везу када се покрене "
+"Stellarium"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
 msgid "Start/connect at startup"
-msgstr ""
+msgstr "Покрени/повежи се при покретању"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Device settings"
@@ -4770,7 +4782,7 @@ msgstr "Подешавања уређаја"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
 msgid "Serial port:"
-msgstr ""
+msgstr "Серијски прикључак:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Device model:"
@@ -4778,7 +4790,7 @@ msgstr "Модел уређаја:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Connection settings"
-msgstr ""
+msgstr "Подешавања везе"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:502
 msgid "Host:"
@@ -4791,11 +4803,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "TCP port:"
-msgstr ""
+msgstr "TCP прикључак:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "User interface settings"
-msgstr ""
+msgstr "Корисничке поставке сучеља"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
 msgid "Show circles with fixed angular size around the telescope reticle"
@@ -4803,11 +4815,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:511
 msgid "Use field of view indicators"
-msgstr ""
+msgstr "Користите видно поље индикатора"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:512
 msgid "Circle size(s):"
-msgstr ""
+msgstr "Величина кругова:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:514
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
@@ -4815,15 +4827,15 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
 msgid "OK"
-msgstr "Potvrdi"
+msgstr "У реду"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
 msgid "Telescopes Controlled"
-msgstr ""
+msgstr "Телескоп под надзором"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Configure the selected telescope"
-msgstr ""
+msgstr "Подеси изабрани зелескоп"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Configure"
@@ -4831,11 +4843,11 @@ msgstr "Подеси"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Add a new telescope"
-msgstr ""
+msgstr "Додај нови телескоп"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "Remove the selected telescope"
-msgstr ""
+msgstr "Уклони изабрани телескоп"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "GUI"
@@ -4843,7 +4855,7 @@ msgstr "Графичка корисничка сучеља"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Show telescope labels"
-msgstr ""
+msgstr "Прикажи ознаке телескопа"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Show telescope reticles"
@@ -4851,7 +4863,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Show field of view indicators"
-msgstr ""
+msgstr "Прикажи видно поље индикатора"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Files"
@@ -4867,7 +4879,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
 msgid "Executables directory:"
-msgstr ""
+msgstr "Извршни директоријум :"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -4978,11 +4990,11 @@ msgstr "Субота"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
-msgstr ""
+msgstr "Додатак временске зоне"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:449
 msgid "Define a time zone"
-msgstr ""
+msgstr "Одреди временску зону"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
@@ -4993,7 +5005,7 @@ msgstr "Временска зона"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:452
 msgid "Timezone name:"
-msgstr ""
+msgstr "Назив временске зоне:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
@@ -5006,7 +5018,7 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
 msgid "DST timezone name:"
-msgstr ""
+msgstr "Назив DST временске зоне:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
 msgid "DST offset from UTC (hours):"
@@ -5014,7 +5026,7 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
 msgid "Daylight saving time start"
-msgstr ""
+msgstr "Почетак летњег рачунања времена"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
@@ -5024,7 +5036,7 @@ msgstr "Дан:"
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
 msgid "Time of change:"
-msgstr ""
+msgstr "Време промене:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:464
@@ -5033,11 +5045,11 @@ msgstr "Датум:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
 msgid "Daylight saving time end"
-msgstr ""
+msgstr "Крај летњег времена"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:465
 msgid "Use this definition"
-msgstr ""
+msgstr "Користи ово значење"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
 msgid ""
@@ -5049,11 +5061,11 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "Use system settings (default)"
-msgstr ""
+msgstr "Користи подешавања система (подразумевано)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
 msgid "Universal Coordinated Time (UTC)"
-msgstr ""
+msgstr "Универзално координисано време (UTC)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "(offset = local time - UTC time)"
@@ -5080,7 +5092,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "Time display format"
-msgstr ""
+msgstr "Приказ временског формата"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
@@ -5089,11 +5101,11 @@ msgstr "Системски подразумевано"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "12-hour format"
-msgstr ""
+msgstr "12- часовни формат"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
 msgid "24-hour format"
-msgstr ""
+msgstr "24 - часовни формат"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:188
@@ -5120,7 +5132,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:149
 msgid "Solar System body"
-msgstr ""
+msgstr "Тело сунчевог система"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:163
 msgid "Current date/time"
@@ -5128,11 +5140,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:168
 msgid "Set time zone"
-msgstr ""
+msgstr "Постави временску зону"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:169
 msgid "Day keys"
-msgstr ""
+msgstr "Кључни дани"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:170
 msgid "Startup date/time preset"
@@ -5176,7 +5188,7 @@ msgstr "Jezik"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:237
 msgid "Show stars"
-msgstr ""
+msgstr "Прикажи звезде"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:265
 msgid "Colors"
@@ -5184,15 +5196,15 @@ msgstr "Боје"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:341
 msgid "Nebula names"
-msgstr ""
+msgstr "Назив маглине"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:345
 msgid "Nebula hints"
-msgstr ""
+msgstr "Савети о маглини"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Galactic plane line"
-msgstr ""
+msgstr "Линије галактичке равни"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:388
 msgid "Effects"
@@ -5200,7 +5212,7 @@ msgstr "Ефекти"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Manual zoom"
-msgstr ""
+msgstr "Ручно увећање"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:407
 msgid "Magnitude scaling multiplier"
@@ -5216,7 +5228,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Zoom duration:"
-msgstr ""
+msgstr "Трајање увећања:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:422
 msgid "Cursor timeout:"

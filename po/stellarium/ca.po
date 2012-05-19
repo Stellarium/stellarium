@@ -10,15 +10,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
 "PO-Revision-Date: 2012-04-30 09:24+0000\n"
 "Last-Translator: Marc Coll Carrillo <Unknown>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:38+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-19 04:40+0000\n"
+"X-Generator: Launchpad (build 15259)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -351,68 +351,68 @@ msgstr "Az/Alt: %1/%2"
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
-msgstr ""
+msgstr "Error de xarxa"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
-msgstr ""
+msgstr "Error sintàctic de posició"
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
-msgstr ""
+msgstr "S'està consultant"
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr ""
+msgstr "No trobat"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
-msgstr ""
+msgstr "Trobat"
 
 #: src/gui/ConfigurationDialog.cpp:346
 msgid "Select screenshot directory"
 msgstr "Sel·leccioni carpeta per guardar la captura de pantalla"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Camp de visió inicial: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Direcció de la vista inicial Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Autors"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "Contacte"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "Llicència"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "Executant script: "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "Executant script: [cap]"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -420,16 +420,16 @@ msgstr ""
 "Finalitzada la descàrrega del nous catàlegs estel·lars!\n"
 "Reinicia Stellarium per poder fer-los servir."
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr "Tots els catàlegs estelars han sigut instal·lats"
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Obtenint catàleg %1 de %2"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -438,7 +438,7 @@ msgstr ""
 "Descarregant %1...\n"
 "(pots tancat aquesta finestra.)"
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -449,7 +449,7 @@ msgstr ""
 "Nombre d'estels: %2 Milions\n"
 "Rang de magnitud: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -458,11 +458,11 @@ msgstr ""
 "Error descarregant %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "Verificant integritat del fitxer..."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -907,19 +907,19 @@ msgstr "Resta 1 setmana sideral"
 
 #: src/gui/StelGui.cpp:168
 msgid "Add 1 sidereal month"
-msgstr ""
+msgstr "Afegeix 1 mes sideral"
 
 #: src/gui/StelGui.cpp:169
 msgid "Subtract 1 sidereal month"
-msgstr ""
+msgstr "Resta 1 mes sideral"
 
 #: src/gui/StelGui.cpp:170
 msgid "Add 1 sidereal year"
-msgstr ""
+msgstr "Afegeix 1 any sideral"
 
 #: src/gui/StelGui.cpp:171
 msgid "Subtract 1 sidereal year"
-msgstr ""
+msgstr "Resta 1 any sideral"
 
 #: src/gui/StelGui.cpp:174
 msgid "Center on selected object"
@@ -1105,11 +1105,11 @@ msgstr "mapa d'estels"
 
 #: src/gui/SearchDialog.cpp:351
 msgid "Simbad Lookup Error"
-msgstr ""
+msgstr "Error de cerca Simbad"
 
 #: src/gui/SearchDialog.cpp:359
 msgid "Simbad Lookup"
-msgstr ""
+msgstr "Cerca Simbad"
 
 #: src/gui/SearchDialog.cpp:507
 msgid "University of Strasbourg (France)"
@@ -2991,23 +2991,23 @@ msgstr "Esfera celeste"
 
 #: src/ui_viewDialog.h:1162
 msgid "Show equator line"
-msgstr ""
+msgstr "Mostra la línia del equador"
 
 #: src/ui_viewDialog.h:1166
 msgid "Show meridian line"
-msgstr ""
+msgstr "Mostra la línia del meridià"
 
 #: src/ui_viewDialog.h:1170
 msgid "Show horizon line"
-msgstr ""
+msgstr "Mostra la línia de l'horitzó"
 
 #: src/ui_viewDialog.h:1174
 msgid "Show ecliptic line"
-msgstr ""
+msgstr "Mostra la línia de la eclíptica"
 
 #: src/ui_viewDialog.h:1178
 msgid "Show Galactic plane line"
-msgstr ""
+msgstr "Mostra la línia del plànol Galàctic"
 
 #: src/ui_viewDialog.h:1182
 msgid "Projection"
@@ -3071,7 +3071,7 @@ msgstr "Curt"
 
 #: src/ui_configurationDialog.h:798
 msgid "Display user settings information"
-msgstr ""
+msgstr "Mostra la informació de configuració de l'usuari"
 
 #: src/ui_configurationDialog.h:800
 msgid "Customized"
@@ -3413,7 +3413,7 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:194
 msgid "Custom Info Settings"
-msgstr ""
+msgstr "Informació de Configuració de Personalització"
 
 #: src/ui_CustomInfoDialog.h:196
 msgid "Display info about an object's name"
@@ -3473,11 +3473,11 @@ msgstr "Les coordenades azimutals"
 
 #: src/ui_CustomInfoDialog.h:224
 msgid "Display the hour angle + DE (of date)"
-msgstr ""
+msgstr "Mostra l'angle (hora) + DE (de la data)"
 
 #: src/ui_CustomInfoDialog.h:226
 msgid "The hour angle"
-msgstr ""
+msgstr "Angle horari"
 
 #: src/ui_CustomInfoDialog.h:228
 msgid "Display info about an object's distance"
@@ -3498,7 +3498,7 @@ msgstr "Mida de l'objecte"
 #: src/ui_CustomInfoDialog.h:236 src/ui_CustomInfoDialog.h:240
 #: src/ui_CustomInfoDialog.h:244
 msgid "Display a derived class-specific extra fields"
-msgstr ""
+msgstr "Mostra una classe específica derivada de camps addicionals"
 
 #: src/ui_CustomInfoDialog.h:238
 msgid "Additional info (Extra 1)"
@@ -3928,7 +3928,7 @@ msgstr "Distància focal:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 msgid "Field stop:"
-msgstr ""
+msgstr "Camp d'aturada:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:881
 msgid "Binoculars"
@@ -4032,7 +4032,7 @@ msgstr "Rang (km): %1"
 #: plugins/Satellites/src/Satellite.cpp:251
 #, qt-format
 msgid "Range rate (km/s): %1"
-msgstr ""
+msgstr "Rati del interval (km/s):%1"
 
 #. TRANSLATORS: Satellite altitude
 #: plugins/Satellites/src/Satellite.cpp:254
@@ -4133,6 +4133,10 @@ msgid ""
 "the default %3 file.  The old file will be backed up as %4.  This can be "
 "found in the user data directory, under \"modules/Satellites/\"."
 msgstr ""
+"Fent clic al botó \"%1 \" en la \"%2 \" pestanya d'aquest quadre de diàleg "
+"revertirà al fitxer %3 per defecte. El fitxer antic serà guardat com a %4. "
+"Aquest pot ser trobat en la carpeta de dades de usuari, dins "
+"\"modules/Satellites/\"."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:276
 msgid ""
@@ -4173,6 +4177,9 @@ msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr ""
+"<b>Nota:</b>si el nom del satèl·lit en les dades actualitzades te qualsevol "
+"part entre parèntesi al final, serà esborrat abans de que les dades siguin "
+"utilitzades."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
 msgid "Adding new satellites"
@@ -4185,6 +4192,11 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
+"1. Assegura't de que el satèl·lit(s) que vols afegir està inclòs en una de "
+"les URLs llistades en la pestanya de Fonts de satèl·lits al quadre de diàleg "
+"de configuració. Ves a la pestanya de Satèl·lits i fes clic el botó '+'. "
+"Selecciona el satèl·lit(s) que desitges afegir i selecciona el botó "
+"\"afegir\"."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
@@ -4203,6 +4215,8 @@ msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
 msgstr ""
+"El codi de càlcul de l'òrbita està escrit per Jose Luis Canales, d'acord amb "
+"l'informe revisat Spacetrack (incloent l'informe Spacetrack #6). "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:293
@@ -4219,6 +4233,8 @@ msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
 "plugin\" in the subject when posting."
 msgstr ""
+"El suport està proveït per la web Launchpad. Assegura't de posar "
+"\"Satellites plugin\" en l'assumpte quan publiquis."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:299
@@ -4238,6 +4254,8 @@ msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr ""
+"Si vol demanar noves funcionalitats, pots crear un informe de fallada, i "
+"establir la severitat a \"wishlist\" (desig)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
 msgid "Internet updates disabled"
@@ -4450,7 +4468,7 @@ msgstr "Dades TLE:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:692
 msgid "NORAD two line element orbit data"
-msgstr ""
+msgstr "NORAD dos línies de dades d'orbita"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:695
 msgid "Remove the selected satellites"
@@ -4579,7 +4597,7 @@ msgstr "Versió %1"
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "Status"
@@ -4614,6 +4632,9 @@ msgid ""
 "control a telescope on its own, but it is still possible to do it through an "
 "external application or to connect to a remote host."
 msgstr ""
+"No hi ha descripció disponible del model del dispositiu. Stellarium no podrà "
+"controlar el telescopi per si sol, però serà possible fer-ho mitjançant un "
+"aplicatiu extern o connectant a un amfitrió remot."
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
@@ -5102,6 +5123,10 @@ msgid ""
 "This behaviour can be changed by changing Stellarium's global time zone "
 "settings."
 msgstr ""
+"Per defecte, el temps mostrat a Stellarium està interpretat com l'hora local "
+"a la zona horària del sistema, no el mostrat a la zona horària de la "
+"localització. Aquest comportament pot ser modificant canviant la zona "
+"horària global a la configuració de Stellarium"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "Use system settings (default)"
@@ -5193,11 +5218,11 @@ msgstr "Estableix el fus horari"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:169
 msgid "Day keys"
-msgstr ""
+msgstr "Tecles dels dies"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:170
 msgid "Startup date/time preset"
-msgstr ""
+msgstr "Data/Hora prefixada al inici"
 
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:177
@@ -5207,7 +5232,7 @@ msgstr "sistema"
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:179
 msgid "preset"
-msgstr ""
+msgstr "preestablert"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:187
 msgid "mmddyyyy"
@@ -5249,7 +5274,7 @@ msgstr "Noms de nebuloses"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:345
 msgid "Nebula hints"
-msgstr ""
+msgstr "Consells de nebulosa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Galactic plane line"
@@ -5273,7 +5298,7 @@ msgstr "Intensitat de la Via Làctica"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:415
 msgid "Nebula label frequency:"
-msgstr ""
+msgstr "Freqüència de les etiquetes de les nebuloses:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Zoom duration:"
@@ -5281,7 +5306,7 @@ msgstr "Duració del zoom:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:422
 msgid "Cursor timeout:"
-msgstr ""
+msgstr "Temps d'espera del cursor:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:423
 msgid "Setting landscape sets location"
@@ -5297,7 +5322,7 @@ msgstr "Atura l'execució de l'script"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:453
 msgid "CD/DVD script"
-msgstr ""
+msgstr "script CD/DVD"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:465
@@ -5318,20 +5343,20 @@ msgstr "Apaga"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:524
 msgid "[no TUI node]"
-msgstr ""
+msgstr "[no hi ha node TIU]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
-msgstr ""
+msgstr "Actiu"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
 msgid "Off"
-msgstr ""
+msgstr "Inactiu"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
 msgid "error, unknown color part \"%1\""
-msgstr ""
+msgstr "error, part de color desconegut \"%1\""
 
 #: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
 msgid " [RETURN to activate]"
@@ -5396,6 +5421,11 @@ msgid ""
 "objects, download such lists from the Internet or search the online Minor "
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
+"Podeu importar dades de cometes i asteroides segons el format d'exportació "
+"del Centre de Planetes Menors de la Unió Astronòmica Internacional IAU (%1). "
+"Podeu importar arxius de llistes d'objectes, descarregar llistes d'aquest "
+"tipus a través d'Internet o buscar, en línia, al Servei de Efemèrides de "
+"Planetes Menors i Cometes (MPES)."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
 msgid "Solar System Editor plug-in"
@@ -5470,6 +5500,12 @@ msgid ""
 "Solar System configuration.<br/>Note that adding a large number of objects "
 "may cause Stellarium to run slowly."
 msgstr ""
+"Marqueu els objectes que voleu importar. En <i>cursiva</ i> s'enumeren els "
+"noms que coincideixin amb els noms dels objectes que ja estan carregats. En "
+"<b>negreta</ b> s'enumeren els noms que coincideixin amb els noms dels "
+"objectes heretats de la configuració per defecte del Sistema Solar de  "
+"Stellarium. <br/> Tingueu en compte que l'addició d'un gran nombre "
+"d'objectes pot causar que  Stellarium funcioni més  lentament."
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Overwrite existing objects"
@@ -5510,11 +5546,15 @@ msgid ""
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
 msgstr ""
+"Aquest connector utilitza un fitxer personalitzat de configuració del "
+"Sistema Solar. Si alguna cosa surt malament i Stellarium es bloqueja i/o no "
+"s'inicia, podeu eliminar manualment el fitxer a:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
+"També podeu restablir tots els canvis i tornar a la configuració per defecte:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Reset to defaults"
@@ -5529,6 +5569,8 @@ msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
+"Podeu fer una còpia de seguretat del fitxer personalitzat de configuració "
+"del Sistema Solar, o substituir-la per una còpia ja existent."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Copy the Solar System file..."
@@ -5567,6 +5609,12 @@ msgid ""
 "1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
 "(13 September)."
 msgstr ""
+"Un connector que mostra algunes de les supernoves històriques més brillants "
+"que magnitud visual 10: SN 185 A (7 de desembre), SN 386 (24 d'abril), SN "
+"1006 (29 d'abril), SN 1054A (3 de juliol), SN 1181A (4 d'agost), SN 1572A (5 "
+"de novembre), SN 1604A (8 d'octubre), SN 1680A (15 d'agost), SN 1885 (17 "
+"d'agost), SN 1895b (5 de juliol), SN 1937C (21 d'agost), SN 1972E (8 de "
+"maig), SN 1987A (24 de febrer) i SN 2011FE (13 de setembre)."
 
 #: plugins/Supernovae/src/Supernova.cpp:99
 msgid "supernova"
@@ -5587,6 +5635,9 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
+"Un connector que mostra alguns quàsars més brillants que la magnitud visual "
+"16. Un catàleg dels quàsars compilats a partir de “Quasars and Active "
+"Nuclei” '(13ena  edició) (Veron + 2010) = 2010A & A. .... 10V 518A"
 
 #: plugins/Quasars/src/Quasar.cpp:92
 msgid "quasar"
@@ -5607,6 +5658,10 @@ msgid ""
 "about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
 "1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
 msgstr ""
+"Aquest connector dibuixa la posició de diferents púlsars, amb informació "
+"sobre cadascun. Les dades dels púlsars s'han obtingut de \"Catalog of "
+"Pulsars\" (Taylor + 1995) <br> Nota: Els identificadors dels púlsars tenen "
+"el prefix \"PSR\""
 
 #: plugins/Pulsars/src/Pulsar.cpp:102
 msgid "pulsar"
@@ -5630,7 +5685,7 @@ msgstr "Tipus du púlsar: %1"
 #: plugins/Pulsars/src/Pulsar.cpp:120
 #, qt-format
 msgid "Equivalent width of the integrated pulse profile: %1 ms"
-msgstr ""
+msgstr "Amplada equivalent del perfil de polsos integrat: %1 ms"
 
 #: plugins/Pulsars/src/Pulsar.cpp:124
 #, qt-format
@@ -5641,7 +5696,7 @@ msgstr "Amplada del perfil al 50% del pic: %1 ms"
 #: plugins/Pulsars/src/Pulsar.cpp:130 plugins/Pulsars/src/Pulsar.cpp:142
 #: plugins/Pulsars/src/Pulsar.cpp:154
 msgid "Time averaged flux density at"
-msgstr ""
+msgstr "Densitat de flux amitjanada en el temps a:"
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Pulsars/src/Pulsar.cpp:133 plugins/Pulsars/src/Pulsar.cpp:145
@@ -5663,12 +5718,12 @@ msgstr "associació de cúmuls globulars"
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:238
 msgid "SNR association"
-msgstr ""
+msgstr "Associació SNR"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:244
 msgid "glitches in period"
-msgstr ""
+msgstr "paràsits en el període"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:250
@@ -5688,17 +5743,17 @@ msgstr "púlsar reciclat"
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:268
 msgid "radio interpulse"
-msgstr ""
+msgstr "inter-pols de ràdio"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:274
 msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
-msgstr ""
+msgstr "Emissió de polsos òptics, de raigs X o de raigs gamma (alta energia)"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
-msgstr ""
+msgstr "Púlsar extragalàctic (en MC)"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Quadrícula Equatorial"
@@ -5927,6 +5982,3 @@ msgstr ""
 
 #~ msgid "Object Sizing Rule: "
 #~ msgstr "Mida del regle de l'objecte "
-
-#~ msgid "Search also in the SIMBAD on-line astronomical database"
-#~ msgstr "Cerca també en la base de dades astronòmica en línia SIMBAD"

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 02:16+0700\n"
+"POT-Creation-Date: 2012-05-10 19:57+0700\n"
 "PO-Revision-Date: 2012-04-26 14:13+0000\n"
 "Last-Translator: Allen Zhong <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-04 04:45+0000\n"
-"X-Generator: Launchpad (build 15195)\n"
+"X-Launchpad-Export-Date: 2012-05-19 04:49+0000\n"
+"X-Generator: Launchpad (build 15259)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -99,7 +99,7 @@ msgstr "行星状星云"
 
 #: src/core/modules/Nebula.cpp:318
 msgid "Cluster associated with nebulosity"
-msgstr ""
+msgstr "星云状星团"
 
 #: src/core/modules/Nebula.cpp:321
 msgid "Unknown"
@@ -138,7 +138,7 @@ msgstr "距离: %1 天文单位"
 #: src/core/modules/Planet.cpp:169
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "视直径: %1, 包括环: %2"
 
 #: src/core/modules/Planet.cpp:175
 #, qt-format
@@ -148,22 +148,22 @@ msgstr "视直径: %1"
 #: src/core/modules/Planet.cpp:189
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "位相角: %1"
 
 #: src/core/modules/Planet.cpp:190
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "距角: %1"
 
 #: src/core/modules/Planet.cpp:191
 #, qt-format
 msgid "Phase: %1"
-msgstr ""
+msgstr "相: %1"
 
 #: src/core/modules/Planet.cpp:192
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr ""
+msgstr "被照亮的部分: %1%"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -178,7 +178,7 @@ msgstr "视星等：<b>%1</b>（消光后）"
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "星等: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
@@ -325,68 +325,68 @@ msgstr "方位角/高度角: %1/%2"
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
-msgstr ""
+msgstr "网络错误"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
-msgstr ""
+msgstr "位置解析错误"
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
-msgstr ""
+msgstr "正在查询"
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "错误"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr ""
+msgstr "没有找到"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
-msgstr ""
+msgstr "已找到"
 
 #: src/gui/ConfigurationDialog.cpp:346
 msgid "Select screenshot directory"
 msgstr "选择储存截图资料夹"
 
-#: src/gui/ConfigurationDialog.cpp:523
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "启动时的视角: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:531
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "启动时的地平坐标方位角/高度角: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:570
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:574 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "联系信息"
 
-#: src/gui/ConfigurationDialog.cpp:652
+#: src/gui/ConfigurationDialog.cpp:658
 msgid "Author"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:656
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "授权条款"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "执行指令： "
 
-#: src/gui/ConfigurationDialog.cpp:693
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "执行指令：[空白]"
 
-#: src/gui/ConfigurationDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -394,16 +394,16 @@ msgstr ""
 "新的天体目录经已下载完毕！\n"
 "请重新启动 Stellarium 以使用新的目录。"
 
-#: src/gui/ConfigurationDialog.cpp:767
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr "所有可用的星体资料均已安装。"
 
-#: src/gui/ConfigurationDialog.cpp:772
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "在 %2 中取后 %1 目录"
 
-#: src/gui/ConfigurationDialog.cpp:779
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -412,7 +412,7 @@ msgstr ""
 "正在下载 %1……\n"
 "（您可以关闭此窗口）"
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -423,7 +423,7 @@ msgstr ""
 "天体数量: %2 百万\n"
 "星等范围: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:829 src/gui/ConfigurationDialog.cpp:865
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -432,11 +432,11 @@ msgstr ""
 "在下载 %1 时发生了错误：\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "正在校验文件..."
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -671,7 +671,7 @@ msgstr "赤道座标 (J2000)"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
-msgstr ""
+msgstr "黄道坐标（J2000）"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
@@ -870,19 +870,19 @@ msgstr "减少 1 恒星周"
 
 #: src/gui/StelGui.cpp:168
 msgid "Add 1 sidereal month"
-msgstr ""
+msgstr "恒星月加1"
 
 #: src/gui/StelGui.cpp:169
 msgid "Subtract 1 sidereal month"
-msgstr ""
+msgstr "恒星月减1"
 
 #: src/gui/StelGui.cpp:170
 msgid "Add 1 sidereal year"
-msgstr ""
+msgstr "恒星年加1"
 
 #: src/gui/StelGui.cpp:171
 msgid "Subtract 1 sidereal year"
-msgstr ""
+msgstr "恒星年减1"
 
 #: src/gui/StelGui.cpp:174
 msgid "Center on selected object"
@@ -1058,7 +1058,7 @@ msgstr "清除图像"
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
-msgstr ""
+msgstr "自然的"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
@@ -1505,7 +1505,7 @@ msgstr "西方"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:162
 msgid "Guereins"
-msgstr ""
+msgstr "古尔瑞恩（Guereins，地名）"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:164
@@ -1525,12 +1525,12 @@ msgstr "海洋"
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:172
 msgid "Garching"
-msgstr ""
+msgstr "慕尼黑"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
 msgid "Landscape Tour"
-msgstr ""
+msgstr "游览"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
@@ -1564,7 +1564,7 @@ msgstr "黄道"
 
 #: src/translations.h:195
 msgid "Look around each installed landscape."
-msgstr ""
+msgstr "搜索已安装地景"
 
 #: src/translations.h:196
 msgid "Script to demonstrate a partial lunar eclipse."
@@ -1576,13 +1576,13 @@ msgstr "月全食演示脚本"
 
 #: src/translations.h:198
 msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr ""
+msgstr "随机天体演示"
 
 #: src/translations.h:199
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
-msgstr ""
+msgstr "2009年日全食演示（地点为孟加拉国兰格普，Rangpur）"
 
 #: src/translations.h:200
 msgid "Script which runs automatically at startup"
@@ -1661,7 +1661,7 @@ msgstr "亚塞拜然"
 
 #: src/translations.h:220
 msgid "Bosnia and Herzegowina"
-msgstr ""
+msgstr "波黑"
 
 #: src/translations.h:221
 msgid "Barbados"
@@ -1721,7 +1721,7 @@ msgstr "不丹"
 
 #: src/translations.h:235
 msgid "Bouvet Island"
-msgstr ""
+msgstr "布维岛"
 
 #: src/translations.h:236
 msgid "Botswana"
@@ -1733,7 +1733,7 @@ msgstr "白俄罗斯"
 
 #: src/translations.h:238
 msgid "Belize"
-msgstr ""
+msgstr "伯利兹"
 
 #: src/translations.h:239
 msgid "Canada"
@@ -1741,7 +1741,7 @@ msgstr "加拿大"
 
 #: src/translations.h:240
 msgid "Cocos Islands"
-msgstr ""
+msgstr "科科斯群岛"
 
 #: src/translations.h:241
 msgid "Democratic Republic of the Congo"
@@ -1817,7 +1817,7 @@ msgstr "德国"
 
 #: src/translations.h:259
 msgid "Djibouti"
-msgstr ""
+msgstr "吉布提"
 
 #: src/translations.h:260
 msgid "Denmark"
@@ -1853,7 +1853,7 @@ msgstr "西撒哈拉"
 
 #: src/translations.h:268
 msgid "Eritrea"
-msgstr ""
+msgstr "厄立特里亚国"
 
 #: src/translations.h:269
 msgid "Spain"
@@ -1897,7 +1897,7 @@ msgstr "英国"
 
 #: src/translations.h:279
 msgid "Grenada"
-msgstr ""
+msgstr "格林纳达"
 
 #: src/translations.h:280
 msgid "Georgia"
@@ -1929,7 +1929,7 @@ msgstr "几内亚"
 
 #: src/translations.h:287
 msgid "Guadeloupe"
-msgstr ""
+msgstr "瓜德鲁普岛"
 
 #: src/translations.h:288
 msgid "Equatorial Guinea"
@@ -1941,7 +1941,7 @@ msgstr "希腊"
 
 #: src/translations.h:290
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "南乔治亚洲和桑威奇群岛"
 
 #: src/translations.h:291
 msgid "Guatemala"
@@ -1965,7 +1965,7 @@ msgstr "香港"
 
 #: src/translations.h:296
 msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgstr "赫德岛与麦克唐纳群岛"
 
 #: src/translations.h:297
 msgid "Honduras"
@@ -2165,7 +2165,7 @@ msgstr "北马里亚纳群岛"
 
 #: src/translations.h:346
 msgid "Martinique"
-msgstr ""
+msgstr "马提尼克"
 
 #: src/translations.h:347
 msgid "Mauritania"
@@ -2173,7 +2173,7 @@ msgstr "毛里塔尼亚"
 
 #: src/translations.h:348
 msgid "Montserrat"
-msgstr ""
+msgstr "蒙特塞拉特岛"
 
 #: src/translations.h:349
 msgid "Malta"
@@ -2241,11 +2241,11 @@ msgstr "尼泊尔"
 
 #: src/translations.h:365
 msgid "Nauru"
-msgstr ""
+msgstr "瑙鲁"
 
 #: src/translations.h:366
 msgid "Niue"
-msgstr ""
+msgstr "纽埃岛"
 
 #: src/translations.h:367
 msgid "New Zealand"
@@ -2285,11 +2285,11 @@ msgstr "波兰"
 
 #: src/translations.h:376
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "圣皮埃尔和密克隆"
 
 #: src/translations.h:377
 msgid "Pitcairn"
-msgstr ""
+msgstr "皮特克恩岛"
 
 #: src/translations.h:378
 msgid "Puerto Rico"
@@ -2361,7 +2361,7 @@ msgstr "新加坡"
 
 #: src/translations.h:395
 msgid "Saint Helena"
-msgstr ""
+msgstr "圣赫勒拿"
 
 #: src/translations.h:396
 msgid "Slovenia"
@@ -2369,7 +2369,7 @@ msgstr "斯洛文尼亚"
 
 #: src/translations.h:397
 msgid "Svalbard and Jan Mayen"
-msgstr ""
+msgstr "斯瓦尔巴群岛"
 
 #: src/translations.h:398
 msgid "Slovakia"
@@ -2397,7 +2397,7 @@ msgstr "苏里南"
 
 #: src/translations.h:404
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "圣多美和普林西比"
 
 #: src/translations.h:405
 msgid "El Salvador"
@@ -2413,7 +2413,7 @@ msgstr "斯威士兰"
 
 #: src/translations.h:408
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "特克斯群岛和凯科斯群岛"
 
 #: src/translations.h:409
 msgid "Chad"
@@ -2505,7 +2505,7 @@ msgstr "梵蒂冈"
 
 #: src/translations.h:431
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "圣文森特和格林纳丁斯"
 
 #: src/translations.h:432
 msgid "Venezuela"
@@ -2529,7 +2529,7 @@ msgstr "瓦努阿图"
 
 #: src/translations.h:437
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "瓦利斯和富图纳群岛"
 
 #: src/translations.h:438
 msgid "Samoa"
@@ -2945,23 +2945,23 @@ msgstr "天球"
 
 #: src/ui_viewDialog.h:1162
 msgid "Show equator line"
-msgstr ""
+msgstr "显示天球赤道"
 
 #: src/ui_viewDialog.h:1166
 msgid "Show meridian line"
-msgstr ""
+msgstr "显示子午线"
 
 #: src/ui_viewDialog.h:1170
 msgid "Show horizon line"
-msgstr ""
+msgstr "显示地平线"
 
 #: src/ui_viewDialog.h:1174
 msgid "Show ecliptic line"
-msgstr ""
+msgstr "显示黄道线"
 
 #: src/ui_viewDialog.h:1178
 msgid "Show Galactic plane line"
-msgstr ""
+msgstr "显示银河平面"
 
 #: src/ui_viewDialog.h:1182
 msgid "Projection"
@@ -3025,11 +3025,11 @@ msgstr "简短显示"
 
 #: src/ui_configurationDialog.h:798
 msgid "Display user settings information"
-msgstr ""
+msgstr "显示用户设置信息"
 
 #: src/ui_configurationDialog.h:800
 msgid "Customized"
-msgstr ""
+msgstr "自定义"
 
 #: src/ui_configurationDialog.h:802
 msgid "Display no information"
@@ -3351,87 +3351,87 @@ msgstr "建议在条件很好的山顶使用0.12，农村地区使用0.2，条�
 
 #: src/ui_CustomInfoDialog.h:194
 msgid "Custom Info Settings"
-msgstr ""
+msgstr "自定义信息设置"
 
 #: src/ui_CustomInfoDialog.h:196
 msgid "Display info about an object's name"
-msgstr ""
+msgstr "显示天体名称信息"
 
 #: src/ui_CustomInfoDialog.h:198
 msgid "An object's name"
-msgstr ""
+msgstr "天体名称"
 
 #: src/ui_CustomInfoDialog.h:200
 msgid "Display  info about a catalog numbers"
-msgstr ""
+msgstr "显示类别信息"
 
 #: src/ui_CustomInfoDialog.h:202
 msgid "Catalog numbers"
-msgstr ""
+msgstr "类别编号"
 
 #: src/ui_CustomInfoDialog.h:204
 msgid "Display  info about a visual magnitude"
-msgstr ""
+msgstr "显示视星等"
 
 #: src/ui_CustomInfoDialog.h:206
 msgid "Visual magnitude"
-msgstr ""
+msgstr "视星等"
 
 #: src/ui_CustomInfoDialog.h:208
 msgid "Display  info about an absolute magnitude"
-msgstr ""
+msgstr "显示绝对星等"
 
 #: src/ui_CustomInfoDialog.h:210
 msgid "Absolute magnitude"
-msgstr ""
+msgstr "绝对星等"
 
 #: src/ui_CustomInfoDialog.h:212
 msgid "Display the equatorial position (J2000 ref)"
-msgstr ""
+msgstr "显示赤道坐标位置(J2000)"
 
 #: src/ui_CustomInfoDialog.h:214
 msgid "The equatorial coordinates (J2000 ref)"
-msgstr ""
+msgstr "赤道坐标(J2000)"
 
 #: src/ui_CustomInfoDialog.h:216
 msgid "Display the equatorial position (of date)"
-msgstr ""
+msgstr "显示赤道坐标位置(以日记)"
 
 #: src/ui_CustomInfoDialog.h:218
 msgid "The equatorial coordinates (of date)"
-msgstr ""
+msgstr "赤道坐标(以日记)"
 
 #: src/ui_CustomInfoDialog.h:220
 msgid "Display the altitude and azimuth position"
-msgstr ""
+msgstr "显示地平坐标位置"
 
 #: src/ui_CustomInfoDialog.h:222
 msgid "The alt-azimuthal coordinates"
-msgstr ""
+msgstr "地平坐标"
 
 #: src/ui_CustomInfoDialog.h:224
 msgid "Display the hour angle + DE (of date)"
-msgstr ""
+msgstr "显示时角（以日记）"
 
 #: src/ui_CustomInfoDialog.h:226
 msgid "The hour angle"
-msgstr ""
+msgstr "时角/相位角"
 
 #: src/ui_CustomInfoDialog.h:228
 msgid "Display info about an object's distance"
-msgstr ""
+msgstr "显示天体距离"
 
 #: src/ui_CustomInfoDialog.h:230
 msgid "Object's distance"
-msgstr ""
+msgstr "天体距离"
 
 #: src/ui_CustomInfoDialog.h:232
 msgid "Display info about an object's size"
-msgstr ""
+msgstr "显示天体大小"
 
 #: src/ui_CustomInfoDialog.h:234
 msgid "Object's size"
-msgstr ""
+msgstr "天体大小"
 
 #: src/ui_CustomInfoDialog.h:236 src/ui_CustomInfoDialog.h:240
 #: src/ui_CustomInfoDialog.h:244
@@ -3440,15 +3440,15 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:238
 msgid "Additional info (Extra 1)"
-msgstr ""
+msgstr "附加信息（增补1）"
 
 #: src/ui_CustomInfoDialog.h:242
 msgid "Additional info (Extra 2)"
-msgstr ""
+msgstr "附加信息（增补2）"
 
 #: src/ui_CustomInfoDialog.h:246
 msgid "Additional info (Extra 3)"
-msgstr ""
+msgstr "附加信息（增补3）"
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
@@ -3945,11 +3945,11 @@ msgstr "旧版本的 satellites.json 文件已不再适用，将使用默认文�
 #: plugins/Satellites/src/Satellite.cpp:230
 #: plugins/Satellites/src/Satellite.cpp:234
 msgid "Catalog #"
-msgstr ""
+msgstr "类别 #"
 
 #: plugins/Satellites/src/Satellite.cpp:236
 msgid "International Designator"
-msgstr ""
+msgstr "国际标准化命名"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:248
@@ -4205,7 +4205,7 @@ msgstr "[轨道计算错误]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"
-msgstr ""
+msgstr "[均为最新添加]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:463
 msgid "[all not displayed]"
@@ -4293,7 +4293,7 @@ msgstr "绘制轨道时使用的线段数量"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Number of  segments:"
-msgstr ""
+msgstr "段落编号："
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:659
 #: plugins/Satellites/src/ui_satellitesDialog.h:663
@@ -4302,7 +4302,7 @@ msgstr "线条中的一个线段所表示的持续时长（秒）"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:661
 msgid "Segment length (s):"
-msgstr ""
+msgstr "段落长度:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:666
 #: plugins/Satellites/src/ui_satellitesDialog.h:669
@@ -5511,7 +5511,7 @@ msgstr "脉冲星"
 #: plugins/Pulsars/src/Pulsar.cpp:109
 #, qt-format
 msgid "Barycentric period: %1 s"
-msgstr ""
+msgstr "自转周期: %1 s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:112
 #, qt-format
@@ -5537,7 +5537,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:130 plugins/Pulsars/src/Pulsar.cpp:142
 #: plugins/Pulsars/src/Pulsar.cpp:154
 msgid "Time averaged flux density at"
-msgstr ""
+msgstr "时均通量密度为"
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Pulsars/src/Pulsar.cpp:133 plugins/Pulsars/src/Pulsar.cpp:145
@@ -5549,7 +5549,7 @@ msgstr "兆赫兹"
 #: plugins/Pulsars/src/Pulsar.cpp:136 plugins/Pulsars/src/Pulsar.cpp:148
 #: plugins/Pulsars/src/Pulsar.cpp:160
 msgid "mJy"
-msgstr ""
+msgstr "毫央"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:232
@@ -5579,7 +5579,7 @@ msgstr "毫秒脉冲星"
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:262
 msgid "recycled pulsar"
-msgstr ""
+msgstr "循环脉冲星"
 
 #. TRANSLATORS: Type of pulsar
 #: plugins/Pulsars/src/Pulsar.cpp:268
