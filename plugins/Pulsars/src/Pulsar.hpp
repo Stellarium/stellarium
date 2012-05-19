@@ -109,6 +109,7 @@ private:
 	float s600;		//! Time averaged flux density at 600MHz in mJy
 	float s1400;		//! Time averaged flux density at 1400MHz in mJy
 	float distance;		//! Distance based on electron density model in kpc
+	QString notes;		//! Notes to pulsar (Type of pulsar)
 
 	LinearFader labelsFader;
 
@@ -116,6 +117,10 @@ private:
 	//! @param p0 - barycentric period of the pulsar (s)
 	//! @param p1 - time derivative of barcycentric period (dimensionless)
 	double getEdot(double p0, double p1) const;
+
+	//! Get type of pulsar
+	//! @param pcode - code of pulsar type
+	QString getPulsarTypeInfoString(QString pcode) const;
 
 };
 
