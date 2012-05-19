@@ -33,7 +33,6 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 	$dmeasure = 0;
 	$frequency = 0;
 	$eccentricity = 0;
-	$edot = 0;
 	$w50 = 0;
 	$s400 = 0;
 	$s600 = 0;
@@ -92,10 +91,6 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 			$s1400 = $2;
 		}
 
-		if ($lines[$j] =~ /^EDOT(\s+)([\d\.]+)/) {
-			$edot = $2;
-		}
-
 		if ($lines[$j] =~ /^PX(\s+)([\d\.]+)/) {
 			$parallax = $2;
 		}
@@ -104,7 +99,7 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 			$dmeasure = $2;
 		}
 
-		if ($lines[$j] =~ /^DIST_DM(\s+)([\d\.\+\-]+)/) {
+		if ($lines[$j] =~ /^DIST_DM1(\s+)([\d\.\+\-]+)/) {
 			$distance = $2;
 		}
 
@@ -138,9 +133,6 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 	}
 	if ($frequency > 0) {
 		$out .= "\t\t\t\"frequency\": ".$frequency.",\n";
-	}
-	if ($edot > 0) {
-		$out .= "\t\t\t\"edot\": ".$edot.",\n";
 	}
 	if ($w50 > 0) {
 		$out .= "\t\t\t\"w50\": ".$w50.",\n";
