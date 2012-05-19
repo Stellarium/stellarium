@@ -61,6 +61,7 @@ Pulsar::Pulsar(const QVariantMap& map)
 	s600 = map.value("s600").toFloat();
 	s1400 = map.value("s1400").toFloat();
 	distance = map.value("distance").toFloat();
+	notes = map.value("notes").toString();
 
 	// If baricentric period not set then calculate it
 	if (period==0 && frequency>0)
@@ -94,6 +95,7 @@ QVariantMap Pulsar::getMap(void)
 	map["s600"] = s600;
 	map["s1400"] = s1400;
 	map["distance"] = distance;
+	map["notes"] = notes;
 
 	return map;
 }
@@ -115,7 +117,9 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	}
 
 	if (flags&Extra1)
-	    oss << q_("Type: <b>%1</b>").arg(q_("pulsar")) << "<br />";
+	{
+		oss << q_("Type: <b>%1</b>").arg(q_("pulsar")) << "<br />";
+	}
 
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
@@ -146,7 +150,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		double edot = getEdot(period, pderivative);
 		if (edot>0)
 		{
-			oss << q_("Spin down energy loss rate: %1 ergs/s").arg(QString::number(edot, 'e', 5)) << "<br>";
+			oss << q_("Spin down energy loss rate: %1 ergs/s").arg(QString::number(edot, 'e', 2)) << "<br>";
 		}
 		if (bperiod>0)
 		{
@@ -205,6 +209,10 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			       // TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 			       .arg(q_("mJy")) << "<br>";
 		}
+		if (notes.length()>0)
+		{
+			oss << "<br>" << q_("Notes: %1").arg(getPulsarTypeInfoString(notes)) << "<br>";
+		}
 	}
 
 	postProcessInfoString(str, flags);
@@ -243,6 +251,48 @@ double Pulsar::getEdot(double p0, double p1) const
 	{
 		return 0.0;
 	}
+}
+
+QString Pulsar::getPulsarTypeInfoString(QString pcode) const
+{
+	QStringList out;
+
+	if (pcode.contains("AXP"))
+	{
+		out.append(q_("anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"));
+	}
+
+	if (pcode.contains("BINARY") || bperiod>0)
+	{
+		out.append(q_("has one or more binary companions"));
+	}
+
+	if (pcode.contains("HE"))
+	{
+		out.append(q_("with pulsed emission from radio to infrared or higher frequencies"));
+	}
+
+	if (pcode.contains("NRAD"))
+	{
+		out.append(q_("with pulsed emission only at infrared or higher frequencies"));
+	}
+
+	if (pcode.contains("RADIO"))
+	{
+		out.append(q_("with pulsed emission in the radio band"));
+	}
+
+	if (pcode.contains("RRAT"))
+	{
+		out.append(q_("with intermittently pulsed radio emission"));
+	}
+
+	if (pcode.contains("XINS"))
+	{
+		out.append(q_("isolated neutron stars with pulsed thermal X-ray emission but no detectable radio emission"));
+	}
+
+	return out.join(",<br />");
 }
 
 double Pulsar::getAngularSize(const StelCore*) const
