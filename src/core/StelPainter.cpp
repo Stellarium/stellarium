@@ -18,9 +18,10 @@
  */
 
 #include "StelPainter.hpp"
-
 #include <QtOpenGL>
 
+#include "StelApp.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
 #include "StelUtils.hpp"
@@ -449,7 +450,7 @@ void StelPainter::sRing(float rMin, float rMax, int slices, int stacks, int orie
 	float x,y;
 	int j;
 
-	static Vec3d lightPos3;
+	static Vec3f lightPos3;
 	static Vec4f ambientLight;
 	static Vec4f diffuseLight;
 	float c;
@@ -461,7 +462,7 @@ void StelPainter::sRing(float rMin, float rMax, int slices, int stacks, int orie
 		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
 		//lightPos3 -= tmpv;
 		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
-		prj->getModelViewTransform()->getApproximateLinearTransfo().transpose().multiplyWithoutTranslation(lightPos3);
+		prj->getModelViewTransform()->getApproximateLinearTransfo().transpose().multiplyWithoutTranslation(Vec3d(lightPos3[0], lightPos3[1], lightPos3[2]));
 		prj->getModelViewTransform()->backward(lightPos3);
 		lightPos3.normalize();
 		ambientLight = light.getAmbient();
@@ -615,23 +616,37 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	// If the text is too far away to be visible in the screen return
 	if (d>qMax(prj->viewportXywh[3], prj->viewportXywh[2])*2)
 		return;
-	theta = M_PI + std::atan2(dx, dy - 1);
+	theta = std::atan2(dy - 1, dx);
 	psi = std::atan2((float)qPainter->fontMetrics().width(ws)/ws.length(),d + 1) * 180./M_PI;
-	if (psi>5)
+	if (psi>5) {
 		psi = 5;
+	}
 
-	const float cosr = std::cos(-theta * M_PI/180.);
-	const float sinr = std::sin(-theta * M_PI/180.);
+	float cWidth = (float)qPainter->fontMetrics().width(ws)/ws.length();
+	float xVc = prj->viewportCenter[0] + xshift;
+	float yVc = prj->viewportCenter[1] + yshift;
 
-	float initX = x + xshift*cosr - yshift*sinr;
-	float initY = y + yshift*sinr + yshift*cosr;
-	
-	for (int i=0;i<ws.length();++i)
+	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	if (!QString("ar fa ur he yi").contains(lang)) {
+        	for (int i=0; i<ws.length(); ++i)
+	        {
+			x = d * std::cos (theta) + xVc ;
+			y = d * std::sin (theta) + yVc ; 
+			drawText(x, y, ws[i], 90. + theta*180./M_PI, 0., 0.);
+			// Compute how much the character contributes to the angle
+			theta += psi * M_PI/180. * (1 + ((float)qPainter->fontMetrics().width(ws[i]) - cWidth)/ cWidth);
+		}
+	}
+	else
 	{
-		drawText(initX, initY, ws[i], -theta*180./M_PI+psi*i, 0., 0.);
-		xshift = (float)qPainter->fontMetrics().width(ws.mid(i,1)) * 1.05;
-		initX+=xshift*std::cos(-theta+psi*i * M_PI/180.);
-		initY+=xshift*std::sin(-theta+psi*i * M_PI/180.);
+		int slen = ws.length();
+		for (int i=0;i<slen;i++)
+		{
+			x = d * std::cos (theta) + xVc;
+			y = d * std::sin (theta) + yVc; 
+			drawText(x, y, ws[slen-1-i], 90. + theta*180./M_PI, 0., 0.);
+			theta += psi * M_PI/180. * (1 + ((float)qPainter->fontMetrics().width(ws[slen-1-i]) - cWidth)/ cWidth);
+		}
 	}
 }
 
@@ -673,7 +688,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	}
 	else
 	{
-		static const int cacheLimitByte = 7000000;
+		static const int cacheLimitByte = 10000000;
 		static QCache<QByteArray,StringTexture> texCache(cacheLimitByte);
 		int pixelSize = qPainter->font().pixelSize();
 		QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);
@@ -748,7 +763,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 
 
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);		
+		glEnable(GL_BLEND);
 		enableClientStates(true, true);
 		setVertexPointer(2, GL_FLOAT, vertexData);
 
@@ -1579,7 +1594,7 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	// It is really good for performance to have Vec4f,Vec3f objects
 	// static rather than on the stack. But why?
 	// Is the constructor/destructor so expensive?
-	static Vec3d lightPos3;
+	static Vec3f lightPos3;
 	static Vec4f ambientLight;
 	static Vec4f diffuseLight;
 	float c;
@@ -1591,7 +1606,7 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
 		//lightPos3 -= tmpv;
 		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
-		prj->getModelViewTransform()->getApproximateLinearTransfo().transpose().multiplyWithoutTranslation(lightPos3);
+		prj->getModelViewTransform()->getApproximateLinearTransfo().transpose().multiplyWithoutTranslation(Vec3d(lightPos3[0], lightPos3[1], lightPos3[2]));
 		prj->getModelViewTransform()->backward(lightPos3);
 		lightPos3.normalize();
 		ambientLight = light.getAmbient();
@@ -1636,10 +1651,12 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	static QVector<float> texCoordArr;
 	static QVector<float> colorArr;
 	static QVector<unsigned int> indiceArr;
+
 	texCoordArr.resize(0);
 	vertexArr.resize(0);
 	colorArr.resize(0);
 	indiceArr.resize(0);
+
 	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
 	{
 		s = !flipTexture ? 0.f : 1.f;
@@ -1943,6 +1960,7 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 	texturesColorShaderVars.vertex = texturesColorShaderProgram->attributeLocation("vertex");
 	texturesColorShaderVars.color = texturesColorShaderProgram->attributeLocation("color");
 	texturesColorShaderVars.texture = texturesColorShaderProgram->uniformLocation("tex");
+
 #endif
 }
 
@@ -1999,6 +2017,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		glEnableClientState(GL_COLOR_ARRAY);
 		glColorPointer(colorArray.size, colorArray.type, 0, colorArray.pointer);
 	}
+
 #else
 	QGLShaderProgram* pr=NULL;
 
@@ -2078,6 +2097,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->release();
 #endif
 }
+
 
 StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& array, int offset, int count, const unsigned int* indices)
 {

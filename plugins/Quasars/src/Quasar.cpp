@@ -182,7 +182,8 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 	if (mag <= sd->getLimitMagnitude())
 	{
 		sd->computeRCMag(mag, rcMag);
-		sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, sd->indexToColor(BvToColorIndex(bV)), false);
+		//sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, sd->indexToColor(BvToColorIndex(bV)), false);
+		sd->drawPointSource(&painter, XYZ, rcMag, sd->indexToColor(BvToColorIndex(bV)), false);
 		painter.setColor(color[0], color[1], color[2], 1);
 		size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 		shift = 6.f + size/1.8f;

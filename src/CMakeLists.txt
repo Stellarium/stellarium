@@ -1,4 +1,3 @@
-
 SET(glues_lib_SRCS
 	core/external/glues_stel/source/glues_error.c
 	core/external/glues_stel/source/glues_error.h
@@ -413,6 +412,8 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/AddRemoveLandscapesDialog.cpp
 		gui/AtmosphereDialog.hpp
 		gui/AtmosphereDialog.cpp
+                gui/CustomInfoDialog.hpp
+                gui/CustomInfoDialog.cpp
 		gui/StelDialog.hpp
 		gui/StelDialog.cpp)
 
@@ -432,6 +433,7 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/ConfigurationDialog.hpp
 		gui/AddRemoveLandscapesDialog.hpp
 		gui/AtmosphereDialog.hpp
+                gui/CustomInfoDialog.hpp
 		gui/StelDialog.hpp)
 
 	################# compiles .ui files ############
@@ -443,6 +445,7 @@ IF (GUI_MODE STREQUAL "Standard")
 	gui/searchDialogGui.ui
 	gui/configurationDialog.ui
 	gui/AtmosphereDialog.ui
+        gui/CustomInfoDialog.ui
 	gui/addRemoveLandscapesDialog.ui)
 
 	IF(ENABLE_SCRIPT_CONSOLE)
@@ -573,13 +576,13 @@ IF (BUILD_STATIC_PLUGINS)
   ENDIF()
 
   IF (USE_PLUGIN_QUASARS)
-    SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Quasars/src/${CMAKE_CFG_INTDIR}/libQuasars.a")
-    ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_QUASARS)
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Quasars/src/${CMAKE_CFG_INTDIR}/libQuasars.a")
+	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_QUASARS)
   ENDIF()
 
   IF (USE_PLUGIN_PULSARS)
-    SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Pulsars/src/${CMAKE_CFG_INTDIR}/libPulsars.a")
-    ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_PULSARS)
+	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Pulsars/src/${CMAKE_CFG_INTDIR}/libPulsars.a")
+	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_PULSARS)
   ENDIF()
   
   IF (USE_PLUGIN_EXOPLANETS)
@@ -679,6 +682,10 @@ SET(tests_testStelSphereGeometry_SRCS
 	core/StelJsonParser.cpp
 	core/StelUtils.cpp
 	core/StelUtils.hpp
+	core/StelProjector.cpp
+	core/StelProjector.hpp
+	core/StelTranslator.cpp
+	core/StelTranslator.hpp
 	${glues_lib_SRCS})
 QT4_WRAP_CPP(testStelSphereGeometry_MOC_SRCS tests/testStelSphereGeometry.hpp)
 ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS} ${testStelSphereGeometry_MOC_SRCS})
@@ -700,6 +707,10 @@ SET(tests_testStelSphericalIndex_SRCS
 	core/StelJsonParser.cpp
 	core/StelUtils.cpp
 	core/StelUtils.hpp
+	core/StelProjector.cpp
+	core/StelProjector.hpp
+	core/StelTranslator.cpp
+	core/StelTranslator.hpp
 	${glues_lib_SRCS})
 QT4_WRAP_CPP(tests_testStelSphericalIndex_MOC_SRCS tests/testStelSphericalIndex.hpp)
 ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS} ${tests_testStelSphericalIndex_MOC_SRCS})
@@ -747,3 +758,4 @@ ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelJsonParser WORKING_
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelVertexArray WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 # ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testRefractionExtinction WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_DEPENDENCIES(tests buildTests)
+

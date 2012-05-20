@@ -90,28 +90,27 @@ AngleSpinBox::AngleSpinboxSection AngleSpinBox::getCurrentSection() const
 	int cPosMin = str.indexOf(QRegExp("[+-"+q_("N")+q_("S")+q_("E")+q_("W")+"]"), 0);
 	int cPosMax = cPosMin+1;
 	
-	if (cPosMin==0)
-	{
-		// No prefix
-		cPosMax=0;
-	}
-	else if (cusorPos>=cPosMin && cusorPos<cPosMax)
+	if (cusorPos>=cPosMin && cusorPos<cPosMax) {
 		return SectionPrefix;
+	}
 	
 	cPosMin = cPosMax;
 	cPosMax = str.indexOf(QRegExp(QString("[h%1]").arg(QChar(176))), 0)+1;
-	if (cusorPos>=cPosMin && cusorPos<cPosMax)
+	if (cusorPos > cPosMin && cusorPos <= cPosMax) {
 		return SectionDegreesHours;
+	}
 	
 	cPosMin = cPosMax;
 	cPosMax = str.indexOf(QRegExp("[m']"), 0)+1;
-	if (cusorPos>=cPosMin && cusorPos<cPosMax)
+	if (cusorPos > cPosMin && cusorPos <= cPosMax) {
 		return SectionMinutes;
+	}
 	
 	cPosMin = cPosMax;
 	cPosMax = str.indexOf(QRegExp("[s\"]"), 0)+1;
-	if (cusorPos>=cPosMin && cusorPos<cPosMax)
+	if (cusorPos > cPosMin && cusorPos <= cPosMax) {
 		return SectionSeconds;
+	}
 	
 	return SectionNone;
 }

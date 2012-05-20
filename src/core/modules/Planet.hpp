@@ -37,7 +37,7 @@ typedef void (OsculatingFunctType)(double jd0,double jd,double xyz[3]);
 
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
-#define ORBIT_SEGMENTS 72
+#define ORBIT_SEGMENTS 360
 
 class StelFont;
 class StelPainter;
@@ -110,8 +110,8 @@ public:
 	//! - Distance
 	//! - Size
 	//! - PlainText
-        //! - Extra1: Heliocentric Ecliptical Coordinates
-        //! - Extra2: Observer-planetocentric Ecliptical Coordinates
+	//! - Extra1: Heliocentric Ecliptical Coordinates & Observer-planetocentric Ecliptical Coordinates
+	//! - Extra2: Phase, illumination, phase angle & elongation from the Sun
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Planet.
@@ -144,7 +144,7 @@ public:
 	double getRadius(void) const {return radius;}
 	double getSiderealDay(void) const {return re.period;}
 
-	const QString& getTextMapName() const {return texMapName;}
+	const QString& getTextMapName() const {return texMapName;}	
 
 	// Compute the z rotation to use from equatorial to geographic coordinates
 	double getSiderealTime(double jd) const;
@@ -160,8 +160,10 @@ public:
 	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
 	void computeTransMatrix(double date);
 
-	// Get the phase angle for an observer at pos obsPos in the heliocentric coordinate (in AU)
+	// Get the phase angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getPhase(const Vec3d& obsPos) const;
+	// Get the elongation angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
+	double getElongation(const Vec3d& obsPos) const;
 	// Get the angular size of the spheroid of the planet (i.e. without the rings)
 	double getSpheroidAngularSize(const StelCore* core) const;
 
@@ -177,6 +179,9 @@ public:
 
 	// Return the heliocentric ecliptical position
 	Vec3d getHeliocentricEclipticPos() const;
+
+	// Return the heliocentric transformation for local coordinate
+	Vec3d getHeliocentricPos(Vec3d) const;
 	void setHeliocentricEclipticPos(const Vec3d &pos);
 
 	// Compute the distance to the given position in heliocentric coordinate (in AU)
@@ -211,6 +216,7 @@ public:
 	// draw orbital path of Planet
 	void drawOrbit(const StelCore*);
 	Vec3d orbit[ORBIT_SEGMENTS+1];   // store heliocentric coordinates for drawing the orbit
+	Vec3d orbitP[ORBIT_SEGMENTS+1];  // store local coordinate for orbit
 	double lastOrbitJD;
 	double deltaJD;
 	double deltaOrbitJD;
@@ -253,10 +259,12 @@ protected:
 	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen
 	Vec3d previousScreenPos;         // The position of this planet in the previous frame.
 	Vec3f color;
+
 	float albedo;                    // Planet albedo
 	Mat4d rotLocalToParent;
 	float axisRotation;              // Rotation angle of the Planet on it's axis
 	StelTextureSP texMap;            // Planet map texture
+
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
 					 // it is used for sorting while drawing

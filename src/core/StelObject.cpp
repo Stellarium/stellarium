@@ -31,7 +31,6 @@
 #include <QRegExp>
 #include <QDebug>
 
-
 Vec3d StelObject::getEquinoxEquatorialPos(const StelCore* core) const
 {
 	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core));
@@ -154,3 +153,4 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		str.append(QString("</font>"));
 	}
 }
+
