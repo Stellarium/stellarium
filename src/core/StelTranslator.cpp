@@ -146,20 +146,20 @@ void StelTranslator::reload()
 }
 
 
-//! Convert from ISO639-1 2 letters langage code to native language name
+//! Convert from ISO639-1 2(+3) letters langage code to native language name
 QString StelTranslator::iso639_1CodeToNativeName(const QString& languageCode)
 {
 	if (languageCode=="C")
 		return "English";
 
-	QLocale loc(languageCode);
-	QString l = loc.name();
+	//QLocale loc(languageCode);
+	//QString l = loc.name();
 	// There is a QLocale for this code.  This should be the case for most
 	// language codes, but there are a few without QLocales, e.g. Interlingua
-	if (l.contains('_'))
-		l.truncate(l.indexOf('_'));
-	if (iso639codes.find(l)!=iso639codes.end())
-		return iso639codes[l]+ (languageCode.size()==2 ? "" : QString(" (")+QLocale::countryToString(loc.country())+")");
+	//if (l.contains('_'))
+	//	l.truncate(l.indexOf('_'));
+	//if (iso639codes.find(l)!=iso639codes.end())
+	//	return iso639codes[l]+ (languageCode.size()==2 ? "" : QString(" (")+QLocale::countryToString(loc.country())+")");
 
 	// For codes which return the locale C, use the language code to do the lookup
 	if (iso639codes.contains(languageCode))
