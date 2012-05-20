@@ -100,6 +100,7 @@ private:
 	float parallax;		//! Annual parallax (mas)
 	double period;		//! Barycentric period of the pulsar (s)
 	double frequency;	//! Barycentric rotation frequency (Hz)
+	double pfrequency;      //! Time derivative of barycentric rotation frequency (s^-2)
 	double pderivative;	//! Time derivative of barcycentric period (dimensionless)
 	double dmeasure;	//! Dispersion measure (cm-3 pc)
 	double bperiod;		//! Binary period of pulsar (days)
@@ -117,6 +118,11 @@ private:
 	//! @param p0 - barycentric period of the pulsar (s)
 	//! @param p1 - time derivative of barcycentric period (dimensionless)
 	double getEdot(double p0, double p1) const;
+
+	//! Calculate and get barycentric period derivative
+	//! @param p0 - barycentric period of the pulsar (s)
+	//! @param f1 - time derivative of barcycentric period (s^-2)
+	double getP1(double p0, double f1) const;
 
 	//! Get type of pulsar
 	//! @param pcode - code of pulsar type
