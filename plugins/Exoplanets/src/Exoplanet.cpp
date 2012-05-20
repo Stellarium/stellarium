@@ -104,11 +104,26 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 
 	if (flags&Extra1)
 	{
-		oss << q_("Period: %1").arg(QString::number(period, 'f', 3)) << "<br>";
-		oss << q_("Mass: %1").arg(QString::number(mass, 'f', 3)) << "<br>";
-		oss << q_("Radius: %1").arg(QString::number(radius, 'f', 3)) << "<br>";
-		oss << q_("Eccentricity: %1").arg(QString::number(eccentricity, 'f', 3)) << "<br>";
-		oss << q_("Inclination: %1").arg(QString::number(inclination, 'f', 3)) << "<br>";
+		if (period>0)
+		{
+			oss << q_("Period: %1").arg(QString::number(period, 'f', 2)) << "<br>";
+		}
+		if (mass>0)
+		{
+			oss << q_("Mass: %1").arg(QString::number(mass, 'f', 2)) << "<br>";
+		}
+		if (radius>0)
+		{
+			oss << q_("Radius: %1").arg(QString::number(radius, 'f', 2)) << "<br>";
+		}
+		if (eccentricity>0)
+		{
+			oss << q_("Eccentricity: %1").arg(QString::number(eccentricity, 'f', 2)) << "<br>";
+		}
+		if (inclination>0)
+		{
+			oss << q_("Inclination: %1").arg(QString::number(inclination, 'f', 2)) << "<br>";
+		}
 	}
 
 	postProcessInfoString(str, flags);
