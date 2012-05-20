@@ -51,6 +51,7 @@ Pulsar::Pulsar(const QVariantMap& map)
 	period = map.value("period").toDouble();
 	bperiod = map.value("bperiod").toDouble();
 	frequency = map.value("frequency").toDouble();
+	pfrequency = map.value("pfrequency").toDouble();
 	pderivative = map.value("pderivative").toDouble();
 	dmeasure = map.value("dmeasure").toDouble();
 	eccentricity = map.value("eccentricity").toDouble();	
@@ -63,10 +64,15 @@ Pulsar::Pulsar(const QVariantMap& map)
 	distance = map.value("distance").toFloat();
 	notes = map.value("notes").toString();
 
-	// If baricentric period not set then calculate it
+	// If barycentric period not set then calculate it
 	if (period==0 && frequency>0)
 	{
 		period = 1/frequency;
+	}
+	// If barycentric period derivative not set then calculate it
+	if (pderivative==0)
+	{
+		pderivative = getP1(period, pfrequency);
 	}
 
 	initialized = true;
@@ -84,6 +90,7 @@ QVariantMap Pulsar::getMap(void)
 	map["parallax"] = parallax;
 	map["bperiod"] = bperiod;
 	map["frequency"] = frequency;
+	map["pfrequency"] = pfrequency;
 	map["pderivative"] = pderivative;
 	map["dmeasure"] = dmeasure;
 	map["eccentricity"] = eccentricity;	
@@ -133,7 +140,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		}
 		if (pderivative>0)
 		{
-			oss << q_("Time derivative of barcycentric period: %1").arg(QString::number(pderivative, 'e', 5)) << "<br>";
+			oss << q_("Time derivative of barycentric period: %1").arg(QString::number(pderivative, 'e', 5)) << "<br>";
 		}
 		if (dmeasure>0)
 		{
@@ -242,7 +249,7 @@ float Pulsar::getVMagnitude(const StelCore* core, bool withExtinction) const
 
 double Pulsar::getEdot(double p0, double p1) const
 {
-	if (p0>0 && p1>0)
+	if (p0>0 && p1!=0)
 	{
 		// Calculate spin down energy loss rate (ergs/s)
 		return 4.0 * M_PI * M_PI * PSR_INERTIA * p1 / pow(p0,3);
@@ -252,6 +259,20 @@ double Pulsar::getEdot(double p0, double p1) const
 		return 0.0;
 	}
 }
+
+double Pulsar::getP1(double p0, double f1) const
+{
+	if (p0>0 && f1!=0)
+	{
+		// Calculate derivative of barycentric period
+		return -1.0 * p0 * p0 * f1;
+	}
+	else
+	{
+		return 0.0;
+	}
+}
+
 
 QString Pulsar::getPulsarTypeInfoString(QString pcode) const
 {
@@ -289,7 +310,7 @@ QString Pulsar::getPulsarTypeInfoString(QString pcode) const
 
 	if (pcode.contains("XINS"))
 	{
-		out.append(q_("isolated neutron stars with pulsed thermal X-ray emission but no detectable radio emission"));
+		out.append(q_("isolated neutron star with pulsed thermal X-ray emission but no detectable radio emission"));
 	}
 
 	return out.join(",<br />");

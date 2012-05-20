@@ -32,6 +32,7 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 	$bperiod = 0;
 	$dmeasure = 0;
 	$frequency = 0;
+	$pfrequency = 0;
 	$eccentricity = 0;
 	$w50 = 0;
 	$s400 = 0;
@@ -47,19 +48,19 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 			$name = $2.$3.$4.$5;
 			$flag = 1;
 		}
-		
+
 		if ($lines[$j] =~ /^RAJ(\s+)([\d\-\+\:\.]+)/) {
 			($hour,$min,$sec) = split(":",$2);
 			$sec += 0;
 			$outRA = $hour."h".$min."m".$sec."s";
 		}
-		
+
 		if ($lines[$j] =~ /^DECJ(\s+)([\d\-\+\:\.]+)/) {
 			($deg,$min,$sec) = split(":",$2);
 			$sec += 0;
 			$outDE = $deg."d".$min."m".$sec."s";
 		}
-		
+
 		if ($lines[$j] =~ /^P0(\s+)([\d\.]+)/) {
 			$period = $2;
 		}
@@ -71,11 +72,15 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 		if ($lines[$j] =~ /^PB(\s+)([\d\.]+)/) {
 			$bperiod = $2;
 		}
-		
+
 		if ($lines[$j] =~ /^F0(\s+)([\d\.]+)/) {
 			$frequency = $2;
 		}
-		
+
+		if ($lines[$j] =~ /^F1(\s+)([\d\.\-E]+)/) {
+			$pfrequency = $2;
+		}
+
 		if ($lines[$j] =~ /^W50(\s+)([\d\.]+)/) {
 			$w50 = $2;
 		}
@@ -107,7 +112,7 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 		if ($lines[$j] =~ /^ECC(\s+)([\d\.\-E]+)/) {
 			$eccentricity = $2;
 		}
-		
+
 		if ($lines[$j] =~ /^TYPE(\s+)([\w\,]+)/)
 		{
 			$notes = $2;
@@ -131,7 +136,7 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 	if ($eccentricity > 0) {
 		$out .= "\t\t\t\"eccentricity\": ".$eccentricity.",\n";
 	}
-	if ($pderivative > 0) {
+	if ($pderivative != 0) {
 		$out .= "\t\t\t\"pderivative\": ".$pderivative.",\n";
 	}
 	if ($dmeasure > 0) {
@@ -139,6 +144,9 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 	}
 	if ($frequency > 0) {
 		$out .= "\t\t\t\"frequency\": ".$frequency.",\n";
+	}
+	if ($pfrequency != 0) {
+		$out .= "\t\t\t\"pfrequency\": ".$pfrequency.",\n";
 	}
 	if ($w50 > 0) {
 		$out .= "\t\t\t\"w50\": ".$w50.",\n";
