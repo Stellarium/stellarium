@@ -108,6 +108,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionShow_Azimuthal_Grid", N_("Azimuthal grid"), "Z", group, true, false);
 	addGuiActions("actionShow_Equatorial_Grid", N_("Equatorial grid"), "E", group, true, false);
 	addGuiActions("actionShow_Equatorial_J2000_Grid", N_("Equatorial J2000 grid"), "", group, true, false);
+	addGuiActions("actionShow_Ecliptic_J2000_Grid", N_("Ecliptic J2000 grid"), "", group, true, false);
 	addGuiActions("actionShow_Galactic_Grid", N_("Galactic grid"), "", group, true, false);
 	addGuiActions("actionShow_Galactic_Plane_Line", N_("Galactic plane"), "", group, true, false);
 	addGuiActions("actionShow_Ecliptic_Line", N_("Ecliptic line"), ",", group, true, false);
@@ -128,19 +129,19 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionShow_Planets_Trails", N_("Planet trails"), "Shift+T", group, true, false);
 
 	addGuiActions("actionShow_Night_Mode", N_("Night mode"), "", group, true, false);
-	addGuiActions("actionSet_Full_Screen_Global", N_("Full-screen mode"), "F11", group, true, false);
+	addGuiActions("actionSet_Full_Screen_Global", N_("Full-screen mode"), "F11", group, true, false, true);
 	addGuiActions("actionHorizontal_Flip", N_("Flip scene horizontally"), "Ctrl+Shift+H", group, true, false);
 	addGuiActions("actionVertical_Flip", N_("Flip scene vertically"), "Ctrl+Shift+V", group, true, false);
 
 	group = N_("Windows");
-	addGuiActions("actionShow_Help_Window_Global", N_("Help window"), "F1", group, true, false);
-	addGuiActions("actionShow_Configuration_Window_Global", N_("Configuration window"), "F2", group, true, false);
-	addGuiActions("actionShow_Search_Window_Global", N_("Search window"), "F3, Ctrl+F", group, true, false);
-	addGuiActions("actionShow_SkyView_Window_Global", N_("Sky and viewing options window"), "F4", group, true, false);
-	addGuiActions("actionShow_DateTime_Window_Global", N_("Date/time window"), "F5", group, true, false);
-	addGuiActions("actionShow_Location_Window_Global", N_("Location window"), "F6", group, true, false);
+	addGuiActions("actionShow_Help_Window_Global", N_("Help window"), "F1", group, true, false, true);
+	addGuiActions("actionShow_Configuration_Window_Global", N_("Configuration window"), "F2", group, true, false, true);
+	addGuiActions("actionShow_Search_Window_Global", N_("Search window"), "F3, Ctrl+F", group, true, false, true);
+	addGuiActions("actionShow_SkyView_Window_Global", N_("Sky and viewing options window"), "F4", group, true, false, true);
+	addGuiActions("actionShow_DateTime_Window_Global", N_("Date/time window"), "F5", group, true, false, true);
+	addGuiActions("actionShow_Location_Window_Global", N_("Location window"), "F6", group, true, false, true);
 #ifdef ENABLE_SCRIPT_CONSOLE
-	addGuiActions("actionShow_ScriptConsole_Window_Global", N_("Script console window"), "F12", group, true, false);
+	addGuiActions("actionShow_ScriptConsole_Window_Global", N_("Script console window"), "F12", group, true, false, true);
 #endif
 
 	group = N_("Date and Time");
@@ -164,6 +165,10 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionSubtract_Sidereal_Day", N_("Subtract 1 sidereal day"), "Alt+-", group, false, true);
 	addGuiActions("actionAdd_Sidereal_Week", N_("Add 1 sidereal week"), "Alt+]", group, false, true);
 	addGuiActions("actionSubtract_Sidereal_Week", N_("Subtract 1 sidereal week"), "Alt+[", group, false, true);
+	addGuiActions("actionAdd_Sidereal_Month", N_("Add 1 sidereal month"), "Alt+Shift+]", group, false, true);
+	addGuiActions("actionSubtract_Sidereal_Month", N_("Subtract 1 sidereal month"), "Alt+Shift+[", group, false, true);
+	addGuiActions("actionAdd_Sidereal_Year", N_("Add 1 sidereal year"), "Ctrl+Alt+Shift+]", group, false, true);
+	addGuiActions("actionSubtract_Sidereal_Year", N_("Subtract 1 sidereal year"), "Ctrl+Alt+Shift+[", group, false, true);
 
 	group = N_("Movement and Selection");
 	addGuiActions("actionGoto_Selected_Object", N_("Center on selected object"), "Space", group, false, false);
@@ -174,13 +179,13 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 
 	group = N_("Miscellaneous");
 	addGuiActions("actionSwitch_Equatorial_Mount", N_("Switch between equatorial and azimuthal mount"), "Ctrl+M", group, true, false);
-	addGuiActions("actionQuit_Global", N_("Quit"), "Ctrl+Q", group, false, false);
-	addGuiActions("actionSave_Screenshot_Global", N_("Save screenshot"), "Ctrl+S", group, false, false);
-	addGuiActions("actionSave_Copy_Object_Information_Global", N_("Copy selected object information to clipboard"), "Ctrl+C", group, false, false);
+	addGuiActions("actionQuit_Global", N_("Quit"), "Ctrl+Q", group, false, false, true);
+	addGuiActions("actionSave_Screenshot_Global", N_("Save screenshot"), "Ctrl+S", group, false, false, true);
+	addGuiActions("actionSave_Copy_Object_Information_Global", N_("Copy selected object information to clipboard"), "Ctrl+C", group, false, false, true);
 	
 	addGuiActions("actionAutoHideHorizontalButtonBar", N_("Auto hide horizontal button bar"), "", group, true, false);
 	addGuiActions("actionAutoHideVerticalButtonBar", N_("Auto hide vertical button bar"), "", group, true, false);
-	addGuiActions("actionToggle_GuiHidden_Global", N_("Toggle visibility of GUI"), "Ctrl+T", group, true, false);
+	addGuiActions("actionToggle_GuiHidden_Global", N_("Toggle visibility of GUI"), "Ctrl+T", group, true, false, true);
 
 
 	///////////////////////////////////////////////////////////////////////
@@ -222,8 +227,12 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiActions("actionSubtract_Solar_Week"), SIGNAL(triggered()), core, SLOT(subtractWeek()));
 	connect(getGuiActions("actionAdd_Sidereal_Day"), SIGNAL(triggered()), core, SLOT(addSiderealDay()));
 	connect(getGuiActions("actionAdd_Sidereal_Week"), SIGNAL(triggered()), core, SLOT(addSiderealWeek()));
+	connect(getGuiActions("actionAdd_Sidereal_Month"), SIGNAL(triggered()), core, SLOT(addSiderealMonth()));
+	connect(getGuiActions("actionAdd_Sidereal_Year"), SIGNAL(triggered()), core, SLOT(addSiderealYear()));
 	connect(getGuiActions("actionSubtract_Sidereal_Day"), SIGNAL(triggered()), core, SLOT(subtractSiderealDay()));
 	connect(getGuiActions("actionSubtract_Sidereal_Week"), SIGNAL(triggered()), core, SLOT(subtractSiderealWeek()));
+	connect(getGuiActions("actionSubtract_Sidereal_Month"), SIGNAL(triggered()), core, SLOT(subtractSiderealMonth()));
+	connect(getGuiActions("actionSubtract_Sidereal_Year"), SIGNAL(triggered()), core, SLOT(subtractSiderealYear()));
 	connect(getGuiActions("actionSet_Home_Planet_To_Selected"), SIGNAL(triggered()), core, SLOT(moveObserverToSelected()));
 
 	// connect the actor after setting the nightmode.
@@ -580,6 +589,16 @@ void StelGui::initGrindLineMgr()
 			SIGNAL(equatorJ2000GridDisplayedChanged(const bool)),
 			this,
 			SLOT(equatorJ2000GridDisplayedUpdated(const bool)));
+
+	getGuiActions("actionShow_Ecliptic_J2000_Grid")->setChecked(gridLineManager->getFlagEclipticJ2000Grid());
+	connect(getGuiActions("actionShow_Ecliptic_J2000_Grid"),
+			SIGNAL(toggled(bool)),
+			gridLineManager,
+			SLOT(setFlagEclipticJ2000Grid(bool)));
+	connect(gridLineManager,
+			SIGNAL(eclipticJ2000GridDisplayedChanged(const bool)),
+			this,
+			SLOT(eclipticJ2000GridDisplayedUpdated(const bool)));
 
 	getGuiActions("actionShow_Galactic_Grid")->setChecked(gridLineManager->getFlagGalacticGrid());
 	connect(getGuiActions("actionShow_Galactic_Grid"),
@@ -992,11 +1011,11 @@ void StelGui::setGuiVisible(bool b)
 	setVisible(b);
 }
 
-QAction* StelGui::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat)
+QAction* StelGui::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat, bool global)
 {
 	if (!shortCut.isEmpty())
 		helpDialog.setKey(helpGroup, "", shortCut, text);
-	return StelGuiBase::addGuiActions(actionName, text, shortCut, helpGroup, checkable, autoRepeat);
+	return StelGuiBase::addGuiActions(actionName, text, shortCut, helpGroup, checkable, autoRepeat, global);
 }
 
 /* ****************************************************************************************************************** */
@@ -1055,6 +1074,14 @@ void StelGui::equatorJ2000GridDisplayedUpdated(const bool displayed)
 		getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(displayed);
 	}
 }
+
+void StelGui::eclipticJ2000GridDisplayedUpdated(const bool displayed)
+{
+	if (getGuiActions("actionShow_Ecliptic_J2000_Grid")->isChecked() != displayed) {
+		getGuiActions("actionShow_Ecliptic_J2000_Grid")->setChecked(displayed);
+	}
+}
+
 
 void StelGui::galacticGridDisplayedUpdated(const bool displayed)
 {

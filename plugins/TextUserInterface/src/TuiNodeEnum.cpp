@@ -41,7 +41,6 @@ TuiNodeResponse TuiNodeEnum::handleEditingKey(int key)
 	{
 		editing = false;
 		response.accepted = true;
-		response.newNode = this;
 		return response;
 	}
 	else if (key==Qt::Key_Up)
@@ -49,7 +48,6 @@ TuiNodeResponse TuiNodeEnum::handleEditingKey(int key)
 		if (currentIdx > 0)
 			currentIdx--;
 		response.accepted = true;
-		response.newNode = this;
 		return response;
 	}
 	else if (key==Qt::Key_Down)
@@ -57,7 +55,6 @@ TuiNodeResponse TuiNodeEnum::handleEditingKey(int key)
 		if (currentIdx+1 < stringList.size())
 			currentIdx++;
 		response.accepted = true;
-		response.newNode = this;
 		return response;
 	}
 	else if (key==Qt::Key_Return)
