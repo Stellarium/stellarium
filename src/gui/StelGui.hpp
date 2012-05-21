@@ -147,6 +147,9 @@ public slots:
 	void increaseScriptSpeed();
 	void decreaseScriptSpeed();
 	void setRealScriptSpeed();
+	void stopScript();
+	void pauseScript();
+	void resumeScript();
 	#endif
 
 	//! Hide or show the GUI.  Public so it can be called from scripts.
