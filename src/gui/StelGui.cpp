@@ -148,6 +148,9 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionDecrease_Script_Speed", N_("Slow down the script execution rate"), "", group, false, false);
 	addGuiActions("actionIncrease_Script_Speed", N_("Speed up the script execution rate"), "", group, false, false);
 	addGuiActions("actionSet_Real_Script_Speed", N_("Set the normal script execution rate"), "", group, false, false);
+	addGuiActions("actionStop_Script", N_("Pause script execution"), "", group, false, false);
+	addGuiActions("actionPause_Script", N_("Pause script execution"), "", group, false, false);
+	addGuiActions("actionResume_Script", N_("Resume script execution"), "", group, false, false);
 	addGuiActions("actionDecrease_Time_Speed", N_("Decrease time speed"), "J", group, false, false);
 	addGuiActions("actionIncrease_Time_Speed", N_("Increase time speed"), "L", group, false, false);
 	addGuiActions("actionSet_Real_Time_Speed", N_("Set normal time rate"), "K", group, false, false);
@@ -210,6 +213,9 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiActions("actionIncrease_Script_Speed"), SIGNAL(triggered()), this, SLOT(increaseScriptSpeed()));
 	connect(getGuiActions("actionDecrease_Script_Speed"), SIGNAL(triggered()), this, SLOT(decreaseScriptSpeed()));
 	connect(getGuiActions("actionSet_Real_Script_Speed"), SIGNAL(triggered()), this, SLOT(setRealScriptSpeed()));
+	connect(getGuiActions("actionStop_Script"), SIGNAL(triggered()), this, SLOT(stopScript()));
+	connect(getGuiActions("actionPause_Script"), SIGNAL(triggered()), this, SLOT(pauseScript()));
+	connect(getGuiActions("actionResume_Script"), SIGNAL(triggered()), this, SLOT(resumeScript()));
 	connect(getGuiActions("actionIncrease_Time_Speed"), SIGNAL(triggered()), core, SLOT(increaseTimeSpeed()));
 	connect(getGuiActions("actionDecrease_Time_Speed"), SIGNAL(triggered()), core, SLOT(decreaseTimeSpeed()));
 	connect(getGuiActions("actionIncrease_Time_Speed_Less"), SIGNAL(triggered()), core, SLOT(increaseTimeSpeedLess()));
@@ -829,6 +835,10 @@ void StelGui::setScriptKeys(bool b)
 		getGuiActions("actionDecrease_Script_Speed")->setShortcut(QKeySequence("J"));
 		getGuiActions("actionIncrease_Script_Speed")->setShortcut(QKeySequence("L"));
 		getGuiActions("actionSet_Real_Script_Speed")->setShortcut(QKeySequence("K"));
+
+		getGuiActions("actionStop_Script")->setShortcut(QKeySequence("4"));
+		getGuiActions("actionPause_Script")->setShortcut(QKeySequence("5"));
+		getGuiActions("actionResume_Script")->setShortcut(QKeySequence("6"));
 	}
 	else
 	{
@@ -854,6 +864,21 @@ void StelGui::decreaseScriptSpeed()
 void StelGui::setRealScriptSpeed()
 {	
 	StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(1);	
+}
+
+void StelGui::stopScript()
+{	
+	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();	
+}
+
+void StelGui::pauseScript()
+{	
+	StelMainGraphicsView::getInstance().getScriptMgr().pauseScript();	
+}
+
+void StelGui::resumeScript()
+{	
+	StelMainGraphicsView::getInstance().getScriptMgr().resumeScript();	
 }
 #endif
 
