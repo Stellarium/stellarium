@@ -22,6 +22,8 @@
 
 #include "VecMath.hpp"
 #include "StelProjector.hpp"
+#include "renderer/StelVertexAttribute.hpp"
+#include "renderer/StelVertexBuffer.hpp"
 
 class QGLFramebufferObject;
 
@@ -33,13 +35,12 @@ public:
 	StelViewportEffect() {;}
 	virtual ~StelViewportEffect() {;}
 	virtual QString getName() {return "framebufferOnly";}
-	//! Alter the GL frame buffer, this method must not display anything.
-	//! The default implementation does nothing.
-	virtual void alterBuffer(QGLFramebufferObject*) const {;}
 	//! Draw the viewport on the screen.
 	//! @param buf the GL frame buffer containing the Stellarium viewport alreay drawn.
+	//!TODO DOC
 	//! The default implementation paints the buffer on the fullscreen.
-	virtual void paintViewportBuffer(const QGLFramebufferObject* buf) const;
+	virtual void paintViewportBuffer(const QGLFramebufferObject* buf,
+	                                 class StelRenderer* renderer) const;
 	//! Distort an x,y position according to the distortion.
 	//! The default implementation does nothing.
 	virtual void distortXY(float& x, float& y) const {Q_UNUSED(x); Q_UNUSED(y);}
@@ -49,12 +50,22 @@ public:
 class StelViewportDistorterFisheyeToSphericMirror : public StelViewportEffect
 {
 public:
-	StelViewportDistorterFisheyeToSphericMirror(int screenWidth,int screenHeight);
+	StelViewportDistorterFisheyeToSphericMirror(int screenWidth, int screenHeight,
+	                                            class StelRenderer* renderer);
 	~StelViewportDistorterFisheyeToSphericMirror();
 	virtual QString getName() {return "sphericMirrorDistorter";}
-	virtual void paintViewportBuffer(const QGLFramebufferObject* buf) const;
+	virtual void paintViewportBuffer(const QGLFramebufferObject* buf,
+	                                 StelRenderer* renderer) const;
 	virtual void distortXY(float& x, float& y) const;
 private:
+
+	struct Vertex 
+	{
+		Vec2f position;
+		Vec2f texCoord;
+		Vec4f color;
+		static const QVector<StelVertexAttribute> attributes;
+	};
 	const int screenWidth;
 	const int screenHeight;
 	const StelProjector::StelProjectorParams originalProjectorParams;
@@ -62,19 +73,26 @@ private:
 	int viewportTextureOffset[2];
 	int texture_wh;
 
-	Vec2f *texturePointGrid;
+	//Vec2f *texturePointGrid;
+	Vertex* vertexGrid;
+	
 	int maxGridX,maxGridY;
 	double stepX,stepY;
 
-	QVector<Vec2f> displayVertexList;
-	QVector<Vec4f> displayColorList;
-	QVector<Vec2f> displayTexCoordList;
+	QVector<StelVertexBuffer<Vertex>*> vertexBuffers;
 	
-	void constructVertexBuffer(const class VertexPoint * const vertexGrid);
+	void constructVertexBuffer(const class Vertex *const vertexGrid, StelRenderer* renderer);
 	void generateDistortion(const class QSettings& conf, const StelProjectorP& proj, 
-	                        const double distorterMaxFOV);
-	bool loadDistortionFromFile(const QString & fileName);
-};
+	                        const double distorterMaxFOV, class StelRenderer* renderer);
 
+	//! Load parameters of distortion generation.
+	//!
+	//! Used by generateDistortion.
+	//!
+	//! @param conf Configuration to load the parameters from.
+	//! @param gamma Gamma correction of the viewport effect will be output here.
+	void loadGenerationParameters(const QSettings& conf, double& gamma);
+	bool loadDistortionFromFile(const QString & fileName, class StelRenderer *renderer);
+};
 #endif // _STELVIEWPORTEFFECT_HPP_
 
