@@ -59,7 +59,7 @@ StelPluginInfo ExoplanetsStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Exoplanets");
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
-	info.description = N_("This plugin plots the position of stars with exoplanets.");
+	info.description = N_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from The 'Extrasolar Planets Encyclopaedia' at exoplanet.eu");
 	return info;
 }
 
