@@ -24,10 +24,10 @@ struct TestVertex1
 	
 	bool operator == (const TestVertex1& rhs) const {return vertex == rhs.vertex;}
 	
-	static const QVector<VertexAttribute> attributes;
+	static const QVector<StelVertexAttribute> attributes;
 };
-const QVector<VertexAttribute> TestVertex1::attributes = 
-	(QVector<VertexAttribute>() << VertexAttribute(AT_Vec3f, Position));
+const QVector<StelVertexAttribute> TestVertex1::attributes = 
+	(QVector<StelVertexAttribute>() << StelVertexAttribute(AT_Vec3f, Position));
 
 //! Test vertex with a position and a texcoord.
 struct TestVertex2
@@ -46,11 +46,11 @@ struct TestVertex2
 		return vertex == rhs.vertex && texCoord == rhs.texCoord;
 	}
 	
-	static const QVector<VertexAttribute> attributes;
+	static const QVector<StelVertexAttribute> attributes;
 };
-const QVector<VertexAttribute> TestVertex2::attributes = 
-	(QVector<VertexAttribute>() << VertexAttribute(AT_Vec3f, Position)
-	                            << VertexAttribute(AT_Vec2f, TexCoord));
+const QVector<StelVertexAttribute> TestVertex2::attributes = 
+	(QVector<StelVertexAttribute>() << StelVertexAttribute(AT_Vec3f, Position)
+	                                << StelVertexAttribute(AT_Vec2f, TexCoord));
 
 //! Test vertex with a position, texcoord, normal and color.
 struct TestVertex3
@@ -76,13 +76,13 @@ struct TestVertex3
 		       color == rhs.color;
 	}
 	
-	static const QVector<VertexAttribute> attributes;
+	static const QVector<StelVertexAttribute> attributes;
 };
-const QVector<VertexAttribute> TestVertex3::attributes = 
-	(QVector<VertexAttribute>() << VertexAttribute(AT_Vec3f, Position)
-	                            << VertexAttribute(AT_Vec2f, TexCoord)
-	                            << VertexAttribute(AT_Vec3f, Normal)
-	                            << VertexAttribute(AT_Vec4f, Color));
+const QVector<StelVertexAttribute> TestVertex3::attributes = 
+	(QVector<StelVertexAttribute>() << StelVertexAttribute(AT_Vec3f, Position)
+	                                << StelVertexAttribute(AT_Vec2f, TexCoord)
+	                                << StelVertexAttribute(AT_Vec3f, Normal)
+	                                << StelVertexAttribute(AT_Vec4f, Color));
 	
 template<class BufferBackend, class Vertex> 
 void TestStelVertexBuffer::testVertexBuffer()
