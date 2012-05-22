@@ -3,7 +3,7 @@
 
 #include <QVector>
 
-#include "VertexAttribute.hpp"
+#include "StelVertexAttribute.hpp"
 
 //! Base class of all vertex buffer backends.
 //!
@@ -29,7 +29,7 @@ class StelVertexBufferBackend
 {
 public:
 	//! Construct a StelVertexBufferBackend, specifying attributes of the vertex type.
-	StelVertexBufferBackend(const QVector<VertexAttribute>& attributes)
+	StelVertexBufferBackend(const QVector<StelVertexAttribute>& attributes)
 		:attributes(attributes)
 	{
 	}
@@ -91,7 +91,7 @@ public:
 		
 		Q_ASSERT_X(bytes == vertexSize,
 		           "Size of the vertex type in bytes doesn't match the sum of sizes of "
-		           "all vertex attributes as reported by attributeType() method.",
+		           "all vertex attributes as reported by \"attributes\" data member.",
 		           "StelVertexBufferImpl::validateVertexType");
 		
 		
@@ -136,7 +136,7 @@ public:
 	
 protected:
 	//! Specifies vertex attributes in the vertex type.
-	const QVector<VertexAttribute> attributes;
+	const QVector<StelVertexAttribute> attributes;
 };
 
 

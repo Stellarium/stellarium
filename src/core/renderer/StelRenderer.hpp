@@ -77,7 +77,7 @@ public:
 	template<class V>
 	StelVertexBuffer<V>* createVertexBuffer(const PrimitiveType primitiveType)
 	{
-		return StelVertexBuffer<V>(createVertexBufferBackend(primitiveType, V::attributes));
+		return new StelVertexBuffer<V>(createVertexBufferBackend(primitiveType, V::attributes));
 	}
 	
 	//! Draw contents of a vertex buffer.
@@ -89,14 +89,12 @@ public:
 	//! @param projector    Projector to project vertices' positions before drawing.
 	//!                     If NULL, no projection will be done and the vertices will be drawn
 	//!                     directly.
-	//!
-	//! @todo This member function is still not implemented.
 	template<class V>
 	void drawVertexBuffer(StelVertexBuffer<V>* vertexBuffer, 
 	                      class StelIndexBuffer* indexBuffer = NULL,
-	                      StelProjectorP projector = NULL)
+	                      StelProjectorP projector = StelProjectorP(NULL))
 	{
-		Q_ASSERT_X(false, "TODO - Implement this method", "StelRenderer::drawVertexBuffer");
+		drawVertexBufferBackend(vertexBuffer->backend, indexBuffer, projector);
 	}
 	
 	//! Start using drawing calls.
@@ -121,7 +119,20 @@ protected:
 	//!
 	//! @return Pointer to a vertex buffer backend specific to the Renderer backend.
 	virtual StelVertexBufferBackend* createVertexBufferBackend
-		(const PrimitiveType primitiveType, const QVector<VertexAttribute>& attributes) = 0;
+		(const PrimitiveType primitiveType, const QVector<StelVertexAttribute>& attributes) = 0;
+
+	//! Draw contents of a vertex buffer (backend). Used by drawVertexBufferBackend.
+	//!
+	//! @param vertexBuffer Vertex buffer backend to draw.
+	//! @param indexBuffer  Index buffer specifying which vertices from the buffer to draw.
+	//!                     If NULL, indexing will not be used and vertices will be drawn
+	//!                     directly in order they are in the buffer.
+	//! @param projector    Projector to project vertices' positions before drawing.
+	//!                     If NULL, no projection will be done and the vertices will be drawn
+	//!                     directly.
+	virtual void drawVertexBufferBackend(StelVertexBufferBackend* vertexBuffer, 
+	                                     class StelIndexBuffer* indexBuffer,
+	                                     StelProjectorP projector) = 0;
 };
 
 #endif // _STELRENDERER_HPP_
