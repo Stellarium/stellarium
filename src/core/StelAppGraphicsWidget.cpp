@@ -85,7 +85,8 @@ void StelAppGraphicsWidget::setViewportEffect(const QString& name)
 	{
 		qDebug() << "Setting sphericMirrorDistorter viewport effect";
 		viewportEffect = new StelViewportDistorterFisheyeToSphericMirror(size().width(),
-		                                                                 size().height());
+		                                                                 size().height(),
+		                                                                 renderer);
 	}
 	else
 	{
