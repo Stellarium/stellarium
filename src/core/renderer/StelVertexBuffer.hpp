@@ -3,7 +3,7 @@
 
 #include "core/VecMath.hpp"
 #include "StelVertexBufferBackend.hpp"
-#include "VertexAttribute.hpp"
+#include "StelVertexAttribute.hpp"
 
 
 //! Graphics primitive types. 
@@ -58,14 +58,16 @@ enum PrimitiveType
 //! 	//
 //! 	// The vector contents are defined below the class 
 //! 	// (C++ doesn't allow non-integer static const data members).
-//! 	static const QVector<VertexAttribute> attributes;
+//! 	static const QVector<StelVertexAttribute> attributes;
 //! };
-//! const QVector<VertexAttribute> MyVertex::attributes = 
-//! 	(QVector<VertexAttribute>() << VertexAttribute(AT_Vec3f, Position)
-//! 	                            << VertexAttribute(AT_Vec2f, TexCoord));
+//!
+//! //This might need to be defined in a .cpp file to prevent multiple definition errors
+//! const QVector<StelVertexAttribute> MyVertex::attributes = 
+//! 	(QVector<StelVertexAttribute>() << StelVertexAttribute(AT_Vec3f, Position)
+//! 	                                << StelVertexAttribute(AT_Vec2f, TexCoord));
 //! @endcode
 //!
-//! @see AttributeType, AttributeInterpretation, VertexAttribute, StelRenderer
+//! @see AttributeType, AttributeInterpretation, StelVertexAttribute, StelRenderer
 //!
 //! @section apinotes API design notes
 //!

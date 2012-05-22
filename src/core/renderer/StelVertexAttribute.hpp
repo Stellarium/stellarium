@@ -1,5 +1,5 @@
-#ifndef _VERTEXATTRIBUTE_HPP_
-#define _VERTEXATTRIBUTE_HPP_
+#ifndef _STELVERTEXATTRIBUTE_HPP_
+#define _STELVERTEXATTRIBUTE_HPP_
 
 //! Vertex attribute types. 
 //!
@@ -14,24 +14,19 @@ enum AttributeType
 	AT_Vec2f
 };
 
+//! Return the number of dimensions of a vertex attribute type.
+//!
+//! E.g. Vec3f is 3-dimensional.
+//!
+//! @param type Attribute type to get number of dimensions of.
+//! @return Number of dimensions.
+int attributeDimensions(const AttributeType type);
+
 //! Get size of a vertex attribute of specified type.
 //!
 //! @param type Attribute type to get size of (e.g. Vec2f).
 //! @return Size of the vertex attribute in bytes.
-static size_t attributeSize(const AttributeType type)
-{
-	switch(type)
-	{
-		case AT_Vec2f: return sizeof(Vec2f);
-		case AT_Vec3f: return sizeof(Vec3f);
-		case AT_Vec4f: return sizeof(Vec4f);
-	}
-	Q_ASSERT_X(false, "Unknown vertex attribute type",
-				"StelQGLVertexBuffer::attributeSize");
-	
-	// Prevents GCC from complaining about exiting a non-void function:
-	return -1;
-}
+int attributeSize(const AttributeType type);
 
 //! Vertex attribute interpretations. 
 //!
@@ -50,7 +45,7 @@ enum AttributeInterpretation
 };
 
 //! Describes a single vertex attribute (e.g. 2D vertex, 3D normal and so on).
-struct VertexAttribute
+struct StelVertexAttribute
 {
 	//! Data type of the attribute.
 	AttributeType type;
@@ -58,17 +53,17 @@ struct VertexAttribute
 	AttributeInterpretation interpretation;
 	
 	//! Default ctor so vectors can reallocate.
-	VertexAttribute(){}
+	StelVertexAttribute(){}
 	
-	//! Construct a VertexAttribute.
+	//! Construct a StelVertexAttribute.
 	//!
 	//! @param type Data type of the attribute.
 	//! @param interpretation How the Renderer should interpret this attribute.
-	VertexAttribute(const AttributeType type, const AttributeInterpretation interpretation)
+	StelVertexAttribute(const AttributeType type, const AttributeInterpretation interpretation)
 		:type(type)
 		,interpretation(interpretation)
 	{
 	}
 };
 
-#endif // _VERTEXATTRIBUTE_HPP_
+#endif // _STELVERTEXATTRIBUTE_HPP_

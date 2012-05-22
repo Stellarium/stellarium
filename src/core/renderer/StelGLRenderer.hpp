@@ -153,7 +153,7 @@ public:
 	virtual void drawWindow(StelViewportEffect* effect)
 	{
 		invariant();
-		
+
 		//Warn about any GL errors.
 		checkGLErrors();
 		
@@ -168,19 +168,42 @@ public:
 			           "Framebuffer objects loadweren't released before drawing the result");
 			enablePainting(defaultPainter);
 			
-			effect->paintViewportBuffer(frontBuffer);
+			effect->paintViewportBuffer(frontBuffer, this);
 			disablePainting();
 		}
 		invariant();
 	}
 	
 protected:
+	//These might have to be moved to QGLRenderer after moving to a QGL based
+	//VertexBuffer.
+  
 	virtual StelVertexBufferBackend* createVertexBufferBackend
-		(const PrimitiveType primitiveType, const QVector<VertexAttribute>& attributes)
+		(const PrimitiveType primitiveType, const QVector<StelVertexAttribute>& attributes)
 	{
 		return new StelTestGLVertexBufferBackend(primitiveType, attributes);
 	}
 	
+	virtual void drawVertexBufferBackend(StelVertexBufferBackend* vertexBuffer, 
+	                                     class StelIndexBuffer* indexBuffer = NULL,
+	                                     StelProjectorP projector = NULL)
+	{
+		Q_ASSERT_X(indexBuffer == NULL, "TODO: Using index buffer when drawing not yet implemented",
+		           "StelGLRenderer::drawVertexBufferBackend");
+		Q_ASSERT_X(projector == NULL, "TODO: Projection when drawing not yet implemented",
+		           "StelGLRenderer::drawVertexBufferBackend");
+
+		//TODO Projection using StelProjector 
+		//TODO indexBuffer 
+		
+		StelTestGLVertexBufferBackend* backend =
+			dynamic_cast<StelTestGLVertexBufferBackend*>(vertexBuffer);
+		Q_ASSERT_X(backend != NULL,
+		           "StelGLRenderer: Trying to draw a vertex buffer created by a different "
+		           "renderer backend", "StelGLRenderer::drawVertexBufferBackend");
+		backend->draw();
+	}
+
 	//! Make Stellarium GL context the currently used GL context. Call this before GL calls.
 	virtual void makeGLContextCurrent() = 0;
 	
