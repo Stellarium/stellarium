@@ -8,15 +8,45 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-10 19:57+0700\n"
-"PO-Revision-Date: 2012-02-25 13:14+0000\n"
+"PO-Revision-Date: 2011-05-28 11:53+0000\n"
 "Last-Translator: Serj Safarian <serjsafarian@gmail.com>\n"
 "Language-Team: Armenian <hy@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-12 06:00+0000\n"
-"X-Generator: Launchpad (build 15225)\n"
+"X-Launchpad-Export-Date: 2012-05-19 04:39+0000\n"
+"X-Generator: Launchpad (build 15259)\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
+
+#~ msgid "Set Location "
+#~ msgstr "Կայել տեղադրությունը "
+
+#~ msgid "Set Time "
+#~ msgstr "Կայել ժամանակը "
+
+#~ msgid "General "
+#~ msgstr "Ընդհանուր "
+
+#~ msgid "Scripts "
+#~ msgstr "Գրվածքներ "
+
+#~ msgid "Administration "
+#~ msgstr "Կառավարում "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Ձեռքով խոշորացնել՝ "
+
+#~ msgid "Local Script: "
+#~ msgstr "Տեղային գրվածք՝ "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "CD/DVD գրվածքներ՝ "
+
+#~ msgid "USB Script: "
+#~ msgstr "USB գրվածքներ՝ "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "Սլաք ներքեւ՝ ցանկը բեռնելու համար։"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -5619,3 +5649,201 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
+
+#~ msgid "Sky Language: "
+#~ msgstr "Երկնային առարկաների լեզուն՝ "
+
+#~ msgid "Stars "
+#~ msgstr "Աստղեր "
+
+#~ msgid "Cardinal Points"
+#~ msgstr "Աշխարհքի կողմեր"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "Խավարածիր"
+
+#~ msgid "Equator Line"
+#~ msgstr "Հասարակածի գիծը"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "Հասարակածային ցանց"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "Ազիմուտային ցանց"
+
+#~ msgid "Date & Time"
+#~ msgstr "Ամսաթիվը և ժամանակը"
+
+#~ msgid "Sky Culture: "
+#~ msgstr "Երկնքի մշակույթը՝ "
+
+#~ msgid "Effects "
+#~ msgstr "Կերպարներ "
+
+#~ msgid "Longitude: "
+#~ msgstr "Երկայնությունը՝ "
+
+#~ msgid "Latitude: "
+#~ msgstr "Լայնությունը՝ "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Արեգակնային համակարգի մարմին՝ "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Բարձրությունը (մ)՝ "
+
+#~ msgid "Colors "
+#~ msgstr "Գույներ "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Արեւային ժամանակ "
+
+#~ msgid "Calendar"
+#~ msgstr "Օրացույց"
+
+#~ msgid "Day keys: "
+#~ msgstr "Հուշումներ ըստ օրերի՝ "
+
+#~ msgid "Time Display Format: "
+#~ msgstr "Ժամանակի ցուցադրման ձեւը՝ "
+
+#~ msgid "Preset Time"
+#~ msgstr "Նախադրված ժամանակը"
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Նախադրված արեւային ժամանակ՝ "
+
+#~ msgid "Sidereal"
+#~ msgstr "Աստղային"
+
+#~ msgid "Actual Time"
+#~ msgstr "Փաստացի ժամանակը"
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Արեւային ժամանակը գործարկման պահին՝ "
+
+#~ msgid "Show: "
+#~ msgstr "Ցույց տալ՝ "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Ամսաթվի ցուցադրման ձեւը՝ "
+
+#~ msgid "Twinkling: "
+#~ msgstr "Առկայծումը՝ "
+
+#~ msgid "Constellation Names"
+#~ msgstr "Համաստեղությունների անվանումները"
+
+#~ msgid "Constellation Lines"
+#~ msgstr "Համաստեղությունների գծերը"
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Առավելագույն աստղային մեծությունը՝ մակագրի համար՝ "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "Աստղերի պայծառության բազմապատկիչ՝ "
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Համաստեղությունների պատկերների վառությունը"
+
+#~ msgid "Landscape: "
+#~ msgstr "Բնապատկերը՝ "
+
+#~ msgid "Nebula Names"
+#~ msgstr "Միգամածությունների անվանումները"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Համաստեղության սահմանները"
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "Լույսի աղտոտվածության պայծառությունը՝ "
+
+#~ msgid "Meridian Line"
+#~ msgstr "Միջօրեականի գիծը"
+
+#~ msgid "Planet Trails"
+#~ msgstr "Մոլորակների հետագծերը"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Մոլորակների ուղեծիրները"
+
+#~ msgid "Planet Names"
+#~ msgstr "Մոլորակների անվանումները"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Միգամածության շրջանակները"
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Առարկաների չափորոշման կանոնը՝ "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "Սանդղակային բազմապատկիչի մեծությունը՝ "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Ծիր Կաթնի պայծառությունը՝ "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Շարժագծի պարապուրդ՝ "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Միգամածությունների առավելագույն մեծությունը՝ մակագրի համար՝ "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Չափագծման տեւողությունը՝ "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Բեռնել լռելյայն կազմաձեւերը՝ "
+
+#~ msgid "Shut Down: "
+#~ msgstr "Աշխատանքի ավարտ՝ "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Օգտվողային միջերեսի կայանքները՝ "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Թարմացնել համացանցի միջոցով՝ "
+
+#~ msgid "Hydra"
+#~ msgstr "Հիդրա"
+
+#~ msgid "Select and exit to run."
+#~ msgstr "Ընտրել եւ դուրս գալ՝ գործարկելու համար։"
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Աստղային մեծության չափորոշման գործակից՝ "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Հիշել ընթացիկ կազմաձեւերն որպես լռելյայն կայանքներ՝ "
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "Աստղերի բոլոր գրացուցակների ներբեռնումն ավարտվել է։"
+
+#~ msgid "Planets labels"
+#~ msgstr "Մոլորակների պիտակներ"
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Կայել ժամային գոտին՝ "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "Աստղային սահմանային մեծությունը՝ "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "Լույսի տարածման ժամանակի շտկում՝ "
+
+#~ msgid "Light pollution: "
+#~ msgstr "Լույսի աղտոտվածությունը՝ "
+
+#~ msgid "Art brightness: "
+#~ msgstr "Պատկերների վառությունը՝ "
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "Սկզբնական տեսադաշտը՝ XX"
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "Դիտման սկզբնական ուղղությունը՝ xxxx"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "Ստանալ x գրացուցակը՝ y֊ից"

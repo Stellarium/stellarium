@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-10 19:57+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
+"PO-Revision-Date: 2012-01-18 15:28+0000\n"
 "Last-Translator: vine_user <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-12 06:05+0000\n"
-"X-Generator: Launchpad (build 15225)\n"
+"X-Launchpad-Export-Date: 2012-05-19 04:43+0000\n"
+"X-Generator: Launchpad (build 15259)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -5580,3 +5580,231 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "赤道座標"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "地平座標"
+
+#~ msgid "Equator Line"
+#~ msgstr "赤道線"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "黄道線"
+
+#~ msgid "Cardinal Points"
+#~ msgstr "方位"
+
+#~ msgid "Sky Language: "
+#~ msgstr "天体名の言語: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "星座の地域: "
+
+#~ msgid "Date & Time"
+#~ msgstr "日付と時刻"
+
+#~ msgid "Set Time "
+#~ msgstr "時刻の設定 "
+
+#~ msgid "General "
+#~ msgstr "一般 "
+
+#~ msgid "Stars "
+#~ msgstr "恒星 "
+
+#~ msgid "Colors "
+#~ msgstr "色 "
+
+#~ msgid "Effects "
+#~ msgstr "効果 "
+
+#~ msgid "Scripts "
+#~ msgstr "スクリプト "
+
+#~ msgid "Administration "
+#~ msgstr "管理 "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "標高(m): "
+
+#~ msgid "Sky Time: "
+#~ msgstr "天の時間 : "
+
+#~ msgid "Actual Time"
+#~ msgstr "現在の時刻"
+
+#~ msgid "Preset Time"
+#~ msgstr "設定された時刻"
+
+#~ msgid "Constellation Lines"
+#~ msgstr "星座線"
+
+#~ msgid "Constellation Names"
+#~ msgstr "星座名"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "星座絵の明るさ"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "星座の境界線"
+
+#~ msgid "Planet Names"
+#~ msgstr "惑星の名前"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "惑星の軌道"
+
+#~ msgid "Planet Trails"
+#~ msgstr "惑星の通った跡"
+
+#~ msgid "Meridian Line"
+#~ msgstr "子午線"
+
+#~ msgid "Nebula Names"
+#~ msgstr "星雲の名前"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "星雲の円"
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "操作パネルの言語: "
+
+#~ msgid "Hydra"
+#~ msgstr "うみへび"
+
+#~ msgid "Select and exit to run."
+#~ msgstr "選択しメニューを抜けるとスタートします。"
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "等級による倍率 : "
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "光害の明るさ: "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "星の明るさの倍率: "
+
+#~ msgid "Sidereal"
+#~ msgstr "恒星時"
+
+#~ msgid "USB Script: "
+#~ msgstr "USBスクリプト: "
+
+#~ msgid "Calendar"
+#~ msgstr "カレンダー"
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "起動時の限界視野: XX"
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "起動時の方位: xxxx"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "すべてのスターカタログのダウンロードが終了しました！"
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "名前を表示する最大等級: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "名前を表示する星雲・星団の最大等級: "
+
+#~ msgid "Planets labels"
+#~ msgstr "惑星名"
+
+#~ msgid "Set Location "
+#~ msgstr "場所の設定 "
+
+#~ msgid "Longitude: "
+#~ msgstr "経度: "
+
+#~ msgid "Latitude: "
+#~ msgstr "緯度: "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "太陽系惑星・天体: "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "タイムゾーンの設定: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "天の時間の設定: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "起動時の天の時間: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "またたき: "
+
+#~ msgid "Show: "
+#~ msgstr "表示: "
+
+#~ msgid "Time Display Format: "
+#~ msgstr "時間の表示形式: "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "日付の表示形式: "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "限界等級: "
+
+#~ msgid "Landscape: "
+#~ msgstr "背景: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "手動ズーム: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "天体の大きさの設定: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "カーソル表示時間: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "光の到達時間を補正する: "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "等級による倍率: "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "天の川の明るさ: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "ズーム時間: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "CD/DVD スクリプト: "
+
+#~ msgid "Local Script: "
+#~ msgstr "ローカルスクリプト: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "下矢印キーで一覧を表示します。"
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "デフォルトの設定を読み込む: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "終了: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "現在の設定をデフォルトとして保存 : "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "インターネット経由で更新: "
+
+#~ msgid "Light pollution: "
+#~ msgstr "光害: "
+
+#~ msgid "Art brightness: "
+#~ msgstr "星座絵の明るさ: "
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "カタログ x / y を取得"
+
+#~ msgid "Day keys: "
+#~ msgstr "日付キー: "

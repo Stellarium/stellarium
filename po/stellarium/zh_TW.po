@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-10 19:57+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
+"PO-Revision-Date: 2011-12-18 14:50+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Taiwan) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-12 06:09+0000\n"
-"X-Generator: Launchpad (build 15225)\n"
+"X-Launchpad-Export-Date: 2012-05-19 04:49+0000\n"
+"X-Generator: Launchpad (build 15259)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -5567,3 +5567,231 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "赤道座標系統"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "地平座標系統"
+
+#~ msgid "Equator Line"
+#~ msgstr "赤道"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "黃道"
+
+#~ msgid "Cardinal Points"
+#~ msgstr "方位基點"
+
+#~ msgid "Sky Language: "
+#~ msgstr "星空述語: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "星空文化: "
+
+#~ msgid "Date & Time"
+#~ msgstr "日期與時間"
+
+#~ msgid "Set Location "
+#~ msgstr "位置設定 "
+
+#~ msgid "Set Time "
+#~ msgstr "時間設定 "
+
+#~ msgid "General "
+#~ msgstr "一般設定 "
+
+#~ msgid "Stars "
+#~ msgstr "恆星設定 "
+
+#~ msgid "Effects "
+#~ msgstr "效果設定 "
+
+#~ msgid "Scripts "
+#~ msgstr "劇本設定 "
+
+#~ msgid "Administration "
+#~ msgstr "管理設定 "
+
+#~ msgid "Latitude: "
+#~ msgstr "緯度: "
+
+#~ msgid "Longitude: "
+#~ msgstr "經度: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "星空時間: "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "時區設定: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "預設星空時間: "
+
+#~ msgid "Actual Time"
+#~ msgstr "實際時間"
+
+#~ msgid "Preset Time"
+#~ msgstr "預設時間"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "時間顯示格式: "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "日期顯示格式: "
+
+#~ msgid "Show: "
+#~ msgstr "顯示: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "星光閃爍程度: "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "星座連線"
+
+#~ msgid "Constellation Names"
+#~ msgstr "星座名稱"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "星座圖繪不透明度"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "星座界線"
+
+#~ msgid "Planet Names"
+#~ msgstr "行星名稱"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "行星軌道"
+
+#~ msgid "Planet Trails"
+#~ msgstr "行星軌跡"
+
+#~ msgid "Nebula Names"
+#~ msgstr "星雲名稱"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "星雲標示"
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "天體成像大小: "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "銀河密度: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "顯示高於該星等之星雲: "
+
+#~ msgid "Local Script: "
+#~ msgstr "本地端劇本: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "載入預設值: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "儲存現有設定為預設值: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "關閉: "
+
+#~ msgid "Hydra"
+#~ msgstr "長蛇座"
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "星等成像加成: "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "觀測者所處太陽系天體: "
+
+#~ msgid "Meridian Line"
+#~ msgstr "子午線"
+
+#~ msgid "Landscape: "
+#~ msgstr "地景: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "透過網路進行更新: "
+
+#~ msgid "Sidereal"
+#~ msgstr "恆星日"
+
+#~ msgid "Calendar"
+#~ msgstr "太陽日"
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "光害程度： "
+
+#~ msgid "Art brightness: "
+#~ msgstr "圖繪亮度: "
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "啟動時的觀看方向: xxxx"
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "啟動時的視角: XX"
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "顯示星等極限: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "考慮光行進時間: "
+
+#~ msgid "Light pollution: "
+#~ msgstr "光害程度: "
+
+#~ msgid "Planets labels"
+#~ msgstr "行星標示"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "取得星表x、y座標"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Colors "
+#~ msgstr "色彩設定 "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "海拔 (公尺): "
+
+#~ msgid "Day keys: "
+#~ msgstr "時間定義: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "程式啟動時之星空時間: "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "星等顯示加成: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "顯示高於該星等之星名 "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "分級縮放: "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "星等成像加成: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "縮放動作時間: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "滑鼠指標自動隱藏: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "CD/DVD 劇本: "
+
+#~ msgid "USB Script: "
+#~ msgstr "USB 劇本: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "按下方向鍵以載入劇本"
+
+#~ msgid "Select and exit to run."
+#~ msgstr "選取後退出選單以執行劇本。"
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "程式界面語言: "
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "下載所有星表完畢！"

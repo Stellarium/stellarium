@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-10 19:57+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
+"PO-Revision-Date: 2011-07-18 20:26+0000\n"
 "Last-Translator: Kiril <Unknown>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-12 06:04+0000\n"
-"X-Generator: Launchpad (build 15225)\n"
+"X-Launchpad-Export-Date: 2012-05-19 04:43+0000\n"
+"X-Generator: Launchpad (build 15259)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -5590,3 +5590,231 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr ""
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "רשת משוונית"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "רשת אזימוטלית"
+
+#~ msgid "Equator Line"
+#~ msgstr "קו המשווה"
+
+#~ msgid "Sky Language: "
+#~ msgstr "שפת שמיים: "
+
+#~ msgid "Date & Time"
+#~ msgstr "תאריך ושעה"
+
+#~ msgid "Set Location "
+#~ msgstr "קבע מיקום "
+
+#~ msgid "Set Time "
+#~ msgstr "קבע זמן "
+
+#~ msgid "General "
+#~ msgstr "כללי "
+
+#~ msgid "Stars "
+#~ msgstr "כוכבים "
+
+#~ msgid "Colors "
+#~ msgstr "צבעים "
+
+#~ msgid "Effects "
+#~ msgstr "אפקטים "
+
+#~ msgid "Scripts "
+#~ msgstr "סקריפטים "
+
+#~ msgid "Latitude: "
+#~ msgstr "קו רוחב: "
+
+#~ msgid "Longitude: "
+#~ msgstr "קו אורך: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "זמן שמיים: "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "קבע אזור זמן: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "זמן שמיים קבוע מראש: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "זמן שמיים באתחול: "
+
+#~ msgid "Preset Time"
+#~ msgstr "זמן קבוע מראש"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "פורמט זמן: "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "פורמט תאריך: "
+
+#~ msgid "Show: "
+#~ msgstr "הצג: "
+
+#~ msgid "Nebula Names"
+#~ msgstr "שמות ערפיליות"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "מעגלי ערפיליות"
+
+#~ msgid "Landscape: "
+#~ msgstr "נוף: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "זום ידני: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "עוצמת ערפילית מירבית לסימון: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "משך זמן לזום: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "גבול זמן לסמן: "
+
+#~ msgid "Local Script: "
+#~ msgstr "סקריפט מקומי: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "טען קונפיגורציית ברירת מחדל: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "שמור קונפיגורציה נוכחית כברירת מחדל: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "כיבוי: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "עדכן אותי דרך אינטרנט: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "קבע שפת ממשק: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "לחץ על חץ למטה כדי לטעון רשימה."
+
+#~ msgid "Hydra"
+#~ msgstr "נחש מים"
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "מכפיל מגניטודה: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "כלל להגדלת עצם: "
+
+#~ msgid "Select and exit to run."
+#~ msgstr "בחר וצא להרצה"
+
+#~ msgid "Sidereal"
+#~ msgstr "סידרי"
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "מכפיל סקאלת בהירות "
+
+#~ msgid "Calendar"
+#~ msgstr "לוח שנה"
+
+#~ msgid "Day keys: "
+#~ msgstr "מקשי יום: "
+
+#~ msgid "USB Script: "
+#~ msgstr "סקריפט USB "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "שמיים לפי תרבות: "
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "עוצמת זיהום אור: "
+
+#~ msgid "Light pollution: "
+#~ msgstr "זיהום אור: "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "בהירות מגבילה: "
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "הורדת כל קטלוגי הכוכבים הסתיימה!"
+
+#~ msgid "Planets labels"
+#~ msgstr "שמות כוכבי הלכת"
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "שדה ראייה באתחול: XX"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "הורד קטלוג x מתוך y"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Art brightness: "
+#~ msgstr "בהירות האומנות "
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "כיוון הסתכלות בהפעלה: xxx"
+
+#~ msgid "Administration "
+#~ msgstr "ניהול "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "גובה (מטרים): "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "עצם במערכת שמש: "
+
+#~ msgid "Actual Time"
+#~ msgstr "זמן נוכחי"
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "מכפיל ערך כוכב: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "מגניטודת כוכב מירבית לסימון: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "ניצנוץ: "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "קווי קבוצות כוכבים"
+
+#~ msgid "Constellation Names"
+#~ msgstr "שמות קבוצות כוכבים"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "עוצמת הגרפיקה של קבוצות כוכבים"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "גבולות קבוצות כוכבים"
+
+#~ msgid "Cardinal Points"
+#~ msgstr "נקודות חשובות"
+
+#~ msgid "Planet Names"
+#~ msgstr "שמות כוכבי לכת"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "מסלולי כוכבי לכת"
+
+#~ msgid "Planet Trails"
+#~ msgstr "עקבות כוכבי לכת"
+
+#~ msgid "Meridian Line"
+#~ msgstr "קו המרידיאן"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "קו המילקה"
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "עוצמת הארה של שביל החלב: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "סקריפט CD/DVD : "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "תיקון עבור זמן מסע של אור: "
