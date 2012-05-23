@@ -12,7 +12,7 @@ ENDIF()
 PROJECT(Stellarium)
 SET(STELLARIUM_MAJOR "0")
 SET(STELLARIUM_MINOR "11")
-SET(STELLARIUM_PATCH "3")
+SET(STELLARIUM_PATCH "4")
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
 SET(PACKAGE stellarium)
 
@@ -328,13 +328,21 @@ IF(GENERATE_PACKAGE_TARGET)
   SET(CPACK_STRIP_FILES "bin/stellarium")
   SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
   SET(CPACK_SOURCE_IGNORE_FILES "/CVS/" "/.svn/" "/.git/" "/.bzr/" "builds/" "installers/" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "\\\\.bzrignore$" "~$" "\\\\.swp$" "\\\\.#" "/#")
+  SET(CPACK_RPM_PACKAGE_LICENSE "GPLv2+")
+  SET(CPACK_RPM_PACKAGE_GROUP "Amusements/Graphics")
+  SET(CPACK_RPM_PACKAGE_URL "http://stellarium.org/")
+  SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "${CPACK_PACKAGE_VENDOR} <stellarium-pubdevel@lists.sourceforge.net>")
+  SET(CPACK_DEBIAN_PACKAGE_SECTION "science")
+  SET(CPACK_DEBIAN_PACKAGE_VERSION "${VERSION}+deb1")
+  SET(CPACK_DEBIAN_PACKAGE_HOMEPAGE "${CPACK_RPM_PACKAGE_URL}")
+  SET(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
   INCLUDE(CPack)
 ENDIF()
 
 ########### Macosx Bundling ###############
-#IF(APPLE)
-#ADD_CUSTOM_TARGET(macosx_bundle bash util/macosx_bundle.sh ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} DEPENDS install WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "making the macosx bundle." VERBATIM)
-#ENDIF()
+IF(APPLE)
+ADD_CUSTOM_TARGET(macosx_bundle bash util/macosx_bundle.sh ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} DEPENDS install WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} COMMENT "making the macosx bundle." VERBATIM)
+ENDIF()
 
 
 ########### Generate doxygen doc ###############

@@ -20,6 +20,7 @@
 
 #include "Dialog.hpp"
 #include "ConfigurationDialog.hpp"
+#include "CustomInfoDialog.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelMainWindow.hpp"
 #include "ui_configurationDialog.h"
@@ -29,6 +30,7 @@
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
+#include "StelObjectMgr.hpp"
 
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
@@ -62,14 +64,18 @@
 ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
 {
 	ui = new Ui_configurationDialogForm;
+	customInfoDialog = NULL;
 	hasDownloadedStarCatalog = false;
 	isDownloadingStarCatalog = false;
-	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();
+	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();	
 }
 
 ConfigurationDialog::~ConfigurationDialog()
 {
 	delete ui;
+	ui=NULL;
+	delete customInfoDialog;
+	customInfoDialog = NULL;
 }
 
 void ConfigurationDialog::retranslate()
@@ -145,14 +151,32 @@ void ConfigurationDialog::createDialogContent()
 
 	// Selected object info
 	if (gui->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
+	{
 		ui->noSelectedInfoRadio->setChecked(true);
+		ui->pushButtonCustomInfoDialog->setEnabled(false);
+	}
 	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
-		ui->briefSelectedInfoRadio->setChecked(true);
-	else
+	{
+		ui->briefSelectedInfoRadio->setChecked(true);	
+		ui->pushButtonCustomInfoDialog->setEnabled(false);
+	}
+	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::AllInfo))
+	{
 		ui->allSelectedInfoRadio->setChecked(true);
+		ui->pushButtonCustomInfoDialog->setEnabled(false);
+	}
+	else
+	{
+		ui->customSelectedInfoRadio->setChecked(true);
+		ui->pushButtonCustomInfoDialog->setEnabled(true);
+	}
+
 	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
+	connect(ui->customSelectedInfoRadio, SIGNAL(released()), this, SLOT(setCustomSelectedInfo()));
+
+	connect(ui->pushButtonCustomInfoDialog, SIGNAL(clicked()), this, SLOT(showCustomInfoDialog()));
 
 	// Navigation tab
 	// Startup time
@@ -288,17 +312,27 @@ void ConfigurationDialog::setSphericMirror(bool b)
 void ConfigurationDialog::setNoSelectedInfo(void)
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(0));
+	ui->pushButtonCustomInfoDialog->setEnabled(false);
 }
 
 void ConfigurationDialog::setAllSelectedInfo(void)
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
+	ui->pushButtonCustomInfoDialog->setEnabled(false);
 }
 
 void ConfigurationDialog::setBriefSelectedInfo(void)
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
+	ui->pushButtonCustomInfoDialog->setEnabled(false);
 }
+
+void ConfigurationDialog::setCustomSelectedInfo(void)
+{
+	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getStelObjectMgr().getCustomInfoString()));
+	ui->pushButtonCustomInfoDialog->setEnabled(true);
+}
+
 
 void ConfigurationDialog::cursorTimeOutChanged()
 {
@@ -381,6 +415,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_equatorial_grid", glmgr->getFlagEquatorGrid());
 	conf->setValue("viewing/flag_equator_line", glmgr->getFlagEquatorLine());
 	conf->setValue("viewing/flag_ecliptic_line", glmgr->getFlagEclipticLine());
+	conf->setValue("viewing/flag_ecliptic_J2000_grid", glmgr->getFlagEclipticJ2000Grid());
 	conf->setValue("viewing/flag_meridian_line", glmgr->getFlagMeridianLine());
 	conf->setValue("viewing/flag_horizon_line", glmgr->getFlagHorizonLine());
 	conf->setValue("viewing/flag_equatorial_J2000_grid", glmgr->getFlagEquatorJ2000Grid());
@@ -429,8 +464,10 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		conf->setValue("gui/selected_object_info", "none");
 	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
 		conf->setValue("gui/selected_object_info", "short");
-	else
+	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::AllInfo))
 		conf->setValue("gui/selected_object_info", "all");
+	else
+		conf->setValue("gui/selected_object_info", "custom");
 
 	// toolbar auto-hide status
 	conf->setValue("gui/auto_hide_horizontal_toolbar", gui->getAutoHideHorizontalButtonBar());
@@ -530,13 +567,13 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 		if (s==q_(desc.info.displayedName))//TODO: Use ID!
 		{
 			QString html = "<html><head></head><body>";
-			html += "<h2>" + q_(desc.info.displayedName) + "</h2>";
-			html += "<h3>" + q_("Authors") + ": " + desc.info.authors + "</h3>";
+			html += "<h2>" + q_(desc.info.displayedName) + "</h2>";			
 			QString d = desc.info.description;
 			d.replace("\n", "<br />");
 			html += "<p>" + q_(d) + "</p>";
-			html += "<h3>" + q_("Contact") + ": " + desc.info.contact + "</h3>";
-			html += "</body></html>";
+			html += "<p><strong>" + q_("Authors") + "</strong>: " + desc.info.authors;
+			html += "<br /><strong>" + q_("Contact") + "</strong>: " + desc.info.contact;
+			html += "</p></body></html>";
 			ui->pluginsInfoBrowser->setHtml(html);
 			ui->pluginLoadAtStartupCheckBox->setChecked(desc.loadAtStartup);
 			StelModule* pmod = StelApp::getInstance().getModuleMgr().getModule(desc.info.id, true);
@@ -611,19 +648,20 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_(scriptMgr.getName(s).trimmed()) + "</h2>";
-	if (!scriptMgr.getAuthor(s).trimmed().isEmpty())
-	{
-		html += "<h3>" + q_("Author") + ": " + scriptMgr.getAuthor(s) + "</h3>";
-	}
-	if (!scriptMgr.getLicense(s).trimmed().isEmpty())
-	{
-		html += "<h3>" + q_("License") + ": " + scriptMgr.getLicense(s) + "</h3>";
-	}	
 	QString d = scriptMgr.getDescription(s).trimmed();
 	d.replace("\n", "<br />");
 	d.replace(QRegExp("\\s{2,}"), " ");
 	html += "<p>" + q_(d) + "</p>";
-	html += "</body></html>";	
+	html += "<p>";
+	if (!scriptMgr.getAuthor(s).trimmed().isEmpty())
+	{
+		html += "<strong>" + q_("Author") + "</strong>: " + scriptMgr.getAuthor(s) + "<br />";
+	}
+	if (!scriptMgr.getLicense(s).trimmed().isEmpty())
+	{
+		html += "<strong>" + q_("License") + "</strong>: " + scriptMgr.getLicense(s);
+	}	
+	html += "</p></body></html>";
 	ui->scriptInfoBrowser->setHtml(html);	
 }
 
@@ -892,4 +930,12 @@ void ConfigurationDialog::downloadFinished()
 	}
 
 	resetStarCatalogControls();
+}
+
+void ConfigurationDialog::showCustomInfoDialog()
+{
+	if(customInfoDialog == NULL)
+		customInfoDialog = new CustomInfoDialog();
+
+	customInfoDialog->setVisible(true);
 }

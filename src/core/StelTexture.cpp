@@ -16,18 +16,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
-#include <iomanip>
-#include <QtCore/QtCore>
-#include <QtGui/QtGui>
-#include <QTextStream>
-#include <QString>
-#include <QDebug>
-#include <QObject>
-#include <QVariant>
-#include <QVarLengthArray>
-
-#include <GLee.h>
-
 #include <cstdlib>
 #include "StelTextureMgr.hpp"
 #include "StelTexture.hpp"
@@ -109,14 +97,12 @@ void ImageLoader::directLoad() {
 	emit finished(image);
 }
 
-void StelTexture::setImage(QImage* img)
-{
-        qImage = *img;
-}
-
 StelTexture::StelTexture() : loader(NULL), downloaded(false), isLoadingImage(false),
 				   errorOccured(false), id(0), avgLuminance(-1.f)
 {
+	#if QT_VERSION>=0x040800
+	initializeGLFunctions();
+	#endif
 	width = -1;
 	height = -1;
 }
@@ -160,29 +146,21 @@ void StelTexture::reportError(const QString& aerrorMessage)
  Bind the texture so that it can be used for openGL drawing (calls glBindTexture)
  *************************************************************************/
 
-//minor change by Eleni Maria Stea:
-//added texture unit (useful when multiple textures are used)
-//this change doesn't affect the previous calls of the function!
-
-bool StelTexture::bind(int texunit)
+bool StelTexture::bind()
 {
 	// qDebug() << "TEST bind" << fullPath;
 	if (id != 0)
 	{
 		// The texture is already fully loaded, just bind and return true;
-#ifndef USE_OPENGL_ES2
-		if(GLEE_ARB_multitexture)
+#ifdef USE_OPENGL_ES2
+		glActiveTexture(GL_TEXTURE0);
 #endif
-			glActiveTexture(GL_TEXTURE0 + texunit);
 
 		glBindTexture(GL_TEXTURE_2D, id);
 		return true;
 	}
 	if (errorOccured)
-	{
-	Q_ASSERT(errorOccured);
 		return false;
-    }
 
 	if (!isLoadingImage && loader == NULL) {
 		isLoadingImage = true;
@@ -245,21 +223,6 @@ bool StelTexture::glLoad()
 		reportError("Unknown error");
 		return false;
 	}
-
-	//hikiko - case that max texture unit supported < qImage size
-	int size;
-	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &size);
-
-	if (size < qImage.width())
-	{
-			qImage = qImage.scaledToWidth(size, Qt::FastTransformation);
-	}
-	if (size < qImage.height())
-	{
-			qImage = qImage.scaledToHeight(size, Qt::FastTransformation);
-	}
-
-	//end hikiko
 
 	QGLContext::BindOptions opt = QGLContext::InvertedYBindOption;
 	if (loadParams.filtering==GL_LINEAR)

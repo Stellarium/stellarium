@@ -70,6 +70,11 @@ void StelLogger::init(const QString& logFilePath)
 		case QSysInfo::WV_WINDOWS7:
 			writeLog("Windows 7");
 			break;
+		#ifdef WV_WINDOWS8
+		case QSysInfo::WV_WINDOWS8:
+			writeLog("Windows 8");
+			break;
+		#endif
 		default:
 			writeLog("Unsupported Windows version");
 			break;
@@ -94,6 +99,11 @@ void StelLogger::init(const QString& logFilePath)
 		#ifdef MV_10_7
 		case QSysInfo::MV_10_7:
 			writeLog("Mac OS X 10.7");
+			break;
+		#endif
+		#ifdef MV_10_8
+		case QSysInfo::MV_10_8:
+			writeLog("Mac OS X 10.8");
 			break;
 		#endif
 		default:
