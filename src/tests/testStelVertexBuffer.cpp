@@ -131,9 +131,9 @@ void TestStelVertexBuffer::testVertexBuffer()
 	delete buffer;
 }
 
-void TestStelVertexBuffer::testStelTestGLVertexBuffer()
+void TestStelVertexBuffer::testStelTestQGL2VertexBuffer()
 {
-	testVertexBuffer<StelTestGLVertexBufferBackend, TestVertex1>();
-	testVertexBuffer<StelTestGLVertexBufferBackend, TestVertex2>();
-	testVertexBuffer<StelTestGLVertexBufferBackend, TestVertex3>();
+	testVertexBuffer<StelTestQGL2VertexBufferBackend, TestVertex1>();
+	testVertexBuffer<StelTestQGL2VertexBufferBackend, TestVertex2>();
+	testVertexBuffer<StelTestQGL2VertexBufferBackend, TestVertex3>();
 }
