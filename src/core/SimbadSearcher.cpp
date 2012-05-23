@@ -52,7 +52,7 @@ void SimbadLookupReply::httpQueryFinished()
 	if (reply->error()!=QNetworkReply::NoError)
 	{
 		currentStatus = SimbadLookupErrorOccured;
-		errorString = q_("Network error: %1").arg(reply->errorString());
+		errorString = QString("%1: %2").arg(q_("Network error")).arg(reply->errorString());
 		emit statusChanged();
 		return;
 	}
@@ -131,7 +131,7 @@ QString SimbadLookupReply::getCurrentStatusString() const
 		case SimbadLookupErrorOccured:
 			return q_("Error");
 		case SimbadLookupFinished:
-			return resultPositions.isEmpty() ? "Not found" : "Found";
+			return resultPositions.isEmpty() ? q_("Not found") : q_("Found");
 	}
 	return QString();
 }

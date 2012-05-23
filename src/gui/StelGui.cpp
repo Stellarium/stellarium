@@ -104,7 +104,6 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 #ifdef ENABLE_SCRIPT_CONSOLE
 	addGuiActions("actionShow_ScriptConsole_Window_Global", N_("Script console window"), "F12", N_("Windows"), true, false, true);
 #endif
-
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
 	connect(getGuiActions("actionQuit_Global"), SIGNAL(triggered()), this, SLOT(quit()));
@@ -127,6 +126,9 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiActions("actionIncrease_Script_Speed"), SIGNAL(triggered()), this, SLOT(increaseScriptSpeed()));
 	connect(getGuiActions("actionDecrease_Script_Speed"), SIGNAL(triggered()), this, SLOT(decreaseScriptSpeed()));
 	connect(getGuiActions("actionSet_Real_Script_Speed"), SIGNAL(triggered()), this, SLOT(setRealScriptSpeed()));
+	connect(getGuiActions("actionStop_Script"), SIGNAL(triggered()), this, SLOT(stopScript()));
+	connect(getGuiActions("actionPause_Script"), SIGNAL(triggered()), this, SLOT(pauseScript()));
+	connect(getGuiActions("actionResume_Script"), SIGNAL(triggered()), this, SLOT(resumeScript()));
 	connect(getGuiActions("actionIncrease_Time_Speed"), SIGNAL(triggered()), core, SLOT(increaseTimeSpeed()));
 	connect(getGuiActions("actionDecrease_Time_Speed"), SIGNAL(triggered()), core, SLOT(decreaseTimeSpeed()));
 	connect(getGuiActions("actionIncrease_Time_Speed_Less"), SIGNAL(triggered()), core, SLOT(increaseTimeSpeedLess()));
@@ -144,8 +146,12 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiActions("actionSubtract_Solar_Week"), SIGNAL(triggered()), core, SLOT(subtractWeek()));
 	connect(getGuiActions("actionAdd_Sidereal_Day"), SIGNAL(triggered()), core, SLOT(addSiderealDay()));
 	connect(getGuiActions("actionAdd_Sidereal_Week"), SIGNAL(triggered()), core, SLOT(addSiderealWeek()));
+	connect(getGuiActions("actionAdd_Sidereal_Month"), SIGNAL(triggered()), core, SLOT(addSiderealMonth()));
+	connect(getGuiActions("actionAdd_Sidereal_Year"), SIGNAL(triggered()), core, SLOT(addSiderealYear()));
 	connect(getGuiActions("actionSubtract_Sidereal_Day"), SIGNAL(triggered()), core, SLOT(subtractSiderealDay()));
 	connect(getGuiActions("actionSubtract_Sidereal_Week"), SIGNAL(triggered()), core, SLOT(subtractSiderealWeek()));
+	connect(getGuiActions("actionSubtract_Sidereal_Month"), SIGNAL(triggered()), core, SLOT(subtractSiderealMonth()));
+	connect(getGuiActions("actionSubtract_Sidereal_Year"), SIGNAL(triggered()), core, SLOT(subtractSiderealYear()));
 	connect(getGuiActions("actionSet_Home_Planet_To_Selected"), SIGNAL(triggered()), core, SLOT(moveObserverToSelected()));
 
 	// connect the actor after setting the nightmode.
@@ -503,6 +509,16 @@ void StelGui::initGrindLineMgr()
 			this,
 			SLOT(equatorJ2000GridDisplayedUpdated(const bool)));
 
+	getGuiActions("actionShow_Ecliptic_J2000_Grid")->setChecked(gridLineManager->getFlagEclipticJ2000Grid());
+	connect(getGuiActions("actionShow_Ecliptic_J2000_Grid"),
+			SIGNAL(toggled(bool)),
+			gridLineManager,
+			SLOT(setFlagEclipticJ2000Grid(bool)));
+	connect(gridLineManager,
+			SIGNAL(eclipticJ2000GridDisplayedChanged(const bool)),
+			this,
+			SLOT(eclipticJ2000GridDisplayedUpdated(const bool)));
+
 	getGuiActions("actionShow_Galactic_Grid")->setChecked(gridLineManager->getFlagGalacticGrid());
 	connect(getGuiActions("actionShow_Galactic_Grid"),
 			SIGNAL(toggled(bool)),
@@ -732,6 +748,10 @@ void StelGui::setScriptKeys(bool b)
 		getGuiActions("actionDecrease_Script_Speed")->setShortcut(QKeySequence("J"));
 		getGuiActions("actionIncrease_Script_Speed")->setShortcut(QKeySequence("L"));
 		getGuiActions("actionSet_Real_Script_Speed")->setShortcut(QKeySequence("K"));
+
+		getGuiActions("actionStop_Script")->setShortcut(QKeySequence("4"));
+		getGuiActions("actionPause_Script")->setShortcut(QKeySequence("5"));
+		getGuiActions("actionResume_Script")->setShortcut(QKeySequence("6"));
 	}
 	else
 	{
@@ -757,6 +777,21 @@ void StelGui::decreaseScriptSpeed()
 void StelGui::setRealScriptSpeed()
 {	
 	StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(1);	
+}
+
+void StelGui::stopScript()
+{	
+	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();	
+}
+
+void StelGui::pauseScript()
+{	
+	StelMainGraphicsView::getInstance().getScriptMgr().pauseScript();	
+}
+
+void StelGui::resumeScript()
+{	
+	StelMainGraphicsView::getInstance().getScriptMgr().resumeScript();	
 }
 #endif
 
@@ -977,6 +1012,14 @@ void StelGui::equatorJ2000GridDisplayedUpdated(const bool displayed)
 		getGuiActions("actionShow_Equatorial_J2000_Grid")->setChecked(displayed);
 	}
 }
+
+void StelGui::eclipticJ2000GridDisplayedUpdated(const bool displayed)
+{
+	if (getGuiActions("actionShow_Ecliptic_J2000_Grid")->isChecked() != displayed) {
+		getGuiActions("actionShow_Ecliptic_J2000_Grid")->setChecked(displayed);
+	}
+}
+
 
 void StelGui::galacticGridDisplayedUpdated(const bool displayed)
 {

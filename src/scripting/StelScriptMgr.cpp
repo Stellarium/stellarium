@@ -134,6 +134,10 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	setScriptRate(1.0);
 	
 	engine.setProcessEventsInterval(10);
+
+	agent = new StelScriptEngineAgent(&engine);
+	engine.setAgent(agent);
+ 
 }
 
 
@@ -363,6 +367,9 @@ void StelScriptMgr::stopScript()
 {
 	if (engine.isEvaluating())
 	{
+		if (agent->getPauseScript()) {
+			agent->setPauseScript(false);
+		}
 		QString msg = QString("INFO: asking running script to exit");
 		emit(scriptDebug(msg));
 		//qDebug() << msg;
@@ -391,6 +398,15 @@ void StelScriptMgr::setScriptRate(float r)
 	
 	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(core->getTimeRate());
 	engine.globalObject().setProperty("scriptRateReadOnly", r);
+
+}
+
+void StelScriptMgr::pauseScript() {
+	agent->setPauseScript(true);
+}
+
+void StelScriptMgr::resumeScript() {
+	agent->setPauseScript(false);
 }
 
 double StelScriptMgr::getScriptRate()
@@ -487,3 +503,20 @@ bool StelScriptMgr::preprocessScript(QFile& input, QString& output, const QStrin
 	return true;
 }
 
+StelScriptEngineAgent::StelScriptEngineAgent(QScriptEngine *engine) 
+	: QScriptEngineAgent(engine)
+{
+	isPaused = false;
+}
+
+void StelScriptEngineAgent::positionChange(qint64 scriptId, int lineNumber, int columnNumber)
+{
+	Q_UNUSED(scriptId);
+	Q_UNUSED(lineNumber);
+	Q_UNUSED(columnNumber);
+
+	while (isPaused) {
+		// TODO : sleep for 'processEventsInterval' time
+		QCoreApplication::processEvents();
+	}
+}

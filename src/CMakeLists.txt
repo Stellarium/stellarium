@@ -36,8 +36,6 @@ IF(OPENGL_MODE STREQUAL "ES2")
 ENDIF()
 
 SET(stellarium_lib_SRCS
-	core/StelShader.hpp
-	core/StelShader.cpp
 	core/StelAudioMgr.hpp
 	core/StelAudioMgr.cpp
 	core/StelGeodesicGrid.cpp
@@ -414,6 +412,8 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/AddRemoveLandscapesDialog.cpp
 		gui/AtmosphereDialog.hpp
 		gui/AtmosphereDialog.cpp
+                gui/CustomInfoDialog.hpp
+                gui/CustomInfoDialog.cpp
 		gui/StelDialog.hpp
 		gui/StelDialog.cpp)
 
@@ -433,6 +433,7 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/ConfigurationDialog.hpp
 		gui/AddRemoveLandscapesDialog.hpp
 		gui/AtmosphereDialog.hpp
+                gui/CustomInfoDialog.hpp
 		gui/StelDialog.hpp)
 
 	################# compiles .ui files ############
@@ -444,6 +445,7 @@ IF (GUI_MODE STREQUAL "Standard")
 	gui/searchDialogGui.ui
 	gui/configurationDialog.ui
 	gui/AtmosphereDialog.ui
+        gui/CustomInfoDialog.ui
 	gui/addRemoveLandscapesDialog.ui)
 
 	IF(ENABLE_SCRIPT_CONSOLE)
@@ -675,6 +677,10 @@ SET(tests_testStelSphereGeometry_SRCS
 	core/StelJsonParser.cpp
 	core/StelUtils.cpp
 	core/StelUtils.hpp
+	core/StelProjector.cpp
+	core/StelProjector.hpp
+	core/StelTranslator.cpp
+	core/StelTranslator.hpp
 	${glues_lib_SRCS})
 QT4_WRAP_CPP(testStelSphereGeometry_MOC_SRCS tests/testStelSphereGeometry.hpp)
 ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS} ${testStelSphereGeometry_MOC_SRCS})
@@ -696,6 +702,10 @@ SET(tests_testStelSphericalIndex_SRCS
 	core/StelJsonParser.cpp
 	core/StelUtils.cpp
 	core/StelUtils.hpp
+	core/StelProjector.cpp
+	core/StelProjector.hpp
+	core/StelTranslator.cpp
+	core/StelTranslator.hpp
 	${glues_lib_SRCS})
 QT4_WRAP_CPP(tests_testStelSphericalIndex_MOC_SRCS tests/testStelSphericalIndex.hpp)
 ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS} ${tests_testStelSphericalIndex_MOC_SRCS})
@@ -743,3 +753,4 @@ ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelJsonParser WORKING_
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelVertexArray WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 # ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testRefractionExtinction WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_DEPENDENCIES(tests buildTests)
+
