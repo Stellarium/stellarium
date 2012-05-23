@@ -3,6 +3,7 @@
 
 #include <QGLContext>
 #include "StelVertexAttribute.hpp"
+#include "StelVertexBuffer.hpp"
 
 
 //! Get OpenGL data type of an element of an attribute type.
@@ -12,5 +13,16 @@
 //! @param type Vertex attribute data type.
 //! @return OpenGL attribute element data type.
 int attributeGLType(const AttributeType type);
+
+//! Get GLSL vertex attribute name corresponding to specified attribute interpretation.
+//!
+//! Each vertex attribute interpretation uses a specific name in shaders it is used in.
+//!
+//! @param interpretation Vertex attribute interpretation.
+//! @return Name of the attribute as a C string.
+const char* attributeGLSLName(const AttributeInterpretation interpretation);
+
+//! Get OpenGL primitive type corresponding to specified PrimitiveType.
+int primitiveGLType(const PrimitiveType type);
 
 #endif // _STELGLUTILITYFUNCTIONS_HPP_
