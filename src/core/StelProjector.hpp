@@ -260,6 +260,12 @@ public:
 	//! Get the current type of the mask if any.
 	StelProjectorMaskType getMaskType(void) const;
 
+	//! Get viewport extents.
+	Vec4i getViewportXywh() const 
+	{
+		return viewportXywh;
+	}
+
 protected:
 	//! Private constructor. Only StelCore can create instances of StelProjector.
 	StelProjector(ModelViewTranformP amodelViewTransform) : modelViewTransform(amodelViewTransform) {;}
