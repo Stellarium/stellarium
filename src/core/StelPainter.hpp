@@ -427,7 +427,7 @@ private:
 	static QGLShaderProgram* basicShaderProgram;
 	struct BasicShaderVars {
 		int projectionMatrix;
-		int color;
+		int globalColor;
 		int vertex;
 	};
 	static BasicShaderVars basicShaderVars;
@@ -437,7 +437,7 @@ private:
 		int projectionMatrix;
 		int texCoord;
 		int vertex;
-		int texColor;
+		int globalColor;
 		int texture;
 	};
 	static TexturesShaderVars texturesShaderVars;

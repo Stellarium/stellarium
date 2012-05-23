@@ -2119,7 +2119,7 @@ void StelPainter::TEMPSpecifyShaders(QGLShaderProgram *plain,
 {
 	basicShaderProgram = plain;
 	basicShaderVars.projectionMatrix = basicShaderProgram->uniformLocation("projectionMatrix");
-	basicShaderVars.color = basicShaderProgram->uniformLocation("color");
+	basicShaderVars.globalColor = basicShaderProgram->uniformLocation("globalColor");
 	basicShaderVars.vertex = basicShaderProgram->attributeLocation("vertex");
 
 	colorShaderProgram = color;
@@ -2129,7 +2129,7 @@ void StelPainter::TEMPSpecifyShaders(QGLShaderProgram *plain,
 	                                      uniformLocation("projectionMatrix");
 	texturesShaderVars.texCoord = texturesShaderProgram->attributeLocation("texCoord");
 	texturesShaderVars.vertex = texturesShaderProgram->attributeLocation("vertex");
-	texturesShaderVars.texColor = texturesShaderProgram->uniformLocation("texColor");
+	texturesShaderVars.globalColor = texturesShaderProgram->uniformLocation("globalColor");
 	texturesShaderVars.texture = texturesShaderProgram->uniformLocation("tex");
 	
 	texturesColorShaderProgram = colorTexture;
@@ -2211,7 +2211,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setAttributeArray(basicShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
 		pr->enableAttributeArray(basicShaderVars.vertex);
 		pr->setUniformValue(basicShaderVars.projectionMatrix, qMat);
-		pr->setUniformValue(basicShaderVars.color, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
+		pr->setUniformValue(basicShaderVars.globalColor, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
 	}
 	else if (texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
@@ -2220,7 +2220,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setAttributeArray(texturesShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
 		pr->enableAttributeArray(texturesShaderVars.vertex);
 		pr->setUniformValue(texturesShaderVars.projectionMatrix, qMat);
-		pr->setUniformValue(texturesShaderVars.texColor, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
+		pr->setUniformValue(texturesShaderVars.globalColor, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
 		pr->setAttributeArray(texturesShaderVars.texCoord, (const GLfloat*)texCoordArray.pointer, 2);
 		pr->enableAttributeArray(texturesShaderVars.texCoord);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
