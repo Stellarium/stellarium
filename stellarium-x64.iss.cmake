@@ -3,6 +3,7 @@
 ; @CONFIGURED_FILE_WARNING@
 
 [Setup]
+ArchitecturesAllowed=x64
 DisableStartupPrompt=yes
 WizardSmallImageFile=data\icon.bmp
 WizardImageFile=data\splash.bmp
@@ -10,9 +11,9 @@ WizardImageStretch=no
 WizardImageBackColor=clBlack
 AppName=Stellarium
 AppVerName=Stellarium @PACKAGE_VERSION@
-OutputBaseFilename=stellarium-@PACKAGE_VERSION@-win32
+OutputBaseFilename=stellarium-@PACKAGE_VERSION@-win64
 OutputDir=installers
-DefaultDirName={pf}\Stellarium
+DefaultDirName={pf64}\Stellarium
 DefaultGroupName=Stellarium
 UninstallDisplayIcon={app}\data\stellarium.ico
 LicenseFile=COPYING
@@ -26,10 +27,8 @@ Source: "INSTALL"; DestDir: "{app}"; DestName: "INSTALL.rtf"
 Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.rtf"
 Source: "AUTHORS"; DestDir: "{app}"; DestName: "AUTHORS.rtf"
 Source: "ChangeLog"; DestDir: "{app}"; DestName: "ChangeLog.rtf"
-Source: "@QT_BINARY_DIR@/../../mingw/bin/libgcc_s_dw2-1.dll"; DestDir: "{app}";
-Source: "@QT_BINARY_DIR@/../../mingw/bin/mingwm10.dll"; DestDir: "{app}";
-Source: "@ICONV_INCLUDE_DIR@/../bin/libiconv2.dll"; DestDir: "{app}";
-Source: "@INTL_INCLUDE_DIR@/../bin/libintl3.dll"; DestDir: "{app}";
+Source: "@ICONV_INCLUDE_DIR@/../bin/libiconv-2.dll"; DestDir: "{app}";
+Source: "@INTL_INCLUDE_DIR@/../bin/libintl-8.dll"; DestDir: "{app}";
 Source: "@ZLIB_INCLUDE_DIR@/../bin/zlib1.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\phonon4.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\QtSql4.dll"; DestDir: "{app}";
