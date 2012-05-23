@@ -6,6 +6,8 @@
 #include "StelPainter.hpp"
 
 #include <QGLWidget>
+#include <QGLFunctions>
+#include <QGraphicsView>
 
 
 //! GLWidget specialized for Stellarium, mostly to provide better debugging information.
@@ -64,12 +66,13 @@ public:
 		                                     QGL::DoubleBuffer)))
 		, glWidget(new StelQGLWidget(glContext, parent))
 		, painter(NULL)
+		, gl(glContext)
 	{
 		glWidget->updateGL();
 		parent->setViewport(glWidget);
 	}
 	
-    virtual ~StelQGLRenderer()
+	virtual ~StelQGLRenderer()
 	{
 		Q_ASSERT_X(NULL == this->painter, "StelQGLRenderer::~StelQGLRenderer()", 
 		           "Painting is not disabled at destruction");
@@ -117,7 +120,7 @@ public:
 		this->painter = NULL;
 		invariant();
 	}
-	
+
 protected:
 	virtual void enablePainting(QPainter* painter)
 	{
@@ -173,6 +176,10 @@ private:
 	QPainter* painter;
 	//! Are we using default-constructed painter?
 	bool usingDefaultPainter;
+
+protected:
+	//! Wraps some GL functions for compatibility across GL and GLES.
+	QGLFunctions gl;
 };
 
 #endif // _STELQGLRENDERER_HPP_
