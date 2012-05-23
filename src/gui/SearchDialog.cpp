@@ -347,13 +347,17 @@ void SearchDialog::onSimbadStatusChanged()
 	Q_ASSERT(simbadReply);
 	if (simbadReply->getCurrentStatus()==SimbadLookupReply::SimbadLookupErrorOccured)
 	{
-		ui->simbadStatusLabel->setText(QString("Simbad Lookup Error: ")+simbadReply->getErrorString());
+		ui->simbadStatusLabel->setText(QString("%1: %2")
+					       .arg(q_("Simbad Lookup Error"))
+					       .arg(simbadReply->getErrorString()));
 		if (ui->completionLabel->isEmpty())
 			ui->pushButtonGotoSearchSkyObject->setEnabled(false);
 	}
 	else
 	{
-		ui->simbadStatusLabel->setText(QString("Simbad Lookup: ")+simbadReply->getCurrentStatusString());
+		ui->simbadStatusLabel->setText(QString("%1: %2")
+					       .arg(q_("Simbad Lookup"))
+					       .arg(simbadReply->getCurrentStatusString()));
 		// Query not over, don't disable button
 		ui->pushButtonGotoSearchSkyObject->setEnabled(true);
 	}

@@ -599,6 +599,8 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		StelUtils::rectToSphe(&ra_start, &de_start, tmpStart);
 		StelUtils::rectToSphe(&ra_aim, &de_aim, tmpAim);
 
+		// Make sure the position of the object to be aimed at is defined...
+		Q_ASSERT(move.aim[0]==move.aim[0] && move.aim[1]==move.aim[1] && move.aim[2]==move.aim[2]);
 		// Trick to choose the good moving direction and never travel on a distance > PI
 		if (ra_aim-ra_start > M_PI)
 		{
