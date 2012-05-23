@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-05-10 19:57+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
+"PO-Revision-Date: 2012-05-08 20:51+0000\n"
 "Last-Translator: Zbyněk Schwarz <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-12 06:02+0000\n"
-"X-Generator: Launchpad (build 15225)\n"
+"X-Launchpad-Export-Date: 2012-05-19 04:40+0000\n"
+"X-Generator: Launchpad (build 15259)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -5728,3 +5728,231 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:280
 msgid "extragalactic (in MC) pulsar"
 msgstr "extragalaktický (v MC) pulsar"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "Ekvatoriální mřížka"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "Azimutální mřížka"
+
+#~ msgid "Equator Line"
+#~ msgstr "Rovník"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "Ekliptika"
+
+#~ msgid "Cardinal Points"
+#~ msgstr "Světové strany"
+
+#~ msgid "Sky Language: "
+#~ msgstr "Jazyk: "
+
+#~ msgid "Sky Culture: "
+#~ msgstr "Kultura: "
+
+#~ msgid "Date & Time"
+#~ msgstr "Datum a čas"
+
+#~ msgid "Set Location "
+#~ msgstr "Nastavení polohy "
+
+#~ msgid "Set Time "
+#~ msgstr "Nastavení času "
+
+#~ msgid "General "
+#~ msgstr "Obecné "
+
+#~ msgid "Stars "
+#~ msgstr "Hvězdy "
+
+#~ msgid "Colors "
+#~ msgstr "Barvy "
+
+#~ msgid "Effects "
+#~ msgstr "Efekty "
+
+#~ msgid "Scripts "
+#~ msgstr "Skripty "
+
+#~ msgid "Administration "
+#~ msgstr "Administrace "
+
+#~ msgid "Latitude: "
+#~ msgstr "Šířka: "
+
+#~ msgid "Longitude: "
+#~ msgstr "Délka: "
+
+#~ msgid "Altitude (m): "
+#~ msgstr "Nadm. výška (m): "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "Těleso sluneční soustavy: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "Hvězdný čas: "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "Nastavení časového pásma: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "Přednastavený hvězdný čas: "
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "Výchozí hvězdný čas: "
+
+#~ msgid "Actual Time"
+#~ msgstr "Aktuální čas"
+
+#~ msgid "Preset Time"
+#~ msgstr "Nastavit čas"
+
+#~ msgid "Time Display Format: "
+#~ msgstr "Formát času: "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "Formát datumu: "
+
+#~ msgid "Show: "
+#~ msgstr "Zobrazovat: "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "Jména do magnitudy: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "Mihotání: "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "Ohraničující čáry souhvězdí"
+
+#~ msgid "Constellation Names"
+#~ msgstr "Názvy souhvězdí"
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "Intenzita obrázků souhvězdí"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "Hranice souhvězdí"
+
+#~ msgid "Planet Names"
+#~ msgstr "Názvy planet"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "Oběžné dráhy planet"
+
+#~ msgid "Planet Trails"
+#~ msgstr "Dráhy planet"
+
+#~ msgid "Meridian Line"
+#~ msgstr "Poledník"
+
+#~ msgid "Nebula Names"
+#~ msgstr "Názvy mlhovin"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "Kroužky mlhovin"
+
+#~ msgid "Landscape: "
+#~ msgstr "Krajina: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "Manuální zoom: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "Velikost objektů: "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "Intenzita Mléčné dráhy: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "Jména mlhovin do magnitudy: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "Rychlost zoomu: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "Skrytí kurzoru: "
+
+#~ msgid "Local Script: "
+#~ msgstr "Lokální skript: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "CD/DVD skript: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "Nahrát výchozí nastavení: "
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "Uložit aktuální nastavení jako výchozí: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "Vypnout: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "Aktualizovat přes Internet: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "Nastavit jazyk uživatelského rozhraní: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "Stikněte šipku dolů pro načtení seznamu."
+
+#~ msgid "Hydra"
+#~ msgstr "Hydra"
+
+#~ msgid "Select and exit to run."
+#~ msgstr "Vyber a opusť pro spuštění."
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "Násobič magnitudy: "
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "Jas světelného znečištění "
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "Násobič jasu hvězd "
+
+#~ msgid "Sidereal"
+#~ msgstr "siderické"
+
+#~ msgid "Calendar"
+#~ msgstr "kalendářní"
+
+#~ msgid "Day keys: "
+#~ msgstr "Typ dnů "
+
+#~ msgid "USB Script: "
+#~ msgstr "USB skript: "
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "Mezní hvězdná velikost (limitní magnituda) "
+
+#~ msgid "Light pollution: "
+#~ msgstr "Světelný smog "
+
+#~ msgid "Art brightness: "
+#~ msgstr "Jas kreseb: "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "Násobič vykreslování magnitud "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "Oprava na konečnou rychlost světla "
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "Zorné pole při spuštění: XX"
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "Směr pohledu při spuštění: xxxx"
+
+#~ msgid "Planets labels"
+#~ msgstr "Popisky planet"
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "Získat katalog x z y"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "Stahování všech katalogů hvězd dokončeno!"
