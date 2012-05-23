@@ -67,6 +67,14 @@ enum PrimitiveType
 //! 	                                << StelVertexAttribute(AT_Vec2f, TexCoord));
 //! @endcode
 //!
+//! Note that there are some requirements for a vertex type 
+//! These are verified at run time.
+//! The requirements are:
+//!
+//! @li A position attribute is required.
+//! @li Any texture coordinates must be 2D. There is no 1D or 3D texture support right now.
+//! @li Any normals must be 3D.
+//!
 //! @see AttributeType, AttributeInterpretation, StelVertexAttribute, StelRenderer
 //!
 //! @section apinotes API design notes
