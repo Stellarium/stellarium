@@ -80,7 +80,6 @@ QVariantMap Exoplanet::getMap(void)
 	map["designation"] = designation;
 	map["RA"] = RA;
 	map["DE"] = DE;
-
 	QVariantList exoplanetList;
 	foreach(const exoplanetData &p, exoplanets)
 	{
@@ -121,16 +120,90 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 
 	if (flags&Extra1 && exoplanets.size() > 0)
 	{
+		QString planetNameLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Exoplanet"));
+		QString periodLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Period")).arg(q_("days"));
+		QString massLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (M<sub>%2</sub>)</td>").arg(q_("Mass")).arg(q_("Jup"));
+		QString radiusLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (R<sub>%2</sub>)</td>").arg(q_("Radius")).arg(q_("Jup"));
+		QString semiAxisLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Semi-Major Axis")).arg(q_("AU"));
+		QString eccentricityLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Eccentricity"));
+		QString inclinationLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Inclination")).arg(QChar(0x00B0));
+		QString yearLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Year of discovery"));
 		foreach(const exoplanetData &p, exoplanets)
 		{
-			oss << q_("Exoplanet name: %1").arg(p.planetName) << "<br>";
-			oss << q_("Period: %1").arg(p.period) << "<br>";
-			oss << q_("Mass: %1").arg(p.mass) << "<br>";
-			oss << q_("Radius: %1").arg(p.radius) << "<br>";
-			oss << q_("Eccentricity: %1").arg(p.eccentricity) << "<br>";
-			oss << q_("Inclination: %1").arg(p.inclination) << "<br>";
-			oss << q_("Year: %1").arg(p.year) << "<br>";
+			if (!p.planetName.isEmpty())
+			{
+				planetNameLabel.append("<td style=\"padding:0 2px;\">").append(p.planetName).append("</td>");
+			}
+			else
+			{
+				planetNameLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+			}
+			if (!p.period.isEmpty())
+			{
+				periodLabel.append("<td style=\"padding:0 2px;\">").append(p.period).append("</td>");
+			}
+			else
+			{
+				periodLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+			}
+			if (!p.mass.isEmpty())
+			{
+				massLabel.append("<td style=\"padding:0 2px;\">").append(p.mass).append("</td>");
+			}
+			else
+			{
+				massLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+			}
+			if (!p.radius.isEmpty())
+			{
+				radiusLabel.append("<td style=\"padding:0 2px;\">").append(p.radius).append("</td>");
+			}
+			else
+			{
+				radiusLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+			}
+			if (!p.eccentricity.isEmpty())
+			{
+				eccentricityLabel.append("<td style=\"padding:0 2px;\">").append(p.eccentricity).append("</td>");
+			}
+			else
+			{
+				eccentricityLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+			}
+			if (!p.inclination.isEmpty())
+			{
+				inclinationLabel.append("<td style=\"padding:0 2px;\">").append(p.inclination).append("</td>");
+			}
+			else
+			{
+				inclinationLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+			}
+			if (!p.semiAxis.isEmpty())
+			{
+				semiAxisLabel.append("<td style=\"padding:0 2px;\">").append(p.semiAxis).append("</td>");
+			}
+			else
+			{
+				semiAxisLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+			}
+			if (p.year>0)
+			{
+				yearLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.year)).append("</td>");
+			}
+			else
+			{
+				yearLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+			}
 		}
+		oss << "<table>";
+		oss << "<tr>" << planetNameLabel << "</tr>";
+		oss << "<tr>" << periodLabel << "</tr>";
+		oss << "<tr>" << massLabel << "</tr>";
+		oss << "<tr>" << radiusLabel << "</tr>";
+		oss << "<tr>" << semiAxisLabel << "</tr>";
+		oss << "<tr>" << eccentricityLabel << "</tr>";
+		oss << "<tr>" << inclinationLabel << "</tr>";
+		oss << "<tr>" << yearLabel << "</tr></table>";
 	}
 
 	postProcessInfoString(str, flags);
