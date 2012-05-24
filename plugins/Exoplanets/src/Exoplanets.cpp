@@ -413,7 +413,7 @@ QVariantMap Exoplanets::loadEPMap(QString path)
 void Exoplanets::setEPMap(const QVariantMap& map)
 {
 	ep.clear();
-	QVariantMap epsMap = map.value("exoplanets").toMap();
+	QVariantMap epsMap = map.value("stars").toMap();
 	foreach(QString epsKey, epsMap.keys())
 	{
 		QVariantMap epsData = epsMap.value(epsKey).toMap();
