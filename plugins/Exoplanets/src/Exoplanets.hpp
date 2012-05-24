@@ -21,6 +21,7 @@
 
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
+#include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelPainter.hpp"
 #include "Exoplanet.hpp"
@@ -30,6 +31,12 @@
 #include <QList>
 #include <QSharedPointer>
 
+class QNetworkAccessManager;
+class QNetworkReply;
+class QProgressBar;
+class QSettings;
+class QTimer;
+class ExoplanetsDialog;
 class StelPainter;
 
 typedef QSharedPointer<Exoplanet> ExoplanetP;
@@ -37,7 +44,18 @@ typedef QSharedPointer<Exoplanet> ExoplanetP;
 //! This is an example of a plug-in which can be dynamically loaded into stellarium
 class Exoplanets : public StelObjectModule
 {
+	Q_OBJECT
 public:	
+	//! @enum UpdateState
+	//! Used for keeping for track of the download/update status
+	enum UpdateState {
+		Updating,		//!< Update in progress
+		CompleteNoUpdates,	//!< Update completed, there we no updates
+		CompleteUpdates,	//!< Update completed, there were updates
+		DownloadError,		//!< Error during download phase
+		OtherError		//!< Other error
+	};
+	
 	Exoplanets();
 	virtual ~Exoplanets();
 
@@ -45,7 +63,7 @@ public:
 	// Methods defined in the StelModule class
 	virtual void init();
 	virtual void deinit();
-	virtual void update(double) {;}
+	virtual void update(double deltaTime);
 	virtual void draw(StelCore* core);
 	virtual void drawPointer(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
@@ -54,9 +72,9 @@ public:
 	// Methods defined in StelObjectManager class
 	//! Used to get a list of objects which are near to some position.
 	//! @param v a vector representing the position in th sky around which to search for nebulae.
-	//! @param limitFov the field of view around the position v in which to search for satellites.
+	//! @param limitFov the field of view around the position v in which to search for exoplanets.
 	//! @param core the StelCore to use for computations.
-	//! @return an list containing the satellites located inside the limitFov circle around position v.
+	//! @return an list containing the exoplanets located inside the limitFov circle around position v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
 	//! Return the matching satellite object's pointer if exists or NULL.
@@ -76,9 +94,64 @@ public:
 	//! get a exoplanet object by identifier
 	ExoplanetP getByID(const QString& id);
 
+	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
+	//! plugin.
+	virtual bool configureGui(bool show=true);
+
+	//! Set up the plugin with default values.  This means clearing out the Exoplanets section in the
+	//! main config.ini (if one already exists), and populating it with default values.  It also
+	//! creates the default exoplanets.json file from the resource embedded in the plugin lib/dll file.
+	void restoreDefaults(void);
+
+	//! Read (or re-read) settings from the main config file.  This will be called from init and also
+	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
+	void readSettingsFromConfig(void);
+
+	//! Save the settings to the main configuration file.
+	void saveSettingsToConfig(void);
+
+	//! get whether or not the plugin will try to update TLE data from the internet
+	//! @return true if updates are set to be done, false otherwise
+	bool getUpdatesEnabled(void) {return updatesEnabled;}
+	//! set whether or not the plugin will try to update TLE data from the internet
+	//! @param b if true, updates will be enabled, else they will be disabled
+	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
+
+	//! get the date and time the TLE elements were updated
+	QDateTime getLastUpdate(void) {return lastUpdate;}
+
+	//! get the update frequency in hours
+	int getUpdateFrequencyHours(void) {return updateFrequencyHours;}
+	void setUpdateFrequencyHours(int hours) {updateFrequencyHours = hours;}
+
+	//! get the number of seconds till the next update
+	int getSecondsToUpdate(void);
+
+	//! Get the current updateState
+	UpdateState getUpdateState(void) {return updateState;}
+
+signals:
+	//! @param state the new update state.
+	void updateStateChanged(Exoplanets::UpdateState state);
+
+	//! emitted after a JSON update has run.
+	void jsonUpdateComplete(void);
+
+public slots:
+	//! Download JSON from web recources described in the module section of the
+	//! module.ini file and update the local JSON file.
+	void updateJSON(void);
+
+	//! Display a message. This is used for plugin-specific warnings and such
+	void displayMessage(const QString& message, const QString hexColor="#999999");
+	void messageTimeout(void);
+
 private:
 	// Font used for displaying our text
 	QFont font;
+
+	// if existing, delete Satellites section in main config.ini, then create with default values
+	void restoreDefaultConfigIni(void);
 
 	//! replace the json file with the default from the compiled-in resource
 	void restoreDefaultJsonFile(void);
@@ -105,6 +178,31 @@ private:
 
 	StelTextureSP texPointer;
 	QList<ExoplanetP> ep;
+
+	// variables and functions for the updater
+	UpdateState updateState;
+	QNetworkAccessManager* downloadMgr;
+	QString updateUrl;
+	QString updateFile;
+	QProgressBar* progressBar;
+	QTimer* updateTimer;
+	QTimer* messageTimer;
+	QList<int> messageIDs;
+	bool updatesEnabled;
+	QDateTime lastUpdate;
+	int updateFrequencyHours;
+
+	// GUI
+	ExoplanetsDialog* configDialog;
+	QByteArray normalStyleSheet;
+	QByteArray nightStyleSheet;
+
+private slots:
+	//! check to see if an update is required.  This is called periodically by a timer
+	//! if the last update was longer than updateFrequencyHours ago then the update is
+	//! done.
+	void checkForUpdate(void);
+	void updateDownloadComplete(QNetworkReply* reply);
 
 };
 
