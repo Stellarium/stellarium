@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-10 19:57+0700\n"
-"PO-Revision-Date: 2012-05-11 09:46+0000\n"
+"POT-Creation-Date: 2012-05-23 18:43+0700\n"
+"PO-Revision-Date: 2012-05-24 08:41+0000\n"
 "Last-Translator: Marius Loots <Unknown>\n"
 "Language-Team: Afrikaans <af@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-19 04:38+0000\n"
-"X-Generator: Launchpad (build 15259)\n"
+"X-Launchpad-Export-Date: 2012-05-24 10:45+0000\n"
+"X-Generator: Launchpad (build 15288)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -37,25 +37,25 @@ msgstr "Horison"
 msgid "Galactic Plane"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:493
+#: src/core/modules/LandscapeMgr.cpp:495
 msgid "Author: "
 msgstr "Outeur : "
 
-#: src/core/modules/LandscapeMgr.cpp:496
+#: src/core/modules/LandscapeMgr.cpp:498
 msgid "Location: "
 msgstr "Ligging: "
 
-#: src/core/modules/LandscapeMgr.cpp:501
+#: src/core/modules/LandscapeMgr.cpp:503
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:505
+#: src/core/modules/LandscapeMgr.cpp:507
 msgid "Planet: "
 msgstr "Planeet: "
 
 #: src/core/modules/Nebula.cpp:96 plugins/Supernovae/src/Supernova.cpp:99
-#: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:102
+#: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:128
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Tipe: <b>%1</b>"
@@ -494,7 +494,7 @@ msgstr "Regs kliek"
 msgid "CTRL + Left click"
 msgstr "CTRL + Links kliek"
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:173
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:176
 msgid "Movement and Selection"
 msgstr "Navigasie en Seleksie"
 
@@ -518,44 +518,56 @@ msgstr "Vee keuse"
 msgid "When a Script is Running"
 msgstr "Wanneer 'n skrip loop"
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:148
+#: src/gui/HelpDialog.cpp:73
+msgid "Stop currently running script"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:151 src/gui/StelGui.cpp:152
+msgid "Pause script execution"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:153
+msgid "Resume script execution"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:148
 msgid "Slow down the script execution rate"
 msgstr "Vertraag die skrip uitvoer tempo"
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:149
+#: src/gui/HelpDialog.cpp:77 src/gui/StelGui.cpp:149
 msgid "Speed up the script execution rate"
 msgstr "Versnel die skrip uitvoer tempo"
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:150
+#: src/gui/HelpDialog.cpp:78 src/gui/StelGui.cpp:150
 msgid "Set the normal script execution rate"
 msgstr "Kies die normale skrip uitvoer tempo"
 
 #. TRANSLATORS: Title of a group of key bindings in the Help window
-#: src/gui/HelpDialog.cpp:77 plugins/AngleMeasure/src/AngleMeasure.cpp:126
+#: src/gui/HelpDialog.cpp:81 plugins/AngleMeasure/src/AngleMeasure.cpp:126
 #: plugins/CompassMarks/src/CompassMarks.cpp:124
 #: plugins/Oculars/src/Oculars.cpp:1188
 #: plugins/Satellites/src/Satellites.cpp:128
 msgid "Plugin Key Bindings"
 msgstr "Invoegsel sleutelbinding"
 
-#: src/gui/HelpDialog.cpp:78
+#: src/gui/HelpDialog.cpp:82
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:82
 msgid "Text User Interface"
 msgstr "Tekswerksvlak"
 
-#: src/gui/HelpDialog.cpp:167
+#: src/gui/HelpDialog.cpp:171
 msgid "Stellarium Help"
 msgstr "Stellarium Hulp"
 
-#: src/gui/HelpDialog.cpp:168
+#: src/gui/HelpDialog.cpp:172
 msgid "Keys"
 msgstr "Sleutels"
 
-#: src/gui/HelpDialog.cpp:176
+#: src/gui/HelpDialog.cpp:180
 msgid "Further Reading"
 msgstr "Verdere leesstof"
 
-#: src/gui/HelpDialog.cpp:177
+#: src/gui/HelpDialog.cpp:181
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -563,17 +575,17 @@ msgstr ""
 "Die volgende skakels is eksterne webskakels, en sal in jou webblaaier "
 "oopmaak:\n"
 
-#: src/gui/HelpDialog.cpp:178
+#: src/gui/HelpDialog.cpp:182
 msgid "The Stellarium User Guide"
 msgstr "The Stellarium Verbruikers Gids"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:182
+#: src/gui/HelpDialog.cpp:186
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Mees Gevraagde Vrae} oor Stellarium. Antwoorde ook."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:187
+#: src/gui/HelpDialog.cpp:191
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -582,7 +594,7 @@ msgstr ""
 "gebruikers en skripte hier kry."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:192
+#: src/gui/HelpDialog.cpp:196
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -591,7 +603,7 @@ msgstr ""
 "aan ons en ons sal probeer om jou te help."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:197
+#: src/gui/HelpDialog.cpp:201
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -602,59 +614,61 @@ msgstr ""
 "gedoen word."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:202
+#: src/gui/HelpDialog.cpp:206
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forums} - bespreek Stellarium met ander verbruikers"
 
-#: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:341
-#: src/gui/HelpDialog.cpp:343 src/gui/StelGui.cpp:180
+#: src/gui/HelpDialog.cpp:242 src/gui/HelpDialog.cpp:345
+#: src/gui/HelpDialog.cpp:347 src/gui/StelGui.cpp:183
 msgid "Miscellaneous"
 msgstr "Allerlei"
 
-#: src/gui/HelpDialog.cpp:298
+#: src/gui/HelpDialog.cpp:302
 msgid "Developers"
 msgstr "Ontwikkelaars"
 
-#: src/gui/HelpDialog.cpp:299
+#: src/gui/HelpDialog.cpp:303
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Projek koördineerder & leier ontwikkelaar: %1"
 
-#: src/gui/HelpDialog.cpp:300
+#: src/gui/HelpDialog.cpp:304
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Dok auteur/ontwikkelaar: %1"
 
-#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
-#: src/gui/HelpDialog.cpp:303 src/gui/HelpDialog.cpp:304
-#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:311
-#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
-#: src/gui/HelpDialog.cpp:314
+#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:306
+#: src/gui/HelpDialog.cpp:307 src/gui/HelpDialog.cpp:308
+#: src/gui/HelpDialog.cpp:309 src/gui/HelpDialog.cpp:315
+#: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:318
 #, qt-format
 msgid "Developer: %1"
 msgstr "Ontwikkelaar: %1"
 
-#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:307
+#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
 #, qt-format
 msgid "Tester: %1"
 msgstr "Toetser: %1"
 
-#: src/gui/HelpDialog.cpp:308
+#: src/gui/HelpDialog.cpp:312
 msgid "Past Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:309
+#: src/gui/HelpDialog.cpp:313
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
+"Verskeie persone het betekenisvolle bydraes gemaak, maar is nie meer aktief "
+"nie. Hulle werk het 'n groot verskil aan die projek gemaak."
 
-#: src/gui/HelpDialog.cpp:310
+#: src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Grafiese/ander ontwerper: %1"
 
-#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:320
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX Ontwikkelaar: %1"
@@ -829,135 +843,135 @@ msgstr "Skrip konsole venster"
 msgid "Date and Time"
 msgstr "Datum en Tyd"
 
-#: src/gui/StelGui.cpp:151
+#: src/gui/StelGui.cpp:154
 msgid "Decrease time speed"
 msgstr "Verminder Tyd Spoed"
 
-#: src/gui/StelGui.cpp:152
+#: src/gui/StelGui.cpp:155
 msgid "Increase time speed"
 msgstr "Versnel Tyd Spoed"
 
-#: src/gui/StelGui.cpp:153
+#: src/gui/StelGui.cpp:156
 msgid "Set normal time rate"
 msgstr "Stel normale tydstempo"
 
-#: src/gui/StelGui.cpp:154
+#: src/gui/StelGui.cpp:157
 msgid "Decrease time speed (a little)"
 msgstr "Vertraag tyd tempo ('n bietjie)"
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:158
 msgid "Increase time speed (a little)"
 msgstr "Verhoog die tyd tempo ('n bietjie)"
 
-#: src/gui/StelGui.cpp:156
+#: src/gui/StelGui.cpp:159
 msgid "Set time rate to zero"
 msgstr "Stel tydstempo na nul"
 
-#: src/gui/StelGui.cpp:157
+#: src/gui/StelGui.cpp:160
 msgid "Set time to now"
 msgstr "Stel tyd tot hede"
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:161
 msgid "Add 1 solar hour"
 msgstr "Plus 1 solar uur"
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:162
 msgid "Subtract 1 solar hour"
 msgstr "Minus 1 solar huur"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:163
 msgid "Add 1 solar day"
 msgstr "Plus 1 solar dag"
 
-#: src/gui/StelGui.cpp:161
+#: src/gui/StelGui.cpp:164
 msgid "Subtract 1 solar day"
 msgstr "Minus 1 solar dag"
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:165
 msgid "Add 1 solar week"
 msgstr "Plus 1 solar week"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:166
 msgid "Subtract 1 solar week"
 msgstr "Minus 1 solar week"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:167
 msgid "Add 1 sidereal day"
 msgstr "Voeg 1 siderale dag by"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:168
 msgid "Subtract 1 sidereal day"
 msgstr "Verwyder 1 siderale dag"
 
-#: src/gui/StelGui.cpp:166
+#: src/gui/StelGui.cpp:169
 msgid "Add 1 sidereal week"
 msgstr "Voeg 1 siderale week by"
 
-#: src/gui/StelGui.cpp:167
+#: src/gui/StelGui.cpp:170
 msgid "Subtract 1 sidereal week"
 msgstr "Verwyder 1 siderale week"
 
-#: src/gui/StelGui.cpp:168
+#: src/gui/StelGui.cpp:171
 msgid "Add 1 sidereal month"
 msgstr ""
 
-#: src/gui/StelGui.cpp:169
+#: src/gui/StelGui.cpp:172
 msgid "Subtract 1 sidereal month"
 msgstr ""
 
-#: src/gui/StelGui.cpp:170
+#: src/gui/StelGui.cpp:173
 msgid "Add 1 sidereal year"
 msgstr ""
 
-#: src/gui/StelGui.cpp:171
+#: src/gui/StelGui.cpp:174
 msgid "Subtract 1 sidereal year"
 msgstr ""
 
-#: src/gui/StelGui.cpp:174
+#: src/gui/StelGui.cpp:177
 msgid "Center on selected object"
 msgstr "Sentreer op gekose voorwerp"
 
-#: src/gui/StelGui.cpp:175
+#: src/gui/StelGui.cpp:178
 msgid "Track object"
 msgstr "Volg voorwerp"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:179
 msgid "Zoom in on selected object"
 msgstr "Zoem in op geselekteerde voorwerp"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:180
 msgid "Zoom out"
 msgstr "Zoem uit"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:181
 msgid "Set home planet to selected planet"
 msgstr "Kies as tuisplaneet die huidige planeet"
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:184
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Skakel tussen ekwatoriale en azimutale montering"
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:185
 msgid "Quit"
 msgstr "Verlaat"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:186
 msgid "Save screenshot"
 msgstr "Stoor skermvangs"
 
-#: src/gui/StelGui.cpp:184
+#: src/gui/StelGui.cpp:187
 msgid "Copy selected object information to clipboard"
 msgstr ""
 
-#: src/gui/StelGui.cpp:186
+#: src/gui/StelGui.cpp:189
 msgid "Auto hide horizontal button bar"
 msgstr "Verberg horisontale keusebalk outomaties"
 
-#: src/gui/StelGui.cpp:187
+#: src/gui/StelGui.cpp:190
 msgid "Auto hide vertical button bar"
 msgstr "Verberg vertikale keusebalk outomaties"
 
-#: src/gui/StelGui.cpp:188
+#: src/gui/StelGui.cpp:191
 msgid "Toggle visibility of GUI"
 msgstr "Skakel sigbaarheid van GUI"
 
@@ -1079,7 +1093,7 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:74
 msgid "selected text"
-msgstr ""
+msgstr "gekose teks"
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "clear text"
@@ -1870,7 +1884,7 @@ msgstr "Algerië"
 
 #: src/translations.h:264
 msgid "Ecuador"
-msgstr ""
+msgstr "Ecuador"
 
 #: src/translations.h:265
 msgid "Estonia"
@@ -2006,7 +2020,7 @@ msgstr "Honduras"
 
 #: src/translations.h:298
 msgid "Croatia"
-msgstr ""
+msgstr "Kroatië"
 
 #: src/translations.h:299
 msgid "Haiti"
@@ -2066,7 +2080,7 @@ msgstr "Japan"
 
 #: src/translations.h:313
 msgid "Kenya"
-msgstr ""
+msgstr "Kenia"
 
 #: src/translations.h:314
 msgid "Kyrgyzstan"
@@ -2078,7 +2092,7 @@ msgstr ""
 
 #: src/translations.h:316
 msgid "Kiribati"
-msgstr ""
+msgstr "Kiribati"
 
 #: src/translations.h:317
 msgid "Comoros"
@@ -2086,15 +2100,15 @@ msgstr ""
 
 #: src/translations.h:318
 msgid "Saint Kitts and Nevis"
-msgstr ""
+msgstr "Saint Kitts en Nevis"
 
 #: src/translations.h:319
 msgid "Democratic People's Republic of Korea"
-msgstr ""
+msgstr "Demokratiese Volksrepubliek van Korea"
 
 #: src/translations.h:320
 msgid "Republic of Korea"
-msgstr ""
+msgstr "Republiek van Korea"
 
 #: src/translations.h:321
 msgid "Kuwait"
@@ -2322,11 +2336,11 @@ msgstr ""
 
 #: src/translations.h:377
 msgid "Pitcairn"
-msgstr ""
+msgstr "Pitcairn"
 
 #: src/translations.h:378
 msgid "Puerto Rico"
-msgstr ""
+msgstr "Puerto Rico"
 
 #: src/translations.h:379
 msgid "Palestinian Territories"
@@ -2334,15 +2348,15 @@ msgstr ""
 
 #: src/translations.h:380
 msgid "Portugal"
-msgstr ""
+msgstr "Portugal"
 
 #: src/translations.h:381
 msgid "Palau"
-msgstr ""
+msgstr "Palau"
 
 #: src/translations.h:382
 msgid "Paraguay"
-msgstr ""
+msgstr "Paraguay"
 
 #: src/translations.h:383
 msgid "Qatar"
@@ -2354,7 +2368,7 @@ msgstr ""
 
 #: src/translations.h:385
 msgid "Romania"
-msgstr ""
+msgstr "Romenië"
 
 #: src/translations.h:386
 msgid "Serbia"
@@ -2366,19 +2380,19 @@ msgstr ""
 
 #: src/translations.h:388
 msgid "Rwanda"
-msgstr ""
+msgstr "Rwanda"
 
 #: src/translations.h:389
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "Saudi Arabië"
 
 #: src/translations.h:390
 msgid "Solomon Islands"
-msgstr ""
+msgstr "Solomon Eilande"
 
 #: src/translations.h:391
 msgid "Seychelles"
-msgstr ""
+msgstr "Seychelles"
 
 #: src/translations.h:392
 msgid "Sudan"
@@ -2466,47 +2480,47 @@ msgstr ""
 
 #: src/translations.h:413
 msgid "Tajikistan"
-msgstr ""
+msgstr "Tajikistan"
 
 #: src/translations.h:414
 msgid "Tokelau"
-msgstr ""
+msgstr "Tokelau"
 
 #: src/translations.h:415
 msgid "East Timor"
-msgstr ""
+msgstr "Oos-Timor"
 
 #: src/translations.h:416
 msgid "Turkmenistan"
-msgstr ""
+msgstr "Turkmenistan"
 
 #: src/translations.h:417
 msgid "Tunisia"
-msgstr ""
+msgstr "Tunisië"
 
 #: src/translations.h:418
 msgid "Tonga"
-msgstr ""
+msgstr "Tonga"
 
 #: src/translations.h:419
 msgid "Turkey"
-msgstr ""
+msgstr "Turkye"
 
 #: src/translations.h:420
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "Trinidad en Tobago"
 
 #: src/translations.h:421
 msgid "Tuvalu"
-msgstr ""
+msgstr "Tuvalu"
 
 #: src/translations.h:422
 msgid "Taiwan"
-msgstr ""
+msgstr "Taiwan"
 
 #: src/translations.h:423
 msgid "Tanzania"
-msgstr ""
+msgstr "Tanzanië"
 
 #: src/translations.h:424
 msgid "Ukraine"
@@ -2514,7 +2528,7 @@ msgstr ""
 
 #: src/translations.h:425
 msgid "Uganda"
-msgstr ""
+msgstr "Uganda"
 
 #: src/translations.h:426
 msgid "United States Minor Outlying Islands"
@@ -2522,15 +2536,15 @@ msgstr ""
 
 #: src/translations.h:427
 msgid "United States"
-msgstr ""
+msgstr "Verenigde State"
 
 #: src/translations.h:428
 msgid "Uruguay"
-msgstr ""
+msgstr "Uruguay"
 
 #: src/translations.h:429
 msgid "Uzbekistan"
-msgstr ""
+msgstr "Uzbekistan"
 
 #: src/translations.h:430
 msgid "Vatican City State"
@@ -2554,23 +2568,23 @@ msgstr ""
 
 #: src/translations.h:435
 msgid "Viet Nam"
-msgstr ""
+msgstr "Viëtnam"
 
 #: src/translations.h:436
 msgid "Vanuatu"
-msgstr ""
+msgstr "Vanuatu"
 
 #: src/translations.h:437
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "Wallis en Futuna"
 
 #: src/translations.h:438
 msgid "Samoa"
-msgstr ""
+msgstr "Samoa"
 
 #: src/translations.h:439
 msgid "Yemen"
-msgstr ""
+msgstr "Yemen"
 
 #: src/translations.h:440
 msgid "Mayotte"
@@ -2582,15 +2596,15 @@ msgstr ""
 
 #: src/translations.h:442
 msgid "South Africa"
-msgstr ""
+msgstr "Suid-Afrika"
 
 #: src/translations.h:443
 msgid "Zambia"
-msgstr ""
+msgstr "Zambië"
 
 #: src/translations.h:444
 msgid "Zimbabwe"
-msgstr ""
+msgstr "Zimbabwe"
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -2817,7 +2831,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:588
 msgid "Server:"
-msgstr ""
+msgstr "Bediener:"
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
@@ -2902,7 +2916,7 @@ msgstr "Vertoon atmosfeer"
 #: src/ui_viewDialog.h:1132
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Light pollution:"
-msgstr ""
+msgstr "Lig besoeddeling"
 
 #: src/ui_viewDialog.h:1134
 msgid "pressure, temperature, extinction coefficient"
@@ -2972,7 +2986,7 @@ msgstr "Wys kuns"
 #: src/ui_viewDialog.h:1154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Art brightness:"
-msgstr ""
+msgstr "Kuns helderheid"
 
 #: src/ui_viewDialog.h:1155
 msgid "Celestial Sphere"
@@ -2980,7 +2994,7 @@ msgstr "Hemelsfeer"
 
 #: src/ui_viewDialog.h:1162
 msgid "Show equator line"
-msgstr ""
+msgstr "Wys ekwatoriale lyn"
 
 #: src/ui_viewDialog.h:1166
 msgid "Show meridian line"
@@ -2988,7 +3002,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1170
 msgid "Show horizon line"
-msgstr ""
+msgstr "Wys horison lyn"
 
 #: src/ui_viewDialog.h:1174
 msgid "Show ecliptic line"
@@ -3408,7 +3422,7 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:198
 msgid "An object's name"
-msgstr ""
+msgstr "'n Voorwerp se naam"
 
 #: src/ui_CustomInfoDialog.h:200
 msgid "Display  info about a catalog numbers"
@@ -3416,7 +3430,7 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:202
 msgid "Catalog numbers"
-msgstr ""
+msgstr "Katalogus nommers"
 
 #: src/ui_CustomInfoDialog.h:204
 msgid "Display  info about a visual magnitude"
@@ -3480,7 +3494,7 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:234
 msgid "Object's size"
-msgstr ""
+msgstr "Voorwerp se grootte"
 
 #: src/ui_CustomInfoDialog.h:236 src/ui_CustomInfoDialog.h:240
 #: src/ui_CustomInfoDialog.h:244
@@ -3489,7 +3503,7 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:238
 msgid "Additional info (Extra 1)"
-msgstr ""
+msgstr "Bykomende inligting (Ekstra 1)"
 
 #: src/ui_CustomInfoDialog.h:242
 msgid "Additional info (Extra 2)"
@@ -3722,19 +3736,20 @@ msgid "Telescope #%1: %2"
 msgstr "Teleskoop #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1497
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:737
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Vergrooting: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1505
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
 #, qt-format
 msgid "FOV: %1"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1520
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:699
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensies: %1"
@@ -3828,19 +3843,19 @@ msgstr ""
 msgid "Rotation: %1"
 msgstr "Rotasie: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
 msgid "Magnification provided by these binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:721
 msgid "Actual field of view provided by these binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
 msgid "Magnification provided by this ocular/telescope combination"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:730
 msgid "Actual field of view provided by this ocular/telescope combination"
 msgstr ""
 
@@ -5339,27 +5354,27 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
-msgstr ""
+msgstr "Kies die tipe"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Asteroids"
-msgstr ""
+msgstr "Asteroïede"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Comets"
-msgstr ""
+msgstr "Komete"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Select the source"
-msgstr ""
+msgstr "Kies die bron"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
 msgid "Download a list of objects from the Internet"
-msgstr ""
+msgstr "Laai 'n lys van voorwerpe van die Internet af"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 msgid "Select a source from the list:"
-msgstr ""
+msgstr "Kies 'n bron van die lys:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Or enter a URL:"
@@ -5371,7 +5386,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Bookmark title:"
-msgstr ""
+msgstr "Boekmerk titel"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "A file containing a list of objects"
@@ -5379,20 +5394,20 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Get orbital elements"
-msgstr ""
+msgstr "Kry orbitale elemente"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Lists"
-msgstr ""
+msgstr "Lyste"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
 msgid "Online search"
-msgstr ""
+msgstr "Aanlyn soektog"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Objects found"
-msgstr ""
+msgstr "Voorwerpe gevind"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:539
 msgid ""
@@ -5405,7 +5420,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:540
 msgid "Overwrite existing objects"
-msgstr ""
+msgstr "Oorskryf bestaande voorwerpe"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:541
 msgid "Update existing objects"
@@ -5417,15 +5432,15 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
 msgid "Mark all"
-msgstr ""
+msgstr "Merk almal"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
 msgid "Mark none"
-msgstr ""
+msgstr "Merk niks"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid "Add objects"
-msgstr ""
+msgstr "Voeg voorwerpe by"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
@@ -5434,7 +5449,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Warning"
-msgstr ""
+msgstr "Waarskuwing"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid ""
@@ -5447,10 +5462,11 @@ msgstr ""
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
+"Jy kan alle veranderinge omkeer en terugkeer na die verstek opstelling:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Reset to defaults"
-msgstr ""
+msgstr "Keer om na verstek opstelling"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Copy/replace the Solar System file"
@@ -5536,100 +5552,124 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsars.cpp:62
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
-"about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
-"1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
+"about each one. Pulsar data is derived from 'The ATNF Pulsar Catalogue'  "
+"(Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, "
+"1993-2006 (2005) (astro-ph/0412641)).<br><br>Note: pulsar identifiers have "
+"the prefix 'PSR'"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:102
+#: plugins/Pulsars/src/Pulsar.cpp:128
 msgid "pulsar"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:109
+#. TRANSLATORS: Unit of measure for period - seconds
+#: plugins/Pulsars/src/Pulsar.cpp:139
 #, qt-format
 msgid "Barycentric period: %1 s"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:112
+#: plugins/Pulsars/src/Pulsar.cpp:143
 #, qt-format
-msgid "Distance: %1 kpc (%2 ly)"
+msgid "Time derivative of barycentric period: %1"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:116
-#, qt-format
-msgid "Type of pulsar: %1"
+#: plugins/Pulsars/src/Pulsar.cpp:148
+msgid "Dispersion measure:"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:120
-#, qt-format
-msgid "Equivalent width of the integrated pulse profile: %1 ms"
+#. TRANSLATORS: Unit of measure for distance - centimeters
+#: plugins/Pulsars/src/Pulsar.cpp:151
+msgid "cm"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:124
+#. TRANSLATORS: Unit of measure for distance - parsecs
+#: plugins/Pulsars/src/Pulsar.cpp:154
+msgid "pc"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:160
+#, qt-format
+msgid "Spin down energy loss rate: %1 ergs/s"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:164
+#, qt-format
+msgid "Binary period of pulsar: %1 days"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:168
+#, qt-format
+msgid "Eccentricity: %1"
+msgstr ""
+
+#. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
+#: plugins/Pulsars/src/Pulsar.cpp:173
+#, qt-format
+msgid "Annual parallax: %1 mas"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:177
+#, qt-format
+msgid "Distance based on electron density model: %1 kpc (%2 ly)"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:181
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
 msgstr "Profiel wydte by 50% van piek: %1 ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:130 plugins/Pulsars/src/Pulsar.cpp:142
-#: plugins/Pulsars/src/Pulsar.cpp:154
+#: plugins/Pulsars/src/Pulsar.cpp:187 plugins/Pulsars/src/Pulsar.cpp:199
+#: plugins/Pulsars/src/Pulsar.cpp:211
 msgid "Time averaged flux density at"
 msgstr ""
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Pulsars/src/Pulsar.cpp:133 plugins/Pulsars/src/Pulsar.cpp:145
-#: plugins/Pulsars/src/Pulsar.cpp:157
+#: plugins/Pulsars/src/Pulsar.cpp:190 plugins/Pulsars/src/Pulsar.cpp:202
+#: plugins/Pulsars/src/Pulsar.cpp:214
 msgid "MHz"
 msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:136 plugins/Pulsars/src/Pulsar.cpp:148
-#: plugins/Pulsars/src/Pulsar.cpp:160
+#: plugins/Pulsars/src/Pulsar.cpp:193 plugins/Pulsars/src/Pulsar.cpp:205
+#: plugins/Pulsars/src/Pulsar.cpp:217
 msgid "mJy"
 msgstr "mJy"
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:232
-msgid "globular cluster association"
+#: plugins/Pulsars/src/Pulsar.cpp:221
+#, qt-format
+msgid "Notes: %1"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:238
-msgid "SNR association"
+#: plugins/Pulsars/src/Pulsar.cpp:283
+msgid ""
+"anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:244
-msgid "glitches in period"
+#: plugins/Pulsars/src/Pulsar.cpp:288
+msgid "has one or more binary companions"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:250
-msgid "binary or multiple pulsar"
+#: plugins/Pulsars/src/Pulsar.cpp:293
+msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:256
-msgid "millisecond pulsar"
+#: plugins/Pulsars/src/Pulsar.cpp:298
+msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:262
-msgid "recycled pulsar"
+#: plugins/Pulsars/src/Pulsar.cpp:303
+msgid "with pulsed emission in the radio band"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:268
-msgid "radio interpulse"
+#: plugins/Pulsars/src/Pulsar.cpp:308
+msgid "with intermittently pulsed radio emission"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:274
-msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
-msgstr ""
-
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:280
-msgid "extragalactic (in MC) pulsar"
+#: plugins/Pulsars/src/Pulsar.cpp:313
+msgid ""
+"isolated neutron star with pulsed thermal X-ray emission but no detectable "
+"radio emission"
 msgstr ""
 
 #~ msgid "Equatorial Grid"

@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-10 19:57+0700\n"
-"PO-Revision-Date: 2012-05-04 08:11+0000\n"
+"POT-Creation-Date: 2012-05-23 18:43+0700\n"
+"PO-Revision-Date: 2012-05-22 14:54+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-19 04:48+0000\n"
-"X-Generator: Launchpad (build 15259)\n"
+"X-Launchpad-Export-Date: 2012-05-24 10:54+0000\n"
+"X-Generator: Launchpad (build 15288)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -43,25 +43,25 @@ msgstr "Горизонт"
 msgid "Galactic Plane"
 msgstr "Галактична площина"
 
-#: src/core/modules/LandscapeMgr.cpp:493
+#: src/core/modules/LandscapeMgr.cpp:495
 msgid "Author: "
 msgstr "Автор: "
 
-#: src/core/modules/LandscapeMgr.cpp:496
+#: src/core/modules/LandscapeMgr.cpp:498
 msgid "Location: "
 msgstr "Розташування: "
 
-#: src/core/modules/LandscapeMgr.cpp:501
+#: src/core/modules/LandscapeMgr.cpp:503
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 м"
 
-#: src/core/modules/LandscapeMgr.cpp:505
+#: src/core/modules/LandscapeMgr.cpp:507
 msgid "Planet: "
 msgstr "Планета: "
 
 #: src/core/modules/Nebula.cpp:96 plugins/Supernovae/src/Supernova.cpp:99
-#: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:102
+#: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:128
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Тип: <b>%1</b>"
@@ -499,7 +499,7 @@ msgstr "клацнути правою кнопкою мишки"
 msgid "CTRL + Left click"
 msgstr "CTRL + клацання лівою кнопкою мишки"
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:173
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:176
 msgid "Movement and Selection"
 msgstr "Пересування і вибір"
 
@@ -523,44 +523,56 @@ msgstr "Зняти позначення"
 msgid "When a Script is Running"
 msgstr "Коли запущено скрипт"
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:148
+#: src/gui/HelpDialog.cpp:73
+msgid "Stop currently running script"
+msgstr "Зупинити роботу скрипту, який зараз виконується"
+
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:151 src/gui/StelGui.cpp:152
+msgid "Pause script execution"
+msgstr "Призупинити виконання скрипту"
+
+#: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:153
+msgid "Resume script execution"
+msgstr "Поновити виконання скрипту"
+
+#: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:148
 msgid "Slow down the script execution rate"
 msgstr "Уповільнити виконання скрипту"
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:149
+#: src/gui/HelpDialog.cpp:77 src/gui/StelGui.cpp:149
 msgid "Speed up the script execution rate"
 msgstr "Пришвидшити виконання скрипту"
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:150
+#: src/gui/HelpDialog.cpp:78 src/gui/StelGui.cpp:150
 msgid "Set the normal script execution rate"
 msgstr "Встановити звичайну швидкість виконання"
 
 #. TRANSLATORS: Title of a group of key bindings in the Help window
-#: src/gui/HelpDialog.cpp:77 plugins/AngleMeasure/src/AngleMeasure.cpp:126
+#: src/gui/HelpDialog.cpp:81 plugins/AngleMeasure/src/AngleMeasure.cpp:126
 #: plugins/CompassMarks/src/CompassMarks.cpp:124
 #: plugins/Oculars/src/Oculars.cpp:1188
 #: plugins/Satellites/src/Satellites.cpp:128
 msgid "Plugin Key Bindings"
 msgstr "Прив’язка клавіш у додатках"
 
-#: src/gui/HelpDialog.cpp:78
+#: src/gui/HelpDialog.cpp:82
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:82
 msgid "Text User Interface"
 msgstr "Текстовий інтерфейс користувача"
 
-#: src/gui/HelpDialog.cpp:167
+#: src/gui/HelpDialog.cpp:171
 msgid "Stellarium Help"
 msgstr "Довідка зі Stellarium"
 
-#: src/gui/HelpDialog.cpp:168
+#: src/gui/HelpDialog.cpp:172
 msgid "Keys"
 msgstr "Клавіші"
 
-#: src/gui/HelpDialog.cpp:176
+#: src/gui/HelpDialog.cpp:180
 msgid "Further Reading"
 msgstr "Подальше читання"
 
-#: src/gui/HelpDialog.cpp:177
+#: src/gui/HelpDialog.cpp:181
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -568,17 +580,17 @@ msgstr ""
 "Наступні посилання є зовнішніми посиланнями. Буде запущено програму для "
 "перегляду інтернету:\n"
 
-#: src/gui/HelpDialog.cpp:178
+#: src/gui/HelpDialog.cpp:182
 msgid "The Stellarium User Guide"
 msgstr "Інструкція користувача Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:182
+#: src/gui/HelpDialog.cpp:186
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Frequently Asked Questions} щодо Stellarium. З відповідями."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:187
+#: src/gui/HelpDialog.cpp:191
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -587,7 +599,7 @@ msgstr ""
 "та скрипти, створені користувачами."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:192
+#: src/gui/HelpDialog.cpp:196
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -596,7 +608,7 @@ msgstr ""
 "тут запит щодо підтримки, і ми спробуємо допомогти."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:197
+#: src/gui/HelpDialog.cpp:201
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -607,48 +619,48 @@ msgstr ""
 "повідомлення про ваду або побажання щодо покращення."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:202
+#: src/gui/HelpDialog.cpp:206
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forums} — обговоріть Stellarium з іншими користувачами."
 
-#: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:341
-#: src/gui/HelpDialog.cpp:343 src/gui/StelGui.cpp:180
+#: src/gui/HelpDialog.cpp:242 src/gui/HelpDialog.cpp:345
+#: src/gui/HelpDialog.cpp:347 src/gui/StelGui.cpp:183
 msgid "Miscellaneous"
 msgstr "Інше"
 
-#: src/gui/HelpDialog.cpp:298
+#: src/gui/HelpDialog.cpp:302
 msgid "Developers"
 msgstr "Розробники"
 
-#: src/gui/HelpDialog.cpp:299
+#: src/gui/HelpDialog.cpp:303
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Координатор проекту і основний розробник: %1"
 
-#: src/gui/HelpDialog.cpp:300
+#: src/gui/HelpDialog.cpp:304
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Автор документації/розробник: %1"
 
-#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
-#: src/gui/HelpDialog.cpp:303 src/gui/HelpDialog.cpp:304
-#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:311
-#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
-#: src/gui/HelpDialog.cpp:314
+#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:306
+#: src/gui/HelpDialog.cpp:307 src/gui/HelpDialog.cpp:308
+#: src/gui/HelpDialog.cpp:309 src/gui/HelpDialog.cpp:315
+#: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:318
 #, qt-format
 msgid "Developer: %1"
 msgstr "Розробник: %1"
 
-#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:307
+#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
 #, qt-format
 msgid "Tester: %1"
 msgstr "Перевірено: %1"
 
-#: src/gui/HelpDialog.cpp:308
+#: src/gui/HelpDialog.cpp:312
 msgid "Past Developers"
 msgstr "Колишні розробники"
 
-#: src/gui/HelpDialog.cpp:309
+#: src/gui/HelpDialog.cpp:313
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -656,12 +668,12 @@ msgstr ""
 "Дехто зробив значний внесок, але тепер не бере участі у розробці програми. "
 "Внесок цих людей значно вплинув на поточний стан проекту."
 
-#: src/gui/HelpDialog.cpp:310
+#: src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Створення графіки/інших елементів: %1"
 
-#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:320
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Розробник під OSX: %1"
@@ -836,135 +848,135 @@ msgstr "Вікно консолі скриптів"
 msgid "Date and Time"
 msgstr "Дата і час"
 
-#: src/gui/StelGui.cpp:151
+#: src/gui/StelGui.cpp:154
 msgid "Decrease time speed"
 msgstr "Зменшити швидкість часу"
 
-#: src/gui/StelGui.cpp:152
+#: src/gui/StelGui.cpp:155
 msgid "Increase time speed"
 msgstr "Збільшити швидкість часу"
 
-#: src/gui/StelGui.cpp:153
+#: src/gui/StelGui.cpp:156
 msgid "Set normal time rate"
 msgstr "Встановити нормальну швидкість часу"
 
-#: src/gui/StelGui.cpp:154
+#: src/gui/StelGui.cpp:157
 msgid "Decrease time speed (a little)"
 msgstr "Сповільнити плин часу (трошки)"
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:158
 msgid "Increase time speed (a little)"
 msgstr "Пришвидшити плин часу (трошки)"
 
-#: src/gui/StelGui.cpp:156
+#: src/gui/StelGui.cpp:159
 msgid "Set time rate to zero"
 msgstr "Призупинення часу"
 
-#: src/gui/StelGui.cpp:157
+#: src/gui/StelGui.cpp:160
 msgid "Set time to now"
 msgstr "Встановити поточний час"
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:161
 msgid "Add 1 solar hour"
 msgstr "Додати 1 сонячну годину"
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:162
 msgid "Subtract 1 solar hour"
 msgstr "Відняти 1 сонячну годину"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:163
 msgid "Add 1 solar day"
 msgstr "Додати 1 сонячний день"
 
-#: src/gui/StelGui.cpp:161
+#: src/gui/StelGui.cpp:164
 msgid "Subtract 1 solar day"
 msgstr "Відняти 1 сонячний день"
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:165
 msgid "Add 1 solar week"
 msgstr "Додати 1 сонячний тиждень"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:166
 msgid "Subtract 1 solar week"
 msgstr "Відняти 1 сонячний день"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:167
 msgid "Add 1 sidereal day"
 msgstr "Додати 1 зірковий день"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:168
 msgid "Subtract 1 sidereal day"
 msgstr "Відняти 1 зірковий день"
 
-#: src/gui/StelGui.cpp:166
+#: src/gui/StelGui.cpp:169
 msgid "Add 1 sidereal week"
 msgstr "Додати 1 зірковий тиждень"
 
-#: src/gui/StelGui.cpp:167
+#: src/gui/StelGui.cpp:170
 msgid "Subtract 1 sidereal week"
 msgstr "Відняти 1 зірковий тиждень"
 
-#: src/gui/StelGui.cpp:168
+#: src/gui/StelGui.cpp:171
 msgid "Add 1 sidereal month"
 msgstr "Додати 1 сидеричний місяць"
 
-#: src/gui/StelGui.cpp:169
+#: src/gui/StelGui.cpp:172
 msgid "Subtract 1 sidereal month"
 msgstr "Відняти 1 сидеричний місяць"
 
-#: src/gui/StelGui.cpp:170
+#: src/gui/StelGui.cpp:173
 msgid "Add 1 sidereal year"
 msgstr "Додати 1 сидеричний рік"
 
-#: src/gui/StelGui.cpp:171
+#: src/gui/StelGui.cpp:174
 msgid "Subtract 1 sidereal year"
 msgstr "Відняти 1 сидеричний рік"
 
-#: src/gui/StelGui.cpp:174
+#: src/gui/StelGui.cpp:177
 msgid "Center on selected object"
 msgstr "Центрувати за позначеним об’єктом"
 
-#: src/gui/StelGui.cpp:175
+#: src/gui/StelGui.cpp:178
 msgid "Track object"
 msgstr "Відслідкувати об’єкт"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:179
 msgid "Zoom in on selected object"
 msgstr "Збільшити позначений об’єкт"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:180
 msgid "Zoom out"
 msgstr "Віддалити"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:181
 msgid "Set home planet to selected planet"
 msgstr "Встановити позначену планету як домашню"
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:184
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Перемкнутися між екваторіальною і азимутальною сіткою"
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:185
 msgid "Quit"
 msgstr "Вийти"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:186
 msgid "Save screenshot"
 msgstr "Зберегти знімок екрана"
 
-#: src/gui/StelGui.cpp:184
+#: src/gui/StelGui.cpp:187
 msgid "Copy selected object information to clipboard"
 msgstr "Копіювати дані щодо позначеного об’єкта до буфера обміну"
 
-#: src/gui/StelGui.cpp:186
+#: src/gui/StelGui.cpp:189
 msgid "Auto hide horizontal button bar"
 msgstr "Автоматично ховати горизонтальні клавіші"
 
-#: src/gui/StelGui.cpp:187
+#: src/gui/StelGui.cpp:190
 msgid "Auto hide vertical button bar"
 msgstr "Автоматично ховати вертикальні клавіші"
 
-#: src/gui/StelGui.cpp:188
+#: src/gui/StelGui.cpp:191
 msgid "Toggle visibility of GUI"
 msgstr "Увімкнути/Вимкнути графічний інтерфейс"
 
@@ -3740,19 +3752,20 @@ msgid "Telescope #%1: %2"
 msgstr "Телескоп %1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1497
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:737
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Збільшення: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1505
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
 #, qt-format
 msgid "FOV: %1"
 msgstr "Поле зору: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1520
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:699
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Розміри: %1"
@@ -3846,19 +3859,19 @@ msgstr "Видиме поле зору цього окуляра"
 msgid "Rotation: %1"
 msgstr "Обертання: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
 msgid "Magnification provided by these binoculars"
 msgstr "Збільшення, що забезпечується цим біноклем"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:721
 msgid "Actual field of view provided by these binoculars"
 msgstr "Справжнє поле зору, що забезпечується цим біноклем"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
 msgid "Magnification provided by this ocular/telescope combination"
 msgstr "Збільшення, що забезпечується цим поєднанням окуляра і телескопа"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:730
 msgid "Actual field of view provided by this ocular/telescope combination"
 msgstr ""
 "Справжнє поле зору, що забезпечується цим поєднанням окуляра і телескопа"
@@ -5656,106 +5669,137 @@ msgstr "Пульсари"
 #: plugins/Pulsars/src/Pulsars.cpp:62
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
-"about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
-"1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
+"about each one. Pulsar data is derived from 'The ATNF Pulsar Catalogue'  "
+"(Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, "
+"1993-2006 (2005) (astro-ph/0412641)).<br><br>Note: pulsar identifiers have "
+"the prefix 'PSR'"
 msgstr ""
-"Цей додаток призначено для показу розташування різноманітних пульсарів та "
-"даних щодо них. Дані пульсарів запозичено з «Каталогу пульсарів» (Taylor та "
-"інші, 1995).<br><br>Зауваження: ідентифікатори пульсарів мають префікс «PSR»"
+"Цей додаток призначено для показу розташування різноманітних пульсарів з "
+"показом даних щодо кожного з них. Дані щодо пульсарів запозичено з «The ATNF "
+"Pulsar Catalogue»  (Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., "
+"Astron. J., 129, 1993-2006 (2005) (astro-ph/0412641)).<br><br>Зауваження: "
+"ідентифікатори пульсарів починаються з префікса «PSR»."
 
-#: plugins/Pulsars/src/Pulsar.cpp:102
+#: plugins/Pulsars/src/Pulsar.cpp:128
 msgid "pulsar"
 msgstr "пульсар"
 
-#: plugins/Pulsars/src/Pulsar.cpp:109
+#. TRANSLATORS: Unit of measure for period - seconds
+#: plugins/Pulsars/src/Pulsar.cpp:139
 #, qt-format
 msgid "Barycentric period: %1 s"
 msgstr "Барицентричний період: %1 с"
 
-#: plugins/Pulsars/src/Pulsar.cpp:112
+#: plugins/Pulsars/src/Pulsar.cpp:143
 #, qt-format
-msgid "Distance: %1 kpc (%2 ly)"
-msgstr "Відстань: %1 кпк (%2 св. р.)"
+msgid "Time derivative of barycentric period: %1"
+msgstr "Похідна за часом від барицентричного періоду: %1"
 
-#: plugins/Pulsars/src/Pulsar.cpp:116
+#: plugins/Pulsars/src/Pulsar.cpp:148
+msgid "Dispersion measure:"
+msgstr "Степінь розсіювання:"
+
+#. TRANSLATORS: Unit of measure for distance - centimeters
+#: plugins/Pulsars/src/Pulsar.cpp:151
+msgid "cm"
+msgstr "см"
+
+#. TRANSLATORS: Unit of measure for distance - parsecs
+#: plugins/Pulsars/src/Pulsar.cpp:154
+msgid "pc"
+msgstr "пк"
+
+#: plugins/Pulsars/src/Pulsar.cpp:160
 #, qt-format
-msgid "Type of pulsar: %1"
-msgstr "Тип пульсара: %1"
+msgid "Spin down energy loss rate: %1 ergs/s"
+msgstr "Швидкість витрати енергії на уповільнення обертання: %1 ерг/с"
 
-#: plugins/Pulsars/src/Pulsar.cpp:120
+#: plugins/Pulsars/src/Pulsar.cpp:164
 #, qt-format
-msgid "Equivalent width of the integrated pulse profile: %1 ms"
-msgstr "Еквівалентна ширина загального профілю пульсації: %1 мс"
+msgid "Binary period of pulsar: %1 days"
+msgstr "Період обертання пульсара у кратній системі: %1 днів"
 
-#: plugins/Pulsars/src/Pulsar.cpp:124
+#: plugins/Pulsars/src/Pulsar.cpp:168
+#, qt-format
+msgid "Eccentricity: %1"
+msgstr "Ексцентриситет: %1"
+
+#. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
+#: plugins/Pulsars/src/Pulsar.cpp:173
+#, qt-format
+msgid "Annual parallax: %1 mas"
+msgstr "Річний паралакс: %1 мкс"
+
+#: plugins/Pulsars/src/Pulsar.cpp:177
+#, qt-format
+msgid "Distance based on electron density model: %1 kpc (%2 ly)"
+msgstr ""
+"Відстань, обчислена на основі моделі електронної щільності: %1 кпк (%2 св.р.)"
+
+#: plugins/Pulsars/src/Pulsar.cpp:181
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
 msgstr "Ширина профілю на 50% потужності: %1 мс"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:130 plugins/Pulsars/src/Pulsar.cpp:142
-#: plugins/Pulsars/src/Pulsar.cpp:154
+#: plugins/Pulsars/src/Pulsar.cpp:187 plugins/Pulsars/src/Pulsar.cpp:199
+#: plugins/Pulsars/src/Pulsar.cpp:211
 msgid "Time averaged flux density at"
 msgstr "Осереднена щільність потоку при"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Pulsars/src/Pulsar.cpp:133 plugins/Pulsars/src/Pulsar.cpp:145
-#: plugins/Pulsars/src/Pulsar.cpp:157
+#: plugins/Pulsars/src/Pulsar.cpp:190 plugins/Pulsars/src/Pulsar.cpp:202
+#: plugins/Pulsars/src/Pulsar.cpp:214
 msgid "MHz"
 msgstr "МГц"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:136 plugins/Pulsars/src/Pulsar.cpp:148
-#: plugins/Pulsars/src/Pulsar.cpp:160
+#: plugins/Pulsars/src/Pulsar.cpp:193 plugins/Pulsars/src/Pulsar.cpp:205
+#: plugins/Pulsars/src/Pulsar.cpp:217
 msgid "mJy"
 msgstr "мЯн"
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:232
-msgid "globular cluster association"
-msgstr "прив’язка до кульового скупчення"
+#: plugins/Pulsars/src/Pulsar.cpp:221
+#, qt-format
+msgid "Notes: %1"
+msgstr "Нотатки: %1"
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:238
-msgid "SNR association"
-msgstr "прив’язка до залишку наднової"
-
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:244
-msgid "glitches in period"
-msgstr "відхилення у періоді"
-
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:250
-msgid "binary or multiple pulsar"
-msgstr "подвійний або кратний пульсар"
-
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:256
-msgid "millisecond pulsar"
-msgstr "мілісекундний пульсар"
-
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:262
-msgid "recycled pulsar"
-msgstr "вторинний пульсар"
-
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:268
-msgid "radio interpulse"
-msgstr "радіопульсар"
-
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:274
-msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
+#: plugins/Pulsars/src/Pulsar.cpp:283
+msgid ""
+"anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
-"пусаційне випромінювання у оптичному, рентгенівському та гамма-діапазоні "
-"(високоенергетичний)"
+"аномальний гамма-пульсар або ретранслятор м’якого гамма-випромінювання з "
+"виявленими пульсаціями"
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:280
-msgid "extragalactic (in MC) pulsar"
-msgstr "позагалактичний пульсар"
+#: plugins/Pulsars/src/Pulsar.cpp:288
+msgid "has one or more binary companions"
+msgstr "має один або декілька компонентів"
+
+#: plugins/Pulsars/src/Pulsar.cpp:293
+msgid "with pulsed emission from radio to infrared or higher frequencies"
+msgstr ""
+"з пульсаційним випромінюванням від радіо- до інфрачервоних або вищих частот"
+
+#: plugins/Pulsars/src/Pulsar.cpp:298
+msgid "with pulsed emission only at infrared or higher frequencies"
+msgstr ""
+"з пульсаційним випромінюванням лише на інфрачервоних або вищих частотах"
+
+#: plugins/Pulsars/src/Pulsar.cpp:303
+msgid "with pulsed emission in the radio band"
+msgstr "з пульсаційним випромінюванням на радіочастотах"
+
+#: plugins/Pulsars/src/Pulsar.cpp:308
+msgid "with intermittently pulsed radio emission"
+msgstr "з періодично пульсаційним радіовипромінюванням"
+
+#: plugins/Pulsars/src/Pulsar.cpp:313
+msgid ""
+"isolated neutron star with pulsed thermal X-ray emission but no detectable "
+"radio emission"
+msgstr ""
+"окрема нейтронна зірка з пульсаційним гамма-випромінюванням у тепловому "
+"діапазоні, але без придатного до виявлення радіовипромінювання"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Екваторіальна сітка"
@@ -5984,3 +6028,53 @@ msgstr "позагалактичний пульсар"
 
 #~ msgid "Shut Down: "
 #~ msgstr "Завершення роботи: "
+
+#~ msgid ""
+#~ "This plugin plots the position of various pulsars, with object information "
+#~ "about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
+#~ "1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
+#~ msgstr ""
+#~ "Цей додаток призначено для показу розташування різноманітних пульсарів та "
+#~ "даних щодо них. Дані пульсарів запозичено з «Каталогу пульсарів» (Taylor та "
+#~ "інші, 1995).<br><br>Зауваження: ідентифікатори пульсарів мають префікс «PSR»"
+
+#, qt-format
+#~ msgid "Equivalent width of the integrated pulse profile: %1 ms"
+#~ msgstr "Еквівалентна ширина загального профілю пульсації: %1 мс"
+
+#, qt-format
+#~ msgid "Distance: %1 kpc (%2 ly)"
+#~ msgstr "Відстань: %1 кпк (%2 св. р.)"
+
+#, qt-format
+#~ msgid "Type of pulsar: %1"
+#~ msgstr "Тип пульсара: %1"
+
+#~ msgid "globular cluster association"
+#~ msgstr "прив’язка до кульового скупчення"
+
+#~ msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
+#~ msgstr ""
+#~ "пусаційне випромінювання у оптичному, рентгенівському та гамма-діапазоні "
+#~ "(високоенергетичний)"
+
+#~ msgid "millisecond pulsar"
+#~ msgstr "мілісекундний пульсар"
+
+#~ msgid "binary or multiple pulsar"
+#~ msgstr "подвійний або кратний пульсар"
+
+#~ msgid "radio interpulse"
+#~ msgstr "радіопульсар"
+
+#~ msgid "recycled pulsar"
+#~ msgstr "вторинний пульсар"
+
+#~ msgid "SNR association"
+#~ msgstr "прив’язка до залишку наднової"
+
+#~ msgid "glitches in period"
+#~ msgstr "відхилення у періоді"
+
+#~ msgid "extragalactic (in MC) pulsar"
+#~ msgstr "позагалактичний пульсар"
