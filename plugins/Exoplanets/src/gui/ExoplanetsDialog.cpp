@@ -56,15 +56,20 @@ ExoplanetsDialog::~ExoplanetsDialog()
 void ExoplanetsDialog::retranslate()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+		refreshUpdateValues();
+		setAboutHtml();
+	}
 }
 
 // Initialize the dialog widgets and connect the signals/slots
 void ExoplanetsDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	ui->tabs->setCurrentIndex(0);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	ui->tabs->setCurrentIndex(0);	
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
+		this, SLOT(retranslate()));
 
 	// Settings tab / updates group
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
