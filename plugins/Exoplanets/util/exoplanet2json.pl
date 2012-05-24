@@ -1,10 +1,10 @@
 #!/usr/bin/perl
 #
-# read exoplanetData.csv and convert to JSON
+# read exoplanetData.csv from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu and convert to JSON
 #
 
 $CSV	= "./exoplanetData.csv";
-$JSON	= "../resources/catalog.json";
+$JSON	= "../resources/exoplanets.json";
 
 open (CSV, "<$CSV");
 @catalog = <CSV>;
