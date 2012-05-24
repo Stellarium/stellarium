@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-10 19:57+0700\n"
-"PO-Revision-Date: 2012-05-11 21:48+0000\n"
+"POT-Creation-Date: 2012-05-23 18:43+0700\n"
+"PO-Revision-Date: 2012-05-23 15:38+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-19 04:49+0000\n"
-"X-Generator: Launchpad (build 15259)\n"
+"X-Launchpad-Export-Date: 2012-05-24 10:55+0000\n"
+"X-Generator: Launchpad (build 15288)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -37,25 +37,25 @@ msgstr "Horizonte"
 msgid "Galactic Plane"
 msgstr "Plano galáctico"
 
-#: src/core/modules/LandscapeMgr.cpp:493
+#: src/core/modules/LandscapeMgr.cpp:495
 msgid "Author: "
 msgstr "Autor: "
 
-#: src/core/modules/LandscapeMgr.cpp:496
+#: src/core/modules/LandscapeMgr.cpp:498
 msgid "Location: "
 msgstr "Localização: "
 
-#: src/core/modules/LandscapeMgr.cpp:501
+#: src/core/modules/LandscapeMgr.cpp:503
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:505
+#: src/core/modules/LandscapeMgr.cpp:507
 msgid "Planet: "
 msgstr "Planeta: "
 
 #: src/core/modules/Nebula.cpp:96 plugins/Supernovae/src/Supernova.cpp:99
-#: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:102
+#: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:128
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Tipo: <b>%1</b>"
@@ -499,7 +499,7 @@ msgstr "Clique com o botão direito"
 msgid "CTRL + Left click"
 msgstr "Ctrl + Clique com o botão esquerdo"
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:173
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:176
 msgid "Movement and Selection"
 msgstr "Movimento e seleção"
 
@@ -523,44 +523,56 @@ msgstr "Limpar seleção"
 msgid "When a Script is Running"
 msgstr "Quando uma apresentação estiver sendo executada"
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:148
+#: src/gui/HelpDialog.cpp:73
+msgid "Stop currently running script"
+msgstr "Para a apresentação que está sendo executada no momento"
+
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:151 src/gui/StelGui.cpp:152
+msgid "Pause script execution"
+msgstr "Pausar a execução de apresentações"
+
+#: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:153
+msgid "Resume script execution"
+msgstr "Retomar a execução de apresentações"
+
+#: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:148
 msgid "Slow down the script execution rate"
 msgstr "Desacelerar a taxa de execução de apresentações"
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:149
+#: src/gui/HelpDialog.cpp:77 src/gui/StelGui.cpp:149
 msgid "Speed up the script execution rate"
 msgstr "Acelerar a taxa de execução de apresentações"
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:150
+#: src/gui/HelpDialog.cpp:78 src/gui/StelGui.cpp:150
 msgid "Set the normal script execution rate"
 msgstr "Definir a taxa normal de execução de apresentações"
 
 #. TRANSLATORS: Title of a group of key bindings in the Help window
-#: src/gui/HelpDialog.cpp:77 plugins/AngleMeasure/src/AngleMeasure.cpp:126
+#: src/gui/HelpDialog.cpp:81 plugins/AngleMeasure/src/AngleMeasure.cpp:126
 #: plugins/CompassMarks/src/CompassMarks.cpp:124
 #: plugins/Oculars/src/Oculars.cpp:1188
 #: plugins/Satellites/src/Satellites.cpp:128
 msgid "Plugin Key Bindings"
 msgstr "Teclas de atalho do complemento"
 
-#: src/gui/HelpDialog.cpp:78
+#: src/gui/HelpDialog.cpp:82
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:82
 msgid "Text User Interface"
 msgstr "Interface textual"
 
-#: src/gui/HelpDialog.cpp:167
+#: src/gui/HelpDialog.cpp:171
 msgid "Stellarium Help"
 msgstr "Ajuda do Stellarium"
 
-#: src/gui/HelpDialog.cpp:168
+#: src/gui/HelpDialog.cpp:172
 msgid "Keys"
 msgstr "Teclas"
 
-#: src/gui/HelpDialog.cpp:176
+#: src/gui/HelpDialog.cpp:180
 msgid "Further Reading"
 msgstr "Leitura adicional"
 
-#: src/gui/HelpDialog.cpp:177
+#: src/gui/HelpDialog.cpp:181
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -568,17 +580,17 @@ msgstr ""
 "Os seguintes linques são de sítios externos, e abrirão o seu navegador de "
 "Internet:\n"
 
-#: src/gui/HelpDialog.cpp:178
+#: src/gui/HelpDialog.cpp:182
 msgid "The Stellarium User Guide"
 msgstr "Guia do Usuário do Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:182
+#: src/gui/HelpDialog.cpp:186
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Perguntas frequentes} sobre o Stellarium. Respostas também."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:187
+#: src/gui/HelpDialog.cpp:191
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -587,7 +599,7 @@ msgstr ""
 "paisagens e apresentações contribuídas por usuários."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:192
+#: src/gui/HelpDialog.cpp:196
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -596,7 +608,7 @@ msgstr ""
 "o Stellarium, submeta uma requisição de suporte aqui, e tentaremos ajudar."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:197
+#: src/gui/HelpDialog.cpp:201
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -607,48 +619,48 @@ msgstr ""
 "você pode abrir relatórios de erros aqui."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:202
+#: src/gui/HelpDialog.cpp:206
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Fóruns} - discuta o Stellarium com outros usuários."
 
-#: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:341
-#: src/gui/HelpDialog.cpp:343 src/gui/StelGui.cpp:180
+#: src/gui/HelpDialog.cpp:242 src/gui/HelpDialog.cpp:345
+#: src/gui/HelpDialog.cpp:347 src/gui/StelGui.cpp:183
 msgid "Miscellaneous"
 msgstr "Miscelânea"
 
-#: src/gui/HelpDialog.cpp:298
+#: src/gui/HelpDialog.cpp:302
 msgid "Developers"
 msgstr "Desenvolvedores"
 
-#: src/gui/HelpDialog.cpp:299
+#: src/gui/HelpDialog.cpp:303
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Coordenador do projeto e desenvolvedor líder: %1"
 
-#: src/gui/HelpDialog.cpp:300
+#: src/gui/HelpDialog.cpp:304
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Autor/desenvolvedor da documentação: %1"
 
-#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
-#: src/gui/HelpDialog.cpp:303 src/gui/HelpDialog.cpp:304
-#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:311
-#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
-#: src/gui/HelpDialog.cpp:314
+#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:306
+#: src/gui/HelpDialog.cpp:307 src/gui/HelpDialog.cpp:308
+#: src/gui/HelpDialog.cpp:309 src/gui/HelpDialog.cpp:315
+#: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:318
 #, qt-format
 msgid "Developer: %1"
 msgstr "Desenvolvedor: %1"
 
-#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:307
+#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
 #, qt-format
 msgid "Tester: %1"
 msgstr "Testador: %1"
 
-#: src/gui/HelpDialog.cpp:308
+#: src/gui/HelpDialog.cpp:312
 msgid "Past Developers"
 msgstr "Desenvolvedores inativos"
 
-#: src/gui/HelpDialog.cpp:309
+#: src/gui/HelpDialog.cpp:313
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -656,12 +668,12 @@ msgstr ""
 "Várias pessoas fizeram contribuições significativas, mas não estão mais "
 "ativas. O trabalho delas fez uma grande diferença para o projeto:"
 
-#: src/gui/HelpDialog.cpp:310
+#: src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Projetista gráfico/de outras coisas: %1"
 
-#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:320
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Desenvolvedor para OSX: %1"
@@ -836,136 +848,136 @@ msgstr "Janela de console de apresentação"
 msgid "Date and Time"
 msgstr "Data e hora"
 
-#: src/gui/StelGui.cpp:151
+#: src/gui/StelGui.cpp:154
 msgid "Decrease time speed"
 msgstr "Diminuir a velocidade do tempo"
 
-#: src/gui/StelGui.cpp:152
+#: src/gui/StelGui.cpp:155
 msgid "Increase time speed"
 msgstr "Aumentar a velocidade do tempo"
 
-#: src/gui/StelGui.cpp:153
+#: src/gui/StelGui.cpp:156
 msgid "Set normal time rate"
 msgstr "Definir a taxa normal de tempo"
 
-#: src/gui/StelGui.cpp:154
+#: src/gui/StelGui.cpp:157
 msgid "Decrease time speed (a little)"
 msgstr "Diminuir a velocidade do tempo (um pouco)"
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:158
 msgid "Increase time speed (a little)"
 msgstr "Aumentar a velocidade do tempo (um pouco)"
 
-#: src/gui/StelGui.cpp:156
+#: src/gui/StelGui.cpp:159
 msgid "Set time rate to zero"
 msgstr "Definir a taxa de tempo para zero"
 
-#: src/gui/StelGui.cpp:157
+#: src/gui/StelGui.cpp:160
 msgid "Set time to now"
 msgstr "Definir o tempo para a hora atual"
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:161
 msgid "Add 1 solar hour"
 msgstr "Avançar uma hora solar"
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:162
 msgid "Subtract 1 solar hour"
 msgstr "Retroceder uma hora solar"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:163
 msgid "Add 1 solar day"
 msgstr "Avançar um dia solar"
 
-#: src/gui/StelGui.cpp:161
+#: src/gui/StelGui.cpp:164
 msgid "Subtract 1 solar day"
 msgstr "Retroceder um dia solar"
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:165
 msgid "Add 1 solar week"
 msgstr "Avançar uma semana solar"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:166
 msgid "Subtract 1 solar week"
 msgstr "Retroceder uma semana solar"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:167
 msgid "Add 1 sidereal day"
 msgstr "Avançar um dia sideral"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:168
 msgid "Subtract 1 sidereal day"
 msgstr "Retroceder um dia sideral"
 
-#: src/gui/StelGui.cpp:166
+#: src/gui/StelGui.cpp:169
 msgid "Add 1 sidereal week"
 msgstr "Avançar uma semana sideral"
 
-#: src/gui/StelGui.cpp:167
+#: src/gui/StelGui.cpp:170
 msgid "Subtract 1 sidereal week"
 msgstr "Retroceder uma semana sideral"
 
-#: src/gui/StelGui.cpp:168
+#: src/gui/StelGui.cpp:171
 msgid "Add 1 sidereal month"
 msgstr "Avançar um mês sideral"
 
-#: src/gui/StelGui.cpp:169
+#: src/gui/StelGui.cpp:172
 msgid "Subtract 1 sidereal month"
 msgstr "Retroceder um mês sideral"
 
-#: src/gui/StelGui.cpp:170
+#: src/gui/StelGui.cpp:173
 msgid "Add 1 sidereal year"
 msgstr "Avançar um ano sideral"
 
-#: src/gui/StelGui.cpp:171
+#: src/gui/StelGui.cpp:174
 msgid "Subtract 1 sidereal year"
 msgstr "Retroceder um ano sideral"
 
-#: src/gui/StelGui.cpp:174
+#: src/gui/StelGui.cpp:177
 msgid "Center on selected object"
 msgstr "Centrar no objeto selecionado"
 
-#: src/gui/StelGui.cpp:175
+#: src/gui/StelGui.cpp:178
 msgid "Track object"
 msgstr "Seguir objeto"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:179
 msgid "Zoom in on selected object"
 msgstr "Aproximar objeto selecionado"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:180
 msgid "Zoom out"
 msgstr "Afastar"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:181
 msgid "Set home planet to selected planet"
 msgstr "Definir o planeta selecionado como o padrão"
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:184
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Alternar entre montagem equatorial e azimutal"
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:185
 msgid "Quit"
 msgstr "Sair"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:186
 msgid "Save screenshot"
 msgstr "Salvar captura de tela"
 
-#: src/gui/StelGui.cpp:184
+#: src/gui/StelGui.cpp:187
 msgid "Copy selected object information to clipboard"
 msgstr ""
 "Copia a informação do objeto selecionado para a área de transferência"
 
-#: src/gui/StelGui.cpp:186
+#: src/gui/StelGui.cpp:189
 msgid "Auto hide horizontal button bar"
 msgstr "Auto-ocultar a barra de botões horizontal"
 
-#: src/gui/StelGui.cpp:187
+#: src/gui/StelGui.cpp:190
 msgid "Auto hide vertical button bar"
 msgstr "Auto-ocultar a barra de botões vertical"
 
-#: src/gui/StelGui.cpp:188
+#: src/gui/StelGui.cpp:191
 msgid "Toggle visibility of GUI"
 msgstr "Alternar a visibilidade da interface gráfica do usuário"
 
@@ -3754,19 +3766,20 @@ msgid "Telescope #%1: %2"
 msgstr "Telescópio nº %1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1497
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:737
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Magnificação: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1505
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
 #, qt-format
 msgid "FOV: %1"
 msgstr "Campo de visão: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1520
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:699
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensões: %1"
@@ -3860,19 +3873,19 @@ msgstr "Campo de visão aparente da ocular"
 msgid "Rotation: %1"
 msgstr "Rotação: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
 msgid "Magnification provided by these binoculars"
 msgstr "Magnificação fornecida por este binóculo"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:721
 msgid "Actual field of view provided by these binoculars"
 msgstr "Campo de visão real fornecido por este binóculo"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
 msgid "Magnification provided by this ocular/telescope combination"
 msgstr "Magnificação fornecida por esta combinação de ocular/telescópio"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:730
 msgid "Actual field of view provided by this ocular/telescope combination"
 msgstr ""
 "Campo de visão real fornecido por esta combinação de ocular/telescópio"
@@ -5691,107 +5704,139 @@ msgstr "Pulsares"
 #: plugins/Pulsars/src/Pulsars.cpp:62
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
-"about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
-"1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
+"about each one. Pulsar data is derived from 'The ATNF Pulsar Catalogue'  "
+"(Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, "
+"1993-2006 (2005) (astro-ph/0412641)).<br><br>Note: pulsar identifiers have "
+"the prefix 'PSR'"
 msgstr ""
-"<p align=\"justify\">Este complemento mostra a posição de vários pulsares e "
-"apresenta informações objetivas sobre cada um deles. Os dados sobre os "
-"pulsares provêm da obra ‘Catalog of Pulsars’ (Taylor+, "
-"1995).<br><br>Observação: os identificadores dos pulsares têm o prefixo "
-"“PSR”."
+"<p align=\\\"justify\\\">Este complemento mostra a posição de vários "
+"pulsares e apresenta informações objetivas sobre cada um deles. Os dados "
+"sobre os pulsares provêm da obra “The ATNF Pulsar Catalogue” (Manchester, R. "
+"N., Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
+"(astro-ph/0412641)).<br><br>Observação: os identificadores dos pulsares têm "
+"o prefixo “PSR”."
 
-#: plugins/Pulsars/src/Pulsar.cpp:102
+#: plugins/Pulsars/src/Pulsar.cpp:128
 msgid "pulsar"
 msgstr "Pulsar"
 
-#: plugins/Pulsars/src/Pulsar.cpp:109
+#. TRANSLATORS: Unit of measure for period - seconds
+#: plugins/Pulsars/src/Pulsar.cpp:139
 #, qt-format
 msgid "Barycentric period: %1 s"
 msgstr "Período baricêntrico: %1 s"
 
-#: plugins/Pulsars/src/Pulsar.cpp:112
+#: plugins/Pulsars/src/Pulsar.cpp:143
 #, qt-format
-msgid "Distance: %1 kpc (%2 ly)"
-msgstr "Distância: %1 kpc (%2 anos-luz)"
+msgid "Time derivative of barycentric period: %1"
+msgstr "Derivada temporal do período baricêntrico: %1"
 
-#: plugins/Pulsars/src/Pulsar.cpp:116
+#: plugins/Pulsars/src/Pulsar.cpp:148
+msgid "Dispersion measure:"
+msgstr "Medida de dispersão:"
+
+#. TRANSLATORS: Unit of measure for distance - centimeters
+#: plugins/Pulsars/src/Pulsar.cpp:151
+msgid "cm"
+msgstr "cm"
+
+#. TRANSLATORS: Unit of measure for distance - parsecs
+#: plugins/Pulsars/src/Pulsar.cpp:154
+msgid "pc"
+msgstr "pc"
+
+#: plugins/Pulsars/src/Pulsar.cpp:160
 #, qt-format
-msgid "Type of pulsar: %1"
-msgstr "Tipo de pulsar: %1"
+msgid "Spin down energy loss rate: %1 ergs/s"
+msgstr "Taxa de perda de energia devido a desaceleração: %1 ergs/s"
 
-#: plugins/Pulsars/src/Pulsar.cpp:120
+#: plugins/Pulsars/src/Pulsar.cpp:164
 #, qt-format
-msgid "Equivalent width of the integrated pulse profile: %1 ms"
-msgstr "Largura equivalente do perfil de pulso integrado: %1 ms"
+msgid "Binary period of pulsar: %1 days"
+msgstr "Período binário do pulsar: %1 dias"
 
-#: plugins/Pulsars/src/Pulsar.cpp:124
+#: plugins/Pulsars/src/Pulsar.cpp:168
+#, qt-format
+msgid "Eccentricity: %1"
+msgstr "Excentricidade: %1"
+
+#. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
+#: plugins/Pulsars/src/Pulsar.cpp:173
+#, qt-format
+msgid "Annual parallax: %1 mas"
+msgstr "Paralaxe anual: %1 msa"
+
+#: plugins/Pulsars/src/Pulsar.cpp:177
+#, qt-format
+msgid "Distance based on electron density model: %1 kpc (%2 ly)"
+msgstr ""
+"Distância baseada em um modelo de densidade eletrônica: %1 kpc (%2 anos-luz)"
+
+#: plugins/Pulsars/src/Pulsar.cpp:181
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
 msgstr "Largura do perfil em 50% do pico: %1 ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:130 plugins/Pulsars/src/Pulsar.cpp:142
-#: plugins/Pulsars/src/Pulsar.cpp:154
+#: plugins/Pulsars/src/Pulsar.cpp:187 plugins/Pulsars/src/Pulsar.cpp:199
+#: plugins/Pulsars/src/Pulsar.cpp:211
 msgid "Time averaged flux density at"
 msgstr "Tempo médio da densidade do fluxo em"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Pulsars/src/Pulsar.cpp:133 plugins/Pulsars/src/Pulsar.cpp:145
-#: plugins/Pulsars/src/Pulsar.cpp:157
+#: plugins/Pulsars/src/Pulsar.cpp:190 plugins/Pulsars/src/Pulsar.cpp:202
+#: plugins/Pulsars/src/Pulsar.cpp:214
 msgid "MHz"
 msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:136 plugins/Pulsars/src/Pulsar.cpp:148
-#: plugins/Pulsars/src/Pulsar.cpp:160
+#: plugins/Pulsars/src/Pulsar.cpp:193 plugins/Pulsars/src/Pulsar.cpp:205
+#: plugins/Pulsars/src/Pulsar.cpp:217
 msgid "mJy"
 msgstr "mJy"
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:232
-msgid "globular cluster association"
-msgstr "associação de aglomerado globular"
+#: plugins/Pulsars/src/Pulsar.cpp:221
+#, qt-format
+msgid "Notes: %1"
+msgstr "Observações: %1"
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:238
-msgid "SNR association"
-msgstr "associação de remanescentes de supernova"
-
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:244
-msgid "glitches in period"
-msgstr "de falha no período"
-
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:250
-msgid "binary or multiple pulsar"
-msgstr "pulsar binário ou múltiplo"
-
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:256
-msgid "millisecond pulsar"
-msgstr "pulsar de milisegundo"
-
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:262
-msgid "recycled pulsar"
-msgstr "pulsar reciclado"
-
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:268
-msgid "radio interpulse"
-msgstr "interpulso de rádio"
-
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:274
-msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
+#: plugins/Pulsars/src/Pulsar.cpp:283
+msgid ""
+"anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
-"emissão pulsante óptica, de raio X ou de raios gama (energia elevada)"
+"pulsar anômalo de raios X ou repetidor de raios gama moles com pulsações "
+"detectadas"
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:280
-msgid "extragalactic (in MC) pulsar"
-msgstr "pulsar extragaláctico (nas Nuvens de Magalhães)"
+#: plugins/Pulsars/src/Pulsar.cpp:288
+msgid "has one or more binary companions"
+msgstr "tem um ou mais companheiros binários"
+
+#: plugins/Pulsars/src/Pulsar.cpp:293
+msgid "with pulsed emission from radio to infrared or higher frequencies"
+msgstr ""
+"com emissão pulsada a partir de frequências de rádio até frequências "
+"infravermelhas ou superiores"
+
+#: plugins/Pulsars/src/Pulsar.cpp:298
+msgid "with pulsed emission only at infrared or higher frequencies"
+msgstr ""
+"com emissão pulsada apenas em frequências infravermelhas ou superiores"
+
+#: plugins/Pulsars/src/Pulsar.cpp:303
+msgid "with pulsed emission in the radio band"
+msgstr "com emissão pulsada na banda de rádio"
+
+#: plugins/Pulsars/src/Pulsar.cpp:308
+msgid "with intermittently pulsed radio emission"
+msgstr "com emissão de rádio pulsada intermitente"
+
+#: plugins/Pulsars/src/Pulsar.cpp:313
+msgid ""
+"isolated neutron star with pulsed thermal X-ray emission but no detectable "
+"radio emission"
+msgstr ""
+"estrela de nêutrons isolada com emissão de raios X térmicos pulsados, mas "
+"sem emissão de rádio detectável"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Grade equatorial"
@@ -6014,6 +6059,57 @@ msgstr "pulsar extragaláctico (nas Nuvens de Magalhães)"
 
 #~ msgid "USB Script: "
 #~ msgstr "Apresentação de USB: "
+
+#, qt-format
+#~ msgid "Type of pulsar: %1"
+#~ msgstr "Tipo de pulsar: %1"
+
+#, qt-format
+#~ msgid "Equivalent width of the integrated pulse profile: %1 ms"
+#~ msgstr "Largura equivalente do perfil de pulso integrado: %1 ms"
+
+#~ msgid "globular cluster association"
+#~ msgstr "associação de aglomerado globular"
+
+#~ msgid "recycled pulsar"
+#~ msgstr "pulsar reciclado"
+
+#~ msgid "binary or multiple pulsar"
+#~ msgstr "pulsar binário ou múltiplo"
+
+#~ msgid "radio interpulse"
+#~ msgstr "interpulso de rádio"
+
+#~ msgid "millisecond pulsar"
+#~ msgstr "pulsar de milisegundo"
+
+#~ msgid "SNR association"
+#~ msgstr "associação de remanescentes de supernova"
+
+#~ msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
+#~ msgstr ""
+#~ "emissão pulsante óptica, de raio X ou de raios gama (energia elevada)"
+
+#~ msgid "extragalactic (in MC) pulsar"
+#~ msgstr "pulsar extragaláctico (nas Nuvens de Magalhães)"
+
+#~ msgid "glitches in period"
+#~ msgstr "de falha no período"
+
+#~ msgid ""
+#~ "This plugin plots the position of various pulsars, with object information "
+#~ "about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
+#~ "1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
+#~ msgstr ""
+#~ "<p align=\"justify\">Este complemento mostra a posição de vários pulsares e "
+#~ "apresenta informações objetivas sobre cada um deles. Os dados sobre os "
+#~ "pulsares provêm da obra ‘Catalog of Pulsars’ (Taylor+, "
+#~ "1995).<br><br>Observação: os identificadores dos pulsares têm o prefixo "
+#~ "“PSR”."
+
+#, qt-format
+#~ msgid "Distance: %1 kpc (%2 ly)"
+#~ msgstr "Distância: %1 kpc (%2 anos-luz)"
 
 #~ msgid "Cursor Timeout: "
 #~ msgstr "Tempo limite para ocultar o cursor: "
