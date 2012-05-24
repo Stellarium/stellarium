@@ -31,6 +31,18 @@
 #include "StelPainter.hpp"
 #include "StelFader.hpp"
 
+typedef struct
+{
+	QString planetName;	//! Exoplanet name
+	QString mass;		//! Exoplanet mass (Mjup)
+	QString radius;		//! Exoplanet radius
+	QString period;		//! Exoplanet period (days)
+	QString semiAxis;	//! Exoplanet orbit semi-axis (AU)
+	QString eccentricity;	//! Exoplanet orbit eccentricity
+	QString inclination;
+	int year;
+} exoplanetData;
+
 class StelPainter;
 
 //! @class Exoplanet
@@ -94,15 +106,10 @@ private:
 	void draw(StelCore* core, StelPainter& painter);
 
 	//! Variables for description of properties of exoplanets
-	QString designation;	//! The designation of the exoplanet
-	float starRA;		//! J2000 right ascension of host star
-	float starDE;		//! J2000 declination of host star
-	float mass;		//! Exoplanet mass
-	float radius;		//! Exoplanet radius
-	float period;		//! Exoplanet period
-	float semiAxis;		//! Exoplanet orbit semi-axis
-	float eccentricity;	//! Exoplanet orbit eccentricity
-	float inclination;	//! Exoplanet orbit inclination
+	QString designation;			//! The designation of the host star
+	float RA;				//! J2000 right ascension of host star
+	float DE;				//! J2000 declination of host star
+	QList<exoplanetData> exoplanets;	//! List of exoplanets
 
 	LinearFader labelsFader;
 

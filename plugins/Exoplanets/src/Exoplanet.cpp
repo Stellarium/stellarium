@@ -45,14 +45,26 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 		return;
 		
 	designation  = map.value("designation").toString();
-	period = map.value("period").toFloat();
-	mass = map.value("mass").toFloat();
-	radius = map.value("radius").toFloat();
-	semiAxis = map.value("semiAxis").toFloat();
-	inclination = map.value("inclination").toFloat();
-	eccentricity = map.value("eccentricity").toFloat();
-	starRA = StelUtils::getDecAngle(map.value("starRA").toString());
-	starDE = StelUtils::getDecAngle(map.value("starDE").toString());
+	RA = StelUtils::getDecAngle(map.value("RA").toString());
+	DE = StelUtils::getDecAngle(map.value("DE").toString());
+
+	if (map.contains("exoplanets"))
+	{
+		foreach(const QVariant &expl, map.value("exoplanets").toList())
+		{
+			QVariantMap exoplanetMap = expl.toMap();
+			exoplanetData p;
+			if (exoplanetMap.contains("planetName")) p.planetName = exoplanetMap.value("planetName").toString();
+			if (exoplanetMap.contains("period")) p.period = exoplanetMap.value("period").toString();
+			if (exoplanetMap.contains("mass")) p.mass = exoplanetMap.value("mass").toString();
+			if (exoplanetMap.contains("radius")) p.radius = exoplanetMap.value("radius").toString();
+			if (exoplanetMap.contains("semiAxis")) p.semiAxis = exoplanetMap.value("semiAxis").toString();
+			if (exoplanetMap.contains("eccentricity")) p.eccentricity = exoplanetMap.value("eccentricity").toString();
+			if (exoplanetMap.contains("inclination")) p.inclination = exoplanetMap.value("inclination").toString();
+			if (exoplanetMap.contains("year")) p.year = exoplanetMap.value("year").toInt();
+			exoplanets.append(p);
+		}
+	}
 
 	initialized = true;
 }
@@ -66,14 +78,24 @@ QVariantMap Exoplanet::getMap(void)
 {
 	QVariantMap map;
 	map["designation"] = designation;
-	map["mass"] = mass;
-	map["period"] = period;
-	map["radius"] = radius;
-	map["semiAxis"] = semiAxis;
-	map["inclination"] = inclination;
-	map["eccentricity"] = eccentricity;
-	map["starRA"] = starRA;
-	map["starDE"] = starDE;
+	map["RA"] = RA;
+	map["DE"] = DE;
+
+	QVariantList exoplanetList;
+	foreach(const exoplanetData &p, exoplanets)
+	{
+		QVariantMap explMap;
+		explMap["planetName"] = p.planetName;
+		if (!p.mass.isEmpty() && p.mass != "") explMap["mass"] = p.mass;
+		if (!p.period.isEmpty() && p.period != "") explMap["period"] = p.period;
+		if (!p.radius.isEmpty() && p.radius != "") explMap["radius"] = p.radius;
+		if (!p.semiAxis.isEmpty() && p.semiAxis != "") explMap["semiAxis"] = p.semiAxis;
+		if (!p.inclination.isEmpty() && p.inclination != "") explMap["inclination"] = p.inclination;
+		if (!p.eccentricity.isEmpty() && p.eccentricity != "") explMap["eccentricity"] = p.eccentricity;
+		if (p.year != 0) explMap["year"] = p.year;
+		exoplanetList << explMap;
+	}
+	map["exoplanets"] = exoplanetList;
 
 	return map;
 }
@@ -94,35 +116,20 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		oss << "<h2>" << designation << "</h2>";
 	}
 
-	if (flags&Extra1)
-	{
-		oss << q_("Type: <b>%1</b>").arg(q_("exoplanet")) << "<br />";
-	}
-
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 
-	if (flags&Extra1)
+	if (flags&Extra1 && exoplanets.size() > 0)
 	{
-		if (period>0)
+		foreach(const exoplanetData &p, exoplanets)
 		{
-			oss << q_("Period: %1").arg(QString::number(period, 'f', 2)) << "<br>";
-		}
-		if (mass>0)
-		{
-			oss << q_("Mass: %1").arg(QString::number(mass, 'f', 2)) << "<br>";
-		}
-		if (radius>0)
-		{
-			oss << q_("Radius: %1").arg(QString::number(radius, 'f', 2)) << "<br>";
-		}
-		if (eccentricity>0)
-		{
-			oss << q_("Eccentricity: %1").arg(QString::number(eccentricity, 'f', 2)) << "<br>";
-		}
-		if (inclination>0)
-		{
-			oss << q_("Inclination: %1").arg(QString::number(inclination, 'f', 2)) << "<br>";
+			oss << q_("Exoplanet name: %1").arg(p.planetName) << "<br>";
+			oss << q_("Period: %1").arg(p.period) << "<br>";
+			oss << q_("Mass: %1").arg(p.mass) << "<br>";
+			oss << q_("Radius: %1").arg(p.radius) << "<br>";
+			oss << q_("Eccentricity: %1").arg(p.eccentricity) << "<br>";
+			oss << q_("Inclination: %1").arg(p.inclination) << "<br>";
+			oss << q_("Year: %1").arg(p.year) << "<br>";
 		}
 	}
 
@@ -168,7 +175,7 @@ void Exoplanet::draw(StelCore* core, StelPainter& painter)
 	Vec3f color = Vec3f(0.4f,1.2f,0.5f);
 	double mag = getVMagnitude(core, true);
 
-	StelUtils::spheToRect(starRA, starDE, XYZ);			
+	StelUtils::spheToRect(RA, DE, XYZ);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
 	painter.setColor(color[0], color[1], color[2], 1);

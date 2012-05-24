@@ -159,14 +159,14 @@ private:
 	//! read the json file and create list of exoplanets.
 	void readJsonFile(void);
 
-	//! Creates a backup of the catalog.json file called catalog.json.old
+	//! Creates a backup of the exoplanets.json file called exoplanets.json.old
 	//! @param deleteOriginal if true, the original file is removed, else not
 	//! @return true on OK, false on failure
 	bool backupJsonFile(bool deleteOriginal=false);
 
-	//! Get the version from the "version" value in the catalog.json file
-	//! @return version string, e.g. "0.1"
-	const QString getJsonFileVersion(void);
+	//! Get the version of catalog format from the "version" value in the exoplanets.json file
+	//! @return version string, e.g. "1"
+	int getJsonFileVersion(void);
 
 	//! parse JSON file and load exoplanets to map
 	QVariantMap loadEPMap(QString path=QString());
