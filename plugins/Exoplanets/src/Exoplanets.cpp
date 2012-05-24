@@ -51,6 +51,8 @@
 #include <QSharedPointer>
 #include <QStringList>
 
+#define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
+
 /*
  This method is the one called automatically by the StelModuleMgr just 
  after loading the dynamic library
@@ -169,7 +171,7 @@ void Exoplanets::init()
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(jsonCatalogPath).exists())
 	{
-		if (getJsonFileVersion() != EXOPLANETS_PLUGIN_VERSION)
+		if (getJsonFileVersion() < CATALOG_FORMAT_VERSION)
 		{
 			restoreDefaultJsonFile();
 		}
@@ -333,6 +335,12 @@ void Exoplanets::restoreDefaultJsonFile(void)
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(jsonCatalogPath);
 		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
+
+		// Make sure that in the case where an online update has previously been done, but
+		// the json file has been manually removed, that an update is schreduled in a timely
+		// manner
+		StelApp::getInstance().getSettings()->remove("Exoplanets/last_update");
+		lastUpdate = QDateTime::fromString("2012-05-24T12:00:00", Qt::ISODate);
 	}
 }
 
@@ -418,9 +426,9 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 	}
 }
 
-const QString Exoplanets::getJsonFileVersion(void)
+int Exoplanets::getJsonFileVersion(void)
 {
-	QString jsonVersion("unknown");
+	int jsonVersion = -1;
 	QFile jsonEPCatalogFile(jsonCatalogPath);
 	if (!jsonEPCatalogFile.open(QIODevice::ReadOnly))
 	{
@@ -432,12 +440,7 @@ const QString Exoplanets::getJsonFileVersion(void)
 	map = StelJsonParser::parse(&jsonEPCatalogFile).toMap();
 	if (map.contains("version"))
 	{
-		QString creator = map.value("version").toString();
-		QRegExp vRx(".*(\\d+\\.\\d+\\.\\d+).*");
-		if (vRx.exactMatch(creator))
-		{
-			jsonVersion = vRx.capturedTexts().at(1);
-		}
+		jsonVersion = map.value("version").toInt();
 	}
 
 	jsonEPCatalogFile.close();

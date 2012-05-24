@@ -5,6 +5,7 @@
 
 $CSV	= "./exoplanetData.csv";
 $JSON	= "../resources/exoplanets.json";
+$CATALOG_FORMAT_VERSION = 1;
 
 open (CSV, "<$CSV");
 @catalog = <CSV>;
@@ -12,7 +13,7 @@ close CSV;
 
 open (JSON, ">$JSON");
 print JSON "{\n";
-print JSON "\t\"version\": \"0.1.0\",\n";
+print JSON "\t\"version\": \"".$CATALOG_FORMAT_VERSION."\",\n";
 print JSON "\t\"shortName\": \"A catalogue of exoplanets\",\n";
 print JSON "\t\"exoplanets\":\n";
 print JSON "\t{\n";
