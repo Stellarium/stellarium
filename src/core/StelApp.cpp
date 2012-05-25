@@ -47,6 +47,8 @@
 #include "StelGuiBase.hpp"
 #include "StelPainter.hpp"
 
+#include "renderer/StelRenderer.hpp"
+
 #include <iostream>
 #include <QStringList>
 #include <QString>
@@ -203,7 +205,7 @@ void StelApp::setupHttpProxy()
 	}
 }
 
-void StelApp::init(QSettings* conf)
+void StelApp::init(QSettings* conf, StelRenderer* renderer)
 {
 	confSettings = conf;
 
@@ -232,7 +234,7 @@ void StelApp::init(QSettings* conf)
 #endif
 
 	// Initialize AFTER creation of openGL context
-	textureMgr = new StelTextureMgr();
+	textureMgr = new StelTextureMgr(renderer);
 	textureMgr->init();
 
 	QString splashFileName = "textures/logo24bits.png";
