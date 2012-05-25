@@ -35,12 +35,12 @@ typedef struct
 {
 	QString planetName;	//! Exoplanet name
 	QString mass;		//! Exoplanet mass (Mjup)
-	QString radius;		//! Exoplanet radius
+	QString radius;		//! Exoplanet radius (Rjup)
 	QString period;		//! Exoplanet period (days)
-	QString semiAxis;	//! Exoplanet orbit semi-axis (AU)
+	QString semiAxis;	//! Exoplanet orbit semi-major axis (AU)
 	QString eccentricity;	//! Exoplanet orbit eccentricity
-	QString inclination;
-	int year;
+	QString inclination;	//! Exoplanet orbit inclination
+	QString angleDistance;	//! Exoplanet angle distance
 } exoplanetData;
 
 class StelPainter;
@@ -109,6 +109,13 @@ private:
 	QString designation;			//! The designation of the host star
 	float RA;				//! J2000 right ascension of host star
 	float DE;				//! J2000 declination of host star
+	float distance;				//! Distance to star in pc
+	QString stype;				//! Spectral type of star
+	float smass;				//! Mass of star in Msun
+	float smetal;				//! [Fe/H] of star
+	float Vmag;				//! Visual magnitude of star
+	float sradius;				//! Radius of star in Rsun
+	int effectiveTemp;			//! Effective temperature of star in K
 	QList<exoplanetData> exoplanets;	//! List of exoplanets
 
 	LinearFader labelsFader;

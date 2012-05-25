@@ -133,7 +133,7 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 				$out .= "\t\t\t\"smass\": ".$smass.",\n";
 			}
 			if ($smetal ne '') {
-				$out .= "\t\t\t\"smetal\": \"".$smetal."\",\n";
+				$out .= "\t\t\t\"smetal\": ".$smetal.",\n";
 			}
 			if ($sVmag ne '') {
 				$out .= "\t\t\t\"Vmag\": ".$sVmag.",\n";
@@ -143,9 +143,6 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 			}
 			if ($sefftemp ne '') {
 				$out .= "\t\t\t\"effectiveTemp\": ".$sefftemp.",\n";
-			}
-			if ($sage ne '') {
-				$out .= "\t\t\t\"age\": ".$sage.",\n";
 			}
 			$out .= "\t\t\t\"RA\": \"".$outRA."\",\n";
 			$out .= "\t\t\t\"DE\": \"".$outDE."\"\n";
