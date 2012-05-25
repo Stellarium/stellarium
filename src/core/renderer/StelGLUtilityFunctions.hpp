@@ -3,6 +3,7 @@
 
 #include <QGLContext>
 #include "StelVertexAttribute.hpp"
+#include "StelTextureParams.hpp"
 #include "StelVertexBuffer.hpp"
 
 
@@ -12,7 +13,7 @@
 //!
 //! @param type Vertex attribute data type.
 //! @return OpenGL attribute element data type.
-int attributeGLType(const AttributeType type);
+GLint attributeGLType(const AttributeType type);
 
 //! Get GLSL vertex attribute name corresponding to specified attribute interpretation.
 //!
@@ -23,6 +24,9 @@ int attributeGLType(const AttributeType type);
 const char* attributeGLSLName(const AttributeInterpretation interpretation);
 
 //! Get OpenGL primitive type corresponding to specified PrimitiveType.
-int primitiveGLType(const PrimitiveType type);
+GLint primitiveGLType(const PrimitiveType type);
+
+//! Get OpenGL texture wrap mode corresponding to specified TextureWrap.
+GLint textureWrapGL(const TextureWrap wrap);
 
 #endif // _STELGLUTILITYFUNCTIONS_HPP_

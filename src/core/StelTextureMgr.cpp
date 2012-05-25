@@ -34,8 +34,12 @@
 #include <QGLFormat>
 #include <cstdlib>
 
+#include "renderer/StelRenderer.hpp"
+// TODO TEMP
+#include "renderer/StelGLUtilityFunctions.hpp"
 
-StelTextureMgr::StelTextureMgr()
+StelTextureMgr::StelTextureMgr(StelRenderer* renderer)
+	:renderer(renderer)
 {
 	// This thread is doing nothing but will contains all the loader objects.
 	loaderThread = new QThread(this);
@@ -54,7 +58,7 @@ void StelTextureMgr::init()
 }
 
 
-StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const StelTexture::StelTextureParams& params)
+StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const StelTextureParams& params)
 {
 	if (afilename.isEmpty())
 		return StelTextureSP();
@@ -89,11 +93,13 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 		tex->downloaded = true;
 
 		tex->id = StelPainter::glContext->bindTexture(tex->fullPath);
+		// TODO TEST
 		// For some reasons only LINEAR seems to work
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, tex->loadParams.wrapMode);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, tex->loadParams.wrapMode);
+		const GLint wrap = textureWrapGL(tex->loadParams.wrapMode);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrap);
 		return tex;
 	}
 	else
@@ -113,7 +119,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 }
 
 
-StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const StelTexture::StelTextureParams& params, const QString& fileExtension, bool lazyLoading)
+StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const StelTextureParams& params, const QString& fileExtension, bool lazyLoading)
 {
 	if (url.isEmpty())
 		return StelTextureSP();

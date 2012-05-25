@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "renderer/StelTextureParams.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelSkyImageTile.hpp"
 #include "StelApp.hpp"
@@ -184,7 +185,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		{
 			// The tile has an associated texture, but it is not yet loaded: load it now
 			StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
-			tex = texMgr.createTextureThread(absoluteImageURI, StelTexture::StelTextureParams(true));
+			tex = texMgr.createTextureThread(absoluteImageURI, StelTextureParams().generateMipmaps());
 			if (!tex)
 			{
 				qWarning() << "WARNING : Can't create tile: " << absoluteImageURI;
