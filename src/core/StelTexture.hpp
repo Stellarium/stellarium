@@ -21,6 +21,7 @@
 #define _STELTEXTURE_HPP_
 
 #include "StelTextureTypes.hpp"
+#include "renderer/StelTextureParams.hpp"
 
 #include <QObject>
 #include <QImage>
@@ -80,21 +81,6 @@ class StelTexture
 	Q_OBJECT
 
 public:
-	//! Contains the parameters defining how a texture is created.
-	struct StelTextureParams
-	{
-		StelTextureParams(bool qgenerateMipmaps=false, GLint afiltering=GL_LINEAR, GLint awrapMode=GL_CLAMP_TO_EDGE) :
-				generateMipmaps(qgenerateMipmaps),
-				filtering(afiltering),
-				wrapMode(awrapMode) {;}
-		//! Define if mipmaps must be created.
-		bool generateMipmaps;
-		//! Define the scaling filter to use. Must be one of GL_NEAREST or GL_LINEAR
-		GLint filtering;
-		//! Define the wrapping mode to use. Must be one of GL_CLAMP_TO_EDGE, or GL_REPEAT.
-		GLint wrapMode;
-	};
-
 	//! Destructor
 	virtual ~StelTexture();
 
@@ -146,7 +132,6 @@ private slots:
 
 private:
 	friend class StelTextureMgr;
-	friend class TextureLoader;
 
 	//! Private constructor
 	StelTexture();

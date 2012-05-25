@@ -96,7 +96,9 @@ Planet::Planet(const QString& englishName,
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
-	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	texMap = StelApp::getInstance()
+	                 .getTextureManager()
+	                 .createTextureThread("textures/"+texMapName, StelTextureParams().generateMipmaps().wrap(Repeat));
 
 	nameI18 = englishName;
 	if (englishName!="Pluto")
@@ -146,8 +148,10 @@ Planet::Planet(const QString& englishName,
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
-	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
-	normalMap = StelApp::getInstance().getTextureManager().createTexture("textures/"+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	const StelTextureParams textureParams = 
+		StelTextureParams().generateMipmaps().wrap(Repeat);
+	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, textureParams);
+	normalMap = StelApp::getInstance().getTextureManager().createTexture("textures/"+normalMapName, textureParams);
 
 	nameI18 = englishName;
 	if (englishName!="Pluto")
@@ -203,8 +207,10 @@ Planet::Planet(const QString& englishName,
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
-	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
-	normalMap = StelApp::getInstance().getTextureManager().createTexture("textures/"+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	const StelTextureParams textureParams = 
+		StelTextureParams().generateMipmaps().wrap(Repeat);
+	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, textureParams);
+	normalMap = StelApp::getInstance().getTextureManager().createTexture("textures/"+normalMapName, textureParams);
 
 	nameI18 = englishName;
 	if (englishName!="Pluto")

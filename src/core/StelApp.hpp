@@ -69,7 +69,7 @@ public:
 	virtual ~StelApp();
 
 	//! Initialize core and default modules.
-	void init(QSettings* conf);
+	void init(QSettings* conf, class StelRenderer* renderer);
 
 	//! Load and initialize external modules (plugins)
 	void initPlugIns();

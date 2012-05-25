@@ -33,7 +33,7 @@ class StelQGLWidget;
 
 //! @class StelMainGraphicsView
 //! Reimplement a QGraphicsView for Stellarium.
-//! It is the class creating the singleton GL Widget, the main StelApp instance as well as the main GUI.
+//! It is the class creating the main StelApp instance as well as the main GUI.
 class StelMainGraphicsView : public QGraphicsView
 {
 Q_OBJECT

@@ -55,7 +55,7 @@ StelAppGraphicsWidget::~StelAppGraphicsWidget()
 
 void StelAppGraphicsWidget::init(QSettings* conf)
 {
-	stelApp->init(conf);
+	stelApp->init(conf, renderer);
 	Q_ASSERT(viewportEffect==NULL);
 	setViewportEffect(conf->value("video/viewport_effect", "none").toString());
 	renderer->viewportHasBeenResized(scene()->sceneRect().size().toSize());

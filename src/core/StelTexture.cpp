@@ -37,6 +37,9 @@
 #include "StelUtils.hpp"
 #include "StelPainter.hpp"
 
+//TODO TEMP 
+#include "renderer/StelGLUtilityFunctions.hpp"
+
 #include <QThread>
 #include <QMutexLocker>
 #include <QSemaphore>
@@ -111,7 +114,7 @@ void ImageLoader::directLoad() {
 
 void StelTexture::setImage(QImage* img)
 {
-        qImage = *img;
+	qImage = *img;
 }
 
 StelTexture::StelTexture() : loader(NULL), downloaded(false), isLoadingImage(false),
@@ -265,13 +268,22 @@ bool StelTexture::glLoad()
 	//end hikiko
 
 	QGLContext::BindOptions opt = QGLContext::InvertedYBindOption;
-	if (loadParams.filtering==GL_LINEAR)
-		opt |= QGLContext::LinearFilteringBindOption;
+
+	// Set GL texture filtering mode.
+	switch(loadParams.filteringMode)
+	{
+		case Nearest: break;
+		case Linear:  opt |= QGLContext::LinearFilteringBindOption; break;
+		default:
+			Q_ASSERT_X(false, "Unknown texture filtering mode", "TODO FUNCTION NAME");
+	}
 
 	// Mipmap seems to be pretty buggy on windows..
 #ifndef Q_OS_WIN
-	if (loadParams.generateMipmaps==true)
+	if (loadParams.autoGenerateMipmaps)
+	{
 		opt |= QGLContext::MipmapBindOption;
+	}
 #endif
 
 	GLint glformat;
@@ -279,20 +291,20 @@ bool StelTexture::glLoad()
 	{
 		glformat = qImage.hasAlphaChannel() ? GL_LUMINANCE_ALPHA : GL_LUMINANCE;
 	}
-	else if (qImage.hasAlphaChannel())
-	{
-		glformat = GL_RGBA;
-	}
 	else
-		glformat = GL_RGB;
+	{
+		glformat = qImage.hasAlphaChannel() ? GL_RGBA : GL_RGB;
+	}
 
 	Q_ASSERT(StelPainter::glContext==QGLContext::currentContext());
 #ifdef USE_OPENGL_ES2
 	glActiveTexture(GL_TEXTURE0);
 #endif
 	id = StelPainter::glContext->bindTexture(qImage, GL_TEXTURE_2D, glformat, opt);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, loadParams.wrapMode);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, loadParams.wrapMode);
+
+	const GLint wrap = textureWrapGL(loadParams.wrapMode);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrap);
 
 	// Release shared memory
 	qImage = QImage();

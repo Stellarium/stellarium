@@ -1,6 +1,6 @@
 #include "StelGLUtilityFunctions.hpp"
 
-int attributeGLType(const AttributeType type)
+GLint attributeGLType(const AttributeType type)
 {
 	switch(type)
 	{
@@ -30,7 +30,7 @@ const char* attributeGLSLName(const AttributeInterpretation interpretation)
 	return NULL;
 }
 
-int primitiveGLType(const PrimitiveType type)
+GLint primitiveGLType(const PrimitiveType type)
 {
 	switch(type)
 	{
@@ -43,3 +43,17 @@ int primitiveGLType(const PrimitiveType type)
 	// Prevents GCC from complaining about exiting a non-void function:
 	return -1;
 }
+
+GLint textureWrapGL(const TextureWrap wrap)
+{
+	switch(wrap)
+	{
+		case Repeat:      return GL_REPEAT;
+		case ClampToEdge: return GL_CLAMP_TO_EDGE;
+	}
+	Q_ASSERT_X(false, "Unknown texture wrap mode", "textureWrapGL");
+
+	// Prevents GCC from complaining about exiting a non-void function:
+	return -1;
+}
+
