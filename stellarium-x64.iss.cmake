@@ -20,8 +20,8 @@ LicenseFile=COPYING
 Compression=zip/9
 
 [Files]
-Source: "@CMAKE_BINARY_DIR@\bin\stellarium.exe"; DestDir: "{app}"
-Source: "@CMAKE_BINARY_DIR@\lib\libstelMain.dll"; DestDir: "{app}"
+Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; DestDir: "{app}"
+Source: "@CMAKE_INSTALL_PREFIX@\lib\libstelMain.dll"; DestDir: "{app}"
 Source: "README"; DestDir: "{app}"; Flags: isreadme; DestName: "README.rtf"
 Source: "INSTALL"; DestDir: "{app}"; DestName: "INSTALL.rtf"
 Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.rtf"
@@ -40,9 +40,9 @@ Source: "@QT_BINARY_DIR@\QtNetwork4.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\QtScript4.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\QtXml4.dll"; DestDir: "{app}";
 ;Source: "@QT_PLUGINS_DIR@\sqldrivers\qsqlite4.dll"; DestDir: "{app}\sqldrivers\";
-Source: "@CMAKE_BINARY_DIR@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
+Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
 ; Locales
-Source: "@CMAKE_BINARY_DIR@\share\locale\*"; DestDir: "{app}\locale\"; Flags: recursesubdirs
+Source: "@CMAKE_INSTALL_PREFIX@\share\locale\*"; DestDir: "{app}\locale\"; Flags: recursesubdirs
 
 [Tasks]
 Name: desktopicon; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
