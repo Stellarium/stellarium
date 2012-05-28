@@ -53,6 +53,11 @@ private:
 //! @param declination declination of the object in radians. 
 	virtual double HourAngle(double latitude,double elevation,double declination);
 
+//! Computes the Hour Angle for a given Right Ascension and Sidereal Time.
+//! @param RA right ascension (hours).
+//! @param ST sidereal time (degrees).
+	virtual double HourAngle2(double RA, double ST);
+
 //! Solves Moon/Sun Rise/Set/Transit times for the current Julian day. This function updates the variables MoonRise, MoonSet, MoonCulm. Returns success status.
 	virtual bool MoonSunSolve(StelCore* core);
 
@@ -106,10 +111,10 @@ private:
 	virtual bool CheckRise(int i);
 
 //! Some useful constants (self-explanatory).
-	double Rad2Deg, Rad2Hr, AstroTwiAlti;
+	double Rad2Deg, Rad2Hr, AstroTwiAlti, UA;
 
 //! RA, Dec, observer latitude, object's elevation, and Hour Angle at horizon.
-	double selRA, selDec, mylat, mylon, alti, horizH, myJD;
+	double selRA, selDec, mylat, mylon, alti, horizH, culmAlt, myJD;
 
 //! Vectors to store Sun's RA, Dec, and Sid. Time at twilight and rise/set.
 	double SunRA[366], SunDec[366], SunSidT[4][366];
@@ -122,6 +127,13 @@ private:
 
 //! Vector of Earth position through the year.
 	Vec3d EarthPos[366];
+
+//! Position of the observer relative to the Earth Center:
+	Vec3d ObserverLoc;
+
+//! Pointer to the Earth:
+	Planet* myEarth;
+	Planet* myMoon;
 
 //! Current simulation year and number of days in the year.;
 	int currYear, nDays;
@@ -136,7 +148,7 @@ private:
 	Vec3d EquPos, LocPos;
 
 //! Some booleans to check the kind of source selected.
-	bool isStar,isMoon,isSun,isScreen, LastSun;
+	bool isStar,isMoon,isSun,isScreen, LastSun, raised;
 
 //! Some booleans to select the kind of output.
 	bool show_Heliacal, show_Good_Nights, show_Best_Night, show_Today;
