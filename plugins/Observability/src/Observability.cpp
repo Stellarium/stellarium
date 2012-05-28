@@ -230,7 +230,7 @@ void Observability::draw(StelCore* core)
 	int auxm, auxd, auxy;
 	StelUtils::getDateFromJulianDay(currJD,&auxy,&auxm,&auxd);
 	bool isSource = StelApp::getInstance().getStelObjectMgr().getWasSelected();
-
+	bool isSat = false;
 	bool show_Year = show_Best_Night || show_Good_Nights || show_Heliacal;
 
 //////////////////////////////////////////////////////////////////
@@ -283,6 +283,10 @@ void Observability::draw(StelCore* core)
 
 // Get the selected source and its name:
 		selectedObject = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]; 
+
+// Don't do anything for satellites:
+		if(selectedObject->getType()== "Satellite") return;
+
 		QString tempName = selectedObject->getEnglishName();
 
 // Check if the source is Sun or Moon (i.e., it changes quite a bit during one day):
@@ -313,6 +317,7 @@ void Observability::draw(StelCore* core)
 		EquPos = core->j2000ToEquinoxEqu(currentPos);
 		LocPos = core->j2000ToAltAz(currentPos);
 	}
+
 
 // Convert EquPos to RA/Dec:
 	toRADec(EquPos,selRA,selDec);
@@ -938,7 +943,7 @@ bool Observability::MoonSunSolve(StelCore* core)
 			TempH = (-Hhoriz-Hcurr)*Tfrac;
 			if (raised==false) TempH += (TempH<0.0)?24.0:0.0;
 		// Check convergence:
-			if (std::abs(TempH-tempEphH)<JDsec) i=101;
+			if (std::abs(TempH-tempEphH)<JDsec) break;
 		// Update rise-time estimate:
 			tempEphH = TempH;
 			MoonRise = myJD + tempEphH/24.;
@@ -977,7 +982,7 @@ bool Observability::MoonSunSolve(StelCore* core)
 			TempH = (Hhoriz-Hcurr)*Tfrac;
 			if (raised==false) TempH -= (TempH>0.0)?24.0:0.0;
 	// Check convergence:
-			if (std::abs(TempH-tempEphH)<JDsec) i=101;
+			if (std::abs(TempH-tempEphH)<JDsec) break;
 	// Update set-time estimate:
 			tempEphH = TempH;
 			MoonSet = myJD + tempEphH/24.;
@@ -1023,7 +1028,7 @@ bool Observability::MoonSunSolve(StelCore* core)
 	// Compute eph. times for mod. coordinates:
 		TempH = -Hcurr*Tfrac;
 	// Check convergence:
-		if (std::abs(TempH-tempEphH)<JDsec) i=101;
+		if (std::abs(TempH-tempEphH)<JDsec) break;
 		tempEphH = TempH;
 		MoonCulm = myJD + tempEphH/24.;
 		culmAlt = std::abs(mylat-Dec); // 90 - altitude at transit. 
