@@ -160,7 +160,7 @@ void OcularDialog::insertNewOcular()
 
 void OcularDialog::insertNewTelescope()
 {
-	telescopeTableModel->insertRows(ccdTableModel->rowCount(), 1);
+	telescopeTableModel->insertRows(telescopeTableModel->rowCount(), 1);
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(telescopeTableModel->rowCount() - 1, 1));
 }
 
