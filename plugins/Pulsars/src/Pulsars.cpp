@@ -173,11 +173,11 @@ void Pulsars::init()
 	}
 	else
 	{
-		qDebug() << "Pulsars::init catalog.json does not exist - copying default file to " << jsonCatalogPath;
+		qDebug() << "Pulsars::init pulsars.json does not exist - copying default file to " << jsonCatalogPath;
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "Pulsars::init using catalog.json file: " << jsonCatalogPath;
+	qDebug() << "Pulsars::init using pulsars.json file: " << jsonCatalogPath;
 
 	readJsonFile();
 
@@ -325,7 +325,7 @@ void Pulsars::restoreDefaultJsonFile(void)
 	}
 	else
 	{
-		qDebug() << "Pulsars::init copied default catalog.json to " << jsonCatalogPath;
+		qDebug() << "Pulsars::init copied default pulsars.json to " << jsonCatalogPath;
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(jsonCatalogPath);
