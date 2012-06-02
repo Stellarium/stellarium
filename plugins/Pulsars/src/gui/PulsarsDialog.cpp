@@ -148,7 +148,7 @@ void PulsarsDialog::setAboutHtml(void)
 void PulsarsDialog::refreshUpdateValues(void)
 {
 	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Pulsars)->getLastUpdate());
-	ui->updateFrequencySpinBox->setValue(GETSTELMODULE(Pulsars)->getUpdateFrequencyHours());
+	ui->updateFrequencySpinBox->setValue(GETSTELMODULE(Pulsars)->getUpdateFrequencyDays());
 	int secondsToUpdate = GETSTELMODULE(Pulsars)->getSecondsToUpdate();
 	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Pulsars)->getUpdatesEnabled());
 	if (!GETSTELMODULE(Pulsars)->getUpdatesEnabled())
@@ -159,13 +159,15 @@ void PulsarsDialog::refreshUpdateValues(void)
 		ui->nextUpdateLabel->setText(q_("Next update: < 1 minute"));
 	else if (secondsToUpdate < 3600)
 		ui->nextUpdateLabel->setText(QString(q_("Next update: %1 minutes")).arg((secondsToUpdate/60)+1));
-	else
+	else if (secondsToUpdate < 86400)
 		ui->nextUpdateLabel->setText(QString(q_("Next update: %1 hours")).arg((secondsToUpdate/3600)+1));
+	else
+		ui->nextUpdateLabel->setText(QString(q_("Next update: %1 days")).arg((secondsToUpdate/86400)+1));
 }
 
-void PulsarsDialog::setUpdateValues(int hours)
+void PulsarsDialog::setUpdateValues(int days)
 {
-	GETSTELMODULE(Pulsars)->setUpdateFrequencyHours(hours);
+	GETSTELMODULE(Pulsars)->setUpdateFrequencyDays(days);
 	refreshUpdateValues();
 }
 
