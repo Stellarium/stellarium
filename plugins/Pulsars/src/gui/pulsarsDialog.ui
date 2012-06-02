@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>551</width>
-    <height>479</height>
+    <width>547</width>
+    <height>475</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Exoplanets Configuration</string>
+   <string>Pulsars Configuration</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="spacing">
@@ -139,7 +139,7 @@
        <item>
         <widget class="QGroupBox" name="updatesGroup">
          <property name="title">
-          <string>Update pulsars data from Internet</string>
+          <string>Update catalog from Internet</string>
          </property>
          <property name="flat">
           <bool>true</bool>
