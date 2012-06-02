@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-02 19:32+0700\n"
+"POT-Creation-Date: 2012-06-02 20:19+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4164,7 +4164,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:355
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:195
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:197
 msgid "Updating now..."
 msgstr ""
 
@@ -4187,18 +4187,18 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:178
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:180
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:260
 msgid "Update now"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:346
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:180
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:182
 msgid "Update from files"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:358
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:198
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:200
 msgid "Update error"
 msgstr ""
 
@@ -4285,7 +4285,6 @@ msgid "Last update:"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:646
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Update frequency (hours):"
 msgstr ""
 
@@ -5686,7 +5685,12 @@ msgid ""
 "catalog you can %1get info here%2."
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:205
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:165
+#, qt-format
+msgid "Next update: %1 days"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:207
 msgid "Pulsars is updated"
 msgstr ""
 
@@ -5700,6 +5704,10 @@ msgstr ""
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:255
 msgid "Update catalog from Internet"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
+msgid "Update frequency (days):"
 msgstr ""
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259

@@ -45,7 +45,7 @@ public slots:
 	void refreshUpdateValues(void);
 
 private slots:
-	void setUpdateValues(int hours);
+	void setUpdateValues(int days);
 	void setUpdatesEnabled(int checkState);
 	void setDistributionEnabled(int checkState);
 	void updateStateReceiver(Pulsars::UpdateState state);

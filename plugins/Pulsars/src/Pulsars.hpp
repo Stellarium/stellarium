@@ -124,9 +124,9 @@ public:
 	//! get the date and time the TLE elements were updated
 	QDateTime getLastUpdate(void) {return lastUpdate;}
 
-	//! get the update frequency in hours
-	int getUpdateFrequencyHours(void) {return updateFrequencyHours;}
-	void setUpdateFrequencyHours(int hours) {updateFrequencyHours = hours;}
+	//! get the update frequency in days
+	int getUpdateFrequencyDays(void) {return updateFrequencyDays;}
+	void setUpdateFrequencyDays(int days) {updateFrequencyDays = days;}
 
 	//! get the number of seconds till the next update
 	int getSecondsToUpdate(void);
@@ -194,7 +194,7 @@ private:
 	QList<int> messageIDs;
 	bool updatesEnabled;
 	QDateTime lastUpdate;
-	int updateFrequencyHours;
+	int updateFrequencyDays;
 	bool distributionEnabled;
 
 	// GUI
