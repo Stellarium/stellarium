@@ -108,13 +108,11 @@ void PulsarsDialog::setAboutHtml(void)
 	html += "<h2>" + q_("Pulsars Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + PULSARS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
-	html += "<tr width=\"30%\"><td><strong>" + q_("Homepage") + ":</strong></td><td><a href='http://stellarium.org/wiki/index.php/Pulsars_plugin'>http://stellarium.org/wiki/index.php/Pulsars_plugin</a></td></tr>";
 	html += "</table>";
 
-	html += "<h3>" + q_("Description") + "</h3>";
 	html += "<p>" + q_("This plugin plots the position of various pulsars, with object information about each one.") + "</p>";
 	html += "<p>" + QString(q_("Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) (%1astro-ph/0412641%2))."))
-			.arg("<a href='http://arxiv.org/abs/astro-ph/0412641'>")
+			.arg("<a href=\"http://arxiv.org/abs/astro-ph/0412641\">")
 			.arg("</a>") + "</p>";
 	html += "<p>" + QString("<strong>%1:</strong> %2")
 			.arg(q_("Note"))
@@ -131,9 +129,18 @@ void PulsarsDialog::setAboutHtml(void)
 			.arg("http://www.obs-nancay.fr/")
 			.arg(q_("Nancay Radioastronomical Observatory"))
 			.arg(q_("in France")) + "</li>";
-	html += "</ul><h3>" + q_("How you can help") + "</h3>";
-	html += "<p>" + q_("We are welcome bug reports, feature requests and feedback through the usual channels (trackers, forums and so on).") + "</p>";
-	html += "</body></html>";
+	html += "</ul><h3>" + q_("Links") + "</h3>";
+	html += "<p>" + q_("Support is provided via the Launchpad website.  Be sure to put \"Pulsars plugin\" in the subject when posting.") + "</p>";
+	html += "<p><ul>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">")).arg("</a>") + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + QString(q_("Bug reports can be made %1here%2.")).arg("<a href=\"https://bugs.launchpad.net/stellarium\">").arg("</a>") + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + q_("If you want read full information about plugin, his history and format of catalog you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Pulsars_plugin\">").arg("</a>") + "</li>";
+	html += "</ul></p></body></html>";
 
 	ui->aboutTextBrowser->setHtml(html);
 }
