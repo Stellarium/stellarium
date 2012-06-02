@@ -748,10 +748,6 @@ void StelGui::setScriptKeys(bool b)
 		getGuiActions("actionDecrease_Script_Speed")->setShortcut(QKeySequence("J"));
 		getGuiActions("actionIncrease_Script_Speed")->setShortcut(QKeySequence("L"));
 		getGuiActions("actionSet_Real_Script_Speed")->setShortcut(QKeySequence("K"));
-
-		getGuiActions("actionStop_Script")->setShortcut(QKeySequence("4"));
-		getGuiActions("actionPause_Script")->setShortcut(QKeySequence("5"));
-		getGuiActions("actionResume_Script")->setShortcut(QKeySequence("6"));
 	}
 	else
 	{
