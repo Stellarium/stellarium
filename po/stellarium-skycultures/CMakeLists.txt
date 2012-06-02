@@ -2,7 +2,7 @@ SET(skycultures_DOMAIN stellarium-skycultures)
 SET(skycultures_POT ${skycultures_DOMAIN}.pot)
 
 GETTEXT_CREATE_TRANSLATIONS(${skycultures_DOMAIN} DEFAULT_TARGET
-    af ar az be bg bn bs ca cs cy da de dv el en en_AU en_CA en_GB eo es et eu fa fil fi fr ga gl gu haw he hi hr hrx hu hy ia id is it ja ka kn ko lt lv mk ml mr ms mt mi nan nb nl nn pl pt_BR pt ro ru se si sk sl sq su sr sv te th tl tr uk vi zh_CN zh_HK zh_TW
+    aa ab ae af ak am an ar as ast av az ba be bg bh bi bn br bs ca ce cs cv cy da de dv el en en_AU en_CA en_GB en_US eo es et eu fa fi fil fj fr ga gd gl gn gu haw he hi hr hrx ht hu hy ia id is it ja ka kg kk kn ko ky la lb lo lt lv mi mk ml mn mo mr ms mt nan nb nl nn os pa pl pt pt_BR ro ru se si sk sl sm sq sr su sv sw ta te tg th tl tr tt uk uz vi zh_CN zh_HK zh_TW zu
 )
 
 ADD_CUSTOM_TARGET(
@@ -22,3 +22,4 @@ ADD_CUSTOM_TARGET(
 
 # Generate this POT file when building the "generate-pot" target.
 ADD_DEPENDENCIES(generate-pot generate-pot-${skycultures_DOMAIN})
+

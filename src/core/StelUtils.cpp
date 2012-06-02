@@ -333,9 +333,9 @@ void spheToRect(double lng, double lat, Vec3d& v)
 }
 
 void spheToRect(float lng, float lat, Vec3f& v)
-{
-	const double cosLat = cos(lat);
-	v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
+{	
+	const double dlng = lng, dlat = lat, cosLat = cos(dlat);
+	v.set(cos(dlng) * cosLat, sin(dlng) * cosLat, sin(dlat));
 }
 
 void rectToSphe(double *lng, double *lat, const Vec3d& v)
