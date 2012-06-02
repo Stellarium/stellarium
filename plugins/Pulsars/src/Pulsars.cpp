@@ -477,7 +477,7 @@ void Pulsars::restoreDefaultConfigIni(void)
 	conf->setValue("distribution_enabled", false);
 	conf->setValue("updates_enabled", true);
 	conf->setValue("url", "http://stellarium.astro.uni-altai.ru/pulsars.json");
-	conf->setValue("update_frequency_hours", 144);
+	conf->setValue("update_frequency_days", 100);
 	conf->endGroup();
 }
 
@@ -487,7 +487,7 @@ void Pulsars::readSettingsFromConfig(void)
 	conf->beginGroup("Pulsars");
 
 	updateUrl = conf->value("url", "http://stellarium.astro.uni-altai.ru/pulsars.json").toString();
-	updateFrequencyHours = conf->value("update_frequency_hours", 144).toInt();
+	updateFrequencyDays = conf->value("update_frequency_days", 100).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	distributionEnabled = conf->value("distribution_enabled", false).toBool();
@@ -501,7 +501,7 @@ void Pulsars::saveSettingsToConfig(void)
 	conf->beginGroup("Pulsars");
 
 	conf->setValue("url", updateUrl);
-	conf->setValue("update_frequency_hours", updateFrequencyHours);
+	conf->setValue("update_frequency_days", updateFrequencyDays);
 	conf->setValue("updates_enabled", updatesEnabled );
 	conf->setValue("distribution_enabled", distributionEnabled);
 
@@ -510,13 +510,13 @@ void Pulsars::saveSettingsToConfig(void)
 
 int Pulsars::getSecondsToUpdate(void)
 {
-	QDateTime nextUpdate = lastUpdate.addSecs(updateFrequencyHours * 3600);
+	QDateTime nextUpdate = lastUpdate.addSecs(updateFrequencyDays * 3600 * 24);
 	return QDateTime::currentDateTime().secsTo(nextUpdate);
 }
 
 void Pulsars::checkForUpdate(void)
 {
-	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime())
+	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime())
 		updateJSON();
 }
 
