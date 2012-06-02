@@ -2,12 +2,14 @@
 #define _STELQGLRENDERER_HPP_
 
 
-#include "StelGLRenderer.hpp"
-#include "StelPainter.hpp"
-
-#include <QGLWidget>
 #include <QGLFunctions>
+#include <QGLWidget>
 #include <QGraphicsView>
+#include <QThread>
+
+#include "StelGLRenderer.hpp"
+#include "StelQGLTextureBackend.hpp"
+#include "StelPainter.hpp"
 
 
 //! GLWidget specialized for Stellarium, mostly to provide better debugging information.
@@ -59,15 +61,21 @@ protected:
 class StelQGLRenderer : public StelGLRenderer
 {
 public:
-	//! Construct a StelQGLRenderer whose GL widget will be a child of specified QGraphicsView.
-	StelQGLRenderer(QGraphicsView* parent)
+	//! Construct a StelQGLRenderer.
+	//!
+	//! @param parent       Parent widget for the renderer's GL widget.
+	//! @param pvrSupported Are .pvr (PVRTC - PowerVR hardware) textures supported on this platform?
+	StelQGLRenderer(QGraphicsView* parent, bool pvrSupported)
 		: glContext(new QGLContext(QGLFormat(QGL::StencilBuffer | 
 		                                     QGL::DepthBuffer   |
 		                                     QGL::DoubleBuffer)))
 		, glWidget(new StelQGLWidget(glContext, parent))
 		, painter(NULL)
+		, pvrSupported(pvrSupported)
 		, gl(glContext)
 	{
+		loaderThread = new QThread();
+		loaderThread->start(QThread::LowestPriority);
 		glWidget->updateGL();
 		parent->setViewport(glWidget);
 	}
@@ -81,6 +89,12 @@ public:
 		
 		//delete glContext;
 		
+		// Hopefully this doesn't take much time.
+		loaderThread->quit();
+		loaderThread->wait();
+		delete loaderThread;
+		loaderThread = NULL;
+
 		glContext   = NULL;
 		glWidget    = NULL;
 	}
@@ -120,6 +134,59 @@ public:
 		this->painter = NULL;
 		invariant();
 	}
+	
+	virtual void makeGLContextCurrent()
+	{
+		invariant();
+		glContext->makeCurrent();
+		invariant();
+	}
+
+	virtual void bindTexture(StelTextureBackend* textureBackend, const int textureUnit)
+	{
+		StelQGLTextureBackend* qglTextureBackend =
+			dynamic_cast<StelQGLTextureBackend*>(textureBackend);
+		Q_ASSERT_X(qglTextureBackend != NULL,
+		           "StelQGLRenderer: Trying to bind a texture created by a different "
+		           "renderer backend", "StelQGLRenderer::bindTexture");
+
+		const TextureStatus status = qglTextureBackend->getStatus();
+		if(status == TextureStatus_Loaded)
+		{
+			if(gl.hasOpenGLFeature(QGLFunctions::Multitexture) && textureUnit !=0)
+			{
+				return;
+			}
+			qglTextureBackend->bind(textureUnit);
+		}
+		if(status == TextureStatus_Uninitialized)
+		{
+			qglTextureBackend->startLoadingInThread();
+		}
+	}
+
+	virtual StelTextureBackend* createTextureBackend_
+		(const QString& filename, const StelTextureParams& params, TextureLoadingMode loadingMode);
+
+	//! Used to access the GL context. 
+	//!
+	//! Safer than making glContext protected as derived classes can't overwrite it.
+	QGLContext* getGLContext()
+	{
+		return glContext;
+	}
+
+	//! Used for GL/GLES-compatible function wrappers and to determine which GL features are available.
+	QGLFunctions& getGLFunctions()
+	{
+		return gl;
+	}
+
+	//! Get a pointer to thread used for loading graphics data (e.g. textures).
+	QThread* getLoaderThread()
+	{
+		return loaderThread;
+	}
 
 protected:
 	virtual void enablePainting(QPainter* painter)
@@ -141,22 +208,6 @@ protected:
 		invariant();
 	}
 	
-	virtual void makeGLContextCurrent()
-	{
-		invariant();
-		glContext->makeCurrent();
-		invariant();
-	}
-	
-protected:
-	//! Used to access the GL context. 
-	//!
-	//! Safer than making glContext protected as derived classes can't overwrite it.
-	QGLContext* getGLContext()
-	{
-		return glContext;
-	}
-	
 	virtual void invariant()
 	{
 		Q_ASSERT_X(NULL != glWidget && NULL != glContext, "StelQGLRenderer::invariant()", 
@@ -176,6 +227,12 @@ private:
 	QPainter* painter;
 	//! Are we using default-constructed painter?
 	bool usingDefaultPainter;
+
+	//! Are .pvr compressed textures supported on the platform we're running on?
+	bool pvrSupported;
+
+	//! Thread used for loading graphics data (e.g. textures).
+	QThread* loaderThread;
 
 protected:
 	//! Wraps some GL functions for compatibility across GL and GLES.

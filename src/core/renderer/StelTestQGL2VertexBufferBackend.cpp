@@ -144,7 +144,7 @@ void StelTestQGL2VertexBufferBackend::
 	{
 		if(attribute.interpretation == Color){vertexColors = true;}
 
-		const char* const name = attributeGLSLName(attribute.interpretation);
+		const char* const name = glslAttributeName(attribute.interpretation);
 		const int handle = program->attributeLocation(name);
 		if(handle == -1)
 		{
@@ -153,7 +153,7 @@ void StelTestQGL2VertexBufferBackend::
 			           "is not in the GLSL shader", "StelTestQGL2VertexBufferBackend::draw");
 		}
 
-		program->setAttributeArray(handle, attributeGLType(attribute.type), 
+		program->setAttributeArray(handle, glAttributeType(attribute.type), 
 		                           buffers[attributeCount]->constData(), 
 		                           attributeDimensions(attribute.type));
 		program->enableAttributeArray(handle);
@@ -175,7 +175,7 @@ void StelTestQGL2VertexBufferBackend::
 	}
 
 	// Draw the vertex arrays.
-	glDrawArrays(primitiveGLType(primitiveType), 0, vertexCount);
+	glDrawArrays(glPrimitiveType(primitiveType), 0, vertexCount);
 
 	for(int attribute = 0; attribute < attributeCount; attribute++) 
 	{

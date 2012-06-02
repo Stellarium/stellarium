@@ -8,6 +8,7 @@
 
 #include "StelRenderer.hpp"
 
+#include "StelGLUtilityFunctions.hpp"
 #include "StelVertexBuffer.hpp"
 #include "StelTestQGL2VertexBufferBackend.hpp"
 
@@ -204,28 +205,14 @@ protected:
 		           "StelQGLRenderer::invariant",
 		           "We're drawing and using FBOs, but the backBufferPainter is NULL");
 	}
-	
+
 	//! Check for any OpenGL errors. Useful for detecting incorrect GL code.
 	void checkGLErrors() const
 	{
-		GLenum glError = glGetError();
-		switch(glError)
-		{
-			case GL_NO_ERROR: 
-				break;
-			case GL_INVALID_ENUM: 
-				qWarning() << "OpenGL error detected: GL_INVALID_ENUM"; break;
-			case GL_INVALID_VALUE:
-				qWarning() << "OpenGL error detected: GL_INVALID_VALUE"; break;
-			case GL_INVALID_OPERATION:
-				qWarning() << "OpenGL error detected: GL_INVALID_OPERATION"; break;
-			case GL_INVALID_FRAMEBUFFER_OPERATION:
-				qWarning() << "OpenGL error detected: GL_INVALID_FRAMEBUFFER_OPERATION"; break;
-			case GL_OUT_OF_MEMORY:
-				qWarning() << "OpenGL error detected: GL_OUT_OF_MEMORY"; break;
-			default:
-				Q_ASSERT_X(false, "GL2Renderer::checkGLErrors", "Unknown GL error");
-		}
+		const GLenum glError = glGetError();
+		if(glError == GL_NO_ERROR) {return;}
+
+		qWarning() << "OpenGL error detected: " << glErrorToString(glError);
 	}
 	
 private:

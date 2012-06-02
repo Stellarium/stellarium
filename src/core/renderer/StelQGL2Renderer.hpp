@@ -30,15 +30,18 @@
 class StelQGL2Renderer : public StelQGLRenderer
 {
 public:
-	//! Construct a StelQGL2Renderer whose GL widget will be a child of specified QGraphicsView.
-	StelQGL2Renderer(QGraphicsView* parent)
-		: StelQGLRenderer(parent)
+	//! Construct a StelQGL2Renderer.
+	//!
+	//! @param parent       Parent widget for the renderer's GL widget.
+	//! @param pvrSupported Are .pvr (PVRTC - PowerVR hardware) textures supported on this platform?
+	StelQGL2Renderer(QGraphicsView* parent, bool pvrSupported)
+		: StelQGLRenderer(parent, pvrSupported)
 		, initialized(false)
 		, shaderPrograms()
 	{
 	}
 	
-    virtual ~StelQGL2Renderer()
+	virtual ~StelQGL2Renderer()
 	{
 		invariant();
 		
@@ -52,8 +55,8 @@ public:
 	
 	virtual bool init()
 	{
-		Q_ASSERT_X(!initialized, "StelQGL2Renderer::init()", 
-		           "StelQGLR2enderer is already initialized");
+		Q_ASSERT_X(!initialized, "StelQGL2Renderer::init", 
+		           "StelQGL2Renderer is already initialized");
 		
 		// Using  this instead of makeGLContextCurrent() to avoid invariant 
 		// as we're not in valid state (getGLContext() isn't public - it doesn't call invariant)
@@ -99,6 +102,7 @@ public:
 		);
 		if(NULL == plainShaderProgram)
 		{
+			qWarning() << "StelQGL2Renderer::init failed to load plain shader program";
 			return false;
 		}
 		shaderPrograms.append(plainShaderProgram);
@@ -126,6 +130,7 @@ public:
 		);
 		if(NULL == colorShaderProgram)
 		{
+			qWarning() << "StelQGL2Renderer::init failed to load color shader program";
 			return false;
 		}
 		shaderPrograms.append(colorShaderProgram);
@@ -153,8 +158,9 @@ public:
 			"    gl_FragColor = texture2D(tex, texc) * globalColor;\n"
 			"}\n"
 		);
-		if(NULL == colorTextureShaderProgram)
+		if(NULL == textureShaderProgram)
 		{
+			qWarning() << "StelQGL2Renderer::init failed to load texture shader program";
 			return false;
 		}
 		shaderPrograms.append(textureShaderProgram);
@@ -187,12 +193,14 @@ public:
 		);
 		if(NULL == colorTextureShaderProgram)
 		{
+			qWarning() << "StelQGL2Renderer::init failed to load colorTexture shader program";
 			return false;
 		}
 		shaderPrograms.append(colorTextureShaderProgram);
 		
 		if(!StelQGLRenderer::init())
 		{
+			qWarning() << "StelQGL2Renderer::init : parent init failed";
 			return false;
 		}
 		
@@ -262,8 +270,8 @@ protected:
 	                                     class StelIndexBuffer* indexBuffer = NULL,
 	                                     StelProjectorP projector = NULL)
 	{
-		Q_ASSERT_X(indexBuffer == NULL, "TODO: Using index buffer when drawing not yet implemented",
-		           "StelGLRenderer::drawVertexBufferBackend");
+		Q_ASSERT_X(indexBuffer == NULL, "StelQGL2Renderer::drawVertexBufferBackend",
+		           "TODO: Using index buffer when drawing not yet implemented");
 
 		//TODO Projection using StelProjector 
 		//TODO IndexBuffer 
@@ -271,8 +279,8 @@ protected:
 		StelTestQGL2VertexBufferBackend* backend =
 			dynamic_cast<StelTestQGL2VertexBufferBackend*>(vertexBuffer);
 		Q_ASSERT_X(backend != NULL,
-		           "StelGLRenderer: Trying to draw a vertex buffer created by a different "
-		           "renderer backend", "StelGLRenderer::drawVertexBufferBackend");
+		           "StelQGL2Renderer: kTrying to draw a vertex buffer created by a different "
+		           "renderer backend", "StelQGL2Renderer::drawVertexBufferBackend");
 
 		// GL setup before drawing.
 
@@ -290,8 +298,8 @@ protected:
 		}
 		else
 		{
-			Q_ASSERT_X(projector == NULL, "TODO: Projection when drawing not yet implemented",
-			           "StelGLRenderer::drawVertexBufferBackend");
+			Q_ASSERT_X(projector == NULL, "StelQGL2Renderer::drawVertexBufferBackend",
+			           "TODO: Projection when drawing not yet implemented");
 		}
 
 		// Need to transpose the matrix for GL.
@@ -308,8 +316,8 @@ protected:
 
 	virtual void invariant()
 	{
-		Q_ASSERT_X(initialized, "StelQGL2Renderer::invariant()", 
-		           "uninitialized StelQGL2Renderer");
+		Q_ASSERT_X(initialized, "uninitialized StelQGL2Renderer", 
+		           "StelQGL2Renderer::invariant");
 		StelQGLRenderer::invariant();
 	}
 	
