@@ -26,7 +26,6 @@
 #endif
 
 #include <QFont>
-#include "StelShader.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
 #include "Planet.hpp"
@@ -177,6 +176,12 @@ public slots:
 	//! Translate names. (public so that SolarSystemEditor can call it).
 	void updateI18n();
 
+	//! Get the V magnitude for Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @param withExtinction the flag for use extinction effect for magnitudes (default not use)
+	//! @return a magnitude
+	float getPlanetVMagnitude(QString planetName, bool withExtinction=false) const;
+
 public:
 	///////////////////////////////////////////////////////////////////////////
 	// Other public methods
@@ -223,9 +228,7 @@ public:
 
 	//! Get the list of all the bodies of the solar system.
 	//! \deprecated Used in LandscapeMgr::update(), but commented out.
-	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}
-
-	StelShader* nMapShader;
+	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}	
 
 private slots:
 	//! Called when a new object is selected.

@@ -147,6 +147,9 @@ public slots:
 	void increaseScriptSpeed();
 	void decreaseScriptSpeed();
 	void setRealScriptSpeed();
+	void stopScript();
+	void pauseScript();
+	void resumeScript();
 	#endif
 
 	//! Hide or show the GUI.  Public so it can be called from scripts.
@@ -171,6 +174,7 @@ private slots:
 	void azimuthalGridDisplayedUpdated(const bool displayed);
 	void equatorGridDisplayedUpdated(const bool displayed);
 	void equatorJ2000GridDisplayedUpdated(const bool displayed);
+	void eclipticJ2000GridDisplayedUpdated(const bool displayed);
 	void galacticGridDisplayedUpdated(const bool displayed);
 	void equatorLineDisplayedUpdated(const bool displayed);
 	void eclipticLineDisplayedUpdated(const bool displayed);

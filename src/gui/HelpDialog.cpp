@@ -69,6 +69,10 @@ HelpDialog::HelpDialog()
 #endif
 
 	group = N_("When a Script is Running");
+
+	setKey(group, "", "4", N_("Stop currently running script"));
+	setKey(group, "", "5", N_("Pause script execution"));
+	setKey(group, "", "6", N_("Resume script execution"));
 	setKey(group, "", "J", N_("Slow down the script execution rate"));
 	setKey(group, "", "L", N_("Speed up the script execution rate"));
 	setKey(group, "", "K", N_("Set the normal script execution rate"));
