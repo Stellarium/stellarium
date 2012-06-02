@@ -29,8 +29,8 @@ class QThread;
 
 
 //! @class StelTextureMgr
-//! Manage textures loading.
-//! It provides method for loading images in a separate thread.
+//! Manage texture loading.
+//! Provides a method for loading images in a separate thread.
 class StelTextureMgr : QObject
 {
 public:
@@ -45,26 +45,23 @@ public:
 	//! @param filename the texture file name, can be absolute path if starts with '/' otherwise
 	//!    the file will be looked in stellarium standard textures directories.
 	//! @param params the texture creation parameters.
+	//! @return NULL if filename is empty or on failure.
 	StelTextureSP createTexture(const QString& filename, const StelTextureParams& params=StelTextureParams());
 
 	//! Load an image from a file and create a new texture from it in a new thread.
 	//! @param url the texture file name or URL, can be absolute path if starts with '/' otherwise
 	//!    the file will be looked in stellarium standard textures directories.
 	//! @param params the texture creation parameters.
-	//! @param fileExtension the file extension to assume. If not set the extension is determined from url
 	//! @param lazyLoading define whether the texture should be actually loaded only when needed, i.e. when bind() is called the first time.
-	StelTextureSP createTextureThread(const QString& url, const StelTextureParams& params=StelTextureParams(), const QString& fileExtension=QString(), bool lazyLoading=true);
+	//! @return NULL if filename is empty or on failure.
+	StelTextureSP createTextureThread(const QString& url, const StelTextureParams& params=StelTextureParams(), bool lazyLoading=true);
 
 private:
-	friend class StelTexture;
-	friend class ImageLoader;
-
-	//! A thread that is used by the TextureLoader object to avoid pausing the main thread too long.
+	//! A thread used by the TextureLoader object to avoid pausing the main thread too long.
 	QThread* loaderThread;
 
 	//! StelRenderer used to handle platform-specific texture functionality.
 	class StelRenderer* renderer;
 };
-
 
 #endif // _STELTEXTUREMGR_HPP_
