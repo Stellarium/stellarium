@@ -7,6 +7,8 @@
 
 #include "StelVertexBuffer.hpp"
 #include "StelViewportEffect.hpp"
+#include "StelTextureBackend.hpp"
+#include "StelTextureParams.hpp"
 
 
 //Development notes:
@@ -97,6 +99,14 @@ public:
 		drawVertexBufferBackend(vertexBuffer->backend, indexBuffer, projector);
 	}
 	
+	//! Bind a texture (following draw calls will use this texture on specified texture unit).
+	//!
+	//! @param  textureBackend Texture to bind.
+	//! @param  textureUnit Texture unit to use. 
+	//!                     If multitexturing is not supported, 
+	//!                     binds to texture units other than 0 are ignored.
+	virtual void bindTexture(class StelTextureBackend* textureBackend, const int textureUnit) = 0;
+
 	//! Start using drawing calls.
 	virtual void startDrawing() = 0;
 	
@@ -109,6 +119,39 @@ public:
 	//! Draw the result of drawing commands to the window, applying given effect if possible.
 	virtual void drawWindow(StelViewportEffect* effect) = 0;
 	
+	//! Create a StelTextureBackend from specified file or URL.
+	//!
+	//! @param  filename    File name or URL of the image to load the texture from.
+	//!                     If it's a file and it's not found, it's searched for in
+	//!                     the textures/ directory. Some renderer backends might also 
+	//!                     support compressed textures with custom file formats.
+	//!                     These backend-specific files should
+	//!                     not be used as filename - instead, if a compressed
+	//!                     texture with the same file name but different extensions
+	//!                     exists, it will be used.
+	//!                     E.g. the GLES backend prefers a .pvr version of a texture
+	//!                     if it exists.
+	//! @param  params      Texture parameters, such as filtering, wrapping, etc.
+	//! @param  loadingMode Texture loading mode to use. Normal immediately loads
+	//!                     the texture, Asynchronous starts loading it in a background
+	//!                     thread and LazyAsynchronous starts loading it when it's
+	//!                     first needed.
+	//!
+	//! @return New texture backend on success, or NULL on failure.
+	StelTextureBackend* createTextureBackend
+		(const QString& filename, const StelTextureParams& params, 
+		 TextureLoadingMode loadingMode)
+	{
+		//This function tests preconditions and calls implementation.
+		Q_ASSERT_X(!filename.endsWith(".pvr"), 
+		           "Renderer::createTextureBackend",
+		           "createTextureBackend() can't load a PVR texture directly, as PVR "
+		           "support may not be implemented by all Renderer backends. Request "
+		           "a non-PVR texture, and if a PVR version exists and the backend "
+		           "supports it, it will be loaded.");
+		return createTextureBackend_(filename, params, loadingMode);
+	}
+
 protected:
 	//! Create a vertex buffer backend. Used by createVertexBuffer.
 	//!
@@ -123,16 +166,17 @@ protected:
 
 	//! Draw contents of a vertex buffer (backend). Used by drawVertexBufferBackend.
 	//!
-	//! @param vertexBuffer Vertex buffer backend to draw.
-	//! @param indexBuffer  Index buffer specifying which vertices from the buffer to draw.
-	//!                     If NULL, indexing will not be used and vertices will be drawn
-	//!                     directly in order they are in the buffer.
-	//! @param projector    Projector to project vertices' positions before drawing.
-	//!                     If NULL, no projection will be done and the vertices will be drawn
-	//!                     directly.
+	//! @see drawVertexBufferBackend
 	virtual void drawVertexBufferBackend(StelVertexBufferBackend* vertexBuffer, 
 	                                     class StelIndexBuffer* indexBuffer,
 	                                     StelProjectorP projector) = 0;
+
+	//! Implementation of createTextureBackend_
+	//!
+	//! @see createTextureBackend
+	virtual class StelTextureBackend* createTextureBackend_
+		(const QString& filename, const StelTextureParams& params, 
+		 TextureLoadingMode loadingMode) = 0;
 };
 
 #endif // _STELRENDERER_HPP_

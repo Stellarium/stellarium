@@ -175,7 +175,9 @@ void StelMainGraphicsView::init(QSettings* conf)
 {
 	// GL-REFACTOR: Once we have GL2 and GL1 implementations, this code should
 	// try to init StelQGL2Renderer, and if that fails, init a StelQGL1Renderer.
-	renderer = new StelQGL2Renderer(this);
+	//
+	// TODO: On hardware with .pvr texture support, the second argument should be true
+	renderer = new StelQGL2Renderer(this, false);
 	if(!renderer->init())
 	{
 		Q_ASSERT_X(false, "StelMainGraphicsView::init", 

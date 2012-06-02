@@ -135,6 +135,7 @@ SET(stellarium_lib_SRCS
 
 	core/renderer/StelRenderer.hpp
 	core/renderer/StelGLRenderer.hpp
+	core/renderer/StelQGLRenderer.cpp
 	core/renderer/StelQGLRenderer.hpp
 	core/renderer/StelQGL2Renderer.hpp
 	
@@ -149,6 +150,10 @@ SET(stellarium_lib_SRCS
 	core/renderer/StelTestQGL2VertexBufferBackend.cpp
 	core/renderer/StelTestQGL2VertexBufferBackend.hpp
 	core/renderer/StelTextureParams.hpp
+	core/renderer/StelTextureBackend.hpp
+	core/renderer/StelQGLTextureBackend.cpp
+	core/renderer/StelQGLTextureBackend.hpp
+	core/renderer/StelTextureLoader.hpp
 
 	${gl_lib_SRCS}
 	core/external/fixx11h.h
@@ -371,6 +376,9 @@ SET(stellarium_MOC_HDRS
 	core/StelSkyLayer.hpp
 	core/StelSkyCultureMgr.hpp
 	core/SimbadSearcher.hpp
+	core/renderer/StelTextureBackend.hpp
+	core/renderer/StelQGLTextureBackend.hpp
+	core/renderer/StelTextureLoader.hpp
 	core/modules/ConstellationMgr.hpp
 	core/modules/GridLinesMgr.hpp
 	core/modules/LabelMgr.hpp
