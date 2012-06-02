@@ -471,7 +471,7 @@ void Pulsars::restoreDefaultConfigIni(void)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Pulsars");
 
-	// delete all existing Exoplanets settings...
+	// delete all existing Pulsars settings...
 	conf->remove("");
 
 	conf->setValue("distribution_enabled", false);

@@ -99,9 +99,9 @@ public:
 	//! plugin.
 	virtual bool configureGui(bool show=true);
 
-	//! Set up the plugin with default values.  This means clearing out the Exoplanets section in the
+	//! Set up the plugin with default values.  This means clearing out the Pulsars section in the
 	//! main config.ini (if one already exists), and populating it with default values.  It also
-	//! creates the default exoplanets.json file from the resource embedded in the plugin lib/dll file.
+	//! creates the default pulsars.json file from the resource embedded in the plugin lib/dll file.
 	void restoreDefaults(void);
 
 	//! Read (or re-read) settings from the main config file.  This will be called from init and also
