@@ -163,12 +163,12 @@ private:
 	//! read the json file and create list of Pulsars.
 	void readJsonFile(void);
 
-	//! Creates a backup of the Pulsars.json file called catalog.json.old
+	//! Creates a backup of the pulsars.json file called pulsars.json.old
 	//! @param deleteOriginal if true, the original file is removed, else not
 	//! @return true on OK, false on failure
 	bool backupJsonFile(bool deleteOriginal=false);
 
-	//! Get the version from the "version" value in the catalog.json file
+	//! Get the version from the "version" value in the pulsars.json file
 	//! @return version string, e.g. "2"
 	int getJsonFileVersion(void);
 
