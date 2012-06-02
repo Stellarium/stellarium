@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-02 18:28+0700\n"
+"POT-Creation-Date: 2012-06-02 18:38+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -371,6 +371,7 @@ msgid "Contact"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:658
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
 msgid "Author"
 msgstr ""
 
@@ -4015,6 +4016,7 @@ msgid "Stellarium Satellites Plugin"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
 msgid "Version"
 msgstr ""
 
@@ -5616,16 +5618,8 @@ msgstr ""
 msgid "Pulsars Plug-in"
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
-msgid "Version:"
-msgstr ""
-
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
-msgid "Author:"
-msgstr ""
-
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:111
-msgid "Homepage:"
+msgid "Homepage"
 msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:115
@@ -5637,7 +5631,7 @@ msgid ""
 msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
-msgid "Note:"
+msgid "Note"
 msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120

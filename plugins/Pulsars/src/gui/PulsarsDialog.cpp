@@ -106,17 +106,17 @@ void PulsarsDialog::setAboutHtml(void)
 {
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Pulsars Plug-in") + "</h2><table width=\"90%\">";
-	html += "<tr width=\"30%\"><td>" + q_("Version:") + "</td><td>" + PULSARS_PLUGIN_VERSION + "</td></tr>";
-	html += "<tr><td>" + q_("Author:") + "</td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
-	html += "<tr width=\"30%\"><td>" + q_("Homepage:") + "</td><td><a href='http://stellarium.org/wiki/index.php/Pulsars_plugin'>http://stellarium.org/wiki/index.php/Pulsars_plugin</a></td></tr>";
+	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + PULSARS_PLUGIN_VERSION + "</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr width=\"30%\"><td><strong>" + q_("Homepage") + ":</strong></td><td><a href='http://stellarium.org/wiki/index.php/Pulsars_plugin'>http://stellarium.org/wiki/index.php/Pulsars_plugin</a></td></tr>";
 	html += "</table>";
 
 	html += "<p>" + q_("This plugin plots the position of various pulsars, with object information about each one.") + "</p>";
 	html += "<p>" + QString(q_("Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) (%1astro-ph/0412641%2))."))
 			.arg("<a href='http://arxiv.org/abs/astro-ph/0412641'>")
 			.arg("</a>") + "</p>";
-	html += "<p>" + QString("<strong>%1</strong> %2")
-			.arg(q_("Note:"))
+	html += "<p>" + QString("<strong>%1:</strong> %2")
+			.arg(q_("Note"))
 			.arg(q_("pulsar identifiers have the prefix 'PSR'")) + "</p>";
 	html += "</body></html>";
 
