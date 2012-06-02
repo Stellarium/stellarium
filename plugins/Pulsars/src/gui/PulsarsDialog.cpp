@@ -111,6 +111,7 @@ void PulsarsDialog::setAboutHtml(void)
 	html += "<tr width=\"30%\"><td><strong>" + q_("Homepage") + ":</strong></td><td><a href='http://stellarium.org/wiki/index.php/Pulsars_plugin'>http://stellarium.org/wiki/index.php/Pulsars_plugin</a></td></tr>";
 	html += "</table>";
 
+	html += "<h3>" + q_("Description") + "</h3>";
 	html += "<p>" + q_("This plugin plots the position of various pulsars, with object information about each one.") + "</p>";
 	html += "<p>" + QString(q_("Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) (%1astro-ph/0412641%2))."))
 			.arg("<a href='http://arxiv.org/abs/astro-ph/0412641'>")
@@ -118,6 +119,20 @@ void PulsarsDialog::setAboutHtml(void)
 	html += "<p>" + QString("<strong>%1:</strong> %2")
 			.arg(q_("Note"))
 			.arg(q_("pulsar identifiers have the prefix 'PSR'")) + "</p>";
+	html += "<h3>" + q_("Acknowledgment") + "</h3>";
+	html += "<p>" + q_("We thank the following people for their contribution and of the valuable comments:") + "</p><ul>";
+	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)")
+			.arg(q_("Vladimir Samodourov"))
+			.arg("http://www.prao.ru/")
+			.arg(q_("Pushchino Radio Astronomy Observatory"))
+			.arg(q_("in Russia")) + "</li>";
+	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)")
+			.arg(q_("Maciej Serylak"))
+			.arg("http://www.obs-nancay.fr/")
+			.arg(q_("Nancay Radioastronomical Observatory"))
+			.arg(q_("in France")) + "</li>";
+	html += "</ul><h3>" + q_("How you can help") + "</h3>";
+	html += "<p>" + q_("We are welcome bug reports, feature requests and feedback through the usual channels (trackers, forums and so on).") + "</p>";
 	html += "</body></html>";
 
 	ui->aboutTextBrowser->setHtml(html);
