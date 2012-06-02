@@ -121,6 +121,8 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	Vec3f xy;
 
 	float shift = sPainter.getFontMetrics().width(sNorth)/2;
+	if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
+		shift = 0;
 
 	// N for North
 	pos.set(-1.f, 0.f, 0.f);
