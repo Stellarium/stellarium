@@ -678,9 +678,7 @@ void ConfigurationDialog::runScriptClicked(void)
 
 void ConfigurationDialog::stopScriptClicked(void)
 {
-	GETSTELMODULE(LabelMgr)->deleteAllLabels();
-	GETSTELMODULE(ScreenImageMgr)->deleteAllImages();	
-	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();	
+	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();
 }
 
 void ConfigurationDialog::aScriptIsRunning(void)

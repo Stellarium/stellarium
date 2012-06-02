@@ -21,6 +21,8 @@
 
 #include "StelScriptMgr.hpp"
 #include "StelMainScriptAPI.hpp"
+#include "StelModuleMgr.hpp"
+#include "LabelMgr.hpp"
 #include "ScreenImageMgr.hpp"
 
 #include "StelApp.hpp"
@@ -291,8 +293,7 @@ const QString StelScriptMgr::getDescription(const QString& s)
 	}
 }
 
-// Run the script located at the given location
-bool StelScriptMgr::runScript(const QString& fileName, const QString& includePath)
+bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript)
 {
 	if (engine.isEvaluating())
 	{
@@ -301,6 +302,26 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 		qWarning() << msg;
 		return false;
 	}
+	// Seed the PRNG so that script random numbers aren't always the same sequence
+	qsrand(QDateTime::currentDateTime().toTime_t());
+
+	// Make sure that the gui object have been completely initialized (there used to be problems with startup scripts).
+	Q_ASSERT(StelApp::getInstance().getGui());
+
+	engine.globalObject().setProperty("scriptRateReadOnly", 1.0);
+
+	// Notify that the script starts here
+	emit(scriptRunning());
+
+	// run that script
+	engine.evaluate(preprocessedScript);
+	scriptEnded();
+	return true;
+}
+
+// Run the script located at the given location
+bool StelScriptMgr::runScript(const QString& fileName, const QString& includePath)
+{
 	QString absPath;
 	QString scriptDir;
 	try
@@ -331,20 +352,8 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 	scriptFileName = fileName;
 	if (!includePath.isEmpty())
 		scriptDir = includePath;
-
-	// Seed the PRNG so that script random numbers aren't always the same sequence
-	qsrand(QDateTime::currentDateTime().toTime_t());
-
-	// Make sure that the gui object have been completely initialized (there used to be problems with startup scripts).
-	Q_ASSERT(StelApp::getInstance().getGui());
-
-	engine.globalObject().setProperty("scriptRateReadOnly", 1.0);
-	
-	// Notify that the script starts here although we still have to preprocess it.
-	emit(scriptRunning());
-	
 	QString preprocessedScript;
-	bool ok=false;
+	bool ok = false;
 	if (fileName.endsWith(".ssc"))
 		ok = preprocessScript(fic, preprocessedScript, scriptDir);
 #ifdef ENABLE_STRATOSCRIPT_COMPAT
@@ -353,20 +362,17 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 #endif
 	if (!ok)
 	{
-		scriptEnded();
 		return false;
 	}
-	
-	// run that script
-	engine.evaluate(preprocessedScript);
-	scriptEnded();
-	return true;
+	return runPreprocessedScript(preprocessedScript);
 }
 
 void StelScriptMgr::stopScript()
 {
 	if (engine.isEvaluating())
 	{
+		GETSTELMODULE(LabelMgr)->deleteAllLabels();
+		GETSTELMODULE(ScreenImageMgr)->deleteAllImages();
 		if (agent->getPauseScript()) {
 			agent->setPauseScript(false);
 		}
@@ -452,12 +458,12 @@ bool StelScriptMgr::strToBool(const QString& str)
 	return QVariant(str).toBool();
 }
 
-bool StelScriptMgr::preprocessScript(QFile& input, QString& output, const QString& scriptDir)
+bool StelScriptMgr::preprocessScript(QString &input, QString &output, const QString &scriptDir)
 {
+	QStringList lines = input.split("\n", QString::SkipEmptyParts);
 	QRegExp includeRe("^include\\s*\\(\\s*\"([^\"]+)\"\\s*\\)\\s*;\\s*(//.*)?$");
-	while (!input.atEnd())
+	foreach (QString line, lines)
 	{
-		QString line = QString::fromUtf8(input.readLine());
 		if (includeRe.exactMatch(line))
 		{
 			QString fileName = includeRe.capturedTexts().at(1);
@@ -501,6 +507,13 @@ bool StelScriptMgr::preprocessScript(QFile& input, QString& output, const QStrin
 		}
 	}
 	return true;
+}
+
+
+bool StelScriptMgr::preprocessScript(QFile& input, QString& output, const QString& scriptDir)
+{
+	QString s(input.readAll());
+	return preprocessScript(s, output, scriptDir);
 }
 
 StelScriptEngineAgent::StelScriptEngineAgent(QScriptEngine *engine) 
