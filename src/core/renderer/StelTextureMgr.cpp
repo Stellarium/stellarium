@@ -18,7 +18,7 @@
  */
 
 #include "StelApp.hpp"
-#include "StelTextureMgr.hpp"
+#include "renderer/StelTextureMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelPainter.hpp"
 #include <QtOpenGL>
@@ -33,9 +33,9 @@
 #include <QGLFormat>
 #include <cstdlib>
 
-#include "renderer/StelRenderer.hpp"
+#include "StelRenderer.hpp"
 #include "renderer/StelTextureBackend.hpp"
-#include "renderer/StelGLUtilityFunctions.hpp"
+#include "StelGLUtilityFunctions.hpp"
 
 StelTextureMgr::StelTextureMgr(StelRenderer* renderer)
 	: renderer(renderer)

@@ -21,7 +21,7 @@
 #define _STELTEXTUREMGR_HPP_
 
 #include <QtOpenGL>
-#include "StelTexture.hpp"
+#include "renderer/StelTexture.hpp"
 #include <QObject>
 
 class QNetworkReply;

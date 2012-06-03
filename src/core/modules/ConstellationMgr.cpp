@@ -31,7 +31,7 @@
 #include "StarMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
-#include "StelTextureMgr.hpp"
+#include "renderer/StelTextureMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"

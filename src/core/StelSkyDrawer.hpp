@@ -20,7 +20,7 @@
 #ifndef _STELSKYDRAWER_HPP_
 #define _STELSKYDRAWER_HPP_
 
-#include "StelTextureTypes.hpp"
+#include "renderer/StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 #include "VecMath.hpp"
 #include "RefractionExtinction.hpp"

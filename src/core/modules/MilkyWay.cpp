@@ -19,13 +19,13 @@
 
 #include "MilkyWay.hpp"
 #include "StelFader.hpp"
-#include "StelTexture.hpp"
+#include "renderer/StelTexture.hpp"
 #include "StelUtils.hpp"
 
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
 #include "StelApp.hpp"
-#include "StelTextureMgr.hpp"
+#include "renderer/StelTextureMgr.hpp"
 #include "StelCore.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelPainter.hpp"

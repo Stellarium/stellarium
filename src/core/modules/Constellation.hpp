@@ -28,7 +28,7 @@
 #include "StelObject.hpp"
 #include "StelUtils.hpp"
 #include "StelFader.hpp"
-#include "StelTextureTypes.hpp"
+#include "renderer/StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
 
 class StarMgr;

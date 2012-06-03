@@ -31,11 +31,11 @@
 #include "StelApp.hpp"
 #include "NebulaMgr.hpp"
 #include "Nebula.hpp"
-#include "StelTexture.hpp"
+#include "renderer/StelTexture.hpp"
 
 #include "StelSkyDrawer.hpp"
 #include "StelTranslator.hpp"
-#include "StelTextureMgr.hpp"
+#include "renderer/StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"

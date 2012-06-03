@@ -91,11 +91,6 @@ SET(stellarium_lib_SRCS
 	core/StelPluginInterface.hpp
 	core/StelSkyCultureMgr.cpp
 	core/StelSkyCultureMgr.hpp
-	core/StelTextureMgr.cpp
-	core/StelTextureMgr.hpp
-	core/StelTexture.cpp
-	core/StelTexture.hpp
-	core/StelTextureTypes.hpp
 	core/StelToneReproducer.cpp
 	core/StelToneReproducer.hpp
 	core/StelSkyLayerMgr.cpp
@@ -154,6 +149,12 @@ SET(stellarium_lib_SRCS
 	core/renderer/StelQGLTextureBackend.cpp
 	core/renderer/StelQGLTextureBackend.hpp
 	core/renderer/StelTextureLoader.hpp
+
+	core/renderer/StelTextureMgr.cpp
+	core/renderer/StelTextureMgr.hpp
+	core/renderer/StelTexture.cpp
+	core/renderer/StelTexture.hpp
+	core/renderer/StelTextureTypes.hpp
 
 	${gl_lib_SRCS}
 	core/external/fixx11h.h
@@ -366,7 +367,6 @@ SET(stellarium_MOC_HDRS
 	core/StelLocationMgr.hpp
 	core/StelCore.hpp
 	core/StelAppGraphicsWidget.hpp
-	core/StelTexture.hpp
 	core/StelMovementMgr.hpp
 	core/MultiLevelJsonBase.hpp
 	core/StelSkyImageTile.hpp
@@ -379,6 +379,7 @@ SET(stellarium_MOC_HDRS
 	core/renderer/StelTextureBackend.hpp
 	core/renderer/StelQGLTextureBackend.hpp
 	core/renderer/StelTextureLoader.hpp
+	core/renderer/StelTexture.hpp
 	core/modules/ConstellationMgr.hpp
 	core/modules/GridLinesMgr.hpp
 	core/modules/LabelMgr.hpp

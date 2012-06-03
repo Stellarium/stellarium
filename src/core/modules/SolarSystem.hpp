@@ -28,7 +28,7 @@
 #include <QFont>
 #include "StelShader.hpp"
 #include "StelObjectModule.hpp"
-#include "StelTextureTypes.hpp"
+#include "renderer/StelTextureTypes.hpp"
 #include "Planet.hpp"
 
 class Orbit;

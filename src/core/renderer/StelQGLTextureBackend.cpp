@@ -3,7 +3,7 @@
 #include "StelQGLTextureBackend.hpp"
 #include "StelQGLRenderer.hpp"
 #include "StelGLUtilityFunctions.hpp"
-#include "StelTextureLoader.hpp"
+#include "renderer/StelTextureLoader.hpp"
 
 
 //! Get QGL bind options corresponding to specified StelTextureParams.

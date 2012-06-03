@@ -20,7 +20,7 @@
 #ifndef _STELLOADINGBAR_HPP_
 #define _STELLOADINGBAR_HPP_
 
-#include "StelTextureTypes.hpp"
+#include "renderer/StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 #include "VecMath.hpp"
 

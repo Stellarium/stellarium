@@ -68,7 +68,7 @@ enum TextureLoadingMode
 //! and its state changes to Loaded on success or Error if loading failed. 
 //!
 //! The loading stage (and no other stage) might fail, resulting in Error 
-//! state. If in Error state, error message can be retrieved by ErrorMessage.
+//! state. If in Error state, error message can be retrieved by getErrorMessage.
 //!
 //! If load mode is Asynchronous, the texture is loaded in background 
 //! thread, and during loading its state is Loading. Again, loading might
