@@ -30,7 +30,6 @@
 #include <QVarLengthArray>
 #include <QDateTime>
 
-#include <GLee.h>
 #include "StelShader.hpp"
 
 #include "StelApp.hpp"

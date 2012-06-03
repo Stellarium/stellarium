@@ -34,7 +34,7 @@
 #include <cstdlib>
 
 #include "StelRenderer.hpp"
-#include "renderer/StelTextureBackend.hpp"
+#include "StelTextureBackend.hpp"
 #include "StelGLUtilityFunctions.hpp"
 
 StelTextureMgr::StelTextureMgr(StelRenderer* renderer)

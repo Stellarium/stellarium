@@ -20,9 +20,10 @@
 #ifndef _STELTEXTUREMGR_HPP_
 #define _STELTEXTUREMGR_HPP_
 
-#include <QtOpenGL>
-#include "renderer/StelTexture.hpp"
 #include <QObject>
+#include <QtOpenGL>
+
+#include "StelTexture.hpp"
 
 class QNetworkReply;
 class QThread;

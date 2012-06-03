@@ -1,11 +1,11 @@
 #ifndef _STELGLUTILITYFUNCTIONS_HPP_
 #define _STELGLUTILITYFUNCTIONS_HPP_
 
-#include <QString>
 #include <QGLContext>
+#include <QString>
 
+#include "StelTextureParams.hpp"
 #include "StelVertexAttribute.hpp"
-#include "renderer/StelTextureParams.hpp"
 #include "StelVertexBuffer.hpp"
 
 

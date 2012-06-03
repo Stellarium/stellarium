@@ -6,9 +6,8 @@
 #include <QPainter>
 #include <QSize>
 
-#include "StelRenderer.hpp"
-
 #include "StelGLUtilityFunctions.hpp"
+#include "StelRenderer.hpp"
 #include "StelVertexBuffer.hpp"
 #include "StelTestQGL2VertexBufferBackend.hpp"
 
