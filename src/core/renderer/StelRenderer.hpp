@@ -7,8 +7,8 @@
 
 #include "StelVertexBuffer.hpp"
 #include "StelViewportEffect.hpp"
-#include "StelTextureBackend.hpp"
-#include "StelTextureParams.hpp"
+#include "renderer/StelTextureBackend.hpp"
+#include "renderer/StelTextureParams.hpp"
 
 
 //Development notes:

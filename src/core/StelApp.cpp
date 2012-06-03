@@ -21,7 +21,7 @@
 
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
-#include "StelTextureMgr.hpp"
+#include "renderer/StelTextureMgr.hpp"
 #include "StelLoadingBar.hpp"
 #include "StelObjectMgr.hpp"
 #include "ConstellationMgr.hpp"

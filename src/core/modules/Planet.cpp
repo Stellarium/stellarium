@@ -35,14 +35,14 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelTexture.hpp"
+#include "renderer/StelTexture.hpp"
 #include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 
 #include "StelProjector.hpp"
 #include "sideral_time.h"
-#include "StelTextureMgr.hpp"
+#include "renderer/StelTextureMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StarMgr.hpp"
 #include "StelMovementMgr.hpp"

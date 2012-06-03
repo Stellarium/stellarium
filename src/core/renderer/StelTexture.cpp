@@ -17,7 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelTexture.hpp"
+#include "renderer/StelTexture.hpp"
 
 StelTexture::StelTexture(StelTextureBackend* backend, StelRenderer* renderer) 
 	: textureBackend(backend)

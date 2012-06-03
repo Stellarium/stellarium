@@ -22,8 +22,8 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
-#include "StelTexture.hpp"
-#include "StelTextureMgr.hpp"
+#include "renderer/StelTexture.hpp"
+#include "renderer/StelTextureMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 

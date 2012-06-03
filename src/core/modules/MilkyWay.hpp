@@ -22,7 +22,7 @@
 
 #include "StelModule.hpp"
 #include "VecMath.hpp"
-#include "StelTextureTypes.hpp"
+#include "renderer/StelTextureTypes.hpp"
 
 //! @class MilkyWay 
 //! Manages the displaying of the Milky Way.

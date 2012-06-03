@@ -17,12 +17,12 @@
  */
 
 #include "renderer/StelTextureParams.hpp"
-#include "StelTextureMgr.hpp"
+#include "renderer/StelTextureMgr.hpp"
 #include "StelSkyImageTile.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
-#include "StelTexture.hpp"
+#include "renderer/StelTexture.hpp"
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
 #include "StelCore.hpp"
