@@ -2,8 +2,8 @@
 #define _STELVERTEXBUFFER_HPP_
 
 #include "core/VecMath.hpp"
-#include "StelVertexBufferBackend.hpp"
 #include "StelVertexAttribute.hpp"
+#include "StelVertexBufferBackend.hpp"
 
 
 //! Graphics primitive types. 

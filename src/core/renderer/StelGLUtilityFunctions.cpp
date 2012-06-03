@@ -1,7 +1,7 @@
 #include <QDebug>
 
-#include "StelGLUtilityFunctions.hpp"
 #include "StelFileMgr.hpp"
+#include "StelGLUtilityFunctions.hpp"
 
 
 
