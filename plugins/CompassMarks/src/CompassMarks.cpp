@@ -121,12 +121,12 @@ void CompassMarks::init()
 		pxmapOnIcon = new QPixmap(":/compassMarks/bt_compass_on.png");
 		pxmapOffIcon = new QPixmap(":/compassMarks/bt_compass_off.png");
 
-		gui->addGuiActions("actionShow_Compass_Marks", N_("Compass marks"), "", N_("Plugin Key Bindings"), true, false);
-		gui->getGuiActions("actionShow_Compass_Marks")->setChecked(markFader);
-		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiActions("actionShow_Compass_Marks"));
+		gui->addGuiAction("actionShow_Compass_Marks", N_("Compass marks"), "", N_("Plugin Key Bindings"), true, false);
+		gui->getGuiAction("actionShow_Compass_Marks")->setChecked(markFader);
+		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiAction("actionShow_Compass_Marks"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-		connect(gui->getGuiActions("actionShow_Compass_Marks"), SIGNAL(toggled(bool)), this, SLOT(setCompassMarks(bool)));
-		connect(gui->getGuiActions("actionShow_Cardinal_Points"), SIGNAL(toggled(bool)), this, SLOT(cardinalPointsChanged(bool)));
+		connect(gui->getGuiAction("actionShow_Compass_Marks"), SIGNAL(toggled(bool)), this, SLOT(setCompassMarks(bool)));
+		connect(gui->getGuiAction("actionShow_Cardinal_Points"), SIGNAL(toggled(bool)), this, SLOT(cardinalPointsChanged(bool)));
 		cardinalPointsState = false;
 	}
 	catch (std::runtime_error& e)
@@ -198,7 +198,7 @@ void CompassMarks::setCompassMarks(bool b)
 	{
 		// Using QActions instead of directly calling
 		// setFlagCardinalsPoints() in order to sync with the buttons
-		dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiActions("actionShow_Cardinal_Points")->trigger();
+		dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiAction("actionShow_Cardinal_Points")->trigger();
 	}
 }
 
@@ -211,7 +211,7 @@ void CompassMarks::cardinalPointsChanged(bool b)
 		if(markFader)
 		{
 			cardinalPointsState = false; // actionShow_Cardinal_Points should not be triggered again
-			dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiActions("actionShow_Compass_Marks")->trigger();
+			dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiAction("actionShow_Compass_Marks")->trigger();
 		}
 	}
 }

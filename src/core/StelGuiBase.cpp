@@ -53,7 +53,7 @@ void StelGuiBase::updateI18n()
 // Note: "text" and "helpGroup" must be in English -- this method and the help
 // dialog take care of translating them. Of course, they still have to be
 // marked for translation using the N_() macro.
-QAction* StelGuiBase::addGuiActions(const QString& actionName, const QString& text, const QString& shortcuts, const QString& helpGroup, bool checkable, bool autoRepeat, bool global)
+QAction* StelGuiBase::addGuiAction(const QString& actionName, const QString& text, const QString& shortcuts, const QString& helpGroup, bool checkable, bool autoRepeat, bool global)
 {
 	Q_UNUSED(helpGroup);
 	QAction* a;
@@ -83,7 +83,7 @@ QAction* StelGuiBase::addGuiActions(const QString& actionName, const QString& te
 	return a;
 }
 
-QAction* StelGuiBase::getGuiActions(const QString& actionName)
+QAction* StelGuiBase::getGuiAction(const QString& actionName)
 {
 	QAction* a = stelAppGraphicsWidget->findChild<QAction*>(actionName);
 	if (!a)

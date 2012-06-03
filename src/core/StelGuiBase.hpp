@@ -57,12 +57,12 @@ public:
 	//! @param checkable whether the action should be checkable
 	//! @param autoRepeat whether the action should be autorepeated
 	//! @param global whether the action should be global (affect in dialogs)
-	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortcuts, const QString& helpGroup, bool checkable=true, bool autoRepeat=false, bool global=false);
+	virtual QAction* addGuiAction(const QString& actionName, const QString& text, const QString& shortcuts, const QString& helpGroup, bool checkable=true, bool autoRepeat=false, bool global=false);
 
 	//! Get a pointer on an action managed by the GUI
 	//! @param actionName qt object name for this action
 	//! @return a pointer on the QAction object or NULL if don't exist
-	virtual QAction* getGuiActions(const QString& actionName);
+	virtual QAction* getGuiAction(const QString& actionName);
 
 	virtual void forceRefreshGui() {;}
 
@@ -94,7 +94,7 @@ public:
 	//! Get the instance of StelGuiBase implmenting the GUI.
 	virtual class StelGuiBase* getStelGuiBase() const = 0;
 };
-Q_DECLARE_INTERFACE(StelGuiPluginInterface, "stellarium.StelGuiPluginInterface/1.0");
+Q_DECLARE_INTERFACE(StelGuiPluginInterface, "stellarium.StelGuiPluginInterface/1.0")
 
 
 #endif // _STELGUIBASE_HPP_
