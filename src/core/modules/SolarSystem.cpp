@@ -20,14 +20,14 @@
  */
 
 #include "SolarSystem.hpp"
-#include "StelTexture.hpp"
+#include "renderer/StelTexture.hpp"
 #include "stellplanet.h"
 #include "Orbit.hpp"
 
 #include "StelProjector.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelTextureMgr.hpp"
+#include "renderer/StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"

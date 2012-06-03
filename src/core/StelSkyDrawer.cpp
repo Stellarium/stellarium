@@ -35,7 +35,7 @@
 #include "StelProjector.hpp"
 
 #include "StelToneReproducer.hpp"
-#include "StelTextureMgr.hpp"
+#include "renderer/StelTextureMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelUtils.hpp"

@@ -32,7 +32,7 @@
 #include "StelProjector.hpp"
 #include "VecMath.hpp"
 #include "StelFader.hpp"
-#include "StelTextureTypes.hpp"
+#include "renderer/StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 
 // The callback type for the external position computation function

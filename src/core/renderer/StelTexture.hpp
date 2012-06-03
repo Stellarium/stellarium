@@ -20,8 +20,8 @@
 #ifndef _STELTEXTURE_HPP_
 #define _STELTEXTURE_HPP_
 
-#include "StelTextureTypes.hpp"
-#include "renderer/StelRenderer.hpp"
+#include "renderer/StelTextureTypes.hpp"
+#include "StelRenderer.hpp"
 #include "renderer/StelTextureParams.hpp"
 #include "renderer/StelTextureBackend.hpp"
 

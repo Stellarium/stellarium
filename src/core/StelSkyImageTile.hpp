@@ -20,7 +20,7 @@
 #ifndef _STELSKYIMAGETILE_HPP_
 #define _STELSKYIMAGETILE_HPP_
 
-#include "StelTextureTypes.hpp"
+#include "renderer/StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
 #include "MultiLevelJsonBase.hpp"
 

@@ -24,7 +24,7 @@
 #include <QString>
 #include "StelObject.hpp"
 #include "StelTranslator.hpp"
-#include "StelTextureTypes.hpp"
+#include "renderer/StelTextureTypes.hpp"
 
 class StelPainter;
 class QDataStream;

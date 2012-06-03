@@ -27,7 +27,7 @@
 
 #include "StelFader.hpp"
 #include "StelUtils.hpp"
-#include "StelTextureTypes.hpp"
+#include "renderer/StelTextureTypes.hpp"
 #include "StelLocation.hpp"
 
 class QSettings;

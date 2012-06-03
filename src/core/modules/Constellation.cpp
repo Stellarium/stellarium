@@ -28,7 +28,7 @@
 #include "Constellation.hpp"
 #include "StarMgr.hpp"
 
-#include "StelTexture.hpp"
+#include "renderer/StelTexture.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"

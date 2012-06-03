@@ -20,7 +20,7 @@
 
 #include "Landscape.hpp"
 #include "StelApp.hpp"
-#include "StelTextureMgr.hpp"
+#include "renderer/StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
 #include "StelLocation.hpp"

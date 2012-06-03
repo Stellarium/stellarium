@@ -28,7 +28,7 @@
 #include "StelFader.hpp"
 #include "StelSphericalIndex.hpp"
 #include "StelObjectModule.hpp"
-#include "StelTextureTypes.hpp"
+#include "renderer/StelTextureTypes.hpp"
 
 class Nebula;
 class StelTranslator;

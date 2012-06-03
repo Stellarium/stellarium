@@ -31,7 +31,7 @@
 #include "StelProjector.hpp"
 #include "StarMgr.hpp"
 #include "StelObject.hpp"
-#include "StelTexture.hpp"
+#include "renderer/StelTexture.hpp"
 
 #include "StelUtils.hpp"
 #include "StelToneReproducer.hpp"
@@ -39,7 +39,7 @@
 #include "StelGeodesicGrid.hpp"
 #include "StelTranslator.hpp"
 #include "StelApp.hpp"
-#include "StelTextureMgr.hpp"
+#include "renderer/StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"

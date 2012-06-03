@@ -5,7 +5,7 @@
 #include <QGLContext>
 
 #include "StelVertexAttribute.hpp"
-#include "StelTextureParams.hpp"
+#include "renderer/StelTextureParams.hpp"
 #include "StelVertexBuffer.hpp"
 
 

@@ -24,11 +24,11 @@
 
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
-#include "StelTexture.hpp"
+#include "renderer/StelTexture.hpp"
 
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
-#include "StelTextureMgr.hpp"
+#include "renderer/StelTextureMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"

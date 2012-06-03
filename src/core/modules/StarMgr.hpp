@@ -24,7 +24,7 @@
 #include <QVariantMap>
 #include "StelFader.hpp"
 #include "StelObjectModule.hpp"
-#include "StelTextureTypes.hpp"
+#include "renderer/StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 
 class StelObject;
