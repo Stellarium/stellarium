@@ -66,7 +66,7 @@ Q_EXPORT_PLUGIN2(AngleMeasure, AngleMeasureStelPluginInterface)
 
 AngleMeasure::AngleMeasure()
 	: flagShowAngleMeasure(false), dragging(false),
-	  angleText(""), flagUseDmsFormat(false), toolbarButton(NULL)
+		angleText(""), flagUseDmsFormat(false), toolbarButton(NULL)
 {
 	setObjectName("AngleMeasure");
 	font.setPixelSize(16);
@@ -120,11 +120,11 @@ void AngleMeasure::init()
 	// Create action for enable/disable & hook up signals
 	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
 	Q_ASSERT(gui);
-	QAction* action = gui->addGuiActions("actionShow_Angle_Measure",
-	                                     N_("Angle measure"),
-	                                     "Ctrl+A",
-	                                     N_("Plugin Key Bindings"),
-	                                     true, false);
+	QAction* action = gui->addGuiAction("actionShow_Angle_Measure",
+																			N_("Angle measure"),
+																			"Ctrl+A",
+																			N_("Plugin Key Bindings"),
+																			true, false);
 	action->setChecked(flagShowAngleMeasure);
 	connect(action, SIGNAL(toggled(bool)), this, SLOT(enableAngleMeasure(bool)));
 
@@ -136,7 +136,7 @@ void AngleMeasure::init()
 	// Add a toolbar button
 	try
 	{
-		toolbarButton = new StelButton(NULL, QPixmap(":/angleMeasure/bt_anglemeasure_on.png"), QPixmap(":/angleMeasure/bt_anglemeasure_off.png"), QPixmap(":/graphicGui/glow32x32.png"), gui->getGuiActions("actionShow_Angle_Measure"));
+		toolbarButton = new StelButton(NULL, QPixmap(":/angleMeasure/bt_anglemeasure_on.png"), QPixmap(":/angleMeasure/bt_anglemeasure_off.png"), QPixmap(":/graphicGui/glow32x32.png"), gui->getGuiAction("actionShow_Angle_Measure"));
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
 	catch (std::runtime_error& e)
@@ -203,7 +203,7 @@ void AngleMeasure::draw(StelCore* core)
 
 void AngleMeasure::handleKeys(QKeyEvent* event)
 {
-		event->setAccepted(false);
+	event->setAccepted(false);
 }
 
 void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
@@ -267,27 +267,27 @@ bool AngleMeasure::handleMouseMoves(int x, int y, Qt::MouseButtons)
 
 void AngleMeasure::calculateEnds(void)
 {
-		Vec3d v0 = endPoint - startPoint;
-		Vec3d v1 = Vec3d(0,0,0) - startPoint;
-		Vec3d p = v0 ^ v1;
-		p *= 0.08;  // end width
-		perp1StartPoint.set(startPoint[0]-p[0],startPoint[1]-p[1],startPoint[2]-p[2]);
-		perp1EndPoint.set(startPoint[0]+p[0],startPoint[1]+p[1],startPoint[2]+p[2]);
+	Vec3d v0 = endPoint - startPoint;
+	Vec3d v1 = Vec3d(0,0,0) - startPoint;
+	Vec3d p = v0 ^ v1;
+	p *= 0.08;  // end width
+	perp1StartPoint.set(startPoint[0]-p[0],startPoint[1]-p[1],startPoint[2]-p[2]);
+	perp1EndPoint.set(startPoint[0]+p[0],startPoint[1]+p[1],startPoint[2]+p[2]);
 
-		v1 = Vec3d(0,0,0) - endPoint;
-		p = v0 ^ v1;
-		p *= 0.08;  // end width
-		perp2StartPoint.set(endPoint[0]-p[0],endPoint[1]-p[1],endPoint[2]-p[2]);
-		perp2EndPoint.set(endPoint[0]+p[0],endPoint[1]+p[1],endPoint[2]+p[2]);
+	v1 = Vec3d(0,0,0) - endPoint;
+	p = v0 ^ v1;
+	p *= 0.08;  // end width
+	perp2StartPoint.set(endPoint[0]-p[0],endPoint[1]-p[1],endPoint[2]-p[2]);
+	perp2EndPoint.set(endPoint[0]+p[0],endPoint[1]+p[1],endPoint[2]+p[2]);
 
-		unsigned int d, m;
-		double s;
-		bool sign;
-		StelUtils::radToDms(startPoint.angle(endPoint), sign, d, m, s);
-		if (flagUseDmsFormat)
-			angleText = QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
-		else
-			angleText = QString("%1%2 %3' %4\"").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2);
+	unsigned int d, m;
+	double s;
+	bool sign;
+	StelUtils::radToDms(startPoint.angle(endPoint), sign, d, m, s);
+	if (flagUseDmsFormat)
+		angleText = QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
+	else
+		angleText = QString("%1%2 %3' %4\"").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2);
 }
 
 void AngleMeasure::enableAngleMeasure(bool b)

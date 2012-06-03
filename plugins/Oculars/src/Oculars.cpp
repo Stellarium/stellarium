@@ -236,20 +236,20 @@ void Oculars::draw(StelCore* core)
 		// Ensure there is a selected ocular & telescope
 		if (selectedCCDIndex > ccds.count()) {
 			qWarning() << "Oculars: the selected sensor index of "
-						  << selectedCCDIndex << " is greater than the sensor count of "
-			<< ccds.count() << ". Module disabled!";
+								 << selectedCCDIndex << " is greater than the sensor count of "
+								 << ccds.count() << ". Module disabled!";
 			ready = false;
 		}
 		if (selectedOcularIndex > oculars.count()) {
 			qWarning() << "Oculars: the selected ocular index of "
-						  << selectedOcularIndex << " is greater than the ocular count of "
-			<< oculars.count() << ". Module disabled!";
+								 << selectedOcularIndex << " is greater than the ocular count of "
+								 << oculars.count() << ". Module disabled!";
 			ready = false;
 		}
 		else if (selectedTelescopeIndex > telescopes.count()) {
 			qWarning() << "Oculars: the selected telescope index of "
-						  << selectedTelescopeIndex << " is greater than the telescope count of "
-			<< telescopes.count() << ". Module disabled!";
+								 << selectedTelescopeIndex << " is greater than the telescope count of "
+								 << telescopes.count() << ". Module disabled!";
 			ready = false;
 		}
 		
@@ -526,10 +526,10 @@ void Oculars::init()
 	}
 	styleSheetFile.close();
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)),
-			  this, SLOT(setStelStyle(const QString&)));
+					this, SLOT(setStelStyle(const QString&)));
 	
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-	        this, SLOT(retranslateGui()));
+					this, SLOT(retranslateGui()));
 }
 
 void Oculars::setStelStyle(const QString&)
@@ -633,7 +633,7 @@ void Oculars::retranslateGui()
 	{
 		// TODO: Fix this hack!
 		
-		// Delete and re-create the panel to retranslate its trings 
+		// Delete and re-create the panel to retranslate its trings
 		guiPanel->hide();
 		delete guiPanel;
 		guiPanel = 0;
@@ -761,14 +761,14 @@ void Oculars::enableOcular(bool enableOcularMode)
 			int yPosition = projectorParams.viewportCenter[1];
 			yPosition = yPosition - 0.5 * (metrics.height());
 			usageMessageLabelID = labelManager->labelScreen(labelText, xPosition, yPosition,
-																			true, font.pixelSize(), "#99FF99");
+																											true, font.pixelSize(), "#99FF99");
 		}
 		// we didn't accept the new status - make sure the toolbar button reflects this
 		disconnect(actionShowOcular, SIGNAL(toggled(bool)),
-		           this, SLOT(enableOcular(bool)));
+							 this, SLOT(enableOcular(bool)));
 		actionShowOcular->setChecked(false);
 		connect(actionShowOcular, SIGNAL(toggled(bool)),
-		        this, SLOT(enableOcular(bool)));
+						this, SLOT(enableOcular(bool)));
 	} else {
 		if (selectedOcularIndex != -1) {
 			// remove the usage label if it is being displayed.
@@ -884,7 +884,7 @@ void Oculars::displayPopupMenu()
 		action->setCheckable(true);
 		action->setChecked(flagShowCrosshairs);
 		connect(action, SIGNAL(toggled(bool)),
-		        actionShowCrosshairs, SLOT(setChecked(bool))); 
+						actionShowCrosshairs, SLOT(setChecked(bool)));
 	} else {
 		// We are not in ocular mode
 		// We want to show the CCD's, and if a CCD is selected, the telescopes
@@ -893,7 +893,7 @@ void Oculars::displayPopupMenu()
 		action->setCheckable(true);
 		action->setChecked(ocularDialog->visible());
 		connect(action, SIGNAL(triggered(bool)),
-		        ocularDialog, SLOT(setVisible(bool)));
+						ocularDialog, SLOT(setVisible(bool)));
 		popup->addAction(action);
 		popup->addSeparator();
 
@@ -902,7 +902,7 @@ void Oculars::displayPopupMenu()
 			action->setCheckable(true);
 			action->setChecked(flagShowCCD);
 			connect(action, SIGNAL(toggled(bool)),
-			        actionShowSensor, SLOT(setChecked(bool)));
+							actionShowSensor, SLOT(setChecked(bool)));
 		}
 		
 		if (!flagShowCCD) {
@@ -910,7 +910,7 @@ void Oculars::displayPopupMenu()
 			action->setCheckable(true);
 			action->setChecked(flagShowTelrad);
 			connect(action, SIGNAL(toggled(bool)),
-			        actionShowTelrad, SLOT(setChecked(bool)));
+							actionShowTelrad, SLOT(setChecked(bool)));
 		}
 		
 		popup->addSeparator();
@@ -943,34 +943,34 @@ void Oculars::displayPopupMenu()
 			submenu = new QMenu(q_("&Rotate CCD"), popup);
 			QAction* rotateAction = NULL;
 			rotateAction = submenu->addAction(QString("&1: -90") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-90"));
 			rotateAction = submenu->addAction(QString("&2: -45") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-45"));
 			rotateAction = submenu->addAction(QString("&3: -15") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-15"));
 			rotateAction = submenu->addAction(QString("&4: -5") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-5"));
 			rotateAction = submenu->addAction(QString("&5: -1") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-1"));
 			rotateAction = submenu->addAction(QString("&6: +1") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("1"));
 			rotateAction = submenu->addAction(QString("&7: +5") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("5"));
 			rotateAction = submenu->addAction(QString("&8: +15") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("15"));
 			rotateAction = submenu->addAction(QString("&9: +45") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("45"));
 			rotateAction = submenu->addAction(QString("&0: +90") + QChar(0x00B0),
-														 ccdRotationSignalMapper, SLOT(map()));
+																				ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("90"));
 			rotateAction = submenu->addAction(q_("&Reset rotation"), this, SLOT(ccdRotationReset()));
 			popup->addMenu(submenu);
@@ -1086,7 +1086,7 @@ void Oculars::toggleCCD(bool show)
 		//if there are no sensors.
 		if (show)
 			qWarning() << "Oculars plugin: Unable to display a sensor boundary:"
-			           << "No sensors or telescopes are defined.";
+								 << "No sensors or telescopes are defined.";
 		flagShowCCD = false;
 		selectedCCDIndex = -1;
 		show = false;
@@ -1197,11 +1197,11 @@ void Oculars::initializeActivationActions()
 	//the first time this action is checked. See:
 	//http://doc.qt.nokia.com/4.7/signalsandslots.html#signals
 	QString shortcutStr = settings->value("bindings/toggle_oculars", "Ctrl+O").toString();
-	actionShowOcular = gui->addGuiActions("actionShow_Ocular",
-	                                      N_("Ocular view"),
-	                                      shortcutStr,
-	                                      group,
-	                                      true);
+	actionShowOcular = gui->addGuiAction("actionShow_Ocular",
+																			 N_("Ocular view"),
+																			 shortcutStr,
+																			 group,
+																			 true);
 	actionShowOcular->setChecked(flagShowOculars);
 	// Make a toolbar button
 	try {
@@ -1209,59 +1209,59 @@ void Oculars::initializeActivationActions()
 		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");
 		pxmapOffIcon = new QPixmap(":/ocular/bt_ocular_off.png");
 		toolbarButton = new StelButton(NULL,
-										*pxmapOnIcon,
-										*pxmapOffIcon,
-										*pxmapGlow,
-										actionShowOcular);
+																	 *pxmapOnIcon,
+																	 *pxmapOffIcon,
+																	 *pxmapGlow,
+																	 actionShowOcular);
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable create toolbar button for Oculars plugin: " << e.what();
 	}
 	connect(actionShowOcular, SIGNAL(toggled(bool)),
-	        this, SLOT(enableOcular(bool)));
+					this, SLOT(enableOcular(bool)));
 
 	shortcutStr = settings->value("bindings/popup_navigator", "Alt+O").toString();
-	actionMenu = gui->addGuiActions("actionShow_Ocular_Menu",
-	                                N_("Oculars popup menu"),
-	                                shortcutStr,
-	                                group,
-	                                true);
+	actionMenu = gui->addGuiAction("actionShow_Ocular_Menu",
+																 N_("Oculars popup menu"),
+																 shortcutStr,
+																 group,
+																 true);
 	connect(actionMenu, SIGNAL(toggled(bool)),
-	        this, SLOT(displayPopupMenu()));
+					this, SLOT(displayPopupMenu()));
 
-	actionShowCrosshairs = gui->addGuiActions("actionShow_Ocular_Crosshairs",
-	                                          N_("Crosshairs"),
-	                                          QString(),
-	                                          group,
-	                                          true);
+	actionShowCrosshairs = gui->addGuiAction("actionShow_Ocular_Crosshairs",
+																					 N_("Crosshairs"),
+																					 QString(),
+																					 group,
+																					 true);
 	connect(actionShowCrosshairs, SIGNAL(toggled(bool)),
-	        this, SLOT(toggleCrosshairs(bool)));
+					this, SLOT(toggleCrosshairs(bool)));
 
-	actionShowSensor = gui->addGuiActions("actionShow_Sensor",
-	                                      N_("Image sensor frame"),
-	                                      QString(),
-	                                      group,
-	                                      true);
+	actionShowSensor = gui->addGuiAction("actionShow_Sensor",
+																			 N_("Image sensor frame"),
+																			 QString(),
+																			 group,
+																			 true);
 	connect(actionShowSensor, SIGNAL(toggled(bool)),
-			this, SLOT(toggleCCD(bool)));
+					this, SLOT(toggleCCD(bool)));
 
-	actionShowTelrad = gui->addGuiActions("actionShow_Telrad",
-	                                      N_("Telrad sight"),
-	                                      QString(),
-	                                      group,
-	                                      true);
+	actionShowTelrad = gui->addGuiAction("actionShow_Telrad",
+																			 N_("Telrad sight"),
+																			 QString(),
+																			 group,
+																			 true);
 	connect(actionShowTelrad, SIGNAL(toggled(bool)),
-	        this, SLOT(toggleTelrad(bool)));
+					this, SLOT(toggleTelrad(bool)));
 
-	actionConfiguration = gui->addGuiActions("actionOpen_Oculars_Configuration",
-	                                         N_("Oculars plugin configuration"),
-	                                         QString(),
-	                                         group,
-	                                         true);
+	actionConfiguration = gui->addGuiAction("actionOpen_Oculars_Configuration",
+																					N_("Oculars plugin configuration"),
+																					QString(),
+																					group,
+																					true);
 	connect(actionConfiguration, SIGNAL(toggled(bool)),
-	        ocularDialog, SLOT(setVisible(bool)));
+					ocularDialog, SLOT(setVisible(bool)));
 	connect(ocularDialog, SIGNAL(visibleChanged(bool)),
-	        actionConfiguration, SLOT(setChecked(bool)));
+					actionConfiguration, SLOT(setChecked(bool)));
 
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(setScreenFOVForCCD()));
@@ -1341,7 +1341,7 @@ void Oculars::paintCrosshairs()
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	// Center of screen
 	Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
-					   projector->getViewportPosY()+projector->getViewportHeight()/2);
+										 projector->getViewportPosY()+projector->getViewportHeight()/2);
 	GLdouble length = 0.5 * params.viewportFovDiameter;
 	// See if we need to scale the length
 	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0) {
@@ -1369,7 +1369,7 @@ void Oculars::paintTelrad()
 		StelPainter painter(projector);
 		painter.setColor(0.77, 0.14, 0.16, 1.0);
 		Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
-						   projector->getViewportPosY()+projector->getViewportHeight()/2);
+											 projector->getViewportPosY()+projector->getViewportHeight()/2);
 		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (0.5));
 		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (2.0));
 		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * projector->getPixelPerRadAtCenter() * (M_PI/180) * (4.0));
@@ -1408,7 +1408,7 @@ void Oculars::paintOcularMask()
 void Oculars::paintText(const StelCore* core)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
-	StelPainter painter(prj);	
+	StelPainter painter(prj);
 
 	// Get the current instruments
 	CCD *ccd = NULL;
@@ -1443,13 +1443,13 @@ void Oculars::paintText(const StelCore* core)
 		if (name.isEmpty())
 		{
 			ocularNumberLabel = QString(q_("Ocular #%1"))
-		                            .arg(selectedOcularIndex);
+					.arg(selectedOcularIndex);
 		}
 		else
 		{
 			ocularNumberLabel = QString(q_("Ocular #%1: %2"))
-			                    .arg(selectedOcularIndex)
-			                    .arg(name);
+					.arg(selectedOcularIndex)
+					.arg(name);
 		}
 		// The name of the ocular could be really long.
 		if (name.length() > widthString.length()) {
@@ -1469,7 +1469,7 @@ void Oculars::paintText(const StelCore* core)
 			ocularFov.append(QChar(0x00B0));//Degree sign
 			// TRANSLATORS: aFOV = apparent field of view
 			QString ocularFOVLabel = QString(q_("Ocular aFOV: %1"))
-			                         .arg(ocularFov);
+					.arg(ocularFov);
 			painter.drawText(xPosition, yPosition, ocularFOVLabel);
 			yPosition-=lineHeight;
 			
@@ -1479,13 +1479,13 @@ void Oculars::paintText(const StelCore* core)
 			if (telescopeName.isEmpty())
 			{
 				telescopeNumberLabel = QString(q_("Telescope #%1"))
-				                       .arg(selectedTelescopeIndex);
+						.arg(selectedTelescopeIndex);
 			}
 			else
 			{
 				telescopeNumberLabel = QString(q_("Telescope #%1: %2"))
-				                       .arg(selectedTelescopeIndex)
-				                       .arg(telescopeName);
+						.arg(selectedTelescopeIndex)
+						.arg(telescopeName);
 			}
 			painter.drawText(xPosition, yPosition, telescopeNumberLabel);
 			yPosition-=lineHeight;
@@ -1495,7 +1495,7 @@ void Oculars::paintText(const StelCore* core)
 			QString magString = QString::number(magnification);
 			magString.append(QChar(0x00D7));//Multiplication sign
 			QString magnificationLabel = QString(q_("Magnification: %1"))
-			                             .arg(magString);
+					.arg(magString);
 			painter.drawText(xPosition, yPosition, magnificationLabel);
 			yPosition-=lineHeight;
 			
@@ -1527,8 +1527,8 @@ void Oculars::paintText(const StelCore* core)
 		else
 		{
 			ccdSensorLabel = QString(q_("Sensor #%1: %2"))
-			                 .arg(selectedCCDIndex)
-			                 .arg(name);
+					.arg(selectedCCDIndex)
+					.arg(name);
 		}
 		painter.drawText(xPosition, yPosition, ccdSensorLabel);
 		yPosition-=lineHeight;
@@ -1541,13 +1541,13 @@ void Oculars::paintText(const StelCore* core)
 		if (telescopeName.isEmpty())
 		{
 			telescopeNumberLabel = QString(q_("Telescope #%1"))
-			                       .arg(selectedTelescopeIndex);
+					.arg(selectedTelescopeIndex);
 		}
 		else
 		{
 			telescopeNumberLabel = QString(q_("Telescope #%1: %2"))
-			                       .arg(selectedTelescopeIndex)
-			                       .arg(telescopeName);
+					.arg(selectedTelescopeIndex)
+					.arg(telescopeName);
 		}
 		painter.drawText(xPosition, yPosition, telescopeNumberLabel);
 	}
@@ -1566,7 +1566,7 @@ void Oculars::validateAndLoadIniFile()
 		QFile src(":/ocular/default_ocular.ini");
 		if (!src.copy(ocularIniPath)) {
 			qWarning() << "Oculars::validateIniFile cannot copy default_ocular.ini resource to [non-existing] "
-					+ ocularIniPath;
+										+ ocularIniPath;
 		} else {
 			qDebug() << "Oculars::validateIniFile copied default_ocular.ini to " << ocularIniPath;
 			// The resource is read only, and the new file inherits this, so set write-able.
@@ -1581,7 +1581,7 @@ void Oculars::validateAndLoadIniFile()
 
 		if (ocularsVersion < MIN_OCULARS_INI_VERSION) {
 			qWarning() << "Oculars::validateIniFile existing ini file version " << ocularsVersion
-						<< " too old to use; required version is " << MIN_OCULARS_INI_VERSION << ". Copying over new one.";
+								 << " too old to use; required version is " << MIN_OCULARS_INI_VERSION << ". Copying over new one.";
 			// delete last "old" file, if it exists
 			QFile deleteFile(ocularIniPath + ".old");
 			deleteFile.remove();
@@ -1670,7 +1670,7 @@ void Oculars::zoomOcular()
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();
 	GridLinesMgr *gridManager =
-		(GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
+			(GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
 
 	gridManager->setFlagAzimuthalGrid(false);
 	gridManager->setFlagGalacticGrid(false);
