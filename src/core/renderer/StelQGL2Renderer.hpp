@@ -2,14 +2,13 @@
 #define _STELQGL2RENDERER_HPP_
 
 
-#include "StelQGLRenderer.hpp"
-#include <qt4/QtCore/qvector.h>
-
 #include <QGLShader>
 #include <QGLShaderProgram>
+#include <QVector>
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelQGLRenderer.hpp"
 #include "StelProjector.hpp"
 
 //TODO:

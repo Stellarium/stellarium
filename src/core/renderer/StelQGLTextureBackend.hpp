@@ -1,8 +1,8 @@
 #ifndef _STELQGLTEXTUREBACKEND_HPP_
 #define _STELQGLTEXTUREBACKEND_HPP_
 
-#include "renderer/StelGLUtilityFunctions.hpp"
-#include "renderer/StelTextureBackend.hpp"
+#include "StelGLUtilityFunctions.hpp"
+#include "StelTextureBackend.hpp"
 
 
 //! Texture backend based on QGL, usable with both GL1 and GL2.

@@ -20,14 +20,14 @@
 #ifndef _STELTEXTURE_HPP_
 #define _STELTEXTURE_HPP_
 
-#include "renderer/StelTextureTypes.hpp"
-#include "StelRenderer.hpp"
-#include "renderer/StelTextureParams.hpp"
-#include "renderer/StelTextureBackend.hpp"
-
 #include <QObject>
 #include <QImage>
 #include <QtOpenGL>
+
+#include "StelRenderer.hpp"
+#include "StelTextureBackend.hpp"
+#include "StelTextureParams.hpp"
+#include "StelTextureTypes.hpp"
 
 //! @class StelTexture
 //! Texture class. For creating an instance, use StelTextureMgr::createTexture() and StelTextureMgr::createTextureThread()
