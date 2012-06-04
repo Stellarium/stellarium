@@ -665,7 +665,8 @@ INSTALL(TARGETS stellarium DESTINATION bin)
 ################################## Build unit tests #########################################
 #############################################################################################
 
-SET(extLinkerOptionTest ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${ZLIB_LIBRARIES})
+SET(extLinkerOptionTest ${QT_LIBRARIES} ${QT_QTTEST_LIBRARY} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${ZLIB_LIBRARIES})
+
 
 # Custom target used to build all tests at once
 ADD_CUSTOM_TARGET(buildTests)
@@ -759,8 +760,11 @@ ADD_DEPENDENCIES(buildTests testStelVertexArray)
 SET(tests_testStelVertexBuffer_SRCS
   tests/testStelVertexBuffer.hpp
   tests/testStelVertexBuffer.cpp
+  core/StelFileMgr.cpp
   core/renderer/StelVertexBuffer.hpp
   core/renderer/StelVertexBufferBackend.hpp
+  core/renderer/StelVertexAttribute.cpp
+  core/renderer/StelGLUtilityFunctions.cpp
   core/renderer/StelTestQGL2VertexBufferBackend.cpp
   core/renderer/StelTestQGL2VertexBufferBackend.hpp)
 QT4_WRAP_CPP(tests_testStelVertexBuffer_MOC_SRCS tests/testStelVertexBuffer.hpp)
@@ -768,6 +772,7 @@ ADD_EXECUTABLE(testStelVertexBuffer EXCLUDE_FROM_ALL ${tests_testStelVertexBuffe
 ${tests_testStelVertexBuffer_MOC_SRCS})
 TARGET_LINK_LIBRARIES(testStelVertexBuffer ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelVertexBuffer)
+######SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES} ${ZLIB_LIBRARIES})
 
 #
 # Temporary disable RefractionExtinction test because now we have two classes:  Refraction and Extinction
