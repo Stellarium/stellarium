@@ -108,11 +108,9 @@ private:
 	{
 		const TextureStatus status = getStatus();
 		Q_ASSERT_X((glTextureID != 0) == (status == TextureStatus_Loaded),
-		           "StelQGLTextureBackend::invariant",
-		           "Texture can only be specified once loaded.");
+		           Q_FUNC_INFO, "Texture can only be specified once loaded.");
 		Q_ASSERT_X(loader == NULL || status == TextureStatus_Loading,
-		           "StelQGLTextureBackend::invariant",
-		           "Texture loader can only exist during loading");
+		           Q_FUNC_INFO, "Texture loader can only exist during loading");
 	}
 };
 #endif // _STELQGLTEXTUREBACKEND_HPP_

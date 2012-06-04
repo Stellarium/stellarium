@@ -22,7 +22,7 @@ static QGLContext::BindOptions getTextureBindOptions(const StelTextureParams& pa
 		case Nearest: break;
 		case Linear:  result |= QGLContext::LinearFilteringBindOption; break;
 		default:
-			Q_ASSERT_X(false, "getTextureBindOptions", "Unknown texture filtering mode");
+			Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown texture filtering mode");
 	}
 	//TODO investigate (maybe we're using deprecated stuff to generate mipmaps?)
 	// Mipmap seems to be pretty buggy on windows
@@ -91,7 +91,7 @@ void StelQGLTextureBackend::startLoadingInThread()
 	bool http = path.startsWith("http://");
 	bool pvr  = path.endsWith(".pvr");
 
-	Q_ASSERT_X(!(http && pvr), "StelQGLTextureBackend::startLoadingInThread()",
+	Q_ASSERT_X(!(http && pvr), Q_FUNC_INFO,
 	           "Can't load .pvr textures from network");
 
 	if(pvr)
@@ -153,7 +153,7 @@ StelQGLTextureBackend* StelQGLTextureBackend::constructAsynchronous
 void StelQGLTextureBackend::onImageLoaded(QImage image)
 {
 	invariant();
-	Q_ASSERT_X(!image.isNull(), "StelQGLTextureBackend::onImageLoaded",
+	Q_ASSERT_X(!image.isNull(), Q_FUNC_INFO,
 	           "onImageLoaded slot was called even though the image failed to load");
 
 	loader->deleteLater();
@@ -172,8 +172,7 @@ void StelQGLTextureBackend::onLoadingError(const QString& errorMessage)
 void StelQGLTextureBackend::loadFromImage(QImage image)
 {
 	invariant();
-	Q_ASSERT_X(!image.isNull(), "StelQGLTextureBackend::loadFromImage",
-	           "Image data is NULL");
+	Q_ASSERT_X(!image.isNull(), Q_FUNC_INFO, "Image data is NULL");
 
 	// Shrink if needed.
 	glEnsureTextureSizeWithinLimits(image);

@@ -109,11 +109,10 @@ public:
 	QSize getDimensions() const
 	{
 		invariant();
-		Q_ASSERT_X(status == TextureStatus_Loaded,
+		Q_ASSERT_X(status == TextureStatus_Loaded, Q_FUNC_INFO,
 		           "Trying to get dimensions of a texture that is not loaded. "
 		           "Use StelTextureBackend::getStatus to determine if the texture "
-		           "is loaded or not.",
-		           "StelTextureBackend::getDimensions");
+		           "is loaded or not.");
 		return size;
 	}
 
@@ -150,9 +149,8 @@ protected:
 	void startedLoading()
 	{
 		invariant();
-		Q_ASSERT_X(status == TextureStatus_Uninitialized,
-		           "Only a texture that has not yet been initialized can start loading",
-		           "StelTextureBackend::startedLoading");
+		Q_ASSERT_X(status == TextureStatus_Uninitialized, Q_FUNC_INFO,
+		           "Only a texture that has not yet been initialized can start loading");
 		status = TextureStatus_Loading;
 		invariant();
 	}
@@ -166,9 +164,8 @@ protected:
 	void finishedLoading(const QSize dimensions)
 	{
 		invariant();
-		Q_ASSERT_X(status == TextureStatus_Loading,
-		           "Only a texture that has started loading can finish loading",
-		           "StelTextureBackend::finishedLoading");
+		Q_ASSERT_X(status == TextureStatus_Loading, Q_FUNC_INFO,
+		           "Only a texture that has started loading can finish loading");
 		size = dimensions;
 		status = TextureStatus_Loaded;
 		invariant();
@@ -183,8 +180,8 @@ protected:
 	{
 		invariant();
 		Q_ASSERT_X(status == TextureStatus_Loading,
-		           "The only time an error can occur with a texture is during loading",
-		           "StelTextureBackend::errorOccured");
+		           Q_FUNC_INFO,
+		           "The only time an error can occur with a texture is during loading");
 		qWarning() << "Error occured during loading of texture " << path << 
 		              ": " << error;
 		errorMessage = error;
@@ -210,8 +207,8 @@ private:
 	void invariant() const
 	{
 		Q_ASSERT_X(errorMessage.isEmpty() == (status != TextureStatus_Error),
-		           "Error message most be empty when status is not Error and non-empty otherwise",
-		           "StelTextureBackend::invariant");
+		           Q_FUNC_INFO,
+		           "Error message must be empty when status is not Error and non-empty otherwise");
 	}
 };
 

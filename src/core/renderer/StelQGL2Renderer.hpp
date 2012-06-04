@@ -54,7 +54,7 @@ public:
 	
 	virtual bool init()
 	{
-		Q_ASSERT_X(!initialized, "StelQGL2Renderer::init", 
+		Q_ASSERT_X(!initialized, Q_FUNC_INFO, 
 		           "StelQGL2Renderer is already initialized");
 		
 		// Using  this instead of makeGLContextCurrent() to avoid invariant 
@@ -248,13 +248,12 @@ public:
 				case Normal:   normal   = true; break;
 				case Color:    color    = true; break;
 				default: 
-					Q_ASSERT_X(false, "Unknown vertex interpretation",
-					           "StelQGL2Renderer::getShaderProgram");
+					Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown vertex interpretation");
 			}
 		}
 
-		Q_ASSERT_X(position, "Vertex formats without vertex position are not supported",
-		           "StelQGL2Renderer::getShaderProgram");
+		Q_ASSERT_X(position, Q_FUNC_INFO,
+		           "Vertex formats without vertex position are not supported");
 
 		// There are possible combinations - 4 are implemented right now.
 		if(!texCoord && !normal && !color) {return plainShaderProgram;}
@@ -268,8 +267,8 @@ public:
 		qDebug() << "position: " << position << " texCoord: " << texCoord
 		         << " normal: " << normal << " color: " << color;
 
-		Q_ASSERT_X(false, "Shader for vertex format not (yet) implemented",
-		           "StelQGL2Renderer::getShaderProgram");
+		Q_ASSERT_X(false, Q_FUNC_INFO,
+		           "Shader for vertex format not (yet) implemented");
 
 		// Prevents GCC from complaining about exiting a non-void function:
 		return NULL;
@@ -286,7 +285,7 @@ protected:
 	                                     class StelIndexBuffer* indexBuffer = NULL,
 	                                     StelProjectorP projector = NULL)
 	{
-		Q_ASSERT_X(indexBuffer == NULL, "StelQGL2Renderer::drawVertexBufferBackend",
+		Q_ASSERT_X(indexBuffer == NULL, Q_FUNC_INFO,
 		           "TODO: Using index buffer when drawing not yet implemented");
 
 		//TODO Projection using StelProjector 
@@ -294,9 +293,9 @@ protected:
 		
 		StelTestQGL2VertexBufferBackend* backend =
 			dynamic_cast<StelTestQGL2VertexBufferBackend*>(vertexBuffer);
-		Q_ASSERT_X(backend != NULL,
-		           "StelQGL2Renderer: kTrying to draw a vertex buffer created by a different "
-		           "renderer backend", "StelQGL2Renderer::drawVertexBufferBackend");
+		Q_ASSERT_X(backend != NULL, Q_FUNC_INFO,
+		           "StelQGL2Renderer: Trying to draw a vertex buffer created by a "
+		           "different renderer backend");
 
 		// GL setup before drawing.
 
@@ -314,7 +313,7 @@ protected:
 		}
 		else
 		{
-			Q_ASSERT_X(projector == NULL, "StelQGL2Renderer::drawVertexBufferBackend",
+			Q_ASSERT_X(projector == NULL, Q_FUNC_INFO,
 			           "TODO: Projection when drawing not yet implemented");
 		}
 
@@ -332,8 +331,7 @@ protected:
 
 	virtual void invariant()
 	{
-		Q_ASSERT_X(initialized, "uninitialized StelQGL2Renderer", 
-		           "StelQGL2Renderer::invariant");
+		Q_ASSERT_X(initialized, Q_FUNC_INFO, "uninitialized StelQGL2Renderer");
 		StelQGLRenderer::invariant();
 	}
 	

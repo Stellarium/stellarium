@@ -82,7 +82,7 @@ public:
 	
 	virtual ~StelQGLRenderer()
 	{
-		Q_ASSERT_X(NULL == this->painter, "StelQGLRenderer::~StelQGLRenderer()", 
+		Q_ASSERT_X(NULL == this->painter, Q_FUNC_INFO, 
 		           "Painting is not disabled at destruction");
 		// This causes crashes for some reason 
 		// (perhaps it is already destroyed by QT? - didn't find that in the docs).
@@ -101,7 +101,7 @@ public:
 	
 	virtual bool init()
 	{
-		Q_ASSERT_X(glWidget->isValid(), "StelQGLRenderer::init()", 
+		Q_ASSERT_X(glWidget->isValid(), Q_FUNC_INFO, 
 		           "Invalid glWidget (maybe there is no OpenGL support?)");
 		
 		//TODO Remove after StelPainter is no longer used.
@@ -122,8 +122,7 @@ public:
 	virtual void disablePainting()
 	{
 		invariant();
-		Q_ASSERT_X(NULL != this->painter, "StelQGLRenderer::disablePainting()", 
-		           "Painting is already disabled");
+		Q_ASSERT_X(NULL != this->painter, Q_FUNC_INFO, "Painting is already disabled");
 		
 		StelPainter::setQPainter(NULL);
 		if(usingDefaultPainter)
@@ -146,9 +145,8 @@ public:
 	{
 		StelQGLTextureBackend* qglTextureBackend =
 			dynamic_cast<StelQGLTextureBackend*>(textureBackend);
-		Q_ASSERT_X(qglTextureBackend != NULL,
-		           "StelQGLRenderer: Trying to bind a texture created by a different "
-		           "renderer backend", "StelQGLRenderer::bindTexture");
+		Q_ASSERT_X(qglTextureBackend != NULL, Q_FUNC_INFO,
+		           "Trying to bind a texture created by a different renderer backend");
 
 		const TextureStatus status = qglTextureBackend->getStatus();
 		if(status == TextureStatus_Loaded)
@@ -192,8 +190,7 @@ protected:
 	virtual void enablePainting(QPainter* painter)
 	{
 		invariant();
-		Q_ASSERT_X(NULL == this->painter, "StelQGLRenderer::enablePainting()", 
-		           "Painting is already enabled");
+		Q_ASSERT_X(NULL == this->painter, Q_FUNC_INFO, "Painting is already enabled");
 		
 		// If no painter specified, create a default one painting to the glWidget.
 		if(painter == NULL)
@@ -210,10 +207,9 @@ protected:
 	
 	virtual void invariant()
 	{
-		Q_ASSERT_X(NULL != glWidget && NULL != glContext, "StelQGLRenderer::invariant()", 
+		Q_ASSERT_X(NULL != glWidget && NULL != glContext, Q_FUNC_INFO, 
 		           "destroyed StelQGLRenderer");
-		Q_ASSERT_X(glContext->isValid(), "StelGLRenderer::invariant", 
-		           "Our GL context is invalid");
+		Q_ASSERT_X(glContext->isValid(), Q_FUNC_INFO, "Our GL context is invalid");
 		StelGLRenderer::invariant();
 	}
 	

@@ -4,13 +4,12 @@
 StelTextureBackend* StelQGLRenderer::createTextureBackend_
 	(const QString& filename, const StelTextureParams& params, TextureLoadingMode loadingMode)
 {
-	Q_ASSERT_X(!filename.isEmpty(), 
-	           "StelQGLRenderer::createTextureBackend",
+	Q_ASSERT_X(!filename.isEmpty(), Q_FUNC_INFO,
 	           "Trying to load a texture with an empty filename or URL");
 	Q_ASSERT_X(!(filename.startsWith("http://") && loadingMode == TextureLoadingMode_Normal),
-	           "StelQGLRenderer::createTextureBackend",
+	           Q_FUNC_INFO,
 	           "When loading a texture from network, texture loading mode must be "
-				  "Asynchronous or LazyAsynchronous");
+	           "Asynchronous or LazyAsynchronous");
 
 	const QString fullPath = filename.startsWith("http://") 
 		? filename 
@@ -48,7 +47,7 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend_
 	{
 		Q_ASSERT_X(loadingMode == TextureLoadingMode_Asynchronous || 
 		           loadingMode == TextureLoadingMode_LazyAsynchronous,
-		           "StelQGLRenderer::createTextureBackend", 
+		           Q_FUNC_INFO, 
 		           "Unknown texture loading mode");
 		StelQGLTextureBackend* result = 
 			StelQGLTextureBackend::constructAsynchronous(this, fullPath, params);
@@ -60,7 +59,7 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend_
 		return result;
 	}
 
-	Q_ASSERT_X(false, "StelQGLRenderer::createTextureBackend", 
+	Q_ASSERT_X(false, Q_FUNC_INFO, 
 	           "This code should never be reached");
 	return NULL;
 }

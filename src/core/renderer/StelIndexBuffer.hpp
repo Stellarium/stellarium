@@ -13,8 +13,7 @@ class StelIndexBuffer
 	public:
 		StelIndexBuffer()
 		{
-			Q_ASSERT_X(false, "StelIndexBuffer stub - TODO implement",
-			           "StelIndexBuffer::StelIndexBuffer()");
+			Q_ASSERT_X(false, Q_FUNC_INFO, "StelIndexBuffer stub - TODO implement");
 		}
 }
 
