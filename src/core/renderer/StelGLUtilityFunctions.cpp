@@ -9,9 +9,9 @@ GLint glAttributeType(const AttributeType type)
 {
 	switch(type)
 	{
-		case AT_Vec2f:
-		case AT_Vec3f:
-		case AT_Vec4f:
+		case AttributeType_Vec2f:
+		case AttributeType_Vec3f:
+		case AttributeType_Vec4f:
 			return GL_FLOAT;
 	}
 	Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown vertex attribute type");
@@ -24,10 +24,10 @@ const char* glslAttributeName(const AttributeInterpretation interpretation)
 {
 	switch(interpretation)
 	{
-		case Position: return "vertex";
-		case TexCoord: return "texCoord";
-		case Normal:   return "normal";
-		case Color:    return "color";
+		case AttributeInterpretation_Position: return "vertex";
+		case AttributeInterpretation_TexCoord: return "texCoord";
+		case AttributeInterpretation_Normal:   return "normal";
+		case AttributeInterpretation_Color:    return "color";
 	}
 	Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown vertex attribute interpretation");
 	
@@ -39,9 +39,9 @@ GLint glPrimitiveType(const PrimitiveType type)
 {
 	switch(type)
 	{
-		case Points:        return GL_POINTS;
-		case Triangles:     return GL_TRIANGLES;
-		case TriangleStrip: return GL_TRIANGLE_STRIP;
+		case PrimitiveType_Points:        return GL_POINTS;
+		case PrimitiveType_Triangles:     return GL_TRIANGLES;
+		case PrimitiveType_TriangleStrip: return GL_TRIANGLE_STRIP;
 	}
 	Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown graphics primitive type");
 	
@@ -53,8 +53,8 @@ GLint glTextureWrap(const TextureWrap wrap)
 {
 	switch(wrap)
 	{
-		case Repeat:      return GL_REPEAT;
-		case ClampToEdge: return GL_CLAMP_TO_EDGE;
+		case TextureWrap_Repeat:      return GL_REPEAT;
+		case TextureWrap_ClampToEdge: return GL_CLAMP_TO_EDGE;
 	}
 	Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown texture wrap mode");
 

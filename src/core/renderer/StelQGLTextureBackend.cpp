@@ -19,8 +19,8 @@ static QGLContext::BindOptions getTextureBindOptions(const StelTextureParams& pa
 	// Set GL texture filtering mode.
 	switch(params.filteringMode)
 	{
-		case Nearest: break;
-		case Linear:  result |= QGLContext::LinearFilteringBindOption; break;
+		case TextureFiltering_Nearest: break;
+		case TextureFiltering_Linear:  result |= QGLContext::LinearFilteringBindOption; break;
 		default:
 			Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown texture filtering mode");
 	}
