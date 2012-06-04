@@ -1158,7 +1158,7 @@ void Planet::drawNMapSphere(StelPainter* painter, float screenSz)
 				        permMap = createPermTexture();
 					}
 
-                    glActiveTexture(GL_TEXTURE2);
+		    glActiveTexture(GL_TEXTURE2);
                     glEnable(GL_TEXTURE_2D);
                     glBindTexture(GL_TEXTURE_2D, permMap);
 
