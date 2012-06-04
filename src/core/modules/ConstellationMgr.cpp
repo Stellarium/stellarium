@@ -448,7 +448,9 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 				}
 			}
 
-			cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath);
+			//We can only get dimensions once the texture is actually loaded now
+			//cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath);
+			cons->artTexture = StelApp::getInstance().getTextureManager().createTexture(texturePath);
 
 			int texSizeX, texSizeY;
 			if (cons->artTexture==NULL || !cons->artTexture->getDimensions(texSizeX, texSizeY))
