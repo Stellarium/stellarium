@@ -45,9 +45,12 @@ void StelViewportEffect::paintViewportBuffer
 ///Vertex attribute specification of DistorterFisheyeToSphericMirror's vertex type.
 const QVector<StelVertexAttribute> StelViewportDistorterFisheyeToSphericMirror
                                    ::Vertex::attributes = 
-	(QVector<StelVertexAttribute>() << StelVertexAttribute(AT_Vec2f, Position)
-	                                << StelVertexAttribute(AT_Vec2f, TexCoord)
-	                                << StelVertexAttribute(AT_Vec4f, Color));
+	(QVector<StelVertexAttribute>() << StelVertexAttribute(AttributeType_Vec2f, 
+	                                                       AttributeInterpretation_Position)
+	                                << StelVertexAttribute(AttributeType_Vec2f, 
+	                                                       AttributeInterpretation_TexCoord)
+	                                << StelVertexAttribute(AttributeType_Vec4f, 
+	                                                       AttributeInterpretation_Color));
 
 StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSphericMirror
 	(int screenWidth,int screenHeight, StelRenderer* renderer) 
@@ -346,7 +349,7 @@ void StelViewportDistorterFisheyeToSphericMirror::constructVertexBuffer
 	for (int row = 0; row < maxGridY; row++)
 	{
 		StelVertexBuffer<Vertex> *buffer = 
-			renderer->createVertexBuffer<Vertex>(TriangleStrip);
+			renderer->createVertexBuffer<Vertex>(PrimitiveType_TriangleStrip);
 
 		// Two rows of vertices make up one row of the grid.
 

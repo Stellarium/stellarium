@@ -243,10 +243,10 @@ public:
 		{
 			switch(attribute.interpretation)
 			{
-				case Position: position = true; break;
-				case TexCoord: texCoord = true; break;
-				case Normal:   normal   = true; break;
-				case Color:    color    = true; break;
+				case AttributeInterpretation_Position: position = true; break;
+				case AttributeInterpretation_TexCoord: texCoord = true; break;
+				case AttributeInterpretation_Normal:   normal   = true; break;
+				case AttributeInterpretation_Color:    color    = true; break;
 				default: 
 					Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown vertex interpretation");
 			}

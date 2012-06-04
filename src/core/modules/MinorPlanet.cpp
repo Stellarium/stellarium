@@ -67,7 +67,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance()
 	                 .getTextureManager()
-	                 .createTextureThread("textures/"+texMapName, StelTextureParams().generateMipmaps().wrap(Repeat));
+	                 .createTextureThread("textures/"+texMapName, StelTextureParams().generateMipmaps().wrap(TextureWrap_Repeat));
 
 	//MinorPlanet specific members
 	minorPlanetNumber = 0;
