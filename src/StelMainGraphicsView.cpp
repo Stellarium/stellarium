@@ -180,8 +180,7 @@ void StelMainGraphicsView::init(QSettings* conf)
 	renderer = new StelQGL2Renderer(this, false);
 	if(!renderer->init())
 	{
-		Q_ASSERT_X(false, "StelMainGraphicsView::init", 
-		           "Fallback renderer not yet implemented");
+		Q_ASSERT_X(false, Q_FUNC_INFO, "Fallback renderer not yet implemented");
 	}
 	
 	// Create the main widget for stellarium, which in turn creates the main StelApp instance.

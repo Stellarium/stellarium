@@ -32,8 +32,7 @@ StelTestQGL2VertexBufferBackend(const PrimitiveType type,
 StelTestQGL2VertexBufferBackend::~StelTestQGL2VertexBufferBackend()
 {
 	Q_ASSERT_X(buffers.size() == static_cast<int>(attributes.size()),
-				  "Attribute buffer count does not match attribute count",
-				  "StelTestQGL2VertexBufferBackend::~StelTestQGL2VertexBufferBackend");
+	           Q_FUNC_INFO, "Attribute buffer count does not match attribute count");
 
 	for(int buffer = 0; buffer < buffers.size(); ++buffer)
 	{
@@ -121,15 +120,14 @@ void StelTestQGL2VertexBufferBackend::setVertex(const uint index, const quint8* 
 void StelTestQGL2VertexBufferBackend::
      draw(StelQGL2Renderer& renderer, const QMatrix4x4& projectionMatrix)
 {
-	Q_ASSERT_X(locked, "Trying to draw a vertex buffer that is not locked.",
-	           "StelTestQGxBufferBackend::draw");
+	Q_ASSERT_X(locked, Q_FUNC_INFO,
+	           "Trying to draw a vertex buffer that is not locked.");
 
 	// Get shader for our format from the renderer.
 	QGLShaderProgram* program = renderer.getShaderProgram(attributes);
 	if(!program->bind())
 	{
-		Q_ASSERT_X(false, "Failed to bind shader program", 
-		           "StelTestQGL2VertexBufferBackend::bind");
+		Q_ASSERT_X(false, Q_FUNC_INFO, "Failed to bind shader program");
 	}
 	
 	// Maximum number of vertex attributes is one per interpretation, so this 
@@ -149,8 +147,8 @@ void StelTestQGL2VertexBufferBackend::
 		if(handle == -1)
 		{
 			qDebug() << "Missing vertex attribute: " << name;
-			Q_ASSERT_X(false, "Vertex attribute required for current vertex format "
-			           "is not in the GLSL shader", "StelTestQGL2VertexBufferBackend::draw");
+			Q_ASSERT_X(false, Q_FUNC_INFO,
+			           "Vertex attribute required for current vertex format is not in the GLSL shader");
 		}
 
 		program->setAttributeArray(handle, glAttributeType(attribute.type), 
@@ -158,9 +156,8 @@ void StelTestQGL2VertexBufferBackend::
 		                           attributeDimensions(attribute.type));
 		program->enableAttributeArray(handle);
 
-		Q_ASSERT_X(attributeCount < 16, "enabledAttributes array is too small to "
-					  "handle all vertex attributes.", 
-					  "StelTestQGL2VertexBufferBackend::draw");
+		Q_ASSERT_X(attributeCount < 16, Q_FUNC_INFO,
+		           "enabledAttributes array is too small to handle all vertex attributes.");
 		enabledAttributes[attributeCount++] = handle;
 	}
 

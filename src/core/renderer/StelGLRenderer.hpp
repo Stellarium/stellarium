@@ -71,8 +71,7 @@ public:
 		invariant();
 		//Can't check this in invariant because Renderer is initialized before 
 		//AppGraphicsWidget sets its viewport size
-		Q_ASSERT_X(size.isValid(), "StelQGLRenderer::viewportHasBeenResized",
-		           "Invalid scene size");
+		Q_ASSERT_X(size.isValid(), Q_FUNC_INFO, "Invalid scene size");
 		sceneSize = size;
 		//We'll need FBOs of different size so get rid of the current FBOs.
 		if (NULL != backBuffer)
@@ -163,8 +162,7 @@ public:
 		//Put the result of drawing to the FBO on the screen, applying an effect.
 		if (useFBO())
 		{
-			Q_ASSERT_X(!backBuffer->isBound() && !frontBuffer->isBound(),
-			           "StelGL2Renderer::drawWindow", 
+			Q_ASSERT_X(!backBuffer->isBound() && !frontBuffer->isBound(), Q_FUNC_INFO, 
 			           "Framebuffer objects loadweren't released before drawing the result");
 			enablePainting(defaultPainter);
 			
@@ -188,20 +186,17 @@ protected:
 	virtual void invariant() const
 	{
 		const bool fbo = useFBO();
-		Q_ASSERT_X(NULL == backBuffer || fbo, "StelQGLRenderer::invariant",
+		Q_ASSERT_X(NULL == backBuffer || fbo, Q_FUNC_INFO,
 		           "We have a backbuffer even though we're not using FBO");
-		Q_ASSERT_X(NULL == frontBuffer || fbo, "StelQGLRenderer::invariant",
+		Q_ASSERT_X(NULL == frontBuffer || fbo, Q_FUNC_INFO,
 		           "We have a frontbuffer even though we're not using FBO");
-		Q_ASSERT_X(NULL == backBufferPainter || fbo, "StelQGLRenderer::invariant",
+		Q_ASSERT_X(NULL == backBufferPainter || fbo, Q_FUNC_INFO,
 		           "We have a backbuffer painter even though we're not using FBO");
-		Q_ASSERT_X(drawing && fbo ? backBuffer != NULL : true,
-		           "StelQGLRenderer::invariant",
+		Q_ASSERT_X(drawing && fbo ? backBuffer != NULL : true, Q_FUNC_INFO,
 		           "We're drawing and using FBOs, but the backBuffer is NULL");
-		Q_ASSERT_X(drawing && fbo ? frontBuffer != NULL : true,
-		           "StelQGLRenderer::invariant",
+		Q_ASSERT_X(drawing && fbo ? frontBuffer != NULL : true, Q_FUNC_INFO,
 		           "We're drawing and using FBOs, but the frontBuffer is NULL");
-		Q_ASSERT_X(drawing && fbo ? backBufferPainter != NULL : true,
-		           "StelQGLRenderer::invariant",
+		Q_ASSERT_X(drawing && fbo ? backBufferPainter != NULL : true, Q_FUNC_INFO,
 		           "We're drawing and using FBOs, but the backBufferPainter is NULL");
 	}
 
@@ -251,24 +246,24 @@ private:
 	//! Initialize the frame buffer objects.
 	void initFBO()
 	{
-		Q_ASSERT_X(useFBO(), "StelGL2Renderer::initFBO", "We're not using FBO");
+		Q_ASSERT_X(useFBO(), Q_FUNC_INFO, "We're not using FBO");
 		if (NULL == backBuffer)
 		{
-			Q_ASSERT_X(NULL == frontBuffer, "StelGL2Renderer::initFBO", 
+			Q_ASSERT_X(NULL == frontBuffer, Q_FUNC_INFO, 
 			           "frontBuffer is not null even though backBuffer is");
 			backBuffer = new QGLFramebufferObject(sceneSize,
 			                                      QGLFramebufferObject::CombinedDepthStencil);
 			frontBuffer = new QGLFramebufferObject(sceneSize,
 			                                       QGLFramebufferObject::CombinedDepthStencil);
 			Q_ASSERT_X(backBuffer->isValid() && frontBuffer->isValid(),
-			           "StelGL2Renderer::initFBO", "Framebuffer objects failed to initialize");
+			           Q_FUNC_INFO, "Framebuffer objects failed to initialize");
 		}
 	}
 	
 	//! Swap front and back buffers, when using FBO.
 	void swapBuffersFBO()
 	{
-		Q_ASSERT_X(useFBO(), "StelGL2Renderer::swapBuffersFBO", "We're not using FBO");
+		Q_ASSERT_X(useFBO(), Q_FUNC_INFO, "We're not using FBO");
 		QGLFramebufferObject* tmp = backBuffer;
 		backBuffer = frontBuffer;
 		frontBuffer = tmp;
