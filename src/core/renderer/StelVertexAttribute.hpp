@@ -7,11 +7,11 @@
 enum AttributeType
 {
 	//! Represents Vec4f (4D float vector).
-	AT_Vec4f,
+	AttributeType_Vec4f,
 	//! Represents Vec3f (3D float vector).
-	AT_Vec3f,
+	AttributeType_Vec3f,
 	//! Represents Vec2f (2D float vector).
-	AT_Vec2f
+	AttributeType_Vec2f
 };
 
 //! Return the number of dimensions of a vertex attribute type.
@@ -35,13 +35,13 @@ int attributeSize(const AttributeType type);
 enum AttributeInterpretation
 {
 	//! Vertex position.
-	Position,
+	AttributeInterpretation_Position,
 	//! Color of the vertex.
-	Color,
+	AttributeInterpretation_Color,
 	//! Normal of the vertex.
-	Normal,
+	AttributeInterpretation_Normal,
 	//! Texture coordinate of the vertex.
-	TexCoord
+	AttributeInterpretation_TexCoord
 };
 
 //! Describes a single vertex attribute (e.g. 2D vertex, 3D normal and so on).

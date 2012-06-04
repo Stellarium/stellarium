@@ -19,9 +19,9 @@ StelTestQGL2VertexBufferBackend(const PrimitiveType type,
 
 		switch(type)
 		{
-			case AT_Vec2f: buffer = new AttributeBuffer<Vec2f>(interpretation); break;
-			case AT_Vec3f: buffer = new AttributeBuffer<Vec3f>(interpretation); break;
-			case AT_Vec4f: buffer = new AttributeBuffer<Vec4f>(interpretation); break;
+			case AttributeType_Vec2f: buffer = new AttributeBuffer<Vec2f>(interpretation); break;
+			case AttributeType_Vec3f: buffer = new AttributeBuffer<Vec3f>(interpretation); break;
+			case AttributeType_Vec4f: buffer = new AttributeBuffer<Vec4f>(interpretation); break;
 			default:  Q_ASSERT(false);
 		}
 
@@ -52,9 +52,9 @@ void StelTestQGL2VertexBufferBackend::addVertex(const quint8* const vertexInPtr)
 		// Add each attribute to its buffer.
 		switch(type)
 		{
-			case AT_Vec2f: addAttribute<Vec2f>(attrib, attribPtr); break;
-			case AT_Vec3f: addAttribute<Vec3f>(attrib, attribPtr); break;
-			case AT_Vec4f: addAttribute<Vec4f>(attrib, attribPtr); break;
+			case AttributeType_Vec2f: addAttribute<Vec2f>(attrib, attribPtr); break;
+			case AttributeType_Vec3f: addAttribute<Vec3f>(attrib, attribPtr); break;
+			case AttributeType_Vec4f: addAttribute<Vec4f>(attrib, attribPtr); break;
 			default: Q_ASSERT(false);
 		}
 		attribPtr += attributeSize(type);
@@ -72,13 +72,13 @@ void StelTestQGL2VertexBufferBackend::getVertex(const uint index, quint8* const 
 		// Get each attribute from its buffer and set result's attribute to that.
 		switch(type)
 		{
-			case AT_Vec2f:
+			case AttributeType_Vec2f:
 				*reinterpret_cast<Vec2f*>(attribPtr) = getAttribute<Vec2f>(attrib, index);
 				break;
-			case AT_Vec3f:
+			case AttributeType_Vec3f:
 				*reinterpret_cast<Vec3f*>(attribPtr) = getAttribute<Vec3f>(attrib, index);
 				break;
-			case AT_Vec4f:
+			case AttributeType_Vec4f:
 				*reinterpret_cast<Vec4f*>(attribPtr) = getAttribute<Vec4f>(attrib, index);
 				break;
 			default:
@@ -100,13 +100,13 @@ void StelTestQGL2VertexBufferBackend::setVertex(const uint index, const quint8* 
 		//Set each attribute in its buffer.
 		switch(type)
 		{
-			case AT_Vec2f:
+			case AttributeType_Vec2f:
 				getAttribute<Vec2f>(attrib, index) = *reinterpret_cast<const Vec2f*>(attribPtr);
 				break;
-			case AT_Vec3f:
+			case AttributeType_Vec3f:
 				getAttribute<Vec3f>(attrib, index) = *reinterpret_cast<const Vec3f*>(attribPtr);
 				break;
-			case AT_Vec4f:
+			case AttributeType_Vec4f:
 				getAttribute<Vec4f>(attrib, index) = *reinterpret_cast<const Vec4f*>(attribPtr);
 				break;
 			default:
@@ -140,7 +140,10 @@ void StelTestQGL2VertexBufferBackend::
 	// Provide all vertex attributes' arrays to GL.
 	foreach(const StelVertexAttribute& attribute, attributes)
 	{
-		if(attribute.interpretation == Color){vertexColors = true;}
+		if(attribute.interpretation == AttributeInterpretation_Color)
+		{
+			vertexColors = true;
+		}
 
 		const char* const name = glslAttributeName(attribute.interpretation);
 		const int handle = program->attributeLocation(name);

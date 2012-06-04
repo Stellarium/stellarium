@@ -8,9 +8,9 @@
 enum TextureFiltering
 {
 	//! Nearest-neighbor (blocky, like in old 1990's 3D games).
-	Nearest,
+	TextureFiltering_Nearest,
 	//! Bilinear if there are no mipmaps or trilinear with mipmaps.
-	Linear
+	TextureFiltering_Linear
 };
 
 //! Texture wrapping modes.
@@ -20,9 +20,9 @@ enum TextureFiltering
 enum TextureWrap
 {
 	//! Texture is repeated infinitely.
-	Repeat,
+	TextureWrap_Repeat,
 	//! Colors at the edge of the texture are used.
-	ClampToEdge
+	TextureWrap_ClampToEdge
 };
 
 //! Parameters specifying how to construct a texture.
@@ -48,8 +48,8 @@ struct StelTextureParams
 	//! Default parameters are no mipmap generation, linear filtering and clamp to edge wrap mode.
 	StelTextureParams()
 		:autoGenerateMipmaps(false)
-		,filteringMode(Linear)
-		,wrapMode(ClampToEdge)
+		,filteringMode(TextureFiltering_Linear)
+		,wrapMode(TextureWrap_ClampToEdge)
 	{
 	}
 

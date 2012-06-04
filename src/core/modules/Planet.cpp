@@ -97,7 +97,9 @@ Planet::Planet(const QString& englishName,
 	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance()
 	                 .getTextureManager()
-	                 .createTextureThread("textures/"+texMapName, StelTextureParams().generateMipmaps().wrap(Repeat));
+	                 .createTextureThread("textures/"+texMapName, 
+	                                      StelTextureParams().generateMipmaps()
+	                                                         .wrap(TextureWrap_Repeat));
 
 	nameI18 = englishName;
 	if (englishName!="Pluto")
@@ -148,7 +150,7 @@ Planet::Planet(const QString& englishName,
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
 	const StelTextureParams textureParams = 
-		StelTextureParams().generateMipmaps().wrap(Repeat);
+		StelTextureParams().generateMipmaps().wrap(TextureWrap_Repeat);
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, textureParams);
 	normalMap = StelApp::getInstance().getTextureManager().createTexture("textures/"+normalMapName, textureParams);
 
@@ -207,7 +209,7 @@ Planet::Planet(const QString& englishName,
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
 	const StelTextureParams textureParams = 
-		StelTextureParams().generateMipmaps().wrap(Repeat);
+		StelTextureParams().generateMipmaps().wrap(TextureWrap_Repeat);
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, textureParams);
 	normalMap = StelApp::getInstance().getTextureManager().createTexture("textures/"+normalMapName, textureParams);
 

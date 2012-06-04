@@ -12,12 +12,12 @@
 enum PrimitiveType
 {
 	//! Each vertex is a separate point.
-	Points,
+	PrimitiveType_Points,
 	//! Every 3 vertices form a triangle.
-	Triangles,
+	PrimitiveType_Triangles,
 	//! The first 3 vertices form a triangle and each vertex after that forms a triangle with its
 	//! previous 2 vertices.
-	TriangleStrip
+	PrimitiveType_TriangleStrip
 };
 
 //! Vertex buffer interface.
@@ -51,8 +51,11 @@ enum PrimitiveType
 //! 	Vec2f texCoord;
 //! 	
 //! 	// Specifies data type and interpretation of each attribute.
-//! 	// Data type can be AT_Vec2f, AT_Vec3f or AT_Vec4f.
-//! 	// Interpretation can be Position, TexCoord, Normal or Color.
+//! 	// Data type can be AttributeType_Vec2f, AttributeType_Vec3f 
+//! 	// or AttributeType_Vec4f.
+//! 	// Interpretation can be AttributeInterpretation_Position, 
+//! 	// AttributeInterpretation_TexCoord, AttributeInterpretation_Normal 
+//! 	// or AttributeInterpretation_Color.
 //! 	// Two attributes must never have the same interpretation
 //! 	// (this is asserted by the vertex buffer backend at run time).
 //! 	//
@@ -63,8 +66,10 @@ enum PrimitiveType
 //!
 //! //This might need to be defined in a .cpp file to prevent multiple definition errors
 //! const QVector<StelVertexAttribute> MyVertex::attributes = 
-//! 	(QVector<StelVertexAttribute>() << StelVertexAttribute(AT_Vec3f, Position)
-//! 	                                << StelVertexAttribute(AT_Vec2f, TexCoord));
+//! 	(QVector<StelVertexAttribute>() << StelVertexAttribute(AttributeType_Vec3f,
+//! 	                                                       AttributeInterpretation_Position)
+//! 	                                << StelVertexAttribute(AttributeType_Vec2f, 
+//! 	                                                       AttributeInterpretation_TexCoord));
 //! @endcode
 //!
 //! Note that there are some requirements for a vertex type 

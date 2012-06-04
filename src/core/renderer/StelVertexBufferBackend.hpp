@@ -102,12 +102,12 @@ public:
 		{
 			switch(attribute.interpretation)
 			{
-				case Position:
+				case AttributeInterpretation_Position:
 					Q_ASSERT_X(!vertex, Q_FUNC_INFO,
 					           "Vertex type has more than one vertex position attribute");
 					vertex = true;
 					break;
-				case TexCoord:
+				case AttributeInterpretation_TexCoord:
 					Q_ASSERT_X(attributeDimensions(attribute.type) == 2, Q_FUNC_INFO,
 					           "Only 2D texture coordinates are supported at the moment");
 					Q_ASSERT_X(!texCoord, 
@@ -115,14 +115,14 @@ public:
 					           "Vertex type has more than one texture coordinate attribute");
 					texCoord = true;
 					break;
-				case Normal:
+				case AttributeInterpretation_Normal:
 					Q_ASSERT_X(attributeDimensions(attribute.type) == 3, Q_FUNC_INFO,
 					           "Only 3D vertex normals are supported");
 					Q_ASSERT_X(!normal, Q_FUNC_INFO,
 					           "Vertex type has more than one normal attribute");
 					normal = true;
 					break;
-				case Color:
+				case AttributeInterpretation_Color:
 					Q_ASSERT_X(!color, Q_FUNC_INFO,
 					           "Vertex type has more than one color attribute");
 					color = true;

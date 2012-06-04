@@ -8,9 +8,9 @@ int attributeDimensions(const AttributeType type)
 {
 	switch(type)
 	{
-		case AT_Vec4f: return 4;
-		case AT_Vec3f: return 3;
-		case AT_Vec2f: return 2;
+		case AttributeType_Vec4f: return 4;
+		case AttributeType_Vec3f: return 3;
+		case AttributeType_Vec2f: return 2;
 	}
 	Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown vertex attribute type");
 	
@@ -22,9 +22,9 @@ int attributeSize(const AttributeType type)
 {
 	switch(type)
 	{
-		case AT_Vec2f: return sizeof(Vec2f);
-		case AT_Vec3f: return sizeof(Vec3f);
-		case AT_Vec4f: return sizeof(Vec4f);
+		case AttributeType_Vec2f: return sizeof(Vec2f);
+		case AttributeType_Vec3f: return sizeof(Vec3f);
+		case AttributeType_Vec4f: return sizeof(Vec4f);
 	}
 	Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown vertex attribute type");
 	

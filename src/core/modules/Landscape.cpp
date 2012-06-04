@@ -237,7 +237,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	QString fogTexPath = getTexturePath(fogTexName, landscapeId);
 	fogTex = StelApp::getInstance()
 	                 .getTextureManager()
-	                 .createTexture(fogTexPath, StelTextureParams().generateMipmaps().filtering(Linear).wrap(Repeat));
+	                 .createTexture(fogTexPath, StelTextureParams().generateMipmaps().wrap(TextureWrap_Repeat));
 	description = landscapeIni.value("landscape/fog").toString();
 	//sscanf(description.toLocal8Bit(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	parameters = description.split(':');
