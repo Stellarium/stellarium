@@ -61,6 +61,23 @@ public:
 		// as we're not in valid state (getGLContext() isn't public - it doesn't call invariant)
 		getGLContext()->makeCurrent();
 
+		// Check for features required for the GL2 backend.
+		if(!gl.hasOpenGLFeature(QGLFunctions::Shaders))
+		{
+			qWarning() << "StelQGL2Renderer::init : Required feature not supported: shaders";
+			return false;
+		}
+		if(!gl.hasOpenGLFeature(QGLFunctions::Buffers))
+		{
+			qWarning() << "StelQGL2Renderer::init : Required feature not supported: VBOs/IBOs";
+			return false;
+		}
+		if(!gl.hasOpenGLFeature(QGLFunctions::Framebuffers))
+		{
+			qWarning() << "StelQGL2Renderer::init : Required feature not supported: framebuffers";
+			return false;
+		}
+
 		// Each shader here handles a specific combination of vertex attribute 
 		// interpretations. E.g. vertex-color-texcoord .
 
