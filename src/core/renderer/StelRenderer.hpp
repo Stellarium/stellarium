@@ -144,7 +144,7 @@ public:
 	{
 		//This function tests preconditions and calls implementation.
 		Q_ASSERT_X(!filename.endsWith(".pvr"), 
-		           "Renderer::createTextureBackend",
+		           Q_FUNC_INFO,
 		           "createTextureBackend() can't load a PVR texture directly, as PVR "
 		           "support may not be implemented by all Renderer backends. Request "
 		           "a non-PVR texture, and if a PVR version exists and the backend "

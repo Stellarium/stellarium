@@ -136,8 +136,8 @@ public:
 	//! @param vertex Vertex to add.
 	void addVertex(const V& vertex)
 	{
-		Q_ASSERT_X(!locked_, "Trying to add a vertex to a locked vertex buffer",
-		           "StelVertexBuffer::addVertex");
+		Q_ASSERT_X(!locked_, Q_FUNC_INFO,
+		           "Trying to add a vertex to a locked vertex buffer");
 		backend->addVertex(reinterpret_cast<const quint8*>(&vertex));
 		++vertexCount;
 	}
@@ -150,10 +150,9 @@ public:
 	//! @return Vertex at specified index.
 	V getVertex(const uint index)
 	{
-		Q_ASSERT_X(!locked_, "Trying to get a vertex in a locked vertex buffer",
-		           "StelVertexBuffer::getVertex");
-		Q_ASSERT_X(index < vertexCount, "Vertex index out of bounds",
-		           "StelVertexBuffer::getVertex");
+		Q_ASSERT_X(!locked_, Q_FUNC_INFO,
+		           "Trying to get a vertex in a locked vertex buffer");
+		Q_ASSERT_X(index < vertexCount, Q_FUNC_INFO, "Vertex index out of bounds");
 		V result;
 		backend->getVertex(index, reinterpret_cast<quint8*>(&result));
 		return result;
@@ -167,10 +166,9 @@ public:
 	//! @param vertex Value to set the vertex to.
 	void setVertex(const uint index, const V& vertex)
 	{
-		Q_ASSERT_X(!locked_, "Trying to set a vertex in a locked vertex buffer",
-		           "StelVertexBuffer::setVertex");
-		Q_ASSERT_X(index < vertexCount, "Vertex index out of bounds",
-		           "StelVertexBuffer::setVertex");
+		Q_ASSERT_X(!locked_, Q_FUNC_INFO,
+		           "Trying to set a vertex in a locked vertex buffer");
+		Q_ASSERT_X(index < vertexCount, Q_FUNC_INFO, "Vertex index out of bounds");
 		backend->setVertex(index, reinterpret_cast<const quint8*>(&vertex));
 	}
 	

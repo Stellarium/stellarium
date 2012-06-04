@@ -89,10 +89,9 @@ public:
 			bytes += attributeSize(attributes[attrib].type);
 		}
 		
-		Q_ASSERT_X(bytes == vertexSize,
+		Q_ASSERT_X(bytes == vertexSize, Q_FUNC_INFO,
 		           "Size of the vertex type in bytes doesn't match the sum of sizes of "
-		           "all vertex attributes as reported by \"attributes\" data member.",
-		           "StelVertexBufferBackend::validateVertexType");
+		           "all vertex attributes as reported by \"attributes\" data member.");
 		
 		
 		bool vertex, texCoord, normal, color;
@@ -104,43 +103,38 @@ public:
 			switch(attribute.interpretation)
 			{
 				case Position:
-					Q_ASSERT_X(!vertex, 
-					           "Vertex type has more than one vertex position attribute",
-					           "StelVertexBufferBackend::validateVertexType");
+					Q_ASSERT_X(!vertex, Q_FUNC_INFO,
+					           "Vertex type has more than one vertex position attribute");
 					vertex = true;
 					break;
 				case TexCoord:
-					Q_ASSERT_X(attributeDimensions(attribute.type) == 2,
-					           "Only 2D texture coordinates are supported at the moment",
-					           "StelVertexBufferBackend::validateVertexType");
+					Q_ASSERT_X(attributeDimensions(attribute.type) == 2, Q_FUNC_INFO,
+					           "Only 2D texture coordinates are supported at the moment");
 					Q_ASSERT_X(!texCoord, 
-					           "Vertex type has more than one texture coordinate attribute",
-					           "StelVertexBufferBackend::validateVertexType");
+					           Q_FUNC_INFO,
+					           "Vertex type has more than one texture coordinate attribute");
 					texCoord = true;
 					break;
 				case Normal:
-					Q_ASSERT_X(attributeDimensions(attribute.type) == 3,
-					           "Only 3D vertex normals are supported",
-					           "StelVertexBufferBackend::validateVertexType");
-					Q_ASSERT_X(!normal, 
-					           "Vertex type has more than one normal attribute",
-					           "StelVertexBufferBackend::validateVertexType");
+					Q_ASSERT_X(attributeDimensions(attribute.type) == 3, Q_FUNC_INFO,
+					           "Only 3D vertex normals are supported");
+					Q_ASSERT_X(!normal, Q_FUNC_INFO,
+					           "Vertex type has more than one normal attribute");
 					normal = true;
 					break;
 				case Color:
-					Q_ASSERT_X(!color, 
-					           "Vertex type has more than one color attribute",
-					           "StelVertexBufferBackend::validateVertexType");
+					Q_ASSERT_X(!color, Q_FUNC_INFO,
+					           "Vertex type has more than one color attribute");
 					color = true;
 					break;
 				default:
-					Q_ASSERT_X(false, "Unknown vertex attribute interpretation",
-					           "StelVertexBufferBackend::validateVertexType");
+					Q_ASSERT_X(false, Q_FUNC_INFO,
+					           "Unknown vertex attribute interpretation");
 			}
 		}
 
-		Q_ASSERT_X(vertex, "Vertex formats without vertex position are not supported",
-		           "StelVertexBufferBackend::validateVertexType");
+		Q_ASSERT_X(vertex, Q_FUNC_INFO, 
+		           "Vertex formats without a position attribute are not supported");
 	}
 	
 protected:

@@ -14,7 +14,7 @@ GLint glAttributeType(const AttributeType type)
 		case AT_Vec4f:
 			return GL_FLOAT;
 	}
-	Q_ASSERT_X(false, "glAttributeType", "Unknown vertex attribute type");
+	Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown vertex attribute type");
 	
 	// Prevents GCC from complaining about exiting a non-void function:
 	return -1;
@@ -29,7 +29,7 @@ const char* glslAttributeName(const AttributeInterpretation interpretation)
 		case Normal:   return "normal";
 		case Color:    return "color";
 	}
-	Q_ASSERT_X(false, "glslAttributeName", "Unknown vertex attribute interpretation");
+	Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown vertex attribute interpretation");
 	
 	// Prevents GCC from complaining about exiting a non-void function:
 	return NULL;
@@ -43,7 +43,7 @@ GLint glPrimitiveType(const PrimitiveType type)
 		case Triangles:     return GL_TRIANGLES;
 		case TriangleStrip: return GL_TRIANGLE_STRIP;
 	}
-	Q_ASSERT_X(false, "glPrimitiveType", "Unknown graphics primitive type");
+	Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown graphics primitive type");
 	
 	// Prevents GCC from complaining about exiting a non-void function:
 	return -1;
@@ -56,7 +56,7 @@ GLint glTextureWrap(const TextureWrap wrap)
 		case Repeat:      return GL_REPEAT;
 		case ClampToEdge: return GL_CLAMP_TO_EDGE;
 	}
-	Q_ASSERT_X(false, "glTextureWrap", "Unknown texture wrap mode");
+	Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown texture wrap mode");
 
 	// Prevents GCC from complaining about exiting a non-void function:
 	return -1;
@@ -73,7 +73,7 @@ QString glErrorToString(const GLenum error)
 		case GL_INVALID_FRAMEBUFFER_OPERATION: return "GL_INVALID_FRAMEBUFFER_OPERATION"; 
 		case GL_OUT_OF_MEMORY:                 return "GL_OUT_OF_MEMORY"; 
 	}
-	Q_ASSERT_X(false, "glErrorToString", "Unknown GL error");
+	Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown GL error");
 
 	// Prevents GCC from complaining about exiting a non-void function:
 	return QString();

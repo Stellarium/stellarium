@@ -72,8 +72,8 @@ public:
 	virtual void abort()
 	{
 		Q_ASSERT_X(QThread::currentThread() == QApplication::instance()->thread(),
-		           "StelTextureLoader::abort must be called from the main thread",
-		           "StelHTTPTextureLoader::abort");
+		           Q_FUNC_INFO,
+		           "StelTextureLoader::abort must be called from the main thread");
 		if (networkReply != NULL) {networkReply->abort();}
 	}
 
