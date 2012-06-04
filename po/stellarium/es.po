@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-02 20:19+0700\n"
-"PO-Revision-Date: 2012-05-25 09:17+0000\n"
+"PO-Revision-Date: 2012-06-04 03:26+0000\n"
 "Last-Translator: José A. Macas Durazo <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-03 04:42+0000\n"
-"X-Generator: Launchpad (build 15342)\n"
+"X-Launchpad-Export-Date: 2012-06-04 04:36+0000\n"
+"X-Generator: Launchpad (build 15353)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -3724,7 +3724,7 @@ msgstr "Mira telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:1257
 msgid "Oculars plugin configuration"
-msgstr "Configuración de complemento de oculares"
+msgstr "Configuración del complemento de oculares"
 
 #: plugins/Oculars/src/Oculars.cpp:1445
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
@@ -4402,7 +4402,7 @@ msgstr "Número de Catálogo: %1"
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
 msgid "Satellites Configuration"
-msgstr "Configuración de satélites"
+msgstr "Configuración de Satélites"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:643
 msgid "Update TLE lists from Internet sources"
@@ -4806,7 +4806,7 @@ msgstr "Configurar &telescopios..."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope Configuration"
-msgstr "Configuración de telescopio"
+msgstr "Configuración de Telescopio"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid "Telescope controlled by:"
@@ -5385,7 +5385,7 @@ msgstr "Cargar configuración por defecto"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:471
 msgid "Save current configuration"
-msgstr "Guardar current configuration"
+msgstr "Guardar la configuración actual"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:474
 msgid "Shut down"
@@ -5709,10 +5709,12 @@ msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr ""
+"Este complemento traza la posición de varios púlsares, con información de "
+"objeto acerca de cada uno."
 
 #: plugins/Pulsars/src/Pulsars.cpp:148
 msgid "Pulsars configuration window"
-msgstr ""
+msgstr "Ventana de configuración de púlsares"
 
 #: plugins/Pulsars/src/Pulsar.cpp:129
 msgid "pulsar"
@@ -5835,7 +5837,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
 msgid "Pulsars Plug-in"
-msgstr ""
+msgstr "Complemento de Púlsares"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
 #, qt-format
@@ -5844,54 +5846,61 @@ msgid ""
 "Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 msgstr ""
+"Los datos de púlsar derivan de 'El Catálogo Púlsar ATNF' (Mánchester, R. N., "
+"Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
+"(%1astro-ph/0412641%2))."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
 msgid "Note"
-msgstr ""
+msgstr "Nota"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr ""
+msgstr "los identificadores de púlsar tienen el prefijo 'PSR'"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 msgid "Acknowledgment"
-msgstr ""
+msgstr "Agradecimiento"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
 msgid ""
 "We thank the following people for their contribution and of the valuable "
 "comments:"
 msgstr ""
+"Agradecemos a las siguientes personas por sus contibuciones y por sus "
+"valiosos comentarios:"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
-msgstr ""
+msgstr "Observatorio de Radio Astronomía de Pushchino"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
 msgid "in Russia"
-msgstr ""
+msgstr "en Russia"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 msgid "Maciej Serylak"
-msgstr ""
+msgstr "Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Nancay Radioastronomical Observatory"
-msgstr ""
+msgstr "Observatorio Radioastronómico de Nancay"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
 msgid "in France"
-msgstr ""
+msgstr "en Francia"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"Pulsars "
 "plugin\" in the subject when posting."
 msgstr ""
+"El soporte se provee a través del sitio web de Launchpad. Asegúrese de "
+"escribir \"Complemento de Púlsares\" en el asunto del mensaje."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
@@ -5900,43 +5909,45 @@ msgid ""
 "If you want read full information about plugin, his history and format of "
 "catalog you can %1get info here%2."
 msgstr ""
+"Si quiere leer la información completa acerca de este complemento, su "
+"historia y su formato de catálogo puede %1obtener información aquí%2."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:165
 #, qt-format
 msgid "Next update: %1 days"
-msgstr ""
+msgstr "Siguiente actualización: %1 días"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:207
 msgid "Pulsars is updated"
-msgstr ""
+msgstr "Los púlsares están actualizados"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:252
 msgid "Pulsars Configuration"
-msgstr ""
+msgstr "Configuración de Púlsares"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:253
 msgid "Pulsars Plug-in Configuration"
-msgstr ""
+msgstr "Configuración del Complemento de Púlsares"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:255
 msgid "Update catalog from Internet"
-msgstr ""
+msgstr "Actualizar catálogo desde Internet"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Update frequency (days):"
-msgstr ""
+msgstr "Frecuencia de actualización (días):"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 msgid "[next update info]"
-msgstr ""
+msgstr "[información de la siguiente actualización]"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:261
 msgid "Display mode for pulsars"
-msgstr ""
+msgstr "Modo de vista para púlsares"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:262
 msgid "Enable display of distribution for pulsars"
-msgstr ""
+msgstr "Habilitar la vista de distribución para púlsares"
 
 #~ msgid "Ecliptic Line"
 #~ msgstr "Eclíptica"
