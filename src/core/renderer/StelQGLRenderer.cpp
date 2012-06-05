@@ -2,15 +2,8 @@
 
 
 StelTextureBackend* StelQGLRenderer::createTextureBackend_
-	(const QString& filename, const StelTextureParams& params, TextureLoadingMode loadingMode)
+	(const QString& filename, const StelTextureParams& params, const TextureLoadingMode loadingMode)
 {
-	Q_ASSERT_X(!filename.isEmpty(), Q_FUNC_INFO,
-	           "Trying to load a texture with an empty filename or URL");
-	Q_ASSERT_X(!(filename.startsWith("http://") && loadingMode == TextureLoadingMode_Normal),
-	           Q_FUNC_INFO,
-	           "When loading a texture from network, texture loading mode must be "
-	           "Asynchronous or LazyAsynchronous");
-
 	const QString fullPath = filename.startsWith("http://") 
 		? filename 
 		: glFileSystemTexturePath(filename, pvrSupported);
@@ -20,6 +13,13 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend_
 		return NULL;
 	}
 
+	StelQGLTextureBackend* cached = textureCache.get(fullPath, loadingMode);
+	if(NULL != cached)
+	{
+		return cached;
+	}
+
+	StelQGLTextureBackend* result = NULL;
 	//Synchronous (not in a separate thread) loading.
 	if(loadingMode == TextureLoadingMode_Normal)
 	{
@@ -35,12 +35,12 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend_
 			}
 
 			//Uploads to GL
-			return StelQGLTextureBackend::constructFromImage(this, fullPath, params, image);
+			result = StelQGLTextureBackend::constructFromImage(this, fullPath, params, image);
 		}
 		//Load from PVR (compressed textures on PowerVR (mobile)).
 		else
 		{
-			return StelQGLTextureBackend::constructFromPVR(this, fullPath, params);
+			result = StelQGLTextureBackend::constructFromPVR(this, fullPath, params);
 		}
 	}
 	else
@@ -49,17 +49,16 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend_
 		           loadingMode == TextureLoadingMode_LazyAsynchronous,
 		           Q_FUNC_INFO, 
 		           "Unknown texture loading mode");
-		StelQGLTextureBackend* result = 
-			StelQGLTextureBackend::constructAsynchronous(this, fullPath, params);
+		result = StelQGLTextureBackend::constructAsynchronous(this, fullPath, params);
 		if(loadingMode != TextureLoadingMode_LazyAsynchronous)
 		{
 			//Web or file
-			result->startLoadingInThread();
+			result->startAsynchronousLoading();
 		}
-		return result;
 	}
 
-	Q_ASSERT_X(false, Q_FUNC_INFO, 
-	           "This code should never be reached");
-	return NULL;
+	Q_ASSERT_X(result != NULL, Q_FUNC_INFO, "Result texture backend was not set");
+
+	textureCache.add(result);
+	return result;
 }

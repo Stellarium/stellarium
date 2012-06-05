@@ -27,5 +27,5 @@ StelTexture::StelTexture(StelTextureBackend* backend, StelRenderer* renderer)
 
 StelTexture::~StelTexture()
 {
-	delete textureBackend;
+	renderer->destroyTextureBackend(textureBackend);
 }
