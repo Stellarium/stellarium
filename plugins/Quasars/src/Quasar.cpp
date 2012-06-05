@@ -93,32 +93,32 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Magnitude)
 	{
-            if (core->getSkyDrawer()->getFlagHasAtmosphere())
-            {
-                if (bV!=0)
+		if (core->getSkyDrawer()->getFlagHasAtmosphere())
 		{
-                        oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)").arg(QString::number(mag, 'f', 2),
-                                                                                                        QString::number(getVMagnitude(core, true),  'f', 2),
-													QString::number(bV, 'f', 2)) << "<br />";
+			if (bV!=0)
+			{
+				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)").arg(QString::number(mag, 'f', 2),
+														QString::number(getVMagnitude(core, true),  'f', 2),
+														QString::number(bV, 'f', 2)) << "<br />";
+			}
+			else
+			{
+				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(mag, 'f', 2),
+												QString::number(getVMagnitude(core, true),  'f', 2)) << "<br />";
+			}
 		}
 		else
 		{
-                        oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(mag, 'f', 2),
-											QString::number(getVMagnitude(core, true),  'f', 2)) << "<br />";
+			if (bV!=0)
+			{
+				oss << q_("Magnitude: <b>%1</b> (B-V: <b>%2</b>)").arg(mag, 0, 'f', 2).arg(bV, 0, 'f', 2) << "<br />";
+			}
+			else
+			{
+				oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br />";
+			}
 		}
-            }
-            else
-            {
-                if (bV!=0)
-                {
-			oss << q_("Magnitude: <b>%1</b> (B-V: <b>%2</b>)").arg(mag, 0, 'f', 2).arg(bV, 0, 'f', 2) << "<br />";
-                }
-                else
-                {
-			oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br />";
-                }
-            }
-            if (AMagnitude!=0)
+		if (AMagnitude!=0)
 		{
 			oss << q_("Absolute Magnitude: %1").arg(AMagnitude, 0, 'f', 2) << "<br />";
 		}
@@ -146,13 +146,13 @@ Vec3f Quasar::getInfoColor(void) const
 
 float Quasar::getVMagnitude(const StelCore* core, bool withExtinction) const
 {
-    float extinctionMag=0.0; // track magnitude loss
-    if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
-    {
-        Vec3d altAz=getAltAzPosApparent(core);
-        altAz.normalize();
-        core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
-    }
+	float extinctionMag=0.0; // track magnitude loss
+	if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
+	{
+		Vec3d altAz=getAltAzPosApparent(core);
+		altAz.normalize();
+		core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
+	}
 
         return VMagnitude + extinctionMag;
 }

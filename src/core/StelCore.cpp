@@ -817,6 +817,17 @@ void StelCore::addSiderealWeek()
 	addSiderealDays(7.0);
 }
 
+void StelCore::addSiderealMonth()
+{
+	addSiderealDays(27.321661);
+}
+
+void StelCore::addSiderealYear()
+{
+	addSolarDays(365.256363004);
+}
+
+
 void StelCore::subtractHour()
 {
 	addSolarDays(-JD_HOUR);
@@ -840,6 +851,16 @@ void StelCore::subtractSiderealDay()
 void StelCore::subtractSiderealWeek()
 {
 	addSiderealDays(-7.0);
+}
+
+void StelCore::subtractSiderealMonth()
+{
+	addSiderealDays(-27.321661);
+}
+
+void StelCore::subtractSiderealYear()
+{
+	addSolarDays(-365.256363004);
 }
 
 void StelCore::addSolarDays(double d)
