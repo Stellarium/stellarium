@@ -415,6 +415,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_equatorial_grid", glmgr->getFlagEquatorGrid());
 	conf->setValue("viewing/flag_equator_line", glmgr->getFlagEquatorLine());
 	conf->setValue("viewing/flag_ecliptic_line", glmgr->getFlagEclipticLine());
+	conf->setValue("viewing/flag_ecliptic_J2000_grid", glmgr->getFlagEclipticJ2000Grid());
 	conf->setValue("viewing/flag_meridian_line", glmgr->getFlagMeridianLine());
 	conf->setValue("viewing/flag_horizon_line", glmgr->getFlagHorizonLine());
 	conf->setValue("viewing/flag_equatorial_J2000_grid", glmgr->getFlagEquatorJ2000Grid());
@@ -566,13 +567,13 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 		if (s==q_(desc.info.displayedName))//TODO: Use ID!
 		{
 			QString html = "<html><head></head><body>";
-			html += "<h2>" + q_(desc.info.displayedName) + "</h2>";
-			html += "<h3>" + q_("Authors") + ": " + desc.info.authors + "</h3>";
+			html += "<h2>" + q_(desc.info.displayedName) + "</h2>";			
 			QString d = desc.info.description;
 			d.replace("\n", "<br />");
 			html += "<p>" + q_(d) + "</p>";
-			html += "<h3>" + q_("Contact") + ": " + desc.info.contact + "</h3>";
-			html += "</body></html>";
+			html += "<p><strong>" + q_("Authors") + "</strong>: " + desc.info.authors;
+			html += "<br /><strong>" + q_("Contact") + "</strong>: " + desc.info.contact;
+			html += "</p></body></html>";
 			ui->pluginsInfoBrowser->setHtml(html);
 			ui->pluginLoadAtStartupCheckBox->setChecked(desc.loadAtStartup);
 			StelModule* pmod = StelApp::getInstance().getModuleMgr().getModule(desc.info.id, true);
@@ -647,19 +648,20 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_(scriptMgr.getName(s).trimmed()) + "</h2>";
-	if (!scriptMgr.getAuthor(s).trimmed().isEmpty())
-	{
-		html += "<h3>" + q_("Author") + ": " + scriptMgr.getAuthor(s) + "</h3>";
-	}
-	if (!scriptMgr.getLicense(s).trimmed().isEmpty())
-	{
-		html += "<h3>" + q_("License") + ": " + scriptMgr.getLicense(s) + "</h3>";
-	}	
 	QString d = scriptMgr.getDescription(s).trimmed();
 	d.replace("\n", "<br />");
 	d.replace(QRegExp("\\s{2,}"), " ");
 	html += "<p>" + q_(d) + "</p>";
-	html += "</body></html>";	
+	html += "<p>";
+	if (!scriptMgr.getAuthor(s).trimmed().isEmpty())
+	{
+		html += "<strong>" + q_("Author") + "</strong>: " + scriptMgr.getAuthor(s) + "<br />";
+	}
+	if (!scriptMgr.getLicense(s).trimmed().isEmpty())
+	{
+		html += "<strong>" + q_("License") + "</strong>: " + scriptMgr.getLicense(s);
+	}	
+	html += "</p></body></html>";
 	ui->scriptInfoBrowser->setHtml(html);	
 }
 
