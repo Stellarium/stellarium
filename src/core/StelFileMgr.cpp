@@ -87,7 +87,7 @@ void StelFileMgr::init()
 #ifdef Q_OS_WIN
 	// This solution work fine on all Windows
 	screenshotDir = QDesktopServices::storageLocation(QDesktopServices::PicturesLocation);
-#elif Q_OS_MAC
+#elif defined Q_OS_MAC
 	screenshotDir = getDesktopDir();
 	QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath());
 #else
