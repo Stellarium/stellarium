@@ -1,3 +1,41 @@
+0.11.3 [2012-05-18]
+Bug fix release.
+
+Added:
+- ecliptic grid (LP: #834307)
+- world observatories to the locations list (LP: #891643)
+- allow configuration of url for SIMBAD lookups (LP: #948528)
+- opportunity to freely choose the object information to display (LP: #834325)
+- Pluto texture (LP: #906766)
+
+Fixed:
+- No objects under horizon (LP: #952532)
+- (MinGW-w64) CMake does not detect Win64 (LP: #951465)
+- (MinGW-w64) Compilation errors (LP: #951405, #951742)
+- Oculars FOV (LP: #971066, #962691)
+- "Galactic Plane" string does not get translated when language is switched (LP: #976515)
+- Use freedesktop specification for Unity quicklists (LP: #959893)
+- Apparent diameter of planets with rings (LP: #960904)
+- Crash [assert] when FOV is small and Quasars or Historical Supernovae plugins is enabled (LP: #961011)
+- Angle Measure plug-in reads the wrong options from the configuration file (LP: #954205)
+- Crash in debug mode on displaying constellation borders (LP: #951967)
+- Star halo "dances" for small Solar System objects (LP: #805810)
+- RTL-languages is not displayed correctly when using gravity labels (LP: #801668)
+- Orbits with close perihelions are not displayed correctly (LP: #640455)
+- Precision of angular diameter lower than intended (LP: #955635)
+- Moons' orbit lines broken by parent planet movement with time (LP: #889712)
+- Invalid user defined location cause Stellarium to crash (LP: #860220)
+- Difficulty to select zoomed in planets and moons (LP: #854374)
+- Altazimutal grid not overlapping equatorial grid when located on poles (LP: #775972)
+- Global key bindings not global (LP: #687288)
+- Screenshot write permission fail (Vista/7) (LP: #568086)
+- Wrong planet phases as seen from more outer planets (LP: #803305)
+- Zoom in/out command sticks (LP: #712112)
+- Importing SSOs causes some strange effects (LP: #969211)
+- Not updated values of dimensions of CCD while changes telescopes (LP: #998726)
+- Gravity labels rendered incorrectly (LP: #998121)
+- Keyboard shortcut for subtract one sidereal year don't works (LP: #997873)
+
 0.11.2 [2012-03-10]
 The main theme of this version seems to be localization:
 - most of the text used by the default plug-ins is now translatable

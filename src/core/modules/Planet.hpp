@@ -37,7 +37,7 @@ typedef void (OsculatingFunctType)(double jd0,double jd,double xyz[3]);
 
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
-#define ORBIT_SEGMENTS 72
+#define ORBIT_SEGMENTS 360
 
 class StelFont;
 class StelPainter;

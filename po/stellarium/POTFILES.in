@@ -14,6 +14,7 @@ src/core/StelCore.cpp
 src/core/StelProjector.cpp
 src/core/StelProjectorClasses.cpp
 src/core/StelObject.cpp
+src/core/SimbadSearcher.cpp
 src/gui/ConfigurationDialog.cpp
 src/gui/HelpDialog.cpp
 src/gui/StelGui.cpp
@@ -80,3 +81,5 @@ plugins/Quasars/src/Quasars.cpp
 plugins/Quasars/src/Quasar.cpp
 plugins/Pulsars/src/Pulsars.cpp
 plugins/Pulsars/src/Pulsar.cpp
+plugins/Pulsars/src/gui/PulsarsDialog.cpp
+plugins/Pulsars/src/ui_pulsarsDialog.h

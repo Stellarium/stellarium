@@ -2,7 +2,7 @@ SET(stellarium_DOMAIN stellarium)
 SET(stellarium_POT ${stellarium_DOMAIN}.pot)
 
 GETTEXT_CREATE_TRANSLATIONS(${stellarium_DOMAIN} DEFAULT_TARGET
-    af ar az be bg bn bo br bs ca cs cy da de dv el en_AU en_CA en_GB en eo es et eu fa fil fi fr fy ga gl gu gv haw he hi hr hrx hu hy ia id is it ja ka kn ko lt lv mk ml mr ms mt mi nan nb nl nn oc pl pt_BR pt ro ru sco se si sk sl sq sr su sv ta te th tl tr uk vi zh_CN zh_HK zh_TW
+    aa ab ae af ak am an ar as ast av az ba be bg bh bi bn bo br bs ca ce cs cv cy da de dv el en en_AU en_CA en_GB en_US eo es et eu fa fi fil fj fr fy ga gd gl gn gu gv haw he hi hr hrx ht hu hy ia id is it ja ka kg kk kn ko ky la lb lo lt lv mi mk ml mn mo mr ms mt nan nb nl nn oc os pa pl pt pt_BR ro ru sco se si sk sl sm sq sr su sv sw ta te tg th tl tr tt uk uz vi zh_CN zh_HK zh_TW zu
 )
 
 ADD_CUSTOM_TARGET(
