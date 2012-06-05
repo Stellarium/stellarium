@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-02 20:19+0700\n"
-"PO-Revision-Date: 2012-05-23 21:24+0000\n"
+"PO-Revision-Date: 2012-06-04 21:20+0000\n"
 "Last-Translator: Zbyněk Schwarz <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-03 04:36+0000\n"
-"X-Generator: Launchpad (build 15342)\n"
+"X-Launchpad-Export-Date: 2012-06-05 04:51+0000\n"
+"X-Generator: Launchpad (build 15353)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -5668,10 +5668,12 @@ msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr ""
+"Tento zásuvný modul zobrazuje umístění různých pulsarů, každý objekt s jeho "
+"informacemi."
 
 #: plugins/Pulsars/src/Pulsars.cpp:148
 msgid "Pulsars configuration window"
-msgstr ""
+msgstr "Okno nastavení pulsarů"
 
 #: plugins/Pulsars/src/Pulsar.cpp:129
 msgid "pulsar"
@@ -5793,7 +5795,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
 msgid "Pulsars Plug-in"
-msgstr ""
+msgstr "Zásuvný modul pulsarů"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
 #, qt-format
@@ -5802,54 +5804,59 @@ msgid ""
 "Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 msgstr ""
+"Data pulsarů byla získána z 'The ATNF Pulsar Catalogue' (Manchester, R. N., "
+"Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
+"(%1astro-ph/0412641%2))."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
 msgid "Note"
-msgstr ""
+msgstr "Poznámka"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr ""
+msgstr "identifikátory pulsarů mají předponu 'PSR'"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 msgid "Acknowledgment"
-msgstr ""
+msgstr "Poděkování"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
 msgid ""
 "We thank the following people for their contribution and of the valuable "
 "comments:"
-msgstr ""
+msgstr "Děkujeme následujícím lidem za jejich příspěvky a cenné připomínky:"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
-msgstr ""
+msgstr "Radioastronomická observatoř Puščino"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
 msgid "in Russia"
-msgstr ""
+msgstr "v Rusku"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 msgid "Maciej Serylak"
-msgstr ""
+msgstr "Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Nancay Radioastronomical Observatory"
-msgstr ""
+msgstr "Radioastronomická observatoř Nancy"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
 msgid "in France"
-msgstr ""
+msgstr "ve Francii"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"Pulsars "
 "plugin\" in the subject when posting."
 msgstr ""
+"Podporu můžete získat na stránce Lunchpad. Nezapomeňte při přidávání "
+"příspěvku dát do názvu \"Pulsars plugin\"."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
@@ -5858,43 +5865,45 @@ msgid ""
 "If you want read full information about plugin, his history and format of "
 "catalog you can %1get info here%2."
 msgstr ""
+"Pokud si chcete přečíst kompletní informace o tomto modulu, jeho historii a "
+"formátu katalogu, můžete tak %1učinit zde%2."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:165
 #, qt-format
 msgid "Next update: %1 days"
-msgstr ""
+msgstr "Další aktualizace: za %1 dní"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:207
 msgid "Pulsars is updated"
-msgstr ""
+msgstr "Pulsary jsou aktualizovány"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:252
 msgid "Pulsars Configuration"
-msgstr ""
+msgstr "Nastavení pulsarů"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:253
 msgid "Pulsars Plug-in Configuration"
-msgstr ""
+msgstr "Nastavení zásuvného modulu pulsarů"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:255
 msgid "Update catalog from Internet"
-msgstr ""
+msgstr "Aktualizovat katalog z internetu"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Update frequency (days):"
-msgstr ""
+msgstr "Četnost aktualizací (ve dnech):"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 msgid "[next update info]"
-msgstr ""
+msgstr "[informace o příští aktualizaci]"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:261
 msgid "Display mode for pulsars"
-msgstr ""
+msgstr "Režim zobrazení pulsarů"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:262
 msgid "Enable display of distribution for pulsars"
-msgstr ""
+msgstr "Povolit zobrazení šíření pulsarů"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Ekvatoriální mřížka"
