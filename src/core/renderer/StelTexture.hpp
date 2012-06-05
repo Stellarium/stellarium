@@ -44,12 +44,8 @@ public:
 	//!
 	//! If the texture is lazily loaded and has not been loaded before,
 	//! it will start loading, it will not be bound and false will be returned.
-	//! @param textureUnit Texture unit to use (default is 0)
+	//! @param textureUnit Texture unit to use
 	//! @return true if the binding successfully occured, false if the texture is not yet loaded.
-	
-	//minor change by Eleni Maria Stea:
-	//added texture unit (useful when multiple textures are used)
-	//this change doesn't affect the previous calls of the function!
 	bool bind(int textureUnit = 0)
 	{
 		if(textureBackend->getStatus() != TextureStatus_Loaded){return false;}
