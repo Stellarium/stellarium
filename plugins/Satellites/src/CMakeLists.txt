@@ -82,7 +82,7 @@ IF(BUILD_STATIC_PLUGINS)
 	# The library target "Satellites-static" has a default OUTPUT_NAME of "Satellites-static", so change it.
 	SET_TARGET_PROPERTIES(Satellites-static PROPERTIES OUTPUT_NAME "Satellites")
 	TARGET_LINK_LIBRARIES(Satellites-static ${StelMain} ${extLinkerOption})
-	IF((GCC_VERSION VERSION_GREATER "4.3") OR (GCC_VERSION VERSION_EQUAL "4.3"))
+	IF("${GCC_VERSION}" VERSION_GREATER "4.6" OR "${GCC_VERSION}" VERSION_EQUAL "4.6")
 	    SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN -Wno-unused-parameter -Wno-unused-but-set-parameter -Wno-unused-but-set-variable")
 	ELSE()
             SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN -Wno-unused-parameter")
