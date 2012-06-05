@@ -27,8 +27,6 @@
 //TODO If Renderer implementation now decides whether or not to use VisualEffects,
 //     "framebufferOnly" makes no sense, and should be removed.
 
-
-
 //! Handles all graphics related functionality.
 //! 
 //! @note This is an interface. It should have only functions, no data members,
@@ -119,7 +117,14 @@ public:
 	//! Draw the result of drawing commands to the window, applying given effect if possible.
 	virtual void drawWindow(StelViewportEffect* effect) = 0;
 	
+	//Both of these will be hidden behind a createTexture() and 
+	//the new StelTexture's dtor
+
 	//! Create a StelTextureBackend from specified file or URL.
+	//!
+	//! Note that the StelTextureBackend created here must be destroyed 
+	//! by calling destroyTextureBackend of the same renderer.
+	//! This allows things like texture caching to work.
 	//!
 	//! @param  filename    File name or URL of the image to load the texture from.
 	//!                     If it's a file and it's not found, it's searched for in
@@ -140,7 +145,7 @@ public:
 	//! @return New texture backend on success, or NULL on failure.
 	StelTextureBackend* createTextureBackend
 		(const QString& filename, const StelTextureParams& params, 
-		 TextureLoadingMode loadingMode)
+		 const TextureLoadingMode loadingMode)
 	{
 		//This function tests preconditions and calls implementation.
 		Q_ASSERT_X(!filename.endsWith(".pvr"), 
@@ -149,8 +154,18 @@ public:
 		           "support may not be implemented by all Renderer backends. Request "
 		           "a non-PVR texture, and if a PVR version exists and the backend "
 		           "supports it, it will be loaded.");
+		Q_ASSERT_X(!filename.isEmpty(), Q_FUNC_INFO,
+		           "Trying to load a texture with an empty filename or URL");
+		Q_ASSERT_X(!(filename.startsWith("http://") && loadingMode == TextureLoadingMode_Normal),
+		           Q_FUNC_INFO,
+		           "When loading a texture from network, texture loading mode must be "
+		           "Asynchronous or LazyAsynchronous");
+
 		return createTextureBackend_(filename, params, loadingMode);
 	}
+
+	//! Destroy a StelTextureBackend.
+	virtual void destroyTextureBackend(StelTextureBackend* backend) = 0;
 
 protected:
 	//! Create a vertex buffer backend. Used by createVertexBuffer.
@@ -164,7 +179,7 @@ protected:
 	virtual StelVertexBufferBackend* createVertexBufferBackend
 		(const PrimitiveType primitiveType, const QVector<StelVertexAttribute>& attributes) = 0;
 
-	//! Draw contents of a vertex buffer (backend). Used by drawVertexBufferBackend.
+	//! Draw contents of a vertex buffer (backend). Used by drawVertexBuffer.
 	//!
 	//! @see drawVertexBufferBackend
 	virtual void drawVertexBufferBackend(StelVertexBufferBackend* vertexBuffer, 
@@ -176,7 +191,7 @@ protected:
 	//! @see createTextureBackend
 	virtual class StelTextureBackend* createTextureBackend_
 		(const QString& filename, const StelTextureParams& params, 
-		 TextureLoadingMode loadingMode) = 0;
+		 const TextureLoadingMode loadingMode) = 0;
 };
 
 #endif // _STELRENDERER_HPP_

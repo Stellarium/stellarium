@@ -125,6 +125,15 @@ public:
 		return errorMessage;
 	}
 
+	//! Get the "name" of this texture.
+	//!
+	//! The name might be the full path if loaded from file, 
+	//! URL if loaded from network, or nothing at all when generated.
+	const QString& getName() const
+	{
+		return path;
+	}
+
 protected:
 	//! Full file system path or URL of the texture file.
 	const QString path;
