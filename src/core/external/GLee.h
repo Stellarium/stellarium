@@ -813,8 +813,9 @@ GLEE_EXTERN GLboolean _GLEE_SGIX_texture_range;
 #else          
 
 	/* GLX */
-
+	#ifndef __FreeBSD__
 	typedef void (*__GLXextFuncPtr)(void);
+	#endif
 
 	#ifndef GLX_ARB_get_proc_address 
 	#define GLX_ARB_get_proc_address 1
