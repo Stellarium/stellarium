@@ -19,7 +19,9 @@ public:
 	//! Start asynchrounously loading the texture in a separate thread.
 	//!
 	//! Can only be called on a StelQGLTextureBackend returned by constructAsynchronous.
-	void startLoadingInThread();
+	//!
+	//! Changes status from Uninitialized to Loading.
+	void startAsynchronousLoading();
 	
 	//! Construct a StelQGLTextureBackend from an image.
 	//!

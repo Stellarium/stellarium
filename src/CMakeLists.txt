@@ -146,6 +146,7 @@ SET(stellarium_lib_SRCS
 	core/renderer/StelTestQGL2VertexBufferBackend.hpp
 	core/renderer/StelTextureParams.hpp
 	core/renderer/StelTextureBackend.hpp
+	core/renderer/StelTextureCache.hpp
 	core/renderer/StelQGLTextureBackend.cpp
 	core/renderer/StelQGLTextureBackend.hpp
 	core/renderer/StelTextureLoader.hpp

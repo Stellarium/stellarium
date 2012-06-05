@@ -83,7 +83,7 @@ void StelQGLTextureBackend::bind(const int textureUnit)
 	invariant();
 }
 
-void StelQGLTextureBackend::startLoadingInThread()
+void StelQGLTextureBackend::startAsynchronousLoading()
 {
 	invariant();
 	startedLoading();

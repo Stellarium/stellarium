@@ -10,6 +10,7 @@
 #include "StelGLRenderer.hpp"
 #include "StelQGLTextureBackend.hpp"
 #include "StelPainter.hpp"
+#include "StelTextureCache.hpp"
 
 
 //! GLWidget specialized for Stellarium, mostly to provide better debugging information.
@@ -72,6 +73,7 @@ public:
 		, glWidget(new StelQGLWidget(glContext, parent))
 		, painter(NULL)
 		, pvrSupported(pvrSupported)
+		, textureCache()
 		, gl(glContext)
 	{
 		loaderThread = new QThread();
@@ -159,12 +161,19 @@ public:
 		}
 		if(status == TextureStatus_Uninitialized)
 		{
-			qglTextureBackend->startLoadingInThread();
+			qglTextureBackend->startAsynchronousLoading();
 		}
 	}
 
-	virtual StelTextureBackend* createTextureBackend_
-		(const QString& filename, const StelTextureParams& params, TextureLoadingMode loadingMode);
+	virtual void destroyTextureBackend(StelTextureBackend* textureBackend)
+	{
+		StelQGLTextureBackend* qglTextureBackend =
+			dynamic_cast<StelQGLTextureBackend*>(textureBackend);
+		Q_ASSERT_X(qglTextureBackend != NULL, Q_FUNC_INFO,
+		           "Trying to destroy a texture created by a different renderer backend");
+
+		textureCache.remove(qglTextureBackend);
+	}
 
 	//! Used to access the GL context. 
 	//!
@@ -187,6 +196,9 @@ public:
 	}
 
 protected:
+	virtual StelTextureBackend* createTextureBackend_
+		(const QString& filename, const StelTextureParams& params, const TextureLoadingMode loadingMode);
+
 	virtual void enablePainting(QPainter* painter)
 	{
 		invariant();
@@ -230,6 +242,8 @@ private:
 	//! Thread used for loading graphics data (e.g. textures).
 	QThread* loaderThread;
 
+	//! Caches textures to prevent duplicate loading.
+	StelTextureCache<StelQGLTextureBackend> textureCache;
 protected:
 	//! Wraps some GL functions for compatibility across GL and GLES.
 	QGLFunctions gl;
