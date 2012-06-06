@@ -26,20 +26,23 @@
 #include "StelMovementMgr.hpp"
 #include "renderer/StelRenderer.hpp"
 
-#include <QGLFramebufferObject>
 #include <QSettings>
 #include <QFile>
 
-void StelViewportEffect::paintViewportBuffer
-	(const QGLFramebufferObject *buf, StelRenderer *renderer) const
+void StelViewportEffect::drawToViewport(StelRenderer *renderer)
 {
-	//TODO replace StelPainter with StelRenderer here
-	Q_UNUSED(renderer);
+	StelTexture* screenTexture = renderer->getViewportTexture();
+	int texWidth, texHeight;
+	screenTexture->getDimensions(texWidth, texHeight);
+
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
 	sPainter.setColor(1,1,1);
-	sPainter.enableTexture2d(true);
-	glBindTexture(GL_TEXTURE_2D, buf->texture());
-	sPainter.drawRect2d(0, 0, buf->size().width(), buf->size().height());
+
+	screenTexture->bind();
+
+	sPainter.drawRect2d(0, 0, texWidth, texHeight);
+
+	delete screenTexture;
 }
 
 ///Vertex attribute specification of DistorterFisheyeToSphericMirror's vertex type.
@@ -58,6 +61,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	, screenHeight(screenHeight)
 	, originalProjectorParams(StelApp::getInstance().getCore()->
 	                          getCurrentStelProjectorParams())
+	, maxTexCoords(1.0f, 1.0f)
 	, vertexGrid(NULL)
 {
 	QSettings& conf = *StelApp::getInstance().getSettings();
@@ -426,7 +430,6 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 		float dx = x / stepX + 0.5f*dy;
 		const int i = (int)floorf(dx);
 		dx -= i;
-		//const Vec2f *const t = texturePointGrid + (j*cols+i);
 		const Vertex *const v = vertexGrid + (j*cols+i);
 		if (dx >= dy)
 		{
@@ -467,19 +470,53 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 }
 
 
-void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer
-    (const QGLFramebufferObject* buf, StelRenderer* renderer) const
+void StelViewportDistorterFisheyeToSphericMirror::recalculateTexCoords(const QSizeF newMaxTexCoords)
 {
-	//TODO replace by StelRenderer code.
+	const float xMult = newMaxTexCoords.width() / maxTexCoords.width();
+	const float yMult = newMaxTexCoords.height() / maxTexCoords.height();
+	for(int row = 0; row < maxGridY; ++row)
 	{
-		StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
-		sPainter.enableTexture2d(true);
-		glBindTexture(GL_TEXTURE_2D, buf->texture());
-		glDisable(GL_BLEND);
+		StelVertexBuffer<Vertex>* buffer = vertexBuffers[row];
+		buffer->unlock();
+		const int length = buffer->length();
+		Vertex vertex;
+
+		for(int v = 0; v < length; ++v) 
+		{
+			vertex = buffer->getVertex(v);
+			vertex.texCoord[0] *= xMult;
+			vertex.texCoord[1] *= yMult;
+			buffer->setVertex(v, vertex);
+		}
+		buffer->lock();
 	}
+	maxTexCoords = newMaxTexCoords;
+}
+
+void StelViewportDistorterFisheyeToSphericMirror::drawToViewport(StelRenderer* renderer) 
+{
+	// Screen texture might be larger than the screen 
+	// if power-of-two textures are required.
+	// In such cases, we need to adjust texture coordinates
+	// and do that every time screen size is changed.
+	StelTexture* screenTexture = renderer->getViewportTexture();
+
+	const QSize viewportSize = renderer->getViewportSize();
+	int texWidth, texHeight;
+	screenTexture->getDimensions(texWidth, texHeight);
+	const QSizeF newMaxTexCoords(viewportSize.width() / static_cast<float>(texWidth),
+	                             viewportSize.height() / static_cast<float>(texHeight));
+	if(maxTexCoords != newMaxTexCoords)
+	{
+		recalculateTexCoords(newMaxTexCoords);
+	}
+
+	screenTexture->bind();
 
 	foreach(StelVertexBuffer<Vertex> *buffer, vertexBuffers)
 	{
 		renderer->drawVertexBuffer(buffer);
 	}
+
+	delete screenTexture;
 }

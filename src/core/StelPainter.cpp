@@ -708,7 +708,8 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			if (isNoPowerOfTwoAllowed)
 				strImage = QPixmap(newTex->subTexWidth, newTex->subTexHeight);
 			else
-				strImage = QPixmap(StelUtils::getBiggerPowerOfTwo(newTex->subTexWidth), StelUtils::getBiggerPowerOfTwo(newTex->subTexHeight));
+				strImage = QPixmap(StelUtils::smallestPowerOfTwoGreaterOrEqualTo(newTex->subTexWidth), 
+				                   StelUtils::smallestPowerOfTwoGreaterOrEqualTo(newTex->subTexHeight));
 			newTex->width = strImage.width();
 			newTex->height = strImage.height();
 

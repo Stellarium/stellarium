@@ -43,14 +43,9 @@ protected:
 		QString paintEngineStr;
 		switch (paintEngine()->type())
 		{
-		case QPaintEngine::OpenGL:
-			paintEngineStr = "OpenGL";
-			break;
-		case QPaintEngine::OpenGL2:
-			paintEngineStr = "OpenGL2";
-			break;
-		default:
-			paintEngineStr = "Other";
+			case QPaintEngine::OpenGL:  paintEngineStr = "OpenGL"; break;
+			case QPaintEngine::OpenGL2: paintEngineStr = "OpenGL2"; break;
+			default:                    paintEngineStr = "Other";
 		}
 		qDebug() << "Qt GL paint engine is: " << paintEngineStr;
 	}
@@ -172,6 +167,11 @@ public:
 		Q_ASSERT_X(qglTextureBackend != NULL, Q_FUNC_INFO,
 		           "Trying to destroy a texture created by a different renderer backend");
 
+		if(textureBackend->getName().isEmpty())
+		{
+			delete textureBackend;
+			return;
+		}
 		textureCache.remove(qglTextureBackend);
 	}
 
@@ -198,6 +198,8 @@ public:
 protected:
 	virtual StelTextureBackend* createTextureBackend_
 		(const QString& filename, const StelTextureParams& params, const TextureLoadingMode loadingMode);
+
+	virtual StelTextureBackend* getViewportTextureBackend();
 
 	virtual void enablePainting(QPainter* painter)
 	{
@@ -226,7 +228,7 @@ protected:
 	}
 	
 private:
-	//! OpenGL context..
+	//! OpenGL context.
 	QGLContext* glContext;
 	//! Widget we're drawing to with OpenGL.
 	StelQGLWidget* glWidget;

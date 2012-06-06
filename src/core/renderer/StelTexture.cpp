@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelRenderer.hpp"
 #include "StelTexture.hpp"
 
 StelTexture::StelTexture(StelTextureBackend* backend, StelRenderer* renderer) 
@@ -28,4 +29,11 @@ StelTexture::StelTexture(StelTextureBackend* backend, StelRenderer* renderer)
 StelTexture::~StelTexture()
 {
 	renderer->destroyTextureBackend(textureBackend);
+}
+
+bool StelTexture::bind(int textureUnit)
+{
+	if(textureBackend->getStatus() != TextureStatus_Loaded){return false;}
+	renderer->bindTexture(textureBackend, textureUnit);
+	return true;
 }
