@@ -62,3 +62,10 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend_
 	textureCache.add(result);
 	return result;
 }
+
+StelTextureBackend* StelQGLRenderer::getViewportTextureBackend()
+{
+	return useFBO() 
+		? StelQGLTextureBackend::fromFBO(this, frontBuffer)
+		: StelQGLTextureBackend::fromViewport(this, getViewportSize(), glContext->format());
+}

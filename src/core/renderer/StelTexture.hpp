@@ -24,7 +24,6 @@
 #include <QImage>
 #include <QtOpenGL>
 
-#include "StelRenderer.hpp"
 #include "StelTextureBackend.hpp"
 #include "StelTextureParams.hpp"
 #include "StelTextureTypes.hpp"
@@ -46,12 +45,7 @@ public:
 	//! it will start loading, it will not be bound and false will be returned.
 	//! @param textureUnit Texture unit to use
 	//! @return true if the binding successfully occured, false if the texture is not yet loaded.
-	bool bind(int textureUnit = 0)
-	{
-		if(textureBackend->getStatus() != TextureStatus_Loaded){return false;}
-		renderer->bindTexture(textureBackend, textureUnit);
-		return true;
-	}
+	bool bind(int textureUnit = 0);
 
 	//! Return whether the texture can be bound, i.e. it is fully loaded
 	bool canBind() const {return textureBackend->getStatus() == TextureStatus_Loaded;}
@@ -80,13 +74,14 @@ private:
 	StelTextureBackend* textureBackend;
 
 	//! Renderer that constructed the texture backend.
-	StelRenderer* renderer;
+	class StelRenderer* renderer;
 
-	//! Constructs a StelTextyre.
+	//! Constructs a StelTexture (StelTextureMgr should be eventually removed).
 	friend class StelTextureMgr;
+	friend class StelRenderer;
 
 	//! Private constructor (so only StelTextureMgr can construct this).
-	StelTexture(StelTextureBackend* backend, StelRenderer* renderer);
+	StelTexture(StelTextureBackend* backend, class StelRenderer* renderer);
 };
 
 

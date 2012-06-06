@@ -7,6 +7,7 @@
 
 #include "StelVertexBuffer.hpp"
 #include "StelViewportEffect.hpp"
+#include "StelTexture.hpp"
 #include "StelTextureBackend.hpp"
 #include "StelTextureParams.hpp"
 
@@ -148,8 +149,7 @@ public:
 		 const TextureLoadingMode loadingMode)
 	{
 		//This function tests preconditions and calls implementation.
-		Q_ASSERT_X(!filename.endsWith(".pvr"), 
-		           Q_FUNC_INFO,
+		Q_ASSERT_X(!filename.endsWith(".pvr"), Q_FUNC_INFO,
 		           "createTextureBackend() can't load a PVR texture directly, as PVR "
 		           "support may not be implemented by all Renderer backends. Request "
 		           "a non-PVR texture, and if a PVR version exists and the backend "
@@ -164,8 +164,24 @@ public:
 		return createTextureBackend_(filename, params, loadingMode);
 	}
 
+	//! Get a texture of the viewport, with everything drawn to the viewport so far.
+	//!
+	//! @note Since some backends only support textures with power of two 
+	//! dimensions, the returned texture might be larger than the viewport
+	//! in which case only the part of the texture matching viewport size 
+	//! (returned by getViewportSize) will be used.
+	//!
+	//! @return Viewport texture.
+	StelTexture* getViewportTexture()
+	{
+		return new StelTexture(getViewportTextureBackend(), this);
+	}
+
 	//! Destroy a StelTextureBackend.
 	virtual void destroyTextureBackend(StelTextureBackend* backend) = 0;
+
+	//! Get size of the viewport in pixels.
+	virtual QSize getViewportSize() const = 0;
 
 protected:
 	//! Create a vertex buffer backend. Used by createVertexBuffer.
@@ -186,12 +202,17 @@ protected:
 	                                     class StelIndexBuffer* indexBuffer,
 	                                     StelProjectorP projector) = 0;
 
-	//! Implementation of createTextureBackend_
+	//! Implementation of createTextureBackend.
 	//!
 	//! @see createTextureBackend
 	virtual class StelTextureBackend* createTextureBackend_
 		(const QString& filename, const StelTextureParams& params, 
 		 const TextureLoadingMode loadingMode) = 0;
+
+	//! Implementation of getViewportTexture.
+	//!
+	//! @see getViewportTexture.
+	virtual StelTextureBackend* getViewportTextureBackend() = 0;
 };
 
 #endif // _STELRENDERER_HPP_

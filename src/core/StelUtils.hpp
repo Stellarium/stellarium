@@ -24,6 +24,7 @@
 
 #include <QVariantMap>
 #include <QDateTime>
+#include <QSize>
 #include <QString>
 
 // astonomical unit (km)
@@ -173,8 +174,11 @@ namespace StelUtils
 	//! Check if a number is a power of 2.
 	bool isPowerOfTwo(int value);
 
-	//! Return the first power of two bigger than the given value.
-	int getBiggerPowerOfTwo(int value);
+	//! Return the first power of two greater or equal to the given value.
+	int smallestPowerOfTwoGreaterOrEqualTo(int value);
+
+	//! Return the smallest size with power-of two dimensions at least as large as given size.
+	QSize smallestPowerOfTwoSizeGreaterOrEqualTo(const QSize base);
 
 	//! Return the inverse sinus hyperbolic of z.
 	double asinh(double z);

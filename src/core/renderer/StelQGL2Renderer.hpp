@@ -10,6 +10,7 @@
 #include "StelCore.hpp"
 #include "StelQGLRenderer.hpp"
 #include "StelProjector.hpp"
+#include "StelTestQGL2VertexBufferBackend.hpp"
 
 //TODO:
 // GL1/GL2 ifdefs (but is this really needed? 
@@ -70,11 +71,6 @@ public:
 		if(!gl.hasOpenGLFeature(QGLFunctions::Buffers))
 		{
 			qWarning() << "StelQGL2Renderer::init : Required feature not supported: VBOs/IBOs";
-			return false;
-		}
-		if(!gl.hasOpenGLFeature(QGLFunctions::Framebuffers))
-		{
-			qWarning() << "StelQGL2Renderer::init : Required feature not supported: framebuffers";
 			return false;
 		}
 

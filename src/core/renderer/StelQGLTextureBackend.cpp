@@ -1,9 +1,13 @@
 #include <QGLContext>
+#include <QGLFormat>
+#include <QGLFramebufferObject>
+#include <QImage>
 
-#include "StelQGLTextureBackend.hpp"
-#include "StelQGLRenderer.hpp"
 #include "StelGLUtilityFunctions.hpp"
-#include "renderer/StelTextureLoader.hpp"
+#include "StelQGLRenderer.hpp"
+#include "StelQGLTextureBackend.hpp"
+#include "StelTextureLoader.hpp"
+#include "StelUtils.hpp"
 
 
 //! Get QGL bind options corresponding to specified StelTextureParams.
@@ -42,6 +46,7 @@ StelQGLTextureBackend::StelQGLTextureBackend
 	, textureParams(params)
 	, renderer(renderer)
 	, glTextureID(0)
+	, ownsTexture(true)
 	, loader(NULL)
 {
 	invariant();
@@ -59,7 +64,7 @@ StelQGLTextureBackend::~StelQGLTextureBackend()
 			            "tried to delete invalid texture with ID=" << glTextureID << 
 			            " Current GL ERROR status is " << glErrorToString(glGetError());
 		}
-		else
+		else if(ownsTexture)
 		{
 			renderer->getGLContext()->deleteTexture(glTextureID);
 		}
@@ -147,6 +152,79 @@ StelQGLTextureBackend* StelQGLTextureBackend::constructAsynchronous
 	(StelQGLRenderer* renderer, const QString& path, const StelTextureParams& params)
 {
 	StelQGLTextureBackend* result = new StelQGLTextureBackend(renderer, path, params);
+	return result;
+}
+
+StelQGLTextureBackend* StelQGLTextureBackend::fromFBO
+	(StelQGLRenderer* renderer, QGLFramebufferObject* fbo)
+{
+	renderer->makeGLContextCurrent();
+
+	const StelTextureParams params = StelTextureParams();
+	StelQGLTextureBackend* result = new StelQGLTextureBackend(renderer, QString(), params);
+
+	result->startedLoading();
+	result->glTextureID = fbo->texture();
+	// Prevent the StelQGLTextureBackend destructor from destroying the texture.
+	result->ownsTexture = false;
+
+	result->finishedLoading(fbo->size());
+
+	return result;
+}
+
+StelQGLTextureBackend* StelQGLTextureBackend::fromViewport
+	(StelQGLRenderer* renderer, const QSize viewportSize, const QGLFormat& viewportFormat)
+{
+	// This function should only be used as a fallback for when FBOs aren't supported.
+
+	// Get image and GL pixel format matching viewport format.
+	int glFormat;
+
+	const int r = viewportFormat.redBufferSize();
+	const int g = viewportFormat.greenBufferSize();
+	const int b = viewportFormat.blueBufferSize();
+	const int a = viewportFormat.alpha() ? viewportFormat.alphaBufferSize() : 0;
+
+	if(r == 8 && g == 8 && b == 8 && a == 8)     {glFormat = GL_RGBA8;}
+	else if(r == 8 && g == 8 && b == 8 && a == 0){glFormat = GL_RGB8;}
+	else if(r == 5 && g == 6 && b == 5 && a == 0){glFormat = GL_RGB5;}
+	else
+	{
+		// This is extremely unlikely, but we can't rule it out.
+		Q_ASSERT_X(false, Q_FUNC_INFO,
+		           "Unknown screen vertex format when getting texture from viewport. "
+		           "Switching to OpenGL2, disabling viewport effects or "
+		           "chaning video mode bit depth might help");
+	}
+
+	// Creating a texture from a dummy image.
+	QImage dummyImage(64, 64, QImage::Format_Mono);
+	const StelTextureParams params = StelTextureParams();
+
+	StelQGLTextureBackend* result = 
+		new StelQGLTextureBackend(renderer, QString(), params);
+
+	QGLContext* context = result->prepareContextForLoading();
+	const GLuint glTextureID = 
+	    context->bindTexture(dummyImage, GL_TEXTURE_2D, glFormat,
+	                         getTextureBindOptions(params));
+
+	// Need a power-of-two texture (as this is used mainly with GL1)
+	const QSize size = 
+		StelUtils::smallestPowerOfTwoSizeGreaterOrEqualTo(viewportSize);
+
+	// Set viewport so it matches the size of the texture
+	glViewport(0, 0, size.width(), size.height());
+	// Copy viewport to texture (this overrides texture size - we must use POT for GL1)
+	glCopyTexImage2D(GL_TEXTURE_2D, 0, glFormat, 0, 0, size.width(), size.height(), 0);
+	// Restore viewport
+	glViewport(0, 0, viewportSize.width(), viewportSize.height());
+
+	result->startedLoading();
+	result->glTextureID = glTextureID;
+	result->finishedLoading(size);
+
 	return result;
 }
 
