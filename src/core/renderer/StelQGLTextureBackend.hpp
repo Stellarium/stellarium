@@ -59,6 +59,32 @@ public:
 	static StelQGLTextureBackend* constructAsynchronous
 		(class StelQGLRenderer* renderer, const QString& path, const StelTextureParams& params);
 	
+	//! Construct a StelQGLTextureBackend from a framebuffer object.
+	//!
+	//! This will simply wrap a texture of a framebuffer object 
+	//! in a StelQGLTextureBackend and return it.
+	//!
+	//! @param renderer Renderer this texture belongs to.
+	//! @param fbo      Framebuffer object to get the texture from.
+	//! @return Pointer to the new StelQGLTextureBackend.
+	static StelQGLTextureBackend* fromFBO
+		(StelQGLRenderer* renderer, class QGLFramebufferObject* fbo);
+
+	//! Construct a StelQGLTextureBackend from the viewport.
+	//!
+	//! Used to get a texture of the viewport. The returned texture will be 
+	//! power-of-two containing the image data in area matching viewport size.
+	//!
+	//! @note This is only usable when FBOs are not used. When using FBOs,
+	//!       use fromFBO on the front buffer instead.
+	//!
+	//! @param renderer       Renderer this texture belongs to.
+	//! @param viewportSize   Size of the viewport in pixels.
+	//! @param viewportFormat Pixel format of the viewport.
+	//! @return Pointer to the new StelQGLTextureBackend.
+	static StelQGLTextureBackend* fromViewport
+		(StelQGLRenderer* renderer, const QSize viewportSize, const QGLFormat& viewportFormat);
+
 private slots:
 	//! Called by the loader when the image data has finished loading.
 	void onImageLoaded(QImage image);
@@ -75,6 +101,12 @@ private:
 
 	//! GL handle of the texture.
 	GLuint glTextureID;
+
+	//! Does this StelQGLTextureBackend own its texture?
+	//!
+	//! This is usually true, but false e.g. if the texture belongs to 
+	//! an FBO. If false, destructor won't delete the texture.
+	bool ownsTexture;
 
 	//! Used when asynchronously loading the texture, otherwise NULL.
 	class StelTextureLoader* loader;

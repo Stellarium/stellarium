@@ -20,6 +20,9 @@
 #ifndef _STELVIEWPORTEFFECT_HPP_
 #define _STELVIEWPORTEFFECT_HPP_
 
+
+#include <QSizeF>
+
 #include "VecMath.hpp"
 #include "StelProjector.hpp"
 #include "renderer/StelVertexAttribute.hpp"
@@ -35,12 +38,10 @@ public:
 	StelViewportEffect() {;}
 	virtual ~StelViewportEffect() {;}
 	virtual QString getName() {return "framebufferOnly";}
-	//! Draw the viewport on the screen.
-	//! @param buf the GL frame buffer containing the Stellarium viewport alreay drawn.
-	//!TODO DOC
-	//! The default implementation paints the buffer on the fullscreen.
-	virtual void paintViewportBuffer(const QGLFramebufferObject* buf,
-	                                 class StelRenderer* renderer) const;
+	//! Apply the effect and draw to viewport.
+	//! @param renderer Renderer to draw the effect.
+	//! The default implementation simply draws the rendered result to the screen.
+	virtual void drawToViewport(class StelRenderer* renderer);
 	//! Distort an x,y position according to the distortion.
 	//! The default implementation does nothing.
 	virtual void distortXY(float& x, float& y) const {Q_UNUSED(x); Q_UNUSED(y);}
@@ -54,8 +55,7 @@ public:
 	                                            class StelRenderer* renderer);
 	~StelViewportDistorterFisheyeToSphericMirror();
 	virtual QString getName() {return "sphericMirrorDistorter";}
-	virtual void paintViewportBuffer(const QGLFramebufferObject* buf,
-	                                 StelRenderer* renderer) const;
+	virtual void drawToViewport(class StelRenderer* renderer);
 	virtual void distortXY(float& x, float& y) const;
 private:
 
@@ -73,12 +73,17 @@ private:
 	int viewportTextureOffset[2];
 	int texture_wh;
 
-	//Vec2f *texturePointGrid;
+	//! Maximum texture coordinates.
+	//!
+	//! These coordinates correspond to the extents of the used 
+	//! part of the screen texture.
+	QSizeF maxTexCoords;
 	Vertex* vertexGrid;
 	
 	int maxGridX,maxGridY;
 	double stepX,stepY;
 
+	// Vertex buffers for each row of the grid.
 	QVector<StelVertexBuffer<Vertex>*> vertexBuffers;
 	
 	void constructVertexBuffer(const class Vertex *const vertexGrid, StelRenderer* renderer);
@@ -93,6 +98,18 @@ private:
 	//! @param gamma Gamma correction of the viewport effect will be output here.
 	void loadGenerationParameters(const QSettings& conf, double& gamma);
 	bool loadDistortionFromFile(const QString & fileName, class StelRenderer *renderer);
+
+	//! Recalculate texture coordinates.
+	//!
+	//! Screen texture might be larger than the screen 
+	//! if power-of-two textures are required.
+	//! In such cases, we need to adjust texture coordinates
+	//! every time screen size is changed.
+	//!
+	//! @param newMaxTexCoords New maximum texture coordinates.
+	//!        These coordinates correspond to the extents of the used 
+	//!        part of the screen texture.
+	void recalculateTexCoords(const QSizeF newMaxTexCoords);
 };
 #endif // _STELVIEWPORTEFFECT_HPP_
 
