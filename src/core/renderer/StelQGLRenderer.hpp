@@ -46,6 +46,7 @@ public:
 	
 	virtual ~StelQGLRenderer()
 	{
+		invariant();
 		loaderThread->quit();
 
 		// This causes crashes for some reason 
@@ -70,21 +71,27 @@ public:
 	
 	virtual QImage screenshot()
 	{
+		invariant();
 		return viewport.screenshot();
 	}
 	
 	virtual void enablePainting()
 	{
+		invariant();
 		viewport.enablePainting();
+		invariant();
 	}
 	
 	virtual void disablePainting()
 	{
+		invariant();
 		viewport.disablePainting();
+		invariant();
 	}
 
 	virtual void renderFrame(StelRenderClient& renderClient)
 	{
+		invariant();
 		if(previousFrameEndTime < 0.0)
 		{
 			previousFrameEndTime = StelApp::getTotalRunTime();
@@ -123,6 +130,7 @@ public:
 		viewport.setDefaultPainter(NULL);
 		
 		previousFrameEndTime = StelApp::getTotalRunTime();
+		invariant();
 	}
 
 	virtual void viewportHasBeenResized(const QSize size)
@@ -132,10 +140,15 @@ public:
 		invariant();
 	}
 
-	virtual QSize getViewportSize() const {return viewport.getViewportSize();}
+	virtual QSize getViewportSize() const 
+	{
+		invariant();
+		return viewport.getViewportSize();
+	}
 	
 	virtual void bindTexture(StelTextureBackend* const textureBackend, const int textureUnit)
 	{
+		invariant();
 		StelQGLTextureBackend* qglTextureBackend =
 			dynamic_cast<StelQGLTextureBackend*>(textureBackend);
 		Q_ASSERT_X(qglTextureBackend != NULL, Q_FUNC_INFO,
@@ -148,6 +161,7 @@ public:
 			// or if texture unit is nonzero and we don't support multitexturing.
 			if(textureUnit >= getTextureUnitCount())
 			{
+				invariant();
 				return;
 			}
 			qglTextureBackend->bind(textureUnit);
@@ -156,10 +170,12 @@ public:
 		{
 			qglTextureBackend->startAsynchronousLoading();
 		}
+		invariant();
 	}
 
 	virtual void destroyTextureBackend(StelTextureBackend* const textureBackend)
 	{
+		invariant();
 		StelQGLTextureBackend* qglTextureBackend =
 			dynamic_cast<StelQGLTextureBackend*>(textureBackend);
 		Q_ASSERT_X(qglTextureBackend != NULL, Q_FUNC_INFO,
@@ -168,9 +184,11 @@ public:
 		if(textureBackend->getName().isEmpty())
 		{
 			delete textureBackend;
+			invariant();
 			return;
 		}
 		textureCache.remove(qglTextureBackend);
+		invariant();
 	}
 	
 	//! Make Stellarium GL context the currently used GL context. Call this before GL calls.
@@ -207,6 +225,7 @@ protected:
 
 	virtual StelTextureBackend* getViewportTextureBackend()
 	{
+		invariant();
 		return viewport.getViewportTextureBackend(this);
 	}
 	
@@ -216,7 +235,7 @@ protected:
 	//! Asserts that we're in a valid state.
 	//!
 	//! Overriding methods should also call StelGLRenderer::invariant().
-	virtual void invariant()
+	virtual void invariant() const
 	{
 		Q_ASSERT_X(NULL != glContext, Q_FUNC_INFO,
 		           "An attempt to use a destroyed StelQGLRenderer.");

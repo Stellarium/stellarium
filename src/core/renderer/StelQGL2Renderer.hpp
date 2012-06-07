@@ -240,6 +240,7 @@ public:
 	//! @return Pointer to the shader program.
 	QGLShaderProgram* getShaderProgram(const QVector<StelVertexAttribute>& attributes)
 	{
+		invariant();
 		// Determine which vertex attributes are used.
 		bool position, texCoord, normal, color;
 		position = texCoord = normal = color = false;
@@ -259,6 +260,7 @@ public:
 		Q_ASSERT_X(position, Q_FUNC_INFO,
 		           "Vertex formats without vertex position are not supported");
 
+		invariant();
 		// There are possible combinations - 4 are implemented right now.
 		if(!texCoord && !normal && !color) {return plainShaderProgram;}
 		if(!texCoord && !normal && color)  {return colorShaderProgram;}
@@ -274,6 +276,7 @@ public:
 		Q_ASSERT_X(false, Q_FUNC_INFO,
 		           "Shader for vertex format not (yet) implemented");
 
+		invariant();
 		// Prevents GCC from complaining about exiting a non-void function:
 		return NULL;
 	}
@@ -282,6 +285,7 @@ protected:
 	virtual StelVertexBufferBackend* createVertexBufferBackend
 		(const PrimitiveType primitiveType, const QVector<StelVertexAttribute>& attributes)
 	{
+		invariant();
 		return new StelTestQGL2VertexBufferBackend(primitiveType, attributes);
 	}
 	
@@ -289,6 +293,7 @@ protected:
 	                                     class StelIndexBuffer* indexBuffer = NULL,
 	                                     StelProjectorP projector = NULL)
 	{
+		invariant();
 		Q_ASSERT_X(indexBuffer == NULL, Q_FUNC_INFO,
 		           "TODO: Using index buffer when drawing not yet implemented");
 
@@ -331,17 +336,20 @@ protected:
 		const Vec4i viewXywh = projector->getViewportXywh();
 		glViewport(viewXywh[0], viewXywh[1], viewXywh[2], viewXywh[3]);
 		backend->draw(*this, transposed);
+		invariant();
 	}
 
 	virtual int getTextureUnitCount() const
 	{
+		invariant();
 		GLint result;
 		// GL1 version should use GL_MAX_TEXTURE_UNITS instead.
 		glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &result);
+		invariant();
 		return result;
 	}
 
-	virtual void invariant()
+	virtual void invariant() const
 	{
 		Q_ASSERT_X(initialized, Q_FUNC_INFO, "uninitialized StelQGL2Renderer");
 		StelQGLRenderer::invariant();
@@ -384,6 +392,8 @@ private:
 	QGLShaderProgram *loadShaderProgram(const char* const name,
 	                                    const char* const vSrc, const char* const fSrc)
 	{
+		// No invariants, as this is called from init - before the Renderer is
+		// in fully valid state.
 		QGLShaderProgram* result = new QGLShaderProgram(getGLContext());
 		
 		// We add shaders directly from source instead of working with
