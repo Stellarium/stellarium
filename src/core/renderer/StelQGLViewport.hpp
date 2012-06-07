@@ -103,18 +103,22 @@ public:
 	//! Called when viewport size changes so we can replace the FBOs.
 	void viewportHasBeenResized(const QSize newSize)
 	{
+		invariant();
 		//Can't check this in invariant because Renderer is initialized before 
 		//AppGraphicsWidget sets its viewport size
 		Q_ASSERT_X(newSize.isValid(), Q_FUNC_INFO, "Invalid scene size");
 		viewportSize = newSize;
 		//We'll need FBOs of different size so get rid of the current FBOs.
 		destroyFBOs();
+		invariant();
 	}
 	
 	//! Set the default painter to use when not drawing to FBO.
 	void setDefaultPainter(QPainter* const painter)
 	{
+		invariant();
 		defaultPainter = painter;
+		invariant();
 	}
 
 	//! Grab a screenshot.
@@ -125,7 +129,11 @@ public:
 	}
 
 	//! Return current viewport size in pixels.
-	QSize getViewportSize() const {return viewportSize;}
+	QSize getViewportSize() const 
+	{
+		invariant();
+		return viewportSize;
+	}
 
 	//! Get a texture of the viewport.
 	StelTextureBackend* getViewportTextureBackend(class StelQGLRenderer* renderer);
@@ -133,6 +141,7 @@ public:
 	//! Are we using framebuffer objects?
 	bool useFBO() const
 	{
+		// Can't call invariant here as invariant calls useFBO
 		return fboSupported && !fboDisabled;
 	}
 
@@ -140,7 +149,6 @@ public:
 	void startFrame()
 	{
 		invariant();
-		drawing = true;
 		if (useFBO())
 		{
 			//Draw to backBuffer.
@@ -153,6 +161,7 @@ public:
 		{
 			enablePainting();
 		}
+		drawing = true;
 		invariant();
 	}
 
@@ -167,6 +176,8 @@ public:
 	void finishFrame(const bool swapBuffers = true)
 	{
 		invariant();
+		drawing = false;
+
 		disablePainting();
 		
 		if (useFBO())
@@ -179,13 +190,13 @@ public:
 			//Swap buffers if finishing, don't swap yet if suspending.
 			if(swapBuffers){swapFBOs();}
 		}
-		drawing = false;
 		invariant();
 	}
 
 	//! Code that must run before drawing the final result of the rendering to the viewport.
 	void prepareToDrawViewport()
 	{
+		invariant();
 		//Put the result of drawing to the FBO on the screen, applying an effect.
 		if (useFBO())
 		{
@@ -213,7 +224,9 @@ public:
 	//! Enable Qt-style painting (with the current default painter, or constructing a fallback if no default).
 	void enablePainting()
 	{
+		invariant();
 		enablePainting(defaultPainter);
+		invariant();
 	}
 
 private:
@@ -295,6 +308,7 @@ private:
 	//! Initialize the frame buffer objects.
 	void initFBOs()
 	{
+		invariant();
 		Q_ASSERT_X(useFBO(), Q_FUNC_INFO, "We're not using FBO");
 		if (NULL == backBuffer)
 		{
@@ -316,20 +330,24 @@ private:
 			Q_ASSERT_X(backBuffer->isValid() && frontBuffer->isValid(),
 			           Q_FUNC_INFO, "Framebuffer objects failed to initialize");
 		}
+		invariant();
 	}
 	
 	//! Swap front and back buffers, when using FBO.
 	void swapFBOs()
 	{
+		invariant();
 		Q_ASSERT_X(useFBO(), Q_FUNC_INFO, "We're not using FBO");
 		QGLFramebufferObject* tmp = backBuffer;
 		backBuffer = frontBuffer;
 		frontBuffer = tmp;
+		invariant();
 	}
 
 	//! Destroy FBOs, if used.
 	void destroyFBOs()
 	{
+		invariant();
 		// Destroy framebuffers
 		if(NULL != frontBuffer)
 		{
@@ -341,6 +359,7 @@ private:
 			delete backBuffer;
 			backBuffer = NULL;
 		}
+		invariant();
 	}
 };
 
