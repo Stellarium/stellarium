@@ -1,6 +1,5 @@
 #include "StelQGLRenderer.hpp"
 
-
 StelTextureBackend* StelQGLRenderer::createTextureBackend_
 	(const QString& filename, const StelTextureParams& params, const TextureLoadingMode loadingMode)
 {
@@ -61,11 +60,4 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend_
 
 	textureCache.add(result);
 	return result;
-}
-
-StelTextureBackend* StelQGLRenderer::getViewportTextureBackend()
-{
-	return useFBO() 
-		? StelQGLTextureBackend::fromFBO(this, frontBuffer)
-		: StelQGLTextureBackend::fromViewport(this, getViewportSize(), glContext->format());
 }
