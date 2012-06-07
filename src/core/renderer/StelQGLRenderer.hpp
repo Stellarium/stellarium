@@ -10,7 +10,7 @@
 #include <QPainter>
 #include <QThread>
 
-#include "StelGLRenderer.hpp"
+#include "StelRenderer.hpp"
 #include "StelPainter.hpp"
 #include "StelQGLTextureBackend.hpp"
 #include "StelTextureCache.hpp"
@@ -59,7 +59,7 @@ protected:
 //TODO get rid of all StelPainter calls (gradually)
 
 //! Base class for renderer based on OpenGL and at the same time Qt's QGL.
-class StelQGLRenderer : public StelGLRenderer
+class StelQGLRenderer : public StelRenderer
 {
 public:
 	//! Construct a StelQGLRenderer.
@@ -67,7 +67,8 @@ public:
 	//! @param parent       Parent widget for the renderer's GL widget.
 	//! @param pvrSupported Are .pvr (PVRTC - PowerVR hardware) textures supported on this platform?
 	StelQGLRenderer(QGraphicsView* parent, bool pvrSupported)
-		: glContext(new QGLContext(QGLFormat(QGL::StencilBuffer | 
+		: StelRenderer()
+		, glContext(new QGLContext(QGLFormat(QGL::StencilBuffer | 
 		                                     QGL::DepthBuffer   |
 		                                     QGL::DoubleBuffer)))
 		, glWidget(new StelQGLWidget(glContext, parent))
@@ -80,6 +81,8 @@ public:
 		, backBuffer(NULL)
 		, fboSupported(false)
 		, fboDisabled(false)
+		, viewportSize(QSize())
+		, drawing(false)
 		, gl(glContext)
 	{
 		loaderThread = new QThread();
@@ -95,17 +98,7 @@ public:
 
 		loaderThread->quit();
 
-		// Destroy framebuffers
-		if(NULL != frontBuffer)
-		{
-			delete frontBuffer;
-			frontBuffer = NULL;
-		}
-		if(NULL != backBuffer)
-		{
-			delete backBuffer;
-			backBuffer = NULL;
-		}
+		destroyFBOs();
 
 		// This causes crashes for some reason 
 		// (perhaps it is already destroyed by QT? - didn't find that in the docs).
@@ -254,19 +247,12 @@ public:
 		Q_ASSERT_X(size.isValid(), Q_FUNC_INFO, "Invalid scene size");
 		viewportSize = size;
 		//We'll need FBOs of different size so get rid of the current FBOs.
-		if (NULL != backBuffer)
-		{
-			delete backBuffer;
-			backBuffer = NULL;
-		}
-		if (NULL != frontBuffer)
-		{
-			delete frontBuffer;
-			frontBuffer = NULL;
-		}
+		destroyFBOs();
 		invariant();
 	}
 
+	virtual QSize getViewportSize() const {return viewportSize;}
+	
 	virtual void bindTexture(StelTextureBackend* textureBackend, const int textureUnit)
 	{
 		StelQGLTextureBackend* qglTextureBackend =
@@ -400,6 +386,12 @@ private:
 	//! Disable frame buffer objects even if supported?
 	bool fboDisabled;
 	
+	//! Graphics scene size.
+	QSize viewportSize;
+	
+	//! Are we in the middle of drawing?
+	bool drawing;
+
 	//! Enable painting using specified painter (or a construct a fallback painter if NULL).
 	void enablePainting(QPainter* painter)
 	{
@@ -460,6 +452,22 @@ private:
 		frontBuffer = tmp;
 	}
 
+	//! Destroy FBOs, if used.
+	void destroyFBOs()
+	{
+		// Destroy framebuffers
+		if(NULL != frontBuffer)
+		{
+			delete frontBuffer;
+			frontBuffer = NULL;
+		}
+		if(NULL != backBuffer)
+		{
+			delete backBuffer;
+			backBuffer = NULL;
+		}
+	}
+
 	// Must be down due to initializer list order.
 protected:
 	//! Wraps some GL functions for compatibility across GL and GLES.
@@ -467,4 +475,3 @@ protected:
 };
 
 #endif // _STELQGLRENDERER_HPP_
-
