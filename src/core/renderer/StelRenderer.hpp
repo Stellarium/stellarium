@@ -12,16 +12,36 @@
 #include "StelTextureParams.hpp"
 
 
-//Development notes:
+//Notes:
 //
 //enable/disablePainting are temporary and will be removed
 //    once painting is done through StelRenderer.
-//
-//FPS balancing, currently in StelAppGraphicsWidget, might be moved into StelRenderer
-//    implementation.
 
-//TODO If Renderer implementation now decides whether or not to use VisualEffects,
-//     "framebufferOnly" makes no sense, and should be removed.
+//! Provides access to scene rendering calls so the Renderer can control it.
+//!
+//! Renderer implementations might decide to only draw parts of the scene 
+//! each frame to increase FPS. This allows them to do so.
+class StelRenderClient
+{
+public:
+	//! Partially draw the scene.
+	//!
+	//! @return false if the last part of the scene was drawn 
+	//!         (i.e. we're done drawing), true otherwise.
+	virtual bool drawPartial() = 0;
+
+	//! Get QPainter used for Qt-style painting to the viewport.
+	//!
+	//! (Note that this painter might not necessarily end up being used - 
+	//! e.g. if a GL backend uses FBOs, it creates a painter to draw to the
+	//! FBOs.)
+	virtual QPainter* getPainter() = 0;
+
+	//! Get viewport effect to apply when drawing the viewport
+	//!
+	//! This can return NULL, in which case no viewport effect is used.
+	virtual StelViewportEffect* getViewportEffect() = 0;
+};
 
 //! Handles all graphics related functionality.
 //! 
@@ -101,17 +121,16 @@ public:
 	//!                     binds to texture units other than 0 are ignored.
 	virtual void bindTexture(class StelTextureBackend* textureBackend, const int textureUnit) = 0;
 
-	//! Start using drawing calls.
-	virtual void startDrawing() = 0;
-	
-	//! Suspend drawing, not showing the result on the screen. Drawing can be continued later.
-	virtual void suspendDrawing() = 0;
-	
-	//! Finish drawing, showing the result on screen.
-	virtual void finishDrawing() = 0;
-	
-	//! Draw the result of drawing commands to the window, applying given effect if possible.
-	virtual void drawWindow(StelViewportEffect* effect) = 0;
+	//! Render a single frame.
+	//!
+	//! This might not render the entire frame - if rendering takes too long,
+	//! the backend may (or may not) suspend the rendering to finish it next 
+	//! time renderFrame is called.
+	//!
+	//! @param renderClient Allows the renderer to draw the scene in parts.
+	//!
+	//! @see StelRenderClient
+	virtual void renderFrame(StelRenderClient& renderClient) = 0;
 	
 	//Both of these will be hidden behind a createTexture() and 
 	//the new StelTexture's dtor
