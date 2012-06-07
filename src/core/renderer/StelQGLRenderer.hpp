@@ -69,6 +69,8 @@ public:
 		, painter(NULL)
 		, pvrSupported(pvrSupported)
 		, textureCache()
+		, backBufferPainter(NULL)
+		, defaultPainter(NULL)
 		, gl(glContext)
 	{
 		loaderThread = new QThread();
@@ -116,6 +118,16 @@ public:
 		return glWidget->grabFrameBuffer();
 	}
 	
+	virtual void enablePainting()
+	{
+		enablePainting(defaultPainter);
+	}
+
+	virtual void setDefaultPainter(QPainter* painter)
+	{
+		defaultPainter = painter;
+	}
+	
 	virtual void disablePainting()
 	{
 		invariant();
@@ -128,6 +140,85 @@ public:
 			usingDefaultPainter = false;
 		}
 		this->painter = NULL;
+		invariant();
+	}
+
+	virtual void startDrawing()
+	{
+		invariant();
+		
+		makeGLContextCurrent();
+		
+		drawing = true;
+		if (useFBO())
+		{
+			//Draw to backBuffer.
+			initFBO();
+			backBuffer->bind();
+			backBufferPainter = new QPainter(backBuffer);
+			enablePainting(backBufferPainter);
+		}
+		else
+		{
+			enablePainting(defaultPainter);
+		}
+		invariant();
+	}
+	
+	virtual void suspendDrawing()
+	{
+		invariant();
+		disablePainting();
+		
+		if (useFBO())
+		{
+			//Release the backbuffer but don't swap it yet - we'll continue the drawing later.
+			delete backBufferPainter;
+			backBufferPainter = NULL;
+			
+			backBuffer->release();
+		}
+		drawing = false;
+		invariant();
+	}
+	
+	virtual void finishDrawing()
+	{
+		invariant();
+		disablePainting();
+		
+		if (useFBO())
+		{
+			//Release the backbuffer and swap it to front.
+			delete backBufferPainter;
+			backBufferPainter = NULL;
+			
+			backBuffer->release();
+			swapBuffersFBO();
+		}
+		drawing = false;
+		invariant();
+	}
+	
+	virtual void drawWindow(StelViewportEffect* effect)
+	{
+		invariant();
+
+		//Warn about any GL errors.
+		checkGLErrors();
+		
+		//Effects are ignored when FBO is not supported.
+		//That might be changed for some GPUs, but it might not be worth the effort.
+		
+		//Put the result of drawing to the FBO on the screen, applying an effect.
+		if (useFBO())
+		{
+			Q_ASSERT_X(!backBuffer->isBound() && !frontBuffer->isBound(), Q_FUNC_INFO, 
+			           "Framebuffer objects loadweren't released before drawing the result");
+		}
+		enablePainting(defaultPainter);
+		effect->drawToViewport(this);
+		disablePainting();
 		invariant();
 	}
 	
@@ -200,30 +291,17 @@ protected:
 		(const QString& filename, const StelTextureParams& params, const TextureLoadingMode loadingMode);
 
 	virtual StelTextureBackend* getViewportTextureBackend();
-
-	virtual void enablePainting(QPainter* painter)
-	{
-		invariant();
-		Q_ASSERT_X(NULL == this->painter, Q_FUNC_INFO, "Painting is already enabled");
-		
-		// If no painter specified, create a default one painting to the glWidget.
-		if(painter == NULL)
-		{
-			this->painter = new QPainter(glWidget);
-			usingDefaultPainter = true;
-			StelPainter::setQPainter(this->painter);
-			return;
-		}
-		this->painter = painter;
-		StelPainter::setQPainter(this->painter);
-		invariant();
-	}
 	
 	virtual void invariant()
 	{
 		Q_ASSERT_X(NULL != glWidget && NULL != glContext, Q_FUNC_INFO, 
 		           "destroyed StelQGLRenderer");
 		Q_ASSERT_X(glContext->isValid(), Q_FUNC_INFO, "Our GL context is invalid");
+		const bool fbo = useFBO();
+		Q_ASSERT_X(NULL == backBufferPainter || fbo, Q_FUNC_INFO,
+		           "We have a backbuffer painter even though we're not using FBO");
+		Q_ASSERT_X(drawing && fbo ? backBufferPainter != NULL : true, Q_FUNC_INFO,
+		           "We're drawing and using FBOs, but the backBufferPainter is NULL");
 		StelGLRenderer::invariant();
 	}
 	
@@ -246,6 +324,33 @@ private:
 
 	//! Caches textures to prevent duplicate loading.
 	StelTextureCache<StelQGLTextureBackend> textureCache;
+
+	//! Painter to the FBO we're drawing to, when using FBOs.
+	QPainter* backBufferPainter;
+	
+	//! Painter we're using when not drawing to an FBO. 
+	QPainter* defaultPainter;
+	
+	//! Enable painting using specified painter (or a construct a fallback painter if NULL).
+	void enablePainting(QPainter* painter)
+	{
+		invariant();
+		Q_ASSERT_X(NULL == this->painter, Q_FUNC_INFO, "Painting is already enabled");
+		
+		// If no painter specified, create a default one painting to the glWidget.
+		if(painter == NULL)
+		{
+			this->painter = new QPainter(glWidget);
+			usingDefaultPainter = true;
+			StelPainter::setQPainter(this->painter);
+			return;
+		}
+		this->painter = painter;
+		StelPainter::setQPainter(this->painter);
+		invariant();
+	}
+
+	// Must be down due to initializer list order.
 protected:
 	//! Wraps some GL functions for compatibility across GL and GLES.
 	QGLFunctions gl;

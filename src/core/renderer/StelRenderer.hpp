@@ -19,11 +19,6 @@
 //
 //FPS balancing, currently in StelAppGraphicsWidget, might be moved into StelRenderer
 //    implementation.
-//
-//VisualEffects now always exist. Renderer implementation decides whether to apply them or not.
-//    This is because things such as FBOs are implementation details of Renderer,
-//    not seen by outside code.
-//    If this is not desired, it a visualEffectsSupported() method could be added to Renderer.
 
 //TODO If Renderer implementation now decides whether or not to use VisualEffects,
 //     "framebufferOnly" makes no sense, and should be removed.
