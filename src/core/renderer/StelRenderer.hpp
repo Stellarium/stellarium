@@ -74,9 +74,6 @@ public:
 	//! This method is temporary and will be removed once painting is handled through Renderer.
 	virtual void disablePainting() = 0;
 	
-	//! Set default QPainter to use for Qt-based painting commands.
-	virtual void setDefaultPainter(QPainter* painter) = 0;
-	
 	//! Must be called once at startup and on every GL viewport resize, specifying new size.
 	virtual void viewportHasBeenResized(QSize size) = 0;
 	
