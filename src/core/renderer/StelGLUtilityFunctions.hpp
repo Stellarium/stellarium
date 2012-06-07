@@ -59,4 +59,7 @@ void glEnsureTextureSizeWithinLimits(QImage& image);
 //! @return Full path of the texture.
 QString glFileSystemTexturePath(const QString& filename, const bool pvrSupported);
 
+//! Check for any OpenGL errors and warn if needed. Useful for detecting incorrect GL code.
+void checkGLErrors();
+
 #endif // _STELGLUTILITYFUNCTIONS_HPP_
