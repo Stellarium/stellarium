@@ -37,6 +37,7 @@
 #include "GridLinesMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelShortcutMgr.hpp"
 
 #include "StelObjectType.hpp"
 #include "StelObject.hpp"
@@ -949,7 +950,14 @@ QAction* StelGui::addGuiAction(const QString& actionName, const QString& text, c
 {
 	if (!shortCut.isEmpty())
 		helpDialog.setKey(helpGroup, "", shortCut, text);
-	return StelGuiBase::addGuiAction(actionName, text, shortCut, helpGroup, checkable, autoRepeat, global);
+	StelShortcutMgr* shortcutMgr = StelApp::getInstance().getStelShortcutManager();
+	return shortcutMgr->addGuiAction(actionName, text, shortCut, helpGroup, checkable, autoRepeat, global);
+}
+
+QAction *StelGui::getGuiAction(const QString &actionName)
+{
+	StelShortcutMgr* shortcutMgr = StelApp::getInstance().getStelShortcutManager();
+	return shortcutMgr->getGuiAction(actionName);
 }
 
 /* ****************************************************************************************************************** */
