@@ -164,3 +164,11 @@ QString glFileSystemTexturePath(const QString& filename, const bool pvrSupported
 	           << filename << ": " << result;
 	return QString();
 }
+
+void checkGLErrors()
+{
+	const GLenum glError = glGetError();
+	if(glError == GL_NO_ERROR) {return;}
+
+	qWarning() << "OpenGL error detected: " << glErrorToString(glError);
+}
