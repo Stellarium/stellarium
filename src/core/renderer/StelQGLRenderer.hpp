@@ -2,15 +2,20 @@
 #define _STELQGLRENDERER_HPP_
 
 
+#include <QGLFramebufferObject>
 #include <QGLFunctions>
 #include <QGLWidget>
 #include <QGraphicsView>
+#include <QImage>
+#include <QPainter>
 #include <QThread>
 
 #include "StelGLRenderer.hpp"
-#include "StelQGLTextureBackend.hpp"
 #include "StelPainter.hpp"
+#include "StelQGLTextureBackend.hpp"
 #include "StelTextureCache.hpp"
+#include "StelVertexBuffer.hpp"
+#include "StelUtils.hpp"
 
 
 //! GLWidget specialized for Stellarium, mostly to provide better debugging information.
@@ -71,6 +76,10 @@ public:
 		, textureCache()
 		, backBufferPainter(NULL)
 		, defaultPainter(NULL)
+		, frontBuffer(NULL)
+		, backBuffer(NULL)
+		, fboSupported(false)
+		, fboDisabled(false)
 		, gl(glContext)
 	{
 		loaderThread = new QThread();
@@ -83,19 +92,31 @@ public:
 	{
 		Q_ASSERT_X(NULL == this->painter, Q_FUNC_INFO, 
 		           "Painting is not disabled at destruction");
+
+		loaderThread->quit();
+
+		// Destroy framebuffers
+		if(NULL != frontBuffer)
+		{
+			delete frontBuffer;
+			frontBuffer = NULL;
+		}
+		if(NULL != backBuffer)
+		{
+			delete backBuffer;
+			backBuffer = NULL;
+		}
+
 		// This causes crashes for some reason 
 		// (perhaps it is already destroyed by QT? - didn't find that in the docs).
+		// delete glContext;
 		
-		//delete glContext;
-		
-		// Hopefully this doesn't take much time.
-		loaderThread->quit();
+		glContext   = NULL;
+		glWidget    = NULL;
+
 		loaderThread->wait();
 		delete loaderThread;
 		loaderThread = NULL;
-
-		glContext   = NULL;
-		glWidget    = NULL;
 	}
 	
 	virtual bool init()
@@ -108,7 +129,10 @@ public:
 		
 		// Prevent flickering on mac Leopard/Snow Leopard
 		glWidget->setAutoFillBackground(false);
-		return StelGLRenderer::init();
+
+		fboSupported = QGLFramebufferObject::hasOpenGLFramebufferObjects();
+
+		return true;
 	}
 	
 	virtual QImage screenshot()
@@ -222,10 +246,24 @@ public:
 		invariant();
 	}
 	
-	virtual void makeGLContextCurrent()
+	virtual void viewportHasBeenResized(QSize size)
 	{
 		invariant();
-		glContext->makeCurrent();
+		//Can't check this in invariant because Renderer is initialized before 
+		//AppGraphicsWidget sets its viewport size
+		Q_ASSERT_X(size.isValid(), Q_FUNC_INFO, "Invalid scene size");
+		viewportSize = size;
+		//We'll need FBOs of different size so get rid of the current FBOs.
+		if (NULL != backBuffer)
+		{
+			delete backBuffer;
+			backBuffer = NULL;
+		}
+		if (NULL != frontBuffer)
+		{
+			delete frontBuffer;
+			frontBuffer = NULL;
+		}
 		invariant();
 	}
 
@@ -265,6 +303,14 @@ public:
 		}
 		textureCache.remove(qglTextureBackend);
 	}
+	
+	//! Make Stellarium GL context the currently used GL context. Call this before GL calls.
+	virtual void makeGLContextCurrent()
+	{
+		invariant();
+		glContext->makeCurrent();
+		invariant();
+	}
 
 	//! Used to access the GL context. 
 	//!
@@ -292,17 +338,28 @@ protected:
 
 	virtual StelTextureBackend* getViewportTextureBackend();
 	
+	//! Asserts that we're in a valid state.
+	//!
+	//! Overriding methods should also call StelGLRenderer::invariant().
 	virtual void invariant()
 	{
 		Q_ASSERT_X(NULL != glWidget && NULL != glContext, Q_FUNC_INFO, 
 		           "destroyed StelQGLRenderer");
 		Q_ASSERT_X(glContext->isValid(), Q_FUNC_INFO, "Our GL context is invalid");
+
 		const bool fbo = useFBO();
 		Q_ASSERT_X(NULL == backBufferPainter || fbo, Q_FUNC_INFO,
 		           "We have a backbuffer painter even though we're not using FBO");
 		Q_ASSERT_X(drawing && fbo ? backBufferPainter != NULL : true, Q_FUNC_INFO,
 		           "We're drawing and using FBOs, but the backBufferPainter is NULL");
-		StelGLRenderer::invariant();
+		Q_ASSERT_X(NULL == backBuffer || fbo, Q_FUNC_INFO,
+		           "We have a backbuffer even though we're not using FBO");
+		Q_ASSERT_X(NULL == frontBuffer || fbo, Q_FUNC_INFO,
+		           "We have a frontbuffer even though we're not using FBO");
+		Q_ASSERT_X(drawing && fbo ? backBuffer != NULL : true, Q_FUNC_INFO,
+		           "We're drawing and using FBOs, but the backBuffer is NULL");
+		Q_ASSERT_X(drawing && fbo ? frontBuffer != NULL : true, Q_FUNC_INFO,
+		           "We're drawing and using FBOs, but the frontBuffer is NULL");
 	}
 	
 private:
@@ -331,6 +388,18 @@ private:
 	//! Painter we're using when not drawing to an FBO. 
 	QPainter* defaultPainter;
 	
+	//! Frontbuffer (i.e. displayed at the moment) frame buffer object, when using FBOs.
+	class QGLFramebufferObject* frontBuffer;
+	
+	//! Backbuffer (i.e. drawn to at the moment) frame buffer object, when using FBOs.
+	class QGLFramebufferObject* backBuffer;
+
+	//! Are frame buffer objects supported on this system?
+	bool fboSupported;
+	
+	//! Disable frame buffer objects even if supported?
+	bool fboDisabled;
+	
 	//! Enable painting using specified painter (or a construct a fallback painter if NULL).
 	void enablePainting(QPainter* painter)
 	{
@@ -348,6 +417,47 @@ private:
 		this->painter = painter;
 		StelPainter::setQPainter(this->painter);
 		invariant();
+	}
+	
+	//! Are we using framebuffer objects?
+	bool useFBO() const
+	{
+		return fboSupported && !fboDisabled;
+	}
+	
+	//! Initialize the frame buffer objects.
+	void initFBO()
+	{
+		Q_ASSERT_X(useFBO(), Q_FUNC_INFO, "We're not using FBO");
+		if (NULL == backBuffer)
+		{
+			Q_ASSERT_X(NULL == frontBuffer, Q_FUNC_INFO, 
+			           "frontBuffer is not null even though backBuffer is");
+
+			const bool npot = gl.hasOpenGLFeature(QGLFunctions::NPOTTextures);
+
+			// If non-power-of-two textures are supported,
+			// FBOs must have power of two size large enough to fit the viewport.
+			const QSize bufferSize = npot 
+				? StelUtils::smallestPowerOfTwoSizeGreaterOrEqualTo(viewportSize) 
+				: viewportSize;
+
+			backBuffer = new QGLFramebufferObject(bufferSize,
+			                                      QGLFramebufferObject::CombinedDepthStencil);
+			frontBuffer = new QGLFramebufferObject(bufferSize,
+			                                       QGLFramebufferObject::CombinedDepthStencil);
+			Q_ASSERT_X(backBuffer->isValid() && frontBuffer->isValid(),
+			           Q_FUNC_INFO, "Framebuffer objects failed to initialize");
+		}
+	}
+	
+	//! Swap front and back buffers, when using FBO.
+	void swapBuffersFBO()
+	{
+		Q_ASSERT_X(useFBO(), Q_FUNC_INFO, "We're not using FBO");
+		QGLFramebufferObject* tmp = backBuffer;
+		backBuffer = frontBuffer;
+		frontBuffer = tmp;
 	}
 
 	// Must be down due to initializer list order.
