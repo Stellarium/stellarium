@@ -61,6 +61,127 @@ protected:
 	}
 };
 
+//! Manages OpenGL viewport.
+//!
+//! This class handles things like framebuffers and Qt-style painting to the viewport.
+class StelQGLViewport
+{
+	//TODO FBOs
+	//TODO viewport extents
+	//TODO drawing bool 
+public:
+	//! Initialize the viewport.
+	void init()
+	{
+		invariant();
+		// Prevent flickering on mac Leopard/Snow Leopard
+		glWidget->setAutoFillBackground(false);
+		invariant();
+	}
+
+	//! Grab a screenshot.
+	QImage screenshot() const 
+	{
+		invariant();
+		return glWidget->grabFrameBuffer();
+	}
+
+	//! Set the default painter to use when not drawing to FBO.
+	void setDefaultPainter(QPainter* painter)
+	{
+		defaultPainter = painter;
+	}
+
+	//! Disable Qt-style painting.
+	void disablePainting()
+	{
+		invariant();
+		Q_ASSERT_X(NULL != painter, Q_FUNC_INFO, "Painting is already disabled");
+		
+		StelPainter::setQPainter(NULL);
+		if(usingGLWidgetPainter)
+		{
+			delete(painter);
+			usingGLWidgetPainter = false;
+		}
+		painter = NULL;
+		invariant();
+	}
+
+	//! Enable Qt-style painting (with the current default painter, or constructing a fallback if no default).
+	void enablePainting()
+	{
+		enablePainting(defaultPainter);
+	}
+
+	//! Enable Qt-style painting with specified painter (or construct a fallback painter if NULL).
+	void enablePainting(QPainter* painter)
+	{
+		invariant();
+		Q_ASSERT_X(NULL == this->painter, Q_FUNC_INFO, "Painting is already enabled");
+		
+		// If no painter specified, create a default one painting to the glWidget.
+		if(painter == NULL)
+		{
+			this->painter = new QPainter(glWidget);
+			usingGLWidgetPainter = true;
+			StelPainter::setQPainter(this->painter);
+			return;
+		}
+		this->painter = painter;
+		StelPainter::setQPainter(this->painter);
+		invariant();
+	}
+	
+	//! Asserts that we're in a valid state.
+	void invariant() const
+	{
+		Q_ASSERT_X(NULL != glWidget, Q_FUNC_INFO, "Destroyed StelQGLViewport");
+		Q_ASSERT_X(glWidget->isValid(), Q_FUNC_INFO, 
+		           "Invalid glWidget (maybe there is no OpenGL support?)");
+	}
+	
+private:
+	//! Only StelQGLRenderer can construct a viewport.
+	friend class StelQGLRenderer;
+	//! Widget we're drawing to with OpenGL.
+	StelQGLWidget* glWidget;
+	//! Painter we're currently using to paint. NULL if painting is disabled.
+	QPainter* painter;
+	//! Painter we're using when not drawing to an FBO. 
+	QPainter* defaultPainter;
+	//! Are we using the fallback painter (directly to glWidget) ?
+	bool usingGLWidgetPainter;
+
+	//! Construct a StelQGLViewport using specified widget.
+	//!
+	//! @param glWidget GL widget that contains the viewport.
+	//! @param parent Parent widget of glWidget.
+	StelQGLViewport(StelQGLWidget* glWidget, QGraphicsView* parent)
+		: glWidget(glWidget)
+		, painter(NULL)
+		, defaultPainter(NULL)
+		, usingGLWidgetPainter(false)
+	{
+		// Forces glWidget to initialize GL.
+		glWidget->updateGL();
+		parent->setViewport(glWidget);
+		invariant();
+	}
+
+	//! Destroy the StelQGLViewport.
+	~StelQGLViewport()
+	{
+		invariant();
+
+		Q_ASSERT_X(NULL == this->painter, Q_FUNC_INFO, 
+		           "Painting is not disabled at destruction");
+
+		// No need to delete the GL widget, its parent widget will do that.
+		glWidget = NULL;
+	}
+};
+
 //TODO get rid of all StelPainter calls (gradually)
 
 //! Base class for renderer based on OpenGL and at the same time Qt's QGL.
@@ -76,12 +197,10 @@ public:
 		, glContext(new QGLContext(QGLFormat(QGL::StencilBuffer | 
 		                                     QGL::DepthBuffer   |
 		                                     QGL::DoubleBuffer)))
-		, glWidget(new StelQGLWidget(glContext, parent))
-		, painter(NULL)
+		, viewport(new StelQGLWidget(glContext, parent), parent)
 		, pvrSupported(pvrSupported)
 		, textureCache()
 		, backBufferPainter(NULL)
-		, defaultPainter(NULL)
 		, frontBuffer(NULL)
 		, backBuffer(NULL)
 		, fboSupported(false)
@@ -93,25 +212,20 @@ public:
 	{
 		loaderThread = new QThread();
 		loaderThread->start(QThread::LowestPriority);
-		glWidget->updateGL();
-		parent->setViewport(glWidget);
 	}
 	
 	virtual ~StelQGLRenderer()
 	{
-		Q_ASSERT_X(NULL == this->painter, Q_FUNC_INFO, 
-		           "Painting is not disabled at destruction");
-
 		loaderThread->quit();
 
 		destroyFBOs();
 
 		// This causes crashes for some reason 
 		// (perhaps it is already destroyed by QT? - didn't find that in the docs).
+		//
 		// delete glContext;
 		
 		glContext   = NULL;
-		glWidget    = NULL;
 
 		loaderThread->wait();
 		delete loaderThread;
@@ -120,14 +234,10 @@ public:
 	
 	virtual bool init()
 	{
-		Q_ASSERT_X(glWidget->isValid(), Q_FUNC_INFO, 
-		           "Invalid glWidget (maybe there is no OpenGL support?)");
-		
+		viewport.init();
+
 		//TODO Remove after StelPainter is no longer used.
 		StelPainter::initSystemGLInfo(glContext);
-		
-		// Prevent flickering on mac Leopard/Snow Leopard
-		glWidget->setAutoFillBackground(false);
 
 		fboSupported = QGLFramebufferObject::hasOpenGLFramebufferObjects();
 
@@ -136,34 +246,17 @@ public:
 	
 	virtual QImage screenshot()
 	{
-		invariant();
-		
-		return glWidget->grabFrameBuffer();
+		return viewport.screenshot();
 	}
 	
 	virtual void enablePainting()
 	{
-		enablePainting(defaultPainter);
-	}
-
-	virtual void setDefaultPainter(QPainter* painter)
-	{
-		defaultPainter = painter;
+		viewport.enablePainting();
 	}
 	
 	virtual void disablePainting()
 	{
-		invariant();
-		Q_ASSERT_X(NULL != this->painter, Q_FUNC_INFO, "Painting is already disabled");
-		
-		StelPainter::setQPainter(NULL);
-		if(usingDefaultPainter)
-		{
-			delete(painter);
-			usingDefaultPainter = false;
-		}
-		this->painter = NULL;
-		invariant();
+		viewport.disablePainting();
 	}
 
 	virtual void renderFrame(StelRenderClient& renderClient)
@@ -173,7 +266,7 @@ public:
 			previousFrameEndTime = StelApp::getTotalRunTime();
 		}
 
-		setDefaultPainter(renderClient.getPainter());
+		viewport.setDefaultPainter(renderClient.getPainter());
 		startDrawing();
 
 		// When using the GUI, try to have the best reactivity, 
@@ -201,7 +294,7 @@ public:
 		}
 		
 		drawWindow(renderClient.getViewportEffect());
-		setDefaultPainter(NULL);
+		viewport.setDefaultPainter(NULL);
 		
 		previousFrameEndTime = StelApp::getTotalRunTime();
 	}
@@ -296,8 +389,8 @@ protected:
 	//! Overriding methods should also call StelGLRenderer::invariant().
 	virtual void invariant()
 	{
-		Q_ASSERT_X(NULL != glWidget && NULL != glContext, Q_FUNC_INFO, 
-		           "destroyed StelQGLRenderer");
+		viewport.invariant();
+		Q_ASSERT_X(NULL != glContext, Q_FUNC_INFO, "destroyed StelQGLRenderer");
 		Q_ASSERT_X(glContext->isValid(), Q_FUNC_INFO, "Our GL context is invalid");
 
 		const bool fbo = useFBO();
@@ -318,14 +411,9 @@ protected:
 private:
 	//! OpenGL context.
 	QGLContext* glContext;
-	//! Widget we're drawing to with OpenGL.
-	StelQGLWidget* glWidget;
-	
-	//! Painter we're using when painting is enabled. NULL otherwise.
-	QPainter* painter;
-	//! Are we using default-constructed painter?
-	bool usingDefaultPainter;
 
+	StelQGLViewport viewport;
+	
 	//! Are .pvr compressed textures supported on the platform we're running on?
 	bool pvrSupported;
 
@@ -337,10 +425,7 @@ private:
 
 	//! Painter to the FBO we're drawing to, when using FBOs.
 	QPainter* backBufferPainter;
-	
-	//! Painter we're using when not drawing to an FBO. 
-	QPainter* defaultPainter;
-	
+
 	//! Frontbuffer (i.e. displayed at the moment) frame buffer object, when using FBOs.
 	class QGLFramebufferObject* frontBuffer;
 	
@@ -367,25 +452,6 @@ private:
 	//! Negative at construction to detect the first frame.
 	double previousFrameEndTime;
 
-	//! Enable painting using specified painter (or a construct a fallback painter if NULL).
-	void enablePainting(QPainter* painter)
-	{
-		invariant();
-		Q_ASSERT_X(NULL == this->painter, Q_FUNC_INFO, "Painting is already enabled");
-		
-		// If no painter specified, create a default one painting to the glWidget.
-		if(painter == NULL)
-		{
-			this->painter = new QPainter(glWidget);
-			usingDefaultPainter = true;
-			StelPainter::setQPainter(this->painter);
-			return;
-		}
-		this->painter = painter;
-		StelPainter::setQPainter(this->painter);
-		invariant();
-	}
-	
 	//! Are we using framebuffer objects?
 	bool useFBO() const
 	{
@@ -456,11 +522,11 @@ private:
 			initFBO();
 			backBuffer->bind();
 			backBufferPainter = new QPainter(backBuffer);
-			enablePainting(backBufferPainter);
+			viewport.enablePainting(backBufferPainter);
 		}
 		else
 		{
-			enablePainting(defaultPainter);
+			viewport.enablePainting();
 		}
 		invariant();
 	}
@@ -512,7 +578,7 @@ private:
 			Q_ASSERT_X(!backBuffer->isBound() && !frontBuffer->isBound(), Q_FUNC_INFO, 
 			           "Framebuffer objects weren't released before drawing the result");
 		}
-		enablePainting(defaultPainter);
+		viewport.enablePainting();
 
 		if(NULL == effect)
 		{
