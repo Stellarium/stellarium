@@ -49,21 +49,6 @@ public:
 	//! @return a pointer to the progress bar.
 	virtual class QProgressBar* addProgressBar() =0;
 
-	//! Add a new action managed by the GUI. This method should be used to add new shortcuts to the program
-	//! @param actionName qt object name. Used as a reference for later uses
-	//! @param text the text to display when hovering, or in the help window
-	//! @param shortCut the qt shortcut to use
-	//! @param helpGroup hint on how to group the text in the help window
-	//! @param checkable whether the action should be checkable
-	//! @param autoRepeat whether the action should be autorepeated
-	//! @param global whether the action should be global (affect in dialogs)
-	virtual QAction* addGuiAction(const QString& actionName, const QString& text, const QString& shortcuts, const QString& helpGroup, bool checkable=true, bool autoRepeat=false, bool global=false);
-
-	//! Get a pointer on an action managed by the GUI
-	//! @param actionName qt object name for this action
-	//! @return a pointer on the QAction object or NULL if don't exist
-	virtual QAction* getGuiAction(const QString& actionName);
-
 	virtual void forceRefreshGui() {;}
 
 	//! Show whether the GUI is visible.

@@ -130,6 +130,8 @@ SET(stellarium_lib_SRCS
 	core/RefractionExtinction.cpp
 	core/StelLoadingBar.cpp
 	core/StelLoadingBar.hpp
+	core/StelShortcutMgr.hpp
+	core/StelShortcutMgr.cpp
 
 	${gl_lib_SRCS}
 	core/external/fixx11h.h
@@ -352,6 +354,7 @@ SET(stellarium_MOC_HDRS
 	core/StelSkyLayer.hpp
 	core/StelSkyCultureMgr.hpp
 	core/SimbadSearcher.hpp
+	core/StelShortcutMgr.hpp
 	core/modules/ConstellationMgr.hpp
 	core/modules/GridLinesMgr.hpp
 	core/modules/LabelMgr.hpp

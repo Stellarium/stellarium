@@ -41,6 +41,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "StelShortcutMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelAudioMgr.hpp"
@@ -84,8 +85,8 @@ void StelApp::deinitStatic()
 *************************************************************************/
 StelApp::StelApp(QObject* parent)
 	: QObject(parent), core(NULL), stelGui(NULL), fps(0),
-	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false),
-	  confSettings(NULL), initialized(false), saveProjW(-1), saveProjH(-1), drawState(0)
+		frame(0), timefr(0.), timeBase(0.), flagNightVision(false),
+		confSettings(NULL), initialized(false), saveProjW(-1), saveProjH(-1), drawState(0)
 {
 	// Stat variables
 	nbDownloadedFiles=0;
@@ -101,6 +102,7 @@ StelApp::StelApp(QObject* parent)
 	textureMgr=NULL;
 	moduleMgr=NULL;
 	networkAccessManager=NULL;
+	shortcutMgr = NULL;
 
 	// Can't create 2 StelApp instances
 	Q_ASSERT(!singleton);
@@ -131,6 +133,7 @@ StelApp::~StelApp()
 	delete textureMgr; textureMgr=NULL;
 	delete planetLocationMgr; planetLocationMgr=NULL;
 	delete moduleMgr; moduleMgr=NULL; // Delete the secondary instance
+	delete shortcutMgr; shortcutMgr = NULL;
 
 	Q_ASSERT(singleton);
 	singleton = NULL;
@@ -231,13 +234,13 @@ void StelApp::init(QSettings* conf)
 #ifdef BUILD_FOR_MAEMO
 	StelLoadingBar loadingBar(splashFileName, "", 25, 320, 101, 800, 400);
 #else
- #ifdef BZR_REVISION
+#ifdef BZR_REVISION
 	StelLoadingBar loadingBar(splashFileName, QString("BZR r%1").arg(BZR_REVISION), 25, 320, 101);
- #elif SVN_REVISION
+#elif SVN_REVISION
 	StelLoadingBar loadingBar(splashFileName, QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
- #else
+#else
 	StelLoadingBar loadingBar(splashFileName, PACKAGE_VERSION, 45, 320, 121);
- #endif
+#endif
 #endif
 	loadingBar.draw();
 
@@ -256,11 +259,15 @@ void StelApp::init(QSettings* conf)
 	stelObjectMgr->init();
 	getModuleMgr().registerModule(stelObjectMgr);
 
-	localeMgr = new StelLocaleMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
 	planetLocationMgr = new StelLocationMgr();
 
+	shortcutMgr = new StelShortcutMgr();
+	shortcutMgr->init();
+
+	localeMgr = new StelLocaleMgr();
 	localeMgr->init();
+
 
 	// Init the solar system first
 	SolarSystem* ssystem = new SolarSystem();
@@ -350,7 +357,7 @@ void StelApp::initPlugIns()
 
 void StelApp::update(double deltaTime)
 {
-	 if (!initialized)
+	if (!initialized)
 		return;
 
 	++frame;
