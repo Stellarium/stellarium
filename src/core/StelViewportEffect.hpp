@@ -35,13 +35,14 @@ class QGLFramebufferObject;
 class StelViewportEffect
 {
 public:
-	StelViewportEffect() {;}
 	virtual ~StelViewportEffect() {;}
-	virtual QString getName() {return "framebufferOnly";}
-	//! Apply the effect and draw to viewport.
-	//! @param renderer Renderer to draw the effect.
-	//! The default implementation simply draws the rendered result to the screen.
-	virtual void drawToViewport(class StelRenderer* renderer);
+	virtual QString getName() = 0;
+
+	//! Apply the effect and draw the viewport.
+	//! This actually puts the result of rendering onto the screen.
+	//!
+	//! @param renderer Renderer to draw with.
+	virtual void drawToViewport(class StelRenderer* renderer) = 0;
 	//! Distort an x,y position according to the distortion.
 	//! The default implementation does nothing.
 	virtual void distortXY(float& x, float& y) const {Q_UNUSED(x); Q_UNUSED(y);}

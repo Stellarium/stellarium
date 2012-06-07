@@ -20,7 +20,6 @@
 #include "StelViewportEffect.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelPainter.hpp"
 #include "SphericMirrorCalculator.hpp"
 #include "StelFileMgr.hpp"
 #include "StelMovementMgr.hpp"
@@ -28,22 +27,6 @@
 
 #include <QSettings>
 #include <QFile>
-
-void StelViewportEffect::drawToViewport(StelRenderer *renderer)
-{
-	StelTexture* screenTexture = renderer->getViewportTexture();
-	int texWidth, texHeight;
-	screenTexture->getDimensions(texWidth, texHeight);
-
-	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
-	sPainter.setColor(1,1,1);
-
-	screenTexture->bind();
-
-	sPainter.drawRect2d(0, 0, texWidth, texHeight);
-
-	delete screenTexture;
-}
 
 ///Vertex attribute specification of DistorterFisheyeToSphericMirror's vertex type.
 const QVector<StelVertexAttribute> StelViewportDistorterFisheyeToSphericMirror

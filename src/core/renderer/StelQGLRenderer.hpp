@@ -17,6 +17,11 @@
 #include "StelVertexBuffer.hpp"
 #include "StelUtils.hpp"
 
+#include "StelApp.hpp"
+#include "StelGuiBase.hpp"
+
+//TEMP
+#include "StelCore.hpp"
 
 //! GLWidget specialized for Stellarium, mostly to provide better debugging information.
 class StelQGLWidget : public QGLWidget
@@ -80,9 +85,10 @@ public:
 		, frontBuffer(NULL)
 		, backBuffer(NULL)
 		, fboSupported(false)
-		, fboDisabled(false)
+		, fboDisabled(true)
 		, viewportSize(QSize())
 		, drawing(false)
+		, previousFrameEndTime(-1.0)
 		, gl(glContext)
 	{
 		loaderThread = new QThread();
@@ -160,85 +166,46 @@ public:
 		invariant();
 	}
 
-	virtual void startDrawing()
+	virtual void renderFrame(StelRenderClient& renderClient)
 	{
-		invariant();
-		
-		makeGLContextCurrent();
-		
-		drawing = true;
-		if (useFBO())
+		if(previousFrameEndTime < 0.0)
 		{
-			//Draw to backBuffer.
-			initFBO();
-			backBuffer->bind();
-			backBufferPainter = new QPainter(backBuffer);
-			enablePainting(backBufferPainter);
+			previousFrameEndTime = StelApp::getTotalRunTime();
 		}
-		else
-		{
-			enablePainting(defaultPainter);
-		}
-		invariant();
-	}
-	
-	virtual void suspendDrawing()
-	{
-		invariant();
-		disablePainting();
-		
-		if (useFBO())
-		{
-			//Release the backbuffer but don't swap it yet - we'll continue the drawing later.
-			delete backBufferPainter;
-			backBufferPainter = NULL;
-			
-			backBuffer->release();
-		}
-		drawing = false;
-		invariant();
-	}
-	
-	virtual void finishDrawing()
-	{
-		invariant();
-		disablePainting();
-		
-		if (useFBO())
-		{
-			//Release the backbuffer and swap it to front.
-			delete backBufferPainter;
-			backBufferPainter = NULL;
-			
-			backBuffer->release();
-			swapBuffersFBO();
-		}
-		drawing = false;
-		invariant();
-	}
-	
-	virtual void drawWindow(StelViewportEffect* effect)
-	{
-		invariant();
 
-		//Warn about any GL errors.
-		checkGLErrors();
-		
-		//Effects are ignored when FBO is not supported.
-		//That might be changed for some GPUs, but it might not be worth the effort.
-		
-		//Put the result of drawing to the FBO on the screen, applying an effect.
-		if (useFBO())
+		setDefaultPainter(renderClient.getPainter());
+		startDrawing();
+
+		// When using the GUI, try to have the best reactivity, 
+		// even if we need to lower the FPS.
+		const int minFps = StelApp::getInstance().getGui()->isCurrentlyUsed() ? 16 : 2;
+
+		while (true)
 		{
-			Q_ASSERT_X(!backBuffer->isBound() && !frontBuffer->isBound(), Q_FUNC_INFO, 
-			           "Framebuffer objects loadweren't released before drawing the result");
+			const bool keepDrawing = renderClient.drawPartial();
+			if(!keepDrawing) 
+			{
+				finishDrawing();
+				break;
+			}
+
+			const double spentTime = StelApp::getTotalRunTime() - previousFrameEndTime;
+
+			// We need FBOs to do partial drawing.
+			if (useFBO() && 1. / spentTime <= minFps)
+			{
+				// We stop the painting operation for now
+				suspendDrawing();
+				break;
+			}
 		}
-		enablePainting(defaultPainter);
-		effect->drawToViewport(this);
-		disablePainting();
-		invariant();
+		
+		drawWindow(renderClient.getViewportEffect());
+		setDefaultPainter(NULL);
+		
+		previousFrameEndTime = StelApp::getTotalRunTime();
 	}
-	
+
 	virtual void viewportHasBeenResized(QSize size)
 	{
 		invariant();
@@ -384,6 +351,9 @@ private:
 	bool fboSupported;
 	
 	//! Disable frame buffer objects even if supported?
+	//!
+	//! Currently, this is only used for debugging. 
+	//! It might be loaded from a config file later.
 	bool fboDisabled;
 	
 	//! Graphics scene size.
@@ -391,6 +361,11 @@ private:
 	
 	//! Are we in the middle of drawing?
 	bool drawing;
+
+	//! Time the previous frame rendered by renderFrame ended.
+	//!
+	//! Negative at construction to detect the first frame.
+	double previousFrameEndTime;
 
 	//! Enable painting using specified painter (or a construct a fallback painter if NULL).
 	void enablePainting(QPainter* painter)
@@ -467,6 +442,107 @@ private:
 			backBuffer = NULL;
 		}
 	}
+
+	//! Start using drawing calls.
+	void startDrawing()
+	{
+		invariant();
+		makeGLContextCurrent();
+		
+		drawing = true;
+		if (useFBO())
+		{
+			//Draw to backBuffer.
+			initFBO();
+			backBuffer->bind();
+			backBufferPainter = new QPainter(backBuffer);
+			enablePainting(backBufferPainter);
+		}
+		else
+		{
+			enablePainting(defaultPainter);
+		}
+		invariant();
+	}
+	
+	// Separate from finishDrawing only for readability
+	//! Suspend drawing, not showing the result on the screen.
+	//!
+	//! Finishes using draw calls for this frame. 
+	//! Drawing can continue later. Only usable with FBOs.
+	void suspendDrawing() {finishDrawing(true);}
+	
+	//! Finish using draw calls.
+	void finishDrawing(bool swapBuffers = true)
+	{
+		invariant();
+		disablePainting();
+		
+		if (useFBO())
+		{
+			//Release the backbuffer.
+			delete backBufferPainter;
+			backBufferPainter = NULL;
+			
+			backBuffer->release();
+			//Swap buffers if finishing, don't swap yet if suspending.
+			if(swapBuffers){swapBuffersFBO();}
+		}
+		drawing = false;
+		invariant();
+	}
+	
+	//! Draw the result of drawing commands to the window, applying given effect if possible.
+	void drawWindow(StelViewportEffect* effect)
+	{
+		// At this point, FBOs are released (if using FBOs), so we're drawing 
+		// directly to the screen. The StelViewportEffect::drawToViewport call 
+		// actually draws puts the rendered result onto the viewport.
+		invariant();
+
+		//Warn about any GL errors.
+		checkGLErrors();
+		
+		//Effects are ignored when FBO is not supported.
+		//That might be changed for some GPUs, but it might not be worth the effort.
+		
+		//Put the result of drawing to the FBO on the screen, applying an effect.
+		if (useFBO())
+		{
+			Q_ASSERT_X(!backBuffer->isBound() && !frontBuffer->isBound(), Q_FUNC_INFO, 
+			           "Framebuffer objects weren't released before drawing the result");
+		}
+		enablePainting(defaultPainter);
+
+		if(NULL == effect)
+		{
+			// If using FBO, we still need to put it on the screen.
+			if(useFBO())
+			{
+				StelTexture* screenTexture = getViewportTexture();
+				int texWidth, texHeight;
+				screenTexture->getDimensions(texWidth, texHeight);
+
+				StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
+				sPainter.setColor(1,1,1);
+
+				sPainter.enableTexture2d(true);
+
+				screenTexture->bind();
+
+				sPainter.drawRect2d(0, 0, texWidth, texHeight);
+			}
+			// Not using FBO, the result is already drawn to the screen.
+		}
+		else
+		{
+			effect->drawToViewport(this);
+		}
+
+		disablePainting();
+		invariant();
+	}
+	
 
 	// Must be down due to initializer list order.
 protected:

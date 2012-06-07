@@ -61,11 +61,10 @@ protected:
 	virtual void resizeEvent(QGraphicsSceneResizeEvent* event);
 
 private:
+	//! Provides Renderer with access to paintPartial.
+	friend class StelAppGraphicsWidgetRenderClient;
+
 	double previousPaintTime;
-	//! The time at the last time re refreshed the frame
-	//! Since paint may decide to stop before we finish to render a complete scene, this is not necessarily the same
-	//! than `previousPaintTime`.
-	double previousPaintFrameTime;
 	//! The main application instance.
 	class StelApp* stelApp;
 	//! The state of paintPartial method
