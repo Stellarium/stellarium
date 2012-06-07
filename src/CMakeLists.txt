@@ -129,6 +129,8 @@ SET(stellarium_lib_SRCS
 	core/StelLoadingBar.hpp
 
 	core/renderer/StelRenderer.hpp
+	core/renderer/StelQGLViewport.cpp
+	core/renderer/StelQGLViewport.hpp
 	core/renderer/StelQGLRenderer.cpp
 	core/renderer/StelQGLRenderer.hpp
 	core/renderer/StelQGL2Renderer.hpp

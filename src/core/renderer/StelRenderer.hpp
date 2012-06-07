@@ -75,7 +75,7 @@ public:
 	virtual void disablePainting() = 0;
 	
 	//! Must be called once at startup and on every GL viewport resize, specifying new size.
-	virtual void viewportHasBeenResized(QSize size) = 0;
+	virtual void viewportHasBeenResized(const QSize size) = 0;
 	
 	//! Create an empty vertex buffer and return a pointer to it.
 	//!
