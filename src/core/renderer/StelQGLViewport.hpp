@@ -161,7 +161,7 @@ public:
 	//!
 	//! Finishes using draw calls for this frame. 
 	//! Drawing can continue later. Only usable with FBOs.
-	void suspendFrame() {finishFrame(true);}
+	void suspendFrame() {finishFrame(false);}
 	
 	//! Finish using draw calls.
 	void finishFrame(const bool swapBuffers = true)
@@ -224,7 +224,7 @@ private:
 
 	//! Painter we're currently using to paint. NULL if painting is disabled.
 	QPainter* painter;
-	//! Painter we're using when not drawing to an FBO. 
+	//! Painter we're using if not using FBOs or when not drawing to an FBO.
 	QPainter* defaultPainter;
 	//! Painter to the FBO we're drawing to, when using FBOs.
 	QPainter* backBufferPainter;
@@ -250,6 +250,28 @@ private:
 
 	//! Are non power of two textures supported?
 	bool nonPowerOfTwoTexturesSupported;
+
+	//! Asserts that we're in a valid state.
+	void invariant() const
+	{
+		Q_ASSERT_X(NULL != glWidget, Q_FUNC_INFO, "Destroyed StelQGLViewport");
+		Q_ASSERT_X(glWidget->isValid(), Q_FUNC_INFO, 
+		           "Invalid glWidget (maybe there is no OpenGL support?)");
+
+		const bool fbo = useFBO();
+		Q_ASSERT_X(NULL == backBufferPainter || fbo, Q_FUNC_INFO,
+		           "We have a backbuffer painter even though we're not using FBO");
+		Q_ASSERT_X(drawing && fbo ? backBufferPainter != NULL : true, Q_FUNC_INFO,
+		           "We're drawing and using FBOs, but the backBufferPainter is NULL");
+		Q_ASSERT_X(NULL == backBuffer || fbo, Q_FUNC_INFO,
+		           "We have a backbuffer even though we're not using FBO");
+		Q_ASSERT_X(NULL == frontBuffer || fbo, Q_FUNC_INFO,
+		           "We have a frontbuffer even though we're not using FBO");
+		Q_ASSERT_X(drawing && fbo ? backBuffer != NULL : true, Q_FUNC_INFO,
+		           "We're drawing and using FBOs, but the backBuffer is NULL");
+		Q_ASSERT_X(drawing && fbo ? frontBuffer != NULL : true, Q_FUNC_INFO,
+		           "We're drawing and using FBOs, but the frontBuffer is NULL");
+	}
 
 	//! Enable Qt-style painting with specified painter (or construct a fallback painter if NULL).
 	void enablePainting(QPainter* painter)
@@ -319,28 +341,6 @@ private:
 			delete backBuffer;
 			backBuffer = NULL;
 		}
-	}
-
-	//! Asserts that we're in a valid state.
-	void invariant() const
-	{
-		Q_ASSERT_X(NULL != glWidget, Q_FUNC_INFO, "Destroyed StelQGLViewport");
-		Q_ASSERT_X(glWidget->isValid(), Q_FUNC_INFO, 
-		           "Invalid glWidget (maybe there is no OpenGL support?)");
-
-		const bool fbo = useFBO();
-		Q_ASSERT_X(NULL == backBufferPainter || fbo, Q_FUNC_INFO,
-		           "We have a backbuffer painter even though we're not using FBO");
-		Q_ASSERT_X(drawing && fbo ? backBufferPainter != NULL : true, Q_FUNC_INFO,
-		           "We're drawing and using FBOs, but the backBufferPainter is NULL");
-		Q_ASSERT_X(NULL == backBuffer || fbo, Q_FUNC_INFO,
-		           "We have a backbuffer even though we're not using FBO");
-		Q_ASSERT_X(NULL == frontBuffer || fbo, Q_FUNC_INFO,
-		           "We have a frontbuffer even though we're not using FBO");
-		Q_ASSERT_X(drawing && fbo ? backBuffer != NULL : true, Q_FUNC_INFO,
-		           "We're drawing and using FBOs, but the backBuffer is NULL");
-		Q_ASSERT_X(drawing && fbo ? frontBuffer != NULL : true, Q_FUNC_INFO,
-		           "We're drawing and using FBOs, but the frontBuffer is NULL");
 	}
 };
 
