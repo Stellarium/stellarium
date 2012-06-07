@@ -3,6 +3,7 @@
 StelTextureBackend* StelQGLRenderer::createTextureBackend_
 	(const QString& filename, const StelTextureParams& params, const TextureLoadingMode loadingMode)
 {
+	invariant();
 	const QString fullPath = filename.startsWith("http://") 
 		? filename 
 		: glFileSystemTexturePath(filename, pvrSupported);
@@ -15,6 +16,7 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend_
 	StelQGLTextureBackend* cached = textureCache.get(fullPath, loadingMode);
 	if(NULL != cached)
 	{
+		invariant();
 		return cached;
 	}
 
@@ -59,5 +61,6 @@ StelTextureBackend* StelQGLRenderer::createTextureBackend_
 	Q_ASSERT_X(result != NULL, Q_FUNC_INFO, "Result texture backend was not set");
 
 	textureCache.add(result);
+	invariant();
 	return result;
 }
