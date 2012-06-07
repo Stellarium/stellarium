@@ -144,7 +144,9 @@ public:
 		const TextureStatus status = qglTextureBackend->getStatus();
 		if(status == TextureStatus_Loaded)
 		{
-			if(gl.hasOpenGLFeature(QGLFunctions::Multitexture) && textureUnit !=0)
+			// Ignore the texture if we don't have enough texture units
+			// or if texture unit is nonzero and we don't support multitexturing.
+			if(textureUnit >= getTextureUnitCount())
 			{
 				return;
 			}
@@ -208,13 +210,17 @@ protected:
 		return viewport.getViewportTextureBackend(this);
 	}
 	
+	//! Return the number of texture units (this is 1 if multitexturing is not supported).
+	virtual int getTextureUnitCount() const = 0;
+
 	//! Asserts that we're in a valid state.
 	//!
 	//! Overriding methods should also call StelGLRenderer::invariant().
 	virtual void invariant()
 	{
-		Q_ASSERT_X(NULL != glContext, Q_FUNC_INFO, "destroyed StelQGLRenderer");
-		Q_ASSERT_X(glContext->isValid(), Q_FUNC_INFO, "Our GL context is invalid");
+		Q_ASSERT_X(NULL != glContext, Q_FUNC_INFO,
+		           "An attempt to use a destroyed StelQGLRenderer.");
+		Q_ASSERT_X(glContext->isValid(), Q_FUNC_INFO, "The GL context is invalid");
 	}
 	
 private:

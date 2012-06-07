@@ -73,6 +73,14 @@ public:
 			qWarning() << "StelQGL2Renderer::init : Required feature not supported: VBOs/IBOs";
 			return false;
 		}
+		// We don't want to check for multitexturing everywhere.
+		// Also, GL2 requires multitexturing so this shouldn't even happen.
+		// (GL1 works fine without multitexturing)
+		if(!gl.hasOpenGLFeature(QGLFunctions::Multitexture))
+		{
+			qWarning() << "StelQGL2Renderer::init : Required feature not supported: Multitexturing";
+			return false;
+		}
 
 		// Each shader here handles a specific combination of vertex attribute 
 		// interpretations. E.g. vertex-color-texcoord .
@@ -323,6 +331,14 @@ protected:
 		const Vec4i viewXywh = projector->getViewportXywh();
 		glViewport(viewXywh[0], viewXywh[1], viewXywh[2], viewXywh[3]);
 		backend->draw(*this, transposed);
+	}
+
+	virtual int getTextureUnitCount() const
+	{
+		GLint result;
+		// GL1 version should use GL_MAX_TEXTURE_UNITS instead.
+		glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &result);
+		return result;
 	}
 
 	virtual void invariant()
