@@ -31,6 +31,44 @@
 #include <QGLFramebufferObject>
 #include <QSettings>
 
+//! Provides access to paintPartial and drawing related classes to Renderer.
+//!
+//! This is basically just a callback object, it is created and passed 
+//! on every frame.
+//!
+//! Renderer uses drawPartial to draw parts of the scene, allowing it 
+//! to measure rendering time and suspend rendering if it's too slow.
+//!
+//! @see StelRenderClient
+class StelAppGraphicsWidgetRenderClient : public StelRenderClient
+{
+public:
+	//! Construct a StelAppGraphicsWidgetRenderClient providing access to specified widget.
+	//!
+	//! @param widget  Widget that manages drawing of the scene.
+	//! @param painter Painter that paints on the widget.
+	explicit StelAppGraphicsWidgetRenderClient(StelAppGraphicsWidget* widget,
+	                                           QPainter* painter)
+		: StelRenderClient()
+		, widget(widget)
+		, painter(painter)
+	{
+	}
+
+	virtual bool drawPartial() {return widget->paintPartial();}
+
+	virtual QPainter* getPainter() {return painter;}
+
+	virtual StelViewportEffect* getViewportEffect() {return widget->viewportEffect;}
+
+private:
+	//! Widget that manages drawing of the scene. 
+	StelAppGraphicsWidget* const widget;
+
+	//! QPainter that paints on the graphics widget.
+	QPainter* const painter;
+};
+
 StelAppGraphicsWidget::StelAppGraphicsWidget(StelRenderer* renderer)
 	: paintState(0), 
 	  renderer(renderer),
@@ -76,10 +114,9 @@ void StelAppGraphicsWidget::setViewportEffect(const QString& name)
 		viewportEffect=NULL;
 	}
 	
-	if (name == "framebufferOnly" || name == "none")
+	if (name == "none")
 	{
-		qDebug() << "Setting default viewport effect";
-		viewportEffect = new StelViewportEffect();
+		qDebug() << "Not using any viewport effect";
 	}
 	else if (name == "sphericMirrorDistorter")
 	{
@@ -90,7 +127,7 @@ void StelAppGraphicsWidget::setViewportEffect(const QString& name)
 	}
 	else
 	{
-		qWarning() << "Unknown viewport effect name: " << name;
+		qWarning() << "Unknown viewport effect name (using no effect): " << name;
 	}
 }
 
@@ -148,35 +185,12 @@ void StelAppGraphicsWidget::paint(QPainter* painter, const QStyleOptionGraphicsI
 	// Don't even try to draw if we don't have a core yet (fix a bug during splash screen)
 	if (!stelApp || !stelApp->getCore() || !doPaint)
 		return;
-		
-	renderer->setDefaultPainter(painter);
-	renderer->startDrawing();
-	
-	
-	// When using the GUI, try to have the best reactivity, 
-	// even if we need to lower the FPS.
-	int minFps = StelApp::getInstance().getGui()->isCurrentlyUsed() ? 16 : 2;
-	while (true)
-	{
-		bool keep = paintPartial();
-		if (!keep) // The paint is done
-		{
-			renderer->finishDrawing();
-			break;
-		}
-		double spentTime = StelApp::getTotalRunTime() - previousPaintFrameTime;
-		if (1. / spentTime <= minFps) // we spent too much time
-		{
-			// We stop the painting operation for now
-			renderer->suspendDrawing();
-			break;
-		}
-	}
-	
-	renderer->drawWindow(viewportEffect);
-	renderer->setDefaultPainter(NULL);
-	
-	previousPaintFrameTime = StelApp::getTotalRunTime();
+
+	StelAppGraphicsWidgetRenderClient client(this, painter);
+
+	// Renderer manages the rendering process in detail, e.g. 
+	// deciding whether or not to suspend drawing because FPS is too low.
+	renderer->renderFrame(client);
 }
 
 void StelAppGraphicsWidget::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
