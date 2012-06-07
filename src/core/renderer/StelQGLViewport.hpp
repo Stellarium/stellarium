@@ -165,12 +165,15 @@ public:
 		invariant();
 	}
 
-	// Separate from finishFrame only for readability
 	//! Suspend drawing, not showing the result on the screen.
 	//!
 	//! Finishes using draw calls for this frame. 
 	//! Drawing can continue later. Only usable with FBOs.
-	void suspendFrame() {finishFrame(false);}
+	void suspendFrame() 
+	{
+		Q_ASSERT_X(useFBO(), Q_FUNC_INFO, "Partial rendering only works with FBOs");
+		finishFrame(false);
+	}
 	
 	//! Finish using draw calls.
 	void finishFrame(const bool swapBuffers = true)
