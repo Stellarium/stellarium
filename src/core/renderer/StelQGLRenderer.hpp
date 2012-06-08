@@ -2,6 +2,7 @@
 #define _STELQGLRENDERER_HPP_
 
 
+#include <QColor>
 #include <QGLFunctions>
 #include <QGraphicsView>
 #include <QThread>
@@ -14,9 +15,6 @@
 #include "StelQGLViewport.hpp"
 #include "StelTextureCache.hpp"
 #include "StelVertexBuffer.hpp"
-
-//TEMP
-#include "StelCore.hpp"
 
 
 //TODO get rid of all StelPainter calls (gradually)
@@ -38,6 +36,7 @@ public:
 		, pvrSupported(pvrSupported)
 		, textureCache()
 		, previousFrameEndTime(-1.0)
+		, globalColor(Qt::white)
 		, gl(glContext)
 	{
 		loaderThread = new QThread();
@@ -190,6 +189,11 @@ public:
 		textureCache.remove(qglTextureBackend);
 		invariant();
 	}
+
+	virtual void setGlobalColor(const QColor& color)
+	{
+		globalColor = color;
+	}
 	
 	//! Make Stellarium GL context the currently used GL context. Call this before GL calls.
 	virtual void makeGLContextCurrent()
@@ -217,6 +221,12 @@ public:
 	QThread* getLoaderThread()
 	{
 		return loaderThread;
+	}
+
+	//! Get global vertex color (used for drawing).
+	const QColor& getGlobalColor() const
+	{
+		return globalColor;
 	}
 
 protected:
@@ -263,6 +273,13 @@ private:
 	//! Negative at construction to detect the first frame.
 	double previousFrameEndTime;
 
+	//! Global vertex color.
+	//! This color is used when rendering vertex formats that have no vertex color attribute.
+	//!
+	//! Per-vertex color completely overrides this 
+	//! (this is to keep behavior from before the GL refactor unchanged).
+	QColor globalColor;
+
 	//! Draw the result of drawing commands to the window, applying given effect if possible.
 	void drawWindow(StelViewportEffect* const effect)
 	{
@@ -289,16 +306,11 @@ private:
 				int texWidth, texHeight;
 				screenTexture->getDimensions(texWidth, texHeight);
 
-				StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
-				sPainter.setColor(1,1,1);
-
-				sPainter.enableTexture2d(true);
-
+				setGlobalColor(Qt::white);
 				screenTexture->bind();
-
-				sPainter.drawRect2d(0, 0, texWidth, texHeight);
+				drawRect(0, 0, texWidth, texHeight);
 			}
-			// Not using FBO, the result is already drawn to the screen.
+			// If not using FBO, the result is already drawn to the screen.
 		}
 		else
 		{

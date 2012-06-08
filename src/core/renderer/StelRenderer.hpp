@@ -1,6 +1,7 @@
 #ifndef _STELRENDERER_HPP_
 #define _STELRENDERER_HPP_
 
+#include <QColor>
 #include <QImage>
 #include <QPainter>
 #include <QSize>
@@ -109,6 +110,26 @@ public:
 	{
 		drawVertexBufferBackend(vertexBuffer->backend, indexBuffer, projector);
 	}
+
+	//! Draw a rectangle to the screen.
+	//!
+	//! The rectangle will be colored by the global color
+	//! (which can be specified by setGlobalColor()).
+	//!
+	//! Optionally, the rectangle can be textured by the currently bound texture
+	//! (on by default).
+	//!
+	//! Default implementation uses other Renderer functions to draw the rectangle,
+	//! but can be overridden if a more optimized implementation is needed.
+	//!
+	//! @param x        X position of the top left corner on the screen in pixels.
+	//! @param y        Y position of the top left corner on the screen in pixels. 
+	//! @param width    Width in pixels.
+	//! @param height   Height in pixels.
+	//! @param textured Draw textured or jus plain color rectangle?
+	virtual void drawRect(const float x, const float y, 
+	                      const float width, const float height, 
+	                      const bool textured = true);
 	
 	//! Bind a texture (following draw calls will use this texture on specified texture unit).
 	//!
@@ -193,6 +214,16 @@ public:
 
 	//! Get size of the viewport in pixels.
 	virtual QSize getViewportSize() const = 0;
+
+	//! Set the global vertex color.
+	//!
+	//! Default color is white.
+	//!
+	//! This color is used when rendering vertex formats that have no vertex color attribute.
+	//!
+	//! Per-vertex color completely overrides this 
+	//! (this is to keep behavior from before the GL refactor unchanged).
+	virtual void setGlobalColor(const QColor& color) = 0;
 
 protected:
 	//! Create a vertex buffer backend. Used by createVertexBuffer.
