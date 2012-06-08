@@ -170,8 +170,10 @@ void StelTestQGL2VertexBufferBackend::
 	// (to keep in line with Stellarium behavior before the GL refactor)
 	if(!vertexColors)
 	{
-		// TODO Placeholder, until Renderer can set colors
-		program->setUniformValue("globalColor", 1.0f, 1.0f, 1.0f, 1.0f);
+		const QColor& color = renderer.getGlobalColor();
+		program->setUniformValue("globalColor", 
+		                         color.redF(), color.greenF(), 
+		                         color.blueF(), color.alphaF());
 	}
 
 	// Draw the vertex arrays.
