@@ -106,8 +106,10 @@ public slots:
 	//! @param name is the English name of the object for which data will be
 	//! returned.
 	//! @return a map of object data.  Keys:
-	//! - altitude : altitude angle in decimal degrees
-	//! - azimuth : azimuth angle in decimal degrees
+	//! - altitude : apparent altitude angle in decimal degrees
+	//! - azimuth : apparent azimuth angle in decimal degrees
+	//! - altitude-geometric : geometric altitude angle in decimal degrees
+	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
 	//! - ra : right ascension angle (current date frame) in decimal degrees
 	//! - dec : declenation angle in (current date frame) decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
