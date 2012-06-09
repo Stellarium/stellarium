@@ -130,7 +130,7 @@ void StelLogger::init(const QString& logFilePath)
 	uname.waitForStarted();
 	uname.waitForFinished();
 	const QString BSDsystem = uname.readAllStandardOutput();
-	writeLog(BSDsystem);
+	writeLog(BSDsystem.trimmed());
 #else
 	writeLog("Unknown operating system");
 #endif
@@ -217,6 +217,30 @@ void StelLogger::init(const QString& logFilePath)
 	}
 #endif
 
+#if defined Q_OS_BSD4
+	QProcess dmesg
+	dmesg.start("dmesg", QIODevice::ReadOnly);
+	dmesg.waitForStarted();
+	dmesg.waitForFinished();
+	const QString dmesgData(dmesg.readAll());
+	QStringList dmesgLines = dmesgData.split('\n', QString::SkipEmptyParts);
+	for (int i = 0; i<dmesgLines.size(); i++)
+	{
+		if (dmesgLines.at(i).contains("memory"))
+		{
+			writeLog(dmesgLines.at(i).trimmed());
+		}
+		if (dmesgLines.at(i).contains("CPU"))
+		{
+			writeLog(dmesgLines.at(i).trimmed());
+		}
+		if (dmesgLines.at(i).contains("VGA"))
+		{
+			writeLog(dmesgLines.at(i).trimmed());
+		}
+	}
+#endif
+
 	// Aargh Windows API
 #elif defined Q_OS_WIN
 	// Hopefully doesn't throw a linker error on earlier systems. Not like
@@ -284,7 +308,7 @@ void StelLogger::init(const QString& logFilePath)
 #elif defined Q_OS_MAC
 	QProcess systemProfiler;
 	systemProfiler.start("/usr/sbin/system_profiler -detailLevel mini SPHardwareDataType SPDisplaysDataType");
-   systemProfiler.waitForStarted();
+	systemProfiler.waitForStarted();
 	systemProfiler.waitForFinished();
 	const QString systemData(systemProfiler.readAllStandardOutput());
 	QStringList systemLines = systemData.split('\n', QString::SkipEmptyParts);
