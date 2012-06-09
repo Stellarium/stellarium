@@ -123,12 +123,20 @@ void StelLogger::init(const QString& logFilePath)
 		writeLog(version);
 		procVersion.close();
 	}
+#elif defined Q_OS_BSD4
+	// Check FreeBSD, NetBSD, OpenBSD and DragonFly BSD
+	QProcess uname;
+	uname.start("/usr/bin/uname -srm");
+	uname.waitForStarted();
+	uname.waitForFinished();
+	const QString BSDsystem = uname.readAllStandardOutput();
+	writeLog(BSDsystem);
 #else
 	writeLog("Unknown operating system");
 #endif
 
 	// write GCC version
-#if defined __GNUC__
+#if defined __GNUC__ && !defined __clang__
 	#ifdef __MINGW32__
 		#define COMPILER "MinGW GCC"
 	#else
