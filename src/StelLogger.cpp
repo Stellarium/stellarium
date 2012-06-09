@@ -128,10 +128,17 @@ void StelLogger::init(const QString& logFilePath)
 #endif
 
 	// write GCC version
-#ifndef __GNUC__
-	writeLog("Non-GCC compiler");
+#if defined __GNUC__
+	#ifdef __MINGW32__
+		#define COMPILER "MinGW GCC"
+	#else
+		#define COMPILER "GCC"
+	#endif
+	writeLog(QString("Compiled using %1 %2.%3.%4").arg(COMPILER).arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__));
+#elif defined __clang__
+	writeLog(QString("Compiled using %1 %2.%3.%4").arg("Clang").arg(__clang_major__).arg(__clang_minor__).arg(__clang_patchlevel__));
 #else
-	writeLog(QString("Compiled with GCC %1.%2.%3").arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__));
+	writeLog("Unknown compiler");
 #endif
 
 	// write Qt version
