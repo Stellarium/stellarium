@@ -219,7 +219,7 @@ void StelLogger::init(const QString& logFilePath)
 
 #if defined Q_OS_BSD4
 	QProcess dmesg
-	dmesg.start("dmesg", QIODevice::ReadOnly);
+	dmesg.start("/sbin/dmesg", QIODevice::ReadOnly);
 	dmesg.waitForStarted();
 	dmesg.waitForFinished();
 	const QString dmesgData(dmesg.readAll());
