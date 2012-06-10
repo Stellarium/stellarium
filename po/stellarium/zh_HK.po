@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-23 18:43+0700\n"
+"POT-Creation-Date: 2012-06-02 20:19+0700\n"
 "PO-Revision-Date: 2012-04-17 03:51+0000\n"
 "Last-Translator: Allen Zhong <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-24 10:54+0000\n"
-"X-Generator: Launchpad (build 15288)\n"
+"X-Launchpad-Export-Date: 2012-06-03 04:44+0000\n"
+"X-Generator: Launchpad (build 15342)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -55,7 +55,7 @@ msgid "Planet: "
 msgstr "行星: "
 
 #: src/core/modules/Nebula.cpp:96 plugins/Supernovae/src/Supernova.cpp:99
-#: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:128
+#: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:129
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "種類:<b>%1</b>"
@@ -371,6 +371,7 @@ msgid "Contact"
 msgstr "聯繫"
 
 #: src/gui/ConfigurationDialog.cpp:658
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
 msgid "Author"
 msgstr "作者"
 
@@ -525,6 +526,7 @@ msgstr "正常腳本的執行效率"
 #: plugins/CompassMarks/src/CompassMarks.cpp:124
 #: plugins/Oculars/src/Oculars.cpp:1188
 #: plugins/Satellites/src/Satellites.cpp:128
+#: plugins/Pulsars/src/Pulsars.cpp:146
 msgid "Plugin Key Bindings"
 msgstr ""
 
@@ -2587,6 +2589,7 @@ msgstr "說明"
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:266
 msgid "About"
 msgstr "關於"
 
@@ -3713,15 +3716,15 @@ msgstr ""
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1735
+#: plugins/Oculars/src/Oculars.cpp:1738
 msgid "&Telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1736
+#: plugins/Oculars/src/Oculars.cpp:1739
 msgid "&Previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1737
+#: plugins/Oculars/src/Oculars.cpp:1740
 msgid "&Next telescope"
 msgstr ""
 
@@ -4024,6 +4027,7 @@ msgid "Stellarium Satellites Plugin"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
 msgid "Version"
 msgstr ""
 
@@ -4131,6 +4135,7 @@ msgid "See %1this document%2 for details."
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
 msgid "Links"
 msgstr ""
 
@@ -4142,56 +4147,69 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:299
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:303
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
 msgid "Internet updates disabled"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:355
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:197
 msgid "Updating now..."
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:325
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:159
 msgid "Next update: < 1 minute"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:161
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:163
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:180
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
 msgid "Update now"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:346
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:182
 msgid "Update from files"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:358
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:200
 msgid "Update error"
 msgstr ""
 
@@ -4268,10 +4286,12 @@ msgid "Update TLE lists from Internet sources"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:644
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:256
 msgid "Update from Internet sources"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
 msgid "Last update:"
 msgstr ""
 
@@ -4319,14 +4339,17 @@ msgid "Fade length:"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:672
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 msgid "Restore default settings"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:264
 msgid "Save settings as default"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:674
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:265
 msgid "Settings"
 msgstr ""
 
@@ -5477,131 +5500,238 @@ msgstr ""
 msgid "Z (redshift): %1"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:59
+#: plugins/Pulsars/src/Pulsars.cpp:71
 msgid "Pulsars"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:62
+#: plugins/Pulsars/src/Pulsars.cpp:74
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:113
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
-"about each one. Pulsar data is derived from 'The ATNF Pulsar Catalogue'  "
-"(Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, "
-"1993-2006 (2005) (astro-ph/0412641)).<br><br>Note: pulsar identifiers have "
-"the prefix 'PSR'"
+"about each one."
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:128
+#: plugins/Pulsars/src/Pulsars.cpp:148
+msgid "Pulsars configuration window"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:129
 msgid "pulsar"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - seconds
-#: plugins/Pulsars/src/Pulsar.cpp:139
+#: plugins/Pulsars/src/Pulsar.cpp:140
 #, qt-format
 msgid "Barycentric period: %1 s"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:143
+#: plugins/Pulsars/src/Pulsar.cpp:144
 #, qt-format
 msgid "Time derivative of barycentric period: %1"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:148
+#: plugins/Pulsars/src/Pulsar.cpp:149
 msgid "Dispersion measure:"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
-#: plugins/Pulsars/src/Pulsar.cpp:151
+#: plugins/Pulsars/src/Pulsar.cpp:152
 msgid "cm"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
-#: plugins/Pulsars/src/Pulsar.cpp:154
+#: plugins/Pulsars/src/Pulsar.cpp:155
 msgid "pc"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:160
+#: plugins/Pulsars/src/Pulsar.cpp:161
 #, qt-format
 msgid "Spin down energy loss rate: %1 ergs/s"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:164
+#: plugins/Pulsars/src/Pulsar.cpp:165
 #, qt-format
 msgid "Binary period of pulsar: %1 days"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:168
+#: plugins/Pulsars/src/Pulsar.cpp:169
 #, qt-format
 msgid "Eccentricity: %1"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: plugins/Pulsars/src/Pulsar.cpp:173
+#: plugins/Pulsars/src/Pulsar.cpp:174
 #, qt-format
 msgid "Annual parallax: %1 mas"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:177
+#: plugins/Pulsars/src/Pulsar.cpp:178
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:181
+#: plugins/Pulsars/src/Pulsar.cpp:182
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:187 plugins/Pulsars/src/Pulsar.cpp:199
-#: plugins/Pulsars/src/Pulsar.cpp:211
+#: plugins/Pulsars/src/Pulsar.cpp:188 plugins/Pulsars/src/Pulsar.cpp:200
+#: plugins/Pulsars/src/Pulsar.cpp:212
 msgid "Time averaged flux density at"
 msgstr ""
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Pulsars/src/Pulsar.cpp:190 plugins/Pulsars/src/Pulsar.cpp:202
-#: plugins/Pulsars/src/Pulsar.cpp:214
+#: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Pulsars/src/Pulsar.cpp:203
+#: plugins/Pulsars/src/Pulsar.cpp:215
 msgid "MHz"
 msgstr ""
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:193 plugins/Pulsars/src/Pulsar.cpp:205
-#: plugins/Pulsars/src/Pulsar.cpp:217
+#: plugins/Pulsars/src/Pulsar.cpp:194 plugins/Pulsars/src/Pulsar.cpp:206
+#: plugins/Pulsars/src/Pulsar.cpp:218
 msgid "mJy"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:221
+#: plugins/Pulsars/src/Pulsar.cpp:222
 #, qt-format
 msgid "Notes: %1"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:283
+#: plugins/Pulsars/src/Pulsar.cpp:291
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:288
+#: plugins/Pulsars/src/Pulsar.cpp:296
 msgid "has one or more binary companions"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:293
+#: plugins/Pulsars/src/Pulsar.cpp:301
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:298
+#: plugins/Pulsars/src/Pulsar.cpp:306
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:303
+#: plugins/Pulsars/src/Pulsar.cpp:311
 msgid "with pulsed emission in the radio band"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:308
+#: plugins/Pulsars/src/Pulsar.cpp:316
 msgid "with intermittently pulsed radio emission"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:313
+#: plugins/Pulsars/src/Pulsar.cpp:321
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
+msgid "Pulsars Plug-in"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
+#, qt-format
+msgid ""
+"Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N., "
+"Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
+"(%1astro-ph/0412641%2))."
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
+msgid "Note"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
+msgid "pulsar identifiers have the prefix 'PSR'"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
+msgid "Acknowledgment"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
+msgid ""
+"We thank the following people for their contribution and of the valuable "
+"comments:"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
+msgid "Vladimir Samodourov"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
+msgid "Pushchino Radio Astronomy Observatory"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
+msgid "in Russia"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
+msgid "Maciej Serylak"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
+msgid "Nancay Radioastronomical Observatory"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
+msgid "in France"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
+msgid ""
+"Support is provided via the Launchpad website.  Be sure to put \"Pulsars "
+"plugin\" in the subject when posting."
+msgstr ""
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
+#, qt-format
+msgid ""
+"If you want read full information about plugin, his history and format of "
+"catalog you can %1get info here%2."
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:165
+#, qt-format
+msgid "Next update: %1 days"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:207
+msgid "Pulsars is updated"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:252
+msgid "Pulsars Configuration"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:253
+msgid "Pulsars Plug-in Configuration"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:255
+msgid "Update catalog from Internet"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
+msgid "Update frequency (days):"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
+msgid "[next update info]"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:261
+msgid "Display mode for pulsars"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:262
+msgid "Enable display of distribution for pulsars"
 msgstr ""
 
 #~ msgid "Equatorial Grid"
