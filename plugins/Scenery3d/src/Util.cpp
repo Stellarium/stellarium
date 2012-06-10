@@ -118,3 +118,9 @@ Vec3d vecfToDouble(Vec3f v)
     return out;
 }
 
+std::string toString(int i)
+{
+    std::stringstream out;
+    out << i;
+    return out.str();
+}

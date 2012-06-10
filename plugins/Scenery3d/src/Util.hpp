@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <sstream>
 
 #include <QString>
 #include <QDebug>
@@ -43,5 +44,7 @@ extern void parseTextureString(std::string in, std::string& out);
 //! Casts a Vec3d to Vec3f;
 extern Vec3f vecdToFloat(Vec3d v);
 extern Vec3d vecfToDouble(Vec3f v);
+//! Parses a int to string
+extern std::string toString(int i);
 #endif
 

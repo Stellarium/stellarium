@@ -120,6 +120,7 @@ public:
     enum Effect { No, BumpMapping, ShadowMapping, All };
     Mat4d mv;
     Mat4d mp;
+    Mat4f mv2;
     Vec3d viewUp;
     Vec3d viewDir;
     Vec3d viewPos;
@@ -136,8 +137,8 @@ private:
     void drawObjModel(StelCore* core);
     void generateShadowMap(StelCore* core);
     void generateCubeMap(StelCore* core);
-    void generateCubeMap_drawScene(StelPainter& painter, float ambientBrightness, float directionalBrightness);
-    void generateCubeMap_drawSceneWithShadows(StelPainter& painter, float ambientBrightness, float directionalBrightness);
+    void generateCubeMap_drawScene(StelPainter& painter);
+    void generateCubeMap_drawSceneWithShadows(StelPainter& painter);
     void drawArrays(StelPainter& painter, bool textures=true);
     void drawFromCubeMap(StelCore* core);
 
@@ -243,6 +244,23 @@ private:
     AABB sceneBoundingBox;
     //Camera Frustum
     Frustum cFrust;
+    void saveFrusts();
+
+    //Number of splits for CSM
+    int frustumSplits;
+    //Weight for splitting the frustums
+    float splitWeight;
+    //Array holding the split frustums
+    Frustum* frustumArray;
+    //Holds the shadow maps
+    GLuint* shadowMapsArray;
+    //Holds the ...
+    Mat4f* shadowCPM;
+    void computeZDist(float zNear, float zFar);
+    void makeCropProjMatrix(int frustumIndex);
+    Mat4f camProj;
+    float debugMaxZ, debugMinZ;
+    Mat4f stelProj;
 };
 
 #endif

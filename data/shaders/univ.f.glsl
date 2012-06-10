@@ -21,61 +21,122 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#version 110
+#version 120
  
 uniform sampler2D tex;
-uniform sampler2D smap;
 uniform sampler2D bmap;
+uniform sampler2D smap_0;
+uniform sampler2D smap_1;
+uniform sampler2D smap_2;
+uniform sampler2D smap_3;
 
-uniform bool boolBump;
+uniform mat4 texmat_0;
+uniform mat4 texmat_1;
+uniform mat4 texmat_2;
+uniform mat4 texmat_3;
+
+uniform vec4 vecSplits;
 uniform vec4 vecColor;
 uniform bool onlyColor;
+uniform bool boolBump;
  
 uniform float fTransparencyThresh;
 uniform float alpha;
 uniform int iIllum;
+uniform bool boolDebug;
 
-varying vec4 SM_tex_coord; 
 varying vec3 vecLight;
 varying vec3 vecEye;
 varying vec3 vecNormal;
+varying vec4 vecEyeView;
+varying vec4 vecPos;
+
+uniform vec4 colors[4] = vec4[4](vec4(0.8, 0.2, 0.2, 1.0),  //Red
+								 vec4(0.2, 0.8, 0.2, 1.0),  //Green
+								 vec4(0.2, 0.2, 0.8, 1.0),  //Blue
+								 vec4(0.7, 0.7, 0.7, 1.0));
+								 
+vec4 debugColor(int i)
+{
+	if(boolDebug)
+	{
+		return colors[i];
+	}
+	
+	return vec4(1.0, 1.0, 1.0, 1.0);
+}
+
+vec4 getShadow()
+{
+	float dist = dot(vecEyeView.xyz, vecEyeView.xyz);
+	
+    vec4 sm_coord_c;
+    float shadow;
+    float s;
+
+    vec4 shadow_c = vec4(1.0, 1.0, 1.0, 1.0);
+
+    if(dist < vecSplits.x)
+    {
+      vec4 sm_coord_c = texmat_0*vecPos;
+      float shadow = texture2D(smap_0, sm_coord_c.xy).x;
+      float s = (shadow < sm_coord_c.z) ? 0.0 : 1.0;
+
+      shadow_c = debugColor(0) * s;
+    }
+    else if(dist < vecSplits.y)
+    {
+      vec4 sm_coord_c = texmat_1*vecPos;
+      float shadow = texture2D(smap_1, sm_coord_c.xy).x;
+      float s = (shadow < sm_coord_c.z) ? 0.0 : 1.0;
+
+      shadow_c = debugColor(1) * s;
+    }
+    else if(dist < vecSplits.z)
+    {
+      vec4 sm_coord_c = texmat_2*vecPos;
+      float shadow = texture2D(smap_2, sm_coord_c.xy).x;
+      float s = (shadow < sm_coord_c.z) ? 0.0 : 1.0;
+
+      shadow_c = debugColor(2) * s;
+    }
+	else if(dist < vecSplits.w)
+	{
+		sm_coord_c = texmat_3*vecPos;
+		shadow = texture2D(smap_3, sm_coord_c.xy).x;
+		s = (shadow < sm_coord_c.z) ? 0.0 : 1.0;
+
+		shadow_c = debugColor(3) * s;	
+	}
+
+    return shadow_c;
+}
   
 vec4 getLighting()
 {
+	vec4 shadow = getShadow();
+
+	//For bump mapping, the normal comes from the bump map texture lookup
+	vec3 n = normalize(vecNormal);
+	if(boolBump)
+	{
+		n = normalize(texture2D(bmap, gl_TexCoord[0].st).xyz * 2.0 - 1.0);
+	}
+	
+	vec3 l = normalize(vecLight);
+	
+	//Lambert term
+	float NdotL = dot(n, l);
+	vec4 color = gl_LightSource[0].diffuse * gl_FrontMaterial.diffuse * max(0.0, NdotL) * shadow;
+	
+	//Add ambient
 	if(iIllum > 0)
 	{
 		//Ka * Ia
-		vec4 color = (gl_FrontLightModelProduct.sceneColor * gl_FrontMaterial.ambient) + (gl_LightSource[0].ambient * gl_FrontMaterial.ambient);
-		
-		//For bump mapping, the normal comes from the bump map texture lookup
-		vec3 n = normalize(vecNormal);
-		if(boolBump)
-		{
-			n = normalize(texture2D(bmap, gl_TexCoord[0].st).xyz * 2.0 - 1.0);
-		}
-		
-		//Traditional shadow mapping
-		vec3 tex_coords = SM_tex_coord.xyz/SM_tex_coord.w;
-		float depth = texture2D(smap, tex_coords.xy).x;
-		
-		float shadowFactor;
-		if(depth > (tex_coords.z + 0.00001))
-		{
-			//In light!
-			shadowFactor = 1.0;
-		}
-		else
-		{
-			shadowFactor = 0.3;
-		}
-	
-		vec3 l = normalize(vecLight);
-	
-		//Lambert term
-		float NdotL = dot(n, l);
-		color += gl_LightSource[0].diffuse * gl_FrontMaterial.diffuse * max(0.0, NdotL) * shadowFactor;
-		
-		if(iIllum == 2 && shadowFactor > 0.3)
+		color += (gl_FrontLightModelProduct.sceneColor * gl_FrontMaterial.ambient) + (gl_LightSource[0].ambient * gl_FrontMaterial.ambient);
+
+		//Add reflect
+		if(iIllum == 2)
 		{
 			//Reflection term
 			if(NdotL > 0.0)
@@ -90,13 +151,10 @@ vec4 getLighting()
 					color += gl_LightSource[0].specular * gl_FrontMaterial.specular * spec;
 				}
 			}
-		}
-		
-		return color;
+		}	
 	}
 	
-	//Illum 0 - KD only
-	return gl_FrontMaterial.diffuse;
+	return color;
 } 
   
 void main(void)
