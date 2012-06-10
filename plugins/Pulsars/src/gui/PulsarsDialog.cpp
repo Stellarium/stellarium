@@ -142,6 +142,11 @@ void PulsarsDialog::setAboutHtml(void)
 	html += "<li>" + q_("If you want read full information about plugin, his history and format of catalog you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Pulsars_plugin\">").arg("</a>") + "</li>";
 	html += "</ul></p></body></html>";
 
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	Q_ASSERT(gui);
+	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+	ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+
 	ui->aboutTextBrowser->setHtml(html);
 }
 
