@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-02 20:19+0700\n"
-"PO-Revision-Date: 2012-03-26 23:01+0000\n"
+"PO-Revision-Date: 2012-06-09 13:51+0000\n"
 "Last-Translator: Asier Iturralde Sarasola <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-03 04:35+0000\n"
-"X-Generator: Launchpad (build 15342)\n"
+"X-Launchpad-Export-Date: 2012-06-10 04:34+0000\n"
+"X-Generator: Launchpad (build 15376)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -148,17 +148,17 @@ msgstr "Itxurazko diametroa: %1"
 #: src/core/modules/Planet.cpp:189
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "Fase-angelua: %1"
 
 #: src/core/modules/Planet.cpp:190
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "Elongazioa: %1"
 
 #: src/core/modules/Planet.cpp:191
 #, qt-format
 msgid "Phase: %1"
-msgstr ""
+msgstr "Fasea: %1"
 
 #: src/core/modules/Planet.cpp:192
 #, qt-format
@@ -345,27 +345,27 @@ msgstr "Az/Alt: %1/%2"
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
-msgstr ""
+msgstr "Sareko errorea"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
-msgstr ""
+msgstr "Errorea posizioa analizatzean"
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
-msgstr ""
+msgstr "Kontsultatzen"
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "Errorea"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr ""
+msgstr "Ez da aurkitu"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
-msgstr ""
+msgstr "Aurkitua"
 
 #: src/gui/ConfigurationDialog.cpp:346
 msgid "Select screenshot directory"
@@ -521,15 +521,15 @@ msgstr "Script bat exekutatzen ari denean"
 
 #: src/gui/HelpDialog.cpp:73
 msgid "Stop currently running script"
-msgstr ""
+msgstr "Gelditu unean martxan dagoen script-a"
 
 #: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:151 src/gui/StelGui.cpp:152
 msgid "Pause script execution"
-msgstr ""
+msgstr "Pausatu script-aren exekuzioa"
 
 #: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:153
 msgid "Resume script execution"
-msgstr ""
+msgstr "Berrekin script-aren exekuzioa"
 
 #: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:148
 msgid "Slow down the script execution rate"
@@ -653,7 +653,7 @@ msgstr "Garatzailea: %1"
 #: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "Testatzailea: %1"
 
 #: src/gui/HelpDialog.cpp:312
 msgid "Past Developers"
@@ -664,6 +664,8 @@ msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
+"Hainbat pertsonak ekarpen garrantzitsuak egin dituzte, baina orain ez daude "
+"aktibo. Beren lana funtsezkoa izan da proiektuaren garapenean"
 
 #: src/gui/HelpDialog.cpp:314
 #, qt-format
@@ -716,7 +718,7 @@ msgstr "J2000 sareta ekuatoriala"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
-msgstr ""
+msgstr "J2000 sareta ekliptikoa"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
@@ -915,19 +917,19 @@ msgstr "Kendu izar-aste bat"
 
 #: src/gui/StelGui.cpp:171
 msgid "Add 1 sidereal month"
-msgstr ""
+msgstr "Gehitu izar-hilabete bat"
 
 #: src/gui/StelGui.cpp:172
 msgid "Subtract 1 sidereal month"
-msgstr ""
+msgstr "Kendu izar-hilabete bat"
 
 #: src/gui/StelGui.cpp:173
 msgid "Add 1 sidereal year"
-msgstr ""
+msgstr "Gehitu izar-urte bat"
 
 #: src/gui/StelGui.cpp:174
 msgid "Subtract 1 sidereal year"
-msgstr ""
+msgstr "Kendu izar-urte bat"
 
 #: src/gui/StelGui.cpp:177
 msgid "Center on selected object"
@@ -1114,11 +1116,11 @@ msgstr "izar-karta"
 
 #: src/gui/SearchDialog.cpp:351
 msgid "Simbad Lookup Error"
-msgstr ""
+msgstr "Simbad bilaketa errorea"
 
 #: src/gui/SearchDialog.cpp:359
 msgid "Simbad Lookup"
-msgstr ""
+msgstr "Simbad bilaketa"
 
 #: src/gui/SearchDialog.cpp:507
 msgid "University of Strasbourg (France)"
@@ -2830,11 +2832,11 @@ msgstr "Posizioa"
 
 #: src/ui_searchDialogGui.h:586
 msgid "On-line astronomical database SIMBAD"
-msgstr ""
+msgstr "SIMBAD lineako datu-base astronomikoa"
 
 #: src/ui_searchDialogGui.h:587
 msgid "Extend search with SIMBAD"
-msgstr ""
+msgstr "Hedatu bilaketa SIMBADekin"
 
 #: src/ui_searchDialogGui.h:588
 msgid "Server:"
@@ -3001,23 +3003,23 @@ msgstr "Zeruko esfera"
 
 #: src/ui_viewDialog.h:1162
 msgid "Show equator line"
-msgstr ""
+msgstr "Erakutsi ekuatore lerroa"
 
 #: src/ui_viewDialog.h:1166
 msgid "Show meridian line"
-msgstr ""
+msgstr "Erakutsi meridiano lerroa"
 
 #: src/ui_viewDialog.h:1170
 msgid "Show horizon line"
-msgstr ""
+msgstr "Erakutsi zerumuga lerroa"
 
 #: src/ui_viewDialog.h:1174
 msgid "Show ecliptic line"
-msgstr ""
+msgstr "Erakutsi ekliptika lerroa"
 
 #: src/ui_viewDialog.h:1178
 msgid "Show Galactic plane line"
-msgstr ""
+msgstr "Erakutsi galaxia-planoaren lerroa"
 
 #: src/ui_viewDialog.h:1182
 msgid "Projection"
@@ -3081,11 +3083,11 @@ msgstr "Laburra"
 
 #: src/ui_configurationDialog.h:798
 msgid "Display user settings information"
-msgstr ""
+msgstr "Erakutsi erabiltzailearen ezarpenen informazioa"
 
 #: src/ui_configurationDialog.h:800
 msgid "Customized"
-msgstr ""
+msgstr "Pertsonalizatua"
 
 #: src/ui_configurationDialog.h:802
 msgid "Display no information"
@@ -3425,87 +3427,87 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:194
 msgid "Custom Info Settings"
-msgstr ""
+msgstr "Informazio pertsonalizatuaren ezarpenak"
 
 #: src/ui_CustomInfoDialog.h:196
 msgid "Display info about an object's name"
-msgstr ""
+msgstr "Bistaratu objektu baten izenari buruzko informazioa"
 
 #: src/ui_CustomInfoDialog.h:198
 msgid "An object's name"
-msgstr ""
+msgstr "Objektu baten izena"
 
 #: src/ui_CustomInfoDialog.h:200
 msgid "Display  info about a catalog numbers"
-msgstr ""
+msgstr "Bistaratu katalogo zenbaki bati buruzko informazioa"
 
 #: src/ui_CustomInfoDialog.h:202
 msgid "Catalog numbers"
-msgstr ""
+msgstr "Katalogo zenbakiak"
 
 #: src/ui_CustomInfoDialog.h:204
 msgid "Display  info about a visual magnitude"
-msgstr ""
+msgstr "Bistaratu magnitude bisual bati buruzko informazioa"
 
 #: src/ui_CustomInfoDialog.h:206
 msgid "Visual magnitude"
-msgstr ""
+msgstr "Magnitude bisuala"
 
 #: src/ui_CustomInfoDialog.h:208
 msgid "Display  info about an absolute magnitude"
-msgstr ""
+msgstr "Bistaratu magnitude absolutu bati buruzko informazioa"
 
 #: src/ui_CustomInfoDialog.h:210
 msgid "Absolute magnitude"
-msgstr ""
+msgstr "Magnitude absolutua"
 
 #: src/ui_CustomInfoDialog.h:212
 msgid "Display the equatorial position (J2000 ref)"
-msgstr ""
+msgstr "Bistaratu posizio ekuatoriala (J2000 erref)"
 
 #: src/ui_CustomInfoDialog.h:214
 msgid "The equatorial coordinates (J2000 ref)"
-msgstr ""
+msgstr "Koordenatu ekuatorialak (J2000 erref)"
 
 #: src/ui_CustomInfoDialog.h:216
 msgid "Display the equatorial position (of date)"
-msgstr ""
+msgstr "Bistaratu posizio ekuatoriala (datarena)"
 
 #: src/ui_CustomInfoDialog.h:218
 msgid "The equatorial coordinates (of date)"
-msgstr ""
+msgstr "Koordenatu ekuatorialak (datarenak)"
 
 #: src/ui_CustomInfoDialog.h:220
 msgid "Display the altitude and azimuth position"
-msgstr ""
+msgstr "Bistaratu altitudea eta posizio azimutala"
 
 #: src/ui_CustomInfoDialog.h:222
 msgid "The alt-azimuthal coordinates"
-msgstr ""
+msgstr "Koordenatu alt-azimutalak"
 
 #: src/ui_CustomInfoDialog.h:224
 msgid "Display the hour angle + DE (of date)"
-msgstr ""
+msgstr "Bistaratu ordu angelua + DEK (datarena)"
 
 #: src/ui_CustomInfoDialog.h:226
 msgid "The hour angle"
-msgstr ""
+msgstr "Ordu angelua"
 
 #: src/ui_CustomInfoDialog.h:228
 msgid "Display info about an object's distance"
-msgstr ""
+msgstr "Bistaratu objektu baten distantziari buruzko informazioa"
 
 #: src/ui_CustomInfoDialog.h:230
 msgid "Object's distance"
-msgstr ""
+msgstr "Objektuaren distantzia"
 
 #: src/ui_CustomInfoDialog.h:232
 msgid "Display info about an object's size"
-msgstr ""
+msgstr "Bistaratu objektu baten tamainari buruzko informazioa"
 
 #: src/ui_CustomInfoDialog.h:234
 msgid "Object's size"
-msgstr ""
+msgstr "Objektuaren tamaina"
 
 #: src/ui_CustomInfoDialog.h:236 src/ui_CustomInfoDialog.h:240
 #: src/ui_CustomInfoDialog.h:244
@@ -3514,15 +3516,15 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:238
 msgid "Additional info (Extra 1)"
-msgstr ""
+msgstr "Informazio gehigarria (Estra 1)"
 
 #: src/ui_CustomInfoDialog.h:242
 msgid "Additional info (Extra 2)"
-msgstr ""
+msgstr "Informazio gehigarria (Estra 2)"
 
 #: src/ui_CustomInfoDialog.h:246
 msgid "Additional info (Extra 3)"
-msgstr ""
+msgstr "Informazio gehigarria (Estra 3)"
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
@@ -5636,7 +5638,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsars.cpp:148
 msgid "Pulsars configuration window"
-msgstr ""
+msgstr "Pulsarren konfigurazio leihoa"
 
 #: plugins/Pulsars/src/Pulsar.cpp:129
 msgid "pulsar"
@@ -5660,12 +5662,12 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:152
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:155
 msgid "pc"
-msgstr ""
+msgstr "pc"
 
 #: plugins/Pulsars/src/Pulsar.cpp:161
 #, qt-format
@@ -5675,23 +5677,23 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:165
 #, qt-format
 msgid "Binary period of pulsar: %1 days"
-msgstr ""
+msgstr "Pulsarraren periodo bitarra: %1 egun"
 
 #: plugins/Pulsars/src/Pulsar.cpp:169
 #, qt-format
 msgid "Eccentricity: %1"
-msgstr ""
+msgstr "Eszentrikotasuna: %1"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: plugins/Pulsars/src/Pulsar.cpp:174
 #, qt-format
 msgid "Annual parallax: %1 mas"
-msgstr ""
+msgstr "Urteko paralajea: %1 mas"
 
 #: plugins/Pulsars/src/Pulsar.cpp:178
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
-msgstr ""
+msgstr "Elektroi dentsitate ereduan oinarritutako distantzia: %1 kpc (%2 au)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:182
 #, qt-format
@@ -5719,7 +5721,7 @@ msgstr "mJy"
 #: plugins/Pulsars/src/Pulsar.cpp:222
 #, qt-format
 msgid "Notes: %1"
-msgstr ""
+msgstr "Oharrak: %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:291
 msgid ""
@@ -5754,7 +5756,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
 msgid "Pulsars Plug-in"
-msgstr ""
+msgstr "Pulsarrak plugina"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
 #, qt-format
@@ -5766,11 +5768,11 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
 msgid "Note"
-msgstr ""
+msgstr "Oharra"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr ""
+msgstr "pulsarren identifikatzaileek 'PSR' aurrizkia dute"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 msgid "Acknowledgment"
@@ -5784,27 +5786,27 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
-msgstr ""
+msgstr "Pushchino irrati-astronomia behatokia"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
 msgid "in Russia"
-msgstr ""
+msgstr "Errusian"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 msgid "Maciej Serylak"
-msgstr ""
+msgstr "Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Nancay Radioastronomical Observatory"
-msgstr ""
+msgstr "Nancay irrati-astronomia behatokia"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
 msgid "in France"
-msgstr ""
+msgstr "Frantzian"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
 msgid ""
@@ -5823,35 +5825,35 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:165
 #, qt-format
 msgid "Next update: %1 days"
-msgstr ""
+msgstr "Hurrengo eguneraketa: %1 egun"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:207
 msgid "Pulsars is updated"
-msgstr ""
+msgstr "Pulsarrak eguneratuta dago"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:252
 msgid "Pulsars Configuration"
-msgstr ""
+msgstr "Pulsarren konfigurazioa"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:253
 msgid "Pulsars Plug-in Configuration"
-msgstr ""
+msgstr "Pulsarrak pluginaren konfigurazioa"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:255
 msgid "Update catalog from Internet"
-msgstr ""
+msgstr "Eguneratu katalogoa internetetik"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Update frequency (days):"
-msgstr ""
+msgstr "Eguneraketen maiztasuna (egunak):"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 msgid "[next update info]"
-msgstr ""
+msgstr "[hurrengo eguneraketaren informazioa]"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:261
 msgid "Display mode for pulsars"
-msgstr ""
+msgstr "Pulsarren bistaratze modua"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:262
 msgid "Enable display of distribution for pulsars"
