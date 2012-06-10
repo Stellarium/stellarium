@@ -229,7 +229,8 @@ bool StelTexture::glLoad()
 		opt |= QGLContext::LinearFilteringBindOption;
 
 	// Mipmap seems to be pretty buggy on windows..
-#ifndef Q_OS_WIN
+	// Also getting some crashes with PowerVR GPUs in glGenerateMipmap, so disabling for Android
+#if !defined(Q_OS_WIN) && !defined(ANDROID)
 	if (loadParams.generateMipmaps==true)
 		opt |= QGLContext::MipmapBindOption;
 #endif
