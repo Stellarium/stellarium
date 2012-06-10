@@ -14,6 +14,12 @@ Item {
 	property int menuX
 	property int menuY
 
+	property int position
+
+	//Position constants (really, don't change these):
+	property int positionCenter: 0
+	property int positionTopRight: 1
+
 	anchors.fill: parent
 
 	MouseArea {
