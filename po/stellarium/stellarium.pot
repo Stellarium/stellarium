@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-10 18:52+0700\n"
+"POT-Creation-Date: 2012-06-10 19:09+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -362,7 +362,7 @@ msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:574
-#: plugins/Oculars/src/gui/OcularDialog.cpp:420
+#: plugins/Oculars/src/gui/OcularDialog.cpp:419
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr ""
@@ -3800,14 +3800,20 @@ msgid "Actual field of view provided by this ocular/telescope combination"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:417
-msgid "Oculars plug-in"
+msgid "Oculars Plug-in"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:424
+#: plugins/Oculars/src/gui/OcularDialog.cpp:418
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
+msgid "Version"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:423
 msgid "Overview"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:426
+#: plugins/Oculars/src/gui/OcularDialog.cpp:425
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -3815,7 +3821,7 @@ msgid ""
 "will populate some samples to get your started."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:427
+#: plugins/Oculars/src/gui/OcularDialog.cpp:426
 msgid ""
 "You can choose to scale the image you see on the screen.  This is intended "
 "to show you a better comparison of what one eyepiece/telescope combination "
@@ -3826,14 +3832,14 @@ msgid ""
 "that you leave it off, unless you feel you have a need of it."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:428
+#: plugins/Oculars/src/gui/OcularDialog.cpp:427
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:429
+#: plugins/Oculars/src/gui/OcularDialog.cpp:428
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -3842,28 +3848,28 @@ msgid ""
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:430
+#: plugins/Oculars/src/gui/OcularDialog.cpp:429
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:433
+#: plugins/Oculars/src/gui/OcularDialog.cpp:432
 msgid "Hot Keys"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:434
+#: plugins/Oculars/src/gui/OcularDialog.cpp:433
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:446
-#: plugins/Oculars/src/gui/OcularDialog.cpp:451
+#: plugins/Oculars/src/gui/OcularDialog.cpp:445
+#: plugins/Oculars/src/gui/OcularDialog.cpp:450
 msgid "[no key defined]"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:455
+#: plugins/Oculars/src/gui/OcularDialog.cpp:454
 msgid "Switches on/off the ocular overlay."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:459
+#: plugins/Oculars/src/gui/OcularDialog.cpp:458
 msgid "Opens the pop-up navigation menu."
 msgstr ""
 
@@ -4082,11 +4088,6 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:258
 msgid "Stellarium Satellites Plugin"
-msgstr ""
-
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
-msgid "Version"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:263

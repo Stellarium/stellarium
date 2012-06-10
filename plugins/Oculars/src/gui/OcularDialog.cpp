@@ -414,11 +414,10 @@ void OcularDialog::initAboutText()
 	//BM: Most of the text for now is the original contents of the About widget.
 	QString html = "<html><head><title></title></head><body>";
 
-	html += "<h1>" + q_("Oculars plug-in") + "</h1>";
-	
-	//Authors
-	QString authors = QString("<strong>%1:</strong> <a href=\"mailto:treaves@silverfieldstech.com\">Timothy Reaves</a>, Bogdan Marinov").arg(q_("Authors"));
-	html += "<h3>" + authors + "</h3>";
+	html += "<h2>" + q_("Oculars Plug-in") + "</h2><table width=\"90%\">";
+	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + OCULARS_PLUGIN_VERSION + "</td></tr>";
+	html += "<tr><td><strong>" + q_("Authors") + ":</strong></td><td>Timothy Reaves &lt;treaves@silverfieldstech.com&gt;<br />Bogdan Marinov</td></tr>";
+	html += "</table>";
 
 	//Overview
 	html += "<h2>" + q_("Overview") + "</h2>";
@@ -460,5 +459,9 @@ void OcularDialog::initAboutText()
 	html += "</li>";
 	html += "</ul>";
 	html += "</body></html>";
+
+	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+	ui->textBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+
 	ui->textBrowser->setHtml(html);
 }
