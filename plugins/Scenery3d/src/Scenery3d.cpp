@@ -49,6 +49,7 @@
 #include <cmath>
 
 #include <limits>
+#include <sstream>
 
 #include "AABB.hpp"
 
@@ -57,6 +58,18 @@
 #define FROM_MODEL (MEANINGLESS_INT + 1)
 
 #define GROUND_MODEL 1
+#define GET_GLERROR()                                   \
+{                                                       \
+    GLenum err = glGetError();                          \
+    if (err != GL_NO_ERROR) {                           \
+    fprintf(stderr, "[line %d] GL Error: %s\n",         \
+    __LINE__, gluErrorString(err));                     \
+    fflush(stderr);                                     \
+    }                                                   \
+}
+
+#define MAXSPLITS 4
+#define FARZ 700.0f
 
 
 Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
@@ -125,6 +138,33 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
     groundGenNormals = false;
     sceneBoundingBox = AABB(Vec3f(0.0f), Vec3f(0.0f));
 
+    //Preset frustumSplits
+    frustumSplits = 4;
+    splitWeight = 0.75f;
+    //Make sure we dont exceed MAXSPLITS or go below 1
+    frustumSplits = qMax(qMin(frustumSplits, MAXSPLITS), 1);
+    //Define shadow maps array - holds MAXSPLITS textures
+    shadowMapsArray = new GLuint[frustumSplits];
+    shadowCPM = new Mat4f[frustumSplits];
+    frustumArray = new Frustum[frustumSplits];
+
+    //Setup the Projection matrix for the view frustum
+    //This one is only used as a virtual view frustum for the shadow optimization
+    //The real projection will be set further down
+    float fov = 90.0f;
+    float aspect = 1.0f;
+    float zNear = 1.0f;
+    float zFar = FARZ;
+    float f = 2.0 / tan(fov * M_PI / 360.0);
+    camProj = Mat4f(f / aspect, 0, 0, 0,
+                    0, f, 0, 0,
+                    0, 0, (zFar + zNear) / (zNear - zFar), 2.0 * zFar * zNear / (zNear - zFar),
+                    0, 0, -1, 0);
+
+    for(int i=0; i<frustumSplits; i++)
+    {
+        frustumArray[i].setCamInternals(90.0f, 1.0f, 1.0f, FARZ);
+    }
 
     Mat4d matrix;
 #define PLANE(_VAR_, _MAT_) matrix=_MAT_; _VAR_=StelVertexArray(cubePlaneFront.vertex,StelVertexArray::Triangles,cubePlaneFront.texCoords);\
@@ -442,7 +482,7 @@ void Scenery3d::handleKeys(QKeyEvent* e)
             case Qt::Key_Right:     movement_x =  1.0f * speedup; e->accept(); break;
             case Qt::Key_Left:      movement_x = -1.0f * speedup; e->accept(); break;
             //case Qt::Key_P:         lightCamEnabled = !lightCamEnabled; e->accept(); break;
-            case Qt::Key_P: cFrust.saveCorners(); e->accept(); break;
+            case Qt::Key_P: saveFrusts(); e->accept(); break;
             case Qt::Key_D:         debugEnabled = !debugEnabled; e->accept(); break;
         }
     }
@@ -455,6 +495,14 @@ void Scenery3d::handleKeys(QKeyEvent* e)
                 movement_x = movement_y = movement_z = 0.0f;
                 e->accept();
             }
+    }
+}
+
+void Scenery3d::saveFrusts()
+{
+    for(int i=0; i<frustumSplits; i++)
+    {
+        frustumArray[i].saveCorners();
     }
 }
 
@@ -626,6 +674,10 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
     }
 
     cFrust.drawFrustum();
+    for(int i=0; i<frustumSplits; i++)
+    {
+        frustumArray[i].drawFrustum();
+    }
 }
 
 void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool& tangEnabled, int& tangLocation)
@@ -635,6 +687,9 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
 
     if(cur != No)
     {
+        location = curShader->uniformLocation("boolDebug");
+        curShader->setUniform(location, debugEnabled);
+
         location = curShader->uniformLocation("fTransparencyThresh");
         curShader->setUniform(location, fTransparencyThresh);
 
@@ -721,13 +776,10 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
     }
 }
 
-void Scenery3d::generateCubeMap_drawScene(StelPainter& painter, float ambientBrightness, float directionalBrightness)
+void Scenery3d::generateCubeMap_drawScene(StelPainter& painter)
 {
     //Bind shader based on selected effect flags
     bindShader();
-
-    //For debug
-    //if(lightCamEnabled) switchToLightCam();
 
     drawArrays(painter, true);
 
@@ -749,31 +801,48 @@ void Scenery3d::bindShader()
     if(curShader != 0) curShader->use();
 }
 
-void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float ambientBrightness, float directionalBrightness)
+void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter)
 {    
     //Bind the shader
     bindShader();
+
+    int location;
 
     //Calculate texture matrix for projection
     //This matrix takes us from eye space to the light's clip space
     //It is postmultiplied by the inverse of the current view matrix when specifying texgen
     static Mat4f biasMatrix(0.5f, 0.0f, 0.0f, 0.0f,
-                         0.0f, 0.5f, 0.0f, 0.0f,
-                         0.0f, 0.0f, 0.5f, 0.0f,
-                         0.5f, 0.5f, 0.5f, 1.0f);	//bias from [-1, 1] to [0, 1]
-    Mat4f textureMatrix = biasMatrix * lightProjectionMatrix * lightViewMatrix;
+                            0.0f, 0.5f, 0.0f, 0.0f,
+                            0.0f, 0.0f, 0.5f, 0.0f,
+                            0.5f, 0.5f, 0.5f, 1.0f);	//bias from [-1, 1] to [0, 1]
 
-    //Bind depth map texture (again in unit 1 because of multitexturing)
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
 
-    //Send Shadow Map to shader
-    int location = curShader->uniformLocation("smap");
-    curShader->setUniform(location, 1);
+    //Holds the squared frustum splits necessary for the lookup in the shader
+    Vec4f squaredSplits = Vec4f(0.0f);
+    for(int i=0; i<frustumSplits; i++)
+    {
+        squaredSplits.v[i] = frustumArray[i].zFar * frustumArray[i].zFar;
 
-    //Send to texture matrix to shader
-    location = curShader->uniformLocation("tex_mat");
-    curShader->setUniform(location, textureMatrix);
+        //Bind current depth map texture
+        glActiveTexture(GL_TEXTURE3+i);
+        glBindTexture(GL_TEXTURE_2D, shadowMapsArray[i]);
+
+        //Compute texture matrix
+        Mat4f texMat = biasMatrix * shadowCPM[i];
+
+        //Send to shader
+        std::string smapLoc = "smap_"+toString(i);
+        location = curShader->uniformLocation(smapLoc.c_str());
+        curShader->setUniform(location, 3+i);
+
+        std::string texMatLoc = "texmat_"+toString(i);
+        location = curShader->uniformLocation(texMatLoc.c_str());
+        curShader->setUniform(location, texMat);
+    }
+
+    //Send squared splits to the shader
+    location = curShader->uniformLocation("vecSplits");
+    curShader->setUniform(location, squaredSplits.v[0], squaredSplits.v[1], squaredSplits.v[2], squaredSplits.v[3]);
 
     //Activate normal texturing
     glActiveTexture(GL_TEXTURE0);
@@ -786,9 +855,102 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter, float
     glUseProgram(0);
 }
 
+void Scenery3d::computeZDist(float zNear, float zFar)
+{
+    float ratio = zFar/zNear;
+
+    //Compute the z-planes for the subfrusta
+    frustumArray[0].zNear = zNear;
+
+    for(int i=1; i<frustumSplits; i++)
+    {
+        float s_i = i/(float)frustumSplits;
+
+        frustumArray[i].zNear = splitWeight*(zNear*powf(ratio, s_i)) + (1-splitWeight)*(zNear + (zFar - zNear)*s_i);
+        //Set the previous zFar to the newly computed zNear
+        frustumArray[i-1].zFar = frustumArray[i].zNear * 1.005f;
+    }
+
+    //Make sure the last zFar is set correctly
+    frustumArray[frustumSplits-1].zFar = zFar;
+}
+
+void Scenery3d::makeCropProjMatrix(int frustumIndex)
+{
+    //Calculating a fitting Projection Matrix for the light
+    Mat4f lightProj, lightMV, lightMVP, c;
+
+    float maxX = -std::numeric_limits<float>::max();
+    float maxY = -std::numeric_limits<float>::max();
+    float maxZ;
+    float minX = std::numeric_limits<float>::max();
+    float minY = std::numeric_limits<float>::max();
+    float minZ;
+
+    lightMV = lightViewMatrix;
+
+    //Find maxZ, minZ for current split
+    Vec3f tmp = frustumArray[frustumIndex].getCorner(Frustum::NBL);
+    Vec4f transf = lightMV * Vec4f(tmp.v[0], tmp.v[1], tmp.v[2], 1.0f);
+    minZ = transf.v[2];
+    maxZ = transf.v[2];
+    for(unsigned int i=0; i<Frustum::CORNERCOUNT; i++)
+    {
+        Vec3f tmp = frustumArray[frustumIndex].getCorner(static_cast<Frustum::Corner>(i));
+        Vec4f transf = lightMV*Vec4f(tmp.v[0], tmp.v[1], tmp.v[2], 1.0f);
+
+        if(transf.v[2] > maxZ) maxZ = transf.v[2];
+        if(transf.v[2] < minZ) minZ = transf.v[2];
+    }
+
+    //Setup the Ortho Projection based on found z values
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(-1.0, 1.0, -1.0, 1.0, -maxZ, -minZ);
+    //Save it for later use
+    glGetFloatv(GL_PROJECTION_MATRIX, lightProj);
+    glPushMatrix();
+    glMultMatrixf(lightMV);
+    //Save the light's ModelViewProjection Matrix for later use
+    glGetFloatv(GL_PROJECTION_MATRIX, lightMVP);
+    glPopMatrix();
+
+    //Project the frustum into light space and find the boundaries
+    for(unsigned int i=0; i<Frustum::CORNERCOUNT; i++)
+    {
+        Vec3f tmp = frustumArray[frustumIndex].getCorner(Frustum::Corner(i));
+        Vec4f transf = lightMVP*Vec4f(tmp.v[0], tmp.v[1], tmp.v[2], 1.0f);
+
+        transf.v[0] /= transf.v[3];
+        transf.v[1] /= transf.v[3];
+
+        if(transf.v[0] > maxX) maxX = transf.v[0];
+        if(transf.v[0] < minX) minX = transf.v[0];
+        if(transf.v[1] > maxY) maxY = transf.v[1];
+        if(transf.v[1] < minY) minY = transf.v[1];
+    }
+
+    //Build the crop matrix and apply it to the light projection matrix
+    float scaleX = 2.0f/(maxX - minX);
+    float scaleY = 2.0f/(maxY - minY);
+    float offsetX = -0.5f*(maxX + minX)*scaleX;
+    float offsetY = -0.5f*(maxY + minY)*scaleY;
+
+    c = Mat4f(scaleX, 0.0f,   0.0f, offsetX,
+              0.0f,   scaleY, 0.0f, offsetY,
+              0.0f,   0.0f,   1.0f, 0.0f,
+              0.0f,   0.0f,   0.0f, 1.0f);
+
+    c = c.transpose();
+
+    //Crop the light projection matrix
+    glLoadMatrixf(c);
+    glMultMatrixf(lightProj);
+}
+
 void Scenery3d::generateShadowMap(StelCore* core)
 {
-    //First Pass
+    //Nothing to draw
     if(!hasModels)
         return;
 
@@ -817,50 +979,13 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glCullFace(GL_FRONT);
     glColorMask(0, 0, 0, 0); // disable color writes (increase performance?)
 
-    //Setup the matrices needed
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
-    glLoadIdentity();
-
-
-    //Bring frustum corners into light space
-    Vec3f corners[Frustum::CORNERCOUNT];
-    for(unsigned int i=0; i<Frustum::CORNERCOUNT; i++)
-    {
-        Vec3f tmp = cFrust.getCorner(Frustum::Corner(i));
-        lightViewMatrix.transfo(tmp);
-        corners[i] = tmp;
-    }
-
-    //Find the AABB in light space
-    AABB* box = new AABB(Vec3f(std::numeric_limits<float>::max()), Vec3f(-std::numeric_limits<float>::max()));
-    for(int i=0; i<Frustum::CORNERCOUNT; i++)
-    {
-        box->min.v[0] = std::min(static_cast<float>(corners[i][0]), box->min[0]);
-        box->min.v[1] = std::min(static_cast<float>(corners[i][1]), box->min[1]);
-        box->min.v[2] = std::min(static_cast<float>(corners[i][2]), box->min[2]);
-
-        box->max.v[0] = std::max(static_cast<float>(corners[i][0]), box->max[0]);
-        box->max.v[1] = std::max(static_cast<float>(corners[i][1]), box->max[1]);
-        box->max.v[2] = std::max(static_cast<float>(corners[i][2]), box->max[2]);
-    }
-
-    //Fit the light frustum to the view frustum
-    const GLdouble orthoLeft = box->min.v[0];
-    const GLdouble orthoRight = box->max.v[0];
-    const GLdouble orthoBottom = box->min.v[1];
-    const GLdouble orthoTop = box->max.v[1];
-    //Need to find better values for n/f
-    const GLdouble f = 1000;
-    const GLdouble n = -1000;
-
-    glOrtho(orthoLeft, orthoRight, orthoBottom, orthoTop, n, f);
-    glGetFloatv(GL_PROJECTION_MATRIX, lightProjectionMatrix); // save light projection for further render passes
 
     glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glLoadIdentity();
-    glRotated(90.0f, -1.0f, 0.0f, 0.0f);
+    //glPushMatrix();
+    //glLoadIdentity();
+    //glRotated(90.0f, -1.0f, 0.0f, 0.0f);
 
     //front
     glPushMatrix();
@@ -880,10 +1005,6 @@ void Scenery3d::generateShadowMap(StelCore* core)
     //No shader needed for generating the depth map
     glUseProgram(0);
 
-    //Activate texture unit 1 as usual
-    glActiveTexture(GL_TEXTURE1);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapTexture, 0);
-
     //Fix selfshadowing
     glEnable(GL_POLYGON_OFFSET_FILL);
     glPolygonOffset(1.1f,4.0f);
@@ -892,11 +1013,37 @@ void Scenery3d::generateShadowMap(StelCore* core)
     glPushAttrib(GL_VIEWPORT_BIT);
     glViewport(0, 0, shadowmapSize, shadowmapSize);
 
-    //Clear everything
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //Compute and set z-distances for each split
+    computeZDist(1.0f, FARZ);
 
-    //Draw the scene
-    drawArrays(painter, false);
+    //For each split
+    for(int i=0; i<frustumSplits; i++)
+    {
+        //Calculate the Frustum for this split
+        frustumArray[i].calcFrustum(viewPos, viewDir, viewUp);
+
+        //Calculate the crop matrix so that the light's frustum is tightly fit to the current split's camera frustum
+        //This alters the ProjectionMatrix of the light
+        makeCropProjMatrix(i);
+
+        //Activate texture unit as usual
+        glActiveTexture(GL_TEXTURE3+i);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapsArray[i], 0);
+
+        //Clear everything
+        glClear(GL_DEPTH_BUFFER_BIT);
+
+        //Draw the scene
+        drawArrays(painter, false);
+
+        //Store the new projection * lightView for later
+        glMatrixMode(GL_PROJECTION);
+        glMultMatrixf(lightViewMatrix);
+        glGetFloatv(GL_PROJECTION_MATRIX, shadowCPM[i]);
+    }
+
+    //Reset Viewportbit
+    glPopAttrib();
 
     //Move polygons back to normal position
     glDisable(GL_POLYGON_OFFSET_FILL);
@@ -907,16 +1054,11 @@ void Scenery3d::generateShadowMap(StelCore* core)
     //Switch back to normal texturing
     glActiveTexture(GL_TEXTURE0);
 
-    //Reset matrices
-    glPopMatrix();
-
-    glMatrixMode(GL_MODELVIEW);
-    glPopMatrix();
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
-
-    //Reset Viewportbit
-    glPopAttrib();
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
+    //glPopMatrix();
 
     //Reset
     glDepthMask(GL_FALSE);
@@ -1099,22 +1241,19 @@ void Scenery3d::generateCubeMap(StelCore* core)
     float zNear = 1.0f;
     float zFar = 1000.0f;
     float f = 2.0 / tan(fov * M_PI / 360.0);
-    Mat4d projMatd(f / aspect, 0, 0, 0,
+    Mat4f camProj = Mat4f(f / aspect, 0, 0, 0,
                     0, f, 0, 0,
                     0, 0, (zFar + zNear) / (zNear - zFar), 2.0 * zFar * zNear / (zNear - zFar),
                     0, 0, -1, 0);
 
-
-    StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
-    cFrust.setCamInternals(fov, aspect, 1.0, 30);
-
+    cFrust.setCamInternals(fov, aspect, 1.0, 1000.0);
 
     glPushAttrib(GL_VIEWPORT_BIT);
     glViewport(0, 0, cubemapSize, cubemapSize);
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
     glLoadIdentity();
-    glMultMatrixd(projMatd);
+    glMultMatrixf(camProj);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glLoadIdentity();
@@ -1123,9 +1262,8 @@ void Scenery3d::generateCubeMap(StelCore* core)
     #define DRAW_SCENE  glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);\
                         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);\
                         setLights(ambientBrightness, directionalBrightness);\
-                        if(shadows){generateCubeMap_drawSceneWithShadows(painter, ambientBrightness, directionalBrightness);}\
-                        else{generateCubeMap_drawScene(painter, ambientBrightness, directionalBrightness);}\
-                        if(debugEnabled) renderSceneAABB();\
+                        if(shadows){generateCubeMap_drawSceneWithShadows(painter);}\
+                        else{generateCubeMap_drawScene(painter);}\
 
     //front
     glPushMatrix();
@@ -1216,16 +1354,26 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
     if(debugEnabled)
     {
         float debugTextureSize = shadowmapSize/8;
-
         const QFont font("Courier", 12);
         painter.setFont(font);
-        painter.drawText(prj->getViewportWidth() - 285.0f, prj->getViewportHeight() - 25.0, QString("Shadow Depth Map Texture"));
 
         float screen_x = prj->getViewportWidth() - debugTextureSize - 30;
         float screen_y = prj->getViewportHeight() - debugTextureSize - 30;
 
-        glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
-        painter.drawSprite2dMode(screen_x, screen_y, debugTextureSize);
+        for(int i=0; i<frustumSplits; i++)
+        {
+            std::string cap = "SM "+toString(i);
+            painter.drawText(screen_x+70, screen_y+130, QString(cap.c_str()));
+
+            glBindTexture(GL_TEXTURE_2D, shadowMapsArray[i]);
+            painter.drawSprite2dMode(screen_x, screen_y, debugTextureSize);
+
+            int tmp = screen_y - debugTextureSize-30;
+            painter.drawText(screen_x-100, tmp, QString("zNear: %1").arg(frustumArray[i].zNear, 7, 'f', 2));
+            painter.drawText(screen_x-100, tmp-15.0f, QString("zFar: %1").arg(frustumArray[i].zFar, 7, 'f', 2));
+
+            screen_x -= 280;
+        }
     }
 
     //front
@@ -1277,8 +1425,6 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
     glEnable(GL_LIGHT0);
     glShadeModel(GL_SMOOTH);
 
-
-
     float ambientBrightness, directionalBrightness; // was: lightBrightness;
     Vec3f lightsourcePosition;
     ShadowCaster shadows=setupLights(ambientBrightness, directionalBrightness, lightsourcePosition);
@@ -1319,13 +1465,10 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
     //testMethod();
     //GZ: The following calls apparently require the full cubemap. TODO: Verify and simplify
     if (shadows) {
-        generateCubeMap_drawSceneWithShadows(painter, ambientBrightness, directionalBrightness);
+        generateCubeMap_drawSceneWithShadows(painter);
     } else {
-        generateCubeMap_drawScene(painter, ambientBrightness, directionalBrightness);
+        generateCubeMap_drawScene(painter);
     }
-
-    //Render the scene's bounding box in debug mode
-    if(debugEnabled) renderSceneAABB();
 
     glMatrixMode(GL_MODELVIEW);
     glPopMatrix();
@@ -1412,7 +1555,7 @@ void Scenery3d::drawDebugText(StelCore* core)
     float screen_x = prj->getViewportWidth()  - 500.0f;
     float screen_y = prj->getViewportHeight() - 300.0f;
 
-    screen_y -= 20.f;
+    screen_y -= 100.f;
     QString str = QString("Drawn: %1").arg(drawn);
     painter.drawText(screen_x, screen_y, str);
     screen_y -= 15.0f;
@@ -1433,33 +1576,10 @@ void Scenery3d::drawDebugText(StelCore* core)
     screen_y -= 15.0f;
     str = QString("%1 %2 %3").arg(viewUp.v[0], 7, 'f', 2).arg(viewUp.v[1], 7, 'f', 2).arg(viewUp.v[2], 7, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
-
-
-    screen_y -= 30.0f;
-    str = "fov   aspect   zNear   zFar";
-    painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
-    str = QString("%1 %2 %3 %4").arg(cFrust.fov, 7, 'f', 2).arg(cFrust.aspect, 7, 'f', 2).arg(cFrust.zNear, 7, 'f', 2).arg(cFrust.zFar, 7, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);
-
-//    screen_y -= 30.0f;
-
-//    str = QString("%1 %2 %3 %4").arg(mv[0], 7, 'f', 2).arg(mv[4], 7, 'f', 2).arg(mv[8], 7, 'f', 2).arg(mv[12], 7, 'f', 2);
-//    painter.drawText(screen_x, screen_y, str);
-//    screen_y -= 15.0f;
-//    str = QString("%1 %2 %3 %4").arg(mv[1], 7, 'f', 2).arg(mv[5], 7, 'f', 2).arg(mv[9], 7, 'f', 2).arg(mv[13], 7, 'f', 2);
-//    painter.drawText(screen_x, screen_y, str);
-//    screen_y -= 15.0f;
-//    str = QString("%1 %2 %3 %4").arg(mv[2], 7, 'f', 2).arg(mv[6], 7, 'f', 2).arg(mv[10], 7, 'f', 2).arg(mv[14], 7, 'f', 2);
-//    painter.drawText(screen_x, screen_y, str);
-//    screen_y -= 15.0f;
-//    str = QString("%1 %2 %3 %4").arg(mv[3], 7, 'f', 2).arg(mv[7], 7, 'f', 2).arg(mv[11], 7, 'f', 2).arg(mv[15], 7, 'f', 2);
-//    painter.drawText(screen_x, screen_y, str);
-
 }
 
 void Scenery3d::initShadowMapping()
-{    
+{
     //Generate FBO - has to be QGLFramebufferObject for some reason.. Generating a normal one lead to bizzare texture results
     //We use handle() to get the id and work as if we created a normal FBO. This is because QGLFramebufferObject doesn't support attaching a texture to the FBO
     shadowFBO = (new QGLFramebufferObject(shadowmapSize, shadowmapSize, QGLFramebufferObject::Depth, GL_TEXTURE_2D))->handle();
@@ -1471,27 +1591,33 @@ void Scenery3d::initShadowMapping()
     //Bind the FBO
     glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
 
-    //Generate the depth map texture
-    glGenTextures(1, &shadowMapTexture);
+    for(int i=0; i<frustumSplits; i++)
+    {
+        //Generate the depth maps
+        glGenTextures(1, &shadowMapsArray[i]);
 
-    //Activate unit 1 - we want shadows + textures so this is crucial
-    glActiveTexture(GL_TEXTURE1);
+        //Activate the texture unit - we want sahdows + textures so this is crucial with the current Stellarium pipeline - we start at unit 3
+        glActiveTexture(GL_TEXTURE3+i);
 
-    //Bind the depth map and setup the parameters 
-    glBindTexture(GL_TEXTURE_2D, shadowMapTexture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-    float ones[] = {1.0f, 1.0f, 1.0f, 1.0f};
-    glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
+        //Bind the depth map and setup parameters
+        glBindTexture(GL_TEXTURE_2D, shadowMapsArray[i]);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+        float ones[] = {1.0f, 1.0f, 1.0f, 1.0f};
+        glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
 
-    //Attach the depthmap to the Buffer
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapTexture, 0);
+        //Attach the depthmap to the Buffer
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapsArray[i], 0);
+    }
 
     glDrawBuffer(GL_NONE); // essential for depth-only FBOs!!!
     glReadBuffer(GL_NONE); // essential for depth-only FBOs!!!
+
+    if(glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT) != GL_FRAMEBUFFER_COMPLETE)
+        qWarning() << "[Scenery3D] GL_FRAMEBUFFER_COMPLETE failed, can't use FBO";
 
     //Done. Unbind and switch to normal texture unit 0
     glBindFramebuffer(GL_FRAMEBUFFER, 0);

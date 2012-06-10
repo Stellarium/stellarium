@@ -37,27 +37,31 @@ uniform int iIllum;
 varying vec3 vecLight;
 varying vec3 vecEye;
 varying vec3 vecNormal;
+varying vec4 vecEyeView;
+varying vec4 vecPos;
   
 vec4 getLighting()
 {
+	//For bump mapping, the normal comes from the bump map texture lookup
+	vec3 n = normalize(vecNormal);
+	if(boolBump)
+	{
+		n = normalize(texture2D(bmap, gl_TexCoord[0].st).xyz * 2.0 - 1.0);
+	}
+	
+	vec3 l = normalize(vecLight);
+	
+	//Lambert term
+	float NdotL = dot(n, l);
+	vec4 color = gl_LightSource[0].diffuse * gl_FrontMaterial.diffuse * max(0.0, NdotL);
+	
+	//Add ambient
 	if(iIllum > 0)
 	{
 		//Ka * Ia
-		vec4 color = (gl_FrontLightModelProduct.sceneColor * gl_FrontMaterial.ambient) + (gl_LightSource[0].ambient * gl_FrontMaterial.ambient);
+		color += (gl_FrontLightModelProduct.sceneColor * gl_FrontMaterial.ambient) + (gl_LightSource[0].ambient * gl_FrontMaterial.ambient);		
 		
-		//For bump mapping, the normal comes from the bump map texture lookup
-		vec3 n = normalize(vecNormal);
-		if(boolBump)
-		{
-			n = normalize(texture2D(bmap, gl_TexCoord[0].st).xyz * 2.0 - 1.0);
-		}
-	
-		vec3 l = normalize(vecLight);
-	
-		//Lambert term
-		float NdotL = dot(n, l);
-		color += gl_LightSource[0].diffuse * gl_FrontMaterial.diffuse * max(0.0, NdotL);
-		
+		//Add reflect
 		if(iIllum == 2)
 		{
 			//Reflection term
@@ -74,12 +78,9 @@ vec4 getLighting()
 				}
 			}
 		}
-		
-		return color;
 	}
 	
-	//Illum 0 - KD only
-	return gl_FrontMaterial.diffuse;
+	return color;
 } 
   
 void main(void)
