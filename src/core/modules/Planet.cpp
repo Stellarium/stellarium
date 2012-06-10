@@ -128,7 +128,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	oss << getPositionInfoString(core, flags);
 
-	if ((flags&Extra2) && (core->getCurrentLocation().planetName=="Earth"))
+	if ((flags&Extra1) && (core->getCurrentLocation().planetName=="Earth"))
 	{
 		//static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 		//double ecl= -(ssystem->getEarth()->getRotObliquity()); // BUG DETECTED! Earth's obliquity is apparently reported constant.
@@ -177,7 +177,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "<br>";
 	}
 
-	if ((flags&Extra3) && (englishName.compare("Sun")!=0))
+	if ((flags&Extra2) && (englishName.compare("Sun")!=0))
 	{
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 		const double observerRq = observerHelioPos.lengthSquared();
@@ -186,10 +186,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		const double observerPlanetRq = (observerHelioPos - planetHelioPos).lengthSquared();
 		const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
 		float planetPhase = 0.5f * std::abs(1.f + cos_chi);
-		oss << QString(q_("Phase: %1")).arg(planetPhase, 0, 'f', 2) << "<br>";
-		oss << QString(q_("Illuminated: %1%")).arg(planetPhase * 100, 0, 'f', 1) << "<br>";
-		oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(getElongation(core->getObserverHeliocentricEclipticPos()))) << "<br>";
 		oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhase(core->getObserverHeliocentricEclipticPos()))) << "<br>";
+		oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(getElongation(core->getObserverHeliocentricEclipticPos()))) << "<br>";
+		oss << QString(q_("Phase: %1")).arg(planetPhase, 0, 'f', 2) << "<br>";
+		oss << QString(q_("Illuminated: %1%")).arg(planetPhase * 100, 0, 'f', 1) << "<br>";		
 	}
 
 	postProcessInfoString(str, flags);

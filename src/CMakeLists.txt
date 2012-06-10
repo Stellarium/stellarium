@@ -38,6 +38,8 @@ ENDIF()
 SET(stellarium_lib_SRCS
 	core/StelAudioMgr.hpp
 	core/StelAudioMgr.cpp
+	core/StelVideoMgr.hpp
+	core/StelVideoMgr.cpp
 	core/StelGeodesicGrid.cpp
 	core/StelGeodesicGrid.hpp
 	core/StelMovementMgr.cpp
@@ -343,6 +345,7 @@ QT4_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 # that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
 SET(stellarium_MOC_HDRS
 	core/StelAudioMgr.hpp
+	core/StelVideoMgr.hpp
 	core/StelModuleMgr.hpp
 	core/StelObjectMgr.hpp
 	core/StelObserver.hpp
@@ -420,6 +423,8 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/AddRemoveLandscapesDialog.cpp
 		gui/AtmosphereDialog.hpp
 		gui/AtmosphereDialog.cpp
+                gui/CustomInfoDialog.hpp
+                gui/CustomInfoDialog.cpp
 		gui/StelDialog.hpp
 		gui/StelDialog.cpp)
 
@@ -439,6 +444,7 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/ConfigurationDialog.hpp
 		gui/AddRemoveLandscapesDialog.hpp
 		gui/AtmosphereDialog.hpp
+                gui/CustomInfoDialog.hpp
 		gui/StelDialog.hpp)
 
 	################# compiles .ui files ############
@@ -450,6 +456,7 @@ IF (GUI_MODE STREQUAL "Standard")
 	gui/searchDialogGui.ui
 	gui/configurationDialog.ui
 	gui/AtmosphereDialog.ui
+        gui/CustomInfoDialog.ui
 	gui/addRemoveLandscapesDialog.ui)
 
 	IF(ENABLE_SCRIPT_CONSOLE)

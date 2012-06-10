@@ -37,7 +37,7 @@ typedef void (OsculatingFunctType)(double jd0,double jd,double xyz[3]);
 
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
-#define ORBIT_SEGMENTS 72
+#define ORBIT_SEGMENTS 360
 
 class StelFont;
 class StelPainter;
@@ -110,9 +110,8 @@ public:
 	//! - Distance
 	//! - Size
 	//! - PlainText
-        //! - Extra1: Heliocentric Ecliptical Coordinates
-        //! - Extra2: Observer-planetocentric Ecliptical Coordinates
-	//! - Extra3: Phase, illumination, phase angle & elongation from the Sun
+	//! - Extra1: Heliocentric Ecliptical Coordinates & Observer-planetocentric Ecliptical Coordinates
+	//! - Extra2: Phase, illumination, phase angle & elongation from the Sun
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Planet.

@@ -20,6 +20,8 @@
 #include "StelPainter.hpp"
 #include <QtOpenGL>
 
+#include "StelApp.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
 #include "StelUtils.hpp"
@@ -618,23 +620,37 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	// If the text is too far away to be visible in the screen return
 	if (d>qMax(prj->viewportXywh[3], prj->viewportXywh[2])*2)
 		return;
-	theta = M_PI + std::atan2(dx, dy - 1);
+	theta = std::atan2(dy - 1, dx);
 	psi = std::atan2((float)qPainter->fontMetrics().width(ws)/ws.length(),d + 1) * 180./M_PI;
-	if (psi>5)
+	if (psi>5) {
 		psi = 5;
+	}
 
-	const float cosr = std::cos(-theta * M_PI/180.);
-	const float sinr = std::sin(-theta * M_PI/180.);
+	float cWidth = (float)qPainter->fontMetrics().width(ws)/ws.length();
+	float xVc = prj->viewportCenter[0] + xshift;
+	float yVc = prj->viewportCenter[1] + yshift;
 
-	float initX = x + xshift*cosr - yshift*sinr;
-	float initY = y + yshift*sinr + yshift*cosr;
-
-	for (int i=0;i<ws.length();++i)
+	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	if (!QString("ar fa ur he yi").contains(lang)) {
+        	for (int i=0; i<ws.length(); ++i)
+	        {
+			x = d * std::cos (theta) + xVc ;
+			y = d * std::sin (theta) + yVc ; 
+			drawText(x, y, ws[i], 90. + theta*180./M_PI, 0., 0.);
+			// Compute how much the character contributes to the angle
+			theta += psi * M_PI/180. * (1 + ((float)qPainter->fontMetrics().width(ws[i]) - cWidth)/ cWidth);
+		}
+	}
+	else
 	{
-		drawText(initX, initY, ws[i], -theta*180./M_PI+psi*i, 0., 0.);
-		xshift = (float)qPainter->fontMetrics().width(ws.mid(i,1)) * 1.05;
-		initX+=xshift*std::cos(-theta+psi*i * M_PI/180.);
-		initY+=xshift*std::sin(-theta+psi*i * M_PI/180.);
+		int slen = ws.length();
+		for (int i=0;i<slen;i++)
+		{
+			x = d * std::cos (theta) + xVc;
+			y = d * std::sin (theta) + yVc; 
+			drawText(x, y, ws[slen-1-i], 90. + theta*180./M_PI, 0., 0.);
+			theta += psi * M_PI/180. * (1 + ((float)qPainter->fontMetrics().width(ws[slen-1-i]) - cWidth)/ cWidth);
+		}
 	}
 }
 
@@ -676,7 +692,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	}
 	else
 	{
-		static const int cacheLimitByte = 7000000;
+		static const int cacheLimitByte = 10000000;
 		static QCache<QByteArray,StringTexture> texCache(cacheLimitByte);
 		int pixelSize = qPainter->font().pixelSize();
 		QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);

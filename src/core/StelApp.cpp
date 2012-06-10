@@ -44,6 +44,7 @@
 #include "StelJsonParser.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelAudioMgr.hpp"
+#include "StelVideoMgr.hpp"
 #include "StelGuiBase.hpp"
 #include "StelPainter.hpp"
 
@@ -292,6 +293,9 @@ void StelApp::init(QSettings* conf)
 
 	// Init audio manager
 	audioMgr = new StelAudioMgr();
+
+	// Init video manager
+	videoMgr = new StelVideoMgr();
 
 	// Constellations
 	ConstellationMgr* asterisms = new ConstellationMgr(hip_stars);

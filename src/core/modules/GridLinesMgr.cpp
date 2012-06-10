@@ -635,6 +635,7 @@ GridLinesMgr::GridLinesMgr()
 	setObjectName("GridLinesMgr");
 	equGrid = new SkyGrid(StelCore::FrameEquinoxEqu);
 	equJ2000Grid = new SkyGrid(StelCore::FrameJ2000);
+	eclJ2000Grid = new SkyGrid(StelCore::FrameObservercentricEcliptic);
 	galacticGrid = new SkyGrid(StelCore::FrameGalactic);
 	aziGrid = new SkyGrid(StelCore::FrameAltAz);
 	equatorLine = new SkyLine(SkyLine::EQUATOR);
@@ -648,6 +649,7 @@ GridLinesMgr::~GridLinesMgr()
 {
 	delete equGrid;
 	delete equJ2000Grid;
+	delete eclJ2000Grid;
 	delete galacticGrid;
 	delete aziGrid;
 	delete equatorLine;
@@ -675,6 +677,7 @@ void GridLinesMgr::init()
 	setFlagAzimuthalGrid(conf->value("viewing/flag_azimuthal_grid").toBool());
 	setFlagEquatorGrid(conf->value("viewing/flag_equatorial_grid").toBool());
 	setFlagEquatorJ2000Grid(conf->value("viewing/flag_equatorial_J2000_grid").toBool());
+	setFlagEclipticJ2000Grid(conf->value("viewing/flag_ecliptic_J2000_grid").toBool());
 	setFlagGalacticGrid(conf->value("viewing/flag_galactic_grid").toBool());
 	setFlagEquatorLine(conf->value("viewing/flag_equator_line").toBool());
 	setFlagEclipticLine(conf->value("viewing/flag_ecliptic_line").toBool());
@@ -692,6 +695,7 @@ void GridLinesMgr::update(double deltaTime)
 	// Update faders
 	equGrid->update(deltaTime);
 	equJ2000Grid->update(deltaTime);
+	eclJ2000Grid->update(deltaTime);
 	galacticGrid->update(deltaTime);
 	aziGrid->update(deltaTime);
 	equatorLine->update(deltaTime);
@@ -706,6 +710,7 @@ void GridLinesMgr::draw(StelCore* core)
 	equGrid->draw(core);
 	galacticGrid->draw(core);
 	equJ2000Grid->draw(core);
+	eclJ2000Grid->draw(core);
 	aziGrid->draw(core);
 	equatorLine->draw(core);
 	eclipticLine->draw(core);
@@ -722,6 +727,7 @@ void GridLinesMgr::setStelStyle(const QString& section)
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setColorEquatorGrid(StelUtils::strToVec3f(conf->value(section+"/equatorial_color", defaultColor).toString()));
 	setColorEquatorJ2000Grid(StelUtils::strToVec3f(conf->value(section+"/equatorial_J2000_color", defaultColor).toString()));
+	setColorEclipticJ2000Grid(StelUtils::strToVec3f(conf->value(section+"/ecliptic_J2000_color", defaultColor).toString()));
 	setColorGalacticGrid(StelUtils::strToVec3f(conf->value(section+"/galactic_color", defaultColor).toString()));
 	setColorAzimuthalGrid(StelUtils::strToVec3f(conf->value(section+"/azimuthal_color", defaultColor).toString()));
 	setColorEquatorLine(StelUtils::strToVec3f(conf->value(section+"/equator_color", defaultColor).toString()));
@@ -815,7 +821,32 @@ void GridLinesMgr::setColorEquatorJ2000Grid(const Vec3f& newColor)
 	}
 }
 
-//! Set flag for displaying Equatorial J2000 Grid
+//! Set flag for displaying Ecliptic J2000 Grid
+void GridLinesMgr::setFlagEclipticJ2000Grid(const bool displayed)
+{
+	if(displayed != eclJ2000Grid->isDisplayed()) {
+		eclJ2000Grid->setDisplayed(displayed);
+		emit eclipticJ2000GridDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Ecliptic J2000 Grid
+bool GridLinesMgr::getFlagEclipticJ2000Grid(void) const
+{
+	return eclJ2000Grid->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorEclipticJ2000Grid(void) const
+{
+	return eclJ2000Grid->getColor();
+}
+void GridLinesMgr::setColorEclipticJ2000Grid(const Vec3f& newColor)
+{
+	if(newColor != eclJ2000Grid->getColor()) {
+		eclJ2000Grid->setColor(newColor);
+		emit eclipticJ2000GridColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying Galactic Grid
 void GridLinesMgr::setFlagGalacticGrid(const bool displayed)
 {
 	if(displayed != galacticGrid->isDisplayed()) {
@@ -823,7 +854,7 @@ void GridLinesMgr::setFlagGalacticGrid(const bool displayed)
 		emit galacticGridDisplayedChanged(displayed);
 	}
 }
-//! Get flag for displaying Equatorial J2000 Grid
+//! Get flag for displaying Galactic Grid
 bool GridLinesMgr::getFlagGalacticGrid(void) const
 {
 	return galacticGrid->isDisplayed();

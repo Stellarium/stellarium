@@ -7,29 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-27 21:44+0700\n"
-"PO-Revision-Date: 2012-02-24 05:21+0000\n"
-"Last-Translator: zhanshime <Unknown>\n"
+"POT-Creation-Date: 2012-06-02 20:19+0700\n"
+"PO-Revision-Date: 2012-05-31 09:34+0000\n"
+"Last-Translator: Eye Of Ice <mydzh@126.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-28 04:43+0000\n"
-"X-Generator: Launchpad (build 15027)\n"
+"X-Launchpad-Export-Date: 2012-06-03 04:44+0000\n"
+"X-Generator: Launchpad (build 15342)\n"
 
-#: src/core/modules/GridLinesMgr.cpp:542
+#: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
 msgstr "子午线"
 
-#: src/core/modules/GridLinesMgr.cpp:546
+#: src/core/modules/GridLinesMgr.cpp:546 src/ui_viewDialog.h:1176
 msgid "Ecliptic"
 msgstr "黄道"
 
-#: src/core/modules/GridLinesMgr.cpp:550
+#: src/core/modules/GridLinesMgr.cpp:550 src/ui_viewDialog.h:1164
 msgid "Equator"
 msgstr "赤道"
 
-#: src/core/modules/GridLinesMgr.cpp:554
+#: src/core/modules/GridLinesMgr.cpp:554 src/ui_viewDialog.h:1172
 msgid "Horizon"
 msgstr "地平线"
 
@@ -37,36 +37,36 @@ msgstr "地平线"
 msgid "Galactic Plane"
 msgstr "银道面"
 
-#: src/core/modules/LandscapeMgr.cpp:493
+#: src/core/modules/LandscapeMgr.cpp:495
 msgid "Author: "
-msgstr "作者: "
+msgstr "作者： "
 
-#: src/core/modules/LandscapeMgr.cpp:496
+#: src/core/modules/LandscapeMgr.cpp:498
 msgid "Location: "
-msgstr "位置: "
+msgstr "位置： "
 
-#: src/core/modules/LandscapeMgr.cpp:501
+#: src/core/modules/LandscapeMgr.cpp:503
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:505
+#: src/core/modules/LandscapeMgr.cpp:507
 msgid "Planet: "
 msgstr "行星： "
 
 #: src/core/modules/Nebula.cpp:96 plugins/Supernovae/src/Supernova.cpp:99
-#: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:102
+#: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:129
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "类型：<b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:123
+#: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "星等: <b>%1</b> (extincted to: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:126
+#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
@@ -99,7 +99,7 @@ msgstr "行星状星云"
 
 #: src/core/modules/Nebula.cpp:318
 msgid "Cluster associated with nebulosity"
-msgstr ""
+msgstr "星云状星团"
 
 #: src/core/modules/Nebula.cpp:321
 msgid "Unknown"
@@ -109,51 +109,61 @@ msgstr "未知"
 msgid "Undocumented type"
 msgstr "未收录类型"
 
-#: src/core/modules/Planet.cpp:129 src/core/modules/StarWrapper.cpp:124
+#: src/core/modules/Planet.cpp:127 src/core/modules/StarWrapper.cpp:124
 #: plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "绝对星等: %1"
 
-#: src/core/modules/Planet.cpp:142
+#: src/core/modules/Planet.cpp:140
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
 msgstr "地心黄道座标轴（已过时）：%1/%2"
 
-#: src/core/modules/Planet.cpp:143
+#: src/core/modules/Planet.cpp:141
 #, qt-format
 msgid "Obliquity (of date): %1"
 msgstr "自转轴倾斜（当前日期）：%1"
 
-#: src/core/modules/Planet.cpp:153
+#: src/core/modules/Planet.cpp:151
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "距离：%1 天文单位（%2 千米）"
 
-#: src/core/modules/Planet.cpp:160
+#: src/core/modules/Planet.cpp:158
 #, no-c-format, qt-format
 msgid "Distance: %1AU"
 msgstr "距离: %1 天文单位"
 
-#: src/core/modules/Planet.cpp:171
+#: src/core/modules/Planet.cpp:169
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "视直径: %1, 包括环: %2"
 
-#: src/core/modules/Planet.cpp:177
+#: src/core/modules/Planet.cpp:175
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "视直径: %1"
 
+#: src/core/modules/Planet.cpp:189
+#, qt-format
+msgid "Phase Angle: %1"
+msgstr "位相角: %1"
+
+#: src/core/modules/Planet.cpp:190
+#, qt-format
+msgid "Elongation: %1"
+msgstr "距角: %1"
+
 #: src/core/modules/Planet.cpp:191
 #, qt-format
 msgid "Phase: %1"
-msgstr ""
+msgstr "相: %1"
 
 #: src/core/modules/Planet.cpp:192
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr ""
+msgstr "被照亮的部分: %1%"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -163,17 +173,17 @@ msgstr "视星等: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "视星等：<b>%1</b>（消光后）"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "星等: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 
 #: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr ""
+msgstr "星等：<b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
 #, qt-format
@@ -195,7 +205,7 @@ msgstr "视差: %1\""
 msgid "SpaceShip"
 msgstr "太空船"
 
-#: src/core/StelProjector.cpp:62
+#: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
 msgstr "最大视野: "
 
@@ -283,76 +293,101 @@ msgid ""
 "of perspective is set to an infinite distance."
 msgstr "正射投影类似透视投影，但是投影点位在无限远的距离。"
 
-#: src/core/StelObject.cpp:87
+#: src/core/StelObject.cpp:86
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
 msgstr "赤经/赤纬 (J2000): %1/%2"
 
-#: src/core/StelObject.cpp:94
+#: src/core/StelObject.cpp:93
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
 msgstr "赤经/赤纬(日期): %1/%2"
 
-#: src/core/StelObject.cpp:104 src/core/StelObject.cpp:107
-#: src/core/StelObject.cpp:110
+#: src/core/StelObject.cpp:103 src/core/StelObject.cpp:106
+#: src/core/StelObject.cpp:109
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "时角/赤纬: %1/%2"
 
-#: src/core/StelObject.cpp:104 src/core/StelObject.cpp:123
+#: src/core/StelObject.cpp:103 src/core/StelObject.cpp:122
 msgid "(geometric)"
 msgstr "(几何)"
 
-#: src/core/StelObject.cpp:107 src/core/StelObject.cpp:129
+#: src/core/StelObject.cpp:106 src/core/StelObject.cpp:128
 msgid "(apparent)"
 msgstr "(视觉)"
 
-#: src/core/StelObject.cpp:123 src/core/StelObject.cpp:129
-#: src/core/StelObject.cpp:132
+#: src/core/StelObject.cpp:122 src/core/StelObject.cpp:128
+#: src/core/StelObject.cpp:131
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "方位角/高度角: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:314 src/gui/ConfigurationDialog.cpp:316
+#: src/core/SimbadSearcher.cpp:55
+msgid "Network error"
+msgstr "网络错误"
+
+#: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
+msgid "Error parsing position"
+msgstr "位置解析错误"
+
+#: src/core/SimbadSearcher.cpp:130
+msgid "Querying"
+msgstr "正在查询"
+
+#: src/core/SimbadSearcher.cpp:132
+msgid "Error"
+msgstr "错误"
+
+#: src/core/SimbadSearcher.cpp:134
+msgid "Not found"
+msgstr "没有找到"
+
+#: src/core/SimbadSearcher.cpp:134
+msgid "Found"
+msgstr "已找到"
+
+#: src/gui/ConfigurationDialog.cpp:346
 msgid "Select screenshot directory"
 msgstr "选择储存截图资料夹"
 
-#: src/gui/ConfigurationDialog.cpp:492
+#: src/gui/ConfigurationDialog.cpp:524
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "启动时的视角: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:500
+#: src/gui/ConfigurationDialog.cpp:532
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "启动时的地平坐标方位角/高度角: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:539
+#: src/gui/ConfigurationDialog.cpp:574
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:543 src/gui/ViewDialog.cpp:393
+#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "联系信息"
 
-#: src/gui/ConfigurationDialog.cpp:621
+#: src/gui/ConfigurationDialog.cpp:658
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
 msgid "Author"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:625
+#: src/gui/ConfigurationDialog.cpp:662
 msgid "License"
 msgstr "授权条款"
 
-#: src/gui/ConfigurationDialog.cpp:655
+#: src/gui/ConfigurationDialog.cpp:688
 msgid "Running script: "
 msgstr "执行指令： "
 
-#: src/gui/ConfigurationDialog.cpp:662
+#: src/gui/ConfigurationDialog.cpp:695
 msgid "Running script: [none]"
 msgstr "执行指令：[空白]"
 
-#: src/gui/ConfigurationDialog.cpp:732
+#: src/gui/ConfigurationDialog.cpp:765
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -360,16 +395,16 @@ msgstr ""
 "新的天体目录经已下载完毕！\n"
 "请重新启动 Stellarium 以使用新的目录。"
 
-#: src/gui/ConfigurationDialog.cpp:736
+#: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
 msgstr "所有可用的星体资料均已安装。"
 
-#: src/gui/ConfigurationDialog.cpp:741
+#: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "在 %2 中取后 %1 目录"
 
-#: src/gui/ConfigurationDialog.cpp:748
+#: src/gui/ConfigurationDialog.cpp:781
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -378,7 +413,7 @@ msgstr ""
 "正在下载 %1……\n"
 "（您可以关闭此窗口）"
 
-#: src/gui/ConfigurationDialog.cpp:755
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -389,7 +424,7 @@ msgstr ""
 "天体数量: %2 百万\n"
 "星等范围: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:798 src/gui/ConfigurationDialog.cpp:834
+#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -398,11 +433,11 @@ msgstr ""
 "在下载 %1 时发生了错误：\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:886
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
 msgstr "正在校验文件..."
 
-#: src/gui/ConfigurationDialog.cpp:890
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -440,7 +475,7 @@ msgstr "按鼠标右键"
 msgid "CTRL + Left click"
 msgstr "CTRL + 鼠标左键"
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:168
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:176
 msgid "Movement and Selection"
 msgstr "移动和选择"
 
@@ -464,74 +499,87 @@ msgstr "消除选取"
 msgid "When a Script is Running"
 msgstr "当脚本执行时"
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:147
+#: src/gui/HelpDialog.cpp:73
+msgid "Stop currently running script"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:151 src/gui/StelGui.cpp:152
+msgid "Pause script execution"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:153
+msgid "Resume script execution"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:148
 msgid "Slow down the script execution rate"
 msgstr "减慢脚本执行速度"
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:148
+#: src/gui/HelpDialog.cpp:77 src/gui/StelGui.cpp:149
 msgid "Speed up the script execution rate"
 msgstr "加快脚本执行速度"
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:149
+#: src/gui/HelpDialog.cpp:78 src/gui/StelGui.cpp:150
 msgid "Set the normal script execution rate"
 msgstr "恢复正常脚本执行速度"
 
 #. TRANSLATORS: Title of a group of key bindings in the Help window
-#: src/gui/HelpDialog.cpp:77 plugins/AngleMeasure/src/AngleMeasure.cpp:126
+#: src/gui/HelpDialog.cpp:81 plugins/AngleMeasure/src/AngleMeasure.cpp:126
 #: plugins/CompassMarks/src/CompassMarks.cpp:124
 #: plugins/Oculars/src/Oculars.cpp:1188
 #: plugins/Satellites/src/Satellites.cpp:128
+#: plugins/Pulsars/src/Pulsars.cpp:146
 msgid "Plugin Key Bindings"
 msgstr "外接程序的按键设置"
 
-#: src/gui/HelpDialog.cpp:78
+#: src/gui/HelpDialog.cpp:82
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:82
 msgid "Text User Interface"
 msgstr "文本用户界面（TUI）"
 
-#: src/gui/HelpDialog.cpp:167
+#: src/gui/HelpDialog.cpp:171
 msgid "Stellarium Help"
 msgstr "Stellarium帮助"
 
-#: src/gui/HelpDialog.cpp:168
+#: src/gui/HelpDialog.cpp:172
 msgid "Keys"
 msgstr "按键"
 
-#: src/gui/HelpDialog.cpp:176
+#: src/gui/HelpDialog.cpp:180
 msgid "Further Reading"
 msgstr "了解更多"
 
-#: src/gui/HelpDialog.cpp:177
+#: src/gui/HelpDialog.cpp:181
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr "以下为外部网络链接，浏览器将被启动:\n"
 
-#: src/gui/HelpDialog.cpp:178
+#: src/gui/HelpDialog.cpp:182
 msgid "The Stellarium User Guide"
 msgstr "Stellarium用户指南"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:182
+#: src/gui/HelpDialog.cpp:186
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{FAQ} -关于Stellarium 的常见问答"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:187
+#: src/gui/HelpDialog.cpp:191
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
 msgstr "{The Stellarium Wiki} - 常规信息，您也可以在此找到由其他用户制作的地景及脚本。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:192
+#: src/gui/HelpDialog.cpp:196
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr "{技术支持系统} - 若您在使用 Stellarium 时需要帮忙，请至该处提出要求，我们会尽量帮忙。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:197
+#: src/gui/HelpDialog.cpp:201
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -539,59 +587,59 @@ msgid ""
 msgstr "{Bug 报告及功能请求系统} - 如果出现某些功能异常、缺失或不在跟踪列表中，你可以在此处打开 bug 汇报。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:202
+#: src/gui/HelpDialog.cpp:206
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{讨论区} - 在此处和其他爱好者讨论Stellarium。"
 
-#: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:341
-#: src/gui/HelpDialog.cpp:343 src/gui/StelGui.cpp:175
+#: src/gui/HelpDialog.cpp:242 src/gui/HelpDialog.cpp:345
+#: src/gui/HelpDialog.cpp:347 src/gui/StelGui.cpp:183
 msgid "Miscellaneous"
 msgstr "杂项"
 
-#: src/gui/HelpDialog.cpp:298
+#: src/gui/HelpDialog.cpp:302
 msgid "Developers"
 msgstr "开发者"
 
-#: src/gui/HelpDialog.cpp:299
+#: src/gui/HelpDialog.cpp:303
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "计划协调&开发经理: %1"
 
-#: src/gui/HelpDialog.cpp:300
+#: src/gui/HelpDialog.cpp:304
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "说明文件撰写: %1"
 
-#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
-#: src/gui/HelpDialog.cpp:303 src/gui/HelpDialog.cpp:304
-#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:311
-#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
-#: src/gui/HelpDialog.cpp:314
+#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:306
+#: src/gui/HelpDialog.cpp:307 src/gui/HelpDialog.cpp:308
+#: src/gui/HelpDialog.cpp:309 src/gui/HelpDialog.cpp:315
+#: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:318
 #, qt-format
 msgid "Developer: %1"
 msgstr "开发者: %1"
 
-#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:307
+#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
 #, qt-format
 msgid "Tester: %1"
 msgstr "测试者：%1"
 
-#: src/gui/HelpDialog.cpp:308
+#: src/gui/HelpDialog.cpp:312
 msgid "Past Developers"
-msgstr ""
+msgstr "以往开发者："
 
-#: src/gui/HelpDialog.cpp:309
+#: src/gui/HelpDialog.cpp:313
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
-msgstr ""
+msgstr "有一些曾经作出杰出贡献的开发者已不再参与开发。他们的工作曾为这一项目带来巨大的进步："
 
-#: src/gui/HelpDialog.cpp:310
+#: src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "视觉与其他设计: %1"
 
-#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:320
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX开发: %1"
@@ -620,261 +668,281 @@ msgstr "星座标示"
 msgid "Constellation boundaries"
 msgstr "星座边界"
 
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1121
+#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Azimuthal grid"
 msgstr "地平座标"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1119
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial grid"
 msgstr "赤道坐标网格"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1120
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equatorial J2000 grid"
 msgstr "赤道座标 (J2000)"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1122
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1158
+msgid "Ecliptic J2000 grid"
+msgstr "黄道坐标（J2000）"
+
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Galactic grid"
 msgstr "银河网格"
 
-#: src/gui/StelGui.cpp:112
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
 msgstr "星系平面"
 
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1126
+#: src/gui/StelGui.cpp:114
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
 msgid "Ecliptic line"
 msgstr "黄道"
 
-#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1123
+#: src/gui/StelGui.cpp:115
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Equator line"
 msgstr "赤道"
 
-#: src/gui/StelGui.cpp:115 src/ui_viewDialog.h:1124
+#: src/gui/StelGui.cpp:116
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Meridian line"
 msgstr "子午线"
 
-#: src/gui/StelGui.cpp:116 src/ui_viewDialog.h:1125
+#: src/gui/StelGui.cpp:117
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Horizon line"
 msgstr "地平线"
 
-#: src/gui/StelGui.cpp:117 src/ui_viewDialog.h:1128
+#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Cardinal points"
 msgstr "基点"
 
-#: src/gui/StelGui.cpp:119
+#: src/gui/StelGui.cpp:120
 msgid "Ground"
 msgstr "地面"
 
-#: src/gui/StelGui.cpp:120 src/ui_viewDialog.h:1099
+#: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1130
 msgid "Atmosphere"
 msgstr "大气层"
 
-#: src/gui/StelGui.cpp:121
+#: src/gui/StelGui.cpp:122
 msgid "Fog"
 msgstr "雾"
 
-#: src/gui/StelGui.cpp:123 src/ui_viewDialog.h:1108
+#: src/gui/StelGui.cpp:124 src/ui_viewDialog.h:1139
 msgid "Nebulas"
 msgstr "星云"
 
-#: src/gui/StelGui.cpp:124
+#: src/gui/StelGui.cpp:125
 msgid "Nebulas background images"
 msgstr "星云背景影像"
 
-#: src/gui/StelGui.cpp:125 src/ui_viewDialog.h:1085 src/ui_viewDialog.h:1107
+#: src/gui/StelGui.cpp:126 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Stars"
 msgstr "天体"
 
-#: src/gui/StelGui.cpp:126
+#: src/gui/StelGui.cpp:127
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Planet labels"
 msgstr "行星标签"
 
-#: src/gui/StelGui.cpp:127
+#: src/gui/StelGui.cpp:128
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:301
 msgid "Planet orbits"
 msgstr "行星轨道"
 
-#: src/gui/StelGui.cpp:128
+#: src/gui/StelGui.cpp:129
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Planet trails"
 msgstr "行星轨迹"
 
-#: src/gui/StelGui.cpp:130
+#: src/gui/StelGui.cpp:131
 msgid "Night mode"
 msgstr "夜间模式"
 
-#: src/gui/StelGui.cpp:131
+#: src/gui/StelGui.cpp:132
 msgid "Full-screen mode"
 msgstr "全屏模式"
 
-#: src/gui/StelGui.cpp:132
+#: src/gui/StelGui.cpp:133
 msgid "Flip scene horizontally"
 msgstr "水平翻转"
 
-#: src/gui/StelGui.cpp:133
+#: src/gui/StelGui.cpp:134
 msgid "Flip scene vertically"
 msgstr "垂直翻转"
 
-#: src/gui/StelGui.cpp:135
+#: src/gui/StelGui.cpp:136
 msgid "Windows"
 msgstr "窗口"
 
-#: src/gui/StelGui.cpp:136
+#: src/gui/StelGui.cpp:137
 msgid "Help window"
 msgstr "说明"
 
-#: src/gui/StelGui.cpp:137
+#: src/gui/StelGui.cpp:138
 msgid "Configuration window"
 msgstr "设定"
 
-#: src/gui/StelGui.cpp:138
+#: src/gui/StelGui.cpp:139
 msgid "Search window"
 msgstr "搜索"
 
-#: src/gui/StelGui.cpp:139
+#: src/gui/StelGui.cpp:140
 msgid "Sky and viewing options window"
 msgstr "星空及显示"
 
-#: src/gui/StelGui.cpp:140
+#: src/gui/StelGui.cpp:141
 msgid "Date/time window"
 msgstr "日期/时间"
 
-#: src/gui/StelGui.cpp:141
+#: src/gui/StelGui.cpp:142
 msgid "Location window"
 msgstr "所在地点"
 
-#: src/gui/StelGui.cpp:143
+#: src/gui/StelGui.cpp:144
 msgid "Script console window"
 msgstr "脚本控制台窗口"
 
-#: src/gui/StelGui.cpp:146 src/ui_dateTimeDialogGui.h:294
+#: src/gui/StelGui.cpp:147 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Date and Time"
 msgstr "日期及时间"
 
-#: src/gui/StelGui.cpp:150
+#: src/gui/StelGui.cpp:154
 msgid "Decrease time speed"
 msgstr "减慢时间速度"
 
-#: src/gui/StelGui.cpp:151
+#: src/gui/StelGui.cpp:155
 msgid "Increase time speed"
 msgstr "加快时间流逝"
 
-#: src/gui/StelGui.cpp:152
+#: src/gui/StelGui.cpp:156
 msgid "Set normal time rate"
 msgstr "正常时间速度"
 
-#: src/gui/StelGui.cpp:153
+#: src/gui/StelGui.cpp:157
 msgid "Decrease time speed (a little)"
 msgstr "减慢时间流逝"
 
-#: src/gui/StelGui.cpp:154
+#: src/gui/StelGui.cpp:158
 msgid "Increase time speed (a little)"
 msgstr "加快时间流逝（小幅度）"
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:159
 msgid "Set time rate to zero"
 msgstr "将时间流速设定为零"
 
-#: src/gui/StelGui.cpp:156
+#: src/gui/StelGui.cpp:160
 msgid "Set time to now"
 msgstr "跳至当前时刻"
 
-#: src/gui/StelGui.cpp:157
+#: src/gui/StelGui.cpp:161
 msgid "Add 1 solar hour"
 msgstr "增加 1 太阳时"
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:162
 msgid "Subtract 1 solar hour"
 msgstr "减少1 太阳时"
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:163
 msgid "Add 1 solar day"
 msgstr "增加 1 太阳日"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:164
 msgid "Subtract 1 solar day"
 msgstr "减少 1 太阳日"
 
-#: src/gui/StelGui.cpp:161
+#: src/gui/StelGui.cpp:165
 msgid "Add 1 solar week"
 msgstr "增加 1 太阳周"
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:166
 msgid "Subtract 1 solar week"
 msgstr "减少 1 太阳周"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:167
 msgid "Add 1 sidereal day"
 msgstr "增加 1 恒星日"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:168
 msgid "Subtract 1 sidereal day"
 msgstr "减少 1 恒星日"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:169
 msgid "Add 1 sidereal week"
 msgstr "增加 1 恒星周"
 
-#: src/gui/StelGui.cpp:166
+#: src/gui/StelGui.cpp:170
 msgid "Subtract 1 sidereal week"
 msgstr "减少 1 恒星周"
 
-#: src/gui/StelGui.cpp:169
+#: src/gui/StelGui.cpp:171
+msgid "Add 1 sidereal month"
+msgstr "恒星月加1"
+
+#: src/gui/StelGui.cpp:172
+msgid "Subtract 1 sidereal month"
+msgstr "恒星月减1"
+
+#: src/gui/StelGui.cpp:173
+msgid "Add 1 sidereal year"
+msgstr "恒星年加1"
+
+#: src/gui/StelGui.cpp:174
+msgid "Subtract 1 sidereal year"
+msgstr "恒星年减1"
+
+#: src/gui/StelGui.cpp:177
 msgid "Center on selected object"
 msgstr "将已选物体置中"
 
-#: src/gui/StelGui.cpp:170
+#: src/gui/StelGui.cpp:178
 msgid "Track object"
 msgstr "追随物体"
 
-#: src/gui/StelGui.cpp:171
+#: src/gui/StelGui.cpp:179
 msgid "Zoom in on selected object"
 msgstr "放大已选的物体"
 
-#: src/gui/StelGui.cpp:172
+#: src/gui/StelGui.cpp:180
 msgid "Zoom out"
 msgstr "缩小"
 
-#: src/gui/StelGui.cpp:173
+#: src/gui/StelGui.cpp:181
 msgid "Set home planet to selected planet"
 msgstr "将选择的行星设为预设位置"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:184
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "赤道仪/水平仪切换"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:185
 msgid "Quit"
 msgstr "退出"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:186
 msgid "Save screenshot"
 msgstr "储存画面快照"
 
-#: src/gui/StelGui.cpp:179
+#: src/gui/StelGui.cpp:187
 msgid "Copy selected object information to clipboard"
-msgstr ""
+msgstr "复制选中天体的信息到剪贴板"
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:189
 msgid "Auto hide horizontal button bar"
 msgstr "自动隐藏水平工具栏"
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:190
 msgid "Auto hide vertical button bar"
 msgstr "自动隐藏垂直工具栏"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:191
 msgid "Toggle visibility of GUI"
 msgstr "显示/隐藏工具栏"
 
@@ -883,27 +951,27 @@ msgstr "显示/隐藏工具栏"
 msgid "%1m"
 msgstr "%1 米"
 
-#: src/gui/ViewDialog.cpp:454
+#: src/gui/ViewDialog.cpp:459
 msgid "No description"
 msgstr "没有描述"
 
-#: src/gui/ViewDialog.cpp:567
+#: src/gui/ViewDialog.cpp:572
 msgid "No shooting stars"
 msgstr "无流星"
 
-#: src/gui/ViewDialog.cpp:570
+#: src/gui/ViewDialog.cpp:575
 msgid "Normal rate"
 msgstr "日常频率"
 
-#: src/gui/ViewDialog.cpp:573
+#: src/gui/ViewDialog.cpp:578
 msgid "Standard Perseids rate"
 msgstr "标准英仙座流星雨频率"
 
-#: src/gui/ViewDialog.cpp:576
+#: src/gui/ViewDialog.cpp:581
 msgid "Exceptional Leonid rate"
 msgstr "超量狮子座流星雨"
 
-#: src/gui/ViewDialog.cpp:579
+#: src/gui/ViewDialog.cpp:584
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "至今最高频率 (1966 狮子座流星雨)"
 
@@ -920,103 +988,111 @@ msgstr "请选择一个包含 Stellarium 地景的 ZIP 压缩包"
 msgid "ZIP archives"
 msgstr "ZIP 压缩包"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:132
+#: src/gui/AddRemoveLandscapesDialog.cpp:127
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
 msgstr "地景 “%1”已被成功安装。"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:133
-#: src/gui/AddRemoveLandscapesDialog.cpp:160
+#: src/gui/AddRemoveLandscapesDialog.cpp:128
+#: src/gui/AddRemoveLandscapesDialog.cpp:155
 msgid "Success"
 msgstr "成功"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:146
-#: src/gui/AddRemoveLandscapesDialog.cpp:216
-#: src/gui/AddRemoveLandscapesDialog.cpp:225
-#: src/gui/AddRemoveLandscapesDialog.cpp:233
+#: src/gui/AddRemoveLandscapesDialog.cpp:141
+#: src/gui/AddRemoveLandscapesDialog.cpp:211
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:228
 msgid "No landscape was installed."
 msgstr "暂没有地景。"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:147
-#: src/gui/AddRemoveLandscapesDialog.cpp:171
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-#: src/gui/AddRemoveLandscapesDialog.cpp:226
-#: src/gui/AddRemoveLandscapesDialog.cpp:234
-#: src/gui/AddRemoveLandscapesDialog.cpp:244
+#: src/gui/AddRemoveLandscapesDialog.cpp:142
+#: src/gui/AddRemoveLandscapesDialog.cpp:166
+#: src/gui/AddRemoveLandscapesDialog.cpp:215
+#: src/gui/AddRemoveLandscapesDialog.cpp:221
+#: src/gui/AddRemoveLandscapesDialog.cpp:229
+#: src/gui/AddRemoveLandscapesDialog.cpp:239
 msgid "Error!"
 msgstr "错误！"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:159
+#: src/gui/AddRemoveLandscapesDialog.cpp:154
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "地景 “%1”已被成功移除。"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:170
-#: src/gui/AddRemoveLandscapesDialog.cpp:240
+#: src/gui/AddRemoveLandscapesDialog.cpp:165
+#: src/gui/AddRemoveLandscapesDialog.cpp:235
 msgid "The selected landscape could not be (completely) removed."
 msgstr "选择的地景无法删除，或是删除不完全。"
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:193
+#: src/gui/AddRemoveLandscapesDialog.cpp:188
 #, qt-format
 msgid "Size on disk: %1 MiB"
 msgstr "磁盘空间：%1 MB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:219
+#: src/gui/AddRemoveLandscapesDialog.cpp:214
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr "Stellarium 无法读取/写入文件：%1。"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:225
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
 msgstr "您选择的文件不是 ZIP 压缩包或是其不包含 Stellarium 地景。"
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:232
+#: src/gui/AddRemoveLandscapesDialog.cpp:227
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr "指定的地景（%1）已存在于列表中。"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:243
+#: src/gui/AddRemoveLandscapesDialog.cpp:238
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "您可以通过手动删除文件夹 %1 来移除此地景。"
 
 #: src/gui/ScriptConsole.cpp:73
 msgid "quickrun..."
-msgstr ""
+msgstr "快速启动"
 
 #: src/gui/ScriptConsole.cpp:74
 msgid "selected text"
-msgstr ""
+msgstr "已选中文字"
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "clear text"
-msgstr ""
+msgstr "清除文本"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "clear images"
-msgstr ""
+msgstr "清除图像"
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
-msgstr ""
+msgstr "自然的"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
+msgstr "星图"
+
+#: src/gui/SearchDialog.cpp:351
+msgid "Simbad Lookup Error"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:503
+#: src/gui/SearchDialog.cpp:359
+msgid "Simbad Lookup"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:507
 msgid "University of Strasbourg (France)"
-msgstr ""
+msgstr "斯特拉斯堡大学（法国）"
 
-#: src/gui/SearchDialog.cpp:504
+#: src/gui/SearchDialog.cpp:508
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "哈佛大学（美国）"
 
 #: src/main.cpp:337
 msgid "This system does not support OpenGL."
@@ -1443,7 +1519,7 @@ msgstr "西方"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:162
 msgid "Guereins"
-msgstr ""
+msgstr "古尔瑞恩（Guereins，地名）"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:164
@@ -1463,75 +1539,75 @@ msgstr "海洋"
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:172
 msgid "Garching"
-msgstr ""
+msgstr "慕尼黑"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
 msgid "Landscape Tour"
-msgstr ""
+msgstr "游览"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
 msgid "Partial Lunar Eclipse"
-msgstr ""
+msgstr "月偏食"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:184
 msgid "Total Lunar Eclipse"
-msgstr ""
+msgstr "月全食"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
 msgid "Screensaver"
-msgstr ""
+msgstr "屏幕保护程序"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:188
 msgid "Solar Eclipse 2009"
-msgstr ""
+msgstr "2009年日食"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:190
 msgid "Startup Script"
-msgstr ""
+msgstr "启动脚本"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:192
 msgid "Zodiac"
-msgstr ""
+msgstr "黄道"
 
 #: src/translations.h:195
 msgid "Look around each installed landscape."
-msgstr ""
+msgstr "搜索已安装地景"
 
 #: src/translations.h:196
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr ""
+msgstr "月偏食演示脚本"
 
 #: src/translations.h:197
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr ""
+msgstr "月全食演示脚本"
 
 #: src/translations.h:198
 msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr ""
+msgstr "随机天体演示"
 
 #: src/translations.h:199
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
-msgstr ""
+msgstr "2009年日全食演示（地点为孟加拉国兰格普，Rangpur）"
 
 #: src/translations.h:200
 msgid "Script which runs automatically at startup"
-msgstr ""
+msgstr "在启动时自动运行的脚本"
 
 #: src/translations.h:201
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
-msgstr ""
+msgstr "黄道星座演示脚本。黄道星座是位于黄道带上，太阳在一年中会经过的一系列星座的统称。"
 
 #: src/translations.h:204
 msgid "Andorra"
@@ -1599,7 +1675,7 @@ msgstr "亚塞拜然"
 
 #: src/translations.h:220
 msgid "Bosnia and Herzegowina"
-msgstr ""
+msgstr "波黑"
 
 #: src/translations.h:221
 msgid "Barbados"
@@ -1643,859 +1719,859 @@ msgstr "汶莱"
 
 #: src/translations.h:231
 msgid "Bolivia"
-msgstr ""
+msgstr "玻利维亚"
 
 #: src/translations.h:232
 msgid "Brazil"
-msgstr ""
+msgstr "巴西"
 
 #: src/translations.h:233
 msgid "Bahamas"
-msgstr ""
+msgstr "巴哈马群岛"
 
 #: src/translations.h:234
 msgid "Bhutan"
-msgstr ""
+msgstr "不丹"
 
 #: src/translations.h:235
 msgid "Bouvet Island"
-msgstr ""
+msgstr "布维岛"
 
 #: src/translations.h:236
 msgid "Botswana"
-msgstr ""
+msgstr "博茨瓦纳"
 
 #: src/translations.h:237
 msgid "Belarus"
-msgstr ""
+msgstr "白俄罗斯"
 
 #: src/translations.h:238
 msgid "Belize"
-msgstr ""
+msgstr "伯利兹"
 
 #: src/translations.h:239
 msgid "Canada"
-msgstr ""
+msgstr "加拿大"
 
 #: src/translations.h:240
 msgid "Cocos Islands"
-msgstr ""
+msgstr "科科斯群岛"
 
 #: src/translations.h:241
 msgid "Democratic Republic of the Congo"
-msgstr ""
+msgstr "刚果民主共和国"
 
 #: src/translations.h:242
 msgid "Central African Republic"
-msgstr ""
+msgstr "中非共和国"
 
 #: src/translations.h:243
 msgid "Republic of the Congo"
-msgstr ""
+msgstr "刚果共和国"
 
 #: src/translations.h:244
 msgid "Switzerland"
-msgstr ""
+msgstr "瑞士"
 
 #: src/translations.h:245
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "科特迪瓦"
 
 #: src/translations.h:246
 msgid "Cook Islands"
-msgstr ""
+msgstr "库克群岛"
 
 #: src/translations.h:247
 msgid "Chile"
-msgstr ""
+msgstr "智利"
 
 #: src/translations.h:248
 msgid "Cameroon"
-msgstr ""
+msgstr "喀麦隆"
 
 #: src/translations.h:249
 msgid "China"
-msgstr ""
+msgstr "中国"
 
 #: src/translations.h:250
 msgid "Colombia"
-msgstr ""
+msgstr "哥伦比亚"
 
 #: src/translations.h:251
 msgid "Costa Rica"
-msgstr ""
+msgstr "哥斯达黎加"
 
 #: src/translations.h:252
 msgid "Serbia and Montenegro"
-msgstr ""
+msgstr "塞尔维亚和黑山共和国"
 
 #: src/translations.h:253
 msgid "Cuba"
-msgstr ""
+msgstr "古巴"
 
 #: src/translations.h:254
 msgid "Cape Verde"
-msgstr ""
+msgstr "佛得角"
 
 #: src/translations.h:255
 msgid "Christmas Island"
-msgstr ""
+msgstr "圣诞岛"
 
 #: src/translations.h:256
 msgid "Cyprus"
-msgstr ""
+msgstr "塞浦路斯"
 
 #: src/translations.h:257
 msgid "Czech Republic"
-msgstr ""
+msgstr "捷克共和国"
 
 #: src/translations.h:258
 msgid "Germany"
-msgstr ""
+msgstr "德国"
 
 #: src/translations.h:259
 msgid "Djibouti"
-msgstr ""
+msgstr "吉布提"
 
 #: src/translations.h:260
 msgid "Denmark"
-msgstr ""
+msgstr "丹麦"
 
 #: src/translations.h:261
 msgid "Dominica"
-msgstr ""
+msgstr "多米尼加"
 
 #: src/translations.h:262
 msgid "Dominican Republic"
-msgstr ""
+msgstr "多米尼加共和国"
 
 #: src/translations.h:263
 msgid "Algeria"
-msgstr ""
+msgstr "阿尔及利亚"
 
 #: src/translations.h:264
 msgid "Ecuador"
-msgstr ""
+msgstr "厄瓜多尔"
 
 #: src/translations.h:265
 msgid "Estonia"
-msgstr ""
+msgstr "爱沙尼亚"
 
 #: src/translations.h:266
 msgid "Egypt"
-msgstr ""
+msgstr "埃及"
 
 #: src/translations.h:267
 msgid "Western Sahara"
-msgstr ""
+msgstr "西撒哈拉"
 
 #: src/translations.h:268
 msgid "Eritrea"
-msgstr ""
+msgstr "厄立特里亚国"
 
 #: src/translations.h:269
 msgid "Spain"
-msgstr ""
+msgstr "西班牙"
 
 #: src/translations.h:270
 msgid "Ethiopia"
-msgstr ""
+msgstr "埃塞俄比亚"
 
 #: src/translations.h:271
 msgid "Finland"
-msgstr ""
+msgstr "芬兰"
 
 #: src/translations.h:272
 msgid "Fiji"
-msgstr ""
+msgstr "斐济"
 
 #: src/translations.h:273
 msgid "Falkland Islands"
-msgstr ""
+msgstr "福克兰群岛"
 
 #: src/translations.h:274
 msgid "Micronesia"
-msgstr ""
+msgstr "密克罗尼西亚"
 
 #: src/translations.h:275
 msgid "Faroe Islands"
-msgstr ""
+msgstr "法罗群岛"
 
 #: src/translations.h:276
 msgid "France"
-msgstr ""
+msgstr "法国"
 
 #: src/translations.h:277
 msgid "Gabon"
-msgstr ""
+msgstr "加蓬"
 
 #: src/translations.h:278
 msgid "United Kingdom"
-msgstr ""
+msgstr "英国"
 
 #: src/translations.h:279
 msgid "Grenada"
-msgstr ""
+msgstr "格林纳达"
 
 #: src/translations.h:280
 msgid "Georgia"
-msgstr ""
+msgstr "佐治亚州"
 
 #: src/translations.h:281
 msgid "French Guiana"
-msgstr ""
+msgstr "法属圭亚那"
 
 #: src/translations.h:282
 msgid "Ghana"
-msgstr ""
+msgstr "加纳"
 
 #: src/translations.h:283
 msgid "Gibraltar"
-msgstr ""
+msgstr "直布罗陀"
 
 #: src/translations.h:284
 msgid "Greenland"
-msgstr ""
+msgstr "格陵兰"
 
 #: src/translations.h:285
 msgid "Gambia"
-msgstr ""
+msgstr "赞比亚"
 
 #: src/translations.h:286
 msgid "Guinea"
-msgstr ""
+msgstr "几内亚"
 
 #: src/translations.h:287
 msgid "Guadeloupe"
-msgstr ""
+msgstr "瓜德鲁普岛"
 
 #: src/translations.h:288
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "赤道几内亚"
 
 #: src/translations.h:289
 msgid "Greece"
-msgstr ""
+msgstr "希腊"
 
 #: src/translations.h:290
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "南乔治亚洲和桑威奇群岛"
 
 #: src/translations.h:291
 msgid "Guatemala"
-msgstr ""
+msgstr "危地马拉"
 
 #: src/translations.h:292
 msgid "Guam"
-msgstr ""
+msgstr "关岛"
 
 #: src/translations.h:293
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "几内亚比绍"
 
 #: src/translations.h:294
 msgid "Guyana"
-msgstr ""
+msgstr "圭亚那"
 
 #: src/translations.h:295
 msgid "Hong Kong"
-msgstr ""
+msgstr "香港"
 
 #: src/translations.h:296
 msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgstr "赫德岛与麦克唐纳群岛"
 
 #: src/translations.h:297
 msgid "Honduras"
-msgstr ""
+msgstr "洪都拉斯"
 
 #: src/translations.h:298
 msgid "Croatia"
-msgstr ""
+msgstr "克罗地亚"
 
 #: src/translations.h:299
 msgid "Haiti"
-msgstr ""
+msgstr "海地"
 
 #: src/translations.h:300
 msgid "Hungary"
-msgstr ""
+msgstr "匈牙利"
 
 #: src/translations.h:301
 msgid "Indonesia"
-msgstr ""
+msgstr "印度尼西亚"
 
 #: src/translations.h:302
 msgid "Ireland"
-msgstr ""
+msgstr "爱尔兰"
 
 #: src/translations.h:303
 msgid "Israel"
-msgstr ""
+msgstr "以色列"
 
 #: src/translations.h:304
 msgid "India"
-msgstr ""
+msgstr "印度"
 
 #: src/translations.h:305
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "英属印度洋地区"
 
 #: src/translations.h:306
 msgid "Iraq"
-msgstr ""
+msgstr "伊拉克"
 
 #: src/translations.h:307
 msgid "Iran"
-msgstr ""
+msgstr "伊朗"
 
 #: src/translations.h:308
 msgid "Iceland"
-msgstr ""
+msgstr "冰岛"
 
 #: src/translations.h:309
 msgid "Italy"
-msgstr ""
+msgstr "意大利"
 
 #: src/translations.h:310
 msgid "Jamaica"
-msgstr ""
+msgstr "牙买加"
 
 #: src/translations.h:311
 msgid "Jordan"
-msgstr ""
+msgstr "约旦"
 
 #: src/translations.h:312
 msgid "Japan"
-msgstr ""
+msgstr "日本"
 
 #: src/translations.h:313
 msgid "Kenya"
-msgstr ""
+msgstr "肯尼亚"
 
 #: src/translations.h:314
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "吉尔吉斯斯坦"
 
 #: src/translations.h:315
 msgid "Cambodia"
-msgstr ""
+msgstr "柬埔寨"
 
 #: src/translations.h:316
 msgid "Kiribati"
-msgstr ""
+msgstr "基里巴斯"
 
 #: src/translations.h:317
 msgid "Comoros"
-msgstr ""
+msgstr "科摩洛"
 
 #: src/translations.h:318
 msgid "Saint Kitts and Nevis"
-msgstr ""
+msgstr "圣基茨和尼维斯"
 
 #: src/translations.h:319
 msgid "Democratic People's Republic of Korea"
-msgstr ""
+msgstr "朝鲜人民民主共和国"
 
 #: src/translations.h:320
 msgid "Republic of Korea"
-msgstr ""
+msgstr "韩国"
 
 #: src/translations.h:321
 msgid "Kuwait"
-msgstr ""
+msgstr "科威特"
 
 #: src/translations.h:322
 msgid "Cayman Islands"
-msgstr ""
+msgstr "开曼群岛"
 
 #: src/translations.h:323
 msgid "Kazakhstan"
-msgstr ""
+msgstr "哈萨克斯坦"
 
 #: src/translations.h:324
 msgid "Lao"
-msgstr ""
+msgstr "老挝"
 
 #: src/translations.h:325
 msgid "Lebanon"
-msgstr ""
+msgstr "黎巴嫩"
 
 #: src/translations.h:326
 msgid "Saint Lucia"
-msgstr ""
+msgstr "圣卢西亚"
 
 #: src/translations.h:327
 msgid "Liechtenstein"
-msgstr ""
+msgstr "列支敦士登"
 
 #: src/translations.h:328
 msgid "Sri Lanka"
-msgstr ""
+msgstr "斯里兰卡"
 
 #: src/translations.h:329
 msgid "Liberia"
-msgstr ""
+msgstr "利比里亚"
 
 #: src/translations.h:330
 msgid "Lesotho"
-msgstr ""
+msgstr "莱索托"
 
 #: src/translations.h:331
 msgid "Lithuania"
-msgstr ""
+msgstr "立陶宛"
 
 #: src/translations.h:332
 msgid "Luxembourg"
-msgstr ""
+msgstr "卢森堡"
 
 #: src/translations.h:333
 msgid "Latvia"
-msgstr ""
+msgstr "拉脱维亚"
 
 #: src/translations.h:334
 msgid "Libyan Arab Jamahiriya"
-msgstr ""
+msgstr "阿拉伯利比亚民众国"
 
 #: src/translations.h:335
 msgid "Morocco"
-msgstr ""
+msgstr "摩洛哥"
 
 #: src/translations.h:336
 msgid "Monaco"
-msgstr ""
+msgstr "摩纳哥"
 
 #: src/translations.h:337
 msgid "Moldova"
-msgstr ""
+msgstr "摩尔多瓦"
 
 #: src/translations.h:338
 msgid "Madagascar"
-msgstr ""
+msgstr "马达加斯加"
 
 #: src/translations.h:339
 msgid "Marshall Islands"
-msgstr ""
+msgstr "马绍尔群岛"
 
 #: src/translations.h:340
 msgid "Macedonia"
-msgstr ""
+msgstr "马其顿"
 
 #: src/translations.h:341
 msgid "Mali"
-msgstr ""
+msgstr "马里"
 
 #: src/translations.h:342
 msgid "Myanmar"
-msgstr ""
+msgstr "缅甸"
 
 #: src/translations.h:343
 msgid "Mongolia"
-msgstr ""
+msgstr "蒙古"
 
 #: src/translations.h:344
 msgid "Macau"
-msgstr ""
+msgstr "澳门"
 
 #: src/translations.h:345
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "北马里亚纳群岛"
 
 #: src/translations.h:346
 msgid "Martinique"
-msgstr ""
+msgstr "马提尼克"
 
 #: src/translations.h:347
 msgid "Mauritania"
-msgstr ""
+msgstr "毛里塔尼亚"
 
 #: src/translations.h:348
 msgid "Montserrat"
-msgstr ""
+msgstr "蒙特塞拉特岛"
 
 #: src/translations.h:349
 msgid "Malta"
-msgstr ""
+msgstr "马耳他"
 
 #: src/translations.h:350
 msgid "Mauritius"
-msgstr ""
+msgstr "毛里求斯"
 
 #: src/translations.h:351
 msgid "Maldives"
-msgstr ""
+msgstr "马尔代夫"
 
 #: src/translations.h:352
 msgid "Malawi"
-msgstr ""
+msgstr "马拉维"
 
 #: src/translations.h:353
 msgid "Mexico"
-msgstr ""
+msgstr "墨西哥"
 
 #: src/translations.h:354
 msgid "Malaysia"
-msgstr ""
+msgstr "马来西亚"
 
 #: src/translations.h:355
 msgid "Mozambique"
-msgstr ""
+msgstr "莫桑比克"
 
 #: src/translations.h:356
 msgid "Namibia"
-msgstr ""
+msgstr "纳米比亚"
 
 #: src/translations.h:357
 msgid "New Caledonia"
-msgstr ""
+msgstr "新喀里多尼亚"
 
 #: src/translations.h:358
 msgid "Niger"
-msgstr ""
+msgstr "尼日尔"
 
 #: src/translations.h:359
 msgid "Norfolk Island"
-msgstr ""
+msgstr "诺福克岛"
 
 #: src/translations.h:360
 msgid "Nigeria"
-msgstr ""
+msgstr "尼日利亚"
 
 #: src/translations.h:361
 msgid "Nicaragua"
-msgstr ""
+msgstr "尼加拉瓜"
 
 #: src/translations.h:362
 msgid "Netherlands"
-msgstr ""
+msgstr "荷兰"
 
 #: src/translations.h:363
 msgid "Norway"
-msgstr ""
+msgstr "挪威"
 
 #: src/translations.h:364
 msgid "Nepal"
-msgstr ""
+msgstr "尼泊尔"
 
 #: src/translations.h:365
 msgid "Nauru"
-msgstr ""
+msgstr "瑙鲁"
 
 #: src/translations.h:366
 msgid "Niue"
-msgstr ""
+msgstr "纽埃岛"
 
 #: src/translations.h:367
 msgid "New Zealand"
-msgstr ""
+msgstr "新西兰"
 
 #: src/translations.h:368
 msgid "Oman"
-msgstr ""
+msgstr "阿曼"
 
 #: src/translations.h:369
 msgid "Panama"
-msgstr ""
+msgstr "巴拿马"
 
 #: src/translations.h:370
 msgid "Peru"
-msgstr ""
+msgstr "秘鲁"
 
 #: src/translations.h:371
 msgid "French Polynesia"
-msgstr ""
+msgstr "法属玻利尼西亚"
 
 #: src/translations.h:372
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "巴布亚新几内亚"
 
 #: src/translations.h:373
 msgid "Philippines"
-msgstr ""
+msgstr "菲律宾"
 
 #: src/translations.h:374
 msgid "Pakistan"
-msgstr ""
+msgstr "巴基斯坦"
 
 #: src/translations.h:375
 msgid "Poland"
-msgstr ""
+msgstr "波兰"
 
 #: src/translations.h:376
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "圣皮埃尔和密克隆"
 
 #: src/translations.h:377
 msgid "Pitcairn"
-msgstr ""
+msgstr "皮特克恩岛"
 
 #: src/translations.h:378
 msgid "Puerto Rico"
-msgstr ""
+msgstr "波多黎各"
 
 #: src/translations.h:379
 msgid "Palestinian Territories"
-msgstr ""
+msgstr "巴勒斯坦领土"
 
 #: src/translations.h:380
 msgid "Portugal"
-msgstr ""
+msgstr "葡萄牙"
 
 #: src/translations.h:381
 msgid "Palau"
-msgstr ""
+msgstr "帕劳"
 
 #: src/translations.h:382
 msgid "Paraguay"
-msgstr ""
+msgstr "巴拉圭"
 
 #: src/translations.h:383
 msgid "Qatar"
-msgstr ""
+msgstr "卡塔尔"
 
 #: src/translations.h:384
 msgid "Réunion"
-msgstr ""
+msgstr "留尼旺"
 
 #: src/translations.h:385
 msgid "Romania"
-msgstr ""
+msgstr "罗马尼亚"
 
 #: src/translations.h:386
 msgid "Serbia"
-msgstr ""
+msgstr "塞尔维亚"
 
 #: src/translations.h:387
 msgid "Russian Federation"
-msgstr ""
+msgstr "俄罗斯联邦"
 
 #: src/translations.h:388
 msgid "Rwanda"
-msgstr ""
+msgstr "卢旺达"
 
 #: src/translations.h:389
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "沙特阿拉伯"
 
 #: src/translations.h:390
 msgid "Solomon Islands"
-msgstr ""
+msgstr "所罗门群岛"
 
 #: src/translations.h:391
 msgid "Seychelles"
-msgstr ""
+msgstr "塞舌尔"
 
 #: src/translations.h:392
 msgid "Sudan"
-msgstr ""
+msgstr "苏丹"
 
 #: src/translations.h:393
 msgid "Sweden"
-msgstr ""
+msgstr "瑞典"
 
 #: src/translations.h:394
 msgid "Singapore"
-msgstr ""
+msgstr "新加坡"
 
 #: src/translations.h:395
 msgid "Saint Helena"
-msgstr ""
+msgstr "圣赫勒拿"
 
 #: src/translations.h:396
 msgid "Slovenia"
-msgstr ""
+msgstr "斯洛文尼亚"
 
 #: src/translations.h:397
 msgid "Svalbard and Jan Mayen"
-msgstr ""
+msgstr "斯瓦尔巴群岛"
 
 #: src/translations.h:398
 msgid "Slovakia"
-msgstr ""
+msgstr "斯洛伐克"
 
 #: src/translations.h:399
 msgid "Sierra Leone"
-msgstr ""
+msgstr "塞拉利昂"
 
 #: src/translations.h:400
 msgid "San Marino"
-msgstr ""
+msgstr "圣马力诺"
 
 #: src/translations.h:401
 msgid "Senegal"
-msgstr ""
+msgstr "塞内加尔"
 
 #: src/translations.h:402
 msgid "Somalia"
-msgstr ""
+msgstr "索马里亚"
 
 #: src/translations.h:403
 msgid "Suriname"
-msgstr ""
+msgstr "苏里南"
 
 #: src/translations.h:404
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "圣多美和普林西比"
 
 #: src/translations.h:405
 msgid "El Salvador"
-msgstr ""
+msgstr "萨尔瓦多"
 
 #: src/translations.h:406
 msgid "Syrian Arab Republic"
-msgstr ""
+msgstr "阿拉伯叙利亚共和国"
 
 #: src/translations.h:407
 msgid "Swaziland"
-msgstr ""
+msgstr "斯威士兰"
 
 #: src/translations.h:408
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "特克斯群岛和凯科斯群岛"
 
 #: src/translations.h:409
 msgid "Chad"
-msgstr ""
+msgstr "乍得"
 
 #: src/translations.h:410
 msgid "French Southern Territories"
-msgstr ""
+msgstr "法属南部领土"
 
 #: src/translations.h:411
 msgid "Togo"
-msgstr ""
+msgstr "多哥"
 
 #: src/translations.h:412
 msgid "Thailand"
-msgstr ""
+msgstr "泰国"
 
 #: src/translations.h:413
 msgid "Tajikistan"
-msgstr ""
+msgstr "塔吉克斯坦"
 
 #: src/translations.h:414
 msgid "Tokelau"
-msgstr ""
+msgstr "托克劳"
 
 #: src/translations.h:415
 msgid "East Timor"
-msgstr ""
+msgstr "东帝汶"
 
 #: src/translations.h:416
 msgid "Turkmenistan"
-msgstr ""
+msgstr "土库曼斯坦"
 
 #: src/translations.h:417
 msgid "Tunisia"
-msgstr ""
+msgstr "突尼斯"
 
 #: src/translations.h:418
 msgid "Tonga"
-msgstr ""
+msgstr "汤加"
 
 #: src/translations.h:419
 msgid "Turkey"
-msgstr ""
+msgstr "土耳其"
 
 #: src/translations.h:420
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "特里尼达和多巴哥"
 
 #: src/translations.h:421
 msgid "Tuvalu"
-msgstr ""
+msgstr "图瓦卢"
 
 #: src/translations.h:422
 msgid "Taiwan"
-msgstr ""
+msgstr "台湾"
 
 #: src/translations.h:423
 msgid "Tanzania"
-msgstr ""
+msgstr "坦桑尼亚"
 
 #: src/translations.h:424
 msgid "Ukraine"
-msgstr ""
+msgstr "乌克兰"
 
 #: src/translations.h:425
 msgid "Uganda"
-msgstr ""
+msgstr "乌干达"
 
 #: src/translations.h:426
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "美国外岛"
 
 #: src/translations.h:427
 msgid "United States"
-msgstr ""
+msgstr "美国"
 
 #: src/translations.h:428
 msgid "Uruguay"
-msgstr ""
+msgstr "乌拉圭"
 
 #: src/translations.h:429
 msgid "Uzbekistan"
-msgstr ""
+msgstr "乌兹别克斯坦"
 
 #: src/translations.h:430
 msgid "Vatican City State"
-msgstr ""
+msgstr "梵蒂冈"
 
 #: src/translations.h:431
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "圣文森特和格林纳丁斯"
 
 #: src/translations.h:432
 msgid "Venezuela"
-msgstr ""
+msgstr "委内瑞拉"
 
 #: src/translations.h:433
 msgid "British Virgin Islands"
-msgstr ""
+msgstr "英属维京群岛"
 
 #: src/translations.h:434
 msgid "United States Virgin Islands"
-msgstr ""
+msgstr "美属维京群岛"
 
 #: src/translations.h:435
 msgid "Viet Nam"
-msgstr ""
+msgstr "越南"
 
 #: src/translations.h:436
 msgid "Vanuatu"
-msgstr ""
+msgstr "瓦努阿图"
 
 #: src/translations.h:437
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "瓦利斯和富图纳群岛"
 
 #: src/translations.h:438
 msgid "Samoa"
-msgstr ""
+msgstr "萨摩亚"
 
 #: src/translations.h:439
 msgid "Yemen"
-msgstr ""
+msgstr "也门"
 
 #: src/translations.h:440
 msgid "Mayotte"
-msgstr ""
+msgstr "马约特岛"
 
 #: src/translations.h:441
 msgid "Yugoslavia"
-msgstr ""
+msgstr "南斯拉夫"
 
 #: src/translations.h:442
 msgid "South Africa"
-msgstr ""
+msgstr "南非"
 
 #: src/translations.h:443
 msgid "Zambia"
-msgstr ""
+msgstr "赞比亚"
 
 #: src/translations.h:444
 msgid "Zimbabwe"
-msgstr ""
+msgstr "津巴布韦"
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -2515,6 +2591,7 @@ msgstr "帮助"
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:266
 msgid "About"
 msgstr "关于"
 
@@ -2526,67 +2603,67 @@ msgstr "记录"
 msgid "Refresh"
 msgstr "重新整理"
 
-#: src/ui_locationDialogGui.h:387
+#: src/ui_locationDialogGui.h:384
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:134
 msgid "Location"
 msgstr "所在位置"
 
-#: src/ui_locationDialogGui.h:391
+#: src/ui_locationDialogGui.h:388
 msgid "Current location information"
 msgstr "目前位置资讯"
 
-#: src/ui_locationDialogGui.h:392
+#: src/ui_locationDialogGui.h:389
 msgid "Use as default"
 msgstr "设成预设值"
 
-#: src/ui_locationDialogGui.h:393 plugins/Oculars/src/ui_ocularDialog.h:876
+#: src/ui_locationDialogGui.h:390 plugins/Oculars/src/ui_ocularDialog.h:876
 #: plugins/Oculars/src/ui_ocularDialog.h:885
 #: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Delete"
 msgstr "删除"
 
-#: src/ui_locationDialogGui.h:394
+#: src/ui_locationDialogGui.h:391
 msgid "Add to list"
 msgstr "加入列表"
 
-#: src/ui_locationDialogGui.h:395
+#: src/ui_locationDialogGui.h:392
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:135
 msgid "Latitude:"
 msgstr "纬度:"
 
-#: src/ui_locationDialogGui.h:397 src/ui_locationDialogGui.h:401
+#: src/ui_locationDialogGui.h:394 src/ui_locationDialogGui.h:398
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr "您可以输入十进位度数，或是使用 dms 格式，例如: +1d 12m 8s"
 
-#: src/ui_locationDialogGui.h:399
+#: src/ui_locationDialogGui.h:396
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:138
 msgid "Longitude:"
 msgstr "经度:"
 
-#: src/ui_locationDialogGui.h:403
+#: src/ui_locationDialogGui.h:400
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Altitude:"
 msgstr "海拔:"
 
-#: src/ui_locationDialogGui.h:405
+#: src/ui_locationDialogGui.h:402
 msgid "Enter the altitude in meter"
 msgstr "输入海拔高度(以m为单位)"
 
-#: src/ui_locationDialogGui.h:407
+#: src/ui_locationDialogGui.h:404
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:408
+#: src/ui_locationDialogGui.h:405
 msgid "Name/City:"
 msgstr "地名/城市:"
 
-#: src/ui_locationDialogGui.h:409
+#: src/ui_locationDialogGui.h:406
 msgid "Country:"
 msgstr "国家/地区:"
 
-#: src/ui_locationDialogGui.h:410
+#: src/ui_locationDialogGui.h:407
 msgid "Planet:"
 msgstr "行星:"
 
@@ -2712,488 +2789,511 @@ msgstr "位置"
 
 #: src/ui_searchDialogGui.h:586
 msgid "On-line astronomical database SIMBAD"
-msgstr ""
+msgstr "SIMBAD 在线天文数据库"
 
 #: src/ui_searchDialogGui.h:587
 msgid "Extend search with SIMBAD"
-msgstr ""
+msgstr "使用 SIMBAD 深度搜索"
 
 #: src/ui_searchDialogGui.h:588
 msgid "Server:"
-msgstr ""
+msgstr "服务器："
 
-#: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1137
-#: src/ui_viewDialog.h:1142 src/ui_viewDialog.h:1144
-#: src/ui_configurationDialog.h:855 src/ui_configurationDialog.h:866
+#: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1184
+#: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
+#: src/ui_configurationDialog.h:891 src/ui_configurationDialog.h:902
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "选项"
 
-#: src/ui_viewDialog.h:1070
+#: src/ui_viewDialog.h:1101
 msgid "View"
 msgstr "显示"
 
-#: src/ui_viewDialog.h:1076
+#: src/ui_viewDialog.h:1107
 msgid "Sky"
 msgstr "天空"
 
-#: src/ui_viewDialog.h:1078
+#: src/ui_viewDialog.h:1109
 msgid "Markings"
 msgstr "标示"
 
-#: src/ui_viewDialog.h:1080
+#: src/ui_viewDialog.h:1111
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:395
 msgid "Landscape"
 msgstr "地景"
 
-#: src/ui_viewDialog.h:1082
+#: src/ui_viewDialog.h:1113
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:217
 msgid "Starlore"
 msgstr "星空术语"
 
-#: src/ui_viewDialog.h:1086
+#: src/ui_viewDialog.h:1117
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:247
 msgid "Absolute scale:"
 msgstr "绝对大小:"
 
-#: src/ui_viewDialog.h:1087
+#: src/ui_viewDialog.h:1118
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:241
 msgid "Relative scale:"
 msgstr "相对大小:"
 
-#: src/ui_viewDialog.h:1088
+#: src/ui_viewDialog.h:1119
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Twinkle:"
 msgstr "闪烁:"
 
-#: src/ui_viewDialog.h:1090
+#: src/ui_viewDialog.h:1121
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "降低明亮天体附近其馀天体的亮度"
 
-#: src/ui_viewDialog.h:1092
+#: src/ui_viewDialog.h:1123
 msgid "Dynamic eye adaptation"
 msgstr "人眼动态视觉调适"
 
-#: src/ui_viewDialog.h:1093
+#: src/ui_viewDialog.h:1124
 msgid "Planets and satellites"
 msgstr "行星及卫星"
 
-#: src/ui_viewDialog.h:1094
+#: src/ui_viewDialog.h:1125
 msgid "Show planets"
 msgstr "显示行星"
 
-#: src/ui_viewDialog.h:1095
+#: src/ui_viewDialog.h:1126
 msgid "Show planet markers"
 msgstr "显示行星标记"
 
-#: src/ui_viewDialog.h:1096
+#: src/ui_viewDialog.h:1127
 msgid "Show planet orbits"
 msgstr "显示行星轨道"
 
-#: src/ui_viewDialog.h:1097
+#: src/ui_viewDialog.h:1128
 msgid "Simulate light speed"
 msgstr "模拟光速"
 
-#: src/ui_viewDialog.h:1098
+#: src/ui_viewDialog.h:1129
 msgid "Scale Moon"
 msgstr "月球尺寸"
 
-#: src/ui_viewDialog.h:1100
+#: src/ui_viewDialog.h:1131
 msgid "Show atmosphere"
 msgstr "显示大气层"
 
-#: src/ui_viewDialog.h:1101
+#: src/ui_viewDialog.h:1132
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Light pollution:"
 msgstr "光污染："
 
-#: src/ui_viewDialog.h:1103
+#: src/ui_viewDialog.h:1134
 msgid "pressure, temperature, extinction coefficient"
 msgstr "压力，温度，消光系数"
 
-#: src/ui_viewDialog.h:1105
+#: src/ui_viewDialog.h:1136
 msgid "Refraction/Extinction settings..."
 msgstr "折射/光吸收设置..."
 
-#: src/ui_viewDialog.h:1106
+#: src/ui_viewDialog.h:1137
 msgid "Labels and Markers"
 msgstr "名称及标记"
 
-#: src/ui_viewDialog.h:1109
+#: src/ui_viewDialog.h:1140
 msgid "Planets"
 msgstr "行星"
 
-#: src/ui_viewDialog.h:1110
+#: src/ui_viewDialog.h:1141
 msgid "Shooting Stars"
 msgstr "流星"
 
-#: src/ui_viewDialog.h:1111
+#: src/ui_viewDialog.h:1142
 msgid "Hourly zenith rate:"
 msgstr "流星天顶小时率:"
 
-#: src/ui_viewDialog.h:1112
+#: src/ui_viewDialog.h:1143
 msgid "0"
 msgstr "0"
 
-#: src/ui_viewDialog.h:1113
+#: src/ui_viewDialog.h:1144
 msgid "10"
 msgstr "10"
 
-#: src/ui_viewDialog.h:1114
+#: src/ui_viewDialog.h:1145
 msgid "80"
 msgstr "80"
 
-#: src/ui_viewDialog.h:1115
+#: src/ui_viewDialog.h:1146
 msgid "10000"
 msgstr "10000"
 
-#: src/ui_viewDialog.h:1116
+#: src/ui_viewDialog.h:1147
 msgid "144000"
 msgstr "144000"
 
-#: src/ui_viewDialog.h:1118
-msgid "Celestial Sphere"
-msgstr "天球"
-
-#: src/ui_viewDialog.h:1127
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:359
-msgid "Galactic plane line"
-msgstr "星系平面线"
-
-#: src/ui_viewDialog.h:1129
+#: src/ui_viewDialog.h:1149
 msgid "Constellations"
 msgstr "星座"
 
-#: src/ui_viewDialog.h:1130
+#: src/ui_viewDialog.h:1150
 msgid "Show lines"
 msgstr "显示星座连线"
 
-#: src/ui_viewDialog.h:1131
+#: src/ui_viewDialog.h:1151
 msgid "Show labels"
 msgstr "显示星座名称"
 
-#: src/ui_viewDialog.h:1132
+#: src/ui_viewDialog.h:1152
 msgid "Show boundaries"
 msgstr "显示星座界线"
 
-#: src/ui_viewDialog.h:1133
+#: src/ui_viewDialog.h:1153
 msgid "Show art"
 msgstr "显示星座图绘"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1134
+#: src/ui_viewDialog.h:1154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Art brightness:"
 msgstr "图绘亮度："
 
-#: src/ui_viewDialog.h:1135
+#: src/ui_viewDialog.h:1155
+msgid "Celestial Sphere"
+msgstr "天球"
+
+#: src/ui_viewDialog.h:1162
+msgid "Show equator line"
+msgstr "显示天球赤道"
+
+#: src/ui_viewDialog.h:1166
+msgid "Show meridian line"
+msgstr "显示子午线"
+
+#: src/ui_viewDialog.h:1170
+msgid "Show horizon line"
+msgstr "显示地平线"
+
+#: src/ui_viewDialog.h:1174
+msgid "Show ecliptic line"
+msgstr "显示黄道线"
+
+#: src/ui_viewDialog.h:1178
+msgid "Show Galactic plane line"
+msgstr "显示银河平面"
+
+#: src/ui_viewDialog.h:1182
 msgid "Projection"
 msgstr "投影方式"
 
-#: src/ui_viewDialog.h:1136
+#: src/ui_viewDialog.h:1183
 msgid "Add/remove landscapes..."
 msgstr "添加或移除地景..."
 
-#: src/ui_viewDialog.h:1138
+#: src/ui_viewDialog.h:1185
 msgid "Show ground"
 msgstr "显示地面"
 
-#: src/ui_viewDialog.h:1139
+#: src/ui_viewDialog.h:1186
 msgid "Show fog"
 msgstr "显示雾气"
 
-#: src/ui_viewDialog.h:1140
+#: src/ui_viewDialog.h:1187
 msgid "Use associated planet and position"
 msgstr "使用与此地景关联的位置与行星"
 
-#: src/ui_viewDialog.h:1141
+#: src/ui_viewDialog.h:1188
 msgid "Use this landscape as default"
 msgstr "将此背景设定为预设值"
 
-#: src/ui_viewDialog.h:1143
+#: src/ui_viewDialog.h:1190
 msgid "Use this sky culture as default"
 msgstr "将此星空述语设为预设值"
 
-#: src/ui_viewDialog.h:1145
+#: src/ui_viewDialog.h:1192
 msgid "Visible"
 msgstr "可见"
 
-#: src/ui_configurationDialog.h:753
+#: src/ui_configurationDialog.h:785
 msgid "Configuration"
 msgstr "设定"
 
-#: src/ui_configurationDialog.h:755
+#: src/ui_configurationDialog.h:787
 msgid "Program language"
 msgstr "程序介面语言"
 
-#: src/ui_configurationDialog.h:756
+#: src/ui_configurationDialog.h:788 src/ui_CustomInfoDialog.h:192
 msgid "Selected object information"
 msgstr "已选择天体资料"
 
-#: src/ui_configurationDialog.h:758
+#: src/ui_configurationDialog.h:790
 msgid "Display all information available"
 msgstr "显示所有信息"
 
-#: src/ui_configurationDialog.h:760
+#: src/ui_configurationDialog.h:792
 msgid "All available"
 msgstr "完整显示"
 
-#: src/ui_configurationDialog.h:762
+#: src/ui_configurationDialog.h:794
 msgid "Display less information"
 msgstr "显示精简信息"
 
-#: src/ui_configurationDialog.h:764
+#: src/ui_configurationDialog.h:796
 msgid "Short"
 msgstr "简短显示"
 
-#: src/ui_configurationDialog.h:766
+#: src/ui_configurationDialog.h:798
+msgid "Display user settings information"
+msgstr "显示用户设置信息"
+
+#: src/ui_configurationDialog.h:800
+msgid "Customized"
+msgstr "自定义"
+
+#: src/ui_configurationDialog.h:802
 msgid "Display no information"
 msgstr "不要显示信息"
 
-#: src/ui_configurationDialog.h:768
+#: src/ui_configurationDialog.h:804
 msgid "None"
 msgstr "无"
 
-#: src/ui_configurationDialog.h:769
+#: src/ui_configurationDialog.h:805
 msgid "Default options"
 msgstr "默认选项"
 
-#: src/ui_configurationDialog.h:771
+#: src/ui_configurationDialog.h:807
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr "保存更改并在下次启动 Stellarium 时恢复"
 
-#: src/ui_configurationDialog.h:773
+#: src/ui_configurationDialog.h:809
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 msgid "Save settings"
 msgstr "保存设置"
 
-#: src/ui_configurationDialog.h:775
+#: src/ui_configurationDialog.h:811
 msgid "Restore the default settings that came with Stellarium"
 msgstr "恢复 Stellarium 的原有设置"
 
-#: src/ui_configurationDialog.h:777
+#: src/ui_configurationDialog.h:813
 msgid "Restore defaults"
 msgstr "还原预设值"
 
-#: src/ui_configurationDialog.h:778
+#: src/ui_configurationDialog.h:814
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr "恢复默认设置需要重新启动 Stellarium。保存设置后，下次启动将使用当前视野大小、观看方向等设置。"
 
-#: src/ui_configurationDialog.h:780
+#: src/ui_configurationDialog.h:816
 msgid "The width of your view when Stellarium starts"
 msgstr "Stellarium 默认的视野宽度"
 
-#: src/ui_configurationDialog.h:783
+#: src/ui_configurationDialog.h:819
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Stellarium 默认的地理位置"
 
-#: src/ui_configurationDialog.h:785
+#: src/ui_configurationDialog.h:821
 msgid "Control"
 msgstr "控制"
 
-#: src/ui_configurationDialog.h:787
+#: src/ui_configurationDialog.h:823
 msgid "Allow keyboard to pan and zoom"
 msgstr "使用键盘移动及缩放画面"
 
-#: src/ui_configurationDialog.h:789
+#: src/ui_configurationDialog.h:825
 msgid "Enable keyboard navigation"
 msgstr "开启键盘导览"
 
-#: src/ui_configurationDialog.h:791
+#: src/ui_configurationDialog.h:827
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "使用鼠标移动及缩放画面 (拖拉滚轮)"
 
-#: src/ui_configurationDialog.h:793
+#: src/ui_configurationDialog.h:829
 msgid "Enable mouse navigation"
 msgstr "启用鼠标导览"
 
-#: src/ui_configurationDialog.h:794
+#: src/ui_configurationDialog.h:830
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Startup date and time"
 msgstr "启动时的日期及时间"
 
-#: src/ui_configurationDialog.h:796
+#: src/ui_configurationDialog.h:832
 msgid "Starts Stellarium at system clock date and time"
 msgstr "以系统设定的时间启动"
 
-#: src/ui_configurationDialog.h:798
+#: src/ui_configurationDialog.h:834
 msgid "System date and time"
 msgstr "系统日期及时间"
 
-#: src/ui_configurationDialog.h:800
+#: src/ui_configurationDialog.h:836
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "下次启动 Stellarium 时设定此时间为模拟时间"
 
-#: src/ui_configurationDialog.h:802
+#: src/ui_configurationDialog.h:838
 msgid "System date at:"
 msgstr "系统日期:"
 
-#: src/ui_configurationDialog.h:804
+#: src/ui_configurationDialog.h:840
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "启动Stellarium时，使用特定时间及日期"
 
-#: src/ui_configurationDialog.h:806
+#: src/ui_configurationDialog.h:842
 msgid "Other:"
 msgstr "其他:"
 
-#: src/ui_configurationDialog.h:807
+#: src/ui_configurationDialog.h:843
 msgid "use current"
 msgstr "使用现在的设定"
 
-#: src/ui_configurationDialog.h:808
+#: src/ui_configurationDialog.h:844
 msgid "Other"
 msgstr "其他"
 
-#: src/ui_configurationDialog.h:810
+#: src/ui_configurationDialog.h:846
 msgid "Hides the mouse cursor when inactive"
 msgstr "静止时隐藏滑鼠指标"
 
-#: src/ui_configurationDialog.h:812
+#: src/ui_configurationDialog.h:848
 msgid "Mouse cursor timeout (seconds):"
 msgstr "指定时间后静止时隐藏鼠标(s):"
 
-#: src/ui_configurationDialog.h:814
+#: src/ui_configurationDialog.h:850
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "转换垂直及水平翻转按钮"
 
-#: src/ui_configurationDialog.h:816
+#: src/ui_configurationDialog.h:852
 msgid "Show flip buttons"
 msgstr "显示翻转按键"
 
-#: src/ui_configurationDialog.h:817
+#: src/ui_configurationDialog.h:853
 msgid "Planetarium options"
 msgstr "天文馆选项"
 
-#: src/ui_configurationDialog.h:819
+#: src/ui_configurationDialog.h:855
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr "球面镜扭曲 (使用 Stellarium 做为低成本星象投影系统的场合)"
 
-#: src/ui_configurationDialog.h:821
+#: src/ui_configurationDialog.h:857
 msgid "Spheric mirror distortion"
 msgstr "球面镜扭曲"
 
-#: src/ui_configurationDialog.h:823
+#: src/ui_configurationDialog.h:859
 msgid "Align labels with the horizon"
 msgstr "星空名称文字保持水平"
 
-#: src/ui_configurationDialog.h:825
+#: src/ui_configurationDialog.h:861
 msgid "Gravity labels"
 msgstr "重力名称文字"
 
-#: src/ui_configurationDialog.h:827
+#: src/ui_configurationDialog.h:863
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr "启动后，「自动缩小」键亦会将还原观测方向。"
 
-#: src/ui_configurationDialog.h:829
+#: src/ui_configurationDialog.h:865
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "自动缩小时回到原本的观看方向"
 
-#: src/ui_configurationDialog.h:831
+#: src/ui_configurationDialog.h:867
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "遮去在中间圆形范围以外的星空"
 
-#: src/ui_configurationDialog.h:833
+#: src/ui_configurationDialog.h:869
 msgid "Disc viewport"
 msgstr "圆形视角"
 
-#: src/ui_configurationDialog.h:835
+#: src/ui_configurationDialog.h:871
 msgid "Hide other constellations when you click one"
 msgstr "选中星系后隐藏其他其他星系"
 
-#: src/ui_configurationDialog.h:837
+#: src/ui_configurationDialog.h:873
 msgid "Select single constellation"
 msgstr "选择单一星座"
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:874
 msgid "Screenshots"
 msgstr "屏幕截图"
 
-#: src/ui_configurationDialog.h:839
+#: src/ui_configurationDialog.h:875
 msgid "Screenshot Directory"
 msgstr "截图储存资料夹"
 
-#: src/ui_configurationDialog.h:841
+#: src/ui_configurationDialog.h:877
 msgid "Invert colors"
 msgstr "对调颜色"
 
-#: src/ui_configurationDialog.h:842
+#: src/ui_configurationDialog.h:878
 msgid "Star catalog updates"
 msgstr "天体目录更新"
 
-#: src/ui_configurationDialog.h:844
+#: src/ui_configurationDialog.h:880
 msgid "Click here to start downloading"
 msgstr "点击这里开始下载"
 
-#: src/ui_configurationDialog.h:846
+#: src/ui_configurationDialog.h:882
 msgid "Download this file to view even more stars"
 msgstr "下载此文件可观看更多天体"
 
-#: src/ui_configurationDialog.h:848
+#: src/ui_configurationDialog.h:884
 msgid "Restart the download"
 msgstr "恢复下载"
 
-#: src/ui_configurationDialog.h:850
+#: src/ui_configurationDialog.h:886
 msgid "Retry"
 msgstr "重试"
 
-#: src/ui_configurationDialog.h:852
+#: src/ui_configurationDialog.h:888
 msgid "Stop the download. You can always restart it later"
 msgstr "停止下载(你可以随时恢复)"
 
-#: src/ui_configurationDialog.h:854
+#: src/ui_configurationDialog.h:890
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
 msgid "Cancel"
 msgstr "取消"
 
-#: src/ui_configurationDialog.h:857
+#: src/ui_configurationDialog.h:893
 msgid "Close window when script runs"
 msgstr "执行指令时关闭窗口"
 
-#: src/ui_configurationDialog.h:859
+#: src/ui_configurationDialog.h:895
 msgid "Run the selected script"
 msgstr "执行选取的指令"
 
-#: src/ui_configurationDialog.h:863
+#: src/ui_configurationDialog.h:899
 msgid "Stop a running script"
 msgstr "停止执行中的指令"
 
-#: src/ui_configurationDialog.h:867
+#: src/ui_configurationDialog.h:903
 msgid "Load at startup"
 msgstr "启动时加载"
 
-#: src/ui_configurationDialog.h:868
+#: src/ui_configurationDialog.h:904
 msgid "configure"
 msgstr "配置"
 
-#: src/ui_configurationDialog.h:873
+#: src/ui_configurationDialog.h:909
 msgid "Main"
 msgstr "主设定画面"
 
-#: src/ui_configurationDialog.h:875
+#: src/ui_configurationDialog.h:911
 msgid "Navigation"
 msgstr "导航"
 
-#: src/ui_configurationDialog.h:877
+#: src/ui_configurationDialog.h:913
 msgid "Tools"
 msgstr "工具"
 
-#: src/ui_configurationDialog.h:879
+#: src/ui_configurationDialog.h:915
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:441
 msgid "Scripts"
 msgstr "脚本"
 
-#: src/ui_configurationDialog.h:881
+#: src/ui_configurationDialog.h:917
 msgid "Plugins"
 msgstr "插件"
 
@@ -3264,61 +3364,162 @@ msgid ""
 "for murky conditions."
 msgstr "建议在条件很好的山顶使用0.12，农村地区使用0.2，条件很差的地方使用0.35"
 
+#: src/ui_CustomInfoDialog.h:194
+msgid "Custom Info Settings"
+msgstr "自定义信息设置"
+
+#: src/ui_CustomInfoDialog.h:196
+msgid "Display info about an object's name"
+msgstr "显示天体名称信息"
+
+#: src/ui_CustomInfoDialog.h:198
+msgid "An object's name"
+msgstr "天体名称"
+
+#: src/ui_CustomInfoDialog.h:200
+msgid "Display  info about a catalog numbers"
+msgstr "显示类别信息"
+
+#: src/ui_CustomInfoDialog.h:202
+msgid "Catalog numbers"
+msgstr "类别编号"
+
+#: src/ui_CustomInfoDialog.h:204
+msgid "Display  info about a visual magnitude"
+msgstr "显示视星等"
+
+#: src/ui_CustomInfoDialog.h:206
+msgid "Visual magnitude"
+msgstr "视星等"
+
+#: src/ui_CustomInfoDialog.h:208
+msgid "Display  info about an absolute magnitude"
+msgstr "显示绝对星等"
+
+#: src/ui_CustomInfoDialog.h:210
+msgid "Absolute magnitude"
+msgstr "绝对星等"
+
+#: src/ui_CustomInfoDialog.h:212
+msgid "Display the equatorial position (J2000 ref)"
+msgstr "显示赤道坐标位置(J2000)"
+
+#: src/ui_CustomInfoDialog.h:214
+msgid "The equatorial coordinates (J2000 ref)"
+msgstr "赤道坐标(J2000)"
+
+#: src/ui_CustomInfoDialog.h:216
+msgid "Display the equatorial position (of date)"
+msgstr "显示赤道坐标位置(以日记)"
+
+#: src/ui_CustomInfoDialog.h:218
+msgid "The equatorial coordinates (of date)"
+msgstr "赤道坐标(以日记)"
+
+#: src/ui_CustomInfoDialog.h:220
+msgid "Display the altitude and azimuth position"
+msgstr "显示地平坐标位置"
+
+#: src/ui_CustomInfoDialog.h:222
+msgid "The alt-azimuthal coordinates"
+msgstr "地平坐标"
+
+#: src/ui_CustomInfoDialog.h:224
+msgid "Display the hour angle + DE (of date)"
+msgstr "显示时角（以日记）"
+
+#: src/ui_CustomInfoDialog.h:226
+msgid "The hour angle"
+msgstr "时角/相位角"
+
+#: src/ui_CustomInfoDialog.h:228
+msgid "Display info about an object's distance"
+msgstr "显示天体距离"
+
+#: src/ui_CustomInfoDialog.h:230
+msgid "Object's distance"
+msgstr "天体距离"
+
+#: src/ui_CustomInfoDialog.h:232
+msgid "Display info about an object's size"
+msgstr "显示天体大小"
+
+#: src/ui_CustomInfoDialog.h:234
+msgid "Object's size"
+msgstr "天体大小"
+
+#: src/ui_CustomInfoDialog.h:236 src/ui_CustomInfoDialog.h:240
+#: src/ui_CustomInfoDialog.h:244
+msgid "Display a derived class-specific extra fields"
+msgstr ""
+
+#: src/ui_CustomInfoDialog.h:238
+msgid "Additional info (Extra 1)"
+msgstr "附加信息（增补1）"
+
+#: src/ui_CustomInfoDialog.h:242
+msgid "Additional info (Extra 2)"
+msgstr "附加信息（增补2）"
+
+#: src/ui_CustomInfoDialog.h:246
+msgid "Additional info (Extra 3)"
+msgstr "附加信息（增补3）"
+
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
-msgstr ""
+msgstr "脚本控制台"
 
 #: src/ui_scriptConsole.h:344
 msgid "load script from file"
-msgstr ""
+msgstr "从文件载入脚本"
 
 #: src/ui_scriptConsole.h:348
 msgid "save script to file"
-msgstr ""
+msgstr "保存脚本至文件"
 
 #: src/ui_scriptConsole.h:352
 msgid "clear script"
-msgstr ""
+msgstr "清除脚本"
 
 #: src/ui_scriptConsole.h:356
 msgid "pre-process script using SSC preprocessor"
-msgstr ""
+msgstr "使用 SSC 处理器预处理脚本"
 
 #: src/ui_scriptConsole.h:359
 msgid "pre-process script using STS preprocessor"
-msgstr ""
+msgstr "使用 STS 处理器预处理脚本"
 
 #: src/ui_scriptConsole.h:362
 msgid "quickly load and run a utility script"
-msgstr ""
+msgstr "快速加载并运行实用脚本"
 
 #: src/ui_scriptConsole.h:365
 msgid "run script"
-msgstr ""
+msgstr "运行脚本"
 
 #: src/ui_scriptConsole.h:369
 msgid "stop script"
-msgstr ""
+msgstr "停止脚本"
 
 #: src/ui_scriptConsole.h:372
 msgid "Script"
-msgstr ""
+msgstr "脚本"
 
 #: src/ui_scriptConsole.h:373
 msgid "Output"
-msgstr ""
+msgstr "输出"
 
 #: src/ui_scriptConsole.h:375
 msgid "Cursor position"
-msgstr ""
+msgstr "光标位置"
 
 #: src/ui_scriptConsole.h:377
 msgid "Include dir:"
-msgstr ""
+msgstr "包含目录："
 
 #: src/ui_scriptConsole.h:378
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 msgid "Angle Measure"
@@ -3487,19 +3688,20 @@ msgid "Telescope #%1: %2"
 msgstr "望远镜 #%1：%2"
 
 #: plugins/Oculars/src/Oculars.cpp:1497
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:737
 #, qt-format
 msgid "Magnification: %1"
 msgstr "放大倍率：%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1505
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
 #, qt-format
 msgid "FOV: %1"
 msgstr "视场：%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1520
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:699
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "尺寸：%1"
@@ -3516,15 +3718,15 @@ msgstr "传感器 #%1"
 msgid "Sensor #%1: %2"
 msgstr "传感器 #%1：%2"
 
-#: plugins/Oculars/src/Oculars.cpp:1736
+#: plugins/Oculars/src/Oculars.cpp:1738
 msgid "&Telescope"
 msgstr "望远镜(&T)"
 
-#: plugins/Oculars/src/Oculars.cpp:1737
+#: plugins/Oculars/src/Oculars.cpp:1739
 msgid "&Previous telescope"
 msgstr "前一个望远镜(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:1738
+#: plugins/Oculars/src/Oculars.cpp:1740
 msgid "&Next telescope"
 msgstr "后一个望远镜(&N)"
 
@@ -3593,19 +3795,19 @@ msgstr "目镜视场"
 msgid "Rotation: %1"
 msgstr "旋转：%1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
 msgid "Magnification provided by these binoculars"
 msgstr "双目镜的放大倍率"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:721
 msgid "Actual field of view provided by these binoculars"
 msgstr "双目镜的实际视场"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
 msgid "Magnification provided by this ocular/telescope combination"
 msgstr "当前目镜/望远镜组合提供的放大倍率"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:730
 msgid "Actual field of view provided by this ocular/telescope combination"
 msgstr "此目镜/望远镜组合提供的视场"
 
@@ -3756,68 +3958,68 @@ msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr "旧版本的 satellites.json 文件已不再适用，将使用默认文件。"
 
-#: plugins/Satellites/src/Satellite.cpp:228
-#: plugins/Satellites/src/Satellite.cpp:232
-msgid "Catalog #"
-msgstr ""
-
+#: plugins/Satellites/src/Satellite.cpp:230
 #: plugins/Satellites/src/Satellite.cpp:234
+msgid "Catalog #"
+msgstr "类别 #"
+
+#: plugins/Satellites/src/Satellite.cpp:236
 msgid "International Designator"
-msgstr ""
+msgstr "国际标准化命名"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:246
+#: plugins/Satellites/src/Satellite.cpp:248
 #, qt-format
 msgid "Range (km): %1"
 msgstr "倾斜范围（千米）：%1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:249
+#: plugins/Satellites/src/Satellite.cpp:251
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "距离变率：%1 千米/秒"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:252
+#: plugins/Satellites/src/Satellite.cpp:254
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "高度：%1 千米"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:255
+#: plugins/Satellites/src/Satellite.cpp:257
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr "投影点纬度：%1%2，经度：%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:269
+#: plugins/Satellites/src/Satellite.cpp:271
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "地心惯性坐标：%1 千米"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:277
+#: plugins/Satellites/src/Satellite.cpp:279
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "地心惯性速度：%1 千米/秒"
 
-#: plugins/Satellites/src/Satellite.cpp:285
+#: plugins/Satellites/src/Satellite.cpp:287
 msgid "The satellite and the observer are in sunlight."
 msgstr "此卫星与观测者均位于阳光下。"
 
-#: plugins/Satellites/src/Satellite.cpp:288
+#: plugins/Satellites/src/Satellite.cpp:290
 msgid "The satellite is visible."
 msgstr "此卫星是可见的。"
 
-#: plugins/Satellites/src/Satellite.cpp:291
+#: plugins/Satellites/src/Satellite.cpp:293
 msgid "The satellite is eclipsed."
 msgstr "此卫星被遮挡。"
 
-#: plugins/Satellites/src/Satellite.cpp:294
+#: plugins/Satellites/src/Satellite.cpp:296
 msgid "The satellite is not visible"
 msgstr "此卫星不可见。"
 
-#: plugins/Satellites/src/Satellite.cpp:320
+#: plugins/Satellites/src/Satellite.cpp:322
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz（%2%3 kHz）"
@@ -3827,6 +4029,7 @@ msgid "Stellarium Satellites Plugin"
 msgstr "Stellarium 卫星插件"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
 msgid "Version"
 msgstr "版本"
 
@@ -3910,6 +4113,8 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
+"1. 请确认您想要添加的卫星包含在卫星设置窗口的“资源”栏填写的 URL 所指向文件其一之中。 2. 前往“卫星”栏，点击 \"+\" "
+"按钮，选择您想要添加到卫星然后点击“添加”按钮。"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
@@ -3938,6 +4143,7 @@ msgid "See %1this document%2 for details."
 msgstr "您可以参阅%1此文档%2来获取详情。"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
 msgid "Links"
 msgstr "链接"
 
@@ -3949,56 +4155,69 @@ msgstr "此插件在 Launchpad 网站上提供支持。在提交帖子时请注�
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:299
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "如果您仍存在问题，可以%1从此处得到回答%2。"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "如果有 Bug 需要报告，请点击%1这里%2。"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:303
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr "如果您需要其他功能，则可以创建一个错误报告，并将严重性设置为“愿望[wishlist]”。"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
 msgid "Internet updates disabled"
 msgstr "Internet 更新已禁用"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:355
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:197
 msgid "Updating now..."
 msgstr "正在更新……"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:325
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:159
 msgid "Next update: < 1 minute"
 msgstr "下次更新：一分钟内"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:161
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "下次更新：%1 分钟后"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:163
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "下次更新：%1 小时后"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:180
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
 msgid "Update now"
 msgstr "立即更新"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:346
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:182
 msgid "Update from files"
 msgstr "从文件更新"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:358
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:200
 msgid "Update error"
 msgstr "更新错误"
 
@@ -4013,11 +4232,11 @@ msgstr "[新源]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
 msgid "[orbit calculation error]"
-msgstr ""
+msgstr "[轨道计算错误]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 msgid "[all newly added]"
-msgstr ""
+msgstr "[均为最新添加]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:463
 msgid "[all not displayed]"
@@ -4037,33 +4256,33 @@ msgstr "选择两行式轨道数据[TLE]更新文件"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:135
 msgid "Downloading data..."
-msgstr ""
+msgstr "正在下载数据..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:136
 msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
-msgstr ""
+msgstr "Stellarium 正从更新源下载卫星数据。请稍候..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
 msgid "Select TLE source file(s)..."
-msgstr ""
+msgstr "选择 TLE 文件..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:166
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:167
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:226
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:227
 msgid "Processing data..."
-msgstr ""
+msgstr "正在处理数据..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:221
 msgid "No data could be downloaded. Try again later."
-msgstr ""
+msgstr "无法下载数据。请稍候再试。"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:344
 #, qt-format
 msgid "Catalog Number: %1"
-msgstr ""
+msgstr "目录编号：%1"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
@@ -4075,10 +4294,12 @@ msgid "Update TLE lists from Internet sources"
 msgstr "从网络更新两行式轨道数据[TLE]列表"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:644
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:256
 msgid "Update from Internet sources"
 msgstr "从网络更新"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
 msgid "Last update:"
 msgstr "最后更新："
 
@@ -4105,7 +4326,7 @@ msgstr "绘制轨道时使用的线段数量"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Number of  segments:"
-msgstr ""
+msgstr "段落编号："
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:659
 #: plugins/Satellites/src/ui_satellitesDialog.h:663
@@ -4114,7 +4335,7 @@ msgstr "线条中的一个线段所表示的持续时长（秒）"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:661
 msgid "Segment length (s):"
-msgstr ""
+msgstr "段落长度:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:666
 #: plugins/Satellites/src/ui_satellitesDialog.h:669
@@ -4126,14 +4347,17 @@ msgid "Fade length:"
 msgstr "淡出长度："
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:672
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 msgid "Restore default settings"
 msgstr "恢复默认设置"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:264
 msgid "Save settings as default"
 msgstr "存为默认设置"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:674
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:265
 msgid "Settings"
 msgstr "设置"
 
@@ -4179,11 +4403,11 @@ msgstr "北美防空联合司令部的两行轨道数据[NORAD TLE]"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:695
 msgid "Remove the selected satellites"
-msgstr ""
+msgstr "移除选中的卫星"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:698
 msgid "Add more satellites"
-msgstr ""
+msgstr "添加更多卫星"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:702
 msgid "Save changes"
@@ -4209,11 +4433,11 @@ msgstr "来源"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:206
 msgid "More Satellites"
-msgstr ""
+msgstr "更多卫星"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:208
 msgid "Get data from update sources"
-msgstr ""
+msgstr "从更新源获取数据"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:209
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
@@ -4222,7 +4446,7 @@ msgstr "取消下载"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:210
 msgid "New satellites"
-msgstr ""
+msgstr "新卫星"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:212
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
@@ -4952,6 +5176,10 @@ msgstr "星云名称"
 msgid "Nebula hints"
 msgstr "星云标记"
 
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:359
+msgid "Galactic plane line"
+msgstr "星系平面线"
+
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:388
 msgid "Effects"
 msgstr "效果"
@@ -4974,7 +5202,7 @@ msgstr "星云标记数量："
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:416
 msgid "Zoom duration:"
-msgstr ""
+msgstr "缩放持续时间："
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:422
 msgid "Cursor timeout:"
@@ -5017,15 +5245,15 @@ msgstr "退出程序"
 msgid "[no TUI node]"
 msgstr "[无 TUI 节点]"
 
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:76
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
 msgstr "开启"
 
-#: plugins/TextUserInterface/src/TuiNodeBool.cpp:77
+#: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
 msgid "Off"
 msgstr "关闭"
 
-#: plugins/TextUserInterface/src/TuiNodeColor.cpp:114
+#: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
 msgid "error, unknown color part \"%1\""
 msgstr "错误，未知的颜色部分“%1%%”"
@@ -5097,7 +5325,7 @@ msgstr "太阳系编辑器插件"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Import data"
-msgstr ""
+msgstr "导入数据"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Select the type"
@@ -5270,12 +5498,12 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernova.cpp:99
 msgid "supernova"
-msgstr ""
+msgstr "超新星"
 
 #: plugins/Supernovae/src/Supernova.cpp:115
 #, qt-format
 msgid "Type of supernova: %1"
-msgstr ""
+msgstr "超新星类型：%1"
 
 #: plugins/Quasars/src/Quasars.cpp:59
 msgid "Quasars"
@@ -5287,117 +5515,250 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
+"一个用于显示视星等亮于16等的类星体的插件。类星体目录参照 'Quasars and Active Galactic Nuclei' (13th "
+"Ed.) (Veron+ 2010) =2010A&A...518A..10V 编制"
 
 #: plugins/Quasars/src/Quasar.cpp:92
 msgid "quasar"
-msgstr ""
+msgstr "类星体"
 
 #: plugins/Quasars/src/Quasar.cpp:134
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr "Z（红移）：%1"
 
-#: plugins/Pulsars/src/Pulsars.cpp:59
+#: plugins/Pulsars/src/Pulsars.cpp:71
 msgid "Pulsars"
-msgstr ""
+msgstr "脉冲星"
 
-#: plugins/Pulsars/src/Pulsars.cpp:62
+#: plugins/Pulsars/src/Pulsars.cpp:74
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:113
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
-"about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
-"1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
+"about each one."
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:102
+#: plugins/Pulsars/src/Pulsars.cpp:148
+msgid "Pulsars configuration window"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:129
 msgid "pulsar"
-msgstr ""
+msgstr "脉冲星"
 
-#: plugins/Pulsars/src/Pulsar.cpp:109
+#. TRANSLATORS: Unit of measure for period - seconds
+#: plugins/Pulsars/src/Pulsar.cpp:140
 #, qt-format
 msgid "Barycentric period: %1 s"
-msgstr ""
+msgstr "自转周期: %1 s"
 
-#: plugins/Pulsars/src/Pulsar.cpp:112
+#: plugins/Pulsars/src/Pulsar.cpp:144
 #, qt-format
-msgid "Distance: %1 kpc (%2 ly)"
+msgid "Time derivative of barycentric period: %1"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:116
+#: plugins/Pulsars/src/Pulsar.cpp:149
+msgid "Dispersion measure:"
+msgstr ""
+
+#. TRANSLATORS: Unit of measure for distance - centimeters
+#: plugins/Pulsars/src/Pulsar.cpp:152
+msgid "cm"
+msgstr ""
+
+#. TRANSLATORS: Unit of measure for distance - parsecs
+#: plugins/Pulsars/src/Pulsar.cpp:155
+msgid "pc"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:161
 #, qt-format
-msgid "Type of pulsar: %1"
+msgid "Spin down energy loss rate: %1 ergs/s"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:120
+#: plugins/Pulsars/src/Pulsar.cpp:165
 #, qt-format
-msgid "Equivalent width of the integrated pulse profile: %1 ms"
+msgid "Binary period of pulsar: %1 days"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:124
+#: plugins/Pulsars/src/Pulsar.cpp:169
+#, qt-format
+msgid "Eccentricity: %1"
+msgstr ""
+
+#. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
+#: plugins/Pulsars/src/Pulsar.cpp:174
+#, qt-format
+msgid "Annual parallax: %1 mas"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:178
+#, qt-format
+msgid "Distance based on electron density model: %1 kpc (%2 ly)"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:182
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:130 plugins/Pulsars/src/Pulsar.cpp:142
-#: plugins/Pulsars/src/Pulsar.cpp:154
+#: plugins/Pulsars/src/Pulsar.cpp:188 plugins/Pulsars/src/Pulsar.cpp:200
+#: plugins/Pulsars/src/Pulsar.cpp:212
 msgid "Time averaged flux density at"
-msgstr ""
+msgstr "时均通量密度为"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Pulsars/src/Pulsar.cpp:133 plugins/Pulsars/src/Pulsar.cpp:145
-#: plugins/Pulsars/src/Pulsar.cpp:157
+#: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Pulsars/src/Pulsar.cpp:203
+#: plugins/Pulsars/src/Pulsar.cpp:215
 msgid "MHz"
-msgstr ""
+msgstr "兆赫兹"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:136 plugins/Pulsars/src/Pulsar.cpp:148
-#: plugins/Pulsars/src/Pulsar.cpp:160
+#: plugins/Pulsars/src/Pulsar.cpp:194 plugins/Pulsars/src/Pulsar.cpp:206
+#: plugins/Pulsars/src/Pulsar.cpp:218
 msgid "mJy"
+msgstr "毫央"
+
+#: plugins/Pulsars/src/Pulsar.cpp:222
+#, qt-format
+msgid "Notes: %1"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:232
-msgid "globular cluster association"
+#: plugins/Pulsars/src/Pulsar.cpp:291
+msgid ""
+"anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:238
-msgid "SNR association"
+#: plugins/Pulsars/src/Pulsar.cpp:296
+msgid "has one or more binary companions"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:244
-msgid "glitches in period"
+#: plugins/Pulsars/src/Pulsar.cpp:301
+msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:250
-msgid "binary or multiple pulsar"
+#: plugins/Pulsars/src/Pulsar.cpp:306
+msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:256
-msgid "millisecond pulsar"
+#: plugins/Pulsars/src/Pulsar.cpp:311
+msgid "with pulsed emission in the radio band"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:262
-msgid "recycled pulsar"
+#: plugins/Pulsars/src/Pulsar.cpp:316
+msgid "with intermittently pulsed radio emission"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:268
-msgid "radio interpulse"
+#: plugins/Pulsars/src/Pulsar.cpp:321
+msgid ""
+"isolated neutron star with pulsed thermal X-ray emission but no detectable "
+"radio emission"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:274
-msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
+msgid "Pulsars Plug-in"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:280
-msgid "extragalactic (in MC) pulsar"
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
+#, qt-format
+msgid ""
+"Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N., "
+"Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
+"(%1astro-ph/0412641%2))."
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
+msgid "Note"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
+msgid "pulsar identifiers have the prefix 'PSR'"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
+msgid "Acknowledgment"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
+msgid ""
+"We thank the following people for their contribution and of the valuable "
+"comments:"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
+msgid "Vladimir Samodourov"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
+msgid "Pushchino Radio Astronomy Observatory"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
+msgid "in Russia"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
+msgid "Maciej Serylak"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
+msgid "Nancay Radioastronomical Observatory"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
+msgid "in France"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
+msgid ""
+"Support is provided via the Launchpad website.  Be sure to put \"Pulsars "
+"plugin\" in the subject when posting."
+msgstr ""
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
+#, qt-format
+msgid ""
+"If you want read full information about plugin, his history and format of "
+"catalog you can %1get info here%2."
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:165
+#, qt-format
+msgid "Next update: %1 days"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:207
+msgid "Pulsars is updated"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:252
+msgid "Pulsars Configuration"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:253
+msgid "Pulsars Plug-in Configuration"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:255
+msgid "Update catalog from Internet"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
+msgid "Update frequency (days):"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
+msgid "[next update info]"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:261
+msgid "Display mode for pulsars"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:262
+msgid "Enable display of distribution for pulsars"
 msgstr ""
 
 #~ msgid "Equatorial Grid"
@@ -5627,3 +5988,25 @@ msgstr ""
 
 #~ msgid "Stars "
 #~ msgstr "天体 "
+
+#~ msgid ""
+#~ "This plugin plots the position of various pulsars, with object information "
+#~ "about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
+#~ "1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
+#~ msgstr ""
+#~ "此插件标绘出多个脉冲星的位置，并提供目标信息。脉冲星数据来自 'Catalog of Pulsars' (Taylor+ "
+#~ "1995).<br><br>注意：脉冲星标识带有前缀 \"PSR\""
+
+#, qt-format
+#~ msgid "Distance: %1 kpc (%2 ly)"
+#~ msgstr "距离：%1 千秒差距（%2 光年）"
+
+#, qt-format
+#~ msgid "Type of pulsar: %1"
+#~ msgstr "脉冲星类型：%1"
+
+#~ msgid "millisecond pulsar"
+#~ msgstr "毫秒脉冲星"
+
+#~ msgid "recycled pulsar"
+#~ msgstr "循环脉冲星"
