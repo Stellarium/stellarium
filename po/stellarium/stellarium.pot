@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-10 18:44+0700\n"
+"POT-Creation-Date: 2012-06-10 18:52+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -362,6 +362,7 @@ msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:574
+#: plugins/Oculars/src/gui/OcularDialog.cpp:420
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr ""
@@ -3796,6 +3797,74 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:730
 msgid "Actual field of view provided by this ocular/telescope combination"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:417
+msgid "Oculars plug-in"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:424
+msgid "Overview"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:426
+msgid ""
+"This plugin is intended to simulate what you would see through an eyepiece.  "
+"This configuration dialog can be used to add, modify, or delete eyepieces "
+"and telescopes, as well as CCD Sensors.  Your first time running the app "
+"will populate some samples to get your started."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:427
+msgid ""
+"You can choose to scale the image you see on the screen.  This is intended "
+"to show you a better comparison of what one eyepiece/telescope combination "
+"will be like as compared to another.  The same eyepiece in two different "
+"telescopes of differing focal length will produce two different exit "
+"circles, changing the view someone.  The trade-off of this is that, with the "
+"image scaled, a good deal of the screen can be wasted.  Therefor I recommend "
+"that you leave it off, unless you feel you have a need of it."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:428
+msgid ""
+"You can toggle a crosshair in the view.  Ideally, I wanted this to be "
+"aligned to North.  I've been unable to do so.  So currently it aligns to the "
+"top of the screen."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:429
+#, qt-format
+msgid ""
+"You can toggle a Telrad finder; this can only be done when you have not "
+"turned on the Ocular view.  This feature draws three concentric circles of "
+"0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
+"the naked eye through the Telrad (or similar) finder."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:430
+msgid "If you find any issues, please let me know.  Enjoy!"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:433
+msgid "Hot Keys"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:434
+msgid "The plug-in's key bindings can be edited in the General Tab."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:446
+#: plugins/Oculars/src/gui/OcularDialog.cpp:451
+msgid "[no key defined]"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:455
+msgid "Switches on/off the ocular overlay."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:459
+msgid "Opens the pop-up navigation menu."
 msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:865
