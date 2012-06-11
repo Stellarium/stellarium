@@ -48,7 +48,16 @@ QImage MobileImageProvider::generateImage(QString path, const QSize &requestedSi
 {
 	if(path.endsWith(QString(RASTER_POSTFIX), Qt::CaseInsensitive))
 	{
-		return QImage(path);
+		if(requestedSize.width() != 0 && requestedSize.height() != 0)
+		{
+			QImage out(requestedSize,QImage::Format_ARGB32);
+			out.load(path);
+			return out;
+		}
+		else
+		{
+			return QImage(path);
+		}
 	}
 
 	Q_ASSERT_X(path.endsWith(QString(VECTOR_POSTFIX), Qt::CaseInsensitive), "MobileImageProvider::generateImage", QString("has an invalid path! " % path).toAscii());

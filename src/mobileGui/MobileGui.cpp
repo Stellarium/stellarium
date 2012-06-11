@@ -263,6 +263,8 @@ void MobileGui::connectSignals()
 	QObject::connect(getGuiActions("actionSet_Real_Time_Speed"), SIGNAL(triggered()), core, SLOT(toggleRealTimeSpeed()));
 	QObject::connect(getGuiActions("actionReturn_To_Current_Time"), SIGNAL(triggered()), core, SLOT(setTimeNow()));
 	getGuiActions("actionReturn_To_Current_Time")->trigger(); //HACK: why is the app starting a few seconds behind real time?
+
+	connect(getGuiActions("actionShow_Night_Mode"), SIGNAL(toggled(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
 }
 
 void MobileGui::initActions()
@@ -274,4 +276,6 @@ void MobileGui::initActions()
 	addGuiActions("actionIncrease_Time_Speed", N_("Increase time speed"), "L", group, true, false)->setChecked(core->getTimeRate()>1.01*StelCore::JD_SECOND);
 	addGuiActions("actionSet_Real_Time_Speed", N_("Set normal time rate"), "K", group, true, false)->setChecked(core->getRealTimeSpeed());
 	addGuiActions("actionReturn_To_Current_Time", N_("Set time to now"), "8", group, true, false)->setChecked(core->getIsTimeNow());
+	addGuiActions("actionShow_Night_Mode", N_("Night mode"), "", group, true, false)->setChecked(StelApp::getInstance().getVisionModeNight());
+
 }

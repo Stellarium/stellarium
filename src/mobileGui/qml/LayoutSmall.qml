@@ -246,19 +246,6 @@ Item {
 							font.pointSize: 8
 
 							onCursorRectangleChanged: flickBox.ensureVisible(cursorRectangle)
-
-							states: [
-								State {
-									name: "TYPING"
-									when: searchField.cursorVisible
-									StateChangeScript {script: freezeShowButtonBar(); }
-									},
-								State {
-									name: "INACTIVE"
-									when: !searchField.cursorVisible
-									StateChangeScript {script: showButtonBar(); }
-								 }
-							]
 						}
 					}
 				}
@@ -271,15 +258,24 @@ Item {
 	{
 		id: barMenu
 		lineHeight: dp(48)
-		menuWidth: dp(200)
-		menuHeight: dp(48) * 2
+		position: barMenu.positionTopRight
 		opacity: 0 //hook this up to state change for pretty anims?
 		model:
 			ListModel {
+				ListElement { action: "actionShow_Night_Mode"
+							  text: "Night mode"}
 				ListElement { action: ""
-							  text: "Test1"}
+							  text: "Sky"}
 				ListElement { action: ""
-							  text: "Test2"}
+							  text: "View"}
+				ListElement { action: ""
+							  text: "Plugins"}
+				ListElement { action: ""
+							  text: "Date / Time"}
+				ListElement { action: ""
+							  text: "Location"}
+				ListElement { action: ""
+							  text: "Settings"}
 			}
 	}
 
