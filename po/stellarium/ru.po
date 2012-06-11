@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-02 20:19+0700\n"
-"PO-Revision-Date: 2012-06-02 18:02+0000\n"
+"POT-Creation-Date: 2012-06-10 19:09+0700\n"
+"PO-Revision-Date: 2012-06-10 13:08+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-03 04:41+0000\n"
-"X-Generator: Launchpad (build 15342)\n"
+"X-Launchpad-Export-Date: 2012-06-11 04:41+0000\n"
+"X-Generator: Launchpad (build 15376)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -383,9 +383,10 @@ msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Начальное направление обзора аз/выс: %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:574
+#: plugins/Oculars/src/gui/OcularDialog.cpp:419
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
-msgstr "Разработчики"
+msgstr "Авторы"
 
 #: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
 msgid "Contact"
@@ -3868,6 +3869,103 @@ msgstr "Увеличение,  даваемое этой комбинацией 
 msgid "Actual field of view provided by this ocular/telescope combination"
 msgstr "Актуальное поле зрения, даваемое этой комбинацией телескопа/окуляра"
 
+#: plugins/Oculars/src/gui/OcularDialog.cpp:417
+msgid "Oculars Plug-in"
+msgstr "Плагин Окуляры"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:418
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
+msgid "Version"
+msgstr "Версия"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:423
+msgid "Overview"
+msgstr "Обзор"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:425
+msgid ""
+"This plugin is intended to simulate what you would see through an eyepiece.  "
+"This configuration dialog can be used to add, modify, or delete eyepieces "
+"and telescopes, as well as CCD Sensors.  Your first time running the app "
+"will populate some samples to get your started."
+msgstr ""
+"Этот плагин предназначен для имитации того, что вы увидите через окуляр. Это "
+"диалоговое окно настройки можно использовать для добавления, изменения или "
+"удаления окуляров и телескопов, а также цифровых приемников - фотоаппаратов "
+"и ПЗС-матриц. При первом запуске будут добавлены несколько распространенных "
+"окуляров, телскопов и цифровых приемников для работы плагина."
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:426
+msgid ""
+"You can choose to scale the image you see on the screen.  This is intended "
+"to show you a better comparison of what one eyepiece/telescope combination "
+"will be like as compared to another.  The same eyepiece in two different "
+"telescopes of differing focal length will produce two different exit "
+"circles, changing the view someone.  The trade-off of this is that, with the "
+"image scaled, a good deal of the screen can be wasted.  Therefor I recommend "
+"that you leave it off, unless you feel you have a need of it."
+msgstr ""
+"Вы можете масштабировать изображение, которое вы видите на экране. Это "
+"сделано для того, чтобы показать вам лучший способ для сравнения сочетания "
+"одного окуляра/телескопа по сравнению с другим сочетанием. Одинаковый окуляр "
+"с двумя различными телескопами с различным фокусным расстоянием будет давать "
+"два разных поля зрения. Компромисс в том, что при масштабировании "
+"изображения много места на экране может быть потрачено впустую. Для этого я "
+"рекомендую вам оставить его, если вы чувствуете, что у вас есть в этом "
+"потребность."
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:427
+msgid ""
+"You can toggle a crosshair in the view.  Ideally, I wanted this to be "
+"aligned to North.  I've been unable to do so.  So currently it aligns to the "
+"top of the screen."
+msgstr ""
+"Вы можете включать и выключать перекрестие в поле зрения окуляра. В идеале я "
+"хотел бы сделать выравнивание по северу. У меня не получилось это сделать и "
+"в настоящее время выравнивание рабоатет по верхней части экрана."
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:428
+#, qt-format
+msgid ""
+"You can toggle a Telrad finder; this can only be done when you have not "
+"turned on the Ocular view.  This feature draws three concentric circles of "
+"0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
+"the naked eye through the Telrad (or similar) finder."
+msgstr ""
+"Вы можете переключаться на искатель Telrad, но он будет работать только в "
+"случае, если выключен окулярный вид. В этом режиме рисуются три "
+"концентрических круга на 0.5%1, 2.0%1 и 4.0%1, помогая вам увидеть то, что "
+"вы ожидали бы увидеть невооруженным глазом через искатель Telrad (или "
+"аналогичный)."
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:429
+msgid "If you find any issues, please let me know.  Enjoy!"
+msgstr ""
+"Если вы обнаружите какие-либо ошибки, пожалуйста, дайте мне знать. "
+"Наслаждайтесь!"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:432
+msgid "Hot Keys"
+msgstr "Горячие клавиши"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:433
+msgid "The plug-in's key bindings can be edited in the General Tab."
+msgstr "Горячие клавиши можно изменить в закладке Общие."
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:445
+#: plugins/Oculars/src/gui/OcularDialog.cpp:450
+msgid "[no key defined]"
+msgstr "[клавиша не определена]"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:454
+msgid "Switches on/off the ocular overlay."
+msgstr "Включает/выключает вид в окуляр."
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:458
+msgid "Opens the pop-up navigation menu."
+msgstr "Открывает всплывающее навигационное меню."
+
 #: plugins/Oculars/src/ui_ocularDialog.h:865
 msgid "Enable only if an object is selected"
 msgstr "Включить, только если объект выбран"
@@ -4089,11 +4187,6 @@ msgstr "%1 МГц (%2%3 кГц)"
 msgid "Stellarium Satellites Plugin"
 msgstr "Плагин Спутники"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
-msgid "Version"
-msgstr "Версия"
-
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:263
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
@@ -4266,48 +4359,48 @@ msgstr ""
 "об ошибке и установить степень важности на «wishlist»."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 msgid "Internet updates disabled"
 msgstr "Обновление через интернет выключено"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:355
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:197
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:202
 msgid "Updating now..."
 msgstr "Обновляется..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:325
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:159
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
 msgid "Next update: < 1 minute"
 msgstr "Следующее обновление через: менее минуты"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:161
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "Следующее обновление через: %1 м."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:163
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "Следующее обновление через: %1 ч."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:180
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:260
 msgid "Update now"
 msgstr "Обновить сейчас"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:346
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:182
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
 msgid "Update from files"
 msgstr "Обновить из файлов"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:358
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:200
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:205
 msgid "Update error"
 msgstr "Ошибка обновления"
 
@@ -5883,12 +5976,12 @@ msgstr ""
 "Получить полную информацию о плагине, его историю и формат каталога можно "
 "%1здесь%2."
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:165
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
 #, qt-format
 msgid "Next update: %1 days"
 msgstr "Следующее обновление через: %1 д."
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:207
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:212
 msgid "Pulsars is updated"
 msgstr "Пульсары обновляются"
 
