@@ -472,7 +472,7 @@ void Supernovae::restoreDefaultConfigIni(void)
 	conf->remove("");
 
 	conf->setValue("updates_enabled", true);
-	conf->setValue("url", "http://stellarium.astro.uni-altai.ru/supernovae.json");
+	conf->setValue("url", "http://stellarium.org/json/supernovae.json");
 	conf->setValue("update_frequency_days", 100);
 	conf->endGroup();
 }
@@ -482,7 +482,7 @@ void Supernovae::readSettingsFromConfig(void)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Supernovae");
 
-	updateUrl = conf->value("url", "http://stellarium.astro.uni-altai.ru/supernovae.json").toString();
+	updateUrl = conf->value("url", "http://stellarium.org/json/supernovae.json").toString();
 	updateFrequencyDays = conf->value("update_frequency_days", 100).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-06-11T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
