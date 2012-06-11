@@ -476,7 +476,7 @@ void Pulsars::restoreDefaultConfigIni(void)
 
 	conf->setValue("distribution_enabled", false);
 	conf->setValue("updates_enabled", true);
-	conf->setValue("url", "http://stellarium.astro.uni-altai.ru/pulsars.json");
+	conf->setValue("url", "http://stellarium.org/json/pulsars.json");
 	conf->setValue("update_frequency_days", 100);
 	conf->endGroup();
 }
@@ -486,7 +486,7 @@ void Pulsars::readSettingsFromConfig(void)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Pulsars");
 
-	updateUrl = conf->value("url", "http://stellarium.astro.uni-altai.ru/pulsars.json").toString();
+	updateUrl = conf->value("url", "http://stellarium.org/json/pulsars.json").toString();
 	updateFrequencyDays = conf->value("update_frequency_days", 100).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
