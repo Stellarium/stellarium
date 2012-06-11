@@ -107,6 +107,7 @@ Item {
 
 				Row
 				{
+					id: rowContent
 					height: lineHeight
 					width: childrenRect.width
 					anchors.horizontalCenter: parent.horizontalCenter
@@ -126,7 +127,7 @@ Item {
 					}
 				}
 				onClicked: model.onClicked
-				width: widestWidth(childrenRect.width)
+				width: widestWidth(rowContent.width)
 			}
 		}
 

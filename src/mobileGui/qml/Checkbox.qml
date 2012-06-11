@@ -2,7 +2,7 @@ import QtQuick 1.0
 
 /* A themed checkbox. It can be checked or unchecked. */
 
-Rectangle {
+Item {
 	width: dp(32)
 	height: dp(32)
 	property bool checked: false

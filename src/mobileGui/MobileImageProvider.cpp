@@ -50,8 +50,9 @@ QImage MobileImageProvider::generateImage(QString path, const QSize &requestedSi
 	{
 		if(requestedSize.width() != 0 && requestedSize.height() != 0)
 		{
-			QImage out(requestedSize,QImage::Format_ARGB32);
-			out.load(path);
+			QImage out(requestedSize,QImage::Format_ARGB32_Premultiplied);
+			out.fill(0);
+			out.load(path,"PNG");
 			return out;
 		}
 		else
@@ -73,7 +74,7 @@ QImage MobileImageProvider::generateImage(QString path, const QSize &requestedSi
 	{
 		size = requestedSize;
 	}
-	QImage image(size, QImage::Format_ARGB32);
+	QImage image(size, QImage::Format_ARGB32_Premultiplied);
 	image.fill(0);
 	svgRenderer.render(new QPainter(&image));
 	return image;
