@@ -1,5 +1,5 @@
 /*
- * Stellarium Pulsars Plug-in GUI
+ * Stellarium Historical Supernovae Plug-in GUI
  *
  * Copyright (C) 2012 Alexander Wolf
  *
@@ -25,9 +25,9 @@
 #include <QFileDialog>
 
 #include "StelApp.hpp"
-#include "ui_pulsarsDialog.h"
-#include "PulsarsDialog.hpp"
-#include "Pulsars.hpp"
+#include "ui_supernovaeDialog.h"
+#include "SupernovaeDialog.hpp"
+#include "Supernovae.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelMovementMgr.hpp"
@@ -37,12 +37,12 @@
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
-PulsarsDialog::PulsarsDialog() : updateTimer(NULL)
+SupernovaeDialog::SupernovaeDialog() : updateTimer(NULL)
 {
-	ui = new Ui_pulsarsDialog;
+	ui = new Ui_supernovaeDialog;
 }
 
-PulsarsDialog::~PulsarsDialog()
+SupernovaeDialog::~SupernovaeDialog()
 {
 	if (updateTimer)
 	{
@@ -53,7 +53,7 @@ PulsarsDialog::~PulsarsDialog()
 	delete ui;
 }
 
-void PulsarsDialog::retranslate()
+void SupernovaeDialog::retranslate()
 {
 	if (dialog)
 	{
@@ -64,7 +64,7 @@ void PulsarsDialog::retranslate()
 }
 
 // Initialize the dialog widgets and connect the signals/slots
-void PulsarsDialog::createDialogContent()
+void SupernovaeDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);	
@@ -72,12 +72,10 @@ void PulsarsDialog::createDialogContent()
 		this, SLOT(retranslate()));
 
 	// Settings tab / updates group
-	ui->displayModeCheckBox->setChecked(GETSTELMODULE(Pulsars)->getDisplayMode());
-	connect(ui->displayModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDistributionEnabled(int)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
-	connect(GETSTELMODULE(Pulsars), SIGNAL(updateStateChanged(Pulsars::UpdateState)), this, SLOT(updateStateReceiver(Pulsars::UpdateState)));
-	connect(GETSTELMODULE(Pulsars), SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
+	connect(GETSTELMODULE(Supernovae), SIGNAL(updateStateChanged(Supernovae::UpdateState)), this, SLOT(updateStateReceiver(Supernovae::UpdateState)));
+	connect(GETSTELMODULE(Supernovae), SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
 	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
 	refreshUpdateValues(); // fetch values for last updated and so on
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
@@ -102,35 +100,28 @@ void PulsarsDialog::createDialogContent()
 
 }
 
-void PulsarsDialog::setAboutHtml(void)
+void SupernovaeDialog::setAboutHtml(void)
 {
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("Pulsars Plug-in") + "</h2><table width=\"90%\">";
-	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + PULSARS_PLUGIN_VERSION + "</td></tr>";
+	html += "<h2>" + q_("Historical Supernovae Plug-in") + "</h2><table width=\"90%\">";
+	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + SUPERNOVAE_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
 	html += "</table>";
 
-	html += "<p>" + q_("This plugin plots the position of various pulsars, with object information about each one.") + "</p>";
-	html += "<p>" + QString(q_("Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) (%1astro-ph/0412641%2))."))
-			.arg("<a href=\"http://arxiv.org/abs/astro-ph/0412641\">")
-			.arg("</a>") + "</p>";
-	html += "<p>" + QString("<strong>%1:</strong> %2")
-			.arg(q_("Note"))
-			.arg(q_("pulsar identifiers have the prefix 'PSR'")) + "</p>";
+	html += "<p>" + q_("A plugin that shows some historical supernovae brighter than 10 visual magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 September).") + "</p>";
+
+	html += "<h3>" + q_("Light curves") + "</h3>";
+	html += "<p>" + QString(q_("In this plugin implemented simple model of light curves for different supernovae. Typical view of light curves for supernova type I and type II you can see %1here%2 (right scale in days) and this model used for plugin.")).arg("<a href=\"http://stellarium.org/wiki/index.php/Historical_Supernovae_plugin#Light_curves\">").arg("</a>") + "</p>";
+
 	html += "<h3>" + q_("Acknowledgment") + "</h3>";
 	html += "<p>" + q_("We thank the following people for their contribution and of the valuable comments:") + "</p><ul>";
 	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)")
-			.arg(q_("Vladimir Samodourov"))
-			.arg("http://www.prao.ru/")
-			.arg(q_("Pushchino Radio Astronomy Observatory"))
+			.arg(q_("Sergei Blinnikov"))
+			.arg("http://www.itep.ru/")
+			.arg(q_("Institute for Theoretical and Experimental Physics"))
 			.arg(q_("in Russia")) + "</li>";
-	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)")
-			.arg(q_("Maciej Serylak"))
-			.arg("http://www.obs-nancay.fr/")
-			.arg(q_("Nancay Radioastronomical Observatory"))
-			.arg(q_("in France")) + "</li>";
 	html += "</ul><h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Pulsars plugin") + "</p>";
+	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Historical Supernovae plugin") + "</p>";
 	html += "<p><ul>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">")).arg("</a>") + "</li>";
@@ -139,7 +130,7 @@ void PulsarsDialog::setAboutHtml(void)
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + q_("If you want read full information about plugin, his history and format of catalog you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Pulsars_plugin\">").arg("</a>") + "</li>";
+	html += "<li>" + q_("If you want read full information about plugin, his history and format of catalog you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Historical_Supernovae_plugin\">").arg("</a>") + "</li>";
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -150,15 +141,15 @@ void PulsarsDialog::setAboutHtml(void)
 	ui->aboutTextBrowser->setHtml(html);
 }
 
-void PulsarsDialog::refreshUpdateValues(void)
+void SupernovaeDialog::refreshUpdateValues(void)
 {
-	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Pulsars)->getLastUpdate());
-	ui->updateFrequencySpinBox->setValue(GETSTELMODULE(Pulsars)->getUpdateFrequencyDays());
-	int secondsToUpdate = GETSTELMODULE(Pulsars)->getSecondsToUpdate();
-	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Pulsars)->getUpdatesEnabled());
-	if (!GETSTELMODULE(Pulsars)->getUpdatesEnabled())
+	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Supernovae)->getLastUpdate());
+	ui->updateFrequencySpinBox->setValue(GETSTELMODULE(Supernovae)->getUpdateFrequencyDays());
+	int secondsToUpdate = GETSTELMODULE(Supernovae)->getSecondsToUpdate();
+	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Supernovae)->getUpdatesEnabled());
+	if (!GETSTELMODULE(Supernovae)->getUpdatesEnabled())
 		ui->nextUpdateLabel->setText(q_("Internet updates disabled"));
-	else if (GETSTELMODULE(Pulsars)->getUpdateState() == Pulsars::Updating)
+	else if (GETSTELMODULE(Supernovae)->getUpdateState() == Supernovae::Updating)
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
 	else if (secondsToUpdate <= 60)
 		ui->nextUpdateLabel->setText(q_("Next update: < 1 minute"));
@@ -170,16 +161,16 @@ void PulsarsDialog::refreshUpdateValues(void)
 		ui->nextUpdateLabel->setText(QString(q_("Next update: %1 days")).arg((secondsToUpdate/86400)+1));
 }
 
-void PulsarsDialog::setUpdateValues(int days)
+void SupernovaeDialog::setUpdateValues(int days)
 {
-	GETSTELMODULE(Pulsars)->setUpdateFrequencyDays(days);
+	GETSTELMODULE(Supernovae)->setUpdateFrequencyDays(days);
 	refreshUpdateValues();
 }
 
-void PulsarsDialog::setUpdatesEnabled(int checkState)
+void SupernovaeDialog::setUpdatesEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Pulsars)->setUpdatesEnabled(b);
+	GETSTELMODULE(Supernovae)->setUpdatesEnabled(b);
 	ui->updateFrequencySpinBox->setEnabled(b);
 	if(b)
 		ui->updateButton->setText(q_("Update now"));
@@ -189,57 +180,51 @@ void PulsarsDialog::setUpdatesEnabled(int checkState)
 	refreshUpdateValues();
 }
 
-void PulsarsDialog::setDistributionEnabled(int checkState)
+void SupernovaeDialog::updateStateReceiver(Supernovae::UpdateState state)
 {
-	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Pulsars)->setDisplayMode(b);
-}
-
-void PulsarsDialog::updateStateReceiver(Pulsars::UpdateState state)
-{
-	//qDebug() << "PulsarsDialog::updateStateReceiver got a signal";
-	if (state==Pulsars::Updating)
+	//qDebug() << "SupernovaeDialog::updateStateReceiver got a signal";
+	if (state==Supernovae::Updating)
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
-	else if (state==Pulsars::DownloadError || state==Pulsars::OtherError)
+	else if (state==Supernovae::DownloadError || state==Supernovae::OtherError)
 	{
 		ui->nextUpdateLabel->setText(q_("Update error"));
 		updateTimer->start();  // make sure message is displayed for a while...
 	}
 }
 
-void PulsarsDialog::updateCompleteReceiver(void)
+void SupernovaeDialog::updateCompleteReceiver(void)
 {
-	ui->nextUpdateLabel->setText(QString(q_("Pulsars is updated")));
+	ui->nextUpdateLabel->setText(QString(q_("Historical supernovae is updated")));
 	// display the status for another full interval before refreshing status
 	updateTimer->start();
-	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Pulsars)->getLastUpdate());
+	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Supernovae)->getLastUpdate());
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 }
 
-void PulsarsDialog::restoreDefaults(void)
+void SupernovaeDialog::restoreDefaults(void)
 {
-	qDebug() << "Pulsars::restoreDefaults";
-	GETSTELMODULE(Pulsars)->restoreDefaults();
-	GETSTELMODULE(Pulsars)->readSettingsFromConfig();
+	qDebug() << "Supernovae::restoreDefaults";
+	GETSTELMODULE(Supernovae)->restoreDefaults();
+	GETSTELMODULE(Supernovae)->readSettingsFromConfig();
 	updateGuiFromSettings();
 }
 
-void PulsarsDialog::updateGuiFromSettings(void)
+void SupernovaeDialog::updateGuiFromSettings(void)
 {
-	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Pulsars)->getUpdatesEnabled());
+	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Supernovae)->getUpdatesEnabled());
 	refreshUpdateValues();
 }
 
-void PulsarsDialog::saveSettings(void)
+void SupernovaeDialog::saveSettings(void)
 {
-	GETSTELMODULE(Pulsars)->saveSettingsToConfig();
+	GETSTELMODULE(Supernovae)->saveSettingsToConfig();
 }
 
-void PulsarsDialog::updateJSON(void)
+void SupernovaeDialog::updateJSON(void)
 {
-	if(GETSTELMODULE(Pulsars)->getUpdatesEnabled())
+	if(GETSTELMODULE(Supernovae)->getUpdatesEnabled())
 	{
-		GETSTELMODULE(Pulsars)->updateJSON();
+		GETSTELMODULE(Supernovae)->updateJSON();
 	}
 }
