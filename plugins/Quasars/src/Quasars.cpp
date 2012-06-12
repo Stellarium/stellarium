@@ -474,7 +474,6 @@ void Quasars::restoreDefaultConfigIni(void)
 	// delete all existing Quasars settings...
 	conf->remove("");
 
-	conf->setValue("distribution_enabled", false);
 	conf->setValue("updates_enabled", true);
 	conf->setValue("url", "http://stellarium.org/json/quasars.json");
 	conf->setValue("update_frequency_days", 100);
@@ -490,7 +489,6 @@ void Quasars::readSettingsFromConfig(void)
 	updateFrequencyDays = conf->value("update_frequency_days", 100).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
-	distributionEnabled = conf->value("distribution_enabled", false).toBool();
 
 	conf->endGroup();
 }
@@ -503,7 +501,6 @@ void Quasars::saveSettingsToConfig(void)
 	conf->setValue("url", updateUrl);
 	conf->setValue("update_frequency_days", updateFrequencyDays);
 	conf->setValue("updates_enabled", updatesEnabled );
-	conf->setValue("distribution_enabled", distributionEnabled);
 
 	conf->endGroup();
 }

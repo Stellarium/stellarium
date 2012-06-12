@@ -72,8 +72,6 @@ void QuasarsDialog::createDialogContent()
 		this, SLOT(retranslate()));
 
 	// Settings tab / updates group
-	ui->displayModeCheckBox->setChecked(GETSTELMODULE(Quasars)->getDisplayMode());
-	connect(ui->displayModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDistributionEnabled(int)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
 	connect(GETSTELMODULE(Quasars), SIGNAL(updateStateChanged(Quasars::UpdateState)), this, SLOT(updateStateReceiver(Quasars::UpdateState)));
@@ -125,7 +123,7 @@ void QuasarsDialog::setAboutHtml(void)
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + q_("If you want read full information about plugin, his history and format of catalog you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Quasars_plugin\">").arg("</a>") + "</li>";
+	html += "<li>" + q_("If you want more information about this plugin, its history, and format of catalog, you can %1get additional info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Quasars_plugin\">").arg("</a>") + "</li>";
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -173,12 +171,6 @@ void QuasarsDialog::setUpdatesEnabled(int checkState)
 		ui->updateButton->setText(q_("Update from files"));
 
 	refreshUpdateValues();
-}
-
-void QuasarsDialog::setDistributionEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Quasars)->setDisplayMode(b);
 }
 
 void QuasarsDialog::updateStateReceiver(Quasars::UpdateState state)

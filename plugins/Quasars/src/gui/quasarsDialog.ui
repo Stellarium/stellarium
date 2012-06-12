@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>543</width>
-    <height>471</height>
+    <width>541</width>
+    <height>469</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -225,25 +225,6 @@
              </widget>
             </item>
            </layout>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="displayBox">
-         <property name="title">
-          <string>Display mode for quasars</string>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <widget class="QCheckBox" name="displayModeCheckBox">
-            <property name="text">
-             <string>Enable display of distribution for quasars</string>
-            </property>
-           </widget>
           </item>
          </layout>
         </widget>
