@@ -108,13 +108,13 @@ void SupernovaeDialog::setAboutHtml(void)
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
 	html += "</table>";
 
-	html += "<p>" + q_("A plugin that shows some historical supernovae brighter than 10 visual magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 September).") + "</p>";
+    html += "<p>" + q_("A plugin that shows some historical supernovae brighter than visual magnitude 10: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 September).") + "</p>";
 
 	html += "<h3>" + q_("Light curves") + "</h3>";
-	html += "<p>" + QString(q_("In this plugin implemented simple model of light curves for different supernovae. Typical view of light curves for supernova type I and type II you can see %1here%2 (right scale in days) and this model used for plugin.")).arg("<a href=\"http://stellarium.org/wiki/index.php/Historical_Supernovae_plugin#Light_curves\">").arg("</a>") + "</p>";
+    html += "<p>" + QString(q_("This plugin implements a simple model of light curves for different supernovae. Typical views of light curves for type I and type II supernova can seen %1here%2 (right scale in days) and this model is used for this plugin.")).arg("<a href=\"http://stellarium.org/wiki/index.php/Historical_Supernovae_plugin#Light_curves\">").arg("</a>") + "</p>";
 
-	html += "<h3>" + q_("Acknowledgment") + "</h3>";
-	html += "<p>" + q_("We thank the following people for their contribution and of the valuable comments:") + "</p><ul>";
+    html += "<h3>" + q_("Acknowledgments") + "</h3>";
+    html += "<p>" + q_("We thank the following people for their contribution and valuable comments:") + "</p><ul>";
 	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)")
 			.arg(q_("Sergei Blinnikov"))
 			.arg("http://www.itep.ru/")
@@ -130,7 +130,7 @@ void SupernovaeDialog::setAboutHtml(void)
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + q_("If you want read full information about plugin, his history and format of catalog you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Historical_Supernovae_plugin\">").arg("</a>") + "</li>";
+    html += "<li>" + q_("If you want more information about this plugin, its history, and format of catalog, you can %1get additional info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Historical_Supernovae_plugin\">").arg("</a>") + "</li>";
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
