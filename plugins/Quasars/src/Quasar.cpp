@@ -36,8 +36,6 @@
 #include <QVariant>
 #include <QList>
 
-StelTextureSP Quasar::markerTexture;
-
 Quasar::Quasar(const QVariantMap& map)
 		: initialized(false)
 {
