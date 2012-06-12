@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-10 19:09+0700\n"
+"POT-Creation-Date: 2012-06-11 18:38+0700\n"
 "PO-Revision-Date: 2012-05-17 02:33+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-11 04:43+0000\n"
-"X-Generator: Launchpad (build 15376)\n"
+"X-Launchpad-Export-Date: 2012-06-12 04:53+0000\n"
+"X-Generator: Launchpad (build 15389)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -57,19 +57,19 @@ msgid "Planet: "
 msgstr "ดาวเคราะห์: "
 
 #: src/core/modules/Nebula.cpp:96 plugins/Supernovae/src/Supernova.cpp:99
-#: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:129
+#: plugins/Quasars/src/Quasar.cpp:95 plugins/Pulsars/src/Pulsar.cpp:129
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "ชนิด: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
-#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
+#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:109
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "โชติมาตร: <b>%1</b> (จางลงไปที่: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
-#: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
+#: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:121
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "โชติมาตร: <b>%1</b>"
@@ -112,7 +112,7 @@ msgid "Undocumented type"
 msgstr "ยังไม่ได้ระบุในเอกสาร"
 
 #: src/core/modules/Planet.cpp:127 src/core/modules/StarWrapper.cpp:124
-#: plugins/Quasars/src/Quasar.cpp:123
+#: plugins/Quasars/src/Quasar.cpp:126
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "โชติมาตรสัมบูรณ์: %1"
@@ -177,12 +177,12 @@ msgstr "โชติมาตร: <b>%1</b> (B-V: %2)"
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
 msgstr "โชติมาตรปรากฏ: <b>%1</b> (โดยการสูญหายในบรรยากาศ)"
 
-#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
+#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:103
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 msgstr "โชติมาตร: <b>%1</b> (จางลงไปที่: <b>%2</b>. B-V: <b>%3</b>)"
 
-#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
+#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:117
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "โชติมาตร : <b>%1</b> (B-V: <b>%2</b>)"
@@ -392,6 +392,8 @@ msgid "Contact"
 msgstr "ติดต่อ"
 
 #: src/gui/ConfigurationDialog.cpp:658
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
 msgid "Author"
 msgstr "ผู้สร้าง"
@@ -549,7 +551,8 @@ msgstr "ตั้งอัตราการประมวลผลสคริ
 #: plugins/CompassMarks/src/CompassMarks.cpp:124
 #: plugins/Oculars/src/Oculars.cpp:1188
 #: plugins/Satellites/src/Satellites.cpp:128
-#: plugins/Pulsars/src/Pulsars.cpp:146
+#: plugins/Supernovae/src/Supernovae.cpp:143
+#: plugins/Quasars/src/Quasars.cpp:146 plugins/Pulsars/src/Pulsars.cpp:146
 msgid "Plugin Key Bindings"
 msgstr "ปุ่มลัดในโปรแกรมเสริม"
 
@@ -2625,6 +2628,8 @@ msgstr "วิธีใช้"
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:248
+#: plugins/Quasars/src/ui_quasarsDialog.h:266
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:266
 msgid "About"
 msgstr "เกี่ยวกับ"
@@ -3871,6 +3876,8 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:418
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:107
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
 msgid "Version"
 msgstr "รุ่น"
@@ -4286,20 +4293,26 @@ msgid "See %1this document%2 for details."
 msgstr "ดู %1เอกสารนี้%2 สำหรับรายละเอียด"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
 msgid "Links"
 msgstr "ลิงก์"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:296
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
+#, qt-format
 msgid ""
-"Support is provided via the Launchpad website.  Be sure to put \"Satellites "
-"plugin\" in the subject when posting."
+"Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
+"subject when posting."
 msgstr ""
-"ความช่วยเหลือจะกระทำผ่านเว็บไซต์ Launchpad โปรดแน่ใจว่าได้เพิ่มข้อความ "
-"\"Satellites plugin\" ไว้ในหัวข้อ"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:299
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:122
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
@@ -4307,6 +4320,8 @@ msgstr "หากมีคำถาม คุณสามารถ%1ถามไ
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
 #, qt-format
 msgid "Bug reports can be made %1here%2."
@@ -4314,6 +4329,8 @@ msgstr "รายงานข้อผิดพลาดได้%1ที่น�
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:303
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
@@ -4323,29 +4340,41 @@ msgstr ""
 "คุณสามารถร้องขอโดยสร้างรายงานข้อผิดพลาด แล้วตั้งค่าเป็น \"wishlist\""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:146
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 msgid "Internet updates disabled"
 msgstr "การอัปเดตจากอินเทอร์เน็ตถูกปิดการใช้งาน"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:355
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:153
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:187
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:148
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:188
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:202
 msgid "Updating now..."
 msgstr "กำลังอัปเดต..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:325
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:155
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
 msgid "Next update: < 1 minute"
 msgstr "อัปเดตครั้งถัดไป: < 1 นาที"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:152
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "อัปเดตครั้งถัดไป: %1 นาที"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:159
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
 #, qt-format
 msgid "Next update: %1 hours"
@@ -4353,17 +4382,25 @@ msgstr "อัปเดตครั้งถัดไป: %1 ชั่วโม�
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:244
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
+#: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:260
 msgid "Update now"
 msgstr "อัปเดตเดี๋ยวนี้"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:346
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
 msgid "Update from files"
 msgstr "อัปเดตจากแฟ้มข้อมูล"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:358
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:190
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:191
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:205
 msgid "Update error"
 msgstr "มีข้อผิดพลาดในการอัปเดต"
@@ -4441,11 +4478,15 @@ msgid "Update TLE lists from Internet sources"
 msgstr "อัปเดตรายชื่อ TLE จากแหล่งข้อมูลบนอินเทอร์เน็ต"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:644
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
+#: plugins/Quasars/src/ui_quasarsDialog.h:256
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:256
 msgid "Update from Internet sources"
 msgstr "อัปเดตจากแหล่งข้อมูลบนอินเทอร์เน็ต"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:241
+#: plugins/Quasars/src/ui_quasarsDialog.h:257
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:257
 msgid "Last update:"
 msgstr "อัปเดตครั้งล่าสุด:"
@@ -4494,16 +4535,22 @@ msgid "Fade length:"
 msgstr "ความยาวของส่วนที่จางลง:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:672
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:245
+#: plugins/Quasars/src/ui_quasarsDialog.h:263
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 msgid "Restore default settings"
 msgstr "คืนค่าเริ่มต้นเดิม"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:246
+#: plugins/Quasars/src/ui_quasarsDialog.h:264
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:264
 msgid "Save settings as default"
 msgstr "บันทึกการตั้งค่าต่าง ๆ ให้เป็นค่าเริ่มต้น"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:674
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:247
+#: plugins/Quasars/src/ui_quasarsDialog.h:265
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:265
 msgid "Settings"
 msgstr "ตั้งค่า"
@@ -5663,11 +5710,34 @@ msgstr "นำเข้าองค์ประกอบวงโคจรใน
 msgid "Solar System"
 msgstr "ระบบสุริยะ"
 
-#: plugins/Supernovae/src/Supernovae.cpp:59
+#: plugins/Supernovae/src/Supernovae.cpp:71
 msgid "Historical Supernovae"
 msgstr "ซูเปอร์โนวาในประวัติศาสตร์"
 
-#: plugins/Supernovae/src/Supernovae.cpp:62
+#: plugins/Supernovae/src/Supernovae.cpp:74
+msgid ""
+"A plugin that shows some historical supernovae brighter than 10 visual "
+"magnitude."
+msgstr ""
+
+#: plugins/Supernovae/src/Supernovae.cpp:145
+msgid "Historical Supernovae configuration window"
+msgstr ""
+
+#: plugins/Supernovae/src/Supernova.cpp:99
+msgid "supernova"
+msgstr "ซูเปอร์โนวา"
+
+#: plugins/Supernovae/src/Supernova.cpp:115
+#, qt-format
+msgid "Type of supernova: %1"
+msgstr "ชนิดของซูเปอร์โนวา: %1"
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
+msgid "Historical Supernovae Plug-in"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid ""
 "A plugin that shows some historical supernovae brighter than 10 visual "
 "magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN "
@@ -5683,20 +5753,95 @@ msgstr ""
 "(21 สิงหาคม), SN 1972E (8 พฤษภาคม), SN 1987A (24 กุมภาพันธ์) และ SN 2011FE "
 "(13 กันยายน)"
 
-#: plugins/Supernovae/src/Supernova.cpp:99
-msgid "supernova"
-msgstr "ซูเปอร์โนวา"
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
+msgid "Light curves"
+msgstr ""
 
-#: plugins/Supernovae/src/Supernova.cpp:115
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:114
 #, qt-format
-msgid "Type of supernova: %1"
-msgstr "ชนิดของซูเปอร์โนวา: %1"
+msgid ""
+"In this plugin implemented simple model of light curves for different "
+"supernovae. Typical view of light curves for supernova type I and type II "
+"you can see %1here%2 (right scale in days) and this model used for plugin."
+msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:59
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
+msgid "Acknowledgment"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
+msgid ""
+"We thank the following people for their contribution and of the valuable "
+"comments:"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
+msgid "Sergei Blinnikov"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
+msgid "Institute for Theoretical and Experimental Physics"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
+msgid "in Russia"
+msgstr ""
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
+#, qt-format
+msgid ""
+"If you want read full information about plugin, his history and format of "
+"catalog you can %1get info here%2."
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
+#, qt-format
+msgid "Next update: %1 days"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
+msgid "Historical supernovae is updated"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:236
+msgid "Historical Supernovae Configuration"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:237
+msgid "Historical Supernovae Plug-in Configuration"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:239
+#: plugins/Quasars/src/ui_quasarsDialog.h:255
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:255
+msgid "Update catalog from Internet"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:242
+#: plugins/Quasars/src/ui_quasarsDialog.h:258
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
+msgid "Update frequency (days):"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:243
+#: plugins/Quasars/src/ui_quasarsDialog.h:259
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
+msgid "[next update info]"
+msgstr ""
+
+#: plugins/Quasars/src/Quasars.cpp:71
 msgid "Quasars"
 msgstr "เควซาร์"
 
-#: plugins/Quasars/src/Quasars.cpp:62
+#: plugins/Quasars/src/Quasars.cpp:74
 msgid ""
 "A plugin that shows some quasars brighter than 16 visual magnitude. A "
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
@@ -5705,14 +5850,53 @@ msgstr ""
 "ส่วนเสริมสำหรับแสดงเควซาร์ที่สว่างกว่าโชติมาตร 16 ซึ่งรวบรวมจาก 'Quasars and "
 "Active Galactic Nuclei' (13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 
-#: plugins/Quasars/src/Quasar.cpp:92
+#: plugins/Quasars/src/Quasars.cpp:148
+msgid "Quasars configuration window"
+msgstr ""
+
+#: plugins/Quasars/src/Quasar.cpp:95
 msgid "quasar"
 msgstr "เควซาร์"
 
-#: plugins/Quasars/src/Quasar.cpp:134
+#: plugins/Quasars/src/Quasar.cpp:137
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr "Z (การเลื่อนไปทางแดง): %1"
+
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:108
+msgid "Quasars Plug-in"
+msgstr ""
+
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
+msgid ""
+"The Quasars plugin provides visualization of some quasars brighter than 16 "
+"visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
+"Galactic Nuclei\" (13th Ed.)"
+msgstr ""
+
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
+msgid "Veron+ 2010"
+msgstr ""
+
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
+msgid "Quasars is updated"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:252
+msgid "Quasars Configuration"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:253
+msgid "Quasars Plug-in Configuration"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:261
+msgid "Display mode for quasars"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:262
+msgid "Enable display of distribution for quasars"
+msgstr ""
 
 #: plugins/Pulsars/src/Pulsars.cpp:71
 msgid "Pulsars"
@@ -5863,26 +6047,12 @@ msgstr ""
 msgid "pulsar identifiers have the prefix 'PSR'"
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
-msgid "Acknowledgment"
-msgstr ""
-
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
-msgid ""
-"We thank the following people for their contribution and of the valuable "
-"comments:"
-msgstr ""
-
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
 msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
-msgstr ""
-
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
-msgid "in Russia"
 msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
@@ -5897,25 +6067,6 @@ msgstr ""
 msgid "in France"
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
-msgid ""
-"Support is provided via the Launchpad website.  Be sure to put \"Pulsars "
-"plugin\" in the subject when posting."
-msgstr ""
-
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
-#, qt-format
-msgid ""
-"If you want read full information about plugin, his history and format of "
-"catalog you can %1get info here%2."
-msgstr ""
-
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
-#, qt-format
-msgid "Next update: %1 days"
-msgstr ""
-
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:212
 msgid "Pulsars is updated"
 msgstr ""
@@ -5926,18 +6077,6 @@ msgstr ""
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:253
 msgid "Pulsars Plug-in Configuration"
-msgstr ""
-
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:255
-msgid "Update catalog from Internet"
-msgstr ""
-
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
-msgid "Update frequency (days):"
-msgstr ""
-
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
-msgid "[next update info]"
 msgstr ""
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:261
@@ -6175,6 +6314,13 @@ msgstr ""
 
 #~ msgid "Get catalog x of y"
 #~ msgstr "รับแค็ตตาล็อกดาว x จาก y"
+
+#~ msgid ""
+#~ "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
+#~ "plugin\" in the subject when posting."
+#~ msgstr ""
+#~ "ความช่วยเหลือจะกระทำผ่านเว็บไซต์ Launchpad โปรดแน่ใจว่าได้เพิ่มข้อความ "
+#~ "\"Satellites plugin\" ไว้ในหัวข้อ"
 
 #~ msgid "millisecond pulsar"
 #~ msgstr "พัลซาร์มิลลิวินาที"
