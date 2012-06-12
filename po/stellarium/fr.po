@@ -17,15 +17,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-10 19:09+0700\n"
+"POT-Creation-Date: 2012-06-11 18:38+0700\n"
 "PO-Revision-Date: 2012-06-06 20:25+0000\n"
 "Last-Translator: xemard.nicolas <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-11 04:36+0000\n"
-"X-Generator: Launchpad (build 15376)\n"
+"X-Launchpad-Export-Date: 2012-06-12 04:47+0000\n"
+"X-Generator: Launchpad (build 15389)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -65,19 +65,19 @@ msgid "Planet: "
 msgstr "Planète : "
 
 #: src/core/modules/Nebula.cpp:96 plugins/Supernovae/src/Supernova.cpp:99
-#: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:129
+#: plugins/Quasars/src/Quasar.cpp:95 plugins/Pulsars/src/Pulsar.cpp:129
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Type : <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
-#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
+#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:109
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitude : <b>%1</b> (extinction à : <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
-#: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
+#: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:121
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnitude : <b>%1</b>"
@@ -120,7 +120,7 @@ msgid "Undocumented type"
 msgstr "Type non documenté"
 
 #: src/core/modules/Planet.cpp:127 src/core/modules/StarWrapper.cpp:124
-#: plugins/Quasars/src/Quasar.cpp:123
+#: plugins/Quasars/src/Quasar.cpp:126
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Magnitude absolue : %1"
@@ -185,12 +185,12 @@ msgstr "Magnitude : <b>%1</b> (B-V: %2)"
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
 msgstr "Magnitude apparente : <b>%1%</b> (par extinction)"
 
-#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
+#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:103
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 msgstr "Magnitude : <b>%1</b> (extinction à  : <b>%2</b>. B-V : <b>%3</b>)"
 
-#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
+#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:117
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Magnitude : <b>%1</b> (B-V : <b>%2</b>)"
@@ -404,6 +404,8 @@ msgid "Contact"
 msgstr "Contact"
 
 #: src/gui/ConfigurationDialog.cpp:658
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
 msgid "Author"
 msgstr "Auteur"
@@ -561,7 +563,8 @@ msgstr "Exécuter le script à la vitesse normale"
 #: plugins/CompassMarks/src/CompassMarks.cpp:124
 #: plugins/Oculars/src/Oculars.cpp:1188
 #: plugins/Satellites/src/Satellites.cpp:128
-#: plugins/Pulsars/src/Pulsars.cpp:146
+#: plugins/Supernovae/src/Supernovae.cpp:143
+#: plugins/Quasars/src/Quasars.cpp:146 plugins/Pulsars/src/Pulsars.cpp:146
 msgid "Plugin Key Bindings"
 msgstr "Raccourcis clavier du plugin"
 
@@ -2646,6 +2649,8 @@ msgstr "Aide"
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:248
+#: plugins/Quasars/src/ui_quasarsDialog.h:266
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:266
 msgid "About"
 msgstr "À propos"
@@ -3900,6 +3905,8 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:418
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:107
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
 msgid "Version"
 msgstr "Version"
@@ -4326,20 +4333,26 @@ msgid "See %1this document%2 for details."
 msgstr "Voir %1ce document%2 pour plus d'informations."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
 msgid "Links"
 msgstr "Liens"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:296
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
+#, qt-format
 msgid ""
-"Support is provided via the Launchpad website.  Be sure to put \"Satellites "
-"plugin\" in the subject when posting."
+"Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
+"subject when posting."
 msgstr ""
-"Le support est fourni par le site Launchpad. Assurez-vous de mettre "
-"\"Satellites plugin\" en sujet quand vous postez."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:299
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:122
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
@@ -4347,6 +4360,8 @@ msgstr "Pour toute question, vous pouvez %1obtenir une réponse ici%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
 #, qt-format
 msgid "Bug reports can be made %1here%2."
@@ -4354,6 +4369,8 @@ msgstr "Les rapports de bogue peuvent être transmis %1ici%2."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:303
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
@@ -4363,29 +4380,41 @@ msgstr ""
 "rapport de bug et fixer sa sévérité à \"wishlist\"."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:146
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 msgid "Internet updates disabled"
 msgstr "Mises à jour via Internet désactivées"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:355
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:153
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:187
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:148
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:188
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:202
 msgid "Updating now..."
 msgstr "Mise à jour en cours..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:325
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:155
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
 msgid "Next update: < 1 minute"
 msgstr "Prochaine mise à jour: < 1 minute"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:152
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "Prochaine mise à jour: %1 minutes"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:159
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
 #, qt-format
 msgid "Next update: %1 hours"
@@ -4393,17 +4422,25 @@ msgstr "Prochaine mise à jour: %1 heures"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:244
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
+#: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:260
 msgid "Update now"
 msgstr "Mettre à jour maintenant"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:346
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
 msgid "Update from files"
 msgstr "Mettre à jour à partir de fichiers"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:358
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:190
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:191
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:205
 msgid "Update error"
 msgstr "Erreur lors de la mise à jour"
@@ -4484,11 +4521,15 @@ msgid "Update TLE lists from Internet sources"
 msgstr "Mettre à jour les listes TLE à partir des sources Internet"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:644
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
+#: plugins/Quasars/src/ui_quasarsDialog.h:256
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:256
 msgid "Update from Internet sources"
 msgstr "Mettre à jour à partir des sources Internet"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:241
+#: plugins/Quasars/src/ui_quasarsDialog.h:257
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:257
 msgid "Last update:"
 msgstr "Dernière mise à jour:"
@@ -4537,16 +4578,22 @@ msgid "Fade length:"
 msgstr "Durée du fondu :"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:672
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:245
+#: plugins/Quasars/src/ui_quasarsDialog.h:263
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 msgid "Restore default settings"
 msgstr "Restaurer les paramètres par défaut"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:246
+#: plugins/Quasars/src/ui_quasarsDialog.h:264
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:264
 msgid "Save settings as default"
 msgstr "Sauvegarder ces paramètres en paramètres par défaut"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:674
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:247
+#: plugins/Quasars/src/ui_quasarsDialog.h:265
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:265
 msgid "Settings"
 msgstr "Paramètres"
@@ -5718,11 +5765,34 @@ msgstr "Importation des paramètres orbitaux en format MPC.."
 msgid "Solar System"
 msgstr "Système solaire"
 
-#: plugins/Supernovae/src/Supernovae.cpp:59
+#: plugins/Supernovae/src/Supernovae.cpp:71
 msgid "Historical Supernovae"
 msgstr "Supernovae historiques"
 
-#: plugins/Supernovae/src/Supernovae.cpp:62
+#: plugins/Supernovae/src/Supernovae.cpp:74
+msgid ""
+"A plugin that shows some historical supernovae brighter than 10 visual "
+"magnitude."
+msgstr ""
+
+#: plugins/Supernovae/src/Supernovae.cpp:145
+msgid "Historical Supernovae configuration window"
+msgstr ""
+
+#: plugins/Supernovae/src/Supernova.cpp:99
+msgid "supernova"
+msgstr "supernova"
+
+#: plugins/Supernovae/src/Supernova.cpp:115
+#, qt-format
+msgid "Type of supernova: %1"
+msgstr "Type de supernova : %1"
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
+msgid "Historical Supernovae Plug-in"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid ""
 "A plugin that shows some historical supernovae brighter than 10 visual "
 "magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN "
@@ -5738,34 +5808,148 @@ msgstr ""
 "juillet), SN 1937C (21 août), SN 1972E (8 mai), SN 1987A (24 février) et SN "
 "2011FE (13 septembre)."
 
-#: plugins/Supernovae/src/Supernova.cpp:99
-msgid "supernova"
-msgstr "supernova"
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
+msgid "Light curves"
+msgstr ""
 
-#: plugins/Supernovae/src/Supernova.cpp:115
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:114
 #, qt-format
-msgid "Type of supernova: %1"
-msgstr "Type de supernova : %1"
+msgid ""
+"In this plugin implemented simple model of light curves for different "
+"supernovae. Typical view of light curves for supernova type I and type II "
+"you can see %1here%2 (right scale in days) and this model used for plugin."
+msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:59
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
+msgid "Acknowledgment"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
+msgid ""
+"We thank the following people for their contribution and of the valuable "
+"comments:"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
+msgid "Sergei Blinnikov"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
+msgid "Institute for Theoretical and Experimental Physics"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
+msgid "in Russia"
+msgstr ""
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
+#, qt-format
+msgid ""
+"If you want read full information about plugin, his history and format of "
+"catalog you can %1get info here%2."
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
+#, qt-format
+msgid "Next update: %1 days"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
+msgid "Historical supernovae is updated"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:236
+msgid "Historical Supernovae Configuration"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:237
+msgid "Historical Supernovae Plug-in Configuration"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:239
+#: plugins/Quasars/src/ui_quasarsDialog.h:255
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:255
+msgid "Update catalog from Internet"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:242
+#: plugins/Quasars/src/ui_quasarsDialog.h:258
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
+msgid "Update frequency (days):"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:243
+#: plugins/Quasars/src/ui_quasarsDialog.h:259
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
+msgid "[next update info]"
+msgstr ""
+
+#: plugins/Quasars/src/Quasars.cpp:71
 msgid "Quasars"
 msgstr "Quasars"
 
-#: plugins/Quasars/src/Quasars.cpp:62
+#: plugins/Quasars/src/Quasars.cpp:74
 msgid ""
 "A plugin that shows some quasars brighter than 16 visual magnitude. A "
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
 
-#: plugins/Quasars/src/Quasar.cpp:92
+#: plugins/Quasars/src/Quasars.cpp:148
+msgid "Quasars configuration window"
+msgstr ""
+
+#: plugins/Quasars/src/Quasar.cpp:95
 msgid "quasar"
 msgstr "quasar"
 
-#: plugins/Quasars/src/Quasar.cpp:134
+#: plugins/Quasars/src/Quasar.cpp:137
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr "Z (décalage vers le rouge) : %1"
+
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:108
+msgid "Quasars Plug-in"
+msgstr ""
+
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
+msgid ""
+"The Quasars plugin provides visualization of some quasars brighter than 16 "
+"visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
+"Galactic Nuclei\" (13th Ed.)"
+msgstr ""
+
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
+msgid "Veron+ 2010"
+msgstr ""
+
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
+msgid "Quasars is updated"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:252
+msgid "Quasars Configuration"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:253
+msgid "Quasars Plug-in Configuration"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:261
+msgid "Display mode for quasars"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:262
+msgid "Enable display of distribution for quasars"
+msgstr ""
 
 #: plugins/Pulsars/src/Pulsars.cpp:71
 msgid "Pulsars"
@@ -5916,26 +6100,12 @@ msgstr ""
 msgid "pulsar identifiers have the prefix 'PSR'"
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
-msgid "Acknowledgment"
-msgstr ""
-
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
-msgid ""
-"We thank the following people for their contribution and of the valuable "
-"comments:"
-msgstr ""
-
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
 msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
-msgstr ""
-
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
-msgid "in Russia"
 msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
@@ -5950,25 +6120,6 @@ msgstr ""
 msgid "in France"
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
-msgid ""
-"Support is provided via the Launchpad website.  Be sure to put \"Pulsars "
-"plugin\" in the subject when posting."
-msgstr ""
-
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
-#, qt-format
-msgid ""
-"If you want read full information about plugin, his history and format of "
-"catalog you can %1get info here%2."
-msgstr ""
-
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
-#, qt-format
-msgid "Next update: %1 days"
-msgstr ""
-
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:212
 msgid "Pulsars is updated"
 msgstr ""
@@ -5979,18 +6130,6 @@ msgstr ""
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:253
 msgid "Pulsars Plug-in Configuration"
-msgstr ""
-
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:255
-msgid "Update catalog from Internet"
-msgstr ""
-
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
-msgid "Update frequency (days):"
-msgstr ""
-
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
-msgid "[next update info]"
 msgstr ""
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:261
@@ -6228,6 +6367,13 @@ msgstr ""
 
 #~ msgid "Hydra"
 #~ msgstr "Hydra"
+
+#~ msgid ""
+#~ "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
+#~ "plugin\" in the subject when posting."
+#~ msgstr ""
+#~ "Le support est fourni par le site Launchpad. Assurez-vous de mettre "
+#~ "\"Satellites plugin\" en sujet quand vous postez."
 
 #~ msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
 #~ msgstr ""
