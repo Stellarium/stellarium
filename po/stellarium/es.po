@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-11 18:38+0700\n"
-"PO-Revision-Date: 2012-06-11 10:27+0000\n"
+"PO-Revision-Date: 2012-06-12 10:58+0000\n"
 "Last-Translator: José A. Macas Durazo <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-12 04:52+0000\n"
+"X-Launchpad-Export-Date: 2012-06-13 04:36+0000\n"
 "X-Generator: Launchpad (build 15389)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -5833,7 +5833,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
 msgid "Light curves"
-msgstr ""
+msgstr "Curvas de luz"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:114
 #, qt-format
@@ -5842,6 +5842,10 @@ msgid ""
 "supernovae. Typical view of light curves for supernova type I and type II "
 "you can see %1here%2 (right scale in days) and this model used for plugin."
 msgstr ""
+"En esta complemento se implementa un simple modelado de curvas de luz para "
+"diferentes supernovas.  La vista típica de curvas de luz para supernovas "
+"tipo I y tipo II puede ver %1 aquí %2 (escala derecha en días) y este modelo "
+"usado para el complemento."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
@@ -5935,7 +5939,7 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:148
 msgid "Quasars configuration window"
-msgstr ""
+msgstr "Ventana de configuración de Cuásares"
 
 #: plugins/Quasars/src/Quasar.cpp:95
 msgid "quasar"
@@ -5948,7 +5952,7 @@ msgstr "Z (desplazamiento al rojo): %1"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:108
 msgid "Quasars Plug-in"
-msgstr ""
+msgstr "Complemento de Cuásares"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
 msgid ""
@@ -5956,30 +5960,33 @@ msgid ""
 "visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
 "Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"El complemento de Cuásares provee visualizaciín de algunos cuásares mas "
+"brillantes que una magnitud visual de 16. Un catálogo de cuásares compilado "
+"de \"Quasars and Active Galactic Nuclei\" (13th Ed.)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
-msgstr ""
+msgstr "Veron+ 2010"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
 msgid "Quasars is updated"
-msgstr ""
+msgstr "Cuásares actualizados"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:252
 msgid "Quasars Configuration"
-msgstr ""
+msgstr "Configuración de Cuásares"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:253
 msgid "Quasars Plug-in Configuration"
-msgstr ""
+msgstr "Configuración del Complemento de Cuásares"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:261
 msgid "Display mode for quasars"
-msgstr ""
+msgstr "Modo de vista para cuásares"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 msgid "Enable display of distribution for quasars"
-msgstr ""
+msgstr "Activar la vista de dispersión de cuásares"
 
 #: plugins/Pulsars/src/Pulsars.cpp:71
 msgid "Pulsars"
@@ -6178,7 +6185,7 @@ msgstr "Modo de vista para púlsares"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:262
 msgid "Enable display of distribution for pulsars"
-msgstr "Habilitar la vista de distribución para púlsares"
+msgstr "Activar la vista de dispersión de púlsares"
 
 #~ msgid "Ecliptic Line"
 #~ msgstr "Eclíptica"
