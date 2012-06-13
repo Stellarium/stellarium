@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-11 18:38+0700\n"
-"PO-Revision-Date: 2012-06-11 20:36+0000\n"
+"PO-Revision-Date: 2012-06-12 20:47+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-12 04:44+0000\n"
+"X-Launchpad-Export-Date: 2012-06-13 04:36+0000\n"
 "X-Generator: Launchpad (build 15389)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -3922,6 +3922,8 @@ msgid ""
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
+"تستطيع إظهار وإخفاء شعرتي التوجيه المتقاطعتين في المنظر الدائري. أردت أن "
+"يكون الاتجاه إلى الشمال، ولم أستطع ذلك. حالياً الاتجاه هو لأعلى الشاشة."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:428
 #, qt-format
@@ -3931,31 +3933,37 @@ msgid ""
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
+"تستطيع إظهار وإخفاء كاشف التلراد، وهو دوائر متداخلة لتسهيل معرفة مكان النجوم "
+"بالنسبة لبعضها. يمكن إظهارها فقط في حالة عدم إظهار المشهد الدائري للعدسة "
+"العينية. هذه الميزة ترسم ثلاث دوائر متداخلة قطرها 0.5%1، 2.0%1 و 4.0%1 "
+"تساعدك في توقع مايمكن رؤيته بالعين المجردة من خلال  كاشف التلراد أو مايشابهه "
+"من الأدوات."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:429
 msgid "If you find any issues, please let me know.  Enjoy!"
-msgstr ""
+msgstr "إذا وجدت مشاكل في هذا التطبيق، تفضل بإخباري. أرجو لك المتعة."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:432
 msgid "Hot Keys"
-msgstr ""
+msgstr "مفاتيح الاختصار"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:433
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr ""
+"مفاتيح الاختصار الخاصة بهذا التطبيق يمكن تحديدها تحت علامة التبويب \"عام\""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:445
 #: plugins/Oculars/src/gui/OcularDialog.cpp:450
 msgid "[no key defined]"
-msgstr ""
+msgstr "[لم يعرّف أي مفتاح]"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:454
 msgid "Switches on/off the ocular overlay."
-msgstr ""
+msgstr "إظهار وإخفاء المشهد الدائري من خلال العدسة العينية"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:458
 msgid "Opens the pop-up navigation menu."
-msgstr ""
+msgstr "فتح قائمة التنقّل المنبثقة"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:865
 msgid "Enable only if an object is selected"
@@ -4328,6 +4336,8 @@ msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
+"الدعم يتم من خلال موقع https://launchpad.net/stellarium ، تأكد من وضع \"%1\" "
+"في رأس الموضوع عند التبليغ عن عطل أو عند تحرير السؤال."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:299
@@ -5730,10 +5740,12 @@ msgid ""
 "A plugin that shows some historical supernovae brighter than 10 visual "
 "magnitude."
 msgstr ""
+"تطبيق إضافي يعرض بعض المستعرات الموثقة تاريخياً بقدر لمعان بصري أعظم من "
+"القدر العاشر."
 
 #: plugins/Supernovae/src/Supernovae.cpp:145
 msgid "Historical Supernovae configuration window"
-msgstr ""
+msgstr "نافذة إعدادات المستعرات الموثقة تاريخياً"
 
 #: plugins/Supernovae/src/Supernova.cpp:99
 msgid "supernova"
@@ -5746,7 +5758,7 @@ msgstr "نوع المستعر: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
 msgid "Historical Supernovae Plug-in"
-msgstr ""
+msgstr "إضافة المستعرات الموثقة تاريخياً"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid ""
@@ -5767,7 +5779,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
 msgid "Light curves"
-msgstr ""
+msgstr "منحنيات السطوع"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:114
 #, qt-format
@@ -5780,27 +5792,29 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 msgid "Acknowledgment"
-msgstr ""
+msgstr "شكر"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
 msgid ""
 "We thank the following people for their contribution and of the valuable "
 "comments:"
-msgstr ""
+msgstr "نشكر الأشخاص التالين لمساهماتهم وماحظاتهم القيّمة:"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Sergei Blinnikov"
-msgstr ""
+msgstr "Sergei Blinnikov"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 msgid "Institute for Theoretical and Experimental Physics"
 msgstr ""
+"Institute for Theoretical and Experimental Physics معهد الفيزياء النظرية "
+"والتجريبية"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
 msgid "in Russia"
-msgstr ""
+msgstr "في روسيا"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
@@ -5817,37 +5831,37 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
 #, qt-format
 msgid "Next update: %1 days"
-msgstr ""
+msgstr "االتحديث التالي: %1 يوماً"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
 msgid "Historical supernovae is updated"
-msgstr ""
+msgstr "تمّ تحديث تطبيق المستعرات الموثّقة تاريخياً"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
 msgid "Historical Supernovae Configuration"
-msgstr ""
+msgstr "إعدادات المستعرات الموثّقة تاريخياً"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr ""
+msgstr "إعدادات تطبيق \"المستعرات الموثّقة تاريخياً\" الإضافي"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:255
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:255
 msgid "Update catalog from Internet"
-msgstr ""
+msgstr "حدّث الدليل من الإنترنت"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Update frequency (days):"
-msgstr ""
+msgstr "حدّث كل (بالأيام)"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:259
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 msgid "[next update info]"
-msgstr ""
+msgstr "[معلومات التحديث القادم]"
 
 #: plugins/Quasars/src/Quasars.cpp:71
 msgid "Quasars"
@@ -5865,7 +5879,7 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:148
 msgid "Quasars configuration window"
-msgstr ""
+msgstr "نافذة إعدادات الكوازارات"
 
 #: plugins/Quasars/src/Quasar.cpp:95
 msgid "quasar"
@@ -5878,7 +5892,7 @@ msgstr "‎ Z (الإزاحة الحمراء‎): %1"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:108
 msgid "Quasars Plug-in"
-msgstr ""
+msgstr "إضافة الكوازارات"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
 msgid ""
@@ -5886,30 +5900,33 @@ msgid ""
 "visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
 "Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"الكوازارات تطبيق إضافي لتصور بعض الكوازارات ذات اللمعان الأقوى من القدر "
+"السادس عشر. مجموعة من الكوازارات تم استخلاصها من \"Quasars and Active "
+"Galactic Nuclei\" الطبعة الثالثة عشر."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
-msgstr ""
+msgstr "Veron+ 2010"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
 msgid "Quasars is updated"
-msgstr ""
+msgstr "الكوازارات محدّثة"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:252
 msgid "Quasars Configuration"
-msgstr ""
+msgstr "إعدادات الكوازارات"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:253
 msgid "Quasars Plug-in Configuration"
-msgstr ""
+msgstr "إعدادات تطبيق الكوازارات الإضافي"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:261
 msgid "Display mode for quasars"
-msgstr ""
+msgstr "نَسَق العرض للكوازارات"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 msgid "Enable display of distribution for quasars"
-msgstr ""
+msgstr "فعِّل عرض توزيع الكوازارات"
 
 #: plugins/Pulsars/src/Pulsars.cpp:71
 msgid "Pulsars"
@@ -5921,10 +5938,12 @@ msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr ""
+"هذا التطبيق الإضافي يرسم مواقع العديد من النجوم النابضة (pulsars)، مع "
+"معلومات عن كل واحد منها."
 
 #: plugins/Pulsars/src/Pulsars.cpp:148
 msgid "Pulsars configuration window"
-msgstr ""
+msgstr "نافذة إعدادات النجوم النابضة"
 
 #: plugins/Pulsars/src/Pulsar.cpp:129
 msgid "pulsar"
@@ -6048,7 +6067,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
 msgid "Pulsars Plug-in"
-msgstr ""
+msgstr "إضافة النجوم النابضة"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
 #, qt-format
@@ -6057,6 +6076,8 @@ msgid ""
 "Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 msgstr ""
+"بيانات النجوم النابضة مستقاة من \"Manchester, R. N., Hobbs, G. B., Teoh, A. "
+"& Hobbs, M., Astron. J., 129, 1993-2006 (2005) (%1astro-ph/0412641%2)\""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
 msgid "Note"
@@ -6064,47 +6085,47 @@ msgstr "ملحوظة"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr ""
+msgstr "النجوم النابضة يبدأ اسمها التعريفي بـ \"PSR\""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
-msgstr ""
+msgstr "مرصد Pushchino Radio Astronomy Observatory للفلك الراديوي"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 msgid "Maciej Serylak"
-msgstr ""
+msgstr "Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Nancay Radioastronomical Observatory"
-msgstr ""
+msgstr "مرصد Nancay Radioastronomical Observatory للفلك الراديوي"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
 msgid "in France"
-msgstr ""
+msgstr "في فرنسا"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:212
 msgid "Pulsars is updated"
-msgstr ""
+msgstr "النجوم النابضة محدّثة"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:252
 msgid "Pulsars Configuration"
-msgstr ""
+msgstr "إعدادات النجوم النابضة"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:253
 msgid "Pulsars Plug-in Configuration"
-msgstr ""
+msgstr "إعدادات تطبيق النجوم النابضة الإضافي"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:261
 msgid "Display mode for pulsars"
-msgstr ""
+msgstr "نَسَق العرض للنجوم النابضة"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:262
 msgid "Enable display of distribution for pulsars"
-msgstr ""
+msgstr "فعّل عرض توزيع النجوم النابضة"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "الشبكة الاستوائية"
