@@ -79,6 +79,11 @@ vec4 getLighting()
 			}
 		}
 	}
+	else
+	{
+		//Add the lightsources ambient at least
+		color += gl_LightSource[0].ambient;
+	}
 	
 	return color;
 } 
