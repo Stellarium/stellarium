@@ -39,7 +39,7 @@ class StelSkyDrawer : public QObject
 	Q_OBJECT
 public:
 	//! Constructor
-	StelSkyDrawer(StelCore* core);
+	StelSkyDrawer(StelCore* core, class StelRenderer* renderer);
 	//! Destructor
 	~StelSkyDrawer();
 
@@ -242,6 +242,7 @@ private:
 	float findWorldLumForMag(float mag, float targetRadius);
 
 	StelCore* core;
+	class StelRenderer* renderer;
 	StelToneReproducer* eye;
 
 	Extinction extinction;

@@ -89,7 +89,7 @@ StelCore::~StelCore()
 /*************************************************************************
  Load core data and initialize with default values
 *************************************************************************/
-void StelCore::init()
+void StelCore::init(class StelRenderer* renderer)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
@@ -133,7 +133,7 @@ void StelCore::init()
 	currentProjectorParams.fov = movementMgr->getInitFov();
 	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);
 
-	skyDrawer = new StelSkyDrawer(this);
+	skyDrawer = new StelSkyDrawer(this, renderer);
 	skyDrawer->init();
 
 	QString tmpstr = conf->value("projection/type", "stereographic").toString();

@@ -284,7 +284,7 @@ void StelApp::init(QSettings* conf, StelRenderer* renderer)
 	hip_stars->init();
 	getModuleMgr().registerModule(hip_stars);
 
-	core->init();
+	core->init(renderer);
 
 	// Init nebulas
 	NebulaMgr* nebulas = new NebulaMgr();
