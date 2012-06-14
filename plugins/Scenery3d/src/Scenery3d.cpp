@@ -69,7 +69,7 @@
 }
 
 #define MAXSPLITS 4
-#define FARZ 500.0f
+#define FARZ 50.0f
 
 
 Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
