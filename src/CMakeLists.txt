@@ -663,6 +663,7 @@ SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -frame
  ENDIF()
 ENDIF()
 
+SET_TARGET_PROPERTIES(stellarium PROPERTIES COMPILE_FLAGS "-g -Wextra")
 ADD_DEPENDENCIES(stellarium AllStaticPlugins)
 
 INSTALL(TARGETS stellarium DESTINATION bin)
