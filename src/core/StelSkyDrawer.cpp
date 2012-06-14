@@ -36,6 +36,7 @@
 
 #include "StelToneReproducer.hpp"
 #include "renderer/StelTextureMgr.hpp"
+#include "renderer/StelRenderer.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
@@ -51,7 +52,10 @@
 #define EYE_RESOLUTION (0.25f)
 #define MAX_LINEAR_RADIUS 8.f
 
-StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore), starsShaderProgram(NULL)
+StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
+	: core(acore)
+	, renderer(renderer)
+	, starsShaderProgram(NULL)
 {
 	eye = core->getToneReproducer();
 

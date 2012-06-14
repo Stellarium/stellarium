@@ -88,7 +88,7 @@ public:
 	virtual ~StelCore();
 
 	//! Init and load all main core components.
-	void init();
+	void init(class StelRenderer* renderer);
 
 	//! Update all the objects with respect to the time.
 	//! @param deltaTime the time increment in sec.
