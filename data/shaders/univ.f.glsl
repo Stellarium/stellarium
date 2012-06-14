@@ -136,7 +136,7 @@ vec4 getLighting()
 		color += (gl_FrontLightModelProduct.sceneColor * gl_FrontMaterial.ambient) + (gl_LightSource[0].ambient * gl_FrontMaterial.ambient);
 
 		//Add reflect
-		if(iIllum == 2)
+		if(iIllum == 2 && length(shadow) > 0)
 		{
 			//Reflection term
 			if(NdotL > 0.0)
@@ -152,6 +152,11 @@ vec4 getLighting()
 				}
 			}
 		}	
+	}
+	else
+	{
+		//Add the lightsources ambient at least
+		color += gl_LightSource[0].ambient;
 	}
 	
 	return color;

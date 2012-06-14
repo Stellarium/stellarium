@@ -69,7 +69,7 @@
 }
 
 #define MAXSPLITS 4
-#define FARZ 700.0f
+#define FARZ 500.0f
 
 
 Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
@@ -184,14 +184,17 @@ Scenery3d::~Scenery3d()
         heightmap = NULL;
     }
     if (location) delete location;
-         if (shadowMapTexture != 0)
-         {
-                 glDeleteTextures(1, &shadowMapTexture);
-                 shadowMapTexture = 0;
-                 shadowFBO = 0;
-                 delete shadowMapFbo;
-                 shadowMapFbo = NULL;
-         }
+        for(int i=0; i<frustumSplits; i++)
+        {
+            if(shadowMapsArray[i] != 0)
+            {
+                glDeleteTextures(1, &shadowMapsArray[i]);
+                shadowMapsArray[i] = 0;
+            }
+        }
+        delete shadowMapFbo;
+        shadowMapFbo = NULL;
+
     for (int i=0; i<6; i++) {
         if (cubeMap[i] != NULL) {
             delete cubeMap[i];
