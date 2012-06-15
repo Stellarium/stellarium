@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-11 18:38+0700\n"
-"PO-Revision-Date: 2012-06-03 18:42+0000\n"
+"PO-Revision-Date: 2012-06-14 16:07+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-12 04:50+0000\n"
-"X-Generator: Launchpad (build 15389)\n"
+"X-Launchpad-Export-Date: 2012-06-15 04:41+0000\n"
+"X-Generator: Launchpad (build 15414)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -3884,7 +3884,7 @@ msgstr "Faktisk synsfelt som tilbys av denne okular/teleskop-kombinasjonen"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:417
 msgid "Oculars Plug-in"
-msgstr ""
+msgstr "Programtillegg for okularer"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:418
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
@@ -3896,7 +3896,7 @@ msgstr "Versjon"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
 msgid "Overview"
-msgstr ""
+msgstr "Oversikt"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:425
 msgid ""
@@ -3905,6 +3905,10 @@ msgid ""
 "and telescopes, as well as CCD Sensors.  Your first time running the app "
 "will populate some samples to get your started."
 msgstr ""
+"Dette programtillegget er ment å simulere hva du ville se gjennom et okular. "
+"Denne innstillingsdialogen kan brukes til å legge til, endre eller slette "
+"okularer og teleskoper samt CCD-sensorer. Ved første gangs kjøring vil det "
+"fylles ut noen eksempler for å komme igang."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:426
 msgid ""
@@ -3939,16 +3943,16 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:432
 msgid "Hot Keys"
-msgstr ""
+msgstr "Hurtigtaster"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:433
 msgid "The plug-in's key bindings can be edited in the General Tab."
-msgstr ""
+msgstr "Programtilleggets tastesnarveier kan redigeres i Generelt-fanen."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:445
 #: plugins/Oculars/src/gui/OcularDialog.cpp:450
 msgid "[no key defined]"
-msgstr ""
+msgstr "[ingen tast definert]"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:454
 msgid "Switches on/off the ocular overlay."
@@ -3956,7 +3960,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:458
 msgid "Opens the pop-up navigation menu."
-msgstr ""
+msgstr "Åpner oppsprettsmenyen for navigering."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:865
 msgid "Enable only if an object is selected"
@@ -5741,10 +5745,12 @@ msgid ""
 "A plugin that shows some historical supernovae brighter than 10 visual "
 "magnitude."
 msgstr ""
+"Et programtillegg som viser noen historiske supernovaer lysere enn visuell "
+"magnitude 10."
 
 #: plugins/Supernovae/src/Supernovae.cpp:145
 msgid "Historical Supernovae configuration window"
-msgstr ""
+msgstr "Innstillingsvindu for historiske supernovaer"
 
 #: plugins/Supernovae/src/Supernova.cpp:99
 msgid "supernova"
@@ -5757,7 +5763,7 @@ msgstr "Supernovatype: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
 msgid "Historical Supernovae Plug-in"
-msgstr ""
+msgstr "Programtillegg for historiske supernovaer"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid ""
@@ -5768,12 +5774,12 @@ msgid ""
 "1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
 "(13 September)."
 msgstr ""
-"Et programtillegg som viser noen historiske supernovaer som er lysere enn "
-"visuell magnitude 10: SN 185A (7. desember), SN 386A (24. april), SN 1006A "
-"(29. april), SN 1054A (3. juli), SN 1181A (4. august), SN 1572A (5. "
-"november), SN 1604A (8. oktober), SN 1680A (15. august), SN 1885A (17. "
-"august), SN 1895B (5. juli), SN 1937C (21. august), SN 1972E (8. mai), SN "
-"1987A (24. februar) og SN 2011FE (13. september)."
+"Et programtillegg som viser noen historiske supernovaer lysere enn visuell "
+"magnitude 10: SN 185A (7. desember), SN 386A (24. april), SN 1006A (29. "
+"april), SN 1054A (3. juli), SN 1181A (4. august), SN 1572A (5. november), SN "
+"1604A (8. oktober), SN 1680A (15. august), SN 1885A (17. august), SN 1895B "
+"(5. juli), SN 1937C (21. august), SN 1972E (8. mai), SN 1987A (24. februar) "
+"og SN 2011FE (13. september)."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
 msgid "Light curves"
@@ -5831,15 +5837,15 @@ msgstr "Neste oppdatering: %1 dager"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
 msgid "Historical supernovae is updated"
-msgstr ""
+msgstr "Historiske supernovaer er oppdatert"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
 msgid "Historical Supernovae Configuration"
-msgstr ""
+msgstr "Innstilling for historiske supernovaer"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr ""
+msgstr "Programtillegginnstilling for historiske supernovaer"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:255
@@ -5857,7 +5863,7 @@ msgstr "Oppdateringsfrekvens (dager):"
 #: plugins/Quasars/src/ui_quasarsDialog.h:259
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 msgid "[next update info]"
-msgstr ""
+msgstr "[informasjon om neste oppdatering]"
 
 #: plugins/Quasars/src/Quasars.cpp:71
 msgid "Quasars"
@@ -5875,7 +5881,7 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:148
 msgid "Quasars configuration window"
-msgstr ""
+msgstr "Innstillingsvindu for kvasarer"
 
 #: plugins/Quasars/src/Quasar.cpp:95
 msgid "quasar"
@@ -5888,7 +5894,7 @@ msgstr "Z (rødforskyvning): %1"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:108
 msgid "Quasars Plug-in"
-msgstr ""
+msgstr "Programtillegg for kvasarer"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
 msgid ""
@@ -5896,6 +5902,9 @@ msgid ""
 "visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
 "Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"Programtillegget for kvasarer gir visualisering av noen kvasarer lysere enn "
+"visuell magnitude 16. En kvasarkatalog utarbeidet fra \"Quasars and Active "
+"Galactic Nuclei\" (13th Ed.)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
@@ -5903,19 +5912,19 @@ msgstr ""
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
 msgid "Quasars is updated"
-msgstr ""
+msgstr "Kvasarer er oppdatert"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:252
 msgid "Quasars Configuration"
-msgstr ""
+msgstr "Innstilling for kvasarer"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:253
 msgid "Quasars Plug-in Configuration"
-msgstr ""
+msgstr "Programtillegginnstilling for kvasarer"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:261
 msgid "Display mode for quasars"
-msgstr ""
+msgstr "Visningsmodus for kvasarer"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 msgid "Enable display of distribution for quasars"
@@ -5980,7 +5989,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:169
 #, qt-format
 msgid "Eccentricity: %1"
-msgstr ""
+msgstr "Eksentrisitet: %1"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: plugins/Pulsars/src/Pulsar.cpp:174
