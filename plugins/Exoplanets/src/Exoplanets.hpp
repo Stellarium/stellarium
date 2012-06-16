@@ -31,12 +31,14 @@
 #include <QList>
 #include <QSharedPointer>
 
+/*
 class QNetworkAccessManager;
 class QNetworkReply;
 class QProgressBar;
 class QSettings;
 class QTimer;
 class ExoplanetsDialog;
+*/
 class StelPainter;
 
 typedef QSharedPointer<Exoplanet> ExoplanetP;
@@ -44,10 +46,11 @@ typedef QSharedPointer<Exoplanet> ExoplanetP;
 //! This is an example of a plug-in which can be dynamically loaded into stellarium
 class Exoplanets : public StelObjectModule
 {
-	Q_OBJECT
+//	Q_OBJECT
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
+	/*
 	enum UpdateState {
 		Updating,		//!< Update in progress
 		CompleteNoUpdates,	//!< Update completed, there we no updates
@@ -55,6 +58,7 @@ public:
 		DownloadError,		//!< Error during download phase
 		OtherError		//!< Other error
 	};
+	*/
 	
 	Exoplanets();
 	virtual ~Exoplanets();
@@ -94,6 +98,7 @@ public:
 	//! get a exoplanet object by identifier
 	ExoplanetP getByID(const QString& id);
 
+	/*
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
 	//! plugin.
 	virtual bool configureGui(bool show=true);
@@ -145,13 +150,14 @@ public slots:
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 	void messageTimeout(void);
+	*/
 
 private:
 	// Font used for displaying our text
 	QFont font;
 
 	// if existing, delete Satellites section in main config.ini, then create with default values
-	void restoreDefaultConfigIni(void);
+	//void restoreDefaultConfigIni(void);
 
 	//! replace the json file with the default from the compiled-in resource
 	void restoreDefaultJsonFile(void);
@@ -180,6 +186,7 @@ private:
 	QList<ExoplanetP> ep;
 
 	// variables and functions for the updater
+	/*
 	UpdateState updateState;
 	QNetworkAccessManager* downloadMgr;
 	QString updateUrl;
@@ -201,7 +208,7 @@ private slots:
 	//! done.
 	void checkForUpdate(void);
 	void updateDownloadComplete(QNetworkReply* reply);
-
+	*/
 };
 
 
