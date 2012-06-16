@@ -32,8 +32,8 @@
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "LabelMgr.hpp"
-#include "Exoplanet.hpp"
 #include "Exoplanets.hpp"
+#include "Exoplanet.hpp"
 #include "ExoplanetsDialog.hpp"
 
 #include <QNetworkAccessManager>
@@ -85,7 +85,7 @@ Exoplanets::Exoplanets()
 	: progressBar(NULL)
 {
 	setObjectName("Exoplanets");
-	configDialog = new ExoplanetsDialog();
+	exoplanetsConfigDialog = new ExoplanetsDialog();
 	font.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 }
 
@@ -94,7 +94,7 @@ Exoplanets::Exoplanets()
 */
 Exoplanets::~Exoplanets()
 {
-	delete configDialog;
+	delete exoplanetsConfigDialog;
 }
 
 void Exoplanets::deinit()
@@ -152,8 +152,8 @@ void Exoplanets::init()
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		gui->addGuiActions("actionShow_Exoplanets_ConfigDialog", N_("Exoplanets configuration window"), "", groupName, true);
 
-		connect(gui->getGuiActions("actionShow_Exoplanets_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
-		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Exoplanets_ConfigDialog"), SLOT(setChecked(bool)));
+		connect(gui->getGuiActions("actionShow_Exoplanets_ConfigDialog"), SIGNAL(toggled(bool)), exoplanetsConfigDialog, SLOT(setVisible(bool)));
+		connect(exoplanetsConfigDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Exoplanets_ConfigDialog"), SLOT(setChecked(bool)));
 	}
 	catch (std::runtime_error &e)
 	{

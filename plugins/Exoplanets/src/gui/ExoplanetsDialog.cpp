@@ -104,12 +104,16 @@ void ExoplanetsDialog::setAboutHtml(void)
 {
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Exoplanets Plug-in") + "</h2><table width=\"90%\">";
-	html += "<tr width=\"30%\"><td>" + q_("Version:") + "</td><td>" + EXOPLANETS_PLUGIN_VERSION + "</td></tr>";
-	html += "<tr><td>" + q_("Author:") + "</td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr></table>";
+	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + EXOPLANETS_PLUGIN_VERSION + "</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr></table>";
 
-	html += "<p>" + q_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu") + "</p>";
+	html += "<p>" + QString(q_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from \"%1The Extrasolar Planets Encyclopaedia%2\"")).arg("<a href=\"http://exoplanet.eu/\">").arg("</a>") + "</p>";
 	html += "</body></html>";
 
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	Q_ASSERT(gui);
+	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+	ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
 	ui->aboutTextBrowser->setHtml(html);
 }
 
@@ -174,7 +178,7 @@ void ExoplanetsDialog::updateCompleteReceiver(void)
 
 void ExoplanetsDialog::restoreDefaults(void)
 {
-	qDebug() << "Exoplanetss::restoreDefaults";
+	qDebug() << "Exoplanets::restoreDefaults";
 	GETSTELMODULE(Exoplanets)->restoreDefaults();
 	GETSTELMODULE(Exoplanets)->readSettingsFromConfig();
 	updateGuiFromSettings();
