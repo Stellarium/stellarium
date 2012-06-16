@@ -193,9 +193,7 @@ private:
 	int updateFrequencyHours;
 
 	// GUI
-	ExoplanetsDialog* configDialog;
-	QByteArray normalStyleSheet;
-	QByteArray nightStyleSheet;
+	ExoplanetsDialog* exoplanetsConfigDialog;
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer
