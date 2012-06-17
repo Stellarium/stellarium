@@ -28,7 +28,6 @@
  #define GL_VERTEX_PROGRAM_POINT_SIZE 0x8642
 #endif
 
-#include <QGLShaderProgram>
 #include <QtOpenGL>
 
 #include "StelSkyDrawer.hpp"
@@ -52,10 +51,18 @@
 #define EYE_RESOLUTION (0.25f)
 #define MAX_LINEAR_RADIUS 8.f
 
+// Vertex attributes of ColoredTexturedVertex.
+const QVector<StelVertexAttribute> StelSkyDrawer::ColoredTexturedVertex::attributes = 
+	(QVector<StelVertexAttribute>() 
+	 << StelVertexAttribute(AttributeType_Vec2f, AttributeInterpretation_Position)
+	 << StelVertexAttribute(AttributeType_Vec3f, AttributeInterpretation_Color)
+	 << StelVertexAttribute(AttributeType_Vec2f, AttributeInterpretation_TexCoord));
+
 StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 	: core(acore)
 	, renderer(renderer)
-	, starsShaderProgram(NULL)
+	, starSpriteBuffer(NULL)
+	, drawing(false)
 {
 	eye = core->getToneReproducer();
 
@@ -80,7 +87,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 	setFlagHasAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
 	setTwinkleAmount(conf->value("stars/star_twinkle_amount",0.3).toFloat());
 	setFlagTwinkle(conf->value("stars/flag_star_twinkle",true).toBool());
-	setFlagPointStar(conf->value("stars/flag_point_star",false).toBool());
+	setDrawStarsAsPoints(conf->value("stars/flag_point_star",false).toBool());
 	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
 	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
@@ -134,38 +141,14 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 		ok = true;
 	}
 
-	// Initialize buffers for use by gl vertex array
-	nbPointSources = 0;
-	maxPointSources = 1000;
-	verticesGrid = new Vec2f[maxPointSources*6];
-	colorGrid = new Vec3f[maxPointSources*6];
-	textureGrid = new Vec2f[maxPointSources*6];
-	for (unsigned int i=0;i<maxPointSources; ++i)
-	{
-		textureGrid[i*6].set(0,0);
-		textureGrid[i*6+1].set(1,0);
-		textureGrid[i*6+2].set(1,1);
-		textureGrid[i*6+3].set(0,0);
-		textureGrid[i*6+4].set(1,1);
-		textureGrid[i*6+5].set(0,1);
-	}
+	starSpriteBuffer = renderer->createVertexBuffer<ColoredTexturedVertex>(PrimitiveType_Triangles);
 }
 
 StelSkyDrawer::~StelSkyDrawer()
 {
-	if (verticesGrid)
-		delete[] verticesGrid;
-	verticesGrid = NULL;
-	if (colorGrid)
-		delete[] colorGrid;
-	colorGrid = NULL;
-	if (textureGrid)
-		delete[] textureGrid;
-	textureGrid = NULL;
-
-	if (useShader)
+	if(NULL != starSpriteBuffer)
 	{
-		delete starsShaderProgram;
+		delete starSpriteBuffer;
 	}
 }
 
@@ -179,68 +162,6 @@ void StelSkyDrawer::init()
 	texHalo = textureManager.createTexture("textures/star16x16.png");
 	texBigHalo = textureManager.createTexture("textures/haloLune.png");
 	texSunHalo = textureManager.createTexture("textures/halo.png");
-
-	useShader = StelApp::getInstance().getUseGLShaders();
-	if (useShader)
-	{
-		qDebug() << "Use vertex shader for stars rendering";
-		QGLShader* vShader = new QGLShader(QGLShader::Vertex);
-		vShader->compileSourceCode(
-						"uniform mediump mat4 projectionMatrix;\n"
-						"attribute mediump vec2 skyVertex;\n"
-						"attribute mediump vec3 starColor;\n"
-						"attribute mediump vec2 starTexcoord;\n"
-						"varying mediump vec4 outColor;\n"
-						"varying mediump vec2 outTexcoord;\n"
-						"void main()\n"
-						"{\n"
-						"	gl_Position = projectionMatrix*vec4(skyVertex[0], \n"
-						"	                                    skyVertex[1], \n"
-						"	                                    0.,\n"
-						"	                                    1.);\n"
-						"	outTexcoord = starTexcoord;\n"
-						"	outColor = vec4(starColor, 1.);\n"
-						" }\n"
-						);
-		starsShaderProgram = new QGLShaderProgram();
-		if (!vShader->isCompiled())
-		{
-			qWarning() << "Error while compiling shader: " << vShader->log();
-			useShader = false;
-		}
-		if (!vShader->log().isEmpty())
-		{
-			qWarning() << "Warnings while compiling vertex shader: " << vShader->log();
-		}
-		QGLShader* fShader = new QGLShader(QGLShader::Fragment);
-		if (!fShader->compileSourceCode(
-				"uniform sampler2D tex;\n"
-				"varying mediump vec4 outColor;\n"
-				"varying mediump vec2 outTexcoord;\n"
-				"void main()\n"
-				"{\n"
-				"	gl_FragColor = /*vec4(1,1,1,1)*/texture2D(tex,outTexcoord)*outColor;\n"
-				"}\n"))
-		{
-			qWarning() << "Error while compiling fragment shader: " << fShader->log();
-			useShader = false;
-		}
-		if (!fShader->log().isEmpty())
-		{
-			qWarning() << "Warnings while compiling fragment shader: " << vShader->log();
-		}
-		starsShaderProgram->addShader(vShader);
-		starsShaderProgram->addShader(fShader);
-		if (!starsShaderProgram->link())
-		{
-			qWarning() << "Error while linking shader program: " << starsShaderProgram->log();
-			useShader = false;
-		}
-		if (!starsShaderProgram->log().isEmpty())
-		{
-			qWarning() << "Warnings while linking shader: " << starsShaderProgram->log();
-		}
-	}
 
 	update(0);
 }
@@ -414,24 +335,18 @@ bool StelSkyDrawer::computeRCMag(float mag, float rcMag[2]) const
 	return true;
 }
 
+//GL-REFACTOR TODO: REMOVE PASSED STELPAINTERS
+
 void StelSkyDrawer::preDrawPointSource(StelPainter* p)
 {
 	Q_ASSERT(p);
-	Q_ASSERT(nbPointSources==0);
+	Q_ASSERT(!drawing, Q_FUNC_INFO,
+	         "Attempting to start drawing point sources when it is already started");
 
-	// Blending is really important. Otherwise faint stars in the vicinity of
-	// bright star will cause tiny black squares on the bright star, e.g. see Procyon.
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
-
-	if (getFlagPointStar())
+	if (drawStarsAsPoints)
 	{
 		p->enableTexture2d(false);
 		p->setPointSize(0.1);
-	}
-	else
-	{
-		p->enableTexture2d(true);
 	}
 }
 
@@ -440,72 +355,40 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 {
 	Q_ASSERT(sPainter);
 
-	if (nbPointSources==0)
-		return;
 	texHalo->bind();
-	sPainter->enableTexture2d(true);
-	glBlendFunc(GL_ONE, GL_ONE);
-	glEnable(GL_BLEND);
+	renderer->setBlendMode(BlendMode_Add);
+	starSpriteBuffer->lock();
 
-	if (useShader)
-	{
-		Q_ASSERT(starsShaderProgram);
-		starsShaderProgram->bind();
-		const Mat4f& m = sPainter->getProjector()->getProjectionMatrix();
-		starsShaderProgram->setUniformValue("projectionMatrix",
-		                                    QMatrix4x4(m[0], m[4], m[8], m[12], 
-		                                               m[1], m[5], m[9], m[13], 
-		                                               m[2], m[6], m[10], m[14], 
-		                                               m[3], m[7], m[11], m[15]));
-		starsShaderProgram->setAttributeArray("skyVertex", (const GLfloat*)verticesGrid, 2, 0);
-		starsShaderProgram->setAttributeArray("starColor", (const GLfloat*)colorGrid, 3, 0);
-		starsShaderProgram->setAttributeArray("starTexcoord",(const GLfloat*)textureGrid, 2, 0);
-		starsShaderProgram->enableAttributeArray("skyVertex");
-		starsShaderProgram->enableAttributeArray("starColor");
-		starsShaderProgram->enableAttributeArray("starTexcoord");
-		glDrawArrays(GL_TRIANGLES, 0, nbPointSources * 6);
-		starsShaderProgram->disableAttributeArray("skyVertex");
-		starsShaderProgram->disableAttributeArray("starColor");
-		starsShaderProgram->disableAttributeArray("starTexcoord");
-		starsShaderProgram->release();
-	}
-	else
-	{
-#ifndef USE_OPENGL_ES2
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_COLOR_ARRAY);
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	// Vertices are already projected, so we dontProject.
+	//
+	// This is a hack - it would be better to refactor StelSkyDrawer,
+	// ZoneArray, etc, so projection gets done by the projector 
+	// during drawing like elsewhere.
+	renderer->drawVertexBuffer(starSpriteBuffer, NULL, sPainter->getProjector(), true);
 
-		// Load the color components
-		glColorPointer(3, GL_FLOAT, 0, colorGrid);
-		// Load the vertex array
-		glVertexPointer(2, GL_FLOAT, 0, verticesGrid);
-		// Load the texture coordinates array
-		glTexCoordPointer(2, GL_FLOAT, 0, textureGrid);
-
-		// And draw everything at once
-		glDrawArrays(GL_TRIANGLES, 0, nbPointSources*6);
-
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glDisableClientState(GL_COLOR_ARRAY);
-		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-#endif
-	}
-	nbPointSources = 0;
+	starSpriteBuffer->unlock();
+	starSpriteBuffer->clear();
+	drawing = false;
 }
 
-static Vec3d win;
 // Draw a point source halo.
-bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const float rcMag[2], const Vec3f& color, bool checkInScreen)
+bool StelSkyDrawer::drawPointSource
+	(StelPainter* sPainter, const Vec3d& v, const float rcMag[2],
+	 const Vec3f& color, bool checkInScreen)
 {
 	Q_ASSERT(sPainter);
+	Q_ASSERT(drawing, Q_FUNC_INFO,
+	         "Attempting to draw a point source without calling preDrawPointSource first.");
 
 	if (rcMag[0]<=0.f)
 		return false;
 
 	// TODO: compute Vec3f v_refr (position including refraction) --> NO: This is done in ZoneArray!
+	//
+	StelProjectorP projector = sPainter->getProjector();
 
-	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
+	Vec3d win;
+	if (!(checkInScreen ? projector->projectCheck(v, win) : projector->project(v, win)))
 		return false;
 
 	const float radius = rcMag[0];
@@ -515,6 +398,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 	// If the rmag is big, draw a big halo
 	if (radius>MAX_LINEAR_RADIUS+5.f)
 	{
+		//GL-REFACTOR TODO
 		float cmag = qMin(rcMag[1],(float)(radius-(MAX_LINEAR_RADIUS+5.f))/30.f);
 		float rmag = 150.f;
 		if (cmag>1.f)
@@ -528,42 +412,32 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 		sPainter->drawSprite2dMode(win[0], win[1], rmag);
 	}
 
-	if (flagPointStar)
+	if (drawStarsAsPoints)
 	{
+		//GL-REFACTOR draw star here, and consider 
+		//drawing all points in one buffer
 		// Draw the star rendered as GLpoint. This may be faster but it is not so nice
 		sPainter->setColor(color[0]*tw, color[1]*tw, color[2]*tw);
 		sPainter->drawPoint2d(win[0], win[1]);
 	}
 	else
 	{
-		// Store the drawing instructions in the vertex arrays
-		Vec2f* v = &(verticesGrid[nbPointSources*6]);
-		v->set(win[0]-radius,win[1]-radius); ++v;
-		v->set(win[0]+radius,win[1]-radius); ++v;
-		v->set(win[0]+radius,win[1]+radius); ++v;
-		v->set(win[0]-radius,win[1]-radius); ++v;
-		v->set(win[0]+radius,win[1]+radius); ++v;
-		v->set(win[0]-radius,win[1]+radius); ++v;
-
-		Vec3f w = color;
-		w = color;
-		w*=tw;
-		Vec3f* cv = &(colorGrid[nbPointSources*6]);
-		*cv = w; ++cv;
-		*cv = w; ++cv;
-		*cv = w; ++cv;
-		*cv = w; ++cv;
-		*cv = w; ++cv;
-		*cv = w; ++cv;
-		win = Vec3d(w[0],w[1],w[2]);
+		// Add a pair of triangles in window coordinates.
+		const Vec3f w = color * tw;
+		starSpriteBuffer->addVertex(ColoredTexturedVertex(
+		                  Vec2f(win[0] - radius, win[1] - radius), w, Vec2f(0.0f, 0.0f)));
+		starSpriteBuffer->addVertex(ColoredTexturedVertex(
+		                  Vec2f(win[0] + radius, win[1] - radius), w, Vec2f(1.0f, 0.0f)));
+		starSpriteBuffer->addVertex(ColoredTexturedVertex(
+		                  Vec2f(win[0] + radius, win[1] + radius), w, Vec2f(1.0f, 1.0f)));
+		starSpriteBuffer->addVertex(ColoredTexturedVertex(
+		                  Vec2f(win[0] - radius, win[1] - radius), w, Vec2f(0.0f, 0.0f)));
+		starSpriteBuffer->addVertex(ColoredTexturedVertex(
+		                  Vec2f(win[0] + radius, win[1] + radius), w, Vec2f(1.0f, 1.0f)));
+		starSpriteBuffer->addVertex(ColoredTexturedVertex(
+		                  Vec2f(win[0] - radius, win[1] + radius), w, Vec2f(0.0f, 1.0f)));
 	}
 
-	++nbPointSources;
-	if (nbPointSources>=maxPointSources)
-	{
-		// Flush the buffer (draw all buffered stars)
-		postDrawPointSource(sPainter);
-	}
 	return true;
 }
 
@@ -589,6 +463,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, flo
 		float cmag = 1.f;
 		if (rmag<pixRadius*3.f+100.)
 			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
+		Vec3d win;
 		painter->getProjector()->project(v, win);
 		painter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
 		painter->drawSprite2dMode(win[0], win[1], rmag);

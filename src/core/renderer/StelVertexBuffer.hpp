@@ -203,6 +203,19 @@ public:
 		return vertexCount;
 	}
 	
+	//! Clear the buffer, removing all vertices.
+	//!
+	//! Can be only called when unlocked.
+	//!
+	//! The backend implementation might reuse previously allocated storage after 
+	//! clearing, so calling clear() might be more efficient than destroying 
+	//! a buffer and then constructing a new one.
+	virtual void clear()
+	{
+		Q_ASSERT_X(!locked_, Q_FUNC_INFO, "Trying to clear a locked vertex buffer");
+		backend->clear();
+	}
+
 private:
 	//! Construct a StelVertexBuffer wrapping specified backend. Only Renderer can do that.
 	StelVertexBuffer(StelVertexBufferBackend* backend)

@@ -21,6 +21,7 @@
 #define _STELSKYDRAWER_HPP_
 
 #include "renderer/StelTextureTypes.hpp"
+#include "renderer/StelVertexBuffer.hpp"
 #include "StelProjectorType.hpp"
 #include "VecMath.hpp"
 #include "RefractionExtinction.hpp"
@@ -135,10 +136,10 @@ public slots:
 	//! Get flag for source twinkling.
 	bool getFlagTwinkle() const {return flagStarTwinkle;}
 
-	//! Set flag for displaying point sources as GLpoints (faster on some hardware but not so nice).
-	void setFlagPointStar(bool b) {flagPointStar=b;}
-	//! Get flag for displaying point sources as GLpoints (faster on some hardware but not so nice).
-	bool getFlagPointStar() const {return flagPointStar;}
+	//! Set flag for displaying point sources as points (faster on some hardware but not so nice).
+	void setDrawStarsAsPoints(bool b) {drawStarsAsPoints=b;}
+	//! Get flag for displaying point sources as points (faster on some hardware but not so nice).
+	bool getDrawStarsAsPoints() const {return drawStarsAsPoints;}
 
 	//! Set the parameters so that the stars disapear at about the limit given by the bortle scale
 	//! The limit is valid only at a given zoom level (around 60 deg)
@@ -242,6 +243,8 @@ private:
 	float findWorldLumForMag(float mag, float targetRadius);
 
 	StelCore* core;
+
+	//! Used to draw the sky.
 	class StelRenderer* renderer;
 	StelToneReproducer* eye;
 
@@ -249,7 +252,7 @@ private:
 	Refraction refraction;
 
 	float maxAdaptFov, minAdaptFov, lnfovFactor;
-	bool flagPointStar;
+	bool drawStarsAsPoints;
 	bool flagStarTwinkle;
 	float twinkleAmount;
 
@@ -284,17 +287,22 @@ private:
 	//! The scaling applied to input luminance before they are converted by the StelToneReproducer
 	float inScale;
 
-	// Variables used for GL optimization when displaying point sources
-	//! Buffer for storing the vertex array data
-	Vec2f* verticesGrid;
-	//! Buffer for storing the color array data
-	Vec3f* colorGrid;
-	//! Buffer for storing the texture coordinate array data
-	Vec2f* textureGrid;
-	//! Current number of sources stored in the buffers (still to display)
-	unsigned int nbPointSources;
-	//! Maximum number of sources which can be stored in the buffers
-	unsigned int maxPointSources;
+	//! A simple 2D vertex with a position, color and a texture coordinate.
+	struct ColoredTexturedVertex
+	{
+		Vec2f position;
+		Vec3f color;
+		Vec2f texCoord;
+		ColoredTexturedVertex(Vec2f position, Vec3f color, Vec2f texCoord)
+			:position(position), color(color), texCoord(texCoord){}
+		static const QVector<StelVertexAttribute> attributes;
+	};
+
+	//! When stars are drawn as triangle pairs ("sprites"), these are stored in this buffer.
+	StelVertexBuffer<ColoredTexturedVertex>* starSpriteBuffer;
+
+	//! Are we drawing point sources at the moment?
+	bool drawing;
 
 	//! The maximum transformed luminance to apply at the next update
 	float maxLum;
@@ -307,9 +315,6 @@ private:
 
 	bool flagLuminanceAdaptation;
 
-	bool useShader;
-	class QGLShaderProgram* starsShaderProgram;
-	
 	float big3dModelHaloRadius;
 };
 
