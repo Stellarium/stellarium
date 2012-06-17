@@ -27,20 +27,19 @@
 #include "StelObjectMgr.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelJsonParser.hpp"
-//#include "StelIniParser.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
-//#include "LabelMgr.hpp"
+#include "LabelMgr.hpp"
 #include "Exoplanets.hpp"
 #include "Exoplanet.hpp"
-//#include "ExoplanetsDialog.hpp"
+#include "ExoplanetsDialog.hpp"
 
-//#include <QNetworkAccessManager>
-//#include <QNetworkReply>
-//#include <QKeyEvent>
-//#include <QAction>
-//#include <QProgressBar>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QKeyEvent>
+#include <QAction>
+#include <QProgressBar>
 #include <QDebug>
 #include <QFileInfo>
 #include <QFile>
@@ -82,11 +81,12 @@ Q_EXPORT_PLUGIN2(Exoplanets, ExoplanetsStelPluginInterface)
  Constructor
 */
 Exoplanets::Exoplanets()
-//	: progressBar(NULL)
+	: progressBar(NULL)
 {
 	setObjectName("Exoplanets");
-//	exoplanetsConfigDialog = new ExoplanetsDialog();
-	font.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
+	exoplanetsConfigDialog = new ExoplanetsDialog();
+	conf = StelApp::getInstance().getSettings();
+	font.setPixelSize(conf->value("gui/base_font_size", 13).toInt());
 }
 
 /*
@@ -94,7 +94,7 @@ Exoplanets::Exoplanets()
 */
 Exoplanets::~Exoplanets()
 {
-//	delete exoplanetsConfigDialog;
+	delete exoplanetsConfigDialog;
 }
 
 void Exoplanets::deinit()
@@ -125,13 +125,10 @@ double Exoplanets::getCallOrder(StelModuleActionName actionName) const
 */
 void Exoplanets::init()
 {
-//	QSettings* conf = StelApp::getInstance().getSettings();
-
 	try
 	{
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Exoplanets");
 
-		/*
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Exoplanets"))
 		{
@@ -141,14 +138,12 @@ void Exoplanets::init()
 
 		// populate settings from main config file.
 		readSettingsFromConfig();
-		*/
 
 		jsonCatalogPath = StelFileMgr::findFile("modules/Exoplanets", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/exoplanets.json";
 
 		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
 		Exoplanet::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Exoplanets/exoplanet.png");
 
-		/*
 		// key bindings and other actions
 		// TRANSLATORS: Title of a group of key bindings in the Help window
 		QString groupName = N_("Plugin Key Bindings");
@@ -157,7 +152,6 @@ void Exoplanets::init()
 
 		connect(gui->getGuiActions("actionShow_Exoplanets_ConfigDialog"), SIGNAL(toggled(bool)), exoplanetsConfigDialog, SLOT(setVisible(bool)));
 		connect(exoplanetsConfigDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Exoplanets_ConfigDialog"), SLOT(setChecked(bool)));
-		*/
 	}
 	catch (std::runtime_error &e)
 	{
@@ -165,14 +159,12 @@ void Exoplanets::init()
 		return;
 	}
 
-	/*
 	// A timer for hiding alert messages
 	messageTimer = new QTimer(this);
 	messageTimer->setSingleShot(true);   // recurring check for update
 	messageTimer->setInterval(9000);      // 6 seconds should be enough time
 	messageTimer->stop();
 	connect(messageTimer, SIGNAL(timeout()), this, SLOT(messageTimeout()));
-	*/
 
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(jsonCatalogPath).exists())
@@ -192,7 +184,6 @@ void Exoplanets::init()
 
 	readJsonFile();
 
-	/*
 	// Set up download manager and the update schedule
 	downloadMgr = new QNetworkAccessManager(this);
 	connect(downloadMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateDownloadComplete(QNetworkReply*)));
@@ -202,7 +193,6 @@ void Exoplanets::init()
 	updateTimer->setInterval(13000);     // check once every 13 seconds to see if it is time for an update
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdate()));
 	updateTimer->start();
-	*/
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
@@ -347,8 +337,8 @@ void Exoplanets::restoreDefaultJsonFile(void)
 		// Make sure that in the case where an online update has previously been done, but
 		// the json file has been manually removed, that an update is schreduled in a timely
 		// manner
-		//StelApp::getInstance().getSettings()->remove("Exoplanets/last_update");
-		//lastUpdate = QDateTime::fromString("2012-05-24T12:00:00", Qt::ISODate);
+		conf->remove("Exoplanets/last_update");
+		lastUpdate = QDateTime::fromString("2012-05-24T12:00:00", Qt::ISODate);
 	}
 }
 
@@ -466,7 +456,6 @@ ExoplanetP Exoplanets::getByID(const QString& id)
 	return ExoplanetP();
 }
 
-/*
 bool Exoplanets::configureGui(bool show)
 {
 	if (show)
@@ -488,7 +477,6 @@ void Exoplanets::restoreDefaults(void)
 
 void Exoplanets::restoreDefaultConfigIni(void)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Exoplanets");
 
 	// delete all existing Exoplanets settings...
@@ -502,7 +490,6 @@ void Exoplanets::restoreDefaultConfigIni(void)
 
 void Exoplanets::readSettingsFromConfig(void)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Exoplanets");
 
 	updateUrl = conf->value("url", "http://stellarium.astro.uni-altai.ru/exoplanets.json").toString();
@@ -515,7 +502,6 @@ void Exoplanets::readSettingsFromConfig(void)
 
 void Exoplanets::saveSettingsToConfig(void)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Exoplanets");
 
 	conf->setValue("url", updateUrl);
@@ -550,7 +536,6 @@ void Exoplanets::updateJSON(void)
 	}
 
 	lastUpdate = QDateTime::currentDateTime();
-	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("Exoplanets/last_update", lastUpdate.toString(Qt::ISODate));
 
 	emit(jsonUpdateComplete());
@@ -628,4 +613,3 @@ void Exoplanets::messageTimeout(void)
 		GETSTELMODULE(LabelMgr)->deleteLabel(i);
 	}
 }
-*/
