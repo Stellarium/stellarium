@@ -8,6 +8,7 @@ StelTestQGL2VertexBufferBackend(const PrimitiveType type,
 	, locked(false)
 	, primitiveType(type)
 	, vertexCount(0)
+	, vertexCapacity(0)
 {
 	// Create a buffer for each vertex attribute.
 	for(int attrib = 0; attrib < attributes.size(); ++attrib)
@@ -42,7 +43,14 @@ StelTestQGL2VertexBufferBackend::~StelTestQGL2VertexBufferBackend()
 
 void StelTestQGL2VertexBufferBackend::addVertex(const quint8* const vertexInPtr)
 {
+	//StelVertexBuffer enforces bounds, so we don't need to
 	++vertexCount;
+	if(vertexCount < vertexCapacity)
+	{
+		setVertex(vertexCount - 1, vertexInPtr);
+		return;
+	}
+	++vertexCapacity;
 	// Points to the current attribute (e.g. color, normal, vertex) within the vertex.
 	const quint8* attribPtr = vertexInPtr;
 	for(int attrib = 0; attrib < attributes.size(); ++attrib)
@@ -186,6 +194,3 @@ void StelTestQGL2VertexBufferBackend::
 
 	program->release();
 }
-
-
-

@@ -72,6 +72,13 @@ public:
 	//! Unlock the buffer. Must be called to modify the buffer after drawing.
 	virtual void unlock() = 0;
 	
+	//! Clear the buffer, removing all vertices.
+	//!
+	//! The backend implementation might reuse previously allocated storage after 
+	//! clearing, so calling clear() might be more efficient than destroying 
+	//! a buffer and then constructing a new one.
+	virtual void clear() = 0;
+
 	//! Assert that the user-specified (in StelVertexBuffer) vertex type is valid.
 	//!
 	//! For instance, assert that there is no more than 1 attribute with

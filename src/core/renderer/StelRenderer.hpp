@@ -12,6 +12,22 @@
 #include "StelTextureBackend.hpp"
 #include "StelTextureParams.hpp"
 
+//! Pixel blending modes.
+//!
+//! Used for example for transparency, mixing colors in background 
+//! with colors drawn in front of it.
+enum BlendMode
+{
+	//! No blending, new color overrides previous color.
+	BlendMode_None,
+	//! Colors of each channel are added up, clamping at maximum value 
+	//! (255 for 8bit channels, 1.0 for floating-point colors)
+	BlendMode_Add,
+	//! Use alpha value of the front color for blending.
+	//! (0 is fully transparent, 255 or 1.0 fully opague)
+	BlendMode_Alpha
+};
+
 
 //Notes:
 //
@@ -101,14 +117,25 @@ public:
 	//!                     If NULL, indexing will not be used and vertices will be drawn
 	//!                     directly in order they are in the buffer.
 	//! @param projector    Projector to project vertices' positions before drawing.
+	//!                     Also determines viewport to draw in.
 	//!                     If NULL, no projection will be done and the vertices will be drawn
 	//!                     directly.
+	//! @param dontProject  Disable vertex position projection.
+	//!                     (Projection matrix and viewport information of the 
+	//!                     projector are still used)
+	//!
+	//!                     This is a hack to support StelSkyDrawer, which already 
+	//!                     projects the star positions before drawing them.
+	//!                     Avoid using this if possible. StelSkyDrawer might be 
+	//!                     refactored in future to remove the need for dontProject,
+	//!                     in which case it should be removed.
 	template<class V>
 	void drawVertexBuffer(StelVertexBuffer<V>* vertexBuffer, 
 	                      class StelIndexBuffer* indexBuffer = NULL,
-	                      StelProjectorP projector = StelProjectorP(NULL))
+	                      StelProjectorP projector = StelProjectorP(NULL),
+	                      bool dontProject = false)
 	{
-		drawVertexBufferBackend(vertexBuffer->backend, indexBuffer, projector);
+		drawVertexBufferBackend(vertexBuffer->backend, indexBuffer, projector, dontProject);
 	}
 
 	//! Draw a rectangle to the screen.
@@ -225,6 +252,13 @@ public:
 	//! (this is to keep behavior from before the GL refactor unchanged).
 	virtual void setGlobalColor(const QColor& color) = 0;
 
+	//! Set blend mode.
+	//!
+	//! Used to enable/disable transparency and similar effects.
+	//!
+	//! On startup, the blend mode is BlendMode_None.
+	virtual void setBlendMode(const BlendMode blendMode) = 0;
+
 protected:
 	//! Create a vertex buffer backend. Used by createVertexBuffer.
 	//!
@@ -239,10 +273,11 @@ protected:
 
 	//! Draw contents of a vertex buffer (backend). Used by drawVertexBuffer.
 	//!
-	//! @see drawVertexBufferBackend
+	//! @see drawVertexBuffer
 	virtual void drawVertexBufferBackend(StelVertexBufferBackend* vertexBuffer, 
 	                                     class StelIndexBuffer* indexBuffer,
-	                                     StelProjectorP projector) = 0;
+	                                     StelProjectorP projector,
+	                                     const bool dontProject) = 0;
 
 	//! Implementation of createTextureBackend.
 	//!

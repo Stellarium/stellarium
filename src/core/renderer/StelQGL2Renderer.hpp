@@ -288,24 +288,22 @@ protected:
 		invariant();
 		return new StelTestQGL2VertexBufferBackend(primitiveType, attributes);
 	}
-	
+
 	virtual void drawVertexBufferBackend(StelVertexBufferBackend* vertexBuffer, 
 	                                     class StelIndexBuffer* indexBuffer = NULL,
-	                                     StelProjectorP projector = NULL)
+	                                     StelProjectorP projector = NULL,
+	                                     bool dontProject = false)
 	{
 		invariant();
 		Q_ASSERT_X(indexBuffer == NULL, Q_FUNC_INFO,
-		           "TODO: Using index buffer when drawing not yet implemented");
+		           "TODO: Drawing with index buffers not yet implemented");
 
 		//TODO Projection using StelProjector 
 		//TODO IndexBuffer 
-		
 		StelTestQGL2VertexBufferBackend* backend =
 			dynamic_cast<StelTestQGL2VertexBufferBackend*>(vertexBuffer);
 		Q_ASSERT_X(backend != NULL, Q_FUNC_INFO,
-		           "StelQGL2Renderer: Trying to draw a vertex buffer created by a "
-		           "different renderer backend");
-
+		           "StelQGL2Renderer: Vertex buffer created by different renderer backend");
 		// GL setup before drawing.
 
 		glDisable(GL_DEPTH_TEST);
@@ -320,7 +318,7 @@ protected:
 		{
 			projector = StelApp::getInstance().getCore()->getProjection2d();
 		}
-		else
+		else if(!dontProject)
 		{
 			Q_ASSERT_X(projector == NULL, Q_FUNC_INFO,
 			           "TODO: Projection when drawing not yet implemented");
@@ -328,7 +326,10 @@ protected:
 
 		// Need to transpose the matrix for GL.
 		const Mat4f& m = projector->getProjectionMatrix();
-		const QMatrix4x4 transposed(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
+		const QMatrix4x4 transposed(m[0], m[4], m[8], m[12],
+		                            m[1], m[5], m[9], m[13], 
+		                            m[2], m[6], m[10], m[14], 
+		                            m[3], m[7], m[11], m[15]);
 
 		glFrontFace(projector->needGlFrontFaceCW() ? GL_CW : GL_CCW);
 
