@@ -27,7 +27,6 @@
 #include "StelObjectMgr.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelJsonParser.hpp"
-#include "StelIniParser.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
@@ -86,7 +85,8 @@ Supernovae::Supernovae()
 {
 	setObjectName("Supernovae");
 	configDialog = new SupernovaeDialog();
-	font.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
+	conf = StelApp::getInstance().getSettings();
+	font.setPixelSize(conf->value("gui/base_font_size", 13).toInt());
 }
 
 /*
@@ -118,8 +118,6 @@ double Supernovae::getCallOrder(StelModuleActionName actionName) const
 */
 void Supernovae::init()
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
-
 	try
 	{
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Supernovae");
@@ -327,6 +325,12 @@ void Supernovae::restoreDefaultJsonFile(void)
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(sneJsonPath);
 		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
+
+		// Make sure that in the case where an online update has previously been done, but
+		// the json file has been manually removed, that an update is schreduled in a timely
+		// manner
+		conf->remove("Supernovae/last_update");
+		lastUpdate = QDateTime::fromString("2012-05-24T12:00:00", Qt::ISODate);
 	}
 }
 
@@ -465,7 +469,6 @@ void Supernovae::restoreDefaults(void)
 
 void Supernovae::restoreDefaultConfigIni(void)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Supernovae");
 
 	// delete all existing Pulsars settings...
@@ -479,7 +482,6 @@ void Supernovae::restoreDefaultConfigIni(void)
 
 void Supernovae::readSettingsFromConfig(void)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Supernovae");
 
 	updateUrl = conf->value("url", "http://stellarium.org/json/supernovae.json").toString();
@@ -492,7 +494,6 @@ void Supernovae::readSettingsFromConfig(void)
 
 void Supernovae::saveSettingsToConfig(void)
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("Pulsars");
 
 	conf->setValue("url", updateUrl);
@@ -527,7 +528,6 @@ void Supernovae::updateJSON(void)
 	}
 
 	lastUpdate = QDateTime::currentDateTime();
-	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("Supernovae/last_update", lastUpdate.toString(Qt::ISODate));
 
 	emit(jsonUpdateComplete());

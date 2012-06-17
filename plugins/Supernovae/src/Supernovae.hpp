@@ -193,10 +193,10 @@ private:
 	QDateTime lastUpdate;
 	int updateFrequencyDays;
 
+	QSettings* conf;
+
 	// GUI
-	SupernovaeDialog* configDialog;
-	QByteArray normalStyleSheet;
-	QByteArray nightStyleSheet;
+	SupernovaeDialog* configDialog;	
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer
