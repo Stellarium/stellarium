@@ -1,5 +1,5 @@
 /*
- * Stellarium Exoplanets Plug-in GUI
+ * Stellarium Quasars Plug-in GUI
  *
  * Copyright (C) 2012 Alexander Wolf
  *
@@ -25,9 +25,9 @@
 #include <QFileDialog>
 
 #include "StelApp.hpp"
-#include "ui_exoplanetsDialog.h"
-#include "ExoplanetsDialog.hpp"
-#include "Exoplanets.hpp"
+#include "ui_quasarsDialog.h"
+#include "QuasarsDialog.hpp"
+#include "Quasars.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelMovementMgr.hpp"
@@ -37,12 +37,12 @@
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
-ExoplanetsDialog::ExoplanetsDialog() : updateTimer(NULL)
+QuasarsDialog::QuasarsDialog() : updateTimer(NULL)
 {
-        ui = new Ui_exoplanetsDialog;
+	ui = new Ui_quasarsDialog;
 }
 
-ExoplanetsDialog::~ExoplanetsDialog()
+QuasarsDialog::~QuasarsDialog()
 {
 	if (updateTimer)
 	{
@@ -53,7 +53,7 @@ ExoplanetsDialog::~ExoplanetsDialog()
 	delete ui;
 }
 
-void ExoplanetsDialog::retranslate()
+void QuasarsDialog::retranslate()
 {
 	if (dialog)
 	{
@@ -64,7 +64,7 @@ void ExoplanetsDialog::retranslate()
 }
 
 // Initialize the dialog widgets and connect the signals/slots
-void ExoplanetsDialog::createDialogContent()
+void QuasarsDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);	
@@ -72,10 +72,12 @@ void ExoplanetsDialog::createDialogContent()
 		this, SLOT(retranslate()));
 
 	// Settings tab / updates group
+	ui->displayModeCheckBox->setChecked(GETSTELMODULE(Quasars)->getDisplayMode());
+	connect(ui->displayModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDistributionEnabled(int)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
-	connect(GETSTELMODULE(Exoplanets), SIGNAL(updateStateChanged(Exoplanets::UpdateState)), this, SLOT(updateStateReceiver(Exoplanets::UpdateState)));
-	connect(GETSTELMODULE(Exoplanets), SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
+	connect(GETSTELMODULE(Quasars), SIGNAL(updateStateChanged(Quasars::UpdateState)), this, SLOT(updateStateReceiver(Quasars::UpdateState)));
+	connect(GETSTELMODULE(Quasars), SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
 	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
 	refreshUpdateValues(); // fetch values for last updated and so on
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
@@ -100,17 +102,21 @@ void ExoplanetsDialog::createDialogContent()
 
 }
 
-void ExoplanetsDialog::setAboutHtml(void)
+void QuasarsDialog::setAboutHtml(void)
 {
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("Exoplanets Plug-in") + "</h2><table width=\"90%\">";
-	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + EXOPLANETS_PLUGIN_VERSION + "</td></tr>";
-	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr></table>";
+	html += "<h2>" + q_("Quasars Plug-in") + "</h2><table width=\"90%\">";
+	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + QUASARS_PLUGIN_VERSION + "</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "</table>";
 
-	html += "<p>" + QString(q_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from \"%1The Extrasolar Planets Encyclopaedia%2\"")).arg("<a href=\"http://exoplanet.eu/\">").arg("</a>") + "</p>";
+	html += QString("<p>%1 (<a href=\"%2\">%3</a>)</p>")
+			.arg(q_("The Quasars plugin provides visualization of some quasars brighter than 16 visual magnitude. A catalogue of quasars compiled from \"Quasars and Active Galactic Nuclei\" (13th Ed.)"))
+			.arg("http://adsabs.harvard.edu/abs/2010A%26A...518A..10V")
+			.arg(q_("Veron+ 2010"));
 
-	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Exoplanets plugin") + "</p>";
+	html += "</ul><h3>" + q_("Links") + "</h3>";
+	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Quasars plugin") + "</p>";
 	html += "<p><ul>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">")).arg("</a>") + "</li>";
@@ -119,44 +125,47 @@ void ExoplanetsDialog::setAboutHtml(void)
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + q_("If you want read full information about plugin, his history and format of catalog you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Exoplanets_plugin\">").arg("</a>") + "</li>";
+	html += "<li>" + q_("If you want read full information about plugin, his history and format of catalog you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Quasars_plugin\">").arg("</a>") + "</li>";
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 	ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+
 	ui->aboutTextBrowser->setHtml(html);
 }
 
-void ExoplanetsDialog::refreshUpdateValues(void)
+void QuasarsDialog::refreshUpdateValues(void)
 {
-	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Exoplanets)->getLastUpdate());
-	ui->updateFrequencySpinBox->setValue(GETSTELMODULE(Exoplanets)->getUpdateFrequencyHours());
-	int secondsToUpdate = GETSTELMODULE(Exoplanets)->getSecondsToUpdate();
-	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Exoplanets)->getUpdatesEnabled());
-	if (!GETSTELMODULE(Exoplanets)->getUpdatesEnabled())
+	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Quasars)->getLastUpdate());
+	ui->updateFrequencySpinBox->setValue(GETSTELMODULE(Quasars)->getUpdateFrequencyDays());
+	int secondsToUpdate = GETSTELMODULE(Quasars)->getSecondsToUpdate();
+	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Quasars)->getUpdatesEnabled());
+	if (!GETSTELMODULE(Quasars)->getUpdatesEnabled())
 		ui->nextUpdateLabel->setText(q_("Internet updates disabled"));
-	else if (GETSTELMODULE(Exoplanets)->getUpdateState() == Exoplanets::Updating)
+	else if (GETSTELMODULE(Quasars)->getUpdateState() == Quasars::Updating)
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
 	else if (secondsToUpdate <= 60)
 		ui->nextUpdateLabel->setText(q_("Next update: < 1 minute"));
 	else if (secondsToUpdate < 3600)
 		ui->nextUpdateLabel->setText(QString(q_("Next update: %1 minutes")).arg((secondsToUpdate/60)+1));
-	else
+	else if (secondsToUpdate < 86400)
 		ui->nextUpdateLabel->setText(QString(q_("Next update: %1 hours")).arg((secondsToUpdate/3600)+1));
+	else
+		ui->nextUpdateLabel->setText(QString(q_("Next update: %1 days")).arg((secondsToUpdate/86400)+1));
 }
 
-void ExoplanetsDialog::setUpdateValues(int hours)
+void QuasarsDialog::setUpdateValues(int days)
 {
-	GETSTELMODULE(Exoplanets)->setUpdateFrequencyHours(hours);
+	GETSTELMODULE(Quasars)->setUpdateFrequencyDays(days);
 	refreshUpdateValues();
 }
 
-void ExoplanetsDialog::setUpdatesEnabled(int checkState)
+void QuasarsDialog::setUpdatesEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Exoplanets)->setUpdatesEnabled(b);
+	GETSTELMODULE(Quasars)->setUpdatesEnabled(b);
 	ui->updateFrequencySpinBox->setEnabled(b);
 	if(b)
 		ui->updateButton->setText(q_("Update now"));
@@ -166,51 +175,57 @@ void ExoplanetsDialog::setUpdatesEnabled(int checkState)
 	refreshUpdateValues();
 }
 
-void ExoplanetsDialog::updateStateReceiver(Exoplanets::UpdateState state)
+void QuasarsDialog::setDistributionEnabled(int checkState)
 {
-	//qDebug() << "ExoplanetsDialog::updateStateReceiver got a signal";
-	if (state==Exoplanets::Updating)
+	bool b = checkState != Qt::Unchecked;
+	GETSTELMODULE(Quasars)->setDisplayMode(b);
+}
+
+void QuasarsDialog::updateStateReceiver(Quasars::UpdateState state)
+{
+	//qDebug() << "QuasarsDialog::updateStateReceiver got a signal";
+	if (state==Quasars::Updating)
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
-	else if (state==Exoplanets::DownloadError || state==Exoplanets::OtherError)
+	else if (state==Quasars::DownloadError || state==Quasars::OtherError)
 	{
 		ui->nextUpdateLabel->setText(q_("Update error"));
 		updateTimer->start();  // make sure message is displayed for a while...
 	}
 }
 
-void ExoplanetsDialog::updateCompleteReceiver(void)
+void QuasarsDialog::updateCompleteReceiver(void)
 {
-        ui->nextUpdateLabel->setText(QString(q_("Exoplanets is updated")));
+	ui->nextUpdateLabel->setText(QString(q_("Quasars is updated")));
 	// display the status for another full interval before refreshing status
 	updateTimer->start();
-	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Exoplanets)->getLastUpdate());
+	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Quasars)->getLastUpdate());
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 }
 
-void ExoplanetsDialog::restoreDefaults(void)
+void QuasarsDialog::restoreDefaults(void)
 {
-	qDebug() << "Exoplanets::restoreDefaults";
-	GETSTELMODULE(Exoplanets)->restoreDefaults();
-	GETSTELMODULE(Exoplanets)->readSettingsFromConfig();
+	qDebug() << "Quasars::restoreDefaults";
+	GETSTELMODULE(Quasars)->restoreDefaults();
+	GETSTELMODULE(Quasars)->readSettingsFromConfig();
 	updateGuiFromSettings();
 }
 
-void ExoplanetsDialog::updateGuiFromSettings(void)
+void QuasarsDialog::updateGuiFromSettings(void)
 {
-	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Exoplanets)->getUpdatesEnabled());
+	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Quasars)->getUpdatesEnabled());
 	refreshUpdateValues();
 }
 
-void ExoplanetsDialog::saveSettings(void)
+void QuasarsDialog::saveSettings(void)
 {
-	GETSTELMODULE(Exoplanets)->saveSettingsToConfig();
+	GETSTELMODULE(Quasars)->saveSettingsToConfig();
 }
 
-void ExoplanetsDialog::updateJSON(void)
+void QuasarsDialog::updateJSON(void)
 {
-	if(GETSTELMODULE(Exoplanets)->getUpdatesEnabled())
+	if(GETSTELMODULE(Quasars)->getUpdatesEnabled())
 	{
-		GETSTELMODULE(Exoplanets)->updateJSON();
+		GETSTELMODULE(Quasars)->updateJSON();
 	}
 }
