@@ -197,10 +197,10 @@ private:
 	int updateFrequencyDays;
 	bool distributionEnabled;
 
+	QSettings* conf;
+
 	// GUI
 	PulsarsDialog* configDialog;
-	QByteArray normalStyleSheet;
-	QByteArray nightStyleSheet;
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer
