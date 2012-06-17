@@ -662,7 +662,7 @@ void StarMgr::draw(StelCore* core)
 			{
 				if (i==0) goto exit_loop;
 			}
-			if (skyDrawer->getFlagPointStar())
+			if (skyDrawer->getDrawStarsAsPoints())
 			{
 				rcmag_table[2*i+1] *= starsFader.getInterstate();
 			}

@@ -75,6 +75,11 @@ public:
 		locked = false;
 	}
 
+	virtual void clear()
+	{
+		vertexCount = 0;
+	}
+
 	void draw(class StelQGL2Renderer& renderer, const QMatrix4x4& projectionMatrix);
 
 private:
@@ -84,8 +89,11 @@ private:
 	//! Graphics primitive type formad by the vertices of this buffer.
 	PrimitiveType primitiveType;
 
-	//! Number of vertices in the buffer.
+	//! Number of used vertices in the buffer.
 	int vertexCount;
+
+	//! Actual number of vertices in the buffer.
+	int vertexCapacity;
 
 	//! Buffers of each vertex attribute.
 	QVector<AnyAttributeBuffer*> buffers;
