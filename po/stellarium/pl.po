@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-11 18:38+0700\n"
-"PO-Revision-Date: 2012-06-10 01:06+0000\n"
+"PO-Revision-Date: 2012-06-17 02:04+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-12 04:51+0000\n"
-"X-Generator: Launchpad (build 15389)\n"
+"X-Launchpad-Export-Date: 2012-06-17 04:33+0000\n"
+"X-Generator: Launchpad (build 15419)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -3910,7 +3910,7 @@ msgstr "Rzeczywiste pole widzenia tego okularu w tym teleskopie"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:417
 msgid "Oculars Plug-in"
-msgstr ""
+msgstr "Wtyczka Okulary"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:418
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
@@ -3922,7 +3922,7 @@ msgstr "Wersja"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
 msgid "Overview"
-msgstr ""
+msgstr "Przegląd"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:425
 msgid ""
@@ -3931,6 +3931,10 @@ msgid ""
 "and telescopes, as well as CCD Sensors.  Your first time running the app "
 "will populate some samples to get your started."
 msgstr ""
+"Wtyczka ta umożliwia symulację obrazu widzianego przez okular. To okno "
+"konfiguracji pozwala na dodawanie, modyfikowanie i usuwanie okularów i "
+"teleskopów, jak również sensorów CCD. Podczas pierwszego uruchomienia "
+"zostanie tutaj umieszczonych kilka przykładowych ustawień."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:426
 msgid ""
@@ -3949,6 +3953,10 @@ msgid ""
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
+"Możliwe jest wyświetlenie lub ukrycie krzyżyka służącego jako celownik. "
+"Byłoby najlepiej, gdyby był on ustawiony zgodnie z kierunkiem północnym. Nie "
+"udało mi się jednak tego osiągnąć, dlatego obecnie jest on wyrównany do "
+"górnej krawędzi ekranu."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:428
 #, qt-format
@@ -3958,31 +3966,37 @@ msgid ""
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
+"Możliwe jest wyświetlenie lub ukrycie celownika Telrad; jest to możliwe pod "
+"warunkiem, że nie jest włączony Widok przez okular. Funkcja ta wyświetla "
+"trzy współosiowe okręgi: 0.5%1, 2.0%1 i 4.0%1, które odpowiadają temu, co "
+"można zobaczyć gołym okiem przez celownik Telrad (lub podobny)."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:429
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr ""
+"Jeśli natkniesz się na jakieś problemy, poinformuj mnie o nich. Miłego "
+"korzystania z programu!"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:432
 msgid "Hot Keys"
-msgstr ""
+msgstr "Skróty klawiaturowe"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:433
 msgid "The plug-in's key bindings can be edited in the General Tab."
-msgstr ""
+msgstr "Skróty klawiaturowe tej wtyczki można modyfikować na karcie Ogólne."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:445
 #: plugins/Oculars/src/gui/OcularDialog.cpp:450
 msgid "[no key defined]"
-msgstr ""
+msgstr "[nie określono klawisza]"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:454
 msgid "Switches on/off the ocular overlay."
-msgstr ""
+msgstr "Włącza/wyłącza nakładkę okularu."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:458
 msgid "Opens the pop-up navigation menu."
-msgstr ""
+msgstr "Otwiera menu nawigacji."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:865
 msgid "Enable only if an object is selected"
@@ -4122,7 +4136,7 @@ msgstr "Okno konfiguracji satelitów"
 
 #: plugins/Satellites/src/Satellites.cpp:131
 msgid "Satellite hints"
-msgstr "Wskazówki dotyczące satelitów"
+msgstr "Oznaczenia satelitów"
 
 #: plugins/Satellites/src/Satellites.cpp:133
 msgid "Satellite labels"
@@ -5448,7 +5462,7 @@ msgstr "Nazwy mgławic"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:345
 msgid "Nebula hints"
-msgstr ""
+msgstr "Oznaczenia mgławic"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:359
 msgid "Galactic plane line"
@@ -5940,15 +5954,15 @@ msgstr ""
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:253
 msgid "Quasars Plug-in Configuration"
-msgstr ""
+msgstr "Konfiguracja wtyczki Kwazary"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:261
 msgid "Display mode for quasars"
-msgstr ""
+msgstr "Tryb wyświetlania kwazarów"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 msgid "Enable display of distribution for quasars"
-msgstr ""
+msgstr "Włącz wyświetlanie rozkładu kwazarów"
 
 #: plugins/Pulsars/src/Pulsars.cpp:71
 msgid "Pulsars"
@@ -5984,7 +5998,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:149
 msgid "Dispersion measure:"
-msgstr ""
+msgstr "Miara dyspersji:"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:152
@@ -5994,7 +6008,7 @@ msgstr "cm"
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:155
 msgid "pc"
-msgstr ""
+msgstr "pc"
 
 #: plugins/Pulsars/src/Pulsar.cpp:161
 #, qt-format
@@ -6110,7 +6124,7 @@ msgstr "oznaczenia pulsarów zaczynają się od liter \"PSR\""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
@@ -6118,7 +6132,7 @@ msgstr "Puszczyńskie Obserwatorium Radioastronomiczne"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 msgid "Maciej Serylak"
-msgstr ""
+msgstr "Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Nancay Radioastronomical Observatory"
@@ -6142,11 +6156,11 @@ msgstr "Konfiguracja wtyczki Pulsary"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:261
 msgid "Display mode for pulsars"
-msgstr ""
+msgstr "Tryb wyświetlania pulsarów"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:262
 msgid "Enable display of distribution for pulsars"
-msgstr ""
+msgstr "Włącz wyświetlanie rozkładu pulsarów"
 
 #~ msgid "Ecliptic Line"
 #~ msgstr "Ekliptyka"
