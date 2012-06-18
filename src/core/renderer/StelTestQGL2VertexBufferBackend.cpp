@@ -45,7 +45,7 @@ void StelTestQGL2VertexBufferBackend::addVertex(const quint8* const vertexInPtr)
 {
 	//StelVertexBuffer enforces bounds, so we don't need to
 	++vertexCount;
-	if(vertexCount < vertexCapacity)
+	if(vertexCount <= vertexCapacity)
 	{
 		setVertex(vertexCount - 1, vertexInPtr);
 		return;
