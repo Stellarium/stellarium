@@ -287,7 +287,17 @@ private:
 	//! The scaling applied to input luminance before they are converted by the StelToneReproducer
 	float inScale;
 
-	//! A simple 2D vertex with a position, color and a texture coordinate.
+	//! A simple 2D vertex with position and color.
+	struct ColoredVertex
+	{
+		Vec2f position;
+		Vec3f color;
+		ColoredVertex(Vec2f position, Vec3f color)
+			:position(position), color(color){}
+		static const QVector<StelVertexAttribute> attributes;
+	};
+
+	//! A simple 2D vertex with position, color and texture coordinate.
 	struct ColoredTexturedVertex
 	{
 		Vec2f position;
@@ -297,6 +307,9 @@ private:
 			:position(position), color(color), texCoord(texCoord){}
 		static const QVector<StelVertexAttribute> attributes;
 	};
+
+	//! When stars are drawn as points, these are stored in this buffer.
+	StelVertexBuffer<ColoredVertex>* starPointBuffer;
 
 	//! When stars are drawn as triangle pairs ("sprites"), these are stored in this buffer.
 	StelVertexBuffer<ColoredTexturedVertex>* starSpriteBuffer;

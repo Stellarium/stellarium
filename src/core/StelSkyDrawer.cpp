@@ -58,9 +58,16 @@ const QVector<StelVertexAttribute> StelSkyDrawer::ColoredTexturedVertex::attribu
 	 << StelVertexAttribute(AttributeType_Vec3f, AttributeInterpretation_Color)
 	 << StelVertexAttribute(AttributeType_Vec2f, AttributeInterpretation_TexCoord));
 
+// Vertex attributes of ColoredVertex.
+const QVector<StelVertexAttribute> StelSkyDrawer::ColoredVertex::attributes = 
+	(QVector<StelVertexAttribute>() 
+	 << StelVertexAttribute(AttributeType_Vec2f, AttributeInterpretation_Position)
+	 << StelVertexAttribute(AttributeType_Vec3f, AttributeInterpretation_Color));
+
 StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 	: core(acore)
 	, renderer(renderer)
+	, starPointBuffer(NULL)
 	, starSpriteBuffer(NULL)
 	, drawing(false)
 {
@@ -141,15 +148,14 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 		ok = true;
 	}
 
+	starPointBuffer = renderer->createVertexBuffer<ColoredVertex>(PrimitiveType_Points);
 	starSpriteBuffer = renderer->createVertexBuffer<ColoredTexturedVertex>(PrimitiveType_Triangles);
 }
 
 StelSkyDrawer::~StelSkyDrawer()
 {
-	if(NULL != starSpriteBuffer)
-	{
-		delete starSpriteBuffer;
-	}
+	if(NULL != starPointBuffer) {delete starPointBuffer;}
+	if(NULL != starSpriteBuffer){delete starSpriteBuffer;}
 }
 
 // Init parameters from config file
@@ -343,11 +349,6 @@ void StelSkyDrawer::preDrawPointSource(StelPainter* p)
 	Q_ASSERT_X(!drawing, Q_FUNC_INFO,
 	           "Attempting to start drawing point sources when it is already started");
 
-	if (drawStarsAsPoints)
-	{
-		p->enableTexture2d(false);
-		p->setPointSize(0.1);
-	}
 	drawing = true;
 }
 
@@ -356,19 +357,34 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 {
 	Q_ASSERT(sPainter);
 
-	texHalo->bind();
-	renderer->setBlendMode(BlendMode_Add);
-	starSpriteBuffer->lock();
+	if(drawStarsAsPoints)
+	{
+		starPointBuffer->lock();
+		// Vertices are already projected, so we dontProject.
+		//
+		// This is a hack - it would be better to refactor StelSkyDrawer,
+		// ZoneArray, etc, so projection gets done by the projector 
+		// during drawing like elsewhere.
+		renderer->drawVertexBuffer(starPointBuffer, NULL, sPainter->getProjector(), true);
+		starPointBuffer->unlock();
+		starPointBuffer->clear();
+	}
+	else
+	{
+		texHalo->bind();
+		renderer->setBlendMode(BlendMode_Add);
+		starSpriteBuffer->lock();
 
-	// Vertices are already projected, so we dontProject.
-	//
-	// This is a hack - it would be better to refactor StelSkyDrawer,
-	// ZoneArray, etc, so projection gets done by the projector 
-	// during drawing like elsewhere.
-	renderer->drawVertexBuffer(starSpriteBuffer, NULL, sPainter->getProjector(), true);
+		// Vertices are already projected, so we dontProject.
+		//
+		// This is a hack - it would be better to refactor StelSkyDrawer,
+		// ZoneArray, etc, so projection gets done by the projector 
+		// during drawing like elsewhere.
+		renderer->drawVertexBuffer(starSpriteBuffer, NULL, sPainter->getProjector(), true);
+		starSpriteBuffer->unlock();
+		starSpriteBuffer->clear();
+	}
 
-	starSpriteBuffer->unlock();
-	starSpriteBuffer->clear();
 	drawing = false;
 }
 
@@ -413,13 +429,11 @@ bool StelSkyDrawer::drawPointSource
 		sPainter->drawSprite2dMode(win[0], win[1], rmag);
 	}
 
+	drawStarsAsPoints = true;
 	if (drawStarsAsPoints)
 	{
-		//GL-REFACTOR draw star here, and consider 
-		//drawing all points in one buffer
-		// Draw the star rendered as GLpoint. This may be faster but it is not so nice
-		sPainter->setColor(color[0]*tw, color[1]*tw, color[2]*tw);
-		sPainter->drawPoint2d(win[0], win[1]);
+		starPointBuffer->addVertex(ColoredVertex(
+		                 Vec2f(win[0], win[1]), color * tw));
 	}
 	else
 	{
