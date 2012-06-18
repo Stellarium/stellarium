@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-11 18:38+0700\n"
-"PO-Revision-Date: 2012-06-17 01:39+0000\n"
+"POT-Creation-Date: 2012-06-17 18:37+0700\n"
+"PO-Revision-Date: 2012-06-17 19:45+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-17 04:33+0000\n"
+"X-Launchpad-Export-Date: 2012-06-18 05:22+0000\n"
 "X-Generator: Launchpad (build 15419)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -62,12 +62,14 @@ msgstr "Druh: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:109
+#: plugins/Exoplanets/src/Exoplanet.cpp:143
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Jasnosť (mag): <b>%1</b> (extinkcia do: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:121
+#: plugins/Exoplanets/src/Exoplanet.cpp:148
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Jasnosť: <b>%1 m</b>"
@@ -186,12 +188,14 @@ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Jasnosť (mag): <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
+#: plugins/Exoplanets/src/Exoplanet.cpp:157
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Spektrálny typ: %1"
 
 #: src/core/modules/StarWrapper.cpp:134
 #: plugins/Supernovae/src/Supernova.cpp:117
+#: plugins/Exoplanets/src/Exoplanet.cpp:162
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Vzdialenosť: %1 svetelných rokov"
@@ -396,6 +400,7 @@ msgstr "Kontakt"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:108
 msgid "Author"
 msgstr "Autor"
 
@@ -552,8 +557,9 @@ msgstr "Nastaviť bežnú rýchlosť behu skriptu"
 #: plugins/CompassMarks/src/CompassMarks.cpp:124
 #: plugins/Oculars/src/Oculars.cpp:1188
 #: plugins/Satellites/src/Satellites.cpp:128
-#: plugins/Supernovae/src/Supernovae.cpp:143
-#: plugins/Quasars/src/Quasars.cpp:146 plugins/Pulsars/src/Pulsars.cpp:146
+#: plugins/Supernovae/src/Supernovae.cpp:141
+#: plugins/Quasars/src/Quasars.cpp:144 plugins/Pulsars/src/Pulsars.cpp:144
+#: plugins/Exoplanets/src/Exoplanets.cpp:149
 msgid "Plugin Key Bindings"
 msgstr "Priradenie klávesov modulom"
 
@@ -1135,7 +1141,8 @@ msgstr "Harvardova univerzita (USA)"
 msgid "This system does not support OpenGL."
 msgstr "Tento systém nepodporuje OpenGL."
 
-#: src/translations.h:33
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:173
+#: plugins/Exoplanets/src/Exoplanet.cpp:177
 msgid "Sun"
 msgstr "Slnko"
 
@@ -1581,7 +1588,7 @@ msgstr "Garching"
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
 msgid "Landscape Tour"
-msgstr ""
+msgstr "Prehliadka terénov"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
@@ -1611,7 +1618,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:192
 msgid "Zodiac"
-msgstr ""
+msgstr "Zvieratník"
 
 #: src/translations.h:195
 msgid "Look around each installed landscape."
@@ -1647,6 +1654,9 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
+"Tento skript zobrazuje súhvezdia zvieratníka. To znamená tie súhvezdia, "
+"ktoré ležia pozdĺž čiary, po ktorej sa pohybuje Slnko cez nebeskú sféru "
+"počas roka."
 
 #: src/translations.h:204
 msgid "Andorra"
@@ -1702,431 +1712,431 @@ msgstr "Rakúsko"
 
 #: src/translations.h:217
 msgid "Australia"
-msgstr ""
+msgstr "Austrália"
 
 #: src/translations.h:218
 msgid "Aruba"
-msgstr ""
+msgstr "Aruba"
 
 #: src/translations.h:219
 msgid "Azerbaijan"
-msgstr ""
+msgstr "Azerbajdžan"
 
 #: src/translations.h:220
 msgid "Bosnia and Herzegowina"
-msgstr ""
+msgstr "Bosna a Hercegovina"
 
 #: src/translations.h:221
 msgid "Barbados"
-msgstr ""
+msgstr "Barbados"
 
 #: src/translations.h:222
 msgid "Bangladesh"
-msgstr ""
+msgstr "Bangladéš"
 
 #: src/translations.h:223
 msgid "Belgium"
-msgstr ""
+msgstr "Belgicko"
 
 #: src/translations.h:224
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Burkina Faso"
 
 #: src/translations.h:225
 msgid "Bulgaria"
-msgstr ""
+msgstr "Bulharsko"
 
 #: src/translations.h:226
 msgid "Bahrain"
-msgstr ""
+msgstr "Bahrajn"
 
 #: src/translations.h:227
 msgid "Burundi"
-msgstr ""
+msgstr "Burundi"
 
 #: src/translations.h:228
 msgid "Benin"
-msgstr ""
+msgstr "Benin"
 
 #: src/translations.h:229
 msgid "Bermuda"
-msgstr ""
+msgstr "Bermudy"
 
 #: src/translations.h:230
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "Brunej"
 
 #: src/translations.h:231
 msgid "Bolivia"
-msgstr ""
+msgstr "Bolívia"
 
 #: src/translations.h:232
 msgid "Brazil"
-msgstr ""
+msgstr "Brazília"
 
 #: src/translations.h:233
 msgid "Bahamas"
-msgstr ""
+msgstr "Bahamy"
 
 #: src/translations.h:234
 msgid "Bhutan"
-msgstr ""
+msgstr "Bhután"
 
 #: src/translations.h:235
 msgid "Bouvet Island"
-msgstr ""
+msgstr "Bouvetov ostrov"
 
 #: src/translations.h:236
 msgid "Botswana"
-msgstr ""
+msgstr "Botswana"
 
 #: src/translations.h:237
 msgid "Belarus"
-msgstr ""
+msgstr "Bielorusko"
 
 #: src/translations.h:238
 msgid "Belize"
-msgstr ""
+msgstr "Belize"
 
 #: src/translations.h:239
 msgid "Canada"
-msgstr ""
+msgstr "Kanada"
 
 #: src/translations.h:240
 msgid "Cocos Islands"
-msgstr ""
+msgstr "Kokosové ostrovy"
 
 #: src/translations.h:241
 msgid "Democratic Republic of the Congo"
-msgstr ""
+msgstr "Konžská demokratická republika"
 
 #: src/translations.h:242
 msgid "Central African Republic"
-msgstr ""
+msgstr "Stredoafrická republika"
 
 #: src/translations.h:243
 msgid "Republic of the Congo"
-msgstr ""
+msgstr "Konžská republika"
 
 #: src/translations.h:244
 msgid "Switzerland"
-msgstr ""
+msgstr "Švajčiarsko"
 
 #: src/translations.h:245
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "Pobrežie Slonoviny"
 
 #: src/translations.h:246
 msgid "Cook Islands"
-msgstr ""
+msgstr "Cookove ostrovy"
 
 #: src/translations.h:247
 msgid "Chile"
-msgstr ""
+msgstr "Čile"
 
 #: src/translations.h:248
 msgid "Cameroon"
-msgstr ""
+msgstr "Kamerun"
 
 #: src/translations.h:249
 msgid "China"
-msgstr ""
+msgstr "Čína"
 
 #: src/translations.h:250
 msgid "Colombia"
-msgstr ""
+msgstr "Kolumbia"
 
 #: src/translations.h:251
 msgid "Costa Rica"
-msgstr ""
+msgstr "Kostarika"
 
 #: src/translations.h:252
 msgid "Serbia and Montenegro"
-msgstr ""
+msgstr "Srbsko a Čierna Hora"
 
 #: src/translations.h:253
 msgid "Cuba"
-msgstr ""
+msgstr "Kuba"
 
 #: src/translations.h:254
 msgid "Cape Verde"
-msgstr ""
+msgstr "Kapverdy"
 
 #: src/translations.h:255
 msgid "Christmas Island"
-msgstr ""
+msgstr "Vianočný ostrov"
 
 #: src/translations.h:256
 msgid "Cyprus"
-msgstr ""
+msgstr "Cyprus"
 
 #: src/translations.h:257
 msgid "Czech Republic"
-msgstr ""
+msgstr "Česká republika"
 
 #: src/translations.h:258
 msgid "Germany"
-msgstr ""
+msgstr "Nemecko"
 
 #: src/translations.h:259
 msgid "Djibouti"
-msgstr ""
+msgstr "Džibutsko"
 
 #: src/translations.h:260
 msgid "Denmark"
-msgstr ""
+msgstr "Dánsko"
 
 #: src/translations.h:261
 msgid "Dominica"
-msgstr ""
+msgstr "Dominika"
 
 #: src/translations.h:262
 msgid "Dominican Republic"
-msgstr ""
+msgstr "Dominikánska republika"
 
 #: src/translations.h:263
 msgid "Algeria"
-msgstr ""
+msgstr "Alžírsko"
 
 #: src/translations.h:264
 msgid "Ecuador"
-msgstr ""
+msgstr "Ekvádor"
 
 #: src/translations.h:265
 msgid "Estonia"
-msgstr ""
+msgstr "Estónsko"
 
 #: src/translations.h:266
 msgid "Egypt"
-msgstr ""
+msgstr "Egypt"
 
 #: src/translations.h:267
 msgid "Western Sahara"
-msgstr ""
+msgstr "Západná Sahara"
 
 #: src/translations.h:268
 msgid "Eritrea"
-msgstr ""
+msgstr "Eritrea"
 
 #: src/translations.h:269
 msgid "Spain"
-msgstr ""
+msgstr "Španielsko"
 
 #: src/translations.h:270
 msgid "Ethiopia"
-msgstr ""
+msgstr "Etiópia"
 
 #: src/translations.h:271
 msgid "Finland"
-msgstr ""
+msgstr "Fínsko"
 
 #: src/translations.h:272
 msgid "Fiji"
-msgstr ""
+msgstr "Fidži"
 
 #: src/translations.h:273
 msgid "Falkland Islands"
-msgstr ""
+msgstr "Falklandské ostrovy"
 
 #: src/translations.h:274
 msgid "Micronesia"
-msgstr ""
+msgstr "Mikronézia"
 
 #: src/translations.h:275
 msgid "Faroe Islands"
-msgstr ""
+msgstr "Faerské ostrovy"
 
 #: src/translations.h:276
 msgid "France"
-msgstr ""
+msgstr "Francúzsko"
 
 #: src/translations.h:277
 msgid "Gabon"
-msgstr ""
+msgstr "Gabun"
 
 #: src/translations.h:278
 msgid "United Kingdom"
-msgstr ""
+msgstr "Spojené kráľovstvo"
 
 #: src/translations.h:279
 msgid "Grenada"
-msgstr ""
+msgstr "Grenada"
 
 #: src/translations.h:280
 msgid "Georgia"
-msgstr ""
+msgstr "Gruzínsko"
 
 #: src/translations.h:281
 msgid "French Guiana"
-msgstr ""
+msgstr "Francúzska Guyana"
 
 #: src/translations.h:282
 msgid "Ghana"
-msgstr ""
+msgstr "Ghana"
 
 #: src/translations.h:283
 msgid "Gibraltar"
-msgstr ""
+msgstr "Gibraltár"
 
 #: src/translations.h:284
 msgid "Greenland"
-msgstr ""
+msgstr "Grónsko"
 
 #: src/translations.h:285
 msgid "Gambia"
-msgstr ""
+msgstr "Gambia"
 
 #: src/translations.h:286
 msgid "Guinea"
-msgstr ""
+msgstr "Guinea"
 
 #: src/translations.h:287
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Guadeloupe"
 
 #: src/translations.h:288
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "Rovníková Guinea"
 
 #: src/translations.h:289
 msgid "Greece"
-msgstr ""
+msgstr "Grécko"
 
 #: src/translations.h:290
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "Južná Georgia a Južné Sandwichove ostrovy"
 
 #: src/translations.h:291
 msgid "Guatemala"
-msgstr ""
+msgstr "Guatemala"
 
 #: src/translations.h:292
 msgid "Guam"
-msgstr ""
+msgstr "Guam"
 
 #: src/translations.h:293
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Guinea-Bissau"
 
 #: src/translations.h:294
 msgid "Guyana"
-msgstr ""
+msgstr "Guyana"
 
 #: src/translations.h:295
 msgid "Hong Kong"
-msgstr ""
+msgstr "Hongkong"
 
 #: src/translations.h:296
 msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgstr "Heardov ostrov"
 
 #: src/translations.h:297
 msgid "Honduras"
-msgstr ""
+msgstr "Honduras"
 
 #: src/translations.h:298
 msgid "Croatia"
-msgstr ""
+msgstr "Chorvátsko"
 
 #: src/translations.h:299
 msgid "Haiti"
-msgstr ""
+msgstr "Haiti"
 
 #: src/translations.h:300
 msgid "Hungary"
-msgstr ""
+msgstr "Maďarsko"
 
 #: src/translations.h:301
 msgid "Indonesia"
-msgstr ""
+msgstr "Indonézia"
 
 #: src/translations.h:302
 msgid "Ireland"
-msgstr ""
+msgstr "Írsko"
 
 #: src/translations.h:303
 msgid "Israel"
-msgstr ""
+msgstr "Izrael"
 
 #: src/translations.h:304
 msgid "India"
-msgstr ""
+msgstr "India"
 
 #: src/translations.h:305
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "Britské indickooceánske územie"
 
 #: src/translations.h:306
 msgid "Iraq"
-msgstr ""
+msgstr "Irak"
 
 #: src/translations.h:307
 msgid "Iran"
-msgstr ""
+msgstr "Irán"
 
 #: src/translations.h:308
 msgid "Iceland"
-msgstr ""
+msgstr "Island"
 
 #: src/translations.h:309
 msgid "Italy"
-msgstr ""
+msgstr "Taliansko"
 
 #: src/translations.h:310
 msgid "Jamaica"
-msgstr ""
+msgstr "Jamajka"
 
 #: src/translations.h:311
 msgid "Jordan"
-msgstr ""
+msgstr "Jordánsko"
 
 #: src/translations.h:312
 msgid "Japan"
-msgstr ""
+msgstr "Japonsko"
 
 #: src/translations.h:313
 msgid "Kenya"
-msgstr ""
+msgstr "Keňa"
 
 #: src/translations.h:314
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "Kirgizsko"
 
 #: src/translations.h:315
 msgid "Cambodia"
-msgstr ""
+msgstr "Kambodža"
 
 #: src/translations.h:316
 msgid "Kiribati"
-msgstr ""
+msgstr "Kiribati"
 
 #: src/translations.h:317
 msgid "Comoros"
-msgstr ""
+msgstr "Komory"
 
 #: src/translations.h:318
 msgid "Saint Kitts and Nevis"
-msgstr ""
+msgstr "Svätý Krištof a Nevis"
 
 #: src/translations.h:319
 msgid "Democratic People's Republic of Korea"
-msgstr ""
+msgstr "Kórejská ľudovodemokratická republika"
 
 #: src/translations.h:320
 msgid "Republic of Korea"
-msgstr ""
+msgstr "Kórejská republika"
 
 #: src/translations.h:321
 msgid "Kuwait"
-msgstr ""
+msgstr "Kuvajt"
 
 #: src/translations.h:322
 msgid "Cayman Islands"
-msgstr ""
+msgstr "Kajmanie ostrovy"
 
 #: src/translations.h:323
 msgid "Kazakhstan"
-msgstr ""
+msgstr "Kazachstan"
 
 #: src/translations.h:324
 msgid "Lao"
@@ -2134,39 +2144,39 @@ msgstr ""
 
 #: src/translations.h:325
 msgid "Lebanon"
-msgstr ""
+msgstr "Libanon"
 
 #: src/translations.h:326
 msgid "Saint Lucia"
-msgstr ""
+msgstr "Svätá Lucia"
 
 #: src/translations.h:327
 msgid "Liechtenstein"
-msgstr ""
+msgstr "Lichtenštajnsko"
 
 #: src/translations.h:328
 msgid "Sri Lanka"
-msgstr ""
+msgstr "Srí Lanka"
 
 #: src/translations.h:329
 msgid "Liberia"
-msgstr ""
+msgstr "Libéria"
 
 #: src/translations.h:330
 msgid "Lesotho"
-msgstr ""
+msgstr "Lesotho"
 
 #: src/translations.h:331
 msgid "Lithuania"
-msgstr ""
+msgstr "Litva"
 
 #: src/translations.h:332
 msgid "Luxembourg"
-msgstr ""
+msgstr "Luxembursko"
 
 #: src/translations.h:333
 msgid "Latvia"
-msgstr ""
+msgstr "Lotyšsko"
 
 #: src/translations.h:334
 msgid "Libyan Arab Jamahiriya"
@@ -2174,443 +2184,443 @@ msgstr ""
 
 #: src/translations.h:335
 msgid "Morocco"
-msgstr ""
+msgstr "Maroko"
 
 #: src/translations.h:336
 msgid "Monaco"
-msgstr ""
+msgstr "Monako"
 
 #: src/translations.h:337
 msgid "Moldova"
-msgstr ""
+msgstr "Moldavsko"
 
 #: src/translations.h:338
 msgid "Madagascar"
-msgstr ""
+msgstr "Madagaskar"
 
 #: src/translations.h:339
 msgid "Marshall Islands"
-msgstr ""
+msgstr "Marshallove ostrovy"
 
 #: src/translations.h:340
 msgid "Macedonia"
-msgstr ""
+msgstr "Macedónsko"
 
 #: src/translations.h:341
 msgid "Mali"
-msgstr ""
+msgstr "Mali"
 
 #: src/translations.h:342
 msgid "Myanmar"
-msgstr ""
+msgstr "Mjanmarsko"
 
 #: src/translations.h:343
 msgid "Mongolia"
-msgstr ""
+msgstr "Mongolsko"
 
 #: src/translations.h:344
 msgid "Macau"
-msgstr ""
+msgstr "Macao"
 
 #: src/translations.h:345
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "Severné Mariány"
 
 #: src/translations.h:346
 msgid "Martinique"
-msgstr ""
+msgstr "Martinik"
 
 #: src/translations.h:347
 msgid "Mauritania"
-msgstr ""
+msgstr "Mauritánia"
 
 #: src/translations.h:348
 msgid "Montserrat"
-msgstr ""
+msgstr "Montserrat"
 
 #: src/translations.h:349
 msgid "Malta"
-msgstr ""
+msgstr "Malta"
 
 #: src/translations.h:350
 msgid "Mauritius"
-msgstr ""
+msgstr "Maurícius"
 
 #: src/translations.h:351
 msgid "Maldives"
-msgstr ""
+msgstr "Maldivy"
 
 #: src/translations.h:352
 msgid "Malawi"
-msgstr ""
+msgstr "Malawi"
 
 #: src/translations.h:353
 msgid "Mexico"
-msgstr ""
+msgstr "Mexiko"
 
 #: src/translations.h:354
 msgid "Malaysia"
-msgstr ""
+msgstr "Malajzia"
 
 #: src/translations.h:355
 msgid "Mozambique"
-msgstr ""
+msgstr "Mozambik"
 
 #: src/translations.h:356
 msgid "Namibia"
-msgstr ""
+msgstr "Namíbia"
 
 #: src/translations.h:357
 msgid "New Caledonia"
-msgstr ""
+msgstr "Nová Kaledónia"
 
 #: src/translations.h:358
 msgid "Niger"
-msgstr ""
+msgstr "Niger"
 
 #: src/translations.h:359
 msgid "Norfolk Island"
-msgstr ""
+msgstr "Norfolk"
 
 #: src/translations.h:360
 msgid "Nigeria"
-msgstr ""
+msgstr "Nigéria"
 
 #: src/translations.h:361
 msgid "Nicaragua"
-msgstr ""
+msgstr "Nikaragua"
 
 #: src/translations.h:362
 msgid "Netherlands"
-msgstr ""
+msgstr "Holandsko"
 
 #: src/translations.h:363
 msgid "Norway"
-msgstr ""
+msgstr "Nórsko"
 
 #: src/translations.h:364
 msgid "Nepal"
-msgstr ""
+msgstr "Nepál"
 
 #: src/translations.h:365
 msgid "Nauru"
-msgstr ""
+msgstr "Nauru"
 
 #: src/translations.h:366
 msgid "Niue"
-msgstr ""
+msgstr "Niue"
 
 #: src/translations.h:367
 msgid "New Zealand"
-msgstr ""
+msgstr "Nový Zéland"
 
 #: src/translations.h:368
 msgid "Oman"
-msgstr ""
+msgstr "Omán"
 
 #: src/translations.h:369
 msgid "Panama"
-msgstr ""
+msgstr "Panama"
 
 #: src/translations.h:370
 msgid "Peru"
-msgstr ""
+msgstr "Peru"
 
 #: src/translations.h:371
 msgid "French Polynesia"
-msgstr ""
+msgstr "Francúzska Polynézia"
 
 #: src/translations.h:372
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "Papua-Nová Guinea"
 
 #: src/translations.h:373
 msgid "Philippines"
-msgstr ""
+msgstr "Filipíny"
 
 #: src/translations.h:374
 msgid "Pakistan"
-msgstr ""
+msgstr "Pakistan"
 
 #: src/translations.h:375
 msgid "Poland"
-msgstr ""
+msgstr "Poľsko"
 
 #: src/translations.h:376
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "Saint Pierre a Miquelon"
 
 #: src/translations.h:377
 msgid "Pitcairn"
-msgstr ""
+msgstr "Pitcairnove ostrovy"
 
 #: src/translations.h:378
 msgid "Puerto Rico"
-msgstr ""
+msgstr "Portoriko"
 
 #: src/translations.h:379
 msgid "Palestinian Territories"
-msgstr ""
+msgstr "Palestínske okupované územia"
 
 #: src/translations.h:380
 msgid "Portugal"
-msgstr ""
+msgstr "Portugalsko"
 
 #: src/translations.h:381
 msgid "Palau"
-msgstr ""
+msgstr "Palau"
 
 #: src/translations.h:382
 msgid "Paraguay"
-msgstr ""
+msgstr "Paraguaj"
 
 #: src/translations.h:383
 msgid "Qatar"
-msgstr ""
+msgstr "Katar"
 
 #: src/translations.h:384
 msgid "Réunion"
-msgstr ""
+msgstr "Réunion"
 
 #: src/translations.h:385
 msgid "Romania"
-msgstr ""
+msgstr "Rumunsko"
 
 #: src/translations.h:386
 msgid "Serbia"
-msgstr ""
+msgstr "Srbsko"
 
 #: src/translations.h:387
 msgid "Russian Federation"
-msgstr ""
+msgstr "Ruská federácia"
 
 #: src/translations.h:388
 msgid "Rwanda"
-msgstr ""
+msgstr "Rwanda"
 
 #: src/translations.h:389
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "Saudská Arábia"
 
 #: src/translations.h:390
 msgid "Solomon Islands"
-msgstr ""
+msgstr "Šalamúnove ostrovy"
 
 #: src/translations.h:391
 msgid "Seychelles"
-msgstr ""
+msgstr "Seychely"
 
 #: src/translations.h:392
 msgid "Sudan"
-msgstr ""
+msgstr "Sudán"
 
 #: src/translations.h:393
 msgid "Sweden"
-msgstr ""
+msgstr "Švédsko"
 
 #: src/translations.h:394
 msgid "Singapore"
-msgstr ""
+msgstr "Singapur"
 
 #: src/translations.h:395
 msgid "Saint Helena"
-msgstr ""
+msgstr "Svätá Helena"
 
 #: src/translations.h:396
 msgid "Slovenia"
-msgstr ""
+msgstr "Slovinsko"
 
 #: src/translations.h:397
 msgid "Svalbard and Jan Mayen"
-msgstr ""
+msgstr "Svalbard a Jan Mayen"
 
 #: src/translations.h:398
 msgid "Slovakia"
-msgstr ""
+msgstr "Slovensko"
 
 #: src/translations.h:399
 msgid "Sierra Leone"
-msgstr ""
+msgstr "Sierra Leone"
 
 #: src/translations.h:400
 msgid "San Marino"
-msgstr ""
+msgstr "San Maríno"
 
 #: src/translations.h:401
 msgid "Senegal"
-msgstr ""
+msgstr "Senegal"
 
 #: src/translations.h:402
 msgid "Somalia"
-msgstr ""
+msgstr "Somálsko"
 
 #: src/translations.h:403
 msgid "Suriname"
-msgstr ""
+msgstr "Surinam"
 
 #: src/translations.h:404
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "Svätý Tomáš a Princov ostrov"
 
 #: src/translations.h:405
 msgid "El Salvador"
-msgstr ""
+msgstr "Salvádor"
 
 #: src/translations.h:406
 msgid "Syrian Arab Republic"
-msgstr ""
+msgstr "Sýrska arabská republika"
 
 #: src/translations.h:407
 msgid "Swaziland"
-msgstr ""
+msgstr "Svazijsko"
 
 #: src/translations.h:408
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "Ostrovy Turks a Caicos"
 
 #: src/translations.h:409
 msgid "Chad"
-msgstr ""
+msgstr "Čad"
 
 #: src/translations.h:410
 msgid "French Southern Territories"
-msgstr ""
+msgstr "Francúzske južné a antarktické územia"
 
 #: src/translations.h:411
 msgid "Togo"
-msgstr ""
+msgstr "Togo"
 
 #: src/translations.h:412
 msgid "Thailand"
-msgstr ""
+msgstr "Thajsko"
 
 #: src/translations.h:413
 msgid "Tajikistan"
-msgstr ""
+msgstr "Tadžikistan"
 
 #: src/translations.h:414
 msgid "Tokelau"
-msgstr ""
+msgstr "Tokelau"
 
 #: src/translations.h:415
 msgid "East Timor"
-msgstr ""
+msgstr "Východný Timor"
 
 #: src/translations.h:416
 msgid "Turkmenistan"
-msgstr ""
+msgstr "Turkménsko"
 
 #: src/translations.h:417
 msgid "Tunisia"
-msgstr ""
+msgstr "Tunisko"
 
 #: src/translations.h:418
 msgid "Tonga"
-msgstr ""
+msgstr "Tonga"
 
 #: src/translations.h:419
 msgid "Turkey"
-msgstr ""
+msgstr "Turecko"
 
 #: src/translations.h:420
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "Trinidad a Tobago"
 
 #: src/translations.h:421
 msgid "Tuvalu"
-msgstr ""
+msgstr "Tuvalu"
 
 #: src/translations.h:422
 msgid "Taiwan"
-msgstr ""
+msgstr "Taiwan"
 
 #: src/translations.h:423
 msgid "Tanzania"
-msgstr ""
+msgstr "Tanzánia"
 
 #: src/translations.h:424
 msgid "Ukraine"
-msgstr ""
+msgstr "Ukrajina"
 
 #: src/translations.h:425
 msgid "Uganda"
-msgstr ""
+msgstr "Uganda"
 
 #: src/translations.h:426
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "Menšie odľahlé ostrovy USA"
 
 #: src/translations.h:427
 msgid "United States"
-msgstr ""
+msgstr "Spojené štáty"
 
 #: src/translations.h:428
 msgid "Uruguay"
-msgstr ""
+msgstr "Uruguaj"
 
 #: src/translations.h:429
 msgid "Uzbekistan"
-msgstr ""
+msgstr "Uzbekistan"
 
 #: src/translations.h:430
 msgid "Vatican City State"
-msgstr ""
+msgstr "Vatikánsky mestský štát"
 
 #: src/translations.h:431
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "Svätý Vincent a Grenadíny"
 
 #: src/translations.h:432
 msgid "Venezuela"
-msgstr ""
+msgstr "Venezuela"
 
 #: src/translations.h:433
 msgid "British Virgin Islands"
-msgstr ""
+msgstr "Britské Panenské ostrovy"
 
 #: src/translations.h:434
 msgid "United States Virgin Islands"
-msgstr ""
+msgstr "Americké Panenské ostrovy"
 
 #: src/translations.h:435
 msgid "Viet Nam"
-msgstr ""
+msgstr "Vietnam"
 
 #: src/translations.h:436
 msgid "Vanuatu"
-msgstr ""
+msgstr "Vanuatu"
 
 #: src/translations.h:437
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "Wallis a Futuna"
 
 #: src/translations.h:438
 msgid "Samoa"
-msgstr ""
+msgstr "Samoa"
 
 #: src/translations.h:439
 msgid "Yemen"
-msgstr ""
+msgstr "Jemen"
 
 #: src/translations.h:440
 msgid "Mayotte"
-msgstr ""
+msgstr "Mayotte"
 
 #: src/translations.h:441
 msgid "Yugoslavia"
-msgstr ""
+msgstr "Juhoslávia"
 
 #: src/translations.h:442
 msgid "South Africa"
-msgstr ""
+msgstr "Južná Afrika"
 
 #: src/translations.h:443
 msgid "Zambia"
-msgstr ""
+msgstr "Zambia"
 
 #: src/translations.h:444
 msgid "Zimbabwe"
-msgstr ""
+msgstr "Zimbabwe"
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -2625,14 +2635,7 @@ msgstr ":"
 msgid "Help"
 msgstr "Pomoc"
 
-#: src/ui_helpDialogGui.h:267 plugins/Oculars/src/ui_ocularDialog.h:903
-#: plugins/Satellites/src/ui_satellitesDialog.h:718
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:248
-#: plugins/Quasars/src/ui_quasarsDialog.h:266
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:266
+#: src/ui_helpDialogGui.h:267
 msgid "About"
 msgstr "O aplikácii"
 
@@ -2831,7 +2834,7 @@ msgstr "Poloha"
 
 #: src/ui_searchDialogGui.h:586
 msgid "On-line astronomical database SIMBAD"
-msgstr ""
+msgstr "On-line astronomická databáza SIMBAD"
 
 #: src/ui_searchDialogGui.h:587
 msgid "Extend search with SIMBAD"
@@ -2924,7 +2927,7 @@ msgstr "Zobraziť atmosféru"
 #: src/ui_viewDialog.h:1132
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Light pollution:"
-msgstr ""
+msgstr "Svetelné znečistenie:"
 
 #: src/ui_viewDialog.h:1134
 msgid "pressure, temperature, extinction coefficient"
@@ -3877,6 +3880,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:107
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:107
 msgid "Version"
 msgstr "Verzia"
 
@@ -4067,6 +4071,18 @@ msgstr "Horizontálne preklopenie"
 msgid "Vertical flip"
 msgstr "Vertikálne preklopenie"
 
+#: plugins/Oculars/src/ui_ocularDialog.h:903
+#: plugins/Satellites/src/ui_satellitesDialog.h:718
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:245
+#: plugins/Quasars/src/ui_quasarsDialog.h:263
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:245
+msgid "About plugin"
+msgstr ""
+
 #: plugins/Satellites/src/Satellites.cpp:65
 #: plugins/Satellites/src/ui_satellitesDialog.h:705
 msgid "Satellites"
@@ -4174,7 +4190,7 @@ msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
-"Zásuvný modul Satelity predpovedá pozície umelých satelitov v obežnej dráhe "
+"Zásuvný modul Satelity predpovedá pozície umelých satelitov na obežnej dráhe "
 "Zeme."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:265
@@ -4194,12 +4210,18 @@ msgid ""
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
+"Predpovedané pozície sú správne len na pomerne krátky čas (ako dni, týždne, "
+"prípadne aj mesiac do minulosti a budúcnosti). Očakávajte zvláštne výsledky "
+"pri dátumoch mimo tohto rozsahu."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:268
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
 msgstr ""
+"Elementy dráhy zastarávajú dosť rýchlo (iba po týždňoch, niekedy dňoch). Ak "
+"chcete dostať užitočné dáta, musíte pravidelne aktualizovať dvojriadkové "
+"elementy (TLE)."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:270
@@ -4215,11 +4237,13 @@ msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
+"Zásuvný modul Satelity je stále vo vývoji. Niektoré funkcie sú nedokončené, "
+"chýbajúce alebo chybné."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:280
 msgid "TLE data updates"
-msgstr ""
+msgstr "Aktualizácie dát TLE"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
 msgid ""
@@ -4280,6 +4304,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:112
 msgid "Links"
 msgstr ""
 
@@ -4287,6 +4312,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:113
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -4298,6 +4324,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:122
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:116
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr ""
@@ -4307,6 +4334,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:118
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr ""
@@ -4316,6 +4344,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -4325,6 +4354,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:146
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:139
 msgid "Internet updates disabled"
 msgstr ""
 
@@ -4336,6 +4366,8 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:188
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:141
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Updating now..."
 msgstr ""
 
@@ -4343,6 +4375,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:155
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
 msgid "Next update: < 1 minute"
 msgstr ""
 
@@ -4350,6 +4383,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:152
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr ""
@@ -4358,6 +4392,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:159
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr ""
@@ -4365,11 +4400,13 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:244
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
-#: plugins/Quasars/src/ui_quasarsDialog.h:260
+#: plugins/Quasars/src/ui_quasarsDialog.h:257
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:241
 msgid "Update now"
 msgstr ""
 
@@ -4377,6 +4414,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 msgid "Update from files"
 msgstr ""
 
@@ -4384,6 +4422,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:190
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:191
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Update error"
 msgstr ""
 
@@ -4460,20 +4499,23 @@ msgid "Update TLE lists from Internet sources"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:644
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
-#: plugins/Quasars/src/ui_quasarsDialog.h:256
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:256
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:237
+#: plugins/Quasars/src/ui_quasarsDialog.h:253
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:253
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:237
 msgid "Update from Internet sources"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:241
-#: plugins/Quasars/src/ui_quasarsDialog.h:257
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:238
+#: plugins/Quasars/src/ui_quasarsDialog.h:254
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:254
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:238
 msgid "Last update:"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:646
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:239
 msgid "Update frequency (hours):"
 msgstr ""
 
@@ -4517,23 +4559,26 @@ msgid "Fade length:"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:672
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:245
-#: plugins/Quasars/src/ui_quasarsDialog.h:263
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:242
+#: plugins/Quasars/src/ui_quasarsDialog.h:260
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:242
 msgid "Restore default settings"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:246
-#: plugins/Quasars/src/ui_quasarsDialog.h:264
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:264
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:243
+#: plugins/Quasars/src/ui_quasarsDialog.h:261
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:261
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:243
 msgid "Save settings as default"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:674
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:247
-#: plugins/Quasars/src/ui_quasarsDialog.h:265
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:265
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:244
+#: plugins/Quasars/src/ui_quasarsDialog.h:262
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:262
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:244
 msgid "Settings"
 msgstr ""
 
@@ -5237,17 +5282,18 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:407
 msgid "Display formats"
-msgstr ""
+msgstr "Formáty zobrazenia"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
+"Tieto nastavenia ovládajú spôsob zobrazenia času a dátumu v stavovom riadku."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "Time display format"
-msgstr ""
+msgstr "Formát zobrazenia času"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
@@ -5265,7 +5311,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:188
 msgid "Date display format"
-msgstr ""
+msgstr "Formát zobrazenia dátumu"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
 msgid "yyyy-mm-dd (ISO 8601)"
@@ -5656,17 +5702,17 @@ msgstr ""
 msgid "Solar System"
 msgstr ""
 
-#: plugins/Supernovae/src/Supernovae.cpp:71
+#: plugins/Supernovae/src/Supernovae.cpp:70
 msgid "Historical Supernovae"
 msgstr ""
 
-#: plugins/Supernovae/src/Supernovae.cpp:74
+#: plugins/Supernovae/src/Supernovae.cpp:73
 msgid ""
 "A plugin that shows some historical supernovae brighter than 10 visual "
 "magnitude."
 msgstr ""
 
-#: plugins/Supernovae/src/Supernovae.cpp:145
+#: plugins/Supernovae/src/Supernovae.cpp:143
 msgid "Historical Supernovae configuration window"
 msgstr ""
 
@@ -5685,9 +5731,9 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid ""
-"A plugin that shows some historical supernovae brighter than 10 visual "
-"magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN "
-"1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 "
+"A plugin that shows some historical supernovae brighter than visual "
+"magnitude 10: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), "
+"SN 1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 "
 "October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN "
 "1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
 "(13 September)."
@@ -5700,21 +5746,20 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:114
 #, qt-format
 msgid ""
-"In this plugin implemented simple model of light curves for different "
-"supernovae. Typical view of light curves for supernova type I and type II "
-"you can see %1here%2 (right scale in days) and this model used for plugin."
+"This plugin implements a simple model of light curves for different "
+"supernovae. Typical views of light curves for type I and type II supernova "
+"can seen %1here%2 (right scale in days) and this model is used for this "
+"plugin."
 msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
-msgid "Acknowledgment"
+msgid "Acknowledgments"
 msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
 msgid ""
-"We thank the following people for their contribution and of the valuable "
-"comments:"
+"We thank the following people for their contribution and valuable comments:"
 msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
@@ -5732,12 +5777,11 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 #, qt-format
 msgid ""
-"If you want read full information about plugin, his history and format of "
-"catalog you can %1get info here%2."
+"If you want more information about this plugin, its history, and format of "
+"catalog, you can %1get additional info here%2."
 msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
@@ -5751,44 +5795,45 @@ msgstr ""
 msgid "Historical supernovae is updated"
 msgstr ""
 
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:236
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 msgid "Historical Supernovae Configuration"
 msgstr ""
 
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:237
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 msgid "Historical Supernovae Plug-in Configuration"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:236
+#: plugins/Quasars/src/ui_quasarsDialog.h:252
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:252
+msgid "Update catalog from Internet"
 msgstr ""
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:255
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:255
-msgid "Update catalog from Internet"
-msgstr ""
-
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:242
-#: plugins/Quasars/src/ui_quasarsDialog.h:258
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Update frequency (days):"
 msgstr ""
 
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:243
-#: plugins/Quasars/src/ui_quasarsDialog.h:259
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
+#: plugins/Quasars/src/ui_quasarsDialog.h:256
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:256
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:240
 msgid "[next update info]"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:71
+#: plugins/Quasars/src/Quasars.cpp:70
 msgid "Quasars"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:74
+#: plugins/Quasars/src/Quasars.cpp:73
 msgid ""
 "A plugin that shows some quasars brighter than 16 visual magnitude. A "
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:148
+#: plugins/Quasars/src/Quasars.cpp:146
 msgid "Quasars configuration window"
 msgstr ""
 
@@ -5816,38 +5861,47 @@ msgstr ""
 msgid "Veron+ 2010"
 msgstr ""
 
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
+#, qt-format
+msgid ""
+"If you want read full information about plugin, his history and format of "
+"catalog you can %1get info here%2."
+msgstr ""
+
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
 msgid "Quasars is updated"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:252
+#: plugins/Quasars/src/ui_quasarsDialog.h:249
 msgid "Quasars Configuration"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:253
+#: plugins/Quasars/src/ui_quasarsDialog.h:250
 msgid "Quasars Plug-in Configuration"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:261
+#: plugins/Quasars/src/ui_quasarsDialog.h:258
 msgid "Display mode for quasars"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:262
+#: plugins/Quasars/src/ui_quasarsDialog.h:259
 msgid "Enable display of distribution for quasars"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:71
+#: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:74
+#: plugins/Pulsars/src/Pulsars.cpp:73
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:113
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:148
+#: plugins/Pulsars/src/Pulsars.cpp:146
 msgid "Pulsars configuration window"
 msgstr ""
 
@@ -5985,6 +6039,10 @@ msgstr ""
 msgid "pulsar identifiers have the prefix 'PSR'"
 msgstr ""
 
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
+msgid "Acknowledgment"
+msgstr ""
+
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
 msgstr ""
@@ -6009,20 +6067,113 @@ msgstr ""
 msgid "Pulsars is updated"
 msgstr ""
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:252
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:249
 msgid "Pulsars Configuration"
 msgstr ""
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:253
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:250
 msgid "Pulsars Plug-in Configuration"
 msgstr ""
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:261
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Display mode for pulsars"
 msgstr ""
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:262
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 msgid "Enable display of distribution for pulsars"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:70
+msgid "Exoplanets"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:73
+msgid ""
+"This plugin plots the position of stars with exoplanets. Exoplanets data is "
+"derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:151
+msgid "Exoplanets configuration window"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:173
+#: plugins/Exoplanets/src/Exoplanet.cpp:189
+msgid "Mass"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:177
+#: plugins/Exoplanets/src/Exoplanet.cpp:190
+msgid "Radius"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:181
+#, qt-format
+msgid "Effective temperature: %1 K"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:187
+msgid "Exoplanet"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:188
+msgid "Period"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:188
+msgid "days"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:189
+#: plugins/Exoplanets/src/Exoplanet.cpp:190
+msgid "Jup"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:191
+msgid "Semi-Major Axis"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:191
+msgid "AU"
+msgstr "AU"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:192
+msgid "Eccentricity"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:193
+msgid "Inclination"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:194
+msgid "Angle Distance"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:106
+msgid "Exoplanets Plug-in"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
+#, qt-format
+msgid ""
+"This plugin plots the position of stars with exoplanets. Exoplanets data is "
+"derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
+msgid "Exoplanets is updated"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
+msgid "Exoplanets Configuration"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:234
+msgid "Exoplanets Plug-in Configuration"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
+msgid "Update exoplanets data from Internet"
 msgstr ""
 
 #~ msgid "Cardinal Points"
