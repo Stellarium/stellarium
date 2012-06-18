@@ -9,17 +9,157 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-11 18:38+0700\n"
-"PO-Revision-Date: 2012-06-12 10:58+0000\n"
+"POT-Creation-Date: 2012-06-17 18:37+0700\n"
+"PO-Revision-Date: 2012-06-17 22:33+0000\n"
 "Last-Translator: José A. Macas Durazo <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-13 04:36+0000\n"
-"X-Generator: Launchpad (build 15389)\n"
+"X-Launchpad-Export-Date: 2012-06-18 05:23+0000\n"
+"X-Generator: Launchpad (build 15419)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
+
+#: src/gui/HelpDialog.cpp:58
+msgid "CTRL + Left click"
+msgstr "CTRL + Clic izq."
+
+#: src/gui/StelGui.cpp:117
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:349
+msgid "Horizon line"
+msgstr "Linea del horizonte"
+
+#: src/gui/StelGui.cpp:144
+msgid "Script console window"
+msgstr "Ventana de la consola de guiones"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:127
+#, qt-format
+msgid "Landscape \"%1\" has been installed successfully."
+msgstr "Paisaje \"%1\" ha sido instalado exitosamente."
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:141
+#: src/gui/AddRemoveLandscapesDialog.cpp:211
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
+#: src/gui/AddRemoveLandscapesDialog.cpp:228
+msgid "No landscape was installed."
+msgstr "Ningún paisaje fue instalado."
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:154
+#, qt-format
+msgid "Landscape \"%1\" has been removed successfully."
+msgstr "Paisaje \"%1\" ha sido eliminado exitosamente."
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:165
+#: src/gui/AddRemoveLandscapesDialog.cpp:235
+msgid "The selected landscape could not be (completely) removed."
+msgstr "El paisaje elegido podría no ser eliminado (completamente)."
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:180
+msgid "Landscape Tour"
+msgstr "Recorrido por los paisajes"
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:182
+msgid "Partial Lunar Eclipse"
+msgstr "Eclipse Parcial de Luna"
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:184
+msgid "Total Lunar Eclipse"
+msgstr "Eclipse Total de Luna"
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:188
+msgid "Solar Eclipse 2009"
+msgstr "Eclipse Solar 2009"
+
+#: src/translations.h:198
+msgid "A slow, infinite tour of the sky, looking at random objects."
+msgstr ""
+"Un lento, e infinito recorrido por el cielo, mirando objetos aleatoriamente."
+
+#: src/translations.h:199
+msgid ""
+"Script to demonstrate a total solar eclipse which has happened in 2009 "
+"(location=Rangpur, Bangladesh)."
+msgstr ""
+"Guión para demostrar un eclipse total de Sol que ocurrió en 2009 "
+"(lugar=Rangpur, Bangladés)."
+
+#: src/translations.h:201
+msgid ""
+"This script displays the constellations of the Zodiac. That means the "
+"constellations which lie along the line which the Sun traces across the "
+"celestial sphere over the course of a year."
+msgstr ""
+"Este guión muestra las constelaciones del Zodíaco. Eso significa que las "
+"constelaciones que se encuentran a lo largo de la línea que traza el Sol "
+"alrededor de la esfera celeste durante el curso del año."
+
+#: src/ui_configurationDialog.h:827
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr ""
+"Permitir desplazamiento (clic y arrastrar) y zoom (rueda de desplazamiento) "
+"con ratón"
+
+#: src/ui_configurationDialog.h:829
+msgid "Enable mouse navigation"
+msgstr "Activar navegación mediante el ratón"
+
+#: src/ui_configurationDialog.h:903
+msgid "Load at startup"
+msgstr "Cargar al inicio"
+
+#: src/ui_AtmosphereDialog.h:179
+msgid "Pressure (mbar):"
+msgstr "Presión (mbar):"
+
+#: src/ui_AtmosphereDialog.h:185
+msgid ""
+"Extinction is the loss of star brightness due to Earth's atmosphere. It is "
+"given in mag/airmass, where airmass is number of atmospheres light has to "
+"pass. (zenith: 1; horizon: about 40)"
+msgstr ""
+"Extinción es la pérdida del brillo de estrella debido a la atmósfera de la "
+"Tierra. Está expresado en mag/masa de aire, en donde masa de aire es el "
+"número de atmósferas que la luz debe atravesar. (zenit:1; horizonte: cerca "
+"de 40)"
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:60
+msgid "Displays compass bearing marks along the horizon"
+msgstr "Muestra marcas de brújula a lo largo del horizonte"
+
+#: plugins/Satellites/src/Satellites.cpp:167
+msgid ""
+"The old satellites.json file is no longer compatible - using default file"
+msgstr ""
+"El anterior archivo satellites.json ya no es compatible - usando el archivo "
+"por defecto"
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:78
+msgid ""
+"This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
+"computerized mount (a \"GoTo telescope\")."
+msgstr ""
+"Este complemento permite a Stellarium enviar \"montones\" de mensajes a un "
+"telescopio en un montaje computarizado (un telescopio \"dirigible\")"
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:155
+#, qt-format
+msgid "Move telescope #%1 to selected object"
+msgstr "Mover el telescopio #%1 a el objecto seleccionado"
+
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:162
+#, qt-format
+msgid "Move telescope #%1 to the point currently in the center of the screen"
+msgstr "Mover el telescopio #%1 a el punto en el centro de la pantalla"
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
+msgid "OK"
+msgstr "Aceptar"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -66,12 +206,14 @@ msgstr "Tipo: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:109
+#: plugins/Exoplanets/src/Exoplanet.cpp:143
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitud: <b>%1</b> (extinto a: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:121
+#: plugins/Exoplanets/src/Exoplanet.cpp:148
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnitud: <b>%1</b>"
@@ -190,12 +332,14 @@ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Magnitud: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
+#: plugins/Exoplanets/src/Exoplanet.cpp:157
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Tipo espectral: %1"
 
 #: src/core/modules/StarWrapper.cpp:134
 #: plugins/Supernovae/src/Supernova.cpp:117
+#: plugins/Exoplanets/src/Exoplanet.cpp:162
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Distancia: %1 años luz"
@@ -402,6 +546,7 @@ msgstr "Contacto"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:108
 msgid "Author"
 msgstr "Autor"
 
@@ -495,15 +640,11 @@ msgstr "CTRL + Arriba/Abajo"
 
 #: src/gui/HelpDialog.cpp:56
 msgid "Left click"
-msgstr "Click izquierdo"
+msgstr "Clic izquierdo"
 
 #: src/gui/HelpDialog.cpp:57
 msgid "Right click"
-msgstr "Click derecho"
-
-#: src/gui/HelpDialog.cpp:58
-msgid "CTRL + Left click"
-msgstr "CTRL + Click izq"
+msgstr "Clic derecho"
 
 #: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:176
 msgid "Movement and Selection"
@@ -558,8 +699,9 @@ msgstr "Establece el ratio de ejecución de scripts normal"
 #: plugins/CompassMarks/src/CompassMarks.cpp:124
 #: plugins/Oculars/src/Oculars.cpp:1188
 #: plugins/Satellites/src/Satellites.cpp:128
-#: plugins/Supernovae/src/Supernovae.cpp:143
-#: plugins/Quasars/src/Quasars.cpp:146 plugins/Pulsars/src/Pulsars.cpp:146
+#: plugins/Supernovae/src/Supernovae.cpp:141
+#: plugins/Quasars/src/Quasars.cpp:144 plugins/Pulsars/src/Pulsars.cpp:144
+#: plugins/Exoplanets/src/Exoplanets.cpp:149
 msgid "Plugin Key Bindings"
 msgstr "Botones de complementos"
 
@@ -753,11 +895,6 @@ msgstr "Línea del Ecuador"
 msgid "Meridian line"
 msgstr "Línea del Meridiano"
 
-#: src/gui/StelGui.cpp:117
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:349
-msgid "Horizon line"
-msgstr "Linea del Horizonte"
-
 #: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Cardinal points"
@@ -846,10 +983,6 @@ msgstr "Ventana de fecha/hora"
 #: src/gui/StelGui.cpp:142
 msgid "Location window"
 msgstr "Ventana de ubicación"
-
-#: src/gui/StelGui.cpp:144
-msgid "Script console window"
-msgstr "Ventana de la consola de scripts"
 
 #: src/gui/StelGui.cpp:147 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
@@ -1030,22 +1163,10 @@ msgstr "elija un archivo ZIP que contenga un paisaje de Stellarium"
 msgid "ZIP archives"
 msgstr "archivos ZIP"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:127
-#, qt-format
-msgid "Landscape \"%1\" has been installed successfully."
-msgstr "Paisaje \"%1\" ha sido instalado exitosamente"
-
 #: src/gui/AddRemoveLandscapesDialog.cpp:128
 #: src/gui/AddRemoveLandscapesDialog.cpp:155
 msgid "Success"
 msgstr "Éxito"
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:141
-#: src/gui/AddRemoveLandscapesDialog.cpp:211
-#: src/gui/AddRemoveLandscapesDialog.cpp:220
-#: src/gui/AddRemoveLandscapesDialog.cpp:228
-msgid "No landscape was installed."
-msgstr "Ningún paisaje fue instalado"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:142
 #: src/gui/AddRemoveLandscapesDialog.cpp:166
@@ -1055,16 +1176,6 @@ msgstr "Ningún paisaje fue instalado"
 #: src/gui/AddRemoveLandscapesDialog.cpp:239
 msgid "Error!"
 msgstr "¡Error!"
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:154
-#, qt-format
-msgid "Landscape \"%1\" has been removed successfully."
-msgstr "Paisaje \"%1\" ha sido eliminado exitosamente"
-
-#: src/gui/AddRemoveLandscapesDialog.cpp:165
-#: src/gui/AddRemoveLandscapesDialog.cpp:235
-msgid "The selected landscape could not be (completely) removed."
-msgstr "El paisaje elegido podría no ser eliminado (completamente)"
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
@@ -1142,7 +1253,8 @@ msgstr "Universidad de Harvard (EE. UU.)"
 msgid "This system does not support OpenGL."
 msgstr "Este sistema no soporta OpenGL."
 
-#: src/translations.h:33
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:173
+#: plugins/Exoplanets/src/Exoplanet.cpp:177
 msgid "Sun"
 msgstr "Sol"
 
@@ -1590,29 +1702,9 @@ msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:180
-msgid "Landscape Tour"
-msgstr "Gira por los paisajes"
-
-#. TRANSLATORS: Name of script
-#: src/translations.h:182
-msgid "Partial Lunar Eclipse"
-msgstr "Eclipse parcial de luna"
-
-#. TRANSLATORS: Name of script
-#: src/translations.h:184
-msgid "Total Lunar Eclipse"
-msgstr "Eclipse total de luna"
-
-#. TRANSLATORS: Name of script
 #: src/translations.h:186
 msgid "Screensaver"
 msgstr "Salvapantallas"
-
-#. TRANSLATORS: Name of script
-#: src/translations.h:188
-msgid "Solar Eclipse 2009"
-msgstr "Eclipse solar 2009"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:190
@@ -1636,32 +1728,9 @@ msgstr "Guión para demostrar un eclipse parcial de luna"
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Guión para demostrar un eclipse total de luna"
 
-#: src/translations.h:198
-msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr ""
-"Una lenta, infinita gira por el cielo, mirando objetos aleatoriamente."
-
-#: src/translations.h:199
-msgid ""
-"Script to demonstrate a total solar eclipse which has happened in 2009 "
-"(location=Rangpur, Bangladesh)."
-msgstr ""
-"Guión para demostrar un eclipse total de Sol que ocurrió en 2009 "
-"(lugar=Rangpur, Bangladesh)."
-
 #: src/translations.h:200
 msgid "Script which runs automatically at startup"
 msgstr "Guión que se ejecuta automáticamente al inicio"
-
-#: src/translations.h:201
-msgid ""
-"This script displays the constellations of the Zodiac. That means the "
-"constellations which lie along the line which the Sun traces across the "
-"celestial sphere over the course of a year."
-msgstr ""
-"Este guión muestra las constelaciones del zodíaco. Eso significa las "
-"constelaciones que se encuentran a lo largo de la línea que traza el Sol "
-"alrededor de la esfera celeste durante el año."
 
 #: src/translations.h:204
 msgid "Andorra"
@@ -2640,14 +2709,7 @@ msgstr ":"
 msgid "Help"
 msgstr "Ayuda"
 
-#: src/ui_helpDialogGui.h:267 plugins/Oculars/src/ui_ocularDialog.h:903
-#: plugins/Satellites/src/ui_satellitesDialog.h:718
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:248
-#: plugins/Quasars/src/ui_quasarsDialog.h:266
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:266
+#: src/ui_helpDialogGui.h:267
 msgid "About"
 msgstr "Acerca de"
 
@@ -3168,16 +3230,6 @@ msgstr "Permitir desplazamiento y zoom con teclado"
 msgid "Enable keyboard navigation"
 msgstr "Activar navegación mediante teclado"
 
-#: src/ui_configurationDialog.h:827
-msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr ""
-"Permitir desplazamiento (click y arrastrar) y zoom (rueda de scroll) con "
-"ratón"
-
-#: src/ui_configurationDialog.h:829
-msgid "Enable mouse navigation"
-msgstr "Activar navegación mediante ratón"
-
 #: src/ui_configurationDialog.h:830
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Startup date and time"
@@ -3341,10 +3393,6 @@ msgstr "Ejecutar script seleccionado"
 msgid "Stop a running script"
 msgstr "Detener script en ejecución"
 
-#: src/ui_configurationDialog.h:903
-msgid "Load at startup"
-msgstr "Carga en el inicio"
-
 #: src/ui_configurationDialog.h:904
 msgid "configure"
 msgstr "configurar"
@@ -3412,23 +3460,9 @@ msgstr "Detalles de la Atmósfera"
 msgid "Refraction Settings"
 msgstr "Configuración de Refracción"
 
-#: src/ui_AtmosphereDialog.h:179
-msgid "Pressure (mbar):"
-msgstr "Presión"
-
 #: src/ui_AtmosphereDialog.h:180
 msgid "Temperature (C):"
 msgstr "Temperatura (C):"
-
-#: src/ui_AtmosphereDialog.h:185
-msgid ""
-"Extinction is the loss of star brightness due to Earth's atmosphere. It is "
-"given in mag/airmass, where airmass is number of atmospheres light has to "
-"pass. (zenith: 1; horizon: about 40)"
-msgstr ""
-"Extincion es la perdida del briillo de estrella debido a la atmosfera de la "
-"Tierra. Esta expresado en mag/airmass, en donde airmass es el numero de "
-"atmosferas que la luz debe atravesar. (zenit:1; horizonte: cerca de 40)"
 
 #: src/ui_AtmosphereDialog.h:187
 msgid "Extinction Coefficient:"
@@ -3631,10 +3665,6 @@ msgstr "Clic con el botón derecho sólo cambia el punto final."
 #: plugins/CompassMarks/src/CompassMarks.cpp:57
 msgid "Compass Marks"
 msgstr "Marcas de Brújula"
-
-#: plugins/CompassMarks/src/CompassMarks.cpp:60
-msgid "Displays compass bearing marks along the horizon"
-msgstr "Muestra marcas de brújula"
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:124
 msgid "Compass marks"
@@ -3905,6 +3935,7 @@ msgstr "Complemento de Oculares"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:107
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:107
 msgid "Version"
 msgstr "Versión"
 
@@ -3962,6 +3993,10 @@ msgid ""
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
+"Puede activar un buscador Telrad; éste sólo se puede hacer cuando no esta la "
+"Vista de Ocular. Esta función dibuja tres círculos concéntricos de 0.5%1, "
+"2.0%1, y 4.0%1, ayudandole a ver como se espera que se mire a simple vista a "
+"través del buscador Telrad (o similar)."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:429
 msgid "If you find any issues, please let me know.  Enjoy!"
@@ -4110,6 +4145,18 @@ msgstr "Voltear horizontalmente"
 msgid "Vertical flip"
 msgstr "Voltear verticalmente"
 
+#: plugins/Oculars/src/ui_ocularDialog.h:903
+#: plugins/Satellites/src/ui_satellitesDialog.h:718
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:245
+#: plugins/Quasars/src/ui_quasarsDialog.h:263
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:245
+msgid "About plugin"
+msgstr "Acerca del complemento"
+
 #: plugins/Satellites/src/Satellites.cpp:65
 #: plugins/Satellites/src/ui_satellitesDialog.h:705
 msgid "Satellites"
@@ -4134,12 +4181,6 @@ msgstr "Posiciones de satélites"
 #: plugins/Satellites/src/Satellites.cpp:133
 msgid "Satellite labels"
 msgstr "Nombres de satélites"
-
-#: plugins/Satellites/src/Satellites.cpp:167
-msgid ""
-"The old satellites.json file is no longer compatible - using default file"
-msgstr ""
-"El previo archivo satellites.json - usando el archivo normalmente usado"
 
 #: plugins/Satellites/src/Satellite.cpp:230
 #: plugins/Satellites/src/Satellite.cpp:234
@@ -4352,6 +4393,7 @@ msgstr "Véa %1este documento%2 para detalles."
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:112
 msgid "Links"
 msgstr "Enlaces"
 
@@ -4359,6 +4401,7 @@ msgstr "Enlaces"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:113
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -4372,6 +4415,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:122
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:116
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Si tiene preguntas, puede %1obtener una respuesta aquí%2"
@@ -4381,6 +4425,7 @@ msgstr "Si tiene preguntas, puede %1obtener una respuesta aquí%2"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:118
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "Reportar errores %1aquí%2."
@@ -4390,6 +4435,7 @@ msgstr "Reportar errores %1aquí%2."
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -4401,6 +4447,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:146
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:139
 msgid "Internet updates disabled"
 msgstr "Actualizaciones por internet inhabilitadas"
 
@@ -4412,6 +4459,8 @@ msgstr "Actualizaciones por internet inhabilitadas"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:188
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:141
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Updating now..."
 msgstr "Actualizando..."
 
@@ -4419,6 +4468,7 @@ msgstr "Actualizando..."
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:155
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
 msgid "Next update: < 1 minute"
 msgstr "Siguiente actualización: < 1 minuto"
 
@@ -4426,6 +4476,7 @@ msgstr "Siguiente actualización: < 1 minuto"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:152
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "Siguiente actualización: %1 minutos"
@@ -4434,6 +4485,7 @@ msgstr "Siguiente actualización: %1 minutos"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:159
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "Siguiente actualización: %1 horas"
@@ -4441,11 +4493,13 @@ msgstr "Siguiente actualización: %1 horas"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:244
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
-#: plugins/Quasars/src/ui_quasarsDialog.h:260
+#: plugins/Quasars/src/ui_quasarsDialog.h:257
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:241
 msgid "Update now"
 msgstr "Actualizar"
 
@@ -4453,6 +4507,7 @@ msgstr "Actualizar"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 msgid "Update from files"
 msgstr "Actualizar desde archivos"
 
@@ -4460,6 +4515,7 @@ msgstr "Actualizar desde archivos"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:190
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:191
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Update error"
 msgstr "Error de actualización"
 
@@ -4538,20 +4594,23 @@ msgid "Update TLE lists from Internet sources"
 msgstr "Actualice las listas TLE desde el internet"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:644
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
-#: plugins/Quasars/src/ui_quasarsDialog.h:256
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:256
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:237
+#: plugins/Quasars/src/ui_quasarsDialog.h:253
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:253
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:237
 msgid "Update from Internet sources"
 msgstr "Actualizar desde fuentes en Internet"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:241
-#: plugins/Quasars/src/ui_quasarsDialog.h:257
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:238
+#: plugins/Quasars/src/ui_quasarsDialog.h:254
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:254
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:238
 msgid "Last update:"
 msgstr "Última actualización:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:646
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:239
 msgid "Update frequency (hours):"
 msgstr "Frecuencia de actualización (horas):"
 
@@ -4595,23 +4654,26 @@ msgid "Fade length:"
 msgstr "Longitun de desvanecimiento:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:672
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:245
-#: plugins/Quasars/src/ui_quasarsDialog.h:263
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:242
+#: plugins/Quasars/src/ui_quasarsDialog.h:260
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:242
 msgid "Restore default settings"
 msgstr "Reestablecer configuración por defecto"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:246
-#: plugins/Quasars/src/ui_quasarsDialog.h:264
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:264
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:243
+#: plugins/Quasars/src/ui_quasarsDialog.h:261
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:261
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:243
 msgid "Save settings as default"
 msgstr "Salvar configuración como por defecto"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:674
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:247
-#: plugins/Quasars/src/ui_quasarsDialog.h:265
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:265
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:244
+#: plugins/Quasars/src/ui_quasarsDialog.h:262
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:262
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:244
 msgid "Settings"
 msgstr "Configuración"
 
@@ -4713,24 +4775,6 @@ msgstr "Descartar"
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:150
 msgid "Telescope Control"
 msgstr "Control de telescopio"
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:78
-msgid ""
-"This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
-"computerized mount (a \"GoTo telescope\")."
-msgstr ""
-"Este complemento permite a Stellarium enviar \"montones\" de mensajes a un "
-"telescopio en un montaje computarizado (un telescopio \"Ir a\")"
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:155
-#, qt-format
-msgid "Move telescope #%1 to selected object"
-msgstr "Mover telescopio #%1 a el objecto seleccionado"
-
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:162
-#, qt-format
-msgid "Move telescope #%1 to the point currently in the center of the screen"
-msgstr "Mover telescopio #%1 a el punto en el centro de la pantalla"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:173
 msgid "Move a telescope to a given set of coordinates"
@@ -5073,10 +5117,6 @@ msgstr "Tamaño de círculo(s):"
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:514
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
 msgstr "Hasta diez valores decimales en grados de arco, separados por comas"
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:517
-msgid "OK"
-msgstr "OK"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
 msgid "Telescopes Controlled"
@@ -5786,11 +5826,11 @@ msgstr "Importar elementos orbitales en formato MPC..."
 msgid "Solar System"
 msgstr "Sistema Solar"
 
-#: plugins/Supernovae/src/Supernovae.cpp:71
+#: plugins/Supernovae/src/Supernovae.cpp:70
 msgid "Historical Supernovae"
 msgstr "Sopernovas Históricas"
 
-#: plugins/Supernovae/src/Supernovae.cpp:74
+#: plugins/Supernovae/src/Supernovae.cpp:73
 msgid ""
 "A plugin that shows some historical supernovae brighter than 10 visual "
 "magnitude."
@@ -5798,7 +5838,7 @@ msgstr ""
 "Un complemento que muestra algunas supernovas históricas más brillantes que "
 "una magnitud visual de 10."
 
-#: plugins/Supernovae/src/Supernovae.cpp:145
+#: plugins/Supernovae/src/Supernovae.cpp:143
 msgid "Historical Supernovae configuration window"
 msgstr "Ventana de configuración de Supernovas Históricas"
 
@@ -5817,19 +5857,19 @@ msgstr "Complemento de Supernovas Históricas"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid ""
-"A plugin that shows some historical supernovae brighter than 10 visual "
-"magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN "
-"1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 "
+"A plugin that shows some historical supernovae brighter than visual "
+"magnitude 10: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), "
+"SN 1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 "
 "October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN "
 "1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
 "(13 September)."
 msgstr ""
-"Un complemento que muestra algunas supernovas históricas mas brillantes que "
-"una magnitud visual 10: SN 185A (7 de Diciembre), SN 386A (24 de Abril), SN "
-"1006A (29 de Abril), SN 1054A (3 de Julio), SN 1181A (4 de Agosto), SN 1572A "
-"(5 de Noviembre), SN 1604A (8 de Octubre), SN 1680A (15 de Agosto), SN 1885A "
-"(17 de Agosto), SN 1895B (5 de Julio), SN 1937C (21 de Agosto), SN 1972E (8 "
-"de Mayo), SN 1987A (24 de Febrero) y SN 2011FE (13 de Septiembre)."
+"Un complemento que muestra algunas supernovas históricas más brillantes que "
+"una magnitud visual de 10: SN 185A (7 de Diciembre), SN 386A (24 de Abril), "
+"SN 1006A (29 de Abril), SN 1054A (3 de Julio), SN 1181A (4 de Agosto), SN "
+"1572A (5 de Noviembre), SN 1604A (8 de Octubre), SN 1680A (15 de Agosto), SN "
+"1885A (17 de Agosto), SN 1895B (5 de Julio), SN 1937C (21 de Agosto), SN "
+"1972E (8 de Mayo), SN 1987A (24 de Febrero) y SN 2011FE (13 de Septiembre)."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
 msgid "Light curves"
@@ -5838,28 +5878,27 @@ msgstr "Curvas de luz"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:114
 #, qt-format
 msgid ""
-"In this plugin implemented simple model of light curves for different "
-"supernovae. Typical view of light curves for supernova type I and type II "
-"you can see %1here%2 (right scale in days) and this model used for plugin."
+"This plugin implements a simple model of light curves for different "
+"supernovae. Typical views of light curves for type I and type II supernova "
+"can seen %1here%2 (right scale in days) and this model is used for this "
+"plugin."
 msgstr ""
-"En esta complemento se implementa un simple modelado de curvas de luz para "
-"diferentes supernovas.  La vista típica de curvas de luz para supernovas "
-"tipo I y tipo II puede ver %1 aquí %2 (escala derecha en días) y este modelo "
-"usado para el complemento."
+"Este complemento implementa un simple modelo de curvas de luz para "
+"diferentes supernovas. Las vistas típicas de curvas de luz para los tipos I "
+"y II de supernovas pueden ser vistos %1aquí%2 (escala derecha en días) y "
+"este modelo es usada para este complemento."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
-msgid "Acknowledgment"
-msgstr "Agradecimiento"
+msgid "Acknowledgments"
+msgstr "Agradecimientos"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
 msgid ""
-"We thank the following people for their contribution and of the valuable "
-"comments:"
+"We thank the following people for their contribution and valuable comments:"
 msgstr ""
-"Agradecemos a las siguientes personas por sus contibuciones y por sus "
-"valiosos comentarios:"
+"Agradecemos a las siguientes personas por su contribución y sus valiosos "
+"comentarios:"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Sergei Blinnikov"
@@ -5876,15 +5915,14 @@ msgstr "en Russia"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 #, qt-format
 msgid ""
-"If you want read full information about plugin, his history and format of "
-"catalog you can %1get info here%2."
+"If you want more information about this plugin, its history, and format of "
+"catalog, you can %1get additional info here%2."
 msgstr ""
-"Si quiere leer la información completa acerca de este complemento, su "
-"historia y su formato de catálogo puede %1obtener información aquí%2."
+"Si quiere más información acerca de este complemento, su historia, y su "
+"formato de catálogo, puede %1obtener información adicional aquí%2."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
@@ -5897,37 +5935,38 @@ msgstr "Siguiente actualización: %1 días"
 msgid "Historical supernovae is updated"
 msgstr "Supernovas históricas actualizadas"
 
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:236
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 msgid "Historical Supernovae Configuration"
 msgstr "Configuración de Supernovas Históricas"
 
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:237
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 msgid "Historical Supernovae Plug-in Configuration"
 msgstr "Configuración del complemento de Supernovas Históricas"
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:236
+#: plugins/Quasars/src/ui_quasarsDialog.h:252
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:252
+msgid "Update catalog from Internet"
+msgstr "Actualizar catálogo desde Internet"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:255
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:255
-msgid "Update catalog from Internet"
-msgstr "Actualizar catálogo desde Internet"
-
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:242
-#: plugins/Quasars/src/ui_quasarsDialog.h:258
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Update frequency (days):"
 msgstr "Frecuencia de actualización (días):"
 
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:243
-#: plugins/Quasars/src/ui_quasarsDialog.h:259
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
+#: plugins/Quasars/src/ui_quasarsDialog.h:256
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:256
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:240
 msgid "[next update info]"
 msgstr "[información de la siguiente actualización]"
 
-#: plugins/Quasars/src/Quasars.cpp:71
+#: plugins/Quasars/src/Quasars.cpp:70
 msgid "Quasars"
 msgstr "Quásares"
 
-#: plugins/Quasars/src/Quasars.cpp:74
+#: plugins/Quasars/src/Quasars.cpp:73
 msgid ""
 "A plugin that shows some quasars brighter than 16 visual magnitude. A "
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
@@ -5937,7 +5976,7 @@ msgstr ""
 "visual 16. Un catálogo de quásares compilado de 'Quasars and Active Galactic "
 "Nuclei' (13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 
-#: plugins/Quasars/src/Quasars.cpp:148
+#: plugins/Quasars/src/Quasars.cpp:146
 msgid "Quasars configuration window"
 msgstr "Ventana de configuración de Cuásares"
 
@@ -5968,31 +6007,42 @@ msgstr ""
 msgid "Veron+ 2010"
 msgstr "Veron+ 2010"
 
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
+#, qt-format
+msgid ""
+"If you want read full information about plugin, his history and format of "
+"catalog you can %1get info here%2."
+msgstr ""
+"Si quiere leer la información completa acerca de este complemento, su "
+"historia y su formato de catálogo puede %1obtener información aquí%2."
+
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
 msgid "Quasars is updated"
 msgstr "Cuásares actualizados"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:252
+#: plugins/Quasars/src/ui_quasarsDialog.h:249
 msgid "Quasars Configuration"
 msgstr "Configuración de Cuásares"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:253
+#: plugins/Quasars/src/ui_quasarsDialog.h:250
 msgid "Quasars Plug-in Configuration"
 msgstr "Configuración del Complemento de Cuásares"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:261
+#: plugins/Quasars/src/ui_quasarsDialog.h:258
 msgid "Display mode for quasars"
 msgstr "Modo de vista para cuásares"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:262
+#: plugins/Quasars/src/ui_quasarsDialog.h:259
 msgid "Enable display of distribution for quasars"
 msgstr "Activar la vista de dispersión de cuásares"
 
-#: plugins/Pulsars/src/Pulsars.cpp:71
+#: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
 msgstr "Púlsares"
 
-#: plugins/Pulsars/src/Pulsars.cpp:74
+#: plugins/Pulsars/src/Pulsars.cpp:73
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:113
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
@@ -6001,7 +6051,7 @@ msgstr ""
 "Este complemento traza la posición de varios púlsares, con información de "
 "objeto acerca de cada uno."
 
-#: plugins/Pulsars/src/Pulsars.cpp:148
+#: plugins/Pulsars/src/Pulsars.cpp:146
 msgid "Pulsars configuration window"
 msgstr "Ventana de configuración de púlsares"
 
@@ -6147,6 +6197,10 @@ msgstr "Nota"
 msgid "pulsar identifiers have the prefix 'PSR'"
 msgstr "los identificadores de púlsar tienen el prefijo 'PSR'"
 
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
+msgid "Acknowledgment"
+msgstr "Agradecimiento"
+
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
 msgstr "Vladimir Samodourov"
@@ -6171,21 +6225,119 @@ msgstr "en Francia"
 msgid "Pulsars is updated"
 msgstr "Los púlsares están actualizados"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:252
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:249
 msgid "Pulsars Configuration"
 msgstr "Configuración de Púlsares"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:253
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:250
 msgid "Pulsars Plug-in Configuration"
 msgstr "Configuración del Complemento de Púlsares"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:261
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Display mode for pulsars"
 msgstr "Modo de vista para púlsares"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:262
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 msgid "Enable display of distribution for pulsars"
 msgstr "Activar la vista de dispersión de púlsares"
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:70
+msgid "Exoplanets"
+msgstr "Exoplanetas"
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:73
+msgid ""
+"This plugin plots the position of stars with exoplanets. Exoplanets data is "
+"derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
+msgstr ""
+"Este complemento traza la posición de estrellas con exoplanetas. Los datos "
+"de los exoplanetas derivan de 'Extrasolar Planets Encyclopaedia' en "
+"exoplanet.eu"
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:151
+msgid "Exoplanets configuration window"
+msgstr "Ventana de configuración de exoplanetas"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:173
+#: plugins/Exoplanets/src/Exoplanet.cpp:189
+msgid "Mass"
+msgstr "Masa"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:177
+#: plugins/Exoplanets/src/Exoplanet.cpp:190
+msgid "Radius"
+msgstr "Radio"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:181
+#, qt-format
+msgid "Effective temperature: %1 K"
+msgstr "Temperatura efectiva: %1 K"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:187
+msgid "Exoplanet"
+msgstr "Exoplaneta"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:188
+msgid "Period"
+msgstr "Periodo"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:188
+msgid "days"
+msgstr "días"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:189
+#: plugins/Exoplanets/src/Exoplanet.cpp:190
+msgid "Jup"
+msgstr "Júp"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:191
+msgid "Semi-Major Axis"
+msgstr "Eje Semi-Mayor"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:191
+msgid "AU"
+msgstr "UA"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:192
+msgid "Eccentricity"
+msgstr "Excentricidad"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:193
+msgid "Inclination"
+msgstr "Inclinación"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:194
+msgid "Angle Distance"
+msgstr "Distancia Angular"
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:106
+msgid "Exoplanets Plug-in"
+msgstr "Complemento de Exoplanetas"
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
+#, qt-format
+msgid ""
+"This plugin plots the position of stars with exoplanets. Exoplanets data is "
+"derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
+msgstr ""
+"Este complemento traza la posición de estrellas con exoplanetas. Los datos "
+"de los exoplanetas derivan de \"%1The Extrasolar Planets Encyclopaedia%2\""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
+msgid "Exoplanets is updated"
+msgstr "Exoplanetas actualizados"
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
+msgid "Exoplanets Configuration"
+msgstr "Configuración de Exoplanetas"
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:234
+msgid "Exoplanets Plug-in Configuration"
+msgstr "Configuración del Complemento de Exoplanetas"
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
+msgid "Update exoplanets data from Internet"
+msgstr "Actualizar datos de exoplanetas desde Internet"
 
 #~ msgid "Ecliptic Line"
 #~ msgstr "Eclíptica"
@@ -6421,6 +6573,21 @@ msgstr "Activar la vista de dispersión de púlsares"
 #~ msgstr ""
 #~ "El soporte se provee a través del sitio web de Lunchpad. Asegúrese escribir "
 #~ "\"Complemento satelital\" en el asunto del mensaje."
+
+#~ msgid ""
+#~ "A plugin that shows some historical supernovae brighter than 10 visual "
+#~ "magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN "
+#~ "1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 "
+#~ "October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN "
+#~ "1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
+#~ "(13 September)."
+#~ msgstr ""
+#~ "Un complemento que muestra algunas supernovas históricas mas brillantes que "
+#~ "una magnitud visual 10: SN 185A (7 de Diciembre), SN 386A (24 de Abril), SN "
+#~ "1006A (29 de Abril), SN 1054A (3 de Julio), SN 1181A (4 de Agosto), SN 1572A "
+#~ "(5 de Noviembre), SN 1604A (8 de Octubre), SN 1680A (15 de Agosto), SN 1885A "
+#~ "(17 de Agosto), SN 1895B (5 de Julio), SN 1937C (21 de Agosto), SN 1972E (8 "
+#~ "de Mayo), SN 1987A (24 de Febrero) y SN 2011FE (13 de Septiembre)."
 
 #~ msgid ""
 #~ "This plugin plots the position of various pulsars, with object information "
