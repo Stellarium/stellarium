@@ -340,14 +340,15 @@ bool StelSkyDrawer::computeRCMag(float mag, float rcMag[2]) const
 void StelSkyDrawer::preDrawPointSource(StelPainter* p)
 {
 	Q_ASSERT(p);
-	Q_ASSERT(!drawing, Q_FUNC_INFO,
-	         "Attempting to start drawing point sources when it is already started");
+	Q_ASSERT_X(!drawing, Q_FUNC_INFO,
+	           "Attempting to start drawing point sources when it is already started");
 
 	if (drawStarsAsPoints)
 	{
 		p->enableTexture2d(false);
 		p->setPointSize(0.1);
 	}
+	drawing = true;
 }
 
 // Finalize the drawing of point sources
@@ -377,8 +378,8 @@ bool StelSkyDrawer::drawPointSource
 	 const Vec3f& color, bool checkInScreen)
 {
 	Q_ASSERT(sPainter);
-	Q_ASSERT(drawing, Q_FUNC_INFO,
-	         "Attempting to draw a point source without calling preDrawPointSource first.");
+	Q_ASSERT_X(drawing, Q_FUNC_INFO,
+	           "Attempting to draw a point source without calling preDrawPointSource first.");
 
 	if (rcMag[0]<=0.f)
 		return false;
