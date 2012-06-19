@@ -185,6 +185,19 @@ QString StelMainScriptAPI::getObserverLocation()
 	return StelApp::getInstance().getCore()->getCurrentLocation().getID();
 }
 
+QVariantMap StelMainScriptAPI::getObserverLocationInfo()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	QVariantMap map;
+	map.insert("longitude", core->getCurrentLocation().longitude);
+	map.insert("latitude", core->getCurrentLocation().latitude);
+	map.insert("planet", core->getCurrentLocation().planetName);
+	map.insert("altitude", core->getCurrentLocation().altitude);
+	map.insert("location", core->getCurrentLocation().getID());
+
+	return map;
+}
+
 void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir)
 {
 	bool oldInvertSetting = StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors();
