@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-17 18:37+0700\n"
-"PO-Revision-Date: 2012-06-17 19:45+0000\n"
+"PO-Revision-Date: 2012-06-18 22:55+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-18 05:22+0000\n"
-"X-Generator: Launchpad (build 15419)\n"
+"X-Launchpad-Export-Date: 2012-06-19 04:42+0000\n"
+"X-Generator: Launchpad (build 15435)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -3329,7 +3329,7 @@ msgstr "Nahrať pri spustení"
 
 #: src/ui_configurationDialog.h:904
 msgid "configure"
-msgstr "skonfigurovať"
+msgstr "nastaviť"
 
 #: src/ui_configurationDialog.h:909
 msgid "Main"
@@ -4093,8 +4093,8 @@ msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
 msgstr ""
-"Predpoveď polohy satelitov na obežnej dráhe podľa dvojriadkových elementov "
-"NORAD"
+"Predpoveď polohy umelých satelitov na obežnej dráhe Zeme podľa údajov TLE "
+"veliteľstva NORAD"
 
 #: plugins/Satellites/src/Satellites.cpp:130
 msgid "Satellites configuration window"
@@ -4243,7 +4243,7 @@ msgstr ""
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:280
 msgid "TLE data updates"
-msgstr "Aktualizácie dát TLE"
+msgstr "Aktualizácie údajov TLE"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
 msgid ""
@@ -4251,6 +4251,9 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
+"Zásuvný modul Satelity dokáže stiahnuť údaje TLE automaticky z internetových "
+"zdrojov a predvolene tak vykoná, ak sú existujúce údaje staršie ako 72 "
+"hodín. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:282
 #, qt-format
@@ -4259,16 +4262,21 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
+"Keď vypnete aktualizácie cez internet, môžete vykonať aktualizáciu zo súboru "
+"na svojom počítači. Tento súbor musí byť v rovnakom formáte ako "
+"aktualizácie, ktoré poskytuje Celestrak (ako príklad si pozrite %1)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:283
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr ""
+"<b>Poznámka:</b> Ak názov satelitu v aktualizačných údajoch obsahuje na "
+"konci čokoľvek v hranatých zátvorkách, pred použitím údajov sa to odstráni."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
 msgid "Adding new satellites"
-msgstr ""
+msgstr "Pridanie nových satelitov"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
 msgid ""
@@ -4277,6 +4285,11 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
+"1. Uistite sa, že satelity (resp. satelit), ktoré chcete pridať, sú zahrnuté "
+"v jednej z adries URL uvedených v karte Zdroje v konfiguračnom dialógovom "
+"okne modulu Satelity. 2. Prejdite na kartu Satelity a kliknite na tlačidlo "
+"'+'. Vyberte satelity (resp. satelit), ktoré si prajete pridať, a zvoľte "
+"tlačidlo Pridať."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
 msgid "Technical notes"
@@ -4287,6 +4300,8 @@ msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
 msgstr ""
+"Pozície sa vypočítavajú pomocou metód SGP4 a SDP4 s použitím údajov TLE "
+"veliteľstva NORAD ako vstupu. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:291
 msgid ""
@@ -4318,6 +4333,8 @@ msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
+"Pomoc sa poskytuje prostredníctvom webovej stránky Launchpad. Pri odosielaní "
+"sa uistite, že ste do predmetu vložili \"%1\"."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:299
@@ -4327,7 +4344,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:116
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
-msgstr ""
+msgstr "Ak máte otázku, odpoveď môžete %1získať tu%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
@@ -4337,7 +4354,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:118
 #, qt-format
 msgid "Bug reports can be made %1here%2."
-msgstr ""
+msgstr "Chyby môžete ohlásiť %1tu%2."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:303
@@ -4377,7 +4394,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
 msgid "Next update: < 1 minute"
-msgstr ""
+msgstr "Ďalšia aktualizácia: < 1 minúta"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
@@ -4386,7 +4403,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
 #, qt-format
 msgid "Next update: %1 minutes"
-msgstr ""
+msgstr "Ďalšia aktualizácia: %1 minút"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:159
@@ -4395,7 +4412,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 #, qt-format
 msgid "Next update: %1 hours"
-msgstr ""
+msgstr "Ďalšia aktualizácia: %1 hodín"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
@@ -4496,7 +4513,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:643
 msgid "Update TLE lists from Internet sources"
-msgstr ""
+msgstr "Aktualizácia zoznamov TLE z internetových zdrojov"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:644
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
@@ -4504,7 +4521,7 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:253
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:237
 msgid "Update from Internet sources"
-msgstr ""
+msgstr "Aktualizovať z internetových zdrojov"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
@@ -4512,7 +4529,7 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:254
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:238
 msgid "Last update:"
-msgstr ""
+msgstr "Posledná aktualizácia:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:646
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:239
@@ -5789,7 +5806,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
 #, qt-format
 msgid "Next update: %1 days"
-msgstr ""
+msgstr "Ďalšia aktualizácia: %1 dní"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
 msgid "Historical supernovae is updated"
