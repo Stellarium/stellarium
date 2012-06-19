@@ -65,10 +65,12 @@ public:
 	//! @param bV the source B-V index
 	//! @param checkInScreen whether source in screen should be checked to avoid unnecessary drawing.
 	//! @return true if the source was actually visible and drawn
+
 	bool drawPointSource(StelPainter* sPainter, const Vec3d& v, const float rcMag[2], unsigned int bV, bool checkInScreen=false)
 		{return drawPointSource(sPainter, v, rcMag, colorTable[bV], checkInScreen);}
 
 	bool drawPointSource(StelPainter* sPainter,const Vec3d& v, const float rcMag[2], const Vec3f& color, bool checkInScreen=false);
+
 
 	//! Terminate drawing of a 3D model, draw the halo
 	//! @param p the StelPainter instance to use for this drawing operation
@@ -313,6 +315,9 @@ private:
 
 	//! When stars are drawn as triangle pairs ("sprites"), these are stored in this buffer.
 	StelVertexBuffer<ColoredTexturedVertex>* starSpriteBuffer;
+
+	//! Buffer for big halos around the largest sources.
+	StelVertexBuffer<ColoredTexturedVertex>* haloBuffer;
 
 	//! Are we drawing point sources at the moment?
 	bool drawing;
