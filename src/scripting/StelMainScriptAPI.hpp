@@ -203,6 +203,15 @@ public slots:
 	//! Get the ID of the current observer location.
 	QString getObserverLocation();
 
+	//! Get the info of the current observer location.
+	//! @return a map of object data.  Keys:
+	//! - altitude : altitude in meters
+	//! - longitude : longitude in decimal degrees
+	//! - latitude : latitude in decimal degrees
+	//! - planet : name of planet
+	//! - location : city and country
+	QVariantMap getObserverLocationInfo();
+
 	//! Save a screenshot.
 	//! @param prefix the prefix for the file name to use
 	//! @param dir the path of the directory to save the screenshot in.  If
