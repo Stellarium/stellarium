@@ -49,7 +49,7 @@
 
 // The 0.025 corresponds to the maximum eye resolution in degree
 #define EYE_RESOLUTION (0.25f)
-#define MAX_LINEAR_RADIUS 8.f
+#define MAX_LINEAR_RADIUS (8.f)
 
 // Vertex attributes of ColoredTexturedVertex.
 const QVector<StelVertexAttribute> StelSkyDrawer::ColoredTexturedVertex::attributes = 
@@ -69,6 +69,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 	, renderer(renderer)
 	, starPointBuffer(NULL)
 	, starSpriteBuffer(NULL)
+	, haloBuffer(NULL)
 	, drawing(false)
 {
 	eye = core->getToneReproducer();
@@ -148,21 +149,21 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 		ok = true;
 	}
 
-	starPointBuffer = renderer->createVertexBuffer<ColoredVertex>(PrimitiveType_Points);
+	starPointBuffer  = renderer->createVertexBuffer<ColoredVertex>(PrimitiveType_Points);
 	starSpriteBuffer = renderer->createVertexBuffer<ColoredTexturedVertex>(PrimitiveType_Triangles);
+	haloBuffer       = renderer->createVertexBuffer<ColoredTexturedVertex>(PrimitiveType_Triangles);
 }
 
 StelSkyDrawer::~StelSkyDrawer()
 {
 	if(NULL != starPointBuffer) {delete starPointBuffer;}
 	if(NULL != starSpriteBuffer){delete starSpriteBuffer;}
+	if(NULL != haloBuffer)      {delete haloBuffer;}
 }
 
 // Init parameters from config file
 void StelSkyDrawer::init()
 {
-	StelPainter::makeMainGLContextCurrent();
-
 	StelTextureMgr& textureManager = StelApp::getInstance().getTextureManager();
 	// Load star texture no mipmap:
 	texHalo = textureManager.createTexture("textures/star16x16.png");
@@ -352,40 +353,60 @@ void StelSkyDrawer::preDrawPointSource(StelPainter* p)
 	drawing = true;
 }
 
+// Helper function that sets Add blend mode, then draws and clears a vertex buffer.
+//
+// The buffer is cleared since we re-add the stars on each frame.
+template<class B>
+void drawStars(StelTextureSP texture, B* buffer, StelRenderer* renderer, StelProjectorP projector)
+{
+	if(NULL != texture){texture->bind();}
+	renderer->setBlendMode(BlendMode_Add);
+	buffer->lock();
+
+	// Vertices are already projected, so we use the dontProject
+	// argument of drawVertexBuffer.
+	//
+	// This is a hack - it would be better to refactor StelSkyDrawer,
+	// ZoneArray, etc, so projection gets done by the projector 
+	// during drawing like elsewhere.
+	
+	renderer->drawVertexBuffer(buffer, NULL, projector, true);
+	buffer->unlock();
+	buffer->clear();
+}
+
 // Finalize the drawing of point sources
 void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 {
 	Q_ASSERT(sPainter);
 
-	if(drawStarsAsPoints)
-	{
-		starPointBuffer->lock();
-		// Vertices are already projected, so we dontProject.
-		//
-		// This is a hack - it would be better to refactor StelSkyDrawer,
-		// ZoneArray, etc, so projection gets done by the projector 
-		// during drawing like elsewhere.
-		renderer->drawVertexBuffer(starPointBuffer, NULL, sPainter->getProjector(), true);
-		starPointBuffer->unlock();
-		starPointBuffer->clear();
-	}
-	else
-	{
-		texHalo->bind();
-		renderer->setBlendMode(BlendMode_Add);
-		starSpriteBuffer->lock();
+	StelProjectorP projector = sPainter->getProjector();
 
-		// Vertices are already projected, so we dontProject.
-		//
-		// This is a hack - it would be better to refactor StelSkyDrawer,
-		// ZoneArray, etc, so projection gets done by the projector 
-		// during drawing like elsewhere.
-		renderer->drawVertexBuffer(starSpriteBuffer, NULL, sPainter->getProjector(), true);
-		starSpriteBuffer->unlock();
-		starSpriteBuffer->clear();
-	}
+	drawStars(texBigHalo, haloBuffer, renderer, projector);
+	if(drawStarsAsPoints){drawStars(StelTextureSP(), starPointBuffer, renderer, projector);}
+	else                 {drawStars(texHalo, starSpriteBuffer, renderer, projector);}
 
 	drawing = false;
+}
+
+//Helper function that adds the halo of a star/other point source to given vertex buffer.
+//
+//The template parameter is only used so we don't need to write ColoredTexturedVertex
+//every time, this function is only meant to be used from drawPointSource.
+//
+//If this pattern (2-triangle quad with 0,0 - 1,1 texcoords) appears in other 
+//classes in well, it might be good to add it as a helper function of 
+//StelVertexBuffer.
+template<class V>
+void addStar(StelVertexBuffer<V>* buffer, 
+             const float x, const float y, const float radius, const Vec3f& color)
+{
+	buffer->addVertex(V(Vec2f(x - radius, y - radius), color, Vec2f(0.0f, 0.0f)));
+	buffer->addVertex(V(Vec2f(x + radius, y - radius), color, Vec2f(1.0f, 0.0f)));
+	buffer->addVertex(V(Vec2f(x + radius, y + radius), color, Vec2f(1.0f, 1.0f)));
+	buffer->addVertex(V(Vec2f(x - radius, y - radius), color, Vec2f(0.0f, 0.0f)));
+	buffer->addVertex(V(Vec2f(x + radius, y + radius), color, Vec2f(1.0f, 1.0f)));
+	buffer->addVertex(V(Vec2f(x - radius, y + radius), color, Vec2f(0.0f, 1.0f)));
 }
 
 // Draw a point source halo.
@@ -397,65 +418,47 @@ bool StelSkyDrawer::drawPointSource
 	Q_ASSERT_X(drawing, Q_FUNC_INFO,
 	           "Attempting to draw a point source without calling preDrawPointSource first.");
 
-	if (rcMag[0]<=0.f)
-		return false;
+	const float radius    = rcMag[0];
+	const float luminance = rcMag[1];
+
+	if (radius <= 0.0f){return false;}
 
 	// TODO: compute Vec3f v_refr (position including refraction) --> NO: This is done in ZoneArray!
 	//
 	StelProjectorP projector = sPainter->getProjector();
 
 	Vec3d win;
-	if (!(checkInScreen ? projector->projectCheck(v, win) : projector->project(v, win)))
-		return false;
+	const bool validProjection = checkInScreen ? projector->projectCheck(v, win) 
+	                                           : projector->project(v, win);
+	if (!validProjection){return false;}
 
-	const float radius = rcMag[0];
 	// Random coef for star twinkling
-	const float tw = (flagStarTwinkle && flagHasAtmosphere) ? (1.f-twinkleAmount*rand()/RAND_MAX)*rcMag[1] : rcMag[1];
+	const float tw = (flagStarTwinkle && flagHasAtmosphere) 
+	                 ? (1.0f - twinkleAmount * rand() / RAND_MAX) * luminance
+	                 : luminance;
+
+	const float x = win[0];
+	const float y = win[1];
 
 	// If the rmag is big, draw a big halo
-	if (radius>MAX_LINEAR_RADIUS+5.f)
+	if (radius > MAX_LINEAR_RADIUS + 5.0f)
 	{
-		//GL-REFACTOR TODO
-		float cmag = qMin(rcMag[1],(float)(radius-(MAX_LINEAR_RADIUS+5.f))/30.f);
-		float rmag = 150.f;
-		if (cmag>1.f)
-			cmag = 1.f;
-
-		texBigHalo->bind();
-		sPainter->enableTexture2d(true);
-		glBlendFunc(GL_ONE, GL_ONE);
-		glEnable(GL_BLEND);
-		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-		sPainter->drawSprite2dMode(win[0], win[1], rmag);
+		const float cmag = qMin(1.0f, qMin(luminance, 
+		                                   (radius - MAX_LINEAR_RADIUS + 50.f) / 30.f));
+		addStar(haloBuffer, x, y, 150.0f, color * cmag);
 	}
 
-	drawStarsAsPoints = true;
 	if (drawStarsAsPoints)
 	{
-		starPointBuffer->addVertex(ColoredVertex(
-		                 Vec2f(win[0], win[1]), color * tw));
+		starPointBuffer->addVertex(ColoredVertex(Vec2f(x, y), color * tw));
 	}
 	else
 	{
-		// Add a pair of triangles in window coordinates.
-		const Vec3f w = color * tw;
-		starSpriteBuffer->addVertex(ColoredTexturedVertex(
-		                  Vec2f(win[0] - radius, win[1] - radius), w, Vec2f(0.0f, 0.0f)));
-		starSpriteBuffer->addVertex(ColoredTexturedVertex(
-		                  Vec2f(win[0] + radius, win[1] - radius), w, Vec2f(1.0f, 0.0f)));
-		starSpriteBuffer->addVertex(ColoredTexturedVertex(
-		                  Vec2f(win[0] + radius, win[1] + radius), w, Vec2f(1.0f, 1.0f)));
-		starSpriteBuffer->addVertex(ColoredTexturedVertex(
-		                  Vec2f(win[0] - radius, win[1] - radius), w, Vec2f(0.0f, 0.0f)));
-		starSpriteBuffer->addVertex(ColoredTexturedVertex(
-		                  Vec2f(win[0] + radius, win[1] + radius), w, Vec2f(1.0f, 1.0f)));
-		starSpriteBuffer->addVertex(ColoredTexturedVertex(
-		                  Vec2f(win[0] - radius, win[1] + radius), w, Vec2f(0.0f, 1.0f)));
+		addStar(starSpriteBuffer, x, y, radius, color * tw);
 	}
 
 	return true;
 }
-
 
 // Terminate drawing of a 3D model, draw the halo
 void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color)
