@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <QSize>
 
+#include "StelIndexBuffer.hpp"
 #include "StelVertexBuffer.hpp"
 #include "StelViewportEffect.hpp"
 #include "StelTexture.hpp"
@@ -93,6 +94,9 @@ public:
 	
 	//! Must be called once at startup and on every GL viewport resize, specifying new size.
 	virtual void viewportHasBeenResized(const QSize size) = 0;
+
+	//! Create an empty index buffer and return a pointer to it.
+	virtual class StelIndexBuffer* createIndexBuffer(const IndexType type) = 0;
 	
 	//! Create an empty vertex buffer and return a pointer to it.
 	//!

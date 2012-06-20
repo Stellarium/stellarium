@@ -140,6 +140,7 @@ SET(stellarium_lib_SRCS
 	core/renderer/StelGLUtilityFunctions.hpp
 
 	core/renderer/StelIndexBuffer.hpp
+	core/renderer/StelQGLIndexBuffer.hpp
 	core/renderer/StelVertexAttribute.cpp
 	core/renderer/StelVertexAttribute.hpp
 	core/renderer/StelVertexBuffer.hpp

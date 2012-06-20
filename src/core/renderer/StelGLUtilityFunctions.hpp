@@ -4,6 +4,7 @@
 #include <QGLContext>
 #include <QString>
 
+#include "StelIndexBuffer.hpp"
 #include "StelTextureParams.hpp"
 #include "StelVertexAttribute.hpp"
 #include "StelVertexBuffer.hpp"
@@ -27,6 +28,9 @@ const char* glslAttributeName(const AttributeInterpretation interpretation);
 
 //! Get OpenGL primitive type corresponding to specified PrimitiveType.
 GLint glPrimitiveType(const PrimitiveType type);
+
+//! Get OpenGL index type corresponding to specified IndexType.
+GLenum glIndexType(const IndexType type);
 
 //! Get OpenGL texture wrap mode corresponding to specified TextureWrap.
 GLint glTextureWrap(const TextureWrap wrap);

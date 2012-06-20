@@ -1,5 +1,6 @@
-#include "StelTestQGL2VertexBufferBackend.hpp"
+#include "StelQGLIndexBuffer.hpp"
 #include "StelQGL2Renderer.hpp"
+#include "StelTestQGL2VertexBufferBackend.hpp"
 
 StelTestQGL2VertexBufferBackend::
 StelTestQGL2VertexBufferBackend(const PrimitiveType type,
@@ -126,7 +127,8 @@ void StelTestQGL2VertexBufferBackend::setVertex(const uint index, const quint8* 
 }
 
 void StelTestQGL2VertexBufferBackend::
-     draw(StelQGL2Renderer& renderer, const QMatrix4x4& projectionMatrix)
+	draw(StelQGL2Renderer& renderer, const QMatrix4x4& projectionMatrix,
+	     StelQGLIndexBuffer* indexBuffer)
 {
 	Q_ASSERT_X(locked, Q_FUNC_INFO,
 	           "Trying to draw a vertex buffer that is not locked.");
@@ -185,7 +187,15 @@ void StelTestQGL2VertexBufferBackend::
 	}
 
 	// Draw the vertex arrays.
-	glDrawArrays(glPrimitiveType(primitiveType), 0, vertexCount);
+	if(NULL != indexBuffer)
+	{
+		glDrawElements(glPrimitiveType(primitiveType), indexBuffer->length(),
+		               glIndexType(indexBuffer->indexType()), indexBuffer->indices());
+	}
+	else
+	{
+		glDrawArrays(glPrimitiveType(primitiveType), 0, vertexCount);
+	}
 
 	for(int attribute = 0; attribute < attributeCount; attribute++) 
 	{

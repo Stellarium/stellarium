@@ -147,13 +147,13 @@ public:
 		++vertexCount;
 	}
 	
-	//! Return a vertex at specified index the buffer.
+	//! Return vertex at specified index the buffer.
 	//!
 	//! The buffer must not be locked.
 	//!
 	//! @param index Index of the vertex to get.
 	//! @return Vertex at specified index.
-	V getVertex(const uint index)
+	V getVertex(const int index)
 	{
 		Q_ASSERT_X(!locked_, Q_FUNC_INFO,
 		           "Trying to get a vertex in a locked vertex buffer");
@@ -163,13 +163,13 @@ public:
 		return result;
 	}
 	
-	//! Set a vertex at specified index in the buffer.
+	//! Set vertex at specified index in the buffer.
 	//!
 	//! The buffer must not be locked.
 	//!
 	//! @param index Index of the vertex to set.
 	//! @param vertex Value to set the vertex to.
-	void setVertex(const uint index, const V& vertex)
+	void setVertex(const int index, const V& vertex)
 	{
 		Q_ASSERT_X(!locked_, Q_FUNC_INFO,
 		           "Trying to set a vertex in a locked vertex buffer");
@@ -198,7 +198,7 @@ public:
 	}
 	
 	//! Returns the number of vertices in the buffer.
-	uint length() const
+	int length() const
 	{
 		return vertexCount;
 	}
@@ -213,6 +213,7 @@ public:
 	virtual void clear()
 	{
 		Q_ASSERT_X(!locked_, Q_FUNC_INFO, "Trying to clear a locked vertex buffer");
+		vertexCount = 0;
 		backend->clear();
 	}
 
@@ -230,7 +231,7 @@ private:
 	bool locked_;
 	
 	//! Number of vertices in the buffer.
-	uint vertexCount;
+	int vertexCount;
 	
 	//! Vertex buffer backend.
 	StelVertexBufferBackend* backend;
