@@ -79,13 +79,18 @@ private:
 	//! These coordinates correspond to the extents of the used 
 	//! part of the screen texture.
 	QSizeF maxTexCoords;
-	Vertex* vertexGrid;
+
+	//! Grid of texture coordinates used to distort mouse coordinates (distortXY)
+	//!
+	//! These are identical to texture coordinates in vertexGrid but stored here 
+	//! for fast access (as vertexGrid might be in GPU memory).
+	Vec2f* texCoordGrid;
 	
 	int maxGridX,maxGridY;
 	double stepX,stepY;
 
 	//! Vertices of the grid.
-	StelVertexBuffer<Vertex>* vertices;
+	StelVertexBuffer<Vertex>* vertexGrid;
 	//! Indices specifying triangle strips representing rows of the grid.
 	QVector<class StelIndexBuffer*> stripBuffers;
 	
