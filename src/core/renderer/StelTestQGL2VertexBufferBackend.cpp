@@ -70,7 +70,8 @@ void StelTestQGL2VertexBufferBackend::addVertex(const quint8* const vertexInPtr)
 	}
 }
 
-void StelTestQGL2VertexBufferBackend::getVertex(const uint index, quint8* const vertexOutPtr)
+void StelTestQGL2VertexBufferBackend::getVertex
+	(const uint index, quint8* const vertexOutPtr) const
 {
 	// Points to the current attribute (e.g. color, normal, vertex) within output.
 	quint8* attribPtr = vertexOutPtr;
@@ -82,13 +83,13 @@ void StelTestQGL2VertexBufferBackend::getVertex(const uint index, quint8* const 
 		switch(type)
 		{
 			case AttributeType_Vec2f:
-				*reinterpret_cast<Vec2f*>(attribPtr) = getAttribute<Vec2f>(attrib, index);
+				*reinterpret_cast<Vec2f*>(attribPtr) = getAttributeConst<Vec2f>(attrib, index);
 				break;
 			case AttributeType_Vec3f:
-				*reinterpret_cast<Vec3f*>(attribPtr) = getAttribute<Vec3f>(attrib, index);
+				*reinterpret_cast<Vec3f*>(attribPtr) = getAttributeConst<Vec3f>(attrib, index);
 				break;
 			case AttributeType_Vec4f:
-				*reinterpret_cast<Vec4f*>(attribPtr) = getAttribute<Vec4f>(attrib, index);
+				*reinterpret_cast<Vec4f*>(attribPtr) = getAttributeConst<Vec4f>(attrib, index);
 				break;
 			default:
 				Q_ASSERT(false);
@@ -98,7 +99,8 @@ void StelTestQGL2VertexBufferBackend::getVertex(const uint index, quint8* const 
 	}
 }
 
-void StelTestQGL2VertexBufferBackend::setVertex(const uint index, const quint8* const vertexInPtr)
+void StelTestQGL2VertexBufferBackend::setVertex
+	(const uint index, const quint8* const vertexInPtr)
 {
 	// Points to the current attribute (e.g. color, normal, vertex) within the vertex.
 	const quint8* attribPtr = vertexInPtr;
