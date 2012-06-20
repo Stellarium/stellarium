@@ -4,7 +4,6 @@
 #include "StelGLUtilityFunctions.hpp"
 
 
-
 GLint glAttributeType(const AttributeType type)
 {
 	switch(type)
@@ -45,6 +44,15 @@ GLint glPrimitiveType(const PrimitiveType type)
 	}
 	Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown graphics primitive type");
 	
+	// Prevents GCC from complaining about exiting a non-void function:
+	return -1;
+}
+
+GLenum glIndexType(const IndexType indexType)
+{
+	if(indexType == IndexType_U16)      {return GL_UNSIGNED_SHORT;}
+	else if(indexType == IndexType_U32) {return GL_UNSIGNED_INT;}
+	Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown index type");
 	// Prevents GCC from complaining about exiting a non-void function:
 	return -1;
 }
