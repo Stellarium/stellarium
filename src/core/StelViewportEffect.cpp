@@ -46,8 +46,8 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	, originalProjectorParams(StelApp::getInstance().getCore()->
 	                          getCurrentStelProjectorParams())
 	, maxTexCoords(1.0f, 1.0f)
-	, vertexGrid(NULL)
-	, vertices(renderer->createVertexBuffer<Vertex>(PrimitiveType_TriangleStrip))
+	, texCoordGrid(NULL)
+	, vertexGrid(renderer->createVertexBuffer<Vertex>(PrimitiveType_TriangleStrip))
 {
 	QSettings& conf = *StelApp::getInstance().getSettings();
 	StelCore* core = StelApp::getInstance().getCore();
@@ -140,14 +140,14 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		generateDistortion(conf, proj, distorterMaxFOV, renderer);
 	}
 
-	vertices->lock();
+	vertexGrid->lock();
 }
 
 
 StelViewportDistorterFisheyeToSphericMirror::~StelViewportDistorterFisheyeToSphericMirror(void)
 {
-	if(NULL != vertexGrid) {delete[] vertexGrid;}
-	if(NULL != vertices)   {delete vertices;}
+	if(NULL != texCoordGrid) {delete[] texCoordGrid;}
+	if(NULL != vertexGrid)   {delete vertexGrid;}
 
 	foreach(StelIndexBuffer* buffer, stripBuffers)
 	{
@@ -174,10 +174,10 @@ void StelViewportDistorterFisheyeToSphericMirror::generateDistortion
 	const float viewScale = 0.5 * newProjectorParams.viewportFovDiameter /
 	                        proj->fovToViewScalingFactor(distorterMaxFOV*(M_PI/360.0));
 
-	vertexGrid = new Vertex[cols * rows];
+	texCoordGrid = new Vec2f[cols * rows];
 	float* heightGrid = new float[cols * rows];
   
-	float maxH = 0;
+	float maxHeight = 0;
 	SphericMirrorCalculator calc(conf);
 	           
 	// Generate grid vertices/texcoords.
@@ -185,7 +185,7 @@ void StelViewportDistorterFisheyeToSphericMirror::generateDistortion
 	{
 		for (int col = 0; col <= maxGridX; col++)
 		{
-			Vertex &vertex(vertexGrid[row * cols + col]);
+			Vertex vertex;
 			float &height(heightGrid[row * cols + col]);
 			
 			// Clamp to screen extents.
@@ -220,24 +220,30 @@ void StelViewportDistorterFisheyeToSphericMirror::generateDistortion
 			vertex.texCoord[0] = (viewportTextureOffset[0] + x) / texture_wh;
 			vertex.texCoord[1] = (viewportTextureOffset[1] + y) / texture_wh;
 
-			maxH = qMax(height, maxH);
+			texCoordGrid[row * cols + col] = vertex.texCoord;
+
+			vertexGrid->addVertex(vertex);
+			maxHeight = qMax(height, maxHeight);
 		}
 	}
 	
-	// Generate grid colors.
+	// Generate grid colors. (Separate from previous loop as we need max height)
 	for (int row = 0; row <= maxGridY; row++)
 	{
 		for (int col = 0; col <= maxGridX; col++)
 		{
-			Vertex &vertex(vertexGrid[row * cols + col]);
+			const int cell = row * cols + col;
+
+			// Getting/setting each vertex is not that efficient, but we only do this 
+			// at startup.
+			Vertex vertex = vertexGrid->getVertex(cell);
 			Vec4f &color(vertex.color);
-			const float height = heightGrid[row * cols + col];
-			const float gray = (height <= 0.0) ? 0.0 
-			                                   : exp(gamma * log(height / maxH));
+			const float height = heightGrid[cell];
+			const float gray = (height <= 0.0) ? 0.0 : exp(gamma * log(height / maxHeight));
 			color[0] = color[1] = color[2] = gray;
 			color[3] = 1.0f; 
 
-			vertices->addVertex(vertex);
+			vertexGrid->setVertex(cell, vertex);
 		}
 	}
 
@@ -305,12 +311,12 @@ bool StelViewportDistorterFisheyeToSphericMirror::loadDistortionFromFile
 	const int rows = maxGridY + 1;
 	
 	// Load the grid.
-	vertexGrid = new Vertex[cols * rows];
+	texCoordGrid = new Vec2f[cols * rows];
 	for (int row = 0; row < rows; row++)
 	{
 		for (int col = 0; col < cols; col++)
 		{
-			Vertex &vertex(vertexGrid[row * cols + col]);
+			Vertex vertex;
 			// Clamp to screen extents.
 			vertex.position[0] = (col == 0)        ? 0.f :
 			                     (col == maxGridX) ? screenWidth :
@@ -323,7 +329,9 @@ bool StelViewportDistorterFisheyeToSphericMirror::loadDistortionFromFile
 			vertex.texCoord[0] = (viewportTextureOffset[0] + x) / texture_wh;
 			vertex.texCoord[1] = (viewportTextureOffset[1] + y) / texture_wh;
 
-			vertices->addVertex(vertex);
+			texCoordGrid[row * cols + col] = vertex.texCoord;
+
+			vertexGrid->addVertex(vertex);
 		}
 	}
 	
@@ -371,11 +379,11 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 	dy -= j;
 	if (j&1)
 	{
-		float dx = x / stepX + 0.5f*(1.f-dy);
+		float dx = x / stepX + 0.5f * (1.f - dy);
 		const int i = (int)floorf(dx);
 		dx -= i;
 
-		const Vertex *const v = vertexGrid + (j*cols+i);
+		const Vec2f* const t = texCoordGrid + (j * cols + i);
 		if (dx + dy <= 1.f)
 		{
 			if (i == 0)
@@ -384,11 +392,11 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 				dx *= 2.f;
 			}
 			//This vertex
-			const Vec2f t0 = v[0].texCoord;
+			const Vec2f t0 = t[0];
 			//Next vertex
-			const Vec2f t1 = v[1].texCoord;
+			const Vec2f t1 = t[1];
 			//Vertex on next line
-			const Vec2f t2 = v[cols].texCoord;
+			const Vec2f t2 = t[cols];
 			textureX = t0[0] + dx * (t1[0]-t0[0]) + dy * (t2[0]-t0[0]);
 			textureY = t0[1] + dx * (t1[1]-t0[1]) + dy * (t2[1]-t0[1]);
 		}
@@ -396,15 +404,15 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 		{
 			if (i == maxGridX-1)
 			{
-				dx -= 0.5f*(1.f-dy);
+				dx -= 0.5f * (1.f - dy);
 				dx *= 2.f;
 			}
 			//Next vertex on this line
-			const Vec2f t0 = v[1].texCoord;
+			const Vec2f t0 = t[1];
 			//This vertex on next line
-			const Vec2f t1 = v[cols].texCoord;
+			const Vec2f t1 = t[cols];
 			//Next vertex on next line
-			const Vec2f t2 = v[cols + 1].texCoord;
+			const Vec2f t2 = t[cols + 1];
 			textureX = t2[0] + (1.f-dy) * (t0[0]-t2[0]) + (1.f-dx) * (t1[0]-t2[0]);
 			textureY = t2[1] + (1.f-dy) * (t0[1]-t2[1]) + (1.f-dx) * (t1[1]-t2[1]);
 		}
@@ -414,7 +422,7 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 		float dx = x / stepX + 0.5f*dy;
 		const int i = (int)floorf(dx);
 		dx -= i;
-		const Vertex *const v = vertexGrid + (j*cols+i);
+		const Vec2f *const t = texCoordGrid + (j * cols + i);
 		if (dx >= dy)
 		{
 			if (i == maxGridX-1)
@@ -423,11 +431,11 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 				dx *= 2.f;
 			}
 			//This vertex
-			const Vec2f t0 = v[0].texCoord;
+			const Vec2f t0 = t[0];
 			//Next vertex
-			const Vec2f t1 = v[1].texCoord;
+			const Vec2f t1 = t[1];
 			//Next vertex on next line
-			const Vec2f t2 = v[cols + 1].texCoord;
+			const Vec2f t2 = t[cols + 1];
 			textureX = t1[0] + (1.f-dx) * (t0[0]-t1[0]) + dy * (t2[0]-t1[0]);
 			textureY = t1[1] + (1.f-dx) * (t0[1]-t1[1]) + dy * (t2[1]-t1[1]);
 		}
@@ -439,11 +447,11 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 				dx *= 2.f;
 			}
 			//This vertex
-			const Vec2f t0 = v[0].texCoord;
+			const Vec2f t0 = t[0];
 			//This vertex on next line
-			const Vec2f t1 = v[cols].texCoord;
+			const Vec2f t1 = t[cols];
 			//Next vertex on next line
-			const Vec2f t2 = v[cols + 1].texCoord;
+			const Vec2f t2 = t[cols + 1];
 			textureX = t1[0] + (1.f-dy) * (t0[0]-t1[0]) + dx * (t2[0]-t1[0]);
 			textureY = t1[1] + (1.f-dy) * (t0[1]-t1[1]) + dx * (t2[1]-t1[1]);
 		}
@@ -459,17 +467,19 @@ void StelViewportDistorterFisheyeToSphericMirror::recalculateTexCoords(const QSi
 	const float xMult = newMaxTexCoords.width() / maxTexCoords.width();
 	const float yMult = newMaxTexCoords.height() / maxTexCoords.height();
 
-	vertices->unlock();
-	const int length = vertices->length();
+	vertexGrid->unlock();
+	const int length = vertexGrid->length();
 	Vertex vertex;
 	for(int v = 0; v < length; ++v) 
 	{
-		vertex = vertices->getVertex(v);
+		vertex = vertexGrid->getVertex(v);
 		vertex.texCoord[0] *= xMult;
 		vertex.texCoord[1] *= yMult;
-		vertices->setVertex(v, vertex);
+		texCoordGrid[v][0] *= xMult;
+		texCoordGrid[v][1] *= xMult;
+		vertexGrid->setVertex(v, vertex);
 	}
-	vertices->lock();
+	vertexGrid->lock();
 
 	maxTexCoords = newMaxTexCoords;
 }
@@ -496,7 +506,7 @@ void StelViewportDistorterFisheyeToSphericMirror::drawToViewport(StelRenderer* r
 
 	foreach(StelIndexBuffer* strip, stripBuffers)
 	{
-		renderer->drawVertexBuffer(vertices, strip);
+		renderer->drawVertexBuffer(vertexGrid, strip);
 	}
 
 	delete screenTexture;
