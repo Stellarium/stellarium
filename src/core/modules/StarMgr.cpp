@@ -641,7 +641,7 @@ void StarMgr::draw(StelCore* core)
 	// Prepare openGL for drawing many stars
 	StelPainter sPainter(prj);
 	sPainter.setFont(starFont);
-	skyDrawer->preDrawPointSource(&sPainter);
+	skyDrawer->preDrawPointSource();
 
 	// draw all the stars of all the selected zones
         // GZ: This table must be enlarged from 2x256 to many more entries. CORRELATE IN Zonearray.cpp!
@@ -690,7 +690,7 @@ void StarMgr::draw(StelCore* core)
 	}
 	exit_loop:
 	// Finish drawing many stars
-	skyDrawer->postDrawPointSource(&sPainter);
+	skyDrawer->postDrawPointSource(sPainter.getProjector());
 
 	if (objectMgr->getFlagSelectedObjectPointer())
 		drawPointer(sPainter, core);

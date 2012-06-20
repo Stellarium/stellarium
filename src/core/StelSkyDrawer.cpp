@@ -40,7 +40,6 @@
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 #include "StelMovementMgr.hpp"
-#include "StelPainter.hpp"
 
 #include <QStringList>
 #include <QSettings>
@@ -348,9 +347,8 @@ bool StelSkyDrawer::computeRCMag(float mag, float rcMag[2]) const
 
 //GL-REFACTOR TODO: REMOVE PASSED STELPAINTERS
 
-void StelSkyDrawer::preDrawPointSource(StelPainter* p)
+void StelSkyDrawer::preDrawPointSource()
 {
-	Q_ASSERT(p);
 	Q_ASSERT_X(!drawing, Q_FUNC_INFO,
 	           "Attempting to start drawing point sources when it is already started");
 
@@ -386,12 +384,8 @@ void drawStars(StelTextureSP texture, VB* vertices, StelIndexBuffer* indices, St
 }
 
 // Finalize the drawing of point sources
-void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
+void StelSkyDrawer::postDrawPointSource(StelProjectorP projector)
 {
-	Q_ASSERT(sPainter);
-
-	StelProjectorP projector = sPainter->getProjector();
-
 	drawStars(texBigHalo, starSpriteBuffer, bigHaloIndices, renderer, projector);
 	drawStars(texSunHalo, starSpriteBuffer, sunHaloIndices, renderer, projector);
 	if(drawStarsAsPoints)
@@ -437,10 +431,9 @@ void addStar(StelVertexBuffer<V>* vertices, StelIndexBuffer* indices,
 
 // Draw a point source halo.
 bool StelSkyDrawer::drawPointSource
-	(StelPainter* sPainter, const Vec3d& v, const float rcMag[2],
+	(StelProjectorP projector, const Vec3d& v, const float rcMag[2],
 	 const Vec3f& color, bool checkInScreen)
 {
-	Q_ASSERT(sPainter);
 	Q_ASSERT_X(drawing, Q_FUNC_INFO,
 	           "Attempting to draw a point source without calling preDrawPointSource first.");
 
@@ -448,10 +441,6 @@ bool StelSkyDrawer::drawPointSource
 	const float luminance = rcMag[1];
 
 	if (radius <= 0.0f){return false;}
-
-	// TODO: compute Vec3f v_refr (position including refraction) --> NO: This is done in ZoneArray!
-	//
-	StelProjectorP projector = sPainter->getProjector();
 
 	Vec3d win;
 	const bool validProjection = checkInScreen ? projector->projectCheck(v, win) 
@@ -486,9 +475,11 @@ bool StelSkyDrawer::drawPointSource
 }
 
 // Terminate drawing of a 3D model, draw the halo
-void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color)
+void StelSkyDrawer::postDrawSky3dModel
+	(StelProjectorP projector, const Vec3d& v, float illuminatedArea, 
+	 float mag, const Vec3f& color)
 {
-	const float pixPerRad = painter->getProjector()->getPixelPerRadAtCenter();
+	const float pixPerRad = projector->getPixelPerRadAtCenter();
 	// Assume a disk shape
 	float pixRadius = std::sqrt(illuminatedArea/(60.*60.)*M_PI/180.*M_PI/180.*(pixPerRad*pixPerRad))/M_PI;
 
@@ -496,14 +487,14 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, flo
 
 	if (mag<-15.f)
 	{
-		float rmag = big3dModelHaloRadius*(mag+15.f)/-11.f;
+		const float rmag = big3dModelHaloRadius*(mag+15.f)/-11.f;
 		float cmag = 1.f;
 		if (rmag<pixRadius*3.f+100.0f)
 		{
 			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
 		}
 		Vec3d win;
-		painter->getProjector()->project(v, win);
+		projector->project(v, win);
 
 		addStar(starSpriteBuffer, sunHaloIndices, win[0], win[1], rmag, color * cmag);
 		noStarHalo = true;
@@ -553,9 +544,9 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, flo
 
 	if (!noStarHalo)
 	{
-		preDrawPointSource(painter);
-		drawPointSource(painter, v,rcm,color);
-		postDrawPointSource(painter);
+		preDrawPointSource();
+		drawPointSource(projector, v, rcm, color);
+		postDrawPointSource(projector);
 	}
 	flagStarTwinkle=save;
 }
