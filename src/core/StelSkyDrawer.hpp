@@ -32,7 +32,6 @@
 
 class StelToneReproducer;
 class StelCore;
-class StelPainter;
 
 //! @class StelSkyDrawer
 //! Provide a set of methods used to draw sky objects taking into account
@@ -55,10 +54,10 @@ public:
 
 	//! Set the proper openGL state before making calls to drawPointSource
 	//! @param p a pointer to a valid instance of a Painter. The instance must be valid until postDrawPointSource() is called
-	void preDrawPointSource(StelPainter* p);
+	void preDrawPointSource();
 
 	//! Finalize the drawing of point sources
-	void postDrawPointSource(StelPainter* sPainter);
+	void postDrawPointSource(StelProjectorP projector);
 
 	//! Draw a point source halo.
 	//! @param sPainter the StelPainter to use for drawing.
@@ -67,12 +66,13 @@ public:
 	//! @param bV the source B-V index
 	//! @param checkInScreen whether source in screen should be checked to avoid unnecessary drawing.
 	//! @return true if the source was actually visible and drawn
+	bool drawPointSource(StelProjectorP projector, const Vec3d& v, 
+	                     const float rcMag[2], unsigned int bV, bool checkInScreen=false)
+	{
+		return drawPointSource(projector, v, rcMag, colorTable[bV], checkInScreen);
+	}
 
-	bool drawPointSource(StelPainter* sPainter, const Vec3d& v, const float rcMag[2], unsigned int bV, bool checkInScreen=false)
-		{return drawPointSource(sPainter, v, rcMag, colorTable[bV], checkInScreen);}
-
-	bool drawPointSource(StelPainter* sPainter,const Vec3d& v, const float rcMag[2], const Vec3f& color, bool checkInScreen=false);
-
+	bool drawPointSource(StelProjectorP projector, const Vec3d& v, const float rcMag[2], const Vec3f& color, bool checkInScreen=false);
 
 	//! Terminate drawing of a 3D model, draw the halo
 	//! @param p the StelPainter instance to use for this drawing operation
@@ -80,7 +80,7 @@ public:
 	//! @param illuminatedArea the illuminated area in arcmin^2
 	//! @param mag the source integrated magnitude
 	//! @param color the object halo RGB color
-	void postDrawSky3dModel(StelPainter* p, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f));
+	void postDrawSky3dModel(StelProjectorP projector, const Vec3d& v, float illuminatedArea, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f));
 
 	//! Compute RMag and CMag from magnitude.
 	//! @param mag the object integrated V magnitude
