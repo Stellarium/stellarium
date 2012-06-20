@@ -80,7 +80,17 @@ public:
 		vertexCount = 0;
 	}
 
-	void draw(class StelQGL2Renderer& renderer, const QMatrix4x4& projectionMatrix);
+	//! Draw the vertex buffer, optionally with index buffer specifying which indices to draw.
+	//!
+	//! Called by StelQGL2Renderer::drawVertexBufferBackend().
+	//!
+	//! @param renderer         Renderer that owns this buffer.
+	//! @param projectionMatrix Projection matrix (in GL format) used for drawing.
+	//! @param indexBuffer      If NULL, all vertices in the buffer are drawn 
+	//!                         in the order they are stored.
+	//!                         If not NULL, specifies indices of vertices to draw.
+	void draw(class StelQGL2Renderer& renderer, const QMatrix4x4& projectionMatrix,
+	          class StelQGLIndexBuffer* indexBuffer);
 
 private:
 	//! Is the vertex buffer locked (i.e. ready to draw?).

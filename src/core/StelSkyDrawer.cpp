@@ -69,7 +69,6 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 	, renderer(renderer)
 	, starPointBuffer(NULL)
 	, starSpriteBuffer(NULL)
-	, haloBuffer(NULL)
 	, drawing(false)
 {
 	eye = core->getToneReproducer();
@@ -151,14 +150,19 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 
 	starPointBuffer  = renderer->createVertexBuffer<ColoredVertex>(PrimitiveType_Points);
 	starSpriteBuffer = renderer->createVertexBuffer<ColoredTexturedVertex>(PrimitiveType_Triangles);
-	haloBuffer       = renderer->createVertexBuffer<ColoredTexturedVertex>(PrimitiveType_Triangles);
+
+	bigHaloIndices    = renderer->createIndexBuffer(IndexType_U16);
+	sunHaloIndices    = renderer->createIndexBuffer(IndexType_U16);
+	starSpriteIndices = renderer->createIndexBuffer(IndexType_U16);
 }
 
 StelSkyDrawer::~StelSkyDrawer()
-{
-	if(NULL != starPointBuffer) {delete starPointBuffer;}
-	if(NULL != starSpriteBuffer){delete starSpriteBuffer;}
-	if(NULL != haloBuffer)      {delete haloBuffer;}
+{                               
+	if(NULL != starPointBuffer)  {delete starPointBuffer;}
+	if(NULL != starSpriteBuffer) {delete starSpriteBuffer;}
+	if(NULL != bigHaloIndices)   {delete bigHaloIndices;}
+	if(NULL != sunHaloIndices)   {delete sunHaloIndices;}
+	if(NULL != starSpriteIndices){delete starSpriteIndices;}
 }
 
 // Init parameters from config file
@@ -356,12 +360,13 @@ void StelSkyDrawer::preDrawPointSource(StelPainter* p)
 // Helper function that sets Add blend mode, then draws and clears a vertex buffer.
 //
 // The buffer is cleared since we re-add the stars on each frame.
-template<class B>
-void drawStars(StelTextureSP texture, B* buffer, StelRenderer* renderer, StelProjectorP projector)
+template<class VB>
+void drawStars(StelTextureSP texture, VB* vertices, StelIndexBuffer* indices, StelRenderer* renderer, StelProjectorP projector)
 {
 	if(NULL != texture){texture->bind();}
 	renderer->setBlendMode(BlendMode_Add);
-	buffer->lock();
+	vertices->lock();
+	if(NULL != indices){indices->lock();}
 
 	// Vertices are already projected, so we use the dontProject
 	// argument of drawVertexBuffer.
@@ -370,9 +375,14 @@ void drawStars(StelTextureSP texture, B* buffer, StelRenderer* renderer, StelPro
 	// ZoneArray, etc, so projection gets done by the projector 
 	// during drawing like elsewhere.
 	
-	renderer->drawVertexBuffer(buffer, NULL, projector, true);
-	buffer->unlock();
-	buffer->clear();
+	renderer->drawVertexBuffer(vertices, indices, projector, true);
+	vertices->unlock();
+	vertices->clear();
+	if(NULL != indices)
+	{
+		indices->unlock();
+		indices->clear();
+	}
 }
 
 // Finalize the drawing of point sources
@@ -382,9 +392,16 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 
 	StelProjectorP projector = sPainter->getProjector();
 
-	drawStars(texBigHalo, haloBuffer, renderer, projector);
-	if(drawStarsAsPoints){drawStars(StelTextureSP(), starPointBuffer, renderer, projector);}
-	else                 {drawStars(texHalo, starSpriteBuffer, renderer, projector);}
+	drawStars(texBigHalo, starSpriteBuffer, bigHaloIndices, renderer, projector);
+	drawStars(texSunHalo, starSpriteBuffer, sunHaloIndices, renderer, projector);
+	if(drawStarsAsPoints)
+	{
+		drawStars(StelTextureSP(), starPointBuffer, NULL, renderer, projector);
+	}
+	else                 
+	{
+		drawStars(texHalo, starSpriteBuffer, starSpriteIndices, renderer, projector);
+	}
 
 	drawing = false;
 }
@@ -398,15 +415,24 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 //classes in well, it might be good to add it as a helper function of 
 //StelVertexBuffer.
 template<class V>
-void addStar(StelVertexBuffer<V>* buffer, 
+void addStar(StelVertexBuffer<V>* vertices, StelIndexBuffer* indices,
              const float x, const float y, const float radius, const Vec3f& color)
 {
-	buffer->addVertex(V(Vec2f(x - radius, y - radius), color, Vec2f(0.0f, 0.0f)));
-	buffer->addVertex(V(Vec2f(x + radius, y - radius), color, Vec2f(1.0f, 0.0f)));
-	buffer->addVertex(V(Vec2f(x + radius, y + radius), color, Vec2f(1.0f, 1.0f)));
-	buffer->addVertex(V(Vec2f(x - radius, y - radius), color, Vec2f(0.0f, 0.0f)));
-	buffer->addVertex(V(Vec2f(x + radius, y + radius), color, Vec2f(1.0f, 1.0f)));
-	buffer->addVertex(V(Vec2f(x - radius, y + radius), color, Vec2f(0.0f, 1.0f)));
+	const int i = vertices->length();
+
+	//4 vertices, 2 triangles.
+	
+	vertices->addVertex(V(Vec2f(x - radius, y - radius), color, Vec2f(0.0f, 0.0f)));
+	vertices->addVertex(V(Vec2f(x + radius, y - radius), color, Vec2f(1.0f, 0.0f)));
+	vertices->addVertex(V(Vec2f(x + radius, y + radius), color, Vec2f(1.0f, 1.0f)));
+	vertices->addVertex(V(Vec2f(x - radius, y + radius), color, Vec2f(0.0f, 1.0f)));
+
+	indices->addIndex(i);
+	indices->addIndex(i + 1);
+	indices->addIndex(i + 2);
+	indices->addIndex(i);
+	indices->addIndex(i + 2);
+	indices->addIndex(i + 3);
 }
 
 // Draw a point source halo.
@@ -443,9 +469,8 @@ bool StelSkyDrawer::drawPointSource
 	// If the rmag is big, draw a big halo
 	if (radius > MAX_LINEAR_RADIUS + 5.0f)
 	{
-		const float cmag = qMin(1.0f, qMin(luminance, 
-		                                   (radius - MAX_LINEAR_RADIUS + 50.f) / 30.f));
-		addStar(haloBuffer, x, y, 150.0f, color * cmag);
+		const float cmag = qMin(1.0f, qMin(luminance, (radius - MAX_LINEAR_RADIUS + 50.f) / 30.f));
+		addStar(starSpriteBuffer, bigHaloIndices, x, y, 150.0f, color * cmag);
 	}
 
 	if (drawStarsAsPoints)
@@ -454,7 +479,7 @@ bool StelSkyDrawer::drawPointSource
 	}
 	else
 	{
-		addStar(starSpriteBuffer, x, y, radius, color * tw);
+		addStar(starSpriteBuffer, starSpriteIndices, x, y, radius, color * tw);
 	}
 
 	return true;
@@ -471,20 +496,16 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3d& v, flo
 
 	if (mag<-15.f)
 	{
-		// Sun, halo size varies in function of the magnitude because sun as seen from pluto should look dimmer
-		// as the sun as seen from earth
-		texSunHalo->bind();
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_ONE, GL_ONE);
-		painter->enableTexture2d(true);
 		float rmag = big3dModelHaloRadius*(mag+15.f)/-11.f;
 		float cmag = 1.f;
-		if (rmag<pixRadius*3.f+100.)
+		if (rmag<pixRadius*3.f+100.0f)
+		{
 			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
+		}
 		Vec3d win;
 		painter->getProjector()->project(v, win);
-		painter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-		painter->drawSprite2dMode(win[0], win[1], rmag);
+
+		addStar(starSpriteBuffer, sunHaloIndices, win[0], win[1], rmag, color * cmag);
 		noStarHalo = true;
 	}
 

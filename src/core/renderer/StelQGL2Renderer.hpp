@@ -290,13 +290,11 @@ protected:
 	}
 
 	virtual void drawVertexBufferBackend(StelVertexBufferBackend* vertexBuffer, 
-	                                     class StelIndexBuffer* indexBuffer = NULL,
+	                                     StelIndexBuffer* indexBuffer = NULL,
 	                                     StelProjectorP projector = NULL,
 	                                     bool dontProject = false)
 	{
 		invariant();
-		Q_ASSERT_X(indexBuffer == NULL, Q_FUNC_INFO,
-		           "TODO: Drawing with index buffers not yet implemented");
 
 		//TODO Projection using StelProjector 
 		//TODO IndexBuffer 
@@ -304,6 +302,16 @@ protected:
 			dynamic_cast<StelTestQGL2VertexBufferBackend*>(vertexBuffer);
 		Q_ASSERT_X(backend != NULL, Q_FUNC_INFO,
 		           "StelQGL2Renderer: Vertex buffer created by different renderer backend");
+
+
+		StelQGLIndexBuffer* glIndexBuffer = NULL;
+		if(indexBuffer != NULL)
+		{
+			glIndexBuffer = dynamic_cast<StelQGLIndexBuffer*>(indexBuffer);
+			Q_ASSERT_X(glIndexBuffer != NULL, Q_FUNC_INFO,
+			           "StelQGL2Renderer: Index buffer created by different renderer backend");
+		}
+
 		// GL setup before drawing.
 
 		glDisable(GL_DEPTH_TEST);
@@ -336,7 +344,7 @@ protected:
 		// Set up viewport for the projector.
 		const Vec4i viewXywh = projector->getViewportXywh();
 		glViewport(viewXywh[0], viewXywh[1], viewXywh[2], viewXywh[3]);
-		backend->draw(*this, transposed);
+		backend->draw(*this, transposed, glIndexBuffer);
 		invariant();
 	}
 

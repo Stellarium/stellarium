@@ -11,6 +11,7 @@
 #include "StelGuiBase.hpp"
 #include "StelPainter.hpp"
 #include "StelRenderer.hpp"
+#include "StelQGLIndexBuffer.hpp"
 #include "StelQGLTextureBackend.hpp"
 #include "StelQGLViewport.hpp"
 #include "StelTextureCache.hpp"
@@ -102,6 +103,11 @@ public:
 	{
 		invariant();
 		return viewport.getViewportSize();
+	}
+
+	StelIndexBuffer* createIndexBuffer(const IndexType type)
+	{
+		return new StelQGLIndexBuffer(type);
 	}
 	
 	virtual void bindTexture(StelTextureBackend* const textureBackend, const int textureUnit);

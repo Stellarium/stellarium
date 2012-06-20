@@ -20,11 +20,13 @@
 #ifndef _STELSKYDRAWER_HPP_
 #define _STELSKYDRAWER_HPP_
 
-#include "renderer/StelTextureTypes.hpp"
-#include "renderer/StelVertexBuffer.hpp"
 #include "StelProjectorType.hpp"
 #include "VecMath.hpp"
 #include "RefractionExtinction.hpp"
+
+#include "renderer/StelIndexBuffer.hpp"
+#include "renderer/StelTextureTypes.hpp"
+#include "renderer/StelVertexBuffer.hpp"
 
 #include <QObject>
 
@@ -313,11 +315,17 @@ private:
 	//! When stars are drawn as points, these are stored in this buffer.
 	StelVertexBuffer<ColoredVertex>* starPointBuffer;
 
-	//! When stars are drawn as triangle pairs ("sprites"), these are stored in this buffer.
+	//! When stars/point sources are drawn as triangle pairs ("sprites"), their vertices are stored here.
+	//!
+	//! Vertices for big halos are stored here as well.
 	StelVertexBuffer<ColoredTexturedVertex>* starSpriteBuffer;
 
-	//! Buffer for big halos around the largest sources.
-	StelVertexBuffer<ColoredTexturedVertex>* haloBuffer;
+	//! Index buffer pointing to starSpriteBuffer storing indices of stars' sprites.
+	StelIndexBuffer* starSpriteIndices;
+	//! Index buffer pointing to starSpriteBuffer storing indices of big halos.
+	StelIndexBuffer* bigHaloIndices;
+	//! Indec buffer pointing to starSpriteBuffer storing indices of the sun halo.
+	StelIndexBuffer* sunHaloIndices;
 
 	//! Are we drawing point sources at the moment?
 	bool drawing;
