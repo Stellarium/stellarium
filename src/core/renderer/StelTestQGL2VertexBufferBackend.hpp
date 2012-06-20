@@ -61,7 +61,7 @@ public:
 
 	virtual void addVertex(const quint8* const vertexInPtr);
 
-	virtual void getVertex(const uint index, quint8* const vertexOutPtr);
+	virtual void getVertex(const uint index, quint8* const vertexOutPtr) const;
 
 	virtual void setVertex(const uint index, const quint8* const vertexInPtr);
 
@@ -139,9 +139,18 @@ private:
 	//! @param vertexIndex    Specifies which vertex we're accessing.
 	//! @return               Non-const reference to the attribute.
 	template<class A>
-	A& getAttribute(const uint attributeIndex, const uint vertexIndex)
+	A& getAttribute(const uint attributeIndex, const uint vertexIndex) 
 	{
 		return getBuffer<A>(attributeIndex).data[vertexIndex];
+	}
+
+	//! Const version of getAttribute.
+	//!
+	//! @see getAttribute
+	template<class A>
+	const A& getAttributeConst(const uint attributeIndex, const uint vertexIndex)  const
+	{
+		return getBufferConst<A>(attributeIndex).data[vertexIndex];
 	}
 
 	//! Access buffer of the specified vertex attribute.
@@ -154,6 +163,15 @@ private:
 	AttributeBuffer<A>& getBuffer(const uint attributeIndex)
 	{
 		return *static_cast<AttributeBuffer<A>*>(buffers[attributeIndex]);
+	}
+
+	//! Const version of getBuffer.
+	//!
+	//! @see getBuffer
+	template<class A>
+	const AttributeBuffer<A>& getBufferConst(const uint attributeIndex) const
+	{
+		return *static_cast<const AttributeBuffer<A>*>(buffers[attributeIndex]);
 	}
 };
 

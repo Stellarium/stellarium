@@ -153,7 +153,7 @@ public:
 	//!
 	//! @param index Index of the vertex to get.
 	//! @return Vertex at specified index.
-	V getVertex(const int index)
+	V getVertex(const int index) const
 	{
 		Q_ASSERT_X(!locked_, Q_FUNC_INFO,
 		           "Trying to get a vertex in a locked vertex buffer");
