@@ -23,6 +23,7 @@
 #include "SphericMirrorCalculator.hpp"
 #include "StelFileMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "renderer/StelIndexBuffer.hpp"
 #include "renderer/StelRenderer.hpp"
 
 #include <QSettings>
@@ -46,6 +47,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	                          getCurrentStelProjectorParams())
 	, maxTexCoords(1.0f, 1.0f)
 	, vertexGrid(NULL)
+	, vertices(renderer->createVertexBuffer<Vertex>(PrimitiveType_TriangleStrip))
 {
 	QSettings& conf = *StelApp::getInstance().getSettings();
 	StelCore* core = StelApp::getInstance().getCore();
@@ -137,27 +139,26 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		qDebug() << "Falling back to generated distortion";
 		generateDistortion(conf, proj, distorterMaxFOV, renderer);
 	}
+
+	vertices->lock();
 }
 
 
 StelViewportDistorterFisheyeToSphericMirror::~StelViewportDistorterFisheyeToSphericMirror(void)
 {
-	if(NULL != vertexGrid)
-	{
-		delete[] vertexGrid;
-	}
+	if(NULL != vertexGrid) {delete[] vertexGrid;}
+	if(NULL != vertices)   {delete vertices;}
 
-	foreach(StelVertexBuffer<Vertex> *buffer, vertexBuffers)
+	foreach(StelIndexBuffer* buffer, stripBuffers)
 	{
 		delete buffer;
 	}
-
 	// TODO repair
 	// prj->setMaxFov(original_max_fov);
-	//	prj->setViewport(original_viewport[0],original_viewport[1],
-	// 	                 original_viewport[2],original_viewport[3],
-	// 	                 original_viewportCenter[0],original_viewportCenter[1],
-	// 	                 original_viewportFovDiameter);
+	// prj->setViewport(original_viewport[0],original_viewport[1],
+	//                  original_viewport[2],original_viewport[3],
+	//                  original_viewportCenter[0],original_viewportCenter[1],
+	//                  original_viewportFovDiameter);
 }
 
 void StelViewportDistorterFisheyeToSphericMirror::generateDistortion
@@ -235,10 +236,12 @@ void StelViewportDistorterFisheyeToSphericMirror::generateDistortion
 			                                   : exp(gamma * log(height / maxH));
 			color[0] = color[1] = color[2] = gray;
 			color[3] = 1.0f; 
+
+			vertices->addVertex(vertex);
 		}
 	}
 
-	constructVertexBuffer(vertexGrid, renderer);
+	constructVertexBuffer(renderer);
 	
 	delete[] heightGrid;
 }
@@ -319,42 +322,40 @@ bool StelViewportDistorterFisheyeToSphericMirror::loadDistortionFromFile
 			Q_ASSERT(in.status() != QTextStream::Ok);
 			vertex.texCoord[0] = (viewportTextureOffset[0] + x) / texture_wh;
 			vertex.texCoord[1] = (viewportTextureOffset[1] + y) / texture_wh;
+
+			vertices->addVertex(vertex);
 		}
 	}
 	
-	constructVertexBuffer(vertexGrid, renderer);
+	constructVertexBuffer(renderer);
 	
 	return true;
 }
 
 void StelViewportDistorterFisheyeToSphericMirror::constructVertexBuffer
-	(const Vertex *const vertexGrid, StelRenderer *renderer)
+	(StelRenderer *renderer)
 {
 	const int cols = maxGridX + 1;
 
 	// Each row is a triangle strip.
 	for (int row = 0; row < maxGridY; row++)
 	{
-		StelVertexBuffer<Vertex> *buffer = 
-			renderer->createVertexBuffer<Vertex>(PrimitiveType_TriangleStrip);
-
+		StelIndexBuffer* buffer = renderer->createIndexBuffer(IndexType_U16);
 		// Two rows of vertices make up one row of the grid.
-
-		const Vertex *v0 = vertexGrid + row * cols;
-		const Vertex *v1 = v0;
+		uint i0 = row * cols;
+		uint i1 = i0;
 		
 		// Alternating between the "first" and the "second" vertex row.
-		if (row & 1) {v1 += cols;}
-		else         {v0 += cols;}
+		if (row & 1) {i1 += cols;}
+		else         {i0 += cols;}
 		
-		for (int col = 0; col < cols; col++,v0++,v1++)
+		for (int col = 0; col < cols; col++,i0++,i1++)
 		{
-			buffer->addVertex(*v0);
-			buffer->addVertex(*v1);
+			buffer->addIndex(i0);
+			buffer->addIndex(i1);
 		}
-
 		buffer->lock();
-		vertexBuffers.append(buffer);
+		stripBuffers.append(buffer);
 	}
 }
 
@@ -457,22 +458,19 @@ void StelViewportDistorterFisheyeToSphericMirror::recalculateTexCoords(const QSi
 {
 	const float xMult = newMaxTexCoords.width() / maxTexCoords.width();
 	const float yMult = newMaxTexCoords.height() / maxTexCoords.height();
-	for(int row = 0; row < maxGridY; ++row)
-	{
-		StelVertexBuffer<Vertex>* buffer = vertexBuffers[row];
-		buffer->unlock();
-		const int length = buffer->length();
-		Vertex vertex;
 
-		for(int v = 0; v < length; ++v) 
-		{
-			vertex = buffer->getVertex(v);
-			vertex.texCoord[0] *= xMult;
-			vertex.texCoord[1] *= yMult;
-			buffer->setVertex(v, vertex);
-		}
-		buffer->lock();
+	vertices->unlock();
+	const int length = vertices->length();
+	Vertex vertex;
+	for(int v = 0; v < length; ++v) 
+	{
+		vertex = vertices->getVertex(v);
+		vertex.texCoord[0] *= xMult;
+		vertex.texCoord[1] *= yMult;
+		vertices->setVertex(v, vertex);
 	}
+	vertices->lock();
+
 	maxTexCoords = newMaxTexCoords;
 }
 
@@ -496,9 +494,9 @@ void StelViewportDistorterFisheyeToSphericMirror::drawToViewport(StelRenderer* r
 
 	screenTexture->bind();
 
-	foreach(StelVertexBuffer<Vertex> *buffer, vertexBuffers)
+	foreach(StelIndexBuffer* strip, stripBuffers)
 	{
-		renderer->drawVertexBuffer(buffer);
+		renderer->drawVertexBuffer(vertices, strip);
 	}
 
 	delete screenTexture;

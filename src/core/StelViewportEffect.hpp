@@ -84,10 +84,12 @@ private:
 	int maxGridX,maxGridY;
 	double stepX,stepY;
 
-	// Vertex buffers for each row of the grid.
-	QVector<StelVertexBuffer<Vertex>*> vertexBuffers;
+	//! Vertices of the grid.
+	StelVertexBuffer<Vertex>* vertices;
+	//! Indices specifying triangle strips representing rows of the grid.
+	QVector<class StelIndexBuffer*> stripBuffers;
 	
-	void constructVertexBuffer(const class Vertex *const vertexGrid, StelRenderer* renderer);
+	void constructVertexBuffer(StelRenderer* renderer);
 	void generateDistortion(const class QSettings& conf, const StelProjectorP& proj, 
 	                        const double distorterMaxFOV, class StelRenderer* renderer);
 
