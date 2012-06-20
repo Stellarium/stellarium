@@ -54,7 +54,7 @@ public:
 	//! @param index        Index of the vertex to read.
 	//! @param vertexOutPtr Pointer to the beginning of the output vertex.
 	//!                     Data members of the vertex must match vertex attributes of the buffer.
-	virtual void getVertex(const uint index, quint8* const vertexOutPtr) = 0;
+	virtual void getVertex(const uint index, quint8* const vertexOutPtr) const = 0;
 	
 	//! Rewrite a vertex in the buffer.
 	//!
