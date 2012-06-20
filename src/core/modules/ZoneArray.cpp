@@ -505,7 +505,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_insi
 	    tmpRcmag = rcmag_table+2*(s->mag+extMagShiftStep);
 	}
 
-	if (drawer->drawPointSource(sPainter, Vec3d(vf[0], vf[1], vf[2]), tmpRcmag, s->bV, !is_inside)
+	if (drawer->drawPointSource(sPainter->getProjector(), Vec3d(vf[0], vf[1], vf[2]), tmpRcmag, s->bV, !is_inside)
 	    && s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
 	{
 	    const float offset = *tmpRcmag*0.7f;
