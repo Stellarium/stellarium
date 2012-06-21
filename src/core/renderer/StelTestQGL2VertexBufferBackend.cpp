@@ -12,14 +12,14 @@ StelTestQGL2VertexBufferBackend(const PrimitiveType type,
 	, vertexCapacity(0)
 {
 	// Create a buffer for each vertex attribute.
-	for(int attrib = 0; attrib < attributes.size(); ++attrib)
+	for(int attrib = 0; attrib < this->attributes.count; ++attrib)
 	{
-		const AttributeType type = attributes[attrib].type;
-		const AttributeInterpretation interpretation = attributes[attrib].interpretation;
+		const AttributeInterpretation interpretation = 
+			this->attributes.attributes[attrib].interpretation;
 
 		AnyAttributeBuffer* buffer;
 
-		switch(type)
+		switch(this->attributes.attributes[attrib].type)
 		{
 			case AttributeType_Vec2f: buffer = new AttributeBuffer<Vec2f>(interpretation); break;
 			case AttributeType_Vec3f: buffer = new AttributeBuffer<Vec3f>(interpretation); break;
@@ -33,7 +33,7 @@ StelTestQGL2VertexBufferBackend(const PrimitiveType type,
 
 StelTestQGL2VertexBufferBackend::~StelTestQGL2VertexBufferBackend()
 {
-	Q_ASSERT_X(buffers.size() == static_cast<int>(attributes.size()),
+	Q_ASSERT_X(buffers.size() == static_cast<int>(attributes.count),
 	           Q_FUNC_INFO, "Attribute buffer count does not match attribute count");
 
 	for(int buffer = 0; buffer < buffers.size(); ++buffer)
@@ -48,25 +48,23 @@ void StelTestQGL2VertexBufferBackend::addVertex(const quint8* const vertexInPtr)
 	++vertexCount;
 	if(vertexCount <= vertexCapacity)
 	{
-		setVertex(vertexCount - 1, vertexInPtr);
+		setVertexNonVirtual(vertexCount - 1, vertexInPtr);
 		return;
 	}
 	++vertexCapacity;
 	// Points to the current attribute (e.g. color, normal, vertex) within the vertex.
 	const quint8* attribPtr = vertexInPtr;
-	for(int attrib = 0; attrib < attributes.size(); ++attrib)
+	for(int attrib = 0; attrib < attributes.count; ++attrib)
 	{
-		const AttributeType type = attributes[attrib].type;
-
 		// Add each attribute to its buffer.
-		switch(type)
+		switch(attributes.attributes[attrib].type)
 		{
 			case AttributeType_Vec2f: addAttribute<Vec2f>(attrib, attribPtr); break;
 			case AttributeType_Vec3f: addAttribute<Vec3f>(attrib, attribPtr); break;
 			case AttributeType_Vec4f: addAttribute<Vec4f>(attrib, attribPtr); break;
 			default: Q_ASSERT(false);
 		}
-		attribPtr += attributeSize(type);
+		attribPtr += attributes.sizes[attrib];
 	}
 }
 
@@ -75,12 +73,10 @@ void StelTestQGL2VertexBufferBackend::getVertex
 {
 	// Points to the current attribute (e.g. color, normal, vertex) within output.
 	quint8* attribPtr = vertexOutPtr;
-	for(int attrib = 0; attrib < attributes.size(); ++attrib)
+	for(int attrib = 0; attrib < attributes.count; ++attrib)
 	{
-		const AttributeType type = attributes[attrib].type;
-
 		// Get each attribute from its buffer and set result's attribute to that.
-		switch(type)
+		switch(attributes.attributes[attrib].type)
 		{
 			case AttributeType_Vec2f:
 				*reinterpret_cast<Vec2f*>(attribPtr) = getAttributeConst<Vec2f>(attrib, index);
@@ -95,36 +91,7 @@ void StelTestQGL2VertexBufferBackend::getVertex
 				Q_ASSERT(false);
 		}
 
-		attribPtr += attributeSize(type);
-	}
-}
-
-void StelTestQGL2VertexBufferBackend::setVertex
-	(const uint index, const quint8* const vertexInPtr)
-{
-	// Points to the current attribute (e.g. color, normal, vertex) within the vertex.
-	const quint8* attribPtr = vertexInPtr;
-	for(int attrib = 0; attrib < attributes.size(); ++attrib)
-	{
-		const AttributeType type = attributes[attrib].type;
-
-		//Set each attribute in its buffer.
-		switch(type)
-		{
-			case AttributeType_Vec2f:
-				getAttribute<Vec2f>(attrib, index) = *reinterpret_cast<const Vec2f*>(attribPtr);
-				break;
-			case AttributeType_Vec3f:
-				getAttribute<Vec3f>(attrib, index) = *reinterpret_cast<const Vec3f*>(attribPtr);
-				break;
-			case AttributeType_Vec4f:
-				getAttribute<Vec4f>(attrib, index) = *reinterpret_cast<const Vec4f*>(attribPtr);
-				break;
-			default:
-				Q_ASSERT(false);
-		}
-
-		attribPtr += attributeSize(type);
+		attribPtr += attributes.sizes[attrib];
 	}
 }
 
@@ -136,22 +103,21 @@ void StelTestQGL2VertexBufferBackend::
 	           "Trying to draw a vertex buffer that is not locked.");
 
 	// Get shader for our format from the renderer.
-	QGLShaderProgram* program = renderer.getShaderProgram(attributes);
+	QGLShaderProgram* program = 
+		renderer.getShaderProgram(attributes.attributes, attributes.count);
 	if(!program->bind())
 	{
 		Q_ASSERT_X(false, Q_FUNC_INFO, "Failed to bind shader program");
 	}
 	
-	// Maximum number of vertex attributes is one per interpretation, so this 
-	// array is large enough (it is also asserted below that we don't get into
-	// trouble if there are over 16 interpretations in future)
-	int enabledAttributes [16];
+	int enabledAttributes [MAX_VERTEX_ATTRIBUTES];
 	int attributeCount = 0;
 
 	bool vertexColors = false;
 	// Provide all vertex attributes' arrays to GL.
-	foreach(const StelVertexAttribute& attribute, attributes)
+	for(int attrib = 0; attrib < attributes.count; ++attrib)
 	{
+		const StelVertexAttribute& attribute(attributes.attributes[attrib]);
 		if(attribute.interpretation == AttributeInterpretation_Color)
 		{
 			vertexColors = true;
@@ -171,7 +137,7 @@ void StelTestQGL2VertexBufferBackend::
 		                           attributeDimensions(attribute.type));
 		program->enableAttributeArray(handle);
 
-		Q_ASSERT_X(attributeCount < 16, Q_FUNC_INFO,
+		Q_ASSERT_X(attributeCount < MAX_VERTEX_ATTRIBUTES, Q_FUNC_INFO,
 		           "enabledAttributes array is too small to handle all vertex attributes.");
 		enabledAttributes[attributeCount++] = handle;
 	}
@@ -199,7 +165,7 @@ void StelTestQGL2VertexBufferBackend::
 		glDrawArrays(glPrimitiveType(primitiveType), 0, vertexCount);
 	}
 
-	for(int attribute = 0; attribute < attributeCount; attribute++) 
+	for(int attribute = 0; attribute < attributes.count; attribute++) 
 	{
 		program->disableAttributeArray(enabledAttributes[attribute]);
 	}

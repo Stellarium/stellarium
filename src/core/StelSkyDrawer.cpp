@@ -319,8 +319,6 @@ bool StelSkyDrawer::computeRCMag(float mag, float rcMag[2]) const
 	return true;
 }
 
-//GL-REFACTOR TODO: REMOVE PASSED STELPAINTERS
-
 void StelSkyDrawer::preDrawPointSource()
 {
 	Q_ASSERT_X(!drawing, Q_FUNC_INFO,
