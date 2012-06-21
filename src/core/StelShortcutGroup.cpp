@@ -21,12 +21,14 @@
 #include "StelAppGraphicsWidget.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelTranslator.hpp"
+#include "StelScriptMgr.hpp"
+#include "StelFileMgr.hpp"
 
 #include <QDebug>
 
 StelShortcut::StelShortcut(const QString &aid, const QString &atext, const QString &akeys,
 													 bool acheckable, bool aautoRepeat, bool aglobal, QGraphicsWidget* parent) :
-	id(aid)
+	id(aid), script()
 {
 	if (parent == NULL)
 	{
@@ -85,6 +87,25 @@ void StelShortcut::setGlobal(bool g)
 	{
 		action->setShortcutContext(Qt::WidgetShortcut);
 	}
+}
+
+void StelShortcut::setScript(const QString &scriptText)
+{
+	QString scriptsDir = StelFileMgr::findFile("scripts/", StelFileMgr::Directory);
+	QString preprocessedScript;
+	if (!StelMainGraphicsView::getInstance().getScriptMgr().preprocessScript(
+				scriptText, preprocessedScript, scriptsDir))
+	{
+		qWarning() << "Failed to preprocess script " << script;
+		return;
+	}
+	script = preprocessedScript;
+	connect(action, SIGNAL(triggered()), this, SLOT(runScript()));
+}
+
+void StelShortcut::runScript()
+{
+	StelMainGraphicsView::getInstance().getScriptMgr().runPreprocessedScript(script);
 }
 
 
