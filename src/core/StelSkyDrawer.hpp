@@ -61,7 +61,7 @@ public:
 	void postDrawPointSource(StelProjectorP projector);
 
 	//! Draw a point source halo.
-	//! @param sPainter the StelPainter to use for drawing.
+	//! @param projector Projector to project the point source.
 	//! @param v the 3d position of the source in J2000 reference frame
 	//! @param rcMag the radius and luminance of the source as computed by computeRCMag()
 	//! @param bV the source B-V index
@@ -76,7 +76,7 @@ public:
 	bool drawPointSource(StelProjectorP projector, const Vec3d& v, const float rcMag[2], const Vec3f& color, bool checkInScreen=false);
 
 	//! Terminate drawing of a 3D model, draw the halo
-	//! @param p the StelPainter instance to use for this drawing operation
+	//! @param projector Projector to use for this drawing operation
 	//! @param v the 3d position of the source in J2000 reference frame
 	//! @param illuminatedArea the illuminated area in arcmin^2
 	//! @param mag the source integrated magnitude
