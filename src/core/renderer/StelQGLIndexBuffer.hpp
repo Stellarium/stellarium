@@ -26,10 +26,14 @@ protected:
 		const int previousIndexCount = length();
 		if(previousIndexCount < indexCapacity())
 		{
-			// StelIndexBuffer only uses setIndex through a bounds check -
-			// here we go around the check to set index that we have
-			// capacity to store. (parent addIndex increments index count).
-			setIndex_(previousIndexCount, index);
+			// We have the capacity to store the index, so store it.
+			// Parent addIndex increments index count.
+			//
+			// This is copied from setIndex_ for inlining 
+			// (setIndex_ can't be inlined as it's virtual)
+			if(indexType_ == IndexType_U16)      {indices16[previousIndexCount] = index;}
+			else if(indexType_ == IndexType_U32) {indices32[previousIndexCount] = index;}
+			else{Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown index type");}
 			return;
 		}
 		if(indexType_ == IndexType_U16)      {indices16.append(index);}

@@ -236,16 +236,19 @@ public:
 
 	//! Get shader program corresponding to specified vertex format.
 	//!
-	//! @param attributes Vertex attributes used in the vertex format.
+	//! @param attributes     Vertex attributes used in the vertex format.
+	//! @param attributeCount Number of vertex attributes.
 	//! @return Pointer to the shader program.
-	QGLShaderProgram* getShaderProgram(const QVector<StelVertexAttribute>& attributes)
+	QGLShaderProgram* getShaderProgram
+		(const StelVertexAttribute* const attributes, const int attributeCount)
 	{
 		invariant();
 		// Determine which vertex attributes are used.
 		bool position, texCoord, normal, color;
 		position = texCoord = normal = color = false;
-		foreach(const StelVertexAttribute& attribute, attributes)
+		for(int attrib = 0; attrib < attributeCount; ++attrib)
 		{
+			const StelVertexAttribute& attribute(attributes[attrib]);
 			switch(attribute.interpretation)
 			{
 				case AttributeInterpretation_Position: position = true; break;
