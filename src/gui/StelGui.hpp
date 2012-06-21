@@ -227,11 +227,6 @@ private:
 	// Currently used StelStyle
 	StelStyle currentStelStyle;
 
-	// This method is used by init() to load shortcuts from data/shortcuts.ini
-	bool loadShortcuts(const QString &filePath);
-
-	void loadShortcuts();
-
 	// This method is used by init() to initialize the ConstellationMgr instance.
 	void initConstellationMgr();
 
