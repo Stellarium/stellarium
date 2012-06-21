@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-17 18:37+0700\n"
-"PO-Revision-Date: 2012-06-19 20:57+0000\n"
+"PO-Revision-Date: 2012-06-20 21:24+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-20 04:33+0000\n"
+"X-Launchpad-Export-Date: 2012-06-21 05:16+0000\n"
 "X-Generator: Launchpad (build 15435)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -2997,7 +2997,7 @@ msgstr "Zobraziť kresby"
 #: src/ui_viewDialog.h:1154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Art brightness:"
-msgstr ""
+msgstr "Jas kresieb:"
 
 #: src/ui_viewDialog.h:1155
 msgid "Celestial Sphere"
@@ -3009,7 +3009,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1166
 msgid "Show meridian line"
-msgstr ""
+msgstr "Zobraziť poludníkovú čiaru"
 
 #: src/ui_viewDialog.h:1170
 msgid "Show horizon line"
@@ -3430,11 +3430,11 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:196
 msgid "Display info about an object's name"
-msgstr ""
+msgstr "Zobraziť informácie o názve objektu"
 
 #: src/ui_CustomInfoDialog.h:198
 msgid "An object's name"
-msgstr ""
+msgstr "Názov objektu"
 
 #: src/ui_CustomInfoDialog.h:200
 msgid "Display  info about a catalog numbers"
@@ -3446,19 +3446,19 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:204
 msgid "Display  info about a visual magnitude"
-msgstr ""
+msgstr "Zobraziť informácie o vizuálnej magnitúde"
 
 #: src/ui_CustomInfoDialog.h:206
 msgid "Visual magnitude"
-msgstr ""
+msgstr "Vizuálna magnitúda"
 
 #: src/ui_CustomInfoDialog.h:208
 msgid "Display  info about an absolute magnitude"
-msgstr ""
+msgstr "Zobraziť informácie o absolútnej magnitúde"
 
 #: src/ui_CustomInfoDialog.h:210
 msgid "Absolute magnitude"
-msgstr ""
+msgstr "Absolútna magnitúda"
 
 #: src/ui_CustomInfoDialog.h:212
 msgid "Display the equatorial position (J2000 ref)"
@@ -3490,23 +3490,23 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:226
 msgid "The hour angle"
-msgstr ""
+msgstr "Hodinový uhol"
 
 #: src/ui_CustomInfoDialog.h:228
 msgid "Display info about an object's distance"
-msgstr ""
+msgstr "Zobraziť informácie o vzdialenosti objektu"
 
 #: src/ui_CustomInfoDialog.h:230
 msgid "Object's distance"
-msgstr ""
+msgstr "Vzdialenosť objektu"
 
 #: src/ui_CustomInfoDialog.h:232
 msgid "Display info about an object's size"
-msgstr ""
+msgstr "Zobraziť informácie o veľkosti objektu"
 
 #: src/ui_CustomInfoDialog.h:234
 msgid "Object's size"
-msgstr ""
+msgstr "Veľkosť objektu"
 
 #: src/ui_CustomInfoDialog.h:236 src/ui_CustomInfoDialog.h:240
 #: src/ui_CustomInfoDialog.h:244
@@ -3699,7 +3699,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1241
 msgid "Image sensor frame"
-msgstr ""
+msgstr "Rám obrazového snímača"
 
 #: plugins/Oculars/src/Oculars.cpp:1249
 msgid "Telrad sight"
@@ -3776,11 +3776,11 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Sensor #%1: %2"
-msgstr ""
+msgstr "Snímač #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1738
 msgid "&Telescope"
-msgstr ""
+msgstr "&Teleskop"
 
 #: plugins/Oculars/src/Oculars.cpp:1739
 msgid "&Previous telescope"
@@ -3816,31 +3816,31 @@ msgstr "Ďalší teleskop"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:245
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr ""
+msgstr "Otočiť rám snímača o 15 stupňov proti smeru hodinových ručičiek"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:258
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr ""
+msgstr "Otočiť rám snímača o 5 stupňov proti smeru hodinových ručičiek"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:271
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr ""
+msgstr "Otočiť rám snímača o 1 stupeň proti smeru hodinových ručičiek"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:284
 msgid "Reset the sensor frame rotation"
-msgstr ""
+msgstr "Obnoviť pôvodné otočenie rámu snímača"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr ""
+msgstr "Otočiť rám snímača o 1 stupeň v smere hodinových ručičiek"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:310
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr ""
+msgstr "Otočiť rám snímača o 5 stupňov v smere hodinových ručičiek"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:323
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr ""
+msgstr "Otočiť rám snímača o 15 stupňov v smere hodinových ručičiek"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:522
 msgid "Effective focal length of the ocular"
