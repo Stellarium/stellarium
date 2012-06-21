@@ -5,6 +5,12 @@
 
 #include "StelVertexAttribute.hpp"
 
+
+//! Maximum number of vertex attributes.
+//!
+//! Must be greater than the number of enum values in AttributeInterpretation.
+static const int MAX_VERTEX_ATTRIBUTES = 8;
+
 //! Base class of all vertex buffer backends.
 //!
 //! This is where the actual vertex buffer logic is implemented.
@@ -27,10 +33,38 @@
 //! @sa StelVertexBuffer, StelRenderer
 class StelVertexBufferBackend
 {
+	//! Stores vertex attribute metadata of a buffer.
+	//!
+	//! (QVector<StelVertexAttribute> was used previously. This is an optimization
+	//! to speed up vertex manipulation).
+	struct Attributes
+	{
+		//! Attribute definitions.
+		StelVertexAttribute attributes[MAX_VERTEX_ATTRIBUTES];
+		//! Size of each attribute in bytes.
+		int sizes[MAX_VERTEX_ATTRIBUTES];
+		//! Number of attributes.
+		int count;
+
+		//! Construct from a vertex attribute vector.
+		Attributes(const QVector<StelVertexAttribute>& attributeVector)
+			: count(attributeVector.size())
+		{
+			for(int a = 0; a < count; ++a)
+			{
+				Q_ASSERT_X(count < MAX_VERTEX_ATTRIBUTES, Q_FUNC_INFO,
+				           "Too many vertex attributes (increase MAX_VERTEX_ATTRIBUTES"
+				           "in StelVertexBufferBackend.hpp)");
+				attributes[a] = attributeVector[a];
+				sizes[a]      = attributeSize(attributes[a].type);
+			}
+		}
+	};
+
 public:
 	//! Construct a StelVertexBufferBackend, specifying attributes of the vertex type.
 	StelVertexBufferBackend(const QVector<StelVertexAttribute>& attributes)
-		:attributes(attributes)
+		: attributes(attributes)
 	{
 	}
 
@@ -86,9 +120,9 @@ public:
 		// but we can at least enforce that their total length matches.
 		uint bytes = 0;
 		
-		for(int attrib = 0; attrib < attributes.size(); ++attrib)
+		for(int attrib = 0; attrib < attributes.count; ++attrib)
 		{
-			bytes += attributeSize(attributes[attrib].type);
+			bytes += attributes.sizes[attrib];
 		}
 		
 		Q_ASSERT_X(bytes == vertexSize, Q_FUNC_INFO,
@@ -98,7 +132,7 @@ public:
 	
 protected:
 	//! Specifies vertex attributes in the vertex type.
-	const QVector<StelVertexAttribute>& attributes;
+	const Attributes attributes;
 };
 
 

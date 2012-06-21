@@ -63,7 +63,10 @@ public:
 
 	virtual void getVertex(const uint index, quint8* const vertexOutPtr) const;
 
-	virtual void setVertex(const uint index, const quint8* const vertexInPtr);
+	virtual void setVertex(const uint index, const quint8* const vertexInPtr)
+	{
+		setVertexNonVirtual(index, vertexInPtr);
+	}
 
 	virtual void lock()
 	{
@@ -116,6 +119,36 @@ private:
 	//! @param attributes Specifications of vertex attributes that will be stored in the buffer.
 	StelTestQGL2VertexBufferBackend(const PrimitiveType type,
 	                                const QVector<StelVertexAttribute>& attributes);
+
+
+	//! SetVertex implementation, non-virtual so it can be inlined in addVertex.
+	//! 
+	//! @see setVertex
+	void setVertexNonVirtual(const uint index, const quint8* const vertexInPtr)
+	{
+		// Points to the current attribute (e.g. color, normal, vertex) within the vertex.
+		const quint8* attribPtr = vertexInPtr;
+		for(int attrib = 0; attrib < attributes.count; ++attrib)
+		{
+			//Set each attribute in its buffer.
+			switch(attributes.attributes[attrib].type)
+			{
+				case AttributeType_Vec2f:
+					getAttribute<Vec2f>(attrib, index) = *reinterpret_cast<const Vec2f*>(attribPtr);
+					break;
+				case AttributeType_Vec3f:
+					getAttribute<Vec3f>(attrib, index) = *reinterpret_cast<const Vec3f*>(attribPtr);
+					break;
+				case AttributeType_Vec4f:
+					getAttribute<Vec4f>(attrib, index) = *reinterpret_cast<const Vec4f*>(attribPtr);
+					break;
+				default:
+					Q_ASSERT(false);
+			}
+
+			attribPtr += attributes.sizes[attrib];
+		}
+	}
 
 	//! Add an attribute to specified attribute buffer.
 	//!
