@@ -49,6 +49,7 @@
 #include <QList>
 #include <QSharedPointer>
 #include <QStringList>
+#include <QPixmap>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
@@ -81,7 +82,7 @@ Q_EXPORT_PLUGIN2(Exoplanets, ExoplanetsStelPluginInterface)
  Constructor
 */
 Exoplanets::Exoplanets()
-	: progressBar(NULL)
+	: flagShowExoplanets(false), OnIcon(NULL), OffIcon(NULL), GlowIcon(NULL), progressBar(NULL)
 {
 	setObjectName("Exoplanets");
 	exoplanetsConfigDialog = new ExoplanetsDialog();
@@ -95,6 +96,13 @@ Exoplanets::Exoplanets()
 Exoplanets::~Exoplanets()
 {
 	delete exoplanetsConfigDialog;
+
+	if (GlowIcon)
+		delete GlowIcon;
+	if (OnIcon)
+		delete OnIcon;
+	if (OffIcon)
+		delete OffIcon;
 }
 
 void Exoplanets::deinit()
@@ -148,10 +156,20 @@ void Exoplanets::init()
 		// TRANSLATORS: Title of a group of key bindings in the Help window
 		QString groupName = N_("Plugin Key Bindings");
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->addGuiActions("actionShow_Exoplanets_ConfigDialog", N_("Exoplanets configuration window"), "", groupName, true);
+
+		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
+		OnIcon = new QPixmap(":/Exoplanets/btExoplanets-on.png");
+		OffIcon = new QPixmap(":/Exoplanets/btExoplanets-off.png");
+
+		gui->addGuiActions("actionShow_Exoplanets_ConfigDialog", N_("Exoplanets configuration window"), "", groupName, true, false);
+		gui->addGuiActions("actionShow_Exoplanets", N_("Show exoplanets"), "Ctrl+Alt+E", groupName, true, false);
+		gui->getGuiActions("actionShow_Exoplanets")->setChecked(flagShowExoplanets);
+		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiActions("actionShow_Exoplanets"));
+		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 
 		connect(gui->getGuiActions("actionShow_Exoplanets_ConfigDialog"), SIGNAL(toggled(bool)), exoplanetsConfigDialog, SLOT(setVisible(bool)));
 		connect(exoplanetsConfigDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Exoplanets_ConfigDialog"), SLOT(setChecked(bool)));
+		connect(gui->getGuiActions("actionShow_Exoplanets"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowExoplanets(bool)));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -202,6 +220,9 @@ void Exoplanets::init()
 */
 void Exoplanets::draw(StelCore* core)
 {
+	if (!flagShowExoplanets)
+		return;
+
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
 	painter.setFont(font);
@@ -246,6 +267,9 @@ QList<StelObjectP> Exoplanets::searchAround(const Vec3d& av, double limitFov, co
 {
 	QList<StelObjectP> result;
 
+	if (!flagShowExoplanets)
+		return result;
+
 	Vec3d v(av);
 	v.normalize();
 	double cosLimFov = cos(limitFov * M_PI/180.);
@@ -269,7 +293,9 @@ QList<StelObjectP> Exoplanets::searchAround(const Vec3d& av, double limitFov, co
 
 StelObjectP Exoplanets::searchByName(const QString& englishName) const
 {
-	QString objw = englishName.toUpper();
+	if (!flagShowExoplanets)
+		return NULL;
+
 	foreach(const ExoplanetP& eps, ep)
 	{
 		if (eps->getEnglishName().toUpper() == englishName)
@@ -281,7 +307,8 @@ StelObjectP Exoplanets::searchByName(const QString& englishName) const
 
 StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 {
-	QString objw = nameI18n.toUpper();
+	if (!flagShowExoplanets)
+		return NULL;
 
 	foreach(const ExoplanetP& eps, ep)
 	{
@@ -295,6 +322,9 @@ StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
 {
 	QStringList result;
+	if (!flagShowExoplanets)
+		return result;
+
 	if (maxNbItem==0) return result;
 
 	QString objw = objPrefix.toUpper();
@@ -483,7 +513,8 @@ void Exoplanets::restoreDefaultConfigIni(void)
 	conf->remove("");
 
 	conf->setValue("updates_enabled", true);
-	conf->setValue("url", "http://stellarium.astro.uni-altai.ru/exoplanets.json");
+	conf->setValue("flag_show_exoplanets", false);
+	conf->setValue("url", "http://stellarium.org/json/exoplanets.json");
 	conf->setValue("update_frequency_hours", 72);
 	conf->endGroup();
 }
@@ -492,10 +523,11 @@ void Exoplanets::readSettingsFromConfig(void)
 {
 	conf->beginGroup("Exoplanets");
 
-	updateUrl = conf->value("url", "http://stellarium.astro.uni-altai.ru/exoplanets.json").toString();
+	updateUrl = conf->value("url", "http://stellarium.org/json/exoplanets.json").toString();
 	updateFrequencyHours = conf->value("update_frequency_hours", 72).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
+	flagShowExoplanets = conf->value("flag_show_exoplanets", false).toBool();
 
 	conf->endGroup();
 }
@@ -507,6 +539,7 @@ void Exoplanets::saveSettingsToConfig(void)
 	conf->setValue("url", updateUrl);
 	conf->setValue("update_frequency_hours", updateFrequencyHours);
 	conf->setValue("updates_enabled", updatesEnabled );
+	conf->setValue("flag_show_exoplanets", flagShowExoplanets);
 
 	conf->endGroup();
 }
