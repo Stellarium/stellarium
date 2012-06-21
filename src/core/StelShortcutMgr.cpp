@@ -1,7 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2008 Fabien Chereau
- * Copyright (C) 2012 Timothy Reaves
+ * Copyright (C) 2012 Anton Samoylov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,12 +18,12 @@
  */
 
 #include "StelShortcutMgr.hpp"
-
-#include "StelIniParser.hpp"
+#include "StelJsonParser.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelTranslator.hpp"
+#include "StelShortcutGroup.hpp"
 
 #include <QDateTime>
 #include <QAction>
@@ -42,33 +41,15 @@ void StelShortcutMgr::init()
 // Note: "text" and "helpGroup" must be in English -- this method and the help
 // dialog take care of translating them. Of course, they still have to be
 // marked for translation using the N_() macro.
-QAction* StelShortcutMgr::addGuiAction(const QString& actionName, const QString& text, const QString& shortcuts, const QString& helpGroup, bool checkable, bool autoRepeat, bool global)
+QAction* StelShortcutMgr::addGuiAction(const QString& actionId, const QString& text, const QString& shortcuts,
+																			 const QString& group, bool checkable, bool autoRepeat, bool global)
 {
-	Q_UNUSED(helpGroup);
-	QAction* a = new QAction(stelAppGraphicsWidget);
-	a->setObjectName(actionName);
-	a->setText(q_(text));
-	QList<QKeySequence> keySeqs;
-	QRegExp shortCutSplitRegEx(";(?!;|$)"); // was ",(?!,|$)" before storing in ini file
-	QStringList shortcutStrings = shortcuts.split(shortCutSplitRegEx);
-	foreach (QString shortcut, shortcutStrings)
+	if (!shGroups.contains(group))
 	{
-		keySeqs << QKeySequence(shortcut.remove(QRegExp("\\s+")).remove(QRegExp("^\"|\"$")));
+		shGroups[group] = new StelShortcutGroup(group);
 	}
-	a->setShortcuts(keySeqs);
-	a->setCheckable(checkable);
-	a->setAutoRepeat(autoRepeat);
-	a->setProperty("englishText", QVariant(text));
-	if (global)
-	{
-		a->setShortcutContext(Qt::ApplicationShortcut);
-	}
-	else
-	{
-		a->setShortcutContext(Qt::WidgetShortcut);
-	}
-	stelAppGraphicsWidget->addAction(a);
-	return a;
+	return shGroups[group]->registerAction(actionId, text, shortcuts, checkable,
+																				 autoRepeat, global, stelAppGraphicsWidget);
 }
 
 QAction* StelShortcutMgr::getGuiAction(const QString& actionName)
@@ -82,40 +63,50 @@ QAction* StelShortcutMgr::getGuiAction(const QString& actionName)
 	return a;
 }
 
+QAction *StelShortcutMgr::getGuiAction(const QString &groupId, const QString &actionId)
+{
+	if (shGroups.contains(groupId))
+	{
+		QAction* a = shGroups[groupId]->getAction(actionId);
+		if (!a)
+		{
+			qWarning() << "Can't find action " << actionId;
+			return NULL;
+		}
+		return a;
+	}
+	qWarning() << "Attempt to find action" << actionId << " of non-existing group " << groupId;
+	return NULL;
+}
+
 bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 {
-	QSettings scs(filePath, StelIniFormat);
-	if (scs.status() != QSettings::NoError)
+	QFile jsonFile(filePath);
+	jsonFile.open(QIODevice::ReadOnly);
+
+	QMap<QString, QVariant> groups = StelJsonParser::parse(jsonFile.readAll()).toMap()["groups"].toMap();
+
+	for (QMap<QString, QVariant>::iterator group = groups.begin(); group != groups.end(); ++group)
 	{
-		qWarning() << "ERROR while parsing" << filePath;
-		return false;
-	}
-	// Shortcuts format example:
-	// [search]
-	// name = actionShow_Search_Window_Global
-	// text = Search window
-	// shortcuts = F3; Ctrl+F
-	// group = Display Options
-	// checkable = 1
-	// autorepeat = 0
-	// global = 1
-	QStringList sections = scs.childGroups();
-	foreach (QString section, sections)
-	{
-		QString name = section;
-		QString text = scs.value(section + "/text").toString();
-		QString shortcuts = scs.value(section + "/shortcuts").toString();
-		QString group = scs.value(section + "/group").toString();
-		// TODO: add true/false, on/off, yes/no, y/n cases (not only 1/0) for bool values
-		bool checkable = scs.value(section + "/checkable", QVariant("1")).toString().toInt();
-		bool autorepeat = scs.value(section + "/autorepeat", QVariant("0")).toString().toInt();
-		bool global = scs.value(section + "/global", QVariant("0")).toString().toInt();
-		if (name == "")
+		QMap<QString, QVariant> groupMap = group.value().toMap();
+		QString groupId = group.key();
+		QString groupPrefix = (groupMap.contains("prefix") ? groupMap["prefix"].toString() + "," : "");
+		QMap<QString, QVariant> actions = group.value().toMap()["actions"].toMap();
+		for (QMap<QString, QVariant>::iterator action = actions.begin(); action != actions.end(); ++action)
 		{
-			qWarning() << "Name missing in " << section << " shortcut, parsing wasn't done";
-			continue;
+			QString actionId = action.key();
+			QMap<QString, QVariant> actionMap = action.value().toMap();
+			QString text = actionMap["text"].toString();
+			QString shortcuts = groupPrefix + actionMap["shortcuts"].toString();
+			bool checkable = actionMap["checkable"].toBool();
+			bool autorepeat = actionMap["autorepeat"].toBool();
+			bool global = actionMap["global"].toBool();
+			if (actionMap.contains("script"))
+			{
+				qDebug() << "SCRIPT FOUND! \"a\" " << actionMap["script"].toString();
+			}
+			addGuiAction(actionId, text, shortcuts, groupId, checkable, autorepeat, global);
 		}
-		addGuiAction(name, text, shortcuts, group, checkable, autorepeat, global);
 	}
 	return true;
 }
@@ -126,11 +117,11 @@ void StelShortcutMgr::loadShortcuts()
 	QStringList shortcutFiles;
 	try
 	{
-		shortcutFiles = StelFileMgr::findFileInAllPaths("data/shortcuts.ini");
+		shortcutFiles = StelFileMgr::findFileInAllPaths("data/shortcuts.json");
 	}
 	catch(std::runtime_error& e)
 	{
-		qWarning() << "ERROR while loading shortcuts.ini (unable to find data/shortcuts.ini): " << e.what() << endl;
+		qWarning() << "ERROR while loading shortcuts.json (unable to find data/shortcuts.json): " << e.what() << endl;
 		return;
 	}
 	foreach (QString shortcutFile, shortcutFiles)
@@ -141,7 +132,7 @@ void StelShortcutMgr::loadShortcuts()
 		{
 			if (shortcutFile.contains(StelFileMgr::getUserDir()))
 			{
-				QString newName = QString("%1/data/shortcuts-%2.ini").arg(StelFileMgr::getUserDir()).arg(QDateTime::currentDateTime().toString("yyyyMMddThhmmss"));
+				QString newName = QString("%1/data/shortcuts-%2.json").arg(StelFileMgr::getUserDir()).arg(QDateTime::currentDateTime().toString("yyyyMMddThhmmss"));
 				if (QFile::rename(shortcutFile, newName))
 					qWarning() << "Invalid shortcuts file" << shortcutFile << "has been renamed to" << newName;
 				else

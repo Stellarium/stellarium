@@ -1,7 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2008 Fabien Chereau
- * Copyright (C) 2012 Timothy Reaves
+ * Copyright (C) 2012 Anton Samoylov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +22,7 @@
 
 #include <QObject>
 
+#include <StelShortcutGroup.hpp>
 #include "StelAppGraphicsWidget.hpp"
 
 class StelShortcutMgr : public QObject
@@ -44,12 +44,14 @@ public:
 	//! @param checkable whether the action should be checkable
 	//! @param autoRepeat whether the action should be autorepeated
 	//! @param global whether the action should be global (affect in dialogs)
-	QAction* addGuiAction(const QString& actionName, const QString& text, const QString& shortcuts, const QString& helpGroup, bool checkable=true, bool autoRepeat=false, bool global=false);
+	QAction* addGuiAction(const QString& actionId, const QString& text, const QString& shortcuts, const QString& group, bool checkable=true, bool autoRepeat=false, bool global=false);
 
 	//! Get a pointer on an action managed by the GUI
 	//! @param actionName qt object name for this action
 	//! @return a pointer on the QAction object or NULL if don't exist
 	QAction* getGuiAction(const QString& actionName);
+
+	QAction* getGuiAction(const QString& groupId, const QString& actionId);
 
 signals:
 	
@@ -57,7 +59,7 @@ public slots:
 
 private:
 	StelAppGraphicsWidget* stelAppGraphicsWidget;
-	
+	QMap<QString, StelShortcutGroup*> shGroups;
 };
 
 #endif // STELSHORTCUTMGR_HPP
