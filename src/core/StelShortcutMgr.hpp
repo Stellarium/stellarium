@@ -53,6 +53,8 @@ public:
 
 	QAction* getGuiAction(const QString& groupId, const QString& actionId);
 
+	QAction* setScriptToAction(const QString& actionId, const QString& script);
+
 signals:
 	
 public slots:
