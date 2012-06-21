@@ -297,7 +297,6 @@ protected:
 		invariant();
 
 		//TODO Projection using StelProjector 
-		//TODO IndexBuffer 
 		StelTestQGL2VertexBufferBackend* backend =
 			dynamic_cast<StelTestQGL2VertexBufferBackend*>(vertexBuffer);
 		Q_ASSERT_X(backend != NULL, Q_FUNC_INFO,

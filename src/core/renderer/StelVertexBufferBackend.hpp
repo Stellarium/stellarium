@@ -33,7 +33,7 @@ public:
 		:attributes(attributes)
 	{
 	}
-	
+
 	//! Required to ensure that derived classes get properly deallocated.
 	virtual ~StelVertexBufferBackend(){};
 	
@@ -80,11 +80,6 @@ public:
 	virtual void clear() = 0;
 
 	//! Assert that the user-specified (in StelVertexBuffer) vertex type is valid.
-	//!
-	//! For instance, assert that there is no more than 1 attribute with
-	//! a particular interpretation (e.g. color, normal),
-	//! and that total size of attributes in bytes matches size
-	//! of the vertex.
 	void validateVertexType(const uint vertexSize)
 	{
 		// We have no way of looking at each data member of the vertex type, 
@@ -99,54 +94,11 @@ public:
 		Q_ASSERT_X(bytes == vertexSize, Q_FUNC_INFO,
 		           "Size of the vertex type in bytes doesn't match the sum of sizes of "
 		           "all vertex attributes as reported by \"attributes\" data member.");
-		
-		
-		bool vertex, texCoord, normal, color;
-		vertex = texCoord = normal = color = false;
-		
-		// Ensure that every kind of vertex attribute is present at most once.
-		foreach(const StelVertexAttribute& attribute, attributes)
-		{
-			switch(attribute.interpretation)
-			{
-				case AttributeInterpretation_Position:
-					Q_ASSERT_X(!vertex, Q_FUNC_INFO,
-					           "Vertex type has more than one vertex position attribute");
-					vertex = true;
-					break;
-				case AttributeInterpretation_TexCoord:
-					Q_ASSERT_X(attributeDimensions(attribute.type) == 2, Q_FUNC_INFO,
-					           "Only 2D texture coordinates are supported at the moment");
-					Q_ASSERT_X(!texCoord, 
-					           Q_FUNC_INFO,
-					           "Vertex type has more than one texture coordinate attribute");
-					texCoord = true;
-					break;
-				case AttributeInterpretation_Normal:
-					Q_ASSERT_X(attributeDimensions(attribute.type) == 3, Q_FUNC_INFO,
-					           "Only 3D vertex normals are supported");
-					Q_ASSERT_X(!normal, Q_FUNC_INFO,
-					           "Vertex type has more than one normal attribute");
-					normal = true;
-					break;
-				case AttributeInterpretation_Color:
-					Q_ASSERT_X(!color, Q_FUNC_INFO,
-					           "Vertex type has more than one color attribute");
-					color = true;
-					break;
-				default:
-					Q_ASSERT_X(false, Q_FUNC_INFO,
-					           "Unknown vertex attribute interpretation");
-			}
-		}
-
-		Q_ASSERT_X(vertex, Q_FUNC_INFO, 
-		           "Vertex formats without a position attribute are not supported");
 	}
 	
 protected:
 	//! Specifies vertex attributes in the vertex type.
-	const QVector<StelVertexAttribute> attributes;
+	const QVector<StelVertexAttribute>& attributes;
 };
 
 

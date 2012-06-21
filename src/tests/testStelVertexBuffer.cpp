@@ -24,11 +24,8 @@ struct TestVertex1
 	
 	bool operator == (const TestVertex1& rhs) const {return vertex == rhs.vertex;}
 	
-	static const QVector<StelVertexAttribute> attributes;
+	VERTEX_ATTRIBUTES(Vec3f Position);
 };
-const QVector<StelVertexAttribute> TestVertex1::attributes = 
-	(QVector<StelVertexAttribute>() << StelVertexAttribute(AttributeType_Vec3f, 
-	                                                       AttributeInterpretation_Position));
 
 //! Test vertex with a position and a texcoord.
 struct TestVertex2
@@ -47,15 +44,9 @@ struct TestVertex2
 		return vertex == rhs.vertex && texCoord == rhs.texCoord;
 	}
 	
-	static const QVector<StelVertexAttribute> attributes;
+	VERTEX_ATTRIBUTES(Vec3f Position, Vec2f TexCoord);
 };
-const QVector<StelVertexAttribute> TestVertex2::attributes = 
-	(QVector<StelVertexAttribute>() << StelVertexAttribute(AttributeType_Vec3f, 
-	                                                       AttributeInterpretation_Position)
-	                                << StelVertexAttribute(AttributeType_Vec2f, 
-	                                                       AttributeInterpretation_TexCoord));
 
-//! Test vertex with a position, texcoord, normal and color.
 struct TestVertex3
 {
 	Vec3f vertex;
@@ -79,32 +70,23 @@ struct TestVertex3
 		       color == rhs.color;
 	}
 	
-	static const QVector<StelVertexAttribute> attributes;
+	VERTEX_ATTRIBUTES(Vec3f Position, Vec2f TexCoord, Vec3f Normal, Vec4f Color);
 };
-const QVector<StelVertexAttribute> TestVertex3::attributes = 
-	(QVector<StelVertexAttribute>() << StelVertexAttribute(AttributeType_Vec3f, 
-	                                                       AttributeInterpretation_Position)
-	                                << StelVertexAttribute(AttributeType_Vec2f, 
-	                                                       AttributeInterpretation_TexCoord)
-	                                << StelVertexAttribute(AttributeType_Vec3f,
-	                                                       AttributeInterpretation_Normal)
-	                                << StelVertexAttribute(AttributeType_Vec4f,
-	                                                       AttributeInterpretation_Color));
 	
 template<class BufferBackend, class Vertex> 
 void TestStelVertexBuffer::testVertexBuffer()
 {
 	StelVertexBuffer<Vertex>* buffer = 
 		new StelVertexBuffer<Vertex>(new BufferBackend(PrimitiveType_Triangles, 
-		                                               Vertex::attributes));
+		                                               Vertex::attributes()));
 	
 	// Make sure the buffer was initialized correctly.
 	QCOMPARE(buffer->locked(), false);
-	QCOMPARE(buffer->length(), 0u);
+	QCOMPARE(buffer->length(), 0);
 	
 	// Vertices we'll be adding (random generated).
 	QVector<Vertex> vertexVector;
-	for(uint v = 0; v < 10042; ++v)
+	for(int v = 0; v < 10042; ++v)
 	{
 		vertexVector.append(Vertex());
 	}
@@ -116,22 +98,22 @@ void TestStelVertexBuffer::testVertexBuffer()
 	}
 	
 	// Verify buffer length.
-	QCOMPARE(buffer->length(), static_cast<uint>(vertexVector.size()));
+	QCOMPARE(buffer->length(), vertexVector.size());
 	
 	// Verify buffer contents (and that getVertex works).
-	for(uint v = 0; v < buffer->length(); ++v)
+	for(int v = 0; v < buffer->length(); ++v)
 	{
 		QCOMPARE(buffer->getVertex(v), vertexVector[v]);
 	}
 	
 	// Test setVertex by setting the vertices in reverse order.
-	for(uint v = 0; v < buffer->length(); ++v)
+	for(int v = 0; v < buffer->length(); ++v)
 	{
 		buffer->setVertex(buffer->length() - v - 1, vertexVector[v]);
 	}
 	
 	// Verify that the vertices have been set as expected.
-	for(uint v = 0; v < buffer->length(); ++v)
+	for(int v = 0; v < buffer->length(); ++v)
 	{
 		QCOMPARE(buffer->getVertex(buffer->length() - v - 1), vertexVector[v]);
 	}

@@ -37,19 +37,6 @@
 #define EYE_RESOLUTION (0.25f)
 #define MAX_LINEAR_RADIUS (8.f)
 
-// Vertex attributes of ColoredTexturedVertex.
-const QVector<StelVertexAttribute> StelSkyDrawer::ColoredTexturedVertex::attributes = 
-	(QVector<StelVertexAttribute>() 
-	 << StelVertexAttribute(AttributeType_Vec2f, AttributeInterpretation_Position)
-	 << StelVertexAttribute(AttributeType_Vec3f, AttributeInterpretation_Color)
-	 << StelVertexAttribute(AttributeType_Vec2f, AttributeInterpretation_TexCoord));
-
-// Vertex attributes of ColoredVertex.
-const QVector<StelVertexAttribute> StelSkyDrawer::ColoredVertex::attributes = 
-	(QVector<StelVertexAttribute>() 
-	 << StelVertexAttribute(AttributeType_Vec2f, AttributeInterpretation_Position)
-	 << StelVertexAttribute(AttributeType_Vec3f, AttributeInterpretation_Color));
-
 StelSkyDrawer::StelSkyDrawer(StelCore* acore, StelRenderer* renderer)
 	: core(acore)
 	, renderer(renderer)

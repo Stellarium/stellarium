@@ -111,7 +111,7 @@ public:
 	template<class V>
 	StelVertexBuffer<V>* createVertexBuffer(const PrimitiveType primitiveType)
 	{
-		return new StelVertexBuffer<V>(createVertexBufferBackend(primitiveType, V::attributes));
+		return new StelVertexBuffer<V>(createVertexBufferBackend(primitiveType, V::attributes()));
 	}
 	
 	//! Draw contents of a vertex buffer.
