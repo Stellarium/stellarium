@@ -57,6 +57,10 @@ public:
 	//! @return Empty string if no script is running, else the 
 	//! ID of the script which is running.
 	QString runningScriptId();
+
+	// Pre-processor functions
+	bool preprocessScript(const QString& input, QString& output, const QString& scriptDir);
+	bool preprocessScript(QFile &input, QString& output, const QString& scriptDir);
 	
 public slots:
 	//! Gets a single line name of the script. 
@@ -147,9 +151,6 @@ private:
 	// Utility functions for preprocessor
 	QMap<QString, QString> mappify(const QStringList& args, bool lowerKey=false);
 	bool strToBool(const QString& str);
-	// Pre-processor functions
-	bool preprocessScript(QString& input, QString& output, const QString& scriptDir);
-	bool preprocessScript(QFile& input, QString& output, const QString& scriptDir);
 
 #ifdef ENABLE_STRATOSCRIPT_COMPAT
 	bool preprocessStratoScript(QFile& input, QString& output, const QString& scriptDir);

@@ -40,10 +40,12 @@ public:
 	void setCheckable(bool c);
 	void setAutoRepeat(bool ar);
 	void setGlobal(bool g);
+	void setScript(const QString& scriptText);
 
 signals:
     
 public slots:
+	void runScript();
 
 private:
 	QAction *action;
@@ -53,6 +55,7 @@ private:
 	bool checkable;
 	bool autoRepeat;
 	bool global;
+	QString script;
 
 	QList<QKeySequence> splitShortcuts(const QString& shortcuts);
 };
@@ -69,6 +72,7 @@ public:
 
 	QAction* getAction(const QString &actionId);
 
+	StelShortcut* getShortcut(const QString& id);
 signals:
 
 public slots:
@@ -76,8 +80,6 @@ public slots:
 private:
 	QString id;
 	QMap<QString, StelShortcut*> shortcuts;
-
-	StelShortcut* getShortcut(const QString& id);
 };
 
 #endif // STELSHORTCUT_HPP

@@ -458,7 +458,7 @@ bool StelScriptMgr::strToBool(const QString& str)
 	return QVariant(str).toBool();
 }
 
-bool StelScriptMgr::preprocessScript(QString &input, QString &output, const QString &scriptDir)
+bool StelScriptMgr::preprocessScript(const QString &input, QString &output, const QString &scriptDir)
 {
 	QStringList lines = input.split("\n", QString::SkipEmptyParts);
 	QRegExp includeRe("^include\\s*\\(\\s*\"([^\"]+)\"\\s*\\)\\s*;\\s*(//.*)?$");
@@ -510,7 +510,7 @@ bool StelScriptMgr::preprocessScript(QString &input, QString &output, const QStr
 }
 
 
-bool StelScriptMgr::preprocessScript(QFile& input, QString& output, const QString& scriptDir)
+bool StelScriptMgr::preprocessScript(QFile &input, QString& output, const QString& scriptDir)
 {
 	QString s(input.readAll());
 	return preprocessScript(s, output, scriptDir);

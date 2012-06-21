@@ -79,6 +79,32 @@ QAction *StelShortcutMgr::getGuiAction(const QString &groupId, const QString &ac
 	return NULL;
 }
 
+QAction *StelShortcutMgr::setScriptToAction(const QString &actionId, const QString &script)
+{
+	// firstly search in "Scripts" group, all the scripts actions should be there
+	if (shGroups.contains("Scripts"))
+	{
+		StelShortcut* sc = shGroups["Scripts"]->getShortcut(actionId);
+		if (sc)
+		{
+			sc->setScript(script);
+			return sc->getAction();
+		}
+	}
+	// if required action not found in "Scripts" group, iterate over map of all groups, searching
+	for (QMap<QString, StelShortcutGroup*>::iterator it = shGroups.begin(); it != shGroups.end(); ++it)
+	{
+		StelShortcut* sc = it.value()->getShortcut(actionId);
+		if (sc)
+		{
+			sc->setScript(script);
+			return sc->getAction();
+		}
+	}
+	qWarning() << "Attempt to set script to non-existing action " << actionId;
+	return NULL;
+}
+
 bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 {
 	QFile jsonFile(filePath);
@@ -90,22 +116,24 @@ bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 	{
 		QMap<QString, QVariant> groupMap = group.value().toMap();
 		QString groupId = group.key();
-		QString groupPrefix = (groupMap.contains("prefix") ? groupMap["prefix"].toString() + "," : "");
+		QString groupPrefix = (groupMap.contains("prefix") ? (groupMap["prefix"].toString() + ",") : "");
 		QMap<QString, QVariant> actions = group.value().toMap()["actions"].toMap();
 		for (QMap<QString, QVariant>::iterator action = actions.begin(); action != actions.end(); ++action)
 		{
 			QString actionId = action.key();
 			QMap<QString, QVariant> actionMap = action.value().toMap();
 			QString text = actionMap["text"].toString();
-			QString shortcuts = groupPrefix + actionMap["shortcuts"].toString();
+			QString shortcuts = (groupPrefix + actionMap["shortcuts"].toString());
 			bool checkable = actionMap["checkable"].toBool();
 			bool autorepeat = actionMap["autorepeat"].toBool();
 			bool global = actionMap["global"].toBool();
+			// init shortcut
+			addGuiAction(actionId, text, shortcuts, groupId, checkable, autorepeat, global);
+			//set script if it exist
 			if (actionMap.contains("script"))
 			{
-				qDebug() << "SCRIPT FOUND! \"a\" " << actionMap["script"].toString();
+				setScriptToAction(actionId, actionMap["script"].toString());
 			}
-			addGuiAction(actionId, text, shortcuts, groupId, checkable, autorepeat, global);
 		}
 	}
 	return true;
