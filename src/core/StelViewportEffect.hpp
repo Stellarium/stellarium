@@ -65,7 +65,8 @@ private:
 		Vec2f position;
 		Vec2f texCoord;
 		Vec4f color;
-		static const QVector<StelVertexAttribute> attributes;
+
+		VERTEX_ATTRIBUTES(Vec2f Position, Vec2f TexCoord, Vec4f Color);
 	};
 	const int screenWidth;
 	const int screenHeight;

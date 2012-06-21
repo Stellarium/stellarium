@@ -30,6 +30,7 @@
 
 #include <QObject>
 
+
 class StelToneReproducer;
 class StelCore;
 
@@ -296,9 +297,9 @@ private:
 	{
 		Vec2f position;
 		Vec3f color;
-		ColoredVertex(Vec2f position, Vec3f color)
-			:position(position), color(color){}
-		static const QVector<StelVertexAttribute> attributes;
+		ColoredVertex(Vec2f position, Vec3f color):position(position), color(color){}
+
+		VERTEX_ATTRIBUTES(Vec2f Position, Vec3f Color);
 	};
 
 	//! A simple 2D vertex with position, color and texture coordinate.
@@ -309,7 +310,8 @@ private:
 		Vec2f texCoord;
 		ColoredTexturedVertex(Vec2f position, Vec3f color, Vec2f texCoord)
 			:position(position), color(color), texCoord(texCoord){}
-		static const QVector<StelVertexAttribute> attributes;
+
+		VERTEX_ATTRIBUTES(Vec2f Position, Vec3f Color, Vec2f TexCoord);
 	};
 
 	//! When stars are drawn as points, these are stored in this buffer.

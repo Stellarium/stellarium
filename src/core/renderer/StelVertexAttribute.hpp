@@ -1,6 +1,11 @@
 #ifndef _STELVERTEXATTRIBUTE_HPP_
 #define _STELVERTEXATTRIBUTE_HPP_
 
+#include <QDebug>
+#include <QString>
+#include <QStringList>
+#include <QVector>
+
 //! Vertex attribute types. 
 //!
 //! Used to specify data type of a vertex attribute in a vertex struct used with VertexBuffer.
@@ -55,15 +60,142 @@ struct StelVertexAttribute
 	//! Default ctor so vectors can reallocate.
 	StelVertexAttribute(){}
 	
-	//! Construct a StelVertexAttribute.
+	//! Construct a StelVertexAttribute from a string.
 	//!
-	//! @param type Data type of the attribute.
-	//! @param interpretation How the Renderer should interpret this attribute.
-	StelVertexAttribute(const AttributeType type, const AttributeInterpretation interpretation)
-		:type(type)
-		,interpretation(interpretation)
+	//! The string must be in format "<Type> <Interpretation>" where <Type> matches
+	//! a value of AttributeType enum without the "AttributeType_" prefix, and 
+	//! <Interpretation> matches a value of AttributeInterpretation enum without 
+	//! the "AttributeInterpretation_" prefix.
+	StelVertexAttribute(const QString& attributeString)
 	{
+		const QString typeStr = 
+			attributeString.section(' ', 0, 0, QString::SectionSkipEmpty);
+		const QString interpretationStr = 
+			attributeString.section(' ', 1, 1, QString::SectionSkipEmpty);
+
+		if(typeStr == "Vec2f")      {type = AttributeType_Vec2f;}
+		else if(typeStr == "Vec3f") {type = AttributeType_Vec3f;}
+		else if(typeStr == "Vec4f") {type = AttributeType_Vec4f;}
+		else 
+		{
+			qDebug() << "Unknown vertex attribute type: \"" << typeStr 
+			         << "\" in attribute \"" << attributeString << "\"";
+			Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown vertex attribute type");
+		}
+
+		if(interpretationStr == "Position")      
+		{
+			interpretation = AttributeInterpretation_Position;
+		}
+		else if(interpretationStr == "Color") 
+		{
+			interpretation = AttributeInterpretation_Color;
+		}
+		else if(interpretationStr == "Normal") 
+		{
+			interpretation = AttributeInterpretation_Normal;
+		}
+		else if(interpretationStr == "TexCoord") 
+		{
+			interpretation = AttributeInterpretation_TexCoord;
+		}
+		else 
+		{
+			qDebug() << "Unknown vertex attribute interpretation: \"" << interpretationStr 
+			         << "\" in attribute \"" << attributeString << "\"";
+			Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown vertex attribute interpretation");
+		}
+	}
+
+	//! Parse a comma separated string of vertex attributes to a vector of StelVertexAttribute.
+	static QVector<StelVertexAttribute> parseAttributes(const char* const attribsCString)
+	{
+		QString attributes(attribsCString);
+		QVector<StelVertexAttribute> result;
+		const QStringList parts = attributes.split(",");
+		for(int part = 0; part < parts.size(); ++part)
+		{
+			result << StelVertexAttribute(parts.at(part));
+		}
+
+		validateAttributes(result);
+		return result;
+	}
+
+private:
+	//! Assert that vertex attributes form a usable vertex format.
+	//!
+	//! For instance, assert that there is no more than 1 attribute with
+	//! a particular interpretation, that we have a position attribute, and so on.
+	static void validateAttributes(const QVector<StelVertexAttribute>& attributes)
+	{
+		bool vertex, texCoord, normal, color;
+		vertex = texCoord = normal = color = false;
+		
+		// Ensure that every kind of vertex attribute is present at most once.
+		foreach(const StelVertexAttribute& attribute, attributes)
+		{
+			switch(attribute.interpretation)
+			{
+				case AttributeInterpretation_Position:
+					Q_ASSERT_X(!vertex, Q_FUNC_INFO,
+					           "Vertex type has more than one vertex position attribute");
+					vertex = true;
+					break;
+				case AttributeInterpretation_TexCoord:
+					Q_ASSERT_X(attributeDimensions(attribute.type) == 2, Q_FUNC_INFO,
+					           "Only 2D texture coordinates are supported at the moment");
+					Q_ASSERT_X(!texCoord, 
+					           Q_FUNC_INFO,
+					           "Vertex type has more than one texture coordinate attribute");
+					texCoord = true;
+					break;
+				case AttributeInterpretation_Normal:
+					Q_ASSERT_X(attributeDimensions(attribute.type) == 3, Q_FUNC_INFO,
+					           "Only 3D vertex normals are supported");
+					Q_ASSERT_X(!normal, Q_FUNC_INFO,
+					           "Vertex type has more than one normal attribute");
+					normal = true;
+					break;
+				case AttributeInterpretation_Color:
+					Q_ASSERT_X(!color, Q_FUNC_INFO,
+					           "Vertex type has more than one color attribute");
+					color = true;
+					break;
+				default:
+					Q_ASSERT_X(false, Q_FUNC_INFO,
+					           "Unknown vertex attribute interpretation");
+			}
+		}
+
+		Q_ASSERT_X(vertex, Q_FUNC_INFO, 
+		           "Vertex formats without a position attribute are not supported");
 	}
 };
+
+//! Generate vertex attribute information for a vertex type.
+//!
+//! NOTE: This depends on variadic macros - a C99 feature.
+//! Also supported in MSVC (which is not C99 compliant) and C++11.
+//!
+//! This macro specifies data type and interpretation of each attribute.
+//! Data type can be Vec2f, Vec3f or Vec4f.
+//! Interpretation can be Position, TexCoord, Normal or Color.
+//! Two attributes must never have the same interpretation
+//! (this is asserted by the vertex buffer backend at run time).
+//! 
+//! Note:
+//! Attribute interpretations are processed at runtime, so if there 
+//! is an error here, Stellarium will crash with an assertion failure and an 
+//! error message.
+//! 
+//! (C++11 TODO) This might be changed with constexpr
+#define VERTEX_ATTRIBUTES(...)\
+	static const QVector<StelVertexAttribute>& attributes()\
+	{\
+		static QVector<StelVertexAttribute> attribs =\
+			StelVertexAttribute::parseAttributes(#__VA_ARGS__);\
+		return attribs;\
+	}
 
 #endif // _STELVERTEXATTRIBUTE_HPP_
