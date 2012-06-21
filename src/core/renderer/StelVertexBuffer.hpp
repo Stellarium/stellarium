@@ -28,10 +28,10 @@ enum PrimitiveType
 //! 
 //! StelVertexBuffer supports basic operations such as adding, reading and modifying vertices.
 //! 
-//! It can also be locked to allow uploading the data to the GPU, or unlocked
-//! to allow manipulation of the data.
+//! It can be locked to allow uploading the data to the GPU, or unlocked
+//! to manipulate the data.
 //!
-//! In order to be drawn (by a Renderer), the vertex buffer has to be locked. 
+//! To be drawn (by a StelRenderer), the vertex buffer must be locked. 
 //! To access/modify vertices, it must be unlocked.
 //! A newly created vertex buffer is always unlocked.
 //!
@@ -50,26 +50,20 @@ enum PrimitiveType
 //! 	Vec3f position;
 //! 	Vec2f texCoord;
 //! 	
-//! 	// Specifies data type and interpretation of each attribute.
-//! 	// Data type can be AttributeType_Vec2f, AttributeType_Vec3f 
-//! 	// or AttributeType_Vec4f.
-//! 	// Interpretation can be AttributeInterpretation_Position, 
-//! 	// AttributeInterpretation_TexCoord, AttributeInterpretation_Normal 
-//! 	// or AttributeInterpretation_Color.
+//! 	// This macro specifies metadata (data type and interpretation)
+//! 	// of each attribute.  Data type can be Vec2f, Vec3f or Vec4f.
+//! 	// Interpretation can be Position, TexCoord, Normal or Color.
 //! 	// Two attributes must never have the same interpretation
 //! 	// (this is asserted by the vertex buffer backend at run time).
+//!   //
+//! 	// Note:
+//! 	// Attribute interpretations are processed at runtime, so if there 
+//! 	// is an error here, Stellarium will crash with an assertion failure and an 
+//! 	// error message.
 //! 	//
-//! 	// The vector contents are defined below the class 
-//! 	// (C++ doesn't allow non-integer static const data members).
-//! 	static const QVector<StelVertexAttribute> attributes;
+//! 	// (C++11 TODO) This might be changed with constexpr
+//! 	VERTEX_ATTRIBUTES(Vec3f Position, Vec2f TexCoord);
 //! };
-//!
-//! //This might need to be defined in a .cpp file to prevent multiple definition errors
-//! const QVector<StelVertexAttribute> MyVertex::attributes = 
-//! 	(QVector<StelVertexAttribute>() << StelVertexAttribute(AttributeType_Vec3f,
-//! 	                                                       AttributeInterpretation_Position)
-//! 	                                << StelVertexAttribute(AttributeType_Vec2f, 
-//! 	                                                       AttributeInterpretation_TexCoord));
 //! @endcode
 //!
 //! Note that there are some requirements for a vertex type 

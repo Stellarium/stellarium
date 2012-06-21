@@ -29,15 +29,6 @@
 #include <QSettings>
 #include <QFile>
 
-///Vertex attribute specification of DistorterFisheyeToSphericMirror's vertex type.
-const QVector<StelVertexAttribute> StelViewportDistorterFisheyeToSphericMirror
-                                   ::Vertex::attributes = 
-	(QVector<StelVertexAttribute>() << StelVertexAttribute(AttributeType_Vec2f, 
-	                                                       AttributeInterpretation_Position)
-	                                << StelVertexAttribute(AttributeType_Vec2f, 
-	                                                       AttributeInterpretation_TexCoord)
-	                                << StelVertexAttribute(AttributeType_Vec4f, 
-	                                                       AttributeInterpretation_Color));
 
 StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSphericMirror
 	(int screenWidth,int screenHeight, StelRenderer* renderer) 

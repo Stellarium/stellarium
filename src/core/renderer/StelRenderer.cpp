@@ -8,11 +8,9 @@ struct Vertex
 {
 	Vec2f position;
 	Vertex(Vec2f position):position(position){}
-	static const QVector<StelVertexAttribute> attributes;
+
+	VERTEX_ATTRIBUTES(Vec2f Position);
 };
-const QVector<StelVertexAttribute> Vertex::attributes = 
-	(QVector<StelVertexAttribute>() 
-	 << StelVertexAttribute(AttributeType_Vec2f, AttributeInterpretation_Position));
 
 //! A simple 2D vertex with a position and texcoord, used for textured rectangles.
 struct TexturedVertex
@@ -20,12 +18,9 @@ struct TexturedVertex
 	Vec2f position;
 	Vec2f texCoord;
 	TexturedVertex(Vec2f position, Vec2f texCoord):position(position),texCoord(texCoord){}
-	static const QVector<StelVertexAttribute> attributes;
+
+	VERTEX_ATTRIBUTES(Vec2f Position, Vec2f TexCoord);
 };
-const QVector<StelVertexAttribute> TexturedVertex::attributes = 
-	(QVector<StelVertexAttribute>() 
-	 << StelVertexAttribute(AttributeType_Vec2f, AttributeInterpretation_Position)
-	 << StelVertexAttribute(AttributeType_Vec2f, AttributeInterpretation_TexCoord));
 
 void StelRenderer::drawRect
 	(const float x, const float y, const float width, const float height, 
