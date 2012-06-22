@@ -50,10 +50,9 @@ public:
 	//! @param actionName qt object name for this action
 	//! @return a pointer on the QAction object or NULL if don't exist
 	QAction* getGuiAction(const QString& actionName);
-
 	QAction* getGuiAction(const QString& groupId, const QString& actionId);
 
-	QAction* setScriptToAction(const QString& actionId, const QString& script);
+	QAction* addScriptToAction(const QString& actionId, const QString& script);
 
 signals:
 	
