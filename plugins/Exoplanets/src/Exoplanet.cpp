@@ -128,7 +128,7 @@ float Exoplanet::getSelectPriority(const StelCore* core) const
 	}
 	else
 	{
-		return getVMagnitude(core, false);
+		return getVMagnitude(core, false) - 1.f;
 	}
 }
 
