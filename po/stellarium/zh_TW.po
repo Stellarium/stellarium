@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-17 18:37+0700\n"
-"PO-Revision-Date: 2011-12-18 14:50+0000\n"
-"Last-Translator: henrysky <Unknown>\n"
+"PO-Revision-Date: 2012-06-21 12:44+0000\n"
+"Last-Translator: Chao-Kuei Hung <ckhung0@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-18 05:25+0000\n"
-"X-Generator: Launchpad (build 15419)\n"
+"X-Launchpad-Export-Date: 2012-06-22 04:34+0000\n"
+"X-Generator: Launchpad (build 15461)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -35,7 +35,7 @@ msgstr "地平圈"
 
 #: src/core/modules/GridLinesMgr.cpp:558
 msgid "Galactic Plane"
-msgstr ""
+msgstr "銀河平面"
 
 #: src/core/modules/LandscapeMgr.cpp:495
 msgid "Author: "
@@ -65,7 +65,7 @@ msgstr "類型: <b>%1</b>"
 #: plugins/Exoplanets/src/Exoplanet.cpp:143
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "星等: <b>%1</b> (消光至: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:121
@@ -130,7 +130,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:151
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "距離: %1AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:158
 #, no-c-format, qt-format
@@ -140,7 +140,7 @@ msgstr "距離: %1AU (天文單位)"
 #: src/core/modules/Planet.cpp:169
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "視直徑r: %1, 含環: %2"
 
 #: src/core/modules/Planet.cpp:175
 #, qt-format
@@ -175,7 +175,7 @@ msgstr "視星等: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "視星等: <b>%1</b> (消光後)"
 
 #: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:103
 #, qt-format
@@ -207,7 +207,7 @@ msgstr "視差: %1\""
 
 #: src/core/StelObserver.cpp:265
 msgid "SpaceShip"
-msgstr ""
+msgstr "太空船"
 
 #: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
@@ -329,27 +329,27 @@ msgstr "方位角/高度角: %1/%2"
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
-msgstr ""
+msgstr "網路錯誤"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
-msgstr ""
+msgstr "無法辨識「位置」字串"
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
-msgstr ""
+msgstr "正在查詢"
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "錯誤"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr ""
+msgstr "找不到"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
-msgstr ""
+msgstr "已找到"
 
 #: src/gui/ConfigurationDialog.cpp:346
 msgid "Select screenshot directory"
@@ -642,7 +642,7 @@ msgstr ""
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
-msgstr ""
+msgstr "有好幾位開發者曾經做出重大的貢獻; 雖然他們現在已較少投入。 他們的貢獻對這個計畫產生了很大的助力:"
 
 #: src/gui/HelpDialog.cpp:314
 #, qt-format
@@ -704,7 +704,7 @@ msgstr "銀河座標"
 
 #: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
-msgstr ""
+msgstr "銀河平面"
 
 #: src/gui/StelGui.cpp:114
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
@@ -724,7 +724,7 @@ msgstr "經線"
 #: src/gui/StelGui.cpp:117
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Horizon line"
-msgstr ""
+msgstr "地平線"
 
 #: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
@@ -759,7 +759,7 @@ msgstr "恆星"
 #: src/gui/StelGui.cpp:127
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Planet labels"
-msgstr ""
+msgstr "行星標籤"
 
 #: src/gui/StelGui.cpp:128
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:301
