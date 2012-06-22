@@ -587,8 +587,9 @@
 		{
 			"prefix": "Ctrl+U",
 			"actions":
+			{
+				"scriptShowMoon":
 				{
-					"scriptShowMoon": {
 					"text" : "Show and zoom Moon",
 					"shortcuts" : "1",
 					"script" : "core.wait(1);
@@ -603,7 +604,19 @@
 					            core.wait(2);
 					            StelMovementMgr.autoZoomIn(2);
 					            core.wait(2);
-					            core.setTimeRate(250);"
+					            core.setTimeRate(250);",
+					"checkable" : "0",
+					"autorepeat" : "0",
+					"global" : "0"
+				},
+				"scriptLandscapes":
+				{
+					"text" : "Run landscapes script from file",
+					"shortcuts" : "2",
+					"scriptFile" : "scripts/landscapes.ssc",
+					"checkable" : "0",
+					"autorepeat" : "0",
+					"global" : "0"
 				}
 			}
 		}
