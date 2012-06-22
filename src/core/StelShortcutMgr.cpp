@@ -28,6 +28,7 @@
 #include <QDateTime>
 #include <QAction>
 #include <QDebug>
+#include <QFileInfo>
 
 StelShortcutMgr::StelShortcutMgr()
 {
@@ -79,7 +80,7 @@ QAction *StelShortcutMgr::getGuiAction(const QString &groupId, const QString &ac
 	return NULL;
 }
 
-QAction *StelShortcutMgr::setScriptToAction(const QString &actionId, const QString &script)
+QAction *StelShortcutMgr::addScriptToAction(const QString &actionId, const QString &script)
 {
 	// firstly search in "Scripts" group, all the scripts actions should be there
 	if (shGroups.contains("Scripts"))
@@ -132,10 +133,27 @@ bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 			//set script if it exist
 			if (actionMap.contains("script"))
 			{
-				setScriptToAction(actionId, actionMap["script"].toString());
+				addScriptToAction(actionId, actionMap["script"].toString());
+			}
+			if (actionMap.contains("scriptFile"))
+			{
+				QString scriptFilePath = StelFileMgr::findFile(actionMap["scriptFile"].toString());
+				if (!QFileInfo(scriptFilePath).exists())
+				{
+					qWarning() << "Couldn't find file " << actionMap["scriptFile"] <<
+												"for shortcut " << actionId;
+				}
+				else
+				{
+					QFile scriptFile(scriptFilePath);
+					scriptFile.open(QIODevice::ReadOnly);
+					addScriptToAction(actionId, QString(scriptFile.readAll()));
+					scriptFile.close();
+				}
 			}
 		}
 	}
+	jsonFile.close();
 	return true;
 }
 
