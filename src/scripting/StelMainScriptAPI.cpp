@@ -344,8 +344,8 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 
 	Vec3f corners[4];
 		corners[0] = matPrecomp * Vec3f(0.f,-texSize,-texSize);
-		corners[1] = matPrecomp * Vec3f(0.f, texSize,-texSize);
-		corners[2] = matPrecomp * Vec3f(0.f,-texSize, texSize);
+		corners[1] = matPrecomp * Vec3f(0.f,-texSize, texSize);
+		corners[2] = matPrecomp * Vec3f(0.f, texSize,-texSize);
 		corners[3] = matPrecomp * Vec3f(0.f, texSize, texSize);
 
 	// convert back to ra/dec (radians)
