@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-17 18:37+0700\n"
-"PO-Revision-Date: 2012-06-13 20:30+0000\n"
+"POT-Creation-Date: 2012-06-23 16:53+0700\n"
+"PO-Revision-Date: 2012-06-23 20:12+0000\n"
 "Last-Translator: Zbyněk Schwarz <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-18 05:17+0000\n"
-"X-Generator: Launchpad (build 15419)\n"
+"X-Launchpad-Export-Date: 2012-06-24 05:17+0000\n"
+"X-Generator: Launchpad (build 15461)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -62,14 +62,14 @@ msgstr "Typ: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:109
-#: plugins/Exoplanets/src/Exoplanet.cpp:143
+#: plugins/Exoplanets/src/Exoplanet.cpp:151
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnituda: <b>%1</b> (Absorbováno do: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:121
-#: plugins/Exoplanets/src/Exoplanet.cpp:148
+#: plugins/Exoplanets/src/Exoplanet.cpp:156
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnituda: <b>%1</b>"
@@ -188,14 +188,14 @@ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "Magnituda: <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
-#: plugins/Exoplanets/src/Exoplanet.cpp:157
+#: plugins/Exoplanets/src/Exoplanet.cpp:166
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Spektrální třída: %1"
 
 #: src/core/modules/StarWrapper.cpp:134
 #: plugins/Supernovae/src/Supernova.cpp:117
-#: plugins/Exoplanets/src/Exoplanet.cpp:162
+#: plugins/Exoplanets/src/Exoplanet.cpp:171
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Vzdálenost: %1 ly"
@@ -557,7 +557,7 @@ msgstr "Nastavit běžnou rychlost běhu skriptu"
 #: plugins/Satellites/src/Satellites.cpp:128
 #: plugins/Supernovae/src/Supernovae.cpp:141
 #: plugins/Quasars/src/Quasars.cpp:144 plugins/Pulsars/src/Pulsars.cpp:144
-#: plugins/Exoplanets/src/Exoplanets.cpp:149
+#: plugins/Exoplanets/src/Exoplanets.cpp:157
 msgid "Plugin Key Bindings"
 msgstr "Klávesové zkratky pluginu"
 
@@ -1138,8 +1138,8 @@ msgstr "Harvardova univerzita (USA)"
 msgid "This system does not support OpenGL."
 msgstr "Tento systém nemá podporu OpenGL."
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:173
-#: plugins/Exoplanets/src/Exoplanet.cpp:177
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:182
+#: plugins/Exoplanets/src/Exoplanet.cpp:186
 msgid "Sun"
 msgstr "Slunce"
 
@@ -4095,7 +4095,7 @@ msgstr "Svislé převrácení"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:245
 msgid "About plugin"
-msgstr ""
+msgstr "O zás. modulu"
 
 #: plugins/Satellites/src/Satellites.cpp:65
 #: plugins/Satellites/src/ui_satellitesDialog.h:705
@@ -5814,6 +5814,12 @@ msgid ""
 "1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
 "(13 September)."
 msgstr ""
+"Zásuvný modul zobrazující některé historické supernovy se zdánlivou jasností "
+"větší než 10: SN 185A (7. prosince), SN 386A (24. dubna), SN 1006A (29. "
+"dubna), SN 1054A (3. července), SN 1181A (4. srpna), SN 1572A (5. "
+"listopadu), SN 1604A (8. října), SN 1680A (15. srpna), SN 1885A (17. srpna), "
+"SN 1895B (5. července), SN 1937C (21. srpna), SN 1972E (8. května), SN 1987A "
+"(24. února) a SN 2011FE (13. září)."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
 msgid "Light curves"
@@ -5827,16 +5833,20 @@ msgid ""
 "can seen %1here%2 (right scale in days) and this model is used for this "
 "plugin."
 msgstr ""
+"Tento modul zavádí jednoduchý model světelných křivek pro různé supernovy. "
+"Typické zobrazení křivek pro supernovy typu I a II můžete vidět %1zde%2 "
+"(měřítko vpravo ve dnech) a tento model je v modelu použit."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 msgid "Acknowledgments"
-msgstr ""
+msgstr "Poděkování"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr ""
+"Děkujeme následujícím lidem za jejich příspěvky a užitečné komentáře:"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Sergei Blinnikov"
@@ -5859,6 +5869,8 @@ msgid ""
 "If you want more information about this plugin, its history, and format of "
 "catalog, you can %1get additional info here%2."
 msgstr ""
+"Pokud se chcete o tomto modulu dozvědět více informací, jeho historii a "
+"formát katalogu, můžete %1tak učinit zde%2."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
@@ -6176,75 +6188,85 @@ msgstr "Režim zobrazení pulsarů"
 msgid "Enable display of distribution for pulsars"
 msgstr "Povolit zobrazení šíření pulsarů"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:70
+#: plugins/Exoplanets/src/Exoplanets.cpp:71
 msgid "Exoplanets"
-msgstr ""
+msgstr "Exoplanety"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:73
+#: plugins/Exoplanets/src/Exoplanets.cpp:74
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
+"Tento modul zobrazí pozici hvězd s exoplanetami. Data exoplanet jsou "
+"odvozena z 'Extrasolar Planets Encyclopaedia' na exoplanet.eu"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:151
+#: plugins/Exoplanets/src/Exoplanets.cpp:164
 msgid "Exoplanets configuration window"
-msgstr ""
+msgstr "Okno nastavení exoplanet"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:173
-#: plugins/Exoplanets/src/Exoplanet.cpp:189
+#: plugins/Exoplanets/src/Exoplanets.cpp:165
+msgid "Show exoplanets"
+msgstr "Zobrazit exoplanety"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:178
+msgid "Metallicity"
+msgstr "Metalicita"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:182
+#: plugins/Exoplanets/src/Exoplanet.cpp:198
 msgid "Mass"
-msgstr ""
+msgstr "Hmotnost"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:177
-#: plugins/Exoplanets/src/Exoplanet.cpp:190
+#: plugins/Exoplanets/src/Exoplanet.cpp:186
+#: plugins/Exoplanets/src/Exoplanet.cpp:199
 msgid "Radius"
-msgstr ""
+msgstr "Poloměr"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:181
+#: plugins/Exoplanets/src/Exoplanet.cpp:190
 #, qt-format
 msgid "Effective temperature: %1 K"
-msgstr ""
+msgstr "Efektivní teplota: %1 K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:187
+#: plugins/Exoplanets/src/Exoplanet.cpp:196
 msgid "Exoplanet"
-msgstr ""
+msgstr "Exoplaneta"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:188
+#: plugins/Exoplanets/src/Exoplanet.cpp:197
 msgid "Period"
-msgstr ""
+msgstr "Doba oběhu"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:188
+#: plugins/Exoplanets/src/Exoplanet.cpp:197
 msgid "days"
-msgstr ""
+msgstr "dní"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:189
-#: plugins/Exoplanets/src/Exoplanet.cpp:190
+#: plugins/Exoplanets/src/Exoplanet.cpp:198
+#: plugins/Exoplanets/src/Exoplanet.cpp:199
 msgid "Jup"
-msgstr ""
+msgstr "Jup"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:191
+#: plugins/Exoplanets/src/Exoplanet.cpp:200
 msgid "Semi-Major Axis"
-msgstr ""
+msgstr "Hlavní poloosa"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:191
+#: plugins/Exoplanets/src/Exoplanet.cpp:200
 msgid "AU"
 msgstr "AU"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:192
+#: plugins/Exoplanets/src/Exoplanet.cpp:201
 msgid "Eccentricity"
-msgstr ""
+msgstr "Výstřednost"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:193
+#: plugins/Exoplanets/src/Exoplanet.cpp:202
 msgid "Inclination"
-msgstr ""
+msgstr "Sklon"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:194
+#: plugins/Exoplanets/src/Exoplanet.cpp:203
 msgid "Angle Distance"
-msgstr ""
+msgstr "Úhlová vzdálenost"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:106
 msgid "Exoplanets Plug-in"
-msgstr ""
+msgstr "Zásuvný modul exoplanet"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
 #, qt-format
@@ -6252,22 +6274,24 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
+"Tento modul zobrazuje pozici hvězd s exoplanetami. Data exoplanet jsou "
+"odvozena z \"%1The Extrasolar Planets Encyclopaedia%2\""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Exoplanets is updated"
-msgstr ""
+msgstr "Exoplanety byly aktualizovány"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
 msgid "Exoplanets Configuration"
-msgstr ""
+msgstr "Nastavení exoplanet"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:234
 msgid "Exoplanets Plug-in Configuration"
-msgstr ""
+msgstr "Nastavení zás. modulu exoplanet"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
 msgid "Update exoplanets data from Internet"
-msgstr ""
+msgstr "Aktualizovat data exoplanet z internetu"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Ekvatoriální mřížka"
