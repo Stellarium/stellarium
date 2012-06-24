@@ -276,10 +276,10 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 		// world coordinates
 		cl.clear();
 		ol.clear();
-		c.clear(); c.append(dec0); c.append(ra0); cl.append(QVariant(c));
-		c.clear(); c.append(dec1); c.append(ra1); cl.append(QVariant(c));
-		c.clear(); c.append(dec2); c.append(ra2); cl.append(QVariant(c));
-		c.clear(); c.append(dec3); c.append(ra3); cl.append(QVariant(c));
+		c.clear(); c.append(ra0); c.append(dec0); cl.append(QVariant(c));
+		c.clear(); c.append(ra1); c.append(dec1); cl.append(QVariant(c));
+		c.clear(); c.append(ra2); c.append(dec2); cl.append(QVariant(c));
+		c.clear(); c.append(ra3); c.append(dec3); cl.append(QVariant(c)); 
 		ol.append(QVariant(cl));
 		vm["worldCoords"] = ol;
 
