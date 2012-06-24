@@ -19,25 +19,25 @@ core.wait(2);
 
 status("loading images...");
 core.loadSkyImage("image1", "../textures/earthmap.png", 
-                  41.33333, 0,    // ra, dec centre
+                  0, 41.33333,    // ra, dec centre
                   60.0, 0,        // angSize, rotation
                   2.5, 14,        // minRes, maxBright
                   false);         // visible on load?
 
 core.loadSkyImage("image2", "../textures/earthmap.png", 
-                  41.33333, 0,    // ra, dec centre
+                  0, 41.33333,    // ra, dec centre
                   40.0, 90,       // angSize, rotation
                   2.5, 14,        // minRes, maxBright
                   false);         // visible on load?
 
 core.loadSkyImage("image3", "../textures/earthmap.png", 
-                  41.33333, 0,    // ra, dec centre
+                  0, 41.33333,    // ra, dec centre
                   20.0, 180,      // angSize, rotation
                   2.5, 14,        // minRes, maxBright
                   false);         // visible on load?
 
 core.loadSkyImage("image4", "../textures/earthmap.png", 
-                  41.33333, 0,    // ra, dec centre
+                  0, 41.33333,    // ra, dec centre
                   10.0, 270,      // angSize, rotation
                   2.5, 14,        // minRes, maxBright
                   false);         // visible on load?

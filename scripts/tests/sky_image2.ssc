@@ -16,11 +16,11 @@ StelMovementMgr.zoomTo(2,1);
 core.wait(2);
 
 status("Loading images...");
-core.loadSkyImage("image1", "../textures/earthmap.png", 41, 11.5, 41.17, 11.5, 41.17, 11.75, 41, 11.75);
+core.loadSkyImage("image1", "../textures/earthmap.png", 11.5, 41, 11.5, 41.17, 11.75, 41.17, 11.75, 41);
 core.wait(1);
-core.loadSkyImage("image2", "../textures/earthmap.png", 41.2, 11.5, 41.37, 11.5, 41.37, 11.75, 41.2, 11.75);
+core.loadSkyImage("image2", "../textures/earthmap.png", 11.5, 41.2, 11.5, 41.37, 11.75, 41.37, 11.75, 41.2);
 core.wait(1);
-core.loadSkyImage("image3", "../textures/earthmap.png", 41.4, 11.5, 41.57, 11.5, 41.57, 11.75, 41.4, 11.75);
+core.loadSkyImage("image3", "../textures/earthmap.png", 11.5, 41.4, 11.5, 41.57, 11.75, 41.57, 11.75, 41.4);
 core.wait(1);
 
 status("playing with the on of buttons...");

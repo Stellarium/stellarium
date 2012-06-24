@@ -17,10 +17,10 @@ core.wait(2);
 
 status("loading image...");
 core.loadSkyImage("image", "../textures/earthmap.png", 
-                  41, 11.5,     // ra, dec first corner
-                  41.17, 11.5,  // ra, dec second corner
-                  41.17, 11.75, // ra, dec third corner
-                  41, 11.75,    // ra, dec fourth corner
+                  11.5, 41,   // ra, dec first corner
+                  11.5, 41.17,  // ra, dec second corner
+                  11.75, 41.17, // ra, dec third corner
+                  11.75, 41,    // ra, dec fourth corner
                   2.5, 14,      // minRes, maxBright
                   false);       // visible on load?
 
