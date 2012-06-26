@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-23 16:53+0700\n"
-"PO-Revision-Date: 2012-06-18 06:23+0000\n"
+"PO-Revision-Date: 2012-06-25 13:24+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-24 05:22+0000\n"
-"X-Generator: Launchpad (build 15461)\n"
+"X-Launchpad-Export-Date: 2012-06-26 05:21+0000\n"
+"X-Generator: Launchpad (build 15482)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -3918,6 +3918,13 @@ msgid ""
 "image scaled, a good deal of the screen can be wasted.  Therefor I recommend "
 "that you leave it off, unless you feel you have a need of it."
 msgstr ""
+"Anda boleh pilih untuk skalakan imej yang anda lihat pada skrin. Ia "
+"bertujuan untuk paparkan pada anda perbandingan yang lebih baik daripada "
+"gabungan kanta mata/teleskop. Kanta mata yang sama dalam dua teleskop yang "
+"berlainan akan berbeza dari segi jarak fokus akan menghasilkan dua bulatan "
+"keluar yang berlainan, menukar pandangan seseorang. Tukar-gantinya adalah, "
+"dengan imej yang terskala, sebahagian paparan skrin tidak dapat dilihat. "
+"Jadi saya sarankan anda matikannya, melainkan anda rasa perlukannya."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:427
 msgid ""
@@ -3925,6 +3932,9 @@ msgid ""
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
+"Anda boleh togol rerambung silang di dalam paparan. Idealnya saya mahukan ia "
+"dijajarkan ke Utara. Malangnya, saya tidak dapat membuatnya. Buat masa ini, "
+"ia dijajar ke bahagian atas skrin."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:428
 #, qt-format
@@ -3934,6 +3944,10 @@ msgid ""
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
+"Anda boleh togol pencari Telrad; ia boleh dibuat bila anda matikan paparan "
+"Okular. Fitur ini melukis tiga bulatan sepusat 0.5%1, 2.0%1, dan 4.0%1, ia "
+"membantu and melihat apa yang anda jangka dengan mata kasar melalui pencari "
+"(serupa dengannya) Telrad."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:429
 msgid "If you find any issues, please let me know.  Enjoy!"
@@ -4089,7 +4103,7 @@ msgstr "Kalih menegak"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:245
 msgid "About plugin"
-msgstr ""
+msgstr "Perihal pemalam"
 
 #: plugins/Satellites/src/Satellites.cpp:65
 #: plugins/Satellites/src/ui_satellitesDialog.h:705
@@ -5812,6 +5826,12 @@ msgid ""
 "1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
 "(13 September)."
 msgstr ""
+"Pemalam yang memaparkan beberapa supernova bersejarah yang lebih besar dari "
+"magnitud visual 10: SN 185A (7 Disember), SN 386A (24 April), SN 1006A (29 "
+"April), SN 1054A (3 Julai), SN 1181A (4 Ogos), SN 1572A (5 November), SN "
+"1604A (8 Oktober), SN 1680A (15 Ogos), SN 1885A (17 Ogos), SN 1895B (5 "
+"Julai), SN 1937C (21 Ogos), SN 1972E (8 Mei), SN 1987A (24 Februari) dan SN "
+"2011FE (13 September)."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
 msgid "Light curves"
@@ -5825,16 +5845,21 @@ msgid ""
 "can seen %1here%2 (right scale in days) and this model is used for this "
 "plugin."
 msgstr ""
+"Pemalam ini melaksanakan model ringkas bagi lengkung cerah bagi supernova "
+"yang berbeza. Paparan biasa lengkung cahaya bagi supernova jenis I dan II "
+"boleh dilihat %1disini%2 (skalan kanan di dalam hari) dan model digunakan "
+"untuk pemalam ini."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 msgid "Acknowledgments"
-msgstr ""
+msgstr "Penghargaan"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr ""
+"Terima kasih kepada individu ini atas sumbangan dan ulasan yang membina:"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Sergei Blinnikov"
@@ -5857,6 +5882,8 @@ msgid ""
 "If you want more information about this plugin, its history, and format of "
 "catalog, you can %1get additional info here%2."
 msgstr ""
+"Jika anda mahu maklumat lanjut mengenai pemalam ini, sejarahnya, dan format "
+"katalog, anda boleh %1dapat maklumat tambahan disini%2."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
@@ -5933,6 +5960,9 @@ msgid ""
 "visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
 "Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"Pemalam Quasar menyediakan pengvisualan beberapa quasar yang lebih cerah "
+"dari magnitud visual 16. Katalog quasar dikompil dari  \"Quasars and Active "
+"Galactic Nuclei\" (13th Ed.)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
@@ -6183,6 +6213,8 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
+"Pemalam ini memplot kedudukan bintang bersama exoplanetnya. Data exoplanet "
+"diperoleh dari 'Extrasolar Planets Encyclopaedia' di exoplanet.eu"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:164
 msgid "Exoplanets configuration window"
@@ -6190,11 +6222,11 @@ msgstr "Tetingkap konfigurasi eksoplanet"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:165
 msgid "Show exoplanets"
-msgstr ""
+msgstr "Papar exoplanet"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:178
 msgid "Metallicity"
-msgstr ""
+msgstr "Kelogaman"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:182
 #: plugins/Exoplanets/src/Exoplanet.cpp:198
@@ -6226,11 +6258,11 @@ msgstr "hari"
 #: plugins/Exoplanets/src/Exoplanet.cpp:198
 #: plugins/Exoplanets/src/Exoplanet.cpp:199
 msgid "Jup"
-msgstr ""
+msgstr "Jup"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
 msgid "Semi-Major Axis"
-msgstr ""
+msgstr "Paksi Semi-Major"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
 msgid "AU"
