@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-06-23 16:53+0700\n"
-"PO-Revision-Date: 2012-06-26 03:12+0000\n"
+"PO-Revision-Date: 2012-06-26 11:06+0000\n"
 "Last-Translator: chingis <chingis091@lavabit.com>\n"
 "Language-Team: Kirghiz <ky@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-26 05:21+0000\n"
+"X-Launchpad-Export-Date: 2012-06-27 05:18+0000\n"
 "X-Generator: Launchpad (build 15482)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -211,7 +211,7 @@ msgstr "Аалам кемеси"
 
 #: src/core/StelProjector.cpp:123
 msgid "Maximum FOV: "
-msgstr "Жогорчек кароо бурчу: "
+msgstr "Кароо бурчунун жогорчеги: "
 
 #: src/core/StelProjectorClasses.cpp:25
 msgid "Perspective"
@@ -416,6 +416,8 @@ msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
+"Жүктөө %1...\n"
+"(Сиз бул терезени жаба аласыз.)"
 
 #: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
@@ -434,6 +436,8 @@ msgid ""
 "Error downloading %1:\n"
 "%2"
 msgstr ""
+"Жүктөө катасы %1:\n"
+"%2"
 
 #: src/gui/ConfigurationDialog.cpp:919
 msgid "Verifying file integrity..."
@@ -445,11 +449,13 @@ msgid ""
 "Error downloading %1:\n"
 "File is corrupted."
 msgstr ""
+"Жүктөө катасы %1:\n"
+"Файл бузулган."
 
 #: src/gui/HelpDialog.cpp:52 src/gui/StelGuiItems.cpp:328
 #: src/gui/StelGuiItems.cpp:709
 msgid "Space"
-msgstr ""
+msgstr "Space"
 
 #: src/gui/HelpDialog.cpp:53
 msgid "Arrow keys & left mouse drag"
@@ -457,23 +463,23 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:54
 msgid "Page Up/Down"
-msgstr ""
+msgstr "Page Up/Down"
 
 #: src/gui/HelpDialog.cpp:55
 msgid "CTRL + Up/Down"
-msgstr ""
+msgstr "CTRL + Up/Down"
 
 #: src/gui/HelpDialog.cpp:56
 msgid "Left click"
-msgstr ""
+msgstr "Сол клик"
 
 #: src/gui/HelpDialog.cpp:57
 msgid "Right click"
-msgstr ""
+msgstr "Оң клик"
 
 #: src/gui/HelpDialog.cpp:58
 msgid "CTRL + Left click"
-msgstr ""
+msgstr "CTRL + Сол клик"
 
 #: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:176
 msgid "Movement and Selection"
@@ -801,7 +807,7 @@ msgstr "Асман жана көрүнүш опцияларынын терезе
 
 #: src/gui/StelGui.cpp:141
 msgid "Date/time window"
-msgstr "Дата/убак терезеси"
+msgstr "Дата/убакыт терезеси"
 
 #: src/gui/StelGui.cpp:142
 msgid "Location window"
@@ -1542,7 +1548,7 @@ msgstr "Океан"
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:172
 msgid "Garching"
-msgstr "Гархинг"
+msgstr "Гархиң"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
