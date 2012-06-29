@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-23 16:53+0700\n"
-"PO-Revision-Date: 2012-06-17 02:04+0000\n"
+"PO-Revision-Date: 2012-06-28 23:59+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-24 05:22+0000\n"
-"X-Generator: Launchpad (build 15461)\n"
+"X-Launchpad-Export-Date: 2012-06-29 04:37+0000\n"
+"X-Generator: Launchpad (build 15505)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -5821,10 +5821,12 @@ msgid ""
 "A plugin that shows some historical supernovae brighter than 10 visual "
 "magnitude."
 msgstr ""
+"Wtyczka wyświetlająca niektóre historyczne supernowe jaśniejsze niż 10 "
+"obserwowanej wielkości gwiazdowej."
 
 #: plugins/Supernovae/src/Supernovae.cpp:143
 msgid "Historical Supernovae configuration window"
-msgstr ""
+msgstr "Okno konfiguracji historycznych supernowych"
 
 #: plugins/Supernovae/src/Supernova.cpp:99
 msgid "supernova"
@@ -5837,7 +5839,7 @@ msgstr "Typ supernowej: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
 msgid "Historical Supernovae Plug-in"
-msgstr ""
+msgstr "Wtyczka Historyczne supernowe"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid ""
@@ -5864,13 +5866,14 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 msgid "Acknowledgments"
-msgstr ""
+msgstr "Podziękowania"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr ""
+"Dziękujemy następującym osobom za ich wkład w pracę oraz za cenne komentarze:"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Sergei Blinnikov"
@@ -5893,6 +5896,8 @@ msgid ""
 "If you want more information about this plugin, its history, and format of "
 "catalog, you can %1get additional info here%2."
 msgstr ""
+"Jeśli chcesz uzyskać więcej informacji o tej wtyczce, jej historii i "
+"formacie katalogu, %1tutaj znajdziesz dodatkowe informacje%2."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
@@ -5903,34 +5908,34 @@ msgstr "Następna aktualizacji: %1 dni"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
 msgid "Historical supernovae is updated"
-msgstr ""
+msgstr "Historyczne supernowe zostały zaktualizowane"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 msgid "Historical Supernovae Configuration"
-msgstr ""
+msgstr "Konfiguracja Historycznych supernowych"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr ""
+msgstr "Konfiguracja wtyczki Historyczne supernowe"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
 #: plugins/Quasars/src/ui_quasarsDialog.h:252
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:252
 msgid "Update catalog from Internet"
-msgstr ""
+msgstr "Zaktualizuj katalog korzystając z Internetu"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:255
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:255
 msgid "Update frequency (days):"
-msgstr ""
+msgstr "Częstotliwość aktualizacji (dni):"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Quasars/src/ui_quasarsDialog.h:256
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:256
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:240
 msgid "[next update info]"
-msgstr ""
+msgstr "[informacja o następnej aktualizacji]"
 
 #: plugins/Quasars/src/Quasars.cpp:70
 msgid "Quasars"
@@ -5945,7 +5950,7 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:146
 msgid "Quasars configuration window"
-msgstr ""
+msgstr "Okno konfiguracji Kwazarów"
 
 #: plugins/Quasars/src/Quasar.cpp:95
 msgid "quasar"
@@ -5958,7 +5963,7 @@ msgstr "Z (przesunięcie ku czerwieni): %1"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:108
 msgid "Quasars Plug-in"
-msgstr ""
+msgstr "Wtyczka Kwazary"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
 msgid ""
