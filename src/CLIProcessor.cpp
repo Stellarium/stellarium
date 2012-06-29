@@ -188,7 +188,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 				qWarning() << "WARNING: --sky-date argument has unrecognised format  (I want yyyymmdd)";
 		}
 
-		if (skyTime.isEmpty())
+		if (!skyTime.isEmpty())
 		{
 			QRegExp timeRx("\\d{1,2}:\\d{2}:\\d{2}");
 			if (timeRx.exactMatch(skyTime))
