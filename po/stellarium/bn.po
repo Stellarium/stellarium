@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-23 16:53+0700\n"
+"POT-Creation-Date: 2012-06-29 21:06+0700\n"
 "PO-Revision-Date: 2012-04-11 17:24+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Bengali <bn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-24 05:16+0000\n"
-"X-Generator: Launchpad (build 15461)\n"
+"X-Launchpad-Export-Date: 2012-06-30 04:38+0000\n"
+"X-Generator: Launchpad (build 15520)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -368,31 +368,31 @@ msgstr ""
 msgid "Found"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:346
+#: src/gui/ConfigurationDialog.cpp:349
 msgid "Select screenshot directory"
 msgstr "স্ক্রীনশট ডিরেক্টরি নির্বাচন করুন"
 
-#: src/gui/ConfigurationDialog.cpp:524
+#: src/gui/ConfigurationDialog.cpp:528
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "প্রারম্ভিক দৃষ্টিসীমা: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:532
+#: src/gui/ConfigurationDialog.cpp:536
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "দিগংশ/উন্নতি-এর প্রারম্ভিক দিক: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:574
+#: src/gui/ConfigurationDialog.cpp:578
 #: plugins/Oculars/src/gui/OcularDialog.cpp:419
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "লেখকবৃন্দ"
 
-#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:579 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "যোগাযোগ"
 
-#: src/gui/ConfigurationDialog.cpp:658
+#: src/gui/ConfigurationDialog.cpp:662
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
@@ -400,19 +400,19 @@ msgstr "যোগাযোগ"
 msgid "Author"
 msgstr "লেখক"
 
-#: src/gui/ConfigurationDialog.cpp:662
+#: src/gui/ConfigurationDialog.cpp:666
 msgid "License"
 msgstr "লাইসেন্স"
 
-#: src/gui/ConfigurationDialog.cpp:688
+#: src/gui/ConfigurationDialog.cpp:692
 msgid "Running script: "
 msgstr "চলমান স্ক্রিপ্ট: "
 
-#: src/gui/ConfigurationDialog.cpp:695
+#: src/gui/ConfigurationDialog.cpp:699
 msgid "Running script: [none]"
 msgstr "চলমান স্ক্রিপ্ট: [কিছুই না]"
 
-#: src/gui/ConfigurationDialog.cpp:765
+#: src/gui/ConfigurationDialog.cpp:769
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -420,16 +420,16 @@ msgstr ""
 "সব তারকাসূচি ডাউনলোড সম্পূর্ণ হয়েছে!\n"
 "দেখার জন্য Stellarium নতুন করে চালু করুন ।"
 
-#: src/gui/ConfigurationDialog.cpp:769
+#: src/gui/ConfigurationDialog.cpp:773
 msgid "All available star catalogs have been installed."
 msgstr "সমস্ত উপলব্ধ তারকা সূচি ইনস্টল করা হয়ে গেছে ।"
 
-#: src/gui/ConfigurationDialog.cpp:774
+#: src/gui/ConfigurationDialog.cpp:778
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%1 থেকে %2 সূচিগুলি ডাউনলোড করুন"
 
-#: src/gui/ConfigurationDialog.cpp:781
+#: src/gui/ConfigurationDialog.cpp:785
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -438,7 +438,7 @@ msgstr ""
 "ডাউনলোড করা হচ্ছে %1...\n"
 "(এই উইন্ডোটি বন্ধ করা যেতে পারে)"
 
-#: src/gui/ConfigurationDialog.cpp:788
+#: src/gui/ConfigurationDialog.cpp:792
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -449,7 +449,7 @@ msgstr ""
 "তারকা সংখ্যা: %2 মিলিয়ন\n"
 "ঔজ্জ্বল্যতার সীমা: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
+#: src/gui/ConfigurationDialog.cpp:835 src/gui/ConfigurationDialog.cpp:871
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -458,11 +458,11 @@ msgstr ""
 "ডাউনলোডে ত্রুটি হয়েছে %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:919
+#: src/gui/ConfigurationDialog.cpp:923
 msgid "Verifying file integrity..."
 msgstr "ফাইলের অখণ্ডতা পরীক্ষা করা হচ্ছে..."
 
-#: src/gui/ConfigurationDialog.cpp:923
+#: src/gui/ConfigurationDialog.cpp:927
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2840,7 +2840,7 @@ msgstr "সার্ভার :"
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
-#: src/ui_configurationDialog.h:891 src/ui_configurationDialog.h:902
+#: src/ui_configurationDialog.h:901 src/ui_configurationDialog.h:912
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "বিকল্পসমূহ"
@@ -3049,55 +3049,55 @@ msgstr "প্রারম্ভিক সূচনা হিসেবে এই
 msgid "Visible"
 msgstr "দৃশ্যমান"
 
-#: src/ui_configurationDialog.h:785
+#: src/ui_configurationDialog.h:791
 msgid "Configuration"
 msgstr "বহি:বিন্যাস"
 
-#: src/ui_configurationDialog.h:787
+#: src/ui_configurationDialog.h:793
 msgid "Program language"
 msgstr "প্রোগ্রামের ভাষা"
 
-#: src/ui_configurationDialog.h:788 src/ui_CustomInfoDialog.h:192
+#: src/ui_configurationDialog.h:794 src/ui_CustomInfoDialog.h:192
 msgid "Selected object information"
 msgstr "নির্বাচিত বস্তুটির সম্পর্কে তথ্য"
 
-#: src/ui_configurationDialog.h:790
+#: src/ui_configurationDialog.h:796
 msgid "Display all information available"
 msgstr "উপলব্ধ সমস্ত তথ্য দেখান"
 
-#: src/ui_configurationDialog.h:792
+#: src/ui_configurationDialog.h:798
 msgid "All available"
 msgstr "সমস্ত উপলব্ধ"
 
-#: src/ui_configurationDialog.h:794
+#: src/ui_configurationDialog.h:800
 msgid "Display less information"
 msgstr "কম তথ্য দেখান"
 
-#: src/ui_configurationDialog.h:796
+#: src/ui_configurationDialog.h:802
 msgid "Short"
 msgstr "স্বল্প"
 
-#: src/ui_configurationDialog.h:798
+#: src/ui_configurationDialog.h:804
 msgid "Display user settings information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:800
+#: src/ui_configurationDialog.h:806
 msgid "Customized"
 msgstr ""
 
-#: src/ui_configurationDialog.h:802
+#: src/ui_configurationDialog.h:808
 msgid "Display no information"
 msgstr "কোন তথ্য দেখাবেন না"
 
-#: src/ui_configurationDialog.h:804
+#: src/ui_configurationDialog.h:810
 msgid "None"
 msgstr "কোনটি না"
 
-#: src/ui_configurationDialog.h:805
+#: src/ui_configurationDialog.h:811
 msgid "Default options"
 msgstr "প্রারম্ভিক সূচনা সংক্রান্ত বিকল্পগুলি"
 
-#: src/ui_configurationDialog.h:807
+#: src/ui_configurationDialog.h:813
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -3105,22 +3105,22 @@ msgstr ""
 "আপনি এই অধিবেশনের পরিবর্তিত বৈশিষ্ট্যগুলির বিন্যাস সংরক্ষণ করুন যা পরবর্তী "
 "সময় আপনি Stellarium শুরুতে পাবেন"
 
-#: src/ui_configurationDialog.h:809
+#: src/ui_configurationDialog.h:815
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 msgid "Save settings"
 msgstr "বৈশিষ্ট্যাবলীর বিন্যাস সংরক্ষণ করুন"
 
-#: src/ui_configurationDialog.h:811
+#: src/ui_configurationDialog.h:817
 msgid "Restore the default settings that came with Stellarium"
 msgstr ""
 "Stellarium এর সাথে প্রাপ্ত প্রারম্ভিক সূচনার বৈশিষ্ট্যাবলী বিন্যাস "
 "পুনঃস্থাপন করুন"
 
-#: src/ui_configurationDialog.h:813
+#: src/ui_configurationDialog.h:819
 msgid "Restore defaults"
 msgstr "প্রারম্ভিক সূচনার বৈশিষ্ট্যাবলী বিন্যাস পুনঃস্থাপন করুন"
 
-#: src/ui_configurationDialog.h:814
+#: src/ui_configurationDialog.h:820
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -3130,96 +3130,104 @@ msgstr ""
 "চালু করুন । পরবর্তী শুরুর জন্য দৃষ্টিসীমা ও দিক সহ সমস্ত বিকল্পগুলি সংরক্ষন "
 "করা হচ্ছে ।"
 
-#: src/ui_configurationDialog.h:816
+#: src/ui_configurationDialog.h:822
 msgid "The width of your view when Stellarium starts"
 msgstr "Stellarium শুরুর সময় আপনার দৃষ্টিসীমার প্রস্থ"
 
-#: src/ui_configurationDialog.h:819
+#: src/ui_configurationDialog.h:825
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Stellarium শুরুর সময় আপনার দৃষ্টিসীমার দিক"
 
-#: src/ui_configurationDialog.h:821
+#: src/ui_configurationDialog.h:827
 msgid "Control"
 msgstr "নিয়ন্ত্রণ"
 
-#: src/ui_configurationDialog.h:823
+#: src/ui_configurationDialog.h:829
 msgid "Allow keyboard to pan and zoom"
 msgstr "কীবোর্ডকে পর্দা ঘোরানো ও কাছেদূরে করার অনুমতি দেওয়া হবে"
 
-#: src/ui_configurationDialog.h:825
+#: src/ui_configurationDialog.h:831
 msgid "Enable keyboard navigation"
 msgstr "কীবোর্ডের সাহায্যে আকাশ দেখুন"
 
-#: src/ui_configurationDialog.h:827
+#: src/ui_configurationDialog.h:833
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "মাউসকে পর্দা ঘোরানো (drag) এবং কাছেদূরে করার (mousewheel) অনুমতি দেওয়া হবে"
 
-#: src/ui_configurationDialog.h:829
+#: src/ui_configurationDialog.h:835
 msgid "Enable mouse navigation"
 msgstr "মাউসের সাহায্যে আকাশ দেখুন"
 
-#: src/ui_configurationDialog.h:830
+#: src/ui_configurationDialog.h:836
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Startup date and time"
 msgstr "শুরুর তারিখ এবং সময়"
 
-#: src/ui_configurationDialog.h:832
+#: src/ui_configurationDialog.h:838
 msgid "Starts Stellarium at system clock date and time"
 msgstr "সিস্টেমের তারিখ এবং সময়ে Stellarium আরম্ভ করুন"
 
-#: src/ui_configurationDialog.h:834
+#: src/ui_configurationDialog.h:840
 msgid "System date and time"
 msgstr "সিস্টেমের তারিখ এবং সময়"
 
-#: src/ui_configurationDialog.h:836
+#: src/ui_configurationDialog.h:842
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
 "আজকের এই সময়কে পরের Stellarium আরম্ভের সিমুলেশান সময় হিসাবে নির্বাচন করুন"
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:844
 msgid "System date at:"
 msgstr "সিস্টেমের তারিখ:"
 
-#: src/ui_configurationDialog.h:840
+#: src/ui_configurationDialog.h:846
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Stellarium আরম্ভের জন্য নির্দিষ্ট তারিখ এবং সময় নির্বাচন করুন"
 
-#: src/ui_configurationDialog.h:842
+#: src/ui_configurationDialog.h:848
 msgid "Other:"
 msgstr "অন্যান্য:"
 
-#: src/ui_configurationDialog.h:843
+#: src/ui_configurationDialog.h:849
 msgid "use current"
 msgstr "বর্তমানটিকে ব্যবহার করুন"
 
-#: src/ui_configurationDialog.h:844
+#: src/ui_configurationDialog.h:850
 msgid "Other"
 msgstr "অন্যান্য"
 
-#: src/ui_configurationDialog.h:846
+#: src/ui_configurationDialog.h:852
 msgid "Hides the mouse cursor when inactive"
 msgstr "মাউস কার্সারটি লুকান যখন তা নিষ্ক্রিয় থাকে"
 
-#: src/ui_configurationDialog.h:848
+#: src/ui_configurationDialog.h:854
 msgid "Mouse cursor timeout (seconds):"
 msgstr "কার্সার অদৃশ্য হওয়ার সময় (সেকেন্ড):"
 
-#: src/ui_configurationDialog.h:850
+#: src/ui_configurationDialog.h:856
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "উল্লম্ব এবং অনুভূমিক ছবি উল্টানোর বোতাম অদলবদল করুন ।"
 
-#: src/ui_configurationDialog.h:852
+#: src/ui_configurationDialog.h:858
 msgid "Show flip buttons"
 msgstr "পর্দা উল্টানোর বোতামটি দেখান"
 
-#: src/ui_configurationDialog.h:853
+#: src/ui_configurationDialog.h:860
+msgid "Toggle display backgrounds of the nebulae."
+msgstr ""
+
+#: src/ui_configurationDialog.h:862
+msgid "Show nebula background button"
+msgstr ""
+
+#: src/ui_configurationDialog.h:863
 msgid "Planetarium options"
 msgstr "গ্রহমণ্ডলীর নকশা বিকল্প"
 
-#: src/ui_configurationDialog.h:855
+#: src/ui_configurationDialog.h:865
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -3227,19 +3235,19 @@ msgstr ""
 "কম খরচের গ্রহমণ্ডলীর নকশা সিস্টেমের গোলীয় দর্পণে Stellarium অভিক্ষেপনের "
 "জন্য 'গোলীয় প্রতিবিম্ব বিকৃতি' ব্যবহৃত হয় ।"
 
-#: src/ui_configurationDialog.h:857
+#: src/ui_configurationDialog.h:867
 msgid "Spheric mirror distortion"
 msgstr "গোলীয় প্রতিবিম্ব বিকৃতি"
 
-#: src/ui_configurationDialog.h:859
+#: src/ui_configurationDialog.h:869
 msgid "Align labels with the horizon"
 msgstr "দিগন্তের সঙ্গে লেবেল বিন্যস্তকরন"
 
-#: src/ui_configurationDialog.h:861
+#: src/ui_configurationDialog.h:871
 msgid "Gravity labels"
 msgstr "মাধ্যাকর্ষনাধীন লেবেল প্রদর্শন"
 
-#: src/ui_configurationDialog.h:863
+#: src/ui_configurationDialog.h:873
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -3247,106 +3255,106 @@ msgstr ""
 "যখন \"স্বয়ংক্রিয়ভাবে দূরে প্রদর্শন\" কি সক্রিয় তখন তা প্রাথমিক "
 "দিকবিন্যাসও ঠিক করে দেয়"
 
-#: src/ui_configurationDialog.h:865
+#: src/ui_configurationDialog.h:875
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "স্বয়ংক্রিয়ভাবে দূরে প্রদর্শন প্রাথমিক দিকবিন্যাসে ফিরানো"
 
-#: src/ui_configurationDialog.h:867
+#: src/ui_configurationDialog.h:877
 msgid "Mask out everything outside a central circle in the main view"
 msgstr ""
 "প্রধান দৃষ্টিক্ষেত্রের একটি কেন্দ্রিয় বৃত্তের বাইরের সব মুখোশে ঢেকে দেন"
 
-#: src/ui_configurationDialog.h:869
+#: src/ui_configurationDialog.h:879
 msgid "Disc viewport"
 msgstr "ডিস্ক ভিউপোর্ট  প্রদর্শন"
 
-#: src/ui_configurationDialog.h:871
+#: src/ui_configurationDialog.h:881
 msgid "Hide other constellations when you click one"
 msgstr "আপনি যখন একটি নক্ষত্রপুঞ্জে ক্লিক করেন তখন অন্যান্যগুলি লুকানো"
 
-#: src/ui_configurationDialog.h:873
+#: src/ui_configurationDialog.h:883
 msgid "Select single constellation"
 msgstr "একটি নক্ষত্রমন্ডল নির্বাচিত করন"
 
-#: src/ui_configurationDialog.h:874
+#: src/ui_configurationDialog.h:884
 msgid "Screenshots"
 msgstr "স্ক্রীনশটসমূহ"
 
-#: src/ui_configurationDialog.h:875
+#: src/ui_configurationDialog.h:885
 msgid "Screenshot Directory"
 msgstr "স্ক্রিনশট ডিরেক্টরী"
 
-#: src/ui_configurationDialog.h:877
+#: src/ui_configurationDialog.h:887
 msgid "Invert colors"
 msgstr "রং বিপরীত করুন"
 
-#: src/ui_configurationDialog.h:878
+#: src/ui_configurationDialog.h:888
 msgid "Star catalog updates"
 msgstr "নক্ষত্র তালিকার আপডেটগুলি"
 
-#: src/ui_configurationDialog.h:880
+#: src/ui_configurationDialog.h:890
 msgid "Click here to start downloading"
 msgstr "ডাউনলোড শুরু করতে এখানে ক্লিক করুন"
 
-#: src/ui_configurationDialog.h:882
+#: src/ui_configurationDialog.h:892
 msgid "Download this file to view even more stars"
 msgstr "আরো বেশি নক্ষত্র দেখতে এই ফাইল গুলিকে ডাউনলোড করুন ।"
 
-#: src/ui_configurationDialog.h:884
+#: src/ui_configurationDialog.h:894
 msgid "Restart the download"
 msgstr "নতুন করে ডাউনলোড করুন"
 
-#: src/ui_configurationDialog.h:886
+#: src/ui_configurationDialog.h:896
 msgid "Retry"
 msgstr "পুনরায় চেষ্টা করুন"
 
-#: src/ui_configurationDialog.h:888
+#: src/ui_configurationDialog.h:898
 msgid "Stop the download. You can always restart it later"
 msgstr "ডাউনলোড থামান । যে কোন সময়ে নতুন করে আপনি ডাউনলোড করতে পারেন ।"
 
-#: src/ui_configurationDialog.h:890
+#: src/ui_configurationDialog.h:900
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
 msgid "Cancel"
 msgstr "বাতিল করুন"
 
-#: src/ui_configurationDialog.h:893
+#: src/ui_configurationDialog.h:903
 msgid "Close window when script runs"
 msgstr "স্ক্রিপ্ট সঞ্চালনের সময় হয় উইন্ডো বন্ধ করুন"
 
-#: src/ui_configurationDialog.h:895
+#: src/ui_configurationDialog.h:905
 msgid "Run the selected script"
 msgstr "নির্বাচিত স্ক্রিপ্টটি চালান"
 
-#: src/ui_configurationDialog.h:899
+#: src/ui_configurationDialog.h:909
 msgid "Stop a running script"
 msgstr "চলমান স্ক্রিপ্টটি থামান"
 
-#: src/ui_configurationDialog.h:903
+#: src/ui_configurationDialog.h:913
 msgid "Load at startup"
 msgstr "শুরুর সময় চালু করা হোক"
 
-#: src/ui_configurationDialog.h:904
+#: src/ui_configurationDialog.h:914
 msgid "configure"
 msgstr "বিন্যাস"
 
-#: src/ui_configurationDialog.h:909
+#: src/ui_configurationDialog.h:919
 msgid "Main"
 msgstr "প্রধান"
 
-#: src/ui_configurationDialog.h:911
+#: src/ui_configurationDialog.h:921
 msgid "Navigation"
 msgstr "দিক নির্ণয়"
 
-#: src/ui_configurationDialog.h:913
+#: src/ui_configurationDialog.h:923
 msgid "Tools"
 msgstr "যন্ত্রাদি"
 
-#: src/ui_configurationDialog.h:915
+#: src/ui_configurationDialog.h:925
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:441
 msgid "Scripts"
 msgstr "স্ক্রিপ্টসমূহ"
 
-#: src/ui_configurationDialog.h:917
+#: src/ui_configurationDialog.h:927
 msgid "Plugins"
 msgstr "প্লাগইন"
 
