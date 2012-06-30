@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-06-23 16:53+0700\n"
+"POT-Creation-Date: 2012-06-29 21:06+0700\n"
 "PO-Revision-Date: 2012-05-21 06:52+0000\n"
 "Last-Translator: පසිඳු කාවින්ද <info@pk-soft.tk>\n"
 "Language-Team: Sinhalese <si@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-24 05:23+0000\n"
-"X-Generator: Launchpad (build 15461)\n"
+"X-Launchpad-Export-Date: 2012-06-30 04:45+0000\n"
+"X-Generator: Launchpad (build 15520)\n"
 "X-Poedit-Country: SRI LANKA\n"
 "X-Poedit-Language: Estonian\n"
 
@@ -360,31 +360,31 @@ msgstr ""
 msgid "Found"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:346
+#: src/gui/ConfigurationDialog.cpp:349
 msgid "Select screenshot directory"
 msgstr "ස්ක්‍රීන්ෂොට් දැමිය යුතු ස්ථානය"
 
-#: src/gui/ConfigurationDialog.cpp:524
+#: src/gui/ConfigurationDialog.cpp:528
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "ආරම්භයේදී FOV: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:532
+#: src/gui/ConfigurationDialog.cpp:536
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "ආරම්භයේදී උද්දිගංශය: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:574
+#: src/gui/ConfigurationDialog.cpp:578
 #: plugins/Oculars/src/gui/OcularDialog.cpp:419
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "කතෘවරුන්"
 
-#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:579 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "සම්බන්ධවීමට"
 
-#: src/gui/ConfigurationDialog.cpp:658
+#: src/gui/ConfigurationDialog.cpp:662
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
@@ -392,19 +392,19 @@ msgstr "සම්බන්ධවීමට"
 msgid "Author"
 msgstr "කර්තෘ"
 
-#: src/gui/ConfigurationDialog.cpp:662
+#: src/gui/ConfigurationDialog.cpp:666
 msgid "License"
 msgstr "බලපත්‍රය"
 
-#: src/gui/ConfigurationDialog.cpp:688
+#: src/gui/ConfigurationDialog.cpp:692
 msgid "Running script: "
 msgstr "ස්ක්‍රිප්ටු ක්‍රියාත්මක කිරීම "
 
-#: src/gui/ConfigurationDialog.cpp:695
+#: src/gui/ConfigurationDialog.cpp:699
 msgid "Running script: [none]"
 msgstr "කිසිදු ස්ක්‍රිප්ට්ටුවක් ක්‍රියාත්මක නොවේ"
 
-#: src/gui/ConfigurationDialog.cpp:765
+#: src/gui/ConfigurationDialog.cpp:769
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -412,16 +412,16 @@ msgstr ""
 "තරු සූචි බාගත කොට අවසන්!\n"
 "ඒවා බලාගැනීම සදහා Stellarium ප්‍රතිපණගන්වන්න."
 
-#: src/gui/ConfigurationDialog.cpp:769
+#: src/gui/ConfigurationDialog.cpp:773
 msgid "All available star catalogs have been installed."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:774
+#: src/gui/ConfigurationDialog.cpp:778
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "සූචි %2 න් %1 වැන්න ලබා ගන්න."
 
-#: src/gui/ConfigurationDialog.cpp:781
+#: src/gui/ConfigurationDialog.cpp:785
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -430,7 +430,7 @@ msgstr ""
 "බාගතකරමින් %1...\n"
 "(ඔබට මෙම කවුළුව වසා දැමිය හැකි ය.)"
 
-#: src/gui/ConfigurationDialog.cpp:788
+#: src/gui/ConfigurationDialog.cpp:792
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -441,7 +441,7 @@ msgstr ""
 "තරු ගණන: %2 Million\n"
 "දීප්තතාවය: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
+#: src/gui/ConfigurationDialog.cpp:835 src/gui/ConfigurationDialog.cpp:871
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -450,11 +450,11 @@ msgstr ""
 "බාගතකිරීමේ ගැටළුවක් %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:919
+#: src/gui/ConfigurationDialog.cpp:923
 msgid "Verifying file integrity..."
 msgstr "ගොනුව පරීක්ෂා කරමින්..."
 
-#: src/gui/ConfigurationDialog.cpp:923
+#: src/gui/ConfigurationDialog.cpp:927
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2822,7 +2822,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
-#: src/ui_configurationDialog.h:891 src/ui_configurationDialog.h:902
+#: src/ui_configurationDialog.h:901 src/ui_configurationDialog.h:912
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "විකල්ප"
@@ -3031,55 +3031,55 @@ msgstr "මෙම අහස් කතා සාමාන්‍ය සැකස�
 msgid "Visible"
 msgstr "දෘශ්‍යමාන"
 
-#: src/ui_configurationDialog.h:785
+#: src/ui_configurationDialog.h:791
 msgid "Configuration"
 msgstr "වින්‍යාසය"
 
-#: src/ui_configurationDialog.h:787
+#: src/ui_configurationDialog.h:793
 msgid "Program language"
 msgstr "වැඩසටහන් භාෂාව"
 
-#: src/ui_configurationDialog.h:788 src/ui_CustomInfoDialog.h:192
+#: src/ui_configurationDialog.h:794 src/ui_CustomInfoDialog.h:192
 msgid "Selected object information"
 msgstr "තෝරාගත් වස්තුවේ තොරතුරු"
 
-#: src/ui_configurationDialog.h:790
+#: src/ui_configurationDialog.h:796
 msgid "Display all information available"
 msgstr "පවතින සියලු තොරතුරු පෙන්වන්න"
 
-#: src/ui_configurationDialog.h:792
+#: src/ui_configurationDialog.h:798
 msgid "All available"
 msgstr "පවතින සියල්ල"
 
-#: src/ui_configurationDialog.h:794
+#: src/ui_configurationDialog.h:800
 msgid "Display less information"
 msgstr "තොරතුරු සුළු ප්‍රමාණයක් පෙන්වන්න"
 
-#: src/ui_configurationDialog.h:796
+#: src/ui_configurationDialog.h:802
 msgid "Short"
 msgstr "කෙටි"
 
-#: src/ui_configurationDialog.h:798
+#: src/ui_configurationDialog.h:804
 msgid "Display user settings information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:800
+#: src/ui_configurationDialog.h:806
 msgid "Customized"
 msgstr ""
 
-#: src/ui_configurationDialog.h:802
+#: src/ui_configurationDialog.h:808
 msgid "Display no information"
 msgstr "තොරතුරු සඟවන්න"
 
-#: src/ui_configurationDialog.h:804
+#: src/ui_configurationDialog.h:810
 msgid "None"
 msgstr "කිසිවක් එපා"
 
-#: src/ui_configurationDialog.h:805
+#: src/ui_configurationDialog.h:811
 msgid "Default options"
 msgstr "පෙරනිමි සැකසුම්"
 
-#: src/ui_configurationDialog.h:807
+#: src/ui_configurationDialog.h:813
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -3087,20 +3087,20 @@ msgstr ""
 "ඔබ මෙහිදී වෙනස් කල සැකසුම් Stellarium නැවත විවෘත වන විටද පවතීම සඳහා ඒවා "
 "සුරකින්න"
 
-#: src/ui_configurationDialog.h:809
+#: src/ui_configurationDialog.h:815
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 msgid "Save settings"
 msgstr "සැකසුම් සුරකින්න"
 
-#: src/ui_configurationDialog.h:811
+#: src/ui_configurationDialog.h:817
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Stellarium සමග පැමිණි පෙරනිමි සැකසුම් ප්‍රතිස්තාපනය කරන්න"
 
-#: src/ui_configurationDialog.h:813
+#: src/ui_configurationDialog.h:819
 msgid "Restore defaults"
 msgstr "පෙරනිමි සැකසුම් ප්‍රතිස්තාපනය කරන්න"
 
-#: src/ui_configurationDialog.h:814
+#: src/ui_configurationDialog.h:820
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -3109,94 +3109,102 @@ msgstr ""
 "සුපුරුදු සැකසුම් ප්‍රතිස්ථාපනය සදහා නැවත පණගැන්විමක් අවශ්‍ය ය. මීළඟ "
 "පණගැන්වීමේදී භාවිතය සදහා දැන් පෙනෙන ප්‍රදේශය සහ දිශාව ඇතුළු සැකසුම් සුරකින්න."
 
-#: src/ui_configurationDialog.h:816
+#: src/ui_configurationDialog.h:822
 msgid "The width of your view when Stellarium starts"
 msgstr "Stellarium විවෘත වන විට ඔබේ දර්ශණ පථයේ පළල"
 
-#: src/ui_configurationDialog.h:819
+#: src/ui_configurationDialog.h:825
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Stellarium විවෟත වන විට ඔබ බලන දිශාව"
 
-#: src/ui_configurationDialog.h:821
+#: src/ui_configurationDialog.h:827
 msgid "Control"
 msgstr "පාලකය"
 
-#: src/ui_configurationDialog.h:823
+#: src/ui_configurationDialog.h:829
 msgid "Allow keyboard to pan and zoom"
 msgstr "යතුරු පුවරුවෙන් එහා මෙහා කිරීමට සහ සූම් කිරීමට ඉඩ දෙන්න"
 
-#: src/ui_configurationDialog.h:825
+#: src/ui_configurationDialog.h:831
 msgid "Enable keyboard navigation"
 msgstr "යතුරු පුවරුවෙන් හැසිරවීමට ඉඩ දෙන්න"
 
-#: src/ui_configurationDialog.h:827
+#: src/ui_configurationDialog.h:833
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "මූසිකයෙන් එහා මෙහා කිරීමට සහ සූම් කිරීමට ඉඩ දෙන්න"
 
-#: src/ui_configurationDialog.h:829
+#: src/ui_configurationDialog.h:835
 msgid "Enable mouse navigation"
 msgstr "මූසිකයෙන් හැසිරවීමට ඉඩ දෙන්න"
 
-#: src/ui_configurationDialog.h:830
+#: src/ui_configurationDialog.h:836
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Startup date and time"
 msgstr "විවෘත වන විට දවස හා වේලාව"
 
-#: src/ui_configurationDialog.h:832
+#: src/ui_configurationDialog.h:838
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Stellarium පරිගණකයේ දිනය හා වේලාවෙන් විවෘත කරන්න"
 
-#: src/ui_configurationDialog.h:834
+#: src/ui_configurationDialog.h:840
 msgid "System date and time"
 msgstr "පරිගණකයේ දිනය හා වේලාව"
 
-#: src/ui_configurationDialog.h:836
+#: src/ui_configurationDialog.h:842
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "නැවත පණගැන්වෙන විට Stellarium හි වේලාව ඊළඟ දිනය සකසයි"
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:844
 msgid "System date at:"
 msgstr "පරිගණකයේ වේලාව:"
 
-#: src/ui_configurationDialog.h:840
+#: src/ui_configurationDialog.h:846
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Stellarium විවෘත වන විට විශේෂ දවසක් හා වේලාවක් භාවිතා කරන්න"
 
-#: src/ui_configurationDialog.h:842
+#: src/ui_configurationDialog.h:848
 msgid "Other:"
 msgstr "වෙනත්:"
 
-#: src/ui_configurationDialog.h:843
+#: src/ui_configurationDialog.h:849
 msgid "use current"
 msgstr "දැන් පවත්නා දිනය හා වේලාව භාවිතා කරන්න"
 
-#: src/ui_configurationDialog.h:844
+#: src/ui_configurationDialog.h:850
 msgid "Other"
 msgstr "වෙනත්"
 
-#: src/ui_configurationDialog.h:846
+#: src/ui_configurationDialog.h:852
 msgid "Hides the mouse cursor when inactive"
 msgstr "භාවිතා නොවන අවස්තාවලදී මවුසයේ ඊ හිස සඟවන්න"
 
-#: src/ui_configurationDialog.h:848
+#: src/ui_configurationDialog.h:854
 msgid "Mouse cursor timeout (seconds):"
 msgstr "මෙම කාලයෙන් පසු මවුස් පොයින්ටරය නොපෙනී යයි (තත්පර):"
 
-#: src/ui_configurationDialog.h:850
+#: src/ui_configurationDialog.h:856
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "සිරස් සහ තිරසි රූප අනෙක් පස ගැන්වුම"
 
-#: src/ui_configurationDialog.h:852
+#: src/ui_configurationDialog.h:858
 msgid "Show flip buttons"
 msgstr "අනෙක් පස හරවන බොත්තම්"
 
-#: src/ui_configurationDialog.h:853
+#: src/ui_configurationDialog.h:860
+msgid "Toggle display backgrounds of the nebulae."
+msgstr ""
+
+#: src/ui_configurationDialog.h:862
+msgid "Show nebula background button"
+msgstr ""
+
+#: src/ui_configurationDialog.h:863
 msgid "Planetarium options"
 msgstr "ග්‍රහලෝකාගාර සැකසුම්"
 
-#: src/ui_configurationDialog.h:855
+#: src/ui_configurationDialog.h:865
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -3204,19 +3212,19 @@ msgstr ""
 "කුඩා ප්‍රමාණයේ ග්‍රහලෝකාගාර සදහා Stellarium ගෝලාකාර තිරයකට ප්‍රක්ශේපණය "
 "කිරීමට Spheric mirror distortion භාවිතා කරයි."
 
-#: src/ui_configurationDialog.h:857
+#: src/ui_configurationDialog.h:867
 msgid "Spheric mirror distortion"
 msgstr "ගෝලයක් ආකාරයෙන් දිස්වනවාක් මෙන් සකසන්න"
 
-#: src/ui_configurationDialog.h:859
+#: src/ui_configurationDialog.h:869
 msgid "Align labels with the horizon"
 msgstr "ලේබල පොළොවට සමාන්තරව සකසන්න"
 
-#: src/ui_configurationDialog.h:861
+#: src/ui_configurationDialog.h:871
 msgid "Gravity labels"
 msgstr "ලේබල ගුරුත්වාකර්ෂණයට අනුව සකසන්න"
 
-#: src/ui_configurationDialog.h:863
+#: src/ui_configurationDialog.h:873
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -3224,105 +3232,105 @@ msgstr ""
 "\"ස්වයංක්‍රීය ඈත් වීම\" යතුර ක්‍රියාත්මකව පවතින විට එය ප්‍රාරම්භක බලන දිශාවද "
 "වෙනස් කරයි"
 
-#: src/ui_configurationDialog.h:865
+#: src/ui_configurationDialog.h:875
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "ස්වයංක්‍රීය ඈත්වීම නැවත ප්‍රාරම්භක බලන දිශාවට පැමිණේ"
 
-#: src/ui_configurationDialog.h:867
+#: src/ui_configurationDialog.h:877
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "මධ්‍යයේ වෘතයෙන් පිටත සියල්ල සඟවන්න"
 
-#: src/ui_configurationDialog.h:869
+#: src/ui_configurationDialog.h:879
 msgid "Disc viewport"
 msgstr "වෘතාකාර කවුලුවක් තුලින් පෙන්වන්න"
 
-#: src/ui_configurationDialog.h:871
+#: src/ui_configurationDialog.h:881
 msgid "Hide other constellations when you click one"
 msgstr "එකක් තෝරන විට අනෙක් තාරකා රාශි නොපෙන්වන්න"
 
-#: src/ui_configurationDialog.h:873
+#: src/ui_configurationDialog.h:883
 msgid "Select single constellation"
 msgstr "එක් තාරකා රාශියක් තෝරන්න"
 
-#: src/ui_configurationDialog.h:874
+#: src/ui_configurationDialog.h:884
 msgid "Screenshots"
 msgstr "තිරපිටපත්"
 
-#: src/ui_configurationDialog.h:875
+#: src/ui_configurationDialog.h:885
 msgid "Screenshot Directory"
 msgstr "තිරපිටපත් නාමාවලිය"
 
-#: src/ui_configurationDialog.h:877
+#: src/ui_configurationDialog.h:887
 msgid "Invert colors"
 msgstr "වර්ණ ඉන්වර්ට් කිරීම"
 
-#: src/ui_configurationDialog.h:878
+#: src/ui_configurationDialog.h:888
 msgid "Star catalog updates"
 msgstr "යාවත්කාල කරන ලද තාරකා සූචි"
 
-#: src/ui_configurationDialog.h:880
+#: src/ui_configurationDialog.h:890
 msgid "Click here to start downloading"
 msgstr "බාගත කිරීම් ආරම්භ කිරීමට මෙය ක්ලික් කරන්න"
 
-#: src/ui_configurationDialog.h:882
+#: src/ui_configurationDialog.h:892
 msgid "Download this file to view even more stars"
 msgstr "තව තරු දකින්නට මෙම ගොනුව බාගතකරන්න"
 
-#: src/ui_configurationDialog.h:884
+#: src/ui_configurationDialog.h:894
 msgid "Restart the download"
 msgstr "නැවතත් බාගතකරන්න"
 
-#: src/ui_configurationDialog.h:886
+#: src/ui_configurationDialog.h:896
 msgid "Retry"
 msgstr "නැවත උත්සහ කරන්න"
 
-#: src/ui_configurationDialog.h:888
+#: src/ui_configurationDialog.h:898
 msgid "Stop the download. You can always restart it later"
 msgstr "බාගතකිරීම නවත්වන්න. ඔබට පසුව එය පණගැන්විය හැකි ය."
 
-#: src/ui_configurationDialog.h:890
+#: src/ui_configurationDialog.h:900
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
 msgid "Cancel"
 msgstr "අවලංගු කරන්න"
 
-#: src/ui_configurationDialog.h:893
+#: src/ui_configurationDialog.h:903
 msgid "Close window when script runs"
 msgstr "ස්ක්‍රිප්ටුව ක්‍රියාත්මක වන අවස්ථාවේදී කවුළුව වසන්න"
 
-#: src/ui_configurationDialog.h:895
+#: src/ui_configurationDialog.h:905
 msgid "Run the selected script"
 msgstr "තෝරාගත් ස්ක්‍රිප්ටුව ක්‍රියාත්මක කරන්න"
 
-#: src/ui_configurationDialog.h:899
+#: src/ui_configurationDialog.h:909
 msgid "Stop a running script"
 msgstr "ස්ක්‍රිප්ටුව ක්‍රියාත්මක වීම නවත්වන්න"
 
-#: src/ui_configurationDialog.h:903
+#: src/ui_configurationDialog.h:913
 msgid "Load at startup"
 msgstr "ආරම්භයේදී පණගන්වන්න"
 
-#: src/ui_configurationDialog.h:904
+#: src/ui_configurationDialog.h:914
 msgid "configure"
 msgstr "සැකසුම්"
 
-#: src/ui_configurationDialog.h:909
+#: src/ui_configurationDialog.h:919
 msgid "Main"
 msgstr "ප්‍රධාන"
 
-#: src/ui_configurationDialog.h:911
+#: src/ui_configurationDialog.h:921
 msgid "Navigation"
 msgstr "යාත්‍රණය"
 
-#: src/ui_configurationDialog.h:913
+#: src/ui_configurationDialog.h:923
 msgid "Tools"
 msgstr "මෙවලම්"
 
-#: src/ui_configurationDialog.h:915
+#: src/ui_configurationDialog.h:925
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:441
 msgid "Scripts"
 msgstr "ස්ක්‍රිප්ටු"
 
-#: src/ui_configurationDialog.h:917
+#: src/ui_configurationDialog.h:927
 msgid "Plugins"
 msgstr "ප්ලගින"
 

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-23 16:53+0700\n"
-"PO-Revision-Date: 2012-05-28 00:23+0000\n"
-"Last-Translator: kulkke <Unknown>\n"
+"POT-Creation-Date: 2012-06-29 21:06+0700\n"
+"PO-Revision-Date: 2012-06-29 11:17+0000\n"
+"Last-Translator: seaflames <Unknown>\n"
 "Language-Team: <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-24 05:25+0000\n"
-"X-Generator: Launchpad (build 15461)\n"
+"X-Launchpad-Export-Date: 2012-06-30 04:47+0000\n"
+"X-Generator: Launchpad (build 15520)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -370,31 +370,31 @@ msgstr ""
 msgid "Found"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:346
+#: src/gui/ConfigurationDialog.cpp:349
 msgid "Select screenshot directory"
 msgstr "Ekran görüntüsü dizinini seçin"
 
-#: src/gui/ConfigurationDialog.cpp:524
+#: src/gui/ConfigurationDialog.cpp:528
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Baslangıç FOV: %1 %2"
 
-#: src/gui/ConfigurationDialog.cpp:532
+#: src/gui/ConfigurationDialog.cpp:536
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Görünümün başlangıç yönü Az/Yük:%1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:574
+#: src/gui/ConfigurationDialog.cpp:578
 #: plugins/Oculars/src/gui/OcularDialog.cpp:419
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Y"
 
-#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:579 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "İletişim"
 
-#: src/gui/ConfigurationDialog.cpp:658
+#: src/gui/ConfigurationDialog.cpp:662
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
@@ -402,19 +402,19 @@ msgstr "İletişim"
 msgid "Author"
 msgstr "Yazar"
 
-#: src/gui/ConfigurationDialog.cpp:662
+#: src/gui/ConfigurationDialog.cpp:666
 msgid "License"
 msgstr "Lisans"
 
-#: src/gui/ConfigurationDialog.cpp:688
+#: src/gui/ConfigurationDialog.cpp:692
 msgid "Running script: "
 msgstr "Script Çalıştırılıyor: "
 
-#: src/gui/ConfigurationDialog.cpp:695
+#: src/gui/ConfigurationDialog.cpp:699
 msgid "Running script: [none]"
 msgstr "Script Çalıştırılıyor: [Hiçbiri]"
 
-#: src/gui/ConfigurationDialog.cpp:765
+#: src/gui/ConfigurationDialog.cpp:769
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -422,23 +422,23 @@ msgstr ""
 "Yeni yıldız kataloglarını indirme tamamlandı! Bunları görmek için "
 "Stellarium'u yeniden başlatın."
 
-#: src/gui/ConfigurationDialog.cpp:769
+#: src/gui/ConfigurationDialog.cpp:773
 msgid "All available star catalogs have been installed."
 msgstr "Tüm erişilebilir yıldız katalogları yüklendi."
 
-#: src/gui/ConfigurationDialog.cpp:774
+#: src/gui/ConfigurationDialog.cpp:778
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%1 'nin %2 fihristini al"
 
-#: src/gui/ConfigurationDialog.cpp:781
+#: src/gui/ConfigurationDialog.cpp:785
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr "%1 indiriliyor..."
 
-#: src/gui/ConfigurationDialog.cpp:788
+#: src/gui/ConfigurationDialog.cpp:792
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -449,7 +449,7 @@ msgstr ""
 "Yıldız sayısı: %2 Million\n"
 "Parlaklık menzili: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
+#: src/gui/ConfigurationDialog.cpp:835 src/gui/ConfigurationDialog.cpp:871
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -458,11 +458,11 @@ msgstr ""
 "%1 Dosyası indirilirken hata yaşandı:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:919
+#: src/gui/ConfigurationDialog.cpp:923
 msgid "Verifying file integrity..."
 msgstr "Dosya bütünlüğü kontrol ediliyor..."
 
-#: src/gui/ConfigurationDialog.cpp:923
+#: src/gui/ConfigurationDialog.cpp:927
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -526,15 +526,15 @@ msgstr "Bir Betik Çalışırken"
 
 #: src/gui/HelpDialog.cpp:73
 msgid "Stop currently running script"
-msgstr ""
+msgstr "Şu an yürütülen betiği durdur"
 
 #: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:151 src/gui/StelGui.cpp:152
 msgid "Pause script execution"
-msgstr ""
+msgstr "Betiğin yürütülmesini duraklat"
 
 #: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:153
 msgid "Resume script execution"
-msgstr ""
+msgstr "Betiğin yürütülmesini devam ettir"
 
 #: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:148
 msgid "Slow down the script execution rate"
@@ -670,6 +670,8 @@ msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
+"Birkaç kişi önemli katkılarda bulunmuştu fakat artık aktif değiller.Onların "
+"emekleri bu projede önemli değişiklikler sağladı."
 
 #: src/gui/HelpDialog.cpp:314
 #, qt-format
@@ -1630,7 +1632,7 @@ msgstr "Tam ay tutulmasını göstermek için gerekli komut."
 
 #: src/translations.h:198
 msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr ""
+msgstr "Rastgele nesnelere bakarak gökyüzünde yavaş,bitmeyen bir tur"
 
 #: src/translations.h:199
 msgid ""
@@ -2838,7 +2840,7 @@ msgstr "Sunucu:"
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
-#: src/ui_configurationDialog.h:891 src/ui_configurationDialog.h:902
+#: src/ui_configurationDialog.h:901 src/ui_configurationDialog.h:912
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "Seçenekler"
@@ -3048,75 +3050,75 @@ msgstr "Bu gokyuzu kulturunu varsayilan olarak kullan"
 msgid "Visible"
 msgstr "Görünür"
 
-#: src/ui_configurationDialog.h:785
+#: src/ui_configurationDialog.h:791
 msgid "Configuration"
 msgstr "Yapılandırma"
 
-#: src/ui_configurationDialog.h:787
+#: src/ui_configurationDialog.h:793
 msgid "Program language"
 msgstr "Program dili"
 
-#: src/ui_configurationDialog.h:788 src/ui_CustomInfoDialog.h:192
+#: src/ui_configurationDialog.h:794 src/ui_CustomInfoDialog.h:192
 msgid "Selected object information"
 msgstr "Seçili cisim bilgisi"
 
-#: src/ui_configurationDialog.h:790
+#: src/ui_configurationDialog.h:796
 msgid "Display all information available"
 msgstr "Mümkün olan tüm bilgiyi göster"
 
-#: src/ui_configurationDialog.h:792
+#: src/ui_configurationDialog.h:798
 msgid "All available"
 msgstr "Mumkun olan hepsi"
 
-#: src/ui_configurationDialog.h:794
+#: src/ui_configurationDialog.h:800
 msgid "Display less information"
 msgstr "Daha az bilgi göster"
 
-#: src/ui_configurationDialog.h:796
+#: src/ui_configurationDialog.h:802
 msgid "Short"
 msgstr "Kısa"
 
-#: src/ui_configurationDialog.h:798
+#: src/ui_configurationDialog.h:804
 msgid "Display user settings information"
-msgstr ""
+msgstr "Kullanıcı ayar bilgilerini görüntüle"
 
-#: src/ui_configurationDialog.h:800
+#: src/ui_configurationDialog.h:806
 msgid "Customized"
-msgstr ""
+msgstr "Özelleştirilmiş"
 
-#: src/ui_configurationDialog.h:802
+#: src/ui_configurationDialog.h:808
 msgid "Display no information"
 msgstr "Bilgi gösterme"
 
-#: src/ui_configurationDialog.h:804
+#: src/ui_configurationDialog.h:810
 msgid "None"
 msgstr "Hiçbiri"
 
-#: src/ui_configurationDialog.h:805
+#: src/ui_configurationDialog.h:811
 msgid "Default options"
 msgstr "Varsayilan secenekler"
 
-#: src/ui_configurationDialog.h:807
+#: src/ui_configurationDialog.h:813
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr ""
 "Bu oturumda değiştirdiğiniz ayarları sonraki Stellarium açılışı için sakla"
 
-#: src/ui_configurationDialog.h:809
+#: src/ui_configurationDialog.h:815
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 msgid "Save settings"
 msgstr "Ayarlari kaydet"
 
-#: src/ui_configurationDialog.h:811
+#: src/ui_configurationDialog.h:817
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Stellarium ile gelen varsayılan ayarlara dön"
 
-#: src/ui_configurationDialog.h:813
+#: src/ui_configurationDialog.h:819
 msgid "Restore defaults"
 msgstr "Varsayilanlari geri yukle"
 
-#: src/ui_configurationDialog.h:814
+#: src/ui_configurationDialog.h:820
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -3126,49 +3128,49 @@ msgstr ""
 "gerektiriyor. Sonraki baslangicta kullanilmak uzere guncel secenekler "
 "kopyalanirken guncel FOV ve gorunum yonu de kopyalanmaktadir."
 
-#: src/ui_configurationDialog.h:816
+#: src/ui_configurationDialog.h:822
 msgid "The width of your view when Stellarium starts"
 msgstr "Stellarium başladığında görüş genişliğin"
 
-#: src/ui_configurationDialog.h:819
+#: src/ui_configurationDialog.h:825
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Stellarium başladığında bakış doğrultun"
 
-#: src/ui_configurationDialog.h:821
+#: src/ui_configurationDialog.h:827
 msgid "Control"
 msgstr "Denetim"
 
-#: src/ui_configurationDialog.h:823
+#: src/ui_configurationDialog.h:829
 msgid "Allow keyboard to pan and zoom"
 msgstr "Klavyeden genisletme ve odaklamaya izin ver."
 
-#: src/ui_configurationDialog.h:825
+#: src/ui_configurationDialog.h:831
 msgid "Enable keyboard navigation"
 msgstr "Klavye ile gezinmeyi etkinlestir."
 
-#: src/ui_configurationDialog.h:827
+#: src/ui_configurationDialog.h:833
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "Fare ile genisletmeyi (surukle) ve odaklamayi (fare topu) etkinlestir."
 
-#: src/ui_configurationDialog.h:829
+#: src/ui_configurationDialog.h:835
 msgid "Enable mouse navigation"
 msgstr "Fare ile gezinmeyi etkinlestir."
 
-#: src/ui_configurationDialog.h:830
+#: src/ui_configurationDialog.h:836
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Startup date and time"
 msgstr "Başlangıç günü ve saati"
 
-#: src/ui_configurationDialog.h:832
+#: src/ui_configurationDialog.h:838
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Stellarium'u sistem tarih ve saati ile başlatır."
 
-#: src/ui_configurationDialog.h:834
+#: src/ui_configurationDialog.h:840
 msgid "System date and time"
 msgstr "Sistem tarih ve saati"
 
-#: src/ui_configurationDialog.h:836
+#: src/ui_configurationDialog.h:842
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -3176,47 +3178,55 @@ msgstr ""
 "Benzetim zamanını, Gökküre'nin başladığı günün zamanından bir sonraki an "
 "olarak belirler."
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:844
 msgid "System date at:"
 msgstr "Sistem Tarihi:"
 
-#: src/ui_configurationDialog.h:840
+#: src/ui_configurationDialog.h:846
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Stellatium basladiginda ozel gun ve saat kullan"
 
-#: src/ui_configurationDialog.h:842
+#: src/ui_configurationDialog.h:848
 msgid "Other:"
 msgstr "Diğer:"
 
-#: src/ui_configurationDialog.h:843
+#: src/ui_configurationDialog.h:849
 msgid "use current"
 msgstr "varsayılanı kullan"
 
-#: src/ui_configurationDialog.h:844
+#: src/ui_configurationDialog.h:850
 msgid "Other"
 msgstr "Diğer"
 
-#: src/ui_configurationDialog.h:846
+#: src/ui_configurationDialog.h:852
 msgid "Hides the mouse cursor when inactive"
 msgstr "Etkin degilken, fare ve isikli gostergeyi sakla"
 
-#: src/ui_configurationDialog.h:848
+#: src/ui_configurationDialog.h:854
 msgid "Mouse cursor timeout (seconds):"
 msgstr "Fare, isikli gosterge zaman asimi (saniye):"
 
-#: src/ui_configurationDialog.h:850
+#: src/ui_configurationDialog.h:856
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Diket ve yatay resim cevirme tuslarini degistir."
 
-#: src/ui_configurationDialog.h:852
+#: src/ui_configurationDialog.h:858
 msgid "Show flip buttons"
 msgstr "Cevirme tuslarini goster."
 
-#: src/ui_configurationDialog.h:853
+#: src/ui_configurationDialog.h:860
+msgid "Toggle display backgrounds of the nebulae."
+msgstr ""
+
+#: src/ui_configurationDialog.h:862
+msgid "Show nebula background button"
+msgstr ""
+
+#: src/ui_configurationDialog.h:863
 msgid "Planetarium options"
 msgstr "Gezegen gozlemevi secenekleri"
 
-#: src/ui_configurationDialog.h:855
+#: src/ui_configurationDialog.h:865
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -3224,19 +3234,19 @@ msgstr ""
 "Gukkure kuresel ayna uzerine izdusurulurken, dusuk maaliyetli gozlemevi "
 "secenekleri icin, kuresel ayna bozulmasi kullanilmistir."
 
-#: src/ui_configurationDialog.h:857
+#: src/ui_configurationDialog.h:867
 msgid "Spheric mirror distortion"
 msgstr "Kuresel ayna bozulmasi"
 
-#: src/ui_configurationDialog.h:859
+#: src/ui_configurationDialog.h:869
 msgid "Align labels with the horizon"
 msgstr "Etiketleri ufka hizala"
 
-#: src/ui_configurationDialog.h:861
+#: src/ui_configurationDialog.h:871
 msgid "Gravity labels"
 msgstr "Yerçekimi etiketleri"
 
-#: src/ui_configurationDialog.h:863
+#: src/ui_configurationDialog.h:873
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -3244,105 +3254,105 @@ msgstr ""
 "Aktif haldeyken, 'otomatik uzaklastirma' tusu, baslangic goruntuleme yonunu "
 "de belirleyecektir."
 
-#: src/ui_configurationDialog.h:865
+#: src/ui_configurationDialog.h:875
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Otomatik uzaklastirma, goruntunun baslangic yonunu verir"
 
-#: src/ui_configurationDialog.h:867
+#: src/ui_configurationDialog.h:877
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Ana goruntudeki merkez daire disindaki herseyi yok say."
 
-#: src/ui_configurationDialog.h:869
+#: src/ui_configurationDialog.h:879
 msgid "Disc viewport"
 msgstr "Goruntu kapisi diski"
 
-#: src/ui_configurationDialog.h:871
+#: src/ui_configurationDialog.h:881
 msgid "Hide other constellations when you click one"
 msgstr "Bir takımyıldıza tıkladığımda diğerlerini gizle"
 
-#: src/ui_configurationDialog.h:873
+#: src/ui_configurationDialog.h:883
 msgid "Select single constellation"
 msgstr "Tek takımyıldız seç"
 
-#: src/ui_configurationDialog.h:874
+#: src/ui_configurationDialog.h:884
 msgid "Screenshots"
 msgstr "Ekran Görüntüleri"
 
-#: src/ui_configurationDialog.h:875
+#: src/ui_configurationDialog.h:885
 msgid "Screenshot Directory"
 msgstr "Ekran goruntusu dizini"
 
-#: src/ui_configurationDialog.h:877
+#: src/ui_configurationDialog.h:887
 msgid "Invert colors"
 msgstr "Renkleri Ters Çevir"
 
-#: src/ui_configurationDialog.h:878
+#: src/ui_configurationDialog.h:888
 msgid "Star catalog updates"
 msgstr "Yıldız Fihristi Güncellemeleri"
 
-#: src/ui_configurationDialog.h:880
+#: src/ui_configurationDialog.h:890
 msgid "Click here to start downloading"
 msgstr "İndirmeye başlamak için buraya tıklayın"
 
-#: src/ui_configurationDialog.h:882
+#: src/ui_configurationDialog.h:892
 msgid "Download this file to view even more stars"
 msgstr "Daha fazla yıldız görmek için bu dosyayı indirin"
 
-#: src/ui_configurationDialog.h:884
+#: src/ui_configurationDialog.h:894
 msgid "Restart the download"
 msgstr "İndirmeyi baştan başlat"
 
-#: src/ui_configurationDialog.h:886
+#: src/ui_configurationDialog.h:896
 msgid "Retry"
 msgstr "Tekrar Dene"
 
-#: src/ui_configurationDialog.h:888
+#: src/ui_configurationDialog.h:898
 msgid "Stop the download. You can always restart it later"
 msgstr "İndirmeyi durdur. Sonra yeniden başlatabilirsin"
 
-#: src/ui_configurationDialog.h:890
+#: src/ui_configurationDialog.h:900
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
 msgid "Cancel"
 msgstr "Vazgeç"
 
-#: src/ui_configurationDialog.h:893
+#: src/ui_configurationDialog.h:903
 msgid "Close window when script runs"
 msgstr "Betik çalışırken penceriyi kapat"
 
-#: src/ui_configurationDialog.h:895
+#: src/ui_configurationDialog.h:905
 msgid "Run the selected script"
 msgstr "Seçili betiği çalıştır"
 
-#: src/ui_configurationDialog.h:899
+#: src/ui_configurationDialog.h:909
 msgid "Stop a running script"
 msgstr "Çalışan bir betiği durdur"
 
-#: src/ui_configurationDialog.h:903
+#: src/ui_configurationDialog.h:913
 msgid "Load at startup"
 msgstr "Başlangıçta Aşırı Yüklenme"
 
-#: src/ui_configurationDialog.h:904
+#: src/ui_configurationDialog.h:914
 msgid "configure"
 msgstr "ayarla"
 
-#: src/ui_configurationDialog.h:909
+#: src/ui_configurationDialog.h:919
 msgid "Main"
 msgstr "Ana"
 
-#: src/ui_configurationDialog.h:911
+#: src/ui_configurationDialog.h:921
 msgid "Navigation"
 msgstr "Gezinme"
 
-#: src/ui_configurationDialog.h:913
+#: src/ui_configurationDialog.h:923
 msgid "Tools"
 msgstr "Araçlar"
 
-#: src/ui_configurationDialog.h:915
+#: src/ui_configurationDialog.h:925
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:441
 msgid "Scripts"
 msgstr "Betikler"
 
-#: src/ui_configurationDialog.h:917
+#: src/ui_configurationDialog.h:927
 msgid "Plugins"
 msgstr "Eklentiler"
 
@@ -3422,7 +3432,7 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:196
 msgid "Display info about an object's name"
-msgstr ""
+msgstr "Nesnenin ismi hakkındak bilgiyi görüntüle"
 
 #: src/ui_CustomInfoDialog.h:198
 msgid "An object's name"
@@ -3430,7 +3440,7 @@ msgstr "Bir cismin adı"
 
 #: src/ui_CustomInfoDialog.h:200
 msgid "Display  info about a catalog numbers"
-msgstr ""
+msgstr "Katalog numarası hakkındaki bilgiyi görüntüle"
 
 #: src/ui_CustomInfoDialog.h:202
 msgid "Catalog numbers"
@@ -3438,19 +3448,19 @@ msgstr "Katolog numraları"
 
 #: src/ui_CustomInfoDialog.h:204
 msgid "Display  info about a visual magnitude"
-msgstr ""
+msgstr "Görsel büyüklük hakkındaki bilgiyi görüntüle"
 
 #: src/ui_CustomInfoDialog.h:206
 msgid "Visual magnitude"
-msgstr ""
+msgstr "Görsel parlaklık"
 
 #: src/ui_CustomInfoDialog.h:208
 msgid "Display  info about an absolute magnitude"
-msgstr ""
+msgstr "Kesin büyüklük hakkındaki bilgiyi görüntüle"
 
 #: src/ui_CustomInfoDialog.h:210
 msgid "Absolute magnitude"
-msgstr ""
+msgstr "Mutlak parlaklık"
 
 #: src/ui_CustomInfoDialog.h:212
 msgid "Display the equatorial position (J2000 ref)"
@@ -3494,7 +3504,7 @@ msgstr "Cismin uzaklığı"
 
 #: src/ui_CustomInfoDialog.h:232
 msgid "Display info about an object's size"
-msgstr ""
+msgstr "Nesnenin boyutu hakkındaki bilgiyi görüntüle"
 
 #: src/ui_CustomInfoDialog.h:234
 msgid "Object's size"
@@ -3507,15 +3517,15 @@ msgstr ""
 
 #: src/ui_CustomInfoDialog.h:238
 msgid "Additional info (Extra 1)"
-msgstr ""
+msgstr "İlave bilgiler (Ek 1)"
 
 #: src/ui_CustomInfoDialog.h:242
 msgid "Additional info (Extra 2)"
-msgstr ""
+msgstr "İlave bilgiler (Ek 2)"
 
 #: src/ui_CustomInfoDialog.h:246
 msgid "Additional info (Extra 3)"
-msgstr ""
+msgstr "İlave bilgiler (Ek 3)"
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
@@ -4461,7 +4471,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:226
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:227
 msgid "Processing data..."
-msgstr ""
+msgstr "Veri işleniyor..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:221
 msgid "No data could be downloaded. Try again later."
@@ -4716,7 +4726,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
-msgstr "Teleskop Kontrol Eklentisi"
+msgstr "Teleskop Kontrol rklentisi"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
@@ -5673,7 +5683,7 @@ msgstr "Güneş Sistemi"
 
 #: plugins/Supernovae/src/Supernovae.cpp:70
 msgid "Historical Supernovae"
-msgstr ""
+msgstr "Tarihsel Süpernovalar"
 
 #: plugins/Supernovae/src/Supernovae.cpp:73
 msgid ""
@@ -5683,7 +5693,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:143
 msgid "Historical Supernovae configuration window"
-msgstr ""
+msgstr "Tarihsel Süpernovalar yapılandırma penceresi"
 
 #: plugins/Supernovae/src/Supernova.cpp:99
 msgid "supernova"
@@ -5733,11 +5743,11 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Sergei Blinnikov"
-msgstr ""
+msgstr "Sergei Blinnikov"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 msgid "Institute for Theoretical and Experimental Physics"
-msgstr ""
+msgstr "Teorik ve Deneysel Fizik Enstitüsü"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
@@ -5762,7 +5772,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
 msgid "Historical supernovae is updated"
-msgstr ""
+msgstr "Tarihsel süpernovalar güncellendi"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 msgid "Historical Supernovae Configuration"
@@ -5804,7 +5814,7 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:146
 msgid "Quasars configuration window"
-msgstr ""
+msgstr "Kuazarlar yapılandırma penceresi"
 
 #: plugins/Quasars/src/Quasar.cpp:95
 msgid "quasar"
@@ -5817,7 +5827,7 @@ msgstr ""
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:108
 msgid "Quasars Plug-in"
-msgstr ""
+msgstr "Kuazarlar Eklentisi"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
 msgid ""
@@ -5828,7 +5838,7 @@ msgstr ""
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
-msgstr ""
+msgstr "Veron+ 2010"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
@@ -5841,15 +5851,15 @@ msgstr ""
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
 msgid "Quasars is updated"
-msgstr ""
+msgstr "Kuazarlar güncellendi"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:249
 msgid "Quasars Configuration"
-msgstr ""
+msgstr "Kuazarlar Yapılandırması"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:250
 msgid "Quasars Plug-in Configuration"
-msgstr ""
+msgstr "Kuazarlar Eklentisi Yapılandırması"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 msgid "Display mode for quasars"
@@ -5872,7 +5882,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsars.cpp:146
 msgid "Pulsars configuration window"
-msgstr ""
+msgstr "Atarcalar yapılandırma penceresi"
 
 #: plugins/Pulsars/src/Pulsar.cpp:129
 msgid "pulsar"
@@ -5896,12 +5906,12 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:152
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:155
 msgid "pc"
-msgstr ""
+msgstr "pc"
 
 #: plugins/Pulsars/src/Pulsar.cpp:161
 #, qt-format
@@ -5916,13 +5926,13 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:169
 #, qt-format
 msgid "Eccentricity: %1"
-msgstr ""
+msgstr "Dış merkezlik: %1"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: plugins/Pulsars/src/Pulsar.cpp:174
 #, qt-format
 msgid "Annual parallax: %1 mas"
-msgstr ""
+msgstr "Yıllık uzaklık açısı: %1 mas"
 
 #: plugins/Pulsars/src/Pulsar.cpp:178
 #, qt-format
@@ -5955,7 +5965,7 @@ msgstr "mJy"
 #: plugins/Pulsars/src/Pulsar.cpp:222
 #, qt-format
 msgid "Notes: %1"
-msgstr ""
+msgstr "Notlar: %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:291
 msgid ""
@@ -5990,7 +6000,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
 msgid "Pulsars Plug-in"
-msgstr ""
+msgstr "Atarcalar Eklentisi"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
 #, qt-format
@@ -6002,7 +6012,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
 msgid "Note"
-msgstr ""
+msgstr "Not"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
 msgid "pulsar identifiers have the prefix 'PSR'"
@@ -6014,7 +6024,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
@@ -6022,7 +6032,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 msgid "Maciej Serylak"
-msgstr ""
+msgstr "Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Nancay Radioastronomical Observatory"
@@ -6034,15 +6044,15 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:212
 msgid "Pulsars is updated"
-msgstr ""
+msgstr "Atarcalar güncellendi"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:249
 msgid "Pulsars Configuration"
-msgstr ""
+msgstr "Atarcalar Yapılandırması"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:250
 msgid "Pulsars Plug-in Configuration"
-msgstr ""
+msgstr "Atarcarlar Eklentisi Yapılandırması"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Display mode for pulsars"
@@ -6054,7 +6064,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:71
 msgid "Exoplanets"
-msgstr ""
+msgstr "Güneş Dışı Gezegenler"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:74
 msgid ""
@@ -6077,7 +6087,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:182
 #: plugins/Exoplanets/src/Exoplanet.cpp:198
 msgid "Mass"
-msgstr ""
+msgstr "Kütle"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:186
 #: plugins/Exoplanets/src/Exoplanet.cpp:199
@@ -6087,11 +6097,11 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:190
 #, qt-format
 msgid "Effective temperature: %1 K"
-msgstr ""
+msgstr "Etkin Sıcaklık: %1 K"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:196
 msgid "Exoplanet"
-msgstr ""
+msgstr "Güneş Dışı Gezegen"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:197
 msgid "Period"
@@ -6116,11 +6126,11 @@ msgstr "AU"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:201
 msgid "Eccentricity"
-msgstr ""
+msgstr "Dış Merkezlik"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:202
 msgid "Inclination"
-msgstr ""
+msgstr "Eğiklik"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:203
 msgid "Angle Distance"
@@ -6128,7 +6138,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:106
 msgid "Exoplanets Plug-in"
-msgstr ""
+msgstr "Güneş Dışı Gezegenler Eklentisi"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
 #, qt-format
@@ -6139,15 +6149,15 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Exoplanets is updated"
-msgstr ""
+msgstr "Güneş dışı gezegenler güncellendi"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
 msgid "Exoplanets Configuration"
-msgstr ""
+msgstr "Güneş Dışı Gezegenler Yapılandırması"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:234
 msgid "Exoplanets Plug-in Configuration"
-msgstr ""
+msgstr "Güneş Dışı Gezegenler Eklentisi Yapılandırması"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
 msgid "Update exoplanets data from Internet"
