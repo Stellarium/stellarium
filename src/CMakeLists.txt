@@ -398,6 +398,8 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/StelGuiItems.cpp
 		gui/HelpDialog.hpp
 		gui/HelpDialog.cpp
+		gui/ShortcutsDialog.hpp
+		gui/ShortcutsDialog.cpp
 		gui/Dialog.hpp
 		gui/Dialog.cpp
 		gui/MapLabel.hpp
@@ -418,8 +420,8 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/AddRemoveLandscapesDialog.cpp
 		gui/AtmosphereDialog.hpp
 		gui/AtmosphereDialog.cpp
-                gui/CustomInfoDialog.hpp
-                gui/CustomInfoDialog.cpp
+		gui/CustomInfoDialog.hpp
+		gui/CustomInfoDialog.cpp
 		gui/StelDialog.hpp
 		gui/StelDialog.cpp)
 
@@ -429,6 +431,7 @@ IF (GUI_MODE STREQUAL "Standard")
 		gui/SkyGui.hpp
 		gui/StelGuiItems.hpp
 		gui/HelpDialog.hpp
+		gui/ShortcutsDialog.hpp
 		gui/Dialog.hpp
 		gui/MapLabel.hpp
 		gui/AngleSpinBox.hpp
@@ -446,6 +449,7 @@ IF (GUI_MODE STREQUAL "Standard")
 	SET(stellarium_UIS
 	gui/locationDialogGui.ui
 	gui/helpDialogGui.ui
+	gui/shortcutsDialog.ui
 	gui/dateTimeDialogGui.ui
 	gui/viewDialog.ui
 	gui/searchDialogGui.ui

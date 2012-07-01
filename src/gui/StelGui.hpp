@@ -25,6 +25,7 @@
 #include "LocationDialog.hpp"
 #include "ViewDialog.hpp"
 #include "HelpDialog.hpp"
+#include "ShortcutsDialog.hpp"
 #include "DateTimeDialog.hpp"
 #include "SearchDialog.hpp"
 #include "ConfigurationDialog.hpp"
@@ -204,6 +205,7 @@ private:
 	
 	LocationDialog locationDialog;
 	HelpDialog helpDialog;
+    ShortcutsDialog shortcutsDialog;
 	DateTimeDialog dateTimeDialog;
 	SearchDialog searchDialog;
 	ViewDialog viewDialog;
