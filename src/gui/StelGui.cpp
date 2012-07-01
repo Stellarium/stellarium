@@ -186,6 +186,9 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	connect(getGuiAction("actionShow_Help_Window_Global"), SIGNAL(toggled(bool)), &helpDialog, SLOT(setVisible(bool)));
 	connect(&helpDialog, SIGNAL(visibleChanged(bool)), getGuiAction("actionShow_Help_Window_Global"), SLOT(setChecked(bool)));
 
+	connect(getGuiAction("actionShow_Shortcuts_Window_Global"), SIGNAL(toggled(bool)), &shortcutsDialog, SLOT(setVisible(bool)));
+	connect(&shortcutsDialog, SIGNAL(visibleChanged(bool)), getGuiAction("actionShow_Shortcuts_Window_Global"), SLOT(setChecked(bool)));
+
 	connect(getGuiAction("actionShow_DateTime_Window_Global"), SIGNAL(toggled(bool)), &dateTimeDialog, SLOT(setVisible(bool)));
 	connect(&dateTimeDialog, SIGNAL(visibleChanged(bool)), getGuiAction("actionShow_DateTime_Window_Global"), SLOT(setChecked(bool)));
 

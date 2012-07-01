@@ -77,9 +77,9 @@ HelpDialog::HelpDialog()
 	setKey(group, "", "L", N_("Speed up the script execution rate"));
 	setKey(group, "", "K", N_("Set the normal script execution rate"));
 
-        // Add keys for those plugins which do not have GUI actions.
-        group = N_("Plugin Key Bindings");
-        setKey(group, "", "Alt+M", N_("Text User Interface"));
+	// Add keys for those plugins which do not have GUI actions.
+	group = N_("Plugin Key Bindings");
+	setKey(group, "", "Alt+M", N_("Text User Interface"));
 }
 
 HelpDialog::~HelpDialog()
@@ -169,7 +169,7 @@ void HelpDialog::setKey(QString group, QString oldKey, QString newKey, QString d
 QString HelpDialog::getHeaderText(void)
 {
 	return "<html><head><title>" + Qt::escape(q_("Stellarium Help")) + "</title></head><body>\n"
-		+ "<h2>" + Qt::escape(q_("Keys")) + "</h2>\n";
+			+ "<h2>" + Qt::escape(q_("Keys")) + "</h2>\n";
 }
 
 QString HelpDialog::getFooterText(void)
