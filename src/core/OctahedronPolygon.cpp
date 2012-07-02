@@ -17,12 +17,13 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelUtils.hpp"
-#include "OctahedronPolygon.hpp"
-#include "StelSphereGeometry.hpp"
+#include <QFile>
+
 #include "glues.h"
 
-#include <QFile>
+#include "OctahedronPolygon.hpp"
+#include "StelSphereGeometry.hpp"
+#include "StelUtils.hpp"
 
 const Vec3d OctahedronPolygon::sideDirections[] = {	Vec3d(1,1,1), Vec3d(1,1,-1),Vec3d(-1,1,1),Vec3d(-1,1,-1),
 	Vec3d(1,-1,1),Vec3d(1,-1,-1),Vec3d(-1,-1,1),Vec3d(-1,-1,-1)};
@@ -93,7 +94,9 @@ QString SubContour::toJSON() const
 	return res;
 };
 
-OctahedronPolygon::OctahedronPolygon(const QVector<Vec3d>& contour) : fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines)
+OctahedronPolygon::OctahedronPolygon(const QVector<Vec3d>& contour) 
+	: fillCachedVertexArray(StelVertexArray::Triangles)
+	, outlineCachedVertexArray(StelVertexArray::Lines)
 {
 	sides.resize(8);
 	appendSubContour(SubContour(contour));
@@ -101,7 +104,9 @@ OctahedronPolygon::OctahedronPolygon(const QVector<Vec3d>& contour) : fillCached
 	updateVertexArray();
 }
 
-OctahedronPolygon::OctahedronPolygon(const QVector<QVector<Vec3d> >& contours) : fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines)
+OctahedronPolygon::OctahedronPolygon(const QVector<QVector<Vec3d> >& contours) 
+	: fillCachedVertexArray(StelVertexArray::Triangles)
+	, outlineCachedVertexArray(StelVertexArray::Lines)
 {
 	sides.resize(8);
 	foreach (const QVector<Vec3d>& contour, contours)
@@ -119,7 +124,9 @@ OctahedronPolygon::OctahedronPolygon(const SubContour& initContour)
 }
 
 
-OctahedronPolygon::OctahedronPolygon(const QList<OctahedronPolygon>& octs) : fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines)
+OctahedronPolygon::OctahedronPolygon(const QList<OctahedronPolygon>& octs) 
+	: fillCachedVertexArray(StelVertexArray::Triangles)
+	, outlineCachedVertexArray(StelVertexArray::Lines)
 {
 	sides.resize(8);
 	foreach (const OctahedronPolygon& oct, octs)
@@ -468,7 +475,7 @@ void OctahedronPolygon::updateVertexArray()
 		Q_ASSERT(SphericalConvexPolygon::checkValidContour(c));
 	}
 #else
-	// If I don't let this like that, the bahaviour will fail in Release mode!!!!
+	// If I don't let this like that, the behaviour will fail in Release mode!!!!
 	// It is either a bug in GCC either a memory problem which appears only when optimizations are activated.
 	QVector<Vec3d> c;
 	c.resize(3);
