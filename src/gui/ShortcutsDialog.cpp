@@ -18,6 +18,9 @@
  */
 
 #include "StelApp.hpp"
+#include "StelShortcutMgr.hpp"
+
+#include <QDebug>
 
 #include "ShortcutsDialog.hpp"
 #include "ui_shortcutsDialog.h"
@@ -46,8 +49,25 @@ void ShortcutsDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-//	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
+	// Creating shortcuts tree
+	QList<StelShortcutGroup*> groups = StelApp::getInstance().getStelShortcutManager()->getGroupList();
+	foreach (StelShortcutGroup* group, groups)
+	{
+		QTreeWidgetItem* groupItem = new QTreeWidgetItem(ui->shortcutsTreeWidget);
+		groupItem->setText(0, group->getId());
+		groupItem->setExpanded(true);
+		QFont rootFont = groupItem->font(0);
+		rootFont.setBold(true); rootFont.setPixelSize(14);
+		groupItem->setFont(0, rootFont);
+		QList<StelShortcut*> shortcuts = group->getActionList();
+		foreach (StelShortcut* shortcut, shortcuts)
+		{
+			QTreeWidgetItem* shortcutItem = new QTreeWidgetItem(groupItem);
+			shortcutItem->setText(0, shortcut->getText());
+			shortcutItem->setText(1, shortcut->getKeys());
+		}
+	}
 	updateText();
 }
 

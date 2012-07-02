@@ -35,11 +35,16 @@ public:
 
 	QAction* getAction() const { return action; }
 
+	QString getId() const { return id; }
+	QString getText() const { return text; }
+	QString getKeys() const { return keys; }
+
 	void setText(const QString& atext);
 	void setKeys(const QString& akeys);
 	void setCheckable(bool c);
 	void setAutoRepeat(bool ar);
 	void setGlobal(bool g);
+	void setTemporary(bool temp);
 	void setScript(const QString& scriptText);
 
 signals:
@@ -55,6 +60,8 @@ private:
 	bool checkable;
 	bool autoRepeat;
 	bool global;
+	// defines whether shortcut exists only in current session
+	bool temporary;
 	QString script;
 
 	QList<QKeySequence> splitShortcuts(const QString& shortcuts);
@@ -71,6 +78,9 @@ public:
 												 bool autoRepeat = true, bool global = false, QGraphicsWidget *parent = false);
 
 	QAction* getAction(const QString &actionId);
+	QList<StelShortcut*> getActionList() const;
+
+	QString getId() const { return id; }
 
 	StelShortcut* getShortcut(const QString& id);
 signals:

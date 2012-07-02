@@ -54,6 +54,8 @@ public:
 
 	QAction* addScriptToAction(const QString& actionId, const QString& script);
 
+	QList<StelShortcutGroup*> getGroupList() const;
+
 signals:
 	
 public slots:

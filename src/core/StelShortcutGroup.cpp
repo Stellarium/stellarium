@@ -89,6 +89,11 @@ void StelShortcut::setGlobal(bool g)
 	}
 }
 
+void StelShortcut::setTemporary(bool temp)
+{
+	temporary = temp;
+}
+
 void StelShortcut::setScript(const QString &scriptText)
 {
 	QString scriptsDir = StelFileMgr::findFile("scripts/", StelFileMgr::Directory);
@@ -155,6 +160,16 @@ QAction *StelShortcutGroup::getAction(const QString &actionId)
 		return NULL;
 	}
 	return shortcuts[actionId]->getAction();
+}
+
+QList<StelShortcut *> StelShortcutGroup::getActionList() const
+{
+	QList<StelShortcut*> res;
+	foreach (StelShortcut* action, shortcuts)
+	{
+		res << action;
+	}
+	return res;
 }
 
 StelShortcut* StelShortcutGroup::getShortcut(const QString &id)
