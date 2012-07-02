@@ -106,6 +106,16 @@ QAction *StelShortcutMgr::addScriptToAction(const QString &actionId, const QStri
 	return NULL;
 }
 
+QList<StelShortcutGroup *> StelShortcutMgr::getGroupList() const
+{
+	QList<StelShortcutGroup*> res;
+	foreach (StelShortcutGroup* group, shGroups)
+	{
+		res << group;
+	}
+	return res;
+}
+
 bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 {
 	QFile jsonFile(filePath);
