@@ -126,7 +126,9 @@ SET(stellarium_lib_SRCS
 	core/RefractionExtinction.hpp
 	core/RefractionExtinction.cpp
 	core/StelLoadingBar.cpp
-	core/StelLoadingBar.hpp
+	core/StelLoadingBar.hpp 
+
+	core/Triplet.hpp
 
 	core/renderer/StelRenderer.cpp
 	core/renderer/StelRenderer.hpp
