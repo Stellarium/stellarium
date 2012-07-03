@@ -10,6 +10,7 @@
 #include "StelCore.hpp"
 #include "StelQGLRenderer.hpp"
 #include "StelProjector.hpp"
+#include "StelProjectorClasses.hpp"
 #include "StelTestQGL2VertexBufferBackend.hpp"
 
 //TODO:
@@ -299,12 +300,10 @@ protected:
 	{
 		invariant();
 
-		//TODO Projection using StelProjector 
 		StelTestQGL2VertexBufferBackend* backend =
 			dynamic_cast<StelTestQGL2VertexBufferBackend*>(vertexBuffer);
 		Q_ASSERT_X(backend != NULL, Q_FUNC_INFO,
 		           "StelQGL2Renderer: Vertex buffer created by different renderer backend");
-
 
 		StelQGLIndexBuffer* glIndexBuffer = NULL;
 		if(indexBuffer != NULL)
@@ -317,21 +316,22 @@ protected:
 		// GL setup before drawing.
 
 		glDisable(GL_DEPTH_TEST);
-		// Not sure why this is used - experiment with removing once more code uses Renderer
-		glDisable(GL_CULL_FACE);
 		// Fix some problem when using Qt OpenGL2 engine
 		glStencilMask(0x11111111);
 		// Deactivate drawing in depth buffer by default
 		glDepthMask(GL_FALSE);
+		// GL-REFACTOR TODO. Once refactor is done, try removing this 
+		// and updating the user code to work with backface culling.
+		glDisable(GL_CULL_FACE);
 
 		if(NULL == projector)
 		{
 			projector = StelApp::getInstance().getCore()->getProjection2d();
 		}
-		else if(!dontProject)
+		// XXX: we should use a more generic way to test whether or not to do the projection.
+		else if(!dontProject && (NULL == dynamic_cast<StelProjector2d*>(projector.data())))
 		{
-			Q_ASSERT_X(projector == NULL, Q_FUNC_INFO,
-			           "TODO: Projection when drawing not yet implemented");
+			backend->projectVertices(projector, glIndexBuffer);
 		}
 
 		// Need to transpose the matrix for GL.
@@ -347,6 +347,7 @@ protected:
 		const Vec4i viewXywh = projector->getViewportXywh();
 		glViewport(viewXywh[0], viewXywh[1], viewXywh[2], viewXywh[3]);
 		backend->draw(*this, transposed, glIndexBuffer);
+
 		invariant();
 	}
 

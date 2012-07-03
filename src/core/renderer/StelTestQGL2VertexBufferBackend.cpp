@@ -1,3 +1,4 @@
+#include "StelProjector.hpp"
 #include "StelQGLIndexBuffer.hpp"
 #include "StelQGL2Renderer.hpp"
 #include "StelTestQGL2VertexBufferBackend.hpp"
@@ -10,6 +11,7 @@ StelTestQGL2VertexBufferBackend(const PrimitiveType type,
 	, primitiveType(type)
 	, vertexCount(0)
 	, vertexCapacity(0)
+	, usingProjectedPositions(false)
 {
 	// Create a buffer for each vertex attribute.
 	for(int attrib = 0; attrib < this->attributes.count; ++attrib)
@@ -69,7 +71,7 @@ void StelTestQGL2VertexBufferBackend::addVertex(const quint8* const vertexInPtr)
 }
 
 void StelTestQGL2VertexBufferBackend::getVertex
-	(const uint index, quint8* const vertexOutPtr) const
+	(const int index, quint8* const vertexOutPtr) const
 {
 	// Points to the current attribute (e.g. color, normal, vertex) within output.
 	quint8* attribPtr = vertexOutPtr;
@@ -95,6 +97,31 @@ void StelTestQGL2VertexBufferBackend::getVertex
 	}
 }
 
+//! Helper function that enables a vertex attribute and provides attribute data to GL.
+//!
+//! @param program   Shader program we're drawing with.
+//! @param handleOut GL handle to the attribute (attribute location) will be stored here.
+//! @param attribute Defines the attribute to enable.
+//! @param data      Attribute data (e.g. positions, texcoords, normals, etc.)
+void enableAttribute(QGLShaderProgram* program, int& handleOut,
+                     const StelVertexAttribute& attribute, const void* data)
+{
+	const char* const name = glslAttributeName(attribute.interpretation);
+	const int handle = program->attributeLocation(name);
+	if(handle == -1)
+	{
+		qDebug() << "Missing vertex attribute: " << name;
+		Q_ASSERT_X(false, Q_FUNC_INFO,
+		           "Vertex attribute required for current vertex format is not in the GLSL shader");
+	}
+
+	program->setAttributeArray(handle, glAttributeType(attribute.type), 
+	                           data, attributeDimensions(attribute.type));
+	program->enableAttributeArray(handle);
+
+	handleOut = handle;
+}
+
 void StelTestQGL2VertexBufferBackend::
 	draw(StelQGL2Renderer& renderer, const QMatrix4x4& projectionMatrix,
 	     StelQGLIndexBuffer* indexBuffer)
@@ -111,47 +138,47 @@ void StelTestQGL2VertexBufferBackend::
 	}
 	
 	int enabledAttributes [MAX_VERTEX_ATTRIBUTES];
-	int attributeCount = 0;
 
-	bool vertexColors = false;
+	bool usingVertexColors = false;
 	// Provide all vertex attributes' arrays to GL.
 	for(int attrib = 0; attrib < attributes.count; ++attrib)
 	{
+		Q_ASSERT_X(attrib < MAX_VERTEX_ATTRIBUTES, Q_FUNC_INFO,
+		           "enabledAttributes array is too small to handle all vertex attributes.");
+
 		const StelVertexAttribute& attribute(attributes.attributes[attrib]);
 		if(attribute.interpretation == AttributeInterpretation_Color)
 		{
-			vertexColors = true;
+			usingVertexColors = true;
 		}
-
-		const char* const name = glslAttributeName(attribute.interpretation);
-		const int handle = program->attributeLocation(name);
-		if(handle == -1)
+		else if(attribute.interpretation == AttributeInterpretation_Position &&
+		        usingProjectedPositions)
 		{
-			qDebug() << "Missing vertex attribute: " << name;
-			Q_ASSERT_X(false, Q_FUNC_INFO,
-			           "Vertex attribute required for current vertex format is not in the GLSL shader");
+			// Using projected positions, use projectedPositions vertex array.
+			enableAttribute(program, enabledAttributes[attrib], 
+			                attribute, projectedPositions.constData());
+			// Projected positions are used within a single renderer drawVertexBufferBackend
+			// call - we set this so any further calls with this buffer won't accidentally 
+			// use projected data from before (we don't destroy the buffer so we can 
+			// reuse it).
+			usingProjectedPositions = false;
+			continue;
 		}
 
-		program->setAttributeArray(handle, glAttributeType(attribute.type), 
-		                           buffers[attributeCount]->constData(), 
-		                           attributeDimensions(attribute.type));
-		program->enableAttributeArray(handle);
-
-		Q_ASSERT_X(attributeCount < MAX_VERTEX_ATTRIBUTES, Q_FUNC_INFO,
-		           "enabledAttributes array is too small to handle all vertex attributes.");
-		enabledAttributes[attributeCount++] = handle;
+		// Not a position attribute, or not using projected positions, 
+		// so use the normal vertex array.
+		enableAttribute(program, enabledAttributes[attrib], attribute, 
+		                buffers[attrib]->constData());
 	}
 
 	program->setUniformValue("projectionMatrix", projectionMatrix);
 
 	// If we don't have a color per vertex, we have a global color
 	// (to keep in line with Stellarium behavior before the GL refactor)
-	if(!vertexColors)
+	if(!usingVertexColors)
 	{
-		const QColor& color = renderer.getGlobalColor();
-		program->setUniformValue("globalColor", 
-		                         color.redF(), color.greenF(), 
-		                         color.blueF(), color.alphaF());
+		const Vec4f& color = renderer.getGlobalColor();
+		program->setUniformValue("globalColor", color[0], color[1], color[2], color[3]);
 	}
 
 	// Draw the vertex arrays.
@@ -171,4 +198,60 @@ void StelTestQGL2VertexBufferBackend::
 	}
 
 	program->release();
+}
+
+int StelTestQGL2VertexBufferBackend::
+	getAttributeIndex(const AttributeInterpretation interpretation) const
+{
+	for(int attrib = 0; attrib < attributes.count; ++attrib)
+	{
+		const StelVertexAttribute& attribute(attributes.attributes[attrib]);
+		if(attribute.interpretation == interpretation)
+		{
+			return attrib;
+		}
+	}
+	return -1;
+}
+
+void StelTestQGL2VertexBufferBackend::
+	projectVertices(StelProjectorP projector, StelQGLIndexBuffer* indexBuffer)
+{
+	Q_ASSERT_X(false, Q_FUNC_INFO,
+	           "GL-REFACTOR Testing assert - will be removed after asserted-out code is tested to work");
+	// This is a backend function called during (right before) drawing, so we need 
+	// to be locked.
+	Q_ASSERT_X(locked, Q_FUNC_INFO,
+	           "Trying to project a vertex buffer that is not locked.");
+
+	// Get the position attribute and ensure that we can project it.
+	const int index = getAttributeIndex(AttributeInterpretation_Position);
+	const StelVertexAttribute& attribute(attributes.attributes[index]);
+	Q_ASSERT_X(attributes.sizes[index] == 3, Q_FUNC_INFO,
+	           "Trying to use a custom StelProjector to project non-3D vertex positions");
+	Q_ASSERT_X(attribute.type == AttributeType_Vec3f, Q_FUNC_INFO, 
+	           "Unknown 3D vertex attribute type");
+	AttributeBuffer<Vec3f>* positions = 
+		dynamic_cast<AttributeBuffer<Vec3f>*>(buffers[index]);
+	Q_ASSERT_X(NULL != positions, Q_FUNC_INFO,
+	           "Unexpected attribute buffer data type");
+
+	usingProjectedPositions = true;
+
+	// We have two different cases :
+	// a) Not using an index array. Size of vertex data is known.
+	// b) Using an index array. 
+	//    We find the max index and project vertices until that index.
+	//
+	// GL-REFACTOR TODO: Project till max index for now to avoid accidental bugs,
+	// but find a smarter way to do this. Maybe _only_ project the vertices used 
+	// instead of until the maximum index.
+	const int projectedCount = (NULL == indexBuffer) ? vertexCount 
+	                                                 : (indexBuffer->maxIndex() + 1);
+	if(projectedPositions.size() < projectedCount)
+	{
+		projectedPositions.resize(projectedCount);
+	}
+	projector->project(projectedCount, positions->data.constData(), 
+	                   projectedPositions.data());
 }
