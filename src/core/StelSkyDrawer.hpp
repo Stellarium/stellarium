@@ -292,7 +292,7 @@ private:
 	//! The scaling applied to input luminance before they are converted by the StelToneReproducer
 	float inScale;
 
-	//! A simple 2D vertex with position and color.
+	//! 2D vertex with position and color.
 	struct ColoredVertex
 	{
 		Vec2f position;
@@ -302,7 +302,7 @@ private:
 		VERTEX_ATTRIBUTES(Vec2f Position, Vec3f Color);
 	};
 
-	//! A simple 2D vertex with position, color and texture coordinate.
+	//! 2D vertex with position, color and texture coordinate.
 	struct ColoredTexturedVertex
 	{
 		Vec2f position;

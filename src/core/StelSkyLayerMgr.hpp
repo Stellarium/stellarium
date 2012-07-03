@@ -36,7 +36,7 @@ class StelSkyLayerMgr : public StelModule
 	Q_OBJECT
 
 public:
-	StelSkyLayerMgr();
+	StelSkyLayerMgr(class StelRenderer* renderer);
 	~StelSkyLayerMgr();
 
 	///////////////////////////////////////////////////////////////////////////
@@ -167,6 +167,9 @@ private:
 
 	// Whether to draw at all
 	bool flagShow;
+
+	//! Renderer used for drawing.
+	class StelRenderer* renderer;
 };
 
 #endif // _STELSKYLAYERMGR_HPP_

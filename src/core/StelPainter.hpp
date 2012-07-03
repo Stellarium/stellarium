@@ -96,6 +96,15 @@ private:
 	float shininess;
 };
 
+//GL-REFACTOR: Remove this once it's not used
+//! Define the drawing mode when drawing polygons
+enum SphericalPolygonDrawMode
+{
+	SphericalPolygonDrawModeFill=0,        //!< Draw the interior of the polygon
+	SphericalPolygonDrawModeBoundary=1,    //!< Draw the boundary of the polygon
+	SphericalPolygonDrawModeTextureFill=2  //!< Draw the interior of the polygon filled with the current texture
+};
+
 //! @class StelPainter
 //! Provides functions for performing openGL drawing operations.
 //! All coordinates are converted using the StelProjector instance passed at construction.
@@ -106,14 +115,6 @@ class StelPainter
 {
 public:
 	friend class VertexArrayProjector;
-
-	//! Define the drawing mode when drawing polygons
-	enum SphericalPolygonDrawMode
-	{
-		SphericalPolygonDrawModeFill=0,			//!< Draw the interior of the polygon
-		SphericalPolygonDrawModeBoundary=1,		//!< Draw the boundary of the polygon
-		SphericalPolygonDrawModeTextureFill=2	//!< Draw the interior of the polygon filled with the current texture
-	};
 
 	//! Define the shade model when interpolating polygons
 	enum ShadeModel
@@ -164,11 +165,17 @@ public:
 	//! @param clippingCap if not set to NULL, tells the painter to try to clip part of the region outside the cap.
 	//! @param doSubDivise if true tesselates the object to follow projection distortions.
 	//! Typically set that to false if you think that the region is fully contained in the viewport.
-	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const SphericalCap* clippingCap=NULL, bool doSubDivise=true, double maxSqDistortion=5.);
+	void drawSphericalRegion(const SphericalRegion* region, 
+	                         SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill,
+	                         const SphericalCap* clippingCap=NULL, 
+	                         bool doSubDivise=true,
+	                         double maxSqDistortion=5.);
 
 	void drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap=NULL);
 
-	void drawSphericalTriangles(const StelVertexArray& va, bool textured, const SphericalCap* clippingCap=NULL, bool doSubDivide=true, double maxSqDistortion=5.);
+	void drawSphericalTriangles(const StelVertexArray& va, bool textured, 
+	                            const SphericalCap* clippingCap=NULL, 
+	                            bool doSubDivide=true, double maxSqDistortion=5.);
 
 	//! Draw a small circle arc between points start and stop with rotation point in rotCenter.
 	//! The angle between start and stop must be < 180 deg.

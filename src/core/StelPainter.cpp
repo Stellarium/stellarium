@@ -1424,7 +1424,7 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 	}
 }
 
-// Draw the given SphericalPolygon.
+// Draw the given SphericalRegion.
 void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap, bool doSubDivise, double maxSqDistortion)
 {
 	if (!prj->getBoundingCap().intersects(poly->getBoundingCap()))
