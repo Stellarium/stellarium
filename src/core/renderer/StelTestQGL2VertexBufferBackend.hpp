@@ -5,6 +5,7 @@
 
 #include "core/VecMath.hpp"
 #include "StelGLUtilityFunctions.hpp"
+#include "StelProjectorType.hpp"
 #include "StelVertexBufferBackend.hpp"
 #include "StelVertexAttribute.hpp"
 
@@ -61,9 +62,9 @@ public:
 
 	virtual void addVertex(const quint8* const vertexInPtr);
 
-	virtual void getVertex(const uint index, quint8* const vertexOutPtr) const;
+	virtual void getVertex(const int index, quint8* const vertexOutPtr) const;
 
-	virtual void setVertex(const uint index, const quint8* const vertexInPtr)
+	virtual void setVertex(const int index, const quint8* const vertexInPtr)
 	{
 		setVertexNonVirtual(index, vertexInPtr);
 	}
@@ -95,6 +96,18 @@ public:
 	void draw(class StelQGL2Renderer& renderer, const QMatrix4x4& projectionMatrix,
 	          class StelQGLIndexBuffer* indexBuffer);
 
+	//! Use a StelProjector to do custom projection of the vertices.
+	//!
+	//! Can be called only immediately before draw(). The projected vertex 
+	//! positions are only used for one draw() call - another one might use a
+	//! changed projector or index buffer.
+	//!
+	//! @param projector Projector to project the vertices with.
+	//! @param indexBuffer Index buffer specifying which vertices to project.
+	//!                    If NULL, all vertices are projected.
+	void projectVertices(StelProjectorP projector, 
+	                     class StelQGLIndexBuffer* indexBuffer);
+
 private:
 	//! Is the vertex buffer locked (i.e. ready to draw?).
 	bool locked;
@@ -111,6 +124,22 @@ private:
 	//! Buffers of each vertex attribute.
 	QVector<AnyAttributeBuffer*> buffers;
 
+	//! Are we using vertex positions projected by a StelProjector?
+	//!
+	//! (Instead of just letting OpenGL handle the projection)
+	//!
+	//! This is set to true by projectVertices() and back to false by 
+	//! draw() immediately after. The projected positions can only be used 
+	//! for one draw call, as for another one the StelProjector might be changed.
+	bool usingProjectedPositions;
+
+	//! Projected vertex positions to draw when we're projecting vertices with a StelProjector.
+	//!
+	//! This replaces the buffer with Position interpretation during drawing when 
+	//! usingProjectedPositions is true. The positions are projected by the 
+	//! projectVertices() member function.
+	QVector<Vec3f> projectedPositions;
+
 	//! Construct a StelTestQGL2VertexBufferBackend. Only GLRenderer can do this.
 	//!
 	//! Initializes vertex attribute buffers.
@@ -120,11 +149,10 @@ private:
 	StelTestQGL2VertexBufferBackend(const PrimitiveType type,
 	                                const QVector<StelVertexAttribute>& attributes);
 
-
 	//! SetVertex implementation, non-virtual so it can be inlined in addVertex.
 	//! 
 	//! @see setVertex
-	void setVertexNonVirtual(const uint index, const quint8* const vertexInPtr)
+	void setVertexNonVirtual(const int index, const quint8* const vertexInPtr)
 	{
 		// Points to the current attribute (e.g. color, normal, vertex) within the vertex.
 		const quint8* attribPtr = vertexInPtr;
@@ -157,7 +185,7 @@ private:
 	//! @param attributePtr   Raw pointer to attribute data. Data format must match
 	//!                       the attribute at specified index.
 	template<class A>
-	void addAttribute(const uint attributeIndex, const quint8* attributePtr)
+	void addAttribute(const int attributeIndex, const quint8* attributePtr)
 	{
 		const A* attrib = reinterpret_cast<const A*>(attributePtr);
 		getBuffer<A>(attributeIndex).data.append(*attrib);
@@ -172,7 +200,7 @@ private:
 	//! @param vertexIndex    Specifies which vertex we're accessing.
 	//! @return               Non-const reference to the attribute.
 	template<class A>
-	A& getAttribute(const uint attributeIndex, const uint vertexIndex) 
+	A& getAttribute(const int attributeIndex, const int vertexIndex) 
 	{
 		return getBuffer<A>(attributeIndex).data[vertexIndex];
 	}
@@ -181,7 +209,7 @@ private:
 	//!
 	//! @see getAttribute
 	template<class A>
-	const A& getAttributeConst(const uint attributeIndex, const uint vertexIndex)  const
+	const A& getAttributeConst(const int attributeIndex, const int vertexIndex)  const
 	{
 		return getBufferConst<A>(attributeIndex).data[vertexIndex];
 	}
@@ -193,7 +221,7 @@ private:
 	//!              we're working with.
 	//! @return      Non-const reference to the attribute buffer.
 	template<class A>
-	AttributeBuffer<A>& getBuffer(const uint attributeIndex)
+	AttributeBuffer<A>& getBuffer(const int attributeIndex)
 	{
 		return *static_cast<AttributeBuffer<A>*>(buffers[attributeIndex]);
 	}
@@ -202,10 +230,17 @@ private:
 	//!
 	//! @see getBuffer
 	template<class A>
-	const AttributeBuffer<A>& getBufferConst(const uint attributeIndex) const
+	const AttributeBuffer<A>& getBufferConst(const int attributeIndex) const
 	{
 		return *static_cast<const AttributeBuffer<A>*>(buffers[attributeIndex]);
 	}
+
+	//! Get index of attribute with specified interpretation in the buffers vector.
+	//!
+	//! (No two attributes can have the same interpretation)
+	//!
+	//! Returns -1 if not found.
+	int getAttributeIndex(const AttributeInterpretation interpretation) const;
 };
 
 #endif // _STELTESTQGL2VERTEXBUFFERBACKEND_HPP_
