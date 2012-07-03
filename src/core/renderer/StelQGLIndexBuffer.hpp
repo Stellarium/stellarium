@@ -1,8 +1,10 @@
 #ifndef _STELQGLINDEXBUFFER_HPP_
 #define _STELQGLINDEXBUFFER_HPP_
 
-#include <QVector>
+#include <algorithm>
+#include <numeric>
 #include <QtOpenGL>
+#include <QVector>
 #include "StelIndexBuffer.hpp"
 
 
@@ -88,6 +90,23 @@ private:
 		// Prevents GCC from complaining about exiting a non-void function:
 		return NULL;
 	}
+
+	//! Get maximum index value.
+	uint maxIndex() const
+	{
+		if(indexType_ == IndexType_U16)      
+		{
+			return std::accumulate(indices16.begin(), indices16.end(), 0, std::max<ushort>);
+		}
+		else if(indexType_ == IndexType_U32) 
+		{
+			return std::accumulate(indices32.begin(), indices32.end(), 0, std::max<uint>);
+		}
+		Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown index type");
+		// Avoids compiler warning about not returning anything
+		return -1;
+	}
+	
 
 	//! Get number of indices we can hold without enlarging indices16/indices32.
 	int indexCapacity() const
