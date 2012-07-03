@@ -297,7 +297,7 @@ void StelApp::init(QSettings* conf, StelRenderer* renderer)
 	getModuleMgr().registerModule(milky_way);
 
 	// Init sky image manager
-	skyImageMgr = new StelSkyLayerMgr();
+	skyImageMgr = new StelSkyLayerMgr(renderer);
 	skyImageMgr->init();
 	getModuleMgr().registerModule(skyImageMgr);
 

@@ -28,6 +28,7 @@
 #include "MilkyWay.hpp"
 #include "StelGuiBase.hpp"
 #include "StelSkyDrawer.hpp"
+#include "renderer/StelRenderer.hpp"
 
 #include <QtOpenGL>
 #include <QNetworkAccessManager>
@@ -39,7 +40,9 @@
 #include <QVariantList>
 #include <QSettings>
 
-StelSkyLayerMgr::StelSkyLayerMgr(void) : flagShow(true)
+StelSkyLayerMgr::StelSkyLayerMgr(StelRenderer* renderer) 
+	: flagShow(true)
+	, renderer(renderer)
 {
 	setObjectName("StelSkyLayerMgr");
 }
@@ -122,7 +125,7 @@ QString StelSkyLayerMgr::insertSkyLayer(StelSkyLayerP tile, const QString& keyHi
 // Add a new image from its URI (URL or local file name)
 QString StelSkyLayerMgr::insertSkyImage(const QString& uri, const QString& keyHint, bool ashow)
 {
-	return insertSkyLayer(StelSkyLayerP(new StelSkyImageTile(uri)), keyHint, ashow);
+	return insertSkyLayer(StelSkyLayerP(new StelSkyImageTile(renderer, uri)), keyHint, ashow);
 }
 
 // Remove a sky image tile from the list of background images
@@ -283,7 +286,7 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 		ol.append(QVariant(cl));
 		vm["worldCoords"] = ol;
 
-		StelSkyLayerP tile = StelSkyLayerP(new StelSkyImageTile(vm, 0));
+		StelSkyLayerP tile = StelSkyLayerP(new StelSkyImageTile(renderer, vm, 0));
 		QString key = insertSkyLayer(tile, filename, visible);
 		if (key == id)
 			return true;

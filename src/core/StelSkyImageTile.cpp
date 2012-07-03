@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "renderer/StelRenderer.hpp"
 #include "renderer/StelTextureParams.hpp"
 #include "renderer/StelTextureMgr.hpp"
 #include "StelSkyImageTile.hpp"
@@ -43,12 +44,14 @@ void StelSkyImageTile::initCtor()
 	alphaBlend = false;
 	noTexture = false;
 	texFader = NULL;
+	renderer = NULL;
 }
 
 // Constructor
-StelSkyImageTile::StelSkyImageTile(const QString& url, StelSkyImageTile* parent) : MultiLevelJsonBase(parent)
+StelSkyImageTile::StelSkyImageTile(StelRenderer* renderer, const QString& url, StelSkyImageTile* parent) : MultiLevelJsonBase(parent)
 {
 	initCtor();
+	this->renderer = renderer;
 	if (parent!=NULL)
 	{
 		luminance = parent->luminance;
@@ -58,9 +61,10 @@ StelSkyImageTile::StelSkyImageTile(const QString& url, StelSkyImageTile* parent)
 }
 
 // Constructor from a map used for JSON files with more than 1 level
-StelSkyImageTile::StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* parent) : MultiLevelJsonBase(parent)
+StelSkyImageTile::StelSkyImageTile(StelRenderer* renderer, const QVariantMap& map, StelSkyImageTile* parent) : MultiLevelJsonBase(parent)
 {
 	initCtor();
+	this->renderer = renderer;
 	if (parent!=NULL)
 	{
 		luminance = parent->luminance;
@@ -209,11 +213,11 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 			{
 				StelSkyImageTile* nt;
 				if (s.type()==QVariant::Map)
-					nt = new StelSkyImageTile(s.toMap(), this);
+					nt = new StelSkyImageTile(renderer, s.toMap(), this);
 				else
 				{
 					Q_ASSERT(s.type()==QVariant::String);
-					nt = new StelSkyImageTile(s.toString(), this);
+					nt = new StelSkyImageTile(renderer, s.toString(), this);
 				}
 				subTiles.append(nt);
 			}
@@ -249,25 +253,24 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 	Vec4f color;
 	if (alphaBlend==true || texFader->state()==QTimeLine::Running)
 	{
-		if (!alphaBlend)
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-		glEnable(GL_BLEND);
+		renderer->setBlendMode(BlendMode_Alpha);
 		color.set(ad_lum,ad_lum,ad_lum, texFader->currentValue());
 	}
 	else
 	{
-		glDisable(GL_BLEND);
+		renderer->setBlendMode(BlendMode_None);
 		color.set(ad_lum,ad_lum,ad_lum, 1.);
 	}
 
-	sPainter.setColor(color[0], color[1], color[2], color[3]);
-	sPainter.enableTexture2d(true);
+	renderer->setGlobalColor(color);
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
 	{
-		sPainter.drawSphericalRegion(poly.data(), StelPainter::SphericalPolygonDrawModeTextureFill);
+		poly->drawFill(renderer, SphericalRegion::DrawParams(sPainter.getProjector()));
 	}
 
 #ifdef DEBUG_STELSKYIMAGE_TILE
+	// GL-REFACTOR note: This code refers to non-existent API in StelPainter
+	// (it was probably changed since then)
 	if (debugFont==NULL)
 	{
 		debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
@@ -279,13 +282,16 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 		Vec3d bary = poly->getPointInside();
 		sPainter.getProjector()->project(bary,win);
 		sPainter.drawText(debugFont, win[0], win[1], getAbsoluteImageURI());
+
 		sPainter.enableTexture2d(false);
 		sPainter.drawSphericalRegion(poly.get(), StelPainter::SphericalPolygonDrawModeBoundary, &color);
 		sPainter.enableTexture2d(true);
 	}
 #endif
 	if (!alphaBlend)
-		glBlendFunc(GL_ONE, GL_ONE); // Revert
+	{
+		renderer->setBlendMode(BlendMode_Add); // Revert
+	}
 
 	return true;
 }

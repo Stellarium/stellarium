@@ -43,7 +43,7 @@ enum TextureWrap
 //! @see StelTextureMgr, StelTexture, StelRenderer
 struct StelTextureParams 
 {
-	//! Construct StelTextureParams initializing default parameters.
+	//! Construct StelTextureParams with default parameters.
 	//!
 	//! Default parameters are no mipmap generation, linear filtering and clamp to edge wrap mode.
 	StelTextureParams()
