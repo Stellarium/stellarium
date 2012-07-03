@@ -17,7 +17,27 @@ enum PrimitiveType
 	PrimitiveType_Triangles,
 	//! The first 3 vertices form a triangle and each vertex after that forms a triangle with its
 	//! previous 2 vertices.
-	PrimitiveType_TriangleStrip
+	PrimitiveType_TriangleStrip,
+
+	//! The first vertex forms a triangle with the second and third, another with 
+	//! the third and fourth, and so on.
+	PrimitiveType_TriangleFan,
+
+	//! Every 2 vertices form a line.
+	PrimitiveType_Lines, 
+
+	//! Vertices form lines from the first to the second, second to third, and so on.
+	//! The last vertex forms a line with the first, closing the loop.
+	PrimitiveType_LineLoop,
+};
+
+//! Base class for all vertex buffers.
+//!
+//! Used to store a pointer that might point to any vertex buffer.
+class StelAbstractVertexBuffer
+{
+public:
+	virtual ~StelAbstractVertexBuffer(){};
 };
 
 //! Vertex buffer interface.
@@ -115,7 +135,7 @@ enum PrimitiveType
 //! at the moment. C++11 might make it possible for the backend to at least
 //! re-create Vertex struct as a tuple in its functions using variadic recursive 
 //! templates, but that might be too complex/hacky to be worth the benefit.
-template<class V> class StelVertexBuffer
+template<class V> class StelVertexBuffer : public StelAbstractVertexBuffer
 {
 //! Only Renderer can construct a vertex buffer, and we also need unittesting.
 friend class StelRenderer;
@@ -152,9 +172,12 @@ public:
 		Q_ASSERT_X(!locked_, Q_FUNC_INFO,
 		           "Trying to get a vertex in a locked vertex buffer");
 		Q_ASSERT_X(index < vertexCount, Q_FUNC_INFO, "Vertex index out of bounds");
-		V result;
-		backend->getVertex(index, reinterpret_cast<quint8*>(&result));
-		return result;
+		// Using a quint array instead of a V directly avoids calling the 
+		// default constructor of V (which might not be defined, and the 
+		// default-constructed data would be overwritten anyway)
+		quint8 result[sizeof(V)];
+		backend->getVertex(index, result);
+		return *(reinterpret_cast<V*>(result));
 	}
 	
 	//! Set vertex at specified index in the buffer.
