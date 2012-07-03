@@ -72,9 +72,9 @@ public:
 	StelSkyImageTile();
 
 	//! Constructor
-	StelSkyImageTile(const QString& url, StelSkyImageTile* parent=NULL);
+	StelSkyImageTile(class StelRenderer* renderer, const QString& url, StelSkyImageTile* parent=NULL);
 	//! Constructor
-	StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* parent);
+	StelSkyImageTile(class StelRenderer* renderer, const QVariantMap& map, StelSkyImageTile* parent);
 
 	//! Destructor
 	~StelSkyImageTile();
@@ -132,6 +132,9 @@ protected:
 
 	//! Minimum resolution of the data of the texture in degree/pixel
 	float minResolution;
+
+	//! Renderer used for drawing.
+	StelRenderer* renderer;
 
 private:
 	//! init the StelSkyImageTile

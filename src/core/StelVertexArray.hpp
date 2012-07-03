@@ -39,8 +39,15 @@ struct StelVertexArray
 	};
 
 	StelVertexArray(StelPrimitiveType pType=StelVertexArray::Triangles) : primitiveType(pType) {;}
-	StelVertexArray(const QVector<Vec3d>& v, StelPrimitiveType pType=StelVertexArray::Triangles,const QVector<Vec2f>& t=QVector<Vec2f>(), const QVector<unsigned int> i=QVector<unsigned int>()) :
-		vertex(v), texCoords(t), indices(i), primitiveType(pType) {;}
+	StelVertexArray(const QVector<Vec3d>& v, 
+	                StelPrimitiveType pType=StelVertexArray::Triangles,
+	                const QVector<Vec2f>& t=QVector<Vec2f>(), 
+	                const QVector<unsigned int> i=QVector<unsigned int>())
+		: vertex(v)
+		, texCoords(t)
+		, indices(i)
+		, primitiveType(pType) 
+	{;}
 
 	//! OpenGL compatible array of 3D vertex to be displayed using vertex arrays.
 	//! TODO, move to float? Most of the vectors are normalized, thus the precision is around 1E-45 using float
