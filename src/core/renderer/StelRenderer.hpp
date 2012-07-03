@@ -1,7 +1,6 @@
 #ifndef _STELRENDERER_HPP_
 #define _STELRENDERER_HPP_
 
-#include <QColor>
 #include <QImage>
 #include <QPainter>
 #include <QSize>
@@ -68,6 +67,9 @@ public:
 class StelRenderer
 {
 public:
+	//! Destructor.
+	virtual ~StelRenderer(){};
+
 	//! Initialize the renderer. 
 	//! 
 	//! Must be called before any other methods.
@@ -127,12 +129,14 @@ public:
 	//! @param dontProject  Disable vertex position projection.
 	//!                     (Projection matrix and viewport information of the 
 	//!                     projector are still used)
-	//!
 	//!                     This is a hack to support StelSkyDrawer, which already 
 	//!                     projects the star positions before drawing them.
 	//!                     Avoid using this if possible. StelSkyDrawer might be 
 	//!                     refactored in future to remove the need for dontProject,
 	//!                     in which case it should be removed.
+	//!
+	//! @note When drawing with a custom StelProjector only 3D vertex positions are
+	//! supported.
 	template<class V>
 	void drawVertexBuffer(StelVertexBuffer<V>* vertexBuffer, 
 	                      class StelIndexBuffer* indexBuffer = NULL,
@@ -186,7 +190,7 @@ public:
 
 	//! Create a StelTextureBackend from specified file or URL.
 	//!
-	//! Note that the StelTextureBackend created here must be destroyed 
+	//! StelTextureBackend created here must be destroyed 
 	//! by calling destroyTextureBackend of the same renderer.
 	//! This allows things like texture caching to work.
 	//!
@@ -254,7 +258,9 @@ public:
 	//!
 	//! Per-vertex color completely overrides this 
 	//! (this is to keep behavior from before the GL refactor unchanged).
-	virtual void setGlobalColor(const QColor& color) = 0;
+	//!
+	//! @note Color channel values can be outside of the 0-1 range.
+	virtual void setGlobalColor(const Vec4f& color) = 0;
 
 	//! Set blend mode.
 	//!

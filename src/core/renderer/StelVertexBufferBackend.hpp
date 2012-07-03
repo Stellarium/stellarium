@@ -88,7 +88,7 @@ public:
 	//! @param index        Index of the vertex to read.
 	//! @param vertexOutPtr Pointer to the beginning of the output vertex.
 	//!                     Data members of the vertex must match vertex attributes of the buffer.
-	virtual void getVertex(const uint index, quint8* const vertexOutPtr) const = 0;
+	virtual void getVertex(const int index, quint8* const vertexOutPtr) const = 0;
 	
 	//! Rewrite a vertex in the buffer.
 	//!
@@ -98,7 +98,7 @@ public:
 	//! @param index       Index of the vertex to set.
 	//! @param vertexInPtr Pointer to the beginning of the vertex we're rewriting with.
 	//!                    Data members of the vertex must match vertex attributes of the buffer.
-	virtual void setVertex(const uint index, const quint8* const vertexInPtr) = 0;
+	virtual void setVertex(const int index, const quint8* const vertexInPtr) = 0;
 	
 	//! Lock the buffer. Must be called before drawing.
 	virtual void lock() = 0;
@@ -114,11 +114,11 @@ public:
 	virtual void clear() = 0;
 
 	//! Assert that the user-specified (in StelVertexBuffer) vertex type is valid.
-	void validateVertexType(const uint vertexSize)
+	void validateVertexType(const int vertexSize)
 	{
 		// We have no way of looking at each data member of the vertex type, 
 		// but we can at least enforce that their total length matches.
-		uint bytes = 0;
+		int bytes = 0;
 		
 		for(int attrib = 0; attrib < attributes.count; ++attrib)
 		{

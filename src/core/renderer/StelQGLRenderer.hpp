@@ -114,7 +114,7 @@ public:
 
 	virtual void destroyTextureBackend(StelTextureBackend* const textureBackend);
 
-	virtual void setGlobalColor(const QColor& color)
+	virtual void setGlobalColor(const Vec4f& color)
 	{
 		globalColor = color;
 	}
@@ -168,7 +168,7 @@ public:
 	}
 
 	//! Get global vertex color (used for drawing).
-	const QColor& getGlobalColor() const
+	const Vec4f& getGlobalColor() const
 	{
 		return globalColor;
 	}
@@ -222,7 +222,9 @@ private:
 	//!
 	//! Per-vertex color completely overrides this 
 	//! (this is to keep behavior from before the GL refactor unchanged).
-	QColor globalColor;
+	//!
+	//! Note that channel values might be outside of the 0-1 range.
+	Vec4f globalColor;
 
 	//! Draw the result of drawing commands to the window, applying given effect if possible.
 	void drawWindow(StelViewportEffect* const effect);

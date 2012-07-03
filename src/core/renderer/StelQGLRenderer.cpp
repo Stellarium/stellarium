@@ -183,7 +183,7 @@ void StelQGLRenderer::drawWindow(StelViewportEffect* const effect)
 			int texWidth, texHeight;
 			screenTexture->getDimensions(texWidth, texHeight);
 
-			setGlobalColor(Qt::white);
+			setGlobalColor(Vec4f(1.0f, 1.0f, 1.0f, 1.0f));
 			screenTexture->bind();
 			drawRect(0, 0, texWidth, texHeight);
 		}

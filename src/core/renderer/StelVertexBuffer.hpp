@@ -86,13 +86,16 @@ public:
 //! };
 //! @endcode
 //!
-//! Note that there are some requirements for a vertex type 
+//! Note that there are some requirements for a vertex type. 
 //! These are verified at run time.
 //! The requirements are:
 //!
 //! @li A position attribute is required.
 //! @li Any texture coordinates must be 2D. There is no 1D or 3D texture support right now.
 //! @li Any normals must be 3D.
+//!
+//! @note When drawing with a custom StelProjector (Renderer::drawVertexBuffer), 
+//! only 3D vertex positions are supported.
 //!
 //! @see AttributeType, AttributeInterpretation, StelVertexAttribute, StelRenderer
 //!
