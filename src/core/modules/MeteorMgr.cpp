@@ -147,7 +147,7 @@ void MeteorMgr::update(double deltaTime)
 }
 
 
-void MeteorMgr::draw(StelCore* core)
+void MeteorMgr::draw(StelCore* core, class StelRenderer* renderer)
 {
 	if (!flagShow)
 		return;

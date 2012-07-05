@@ -256,7 +256,7 @@ void LandscapeMgr::update(double deltaTime)
 	landscape->setBrightness(landscapeBrightness+0.05);
 }
 
-void LandscapeMgr::draw(StelCore* core)
+void LandscapeMgr::draw(StelCore* core, class StelRenderer* renderer)
 {
 	// Draw the atmosphere
 	atmosphere->draw(core);

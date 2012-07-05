@@ -297,7 +297,7 @@ void StelApp::init(QSettings* conf, StelRenderer* renderer)
 	getModuleMgr().registerModule(milky_way);
 
 	// Init sky image manager
-	skyImageMgr = new StelSkyLayerMgr(renderer);
+	skyImageMgr = new StelSkyLayerMgr();
 	skyImageMgr->init();
 	getModuleMgr().registerModule(skyImageMgr);
 
@@ -392,7 +392,7 @@ void StelApp::update(double deltaTime)
 }
 
 //! Iterate through the drawing sequence.
-bool StelApp::drawPartial()
+bool StelApp::drawPartial(StelRenderer* renderer)
 {
 	if (drawState == 0)
 	{
@@ -407,7 +407,7 @@ bool StelApp::drawPartial()
 	int index = drawState - 1;
 	if (index < modules.size())
 	{
-		if (modules[index]->drawPartial(core))
+		if (modules[index]->drawPartial(core, renderer))
 			return true;
 		drawState++;
 		return true;
@@ -418,10 +418,10 @@ bool StelApp::drawPartial()
 }
 
 //! Main drawing function called at each frame
-void StelApp::draw()
+void StelApp::draw(StelRenderer* renderer)
 {
 	Q_ASSERT(drawState == 0);
-	while (drawPartial()) {}
+	while (drawPartial(renderer)) {}
 	Q_ASSERT(drawState == 0);
 }
 

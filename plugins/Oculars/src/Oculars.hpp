@@ -62,7 +62,7 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual bool configureGui(bool show=true);
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	//! Returns the module-specific style sheet.
 	//! The main StelStyle instance should be passed.

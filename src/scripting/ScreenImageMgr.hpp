@@ -113,7 +113,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init();
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 	//! Update time-dependent parts of the module.
 	virtual void update(double deltaTime);
 	//! Defines the order in which the various modules are drawn.

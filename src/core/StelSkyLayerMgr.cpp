@@ -24,7 +24,6 @@
 #include "StelProjector.hpp"
 #include "StelSkyImageTile.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelPainter.hpp"
 #include "MilkyWay.hpp"
 #include "StelGuiBase.hpp"
 #include "StelSkyDrawer.hpp"
@@ -40,9 +39,8 @@
 #include <QVariantList>
 #include <QSettings>
 
-StelSkyLayerMgr::StelSkyLayerMgr(StelRenderer* renderer) 
+StelSkyLayerMgr::StelSkyLayerMgr() 
 	: flagShow(true)
-	, renderer(renderer)
 {
 	setObjectName("StelSkyLayerMgr");
 }
@@ -125,7 +123,7 @@ QString StelSkyLayerMgr::insertSkyLayer(StelSkyLayerP tile, const QString& keyHi
 // Add a new image from its URI (URL or local file name)
 QString StelSkyLayerMgr::insertSkyImage(const QString& uri, const QString& keyHint, bool ashow)
 {
-	return insertSkyLayer(StelSkyLayerP(new StelSkyImageTile(renderer, uri)), keyHint, ashow);
+	return insertSkyLayer(StelSkyLayerP(new StelSkyImageTile(uri)), keyHint, ashow);
 }
 
 // Remove a sky image tile from the list of background images
@@ -155,18 +153,16 @@ void StelSkyLayerMgr::removeSkyLayer(StelSkyLayerP l)
 }
 
 // Draw all the multi-res images collection
-void StelSkyLayerMgr::draw(StelCore* core)
+void StelSkyLayerMgr::draw(StelCore* core, StelRenderer* renderer)
 {
 	if (!flagShow)
 		return;
 
-	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	glBlendFunc(GL_ONE, GL_ONE);
-	glEnable(GL_BLEND);
+	renderer->setBlendMode(BlendMode_Add);
 	foreach (SkyLayerElem* s, allSkyLayers)
 	{
 		if (s->show)
-			s->layer->draw(core, sPainter, core->getProjection(StelCore::FrameJ2000), 1.);
+			s->layer->draw(core, renderer, core->getProjection(StelCore::FrameJ2000), 1.);
 	}
 }
 
@@ -286,7 +282,7 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 		ol.append(QVariant(cl));
 		vm["worldCoords"] = ol;
 
-		StelSkyLayerP tile = StelSkyLayerP(new StelSkyImageTile(renderer, vm, 0));
+		StelSkyLayerP tile = StelSkyLayerP(new StelSkyImageTile(vm, 0));
 		QString key = insertSkyLayer(tile, filename, visible);
 		if (key == id)
 			return true;

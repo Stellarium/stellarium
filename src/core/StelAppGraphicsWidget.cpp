@@ -170,7 +170,7 @@ bool StelAppGraphicsWidget::paintPartial()
 	if (paintState == 1)
 	{
 		// And draw them
-		if (stelApp->drawPartial())
+		if (stelApp->drawPartial(renderer))
 			return true;
 
 		paintState = 0;

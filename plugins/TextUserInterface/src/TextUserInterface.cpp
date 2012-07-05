@@ -496,7 +496,7 @@ void TextUserInterface::loadConfiguration(void)
 /*************************************************************************
  Draw our module.
 *************************************************************************/
-void TextUserInterface::draw(StelCore* core)
+void TextUserInterface::draw(StelCore* core, class StelRenderer* renderer)
 {
 	if (tuiActive)
 	{

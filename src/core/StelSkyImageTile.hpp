@@ -71,15 +71,15 @@ public:
 	StelSkyImageTile();
 
 	//! Constructor
-	StelSkyImageTile(class StelRenderer* renderer, const QString& url, StelSkyImageTile* parent=NULL);
+	StelSkyImageTile(const QString& url, StelSkyImageTile* parent=NULL);
 	//! Constructor
-	StelSkyImageTile(class StelRenderer* renderer, const QVariantMap& map, StelSkyImageTile* parent);
+	StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* parent);
 
 	//! Destructor
 	~StelSkyImageTile();
 
 	//! Draw the image on the screen.
-	void draw(StelCore* core, class StelPainter& sPainter, StelProjectorP projector, float opacity=1.);
+	void draw(StelCore* core, class StelRenderer* renderer, StelProjectorP projector, float opacity=1.);
 
 	//! Return the dataset credits to use in the progress bar
 	DataSetCredits getDataSetCredits() const {return dataSetCredits;}
@@ -132,8 +132,8 @@ protected:
 	//! Minimum resolution of the data of the texture in degree/pixel
 	float minResolution;
 
-	//! Renderer used for drawing.
-	StelRenderer* renderer;
+	// //! Renderer used for drawing.
+	// StelRenderer* renderer;
 
 private:
 	//! init the StelSkyImageTile
@@ -141,11 +141,16 @@ private:
 
 	//! Return the list of tiles which should be drawn.
 	//! @param result a map containing resolution, pointer to the tiles
-	void getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& result, StelCore* core, const SphericalRegionP& viewPortPoly, float limitLuminance, bool recheckIntersect=true);
+	void getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& result, 
+	                    StelCore* core, 
+	                    StelRenderer* renderer,
+	                    const SphericalRegionP& viewPortPoly,
+	                    float limitLuminance, 
+	                    bool recheckIntersect=true);
 
 	//! Draw the image on the screen.
 	//! @return true if the tile was actually displayed
-	bool drawTile(StelCore* core, StelProjectorP projector);
+	bool drawTile(StelCore* core, StelRenderer* renderer, StelProjectorP projector);
 
 	//! Return the minimum resolution
 	double getMinResolution() const {return minResolution;}

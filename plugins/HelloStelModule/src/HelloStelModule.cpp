@@ -87,7 +87,7 @@ void HelloStelModule::init()
 /*************************************************************************
  Draw our module. This should print "Hello world!" in the main window
 *************************************************************************/
-void HelloStelModule::draw(StelCore* core)
+void HelloStelModule::draw(StelCore* core, class StelRenderer* renderer)
 {
 	StelPainter painter(core->getProjection2d());
 	painter.setColor(1,1,1,1);

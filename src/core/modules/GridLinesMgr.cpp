@@ -705,7 +705,7 @@ void GridLinesMgr::update(double deltaTime)
 	galacticPlaneLine->update(deltaTime);
 }
 
-void GridLinesMgr::draw(StelCore* core)
+void GridLinesMgr::draw(StelCore* core, class StelRenderer* renderer)
 {
 	equGrid->draw(core);
 	galacticGrid->draw(core);

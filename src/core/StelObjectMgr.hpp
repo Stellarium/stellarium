@@ -42,7 +42,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init() {;}
-	virtual void draw(StelCore*) {;}
+	virtual void draw(StelCore*, class StelRenderer*) {;}
 	virtual void update(double) {;}
 
 	///////////////////////////////////////////////////////////////////////////
