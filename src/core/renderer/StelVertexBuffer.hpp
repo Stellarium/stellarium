@@ -13,8 +13,10 @@ enum PrimitiveType
 {
 	//! Each vertex is a separate point.
 	PrimitiveType_Points,
+
 	//! Every 3 vertices form a triangle.
 	PrimitiveType_Triangles,
+
 	//! The first 3 vertices form a triangle and each vertex after that forms a triangle with its
 	//! previous 2 vertices.
 	PrimitiveType_TriangleStrip,
