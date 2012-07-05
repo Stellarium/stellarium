@@ -166,7 +166,7 @@ void StelSkyLayerMgr::draw(StelCore* core)
 	foreach (SkyLayerElem* s, allSkyLayers)
 	{
 		if (s->show)
-			s->layer->draw(core, sPainter, 1.);
+			s->layer->draw(core, sPainter, core->getProjection(StelCore::FrameJ2000), 1.);
 	}
 }
 

@@ -78,13 +78,11 @@ StelSkyImageTile::~StelSkyImageTile()
 {
 }
 
-void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float)
+void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, StelProjectorP projector, float)
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-
 	const float limitLuminance = core->getSkyDrawer()->getLimitLuminance();
 	QMultiMap<double, StelSkyImageTile*> result;
-	getTilesToDraw(result, core, prj->getViewportConvexPolygon(0, 0), limitLuminance, true);
+	getTilesToDraw(result, core, projector->getViewportConvexPolygon(0, 0), limitLuminance, true);
 
 	int numToBeLoaded=0;
 	foreach (StelSkyImageTile* t, result)
@@ -92,14 +90,12 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float)
 			++numToBeLoaded;
 	updatePercent(result.size(), numToBeLoaded);
 
-	// Draw in the good order
-	sPainter.enableTexture2d(true);
-	glBlendFunc(GL_ONE, GL_ONE);
+	// Draw in the right order
 	QMap<double, StelSkyImageTile*>::Iterator i = result.end();
 	while (i!=result.begin())
 	{
 		--i;
-		i.value()->drawTile(core, sPainter);
+		i.value()->drawTile(core, projector);
 	}
 
 	deleteUnusedSubTiles();
@@ -236,8 +232,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 }
 
 // Draw the image on the screen.
-// Assume GL_TEXTURE_2D is enabled
-bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
+bool StelSkyImageTile::drawTile(StelCore* core, StelProjectorP projector)
 {
 	if (!tex->bind())
 		return false;
@@ -265,7 +260,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 	renderer->setGlobalColor(color);
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
 	{
-		poly->drawFill(renderer, SphericalRegion::DrawParams(sPainter.getProjector()));
+		poly->drawFill(renderer, SphericalRegion::DrawParams(projector));
 	}
 
 #ifdef DEBUG_STELSKYIMAGE_TILE
