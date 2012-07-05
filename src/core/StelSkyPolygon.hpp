@@ -72,7 +72,7 @@ public:
 	~StelSkyPolygon();
 
 	//! Draw the image on the screen.
-	void draw(StelCore* core, StelPainter& sPainter, float opacity=1.);
+	void draw(StelCore* core, StelPainter& sPainter, StelProjectorP projector, float opacity=1.);
 
 	//! Return the dataset credits to use in the progress bar
 	DataSetCredits getDataSetCredits() const {return dataSetCredits;}

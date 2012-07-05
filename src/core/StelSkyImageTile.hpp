@@ -20,17 +20,16 @@
 #ifndef _STELSKYIMAGETILE_HPP_
 #define _STELSKYIMAGETILE_HPP_
 
+#include <QTimeLine>
+
+#include "MultiLevelJsonBase.hpp"
 #include "renderer/StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
-#include "MultiLevelJsonBase.hpp"
-
-#include <QTimeLine>
 
 //#define DEBUG_STELSKYIMAGE_TILE 1
 
 class QIODevice;
 class StelCore;
-class StelPainter;
 
 //! Contain all the credits for a given server hosting the data
 class ServerCredits
@@ -80,7 +79,7 @@ public:
 	~StelSkyImageTile();
 
 	//! Draw the image on the screen.
-	void draw(StelCore* core, StelPainter& sPainter, float opacity=1.);
+	void draw(StelCore* core, class StelPainter& sPainter, StelProjectorP projector, float opacity=1.);
 
 	//! Return the dataset credits to use in the progress bar
 	DataSetCredits getDataSetCredits() const {return dataSetCredits;}
@@ -146,7 +145,7 @@ private:
 
 	//! Draw the image on the screen.
 	//! @return true if the tile was actually displayed
-	bool drawTile(StelCore* core, StelPainter& sPainter);
+	bool drawTile(StelCore* core, StelProjectorP projector);
 
 	//! Return the minimum resolution
 	double getMinResolution() const {return minResolution;}
