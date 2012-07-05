@@ -233,8 +233,7 @@ void StelSkyImageTile::getTilesToDraw
 // Draw the image on the screen.
 bool StelSkyImageTile::drawTile(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
 {
-	if (!tex->bind())
-		return false;
+	if (!tex->bind()) {return false;}
 
 	if (!texFader)
 	{
