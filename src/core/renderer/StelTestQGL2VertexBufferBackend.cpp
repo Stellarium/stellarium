@@ -217,8 +217,6 @@ int StelTestQGL2VertexBufferBackend::
 void StelTestQGL2VertexBufferBackend::
 	projectVertices(StelProjectorP projector, StelQGLIndexBuffer* indexBuffer)
 {
-	Q_ASSERT_X(false, Q_FUNC_INFO,
-	           "GL-REFACTOR Testing assert - will be removed after asserted-out code is tested to work");
 	// This is a backend function called during (right before) drawing, so we need 
 	// to be locked.
 	Q_ASSERT_X(locked, Q_FUNC_INFO,
@@ -226,8 +224,9 @@ void StelTestQGL2VertexBufferBackend::
 
 	// Get the position attribute and ensure that we can project it.
 	const int index = getAttributeIndex(AttributeInterpretation_Position);
+	Q_ASSERT_X(index >= 0, Q_FUNC_INFO, "Vertex format without a position attribute");
 	const StelVertexAttribute& attribute(attributes.attributes[index]);
-	Q_ASSERT_X(attributes.sizes[index] == 3, Q_FUNC_INFO,
+	Q_ASSERT_X(attributeDimensions(attribute.type) == 3, Q_FUNC_INFO,
 	           "Trying to use a custom StelProjector to project non-3D vertex positions");
 	Q_ASSERT_X(attribute.type == AttributeType_Vec3f, Q_FUNC_INFO, 
 	           "Unknown 3D vertex attribute type");
