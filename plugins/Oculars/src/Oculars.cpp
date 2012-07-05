@@ -228,7 +228,7 @@ void Oculars::deinit()
 }
 
 //! Draw any parts on the screen which are for our module
-void Oculars::draw(StelCore* core)
+void Oculars::draw(StelCore* core, class StelRenderer* renderer)
 {
 	if (flagShowTelrad) {
 		paintTelrad();

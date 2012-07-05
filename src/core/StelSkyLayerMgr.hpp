@@ -36,7 +36,7 @@ class StelSkyLayerMgr : public StelModule
 	Q_OBJECT
 
 public:
-	StelSkyLayerMgr(class StelRenderer* renderer);
+	StelSkyLayerMgr();
 	~StelSkyLayerMgr();
 
 	///////////////////////////////////////////////////////////////////////////
@@ -45,7 +45,7 @@ public:
 	virtual void init();
 
 	//! Draws sky background
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 
 	//! Update state which is time dependent.
 	virtual void update(double) {;}
@@ -167,9 +167,6 @@ private:
 
 	// Whether to draw at all
 	bool flagShow;
-
-	//! Renderer used for drawing.
-	class StelRenderer* renderer;
 };
 
 #endif // _STELSKYLAYERMGR_HPP_

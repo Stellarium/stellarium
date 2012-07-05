@@ -128,7 +128,7 @@ public:
 	//! Draws the Equatorial Grid, Azimuthal Grid, Meridian Line, Equator Line
 	//! and Ecliptic Line according to the various flags which control their
 	//! visibility.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 
 	//! Update time-dependent features.
 	//! Used to control fading when turning on and off the grid lines and great circles.

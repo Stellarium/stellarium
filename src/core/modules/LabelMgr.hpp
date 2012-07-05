@@ -56,7 +56,7 @@ public:
 	virtual void init();
 	
 	//! Draw user labels.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 	
 	//! Update time-dependent parts of the module.
 	virtual void update(double deltaTime);

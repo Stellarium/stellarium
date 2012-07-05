@@ -67,7 +67,7 @@ void MilkyWay::update(double deltaTime) {fader->update((int)(deltaTime*1000));}
 void MilkyWay::setFlagShow(bool b){*fader = b;}
 bool MilkyWay::getFlagShow() const {return *fader;}
 
-void MilkyWay::draw(StelCore* core)
+void MilkyWay::draw(StelCore* core, class StelRenderer* renderer)
 {
 	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
 	transfo->combine(Mat4d::xrotation(M_PI/180.*23.)*

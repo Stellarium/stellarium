@@ -623,7 +623,7 @@ int StarMgr::getMaxSearchLevel() const
 
 
 // Draw all the stars
-void StarMgr::draw(StelCore* core)
+void StarMgr::draw(StelCore* core, class StelRenderer* renderer)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelSkyDrawer* skyDrawer = core->getSkyDrawer();

@@ -140,7 +140,7 @@ struct DrawNebulaFuncObject
 };
 
 // Draw all the Nebulae
-void NebulaMgr::draw(StelCore* core)
+void NebulaMgr::draw(StelCore* core, class StelRenderer* renderer)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);

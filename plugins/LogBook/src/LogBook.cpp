@@ -119,7 +119,7 @@ bool LogBook::configureGui(bool)
 	return true;
 }
 
-void LogBook::draw(StelCore* core)
+void LogBook::draw(StelCore* core, class StelRenderer* renderer)
 {
 	StelPainter painter(core->getProjection2d());
 }

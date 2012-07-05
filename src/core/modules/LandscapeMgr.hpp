@@ -71,7 +71,7 @@ public:
 	virtual void init();
 
 	//! Draw the landscape graphics, cardinal points and atmosphere.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 
 	//! Update time-dependent state.
 	//! Includes:

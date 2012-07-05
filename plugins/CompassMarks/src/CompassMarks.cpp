@@ -136,7 +136,7 @@ void CompassMarks::init()
 }
 
 //! Draw any parts on the screen which are for our module
-void CompassMarks::draw(StelCore* core)
+void CompassMarks::draw(StelCore* core, class StelRenderer* renderer)
 {
 	if (markFader.getInterstate() <= 0.0) { return; }
 

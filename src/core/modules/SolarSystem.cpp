@@ -922,7 +922,7 @@ struct biggerDistance : public std::binary_function<PlanetP, PlanetP, bool>
 
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
-void SolarSystem::draw(StelCore* core)
+void SolarSystem::draw(StelCore* core, class StelRenderer* renderer)
 {
 	if (!flagShow)
 		return;

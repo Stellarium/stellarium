@@ -42,7 +42,7 @@ public:
 	virtual void init();
 
 	//! Draw the Milky Way.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 	
 	//! Update and time-dependent state.  Updates the fade level while the 
 	//! Milky way rendering is being changed from on to off or off to on.

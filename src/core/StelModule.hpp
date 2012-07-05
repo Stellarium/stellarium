@@ -66,13 +66,17 @@ public:
 
 	//! Execute all the drawing functions for this module.
 	//! @param core the core to use for the drawing
-	virtual void draw(StelCore* core) {Q_UNUSED(core);}
+	virtual void draw(StelCore* core, class StelRenderer* renderer) 
+	{
+		Q_UNUSED(core);
+		Q_UNUSED(renderer);
+	}
 
 	//! Iterate through the drawing sequence.
 	//! This allow us to split the slow drawing operation into small parts,
 	//! we can then decide to pause the painting for this frame and used the cached image instead.
 	//! @return true if we should continue drawing (by calling the method again)
-	virtual bool drawPartial(StelCore* core);
+	virtual bool drawPartial(StelCore* core, class StelRenderer* renderer);
 
 	//! Update the module with respect to the time.
 	//! @param deltaTime the time increment in second since last call.
