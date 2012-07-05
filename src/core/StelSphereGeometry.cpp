@@ -739,44 +739,15 @@ void prepareVertexBufferUpdate(StelVertexBuffer<V>** buffer, StelRenderer* rende
 	(*buffer)->clear();
 }
 
-//! Utility function providing default behavior for 
-//! SphericalRegion::updateFillVertexBuffer when not subdividing triangles.
-//! Used by SphericalRegion and SphericalConvexPolygon. 
-//! SphericalTexturedConvexPolygon has its own code.
+//! Determine whether a triangle instersects a projection discontinuity.
 //!
-//! (this is not a virtual method of SphericalRegion as every
-//! overridden version would then need different arguments.)
-//!
-//! @param buffer              Fill vertex buffer we're updating.
-//! @param vertices            Vertex position data.
-//! @param handleDiscontinuity Do we need to handle a projection discontinuity?
-//!                            (we need to do this when triangles might 
-//!                            intersect a discontinuity in the viewport)
-void updateFillVertexBufferNoSubdivide(StelVertexBuffer<SphericalRegion::PlainVertex>** buffer,
-                                       const QVector<Vec3d>& vertices, bool handleDiscontinuity)
+//! @param projector Projector to check against.
+//! @param triangle  Positions of vertices in the triangle.
+bool triangleIntersectsDiscontinuity(StelProjectorP projector, const Triplet<Vec3d>& triangle)
 {
-	// The simplest case, we don't need to iterate through the triangles at all.
-	if (handleDiscontinuity)
-	{
-		//GL-REFACTOR TODO implement this.
-		Q_ASSERT_X(false, Q_FUNC_INFO, "TODO - not yet implemented");
-		//Implementation reference:
-		// The projection has discontinuities, so we need to make sure that no triangle is crossing them.
-		//drawStelVertexArray(arr.removeDiscontinuousTriangles(projector.data()), false);
-	}
-	else
-	{
-		Q_ASSERT_X(false, Q_FUNC_INFO,
-		           "GL-REFACTOR Testing assert - will be removed after asserted-out code is tested to work");
-
-		// Copy the vertex data to the buffer without subdividing or changing anything.
-		for (int v = 0; v < vertices.size(); v++) 
-		{
-			Vec3d pos = vertices[v];
-			(*buffer)->addVertex(SphericalRegion::PlainVertex(Vec3f(pos[1], pos[2], pos[3])));
-		}
-		(*buffer)->lock();
-	}
+	return projector->intersectViewportDiscontinuity(triangle.a, triangle.b) ||
+	       projector->intersectViewportDiscontinuity(triangle.b, triangle.c) ||
+	       projector->intersectViewportDiscontinuity(triangle.c, triangle.a);
 }
 
 void SphericalRegion::updateFillVertexBuffer(StelRenderer* renderer, const DrawParams& params, bool handleDiscontinuity)
@@ -784,12 +755,52 @@ void SphericalRegion::updateFillVertexBuffer(StelRenderer* renderer, const DrawP
 	Q_ASSERT_X(false, Q_FUNC_INFO,
 	           "GL-REFACTOR Testing assert - will be removed after asserted-out code is tested to work");
 
-	prepareVertexBufferUpdate(&fillPlainVertexBuffer, renderer);
 	const QVector<Vec3d>& vertices = getOctahedronPolygon().fillVertices();
+	StelProjectorP projector = params.projector_;
+
+	prepareVertexBufferUpdate(&fillPlainVertexBuffer, renderer);
 
 	if(!params.subdivide_)
 	{
-		updateFillVertexBufferNoSubdivide(&fillPlainVertexBuffer, vertices, handleDiscontinuity);
+		// The simplest case, we don't need to iterate through the triangles at all.
+		if (handleDiscontinuity)
+		{
+			Q_ASSERT_X(false, Q_FUNC_INFO,
+			           "GL-REFACTOR Testing assert - will be removed after asserted-out code is tested to work");
+
+			// We don't use indices here, since we don't have a vertex buffer yet.
+			// If we did it as it was done in 
+			// StelPainter::removeDiscontinuousTriangles(), we'd have to copy _all_
+			// vertices and then use indices to specify which to draw.
+			// 
+			// So we only copy _some_ of the vertices.
+
+			// Iterating over triangles,
+			// adding them to the buffer if they don't cross the discontinuity.
+			for (int i = 0; i < vertices.size(); i += 3)
+			{
+				const Triplet<Vec3d> triVertices
+					(vertices.at(i), vertices.at(i + 1), vertices.at(i + 2));
+				if(!triangleIntersectsDiscontinuity(projector, triVertices))
+				{
+					fillPlainVertexBuffer->addVertex(PlainVertex(triVertices.a));
+					fillPlainVertexBuffer->addVertex(PlainVertex(triVertices.b));
+					fillPlainVertexBuffer->addVertex(PlainVertex(triVertices.c));
+				}
+			} 
+		}
+		else
+		{
+			Q_ASSERT_X(false, Q_FUNC_INFO,
+			           "GL-REFACTOR Testing assert - will be removed after asserted-out code is tested to work");
+
+			// Copy the vertex data to the buffer without subdividing or changing anything.
+			for (int v = 0; v < vertices.size(); v++) 
+			{
+				fillPlainVertexBuffer->addVertex(SphericalRegion::PlainVertex(vertices[v]));
+			}
+			fillPlainVertexBuffer->lock();
+		} 
 		useProjector = true;
 		return;
 	}
@@ -799,7 +810,7 @@ void SphericalRegion::updateFillVertexBuffer(StelRenderer* renderer, const DrawP
 	// and appending to the buffer.
 	for (int i = 0; i < vertices.size(); i += 3)
 	{
-		Triplet<Vec3d> triVertices(vertices.at(i), vertices.at(i + 1), vertices.at(i + 2));
+		const Triplet<Vec3d> triVertices(vertices.at(i), vertices.at(i + 1), vertices.at(i + 2));
 		projectSphericalTriangle(params.projector_, params.clippingCap_, 
 		                         &triVertices, NULL, fillPlainVertexBuffer, 
 		                         params.maxSqDistortion_);
@@ -814,11 +825,55 @@ void SphericalConvexPolygon::updateFillVertexBuffer(StelRenderer* renderer, cons
 	           "GL-REFACTOR Testing assert - will be removed after asserted-out code is tested to work");
 
 	const QVector<Vec3d>& vertices = contour;
+	StelProjectorP projector = params.projector_;
+
 	prepareVertexBufferUpdate(&fillPlainVertexBuffer, renderer);
 
 	if(!params.subdivide_)
 	{
-		updateFillVertexBufferNoSubdivide(&fillPlainVertexBuffer, vertices, handleDiscontinuity);
+		if (handleDiscontinuity)
+		{
+			Q_ASSERT_X(false, Q_FUNC_INFO,
+			          "GL-REFACTOR Testing assert - will be removed after asserted-out code is tested to work");
+
+			// We don't use indices here, since we don't have a vertex buffer yet.
+			// If we did it as it was done in 
+			// StelPainter::removeDiscontinuousTriangles(), we'd have to copy _all_
+			// vertices and then use indices to specify which to draw.
+			// 
+			// So we only copy _some_ of the vertices.
+
+			// Iterating over triangles in a triangle fan, 
+			// adding them as separate triangles if they don't cross the discontinuity.
+			const Vec3d v0 = vertices.at(0);
+			for (int i = 1; i < vertices.size() - 1; ++i)
+			{
+				const Triplet<Vec3d> triVertices(v0, vertices.at(i), vertices.at(i + 1));
+				if(!triangleIntersectsDiscontinuity(projector, triVertices))
+				{
+					fillPlainVertexBuffer->addVertex(PlainVertex(triVertices.a));
+					fillPlainVertexBuffer->addVertex(PlainVertex(triVertices.b));
+					fillPlainVertexBuffer->addVertex(PlainVertex(triVertices.c));
+				}
+			}
+		}
+		else
+		{
+			Q_ASSERT_X(false, Q_FUNC_INFO,
+			          "GL-REFACTOR Testing assert - will be removed after asserted-out code is tested to work");
+			//Decomposing the triangle fan into triangles. 
+			//
+			//We could get less overhead with initializing the vertex buffer with 
+			//triangle fan primitive type, but we might end up deleting/constructing
+			//a new buffer based on draw parameters (which would complicate code).
+			const Vec3d v0 = vertices.at(0);
+			for (int i = 1; i < vertices.size() - 1; ++i)
+			{
+				fillPlainVertexBuffer->addVertex(PlainVertex(v0));
+				fillPlainVertexBuffer->addVertex(PlainVertex(vertices.at(i)));
+				fillPlainVertexBuffer->addVertex(PlainVertex(vertices.at(i + 1)));
+			}
+		}
 		useProjector = true;
 		return;
 	}
@@ -829,7 +884,7 @@ void SphericalConvexPolygon::updateFillVertexBuffer(StelRenderer* renderer, cons
 	const Vec3d v0 = vertices.at(0);
 	for (int i = 1; i < vertices.size() - 1; ++i)
 	{
-		Triplet<Vec3d> triVertices(v0, vertices.at(i), vertices.at(i + 1));
+		const Triplet<Vec3d> triVertices(v0, vertices.at(i), vertices.at(i + 1));
 		projectSphericalTriangle(params.projector_, params.clippingCap_, 
 		                         &triVertices, NULL, fillPlainVertexBuffer, 
 		                         params.maxSqDistortion_);
@@ -850,6 +905,8 @@ void SphericalTexturedConvexPolygon::updateFillVertexBuffer(StelRenderer* render
 {
 	const QVector<Vec3d>& vertices  = contour;
 	const QVector<Vec2f>& texCoords = textureCoords;
+	StelProjectorP projector = params.projector_;
+
 	Q_ASSERT_X(vertices.size() == texCoords.size(), Q_FUNC_INFO,
 	           "Numbers of vertices and texture coordinates do not match");
 
@@ -857,14 +914,35 @@ void SphericalTexturedConvexPolygon::updateFillVertexBuffer(StelRenderer* render
 
 	if(!params.subdivide_)
 	{
-		// The simplest case, we don't need to iterate through the triangles at all.
 		if (handleDiscontinuity)
 		{
-			//GL-REFACTOR TODO implement this.
-			Q_ASSERT_X(false, Q_FUNC_INFO, "TODO - not yet implemented");
-			//Implementation reference:
-			// The projection has discontinuities, so we need to make sure that no triangle is crossing them.
-			//drawStelVertexArray(arr.removeDiscontinuousTriangles(projector.data()), false);
+			Q_ASSERT_X(false, Q_FUNC_INFO,
+			          "GL-REFACTOR Testing assert - will be removed after asserted-out code is tested to work");
+
+			// We don't use indices here, since we don't have a vertex buffer yet.
+			// If we did it as it was done in 
+			// StelPainter::removeDiscontinuousTriangles(), we'd have to copy _all_
+			// vertices and then use indices to specify which to draw.
+			// 
+			// So we only copy _some_ of the vertices.
+
+			// Iterating over triangles in a triangle fan, 
+			// adding them as separate triangles if they don't cross the discontinuity.
+			const Vec3d v0 = vertices.at(0);
+			const Vec2f t0 = texCoords.at(0);
+			for (int i = 1; i < vertices.size() - 1; ++i)
+			{
+				const Triplet<Vec3d> triVertices(v0, vertices.at(i), vertices.at(i + 1));
+				if(!triangleIntersectsDiscontinuity(projector, triVertices))
+				{
+					fillTexturedVertexBuffer->
+						addVertex(TexturedVertex(triVertices.a, t0));
+					fillTexturedVertexBuffer->
+						addVertex(TexturedVertex(triVertices.b, texCoords.at(i)));
+					fillTexturedVertexBuffer->
+						addVertex(TexturedVertex(triVertices.c, texCoords.at(i + 1)));
+				}
+			}
 		}
 		else
 		{
@@ -874,9 +952,7 @@ void SphericalTexturedConvexPolygon::updateFillVertexBuffer(StelRenderer* render
 			// Copy the vertex data to the buffer without subdividing or changing anything.
 			for (int v = 0; v < vertices.size(); v++) 
 			{
-				Vec3d pos = vertices[v];
-				fillTexturedVertexBuffer->addVertex(
-					TexturedVertex(Vec3f(pos[1], pos[2], pos[3]), texCoords[v]));
+				fillTexturedVertexBuffer->addVertex(TexturedVertex(vertices[v], texCoords[v]));
 			}
 			fillTexturedVertexBuffer->lock();
 		}
@@ -892,8 +968,8 @@ void SphericalTexturedConvexPolygon::updateFillVertexBuffer(StelRenderer* render
 	const Vec2f t0 = texCoords.at(0);
 	for (int i = 1; i < vertices.size() - 1; ++i)
 	{
-		Triplet<Vec3d> triVertices(v0, vertices.at(i), vertices.at(i + 1));
-		Triplet<Vec2f> triTexCoords(t0, texCoords.at(i), texCoords.at(i + 1));
+		const Triplet<Vec3d> triVertices(v0, vertices.at(i), vertices.at(i + 1));
+		const Triplet<Vec2f> triTexCoords(t0, texCoords.at(i), texCoords.at(i + 1));
 
 		projectSphericalTriangle(params.projector_, params.clippingCap_, 
 		                         &triVertices, &triTexCoords, fillTexturedVertexBuffer, 
