@@ -343,7 +343,7 @@ void LabelMgr::init()
 {
 }
 
-void LabelMgr::draw(StelCore* core)
+void LabelMgr::draw(StelCore* core, class StelRenderer* renderer)
 {
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	foreach(StelLabel* l, allLabels) 

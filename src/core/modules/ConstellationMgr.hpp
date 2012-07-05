@@ -102,7 +102,7 @@ public:
 	virtual void init();
 
 	//! Draw constellation lines, art, names and boundaries.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 
 	//! Updates time-varying state for each Constellation.
 	virtual void update(double deltaTime);

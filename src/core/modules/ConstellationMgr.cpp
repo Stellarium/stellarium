@@ -512,7 +512,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	fic.close();
 }
 
-void ConstellationMgr::draw(StelCore* core)
+void ConstellationMgr::draw(StelCore* core, class StelRenderer* renderer)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);

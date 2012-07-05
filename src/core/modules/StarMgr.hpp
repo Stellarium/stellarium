@@ -81,7 +81,7 @@ public:
 	virtual void init();
 
 	//! Draw the stars and the star selection indicator if necessary.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 
 	//! Update any time-dependent features.
 	//! Includes fading in and out stars and labels when they are turned on and off.

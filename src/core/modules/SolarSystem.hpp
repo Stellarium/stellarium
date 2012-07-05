@@ -63,7 +63,7 @@ public:
 	//! @param core The StelCore object.
 	//! @return The maximum squared distance in pixels that any SolarSystem object
 	//! has travelled since the last update.
-	virtual void draw(StelCore *core);
+	virtual void draw(StelCore *core, class StelRenderer* renderer);
 
 	//! Update time-varying components.
 	//! This includes planet motion trails.

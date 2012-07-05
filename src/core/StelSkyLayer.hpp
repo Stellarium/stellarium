@@ -26,7 +26,6 @@
 #include "StelProjectorType.hpp"
 
 class StelCore;
-class StelPainter;
 
 //! Abstract class defining the API to implement for all sky layer.
 //! A sky layer is a graphical layer containing image or polygons displayed in the sky.
@@ -38,7 +37,7 @@ public:
 	StelSkyLayer(QObject* parent=NULL) : QObject(parent) {;}
 
 	//! Draws the content of the layer.
-	virtual void draw(StelCore* core, StelPainter& sPainter, StelProjectorP projector, float opacity=1.)=0;
+	virtual void draw(StelCore* core, class StelRenderer* renderer, StelProjectorP projector, float opacity=1.)=0;
 
 	//! Return the short name to display in the loading bar.
 	virtual QString getShortName() const =0;

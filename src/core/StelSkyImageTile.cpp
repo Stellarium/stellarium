@@ -28,7 +28,6 @@
 #include "StelToneReproducer.hpp"
 #include "StelCore.hpp"
 #include "StelSkyDrawer.hpp"
-#include "StelPainter.hpp"
 
 #include <QDebug>
 
@@ -44,14 +43,12 @@ void StelSkyImageTile::initCtor()
 	alphaBlend = false;
 	noTexture = false;
 	texFader = NULL;
-	renderer = NULL;
 }
 
 // Constructor
-StelSkyImageTile::StelSkyImageTile(StelRenderer* renderer, const QString& url, StelSkyImageTile* parent) : MultiLevelJsonBase(parent)
+StelSkyImageTile::StelSkyImageTile(const QString& url, StelSkyImageTile* parent) : MultiLevelJsonBase(parent)
 {
 	initCtor();
-	this->renderer = renderer;
 	if (parent!=NULL)
 	{
 		luminance = parent->luminance;
@@ -61,10 +58,9 @@ StelSkyImageTile::StelSkyImageTile(StelRenderer* renderer, const QString& url, S
 }
 
 // Constructor from a map used for JSON files with more than 1 level
-StelSkyImageTile::StelSkyImageTile(StelRenderer* renderer, const QVariantMap& map, StelSkyImageTile* parent) : MultiLevelJsonBase(parent)
+StelSkyImageTile::StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* parent) : MultiLevelJsonBase(parent)
 {
 	initCtor();
-	this->renderer = renderer;
 	if (parent!=NULL)
 	{
 		luminance = parent->luminance;
@@ -78,11 +74,11 @@ StelSkyImageTile::~StelSkyImageTile()
 {
 }
 
-void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, StelProjectorP projector, float)
+void StelSkyImageTile::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector, float)
 {
 	const float limitLuminance = core->getSkyDrawer()->getLimitLuminance();
 	QMultiMap<double, StelSkyImageTile*> result;
-	getTilesToDraw(result, core, projector->getViewportConvexPolygon(0, 0), limitLuminance, true);
+	getTilesToDraw(result, core, renderer, projector->getViewportConvexPolygon(0, 0), limitLuminance, true);
 
 	int numToBeLoaded=0;
 	foreach (StelSkyImageTile* t, result)
@@ -95,14 +91,17 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, StelProjector
 	while (i!=result.begin())
 	{
 		--i;
-		i.value()->drawTile(core, projector);
+		i.value()->drawTile(core, renderer, projector);
 	}
 
 	deleteUnusedSubTiles();
 }
 
 // Return the list of tiles which should be drawn.
-void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& result, StelCore* core, const SphericalRegionP& viewPortPoly, float limitLuminance, bool recheckIntersect)
+void StelSkyImageTile::getTilesToDraw
+	(QMultiMap<double, StelSkyImageTile*>& result, StelCore* core, 
+	 StelRenderer* renderer, const SphericalRegionP& viewPortPoly,
+	 float limitLuminance, bool recheckIntersect)
 {
 
 #ifndef NDEBUG
@@ -209,11 +208,11 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 			{
 				StelSkyImageTile* nt;
 				if (s.type()==QVariant::Map)
-					nt = new StelSkyImageTile(renderer, s.toMap(), this);
+					nt = new StelSkyImageTile(s.toMap(), this);
 				else
 				{
 					Q_ASSERT(s.type()==QVariant::String);
-					nt = new StelSkyImageTile(renderer, s.toString(), this);
+					nt = new StelSkyImageTile(s.toString(), this);
 				}
 				subTiles.append(nt);
 			}
@@ -221,7 +220,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		// Try to add the subtiles
 		foreach (MultiLevelJsonBase* tile, subTiles)
 		{
-			qobject_cast<StelSkyImageTile*>(tile)->getTilesToDraw(result, core, viewPortPoly, limitLuminance, !fullInScreen);
+			qobject_cast<StelSkyImageTile*>(tile)->getTilesToDraw(result, core, renderer, viewPortPoly, limitLuminance, !fullInScreen);
 		}
 	}
 	else
@@ -232,7 +231,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 }
 
 // Draw the image on the screen.
-bool StelSkyImageTile::drawTile(StelCore* core, StelProjectorP projector)
+bool StelSkyImageTile::drawTile(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
 {
 	if (!tex->bind())
 		return false;

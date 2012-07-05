@@ -152,7 +152,7 @@ void AngleMeasure::update(double deltaTime)
 }
 
 //! Draw any parts on the screen which are for our module
-void AngleMeasure::draw(StelCore* core)
+void AngleMeasure::draw(StelCore* core, class StelRenderer* renderer)
 {
 	if (lineVisible.getInterstate() < 0.000001f && messageFader.getInterstate() < 0.000001f)
 		return;
