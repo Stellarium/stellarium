@@ -53,12 +53,10 @@ StelSkyPolygon::~StelSkyPolygon()
 {
 }
 
-void StelSkyPolygon::draw(StelCore* core, StelPainter& sPainter, float)
+void StelSkyPolygon::draw(StelCore* core, StelPainter& sPainter, StelProjectorP projector, float)
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-
 	QMultiMap<double, StelSkyPolygon*> result;
-	getTilesToDraw(result, core, prj->getViewportConvexPolygon(0, 0), true);
+	getTilesToDraw(result, core, projector->getViewportConvexPolygon(0, 0), true);
 
 	// Draw in the good order
 	sPainter.enableTexture2d(false);
