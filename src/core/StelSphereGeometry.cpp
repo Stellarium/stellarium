@@ -752,9 +752,6 @@ bool triangleIntersectsDiscontinuity(StelProjectorP projector, const Triplet<Vec
 
 void SphericalRegion::updateFillVertexBuffer(StelRenderer* renderer, const DrawParams& params, bool handleDiscontinuity)
 {
-	Q_ASSERT_X(false, Q_FUNC_INFO,
-	           "GL-REFACTOR Testing assert - will be removed after asserted-out code is tested to work");
-
 	const QVector<Vec3d>& vertices = getOctahedronPolygon().fillVertices();
 	StelProjectorP projector = params.projector_;
 
@@ -765,9 +762,6 @@ void SphericalRegion::updateFillVertexBuffer(StelRenderer* renderer, const DrawP
 		// The simplest case, we don't need to iterate through the triangles at all.
 		if (handleDiscontinuity)
 		{
-			Q_ASSERT_X(false, Q_FUNC_INFO,
-			           "GL-REFACTOR Testing assert - will be removed after asserted-out code is tested to work");
-
 			// We don't use indices here, since we don't have a vertex buffer yet.
 			// If we did it as it was done in 
 			// StelPainter::removeDiscontinuousTriangles(), we'd have to copy _all_
@@ -791,16 +785,13 @@ void SphericalRegion::updateFillVertexBuffer(StelRenderer* renderer, const DrawP
 		}
 		else
 		{
-			Q_ASSERT_X(false, Q_FUNC_INFO,
-			           "GL-REFACTOR Testing assert - will be removed after asserted-out code is tested to work");
-
 			// Copy the vertex data to the buffer without subdividing or changing anything.
 			for (int v = 0; v < vertices.size(); v++) 
 			{
 				fillPlainVertexBuffer->addVertex(SphericalRegion::PlainVertex(vertices[v]));
 			}
-			fillPlainVertexBuffer->lock();
 		} 
+		fillPlainVertexBuffer->lock();
 		useProjector = true;
 		return;
 	}
@@ -821,9 +812,6 @@ void SphericalRegion::updateFillVertexBuffer(StelRenderer* renderer, const DrawP
 
 void SphericalConvexPolygon::updateFillVertexBuffer(StelRenderer* renderer, const DrawParams& params, bool handleDiscontinuity)
 {
-	Q_ASSERT_X(false, Q_FUNC_INFO,
-	           "GL-REFACTOR Testing assert - will be removed after asserted-out code is tested to work");
-
 	const QVector<Vec3d>& vertices = contour;
 	StelProjectorP projector = params.projector_;
 
@@ -833,9 +821,6 @@ void SphericalConvexPolygon::updateFillVertexBuffer(StelRenderer* renderer, cons
 	{
 		if (handleDiscontinuity)
 		{
-			Q_ASSERT_X(false, Q_FUNC_INFO,
-			          "GL-REFACTOR Testing assert - will be removed after asserted-out code is tested to work");
-
 			// We don't use indices here, since we don't have a vertex buffer yet.
 			// If we did it as it was done in 
 			// StelPainter::removeDiscontinuousTriangles(), we'd have to copy _all_
@@ -859,8 +844,6 @@ void SphericalConvexPolygon::updateFillVertexBuffer(StelRenderer* renderer, cons
 		}
 		else
 		{
-			Q_ASSERT_X(false, Q_FUNC_INFO,
-			          "GL-REFACTOR Testing assert - will be removed after asserted-out code is tested to work");
 			//Decomposing the triangle fan into triangles. 
 			//
 			//We could get less overhead with initializing the vertex buffer with 
@@ -874,6 +857,7 @@ void SphericalConvexPolygon::updateFillVertexBuffer(StelRenderer* renderer, cons
 				fillPlainVertexBuffer->addVertex(PlainVertex(vertices.at(i + 1)));
 			}
 		}
+		fillPlainVertexBuffer->lock();
 		useProjector = true;
 		return;
 	}
@@ -916,9 +900,6 @@ void SphericalTexturedConvexPolygon::updateFillVertexBuffer(StelRenderer* render
 	{
 		if (handleDiscontinuity)
 		{
-			Q_ASSERT_X(false, Q_FUNC_INFO,
-			          "GL-REFACTOR Testing assert - will be removed after asserted-out code is tested to work");
-
 			// We don't use indices here, since we don't have a vertex buffer yet.
 			// If we did it as it was done in 
 			// StelPainter::removeDiscontinuousTriangles(), we'd have to copy _all_
@@ -946,17 +927,25 @@ void SphericalTexturedConvexPolygon::updateFillVertexBuffer(StelRenderer* render
 		}
 		else
 		{
-			Q_ASSERT_X(false, Q_FUNC_INFO,
-			          "GL-REFACTOR Testing assert - will be removed after asserted-out code is tested to work");
-
-			// Copy the vertex data to the buffer without subdividing or changing anything.
-			for (int v = 0; v < vertices.size(); v++) 
+			//Decomposing the triangle fan into triangles. 
+			//
+			//We could get less overhead with initializing the vertex buffer with 
+			//triangle fan primitive type, but we might end up deleting/constructing
+			//a new buffer based on draw parameters (which would complicate code).
+			const Vec3d v0 = vertices.at(0);
+			const Vec2f t0 = texCoords.at(0);
+			for (int i = 1; i < vertices.size() - 1; ++i)
 			{
-				fillTexturedVertexBuffer->addVertex(TexturedVertex(vertices[v], texCoords[v]));
+				fillTexturedVertexBuffer->
+					addVertex(TexturedVertex(v0, t0));
+				fillTexturedVertexBuffer->
+					addVertex(TexturedVertex(vertices.at(i), texCoords.at(i)));
+				fillTexturedVertexBuffer->
+					addVertex(TexturedVertex(vertices.at(i + 1), texCoords.at(i + 1)));
 			}
-			fillTexturedVertexBuffer->lock();
 		}
 		useProjector = true;
+		fillTexturedVertexBuffer->lock();
 		return;
 	}
 
