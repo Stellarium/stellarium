@@ -28,8 +28,10 @@ enum PrimitiveType
 	//! Every 2 vertices form a line.
 	PrimitiveType_Lines, 
 
-	//! Vertices form lines from the first to the second, second to third, and so on.
-	//! The last vertex forms a line with the first, closing the loop.
+	//! Vertices form a strip of lines from the first to the last.
+	PrimitiveType_LineStrip,
+
+	//! Like LineStrip, but the last vertex also forms a line with the first.
 	PrimitiveType_LineLoop,
 };
 

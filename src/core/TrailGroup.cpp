@@ -20,51 +20,75 @@
 #include "TrailGroup.hpp"
 
 #include "StelApp.hpp"
-#include "StelPainter.hpp"
 #include "StelObject.hpp"
 #include "Planet.hpp"
+#include "renderer/StelRenderer.hpp"
+
 #include <QtOpenGL>
 
-TrailGroup::TrailGroup(float te) : timeExtent(te), opacity(1.f)
+TrailGroup::TrailGroup(float te) 
+	: timeExtent(te)
+	, opacity(1.0f)
 {
 	j2000ToTrailNative=Mat4d::identity();
 	j2000ToTrailNativeInverted=Mat4d::identity();
 }
 
+TrailGroup::~TrailGroup()
+{
+	for(int t = 0; t < allTrails.size(); t++) 
+	{
+		delete allTrails[t].vertexBuffer;
+	}
+}
+
 static QVector<Vec3d> vertexArray;
 static QVector<Vec4f> colorArray;
-void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
+void TrailGroup::draw(StelCore* core, StelRenderer* renderer)
 {
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	renderer->setBlendMode(BlendMode_Alpha);
 	float currentTime = core->getJDay();
 	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
 	transfo->combine(j2000ToTrailNativeInverted);
-	sPainter->setProjector(core->getProjection(transfo));
-	foreach (const Trail& trail, allTrails)
+	StelProjectorP projector = core->getProjection(transfo);
+
+	for(int t = 0; t < allTrails.size(); t++) 
 	{
+		Trail& trail(allTrails[t]);
 		Planet* hpl = dynamic_cast<Planet*>(trail.stelObject.data());
 		if (hpl!=NULL)
 		{
 			// Avoid drawing the trails if the object is the home planet
 			QString homePlanetName = hpl==NULL ? "" : hpl->getEnglishName();
 			if (homePlanetName==StelApp::getInstance().getCore()->getCurrentLocation().planetName)
+			{
 				continue;
+			}
 		}
+
 		const QList<Vec3d>& posHistory = trail.posHistory;
-		vertexArray.resize(posHistory.size());
-		colorArray.resize(posHistory.size());
-		for (int i=0;i<posHistory.size();++i)
+		// Construct the vertex buffer if not yet constructed, otherwise clear it.
+		if(NULL == trail.vertexBuffer)
 		{
-			float colorRatio = 1.f-(currentTime-times.at(i))/timeExtent;
-			colorArray[i].set(trail.color[0], trail.color[1], trail.color[2], colorRatio*opacity);
-			vertexArray[i]=posHistory.at(i);
+			trail.vertexBuffer = 
+				renderer->createVertexBuffer<ColoredVertex>(PrimitiveType_LineStrip);
 		}
-		sPainter->setVertexPointer(3, GL_DOUBLE, vertexArray.constData());
-		sPainter->setColorPointer(4, GL_FLOAT, colorArray.constData());
-		sPainter->enableClientStates(true, false, true);
-		sPainter->drawFromArray(StelPainter::LineStrip, vertexArray.size(), 0, true);
-		sPainter->enableClientStates(false);
+		else
+		{
+			trail.vertexBuffer->unlock();
+			trail.vertexBuffer->clear();
+		}
+		
+		// Update vertex data
+		for (int p=0; p < posHistory.size(); ++p)
+		{
+			const float colorRatio = 1.0f - (currentTime - times.at(p)) / timeExtent;
+			const Vec4f color(trail.color[0], trail.color[1], trail.color[2], colorRatio*opacity);
+			trail.vertexBuffer->addVertex(ColoredVertex(posHistory.at(p), color));
+		}
+		trail.vertexBuffer->lock();
+
+		renderer->drawVertexBuffer(trail.vertexBuffer, NULL, projector);
 	}
 }
 
