@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>511</width>
+    <width>509</width>
     <height>400</height>
    </rect>
   </property>
@@ -147,7 +147,7 @@
       <item>
        <widget class="QTabWidget" name="Tabs">
         <property name="currentIndex">
-         <number>4</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="General">
          <attribute name="title">
@@ -272,6 +272,13 @@
               <widget class="QCheckBox" name="checkBoxControlPanel">
                <property name="text">
                 <string>On-screen control panel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBoxDecimalDegrees">
+               <property name="text">
+                <string>Use degrees and minutes for FOV</string>
                </property>
               </widget>
              </item>
