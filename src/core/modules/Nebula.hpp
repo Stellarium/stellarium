@@ -92,8 +92,8 @@ private:
 	bool readNGC(char *record);
 	void readNGC(QDataStream& in);
 			
-	void drawLabel(StelPainter& sPainter, float maxMagLabel);
-	void drawHints(StelPainter& sPainter, float maxMagHints);
+	void drawHints(StelRenderer* renderer, float maxMagHints);
+	void drawLabel(StelPainter& sPainter, StelRenderer* renderer, float maxMagLabel);
 
 	unsigned int M_nb;              // Messier Catalog number
 	unsigned int NGC_nb;            // New General Catalog number
