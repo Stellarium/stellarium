@@ -43,6 +43,7 @@ GLint glPrimitiveType(const PrimitiveType type)
 		case PrimitiveType_TriangleStrip: return GL_TRIANGLE_STRIP;
 		case PrimitiveType_TriangleFan:   return GL_TRIANGLE_FAN;
 		case PrimitiveType_Lines:         return GL_LINES;
+		case PrimitiveType_LineStrip:     return GL_LINE_STRIP;
 		case PrimitiveType_LineLoop:      return GL_LINE_LOOP;
 	}
 	Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown graphics primitive type");
