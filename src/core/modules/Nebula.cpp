@@ -18,23 +18,23 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QTextStream>
-#include <QFile>
-#include <QString>
-
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
+
+#include "renderer/StelRenderer.hpp"
 #include "renderer/StelTexture.hpp"
-
-#include "StelUtils.hpp"
-#include "StelApp.hpp"
 #include "renderer/StelTextureMgr.hpp"
-#include "StelModuleMgr.hpp"
+#include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
+#include "StelUtils.hpp"
 
-#include <QDebug>
 #include <QBuffer>
+#include <QDebug>
+#include <QFile>
+#include <QString>
+#include <QTextStream>
 
 StelTextureSP Nebula::texCircle;
 StelTextureSP Nebula::texOpenCluster;
@@ -151,30 +151,36 @@ double Nebula::getCloseViewFov(const StelCore*) const
 	return angularSize>0 ? angularSize * 4 : 1;
 }
 
-void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
+void Nebula::drawHints(StelRenderer* renderer, float maxMagHints)
 {
 	if (mag>maxMagHints)
 		return;
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
+	renderer->setBlendMode(BlendMode_Add);
 	float lum = 1.f;//qMin(1,4.f/getOnScreenSize(core))*0.8;
-	sPainter.setColor(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness, 1);
+	renderer->setGlobalColor(Vec4f(circleColor[0] * lum * hintsBrightness, 
+	                               circleColor[1] * lum * hintsBrightness, 
+	                               circleColor[2] * lum * hintsBrightness, 1));
 	if (nType == 1)
+	{
 		Nebula::texOpenCluster->bind();
-
-	if (nType == 2)
+	}
+	else if (nType == 2)
+	{
 		Nebula::texGlobularCluster->bind();
-
-	if (nType == 4)
+	}
+	else if (nType == 4)
+	{
 		Nebula::texPlanetNebula->bind();
-
-	if (nType != 1 && nType != 2 && nType != 4)
+	}
+	else
+	{
 		Nebula::texCircle->bind();
+	}
 
-	sPainter.drawSprite2dMode(XY[0], XY[1], 6);
+	renderer->drawRect(XY[0] - 6, XY[1] - 6, 12, 12);
 }
 
-void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
+void Nebula::drawLabel(StelPainter& sPainter, StelRenderer* renderer, float maxMagLabel)
 {
 	if (mag>maxMagLabel)
 		return;

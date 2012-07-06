@@ -161,7 +161,7 @@ public:
 	//! @param y        Y position of the top left corner on the screen in pixels. 
 	//! @param width    Width in pixels.
 	//! @param height   Height in pixels.
-	//! @param textured Draw textured or jus plain color rectangle?
+	//! @param textured Draw textured or just plain color rectangle?
 	virtual void drawRect(const float x, const float y, 
 	                      const float width, const float height, 
 	                      const bool textured = true);
