@@ -20,7 +20,6 @@
 #include "StelApp.hpp"
 #include "renderer/StelTextureMgr.hpp"
 #include "StelUtils.hpp"
-#include "StelPainter.hpp"
 
 #include <QHttp>
 #include <QFileInfo>

@@ -116,7 +116,15 @@ void NebulaMgr::init()
 
 struct DrawNebulaFuncObject
 {
-	DrawNebulaFuncObject(float amaxMagHints, float amaxMagLabels, StelPainter* p, StelCore* aCore, bool acheckMaxMagHints) : maxMagHints(amaxMagHints), maxMagLabels(amaxMagLabels), sPainter(p), core(aCore), checkMaxMagHints(acheckMaxMagHints)
+	DrawNebulaFuncObject
+		(float amaxMagHints, float amaxMagLabels, StelPainter* p, 
+		 StelRenderer* renderer, StelCore* aCore, bool acheckMaxMagHints) 
+		: maxMagHints(amaxMagHints)
+		, maxMagLabels(amaxMagLabels)
+		, sPainter(p)
+		, renderer(renderer)
+		, core(aCore)
+		, checkMaxMagHints(acheckMaxMagHints)
 	{
 		angularSizeLimit = 5.f/sPainter->getProjector()->getPixelPerRadAtCenter()*180.f/M_PI;
 	}
@@ -127,13 +135,14 @@ struct DrawNebulaFuncObject
 		{
 			float refmag_add=0; // value to adjust hints visibility threshold.
 			sPainter->getProjector()->project(n->XYZ,n->XY);
-			n->drawLabel(*sPainter, maxMagLabels-refmag_add);
-			n->drawHints(*sPainter, maxMagHints -refmag_add);
+			n->drawLabel(*sPainter, renderer, maxMagLabels-refmag_add);
+			n->drawHints(renderer, maxMagHints -refmag_add);
 		}
 	}
 	float maxMagHints;
 	float maxMagLabels;
 	StelPainter* sPainter;
+	StelRenderer* renderer;
 	StelCore* core;
 	float angularSizeLimit;
 	bool checkMaxMagHints;
@@ -161,7 +170,7 @@ void NebulaMgr::draw(StelCore* core, class StelRenderer* renderer)
 	float maxMagHints = skyDrawer->getLimitMagnitude()*1.2f-2.f+(hintsAmount*1.2f)-2.f;
 	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.f+(labelsAmount*1.2f)-2.f;
 	sPainter.setFont(nebulaFont);
-	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, core, hintsFader.getInterstate()>0.0001);
+	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, renderer, core, hintsFader.getInterstate()>0.0001);
 	nebGrid.processIntersectingRegions(p, func);
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
