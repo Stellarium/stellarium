@@ -24,14 +24,15 @@
 #include "StelCore.hpp"
 #include "StelObjectType.hpp"
 
-class StelPainter;
 
 class TrailGroup
 {
 public:
 	TrailGroup(float atimeExtent);
 
-	void draw(StelCore* core, StelPainter*);
+	~TrailGroup();
+
+	void draw(StelCore* core, class StelRenderer* renderer);
 
 	// Add 1 point to all the curves at current time and suppress too old points
 	void update();
@@ -41,20 +42,38 @@ public:
 
 	void addObject(const StelObjectP&, const Vec3f* col=NULL);
 
-	void setOpacity(float op) {opacity=op;}
+	void setOpacity(float op) 
+	{
+		opacity = op;
+	}
 
 	//! Reset all trails points
 	void reset();
 
 private:
-	class Trail
+	struct ColoredVertex
 	{
-	public:
-		Trail(const StelObjectP& obj, const Vec3f& col) : stelObject(obj), color(col) {;}
+		Vec3f position;
+		Vec4f color;
+
+		ColoredVertex(const Vec3d& pos, const Vec4f& color) 
+			: position(pos[0], pos[1], pos[2]) , color(color) {}
+
+		VERTEX_ATTRIBUTES(Vec3f Position, Vec4f Color);
+	};
+
+	struct Trail
+	{
+		Trail(const StelObjectP& obj, const Vec3f& col) 
+			: stelObject(obj), color(col), vertexBuffer(NULL) 
+		{
+		}
+
 		StelObjectP stelObject;
 		// All previous positions
 		QList<Vec3d> posHistory;
 		Vec3f color;
+		StelVertexBuffer<ColoredVertex>* vertexBuffer;
 	};
 
 	QList<Trail> allTrails;
