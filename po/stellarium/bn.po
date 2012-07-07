@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 21:06+0700\n"
-"PO-Revision-Date: 2012-07-05 09:42+0000\n"
+"POT-Creation-Date: 2012-07-07 00:21+0700\n"
+"PO-Revision-Date: 2012-07-06 11:33+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-06 04:37+0000\n"
+"X-Launchpad-Export-Date: 2012-07-07 04:41+0000\n"
 "X-Generator: Launchpad (build 15558)\n"
 "Language: bn\n"
 
@@ -384,7 +384,7 @@ msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "দিগংশ / উন্নতি-এর প্রারম্ভিক দিক : %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:578
-#: plugins/Oculars/src/gui/OcularDialog.cpp:419
+#: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "লেখকবৃন্দ"
@@ -552,7 +552,7 @@ msgstr "স্ক্রিপ্টের গতি স্বাভাবিক 
 #. TRANSLATORS: Title of a group of key bindings in the Help window
 #: src/gui/HelpDialog.cpp:81 plugins/AngleMeasure/src/AngleMeasure.cpp:126
 #: plugins/CompassMarks/src/CompassMarks.cpp:124
-#: plugins/Oculars/src/Oculars.cpp:1188
+#: plugins/Oculars/src/Oculars.cpp:1190
 #: plugins/Satellites/src/Satellites.cpp:128
 #: plugins/Supernovae/src/Supernovae.cpp:141
 #: plugins/Quasars/src/Quasars.cpp:144 plugins/Pulsars/src/Pulsars.cpp:144
@@ -1013,7 +1013,7 @@ msgstr "সিংহরাশি থেকে বর্ষিত উল্কা
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "সর্বকালের সর্বোচ্চ হার (১৯৬৬ সিংহরাশি থেকে)"
 
-#: src/gui/LocationDialog.cpp:401
+#: src/gui/LocationDialog.cpp:408
 msgid "New Location"
 msgstr "নতুন অবস্থান"
 
@@ -2654,9 +2654,9 @@ msgstr "বর্তমান অবস্থান সম্পর্কে ত
 msgid "Use as default"
 msgstr "প্রারম্ভিক সূচনা হিসেবে ব্যবহার করুন"
 
-#: src/ui_locationDialogGui.h:390 plugins/Oculars/src/ui_ocularDialog.h:876
-#: plugins/Oculars/src/ui_ocularDialog.h:885
-#: plugins/Oculars/src/ui_ocularDialog.h:896
+#: src/ui_locationDialogGui.h:390 plugins/Oculars/src/ui_ocularDialog.h:883
+#: plugins/Oculars/src/ui_ocularDialog.h:892
+#: plugins/Oculars/src/ui_ocularDialog.h:903
 msgid "Delete"
 msgstr "মুছে ফেলুন"
 
@@ -3529,7 +3529,7 @@ msgstr "অতিরিক্ত তথ্য ২"
 
 #: src/ui_CustomInfoDialog.h:246
 msgid "Additional info (Extra 3)"
-msgstr "অতিরিক্ত তথ্য ১৩"
+msgstr "অতিরিক্ত তথ্য ৩"
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
@@ -3628,7 +3628,7 @@ msgid "Compass marks"
 msgstr "দিক নির্দেশ"
 
 #: plugins/Oculars/src/Oculars.cpp:84
-#: plugins/Oculars/src/ui_ocularDialog.h:862
+#: plugins/Oculars/src/ui_ocularDialog.h:868
 msgid "Oculars"
 msgstr "দূরবীন দর্শন বিন্যাস"
 
@@ -3642,161 +3642,161 @@ msgstr ""
 "এবং দৃষ্টিক্ষেত্র পরিবর্তন করা যায় ।)তাছাড়া এটি একটি সংবেদক ফ্রেম এবং একটি "
 "দূরবীনের জন্য প্রতিফলক দৃষ্টিক্ষেত্র প্রদর্শন করতে পারে ।"
 
-#: plugins/Oculars/src/Oculars.cpp:757
+#: plugins/Oculars/src/Oculars.cpp:759
 msgid "Please select an object before switching to ocular view."
 msgstr "দূরবীন দর্শন করতে আগে কোন একটি জ্যোতিষ্ক নির্বাচন করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:836
+#: plugins/Oculars/src/Oculars.cpp:838
 msgid "&Previous ocular"
 msgstr "&পূর্ববর্তী দূরবীন দর্শন বিন্যাস"
 
-#: plugins/Oculars/src/Oculars.cpp:837
+#: plugins/Oculars/src/Oculars.cpp:839
 msgid "&Next ocular"
 msgstr "&পরবর্তী দূরবীন দর্শন বিন্যাস"
 
-#: plugins/Oculars/src/Oculars.cpp:838
+#: plugins/Oculars/src/Oculars.cpp:840
 msgid "Select &ocular"
 msgstr "&দূরবীন দর্শন বিন্যাস নির্বাচন করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:883
+#: plugins/Oculars/src/Oculars.cpp:885
 msgid "Toggle &crosshair"
 msgstr "&লক্ষ স্থির করার ক্রসটি অদলবদল করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:892
+#: plugins/Oculars/src/Oculars.cpp:894
 msgid "Configure &Oculars"
 msgstr "'দূরবীন দর্শন বিন্যাস' বিন্যাস করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:901
+#: plugins/Oculars/src/Oculars.cpp:903
 msgid "Toggle &CCD"
 msgstr "অদলবদল &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:909
+#: plugins/Oculars/src/Oculars.cpp:911
 msgid "Toggle &Telrad"
 msgstr "অদলবদল &দূরবীনের জন্য প্রতিফলক দৃষ্টিক্ষেত্র"
 
-#: plugins/Oculars/src/Oculars.cpp:919
+#: plugins/Oculars/src/Oculars.cpp:921
 msgid "&Previous CCD"
 msgstr "&পূর্ববর্তী CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:920
+#: plugins/Oculars/src/Oculars.cpp:922
 msgid "&Next CCD"
 msgstr "&পরবর্তী CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:921
+#: plugins/Oculars/src/Oculars.cpp:923
 msgid "&Select CCD"
 msgstr "CCD &নির্বাচন করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:943
+#: plugins/Oculars/src/Oculars.cpp:945
 msgid "&Rotate CCD"
 msgstr "CCD &ঘোরান"
 
-#: plugins/Oculars/src/Oculars.cpp:975
+#: plugins/Oculars/src/Oculars.cpp:977
 msgid "&Reset rotation"
 msgstr "&ঘূর্ণন পুনঃস্থাপন করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:1201
-#: plugins/Oculars/src/ui_ocularDialog.h:864
+#: plugins/Oculars/src/Oculars.cpp:1203
+#: plugins/Oculars/src/ui_ocularDialog.h:870
 msgid "Ocular view"
 msgstr "দূরবীন দর্শন বিন্যাস দর্শণ"
 
-#: plugins/Oculars/src/Oculars.cpp:1225
+#: plugins/Oculars/src/Oculars.cpp:1227
 msgid "Oculars popup menu"
 msgstr "দূরবীন দর্শন বিন্যাস পপআপ মেনু"
 
-#: plugins/Oculars/src/Oculars.cpp:1233
+#: plugins/Oculars/src/Oculars.cpp:1235
 msgid "Crosshairs"
 msgstr "লক্ষ স্থির করার ক্রস"
 
-#: plugins/Oculars/src/Oculars.cpp:1241
+#: plugins/Oculars/src/Oculars.cpp:1243
 msgid "Image sensor frame"
 msgstr "ছবি সংবেদকের ফ্রেম"
 
-#: plugins/Oculars/src/Oculars.cpp:1249
+#: plugins/Oculars/src/Oculars.cpp:1251
 msgid "Telrad sight"
 msgstr "দূরবীনের জন্য প্রতিফলক দৃষ্টিক্ষেত্র"
 
-#: plugins/Oculars/src/Oculars.cpp:1257
+#: plugins/Oculars/src/Oculars.cpp:1259
 msgid "Oculars plugin configuration"
 msgstr "'দূরবীন দর্শন বিন্যাস' প্লাগইন বিন্যাস করুন"
 
-#: plugins/Oculars/src/Oculars.cpp:1445
+#: plugins/Oculars/src/Oculars.cpp:1447
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 #, qt-format
 msgid "Ocular #%1"
 msgstr "দূরবীন দর্শন বিন্যাস #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1450
+#: plugins/Oculars/src/Oculars.cpp:1452
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "দূরবীন দর্শন বিন্যাস #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1464
+#: plugins/Oculars/src/Oculars.cpp:1466
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:520
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "দূরবীন দর্শন বিন্যাস FL: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1471
+#: plugins/Oculars/src/Oculars.cpp:1473
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:530
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "দূরবীন দর্শন বিন্যাস aFOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1481 plugins/Oculars/src/Oculars.cpp:1543
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
+#: plugins/Oculars/src/Oculars.cpp:1483 plugins/Oculars/src/Oculars.cpp:1540
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:653
 #, qt-format
 msgid "Telescope #%1"
 msgstr "দূরবীন #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1486 plugins/Oculars/src/Oculars.cpp:1548
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
+#: plugins/Oculars/src/Oculars.cpp:1488 plugins/Oculars/src/Oculars.cpp:1545
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:657
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "দূরবীন #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1497
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:737
+#: plugins/Oculars/src/Oculars.cpp:1499
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:731
 #, qt-format
 msgid "Magnification: %1"
 msgstr "বর্ধিতকরণ: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1505
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
+#: plugins/Oculars/src/Oculars.cpp:1507
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:740
 #, qt-format
 msgid "FOV: %1"
 msgstr "দৃষ্টিসীমা: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1520
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:699
+#: plugins/Oculars/src/Oculars.cpp:1517
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:693
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "মাত্রা: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1525
+#: plugins/Oculars/src/Oculars.cpp:1522
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Sensor #%1"
 msgstr "সংবেদক #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1529
+#: plugins/Oculars/src/Oculars.cpp:1526
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "সংবেদক #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1738
+#: plugins/Oculars/src/Oculars.cpp:1735
 msgid "&Telescope"
 msgstr "&দূরবীন"
 
-#: plugins/Oculars/src/Oculars.cpp:1739
+#: plugins/Oculars/src/Oculars.cpp:1736
 msgid "&Previous telescope"
 msgstr "&পূর্ববর্তী দূরবীন"
 
-#: plugins/Oculars/src/Oculars.cpp:1740
+#: plugins/Oculars/src/Oculars.cpp:1737
 msgid "&Next telescope"
 msgstr "&পরবর্তী দূরবীন"
 
@@ -3860,32 +3860,32 @@ msgstr "দূরবীন দর্শন বিন্যাসের কার
 msgid "Apparent field of view of the ocular"
 msgstr "দূরবীন দর্শন বিন্যাসের আপাত দৃষ্টিক্ষেত্র"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:606
 #, qt-format
 msgid "Rotation: %1"
 msgstr "ঘূর্ণন: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:714
 msgid "Magnification provided by these binoculars"
 msgstr "এই দূরবীন দ্বারা প্রাপ্ত বর্ধিতকরন"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:721
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:715
 msgid "Actual field of view provided by these binoculars"
 msgstr "এই দূরবীন দ্বারা প্রাপ্ত আসল দৃষ্টিক্ষেত্র"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:723
 msgid "Magnification provided by this ocular/telescope combination"
 msgstr "এই দূরবীন বা দূরবীন দর্শন বিন্যাস দ্বারা প্রাপ্ত বর্ধিতকরন"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:730
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:724
 msgid "Actual field of view provided by this ocular/telescope combination"
 msgstr "এই দূরবীন বা দূরবীন দর্শন বিন্যাস দ্বারা প্রাপ্ত আসল দৃষ্টিক্ষেত্র"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:417
+#: plugins/Oculars/src/gui/OcularDialog.cpp:421
 msgid "Oculars Plug-in"
 msgstr "দূরবীন দর্শন বিন্যাস প্লাগইন"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:418
+#: plugins/Oculars/src/gui/OcularDialog.cpp:422
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:107
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
@@ -3894,11 +3894,11 @@ msgstr "দূরবীন দর্শন বিন্যাস প্লাগ
 msgid "Version"
 msgstr "সংস্করণ"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:423
+#: plugins/Oculars/src/gui/OcularDialog.cpp:427
 msgid "Overview"
 msgstr "সারসংক্ষেপ"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:425
+#: plugins/Oculars/src/gui/OcularDialog.cpp:429
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -3909,7 +3909,7 @@ msgstr ""
 "বিন্যাস ডায়ালগটির সাহায্যে অভিনেত্র, দূরবীন এমনকি সিসিডি সংবেদকও সংযোগ, "
 "পরিবর্তন বা মুছে ফেলা যায় । প্রথমবার ব্যবহারের সময় কিছু নমুনা তৈরী হয়ে যাবে ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:426
+#: plugins/Oculars/src/gui/OcularDialog.cpp:430
 msgid ""
 "You can choose to scale the image you see on the screen.  This is intended "
 "to show you a better comparison of what one eyepiece/telescope combination "
@@ -3925,7 +3925,7 @@ msgstr ""
 "এর ফলে স্ক্রিনের অনেকটা অংশ দৃষ্টিক্ষেত্র থেকে বাদ পড়ে যায় । তাই অামার মনে "
 "হয় যে একান্ত দরকার না হলে এটা ব্যবহারের কোন দরকার নেই ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:427
+#: plugins/Oculars/src/gui/OcularDialog.cpp:431
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
@@ -3935,7 +3935,7 @@ msgstr ""
 "অামি এটির উত্তর দিকে প্রান্তিকরন চেয়েছিলাম । কিন্তু সেটা করা সম্ভব হয়ে ওঠে "
 "নি । বর্তমানে এটি স্ক্রিনে লম্বালম্বি ভাবে থাকে ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:428
+#: plugins/Oculars/src/gui/OcularDialog.cpp:432
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -3944,156 +3944,159 @@ msgid ""
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
 "অাপনি দূরবীনের জন্য প্রতিফলক দৃষ্টিক্ষেত্র অদল বদল করতে পারেন, কেবলমাত্র "
-"দূরবীন দর্শন বিন্যাস \"\r\n"
-"\"বন্ধ থাকলে তবেই । এটি খালি চোখে দূরবীনের জন্য প্রতিফলক (বা সমতুল্য) "
-"দৃষ্টিক্ষেত্রে তিনটি ০.৫ %1, ২.০ %1 \"\r\n"
-"\"ও ৪.০ %1 ব্যাসের সমকেন্দ্রিক বৃত্তের দ্বারা পর্যবেক্ষণে সাহায্য করে ।"
+"দূরবীন দর্শন বিন্যাস বন্ধ থাকলে তবেই । এটি খালি চোখে দূরবীনের জন্য প্রতিফলক "
+"(বা সমতুল্য) দৃষ্টিক্ষেত্রে তিনটি ০.৫ %1, ২.০ %1 ও ৪.০ %1 ব্যাসের "
+"সমকেন্দ্রিক বৃত্তের দ্বারা পর্যবেক্ষণে সাহায্য করে ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:429
+#: plugins/Oculars/src/gui/OcularDialog.cpp:433
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "কোন সমস্যা খুঁজে পেলে অামাকে জানান । প্লাগইনটির অানন্দ উপভোগ করুন ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:432
+#: plugins/Oculars/src/gui/OcularDialog.cpp:436
 msgid "Hot Keys"
 msgstr "চটজলদি কাজের বোতাম"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:433
+#: plugins/Oculars/src/gui/OcularDialog.cpp:437
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr "এই প্লাগইনের বোতামগুলির নাম সাধারন ট্যাবে সংশোধন করতে পারেন ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:445
-#: plugins/Oculars/src/gui/OcularDialog.cpp:450
+#: plugins/Oculars/src/gui/OcularDialog.cpp:449
+#: plugins/Oculars/src/gui/OcularDialog.cpp:454
 msgid "[no key defined]"
 msgstr "[কোন বোতামের নাম উল্লেখ করা নেই]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:454
+#: plugins/Oculars/src/gui/OcularDialog.cpp:458
 msgid "Switches on/off the ocular overlay."
 msgstr "দূরবীন দর্শন বিন্যাস শুরু বা বন্ধ করুন ।"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:458
+#: plugins/Oculars/src/gui/OcularDialog.cpp:462
 msgid "Opens the pop-up navigation menu."
 msgstr "পপ আপ নেভিগেশন মেনু খুলুন ।"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:865
+#: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Enable only if an object is selected"
 msgstr "কোন জ্যোতিষ্ক নির্বাচন করা থাকলে তবেই সক্রিয় হবে"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:866
+#: plugins/Oculars/src/ui_ocularDialog.h:872
 msgid "Scale image circle"
 msgstr "ছবির বৃত্তিয় দৃষ্টিক্ষেত্র মাপ করা হবে"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:867
+#: plugins/Oculars/src/ui_ocularDialog.h:873
 msgid "Key mappings"
 msgstr "বোতাম বিন্যাস"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:868
+#: plugins/Oculars/src/ui_ocularDialog.h:874
 msgid "Toggle ocular view:"
 msgstr "দূরবীন দর্শন বিন্যাস অদলবদল"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:870
+#: plugins/Oculars/src/ui_ocularDialog.h:876
 msgid "Open pop-up navigation menu:"
 msgstr "পপ আপ নেভিগেশন মেনু খুলুন :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:871
+#: plugins/Oculars/src/ui_ocularDialog.h:877
 msgid "Interface"
 msgstr "ইন্টারফেস"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:872
+#: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "On-screen control panel"
 msgstr "স্ক্রিনে নিয়ন্ত্রণ প্যানেল"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:873
+#: plugins/Oculars/src/ui_ocularDialog.h:879
+msgid "Use degrees and minutes for FOV of CCD"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:880
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:214
 msgid "General"
 msgstr "সার্বজনীন"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:874
-#: plugins/Oculars/src/ui_ocularDialog.h:882
+#: plugins/Oculars/src/ui_ocularDialog.h:881
+#: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Eyepieces"
 msgstr "অভিনেত্র"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:875
-#: plugins/Oculars/src/ui_ocularDialog.h:884
-#: plugins/Oculars/src/ui_ocularDialog.h:895
+#: plugins/Oculars/src/ui_ocularDialog.h:882
+#: plugins/Oculars/src/ui_ocularDialog.h:891
+#: plugins/Oculars/src/ui_ocularDialog.h:902
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Add"
 msgstr "যোগ করুন"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:877
-#: plugins/Oculars/src/ui_ocularDialog.h:886
-#: plugins/Oculars/src/ui_ocularDialog.h:897
+#: plugins/Oculars/src/ui_ocularDialog.h:884
+#: plugins/Oculars/src/ui_ocularDialog.h:893
+#: plugins/Oculars/src/ui_ocularDialog.h:904
 #: plugins/Satellites/src/ui_satellitesDialog.h:683
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr "নাম"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:878
+#: plugins/Oculars/src/ui_ocularDialog.h:885
 msgid "aFOV:"
 msgstr "অাপাত দৃষ্টিসীমা :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:879
-#: plugins/Oculars/src/ui_ocularDialog.h:898
+#: plugins/Oculars/src/ui_ocularDialog.h:886
+#: plugins/Oculars/src/ui_ocularDialog.h:905
 msgid "Focal length:"
 msgstr "ফোকাস দূরত্ব :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:880
+#: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Field stop:"
 msgstr "ক্ষেত্র বন্ধ :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:881
+#: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Binoculars"
 msgstr "দূরবীনগুলি"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:883
-#: plugins/Oculars/src/ui_ocularDialog.h:893
+#: plugins/Oculars/src/ui_ocularDialog.h:890
+#: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Sensors"
 msgstr "সংবেদকগুলি"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:887
+#: plugins/Oculars/src/ui_ocularDialog.h:894
 msgid "Resolution x (pixels):"
 msgstr "রেজোলিউশন X (পিক্সেল) :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:888
+#: plugins/Oculars/src/ui_ocularDialog.h:895
 msgid "Resolution y (pixels):"
 msgstr "রেজোলিউশন y (পিক্সেল) :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:889
+#: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Chip width (mm):"
 msgstr "চীপের প্রস্থ (মিলিমিটার):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:890
+#: plugins/Oculars/src/ui_ocularDialog.h:897
 msgid "Chip height (mm):"
 msgstr "চীপের উচ্চতা (মিলিমিটার):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:891
+#: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Pixel width (micron):"
 msgstr "পিক্সেলের প্রস্থ (মাইক্রন):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:892
+#: plugins/Oculars/src/ui_ocularDialog.h:899
 msgid "Pixel height (micron):"
 msgstr "পিক্সেলের উচ্চতা (মাইক্রন):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:894
-#: plugins/Oculars/src/ui_ocularDialog.h:902
+#: plugins/Oculars/src/ui_ocularDialog.h:901
+#: plugins/Oculars/src/ui_ocularDialog.h:909
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Telescopes"
 msgstr "দূরবীন"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:899
+#: plugins/Oculars/src/ui_ocularDialog.h:906
 msgid "Diameter:"
 msgstr "ব্যাস"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:900
+#: plugins/Oculars/src/ui_ocularDialog.h:907
 msgid "Horizontal flip"
 msgstr "আনুভূমিকভাবে উল্টানো"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:901
+#: plugins/Oculars/src/ui_ocularDialog.h:908
 msgid "Vertical flip"
 msgstr "উল্লম্বভাবে উল্টানো"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:903
+#: plugins/Oculars/src/ui_ocularDialog.h:910
 #: plugins/Satellites/src/ui_satellitesDialog.h:718
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
@@ -5796,7 +5799,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:143
 msgid "Historical Supernovae configuration window"
-msgstr ""
+msgstr "ঐতিহাসিক অতিনোভার বৈশিষ্ট্য বিন্যাস"
 
 #: plugins/Supernovae/src/Supernova.cpp:99
 msgid "supernova"
@@ -5829,7 +5832,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
 msgid "Light curves"
-msgstr ""
+msgstr "অালোক লেখচিত্র"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:114
 #, qt-format
@@ -5839,29 +5842,33 @@ msgid ""
 "can seen %1here%2 (right scale in days) and this model is used for this "
 "plugin."
 msgstr ""
+"এই প্লাগইন বিভিন্ন অতিনোভার অালোক লেখচিত্র মডেল প্রস্তুত করে । ১ম ও ২য় ধরনের "
+"অতিনোভার অালোক লেখচিত্র  %1এখানে%2 পাওয়া যাবে (দিনে পরিমিত) এবং এই মডেলটাই "
+"প্লাগইন-এ ব্যবহৃত হয় ।"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 msgid "Acknowledgments"
-msgstr ""
+msgstr "কৃতজ্ঞতা স্বীকার"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr ""
+"অামরা নিম্নলিখিত ব্যক্তিবর্গের মূল্যবান মতামত ও অবদানের জন্য ধন্যবাদ জানাই ।"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Sergei Blinnikov"
-msgstr ""
+msgstr "সেরগি ব্লিনিকভ্"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 msgid "Institute for Theoretical and Experimental Physics"
-msgstr ""
+msgstr "ইনস্টিটিউট ফর থিওরিটিক্যাল অ্যান্ড এক্সপেরিমেন্টাল ফিজিক্স"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
 msgid "in Russia"
-msgstr ""
+msgstr ", রাশিয়া"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
@@ -5871,44 +5878,46 @@ msgid ""
 "If you want more information about this plugin, its history, and format of "
 "catalog, you can %1get additional info here%2."
 msgstr ""
+"এই প্লাগইন, তার ইতিহাস ও তালিকার format সম্বন্ধে %1অারও অতিরিক্ত তথ্য "
+"এখানে%2 পাবেন ।"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
 #, qt-format
 msgid "Next update: %1 days"
-msgstr ""
+msgstr "পরবর্তী সংশোধন : %1 দিন"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
 msgid "Historical supernovae is updated"
-msgstr ""
+msgstr "ঐতিহাসিক অতিনোভা সংশোধিত করা হয়েছে"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 msgid "Historical Supernovae Configuration"
-msgstr ""
+msgstr "ঐতিহাসিক অতিনোভার বৈশিষ্ট্য বিন্যাস"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr ""
+msgstr "ঐতিহাসিক অতিনোভা প্লাগইনের বৈশিষ্ট্য বিন্যাস"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
 #: plugins/Quasars/src/ui_quasarsDialog.h:252
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:252
 msgid "Update catalog from Internet"
-msgstr ""
+msgstr "ইন্টারনেট থেকে তালিকা সংশোধন"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:255
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:255
 msgid "Update frequency (days):"
-msgstr ""
+msgstr "সংশোধনের হার (দিন):"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Quasars/src/ui_quasarsDialog.h:256
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:256
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:240
 msgid "[next update info]"
-msgstr ""
+msgstr "[পরবর্তী সংশোধন তথ্য]"
 
 #: plugins/Quasars/src/Quasars.cpp:70
 msgid "Quasars"
@@ -5921,12 +5930,12 @@ msgid ""
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
 "এই প্লাগইন ১৬ ঔজ্জ্বল্যতার থেকে বেশি ঔজ্জ্বল্যতার কিছু কোয়াসার নির্দেশ করে । "
-"'Quasars and Active Galactic Nuclei' (13th Ed.) (Veron+ 2010) "
-"=2010A&A...518A..10V থেকে এই তালিকাটি নেওয়া হয়েছে ।"
+"একটি তালিকা 'Quasars and Active Galactic Nuclei' (13th Ed.) (Veron+ 2010) "
+"=2010A&A...518A..10V থেকে নেওয়া হয়েছে ।"
 
 #: plugins/Quasars/src/Quasars.cpp:146
 msgid "Quasars configuration window"
-msgstr ""
+msgstr "কোয়াসার বৈশিষ্ট্য বিন্যাস উইন্ডো"
 
 #: plugins/Quasars/src/Quasar.cpp:95
 msgid "quasar"
@@ -5939,7 +5948,7 @@ msgstr "Z (লোহিত সরন): %1"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:108
 msgid "Quasars Plug-in"
-msgstr ""
+msgstr "কোয়াসার প্লাগইন"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
 msgid ""
@@ -5947,10 +5956,13 @@ msgid ""
 "visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
 "Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"কোয়াসার প্লাগইন ১৬ ঔজ্জ্বল্যতার থেকে বেশি ঔজ্জ্বল্যতার কিছু কোয়াসার নির্দেশ "
+"করে ।একটি তালিকা 'Quasars and Active Galactic Nuclei' (13th Ed.) থেকে নেওয়া "
+"হয়েছে ।"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
-msgstr ""
+msgstr "ভেরন+ ২০১০"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
@@ -5960,26 +5972,27 @@ msgid ""
 "If you want read full information about plugin, his history and format of "
 "catalog you can %1get info here%2."
 msgstr ""
+"এই প্লাগইন, তার ইতিহাস ও তালিকার format সম্বন্ধে বিশদ তথ্য %1এখানে%2 পাবেন ।"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
 msgid "Quasars is updated"
-msgstr ""
+msgstr "কোয়াসার তথ্য সংশোধিত করা হয়েছে"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:249
 msgid "Quasars Configuration"
-msgstr ""
+msgstr "কোয়াসার বৈশিষ্ট্য বিন্যাস"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:250
 msgid "Quasars Plug-in Configuration"
-msgstr ""
+msgstr "কোয়াসার প্লাগইনের বৈশিষ্ট্য বিন্যাস"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 msgid "Display mode for quasars"
-msgstr ""
+msgstr "কোয়াসার প্রদর্শন মোড"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:259
 msgid "Enable display of distribution for quasars"
-msgstr ""
+msgstr "কোয়াসারদের বণ্টন প্রদর্শন সক্রিয় করুন"
 
 #: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
@@ -5991,10 +6004,11 @@ msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr ""
+"এই প্লাগইন বিভিন্ন পালসারের তাদের নিজস্ব তথ্য সহ অবস্থান নির্দেশ করে ।"
 
 #: plugins/Pulsars/src/Pulsars.cpp:146
 msgid "Pulsars configuration window"
-msgstr ""
+msgstr "পালসার বৈশিষ্ট্য বিন্যাস উইন্ডো"
 
 #: plugins/Pulsars/src/Pulsar.cpp:129
 msgid "pulsar"
@@ -6004,36 +6018,36 @@ msgstr "পালসার"
 #: plugins/Pulsars/src/Pulsar.cpp:140
 #, qt-format
 msgid "Barycentric period: %1 s"
-msgstr "ব্যারিসেন্ট্রিক পর্যায়কাল: %1 সেকেন্ড"
+msgstr "ব্যারিসেন্ট্রিক পর্যায়কাল : %1 সেকেন্ড"
 
 #: plugins/Pulsars/src/Pulsar.cpp:144
 #, qt-format
 msgid "Time derivative of barycentric period: %1"
-msgstr ""
+msgstr "ব্যারিসেন্ট্রিক পর্যায়কালের সময় অবকলন : %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:149
 msgid "Dispersion measure:"
-msgstr ""
+msgstr "বিক্ষেপ পরিমাপ"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:152
 msgid "cm"
-msgstr ""
+msgstr "সেমি"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:155
 msgid "pc"
-msgstr ""
+msgstr "পারসেক"
 
 #: plugins/Pulsars/src/Pulsar.cpp:161
 #, qt-format
 msgid "Spin down energy loss rate: %1 ergs/s"
-msgstr ""
+msgstr "শক্তিক্ষয় হারের অবনমন : %1 অার্গ/সেকেন্ড"
 
 #: plugins/Pulsars/src/Pulsar.cpp:165
 #, qt-format
 msgid "Binary period of pulsar: %1 days"
-msgstr ""
+msgstr "পালসারের দ্বিক পর্যায়কাল : %1 দিন"
 
 #: plugins/Pulsars/src/Pulsar.cpp:169
 #, qt-format
@@ -6044,23 +6058,23 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:174
 #, qt-format
 msgid "Annual parallax: %1 mas"
-msgstr ""
+msgstr "বার্ষিক লম্বন : %1 মিলি অার্কসেকেন্ড"
 
 #: plugins/Pulsars/src/Pulsar.cpp:178
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
-msgstr ""
+msgstr "ইলেকট্রন ঘনত্ব মডেল অনুসারে দূরত্ব : %1 কিলোপারসেক (%2 অালোকবর্ষ)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:182
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
-msgstr "৫০% শীর্ষে পরিলেখ প্রস্থ: %1 মিলিসেকেন্ড"
+msgstr "৫০% তীক্ষ্ণতায় পরিলেখ প্রস্থ: %1 মিলিসেকেন্ড"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:188 plugins/Pulsars/src/Pulsar.cpp:200
 #: plugins/Pulsars/src/Pulsar.cpp:212
 msgid "Time averaged flux density at"
-msgstr "সময় সাপেক্ষে প্রাবল্য ঘনত্ব"
+msgstr "সময় সাপেক্ষে প্রাবল্য ঘনত্ব গড়"
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Pulsars/src/Pulsar.cpp:203
@@ -6072,47 +6086,51 @@ msgstr "মেগাহার্জ"
 #: plugins/Pulsars/src/Pulsar.cpp:194 plugins/Pulsars/src/Pulsar.cpp:206
 #: plugins/Pulsars/src/Pulsar.cpp:218
 msgid "mJy"
-msgstr "mJy"
+msgstr "মিলি জানস্কাই"
 
 #: plugins/Pulsars/src/Pulsar.cpp:222
 #, qt-format
 msgid "Notes: %1"
-msgstr ""
+msgstr "টোটকা : %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:291
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
+"পরিলক্ষিত স্পন্দন সহ সংগতিহীন এক্স-রশ্মি বিচ্ছুরণ করা পালসার অথবা পুনঃপুনঃ "
+"দুর্বল গামা রশ্মি বিচ্ছুরণ করা জ্যোতিষ্ক"
 
 #: plugins/Pulsars/src/Pulsar.cpp:296
 msgid "has one or more binary companions"
-msgstr ""
+msgstr "এক বা একাধিক সাথী অাছে"
 
 #: plugins/Pulsars/src/Pulsar.cpp:301
 msgid "with pulsed emission from radio to infrared or higher frequencies"
-msgstr ""
+msgstr "বেতার থেকে অবলোহিত বা অারও উচ্চ কম্পাঙ্কের স্পন্দিত বিচ্ছুরণ সহ"
 
 #: plugins/Pulsars/src/Pulsar.cpp:306
 msgid "with pulsed emission only at infrared or higher frequencies"
-msgstr ""
+msgstr "কেবলমাত্র অবলোহিত বা অারও উচ্চ কম্পাঙ্কের স্পন্দিত বিচ্ছুরণ সহ"
 
 #: plugins/Pulsars/src/Pulsar.cpp:311
 msgid "with pulsed emission in the radio band"
-msgstr ""
+msgstr "বেতার তরঙ্গে স্পন্দিত বিচ্ছুরণ সহ"
 
 #: plugins/Pulsars/src/Pulsar.cpp:316
 msgid "with intermittently pulsed radio emission"
-msgstr ""
+msgstr "বেতার তরঙ্গে থেমে থেমে স্পন্দিত বিচ্ছুরণ সহ"
 
 #: plugins/Pulsars/src/Pulsar.cpp:321
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
 msgstr ""
+"উষ্ণতা জনিত সৃষ্ট স্পন্দিত এক্স-রশ্মি বিচ্ছুরণ সহ কোন এক নিঃসঙ্গ নিউট্রন "
+"নক্ষত্র যার কোন বেতার তরঙ্গে স্পন্দিত বিচ্ছুরণ দেখা যায় না ।"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
 msgid "Pulsars Plug-in"
-msgstr ""
+msgstr "পালসার প্লাগইন"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
 #, qt-format
@@ -6121,116 +6139,121 @@ msgid ""
 "Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 msgstr ""
+"পালসার সম্বন্ধে তথ্য 'ATNF পালসার তালিকা'  (ম্যানচেস্টার, R. N., Hobbs, G. "
+"B., Teoh, A. & Hobbs, M., Astron. J., ১২৯, ১৯৯৩-২০০৬ (২০০৫) (%1astro-"
+"ph/0412641%2)) থেকে নেওয়া হয়েছে ।"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
 msgid "Note"
-msgstr ""
+msgstr "টোটকা"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr ""
+msgstr "পালসারদের অাগে অবশ্যই  ' PSR' শব্দটি থাকতে হবে"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 msgid "Acknowledgment"
-msgstr ""
+msgstr "কৃতজ্ঞতা স্বীকার"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "ভ্লাদিমির সামোডাউরভ"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "Pushchino Radio Astronomy Observatory"
-msgstr ""
+msgstr "পুসচিনো বেতার জ্যোতির্বিজ্ঞান মানমন্দির"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 msgid "Maciej Serylak"
-msgstr ""
+msgstr "মাসিএজ সেরিল্যাক"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Nancay Radioastronomical Observatory"
-msgstr ""
+msgstr "ন্যান্সি বেতার জ্যোতির্বিজ্ঞান মানমন্দির"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
 msgid "in France"
-msgstr ""
+msgstr ", ফ্রান্স"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:212
 msgid "Pulsars is updated"
-msgstr ""
+msgstr "পালসার তথ্য সংশোধিত করা হয়েছে"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:249
 msgid "Pulsars Configuration"
-msgstr ""
+msgstr "পালসার বৈশিষ্ট্য বিন্যাস"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:250
 msgid "Pulsars Plug-in Configuration"
-msgstr ""
+msgstr "পালসার প্লাগইনের বৈশিষ্ট্য বিন্যাস"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Display mode for pulsars"
-msgstr ""
+msgstr "পালসার প্রদর্শন মোড"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 msgid "Enable display of distribution for pulsars"
-msgstr ""
+msgstr "পলসারদের বণ্টন প্রদর্শন সক্রিয় করুন"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:71
 msgid "Exoplanets"
-msgstr ""
+msgstr "বহির্গ্রহ"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:74
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
+"এই প্লাগইন বহির্গ্রহ যুক্ত তারাদের অবস্থান নির্দেশ করে । বহির্গ্রহ সম্পর্কে "
+"সমস্ত তথ্য exoplanet.eu -এ প্রাপ্ত 'বহির্গ্রহ বিশ্বকোষ' থেকে নেওয়া হয়েছে ।"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:164
 msgid "Exoplanets configuration window"
-msgstr ""
+msgstr "বহির্গ্রহ বৈশিষ্ট্য বিন্যাস উইন্ডো"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:165
 msgid "Show exoplanets"
-msgstr ""
+msgstr "বহির্গ্রহগুলি প্রদর্শন করুন"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:178
 msgid "Metallicity"
-msgstr ""
+msgstr "ধাতুময়তা"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:182
 #: plugins/Exoplanets/src/Exoplanet.cpp:198
 msgid "Mass"
-msgstr ""
+msgstr "ভর"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:186
 #: plugins/Exoplanets/src/Exoplanet.cpp:199
 msgid "Radius"
-msgstr ""
+msgstr "ব্যাসার্ধ"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:190
 #, qt-format
 msgid "Effective temperature: %1 K"
-msgstr ""
+msgstr "কার্যকর তাপমাত্রা : %1 কেলভিন"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:196
 msgid "Exoplanet"
-msgstr ""
+msgstr "বহির্গ্রহ"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:197
 msgid "Period"
-msgstr ""
+msgstr "পর্যায়কাল"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:197
 msgid "days"
-msgstr ""
+msgstr "দিন"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:198
 #: plugins/Exoplanets/src/Exoplanet.cpp:199
 msgid "Jup"
-msgstr ""
+msgstr "জুপ"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
 msgid "Semi-Major Axis"
-msgstr ""
+msgstr "প্রধান অক্ষ"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
 msgid "AU"
@@ -6238,19 +6261,19 @@ msgstr "জ্যোতির্বৈজ্ঞানিক একক"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:201
 msgid "Eccentricity"
-msgstr ""
+msgstr "উত্কেন্দ্রতা"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:202
 msgid "Inclination"
-msgstr ""
+msgstr "তীর্যকতা"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:203
 msgid "Angle Distance"
-msgstr ""
+msgstr "কৌনিক দূরত্ব"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:106
 msgid "Exoplanets Plug-in"
-msgstr ""
+msgstr "বহির্গ্রহ প্লাগইন"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
 #, qt-format
@@ -6258,22 +6281,24 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
+"এই প্লাগইন বহির্গ্রহ যুক্ত তারাদের অবস্থান নির্দেশ করে । বহির্গ্রহ সম্পর্কে "
+"সমস্ত তথ্য %1বহির্গ্রহ বিশ্বকোষ%2 থেকে নেওয়া হয়েছে ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Exoplanets is updated"
-msgstr ""
+msgstr "বহির্গ্রহগুলির তথ্য সংশোধিত হয়েছে"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
 msgid "Exoplanets Configuration"
-msgstr ""
+msgstr "বহির্গ্রহ বৈশিষ্ট্য বিন্যাস"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:234
 msgid "Exoplanets Plug-in Configuration"
-msgstr ""
+msgstr "বহির্গ্রহ প্লাগইনের বৈশিষ্ট্য বিন্যাস"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
 msgid "Update exoplanets data from Internet"
-msgstr ""
+msgstr "বহির্গ্রহগুলির তথ্য ইন্টারনেট থেকে সংশোধন করুন"
 
 #~ msgid "General "
 #~ msgstr "সাধারণ "
