@@ -5,6 +5,8 @@
 #include <QPainter>
 #include <QSize>
 
+#include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "StelIndexBuffer.hpp"
 #include "StelVertexBuffer.hpp"
 #include "StelViewportEffect.hpp"
@@ -27,7 +29,6 @@ enum BlendMode
 	//! (0 is fully transparent, 255 or 1.0 fully opague)
 	BlendMode_Alpha
 };
-
 
 //Notes:
 //
@@ -58,6 +59,94 @@ public:
 	//!
 	//! This can return NULL, in which case no viewport effect is used.
 	virtual StelViewportEffect* getViewportEffect() = 0;
+};
+
+//! Parameters specifying how to draw text.
+//!
+//! These are e.g. passed to StelRenderer::drawText() to draw text.
+//!
+//! This is a builder-style struct. Parameters can be specified like this:
+//!
+//! @code
+//! // Note that text position and string must be always specified, so they 
+//! // are in the constructor.
+//! // Default parameters (no rotation, no shift, no gravity, 2D projection).
+//! TextParams a(16, 16, "Hello World");
+//! // Rotate by 30 degrees.
+//! TextParams b = TextParams(16, 16 "Hello World!").angleDegrees(30.0f);
+//! // Rotate by 30 degrees and shift by (8, 4) in rotated direction.
+//! TextParams c = TextParams(16, 16 "Hello World!").angleDegrees(30.0f).shift(8.0f, 4.0f);
+//! @endcode
+//!
+struct TextParams
+{
+	//! Construct TextParams with default parameters.
+	//!
+	//! Text position and string are required, so they are specified here.
+	//!
+	//! @param x      = Horizontal position of lower left corner of the text in pixels.
+	//! @param y      = Vertical position of lower left corner of the text in pixels.
+	//! @param string = Text string to draw.
+	//!
+	//! Default values of other values are: rotation of 0.0 degrees,
+	//! shift in rotated direction of (0.0, 0.0), don't draw with gravity,
+	//! 2D projection from StelCore.
+	TextParams(const float x, const float y, const QString& string)
+		: x_(x)
+		, y_(y)
+		, string_(string)
+		, angleDegrees_(0.0f)
+		, xShift_(0.0f)
+		, yShift_(0.0f)
+		, noGravity_(true)
+		, projector_(StelApp::getInstance().getCore()->getProjection2d())
+	{}
+
+	//! Angle of text rotation in degrees.
+	TextParams& angleDegrees(const float angle)
+	{
+		angleDegrees_ = angle;
+		return *this;
+	}
+
+	//! Shift of the text in rotated direction in pixels.
+	TextParams& shift(const float x, const float y)
+	{
+		xShift_ = x;
+		yShift_ = y;
+		return *this;
+	}
+
+	//! Draw the text with gravity.
+	TextParams& useGravity()
+	{
+		noGravity_ = false;
+		return *this;
+	}
+
+	//! Projector to project coordinates of the text with.
+	TextParams& projector(StelProjectorP projector)
+	{
+		projector_ = projector;
+		return *this;
+	}
+
+	//! X position of the text.
+	const float x_;
+	//! Y position of the text.
+	const float y_;
+	//! Text string to draw.
+	const QString& string_;
+	//! Rotation of the text in degrees.
+	float angleDegrees_;
+	//! X shift in rotated direction.
+	float xShift_;
+	//! Y shift in rotated direction.
+	float yShift_;
+	//! Don't draw with gravity.
+	bool  noGravity_;
+	//! Projector to use (for most(all?) cases, 2D projection).
+	StelProjectorP projector_;
 };
 
 //! Handles all graphics related functionality.
@@ -165,7 +254,29 @@ public:
 	virtual void drawRect(const float x, const float y, 
 	                      const float width, const float height, 
 	                      const bool textured = true);
-	
+
+	//! Draw text with specified parameters.
+	//!
+	//! @param params Parameters of the text to draw.
+	//!
+	//! Parameters are specified by a builder-style struct.
+	//!
+	//! Examples:
+	//!
+	//! @code
+	//! // Note that text position and string must be always specified, so they 
+	//! // are in the constructor.
+	//! // Draw with default parameters (no rotation, no shift, no gravity, 2D projection).
+	//! renderer->drawText(TextParams(16, 16, "Hello World"));
+	//! // Rotate by 30 degrees.
+	//! renderer->drawText(TextParams(16, 16 "Hello World!").angleDegrees(30.0f));
+	//! // Rotate by 30 degrees and shift by (8, 4) in rotated direction.
+	//! renderer->drawText(TextParams(16, 16 "Hello World!").angleDegrees(30.0f).shift(8.0f, 4.0f));
+	//! @endcode
+	//!
+	//! @see TextParams
+	virtual void drawText(const TextParams& params) = 0;
+
 	//! Bind a texture (following draw calls will use this texture on specified texture unit).
 	//!
 	//! @param  textureBackend Texture to bind.
@@ -185,8 +296,8 @@ public:
 	//! @see StelRenderClient
 	virtual void renderFrame(StelRenderClient& renderClient) = 0;
 	
-	//Both of these will be hidden behind a createTexture() and 
-	//the new StelTexture's dtor
+	// GL-REFACTOR: Both of these will be hidden behind a createTexture() and 
+	// the new StelTexture's dtor
 
 	//! Create a StelTextureBackend from specified file or URL.
 	//!
@@ -211,6 +322,11 @@ public:
 	//!                     first needed.
 	//!
 	//! @return New texture backend on success, or NULL on failure.
+	//!
+	//! @note Some renderer backends only support textures with power of two 
+	//!       dimensions (e.g. 512x512 or 2048x256). On these backends, loading 
+	//!       a texture with non-power-of-two dimensions will fail and result 
+	//!       in a StelTextureBackend with status of TextureStatus_Error.
 	StelTextureBackend* createTextureBackend
 		(const QString& filename, const StelTextureParams& params, 
 		 const TextureLoadingMode loadingMode)
