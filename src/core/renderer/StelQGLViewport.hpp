@@ -232,6 +232,12 @@ public:
 		invariant();
 	}
 
+	//! Return the painter currently used to paint, if any.
+	QPainter* getPainter()
+	{
+		return painter;
+	}
+
 private:
 	//! Size of the viewport (i.e. graphics resolution).
 	QSize viewportSize;

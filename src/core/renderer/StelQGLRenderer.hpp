@@ -2,6 +2,7 @@
 #define _STELQGLRENDERER_HPP_
 
 
+#include <QCache>
 #include <QColor>
 #include <QGLFunctions>
 #include <QGraphicsView>
@@ -36,6 +37,9 @@ public:
 		, viewport(new StelQGLWidget(glContext, parent), parent)
 		, pvrSupported(pvrSupported)
 		, textureCache()
+		// Maximum bytes of text textures to store in the cache.
+		, textTextureCache(10000000)
+		, textBuffer(NULL)
 		, previousFrameEndTime(-1.0)
 		, globalColor(Qt::white)
 		, gl(glContext)
@@ -48,6 +52,9 @@ public:
 	{
 		invariant();
 		loaderThread->quit();
+
+		textTextureCache.clear();
+		if(NULL != textBuffer) {delete textBuffer;}
 
 		// This causes crashes for some reason 
 		// (perhaps it is already destroyed by QT? - didn't find that in the docs).
@@ -109,6 +116,8 @@ public:
 	{
 		return new StelQGLIndexBuffer(type);
 	}
+
+	virtual void drawText(const TextParams& params);
 	
 	virtual void bindTexture(StelTextureBackend* const textureBackend, const int textureUnit);
 
@@ -173,6 +182,9 @@ public:
 		return globalColor;
 	}
 
+	//! Returns true if non-power-of-two textures are supported, false otherwise.
+	virtual bool areNonPowerOfTwoTexturesSupported() const = 0;
+
 protected:
 	virtual StelTextureBackend* createTextureBackend_
 		(const QString& filename, const StelTextureParams& params, const TextureLoadingMode loadingMode);
@@ -210,7 +222,29 @@ private:
 	QThread* loaderThread;
 
 	//! Caches textures to prevent duplicate loading.
+	//!
+	//! StelTextureCache is used instead of QCache to properly 
+	//! support asynchronous/lazy loading.
 	StelTextureCache<StelQGLTextureBackend> textureCache;
+
+	//! Caches textures used to draw text.
+	//!
+	//! These are always loaded (drawn) synchronously, so QCache is enough.
+	QCache<QByteArray, StelQGLTextureBackend> textTextureCache;
+
+	//! 2D vertex with a position and texture coordinates.
+	struct TexturedVertex
+	{
+		Vec2f position;
+		Vec2f texCoord;
+		TexturedVertex(const Vec2f& position, const Vec2f& texCoord)
+			: position(position), texCoord(texCoord){}
+
+		VERTEX_ATTRIBUTES(Vec2f Position, Vec2f TexCoord);
+	};
+
+	//! This buffer is reused to draw text at every drawText() call.
+	StelVertexBuffer<TexturedVertex>* textBuffer;
 	
 	//! Time the previous frame rendered by renderFrame ended.
 	//!

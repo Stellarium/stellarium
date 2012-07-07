@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "StelQGLRenderer.hpp"
 
 void StelQGLRenderer::bindTexture
@@ -196,4 +198,119 @@ void StelQGLRenderer::drawWindow(StelViewportEffect* const effect)
 
 	disablePainting();
 	invariant();
+}
+
+void StelQGLRenderer::drawText(const TextParams& params)
+{
+	QPainter* painter = viewport.getPainter();
+	Q_ASSERT_X(NULL != painter, Q_FUNC_INFO, 
+	           "Trying to draw text but painting is disabled");
+
+	if(params.projector_->useGravityLabels() && !params.noGravity_)
+	{
+		Q_ASSERT_X(false, Q_FUNC_INFO, "TODO - Not yet implemented");
+		return;
+	}
+	
+	const int pixelSize   = painter->font().pixelSize();
+	const QByteArray hash = params.string_.toUtf8() + QByteArray::number(pixelSize) + 
+	                        painter->font().family().toUtf8();
+	StelQGLTextureBackend* textTexture = textTextureCache.object(hash);
+
+	// No texture in cache for this string, need to draw it.
+	if (NULL == textTexture) 
+	{
+		// Create temporary image and render text into it
+		const QRect extents = painter->fontMetrics().boundingRect(params.string_);
+
+		const int minWidth  = extents.width() + 1 + static_cast<int>(0.02f * extents.width());
+		const int minHeight = extents.height();
+
+		// QImage is used solely to reuse existing QGLTextureBackend constructor 
+		// function. QPixmap could be used as well (not sure which is faster, 
+		// needs profiling)
+		QImage image = areNonPowerOfTwoTexturesSupported() 
+		             ? QImage(minWidth, minHeight, QImage::Format_ARGB32) 
+		             : QImage(StelUtils::smallestPowerOfTwoGreaterOrEqualTo(minWidth), 
+		                      StelUtils::smallestPowerOfTwoGreaterOrEqualTo(minHeight),
+		                      QImage::Format_ARGB32);
+		image.fill(Qt::transparent);
+
+		QPainter fontPainter(&image);
+		fontPainter.setFont(painter->font());
+		fontPainter.setRenderHints(QPainter::TextAntialiasing, true);
+		fontPainter.setPen(Qt::white);
+
+		// The second argument ensures the text is positioned correctly even if 
+		// the image is enlarged to power-of-two.
+		fontPainter.drawText(-extents.x(), 
+		                     image.height() - minHeight - extents.y(), 
+		                     params.string_);
+
+		textTexture = StelQGLTextureBackend::constructFromImage
+			(this, QString(), StelTextureParams().filtering(TextureFiltering_Nearest), image);
+		const QSize size = textTexture->getDimensions();
+		if(!textTexture->getStatus() == TextureStatus_Loaded)
+		{
+			qWarning() << "Texture error: " << textTexture->getErrorMessage();
+			Q_ASSERT_X(false, Q_FUNC_INFO, "Failed to construct a text texture");
+		}
+		textTextureCache.insert(hash, textTexture, 4 * size.width() * size.height());
+	}
+
+	// Even if NPOT textures are not supported, we always draw the full rectangle 
+	// of the texture. The extra space is fully transparent, so it's not an issue.
+
+	// Shortcut variables to calculate the rectangle.
+	const QSize size   = textTexture->getDimensions();
+	const float w      = size.width();
+	const float h      = size.height();
+	const float x      = params.x_;
+	const float y      = params.y_;
+	const float xShift = params.xShift_;
+	const float yShift = params.yShift_;
+
+	const float angleDegrees = 
+		params.angleDegrees_ + 
+		params.noGravity_ ? 0.0f : params.projector_->getDefaultAngleForGravityText();
+	// Zero out very small angles.
+	// 
+	// (this could also be used to optimize the case with zero angled
+	//  to avoid sin/cos if needed)
+	const bool  angled = std::fabs(angleDegrees) >= 1.0f * M_PI / 180.f;
+	const float cosr   = angled ? std::cos(angleDegrees * M_PI / 180.0) : 1.0f;
+	const float sinr   = angled ? std::sin(angleDegrees * M_PI / 180.0) : 0.0f;
+
+	// Corners of the (possibly rotated) texture rectangle.
+	const Vec2f ne(round(x + cosr * xShift       - sinr * yShift),
+	               round(y + sinr * xShift       + cosr * yShift));
+	const Vec2f nw(round(x + cosr * (w + xShift) - sinr * yShift),
+	               round(y + sinr * (w + xShift) + cosr * yShift));
+	const Vec2f se(round(x + cosr * xShift       - sinr * (h + yShift)),
+	               round(y + sinr * xShift       + cosr * (h + yShift)));
+	const Vec2f sw(round(x + cosr * (w + xShift) - sinr * (h + yShift)),
+	               round(y + sinr * (w + xShift) + cosr * (h + yShift)));
+
+	// Construct the text vertex buffer if it doesn't exist yet, otherwise clear it.
+	if(NULL == textBuffer)
+	{
+		textBuffer = createVertexBuffer<TexturedVertex>(PrimitiveType_TriangleStrip);
+	}
+	else
+	{
+		textBuffer->unlock();
+		textBuffer->clear();
+	}
+
+	// Build the vertex buffer.
+	textBuffer->addVertex(TexturedVertex(ne, Vec2f(0.0f, 0.0f)));
+	textBuffer->addVertex(TexturedVertex(nw, Vec2f(1.0f, 0.0f)));
+	textBuffer->addVertex(TexturedVertex(se, Vec2f(0.0f, 1.0f)));
+	textBuffer->addVertex(TexturedVertex(sw, Vec2f(1.0f, 1.0f)));
+	textBuffer->lock();
+
+	// Draw.
+	setBlendMode(BlendMode_Alpha);
+	textTexture->bind(0);
+	drawVertexBuffer(textBuffer);
 }

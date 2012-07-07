@@ -285,6 +285,8 @@ public:
 		return NULL;
 	}
 
+	virtual bool areNonPowerOfTwoTexturesSupported() const {return true;}
+
 protected:
 	virtual StelVertexBufferBackend* createVertexBufferBackend
 		(const PrimitiveType primitiveType, const QVector<StelVertexAttribute>& attributes)
