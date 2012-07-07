@@ -26,7 +26,6 @@
 #include "StelTranslator.hpp"
 #include "renderer/StelTextureTypes.hpp"
 
-class StelPainter;
 class QDataStream;
 
 class Nebula : public StelObject
@@ -93,7 +92,7 @@ private:
 	void readNGC(QDataStream& in);
 			
 	void drawHints(StelRenderer* renderer, float maxMagHints);
-	void drawLabel(StelPainter& sPainter, StelRenderer* renderer, float maxMagLabel);
+	void drawLabel(StelRenderer* renderer, StelProjectorP projector, float maxMagLabel);
 
 	unsigned int M_nb;              // Messier Catalog number
 	unsigned int NGC_nb;            // New General Catalog number

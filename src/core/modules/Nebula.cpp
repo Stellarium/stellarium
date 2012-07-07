@@ -27,7 +27,6 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelPainter.hpp"
 #include "StelUtils.hpp"
 
 #include <QBuffer>
@@ -180,13 +179,14 @@ void Nebula::drawHints(StelRenderer* renderer, float maxMagHints)
 	renderer->drawRect(XY[0] - 6, XY[1] - 6, 12, 12);
 }
 
-void Nebula::drawLabel(StelPainter& sPainter, StelRenderer* renderer, float maxMagLabel)
+
+void Nebula::drawLabel(StelRenderer* renderer, StelProjectorP projector, float maxMagLabel)
 {
 	if (mag>maxMagLabel)
 		return;
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], hintsBrightness);
-	float size = getAngularSize(NULL)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-	float shift = 4.f + size/1.8f;
+	renderer->setGlobalColor(Vec4f(labelColor[0], labelColor[1], labelColor[2], hintsBrightness));
+	float size = getAngularSize(NULL) * M_PI / 180.0 * projector->getPixelPerRadAtCenter();
+	float shift = 4.f + size / 1.8f;
 	QString str;
 	if (nameI18!="")
 		str = getNameI18n();
@@ -200,7 +200,7 @@ void Nebula::drawLabel(StelPainter& sPainter, StelRenderer* renderer, float maxM
 			str = QString("IC %1").arg(IC_nb);
 	}
 
-	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
+	renderer->drawText(TextParams(XY[0] + shift, XY[1] + shift, str).useGravity());
 }
 
 

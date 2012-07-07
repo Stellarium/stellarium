@@ -135,7 +135,7 @@ struct DrawNebulaFuncObject
 		{
 			float refmag_add=0; // value to adjust hints visibility threshold.
 			sPainter->getProjector()->project(n->XYZ,n->XY);
-			n->drawLabel(*sPainter, renderer, maxMagLabels-refmag_add);
+			n->drawLabel(renderer, sPainter->getProjector(), maxMagLabels-refmag_add);
 			n->drawHints(renderer, maxMagHints -refmag_add);
 		}
 	}
