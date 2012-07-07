@@ -82,6 +82,8 @@ StelQGLTextureBackend::~StelQGLTextureBackend()
 void StelQGLTextureBackend::bind(const int textureUnit)
 {
 	invariant();
+	Q_ASSERT_X(textureUnit >= 0, Q_FUNC_INFO,
+	           "Trying to bind to a texture unit with negative index");
 	renderer->makeGLContextCurrent();
 	glActiveTexture(GL_TEXTURE0 + textureUnit);
 	glBindTexture(GL_TEXTURE_2D, glTextureID);
@@ -258,9 +260,17 @@ void StelQGLTextureBackend::loadFromImage(QImage image)
 	QGLContext* context = prepareContextForLoading();
 	glTextureID = context->bindTexture(image, GL_TEXTURE_2D, glGetPixelFormat(image),
 	                                   getTextureBindOptions(textureParams));
+	if(!renderer->areNonPowerOfTwoTexturesSupported() && 
+		(!StelUtils::isPowerOfTwo(image.width()) ||
+		 !StelUtils::isPowerOfTwo(image.height())))
+	{
+		errorOccured("loadFromImage(): Failed to load because the image has "
+		             "non-power-of-two width and/or height while the renderer "
+		             "backend only supports power-of-two dimensions");
+	}
 	if(glTextureID == 0)
 	{
-		errorOccured("loadFromImage() failed to load an image to a GL texture");
+		errorOccured("loadFromImage(): Failed to load an image to a GL texture");
 	}
 	setTextureWrapping();
 
@@ -306,7 +316,7 @@ void StelQGLTextureBackend::completeLoading()
 {
 	// Determine texture size.
 	GLint width, height;
-	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &width);
+	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH,  &width);
 	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &height);
 	if(width == 0 || height == 0)
 	{
