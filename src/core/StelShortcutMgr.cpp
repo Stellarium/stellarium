@@ -53,6 +53,26 @@ QAction* StelShortcutMgr::addGuiAction(const QString& actionId, const QString& t
 																				 autoRepeat, global, stelAppGraphicsWidget);
 }
 
+void StelShortcutMgr::changeActionPrimaryKey(const QString &actionId, const QString &groupId, QKeySequence newKey)
+{
+	if (!shGroups.contains(groupId))
+	{
+		qWarning() << "Attempt to find action" << actionId << " of non-existing group " << groupId;
+		return;
+	}
+	shGroups[groupId]->getShortcut(actionId)->setPrimaryKey(newKey);
+}
+
+void StelShortcutMgr::changeActionAltKey(const QString &actionId, const QString &groupId, QKeySequence newKey)
+{
+	if (!shGroups.contains(groupId))
+	{
+		qWarning() << "Attempt to find action" << actionId << " of non-existing group " << groupId;
+		return;
+	}
+	shGroups[groupId]->getShortcut(actionId)->setAltKey(newKey);
+}
+
 QAction* StelShortcutMgr::getGuiAction(const QString& actionName)
 {
 	QAction* a = stelAppGraphicsWidget->findChild<QAction*>(actionName);

@@ -42,6 +42,8 @@ public slots:
 
 signals:
 	void focusChanged(bool focus);
+	// emits when content is changed; resetable defines whether content can be changed back or not
+	void contentsChanged();
 
 protected:
 	void keyPressEvent(QKeyEvent *e);
@@ -66,12 +68,15 @@ public:
 
 public slots:
 	void retranslate();
-	void setEditorsEnable();
+	void initEditors();
 	void setActionsEnabled(bool enable);
+	void handleChanges();
+	void applyChanges();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
+	ShortcutLineEdit* getCurrrentEdit();
 
 private:
 	//! This function concatenates the header, key codes and footer to build
