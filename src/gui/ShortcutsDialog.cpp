@@ -36,6 +36,7 @@ ShortcutLineEdit::ShortcutLineEdit(QWidget *parent) :
 void ShortcutLineEdit::clear()
 {
 	m_keyNum = m_keys[0] = m_keys[1] = m_keys[2] = m_keys[3] = 0;
+	emit contentsChanged();
 	QLineEdit::clear();
 }
 
@@ -53,7 +54,7 @@ void ShortcutLineEdit::keyPressEvent(QKeyEvent *e)
 	++m_keyNum;
 	QKeySequence ks(m_keys[0], m_keys[1], m_keys[2], m_keys[3]);
 	setText(ks);
-	emit textChanged(text());
+	emit contentsChanged();
 	e->accept();
 }
 
@@ -110,19 +111,23 @@ void ShortcutsDialog::retranslate()
 	}
 }
 
-void ShortcutsDialog::setEditorsEnable()
+void ShortcutsDialog::initEditors()
 {
 	if (ui->shortcutsTreeWidget->currentItem()->isSelected()) {
 		ui->primaryShortcutEdit->setEnabled(true);
 		ui->altShortcutEdit->setEnabled(true);
-		ui->primaryShortcutEdit->clear();
-		ui->altShortcutEdit->clear();
+		ui->primaryShortcutEdit->setText(
+					ui->shortcutsTreeWidget->currentItem()->text(1));
+		ui->altShortcutEdit->setText(
+					ui->shortcutsTreeWidget->currentItem()->text(2));
+		handleChanges();
 	}
 	else {
 		ui->primaryShortcutEdit->setEnabled(false);
 		ui->altShortcutEdit->setEnabled(false);
-		ui->clearButton->setEnabled(false);
 		ui->applyButton->setEnabled(false);
+		ui->primaryShortcutEdit->clear();
+		ui->altShortcutEdit->clear();
 	}
 }
 
@@ -138,17 +143,72 @@ void ShortcutsDialog::setActionsEnabled(bool enable)
 	}
 }
 
+void ShortcutsDialog::handleChanges()
+{
+	QString changedText;
+	// updating apply button
+	if (ui->primaryShortcutEdit->hasFocus())
+	{
+		changedText = ui->primaryShortcutEdit->text();
+		if (changedText == ui->shortcutsTreeWidget->currentItem()->text(1))
+		{
+			// nothing to apply
+			ui->applyButton->setEnabled(false);
+		}
+		else
+		{
+			ui->applyButton->setEnabled(true);
+		}
+	}
+	if (ui->altShortcutEdit->hasFocus())
+	{
+		changedText = ui->altShortcutEdit->text();
+		if (changedText == ui->shortcutsTreeWidget->currentItem()->text(2))
+		{
+			// nothing to apply
+			ui->applyButton->setEnabled(false);
+		}
+		else
+		{
+			ui->applyButton->setEnabled(true);
+		}
+	}
+	if (ui->primaryShortcutEdit->text().isEmpty())
+	{
+		ui->clearPrimaryButton->setEnabled(false);
+	}
+	else
+	{
+		ui->clearPrimaryButton->setEnabled(true);
+	}
+	if (ui->altShortcutEdit->text().isEmpty())
+	{
+		ui->clearAltButton->setEnabled(false);
+	}
+	else
+	{
+		ui->clearAltButton->setEnabled(true);
+	}
+}
+
+void ShortcutsDialog::applyChanges()
+{
+
+}
+
 void ShortcutsDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->shortcutsTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(setEditorsEnable()));
-	connect(ui->clearButton, SIGNAL(toggled(bool)), ui->primaryShortcutEdit, SLOT(clear()));
-	connect(ui->clearButton, SIGNAL(toggled(bool)), ui->altShortcutEdit, SLOT(clear()));
+	connect(ui->shortcutsTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(initEditors()));
+	// apply button logic
+	connect(ui->applyButton, SIGNAL(released()), this, SLOT(applyChanges()));
 	// we need to disable all shortcut actions, so we can enter shortcuts without activating any actions
 	connect(ui->primaryShortcutEdit, SIGNAL(focusChanged(bool)), this, SLOT(setActionsEnabled(bool)));
 	connect(ui->altShortcutEdit, SIGNAL(focusChanged(bool)), this, SLOT(setActionsEnabled(bool)));
-
+	// handling changes in editlines
+	connect(ui->primaryShortcutEdit, SIGNAL(contentsChanged()), this, SLOT(handleChanges()));
+	connect(ui->altShortcutEdit, SIGNAL(contentsChanged()), this, SLOT(handleChanges()));
 
 	// Creating shortcuts tree
 	QList<StelShortcutGroup*> groups = shortcutMgr->getGroupList();
@@ -174,6 +234,15 @@ void ShortcutsDialog::createDialogContent()
 		}
 	}
 	updateText();
+}
+
+ShortcutLineEdit *ShortcutsDialog::getCurrrentEdit()
+{
+	if (ui->primaryShortcutEdit->hasFocus())
+		return ui->primaryShortcutEdit;
+	if (ui->altShortcutEdit->hasFocus())
+		return ui->altShortcutEdit;
+	return NULL;
 }
 
 void ShortcutsDialog::updateText()

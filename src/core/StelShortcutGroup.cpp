@@ -201,16 +201,6 @@ QAction *StelShortcutGroup::getAction(const QString &actionId)
 	return m_shortcuts[actionId]->getAction();
 }
 
-QList<StelShortcut *> StelShortcutGroup::getActionList() const
-{
-	QList<StelShortcut*> res;
-	foreach (StelShortcut* action, m_shortcuts)
-	{
-		res << action;
-	}
-	return res;
-}
-
 StelShortcut* StelShortcutGroup::getShortcut(const QString &id)
 {
 	if (!m_shortcuts.contains(id))
@@ -219,6 +209,16 @@ StelShortcut* StelShortcutGroup::getShortcut(const QString &id)
 		return NULL;
 	}
 	return m_shortcuts[id];
+}
+
+QList<StelShortcut *> StelShortcutGroup::getActionList() const
+{
+	QList<StelShortcut*> res;
+	foreach (StelShortcut* action, m_shortcuts)
+	{
+		res << action;
+	}
+	return res;
 }
 
 void StelShortcutGroup::disableAllActions()
