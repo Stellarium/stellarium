@@ -76,7 +76,6 @@ public slots:
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
-	ShortcutLineEdit* getCurrrentEdit();
 
 private:
 	//! This function concatenates the header, key codes and footer to build
