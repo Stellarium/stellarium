@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-07-07 00:21+0700\n"
-"PO-Revision-Date: 2012-07-06 22:33+0000\n"
+"PO-Revision-Date: 2012-07-07 21:50+0000\n"
 "Last-Translator: chingis <chingis091@lavabit.com>\n"
 "Language-Team: Kirghiz <ky@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-07 04:45+0000\n"
+"X-Launchpad-Export-Date: 2012-07-08 04:39+0000\n"
 "X-Generator: Launchpad (build 15558)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -300,6 +300,9 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
+"Меркатор проекциясы эң көп колдонулган картография проекциясынын бири болот. "
+"Бул багытты жана форманы сактайт, бирок экватордон алыстатканда өлчөмдү "
+"ийрейтет."
 
 #: src/core/StelProjectorClasses.cpp:322
 msgid "Orthographic"
@@ -556,7 +559,7 @@ msgstr "Сценарийдин аткарылуу темпин ченемдүү 
 #: plugins/Quasars/src/Quasars.cpp:144 plugins/Pulsars/src/Pulsars.cpp:144
 #: plugins/Exoplanets/src/Exoplanets.cpp:157
 msgid "Plugin Key Bindings"
-msgstr "Плагиндин клавиштик байланыштары"
+msgstr "Плагиндин клавиштик айкалыштары"
 
 #: src/gui/HelpDialog.cpp:82
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:82
@@ -3164,11 +3167,11 @@ msgstr "Алгачкы дата жана убакыт"
 
 #: src/ui_configurationDialog.h:838
 msgid "Starts Stellarium at system clock date and time"
-msgstr "Системдик саат датасы жана убактысында Stellarium'ду жүргүзүү"
+msgstr "Системалык саат датасы жана убактысында Stellarium'ду жүргүзүү"
 
 #: src/ui_configurationDialog.h:840
 msgid "System date and time"
-msgstr "Системдик дата жана убакыт"
+msgstr "Системалык дата жана убакыт"
 
 #: src/ui_configurationDialog.h:842
 msgid ""
@@ -3178,7 +3181,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:844
 msgid "System date at:"
-msgstr "Системдик дата:"
+msgstr "Системалык дата:"
 
 #: src/ui_configurationDialog.h:846
 msgid "Use a specific date and time when Stellarium starts up"
@@ -3627,7 +3630,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:759
 msgid "Please select an object before switching to ocular view."
-msgstr "Окуляр көрүүсүнө которуу алдында объектти тандаңыз."
+msgstr "Окуляр көрүнүшүнө которуу алдында объектти тандаңыз."
 
 #: plugins/Oculars/src/Oculars.cpp:838
 msgid "&Previous ocular"
@@ -3680,11 +3683,11 @@ msgstr "&Айланууну түшүрүү"
 #: plugins/Oculars/src/Oculars.cpp:1203
 #: plugins/Oculars/src/ui_ocularDialog.h:870
 msgid "Ocular view"
-msgstr "Окуляр көрүүсү"
+msgstr "Окуляр көрүнүшү"
 
 #: plugins/Oculars/src/Oculars.cpp:1227
 msgid "Oculars popup menu"
-msgstr "Окулярлар калкуучу менюсу"
+msgstr "Окулярлардын калкуучу менюсу"
 
 #: plugins/Oculars/src/Oculars.cpp:1235
 msgid "Crosshairs"
@@ -3875,7 +3878,7 @@ msgstr "Окулярлар плагини"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:107
 msgid "Version"
-msgstr "Жоромол"
+msgstr "Версия"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:427
 msgid "Overview"
@@ -3952,11 +3955,11 @@ msgstr "Тегеректен сүрөттү масштабтоо"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:873
 msgid "Key mappings"
-msgstr "Клавиштик байланыштары"
+msgstr "Клавиштик айкалыштары"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:874
 msgid "Toggle ocular view:"
-msgstr "Окуляр көрүүсүнө которуу:"
+msgstr "Окуляр көрүнүшүнө которуу:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:876
 msgid "Open pop-up navigation menu:"
@@ -4721,7 +4724,7 @@ msgstr "Телескоп контролюнун плагини"
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
 #, qt-format
 msgid "Version %1"
-msgstr "Жоромол %1"
+msgstr "Версия %1"
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
@@ -5058,7 +5061,7 @@ msgstr "Аткарууга мүмкүн болгон директория:"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
-msgstr "Саат алкагы"
+msgstr "Сааттык алкак"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:44
 msgid ""
@@ -5165,22 +5168,22 @@ msgstr "Ишемби"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
-msgstr "Саат алкагынын плагини"
+msgstr "Сааттык алкагынын плагини"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:449
 msgid "Define a time zone"
-msgstr "Саат алкагын аныктоо"
+msgstr "Сааттык алкагын аныктоо"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
 msgid "Time zone"
-msgstr "Саат алкагы"
+msgstr "Сааттык алкак"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:452
 msgid "Timezone name:"
-msgstr "Саат алкагынын аты:"
+msgstr "Сааттык алкагынын аты:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
@@ -5193,7 +5196,7 @@ msgstr "Жайкы убакыт"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
 msgid "DST timezone name:"
-msgstr "Жайкы убакыттын саат алкагынын аты:"
+msgstr "ЖУ сааттык алкагынын аты:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
 msgid "DST offset from UTC (hours):"
@@ -5236,7 +5239,7 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "Use system settings (default)"
-msgstr "Системдик ырастоолорду колдонуу (жарыяланбас)"
+msgstr "Системалык ырастоолорду колдонуу (жарыяланбас)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
 msgid "Universal Coordinated Time (UTC)"
@@ -5272,7 +5275,7 @@ msgstr "Убакыт көрсөтүү форматы"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
 msgid "System default"
-msgstr "Системдик жарыяланбас"
+msgstr "Системалык жарыяланбас"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "12-hour format"
@@ -5315,7 +5318,7 @@ msgstr "Азыркы дата/убак"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:168
 msgid "Set time zone"
-msgstr "Саат алкагын коюу"
+msgstr "Сааттык алкагын белгилөө"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:169
 msgid "Day keys"
