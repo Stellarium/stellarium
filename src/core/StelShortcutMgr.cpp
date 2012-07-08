@@ -116,6 +116,22 @@ QList<StelShortcutGroup *> StelShortcutMgr::getGroupList() const
 	return res;
 }
 
+void StelShortcutMgr::disableAllActions()
+{
+	foreach (StelShortcutGroup* group, shGroups)
+	{
+		group->disableAllActions();
+	}
+}
+
+void StelShortcutMgr::enableAllActions()
+{
+	foreach (StelShortcutGroup* group, shGroups)
+	{
+		group->enableAllActions();
+	}
+}
+
 bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 {
 	QFile jsonFile(filePath);

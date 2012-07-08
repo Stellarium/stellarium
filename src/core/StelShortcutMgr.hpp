@@ -59,6 +59,8 @@ public:
 signals:
 	
 public slots:
+	void disableAllActions();
+	void enableAllActions();
 
 private:
 	StelAppGraphicsWidget* stelAppGraphicsWidget;

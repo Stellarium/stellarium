@@ -33,14 +33,20 @@ public:
 
 	~StelShortcut();
 
-	QAction* getAction() const { return action; }
+	QAction* getAction() const { return m_action; }
 
-	QString getId() const { return id; }
-	QString getText() const { return text; }
-	QString getKeys() const { return keys; }
+	QString getId() const { return m_id; }
+	QString getText() const { return m_text; }
+	QKeySequence getPrimaryKey() const { return m_primaryKey; }
+	QKeySequence getAltKey() const { return m_altKey; }
+	QString getKeysString() const;
 
-	void setText(const QString& atext);
-	void setKeys(const QString& akeys);
+	void setText(const QString& text);
+	void setKeys(const QString& keys);
+	void setPrimaryKey(const QString& key);
+	void setPrimaryKey(const QKeySequence& key);
+	void setAltKey(const QString& key);
+	void setAltKey(const QKeySequence& key);
 	void setCheckable(bool c);
 	void setAutoRepeat(bool ar);
 	void setGlobal(bool g);
@@ -48,18 +54,19 @@ public:
 	void setScript(const QString& scriptText);
 
 signals:
-    
+
 public slots:
 	void runScript();
 
 private:
-	QAction *action;
-	QString id;
-	QString text;
-	QString keys;
-	bool checkable;
-	bool autoRepeat;
-	bool global;
+	QAction* m_action;
+	QString m_id;
+	QString m_text;
+	QKeySequence m_primaryKey;
+	QKeySequence m_altKey;
+	bool m_checkable;
+	bool m_autoRepeat;
+	bool m_global;
 	// defines whether shortcut exists only in current session
 	bool temporary;
 	QString script;
@@ -73,23 +80,25 @@ class StelShortcutGroup : public QObject
 {
 	Q_OBJECT
 public:
-	StelShortcutGroup(QString id);
+	StelShortcutGroup(QString m_id);
 	QAction* registerAction(const QString& actionId, const QString& text, const QString& keys, bool checkable,
-												 bool autoRepeat = true, bool global = false, QGraphicsWidget *parent = false);
+													bool autoRepeat = true, bool global = false, QGraphicsWidget *parent = false);
 
 	QAction* getAction(const QString &actionId);
 	QList<StelShortcut*> getActionList() const;
 
-	QString getId() const { return id; }
+	QString getId() const { return m_id; }
 
-	StelShortcut* getShortcut(const QString& id);
+	StelShortcut* getShortcut(const QString& m_id);
 signals:
 
 public slots:
+	void disableAllActions();
+	void enableAllActions();
 
 private:
-	QString id;
-	QMap<QString, StelShortcut*> shortcuts;
+	QString m_id;
+	QMap<QString, StelShortcut*> m_shortcuts;
 };
 
 #endif // STELSHORTCUT_HPP
