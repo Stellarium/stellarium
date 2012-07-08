@@ -21,10 +21,40 @@
 #define SHORTCUTSDIALOG_HPP
 
 #include "StelDialog.hpp"
+#include "StelShortcutMgr.hpp"
 
+#include <QLineEdit>
 
 class Ui_shortcutsDialogForm;
 class ShortcutsDialog;
+
+class ShortcutLineEdit : public QLineEdit
+{
+	Q_OBJECT
+
+public:
+	ShortcutLineEdit(QWidget* parent);
+
+	QKeySequence getKeySequence();
+
+public slots:
+	void clear();
+
+signals:
+	void focusChanged(bool focus);
+
+protected:
+	void keyPressEvent(QKeyEvent *e);
+	void focusInEvent(QFocusEvent *e);
+	void focusOutEvent(QFocusEvent *e);
+
+private:
+	int getModifiers(Qt::KeyboardModifiers state, const QString &text);
+
+	// counter and array for store keys entered
+	int m_keyNum;
+	int m_keys[4]; // QKeySequence allows only 4 keys in single shortcut
+};
 
 class ShortcutsDialog : public StelDialog
 {
@@ -36,6 +66,8 @@ public:
 
 public slots:
 	void retranslate();
+	void setEditorsEnable();
+	void setActionsEnabled(bool enable);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -45,6 +77,9 @@ private:
 	//! This function concatenates the header, key codes and footer to build
 	//! up the help text.
 	void updateText(void);
+
+	// pointer to mgr, for not getting it from stelapp every time
+	StelShortcutMgr* shortcutMgr;
 
 	Ui_shortcutsDialogForm *ui;
 };

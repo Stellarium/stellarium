@@ -28,14 +28,14 @@
 
 StelShortcut::StelShortcut(const QString &aid, const QString &atext, const QString &akeys,
 													 bool acheckable, bool aautoRepeat, bool aglobal, QGraphicsWidget* parent) :
-	id(aid), script()
+	m_id(aid), script()
 {
 	if (parent == NULL)
 	{
 		parent = StelMainGraphicsView::getInstance().getStelAppGraphicsWidget();
 	}
-	action = new QAction(parent);
-	action->setObjectName(aid);
+	m_action = new QAction(parent);
+	m_action->setObjectName(aid);
 
 	setText(atext);
 	setKeys(akeys);
@@ -43,49 +43,88 @@ StelShortcut::StelShortcut(const QString &aid, const QString &atext, const QStri
 	setAutoRepeat(aautoRepeat);
 	setGlobal(aglobal);
 
-	parent->addAction(action);
+	parent->addAction(m_action);
 }
 
 StelShortcut::~StelShortcut()
 {
-	delete action; action = NULL;
+	delete m_action; m_action = NULL;
 }
 
-void StelShortcut::setText(const QString &atext)
+QString StelShortcut::getKeysString() const
 {
-	text = atext;
-	action->setText(q_(atext));
-	action->setProperty("englishText", QVariant(atext));
+	return (m_primaryKey.toString() + ";" + m_altKey.toString());
 }
 
-void StelShortcut::setKeys(const QString &akeys)
+void StelShortcut::setText(const QString &text)
 {
-	keys = akeys;
-	action->setShortcuts(splitShortcuts(keys));
+	m_text = text;
+	m_action->setText(q_(text));
+	m_action->setProperty("englishText", QVariant(text));
+}
+
+void StelShortcut::setKeys(const QString &keys)
+{
+	QList<QKeySequence> keyList = splitShortcuts(keys);
+	int len = keyList.length();
+	if (len > 2)
+	{
+		qWarning() << "Attempt to set more then 2 shortcuts in " << m_id << " action, use only first 2";
+	}
+	if (len > 0)
+	{
+		setPrimaryKey(keyList.at(0).toString());
+	}
+	if (len > 1)
+	{
+		setAltKey(keyList.at(1).toString());
+	}
+	// set only first 2 shortcuts
+	m_action->setShortcuts(keyList.mid(0, 2));
+}
+
+void StelShortcut::setPrimaryKey(const QString &key)
+{
+	m_primaryKey = QKeySequence(key);
+}
+
+void StelShortcut::setPrimaryKey(const QKeySequence &key)
+{
+	m_primaryKey = key;
+}
+
+void StelShortcut::setAltKey(const QString &key)
+{
+	m_altKey = QKeySequence(key);
+}
+
+void StelShortcut::setAltKey(const QKeySequence &key)
+{
+	m_altKey = key;
 }
 
 void StelShortcut::setCheckable(bool c)
 {
-	checkable = c;
-	action->setCheckable(c);
+	m_checkable = c;
+	m_action->setCheckable(c);
 }
 
 void StelShortcut::setAutoRepeat(bool ar)
 {
-	autoRepeat = ar;
-	action->setAutoRepeat(ar);
+	m_autoRepeat = ar;
+	m_action->setAutoRepeat(ar);
 }
 
 void StelShortcut::setGlobal(bool g)
 {
-	global = g;
+	m_global = g;
 	if (g)
 	{
-		action->setShortcutContext(Qt::ApplicationShortcut);
+		m_action->setShortcutContext(Qt::ApplicationShortcut);
 	}
 	else
 	{
-		action->setShortcutContext(Qt::WidgetShortcut);
+		m_action->setShortcutContext(Qt::WidgetShortcut);
 	}
 }
 
@@ -105,7 +144,7 @@ void StelShortcut::setScript(const QString &scriptText)
 		return;
 	}
 	script = preprocessedScript;
-	connect(action, SIGNAL(triggered()), this, SLOT(runScript()));
+	connect(m_action, SIGNAL(triggered()), this, SLOT(runScript()));
 }
 
 void StelShortcut::runScript()
@@ -129,14 +168,14 @@ QList<QKeySequence> StelShortcut::splitShortcuts(const QString &shortcuts)
 
 
 StelShortcutGroup::StelShortcutGroup(QString id) :
-	id(id)
+	m_id(id)
 {
 }
 
 QAction* StelShortcutGroup::registerAction(const QString &actionId, const QString &text, const QString &keys,
-																			 bool checkable, bool autoRepeat, bool global, QGraphicsWidget *parent)
+																					 bool checkable, bool autoRepeat, bool global, QGraphicsWidget *parent)
 {
-	if (shortcuts.contains(actionId))
+	if (m_shortcuts.contains(actionId))
 	{
 		qWarning() << "Attempt to add an existing shortcut with id: " << actionId << ", rewrite properties";
 		StelShortcut *shortcut = getShortcut(actionId);
@@ -148,24 +187,24 @@ QAction* StelShortcutGroup::registerAction(const QString &actionId, const QStrin
 		return shortcut->getAction();
 	}
 	StelShortcut* newShortcut = new StelShortcut(actionId, text, keys, checkable, autoRepeat, global, parent);
-	shortcuts[actionId] = newShortcut;
+	m_shortcuts[actionId] = newShortcut;
 	return newShortcut->getAction();
 }
 
 QAction *StelShortcutGroup::getAction(const QString &actionId)
 {
-	if (!shortcuts.contains(actionId))
+	if (!m_shortcuts.contains(actionId))
 	{
 		qDebug() << "Attempt to get non-existing shortcut by id: " << actionId << endl;
 		return NULL;
 	}
-	return shortcuts[actionId]->getAction();
+	return m_shortcuts[actionId]->getAction();
 }
 
 QList<StelShortcut *> StelShortcutGroup::getActionList() const
 {
 	QList<StelShortcut*> res;
-	foreach (StelShortcut* action, shortcuts)
+	foreach (StelShortcut* action, m_shortcuts)
 	{
 		res << action;
 	}
@@ -174,10 +213,26 @@ QList<StelShortcut *> StelShortcutGroup::getActionList() const
 
 StelShortcut* StelShortcutGroup::getShortcut(const QString &id)
 {
-	if (!shortcuts.contains(id))
+	if (!m_shortcuts.contains(id))
 	{
 		qDebug() << "Attempt to get non-existing shortcut by id: " << id << endl;
 		return NULL;
 	}
-	return shortcuts[id];
+	return m_shortcuts[id];
+}
+
+void StelShortcutGroup::disableAllActions()
+{
+	foreach (StelShortcut* sh, m_shortcuts)
+	{
+		sh->getAction()->setEnabled(false);
+	}
+}
+
+void StelShortcutGroup::enableAllActions()
+{
+	foreach (StelShortcut* sh, m_shortcuts)
+	{
+		sh->getAction()->setEnabled(true);
+	}
 }
