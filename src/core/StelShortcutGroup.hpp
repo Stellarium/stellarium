@@ -57,6 +57,7 @@ signals:
 
 public slots:
 	void runScript();
+	void updateShortcuts();
 
 private:
 	QAction* m_action;

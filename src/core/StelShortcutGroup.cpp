@@ -85,22 +85,24 @@ void StelShortcut::setKeys(const QString &keys)
 
 void StelShortcut::setPrimaryKey(const QString &key)
 {
-	m_primaryKey = QKeySequence(key);
+	setPrimaryKey(QKeySequence(key));
 }
 
 void StelShortcut::setPrimaryKey(const QKeySequence &key)
 {
 	m_primaryKey = key;
+	updateShortcuts();
 }
 
 void StelShortcut::setAltKey(const QString &key)
 {
-	m_altKey = QKeySequence(key);
+	setAltKey(QKeySequence(key));
 }
 
 void StelShortcut::setAltKey(const QKeySequence &key)
 {
 	m_altKey = key;
+	updateShortcuts();
 }
 
 void StelShortcut::setCheckable(bool c)
@@ -150,6 +152,13 @@ void StelShortcut::setScript(const QString &scriptText)
 void StelShortcut::runScript()
 {
 	StelMainGraphicsView::getInstance().getScriptMgr().runPreprocessedScript(script);
+}
+
+void StelShortcut::updateShortcuts()
+{
+	QList<QKeySequence> list;
+	list << m_primaryKey << m_altKey;
+	m_action->setShortcuts(list);
 }
 
 
