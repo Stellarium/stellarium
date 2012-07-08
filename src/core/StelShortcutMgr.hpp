@@ -46,6 +46,9 @@ public:
 	//! @param global whether the action should be global (affect in dialogs)
 	QAction* addGuiAction(const QString& actionId, const QString& text, const QString& shortcuts, const QString& group, bool checkable=true, bool autoRepeat=false, bool global=false);
 
+	void changeActionPrimaryKey(const QString& actionId, const QString& groupId, QKeySequence newKey);
+	void changeActionAltKey(const QString& actionId, const QString& groupId, QKeySequence newKey);
+
 	//! Get a pointer on an action managed by the GUI
 	//! @param actionName qt object name for this action
 	//! @return a pointer on the QAction object or NULL if don't exist

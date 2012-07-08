@@ -85,11 +85,11 @@ public:
 													bool autoRepeat = true, bool global = false, QGraphicsWidget *parent = false);
 
 	QAction* getAction(const QString &actionId);
+	StelShortcut* getShortcut(const QString& id);
 	QList<StelShortcut*> getActionList() const;
 
 	QString getId() const { return m_id; }
 
-	StelShortcut* getShortcut(const QString& m_id);
 signals:
 
 public slots:
