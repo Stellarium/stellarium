@@ -278,6 +278,12 @@ public:
 		return defautAngleForGravityText;
 	}
 
+	//! Get center of the viewport on the screen in pixels.
+	Vec2f getViewportCenterAbsolute() const 
+	{
+		return viewportCenter;
+	}
+
 protected:
 	//! Private constructor. Only StelCore can create instances of StelProjector.
 	StelProjector(ModelViewTranformP amodelViewTransform) : modelViewTransform(amodelViewTransform) {;}

@@ -200,7 +200,7 @@ void Nebula::drawLabel(StelRenderer* renderer, StelProjectorP projector, float m
 			str = QString("IC %1").arg(IC_nb);
 	}
 
-	renderer->drawText(TextParams(XY[0] + shift, XY[1] + shift, str).useGravity());
+	renderer->drawText(TextParams(XY[0] + shift, XY[1] + shift, str).useGravity().projector(projector));
 }
 
 
