@@ -120,6 +120,29 @@ ShortcutsDialog::~ShortcutsDialog()
 	delete ui; ui = NULL;
 }
 
+void ShortcutsDialog::paintCollisions(QList<QTreeWidgetItem *> items)
+{
+	collisionItems.append(items);
+	foreach(QTreeWidgetItem* item, items)
+	{
+		item->setForeground(0, Qt::red);
+		item->setForeground(1, Qt::red);
+		item->setForeground(2, Qt::red);
+	}
+}
+
+void ShortcutsDialog::resetCollisions()
+{
+	foreach(QTreeWidgetItem* item, collisionItems)
+	{
+		QColor defaultColor = ui->shortcutsTreeWidget->palette().color(QPalette::Foreground);
+		item->setForeground(0, defaultColor);
+		item->setForeground(1, defaultColor);
+		item->setForeground(2, defaultColor);
+	}
+	collisionItems.clear();
+}
+
 void ShortcutsDialog::retranslate()
 {
 	if (dialog)
@@ -163,19 +186,52 @@ void ShortcutsDialog::setActionsEnabled(bool enable)
 	}
 }
 
-void ShortcutsDialog::handleChanges()
+void ShortcutsDialog::handleCollisions()
 {
-	// updating apply button
-	if (ui->primaryShortcutEdit->text() == ui->shortcutsTreeWidget->currentItem()->text(1) &&
-			ui->altShortcutEdit->text() == ui->shortcutsTreeWidget->currentItem()->text(2))
+	QString primText = ui->primaryShortcutEdit->text();
+	QString altText = ui->altShortcutEdit->text();
+	// check for collisions
+	resetCollisions();
+	QList<QTreeWidgetItem*> collisionList;
+	bool collisionInPrimeEdit = false;
+	bool collisionInAltEdit = false;
+	if (!primText.isEmpty())
 	{
-		// nothing to apply
+		// check in primary shortcuts
+		collisionList.append(ui->shortcutsTreeWidget->findItems(primText, Qt::MatchFixedString | Qt::MatchRecursive, 1));
+		// check in alternative shortcuts
+		collisionList.append(ui->shortcutsTreeWidget->findItems(primText, Qt::MatchFixedString | Qt::MatchRecursive, 2));
+		collisionList.removeOne(ui->shortcutsTreeWidget->currentItem());
+	}
+	if (!collisionList.isEmpty())
+	{
+		collisionInPrimeEdit = true;
+		paintCollisions(collisionList);
+	}
+	collisionList.clear();
+	if (!altText.isEmpty())
+	{
+		// check in primary shortcuts
+		collisionList.append(ui->shortcutsTreeWidget->findItems(altText, Qt::MatchFixedString | Qt::MatchRecursive, 1));
+		// check in alternative shortcuts
+		collisionList.append(ui->shortcutsTreeWidget->findItems(altText, Qt::MatchFixedString | Qt::MatchRecursive, 2));
+		collisionList.removeOne(ui->shortcutsTreeWidget->currentItem());
+	}
+	if (!collisionList.isEmpty())
+	{
+		collisionInAltEdit = true;
+		paintCollisions(collisionList);
+	}
+	if (collisionInPrimeEdit || collisionInAltEdit)
+	{
 		ui->applyButton->setEnabled(false);
 	}
-	else
-	{
-		ui->applyButton->setEnabled(true);
-	}
+	ui->primaryShortcutEdit->setProperty("collision", collisionInPrimeEdit);
+	ui->altShortcutEdit->setProperty("collision", collisionInAltEdit);
+}
+
+void ShortcutsDialog::handleChanges()
+{
 	// updating clear buttons
 	if (ui->primaryShortcutEdit->text().isEmpty())
 	{
@@ -193,6 +249,25 @@ void ShortcutsDialog::handleChanges()
 	{
 		ui->clearAltButton->setEnabled(true);
 	}
+	QString primText = ui->primaryShortcutEdit->text();
+	QString altText = ui->altShortcutEdit->text();
+	// updating apply button
+	if (primText == ui->shortcutsTreeWidget->currentItem()->text(1) &&
+			altText == ui->shortcutsTreeWidget->currentItem()->text(2))
+	{
+		// nothing to apply
+		ui->applyButton->setEnabled(false);
+	}
+	else
+	{
+		ui->applyButton->setEnabled(true);
+	}
+	handleCollisions();
+	// apply style changes, see http://qt-project.org/faq/answer/how_can_my_stylesheet_account_for_custom_properties
+	ui->primaryShortcutEdit->style()->unpolish(ui->primaryShortcutEdit);
+	ui->primaryShortcutEdit->style()->polish(ui->primaryShortcutEdit);
+	ui->altShortcutEdit->style()->unpolish(ui->altShortcutEdit);
+	ui->altShortcutEdit->style()->polish(ui->altShortcutEdit);
 }
 
 void ShortcutsDialog::applyChanges()
