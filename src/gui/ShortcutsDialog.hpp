@@ -38,12 +38,13 @@ public:
 	QKeySequence getKeySequence();
 
 public slots:
+	// clear contents; also clear stored keys
 	void clear();
 	void setContents(QKeySequence ks);
 
 signals:
+	// need for enable/disable buttons in dialog
 	void focusChanged(bool focus);
-	// emits when content is changed; resetable defines whether content can be changed back or not
 	void contentsChanged();
 
 protected:
@@ -52,7 +53,8 @@ protected:
 	void focusOutEvent(QFocusEvent *e);
 
 private:
-	int getModifiers(Qt::KeyboardModifiers state, const QString &text);
+	// transform modifiers to int
+	int getModifiers(Qt::KeyboardModifiers state, const QString &text);	
 
 	// counter and array for store keys entered
 	int m_keyNum;
@@ -69,15 +71,22 @@ public:
 	ShortcutsDialog();
 	~ShortcutsDialog();
 
+	// higlight items that have collisions with current lineEdits' state according to css
 	void paintCollisions(QList<QTreeWidgetItem*> items);
 
 public slots:
+	// restore colors of all items it TreeWidget to defaults
 	void resetCollisions();
 	void retranslate();
+	// ititialize editors state when current item changed
 	void initEditors();
+	// enable/disable all actions of application
+	// need for editing shortcuts without trigging any actions
 	void setActionsEnabled(bool enable);
 	void handleCollisions();
+	// called when editors' state changed
 	void handleChanges();
+	// called when apply button clicked
 	void applyChanges();
 
 protected:

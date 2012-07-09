@@ -48,6 +48,8 @@ void ShortcutLineEdit::clear()
 
 void ShortcutLineEdit::setContents(QKeySequence ks)
 {
+	// clear before setting up
+	clear();
 	// set up m_keys from given key sequence
 	m_keyNum = ks.count();
 	for (int i = 0; i < m_keyNum; ++i)
@@ -70,9 +72,11 @@ void ShortcutLineEdit::keyPressEvent(QKeyEvent *e)
 	nextKey |= getModifiers(e->modifiers(), e->text());
 	m_keys[m_keyNum] = nextKey;
 	++m_keyNum;
+	// set displaying information
 	QKeySequence ks(m_keys[0], m_keys[1], m_keys[2], m_keys[3]);
 	setText(ks);
 	emit contentsChanged();
+	// not call QLineEdit's event because we already changed contents
 	e->accept();
 }
 
@@ -89,8 +93,7 @@ void ShortcutLineEdit::focusOutEvent(QFocusEvent *e)
 }
 
 
-int ShortcutLineEdit::getModifiers(Qt::KeyboardModifiers state,
-																				 const QString &text)
+int ShortcutLineEdit::getModifiers(Qt::KeyboardModifiers state, const QString &text)
 {
 	int result = 0;
 	// The shift modifier only counts when it is not used to type a symbol
@@ -117,6 +120,7 @@ ShortcutsDialog::ShortcutsDialog() :
 
 ShortcutsDialog::~ShortcutsDialog()
 {
+	collisionItems.clear();
 	delete ui; ui = NULL;
 }
 
@@ -125,6 +129,7 @@ void ShortcutsDialog::paintCollisions(QList<QTreeWidgetItem *> items)
 	collisionItems.append(items);
 	foreach(QTreeWidgetItem* item, items)
 	{
+		// change colors of all columns for better visibility
 		item->setForeground(0, Qt::red);
 		item->setForeground(1, Qt::red);
 		item->setForeground(2, Qt::red);
@@ -155,8 +160,10 @@ void ShortcutsDialog::retranslate()
 void ShortcutsDialog::initEditors()
 {
 	if (ui->shortcutsTreeWidget->currentItem()->isSelected()) {
+		// current item is shortcut, not group (group items aren't selectable)
 		ui->primaryShortcutEdit->setEnabled(true);
 		ui->altShortcutEdit->setEnabled(true);
+		// fill editors with item's shortcuts
 		ui->primaryShortcutEdit->setContents(
 					ui->shortcutsTreeWidget->currentItem()->
 					data(1, Qt::DisplayRole).value<QKeySequence>());
@@ -166,6 +173,7 @@ void ShortcutsDialog::initEditors()
 		handleChanges();
 	}
 	else {
+		// item is group, not shortcut
 		ui->primaryShortcutEdit->setEnabled(false);
 		ui->altShortcutEdit->setEnabled(false);
 		ui->applyButton->setEnabled(false);
@@ -190,7 +198,7 @@ void ShortcutsDialog::handleCollisions()
 {
 	QString primText = ui->primaryShortcutEdit->text();
 	QString altText = ui->altShortcutEdit->text();
-	// check for collisions
+	// clear previous collisions
 	resetCollisions();
 	QList<QTreeWidgetItem*> collisionList;
 	bool collisionInPrimeEdit = false;
@@ -201,6 +209,7 @@ void ShortcutsDialog::handleCollisions()
 		collisionList.append(ui->shortcutsTreeWidget->findItems(primText, Qt::MatchFixedString | Qt::MatchRecursive, 1));
 		// check in alternative shortcuts
 		collisionList.append(ui->shortcutsTreeWidget->findItems(primText, Qt::MatchFixedString | Qt::MatchRecursive, 2));
+		// remove current item
 		collisionList.removeOne(ui->shortcutsTreeWidget->currentItem());
 	}
 	if (!collisionList.isEmpty())
@@ -208,6 +217,7 @@ void ShortcutsDialog::handleCollisions()
 		collisionInPrimeEdit = true;
 		paintCollisions(collisionList);
 	}
+	// clear for proper handling for alternative edit
 	collisionList.clear();
 	if (!altText.isEmpty())
 	{
@@ -215,6 +225,7 @@ void ShortcutsDialog::handleCollisions()
 		collisionList.append(ui->shortcutsTreeWidget->findItems(altText, Qt::MatchFixedString | Qt::MatchRecursive, 1));
 		// check in alternative shortcuts
 		collisionList.append(ui->shortcutsTreeWidget->findItems(altText, Qt::MatchFixedString | Qt::MatchRecursive, 2));
+		// remove current item
 		collisionList.removeOne(ui->shortcutsTreeWidget->currentItem());
 	}
 	if (!collisionList.isEmpty())
@@ -225,6 +236,13 @@ void ShortcutsDialog::handleCollisions()
 	if (collisionInPrimeEdit || collisionInAltEdit)
 	{
 		ui->applyButton->setEnabled(false);
+		// scrolling to first collision item
+		ui->shortcutsTreeWidget->scrollToItem(collisionItems.first());
+	}
+	else
+	{
+		// scrolling back to current item
+		ui->shortcutsTreeWidget->scrollToItem(ui->shortcutsTreeWidget->currentItem());
 	}
 	ui->primaryShortcutEdit->setProperty("collision", collisionInPrimeEdit);
 	ui->altShortcutEdit->setProperty("collision", collisionInAltEdit);
@@ -272,11 +290,14 @@ void ShortcutsDialog::handleChanges()
 
 void ShortcutsDialog::applyChanges()
 {
+	// get ids stored in tree
 	QString actionId = ui->shortcutsTreeWidget->currentItem()->data(0, Qt::UserRole).toString();
 	QString groupId = ui->shortcutsTreeWidget->currentItem()->parent()->
 			data(0, Qt::UserRole).toString();
+	// changing keys in shortcuts
 	shortcutMgr->changeActionPrimaryKey(actionId, groupId, ui->primaryShortcutEdit->getKeySequence());
 	shortcutMgr->changeActionAltKey(actionId, groupId, ui->altShortcutEdit->getKeySequence());
+	// changing displaying information in tree
 	ui->shortcutsTreeWidget->currentItem()->setText(1, ui->primaryShortcutEdit->text());
 	ui->shortcutsTreeWidget->currentItem()->setText(2, ui->altShortcutEdit->text());
 }
@@ -291,23 +312,26 @@ void ShortcutsDialog::createDialogContent()
 	// we need to disable all shortcut actions, so we can enter shortcuts without activating any actions
 	connect(ui->primaryShortcutEdit, SIGNAL(focusChanged(bool)), this, SLOT(setActionsEnabled(bool)));
 	connect(ui->altShortcutEdit, SIGNAL(focusChanged(bool)), this, SLOT(setActionsEnabled(bool)));
-	// handling changes in editlines
+	// handling changes in editors
 	connect(ui->primaryShortcutEdit, SIGNAL(contentsChanged()), this, SLOT(handleChanges()));
 	connect(ui->altShortcutEdit, SIGNAL(contentsChanged()), this, SLOT(handleChanges()));
 
-	// Creating shortcuts tree
+	// Create shortcuts tree
 	QList<StelShortcutGroup*> groups = shortcutMgr->getGroupList();
 	foreach (StelShortcutGroup* group, groups)
 	{
 		QTreeWidgetItem* groupItem = new QTreeWidgetItem(ui->shortcutsTreeWidget);
+		// group items aren't selectable
 		groupItem->setFlags(Qt::ItemIsEnabled);
 		groupItem->setText(0, group->getId());
+		// store id
 		groupItem->setData(0, Qt::UserRole, group->getId());
 		groupItem->setExpanded(true);
 		// setup bold font for group lines
 		QFont rootFont = groupItem->font(0);
 		rootFont.setBold(true); rootFont.setPixelSize(14);
 		groupItem->setFont(0, rootFont);
+		// displaying group's shortcuts
 		QList<StelShortcut*> shortcuts = group->getActionList();
 		foreach (StelShortcut* shortcut, shortcuts)
 		{
