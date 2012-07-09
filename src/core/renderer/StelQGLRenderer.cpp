@@ -1,6 +1,7 @@
 #include <cmath>
 
 #include "StelQGLRenderer.hpp"
+#include "StelLocaleMgr.hpp"
 
 void StelQGLRenderer::bindTexture
 	(StelTextureBackend* const textureBackend, const int textureUnit)
@@ -200,6 +201,47 @@ void StelQGLRenderer::drawWindow(StelViewportEffect* const effect)
 	invariant();
 }
 
+void StelQGLRenderer::drawTextGravityHelper(const TextParams& params, QPainter& painter)
+{
+	StelProjectorP projector   = params.projector_;
+	const Vec2f viewportCenter = projector->getViewportCenterAbsolute();
+
+	const float dx = params.x_ - viewportCenter[0];
+	const float dy = params.y_ - viewportCenter[1];
+	const float d  = std::sqrt(dx * dx + dy * dy);
+	
+	// Cull the text if it's too far away to be visible in the screen.
+	if (d > qMax(projector->getViewportXywh()[3], projector->getViewportXywh()[2]) * 2)
+	{
+		return;
+	}
+
+	const QString string  = params.string_;
+	const int charCount   = string.length();
+	const float charWidth = painter.fontMetrics().width(string) / charCount;
+	float theta           = std::atan2(dy - 1, dx);
+	const float psi       = qMin(5.0, std::atan2(charWidth, d + 1) * 180.0f / M_PI);
+	const float xVc       = viewportCenter[0] + params.xShift_;
+	const float yVc       = viewportCenter[1] + params.yShift_;
+	const QString lang    = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+
+	const bool leftToRight = !QString("ar fa ur he yi").contains(lang);
+	// Draw each character separately
+	for (int i = 0; i < charCount; ++i)
+	{
+		const int charIndex = leftToRight ? i : charCount - 1 - i;
+		const float x       = d * std::cos(theta) + xVc;
+		const float y       = d * std::sin(theta) + yVc;
+		const float angle   = 90.0f + theta * 180.0f / M_PI;
+
+		drawText(TextParams(x, y, string[charIndex]).angleDegrees(angle));
+	
+		// Compute how much the character contributes to the angle 
+		const float width = painter.fontMetrics().width(string[charIndex]);
+		theta += psi * M_PI / 180.0 * (1 + (width - charWidth) / charWidth);
+	}
+}
+
 void StelQGLRenderer::drawText(const TextParams& params)
 {
 	QPainter* painter = viewport.getPainter();
@@ -208,7 +250,7 @@ void StelQGLRenderer::drawText(const TextParams& params)
 
 	if(params.projector_->useGravityLabels() && !params.noGravity_)
 	{
-		Q_ASSERT_X(false, Q_FUNC_INFO, "TODO - Not yet implemented");
+		drawTextGravityHelper(params, *painter);
 		return;
 	}
 	
@@ -272,14 +314,14 @@ void StelQGLRenderer::drawText(const TextParams& params)
 
 	const float angleDegrees = 
 		params.angleDegrees_ + 
-		params.noGravity_ ? 0.0f : params.projector_->getDefaultAngleForGravityText();
+		(params.noGravity_ ? 0.0f : params.projector_->getDefaultAngleForGravityText());
 	// Zero out very small angles.
 	// 
 	// (this could also be used to optimize the case with zero angled
 	//  to avoid sin/cos if needed)
 	const bool  angled = std::fabs(angleDegrees) >= 1.0f * M_PI / 180.f;
-	const float cosr   = angled ? std::cos(angleDegrees * M_PI / 180.0) : 1.0f;
-	const float sinr   = angled ? std::sin(angleDegrees * M_PI / 180.0) : 0.0f;
+	const float cosr   = angled  ? std::cos(angleDegrees * M_PI / 180.0) : 1.0f;
+	const float sinr   = angled  ? std::sin(angleDegrees * M_PI / 180.0) : 0.0f;
 
 	// Corners of the (possibly rotated) texture rectangle.
 	const Vec2f ne(round(x + cosr * xShift       - sinr * yShift),

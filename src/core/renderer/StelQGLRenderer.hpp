@@ -262,6 +262,14 @@ private:
 
 	//! Draw the result of drawing commands to the window, applying given effect if possible.
 	void drawWindow(StelViewportEffect* const effect);
+
+	//! Handles gravity text logic. Called by draText().
+	//!
+	//! Splits the string into characters and draws each separately with its own rotation.
+	//!
+	//! @param params  Text drawing parameters.
+	//! @param painter QPainter used for painting to the viewport.
+	void drawTextGravityHelper(const TextParams& params, QPainter& painter);
 	
 	// Must be down due to initializer list order.
 protected:
