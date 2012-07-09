@@ -59,6 +59,8 @@ private:
 	int m_keys[4]; // QKeySequence allows only 4 keys in single shortcut
 };
 
+QT_FORWARD_DECLARE_CLASS(QTreeWidgetItem)
+
 class ShortcutsDialog : public StelDialog
 {
 	Q_OBJECT
@@ -67,10 +69,14 @@ public:
 	ShortcutsDialog();
 	~ShortcutsDialog();
 
+	void paintCollisions(QList<QTreeWidgetItem*> items);
+
 public slots:
+	void resetCollisions();
 	void retranslate();
 	void initEditors();
 	void setActionsEnabled(bool enable);
+	void handleCollisions();
 	void handleChanges();
 	void applyChanges();
 
@@ -85,6 +91,9 @@ private:
 
 	// pointer to mgr, for not getting it from stelapp every time
 	StelShortcutMgr* shortcutMgr;
+
+	// list for storing collisions items, so we can easy restore their colors
+	QList<QTreeWidgetItem*> collisionItems;
 
 	Ui_shortcutsDialogForm *ui;
 };
