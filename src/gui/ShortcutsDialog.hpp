@@ -39,6 +39,7 @@ public:
 
 public slots:
 	void clear();
+	void setContents(QKeySequence ks);
 
 signals:
 	void focusChanged(bool focus);

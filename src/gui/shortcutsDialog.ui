@@ -314,5 +314,37 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>clearPrimaryButton</sender>
+   <signal>clicked()</signal>
+   <receiver>primaryShortcutEdit</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>540</x>
+     <y>380</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>352</x>
+     <y>380</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearAltButton</sender>
+   <signal>clicked()</signal>
+   <receiver>altShortcutEdit</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>540</x>
+     <y>413</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>352</x>
+     <y>413</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
 </ui>
