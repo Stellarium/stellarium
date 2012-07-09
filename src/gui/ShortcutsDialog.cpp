@@ -30,6 +30,7 @@
 ShortcutLineEdit::ShortcutLineEdit(QWidget *parent) :
 	QLineEdit(parent)
 {
+	// call clear for setting up private fields
 	clear();
 }
 
@@ -45,15 +46,27 @@ void ShortcutLineEdit::clear()
 	emit contentsChanged();
 }
 
+void ShortcutLineEdit::setContents(QKeySequence ks)
+{
+	// set up m_keys from given key sequence
+	m_keyNum = ks.count();
+	for (int i = 0; i < m_keyNum; ++i)
+	{
+		m_keys[i] = ks[i];
+	}
+	setText(ks.toString());
+}
+
 void ShortcutLineEdit::keyPressEvent(QKeyEvent *e)
 {
 	int nextKey = e->key();
 	if ( m_keyNum > 3 || // too long shortcut
-			 nextKey == Qt::Key_Control ||
+			 nextKey == Qt::Key_Control || // dont count modifier keys
 			 nextKey == Qt::Key_Shift ||
 			 nextKey == Qt::Key_Meta ||
 			 nextKey == Qt::Key_Alt )
 		return;
+	// applying current modifiers to key
 	nextKey |= getModifiers(e->modifiers(), e->text());
 	m_keys[m_keyNum] = nextKey;
 	++m_keyNum;
@@ -121,10 +134,12 @@ void ShortcutsDialog::initEditors()
 	if (ui->shortcutsTreeWidget->currentItem()->isSelected()) {
 		ui->primaryShortcutEdit->setEnabled(true);
 		ui->altShortcutEdit->setEnabled(true);
-		ui->primaryShortcutEdit->setText(
-					ui->shortcutsTreeWidget->currentItem()->text(1));
-		ui->altShortcutEdit->setText(
-					ui->shortcutsTreeWidget->currentItem()->text(2));
+		ui->primaryShortcutEdit->setContents(
+					ui->shortcutsTreeWidget->currentItem()->
+					data(1, Qt::DisplayRole).value<QKeySequence>());
+		ui->altShortcutEdit->setContents(
+					ui->shortcutsTreeWidget->currentItem()->
+					data(2, Qt::DisplayRole).value<QKeySequence>());
 		handleChanges();
 	}
 	else {
@@ -196,10 +211,8 @@ void ShortcutsDialog::createDialogContent()
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->shortcutsTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(initEditors()));
-	// apply/clear buttons logic
+	// apply button logic
 	connect(ui->applyButton, SIGNAL(released()), this, SLOT(applyChanges()));
-	connect(ui->clearPrimaryButton, SIGNAL(released()), ui->primaryShortcutEdit, SLOT(clear()));
-	connect(ui->clearAltButton, SIGNAL(released()), ui->altShortcutEdit, SLOT(clear()));
 	// we need to disable all shortcut actions, so we can enter shortcuts without activating any actions
 	connect(ui->primaryShortcutEdit, SIGNAL(focusChanged(bool)), this, SLOT(setActionsEnabled(bool)));
 	connect(ui->altShortcutEdit, SIGNAL(focusChanged(bool)), this, SLOT(setActionsEnabled(bool)));
@@ -225,9 +238,10 @@ void ShortcutsDialog::createDialogContent()
 		{
 			QTreeWidgetItem* shortcutItem = new QTreeWidgetItem(groupItem);
 			shortcutItem->setText(0, shortcut->getText());
-			shortcutItem->setText(1, shortcut->getPrimaryKey());
-			shortcutItem->setText(2, shortcut->getAltKey());
+			// store shortcut id, so we can find it when shortcut changed
 			shortcutItem->setData(0, Qt::UserRole, QVariant(shortcut->getId()));
+			shortcutItem->setData(1, Qt::DisplayRole, shortcut->getPrimaryKey());
+			shortcutItem->setData(2, Qt::DisplayRole, shortcut->getAltKey());
 		}
 	}
 	updateText();
