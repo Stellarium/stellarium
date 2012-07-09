@@ -239,7 +239,7 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 								   double ra3, double dec3,
 								   double minRes, double maxBright, bool visible)
 {
-	if (allSkyLayers.contains("id"))
+	if (allSkyLayers.contains(id))
 	{
 		qWarning() << "Image ID" << id << "already exists, removing old image before loading";
 		removeSkyLayer(id);
