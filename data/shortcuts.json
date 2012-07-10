@@ -627,6 +627,46 @@
 					"global" : "0"
 				}
 			}
+		},
+		"Plugin Key Bindings":
+		{
+			"actions":
+			{
+				"actionShow_Exoplanets_ConfigDialog":
+				{
+					"text" : "Exoplanets configuration window",
+					"shortcuts" : "",
+					"checkable" : "1",
+					"autorepeat" : "0",
+					"global" : "0"
+				},
+				"actionShow_Exoplanets":
+				{
+					"text" : "Show exoplanets",
+					"shortcuts" : "Ctrl+Alt+E",
+					"checkable" : "1",
+					"autorepeat" : "0",
+					"global" : "0"
+				},
+				"actionShow_Pulsars_ConfigDialog":
+				{
+					"text" : "Pulsars configuration window",
+					"shortcuts" : "",
+					"checkable" : "1"
+				},
+				"actionShow_Supernovae_ConfigDialog":
+				{
+					"text" : "Historical Supernovae configuration window",
+					"shortcuts" : "",
+					"checkable": "1"
+				},
+				"actionShow_Quasars_ConfigDialog":
+				{
+					"text" : "Quasars configuration window",
+					"shortcuts" : "",
+					"checkable" : "1"
+				}
+			}
 		}
 	}
 }

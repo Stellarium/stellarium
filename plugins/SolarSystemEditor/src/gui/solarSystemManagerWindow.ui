@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>480</height>
+    <width>498</width>
+    <height>478</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -123,7 +123,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tabConfigurationFile">
       <attribute name="title">
@@ -306,7 +306,7 @@
      </widget>
      <widget class="QWidget" name="tabAbout">
       <attribute name="title">
-       <string>About</string>
+       <string>About plugin</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>

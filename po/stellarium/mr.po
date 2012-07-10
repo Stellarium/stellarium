@@ -7,23 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-05-10 19:57+0700\n"
-"PO-Revision-Date: 2012-02-25 10:00+0000\n"
-"Last-Translator: Harshal Raje <Unknown>\n"
+"POT-Creation-Date: 2012-06-11 18:38+0700\n"
+"PO-Revision-Date: 2012-06-10 07:29+0000\n"
+"Last-Translator: nyogi <nyogi2004@gmail.com>\n"
 "Language-Team: Marathi <mr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-12 06:06+0000\n"
-"X-Generator: Launchpad (build 15225)\n"
+"X-Launchpad-Export-Date: 2012-06-12 04:50+0000\n"
+"X-Generator: Launchpad (build 15389)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
-msgstr ""
+msgstr "मध्यान्हवृत्त"
 
 #: src/core/modules/GridLinesMgr.cpp:546 src/ui_viewDialog.h:1176
 msgid "Ecliptic"
-msgstr ""
+msgstr "क्रांतीवृत्त"
 
 #: src/core/modules/GridLinesMgr.cpp:550 src/ui_viewDialog.h:1164
 msgid "Equator"
@@ -35,39 +35,39 @@ msgstr "Kshitij"
 
 #: src/core/modules/GridLinesMgr.cpp:558
 msgid "Galactic Plane"
-msgstr ""
+msgstr "दिर्घिका प्रतल"
 
-#: src/core/modules/LandscapeMgr.cpp:493
+#: src/core/modules/LandscapeMgr.cpp:495
 msgid "Author: "
 msgstr "लेखक: "
 
-#: src/core/modules/LandscapeMgr.cpp:496
+#: src/core/modules/LandscapeMgr.cpp:498
 msgid "Location: "
 msgstr "स्थान: "
 
-#: src/core/modules/LandscapeMgr.cpp:501
+#: src/core/modules/LandscapeMgr.cpp:503
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:505
+#: src/core/modules/LandscapeMgr.cpp:507
 msgid "Planet: "
 msgstr "ग्रह: "
 
 #: src/core/modules/Nebula.cpp:96 plugins/Supernovae/src/Supernova.cpp:99
-#: plugins/Quasars/src/Quasar.cpp:92 plugins/Pulsars/src/Pulsar.cpp:102
+#: plugins/Quasars/src/Quasar.cpp:95 plugins/Pulsars/src/Pulsar.cpp:129
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "प्रकार: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
-#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:106
+#: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:109
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "प्रत: <b>%1</b> (पर्यंत: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
-#: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:118
+#: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:121
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "प्रत: <b>%1</b>"
@@ -110,7 +110,7 @@ msgid "Undocumented type"
 msgstr "नोंद न झालेला प्रकार"
 
 #: src/core/modules/Planet.cpp:127 src/core/modules/StarWrapper.cpp:124
-#: plugins/Quasars/src/Quasar.cpp:123
+#: plugins/Quasars/src/Quasar.cpp:126
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "निरपेक्ष प्रत: %1"
@@ -118,17 +118,17 @@ msgstr "निरपेक्ष प्रत: %1"
 #: src/core/modules/Planet.cpp:140
 #, qt-format
 msgid "Ecliptic Geocentric (of date): %1/%2"
-msgstr ""
+msgstr "भूमध्य क्रांतिवृत्त ( दिनांक ): %1/%2"
 
 #: src/core/modules/Planet.cpp:141
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr ""
+msgstr "तिर्यकता(of date): %1"
 
 #: src/core/modules/Planet.cpp:151
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "अंतर: %1AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:158
 #, no-c-format, qt-format
@@ -138,7 +138,7 @@ msgstr "अंतर: %1AU"
 #: src/core/modules/Planet.cpp:169
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "भासमान व्यास r: %1, वर्तूळाचा: %2"
 
 #: src/core/modules/Planet.cpp:175
 #, qt-format
@@ -148,22 +148,22 @@ msgstr "भासमान व्यास: %1"
 #: src/core/modules/Planet.cpp:189
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "कला कोन: %1"
 
 #: src/core/modules/Planet.cpp:190
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "दिर्घिकरण: %1"
 
 #: src/core/modules/Planet.cpp:191
 #, qt-format
 msgid "Phase: %1"
-msgstr ""
+msgstr "प्रावस्था : %1"
 
 #: src/core/modules/Planet.cpp:192
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr ""
+msgstr "प्रकाशित: %1%"
 
 #: src/core/modules/StarWrapper.cpp:52
 #, qt-format
@@ -173,17 +173,17 @@ msgstr "प्रत: <b>%1</b> (B-V: %2)"
 #: src/core/modules/StarWrapper.cpp:55
 #, qt-format
 msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr ""
+msgstr "भासमान प्रत: <b>%1</b> (by extinction)"
 
-#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:100
+#: src/core/modules/StarWrapper.cpp:115 plugins/Quasars/src/Quasar.cpp:103
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-msgstr ""
+msgstr "प्रत : <b>%1</b> (पर्यंत: <b>%2</b>. B-V: <b>%3</b>)"
 
-#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:114
+#: src/core/modules/StarWrapper.cpp:119 plugins/Quasars/src/Quasar.cpp:117
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-msgstr ""
+msgstr "प्रत : <b>%1</b> (B-V: <b>%2</b>)"
 
 #: src/core/modules/StarWrapper.cpp:130
 #, qt-format
@@ -331,7 +331,7 @@ msgstr "तास कोन/डेक : %1/%2"
 
 #: src/core/StelObject.cpp:103 src/core/StelObject.cpp:122
 msgid "(geometric)"
-msgstr ""
+msgstr "(भौ मितिक)"
 
 #: src/core/StelObject.cpp:106 src/core/StelObject.cpp:128
 msgid "(apparent)"
@@ -345,27 +345,27 @@ msgstr "दिगंश/उन्न्तांश: %1/%2"
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
-msgstr ""
+msgstr "नेटवर्क त्रुटी"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
-msgstr ""
+msgstr "त्रुटी पदनिरुपण स्थिती"
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
-msgstr ""
+msgstr "विचाराधीन"
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "त्रुटी"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr ""
+msgstr "आढळले नाही"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
-msgstr ""
+msgstr "सापडले"
 
 #: src/gui/ConfigurationDialog.cpp:346
 msgid "Select screenshot directory"
@@ -382,6 +382,7 @@ msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "सुरु होतांनाच्या दिगंश/उन्न्तांशची दिशा: %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:574
+#: plugins/Oculars/src/gui/OcularDialog.cpp:419
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "लेखक"
@@ -391,6 +392,9 @@ msgid "Contact"
 msgstr "संपर्क"
 
 #: src/gui/ConfigurationDialog.cpp:658
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
 msgid "Author"
 msgstr "लेखक"
 
@@ -416,7 +420,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:769
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "उपलब्द्ध सर्व तारकासंच प्रस्थापित केले आहेत"
 
 #: src/gui/ConfigurationDialog.cpp:774
 #, qt-format
@@ -494,7 +498,7 @@ msgstr "उजवी क्लिक"
 msgid "CTRL + Left click"
 msgstr "CTRL + डावी क्लिक"
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:173
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:176
 msgid "Movement and Selection"
 msgstr "हालचाल आणि निवड"
 
@@ -518,44 +522,58 @@ msgstr "निवड रद्द करा"
 msgid "When a Script is Running"
 msgstr "जेव्हा आज्ञावली कार्यरत असेल"
 
-#: src/gui/HelpDialog.cpp:72 src/gui/StelGui.cpp:148
+#: src/gui/HelpDialog.cpp:73
+msgid "Stop currently running script"
+msgstr "सद्य् स्थितीतील आज्ञावली थांबवा"
+
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:151 src/gui/StelGui.cpp:152
+msgid "Pause script execution"
+msgstr "आज्ञावलींचे अंमलबजावणी थोपवा"
+
+#: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:153
+msgid "Resume script execution"
+msgstr "आज्ञावलींचे अंमलबजावणी सुरु करा"
+
+#: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:148
 msgid "Slow down the script execution rate"
 msgstr "आज्ञावली प्रक्रिया वेग कमी करा"
 
-#: src/gui/HelpDialog.cpp:73 src/gui/StelGui.cpp:149
+#: src/gui/HelpDialog.cpp:77 src/gui/StelGui.cpp:149
 msgid "Speed up the script execution rate"
 msgstr "आज्ञावली प्रक्रिया वेग वाढवा"
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:150
+#: src/gui/HelpDialog.cpp:78 src/gui/StelGui.cpp:150
 msgid "Set the normal script execution rate"
 msgstr "आज्ञावली प्रक्रिया वेग सामान्य ठेवा"
 
 #. TRANSLATORS: Title of a group of key bindings in the Help window
-#: src/gui/HelpDialog.cpp:77 plugins/AngleMeasure/src/AngleMeasure.cpp:126
+#: src/gui/HelpDialog.cpp:81 plugins/AngleMeasure/src/AngleMeasure.cpp:126
 #: plugins/CompassMarks/src/CompassMarks.cpp:124
 #: plugins/Oculars/src/Oculars.cpp:1188
 #: plugins/Satellites/src/Satellites.cpp:128
+#: plugins/Supernovae/src/Supernovae.cpp:143
+#: plugins/Quasars/src/Quasars.cpp:146 plugins/Pulsars/src/Pulsars.cpp:146
 msgid "Plugin Key Bindings"
-msgstr ""
+msgstr "जोडसाधनांची बधंने"
 
-#: src/gui/HelpDialog.cpp:78
+#: src/gui/HelpDialog.cpp:82
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:82
 msgid "Text User Interface"
-msgstr ""
+msgstr "शब्द वा्परकर्ता फलक"
 
-#: src/gui/HelpDialog.cpp:167
+#: src/gui/HelpDialog.cpp:171
 msgid "Stellarium Help"
 msgstr "स्टेलेरिअम बाबत मदत"
 
-#: src/gui/HelpDialog.cpp:168
+#: src/gui/HelpDialog.cpp:172
 msgid "Keys"
 msgstr "कळ"
 
-#: src/gui/HelpDialog.cpp:176
+#: src/gui/HelpDialog.cpp:180
 msgid "Further Reading"
 msgstr "अधिक वाचनासाठी"
 
-#: src/gui/HelpDialog.cpp:177
+#: src/gui/HelpDialog.cpp:181
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -563,17 +581,17 @@ msgstr ""
 "पुढे दिलेले दुवे हे बाहेरील महाजालातील दुवे आहेत, आणि ते तुमच्या "
 "महाजालन्याहळक उघडतील :\n"
 
-#: src/gui/HelpDialog.cpp:178
+#: src/gui/HelpDialog.cpp:182
 msgid "The Stellarium User Guide"
 msgstr "स्टेलारीअम वापरण्याचा मार्गदर्शक"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:182
+#: src/gui/HelpDialog.cpp:186
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Frequently Asked Questions} स्टेलारीअम बाबत प्रश्न व उत्तरे."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:187
+#: src/gui/HelpDialog.cpp:191
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -582,7 +600,7 @@ msgstr ""
 "वापरकर्त्यांनी तयार केलेले देखावे आणि आज्ञावली मिळू शकतील."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:192
+#: src/gui/HelpDialog.cpp:196
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -591,7 +609,7 @@ msgstr ""
 "विनंती येथे लिहा, आम्ही तुम्हाला मदत करण्याचा प्रयत्न करू."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:197
+#: src/gui/HelpDialog.cpp:201
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -602,59 +620,61 @@ msgstr ""
 "करा"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:202
+#: src/gui/HelpDialog.cpp:206
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forums} स्टेलारीअम बाबत इतरांशी चर्चा करा."
 
-#: src/gui/HelpDialog.cpp:238 src/gui/HelpDialog.cpp:341
-#: src/gui/HelpDialog.cpp:343 src/gui/StelGui.cpp:180
+#: src/gui/HelpDialog.cpp:242 src/gui/HelpDialog.cpp:345
+#: src/gui/HelpDialog.cpp:347 src/gui/StelGui.cpp:183
 msgid "Miscellaneous"
 msgstr "इतर"
 
-#: src/gui/HelpDialog.cpp:298
+#: src/gui/HelpDialog.cpp:302
 msgid "Developers"
 msgstr "विकासक"
 
-#: src/gui/HelpDialog.cpp:299
+#: src/gui/HelpDialog.cpp:303
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "प्रकल्प संयोजक आणि प्रमुख विकासक: %1"
 
-#: src/gui/HelpDialog.cpp:300
+#: src/gui/HelpDialog.cpp:304
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "दस्त लेखक / विकासक: %1"
 
-#: src/gui/HelpDialog.cpp:301 src/gui/HelpDialog.cpp:302
-#: src/gui/HelpDialog.cpp:303 src/gui/HelpDialog.cpp:304
-#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:311
-#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:313
-#: src/gui/HelpDialog.cpp:314
+#: src/gui/HelpDialog.cpp:305 src/gui/HelpDialog.cpp:306
+#: src/gui/HelpDialog.cpp:307 src/gui/HelpDialog.cpp:308
+#: src/gui/HelpDialog.cpp:309 src/gui/HelpDialog.cpp:315
+#: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:318
 #, qt-format
 msgid "Developer: %1"
 msgstr "विकासक: %1"
 
-#: src/gui/HelpDialog.cpp:306 src/gui/HelpDialog.cpp:307
+#: src/gui/HelpDialog.cpp:310 src/gui/HelpDialog.cpp:311
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "टेस्टर: %1"
 
-#: src/gui/HelpDialog.cpp:308
+#: src/gui/HelpDialog.cpp:312
 msgid "Past Developers"
-msgstr ""
+msgstr "मागिल विकसक"
 
-#: src/gui/HelpDialog.cpp:309
+#: src/gui/HelpDialog.cpp:313
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
+"खुप व्यक्तींचे यात महत्वपुर्ण योगदान आहे, परंतू त्या सध्या सक्रिय नाहित. "
+"त्यांच्या कामामुळे या प्रकल्पात महत्वाचा फरक पडला आहे"
 
-#: src/gui/HelpDialog.cpp:310
+#: src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "रेखाचित्र/ इतर रचनाकार: %1"
 
-#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:320
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "ओ एस् एक्स् विकासक: %1"
@@ -700,7 +720,7 @@ msgstr "विषुवांश J2000 जाळी"
 
 #: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
-msgstr ""
+msgstr "क्रांतीवृत्त J2000 जालीका"
 
 #: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
@@ -709,7 +729,7 @@ msgstr "दिर्घीका जाल"
 
 #: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
-msgstr ""
+msgstr "दिर्घिका प्रतल"
 
 #: src/gui/StelGui.cpp:114
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
@@ -764,7 +784,7 @@ msgstr "तारे"
 #: src/gui/StelGui.cpp:127
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Planet labels"
-msgstr ""
+msgstr "ग्रहांची नावे"
 
 #: src/gui/StelGui.cpp:128
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:301
@@ -829,135 +849,135 @@ msgstr "आज्ञावली नियंत्रक खिडकी"
 msgid "Date and Time"
 msgstr "दिनांक आणि वेळ"
 
-#: src/gui/StelGui.cpp:151
+#: src/gui/StelGui.cpp:154
 msgid "Decrease time speed"
 msgstr "वेळेचा वेग कमी करा"
 
-#: src/gui/StelGui.cpp:152
+#: src/gui/StelGui.cpp:155
 msgid "Increase time speed"
 msgstr "वेळेचा वेग जास्त करा"
 
-#: src/gui/StelGui.cpp:153
+#: src/gui/StelGui.cpp:156
 msgid "Set normal time rate"
 msgstr "वेळेचा वेग सामान्य ठेवा"
 
-#: src/gui/StelGui.cpp:154
+#: src/gui/StelGui.cpp:157
 msgid "Decrease time speed (a little)"
 msgstr "वेळ वेग वाढवा (थोडा)"
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:158
 msgid "Increase time speed (a little)"
 msgstr "वेळ वेग कमी करा  (थोडा)"
 
-#: src/gui/StelGui.cpp:156
+#: src/gui/StelGui.cpp:159
 msgid "Set time rate to zero"
 msgstr "वेळेचा वेग शुन्य करा"
 
-#: src/gui/StelGui.cpp:157
+#: src/gui/StelGui.cpp:160
 msgid "Set time to now"
 msgstr "सध्याच्या वेळेशी सुसंगत करा"
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:161
 msgid "Add 1 solar hour"
 msgstr "१ सौरतास वाढवा"
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:162
 msgid "Subtract 1 solar hour"
 msgstr "१ सौरतास कमी करा"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:163
 msgid "Add 1 solar day"
 msgstr "१ सौर दिवस वाढवा"
 
-#: src/gui/StelGui.cpp:161
+#: src/gui/StelGui.cpp:164
 msgid "Subtract 1 solar day"
 msgstr "१ सौर दिवस कमी करा"
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:165
 msgid "Add 1 solar week"
 msgstr "१ सौर आठवडा वाढवा"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:166
 msgid "Subtract 1 solar week"
 msgstr "१ सौर आठवडा कमी करा"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:167
 msgid "Add 1 sidereal day"
 msgstr "१ नक्षत्र दिवस वाढवा"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:168
 msgid "Subtract 1 sidereal day"
 msgstr "१ नक्षत्र दिवस कमी करा"
 
-#: src/gui/StelGui.cpp:166
+#: src/gui/StelGui.cpp:169
 msgid "Add 1 sidereal week"
 msgstr "१ नक्षत्र आठवडा वाढवा"
 
-#: src/gui/StelGui.cpp:167
+#: src/gui/StelGui.cpp:170
 msgid "Subtract 1 sidereal week"
 msgstr "१ नक्षत्र आठवडा कमी करा"
 
-#: src/gui/StelGui.cpp:168
-msgid "Add 1 sidereal month"
-msgstr ""
-
-#: src/gui/StelGui.cpp:169
-msgid "Subtract 1 sidereal month"
-msgstr ""
-
-#: src/gui/StelGui.cpp:170
-msgid "Add 1 sidereal year"
-msgstr ""
-
 #: src/gui/StelGui.cpp:171
-msgid "Subtract 1 sidereal year"
-msgstr ""
+msgid "Add 1 sidereal month"
+msgstr "१ नाक्षत्र महिना वाढवा"
+
+#: src/gui/StelGui.cpp:172
+msgid "Subtract 1 sidereal month"
+msgstr "१ नाक्षत्र महिना कमी करा"
+
+#: src/gui/StelGui.cpp:173
+msgid "Add 1 sidereal year"
+msgstr "१ नाक्षत्र वर्ष वाढवा"
 
 #: src/gui/StelGui.cpp:174
+msgid "Subtract 1 sidereal year"
+msgstr "१ नाक्षत्र वर्ष कमी करा"
+
+#: src/gui/StelGui.cpp:177
 msgid "Center on selected object"
 msgstr "निवडलेले लक्ष्य मधोमध आणा"
 
-#: src/gui/StelGui.cpp:175
+#: src/gui/StelGui.cpp:178
 msgid "Track object"
 msgstr "लक्ष्याचा मागोवा घ्या"
 
-#: src/gui/StelGui.cpp:176
+#: src/gui/StelGui.cpp:179
 msgid "Zoom in on selected object"
 msgstr "निवडलेले लक्षाचा आकार मोठा करा( निकटन)"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:180
 msgid "Zoom out"
 msgstr "आकार छोटा करा(दुरावलोकन)"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:181
 msgid "Set home planet to selected planet"
 msgstr "निवडलेला ग्रह गृह म्हणून निश्चित करा"
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:184
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "विषुवांश व दिगंश आरोपण यात बदल करा"
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:185
 msgid "Quit"
 msgstr "बाहेर पडा"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:186
 msgid "Save screenshot"
 msgstr "पटलचित्र साठवून ठेवा"
 
-#: src/gui/StelGui.cpp:184
+#: src/gui/StelGui.cpp:187
 msgid "Copy selected object information to clipboard"
-msgstr ""
+msgstr "निवडलेला मजकूर क्लिपबोर्डवर घ्या"
 
-#: src/gui/StelGui.cpp:186
+#: src/gui/StelGui.cpp:189
 msgid "Auto hide horizontal button bar"
 msgstr "आडवी कळ पट्टी स्वत:हून लपवा"
 
-#: src/gui/StelGui.cpp:187
+#: src/gui/StelGui.cpp:190
 msgid "Auto hide vertical button bar"
 msgstr "उभी कळ पट्टी स्वत:हून लपवा"
 
-#: src/gui/StelGui.cpp:188
+#: src/gui/StelGui.cpp:191
 msgid "Toggle visibility of GUI"
 msgstr "पडद्यावरील आकृत्य़ांची दृष्यमानता बदला"
 
@@ -1006,7 +1026,7 @@ msgstr "ZIP गाठोडी"
 #: src/gui/AddRemoveLandscapesDialog.cpp:127
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
-msgstr ""
+msgstr "देखावा  \"%1\"योग्य रित्या स्थापित झाला आहे."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:128
 #: src/gui/AddRemoveLandscapesDialog.cpp:155
@@ -1018,7 +1038,7 @@ msgstr "यश"
 #: src/gui/AddRemoveLandscapesDialog.cpp:220
 #: src/gui/AddRemoveLandscapesDialog.cpp:228
 msgid "No landscape was installed."
-msgstr ""
+msgstr "कोणताही देखावा स्थापित केला नाही"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:142
 #: src/gui/AddRemoveLandscapesDialog.cpp:166
@@ -1032,82 +1052,82 @@ msgstr "गडबड!"
 #: src/gui/AddRemoveLandscapesDialog.cpp:154
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
-msgstr ""
+msgstr "\"%1\" देखावा यशस्वीरित्या काढून टाकला."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:165
 #: src/gui/AddRemoveLandscapesDialog.cpp:235
 msgid "The selected landscape could not be (completely) removed."
-msgstr ""
+msgstr "निवडलेला देखावा पुर्णत: काढला गेला नाही"
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
 #, qt-format
 msgid "Size on disk: %1 MiB"
-msgstr ""
+msgstr "हार्डडिस्कवरील  आकार : %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
 #: src/gui/AddRemoveLandscapesDialog.cpp:214
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
-msgstr ""
+msgstr "%1लिहिण्या किंवा वाचण्याकरीता स्टेलारिअम उघडले जाउ शकत नाही."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:220
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
-msgstr ""
+msgstr "निवडलेली फाइल ZIP प्रकारची नाही अथवा त्यात स्टेलारिअम देखावा नाही."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
 #: src/gui/AddRemoveLandscapesDialog.cpp:227
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
-msgstr ""
+msgstr "(%1) देखावा त्याच नावाचा आहे किंवा आगोदरच स्थित आहे"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
 #: src/gui/AddRemoveLandscapesDialog.cpp:238
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
-msgstr ""
+msgstr "%1 ही डिक्शनरी तऊम्ही स्वत: काढून टाकू शकता."
 
 #: src/gui/ScriptConsole.cpp:73
 msgid "quickrun..."
-msgstr ""
+msgstr "धावतीभेट"
 
 #: src/gui/ScriptConsole.cpp:74
 msgid "selected text"
-msgstr ""
+msgstr "निवडलेला मजकूर"
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "clear text"
-msgstr ""
+msgstr "मजकुर काढा"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "clear images"
-msgstr ""
+msgstr "चित्र स्वच्छ केले"
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
-msgstr ""
+msgstr "नैसर्गिक"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
-msgstr ""
+msgstr "तारकाचित्र"
 
 #: src/gui/SearchDialog.cpp:351
 msgid "Simbad Lookup Error"
-msgstr ""
+msgstr "सिमबॅड देखभाल तृटी"
 
 #: src/gui/SearchDialog.cpp:359
 msgid "Simbad Lookup"
-msgstr ""
+msgstr "सिमबॅड देखभाल"
 
 #: src/gui/SearchDialog.cpp:507
 msgid "University of Strasbourg (France)"
-msgstr ""
+msgstr "स्टारबोर्ग विश्वविद्यालय (फ्रान्स)"
 
 #: src/gui/SearchDialog.cpp:508
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "हावर्ड विश्वविद्यालय (अमेरिका)"
 
 #: src/main.cpp:337
 msgid "This system does not support OpenGL."
@@ -1185,47 +1205,47 @@ msgstr "कॅलिस्टो"
 
 #: src/translations.h:50
 msgid "Amalthea"
-msgstr ""
+msgstr "अ‍ॅमेलथिआ"
 
 #: src/translations.h:51
 msgid "Himalia"
-msgstr ""
+msgstr "हिमालिया"
 
 #: src/translations.h:52
 msgid "Elara"
-msgstr ""
+msgstr "एलारा"
 
 #: src/translations.h:53
 msgid "Pasiphae"
-msgstr ""
+msgstr "पॅसिफे"
 
 #: src/translations.h:54
 msgid "Sinope"
-msgstr ""
+msgstr "सिनोप"
 
 #: src/translations.h:55
 msgid "Lysithea"
-msgstr ""
+msgstr "लिसिथेआ"
 
 #: src/translations.h:56
 msgid "Carme"
-msgstr ""
+msgstr "कारमे"
 
 #: src/translations.h:57
 msgid "Ananke"
-msgstr ""
+msgstr "अ‍ॅनाके"
 
 #: src/translations.h:58
 msgid "Leda"
-msgstr ""
+msgstr "लिडा"
 
 #: src/translations.h:59
 msgid "Thebe"
-msgstr ""
+msgstr "थेबे"
 
 #: src/translations.h:60
 msgid "Adrastea"
-msgstr ""
+msgstr "अ‍ॅडरास्टीआ"
 
 #. TRANSLATORS: Asteroid (9) Metis
 #: src/translations.h:61 src/translations.h:119
@@ -1312,12 +1332,12 @@ msgstr "चेरॉन"
 #. TRANSLATORS: Moon of Pluto (II)
 #: src/translations.h:82
 msgid "Nix"
-msgstr ""
+msgstr "निक्स"
 
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
 msgid "Hydra (moon)"
-msgstr ""
+msgstr "हायड्रा"
 
 #: src/translations.h:85
 msgid "Eris"
@@ -1325,55 +1345,55 @@ msgstr "एरिस"
 
 #: src/translations.h:86
 msgid "Triton"
-msgstr ""
+msgstr "ट्रिटॉन"
 
 #: src/translations.h:87
 msgid "Nereid"
-msgstr ""
+msgstr "नेरेईड"
 
 #: src/translations.h:88
 msgid "Naiad"
-msgstr ""
+msgstr "नाईड"
 
 #: src/translations.h:89
 msgid "Thalassa"
-msgstr ""
+msgstr "थालासा"
 
 #: src/translations.h:90
 msgid "Despina"
-msgstr ""
+msgstr "डेस्पिना"
 
 #: src/translations.h:91
 msgid "Galatea"
-msgstr ""
+msgstr "गॅलाटिया"
 
 #: src/translations.h:92
 msgid "Larissa"
-msgstr ""
+msgstr "लॅरिसा"
 
 #: src/translations.h:93
 msgid "Proteus"
-msgstr ""
+msgstr "प्रोटेस"
 
 #: src/translations.h:94
 msgid "Halimede"
-msgstr ""
+msgstr "हॅलिमेड"
 
 #: src/translations.h:95
 msgid "Psamathe"
-msgstr ""
+msgstr "पसामाथे"
 
 #: src/translations.h:96
 msgid "Sao"
-msgstr ""
+msgstr "साओ"
 
 #: src/translations.h:97
 msgid "Laomedeia"
-msgstr ""
+msgstr "लाओमेडिआ"
 
 #: src/translations.h:98
 msgid "Neso"
-msgstr ""
+msgstr "नेसो"
 
 #: src/translations.h:99
 msgid "Solar System Observer"
@@ -1382,27 +1402,27 @@ msgstr "सूर्यमाला निरिक्षक"
 #. TRANSLATORS: TNO/Asteroid (90377) Sedna
 #: src/translations.h:102
 msgid "Sedna"
-msgstr ""
+msgstr "सेडना"
 
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
 #: src/translations.h:104
 msgid "Quaoar"
-msgstr ""
+msgstr "क्युऑर"
 
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
 #: src/translations.h:106
 msgid "Orcus"
-msgstr ""
+msgstr "ओर्कस"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
 #: src/translations.h:108
 msgid "Haumea"
-msgstr ""
+msgstr "हाउमिआ"
 
 #. TRANSLATORS: Asteroid (5) Astraea
 #: src/translations.h:111
 msgid "Astraea"
-msgstr ""
+msgstr "अ‍ॅस्ट्राइआ"
 
 #. TRANSLATORS: Asteroid (6) Hebe
 #: src/translations.h:113
@@ -1452,12 +1472,12 @@ msgstr "हेक्टर"
 #. TRANSLATORS: Name of supernova SN 1572A
 #: src/translations.h:134
 msgid "Tycho's Supernova"
-msgstr ""
+msgstr "टेकोचा अतिनवतारा"
 
 #. TRANSLATORS: Name of supernova SN 1604A
 #: src/translations.h:136
 msgid "Kepler's Supernova"
-msgstr ""
+msgstr "केप्लरचा अतिनवतारा"
 
 #: src/translations.h:139
 msgid "N"
@@ -1477,7 +1497,7 @@ msgstr "प"
 
 #: src/translations.h:145
 msgid "Arabic"
-msgstr ""
+msgstr "अरेबिक"
 
 #: src/translations.h:146
 msgid "Aztec"
@@ -1534,643 +1554,644 @@ msgstr "पाश्चिमात्य"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:162
 msgid "Guereins"
-msgstr ""
+msgstr "ग्युरेन्स"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:164
 msgid "Trees"
-msgstr ""
+msgstr "झाडे"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:168
 msgid "Hurricane"
-msgstr ""
+msgstr "वादळे"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:170
 msgid "Ocean"
-msgstr ""
+msgstr "समुद्र"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:172
 msgid "Garching"
-msgstr ""
+msgstr "गार्चिंग"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
 msgid "Landscape Tour"
-msgstr ""
+msgstr "देखाव्यांची भेट"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
 msgid "Partial Lunar Eclipse"
-msgstr ""
+msgstr "खंडग्रासा चंद्रग्रहण"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:184
 msgid "Total Lunar Eclipse"
-msgstr ""
+msgstr "खग्रास चंद्रग्रहण"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
 msgid "Screensaver"
-msgstr ""
+msgstr "स्क्रीनसेवर"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:188
 msgid "Solar Eclipse 2009"
-msgstr ""
+msgstr "सूर्यग्रहण २००९"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:190
 msgid "Startup Script"
-msgstr ""
+msgstr "आज्ञावली सुरु"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:192
 msgid "Zodiac"
-msgstr ""
+msgstr "राशीचक्र"
 
 #: src/translations.h:195
 msgid "Look around each installed landscape."
-msgstr ""
+msgstr "संस्थापित केलेले सर्व देखावे पहा."
 
 #: src/translations.h:196
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr ""
+msgstr "खंडग्रास चंद्रग्रहण दर्शवणारी आज्ञावली"
 
 #: src/translations.h:197
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr ""
+msgstr "खग्रास चंद्रग्रहण दर्शवणारी आज्ञावली"
 
 #: src/translations.h:198
 msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr ""
+msgstr "अवकाशातील यदृच्छा भेट,"
 
 #: src/translations.h:199
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
+"२००९ साली झालेले सूर्यग्रहण दर्शवणारी आज्ञावली (ठिकाण = रंगपूर, बांगलादेश)"
 
 #: src/translations.h:200
 msgid "Script which runs automatically at startup"
-msgstr ""
+msgstr "सुरु होतांना स्वयंचलितरीत्या सुरु होणारॊ आज्ञावली"
 
 #: src/translations.h:201
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
-msgstr ""
+msgstr "ही आज्ञावली सुर्य वर्षभारात ज्या राशींमधून फिरतो ते दर्शवीते."
 
 #: src/translations.h:204
 msgid "Andorra"
-msgstr ""
+msgstr "अॅंडोरा"
 
 #: src/translations.h:205
 msgid "United Arab Emirates"
-msgstr ""
+msgstr "संयुक्त अरब अमिराती"
 
 #: src/translations.h:206
 msgid "Afghanistan"
-msgstr ""
+msgstr "अफ़गणिस्तान"
 
 #: src/translations.h:207
 msgid "Antigua and Barbuda"
-msgstr ""
+msgstr "अॅंटिग्वा आणी बार्बुडा"
 
 #: src/translations.h:208
 msgid "Anguilla"
-msgstr ""
+msgstr "अॅंग्विला"
 
 #: src/translations.h:209
 msgid "Albania"
-msgstr ""
+msgstr "अल्बेनिया"
 
 #: src/translations.h:210
 msgid "Armenia"
-msgstr ""
+msgstr "अमेरीका"
 
 #: src/translations.h:211
 msgid "Netherlands Antilles"
-msgstr ""
+msgstr "नेदरलैंड्स एंटीलेस"
 
 #: src/translations.h:212
 msgid "Angola"
-msgstr ""
+msgstr "अंगोला"
 
 #: src/translations.h:213
 msgid "Antarctica"
-msgstr ""
+msgstr "अंटार्क्टिका"
 
 #: src/translations.h:214
 msgid "Argentina"
-msgstr ""
+msgstr "अर्जेंर्टिना"
 
 #: src/translations.h:215
 msgid "American Samoa"
-msgstr ""
+msgstr "अमेरिकन सॅमोआ"
 
 #: src/translations.h:216
 msgid "Austria"
-msgstr ""
+msgstr "ऑस्ट्रिया"
 
 #: src/translations.h:217
 msgid "Australia"
-msgstr ""
+msgstr "ऑस्ट्रेलिया"
 
 #: src/translations.h:218
 msgid "Aruba"
-msgstr ""
+msgstr "अरुबा"
 
 #: src/translations.h:219
 msgid "Azerbaijan"
-msgstr ""
+msgstr "अझरबैजान"
 
 #: src/translations.h:220
 msgid "Bosnia and Herzegowina"
-msgstr ""
+msgstr "बोस्निया आणि हर्झेगोविना"
 
 #: src/translations.h:221
 msgid "Barbados"
-msgstr ""
+msgstr "बार्बाडोस"
 
 #: src/translations.h:222
 msgid "Bangladesh"
-msgstr ""
+msgstr "बांगलादेश"
 
 #: src/translations.h:223
 msgid "Belgium"
-msgstr ""
+msgstr "बेल्जियम"
 
 #: src/translations.h:224
 msgid "Burkina Faso"
-msgstr ""
+msgstr "बुर्किनो फासो"
 
 #: src/translations.h:225
 msgid "Bulgaria"
-msgstr ""
+msgstr "बल्गेरिया"
 
 #: src/translations.h:226
 msgid "Bahrain"
-msgstr ""
+msgstr "बाहारिन"
 
 #: src/translations.h:227
 msgid "Burundi"
-msgstr ""
+msgstr "बुरुंडी"
 
 #: src/translations.h:228
 msgid "Benin"
-msgstr ""
+msgstr "बेनिन"
 
 #: src/translations.h:229
 msgid "Bermuda"
-msgstr ""
+msgstr "बर्मुडा"
 
 #: src/translations.h:230
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "ब्रुनोइ दारुसलाम"
 
 #: src/translations.h:231
 msgid "Bolivia"
-msgstr ""
+msgstr "बोलिव्हीया"
 
 #: src/translations.h:232
 msgid "Brazil"
-msgstr ""
+msgstr "ब्राझिल"
 
 #: src/translations.h:233
 msgid "Bahamas"
-msgstr ""
+msgstr "बहामाज्"
 
 #: src/translations.h:234
 msgid "Bhutan"
-msgstr ""
+msgstr "भूतान"
 
 #: src/translations.h:235
 msgid "Bouvet Island"
-msgstr ""
+msgstr "बोव्हे आयलॅंड"
 
 #: src/translations.h:236
 msgid "Botswana"
-msgstr ""
+msgstr "बोस्वाना"
 
 #: src/translations.h:237
 msgid "Belarus"
-msgstr ""
+msgstr "बेलारूस"
 
 #: src/translations.h:238
 msgid "Belize"
-msgstr ""
+msgstr "बेलिझ"
 
 #: src/translations.h:239
 msgid "Canada"
-msgstr ""
+msgstr "कॅनडा"
 
 #: src/translations.h:240
 msgid "Cocos Islands"
-msgstr ""
+msgstr "कोकोज  बेटे"
 
 #: src/translations.h:241
 msgid "Democratic Republic of the Congo"
-msgstr ""
+msgstr "डेमोक्रिटीक रिपब्लिक ऑफ कॉन्गो"
 
 #: src/translations.h:242
 msgid "Central African Republic"
-msgstr ""
+msgstr "केंद्रीय आफ्रिकी गणराज्य"
 
 #: src/translations.h:243
 msgid "Republic of the Congo"
-msgstr ""
+msgstr "रिपब्लिक ऑफ कॉंगो"
 
 #: src/translations.h:244
 msgid "Switzerland"
-msgstr ""
+msgstr "स्वीर्त्झेलॅंड"
 
 #: src/translations.h:245
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "कोट द लव्होरे"
 
 #: src/translations.h:246
 msgid "Cook Islands"
-msgstr ""
+msgstr "कुक बेट"
 
 #: src/translations.h:247
 msgid "Chile"
-msgstr ""
+msgstr "चिली"
 
 #: src/translations.h:248
 msgid "Cameroon"
-msgstr ""
+msgstr "कॅमेरून"
 
 #: src/translations.h:249
 msgid "China"
-msgstr ""
+msgstr "चीन"
 
 #: src/translations.h:250
 msgid "Colombia"
-msgstr ""
+msgstr "कोलंबिया"
 
 #: src/translations.h:251
 msgid "Costa Rica"
-msgstr ""
+msgstr "कोस्टारिका"
 
 #: src/translations.h:252
 msgid "Serbia and Montenegro"
-msgstr ""
+msgstr "सर्बिया आणी मॉंटेनेगोरो"
 
 #: src/translations.h:253
 msgid "Cuba"
-msgstr ""
+msgstr "क्युबा"
 
 #: src/translations.h:254
 msgid "Cape Verde"
-msgstr ""
+msgstr "केप वर्द"
 
 #: src/translations.h:255
 msgid "Christmas Island"
-msgstr ""
+msgstr "क्रिसमस बेट"
 
 #: src/translations.h:256
 msgid "Cyprus"
-msgstr ""
+msgstr "सायप्रस"
 
 #: src/translations.h:257
 msgid "Czech Republic"
-msgstr ""
+msgstr "झेक प्रजासत्ताक"
 
 #: src/translations.h:258
 msgid "Germany"
-msgstr ""
+msgstr "जर्मनी"
 
 #: src/translations.h:259
 msgid "Djibouti"
-msgstr ""
+msgstr "दिजीबौटी"
 
 #: src/translations.h:260
 msgid "Denmark"
-msgstr ""
+msgstr "डेन्मार्क"
 
 #: src/translations.h:261
 msgid "Dominica"
-msgstr ""
+msgstr "डोमिनिका"
 
 #: src/translations.h:262
 msgid "Dominican Republic"
-msgstr ""
+msgstr "डॉमिनिकन रिपब्लिक"
 
 #: src/translations.h:263
 msgid "Algeria"
-msgstr ""
+msgstr "अल्जिरिया"
 
 #: src/translations.h:264
 msgid "Ecuador"
-msgstr ""
+msgstr "इक्वेडोर"
 
 #: src/translations.h:265
 msgid "Estonia"
-msgstr ""
+msgstr "ईस्टोनिया"
 
 #: src/translations.h:266
 msgid "Egypt"
-msgstr ""
+msgstr "ईजिप्त"
 
 #: src/translations.h:267
 msgid "Western Sahara"
-msgstr ""
+msgstr "पश्चिमी सहारा"
 
 #: src/translations.h:268
 msgid "Eritrea"
-msgstr ""
+msgstr "इरीट्रिया"
 
 #: src/translations.h:269
 msgid "Spain"
-msgstr ""
+msgstr "स्पेन"
 
 #: src/translations.h:270
 msgid "Ethiopia"
-msgstr ""
+msgstr "इथिओपिया"
 
 #: src/translations.h:271
 msgid "Finland"
-msgstr ""
+msgstr "फिन्लंड"
 
 #: src/translations.h:272
 msgid "Fiji"
-msgstr ""
+msgstr "फिजी"
 
 #: src/translations.h:273
 msgid "Falkland Islands"
-msgstr ""
+msgstr "फाल्कलॅन्ड बेटे"
 
 #: src/translations.h:274
 msgid "Micronesia"
-msgstr ""
+msgstr "मिक्रोनेसिआ"
 
 #: src/translations.h:275
 msgid "Faroe Islands"
-msgstr ""
+msgstr "फेरो आयलॅंडस्"
 
 #: src/translations.h:276
 msgid "France"
-msgstr ""
+msgstr "फ़्रान्स"
 
 #: src/translations.h:277
 msgid "Gabon"
-msgstr ""
+msgstr "गॅबन"
 
 #: src/translations.h:278
 msgid "United Kingdom"
-msgstr ""
+msgstr "युनायटेड किंगडम"
 
 #: src/translations.h:279
 msgid "Grenada"
-msgstr ""
+msgstr "ग्रेनेडा"
 
 #: src/translations.h:280
 msgid "Georgia"
-msgstr ""
+msgstr "जॉर्जिया"
 
 #: src/translations.h:281
 msgid "French Guiana"
-msgstr ""
+msgstr "फ्रेंच गियाना"
 
 #: src/translations.h:282
 msgid "Ghana"
-msgstr ""
+msgstr "घाना"
 
 #: src/translations.h:283
 msgid "Gibraltar"
-msgstr ""
+msgstr "जिब्राल्टर"
 
 #: src/translations.h:284
 msgid "Greenland"
-msgstr ""
+msgstr "ग्रीनलैंड"
 
 #: src/translations.h:285
 msgid "Gambia"
-msgstr ""
+msgstr "गैमबिया"
 
 #: src/translations.h:286
 msgid "Guinea"
-msgstr ""
+msgstr "गिनी"
 
 #: src/translations.h:287
 msgid "Guadeloupe"
-msgstr ""
+msgstr "ग्वाडेलोप"
 
 #: src/translations.h:288
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "इक्वेटोरियल गिनी"
 
 #: src/translations.h:289
 msgid "Greece"
-msgstr ""
+msgstr "ग्रिस"
 
 #: src/translations.h:290
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "दक्षिण जार्जिया आणि दक्षिण सैंडविच द्वीप"
 
 #: src/translations.h:291
 msgid "Guatemala"
-msgstr ""
+msgstr "ग्वाटेमाला"
 
 #: src/translations.h:292
 msgid "Guam"
-msgstr ""
+msgstr "गुआम"
 
 #: src/translations.h:293
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "गिनी-बिसाव"
 
 #: src/translations.h:294
 msgid "Guyana"
-msgstr ""
+msgstr "गियाना"
 
 #: src/translations.h:295
 msgid "Hong Kong"
-msgstr ""
+msgstr "हॉंगकॉंग"
 
 #: src/translations.h:296
 msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgstr "हर्ड आयलॅंड आणि मॅकडोनाल्ड आयलॅंडस्"
 
 #: src/translations.h:297
 msgid "Honduras"
-msgstr ""
+msgstr "होन्डारस"
 
 #: src/translations.h:298
 msgid "Croatia"
-msgstr ""
+msgstr "क्रोआटिया"
 
 #: src/translations.h:299
 msgid "Haiti"
-msgstr ""
+msgstr "हैती"
 
 #: src/translations.h:300
 msgid "Hungary"
-msgstr ""
+msgstr "हंगेरी"
 
 #: src/translations.h:301
 msgid "Indonesia"
-msgstr ""
+msgstr "इंडोनेशिया"
 
 #: src/translations.h:302
 msgid "Ireland"
-msgstr ""
+msgstr "आयर्लंड"
 
 #: src/translations.h:303
 msgid "Israel"
-msgstr ""
+msgstr "इस्रायल"
 
 #: src/translations.h:304
 msgid "India"
-msgstr ""
+msgstr "भारत"
 
 #: src/translations.h:305
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "ब्रिटिश ईंडियन ओशन टेरिटोरी"
 
 #: src/translations.h:306
 msgid "Iraq"
-msgstr ""
+msgstr "ईराक"
 
 #: src/translations.h:307
 msgid "Iran"
-msgstr ""
+msgstr "ईराण"
 
 #: src/translations.h:308
 msgid "Iceland"
-msgstr ""
+msgstr "आइसलँड"
 
 #: src/translations.h:309
 msgid "Italy"
-msgstr ""
+msgstr "ईटली"
 
 #: src/translations.h:310
 msgid "Jamaica"
-msgstr ""
+msgstr "जमैका"
 
 #: src/translations.h:311
 msgid "Jordan"
-msgstr ""
+msgstr "जॉर्डन"
 
 #: src/translations.h:312
 msgid "Japan"
-msgstr ""
+msgstr "जपान"
 
 #: src/translations.h:313
 msgid "Kenya"
-msgstr ""
+msgstr "केनिया"
 
 #: src/translations.h:314
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "किरगिझस्तान"
 
 #: src/translations.h:315
 msgid "Cambodia"
-msgstr ""
+msgstr "कंबोडिया"
 
 #: src/translations.h:316
 msgid "Kiribati"
-msgstr ""
+msgstr "किरिबाती"
 
 #: src/translations.h:317
 msgid "Comoros"
-msgstr ""
+msgstr "कॉमोरोस"
 
 #: src/translations.h:318
 msgid "Saint Kitts and Nevis"
-msgstr ""
+msgstr "सेंट किटस् आणी नेव्हिस"
 
 #: src/translations.h:319
 msgid "Democratic People's Republic of Korea"
-msgstr ""
+msgstr "डेमोक्रॅटिक पिपल्स रिपब्लिक ऑफ कोरिया"
 
 #: src/translations.h:320
 msgid "Republic of Korea"
-msgstr ""
+msgstr "रिपब्लिक ऑफ कोरिया"
 
 #: src/translations.h:321
 msgid "Kuwait"
-msgstr ""
+msgstr "कुवेत"
 
 #: src/translations.h:322
 msgid "Cayman Islands"
-msgstr ""
+msgstr "केमन बेट"
 
 #: src/translations.h:323
 msgid "Kazakhstan"
-msgstr ""
+msgstr "कझाकिस्तान"
 
 #: src/translations.h:324
 msgid "Lao"
-msgstr ""
+msgstr "लाओ"
 
 #: src/translations.h:325
 msgid "Lebanon"
-msgstr ""
+msgstr "लेबेनॉन"
 
 #: src/translations.h:326
 msgid "Saint Lucia"
-msgstr ""
+msgstr "सेंट लुसिआ"
 
 #: src/translations.h:327
 msgid "Liechtenstein"
-msgstr ""
+msgstr "लिचेंस्टाइन"
 
 #: src/translations.h:328
 msgid "Sri Lanka"
-msgstr ""
+msgstr "श्रीलंका"
 
 #: src/translations.h:329
 msgid "Liberia"
-msgstr ""
+msgstr "लायबेरिया"
 
 #: src/translations.h:330
 msgid "Lesotho"
-msgstr ""
+msgstr "लेसोथो"
 
 #: src/translations.h:331
 msgid "Lithuania"
-msgstr ""
+msgstr "लूथेनिया"
 
 #: src/translations.h:332
 msgid "Luxembourg"
-msgstr ""
+msgstr "लक्झेंबर्ग"
 
 #: src/translations.h:333
 msgid "Latvia"
-msgstr ""
+msgstr "लॅटिवा"
 
 #: src/translations.h:334
 msgid "Libyan Arab Jamahiriya"
-msgstr ""
+msgstr "लिबियन अरब जमाहिरिया"
 
 #: src/translations.h:335
 msgid "Morocco"
-msgstr ""
+msgstr "मोरोक्को"
 
 #: src/translations.h:336
 msgid "Monaco"
-msgstr ""
+msgstr "मोनाको"
 
 #: src/translations.h:337
 msgid "Moldova"
-msgstr ""
+msgstr "मालडोवा"
 
 #: src/translations.h:338
 msgid "Madagascar"
-msgstr ""
+msgstr "मादागास्कर"
 
 #: src/translations.h:339
 msgid "Marshall Islands"
-msgstr ""
+msgstr "मार्शल बेटे"
 
 #: src/translations.h:340
 msgid "Macedonia"
-msgstr ""
+msgstr "मसिडोनिया"
 
 #: src/translations.h:341
 msgid "Mali"
@@ -2210,159 +2231,159 @@ msgstr ""
 
 #: src/translations.h:350
 msgid "Mauritius"
-msgstr ""
+msgstr "मॉरिशस"
 
 #: src/translations.h:351
 msgid "Maldives"
-msgstr ""
+msgstr "मालदिव्हज्"
 
 #: src/translations.h:352
 msgid "Malawi"
-msgstr ""
+msgstr "मालवी"
 
 #: src/translations.h:353
 msgid "Mexico"
-msgstr ""
+msgstr "मेक्सिको"
 
 #: src/translations.h:354
 msgid "Malaysia"
-msgstr ""
+msgstr "मलेशिया"
 
 #: src/translations.h:355
 msgid "Mozambique"
-msgstr ""
+msgstr "मोझांबिक"
 
 #: src/translations.h:356
 msgid "Namibia"
-msgstr ""
+msgstr "नामिबिया"
 
 #: src/translations.h:357
 msgid "New Caledonia"
-msgstr ""
+msgstr "न्यू कॅलिडोनिया"
 
 #: src/translations.h:358
 msgid "Niger"
-msgstr ""
+msgstr "नायगर"
 
 #: src/translations.h:359
 msgid "Norfolk Island"
-msgstr ""
+msgstr "नॉर्फोक बेट"
 
 #: src/translations.h:360
 msgid "Nigeria"
-msgstr ""
+msgstr "नायजेरिया"
 
 #: src/translations.h:361
 msgid "Nicaragua"
-msgstr ""
+msgstr "निकाराग्वा"
 
 #: src/translations.h:362
 msgid "Netherlands"
-msgstr ""
+msgstr "नेदरलँड्स"
 
 #: src/translations.h:363
 msgid "Norway"
-msgstr ""
+msgstr "नॉर्वे"
 
 #: src/translations.h:364
 msgid "Nepal"
-msgstr ""
+msgstr "नेपाल"
 
 #: src/translations.h:365
 msgid "Nauru"
-msgstr ""
+msgstr "नौरु"
 
 #: src/translations.h:366
 msgid "Niue"
-msgstr ""
+msgstr "निउई"
 
 #: src/translations.h:367
 msgid "New Zealand"
-msgstr ""
+msgstr "न्यूझिलंड"
 
 #: src/translations.h:368
 msgid "Oman"
-msgstr ""
+msgstr "ओमान"
 
 #: src/translations.h:369
 msgid "Panama"
-msgstr ""
+msgstr "पनामा"
 
 #: src/translations.h:370
 msgid "Peru"
-msgstr ""
+msgstr "पेरू"
 
 #: src/translations.h:371
 msgid "French Polynesia"
-msgstr ""
+msgstr "फ्रेच पॉलिनेशिया"
 
 #: src/translations.h:372
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "पापुआ न्यू गिनी"
 
 #: src/translations.h:373
 msgid "Philippines"
-msgstr ""
+msgstr "फिलिपिन्स"
 
 #: src/translations.h:374
 msgid "Pakistan"
-msgstr ""
+msgstr "पाकिस्तान"
 
 #: src/translations.h:375
 msgid "Poland"
-msgstr ""
+msgstr "पोलंड"
 
 #: src/translations.h:376
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "संत पीयरे आणि मीकेलोन"
 
 #: src/translations.h:377
 msgid "Pitcairn"
-msgstr ""
+msgstr "पिटकेर्न"
 
 #: src/translations.h:378
 msgid "Puerto Rico"
-msgstr ""
+msgstr "पोर्टो रिका"
 
 #: src/translations.h:379
 msgid "Palestinian Territories"
-msgstr ""
+msgstr "पॅलेस्टाइन  प्रदेश"
 
 #: src/translations.h:380
 msgid "Portugal"
-msgstr ""
+msgstr "पोर्तुगाल"
 
 #: src/translations.h:381
 msgid "Palau"
-msgstr ""
+msgstr "पालाउ"
 
 #: src/translations.h:382
 msgid "Paraguay"
-msgstr ""
+msgstr "पेरूग्वे"
 
 #: src/translations.h:383
 msgid "Qatar"
-msgstr ""
+msgstr "कतार"
 
 #: src/translations.h:384
 msgid "Réunion"
-msgstr ""
+msgstr "रियूनियन"
 
 #: src/translations.h:385
 msgid "Romania"
-msgstr ""
+msgstr "रूमानिया"
 
 #: src/translations.h:386
 msgid "Serbia"
-msgstr ""
+msgstr "सर्बिया"
 
 #: src/translations.h:387
 msgid "Russian Federation"
-msgstr ""
+msgstr "रशियन संघराज्य"
 
 #: src/translations.h:388
 msgid "Rwanda"
-msgstr ""
+msgstr "रवांडा"
 
 #: src/translations.h:389
 msgid "Saudi Arabia"
@@ -2606,6 +2627,9 @@ msgstr "मदत"
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:248
+#: plugins/Quasars/src/ui_quasarsDialog.h:266
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:266
 msgid "About"
 msgstr "स्टेलारीअम विषयी"
 
@@ -3714,19 +3738,20 @@ msgid "Telescope #%1: %2"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1497
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:737
 #, qt-format
 msgid "Magnification: %1"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1505
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
 #, qt-format
 msgid "FOV: %1"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1520
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:699
 #, qt-format
 msgid "Dimensions: %1"
 msgstr ""
@@ -3743,15 +3768,15 @@ msgstr ""
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1735
+#: plugins/Oculars/src/Oculars.cpp:1738
 msgid "&Telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1736
+#: plugins/Oculars/src/Oculars.cpp:1739
 msgid "&Previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1737
+#: plugins/Oculars/src/Oculars.cpp:1740
 msgid "&Next telescope"
 msgstr ""
 
@@ -3820,20 +3845,96 @@ msgstr ""
 msgid "Rotation: %1"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
 msgid "Magnification provided by these binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:721
 msgid "Actual field of view provided by these binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
 msgid "Magnification provided by this ocular/telescope combination"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:730
 msgid "Actual field of view provided by this ocular/telescope combination"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:417
+msgid "Oculars Plug-in"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:418
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:107
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
+msgid "Version"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:423
+msgid "Overview"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:425
+msgid ""
+"This plugin is intended to simulate what you would see through an eyepiece.  "
+"This configuration dialog can be used to add, modify, or delete eyepieces "
+"and telescopes, as well as CCD Sensors.  Your first time running the app "
+"will populate some samples to get your started."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:426
+msgid ""
+"You can choose to scale the image you see on the screen.  This is intended "
+"to show you a better comparison of what one eyepiece/telescope combination "
+"will be like as compared to another.  The same eyepiece in two different "
+"telescopes of differing focal length will produce two different exit "
+"circles, changing the view someone.  The trade-off of this is that, with the "
+"image scaled, a good deal of the screen can be wasted.  Therefor I recommend "
+"that you leave it off, unless you feel you have a need of it."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:427
+msgid ""
+"You can toggle a crosshair in the view.  Ideally, I wanted this to be "
+"aligned to North.  I've been unable to do so.  So currently it aligns to the "
+"top of the screen."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:428
+#, qt-format
+msgid ""
+"You can toggle a Telrad finder; this can only be done when you have not "
+"turned on the Ocular view.  This feature draws three concentric circles of "
+"0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
+"the naked eye through the Telrad (or similar) finder."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:429
+msgid "If you find any issues, please let me know.  Enjoy!"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:432
+msgid "Hot Keys"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:433
+msgid "The plug-in's key bindings can be edited in the General Tab."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:445
+#: plugins/Oculars/src/gui/OcularDialog.cpp:450
+msgid "[no key defined]"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:454
+msgid "Switches on/off the ocular overlay."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:458
+msgid "Opens the pop-up navigation menu."
 msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:865
@@ -4053,10 +4154,6 @@ msgstr ""
 msgid "Stellarium Satellites Plugin"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
-msgid "Version"
-msgstr ""
-
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:263
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
@@ -4161,67 +4258,113 @@ msgid "See %1this document%2 for details."
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
 msgid "Links"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:296
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
+#, qt-format
 msgid ""
-"Support is provided via the Launchpad website.  Be sure to put \"Satellites "
-"plugin\" in the subject when posting."
+"Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
+"subject when posting."
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:299
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:122
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:303
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:146
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 msgid "Internet updates disabled"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:355
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:153
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:187
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:148
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:188
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:202
 msgid "Updating now..."
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:325
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:155
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
 msgid "Next update: < 1 minute"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:152
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:159
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:244
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
+#: plugins/Quasars/src/ui_quasarsDialog.h:260
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
 msgid "Update now"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:346
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
 msgid "Update from files"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:358
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:190
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:191
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:205
 msgid "Update error"
 msgstr ""
 
@@ -4298,10 +4441,16 @@ msgid "Update TLE lists from Internet sources"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:644
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
+#: plugins/Quasars/src/ui_quasarsDialog.h:256
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:256
 msgid "Update from Internet sources"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:241
+#: plugins/Quasars/src/ui_quasarsDialog.h:257
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
 msgid "Last update:"
 msgstr ""
 
@@ -4349,14 +4498,23 @@ msgid "Fade length:"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:672
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:245
+#: plugins/Quasars/src/ui_quasarsDialog.h:263
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 msgid "Restore default settings"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:246
+#: plugins/Quasars/src/ui_quasarsDialog.h:264
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:264
 msgid "Save settings as default"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:674
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:247
+#: plugins/Quasars/src/ui_quasarsDialog.h:265
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:265
 msgid "Settings"
 msgstr ""
 
@@ -5464,18 +5622,18 @@ msgstr ""
 msgid "Solar System"
 msgstr ""
 
-#: plugins/Supernovae/src/Supernovae.cpp:59
+#: plugins/Supernovae/src/Supernovae.cpp:71
 msgid "Historical Supernovae"
 msgstr ""
 
-#: plugins/Supernovae/src/Supernovae.cpp:62
+#: plugins/Supernovae/src/Supernovae.cpp:74
 msgid ""
 "A plugin that shows some historical supernovae brighter than 10 visual "
-"magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN "
-"1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 "
-"October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN "
-"1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
-"(13 September)."
+"magnitude."
+msgstr ""
+
+#: plugins/Supernovae/src/Supernovae.cpp:145
+msgid "Historical Supernovae configuration window"
 msgstr ""
 
 #: plugins/Supernovae/src/Supernova.cpp:99
@@ -5487,125 +5645,570 @@ msgstr ""
 msgid "Type of supernova: %1"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:59
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
+msgid "Historical Supernovae Plug-in"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
+msgid ""
+"A plugin that shows some historical supernovae brighter than 10 visual "
+"magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN "
+"1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 "
+"October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN "
+"1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
+"(13 September)."
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
+msgid "Light curves"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:114
+#, qt-format
+msgid ""
+"In this plugin implemented simple model of light curves for different "
+"supernovae. Typical view of light curves for supernova type I and type II "
+"you can see %1here%2 (right scale in days) and this model used for plugin."
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
+msgid "Acknowledgment"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
+msgid ""
+"We thank the following people for their contribution and of the valuable "
+"comments:"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
+msgid "Sergei Blinnikov"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
+msgid "Institute for Theoretical and Experimental Physics"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
+msgid "in Russia"
+msgstr ""
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
+#, qt-format
+msgid ""
+"If you want read full information about plugin, his history and format of "
+"catalog you can %1get info here%2."
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
+#, qt-format
+msgid "Next update: %1 days"
+msgstr ""
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
+msgid "Historical supernovae is updated"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:236
+msgid "Historical Supernovae Configuration"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:237
+msgid "Historical Supernovae Plug-in Configuration"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:239
+#: plugins/Quasars/src/ui_quasarsDialog.h:255
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:255
+msgid "Update catalog from Internet"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:242
+#: plugins/Quasars/src/ui_quasarsDialog.h:258
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
+msgid "Update frequency (days):"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:243
+#: plugins/Quasars/src/ui_quasarsDialog.h:259
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
+msgid "[next update info]"
+msgstr ""
+
+#: plugins/Quasars/src/Quasars.cpp:71
 msgid "Quasars"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:62
+#: plugins/Quasars/src/Quasars.cpp:74
 msgid ""
 "A plugin that shows some quasars brighter than 16 visual magnitude. A "
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
 
-#: plugins/Quasars/src/Quasar.cpp:92
+#: plugins/Quasars/src/Quasars.cpp:148
+msgid "Quasars configuration window"
+msgstr ""
+
+#: plugins/Quasars/src/Quasar.cpp:95
 msgid "quasar"
 msgstr ""
 
-#: plugins/Quasars/src/Quasar.cpp:134
+#: plugins/Quasars/src/Quasar.cpp:137
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:59
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:108
+msgid "Quasars Plug-in"
+msgstr ""
+
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
+msgid ""
+"The Quasars plugin provides visualization of some quasars brighter than 16 "
+"visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
+"Galactic Nuclei\" (13th Ed.)"
+msgstr ""
+
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
+msgid "Veron+ 2010"
+msgstr ""
+
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
+msgid "Quasars is updated"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:252
+msgid "Quasars Configuration"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:253
+msgid "Quasars Plug-in Configuration"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:261
+msgid "Display mode for quasars"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:262
+msgid "Enable display of distribution for quasars"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsars.cpp:71
 msgid "Pulsars"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:62
+#: plugins/Pulsars/src/Pulsars.cpp:74
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:113
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
-"about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
-"1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
+"about each one."
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:102
+#: plugins/Pulsars/src/Pulsars.cpp:148
+msgid "Pulsars configuration window"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:129
 msgid "pulsar"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:109
+#. TRANSLATORS: Unit of measure for period - seconds
+#: plugins/Pulsars/src/Pulsar.cpp:140
 #, qt-format
 msgid "Barycentric period: %1 s"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:112
+#: plugins/Pulsars/src/Pulsar.cpp:144
 #, qt-format
-msgid "Distance: %1 kpc (%2 ly)"
+msgid "Time derivative of barycentric period: %1"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:116
-#, qt-format
-msgid "Type of pulsar: %1"
+#: plugins/Pulsars/src/Pulsar.cpp:149
+msgid "Dispersion measure:"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:120
-#, qt-format
-msgid "Equivalent width of the integrated pulse profile: %1 ms"
+#. TRANSLATORS: Unit of measure for distance - centimeters
+#: plugins/Pulsars/src/Pulsar.cpp:152
+msgid "cm"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:124
+#. TRANSLATORS: Unit of measure for distance - parsecs
+#: plugins/Pulsars/src/Pulsar.cpp:155
+msgid "pc"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:161
+#, qt-format
+msgid "Spin down energy loss rate: %1 ergs/s"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:165
+#, qt-format
+msgid "Binary period of pulsar: %1 days"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:169
+#, qt-format
+msgid "Eccentricity: %1"
+msgstr ""
+
+#. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
+#: plugins/Pulsars/src/Pulsar.cpp:174
+#, qt-format
+msgid "Annual parallax: %1 mas"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:178
+#, qt-format
+msgid "Distance based on electron density model: %1 kpc (%2 ly)"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:182
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:130 plugins/Pulsars/src/Pulsar.cpp:142
-#: plugins/Pulsars/src/Pulsar.cpp:154
+#: plugins/Pulsars/src/Pulsar.cpp:188 plugins/Pulsars/src/Pulsar.cpp:200
+#: plugins/Pulsars/src/Pulsar.cpp:212
 msgid "Time averaged flux density at"
 msgstr ""
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Pulsars/src/Pulsar.cpp:133 plugins/Pulsars/src/Pulsar.cpp:145
-#: plugins/Pulsars/src/Pulsar.cpp:157
+#: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Pulsars/src/Pulsar.cpp:203
+#: plugins/Pulsars/src/Pulsar.cpp:215
 msgid "MHz"
 msgstr ""
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:136 plugins/Pulsars/src/Pulsar.cpp:148
-#: plugins/Pulsars/src/Pulsar.cpp:160
+#: plugins/Pulsars/src/Pulsar.cpp:194 plugins/Pulsars/src/Pulsar.cpp:206
+#: plugins/Pulsars/src/Pulsar.cpp:218
 msgid "mJy"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:232
-msgid "globular cluster association"
+#: plugins/Pulsars/src/Pulsar.cpp:222
+#, qt-format
+msgid "Notes: %1"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:238
-msgid "SNR association"
+#: plugins/Pulsars/src/Pulsar.cpp:291
+msgid ""
+"anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:244
-msgid "glitches in period"
+#: plugins/Pulsars/src/Pulsar.cpp:296
+msgid "has one or more binary companions"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:250
-msgid "binary or multiple pulsar"
+#: plugins/Pulsars/src/Pulsar.cpp:301
+msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:256
-msgid "millisecond pulsar"
+#: plugins/Pulsars/src/Pulsar.cpp:306
+msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:262
-msgid "recycled pulsar"
+#: plugins/Pulsars/src/Pulsar.cpp:311
+msgid "with pulsed emission in the radio band"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:268
-msgid "radio interpulse"
+#: plugins/Pulsars/src/Pulsar.cpp:316
+msgid "with intermittently pulsed radio emission"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:274
-msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
+#: plugins/Pulsars/src/Pulsar.cpp:321
+msgid ""
+"isolated neutron star with pulsed thermal X-ray emission but no detectable "
+"radio emission"
 msgstr ""
 
-#. TRANSLATORS: Type of pulsar
-#: plugins/Pulsars/src/Pulsar.cpp:280
-msgid "extragalactic (in MC) pulsar"
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
+msgid "Pulsars Plug-in"
 msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
+#, qt-format
+msgid ""
+"Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N., "
+"Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
+"(%1astro-ph/0412641%2))."
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
+msgid "Note"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
+msgid "pulsar identifiers have the prefix 'PSR'"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
+msgid "Vladimir Samodourov"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
+msgid "Pushchino Radio Astronomy Observatory"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
+msgid "Maciej Serylak"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
+msgid "Nancay Radioastronomical Observatory"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
+msgid "in France"
+msgstr ""
+
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:212
+msgid "Pulsars is updated"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:252
+msgid "Pulsars Configuration"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:253
+msgid "Pulsars Plug-in Configuration"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:261
+msgid "Display mode for pulsars"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:262
+msgid "Enable display of distribution for pulsars"
+msgstr ""
+
+#~ msgid "Set Location "
+#~ msgstr "स्थान निश्चित करा "
+
+#~ msgid "Set Time "
+#~ msgstr "वेळ निर्धारीत करा "
+
+#~ msgid "General "
+#~ msgstr "सामान्य "
+
+#~ msgid "Stars "
+#~ msgstr "तारे "
+
+#~ msgid "Colors "
+#~ msgstr "रंग "
+
+#~ msgid "Effects "
+#~ msgstr "परिणाम "
+
+#~ msgid "Scripts "
+#~ msgstr "आज्ञावली "
+
+#~ msgid "Administration "
+#~ msgstr "व्यवस्थापन "
+
+#~ msgid "Latitude: "
+#~ msgstr "अक्षांश: "
+
+#~ msgid "Longitude: "
+#~ msgstr "रेखांश: "
+
+#~ msgid "Sky Time: "
+#~ msgstr "अवकाश वेळ: "
+
+#~ msgid "Day keys: "
+#~ msgstr "दिवस कळ: "
+
+#~ msgid "Sidereal"
+#~ msgstr "नाक्षत्रवर्ष"
+
+#~ msgid "Sky Time At Start-up: "
+#~ msgstr "सुरुवात होतांनांची अवकाश वेळ: "
+
+#~ msgid "Show: "
+#~ msgstr "दर्शवा: "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "प्रत आकार गुणक: "
+
+#~ msgid "Twinkling: "
+#~ msgstr "लुकलुकणारे: "
+
+#~ msgid "Constellation Names"
+#~ msgstr "तारकापुंजाची नावे"
+
+#~ msgid "Constellation Boundaries"
+#~ msgstr "ताराकापुंज सीमा"
+
+#~ msgid "Cardinal Points"
+#~ msgstr "प्रमाणक बिंदू"
+
+#~ msgid "Planet Names"
+#~ msgstr "ग्रहांची नावे"
+
+#~ msgid "Planet Orbits"
+#~ msgstr "ग्रहांच्या कक्षा"
+
+#~ msgid "Planet Trails"
+#~ msgstr "ग्रहाची मागरेष"
+
+#~ msgid "Meridian Line"
+#~ msgstr "मध्यानवृत्त"
+
+#~ msgid "Azimuthal Grid"
+#~ msgstr "दिगंश"
+
+#~ msgid "Equatorial Grid"
+#~ msgstr "विषुवांश"
+
+#~ msgid "Equator Line"
+#~ msgstr "विषुववृत्त रेषा"
+
+#~ msgid "Ecliptic Line"
+#~ msgstr "अयनवृत्त"
+
+#~ msgid "Nebula Names"
+#~ msgstr "तेजोमेघाचे नाव"
+
+#~ msgid "Nebula Circles"
+#~ msgstr "तेजोमेघ वर्तृळ"
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "प्रकाश प्रदूषण दिप्ती: "
+
+#~ msgid "Landscape: "
+#~ msgstr "देखावा: "
+
+#~ msgid "Manual zoom: "
+#~ msgstr "स्वहस्ते निकटन/दुरावलोकन: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "चित्र मोठे करण्याचा काल: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "कर्सर वेळमर्यादा: "
+
+#~ msgid "Local Script: "
+#~ msgstr "स्थानिक आज्ञावली: "
+
+#~ msgid "CD/DVD Script: "
+#~ msgstr "सीडी/ डीव्हीडी आज्ञावली: "
+
+#~ msgid "USB Script: "
+#~ msgstr "यू एस बी आज्ञावली: "
+
+#~ msgid "Arrow down to load list."
+#~ msgstr "यादी भरण्यासासाठी  खालच्या दिशेची कळ दाबा."
+
+#~ msgid "Select and exit to run."
+#~ msgstr "सुरू करण्यासाठी निवडा व बाहेर पडा."
+
+#~ msgid "Save Current Configuration as Default: "
+#~ msgstr "सध्याची संरचना मूळ म्हणून साठवा: "
+
+#~ msgid "Shut Down: "
+#~ msgstr "बंद करा: "
+
+#~ msgid "Set UI Locale: "
+#~ msgstr "UI Locale निश्चित करा: "
+
+#~ msgid "Planets labels"
+#~ msgstr "ग्रहांची नावे"
+
+#~ msgid "Light pollution: "
+#~ msgstr "प्रकाश प्रदुषण: "
+
+#~ msgid "Art brightness: "
+#~ msgstr "चित्र तिव्रता: "
+
+#~ msgid "Startup FOV: XX"
+#~ msgstr "सुरुवातीचे दृष्टीक्षेत्र: XX"
+
+#~ msgid "Startup direction of view: xxxx"
+#~ msgstr "सुरु होतांनाची बघण्याची दिशा: xxxx"
+
+#~ msgid "xxx"
+#~ msgstr "xxx"
+
+#~ msgid "Altitude (m): "
+#~ msgstr "उंची (m): "
+
+#~ msgid "Set Time Zone: "
+#~ msgstr "कालक्षेत्र निश्चित करा "
+
+#~ msgid "Calendar"
+#~ msgstr "दिनदर्शिका"
+
+#~ msgid "Sky Language: "
+#~ msgstr "आकाशाची भाषा: "
+
+#~ msgid "Time Display Format: "
+#~ msgstr "वेळ दर्शविण्याची पद्धत: "
+
+#~ msgid "Preset Time"
+#~ msgstr "पूर्वनिर्धारित वेळ"
+
+#~ msgid "Sky Culture: "
+#~ msgstr "अवकाश संस्कृती "
+
+#~ msgid "Date Display Format: "
+#~ msgstr "दिनांक दर्शविण्याची पद्धत: "
+
+#~ msgid "Preset Sky Time: "
+#~ msgstr "पूर्वनिर्धारित अवकाश वेळ "
+
+#~ msgid "Actual Time"
+#~ msgstr "आताची वेळ"
+
+#~ msgid "Limiting Magnitude: "
+#~ msgstr "नुसत्या डोळ्याने दिसणारी जास्तीत जास्त प्रत "
+
+#~ msgid "Constellation Lines"
+#~ msgstr "तारकापुंज रेषा"
+
+#~ msgid "Star Value Multiplier: "
+#~ msgstr "तारकामूल्य गुणक: "
+
+#~ msgid "Constellation Art Intensity"
+#~ msgstr "ताराकापुंज चित्राची दीप्ती"
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "नाव दर्शविण्यासाठीची जास्तीत जास्त प्रत: "
+
+#~ msgid "Object Sizing Rule: "
+#~ msgstr "वस्तूचा आकार ठरविण्याचे नियम "
+
+#~ msgid "Magnitude Scaling Multiplier: "
+#~ msgstr "प्रत कमीजास्त करण्याचा गुणक "
+
+#~ msgid "Milky Way intensity: "
+#~ msgstr "आकाशगंगेची दीप्ती: "
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "तेजोमेघाचे नाव दर्शविण्यासाठीची जास्तीत जास्त प्रत: "
+
+#~ msgid "Correct for light travel time: "
+#~ msgstr "प्रकाशाच्या मार्गक्रमणाचा वेळ ध्यानात घेवून दुरुस्ती करा: "
+
+#~ msgid "Load Default Configuration: "
+#~ msgstr "मूळ संरचना भरा: "
+
+#~ msgid "Update me via Internet: "
+#~ msgstr "इंटरनेटद्वारे अद्यायावत करा: "
+
+#~ msgid "Solar System Body: "
+#~ msgstr "सूर्यमालेतील वस्तू "
+
+#~ msgid "Get catalog x of y"
+#~ msgstr "y ची x सुची मिळवा"
+
+#~ msgid "Finished downloading all star catalogs!"
+#~ msgstr "सर्व तारकासुची डाउनलोड झाल्या आहेत!"

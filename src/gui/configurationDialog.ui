@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>428</width>
-    <height>467</height>
+    <height>463</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -133,7 +133,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -670,6 +670,16 @@
                </property>
                <property name="text">
                 <string>Show flip buttons</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="showNebulaBgButtonCheckbox">
+               <property name="toolTip">
+                <string>Toggle display backgrounds of the nebulae.</string>
+               </property>
+               <property name="text">
+                <string>Show nebula background button</string>
                </property>
               </widget>
              </item>

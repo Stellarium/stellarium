@@ -113,6 +113,10 @@ Q_IMPORT_PLUGIN(Quasars)
 Q_IMPORT_PLUGIN(Pulsars)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_EXOPLANETS
+Q_IMPORT_PLUGIN(Exoplanets)
+#endif
+
 // Initialize static variables
 StelMainGraphicsView* StelMainGraphicsView::singleton = NULL;
 
@@ -212,6 +216,14 @@ StelMainGraphicsView::StelMainGraphicsView(QWidget* parent)
 
 	backItem = new QGraphicsWidget();
 	backItem->setFocusPolicy(Qt::NoFocus);
+
+	// Workaround (see Bug #940638) Although we have already explicitly set
+	// LC_NUMERIC to "C" in main.cpp there seems to be a bug in OpenGL where
+	// it will silently reset LC_NUMERIC to the value of LC_ALL during OpenGL
+	// initialization. This has been observed on Ubuntu 11.10 under certain
+	// circumstances, so here we set it again just to be on the safe side.
+	setlocale(LC_NUMERIC, "C");
+	// End workaround
 }
 
 StelMainGraphicsView::~StelMainGraphicsView()
