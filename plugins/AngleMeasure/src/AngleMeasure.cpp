@@ -120,11 +120,7 @@ void AngleMeasure::init()
 	// Create action for enable/disable & hook up signals
 	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
 	Q_ASSERT(gui);
-	QAction* action = gui->addGuiAction("actionShow_Angle_Measure",
-																			N_("Angle measure"),
-																			"Ctrl+A",
-																			N_("Plugin Key Bindings"),
-																			true, false);
+	QAction* action = gui->getGuiAction("actionShow_Angle_Measure");
 	action->setChecked(flagShowAngleMeasure);
 	connect(action, SIGNAL(toggled(bool)), this, SLOT(enableAngleMeasure(bool)));
 
