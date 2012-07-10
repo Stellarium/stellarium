@@ -136,19 +136,11 @@ QList<StelShortcutGroup *> StelShortcutMgr::getGroupList() const
 	return res;
 }
 
-void StelShortcutMgr::disableAllActions()
+void StelShortcutMgr::setAllActionsEnabled(bool enable)
 {
 	foreach (StelShortcutGroup* group, shGroups)
 	{
-		group->disableAllActions();
-	}
-}
-
-void StelShortcutMgr::enableAllActions()
-{
-	foreach (StelShortcutGroup* group, shGroups)
-	{
-		group->enableAllActions();
+		group->setAllActionsEnabled(enable);
 	}
 }
 
@@ -209,11 +201,11 @@ void StelShortcutMgr::loadShortcuts()
 	QStringList shortcutFiles;
 	try
 	{
-		shortcutFiles = StelFileMgr::findFileInAllPaths("data/shortcuts.json");
+		shortcutFiles = StelFileMgr::findFileInAllPaths("data/default_shortcuts.json");
 	}
 	catch(std::runtime_error& e)
 	{
-		qWarning() << "ERROR while loading shortcuts.json (unable to find data/shortcuts.json): " << e.what() << endl;
+		qWarning() << "ERROR while loading default_shortcuts.json (unable to find data/default_shortcuts.json): " << e.what() << endl;
 		return;
 	}
 	foreach (QString shortcutFile, shortcutFiles)

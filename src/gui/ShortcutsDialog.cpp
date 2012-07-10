@@ -82,13 +82,13 @@ void ShortcutLineEdit::keyPressEvent(QKeyEvent *e)
 
 void ShortcutLineEdit::focusInEvent(QFocusEvent *e)
 {
-	emit focusChanged(true);
+	emit focusChanged(false);
 	QLineEdit::focusInEvent(e);
 }
 
 void ShortcutLineEdit::focusOutEvent(QFocusEvent *e)
 {
-	emit focusChanged(false);
+	emit focusChanged(true);
 	QLineEdit::focusOutEvent(e);
 }
 
@@ -179,18 +179,6 @@ void ShortcutsDialog::initEditors()
 		ui->applyButton->setEnabled(false);
 		ui->primaryShortcutEdit->clear();
 		ui->altShortcutEdit->clear();
-	}
-}
-
-void ShortcutsDialog::setActionsEnabled(bool enable)
-{
-	if (enable)
-	{
-		shortcutMgr->disableAllActions();
-	}
-	else
-	{
-		shortcutMgr->enableAllActions();
 	}
 }
 
@@ -310,8 +298,8 @@ void ShortcutsDialog::createDialogContent()
 	// apply button logic
 	connect(ui->applyButton, SIGNAL(released()), this, SLOT(applyChanges()));
 	// we need to disable all shortcut actions, so we can enter shortcuts without activating any actions
-	connect(ui->primaryShortcutEdit, SIGNAL(focusChanged(bool)), this, SLOT(setActionsEnabled(bool)));
-	connect(ui->altShortcutEdit, SIGNAL(focusChanged(bool)), this, SLOT(setActionsEnabled(bool)));
+	connect(ui->primaryShortcutEdit, SIGNAL(focusChanged(bool)), shortcutMgr, SLOT(setAllActionsEnabled(bool)));
+	connect(ui->altShortcutEdit, SIGNAL(focusChanged(bool)), shortcutMgr, SLOT(setAllActionsEnabled(bool)));
 	// handling changes in editors
 	connect(ui->primaryShortcutEdit, SIGNAL(contentsChanged()), this, SLOT(handleChanges()));
 	connect(ui->altShortcutEdit, SIGNAL(contentsChanged()), this, SLOT(handleChanges()));

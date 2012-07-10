@@ -94,8 +94,9 @@ public:
 signals:
 
 public slots:
-	void disableAllActions();
-	void enableAllActions();
+	// enable/disable all actions of the group
+	// need for editing shortcuts without trigging any actions
+	void setAllActionsEnabled(bool enable);
 
 private:
 	QString m_id;

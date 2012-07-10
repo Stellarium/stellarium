@@ -80,9 +80,6 @@ public slots:
 	void retranslate();
 	// ititialize editors state when current item changed
 	void initEditors();
-	// enable/disable all actions of application
-	// need for editing shortcuts without trigging any actions
-	void setActionsEnabled(bool enable);
 	void handleCollisions();
 	// called when editors' state changed
 	void handleChanges();
