@@ -239,7 +239,7 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 								   double ra3, double dec3,
 								   double minRes, double maxBright, bool visible)
 {
-	if (allSkyLayers.contains("id"))
+	if (allSkyLayers.contains(id))
 	{
 		qWarning() << "Image ID" << id << "already exists, removing old image before loading";
 		removeSkyLayer(id);
@@ -276,10 +276,10 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 		// world coordinates
 		cl.clear();
 		ol.clear();
-		c.clear(); c.append(dec0); c.append(ra0); cl.append(QVariant(c));
-		c.clear(); c.append(dec1); c.append(ra1); cl.append(QVariant(c));
-		c.clear(); c.append(dec2); c.append(ra2); cl.append(QVariant(c));
-		c.clear(); c.append(dec3); c.append(ra3); cl.append(QVariant(c));
+		c.clear(); c.append(ra0); c.append(dec0); cl.append(QVariant(c));
+		c.clear(); c.append(ra1); c.append(dec1); cl.append(QVariant(c));
+		c.clear(); c.append(ra2); c.append(dec2); cl.append(QVariant(c));
+		c.clear(); c.append(ra3); c.append(dec3); cl.append(QVariant(c)); 
 		ol.append(QVariant(cl));
 		vm["worldCoords"] = ol;
 

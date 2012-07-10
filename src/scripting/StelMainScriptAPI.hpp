@@ -106,8 +106,10 @@ public slots:
 	//! @param name is the English name of the object for which data will be
 	//! returned.
 	//! @return a map of object data.  Keys:
-	//! - altitude : altitude angle in decimal degrees
-	//! - azimuth : azimuth angle in decimal degrees
+	//! - altitude : apparent altitude angle in decimal degrees
+	//! - azimuth : apparent azimuth angle in decimal degrees
+	//! - altitude-geometric : geometric altitude angle in decimal degrees
+	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
 	//! - ra : right ascension angle (current date frame) in decimal degrees
 	//! - dec : declenation angle in (current date frame) decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
@@ -200,6 +202,15 @@ public slots:
 
 	//! Get the ID of the current observer location.
 	QString getObserverLocation();
+
+	//! Get the info of the current observer location.
+	//! @return a map of object data.  Keys:
+	//! - altitude : altitude in meters
+	//! - longitude : longitude in decimal degrees
+	//! - latitude : latitude in decimal degrees
+	//! - planet : name of planet
+	//! - location : city and country
+	QVariantMap getObserverLocationInfo();
 
 	//! Save a screenshot.
 	//! @param prefix the prefix for the file name to use
@@ -386,6 +397,63 @@ public slots:
 	//! @param id the identifier used when loadSound was called
 	void dropSound(const QString& id);
 
+	//! Load a video from a file.
+	//! @param filename the name of the file to load.
+	//! @param id the identifier which will be used to refer to the video
+	//! when calling playVideo, pauseVideo, stopVideo and dropVideo.
+	//! @param x  the x-coordinate for the video widget.
+	//! @param y  the y-coordinate for the video widget.
+	//! @param show  the visibility state for the video.
+	//! @param alpha the initial alpha value of the video.
+	void loadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha);
+
+	//! Play a video which has previously been loaded with loadVideo
+	//! @param id the identifier used when loadVideo was called
+	void playVideo(const QString& id);
+
+	//! Pause a video which is playing.  Subsequent playVideo calls will
+	//! resume playing from the position in the file when it was paused.
+	//! @param id the identifier used when loadVideo was called
+	void pauseVideo(const QString& id);
+
+	//! Stop a video from playing.  This resets the position in the
+	//! video to the start so that subsequent playVideo calls will
+	//! start from the beginning.
+	//! @param id the identifier used when loadVideo was called
+	void stopVideo(const QString& id);
+
+	//! Drop a video from memory.  You should do this before the end
+	//! of your script.
+	//! @param id the identifier used when loadVideo was called
+	void dropVideo(const QString& id);
+
+	//! Seeks a video to the requested time.
+	//! @param id the identifier used when loadVideo was called
+	//! @param ms the time in milliseconds from the start of the media.
+        void seekVideo(const QString& id, qint64 ms);                                   
+
+	//! Sets the position of the video widget.
+	//! @param id the identifier used when loadVideo was called
+	//! @param x the new x-coordinate for the video. 
+	//! @param y the new y-coordinate for the video. 
+        void setVideoXY(const QString& id, float x, float y);                           
+
+	//! Set the alpha value of a video when visible.
+	//! @param id the identifier used when loadVideo was called
+	//! @param alpha the new alpha value to set.
+        void setVideoAlpha(const QString& id, float alpha);                             
+
+	//! Resize the video widget to the specified width, height. 
+	//! @param id the identifier used when loadVideo was called
+	//! @param w the new width for the widget.
+	//! @param h the new height for the widget.
+        void resizeVideo(const QString& id, float w, float h);
+
+	//! Set the visibility state of a video.
+	//! @param id the identifier used when loadVideo was called
+	//! @param show the new visible state of the video.
+        void showVideo(const QString& id, bool show);
+
 	//! Get the screen width in pixels.
 	//! @return The screen width in pixels
 	int getScreenWidth();
@@ -452,6 +520,17 @@ signals:
 	void requestPauseSound(const QString& id);
 	void requestStopSound(const QString& id);
 	void requestDropSound(const QString& id);
+	void requestLoadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha);
+	void requestPlayVideo(const QString& id);
+	void requestPauseVideo(const QString& id);
+	void requestStopVideo(const QString& id);
+	void requestDropVideo(const QString& id);
+	void requestSeekVideo(const QString& id, qint64 ms);
+	void requestSetVideoXY(const QString& id, float x, float y);
+	void requestSetVideoAlpha(const QString& id, float alpha);
+	void requestResizeVideo(const QString& id, float w, float h);
+	void requestShowVideo(const QString& id, bool show);
+	
 	void requestSetNightMode(bool b);
 	void requestSetProjectionMode(QString id);
 	void requestSetSkyCulture(QString id);

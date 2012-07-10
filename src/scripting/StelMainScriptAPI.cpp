@@ -33,6 +33,7 @@
 #include "StarMgr.hpp"
 #include "StelApp.hpp"
 #include "StelAudioMgr.hpp"
+#include "StelVideoMgr.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
 #include "StelLocation.hpp"
@@ -76,6 +77,18 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestPauseSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(pauseSound(const QString&)));
 	connect(this, SIGNAL(requestStopSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(stopSound(const QString&)));
 	connect(this, SIGNAL(requestDropSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(dropSound(const QString&)));
+
+	connect(this, SIGNAL(requestLoadVideo(const QString&, const QString&, float, float, bool, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(loadVideo(const QString&, const QString&, float, float, bool, float)));
+	connect(this, SIGNAL(requestPlayVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(playVideo(const QString&)));
+	connect(this, SIGNAL(requestPauseVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(pauseVideo(const QString&)));
+	connect(this, SIGNAL(requestStopVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(stopVideo(const QString&)));
+	connect(this, SIGNAL(requestDropVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(dropVideo(const QString&)));
+	connect(this, SIGNAL(requestSeekVideo(const QString&, qint64)), StelApp::getInstance().getStelVideoMgr(), SLOT(seekVideo(const QString&, qint64)));
+	connect(this, SIGNAL(requestSetVideoXY(const QString&, float, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(setVideoXY(const QString&, float, float)));
+	connect(this, SIGNAL(requestSetVideoAlpha(const QString&, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(setVideoAlpha(const QString&, float)));
+	connect(this, SIGNAL(requestResizeVideo(const QString&, float, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(resizeVideo(const QString&, float, float)));
+	connect(this, SIGNAL(requestShowVideo(const QString&, bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(showVideo(const QString&, bool)));
+
 	connect(this, SIGNAL(requestExit()), this->parent(), SLOT(stopScript()));
 	connect(this, SIGNAL(requestSetNightMode(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
 	connect(this, SIGNAL(requestSetProjectionMode(QString)), StelApp::getInstance().getCore(), SLOT(setCurrentProjectionTypeKey(QString)));
@@ -170,6 +183,19 @@ void StelMainScriptAPI::setObserverLocation(const QString id, float duration)
 QString StelMainScriptAPI::getObserverLocation()
 {
 	return StelApp::getInstance().getCore()->getCurrentLocation().getID();
+}
+
+QVariantMap StelMainScriptAPI::getObserverLocationInfo()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	QVariantMap map;
+	map.insert("longitude", core->getCurrentLocation().longitude);
+	map.insert("latitude", core->getCurrentLocation().latitude);
+	map.insert("planet", core->getCurrentLocation().planetName);
+	map.insert("altitude", core->getCurrentLocation().altitude);
+	map.insert("location", core->getCurrentLocation().getID());
+
+	return map;
 }
 
 void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir)
@@ -318,8 +344,8 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 
 	Vec3f corners[4];
 		corners[0] = matPrecomp * Vec3f(0.f,-texSize,-texSize);
-		corners[1] = matPrecomp * Vec3f(0.f, texSize,-texSize);
-		corners[2] = matPrecomp * Vec3f(0.f,-texSize, texSize);
+		corners[1] = matPrecomp * Vec3f(0.f,-texSize, texSize);
+		corners[2] = matPrecomp * Vec3f(0.f, texSize,-texSize);
 		corners[3] = matPrecomp * Vec3f(0.f, texSize, texSize);
 
 	// convert back to ra/dec (radians)
@@ -383,6 +409,67 @@ void StelMainScriptAPI::stopSound(const QString& id)
 void StelMainScriptAPI::dropSound(const QString& id)
 {
 	emit(requestDropSound(id));
+}
+
+void StelMainScriptAPI::loadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha)
+{
+	QString path;
+	try
+	{
+		path = StelFileMgr::findFile("scripts/" + filename);
+	}
+	catch(std::runtime_error& e)
+	{
+		qWarning() << "cannot play video" << filename << ":" << e.what();
+		return;
+	}
+
+	emit(requestLoadVideo(path, id, x, y, show, alpha));
+}
+
+void StelMainScriptAPI::playVideo(const QString& id)
+{
+	emit(requestPlayVideo(id));
+}
+
+void StelMainScriptAPI::pauseVideo(const QString& id)
+{
+	emit(requestPauseVideo(id));
+}
+
+void StelMainScriptAPI::stopVideo(const QString& id)
+{
+	emit(requestStopVideo(id));
+}
+
+void StelMainScriptAPI::dropVideo(const QString& id)
+{
+	emit(requestDropVideo(id));
+}
+
+void StelMainScriptAPI::seekVideo(const QString& id, qint64 ms)
+{
+	emit(requestSeekVideo(id, ms));
+}
+
+void StelMainScriptAPI::setVideoXY(const QString& id, float x, float y)
+{
+	emit(requestSetVideoXY(id, x, y));
+}
+
+void StelMainScriptAPI::setVideoAlpha(const QString& id, float alpha)
+{
+	emit(requestSetVideoAlpha(id, alpha));
+}
+
+void StelMainScriptAPI::resizeVideo(const QString& id, float w, float h)
+{
+	emit(requestResizeVideo(id, w, h));
+}
+
+void StelMainScriptAPI::showVideo(const QString& id, bool show)
+{
+	emit(requestShowVideo(id, show));
 }
 
 int StelMainScriptAPI::getScreenWidth()
@@ -544,6 +631,11 @@ QVariantMap StelMainScriptAPI::getObjectPosition(const QString& name)
 	StelUtils::rectToSphe(&azi, &alt, pos);
 	map.insert("altitude", alt*180./M_PI);
 	map.insert("azimuth", azi*180./M_PI);
+
+	pos = obj->getAltAzPosGeometric(StelApp::getInstance().getCore());
+	StelUtils::rectToSphe(&azi, &alt, pos);
+	map.insert("altitude-geometric", alt*180./M_PI);
+	map.insert("azimuth-geometric", azi*180./M_PI);
 
 	return map;
 }

@@ -824,7 +824,7 @@ void StelCore::addSiderealMonth()
 
 void StelCore::addSiderealYear()
 {
-	addSiderealDays(365.256363004);
+	addSolarDays(365.256363004);
 }
 
 
@@ -860,7 +860,7 @@ void StelCore::subtractSiderealMonth()
 
 void StelCore::subtractSiderealYear()
 {
-	addSiderealDays(-365.256363004);
+	addSolarDays(-365.256363004);
 }
 
 void StelCore::addSolarDays(double d)

@@ -21,6 +21,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelGui.hpp"
+#include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -29,17 +30,27 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
-#include "Quasars.hpp"
+#include "LabelMgr.hpp"
 #include "Quasar.hpp"
+#include "Quasars.hpp"
+#include "QuasarsDialog.hpp"
 
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QKeyEvent>
+#include <QAction>
+#include <QProgressBar>
 #include <QDebug>
 #include <QFileInfo>
 #include <QFile>
+#include <QTimer>
 #include <QVariantMap>
 #include <QVariant>
 #include <QList>
 #include <QSharedPointer>
 #include <QStringList>
+
+#define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
 /*
  This method is the one called automatically by the StelModuleMgr just 
@@ -70,9 +81,12 @@ Q_EXPORT_PLUGIN2(Quasars, QuasarsStelPluginInterface)
  Constructor
 */
 Quasars::Quasars()
+	: progressBar(NULL)
 {
 	setObjectName("Quasars");
-	font.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
+	configDialog = new QuasarsDialog();
+	conf = StelApp::getInstance().getSettings();
+	font.setPixelSize(conf->value("gui/base_font_size", 13).toInt());
 }
 
 /*
@@ -80,11 +94,13 @@ Quasars::Quasars()
 */
 Quasars::~Quasars()
 {
-	//
+	delete configDialog;
 }
 
 void Quasars::deinit()
 {
+	QSO.clear();
+	Quasar::markerTexture.clear();
 	texPointer.clear();
 }
 
@@ -108,9 +124,26 @@ void Quasars::init()
 	{
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Quasars");
 
-		catalogJsonPath = StelFileMgr::findFile("modules/Quasars", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/catalog.json";
+		// If no settings in the main config file, create with defaults
+		if (!conf->childGroups().contains("Quasars"))
+		{
+			qDebug() << "Quasars::init no Quasars section exists in main config file - creating with defaults";
+			restoreDefaultConfigIni();
+		}
+
+		// populate settings from main config file.
+		readSettingsFromConfig();
+
+		catalogJsonPath = StelFileMgr::findFile("modules/Quasars", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/quasars.json";
 
 		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
+		Quasar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Quasars/quasar.png");
+
+		// key bindings and other actions
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+
+		connect(gui->getGuiAction("actionShow_Quasars_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
+		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Quasars_ConfigDialog"), SLOT(setChecked(bool)));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -118,10 +151,17 @@ void Quasars::init()
 		return;
 	}
 
+	// A timer for hiding alert messages
+	messageTimer = new QTimer(this);
+	messageTimer->setSingleShot(true);   // recurring check for update
+	messageTimer->setInterval(9000);      // 6 seconds should be enough time
+	messageTimer->stop();
+	connect(messageTimer, SIGNAL(timeout()), this, SLOT(messageTimeout()));
+
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(catalogJsonPath).exists())
 	{
-		if (getJsonFileVersion() != QUASARS_PLUGIN_VERSION)
+		if (getJsonFileVersion() < CATALOG_FORMAT_VERSION)
 		{
 			restoreDefaultJsonFile();
 		}
@@ -135,6 +175,16 @@ void Quasars::init()
 	qDebug() << "Quasars::init using catalog.json file: " << catalogJsonPath;
 
 	readJsonFile();
+
+	// Set up download manager and the update schedule
+	downloadMgr = new QNetworkAccessManager(this);
+	connect(downloadMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateDownloadComplete(QNetworkReply*)));
+	updateState = CompleteNoUpdates;
+	updateTimer = new QTimer(this);
+	updateTimer->setSingleShot(false);   // recurring check for update
+	updateTimer->setInterval(13000);     // check once every 13 seconds to see if it is time for an update
+	connect(updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdate()));
+	updateTimer->start();
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
@@ -263,7 +313,7 @@ void Quasars::restoreDefaultJsonFile(void)
 	if (QFileInfo(catalogJsonPath).exists())
 		backupJsonFile(true);
 
-	QFile src(":/Quasars/catalog.json");
+	QFile src(":/Quasars/quasars.json");
 	if (!src.copy(catalogJsonPath))
 	{
 		qWarning() << "Quasars::restoreDefaultJsonFile cannot copy json resource to " + catalogJsonPath;
@@ -275,6 +325,13 @@ void Quasars::restoreDefaultJsonFile(void)
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(catalogJsonPath);
 		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
+
+		// Make sure that in the case where an online update has previously been done, but
+		// the json file has been manually removed, that an update is schreduled in a timely
+		// manner
+		conf->remove("Quasars/last_update");
+		lastUpdate = QDateTime::fromString("2012-05-24T12:00:00", Qt::ISODate);
+
 	}
 }
 
@@ -300,14 +357,14 @@ bool Quasars::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "Quasars::backupJsonFile WARNING - could not remove old catalog.json file";
+				qWarning() << "Quasars::backupJsonFile WARNING - could not remove old quasars.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "Quasars::backupJsonFile WARNING - failed to copy catalog.json to catalog.json.old";
+		qWarning() << "Quasars::backupJsonFile WARNING - failed to copy quasars.json to quasars.json.old";
 		return false;
 	}
 
@@ -360,9 +417,9 @@ void Quasars::setQSOMap(const QVariantMap& map)
 	}
 }
 
-const QString Quasars::getJsonFileVersion(void)
+int Quasars::getJsonFileVersion(void)
 {
-	QString jsonVersion("unknown");
+	int jsonVersion = -1;
 	QFile catalogJsonFile(catalogJsonPath);
 	if (!catalogJsonFile.open(QIODevice::ReadOnly))
 	{
@@ -374,12 +431,7 @@ const QString Quasars::getJsonFileVersion(void)
 	map = StelJsonParser::parse(&catalogJsonFile).toMap();
 	if (map.contains("version"))
 	{
-		QString creator = map.value("version").toString();
-		QRegExp vRx(".*(\\d+\\.\\d+\\.\\d+).*");
-		if (vRx.exactMatch(creator))
-		{
-			jsonVersion = vRx.capturedTexts().at(1);
-		}
+		jsonVersion = map.value("version").toInt();
 	}
 
 	catalogJsonFile.close();
@@ -395,4 +447,165 @@ QuasarP Quasars::getByID(const QString& id)
 			return quasar;
 	}
 	return QuasarP();
+}
+
+bool Quasars::configureGui(bool show)
+{
+	if (show)
+	{
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		gui->getGuiAction("actionShow_Quasars_ConfigDialog")->setChecked(true);
+	}
+
+	return true;
+}
+
+void Quasars::restoreDefaults(void)
+{
+	restoreDefaultConfigIni();
+	restoreDefaultJsonFile();
+	readJsonFile();
+	readSettingsFromConfig();
+}
+
+void Quasars::restoreDefaultConfigIni(void)
+{
+	conf->beginGroup("Quasars");
+
+	// delete all existing Quasars settings...
+	conf->remove("");
+
+	conf->setValue("distribution_enabled", false);
+	conf->setValue("updates_enabled", true);
+	conf->setValue("url", "http://stellarium.org/json/quasars.json");
+	conf->setValue("update_frequency_days", 100);
+	conf->endGroup();
+}
+
+void Quasars::readSettingsFromConfig(void)
+{
+	conf->beginGroup("Quasars");
+
+	updateUrl = conf->value("url", "http://stellarium.org/json/quasars.json").toString();
+	updateFrequencyDays = conf->value("update_frequency_days", 100).toInt();
+	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
+	updatesEnabled = conf->value("updates_enabled", true).toBool();
+	distributionEnabled = conf->value("distribution_enabled", false).toBool();
+
+	conf->endGroup();
+}
+
+void Quasars::saveSettingsToConfig(void)
+{
+	conf->beginGroup("Quasars");
+
+	conf->setValue("url", updateUrl);
+	conf->setValue("update_frequency_days", updateFrequencyDays);
+	conf->setValue("updates_enabled", updatesEnabled );
+	conf->setValue("distribution_enabled", distributionEnabled);
+
+	conf->endGroup();
+}
+
+int Quasars::getSecondsToUpdate(void)
+{
+	QDateTime nextUpdate = lastUpdate.addSecs(updateFrequencyDays * 3600 * 24);
+	return QDateTime::currentDateTime().secsTo(nextUpdate);
+}
+
+void Quasars::checkForUpdate(void)
+{
+	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime())
+		updateJSON();
+}
+
+void Quasars::updateJSON(void)
+{
+	if (updateState==Quasars::Updating)
+	{
+		qWarning() << "Quasars: already updating...  will not start again current update is complete.";
+		return;
+	}
+	else
+	{
+		qDebug() << "Quasars: starting update...";
+	}
+
+	lastUpdate = QDateTime::currentDateTime();
+	conf->setValue("Quasars/last_update", lastUpdate.toString(Qt::ISODate));
+
+	emit(jsonUpdateComplete());
+
+	updateState = Quasars::Updating;
+
+	emit(updateStateChanged(updateState));
+	updateFile.clear();
+
+	if (progressBar==NULL)
+		progressBar = StelApp::getInstance().getGui()->addProgressBar();
+
+	progressBar->setValue(0);
+	progressBar->setMaximum(updateUrl.size());
+	progressBar->setVisible(true);
+	progressBar->setFormat("Update quasars");
+
+	QNetworkRequest request;
+	request.setUrl(QUrl(updateUrl));
+	request.setRawHeader("User-Agent", QString("Mozilla/5.0 (Stellarium Quasars Plugin %1; http://stellarium.org/)").arg(QUASARS_PLUGIN_VERSION).toUtf8());
+	downloadMgr->get(request);
+
+	progressBar->setValue(100);
+	delete progressBar;
+	progressBar = NULL;
+
+	updateState = CompleteUpdates;
+
+	emit(updateStateChanged(updateState));
+	emit(jsonUpdateComplete());
+}
+
+void Quasars::updateDownloadComplete(QNetworkReply* reply)
+{
+	// check the download worked, and save the data to file if this is the case.
+	if (reply->error() != QNetworkReply::NoError)
+	{
+		qWarning() << "Quasars::updateDownloadComplete FAILED to download" << reply->url() << " Error: " << reply->errorString();
+	}
+	else
+	{
+		// download completed successfully.
+		try
+		{
+			QString jsonFilePath = StelFileMgr::findFile("modules/Quasars", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/quasars.json";
+			QFile jsonFile(jsonFilePath);
+			if (jsonFile.exists())
+				jsonFile.remove();
+
+			jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
+			jsonFile.write(reply->readAll());
+			jsonFile.close();
+		}
+		catch (std::runtime_error &e)
+		{
+			qWarning() << "Quasars::updateDownloadComplete: cannot write JSON data to file:" << e.what();
+		}
+
+	}
+
+	if (progressBar)
+		progressBar->setValue(100);
+}
+
+void Quasars::displayMessage(const QString& message, const QString hexColor)
+{
+	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20*messageIDs.count()), true, 16, hexColor);
+	messageTimer->start();
+}
+
+void Quasars::messageTimeout(void)
+{
+	foreach(int i, messageIDs)
+	{
+		GETSTELMODULE(LabelMgr)->deleteLabel(i);
+	}
 }

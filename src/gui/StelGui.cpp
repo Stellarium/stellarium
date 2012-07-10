@@ -54,6 +54,7 @@
 #include "StelScriptMgr.hpp"
 #endif
 #include "StelAppGraphicsWidget.hpp"
+#include "StelLocationMgr.hpp"
 
 #include <QDebug>
 #include <QTimeLine>
@@ -108,6 +109,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	///////////////////////////////////////////////////////////////////////
 	// Connect all the GUI actions signals with the Core of Stellarium
 	connect(getGuiAction("actionQuit_Global"), SIGNAL(triggered()), this, SLOT(quit()));
+	connect(getGuiAction("actionGo_Home_Global"), SIGNAL(triggered()), this, SLOT(home()));
 
 	initConstellationMgr();
 	initGrindLineMgr();
@@ -595,6 +597,23 @@ void StelGui::quit()
 	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();
 #endif
 	QCoreApplication::exit();
+}
+
+void StelGui::home()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	QString defaultLocationID = core->getDefaultLocationID();
+
+	StelLocation location = StelApp::getInstance().getLocationMgr().locationForSmallString(defaultLocationID);
+
+	core->moveObserverTo(location);
+	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
+	landscapeMgr->setCurrentLandscapeID(landscapeMgr->getDefaultLandscapeID());
+
+	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+	PlanetP p = ssm->searchByEnglishName(location.planetName);
+	landscapeMgr->setFlagAtmosphere(p->hasAtmosphere());
+	landscapeMgr->setFlagFog(p->hasAtmosphere());
 }
 
 //! Reload the current Qt Style Sheet (Debug only)

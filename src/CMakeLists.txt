@@ -38,6 +38,8 @@ ENDIF()
 SET(stellarium_lib_SRCS
 	core/StelAudioMgr.hpp
 	core/StelAudioMgr.cpp
+	core/StelVideoMgr.hpp
+	core/StelVideoMgr.cpp
 	core/StelGeodesicGrid.cpp
 	core/StelGeodesicGrid.hpp
 	core/StelMovementMgr.cpp
@@ -339,6 +341,7 @@ QT4_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 # that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
 SET(stellarium_MOC_HDRS
 	core/StelAudioMgr.hpp
+	core/StelVideoMgr.hpp
 	core/StelModuleMgr.hpp
 	core/StelObjectMgr.hpp
 	core/StelObserver.hpp
@@ -593,6 +596,11 @@ IF (BUILD_STATIC_PLUGINS)
   IF (USE_PLUGIN_PULSARS)
 	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Pulsars/src/${CMAKE_CFG_INTDIR}/libPulsars.a")
 	ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_PULSARS)
+  ENDIF()
+  
+  IF (USE_PLUGIN_EXOPLANETS)
+    SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Exoplanets/src/${CMAKE_CFG_INTDIR}/libExoplanets.a")
+    ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_EXOPLANETS)
   ENDIF()
 
   IF (USE_PLUGIN_SVMT)
