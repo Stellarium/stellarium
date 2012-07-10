@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-08 19:10+0700\n"
-"PO-Revision-Date: 2012-07-06 18:36+0000\n"
+"POT-Creation-Date: 2012-07-10 01:06+0700\n"
+"PO-Revision-Date: 2012-07-09 19:05+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-09 04:48+0000\n"
+"X-Launchpad-Export-Date: 2012-07-10 05:31+0000\n"
 "X-Generator: Launchpad (build 15558)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -982,7 +982,7 @@ msgstr "Копіювати дані щодо позначеного об’єк�
 
 #: src/gui/StelGui.cpp:189
 msgid "Go to home"
-msgstr ""
+msgstr "Домівка"
 
 #: src/gui/StelGui.cpp:191
 msgid "Auto hide horizontal button bar"
@@ -5876,13 +5876,13 @@ msgstr "Криві світності"
 msgid ""
 "This plugin implements a simple model of light curves for different "
 "supernovae. Typical views of light curves for type I and type II supernova "
-"can seen %1here%2 (right scale in days) and this model is used for this "
+"can be seen %1here%2 (right scale in days), and this model is used for this "
 "plugin."
 msgstr ""
 "У цьому додатку реалізовано просту модель кривих світності для різних "
-"наднових. З типовим виглядом кривих світності для типів I та II наднових "
-"можна ознайомитися %1тут%2 (праву шкалу вказано у днях). Відповідну модель "
-"реалізовано у цьому додатку."
+"наднових. З типовим виглядом кривих світності для наднових першого і другого "
+"типів можна ознайомитися %1тут%2 (значення на правій шкалі вказано у днях). "
+"Саме цю модель і використано під час створення додатка."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 msgid "Acknowledgments"
@@ -5910,14 +5910,15 @@ msgstr "у Росії"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 #, qt-format
 msgid ""
-"If you want more information about this plugin, its history, and format of "
-"catalog, you can %1get additional info here%2."
+"If you want to read full information about this plugin, its history and "
+"format of catalog, you can %1get info here%2."
 msgstr ""
-"Якщо ви хочете ознайомитися з додатковими даними щодо цього додатка, його "
-"історією та даними щодо формату каталогу, відвідайте %1цю сторінку%2."
+"Якщо ви хочете дізнатися більше про цей додаток, його історію та формат "
+"каталогу, можете %1скористатися цією сторінкою%2."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
@@ -6002,17 +6003,6 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
 msgstr "Veron+ 2010"
-
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
-#, qt-format
-msgid ""
-"If you want read full information about plugin, his history and format of "
-"catalog you can %1get info here%2."
-msgstr ""
-"Якщо вам потрібні всі дані щодо додатка, його історії та формату даних "
-"каталогу, отримати їх можна %1тут%2."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
 msgid "Quasars is updated"
@@ -6329,6 +6319,16 @@ msgstr ""
 "За допомогою цього додатка можна переглянути розташування зірок з "
 "екзопланетами. Дані екзопланет отримано на основі «%1The Extrasolar Planets "
 "Encyclopaedia%2»."
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
+#, qt-format
+msgid ""
+"If you want read full information about plugin, his history and format of "
+"catalog you can %1get info here%2."
+msgstr ""
+"Якщо вам потрібні всі дані щодо додатка, його історії та формату даних "
+"каталогу, отримати їх можна %1тут%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Exoplanets is updated"
