@@ -33,7 +33,9 @@ public:
 	
 	void init();
 
+	// load shortcuts from existing file
 	bool loadShortcuts(const QString &filePath);
+	// search for file with shortcuts, load shortcuts from it
 	void loadShortcuts();
 
 	//! Add a new action managed by the GUI. This method should be used to add new shortcuts to the program
@@ -44,7 +46,8 @@ public:
 	//! @param checkable whether the action should be checkable
 	//! @param autoRepeat whether the action should be autorepeated
 	//! @param global whether the action should be global (affect in dialogs)
-	QAction* addGuiAction(const QString& actionId, const QString& text, const QString& shortcuts, const QString& group, bool checkable=true, bool autoRepeat=false, bool global=false);
+	QAction* addGuiAction(const QString& actionId, const QString& text, const QString& shortcuts,
+												const QString& group, bool checkable=true, bool autoRepeat=false, bool global=false);
 
 	void changeActionPrimaryKey(const QString& actionId, const QString& groupId, QKeySequence newKey);
 	void changeActionAltKey(const QString& actionId, const QString& groupId, QKeySequence newKey);
@@ -53,20 +56,27 @@ public:
 	//! @param actionName qt object name for this action
 	//! @return a pointer on the QAction object or NULL if don't exist
 	QAction* getGuiAction(const QString& actionName);
+	// unlike getGuiAction with only actionId parameter search by
+	// iterationg over map of groups and map of shortcuts in each group
 	QAction* getGuiAction(const QString& groupId, const QString& actionId);
 
+	// bind script evaluation to given action
 	QAction* addScriptToAction(const QString& actionId, const QString& script);
 
+	// get list of all group of shortcuts
 	QList<StelShortcutGroup*> getGroupList() const;
 
 signals:
 	
 public slots:
-	void disableAllActions();
-	void enableAllActions();
+	// enable/disable all actions of application
+	// need for editing shortcuts without trigging any actions
+	void setAllActionsEnabled(bool enable);
 
 private:
+	// pointer to StelAppGraphicsWidget, used for obtaining actions by their object names
 	StelAppGraphicsWidget* stelAppGraphicsWidget;
+	// QMap, containing all shortcuts groups
 	QMap<QString, StelShortcutGroup*> shGroups;
 };
 

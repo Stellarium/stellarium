@@ -121,11 +121,11 @@ void CompassMarks::init()
 		pxmapOnIcon = new QPixmap(":/compassMarks/bt_compass_on.png");
 		pxmapOffIcon = new QPixmap(":/compassMarks/bt_compass_off.png");
 
-		gui->addGuiAction("actionShow_Compass_Marks", N_("Compass marks"), "", N_("Plugin Key Bindings"), true, false);
-		gui->getGuiAction("actionShow_Compass_Marks")->setChecked(markFader);
-		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, gui->getGuiAction("actionShow_Compass_Marks"));
+		QAction *showCompassAction = gui->getGuiAction("actionShow_Compass_Marks");
+		showCompassAction->setChecked(markFader);
+		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, showCompassAction);
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-		connect(gui->getGuiAction("actionShow_Compass_Marks"), SIGNAL(toggled(bool)), this, SLOT(setCompassMarks(bool)));
+		connect(showCompassAction, SIGNAL(toggled(bool)), this, SLOT(setCompassMarks(bool)));
 		connect(gui->getGuiAction("actionShow_Cardinal_Points"), SIGNAL(toggled(bool)), this, SLOT(cardinalPointsChanged(bool)));
 		cardinalPointsState = false;
 	}

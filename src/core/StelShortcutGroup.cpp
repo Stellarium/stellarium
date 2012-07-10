@@ -230,18 +230,10 @@ QList<StelShortcut *> StelShortcutGroup::getActionList() const
 	return res;
 }
 
-void StelShortcutGroup::disableAllActions()
+void StelShortcutGroup::setAllActionsEnabled(bool enable)
 {
 	foreach (StelShortcut* sh, m_shortcuts)
 	{
-		sh->getAction()->setEnabled(false);
-	}
-}
-
-void StelShortcutGroup::enableAllActions()
-{
-	foreach (StelShortcut* sh, m_shortcuts)
-	{
-		sh->getAction()->setEnabled(true);
+		sh->getAction()->setEnabled(enable);
 	}
 }
