@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>513</width>
+    <width>507</width>
     <height>400</height>
    </rect>
   </property>
@@ -272,6 +272,13 @@
               <widget class="QCheckBox" name="checkBoxControlPanel">
                <property name="text">
                 <string>On-screen control panel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBoxDecimalDegrees">
+               <property name="text">
+                <string>Use degrees and minutes for FOV of CCD</string>
                </property>
               </widget>
              </item>
@@ -1226,7 +1233,7 @@
         </widget>
         <widget class="QWidget" name="About">
          <attribute name="title">
-          <string>About</string>
+          <string>About plugin</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout">
           <property name="margin">

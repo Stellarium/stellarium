@@ -46,6 +46,7 @@ plugins/AngleMeasure/src/AngleMeasure.cpp
 plugins/CompassMarks/src/CompassMarks.cpp
 plugins/Oculars/src/Oculars.cpp
 plugins/Oculars/src/gui/OcularsGuiPanel.cpp
+plugins/Oculars/src/gui/OcularDialog.cpp
 plugins/Oculars/src/ui_ocularDialog.h
 plugins/Satellites/src/Satellites.cpp
 plugins/Satellites/src/Satellite.cpp
@@ -77,7 +78,17 @@ plugins/SolarSystemEditor/src/ui_mpcImportWindow.h
 plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h
 plugins/Supernovae/src/Supernovae.cpp
 plugins/Supernovae/src/Supernova.cpp
+plugins/Supernovae/src/gui/SupernovaeDialog.cpp
+plugins/Supernovae/src/ui_supernovaeDialog.h
 plugins/Quasars/src/Quasars.cpp
 plugins/Quasars/src/Quasar.cpp
+plugins/Quasars/src/gui/QuasarsDialog.cpp
+plugins/Quasars/src/ui_quasarsDialog.h
 plugins/Pulsars/src/Pulsars.cpp
 plugins/Pulsars/src/Pulsar.cpp
+plugins/Pulsars/src/gui/PulsarsDialog.cpp
+plugins/Pulsars/src/ui_pulsarsDialog.h
+plugins/Exoplanets/src/Exoplanets.cpp
+plugins/Exoplanets/src/Exoplanet.cpp
+plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp
+plugins/Exoplanets/src/ui_exoplanetsDialog.h

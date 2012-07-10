@@ -442,7 +442,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 				{
 					texturePath = StelFileMgr::findFile(QString("textures/")+texfile);
 				}
-				catch(exception& e2)
+				catch(std::exception& e2)
 				{
 					qWarning() << "ERROR: could not find texture, " << texfile << ": " << e2.what();
 				}

@@ -17,6 +17,7 @@
  */
 
 #include "Pulsar.hpp"
+#include "Pulsars.hpp"
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
@@ -244,7 +245,14 @@ float Pulsar::getVMagnitude(const StelCore* core, bool withExtinction) const
 	// Calculate fake visual magnitude as function by distance - minimal magnitude is 6
 	float vmag = distance + 6.f;
 
-	return vmag + extinctionMag;
+	if (GETSTELMODULE(Pulsars)->getDisplayMode())
+	{
+		return 3.f;
+	}
+	else
+	{
+		return vmag + extinctionMag;
+	}
 }
 
 double Pulsar::getEdot(double p0, double p1) const
@@ -346,8 +354,16 @@ void Pulsar::draw(StelCore* core, StelPainter& painter)
 		float shift = 5.f + size/1.6f;
 		if (labelsFader.getInterstate()<=0.f)
 		{
-			painter.drawSprite2dMode(XYZ, 5);
-			painter.drawText(XYZ, designation, 0, shift, shift, false);
+			if (GETSTELMODULE(Pulsars)->getDisplayMode())
+			{
+				painter.drawSprite2dMode(XYZ, 4);
+				painter.drawText(XYZ, " ", 0, shift, shift, false);
+			}
+			else
+			{
+				painter.drawSprite2dMode(XYZ, 5);
+				painter.drawText(XYZ, designation, 0, shift, shift, false);
+			}
 		}
 	}
 }

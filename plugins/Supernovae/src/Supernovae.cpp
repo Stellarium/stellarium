@@ -21,6 +21,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelGui.hpp"
+#include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -29,17 +30,27 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
-#include "Supernovae.hpp"
+#include "LabelMgr.hpp"
 #include "Supernova.hpp"
+#include "Supernovae.hpp"
+#include "SupernovaeDialog.hpp"
 
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QKeyEvent>
+#include <QAction>
+#include <QProgressBar>
 #include <QDebug>
 #include <QFileInfo>
 #include <QFile>
+#include <QTimer>
 #include <QVariantMap>
 #include <QVariant>
 #include <QList>
 #include <QSharedPointer>
 #include <QStringList>
+
+#define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
 /*
  This method is the one called automatically by the StelModuleMgr just 
@@ -59,7 +70,7 @@ StelPluginInfo SupernovaeStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Historical Supernovae");
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
-	info.description = N_("A plugin that shows some historical supernovae brighter than 10 visual magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN 1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN 1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE (13 September).");
+	info.description = N_("A plugin that shows some historical supernovae brighter than 10 visual magnitude.");
 	return info;
 }
 
@@ -70,9 +81,12 @@ Q_EXPORT_PLUGIN2(Supernovae, SupernovaeStelPluginInterface)
  Constructor
 */
 Supernovae::Supernovae()
+	: progressBar(NULL)
 {
 	setObjectName("Supernovae");
-	font.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
+	configDialog = new SupernovaeDialog();
+	conf = StelApp::getInstance().getSettings();
+	font.setPixelSize(conf->value("gui/base_font_size", 13).toInt());
 }
 
 /*
@@ -80,7 +94,7 @@ Supernovae::Supernovae()
 */
 Supernovae::~Supernovae()
 {
-	//
+	delete configDialog;
 }
 
 void Supernovae::deinit()
@@ -108,9 +122,25 @@ void Supernovae::init()
 	{
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Supernovae");
 
+		// If no settings in the main config file, create with defaults
+		if (!conf->childGroups().contains("Supernovae"))
+		{
+			qDebug() << "Supernovae::init no Supernovae section exists in main config file - creating with defaults";
+			restoreDefaultConfigIni();
+		}
+
+		// populate settings from main config file.
+		readSettingsFromConfig();
+
 		sneJsonPath = StelFileMgr::findFile("modules/Supernovae", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/supernovae.json";
 
 		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
+
+		// key bindings and other actions
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+
+		connect(gui->getGuiAction("actionShow_Supernovae_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
+		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Supernovae_ConfigDialog"), SLOT(setChecked(bool)));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -118,10 +148,17 @@ void Supernovae::init()
 		return;
 	}
 
+	// A timer for hiding alert messages
+	messageTimer = new QTimer(this);
+	messageTimer->setSingleShot(true);   // recurring check for update
+	messageTimer->setInterval(9000);      // 6 seconds should be enough time
+	messageTimer->stop();
+	connect(messageTimer, SIGNAL(timeout()), this, SLOT(messageTimeout()));
+
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(sneJsonPath).exists())
 	{
-		if (getJsonFileVersion() != PLUGIN_VERSION)
+		if (getJsonFileVersion() < CATALOG_FORMAT_VERSION)
 		{
 			restoreDefaultJsonFile();
 		}
@@ -135,6 +172,16 @@ void Supernovae::init()
 	qDebug() << "Supernovae::init using supernovae.json file: " << sneJsonPath;
 
 	readJsonFile();
+
+	// Set up download manager and the update schedule
+	downloadMgr = new QNetworkAccessManager(this);
+	connect(downloadMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateDownloadComplete(QNetworkReply*)));
+	updateState = CompleteNoUpdates;
+	updateTimer = new QTimer(this);
+	updateTimer->setSingleShot(false);   // recurring check for update
+	updateTimer->setInterval(13000);     // check once every 13 seconds to see if it is time for an update
+	connect(updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdate()));
+	updateTimer->start();
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
@@ -275,6 +322,12 @@ void Supernovae::restoreDefaultJsonFile(void)
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(sneJsonPath);
 		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
+
+		// Make sure that in the case where an online update has previously been done, but
+		// the json file has been manually removed, that an update is schreduled in a timely
+		// manner
+		conf->remove("Supernovae/last_update");
+		lastUpdate = QDateTime::fromString("2012-05-24T12:00:00", Qt::ISODate);
 	}
 }
 
@@ -360,9 +413,9 @@ void Supernovae::setSNeMap(const QVariantMap& map)
 	}
 }
 
-const QString Supernovae::getJsonFileVersion(void)
-{
-	QString jsonVersion("unknown");
+int Supernovae::getJsonFileVersion(void)
+{	
+	int jsonVersion = -1;
 	QFile sneJsonFile(sneJsonPath);
 	if (!sneJsonFile.open(QIODevice::ReadOnly))
 	{
@@ -374,12 +427,7 @@ const QString Supernovae::getJsonFileVersion(void)
 	map = StelJsonParser::parse(&sneJsonFile).toMap();
 	if (map.contains("version"))
 	{
-		QString creator = map.value("version").toString();
-		QRegExp vRx(".*(\\d+\\.\\d+\\.\\d+).*");
-		if (vRx.exactMatch(creator))
-		{
-			jsonVersion = vRx.capturedTexts().at(1);
-		}
+		jsonVersion = map.value("version").toInt();
 	}
 
 	sneJsonFile.close();
@@ -395,4 +443,162 @@ SupernovaP Supernovae::getByID(const QString& id)
 			return sn;
 	}
 	return SupernovaP();
+}
+
+bool Supernovae::configureGui(bool show)
+{
+	if (show)
+	{
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		gui->getGuiAction("actionShow_Supernovae_ConfigDialog")->setChecked(true);
+	}
+
+	return true;
+}
+
+void Supernovae::restoreDefaults(void)
+{
+	restoreDefaultConfigIni();
+	restoreDefaultJsonFile();
+	readJsonFile();
+	readSettingsFromConfig();
+}
+
+void Supernovae::restoreDefaultConfigIni(void)
+{
+	conf->beginGroup("Supernovae");
+
+	// delete all existing Pulsars settings...
+	conf->remove("");
+
+	conf->setValue("updates_enabled", true);
+	conf->setValue("url", "http://stellarium.org/json/supernovae.json");
+	conf->setValue("update_frequency_days", 100);
+	conf->endGroup();
+}
+
+void Supernovae::readSettingsFromConfig(void)
+{
+	conf->beginGroup("Supernovae");
+
+	updateUrl = conf->value("url", "http://stellarium.org/json/supernovae.json").toString();
+	updateFrequencyDays = conf->value("update_frequency_days", 100).toInt();
+	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-06-11T12:00:00").toString(), Qt::ISODate);
+	updatesEnabled = conf->value("updates_enabled", true).toBool();
+
+	conf->endGroup();
+}
+
+void Supernovae::saveSettingsToConfig(void)
+{
+	conf->beginGroup("Pulsars");
+
+	conf->setValue("url", updateUrl);
+	conf->setValue("update_frequency_days", updateFrequencyDays);
+	conf->setValue("updates_enabled", updatesEnabled );
+
+	conf->endGroup();
+}
+
+int Supernovae::getSecondsToUpdate(void)
+{
+	QDateTime nextUpdate = lastUpdate.addSecs(updateFrequencyDays * 3600 * 24);
+	return QDateTime::currentDateTime().secsTo(nextUpdate);
+}
+
+void Supernovae::checkForUpdate(void)
+{
+	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime())
+		updateJSON();
+}
+
+void Supernovae::updateJSON(void)
+{
+	if (updateState==Supernovae::Updating)
+	{
+		qWarning() << "Supernovae: already updating...  will not start again current update is complete.";
+		return;
+	}
+	else
+	{
+		qDebug() << "Supernovae: starting update...";
+	}
+
+	lastUpdate = QDateTime::currentDateTime();
+	conf->setValue("Supernovae/last_update", lastUpdate.toString(Qt::ISODate));
+
+	emit(jsonUpdateComplete());
+
+	updateState = Supernovae::Updating;
+
+	emit(updateStateChanged(updateState));
+	updateFile.clear();
+
+	if (progressBar==NULL)
+		progressBar = StelApp::getInstance().getGui()->addProgressBar();
+
+	progressBar->setValue(0);
+	progressBar->setMaximum(updateUrl.size());
+	progressBar->setVisible(true);
+	progressBar->setFormat("Update historical supernovae");
+
+	QNetworkRequest request;
+	request.setUrl(QUrl(updateUrl));
+	request.setRawHeader("User-Agent", QString("Mozilla/5.0 (Stellarium Historical Supernovae Plugin %1; http://stellarium.org/)").arg(SUPERNOVAE_PLUGIN_VERSION).toUtf8());
+	downloadMgr->get(request);
+
+	progressBar->setValue(100);
+	delete progressBar;
+	progressBar = NULL;
+
+	updateState = CompleteUpdates;
+
+	emit(updateStateChanged(updateState));
+	emit(jsonUpdateComplete());
+}
+
+void Supernovae::updateDownloadComplete(QNetworkReply* reply)
+{
+	// check the download worked, and save the data to file if this is the case.
+	if (reply->error() != QNetworkReply::NoError)
+	{
+		qWarning() << "Supernovae::updateDownloadComplete FAILED to download" << reply->url() << " Error: " << reply->errorString();
+	}
+	else
+	{
+		// download completed successfully.
+		try
+		{
+			QString jsonFilePath = StelFileMgr::findFile("modules/Supernovae", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/supernovae.json";
+			QFile jsonFile(jsonFilePath);
+			if (jsonFile.exists())
+				jsonFile.remove();
+
+			jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
+			jsonFile.write(reply->readAll());
+			jsonFile.close();
+		}
+		catch (std::runtime_error &e)
+		{
+			qWarning() << "Supernovae::updateDownloadComplete: cannot write JSON data to file:" << e.what();
+		}
+
+	}
+
+	if (progressBar)
+		progressBar->setValue(100);
+}
+
+void Supernovae::displayMessage(const QString& message, const QString hexColor)
+{
+	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20*messageIDs.count()), true, 16, hexColor);
+	messageTimer->start();
+}
+
+void Supernovae::messageTimeout(void)
+{
+	foreach(int i, messageIDs)
+	{
+		GETSTELMODULE(LabelMgr)->deleteLabel(i);
+	}
 }

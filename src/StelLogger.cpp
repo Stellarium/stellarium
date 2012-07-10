@@ -123,15 +123,30 @@ void StelLogger::init(const QString& logFilePath)
 		writeLog(version);
 		procVersion.close();
 	}
+#elif defined Q_OS_BSD4
+	// Check FreeBSD, NetBSD, OpenBSD and DragonFly BSD
+	QProcess uname;
+	uname.start("/usr/bin/uname -srm");
+	uname.waitForStarted();
+	uname.waitForFinished();
+	const QString BSDsystem = uname.readAllStandardOutput();
+	writeLog(BSDsystem.trimmed());
 #else
 	writeLog("Unknown operating system");
 #endif
 
 	// write GCC version
-#ifndef __GNUC__
-	writeLog("Non-GCC compiler");
+#if defined __GNUC__ && !defined __clang__
+	#ifdef __MINGW32__
+		#define COMPILER "MinGW GCC"
+	#else
+		#define COMPILER "GCC"
+	#endif
+	writeLog(QString("Compiled using %1 %2.%3.%4").arg(COMPILER).arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__));
+#elif defined __clang__
+	writeLog(QString("Compiled using %1 %2.%3.%4").arg("Clang").arg(__clang_major__).arg(__clang_minor__).arg(__clang_patchlevel__));
 #else
-	writeLog(QString("Compiled with GCC %1.%2.%3").arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__));
+	writeLog("Unknown compiler");
 #endif
 
 	// write Qt version
@@ -202,7 +217,7 @@ void StelLogger::init(const QString& logFilePath)
 	}
 #endif
 
-	// Aargh Windows API
+// Aargh Windows API
 #elif defined Q_OS_WIN
 	// Hopefully doesn't throw a linker error on earlier systems. Not like
 	// I'm gonna test it or anything.
@@ -269,7 +284,7 @@ void StelLogger::init(const QString& logFilePath)
 #elif defined Q_OS_MAC
 	QProcess systemProfiler;
 	systemProfiler.start("/usr/sbin/system_profiler -detailLevel mini SPHardwareDataType SPDisplaysDataType");
-   systemProfiler.waitForStarted();
+	systemProfiler.waitForStarted();
 	systemProfiler.waitForFinished();
 	const QString systemData(systemProfiler.readAllStandardOutput());
 	QStringList systemLines = systemData.split('\n', QString::SkipEmptyParts);
@@ -296,7 +311,29 @@ void StelLogger::init(const QString& logFilePath)
 		}
 
 	}
-	//writeLog("You look like a Mac user. How would you like to write some system info code here? That would help a lot.");
+
+#elif defined Q_OS_BSD4
+	QProcess dmesg
+	dmesg.start("/sbin/dmesg", QIODevice::ReadOnly);
+	dmesg.waitForStarted();
+	dmesg.waitForFinished();
+	const QString dmesgData(dmesg.readAll());
+	QStringList dmesgLines = dmesgData.split('\n', QString::SkipEmptyParts);
+	for (int i = 0; i<dmesgLines.size(); i++)
+	{
+		if (dmesgLines.at(i).contains("memory"))
+		{
+			writeLog(dmesgLines.at(i).trimmed());
+		}
+		if (dmesgLines.at(i).contains("CPU"))
+		{
+			writeLog(dmesgLines.at(i).trimmed());
+		}
+		if (dmesgLines.at(i).contains("VGA"))
+		{
+			writeLog(dmesgLines.at(i).trimmed());
+		}
+	}
 
 #endif
 }

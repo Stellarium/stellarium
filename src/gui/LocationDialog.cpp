@@ -20,6 +20,7 @@
 
 #include "Dialog.hpp"
 #include "LocationDialog.hpp"
+#include "LandscapeMgr.hpp"
 #include "StelLocationMgr.hpp"
 #include "ui_locationDialogGui.h"
 #include "StelApp.hpp"
@@ -198,6 +199,12 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
 
 	ui->deleteLocationFromListPushButton->setEnabled(StelApp::getInstance().getLocationMgr().canDeleteUserLocation(loc.getID()));
+
+	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+	PlanetP p = ssm->searchByEnglishName(loc.planetName);
+	LandscapeMgr* ls = GETSTELMODULE(LandscapeMgr);
+	ls->setFlagAtmosphere(p->hasAtmosphere());
+	ls->setFlagFog(p->hasAtmosphere());
 
 	// Reactivate edit signals
 	connectEditSignals();
