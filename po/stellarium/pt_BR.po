@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-08 19:10+0700\n"
-"PO-Revision-Date: 2012-07-08 14:12+0000\n"
+"POT-Creation-Date: 2012-07-10 01:06+0700\n"
+"PO-Revision-Date: 2012-07-09 22:31+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-09 04:48+0000\n"
+"X-Launchpad-Export-Date: 2012-07-10 05:32+0000\n"
 "X-Generator: Launchpad (build 15558)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -5911,12 +5911,12 @@ msgstr "Curvas de luz"
 msgid ""
 "This plugin implements a simple model of light curves for different "
 "supernovae. Typical views of light curves for type I and type II supernova "
-"can seen %1here%2 (right scale in days) and this model is used for this "
+"can be seen %1here%2 (right scale in days), and this model is used for this "
 "plugin."
 msgstr ""
 "Este complemento implementa um modelo simples de curvas de luz para "
-"diferentes tipos de supernovas. A visualização típica de curvas de luz de "
-"supernovas do tipo I e do tipo II você pode ver %1aqui%2 (a escala da "
+"diferentes tipos de supernovas. As visualizações típicas de curvas de luz de "
+"supernovas do tipo I e do tipo II podem ser vistas %1aqui%2 (a escala da "
 "direita está em dias), tendo sido este modelo utilizado para o complemento."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
@@ -5946,14 +5946,15 @@ msgstr "na Rússia"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 #, qt-format
 msgid ""
-"If you want more information about this plugin, its history, and format of "
-"catalog, you can %1get additional info here%2."
+"If you want to read full information about this plugin, its history and "
+"format of catalog, you can %1get info here%2."
 msgstr ""
-"Se você quiser mais informações sobre este complemento, sua história e o "
-"formato do catálogo, você pode %1obter informações adicionais aqui%2."
+"Se você quiser ler as informações completas sobre o complemento, sua "
+"história e o formato do catálogo, você pode %1obter informações aqui%2."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
@@ -6038,17 +6039,6 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
 msgstr "Veron+ 2010"
-
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
-#, qt-format
-msgid ""
-"If you want read full information about plugin, his history and format of "
-"catalog you can %1get info here%2."
-msgstr ""
-"Se você quiser ler as informações completas sobre o complemento, sua "
-"história e o formato do catálogo, você pode %1obter informações aqui%2."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
 msgid "Quasars is updated"
@@ -6365,6 +6355,16 @@ msgid ""
 msgstr ""
 "Este complemento mostra a posição de estrelas com exoplanetas. Os dados "
 "sobre os exoplanetas provêm da “%1The Extrasolar Planets Encyclopaedia%2”"
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
+#, qt-format
+msgid ""
+"If you want read full information about plugin, his history and format of "
+"catalog you can %1get info here%2."
+msgstr ""
+"Se você quiser ler as informações completas sobre o complemento, sua "
+"história e o formato do catálogo, você pode %1obter informações aqui%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Exoplanets is updated"

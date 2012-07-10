@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-08 19:10+0700\n"
+"POT-Creation-Date: 2012-07-10 01:06+0700\n"
 "PO-Revision-Date: 2012-06-29 10:56+0000\n"
 "Last-Translator: forest93 <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-09 04:49+0000\n"
+"X-Launchpad-Export-Date: 2012-07-10 05:32+0000\n"
 "X-Generator: Launchpad (build 15558)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -5699,11 +5699,9 @@ msgstr "光变曲线"
 msgid ""
 "This plugin implements a simple model of light curves for different "
 "supernovae. Typical views of light curves for type I and type II supernova "
-"can seen %1here%2 (right scale in days) and this model is used for this "
+"can be seen %1here%2 (right scale in days), and this model is used for this "
 "plugin."
 msgstr ""
-"此插件实现了一个模拟不同类型超新星光变曲线的简单模型。典型的 I 型和 II "
-"型超新星光变曲线可以在%1这里%2查看（以天为尺度），本插件使用的也是这个模型。"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 msgid "Acknowledgments"
@@ -5730,12 +5728,13 @@ msgstr "在俄罗斯"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 #, qt-format
 msgid ""
-"If you want more information about this plugin, its history, and format of "
-"catalog, you can %1get additional info here%2."
-msgstr "如果需要有关此插件的更多信息、它的发展历史，以及目录格式，您可以%1点击此处获取详情%2。"
+"If you want to read full information about this plugin, its history and "
+"format of catalog, you can %1get info here%2."
+msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
@@ -5816,15 +5815,6 @@ msgstr ""
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
-msgstr ""
-
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
-#, qt-format
-msgid ""
-"If you want read full information about plugin, his history and format of "
-"catalog you can %1get info here%2."
 msgstr ""
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:198
@@ -6123,6 +6113,14 @@ msgstr ""
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
+msgstr ""
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
+#, qt-format
+msgid ""
+"If you want read full information about plugin, his history and format of "
+"catalog you can %1get info here%2."
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
