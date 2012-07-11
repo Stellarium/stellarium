@@ -176,7 +176,7 @@ void Nebula::drawHints(StelRenderer* renderer, float maxMagHints)
 		Nebula::texCircle->bind();
 	}
 
-	renderer->drawRect(XY[0] - 6, XY[1] - 6, 12, 12);
+	renderer->drawTexturedRect(XY[0] - 6, XY[1] - 6, 12, 12);
 }
 
 

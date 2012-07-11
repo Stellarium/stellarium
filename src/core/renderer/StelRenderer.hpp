@@ -240,20 +240,39 @@ public:
 	//! The rectangle will be colored by the global color
 	//! (which can be specified by setGlobalColor()).
 	//!
-	//! Optionally, the rectangle can be textured by the currently bound texture
-	//! (on by default).
+	//! The rectangle can be rotated around its center by an angle specified 
+	//! in degrees.
 	//!
 	//! Default implementation uses other Renderer functions to draw the rectangle,
 	//! but can be overridden if a more optimized implementation is needed.
 	//!
-	//! @param x        X position of the top left corner on the screen in pixels.
-	//! @param y        Y position of the top left corner on the screen in pixels. 
-	//! @param width    Width in pixels.
-	//! @param height   Height in pixels.
-	//! @param textured Draw textured or just plain color rectangle?
+	//! @param x      X position of the top left corner on the screen in pixels.
+	//! @param y      Y position of the top left corner on the screen in pixels. 
+	//! @param width  Width in pixels.
+	//! @param height Height in pixels.
+	//! @param angle  Angle to rotate the rectangle in degrees.
 	virtual void drawRect(const float x, const float y, 
 	                      const float width, const float height, 
-	                      const bool textured = true);
+	                      const float angle = 0.0f);
+	
+	//! Draw a textured rectangle to the screen.
+	//!
+	//! The rectangle will be textured by the currently bound texture.
+	//!
+	//! The rectangle can be rotated around its center by an angle specified 
+	//! in degrees.
+	//!
+	//! Default implementation uses other Renderer functions to draw the rectangle,
+	//! but can be overridden if a more optimized implementation is needed.
+	//!
+	//! @param x      X position of the top left corner on the screen in pixels.
+	//! @param y      Y position of the top left corner on the screen in pixels. 
+	//! @param width  Width in pixels.
+	//! @param height Height in pixels.
+	//! @param angle  Angle to rotate the rectangle in degrees.
+	virtual void drawTexturedRect(const float x, const float y, 
+	                              const float width, const float height, 
+	                              const float angle = 0.0f);
 
 	//! Draw text with specified parameters.
 	//!
@@ -276,6 +295,9 @@ public:
 	//!
 	//! @see TextParams
 	virtual void drawText(const TextParams& params) = 0;
+
+	//! Set font to use for drawing text.
+	virtual void setFont(const QFont& font) = 0;
 
 	//! Bind a texture (following draw calls will use this texture on specified texture unit).
 	//!
