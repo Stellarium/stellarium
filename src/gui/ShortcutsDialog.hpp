@@ -24,10 +24,9 @@
 #include "StelShortcutMgr.hpp"
 
 #include <QLineEdit>
+#include <QModelIndex>
 
-class Ui_shortcutsDialogForm;
-class ShortcutsDialog;
-
+// auxilary class for convenient editing shortcuts
 class ShortcutLineEdit : public QLineEdit
 {
 	Q_OBJECT
@@ -40,7 +39,10 @@ public:
 public slots:
 	// clear contents; also clear stored keys
 	void clear();
+	// remove last key from keysequence
+	void backspace();
 	void setContents(QKeySequence ks);
+	bool isEmpty() const { return (m_keyNum <= 0); }
 
 signals:
 	// need for enable/disable buttons in dialog
@@ -54,13 +56,14 @@ protected:
 
 private:
 	// transform modifiers to int
-	int getModifiers(Qt::KeyboardModifiers state, const QString &text);	
+	static int getModifiers(Qt::KeyboardModifiers state, const QString &text);
 
-	// counter and array for store keys entered
+	// counter and array for storing entered keys
 	int m_keyNum;
 	int m_keys[4]; // QKeySequence allows only 4 keys in single shortcut
 };
 
+class Ui_shortcutsDialogForm;
 QT_FORWARD_DECLARE_CLASS(QTreeWidgetItem)
 
 class ShortcutsDialog : public StelDialog
@@ -84,13 +87,17 @@ public slots:
 	// called when editors' state changed
 	void handleChanges();
 	// called when apply button clicked
-	void applyChanges();
+	void applyChanges() const;
+	// called by doubleclick; if click is on editable item, switch to editors
+	void switchToEditors(QModelIndex index);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
 
 private:
+	// checks whether given item can be changed by editors
+	static bool itemIsEditable(QTreeWidgetItem *item);
 	//! This function concatenates the header, key codes and footer to build
 	//! up the help text.
 	void updateText(void);
