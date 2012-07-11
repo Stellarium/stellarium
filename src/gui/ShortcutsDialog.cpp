@@ -257,19 +257,19 @@ void ShortcutsDialog::handleChanges()
 	// updating clear buttons
 	if (ui->primaryShortcutEdit->isEmpty())
 	{
-		ui->clearPrimaryButton->setEnabled(false);
+		ui->primaryBackspaceButton->setEnabled(false);
 	}
 	else
 	{
-		ui->clearPrimaryButton->setEnabled(true);
+		ui->primaryBackspaceButton->setEnabled(true);
 	}
 	if (ui->altShortcutEdit->isEmpty())
 	{
-		ui->clearAltButton->setEnabled(false);
+		ui->altBackspaceButton->setEnabled(false);
 	}
 	else
 	{
-		ui->clearAltButton->setEnabled(true);
+		ui->altBackspaceButton->setEnabled(true);
 	}
 	QString primText = ui->primaryShortcutEdit->text();
 	QString altText = ui->altShortcutEdit->text();
