@@ -32,6 +32,7 @@
 #include "NebulaMgr.hpp"
 #include "Nebula.hpp"
 #include "renderer/StelTexture.hpp"
+#include "renderer/StelRenderer.hpp"
 
 #include "StelSkyDrawer.hpp"
 #include "StelTranslator.hpp"
@@ -43,7 +44,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelSkyImageTile.hpp"
-#include "StelPainter.hpp"
 #include "RefractionExtinction.hpp"
 
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c;}
@@ -117,16 +117,16 @@ void NebulaMgr::init()
 struct DrawNebulaFuncObject
 {
 	DrawNebulaFuncObject
-		(float amaxMagHints, float amaxMagLabels, StelPainter* p, 
+		(float amaxMagHints, float amaxMagLabels, StelProjectorP projector,
 		 StelRenderer* renderer, StelCore* aCore, bool acheckMaxMagHints) 
 		: maxMagHints(amaxMagHints)
 		, maxMagLabels(amaxMagLabels)
-		, sPainter(p)
+		, projector(projector)
 		, renderer(renderer)
 		, core(aCore)
 		, checkMaxMagHints(acheckMaxMagHints)
 	{
-		angularSizeLimit = 5.f/sPainter->getProjector()->getPixelPerRadAtCenter()*180.f/M_PI;
+		angularSizeLimit = 5.0f / projector->getPixelPerRadAtCenter() * 180.0f / M_PI;
 	}
 	void operator()(StelRegionObjectP obj)
 	{
@@ -134,14 +134,14 @@ struct DrawNebulaFuncObject
 		if (n->angularSize>angularSizeLimit || (checkMaxMagHints && n->mag <= maxMagHints))
 		{
 			float refmag_add=0; // value to adjust hints visibility threshold.
-			sPainter->getProjector()->project(n->XYZ,n->XY);
-			n->drawLabel(renderer, sPainter->getProjector(), maxMagLabels-refmag_add);
+			projector->project(n->XYZ,n->XY);
+			n->drawLabel(renderer, projector, maxMagLabels-refmag_add);
 			n->drawHints(renderer, maxMagHints -refmag_add);
 		}
 	}
 	float maxMagHints;
 	float maxMagLabels;
-	StelPainter* sPainter;
+	StelProjectorP projector;
 	StelRenderer* renderer;
 	StelCore* core;
 	float angularSizeLimit;
@@ -149,18 +149,13 @@ struct DrawNebulaFuncObject
 };
 
 // Draw all the Nebulae
-void NebulaMgr::draw(StelCore* core, class StelRenderer* renderer)
+void NebulaMgr::draw(StelCore* core, StelRenderer* renderer)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter sPainter(prj);
 
 	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
 
 	Nebula::hintsBrightness = hintsFader.getInterstate()*flagShow.getInterstate();
-
-	sPainter.enableTexture2d(true);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
 
 	// Use a 1 degree margin
 	const double margin = 1.*M_PI/180.*prj->getPixelPerRadAtCenter();
@@ -169,15 +164,18 @@ void NebulaMgr::draw(StelCore* core, class StelRenderer* renderer)
 	// Print all the nebulae of all the selected zones
 	float maxMagHints = skyDrawer->getLimitMagnitude()*1.2f-2.f+(hintsAmount*1.2f)-2.f;
 	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.f+(labelsAmount*1.2f)-2.f;
-	sPainter.setFont(nebulaFont);
-	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, renderer, core, hintsFader.getInterstate()>0.0001);
+	
+	renderer->setFont(nebulaFont);
+	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, prj, renderer, core, hintsFader.getInterstate()>0.0001);
 	nebGrid.processIntersectingRegions(p, func);
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-		drawPointer(core, sPainter);
+	{
+		drawPointer(core, renderer);
+	}
 }
 
-void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
+void NebulaMgr::drawPointer(const StelCore* core, StelRenderer* renderer)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
@@ -187,23 +185,31 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		// Compute 2D pos and return if outside screen
+		// Compute 2D pos and don't draw if outside screen
 		if (!prj->projectInPlace(pos)) return;
-		sPainter.setColor(0.4f,0.5f,0.8f);
+
+		renderer->setGlobalColor(Vec4f(0.4f, 0.5f, 0.8f, 1.0f));
 		texPointer->bind();
 
-		sPainter.enableTexture2d(true);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		renderer->setBlendMode(BlendMode_Alpha);
 
-		// Size on screen
+		// Size of the whole pointer on screen
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 
 		size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
-		sPainter.drawSprite2dMode(pos[0]-size/2, pos[1]-size/2, 10, 90);
-		sPainter.drawSprite2dMode(pos[0]-size/2, pos[1]+size/2, 10, 0);
-		sPainter.drawSprite2dMode(pos[0]+size/2, pos[1]+size/2, 10, -90);
-		sPainter.drawSprite2dMode(pos[0]+size/2, pos[1]-size/2, 10, -180);
+
+		const float halfSize = size * 0.5;
+
+		const float xLeft   = pos[0] - halfSize - 10;
+		const float xRight  = pos[0] + halfSize - 10;
+		const float yTop    = pos[1] - halfSize - 10;
+		const float yBottom = pos[1] + halfSize - 10;
+
+		// Every part of the pointer has size 20.
+		renderer->drawTexturedRect(xLeft,  yTop,    20, 20, 90);
+		renderer->drawTexturedRect(xLeft,  yBottom, 20, 20, 0);
+		renderer->drawTexturedRect(xRight, yBottom, 20, 20, -90);
+		renderer->drawTexturedRect(xRight, yTop,    20, 20, -180);;
 	}
 }
 

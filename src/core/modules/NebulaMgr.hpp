@@ -34,7 +34,6 @@ class Nebula;
 class StelTranslator;
 class StelToneReproducer;
 class QSettings;
-class StelPainter;
 
 typedef QSharedPointer<Nebula> NebulaP;
 
@@ -172,7 +171,7 @@ private:
 	void loadNebulaSet(const QString& setName);
 
 	//! Draw a nice animated pointer around the object
-	void drawPointer(const StelCore* core, StelPainter& sPainter);
+	void drawPointer(const StelCore* core, class StelRenderer* renderer);
 
 	NebulaP searchM(unsigned int M);
 	NebulaP searchNGC(unsigned int NGC);

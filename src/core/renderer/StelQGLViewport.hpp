@@ -145,6 +145,14 @@ public:
 		return fboSupported && !fboDisabled;
 	}
 
+	//! Set font to use for drawing text.
+	void setFont(const QFont& font)
+	{
+		Q_ASSERT_X(NULL != painter, Q_FUNC_INFO,
+		           "Trying to set text (painting) font but painting is disabled");
+		painter->setFont(font);
+	}
+
 	//! Start using drawing calls.
 	void startFrame()
 	{

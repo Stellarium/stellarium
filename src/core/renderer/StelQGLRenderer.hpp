@@ -119,6 +119,11 @@ public:
 
 	virtual void drawText(const TextParams& params);
 	
+	virtual void setFont(const QFont& font)
+	{
+		viewport.setFont(font);
+	}
+
 	virtual void bindTexture(StelTextureBackend* const textureBackend, const int textureUnit);
 
 	virtual void destroyTextureBackend(StelTextureBackend* const textureBackend);

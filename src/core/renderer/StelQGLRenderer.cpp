@@ -188,7 +188,7 @@ void StelQGLRenderer::drawWindow(StelViewportEffect* const effect)
 
 			setGlobalColor(Vec4f(1.0f, 1.0f, 1.0f, 1.0f));
 			screenTexture->bind();
-			drawRect(0, 0, texWidth, texHeight);
+			drawTexturedRect(0, 0, texWidth, texHeight);
 		}
 		// If not using FBO, the result is already drawn to the screen.
 	}
@@ -255,6 +255,7 @@ void StelQGLRenderer::drawText(const TextParams& params)
 	}
 	
 	const int pixelSize   = painter->font().pixelSize();
+	// Strings drawn by drawText() can differ by text, font size, or the font itself.
 	const QByteArray hash = params.string_.toUtf8() + QByteArray::number(pixelSize) + 
 	                        painter->font().family().toUtf8();
 	StelQGLTextureBackend* textTexture = textTextureCache.object(hash);
@@ -290,7 +291,7 @@ void StelQGLRenderer::drawText(const TextParams& params)
 		                     params.string_);
 
 		textTexture = StelQGLTextureBackend::constructFromImage
-			(this, QString(), StelTextureParams().filtering(TextureFiltering_Nearest), image);
+			(this, QString(), StelTextureParams().filtering(TextureFiltering_Linear), image);
 		const QSize size = textTexture->getDimensions();
 		if(!textTexture->getStatus() == TextureStatus_Loaded)
 		{
