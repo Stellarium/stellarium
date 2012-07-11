@@ -294,6 +294,9 @@
    <class>ShortcutLineEdit</class>
    <extends>QLineEdit</extends>
    <header>ShortcutsDialog.hpp</header>
+   <slots>
+    <slot>backspace()</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -318,7 +321,7 @@
    <sender>clearPrimaryButton</sender>
    <signal>clicked()</signal>
    <receiver>primaryShortcutEdit</receiver>
-   <slot>clear()</slot>
+   <slot>backspace()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>540</x>
@@ -334,7 +337,7 @@
    <sender>clearAltButton</sender>
    <signal>clicked()</signal>
    <receiver>altShortcutEdit</receiver>
-   <slot>clear()</slot>
+   <slot>backspace()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>540</x>

@@ -22,7 +22,6 @@
 
 #include <QDebug>
 #include <QDialog>
-#include <QLineEdit>
 
 #include "ShortcutsDialog.hpp"
 #include "ui_shortcutsDialog.h"
@@ -46,8 +45,24 @@ void ShortcutLineEdit::clear()
 	emit contentsChanged();
 }
 
+void ShortcutLineEdit::backspace()
+{
+	if (m_keyNum <= 0)
+	{
+		qWarning() << "Clear button works when it shouldn't ";
+		return;
+	}
+	--m_keyNum;
+	m_keys[m_keyNum] = 0;
+	// update text
+	setContents(getKeySequence());
+}
+
 void ShortcutLineEdit::setContents(QKeySequence ks)
 {
+	// need for avoiding infinite loop of same signal-slot emitting/calling
+	if (ks.toString() == text())
+		return;
 	// clear before setting up
 	clear();
 	// set up m_keys from given key sequence
@@ -57,6 +72,7 @@ void ShortcutLineEdit::setContents(QKeySequence ks)
 		m_keys[i] = ks[i];
 	}
 	setText(ks.toString());
+	emit contentsChanged();
 }
 
 void ShortcutLineEdit::keyPressEvent(QKeyEvent *e)
@@ -159,7 +175,7 @@ void ShortcutsDialog::retranslate()
 
 void ShortcutsDialog::initEditors()
 {
-	if (ui->shortcutsTreeWidget->currentItem()->isSelected()) {
+	if (itemIsEditable(ui->shortcutsTreeWidget->currentItem())) {
 		// current item is shortcut, not group (group items aren't selectable)
 		ui->primaryShortcutEdit->setEnabled(true);
 		ui->altShortcutEdit->setEnabled(true);
@@ -239,7 +255,7 @@ void ShortcutsDialog::handleCollisions()
 void ShortcutsDialog::handleChanges()
 {
 	// updating clear buttons
-	if (ui->primaryShortcutEdit->text().isEmpty())
+	if (ui->primaryShortcutEdit->isEmpty())
 	{
 		ui->clearPrimaryButton->setEnabled(false);
 	}
@@ -247,7 +263,7 @@ void ShortcutsDialog::handleChanges()
 	{
 		ui->clearPrimaryButton->setEnabled(true);
 	}
-	if (ui->altShortcutEdit->text().isEmpty())
+	if (ui->altShortcutEdit->isEmpty())
 	{
 		ui->clearAltButton->setEnabled(false);
 	}
@@ -276,7 +292,7 @@ void ShortcutsDialog::handleChanges()
 	ui->altShortcutEdit->style()->polish(ui->altShortcutEdit);
 }
 
-void ShortcutsDialog::applyChanges()
+void ShortcutsDialog::applyChanges() const
 {
 	// get ids stored in tree
 	QString actionId = ui->shortcutsTreeWidget->currentItem()->data(0, Qt::UserRole).toString();
@@ -290,11 +306,22 @@ void ShortcutsDialog::applyChanges()
 	ui->shortcutsTreeWidget->currentItem()->setText(2, ui->altShortcutEdit->text());
 }
 
+void ShortcutsDialog::switchToEditors(QModelIndex index)
+{
+	Q_UNUSED(index);
+	QTreeWidgetItem* curItem = ui->shortcutsTreeWidget->currentItem();
+	if (itemIsEditable(curItem))
+	{
+		ui->primaryShortcutEdit->setFocus();
+	}
+}
+
 void ShortcutsDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->shortcutsTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(initEditors()));
+	connect(ui->shortcutsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(switchToEditors(QModelIndex)));
 	// apply button logic
 	connect(ui->applyButton, SIGNAL(released()), this, SLOT(applyChanges()));
 	// we need to disable all shortcut actions, so we can enter shortcuts without activating any actions
@@ -336,4 +363,11 @@ void ShortcutsDialog::createDialogContent()
 
 void ShortcutsDialog::updateText()
 {
+}
+
+bool ShortcutsDialog::itemIsEditable(QTreeWidgetItem *item)
+{
+	if (item == NULL) return false;
+	// non-editable items have no Qt::ItemIsSelectable flag
+	return (Qt::ItemIsSelectable & item->flags());
 }
