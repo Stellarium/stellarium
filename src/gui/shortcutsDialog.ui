@@ -222,7 +222,7 @@
           </widget>
          </item>
          <item row="1" column="2">
-          <widget class="QPushButton" name="clearAltButton">
+          <widget class="QPushButton" name="altBackspaceButton">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -244,7 +244,7 @@
           </widget>
          </item>
          <item row="0" column="2">
-          <widget class="QPushButton" name="clearPrimaryButton">
+          <widget class="QPushButton" name="primaryBackspaceButton">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -318,7 +318,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>clearPrimaryButton</sender>
+   <sender>primaryBackspaceButton</sender>
    <signal>clicked()</signal>
    <receiver>primaryShortcutEdit</receiver>
    <slot>backspace()</slot>
@@ -334,7 +334,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>clearAltButton</sender>
+   <sender>altBackspaceButton</sender>
    <signal>clicked()</signal>
    <receiver>altShortcutEdit</receiver>
    <slot>backspace()</slot>
@@ -350,7 +350,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>clearPrimaryButton</sender>
+   <sender>primaryBackspaceButton</sender>
    <signal>clicked()</signal>
    <receiver>primaryShortcutEdit</receiver>
    <slot>setFocus()</slot>
@@ -366,7 +366,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>clearAltButton</sender>
+   <sender>altBackspaceButton</sender>
    <signal>clicked()</signal>
    <receiver>altShortcutEdit</receiver>
    <slot>setFocus()</slot>
