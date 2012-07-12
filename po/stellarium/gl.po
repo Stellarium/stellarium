@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-07-10 01:06+0700\n"
-"PO-Revision-Date: 2012-07-08 07:05+0000\n"
+"PO-Revision-Date: 2012-07-11 08:48+0000\n"
 "Last-Translator: Manuel Rosales Graña <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-10 05:25+0000\n"
-"X-Generator: Launchpad (build 15558)\n"
+"X-Launchpad-Export-Date: 2012-07-12 04:39+0000\n"
+"X-Generator: Launchpad (build 15593)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -976,7 +976,7 @@ msgstr "Copiar información do obxecto seleccionado ó portapapeis"
 
 #: src/gui/StelGui.cpp:189
 msgid "Go to home"
-msgstr ""
+msgstr "Ir ó Inicio"
 
 #: src/gui/StelGui.cpp:191
 msgid "Auto hide horizontal button bar"
@@ -5872,6 +5872,10 @@ msgid ""
 "can be seen %1here%2 (right scale in days), and this model is used for this "
 "plugin."
 msgstr ""
+"Este plugin implementa un modelo simple de curvas de luz para diferentes "
+"supernovas. A vista típica das curvas de luz para os tipos I e II de "
+"supernovas pódense ver %1aquí%2 (escala da dereita en días), e este é o "
+"modelo que se usa para este plugin."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 msgid "Acknowledgments"
@@ -5907,6 +5911,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of catalog, you can %1get info here%2."
 msgstr ""
+"Se queres ler a información completa sobre este plugin, a súa historia e o "
+"formato do catálogo, podes %1obter información aquí%2."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
