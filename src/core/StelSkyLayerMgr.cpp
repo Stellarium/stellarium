@@ -162,8 +162,20 @@ void StelSkyLayerMgr::draw(StelCore* core)
 	glEnable(GL_BLEND);
 	foreach (SkyLayerElem* s, allSkyLayers)
 	{
-		if (s->show)
+		if (s->show) 
+		{
+			if (s->layer->getFrameType() == StelCore::FrameAltAz) 
+			{
+				sPainter.setProjector(core->getProjection(StelCore::FrameAltAz));
+			} 
+			else
+			{
+				// TODO : Use the respective reference frames, once every SkyLayer
+				// object sets their frame type. Defaulting to Equatorial frame now.
+				sPainter.setProjector(core->getProjection(StelCore::FrameJ2000));
+			}
 			s->layer->draw(core, sPainter, 1.);
+		}
 	}
 }
 
@@ -284,6 +296,73 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 		vm["worldCoords"] = ol;
 
 		StelSkyLayerP tile = StelSkyLayerP(new StelSkyImageTile(vm, 0));
+		tile->setFrameType(StelCore::FrameJ2000);
+		QString key = insertSkyLayer(tile, filename, visible);
+		if (key == id)
+			return true;
+		else
+			return false;
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "Could not find image" << filename << ":" << e.what();
+		return false;
+	}
+}
+
+bool StelSkyLayerMgr::loadSkyImageAltAz(const QString& id, const QString& filename,
+								   double alt0, double azi0,
+								   double alt1, double azi1,
+								   double alt2, double azi2,
+								   double alt3, double azi3,
+								   double minRes, double maxBright, bool visible)
+{
+	if (allSkyLayers.contains(id))
+	{
+		qWarning() << "Image ID" << id << "already exists, removing old image before loading";
+		removeSkyLayer(id);
+	}
+
+	QString path;
+	// Possible exception sources:
+	// - StelFileMgr file not found
+	// - list index out of range in insertSkyImage
+	try
+	{
+		path = StelFileMgr::findFile(filename);
+
+		QVariantMap vm;
+		QVariantList l;
+		QVariantList cl; // coordinates list for adding worldCoords and textureCoords
+		QVariantList c;  // a list for a pair of coordinates
+		QVariantList ol; // outer list - we want a structure 3 levels deep...
+		vm["imageUrl"] = QVariant(path);
+		vm["maxBrightness"] = QVariant(maxBright);
+		vm["minResolution"] = QVariant(minRes);
+		vm["shortName"] = QVariant(id);
+
+		// textureCoords (define the ordering of worldCoords)
+		cl.clear();
+		ol.clear();
+		c.clear(); c.append(0); c.append(0); cl.append(QVariant(c));
+		c.clear(); c.append(1); c.append(0); cl.append(QVariant(c));
+		c.clear(); c.append(1); c.append(1); cl.append(QVariant(c));
+		c.clear(); c.append(0); c.append(1); cl.append(QVariant(c));
+		ol.append(QVariant(cl));
+		vm["textureCoords"] = ol;
+
+		// world coordinates
+		cl.clear();
+		ol.clear();
+		c.clear(); c.append(alt0); c.append(azi0); cl.append(QVariant(c));
+		c.clear(); c.append(alt1); c.append(azi1); cl.append(QVariant(c));
+		c.clear(); c.append(alt2); c.append(azi2); cl.append(QVariant(c));
+		c.clear(); c.append(alt3); c.append(azi3); cl.append(QVariant(c)); 
+		ol.append(QVariant(cl));
+		vm["worldCoords"] = ol;
+
+		StelSkyLayerP tile = StelSkyLayerP(new StelSkyImageTile(vm, 0));
+		tile->setFrameType(StelCore::FrameAltAz);
 		QString key = insertSkyLayer(tile, filename, visible);
 		if (key == id)
 			return true;
