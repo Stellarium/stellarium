@@ -83,20 +83,10 @@ void StelShortcut::setKeys(const QString &keys)
 	m_action->setShortcuts(keyList.mid(0, 2));
 }
 
-void StelShortcut::setPrimaryKey(const QString &key)
-{
-	setPrimaryKey(QKeySequence(key));
-}
-
 void StelShortcut::setPrimaryKey(const QKeySequence &key)
 {
 	m_primaryKey = key;
 	updateShortcuts();
-}
-
-void StelShortcut::setAltKey(const QString &key)
-{
-	setAltKey(QKeySequence(key));
 }
 
 void StelShortcut::setAltKey(const QKeySequence &key)

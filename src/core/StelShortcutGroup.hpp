@@ -43,9 +43,7 @@ public:
 
 	void setText(const QString& text);
 	void setKeys(const QString& keys);
-	void setPrimaryKey(const QString& key);
 	void setPrimaryKey(const QKeySequence& key);
-	void setAltKey(const QString& key);
 	void setAltKey(const QKeySequence& key);
 	void setCheckable(bool c);
 	void setAutoRepeat(bool ar);
