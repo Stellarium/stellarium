@@ -968,12 +968,12 @@ void StelGui::setGuiVisible(bool b)
 	setVisible(b);
 }
 
-QAction* StelGui::addGuiAction(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat, bool global)
+QAction* StelGui::addGuiAction(const QString& actionName, const QString& text, const QString& shortcuts, const QString& helpGroup, bool checkable, bool autoRepeat, bool global)
 {
-	if (!shortCut.isEmpty())
-		helpDialog.setKey(helpGroup, "", shortCut, text);
+	if (!shortcuts.isEmpty())
+		helpDialog.setKey(helpGroup, "", shortcuts, text);
 	StelShortcutMgr* shortcutMgr = StelApp::getInstance().getStelShortcutManager();
-	return shortcutMgr->addGuiAction(actionName, text, shortCut, helpGroup, checkable, autoRepeat, global);
+	return shortcutMgr->addGuiAction(actionName, text, shortcuts, helpGroup, checkable, autoRepeat, global);
 }
 
 QAction *StelGui::getGuiAction(const QString &actionName)

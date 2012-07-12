@@ -175,13 +175,21 @@ bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 			QString actionId = action.key();
 			QMap<QString, QVariant> actionMap = action.value().toMap();
 			QString text = actionMap["text"].toString();
-			QString shortcuts = (groupPrefix + actionMap["shortcuts"].toString());
+			// get primary and alternative keys of shortcut
+			QString primaryKey = (groupPrefix + actionMap["primaryKey"].toString());
+			QString altKey = (groupPrefix + actionMap["altKey"].toString());
+			QString shortcuts = primaryKey;
+			if (!altKey.isEmpty())
+			{
+				shortcuts += ";" + altKey;
+			}
+			// get behavior properties of shortcut
 			bool checkable = actionMap["checkable"].toBool();
 			bool autorepeat = actionMap["autorepeat"].toBool();
 			bool global = actionMap["global"].toBool();
-			// init shortcut
+			// create & init shortcut
 			addGuiAction(actionId, text, shortcuts, groupId, checkable, autorepeat, global);
-			//set script if it exist
+			// set script if it exist
 			if (actionMap.contains("script"))
 			{
 				addScriptToAction(actionId, actionMap["script"].toString());

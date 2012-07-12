@@ -111,7 +111,7 @@ public:
 	
     virtual QAction* addGuiAction(const QString& actionName,
                                   const QString& text,
-                                  const QString& shortCut,
+                                  const QString& shortcuts,
                                   const QString& helpGroup,
                                   bool checkable=true,
                                   bool autoRepeat=false,
