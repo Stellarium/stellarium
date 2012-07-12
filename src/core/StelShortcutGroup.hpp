@@ -81,7 +81,7 @@ class StelShortcutGroup : public QObject
 {
 	Q_OBJECT
 public:
-	StelShortcutGroup(QString m_id);
+	StelShortcutGroup(QString id, QString text = "");
 	QAction* registerAction(const QString& actionId, const QString& text, const QString& keys, bool checkable,
 													bool autoRepeat = true, bool global = false, QGraphicsWidget *parent = false);
 
@@ -90,6 +90,7 @@ public:
 	QList<StelShortcut*> getActionList() const;
 
 	QString getId() const { return m_id; }
+	QString getText() const { return m_text; }
 
 signals:
 
@@ -100,6 +101,7 @@ public slots:
 
 private:
 	QString m_id;
+	QString m_text;
 	QMap<QString, StelShortcut*> m_shortcuts;
 };
 

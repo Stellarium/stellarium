@@ -1,8 +1,9 @@
 {
 	"groups":
 	{
-		"Display Options":
+		"DisplayOptions":
 		{
+			"text" : "Display Options",
 			"actions":
 			{
 				"actionShow_Constellation_Lines":
@@ -233,6 +234,7 @@
 		},
 		"Windows":
 		{
+			"text" : "Windows",
 			"actions":
 			{
 				"actionShow_Help_Window_Global":
@@ -293,8 +295,9 @@
 				}
 			}
 		},
-		"Date and Time":
+		"DateAndTime":
 		{
+			"text" : "Date and Time",
 			"actions":
 			{
 				"actionDecrease_Script_Speed":
@@ -483,8 +486,9 @@
 				}
 			}
 		},
-		"Movement and Selection":
+		"MovementAndSelection":
 		{
+			"text" : "Movement and Selection",
 			"actions":
 			{
 				"actionGoto_Selected_Object":
@@ -531,6 +535,7 @@
 		},
 		"Miscellaneous":
 		{
+			"text": "Miscellaneous",
 			"actions":
 			{
 				"actionSwitch_Equatorial_Mount":
@@ -593,6 +598,7 @@
 		},
 		"Scripts":
 		{
+			"text" : "Scripts",
 			"prefix": "Ctrl+U",
 			"actions":
 			{
@@ -628,8 +634,9 @@
 				}
 			}
 		},
-		"Plugin Key Bindings":
+		"PluginKeyBindings":
 		{
+			"text" : "Plugin Key Bindings",
 			"actions":
 			{
 				"actionShow_Exoplanets_ConfigDialog":

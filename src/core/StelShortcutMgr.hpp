@@ -47,7 +47,7 @@ public:
 	//! @param autoRepeat whether the action should be autorepeated
 	//! @param global whether the action should be global (affect in dialogs)
 	QAction* addGuiAction(const QString& actionId, const QString& text, const QString& shortcuts,
-												const QString& group, bool checkable=true, bool autoRepeat=false, bool global=false);
+												const QString& groupId, bool checkable=true, bool autoRepeat=false, bool global=false);
 
 	void changeActionPrimaryKey(const QString& actionId, const QString& groupId, QKeySequence newKey);
 	void changeActionAltKey(const QString& actionId, const QString& groupId, QKeySequence newKey);
