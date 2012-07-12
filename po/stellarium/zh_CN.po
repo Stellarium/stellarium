@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-07-10 01:06+0700\n"
-"PO-Revision-Date: 2012-06-29 10:56+0000\n"
+"PO-Revision-Date: 2012-07-12 04:04+0000\n"
 "Last-Translator: forest93 <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-10 05:32+0000\n"
-"X-Generator: Launchpad (build 15558)\n"
+"X-Launchpad-Export-Date: 2012-07-12 04:39+0000\n"
+"X-Generator: Launchpad (build 15593)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -946,7 +946,7 @@ msgstr "复制选中天体的信息到剪贴板"
 
 #: src/gui/StelGui.cpp:189
 msgid "Go to home"
-msgstr ""
+msgstr "返回"
 
 #: src/gui/StelGui.cpp:191
 msgid "Auto hide horizontal button bar"
@@ -3179,11 +3179,11 @@ msgstr "显示翻转按键"
 
 #: src/ui_configurationDialog.h:860
 msgid "Toggle display backgrounds of the nebulae."
-msgstr ""
+msgstr "显示/隐藏星云的背景。"
 
 #: src/ui_configurationDialog.h:862
 msgid "Show nebula background button"
-msgstr ""
+msgstr "显示星云背景按钮"
 
 #: src/ui_configurationDialog.h:863
 msgid "Planetarium options"
@@ -3906,7 +3906,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:462
 msgid "Opens the pop-up navigation menu."
-msgstr ""
+msgstr "显示弹出式导航菜单"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Enable only if an object is selected"
@@ -3938,7 +3938,7 @@ msgstr "屏幕上的控制栏"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:879
 msgid "Use degrees and minutes for FOV of CCD"
-msgstr ""
+msgstr "使用度和分来表示CCD的视场"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:214
@@ -5431,7 +5431,7 @@ msgstr "错误，未知的颜色部分“%1%%”"
 
 #: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
 msgid " [RETURN to activate]"
-msgstr ""
+msgstr " [请按回车键以启用]"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:56
 msgid "Solar System Editor"
@@ -5702,6 +5702,7 @@ msgid ""
 "can be seen %1here%2 (right scale in days), and this model is used for this "
 "plugin."
 msgstr ""
+"此插件使用了一个简单的模型来为不同的超新星实现光变曲线。用于此插件计算的类型Ⅰ与类型Ⅱ的超新星的典型光变曲线可以在%1此处%2看到（以天计）。"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 msgid "Acknowledgments"
@@ -5734,7 +5735,7 @@ msgstr "在俄罗斯"
 msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of catalog, you can %1get info here%2."
-msgstr ""
+msgstr "如果您想了解此插件的完整信息、其历史以及编录格式，请%1点击此处%2。"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
@@ -5846,11 +5847,11 @@ msgstr "脉冲星"
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
-msgstr ""
+msgstr "此插件可以显示各种脉冲星的位置，以及每个脉冲星的详情。"
 
 #: plugins/Pulsars/src/Pulsars.cpp:146
 msgid "Pulsars configuration window"
-msgstr ""
+msgstr "脉冲星设置窗口"
 
 #: plugins/Pulsars/src/Pulsar.cpp:129
 msgid "pulsar"
@@ -5900,7 +5901,7 @@ msgstr "偏心率： %1"
 #: plugins/Pulsars/src/Pulsar.cpp:174
 #, qt-format
 msgid "Annual parallax: %1 mas"
-msgstr ""
+msgstr "周年视差：%1 毫弧秒"
 
 #: plugins/Pulsars/src/Pulsar.cpp:178
 #, qt-format
@@ -5933,7 +5934,7 @@ msgstr "毫央"
 #: plugins/Pulsars/src/Pulsar.cpp:222
 #, qt-format
 msgid "Notes: %1"
-msgstr ""
+msgstr "说明：%1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:291
 msgid ""
@@ -5942,7 +5943,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:296
 msgid "has one or more binary companions"
-msgstr ""
+msgstr "存在至少一个伴星"
 
 #: plugins/Pulsars/src/Pulsar.cpp:301
 msgid "with pulsed emission from radio to infrared or higher frequencies"
@@ -5980,15 +5981,15 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
 msgid "Note"
-msgstr ""
+msgstr "说明"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr ""
+msgstr "脉冲星的标识符有“PSR”前缀"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 msgid "Acknowledgment"
-msgstr ""
+msgstr "鸣谢"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
@@ -6004,31 +6005,31 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Nancay Radioastronomical Observatory"
-msgstr ""
+msgstr "楠赛射电天文台"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
 msgid "in France"
-msgstr ""
+msgstr "（法国）"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:212
 msgid "Pulsars is updated"
-msgstr ""
+msgstr "脉冲星已更新"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:249
 msgid "Pulsars Configuration"
-msgstr ""
+msgstr "脉冲星设置"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:250
 msgid "Pulsars Plug-in Configuration"
-msgstr ""
+msgstr "脉冲星插件设置"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Display mode for pulsars"
-msgstr ""
+msgstr "脉冲星显示模式"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 msgid "Enable display of distribution for pulsars"
-msgstr ""
+msgstr "显示脉冲星的分布"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:71
 msgid "Exoplanets"
