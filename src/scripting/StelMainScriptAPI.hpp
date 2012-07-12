@@ -514,6 +514,10 @@ public slots:
 	//! if the script rate was 1.
 	void setScriptRate(double r);
 
+	//! Pause the currently running script. Note that you may need to use 
+	//! the key '6' or the GUI to resume script execution.
+	void pauseScript();
+
 	//! Set the amount of selected object information to display
 	//! @param level can be "AllInfo", "ShortInfo", "None"
 	void setSelectedObjectInfo(const QString& level);

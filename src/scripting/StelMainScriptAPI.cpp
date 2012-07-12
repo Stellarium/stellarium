@@ -540,6 +540,11 @@ void StelMainScriptAPI::setScriptRate(double r)
         return StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(r);
 }
 
+void StelMainScriptAPI::pauseScript()
+{
+	return StelMainGraphicsView::getInstance().getScriptMgr().pauseScript();
+}
+
 void StelMainScriptAPI::setSelectedObjectInfo(const QString& level)
 {
 	if (level == "AllInfo")
