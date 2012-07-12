@@ -149,7 +149,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionDecrease_Script_Speed", N_("Slow down the script execution rate"), "", group, false, false);
 	addGuiActions("actionIncrease_Script_Speed", N_("Speed up the script execution rate"), "", group, false, false);
 	addGuiActions("actionSet_Real_Script_Speed", N_("Set the normal script execution rate"), "", group, false, false);
-	addGuiActions("actionStop_Script", N_("Pause script execution"), "", group, false, false);
+	addGuiActions("actionStop_Script", N_("Stop script execution"), "", group, false, false);
 	addGuiActions("actionPause_Script", N_("Pause script execution"), "", group, false, false);
 	addGuiActions("actionResume_Script", N_("Resume script execution"), "", group, false, false);
 	addGuiActions("actionDecrease_Time_Speed", N_("Decrease time speed"), "J", group, false, false);
