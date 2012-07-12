@@ -176,8 +176,8 @@ QList<QKeySequence> StelShortcut::splitShortcuts(const QString &shortcuts)
 
 
 
-StelShortcutGroup::StelShortcutGroup(QString id) :
-	m_id(id)
+StelShortcutGroup::StelShortcutGroup(QString id, QString text) :
+	m_id(id), m_text(text)
 {
 }
 

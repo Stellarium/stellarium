@@ -121,6 +121,7 @@ int ShortcutLineEdit::getModifiers(Qt::KeyboardModifiers state, const QString &t
 		result |= Qt::SHIFT;
 	if (state & Qt::ControlModifier)
 		result |= Qt::CTRL;
+	// META key is the same as WIN key on non-MACs
 	if (state & Qt::MetaModifier)
 		result |= Qt::META;
 	if (state & Qt::AltModifier)
@@ -338,7 +339,8 @@ void ShortcutsDialog::createDialogContent()
 		QTreeWidgetItem* groupItem = new QTreeWidgetItem(ui->shortcutsTreeWidget);
 		// group items aren't selectable
 		groupItem->setFlags(Qt::ItemIsEnabled);
-		groupItem->setText(0, group->getId());
+		QString text((group->getText().isEmpty() ? group->getId() : group->getText()));
+		groupItem->setText(0, text);
 		// store id
 		groupItem->setData(0, Qt::UserRole, group->getId());
 		groupItem->setExpanded(true);

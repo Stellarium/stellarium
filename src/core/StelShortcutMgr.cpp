@@ -43,13 +43,15 @@ void StelShortcutMgr::init()
 // dialog take care of translating them. Of course, they still have to be
 // marked for translation using the N_() macro.
 QAction* StelShortcutMgr::addGuiAction(const QString& actionId, const QString& text, const QString& shortcuts,
-																			 const QString& group, bool checkable, bool autoRepeat, bool global)
+																			 const QString& groupId, bool checkable, bool autoRepeat, bool global)
 {
-	if (!shGroups.contains(group))
+	if (!shGroups.contains(groupId))
 	{
-		shGroups[group] = new StelShortcutGroup(group);
+		qWarning() << "Implicitly creating group " << groupId
+							 << "for action " << actionId << "; group text is empty";
+		shGroups[groupId] = new StelShortcutGroup(groupId);
 	}
-	return shGroups[group]->registerAction(actionId, text, shortcuts, checkable,
+	return shGroups[groupId]->registerAction(actionId, text, shortcuts, checkable,
 																				 autoRepeat, global, stelAppGraphicsWidget);
 }
 
@@ -153,10 +155,21 @@ bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 
 	for (QMap<QString, QVariant>::iterator group = groups.begin(); group != groups.end(); ++group)
 	{
+		// parsing shortcuts' group parameters
 		QMap<QString, QVariant> groupMap = group.value().toMap();
 		QString groupId = group.key();
+		QString groupText = groupMap["text"].toString();
 		QString groupPrefix = (groupMap.contains("prefix") ? (groupMap["prefix"].toString() + ",") : "");
-		QMap<QString, QVariant> actions = group.value().toMap()["actions"].toMap();
+		// creating group
+		if (shGroups.contains(groupId))
+		{
+			qWarning() << "Dubbing group id - " << groupId;
+		}
+		else
+		{
+			shGroups[groupId] = new StelShortcutGroup(groupId, groupText);
+		}
+		QMap<QString, QVariant> actions = groupMap["actions"].toMap();
 		for (QMap<QString, QVariant>::iterator action = actions.begin(); action != actions.end(); ++action)
 		{
 			QString actionId = action.key();
