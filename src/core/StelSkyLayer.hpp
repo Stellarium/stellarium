@@ -22,6 +22,7 @@
 #include <QObject>
 #include <QString>
 #include <QSharedPointer>
+#include "StelCore.hpp"
 
 class StelCore;
 class StelPainter;
@@ -52,6 +53,12 @@ public:
 	//! links and copyrights.
 	virtual QString getLayerDescriptionHtml() const {return "No description.";}
 
+	//! Set the reference frame type.
+	void setFrameType(StelCore::FrameType ft) {frameType = ft;}
+
+	//! Get the reference frame type.
+	StelCore::FrameType getFrameType() {return frameType;}
+
 signals:
 	//! Emitted when loading of data started or stopped.
 	//! @param b true if data loading started, false if finished.
@@ -60,6 +67,9 @@ signals:
 	//! Emitted when the percentage of loading tiles/tiles to be displayed changed.
 	//! @param percentage the percentage of loaded data.
 	void percentLoadedChanged(int percentage);
+private:
+	//! Reference frametype for painter
+	StelCore::FrameType frameType;
 };
 
 //! @file StelSkyLayerMgr.hpp
