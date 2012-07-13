@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-11 18:38+0700\n"
-"PO-Revision-Date: 2011-12-14 17:51+0000\n"
-"Last-Translator: BRIJESH E.P <Unknown>\n"
+"POT-Creation-Date: 2012-07-10 01:06+0700\n"
+"PO-Revision-Date: 2012-06-26 08:49+0000\n"
+"Last-Translator: Sibi Antony <Unknown>\n"
 "Language-Team: Malayalam <ml@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-12 04:50+0000\n"
-"X-Generator: Launchpad (build 15389)\n"
+"X-Launchpad-Export-Date: 2012-07-10 05:28+0000\n"
+"X-Generator: Launchpad (build 15558)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -62,12 +62,14 @@ msgstr "തരം: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:101 src/core/modules/Planet.cpp:121
 #: plugins/Supernovae/src/Supernova.cpp:104 plugins/Quasars/src/Quasar.cpp:109
+#: plugins/Exoplanets/src/Exoplanet.cpp:151
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:124
 #: plugins/Supernovae/src/Supernova.cpp:107 plugins/Quasars/src/Quasar.cpp:121
+#: plugins/Exoplanets/src/Exoplanet.cpp:156
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "കാന്തിമാനം: <b>%1</b>"
@@ -186,12 +188,14 @@ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:130
+#: plugins/Exoplanets/src/Exoplanet.cpp:166
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "വര്‍ണരാജി ഗണം: %1"
 
 #: src/core/modules/StarWrapper.cpp:134
 #: plugins/Supernovae/src/Supernova.cpp:117
+#: plugins/Exoplanets/src/Exoplanet.cpp:171
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "ദൂരം: %1 പ്രകാശ വര്‍ഷങ്ങള്‍"
@@ -338,7 +342,7 @@ msgstr "Az/Alt: %1/%2"
 
 #: src/core/SimbadSearcher.cpp:55
 msgid "Network error"
-msgstr ""
+msgstr "നെറ്റ്‌വര്‍ക്ക് പിഴവു്"
 
 #: src/core/SimbadSearcher.cpp:92 src/core/SimbadSearcher.cpp:104
 msgid "Error parsing position"
@@ -346,64 +350,65 @@ msgstr ""
 
 #: src/core/SimbadSearcher.cpp:130
 msgid "Querying"
-msgstr ""
+msgstr "ക്വറി ചെയ്യുന്നു"
 
 #: src/core/SimbadSearcher.cpp:132
 msgid "Error"
-msgstr ""
+msgstr "പിഴവ്"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Not found"
-msgstr ""
+msgstr "ലഭ്യമല്ല"
 
 #: src/core/SimbadSearcher.cpp:134
 msgid "Found"
-msgstr ""
+msgstr "ലഭ്യമാണ്"
 
-#: src/gui/ConfigurationDialog.cpp:346
+#: src/gui/ConfigurationDialog.cpp:349
 msgid "Select screenshot directory"
 msgstr "സ്ക്രീന്‍ഷോട്ടിനുള്ള ഡയറക്ടറി തിരഞ്ഞെടുക്കുക"
 
-#: src/gui/ConfigurationDialog.cpp:524
+#: src/gui/ConfigurationDialog.cpp:528
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "തുടക്കത്തിലെ FOV: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:532
+#: src/gui/ConfigurationDialog.cpp:536
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "തുടക്കത്തിലെ വീക്ഷണ ദിശ Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:574
-#: plugins/Oculars/src/gui/OcularDialog.cpp:419
+#: src/gui/ConfigurationDialog.cpp:578
+#: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "രചയിതാക്കള്‍"
 
-#: src/gui/ConfigurationDialog.cpp:575 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:579 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "വിലാസം"
 
-#: src/gui/ConfigurationDialog.cpp:658
+#: src/gui/ConfigurationDialog.cpp:662
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:108
 msgid "Author"
 msgstr "രചയിതാവ്"
 
-#: src/gui/ConfigurationDialog.cpp:662
+#: src/gui/ConfigurationDialog.cpp:666
 msgid "License"
 msgstr "അനുമതിപത്രം"
 
-#: src/gui/ConfigurationDialog.cpp:688
+#: src/gui/ConfigurationDialog.cpp:692
 msgid "Running script: "
 msgstr "പ്രവര്‍ത്തിച്ചുകൊണ്ടിരിക്കുന്ന സ്ക്രിപ്റ്റ്: "
 
-#: src/gui/ConfigurationDialog.cpp:695
+#: src/gui/ConfigurationDialog.cpp:699
 msgid "Running script: [none]"
 msgstr "പ്രവര്‍ത്തിച്ചുകൊണ്ടിരിക്കുന്ന സ്ക്രിപ്റ്റ്: [ശൂന്യം]"
 
-#: src/gui/ConfigurationDialog.cpp:765
+#: src/gui/ConfigurationDialog.cpp:769
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -412,16 +417,16 @@ msgstr ""
 "പൂര്‍ത്തീകരിച്ചിരിക്കുന്നു!\n"
 "അവ പ്രദര്‍ശിപ്പിക്കുവാന്‍ സ്റ്റെല്ലേറിയം റീസ്റ്റാര്‍ട്ട് ചെയ്യുക."
 
-#: src/gui/ConfigurationDialog.cpp:769
+#: src/gui/ConfigurationDialog.cpp:773
 msgid "All available star catalogs have been installed."
 msgstr "ലഭ്യമായ നക്ഷത്ര കാറ്റലോഗുകള്‍ ഇന്‍സ്റ്റാള്‍ ചെയ്തിരിക്കുന്നു."
 
-#: src/gui/ConfigurationDialog.cpp:774
+#: src/gui/ConfigurationDialog.cpp:778
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "കാറ്റലോഗ് ലഭ്യമാക്കുന്നു %1 of %2"
 
-#: src/gui/ConfigurationDialog.cpp:781
+#: src/gui/ConfigurationDialog.cpp:785
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -430,7 +435,7 @@ msgstr ""
 "%1 ഡൌണ്‍ലോഡ് ചെയ്തുകൊണ്ടിരിക്കുന്നു...\n"
 "(ഈ ജാലകം അടക്കുന്നതിന് കുഴപ്പമില്ല.)"
 
-#: src/gui/ConfigurationDialog.cpp:788
+#: src/gui/ConfigurationDialog.cpp:792
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -441,7 +446,7 @@ msgstr ""
 "നക്ഷത്രങ്ങളുടെ എണ്ണം: %2 മില്യണ്‍\n"
 "കാന്തിമാന പരിധി: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:831 src/gui/ConfigurationDialog.cpp:867
+#: src/gui/ConfigurationDialog.cpp:835 src/gui/ConfigurationDialog.cpp:871
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -450,11 +455,11 @@ msgstr ""
 "%1 ഡൌണ്‍ലോഡ് ചെയ്യുന്നതില്‍ പിഴവ്:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:919
+#: src/gui/ConfigurationDialog.cpp:923
 msgid "Verifying file integrity..."
 msgstr "പ്രമാണത്തിന്റെ സാധുത പരിശോധിച്ചുകൊണ്ടിരിക്കുന്നു"
 
-#: src/gui/ConfigurationDialog.cpp:923
+#: src/gui/ConfigurationDialog.cpp:927
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -492,7 +497,7 @@ msgstr "വലത് ഞെക്കല്‍"
 msgid "CTRL + Left click"
 msgstr "CTRL + Left click"
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:176
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:177
 msgid "Movement and Selection"
 msgstr "ചലനവും തെരഞ്ഞെടുപ്പും"
 
@@ -520,40 +525,41 @@ msgstr "ഒരു സ്ക്രിപ്റ്റ് പ്രവര്‍ത�
 msgid "Stop currently running script"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:151 src/gui/StelGui.cpp:152
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:152 src/gui/StelGui.cpp:153
 msgid "Pause script execution"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:153
+#: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:154
 msgid "Resume script execution"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:148
+#: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:149
 msgid "Slow down the script execution rate"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:77 src/gui/StelGui.cpp:149
+#: src/gui/HelpDialog.cpp:77 src/gui/StelGui.cpp:150
 msgid "Speed up the script execution rate"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:78 src/gui/StelGui.cpp:150
+#: src/gui/HelpDialog.cpp:78 src/gui/StelGui.cpp:151
 msgid "Set the normal script execution rate"
 msgstr ""
 
 #. TRANSLATORS: Title of a group of key bindings in the Help window
 #: src/gui/HelpDialog.cpp:81 plugins/AngleMeasure/src/AngleMeasure.cpp:126
 #: plugins/CompassMarks/src/CompassMarks.cpp:124
-#: plugins/Oculars/src/Oculars.cpp:1188
+#: plugins/Oculars/src/Oculars.cpp:1190
 #: plugins/Satellites/src/Satellites.cpp:128
-#: plugins/Supernovae/src/Supernovae.cpp:143
-#: plugins/Quasars/src/Quasars.cpp:146 plugins/Pulsars/src/Pulsars.cpp:146
+#: plugins/Supernovae/src/Supernovae.cpp:141
+#: plugins/Quasars/src/Quasars.cpp:144 plugins/Pulsars/src/Pulsars.cpp:144
+#: plugins/Exoplanets/src/Exoplanets.cpp:157
 msgid "Plugin Key Bindings"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:82
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:82
 msgid "Text User Interface"
-msgstr ""
+msgstr "ടെക്സ്റ്റ്‌  യൂസര്‍ ഇന്റര്‍ഫേസ്"
 
 #: src/gui/HelpDialog.cpp:171
 msgid "Stellarium Help"
@@ -615,7 +621,7 @@ msgstr ""
 "{Forums} - സ്റ്റെല്ലേറിയത്തെക്കുറിച്ച് മറ്റുപയോക്താക്കളുമായി സംവദിക്കുക."
 
 #: src/gui/HelpDialog.cpp:242 src/gui/HelpDialog.cpp:345
-#: src/gui/HelpDialog.cpp:347 src/gui/StelGui.cpp:183
+#: src/gui/HelpDialog.cpp:347 src/gui/StelGui.cpp:184
 msgid "Miscellaneous"
 msgstr "മറ്റുള്ളവ"
 
@@ -667,305 +673,309 @@ msgstr ""
 msgid "OSX Developer: %1"
 msgstr "OSX രചയിതാവ് : %1"
 
-#: src/gui/StelGui.cpp:102
+#: src/gui/StelGui.cpp:103
 msgid "Display Options"
 msgstr "പ്രദര്‍ശ്ന ഐച്ഛീകങ്ങള്‍"
 
-#: src/gui/StelGui.cpp:103
+#: src/gui/StelGui.cpp:104
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Constellation lines"
 msgstr "നക്ഷത്രരാശിയുടെ രേഖകള്‍"
 
-#: src/gui/StelGui.cpp:104
+#: src/gui/StelGui.cpp:105
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:278
 msgid "Constellation art"
 msgstr "നക്ഷത്രരാശിയുടെ കലാരൂപം"
 
-#: src/gui/StelGui.cpp:105
+#: src/gui/StelGui.cpp:106
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:273
 msgid "Constellation labels"
 msgstr "നക്ഷത്രരാശിയുടെ ലേബല്‍"
 
-#: src/gui/StelGui.cpp:106
+#: src/gui/StelGui.cpp:107
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Constellation boundaries"
 msgstr "നക്ഷത്രരാശിയുടെ അതിരുകള്‍"
 
-#: src/gui/StelGui.cpp:108 src/ui_viewDialog.h:1159
+#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Azimuthal grid"
 msgstr "അഗ്രകോടി വരകള്‍"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1157
+#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial grid"
 msgstr "ഭൂമധ്യരേഖാപരമായ വരകള്‍"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1156
+#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equatorial J2000 grid"
 msgstr ""
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1158
+#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
 msgstr ""
 
-#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1160
+#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Galactic grid"
 msgstr "ആകാശഗംഗ വരകള്‍"
 
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1180
+#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
 msgstr "ആകാശഗംഗ  തലം"
 
-#: src/gui/StelGui.cpp:114
+#: src/gui/StelGui.cpp:115
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
 msgid "Ecliptic line"
 msgstr "ക്രാന്തിവൃത്ത രേഖ"
 
-#: src/gui/StelGui.cpp:115
+#: src/gui/StelGui.cpp:116
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Equator line"
 msgstr "ഭൂമധ്യരേഖ"
 
-#: src/gui/StelGui.cpp:116
+#: src/gui/StelGui.cpp:117
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Meridian line"
 msgstr "ഉച്ചസ്ഥാന രേഖ"
 
-#: src/gui/StelGui.cpp:117
+#: src/gui/StelGui.cpp:118
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Horizon line"
 msgstr "ചക്രവാളം രേഖ"
 
-#: src/gui/StelGui.cpp:118 src/ui_viewDialog.h:1181
+#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Cardinal points"
 msgstr "ദിശാ സൂചകങ്ങള്‍"
 
-#: src/gui/StelGui.cpp:120
+#: src/gui/StelGui.cpp:121
 msgid "Ground"
 msgstr "ഭൗമോപരിതലം"
 
-#: src/gui/StelGui.cpp:121 src/ui_viewDialog.h:1130
+#: src/gui/StelGui.cpp:122 src/ui_viewDialog.h:1130
 msgid "Atmosphere"
 msgstr "അന്തരീക്ഷം"
 
-#: src/gui/StelGui.cpp:122
+#: src/gui/StelGui.cpp:123
 msgid "Fog"
 msgstr "മൂടല്‍ മഞ്ഞ്"
 
-#: src/gui/StelGui.cpp:124 src/ui_viewDialog.h:1139
+#: src/gui/StelGui.cpp:125 src/ui_viewDialog.h:1139
 msgid "Nebulas"
 msgstr "നെബുലകള്‍"
 
-#: src/gui/StelGui.cpp:125
+#: src/gui/StelGui.cpp:126
 msgid "Nebulas background images"
 msgstr "നെബുലകളുടെ ചിത്രങ്ങള്‍"
 
-#: src/gui/StelGui.cpp:126 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
+#: src/gui/StelGui.cpp:127 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Stars"
 msgstr "നക്ഷത്രങ്ങള്‍"
 
-#: src/gui/StelGui.cpp:127
+#: src/gui/StelGui.cpp:128
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Planet labels"
 msgstr "ഗ്രഹങ്ങളുടെ പേര് കാണിക്കുക"
 
-#: src/gui/StelGui.cpp:128
+#: src/gui/StelGui.cpp:129
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:301
 msgid "Planet orbits"
 msgstr "ഗ്രഹ പ്രദക്ഷിണപഥം"
 
-#: src/gui/StelGui.cpp:129
+#: src/gui/StelGui.cpp:130
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Planet trails"
 msgstr ""
 
-#: src/gui/StelGui.cpp:131
+#: src/gui/StelGui.cpp:132
 msgid "Night mode"
 msgstr "രാത്രിദൃശ്യം"
 
-#: src/gui/StelGui.cpp:132
+#: src/gui/StelGui.cpp:133
 msgid "Full-screen mode"
 msgstr "ഫുള്‍-സ്ക്രീന്‍ മോഡ്"
 
-#: src/gui/StelGui.cpp:133
+#: src/gui/StelGui.cpp:134
 msgid "Flip scene horizontally"
 msgstr "തിരശ്ശീല തിരശ്ചീനദിശയില്‍ വിപരീതമാക്കുക"
 
-#: src/gui/StelGui.cpp:134
+#: src/gui/StelGui.cpp:135
 msgid "Flip scene vertically"
 msgstr "ആകാശ ക്രമീകരണ ജാലകം [F4]"
 
-#: src/gui/StelGui.cpp:136
+#: src/gui/StelGui.cpp:137
 msgid "Windows"
 msgstr "ജാലകങ്ങള്‍"
 
-#: src/gui/StelGui.cpp:137
+#: src/gui/StelGui.cpp:138
 msgid "Help window"
 msgstr "സഹായ ജാലകം"
 
-#: src/gui/StelGui.cpp:138
+#: src/gui/StelGui.cpp:139
 msgid "Configuration window"
 msgstr "ക്രമീകരണ ജാലകം"
 
-#: src/gui/StelGui.cpp:139
+#: src/gui/StelGui.cpp:140
 msgid "Search window"
 msgstr "തെരച്ചില്‍ ജാലകം"
 
-#: src/gui/StelGui.cpp:140
+#: src/gui/StelGui.cpp:141
 msgid "Sky and viewing options window"
 msgstr "ആകാശ-ദൃശ്യ ക്രമീകരണ ജാലകം"
 
-#: src/gui/StelGui.cpp:141
+#: src/gui/StelGui.cpp:142
 msgid "Date/time window"
 msgstr "തീയതി/സമയ ജാലകം"
 
-#: src/gui/StelGui.cpp:142
+#: src/gui/StelGui.cpp:143
 msgid "Location window"
 msgstr "സ്ഥാന ജാലകം"
 
-#: src/gui/StelGui.cpp:144
+#: src/gui/StelGui.cpp:145
 msgid "Script console window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:147 src/ui_dateTimeDialogGui.h:294
+#: src/gui/StelGui.cpp:148 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Date and Time"
 msgstr "തീയതിയും സമയവും"
 
-#: src/gui/StelGui.cpp:154
+#: src/gui/StelGui.cpp:155
 msgid "Decrease time speed"
 msgstr "സമയവേഗത കുറയ്ക്കുക"
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:156
 msgid "Increase time speed"
 msgstr "സമയവേഗത കൂട്ടുക"
 
-#: src/gui/StelGui.cpp:156
+#: src/gui/StelGui.cpp:157
 msgid "Set normal time rate"
 msgstr "സമയവേഗത സാധാരണ നിലയിലാക്കുക"
 
-#: src/gui/StelGui.cpp:157
+#: src/gui/StelGui.cpp:158
 msgid "Decrease time speed (a little)"
 msgstr "സമയവേഗത കുറയ്ക്കുക (ചെറുതായി)"
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:159
 msgid "Increase time speed (a little)"
 msgstr "സമയവേഗത കൂട്ടുക (ചെറുതായി)"
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:160
 msgid "Set time rate to zero"
 msgstr "സമയവേഗതയിലെ നിരക്ക് പൂജ്യമാക്കുക"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:161
 msgid "Set time to now"
 msgstr "സമയം നിലവിലെ സമയമാക്കുക"
 
-#: src/gui/StelGui.cpp:161
+#: src/gui/StelGui.cpp:162
 msgid "Add 1 solar hour"
 msgstr "1 സൗരമണിക്കൂര്‍ കൂട്ടുക"
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:163
 msgid "Subtract 1 solar hour"
 msgstr "1 സൗരമണിക്കൂര്‍ കുറയ്ക്കുക"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:164
 msgid "Add 1 solar day"
 msgstr "1 സൗരദിനം കൂട്ടുക"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:165
 msgid "Subtract 1 solar day"
 msgstr "1 സൗരദിനം കുറയ്ക്കുക"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:166
 msgid "Add 1 solar week"
 msgstr "1 സൗരആഴ്ച കൂട്ടുക"
 
-#: src/gui/StelGui.cpp:166
+#: src/gui/StelGui.cpp:167
 msgid "Subtract 1 solar week"
 msgstr "1 സൗരആഴ്ച കുറയ്ക്കുക"
 
-#: src/gui/StelGui.cpp:167
+#: src/gui/StelGui.cpp:168
 msgid "Add 1 sidereal day"
 msgstr "1 സൈഡീരിയല്‍ ദിവസം കൂട്ടുക"
 
-#: src/gui/StelGui.cpp:168
+#: src/gui/StelGui.cpp:169
 msgid "Subtract 1 sidereal day"
 msgstr "1 സൈഡീരിയല്‍ ദിവസം കുറയ്ക്കുക"
 
-#: src/gui/StelGui.cpp:169
+#: src/gui/StelGui.cpp:170
 msgid "Add 1 sidereal week"
 msgstr "1 സൈഡീരിയല്‍ ആഴ്ച കൂട്ടുക"
 
-#: src/gui/StelGui.cpp:170
+#: src/gui/StelGui.cpp:171
 msgid "Subtract 1 sidereal week"
 msgstr "1 സൈഡീരിയല്‍ ആഴ്ച കുറയ്ക്കുക"
 
-#: src/gui/StelGui.cpp:171
+#: src/gui/StelGui.cpp:172
 msgid "Add 1 sidereal month"
 msgstr ""
 
-#: src/gui/StelGui.cpp:172
+#: src/gui/StelGui.cpp:173
 msgid "Subtract 1 sidereal month"
 msgstr ""
 
-#: src/gui/StelGui.cpp:173
+#: src/gui/StelGui.cpp:174
 msgid "Add 1 sidereal year"
 msgstr ""
 
-#: src/gui/StelGui.cpp:174
+#: src/gui/StelGui.cpp:175
 msgid "Subtract 1 sidereal year"
 msgstr ""
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:178
 msgid "Center on selected object"
 msgstr "തിരഞ്ഞെടുത്ത വസ്തുവിനെ മധ്യത്തിലാക്കി പ്രദര്‍ശിപ്പിക്കുക"
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:179
 msgid "Track object"
 msgstr "വസ്തുവിനെ പിന്തുടരുക"
 
-#: src/gui/StelGui.cpp:179
+#: src/gui/StelGui.cpp:180
 msgid "Zoom in on selected object"
 msgstr "തിരഞ്ഞെടുത്ത വസ്തുവിനെ കേന്ദ്രീകരിച്ചു വലുതാക്കി കാണിക്കുക"
 
-#: src/gui/StelGui.cpp:180
+#: src/gui/StelGui.cpp:181
 msgid "Zoom out"
 msgstr "വലുതാക്കുക"
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:182
 msgid "Set home planet to selected planet"
 msgstr "തെരഞ്ഞെടുത്ത ഗ്രഹത്തെ സ്വഗ്രഹമായി ക്രമീകരിക്കുക"
 
-#: src/gui/StelGui.cpp:184
+#: src/gui/StelGui.cpp:185
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "ഭൂമധ്യരേഖാ/അഗ്രകോടി രീതിയിലേക്കോ മാറുക"
 
-#: src/gui/StelGui.cpp:185
+#: src/gui/StelGui.cpp:186
 msgid "Quit"
 msgstr "പുറത്ത് കടക്കുക"
 
-#: src/gui/StelGui.cpp:186
+#: src/gui/StelGui.cpp:187
 msgid "Save screenshot"
 msgstr "സ്ക്രീന്‍ ഷോട്ട് സംരക്ഷിക്കുക"
 
-#: src/gui/StelGui.cpp:187
+#: src/gui/StelGui.cpp:188
 msgid "Copy selected object information to clipboard"
 msgstr ""
 
 #: src/gui/StelGui.cpp:189
+msgid "Go to home"
+msgstr ""
+
+#: src/gui/StelGui.cpp:191
 msgid "Auto hide horizontal button bar"
 msgstr "വിലങ്ങനെയുള്ള ബട്ടണ്‍ ബാര്‍ തനിയെ മറയ്ക്കുക"
 
-#: src/gui/StelGui.cpp:190
+#: src/gui/StelGui.cpp:192
 msgid "Auto hide vertical button bar"
 msgstr "കുത്തനെയുള്ള ബട്ടണ്‍ ബാര്‍ തനിയെ മറയ്ക്കുക"
 
-#: src/gui/StelGui.cpp:191
+#: src/gui/StelGui.cpp:193
 msgid "Toggle visibility of GUI"
 msgstr ""
 
@@ -998,7 +1008,7 @@ msgstr "അസാധാരണ ലിയനോയിഡ് നിരക്ക്"
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "ഏറ്റവും കൂടിയ നിരക്ക് (1966 ലെ ലിയനോയിഡ് )"
 
-#: src/gui/LocationDialog.cpp:401
+#: src/gui/LocationDialog.cpp:408
 msgid "New Location"
 msgstr "പുതിയ സ്ഥാനം"
 
@@ -1111,17 +1121,18 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:507
 msgid "University of Strasbourg (France)"
-msgstr ""
+msgstr "സ്ട്രാസ്ബൌര്‍ഗ് സർവ്വകലാശാല (ഫ്രാൻസ്)"
 
 #: src/gui/SearchDialog.cpp:508
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "ഹാര്‍വാര്‍ഡ് സർവ്വകലാശാല (യു.എസ്‌.എ)"
 
 #: src/main.cpp:337
 msgid "This system does not support OpenGL."
 msgstr "ഈ സിസ്റ്റം OpenGL പിന്താങ്ങുന്നില്ല"
 
-#: src/translations.h:33
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:182
+#: plugins/Exoplanets/src/Exoplanet.cpp:186
 msgid "Sun"
 msgstr "സൂര്യന്‍"
 
@@ -1542,7 +1553,7 @@ msgstr "പാശ്ചാത്യം"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:162
 msgid "Guereins"
-msgstr ""
+msgstr "ഗ്യൂറൈൻസ്"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:164
@@ -1552,17 +1563,17 @@ msgstr ""
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:168
 msgid "Hurricane"
-msgstr ""
+msgstr "ചുഴലിക്കാറ്റ്"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:170
 msgid "Ocean"
-msgstr ""
+msgstr "സമുദ്രം"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:172
 msgid "Garching"
-msgstr ""
+msgstr "ഗാര്‍ഹിംഗ്"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:180
@@ -1577,17 +1588,17 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:184
 msgid "Total Lunar Eclipse"
-msgstr ""
+msgstr "സമ്പൂർണ്ണചന്ദ്രഗ്രഹണം"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
 msgid "Screensaver"
-msgstr ""
+msgstr "സ്‌ക്രീന്‍സേവര്‍"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:188
 msgid "Solar Eclipse 2009"
-msgstr ""
+msgstr "സൂര്യഗ്രഹണം 2009"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:190
@@ -1634,127 +1645,127 @@ msgstr ""
 
 #: src/translations.h:204
 msgid "Andorra"
-msgstr ""
+msgstr "അന്‍ഡോറാ"
 
 #: src/translations.h:205
 msgid "United Arab Emirates"
-msgstr ""
+msgstr "യുണൈറ്റഡ് അറബ് എമിറേറ്റ്സ്"
 
 #: src/translations.h:206
 msgid "Afghanistan"
-msgstr ""
+msgstr "അഫ്ഗാനിസ്ഥാന്‍"
 
 #: src/translations.h:207
 msgid "Antigua and Barbuda"
-msgstr ""
+msgstr "ആന്റിഗ്വാ ആന്‍ഡ് ബാര്‍ബുഡ"
 
 #: src/translations.h:208
 msgid "Anguilla"
-msgstr ""
+msgstr "ആന്‍ഗ്വില"
 
 #: src/translations.h:209
 msgid "Albania"
-msgstr ""
+msgstr "അല്‍ബേനിയ"
 
 #: src/translations.h:210
 msgid "Armenia"
-msgstr ""
+msgstr "അര്‍മേനിയ"
 
 #: src/translations.h:211
 msgid "Netherlands Antilles"
-msgstr ""
+msgstr "നെതര്‍ലന്‍ഡ്സ് ആന്റിലസ്"
 
 #: src/translations.h:212
 msgid "Angola"
-msgstr ""
+msgstr "അംഗോള"
 
 #: src/translations.h:213
 msgid "Antarctica"
-msgstr ""
+msgstr "അന്റാര്‍ട്ടിക്ക"
 
 #: src/translations.h:214
 msgid "Argentina"
-msgstr ""
+msgstr "അര്‍ജന്റീന"
 
 #: src/translations.h:215
 msgid "American Samoa"
-msgstr ""
+msgstr "അമേരിക്കന്‍ സമോവ"
 
 #: src/translations.h:216
 msgid "Austria"
-msgstr ""
+msgstr "ഓസ്‌ട്രിയ"
 
 #: src/translations.h:217
 msgid "Australia"
-msgstr ""
+msgstr "ഓസ്‌ട്രേലിയ"
 
 #: src/translations.h:218
 msgid "Aruba"
-msgstr ""
+msgstr "അറൂബ"
 
 #: src/translations.h:219
 msgid "Azerbaijan"
-msgstr ""
+msgstr "അസ‌ര്‍ബൈജാന്‍"
 
 #: src/translations.h:220
 msgid "Bosnia and Herzegowina"
-msgstr ""
+msgstr "ബോസ്നിയ ആന്റ് ഹെർസെഗോവിന"
 
 #: src/translations.h:221
 msgid "Barbados"
-msgstr ""
+msgstr "ബാര്‍ബാഡോസ്"
 
 #: src/translations.h:222
 msgid "Bangladesh"
-msgstr ""
+msgstr "ബംഗ്ളാദേശ്"
 
 #: src/translations.h:223
 msgid "Belgium"
-msgstr ""
+msgstr "ബെൽജിയം"
 
 #: src/translations.h:224
 msgid "Burkina Faso"
-msgstr ""
+msgstr "ബർക്കിനാ ഫാസോ"
 
 #: src/translations.h:225
 msgid "Bulgaria"
-msgstr ""
+msgstr "ബള്‍ഗേറിയ"
 
 #: src/translations.h:226
 msgid "Bahrain"
-msgstr ""
+msgstr "ബഹറിന്‍"
 
 #: src/translations.h:227
 msgid "Burundi"
-msgstr ""
+msgstr "ബറുണ്ടി"
 
 #: src/translations.h:228
 msgid "Benin"
-msgstr ""
+msgstr "ബെനിന്‍"
 
 #: src/translations.h:229
 msgid "Bermuda"
-msgstr ""
+msgstr "ബെർമുഡ"
 
 #: src/translations.h:230
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "ബ്രൂണെയ് ദാറുസ്സലാം"
 
 #: src/translations.h:231
 msgid "Bolivia"
-msgstr ""
+msgstr "ബൊളീവിയ"
 
 #: src/translations.h:232
 msgid "Brazil"
-msgstr ""
+msgstr "ബ്രസീൽ"
 
 #: src/translations.h:233
 msgid "Bahamas"
-msgstr ""
+msgstr "ബഹാമാസ്"
 
 #: src/translations.h:234
 msgid "Bhutan"
-msgstr ""
+msgstr "ഭൂട്ടാന്‍"
 
 #: src/translations.h:235
 msgid "Bouvet Island"
@@ -1762,839 +1773,839 @@ msgstr ""
 
 #: src/translations.h:236
 msgid "Botswana"
-msgstr ""
+msgstr "ബോട്സ്വാന"
 
 #: src/translations.h:237
 msgid "Belarus"
-msgstr ""
+msgstr "ബെലാറസ്"
 
 #: src/translations.h:238
 msgid "Belize"
-msgstr ""
+msgstr "ബെലീസ്"
 
 #: src/translations.h:239
 msgid "Canada"
-msgstr ""
+msgstr "കാനഡ"
 
 #: src/translations.h:240
 msgid "Cocos Islands"
-msgstr ""
+msgstr "കൊകോസ് ദ്വീപുകള്‍"
 
 #: src/translations.h:241
 msgid "Democratic Republic of the Congo"
-msgstr ""
+msgstr "ഡെമോക്രാറ്റിക് റിപബ്ലിക് ഓഫ് കോംഗോ"
 
 #: src/translations.h:242
 msgid "Central African Republic"
-msgstr ""
+msgstr "മദ്ധ്യ ആഫ്രിക്കൻ റിപ്പബ്ലിക്ക്"
 
 #: src/translations.h:243
 msgid "Republic of the Congo"
-msgstr ""
+msgstr "റിപബ്ലിക് ഓഫ് ദി കോംഗോ"
 
 #: src/translations.h:244
 msgid "Switzerland"
-msgstr ""
+msgstr "സ്വിറ്റ്സ‌ര്‍ലാന്‍ഡ്"
 
 #: src/translations.h:245
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "കോട്ടേ ഡെല്‍‍വോയിര്‍"
 
 #: src/translations.h:246
 msgid "Cook Islands"
-msgstr ""
+msgstr "കുക്ക് ദ്വീപുകള്‍"
 
 #: src/translations.h:247
 msgid "Chile"
-msgstr ""
+msgstr "ചിലി"
 
 #: src/translations.h:248
 msgid "Cameroon"
-msgstr ""
+msgstr "കാമറൂൺ"
 
 #: src/translations.h:249
 msgid "China"
-msgstr ""
+msgstr "ചൈന"
 
 #: src/translations.h:250
 msgid "Colombia"
-msgstr ""
+msgstr "കൊളംബിയ‌"
 
 #: src/translations.h:251
 msgid "Costa Rica"
-msgstr ""
+msgstr "കോസ്റ്റ റീക്ക"
 
 #: src/translations.h:252
 msgid "Serbia and Montenegro"
-msgstr ""
+msgstr "സെര്‍ബിയയും മോണ്ടിനെഗ്രോയും"
 
 #: src/translations.h:253
 msgid "Cuba"
-msgstr ""
+msgstr "ക്യൂബ"
 
 #: src/translations.h:254
 msgid "Cape Verde"
-msgstr ""
+msgstr "കേപ് വെര്‍ഡെ"
 
 #: src/translations.h:255
 msgid "Christmas Island"
-msgstr ""
+msgstr "ക്രിസ്തുമസ് ദ്വീപ്"
 
 #: src/translations.h:256
 msgid "Cyprus"
-msgstr ""
+msgstr "സൈപ്രസ്സ്"
 
 #: src/translations.h:257
 msgid "Czech Republic"
-msgstr ""
+msgstr "ചെക്ക്‌ റിപ്പബ്ലിക്ക്‌"
 
 #: src/translations.h:258
 msgid "Germany"
-msgstr ""
+msgstr "ജ‌ര്‍മ്മനി"
 
 #: src/translations.h:259
 msgid "Djibouti"
-msgstr ""
+msgstr "ജിബൌട്ടി"
 
 #: src/translations.h:260
 msgid "Denmark"
-msgstr ""
+msgstr "ഡെന്മാർക്ക്"
 
 #: src/translations.h:261
 msgid "Dominica"
-msgstr ""
+msgstr "‌ഡൊമിനിക്ക"
 
 #: src/translations.h:262
 msgid "Dominican Republic"
-msgstr ""
+msgstr "‌ഡൊമിനിക്കന്‍ റിപബ്ലിക്ക്"
 
 #: src/translations.h:263
 msgid "Algeria"
-msgstr ""
+msgstr "അള്‍ജീരിയ"
 
 #: src/translations.h:264
 msgid "Ecuador"
-msgstr ""
+msgstr "ഇക്ക്വഡോര്‍"
 
 #: src/translations.h:265
 msgid "Estonia"
-msgstr ""
+msgstr "എസ്റ്റോണിയ"
 
 #: src/translations.h:266
 msgid "Egypt"
-msgstr ""
+msgstr "ഈജിപ്ത്"
 
 #: src/translations.h:267
 msgid "Western Sahara"
-msgstr ""
+msgstr "പശ്ചിമ സഹാറ"
 
 #: src/translations.h:268
 msgid "Eritrea"
-msgstr ""
+msgstr "എറിട്രിയ"
 
 #: src/translations.h:269
 msgid "Spain"
-msgstr ""
+msgstr "സ്പെയിന്‍"
 
 #: src/translations.h:270
 msgid "Ethiopia"
-msgstr ""
+msgstr "എത്യോപ്യ"
 
 #: src/translations.h:271
 msgid "Finland"
-msgstr ""
+msgstr "ഫിന്‍ലാന്റ്"
 
 #: src/translations.h:272
 msgid "Fiji"
-msgstr ""
+msgstr "ഫിജി"
 
 #: src/translations.h:273
 msgid "Falkland Islands"
-msgstr ""
+msgstr "ഫാക്‌ലാന്‍ഡ്  ദ്വീപുകള്‍"
 
 #: src/translations.h:274
 msgid "Micronesia"
-msgstr ""
+msgstr "മൈക്രോണേഷ്യ"
 
 #: src/translations.h:275
 msgid "Faroe Islands"
-msgstr ""
+msgstr "ഫാറോ ദ്വീപുകള്‍"
 
 #: src/translations.h:276
 msgid "France"
-msgstr ""
+msgstr "ഫ്രാന്‍സ്"
 
 #: src/translations.h:277
 msgid "Gabon"
-msgstr ""
+msgstr "ഗാബോണ്‍"
 
 #: src/translations.h:278
 msgid "United Kingdom"
-msgstr ""
+msgstr "യുണൈറ്റഡ് കിങ്ഡം"
 
 #: src/translations.h:279
 msgid "Grenada"
-msgstr ""
+msgstr "ഗ്രനാഡ"
 
 #: src/translations.h:280
 msgid "Georgia"
-msgstr ""
+msgstr "ജോര്‍ജിയ"
 
 #: src/translations.h:281
 msgid "French Guiana"
-msgstr ""
+msgstr "ഫ്രഞ്ച് ഗയാന"
 
 #: src/translations.h:282
 msgid "Ghana"
-msgstr ""
+msgstr "ഘാന"
 
 #: src/translations.h:283
 msgid "Gibraltar"
-msgstr ""
+msgstr "ജിബ്രാള്‍ട്ടര്‍"
 
 #: src/translations.h:284
 msgid "Greenland"
-msgstr ""
+msgstr "ഗ്രീന്‍ലാന്‍ഡ്"
 
 #: src/translations.h:285
 msgid "Gambia"
-msgstr ""
+msgstr "ഗാംബിയ"
 
 #: src/translations.h:286
 msgid "Guinea"
-msgstr ""
+msgstr "ഗിനി"
 
 #: src/translations.h:287
 msgid "Guadeloupe"
-msgstr ""
+msgstr "ഗ്വാഡെലോപ്"
 
 #: src/translations.h:288
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "ഇക്വറ്റോറിയൽ ഗിനി"
 
 #: src/translations.h:289
 msgid "Greece"
-msgstr ""
+msgstr "ഗ്രീസ്"
 
 #: src/translations.h:290
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "തെക്കന്‍ ജോര്‍ജിയയും തെക്കന്‍ സാന്‍ഡ്‌വിച്ചും ദ്വീപുകള്‍"
 
 #: src/translations.h:291
 msgid "Guatemala"
-msgstr ""
+msgstr "ഗ്വാട്ടിമാല"
 
 #: src/translations.h:292
 msgid "Guam"
-msgstr ""
+msgstr "ഗ്വാം"
 
 #: src/translations.h:293
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "ഗിനി-ബിസൗ"
 
 #: src/translations.h:294
 msgid "Guyana"
-msgstr ""
+msgstr "ഗയാന"
 
 #: src/translations.h:295
 msgid "Hong Kong"
-msgstr ""
+msgstr "ഹോങ്കോങ്"
 
 #: src/translations.h:296
 msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgstr "ഹെര്‍ഡ് ദ്വീപും മക്ഡൊണാള്‍ഡ് ദ്വീപുകളും"
 
 #: src/translations.h:297
 msgid "Honduras"
-msgstr ""
+msgstr "ഹോണ്ടുറാസ്"
 
 #: src/translations.h:298
 msgid "Croatia"
-msgstr ""
+msgstr "ക്രോയേഷ്യ"
 
 #: src/translations.h:299
 msgid "Haiti"
-msgstr ""
+msgstr "ഹെയ്‌റ്റി"
 
 #: src/translations.h:300
 msgid "Hungary"
-msgstr ""
+msgstr "ഹംഗറി"
 
 #: src/translations.h:301
 msgid "Indonesia"
-msgstr ""
+msgstr "ഇന്‍ഡോനേഷ്യ"
 
 #: src/translations.h:302
 msgid "Ireland"
-msgstr ""
+msgstr "അയർലണ്ട്"
 
 #: src/translations.h:303
 msgid "Israel"
-msgstr ""
+msgstr "ഇസ്രയേൽ"
 
 #: src/translations.h:304
 msgid "India"
-msgstr ""
+msgstr "ഇന്ത്യ"
 
 #: src/translations.h:305
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "ബ്രിട്ടീഷ് ഇന്ത്യന്‍ മഹാസമുദ്ര പ്രദേശം"
 
 #: src/translations.h:306
 msgid "Iraq"
-msgstr ""
+msgstr "ഇറാഖ്‌"
 
 #: src/translations.h:307
 msgid "Iran"
-msgstr ""
+msgstr "ഇറാൻ"
 
 #: src/translations.h:308
 msgid "Iceland"
-msgstr ""
+msgstr "ഐസ്‌ലാന്റ്"
 
 #: src/translations.h:309
 msgid "Italy"
-msgstr ""
+msgstr "ഇറ്റലി‌"
 
 #: src/translations.h:310
 msgid "Jamaica"
-msgstr ""
+msgstr "ജമൈക്ക"
 
 #: src/translations.h:311
 msgid "Jordan"
-msgstr ""
+msgstr "ജോര്‍ദാന്‍"
 
 #: src/translations.h:312
 msgid "Japan"
-msgstr ""
+msgstr "ജപ്പാൻ"
 
 #: src/translations.h:313
 msgid "Kenya"
-msgstr ""
+msgstr "കെ നി യ"
 
 #: src/translations.h:314
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "കിർഗ്ഗിസ്ഥാൻ"
 
 #: src/translations.h:315
 msgid "Cambodia"
-msgstr ""
+msgstr "കംബോഡിയ"
 
 #: src/translations.h:316
 msgid "Kiribati"
-msgstr ""
+msgstr "കിരീബാസ്"
 
 #: src/translations.h:317
 msgid "Comoros"
-msgstr ""
+msgstr "കൊമോറസ്"
 
 #: src/translations.h:318
 msgid "Saint Kitts and Nevis"
-msgstr ""
+msgstr "സെയ്ന്റ് കിറ്റ്സ് നീവസ്"
 
 #: src/translations.h:319
 msgid "Democratic People's Republic of Korea"
-msgstr ""
+msgstr "ഡെമോക്രാറ്റിക് പീപ്പിള്‍സ് റിപ്പബ്ലിക് ഓഫ് കൊറിയ"
 
 #: src/translations.h:320
 msgid "Republic of Korea"
-msgstr ""
+msgstr "റിപ്പബ്ലിക് ഓഫ് കൊറിയ"
 
 #: src/translations.h:321
 msgid "Kuwait"
-msgstr ""
+msgstr "കുവൈറ്റ്‌"
 
 #: src/translations.h:322
 msgid "Cayman Islands"
-msgstr ""
+msgstr "കേയ്മാന്‍ ദ്വീപുകള്‍"
 
 #: src/translations.h:323
 msgid "Kazakhstan"
-msgstr ""
+msgstr "ഖസാഖ്‌സ്ഥാൻ"
 
 #: src/translations.h:324
 msgid "Lao"
-msgstr ""
+msgstr "ലാവോ"
 
 #: src/translations.h:325
 msgid "Lebanon"
-msgstr ""
+msgstr "ലെബനോണ്‍"
 
 #: src/translations.h:326
 msgid "Saint Lucia"
-msgstr ""
+msgstr "സെയ്ന്റ് ലൂസിയ"
 
 #: src/translations.h:327
 msgid "Liechtenstein"
-msgstr ""
+msgstr "ലിക്റ്റൻ‌സ്റ്റൈൻ"
 
 #: src/translations.h:328
 msgid "Sri Lanka"
-msgstr ""
+msgstr "ശ്രീലങ്ക"
 
 #: src/translations.h:329
 msgid "Liberia"
-msgstr ""
+msgstr "ലൈബീരിയ"
 
 #: src/translations.h:330
 msgid "Lesotho"
-msgstr ""
+msgstr "ലെസോത്തോ"
 
 #: src/translations.h:331
 msgid "Lithuania"
-msgstr ""
+msgstr "ലിത്വാനിയ"
 
 #: src/translations.h:332
 msgid "Luxembourg"
-msgstr ""
+msgstr "ലക്സംബർഗ്"
 
 #: src/translations.h:333
 msgid "Latvia"
-msgstr ""
+msgstr "ലാത്‌വിയ"
 
 #: src/translations.h:334
 msgid "Libyan Arab Jamahiriya"
-msgstr ""
+msgstr "ലിബിയന്‍ അറബ് ജമാഹിരിയ"
 
 #: src/translations.h:335
 msgid "Morocco"
-msgstr ""
+msgstr "മൊറോക്കൊ"
 
 #: src/translations.h:336
 msgid "Monaco"
-msgstr ""
+msgstr "മൊണാക്കോ"
 
 #: src/translations.h:337
 msgid "Moldova"
-msgstr ""
+msgstr "മൊൾഡോവ"
 
 #: src/translations.h:338
 msgid "Madagascar"
-msgstr ""
+msgstr "മഡഗാസ്കര്‍"
 
 #: src/translations.h:339
 msgid "Marshall Islands"
-msgstr ""
+msgstr "മാര്‍ഷല്‍ ദ്വീപുകള്‍"
 
 #: src/translations.h:340
 msgid "Macedonia"
-msgstr ""
+msgstr "മാസിഡോണിയ"
 
 #: src/translations.h:341
 msgid "Mali"
-msgstr ""
+msgstr "മാലി"
 
 #: src/translations.h:342
 msgid "Myanmar"
-msgstr ""
+msgstr "മ്യാന്മാർ"
 
 #: src/translations.h:343
 msgid "Mongolia"
-msgstr ""
+msgstr "മംഗോളിയ"
 
 #: src/translations.h:344
 msgid "Macau"
-msgstr ""
+msgstr "മക്കൌ"
 
 #: src/translations.h:345
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "വടക്കന്‍ മരിയാന ദ്വീപുകള്‍"
 
 #: src/translations.h:346
 msgid "Martinique"
-msgstr ""
+msgstr "മാര്ട്ടിനിക്ക്"
 
 #: src/translations.h:347
 msgid "Mauritania"
-msgstr ""
+msgstr "മൌറിറ്റാനിയ"
 
 #: src/translations.h:348
 msgid "Montserrat"
-msgstr ""
+msgstr "മോണ്ട്സെറാറ്റ്"
 
 #: src/translations.h:349
 msgid "Malta"
-msgstr ""
+msgstr "മാള്‍ട്ട"
 
 #: src/translations.h:350
 msgid "Mauritius"
-msgstr ""
+msgstr "മൗറീഷ്യസ്"
 
 #: src/translations.h:351
 msgid "Maldives"
-msgstr ""
+msgstr "മാലിദ്വീപ്"
 
 #: src/translations.h:352
 msgid "Malawi"
-msgstr ""
+msgstr "മലാവി"
 
 #: src/translations.h:353
 msgid "Mexico"
-msgstr ""
+msgstr "മെക്സിക്കോ"
 
 #: src/translations.h:354
 msgid "Malaysia"
-msgstr ""
+msgstr "മലേഷ്യ"
 
 #: src/translations.h:355
 msgid "Mozambique"
-msgstr ""
+msgstr "മൊസാംബിക്ക്"
 
 #: src/translations.h:356
 msgid "Namibia"
-msgstr ""
+msgstr "നമീബീയ"
 
 #: src/translations.h:357
 msgid "New Caledonia"
-msgstr ""
+msgstr "ന്യൂ സലേഡോണിയ"
 
 #: src/translations.h:358
 msgid "Niger"
-msgstr ""
+msgstr "നൈഗ‌ര്‍"
 
 #: src/translations.h:359
 msgid "Norfolk Island"
-msgstr ""
+msgstr "നോര്‍ഫോക്ക് ദ്വീപു്"
 
 #: src/translations.h:360
 msgid "Nigeria"
-msgstr ""
+msgstr "നൈജീരിയ"
 
 #: src/translations.h:361
 msgid "Nicaragua"
-msgstr ""
+msgstr "നിക്കരാഗ്വ"
 
 #: src/translations.h:362
 msgid "Netherlands"
-msgstr ""
+msgstr "നെഥര്‍ലന്‍ഡ്സ്"
 
 #: src/translations.h:363
 msgid "Norway"
-msgstr ""
+msgstr "നോർവെ"
 
 #: src/translations.h:364
 msgid "Nepal"
-msgstr ""
+msgstr "നേപ്പാള്‍"
 
 #: src/translations.h:365
 msgid "Nauru"
-msgstr ""
+msgstr "നൌറു"
 
 #: src/translations.h:366
 msgid "Niue"
-msgstr ""
+msgstr "നിയൂ"
 
 #: src/translations.h:367
 msgid "New Zealand"
-msgstr ""
+msgstr "ന്യൂസീലൻഡ്"
 
 #: src/translations.h:368
 msgid "Oman"
-msgstr ""
+msgstr "ഒമാന്‍"
 
 #: src/translations.h:369
 msgid "Panama"
-msgstr ""
+msgstr "പനാമ"
 
 #: src/translations.h:370
 msgid "Peru"
-msgstr ""
+msgstr "പെറു"
 
 #: src/translations.h:371
 msgid "French Polynesia"
-msgstr ""
+msgstr "ഫ്രഞ്ച് പോളിനേഷ്യ"
 
 #: src/translations.h:372
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "പാപുവ ന്യൂ ഗിനി"
 
 #: src/translations.h:373
 msgid "Philippines"
-msgstr ""
+msgstr "ഫിലിപ്പീന്‍സ്"
 
 #: src/translations.h:374
 msgid "Pakistan"
-msgstr ""
+msgstr "പാക്കിസ്ഥാന്‍"
 
 #: src/translations.h:375
 msgid "Poland"
-msgstr ""
+msgstr "പോളണ്ട്"
 
 #: src/translations.h:376
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "സെയിന്റ് പിയറി ആന്‍ഡ് മിക്വിലണ്‍"
 
 #: src/translations.h:377
 msgid "Pitcairn"
-msgstr ""
+msgstr "പിറ്റ്കേര്‍ണ്‍"
 
 #: src/translations.h:378
 msgid "Puerto Rico"
-msgstr ""
+msgstr "പ്യൂര്‍ട്ടോ റികോ"
 
 #: src/translations.h:379
 msgid "Palestinian Territories"
-msgstr ""
+msgstr "പാലസ്തീനിയന്‍ പ്രദേശങ്ങള്‍"
 
 #: src/translations.h:380
 msgid "Portugal"
-msgstr ""
+msgstr "പോ‌ര്‍ച്ചുഗല്‍"
 
 #: src/translations.h:381
 msgid "Palau"
-msgstr ""
+msgstr "പോളൌ"
 
 #: src/translations.h:382
 msgid "Paraguay"
-msgstr ""
+msgstr "പരാഗ്വെ"
 
 #: src/translations.h:383
 msgid "Qatar"
-msgstr ""
+msgstr "ഖത്ത‌ര്‍‍"
 
 #: src/translations.h:384
 msgid "Réunion"
-msgstr ""
+msgstr "റീയൂണിയന്‍"
 
 #: src/translations.h:385
 msgid "Romania"
-msgstr ""
+msgstr "റൊമാനിയ"
 
 #: src/translations.h:386
 msgid "Serbia"
-msgstr ""
+msgstr "സെർബിയ"
 
 #: src/translations.h:387
 msgid "Russian Federation"
-msgstr ""
+msgstr "റഷ്യന്‍ ഫെഡറേഷന്‍"
 
 #: src/translations.h:388
 msgid "Rwanda"
-msgstr ""
+msgstr "റുവാണ്ട"
 
 #: src/translations.h:389
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "സൗദി അറേബ്യ"
 
 #: src/translations.h:390
 msgid "Solomon Islands"
-msgstr ""
+msgstr "സോളമൻ ദ്വീപുകൾ"
 
 #: src/translations.h:391
 msgid "Seychelles"
-msgstr ""
+msgstr "സെയ്‌ഷെൽസ്"
 
 #: src/translations.h:392
 msgid "Sudan"
-msgstr ""
+msgstr "സുഡാൻ"
 
 #: src/translations.h:393
 msgid "Sweden"
-msgstr ""
+msgstr "സ്വീഡൻ"
 
 #: src/translations.h:394
 msgid "Singapore"
-msgstr ""
+msgstr "സിംഗപ്പൂർ"
 
 #: src/translations.h:395
 msgid "Saint Helena"
-msgstr ""
+msgstr "സെയിന്റ് ഹെലേന"
 
 #: src/translations.h:396
 msgid "Slovenia"
-msgstr ""
+msgstr "സ്ലൊവീന്യ"
 
 #: src/translations.h:397
 msgid "Svalbard and Jan Mayen"
-msgstr ""
+msgstr "സ്വാല്‍ബാര്‍ഡും യാന്‍ മായെനും"
 
 #: src/translations.h:398
 msgid "Slovakia"
-msgstr ""
+msgstr "സ്ലോവാക്യ"
 
 #: src/translations.h:399
 msgid "Sierra Leone"
-msgstr ""
+msgstr "സിയേറ ലിയോണ്‍"
 
 #: src/translations.h:400
 msgid "San Marino"
-msgstr ""
+msgstr "സാന്‍ മരീനൊ"
 
 #: src/translations.h:401
 msgid "Senegal"
-msgstr ""
+msgstr "സെനെഗൽ"
 
 #: src/translations.h:402
 msgid "Somalia"
-msgstr ""
+msgstr "സോമാലിയ"
 
 #: src/translations.h:403
 msgid "Suriname"
-msgstr ""
+msgstr "സുരിനാം"
 
 #: src/translations.h:404
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "സാവോ ടോം ആൻഡ് പ്രിൻസിപ്പെ"
 
 #: src/translations.h:405
 msgid "El Salvador"
-msgstr ""
+msgstr "എൽ സാൽവദോർ"
 
 #: src/translations.h:406
 msgid "Syrian Arab Republic"
-msgstr ""
+msgstr "സിറിയന്‍ അറബ് റിപ്പബ്ലിക്"
 
 #: src/translations.h:407
 msgid "Swaziland"
-msgstr ""
+msgstr "സ്വാസിലാന്റ്"
 
 #: src/translations.h:408
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "ടർക്സ്-കൈകോസ് ദ്വീപുകൾ"
 
 #: src/translations.h:409
 msgid "Chad"
-msgstr ""
+msgstr "ഛാഡ്"
 
 #: src/translations.h:410
 msgid "French Southern Territories"
-msgstr ""
+msgstr "ഫ്രഞ്ച് തെക്കന്‍ പ്രദേശങ്ങള്‍"
 
 #: src/translations.h:411
 msgid "Togo"
-msgstr ""
+msgstr "ടോഗോ"
 
 #: src/translations.h:412
 msgid "Thailand"
-msgstr ""
+msgstr "തായ്‌ലാന്റ്"
 
 #: src/translations.h:413
 msgid "Tajikistan"
-msgstr ""
+msgstr "താജിക്കിസ്ഥാന്‍"
 
 #: src/translations.h:414
 msgid "Tokelau"
-msgstr ""
+msgstr "ടോക്‌ലവ്"
 
 #: src/translations.h:415
 msgid "East Timor"
-msgstr ""
+msgstr "കിഴക്കൻ ടിമോർ"
 
 #: src/translations.h:416
 msgid "Turkmenistan"
-msgstr ""
+msgstr "തുർക്‌മെനിസ്ഥാൻ"
 
 #: src/translations.h:417
 msgid "Tunisia"
-msgstr ""
+msgstr "ടുണീഷ്യ"
 
 #: src/translations.h:418
 msgid "Tonga"
-msgstr ""
+msgstr "ടോങ്ക"
 
 #: src/translations.h:419
 msgid "Turkey"
-msgstr ""
+msgstr "തുർക്കി"
 
 #: src/translations.h:420
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "ട്രിനിഡാഡ് ആന്‍ഡ് ടോബാഗോ"
 
 #: src/translations.h:421
 msgid "Tuvalu"
-msgstr ""
+msgstr "ടുവാലു"
 
 #: src/translations.h:422
 msgid "Taiwan"
-msgstr ""
+msgstr "തായ്‌വാൻ"
 
 #: src/translations.h:423
 msgid "Tanzania"
-msgstr ""
+msgstr "ടാന്‍സാനിയ"
 
 #: src/translations.h:424
 msgid "Ukraine"
-msgstr ""
+msgstr "യുക്രെയിൻ"
 
 #: src/translations.h:425
 msgid "Uganda"
-msgstr ""
+msgstr "ഉഗാണ്ട"
 
 #: src/translations.h:426
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "യുണൈറ്റഡ് സ്റ്റേറ്റ്സ് മൈനര്‍ ഔട്ട്ലയിങ് ദ്വീപുകള്‍"
 
 #: src/translations.h:427
 msgid "United States"
-msgstr ""
+msgstr "യുണൈറ്റഡ് സ്റ്റേറ്റ്സ്"
 
 #: src/translations.h:428
 msgid "Uruguay"
-msgstr ""
+msgstr "ഉറുഗ്വേ"
 
 #: src/translations.h:429
 msgid "Uzbekistan"
-msgstr ""
+msgstr "ഉസ്ബെക്കിസ്ഥാൻ"
 
 #: src/translations.h:430
 msgid "Vatican City State"
-msgstr ""
+msgstr "വത്തിക്കാൻ നഗരം"
 
 #: src/translations.h:431
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "സെയ്ന്റ് വിൻസന്റ് ആന്റ് ഗ്രനഡീൻസ്"
 
 #: src/translations.h:432
 msgid "Venezuela"
-msgstr ""
+msgstr "വെനിസ്വേല"
 
 #: src/translations.h:433
 msgid "British Virgin Islands"
-msgstr ""
+msgstr "ബ്രിട്ടീഷ് വിര്‍ജിന്‍ ദ്വീപുകള്‍"
 
 #: src/translations.h:434
 msgid "United States Virgin Islands"
-msgstr ""
+msgstr "യുണൈറ്റഡ് സ്റ്റേറ്റ്സ് വിര്‍ജിന്‍ ദ്വീപുകള്‍"
 
 #: src/translations.h:435
 msgid "Viet Nam"
-msgstr ""
+msgstr "വിയറ്റ്നാം"
 
 #: src/translations.h:436
 msgid "Vanuatu"
-msgstr ""
+msgstr "വാന്വാട്ടു"
 
 #: src/translations.h:437
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "വോളിസ് ആന്റ് ഫുട്ടാന"
 
 #: src/translations.h:438
 msgid "Samoa"
-msgstr ""
+msgstr "സമോവ"
 
 #: src/translations.h:439
 msgid "Yemen"
-msgstr ""
+msgstr "യെമൻ"
 
 #: src/translations.h:440
 msgid "Mayotte"
-msgstr ""
+msgstr "മയോട്ടെ"
 
 #: src/translations.h:441
 msgid "Yugoslavia"
-msgstr ""
+msgstr "യുഗോസ്ലാവിയ"
 
 #: src/translations.h:442
 msgid "South Africa"
-msgstr ""
+msgstr "ദക്ഷിണാഫ്രിക്ക‌"
 
 #: src/translations.h:443
 msgid "Zambia"
-msgstr ""
+msgstr "സാംബിയ"
 
 #: src/translations.h:444
 msgid "Zimbabwe"
-msgstr ""
+msgstr "സിംബാബ്‌വെ"
 
 #: src/ui_dateTimeDialogGui.h:296 src/ui_dateTimeDialogGui.h:297
 msgid "/"
@@ -2609,16 +2620,9 @@ msgstr ":"
 msgid "Help"
 msgstr "സഹായം"
 
-#: src/ui_helpDialogGui.h:267 plugins/Oculars/src/ui_ocularDialog.h:903
-#: plugins/Satellites/src/ui_satellitesDialog.h:718
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:248
-#: plugins/Quasars/src/ui_quasarsDialog.h:266
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:266
+#: src/ui_helpDialogGui.h:267
 msgid "About"
-msgstr ""
+msgstr "വിവരണം"
 
 #: src/ui_helpDialogGui.h:269
 msgid "Log"
@@ -2641,9 +2645,9 @@ msgstr "നിലവിലെ സ്ഥാനത്തെപ്പറ്റി�
 msgid "Use as default"
 msgstr "സ്വതവേയായി ഉപയോഗിക്കുക"
 
-#: src/ui_locationDialogGui.h:390 plugins/Oculars/src/ui_ocularDialog.h:876
-#: plugins/Oculars/src/ui_ocularDialog.h:885
-#: plugins/Oculars/src/ui_ocularDialog.h:896
+#: src/ui_locationDialogGui.h:390 plugins/Oculars/src/ui_ocularDialog.h:883
+#: plugins/Oculars/src/ui_ocularDialog.h:892
+#: plugins/Oculars/src/ui_ocularDialog.h:903
 msgid "Delete"
 msgstr "മായ്ക്കുക"
 
@@ -2824,11 +2828,11 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:588
 msgid "Server:"
-msgstr ""
+msgstr "സെര്‍വര്‍:"
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
-#: src/ui_configurationDialog.h:891 src/ui_configurationDialog.h:902
+#: src/ui_configurationDialog.h:901 src/ui_configurationDialog.h:912
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "ഐച്ഛികങ്ങള്‍"
@@ -3039,55 +3043,55 @@ msgstr "ഈ ആകാശസംസ്കാരം സ്വതവേയായി 
 msgid "Visible"
 msgstr "ദൃശ്യമായതു്"
 
-#: src/ui_configurationDialog.h:785
+#: src/ui_configurationDialog.h:791
 msgid "Configuration"
 msgstr "ക്രമീകരണം"
 
-#: src/ui_configurationDialog.h:787
+#: src/ui_configurationDialog.h:793
 msgid "Program language"
 msgstr "പ്രോഗ്രാമിന്റെ ഭാഷ"
 
-#: src/ui_configurationDialog.h:788 src/ui_CustomInfoDialog.h:192
+#: src/ui_configurationDialog.h:794 src/ui_CustomInfoDialog.h:192
 msgid "Selected object information"
 msgstr "തിരഞ്ഞെടുത്ത വസ്തുവിന്റെ വിവരങ്ങള്‍"
 
-#: src/ui_configurationDialog.h:790
+#: src/ui_configurationDialog.h:796
 msgid "Display all information available"
 msgstr "ലഭ്യമായ എല്ലാ വിവരങ്ങളും പ്രദര്‍ശിപ്പിക്കുക"
 
-#: src/ui_configurationDialog.h:792
+#: src/ui_configurationDialog.h:798
 msgid "All available"
 msgstr "ലഭ്യമായ എല്ലാം"
 
-#: src/ui_configurationDialog.h:794
+#: src/ui_configurationDialog.h:800
 msgid "Display less information"
 msgstr "കുറഞ്ഞ വിവരങ്ങള്‍ പ്രദര്‍ശിപ്പിക്കുക"
 
-#: src/ui_configurationDialog.h:796
+#: src/ui_configurationDialog.h:802
 msgid "Short"
 msgstr "നീളം കുറഞ്ഞ"
 
-#: src/ui_configurationDialog.h:798
+#: src/ui_configurationDialog.h:804
 msgid "Display user settings information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:800
+#: src/ui_configurationDialog.h:806
 msgid "Customized"
 msgstr ""
 
-#: src/ui_configurationDialog.h:802
+#: src/ui_configurationDialog.h:808
 msgid "Display no information"
 msgstr "വിവരങ്ങളൊന്നും പ്രദര്‍ശിപ്പിക്കേണ്ട"
 
-#: src/ui_configurationDialog.h:804
+#: src/ui_configurationDialog.h:810
 msgid "None"
 msgstr "ഒന്നുമില്ല"
 
-#: src/ui_configurationDialog.h:805
+#: src/ui_configurationDialog.h:811
 msgid "Default options"
 msgstr "സ്വതവേയുള്ള ഐച്ഛീകങ്ങള്‍"
 
-#: src/ui_configurationDialog.h:807
+#: src/ui_configurationDialog.h:813
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -3095,22 +3099,22 @@ msgstr ""
 "ഈ സെഷനില്‍ താങ്കള്‍ വരുത്തിയ മാറ്റങ്ങള്‍ അടുത്ത തവണ സ്റ്റെല്ലേറിയം "
 "ആരംഭിക്കുമ്പോള്‍ തുടരുന്നതിനായി സംരക്ഷിക്കുക"
 
-#: src/ui_configurationDialog.h:809
+#: src/ui_configurationDialog.h:815
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 msgid "Save settings"
 msgstr "ക്രമീകരണങ്ങള്‍ സംരക്ഷിക്കുക"
 
-#: src/ui_configurationDialog.h:811
+#: src/ui_configurationDialog.h:817
 msgid "Restore the default settings that came with Stellarium"
 msgstr ""
 "സ്റ്റെല്ലേറിയത്തിന്റെ കൂടെ വന്ന സ്വതവേയുള്ള ക്രമീകരണങ്ങള്‍ "
 "പൂര്‍വ്വസ്ഥിതിയിലാക്കുക"
 
-#: src/ui_configurationDialog.h:813
+#: src/ui_configurationDialog.h:819
 msgid "Restore defaults"
 msgstr "സ്വതവേകള്‍ പൂര്‍വ്വസ്ഥിതിയിലാക്കുക"
 
-#: src/ui_configurationDialog.h:814
+#: src/ui_configurationDialog.h:820
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -3121,49 +3125,49 @@ msgstr ""
 "നിലവിലെ FOV ഉം അടുത്ത ആരംഭത്തില്‍ ഉപയോഗിക്കേണ്ട കാഴ്ചയുടെ ദിശയും "
 "ഉള്‍പ്പെടുന്നു."
 
-#: src/ui_configurationDialog.h:816
+#: src/ui_configurationDialog.h:822
 msgid "The width of your view when Stellarium starts"
 msgstr "സ്റ്റെല്ലേറിയം ആരംഭികുമ്പോഴുള്ള ദര്‍ശനത്തിന്റെ വീതി"
 
-#: src/ui_configurationDialog.h:819
+#: src/ui_configurationDialog.h:825
 msgid "The direction you're looking when Stellarium starts"
 msgstr "സ്റ്റെല്ലേറിയ ആരംഭിക്കുമ്പോള്‍ നിങ്ങള്‍ നോക്കുന്ന ദിശ"
 
-#: src/ui_configurationDialog.h:821
+#: src/ui_configurationDialog.h:827
 msgid "Control"
 msgstr "നിയന്ത്രണം"
 
-#: src/ui_configurationDialog.h:823
+#: src/ui_configurationDialog.h:829
 msgid "Allow keyboard to pan and zoom"
 msgstr "കീബോര്‍ഡുകൊണ്ട് നീക്കാനും വലുതാക്കാനും അനുവദിക്കുക"
 
-#: src/ui_configurationDialog.h:825
+#: src/ui_configurationDialog.h:831
 msgid "Enable keyboard navigation"
 msgstr "കീബോര്‍ഡുപയോഗിച്ചുള്ള ദര്‍ശന നിയന്ത്രണം സാധ്യമാക്കുക"
 
-#: src/ui_configurationDialog.h:827
+#: src/ui_configurationDialog.h:833
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "മൌസുപയോഗിച്ച് നീക്കാനും (ഇഴയ്ക്കുക) വലുതാക്കാനും (മൌസ്‌വീല്‍) അനുവദിക്കുക"
 
-#: src/ui_configurationDialog.h:829
+#: src/ui_configurationDialog.h:835
 msgid "Enable mouse navigation"
 msgstr "മൌസുപയോഗിച്ചുള്ള ദര്‍ശന നിയന്ത്രണം സാധ്യമാക്കുക"
 
-#: src/ui_configurationDialog.h:830
+#: src/ui_configurationDialog.h:836
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Startup date and time"
 msgstr "ആരംഭ തിയ്യതിയും സമയവും"
 
-#: src/ui_configurationDialog.h:832
+#: src/ui_configurationDialog.h:838
 msgid "Starts Stellarium at system clock date and time"
 msgstr "സിസ്റ്റം തീയതിയിലും സമയത്തിലും സ്റ്റെല്ലേറിയം തുടങ്ങുക"
 
-#: src/ui_configurationDialog.h:834
+#: src/ui_configurationDialog.h:840
 msgid "System date and time"
 msgstr "സിസ്റ്റം തീയതിയും സമയവും"
 
-#: src/ui_configurationDialog.h:836
+#: src/ui_configurationDialog.h:842
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -3171,171 +3175,179 @@ msgstr ""
 "അനുകരണത്തിന്റെ സമയം സ്റ്റെല്ലേറിയം ആരംഭിക്കുമ്പോഴുള്ള ദിവസത്തിലെ സമയത്തോട് "
 "തൊട്ടടുത്ത നിലയിലാക്കുന്നു"
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:844
 msgid "System date at:"
 msgstr "സിസ്റ്റം തീയ്യതി :"
 
-#: src/ui_configurationDialog.h:840
+#: src/ui_configurationDialog.h:846
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr ""
 "സ്റ്റെല്ലേറിയം ആരംഭിക്കുമ്പോള്‍ ഒരു പ്രതേക തീയതിയും സമയവും ഉപയോഗിക്കുക"
 
-#: src/ui_configurationDialog.h:842
+#: src/ui_configurationDialog.h:848
 msgid "Other:"
 msgstr "മറ്റുള്ളവ:"
 
-#: src/ui_configurationDialog.h:843
+#: src/ui_configurationDialog.h:849
 msgid "use current"
 msgstr "നിലവിലുള്ളത് ഉപയോഗിക്കുക"
 
-#: src/ui_configurationDialog.h:844
+#: src/ui_configurationDialog.h:850
 msgid "Other"
 msgstr "മറ്റുള്ളവ"
 
-#: src/ui_configurationDialog.h:846
+#: src/ui_configurationDialog.h:852
 msgid "Hides the mouse cursor when inactive"
 msgstr "നിര്‍ജ്ജീവമായിരിക്കുമ്പോള്‍ മൗസ് കര്‍സര്‍ മറയ്ക്കുന്നു"
 
-#: src/ui_configurationDialog.h:848
+#: src/ui_configurationDialog.h:854
 msgid "Mouse cursor timeout (seconds):"
 msgstr "മൗസ് കര്‍സര്‍ നിര്‍ജ്ജിവമാകാനുള്ള സമയപരിധി (സെക്കന്റില്‍):"
 
-#: src/ui_configurationDialog.h:850
+#: src/ui_configurationDialog.h:856
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr ""
 
-#: src/ui_configurationDialog.h:852
+#: src/ui_configurationDialog.h:858
 msgid "Show flip buttons"
 msgstr ""
 
-#: src/ui_configurationDialog.h:853
+#: src/ui_configurationDialog.h:860
+msgid "Toggle display backgrounds of the nebulae."
+msgstr ""
+
+#: src/ui_configurationDialog.h:862
+msgid "Show nebula background button"
+msgstr ""
+
+#: src/ui_configurationDialog.h:863
 msgid "Planetarium options"
 msgstr "പ്ലാനെറ്റേറിയം ഐച്ഛീകങ്ങള്‍"
 
-#: src/ui_configurationDialog.h:855
+#: src/ui_configurationDialog.h:865
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr ""
 
-#: src/ui_configurationDialog.h:857
+#: src/ui_configurationDialog.h:867
 msgid "Spheric mirror distortion"
 msgstr ""
 
-#: src/ui_configurationDialog.h:859
+#: src/ui_configurationDialog.h:869
 msgid "Align labels with the horizon"
 msgstr "ലേബലുകള്‍ ചക്രവാളത്തോടടുപ്പിച്ച് നിര്‍ത്തുക"
 
-#: src/ui_configurationDialog.h:861
+#: src/ui_configurationDialog.h:871
 msgid "Gravity labels"
 msgstr "ഗുരുത്വാകര്‍ഷണ ലേബലുകള്‍"
 
-#: src/ui_configurationDialog.h:863
+#: src/ui_configurationDialog.h:873
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
 
-#: src/ui_configurationDialog.h:865
+#: src/ui_configurationDialog.h:875
 msgid "Auto zoom out returns to initial direction of view"
 msgstr ""
 
-#: src/ui_configurationDialog.h:867
+#: src/ui_configurationDialog.h:877
 msgid "Mask out everything outside a central circle in the main view"
 msgstr ""
 
-#: src/ui_configurationDialog.h:869
+#: src/ui_configurationDialog.h:879
 msgid "Disc viewport"
 msgstr ""
 
-#: src/ui_configurationDialog.h:871
+#: src/ui_configurationDialog.h:881
 msgid "Hide other constellations when you click one"
 msgstr "ഒന്നില്‍ ക്ലിക് ചെയ്താല്‍ മറ്റുള്ള നക്ഷത്രരാശികള്‍ മറയ്ക്കുക"
 
-#: src/ui_configurationDialog.h:873
+#: src/ui_configurationDialog.h:883
 msgid "Select single constellation"
 msgstr "ഒരു നക്ഷത്രരാശി മാത്രം തിരഞ്ഞെടുക്കുക"
 
-#: src/ui_configurationDialog.h:874
+#: src/ui_configurationDialog.h:884
 msgid "Screenshots"
 msgstr "സ്ക്രീന്‍ഷോട്ടുകള്‍"
 
-#: src/ui_configurationDialog.h:875
+#: src/ui_configurationDialog.h:885
 msgid "Screenshot Directory"
 msgstr "സ്ക്രീന്‍ഷോട്ടുകള്‍ സേവ് ചെയ്യേണ്ടയിടം"
 
-#: src/ui_configurationDialog.h:877
+#: src/ui_configurationDialog.h:887
 msgid "Invert colors"
 msgstr "നെഗറ്റീവ് നിറങ്ങള്‍"
 
-#: src/ui_configurationDialog.h:878
+#: src/ui_configurationDialog.h:888
 msgid "Star catalog updates"
 msgstr "നക്ഷത്ര കാറ്റലോഗിലെ പുതിയ മാറ്റങ്ങള്‍"
 
-#: src/ui_configurationDialog.h:880
+#: src/ui_configurationDialog.h:890
 msgid "Click here to start downloading"
 msgstr "ഡൌണ്‍ലോഡ് ചെയ്യാന്‍ ഇവിടെ ഞെക്കുക"
 
-#: src/ui_configurationDialog.h:882
+#: src/ui_configurationDialog.h:892
 msgid "Download this file to view even more stars"
 msgstr "കൂടുതല്‍ നക്ഷത്രങ്ങള്‍ക്കായി ഇത് ഡൌണ്‍ലോഡ് ചെയ്യുക"
 
-#: src/ui_configurationDialog.h:884
+#: src/ui_configurationDialog.h:894
 msgid "Restart the download"
 msgstr "ഡൌണ്‍ലോഡ്  പുനരാരംഭിക്കുക"
 
-#: src/ui_configurationDialog.h:886
+#: src/ui_configurationDialog.h:896
 msgid "Retry"
 msgstr "വീണ്ടും ശ്രമിക്കുക"
 
-#: src/ui_configurationDialog.h:888
+#: src/ui_configurationDialog.h:898
 msgid "Stop the download. You can always restart it later"
 msgstr ""
 "ഡൌണ്‍ലോഡ്  നിര്‍ത്തി വയ്ക്കുക. താങ്കള്‍ക്ക് പിന്നീട്  പുനരാരംഭിക്കാവുന്നതാണ്."
 
-#: src/ui_configurationDialog.h:890
+#: src/ui_configurationDialog.h:900
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
 msgid "Cancel"
 msgstr "വേണ്ട"
 
-#: src/ui_configurationDialog.h:893
+#: src/ui_configurationDialog.h:903
 msgid "Close window when script runs"
 msgstr "സ്ക്രിപ്റ്റ് പ്രവര്‍ത്തിക്കുന്പോള്‍ ജാലകം അടക്കുക"
 
-#: src/ui_configurationDialog.h:895
+#: src/ui_configurationDialog.h:905
 msgid "Run the selected script"
 msgstr "തിരഞ്ഞെടുത്ത സ്ക്രിപ്റ്റ് പ്രവര്‍ത്തിപ്പിക്കുക"
 
-#: src/ui_configurationDialog.h:899
+#: src/ui_configurationDialog.h:909
 msgid "Stop a running script"
 msgstr "സ്ക്രിപ്റ്റ് നിര്‍ത്തിവക്കുക."
 
-#: src/ui_configurationDialog.h:903
+#: src/ui_configurationDialog.h:913
 msgid "Load at startup"
 msgstr "ആരംഭത്തില്‍ ലോഡ് ചെയ്യുക"
 
-#: src/ui_configurationDialog.h:904
+#: src/ui_configurationDialog.h:914
 msgid "configure"
 msgstr "ക്രമീകരിക്കുക"
 
-#: src/ui_configurationDialog.h:909
+#: src/ui_configurationDialog.h:919
 msgid "Main"
 msgstr "പ്രധാനപ്പെട്ട"
 
-#: src/ui_configurationDialog.h:911
+#: src/ui_configurationDialog.h:921
 msgid "Navigation"
 msgstr "നാവിഗേഷന്‍"
 
-#: src/ui_configurationDialog.h:913
+#: src/ui_configurationDialog.h:923
 msgid "Tools"
 msgstr "ഉപകരണങ്ങള്‍"
 
-#: src/ui_configurationDialog.h:915
+#: src/ui_configurationDialog.h:925
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:441
 msgid "Scripts"
 msgstr "സ്ക്രിപ്റ്റുകള്‍"
 
-#: src/ui_configurationDialog.h:917
+#: src/ui_configurationDialog.h:927
 msgid "Plugins"
 msgstr "പ്ലഗിനുകള്‍"
 
@@ -3603,7 +3615,7 @@ msgid "Compass marks"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:84
-#: plugins/Oculars/src/ui_ocularDialog.h:862
+#: plugins/Oculars/src/ui_ocularDialog.h:868
 msgid "Oculars"
 msgstr ""
 
@@ -3614,161 +3626,161 @@ msgid ""
 "frame and a Telrad sight."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:757
+#: plugins/Oculars/src/Oculars.cpp:759
 msgid "Please select an object before switching to ocular view."
 msgstr "ഒരു വസ്തു തിരഞ്ഞെടുത്ത ശേഷമേ ocular വ്യൂ വിലേക്ക് മാറാവൂ"
 
-#: plugins/Oculars/src/Oculars.cpp:836
+#: plugins/Oculars/src/Oculars.cpp:838
 msgid "&Previous ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:837
+#: plugins/Oculars/src/Oculars.cpp:839
 msgid "&Next ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:838
+#: plugins/Oculars/src/Oculars.cpp:840
 msgid "Select &ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:883
+#: plugins/Oculars/src/Oculars.cpp:885
 msgid "Toggle &crosshair"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:892
+#: plugins/Oculars/src/Oculars.cpp:894
 msgid "Configure &Oculars"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:901
+#: plugins/Oculars/src/Oculars.cpp:903
 msgid "Toggle &CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:909
+#: plugins/Oculars/src/Oculars.cpp:911
 msgid "Toggle &Telrad"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:919
+#: plugins/Oculars/src/Oculars.cpp:921
 msgid "&Previous CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:920
+#: plugins/Oculars/src/Oculars.cpp:922
 msgid "&Next CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:921
+#: plugins/Oculars/src/Oculars.cpp:923
 msgid "&Select CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:943
+#: plugins/Oculars/src/Oculars.cpp:945
 msgid "&Rotate CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:975
+#: plugins/Oculars/src/Oculars.cpp:977
 msgid "&Reset rotation"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1201
-#: plugins/Oculars/src/ui_ocularDialog.h:864
+#: plugins/Oculars/src/Oculars.cpp:1203
+#: plugins/Oculars/src/ui_ocularDialog.h:870
 msgid "Ocular view"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1225
+#: plugins/Oculars/src/Oculars.cpp:1227
 msgid "Oculars popup menu"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1233
+#: plugins/Oculars/src/Oculars.cpp:1235
 msgid "Crosshairs"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1241
+#: plugins/Oculars/src/Oculars.cpp:1243
 msgid "Image sensor frame"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1249
+#: plugins/Oculars/src/Oculars.cpp:1251
 msgid "Telrad sight"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1257
+#: plugins/Oculars/src/Oculars.cpp:1259
 msgid "Oculars plugin configuration"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1445
+#: plugins/Oculars/src/Oculars.cpp:1447
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 #, qt-format
 msgid "Ocular #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1450
+#: plugins/Oculars/src/Oculars.cpp:1452
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr ""
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1464
+#: plugins/Oculars/src/Oculars.cpp:1466
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:520
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr ""
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1471
+#: plugins/Oculars/src/Oculars.cpp:1473
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:530
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1481 plugins/Oculars/src/Oculars.cpp:1543
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
+#: plugins/Oculars/src/Oculars.cpp:1483 plugins/Oculars/src/Oculars.cpp:1540
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:653
 #, qt-format
 msgid "Telescope #%1"
 msgstr "ടെലിസ്കോപ്പ് #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1486 plugins/Oculars/src/Oculars.cpp:1548
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
+#: plugins/Oculars/src/Oculars.cpp:1488 plugins/Oculars/src/Oculars.cpp:1545
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:657
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "ടെലിസ്കോപ്പ് #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1497
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:737
+#: plugins/Oculars/src/Oculars.cpp:1499
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:731
 #, qt-format
 msgid "Magnification: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1505
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
+#: plugins/Oculars/src/Oculars.cpp:1507
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:740
 #, qt-format
 msgid "FOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1520
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:699
+#: plugins/Oculars/src/Oculars.cpp:1517
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:693
 #, qt-format
 msgid "Dimensions: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1525
+#: plugins/Oculars/src/Oculars.cpp:1522
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:560
 #, qt-format
 msgid "Sensor #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1529
+#: plugins/Oculars/src/Oculars.cpp:1526
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:564
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1738
+#: plugins/Oculars/src/Oculars.cpp:1735
 msgid "&Telescope"
 msgstr "& ടെലിസ്കോപ്പ്"
 
-#: plugins/Oculars/src/Oculars.cpp:1739
+#: plugins/Oculars/src/Oculars.cpp:1736
 msgid "&Previous telescope"
 msgstr "& മുന്‍പത്തെ ടെലിസ്കോപ്പ്"
 
-#: plugins/Oculars/src/Oculars.cpp:1740
+#: plugins/Oculars/src/Oculars.cpp:1737
 msgid "&Next telescope"
 msgstr "& അടുത്ത ടെലിസ്കോപ്പ്"
 
@@ -3832,44 +3844,45 @@ msgstr ""
 msgid "Apparent field of view of the ocular"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:606
 #, qt-format
 msgid "Rotation: %1"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:720
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:714
 msgid "Magnification provided by these binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:721
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:715
 msgid "Actual field of view provided by these binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:723
 msgid "Magnification provided by this ocular/telescope combination"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:730
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:724
 msgid "Actual field of view provided by this ocular/telescope combination"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:417
+#: plugins/Oculars/src/gui/OcularDialog.cpp:421
 msgid "Oculars Plug-in"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:418
+#: plugins/Oculars/src/gui/OcularDialog.cpp:422
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:107
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:107
 msgid "Version"
 msgstr "പതിപ്പ്"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:423
+#: plugins/Oculars/src/gui/OcularDialog.cpp:427
 msgid "Overview"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:425
+#: plugins/Oculars/src/gui/OcularDialog.cpp:429
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -3877,7 +3890,7 @@ msgid ""
 "will populate some samples to get your started."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:426
+#: plugins/Oculars/src/gui/OcularDialog.cpp:430
 msgid ""
 "You can choose to scale the image you see on the screen.  This is intended "
 "to show you a better comparison of what one eyepiece/telescope combination "
@@ -3888,14 +3901,14 @@ msgid ""
 "that you leave it off, unless you feel you have a need of it."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:427
+#: plugins/Oculars/src/gui/OcularDialog.cpp:431
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:428
+#: plugins/Oculars/src/gui/OcularDialog.cpp:432
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -3904,148 +3917,164 @@ msgid ""
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:429
+#: plugins/Oculars/src/gui/OcularDialog.cpp:433
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:432
+#: plugins/Oculars/src/gui/OcularDialog.cpp:436
 msgid "Hot Keys"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:433
+#: plugins/Oculars/src/gui/OcularDialog.cpp:437
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:445
-#: plugins/Oculars/src/gui/OcularDialog.cpp:450
+#: plugins/Oculars/src/gui/OcularDialog.cpp:449
+#: plugins/Oculars/src/gui/OcularDialog.cpp:454
 msgid "[no key defined]"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:454
+#: plugins/Oculars/src/gui/OcularDialog.cpp:458
 msgid "Switches on/off the ocular overlay."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:458
+#: plugins/Oculars/src/gui/OcularDialog.cpp:462
 msgid "Opens the pop-up navigation menu."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:865
+#: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Enable only if an object is selected"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:866
+#: plugins/Oculars/src/ui_ocularDialog.h:872
 msgid "Scale image circle"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:867
+#: plugins/Oculars/src/ui_ocularDialog.h:873
 msgid "Key mappings"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:868
+#: plugins/Oculars/src/ui_ocularDialog.h:874
 msgid "Toggle ocular view:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:870
+#: plugins/Oculars/src/ui_ocularDialog.h:876
 msgid "Open pop-up navigation menu:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:871
+#: plugins/Oculars/src/ui_ocularDialog.h:877
 msgid "Interface"
 msgstr "ദൃശ്യതലം"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:872
+#: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "On-screen control panel"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:873
+#: plugins/Oculars/src/ui_ocularDialog.h:879
+msgid "Use degrees and minutes for FOV of CCD"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:880
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:214
 msgid "General"
 msgstr "സാധാരണമായ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:874
-#: plugins/Oculars/src/ui_ocularDialog.h:882
+#: plugins/Oculars/src/ui_ocularDialog.h:881
+#: plugins/Oculars/src/ui_ocularDialog.h:889
 msgid "Eyepieces"
 msgstr "ഐപീസുകള്‍"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:875
-#: plugins/Oculars/src/ui_ocularDialog.h:884
-#: plugins/Oculars/src/ui_ocularDialog.h:895
+#: plugins/Oculars/src/ui_ocularDialog.h:882
+#: plugins/Oculars/src/ui_ocularDialog.h:891
+#: plugins/Oculars/src/ui_ocularDialog.h:902
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Add"
 msgstr "ചേര്‍ക്കുക"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:877
-#: plugins/Oculars/src/ui_ocularDialog.h:886
-#: plugins/Oculars/src/ui_ocularDialog.h:897
+#: plugins/Oculars/src/ui_ocularDialog.h:884
+#: plugins/Oculars/src/ui_ocularDialog.h:893
+#: plugins/Oculars/src/ui_ocularDialog.h:904
 #: plugins/Satellites/src/ui_satellitesDialog.h:683
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr "പേര്:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:878
+#: plugins/Oculars/src/ui_ocularDialog.h:885
 msgid "aFOV:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:879
-#: plugins/Oculars/src/ui_ocularDialog.h:898
+#: plugins/Oculars/src/ui_ocularDialog.h:886
+#: plugins/Oculars/src/ui_ocularDialog.h:905
 msgid "Focal length:"
 msgstr "ഫോക്കല്‍ ലെങ്ത്ത്"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:880
+#: plugins/Oculars/src/ui_ocularDialog.h:887
 msgid "Field stop:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:881
+#: plugins/Oculars/src/ui_ocularDialog.h:888
 msgid "Binoculars"
 msgstr "ബൈനോക്കുലറുകള്‍"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:883
-#: plugins/Oculars/src/ui_ocularDialog.h:893
+#: plugins/Oculars/src/ui_ocularDialog.h:890
+#: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Sensors"
 msgstr "സെന്‍സറുകള്‍"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:887
+#: plugins/Oculars/src/ui_ocularDialog.h:894
 msgid "Resolution x (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:888
+#: plugins/Oculars/src/ui_ocularDialog.h:895
 msgid "Resolution y (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:889
+#: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Chip width (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:890
+#: plugins/Oculars/src/ui_ocularDialog.h:897
 msgid "Chip height (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:891
+#: plugins/Oculars/src/ui_ocularDialog.h:898
 msgid "Pixel width (micron):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:892
+#: plugins/Oculars/src/ui_ocularDialog.h:899
 msgid "Pixel height (micron):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:894
-#: plugins/Oculars/src/ui_ocularDialog.h:902
+#: plugins/Oculars/src/ui_ocularDialog.h:901
+#: plugins/Oculars/src/ui_ocularDialog.h:909
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Telescopes"
 msgstr "ടെലിസ്കോപ്പുകള്‍"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:899
+#: plugins/Oculars/src/ui_ocularDialog.h:906
 msgid "Diameter:"
 msgstr "വ്യാസം:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:900
+#: plugins/Oculars/src/ui_ocularDialog.h:907
 msgid "Horizontal flip"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:901
+#: plugins/Oculars/src/ui_ocularDialog.h:908
 msgid "Vertical flip"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:910
+#: plugins/Satellites/src/ui_satellitesDialog.h:718
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:245
+#: plugins/Quasars/src/ui_quasarsDialog.h:263
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:245
+msgid "About plugin"
 msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:65
@@ -4257,6 +4286,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:112
 msgid "Links"
 msgstr "പുറത്തേക്കുള്ള കണ്ണികള്‍"
 
@@ -4264,6 +4294,7 @@ msgstr "പുറത്തേക്കുള്ള കണ്ണികള്‍"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:113
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -4275,6 +4306,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:122
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:116
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr ""
@@ -4284,6 +4316,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:118
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr ""
@@ -4293,6 +4326,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -4302,6 +4336,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:146
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:139
 msgid "Internet updates disabled"
 msgstr "ഇന്റര്‍നെറ്റ് വഴിയുള്ള പുതുക്കല്‍ ഇല്ലാതാക്കിയിരിക്കുന്നു."
 
@@ -4313,6 +4348,8 @@ msgstr "ഇന്റര്‍നെറ്റ് വഴിയുള്ള പു�
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:188
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:141
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Updating now..."
 msgstr "പുതുക്കിക്കൊണ്ടിരിക്കുന്നു..."
 
@@ -4320,6 +4357,7 @@ msgstr "പുതുക്കിക്കൊണ്ടിരിക്കുന്
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:155
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
 msgid "Next update: < 1 minute"
 msgstr ""
 
@@ -4327,6 +4365,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:152
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr ""
@@ -4335,6 +4374,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:159
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr ""
@@ -4342,11 +4382,13 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
 #: plugins/Satellites/src/ui_satellitesDialog.h:647
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:244
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
-#: plugins/Quasars/src/ui_quasarsDialog.h:260
+#: plugins/Quasars/src/ui_quasarsDialog.h:257
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:241
 msgid "Update now"
 msgstr "ഉടന്‍ പുതുക്കുക"
 
@@ -4354,6 +4396,7 @@ msgstr "ഉടന്‍ പുതുക്കുക"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 msgid "Update from files"
 msgstr "പ്രമാണങ്ങളില്‍ നിന്നും പുതുക്കുക"
 
@@ -4361,6 +4404,7 @@ msgstr "പ്രമാണങ്ങളില്‍ നിന്നും പു�
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:190
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:191
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Update error"
 msgstr "പുതുക്കുന്നതില്‍ പിശക്"
 
@@ -4437,20 +4481,23 @@ msgid "Update TLE lists from Internet sources"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:644
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
-#: plugins/Quasars/src/ui_quasarsDialog.h:256
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:256
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:237
+#: plugins/Quasars/src/ui_quasarsDialog.h:253
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:253
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:237
 msgid "Update from Internet sources"
 msgstr "ഇന്റര്‍നെറ്റില്‍ നിന്നും പുതുക്കുക"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:645
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:241
-#: plugins/Quasars/src/ui_quasarsDialog.h:257
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:238
+#: plugins/Quasars/src/ui_quasarsDialog.h:254
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:254
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:238
 msgid "Last update:"
 msgstr "ഏറ്റവും ഒടുവില്‍ പുതുക്കിയത്:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:646
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:239
 msgid "Update frequency (hours):"
 msgstr ""
 
@@ -4494,23 +4541,26 @@ msgid "Fade length:"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:672
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:245
-#: plugins/Quasars/src/ui_quasarsDialog.h:263
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:242
+#: plugins/Quasars/src/ui_quasarsDialog.h:260
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:242
 msgid "Restore default settings"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:673
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:246
-#: plugins/Quasars/src/ui_quasarsDialog.h:264
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:264
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:243
+#: plugins/Quasars/src/ui_quasarsDialog.h:261
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:261
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:243
 msgid "Save settings as default"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:674
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:247
-#: plugins/Quasars/src/ui_quasarsDialog.h:265
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:265
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:244
+#: plugins/Quasars/src/ui_quasarsDialog.h:262
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:262
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:244
 msgid "Settings"
 msgstr "ക്രമീകരണങ്ങള്‍"
 
@@ -5619,17 +5669,17 @@ msgstr ""
 msgid "Solar System"
 msgstr "സൌരയൂഥം"
 
-#: plugins/Supernovae/src/Supernovae.cpp:71
+#: plugins/Supernovae/src/Supernovae.cpp:70
 msgid "Historical Supernovae"
 msgstr "ചരിത്രപരമായ സൂപ്പര്‍നോവകള്‍"
 
-#: plugins/Supernovae/src/Supernovae.cpp:74
+#: plugins/Supernovae/src/Supernovae.cpp:73
 msgid ""
 "A plugin that shows some historical supernovae brighter than 10 visual "
 "magnitude."
 msgstr ""
 
-#: plugins/Supernovae/src/Supernovae.cpp:145
+#: plugins/Supernovae/src/Supernovae.cpp:143
 msgid "Historical Supernovae configuration window"
 msgstr ""
 
@@ -5648,9 +5698,9 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid ""
-"A plugin that shows some historical supernovae brighter than 10 visual "
-"magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN "
-"1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 "
+"A plugin that shows some historical supernovae brighter than visual "
+"magnitude 10: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), "
+"SN 1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 "
 "October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN "
 "1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
 "(13 September)."
@@ -5663,21 +5713,20 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:114
 #, qt-format
 msgid ""
-"In this plugin implemented simple model of light curves for different "
-"supernovae. Typical view of light curves for supernova type I and type II "
-"you can see %1here%2 (right scale in days) and this model used for plugin."
+"This plugin implements a simple model of light curves for different "
+"supernovae. Typical views of light curves for type I and type II supernova "
+"can be seen %1here%2 (right scale in days), and this model is used for this "
+"plugin."
 msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
-msgid "Acknowledgment"
+msgid "Acknowledgments"
 msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
 msgid ""
-"We thank the following people for their contribution and of the valuable "
-"comments:"
+"We thank the following people for their contribution and valuable comments:"
 msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
@@ -5699,8 +5748,8 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 #, qt-format
 msgid ""
-"If you want read full information about plugin, his history and format of "
-"catalog you can %1get info here%2."
+"If you want to read full information about this plugin, its history and "
+"format of catalog, you can %1get info here%2."
 msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
@@ -5714,44 +5763,45 @@ msgstr ""
 msgid "Historical supernovae is updated"
 msgstr ""
 
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:236
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 msgid "Historical Supernovae Configuration"
 msgstr ""
 
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:237
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 msgid "Historical Supernovae Plug-in Configuration"
+msgstr ""
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:236
+#: plugins/Quasars/src/ui_quasarsDialog.h:252
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:252
+msgid "Update catalog from Internet"
 msgstr ""
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:255
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:255
-msgid "Update catalog from Internet"
-msgstr ""
-
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:242
-#: plugins/Quasars/src/ui_quasarsDialog.h:258
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Update frequency (days):"
 msgstr ""
 
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:243
-#: plugins/Quasars/src/ui_quasarsDialog.h:259
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
+#: plugins/Quasars/src/ui_quasarsDialog.h:256
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:256
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:240
 msgid "[next update info]"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:71
+#: plugins/Quasars/src/Quasars.cpp:70
 msgid "Quasars"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:74
+#: plugins/Quasars/src/Quasars.cpp:73
 msgid ""
 "A plugin that shows some quasars brighter than 16 visual magnitude. A "
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:148
+#: plugins/Quasars/src/Quasars.cpp:146
 msgid "Quasars configuration window"
 msgstr ""
 
@@ -5783,34 +5833,34 @@ msgstr ""
 msgid "Quasars is updated"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:252
+#: plugins/Quasars/src/ui_quasarsDialog.h:249
 msgid "Quasars Configuration"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:253
+#: plugins/Quasars/src/ui_quasarsDialog.h:250
 msgid "Quasars Plug-in Configuration"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:261
+#: plugins/Quasars/src/ui_quasarsDialog.h:258
 msgid "Display mode for quasars"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:262
+#: plugins/Quasars/src/ui_quasarsDialog.h:259
 msgid "Enable display of distribution for quasars"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:71
+#: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:74
+#: plugins/Pulsars/src/Pulsars.cpp:73
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:113
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:148
+#: plugins/Pulsars/src/Pulsars.cpp:146
 msgid "Pulsars configuration window"
 msgstr ""
 
@@ -5948,6 +5998,10 @@ msgstr ""
 msgid "pulsar identifiers have the prefix 'PSR'"
 msgstr ""
 
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
+msgid "Acknowledgment"
+msgstr ""
+
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
 msgid "Vladimir Samodourov"
 msgstr ""
@@ -5972,20 +6026,129 @@ msgstr ""
 msgid "Pulsars is updated"
 msgstr ""
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:252
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:249
 msgid "Pulsars Configuration"
 msgstr ""
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:253
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:250
 msgid "Pulsars Plug-in Configuration"
 msgstr ""
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:261
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Display mode for pulsars"
 msgstr ""
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:262
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 msgid "Enable display of distribution for pulsars"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:71
+msgid "Exoplanets"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:74
+msgid ""
+"This plugin plots the position of stars with exoplanets. Exoplanets data is "
+"derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:164
+msgid "Exoplanets configuration window"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:165
+msgid "Show exoplanets"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:178
+msgid "Metallicity"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:182
+#: plugins/Exoplanets/src/Exoplanet.cpp:198
+msgid "Mass"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:186
+#: plugins/Exoplanets/src/Exoplanet.cpp:199
+msgid "Radius"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:190
+#, qt-format
+msgid "Effective temperature: %1 K"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:196
+msgid "Exoplanet"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:197
+msgid "Period"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:197
+msgid "days"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:198
+#: plugins/Exoplanets/src/Exoplanet.cpp:199
+msgid "Jup"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:200
+msgid "Semi-Major Axis"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:200
+msgid "AU"
+msgstr "AU"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:201
+msgid "Eccentricity"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:202
+msgid "Inclination"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:203
+msgid "Angle Distance"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:106
+msgid "Exoplanets Plug-in"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
+#, qt-format
+msgid ""
+"This plugin plots the position of stars with exoplanets. Exoplanets data is "
+"derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
+msgstr ""
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
+#, qt-format
+msgid ""
+"If you want read full information about plugin, his history and format of "
+"catalog you can %1get info here%2."
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
+msgid "Exoplanets is updated"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
+msgid "Exoplanets Configuration"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:234
+msgid "Exoplanets Plug-in Configuration"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
+msgid "Update exoplanets data from Internet"
 msgstr ""
 
 #~ msgid "Date & Time"
