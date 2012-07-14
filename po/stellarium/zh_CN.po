@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-07-10 01:06+0700\n"
-"PO-Revision-Date: 2012-07-12 04:04+0000\n"
+"PO-Revision-Date: 2012-07-13 06:10+0000\n"
 "Last-Translator: forest93 <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-13 04:45+0000\n"
+"X-Launchpad-Export-Date: 2012-07-14 05:16+0000\n"
 "X-Generator: Launchpad (build 15614)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -540,7 +540,7 @@ msgstr "恢复正常脚本执行速度"
 #: plugins/Quasars/src/Quasars.cpp:144 plugins/Pulsars/src/Pulsars.cpp:144
 #: plugins/Exoplanets/src/Exoplanets.cpp:157
 msgid "Plugin Key Bindings"
-msgstr "外接程序的按键设置"
+msgstr "插件快捷键设置"
 
 #: src/gui/HelpDialog.cpp:82
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:82
@@ -549,11 +549,11 @@ msgstr "文本用户界面（TUI）"
 
 #: src/gui/HelpDialog.cpp:171
 msgid "Stellarium Help"
-msgstr "Stellarium帮助"
+msgstr "Stellarium 帮助"
 
 #: src/gui/HelpDialog.cpp:172
 msgid "Keys"
-msgstr "按键"
+msgstr "快捷键"
 
 #: src/gui/HelpDialog.cpp:180
 msgid "Further Reading"
@@ -1110,7 +1110,7 @@ msgstr "哈佛大学（美国）"
 
 #: src/main.cpp:337
 msgid "This system does not support OpenGL."
-msgstr "您的系统不支持 OpenGL"
+msgstr "您的系统不支持 OpenGL。"
 
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:182
 #: plugins/Exoplanets/src/Exoplanet.cpp:186
@@ -3345,7 +3345,7 @@ msgstr "移除"
 msgid ""
 "WARNING: Removing the selected landscape means deleting its files. This "
 "operation is irreversible."
-msgstr "警告：移除选择的地景会删除其文件，此操作是不可逆的。"
+msgstr "警告：移除选择的地景会删除其文件，此操作是不可撤销的。"
 
 #: src/ui_AtmosphereDialog.h:176
 msgid "Atmosphere Details"
@@ -3657,7 +3657,7 @@ msgstr "十字准线"
 
 #: plugins/Oculars/src/Oculars.cpp:1243
 msgid "Image sensor frame"
-msgstr "图像传感器边框"
+msgstr "图像传感器画幅"
 
 #: plugins/Oculars/src/Oculars.cpp:1251
 msgid "Telrad sight"
@@ -3898,7 +3898,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularDialog.cpp:449
 #: plugins/Oculars/src/gui/OcularDialog.cpp:454
 msgid "[no key defined]"
-msgstr ""
+msgstr "[未指定]"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:458
 msgid "Switches on/off the ocular overlay."
@@ -3926,7 +3926,7 @@ msgstr "切换目镜视图："
 
 #: plugins/Oculars/src/ui_ocularDialog.h:876
 msgid "Open pop-up navigation menu:"
-msgstr "打开弹出式导航菜单"
+msgstr "打开弹出式导航菜单："
 
 #: plugins/Oculars/src/ui_ocularDialog.h:877
 msgid "Interface"
@@ -4052,7 +4052,7 @@ msgstr "人造卫星"
 msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
-msgstr "使用基于北美防空联合司令部的两行轨道数据（NORAD TLE）预测绕地人造卫星的位置"
+msgstr "使用基于北美防空联合司令部的两行轨道数据[NORAD TLE]来预测绕地人造卫星的位置"
 
 #: plugins/Satellites/src/Satellites.cpp:130
 msgid "Satellites configuration window"
@@ -5443,8 +5443,8 @@ msgid ""
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
 msgstr ""
-"这是一个用于为 Stellarium 添加小行星或是彗星的界面。它可以通过从小行星中心（Minor Planet "
-"Center）的网站上下载天体列表并在其在线数据库中检索信息。此功能暂处于开发阶段。"
+"这是一个用于为 Stellarium 添加小行星或是彗星的界面。它可以通过从小行星中心[Minor Planet "
+"Center]的网站上下载天体列表并在其在线数据库中检索信息。此功能暂处于开发阶段。"
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
@@ -5725,7 +5725,7 @@ msgstr "理论和实验物理研究所"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
 msgid "in Russia"
-msgstr "在俄罗斯"
+msgstr "（俄罗斯）"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
@@ -5836,7 +5836,7 @@ msgstr "类星体显示模式"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:259
 msgid "Enable display of distribution for quasars"
-msgstr ""
+msgstr "显示类星体分布"
 
 #: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
@@ -5969,7 +5969,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
 msgid "Pulsars Plug-in"
-msgstr ""
+msgstr "脉冲星插件"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
 #, qt-format
@@ -5978,6 +5978,8 @@ msgid ""
 "Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 msgstr ""
+"脉冲星的数据来自澳大利亚国立天文台[ATNF]的脉冲星编录（Manchester, R. N., Hobbs, G. B., Teoh, A. & "
+"Hobbs, M., Astron. J., 129, 1993-2006 (2005) (%1astro-ph/0412641%2)）。"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
 msgid "Note"
@@ -6033,21 +6035,21 @@ msgstr "显示脉冲星的分布"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:71
 msgid "Exoplanets"
-msgstr ""
+msgstr "太阳系外行星"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:74
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
-msgstr ""
+msgstr "此插件标出了包含系外行星的恒星的位置。系外行星的数据来自 exoplanet.eu 的太阳系外行星百科。"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:164
 msgid "Exoplanets configuration window"
-msgstr ""
+msgstr "系外行星设置窗口"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:165
 msgid "Show exoplanets"
-msgstr ""
+msgstr "显示系外行星"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:178
 msgid "Metallicity"
@@ -6066,11 +6068,11 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:190
 #, qt-format
 msgid "Effective temperature: %1 K"
-msgstr ""
+msgstr "有效温度：%1 K"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:196
 msgid "Exoplanet"
-msgstr ""
+msgstr "系外行星"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:197
 msgid "Period"
@@ -6087,7 +6089,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
 msgid "Semi-Major Axis"
-msgstr ""
+msgstr "长半轴"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
 msgid "AU"
@@ -6095,26 +6097,26 @@ msgstr "天文单位"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:201
 msgid "Eccentricity"
-msgstr ""
+msgstr "离心率"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:202
 msgid "Inclination"
-msgstr ""
+msgstr "倾角"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:203
 msgid "Angle Distance"
-msgstr ""
+msgstr "角距离"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:106
 msgid "Exoplanets Plug-in"
-msgstr ""
+msgstr "系外行星插件"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:110
 #, qt-format
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
-msgstr ""
+msgstr "此插件可以显示含有系外行星的恒星的位置。系外行星数据来自“%1系外行星百科%2”。"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
@@ -6122,23 +6124,23 @@ msgstr ""
 msgid ""
 "If you want read full information about plugin, his history and format of "
 "catalog you can %1get info here%2."
-msgstr ""
+msgstr "如果您想了解此插件的全部信息、历史以及编录格式，请%1点击此处%2。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Exoplanets is updated"
-msgstr ""
+msgstr "系外行星已更新"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
 msgid "Exoplanets Configuration"
-msgstr ""
+msgstr "系外行星设置"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:234
 msgid "Exoplanets Plug-in Configuration"
-msgstr ""
+msgstr "系外行星插件设置"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
 msgid "Update exoplanets data from Internet"
-msgstr ""
+msgstr "从互联网更新系外新星数据"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "赤道坐标网格"
