@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-07-10 01:06+0700\n"
-"PO-Revision-Date: 2012-06-21 22:27+0000\n"
+"PO-Revision-Date: 2012-07-14 17:44+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-10 05:23+0000\n"
-"X-Generator: Launchpad (build 15558)\n"
+"X-Launchpad-Export-Date: 2012-07-15 05:12+0000\n"
+"X-Generator: Launchpad (build 15614)\n"
 "X-Poedit-Country: BELARUS\n"
 "Language: be\n"
 "X-Poedit-Language: Belarusian\n"
@@ -984,7 +984,7 @@ msgstr "Скапіяваць зьвесткі аб вылучаным аб'ек�
 
 #: src/gui/StelGui.cpp:189
 msgid "Go to home"
-msgstr ""
+msgstr "Дахаты"
 
 #: src/gui/StelGui.cpp:191
 msgid "Auto hide horizontal button bar"
@@ -3233,11 +3233,11 @@ msgstr "Паказваць ґузік перакульваньня"
 
 #: src/ui_configurationDialog.h:860
 msgid "Toggle display backgrounds of the nebulae."
-msgstr ""
+msgstr "Паказваць ці не фон туманнасьцяў."
 
 #: src/ui_configurationDialog.h:862
 msgid "Show nebula background button"
-msgstr ""
+msgstr "Паказваць ґузік фону туманнасьцяў"
 
 #: src/ui_configurationDialog.h:863
 msgid "Planetarium options"
@@ -3921,6 +3921,10 @@ msgid ""
 "and telescopes, as well as CCD Sensors.  Your first time running the app "
 "will populate some samples to get your started."
 msgstr ""
+"Гэты дадатак прызначаны для ўдаваньня прагляду праз акуляр. У гэтым дыялёґу "
+"настаўленьняў можна дадаваць, зьмяняць і выдаляць акуляры й тэлескопы, а "
+"таксама сэнсары ПЗС. Пры першым запуску праґрамы будуць дададзеныя некалькі "
+"прыкладаў."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:430
 msgid ""
@@ -3932,6 +3936,12 @@ msgid ""
 "image scaled, a good deal of the screen can be wasted.  Therefor I recommend "
 "that you leave it off, unless you feel you have a need of it."
 msgstr ""
+"Можна маштабаваць выяву бачную на экране. Гэта зроблена з мэтай лепшага "
+"параўнаньня аднаго спалучэньня акуляра й тэлескопа зь іншым. Адзін і той жа "
+"акуляр у двух розных тэлескопах з рознай фокуснай адлегласьцю дасьць два "
+"розных полі зроку. Адмоўны эфэкт гэтага ў тым, што пры маштабаваньні выявы "
+"значная частка экрану будзе змарнаваная. Таму я ня раю задзейнічаць яго, "
+"апрача сытуацый, калі яно сапраўды табе патрэбна."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:431
 msgid ""
@@ -3939,6 +3949,9 @@ msgid ""
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
+"Можна паказаць ці схаваць перакрыжаваньне. Мне хацелася, каб яно было "
+"ўраўнаваным на поўнач. Мне гэта не ўдалося, таму яно ўраўнаванае зь верхам "
+"экрану."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:432
 #, qt-format
@@ -3948,10 +3961,14 @@ msgid ""
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
+"Можна пераключыцца на шукальнік Telrad, але толькі тады, калі не "
+"задзейнічаны акуляр. У гэтым рэжыме будуць нарысаваныя тры канцэнтрычныя "
+"акружыны на 0,5%1, 2,0%1, і 4,0%1, якія дапамогуць пабачыць тое, што можна "
+"пабачыць няўзброеным вокам праз Telrad ці падобны шукальнік."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:433
 msgid "If you find any issues, please let me know.  Enjoy!"
-msgstr ""
+msgstr "Калі напаткаеш нейкія праблемы, паведамі мне.  Цешся!"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:436
 msgid "Hot Keys"
@@ -3959,7 +3976,7 @@ msgstr "«Гарачыя» клявішы"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:437
 msgid "The plug-in's key bindings can be edited in the General Tab."
-msgstr ""
+msgstr "Гарачыя клявішы гэтага дадатку можна зьмяняць на ўкладцы «Асноўныя»."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:449
 #: plugins/Oculars/src/gui/OcularDialog.cpp:454
@@ -3968,11 +3985,11 @@ msgstr "[клявіша ня вызначаная]"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:458
 msgid "Switches on/off the ocular overlay."
-msgstr ""
+msgstr "Уключае/выключае прагляд праз акуляр."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:462
 msgid "Opens the pop-up navigation menu."
-msgstr ""
+msgstr "Адкрые усплыўное навіґацыйнае мэню."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Enable only if an object is selected"
@@ -4004,7 +4021,7 @@ msgstr "Кіроўная панэль на экране"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:879
 msgid "Use degrees and minutes for FOV of CCD"
-msgstr ""
+msgstr "Паказваць ПЗ ПЗС у ґрадусах і мінутах"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:880
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:214
@@ -4363,6 +4380,8 @@ msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
+"Падтрымка ажыцьцяўляецца праз пляцоўку Launchpad. Не забцдзь дадаць «%1» у "
+"тэму паведамленьня."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:299
@@ -5806,7 +5825,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:143
 msgid "Historical Supernovae configuration window"
-msgstr ""
+msgstr "Вакно настаўленьняў гістарычных звышновых"
 
 #: plugins/Supernovae/src/Supernova.cpp:99
 msgid "supernova"
@@ -5849,6 +5868,10 @@ msgid ""
 "can be seen %1here%2 (right scale in days), and this model is used for this "
 "plugin."
 msgstr ""
+"Гэты дадатак рэалізуе простую мадэль сьветлавых крывых для розных звышновых. "
+"Як выглядаюць тыповыя сьветлавыя крывыя для звышновых тыпу I і II можна "
+"пабачыць %1тут%2 (правая шкала ў днях) і гэтая мадэль выкарыстоўваецца ў "
+"гэтым дадатку."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 msgid "Acknowledgments"
@@ -5858,7 +5881,7 @@ msgstr "Падзякі"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
-msgstr ""
+msgstr "Мы ўдзячныя наступным людзям за іхны ўнёсак і каштоўныя заўвагі:"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Sergei Blinnikov"
@@ -5882,6 +5905,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of catalog, you can %1get info here%2."
 msgstr ""
+"Калі жадаеш прачытаць усе зьвесткі пра дадатак, ягоную гісторыю й фармат "
+"каталёґу, то зьвесткі %1можна атрымаць тут%2."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
@@ -5896,11 +5921,11 @@ msgstr "Гістарычныя звышновыя абноўленыя"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 msgid "Historical Supernovae Configuration"
-msgstr ""
+msgstr "Настаўленьні гістарычных звышновых"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr ""
+msgstr "Настаўленьні дадатку «Гістарычныя звышновыя»"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
 #: plugins/Quasars/src/ui_quasarsDialog.h:252
@@ -5919,7 +5944,7 @@ msgstr "Часьціня абнаўленьняў (у днях):"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:256
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:240
 msgid "[next update info]"
-msgstr ""
+msgstr "[наступнае абнаўленьне]"
 
 #: plugins/Quasars/src/Quasars.cpp:70
 msgid "Quasars"
@@ -5937,7 +5962,7 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:146
 msgid "Quasars configuration window"
-msgstr ""
+msgstr "Вакно настаўленьняў квазараў"
 
 #: plugins/Quasars/src/Quasar.cpp:95
 msgid "quasar"
@@ -5958,6 +5983,9 @@ msgid ""
 "visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
 "Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"Дадатак «Квазары» паказвае некаторыя квазары, ярчэйшыя за 16 бачную "
+"велічыню. Каталёґ квазараў ўзяты з 13-га выданьня «Квазараў і актыўных ядраў "
+"ґаляктык» («Quasars and Active Galactic Nuclei»)."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 msgid "Veron+ 2010"
@@ -5969,19 +5997,19 @@ msgstr "Квазары абноўленыя"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:249
 msgid "Quasars Configuration"
-msgstr ""
+msgstr "Настаўленьні квазараў"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:250
 msgid "Quasars Plug-in Configuration"
-msgstr ""
+msgstr "Настаўленьні дадатку «Квазары»"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 msgid "Display mode for quasars"
-msgstr ""
+msgstr "Рэжым паказу квазараў"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:259
 msgid "Enable display of distribution for quasars"
-msgstr ""
+msgstr "Задзейнічаць паказ разьмеркаваньня квазараў"
 
 #: plugins/Pulsars/src/Pulsars.cpp:70
 msgid "Pulsars"
@@ -5993,10 +6021,12 @@ msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr ""
+"Гэты дадатак паказвае становішчы розных пульсараў, са зьвесткамі пра кожны "
+"зь іх."
 
 #: plugins/Pulsars/src/Pulsars.cpp:146
 msgid "Pulsars configuration window"
-msgstr ""
+msgstr "Вакно настаўленьняў пульсараў"
 
 #: plugins/Pulsars/src/Pulsar.cpp:129
 msgid "pulsar"
@@ -6011,11 +6041,11 @@ msgstr "Барыцэнтрычны пэрыяд: %1 с"
 #: plugins/Pulsars/src/Pulsar.cpp:144
 #, qt-format
 msgid "Time derivative of barycentric period: %1"
-msgstr ""
+msgstr "Часавая вытворная барыцэнтрычнага пэрыяду: %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:149
 msgid "Dispersion measure:"
-msgstr ""
+msgstr "Вымеры дыспэрсіі:"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:152
@@ -6030,7 +6060,7 @@ msgstr "парс"
 #: plugins/Pulsars/src/Pulsar.cpp:161
 #, qt-format
 msgid "Spin down energy loss rate: %1 ergs/s"
-msgstr ""
+msgstr "Хуткасьць страты энэргіі восевага аварачэньня: %1 эрґ/с"
 
 #: plugins/Pulsars/src/Pulsar.cpp:165
 #, qt-format
@@ -6086,6 +6116,8 @@ msgstr "Нататкі: %1"
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
+"анамальны ронтґенаўскі пульсар ці мяккі ґама-паўтаральнік з выяўленымі "
+"пульсацыямі"
 
 #: plugins/Pulsars/src/Pulsar.cpp:296
 msgid "has one or more binary companions"
@@ -6094,24 +6126,28 @@ msgstr "з адным ці большай колькасьцю бінарных 
 #: plugins/Pulsars/src/Pulsar.cpp:301
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
+"з пульсуючым выпрамяненьнем ад радыё да інфрачырвоных ці вышэйшых часьцінь"
 
 #: plugins/Pulsars/src/Pulsar.cpp:306
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
+"з пульсуючым выпрамяненьнем толькі на інфрачырвоных ці вышэйшых часьцінях"
 
 #: plugins/Pulsars/src/Pulsar.cpp:311
 msgid "with pulsed emission in the radio band"
-msgstr ""
+msgstr "з пульсуючым выпрамяненьнем у радыё-дыяпазоне"
 
 #: plugins/Pulsars/src/Pulsar.cpp:316
 msgid "with intermittently pulsed radio emission"
-msgstr ""
+msgstr "зь перамежным пульсуючым выпрамяненьнем у радыё-дыяпазоне"
 
 #: plugins/Pulsars/src/Pulsar.cpp:321
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
 msgstr ""
+"ізаляваная нэўтронная зорка з пульсуючым цеплавым ронтґенаўскім "
+"выпраменьваньнем, але без выяўленага радыё-выпраменьваньня"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:108
 msgid "Pulsars Plug-in"
@@ -6167,19 +6203,19 @@ msgstr "Пульсары абноўленыя"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:249
 msgid "Pulsars Configuration"
-msgstr ""
+msgstr "Настаўленьні пульсараў"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:250
 msgid "Pulsars Plug-in Configuration"
-msgstr ""
+msgstr "Настаўленьні дадатку «Пульсары»"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Display mode for pulsars"
-msgstr ""
+msgstr "Рэжым паказу пульсараў"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:259
 msgid "Enable display of distribution for pulsars"
-msgstr ""
+msgstr "Задзейнічаць паказ разьмеркаваньня пульсараў"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:71
 msgid "Exoplanets"
@@ -6196,15 +6232,15 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:164
 msgid "Exoplanets configuration window"
-msgstr ""
+msgstr "Вакно настаўленьняў экзаплянэт"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:165
 msgid "Show exoplanets"
-msgstr ""
+msgstr "Паказваць экзаплянэты"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:178
 msgid "Metallicity"
-msgstr ""
+msgstr "Мэталічнасьць"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:182
 #: plugins/Exoplanets/src/Exoplanet.cpp:198
@@ -6236,7 +6272,7 @@ msgstr "дзён"
 #: plugins/Exoplanets/src/Exoplanet.cpp:198
 #: plugins/Exoplanets/src/Exoplanet.cpp:199
 msgid "Jup"
-msgstr ""
+msgstr "Юп"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
 msgid "Semi-Major Axis"
@@ -6278,6 +6314,8 @@ msgid ""
 "If you want read full information about plugin, his history and format of "
 "catalog you can %1get info here%2."
 msgstr ""
+"Калі жадаеш прачытаць усе зьвесткі пра дадатак, ягоную гісторыю й фармат "
+"каталёґу, то іх %1можна атрымаць тут%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Exoplanets is updated"
