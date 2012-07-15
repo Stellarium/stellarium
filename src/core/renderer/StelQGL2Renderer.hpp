@@ -8,6 +8,7 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelQGLGLSLShader.hpp"
 #include "StelQGLRenderer.hpp"
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
@@ -39,6 +40,7 @@ public:
 		: StelQGLRenderer(parent, pvrSupported)
 		, initialized(false)
 		, shaderPrograms()
+		, customShader(NULL)
 	{
 	}
 	
@@ -235,7 +237,14 @@ public:
 		return true;
 	}
 
+	virtual bool areNonPowerOfTwoTexturesSupported() const {return true;}
+
 	//! Get shader program corresponding to specified vertex format.
+	//!
+	//! If the user binds a custom shader
+	//! (StelGLSLShader, in this case StelQGLGLSLShader),
+	//! this shader's shader program is returned instead.
+	//! (I.e. custom shader programs override builtin ones.)
 	//!
 	//! @param attributes     Vertex attributes used in the vertex format.
 	//! @param attributeCount Number of vertex attributes.
@@ -244,6 +253,14 @@ public:
 		(const StelVertexAttribute* const attributes, const int attributeCount)
 	{
 		invariant();
+
+		// A custom shader (StelGLSLShader - in this case StelQGLGLSLShader)
+		// overrides builtin shaders.
+		if(NULL != customShader)
+		{
+			return &(customShader->getProgram());
+		}
+
 		// Determine which vertex attributes are used.
 		bool position, texCoord, normal, color;
 		position = texCoord = normal = color = false;
@@ -285,7 +302,36 @@ public:
 		return NULL;
 	}
 
-	virtual bool areNonPowerOfTwoTexturesSupported() const {return true;}
+	//! Use a custom shader program, overriding builtin shader programs.
+	//!
+	//! No custom shader can be bound when this is called 
+	//! (previous custom shader must be released).
+	//!
+	//! Used by StelQGLGLSLShader.
+	//!
+	//! @param shader Shader to use.
+	void bindCustomShader(StelQGLGLSLShader* shader)
+	{
+		Q_ASSERT_X(NULL == customShader, Q_FUNC_INFO, 
+		           "Trying to bind() a shader without releasing the previous shader.");
+
+		customShader = shader;
+	}
+
+	//! Release a custom shader program, allowing use of builtin shader programs.
+	//!
+	//! The released shader must match the currently bound one.
+	//!
+	//! Used by StelQGLGLSLShader.
+	//!
+	//! @param shader Shader assumed to be bound, for error checking.
+	void releaseCustomShader(StelQGLGLSLShader* shader)
+	{
+		Q_ASSERT_X(shader == customShader, Q_FUNC_INFO, 
+		           "Trying to release() a shader when no shader or a different shader is bound.");
+
+		customShader = NULL;
+	}
 
 protected:
 	virtual StelVertexBufferBackend* createVertexBufferBackend
@@ -386,6 +432,11 @@ private:
 	QGLShaderProgram* textureShaderProgram;
 	//! Shader used for texturing interpolated with a per-vertex color.
 	QGLShaderProgram* colorTextureShaderProgram;
+
+	//! Custom shader program specified by the user.
+	//!
+	//! If not NULL, overrides builtin vertex format specific shader programs.
+	StelQGLGLSLShader* customShader;
 	
 	//Note:
 	//We don't keep handles to shader variable locations.

@@ -149,18 +149,22 @@ SET(stellarium_lib_SRCS
 	core/renderer/StelVertexBufferBackend.hpp
 	core/renderer/StelTestQGL2VertexBufferBackend.cpp
 	core/renderer/StelTestQGL2VertexBufferBackend.hpp
+
 	core/renderer/StelTextureParams.hpp
 	core/renderer/StelTextureBackend.hpp
 	core/renderer/StelTextureCache.hpp
 	core/renderer/StelQGLTextureBackend.cpp
 	core/renderer/StelQGLTextureBackend.hpp
 	core/renderer/StelTextureLoader.hpp
-
 	core/renderer/StelTextureMgr.cpp
 	core/renderer/StelTextureMgr.hpp
 	core/renderer/StelTexture.cpp
 	core/renderer/StelTexture.hpp
 	core/renderer/StelTextureTypes.hpp
+
+	core/renderer/StelGLSLShader.hpp
+	core/renderer/StelQGLGLSLShader.hpp
+	core/renderer/StelQGLGLSLShader.cpp
 
 	${gl_lib_SRCS}
 	core/external/fixx11h.h
