@@ -259,7 +259,7 @@ void LandscapeMgr::update(double deltaTime)
 void LandscapeMgr::draw(StelCore* core, class StelRenderer* renderer)
 {
 	// Draw the atmosphere
-	atmosphere->draw(core);
+	atmosphere->draw(core, renderer);
 
 	// Draw the landscape
 	landscape->draw(core);
