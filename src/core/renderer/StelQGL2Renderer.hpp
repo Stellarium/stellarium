@@ -239,6 +239,13 @@ public:
 
 	virtual bool areNonPowerOfTwoTexturesSupported() const {return true;}
 
+	virtual StelGLSLShader* createGLSLShader()
+	{
+		return new StelQGLGLSLShader(this);
+	}
+
+	virtual bool isGLSLSupported() const {return true;}
+
 	//! Get shader program corresponding to specified vertex format.
 	//!
 	//! If the user binds a custom shader

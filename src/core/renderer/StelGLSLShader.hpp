@@ -66,6 +66,8 @@ public:
 
 	//! Bind the shader, using it for following draw calls.
 	//!
+	//! This must be called before setting any uniforms.
+	//!
 	//! Note that the shader must be released after any draw calls using the shader
 	//! to allow any builtin default shaders to return to use.
 	virtual void bind() = 0;
