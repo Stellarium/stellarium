@@ -14,6 +14,7 @@ void StelQGLGLSLShader::bind()
 {
 	Q_ASSERT_X(built, Q_FUNC_INFO, "Trying to bind a non-built shader");
 	Q_ASSERT_X(!bound, Q_FUNC_INFO, "Must release() a shader before calling bind() again");
+	program.bind();
 	renderer->bindCustomShader(this);
 	bound = true;
 }
@@ -25,4 +26,5 @@ void StelQGLGLSLShader::release()
 	bound = false;
 	// The reference is passed to ensure the custom shader used is really this one.
 	renderer->releaseCustomShader(this);
+	program.release();
 }

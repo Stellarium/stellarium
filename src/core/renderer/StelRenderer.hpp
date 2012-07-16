@@ -7,6 +7,7 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelGLSLShader.hpp"
 #include "StelIndexBuffer.hpp"
 #include "StelVertexBuffer.hpp"
 #include "StelViewportEffect.hpp"
@@ -384,6 +385,24 @@ public:
 
 	//! Destroy a StelTextureBackend.
 	virtual void destroyTextureBackend(StelTextureBackend* backend) = 0;
+
+	//! Create a GLSL shader.
+	//!
+	//! This can only be called if isGLSLSupported() is true.
+	//!
+	//! The constructed shader must be deleted by the user before the 
+	//! Renderer is destroyed.
+	virtual StelGLSLShader* createGLSLShader()
+	{
+		Q_ASSERT_X(false, Q_FUNC_INFO, 
+		           "Trying to create a GLSL shader with a renderer backend that doesn't "
+		           "support GLSL");
+		// Avoids compiler warnings.
+		return NULL;
+	}
+
+	//! Are GLSL shaders are supported by the backend?
+	virtual bool isGLSLSupported() const {return false;}
 
 	//! Get size of the viewport in pixels.
 	virtual QSize getViewportSize() const = 0;

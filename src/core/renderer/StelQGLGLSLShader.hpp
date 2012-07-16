@@ -69,9 +69,6 @@ protected:
 	//! Is the shader currently bound?
 	//!
 	//! true between a bind() and release() call. 
-	//! 
-	//! This is not synonymous to the shader program itself being bound - 
-	//! it is only bound briefly during drawing by the vertex buffer backend.
 	bool bound;
 
 	//! Has the shader been built?
