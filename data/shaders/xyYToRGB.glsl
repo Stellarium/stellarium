@@ -16,18 +16,17 @@ uniform mediump float term_y, Ay, By, Cy, Dy, Ey;
 uniform mediump mat4 projectionMatrix;
 
 // Contains the 2d position of the point on the screen (before multiplication by the projection matrix)
-attribute mediump vec2 skyVertex;
+attribute mediump vec2 vertex;
 
 // Contains the r,g,b,Y (luminosity) components.
-attribute highp vec4 skyColor;
+attribute highp vec4 color;
 
 // The output variable passed to the fragment shader
 varying mediump vec4 resultSkyColor;
 
 void main()
 {
-	gl_Position = projectionMatrix*vec4(skyVertex, 0., 1.);
-	highp vec4 color = skyColor;
+	gl_Position = projectionMatrix*vec4(vertex, 0., 1.);
 
 	///////////////////////////////////////////////////////////////////////////
 	// First compute the xy color component
