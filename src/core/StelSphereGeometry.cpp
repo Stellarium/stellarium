@@ -877,14 +877,6 @@ void SphericalConvexPolygon::updateFillVertexBuffer(StelRenderer* renderer, cons
 	fillPlainVertexBuffer->lock(); 
 }
 
-void SphericalTexturedPolygon::updateFillVertexBuffer(StelRenderer* renderer, const DrawParams& params, bool handleDiscontinuity)
-{
-	Q_UNUSED(renderer);
-	Q_UNUSED(params);
-	Q_UNUSED(handleDiscontinuity);
-	Q_ASSERT(0);
-}
-
 void SphericalTexturedConvexPolygon::updateFillVertexBuffer(StelRenderer* renderer, const DrawParams& params, bool handleDiscontinuity)
 {
 	const QVector<Vec3d>& vertices  = contour;
@@ -1007,13 +999,6 @@ void SphericalRegion::drawFillVertexBuffer(StelRenderer* renderer, StelProjector
 void SphericalConvexPolygon::drawFillVertexBuffer(StelRenderer* renderer, StelProjectorP projector)
 {
 	renderer->drawVertexBuffer(fillPlainVertexBuffer, NULL, projector);
-}
-
-void SphericalTexturedPolygon::drawFillVertexBuffer(StelRenderer* renderer, StelProjectorP projector)
-{
-	Q_UNUSED(renderer);
-	Q_UNUSED(projector);
-	Q_ASSERT(0);
 }
 
 void SphericalTexturedConvexPolygon::drawFillVertexBuffer(StelRenderer* renderer, StelProjectorP projector)
@@ -1565,11 +1550,6 @@ SphericalRegionP SphericalPolygon::multiIntersection(const QList<SphericalRegion
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// Methods for SphericalTexturedPolygon
-///////////////////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalConvexPolygon
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -1801,18 +1781,6 @@ QVariantList SphericalTexturedConvexPolygon::toQVariant() const
 	res << cv;
 	return res;
 }
-
-
-///////////////////////////////////////////////////////////////////////////////
-// Methods for SphericalTexturedPolygon
-///////////////////////////////////////////////////////////////////////////////
-QVariantList SphericalTexturedPolygon::toQVariant() const
-{
-	Q_ASSERT(0);
-	// TODO store a tesselated polygon?, including edge flags?
-	return QVariantList();
-}
-
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2084,44 +2052,8 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantMap& map)
 		// No texture coordinates
 		return loadFromQVariant(contoursList);
 	}
-	else
-	{
-		// With texture coordinates
-		QVector<QVector<SphericalTexturedPolygon::TextureVertex> > contours;
-		QVector<SphericalTexturedPolygon::TextureVertex> vertices;
-		for (int i=0;i<contoursList.size();++i)
-		{
-			// Load vertices
-			const QVariantList& polyRaDecToList = contoursList.at(i).toList();
-			if (polyRaDecToList.size()<3)
-				throw std::runtime_error("a polygon contour must have at least 3 vertices");
-			SphericalTexturedPolygon::TextureVertex v;
-			foreach (const QVariant& vRaDec, polyRaDecToList)
-			{
-				parseRaDec(vRaDec, v.vertex);
-				vertices.append(v);
-			}
-			Q_ASSERT(vertices.size()>2);
 
-			// Add the texture coordinates
-			const QVariantList& polyXYToList = texCoordList.at(i).toList();
-			if (polyXYToList.size()!=vertices.size())
-				throw std::runtime_error("texture coordinate and vertices number mismatch for contour");
-			for (int n=0;n<polyXYToList.size();++n)
-			{
-				const QVariantList& vl = polyXYToList.at(n).toList();
-				if (vl.size()!=2)
-					throw std::runtime_error("invalid texture coordinate pair (expect 2 double values in degree)");
-				vertices[n].texCoord.set(vl.at(0).toDouble(&ok), vl.at(1).toDouble(&ok));
-				if (!ok)
-					throw std::runtime_error("invalid texture coordinate pair (expect 2 double values in degree)");
-			}
-			contours.append(vertices);
-			vertices.clear();
-		}
-		return SphericalRegionP(new SphericalTexturedPolygon(contours));
-	}
-	Q_ASSERT(0);
+	Q_ASSERT_X(false, Q_FUNC_INFO, "Code to load textured spherical region not yet implemented");
 	return SphericalRegionP(new SphericalCap());
 }
 
