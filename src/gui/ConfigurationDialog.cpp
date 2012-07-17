@@ -153,30 +153,24 @@ void ConfigurationDialog::createDialogContent()
 	if (gui->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
 	{
 		ui->noSelectedInfoRadio->setChecked(true);
-		ui->pushButtonCustomInfoDialog->setEnabled(false);
 	}
 	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
 	{
 		ui->briefSelectedInfoRadio->setChecked(true);	
-		ui->pushButtonCustomInfoDialog->setEnabled(false);
 	}
 	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::AllInfo))
 	{
 		ui->allSelectedInfoRadio->setChecked(true);
-		ui->pushButtonCustomInfoDialog->setEnabled(false);
 	}
 	else
 	{
 		ui->customSelectedInfoRadio->setChecked(true);
-		ui->pushButtonCustomInfoDialog->setEnabled(true);
 	}
 
 	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
 	connect(ui->customSelectedInfoRadio, SIGNAL(released()), this, SLOT(setCustomSelectedInfo()));
-
-	connect(ui->pushButtonCustomInfoDialog, SIGNAL(clicked()), this, SLOT(showCustomInfoDialog()));
 
 	// Navigation tab
 	// Startup time
@@ -315,25 +309,21 @@ void ConfigurationDialog::setSphericMirror(bool b)
 void ConfigurationDialog::setNoSelectedInfo(void)
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(0));
-	ui->pushButtonCustomInfoDialog->setEnabled(false);
 }
 
 void ConfigurationDialog::setAllSelectedInfo(void)
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
-	ui->pushButtonCustomInfoDialog->setEnabled(false);
 }
 
 void ConfigurationDialog::setBriefSelectedInfo(void)
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
-	ui->pushButtonCustomInfoDialog->setEnabled(false);
 }
 
 void ConfigurationDialog::setCustomSelectedInfo(void)
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getStelObjectMgr().getCustomInfoString()));
-	ui->pushButtonCustomInfoDialog->setEnabled(true);
 }
 
 
