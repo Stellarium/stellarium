@@ -131,8 +131,6 @@ private slots:
 	#endif
 	void setFixedDateTimeToCurrent();
 
-	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
-
 	void showCustomInfoDialog();
 
 private:

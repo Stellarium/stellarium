@@ -256,8 +256,6 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->pluginConfigureButton, SIGNAL(clicked()), this, SLOT(pluginConfigureCurrentSelection()));
 	populatePluginsList();
 
-
-	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 	updateConfigLabels();
 }
 
@@ -698,13 +696,6 @@ void ConfigurationDialog::setFixedDateTimeToCurrent(void)
 	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(StelApp::getInstance().getCore()->getJDay()));
 	ui->fixedTimeRadio->setChecked(true);
 	setStartupTimeMode();
-}
-
-void ConfigurationDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
-{
-	if (!current)
-		current = previous;
-	ui->configurationStackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
 }
 
 
