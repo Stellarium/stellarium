@@ -1,44 +1,10 @@
 #include "StelRenderer.hpp"
 #include "VecMath.hpp"
-#include "StelVertexAttribute.hpp"
 #include "StelVertexBuffer.hpp"
 
-//! A plain, position-only 2D vertex.
-struct Vertex
-{
-	Vec2f position;
-	Vertex(Vec2f position):position(position){}
-
-	VERTEX_ATTRIBUTES(Vec2f Position);
-};
-
-//! A simple 2D vertex with a position and texcoord, used for textured rectangles.
-struct TexturedVertex
-{
-	Vec2f position;
-	Vec2f texCoord;
-	TexturedVertex(Vec2f position, Vec2f texCoord):position(position),texCoord(texCoord){}
-
-	VERTEX_ATTRIBUTES(Vec2f Position, Vec2f TexCoord);
-};
-
-//! Implements drawRect() and drawTexturedRect(). 
-//!
-//! These are pretty much the same function, but with different names to improve
-//! readability.
-//!
-//! @param renderer Renderer that's drawing the rectangle.
-//! @param textured Should the rectangle be textured?
-//! @param x        Horizontal position of the rectangle.
-//! @param y        Vertical position of the rectangle.
-//! @param width    Width of the rectangle.
-//! @param height   Height of the rectangle.
-//! @param angle    Rotation angle of the rectangle in degrees.
-//!
-//! @see drawRect, drawTexturedRect
-void drawRectInternal
-	(StelRenderer* renderer, const bool textured, 
-	 const float x, const float y, const float width, const float height, const float angle)
+void StelRenderer::drawRectInternal
+	(const bool textured, const float x, const float y, const float width, 
+	 const float height, const float angle)
 {
 	Vec2f ne, nw, se, sw;
 
@@ -74,7 +40,7 @@ void drawRectInternal
 	if(textured)
 	{
 		StelVertexBuffer<TexturedVertex>* buffer = 
-			renderer->createVertexBuffer<TexturedVertex>(PrimitiveType_TriangleStrip);
+			createVertexBuffer<TexturedVertex>(PrimitiveType_TriangleStrip);
 
 		buffer->addVertex(TexturedVertex(ne, Vec2f(0.0f , 0.0f)));
 		buffer->addVertex(TexturedVertex(nw, Vec2f(1.0f , 0.0f)));
@@ -82,13 +48,13 @@ void drawRectInternal
 		buffer->addVertex(TexturedVertex(sw, Vec2f(1.0f , 1.0f)));
 
 		buffer->lock();
-		renderer->drawVertexBuffer(buffer);
+		drawVertexBuffer(buffer);
 		delete buffer;
 	}
 	else
 	{
 		StelVertexBuffer<Vertex>* buffer = 
-			renderer->createVertexBuffer<Vertex>(PrimitiveType_TriangleStrip);
+			createVertexBuffer<Vertex>(PrimitiveType_TriangleStrip);
 
 		buffer->addVertex(Vertex(ne));
 		buffer->addVertex(Vertex(nw));
@@ -96,7 +62,7 @@ void drawRectInternal
 		buffer->addVertex(Vertex(sw));
 
 		buffer->lock();
-		renderer->drawVertexBuffer(buffer);
+		drawVertexBuffer(buffer);
 		delete buffer;
 	}
 }
@@ -104,11 +70,11 @@ void drawRectInternal
 void StelRenderer::drawRect
 	(const float x, const float y, const float width, const float height, const float angle)
 {
-	drawRectInternal(this, false, x, y, width, height, angle);
+	drawRectInternal(false, x, y, width, height, angle);
 }
 
 void StelRenderer::drawTexturedRect
 	(const float x, const float y, const float width, const float height, const float angle)
 {
-	drawRectInternal(this, true, x, y, width, height, angle);
+	drawRectInternal(true, x, y, width, height, angle);
 }
