@@ -9,6 +9,7 @@
 #include "StelCore.hpp"
 #include "StelGLSLShader.hpp"
 #include "StelIndexBuffer.hpp"
+#include "StelVertexAttribute.hpp"
 #include "StelVertexBuffer.hpp"
 #include "StelViewportEffect.hpp"
 #include "StelTexture.hpp"
@@ -457,6 +458,41 @@ protected:
 	//!
 	//! @see getViewportTexture.
 	virtual StelTextureBackend* getViewportTextureBackend() = 0;
+
+private:
+	//! A plain, position-only 2D vertex.
+	struct Vertex
+	{
+		Vec2f position;
+		Vertex(Vec2f position):position(position){}
+		VERTEX_ATTRIBUTES(Vec2f Position);
+	};
+
+	//! A simple 2D vertex with a position and texcoord, used for textured rectangles.
+	struct TexturedVertex
+	{
+		Vec2f position;
+		Vec2f texCoord;
+		TexturedVertex(Vec2f position, Vec2f texCoord):position(position),texCoord(texCoord){}
+		VERTEX_ATTRIBUTES(Vec2f Position, Vec2f TexCoord);
+	};
+
+	//! Implements drawRect() and drawTexturedRect(). 
+	//!
+	//! These are pretty much the same function, but with different names to improve
+	//! readability.
+	//!
+	//! @param renderer Renderer that's drawing the rectangle.
+	//! @param textured Should the rectangle be textured?
+	//! @param x        Horizontal position of the rectangle.
+	//! @param y        Vertical position of the rectangle.
+	//! @param width    Width of the rectangle.
+	//! @param height   Height of the rectangle.
+	//! @param angle    Rotation angle of the rectangle in degrees.
+	//!
+	//! @see drawRect, drawTexturedRect
+	void drawRectInternal(const bool textured, const float x, const float y, 
+	                      const float width, const float height, const float angle);
 };
 
 #endif // _STELRENDERER_HPP_
