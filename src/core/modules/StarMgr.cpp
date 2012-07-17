@@ -684,9 +684,9 @@ void StarMgr::draw(StelCore* core, class StelRenderer* renderer)
 		}
 		int zone;
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it.key());(zone = it1.next()) >= 0;)
-			it.value()->draw(&sPainter, zone, true, rcmag_table, core, maxMagStarName, names_brightness);
+			it.value()->draw(sPainter.getProjector(), renderer, zone, true, rcmag_table, core, maxMagStarName, names_brightness);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it.key());(zone = it1.next()) >= 0;)
-			it.value()->draw(&sPainter, zone, false, rcmag_table, core, maxMagStarName,names_brightness);
+			it.value()->draw(sPainter.getProjector(), renderer, zone, false, rcmag_table, core, maxMagStarName,names_brightness);
 	}
 	exit_loop:
 	// Finish drawing many stars
