@@ -31,10 +31,10 @@
 #include "Star.hpp"
 
 #include "StelCore.hpp"
-#include "StelSkyDrawer.hpp"
 #include "StarMgr.hpp"
+#include "StelProjector.hpp"
+#include "StelSkyDrawer.hpp"
 
-#include "StelPainter.hpp"
 
 // Patch by Rainer Canavan for compilation on irix with mipspro compiler part 1
 #ifndef MAP_NORESERVE
@@ -94,12 +94,12 @@ public:
 
 	//! Pure virtual method. See subclass implementation.
 	virtual void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
-							  QList<StelObjectP > &result) = 0;
+	                          QList<StelObjectP> &result) = 0;
 
 	//! Pure virtual method. See subclass implementation.
-	virtual void draw(StelPainter* sPainter, int index,bool is_inside,
-					  const float *rcmag_table, StelCore* core,
-					  unsigned int maxMagStarName,float names_brightness) const = 0;
+	virtual void draw(StelProjectorP projector, class StelRenderer* renderer, int index,
+	                  bool is_inside, const float *rcmag_table, StelCore* core,
+	                  unsigned int maxMagStarName,float names_brightness) const = 0;
 
 	//! Get whether or not the catalog was successfully loaded.
 	//! @return @c true if at least one zone was loaded, otherwise @c false
@@ -177,9 +177,9 @@ protected:
 	//! @param core core to use for drawing
 	//! @param maxMagStarName magnitude limit of stars that display labels
 	//! @param names_brightness brightness of labels
-	void draw(StelPainter* sPainter, int index,bool is_inside,
-			  const float *rcmag_table, StelCore* core,
-			  unsigned int maxMagStarName,float names_brightness) const;
+	void draw(StelProjectorP projector, class StelRenderer* renderer, int index,
+	          bool is_inside, const float *rcmag_table, StelCore* core,
+	          unsigned int maxMagStarName,float names_brightness) const;
 
 	void scaleAxis(void);
 	void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
