@@ -10,9 +10,6 @@
     <height>465</height>
    </rect>
   </property>
-  <property name="styleSheet">
-   <string notr="true"/>
-  </property>
   <layout class="QVBoxLayout">
    <property name="spacing">
     <number>0</number>
@@ -142,18 +139,6 @@
           </property>
           <item>
            <widget class="QGroupBox" name="groupBox_2">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
             <property name="title">
              <string>Program language</string>
             </property>
@@ -188,18 +173,6 @@
           </item>
           <item>
            <widget class="QGroupBox" name="groupBox_6">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Default options</string>
             </property>
@@ -1358,5 +1331,22 @@
  <resources>
   <include location="../../data/gui/guiRes.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>stackListWidget</sender>
+   <signal>currentRowChanged(int)</signal>
+   <receiver>configurationStackedWidget</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>237</x>
+     <y>62</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>237</x>
+     <y>281</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
