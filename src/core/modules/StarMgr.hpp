@@ -30,7 +30,6 @@
 class StelObject;
 class StelToneReproducer;
 class StelProjector;
-class StelPainter;
 class QSettings;
 
 namespace BigStarCatalogExtension {
