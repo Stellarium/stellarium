@@ -487,14 +487,46 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	langName = StelApp::getInstance().getLocaleMgr().getSkyLanguage();
 	conf->setValue("localization/sky_locale", StelTranslator::nativeNameToIso639_1Code(langName));
 
-	if (gui->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
+	// configuration dialog / selected object info tab
+	const StelObject::InfoStringGroup& flags = gui->getInfoTextFilters();
+	if (flags == StelObject::InfoStringGroup(0))
 		conf->setValue("gui/selected_object_info", "none");
-	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
+	else if (flags == StelObject::InfoStringGroup(StelObject::ShortInfo))
 		conf->setValue("gui/selected_object_info", "short");
-	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::AllInfo))
+	else if (flags == StelObject::InfoStringGroup(StelObject::AllInfo))
 		conf->setValue("gui/selected_object_info", "all");
 	else
+	{
 		conf->setValue("gui/selected_object_info", "custom");
+		
+		conf->beginGroup("custom_selected_info");
+		conf->setValue("flag_show_name", (bool) (flags & StelObject::Name));
+		conf->setValue("flag_show_catalognumber",
+		               (bool) (flags & StelObject::CatalogNumber));
+		conf->setValue("flag_show_magnitude",
+		               (bool) (flags & StelObject::Magnitude));
+		conf->setValue("flag_show_absolutemagnitude",
+		               (bool) (flags & StelObject::AbsoluteMagnitude));
+		conf->setValue("flag_show_radecj2000",
+		               (bool) (flags & StelObject::RaDecJ2000));
+		conf->setValue("flag_show_radecofdate",
+		               (bool) (flags & StelObject::RaDecOfDate));
+		conf->setValue("flag_show_hourangle",
+		               (bool) (flags & StelObject::HourAngle));
+		conf->setValue("flag_show_altaz",
+		               (bool) (flags &  StelObject::AltAzi));
+		conf->setValue("flag_show_distance",
+		               (bool) (flags & StelObject::Distance));
+		conf->setValue("flag_show_size",
+		               (bool) (flags & StelObject::Size));
+		conf->setValue("flag_show_extra1",
+		               (bool) (flags & StelObject::Extra1));
+		conf->setValue("flag_show_extra2",
+		               (bool) (flags & StelObject::Extra2));
+		conf->setValue("flag_show_extra3",
+		               (bool) (flags & StelObject::Extra3));
+		conf->endGroup();
+	}
 
 	// toolbar auto-hide status
 	conf->setValue("gui/auto_hide_horizontal_toolbar", gui->getAutoHideHorizontalButtonBar());
