@@ -76,7 +76,11 @@ private slots:
 	void setNoSelectedInfo(void);
 	void setAllSelectedInfo(void);
 	void setBriefSelectedInfo(void);
-	void setCustomSelectedInfo(void);
+	//! Set the selected object info fields from the "Displayed Fields" boxes.
+	//! Called when any of the boxes has been clicked. Sets the
+	//! "selected info" mode to "Custom".
+	void setSelectedInfoFromCheckBoxes();
+	
 	void selectLanguage(const QString& languageCode);
 	void setStartupTimeMode();
 	void setDiskViewport(bool);
@@ -134,6 +138,9 @@ private:
 	StelGui* gui;
 
 	int savedProjectionType;
+	
+	//! Set the displayed fields checkboxes from the current displayed fields.
+	void updateSelectedInfoCheckBoxes();
 };
 
 #endif // _CONFIGURATIONDIALOG_HPP_
