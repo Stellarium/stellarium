@@ -31,6 +31,7 @@
 #include "StelProjector.hpp"
 #include "StarMgr.hpp"
 #include "StelObject.hpp"
+#include "renderer/StelRenderer.hpp"
 #include "renderer/StelTexture.hpp"
 
 #include "StelUtils.hpp"
@@ -245,7 +246,7 @@ void StarMgr::init()
 }
 
 
-void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
+void StarMgr::drawPointer(StelRenderer* renderer, StelProjectorP projector, const StelCore* core)
 {
 	const QList<StelObjectP> newSelected = objectMgr->getSelectedObject("Star");
 	if (!newSelected.empty())
@@ -253,18 +254,19 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		Vec3d screenpos;
+		Vec3d win;
 		// Compute 2D pos and return if outside screen
-		if (!sPainter.getProjector()->project(pos, screenpos))
+		if (!projector->project(pos, win))
+		{
 			return;
+		}
 
 		const Vec3f& c(obj->getInfoColor());
-		sPainter.setColor(c[0],c[1],c[2]);
+		renderer->setGlobalColor(Vec4f(c[0], c[1], c[2], 1.0f));
 		texPointer->bind();
-		sPainter.enableTexture2d(true);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
+		renderer->setBlendMode(BlendMode_Alpha);
+		const float angle = StelApp::getInstance().getTotalRunTime() * 40.0f;
+		renderer->drawTexturedRect(win[0] - 13.0f, win[1] - 13.0f, 26.0f, 26.0f, angle);
 	}
 }
 
@@ -693,7 +695,7 @@ void StarMgr::draw(StelCore* core, class StelRenderer* renderer)
 	skyDrawer->postDrawPointSource(sPainter.getProjector());
 
 	if (objectMgr->getFlagSelectedObjectPointer())
-		drawPointer(sPainter, core);
+		drawPointer(renderer, prj, core);
 }
 
 
