@@ -189,8 +189,6 @@ private:
 	//! The amount of labels (between 0 and 10)
 	float labelsAmount;
 
-	bool displayNoTexture;			// Define if nebulas without textures are to be displayed
-
 	//! The selection pointer texture
 	StelTextureSP texPointer;
 	
