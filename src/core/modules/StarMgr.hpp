@@ -204,7 +204,7 @@ private:
 	void loadData(QVariantMap starsConfigFile);
 
 	//! Draw a nice animated pointer around the object.
-	void drawPointer(StelPainter& sPainter, const StelCore* core);
+	void drawPointer(class StelRenderer* renderer, StelProjectorP projector, const StelCore* core);
 
 	LinearFader labelsFader;
 	LinearFader starsFader;
