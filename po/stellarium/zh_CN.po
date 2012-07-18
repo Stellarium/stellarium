@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-10 01:06+0700\n"
+"POT-Creation-Date: 2012-07-17 14:31+0300\n"
 "PO-Revision-Date: 2012-07-16 09:41+0000\n"
 "Last-Translator: Allen Zhong <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-17 04:48+0000\n"
-"X-Generator: Launchpad (build 15627)\n"
+"X-Launchpad-Export-Date: 2012-07-18 05:23+0000\n"
+"X-Generator: Launchpad (build 15637)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -511,7 +511,7 @@ msgstr "当脚本执行时"
 msgid "Stop currently running script"
 msgstr "终止当前运行的脚本"
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:152 src/gui/StelGui.cpp:153
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:153
 msgid "Pause script execution"
 msgstr "暂停脚本执行"
 
@@ -823,6 +823,10 @@ msgstr "脚本控制台窗口"
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Date and Time"
 msgstr "日期及时间"
+
+#: src/gui/StelGui.cpp:152
+msgid "Stop script execution"
+msgstr ""
 
 #: src/gui/StelGui.cpp:155
 msgid "Decrease time speed"
@@ -3953,7 +3957,7 @@ msgstr "目镜"
 #: plugins/Oculars/src/ui_ocularDialog.h:882
 #: plugins/Oculars/src/ui_ocularDialog.h:891
 #: plugins/Oculars/src/ui_ocularDialog.h:902
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:211
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:226
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Add"
 msgstr "添加"
@@ -4409,32 +4413,32 @@ msgstr "[所有卫星]"
 msgid "Select TLE Update File"
 msgstr "选择两行式轨道数据[TLE]更新文件"
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:135
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:139
 msgid "Downloading data..."
 msgstr "正在下载数据..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:136
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:140
 msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
 msgstr "Stellarium 正从更新源下载卫星数据。请稍候..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:155
 msgid "Select TLE source file(s)..."
 msgstr "选择 TLE 文件..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:166
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:167
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:226
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:227
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:170
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:171
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:230
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:231
 msgid "Processing data..."
 msgstr "正在处理数据..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:221
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:225
 msgid "No data could be downloaded. Try again later."
 msgstr "无法下载数据。请稍候再试。"
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:344
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:358
 #, qt-format
 msgid "Catalog Number: %1"
 msgstr "目录编号：%1"
@@ -4602,24 +4606,34 @@ msgstr "删除选定新来源"
 msgid "Sources"
 msgstr "来源"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:206
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:218
 msgid "More Satellites"
 msgstr "更多卫星"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:208
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:220
 msgid "Get data from update sources"
 msgstr "从更新源获取数据"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:209
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:221
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Abort download"
 msgstr "取消下载"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:210
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:222
 msgid "New satellites"
 msgstr "新卫星"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:212
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:223
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
+msgid "Mark all"
+msgstr "全选"
+
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:224
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
+msgid "Mark none"
+msgstr "取消全选"
+
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:225
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Discard"
 msgstr "丢弃列表"
@@ -5577,14 +5591,6 @@ msgstr "更新已存在的天体"
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid "Update only the orbital elements"
 msgstr "仅更新轨道参数"
-
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
-msgid "Mark all"
-msgstr "全选"
-
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
-msgid "Mark none"
-msgstr "取消全选"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid "Add objects"
