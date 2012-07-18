@@ -153,7 +153,9 @@ double Nebula::getCloseViewFov(const StelCore*) const
 
 void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 {
-	if (mag>maxMagHints)
+	float lim = mag;
+	if (lim > 50) lim = 15.f;
+	if (lim>maxMagHints)
 		return;
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
@@ -176,7 +178,9 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 {
-	if (mag>maxMagLabel)
+	float lim = mag;
+	if (lim > 50) lim = 15.f;
+	if (lim>maxMagLabel)
 		return;
 	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], hintsBrightness);
 	float size = getAngularSize(NULL)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
