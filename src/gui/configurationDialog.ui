@@ -369,72 +369,37 @@
              <property name="margin">
               <number>0</number>
              </property>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="checkBoxName">
-               <property name="text">
-                <string>Name</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="checkBoxHourAngle">
-               <property name="toolTip">
-                <string>Topocentric equatorial coordinates</string>
-               </property>
-               <property name="text">
-                <string>Hour angle/Declination</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0" colspan="2">
-              <widget class="QCheckBox" name="checkBoxRaDecOfDate">
-               <property name="toolTip">
-                <string>Geocentric equatorial coordinates, equinox of date</string>
-               </property>
-               <property name="text">
-                <string>Right ascension/Declination (of date)</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="1">
               <widget class="QCheckBox" name="checkBoxVisualMag">
                <property name="text">
                 <string>Visual magnitude</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
               </widget>
              </item>
-             <item row="11" column="0" colspan="2">
-              <widget class="QCheckBox" name="checkBox_3">
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="checkBoxExtra1">
+               <property name="toolTip">
+                <string>Spectral class, nebula type, etc.</string>
+               </property>
+               <property name="text">
+                <string>Additional information 1</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="7" column="0" colspan="2">
+              <widget class="QCheckBox" name="checkBoxExtra3">
                <property name="text">
                 <string>Additional information 3</string>
                </property>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QCheckBox" name="checkBoxAltAz">
-               <property name="toolTip">
-                <string>Horizontal coordinates</string>
-               </property>
-               <property name="text">
-                <string>Altitude/Azimuth</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="checkBoxAbsoluteMag">
-               <property name="text">
-                <string>Absolute magnitude</string>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="1">
-              <widget class="QCheckBox" name="checkBox_2">
-               <property name="toolTip">
-                <string/>
-               </property>
-               <property name="text">
-                <string>Additional information 2</string>
-               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
               </widget>
              </item>
              <item row="1" column="0">
@@ -442,36 +407,58 @@
                <property name="text">
                 <string>Catalog number(s)</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
               </widget>
              </item>
-             <item row="4" column="0" colspan="2">
-              <widget class="QCheckBox" name="checkBoxRaDecJ2000">
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxName">
+               <property name="text">
+                <string>Name</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="checkBoxExtra2">
                <property name="toolTip">
-                <string>Geocentric equatorial coordinates, equinox of J2000.0</string>
+                <string/>
                </property>
                <property name="text">
-                <string>Right ascension/Declination (J2000)</string>
+                <string>Additional information 2</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
               </widget>
              </item>
-             <item row="9" column="0">
-              <widget class="QCheckBox" name="checkBox">
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="checkBoxAbsoluteMag">
+               <property name="text">
+                <string>Absolute magnitude</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="checkBoxAltAz">
                <property name="toolTip">
-                <string>Spectral class, nebula type, etc.</string>
+                <string>Horizontal coordinates</string>
                </property>
                <property name="text">
-                <string>Additional information 1</string>
+                <string>Altitude/Azimuth</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
               </widget>
              </item>
-             <item row="8" column="0">
-              <widget class="QCheckBox" name="checkBoxDistance">
-               <property name="text">
-                <string>Distance</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="1">
+             <item row="5" column="1">
               <widget class="QCheckBox" name="checkBoxSize">
                <property name="toolTip">
                 <string>Angular or physical size</string>
@@ -479,6 +466,58 @@
                <property name="text">
                 <string>Size</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="3" column="0" colspan="2">
+              <widget class="QCheckBox" name="checkBoxRaDecOfDate">
+               <property name="toolTip">
+                <string>Geocentric equatorial coordinates, equinox of date</string>
+               </property>
+               <property name="text">
+                <string>Right ascension/Declination (of date)</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="checkBoxDistance">
+               <property name="text">
+                <string>Distance</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="2" column="0" colspan="2">
+              <widget class="QCheckBox" name="checkBoxRaDecJ2000">
+               <property name="toolTip">
+                <string>Geocentric equatorial coordinates, equinox of J2000.0</string>
+               </property>
+               <property name="text">
+                <string>Right ascension/Declination (J2000)</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="checkBoxHourAngle">
+               <property name="toolTip">
+                <string>Topocentric equatorial coordinates</string>
+               </property>
+               <property name="text">
+                <string>Hour angle/Declination</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
               </widget>
              </item>
             </layout>
@@ -1294,9 +1333,9 @@
   <tabstop>checkBoxAltAz</tabstop>
   <tabstop>checkBoxDistance</tabstop>
   <tabstop>checkBoxSize</tabstop>
-  <tabstop>checkBox</tabstop>
-  <tabstop>checkBox_2</tabstop>
-  <tabstop>checkBox_3</tabstop>
+  <tabstop>checkBoxExtra1</tabstop>
+  <tabstop>checkBoxExtra2</tabstop>
+  <tabstop>checkBoxExtra3</tabstop>
   <tabstop>enableKeysNavigationCheckBox</tabstop>
   <tabstop>enableMouseNavigationCheckBox</tabstop>
   <tabstop>systemTimeRadio</tabstop>
@@ -1349,4 +1388,11 @@
    </hints>
   </connection>
  </connections>
+ <buttongroups>
+  <buttongroup name="buttonGroupDisplayedFields">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+ </buttongroups>
 </ui>

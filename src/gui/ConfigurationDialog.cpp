@@ -2,6 +2,7 @@
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
  * Copyright (C) 2012 Timothy Reaves
+ * Copyright (C) 2012 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -146,15 +147,15 @@ void ConfigurationDialog::createDialogContent()
 	resetStarCatalogControls();
 
 	// Selected object info
-	if (gui->getInfoTextFilters() == (StelObject::InfoStringGroup)0)
+	if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(0))
 	{
 		ui->noSelectedInfoRadio->setChecked(true);
 	}
-	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::ShortInfo))
+	else if (gui->getInfoTextFilters() == StelObject::ShortInfo)
 	{
 		ui->briefSelectedInfoRadio->setChecked(true);	
 	}
-	else if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(StelObject::AllInfo))
+	else if (gui->getInfoTextFilters() == StelObject::AllInfo)
 	{
 		ui->allSelectedInfoRadio->setChecked(true);
 	}
@@ -162,12 +163,14 @@ void ConfigurationDialog::createDialogContent()
 	{
 		ui->customSelectedInfoRadio->setChecked(true);
 	}
-
+	updateSelectedInfoCheckBoxes();
+	
 	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
-	connect(ui->customSelectedInfoRadio, SIGNAL(released()), this, SLOT(setCustomSelectedInfo()));
-
+	connect(ui->buttonGroupDisplayedFields, SIGNAL(buttonClicked(int)),
+	        this, SLOT(setSelectedInfoFromCheckBoxes()));
+	
 	// Navigation tab
 	// Startup time
 	if (core->getStartupTimeMode()=="actual")
@@ -303,21 +306,58 @@ void ConfigurationDialog::setSphericMirror(bool b)
 void ConfigurationDialog::setNoSelectedInfo(void)
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(0));
+	updateSelectedInfoCheckBoxes();
 }
 
 void ConfigurationDialog::setAllSelectedInfo(void)
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
+	updateSelectedInfoCheckBoxes();
 }
 
 void ConfigurationDialog::setBriefSelectedInfo(void)
 {
 	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
+	updateSelectedInfoCheckBoxes();
 }
 
-void ConfigurationDialog::setCustomSelectedInfo(void)
+void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 {
-	//gui->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getStelObjectMgr().getCustomInfoString()));
+	// As this signal will be called when a checbox is toggled,
+	// change the general mode to Custom.
+	if (!ui->customSelectedInfoRadio->isChecked())
+		ui->customSelectedInfoRadio->setChecked(true);
+	
+	StelObject::InfoStringGroup flags(0);
+	
+	if (ui->checkBoxName->isChecked())
+		flags |= StelObject::Name;
+	if (ui->checkBoxCatalogNumbers->isChecked())
+		flags |= StelObject::CatalogNumber;
+	if (ui->checkBoxVisualMag->isChecked())
+		flags |= StelObject::Magnitude;
+	if (ui->checkBoxAbsoluteMag->isChecked())
+		flags |= StelObject::AbsoluteMagnitude;
+	if (ui->checkBoxRaDecJ2000->isChecked())
+		flags |= StelObject::RaDecJ2000;
+	if (ui->checkBoxRaDecOfDate->isChecked())
+		flags |= StelObject::RaDecOfDate;
+	if (ui->checkBoxHourAngle->isChecked())
+		flags |= StelObject::HourAngle;
+	if (ui->checkBoxAltAz->isChecked())
+		flags |= StelObject::AltAzi;
+	if (ui->checkBoxDistance->isChecked())
+		flags |= StelObject::Distance;
+	if (ui->checkBoxSize->isChecked())
+		flags |= StelObject::Size;
+	if (ui->checkBoxExtra1->isChecked())
+		flags |= StelObject::Extra1;
+	if (ui->checkBoxExtra2->isChecked())
+		flags |= StelObject::Extra2;
+	if (ui->checkBoxExtra3->isChecked())
+		flags |= StelObject::Extra3;
+	
+	gui->setInfoTextFilters(flags);
 }
 
 
@@ -911,4 +951,23 @@ void ConfigurationDialog::downloadFinished()
 	}
 
 	resetStarCatalogControls();
+}
+
+void ConfigurationDialog::updateSelectedInfoCheckBoxes()
+{
+	const StelObject::InfoStringGroup& flags = gui->getInfoTextFilters();
+	
+	ui->checkBoxName->setChecked(flags & StelObject::Name);
+	ui->checkBoxCatalogNumbers->setChecked(flags & StelObject::CatalogNumber);
+	ui->checkBoxVisualMag->setChecked(flags & StelObject::Magnitude);
+	ui->checkBoxAbsoluteMag->setChecked(flags & StelObject::AbsoluteMagnitude);
+	ui->checkBoxRaDecJ2000->setChecked(flags & StelObject::RaDecJ2000);
+	ui->checkBoxRaDecOfDate->setChecked(flags & StelObject::RaDecOfDate);
+	ui->checkBoxHourAngle->setChecked(flags & StelObject::HourAngle);
+	ui->checkBoxAltAz->setChecked(flags & StelObject::AltAzi);
+	ui->checkBoxDistance->setChecked(flags & StelObject::Distance);
+	ui->checkBoxSize->setChecked(flags & StelObject::Size);
+	ui->checkBoxExtra1->setChecked(flags & StelObject::Extra1);
+	ui->checkBoxExtra2->setChecked(flags & StelObject::Extra2);
+	ui->checkBoxExtra3->setChecked(flags & StelObject::Extra3);
 }
