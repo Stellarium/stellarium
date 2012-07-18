@@ -54,7 +54,7 @@ void NebulaMgr::setCircleScale(float scale) {Nebula::circleScale = scale;}
 float NebulaMgr::getCircleScale(void) const {return Nebula::circleScale;}
 
 
-NebulaMgr::NebulaMgr(void) : nebGrid(200), displayNoTexture(false)
+NebulaMgr::NebulaMgr(void) : nebGrid(200)
 {
 	setObjectName("NebulaMgr");
 }
