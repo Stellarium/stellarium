@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-10 01:06+0700\n"
+"POT-Creation-Date: 2012-07-17 14:31+0300\n"
 "PO-Revision-Date: 2012-07-16 14:05+0000\n"
 "Last-Translator: ptia <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-17 04:47+0000\n"
-"X-Generator: Launchpad (build 15627)\n"
+"X-Launchpad-Export-Date: 2012-07-18 05:17+0000\n"
+"X-Generator: Launchpad (build 15637)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -533,7 +533,7 @@ msgstr "Quando uno script è avviato"
 msgid "Stop currently running script"
 msgstr "Ferma lo script in esecuzione"
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:152 src/gui/StelGui.cpp:153
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:153
 msgid "Pause script execution"
 msgstr "Interrompi l'esecuzione dello script"
 
@@ -859,6 +859,10 @@ msgstr "Finestra dell'interfaccia a riga di comando dello script"
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Date and Time"
 msgstr "Data e ora"
+
+#: src/gui/StelGui.cpp:152
+msgid "Stop script execution"
+msgstr ""
 
 #: src/gui/StelGui.cpp:155
 msgid "Decrease time speed"
@@ -4022,7 +4026,7 @@ msgstr "Oculari"
 #: plugins/Oculars/src/ui_ocularDialog.h:882
 #: plugins/Oculars/src/ui_ocularDialog.h:891
 #: plugins/Oculars/src/ui_ocularDialog.h:902
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:211
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:226
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Add"
 msgstr "Aggiungi"
@@ -4507,11 +4511,11 @@ msgstr "[tutti]"
 msgid "Select TLE Update File"
 msgstr "Scegli il file di aggiornamento TLE"
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:135
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:139
 msgid "Downloading data..."
 msgstr "Scaricamento dei dati in corso..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:136
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:140
 msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
@@ -4519,22 +4523,22 @@ msgstr ""
 "Stellarium sta scaricando i dati dei satelliti dalle sorgenti di "
 "aggiornamento. Per favore, attendere..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:155
 msgid "Select TLE source file(s)..."
 msgstr "Seleziona i file sorgenti TLE..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:166
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:167
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:226
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:227
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:170
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:171
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:230
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:231
 msgid "Processing data..."
 msgstr "Elaborazione dati in corso..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:221
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:225
 msgid "No data could be downloaded. Try again later."
 msgstr "Non è stato possibile scaricare i dati. Riprovare più tardi."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:344
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:358
 #, qt-format
 msgid "Catalog Number: %1"
 msgstr "Catalogo numero: %1"
@@ -4704,24 +4708,34 @@ msgstr "Rimuovi la fonte selezionata"
 msgid "Sources"
 msgstr "Fonti"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:206
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:218
 msgid "More Satellites"
 msgstr "Più satelliti"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:208
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:220
 msgid "Get data from update sources"
 msgstr "Scarica i dati dalle sorgenti di aggiornamento"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:209
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:221
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Abort download"
 msgstr "Interrompi il download"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:210
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:222
 msgid "New satellites"
 msgstr "Nuovi satelliti"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:212
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:223
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
+msgid "Mark all"
+msgstr "Seleziona tutto"
+
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:224
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
+msgid "Mark none"
+msgstr "Deseleziona tutto"
+
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:225
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Discard"
 msgstr "Scarta"
@@ -5721,14 +5735,6 @@ msgstr "Aggiorna gli oggetti esistenti"
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid "Update only the orbital elements"
 msgstr "Aggiorna soltanto gli elementi orbitali"
-
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
-msgid "Mark all"
-msgstr "Seleziona tutto"
-
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
-msgid "Mark none"
-msgstr "Deseleziona tutto"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid "Add objects"

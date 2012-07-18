@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-07-10 01:06+0700\n"
-"PO-Revision-Date: 2012-07-16 15:17+0000\n"
+"POT-Creation-Date: 2012-07-17 14:31+0300\n"
+"PO-Revision-Date: 2012-07-17 14:29+0000\n"
 "Last-Translator: chingis <chingis091@lavabit.com>\n"
 "Language-Team: Kirghiz <ky@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-17 04:47+0000\n"
-"X-Generator: Launchpad (build 15627)\n"
+"X-Launchpad-Export-Date: 2012-07-18 05:18+0000\n"
+"X-Generator: Launchpad (build 15637)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -97,7 +97,7 @@ msgstr "Жыбыраган калың жылдыз"
 
 #: src/core/modules/Nebula.cpp:315
 msgid "Planetary nebula"
-msgstr "Планетарийлик жыбыраган калың жылдызы"
+msgstr "Планетарийлик жыбыраган калың жылдыз"
 
 #: src/core/modules/Nebula.cpp:318
 msgid "Cluster associated with nebulosity"
@@ -530,7 +530,7 @@ msgstr "Сценарий аткарылып жатканда"
 msgid "Stop currently running script"
 msgstr "Азыр жүргүзүлүп турган сценарийди токтотуу"
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:152 src/gui/StelGui.cpp:153
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:153
 msgid "Pause script execution"
 msgstr "Сценарий аткарылуусун пауза кылуу"
 
@@ -854,6 +854,10 @@ msgstr "Сценарий консолюнун терезеси"
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Date and Time"
 msgstr "Дата жана убакыт"
+
+#: src/gui/StelGui.cpp:152
+msgid "Stop script execution"
+msgstr ""
 
 #: src/gui/StelGui.cpp:155
 msgid "Decrease time speed"
@@ -3994,7 +3998,7 @@ msgstr "Окулярлар"
 #: plugins/Oculars/src/ui_ocularDialog.h:882
 #: plugins/Oculars/src/ui_ocularDialog.h:891
 #: plugins/Oculars/src/ui_ocularDialog.h:902
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:211
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:226
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Add"
 msgstr "Кошуу"
@@ -4444,11 +4448,11 @@ msgstr "[баары]"
 msgid "Select TLE Update File"
 msgstr "TLE жаңыртуу файлын тандоо"
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:135
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:139
 msgid "Downloading data..."
 msgstr "Маалымат жүктөө..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:136
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:140
 msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
@@ -4456,23 +4460,23 @@ msgstr ""
 "Жаңыртуу булактарынан Stellarium жолдош маалыматын жүктөп жатат. Күтө "
 "туруңуз..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:155
 msgid "Select TLE source file(s)..."
 msgstr "TLE булак файл(дар)ын тандоо..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:166
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:167
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:226
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:227
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:170
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:171
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:230
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:231
 msgid "Processing data..."
 msgstr "Маалымат иштетүү..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:221
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:225
 msgid "No data could be downloaded. Try again later."
 msgstr ""
 "Маалымат жүктөп алууга мүмкүн эмес. Кечирээк дагы аракет кылып көрүңүз."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:344
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:358
 #, qt-format
 msgid "Catalog Number: %1"
 msgstr "Каталог номери: %1"
@@ -4640,24 +4644,34 @@ msgstr "Тандалган булакты алуу"
 msgid "Sources"
 msgstr "Булактар"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:206
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:218
 msgid "More Satellites"
 msgstr "Көбүрөөк жолдоштор"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:208
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:220
 msgid "Get data from update sources"
 msgstr "Жаңыртуу булактарынан маалыматты алуу"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:209
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:221
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Abort download"
 msgstr "Жүктөөнү үзүү"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:210
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:222
 msgid "New satellites"
 msgstr "Жаңы жолдоштор"
 
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:212
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:223
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
+msgid "Mark all"
+msgstr "Баарын белгилөө"
+
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:224
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
+msgid "Mark none"
+msgstr "Эч бир деп белгилөө"
+
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:225
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:545
 msgid "Discard"
 msgstr "Түшүрүү"
@@ -5606,14 +5620,6 @@ msgstr "Бар болгон объекттерди жаңыртуу"
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:542
 msgid "Update only the orbital elements"
 msgstr "Орбита элементтерин гана жаңыртуу"
-
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:543
-msgid "Mark all"
-msgstr "Баарын белгилөө"
-
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:544
-msgid "Mark none"
-msgstr "Эч бир деп белгилөө"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:546
 msgid "Add objects"
