@@ -48,7 +48,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelIniParser.hpp"
-#include "StelPainter.hpp"
 #include "StelJsonParser.hpp"
 #include "ZoneArray.hpp"
 #include "StelSkyDrawer.hpp"
@@ -625,7 +624,7 @@ int StarMgr::getMaxSearchLevel() const
 
 
 // Draw all the stars
-void StarMgr::draw(StelCore* core, class StelRenderer* renderer)
+void StarMgr::draw(StelCore* core, StelRenderer* renderer)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
@@ -640,16 +639,15 @@ void StarMgr::draw(StelCore* core, class StelRenderer* renderer)
 	// Set temporary static variable for optimization
 	const float names_brightness = labelsFader.getInterstate() * starsFader.getInterstate();
 
-	// Prepare openGL for drawing many stars
-	StelPainter sPainter(prj);
-	sPainter.setFont(starFont);
+	// Prepare for drawing many stars
+	renderer->setFont(starFont);
 	skyDrawer->preDrawPointSource();
 
 	// draw all the stars of all the selected zones
-        // GZ: This table must be enlarged from 2x256 to many more entries. CORRELATE IN Zonearray.cpp!
+	// GZ: This table must be enlarged from 2x256 to many more entries. CORRELATE IN Zonearray.cpp!
 	//float rcmag_table[2*256];
-        //float rcmag_table[2*16384];
-        float rcmag_table[2*4096];
+	//float rcmag_table[2*16384];
+	float rcmag_table[2*4096];
 
 	for (ZoneArrayMap::const_iterator it(zoneArrays.constBegin()); it!=zoneArrays.constEnd();++it)
 	{
@@ -686,13 +684,13 @@ void StarMgr::draw(StelCore* core, class StelRenderer* renderer)
 		}
 		int zone;
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it.key());(zone = it1.next()) >= 0;)
-			it.value()->draw(sPainter.getProjector(), renderer, zone, true, rcmag_table, core, maxMagStarName, names_brightness);
+			it.value()->draw(prj, renderer, zone, true, rcmag_table, core, maxMagStarName, names_brightness);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it.key());(zone = it1.next()) >= 0;)
-			it.value()->draw(sPainter.getProjector(), renderer, zone, false, rcmag_table, core, maxMagStarName,names_brightness);
+			it.value()->draw(prj, renderer, zone, false, rcmag_table, core, maxMagStarName,names_brightness);
 	}
 	exit_loop:
 	// Finish drawing many stars
-	skyDrawer->postDrawPointSource(sPainter.getProjector());
+	skyDrawer->postDrawPointSource(prj);
 
 	if (objectMgr->getFlagSelectedObjectPointer())
 		drawPointer(renderer, prj, core);
