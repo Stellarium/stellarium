@@ -20,7 +20,6 @@
 
 #include "Dialog.hpp"
 #include "ConfigurationDialog.hpp"
-#include "CustomInfoDialog.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelMainWindow.hpp"
 #include "ui_configurationDialog.h"
@@ -64,7 +63,6 @@
 ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
 {
 	ui = new Ui_configurationDialogForm;
-	customInfoDialog = NULL;
 	hasDownloadedStarCatalog = false;
 	isDownloadingStarCatalog = false;
 	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();	
@@ -73,9 +71,7 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), star
 ConfigurationDialog::~ConfigurationDialog()
 {
 	delete ui;
-	ui=NULL;
-	delete customInfoDialog;
-	customInfoDialog = NULL;
+	ui = 0;
 }
 
 void ConfigurationDialog::retranslate()
@@ -321,7 +317,7 @@ void ConfigurationDialog::setBriefSelectedInfo(void)
 
 void ConfigurationDialog::setCustomSelectedInfo(void)
 {
-	gui->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getStelObjectMgr().getCustomInfoString()));
+	//gui->setInfoTextFilters(StelObject::InfoStringGroup(StelApp::getInstance().getStelObjectMgr().getCustomInfoString()));
 }
 
 
@@ -915,12 +911,4 @@ void ConfigurationDialog::downloadFinished()
 	}
 
 	resetStarCatalogControls();
-}
-
-void ConfigurationDialog::showCustomInfoDialog()
-{
-	if(customInfoDialog == NULL)
-		customInfoDialog = new CustomInfoDialog();
-
-	customInfoDialog->setVisible(true);
 }
