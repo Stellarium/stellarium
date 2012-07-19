@@ -21,7 +21,6 @@
 #define SHORTCUTSDIALOG_HPP
 
 #include "StelDialog.hpp"
-#include "StelShortcutMgr.hpp"
 
 #include <QLineEdit>
 #include <QModelIndex>
@@ -65,6 +64,7 @@ private:
 
 class Ui_shortcutsDialogForm;
 QT_FORWARD_DECLARE_CLASS(QTreeWidgetItem)
+QT_FORWARD_DECLARE_CLASS(StelShortcutMgr)
 
 class ShortcutsDialog : public StelDialog
 {

@@ -17,11 +17,12 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelApp.hpp"
-#include "StelShortcutMgr.hpp"
-
 #include <QDebug>
 #include <QDialog>
+
+#include "StelApp.hpp"
+#include "StelShortcutMgr.hpp"
+#include "StelShortcutGroup.hpp"
 
 #include "ShortcutsDialog.hpp"
 #include "ui_shortcutsDialog.h"
@@ -336,6 +337,8 @@ void ShortcutsDialog::createDialogContent()
 	QList<StelShortcutGroup*> groups = shortcutMgr->getGroupList();
 	foreach (StelShortcutGroup* group, groups)
 	{
+		// don't show disabled groups
+		if (!group->isEnabled()) continue;
 		QTreeWidgetItem* groupItem = new QTreeWidgetItem(ui->shortcutsTreeWidget);
 		// group items aren't selectable
 		groupItem->setFlags(Qt::ItemIsEnabled);
