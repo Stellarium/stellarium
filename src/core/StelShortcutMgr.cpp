@@ -148,6 +148,50 @@ void StelShortcutMgr::setAllActionsEnabled(bool enable)
 	}
 }
 
+void StelShortcutMgr::addGroup(const QString &id, QString text, const QString &pluginId)
+{
+	bool enabled = true;
+	if (!pluginId.isEmpty())
+	{
+		// search for plugin
+		StelModuleMgr::PluginDescriptor pluginDescriptor;
+		bool found = false;
+		foreach (StelModuleMgr::PluginDescriptor desc, StelApp::getInstance().getModuleMgr().getPluginsList())
+		{
+			if (desc.info.id == pluginId)
+			{
+				pluginDescriptor = desc;
+				found = true;
+			}
+		}
+		if (!found)
+		{
+			qWarning() << "Can't find plugin with id " << pluginId;
+		}
+		else
+		{
+			// if no text provided in file, get text from plugin descriptor
+			if (text.isEmpty())
+			{
+				text = pluginDescriptor.info.displayedName + " Plugin";
+			}
+			// enable group only when plugin is enabled
+			enabled = pluginDescriptor.loadAtStartup;
+		}
+	}
+	// creating group
+	if (shGroups.contains(id))
+	{
+		qWarning() << "Dubbing group id - " << id;
+	}
+	else
+	{
+		shGroups[id] = new StelShortcutGroup(id, text);
+	}
+	// applying group properties
+	shGroups[id]->setEnabled(enabled);
+}
+
 bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 {
 	QFile jsonFile(filePath);
@@ -157,63 +201,33 @@ bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 	// parsing shortcuts groups from file
 	for (QMap<QString, QVariant>::iterator group = groups.begin(); group != groups.end(); ++group)
 	{
-		// parsing shortcuts' group parameters
 		QMap<QString, QVariant> groupMap = group.value().toMap();
+		// parsing shortcuts' group properties
 		QString groupId = group.key();
 		QString groupText;
 		if (groupMap.contains("text"))
 		{
 			groupText = groupMap["text"].toString();
 		}
-		bool groupEnabled = true;
-		// group if for certain plugin shortcuts?
+		QString pluginId;
 		if (groupMap.contains("pluginId"))
 		{
-			QString pluginId = groupMap["pluginId"].toString();
-			// search for plugin
-			StelModuleMgr::PluginDescriptor pluginDescriptor;
-			bool found = false;
-			foreach (StelModuleMgr::PluginDescriptor desc, StelApp::getInstance().getModuleMgr().getPluginsList())
-			{
-				if (desc.info.id == pluginId)
-				{
-					pluginDescriptor = desc;
-					found = true;
-				}
-			}
-			if (!found)
-			{
-				qWarning() << "Can't find plugin with id " << pluginId;
-			}
-			else
-			{
-				// probably get displayed name from plugin descriptor
-				if (groupText.isEmpty())
-				{
-					groupText = pluginDescriptor.info.displayedName + " Plugin";
-				}
-				// enable group only if plugin enabled
-				groupEnabled = pluginDescriptor.loadAtStartup;
-			}
+			pluginId = groupMap["pluginId"].toString();
 		}
-		// creating group
-		if (shGroups.contains(groupId))
-		{
-			qWarning() << "Dubbing group id - " << groupId;
-		}
-		else
-		{
-			shGroups[groupId] = new StelShortcutGroup(groupId, groupText);
-		}
-		// applying group properties
-		shGroups[groupId]->setEnabled(groupEnabled);
+		// add group to map
+		addGroup(groupId, groupText, pluginId);
 		// parsing group's actions (shortcuts)
 		QMap<QString, QVariant> actions = groupMap["actions"].toMap();
 		for (QMap<QString, QVariant>::iterator action = actions.begin(); action != actions.end(); ++action)
 		{
 			QString actionId = action.key();
 			QMap<QString, QVariant> actionMap = action.value().toMap();
-			QString text = actionMap["text"].toString();
+			// parsing action (shortcut) properties
+			QString text;
+			if (actionMap.contains("text"))
+			{
+				text = actionMap["text"].toString();
+			}
 			// get primary and alternative keys of shortcut
 			QString primaryKey = actionMap["primaryKey"].toString();
 			QString altKey = actionMap["altKey"].toString();
@@ -223,9 +237,36 @@ bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 				shortcuts += ";" + altKey;
 			}
 			// get behavior properties of shortcut
-			bool checkable = actionMap["checkable"].toBool();
-			bool autorepeat = actionMap["autorepeat"].toBool();
-			bool global = actionMap["global"].toBool();
+			bool checkable;
+			if (actionMap.contains("checkable"))
+			{
+				checkable = actionMap["checkable"].toBool();
+			}
+			else
+			{
+				// default value
+				checkable = true;
+			}
+			bool autorepeat;
+			if (actionMap.contains("autorepeat"))
+			{
+				autorepeat = actionMap["autorepeat"].toBool();
+			}
+			else
+			{
+				// default value
+				autorepeat = false;
+			}
+			bool global;
+			if (actionMap.contains("global"))
+			{
+				global = actionMap["global"].toBool();
+			}
+			else
+			{
+				// default value
+				global = true;
+			}
 			// create & init shortcut
 			addGuiAction(actionId, text, shortcuts, groupId, checkable, autorepeat, global);
 			// set script if it exist
