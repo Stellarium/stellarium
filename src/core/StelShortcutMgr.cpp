@@ -20,6 +20,8 @@
 #include "StelShortcutMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelApp.hpp"
+#include "StelAppGraphicsWidget.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelMainGraphicsView.hpp"
 #include "StelTranslator.hpp"
@@ -142,7 +144,7 @@ void StelShortcutMgr::setAllActionsEnabled(bool enable)
 {
 	foreach (StelShortcutGroup* group, shGroups)
 	{
-		group->setAllActionsEnabled(enable);
+		group->setEnabled(enable);
 	}
 }
 
@@ -150,16 +152,50 @@ bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 {
 	QFile jsonFile(filePath);
 	jsonFile.open(QIODevice::ReadOnly);
-
 	QMap<QString, QVariant> groups = StelJsonParser::parse(jsonFile.readAll()).toMap()["groups"].toMap();
 
+	// parsing shortcuts groups from file
 	for (QMap<QString, QVariant>::iterator group = groups.begin(); group != groups.end(); ++group)
 	{
 		// parsing shortcuts' group parameters
 		QMap<QString, QVariant> groupMap = group.value().toMap();
 		QString groupId = group.key();
-		QString groupText = groupMap["text"].toString();
-		QString groupPrefix = (groupMap.contains("prefix") ? (groupMap["prefix"].toString() + ",") : "");
+		QString groupText;
+		if (groupMap.contains("text"))
+		{
+			groupText = groupMap["text"].toString();
+		}
+		bool groupEnabled = true;
+		// group if for certain plugin shortcuts?
+		if (groupMap.contains("pluginId"))
+		{
+			QString pluginId = groupMap["pluginId"].toString();
+			// search for plugin
+			StelModuleMgr::PluginDescriptor pluginDescriptor;
+			bool found = false;
+			foreach (StelModuleMgr::PluginDescriptor desc, StelApp::getInstance().getModuleMgr().getPluginsList())
+			{
+				if (desc.info.id == pluginId)
+				{
+					pluginDescriptor = desc;
+					found = true;
+				}
+			}
+			if (!found)
+			{
+				qWarning() << "Can't find plugin with id " << pluginId;
+			}
+			else
+			{
+				// probably get displayed name from plugin descriptor
+				if (groupText.isEmpty())
+				{
+					groupText = pluginDescriptor.info.displayedName + " Plugin";
+				}
+				// enable group only if plugin enabled
+				groupEnabled = pluginDescriptor.loadAtStartup;
+			}
+		}
 		// creating group
 		if (shGroups.contains(groupId))
 		{
@@ -169,6 +205,9 @@ bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 		{
 			shGroups[groupId] = new StelShortcutGroup(groupId, groupText);
 		}
+		// applying group properties
+		shGroups[groupId]->setEnabled(groupEnabled);
+		// parsing group's actions (shortcuts)
 		QMap<QString, QVariant> actions = groupMap["actions"].toMap();
 		for (QMap<QString, QVariant>::iterator action = actions.begin(); action != actions.end(); ++action)
 		{
@@ -176,8 +215,8 @@ bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 			QMap<QString, QVariant> actionMap = action.value().toMap();
 			QString text = actionMap["text"].toString();
 			// get primary and alternative keys of shortcut
-			QString primaryKey = (groupPrefix + actionMap["primaryKey"].toString());
-			QString altKey = (groupPrefix + actionMap["altKey"].toString());
+			QString primaryKey = actionMap["primaryKey"].toString();
+			QString altKey = actionMap["altKey"].toString();
 			QString shortcuts = primaryKey;
 			if (!altKey.isEmpty())
 			{

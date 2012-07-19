@@ -167,7 +167,7 @@ QList<QKeySequence> StelShortcut::splitShortcuts(const QString &shortcuts)
 
 
 StelShortcutGroup::StelShortcutGroup(QString id, QString text) :
-	m_id(id), m_text(text)
+	m_id(id), m_text(text), m_enabled(true)
 {
 }
 
@@ -220,10 +220,11 @@ QList<StelShortcut *> StelShortcutGroup::getActionList() const
 	return res;
 }
 
-void StelShortcutGroup::setAllActionsEnabled(bool enable)
+void StelShortcutGroup::setEnabled(bool enable)
 {
 	foreach (StelShortcut* sh, m_shortcuts)
 	{
 		sh->getAction()->setEnabled(enable);
 	}
+	m_enabled = enable;
 }

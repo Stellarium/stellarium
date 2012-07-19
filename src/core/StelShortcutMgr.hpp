@@ -21,9 +21,10 @@
 #define STELSHORTCUTMGR_HPP
 
 #include <QObject>
+#include <QAction>
 
-#include <StelShortcutGroup.hpp>
-#include "StelAppGraphicsWidget.hpp"
+QT_FORWARD_DECLARE_CLASS(StelShortcutGroup)
+QT_FORWARD_DECLARE_CLASS(StelAppGraphicsWidget)
 
 class StelShortcutMgr : public QObject
 {

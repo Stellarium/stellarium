@@ -600,13 +600,12 @@
 		"Scripts":
 		{
 			"text" : "Scripts",
-			"prefix": "Ctrl+U",
 			"actions":
 			{
 				"scriptShowMoon":
 				{
 					"text" : "Show and zoom Moon",
-					"primaryKey" : "1",
+					"primaryKey" : "Ctrl+U, 1",
 					"script" : "core.wait(1);
 											core.clear(\"natural\");
 											LandscapeMgr.setFlagLandscape(false);
@@ -627,7 +626,7 @@
 				"scriptLandscapes":
 				{
 					"text" : "Run landscapes script from file",
-					"primaryKey" : "2",
+					"primaryKey" : "Ctrl+U, 2",
 					"scriptFile" : "scripts/landscapes.ssc",
 					"checkable" : "0",
 					"autorepeat" : "0",
@@ -635,10 +634,24 @@
 				}
 			}
 		},
-		"PluginKeyBindings":
+		"PluginAngleMeasure":
 		{
-			"text" : "Plugin Key Bindings",
-			"actions":
+			"pluginId" : "AngleMeasure",
+			"actions" :
+			{
+				"actionShow_Angle_Measure":
+				{
+					"text" : "Angle measure",
+					"primaryKey" : "Ctrl+A",
+					"checkable" : "1",
+					"autorepeat" : "0"
+				}
+			}
+		},
+		"PluginExoplanets":
+		{
+			"pluginId" : "Exoplanets",
+			"actions" :
 			{
 				"actionShow_Exoplanets_ConfigDialog":
 				{
@@ -655,32 +668,53 @@
 					"checkable" : "1",
 					"autorepeat" : "0",
 					"global" : "0"
-				},
+				}
+			}
+		},
+		"PluginPulsars":
+		{
+			"pluginId" : "Pulsars",
+			"actions":
+			{
 				"actionShow_Pulsars_ConfigDialog":
 				{
 					"text" : "Pulsars configuration window",
 					"primaryKey" : "",
 					"checkable" : "1"
-				},
+				}
+			}
+		},
+		"PluginSupernovae" :
+		{
+			"pluginId" : "Supernovae",
+			"actions" :
+			{
 				"actionShow_Supernovae_ConfigDialog":
 				{
 					"text" : "Historical Supernovae configuration window",
 					"primaryKey" : "",
 					"checkable": "1"
-				},
+				}
+			}
+		},
+		"PluginQuasars" :
+		{
+			"pluginId" : "Quasars",
+			"actions":
+			{
 				"actionShow_Quasars_ConfigDialog":
 				{
 					"text" : "Quasars configuration window",
 					"primaryKey" : "",
 					"checkable" : "1"
-				},
-				"actionShow_Angle_Measure":
-				{
-					"text" : "Angle measure",
-					"primaryKey" : "Ctrl+A",
-					"checkable" : "1",
-					"autorepeat" : "0"
-				},
+				}
+			}
+		},
+		"PluginCompassMarks":
+		{
+			"pluginId" : "CompassMarks",
+			"actions" :
+			{
 				"actionShow_Compass_Marks":
 				{
 					"text" : "Compass marks",

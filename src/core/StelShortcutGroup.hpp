@@ -89,17 +89,20 @@ public:
 
 	QString getId() const { return m_id; }
 	QString getText() const { return m_text; }
+	bool isEnabled() const { return m_enabled; }
 
 signals:
 
 public slots:
 	// enable/disable all actions of the group
 	// need for editing shortcuts without trigging any actions
-	void setAllActionsEnabled(bool enable);
+	void setEnabled(bool enable);
 
 private:
 	QString m_id;
 	QString m_text;
+	QString m_pluginId;
+	bool m_enabled;
 	QMap<QString, StelShortcut*> m_shortcuts;
 };
 
