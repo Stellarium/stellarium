@@ -75,6 +75,9 @@ public slots:
 	void setAllActionsEnabled(bool enable);
 
 private:
+	// init and add to map group with parsed from file properties
+	void addGroup(const QString& id, QString text, const QString& pluginId = "");
+
 	// pointer to StelAppGraphicsWidget, used for obtaining actions by their object names
 	StelAppGraphicsWidget* stelAppGraphicsWidget;
 	// QMap, containing all shortcuts groups
