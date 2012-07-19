@@ -31,7 +31,6 @@
 #include <QString>
 
 class StelCore;
-class StelPainter;
 
 //! @class LabelMgr
 //! Allows for creation of custom labels on objects or coordinates.

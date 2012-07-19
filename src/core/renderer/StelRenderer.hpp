@@ -237,6 +237,15 @@ public:
 		drawVertexBufferBackend(vertexBuffer->backend, indexBuffer, projector, dontProject);
 	}
 
+	//! Draw a line with current global color to the screen.
+	//!
+	//! @param startX X position of the starting point of the line in pixels.
+	//! @param startY Y position of the starting point of the line in pixels.
+	//! @param endX   X position of the ending point of the line in pixels.
+	//! @param endY   Y position of the ending point of the line in pixels.
+	virtual void drawLine(const float startX, const float startY, 
+	                      const float endX, const float endY);
+
 	//! Draw a rectangle to the screen.
 	//!
 	//! The rectangle will be colored by the global color
