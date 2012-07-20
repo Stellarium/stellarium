@@ -29,6 +29,7 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QNetworkReply>
+#include <QProgressBar>
 #include <QSortFilterProxyModel>
 #include <QStandardItemModel>
 #include <QTemporaryFile>
