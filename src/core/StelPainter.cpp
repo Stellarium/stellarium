@@ -864,7 +864,10 @@ void StelPainter::drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, cons
 /*************************************************************************
  Draw a small circle arc in the current frame
 *************************************************************************/
-void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData), void* userData)
+void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, 
+	const Vec3d& rotCenter, 
+	void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos,
+		const Vec3d& direction, void* userData), void* userData)
 {
 	Q_ASSERT(smallCircleVertexArray.empty());
 

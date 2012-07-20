@@ -138,6 +138,8 @@ SET(stellarium_lib_SRCS
 	core/renderer/StelQGLRenderer.hpp
 	core/renderer/StelQGL2Renderer.hpp
 	
+	core/renderer/StelCircleArcRenderer.hpp
+
 	core/renderer/StelGLUtilityFunctions.cpp
 	core/renderer/StelGLUtilityFunctions.hpp
 
