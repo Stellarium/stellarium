@@ -26,6 +26,7 @@
 #include "Satellites.hpp"
 
 class Ui_satellitesDialog;
+class QListWidgetItem;
 class QTimer;
 class SatellitesImportDialog;
 

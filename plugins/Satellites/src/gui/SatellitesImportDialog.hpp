@@ -26,6 +26,7 @@
 class Ui_satellitesImportDialog;
 class QSortFilterProxyModel;
 class QStandardItemModel;
+class QFile;
 class QTemporaryFile;
 class QNetworkReply;
 
