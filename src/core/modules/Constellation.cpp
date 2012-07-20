@@ -28,6 +28,8 @@
 #include "Constellation.hpp"
 #include "StarMgr.hpp"
 
+#include "renderer/StelCircleArcRenderer.hpp"
+#include "renderer/StelRenderer.hpp"
 #include "renderer/StelTexture.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
@@ -96,22 +98,27 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 	return true;
 }
 
-void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const
+void Constellation::drawOptim(StelRenderer* renderer, StelProjectorP projector, const StelCore* core, const SphericalCap& viewportHalfspace) const
 {
-	if (lineFader.getInterstate()<=0.0001f)
+	// Avoid drawing when not visible
+	if (lineFader.getInterstate() <= 0.0001f)
+	{
 		return;
+	}
 
-	sPainter.setColor(lineColor[0], lineColor[1], lineColor[2], lineFader.getInterstate());
+	renderer->setGlobalColor(Vec4f(lineColor[0], lineColor[1], 
+	                               lineColor[2], lineFader.getInterstate()));
 
 	Vec3d star1;
 	Vec3d star2;
-	for (unsigned int i=0;i<numberOfSegments;++i)
+	for (unsigned int i = 0; i < numberOfSegments; ++i)
 	{
-		star1=asterism[2*i]->getJ2000EquatorialPos(core);
-		star2=asterism[2*i+1]->getJ2000EquatorialPos(core);
+		star1 = asterism[2 * i]->getJ2000EquatorialPos(core);
+		star2 = asterism[2 * i + 1]->getJ2000EquatorialPos(core);
 		star1.normalize();
 		star2.normalize();
-		sPainter.drawGreatCircleArc(star1, star2, &viewportHalfspace);
+		StelCircleArcRenderer(renderer, projector)
+			.drawGreatCircleArc(star1, star2, &viewportHalfspace);
 	}
 }
 
