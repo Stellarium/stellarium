@@ -27,6 +27,7 @@
 #include "StelLocation.hpp"
 
 #include <QDateTime>
+#include <QFile>
 #include <QSharedPointer>
 #include <QVariantMap>
 
