@@ -44,8 +44,8 @@ void StelShortcutMgr::init()
 // Note: "text" and "helpGroup" must be in English -- this method and the help
 // dialog take care of translating them. Of course, they still have to be
 // marked for translation using the N_() macro.
-QAction* StelShortcutMgr::addGuiAction(const QString& actionId, const QString& text, const QString& shortcuts,
-																			 const QString& groupId, bool checkable, bool autoRepeat, bool global)
+QAction* StelShortcutMgr::addGuiAction(const QString& actionId, const QString& text, const QString& primaryKey,
+																			 const QString& altKey, const QString &groupId, bool checkable, bool autoRepeat, bool global)
 {
 	if (!shGroups.contains(groupId))
 	{
@@ -53,7 +53,7 @@ QAction* StelShortcutMgr::addGuiAction(const QString& actionId, const QString& t
 							 << "for action " << actionId << "; group text is empty";
 		shGroups[groupId] = new StelShortcutGroup(groupId);
 	}
-	return shGroups[groupId]->registerAction(actionId, text, shortcuts, checkable,
+	return shGroups[groupId]->registerAction(actionId, text, primaryKey, altKey, checkable,
 																				 autoRepeat, global, stelAppGraphicsWidget);
 }
 
@@ -231,11 +231,6 @@ bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 			// get primary and alternative keys of shortcut
 			QString primaryKey = actionMap["primaryKey"].toString();
 			QString altKey = actionMap["altKey"].toString();
-			QString shortcuts = primaryKey;
-			if (!altKey.isEmpty())
-			{
-				shortcuts += ";" + altKey;
-			}
 			// get behavior properties of shortcut
 			bool checkable;
 			if (actionMap.contains("checkable"))
@@ -268,7 +263,7 @@ bool StelShortcutMgr::loadShortcuts(const QString &filePath)
 				global = true;
 			}
 			// create & init shortcut
-			addGuiAction(actionId, text, shortcuts, groupId, checkable, autorepeat, global);
+			addGuiAction(actionId, text, primaryKey, altKey, groupId, checkable, autorepeat, global);
 			// set script if it exist
 			if (actionMap.contains("script"))
 			{
