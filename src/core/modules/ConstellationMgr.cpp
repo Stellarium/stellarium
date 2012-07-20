@@ -31,6 +31,7 @@
 #include "StarMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
+#include "renderer/StelRenderer.hpp"
 #include "renderer/StelTextureMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelObjectMgr.hpp"
@@ -517,7 +518,7 @@ void ConstellationMgr::draw(StelCore* core, class StelRenderer* renderer)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 	sPainter.setFont(asterFont);
-	drawLines(sPainter, core);
+	drawLines(renderer, prj, core);
 	drawNames(sPainter);
 	drawArt(sPainter);
 	drawBoundaries(sPainter);
@@ -542,16 +543,14 @@ void ConstellationMgr::drawArt(StelPainter& sPainter) const
 }
 
 // Draw constellations lines
-void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
+void ConstellationMgr::drawLines(StelRenderer* renderer, StelProjectorP projector, const StelCore* core) const
 {
-	sPainter.enableTexture2d(false);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
+	renderer->setBlendMode(BlendMode_Alpha);
+	const SphericalCap& viewportHalfspace = projector->getBoundingCap();
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->drawOptim(sPainter, core, viewportHalfspace);
+		(*iter)->drawOptim(renderer, projector, core, viewportHalfspace);
 	}
 }
 
