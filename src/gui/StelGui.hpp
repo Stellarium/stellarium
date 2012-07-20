@@ -109,15 +109,16 @@ public:
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags);
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const;
 	
-    virtual QAction* addGuiAction(const QString& actionName,
-                                  const QString& text,
-                                  const QString& shortcuts,
-                                  const QString& helpGroup,
-                                  bool checkable=true,
-                                  bool autoRepeat=false,
-                                  bool global = false);
+	virtual QAction* addGuiAction(const QString& actionName,
+																const QString& text,
+																const QString& primaryKey,
+																const QString& altKey,
+																const QString& helpGroup,
+																bool checkable=true,
+																bool autoRepeat=false,
+																bool global = false);
 
-    virtual QAction* getGuiAction(const QString& actionName);
+	virtual QAction* getGuiAction(const QString& actionName);
 
 public slots:
 	//! Define whether the buttons toggling image flip should be visible

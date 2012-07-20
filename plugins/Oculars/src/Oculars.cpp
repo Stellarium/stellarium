@@ -1201,7 +1201,7 @@ void Oculars::initializeActivationActions()
 	QString shortcutStr = settings->value("bindings/toggle_oculars", "Ctrl+O").toString();
 	actionShowOcular = gui->addGuiAction("actionShow_Ocular",
 																			 N_("Ocular view"),
-																			 shortcutStr,
+																			 shortcutStr, "",
 																			 group,
 																			 true);
 	actionShowOcular->setChecked(flagShowOculars);
@@ -1225,7 +1225,7 @@ void Oculars::initializeActivationActions()
 	shortcutStr = settings->value("bindings/popup_navigator", "Alt+O").toString();
 	actionMenu = gui->addGuiAction("actionShow_Ocular_Menu",
 																 N_("Oculars popup menu"),
-																 shortcutStr,
+																 shortcutStr, "",
 																 group,
 																 true);
 	connect(actionMenu, SIGNAL(toggled(bool)),
@@ -1233,7 +1233,7 @@ void Oculars::initializeActivationActions()
 
 	actionShowCrosshairs = gui->addGuiAction("actionShow_Ocular_Crosshairs",
 																					 N_("Crosshairs"),
-																					 QString(),
+																					 QString(), "",
 																					 group,
 																					 true);
 	connect(actionShowCrosshairs, SIGNAL(toggled(bool)),
@@ -1241,7 +1241,7 @@ void Oculars::initializeActivationActions()
 
 	actionShowSensor = gui->addGuiAction("actionShow_Sensor",
 																			 N_("Image sensor frame"),
-																			 QString(),
+																			 QString(), "",
 																			 group,
 																			 true);
 	connect(actionShowSensor, SIGNAL(toggled(bool)),
@@ -1249,7 +1249,7 @@ void Oculars::initializeActivationActions()
 
 	actionShowTelrad = gui->addGuiAction("actionShow_Telrad",
 																			 N_("Telrad sight"),
-																			 QString(),
+																			 QString(), "",
 																			 group,
 																			 true);
 	connect(actionShowTelrad, SIGNAL(toggled(bool)),
@@ -1257,7 +1257,7 @@ void Oculars::initializeActivationActions()
 
 	actionConfiguration = gui->addGuiAction("actionOpen_Oculars_Configuration",
 																					N_("Oculars plugin configuration"),
-																					QString(),
+																					QString(), "",
 																					group,
 																					true);
 	connect(actionConfiguration, SIGNAL(toggled(bool)),

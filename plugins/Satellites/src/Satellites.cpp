@@ -127,10 +127,10 @@ void Satellites::init()
 		// TRANSLATORS: Title of a group of key bindings in the Help window
 		QString groupName = N_("Plugin Key Bindings");
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->addGuiAction("actionShow_Satellite_ConfigDialog_Global", N_("Satellites configuration window"), "Alt+Z", groupName, true, false, true);
-		gui->addGuiAction("actionShow_Satellite_Hints", N_("Satellite hints"), "Ctrl+Z", groupName, true, false);
+		gui->addGuiAction("actionShow_Satellite_ConfigDialog_Global", N_("Satellites configuration window"), "Alt+Z", "", groupName, true, false, true);
+		gui->addGuiAction("actionShow_Satellite_Hints", N_("Satellite hints"), "Ctrl+Z", "", groupName, true, false);
 		gui->getGuiAction("actionShow_Satellite_Hints")->setChecked(getFlagHints());
-		gui->addGuiAction("actionShow_Satellite_Labels", N_("Satellite labels"), "Shift+Z", groupName, true, false);
+		gui->addGuiAction("actionShow_Satellite_Labels", N_("Satellite labels"), "Shift+Z", "", groupName, true, false);
 		gui->getGuiAction("actionShow_Satellite_Labels")->setChecked(Satellite::showLabels);
 
 		// Gui toolbar button

@@ -28,8 +28,8 @@ class StelShortcut : public QObject
 {
 	Q_OBJECT
 public:
-	StelShortcut(const QString& aid, const QString& atext, const QString& akeys,
-							 bool acheckable, bool aautoRepeat = true, bool aglobal = false, QGraphicsWidget *parent = NULL);
+	StelShortcut(const QString& id, const QString& text, const QString& primaryKey, const QString& altKey,
+							 bool checkable, bool autoRepeat = true, bool global = false, QGraphicsWidget *parent = NULL);
 
 	~StelShortcut();
 
@@ -39,10 +39,8 @@ public:
 	QString getText() const { return m_text; }
 	QKeySequence getPrimaryKey() const { return m_primaryKey; }
 	QKeySequence getAltKey() const { return m_altKey; }
-	QString getKeysString() const;
 
 	void setText(const QString& text);
-	void setKeys(const QString& keys);
 	void setPrimaryKey(const QKeySequence& key);
 	void setAltKey(const QKeySequence& key);
 	void setCheckable(bool c);
@@ -69,8 +67,6 @@ private:
 	// defines whether shortcut exists only in current session
 	bool temporary;
 	QString script;
-
-	QList<QKeySequence> splitShortcuts(const QString& shortcuts);
 };
 
 
@@ -80,8 +76,9 @@ class StelShortcutGroup : public QObject
 	Q_OBJECT
 public:
 	StelShortcutGroup(QString id, QString text = "");
-	QAction* registerAction(const QString& actionId, const QString& text, const QString& keys, bool checkable,
-													bool autoRepeat = true, bool global = false, QGraphicsWidget *parent = false);
+	QAction* registerAction(const QString& actionId, const QString& text, const QString& primaryKey,
+													const QString& altKey, bool checkable, bool autoRepeat = true,
+													bool global = false, QGraphicsWidget *parent = false);
 
 	QAction* getAction(const QString &actionId);
 	StelShortcut* getShortcut(const QString& id);
