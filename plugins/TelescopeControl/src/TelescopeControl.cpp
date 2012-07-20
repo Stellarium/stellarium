@@ -154,14 +154,14 @@ void TelescopeControl::init()
 			QString name = QString("actionMove_Telescope_To_Selection_%1").arg(i);
 			QString description = q_("Move telescope #%1 to selected object").arg(i);
 			QString shortcut = QString("Ctrl+%1").arg(i);
-			gui->addGuiAction(name, description, shortcut, group, false, false);
+			gui->addGuiAction(name, description, shortcut, "", group, false, false);
 			connect(gui->getGuiAction(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToSelectedObject()));
 
 			// "Slew to the center of the screen" commands
 			name = QString("actionSlew_Telescope_To_Direction_%1").arg(i);
 			description = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
 			shortcut = QString("Alt+%1").arg(i);
-			gui->addGuiAction(name, description, shortcut, group, false, false);
+			gui->addGuiAction(name, description, shortcut, "", group, false, false);
 			connect(gui->getGuiAction(name), SIGNAL(triggered()), this, SLOT(slewTelescopeToViewDirection()));
 		}
 
@@ -170,7 +170,7 @@ void TelescopeControl::init()
 		slewDialog = new SlewDialog();
 		
 		//TODO: Think of a better keyboard shortcut
-		gui->addGuiAction("actionShow_Slew_Window", N_("Move a telescope to a given set of coordinates"), "Ctrl+0", group, true, false);
+		gui->addGuiAction("actionShow_Slew_Window", N_("Move a telescope to a given set of coordinates"), "Ctrl+0", "", group, true, false);
 		connect(gui->getGuiAction("actionShow_Slew_Window"), SIGNAL(toggled(bool)), slewDialog, SLOT(setVisible(bool)));
 		connect(slewDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Slew_Window"), SLOT(setChecked(bool)));
 		

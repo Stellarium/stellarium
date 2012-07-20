@@ -39,15 +39,8 @@ public:
 	// search for file with shortcuts, load shortcuts from it
 	void loadShortcuts();
 
-	//! Add a new action managed by the GUI. This method should be used to add new shortcuts to the program
-	//! @param actionName qt object name. Used as a reference for later uses
-	//! @param text the text to display when hovering, or in the help window
-	//! @param shortCut the qt shortcut to use
-	//! @param helpGroup hint on how to group the text in the help window
-	//! @param checkable whether the action should be checkable
-	//! @param autoRepeat whether the action should be autorepeated
-	//! @param global whether the action should be global (affect in dialogs)
-	QAction* addGuiAction(const QString& actionId, const QString& text, const QString& shortcuts,
+	// Add a new action managed by the GUI. This method should be used to add new shortcuts to the program
+	QAction* addGuiAction(const QString& actionId, const QString& text, const QString& primaryKey, const QString& altKey,
 												const QString& groupId, bool checkable=true, bool autoRepeat=false, bool global=false);
 
 	void changeActionPrimaryKey(const QString& actionId, const QString& groupId, QKeySequence newKey);
