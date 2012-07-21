@@ -723,6 +723,37 @@
 					"autorepeat" : "0"
 				}
 			}
+		},
+		"PluginSatellites":
+		{
+			"pluginId" : "Satellites",
+			"actions" :
+			{
+				"actionShow_Satellite_ConfigDialog_Global":
+				{
+					"text" : "Satellites configuration window",
+					"primaryKey" : "Alt+Z",
+					"checkable" : "1",
+					"autorepeat" : "0",
+					"global" : "1"
+					},
+				"actionShow_Satellite_Hints":
+				{
+					"text" : "Satellite hints",
+					"primaryKey" : "Ctrl+Z",
+					"checkable" : "1",
+					"autorepeat" : "0",
+					"global" : "0"
+				},
+				"actionShow_Satellite_Labels":
+				{
+					"text" : "Satellite labels",
+					"primaryKey" : "Shift+Z",
+					"checkable" :  "1",
+					"autorepeat" : "0",
+					"global" : "0"
+				}
+			}
 		}
 	}
 }

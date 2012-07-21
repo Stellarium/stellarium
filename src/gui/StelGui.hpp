@@ -114,8 +114,8 @@ public:
 																const QString& primaryKey,
 																const QString& altKey,
 																const QString& helpGroup,
-																bool checkable=true,
-																bool autoRepeat=false,
+																bool checkable = true,
+																bool autoRepeat = false,
 																bool global = false);
 
 	virtual QAction* getGuiAction(const QString& actionName);
