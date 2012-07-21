@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-17 14:31+0300\n"
+"POT-Creation-Date: 2012-07-20 17:32+0300\n"
 "PO-Revision-Date: 2012-07-02 01:06+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-18 05:19+0000\n"
-"X-Generator: Launchpad (build 15637)\n"
+"X-Launchpad-Export-Date: 2012-07-21 04:42+0000\n"
+"X-Generator: Launchpad (build 15654)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -79,35 +79,35 @@ msgstr "Magnitud: <b>%1</b>"
 msgid "Size: %1"
 msgstr "Saiz: %1"
 
-#: src/core/modules/Nebula.cpp:303
+#: src/core/modules/Nebula.cpp:307
 msgid "Galaxy"
 msgstr "Galaksi"
 
-#: src/core/modules/Nebula.cpp:306
+#: src/core/modules/Nebula.cpp:310
 msgid "Open cluster"
 msgstr "Gugusan bintang terbuka"
 
-#: src/core/modules/Nebula.cpp:309
+#: src/core/modules/Nebula.cpp:313
 msgid "Globular cluster"
 msgstr "gugusan bintang kelompok"
 
-#: src/core/modules/Nebula.cpp:312
+#: src/core/modules/Nebula.cpp:316
 msgid "Nebula"
 msgstr "Nebula"
 
-#: src/core/modules/Nebula.cpp:315
+#: src/core/modules/Nebula.cpp:319
 msgid "Planetary nebula"
 msgstr "Nebula planetari"
 
-#: src/core/modules/Nebula.cpp:318
+#: src/core/modules/Nebula.cpp:322
 msgid "Cluster associated with nebulosity"
 msgstr "Gugusan bintang dengan gas nebulasiti"
 
-#: src/core/modules/Nebula.cpp:321
+#: src/core/modules/Nebula.cpp:325
 msgid "Unknown"
 msgstr "Tidak diketahui"
 
-#: src/core/modules/Nebula.cpp:324
+#: src/core/modules/Nebula.cpp:328
 msgid "Undocumented type"
 msgstr "Jenis yang tidak didokumentasi"
 
@@ -372,31 +372,31 @@ msgstr "Tidak ditemui"
 msgid "Found"
 msgstr "Temui"
 
-#: src/gui/ConfigurationDialog.cpp:349
+#: src/gui/ConfigurationDialog.cpp:373
 msgid "Select screenshot directory"
 msgstr "pilih direktori skrin yang dirakam"
 
-#: src/gui/ConfigurationDialog.cpp:528
+#: src/gui/ConfigurationDialog.cpp:584
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Permulaan FOV: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:536
+#: src/gui/ConfigurationDialog.cpp:592
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Arah permulaan bagi paparan Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:578
+#: src/gui/ConfigurationDialog.cpp:634
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Pengarang"
 
-#: src/gui/ConfigurationDialog.cpp:579 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:635 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "Hubungi"
 
-#: src/gui/ConfigurationDialog.cpp:662
+#: src/gui/ConfigurationDialog.cpp:718
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
@@ -404,19 +404,19 @@ msgstr "Hubungi"
 msgid "Author"
 msgstr "Pengarang"
 
-#: src/gui/ConfigurationDialog.cpp:666
+#: src/gui/ConfigurationDialog.cpp:722
 msgid "License"
 msgstr "Lesen"
 
-#: src/gui/ConfigurationDialog.cpp:692
+#: src/gui/ConfigurationDialog.cpp:748
 msgid "Running script: "
 msgstr "Skrip yang digunakan "
 
-#: src/gui/ConfigurationDialog.cpp:699
+#: src/gui/ConfigurationDialog.cpp:755
 msgid "Running script: [none]"
 msgstr "Skrip yang digunakan"
 
-#: src/gui/ConfigurationDialog.cpp:769
+#: src/gui/ConfigurationDialog.cpp:818
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -424,16 +424,16 @@ msgstr ""
 "Katalog bintang baru sudah selesai dimuat turun!/n\n"
 "Tutup dan buka semula Stellarium untuk paparkannya."
 
-#: src/gui/ConfigurationDialog.cpp:773
+#: src/gui/ConfigurationDialog.cpp:822
 msgid "All available star catalogs have been installed."
 msgstr "Semua katalog bintang yang tersedia telah dipasang."
 
-#: src/gui/ConfigurationDialog.cpp:778
+#: src/gui/ConfigurationDialog.cpp:827
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Dapatkan katalog %1 dari %2"
 
-#: src/gui/ConfigurationDialog.cpp:785
+#: src/gui/ConfigurationDialog.cpp:834
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -442,7 +442,7 @@ msgstr ""
 "Memuat turun %1.../n\n"
 "(Anda boleh tutup tetingkap ini.)"
 
-#: src/gui/ConfigurationDialog.cpp:792
+#: src/gui/ConfigurationDialog.cpp:841
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -453,7 +453,7 @@ msgstr ""
 "Kiraan bintang: %2 juta\n"
 "Jarak Magnitud: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:835 src/gui/ConfigurationDialog.cpp:871
+#: src/gui/ConfigurationDialog.cpp:884 src/gui/ConfigurationDialog.cpp:920
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -462,11 +462,11 @@ msgstr ""
 "Ralat memuat turun %1:/n\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:923
+#: src/gui/ConfigurationDialog.cpp:972
 msgid "Verifying file integrity..."
 msgstr "Mengesahkan Integriti fail..."
 
-#: src/gui/ConfigurationDialog.cpp:927
+#: src/gui/ConfigurationDialog.cpp:976
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2856,7 +2856,7 @@ msgstr "Pelayan:"
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
-#: src/ui_configurationDialog.h:901 src/ui_configurationDialog.h:912
+#: src/ui_configurationDialog.h:1065 src/ui_configurationDialog.h:1076
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "Pilihan"
@@ -3065,55 +3065,19 @@ msgstr "Guna budaya langit inisebagai lalai"
 msgid "Visible"
 msgstr "Tampak"
 
-#: src/ui_configurationDialog.h:791
+#: src/ui_configurationDialog.h:920
 msgid "Configuration"
 msgstr "Konfigurasi"
 
-#: src/ui_configurationDialog.h:793
+#: src/ui_configurationDialog.h:922
 msgid "Program language"
 msgstr "Bahasa Program"
 
-#: src/ui_configurationDialog.h:794 src/ui_CustomInfoDialog.h:192
-msgid "Selected object information"
-msgstr "Maklumat objek yang dipilih"
-
-#: src/ui_configurationDialog.h:796
-msgid "Display all information available"
-msgstr "Papar semua maklumat yang ada"
-
-#: src/ui_configurationDialog.h:798
-msgid "All available"
-msgstr "Semua yang ada"
-
-#: src/ui_configurationDialog.h:800
-msgid "Display less information"
-msgstr "Papar kurang maklumat"
-
-#: src/ui_configurationDialog.h:802
-msgid "Short"
-msgstr "Pendek"
-
-#: src/ui_configurationDialog.h:804
-msgid "Display user settings information"
-msgstr "Papar maklumat tetapan pengguna"
-
-#: src/ui_configurationDialog.h:806
-msgid "Customized"
-msgstr "Tersuai"
-
-#: src/ui_configurationDialog.h:808
-msgid "Display no information"
-msgstr "Jangan paparkan maklumat"
-
-#: src/ui_configurationDialog.h:810
-msgid "None"
-msgstr "Tiada"
-
-#: src/ui_configurationDialog.h:811
+#: src/ui_configurationDialog.h:923
 msgid "Default options"
 msgstr "Pilihan lalai"
 
-#: src/ui_configurationDialog.h:813
+#: src/ui_configurationDialog.h:925
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -3121,20 +3085,20 @@ msgstr ""
 "Simpan tetapan yang anda ubah dari sesi ini supaya tetap sama bila anda "
 "mulakan Stellarium dilain masa."
 
-#: src/ui_configurationDialog.h:815
+#: src/ui_configurationDialog.h:927
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 msgid "Save settings"
 msgstr "Simpan tetapan"
 
-#: src/ui_configurationDialog.h:817
+#: src/ui_configurationDialog.h:929
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Pulih tetapan lalai yang sedia ada pada Stellarium"
 
-#: src/ui_configurationDialog.h:819
+#: src/ui_configurationDialog.h:931
 msgid "Restore defaults"
 msgstr "Pulih lalai"
 
-#: src/ui_configurationDialog.h:820
+#: src/ui_configurationDialog.h:932
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -3144,49 +3108,166 @@ msgstr ""
 "pilihan semasa termasuklah FOV semasa dan arah paparan yang akan digunakan "
 "pada mula semula seterusnya."
 
-#: src/ui_configurationDialog.h:822
+#: src/ui_configurationDialog.h:934
 msgid "The width of your view when Stellarium starts"
 msgstr "Kelebaran paparan anda bila Stellarium dimulakan"
 
-#: src/ui_configurationDialog.h:825
+#: src/ui_configurationDialog.h:937
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Arah anda melihat bila Stellarium dimulakan"
 
-#: src/ui_configurationDialog.h:827
+#: src/ui_configurationDialog.h:939 src/ui_configurationDialog.h:1087
+msgid "Selected object information"
+msgstr "Maklumat objek yang dipilih"
+
+#: src/ui_configurationDialog.h:941
+msgid "Display all information available"
+msgstr "Papar semua maklumat yang ada"
+
+#: src/ui_configurationDialog.h:943
+msgid "All available"
+msgstr "Semua yang ada"
+
+#: src/ui_configurationDialog.h:945
+msgid "Display less information"
+msgstr "Papar kurang maklumat"
+
+#: src/ui_configurationDialog.h:947
+msgid "Short"
+msgstr "Pendek"
+
+#: src/ui_configurationDialog.h:949
+msgid "Display no information"
+msgstr "Jangan paparkan maklumat"
+
+#: src/ui_configurationDialog.h:951
+msgid "None"
+msgstr "Tiada"
+
+#: src/ui_configurationDialog.h:953
+msgid "Display user settings information"
+msgstr "Papar maklumat tetapan pengguna"
+
+#: src/ui_configurationDialog.h:955
+msgid "Customized"
+msgstr "Tersuai"
+
+#: src/ui_configurationDialog.h:956
+msgid "Displayed fields"
+msgstr ""
+
+#: src/ui_configurationDialog.h:957
+msgid "Visual magnitude"
+msgstr "Magnitud visual"
+
+#: src/ui_configurationDialog.h:959
+msgid "Spectral class, nebula type, etc."
+msgstr ""
+
+#: src/ui_configurationDialog.h:961
+msgid "Additional information 1"
+msgstr ""
+
+#: src/ui_configurationDialog.h:962
+msgid "Additional information 3"
+msgstr ""
+
+#: src/ui_configurationDialog.h:963
+msgid "Catalog number(s)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:964
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
+msgid "Name"
+msgstr "Nama"
+
+#: src/ui_configurationDialog.h:968
+msgid "Additional information 2"
+msgstr ""
+
+#: src/ui_configurationDialog.h:969
+msgid "Absolute magnitude"
+msgstr "Magnitud mutlak"
+
+#: src/ui_configurationDialog.h:971
+msgid "Horizontal coordinates"
+msgstr ""
+
+#: src/ui_configurationDialog.h:973
+msgid "Altitude/Azimuth"
+msgstr ""
+
+#: src/ui_configurationDialog.h:975
+msgid "Angular or physical size"
+msgstr ""
+
+#: src/ui_configurationDialog.h:977
+msgid "Size"
+msgstr ""
+
+#: src/ui_configurationDialog.h:979
+msgid "Geocentric equatorial coordinates, equinox of date"
+msgstr ""
+
+#: src/ui_configurationDialog.h:981
+msgid "Right ascension/Declination (of date)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:982
+msgid "Distance"
+msgstr ""
+
+#: src/ui_configurationDialog.h:984
+msgid "Geocentric equatorial coordinates, equinox of J2000.0"
+msgstr ""
+
+#: src/ui_configurationDialog.h:986
+msgid "Right ascension/Declination (J2000)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:988
+msgid "Topocentric equatorial coordinates"
+msgstr ""
+
+#: src/ui_configurationDialog.h:990
+msgid "Hour angle/Declination"
+msgstr ""
+
+#: src/ui_configurationDialog.h:991
 msgid "Control"
 msgstr "Kawalan"
 
-#: src/ui_configurationDialog.h:829
+#: src/ui_configurationDialog.h:993
 msgid "Allow keyboard to pan and zoom"
 msgstr "Benarkan papan kekunci digunakan untuk bergerak dan zum"
 
-#: src/ui_configurationDialog.h:831
+#: src/ui_configurationDialog.h:995
 msgid "Enable keyboard navigation"
 msgstr "Benarkan navigasi papan kekunci"
 
-#: src/ui_configurationDialog.h:833
+#: src/ui_configurationDialog.h:997
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "Benarkan tetikus digunakan untuk bergerak (seret) dan zum (roda tetikus)"
 
-#: src/ui_configurationDialog.h:835
+#: src/ui_configurationDialog.h:999
 msgid "Enable mouse navigation"
 msgstr "Benarkan pandu arah tetikus"
 
-#: src/ui_configurationDialog.h:836
+#: src/ui_configurationDialog.h:1000
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Startup date and time"
 msgstr "Tarikh dan masa permulaan"
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:1002
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Mulakan Stellarium menggunakan tarikh dan masa sistem"
 
-#: src/ui_configurationDialog.h:840
+#: src/ui_configurationDialog.h:1004
 msgid "System date and time"
 msgstr "Tarikh dan masa sistem"
 
-#: src/ui_configurationDialog.h:842
+#: src/ui_configurationDialog.h:1006
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -3194,55 +3275,55 @@ msgstr ""
 "Tetapkan masa simulasi pada tika seterusnya pada masa hari ini bila "
 "Stellarium dimulakan"
 
-#: src/ui_configurationDialog.h:844
+#: src/ui_configurationDialog.h:1008
 msgid "System date at:"
 msgstr "Tarikh sistem pada:"
 
-#: src/ui_configurationDialog.h:846
+#: src/ui_configurationDialog.h:1010
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Guna tarikh dan masa spesifik bila Stellarium bermula"
 
-#: src/ui_configurationDialog.h:848
+#: src/ui_configurationDialog.h:1012
 msgid "Other:"
 msgstr "Lain-lain:"
 
-#: src/ui_configurationDialog.h:849
+#: src/ui_configurationDialog.h:1013
 msgid "use current"
 msgstr "guna yang semasa"
 
-#: src/ui_configurationDialog.h:850
+#: src/ui_configurationDialog.h:1014
 msgid "Other"
 msgstr "Lain-lain"
 
-#: src/ui_configurationDialog.h:852
+#: src/ui_configurationDialog.h:1016
 msgid "Hides the mouse cursor when inactive"
 msgstr "Sembunyikan kursor tetikus apabila tidak aktif"
 
-#: src/ui_configurationDialog.h:854
+#: src/ui_configurationDialog.h:1018
 msgid "Mouse cursor timeout (seconds):"
 msgstr "Had masa tamat bagi kursor tetikus (saat):"
 
-#: src/ui_configurationDialog.h:856
+#: src/ui_configurationDialog.h:1020
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Togol butang kalih imej menegak dan melintang."
 
-#: src/ui_configurationDialog.h:858
+#: src/ui_configurationDialog.h:1022
 msgid "Show flip buttons"
 msgstr "Papar butang kalih"
 
-#: src/ui_configurationDialog.h:860
+#: src/ui_configurationDialog.h:1024
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "Togol latar belakang paparan nebula."
 
-#: src/ui_configurationDialog.h:862
+#: src/ui_configurationDialog.h:1026
 msgid "Show nebula background button"
 msgstr "Papar butang latar belakang nebula"
 
-#: src/ui_configurationDialog.h:863
+#: src/ui_configurationDialog.h:1027
 msgid "Planetarium options"
 msgstr "Pilihan Planetarium"
 
-#: src/ui_configurationDialog.h:865
+#: src/ui_configurationDialog.h:1029
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -3250,19 +3331,19 @@ msgstr ""
 "Herotan cermin bersfera digunakan apabila Stellarium diunjurkan kepada "
 "cermin bersfera untuk sistem planetarium berkos rendah."
 
-#: src/ui_configurationDialog.h:867
+#: src/ui_configurationDialog.h:1031
 msgid "Spheric mirror distortion"
 msgstr "Herotan cermin bersfera"
 
-#: src/ui_configurationDialog.h:869
+#: src/ui_configurationDialog.h:1033
 msgid "Align labels with the horizon"
 msgstr "Jajar label dengan ufuk"
 
-#: src/ui_configurationDialog.h:871
+#: src/ui_configurationDialog.h:1035
 msgid "Gravity labels"
 msgstr "Label graviti"
 
-#: src/ui_configurationDialog.h:873
+#: src/ui_configurationDialog.h:1037
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -3270,105 +3351,109 @@ msgstr ""
 "Bila dibenarkan, kekunci \"zum keluar automatik\" juga akan ditetapkan pada "
 "arah pandangan asal"
 
-#: src/ui_configurationDialog.h:875
+#: src/ui_configurationDialog.h:1039
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Zum keluar secara automatik dikembalikan kepada arah paparan asal"
 
-#: src/ui_configurationDialog.h:877
+#: src/ui_configurationDialog.h:1041
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Bukakan semuanya diluar pusat bulatan pada paparan utama"
 
-#: src/ui_configurationDialog.h:879
+#: src/ui_configurationDialog.h:1043
 msgid "Disc viewport"
 msgstr "Port pandang cakera"
 
-#: src/ui_configurationDialog.h:881
+#: src/ui_configurationDialog.h:1045
 msgid "Hide other constellations when you click one"
 msgstr "Sembunyi buruj lain bila anda klikkannya"
 
-#: src/ui_configurationDialog.h:883
+#: src/ui_configurationDialog.h:1047
 msgid "Select single constellation"
 msgstr "Pilih satu buruj"
 
-#: src/ui_configurationDialog.h:884
+#: src/ui_configurationDialog.h:1048
 msgid "Screenshots"
 msgstr "Cekupan skrin"
 
-#: src/ui_configurationDialog.h:885
+#: src/ui_configurationDialog.h:1049
 msgid "Screenshot Directory"
 msgstr "Direktori Cekupan skrin"
 
-#: src/ui_configurationDialog.h:887
+#: src/ui_configurationDialog.h:1051
 msgid "Invert colors"
 msgstr "Warna songsang"
 
-#: src/ui_configurationDialog.h:888
+#: src/ui_configurationDialog.h:1052
 msgid "Star catalog updates"
 msgstr "Kemaskini katalog bintang"
 
-#: src/ui_configurationDialog.h:890
+#: src/ui_configurationDialog.h:1054
 msgid "Click here to start downloading"
 msgstr "Klik disini untuk memulakan muat turun"
 
-#: src/ui_configurationDialog.h:892
+#: src/ui_configurationDialog.h:1056
 msgid "Download this file to view even more stars"
 msgstr "Muat turun fail ini untuk paparkan lebih banyak bintang"
 
-#: src/ui_configurationDialog.h:894
+#: src/ui_configurationDialog.h:1058
 msgid "Restart the download"
 msgstr "Mula semula muat turun"
 
-#: src/ui_configurationDialog.h:896
+#: src/ui_configurationDialog.h:1060
 msgid "Retry"
 msgstr "Cuba lagi"
 
-#: src/ui_configurationDialog.h:898
+#: src/ui_configurationDialog.h:1062
 msgid "Stop the download. You can always restart it later"
 msgstr "Henti muat turun. anda boleh mula semula kemudiannya"
 
-#: src/ui_configurationDialog.h:900
+#: src/ui_configurationDialog.h:1064
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
 msgid "Cancel"
 msgstr "Batal"
 
-#: src/ui_configurationDialog.h:903
+#: src/ui_configurationDialog.h:1067
 msgid "Close window when script runs"
 msgstr "Tutup tetingkap ini bila skrip dijalankan"
 
-#: src/ui_configurationDialog.h:905
+#: src/ui_configurationDialog.h:1069
 msgid "Run the selected script"
 msgstr "Jalankan skrip yang dipilih"
 
-#: src/ui_configurationDialog.h:909
+#: src/ui_configurationDialog.h:1073
 msgid "Stop a running script"
 msgstr "Henti skrip yang dijalankan"
 
-#: src/ui_configurationDialog.h:913
+#: src/ui_configurationDialog.h:1077
 msgid "Load at startup"
 msgstr "Muat pada permulaan"
 
-#: src/ui_configurationDialog.h:914
+#: src/ui_configurationDialog.h:1078
 msgid "configure"
 msgstr "konfigur"
 
-#: src/ui_configurationDialog.h:919
+#: src/ui_configurationDialog.h:1083
 msgid "Main"
 msgstr "Utama"
 
-#: src/ui_configurationDialog.h:921
+#: src/ui_configurationDialog.h:1085
+msgid "Information"
+msgstr "Maklumat"
+
+#: src/ui_configurationDialog.h:1090
 msgid "Navigation"
 msgstr "Navigasi"
 
-#: src/ui_configurationDialog.h:923
+#: src/ui_configurationDialog.h:1092
 msgid "Tools"
 msgstr "Alatan"
 
-#: src/ui_configurationDialog.h:925
+#: src/ui_configurationDialog.h:1094
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:441
 msgid "Scripts"
 msgstr "Skrip"
 
-#: src/ui_configurationDialog.h:927
+#: src/ui_configurationDialog.h:1096
 msgid "Plugins"
 msgstr "Pemalam"
 
@@ -3443,107 +3528,6 @@ msgid ""
 msgstr ""
 "Guna kira-kira 0.12 untuk puncak gunung, 0.2 untuk lanskap pendalaman, 0.35 "
 "untuk keadaan suram"
-
-#: src/ui_CustomInfoDialog.h:194
-msgid "Custom Info Settings"
-msgstr "Tetapan Maklumat Suai"
-
-#: src/ui_CustomInfoDialog.h:196
-msgid "Display info about an object's name"
-msgstr "Papar maklumat mengenai nama objek"
-
-#: src/ui_CustomInfoDialog.h:198
-msgid "An object's name"
-msgstr "Nama objek"
-
-#: src/ui_CustomInfoDialog.h:200
-msgid "Display  info about a catalog numbers"
-msgstr "Papar maklumat mengenai nombor katalog"
-
-#: src/ui_CustomInfoDialog.h:202
-msgid "Catalog numbers"
-msgstr "Nombor katalog"
-
-#: src/ui_CustomInfoDialog.h:204
-msgid "Display  info about a visual magnitude"
-msgstr "Papar maklumat mengenai magnitud visual"
-
-#: src/ui_CustomInfoDialog.h:206
-msgid "Visual magnitude"
-msgstr "Magnitud visual"
-
-#: src/ui_CustomInfoDialog.h:208
-msgid "Display  info about an absolute magnitude"
-msgstr "Papar maklumat mengenai magnitud mutlak"
-
-#: src/ui_CustomInfoDialog.h:210
-msgid "Absolute magnitude"
-msgstr "Magnitud mutlak"
-
-#: src/ui_CustomInfoDialog.h:212
-msgid "Display the equatorial position (J2000 ref)"
-msgstr "Papar kedudukan khatulistiwa (J2000 ref)"
-
-#: src/ui_CustomInfoDialog.h:214
-msgid "The equatorial coordinates (J2000 ref)"
-msgstr "Koordinat khatulistiwa (J2000 ref)"
-
-#: src/ui_CustomInfoDialog.h:216
-msgid "Display the equatorial position (of date)"
-msgstr "Papar kedudukan khatulistiwa (tarikh)"
-
-#: src/ui_CustomInfoDialog.h:218
-msgid "The equatorial coordinates (of date)"
-msgstr "Koordinat khatulistiwa (tarikh)"
-
-#: src/ui_CustomInfoDialog.h:220
-msgid "Display the altitude and azimuth position"
-msgstr "Papar kedudukan altitud dan azimut"
-
-#: src/ui_CustomInfoDialog.h:222
-msgid "The alt-azimuthal coordinates"
-msgstr "Koordinat alt-azimut"
-
-#: src/ui_CustomInfoDialog.h:224
-msgid "Display the hour angle + DE (of date)"
-msgstr "Papar sudut jam + DE (tarikh)"
-
-#: src/ui_CustomInfoDialog.h:226
-msgid "The hour angle"
-msgstr "Sudut jam"
-
-#: src/ui_CustomInfoDialog.h:228
-msgid "Display info about an object's distance"
-msgstr "Papar maklumat mengenai jarak objek"
-
-#: src/ui_CustomInfoDialog.h:230
-msgid "Object's distance"
-msgstr "Jarak objek"
-
-#: src/ui_CustomInfoDialog.h:232
-msgid "Display info about an object's size"
-msgstr "Papar maklumat mengenai saiz objek"
-
-#: src/ui_CustomInfoDialog.h:234
-msgid "Object's size"
-msgstr "Saiz objek"
-
-#: src/ui_CustomInfoDialog.h:236 src/ui_CustomInfoDialog.h:240
-#: src/ui_CustomInfoDialog.h:244
-msgid "Display a derived class-specific extra fields"
-msgstr "Papar medan tambahan spesifik-kelas terpacu"
-
-#: src/ui_CustomInfoDialog.h:238
-msgid "Additional info (Extra 1)"
-msgstr "Maklumat tambahan (Tambahan 1)"
-
-#: src/ui_CustomInfoDialog.h:242
-msgid "Additional info (Extra 2)"
-msgstr "Maklumat tambahan (Tambahan 2)"
-
-#: src/ui_CustomInfoDialog.h:246
-msgid "Additional info (Extra 3)"
-msgstr "Maklumat tambahan (Tambahan 3)"
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
@@ -4832,10 +4816,6 @@ msgstr "Status"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Type"
 msgstr "Jenis"
-
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
-msgid "Name"
-msgstr "Nama"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #, qt-format
@@ -6620,3 +6600,72 @@ msgstr "Kemaskini data eksoplanet dari Internet"
 #, qt-format
 #~ msgid "Equivalent width of the integrated pulse profile: %1 ms"
 #~ msgstr "Lebar setara bagi profil denyut tersepadu: %1 ms"
+
+#~ msgid "Custom Info Settings"
+#~ msgstr "Tetapan Maklumat Suai"
+
+#~ msgid "Display info about an object's name"
+#~ msgstr "Papar maklumat mengenai nama objek"
+
+#~ msgid "An object's name"
+#~ msgstr "Nama objek"
+
+#~ msgid "Display  info about an absolute magnitude"
+#~ msgstr "Papar maklumat mengenai magnitud mutlak"
+
+#~ msgid "Display  info about a catalog numbers"
+#~ msgstr "Papar maklumat mengenai nombor katalog"
+
+#~ msgid "Catalog numbers"
+#~ msgstr "Nombor katalog"
+
+#~ msgid "Display  info about a visual magnitude"
+#~ msgstr "Papar maklumat mengenai magnitud visual"
+
+#~ msgid "Display info about an object's size"
+#~ msgstr "Papar maklumat mengenai saiz objek"
+
+#~ msgid "Object's distance"
+#~ msgstr "Jarak objek"
+
+#~ msgid "Display info about an object's distance"
+#~ msgstr "Papar maklumat mengenai jarak objek"
+
+#~ msgid "Additional info (Extra 1)"
+#~ msgstr "Maklumat tambahan (Tambahan 1)"
+
+#~ msgid "Object's size"
+#~ msgstr "Saiz objek"
+
+#~ msgid "Additional info (Extra 3)"
+#~ msgstr "Maklumat tambahan (Tambahan 3)"
+
+#~ msgid "Display the altitude and azimuth position"
+#~ msgstr "Papar kedudukan altitud dan azimut"
+
+#~ msgid "Display the hour angle + DE (of date)"
+#~ msgstr "Papar sudut jam + DE (tarikh)"
+
+#~ msgid "The alt-azimuthal coordinates"
+#~ msgstr "Koordinat alt-azimut"
+
+#~ msgid "The hour angle"
+#~ msgstr "Sudut jam"
+
+#~ msgid "Additional info (Extra 2)"
+#~ msgstr "Maklumat tambahan (Tambahan 2)"
+
+#~ msgid "Display the equatorial position (J2000 ref)"
+#~ msgstr "Papar kedudukan khatulistiwa (J2000 ref)"
+
+#~ msgid "The equatorial coordinates (of date)"
+#~ msgstr "Koordinat khatulistiwa (tarikh)"
+
+#~ msgid "Display the equatorial position (of date)"
+#~ msgstr "Papar kedudukan khatulistiwa (tarikh)"
+
+#~ msgid "The equatorial coordinates (J2000 ref)"
+#~ msgstr "Koordinat khatulistiwa (J2000 ref)"
+
+#~ msgid "Display a derived class-specific extra fields"
+#~ msgstr "Papar medan tambahan spesifik-kelas terpacu"

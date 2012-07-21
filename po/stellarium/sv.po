@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-17 14:31+0300\n"
+"POT-Creation-Date: 2012-07-20 17:32+0300\n"
 "PO-Revision-Date: 2012-02-19 15:58+0000\n"
 "Last-Translator: Rikard Edgren <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-18 05:21+0000\n"
-"X-Generator: Launchpad (build 15637)\n"
+"X-Launchpad-Export-Date: 2012-07-21 04:44+0000\n"
+"X-Generator: Launchpad (build 15654)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -79,35 +79,35 @@ msgstr "Magnitud: <b>%1</b>"
 msgid "Size: %1"
 msgstr "Storlek: %1"
 
-#: src/core/modules/Nebula.cpp:303
+#: src/core/modules/Nebula.cpp:307
 msgid "Galaxy"
 msgstr "Galax"
 
-#: src/core/modules/Nebula.cpp:306
+#: src/core/modules/Nebula.cpp:310
 msgid "Open cluster"
 msgstr "Öppen stjärnhop"
 
-#: src/core/modules/Nebula.cpp:309
+#: src/core/modules/Nebula.cpp:313
 msgid "Globular cluster"
 msgstr "Klotformad stjärnhop"
 
-#: src/core/modules/Nebula.cpp:312
+#: src/core/modules/Nebula.cpp:316
 msgid "Nebula"
 msgstr "Nebulosa"
 
-#: src/core/modules/Nebula.cpp:315
+#: src/core/modules/Nebula.cpp:319
 msgid "Planetary nebula"
 msgstr "Planetär nebulosa"
 
-#: src/core/modules/Nebula.cpp:318
+#: src/core/modules/Nebula.cpp:322
 msgid "Cluster associated with nebulosity"
 msgstr "Kluster associerat med nebulositet"
 
-#: src/core/modules/Nebula.cpp:321
+#: src/core/modules/Nebula.cpp:325
 msgid "Unknown"
 msgstr "Okänd"
 
-#: src/core/modules/Nebula.cpp:324
+#: src/core/modules/Nebula.cpp:328
 msgid "Undocumented type"
 msgstr "Odokumenterad typ"
 
@@ -372,31 +372,31 @@ msgstr ""
 msgid "Found"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:349
+#: src/gui/ConfigurationDialog.cpp:373
 msgid "Select screenshot directory"
 msgstr "Välj skärmbildskatalog"
 
-#: src/gui/ConfigurationDialog.cpp:528
+#: src/gui/ConfigurationDialog.cpp:584
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "FOV vid start: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:536
+#: src/gui/ConfigurationDialog.cpp:592
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Visningsriktning vid start Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:578
+#: src/gui/ConfigurationDialog.cpp:634
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
 msgid "Authors"
 msgstr "Upphovsmän"
 
-#: src/gui/ConfigurationDialog.cpp:579 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:635 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "Kontakt"
 
-#: src/gui/ConfigurationDialog.cpp:662
+#: src/gui/ConfigurationDialog.cpp:718
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
@@ -404,19 +404,19 @@ msgstr "Kontakt"
 msgid "Author"
 msgstr "Upphovsman"
 
-#: src/gui/ConfigurationDialog.cpp:666
+#: src/gui/ConfigurationDialog.cpp:722
 msgid "License"
 msgstr "Licens"
 
-#: src/gui/ConfigurationDialog.cpp:692
+#: src/gui/ConfigurationDialog.cpp:748
 msgid "Running script: "
 msgstr "Kör skript: "
 
-#: src/gui/ConfigurationDialog.cpp:699
+#: src/gui/ConfigurationDialog.cpp:755
 msgid "Running script: [none]"
 msgstr "Kör skript: [inget]"
 
-#: src/gui/ConfigurationDialog.cpp:769
+#: src/gui/ConfigurationDialog.cpp:818
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -424,16 +424,16 @@ msgstr ""
 "Nerladdning av nya stjärnkataloger klar!\n"
 "Starta om Stellarium för att visa dem."
 
-#: src/gui/ConfigurationDialog.cpp:773
+#: src/gui/ConfigurationDialog.cpp:822
 msgid "All available star catalogs have been installed."
 msgstr "Alla tillgängliga stjærnkataloger har installerats"
 
-#: src/gui/ConfigurationDialog.cpp:778
+#: src/gui/ConfigurationDialog.cpp:827
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Hämta katalog %1 av %2"
 
-#: src/gui/ConfigurationDialog.cpp:785
+#: src/gui/ConfigurationDialog.cpp:834
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -442,7 +442,7 @@ msgstr ""
 "Hämtar %1...\n"
 "(Du kan stänga detta fönster.)"
 
-#: src/gui/ConfigurationDialog.cpp:792
+#: src/gui/ConfigurationDialog.cpp:841
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -453,7 +453,7 @@ msgstr ""
 "Antal stjärnor: %2 miljoner\n"
 "Magnitud: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:835 src/gui/ConfigurationDialog.cpp:871
+#: src/gui/ConfigurationDialog.cpp:884 src/gui/ConfigurationDialog.cpp:920
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -462,11 +462,11 @@ msgstr ""
 "Fel vid hämtning av %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:923
+#: src/gui/ConfigurationDialog.cpp:972
 msgid "Verifying file integrity..."
 msgstr "Verifierar filintegritet..."
 
-#: src/gui/ConfigurationDialog.cpp:927
+#: src/gui/ConfigurationDialog.cpp:976
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2847,7 +2847,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
-#: src/ui_configurationDialog.h:901 src/ui_configurationDialog.h:912
+#: src/ui_configurationDialog.h:1065 src/ui_configurationDialog.h:1076
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "Options"
 msgstr "Alternativ"
@@ -3056,55 +3056,19 @@ msgstr "Använd denna himmelskultur som standard"
 msgid "Visible"
 msgstr "Synlig"
 
-#: src/ui_configurationDialog.h:791
+#: src/ui_configurationDialog.h:920
 msgid "Configuration"
 msgstr "Konfiguration"
 
-#: src/ui_configurationDialog.h:793
+#: src/ui_configurationDialog.h:922
 msgid "Program language"
 msgstr "Programspråk"
 
-#: src/ui_configurationDialog.h:794 src/ui_CustomInfoDialog.h:192
-msgid "Selected object information"
-msgstr "Information om valt objekt"
-
-#: src/ui_configurationDialog.h:796
-msgid "Display all information available"
-msgstr "Visa all tillgänglig information"
-
-#: src/ui_configurationDialog.h:798
-msgid "All available"
-msgstr "Alla tillgängliga"
-
-#: src/ui_configurationDialog.h:800
-msgid "Display less information"
-msgstr "Visa mindre information"
-
-#: src/ui_configurationDialog.h:802
-msgid "Short"
-msgstr "Kort"
-
-#: src/ui_configurationDialog.h:804
-msgid "Display user settings information"
-msgstr ""
-
-#: src/ui_configurationDialog.h:806
-msgid "Customized"
-msgstr ""
-
-#: src/ui_configurationDialog.h:808
-msgid "Display no information"
-msgstr "Visa ingen information"
-
-#: src/ui_configurationDialog.h:810
-msgid "None"
-msgstr "Ingen"
-
-#: src/ui_configurationDialog.h:811
+#: src/ui_configurationDialog.h:923
 msgid "Default options"
 msgstr "Standardval"
 
-#: src/ui_configurationDialog.h:813
+#: src/ui_configurationDialog.h:925
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -3112,20 +3076,20 @@ msgstr ""
 "Spara inställningarna du ändrat i denna session så att dessa används nästa "
 "gång du startar Stellarium"
 
-#: src/ui_configurationDialog.h:815
+#: src/ui_configurationDialog.h:927
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 msgid "Save settings"
 msgstr "Spara inställningar"
 
-#: src/ui_configurationDialog.h:817
+#: src/ui_configurationDialog.h:929
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Återställ inställningarna till ursprungliga värden."
 
-#: src/ui_configurationDialog.h:819
+#: src/ui_configurationDialog.h:931
 msgid "Restore defaults"
 msgstr "Återställ standardvärden"
 
-#: src/ui_configurationDialog.h:820
+#: src/ui_configurationDialog.h:932
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -3135,48 +3099,165 @@ msgstr ""
 "stellarium. Lagra alla aktuella inställningar, inklusive den aktuella FOV "
 "och visningsriktningen för bruk vid nästa start."
 
-#: src/ui_configurationDialog.h:822
+#: src/ui_configurationDialog.h:934
 msgid "The width of your view when Stellarium starts"
 msgstr "Vidden av ditt synfält när Stellarium startar"
 
-#: src/ui_configurationDialog.h:825
+#: src/ui_configurationDialog.h:937
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Den riktning du ser när Stellarium startar"
 
-#: src/ui_configurationDialog.h:827
+#: src/ui_configurationDialog.h:939 src/ui_configurationDialog.h:1087
+msgid "Selected object information"
+msgstr "Information om valt objekt"
+
+#: src/ui_configurationDialog.h:941
+msgid "Display all information available"
+msgstr "Visa all tillgänglig information"
+
+#: src/ui_configurationDialog.h:943
+msgid "All available"
+msgstr "Alla tillgängliga"
+
+#: src/ui_configurationDialog.h:945
+msgid "Display less information"
+msgstr "Visa mindre information"
+
+#: src/ui_configurationDialog.h:947
+msgid "Short"
+msgstr "Kort"
+
+#: src/ui_configurationDialog.h:949
+msgid "Display no information"
+msgstr "Visa ingen information"
+
+#: src/ui_configurationDialog.h:951
+msgid "None"
+msgstr "Ingen"
+
+#: src/ui_configurationDialog.h:953
+msgid "Display user settings information"
+msgstr ""
+
+#: src/ui_configurationDialog.h:955
+msgid "Customized"
+msgstr ""
+
+#: src/ui_configurationDialog.h:956
+msgid "Displayed fields"
+msgstr ""
+
+#: src/ui_configurationDialog.h:957
+msgid "Visual magnitude"
+msgstr ""
+
+#: src/ui_configurationDialog.h:959
+msgid "Spectral class, nebula type, etc."
+msgstr ""
+
+#: src/ui_configurationDialog.h:961
+msgid "Additional information 1"
+msgstr ""
+
+#: src/ui_configurationDialog.h:962
+msgid "Additional information 3"
+msgstr ""
+
+#: src/ui_configurationDialog.h:963
+msgid "Catalog number(s)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:964
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
+msgid "Name"
+msgstr "Namn"
+
+#: src/ui_configurationDialog.h:968
+msgid "Additional information 2"
+msgstr ""
+
+#: src/ui_configurationDialog.h:969
+msgid "Absolute magnitude"
+msgstr ""
+
+#: src/ui_configurationDialog.h:971
+msgid "Horizontal coordinates"
+msgstr ""
+
+#: src/ui_configurationDialog.h:973
+msgid "Altitude/Azimuth"
+msgstr ""
+
+#: src/ui_configurationDialog.h:975
+msgid "Angular or physical size"
+msgstr ""
+
+#: src/ui_configurationDialog.h:977
+msgid "Size"
+msgstr ""
+
+#: src/ui_configurationDialog.h:979
+msgid "Geocentric equatorial coordinates, equinox of date"
+msgstr ""
+
+#: src/ui_configurationDialog.h:981
+msgid "Right ascension/Declination (of date)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:982
+msgid "Distance"
+msgstr ""
+
+#: src/ui_configurationDialog.h:984
+msgid "Geocentric equatorial coordinates, equinox of J2000.0"
+msgstr ""
+
+#: src/ui_configurationDialog.h:986
+msgid "Right ascension/Declination (J2000)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:988
+msgid "Topocentric equatorial coordinates"
+msgstr ""
+
+#: src/ui_configurationDialog.h:990
+msgid "Hour angle/Declination"
+msgstr ""
+
+#: src/ui_configurationDialog.h:991
 msgid "Control"
 msgstr "Styrning"
 
-#: src/ui_configurationDialog.h:829
+#: src/ui_configurationDialog.h:993
 msgid "Allow keyboard to pan and zoom"
 msgstr "Använd tangentbordet till att flytta och zooma"
 
-#: src/ui_configurationDialog.h:831
+#: src/ui_configurationDialog.h:995
 msgid "Enable keyboard navigation"
 msgstr "Aktivera tangentbordsnavigering"
 
-#: src/ui_configurationDialog.h:833
+#: src/ui_configurationDialog.h:997
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "Tillåt panorering (dra) och zoomning (scrollhjul) med musen"
 
-#: src/ui_configurationDialog.h:835
+#: src/ui_configurationDialog.h:999
 msgid "Enable mouse navigation"
 msgstr "Aktivera musnavigering"
 
-#: src/ui_configurationDialog.h:836
+#: src/ui_configurationDialog.h:1000
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Startup date and time"
 msgstr "Datum och tid vid start"
 
-#: src/ui_configurationDialog.h:838
+#: src/ui_configurationDialog.h:1002
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Startar Stellarium vid systemklockans datum och tid"
 
-#: src/ui_configurationDialog.h:840
+#: src/ui_configurationDialog.h:1004
 msgid "System date and time"
 msgstr "Systemets datum och tid"
 
-#: src/ui_configurationDialog.h:842
+#: src/ui_configurationDialog.h:1006
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -3184,55 +3265,55 @@ msgstr ""
 "Ställer in simuleringstiden till nästa instans av den här tiden på dygnet "
 "när Stellarium startar"
 
-#: src/ui_configurationDialog.h:844
+#: src/ui_configurationDialog.h:1008
 msgid "System date at:"
 msgstr "Systemets datum kl:"
 
-#: src/ui_configurationDialog.h:846
+#: src/ui_configurationDialog.h:1010
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Använd ett angivet datum och tid när Stellarium startas upp"
 
-#: src/ui_configurationDialog.h:848
+#: src/ui_configurationDialog.h:1012
 msgid "Other:"
 msgstr "Annat:"
 
-#: src/ui_configurationDialog.h:849
+#: src/ui_configurationDialog.h:1013
 msgid "use current"
 msgstr "använd aktuellt"
 
-#: src/ui_configurationDialog.h:850
+#: src/ui_configurationDialog.h:1014
 msgid "Other"
 msgstr "Annat"
 
-#: src/ui_configurationDialog.h:852
+#: src/ui_configurationDialog.h:1016
 msgid "Hides the mouse cursor when inactive"
 msgstr "Döljer muspekaren vid inaktivitet"
 
-#: src/ui_configurationDialog.h:854
+#: src/ui_configurationDialog.h:1018
 msgid "Mouse cursor timeout (seconds):"
 msgstr "Tidsgräns för muspekare (sekunder):"
 
-#: src/ui_configurationDialog.h:856
+#: src/ui_configurationDialog.h:1020
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Växla knappar för vertikal och horisontell bildvändning."
 
-#: src/ui_configurationDialog.h:858
+#: src/ui_configurationDialog.h:1022
 msgid "Show flip buttons"
 msgstr "Visa vändningsknappar"
 
-#: src/ui_configurationDialog.h:860
+#: src/ui_configurationDialog.h:1024
 msgid "Toggle display backgrounds of the nebulae."
 msgstr ""
 
-#: src/ui_configurationDialog.h:862
+#: src/ui_configurationDialog.h:1026
 msgid "Show nebula background button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:863
+#: src/ui_configurationDialog.h:1027
 msgid "Planetarium options"
 msgstr "Planetariumalternativ"
 
-#: src/ui_configurationDialog.h:865
+#: src/ui_configurationDialog.h:1029
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -3240,19 +3321,19 @@ msgstr ""
 "Sfärisk spegel distorsion används när Stellarium projiceras på en sfärisk "
 "spegel i låg-budjet planetarie-system."
 
-#: src/ui_configurationDialog.h:867
+#: src/ui_configurationDialog.h:1031
 msgid "Spheric mirror distortion"
 msgstr "Sfärisk spegel distorsion"
 
-#: src/ui_configurationDialog.h:869
+#: src/ui_configurationDialog.h:1033
 msgid "Align labels with the horizon"
 msgstr "Rätta etiketter mot horisonten"
 
-#: src/ui_configurationDialog.h:871
+#: src/ui_configurationDialog.h:1035
 msgid "Gravity labels"
 msgstr "Gravitetsetiketter"
 
-#: src/ui_configurationDialog.h:873
+#: src/ui_configurationDialog.h:1037
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -3260,105 +3341,109 @@ msgstr ""
 "När det aktiveras kommer knappen för \"automatisk utzoomning\" också ställa "
 "in riktningen för visning vid start"
 
-#: src/ui_configurationDialog.h:875
+#: src/ui_configurationDialog.h:1039
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Automatisk utzoomning återvänder till visningsriktningen vid start"
 
-#: src/ui_configurationDialog.h:877
+#: src/ui_configurationDialog.h:1041
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Maskera bort allting utanför en central cirkel i huvud vyn"
 
-#: src/ui_configurationDialog.h:879
+#: src/ui_configurationDialog.h:1043
 msgid "Disc viewport"
 msgstr "Skivformad vyport"
 
-#: src/ui_configurationDialog.h:881
+#: src/ui_configurationDialog.h:1045
 msgid "Hide other constellations when you click one"
 msgstr "Dölj andra stjärnbilder när du klickar på en"
 
-#: src/ui_configurationDialog.h:883
+#: src/ui_configurationDialog.h:1047
 msgid "Select single constellation"
 msgstr "Välj enskild stjärnbild"
 
-#: src/ui_configurationDialog.h:884
+#: src/ui_configurationDialog.h:1048
 msgid "Screenshots"
 msgstr "Skärmbilder"
 
-#: src/ui_configurationDialog.h:885
+#: src/ui_configurationDialog.h:1049
 msgid "Screenshot Directory"
 msgstr "Skärmbildskatalog"
 
-#: src/ui_configurationDialog.h:887
+#: src/ui_configurationDialog.h:1051
 msgid "Invert colors"
 msgstr "Invertera färger"
 
-#: src/ui_configurationDialog.h:888
+#: src/ui_configurationDialog.h:1052
 msgid "Star catalog updates"
 msgstr "Uppdateringar av stjärnkataloger"
 
-#: src/ui_configurationDialog.h:890
+#: src/ui_configurationDialog.h:1054
 msgid "Click here to start downloading"
 msgstr "Klicka här för att ladda ner"
 
-#: src/ui_configurationDialog.h:892
+#: src/ui_configurationDialog.h:1056
 msgid "Download this file to view even more stars"
 msgstr "Ladda ner denna fil för att visa ännu fler stjärnor"
 
-#: src/ui_configurationDialog.h:894
+#: src/ui_configurationDialog.h:1058
 msgid "Restart the download"
 msgstr "Ladda ner på nytt"
 
-#: src/ui_configurationDialog.h:896
+#: src/ui_configurationDialog.h:1060
 msgid "Retry"
 msgstr "Försök igen"
 
-#: src/ui_configurationDialog.h:898
+#: src/ui_configurationDialog.h:1062
 msgid "Stop the download. You can always restart it later"
 msgstr "Stoppa nedladdningen. Du kan alltid starta om den senare"
 
-#: src/ui_configurationDialog.h:900
+#: src/ui_configurationDialog.h:1064
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:518
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/ui_configurationDialog.h:903
+#: src/ui_configurationDialog.h:1067
 msgid "Close window when script runs"
 msgstr "Stäng fönstret när skriptet körs"
 
-#: src/ui_configurationDialog.h:905
+#: src/ui_configurationDialog.h:1069
 msgid "Run the selected script"
 msgstr "Kör det valda skriptet"
 
-#: src/ui_configurationDialog.h:909
+#: src/ui_configurationDialog.h:1073
 msgid "Stop a running script"
 msgstr "Stoppa ett körande skript"
 
-#: src/ui_configurationDialog.h:913
+#: src/ui_configurationDialog.h:1077
 msgid "Load at startup"
 msgstr "Laddas vid start"
 
-#: src/ui_configurationDialog.h:914
+#: src/ui_configurationDialog.h:1078
 msgid "configure"
 msgstr "Konfigurera"
 
-#: src/ui_configurationDialog.h:919
+#: src/ui_configurationDialog.h:1083
 msgid "Main"
 msgstr "Allmänt"
 
-#: src/ui_configurationDialog.h:921
+#: src/ui_configurationDialog.h:1085
+msgid "Information"
+msgstr "Information"
+
+#: src/ui_configurationDialog.h:1090
 msgid "Navigation"
 msgstr "Navigering"
 
-#: src/ui_configurationDialog.h:923
+#: src/ui_configurationDialog.h:1092
 msgid "Tools"
 msgstr "Verktyg"
 
-#: src/ui_configurationDialog.h:925
+#: src/ui_configurationDialog.h:1094
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:441
 msgid "Scripts"
 msgstr "Skript"
 
-#: src/ui_configurationDialog.h:927
+#: src/ui_configurationDialog.h:1096
 msgid "Plugins"
 msgstr "Insticksprogram"
 
@@ -3433,107 +3518,6 @@ msgid ""
 msgstr ""
 "Använd cirka 0,12 för bästa vyn från bergstoppar, 0,2 för bra förhållanden "
 "på landsbygden, 0,35 för sämre förhållanden."
-
-#: src/ui_CustomInfoDialog.h:194
-msgid "Custom Info Settings"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:196
-msgid "Display info about an object's name"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:198
-msgid "An object's name"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:200
-msgid "Display  info about a catalog numbers"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:202
-msgid "Catalog numbers"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:204
-msgid "Display  info about a visual magnitude"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:206
-msgid "Visual magnitude"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:208
-msgid "Display  info about an absolute magnitude"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:210
-msgid "Absolute magnitude"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:212
-msgid "Display the equatorial position (J2000 ref)"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:214
-msgid "The equatorial coordinates (J2000 ref)"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:216
-msgid "Display the equatorial position (of date)"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:218
-msgid "The equatorial coordinates (of date)"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:220
-msgid "Display the altitude and azimuth position"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:222
-msgid "The alt-azimuthal coordinates"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:224
-msgid "Display the hour angle + DE (of date)"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:226
-msgid "The hour angle"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:228
-msgid "Display info about an object's distance"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:230
-msgid "Object's distance"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:232
-msgid "Display info about an object's size"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:234
-msgid "Object's size"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:236 src/ui_CustomInfoDialog.h:240
-#: src/ui_CustomInfoDialog.h:244
-msgid "Display a derived class-specific extra fields"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:238
-msgid "Additional info (Extra 1)"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:242
-msgid "Additional info (Extra 2)"
-msgstr ""
-
-#: src/ui_CustomInfoDialog.h:246
-msgid "Additional info (Extra 3)"
-msgstr ""
 
 #: src/ui_scriptConsole.h:341
 msgid "Script console"
@@ -4786,10 +4770,6 @@ msgstr "Status"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Type"
 msgstr "Filtyp"
-
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
-msgid "Name"
-msgstr "Namn"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #, qt-format
