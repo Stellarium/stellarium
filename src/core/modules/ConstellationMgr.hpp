@@ -34,7 +34,6 @@ class StelToneReproducer;
 class StarMgr;
 class Constellation;
 class StelProjector;
-class StelPainter;
 
 //! @class ConstellationMgr
 //! Display and manage the constellations.
@@ -260,7 +259,10 @@ private:
 	//! @param font      Font to draw the names with.
 	void drawNames(class StelRenderer* renderer, StelProjectorP projector, QFont& font) const;
 	//! Draw the constellation boundaries.
-	void drawBoundaries(StelPainter& sPainter) const;
+	//! 
+	//! @param renderer  Renderer to draw with.
+	//! @param projector Projector to project vertices to viewport.
+	void drawBoundaries(StelRenderer* renderer, StelProjectorP projector) const;
 	//! Handle single and multi-constellation selections.
 	void setSelectedConst(Constellation* c);
 	//! Handle unselecting a single constellation.

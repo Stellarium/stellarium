@@ -466,7 +466,7 @@ public:
 	//! determined by StelProjector::flipFrontBackFace().
 	//!
 	//! @note Front face culling seems to be severely bugged (resulting in 
-	//! garbage viewport) at least on the following configuration:
+	//! garbage viewport) at least on the following configuration/s:
 	//!
 	//! Ubuntu 12.04, AMD Catalyst 8.96.7, Radeon HD 6700 (using StelQGL2Renderer)
 	//!

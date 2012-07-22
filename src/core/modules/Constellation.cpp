@@ -32,7 +32,6 @@
 #include "renderer/StelRenderer.hpp"
 #include "renderer/StelTexture.hpp"
 #include "renderer/StelIndexBuffer.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
@@ -243,41 +242,39 @@ void Constellation::update(int deltaTime)
 	boundaryFader.update(deltaTime);
 }
 
-void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
+void Constellation::drawBoundaryOptim(StelRenderer* renderer, StelProjectorP projector) const
 {
-	if (!boundaryFader.getInterstate())
-		return;
-
-	sPainter.enableTexture2d(false);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-
-	sPainter.setColor(boundaryColor[0], boundaryColor[1], boundaryColor[2], boundaryFader.getInterstate());
-
-	unsigned int i, j, size;
-	Vec3f pt1, pt2;
-	Vec3d ptd1, ptd2;
-	std::vector<Vec3f> *points;
-
-	if (singleSelected) size = isolatedBoundarySegments.size();
-	else size = sharedBoundarySegments.size();
-
-	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
-
-	for (i=0;i<size;i++)
+	if (boundaryFader.getInterstate() < 0.001)
 	{
-		if (singleSelected) points = isolatedBoundarySegments[i];
-		else points = sharedBoundarySegments[i];
+		return;
+	}
 
-		for (j=0;j<points->size()-1;j++)
+	renderer->setBlendMode(BlendMode_Alpha);
+	renderer->setGlobalColor(Vec4f(boundaryColor[0], boundaryColor[1], 
+	                               boundaryColor[2], boundaryFader.getInterstate()));
+
+	int size = singleSelected ? isolatedBoundarySegments.size() 
+	                          : sharedBoundarySegments.size();
+
+	const SphericalCap& viewportHalfspace = projector->getBoundingCap();
+
+	for (int i = 0; i < size; i++)
+	{
+		std::vector<Vec3f>* points = singleSelected ? isolatedBoundarySegments[i] 
+		                                            : sharedBoundarySegments[i];
+
+		for (int j = 0; j < static_cast<int>(points->size()) - 1; j++)
 		{
-			pt1 = points->at(j);
-			pt2 = points->at(j+1);
-			if (pt1*pt2>0.9999999f)
+			const Vec3f pt1 = points->at(j) ;
+			const Vec3f pt2 = points->at(j +1);
+			if (pt1 * pt2 > 0.99999f)
+			{
 				continue;
-			ptd1.set(pt1[0], pt1[1], pt1[2]);
-			ptd2.set(pt2[0], pt2[1], pt2[2]);
-			sPainter.drawGreatCircleArc(ptd1, ptd2, &viewportHalfspace);
+			}
+			const Vec3d ptd1(pt1[0], pt1[1], pt1[2]);
+			const Vec3d ptd2(pt2[0], pt2[1], pt2[2]);
+			StelCircleArcRenderer(renderer, projector)
+				.drawGreatCircleArc(ptd1, ptd2, &viewportHalfspace);
 		}
 	}
 }

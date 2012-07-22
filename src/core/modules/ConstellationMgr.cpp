@@ -40,7 +40,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
-#include "StelPainter.hpp"
 #include "StelSkyDrawer.hpp"
 
 using namespace std;
@@ -498,11 +497,10 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 void ConstellationMgr::draw(StelCore* core, class StelRenderer* renderer)
 {
 	const StelProjectorP projector = core->getProjection(StelCore::FrameJ2000);
-	StelPainter sPainter(projector);
 	drawLines(renderer, projector, core);
 	drawNames(renderer, projector, asterFont);
 	drawArt(renderer, projector);
-	drawBoundaries(sPainter);
+	drawBoundaries(renderer, projector);
 }
 
 // Draw constellations art textures
@@ -1078,22 +1076,15 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	return true;
 }
 
-void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
+void ConstellationMgr::drawBoundaries(StelRenderer* renderer, StelProjectorP projector) const
 {
-	sPainter.enableTexture2d(false);
-	glDisable(GL_BLEND);
-#ifndef USE_OPENGL_ES2
-	glLineStipple(2, 0x3333);
-	glEnable(GL_LINE_STIPPLE);
-#endif
+	renderer->setBlendMode(BlendMode_None);
+
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->drawBoundaryOptim(sPainter);
+		(*iter)->drawBoundaryOptim(renderer, projector);
 	}
-#ifndef USE_OPENGL_ES2
-	glDisable(GL_LINE_STIPPLE);
-#endif
 }
 
 StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const
