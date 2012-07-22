@@ -20,8 +20,8 @@ rmdir ${CMAKE_INSTALL_PREFIX}/Resources/stellarium
 mkdir ${CMAKE_INSTALL_PREFIX}/Frameworks
 /usr/bin/perl util/pkgApp.pl ${CMAKE_INSTALL_PREFIX} MacOS/stellarium Frameworks 
 mkdir ${CMAKE_INSTALL_PREFIX}/plugins
-cp -pr /Developer/Applications/Qt/plugins/{imageformats,iconengines} ${CMAKE_INSTALL_PREFIX}/plugins
-for f in ${CMAKE_INSTALL_PREFIX}/plugins/{imageformats,iconengines}/*.dylib; do
+cp -pr /Developer/Applications/Qt/plugins/{imageformats,iconengines}/* ${CMAKE_INSTALL_PREFIX}/plugins
+for f in ${CMAKE_INSTALL_PREFIX}/plugins/*.dylib; do
     fdir=`dirname $f`
     dir=`basename $fdir`
     base=`basename $f`
