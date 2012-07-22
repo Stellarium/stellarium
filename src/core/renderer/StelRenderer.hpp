@@ -32,6 +32,19 @@ enum BlendMode
 	BlendMode_Alpha
 };
 
+//! Represents faces to be culled (not drawn).
+//!
+//! Used with StelRenderer::setCulledFaces()
+enum CullFace 
+{
+	//! Draw both mack and front faces.
+	CullFace_None,
+	//! Don't draw front faces.
+	CullFace_Front,
+	//! Don't draw back faces.
+	CullFace_Back
+};
+
 //Notes:
 //
 //enable/disablePainting are temporary and will be removed
@@ -435,6 +448,29 @@ public:
 	//!
 	//! On startup, the blend mode is BlendMode_None.
 	virtual void setBlendMode(const BlendMode blendMode) = 0;
+
+	//! Set which faces (triangles) should be culled.
+	//!
+	//! Front faces are usually those whose vertices are in counter-clockwise order,
+	//! but a StelProjector might flip this order after projection. If such a
+	//! StelProjector is used with StelRenderer::drawVertexBuffer(), front 
+	//! faces will be clock wise. This doesn't affect the user in any way as
+	//! the projection is done inside renderer.
+	//!
+	//! However, if doing manual projection and sending the already projected vertices 
+	//! for drawing, this order will be flipped, so previously counter-clockwise(front) 
+	//! faces will be clock-wise (back) faces, so if culling is used, opposite face 
+	//! should be used with setCulledFaces().
+	//!
+	//! Whether a StelProjector changes clockwise-counterclockwise winding can be
+	//! determined by StelProjector::flipFrontBackFace().
+	//!
+	//! @note Front face culling seems to be severely bugged (resulting in 
+	//! garbage viewport) at least on the following configuration:
+	//!
+	//! Ubuntu 12.04, AMD Catalyst 8.96.7, Radeon HD 6700 (using StelQGL2Renderer)
+	//!
+	virtual void setCulledFaces(const CullFace cullFace) = 0;
 
 protected:
 	//! Create a vertex buffer backend. Used by createVertexBuffer.

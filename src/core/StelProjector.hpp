@@ -176,7 +176,7 @@ public:
 	float getFov() const;
 
 	//! Get whether front faces need to be oriented in the clockwise direction
-	bool needGlFrontFaceCW() const;
+	bool flipFrontBackFace() const;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Full projection methods

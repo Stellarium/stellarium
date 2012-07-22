@@ -423,7 +423,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		if (!cons)
 		{
 			qWarning() << "ERROR in constellation art file at line" << currentLineNumber << "for culture" << cultureName
-					   << "constellation" << shortname << "unknown";
+			           << "constellation" << shortname << "unknown";
 		}
 		else
 		{
@@ -452,9 +452,11 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			//We can only get dimensions once the texture is actually loaded now
 			//cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath);
 			cons->artTexture = StelApp::getInstance().getTextureManager().createTexture(texturePath);
+			Q_ASSERT_X(NULL != cons->artTexture, Q_FUNC_INFO, 
+			           "Error loading constellation texture");
 
 			int texSizeX, texSizeY;
-			if (cons->artTexture==NULL || !cons->artTexture->getDimensions(texSizeX, texSizeY))
+			if (!cons->artTexture->getDimensions(texSizeX, texSizeY))
 			{
 				qWarning() << "Texture dimension not available";
 			}
@@ -473,33 +475,13 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			Mat4d A(x1, texSizeY - y1, 0.f, 1.f, x2, texSizeY - y2, 0.f, 1.f, x3, texSizeY - y3, 0.f, 1.f, x1, texSizeY - y1, texSizeX, 1.f);
 			Mat4d X = B * A.inverse();
 
-			// Tesselate on the plan assuming a tangential projection for the image
-			static const int nbPoints=5;
-			QVector<Vec2f> texCoords;
-			texCoords.reserve(nbPoints*nbPoints*6);
-			for (int j=0;j<nbPoints;++j)
-			{
-				for (int i=0;i<nbPoints;++i)
-				{
-					texCoords << Vec2f(((float)i)/nbPoints, ((float)j)/nbPoints);
-					texCoords << Vec2f(((float)i+1.f)/nbPoints, ((float)j)/nbPoints);
-					texCoords << Vec2f(((float)i)/nbPoints, ((float)j+1.f)/nbPoints);
-					texCoords << Vec2f(((float)i+1.f)/nbPoints, ((float)j)/nbPoints);
-					texCoords << Vec2f(((float)i+1.f)/nbPoints, ((float)j+1.f)/nbPoints);
-					texCoords << Vec2f(((float)i)/nbPoints, ((float)j+1.f)/nbPoints);
-				}
-			}
+			cons->texCoordTo3D = Mat4f(X[0]  , X[1]  , X[2]  , X[3],
+			                           X[4]  , X[5]  , X[6]  , X[7],
+			                           X[8]  , X[9]  , X[10] , X[11],
+			                           X[12] , X[13] , X[14] , X[15]);
 
-			QVector<Vec3d> contour;
-			contour.reserve(texCoords.size());
-			foreach (const Vec2f& v, texCoords)
-				contour << X * Vec3d(v[0]*texSizeX, v[1]*texSizeY, 0.);
 
-			cons->artPolygon.vertex=contour;
-			cons->artPolygon.texCoords=texCoords;
-			cons->artPolygon.primitiveType=StelVertexArray::Triangles;
-
-			Vec3d tmp(X * Vec3d(0.5*texSizeX, 0.5*texSizeY, 0.));
+			Vec3d tmp(X * Vec3d(0.5 * texSizeX, 0.5 * texSizeY, 0.));
 			tmp.normalize();
 			Vec3d tmp2(X * Vec3d(0., 0., 0.));
 			tmp2.normalize();
@@ -515,31 +497,34 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 
 void ConstellationMgr::draw(StelCore* core, class StelRenderer* renderer)
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter sPainter(prj);
-	sPainter.setFont(asterFont);
-	drawLines(renderer, prj, core);
-	drawNames(sPainter);
-	drawArt(sPainter);
+	const StelProjectorP projector = core->getProjection(StelCore::FrameJ2000);
+	StelPainter sPainter(projector);
+	drawLines(renderer, projector, core);
+	drawNames(renderer, projector, asterFont);
+	drawArt(renderer, projector);
 	drawBoundaries(sPainter);
 }
 
 // Draw constellations art textures
-void ConstellationMgr::drawArt(StelPainter& sPainter) const
+void ConstellationMgr::drawArt(StelRenderer* renderer, StelProjectorP projector) const
 {
-	glBlendFunc(GL_ONE, GL_ONE);
-	sPainter.enableTexture2d(true);
-	glEnable(GL_BLEND);
-	glEnable(GL_CULL_FACE);
+	renderer->setBlendMode(BlendMode_Add);
 
 	vector < Constellation * >::const_iterator iter;
-	SphericalRegionP region = sPainter.getProjector()->getViewportConvexPolygon();
+	SphericalRegionP region = projector->getViewportConvexPolygon();
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->drawArtOptim(sPainter, *region);
-	}
+		Constellation* cons = *iter;
 
-	glDisable(GL_CULL_FACE);
+		if(NULL == cons->artVertices)
+		{
+			// Tesselate on the plane assuming a tangential projection for the image
+			const int resolution = 5;
+			cons->generateArtVertices(renderer, resolution);
+		}
+
+		cons->drawArtOptim(renderer, projector, *region);
+	}
 }
 
 // Draw constellations lines
@@ -555,17 +540,17 @@ void ConstellationMgr::drawLines(StelRenderer* renderer, StelProjectorP projecto
 }
 
 // Draw the names of all the constellations
-void ConstellationMgr::drawNames(StelPainter& sPainter) const
+void ConstellationMgr::drawNames(StelRenderer* renderer, StelProjectorP projector, QFont& font) const
 {
-	glEnable(GL_BLEND);
-	sPainter.enableTexture2d(true);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	renderer->setBlendMode(BlendMode_Alpha);
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
 	{
 		// Check if in the field of view
-		if (sPainter.getProjector()->projectCheck((*iter)->XYZname, (*iter)->XYname))
-			(*iter)->drawName(sPainter);
+		if (projector->projectCheck((*iter)->XYZname, (*iter)->XYname))
+		{
+			(*iter)->drawName(renderer, font);\
+		}
 	}
 }
 

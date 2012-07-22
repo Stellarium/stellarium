@@ -251,6 +251,7 @@ void StelTestQGL2VertexBufferBackend::
 	{
 		projectedPositions.resize(projectedCount);
 	}
+
 	projector->project(projectedCount, positions->data.constData(), 
 	                   projectedPositions.data());
 }

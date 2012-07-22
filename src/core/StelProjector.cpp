@@ -202,7 +202,7 @@ SphericalRegionP StelProjector::getViewportConvexPolygon(float marginX, float ma
 	e1.normalize();
 	e2.normalize();
 	e3.normalize();
-	if (needGlFrontFaceCW())
+	if (flipFrontBackFace())
 	{
 		Vec3d v = e0;
 		e0 = e3;
@@ -243,7 +243,7 @@ float StelProjector::getFov() const {
 }
 
 //! Get whether front faces need to be oriented in the clockwise direction
-bool StelProjector::needGlFrontFaceCW() const
+bool StelProjector::flipFrontBackFace() const
 {
 	return (flipHorz*flipVert < 0.f);
 }
