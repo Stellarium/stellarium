@@ -201,7 +201,7 @@ private:
 			checkCrossDiscontinuity && 
 			projector->intersectViewportDiscontinuity(p1 + rotCenter, p2 + rotCenter);
 
-		if (crossDiscontinuity && nbI >= 10)
+		if (crossDiscontinuity && nbI >= 5)
 		{
 			win1[2] = -2.0;
 			win2[2] = -2.0;
@@ -224,7 +224,7 @@ private:
 
 		const float dist = std::sqrt((v10 * v10 + v11 * v11) * (v20 * v20 + v21 * v21));
 		const float cosAngle = (v10 * v20 + v11 * v21) / dist;
-		if ((cosAngle > -0.999f || dist > 50 * 50 || crossDiscontinuity) && nbI < 10)
+		if ((cosAngle > -0.999f || dist > 50 * 50 || crossDiscontinuity) && nbI < 5)
 		{
 			// Use the 3rd component of the vector to store whether the vertex is valid
 			win3[2]= isValidVertex ? 1.0 : -1.0;

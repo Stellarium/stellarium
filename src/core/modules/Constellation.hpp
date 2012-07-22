@@ -33,7 +33,6 @@
 #include "StelSphereGeometry.hpp"
 
 class StarMgr;
-class StelPainter;
 
 //! @class Constellation
 //! The Constellation class models a grouping of stars in a Sky Culture.
@@ -78,10 +77,17 @@ private:
 	//! @return false if can't parse record, else true.
 	bool read(const QString& record, StarMgr *starMgr);
 
-	//! Draw the constellation name
+	//! Draw the constellation name.
+	//!
+	//! @param renderer  Renderer to draw with.
+	//! @param projector Font to draw the name with.
 	void drawName(class StelRenderer* renderer, QFont& font) const;
-	//! Draw the constellation boundary
-	void drawBoundaryOptim(StelPainter& sPainter) const;
+
+	//! Draw the constellation boundary.
+	//!
+	//! @param renderer  Renderer to draw with.
+	//! @param projector Projector to project vertices to viewport.
+	void drawBoundaryOptim(StelRenderer* renderer, StelProjectorP projector) const;
 
 	//! Test if a star is part of a Constellation.
 	//! This member tests to see if a star is one of those which make up
