@@ -41,6 +41,7 @@ public:
 		, initialized(false)
 		, shaderPrograms()
 		, customShader(NULL)
+		, culledFaces(CullFace_None)
 	{
 	}
 	
@@ -244,6 +245,11 @@ public:
 		return new StelQGLGLSLShader(this);
 	}
 
+	virtual void setCulledFaces(const CullFace cullFace)
+	{
+		culledFaces = cullFace;
+	}
+
 	virtual bool isGLSLSupported() const {return true;}
 
 	//! Get shader program corresponding to specified vertex format.
@@ -375,9 +381,22 @@ protected:
 		glStencilMask(0x11111111);
 		// Deactivate drawing in depth buffer by default
 		glDepthMask(GL_FALSE);
-		// GL-REFACTOR TODO. Once refactor is done, try removing this 
-		// and updating the user code to work with backface culling.
-		glDisable(GL_CULL_FACE);
+
+		switch(culledFaces)
+		{
+			case CullFace_None:
+				glDisable(GL_CULL_FACE);
+				break;
+			case CullFace_Front:
+				glEnable(GL_CULL_FACE);
+				glCullFace(GL_FRONT);
+				break;
+			case CullFace_Back:
+				glEnable(GL_CULL_FACE);
+				glCullFace(GL_BACK);
+				break;
+			default: Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown cull face type");
+		}
 
 		if(NULL == projector)
 		{
@@ -396,7 +415,7 @@ protected:
 		                            m[2], m[6], m[10], m[14], 
 		                            m[3], m[7], m[11], m[15]);
 
-		glFrontFace(projector->needGlFrontFaceCW() ? GL_CW : GL_CCW);
+		glFrontFace(projector->flipFrontBackFace() ? GL_CW : GL_CCW);
 
 		// Set up viewport for the projector.
 		const Vec4i viewXywh = projector->getViewportXywh();
@@ -444,6 +463,9 @@ private:
 	//!
 	//! If not NULL, overrides builtin vertex format specific shader programs.
 	StelQGLGLSLShader* customShader;
+
+	//! Determines whether front or back faces are culled, if any are culled at all.
+	CullFace culledFaces;
 	
 	//Note:
 	//We don't keep handles to shader variable locations.

@@ -249,9 +249,16 @@ private:
         //! Draw the constellation lines at the epoch given by the StelCore.
 	void drawLines(class StelRenderer* renderer, StelProjectorP projector, const StelCore* core) const;
 	//! Draw the constellation art.
-	void drawArt(StelPainter& sPainter) const;
+	//!
+	//! @param renderer  Renderer to draw with.
+	//! @param projector Projector to project vertices to viewport.
+	void drawArt(class StelRenderer* renderer, StelProjectorP projector) const;
 	//! Draw the constellation name labels.
-	void drawNames(StelPainter& sPainter) const;
+	//! 
+	//! @param renderer  Renderer to draw with.
+	//! @param projector Projector to project vertices to viewport.
+	//! @param font      Font to draw the names with.
+	void drawNames(class StelRenderer* renderer, StelProjectorP projector, QFont& font) const;
 	//! Draw the constellation boundaries.
 	void drawBoundaries(StelPainter& sPainter) const;
 	//! Handle single and multi-constellation selections.
