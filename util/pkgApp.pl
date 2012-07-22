@@ -214,6 +214,9 @@ sub architecture {
     elsif ( grep(m/i386/, @output) ) {
 	$retval =  'i386';
     }
+    elsif ( grep(m/x86_64/, @output) ) {
+	$retval =  'x86_64';
+    }
     # warn qq{$0: $file isa '$retval' arch\n};
     return $retval;
 }
