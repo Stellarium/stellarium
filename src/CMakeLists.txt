@@ -618,6 +618,15 @@ IF(WIN32)
 	SET(extLinkerOption ${extLinkerOption} libwinmm.a)
 ENDIF()
 
+IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
+  IF(RC_COMPILER_PATH)
+    ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_BINARY_DIR}/stellarium-rc.o
+                       COMMAND ${RC_COMPILER_PATH} ${CMAKE_SOURCE_DIR}/data/stellarium.rc ${CMAKE_BINARY_DIR}/stellarium-rc.o
+                       WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/data)
+    SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_BINARY_DIR}/stellarium-rc.o)
+  ENDIF(RC_COMPILER_PATH)
+ENDIF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
+
 IF(GENERATE_STELMAINLIB)
  ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_MOC_SRCS} ${stellarium_RES_CXX})
  TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
