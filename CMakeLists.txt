@@ -324,6 +324,18 @@ IF(ENABLE_STRATOSCRIPT_COMPAT)
   ADD_DEFINITIONS(-DENABLE_STRATOSCRIPT_COMPAT)
 ENDIF()
 
+### [Optional] Embed icon in the Windows executable ###
+IF(WIN32)
+  SET(ENABLE_WINDOWS_EXE_ICON 1 CACHE BOOL "Determine if it should try to embed the Stellarium icon in the Windows .exe file")
+  IF(ENABLE_WINDOWS_EXE_ICON)
+    #The mingGW snapshot distributed with the Qt SDK has it under this name.
+    SET(RC_COMPILER_FILENAME "windres.exe")
+	FIND_FILE(RC_COMPILER_PATH ${RC_COMPILER_FILENAME})
+    IF (RC_COMPILER_PATH)
+     MESSAGE(STATUS "Found .rc compiler: ${RC_COMPILER_PATH}")
+    ENDIF(RC_COMPILER_PATH)
+  ENDIF(ENABLE_WINDOWS_EXE_ICON)
+ENDIF(WIN32)
 
 ### Generate an Inno Setup project file ###
 IF(WIN32)
