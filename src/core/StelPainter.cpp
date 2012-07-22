@@ -148,7 +148,7 @@ void StelPainter::setProjector(const StelProjectorP& p)
 	prj=p;
 	// Init GL viewport to current projector values
 	glViewport(prj->viewportXywh[0], prj->viewportXywh[1], prj->viewportXywh[2], prj->viewportXywh[3]);
-	glFrontFace(prj->needGlFrontFaceCW()?GL_CW:GL_CCW);
+	glFrontFace(prj->flipFrontBackFace()?GL_CW:GL_CCW);
 #ifndef STELPAINTER_GL2
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
