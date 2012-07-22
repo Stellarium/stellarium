@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-20 17:32+0300\n"
+"POT-Creation-Date: 2012-07-21 16:42+0700\n"
 "PO-Revision-Date: 2012-01-10 02:18+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-21 04:43+0000\n"
+"X-Launchpad-Export-Date: 2012-07-22 04:40+0000\n"
 "X-Generator: Launchpad (build 15654)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -504,7 +504,7 @@ msgstr "Botão direito"
 msgid "CTRL + Left click"
 msgstr "CTRL + clique esquerdo"
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:177
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:237
 msgid "Movement and Selection"
 msgstr "Movimentação e Selecção"
 
@@ -532,23 +532,23 @@ msgstr "Se estiver a executar um \"script\""
 msgid "Stop currently running script"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:153
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:213
 msgid "Pause script execution"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:154
+#: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:214
 msgid "Resume script execution"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:149
+#: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:209
 msgid "Slow down the script execution rate"
 msgstr "Reduzir a velocidade de execução do \"script\""
 
-#: src/gui/HelpDialog.cpp:77 src/gui/StelGui.cpp:150
+#: src/gui/HelpDialog.cpp:77 src/gui/StelGui.cpp:210
 msgid "Speed up the script execution rate"
 msgstr "Aumentar a velocidade de execução do \"script\""
 
-#: src/gui/HelpDialog.cpp:78 src/gui/StelGui.cpp:151
+#: src/gui/HelpDialog.cpp:78 src/gui/StelGui.cpp:211
 msgid "Set the normal script execution rate"
 msgstr "Velocidade normal de execução do \"script\""
 
@@ -632,7 +632,7 @@ msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Fóruns} - Converse com outros utilizadores do Stellarium."
 
 #: src/gui/HelpDialog.cpp:242 src/gui/HelpDialog.cpp:345
-#: src/gui/HelpDialog.cpp:347 src/gui/StelGui.cpp:184
+#: src/gui/HelpDialog.cpp:347 src/gui/StelGui.cpp:244
 msgid "Miscellaneous"
 msgstr "Diversos"
 
@@ -684,313 +684,313 @@ msgstr "Programador gráfico/outros: %1"
 msgid "OSX Developer: %1"
 msgstr "Programador OSX: %1"
 
-#: src/gui/StelGui.cpp:103
+#: src/gui/StelGui.cpp:163
 msgid "Display Options"
 msgstr "Opções de Exibição"
 
-#: src/gui/StelGui.cpp:104
+#: src/gui/StelGui.cpp:164
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Constellation lines"
 msgstr "Linhas da constelação"
 
-#: src/gui/StelGui.cpp:105
+#: src/gui/StelGui.cpp:165
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:278
 msgid "Constellation art"
 msgstr "Arte da constelação"
 
-#: src/gui/StelGui.cpp:106
+#: src/gui/StelGui.cpp:166
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:273
 msgid "Constellation labels"
 msgstr "Campos da constelação"
 
-#: src/gui/StelGui.cpp:107
+#: src/gui/StelGui.cpp:167
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Constellation boundaries"
 msgstr "Limites de constelação"
 
-#: src/gui/StelGui.cpp:109 src/ui_viewDialog.h:1159
+#: src/gui/StelGui.cpp:169 src/ui_viewDialog.h:1159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Azimuthal grid"
 msgstr "Grelha azimutal"
 
-#: src/gui/StelGui.cpp:110 src/ui_viewDialog.h:1157
+#: src/gui/StelGui.cpp:170 src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:320
 msgid "Equatorial grid"
 msgstr "Grelha Equatorial"
 
-#: src/gui/StelGui.cpp:111 src/ui_viewDialog.h:1156
+#: src/gui/StelGui.cpp:171 src/ui_viewDialog.h:1156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:325
 msgid "Equatorial J2000 grid"
 msgstr "Grelha equatorial J2000"
 
-#: src/gui/StelGui.cpp:112 src/ui_viewDialog.h:1158
+#: src/gui/StelGui.cpp:172 src/ui_viewDialog.h:1158
 msgid "Ecliptic J2000 grid"
 msgstr ""
 
-#: src/gui/StelGui.cpp:113 src/ui_viewDialog.h:1160
+#: src/gui/StelGui.cpp:173 src/ui_viewDialog.h:1160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Galactic grid"
 msgstr "Grelha galáctica"
 
-#: src/gui/StelGui.cpp:114 src/ui_viewDialog.h:1180
+#: src/gui/StelGui.cpp:174 src/ui_viewDialog.h:1180
 msgid "Galactic plane"
 msgstr "Plano galáctico"
 
-#: src/gui/StelGui.cpp:115
+#: src/gui/StelGui.cpp:175
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
 msgid "Ecliptic line"
 msgstr "Linha eclítica"
 
-#: src/gui/StelGui.cpp:116
+#: src/gui/StelGui.cpp:176
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
 msgid "Equator line"
 msgstr "Linha do equador"
 
-#: src/gui/StelGui.cpp:117
+#: src/gui/StelGui.cpp:177
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:310
 msgid "Meridian line"
 msgstr "Linha do meridiano"
 
-#: src/gui/StelGui.cpp:118
+#: src/gui/StelGui.cpp:178
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:349
 msgid "Horizon line"
 msgstr "Linha do horizonte"
 
-#: src/gui/StelGui.cpp:119 src/ui_viewDialog.h:1181
+#: src/gui/StelGui.cpp:179 src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:292
 msgid "Cardinal points"
 msgstr "Pontos cardeais"
 
-#: src/gui/StelGui.cpp:121
+#: src/gui/StelGui.cpp:181
 msgid "Ground"
 msgstr "Superfície"
 
-#: src/gui/StelGui.cpp:122 src/ui_viewDialog.h:1130
+#: src/gui/StelGui.cpp:182 src/ui_viewDialog.h:1130
 msgid "Atmosphere"
 msgstr "Atmosfera"
 
-#: src/gui/StelGui.cpp:123
+#: src/gui/StelGui.cpp:183
 msgid "Fog"
 msgstr "Nevoeiro"
 
-#: src/gui/StelGui.cpp:125 src/ui_viewDialog.h:1139
+#: src/gui/StelGui.cpp:185 src/ui_viewDialog.h:1139
 msgid "Nebulas"
 msgstr "Nebulas"
 
-#: src/gui/StelGui.cpp:126
+#: src/gui/StelGui.cpp:186
 msgid "Nebulas background images"
 msgstr "Imagens de fundo das nebulas"
 
-#: src/gui/StelGui.cpp:127 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
+#: src/gui/StelGui.cpp:187 src/ui_viewDialog.h:1116 src/ui_viewDialog.h:1138
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:234
 msgid "Stars"
 msgstr "Estrelas"
 
-#: src/gui/StelGui.cpp:128
+#: src/gui/StelGui.cpp:188
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Planet labels"
 msgstr "Identificações dos planetas"
 
-#: src/gui/StelGui.cpp:129
+#: src/gui/StelGui.cpp:189
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:301
 msgid "Planet orbits"
 msgstr "Órbitas planetárias"
 
-#: src/gui/StelGui.cpp:130
+#: src/gui/StelGui.cpp:190
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Planet trails"
 msgstr "Rastos dos planetas"
 
-#: src/gui/StelGui.cpp:132
+#: src/gui/StelGui.cpp:192
 msgid "Night mode"
 msgstr "Modo nocturno"
 
-#: src/gui/StelGui.cpp:133
+#: src/gui/StelGui.cpp:193
 msgid "Full-screen mode"
 msgstr "Modo de ecrã completo"
 
-#: src/gui/StelGui.cpp:134
+#: src/gui/StelGui.cpp:194
 msgid "Flip scene horizontally"
 msgstr "Inverter horizontalmente"
 
-#: src/gui/StelGui.cpp:135
+#: src/gui/StelGui.cpp:195
 msgid "Flip scene vertically"
 msgstr "Inverter verticalmente"
 
-#: src/gui/StelGui.cpp:137
+#: src/gui/StelGui.cpp:197
 msgid "Windows"
 msgstr "Janelas"
 
-#: src/gui/StelGui.cpp:138
+#: src/gui/StelGui.cpp:198
 msgid "Help window"
 msgstr "Janela de ajuda"
 
-#: src/gui/StelGui.cpp:139
+#: src/gui/StelGui.cpp:199
 msgid "Configuration window"
 msgstr "Janela de configuração"
 
-#: src/gui/StelGui.cpp:140
+#: src/gui/StelGui.cpp:200
 msgid "Search window"
 msgstr "Janela de pesquisa"
 
-#: src/gui/StelGui.cpp:141
+#: src/gui/StelGui.cpp:201
 msgid "Sky and viewing options window"
 msgstr "Céu e a ver a janela de opções"
 
-#: src/gui/StelGui.cpp:142
+#: src/gui/StelGui.cpp:202
 msgid "Date/time window"
 msgstr "Janela de data/hora"
 
-#: src/gui/StelGui.cpp:143
+#: src/gui/StelGui.cpp:203
 msgid "Location window"
 msgstr "Janela de localização"
 
-#: src/gui/StelGui.cpp:145
+#: src/gui/StelGui.cpp:205
 msgid "Script console window"
 msgstr "Janela da consola do \"script\""
 
-#: src/gui/StelGui.cpp:148 src/ui_dateTimeDialogGui.h:294
+#: src/gui/StelGui.cpp:208 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Date and Time"
 msgstr "Data e Hora"
 
-#: src/gui/StelGui.cpp:152
+#: src/gui/StelGui.cpp:212
 msgid "Stop script execution"
 msgstr ""
 
-#: src/gui/StelGui.cpp:155
+#: src/gui/StelGui.cpp:215
 msgid "Decrease time speed"
 msgstr "Diminuir a velocidade do tempo"
 
-#: src/gui/StelGui.cpp:156
+#: src/gui/StelGui.cpp:216
 msgid "Increase time speed"
 msgstr "Aumentar a velocidade do tempo"
 
-#: src/gui/StelGui.cpp:157
+#: src/gui/StelGui.cpp:217
 msgid "Set normal time rate"
 msgstr "Velocidade do tempo normal"
 
-#: src/gui/StelGui.cpp:158
+#: src/gui/StelGui.cpp:218
 msgid "Decrease time speed (a little)"
 msgstr "Diminuir a velocidade do tempo (um pouco)"
 
-#: src/gui/StelGui.cpp:159
+#: src/gui/StelGui.cpp:219
 msgid "Increase time speed (a little)"
 msgstr "Aumentar a velocidade do tempo (um pouco)"
 
-#: src/gui/StelGui.cpp:160
+#: src/gui/StelGui.cpp:220
 msgid "Set time rate to zero"
 msgstr "Velocidade do tempo: zero"
 
-#: src/gui/StelGui.cpp:161
+#: src/gui/StelGui.cpp:221
 msgid "Set time to now"
 msgstr "Definir a hora actual"
 
-#: src/gui/StelGui.cpp:162
+#: src/gui/StelGui.cpp:222
 msgid "Add 1 solar hour"
 msgstr "Adicionar 1 hora solar"
 
-#: src/gui/StelGui.cpp:163
+#: src/gui/StelGui.cpp:223
 msgid "Subtract 1 solar hour"
 msgstr "Retirar 1 hora solar"
 
-#: src/gui/StelGui.cpp:164
+#: src/gui/StelGui.cpp:224
 msgid "Add 1 solar day"
 msgstr "Adicionar 1 dia solar"
 
-#: src/gui/StelGui.cpp:165
+#: src/gui/StelGui.cpp:225
 msgid "Subtract 1 solar day"
 msgstr "Retirar 1 dia solar"
 
-#: src/gui/StelGui.cpp:166
+#: src/gui/StelGui.cpp:226
 msgid "Add 1 solar week"
 msgstr "Adicionar 1 semana solar"
 
-#: src/gui/StelGui.cpp:167
+#: src/gui/StelGui.cpp:227
 msgid "Subtract 1 solar week"
 msgstr "Retirar 1 semana solar"
 
-#: src/gui/StelGui.cpp:168
+#: src/gui/StelGui.cpp:228
 msgid "Add 1 sidereal day"
 msgstr "Adicionar 1 dia sideral"
 
-#: src/gui/StelGui.cpp:169
+#: src/gui/StelGui.cpp:229
 msgid "Subtract 1 sidereal day"
 msgstr "Retirar 1 dia sideral"
 
-#: src/gui/StelGui.cpp:170
+#: src/gui/StelGui.cpp:230
 msgid "Add 1 sidereal week"
 msgstr "Adicionar 1 semana sideral"
 
-#: src/gui/StelGui.cpp:171
+#: src/gui/StelGui.cpp:231
 msgid "Subtract 1 sidereal week"
 msgstr "Retirar 1 semana sideral"
 
-#: src/gui/StelGui.cpp:172
+#: src/gui/StelGui.cpp:232
 msgid "Add 1 sidereal month"
 msgstr ""
 
-#: src/gui/StelGui.cpp:173
+#: src/gui/StelGui.cpp:233
 msgid "Subtract 1 sidereal month"
 msgstr ""
 
-#: src/gui/StelGui.cpp:174
+#: src/gui/StelGui.cpp:234
 msgid "Add 1 sidereal year"
 msgstr ""
 
-#: src/gui/StelGui.cpp:175
+#: src/gui/StelGui.cpp:235
 msgid "Subtract 1 sidereal year"
 msgstr ""
 
-#: src/gui/StelGui.cpp:178
+#: src/gui/StelGui.cpp:238
 msgid "Center on selected object"
 msgstr "Centrar no objecto seleccionado"
 
-#: src/gui/StelGui.cpp:179
+#: src/gui/StelGui.cpp:239
 msgid "Track object"
 msgstr "Acompanhar objecto"
 
-#: src/gui/StelGui.cpp:180
+#: src/gui/StelGui.cpp:240
 msgid "Zoom in on selected object"
 msgstr "Ampliar no objecto seleccionado"
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:241
 msgid "Zoom out"
 msgstr "Reduzir"
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:242
 msgid "Set home planet to selected planet"
 msgstr "Definir o planeta seleccionado como base"
 
-#: src/gui/StelGui.cpp:185
+#: src/gui/StelGui.cpp:245
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Trocar entre equatorial e azimutal"
 
-#: src/gui/StelGui.cpp:186
+#: src/gui/StelGui.cpp:246
 msgid "Quit"
 msgstr "Fechar"
 
-#: src/gui/StelGui.cpp:187
+#: src/gui/StelGui.cpp:247
 msgid "Save screenshot"
 msgstr "Gravar captura de ecrã"
 
-#: src/gui/StelGui.cpp:188
+#: src/gui/StelGui.cpp:248
 msgid "Copy selected object information to clipboard"
 msgstr ""
 
-#: src/gui/StelGui.cpp:189
+#: src/gui/StelGui.cpp:249
 msgid "Go to home"
 msgstr ""
 
-#: src/gui/StelGui.cpp:191
+#: src/gui/StelGui.cpp:251
 msgid "Auto hide horizontal button bar"
 msgstr "Ocultar automaticamente barra de botões horizontal"
 
-#: src/gui/StelGui.cpp:192
+#: src/gui/StelGui.cpp:252
 msgid "Auto hide vertical button bar"
 msgstr "Ocultar automaticamente barra de botões vertical"
 
-#: src/gui/StelGui.cpp:193
+#: src/gui/StelGui.cpp:253
 msgid "Toggle visibility of GUI"
 msgstr "Alternar a visibilidade da interface gráfica"
 
@@ -4445,32 +4445,32 @@ msgstr ""
 msgid "Select TLE Update File"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:139
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:140
 msgid "Downloading data..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:140
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:141
 msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:155
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:156
 msgid "Select TLE source file(s)..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:170
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:171
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:230
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:172
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:231
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:232
 msgid "Processing data..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:225
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:226
 msgid "No data could be downloaded. Try again later."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:358
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:359
 #, qt-format
 msgid "Catalog Number: %1"
 msgstr ""
