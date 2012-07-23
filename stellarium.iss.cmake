@@ -31,8 +31,8 @@ Source: "AUTHORS"; DestDir: "{app}"; DestName: "AUTHORS.rtf"
 Source: "ChangeLog"; DestDir: "{app}"; DestName: "ChangeLog.rtf"
 Source: "@MINGW_BIN_DIRECTORY@/libgcc_s_dw2-1.dll"; DestDir: "{app}";
 Source: "@MINGW_BIN_DIRECTORY@/mingwm10.dll"; DestDir: "{app}";
-Source: "@ICONV_INCLUDE_DIR@/../bin/libiconv2.dll"; DestDir: "{app}";
-Source: "@INTL_INCLUDE_DIR@/../bin/libintl3.dll"; DestDir: "{app}";
+Source: "@ICONV_INCLUDE_DIR@/../bin/@ISS_ARCH_SPECIFIC_ICONV_LIB@"; DestDir: "{app}";
+Source: "@INTL_INCLUDE_DIR@/../bin/@ISS_ARCH_SPECIFIC_INTL_LIB@"; DestDir: "{app}";
 Source: "@ZLIB_INCLUDE_DIR@/../bin/zlib1.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\phonon4.dll"; DestDir: "{app}";
 Source: "@QT_BINARY_DIR@\QtSql4.dll"; DestDir: "{app}";
