@@ -29,8 +29,6 @@ Source: "INSTALL"; DestDir: "{app}"; DestName: "INSTALL.rtf"
 Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.rtf"
 Source: "AUTHORS"; DestDir: "{app}"; DestName: "AUTHORS.rtf"
 Source: "ChangeLog"; DestDir: "{app}"; DestName: "ChangeLog.rtf"
-Source: "@MINGW_BIN_DIRECTORY@/libgcc_s_dw2-1.dll"; DestDir: "{app}";
-Source: "@MINGW_BIN_DIRECTORY@/mingwm10.dll"; DestDir: "{app}";
 Source: "@ICONV_INCLUDE_DIR@/../bin/libiconv*.dll"; DestDir: "{app}";
 Source: "@INTL_INCLUDE_DIR@/../bin/libintl*.dll"; DestDir: "{app}";
 Source: "@ZLIB_INCLUDE_DIR@/../bin/zlib1.dll"; DestDir: "{app}";
@@ -47,6 +45,7 @@ Source: "@QT_BINARY_DIR@\QtXml4.dll"; DestDir: "{app}";
 Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
 ; Locales
 Source: "@CMAKE_INSTALL_PREFIX@\share\locale\*"; DestDir: "{app}\locale\"; Flags: recursesubdirs
+@ISS_ARCH_SPECIFIC_MINGW_LIBS@
 
 [Tasks]
 Name: desktopicon; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"
