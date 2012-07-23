@@ -13,7 +13,7 @@ my $appdir = shift(@ARGV);
 chdir $appdir;
 my $main_executable = shift(@ARGV);
 my $frameworks_dir = shift(@ARGV);
-my $current_arch = `/usr/bin/arch`;
+my $current_arch = `/usr/bin/uname -m`;
 chomp($current_arch);
 
 if ( ! -e "$frameworks_dir/$current_arch" ) {
