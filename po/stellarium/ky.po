@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-07-21 16:42+0700\n"
-"PO-Revision-Date: 2012-07-17 14:29+0000\n"
-"Last-Translator: chingis <chingis091@lavabit.com>\n"
+"PO-Revision-Date: 2012-07-22 23:57+0000\n"
+"Last-Translator: xee2eim7 <q9mwvwxx@lavabit.com>\n"
 "Language-Team: Kirghiz <ky@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-22 04:38+0000\n"
+"X-Launchpad-Export-Date: 2012-07-23 05:16+0000\n"
 "X-Generator: Launchpad (build 15654)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -198,7 +198,7 @@ msgstr "Спектрдык түр: %1"
 #: plugins/Exoplanets/src/Exoplanet.cpp:171
 #, qt-format
 msgid "Distance: %1 Light Years"
-msgstr "Аралык: %1 жарык жылы"
+msgstr "Аралык: %1 жарыктык жыл"
 
 #: src/core/modules/StarWrapper.cpp:137
 #, qt-format
@@ -828,7 +828,7 @@ msgstr "Жардам терезеси"
 
 #: src/gui/StelGui.cpp:199
 msgid "Configuration window"
-msgstr "Конфигурация терезеси"
+msgstr "Ырастоо терезеси"
 
 #: src/gui/StelGui.cpp:200
 msgid "Search window"
@@ -1765,7 +1765,7 @@ msgstr "Бенин"
 
 #: src/translations.h:229
 msgid "Bermuda"
-msgstr "Бермуда"
+msgstr "Бермуд аралдары"
 
 #: src/translations.h:230
 msgid "Brunei Darussalam"
@@ -1869,7 +1869,7 @@ msgstr "Кабо-Верде"
 
 #: src/translations.h:255
 msgid "Christmas Island"
-msgstr "Төрөлүш аралы"
+msgstr "Рождество аралы"
 
 #: src/translations.h:256
 msgid "Cyprus"
@@ -2117,7 +2117,7 @@ msgstr "Кирибати"
 
 #: src/translations.h:317
 msgid "Comoros"
-msgstr "Комордор"
+msgstr "Комор аралдары"
 
 #: src/translations.h:318
 msgid "Saint Kitts and Nevis"
@@ -2933,7 +2933,7 @@ msgstr "Атмосфераны көрсөтүү"
 #: src/ui_viewDialog.h:1132
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Light pollution:"
-msgstr "Жарык булганышы:"
+msgstr "Жарыктык булганыш:"
 
 #: src/ui_viewDialog.h:1134
 msgid "pressure, temperature, extinction coefficient"
@@ -2941,7 +2941,7 @@ msgstr "басым, температура, өчүү коэфициенти"
 
 #: src/ui_viewDialog.h:1136
 msgid "Refraction/Extinction settings..."
-msgstr "Сыныш/Өчүү ырастоолору..."
+msgstr "Рефракция/Экстинкция ырастоолору..."
 
 #: src/ui_viewDialog.h:1137
 msgid "Labels and Markers"
@@ -3063,7 +3063,7 @@ msgstr "Көрүнүп турган"
 
 #: src/ui_configurationDialog.h:920
 msgid "Configuration"
-msgstr "Конфигурация"
+msgstr "Ырастоо"
 
 #: src/ui_configurationDialog.h:922
 msgid "Program language"
@@ -3160,15 +3160,15 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:961
 msgid "Additional information 1"
-msgstr ""
+msgstr "Кошумча информация 1"
 
 #: src/ui_configurationDialog.h:962
 msgid "Additional information 3"
-msgstr ""
+msgstr "Кошумча информация 3"
 
 #: src/ui_configurationDialog.h:963
 msgid "Catalog number(s)"
-msgstr ""
+msgstr "Каталог номер(лер)и"
 
 #: src/ui_configurationDialog.h:964
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
@@ -3177,7 +3177,7 @@ msgstr "Ат"
 
 #: src/ui_configurationDialog.h:968
 msgid "Additional information 2"
-msgstr ""
+msgstr "Кошумча информация 2"
 
 #: src/ui_configurationDialog.h:969
 msgid "Absolute magnitude"
@@ -3185,11 +3185,11 @@ msgstr "Накта чоңдук"
 
 #: src/ui_configurationDialog.h:971
 msgid "Horizontal coordinates"
-msgstr ""
+msgstr "Горизонталдык координаттар"
 
 #: src/ui_configurationDialog.h:973
 msgid "Altitude/Azimuth"
-msgstr ""
+msgstr "Бийиктик/Азимут"
 
 #: src/ui_configurationDialog.h:975
 msgid "Angular or physical size"
@@ -3209,7 +3209,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:982
 msgid "Distance"
-msgstr ""
+msgstr "Аралык"
 
 #: src/ui_configurationDialog.h:984
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
@@ -3225,11 +3225,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:990
 msgid "Hour angle/Declination"
-msgstr ""
+msgstr "Саат бурчу/Эңкейүү"
 
 #: src/ui_configurationDialog.h:991
 msgid "Control"
-msgstr "Контроль"
+msgstr "Башкаруу"
 
 #: src/ui_configurationDialog.h:993
 msgid "Allow keyboard to pan and zoom"
@@ -3314,7 +3314,7 @@ msgstr "Жыбыраган калың жылдыздын фон баскычын
 
 #: src/ui_configurationDialog.h:1027
 msgid "Planetarium options"
-msgstr "Планетарий опциялары"
+msgstr "Планетарийдин параметрлери"
 
 #: src/ui_configurationDialog.h:1029
 msgid ""
@@ -3419,7 +3419,7 @@ msgstr "Башында жүктөө"
 
 #: src/ui_configurationDialog.h:1078
 msgid "configure"
-msgstr "конфигурациялоо"
+msgstr "ырастоо"
 
 #: src/ui_configurationDialog.h:1083
 msgid "Main"
@@ -3427,7 +3427,7 @@ msgstr "Башкы"
 
 #: src/ui_configurationDialog.h:1085
 msgid "Information"
-msgstr ""
+msgstr "Информация"
 
 #: src/ui_configurationDialog.h:1090
 msgid "Navigation"
@@ -3435,7 +3435,7 @@ msgstr "Навигация"
 
 #: src/ui_configurationDialog.h:1092
 msgid "Tools"
-msgstr "Куралдар"
+msgstr "Аспаптар"
 
 #: src/ui_configurationDialog.h:1094
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:441
@@ -3486,7 +3486,7 @@ msgstr "Атмосфера детальдары"
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Refraction Settings"
-msgstr "Сыныш ырастоолору"
+msgstr "Рефракция ырастоолору"
 
 #: src/ui_AtmosphereDialog.h:179
 msgid "Pressure (mbar):"
@@ -3575,7 +3575,7 @@ msgstr "Бурч ченөөч"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
-msgstr "Бурч ченөө куралын камсыз кылат"
+msgstr "Бурч ченөө аспабын камсыз кылат"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:124
 msgid "Angle measure"
@@ -3642,7 +3642,7 @@ msgstr "&Айкашманы которуу"
 
 #: plugins/Oculars/src/Oculars.cpp:894
 msgid "Configure &Oculars"
-msgstr "&Окулярларды конфигурациялоо"
+msgstr "&Окулярларды ырастоо"
 
 #: plugins/Oculars/src/Oculars.cpp:903
 msgid "Toggle &CCD"
@@ -3695,7 +3695,7 @@ msgstr "Telrad көрүнүп турган мейкин"
 
 #: plugins/Oculars/src/Oculars.cpp:1259
 msgid "Oculars plugin configuration"
-msgstr "Окулярлар плагининин конфигурациясы"
+msgstr "Окулярлар плагининин ырастоосу"
 
 #: plugins/Oculars/src/Oculars.cpp:1447
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
@@ -3963,7 +3963,7 @@ msgstr "Интерфейс"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:878
 msgid "On-screen control panel"
-msgstr "Экрандык контроль панели"
+msgstr "Экрандык башкаруу панели"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:879
 msgid "Use degrees and minutes for FOV of CCD"
@@ -4085,7 +4085,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:130
 msgid "Satellites configuration window"
-msgstr "Жолдоштор конфигурациясынын терезеси"
+msgstr "Жолдоштор ырастоосунун терезеси"
 
 #: plugins/Satellites/src/Satellites.cpp:131
 msgid "Satellite hints"
@@ -4468,7 +4468,7 @@ msgstr "Каталог номери: %1"
 #: plugins/Satellites/src/ui_satellitesDialog.h:640
 #: plugins/Satellites/src/ui_satellitesDialog.h:641
 msgid "Satellites Configuration"
-msgstr "Жолдоштор конфигурациясы"
+msgstr "Жолдоштор ырастоосу"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:643
 msgid "Update TLE lists from Internet sources"
@@ -4663,7 +4663,7 @@ msgstr "Түшүрүү"
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:75
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:150
 msgid "Telescope Control"
-msgstr "Телескоп контролю"
+msgstr "Телескопту башкаруу"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
 msgid ""
@@ -4691,7 +4691,7 @@ msgstr "Жаңы телескоп кошуу"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:160
 msgid "Configure Telescope"
-msgstr "Телескопту конфигурациялоо"
+msgstr "Телескопту ырастоо"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:56
 msgid "N/A"
@@ -4719,7 +4719,7 @@ msgstr "Токтотулду"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:238
 msgid "Telescope Control plug-in"
-msgstr "Телескоп контролюнун плагини"
+msgstr "Телескопту башкаруучу плагини"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
@@ -4877,11 +4877,11 @@ msgstr "&Бурулуу"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Configure &telescopes..."
-msgstr "&Телескопторду конфигурациялоо..."
+msgstr "&Телескопторду ырастоо..."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope Configuration"
-msgstr "Телескоп конфигурациясы"
+msgstr "Телескоп ырастоосу"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid "Telescope controlled by:"
@@ -5009,11 +5009,11 @@ msgstr "Башкарылуучу телескоптор"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
 msgid "Configure the selected telescope"
-msgstr "Тандалган телескопту конфигурациялоо"
+msgstr "Тандалган телескопту ырастоо"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Configure"
-msgstr "Конфигурациялоо"
+msgstr "Ырастоо"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
 msgid "Add a new telescope"
@@ -5433,11 +5433,11 @@ msgstr "Башкаруу"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:470
 msgid "Load default configuration"
-msgstr "Жарыяланбас конфигурацияны жүктөө"
+msgstr "Жарыяланбас ырастоону жүктөө"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:471
 msgid "Save current configuration"
-msgstr "Азыркы конфигурацияны сактоо"
+msgstr "Азыркы ырастоону сактоо"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:474
 msgid "Shut down"
@@ -5650,7 +5650,7 @@ msgstr "Күн системасынын файлын алмаштыруу..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Configuration file"
-msgstr "Конфигурация файлы"
+msgstr "Ырастоо файлы"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Add new Solar System objects"
@@ -5676,7 +5676,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:143
 msgid "Historical Supernovae configuration window"
-msgstr "Тарыхый супернова конфигурациясынын терезеси"
+msgstr "Тарыхый супернова ырастоосунун терезеси"
 
 #: plugins/Supernovae/src/Supernova.cpp:99
 msgid "supernova"
@@ -5760,11 +5760,11 @@ msgstr "Тарыхый супернова жаңыртылды"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 msgid "Historical Supernovae Configuration"
-msgstr "Тарыхый супернова конфигурациясы"
+msgstr "Тарыхый супернова ырастоосу"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr "Тарыхый супернова плагининин конфигурациясы"
+msgstr "Тарыхый супернова плагининин ырастоосу"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
 #: plugins/Quasars/src/ui_quasarsDialog.h:252
@@ -5798,7 +5798,7 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:146
 msgid "Quasars configuration window"
-msgstr "Квазарлар конфигурациясынын терезеси"
+msgstr "Квазарлар ырастоосунун терезеси"
 
 #: plugins/Quasars/src/Quasar.cpp:95
 msgid "quasar"
@@ -5830,11 +5830,11 @@ msgstr "Квазарлар жаңыртылды"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:249
 msgid "Quasars Configuration"
-msgstr "Квазарлар конфигурациясы"
+msgstr "Квазарлар ырастоосу"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:250
 msgid "Quasars Plug-in Configuration"
-msgstr "Квазарлар плагининин конфигурациясы"
+msgstr "Квазарлар плагининин ырастоосу"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 msgid "Display mode for quasars"
@@ -5857,7 +5857,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsars.cpp:146
 msgid "Pulsars configuration window"
-msgstr "Пульсарлар конфигурациясынын терезеси"
+msgstr "Пульсарлар ырастоосунун терезеси"
 
 #: plugins/Pulsars/src/Pulsar.cpp:129
 msgid "pulsar"
@@ -6023,11 +6023,11 @@ msgstr "Пульсарлар жаңыртылды"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:249
 msgid "Pulsars Configuration"
-msgstr "Пульсарлар конфигурациясы"
+msgstr "Пульсарлар ырастоосу"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:250
 msgid "Pulsars Plug-in Configuration"
-msgstr "Пульсарлар плагининин конфигурациясы"
+msgstr "Пульсарлар плагининин ырастоосу"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:258
 msgid "Display mode for pulsars"
@@ -6049,7 +6049,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:164
 msgid "Exoplanets configuration window"
-msgstr "Экзопланеталар конфигурациясынын терезеси"
+msgstr "Экзопланеталар ырастоосунун терезеси"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:165
 msgid "Show exoplanets"
@@ -6138,11 +6138,11 @@ msgstr "Экзопланеталар жаңыртылды"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
 msgid "Exoplanets Configuration"
-msgstr "Экзопланеталар конфигурациясы"
+msgstr "Экзопланеталар ырастоосу"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:234
 msgid "Exoplanets Plug-in Configuration"
-msgstr "Экзопланеталар плагининин конфигурациясы"
+msgstr "Экзопланеталар плагининин ырастоосу"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
 msgid "Update exoplanets data from Internet"
