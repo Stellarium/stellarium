@@ -21,7 +21,6 @@
 #include <QSettings>
 #include <QDebug>
 #include <QFontMetrics>
-#include <QtOpenGL>
 
 #include "GridLinesMgr.hpp"
 #include "StelApp.hpp"
@@ -36,7 +35,6 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
-#include "StelPainter.hpp"
 #include "StelSkyDrawer.hpp"
 
 //! @class SkyGrid
@@ -48,7 +46,11 @@ public:
 	// Create and precompute positions of a SkyGrid
 	SkyGrid(StelCore::FrameType frame);
 	virtual ~SkyGrid();
-	void draw(const StelCore* prj) const;
+	//! Draw the grid.
+	//!
+	//! @param core     The StelCore object.
+	//! @param renderer Renderer to draw with.
+	void draw(const StelCore* core, StelRenderer* renderer) const;
 	void setFontSize(double newFontSize);
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() {return color;}
@@ -80,7 +82,11 @@ public:
 	// Create and precompute positions of a SkyGrid
 	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR);
 	virtual ~SkyLine();
-	void draw(StelCore *core, StelRenderer* renderer) const;
+	//! Draw the line.
+	//!
+	//! @param core     The StelCore object.
+	//! @param renderer Renderer to draw with.
+	void draw(StelCore* core, StelRenderer* renderer) const;
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() {return color;}
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
@@ -148,124 +154,95 @@ static double getClosestResolutionHMS(double pixelPerRad)
 	return 15.;
 }
 
+//! Data passed to viewportEdgeIntersectCallback.
 struct ViewportEdgeIntersectCallbackData
 {
+	//! Construct ViewportEdgeIntersectCallbackData with specified font metrics.
 	ViewportEdgeIntersectCallbackData(const QFontMetrics& metrics) 
 		: fontMetrics(metrics){}
+
+	//! Renderer to draw the label with.
 	StelRenderer* renderer;
+	//! Projector to project 3D coordinates to viewport.
 	StelProjectorP projector;
+	//! Color of label text.
 	Vec4f textColor;
+	//! Color of the sky line (or grid) being drawn.
 	Vec4f skyLineColor;
+	//! Metrics of the label font (so we know how to offset the label).
 	const QFontMetrics fontMetrics;
-	QString text;		// Label to display at the intersection of the lines and screen side
-	double raAngle;		// Used for meridians
+	//! Label text.
+	QString text;
+	double raAngle;// Used for meridians
 	StelCore::FrameType frameType;
 };
 
-struct ViewportEdgeIntersectCallbackData2
-{
-	ViewportEdgeIntersectCallbackData2(StelPainter* painter) : sPainter(painter){}
-	StelPainter* sPainter;
-	Vec4f textColor;
-	QString text;		// Label to display at the intersection of the lines and screen side
-	double raAngle;		// Used for meridians
-	StelCore::FrameType frameType;
-};
-
-// Callback which draws the label of the grid
+//! Callback which draws the label of the grid at the edge of the viewport.
+//!
+//! @param screenPos 2D position of the intersection on the screen.
+//! @param direction Normalized direction of the arc toward the inside of the viewport.
+//! @param userData  ViewportEdgeIntersectCallbackData.
 void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direction, void* userData)
 {
-	ViewportEdgeIntersectCallbackData* d = static_cast<ViewportEdgeIntersectCallbackData*>(userData);
-	Vec3d direc(direction);
-	direc.normalize();
+	ViewportEdgeIntersectCallbackData* d = 
+		static_cast<ViewportEdgeIntersectCallbackData*>(userData);
 	d->renderer->setGlobalColor(d->textColor);
 
 	QString text;
 	if (d->text.isEmpty())
 	{
-		// We are in the case of meridians, we need to determine which of the 2 labels (3h or 15h to use)
+		// We are in the case of meridians,
+		// we need to determine which of the 2 labels (3h or 15h) to use
 		Vec3d tmpV;
 		d->projector->unProject(screenPos, tmpV);
-		double lon, lat;
+		double lon, lat, raAngle;
 		StelUtils::rectToSphe(&lon, &lat, tmpV);
-		switch (d->frameType)
+
+		const bool altAzOrGalactic = d->frameType == StelCore::FrameAltAz || 
+		                             d->frameType == StelCore::FrameGalactic;
+		raAngle = d->raAngle;
+		if(altAzOrGalactic)
 		{
-			case StelCore::FrameAltAz:
-			{
-				double raAngle = M_PI-d->raAngle;
-				lon = M_PI-lon;
-				if (raAngle<0)
-					raAngle=+2.*M_PI;
-				if (lon<0)
-					lon=+2.*M_PI;
-
-				if (std::fabs(2.*M_PI-lon)<0.01)
-				{
-					// We are at meridian 0
-					lon = 0.;
-				}
-				if (std::fabs(lon-raAngle) < 0.01)
-					text = StelUtils::radToDmsStrAdapt(raAngle);
-				else
-				{
-					const double delta = raAngle<M_PI ? M_PI : -M_PI;
-					if (raAngle==2*M_PI && delta==-M_PI)
-					{
-						text = StelUtils::radToDmsStrAdapt(0);
-					}
-					else
-					{
-						text = StelUtils::radToDmsStrAdapt(raAngle+delta);
-					}
-				}
-				break;
-			}
-			case StelCore::FrameGalactic:
-			{
-				double raAngle = M_PI-d->raAngle;
-				lon = M_PI-lon;
-				if (raAngle<0)
-					raAngle=+2.*M_PI;
-				if (lon<0)
-					lon=+2.*M_PI;
-
-				if (std::fabs(2.*M_PI-lon)<0.01)
-				{
-					// We are at meridian 0
-					lon = 0.;
-				}
-				if (std::fabs(lon-raAngle) < 0.01)
-					text = StelUtils::radToDmsStrAdapt(-raAngle+M_PI);
-				else
-				{
-					const double delta = raAngle<M_PI ? M_PI : -M_PI;
-					text = StelUtils::radToDmsStrAdapt(-raAngle-delta+M_PI);
-				}
-				break;
-			}
-			default:
-			{
-				if (std::fabs(2.*M_PI-lon)<0.01)
-				{
-					// We are at meridian 0
-					lon = 0.;
-				}
-				if (std::fabs(lon-d->raAngle) < 0.01)
-					text = StelUtils::radToHmsStrAdapt(d->raAngle);
-				else
-				{
-					const double delta = d->raAngle<M_PI ? M_PI : -M_PI;
-					text = StelUtils::radToHmsStrAdapt(d->raAngle+delta);
-				}
-			}
+			raAngle = M_PI - raAngle;
+			lon     = M_PI - lon;
+			if (raAngle < 0) {raAngle += 2.0 * M_PI;}
+			if (lon < 0)     {lon     += 2.0 * M_PI;}
 		}
+		if (std::fabs(2.0 * M_PI - lon) < 0.01)
+		{
+			// We are at meridian 0
+			lon = 0.0;
+		}
+		const double delta = raAngle < M_PI ? M_PI : -M_PI;
+		double textAngle;
+		if (std::fabs(lon - raAngle) < 0.01)
+		{
+			textAngle = 
+				(d->frameType == StelCore::FrameGalactic) ? -raAngle + M_PI : raAngle;
+		}
+		else if(d->frameType == StelCore::FrameAltAz)
+		{
+			textAngle = 
+				(std::fabs(raAngle - 2.0 * M_PI) < 0.01) ? 0.0 : raAngle + delta;
+		}
+		else if(d->frameType == StelCore::FrameGalactic)
+		{
+			textAngle = -raAngle - delta + M_PI;
+		}
+		else
+		{
+			textAngle = raAngle + delta;
+		}
+
+		text = altAzOrGalactic ? StelUtils::radToDmsStrAdapt(textAngle)
+		                       : StelUtils::radToHmsStrAdapt(textAngle);
 	}
 	else
 	{
 		text = d->text;
 	}
 
-	float angleDeg = std::atan2(-direc[1], -direc[0]) * 180.0 / M_PI;
+	float angleDeg = std::atan2(-direction[1], -direction[0]) * 180.0 / M_PI;
 	float xshift = 6.0f;
 	if (angleDeg > 90.0f || angleDeg < -90.0f)
 	{
@@ -279,117 +256,10 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	d->renderer->setBlendMode(BlendMode_Alpha);
 }
 
-void viewportEdgeIntersectCallback2(const Vec3d& screenPos, const Vec3d& direction, void* userData)
-{
-	ViewportEdgeIntersectCallbackData2* d = static_cast<ViewportEdgeIntersectCallbackData2*>(userData);
-	Vec3d direc(direction);
-	direc.normalize();
-	const Vec4f tmpColor = d->sPainter->getColor();
-	d->sPainter->setColor(d->textColor[0], d->textColor[1], d->textColor[2], d->textColor[3]);
-
-	QString text;
-	if (d->text.isEmpty())
-	{
-		// We are in the case of meridians, we need to determine which of the 2 labels (3h or 15h to use)
-		Vec3d tmpV;
-		d->sPainter->getProjector()->unProject(screenPos, tmpV);
-		double lon, lat;
-		StelUtils::rectToSphe(&lon, &lat, tmpV);
-		switch (d->frameType)
-		{
-			case StelCore::FrameAltAz:
-			{
-				double raAngle = M_PI-d->raAngle;
-				lon = M_PI-lon;
-				if (raAngle<0)
-					raAngle=+2.*M_PI;
-				if (lon<0)
-					lon=+2.*M_PI;
-
-				if (std::fabs(2.*M_PI-lon)<0.01)
-				{
-					// We are at meridian 0
-					lon = 0.;
-				}
-				if (std::fabs(lon-raAngle) < 0.01)
-					text = StelUtils::radToDmsStrAdapt(raAngle);
-				else
-				{
-					const double delta = raAngle<M_PI ? M_PI : -M_PI;
-					if (raAngle==2*M_PI && delta==-M_PI)
-					{
-						text = StelUtils::radToDmsStrAdapt(0);
-					}
-					else
-					{
-						text = StelUtils::radToDmsStrAdapt(raAngle+delta);
-					}
-				}
-				break;
-			}
-			case StelCore::FrameGalactic:
-			{
-				double raAngle = M_PI-d->raAngle;
-				lon = M_PI-lon;
-				if (raAngle<0)
-					raAngle=+2.*M_PI;
-				if (lon<0)
-					lon=+2.*M_PI;
-
-				if (std::fabs(2.*M_PI-lon)<0.01)
-				{
-					// We are at meridian 0
-					lon = 0.;
-				}
-				if (std::fabs(lon-raAngle) < 0.01)
-					text = StelUtils::radToDmsStrAdapt(-raAngle+M_PI);
-				else
-				{
-					const double delta = raAngle<M_PI ? M_PI : -M_PI;
-					text = StelUtils::radToDmsStrAdapt(-raAngle-delta+M_PI);
-				}
-				break;
-			}
-			default:
-			{
-				if (std::fabs(2.*M_PI-lon)<0.01)
-				{
-					// We are at meridian 0
-					lon = 0.;
-				}
-				if (std::fabs(lon-d->raAngle) < 0.01)
-					text = StelUtils::radToHmsStrAdapt(d->raAngle);
-				else
-				{
-					const double delta = d->raAngle<M_PI ? M_PI : -M_PI;
-					text = StelUtils::radToHmsStrAdapt(d->raAngle+delta);
-				}
-			}
-		}
-	}
-	else
-	{
-		text = d->text;
-	}
-
-	float angleDeg = std::atan2(-direc[1], -direc[0]) * 180.0 / M_PI;
-	float xshift = 6.0f;
-	if (angleDeg > 90.0f || angleDeg < -90.0f)
-	{
-		angleDeg += 180.0f;
-		xshift=-d->sPainter->getFontMetrics().width(text)-6.f;
-	}
-
-	d->sPainter->drawText(screenPos[0], screenPos[1], text, angleDeg, xshift, 3);
-	d->sPainter->setColor(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]);
-	glDisable(GL_TEXTURE_2D);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-}
-
 //! Draw the sky grid in the current frame
-void SkyGrid::draw(const StelCore* core) const
+void SkyGrid::draw(const StelCore* core, StelRenderer* renderer) const
 {
-	const StelProjectorP prj = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? StelCore::RefractionAuto : StelCore::RefractionOff);
+	const StelProjectorP projector = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? StelCore::RefractionAuto : StelCore::RefractionOff);
 	if (!fader.getInterstate())
 		return;
 
@@ -398,28 +268,28 @@ void SkyGrid::draw(const StelCore* core) const
 	bool northPoleInViewport = false;
 	bool southPoleInViewport = false;
 	Vec3f win;
-	if (prj->project(Vec3f(0,0,1), win) && prj->checkInViewport(win))
+	if (projector->project(Vec3f(0,0,1), win) && projector->checkInViewport(win))
 		northPoleInViewport = true;
-	if (prj->project(Vec3f(0,0,-1), win) && prj->checkInViewport(win))
+	if (projector->project(Vec3f(0,0,-1), win) && projector->checkInViewport(win))
 		southPoleInViewport = true;
 	// Get the longitude and latitude resolution at the center of the viewport
 	Vec3d centerV;
-	prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2+1, centerV);
+	projector->unProject(projector->getViewportPosX()+projector->getViewportWidth()/2, projector->getViewportPosY()+projector->getViewportHeight()/2+1, centerV);
 	double lon2, lat2;
 	StelUtils::rectToSphe(&lon2, &lat2, centerV);
 
-	const double gridStepParallelRad = M_PI/180.*getClosestResolutionDMS(prj->getPixelPerRadAtCenter());
+	const double gridStepParallelRad = M_PI/180.*getClosestResolutionDMS(projector->getPixelPerRadAtCenter());
 	double gridStepMeridianRad;
 	if (northPoleInViewport || southPoleInViewport)
 		gridStepMeridianRad = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic) ? M_PI/180.* 10. : M_PI/180.* 15.;
 	else
 	{
-		const double closetResLon = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic) ? getClosestResolutionDMS(prj->getPixelPerRadAtCenter()*std::cos(lat2)) : getClosestResolutionHMS(prj->getPixelPerRadAtCenter()*std::cos(lat2));
+		const double closetResLon = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic) ? getClosestResolutionDMS(projector->getPixelPerRadAtCenter()*std::cos(lat2)) : getClosestResolutionHMS(projector->getPixelPerRadAtCenter()*std::cos(lat2));
 		gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : closetResLon);
 	}
 
 	// Get the bounding halfspace
-	const SphericalCap& viewPortSphericalCap = prj->getBoundingCap();
+	const SphericalCap& viewPortSphericalCap = projector->getBoundingCap();
 
 	// Compute the first grid starting point. This point is close to the center of the screen
 	// and lays at the intersection of a meridien and a parallel
@@ -431,11 +301,11 @@ void SkyGrid::draw(const StelCore* core) const
 
 	// Q_ASSERT(viewPortSphericalCap.contains(firstPoint));
 
-	// Initialize a painter and set openGL state
-	StelPainter sPainter(prj);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-	Vec4f textColor(color[0], color[1], color[2], 0);
+	// Prepare for drawing
+	renderer->setBlendMode(BlendMode_Alpha);
+	Vec4f textColor(color[0], color[1], color[2], 0.0f);
+
+	Vec4f skyGridColor;
 	if (StelApp::getInstance().getVisionModeNight())
 	{
 		// instead of a filter which just zeros G&B, set the red
@@ -443,20 +313,25 @@ void SkyGrid::draw(const StelCore* core) const
 		float red = (color[0] + color[1] + color[2]) / 3.0;
 		textColor[0] = red;
 		textColor[1] = 0.; textColor[2] = 0.;
-		sPainter.setColor(red, 0, 0, fader.getInterstate());
+		skyGridColor = Vec4f(red, 0.0f, 0.0f, fader.getInterstate());
 	}
 	else
 	{
-		sPainter.setColor(color[0],color[1],color[2], fader.getInterstate());
+		skyGridColor = Vec4f(color[0], color[1], color[2], fader.getInterstate());
 	}
+	renderer->setGlobalColor(skyGridColor);
 
-	textColor*=2;
-	textColor[3]=fader.getInterstate();
+	textColor *= 2;
+	textColor[3] = fader.getInterstate();
 
-	sPainter.setFont(font);
-	ViewportEdgeIntersectCallbackData2 userData(&sPainter);
-	userData.textColor = textColor;
-	userData.frameType = frameType;
+	renderer->setFont(font);
+	ViewportEdgeIntersectCallbackData userData =
+		ViewportEdgeIntersectCallbackData(QFontMetrics(font));
+	userData.renderer     = renderer;
+	userData.projector    = projector;
+	userData.textColor    = textColor;
+	userData.frameType    = frameType;
+	userData.skyLineColor = skyGridColor;
 
 	/////////////////////////////////////////////////
 	// Draw all the meridians (great circles)
@@ -466,6 +341,7 @@ void SkyGrid::draw(const StelCore* core) const
 	Vec3d p1, p2;
 	int maxNbIter = (int)(M_PI/gridStepMeridianRad);
 	int i;
+	StelCircleArcRenderer circleRenderer(renderer, projector);
 	for (i=0; i<maxNbIter; ++i)
 	{
 		StelUtils::rectToSphe(&lon2, &lat2, fpt);
@@ -483,9 +359,12 @@ void SkyGrid::draw(const StelCore* core) const
 				rotFpt.transfo4d(rotLon120);
 				Vec3d rotFpt2=rotFpt;
 				rotFpt2.transfo4d(rotLon120);
-				sPainter.drawGreatCircleArc(fpt, rotFpt, NULL, viewportEdgeIntersectCallback2, &userData);
-				sPainter.drawGreatCircleArc(rotFpt, rotFpt2, NULL, viewportEdgeIntersectCallback2, &userData);
-				sPainter.drawGreatCircleArc(rotFpt2, fpt, NULL, viewportEdgeIntersectCallback2, &userData);
+				circleRenderer.drawGreatCircleArc
+					(fpt, rotFpt, NULL, viewportEdgeIntersectCallback, &userData); 
+				circleRenderer.drawGreatCircleArc
+					(rotFpt, rotFpt2, NULL, viewportEdgeIntersectCallback, &userData); 
+				circleRenderer.drawGreatCircleArc
+					(rotFpt2, fpt, NULL, viewportEdgeIntersectCallback, &userData); 
 				fpt.transfo4d(rotLon);
 				continue;
 			}
@@ -499,8 +378,10 @@ void SkyGrid::draw(const StelCore* core) const
 			middlePoint*=-1.;
 
 		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-		sPainter.drawGreatCircleArc(p1, middlePoint, NULL, viewportEdgeIntersectCallback2, &userData);
-		sPainter.drawGreatCircleArc(p2, middlePoint, NULL, viewportEdgeIntersectCallback2, &userData);
+		circleRenderer.drawGreatCircleArc
+			(p1, middlePoint, NULL, viewportEdgeIntersectCallback, &userData); 
+		circleRenderer.drawGreatCircleArc
+			(p2, middlePoint, NULL, viewportEdgeIntersectCallback, &userData); 
 
 		fpt.transfo4d(rotLon);
 	}
@@ -525,8 +406,10 @@ void SkyGrid::draw(const StelCore* core) const
 			if (!viewPortSphericalCap.contains(middlePoint))
 				middlePoint*=-1;
 
-			sPainter.drawGreatCircleArc(p1, middlePoint, NULL, viewportEdgeIntersectCallback2, &userData);
-			sPainter.drawGreatCircleArc(p2, middlePoint, NULL, viewportEdgeIntersectCallback2, &userData);
+			circleRenderer.drawGreatCircleArc
+				(p1, middlePoint, NULL, viewportEdgeIntersectCallback, &userData); 
+			circleRenderer.drawGreatCircleArc
+				(p2, middlePoint, NULL, viewportEdgeIntersectCallback, &userData); 
 
 			fpt.transfo4d(rotLon);
 		}
@@ -548,6 +431,8 @@ void SkyGrid::draw(const StelCore* core) const
 			break;
 
 		const Vec3d rotCenter(0,0,parallelSphericalCap.d);
+		circleRenderer.setRotCenter(rotCenter);
+
 		if (!SphericalCap::intersectionPoints(viewPortSphericalCap, parallelSphericalCap, p1, p2))
 		{
 			if ((viewPortSphericalCap.d<parallelSphericalCap.d && viewPortSphericalCap.contains(parallelSphericalCap.n))
@@ -559,9 +444,13 @@ void SkyGrid::draw(const StelCore* core) const
 				rotFpt.transfo4d(rotLon120);
 				Vec3d rotFpt2=rotFpt;
 				rotFpt2.transfo4d(rotLon120);
-				sPainter.drawSmallCircleArc(fpt, rotFpt, rotCenter, viewportEdgeIntersectCallback2, &userData);
-				sPainter.drawSmallCircleArc(rotFpt, rotFpt2, rotCenter, viewportEdgeIntersectCallback2, &userData);
-				sPainter.drawSmallCircleArc(rotFpt2, fpt, rotCenter, viewportEdgeIntersectCallback2, &userData);
+
+				circleRenderer.drawSmallCircleArc
+					(fpt, rotFpt, viewportEdgeIntersectCallback, &userData);
+				circleRenderer.drawSmallCircleArc
+					(rotFpt, rotFpt2, viewportEdgeIntersectCallback, &userData);
+				circleRenderer.drawSmallCircleArc
+					(rotFpt2, fpt, viewportEdgeIntersectCallback, &userData);
 				fpt.transfo4d(rotLon);
 				continue;
 			}
@@ -581,9 +470,10 @@ void SkyGrid::draw(const StelCore* core) const
 			middlePoint+=rotCenter;
 		}
 
-		sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter, viewportEdgeIntersectCallback2, &userData);
-
-		sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback2, &userData);
+		circleRenderer.drawSmallCircleArc
+			(p1, middlePoint, viewportEdgeIntersectCallback, &userData);
+		circleRenderer.drawSmallCircleArc
+			(p2, middlePoint, viewportEdgeIntersectCallback, &userData);
 
 		fpt.transfo4d(rotLon);
 	}
@@ -600,6 +490,7 @@ void SkyGrid::draw(const StelCore* core) const
 
 			parallelSphericalCap.d = fpt[2];
 			const Vec3d rotCenter(0,0,parallelSphericalCap.d);
+			circleRenderer.setRotCenter(rotCenter);
 			if (!SphericalCap::intersectionPoints(viewPortSphericalCap, parallelSphericalCap, p1, p2))
 			{
 				if ((viewPortSphericalCap.d<parallelSphericalCap.d && viewPortSphericalCap.contains(parallelSphericalCap.n))
@@ -611,9 +502,12 @@ void SkyGrid::draw(const StelCore* core) const
 					rotFpt.transfo4d(rotLon120);
 					Vec3d rotFpt2=rotFpt;
 					rotFpt2.transfo4d(rotLon120);
-					sPainter.drawSmallCircleArc(fpt, rotFpt, rotCenter, viewportEdgeIntersectCallback2, &userData);
-					sPainter.drawSmallCircleArc(rotFpt, rotFpt2, rotCenter, viewportEdgeIntersectCallback2, &userData);
-					sPainter.drawSmallCircleArc(rotFpt2, fpt, rotCenter, viewportEdgeIntersectCallback2, &userData);
+					circleRenderer.drawSmallCircleArc
+						(fpt, rotFpt, viewportEdgeIntersectCallback, &userData);
+					circleRenderer.drawSmallCircleArc
+						(rotFpt, rotFpt2, viewportEdgeIntersectCallback, &userData);
+					circleRenderer.drawSmallCircleArc
+						(rotFpt2, fpt, viewportEdgeIntersectCallback, &userData);
 					fpt.transfo4d(rotLon);
 					continue;
 				}
@@ -633,8 +527,10 @@ void SkyGrid::draw(const StelCore* core) const
 				middlePoint+=rotCenter;
 			}
 
-			sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter, viewportEdgeIntersectCallback2, &userData);
-			sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback2, &userData);
+			circleRenderer.drawSmallCircleArc
+				(p1, middlePoint, viewportEdgeIntersectCallback, &userData);
+			circleRenderer.drawSmallCircleArc
+				(p2, middlePoint, viewportEdgeIntersectCallback, &userData);
 
 			fpt.transfo4d(rotLon);
 		}
@@ -706,7 +602,8 @@ void SkyLine::draw(StelCore *core, StelRenderer* renderer) const
 
 	renderer->setFont(font);
 
-	ViewportEdgeIntersectCallbackData userData = ViewportEdgeIntersectCallbackData(QFontMetrics(font));
+	ViewportEdgeIntersectCallbackData userData = 
+		ViewportEdgeIntersectCallbackData(QFontMetrics(font));
 	userData.renderer     = renderer;
 	userData.projector    = projector;
 	userData.textColor    = textColor;
@@ -742,10 +639,8 @@ void SkyLine::draw(StelCore *core, StelRenderer* renderer) const
 				(rotFpt, rotFpt2, NULL, viewportEdgeIntersectCallback, &userData); 
 			circleRenderer.drawGreatCircleArc
 				(rotFpt2, fpt, NULL, viewportEdgeIntersectCallback, &userData); 
-			return;
 		}
-		else
-			return;
+		return;
 	}
 
 
@@ -768,15 +663,15 @@ void SkyLine::draw(StelCore *core, StelRenderer* renderer) const
 GridLinesMgr::GridLinesMgr()
 {
 	setObjectName("GridLinesMgr");
-	equGrid = new SkyGrid(StelCore::FrameEquinoxEqu);
-	equJ2000Grid = new SkyGrid(StelCore::FrameJ2000);
-	eclJ2000Grid = new SkyGrid(StelCore::FrameObservercentricEcliptic);
-	galacticGrid = new SkyGrid(StelCore::FrameGalactic);
-	aziGrid = new SkyGrid(StelCore::FrameAltAz);
-	equatorLine = new SkyLine(SkyLine::EQUATOR);
-	eclipticLine = new SkyLine(SkyLine::ECLIPTIC);
-	meridianLine = new SkyLine(SkyLine::MERIDIAN);
-	horizonLine = new SkyLine(SkyLine::HORIZON);
+	equGrid           = new SkyGrid(StelCore::FrameEquinoxEqu);
+	equJ2000Grid      = new SkyGrid(StelCore::FrameJ2000);
+	eclJ2000Grid      = new SkyGrid(StelCore::FrameObservercentricEcliptic);
+	galacticGrid      = new SkyGrid(StelCore::FrameGalactic);
+	aziGrid           = new SkyGrid(StelCore::FrameAltAz);
+	equatorLine       = new SkyLine(SkyLine::EQUATOR);
+	eclipticLine      = new SkyLine(SkyLine::ECLIPTIC);
+	meridianLine      = new SkyLine(SkyLine::MERIDIAN);
+	horizonLine       = new SkyLine(SkyLine::HORIZON);
 	galacticPlaneLine = new SkyLine(SkyLine::GALACTICPLANE);
 }
 
@@ -842,11 +737,11 @@ void GridLinesMgr::update(double deltaTime)
 
 void GridLinesMgr::draw(StelCore* core, class StelRenderer* renderer)
 {
-	equGrid->draw(core);
-	galacticGrid->draw(core);
-	equJ2000Grid->draw(core);
-	eclJ2000Grid->draw(core);
-	aziGrid->draw(core);
+	equGrid->draw(core, renderer);
+	galacticGrid->draw(core, renderer);
+	equJ2000Grid->draw(core, renderer);
+	eclJ2000Grid->draw(core, renderer);
+	aziGrid->draw(core, renderer);
 	equatorLine->draw(core, renderer);
 	eclipticLine->draw(core, renderer);
 	meridianLine->draw(core, renderer);

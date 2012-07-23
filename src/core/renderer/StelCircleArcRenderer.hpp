@@ -45,8 +45,9 @@ public:
 	//! The line will look smooth, even for non linear distortion.
 	//! Each time the small circle crosses the edge of the viewport,
 	//! the viewportEdgeIntersectCallback is called with the
-	//! screen 2d position, direction of the currently drawn arc 
-	//! toward the inside of the viewport.
+	//! screen 2d position of the intersection, normalized direction of the 
+	//! currently drawn arc toward the inside of the viewport, and any extra
+	//! user specified data.
 	//!
 	//! @param start       Start point of the arc.
 	//! @param stop        End point of the arc.
@@ -75,29 +76,11 @@ public:
 		drawSmallCircleArc(start, stop, viewportEdgeIntersectCallback, userData);
 	}
 
-private:
-	//! Vertex with only a 2D position.
-	struct Vertex
+	//! Set rotation point to draw a small circle around.
+	void setRotCenter(const Vec3d center)
 	{
-		Vec2f position;
-		Vertex(const Vec2f position) : position(position) {}
-		VERTEX_ATTRIBUTES(Vec2f Position);
-	};
-
-	//! Renderer used to construct and draw vertex buffers.
-	StelRenderer* renderer;
-
-	//! Projector to project vertices to viewport.
-	StelProjectorP projector;
-
-	//! Vertex buffer we're drawing the arc with.
-	StelVertexBuffer<Vertex>* smallCircleVertexBuffer;
-
-	//! List of projected points from the tesselated arc.
-	QLinkedList<Vec3d> vertexList;	
-
-	//! Center of rotation around which we're tesselating the arc.
-	Vec3d rotCenter;
+		rotCenter = center;
+	}
 
 	//! Draw a small circle arc between points start and stop 
 	//!
@@ -107,8 +90,9 @@ private:
 	//! The line will look smooth, even for non linear distortion.
 	//! Each time the small circle crosses the edge of the viewport, 
 	//! the viewportEdgeIntersectCallback is called with the
-	//! screen 2d position, direction of the currently drawn arc toward
-	//! the inside of the viewport.
+	//! screen 2d position of the intersection, normalized direction of the 
+	//! currently drawn arc toward the inside of the viewport, and any extra
+	//! user specified data.
 	//!
 	//! If rotCenter is (0,0,0), the method draws a great circle.
 	//!
@@ -173,8 +157,10 @@ private:
 					// if !p1InViewport, then p2InViewport
 					const Vec3d& a = p1InViewport ? p1 : p2;
 					const Vec3d& b = p1InViewport ? p2 : p1;
+					Vec3d dir = b - a;
+					dir.normalize();
 					viewportEdgeIntersectCallback(projector->viewPortIntersect(a, b),
-					                              b - a, userData);
+					                              dir, userData);
 				}
 			}
 			else
@@ -191,6 +177,30 @@ private:
 		Q_ASSERT_X(smallCircleVertexBuffer->length() == 0, Q_FUNC_INFO,
 		           "Small circle buffer must be empty after drawing");
 	}
+
+private:
+	//! Vertex with only a 2D position.
+	struct Vertex
+	{
+		Vec2f position;
+		Vertex(const Vec2f position) : position(position) {}
+		VERTEX_ATTRIBUTES(Vec2f Position);
+	};
+
+	//! Renderer used to construct and draw vertex buffers.
+	StelRenderer* renderer;
+
+	//! Projector to project vertices to viewport.
+	StelProjectorP projector;
+
+	//! Vertex buffer we're drawing the arc with.
+	StelVertexBuffer<Vertex>* smallCircleVertexBuffer;
+
+	//! List of projected points from the tesselated arc.
+	QLinkedList<Vec3d> vertexList;	
+
+	//! Center of rotation around which we're tesselating the arc.
+	Vec3d rotCenter;
 
 	//! Recursive function cutting a small circle into smaller segments
 	void fIter(const Vec3d& p1, const Vec3d& p2, Vec3d& win1, Vec3d& win2, 
