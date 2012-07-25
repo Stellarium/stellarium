@@ -27,7 +27,9 @@
 
 #include "StelFader.hpp"
 #include "StelUtils.hpp"
+#include "renderer/GenericVertexTypes.hpp"
 #include "renderer/StelTextureTypes.hpp"
+#include "renderer/StelVertexBuffer.hpp"
 #include "StelLocation.hpp"
 
 class QSettings;
@@ -44,7 +46,13 @@ public:
 	Landscape(float _radius = 2.f);
 	virtual ~Landscape();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) = 0;
-	virtual void draw(StelCore* core) = 0;
+
+	//! Draw the landscape.
+	//!
+	//! @param core     The StelCore object.
+	//! @param renderer The renderer to draw with.
+	virtual void draw(StelCore* core, class StelRenderer* renderer) = 0;
+
 	void update(double deltaTime)
 	{
 		landFader.update((int)(deltaTime*1000));
@@ -97,7 +105,7 @@ protected:
 	//! @param landscapeId The landscape ID (directory name) to which the texture belongs
 	//! @exception misc possibility of throwing "file not found" exceptions
 	const QString getTexturePath(const QString& basename, const QString& landscapeId);
-	float radius;
+	const float radius;
 	QString name;
 	float skyBrightness;
 	bool validLandscape;   // was a landscape loaded properly?
@@ -132,10 +140,10 @@ public:
 	LandscapeOldStyle(float radius = 2.f);
 	virtual ~LandscapeOldStyle();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 	void create(bool _fullpath, QMap<QString, QString> param);
 private:
-	void drawFog(StelCore* core, StelPainter&) const;
+	void drawFog(StelCore* core, StelRenderer* renderer);
 	void drawDecor(StelCore* core, StelPainter&) const;
 	void drawGround(StelCore* core, StelPainter&) const;
 	QVector<double> groundVertexArr;
@@ -165,6 +173,10 @@ private:
 	};
 
 	QList<LOSSide> precomputedSides;
+	//! Used to draw the fog cylinder.
+	StelVertexBuffer<VertexP3T2>* fogCylinderBuffer;
+	//! Height of the for cylinder on previous draw.
+	float previousFogHeight;
 };
 
 class LandscapeFisheye : public Landscape
@@ -173,7 +185,7 @@ public:
 	LandscapeFisheye(float radius = 1.f);
 	virtual ~LandscapeFisheye();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 	void create(const QString name, const QString& maptex, float texturefov, float angleRotateZ);
 private:
 
@@ -188,7 +200,7 @@ public:
 	LandscapeSpherical(float radius = 1.f);
 	virtual ~LandscapeSpherical();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core, class StelRenderer* renderer);
 	void create(const QString name, const QString& maptex, float angleRotateZ);
 private:
 
