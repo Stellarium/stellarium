@@ -262,7 +262,7 @@ void LandscapeMgr::draw(StelCore* core, class StelRenderer* renderer)
 	atmosphere->draw(core, renderer);
 
 	// Draw the landscape
-	landscape->draw(core);
+	landscape->draw(core, renderer);
 
 	// Draw the cardinal points
 	cardinalsPoints->draw(core, StelApp::getInstance().getCore()->getCurrentLocation().latitude);

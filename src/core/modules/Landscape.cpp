@@ -20,6 +20,8 @@
 
 #include "Landscape.hpp"
 #include "StelApp.hpp"
+#include "renderer/StelGeometryBuilder.hpp"
+#include "renderer/StelRenderer.hpp"
 #include "renderer/StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
@@ -142,18 +144,36 @@ const QString Landscape::getTexturePath(const QString& basename, const QString& 
 	}
 }
 
-LandscapeOldStyle::LandscapeOldStyle(float _radius) : Landscape(_radius), sideTexs(NULL), sides(NULL), tanMode(false), calibrated(false)
+LandscapeOldStyle::LandscapeOldStyle(float _radius)
+	: Landscape(_radius)
+	, sideTexs(NULL)
+	, sides(NULL)
+	, tanMode(false)
+	, calibrated(false)
+	, fogCylinderBuffer(NULL)
+	// Way off to ensure the height is detected as "changed" on the first drawFog() call.
+	, previousFogHeight(-1000.0f)
 {}
 
 LandscapeOldStyle::~LandscapeOldStyle()
 {
-	if (sideTexs)
+	if (NULL != sideTexs)
 	{
 		delete [] sideTexs;
 		sideTexs = NULL;
 	}
 
-	if (sides) delete [] sides;
+	if (NULL != fogCylinderBuffer) 
+	{
+		delete fogCylinderBuffer;
+		fogCylinderBuffer = NULL;
+	}
+
+	if (NULL != sides) 
+	{
+		delete [] sides;
+		sides = NULL;
+	}
 }
 
 void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& landscapeId)
@@ -351,13 +371,13 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	}
 }
 
-void LandscapeOldStyle::draw(StelCore* core)
+void LandscapeOldStyle::draw(StelCore* core, StelRenderer* renderer)
 {
 	StelPainter painter(core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff));
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	painter.enableTexture2d(true);
 	glEnable(GL_CULL_FACE);
+	renderer->setBlendMode(BlendMode_Alpha);
+	StelProjectorP projector =
+		core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 
 	if (!validLandscape)
 		return;
@@ -366,29 +386,56 @@ void LandscapeOldStyle::draw(StelCore* core)
 	drawDecor(core, painter);
 	if (!drawGroundFirst)
 		drawGround(core, painter);
-	drawFog(core, painter);
+
+	renderer->setCulledFaces(CullFace_Back);
+	drawFog(core, renderer);
 }
 
 
 // Draw the horizon fog
-void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
+void LandscapeOldStyle::drawFog(StelCore* core, StelRenderer* renderer)
 {
-	if (!fogFader.getInterstate())
-		return;
+	if (!fogFader.getInterstate()) {return;}
 
-	const float vpos = (tanMode||calibrated) ? radius*std::tan(fogAngleShift*M_PI/180.) : radius*std::sin(fogAngleShift*M_PI/180.);
-	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-	transfo->combine(Mat4d::translation(Vec3d(0.,0.,vpos)));
-	sPainter.setProjector(core->getProjection(transfo));
-	glBlendFunc(GL_ONE, GL_ONE);
-	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
-	sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
-			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter,
-			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter);
+	const float vpos = radius * (tanMode || calibrated) 
+	                          ? std::tan(fogAngleShift * M_PI / 180.0) 
+	                          : std::sin(fogAngleShift * M_PI / 180.0);
+
+	StelProjector::ModelViewTranformP transform =
+		core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transform->combine(Mat4d::translation(Vec3d(0.,0.,vpos)));
+
+	StelProjectorP projector = core->getProjection(transform);
+	renderer->setBlendMode(BlendMode_Add);
+
+	const float nightModeFilter = 
+		StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
+
+	const float intensity = fogFader.getInterstate() * (0.1f + 0.1f * skyBrightness);
+	const float filteredIntensity = intensity * nightModeFilter;
+	renderer->setGlobalColor(Vec4f(intensity, filteredIntensity, filteredIntensity, 1.0f));
 	fogTex->bind();
-	const float height = (tanMode||calibrated) ? radius*std::tan(fogAltAngle*M_PI/180.) : radius*std::sin(fogAltAngle*M_PI/180.);
-	sPainter.sCylinder(radius, height, 64, 1);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	const float height = (tanMode || calibrated) 
+	                   ? radius * std::tan(fogAltAngle * M_PI / 180.f) 
+	                   : radius * std::sin(fogAltAngle * M_PI / 180.f);
+
+	if(std::fabs(height - previousFogHeight) > 0.01)
+	{
+		// Height has changed, need to regenerate the buffer.
+		delete fogCylinderBuffer;
+		fogCylinderBuffer = NULL;
+		previousFogHeight = height;
+	}
+
+	if(NULL == fogCylinderBuffer)
+	{
+		fogCylinderBuffer = renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleStrip);
+		StelGeometryBuilder().buildCylinder(fogCylinderBuffer, radius, height, 64, true);
+	}
+
+	renderer->drawVertexBuffer(fogCylinderBuffer, NULL, projector);
+
+	renderer->setBlendMode(BlendMode_Alpha);
 }
 
 // Draw the mountains with a few pieces of texture
@@ -475,7 +522,7 @@ void LandscapeFisheye::create(const QString _name, const QString& _maptex, float
 }
 
 
-void LandscapeFisheye::draw(StelCore* core)
+void LandscapeFisheye::draw(StelCore* core, StelRenderer* renderer)
 {
 	if(!validLandscape) return;
 	if(!landFader.getInterstate()) return;
@@ -540,7 +587,7 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, flo
 }
 
 
-void LandscapeSpherical::draw(StelCore* core)
+void LandscapeSpherical::draw(StelCore* core, StelRenderer* renderer)
 {
 	if(!validLandscape) return;
 	if(!landFader.getInterstate()) return;
