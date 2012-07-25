@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-07-21 16:42+0700\n"
-"PO-Revision-Date: 2012-07-07 21:27+0000\n"
+"PO-Revision-Date: 2012-07-24 23:31+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-22 04:40+0000\n"
-"X-Generator: Launchpad (build 15654)\n"
+"X-Launchpad-Export-Date: 2012-07-25 04:36+0000\n"
+"X-Generator: Launchpad (build 15679)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -871,7 +871,7 @@ msgstr "Data i godzina"
 
 #: src/gui/StelGui.cpp:212
 msgid "Stop script execution"
-msgstr ""
+msgstr "Zatrzymaj działanie skryptu"
 
 #: src/gui/StelGui.cpp:215
 msgid "Decrease time speed"
@@ -3170,7 +3170,7 @@ msgstr "Własne ustawienia"
 
 #: src/ui_configurationDialog.h:956
 msgid "Displayed fields"
-msgstr ""
+msgstr "Wyświetlane pola"
 
 #: src/ui_configurationDialog.h:957
 msgid "Visual magnitude"
@@ -3178,19 +3178,19 @@ msgstr "Obserwowana wielkość gwiazdowa"
 
 #: src/ui_configurationDialog.h:959
 msgid "Spectral class, nebula type, etc."
-msgstr ""
+msgstr "Typ widmowy, typ mgławicy, itp."
 
 #: src/ui_configurationDialog.h:961
 msgid "Additional information 1"
-msgstr ""
+msgstr "Dodatkowa informacja 1"
 
 #: src/ui_configurationDialog.h:962
 msgid "Additional information 3"
-msgstr ""
+msgstr "Dodatkowa informacja 3"
 
 #: src/ui_configurationDialog.h:963
 msgid "Catalog number(s)"
-msgstr ""
+msgstr "Numer(y) katalogowy(-e)"
 
 #: src/ui_configurationDialog.h:964
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
@@ -3199,7 +3199,7 @@ msgstr "Nazwa"
 
 #: src/ui_configurationDialog.h:968
 msgid "Additional information 2"
-msgstr ""
+msgstr "Dodatkowa informacja 2"
 
 #: src/ui_configurationDialog.h:969
 msgid "Absolute magnitude"
@@ -3207,19 +3207,19 @@ msgstr "Absolutna wielkość gwiazdowa"
 
 #: src/ui_configurationDialog.h:971
 msgid "Horizontal coordinates"
-msgstr ""
+msgstr "Współrzędne horyzontalne"
 
 #: src/ui_configurationDialog.h:973
 msgid "Altitude/Azimuth"
-msgstr ""
+msgstr "Wysokość/Azymut"
 
 #: src/ui_configurationDialog.h:975
 msgid "Angular or physical size"
-msgstr ""
+msgstr "Rozmiar kątowy lub fizyczny"
 
 #: src/ui_configurationDialog.h:977
 msgid "Size"
-msgstr ""
+msgstr "Rozmiar"
 
 #: src/ui_configurationDialog.h:979
 msgid "Geocentric equatorial coordinates, equinox of date"
@@ -3227,11 +3227,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:981
 msgid "Right ascension/Declination (of date)"
-msgstr ""
+msgstr "Rektascensja/Deklinacja (na dzień)"
 
 #: src/ui_configurationDialog.h:982
 msgid "Distance"
-msgstr ""
+msgstr "Odległość"
 
 #: src/ui_configurationDialog.h:984
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
@@ -3239,15 +3239,15 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:986
 msgid "Right ascension/Declination (J2000)"
-msgstr ""
+msgstr "Rektascensja/Deklinacja (J2000)"
 
 #: src/ui_configurationDialog.h:988
 msgid "Topocentric equatorial coordinates"
-msgstr ""
+msgstr "Topocentryczne współrzędne równikowe"
 
 #: src/ui_configurationDialog.h:990
 msgid "Hour angle/Declination"
-msgstr ""
+msgstr "Kąt godzinowy/Deklinacja"
 
 #: src/ui_configurationDialog.h:991
 msgid "Control"
@@ -4616,7 +4616,7 @@ msgstr "Liczba odcinków używanych do narysowania linii"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:654
 msgid "Number of  segments:"
-msgstr ""
+msgstr "Liczba odcinków:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:659
 #: plugins/Satellites/src/ui_satellitesDialog.h:663
@@ -5027,7 +5027,7 @@ msgstr "Zewnętrzny program lub komputer odległy"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr ""
+msgstr "Brak, tylko symulacja (ruchoma siatka)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Telescope properties"
