@@ -422,6 +422,11 @@ protected:
 		glViewport(viewXywh[0], viewXywh[1], viewXywh[2], viewXywh[3]);
 		backend->draw(*this, transposed, glIndexBuffer);
 
+		// Restore culling to defaults.
+		glFrontFace(projector->flipFrontBackFace() ? GL_CCW : GL_CW);
+		glCullFace(GL_BACK);
+		glDisable(GL_CULL_FACE);
+
 		invariant();
 	}
 
