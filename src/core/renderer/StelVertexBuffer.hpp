@@ -226,6 +226,12 @@ public:
 	{
 		return vertexCount;
 	}
+
+	//! Return type of graphics primitives drawn with this vertex buffer.
+	PrimitiveType primitiveType() const 
+	{
+		return primitiveType_;
+	}
 	
 	//! Clear the buffer, removing all vertices.
 	//!
@@ -242,10 +248,13 @@ public:
 	}
 
 private:
-	//! Construct a StelVertexBuffer wrapping specified backend. Only Renderer can do that.
-	StelVertexBuffer(StelVertexBufferBackend* backend)
+	//! Construct a StelVertexBuffer wrapping specified backend with specified primitive type.
+	//!
+	//! Only Renderer can call this.
+	StelVertexBuffer(StelVertexBufferBackend* backend, const PrimitiveType primitiveType)
 		: locked_(false)
 		, vertexCount(0)
+		, primitiveType_(primitiveType)
 		, backend(backend)
 	{
 		backend->validateVertexType(sizeof(V));
@@ -256,6 +265,9 @@ private:
 	
 	//! Number of vertices in the buffer.
 	int vertexCount;
+
+	//! Type of graphics primitives drawn with this vertex buffer.
+	PrimitiveType primitiveType_;
 	
 	//! Vertex buffer backend.
 	StelVertexBufferBackend* backend;
