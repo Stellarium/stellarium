@@ -10,8 +10,13 @@ struct VertexP3T2
 	Vec3f position;
 	Vec2f texCoord;
 
+	//! Construct from a 3D position and 2D texture coordinate.
 	VertexP3T2(const Vec3f& position, const Vec2f texCoord) 
 		: position(position), texCoord(texCoord) {}
+	
+	//! Construct from a 2D position, setting the z coord to 0, and 2D texture coordinate.
+	VertexP3T2(const Vec2f pos, const Vec2f texCoord) 
+		: position(pos[0], pos[1], 0.0f), texCoord(texCoord) {}
 
 	VERTEX_ATTRIBUTES(Vec3f Position, Vec2f TexCoord);
 };

@@ -153,6 +153,8 @@ LandscapeOldStyle::LandscapeOldStyle(float _radius)
 	, fogCylinderBuffer(NULL)
 	// Way off to ensure the height is detected as "changed" on the first drawFog() call.
 	, previousFogHeight(-1000.0f)
+	, groundFanDisk(NULL)
+	, groundFanDiskIndices(NULL)
 {}
 
 LandscapeOldStyle::~LandscapeOldStyle()
@@ -167,6 +169,16 @@ LandscapeOldStyle::~LandscapeOldStyle()
 	{
 		delete fogCylinderBuffer;
 		fogCylinderBuffer = NULL;
+	}
+
+	if (NULL != groundFanDisk) 
+	{
+		Q_ASSERT_X(NULL != groundFanDiskIndices, Q_FUNC_INFO, 
+		           "Vertex buffer is generated but index buffer is not");
+		delete groundFanDisk;
+		groundFanDisk = NULL;
+		delete groundFanDiskIndices;
+		groundFanDiskIndices = NULL;
 	}
 
 	if (NULL != sides) 
@@ -278,23 +290,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	tanMode            = landscapeIni.value("landscape/tan_mode", false).toBool();
 	calibrated         = landscapeIni.value("landscape/calibrated", false).toBool();
 
-	// Precompute the vertex arrays for ground display
-	// Make slices_per_side=(3<<K) so that the innermost polygon of the fandisk becomes a triangle:
-	int slices_per_side = 3*64/(nbDecorRepeat*nbSide);
-	if (slices_per_side<=0)
-		slices_per_side = 1;
-
-	// draw a fan disk instead of a ordinary disk to that the inner slices
-	// are not so slender. When they are too slender, culling errors occur
-	// in cylinder projection mode.
-	int slices_inside = nbSide*slices_per_side*nbDecorRepeat;
-	int level = 0;
-	while ((slices_inside&1)==0 && slices_inside > 4)
-	{
-		++level;
-		slices_inside>>=1;
-	}
-	StelPainter::computeFanDisk(radius, slices_inside, level, groundVertexArr, groundTexCoordArr);
+	// Make slicesPerSide=(3<<K) so that the innermost polygon of the fandisk becomes a triangle:
+	int slicesPerSide = std::max(1, 3 * 64 / (nbDecorRepeat * nbSide));
 
 
 	// Precompute the vertex arrays for side display
@@ -307,7 +304,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	// Note that GZ fills this value with a different meaning!
 	const double d_z = calibrated ? decorAltAngle/stacks : (tanMode ? radius*std::tan(decorAltAngle*M_PI/180.f)/stacks : radius*std::sin(decorAltAngle*M_PI/180.0)/stacks);
 
-	const float alpha = 2.f*M_PI/(nbDecorRepeat*nbSide*slices_per_side);
+	const float alpha = 2.f * M_PI / (nbDecorRepeat * nbSide * slicesPerSide);
 	const float ca = std::cos(alpha);
 	const float sa = std::sin(alpha);
 	float y0 = radius*std::cos(angleRotateZ*M_PI/180.f);
@@ -333,9 +330,9 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 			precompSide.tex=sideTexs[ti];
 
 			float tx0 = sides[ti].texCoords[0];
-			const float d_tx0 = (sides[ti].texCoords[2]-sides[ti].texCoords[0]) / slices_per_side;
+			const float d_tx0 = (sides[ti].texCoords[2]-sides[ti].texCoords[0]) / slicesPerSide;
 			const float d_ty = (sides[ti].texCoords[3]-sides[ti].texCoords[1]) / stacks;
-			for (int j=0;j<slices_per_side;j++)
+			for (int j=0;j<slicesPerSide;j++)
 			{
 				const float y1 = y0*ca - x0*sa;
 				const float x1 = y0*sa + x0*ca;
@@ -381,13 +378,18 @@ void LandscapeOldStyle::draw(StelCore* core, StelRenderer* renderer)
 
 	if (!validLandscape)
 		return;
+	renderer->setCulledFaces(CullFace_Back);
 	if (drawGroundFirst)
-		drawGround(core, painter);
+	{
+		drawGround(core, renderer);
+	}
+	glEnable(GL_CULL_FACE);
 	drawDecor(core, painter);
 	if (!drawGroundFirst)
-		drawGround(core, painter);
+	{
+		drawGround(core, renderer);
+	}
 
-	renderer->setCulledFaces(CullFace_Back);
 	drawFog(core, renderer);
 }
 
@@ -449,10 +451,10 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
 	// and the texture in between is correctly stretched.
 	// TODO: (1) Replace fog cylinder by similar texture, which could be painted as image layer in Photoshop/Gimp.
 	//       (2) Implement calibrated && tan_mode
-	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-	transfo->combine(Mat4d::zrotation(-angleRotateZOffset*M_PI/180.f));
+	StelProjector::ModelViewTranformP transform = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transform->combine(Mat4d::zrotation(-angleRotateZOffset*M_PI/180.f));
 
-	sPainter.setProjector(core->getProjection(transfo));
+	sPainter.setProjector(core->getProjection(transform));
 
 	if (!landFader.getInterstate())
 		return;
@@ -466,24 +468,64 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
 	}
 }
 
+void LandscapeOldStyle::generateGroundFanDisk(StelRenderer* renderer)
+{
+	// Precompute the vertex buffer for ground display
+	// Make slicesPerSide = (3<<K) so that the 
+	// innermost polygon of the fandisk becomes a triangle:
+	int slicesPerSide = std::max(1, 3 * 64 / (nbDecorRepeat * nbSide));
+
+	// draw a fan disk instead of a ordinary disk so that the inner slices
+	// are not so slender. When they are too slender, culling errors occur
+	// in cylinder projection mode.
+	int slicesInside = nbSide * slicesPerSide * nbDecorRepeat;
+	int level = 0;
+	while ((slicesInside & 1) == 0 && slicesInside > 4)
+	{
+		++level;
+		slicesInside >>= 1;
+	}
+
+	groundFanDisk = renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_Triangles);
+	groundFanDiskIndices = renderer->createIndexBuffer(IndexType_U16);
+	StelGeometryBuilder()
+		.buildFanDisk(groundFanDisk, groundFanDiskIndices, radius, slicesInside, level);
+}
 
 // Draw the ground
-void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
+void LandscapeOldStyle::drawGround(StelCore* core, StelRenderer* renderer)
 {
-	if (!landFader.getInterstate())
-		return;
-	const float vshift = (tanMode || calibrated) ?
-	  radius*std::tan(groundAngleShift*M_PI/180.) :
-	  radius*std::sin(groundAngleShift*M_PI/180.);
-	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-	transfo->combine(Mat4d::zrotation((groundAngleRotateZ-angleRotateZOffset)*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift)));
+	if (!landFader.getInterstate()) {return;}
 
-	sPainter.setProjector(core->getProjection(transfo));
-	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
-	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
+	const float vshift = (tanMode || calibrated) 
+	                   ? radius * std::tan(groundAngleShift * M_PI / 180.0f) 
+	                   : radius * std::sin(groundAngleShift * M_PI / 180.0f);
+
+	StelProjector::ModelViewTranformP transform =
+		core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transform->combine
+		(Mat4d::zrotation((groundAngleRotateZ - angleRotateZOffset) * M_PI / 180.0f) *
+		 Mat4d::translation(Vec3d(0.0, 0.0, vshift)));
+
+	StelProjectorP projector = core->getProjection(transform);
+	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.0f : 1.0f;
+	renderer->setGlobalColor(Vec4f(skyBrightness,
+	                               skyBrightness * nightModeFilter,
+	                               skyBrightness * nightModeFilter,
+	                               landFader.getInterstate()));
+
 	groundTex->bind();
-	sPainter.setArrays((Vec3d*)groundVertexArr.constData(), (Vec2f*)groundTexCoordArr.constData());
-	sPainter.drawFromArray(StelPainter::Triangles, groundVertexArr.size()/3);
+
+	// Lazily generate the ground fan disk.
+	if(NULL == groundFanDisk)
+	{
+		Q_ASSERT_X(NULL == groundFanDiskIndices, Q_FUNC_INFO, 
+		           "Vertex buffer is NULL but index buffer is already generated");
+		generateGroundFanDisk(renderer);
+	}
+
+	// Draw the ground.
+	renderer->drawVertexBuffer(groundFanDisk, groundFanDiskIndices, projector);
 }
 
 LandscapeFisheye::LandscapeFisheye(float _radius) : Landscape(_radius)
@@ -527,9 +569,9 @@ void LandscapeFisheye::draw(StelCore* core, StelRenderer* renderer)
 	if(!validLandscape) return;
 	if(!landFader.getInterstate()) return;
 
-	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-	transfo->combine(Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
-	const StelProjectorP prj = core->getProjection(transfo);
+	StelProjector::ModelViewTranformP transform = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transform->combine(Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
+	const StelProjectorP prj = core->getProjection(transform);
 	StelPainter sPainter(prj);
 
 	// Normal transparency mode
@@ -592,9 +634,9 @@ void LandscapeSpherical::draw(StelCore* core, StelRenderer* renderer)
 	if(!validLandscape) return;
 	if(!landFader.getInterstate()) return;
 
-	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-	transfo->combine(Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
-	const StelProjectorP prj = core->getProjection(transfo);
+	StelProjector::ModelViewTranformP transform = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transform->combine(Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
+	const StelProjectorP prj = core->getProjection(transform);
 	StelPainter sPainter(prj);
 
 	// Normal transparency mode
