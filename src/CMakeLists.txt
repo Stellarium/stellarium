@@ -152,6 +152,7 @@ SET(stellarium_lib_SRCS
 	core/renderer/StelVertexAttribute.cpp
 	core/renderer/StelVertexAttribute.hpp
 	core/renderer/StelGeometryBuilder.hpp
+	core/renderer/StelGeometryBuilder.cpp
 	core/renderer/GenericVertexTypes.hpp
 
 	core/renderer/StelTextureParams.hpp
