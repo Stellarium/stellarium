@@ -28,6 +28,7 @@
 #include "StelFader.hpp"
 #include "StelUtils.hpp"
 #include "renderer/GenericVertexTypes.hpp"
+#include "renderer/StelIndexBuffer.hpp"
 #include "renderer/StelTextureTypes.hpp"
 #include "renderer/StelVertexBuffer.hpp"
 #include "StelLocation.hpp"
@@ -142,12 +143,25 @@ public:
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(StelCore* core, class StelRenderer* renderer);
 	void create(bool _fullpath, QMap<QString, QString> param);
+
 private:
-	void drawFog(StelCore* core, StelRenderer* renderer);
+	//! Draw the fog around the landscape.
+	//!
+	//! @param core     The StelCore object.
+	//! @param renderer Renderer to draw with.
+	void drawFog(StelCore* core, class StelRenderer* renderer);
 	void drawDecor(StelCore* core, StelPainter&) const;
-	void drawGround(StelCore* core, StelPainter&) const;
-	QVector<double> groundVertexArr;
-	QVector<float> groundTexCoordArr;
+	//! Draw the ground.
+	//!
+	//! @param core     The StelCore object.
+	//! @param renderer Renderer to draw with.
+	void drawGround(StelCore* core, class StelRenderer* renderer);
+
+	//! Generate groundFanDisk and groundFanDiskIndices
+	//!
+	//! @param renderer Renderer used to create the vertex/index buffers.
+	void generateGroundFanDisk(class StelRenderer* renderer);
+
 	StelTextureSP* sideTexs;
 	int nbSideTexs;
 	int nbSide;
@@ -177,6 +191,11 @@ private:
 	StelVertexBuffer<VertexP3T2>* fogCylinderBuffer;
 	//! Height of the for cylinder on previous draw.
 	float previousFogHeight;
+	//! Disk used to draw the ground.
+	StelVertexBuffer<VertexP3T2>* groundFanDisk;
+	//! Index buffer used to draw groundFanDisk.
+	StelIndexBuffer* groundFanDiskIndices;
+
 };
 
 class LandscapeFisheye : public Landscape

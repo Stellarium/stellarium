@@ -1,6 +1,7 @@
 #ifndef _STELGEOMETRYBUILDER_HPP_
 #define _STELGEOMETRYBUILDER_HPP_
 
+#include "StelIndexBuffer.hpp"
 #include "StelVertexBuffer.hpp"
 #include "GenericVertexTypes.hpp"
 
@@ -56,5 +57,25 @@ public:
 		}
 		vertexBuffer->lock();
 	}
+
+	//! Build a disk having texture center at center of disk.
+	//! The disk is made up of concentric circles with increasing refinement.
+	//! The number of slices of the outmost circle is (innerFanSlices << level).
+	//!
+	//! Index buffer is used to decrease vertex count.
+	//!
+	//! @param vertexBuffer Vertex buffer (of 3D-position/2D-texcoord vertices)
+	//!                     to store the fan disk. Must be empty, and have the
+	//!                     triangles primitive type.
+	//! @param indexBuffer  Index buffer to store indices specifying the triangles
+	//!                     to draw.
+	//! @param radius       Radius of the cylinder.
+	//! @param radius         Radius of the disk.
+	//! @param innerFanSlices Number of slices. Must be at least 3.
+	//! @param level          Number of concentric circles. Must be at most 31,
+	//!                       but much lower (e.g; 8) is recommended.
+	void buildFanDisk(StelVertexBuffer<VertexP3T2>* vertexBuffer,
+	                  StelIndexBuffer* indexBuffer, const float radius,
+	                  const int innerFanSlices, const int level);
 };
 #endif // _STELGEOMETRYBUILDER_HPP_
