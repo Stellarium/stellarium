@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>528</width>
+    <width>530</width>
     <height>498</height>
    </rect>
   </property>
@@ -119,9 +119,6 @@
    </item>
    <item>
     <widget class="QTabWidget" name="tabs">
-     <property name="currentIndex">
-      <number>3</number>
-     </property>
      <property name="documentMode">
       <bool>false</bool>
      </property>
@@ -439,7 +436,22 @@
           <widget class="QComboBox" name="groupsCombo"/>
          </item>
          <item>
-          <widget class="QListWidget" name="satellitesList">
+          <widget class="QLineEdit" name="lineEditSearch">
+           <property name="styleSheet">
+            <string notr="true">QLineEdit {
+	margin: 0px 0px 4px 0px;
+	padding: 4px;
+	padding-left: 32px;
+	background-image: url(:/graphicGui/searchBoxBackground.png);
+	background-repeat: none;
+	background-position: center left;
+	border: none;
+}/* Stolen from the #citySearchLineEdit widget. */</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QListView" name="satellitesList">
            <property name="selectionMode">
             <enum>QAbstractItemView::ExtendedSelection</enum>
            </property>
@@ -833,6 +845,7 @@
   <tabstop>restoreDefaultsButton</tabstop>
   <tabstop>saveSettingsButton</tabstop>
   <tabstop>groupsCombo</tabstop>
+  <tabstop>lineEditSearch</tabstop>
   <tabstop>satellitesList</tabstop>
   <tabstop>visibleCheckbox</tabstop>
   <tabstop>orbitCheckbox</tabstop>
