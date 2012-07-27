@@ -1398,7 +1398,9 @@ void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDisc
 	enableClientStates(false);
 }
 
-void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool textured, const SphericalCap* clippingCap, bool doSubDivide, double maxSqDistortion)
+void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool textured,
+                                         const SphericalCap* clippingCap,
+                                         bool doSubDivide, double maxSqDistortion)
 {
 	if (va.vertex.isEmpty())
 		return;
