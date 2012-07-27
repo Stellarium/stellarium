@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-07-21 16:42+0700\n"
-"PO-Revision-Date: 2012-07-24 14:40+0000\n"
-"Last-Translator: Andrea Reguitti <lanzinimarina@alice.it>\n"
+"PO-Revision-Date: 2012-07-26 13:33+0000\n"
+"Last-Translator: Paolo Coveri <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-25 04:36+0000\n"
-"X-Generator: Launchpad (build 15679)\n"
+"X-Launchpad-Export-Date: 2012-07-27 05:21+0000\n"
+"X-Generator: Launchpad (build 15694)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -125,12 +125,12 @@ msgstr "Eclittica geocentrica (alla data): %1/%2"
 #: src/core/modules/Planet.cpp:141
 #, qt-format
 msgid "Obliquity (of date): %1"
-msgstr "Inclinazione assiale (della data): %1"
+msgstr "Inclinazione assiale (alla data): %1"
 
 #: src/core/modules/Planet.cpp:151
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr "Distanza: %1AU (%2 km)"
+msgstr "Distanza: %1UA (%2 km)"
 
 #: src/core/modules/Planet.cpp:158
 #, no-c-format, qt-format
@@ -224,7 +224,7 @@ msgid ""
 msgstr ""
 "La proiezione in prospettiva rappresenta l'orizzonte come una linea dritta. "
 "Il nome matematico di questo metodo di proiezione è <i> proiezione "
-"gnomonica</i>"
+"gnomonica</i>."
 
 #: src/core/StelProjectorClasses.cpp:63
 msgid "Equal Area"
@@ -254,7 +254,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Fish-eye"
-msgstr "Fisheye"
+msgstr "Fish-eye"
 
 #: src/core/StelProjectorClasses.cpp:150
 msgid ""
@@ -263,10 +263,10 @@ msgid ""
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
 msgstr ""
-"Nella proiezione fisheye, o <i>proiezione equidistante azimutale</i>, le "
+"Nella proiezione fish-eye, o <i>proiezione equidistante azimutale</i>, le "
 "linee diritte diventano curve quando si trovano ad una grande distanza "
-"angolare dal centro del campo di vista (come le distorsioni viste con un "
-"angolo molto ampio dall'obiettivo della fotocamera)"
+"angolare dal centro del campo visuale (similmente alle distorsioni che si "
+"vedono con un obiettivo da fotocamera fortemente grandangolare)."
 
 #: src/core/StelProjectorClasses.cpp:182
 msgid "Hammer-Aitoff"
@@ -277,8 +277,9 @@ msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
 msgstr ""
-"La proiezione di Hammer è una proiezione equivalente, descritta da Ernst "
-"Hammer nel 1892 e direttamente ispirata dalla proiezione di Aitoff."
+"La proiezione di Hammer è una proiezione di mappa ad area equivalente, "
+"descritta da Ernst Hammer nel 1892 e direttamente ispirata dalla proiezione "
+"di Aitoff."
 
 #: src/core/StelProjectorClasses.cpp:223
 msgid "Cylinder"
@@ -380,12 +381,12 @@ msgstr "Selezionare la cartella delle schermate"
 #: src/gui/ConfigurationDialog.cpp:584
 #, qt-format
 msgid "Startup FOV: %1%2"
-msgstr "FOV di avvio: %1%2"
+msgstr "FOV di partenza: %1%2"
 
 #: src/gui/ConfigurationDialog.cpp:592
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr "Punta direzione all'avvio Az/Alt: %1%2"
+msgstr "Direzione di partenza della visualizzazione Az/Alt: %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:634
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
@@ -411,23 +412,23 @@ msgstr "Licenza"
 
 #: src/gui/ConfigurationDialog.cpp:748
 msgid "Running script: "
-msgstr "Esecuzione script: "
+msgstr "Script in esecuzione: "
 
 #: src/gui/ConfigurationDialog.cpp:755
 msgid "Running script: [none]"
-msgstr "Esecuzione script: [nessuno]"
+msgstr "Script in esecuzione: [nessuno]"
 
 #: src/gui/ConfigurationDialog.cpp:818
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
-"Scaricamento dei cataloghi di stelle completato.\n"
+"Lo scaricamento dei nuovi cataloghi di stelle è completato!\n"
 "Riavviare Stellarium per visualizzarli."
 
 #: src/gui/ConfigurationDialog.cpp:822
 msgid "All available star catalogs have been installed."
-msgstr "Tutti i cataloghi delle stelle disponibili sono stati installati."
+msgstr "Tutti i cataloghi stellari disponibili sono stati installati."
 
 #: src/gui/ConfigurationDialog.cpp:827
 #, qt-format
@@ -452,7 +453,7 @@ msgid ""
 msgstr ""
 "Dimensione scaricamento: %1MB\n"
 "Numero di stelle: %2 Million\n"
-"Intervallo di magnitudo: %3 - %4"
+"Intervallo di magnitudine: %3 - %4"
 
 #: src/gui/ConfigurationDialog.cpp:884 src/gui/ConfigurationDialog.cpp:920
 #, qt-format
@@ -483,7 +484,7 @@ msgstr "Spazio"
 
 #: src/gui/HelpDialog.cpp:53
 msgid "Arrow keys & left mouse drag"
-msgstr "Spostamento con frecce & tasto sinistro del mouse"
+msgstr "Spostamento con frecce e tasto sinistro del mouse"
 
 #: src/gui/HelpDialog.cpp:54
 msgid "Page Up/Down"
@@ -6304,7 +6305,7 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
-"Questo plugin traccia la posizione di stelle con esopianeti; i dati degli "
+"Questo plugin traccia la posizione di stelle con esopianeti. I dati degli "
 "esopianeti sono derivati dalla \"%1The Extrasolar Planets Encyclopaedia%2\""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link

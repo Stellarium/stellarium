@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-07-21 16:42+0700\n"
-"PO-Revision-Date: 2012-07-16 09:41+0000\n"
+"PO-Revision-Date: 2012-07-26 11:53+0000\n"
 "Last-Translator: Allen Zhong <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-22 04:43+0000\n"
-"X-Generator: Launchpad (build 15654)\n"
+"X-Launchpad-Export-Date: 2012-07-27 05:21+0000\n"
+"X-Generator: Launchpad (build 15694)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -305,7 +305,7 @@ msgstr "赤经/赤纬 (J2000): %1/%2"
 #: src/core/StelObject.cpp:93
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr "赤经/赤纬(日期): %1/%2"
+msgstr "赤经/赤纬 (日期): %1/%2"
 
 #: src/core/StelObject.cpp:103 src/core/StelObject.cpp:106
 #: src/core/StelObject.cpp:109
@@ -826,7 +826,7 @@ msgstr "日期及时间"
 
 #: src/gui/StelGui.cpp:212
 msgid "Stop script execution"
-msgstr ""
+msgstr "停止执行脚本"
 
 #: src/gui/StelGui.cpp:215
 msgid "Decrease time speed"
@@ -3108,7 +3108,7 @@ msgstr "自定义"
 
 #: src/ui_configurationDialog.h:956
 msgid "Displayed fields"
-msgstr ""
+msgstr "显示区域"
 
 #: src/ui_configurationDialog.h:957
 msgid "Visual magnitude"
@@ -3116,19 +3116,19 @@ msgstr "视星等"
 
 #: src/ui_configurationDialog.h:959
 msgid "Spectral class, nebula type, etc."
-msgstr ""
+msgstr "光谱型、星云类别等。"
 
 #: src/ui_configurationDialog.h:961
 msgid "Additional information 1"
-msgstr ""
+msgstr "额外信息1"
 
 #: src/ui_configurationDialog.h:962
 msgid "Additional information 3"
-msgstr ""
+msgstr "额外信息2"
 
 #: src/ui_configurationDialog.h:963
 msgid "Catalog number(s)"
-msgstr ""
+msgstr "星表编号"
 
 #: src/ui_configurationDialog.h:964
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
@@ -3137,7 +3137,7 @@ msgstr "名称"
 
 #: src/ui_configurationDialog.h:968
 msgid "Additional information 2"
-msgstr ""
+msgstr "额外信息2"
 
 #: src/ui_configurationDialog.h:969
 msgid "Absolute magnitude"
@@ -3145,19 +3145,19 @@ msgstr "绝对星等"
 
 #: src/ui_configurationDialog.h:971
 msgid "Horizontal coordinates"
-msgstr ""
+msgstr "地平坐标"
 
 #: src/ui_configurationDialog.h:973
 msgid "Altitude/Azimuth"
-msgstr ""
+msgstr "高度角/方位角"
 
 #: src/ui_configurationDialog.h:975
 msgid "Angular or physical size"
-msgstr ""
+msgstr "角面积或物理面积"
 
 #: src/ui_configurationDialog.h:977
 msgid "Size"
-msgstr ""
+msgstr "大小"
 
 #: src/ui_configurationDialog.h:979
 msgid "Geocentric equatorial coordinates, equinox of date"
@@ -3165,11 +3165,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:981
 msgid "Right ascension/Declination (of date)"
-msgstr ""
+msgstr "赤经/赤纬 (日期)"
 
 #: src/ui_configurationDialog.h:982
 msgid "Distance"
-msgstr ""
+msgstr "距离"
 
 #: src/ui_configurationDialog.h:984
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
@@ -3177,7 +3177,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:986
 msgid "Right ascension/Declination (J2000)"
-msgstr ""
+msgstr "赤经/赤纬 (J2000)"
 
 #: src/ui_configurationDialog.h:988
 msgid "Topocentric equatorial coordinates"
@@ -3185,7 +3185,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:990
 msgid "Hour angle/Declination"
-msgstr ""
+msgstr "时角/赤纬"
 
 #: src/ui_configurationDialog.h:991
 msgid "Control"

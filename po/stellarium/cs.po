@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-07-21 16:42+0700\n"
-"PO-Revision-Date: 2012-07-08 20:58+0000\n"
+"PO-Revision-Date: 2012-07-26 20:46+0000\n"
 "Last-Translator: Zbyněk Schwarz <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-22 04:35+0000\n"
-"X-Generator: Launchpad (build 15654)\n"
+"X-Launchpad-Export-Date: 2012-07-27 05:21+0000\n"
+"X-Generator: Launchpad (build 15694)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -856,7 +856,7 @@ msgstr "Datum a čas"
 
 #: src/gui/StelGui.cpp:212
 msgid "Stop script execution"
-msgstr ""
+msgstr "Zastavit spouštění skriptu"
 
 #: src/gui/StelGui.cpp:215
 msgid "Decrease time speed"
@@ -3149,7 +3149,7 @@ msgstr "Přzpůsobeno"
 
 #: src/ui_configurationDialog.h:956
 msgid "Displayed fields"
-msgstr ""
+msgstr "Zobrazená pole"
 
 #: src/ui_configurationDialog.h:957
 msgid "Visual magnitude"
@@ -3157,19 +3157,19 @@ msgstr "Vizuální magnituda"
 
 #: src/ui_configurationDialog.h:959
 msgid "Spectral class, nebula type, etc."
-msgstr ""
+msgstr "Spektrální třídy, typ mlhoviny, atd."
 
 #: src/ui_configurationDialog.h:961
 msgid "Additional information 1"
-msgstr ""
+msgstr "Dodatečné informace 1"
 
 #: src/ui_configurationDialog.h:962
 msgid "Additional information 3"
-msgstr ""
+msgstr "Dodatečné informace 3"
 
 #: src/ui_configurationDialog.h:963
 msgid "Catalog number(s)"
-msgstr ""
+msgstr "Čísla katalogů"
 
 #: src/ui_configurationDialog.h:964
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
@@ -3178,7 +3178,7 @@ msgstr "Název"
 
 #: src/ui_configurationDialog.h:968
 msgid "Additional information 2"
-msgstr ""
+msgstr "Dodatečné informace 2"
 
 #: src/ui_configurationDialog.h:969
 msgid "Absolute magnitude"
@@ -3186,47 +3186,47 @@ msgstr "Absoulutní magnituda"
 
 #: src/ui_configurationDialog.h:971
 msgid "Horizontal coordinates"
-msgstr ""
+msgstr "Horizontální souřadnice"
 
 #: src/ui_configurationDialog.h:973
 msgid "Altitude/Azimuth"
-msgstr ""
+msgstr "Nadm. výška/Azimut"
 
 #: src/ui_configurationDialog.h:975
 msgid "Angular or physical size"
-msgstr ""
+msgstr "Úhlová nebo fyzická velikost"
 
 #: src/ui_configurationDialog.h:977
 msgid "Size"
-msgstr ""
+msgstr "Velikost"
 
 #: src/ui_configurationDialog.h:979
 msgid "Geocentric equatorial coordinates, equinox of date"
-msgstr ""
+msgstr "Geocentrické rovníkové souřadnice, rovnodennost ze dne"
 
 #: src/ui_configurationDialog.h:981
 msgid "Right ascension/Declination (of date)"
-msgstr ""
+msgstr "Rektascenze / Deklinace (ze dne)"
 
 #: src/ui_configurationDialog.h:982
 msgid "Distance"
-msgstr ""
+msgstr "Vzdálenost"
 
 #: src/ui_configurationDialog.h:984
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
-msgstr ""
+msgstr "Geocentrické rovníkové souřadnice, rovnodennost v J2000.0"
 
 #: src/ui_configurationDialog.h:986
 msgid "Right ascension/Declination (J2000)"
-msgstr ""
+msgstr "Rektascenze/Deklinace (J2000)"
 
 #: src/ui_configurationDialog.h:988
 msgid "Topocentric equatorial coordinates"
-msgstr ""
+msgstr "Topocentrické rovníkové souřadnice"
 
 #: src/ui_configurationDialog.h:990
 msgid "Hour angle/Declination"
-msgstr ""
+msgstr "Hodinový úhel/Deklinace"
 
 #: src/ui_configurationDialog.h:991
 msgid "Control"
@@ -5835,6 +5835,10 @@ msgid ""
 "can be seen %1here%2 (right scale in days), and this model is used for this "
 "plugin."
 msgstr ""
+"Tento zásuvný model zavádí jednoduchý model světelných křivek pro různé "
+"supernovy. Typické zobrazení světelných křivek pro supernovy typu I a II "
+"můžete vidět %1zde%2 (měřítko vpravo je ve dnech) a tento model je použit "
+"pro tento modul."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 msgid "Acknowledgments"
@@ -5869,6 +5873,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of catalog, you can %1get info here%2."
 msgstr ""
+"Pokud se chcete o tomto modulu dozvědět vice informací, jeho historii a "
+"formát katalogu, můžete tak %1učinit zde%2."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
