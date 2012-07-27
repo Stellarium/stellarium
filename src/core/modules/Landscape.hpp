@@ -150,17 +150,32 @@ private:
 	//! @param core     The StelCore object.
 	//! @param renderer Renderer to draw with.
 	void drawFog(StelCore* core, class StelRenderer* renderer);
-	void drawDecor(StelCore* core, StelPainter&) const;
+	
+	//! Draw the landscape decoration.
+	//!
+	//! @param core     The StelCore object.
+	//! @param renderer Renderer to draw with.
+	void drawDecor(StelCore* core, class StelRenderer* renderer);
+
 	//! Draw the ground.
 	//!
 	//! @param core     The StelCore object.
 	//! @param renderer Renderer to draw with.
 	void drawGround(StelCore* core, class StelRenderer* renderer);
 
-	//! Generate groundFanDisk and groundFanDiskIndices
+	//! Generate groundFanDisk and groundFanDiskIndices.
+	//!
+	//! Called lazily, once needed.
 	//!
 	//! @param renderer Renderer used to create the vertex/index buffers.
 	void generateGroundFanDisk(class StelRenderer* renderer);
+
+	//! Generate precomputedSides.
+	//!
+	//! Called lazily, once needed.
+	//!
+	//! @param renderer Renderer used to create the vertex/index buffers.
+	void generatePrecomputedSides(class StelRenderer* renderer);
 
 	StelTextureSP* sideTexs;
 	int nbSideTexs;
@@ -180,22 +195,36 @@ private:
 	int drawGroundFirst;
 	bool tanMode;		// Whether the angles should be converted using tan instead of sin
 	bool calibrated;	// if true, the documented altitudes are inded correct (the original code is buggy!)
+	
+	//! Side of a LandscapeOldStyle decoration.
 	struct LOSSide
 	{
-		StelVertexArray arr;
+		//! Vertex buffer (triangles) to draw the side.
+		StelVertexBuffer<VertexP3T2>* vertices;
+		//! Index buffer specifying triangles to draw.
+		StelIndexBuffer* indices;
+		//! Texture of the decoration.
 		StelTextureSP tex;
 	};
 
 	QList<LOSSide> precomputedSides;
+
+	//! This seems to map sides to their textures in sideTexs.
+	//!
+	//! This should probably be replaced by something that makes more sense.
+	QMap<int, int> texToSide;
+
 	//! Used to draw the fog cylinder.
 	StelVertexBuffer<VertexP3T2>* fogCylinderBuffer;
+
 	//! Height of the for cylinder on previous draw.
 	float previousFogHeight;
+
 	//! Disk used to draw the ground.
 	StelVertexBuffer<VertexP3T2>* groundFanDisk;
+
 	//! Index buffer used to draw groundFanDisk.
 	StelIndexBuffer* groundFanDiskIndices;
-
 };
 
 class LandscapeFisheye : public Landscape

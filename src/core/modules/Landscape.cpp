@@ -186,6 +186,13 @@ LandscapeOldStyle::~LandscapeOldStyle()
 		delete [] sides;
 		sides = NULL;
 	}
+
+	for(int side = 0; side < precomputedSides.length(); ++side)
+	{
+		delete precomputedSides[side].vertices;
+		delete precomputedSides[side].indices;
+	}
+	precomputedSides.clear();
 }
 
 void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& landscapeId)
@@ -220,7 +227,6 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		sideTexs[i] = StelApp::getInstance().getTextureManager().createTexture(texturePath);
 	}
 
-	QMap<int, int> texToSide;
 	// Init sides parameters
 	nbSide = landscapeIni.value("landscape/nbside", 0).toInt();
 	sides = new landscapeTexCoord[nbSide];
@@ -289,110 +295,22 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	drawGroundFirst    = landscapeIni.value("landscape/draw_ground_first", 0).toInt();
 	tanMode            = landscapeIni.value("landscape/tan_mode", false).toBool();
 	calibrated         = landscapeIni.value("landscape/calibrated", false).toBool();
-
-	// Make slicesPerSide=(3<<K) so that the innermost polygon of the fandisk becomes a triangle:
-	int slicesPerSide = std::max(1, 3 * 64 / (nbDecorRepeat * nbSide));
-
-
-	// Precompute the vertex arrays for side display
-	static const int stacks = (calibrated ? 16 : 8); // GZ: 8->16, I need better precision.
-	const double z0 = calibrated ?
-	// GZ: For calibrated, we use z=decorAngleShift...(decorAltAngle-decorAngleShift), but we must compute the tan in the loop.
-	decorAngleShift : (tanMode ? radius * std::tan(decorAngleShift*M_PI/180.f) : radius * std::sin(decorAngleShift*M_PI/180.f));
-	// GZ: The old formula is completely meaningless for photos with opening angle >90,
-	// and most likely also not what was intended for other images.
-	// Note that GZ fills this value with a different meaning!
-	const double d_z = calibrated ? decorAltAngle/stacks : (tanMode ? radius*std::tan(decorAltAngle*M_PI/180.f)/stacks : radius*std::sin(decorAltAngle*M_PI/180.0)/stacks);
-
-	const float alpha = 2.f * M_PI / (nbDecorRepeat * nbSide * slicesPerSide);
-	const float ca = std::cos(alpha);
-	const float sa = std::sin(alpha);
-	float y0 = radius*std::cos(angleRotateZ*M_PI/180.f);
-	float x0 = radius*std::sin(angleRotateZ*M_PI/180.f);
-
-	LOSSide precompSide;
-	precompSide.arr.primitiveType=StelVertexArray::Triangles;
-	for (int n=0;n<nbDecorRepeat;n++)
-	{
-		for (int i=0;i<nbSide;i++)
-		{
-			int ti;
-			if (texToSide.contains(i))
-				ti = texToSide[i];
-			else
-			{
-				qDebug() << QString("LandscapeOldStyle::load ERROR: found no corresponding tex value for side%1").arg(i);
-				break;
-			}
-			precompSide.arr.vertex.resize(0);
-			precompSide.arr.texCoords.resize(0);
-			precompSide.arr.indices.resize(0);
-			precompSide.tex=sideTexs[ti];
-
-			float tx0 = sides[ti].texCoords[0];
-			const float d_tx0 = (sides[ti].texCoords[2]-sides[ti].texCoords[0]) / slicesPerSide;
-			const float d_ty = (sides[ti].texCoords[3]-sides[ti].texCoords[1]) / stacks;
-			for (int j=0;j<slicesPerSide;j++)
-			{
-				const float y1 = y0*ca - x0*sa;
-				const float x1 = y0*sa + x0*ca;
-				const float tx1 = tx0 + d_tx0;
-				float z = z0;
-				float ty0 = sides[ti].texCoords[1];
-				for (int k=0;k<=stacks*2;k+=2)
-				{
-					precompSide.arr.texCoords << Vec2f(tx0, ty0) << Vec2f(tx1, ty0);
-					if (calibrated)
-					{
-						float tanZ=radius * std::tan(z*M_PI/180.f);
-						precompSide.arr.vertex << Vec3d(x0, y0, tanZ) << Vec3d(x1, y1, tanZ);
-					} else
-					{
-						precompSide.arr.vertex << Vec3d(x0, y0, z) << Vec3d(x1, y1, z);
-					}
-					z += d_z;
-					ty0 += d_ty;
-				}
-				unsigned int offset = j*(stacks+1)*2;
-				for (int k = 2;k<stacks*2+2;k+=2)
-				{
-					precompSide.arr.indices << offset+k-2 << offset+k-1 << offset+k;
-					precompSide.arr.indices << offset+k << offset+k-1 << offset+k+1;
-				}
-				y0 = y1;
-				x0 = x1;
-				tx0 = tx1;
-			}
-			precomputedSides.append(precompSide);
-		}
-	}
 }
 
 void LandscapeOldStyle::draw(StelCore* core, StelRenderer* renderer)
 {
-	StelPainter painter(core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff));
-	glEnable(GL_CULL_FACE);
+	if (!validLandscape) {return;}
+
 	renderer->setBlendMode(BlendMode_Alpha);
 	StelProjectorP projector =
 		core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 
-	if (!validLandscape)
-		return;
 	renderer->setCulledFaces(CullFace_Back);
-	if (drawGroundFirst)
-	{
-		drawGround(core, renderer);
-	}
-	glEnable(GL_CULL_FACE);
-	drawDecor(core, painter);
-	if (!drawGroundFirst)
-	{
-		drawGround(core, renderer);
-	}
-
+	if (drawGroundFirst) {drawGround(core, renderer);}
+	drawDecor(core, renderer);
+	if (!drawGroundFirst) {drawGround(core, renderer);}
 	drawFog(core, renderer);
 }
-
 
 // Draw the horizon fog
 void LandscapeOldStyle::drawFog(StelCore* core, StelRenderer* renderer)
@@ -440,9 +358,93 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelRenderer* renderer)
 	renderer->setBlendMode(BlendMode_Alpha);
 }
 
-// Draw the mountains with a few pieces of texture
-void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
+void LandscapeOldStyle::generatePrecomputedSides(StelRenderer* renderer)
 {
+	// Make slicesPerSide=(3<<K) so that the innermost polygon of the fandisk becomes a triangle:
+	const int slicesPerSide = std::max(1, 3 * 64 / (nbDecorRepeat * nbSide));
+
+	// Precompute the vertex arrays for side display
+	static const int stacks = (calibrated ? 16 : 8); // GZ: 8->16, I need better precision.
+	const double z0 = calibrated ?
+	// GZ: For calibrated, we use z=decorAngleShift...(decorAltAngle-decorAngleShift), but we must compute the tan in the loop.
+	decorAngleShift : (tanMode ? radius * std::tan(decorAngleShift*M_PI/180.f) : radius * std::sin(decorAngleShift*M_PI/180.f));
+	// GZ: The old formula is completely meaningless for photos with opening angle >90,
+	// and most likely also not what was intended for other images.
+	// Note that GZ fills this value with a different meaning!
+	const double d_z = calibrated ? decorAltAngle/stacks : (tanMode ? radius*std::tan(decorAltAngle*M_PI/180.f)/stacks : radius*std::sin(decorAltAngle*M_PI/180.0)/stacks);
+
+	const float alpha = 2.f * M_PI / (nbDecorRepeat * nbSide * slicesPerSide);
+	const float ca = std::cos(alpha);
+	const float sa = std::sin(alpha);
+	float y0 = radius*std::cos(angleRotateZ*M_PI/180.f);
+	float x0 = radius*std::sin(angleRotateZ*M_PI/180.f);
+
+	LOSSide precompSide;
+	for (int n = 0; n < nbDecorRepeat; n++)
+	{
+		for (int i = 0; i < nbSide; i++)
+		{
+			if (!texToSide.contains(i))
+			{
+				qDebug() << QString("LandscapeOldStyle::load ERROR: found no corresponding tex value for side%1").arg(i);
+				break;
+			}
+
+			const int ti = texToSide[i];
+			precompSide.vertices = 
+				renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_Triangles);
+			precompSide.indices = renderer->createIndexBuffer(IndexType_U16);
+			precompSide.tex = sideTexs[ti];
+
+			float tx0 = sides[ti].texCoords[0];
+			const float d_tx0 = (sides[ti].texCoords[2] - sides[ti].texCoords[0]) / slicesPerSide;
+			const float d_ty  = (sides[ti].texCoords[3] - sides[ti].texCoords[1]) / stacks;
+			for (int j = 0; j < slicesPerSide; j++)
+			{
+				const float y1  = y0 * ca - x0 * sa;
+				const float x1  = y0 * sa + x0 * ca;
+				const float tx1 = tx0 + d_tx0;
+
+				float z   = z0;
+				float ty0 = sides[ti].texCoords[1];
+
+				for (int k = 0; k <= stacks * 2; k += 2)
+				{
+
+					const float calibratedZ =
+						calibrated ? radius * std::tan(z * M_PI / 180.0f) : z;
+					precompSide.vertices->addVertex
+						(VertexP3T2(Vec3f(x0, y0, calibratedZ), Vec2f(tx0, ty0)));
+					precompSide.vertices->addVertex
+						(VertexP3T2(Vec3f(x1, y1, calibratedZ), Vec2f(tx1, ty0)));
+					z   += d_z;
+					ty0 += d_ty;
+				}
+				const uint offset = j*(stacks+1)*2;
+				for (int k = 2; k < stacks * 2 + 2; k += 2)
+				{
+					precompSide.indices->addIndex(offset + k - 2);
+					precompSide.indices->addIndex(offset + k - 1);
+					precompSide.indices->addIndex(offset + k);
+					precompSide.indices->addIndex(offset + k);
+					precompSide.indices->addIndex(offset + k - 1);
+					precompSide.indices->addIndex(offset + k + 1);
+				}
+				y0  = y1;
+				x0  = x1;
+				tx0 = tx1;
+			}
+			precompSide.vertices->lock();
+			precompSide.indices->lock();
+			precomputedSides.append(precompSide);
+		}
+	}
+}
+
+// Draw the mountains with a few pieces of texture
+void LandscapeOldStyle::drawDecor(StelCore* core, StelRenderer* renderer) 
+{
+	if (!landFader.getInterstate()) {return;}
 
 	// Patched by Georg Zotti: I located an undocumented switch tan_mode, maybe tan_mode=true means cylindrical panorama projection.
 	// anyway, the old code makes unfortunately no sense.
@@ -451,20 +453,30 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
 	// and the texture in between is correctly stretched.
 	// TODO: (1) Replace fog cylinder by similar texture, which could be painted as image layer in Photoshop/Gimp.
 	//       (2) Implement calibrated && tan_mode
-	StelProjector::ModelViewTranformP transform = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	StelProjector::ModelViewTranformP transform =
+		core->getAltAzModelViewTransform(StelCore::RefractionOff);
 	transform->combine(Mat4d::zrotation(-angleRotateZOffset*M_PI/180.f));
 
-	sPainter.setProjector(core->getProjection(transform));
+	StelProjectorP projector = core->getProjection(transform);
 
-	if (!landFader.getInterstate())
-		return;
-	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
-	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
+	const float nightModeFilter =
+	  	StelApp::getInstance().getVisionModeNight() ? 0.0f : 1.0f;
+	renderer->setGlobalColor(Vec4f(skyBrightness,
+	                               skyBrightness * nightModeFilter,
+	                               skyBrightness * nightModeFilter,
+	                               landFader.getInterstate()));
 
+	// Lazily generate decoration sides.
+	if(precomputedSides.empty())
+	{
+		generatePrecomputedSides(renderer);
+	}
+
+	// Draw decoration sides.
 	foreach (const LOSSide& side, precomputedSides)
 	{
 		side.tex->bind();
-		sPainter.drawSphericalTriangles(side.arr, true, NULL, false);
+		renderer->drawVertexBuffer(side.vertices, side.indices, projector);
 	}
 }
 
