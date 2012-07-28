@@ -19,7 +19,7 @@ public:
 	//! @param slices       Number of slices (sides) of the cylinder.
 	//!                     Must be at least 3.
 	//! @param orientInside Should the cylinder's faces point inside?
-	void buildCylinder(StelVertexBuffer<VertexP3T2>* vertexBuffer, 
+	void buildCylinder(StelVertexBuffer<VertexP3T2>* const vertexBuffer, 
 	                   const float radius, const float height, const int slices,
 	                   const bool orientInside = false)
 	{
@@ -64,18 +64,44 @@ public:
 	//!
 	//! Index buffer is used to decrease vertex count.
 	//!
-	//! @param vertexBuffer Vertex buffer (of 3D-position/2D-texcoord vertices)
-	//!                     to store the fan disk. Must be empty, and have the
-	//!                     triangles primitive type.
-	//! @param indexBuffer  Index buffer to store indices specifying the triangles
-	//!                     to draw.
-	//! @param radius       Radius of the cylinder.
+	//! @param vertexBuffer   Vertex buffer (of 3D-position/2D-texcoord vertices)
+	//!                       to store the fan disk. Must be empty, and have the
+	//!                       triangles primitive type.
+	//! @param indexBuffer    Index buffer to store indices specifying the triangles
+	//!                       to draw.
 	//! @param radius         Radius of the disk.
 	//! @param innerFanSlices Number of slices. Must be at least 3.
 	//! @param level          Number of concentric circles. Must be at most 31,
 	//!                       but much lower (e.g; 8) is recommended.
-	void buildFanDisk(StelVertexBuffer<VertexP3T2>* vertexBuffer,
-	                  StelIndexBuffer* indexBuffer, const float radius,
+	void buildFanDisk(StelVertexBuffer<VertexP3T2>* const vertexBuffer,
+	                  StelIndexBuffer* const indexBuffer, const float radius,
 	                  const int innerFanSlices, const int level);
+
+	//! Build a fisheye-textured sphere.
+	//!
+	//! The sphere is a spherical grid formed by rowIndexBuffers.size()
+	//! rows (each a single triangle strip), and slices columns.
+	//!
+	//! That is, empty index buffers must be provided for each row,
+	//! and the row count depends on how many index buffers are provided.
+	//! as well as an empty vertex buffer.
+	//!
+	//! @param vertices        Vertex buffer to store vertices of the sphere.
+	//!                        Indices in row index buffers will point to 
+	//!                        vertices in this buffer.
+	//!                        Must be empty.
+	//! @param rowIndexBuffers Index buffers to store rows of the sphere.
+	//!                        The number of rows generated is 
+	//!                        rowIndexBuffers.size(). At least 3 index buffers
+	//!                        must be provided, and all of them must be empty.
+	//! @param radius          Radius of the sphere.
+	//! @param slices          Number of columns in each row of the sphere.
+	//!                        Must be at least 3.
+	//! @param textureFov      Field of view of the texture coordinates.
+	//! @param orientInside    Should the front faces of the sphere point inside?
+	void buildSphereMapFisheye
+		(StelVertexBuffer<VertexP3T2>* const vertices, 
+		 QVector<StelIndexBuffer* >& rowIndexBuffers, const float radius,
+		 const int slices, const float textureFov, const bool orientInside);
 };
 #endif // _STELGEOMETRYBUILDER_HPP_
