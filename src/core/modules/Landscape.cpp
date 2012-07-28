@@ -540,11 +540,24 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelRenderer* renderer)
 	renderer->drawVertexBuffer(groundFanDisk, groundFanDiskIndices, projector);
 }
 
-LandscapeFisheye::LandscapeFisheye(float _radius) : Landscape(_radius)
+LandscapeFisheye::LandscapeFisheye(float _radius) 
+	: Landscape(_radius)
+	, fisheyeSphereVertices(NULL)
 {}
 
 LandscapeFisheye::~LandscapeFisheye()
 {
+	for(int buffer = 0; buffer < fisheyeSphereRows.size(); ++buffer)
+	{
+		delete fisheyeSphereRows[buffer];
+	}
+	fisheyeSphereRows.clear();
+
+	if(NULL != fisheyeSphereVertices)
+	{
+		delete fisheyeSphereVertices;
+		fisheyeSphereVertices = NULL;
+	}
 }
 
 void LandscapeFisheye::load(const QSettings& landscapeIni, const QString& landscapeId)
@@ -575,7 +588,6 @@ void LandscapeFisheye::create(const QString _name, const QString& _maptex, float
 	angleRotateZ = aangleRotateZ*M_PI/180.f;
 }
 
-
 void LandscapeFisheye::draw(StelCore* core, StelRenderer* renderer)
 {
 	if(!validLandscape) return;
@@ -583,22 +595,43 @@ void LandscapeFisheye::draw(StelCore* core, StelRenderer* renderer)
 
 	StelProjector::ModelViewTranformP transform = core->getAltAzModelViewTransform(StelCore::RefractionOff);
 	transform->combine(Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
-	const StelProjectorP prj = core->getProjection(transform);
-	StelPainter sPainter(prj);
+	const StelProjectorP projector = core->getProjection(transform);
 
-	// Normal transparency mode
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	renderer->setBlendMode(BlendMode_Alpha);
 	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
-	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
 
-	glEnable(GL_CULL_FACE);
-	sPainter.enableTexture2d(true);
-	glEnable(GL_BLEND);
+	renderer->setGlobalColor(Vec4f(skyBrightness,
+	                               skyBrightness * nightModeFilter,
+	                               skyBrightness * nightModeFilter,
+	                               landFader.getInterstate()));
+
+	renderer->setCulledFaces(CullFace_Back);
+	renderer->setBlendMode(BlendMode_Alpha);
 	mapTex->bind();
 	// Patch GZ: (40,20)->(cols,rows)
-	sPainter.sSphereMap(radius,cols,rows,texFov,1);
 
-	glDisable(GL_CULL_FACE);
+	// Lazily generate the sphere.
+	if(fisheyeSphereRows.empty())
+	{
+		// Each row of the sphere is a separate triangle strip using the same vertex buffer.
+		for(int row = 0; row < rows; ++row)
+		{
+			fisheyeSphereRows.append(renderer->createIndexBuffer(IndexType_U16));
+		}
+		fisheyeSphereVertices = 
+			renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleStrip);
+		StelGeometryBuilder()
+			.buildSphereMapFisheye(fisheyeSphereVertices, fisheyeSphereRows, 
+			                       radius, cols, texFov, true);
+	}
+
+	// Draw the sphere.
+	for(int buffer = 0; buffer < fisheyeSphereRows.size(); ++buffer)
+	{
+		renderer->drawVertexBuffer(fisheyeSphereVertices, fisheyeSphereRows[buffer], projector);
+	}
+
+	renderer->setCulledFaces(CullFace_None);
 }
 
 
@@ -648,8 +681,8 @@ void LandscapeSpherical::draw(StelCore* core, StelRenderer* renderer)
 
 	StelProjector::ModelViewTranformP transform = core->getAltAzModelViewTransform(StelCore::RefractionOff);
 	transform->combine(Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
-	const StelProjectorP prj = core->getProjection(transform);
-	StelPainter sPainter(prj);
+	const StelProjectorP projector = core->getProjection(transform);
+	StelPainter sPainter(projector);
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
