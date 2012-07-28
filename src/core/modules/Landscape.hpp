@@ -114,15 +114,19 @@ protected:
 	LinearFader fogFader;
 	QString author;
 	QString description;
+
+	// Currently, rows and cols do not change after initialization.
+	// If, in future, these values can be modified, cached vertex/index buffers 
+	// will have to be regenerated after the change.
 	// GZ patched, these can now be set in landscape.ini:
 	int rows; // horizontal rows
 	int cols; // vertical columns
-        int defaultBortleIndex; // light pollution from landscape.ini, or -1(no change)
-        int defaultFogSetting; // fog flag setting from landscape.ini: -1(no change), 0(off), 1(on)
-        double defaultExtinctionCoefficient; // atmospheric_extinction_coefficient from landscape.ini or -1
-        double defaultTemperature; // atmospheric_temperature from landscape.ini or -1000.0
-        double defaultPressure; // atmospheric_pressure from landscape.ini or -1.0
-
+	int defaultBortleIndex; // light pollution from landscape.ini, or -1(no change)
+	int defaultFogSetting; // fog flag setting from landscape.ini: -1(no change), 0(off), 1(on)
+	double defaultExtinctionCoefficient; // atmospheric_extinction_coefficient from landscape.ini or -1
+	double defaultTemperature; // atmospheric_temperature from landscape.ini or -1000.0
+	double defaultPressure; // atmospheric_pressure from landscape.ini or -1.0
+	
 	typedef struct
 	{
 		StelTextureSP tex;
@@ -238,7 +242,15 @@ public:
 private:
 
 	StelTextureSP mapTex;
+	// Currently, this does not change after initialization.
+	// If, in future, this value can be modified, cached vertex/index buffers 
+	// will have to be regenerated after the change.
 	float texFov;
+
+	//! Index buffers pointing to fisheyeSphereVertices forming rows of the sphere.
+	QVector<StelIndexBuffer*> fisheyeSphereRows;
+	//! Vertices of the sphere used to draw the landscape.
+	StelVertexBuffer<VertexP3T2>* fisheyeSphereVertices;
 };
 
 
