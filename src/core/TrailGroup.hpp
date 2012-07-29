@@ -51,13 +51,13 @@ public:
 	void reset();
 
 private:
+	//! Vertex with a position and a color.
 	struct ColoredVertex
 	{
 		Vec3f position;
 		Vec4f color;
 
-		ColoredVertex(const Vec3d& pos, const Vec4f& color) 
-			: position(pos[0], pos[1], pos[2]) , color(color) {}
+		ColoredVertex(){}
 
 		VERTEX_ATTRIBUTES(Vec3f Position, Vec4f Color);
 	};
@@ -70,8 +70,14 @@ private:
 		}
 
 		StelObjectP stelObject;
+
+		// Using QVector instead of QList.
+		// QList is an array of pointers to elements, which are 8 byte on 64-bit,
+		// while Vec3f is 12 byte, so not much space saved (or time, at popFront).
+		// At the same time, it has a bad cache performance that slows down drawing.
+
 		// All previous positions
-		QList<Vec3d> posHistory;
+		QVector<Vec3f> posHistory;
 		Vec3f color;
 		StelVertexBuffer<ColoredVertex>* vertexBuffer;
 	};
@@ -87,6 +93,11 @@ private:
 	Mat4d j2000ToTrailNativeInverted;
 
 	float opacity;
+
+	//! Last time for which we have positions in history.
+	//!
+	//! We only add new positions to history after a long enough interval (one minute).
+	double lastTimeInHistory;
 };
 
 #endif // TRAILMGR_HPP
