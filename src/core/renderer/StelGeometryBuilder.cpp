@@ -189,9 +189,8 @@ void StelGeometryBuilder::buildFanDisk
 	indexBuffer->lock();
 }
 
+#ifndef NDEBUG
 //! Checks preconditions for sphere building.
-//!
-//! In release builds, this function does nothing, and should be optimized away.
 //!
 //! @param vertices        Vertex buffer to store sphere vertices.
 //! @param rowIndexBuffers Index buffers to store triangle strips forming sphere rows.
@@ -216,6 +215,7 @@ static void spherePreconditions(StelVertexBuffer<VertexP3T2>* const vertices,
 		           "Need empty index buffers to build a sphere");
 	}
 }
+#endif
 
 // A lot of code in the below two member functions is identical, but 
 // there is no simple way to refactor it out without using a single function 
@@ -228,7 +228,9 @@ void StelGeometryBuilder::buildSphereFisheye
 	 const int slices, const float textureFov, const bool orientInside)
 {
 	const int stacks = rowIndexBuffers.size();
+#ifndef NDEBUG
 	spherePreconditions(vertices, rowIndexBuffers, stacks, slices);
+#endif
 
 	const float stackAngle = M_PI / stacks;
 	const float dtheta     = 2.0f * M_PI / slices;
@@ -292,7 +294,9 @@ void StelGeometryBuilder::buildSphere
 {
 	const int stacks = rowIndexBuffers.size();
 
+#ifndef NDEBUG
 	spherePreconditions(vertices, rowIndexBuffers, stacks, slices);
+#endif
 
 	vertices->unlock();
 	const float drho   = M_PI / stacks;

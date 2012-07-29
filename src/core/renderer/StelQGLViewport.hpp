@@ -284,6 +284,7 @@ private:
 	//! Asserts that we're in a valid state.
 	void invariant() const
 	{
+#ifndef NDEBUG
 		Q_ASSERT_X(NULL != glWidget, Q_FUNC_INFO, "Destroyed StelQGLViewport");
 		Q_ASSERT_X(glWidget->isValid(), Q_FUNC_INFO, 
 		           "Invalid glWidget (maybe there is no OpenGL support?)");
@@ -301,6 +302,7 @@ private:
 		           "We're drawing and using FBOs, but the backBuffer is NULL");
 		Q_ASSERT_X(drawing && fbo ? frontBuffer != NULL : true, Q_FUNC_INFO,
 		           "We're drawing and using FBOs, but the frontBuffer is NULL");
+#endif
 	}
 
 	//! Enable Qt-style painting with specified painter (or construct a fallback painter if NULL).

@@ -198,6 +198,8 @@ StelQGLTextureBackend* StelQGLTextureBackend::fromViewport
 		           "Unknown screen vertex format when getting texture from viewport. "
 		           "Switching to OpenGL2, disabling viewport effects or "
 		           "chaning video mode bit depth might help");
+		// Invalid value to avoid warnings.
+		glFormat = -1;
 	}
 
 	// Creating a texture from a dummy image.
