@@ -22,7 +22,10 @@
 
 #include "StelModule.hpp"
 #include "VecMath.hpp"
+#include "renderer/GenericVertexTypes.hpp"
+#include "renderer/StelIndexBuffer.hpp"
 #include "renderer/StelTextureTypes.hpp"
+#include "renderer/StelVertexBuffer.hpp"
 
 //! @class MilkyWay 
 //! Manages the displaying of the Milky Way.
@@ -42,6 +45,9 @@ public:
 	virtual void init();
 
 	//! Draw the Milky Way.
+	//!
+	//! @param core     The StelCore object.
+	//! @param renderer Renderer to draw with.
 	virtual void draw(StelCore* core, class StelRenderer* renderer);
 	
 	//! Update and time-dependent state.  Updates the fade level while the 
@@ -76,7 +82,10 @@ private:
 	float intensity;
 	class LinearFader* fader;
 
-	struct StelVertexArray* vertexArray;
+	//! Vertices of the sphere.
+	StelVertexBuffer<VertexP3T2>* sphereVertices;
+	//! Index buffers storing triangle strips that are the rows of the sphere.
+	QVector<StelIndexBuffer*> sphereRows;
 };
 
 #endif // _MILKYWAY_HPP_
