@@ -340,6 +340,9 @@ public:
 	//! @param shader Shader assumed to be bound, for error checking.
 	void releaseCustomShader(StelQGLGLSLShader* shader)
 	{
+#ifdef NDEBUG
+		Q_UNUSED(shader);
+#endif
 		Q_ASSERT_X(shader == customShader, Q_FUNC_INFO, 
 		           "Trying to release() a shader when no shader or a different shader is bound.");
 
@@ -442,8 +445,10 @@ protected:
 
 	virtual void invariant() const
 	{
+#ifndef NDEBUG
 		Q_ASSERT_X(initialized, Q_FUNC_INFO, "uninitialized StelQGL2Renderer");
 		StelQGLRenderer::invariant();
+#endif
 	}
 	
 private:
