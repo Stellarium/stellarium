@@ -99,9 +99,47 @@ public:
 	//!                        Must be at least 3.
 	//! @param textureFov      Field of view of the texture coordinates.
 	//! @param orientInside    Should the front faces of the sphere point inside?
-	void buildSphereMapFisheye
+	void buildSphereFisheye
 		(StelVertexBuffer<VertexP3T2>* const vertices, 
 		 QVector<StelIndexBuffer* >& rowIndexBuffers, const float radius,
 		 const int slices, const float textureFov, const bool orientInside);
+
+	// The parameter list here is horrible (7 parameters!)
+	// A solution might be a Sphere class wrapping up details and drawing of
+	// various spheres.
+	//! Build a regularly texture mapped sphere.
+	//!
+	//! Texture coordinates: x goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y 
+	//! sides of the sphere, y goes from -1.0/+1.0 at z = -radius/+radius 
+	//! (linear along longitudes)
+	//!
+	//! The sphere is a spherical grid formed by rowIndexBuffers.size()
+	//! rows (each a single triangle strip), and slices columns.
+	//!
+	//! That is, empty index buffers must be provided for each row,
+	//! and the row count depends on how many index buffers are provided.
+	//! as well as an empty vertex buffer.
+	//!
+	//! @param vertices           Vertex buffer to store vertices of the sphere.
+	//!                           Indices in row index buffers will point to 
+	//!                           vertices in this buffer.
+	//!                           Must be empty.
+	//! @param rowIndexBuffers    Index buffers to store rows of the sphere.
+	//!                           The number of rows generated is 
+	//!                           rowIndexBuffers.size(). At least 3 index buffers
+	//!                           must be provided, and all of them must be empty.
+	//! @param radius             Radius of the sphere.
+	//! @param oneMinusOblateness Defines how "squished" the sphere is -
+	//!                           for planets, this is the polar radius divided 
+	//!                           by the equatorial radius.
+	//! @param slices             Number of columns in each row of the sphere.
+	//!                           Must be at least 3.
+	//! @param orientInside       Should the front faces of the sphere point inside?
+	//! @param flipTexture        Should the texture coordinates be horizontally flipped?
+	void buildSphere 
+		(StelVertexBuffer<VertexP3T2>* const vertices, 
+		 QVector<StelIndexBuffer*>& rowIndexBuffers, const float radius,
+		 const float oneMinusOblateness, const int slices, 
+		 const bool orientInside, const bool flipTexture);
 };
 #endif // _STELGEOMETRYBUILDER_HPP_

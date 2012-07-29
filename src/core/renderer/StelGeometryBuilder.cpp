@@ -189,12 +189,18 @@ void StelGeometryBuilder::buildFanDisk
 	indexBuffer->lock();
 }
 
-void StelGeometryBuilder::buildSphereMapFisheye
-	(StelVertexBuffer<VertexP3T2>* const vertices, 
-	 QVector<StelIndexBuffer*>& rowIndexBuffers, const float radius,
-	 const int slices, const float textureFov, const bool orientInside)
+//! Checks preconditions for sphere building.
+//!
+//! In release builds, this function does nothing, and should be optimized away.
+//!
+//! @param vertices        Vertex buffer to store sphere vertices.
+//! @param rowIndexBuffers Index buffers to store triangle strips forming sphere rows.
+//! @param stacks          Number of rows of the sphere grid.
+//! @param slices          Number of columns of the sphere grid.
+static void spherePreconditions(StelVertexBuffer<VertexP3T2>* const vertices,
+                                QVector<StelIndexBuffer*> rowIndexBuffers,
+                                const int stacks, const int slices)
 {
-	const int stacks = rowIndexBuffers.size();
 	Q_ASSERT_X(stacks <= MAX_STACKS, Q_FUNC_INFO, "Too many stacks");
 	Q_ASSERT_X(stacks > 3, Q_FUNC_INFO,
 	           "Need at least 3 row index buffers to build a sphere");
@@ -204,16 +210,31 @@ void StelGeometryBuilder::buildSphereMapFisheye
 	           "Need an empty vertex buffer to build a sphere");
 	Q_ASSERT_X(vertices->primitiveType() == PrimitiveType_TriangleStrip, 
 	           Q_FUNC_INFO, "Need a triangle strip vertex buffer to build a sphere");
+	foreach(const StelIndexBuffer* buffer, rowIndexBuffers)
+	{
+		Q_ASSERT_X(buffer->length() == 0, Q_FUNC_INFO, 
+		           "Need empty index buffers to build a sphere");
+	}
+}
+
+// A lot of code in the below two member functions is identical, but 
+// there is no simple way to refactor it out without using a single function 
+// calling many subfunctions. Perhaps a Sphere class with generation variables 
+// as data members could solve this.
+
+void StelGeometryBuilder::buildSphereFisheye
+	(StelVertexBuffer<VertexP3T2>* const vertices, 
+	 QVector<StelIndexBuffer*>& rowIndexBuffers, const float radius,
+	 const int slices, const float textureFov, const bool orientInside)
+{
+	const int stacks = rowIndexBuffers.size();
+	spherePreconditions(vertices, rowIndexBuffers, stacks, slices);
 
 	const float stackAngle = M_PI / stacks;
+	const float dtheta     = 2.0f * M_PI / slices;
+	const float drho       = stackAngle / textureFov;
 	computeCosSinRho(stackAngle, stacks);
-	const float dtheta = 2.0f * M_PI / slices;
 	computeCosSinTheta(dtheta, slices);
-	const float drho = stackAngle / textureFov;
-
-	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
-	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
-	// cannot use triangle fan for texturing (s coord at top/bottom tip varies)
 
 	const Vec2f texOffset(0.5f, 0.5f);
 	float yTexMult = orientInside ? -1.0f : 1.0f;
@@ -245,11 +266,9 @@ void StelGeometryBuilder::buildSphereMapFisheye
 
 	// Generate index buffers for strips (rows) forming the sphere.
 	uint index = 0;
-	for (int i = 0; i < stacks; ++i, rho += drho)
+	for (int i = 0; i < stacks; ++i)
 	{
-		StelIndexBuffer* indices = rowIndexBuffers[i];
-		Q_ASSERT_X(indices->length() == 0, Q_FUNC_INFO, 
-		           "Need empty index buffers to build a sphere");
+		StelIndexBuffer* const indices = rowIndexBuffers[i];
 		indices->unlock();
 
 		for (int j = 0; j <= slices; ++j)
@@ -264,3 +283,72 @@ void StelGeometryBuilder::buildSphereMapFisheye
 		indices->lock();
 	}
 }
+
+void StelGeometryBuilder::buildSphere 
+	(StelVertexBuffer<VertexP3T2>* const vertices, 
+	 QVector<StelIndexBuffer*>& rowIndexBuffers, const float radius,
+	 const float oneMinusOblateness, const int slices, 
+	 const bool orientInside, const bool flipTexture)
+{
+	const int stacks = rowIndexBuffers.size();
+
+	spherePreconditions(vertices, rowIndexBuffers, stacks, slices);
+
+	vertices->unlock();
+	const float drho   = M_PI / stacks;
+	const float dtheta = 2.0f * M_PI / slices;
+	computeCosSinRho(drho, stacks);
+	computeCosSinTheta(dtheta, slices);
+
+	const float nsign = orientInside ? -1.0f : 1.0f;
+	// from inside texture is reversed 
+	float t           = orientInside ?  0.0f : 1.0f;
+
+	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
+	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
+	// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
+	// If the texture is flipped, we iterate the coordinates backward.
+	const float ds = (flipTexture ? -1.0f : 1.0f) / slices;
+	const float dt = nsign / stacks; // from inside texture is reversed
+
+	const float* cosSinRho = COS_SIN_RHO;
+	for (int i = 0; i <= stacks; ++i)
+	{
+		const float cosSinRho0 = cosSinRho[0];
+		const float cosSinRho1 = cosSinRho[1];
+		
+		float s = !flipTexture ? 0.0f : 1.0f;
+		const float* cosSinTheta = COS_SIN_THETA;
+		for (int j = 0; j <= slices; ++j)
+		{
+			const Vec3f v(-cosSinTheta[1] * cosSinRho1,
+			              cosSinTheta[0] * cosSinRho1, 
+			              nsign * cosSinRho0 * oneMinusOblateness);
+			vertices->addVertex(VertexP3T2(v * radius, Vec2f(s, t)));
+			s += ds;
+			cosSinTheta += 2;
+		}
+
+		cosSinRho += 2;
+		t -= dt;
+	}
+	// Generate index buffers for strips (rows) forming the sphere.
+	uint index = 0;
+	for (int i = 0; i < stacks; ++i)
+	{
+		StelIndexBuffer* const indices = rowIndexBuffers[i];
+		indices->unlock();
+
+		for (int j = 0; j <= slices; ++j)
+		{
+			indices->addIndex(index);
+			indices->addIndex(index + slices + 1);
+			index += 1;
+		}
+
+		indices->lock();
+	}
+
+	vertices->lock();
+}
+
