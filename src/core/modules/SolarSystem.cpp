@@ -21,6 +21,7 @@
 
 #include "SolarSystem.hpp"
 #include "renderer/StelTexture.hpp"
+#include "renderer/StelRenderer.hpp"
 #include "stellplanet.h"
 #include "Orbit.hpp"
 
@@ -154,7 +155,7 @@ void SolarSystem::recreateTrails()
 	}
 }
 
-void SolarSystem::drawPointer(const StelCore* core)
+void SolarSystem::drawPointer(const StelCore* core, StelRenderer* renderer)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
@@ -169,18 +170,14 @@ void SolarSystem::drawPointer(const StelCore* core)
 		if (!prj->project(pos, screenpos))
 			return;
 
-
-		StelPainter sPainter(prj);
-		sPainter.setColor(1.0f,0.3f,0.3f);
+		renderer->setGlobalColor(Vec4f(1.0f, 0.3f, 0.3f, 1.0f));
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
 		size+=40.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 
 		texPointer->bind();
 
-		sPainter.enableTexture2d(true);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		renderer->setBlendMode(BlendMode_Alpha);
 
 		size*=0.5;
 		const float angleBase = StelApp::getInstance().getTotalRunTime() * 10;
@@ -190,7 +187,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 			const float angle = angleBase + i * 90;
 			const double x = screenpos[0] + size * cos(angle / 180 * M_PI);
 			const double y = screenpos[1] + size * sin(angle / 180 * M_PI);
-			sPainter.drawSprite2dMode(x, y, 10, angle);
+			renderer->drawTexturedRect(x - 10, y - 10, 20, 20, angle);
 		}
 	}
 }
@@ -956,7 +953,7 @@ void SolarSystem::draw(StelCore* core, class StelRenderer* renderer)
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-		drawPointer(core);
+		drawPointer(core, renderer);
 }
 
 void SolarSystem::setStelStyle(const QString& section)
