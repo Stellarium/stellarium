@@ -238,7 +238,9 @@ public:
 	             int stacks, int orientInside = 0, bool flipTexture = false);
 
 	//! Generate a StelVertexArray for a sphere.
-	static StelVertexArray computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
+	static StelVertexArray computeSphereNoLight
+		(float radius, float oneMinusOblateness, int slices,
+		 int stacks, int orientInside = 0, bool flipTexture = false);
 
 	//! Re-implementation of gluCylinder : glu is overridden for non-standard projection.
 	void sCylinder(float radius, float height, int slices, int orientInside = 0);
