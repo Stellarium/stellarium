@@ -41,7 +41,6 @@
 
 #include "StelSkyDrawer.hpp"
 #include "StelUtils.hpp"
-#include "StelPainter.hpp"
 #include "TrailGroup.hpp"
 #include "RefractionExtinction.hpp"
 

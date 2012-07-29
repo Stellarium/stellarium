@@ -102,7 +102,7 @@ public:
 	void buildSphereFisheye
 		(StelVertexBuffer<VertexP3T2>* const vertices, 
 		 QVector<StelIndexBuffer* >& rowIndexBuffers, const float radius,
-		 const int slices, const float textureFov, const bool orientInside);
+		 const int slices, const float textureFov, const bool orientInside = false);
 
 	// The parameter list here is horrible (7 parameters!)
 	// A solution might be a Sphere class wrapping up details and drawing of
@@ -140,6 +140,6 @@ public:
 		(StelVertexBuffer<VertexP3T2>* const vertices, 
 		 QVector<StelIndexBuffer*>& rowIndexBuffers, const float radius,
 		 const float oneMinusOblateness, const int slices, 
-		 const bool orientInside, const bool flipTexture);
+		 const bool orientInside = false, const bool flipTexture = false);
 };
 #endif // _STELGEOMETRYBUILDER_HPP_
