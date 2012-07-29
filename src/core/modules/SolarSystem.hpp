@@ -251,7 +251,10 @@ private:
 	void computeTransMatrices(double date, const Vec3d& observerPos = Vec3d(0.));
 
 	//! Draw a nice animated pointer around the object.
-	void drawPointer(const StelCore* core);
+	//!
+	//! @param core     The StelCore object.
+	//! @param renderer Renderer to draw with.
+	void drawPointer(const StelCore* core, class StelRenderer* renderer);
 
 	//! Load planet data from the Solar System configuration file.
 	//! This function attempts to load every possible instance of the
