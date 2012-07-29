@@ -234,7 +234,8 @@ public:
 	void drawRect2d(float x, float y, float width, float height, bool textured=true);
 
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
-	void sSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
+	void sSphere(float radius, float oneMinusOblateness, int slices,
+	             int stacks, int orientInside = 0, bool flipTexture = false);
 
 	//! Generate a StelVertexArray for a sphere.
 	static StelVertexArray computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
