@@ -223,35 +223,72 @@ void StelTestQGL2VertexBufferBackend::
 	           "Trying to project a vertex buffer that is not locked.");
 
 	// Get the position attribute and ensure that we can project it.
-	const int index = getAttributeIndex(AttributeInterpretation_Position);
-	Q_ASSERT_X(index >= 0, Q_FUNC_INFO, "Vertex format without a position attribute");
-	const StelVertexAttribute& attribute(attributes.attributes[index]);
+	const int posIndex = getAttributeIndex(AttributeInterpretation_Position);
+#ifndef NDEBUG
+	const StelVertexAttribute& attribute(attributes.attributes[posIndex]);
+#endif
+	Q_ASSERT_X(posIndex >= 0, Q_FUNC_INFO, "Vertex format without a position attribute");
 	Q_ASSERT_X(attributeDimensions(attribute.type) == 3, Q_FUNC_INFO,
 	           "Trying to use a custom StelProjector to project non-3D vertex positions");
 	Q_ASSERT_X(attribute.type == AttributeType_Vec3f, Q_FUNC_INFO, 
 	           "Unknown 3D vertex attribute type");
 	AttributeBuffer<Vec3f>* positions = 
-		dynamic_cast<AttributeBuffer<Vec3f>*>(buffers[index]);
+		dynamic_cast<AttributeBuffer<Vec3f>*>(buffers[posIndex]);
 	Q_ASSERT_X(NULL != positions, Q_FUNC_INFO,
 	           "Unexpected attribute buffer data type");
 
 	usingProjectedPositions = true;
 
+
 	// We have two different cases :
 	// a) Not using an index array. Size of vertex data is known.
 	// b) Using an index array. 
-	//    We find the max index and project vertices until that index.
-	//
-	// GL-REFACTOR TODO: Project till max index for now to avoid accidental bugs,
-	// but find a smarter way to do this. Maybe _only_ project the vertices used 
-	// instead of until the maximum index.
-	const int projectedCount = (NULL == indexBuffer) ? vertexCount 
-	                                                 : (indexBuffer->maxIndex() + 1);
-	if(projectedPositions.size() < projectedCount)
+	//    We find the max index and project vertices until that index, 
+	//    or if there are not many indices, project vertices separately 
+	//    based on indices.
+	const int minProjectedSize =
+		(NULL == indexBuffer) ? vertexCount : (indexBuffer->maxIndex() + 1);
+	if(projectedPositions.size() < minProjectedSize)
 	{
-		projectedPositions.resize(projectedCount);
+		projectedPositions.resize(minProjectedSize);
 	}
 
-	projector->project(projectedCount, positions->data.constData(), 
-	                   projectedPositions.data());
+	// If the index buffer is big, it's likely that it covers most 
+	// of the vertex buffer so we can just project everything en masse, 
+	// taking advantage of the cache.
+	if(NULL == indexBuffer || indexBuffer->length() >= minProjectedSize)
+	{
+		projector->project(minProjectedSize, positions->data.constData(), 
+		                   projectedPositions.data());
+	}
+	// Project vertices separately based on indices.
+	else
+	{
+		const Vec3f* const pos = positions->data.constData();
+		Vec3f* const projected = projectedPositions.data();
+		if(indexBuffer->indexType() == IndexType_U16)
+		{
+			const ushort* const indices = indexBuffer->indices16.constData();
+			const int indexCount        = indexBuffer->indices16.size();
+			for(int i = 0; i < indexCount; ++i)
+			{
+				const ushort index = indices[i];
+				projector->project(pos[index], projected[index]);
+			}
+		}
+		else if(indexBuffer->indexType() == IndexType_U32)
+		{
+			const uint* const indices = indexBuffer->indices32.constData();
+			const int indexCount      = indexBuffer->indices32.size();
+			for(int i = 0; i < indexCount; ++i)
+			{
+				const uint index = indices[i];
+				projector->project(pos[index], projected[index]);
+			}
+		}
+		else
+		{
+			Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown index type");
+		}
+	}
 }
