@@ -208,9 +208,11 @@ protected:
 	//! Overriding methods should also call StelGLRenderer::invariant().
 	virtual void invariant() const
 	{
+#ifndef NDEBUG
 		Q_ASSERT_X(NULL != glContext, Q_FUNC_INFO,
 		           "An attempt to use a destroyed StelQGLRenderer.");
 		Q_ASSERT_X(glContext->isValid(), Q_FUNC_INFO, "The GL context is invalid");
+#endif
 	}
 	
 private:

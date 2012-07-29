@@ -116,6 +116,9 @@ public:
 	//! Assert that the user-specified (in StelVertexBuffer) vertex type is valid.
 	void validateVertexType(const int vertexSize)
 	{
+#ifdef NDEBUG
+		Q_UNUSED(vertexSize);
+#endif
 		// We have no way of looking at each data member of the vertex type, 
 		// but we can at least enforce that their total length matches.
 		int bytes = 0;

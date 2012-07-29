@@ -118,11 +118,14 @@ struct StelVertexAttribute
 			result << StelVertexAttribute(parts.at(part));
 		}
 
+#ifndef NDEBUG
 		validateAttributes(result);
+#endif
 		return result;
 	}
 
 private:
+#ifndef NDEBUG
 	//! Assert that vertex attributes form a usable vertex format.
 	//!
 	//! For instance, assert that there is no more than 1 attribute with
@@ -171,6 +174,7 @@ private:
 		Q_ASSERT_X(vertex, Q_FUNC_INFO, 
 		           "Vertex formats without a position attribute are not supported");
 	}
+#endif
 };
 
 //! Generate vertex attribute information for a vertex type.

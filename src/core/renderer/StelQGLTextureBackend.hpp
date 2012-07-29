@@ -140,11 +140,13 @@ private:
 	//! Ensure that we're in consistent state.
 	void invariant() const
 	{
+#ifndef NDEBUG
 		const TextureStatus status = getStatus();
 		Q_ASSERT_X((glTextureID != 0) == (status == TextureStatus_Loaded),
 		           Q_FUNC_INFO, "Texture can only be specified once loaded.");
 		Q_ASSERT_X(loader == NULL || status == TextureStatus_Loading,
 		           Q_FUNC_INFO, "Texture loader can only exist during loading");
+#endif
 	}
 };
 #endif // _STELQGLTEXTUREBACKEND_HPP_
