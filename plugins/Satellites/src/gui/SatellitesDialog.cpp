@@ -604,9 +604,9 @@ void SatellitesDialog::handleDoubleClick(const QModelIndex& index)
 		setHintsAction->setChecked(true);
 	}
 
-	//TODO: We need to find a way to deal with duplicates... --BM
-	QString name = index.data().toString();
-	if (StelApp::getInstance().getStelObjectMgr().findAndSelect(name))
+	StelObjectP obj = qSharedPointerDynamicCast<StelObject>(sat);
+	StelObjectMgr& objectMgr = StelApp::getInstance().getStelObjectMgr();
+	if (objectMgr.setSelectedObject(obj))
 	{
 		GETSTELMODULE(StelMovementMgr)->autoZoomIn();
 		GETSTELMODULE(StelMovementMgr)->setFlagTracking(true);
