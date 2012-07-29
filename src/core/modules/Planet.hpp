@@ -135,7 +135,7 @@ public:
 	virtual void translateName(StelTranslator& trans);
 
 	// Draw the Planet
-	void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont);
+	void draw(StelCore* core, class StelRenderer* renderer, float maxMagLabels, const QFont& planetNameFont);
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to Planet
@@ -245,7 +245,7 @@ protected:
 	void drawSphere(StelPainter* painter, float screenSz);
 
 	// Draw the circle and name of the Planet
-	void drawHints(const StelCore* core, const QFont& planetNameFont);
+	void drawHints(const StelCore* core, class StelRenderer* renderer, const QFont& planetNameFont);
 
 	QString englishName;             // english planet name
 	QString nameI18;                 // International translated name

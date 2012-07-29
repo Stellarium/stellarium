@@ -25,6 +25,7 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "renderer/StelRenderer.hpp"
 #include "renderer/StelTexture.hpp"
 #include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
@@ -738,7 +739,7 @@ double Planet::getSpheroidAngularSize(const StelCore* core) const
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
-void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont)
+void Planet::draw(StelCore* core, StelRenderer* renderer, float maxMagLabels, const QFont& planetNameFont)
 {
 	if (hidden)
 		return;
@@ -791,7 +792,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		{
 			labelsFader=false;
 		}
-		drawHints(core, planetNameFont);
+		drawHints(core, renderer, planetNameFont);
 
 		draw3dModel(core,transfo,screenSz);
 	}
@@ -1022,32 +1023,33 @@ void Planet::drawEarthShadow(StelCore* core, StelPainter* sPainter)
 	sPainter->setProjector(saveProj);
 }
 
-void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
+void Planet::drawHints(const StelCore* core, StelRenderer* renderer, const QFont& planetNameFont)
 {
 	if (labelsFader.getInterstate()<=0.f)
 		return;
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter sPainter(prj);
-	sPainter.setFont(planetNameFont);
+	renderer->setFont(planetNameFont);
 	// Draw nameI18 + scaling if it's not == 1.
 	float tmp = (hintFader.getInterstate()<=0 ? 7.f : 10.f) + getAngularSize(core)*M_PI/180.f*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate());
-	sPainter.drawText(screenPos[0],screenPos[1], getSkyLabel(core), 0, tmp, tmp, false);
+
+	Vec4f color(labelColor[0], labelColor[1], labelColor[2], labelsFader.getInterstate());
+	renderer->setGlobalColor(color);
+	renderer->drawText(TextParams(screenPos[0], screenPos[1], getSkyLabel(core))
+	                   .shift(tmp, tmp).useGravity());
 
 	// hint disapears smoothly on close view
 	if (hintFader.getInterstate()<=0)
 		return;
 	tmp -= 10.f;
 	if (tmp<1) tmp=1;
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate()*hintFader.getInterstate()/tmp*0.7f);
+	color[3] *= hintFader.getInterstate() / tmp * 0.7f;
+	renderer->setGlobalColor(color);
 
 	// Draw the 2D small circle
-	glEnable(GL_BLEND);
-	sPainter.enableTexture2d(true);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	renderer->setBlendMode(BlendMode_Alpha);
 	Planet::hintCircleTex->bind();
-	sPainter.drawSprite2dMode(screenPos[0], screenPos[1], 11);
+	renderer->drawTexturedRect(screenPos[0] - 11, screenPos[1] - 11, 22, 22);
 }
 
 Ring::Ring(double radiusMin,double radiusMax,const QString &texname)
