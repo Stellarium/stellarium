@@ -948,7 +948,7 @@ void SolarSystem::draw(StelCore* core, class StelRenderer* renderer)
 	// Draw the elements
 	foreach (const PlanetP& p, systemPlanets)
 	{
-		p->draw(core, maxMagLabel, planetNameFont);
+		p->draw(core, renderer, maxMagLabel, planetNameFont);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
