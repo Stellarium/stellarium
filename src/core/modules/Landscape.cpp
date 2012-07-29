@@ -27,7 +27,6 @@
 #include "StelIniParser.hpp"
 #include "StelLocation.hpp"
 #include "StelCore.hpp"
-#include "StelPainter.hpp"
 
 #include <QDebug>
 #include <QSettings>
