@@ -36,7 +36,6 @@
 class QSettings;
 class StelLocation;
 class StelCore;
-class StelPainter;
 
 //! @class Landscape
 //! Store and manages the displaying of the Landscape.
