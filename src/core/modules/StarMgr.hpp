@@ -37,6 +37,8 @@ namespace BigStarCatalogExtension {
   class HipIndexStruct;
 }
 
+static const int RCMAG_TABLE_SIZE = 4096;
+
 //! @class StarMgr
 //! Stores the star catalogue data.
 //! Used to render the stars themselves, as well as determine the color table
