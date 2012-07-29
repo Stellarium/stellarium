@@ -621,8 +621,8 @@ void LandscapeFisheye::draw(StelCore* core, StelRenderer* renderer)
 		fisheyeSphereVertices = 
 			renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleStrip);
 		StelGeometryBuilder()
-			.buildSphereMapFisheye(fisheyeSphereVertices, fisheyeSphereRows, 
-			                       radius, cols, texFov, true);
+			.buildSphereFisheye(fisheyeSphereVertices, fisheyeSphereRows, 
+			                    radius, cols, texFov, true);
 	}
 
 	// Draw the sphere.
@@ -637,11 +637,24 @@ void LandscapeFisheye::draw(StelCore* core, StelRenderer* renderer)
 
 // spherical panoramas
 
-LandscapeSpherical::LandscapeSpherical(float _radius) : Landscape(_radius)
+LandscapeSpherical::LandscapeSpherical(float _radius) 
+	: Landscape(_radius)
+	, sphereVertices(NULL)
 {}
 
 LandscapeSpherical::~LandscapeSpherical()
 {
+	for(int buffer = 0; buffer < sphereRows.size(); ++buffer)
+	{
+		delete sphereRows[buffer];
+	}
+	sphereRows.clear();
+
+	if(NULL != sphereVertices)
+	{
+		delete sphereVertices;
+		sphereVertices = NULL;
+	}
 }
 
 void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& landscapeId)
@@ -682,23 +695,38 @@ void LandscapeSpherical::draw(StelCore* core, StelRenderer* renderer)
 	StelProjector::ModelViewTranformP transform = core->getAltAzModelViewTransform(StelCore::RefractionOff);
 	transform->combine(Mat4d::zrotation(-(angleRotateZ+(angleRotateZOffset*M_PI/180.))));
 	const StelProjectorP projector = core->getProjection(transform);
-	StelPainter sPainter(projector);
 
-	// Normal transparency mode
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0. : 1.;
-	sPainter.setColor(skyBrightness, skyBrightness*nightModeFilter, skyBrightness*nightModeFilter, landFader.getInterstate());
+	renderer->setBlendMode(BlendMode_Alpha);
+	const float nightModeFilter =
+	  	StelApp::getInstance().getVisionModeNight() ? 0.0f : 1.0f;
+	renderer->setGlobalColor(Vec4f(skyBrightness,
+	                               skyBrightness * nightModeFilter,
+	                               skyBrightness * nightModeFilter,
+	                               landFader.getInterstate()));
 
-	glEnable(GL_CULL_FACE);
-	sPainter.enableTexture2d(true);
-	glEnable(GL_BLEND);
+	renderer->setCulledFaces(CullFace_Back);
 	mapTex->bind();
+
+	if(NULL == sphereVertices)
+	{
+		// Each row of the sphere is a separate triangle strip using the same vertex buffer.
+		for(int row = 0; row < 20; ++row)
+		{
+			sphereRows.append(renderer->createIndexBuffer(IndexType_U16));
+		}
+		sphereVertices = 
+			renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleStrip);
+		StelGeometryBuilder()
+			.buildSphere(sphereVertices, sphereRows, radius, 1.0, 40, true, true);
+	}
+	// Draw the sphere.
+	for(int buffer = 0; buffer < sphereRows.size(); ++buffer)
+	{
+		renderer->drawVertexBuffer(sphereVertices, sphereRows[buffer], projector);
+	}
 
 	// TODO: verify that this works correctly for custom projections
 	// seam is at East
-	//sPainter.sSphere(radius, 1.0, 40, 20, 1, true);
 	// GZ: Want better angle resolution, optional!
-	sPainter.sSphere(radius, 1.0, cols, rows, 1, true);
-
-	glDisable(GL_CULL_FACE);
+	renderer->setCulledFaces(CullFace_None);
 }

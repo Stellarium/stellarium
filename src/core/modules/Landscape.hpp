@@ -265,6 +265,10 @@ public:
 private:
 
 	StelTextureSP mapTex;
+	//! Index buffers pointing to sphereVertices forming rows of the sphere.
+	QVector<StelIndexBuffer*> sphereRows;
+	//! Vertices of the sphere used to draw the landscape.
+	StelVertexBuffer<VertexP3T2>* sphereVertices;
 };
 
 #endif // _LANDSCAPE_HPP_
