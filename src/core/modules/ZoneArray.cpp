@@ -504,7 +504,7 @@ void SpecialZoneArray<Star>::draw
 			Vec3d altAz=core->j2000ToAltAz(Vec3d(vf[0], vf[1], vf[2]), StelCore::RefractionOn);
 			float extMagShift=0.0f;
 			extinction.forward(&altAz, &extMagShift);
-			int extMagShiftStep=qMin((int)floor(extMagShift/k), 4096-mag_steps); // this number muist be equal StarMgr.cpp line 649
+			int extMagShiftStep=qMin((int)floor(extMagShift/k), RCMAG_TABLE_SIZE-mag_steps); 
 			tmpRcmag = rcmag_table+2*(s->mag+extMagShiftStep);
 		}
 
