@@ -2,7 +2,6 @@
 #define _STELQGLINDEXBUFFER_HPP_
 
 #include <algorithm>
-#include <numeric>
 #include <QtOpenGL>
 #include <QVector>
 #include "StelIndexBuffer.hpp"
@@ -26,6 +25,7 @@ protected:
 	virtual void addIndex_(const uint index)
 	{
 		const int previousIndexCount = length();
+		maxIndex_ = std::max(index, maxIndex_);
 		if(previousIndexCount < indexCapacity())
 		{
 			// We have the capacity to store the index, so store it.
@@ -75,9 +75,15 @@ private:
 
 	//! Index storage when using 16bit indices.
 	QVector<ushort> indices16;
-
+	
 	//! Construct a StelQGLIndexBuffer (only StelQGLRenderer can do this).
-	StelQGLIndexBuffer(const IndexType indexType) : StelIndexBuffer(indexType) {}
+	StelQGLIndexBuffer(const IndexType indexType)
+		: StelIndexBuffer(indexType)
+		, maxIndex_(0)
+	{}
+
+	//! Maximum index value in the buffer.
+	uint maxIndex_;
 
 	//! Get a raw pointer to index data for OpenGL.
 	const GLvoid* indices() const
@@ -94,19 +100,8 @@ private:
 	//! Get maximum index value.
 	uint maxIndex() const
 	{
-		if(indexType_ == IndexType_U16)      
-		{
-			return std::accumulate(indices16.begin(), indices16.end(), 0, std::max<ushort>);
-		}
-		else if(indexType_ == IndexType_U32) 
-		{
-			return std::accumulate(indices32.begin(), indices32.end(), 0, std::max<uint>);
-		}
-		Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown index type");
-		// Avoids compiler warning about not returning anything
-		return -1;
+		return maxIndex_;
 	}
-	
 
 	//! Get number of indices we can hold without enlarging indices16/indices32.
 	int indexCapacity() const
