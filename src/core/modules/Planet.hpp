@@ -26,7 +26,9 @@
 #include "StelProjector.hpp"
 #include "VecMath.hpp"
 #include "StelFader.hpp"
+#include "renderer/GenericVertexTypes.hpp"
 #include "renderer/StelTextureTypes.hpp"
+#include "renderer/StelIndexBuffer.hpp"
 #include "renderer/StelVertexBuffer.hpp"
 #include "StelProjectorType.hpp"
 
@@ -71,12 +73,55 @@ class Ring
 public:
 	Ring(double radiusMin,double radiusMax,const QString &texname);
 	~Ring(void);
-	void draw(StelPainter* painter, StelProjector::ModelViewTranformP transfo, double screenSz);
+
+	//! Draw the ring 
+	//!
+	//! Note that ring drawing doesn't use light 
+	//! (it didn't use it before the refactor either, but there was code 
+	//! to do lighting on the CPU in StelPainter::sRing)
+	//!
+	//! @param projector Projector to project the vertices.
+	//! @param renderer  Renderer to draw with.
+	//! @param transform Used to determine whether we're above or below the ring.
+	//! @param screenSz  Angular size of the screen.
+	void draw(StelProjectorP projector, class StelRenderer* renderer, StelProjector::ModelViewTranformP transform, double screenSz);
+
 	double getSize(void) const {return radiusMax;}
 private:
 	const double radiusMin;
 	const double radiusMax;
 	StelTextureSP tex;
+
+	//! Cached vertices of the ring.
+	StelVertexBuffer<VertexP3T2>* ringVertices;
+	//! Index buffers forming triangle strips for every "row" (circle) of the ring,
+	//! pointing to vertices in ringVertices.
+	QVector<StelIndexBuffer*> ringRows;
+
+
+	//! Value of the stacks parameter at the last updateGraphics call.
+	//! Used to cache vertex/index buffers.
+	int cachedStacks;
+
+	//! Value of the slices parameter at the last updateGraphics call.
+	//! Used to cache vertex/index buffers.
+	int cachedSlices;
+
+	//! Value of the flipFaces parameter at the last updateGraphics call.
+	//! Used to cache vertex/index buffers.
+	bool cachedFlipFaces;
+
+	//! Update ring vertex and index buffer.
+	//!
+	//! Checks if ring parameters have changed. If yes, it regenerates the buffers.
+	//! Otherwise it keeps the buffers unchanged.
+	//!
+	//! @param renderer  Renderer to construct vertex/index buffers.
+	//! @param stacks    Number of stacks/rows/circles of the ring.
+	//! @param slices    Number of slices of the ring (i.e. how "fine" the ring is).
+	//! @param flipFaces Determines if the ring's faces should be flipped to face the other side.
+	//!                  Depends on whether we're observing the ring from above or below.
+	void updateGraphics(StelRenderer* renderer, int stacks, int slices, bool flipFaces);
 };
 
 
@@ -252,7 +297,7 @@ protected:
 	QString getSkyLabel(const StelCore* core) const;
 
 	// Draw the 3d model. Call the proper functions if there are rings etc..
-	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz);
+	void draw3dModel(StelCore* core, class StelRenderer* renderer, StelProjector::ModelViewTranformP transfo, float screenSz);
 
 	// Draw the 3D sphere
 	void drawSphere(StelPainter* painter, float screenSz);
