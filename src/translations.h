@@ -201,7 +201,7 @@ class Translations
 		// TRANSLATORS: Name of script
 		N_("Occultation of Earth and Jupiter 2048");
 		// TRANSLATORS: Name of script
-		N_("A Quintople eclipse from Deimos 2027");
+		N_("A Quintuple eclipse from Deimos 2027");
 		// TRANSLATORS: Name of script
 		N_("Solar System Screensaver");
 		// TRANSLATORS: Name of script
