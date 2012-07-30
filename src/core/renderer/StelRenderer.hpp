@@ -45,6 +45,19 @@ enum CullFace
 	CullFace_Back
 };
 
+//! Possible depth test modes.
+enum DepthTest
+{
+	//! No depth test. Earlier draws are overdrawn by the later draws.
+	DepthTest_Disabled,
+	//! Do not write to the depth buffer. Draws are affected by the depth buffer
+	//! without modifying it.
+	DepthTest_ReadOnly,
+	//! Read and write to the depth buffer. Draws are affected by the depth buffer 
+	//! and change its values.
+	DepthTest_ReadWrite
+};
+
 //Notes:
 //
 //enable/disablePainting are temporary and will be removed
@@ -480,6 +493,12 @@ public:
 	//! Ubuntu 12.04, AMD Catalyst 8.96.7, Radeon HD 6700 (using StelQGL2Renderer)
 	//!
 	virtual void setCulledFaces(const CullFace cullFace) = 0;
+
+	//! Clear the depth buffer, removing any depth information.
+	virtual void clearDepthBuffer() = 0;
+
+	//! Set depth test mode.
+	virtual void setDepthTest(const DepthTest test) = 0;
 
 protected:
 	//! Create a vertex buffer backend. Used by createVertexBuffer.
