@@ -254,7 +254,7 @@ void StelGeometryBuilder::buildSphereFisheye
 		const float cosSinRho1 = cosSinRho[1];
 		
 		const float* cosSinTheta = COS_SIN_THETA;
-		for (int j = 0; j <= slices; ++j)
+		for (int slice = 0; slice <= slices; ++slice)
 		{
 			const Vec3f v(-cosSinTheta[1] * cosSinRho1, cosSinTheta[0] * cosSinRho1, cosSinRho0);
 			const Vec2f t(cosSinTheta[0], yTexMult * cosSinTheta[1]);
@@ -273,7 +273,7 @@ void StelGeometryBuilder::buildSphereFisheye
 		StelIndexBuffer* const indices = rowIndexBuffers[i];
 		indices->unlock();
 
-		for (int j = 0; j <= slices; ++j)
+		for (int slice = 0; slice <= slices; ++slice)
 		{
 			const uint i1 = orientInside ? index + slices + 1 : index;
 			const uint i2 = orientInside ? index : index + slices + 1;
@@ -323,7 +323,7 @@ void StelGeometryBuilder::buildSphere
 		
 		float s = !flipTexture ? 0.0f : 1.0f;
 		const float* cosSinTheta = COS_SIN_THETA;
-		for (int j = 0; j <= slices; ++j)
+		for (int slice = 0; slice <= slices; ++slice)
 		{
 			const Vec3f v(-cosSinTheta[1] * cosSinRho1,
 			              cosSinTheta[0] * cosSinRho1, 
@@ -343,7 +343,7 @@ void StelGeometryBuilder::buildSphere
 		StelIndexBuffer* const indices = rowIndexBuffers[i];
 		indices->unlock();
 
-		for (int j = 0; j <= slices; ++j)
+		for (int slice = 0; slice <= slices; ++slice)
 		{
 			indices->addIndex(index);
 			indices->addIndex(index + slices + 1);
@@ -356,3 +356,54 @@ void StelGeometryBuilder::buildSphere
 	vertices->lock();
 }
 
+void StelGeometryBuilder::buildRing
+(StelVertexBuffer<VertexP3T2>* vertices, QVector<StelIndexBuffer*>& rowIndexBuffers,
+ const float rMin, const float rMax, int slices, bool flipFaces)
+{
+	const int stacks = rowIndexBuffers.size();
+	Q_ASSERT_X(stacks > 0, Q_FUNC_INFO, "Need at least 1 row buffer to build a ring");
+	Q_ASSERT_X(slices > 3, Q_FUNC_INFO, "Need at least 3 slices to build a ring");
+	Q_ASSERT_X(vertices->primitiveType() == PrimitiveType_TriangleStrip, Q_FUNC_INFO,
+	           "Need a triangle strip vertex buffer to build a ring");
+	Q_ASSERT_X(vertices->length() == 0, Q_FUNC_INFO, 
+	           "Need an empty vertex buffer to build a ring");
+	Q_ASSERT_X(rMin >= 0.0f, Q_FUNC_INFO, "Ring can't have a negative radius");
+	Q_ASSERT_X(rMax > rMin, Q_FUNC_INFO, 
+	           "Maximum ring radius must be greater than the minimum radius");
+
+	const float dr     = (rMax - rMin) / stacks;
+	const float dtheta = (flipFaces ? -1.0f : 1.0f) * 2.0f * M_PI / slices;
+	Q_ASSERT_X(slices <= MAX_SLICES, Q_FUNC_INFO, "Too many slices");
+	computeCosSinTheta(dtheta, slices);
+
+	// Generate vertices of the ring.
+	float r = rMin;
+	for(int stack = 0; stack <= stacks; ++stack, r += dr)
+	{
+		const float texR = (r - rMin) / (rMax - rMin);
+		const float* cosSinTheta = COS_SIN_THETA;
+		for (int slice = 0; slice <= slices; ++slice, cosSinTheta += 2)
+		{
+			vertices->addVertex(VertexP3T2(Vec2f(r * cosSinTheta[0], r * cosSinTheta[1]),
+			                               Vec2f(texR, 0.5f)));
+		}
+	}
+	vertices->lock();
+
+	// Generate a triangle strip index buffer for each stack.
+	uint index = 0;
+	for(int stack = 0; stack < stacks; ++stack)
+	{
+		StelIndexBuffer* indices = rowIndexBuffers[stack];
+		Q_ASSERT_X(indices->length() == 0, Q_FUNC_INFO, 
+		           "Need empty index buffers to build a ring");
+		indices->unlock();
+		for (int slice = 0; slice <= slices; ++slice)
+		{
+			indices->addIndex(index);
+			indices->addIndex(index + slices + 1);
+			++index;
+		}
+		indices->lock();
+	}
+}
