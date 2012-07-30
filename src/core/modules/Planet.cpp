@@ -25,6 +25,8 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "renderer/GenericVertexTypes.hpp"
+#include "renderer/StelGeometryBuilder.hpp"
 #include "renderer/StelRenderer.hpp"
 #include "renderer/StelTexture.hpp"
 #include "StelSkyDrawer.hpp"
@@ -766,7 +768,7 @@ void Planet::draw(StelCore* core, StelRenderer* renderer, float maxMagLabels, co
 		if (rings)
 		{
 			StelPainter sPainter(core->getProjection(transfo));
-			rings->draw(&sPainter,transfo,1000.0);
+			rings->draw(sPainter.getProjector(), renderer, transfo,1000.0);
 		}
 		return;
 	}
@@ -799,12 +801,12 @@ void Planet::draw(StelCore* core, StelRenderer* renderer, float maxMagLabels, co
 		}
 		drawHints(core, renderer, planetNameFont);
 
-		draw3dModel(core,transfo,screenSz);
+		draw3dModel(core, renderer, transfo, screenSz);
 	}
 	return;
 }
 
-void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz)
+void Planet::draw3dModel(StelCore* core, StelRenderer* renderer, StelProjector::ModelViewTranformP transfo, float screenSz)
 {
 	// This is the main method drawing a planet 3d model
 	// Some work has to be done on this method to make the rendering nicer
@@ -852,15 +854,18 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			double n,f;
 			core->getClippingPlanes(&n,&f); // Save clipping planes
 			core->setClippingPlanes(z_near,z_far);
+
 			glDepthMask(GL_TRUE);
 			glClear(GL_DEPTH_BUFFER_BIT);
 			glEnable(GL_DEPTH_TEST);
+			renderer->clearDepthBuffer();
+			renderer->setDepthTest(DepthTest_ReadWrite);
 			drawSphere(sPainter, screenSz);
-			glDepthMask(GL_FALSE);
+			renderer->setDepthTest(DepthTest_ReadOnly);
 			sPainter->getLight().disable();
-			rings->draw(sPainter,transfo,screenSz);
+			rings->draw(sPainter->getProjector(), renderer, transfo, screenSz);
 			sPainter->getLight().enable();
-			glDisable(GL_DEPTH_TEST);
+			renderer->setDepthTest(DepthTest_Disabled);
 			core->setClippingPlanes(n,f);  // Restore old clipping planes
 		}
 		else
@@ -1058,16 +1063,78 @@ void Planet::drawHints(const StelCore* core, StelRenderer* renderer, const QFont
 }
 
 Ring::Ring(double radiusMin,double radiusMax,const QString &texname)
-	 :radiusMin(radiusMin),radiusMax(radiusMax)
+	 : radiusMin(radiusMin)
+	 , radiusMax(radiusMax)
+	 , ringVertices(NULL)
+	 // Set to invalid values to force buffer update at the first draw.
+	 , cachedStacks(-1)
+	 , cachedSlices(-1)
+	 , cachedFlipFaces(true)
 {
 	tex = StelApp::getInstance().getTextureManager().createTexture("textures/"+texname);
 }
 
 Ring::~Ring(void)
 {
+	if(NULL != ringVertices)
+	{
+		delete ringVertices;
+		ringVertices = NULL;
+	}
+	for(int stack = 0; stack < ringRows.size(); ++stack)
+	{
+		delete ringRows[stack];
+	}
+	ringRows.clear();
 }
 
-void Ring::draw(StelPainter* sPainter,StelProjector::ModelViewTranformP transfo,double screenSz)
+void Ring::updateGraphics(StelRenderer* renderer, int stacks, int slices, bool flipFaces)
+{
+	if(NULL != ringVertices &&
+		stacks == cachedStacks && slices == cachedSlices && flipFaces == cachedFlipFaces)
+	{
+		return;
+	}
+
+	// At the first draw call, we don't have any vertex buffer at all.
+	// Later we only need to clear the buffer.
+	if(NULL == ringVertices)
+	{
+		Q_ASSERT_X(ringRows.size() == 0, Q_FUNC_INFO, 
+		           "Vertex buffer is not generated but index buffers are");
+		ringVertices = renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleStrip);
+	}
+	else
+	{
+		Q_ASSERT_X(ringRows.size() > 0, Q_FUNC_INFO, 
+		           "Vertex buffer is generated but index buffers are not");
+		ringVertices->unlock();
+		ringVertices->clear();
+	}
+
+	// Replace row index buffer. Could be more efficient, but longer, if we
+	// reused existing buffers.
+	for(int stack = 0; stack < ringRows.size(); ++stack)
+	{
+		delete ringRows[stack];
+	}
+	ringRows.clear();
+	for(int stack = 0; stack < stacks; ++stack)
+	{
+		ringRows.append(renderer->createIndexBuffer(IndexType_U16));
+	}
+
+	StelGeometryBuilder()
+		.buildRing(ringVertices, ringRows, radiusMin, radiusMax, slices, flipFaces);
+
+	// Update cached parameters.
+	cachedStacks = stacks;
+	cachedSlices = slices;
+	cachedFlipFaces = flipFaces;
+}
+
+void Ring::draw(StelProjectorP projector, StelRenderer* renderer, 
+                StelProjector::ModelViewTranformP transfo, double screenSz)
 {
 	screenSz -= 50;
 	screenSz /= 250.0;
@@ -1076,23 +1143,26 @@ void Ring::draw(StelPainter* sPainter,StelProjector::ModelViewTranformP transfo,
 	const int slices = 128+(int)((256-128)*screenSz);
 	const int stacks = 8+(int)((32-8)*screenSz);
 
-	// Normal transparency mode
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	sPainter->setColor(1.f, 1.f, 1.f);
-	sPainter->enableTexture2d(true);
-	glEnable(GL_CULL_FACE);
-	glEnable(GL_BLEND);
+	renderer->setBlendMode(BlendMode_Alpha);
+	renderer->setGlobalColor(1.0f, 1.0f, 1.0f);
+	renderer->setCulledFaces(CullFace_Back);
 
 	if (tex) tex->bind();
 
 	Mat4d mat = transfo->getApproximateLinearTransfo();
-	  // solve the ring wraparound by culling:
-	  // decide if we are above or below the ring plane
-	const double h = mat.r[ 8]*mat.r[12]
-				   + mat.r[ 9]*mat.r[13]
-				   + mat.r[10]*mat.r[14];
-	sPainter->sRing(radiusMin,radiusMax,(h<0.0)?slices:-slices,stacks, 0);
-	glDisable(GL_CULL_FACE);
+	// solve the ring wraparound by culling:
+	// decide if we are above or below the ring plane
+	const double h = mat.r[ 8] * mat.r[12]
+	               + mat.r[ 9] * mat.r[13]
+	               + mat.r[10] * mat.r[14];
+
+	// Regenerate vertex/index buffer if the parameters have changed.
+	updateGraphics(renderer, stacks, slices, h >= 0);
+	for(int s = 0; s < stacks; ++s)
+	{
+		renderer->drawVertexBuffer(ringVertices, ringRows[s], projector);
+	}
+	renderer->setCulledFaces(CullFace_None);
 }
 
 // draw orbital path of Planet
