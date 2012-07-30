@@ -75,6 +75,7 @@ Planet::Planet(const QString& englishName,
 	lastOrbitJD =0;
 	deltaJD = StelCore::JD_SECOND;
 	orbitCached = 0;
+	orbitVertices = NULL;
 	closeOrbit = acloseOrbit;
 
 	eclipticPos=Vec3d(0.,0.,0.);
@@ -98,6 +99,10 @@ Planet::~Planet()
 {
 	if (rings)
 		delete rings;
+	if(NULL == orbitVertices)
+	{
+		delete orbitVertices;
+	}
 }
 
 void Planet::translateName(StelTranslator& trans)
@@ -782,7 +787,7 @@ void Planet::draw(StelCore* core, StelRenderer* renderer, float maxMagLabels, co
 			ang_dist = 1.f; // if ang_dist == 0, the Planet is sun..
 
 		// by putting here, only draw orbit if Planet is visible for clarity
-		drawOrbit(core);  // TODO - fade in here also...
+		drawOrbit(core, renderer);  // TODO - fade in here also...
 
 		if (flagLabels && ang_dist>0.25 && maxMagLabels>getVMagnitude(core))
 		{
@@ -1090,9 +1095,8 @@ void Ring::draw(StelPainter* sPainter,StelProjector::ModelViewTranformP transfo,
 	glDisable(GL_CULL_FACE);
 }
 
-
 // draw orbital path of Planet
-void Planet::drawOrbit(const StelCore* core)
+void Planet::drawOrbit(const StelCore* core, StelRenderer* renderer)
 {
 	if (!orbitFader.getInterstate())
 		return;
@@ -1101,13 +1105,10 @@ void Planet::drawOrbit(const StelCore* core)
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEcliptic);
 
-	StelPainter sPainter(prj);
+	renderer->setBlendMode(BlendMode_Alpha);
+	renderer->setGlobalColor(orbitColor[0], orbitColor[1], 
+	                         orbitColor[2], orbitFader.getInterstate());
 
-	// Normal transparency mode
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-
-	sPainter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], orbitFader.getInterstate());
 	Vec3d onscreen;
 	// special case - use current Planet position as center vertex so that draws
 	// on it's orbit all the time (since segmented rather than smooth curve)
@@ -1115,31 +1116,36 @@ void Planet::drawOrbit(const StelCore* core)
 	orbit[ORBIT_SEGMENTS/2]=getHeliocentricEclipticPos();
 	orbit[ORBIT_SEGMENTS]=orbit[0];
 	int nbIter = closeOrbit ? ORBIT_SEGMENTS : ORBIT_SEGMENTS-1;
-	QVarLengthArray<float, 1024> vertexArray;
 
-	sPainter.enableClientStates(true, false, false);
+	if(NULL == orbitVertices)
+	{
+		orbitVertices = 
+			renderer->createVertexBuffer<Vertex2D>(PrimitiveType_LineStrip);
+	}
 
 	for (int n=0; n<=nbIter; ++n)
 	{
-		if (prj->project(orbit[n],onscreen) && (vertexArray.size()==0 || !prj->intersectViewportDiscontinuity(orbit[n-1], orbit[n])))
+		if (prj->project(orbit[n],onscreen) && (orbitVertices->length()==0 || !prj->intersectViewportDiscontinuity(orbit[n-1], orbit[n])))
 		{
-			vertexArray.append(onscreen[0]);
-			vertexArray.append(onscreen[1]);
+			orbitVertices->addVertex(Vertex2D(onscreen[0], onscreen[1]));
 		}
-		else if (!vertexArray.isEmpty())
+		else if(orbitVertices->length() > 0)
 		{
-			sPainter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
-			sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size()/2, 0, false);
-			vertexArray.clear();
+			orbitVertices->lock();
+			renderer->drawVertexBuffer(orbitVertices);
+			orbitVertices->unlock();
+			orbitVertices->clear();
 		}
 	}
 	orbit[ORBIT_SEGMENTS/2]=savePos;
-	if (!vertexArray.isEmpty())
+
+	if(orbitVertices->length() > 0)
 	{
-		sPainter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
-		sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size()/2, 0, false);
+		orbitVertices->lock();
+		renderer->drawVertexBuffer(orbitVertices);
+		orbitVertices->unlock();
+		orbitVertices->clear();
 	}
-	sPainter.enableClientStates(false);
 }
 
 void Planet::update(int deltaTime)
