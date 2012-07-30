@@ -104,7 +104,8 @@ public:
 		 QVector<StelIndexBuffer* >& rowIndexBuffers, const float radius,
 		 const int slices, const float textureFov, const bool orientInside = false);
 
-	// The parameter list here is horrible (7 parameters!)
+	// The parameter list here is horrible (7 parameters!), and other ones
+	// aren't much better.
 	// A solution might be a Sphere class wrapping up details and drawing of
 	// various spheres.
 	//! Build a regularly texture mapped sphere.
@@ -121,7 +122,7 @@ public:
 	//! as well as an empty vertex buffer.
 	//!
 	//! @param vertices           Vertex buffer to store vertices of the sphere.
-	//!                           Indices in row index buffers will point to 
+	//!                           Indices in rowIndexBuffers will point to 
 	//!                           vertices in this buffer.
 	//!                           Must be empty.
 	//! @param rowIndexBuffers    Index buffers to store rows of the sphere.
@@ -141,5 +142,33 @@ public:
 		 QVector<StelIndexBuffer*>& rowIndexBuffers, const float radius,
 		 const float oneMinusOblateness, const int slices, 
 		 const bool orientInside = false, const bool flipTexture = false);
+
+	//! Build a ring (e.g. planet's rings).
+	//!
+	//! The ring is a circular grid formed by rowIndexBuffers.size()
+	//! rows/circles (each a single triangle strip), and slices columns.
+	//!
+	//! That is, empty index buffers must be provided for each row,
+	//! and the row count depends on how many index buffers are provided.
+	//! as well as an empty vertex buffer.
+	//!
+	//! @param vertices        Vertex buffer to store vertices of the ring.
+	//!                        Indices in rowIndexBuffers will point to 
+	//!                        vertices in this buffer.
+	//!                        Must be empty.
+	//! @param rowIndexBuffers Index buffers to store rows (circles) of the ring.
+	//!                        The number of rows generated is 
+	//!                        rowIndexBuffers.size(). At least 1 index buffer
+	//!                        must be provided, and all of them must be empty.
+	//! @param rMin            Inner radius of the ring. Must be at least zero.
+	//! @param rMax            Outer radius of the ring. Must be greater than rMin.
+	//! @param slices          Number of colums in each row, i.e. how "fine" the ring is.
+	//!                        5 will form a pentagon, 6 a hexagon, etc.
+	//!                        Must be at least 3.
+	//! @param flipFaces       Should the faces be flipped to face the other side?
+	//!                        (to avoid culling them if viewed from the wrong side).
+	void buildRing
+		(StelVertexBuffer<VertexP3T2>* vertices, QVector<StelIndexBuffer*>& rowIndexBuffers,
+		 const float rMin, const float rMax, int slices, bool flipFaces = false);
 };
 #endif // _STELGEOMETRYBUILDER_HPP_
