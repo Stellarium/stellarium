@@ -2,35 +2,36 @@
 // Author: Qam1
 // Name: Mercury Triple Sunrise and Sunset
 // Description: Due to the quirks in Mercury's orbit and rotation at certain spots the sun will rise & set 3 different times in one Mercury day.
+// Version: 1.1
+// License: Public Domain
 //
 
-
-r = 1
-long = 90;
-ds = 2455361;
+var r = 1
+var long = 90;
+var ds = 2455361;
 
 core.setObserverLocation(90, -0.00, 1, 1, "", "Mercury");
-landscapeID = LandscapeMgr.getCurrentLandscapeID();
-atmosphere = LandscapeMgr.getFlagAtmosphere();
-fog = LandscapeMgr.getFlagFog();
+var landscapeID = LandscapeMgr.getCurrentLandscapeID();
+var atmosphere = LandscapeMgr.getFlagAtmosphere();
+var fog = LandscapeMgr.getFlagFog();
 
 LandscapeMgr.setFlagAtmosphere(false);
 LandscapeMgr.setFlagFog(false);
 LandscapeMgr.setCurrentLandscapeID("ocean");
 
-y = core.getScreenHeight()/768;
-x = core.getScreenWidth()/1024;
+var y = core.getScreenHeight()/768;
+var x = core.getScreenWidth()/1024;
 
 core.selectObjectByName("Sun", pointer = true);
 StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(50, 1);
 
-d = 0
+var d = 0
 
 while (r == 1)
 {
 	d = d + 1;
-	j = core.getJDay();
+	var j = core.getJDay();
 	if (j > 2561117)
 	{
 		j = 2455361;
@@ -45,7 +46,7 @@ while (r == 1)
 
 	core.setJDay(ds);
 
-	txt1 = LabelMgr.labelScreen("Just Before Sunrise.....", 620*x, 10, false, 20, "#F9E397");
+	var txt1 = LabelMgr.labelScreen("Just Before Sunrise.....", 620*x, 10, false, 20, "#F9E397");
 	LabelMgr.setLabelShow(txt1, true);
 
 	txt1 = LabelMgr.labelScreen("Surface of Mercury", 640*x, 35, false, 20, "#F9E397");
@@ -60,8 +61,8 @@ while (r == 1)
 	core.setTimeRate(0);
 	core.wait(1);
 
-	SunData = core.getObjectPosition("Sun");
-	SunAlt = SunData["altitude"];
+	var SunData = core.getObjectPosition("Sun");
+	var SunAlt = SunData["altitude"];
 	core.setTimeRate(0);
 
 	while (SunAlt > -2)
@@ -90,8 +91,8 @@ while (r == 1)
 	core.wait(3);
 	core.setTimeRate(30000);
 
-	ls = SunAlt - 10;
-	lt = 0;
+	var ls = SunAlt - 10;
+	var lt = 0;
 
 	LabelMgr.setLabelShow(txt1, false);
 

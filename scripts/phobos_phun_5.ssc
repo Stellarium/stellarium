@@ -1,0 +1,31 @@
+//
+// Author: Qam1
+// Name: A Quintople eclipse from Deimos 2027
+// Description: Phobos races ahead of Mars and eclipses the sun, passes thru it and then retrogrades back towards the sun and just partially eclipses it (only seen in the SH) again, then Mars totally eclipses the sun and Phobos, and then as Phobos emerges from the sun it passes through Mars' shadow and dims.
+// Version: 2.1
+// License: Public Domain
+//
+
+var atmosphere = LandscapeMgr.getFlagAtmosphere();
+var fog = LandscapeMgr.getFlagFog();
+var landscapeID = LandscapeMgr.getCurrentLandscapeID();
+
+core.setDate("2027-10-08T15:45:05", "utc");
+
+StelSkyDrawer.setFlagLuminanceAdaptation(false);
+
+LandscapeMgr.setFlagAtmosphere(false);
+LandscapeMgr.setFlagFog(false);
+LandscapeMgr.setCurrentLandscapeID("moon");
+
+core.setObserverLocation(47.33, -48.34, 17, 1, "", "Deimos");
+core.selectObjectByName("Phobos", pointer = true);
+
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(18, 1);
+
+core.setTimeRate(100);
+
+LandscapeMgr.setFlagAtmosphere(atmosphere);
+LandscapeMgr.setFlagFog(fog);
+LandscapeMgr.setCurrentLandscapeID(landscapeID);
