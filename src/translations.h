@@ -202,6 +202,8 @@ class Translations
 		N_("Occultation of Earth and Jupiter 2048");
 		// TRANSLATORS: Name of script
 		N_("A Quintople eclipse from Deimos 2027");
+		// TRANSLATORS: Name of script
+		N_("Solar System Screensaver");
 
 		// Scripts description
 		N_("Look around each installed landscape.");
@@ -217,6 +219,7 @@ class Translations
 		N_("Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068.");
 		N_("Phobos occultations of Earth are common, as are occultations of Jupiter. But Occultations of both on the same day are very rare. Here's one that takes place 1/23/2048. In real speed.");
 		N_("Phobos races ahead of Mars and eclipses the sun, passes thru it and then retrogrades back towards the sun and just partially eclipses it (only seen in the SH) again, then Mars totally eclipses the sun and Phobos, and then as Phobos emerges from the sun it passes through Mars' shadow and dims.");
+		N_("Screensaver of various happenings in the Solar System. 171 events in all!");
 
 		// List of countries
 		N_("Andorra");
