@@ -367,23 +367,38 @@ protected:
 		StelTestQGL2VertexBufferBackend* backend =
 			dynamic_cast<StelTestQGL2VertexBufferBackend*>(vertexBuffer);
 		Q_ASSERT_X(backend != NULL, Q_FUNC_INFO,
-		           "StelQGL2Renderer: Vertex buffer created by different renderer backend");
-
+		           "StelQGL2Renderer: Vertex buffer created by different renderer backend "
+		           "or uninitialized");
+		
 		StelQGLIndexBuffer* glIndexBuffer = NULL;
 		if(indexBuffer != NULL)
 		{
 			glIndexBuffer = dynamic_cast<StelQGLIndexBuffer*>(indexBuffer);
 			Q_ASSERT_X(glIndexBuffer != NULL, Q_FUNC_INFO,
-			           "StelQGL2Renderer: Index buffer created by different renderer backend");
+			           "StelQGL2Renderer: Index buffer created by different renderer " 
+			           "backend or uninitialized");
 		}
 
 		// GL setup before drawing.
-
-		glDisable(GL_DEPTH_TEST);
 		// Fix some problem when using Qt OpenGL2 engine
 		glStencilMask(0x11111111);
-		// Deactivate drawing in depth buffer by default
-		glDepthMask(GL_FALSE);
+		
+		switch(depthTest)
+		{
+			case DepthTest_Disabled:
+				glDisable(GL_DEPTH_TEST);
+				break;
+			case DepthTest_ReadOnly:
+				glEnable(GL_DEPTH_TEST);
+				glDepthMask(GL_FALSE);
+				break;
+			case DepthTest_ReadWrite:
+				glEnable(GL_DEPTH_TEST);
+				glDepthMask(GL_TRUE);
+				break;
+			default:
+				Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown depth test value");
+		}
 
 		switch(culledFaces)
 		{
@@ -425,10 +440,11 @@ protected:
 		glViewport(viewXywh[0], viewXywh[1], viewXywh[2], viewXywh[3]);
 		backend->draw(*this, transposed, glIndexBuffer);
 
-		// Restore culling to defaults.
+		// Restore default state to avoid interfering with Qt OpenGL drawing.
 		glFrontFace(projector->flipFrontBackFace() ? GL_CCW : GL_CW);
 		glCullFace(GL_BACK);
 		glDisable(GL_CULL_FACE);
+		glDisable(GL_DEPTH_TEST);
 
 		invariant();
 	}

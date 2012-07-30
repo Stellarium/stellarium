@@ -43,6 +43,7 @@ public:
 		, previousFrameEndTime(-1.0)
 		, globalColor(Qt::white)
 		, gl(glContext)
+		, depthTest(DepthTest_Disabled)
 	{
 		loaderThread = new QThread();
 		loaderThread->start(QThread::LowestPriority);
@@ -152,7 +153,17 @@ public:
 				Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown blend mode");
 		}
 	}
+
+	virtual void setDepthTest(const DepthTest test)
+	{
+		depthTest = test;
+	}
 	
+	virtual void clearDepthBuffer()
+	{
+		glClear(GL_DEPTH_BUFFER_BIT);
+	}
+
 	//! Make Stellarium GL context the currently used GL context. Call this before GL calls.
 	virtual void makeGLContextCurrent()
 	{
@@ -282,6 +293,9 @@ private:
 protected:
 	//! Wraps some GL functions for compatibility across GL and GLES.
 	QGLFunctions gl;
+
+	//! Current depth test mode.
+	DepthTest depthTest;
 };
 
 #endif // _STELQGLRENDERER_HPP_
