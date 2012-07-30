@@ -2996,7 +2996,7 @@ while (1)
 		txt1 = LabelMgr.labelScreen(d, 180, 20, false, 20, "#1170FF");
 		LabelMgr.setLabelShow(txt1, true);
 
-		d = "47.375&deg;       07/17/2084";
+		d = "47.375 Degrees   07/17/2084";
 		txt1 = LabelMgr.labelScreen(d, 480, 45, false, 20, "#1170FF");
 		LabelMgr.setLabelShow(txt1, true);
 
@@ -3155,7 +3155,7 @@ while (1)
 		var pick = Math.floor(Math.random()*70)+70;
 		StelMovementMgr.zoomTo(pick, 1);
 
-		d = "Mars - Highest Declination 27.207&deg; of the 21st Century 1/22/2040";
+		d = "Mars - Highest Declination 27.207 Degrees of the 21st Century 1/22/2040";
 		txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FF0000");
 		LabelMgr.setLabelShow(txt1, true);
 	}
@@ -3174,7 +3174,7 @@ while (1)
 		var pick = Math.floor(Math.random()*70)+70;
 		StelMovementMgr.zoomTo(pick, 1);
 
-		d = "Mars - Lowest Declination -28.632&deg; of the 21st Century 7/22/2033";
+		d = "Mars - Lowest Declination -28.632 Degrees of the 21st Century 7/22/2033";
 		txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FF0000");
 		LabelMgr.setLabelShow(txt1, true);
 	}
@@ -3294,7 +3294,7 @@ while (1)
 		var pick = Math.floor(Math.random()*70)+10;
 		StelMovementMgr.zoomTo(pick, 1);
 
-		d = "A very close 0.04&deg; Ceres - Vesta Conjunction 07/13/2014";
+		d = "A very close 0.04 Degrees Ceres - Vesta Conjunction 07/13/2014";
 		txt1 = LabelMgr.labelScreen(d, 250, 20, false, 20, "#F0F0F0");
 		LabelMgr.setLabelShow(txt1, true);
 	}
@@ -3388,7 +3388,7 @@ while (1)
 		SolarSystem.setFlagOrbits(true);
 		StelMovementMgr.zoomTo(34, 1);
 
-		d = "Uranus Greatest Elongation from Neptune 09/20/2018 - 41.50&deg;";
+		d = "Uranus Greatest Elongation from Neptune 09/20/2018 - 41.50 Degrees";
 		txt1 = LabelMgr.labelScreen(d, 240, 20, false, 20, "#11FF18");
 		LabelMgr.setLabelShow(txt1, true);
 
@@ -3720,7 +3720,7 @@ while (1)
 		var pick = Math.floor(Math.random()*50)+10;
 		StelMovementMgr.zoomTo(pick, 1);
 
-		d = "Close 0.06&deg; Jupiter and Venus Conjunction with Mercury nearby 8/27/2016";
+		d = "Close 0.06 Degrees Jupiter and Venus Conjunction with Mercury nearby 8/27/2016";
 		txt1 = LabelMgr.labelScreen(d, 270, 20, false, 18, "#F611FA");
 		LabelMgr.setLabelShow(txt1, true);
 	}
