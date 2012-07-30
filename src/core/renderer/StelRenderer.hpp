@@ -443,6 +443,14 @@ public:
 	//! @note Color channel values can be outside of the 0-1 range.
 	virtual void setGlobalColor(const Vec4f& color) = 0;
 
+	//! setGlobalColor overload specifying the channels directly instead of through Vec4f.
+	//! 
+	//! @see setGlobalColor
+	void setGlobalColor(const float r, const float g, const float b, const float a = 1.0f)
+	{
+		setGlobalColor(Vec4f(r, g, b, a));
+	}
+
 	//! Set blend mode.
 	//!
 	//! Used to enable/disable transparency and similar effects.
