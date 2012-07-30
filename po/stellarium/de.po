@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-21 16:42+0700\n"
-"PO-Revision-Date: 2012-07-16 13:17+0000\n"
-"Last-Translator: Armin Eibl <Unknown>\n"
+"POT-Creation-Date: 2012-07-30 00:53+0700\n"
+"PO-Revision-Date: 2012-07-29 12:43+0000\n"
+"Last-Translator: Philipp Fischbeck <philipp.fischbeck@arcor.de>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-22 04:36+0000\n"
-"X-Generator: Launchpad (build 15654)\n"
+"X-Launchpad-Export-Date: 2012-07-30 04:42+0000\n"
+"X-Generator: Launchpad (build 15702)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -375,31 +375,31 @@ msgstr "Nicht gefunden"
 msgid "Found"
 msgstr "Gefunden"
 
-#: src/gui/ConfigurationDialog.cpp:373
+#: src/gui/ConfigurationDialog.cpp:375
 msgid "Select screenshot directory"
 msgstr "Screenshot-Verzeichnis auswählen"
 
-#: src/gui/ConfigurationDialog.cpp:584
+#: src/gui/ConfigurationDialog.cpp:586
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Anfängliches Gesichtsfeld: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:592
+#: src/gui/ConfigurationDialog.cpp:594
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Anfängliche Blickrichtung in Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:634
+#: src/gui/ConfigurationDialog.cpp:636
 #: plugins/Oculars/src/gui/OcularDialog.cpp:423
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:260
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:288
 msgid "Authors"
 msgstr "Autoren"
 
-#: src/gui/ConfigurationDialog.cpp:635 src/gui/ViewDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:637 src/gui/ViewDialog.cpp:398
 msgid "Contact"
 msgstr "Ansprechpartner"
 
-#: src/gui/ConfigurationDialog.cpp:718
+#: src/gui/ConfigurationDialog.cpp:720
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:110
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:110
@@ -407,19 +407,19 @@ msgstr "Ansprechpartner"
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:722
+#: src/gui/ConfigurationDialog.cpp:724
 msgid "License"
 msgstr "Lizenz"
 
-#: src/gui/ConfigurationDialog.cpp:748
+#: src/gui/ConfigurationDialog.cpp:750
 msgid "Running script: "
 msgstr "Ausgeführtes Skript: "
 
-#: src/gui/ConfigurationDialog.cpp:755
+#: src/gui/ConfigurationDialog.cpp:757
 msgid "Running script: [none]"
 msgstr "Ausgeführtes Skript: [keines]"
 
-#: src/gui/ConfigurationDialog.cpp:818
+#: src/gui/ConfigurationDialog.cpp:820
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -427,16 +427,16 @@ msgstr ""
 "Herunterladen neuer Sternkataloge beendet!\n"
 "Starten Sie Stellarium neu, um sie anzuzeigen."
 
-#: src/gui/ConfigurationDialog.cpp:822
+#: src/gui/ConfigurationDialog.cpp:824
 msgid "All available star catalogs have been installed."
 msgstr "Alle verfügbaren Sternkataloge wurden installiert."
 
-#: src/gui/ConfigurationDialog.cpp:827
+#: src/gui/ConfigurationDialog.cpp:829
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Empfange Katalog %1 von %2"
 
-#: src/gui/ConfigurationDialog.cpp:834
+#: src/gui/ConfigurationDialog.cpp:836
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -445,7 +445,7 @@ msgstr ""
 "Lade %1...\n"
 "(Sie können dieses Fenster schließen.)"
 
-#: src/gui/ConfigurationDialog.cpp:841
+#: src/gui/ConfigurationDialog.cpp:843
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -456,7 +456,7 @@ msgstr ""
 "Anzahl der Sterne: %2 Millionen\n"
 "Magnitudenspanne: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:884 src/gui/ConfigurationDialog.cpp:920
+#: src/gui/ConfigurationDialog.cpp:886 src/gui/ConfigurationDialog.cpp:922
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -465,11 +465,11 @@ msgstr ""
 "Fehler beim Herunterladen von %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:972
+#: src/gui/ConfigurationDialog.cpp:974
 msgid "Verifying file integrity..."
 msgstr "Überprüfe Dateiintegrität..."
 
-#: src/gui/ConfigurationDialog.cpp:976
+#: src/gui/ConfigurationDialog.cpp:978
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -861,7 +861,7 @@ msgstr "Datum und Uhrzeit"
 
 #: src/gui/StelGui.cpp:212
 msgid "Stop script execution"
-msgstr ""
+msgstr "Skript-Ausführung anhalten"
 
 #: src/gui/StelGui.cpp:215
 msgid "Decrease time speed"
@@ -1637,23 +1637,28 @@ msgstr "Start-Skript"
 msgid "Zodiac"
 msgstr "Tierkreis"
 
-#: src/translations.h:195
+#. TRANSLATORS: Name of script
+#: src/translations.h:194
+msgid "Mercury Triple Sunrise and Sunset"
+msgstr ""
+
+#: src/translations.h:197
 msgid "Look around each installed landscape."
 msgstr "Ein Rundblick durch alle installierten Landschaften."
 
-#: src/translations.h:196
+#: src/translations.h:198
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Skript zum Demonstrieren einer partiellen Mondfinsternis."
 
-#: src/translations.h:197
+#: src/translations.h:199
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Skript zum Demonstrieren einer totalen Mondfinsternis."
 
-#: src/translations.h:198
+#: src/translations.h:200
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "Endlos-Show durch zufällig angesteuerte Hmmelsobjekte."
 
-#: src/translations.h:199
+#: src/translations.h:201
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -1661,11 +1666,11 @@ msgstr ""
 "Skript zum Demonstrieren der totalen Sonnenfinsternis im Jahr 2009 (Ort= "
 "Ranpur, Bangladesch)"
 
-#: src/translations.h:200
+#: src/translations.h:202
 msgid "Script which runs automatically at startup"
 msgstr "Skript, das zum Programmstart ausgeführt wird."
 
-#: src/translations.h:201
+#: src/translations.h:203
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -1675,966 +1680,972 @@ msgstr ""
 "Sternbilder entlang der scheinbaren Jahresbahn der Sonne."
 
 #: src/translations.h:204
+msgid ""
+"Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
+"will rise & set 3 different times in one Mercury day."
+msgstr ""
+
+#: src/translations.h:207
 msgid "Andorra"
 msgstr "Andorra"
 
-#: src/translations.h:205
+#: src/translations.h:208
 msgid "United Arab Emirates"
 msgstr "Vereinigte Arabische Emirate"
 
-#: src/translations.h:206
+#: src/translations.h:209
 msgid "Afghanistan"
 msgstr "Afghanistan"
 
-#: src/translations.h:207
+#: src/translations.h:210
 msgid "Antigua and Barbuda"
 msgstr "Antigua und Barbuda"
 
-#: src/translations.h:208
+#: src/translations.h:211
 msgid "Anguilla"
 msgstr "Anguilla"
 
-#: src/translations.h:209
+#: src/translations.h:212
 msgid "Albania"
 msgstr "Albanien"
 
-#: src/translations.h:210
+#: src/translations.h:213
 msgid "Armenia"
 msgstr "Armenien"
 
-#: src/translations.h:211
+#: src/translations.h:214
 msgid "Netherlands Antilles"
 msgstr "Niederländische Antillen"
 
-#: src/translations.h:212
+#: src/translations.h:215
 msgid "Angola"
 msgstr "Angola"
 
-#: src/translations.h:213
+#: src/translations.h:216
 msgid "Antarctica"
 msgstr "Antarktis"
 
-#: src/translations.h:214
+#: src/translations.h:217
 msgid "Argentina"
 msgstr "Argentinien"
 
-#: src/translations.h:215
+#: src/translations.h:218
 msgid "American Samoa"
 msgstr "Amerikanisch-Samoa"
 
-#: src/translations.h:216
+#: src/translations.h:219
 msgid "Austria"
 msgstr "Österreich"
 
-#: src/translations.h:217
+#: src/translations.h:220
 msgid "Australia"
 msgstr "Australien"
 
-#: src/translations.h:218
+#: src/translations.h:221
 msgid "Aruba"
 msgstr "Aruba"
 
-#: src/translations.h:219
+#: src/translations.h:222
 msgid "Azerbaijan"
 msgstr "Aserbaidschan"
 
-#: src/translations.h:220
+#: src/translations.h:223
 msgid "Bosnia and Herzegowina"
 msgstr "Bosnien und Herzegowina"
 
-#: src/translations.h:221
+#: src/translations.h:224
 msgid "Barbados"
 msgstr "Barbados"
 
-#: src/translations.h:222
+#: src/translations.h:225
 msgid "Bangladesh"
 msgstr "Bangladesch"
 
-#: src/translations.h:223
+#: src/translations.h:226
 msgid "Belgium"
 msgstr "Belgien"
 
-#: src/translations.h:224
+#: src/translations.h:227
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
-#: src/translations.h:225
+#: src/translations.h:228
 msgid "Bulgaria"
 msgstr "Bulgarien"
 
-#: src/translations.h:226
+#: src/translations.h:229
 msgid "Bahrain"
 msgstr "Bahrain"
 
-#: src/translations.h:227
+#: src/translations.h:230
 msgid "Burundi"
 msgstr "Burundi"
 
-#: src/translations.h:228
+#: src/translations.h:231
 msgid "Benin"
 msgstr "Benin"
 
-#: src/translations.h:229
+#: src/translations.h:232
 msgid "Bermuda"
 msgstr "Bermuda"
 
-#: src/translations.h:230
+#: src/translations.h:233
 msgid "Brunei Darussalam"
 msgstr "Brunei"
 
-#: src/translations.h:231
+#: src/translations.h:234
 msgid "Bolivia"
 msgstr "Bolivien"
 
-#: src/translations.h:232
+#: src/translations.h:235
 msgid "Brazil"
 msgstr "Brasilien"
 
-#: src/translations.h:233
+#: src/translations.h:236
 msgid "Bahamas"
 msgstr "Bahamas"
 
-#: src/translations.h:234
+#: src/translations.h:237
 msgid "Bhutan"
 msgstr "Bhutan"
 
-#: src/translations.h:235
+#: src/translations.h:238
 msgid "Bouvet Island"
 msgstr "Bouvet-Insel"
 
-#: src/translations.h:236
+#: src/translations.h:239
 msgid "Botswana"
 msgstr "Botsuana"
 
-#: src/translations.h:237
+#: src/translations.h:240
 msgid "Belarus"
 msgstr "Weißrussland"
 
-#: src/translations.h:238
+#: src/translations.h:241
 msgid "Belize"
 msgstr "Belize"
 
-#: src/translations.h:239
+#: src/translations.h:242
 msgid "Canada"
 msgstr "Kanada"
 
-#: src/translations.h:240
+#: src/translations.h:243
 msgid "Cocos Islands"
 msgstr "Kokos-Inseln"
 
-#: src/translations.h:241
+#: src/translations.h:244
 msgid "Democratic Republic of the Congo"
 msgstr "Demokratische Republik Kongo"
 
-#: src/translations.h:242
+#: src/translations.h:245
 msgid "Central African Republic"
 msgstr "Zentralafrikanische Republik"
 
-#: src/translations.h:243
+#: src/translations.h:246
 msgid "Republic of the Congo"
 msgstr "Republik Kongo"
 
-#: src/translations.h:244
+#: src/translations.h:247
 msgid "Switzerland"
 msgstr "Schweiz"
 
-#: src/translations.h:245
+#: src/translations.h:248
 msgid "Cote d'Ivoire"
 msgstr "Elfenbeinküste"
 
-#: src/translations.h:246
+#: src/translations.h:249
 msgid "Cook Islands"
 msgstr "Cookinseln"
 
-#: src/translations.h:247
+#: src/translations.h:250
 msgid "Chile"
 msgstr "Chile"
 
-#: src/translations.h:248
+#: src/translations.h:251
 msgid "Cameroon"
 msgstr "Kamerun"
 
-#: src/translations.h:249
+#: src/translations.h:252
 msgid "China"
 msgstr "China"
 
-#: src/translations.h:250
+#: src/translations.h:253
 msgid "Colombia"
 msgstr "Kolumbien"
 
-#: src/translations.h:251
+#: src/translations.h:254
 msgid "Costa Rica"
 msgstr "Costa Rica"
 
-#: src/translations.h:252
+#: src/translations.h:255
 msgid "Serbia and Montenegro"
 msgstr "Serbien und Montenegro"
 
-#: src/translations.h:253
+#: src/translations.h:256
 msgid "Cuba"
 msgstr "Kuba"
 
-#: src/translations.h:254
+#: src/translations.h:257
 msgid "Cape Verde"
 msgstr "Kap Verde"
 
-#: src/translations.h:255
+#: src/translations.h:258
 msgid "Christmas Island"
 msgstr "Weihnachtsinseln"
 
-#: src/translations.h:256
+#: src/translations.h:259
 msgid "Cyprus"
 msgstr "Zypern"
 
-#: src/translations.h:257
+#: src/translations.h:260
 msgid "Czech Republic"
 msgstr "Tschechien"
 
-#: src/translations.h:258
+#: src/translations.h:261
 msgid "Germany"
 msgstr "Deutschland"
 
-#: src/translations.h:259
+#: src/translations.h:262
 msgid "Djibouti"
 msgstr "Dschibuti"
 
-#: src/translations.h:260
+#: src/translations.h:263
 msgid "Denmark"
 msgstr "Dänemark"
 
-#: src/translations.h:261
+#: src/translations.h:264
 msgid "Dominica"
 msgstr "Dominica"
 
-#: src/translations.h:262
+#: src/translations.h:265
 msgid "Dominican Republic"
 msgstr "Dominikanische Republik"
 
-#: src/translations.h:263
+#: src/translations.h:266
 msgid "Algeria"
 msgstr "Algerien"
 
-#: src/translations.h:264
+#: src/translations.h:267
 msgid "Ecuador"
 msgstr "Ecuador"
 
-#: src/translations.h:265
+#: src/translations.h:268
 msgid "Estonia"
 msgstr "Estland"
 
-#: src/translations.h:266
+#: src/translations.h:269
 msgid "Egypt"
 msgstr "Ägypten"
 
-#: src/translations.h:267
+#: src/translations.h:270
 msgid "Western Sahara"
 msgstr "Westsahara"
 
-#: src/translations.h:268
+#: src/translations.h:271
 msgid "Eritrea"
 msgstr "Eritrea"
 
-#: src/translations.h:269
+#: src/translations.h:272
 msgid "Spain"
 msgstr "Spanien"
 
-#: src/translations.h:270
+#: src/translations.h:273
 msgid "Ethiopia"
 msgstr "Äthiopien"
 
-#: src/translations.h:271
+#: src/translations.h:274
 msgid "Finland"
 msgstr "Finnland"
 
-#: src/translations.h:272
+#: src/translations.h:275
 msgid "Fiji"
 msgstr "Fidschi"
 
-#: src/translations.h:273
+#: src/translations.h:276
 msgid "Falkland Islands"
 msgstr "Falklandinseln"
 
-#: src/translations.h:274
+#: src/translations.h:277
 msgid "Micronesia"
 msgstr "Mikronesien"
 
-#: src/translations.h:275
+#: src/translations.h:278
 msgid "Faroe Islands"
 msgstr "Färöer-Inseln"
 
-#: src/translations.h:276
+#: src/translations.h:279
 msgid "France"
 msgstr "Frankreich"
 
-#: src/translations.h:277
+#: src/translations.h:280
 msgid "Gabon"
 msgstr "Gabun"
 
-#: src/translations.h:278
+#: src/translations.h:281
 msgid "United Kingdom"
 msgstr "Vereinigtes Königreich"
 
-#: src/translations.h:279
+#: src/translations.h:282
 msgid "Grenada"
 msgstr "Grenada"
 
-#: src/translations.h:280
+#: src/translations.h:283
 msgid "Georgia"
 msgstr "Georgien"
 
-#: src/translations.h:281
+#: src/translations.h:284
 msgid "French Guiana"
 msgstr "Französisch-Guayana"
 
-#: src/translations.h:282
+#: src/translations.h:285
 msgid "Ghana"
 msgstr "Ghana"
 
-#: src/translations.h:283
+#: src/translations.h:286
 msgid "Gibraltar"
 msgstr "Gibraltar"
 
-#: src/translations.h:284
+#: src/translations.h:287
 msgid "Greenland"
 msgstr "Grönland"
 
-#: src/translations.h:285
+#: src/translations.h:288
 msgid "Gambia"
 msgstr "Gambia"
 
-#: src/translations.h:286
+#: src/translations.h:289
 msgid "Guinea"
 msgstr "Guinea"
 
-#: src/translations.h:287
+#: src/translations.h:290
 msgid "Guadeloupe"
 msgstr "Guadeloupe"
 
-#: src/translations.h:288
+#: src/translations.h:291
 msgid "Equatorial Guinea"
 msgstr "Äquatorialguinea"
 
-#: src/translations.h:289
+#: src/translations.h:292
 msgid "Greece"
 msgstr "Griechenland"
 
-#: src/translations.h:290
+#: src/translations.h:293
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Südgeorgien und die Südlichen Sandwich-Inseln"
 
-#: src/translations.h:291
+#: src/translations.h:294
 msgid "Guatemala"
 msgstr "Guatemala"
 
-#: src/translations.h:292
+#: src/translations.h:295
 msgid "Guam"
 msgstr "Guam"
 
-#: src/translations.h:293
+#: src/translations.h:296
 msgid "Guinea-Bissau"
 msgstr "Guinea-Bissau"
 
-#: src/translations.h:294
+#: src/translations.h:297
 msgid "Guyana"
 msgstr "Guyana"
 
-#: src/translations.h:295
+#: src/translations.h:298
 msgid "Hong Kong"
 msgstr "Hongkong"
 
-#: src/translations.h:296
+#: src/translations.h:299
 msgid "Heard Island and McDonald Islands"
 msgstr "Heard- und McDonald-Inseln"
 
-#: src/translations.h:297
+#: src/translations.h:300
 msgid "Honduras"
 msgstr "Honduras"
 
-#: src/translations.h:298
+#: src/translations.h:301
 msgid "Croatia"
 msgstr "Kroatien"
 
-#: src/translations.h:299
+#: src/translations.h:302
 msgid "Haiti"
 msgstr "Haiti"
 
-#: src/translations.h:300
+#: src/translations.h:303
 msgid "Hungary"
 msgstr "Ungarn"
 
-#: src/translations.h:301
+#: src/translations.h:304
 msgid "Indonesia"
 msgstr "Indonesien"
 
-#: src/translations.h:302
+#: src/translations.h:305
 msgid "Ireland"
 msgstr "Irland"
 
-#: src/translations.h:303
+#: src/translations.h:306
 msgid "Israel"
 msgstr "Israel"
 
-#: src/translations.h:304
+#: src/translations.h:307
 msgid "India"
 msgstr "Indien"
 
-#: src/translations.h:305
+#: src/translations.h:308
 msgid "British Indian Ocean Territory"
 msgstr "Britisches Territorium im Indischen Ozean"
 
-#: src/translations.h:306
+#: src/translations.h:309
 msgid "Iraq"
 msgstr "Irak"
 
-#: src/translations.h:307
+#: src/translations.h:310
 msgid "Iran"
 msgstr "Iran"
 
-#: src/translations.h:308
+#: src/translations.h:311
 msgid "Iceland"
 msgstr "Island"
 
-#: src/translations.h:309
+#: src/translations.h:312
 msgid "Italy"
 msgstr "Italien"
 
-#: src/translations.h:310
+#: src/translations.h:313
 msgid "Jamaica"
 msgstr "Jamaika"
 
-#: src/translations.h:311
+#: src/translations.h:314
 msgid "Jordan"
 msgstr "Jordanien"
 
-#: src/translations.h:312
+#: src/translations.h:315
 msgid "Japan"
 msgstr "Japan"
 
-#: src/translations.h:313
+#: src/translations.h:316
 msgid "Kenya"
 msgstr "Kenia"
 
-#: src/translations.h:314
+#: src/translations.h:317
 msgid "Kyrgyzstan"
 msgstr "Kirgisistan"
 
-#: src/translations.h:315
+#: src/translations.h:318
 msgid "Cambodia"
 msgstr "Kambodscha"
 
-#: src/translations.h:316
+#: src/translations.h:319
 msgid "Kiribati"
 msgstr "Kiribati"
 
-#: src/translations.h:317
+#: src/translations.h:320
 msgid "Comoros"
 msgstr "Komoren"
 
-#: src/translations.h:318
+#: src/translations.h:321
 msgid "Saint Kitts and Nevis"
 msgstr "St. Kitts und Nevis"
 
-#: src/translations.h:319
+#: src/translations.h:322
 msgid "Democratic People's Republic of Korea"
 msgstr "Demokratische Volksrepublik Korea"
 
-#: src/translations.h:320
+#: src/translations.h:323
 msgid "Republic of Korea"
 msgstr "Republik Korea"
 
-#: src/translations.h:321
+#: src/translations.h:324
 msgid "Kuwait"
 msgstr "Kuwait"
 
-#: src/translations.h:322
+#: src/translations.h:325
 msgid "Cayman Islands"
 msgstr "Kaiman-Inseln"
 
-#: src/translations.h:323
+#: src/translations.h:326
 msgid "Kazakhstan"
 msgstr "Kasachstan"
 
-#: src/translations.h:324
+#: src/translations.h:327
 msgid "Lao"
 msgstr "Laos"
 
-#: src/translations.h:325
+#: src/translations.h:328
 msgid "Lebanon"
 msgstr "Libanon"
 
-#: src/translations.h:326
+#: src/translations.h:329
 msgid "Saint Lucia"
 msgstr "St. Lucia"
 
-#: src/translations.h:327
+#: src/translations.h:330
 msgid "Liechtenstein"
 msgstr "Liechtenstein"
 
-#: src/translations.h:328
+#: src/translations.h:331
 msgid "Sri Lanka"
 msgstr "Sri Lanka"
 
-#: src/translations.h:329
+#: src/translations.h:332
 msgid "Liberia"
 msgstr "Liberia"
 
-#: src/translations.h:330
+#: src/translations.h:333
 msgid "Lesotho"
 msgstr "Lesotho"
 
-#: src/translations.h:331
+#: src/translations.h:334
 msgid "Lithuania"
 msgstr "Litauen"
 
-#: src/translations.h:332
+#: src/translations.h:335
 msgid "Luxembourg"
 msgstr "Luxemburg"
 
-#: src/translations.h:333
+#: src/translations.h:336
 msgid "Latvia"
 msgstr "Lettland"
 
-#: src/translations.h:334
+#: src/translations.h:337
 msgid "Libyan Arab Jamahiriya"
 msgstr "Libyen"
 
-#: src/translations.h:335
+#: src/translations.h:338
 msgid "Morocco"
 msgstr "Marokko"
 
-#: src/translations.h:336
+#: src/translations.h:339
 msgid "Monaco"
 msgstr "Monaco"
 
-#: src/translations.h:337
+#: src/translations.h:340
 msgid "Moldova"
 msgstr "Moldawien"
 
-#: src/translations.h:338
+#: src/translations.h:341
 msgid "Madagascar"
 msgstr "Madagaskar"
 
-#: src/translations.h:339
+#: src/translations.h:342
 msgid "Marshall Islands"
 msgstr "Marshallinseln"
 
-#: src/translations.h:340
+#: src/translations.h:343
 msgid "Macedonia"
 msgstr "Mazedonien"
 
-#: src/translations.h:341
+#: src/translations.h:344
 msgid "Mali"
 msgstr "Mali"
 
-#: src/translations.h:342
+#: src/translations.h:345
 msgid "Myanmar"
 msgstr "Myanmar"
 
-#: src/translations.h:343
+#: src/translations.h:346
 msgid "Mongolia"
 msgstr "Mongolei"
 
-#: src/translations.h:344
+#: src/translations.h:347
 msgid "Macau"
 msgstr "Macao"
 
-#: src/translations.h:345
+#: src/translations.h:348
 msgid "Northern Mariana Islands"
 msgstr "Nördliche Marianen"
 
-#: src/translations.h:346
+#: src/translations.h:349
 msgid "Martinique"
 msgstr "Martinique"
 
-#: src/translations.h:347
+#: src/translations.h:350
 msgid "Mauritania"
 msgstr "Mauretanien"
 
-#: src/translations.h:348
+#: src/translations.h:351
 msgid "Montserrat"
 msgstr "Montserrat"
 
-#: src/translations.h:349
+#: src/translations.h:352
 msgid "Malta"
 msgstr "Malta"
 
-#: src/translations.h:350
+#: src/translations.h:353
 msgid "Mauritius"
 msgstr "Mauritius"
 
-#: src/translations.h:351
+#: src/translations.h:354
 msgid "Maldives"
 msgstr "Malediven"
 
-#: src/translations.h:352
+#: src/translations.h:355
 msgid "Malawi"
 msgstr "Malawi"
 
-#: src/translations.h:353
+#: src/translations.h:356
 msgid "Mexico"
 msgstr "Mexiko"
 
-#: src/translations.h:354
+#: src/translations.h:357
 msgid "Malaysia"
 msgstr "Malaysia"
 
-#: src/translations.h:355
+#: src/translations.h:358
 msgid "Mozambique"
 msgstr "Mosambik"
 
-#: src/translations.h:356
+#: src/translations.h:359
 msgid "Namibia"
 msgstr "Namibia"
 
-#: src/translations.h:357
+#: src/translations.h:360
 msgid "New Caledonia"
 msgstr "Neukaledonien"
 
-#: src/translations.h:358
+#: src/translations.h:361
 msgid "Niger"
 msgstr "Niger"
 
-#: src/translations.h:359
+#: src/translations.h:362
 msgid "Norfolk Island"
 msgstr "Norfolkinsel"
 
-#: src/translations.h:360
+#: src/translations.h:363
 msgid "Nigeria"
 msgstr "Nigeria"
 
-#: src/translations.h:361
+#: src/translations.h:364
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
-#: src/translations.h:362
+#: src/translations.h:365
 msgid "Netherlands"
 msgstr "Niederlande"
 
-#: src/translations.h:363
+#: src/translations.h:366
 msgid "Norway"
 msgstr "Norwegen"
 
-#: src/translations.h:364
+#: src/translations.h:367
 msgid "Nepal"
 msgstr "Nepal"
 
-#: src/translations.h:365
+#: src/translations.h:368
 msgid "Nauru"
 msgstr "Nauru"
 
-#: src/translations.h:366
+#: src/translations.h:369
 msgid "Niue"
 msgstr "Niue"
 
-#: src/translations.h:367
+#: src/translations.h:370
 msgid "New Zealand"
 msgstr "Neuseeland"
 
-#: src/translations.h:368
+#: src/translations.h:371
 msgid "Oman"
 msgstr "Oman"
 
-#: src/translations.h:369
+#: src/translations.h:372
 msgid "Panama"
 msgstr "Panama"
 
-#: src/translations.h:370
+#: src/translations.h:373
 msgid "Peru"
 msgstr "Peru"
 
-#: src/translations.h:371
+#: src/translations.h:374
 msgid "French Polynesia"
 msgstr "Französisch-Polynesien"
 
-#: src/translations.h:372
+#: src/translations.h:375
 msgid "Papua New Guinea"
 msgstr "Papua-Neuguinea"
 
-#: src/translations.h:373
+#: src/translations.h:376
 msgid "Philippines"
 msgstr "Phillippinen"
 
-#: src/translations.h:374
+#: src/translations.h:377
 msgid "Pakistan"
 msgstr "Pakistan"
 
-#: src/translations.h:375
+#: src/translations.h:378
 msgid "Poland"
 msgstr "Polen"
 
-#: src/translations.h:376
+#: src/translations.h:379
 msgid "Saint Pierre and Miquelon"
 msgstr "St. Pierre und Miquelon"
 
-#: src/translations.h:377
+#: src/translations.h:380
 msgid "Pitcairn"
 msgstr "Pitcairninseln"
 
-#: src/translations.h:378
+#: src/translations.h:381
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
 
-#: src/translations.h:379
+#: src/translations.h:382
 msgid "Palestinian Territories"
 msgstr "Palästinensische Autonomiegebiete"
 
-#: src/translations.h:380
+#: src/translations.h:383
 msgid "Portugal"
 msgstr "Portugal"
 
-#: src/translations.h:381
+#: src/translations.h:384
 msgid "Palau"
 msgstr "Palau"
 
-#: src/translations.h:382
+#: src/translations.h:385
 msgid "Paraguay"
 msgstr "Paraguay"
 
-#: src/translations.h:383
+#: src/translations.h:386
 msgid "Qatar"
 msgstr "Katar"
 
-#: src/translations.h:384
+#: src/translations.h:387
 msgid "Réunion"
 msgstr "Réunion"
 
-#: src/translations.h:385
+#: src/translations.h:388
 msgid "Romania"
 msgstr "Rumänien"
 
-#: src/translations.h:386
+#: src/translations.h:389
 msgid "Serbia"
 msgstr "Serbien"
 
-#: src/translations.h:387
+#: src/translations.h:390
 msgid "Russian Federation"
 msgstr "Russland"
 
-#: src/translations.h:388
+#: src/translations.h:391
 msgid "Rwanda"
 msgstr "Ruanda"
 
-#: src/translations.h:389
+#: src/translations.h:392
 msgid "Saudi Arabia"
 msgstr "Saudi-Arabien"
 
-#: src/translations.h:390
+#: src/translations.h:393
 msgid "Solomon Islands"
 msgstr "Salomon-Inseln"
 
-#: src/translations.h:391
+#: src/translations.h:394
 msgid "Seychelles"
 msgstr "Seychellen"
 
-#: src/translations.h:392
+#: src/translations.h:395
 msgid "Sudan"
 msgstr "Sudan"
 
-#: src/translations.h:393
+#: src/translations.h:396
 msgid "Sweden"
 msgstr "Schweden"
 
-#: src/translations.h:394
+#: src/translations.h:397
 msgid "Singapore"
 msgstr "Singapur"
 
-#: src/translations.h:395
+#: src/translations.h:398
 msgid "Saint Helena"
 msgstr "St. Helena"
 
-#: src/translations.h:396
+#: src/translations.h:399
 msgid "Slovenia"
 msgstr "Slowenien"
 
-#: src/translations.h:397
+#: src/translations.h:400
 msgid "Svalbard and Jan Mayen"
 msgstr "Svalbard und Jan Mayen"
 
-#: src/translations.h:398
+#: src/translations.h:401
 msgid "Slovakia"
 msgstr "Slowakei"
 
-#: src/translations.h:399
+#: src/translations.h:402
 msgid "Sierra Leone"
 msgstr "Sierra Leone"
 
-#: src/translations.h:400
+#: src/translations.h:403
 msgid "San Marino"
 msgstr "San Marino"
 
-#: src/translations.h:401
+#: src/translations.h:404
 msgid "Senegal"
 msgstr "Senegal"
 
-#: src/translations.h:402
+#: src/translations.h:405
 msgid "Somalia"
 msgstr "Somalia"
 
-#: src/translations.h:403
+#: src/translations.h:406
 msgid "Suriname"
 msgstr "Suriname"
 
-#: src/translations.h:404
+#: src/translations.h:407
 msgid "Sao Tome and Principe"
 msgstr "São Tomé und Príncipe"
 
-#: src/translations.h:405
+#: src/translations.h:408
 msgid "El Salvador"
 msgstr "El Salvador"
 
-#: src/translations.h:406
+#: src/translations.h:409
 msgid "Syrian Arab Republic"
 msgstr "Syrien"
 
-#: src/translations.h:407
+#: src/translations.h:410
 msgid "Swaziland"
 msgstr "Swasiland"
 
-#: src/translations.h:408
+#: src/translations.h:411
 msgid "Turks and Caicos Islands"
 msgstr "Turks- und Caicosinseln"
 
-#: src/translations.h:409
+#: src/translations.h:412
 msgid "Chad"
 msgstr "Tschad"
 
-#: src/translations.h:410
+#: src/translations.h:413
 msgid "French Southern Territories"
 msgstr "Französische Süd- und Antarktisgebiete"
 
-#: src/translations.h:411
+#: src/translations.h:414
 msgid "Togo"
 msgstr "Togo"
 
-#: src/translations.h:412
+#: src/translations.h:415
 msgid "Thailand"
 msgstr "Thailand"
 
-#: src/translations.h:413
+#: src/translations.h:416
 msgid "Tajikistan"
 msgstr "Tadschikistan"
 
-#: src/translations.h:414
+#: src/translations.h:417
 msgid "Tokelau"
 msgstr "Tokelau"
 
-#: src/translations.h:415
+#: src/translations.h:418
 msgid "East Timor"
 msgstr "Osttimor"
 
-#: src/translations.h:416
+#: src/translations.h:419
 msgid "Turkmenistan"
 msgstr "Turkmenistan"
 
-#: src/translations.h:417
+#: src/translations.h:420
 msgid "Tunisia"
 msgstr "Tunesien"
 
-#: src/translations.h:418
+#: src/translations.h:421
 msgid "Tonga"
 msgstr "Tonga"
 
-#: src/translations.h:419
+#: src/translations.h:422
 msgid "Turkey"
 msgstr "Türkei"
 
-#: src/translations.h:420
+#: src/translations.h:423
 msgid "Trinidad and Tobago"
 msgstr "Trinidad und Tobago"
 
-#: src/translations.h:421
+#: src/translations.h:424
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: src/translations.h:422
+#: src/translations.h:425
 msgid "Taiwan"
 msgstr "Taiwan"
 
-#: src/translations.h:423
+#: src/translations.h:426
 msgid "Tanzania"
 msgstr "Tansania"
 
-#: src/translations.h:424
+#: src/translations.h:427
 msgid "Ukraine"
 msgstr "Ukraine"
 
-#: src/translations.h:425
+#: src/translations.h:428
 msgid "Uganda"
 msgstr "Uganda"
 
-#: src/translations.h:426
+#: src/translations.h:429
 msgid "United States Minor Outlying Islands"
 msgstr "Kleinere Inselbesitzungen der Vereinigten Staaten"
 
-#: src/translations.h:427
+#: src/translations.h:430
 msgid "United States"
 msgstr "Vereinigte Staaten"
 
-#: src/translations.h:428
+#: src/translations.h:431
 msgid "Uruguay"
 msgstr "Uruguay"
 
-#: src/translations.h:429
+#: src/translations.h:432
 msgid "Uzbekistan"
 msgstr "Usbekistan"
 
-#: src/translations.h:430
+#: src/translations.h:433
 msgid "Vatican City State"
 msgstr "Vatikanstadt"
 
-#: src/translations.h:431
+#: src/translations.h:434
 msgid "Saint Vincent and the Grenadines"
 msgstr "St. Vincent und die Grenadinen"
 
-#: src/translations.h:432
+#: src/translations.h:435
 msgid "Venezuela"
 msgstr "Venezuela"
 
-#: src/translations.h:433
+#: src/translations.h:436
 msgid "British Virgin Islands"
 msgstr "Britische Jungferninseln"
 
-#: src/translations.h:434
+#: src/translations.h:437
 msgid "United States Virgin Islands"
 msgstr "Amerikanische Jungferninseln"
 
-#: src/translations.h:435
+#: src/translations.h:438
 msgid "Viet Nam"
 msgstr "Vietnam"
 
-#: src/translations.h:436
+#: src/translations.h:439
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
-#: src/translations.h:437
+#: src/translations.h:440
 msgid "Wallis and Futuna"
 msgstr "Wallis und Futuna"
 
-#: src/translations.h:438
+#: src/translations.h:441
 msgid "Samoa"
 msgstr "Samoa"
 
-#: src/translations.h:439
+#: src/translations.h:442
 msgid "Yemen"
 msgstr "Jemen"
 
-#: src/translations.h:440
+#: src/translations.h:443
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: src/translations.h:441
+#: src/translations.h:444
 msgid "Yugoslavia"
 msgstr "Jugoslawien"
 
-#: src/translations.h:442
+#: src/translations.h:445
 msgid "South Africa"
 msgstr "Südafrika"
 
-#: src/translations.h:443
+#: src/translations.h:446
 msgid "Zambia"
 msgstr "Sambia"
 
-#: src/translations.h:444
+#: src/translations.h:447
 msgid "Zimbabwe"
 msgstr "Simbabwe"
 
@@ -3163,7 +3174,7 @@ msgstr "Angepaßt"
 
 #: src/ui_configurationDialog.h:956
 msgid "Displayed fields"
-msgstr ""
+msgstr "Angezeigte Felder"
 
 #: src/ui_configurationDialog.h:957
 msgid "Visual magnitude"
@@ -3171,15 +3182,15 @@ msgstr "Scheinbare Helligkeit"
 
 #: src/ui_configurationDialog.h:959
 msgid "Spectral class, nebula type, etc."
-msgstr ""
+msgstr "Spektralklasse, Nebeltyp, etc."
 
 #: src/ui_configurationDialog.h:961
 msgid "Additional information 1"
-msgstr ""
+msgstr "Zusätzliche Informationen 1"
 
 #: src/ui_configurationDialog.h:962
 msgid "Additional information 3"
-msgstr ""
+msgstr "Zusätzliche Informationen 3"
 
 #: src/ui_configurationDialog.h:963
 msgid "Catalog number(s)"
@@ -3192,7 +3203,7 @@ msgstr "Name"
 
 #: src/ui_configurationDialog.h:968
 msgid "Additional information 2"
-msgstr ""
+msgstr "Zusätzliche Informationen 3"
 
 #: src/ui_configurationDialog.h:969
 msgid "Absolute magnitude"
@@ -3200,11 +3211,11 @@ msgstr "Absolute Helligkeit"
 
 #: src/ui_configurationDialog.h:971
 msgid "Horizontal coordinates"
-msgstr ""
+msgstr "Horizontale Koordinaten"
 
 #: src/ui_configurationDialog.h:973
 msgid "Altitude/Azimuth"
-msgstr ""
+msgstr "Höhe/Azimut"
 
 #: src/ui_configurationDialog.h:975
 msgid "Angular or physical size"
@@ -3212,7 +3223,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:977
 msgid "Size"
-msgstr ""
+msgstr "Größe"
 
 #: src/ui_configurationDialog.h:979
 msgid "Geocentric equatorial coordinates, equinox of date"
@@ -3224,7 +3235,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:982
 msgid "Distance"
-msgstr ""
+msgstr "Entfernung"
 
 #: src/ui_configurationDialog.h:984
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
@@ -3895,7 +3906,7 @@ msgid "Oculars Plug-in"
 msgstr "Okular Erweiterungsmodul"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:422
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:259
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:107
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:109
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:109
@@ -4020,7 +4031,7 @@ msgstr "Hinzufügen"
 #: plugins/Oculars/src/ui_ocularDialog.h:884
 #: plugins/Oculars/src/ui_ocularDialog.h:893
 #: plugins/Oculars/src/ui_ocularDialog.h:904
-#: plugins/Satellites/src/ui_satellitesDialog.h:683
+#: plugins/Satellites/src/ui_satellitesDialog.h:697
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr "Name:"
@@ -4091,7 +4102,7 @@ msgid "Vertical flip"
 msgstr "Vertkal spiegeln"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:910
-#: plugins/Satellites/src/ui_satellitesDialog.h:718
+#: plugins/Satellites/src/ui_satellitesDialog.h:732
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
@@ -4103,7 +4114,7 @@ msgid "About plugin"
 msgstr "Über Modul"
 
 #: plugins/Satellites/src/Satellites.cpp:65
-#: plugins/Satellites/src/ui_satellitesDialog.h:705
+#: plugins/Satellites/src/ui_satellitesDialog.h:719
 msgid "Satellites"
 msgstr "Satelliten"
 
@@ -4199,11 +4210,11 @@ msgstr "Der Satellit ist nicht sichtbar"
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:258
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
 msgid "Stellarium Satellites Plugin"
 msgstr "Stellarium Satelliten-Plugin"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:263
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:291
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
@@ -4211,18 +4222,18 @@ msgstr ""
 "Die Satellitenerweiterung kann die Positionen von künstlichen Satelliten in "
 "der Erdumlaufbahn vorhersagen."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:265
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:293
 msgid "Notes for users"
 msgstr "Hinweise für Benutzer"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:266
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:294
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
 "Satelliten und deren Umlaufbahnen werden nur angezeigt, wenn sich der "
 "Beobachter auf der Erde befindet."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:267
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
@@ -4232,7 +4243,7 @@ msgstr ""
 "(einige Tage, Wochen oder evtl. 1 Monat in die Vergangenheit und Zukunft). "
 "Außerhalb dieses Zeitrahmens sind große Abweichungen zu erwarten."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:268
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:296
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
@@ -4242,7 +4253,7 @@ msgstr ""
 "regelmäßig aktualisiert werden."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:270
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:298
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -4254,7 +4265,7 @@ msgstr ""
 "und befindet sich im Datenordner des Benutzers unter "
 "».stellarium/modules/Satellites/«."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:276
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:304
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
@@ -4263,11 +4274,11 @@ msgstr ""
 "Funktionen sind fehlerhaft, unvollständig oder nicht vorhanden."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:280
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:308
 msgid "TLE data updates"
 msgstr "Aktualisierungen der TLE-Daten"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:281
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:309
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more "
@@ -4277,7 +4288,7 @@ msgstr ""
 "herunterladen. In der Voreinstellung wird das Plugin die TLE-Daten "
 "aktualisieren, wenn diese älter als 72 Stunden sind. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:282
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:310
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -4289,7 +4300,7 @@ msgstr ""
 "Rechner befindet. Diese Datei muss im selben Format sein, wie die Celestrak-"
 "Aktualisierungen (für ein Beispiel siehe %1)."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:283
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:311
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
@@ -4298,11 +4309,11 @@ msgstr ""
 "am Ende etwas in eckigen Klammern enthält, wird dieser Teil entfernt, bevor "
 "die Daten benutzt werden."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:286
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:314
 msgid "Adding new satellites"
 msgstr "Neue Satelliten hinzufügen"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:287
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:315
 msgid ""
 "1. Make sure the satellite(s) you wish to add are included in one of the "
 "URLs listed in the Sources tab of the satellites configuration dialog. 2. Go "
@@ -4315,11 +4326,11 @@ msgstr ""
 "2. Wechsle zum Satelliten-Tab und klicke die Schaltfläche '+'. \r\n"
 "3. Wähle den/die gewünschten Satelliten und drücke 'hinzufügen'."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:289
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:317
 msgid "Technical notes"
 msgstr "Technische Hinweise"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:290
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:318
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
@@ -4327,7 +4338,7 @@ msgstr ""
 "Die Positionen werden mithilfe der SGP4- & SDP4-Methoden berechnet, "
 "ausgehend von NORAD-TLE-Eingabedaten. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:291
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:319
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
@@ -4336,21 +4347,21 @@ msgstr ""
 "korrigierten Spacetrack Report #3 (sowie Spacetrack Report #6) geschrieben. "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:293
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
 #, qt-format
 msgid "See %1this document%2 for details."
 msgstr "Weitere Details gibt es %1hier%2."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:295
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:112
 msgid "Links"
 msgstr "Verknüpfungen"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:296
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:324
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:113
@@ -4361,8 +4372,8 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:299
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:122
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:116
@@ -4371,8 +4382,8 @@ msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Wenn Sie Fragen haben, können Sie %1hier eine Antwort erhalten%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:301
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:118
@@ -4381,8 +4392,8 @@ msgid "Bug reports can be made %1here%2."
 msgstr "Fehlerberichte können %1hier%2 eingereicht werden."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:303
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:331
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
@@ -4393,18 +4404,18 @@ msgstr ""
 "Wenn Sie neue Funktionen wünschen, erstellen Sie bitte einen Fehlerbericht "
 "und markieren Sie ihn als »wishlist«."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:349
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:153
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:146
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:139
 msgid "Internet updates disabled"
 msgstr "Internet-Aktualisierungen deaktiviert"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:323
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:355
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:153
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:187
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:351
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:383
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:155
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:189
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:148
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:188
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
@@ -4414,16 +4425,16 @@ msgstr "Internet-Aktualisierungen deaktiviert"
 msgid "Updating now..."
 msgstr "Aktualisierung läuft …"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:325
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:155
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:353
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
 msgid "Next update: < 1 minute"
 msgstr "Nächste Aktualisierung in: < 1 Minute"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:327
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:355
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:159
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:152
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
@@ -4431,8 +4442,8 @@ msgstr "Nächste Aktualisierung in: < 1 Minute"
 msgid "Next update: %1 minutes"
 msgstr "Nächste Aktualisierung in: %1 Minuten"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:329
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:159
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:357
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
@@ -4440,9 +4451,9 @@ msgstr "Nächste Aktualisierung in: %1 Minuten"
 msgid "Next update: %1 hours"
 msgstr "Nächste Aktualisierung in: %1 Stunden"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:344
-#: plugins/Satellites/src/ui_satellitesDialog.h:647
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:372
+#: plugins/Satellites/src/ui_satellitesDialog.h:661
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
 #: plugins/Quasars/src/ui_quasarsDialog.h:257
@@ -4453,52 +4464,52 @@ msgstr "Nächste Aktualisierung in: %1 Stunden"
 msgid "Update now"
 msgstr "Jetzt aktualisieren"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:346
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:374
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:180
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 msgid "Update from files"
 msgstr "Aktualisierung mittels Dateien"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:358
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:190
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:386
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:192
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:191
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:205
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Update error"
 msgstr "Aktualisierungsfehler"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:365
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:393
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 missing"
 msgstr "%1/%2 Satellit(en) aktualisiert; %3 fehlt/fehlen"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:422
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:450
 msgid "[new source]"
 msgstr "[neue Quelle]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:489
 msgid "[orbit calculation error]"
 msgstr "[Fehler bei der Bahnberechnung]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:490
 msgid "[all newly added]"
 msgstr "[alle neu hinzugefügten]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:463
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:491
 msgid "[all not displayed]"
 msgstr "[alle nicht angezeigten]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:464
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:492
 msgid "[all displayed]"
 msgstr "[alle angezeigten]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:465
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:493
 msgid "[all]"
 msgstr "[alle]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:597
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:633
 msgid "Select TLE Update File"
 msgstr "Wählen Sie die TLE-Aktualisierungsdatei"
 
@@ -4535,16 +4546,16 @@ msgstr ""
 msgid "Catalog Number: %1"
 msgstr "Katalognummer: %1"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:640
-#: plugins/Satellites/src/ui_satellitesDialog.h:641
+#: plugins/Satellites/src/ui_satellitesDialog.h:654
+#: plugins/Satellites/src/ui_satellitesDialog.h:655
 msgid "Satellites Configuration"
 msgstr "Satelliten-Konfiguration"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:643
+#: plugins/Satellites/src/ui_satellitesDialog.h:657
 msgid "Update TLE lists from Internet sources"
 msgstr "Internet-Aktualisierungen der TLE-Listen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:644
+#: plugins/Satellites/src/ui_satellitesDialog.h:658
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:253
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:253
@@ -4552,7 +4563,7 @@ msgstr "Internet-Aktualisierungen der TLE-Listen"
 msgid "Update from Internet sources"
 msgstr "Aktualisierungen aus dem Internet"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:645
+#: plugins/Satellites/src/ui_satellitesDialog.h:659
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Quasars/src/ui_quasarsDialog.h:254
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:254
@@ -4560,51 +4571,51 @@ msgstr "Aktualisierungen aus dem Internet"
 msgid "Last update:"
 msgstr "Zuletzt aktualisiert:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:646
+#: plugins/Satellites/src/ui_satellitesDialog.h:660
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:239
 msgid "Update frequency (hours):"
 msgstr "Aktualisierungs-Rhythmus (Stunden):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:648
+#: plugins/Satellites/src/ui_satellitesDialog.h:662
 msgid "Labels"
 msgstr "Beschriftungen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:649
+#: plugins/Satellites/src/ui_satellitesDialog.h:663
 msgid "Label font size (pixels):"
 msgstr "Schriftgröße der Beschriftung (Pixel):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:650
+#: plugins/Satellites/src/ui_satellitesDialog.h:664
 msgid "Orbit lines"
 msgstr "Bahnlinien"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:652
-#: plugins/Satellites/src/ui_satellitesDialog.h:656
+#: plugins/Satellites/src/ui_satellitesDialog.h:666
+#: plugins/Satellites/src/ui_satellitesDialog.h:670
 msgid "Number of segments used to draw the line"
 msgstr "Anzahl der Bahnlinien-Segmente"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:654
+#: plugins/Satellites/src/ui_satellitesDialog.h:668
 msgid "Number of  segments:"
 msgstr "Anzahl der Segmente:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:659
-#: plugins/Satellites/src/ui_satellitesDialog.h:663
+#: plugins/Satellites/src/ui_satellitesDialog.h:673
+#: plugins/Satellites/src/ui_satellitesDialog.h:677
 msgid "Duration of a single segment in seconds"
 msgstr "Dauer eines einzelnen Segments in Sekunden"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:661
+#: plugins/Satellites/src/ui_satellitesDialog.h:675
 msgid "Segment length (s):"
 msgstr "Segment-Länge (s):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:666
-#: plugins/Satellites/src/ui_satellitesDialog.h:669
+#: plugins/Satellites/src/ui_satellitesDialog.h:680
+#: plugins/Satellites/src/ui_satellitesDialog.h:683
 msgid "Number of segments used to draw each end of the line"
 msgstr "Anzahl der Segmente am Ende jeder Bahnllinie"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:671
+#: plugins/Satellites/src/ui_satellitesDialog.h:685
 msgid "Fade length:"
 msgstr "Dauer des Überblendens:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:672
+#: plugins/Satellites/src/ui_satellitesDialog.h:686
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:260
@@ -4612,7 +4623,7 @@ msgstr "Dauer des Überblendens:"
 msgid "Restore default settings"
 msgstr "Standardwerte wiederherstellen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:673
+#: plugins/Satellites/src/ui_satellitesDialog.h:687
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:261
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:261
@@ -4620,7 +4631,7 @@ msgstr "Standardwerte wiederherstellen"
 msgid "Save settings as default"
 msgstr "Einstallungen als Standard speichern"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:674
+#: plugins/Satellites/src/ui_satellitesDialog.h:688
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:244
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:262
@@ -4628,59 +4639,59 @@ msgstr "Einstallungen als Standard speichern"
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:676
+#: plugins/Satellites/src/ui_satellitesDialog.h:690
 msgid "Display the selected satellite(s)"
 msgstr "Gewählte(n) Satelliten anzeigen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:678
+#: plugins/Satellites/src/ui_satellitesDialog.h:692
 msgid "Displayed"
 msgstr "Angezeigt"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:680
+#: plugins/Satellites/src/ui_satellitesDialog.h:694
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr "Bahnlinie(n) des/der ausgewählten Satelliten anzeigen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:682
+#: plugins/Satellites/src/ui_satellitesDialog.h:696
 msgid "Orbit"
 msgstr "Umlaufbahn"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:684
+#: plugins/Satellites/src/ui_satellitesDialog.h:698
 msgid "Catalog number:"
 msgstr "Katalognummer:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:685
+#: plugins/Satellites/src/ui_satellitesDialog.h:699
 msgid "Description:"
 msgstr "Beschreibung:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:686
+#: plugins/Satellites/src/ui_satellitesDialog.h:700
 msgid "Groups:"
 msgstr "Gruppen:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:688
+#: plugins/Satellites/src/ui_satellitesDialog.h:702
 msgid "Comma separated list of groups"
 msgstr "Komma-getrennte Liste der Gruppen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:690
+#: plugins/Satellites/src/ui_satellitesDialog.h:704
 msgid "TLE data:"
 msgstr "TLE-Daten:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:692
+#: plugins/Satellites/src/ui_satellitesDialog.h:706
 msgid "NORAD two line element orbit data"
 msgstr "Bahndaten nach NORAD Two Line Elements"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:695
+#: plugins/Satellites/src/ui_satellitesDialog.h:709
 msgid "Remove the selected satellites"
 msgstr "Ausgewählte Satelliten entfernen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:698
+#: plugins/Satellites/src/ui_satellitesDialog.h:712
 msgid "Add more satellites"
 msgstr "Mehr Satelliten hinzufügen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:702
+#: plugins/Satellites/src/ui_satellitesDialog.h:716
 msgid "Save changes"
 msgstr "Änderungen speichern"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:707
+#: plugins/Satellites/src/ui_satellitesDialog.h:721
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
@@ -4688,15 +4699,15 @@ msgstr ""
 "URL der gewählten Quelle eintragen/ändern. Änderungen werden mit Druck auf "
 "die Entertaste gespeichert."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:710
+#: plugins/Satellites/src/ui_satellitesDialog.h:724
 msgid "Add new source"
 msgstr "Neue Quelle hinzufügen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:714
+#: plugins/Satellites/src/ui_satellitesDialog.h:728
 msgid "Remove selected source"
 msgstr "Ausgewählte Quelle entfernen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:717
+#: plugins/Satellites/src/ui_satellitesDialog.h:731
 msgid "Sources"
 msgstr "Quellen"
 
@@ -5160,50 +5171,62 @@ msgstr ""
 "Zeitzone sowie des Datums- und Zeitformats in der unteren Menüleiste."
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
+#: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "January"
 msgstr "Januar"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
+#: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "February"
 msgstr "Februar"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
+#: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "March"
 msgstr "März"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
+#: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "April"
 msgstr "April"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
+#: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "May"
 msgstr "Mai"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
+#: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "June"
 msgstr "Juni"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
+#: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "July"
 msgstr "Juli"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
+#: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "August"
 msgstr "August"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
+#: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "September"
 msgstr "September"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
+#: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "October"
 msgstr "Oktober"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
+#: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "November"
 msgstr "November"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
+#: plugins/Supernovae/src/Supernovae.cpp:614
 msgid "December"
 msgstr "Dezember"
 
@@ -5819,18 +5842,14 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
 msgid ""
 "A plugin that shows some historical supernovae brighter than visual "
-"magnitude 10: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), "
-"SN 1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 "
-"October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN "
-"1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
-"(13 September)."
+"magnitude 10: "
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 msgid "Light curves"
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:114
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 #, qt-format
 msgid ""
 "This plugin implements a simple model of light curves for different "
@@ -5839,31 +5858,32 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
 msgid "Acknowledgments"
 msgstr "Danksagungen"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr ""
-
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
-msgid "Sergei Blinnikov"
-msgstr ""
+"Wir danken den folgenden Personen für ihren Beitrag und wertvolle Kommentare:"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
+msgid "Sergei Blinnikov"
+msgstr "Sergei Blinnikov"
+
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 msgid "Institute for Theoretical and Experimental Physics"
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
 msgid "in Russia"
 msgstr "in Russland"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 #, qt-format
@@ -5872,14 +5892,14 @@ msgid ""
 "format of catalog, you can %1get info here%2."
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:163
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
 #, qt-format
 msgid "Next update: %1 days"
 msgstr "Nächste Aktualisierung erfolgt in %1 Tagen."
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:199
 msgid "Historical supernovae is updated"
 msgstr ""
 
@@ -6213,7 +6233,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:197
 msgid "days"
-msgstr ""
+msgstr "Tage"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:198
 #: plugins/Exoplanets/src/Exoplanet.cpp:199
