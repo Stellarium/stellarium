@@ -27,6 +27,7 @@
 #include "VecMath.hpp"
 #include "StelFader.hpp"
 #include "renderer/StelTextureTypes.hpp"
+#include "renderer/StelVertexBuffer.hpp"
 #include "StelProjectorType.hpp"
 
 // The callback type for the external position computation function
@@ -212,9 +213,21 @@ public:
 	// Should move to an OrbitPath class which works on a SolarSystemObject, not a Planet
 	void setFlagOrbits(bool b){orbitFader = b;}
 	bool getFlagOrbits(void) const {return orbitFader;}
+
+	//! A simple 2D vertex with only a position.
+	struct Vertex2D
+	{
+		Vec2f position;
+		Vertex2D(const float x, const float y) : position(x, y){}
+		VERTEX_ATTRIBUTES(Vec2f Position);
+	};
+
+	//! Vertex buffer used to draw the orbit.
+	StelVertexBuffer<Vertex2D>* orbitVertices;
+
 	LinearFader orbitFader;
 	// draw orbital path of Planet
-	void drawOrbit(const StelCore*);
+	void drawOrbit(const StelCore* core, class StelRenderer* renderer);
 	Vec3d orbit[ORBIT_SEGMENTS+1];   // store heliocentric coordinates for drawing the orbit
 	Vec3d orbitP[ORBIT_SEGMENTS+1];  // store local coordinate for orbit
 	double lastOrbitJD;
