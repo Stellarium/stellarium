@@ -647,8 +647,11 @@ Vec3d StelCore::getObserverHeliocentricEclipticPos() const
 // Set the location to use by default at startup
 void StelCore::setDefaultLocationID(const QString& id)
 {
+	bool ok = false;
+	StelApp::getInstance().getLocationMgr().locationForSmallString(id, &ok);
+	if (!ok)
+		return;
 	defaultLocationID = id;
-	StelApp::getInstance().getLocationMgr().locationForSmallString(id);
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	conf->setValue("init_location/location", id);
