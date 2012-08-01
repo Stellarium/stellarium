@@ -15,6 +15,7 @@ ADD_CUSTOM_TARGET(
         --keyword=N_
         --keyword=q_
         --keyword=translate:2
+        --keyword=translate:2,3c
         --add-comments=TRANSLATORS:
         --directory=${CMAKE_BINARY_DIR}
         --directory=${CMAKE_SOURCE_DIR}

@@ -146,9 +146,6 @@
       </property>
       <item>
        <widget class="QTabWidget" name="Tabs">
-        <property name="currentIndex">
-         <number>0</number>
-        </property>
         <widget class="QWidget" name="General">
          <attribute name="title">
           <string>General</string>
@@ -1233,7 +1230,7 @@
         </widget>
         <widget class="QWidget" name="About">
          <attribute name="title">
-          <string>About plugin</string>
+          <string comment="tab in plugin windows">About</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout">
           <property name="margin">
