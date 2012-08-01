@@ -206,6 +206,8 @@ class Translations
 		N_("Solar System Screensaver");
 		// TRANSLATORS: Name of script
 		N_("Constellations Tour");
+		// TRANSLATORS: Name of script
+		N_("Sun from different planets");
 
 		// Scripts description
 		N_("Look around each installed landscape.");
@@ -223,6 +225,7 @@ class Translations
 		N_("Phobos races ahead of Mars and eclipses the sun, passes thru it and then retrogrades back towards the sun and just partially eclipses it (only seen in the SH) again, then Mars totally eclipses the sun and Phobos, and then as Phobos emerges from the sun it passes through Mars' shadow and dims.");
 		N_("Screensaver of various happenings in the Solar System. 171 events in all!");
 		N_("A tour via western constellations.");
+		N_("Look at Sun from big planets of Solar system and Pluto.");
 
 		// List of countries
 		N_("Andorra");
