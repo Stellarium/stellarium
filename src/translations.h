@@ -208,6 +208,8 @@ class Translations
 		N_("Constellations Tour");
 		// TRANSLATORS: Name of script
 		N_("Sun from different planets");
+		// TRANSLATORS: Name of script
+		N_("Earth best views from other bodies");
 
 		// Scripts description
 		N_("Look around each installed landscape.");
@@ -226,6 +228,7 @@ class Translations
 		N_("Screensaver of various happenings in the Solar System. 171 events in all!");
 		N_("A tour via western constellations.");
 		N_("Look at Sun from big planets of Solar system and Pluto.");
+		N_("Earth best views from other Solar system bodies in the 21st Century.");
 
 		// List of countries
 		N_("Andorra");
