@@ -15,7 +15,14 @@
 //!
 //! Uniform variables are set through the setUniformValue() member functions.
 //! Only most commonly used data types are supported, but it is easy to add 
-//! support for more types if needed.
+//! support for more types if needed. 
+//! Some uniform variables are specified internally and need to be declared 
+//! in the shader:
+//!
+//! @li StelProjector's projection matrix: mat4f projectionMatrix
+//! @li Global color (only specified if vertex has no color attribute): vec4 globalColor
+//!
+//!
 //! Attribute variables can't be set through the API - they are set internally 
 //! from vertex buffer during drawing.
 //!
@@ -24,10 +31,74 @@
 //! @li Position: vertex
 //! @li TexCoord: texCoord
 //! @li Normal:   normal
-//! @li Color:    color
+//! @li Color:    color 
+//!
+//! Furthermore, is useUnprojectedPositionAttribute() is called, another attribute is added:
+//! 
+//! @li Position before StelProjector projection: unprojectedVertex
 //!
 //! Note that adding a shader or building can fail. After a failure, the 
 //! shader is invalid and should not be used (should be destroyed).
+//!
+//!
+//! Shader creation example:
+//!
+//! @code 
+//! // renderer is a StelRenderer*
+//! if(renderer->isGLSLSupported())
+//! {
+//! 	StelGLSLShader* shader = renderer->createGLSLShader();
+//! 	if(!shader->addVertexShader(
+//! 	   "attribute mediump vec4 vertex;\n"
+//! 	   "uniform mediump mat4 projectionMatrix;\n"
+//! 	   "void main(void)\n"
+//! 	   "{\n"
+//! 	   "    gl_Position = projectionMatrix * vertex;\n"
+//! 	   "}\n"))
+//! 	{
+//! 		qWarning() << "Error adding vertex shader: " << shader->log();
+//! 		delete shader;
+//! 		return false; // Failed creating shader
+//! 	}
+//! 	if(!shader->addFragmentShader(
+//! 	   "uniform mediump vec4 globalColor;\n"
+//! 	   "void main(void)\n"
+//! 	   "{\n"
+//! 	   "    gl_FragColor = globalColor;\n"
+//! 	   "}\n"))
+//! 	{
+//! 		qWarning() << "Error adding fragment shader: " << shader->log();
+//! 		delete shader;
+//! 		return false; // Failed creating shader
+//! 	}
+//! 	if(!shader->build())
+//! 	{
+//! 		qWarning() << "Error building shader: " << shader->log();
+//! 		delete shader;
+//! 		return false; // failed creating shader
+//! 	}
+//! 	if(!shader->log().isEmpty())
+//! 	{
+//! 		qWarning() << "Warnings during shader creation: " << shader->log();
+//! 	}
+//! }
+//! @endcode
+//!
+//! Shader usage example:
+//!
+//! @code
+//! // shader is a StelGLSLShader*
+//! // renderer is a StelRenderer*
+//! // vertices is a StelVertexBuffer<SomeVertexType>*
+//! // indices is a StelIndexBuffer*
+//! // projector is a StelProjectorP
+//!
+//! shader->bind();
+//! shader->setUniformValue("ambientLight", Vec4f(0.1f, 0.1f, 0.1f,0.1f));
+//! renderer->drawVertexBuffer(vertices, indices, projector);
+//! shader->release();
+//! @endcode
+//!
 class StelGLSLShader
 {
 public:
@@ -104,6 +175,13 @@ public:
 		setUniformValue_(name, value);
 	}
 
+	//! Does this shader need the unprojected position attribute?
+	//!
+	//! If called, the shader will have to declare another vertex attribute, 
+	//! unprojectedVertex, for vertex position before StelProjector projection.
+	//! Useful e.g. for lighting.
+	virtual void useUnprojectedPositionAttribute() = 0;
+
 protected:
 
 	//! "Default" overload of setUniformValue() implementation.
@@ -112,8 +190,12 @@ protected:
 	template<class T>
 	void setUniformValue_(const char* const name, T value)
 	{
+		Q_UNUSED(name);
+		Q_UNUSED(value);
 		//TODO C++11: use static assert here (for a compile-time error)
-		Q_ASSERT_X(false, Q_FUNC_INFO, "Unsupported uniform data type");
+		Q_ASSERT_X(false, Q_FUNC_INFO,
+		           "Unsupported uniform data type. "
+		           "Supported types: float, Vec2f, Vec3f, Vec4f, Mat4f");
 	}
 
 	//! setUniformValue() implementation for type float.
