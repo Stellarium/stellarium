@@ -37,7 +37,7 @@
 // Class which manages the displaying of the Milky Way
 MilkyWay::MilkyWay() 
 	: color(1.f, 1.f, 1.f)
-	, sphereVertices(NULL)
+	, skySphere(NULL)
 {
 	setObjectName("MilkyWay");
 	fader = new LinearFader();
@@ -48,16 +48,11 @@ MilkyWay::~MilkyWay()
 	delete fader;
 	fader = NULL;
 	
-	if(NULL == sphereVertices)
+	if(NULL == skySphere)
 	{
-		delete sphereVertices;
-		sphereVertices = NULL;
+		delete skySphere;
+		skySphere = NULL;
 	}
-	for(int row = 0; row < sphereRows.size(); ++row)
-	{
-		delete sphereRows[row];
-	}
-	sphereRows.clear();
 }
 
 void MilkyWay::init()
@@ -68,6 +63,9 @@ void MilkyWay::init()
 	tex = StelApp::getInstance().getTextureManager().createTexture("textures/milkyway.png");
 	setFlagShow(conf->value("astro/flag_milky_way").toBool());
 	setIntensity(conf->value("astro/milky_way_intensity",1.f).toFloat());
+
+	const SphereParams params = SphereParams(1.0f).resolution(20, 20).orientInside();
+	skySphere = StelGeometryBuilder().buildSphereUnlit(params);
 }
 
 
@@ -110,26 +108,11 @@ void MilkyWay::draw(StelCore* core, class StelRenderer* renderer)
 	c[2] = std::max(c[2], 0.0f);
 	c[3] = 1.0f;
 
-	// Lazily initialize the sphere
-	if(NULL == sphereVertices)
-	{
-		sphereVertices = renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleStrip);
-		for(int row = 0; row < 20; ++row)
-		{
-			sphereRows.append(renderer->createIndexBuffer(IndexType_U16));
-		}
-		StelGeometryBuilder()
-			.buildSphere(sphereVertices, sphereRows, 1.0f, 1.0f, 20, true);
-	}
-
 	renderer->setGlobalColor(Vec4f(c[0], c[1], c[2], 1.0f));
 	renderer->setCulledFaces(CullFace_Back);
 	renderer->setBlendMode(BlendMode_None);
 	tex->bind();
-	// Draw the sphere.
-	for(int row = 0; row < sphereRows.size(); ++row)
-	{
-		renderer->drawVertexBuffer(sphereVertices, sphereRows[row], prj);
-	}
+
+	skySphere->draw(renderer, prj);
 	renderer->setCulledFaces(CullFace_None);
 }

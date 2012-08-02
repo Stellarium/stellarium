@@ -246,10 +246,8 @@ private:
 	// will have to be regenerated after the change.
 	float texFov;
 
-	//! Index buffers pointing to fisheyeSphereVertices forming rows of the sphere.
-	QVector<StelIndexBuffer*> fisheyeSphereRows;
-	//! Vertices of the sphere used to draw the landscape.
-	StelVertexBuffer<VertexP3T2>* fisheyeSphereVertices;
+	//! Sphere used to draw the landscape.
+	class StelGeometrySphere* fisheyeSphere;
 };
 
 
@@ -264,10 +262,9 @@ public:
 private:
 
 	StelTextureSP mapTex;
-	//! Index buffers pointing to sphereVertices forming rows of the sphere.
-	QVector<StelIndexBuffer*> sphereRows;
-	//! Vertices of the sphere used to draw the landscape.
-	StelVertexBuffer<VertexP3T2>* sphereVertices;
+
+	//! Sphere used to draw the landscape.
+	class StelGeometrySphere* landscapeSphere;
 };
 
 #endif // _LANDSCAPE_HPP_
