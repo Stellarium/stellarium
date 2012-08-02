@@ -14,7 +14,7 @@ public:
 	//! Construct a StelQGLGLSLShader owned by specified renderer.
 	//!
 	//! Used by QGL2 renderer backend.
-	StelQGLGLSLShader(class StelQGL2Renderer* renderer) ;
+	StelQGLGLSLShader(class StelQGL2Renderer* renderer);
 
 	virtual ~StelQGLGLSLShader()
 	{
@@ -50,6 +50,11 @@ public:
 
 	virtual void release();
 
+	virtual void useUnprojectedPositionAttribute()
+	{
+		useUnprojectedPosition_ = true;
+	}
+
 	//! Get a reference to underlying shader program.
 	//!
 	//! Used by QGL2 renderer backend.
@@ -57,6 +62,14 @@ public:
 	{
 		Q_ASSERT_X(built, Q_FUNC_INFO, "Trying to use a non-built shader for drawing");
 		return program;
+	}
+
+	//! Does this vertex need the unprojected vertex position attribute?
+	//!
+	//! Used by vertex buffer backend to determine if this attribute should be provided.
+	bool useUnprojectedPosition() const
+	{
+		return useUnprojectedPosition_;
 	}
 
 protected:
@@ -73,6 +86,10 @@ protected:
 
 	//! Has the shader been built?
 	bool built;
+
+	//! Does this shader need the "unprojectedVertex" attribute (position before StelProjector
+	//! projection) ?
+	bool useUnprojectedPosition_;
 
 	virtual void setUniformValue_(const char* const name, const float value)
 	{
