@@ -39,7 +39,7 @@ public:
 	StelQGL2Renderer(QGraphicsView* parent, bool pvrSupported)
 		: StelQGLRenderer(parent, pvrSupported)
 		, initialized(false)
-		, shaderPrograms()
+		, builtinShaders()
 		, customShader(NULL)
 		, culledFaces(CullFace_None)
 	{
@@ -49,9 +49,9 @@ public:
 	{
 		invariant();
 		
-		foreach(QGLShaderProgram *program, shaderPrograms)
+		foreach(StelQGLGLSLShader *shader, builtinShaders)
 		{
-			delete program;
+			delete shader;
 		}
 		
 		initialized = false;
@@ -104,12 +104,16 @@ public:
 		// - "vertex" for vertex position
 		// - "texCoord" for texture coordinate
 		// - "normal" for vertex normal
-		// - "color" for vertex color
+		// - "color" for vertex color 
+		//
+		// GLSLShader can also require unprojected position attribute, 
+		// "unprojectedVertex", but this is only specified if the shader requires it.
+		//
 		
 		// All vertices have the same color.
-		plainShaderProgram = loadShaderProgram
+		plainShader = loadBuiltinShader
 		(
-			"plainShaderProgram"
+			"plainShader"
 			,
 			"attribute mediump vec4 vertex;\n"
 			"uniform mediump mat4 projectionMatrix;\n"
@@ -124,17 +128,17 @@ public:
 			"    gl_FragColor = globalColor;\n"
 			"}\n"
 		);
-		if(NULL == plainShaderProgram)
+		if(NULL == plainShader)
 		{
-			qWarning() << "StelQGL2Renderer::init failed to load plain shader program";
+			qWarning() << "StelQGL2Renderer::init failed to load plain shader";
 			return false;
 		}
-		shaderPrograms.append(plainShaderProgram);
+		builtinShaders.append(plainShader);
 		
 		// Vertices with per-vertex color.
-		colorShaderProgram = loadShaderProgram
+		colorShader = loadBuiltinShader
 		(
-			"colorShaderProgram"
+			"colorShader"
 			,
 			"attribute highp vec4 vertex;\n"
 			"attribute mediump vec4 color;\n"
@@ -152,17 +156,17 @@ public:
 			"    gl_FragColor = outColor;\n"
 			"}\n"
 		);
-		if(NULL == colorShaderProgram)
+		if(NULL == colorShader)
 		{
 			qWarning() << "StelQGL2Renderer::init failed to load color shader program";
 			return false;
 		}
-		shaderPrograms.append(colorShaderProgram);
+		builtinShaders.append(colorShader);
 		
 		// Textured mesh.
-		textureShaderProgram = loadShaderProgram
+		textureShader = loadBuiltinShader
 		(
-			"textureShaderProgram"
+			"textureShader"
 			,
 			"attribute highp vec4 vertex;\n"
 			"attribute mediump vec2 texCoord;\n"
@@ -182,17 +186,17 @@ public:
 			"    gl_FragColor = texture2D(tex, texc) * globalColor;\n"
 			"}\n"
 		);
-		if(NULL == textureShaderProgram)
+		if(NULL == textureShader)
 		{
-			qWarning() << "StelQGL2Renderer::init failed to load texture shader program";
+			qWarning() << "StelQGL2Renderer::init failed to load texture shader";
 			return false;
 		}
-		shaderPrograms.append(textureShaderProgram);
+		builtinShaders.append(textureShader);
 		
 		// Textured mesh interpolated with per-vertex color.
-		colorTextureShaderProgram = loadShaderProgram
+		colorTextureShader = loadBuiltinShader
 		(
-			"colorTextureShaderProgram"
+			"colorTextureShader"
 			,
 			"attribute highp vec4 vertex;\n"
 			"attribute mediump vec2 texCoord;\n"
@@ -215,12 +219,12 @@ public:
 			"    gl_FragColor = texture2D(tex, texc) * outColor;\n"
 			"}\n"
 		);
-		if(NULL == colorTextureShaderProgram)
+		if(NULL == colorTextureShader)
 		{
-			qWarning() << "StelQGL2Renderer::init failed to load colorTexture shader program";
+			qWarning() << "StelQGL2Renderer::init failed to load colorTexture shader";
 			return false;
 		}
-		shaderPrograms.append(colorTextureShaderProgram);
+		builtinShaders.append(colorTextureShader);
 		
 		if(!StelQGLRenderer::init())
 		{
@@ -229,10 +233,10 @@ public:
 		}
 		
 		// TODO remove this as we refactor StelPainter.
-		StelPainter::TEMPSpecifyShaders(plainShaderProgram,
-		                                colorShaderProgram,
-		                                textureShaderProgram,
-		                                colorTextureShaderProgram);
+		StelPainter::TEMPSpecifyShaders(&(plainShader->getProgram()),
+		                                &(colorShader->getProgram()),
+		                                &(textureShader->getProgram()),
+		                                &(colorTextureShader->getProgram()));
 		initialized = true;
 		invariant();
 		return true;
@@ -252,27 +256,21 @@ public:
 
 	virtual bool isGLSLSupported() const {return true;}
 
-	//! Get shader program corresponding to specified vertex format.
+	//! Get shader corresponding to specified vertex format.
 	//!
-	//! If the user binds a custom shader
-	//! (StelGLSLShader, in this case StelQGLGLSLShader),
-	//! this shader's shader program is returned instead.
-	//! (I.e. custom shader programs override builtin ones.)
+	//! If the user binds a custom shader (StelGLSLShader, in this case StelQGLGLSLShader),
+	//! this shader is returned instead. (I.e. custom shader programs override builtin ones.)
 	//!
 	//! @param attributes     Vertex attributes used in the vertex format.
 	//! @param attributeCount Number of vertex attributes.
-	//! @return Pointer to the shader program.
-	QGLShaderProgram* getShaderProgram
-		(const StelVertexAttribute* const attributes, const int attributeCount)
+	//! @return Pointer to the shader.
+	StelQGLGLSLShader* getShader(const StelVertexAttribute* const attributes, const int attributeCount)
 	{
 		invariant();
 
 		// A custom shader (StelGLSLShader - in this case StelQGLGLSLShader)
 		// overrides builtin shaders.
-		if(NULL != customShader)
-		{
-			return &(customShader->getProgram());
-		}
+		if(NULL != customShader) {return customShader;}
 
 		// Determine which vertex attributes are used.
 		bool position, texCoord, normal, color;
@@ -296,10 +294,10 @@ public:
 
 		invariant();
 		// There are possible combinations - 4 are implemented right now.
-		if(!texCoord && !normal && !color) {return plainShaderProgram;}
-		if(!texCoord && !normal && color)  {return colorShaderProgram;}
-		if(texCoord  && !normal && !color) {return textureShaderProgram;}
-		if(texCoord  && !normal && color)  {return colorTextureShaderProgram;}
+		if(!texCoord && !normal && !color) {return plainShader;}
+		if(!texCoord && !normal && color)  {return colorShader;}
+		if(texCoord  && !normal && !color) {return textureShader;}
+		if(texCoord  && !normal && color)  {return colorTextureShader;}
 
 		// If we reach here, the vertex format has no shader implemented so we 
 		// least inform the user about what vertex format fails (so it can
@@ -473,17 +471,17 @@ private:
 	
 	//! Contains all loaded shaders.
 	//!
-	//! Currently, these are duplicates of plainShaderProgram, etc. and only simplify cleanup.
-	QVector<QGLShaderProgram *> shaderPrograms;
+	//! Currently, these are duplicates of plainShader, etc. and only simplify cleanup.
+	QVector<StelQGLGLSLShader *> builtinShaders;
 	
 	//! Shader that sets all vertices to the same color.
-	QGLShaderProgram* plainShaderProgram;
+	StelQGLGLSLShader* plainShader;
 	//! Shader used for per-vertex color.
-	QGLShaderProgram* colorShaderProgram;
+	StelQGLGLSLShader* colorShader;
 	//! Shader used for texturing.
-	QGLShaderProgram* textureShaderProgram;
+	StelQGLGLSLShader* textureShader;
 	//! Shader used for texturing interpolated with a per-vertex color.
-	QGLShaderProgram* colorTextureShaderProgram;
+	StelQGLGLSLShader* colorTextureShader;
 
 	//! Custom shader program specified by the user.
 	//!
@@ -500,49 +498,49 @@ private:
 	//too much time (which is unlikely)
 	
 	
-	//! Load a shader program from specified source.
-	//!
-	//! This will load a shader program composed of one vertex shader and one fragment shader.
+	//! Load a builtin shader from specified source.
 	//!
 	//! @param name Name used for debugging.
 	//! @param vSrc Vertex shader source.
 	//! @param fSrc Fragment shader source.
 	//!
 	//! @return Complete shader program at success, NULL on compiling or linking error.
-	QGLShaderProgram *loadShaderProgram(const char* const name,
-	                                    const char* const vSrc, const char* const fSrc)
+	StelQGLGLSLShader *loadBuiltinShader(const char* const name,
+	                                     const char* const vSrc, const char* const fSrc)
 	{
 		// No invariants, as this is called from init - before the Renderer is
 		// in fully valid state.
-		QGLShaderProgram* result = new QGLShaderProgram(getGLContext());
-		
-		// We add shaders directly from source instead of working with
-		// QGLShader, as in that case we would also need to take care of QGLShader destruction.
+		StelQGLGLSLShader* result = dynamic_cast<StelQGLGLSLShader*>(createGLSLShader());
 		
 		// Compile and add vertex shader.
-		if(!result->addShaderFromSourceCode(QGLShader::Vertex, vSrc))
+		if(!result->addVertexShader(QString(vSrc)))
 		{
-			qWarning() << "Failed to compile vertex shader of program \"" 
+			qWarning() << "Failed to compile vertex shader of builtin shader \"" 
 			           << name << "\" : " << result->log();
 			delete result;
 			return NULL;
 		}
 		// Compile and add fragment shader.
-		if(!result->addShaderFromSourceCode(QGLShader::Fragment, fSrc))
+		if(!result->addFragmentShader(QString(fSrc)))
 		{
-			qWarning() << "Failed to compile fragment shader of program \"" 
+			qWarning() << "Failed to compile fragment shader of builtin shader \"" 
 			           << name << "\" : " << result->log();
 			delete result;
 			return NULL;
 		}
 		// Link the shader program.
-		if(!result->link())
+		if(!result->build())
 		{
-			qWarning() << "Failed to link shader program \"" 
+			qWarning() << "Failed to link builtin shader \"" 
 			           << name << "\" : " << result->log();
 			delete result;
 			return NULL;
 		}
+		if(!result->log().isEmpty())
+ 		{
+ 			qWarning() << "Warnings during creation of builtin shader \"" << name 
+			           << "\" :" << result->log();
+ 		}
 		
 		return result;
 	}
