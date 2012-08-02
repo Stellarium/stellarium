@@ -7,10 +7,6 @@
 //
 
 
-var atmoshere = LandscapeMgr.getFlagAtmosphere();
-var fog = LandscapeMgr.getFlagFog();
-var landscapeID = LandscapeMgr.getCurrentLandscapeID();
-
 core.setObserverLocation(76.61, -37.50, 17, 1, "", "Deimos");
 core.setDate("2017-04-26T18:47:00", "utc");
 
@@ -27,7 +23,3 @@ core.setTimeRate(10);
 core.wait(25);
 core.selectObjectByName("Phobos", pointer = true);
 core.setTimeRate(10);
-
-LandscapeMgr.setFlagAtmosphere(atmosphere);
-LandscapeMgr.setFlagFog(fog);
-LandscapeMgr.setCurrentLandscapeID(landscapeID);

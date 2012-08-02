@@ -46,12 +46,6 @@ for (i=0; i<planets.length; i++)
 	LabelMgr.setLabelShow(psize, false);
 }
 
-LandscapeMgr.setFlagAtmosphere(atmosphere);
-LandscapeMgr.setFlagFog(fog);
-core.wait(1);
-LandscapeMgr.setCurrentLandscapeID(LandscapeMgr.getDefaultLandscapeID());
-core.wait(1);
-core.setObserverLocation(location, 5);
 core.clear("natural");
 core.setGuiVisible(true);
-SolarSystem.setFlagLabels(true);
+core.goHome();

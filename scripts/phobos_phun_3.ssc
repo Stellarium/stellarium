@@ -6,10 +6,6 @@
 // Description: Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068.
 //
 
-var atmosphere = LandscapeMgr.getFlagAtmosphere();
-var fog = LandscapeMgr.getFlagFog();
-var landscapeID = LandscapeMgr.getCurrentLandscapeID();
-
 LandscapeMgr.setCurrentLandscapeID("mars");
 
 core.setTimeRate(1);
@@ -40,6 +36,3 @@ core.waitFor(5);
 
 StelMovementMgr.zoomTo(4.8, 1);
 
-LandscapeMgr.setFlagAtmosphere(atmosphere);
-LandscapeMgr.setFlagFog(fog);
-LandscapeMgr.setCurrentLandscapeID(landscapeID);

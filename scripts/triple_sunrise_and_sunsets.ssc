@@ -11,9 +11,6 @@ var long = 90;
 var ds = 2455361;
 
 core.setObserverLocation(90, -0.00, 1, 1, "", "Mercury");
-var landscapeID = LandscapeMgr.getCurrentLandscapeID();
-var atmosphere = LandscapeMgr.getFlagAtmosphere();
-var fog = LandscapeMgr.getFlagFog();
 
 LandscapeMgr.setFlagAtmosphere(false);
 LandscapeMgr.setFlagFog(false);
@@ -251,8 +248,12 @@ while (r == 1)
 	core.setTimeRate(1);
 
 	LabelMgr.deleteAllLabels();
+	
+	if (d == 3)
+	{
+		r = 0;
+	}
 }
 
-LandscapeMgr.setFlagAtmosphere(atmosphere);
-LandscapeMgr.setFlagFog(fog);
-LandscapeMgr.setCurrentLandscapeID(landscapeID);
+core.goHome();
+

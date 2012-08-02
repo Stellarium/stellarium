@@ -771,7 +771,7 @@ void StelGui::home()
 
 	StelLocation location = StelApp::getInstance().getLocationMgr().locationForSmallString(defaultLocationID);
 
-	core->moveObserverTo(location);
+	core->moveObserverTo(location);	
 	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
 	landscapeMgr->setCurrentLandscapeID(landscapeMgr->getDefaultLandscapeID());
 
@@ -779,6 +779,11 @@ void StelGui::home()
 	PlanetP p = ssm->searchByEnglishName(location.planetName);
 	landscapeMgr->setFlagAtmosphere(p->hasAtmosphere());
 	landscapeMgr->setFlagFog(p->hasAtmosphere());
+
+	GETSTELMODULE(StelObjectMgr)->unSelect();
+
+	StelMovementMgr* smmgr = core->getMovementMgr();
+	smmgr->setViewDirectionJ2000(core->altAzToJ2000(smmgr->getInitViewingDirection(), StelCore::RefractionOff));
 }
 
 //! Reload the current Qt Style Sheet (Debug only)
