@@ -541,21 +541,14 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelRenderer* renderer)
 
 LandscapeFisheye::LandscapeFisheye(float _radius) 
 	: Landscape(_radius)
-	, fisheyeSphereVertices(NULL)
+	, fisheyeSphere(NULL)
 {}
 
 LandscapeFisheye::~LandscapeFisheye()
 {
-	for(int buffer = 0; buffer < fisheyeSphereRows.size(); ++buffer)
+	if(NULL != fisheyeSphere)
 	{
-		delete fisheyeSphereRows[buffer];
-	}
-	fisheyeSphereRows.clear();
-
-	if(NULL != fisheyeSphereVertices)
-	{
-		delete fisheyeSphereVertices;
-		fisheyeSphereVertices = NULL;
+		delete fisheyeSphere;
 	}
 }
 
@@ -585,6 +578,9 @@ void LandscapeFisheye::create(const QString _name, const QString& _maptex, float
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTextureParams().generateMipmaps());
 	texFov = atexturefov*M_PI/180.f;
 	angleRotateZ = aangleRotateZ*M_PI/180.f;
+
+	const SphereParams params = SphereParams(radius).resolution(rows, cols).orientInside();
+	fisheyeSphere = StelGeometryBuilder().buildSphereFisheye(params, texFov);
 }
 
 void LandscapeFisheye::draw(StelCore* core, StelRenderer* renderer)
@@ -607,28 +603,8 @@ void LandscapeFisheye::draw(StelCore* core, StelRenderer* renderer)
 	renderer->setCulledFaces(CullFace_Back);
 	renderer->setBlendMode(BlendMode_Alpha);
 	mapTex->bind();
-	// Patch GZ: (40,20)->(cols,rows)
 
-	// Lazily generate the sphere.
-	if(fisheyeSphereRows.empty())
-	{
-		// Each row of the sphere is a separate triangle strip using the same vertex buffer.
-		for(int row = 0; row < rows; ++row)
-		{
-			fisheyeSphereRows.append(renderer->createIndexBuffer(IndexType_U16));
-		}
-		fisheyeSphereVertices = 
-			renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleStrip);
-		StelGeometryBuilder()
-			.buildSphereFisheye(fisheyeSphereVertices, fisheyeSphereRows, 
-			                    radius, cols, texFov, true);
-	}
-
-	// Draw the sphere.
-	for(int buffer = 0; buffer < fisheyeSphereRows.size(); ++buffer)
-	{
-		renderer->drawVertexBuffer(fisheyeSphereVertices, fisheyeSphereRows[buffer], projector);
-	}
+	fisheyeSphere->draw(renderer, projector);
 
 	renderer->setCulledFaces(CullFace_None);
 }
@@ -638,21 +614,14 @@ void LandscapeFisheye::draw(StelCore* core, StelRenderer* renderer)
 
 LandscapeSpherical::LandscapeSpherical(float _radius) 
 	: Landscape(_radius)
-	, sphereVertices(NULL)
 {}
 
 LandscapeSpherical::~LandscapeSpherical()
 {
-	for(int buffer = 0; buffer < sphereRows.size(); ++buffer)
+	if(NULL != landscapeSphere)
 	{
-		delete sphereRows[buffer];
-	}
-	sphereRows.clear();
-
-	if(NULL != sphereVertices)
-	{
-		delete sphereVertices;
-		sphereVertices = NULL;
+		delete landscapeSphere;
+		landscapeSphere = NULL;
 	}
 }
 
@@ -683,6 +652,10 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, flo
 	name = _name;
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTextureParams().generateMipmaps());
 	angleRotateZ = _angleRotateZ*M_PI/180.f;
+
+	const SphereParams params 
+		= SphereParams(radius).resolution(20, 40).orientInside().flipTexture();
+	landscapeSphere = StelGeometryBuilder().buildSphereUnlit(params);
 }
 
 
@@ -706,24 +679,8 @@ void LandscapeSpherical::draw(StelCore* core, StelRenderer* renderer)
 	renderer->setCulledFaces(CullFace_Back);
 	mapTex->bind();
 
-	if(NULL == sphereVertices)
-	{
-		// Each row of the sphere is a separate triangle strip using the same vertex buffer.
-		for(int row = 0; row < 20; ++row)
-		{
-			sphereRows.append(renderer->createIndexBuffer(IndexType_U16));
-		}
-		sphereVertices = 
-			renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleStrip);
-		StelGeometryBuilder()
-			.buildSphere(sphereVertices, sphereRows, radius, 1.0, 40, true, true);
-	}
-	// Draw the sphere.
-	for(int buffer = 0; buffer < sphereRows.size(); ++buffer)
-	{
-		renderer->drawVertexBuffer(sphereVertices, sphereRows[buffer], projector);
-	}
 
+	landscapeSphere->draw(renderer, projector);
 	// TODO: verify that this works correctly for custom projections
 	// seam is at East
 	// GZ: Want better angle resolution, optional!

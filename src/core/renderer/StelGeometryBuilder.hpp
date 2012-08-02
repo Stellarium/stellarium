@@ -1,9 +1,296 @@
 #ifndef _STELGEOMETRYBUILDER_HPP_
 #define _STELGEOMETRYBUILDER_HPP_
 
-#include "StelIndexBuffer.hpp"
-#include "StelVertexBuffer.hpp"
+
 #include "GenericVertexTypes.hpp"
+#include "StelIndexBuffer.hpp"
+#include "StelLight.hpp"
+#include "StelProjector.hpp"
+#include "StelVertexBuffer.hpp"
+#include "VecMath.hpp"
+
+
+//! Parameters specifying how to generate a sphere.
+//!
+//! These are passed to StelGeometryBuilder to build a sphere.
+//!
+//! This is a builder-style struct. Parameters can be specified like this:
+//!
+//! @code
+//! // Radius (required parameter) set to 5, optional parameters have default values
+//! (completely spherical, 20 stacks, 20 slices, oriented outside, texture not flipped)
+//! SphereParams a = SphereParams(5.0f);
+//! // Higher resolution sphere
+//! SphereParams b = SphereParams(5.0f).resolution(40, 40);
+//! // Oblate "sphere" with faces oriented inside
+//! SphereParams c = SphereParams(5.0f).oneMinusOblateness(0.5f).orientInside();
+//! @endcode
+//!
+//! @see StelGeometryBuilder, StelGeometrySphere
+struct SphereParams
+{
+	//! Construct SphereParams specifying the required radius parameter and other parameters at
+	//! default values.
+	//!
+	//! Default parameters are no oblateness, 20 stacks, 20 slices, oriented inside and texture
+	//! not flipped.
+	//!
+	//! @param radius Radius of the sphere. Must be greater than zero.
+	SphereParams(const float radius)
+		: radius_(radius)
+		, oneMinusOblateness_(1.0f)
+		, slices_(20)
+		, stacks_(20)
+		, orientInside_(false)
+		, flipTexture_(false)
+	{
+	}
+
+	//! Set the oblateness of the sphere.
+	//!
+	//! 1.0 is a perfect sphere, 0.0f a flat ring.
+	//!
+	//! Must be at least zero and at most one.
+	SphereParams& oneMinusOblateness(const float rhs)
+	{
+		oneMinusOblateness_ = rhs;
+		return *this;
+	}
+
+	//! Set resolution (detail) of the sphere grid.
+	//!
+	//! Higher values result in more detail, but also higher resource usage.
+	//!
+	//! @param stacks Number of stacks/rows/rings, i.e. vertical resolution of the sphere.
+	//!               Must be at least 3 and at most 4096.
+	//! @param slices Number of slices/columns, i.e. horizontal resolution of the sphere.
+	//!               Must be at least 3 and at most 4096.
+	SphereParams& resolution(const int slices, const int stacks)
+	{
+		slices_ = slices;
+		stacks_ = stacks;
+		return *this;
+	}
+
+	//! If specified, the faces of the sphere will point inside instead of outside.
+	SphereParams& orientInside()
+	{
+		orientInside_ = true;
+		return *this;
+	}
+
+	//! If sphecified, texture coords will be flipped on the (texture, not global) X axis.
+	SphereParams& flipTexture()
+	{
+		flipTexture_ = true;
+		return *this;
+	}
+
+	//! Radius of the sphere.
+	float radius_;
+	//! Determines how oblate the "sphere" is.
+	float oneMinusOblateness_;
+	//! Number of slices/columns in the sphere grid.
+	int slices_;
+	//! Number of stacks/rows in the sphere grid.
+	int stacks_;
+	//! Are the faces of the sphere oriented inside?
+	bool orientInside_;
+	//! Is the the texture coordinates flipped on the X axis?
+	bool flipTexture_;
+};
+
+
+//! Drawable 3D sphere.
+//!
+//! Encapsulates vertex and index buffers needed to draw the sphere.
+//! These are generated as needed any time sphere parameters change.
+//!
+//! The sphere is a spherical grid with multiple stacks each composed of multiple slices.
+//!
+//! Spheres are constructed by StelGeometryBuilder functions buildSphereFisheye(),
+//! buildSphereUnlit() and buildSphereLit().
+//!
+//! @see StelGeometryBuilder
+class StelGeometrySphere
+{
+friend class StelGeometryBuilder;
+private:
+	//! Types of sphere. Affects how the sphere is generated and drawn.
+	enum SphereType
+	{
+		//! Sphere with fisheye texture coordinates.
+		SphereType_Fisheye,
+		//! Sphere with regular grid texture coordinates.
+		SphereType_Unlit,
+		//! Like Unlit, but lighting is baked into vertex colors.
+		SphereType_Lit
+	};
+
+public:
+	//! Destroy the sphere, freeing vertex and index buffers.
+	~StelGeometrySphere()
+	{
+		if(NULL != unlitVertices)
+		{
+			Q_ASSERT_X(NULL == litVertices, Q_FUNC_INFO,
+			           "Both lit and unlit vertex buffers are used");
+			delete unlitVertices;
+			unlitVertices = NULL;
+		}
+ 		if(NULL != litVertices)
+		{
+			Q_ASSERT_X(NULL == unlitVertices, Q_FUNC_INFO,
+			           "Both lit and unlit vertex buffers are used");
+			delete litVertices;
+			litVertices = NULL;
+		}   
+		for(int row = 0; row < rowIndices.size(); ++row)
+		{
+			delete rowIndices[row];
+		}
+		rowIndices.clear();
+	}
+
+	//! Draw the sphere.
+	//!
+	//! @param renderer  Renderer to draw the sphere.
+	//! @param projector Projector to project the vertices.
+	void draw(class StelRenderer* renderer, StelProjectorP projector);
+
+	//! Set radius of the sphere.
+	//!
+	//! @param radius Radius to set. Must be greater than zero.
+	void setRadius(const float radius)
+	{
+		Q_ASSERT_X(radius > 0.0f, Q_FUNC_INFO, "Sphere radius must be greater than zero");
+		this->radius = radius;
+		updated = true;
+	}
+
+	//! Set the oblateness of the sphere.
+	//!
+	//! 1.0 is a perfect sphere, 0.0f a flat ring.
+	//!
+	//! Must be at least zero and at most one.
+	void setOneMinusOblateness(const float oneMinusOblateness)
+	{
+		Q_ASSERT_X(oneMinusOblateness >= 0.0f && oneMinusOblateness <= 1.0f, Q_FUNC_INFO,
+		           "Sphere oneMinusOblateness parameter must be at least zero and at most one");
+		this->oneMinusOblateness = oneMinusOblateness;
+		updated = true;
+	}
+
+	//! Set resolution (detail) of the sphere grid.
+	//!
+	//! Higher values result in more detail, but also higher resource usage.
+	//!
+	//! @param stacks Number of stacks/rows/rings, i.e. vertical resolution of the sphere.
+	//!               Must be at least 3 and at most 4096.
+	//! @param slices Number of slices/columns, i.e. horizontal resolution of the sphere.
+	//!               Must be at least 3 and at most 4096.
+	void setResolution(const int stacks, const int slices)
+	{
+		// The maximums here must match MAX_STACKS and MAX_SLICES in the cpp file.
+		Q_ASSERT_X(stacks >= 3 && stacks < 4096, Q_FUNC_INFO,
+		           "There must be at least 3 stacks in a sphere, and at most 4096.");
+		Q_ASSERT_X(slices >= 3 && slices < 4096, Q_FUNC_INFO,
+		           "There must be at least 3 slices in a sphere, and at most 4096.");
+		this->stacks = stacks;
+		this->slices = slices;
+		updated = true;
+	}
+
+	//! Should sphere faces be oriented inside? (Useful e.g. for skyspheres)
+	void setOrientInside(const bool orientInside)
+	{
+		this->orientInside = orientInside;
+		updated = true;
+	}
+
+	//! Should texture coordinates be flipped on the x (texture coord, not world) axis?
+	void setFlipTexture(const bool flipTexture)
+	{
+		this->flipTexture = flipTexture;
+		updated = true;
+	}
+
+private:
+	//! Sphere type. Affects how the sphere is generated and drawn.
+	const SphereType type;
+
+	//! Have the sphere parameters been updated since the last call to regenerate() ?
+	//!
+	//! If true, the sphere will be regenerated at the next draw() call.
+	bool updated;
+
+	//! Radius of the sphere.
+	float radius;
+	//! Determines how oblate the "sphere" is.
+	float oneMinusOblateness;
+	//! Number of stacks/rows in the sphere grid.
+	int stacks;
+	//! Number of slices/columns in the sphere grid.
+	int slices;
+	//! Are the faces of the sphere oriented inside?
+	bool orientInside;
+	//! Is the the texture coordinates flipped on the X axis?
+	bool flipTexture;
+
+	//! FOV of fisheye texture coordinates used when type is SphereType_Fisheye.
+	const float fisheyeTextureFov;
+
+	//! Light used to bake lighting when type is SphereType_Lit.
+	const StelLight light;
+
+	//! Vertex buffer used when sphere type is SphereType_Fisheye or SphereType_Unlit
+	StelVertexBuffer<VertexP3T2>* unlitVertices;
+	//! Vertex buffer used when sphere type is SphereType_Lit.
+	StelVertexBuffer<VertexP3T2C4>* litVertices;
+
+	//! Each index buffer is a triangle strip forming one row of the sphere pointing to the used
+	//! vertex buffer.
+	QVector<StelIndexBuffer*> rowIndices;
+
+	//! Construct a StelGeometrySphere.
+	//!
+	//! This can only be used by StelGeometryBuilder functions such as buildSphereUnlit().
+	//!
+	//! Sphere parameters are set with invalid values and have to be set by the builder functions.
+	//!
+	//! @param type       Type of the sphere (fisheye, unlit or lit).
+	//! @param textureFov FOV of fisheye texture coordinates. Used only with SphereType_Fisheye.
+	//! @param light      Light. Used only when type is SphereType_Lit.
+	StelGeometrySphere(const SphereType type, const float textureFov = -100.0f, 
+	                   const StelLight& light = StelLight())
+		: type(type)
+		, updated(true)
+		, radius(0.0f)
+		, oneMinusOblateness(0.0f)
+		, stacks(0)
+		, slices(0)
+		, orientInside(false)
+		, flipTexture(false)
+		, fisheyeTextureFov(textureFov)
+		, light(light)
+		, unlitVertices(NULL)
+		, litVertices(NULL)
+	{
+		if(type == SphereType_Fisheye)
+		{
+			Q_ASSERT_X(textureFov > 0.0f, Q_FUNC_INFO,
+			           "Fisheye sphere texture FOV must be greater than zero");
+		}
+	}
+
+	//! Regenerate the sphere.
+	//!
+	//! Called at first draw and when sphere parameters change.
+	//!
+	//! @param renderer  Renderer to create vertex/index buffers.
+	//! @param projector Projector used in drawing (used by lighting code).
+	void regenerate(class StelRenderer* renderer, StelProjectorP projector);
+};
 
 //! Builds various geometry primitives, storing them in vertex buffers.
 class StelGeometryBuilder
@@ -79,69 +366,70 @@ public:
 
 	//! Build a fisheye-textured sphere.
 	//!
-	//! The sphere is a spherical grid formed by rowIndexBuffers.size()
-	//! rows (each a single triangle strip), and slices columns.
+	//! Note that the sphere must be deleted to free graphics resources.
 	//!
-	//! That is, empty index buffers must be provided for each row,
-	//! and the row count depends on how many index buffers are provided.
-	//! as well as an empty vertex buffer.
+	//! @param params     Common sphere parameters.
+	//! @param textureFov Field of view of the texture coordinates.
 	//!
-	//! @param vertices        Vertex buffer to store vertices of the sphere.
-	//!                        Indices in row index buffers will point to 
-	//!                        vertices in this buffer.
-	//!                        Must be empty.
-	//! @param rowIndexBuffers Index buffers to store rows of the sphere.
-	//!                        The number of rows generated is 
-	//!                        rowIndexBuffers.size(). At least 3 index buffers
-	//!                        must be provided, and all of them must be empty.
-	//! @param radius          Radius of the sphere.
-	//! @param slices          Number of columns in each row of the sphere.
-	//!                        Must be at least 3.
-	//! @param textureFov      Field of view of the texture coordinates.
-	//! @param orientInside    Should the front faces of the sphere point inside?
-	void buildSphereFisheye
-		(StelVertexBuffer<VertexP3T2>* const vertices, 
-		 QVector<StelIndexBuffer* >& rowIndexBuffers, const float radius,
-		 const int slices, const float textureFov, const bool orientInside = false);
+	//! @see SphereParams
+	StelGeometrySphere* buildSphereFisheye(const SphereParams& params, const float textureFov)
+	{
+		StelGeometrySphere* result = 
+			new StelGeometrySphere(StelGeometrySphere::SphereType_Fisheye, textureFov);
+		result->setRadius(params.radius_);
+		result->setOneMinusOblateness(params.oneMinusOblateness_);
+		result->setResolution(params.stacks_, params.slices_);
+		result->setOrientInside(params.orientInside_);
+		result->setFlipTexture(params.flipTexture_);
+		return result;
+	}
 
-	// The parameter list here is horrible (7 parameters!), and other ones
-	// aren't much better.
-	// A solution might be a Sphere class wrapping up details and drawing of
-	// various spheres.
 	//! Build a regularly texture mapped sphere.
 	//!
 	//! Texture coordinates: x goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y 
 	//! sides of the sphere, y goes from -1.0/+1.0 at z = -radius/+radius 
 	//! (linear along longitudes)
 	//!
-	//! The sphere is a spherical grid formed by rowIndexBuffers.size()
-	//! rows (each a single triangle strip), and slices columns.
+	//! Note that the sphere must be deleted to free graphics resources.
 	//!
-	//! That is, empty index buffers must be provided for each row,
-	//! and the row count depends on how many index buffers are provided.
-	//! as well as an empty vertex buffer.
+	//! @param params Common sphere parameters.
 	//!
-	//! @param vertices           Vertex buffer to store vertices of the sphere.
-	//!                           Indices in rowIndexBuffers will point to 
-	//!                           vertices in this buffer.
-	//!                           Must be empty.
-	//! @param rowIndexBuffers    Index buffers to store rows of the sphere.
-	//!                           The number of rows generated is 
-	//!                           rowIndexBuffers.size(). At least 3 index buffers
-	//!                           must be provided, and all of them must be empty.
-	//! @param radius             Radius of the sphere.
-	//! @param oneMinusOblateness Defines how "squished" the sphere is -
-	//!                           for planets, this is the polar radius divided 
-	//!                           by the equatorial radius.
-	//! @param slices             Number of columns in each row of the sphere.
-	//!                           Must be at least 3.
-	//! @param orientInside       Should the front faces of the sphere point inside?
-	//! @param flipTexture        Should the texture coordinates be horizontally flipped?
-	void buildSphere 
-		(StelVertexBuffer<VertexP3T2>* const vertices, 
-		 QVector<StelIndexBuffer*>& rowIndexBuffers, const float radius,
-		 const float oneMinusOblateness, const int slices, 
-		 const bool orientInside = false, const bool flipTexture = false);
+	//! @see SphereParams
+	StelGeometrySphere* buildSphereUnlit(const SphereParams& params)
+	{
+		StelGeometrySphere* result = 
+			new StelGeometrySphere(StelGeometrySphere::SphereType_Unlit);
+		result->setRadius(params.radius_);
+		result->setOneMinusOblateness(params.oneMinusOblateness_);
+		result->setResolution(params.stacks_, params.slices_);
+		result->setOrientInside(params.orientInside_);
+		result->setFlipTexture(params.flipTexture_);
+		return result;
+	}
+
+	//! Build a regularly texture mapped sphere with lighting baked into vertex colors.
+	//!
+	//! Texture coordinates: x goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y 
+	//! sides of the sphere, y goes from -1.0/+1.0 at z = -radius/+radius 
+	//! (linear along longitudes)
+	//!
+	//! Note that the sphere must be deleted to free graphics resources.
+	//!
+	//! @param params Common sphere parameters.
+	//! @param light  Light to use for lighting.
+	//!
+	//! @see SphereParams
+	StelGeometrySphere* buildSphereLit(const SphereParams& params, const StelLight& light)
+	{
+		StelGeometrySphere* result = 
+			new StelGeometrySphere(StelGeometrySphere::SphereType_Lit, -100.0f, light);
+		result->setRadius(params.radius_);
+		result->setOneMinusOblateness(params.oneMinusOblateness_);
+		result->setResolution(params.stacks_, params.slices_);
+		result->setOrientInside(params.orientInside_);
+		result->setFlipTexture(params.flipTexture_);
+		return result;
+	}
 
 	//! Build a ring (e.g. planet's rings).
 	//!
