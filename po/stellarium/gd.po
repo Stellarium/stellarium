@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-07-30 19:36+0700\n"
+"POT-Creation-Date: 2012-08-01 21:36+0700\n"
 "PO-Revision-Date: 2012-05-08 17:14+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Gaelic; Scottish <gd@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-31 04:49+0000\n"
-"X-Generator: Launchpad (build 15702)\n"
+"X-Launchpad-Export-Date: 2012-08-02 04:38+0000\n"
+"X-Generator: Launchpad (build 15719)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -1624,69 +1624,84 @@ msgstr ""
 msgid "Constellations Tour"
 msgstr ""
 
-#: src/translations.h:211
+#. TRANSLATORS: Name of script
+#: src/translations.h:210
+msgid "Sun from different planets"
+msgstr ""
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:212
+msgid "Earth best views from other bodies"
+msgstr ""
+
+#. TRANSLATORS: Name of script
+#: src/translations.h:214
+msgid "Transit of Venus"
+msgstr ""
+
+#: src/translations.h:217
 msgid "Look around each installed landscape."
 msgstr ""
 
-#: src/translations.h:212
+#: src/translations.h:218
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr ""
 
-#: src/translations.h:213
+#: src/translations.h:219
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr ""
 
-#: src/translations.h:214
+#: src/translations.h:220
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 
-#: src/translations.h:215
+#: src/translations.h:221
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
 
-#: src/translations.h:216
+#: src/translations.h:222
 msgid "Script which runs automatically at startup"
 msgstr ""
 
-#: src/translations.h:217
+#: src/translations.h:223
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
 
-#: src/translations.h:218
+#: src/translations.h:224
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
 
-#: src/translations.h:219
+#: src/translations.h:225
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
 
-#: src/translations.h:220
+#: src/translations.h:226
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
 
-#: src/translations.h:221
+#: src/translations.h:227
 msgid "Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068."
 msgstr ""
 
-#: src/translations.h:222
+#: src/translations.h:228
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "Occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
 
-#: src/translations.h:223
+#: src/translations.h:228
 msgid ""
 "Phobos races ahead of Mars and eclipses the sun, passes thru it and then "
 "retrogrades back towards the sun and just partially eclipses it (only seen "
@@ -1694,976 +1709,988 @@ msgid ""
 "Phobos emerges from the sun it passes through Mars' shadow and dims."
 msgstr ""
 
-#: src/translations.h:224
+#: src/translations.h:229
 msgid ""
 "Screensaver of various happenings in the Solar System. 171 events in all!"
 msgstr ""
 
-#: src/translations.h:225
+#: src/translations.h:230
 msgid "A tour via western constellations."
 msgstr ""
 
-#: src/translations.h:228
-msgid "Andorra"
-msgstr ""
-
-#: src/translations.h:229
-msgid "United Arab Emirates"
-msgstr ""
-
-#: src/translations.h:230
-msgid "Afghanistan"
-msgstr ""
-
 #: src/translations.h:231
-msgid "Antigua and Barbuda"
+msgid "Look at Sun from big planets of Solar system and Pluto."
 msgstr ""
 
 #: src/translations.h:232
-msgid "Anguilla"
+msgid "Earth best views from other Solar system bodies in the 21st Century."
 msgstr ""
 
 #: src/translations.h:233
-msgid "Albania"
-msgstr ""
-
-#: src/translations.h:234
-msgid "Armenia"
-msgstr ""
-
-#: src/translations.h:235
-msgid "Netherlands Antilles"
+msgid "Transit of Venus as seen from Sydney Australia 6th June 2012."
 msgstr ""
 
 #: src/translations.h:236
-msgid "Angola"
+msgid "Andorra"
 msgstr ""
 
 #: src/translations.h:237
-msgid "Antarctica"
+msgid "United Arab Emirates"
 msgstr ""
 
 #: src/translations.h:238
-msgid "Argentina"
+msgid "Afghanistan"
 msgstr ""
 
 #: src/translations.h:239
-msgid "American Samoa"
+msgid "Antigua and Barbuda"
 msgstr ""
 
 #: src/translations.h:240
-msgid "Austria"
+msgid "Anguilla"
 msgstr ""
 
 #: src/translations.h:241
-msgid "Australia"
+msgid "Albania"
 msgstr ""
 
 #: src/translations.h:242
-msgid "Aruba"
+msgid "Armenia"
 msgstr ""
 
 #: src/translations.h:243
-msgid "Azerbaijan"
+msgid "Netherlands Antilles"
 msgstr ""
 
 #: src/translations.h:244
-msgid "Bosnia and Herzegowina"
+msgid "Angola"
 msgstr ""
 
 #: src/translations.h:245
-msgid "Barbados"
+msgid "Antarctica"
 msgstr ""
 
 #: src/translations.h:246
-msgid "Bangladesh"
+msgid "Argentina"
 msgstr ""
 
 #: src/translations.h:247
-msgid "Belgium"
+msgid "American Samoa"
 msgstr ""
 
 #: src/translations.h:248
-msgid "Burkina Faso"
+msgid "Austria"
 msgstr ""
 
 #: src/translations.h:249
-msgid "Bulgaria"
+msgid "Australia"
 msgstr ""
 
 #: src/translations.h:250
-msgid "Bahrain"
+msgid "Aruba"
 msgstr ""
 
 #: src/translations.h:251
-msgid "Burundi"
+msgid "Azerbaijan"
 msgstr ""
 
 #: src/translations.h:252
-msgid "Benin"
+msgid "Bosnia and Herzegowina"
 msgstr ""
 
 #: src/translations.h:253
-msgid "Bermuda"
+msgid "Barbados"
 msgstr ""
 
 #: src/translations.h:254
-msgid "Brunei Darussalam"
+msgid "Bangladesh"
 msgstr ""
 
 #: src/translations.h:255
-msgid "Bolivia"
+msgid "Belgium"
 msgstr ""
 
 #: src/translations.h:256
-msgid "Brazil"
+msgid "Burkina Faso"
 msgstr ""
 
 #: src/translations.h:257
-msgid "Bahamas"
+msgid "Bulgaria"
 msgstr ""
 
 #: src/translations.h:258
-msgid "Bhutan"
+msgid "Bahrain"
 msgstr ""
 
 #: src/translations.h:259
-msgid "Bouvet Island"
+msgid "Burundi"
 msgstr ""
 
 #: src/translations.h:260
-msgid "Botswana"
+msgid "Benin"
 msgstr ""
 
 #: src/translations.h:261
-msgid "Belarus"
+msgid "Bermuda"
 msgstr ""
 
 #: src/translations.h:262
-msgid "Belize"
+msgid "Brunei Darussalam"
 msgstr ""
 
 #: src/translations.h:263
-msgid "Canada"
+msgid "Bolivia"
 msgstr ""
 
 #: src/translations.h:264
-msgid "Cocos Islands"
+msgid "Brazil"
 msgstr ""
 
 #: src/translations.h:265
-msgid "Democratic Republic of the Congo"
+msgid "Bahamas"
 msgstr ""
 
 #: src/translations.h:266
-msgid "Central African Republic"
+msgid "Bhutan"
 msgstr ""
 
 #: src/translations.h:267
-msgid "Republic of the Congo"
+msgid "Bouvet Island"
 msgstr ""
 
 #: src/translations.h:268
-msgid "Switzerland"
+msgid "Botswana"
 msgstr ""
 
 #: src/translations.h:269
-msgid "Cote d'Ivoire"
+msgid "Belarus"
 msgstr ""
 
 #: src/translations.h:270
-msgid "Cook Islands"
+msgid "Belize"
 msgstr ""
 
 #: src/translations.h:271
-msgid "Chile"
+msgid "Canada"
 msgstr ""
 
 #: src/translations.h:272
-msgid "Cameroon"
+msgid "Cocos Islands"
 msgstr ""
 
 #: src/translations.h:273
-msgid "China"
+msgid "Democratic Republic of the Congo"
 msgstr ""
 
 #: src/translations.h:274
-msgid "Colombia"
+msgid "Central African Republic"
 msgstr ""
 
 #: src/translations.h:275
-msgid "Costa Rica"
+msgid "Republic of the Congo"
 msgstr ""
 
 #: src/translations.h:276
-msgid "Serbia and Montenegro"
+msgid "Switzerland"
 msgstr ""
 
 #: src/translations.h:277
-msgid "Cuba"
+msgid "Cote d'Ivoire"
 msgstr ""
 
 #: src/translations.h:278
-msgid "Cape Verde"
+msgid "Cook Islands"
 msgstr ""
 
 #: src/translations.h:279
-msgid "Christmas Island"
+msgid "Chile"
 msgstr ""
 
 #: src/translations.h:280
-msgid "Cyprus"
+msgid "Cameroon"
 msgstr ""
 
 #: src/translations.h:281
-msgid "Czech Republic"
+msgid "China"
 msgstr ""
 
 #: src/translations.h:282
-msgid "Germany"
+msgid "Colombia"
 msgstr ""
 
 #: src/translations.h:283
-msgid "Djibouti"
+msgid "Costa Rica"
 msgstr ""
 
 #: src/translations.h:284
-msgid "Denmark"
+msgid "Serbia and Montenegro"
 msgstr ""
 
 #: src/translations.h:285
-msgid "Dominica"
+msgid "Cuba"
 msgstr ""
 
 #: src/translations.h:286
-msgid "Dominican Republic"
+msgid "Cape Verde"
 msgstr ""
 
 #: src/translations.h:287
-msgid "Algeria"
+msgid "Christmas Island"
 msgstr ""
 
 #: src/translations.h:288
-msgid "Ecuador"
+msgid "Cyprus"
 msgstr ""
 
 #: src/translations.h:289
-msgid "Estonia"
+msgid "Czech Republic"
 msgstr ""
 
 #: src/translations.h:290
-msgid "Egypt"
+msgid "Germany"
 msgstr ""
 
 #: src/translations.h:291
-msgid "Western Sahara"
+msgid "Djibouti"
 msgstr ""
 
 #: src/translations.h:292
-msgid "Eritrea"
+msgid "Denmark"
 msgstr ""
 
 #: src/translations.h:293
-msgid "Spain"
+msgid "Dominica"
 msgstr ""
 
 #: src/translations.h:294
-msgid "Ethiopia"
+msgid "Dominican Republic"
 msgstr ""
 
 #: src/translations.h:295
-msgid "Finland"
+msgid "Algeria"
 msgstr ""
 
 #: src/translations.h:296
-msgid "Fiji"
+msgid "Ecuador"
 msgstr ""
 
 #: src/translations.h:297
-msgid "Falkland Islands"
+msgid "Estonia"
 msgstr ""
 
 #: src/translations.h:298
-msgid "Micronesia"
+msgid "Egypt"
 msgstr ""
 
 #: src/translations.h:299
-msgid "Faroe Islands"
+msgid "Western Sahara"
 msgstr ""
 
 #: src/translations.h:300
-msgid "France"
+msgid "Eritrea"
 msgstr ""
 
 #: src/translations.h:301
-msgid "Gabon"
+msgid "Spain"
 msgstr ""
 
 #: src/translations.h:302
-msgid "United Kingdom"
+msgid "Ethiopia"
 msgstr ""
 
 #: src/translations.h:303
-msgid "Grenada"
+msgid "Finland"
 msgstr ""
 
 #: src/translations.h:304
-msgid "Georgia"
+msgid "Fiji"
 msgstr ""
 
 #: src/translations.h:305
-msgid "French Guiana"
+msgid "Falkland Islands"
 msgstr ""
 
 #: src/translations.h:306
-msgid "Ghana"
+msgid "Micronesia"
 msgstr ""
 
 #: src/translations.h:307
-msgid "Gibraltar"
+msgid "Faroe Islands"
 msgstr ""
 
 #: src/translations.h:308
-msgid "Greenland"
+msgid "France"
 msgstr ""
 
 #: src/translations.h:309
-msgid "Gambia"
+msgid "Gabon"
 msgstr ""
 
 #: src/translations.h:310
-msgid "Guinea"
+msgid "United Kingdom"
 msgstr ""
 
 #: src/translations.h:311
-msgid "Guadeloupe"
+msgid "Grenada"
 msgstr ""
 
 #: src/translations.h:312
-msgid "Equatorial Guinea"
+msgid "Georgia"
 msgstr ""
 
 #: src/translations.h:313
-msgid "Greece"
+msgid "French Guiana"
 msgstr ""
 
 #: src/translations.h:314
-msgid "South Georgia and the South Sandwich Islands"
+msgid "Ghana"
 msgstr ""
 
 #: src/translations.h:315
-msgid "Guatemala"
+msgid "Gibraltar"
 msgstr ""
 
 #: src/translations.h:316
-msgid "Guam"
+msgid "Greenland"
 msgstr ""
 
 #: src/translations.h:317
-msgid "Guinea-Bissau"
+msgid "Gambia"
 msgstr ""
 
 #: src/translations.h:318
-msgid "Guyana"
+msgid "Guinea"
 msgstr ""
 
 #: src/translations.h:319
-msgid "Hong Kong"
+msgid "Guadeloupe"
 msgstr ""
 
 #: src/translations.h:320
-msgid "Heard Island and McDonald Islands"
+msgid "Equatorial Guinea"
 msgstr ""
 
 #: src/translations.h:321
-msgid "Honduras"
+msgid "Greece"
 msgstr ""
 
 #: src/translations.h:322
-msgid "Croatia"
+msgid "South Georgia and the South Sandwich Islands"
 msgstr ""
 
 #: src/translations.h:323
-msgid "Haiti"
+msgid "Guatemala"
 msgstr ""
 
 #: src/translations.h:324
-msgid "Hungary"
+msgid "Guam"
 msgstr ""
 
 #: src/translations.h:325
-msgid "Indonesia"
+msgid "Guinea-Bissau"
 msgstr ""
 
 #: src/translations.h:326
-msgid "Ireland"
+msgid "Guyana"
 msgstr ""
 
 #: src/translations.h:327
-msgid "Israel"
+msgid "Hong Kong"
 msgstr ""
 
 #: src/translations.h:328
-msgid "India"
+msgid "Heard Island and McDonald Islands"
 msgstr ""
 
 #: src/translations.h:329
-msgid "British Indian Ocean Territory"
+msgid "Honduras"
 msgstr ""
 
 #: src/translations.h:330
-msgid "Iraq"
+msgid "Croatia"
 msgstr ""
 
 #: src/translations.h:331
-msgid "Iran"
+msgid "Haiti"
 msgstr ""
 
 #: src/translations.h:332
-msgid "Iceland"
+msgid "Hungary"
 msgstr ""
 
 #: src/translations.h:333
-msgid "Italy"
+msgid "Indonesia"
 msgstr ""
 
 #: src/translations.h:334
-msgid "Jamaica"
+msgid "Ireland"
 msgstr ""
 
 #: src/translations.h:335
-msgid "Jordan"
+msgid "Israel"
 msgstr ""
 
 #: src/translations.h:336
-msgid "Japan"
+msgid "India"
 msgstr ""
 
 #: src/translations.h:337
-msgid "Kenya"
+msgid "British Indian Ocean Territory"
 msgstr ""
 
 #: src/translations.h:338
-msgid "Kyrgyzstan"
+msgid "Iraq"
 msgstr ""
 
 #: src/translations.h:339
-msgid "Cambodia"
+msgid "Iran"
 msgstr ""
 
 #: src/translations.h:340
-msgid "Kiribati"
+msgid "Iceland"
 msgstr ""
 
 #: src/translations.h:341
-msgid "Comoros"
+msgid "Italy"
 msgstr ""
 
 #: src/translations.h:342
-msgid "Saint Kitts and Nevis"
+msgid "Jamaica"
 msgstr ""
 
 #: src/translations.h:343
-msgid "Democratic People's Republic of Korea"
+msgid "Jordan"
 msgstr ""
 
 #: src/translations.h:344
-msgid "Republic of Korea"
+msgid "Japan"
 msgstr ""
 
 #: src/translations.h:345
-msgid "Kuwait"
+msgid "Kenya"
 msgstr ""
 
 #: src/translations.h:346
-msgid "Cayman Islands"
+msgid "Kyrgyzstan"
 msgstr ""
 
 #: src/translations.h:347
-msgid "Kazakhstan"
+msgid "Cambodia"
 msgstr ""
 
 #: src/translations.h:348
-msgid "Lao"
+msgid "Kiribati"
 msgstr ""
 
 #: src/translations.h:349
-msgid "Lebanon"
+msgid "Comoros"
 msgstr ""
 
 #: src/translations.h:350
-msgid "Saint Lucia"
+msgid "Saint Kitts and Nevis"
 msgstr ""
 
 #: src/translations.h:351
-msgid "Liechtenstein"
+msgid "Democratic People's Republic of Korea"
 msgstr ""
 
 #: src/translations.h:352
-msgid "Sri Lanka"
+msgid "Republic of Korea"
 msgstr ""
 
 #: src/translations.h:353
-msgid "Liberia"
+msgid "Kuwait"
 msgstr ""
 
 #: src/translations.h:354
-msgid "Lesotho"
+msgid "Cayman Islands"
 msgstr ""
 
 #: src/translations.h:355
-msgid "Lithuania"
+msgid "Kazakhstan"
 msgstr ""
 
 #: src/translations.h:356
-msgid "Luxembourg"
+msgid "Lao"
 msgstr ""
 
 #: src/translations.h:357
-msgid "Latvia"
+msgid "Lebanon"
 msgstr ""
 
 #: src/translations.h:358
-msgid "Libyan Arab Jamahiriya"
+msgid "Saint Lucia"
 msgstr ""
 
 #: src/translations.h:359
-msgid "Morocco"
+msgid "Liechtenstein"
 msgstr ""
 
 #: src/translations.h:360
-msgid "Monaco"
+msgid "Sri Lanka"
 msgstr ""
 
 #: src/translations.h:361
-msgid "Moldova"
+msgid "Liberia"
 msgstr ""
 
 #: src/translations.h:362
-msgid "Madagascar"
+msgid "Lesotho"
 msgstr ""
 
 #: src/translations.h:363
-msgid "Marshall Islands"
+msgid "Lithuania"
 msgstr ""
 
 #: src/translations.h:364
-msgid "Macedonia"
+msgid "Luxembourg"
 msgstr ""
 
 #: src/translations.h:365
-msgid "Mali"
+msgid "Latvia"
 msgstr ""
 
 #: src/translations.h:366
-msgid "Myanmar"
+msgid "Libyan Arab Jamahiriya"
 msgstr ""
 
 #: src/translations.h:367
-msgid "Mongolia"
+msgid "Morocco"
 msgstr ""
 
 #: src/translations.h:368
-msgid "Macau"
+msgid "Monaco"
 msgstr ""
 
 #: src/translations.h:369
-msgid "Northern Mariana Islands"
+msgid "Moldova"
 msgstr ""
 
 #: src/translations.h:370
-msgid "Martinique"
+msgid "Madagascar"
 msgstr ""
 
 #: src/translations.h:371
-msgid "Mauritania"
+msgid "Marshall Islands"
 msgstr ""
 
 #: src/translations.h:372
-msgid "Montserrat"
+msgid "Macedonia"
 msgstr ""
 
 #: src/translations.h:373
-msgid "Malta"
+msgid "Mali"
 msgstr ""
 
 #: src/translations.h:374
-msgid "Mauritius"
+msgid "Myanmar"
 msgstr ""
 
 #: src/translations.h:375
-msgid "Maldives"
+msgid "Mongolia"
 msgstr ""
 
 #: src/translations.h:376
-msgid "Malawi"
+msgid "Macau"
 msgstr ""
 
 #: src/translations.h:377
-msgid "Mexico"
+msgid "Northern Mariana Islands"
 msgstr ""
 
 #: src/translations.h:378
-msgid "Malaysia"
+msgid "Martinique"
 msgstr ""
 
 #: src/translations.h:379
-msgid "Mozambique"
+msgid "Mauritania"
 msgstr ""
 
 #: src/translations.h:380
-msgid "Namibia"
+msgid "Montserrat"
 msgstr ""
 
 #: src/translations.h:381
-msgid "New Caledonia"
+msgid "Malta"
 msgstr ""
 
 #: src/translations.h:382
-msgid "Niger"
+msgid "Mauritius"
 msgstr ""
 
 #: src/translations.h:383
-msgid "Norfolk Island"
+msgid "Maldives"
 msgstr ""
 
 #: src/translations.h:384
-msgid "Nigeria"
+msgid "Malawi"
 msgstr ""
 
 #: src/translations.h:385
-msgid "Nicaragua"
+msgid "Mexico"
 msgstr ""
 
 #: src/translations.h:386
-msgid "Netherlands"
+msgid "Malaysia"
 msgstr ""
 
 #: src/translations.h:387
-msgid "Norway"
+msgid "Mozambique"
 msgstr ""
 
 #: src/translations.h:388
-msgid "Nepal"
+msgid "Namibia"
 msgstr ""
 
 #: src/translations.h:389
-msgid "Nauru"
+msgid "New Caledonia"
 msgstr ""
 
 #: src/translations.h:390
-msgid "Niue"
+msgid "Niger"
 msgstr ""
 
 #: src/translations.h:391
-msgid "New Zealand"
+msgid "Norfolk Island"
 msgstr ""
 
 #: src/translations.h:392
-msgid "Oman"
+msgid "Nigeria"
 msgstr ""
 
 #: src/translations.h:393
-msgid "Panama"
+msgid "Nicaragua"
 msgstr ""
 
 #: src/translations.h:394
-msgid "Peru"
+msgid "Netherlands"
 msgstr ""
 
 #: src/translations.h:395
-msgid "French Polynesia"
+msgid "Norway"
 msgstr ""
 
 #: src/translations.h:396
-msgid "Papua New Guinea"
+msgid "Nepal"
 msgstr ""
 
 #: src/translations.h:397
-msgid "Philippines"
+msgid "Nauru"
 msgstr ""
 
 #: src/translations.h:398
-msgid "Pakistan"
+msgid "Niue"
 msgstr ""
 
 #: src/translations.h:399
-msgid "Poland"
+msgid "New Zealand"
 msgstr ""
 
 #: src/translations.h:400
-msgid "Saint Pierre and Miquelon"
+msgid "Oman"
 msgstr ""
 
 #: src/translations.h:401
-msgid "Pitcairn"
+msgid "Panama"
 msgstr ""
 
 #: src/translations.h:402
-msgid "Puerto Rico"
+msgid "Peru"
 msgstr ""
 
 #: src/translations.h:403
-msgid "Palestinian Territories"
+msgid "French Polynesia"
 msgstr ""
 
 #: src/translations.h:404
-msgid "Portugal"
+msgid "Papua New Guinea"
 msgstr ""
 
 #: src/translations.h:405
-msgid "Palau"
+msgid "Philippines"
 msgstr ""
 
 #: src/translations.h:406
-msgid "Paraguay"
+msgid "Pakistan"
 msgstr ""
 
 #: src/translations.h:407
-msgid "Qatar"
+msgid "Poland"
 msgstr ""
 
 #: src/translations.h:408
-msgid "Réunion"
+msgid "Saint Pierre and Miquelon"
 msgstr ""
 
 #: src/translations.h:409
-msgid "Romania"
+msgid "Pitcairn"
 msgstr ""
 
 #: src/translations.h:410
-msgid "Serbia"
+msgid "Puerto Rico"
 msgstr ""
 
 #: src/translations.h:411
-msgid "Russian Federation"
+msgid "Palestinian Territories"
 msgstr ""
 
 #: src/translations.h:412
-msgid "Rwanda"
+msgid "Portugal"
 msgstr ""
 
 #: src/translations.h:413
-msgid "Saudi Arabia"
+msgid "Palau"
 msgstr ""
 
 #: src/translations.h:414
-msgid "Solomon Islands"
+msgid "Paraguay"
 msgstr ""
 
 #: src/translations.h:415
-msgid "Seychelles"
+msgid "Qatar"
 msgstr ""
 
 #: src/translations.h:416
-msgid "Sudan"
+msgid "Réunion"
 msgstr ""
 
 #: src/translations.h:417
-msgid "Sweden"
+msgid "Romania"
 msgstr ""
 
 #: src/translations.h:418
-msgid "Singapore"
+msgid "Serbia"
 msgstr ""
 
 #: src/translations.h:419
-msgid "Saint Helena"
+msgid "Russian Federation"
 msgstr ""
 
 #: src/translations.h:420
-msgid "Slovenia"
+msgid "Rwanda"
 msgstr ""
 
 #: src/translations.h:421
-msgid "Svalbard and Jan Mayen"
+msgid "Saudi Arabia"
 msgstr ""
 
 #: src/translations.h:422
-msgid "Slovakia"
+msgid "Solomon Islands"
 msgstr ""
 
 #: src/translations.h:423
-msgid "Sierra Leone"
+msgid "Seychelles"
 msgstr ""
 
 #: src/translations.h:424
-msgid "San Marino"
+msgid "Sudan"
 msgstr ""
 
 #: src/translations.h:425
-msgid "Senegal"
+msgid "Sweden"
 msgstr ""
 
 #: src/translations.h:426
-msgid "Somalia"
+msgid "Singapore"
 msgstr ""
 
 #: src/translations.h:427
-msgid "Suriname"
+msgid "Saint Helena"
 msgstr ""
 
 #: src/translations.h:428
-msgid "Sao Tome and Principe"
+msgid "Slovenia"
 msgstr ""
 
 #: src/translations.h:429
-msgid "El Salvador"
+msgid "Svalbard and Jan Mayen"
 msgstr ""
 
 #: src/translations.h:430
-msgid "Syrian Arab Republic"
+msgid "Slovakia"
 msgstr ""
 
 #: src/translations.h:431
-msgid "Swaziland"
+msgid "Sierra Leone"
 msgstr ""
 
 #: src/translations.h:432
-msgid "Turks and Caicos Islands"
+msgid "San Marino"
 msgstr ""
 
 #: src/translations.h:433
-msgid "Chad"
+msgid "Senegal"
 msgstr ""
 
 #: src/translations.h:434
-msgid "French Southern Territories"
+msgid "Somalia"
 msgstr ""
 
 #: src/translations.h:435
-msgid "Togo"
+msgid "Suriname"
 msgstr ""
 
 #: src/translations.h:436
-msgid "Thailand"
+msgid "Sao Tome and Principe"
 msgstr ""
 
 #: src/translations.h:437
-msgid "Tajikistan"
+msgid "El Salvador"
 msgstr ""
 
 #: src/translations.h:438
-msgid "Tokelau"
+msgid "Syrian Arab Republic"
 msgstr ""
 
 #: src/translations.h:439
-msgid "East Timor"
+msgid "Swaziland"
 msgstr ""
 
 #: src/translations.h:440
-msgid "Turkmenistan"
+msgid "Turks and Caicos Islands"
 msgstr ""
 
 #: src/translations.h:441
-msgid "Tunisia"
+msgid "Chad"
 msgstr ""
 
 #: src/translations.h:442
-msgid "Tonga"
+msgid "French Southern Territories"
 msgstr ""
 
 #: src/translations.h:443
-msgid "Turkey"
+msgid "Togo"
 msgstr ""
 
 #: src/translations.h:444
-msgid "Trinidad and Tobago"
+msgid "Thailand"
 msgstr ""
 
 #: src/translations.h:445
-msgid "Tuvalu"
+msgid "Tajikistan"
 msgstr ""
 
 #: src/translations.h:446
-msgid "Taiwan"
+msgid "Tokelau"
 msgstr ""
 
 #: src/translations.h:447
-msgid "Tanzania"
+msgid "East Timor"
 msgstr ""
 
 #: src/translations.h:448
-msgid "Ukraine"
+msgid "Turkmenistan"
 msgstr ""
 
 #: src/translations.h:449
-msgid "Uganda"
+msgid "Tunisia"
 msgstr ""
 
 #: src/translations.h:450
-msgid "United States Minor Outlying Islands"
+msgid "Tonga"
 msgstr ""
 
 #: src/translations.h:451
-msgid "United States"
+msgid "Turkey"
 msgstr ""
 
 #: src/translations.h:452
-msgid "Uruguay"
+msgid "Trinidad and Tobago"
 msgstr ""
 
 #: src/translations.h:453
-msgid "Uzbekistan"
+msgid "Tuvalu"
 msgstr ""
 
 #: src/translations.h:454
-msgid "Vatican City State"
+msgid "Taiwan"
 msgstr ""
 
 #: src/translations.h:455
-msgid "Saint Vincent and the Grenadines"
+msgid "Tanzania"
 msgstr ""
 
 #: src/translations.h:456
-msgid "Venezuela"
+msgid "Ukraine"
 msgstr ""
 
 #: src/translations.h:457
-msgid "British Virgin Islands"
+msgid "Uganda"
 msgstr ""
 
 #: src/translations.h:458
-msgid "United States Virgin Islands"
+msgid "United States Minor Outlying Islands"
 msgstr ""
 
 #: src/translations.h:459
-msgid "Viet Nam"
+msgid "United States"
 msgstr ""
 
 #: src/translations.h:460
-msgid "Vanuatu"
+msgid "Uruguay"
 msgstr ""
 
 #: src/translations.h:461
-msgid "Wallis and Futuna"
+msgid "Uzbekistan"
 msgstr ""
 
 #: src/translations.h:462
-msgid "Samoa"
+msgid "Vatican City State"
 msgstr ""
 
 #: src/translations.h:463
-msgid "Yemen"
+msgid "Saint Vincent and the Grenadines"
 msgstr ""
 
 #: src/translations.h:464
-msgid "Mayotte"
+msgid "Venezuela"
 msgstr ""
 
 #: src/translations.h:465
-msgid "Yugoslavia"
+msgid "British Virgin Islands"
 msgstr ""
 
 #: src/translations.h:466
-msgid "South Africa"
+msgid "United States Virgin Islands"
 msgstr ""
 
 #: src/translations.h:467
-msgid "Zambia"
+msgid "Viet Nam"
 msgstr ""
 
 #: src/translations.h:468
+msgid "Vanuatu"
+msgstr ""
+
+#: src/translations.h:469
+msgid "Wallis and Futuna"
+msgstr ""
+
+#: src/translations.h:470
+msgid "Samoa"
+msgstr ""
+
+#: src/translations.h:471
+msgid "Yemen"
+msgstr ""
+
+#: src/translations.h:472
+msgid "Mayotte"
+msgstr ""
+
+#: src/translations.h:473
+msgid "Yugoslavia"
+msgstr ""
+
+#: src/translations.h:474
+msgid "South Africa"
+msgstr ""
+
+#: src/translations.h:475
+msgid "Zambia"
+msgstr ""
+
+#: src/translations.h:476
 msgid "Zimbabwe"
 msgstr ""
 
