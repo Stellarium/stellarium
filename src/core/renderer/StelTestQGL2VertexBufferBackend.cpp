@@ -103,11 +103,11 @@ void StelTestQGL2VertexBufferBackend::getVertex
 //! @param handleOut GL handle to the attribute (attribute location) will be stored here.
 //! @param attribute Defines the attribute to enable.
 //! @param data      Attribute data (e.g. positions, texcoords, normals, etc.)
-void enableAttribute(QGLShaderProgram* program, int& handleOut,
+void enableAttribute(QGLShaderProgram& program, int& handleOut,
                      const StelVertexAttribute& attribute, const void* data)
 {
 	const char* const name = glslAttributeName(attribute.interpretation);
-	const int handle = program->attributeLocation(name);
+	const int handle = program.attributeLocation(name);
 	if(handle == -1)
 	{
 		qDebug() << "Missing vertex attribute: " << name;
@@ -115,9 +115,9 @@ void enableAttribute(QGLShaderProgram* program, int& handleOut,
 		           "Vertex attribute required for current vertex format is not in the GLSL shader");
 	}
 
-	program->setAttributeArray(handle, glAttributeType(attribute.type), 
-	                           data, attributeDimensions(attribute.type));
-	program->enableAttributeArray(handle);
+	program.setAttributeArray(handle, glAttributeType(attribute.type), 
+	                          data, attributeDimensions(attribute.type));
+	program.enableAttributeArray(handle);
 
 	handleOut = handle;
 }
@@ -129,10 +129,11 @@ void StelTestQGL2VertexBufferBackend::
 	Q_ASSERT_X(locked, Q_FUNC_INFO,
 	           "Trying to draw a vertex buffer that is not locked.");
 
+	StelQGLGLSLShader* shader = 
+		renderer.getShader(attributes.attributes, attributes.count);
 	// Get shader for our format from the renderer.
-	QGLShaderProgram* program = 
-		renderer.getShaderProgram(attributes.attributes, attributes.count);
-	if(!program->bind())
+	QGLShaderProgram& program = shader->getProgram();
+	if(!program.bind())
 	{
 		Q_ASSERT_X(false, Q_FUNC_INFO, "Failed to bind shader program");
 	}
@@ -140,8 +141,10 @@ void StelTestQGL2VertexBufferBackend::
 	int enabledAttributes [MAX_VERTEX_ATTRIBUTES];
 
 	bool usingVertexColors = false;
+	// Number of all attributes, including any special ones like unprojected position.
+	int totalAttributes = 0;
 	// Provide all vertex attributes' arrays to GL.
-	for(int attrib = 0; attrib < attributes.count; ++attrib)
+	for(int attrib = 0; attrib < attributes.count; ++attrib, ++totalAttributes)
 	{
 		Q_ASSERT_X(attrib < MAX_VERTEX_ATTRIBUTES, Q_FUNC_INFO,
 		           "enabledAttributes array is too small to handle all vertex attributes.");
@@ -155,8 +158,27 @@ void StelTestQGL2VertexBufferBackend::
 		        usingProjectedPositions)
 		{
 			// Using projected positions, use projectedPositions vertex array.
-			enableAttribute(program, enabledAttributes[attrib], 
+			enableAttribute(program, enabledAttributes[totalAttributes], 
 			                attribute, projectedPositions.constData());
+
+			// Special case when using unprojected position.
+			if(shader->useUnprojectedPosition())
+			{
+				++totalAttributes;
+				const char* const name = "unprojectedVertex";
+				const int handle = program.attributeLocation(name);
+				if(handle == -1)
+				{
+					qDebug() << "Missing vertex attribute: " << name;
+					Q_ASSERT_X(false, Q_FUNC_INFO,
+					           "Unprojected position vertex attribute is used, but not present in the GLSL shader");
+				}
+				program.setAttributeArray(handle, glAttributeType(attribute.type), 
+				                          buffers[attrib]->constData(), attributeDimensions(attribute.type));
+				program.enableAttributeArray(handle);
+				enabledAttributes[totalAttributes] = handle;
+			}
+
 			// Projected positions are used within a single renderer drawVertexBufferBackend
 			// call - we set this so any further calls with this buffer won't accidentally 
 			// use projected data from before (we don't destroy the buffer so we can 
@@ -167,18 +189,18 @@ void StelTestQGL2VertexBufferBackend::
 
 		// Not a position attribute, or not using projected positions, 
 		// so use the normal vertex array.
-		enableAttribute(program, enabledAttributes[attrib], attribute, 
+		enableAttribute(program, enabledAttributes[totalAttributes], attribute, 
 		                buffers[attrib]->constData());
 	}
 
-	program->setUniformValue("projectionMatrix", projectionMatrix);
+	program.setUniformValue("projectionMatrix", projectionMatrix);
 
 	// If we don't have a color per vertex, we have a global color
 	// (to keep in line with Stellarium behavior before the GL refactor)
 	if(!usingVertexColors)
 	{
 		const Vec4f& color = renderer.getGlobalColor();
-		program->setUniformValue("globalColor", color[0], color[1], color[2], color[3]);
+		program.setUniformValue("globalColor", color[0], color[1], color[2], color[3]);
 	}
 
 	// Draw the vertex arrays.
@@ -194,10 +216,10 @@ void StelTestQGL2VertexBufferBackend::
 
 	for(int attribute = 0; attribute < attributes.count; attribute++) 
 	{
-		program->disableAttributeArray(enabledAttributes[attribute]);
+		program.disableAttributeArray(enabledAttributes[attribute]);
 	}
 
-	program->release();
+	program.release();
 }
 
 int StelTestQGL2VertexBufferBackend::
