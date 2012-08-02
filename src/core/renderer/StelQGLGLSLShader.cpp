@@ -7,6 +7,7 @@ StelQGLGLSLShader::StelQGLGLSLShader(StelQGL2Renderer* renderer)
 	, program(renderer->getGLContext())
 	, bound(false)
 	, built(false)
+	, useUnprojectedPosition_(false)
 {
 }
 
