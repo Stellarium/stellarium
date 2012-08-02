@@ -77,9 +77,10 @@
 //! 		delete shader;
 //! 		return false; // failed creating shader
 //! 	}
+//! 	// Shader log might contain warnings.
 //! 	if(!shader->log().isEmpty())
 //! 	{
-//! 		qWarning() << "Warnings during shader creation: " << shader->log();
+//! 		qWarning() << "Shader creation log: " << shader->log();
 //! 	}
 //! }
 //! @endcode
@@ -133,6 +134,9 @@ public:
 	virtual bool build() = 0;
 
 	//! Return a string containing the error log of the shader.
+	//!
+	//! If the shader is succesfully built, it will contain a success message.
+	//! It might also contain GLSL code warnings.
 	virtual QString log() const = 0;
 
 	//! Bind the shader, using it for following draw calls.
