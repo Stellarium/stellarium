@@ -370,7 +370,7 @@ bool Atmosphere::lazyLoadShader(StelRenderer* renderer)
 
 	if(!shader->log().isEmpty())
 	{
-		qWarning() << "Warnings while creating atmosphere shader: " << shader->log();
+		qDebug() << "Atmosphere shader build log: " << shader->log();
 	}
 
 	return true;
