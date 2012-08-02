@@ -51,7 +51,7 @@ ArtificialPlanet::ArtificialPlanet(const PlanetP& orig) :
 		NULL, NULL, 0, false, true, false), dest(0),
 		orig_name(orig->getEnglishName()), orig_name_i18n(orig->getNameI18n())
 {
-	radius = 0;
+	// radius = 0;
 	// set parent = sun:
 	if (orig->getParent())
 	{
