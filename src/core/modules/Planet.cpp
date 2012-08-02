@@ -71,7 +71,9 @@ Planet::Planet(const QString& englishName,
 	  osculatingFunc(osculatingFunc),
 	  parent(NULL),
 	  hidden(hidden),
-	  atmosphere(hasAtmosphere)
+	  atmosphere(hasAtmosphere),
+	  unlitSphere(NULL),
+	  litSphere(NULL)
 {
 	texMapName = atexMapName;
 	lastOrbitJD =0;
@@ -99,11 +101,31 @@ Planet::Planet(const QString& englishName,
 
 Planet::~Planet()
 {
-	if (rings)
+	if(NULL != rings)
+	{
 		delete rings;
-	if(NULL == orbitVertices)
+		rings = NULL;
+	}
+
+	if(NULL != orbitVertices)
 	{
 		delete orbitVertices;
+		orbitVertices = NULL;
+	}
+
+	if(NULL != litSphere)
+	{
+		Q_ASSERT_X(NULL == unlitSphere, Q_FUNC_INFO,
+		           "Both lit and unlit spheres have been generated");
+		delete litSphere;
+		litSphere = NULL;
+	}
+	if(NULL != unlitSphere)
+	{
+		Q_ASSERT_X(NULL == litSphere, Q_FUNC_INFO,
+		           "Both lit and unlit spheres have been generated");
+		delete unlitSphere;
+		unlitSphere = NULL;
 	}
 }
 
@@ -746,7 +768,8 @@ double Planet::getSpheroidAngularSize(const StelCore* core) const
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
-void Planet::draw(StelCore* core, StelRenderer* renderer, float maxMagLabels, const QFont& planetNameFont)
+void Planet::draw(StelCore* core, StelRenderer* renderer, float maxMagLabels, 
+                  const QFont& planetNameFont, StelGLSLShader* planetShader)
 {
 	if (hidden)
 		return;
@@ -801,48 +824,35 @@ void Planet::draw(StelCore* core, StelRenderer* renderer, float maxMagLabels, co
 		}
 		drawHints(core, renderer, planetNameFont);
 
-		draw3dModel(core, renderer, transfo, screenSz);
+		draw3dModel(core, renderer, planetShader, transfo, screenSz);
 	}
 	return;
 }
 
-void Planet::draw3dModel(StelCore* core, StelRenderer* renderer, StelProjector::ModelViewTranformP transfo, float screenSz)
+void Planet::draw3dModel(StelCore* core, StelRenderer* renderer, StelGLSLShader* planetShader, 
+                         StelProjector::ModelViewTranformP transfo, float screenSz)
 {
 	// This is the main method drawing a planet 3d model
 	// Some work has to be done on this method to make the rendering nicer
 
-	if (screenSz>1.)
+	if (screenSz > 1.0f)
 	{
 		StelProjector::ModelViewTranformP transfo2 = transfo->clone();
 		transfo2->combine(Mat4d::zrotation(M_PI/180*(axisRotation + 90.)));
-		StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
+		StelProjectorP projector = core->getProjection(transfo2);
+		StelPainter* sPainter = new StelPainter(projector);
+
+		StelLight light;
 
 		if (flagLighting)
 		{
-			sPainter->getLight().enable();
-
 			// Set the main source of light to be the sun
 			Vec3d sunPos(0);
 			core->getHeliocentricEclipticModelViewTransform()->forward(sunPos);
-			sPainter->getLight().setPosition(Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
-
 			// Set the light parameters taking sun as the light source
-			static const Vec4f diffuse = Vec4f(2.f,2.f,2.f,1.f);
-			static const Vec4f zero = Vec4f(0.f,0.f,0.f,0.f);
-			static const Vec4f ambient = Vec4f(0.02f,0.02f,0.02f,0.02f);
-			sPainter->getLight().setAmbient(ambient);
-			sPainter->getLight().setDiffuse(diffuse);
-			sPainter->getLight().setSpecular(zero);
-
-			sPainter->getMaterial().setAmbient(ambient);
-			sPainter->getMaterial().setEmission(zero);
-			sPainter->getMaterial().setShininess(0.f);
-			sPainter->getMaterial().setSpecular(zero);
-		}
-		else
-		{
-			sPainter->getLight().disable();
-			sPainter->setColor(1.f,1.f,1.f);
+			light.position = Vec3f(sunPos[0], sunPos[1], sunPos[2]);
+			light.ambient  = Vec4f(0.02f, 0.02f, 0.02f, 0.02f);
+			light.diffuse  = Vec4f(2.0f, 2.0f, 2.0f, 1.0f);
 		}
 
 		if (rings)
@@ -855,16 +865,11 @@ void Planet::draw3dModel(StelCore* core, StelRenderer* renderer, StelProjector::
 			core->getClippingPlanes(&n,&f); // Save clipping planes
 			core->setClippingPlanes(z_near,z_far);
 
-			glDepthMask(GL_TRUE);
-			glClear(GL_DEPTH_BUFFER_BIT);
-			glEnable(GL_DEPTH_TEST);
 			renderer->clearDepthBuffer();
 			renderer->setDepthTest(DepthTest_ReadWrite);
-			drawSphere(sPainter, screenSz);
+			drawSphere(renderer, projector, flagLighting ? &light : NULL, planetShader, screenSz);
 			renderer->setDepthTest(DepthTest_ReadOnly);
-			sPainter->getLight().disable();
-			rings->draw(sPainter->getProjector(), renderer, transfo, screenSz);
-			sPainter->getLight().enable();
+			rings->draw(projector, renderer, transfo, screenSz);
 			renderer->setDepthTest(DepthTest_Disabled);
 			core->setClippingPlanes(n,f);  // Restore old clipping planes
 		}
@@ -881,16 +886,15 @@ void Planet::draw3dModel(StelCore* core, StelRenderer* renderer, StelProjector::
 				glStencilFunc(GL_ALWAYS, 0x1, 0x1);
 				glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
 				glEnable(GL_STENCIL_TEST);
-				drawSphere(sPainter, screenSz);
+				drawSphere(renderer, projector, flagLighting ? &light : NULL, planetShader, screenSz);
 				glDisable(GL_STENCIL_TEST);
 
-				sPainter->getLight().disable();
 				drawEarthShadow(core, sPainter);
 			}
 			else
 			{
 				// Normal planet
-				drawSphere(sPainter, screenSz);
+				drawSphere(renderer, projector, flagLighting ? &light : NULL, planetShader, screenSz);
 			}
 		}
 		if (sPainter)
@@ -909,8 +913,21 @@ void Planet::draw3dModel(StelCore* core, StelRenderer* renderer, StelProjector::
 	core->getSkyDrawer()->postDrawSky3dModel(sPainter.getProjector(), tmp, surfArcMin2, getVMagnitude(core, true), color);
 }
 
+void Planet::drawUnlitSphere(StelRenderer* renderer, StelProjectorP projector)
+{
+	if(NULL == unlitSphere)
+	{
+		const SphereParams params = SphereParams(radius * sphereScale).resolution(40, 40)
+		                            .oneMinusOblateness(oneMinusOblateness);
+		unlitSphere = StelGeometryBuilder().buildSphereUnlit(params);
+	}
 
-void Planet::drawSphere(StelPainter* painter, float screenSz)
+	unlitSphere->draw(renderer, projector);
+}
+
+
+void Planet::drawSphere(StelRenderer* renderer, StelProjectorP projector,
+                        const StelLight* light, StelGLSLShader* shader, float screenSz)
 {
 	if (texMap)
 	{
@@ -920,23 +937,72 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 			return;
 		}
 	}
-	painter->enableTexture2d(true);
-	glDisable(GL_BLEND);
-	glEnable(GL_CULL_FACE);
+	renderer->setBlendMode(BlendMode_None);
+	renderer->setCulledFaces(CullFace_Back);
 
-	// Draw the spheroid itself
-	// Adapt the number of facets according with the size of the sphere for optimization
-	int nb_facet = (int)(screenSz * 40/50);	// 40 facets for 1024 pixels diameter on screen
-	if (nb_facet<10) nb_facet = 10;
-	if (nb_facet>40) nb_facet = 40;
-	painter->setShadeModel(StelPainter::ShadeModelSmooth);
-	// Rotate and add an extra quarter rotation so that the planet texture map
-	// fits to the observers position. No idea why this is necessary,
-	// perhaps some openGl strangeness, or confusing sin/cos.
+	// Now draw the sphere
+	// Lighting is disabled, so just draw the plain sphere.
+	if(NULL == light)
+	{
+		renderer->setGlobalColor(1.0f, 1.0f, 1.0f);
+		drawUnlitSphere(renderer, projector);
+	}
+	// Do the lighting on shader, avoiding the need to regenerate the sphere.
+	// Shader is NULL if it failed to load, in that case we need to do lighting on the CPU.
+	else if(renderer->isGLSLSupported() && NULL != shader)
+	{
+		if(renderer->isGLSLSupported())
+		{
+			shader->bind();
+			// provides the unprojectedVertex attribute to the shader.
+			shader->useUnprojectedPositionAttribute();
 
-	painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
-	painter->setShadeModel(StelPainter::ShadeModelFlat);
-	glDisable(GL_CULL_FACE);
+			Vec3d lightPos = Vec3d(light->position[0], light->position[1], light->position[2]);
+			projector->getModelViewTransform()
+			         ->getApproximateLinearTransfo()
+			         .transpose()
+			         .multiplyWithoutTranslation(Vec3d(lightPos[0], lightPos[1], lightPos[2]));
+			projector->getModelViewTransform()->backward(lightPos);
+			lightPos.normalize();
+
+			shader->setUniformValue("lightPos"           , Vec3f(lightPos[0]                          , lightPos[1] , lightPos[2]));
+			shader->setUniformValue("diffuseLight"       , light->diffuse);
+			shader->setUniformValue("ambientLight"       , light->ambient);
+			shader->setUniformValue("radius"             , static_cast<float>(radius * sphereScale));
+			shader->setUniformValue("oneMinusOblateness" , static_cast<float>(oneMinusOblateness));
+		}
+
+		drawUnlitSphere(renderer, projector);
+
+		if(renderer->isGLSLSupported())
+		{
+			shader->release();
+		}
+	}
+	// If shaders are not supported and we need lighting, we generate the sphere 
+	// with lighting baked into vertex colors.
+	else
+	{
+		// Adapt the number of facets according with the size of the sphere for optimization
+		// 40 facets for 1024 pixels diameter on screen
+		const int resolution = std::min(40, std::max(7, static_cast<int>(screenSz * 40.0 / 50.0)));
+
+		// Lazily construct the lit sphere.
+		if(NULL == litSphere)
+		{
+			const SphereParams params = SphereParams(radius * sphereScale)
+			                            .resolution(resolution, resolution)
+			                            .oneMinusOblateness(oneMinusOblateness);
+			litSphere = StelGeometryBuilder().buildSphereLit(params, *light);
+		}
+		else
+		{
+			litSphere->setResolution(resolution, resolution);
+		}
+		litSphere->draw(renderer, projector);
+	}
+
+	renderer->setCulledFaces(CullFace_None);
 }
 
 // draws earth shadow overlapping the moon using stencil buffer

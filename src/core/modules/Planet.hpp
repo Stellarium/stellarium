@@ -83,7 +83,7 @@ public:
 	//! @param projector Projector to project the vertices.
 	//! @param renderer  Renderer to draw with.
 	//! @param transform Used to determine whether we're above or below the ring.
-	//! @param screenSz  Angular size of the screen.
+	//! @param screenSz  Screen size.
 	void draw(StelProjectorP projector, class StelRenderer* renderer, StelProjector::ModelViewTranformP transform, double screenSz);
 
 	double getSize(void) const {return radiusMax;}
@@ -180,8 +180,16 @@ public:
 	//! Translate planet name using the passed translator
 	virtual void translateName(StelTranslator& trans);
 
-	// Draw the Planet
-	void draw(StelCore* core, class StelRenderer* renderer, float maxMagLabels, const QFont& planetNameFont);
+	//! Draw the Planet.
+	//!
+	//! @param core           The StelCore object.
+	//! @param renderer       Renderer used for drawing.
+	//! @param maxMagLabels   Maximum visual magnitude to draw the label at.
+	//! @param planetNameFont Font used to draw the planet label.
+	//! @param planetShader   If not NULL and lighting is enable for the planet, this shader 
+	//!                       handles lighting.
+	void draw(StelCore* core, class StelRenderer* renderer, float maxMagLabels,
+	          const QFont& planetNameFont, class StelGLSLShader* planetShader);
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to Planet
@@ -280,8 +288,8 @@ public:
 	double deltaOrbitJD;
 	bool orbitCached;                // whether orbit calculations are cached for drawing orbit yet
 	bool closeOrbit;                 // whether to connect the beginning of the orbit line to
-					 // the end: good for elliptical orbits, bad for parabolic
-					 // and hyperbolic orbits
+	                                 // the end: good for elliptical orbits, bad for parabolic
+	                                 // and hyperbolic orbits
 
 	static Vec3f orbitColor;
 	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
@@ -296,11 +304,40 @@ protected:
 	// Return the information string "ready to print" :)
 	QString getSkyLabel(const StelCore* core) const;
 
-	// Draw the 3d model. Call the proper functions if there are rings etc..
-	void draw3dModel(StelCore* core, class StelRenderer* renderer, StelProjector::ModelViewTranformP transfo, float screenSz);
+	//! Draw the 3d model. Call the proper functions if there are rings etc. .
+	//!
+	//! @param core         The StelCore object.
+	//! @param renderer     Renderer used for drawing.
+	//! @param planetShader If not NULL and lighting is enabled, this shader is used to handled
+	//!                     lighting.
+	//! @param transfo      Modelview transform.
+	//! @param screenSz     Screen size.
+	void draw3dModel(StelCore* core, class StelRenderer* renderer, 
+	                 class StelGLSLShader* planetShader,
+	                 StelProjector::ModelViewTranformP transfo, float screenSz);
 
-	// Draw the 3D sphere
-	void drawSphere(StelPainter* painter, float screenSz);
+	//! Draw the unlit sphere model.
+	//!
+	//! Used either when lighting is disabled or when it is done in shaders.
+	//!
+	//! Called by drawSphere.
+	//!
+	//! @param renderer  Renderer to draw with.
+	//! @param projector Projector to project the vertices.
+	void drawUnlitSphere(class StelRenderer* renderer, StelProjectorP projector);
+
+	//! Draw the 3D sphere.
+	//!
+	//! @param renderer  Renderer to draw with.
+	//! @param projector Projector to project vertices.
+	//! @param light     If NULL, lighting is not used. Otherwise the sphere is 
+	//!                  either generated with lighting (no shaders), or lit in
+	//!                  shaders (if GLSL is supported).
+	//! @param shader    If not NULL and lighting is enabled, this shader is used 
+	//!                  to light the planet on the GPU.
+	//! @param screenSz  Screen size.
+	void drawSphere(class StelRenderer* renderer, StelProjectorP projector,
+                   const struct StelLight* light, class StelGLSLShader* shader, float screenSz);
 
 	// Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, class StelRenderer* renderer, const QFont& planetNameFont);
@@ -308,12 +345,16 @@ protected:
 	QString englishName;             // english planet name
 	QString nameI18;                 // International translated name
 	QString texMapName;              // Texture file path
-	int flagLighting;                // Set whether light computation has to be proceed
 	RotationElements re;             // Rotation param
-	double radius;                   // Planet radius in AU
-	double oneMinusOblateness;       // (polar radius)/(equatorial radius)
+
+	// Note: vertex/index buffer generation depends on the fact that 
+	// flagLighting, radius and oneMinusOblateness don't change.
+	// If they change, buffers will have to be regenerated to reflect the change.
+	const int flagLighting;          // Set whether light computation has to be proceed
+	const double radius;             // Planet radius in AU
+	const double oneMinusOblateness; // (polar radius)/(equatorial radius)
 	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system
-					 // centered on the parent Planet
+	                                 // centered on the parent Planet
 	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen
 	Vec3d previousScreenPos;         // The position of this planet in the previous frame.
 	Vec3f color;
@@ -325,7 +366,7 @@ protected:
 
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
-					 // it is used for sorting while drawing
+	                                 // it is used for sorting while drawing
 	float sphereScale;               // Artificial scaling for better viewing
 	double lastJD;
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
@@ -340,6 +381,11 @@ protected:
 	bool flagLabels;                 // Define whether labels should be displayed
 	bool hidden;                     // useful for fake planets used as observation positions - not drawn or labeled
 	bool atmosphere;                 // Does the planet have an atmosphere?
+
+	//! Sphere used to draw the planet when lighting is disabled or when it is done in shaders.
+	class StelGeometrySphere* unlitSphere;
+	//! Sphere used to draw the planet when lighting is enabled and shaders are not used.
+	class StelGeometrySphere* litSphere;
 
 	static Vec3f labelColor;
 	static StelTextureSP hintCircleTex;
