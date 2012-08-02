@@ -1,5 +1,7 @@
 #include "StelGeometryBuilder.hpp"
 
+#include "StelRenderer.hpp"
+
 
 //TODO These lookup tables and their generation function need documentation
 
@@ -63,6 +65,317 @@ static void computeCosSinRho(const float phi, const int segments)
 		*--cosSinReverse =  cosSin[-1];
 		*--cosSinReverse = -cosSin[-2];
 	}
+}
+
+void StelGeometrySphere::draw(StelRenderer* renderer, StelProjectorP projector)
+{
+	// Lit spheres must update at every projector as projector is used in lighting.
+	if(updated || type == SphereType_Lit)
+	{
+		regenerate(renderer, projector);
+	}
+
+	switch(type)
+	{
+		case SphereType_Fisheye:
+		case SphereType_Unlit:
+		{
+			for(int row = 0; row < rowIndices.size(); ++row)
+			{
+				renderer->drawVertexBuffer(unlitVertices, rowIndices[row], projector);
+			}
+			break;
+		}
+		case SphereType_Lit:
+		{
+			for(int row = 0; row < rowIndices.size(); ++row)
+			{
+				renderer->drawVertexBuffer(litVertices, rowIndices[row], projector);
+			}
+			break;
+		}
+		default:
+			Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown sphere type");
+	}
+} 
+
+void StelGeometrySphere::regenerate(class StelRenderer* renderer, StelProjectorP projector)
+{
+#ifndef NDEBUG
+	switch(type)
+	{
+		case SphereType_Fisheye:
+		case SphereType_Unlit:
+		case SphereType_Lit:
+			break;
+		default:
+			Q_ASSERT_X(false, Q_FUNC_INFO, 
+			           "New sphere type - need to update StelGeometrySphere::regenerate()");
+	}
+#endif
+
+	// Prepare the vertex buffer
+	if(type == SphereType_Fisheye || type == SphereType_Unlit)
+	{
+		Q_ASSERT_X(litVertices == NULL, Q_FUNC_INFO,
+		           "Lit vertex buffer is used for unlit sphere");
+		if(unlitVertices == NULL)
+		{
+			unlitVertices = 
+				renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleStrip);
+		}
+		else
+		{
+			unlitVertices->unlock();
+			unlitVertices->clear();
+		}
+	}
+	else if(type == SphereType_Lit)
+	{
+		Q_ASSERT_X(unlitVertices == NULL, Q_FUNC_INFO,
+		           "Unlit vertex buffer is used for lit sphere");
+		if(litVertices == NULL)
+		{
+			litVertices = 
+				renderer->createVertexBuffer<VertexP3T2C4>(PrimitiveType_TriangleStrip);
+		}
+		else
+		{
+			litVertices->unlock();
+			litVertices->clear();
+		}
+	}
+	else
+	{
+		Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown sphere type");
+	}
+
+	// Prepare index buffers for rows.
+	// Add/remove rows based on stacks. Clear reused rows.
+	const int rowsKept = std::min(stacks, rowIndices.size());
+	for(int row = 0; row < rowsKept; ++row)
+	{
+		rowIndices[row]->unlock();
+		rowIndices[row]->clear();
+	}
+
+	if(stacks > rowIndices.size())
+	{
+		for(int row = rowIndices.size(); row < stacks; ++row)
+		{
+			rowIndices.append(renderer->createIndexBuffer(IndexType_U16));
+		}
+	}
+	else if(stacks < rowIndices.size())
+	{
+		for(int row = stacks; row < rowIndices.size(); ++row)
+		{
+			delete rowIndices[row];
+		}
+		rowIndices.resize(stacks);
+	}
+
+
+	// Now actually build the sphere
+
+	const float dtheta     = 2.0f * M_PI / slices;
+	computeCosSinTheta(dtheta, slices);
+
+	if(type == SphereType_Fisheye)
+	{
+		StelVertexBuffer<VertexP3T2>* vertices = unlitVertices;
+		const float stackAngle = M_PI / stacks;
+		const float drho       = stackAngle / fisheyeTextureFov;
+		computeCosSinRho(stackAngle, stacks);
+
+		const Vec2f texOffset(0.5f, 0.5f);
+		float yTexMult = orientInside ? -1.0f : 1.0f;
+		float xTexMult = flipTexture ? -1.0f : 1.0f;
+
+		// Build intermediate stacks as triangle strips
+		const float* cosSinRho = COS_SIN_RHO;
+		float rho = 0.0f;
+
+		// Generate all vertices of the sphere.
+		vertices->unlock();
+		for (int i = 0; i <= stacks; ++i, rho += drho)
+		{
+			const float rhoClamped = std::min(rho, 0.5f);
+			const float cosSinRho0 = cosSinRho[0];
+			const float cosSinRho1 = cosSinRho[1];
+			
+			const float* cosSinTheta = COS_SIN_THETA;
+			for (int slice = 0; slice <= slices; ++slice)
+			{
+				const Vec3f v(-cosSinTheta[1] * cosSinRho1,
+								  cosSinTheta[0] * cosSinRho1, 
+								  cosSinRho0 * oneMinusOblateness);
+				const Vec2f t(xTexMult * cosSinTheta[0], yTexMult * cosSinTheta[1]);
+				vertices->addVertex(VertexP3T2(v * radius, texOffset + rhoClamped * t));
+				cosSinTheta += 2;
+			}
+
+			cosSinRho += 2;
+		}
+		vertices->lock();
+
+		// Generate index buffers for strips (rows) forming the sphere.
+		uint index = 0;
+		for (int i = 0; i < stacks; ++i)
+		{
+			StelIndexBuffer* const indices = rowIndices[i];
+			indices->unlock();
+
+			for (int slice = 0; slice <= slices; ++slice)
+			{
+				const uint i1 = orientInside ? index + slices + 1 : index;
+				const uint i2 = orientInside ? index : index + slices + 1;
+				indices->addIndex(i1);
+				indices->addIndex(i2);
+				index += 1;
+			}
+
+			indices->lock();
+		}
+	}
+	else if(type == SphereType_Unlit)
+	{ 
+		StelVertexBuffer<VertexP3T2>* vertices = unlitVertices;
+		vertices->unlock();
+		const float drho   = M_PI / stacks;
+		computeCosSinRho(drho, stacks);
+
+		const float nsign = orientInside ? -1.0f : 1.0f;
+		// from inside texture is reversed 
+		float t           = orientInside ?  0.0f : 1.0f;
+
+		// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
+		// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
+		// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
+		const float ds = (flipTexture ? -1.0f : 1.0f) / slices;
+		const float dt = nsign / stacks; // from inside texture is reversed
+
+		const float* cosSinRho = COS_SIN_RHO;
+		for (int i = 0; i <= stacks; ++i)
+		{
+			const float cosSinRho0 = cosSinRho[0];
+			const float cosSinRho1 = cosSinRho[1];
+			
+			float s = flipTexture ? 1.0f : 0.0f;
+			const float* cosSinTheta = COS_SIN_THETA;
+			for (int slice = 0; slice <= slices; ++slice)
+			{
+				const Vec3f v(-cosSinTheta[1] * cosSinRho1,
+				              cosSinTheta[0] * cosSinRho1, 
+				              nsign * cosSinRho0 * oneMinusOblateness);
+				vertices->addVertex(VertexP3T2(v * radius, Vec2f(s, t)));
+				s += ds;
+				cosSinTheta += 2;
+			}
+
+			cosSinRho += 2;
+			t -= dt;
+		}
+		// Generate index buffers for strips (rows) forming the sphere.
+		uint index = 0;
+		for (int i = 0; i < stacks; ++i)
+		{
+			StelIndexBuffer* const indices = rowIndices[i];
+			indices->unlock();
+
+			for (int slice = 0; slice <= slices; ++slice)
+			{
+				indices->addIndex(index);
+				indices->addIndex(index + slices + 1);
+				index += 1;
+			}
+
+			indices->lock();
+		}
+
+		vertices->lock(); 
+	}
+	else if(type == SphereType_Lit)
+	{
+		StelVertexBuffer<VertexP3T2C4>* vertices = litVertices;
+		// Set up the light.
+		Vec3d lightPos = Vec3d(light.position[0], light.position[1], light.position[2]);
+		projector->getModelViewTransform()
+		         ->getApproximateLinearTransfo()
+		         .transpose()
+		         .multiplyWithoutTranslation(Vec3d(lightPos[0], lightPos[1], lightPos[2]));
+		projector->getModelViewTransform()->backward(lightPos);
+		lightPos.normalize();
+		const Vec4f ambientLight = light.ambient;
+		const Vec4f diffuseLight = light.diffuse; 
+
+		// Set up vertex generation.
+		vertices->unlock();
+		const float drho   = M_PI / stacks;
+		computeCosSinRho(drho, stacks);
+
+		const float nsign = orientInside ? -1.0f : 1.0f;
+		// from inside texture is reversed 
+		float t           = orientInside ?  0.0f : 1.0f;
+
+		// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
+		// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
+		// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
+		const float ds = (flipTexture ? -1.0f : 1.0f) / slices;
+		const float dt = nsign / stacks; // from inside texture is reversed
+
+		// Generate sphere vertices with lighting baked in colors.
+		const float* cosSinRho = COS_SIN_RHO;
+		for (int i = 0; i <= stacks; ++i)
+		{
+			const float cosSinRho0 = cosSinRho[0];
+			const float cosSinRho1 = cosSinRho[1];
+			
+			float s = flipTexture ? 1.0f : 0.0f;
+			const float* cosSinTheta = COS_SIN_THETA;
+			for (int slice = 0; slice <= slices; ++slice)
+			{
+				const Vec3f v(-cosSinTheta[1] * cosSinRho1,
+								  cosSinTheta[0] * cosSinRho1, 
+								  nsign * cosSinRho0 * oneMinusOblateness);
+				const float c = 
+					std::max(0.0, nsign * (lightPos[0] * v[0] * oneMinusOblateness +
+												  lightPos[1] * v[1] * oneMinusOblateness +
+												  lightPos[2] * v[2] / oneMinusOblateness));
+				const Vec4f color = std::min(c, 0.5f) * diffuseLight + ambientLight;
+				vertices->addVertex(VertexP3T2C4(v * radius, Vec2f(s, t), color));
+				s += ds;
+				cosSinTheta += 2;
+			}
+
+			cosSinRho += 2;
+			t -= dt;
+		}
+		// Generate index buffers for strips (rows) forming the sphere.
+		uint index = 0;
+		for (int i = 0; i < stacks; ++i)
+		{
+			StelIndexBuffer* const indices = rowIndices[i];
+			indices->unlock();
+
+			for (int slice = 0; slice <= slices; ++slice)
+			{
+				indices->addIndex(index);
+				indices->addIndex(index + slices + 1);
+				index += 1;
+			}
+
+			indices->lock();
+		}
+
+		vertices->lock(); 
+	}
+	else
+	{
+		Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown sphere type");
+	}
+
+	updated = false;
 }
 
 void StelGeometryBuilder::buildFanDisk
@@ -187,173 +500,6 @@ void StelGeometryBuilder::buildFanDisk
 
 	vertexBuffer->lock();
 	indexBuffer->lock();
-}
-
-#ifndef NDEBUG
-//! Checks preconditions for sphere building.
-//!
-//! @param vertices        Vertex buffer to store sphere vertices.
-//! @param rowIndexBuffers Index buffers to store triangle strips forming sphere rows.
-//! @param stacks          Number of rows of the sphere grid.
-//! @param slices          Number of columns of the sphere grid.
-static void spherePreconditions(StelVertexBuffer<VertexP3T2>* const vertices,
-                                QVector<StelIndexBuffer*> rowIndexBuffers,
-                                const int stacks, const int slices)
-{
-	Q_ASSERT_X(stacks <= MAX_STACKS, Q_FUNC_INFO, "Too many stacks");
-	Q_ASSERT_X(stacks > 3, Q_FUNC_INFO,
-	           "Need at least 3 row index buffers to build a sphere");
-	Q_ASSERT_X(slices <= MAX_SLICES, Q_FUNC_INFO, "Too many slices");
-	Q_ASSERT_X(slices > 3, Q_FUNC_INFO, "Need at least 3 columns to build a sphere");
-	Q_ASSERT_X(vertices->length() == 0, Q_FUNC_INFO, 
-	           "Need an empty vertex buffer to build a sphere");
-	Q_ASSERT_X(vertices->primitiveType() == PrimitiveType_TriangleStrip, 
-	           Q_FUNC_INFO, "Need a triangle strip vertex buffer to build a sphere");
-	foreach(const StelIndexBuffer* buffer, rowIndexBuffers)
-	{
-		Q_ASSERT_X(buffer->length() == 0, Q_FUNC_INFO, 
-		           "Need empty index buffers to build a sphere");
-	}
-}
-#endif
-
-// A lot of code in the below two member functions is identical, but 
-// there is no simple way to refactor it out without using a single function 
-// calling many subfunctions. Perhaps a Sphere class with generation variables 
-// as data members could solve this.
-
-void StelGeometryBuilder::buildSphereFisheye
-	(StelVertexBuffer<VertexP3T2>* const vertices, 
-	 QVector<StelIndexBuffer*>& rowIndexBuffers, const float radius,
-	 const int slices, const float textureFov, const bool orientInside)
-{
-	const int stacks = rowIndexBuffers.size();
-#ifndef NDEBUG
-	spherePreconditions(vertices, rowIndexBuffers, stacks, slices);
-#endif
-
-	const float stackAngle = M_PI / stacks;
-	const float dtheta     = 2.0f * M_PI / slices;
-	const float drho       = stackAngle / textureFov;
-	computeCosSinRho(stackAngle, stacks);
-	computeCosSinTheta(dtheta, slices);
-
-	const Vec2f texOffset(0.5f, 0.5f);
-	float yTexMult = orientInside ? -1.0f : 1.0f;
-
-	// Build intermediate stacks as triangle strips
-	const float* cosSinRho = COS_SIN_RHO;
-	float rho = 0.0f;
-
-	// Generate all vertices of the sphere.
-	vertices->unlock();
-	for (int i = 0; i <= stacks; ++i, rho += drho)
-	{
-		const float rhoClamped = std::min(rho, 0.5f);
-		const float cosSinRho0 = cosSinRho[0];
-		const float cosSinRho1 = cosSinRho[1];
-		
-		const float* cosSinTheta = COS_SIN_THETA;
-		for (int slice = 0; slice <= slices; ++slice)
-		{
-			const Vec3f v(-cosSinTheta[1] * cosSinRho1, cosSinTheta[0] * cosSinRho1, cosSinRho0);
-			const Vec2f t(cosSinTheta[0], yTexMult * cosSinTheta[1]);
-			vertices->addVertex(VertexP3T2(v * radius, texOffset + rhoClamped * t));
-			cosSinTheta += 2;
-		}
-
-		cosSinRho += 2;
-	}
-	vertices->lock();
-
-	// Generate index buffers for strips (rows) forming the sphere.
-	uint index = 0;
-	for (int i = 0; i < stacks; ++i)
-	{
-		StelIndexBuffer* const indices = rowIndexBuffers[i];
-		indices->unlock();
-
-		for (int slice = 0; slice <= slices; ++slice)
-		{
-			const uint i1 = orientInside ? index + slices + 1 : index;
-			const uint i2 = orientInside ? index : index + slices + 1;
-			indices->addIndex(i1);
-			indices->addIndex(i2);
-			index += 1;
-		}
-
-		indices->lock();
-	}
-}
-
-void StelGeometryBuilder::buildSphere 
-	(StelVertexBuffer<VertexP3T2>* const vertices, 
-	 QVector<StelIndexBuffer*>& rowIndexBuffers, const float radius,
-	 const float oneMinusOblateness, const int slices, 
-	 const bool orientInside, const bool flipTexture)
-{
-	const int stacks = rowIndexBuffers.size();
-
-#ifndef NDEBUG
-	spherePreconditions(vertices, rowIndexBuffers, stacks, slices);
-#endif
-
-	vertices->unlock();
-	const float drho   = M_PI / stacks;
-	const float dtheta = 2.0f * M_PI / slices;
-	computeCosSinRho(drho, stacks);
-	computeCosSinTheta(dtheta, slices);
-
-	const float nsign = orientInside ? -1.0f : 1.0f;
-	// from inside texture is reversed 
-	float t           = orientInside ?  0.0f : 1.0f;
-
-	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
-	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
-	// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
-	// If the texture is flipped, we iterate the coordinates backward.
-	const float ds = (flipTexture ? -1.0f : 1.0f) / slices;
-	const float dt = nsign / stacks; // from inside texture is reversed
-
-	const float* cosSinRho = COS_SIN_RHO;
-	for (int i = 0; i <= stacks; ++i)
-	{
-		const float cosSinRho0 = cosSinRho[0];
-		const float cosSinRho1 = cosSinRho[1];
-		
-		float s = !flipTexture ? 0.0f : 1.0f;
-		const float* cosSinTheta = COS_SIN_THETA;
-		for (int slice = 0; slice <= slices; ++slice)
-		{
-			const Vec3f v(-cosSinTheta[1] * cosSinRho1,
-			              cosSinTheta[0] * cosSinRho1, 
-			              nsign * cosSinRho0 * oneMinusOblateness);
-			vertices->addVertex(VertexP3T2(v * radius, Vec2f(s, t)));
-			s += ds;
-			cosSinTheta += 2;
-		}
-
-		cosSinRho += 2;
-		t -= dt;
-	}
-	// Generate index buffers for strips (rows) forming the sphere.
-	uint index = 0;
-	for (int i = 0; i < stacks; ++i)
-	{
-		StelIndexBuffer* const indices = rowIndexBuffers[i];
-		indices->unlock();
-
-		for (int slice = 0; slice <= slices; ++slice)
-		{
-			indices->addIndex(index);
-			indices->addIndex(index + slices + 1);
-			index += 1;
-		}
-
-		indices->lock();
-	}
-
-	vertices->lock();
 }
 
 void StelGeometryBuilder::buildRing

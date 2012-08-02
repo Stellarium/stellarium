@@ -82,10 +82,8 @@ private:
 	float intensity;
 	class LinearFader* fader;
 
-	//! Vertices of the sphere.
-	StelVertexBuffer<VertexP3T2>* sphereVertices;
-	//! Index buffers storing triangle strips that are the rows of the sphere.
-	QVector<StelIndexBuffer*> sphereRows;
+	//! Sphere used to draw the Milky Way.
+	class StelGeometrySphere* skySphere;
 };
 
 #endif // _MILKYWAY_HPP_
