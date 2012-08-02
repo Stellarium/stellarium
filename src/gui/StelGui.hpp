@@ -154,7 +154,6 @@ public slots:
 
 	//! Hide or show the GUI.  Public so it can be called from scripts.
 	void setGuiVisible(bool);	
-	void home();
 
 private slots:
 	void reloadStyle();
@@ -164,7 +163,8 @@ private slots:
 	#endif
 	//! Load color scheme from the given ini file and section name
 	void setStelStyle(const QString& section);
-	void quit();		
+	void quit();
+	void home();
 	void updateI18n();
 	//! Process changes from the ConstellationMgr
 	void artDisplayedUpdated(const bool displayed);
