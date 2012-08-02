@@ -161,7 +161,14 @@ public:
 	
 	virtual void clearDepthBuffer()
 	{
+		// glDepthMask enables writing to the depth buffer so we can clear it.
+		// This is a different API behavor from plain OpenGL. With OpenGL, the user 
+		// must enable writing to the depth buffer to clear it.
+		// StelRenderer allows it to be cleared regardless of modes set by setDepthTest
+		// (which serves the same role as glDepthMask() in GL).
+		glDepthMask(GL_TRUE);
 		glClear(GL_DEPTH_BUFFER_BIT);
+		glDepthMask(GL_FALSE);
 	}
 
 	//! Make Stellarium GL context the currently used GL context. Call this before GL calls.
