@@ -160,6 +160,8 @@ SET(stellarium_lib_SRCS
 	core/renderer/StelTexture.hpp
 	core/renderer/StelTextureTypes.hpp
 
+	core/renderer/StelLight.hpp
+
 	core/renderer/StelGLSLShader.hpp
 	core/renderer/StelQGLGLSLShader.hpp
 	core/renderer/StelQGLGLSLShader.cpp
