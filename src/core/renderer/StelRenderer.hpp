@@ -58,6 +58,19 @@ enum DepthTest
 	DepthTest_ReadWrite
 };
 
+//! Possible stencil test modes.
+enum StencilTest
+{
+	//! Stencil test is disabled and does not affect drawing.
+	StencilTest_Disabled,
+	//! Drawing works normally, but writes value 1 to the stencil buffer for every pixel drawn.
+	StencilTest_Write_1,
+	//! Only pixels where the stencil buffer has a value of 1 are drawn to.
+	//!
+	//! Stencil buffer values themselves are not changed.
+	StencilTest_DrawIf_1
+};
+
 //Notes:
 //
 //enable/disablePainting are temporary and will be removed
@@ -494,11 +507,29 @@ public:
 	//!
 	virtual void setCulledFaces(const CullFace cullFace) = 0;
 
-	//! Clear the depth buffer, removing any depth information.
+	//! Clear the depth buffer to zeroes, removing any depth information.
 	virtual void clearDepthBuffer() = 0;
 
 	//! Set depth test mode.
+	//!
+	//! Depth test is implemented to be as specific as possible, 
+	//! only supporting what Stellarium needs. This might be counterintuitive, 
+	//! as much of the power of OpenGL is removed. However, 
+	//! this makes it easier to implement different Renderer backends that 
+	//! might not necessarily be based on OpenGL.
 	virtual void setDepthTest(const DepthTest test) = 0;
+
+	//! Clear the stencil buffer to zeroes, removing any stencil information.
+	virtual void clearStencilBuffer() = 0;
+
+	//! Set stencil test mode.
+	//!
+	//! Stencil test is implemented to be as specific as possible, 
+	//! only supporting what Stellarium needs. This might be counterintuitive, 
+	//! as much of the power of OpenGL is removed. However, 
+	//! this makes it easier to implement different Renderer backends that 
+	//! might not necessarily be based on OpenGL.
+	virtual void setStencilTest(const StencilTest test) = 0;
 
 protected:
 	//! Create a vertex buffer backend. Used by createVertexBuffer.
