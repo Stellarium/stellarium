@@ -377,6 +377,10 @@ protected:
 			           "backend or uninitialized");
 		}
 
+		// Instead of setting GL state when functions such as setDepthTest() or setCulledFaces()
+		// are called, we only set it before drawing and reset after drawing to avoid 
+		// conflicts with e.g. Qt OpenGL backend, or any other GL code that might be running.
+
 		// GL setup before drawing.
 		// Fix some problem when using Qt OpenGL2 engine
 		glStencilMask(0x11111111);
@@ -395,7 +399,26 @@ protected:
 				glDepthMask(GL_TRUE);
 				break;
 			default:
-				Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown depth test value");
+				Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown depth test mode");
+		}
+
+		switch(stencilTest)
+		{
+			case StencilTest_Disabled:
+				glDisable(GL_STENCIL_TEST);
+				break;
+			case StencilTest_Write_1:
+				glStencilFunc(GL_ALWAYS, 0x1, 0x1);
+				glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
+				glEnable(GL_STENCIL_TEST);
+				break;
+			case StencilTest_DrawIf_1:
+				glEnable(GL_STENCIL_TEST);
+				glStencilFunc(GL_EQUAL, 0x1, 0x1);
+				glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+				break;
+			default:
+				Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown stencil test mode");
 		}
 
 		switch(culledFaces)
@@ -443,6 +466,7 @@ protected:
 		glCullFace(GL_BACK);
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_DEPTH_TEST);
+		glDisable(GL_STENCIL_TEST);
 
 		invariant();
 	}
