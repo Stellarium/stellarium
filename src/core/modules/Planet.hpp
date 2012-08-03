@@ -43,7 +43,6 @@ typedef void (OsculatingFunctType)(double jd0,double jd,double xyz[3]);
 #define ORBIT_SEGMENTS 360
 
 class StelFont;
-class StelPainter;
 class StelTranslator;
 
 struct TrailPoint
@@ -299,7 +298,7 @@ protected:
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
 
 	// draw earth shadow on moon for lunar eclipses
-	void drawEarthShadow(StelCore* core, StelPainter* sPainter);
+	void drawEarthShadow(StelCore* core, class StelRenderer* renderer);
 
 	// Return the information string "ready to print" :)
 	QString getSkyLabel(const StelCore* core) const;

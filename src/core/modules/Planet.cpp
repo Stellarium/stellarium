@@ -39,7 +39,6 @@
 #include "StelModuleMgr.hpp"
 #include "StarMgr.hpp"
 #include "StelMovementMgr.hpp"
-#include "StelPainter.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 
@@ -790,8 +789,7 @@ void Planet::draw(StelCore* core, StelRenderer* renderer, float maxMagLabels,
 		// Draw the rings if we are located on a planet with rings, but not the planet itself.
 		if (rings)
 		{
-			StelPainter sPainter(core->getProjection(transfo));
-			rings->draw(sPainter.getProjector(), renderer, transfo,1000.0);
+			rings->draw(core->getProjection(transfo), renderer, transfo,1000.0);
 		}
 		return;
 	}
@@ -840,8 +838,6 @@ void Planet::draw3dModel(StelCore* core, StelRenderer* renderer, StelGLSLShader*
 		StelProjector::ModelViewTranformP transfo2 = transfo->clone();
 		transfo2->combine(Mat4d::zrotation(M_PI/180*(axisRotation + 90.)));
 		StelProjectorP projector = core->getProjection(transfo2);
-		StelPainter* sPainter = new StelPainter(projector);
-
 		StelLight light;
 
 		if (flagLighting)
@@ -881,15 +877,11 @@ void Planet::draw3dModel(StelCore* core, StelRenderer* renderer, StelGLSLShader*
 				// Draw earth shadow over moon using stencil buffer if appropriate
 				// This effect curently only looks right from earth viewpoint
 				// TODO: moon magnitude label during eclipse isn't accurate...
-				glClearStencil(0x0);
-				glClear(GL_STENCIL_BUFFER_BIT);
-				glStencilFunc(GL_ALWAYS, 0x1, 0x1);
-				glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
-				glEnable(GL_STENCIL_TEST);
+				renderer->clearStencilBuffer();
+				renderer->setStencilTest(StencilTest_Write_1);
 				drawSphere(renderer, projector, flagLighting ? &light : NULL, planetShader, screenSz);
-				glDisable(GL_STENCIL_TEST);
-
-				drawEarthShadow(core, sPainter);
+				renderer->setStencilTest(StencilTest_Disabled);
+				drawEarthShadow(core, renderer);
 			}
 			else
 			{
@@ -897,9 +889,6 @@ void Planet::draw3dModel(StelCore* core, StelRenderer* renderer, StelGLSLShader*
 				drawSphere(renderer, projector, flagLighting ? &light : NULL, planetShader, screenSz);
 			}
 		}
-		if (sPainter)
-			delete sPainter;
-		sPainter=NULL;
 	}
 
 	// Draw the halo
@@ -908,9 +897,10 @@ void Planet::draw3dModel(StelCore* core, StelRenderer* renderer, StelGLSLShader*
 	float surfArcMin2 = getSpheroidAngularSize(core)*60;
 	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI; // the total illuminated area in arcmin^2
 
-	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	Vec3d tmp = getJ2000EquatorialPos(core);
-	core->getSkyDrawer()->postDrawSky3dModel(sPainter.getProjector(), tmp, surfArcMin2, getVMagnitude(core, true), color);
+	const Vec3d tmp = getJ2000EquatorialPos(core);
+	core->getSkyDrawer()
+	    ->postDrawSky3dModel(core->getProjection(StelCore::FrameJ2000),
+	                         tmp, surfArcMin2, getVMagnitude(core, true), color);
 }
 
 void Planet::drawUnlitSphere(StelRenderer* renderer, StelProjectorP projector)
@@ -1007,7 +997,7 @@ void Planet::drawSphere(StelRenderer* renderer, StelProjectorP projector,
 
 // draws earth shadow overlapping the moon using stencil buffer
 // umbra and penumbra are sized separately for accuracy
-void Planet::drawEarthShadow(StelCore* core, StelPainter* sPainter)
+void Planet::drawEarthShadow(StelCore* core, StelRenderer* renderer)
 {
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 	Vec3d e = ssm->getEarth()->getEclipticPos();
@@ -1038,65 +1028,56 @@ void Planet::drawEarthShadow(StelCore* core, StelPainter* sPainter)
 
 	shadow = mh + mdist*mscale;
 
-	StelProjectorP saveProj = sPainter->getProjector();
-	sPainter->setProjector(core->getProjection(StelCore::FrameHeliocentricEcliptic));
+	StelProjectorP projector = core->getProjection(StelCore::FrameHeliocentricEcliptic);
 
-	sPainter->enableTexture2d(true);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	sPainter->setColor(1,1,1);
-
-	glEnable(GL_STENCIL_TEST);
+	renderer->setBlendMode(BlendMode_Alpha);
+	renderer->setGlobalColor(1.0f, 1.0f, 1.0f);
 	// We draw only where the stencil buffer is at 1, i.e. where the moon was drawn
-	glStencilFunc(GL_EQUAL, 0x1, 0x1);
-	// Don't change stencil buffer value
-	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+	renderer->setStencilTest(StencilTest_DrawIf_1);
 
 	// shadow radial texture
 	texEarthShadow->bind();
 
-	Vec3d r;
-
 	// Draw umbra first
-	QVector<Vec2f> texCoordArray;
-	QVector<Vec3d> vertexArray;
-	texCoordArray.reserve(210);
-	vertexArray.reserve(210);
-	texCoordArray << Vec2f(0.f, 0.5f);
-	// johannes: work-around for nasty ATI rendering bug: use y-texture coordinate of 0.5 instead of 0.0
-	vertexArray << shadow;
+	StelVertexBuffer<VertexP3T2>* umbra =
+		renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleFan);
 
+	// johannes: work-around for nasty ATI rendering bug: use y-texture coordinate of 0.5 instead of 0.0
 	const Mat4d& rotMat = Mat4d::rotation(shadow, 2.*M_PI/100.);
-	r = upt;
+	Vec3f r(upt[0], upt[1], upt[2]);
+	const Vec3f shadowF(shadow[0], shadow[1], shadow[2]);
+
+	umbra->addVertex(VertexP3T2(shadowF, Vec2f(0.0f, 0.5f)));
 	for (int i=1; i<=101; ++i)
 	{
-		// position in texture of umbra edge
-		texCoordArray << Vec2f(0.6f, 0.5f);
 		r.transfo4d(rotMat);
-		vertexArray << shadow + r;
+		// position in texture of umbra edge
+		umbra->addVertex(VertexP3T2(shadowF + r, Vec2f(0.6f, 0.5f)));
 	}
-	sPainter->setArrays(vertexArray.constData(), texCoordArray.constData());
-	sPainter->drawFromArray(StelPainter::TriangleFan, 102);
+	umbra->lock();
+	renderer->drawVertexBuffer(umbra, NULL, projector);
+	delete umbra;
 
 	// now penumbra
-	vertexArray.resize(0);
-	texCoordArray.resize(0);
-	Vec3d u;
-	r = rpt;
-	u = upt;
+	StelVertexBuffer<VertexP3T2>* penumbra =
+		renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleStrip);
+	Vec3f u = r;
+	r = Vec3f(rpt[0], rpt[1], rpt[2]);
 	for (int i=0; i<=200; i+=2)
 	{
 		r.transfo4d(rotMat);
 		u.transfo4d(rotMat);
-		texCoordArray << Vec2f(0.6f, 0.5f) << Vec2f(1.f, 0.5f); // position in texture of umbra edge
-		vertexArray <<  shadow + u << shadow + r;
+
+		// position in texture of umbra edge
+		penumbra->addVertex(VertexP3T2(shadowF + u, Vec2f(0.6f, 0.5f)));
+		penumbra->addVertex(VertexP3T2(shadowF + r, Vec2f(1.0f, 0.5f)));
 	}
-	sPainter->setArrays(vertexArray.constData(), texCoordArray.constData());
-	sPainter->drawFromArray(StelPainter::TriangleStrip, 202);
-	glDisable(GL_STENCIL_TEST);
-	glClearStencil(0x0);
-	glClear(GL_STENCIL_BUFFER_BIT);	// Clean again to let a clean buffer for later Qt display
-	sPainter->setProjector(saveProj);
+	penumbra->lock();
+	renderer->drawVertexBuffer(penumbra, NULL, projector);
+	delete penumbra;
+
+	renderer->setStencilTest(StencilTest_Disabled);
+	renderer->clearStencilBuffer();
 }
 
 void Planet::drawHints(const StelCore* core, StelRenderer* renderer, const QFont& planetNameFont)
