@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-01 21:36+0700\n"
-"PO-Revision-Date: 2012-08-01 14:49+0000\n"
+"POT-Creation-Date: 2012-08-03 11:43+0700\n"
+"PO-Revision-Date: 2012-08-02 09:11+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-02 04:42+0000\n"
-"X-Generator: Launchpad (build 15719)\n"
+"X-Launchpad-Export-Date: 2012-08-03 05:22+0000\n"
+"X-Generator: Launchpad (build 15734)\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
 msgid "Meridian"
@@ -1143,7 +1143,7 @@ msgstr "Университет Страсбурга (Франция)"
 msgid "Harvard University (USA)"
 msgstr "Гарвардский университет (США)"
 
-#: src/main.cpp:337
+#: src/main.cpp:349
 msgid "This system does not support OpenGL."
 msgstr "Эта система не поддерживает OpenGL."
 
@@ -2770,7 +2770,7 @@ msgid ":"
 msgstr ":"
 
 #: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:422
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 msgid "Help"
 msgstr "Справка"
 
@@ -2799,9 +2799,9 @@ msgstr "Информация о текущем местоположении"
 msgid "Use as default"
 msgstr "Использовать по умолчанию"
 
-#: src/ui_locationDialogGui.h:390 plugins/Oculars/src/ui_ocularDialog.h:883
-#: plugins/Oculars/src/ui_ocularDialog.h:892
-#: plugins/Oculars/src/ui_ocularDialog.h:903
+#: src/ui_locationDialogGui.h:390 plugins/Oculars/src/ui_ocularDialog.h:880
+#: plugins/Oculars/src/ui_ocularDialog.h:889
+#: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Delete"
 msgstr "Удалить"
 
@@ -2987,7 +2987,7 @@ msgstr "Сервер:"
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
 #: src/ui_configurationDialog.h:1065 src/ui_configurationDialog.h:1076
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Options"
 msgstr "Параметры"
 
@@ -3214,7 +3214,7 @@ msgid ""
 msgstr "Сохранить эти настройки для всех последующих сессий."
 
 #: src/ui_configurationDialog.h:927
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "Save settings"
 msgstr "Сохранить настройки"
 
@@ -3605,8 +3605,8 @@ msgid "Remove an installed landscape"
 msgstr "Удалить установленный ландшафт"
 
 #: src/ui_addRemoveLandscapesDialog.h:275
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Remove"
 msgstr "Удалить"
 
@@ -3754,7 +3754,7 @@ msgid "Compass marks"
 msgstr "Компас"
 
 #: plugins/Oculars/src/Oculars.cpp:84
-#: plugins/Oculars/src/ui_ocularDialog.h:868
+#: plugins/Oculars/src/ui_ocularDialog.h:865
 msgid "Oculars"
 msgstr "Окуляры"
 
@@ -3821,7 +3821,7 @@ msgid "&Reset rotation"
 msgstr "&Сбросить поворот"
 
 #: plugins/Oculars/src/Oculars.cpp:1203
-#: plugins/Oculars/src/ui_ocularDialog.h:870
+#: plugins/Oculars/src/ui_ocularDialog.h:867
 msgid "Ocular view"
 msgstr "Вид в окуляр"
 
@@ -4044,17 +4044,9 @@ msgid ""
 "will be like as compared to another.  The same eyepiece in two different "
 "telescopes of differing focal length will produce two different exit "
 "circles, changing the view someone.  The trade-off of this is that, with the "
-"image scaled, a good deal of the screen can be wasted.  Therefor I recommend "
-"that you leave it off, unless you feel you have a need of it."
+"image scaled, a good deal of the screen can be wasted.  Therefore I "
+"recommend that you leave it off, unless you feel you have a need of it."
 msgstr ""
-"Вы можете масштабировать изображение, которое вы видите на экране. Это "
-"сделано для того, чтобы показать вам лучший способ для сравнения сочетания "
-"одного окуляра/телескопа по сравнению с другим сочетанием. Одинаковый окуляр "
-"с двумя различными телескопами с различным фокусным расстоянием будет давать "
-"два разных поля зрения. Компромисс в том, что при масштабировании "
-"изображения много места на экране может быть потрачено впустую. Для этого я "
-"рекомендую вам оставить его, если вы чувствуете, что у вас есть в этом "
-"потребность."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:431
 msgid ""
@@ -4107,139 +4099,140 @@ msgstr "Включает/выключает вид в окуляр."
 msgid "Opens the pop-up navigation menu."
 msgstr "Открывает всплывающее навигационное меню."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:871
+#: plugins/Oculars/src/ui_ocularDialog.h:868
 msgid "Enable only if an object is selected"
 msgstr "Включить, только если объект выбран"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:872
+#: plugins/Oculars/src/ui_ocularDialog.h:869
 msgid "Scale image circle"
 msgstr "Масштабировать изображение по кругу"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:873
+#: plugins/Oculars/src/ui_ocularDialog.h:870
 msgid "Key mappings"
 msgstr "Привязка клавиш"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:874
+#: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Toggle ocular view:"
 msgstr "Включение режима окуляра:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:876
+#: plugins/Oculars/src/ui_ocularDialog.h:873
 msgid "Open pop-up navigation menu:"
 msgstr "Открыть всплывающее навигационное меню:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:877
+#: plugins/Oculars/src/ui_ocularDialog.h:874
 msgid "Interface"
 msgstr "Внешний вид"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:878
+#: plugins/Oculars/src/ui_ocularDialog.h:875
 msgid "On-screen control panel"
 msgstr "Экранная панель управления"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:879
+#: plugins/Oculars/src/ui_ocularDialog.h:876
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Использовать градусы и минуты для поля зрения сенсора"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:880
+#: plugins/Oculars/src/ui_ocularDialog.h:877
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:214
 msgid "General"
 msgstr "Основные"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:881
-#: plugins/Oculars/src/ui_ocularDialog.h:889
+#: plugins/Oculars/src/ui_ocularDialog.h:878
+#: plugins/Oculars/src/ui_ocularDialog.h:886
 msgid "Eyepieces"
 msgstr "Окуляры"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:882
-#: plugins/Oculars/src/ui_ocularDialog.h:891
-#: plugins/Oculars/src/ui_ocularDialog.h:902
+#: plugins/Oculars/src/ui_ocularDialog.h:879
+#: plugins/Oculars/src/ui_ocularDialog.h:888
+#: plugins/Oculars/src/ui_ocularDialog.h:899
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:226
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
 msgid "Add"
 msgstr "Добавить"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:884
-#: plugins/Oculars/src/ui_ocularDialog.h:893
-#: plugins/Oculars/src/ui_ocularDialog.h:904
+#: plugins/Oculars/src/ui_ocularDialog.h:881
+#: plugins/Oculars/src/ui_ocularDialog.h:890
+#: plugins/Oculars/src/ui_ocularDialog.h:901
 #: plugins/Satellites/src/ui_satellitesDialog.h:697
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr "Название:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:885
+#: plugins/Oculars/src/ui_ocularDialog.h:882
 msgid "aFOV:"
 msgstr "Видимое поле зрения:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:886
-#: plugins/Oculars/src/ui_ocularDialog.h:905
+#: plugins/Oculars/src/ui_ocularDialog.h:883
+#: plugins/Oculars/src/ui_ocularDialog.h:902
 msgid "Focal length:"
 msgstr "Фокус:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:887
+#: plugins/Oculars/src/ui_ocularDialog.h:884
 msgid "Field stop:"
 msgstr "Полевая диафрагма:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:888
+#: plugins/Oculars/src/ui_ocularDialog.h:885
 msgid "Binoculars"
 msgstr "Бинокль"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:890
-#: plugins/Oculars/src/ui_ocularDialog.h:900
+#: plugins/Oculars/src/ui_ocularDialog.h:887
+#: plugins/Oculars/src/ui_ocularDialog.h:897
 msgid "Sensors"
 msgstr "Сенсоры"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:894
+#: plugins/Oculars/src/ui_ocularDialog.h:891
 msgid "Resolution x (pixels):"
 msgstr "Разрешение по x (пкс):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:895
+#: plugins/Oculars/src/ui_ocularDialog.h:892
 msgid "Resolution y (pixels):"
 msgstr "Разрешение по y (пкс):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:896
+#: plugins/Oculars/src/ui_ocularDialog.h:893
 msgid "Chip width (mm):"
 msgstr "Ширина чипа (мм):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:897
+#: plugins/Oculars/src/ui_ocularDialog.h:894
 msgid "Chip height (mm):"
 msgstr "Высота чипа (мм):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:898
+#: plugins/Oculars/src/ui_ocularDialog.h:895
 msgid "Pixel width (micron):"
 msgstr "Ширина пикселя (мкм):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:899
+#: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Pixel height (micron):"
 msgstr "Высота пикселя (мкм):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:901
-#: plugins/Oculars/src/ui_ocularDialog.h:909
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
+#: plugins/Oculars/src/ui_ocularDialog.h:898
+#: plugins/Oculars/src/ui_ocularDialog.h:906
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:393
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "Telescopes"
 msgstr "Телескопы"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:906
+#: plugins/Oculars/src/ui_ocularDialog.h:903
 msgid "Diameter:"
 msgstr "Диаметр:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:907
+#: plugins/Oculars/src/ui_ocularDialog.h:904
 msgid "Horizontal flip"
 msgstr "Горизонтальное отражение"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:908
+#: plugins/Oculars/src/ui_ocularDialog.h:905
 msgid "Vertical flip"
 msgstr "Вертикальное отражение"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:910
+#: plugins/Oculars/src/ui_ocularDialog.h:907
 #: plugins/Satellites/src/ui_satellitesDialog.h:732
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:245
-#: plugins/Quasars/src/ui_quasarsDialog.h:263
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:245
-msgid "About plugin"
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:242
+#: plugins/Quasars/src/ui_quasarsDialog.h:260
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:242
+msgctxt "tab in plugin windows"
+msgid "About"
 msgstr "О плагине"
 
 #: plugins/Satellites/src/Satellites.cpp:65
@@ -4582,13 +4575,13 @@ msgstr "Следующее обновление через: %1 ч."
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:372
 #: plugins/Satellites/src/ui_satellitesDialog.h:661
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:241
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
-#: plugins/Quasars/src/ui_quasarsDialog.h:257
+#: plugins/Quasars/src/ui_quasarsDialog.h:254
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:254
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:241
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:238
 msgid "Update now"
 msgstr "Обновить сейчас"
 
@@ -4683,23 +4676,23 @@ msgid "Update TLE lists from Internet sources"
 msgstr "Обновление через интернет списка источников TLE"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:658
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:237
-#: plugins/Quasars/src/ui_quasarsDialog.h:253
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:253
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:237
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:234
+#: plugins/Quasars/src/ui_quasarsDialog.h:250
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:250
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:234
 msgid "Update from Internet sources"
 msgstr "Обновление через интернет"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:659
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:238
-#: plugins/Quasars/src/ui_quasarsDialog.h:254
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:254
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:238
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:235
+#: plugins/Quasars/src/ui_quasarsDialog.h:251
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:251
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:235
 msgid "Last update:"
 msgstr "Последнее обновление:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:660
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:239
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
 msgid "Update frequency (hours):"
 msgstr "Частота обновлений (в часах):"
 
@@ -4743,26 +4736,26 @@ msgid "Fade length:"
 msgstr "Длина:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:686
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:242
-#: plugins/Quasars/src/ui_quasarsDialog.h:260
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:242
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:239
+#: plugins/Quasars/src/ui_quasarsDialog.h:257
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:239
 msgid "Restore default settings"
 msgstr "Первоначальные настройки"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:687
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:243
-#: plugins/Quasars/src/ui_quasarsDialog.h:261
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:261
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:243
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
+#: plugins/Quasars/src/ui_quasarsDialog.h:258
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:240
 msgid "Save settings as default"
 msgstr "Сохранить настройки"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:688
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:244
-#: plugins/Quasars/src/ui_quasarsDialog.h:262
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:262
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:244
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:241
+#: plugins/Quasars/src/ui_quasarsDialog.h:259
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:241
 msgid "Settings"
 msgstr "Настройки"
 
@@ -5004,7 +4997,7 @@ msgid "virtual"
 msgstr "виртуальное"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:744
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 msgid "Start"
 msgstr "Запустить"
 
@@ -5042,7 +5035,7 @@ msgstr "Выбрать каталог"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:281
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 msgid "Form"
 msgstr "Форма"
 
@@ -5229,57 +5222,57 @@ msgstr "До десяти десятичных значений в градус�
 msgid "OK"
 msgstr "ОК"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
 msgid "Telescopes Controlled"
 msgstr "Управляемые телескопы"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
 msgid "Configure the selected telescope"
 msgstr "Настроить выбранный телескоп"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:400
 msgid "Configure"
 msgstr "Настроить"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:402
 msgid "Add a new telescope"
 msgstr "Добавить телескоп"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:406
 msgid "Remove the selected telescope"
 msgstr "Удалить выбранный телескоп"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
 msgid "GUI"
 msgstr "Графический интерфейс пользователя"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
 msgid "Show telescope labels"
 msgstr "Показывать название телескопа"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Show telescope reticles"
 msgstr "Показывать шаблон телескопа"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "Show field of view indicators"
 msgstr "Показывать индикатор поля зрения"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Files"
 msgstr "Файлы"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Log telescope driver messages to files"
 msgstr "Журнал сообщений драйвера телескопа в файле"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Use telescope server executables (override built-in drivers)"
 msgstr ""
 "Использовать телескоп с работающего сервера (переопределяет встроенные "
 "драйверы)"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Executables directory:"
 msgstr "Исполнимый каталог:"
 
@@ -5414,9 +5407,9 @@ msgid "Define a time zone"
 msgstr "Определение часового пояса"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:383
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
 msgid "Time zone"
 msgstr "Часовой пояс"
 
@@ -5425,7 +5418,7 @@ msgid "Timezone name:"
 msgstr "Название часового пояса:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
 msgid "Offset from UTC (hours):"
 msgstr "Смещение от UTC (часы):"
 
@@ -5468,7 +5461,7 @@ msgstr "Окончание действия летнего времени"
 msgid "Use this definition"
 msgstr "Использовать это определение"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
 msgid ""
 "By default, the time displayed in Stellarium is interpreted as the local "
 "time in the system's time zone, not in the displayed location's time zone. "
@@ -5480,69 +5473,69 @@ msgstr ""
 "географического пункта. Это поведение Stellarium'а можно изменить путём "
 "полного изменения настройки часового пояса."
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
 msgid "Use system settings (default)"
 msgstr "Использовать системные настройки (по умолчанию)"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
 msgid "Universal Coordinated Time (UTC)"
 msgstr "Универсальное координированное время (UTC)"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "(offset = local time - UTC time)"
 msgstr "(смещение = местное время - время UTC)"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
 msgid "User-defined:"
 msgstr "Определенное пользователем:"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "Any changes will take effect the next time Stellarium is started."
 msgstr "Все изменения вступят в силу при следующем запуске Stellarium'а."
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:407
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
 msgid "Display formats"
 msgstr "Форматы"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
 "Эти настройки управляют способом отображения даты и времени  в нижней панели."
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "Time display format"
 msgstr "Формат отображения времени"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "System default"
 msgstr "Используемый системой"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid "12-hour format"
 msgstr "12-часовой формат"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 msgid "24-hour format"
 msgstr "24-часовой формат"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:188
 msgid "Date display format"
 msgstr "Формат отображения даты"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "гггг-мм-дд (ISO 8601)"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
 msgid "dd-mm-yyyy"
 msgstr "дд-мм-гггг"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
 msgid "mm-dd-yyyy"
 msgstr "мм-дд-гггг"
 
@@ -5874,16 +5867,16 @@ msgstr "Обновить только элементы орбит"
 msgid "Add objects"
 msgstr "Добавить объекты"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:294
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Solar System objects"
 msgstr "Объекты Солнечной системы"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:296
 msgid "Warning"
 msgstr "Предупреждение"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
 msgid ""
 "This plug-in uses a custom Solar System configuration file. If something "
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
@@ -5893,20 +5886,20 @@ msgstr ""
 "что-то идёт не так и Stellarium аварийно завершает работу и/или не "
 "запускается, то можно вручную удалить этот файл:"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr "Можно отменить изменения и вернуться к исходным настройкам:"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Reset to defaults"
 msgstr "Установки по умолчанию"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid "Copy/replace the Solar System file"
 msgstr "Скопировать/заменить файл настроек тел Солнечной системы"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
@@ -5914,27 +5907,27 @@ msgstr ""
 "Можно создать резервную копию вашего файла настроек тел Солнечной системы в "
 "удобном для вас месте или заменить его копией."
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Copy the Solar System file..."
 msgstr "Копировать файл настроек тел Солнечной системы..."
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Replace the Solar System file..."
 msgstr "Заменить файл настроек тел Солнечной системы..."
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Configuration file"
 msgstr "Файл конфигурации"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Add new Solar System objects"
 msgstr "Добавить новый объект Солнечной системы"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Import orbital elements in MPC format..."
 msgstr "Импорт элементов орбит в формате MPC..."
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Solar System"
 msgstr "Солнечная система"
 
@@ -6038,30 +6031,30 @@ msgstr "Следующее обновление через: %1 д."
 msgid "Historical supernovae is updated"
 msgstr "Исторические сверхновые обновляются"
 
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:233
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:230
 msgid "Historical Supernovae Configuration"
 msgstr "Настройка исторических сверхновых"
 
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:234
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:231
 msgid "Historical Supernovae Plug-in Configuration"
 msgstr "Настройка плагина Исторические сверхновые"
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:233
+#: plugins/Quasars/src/ui_quasarsDialog.h:249
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:249
+msgid "Update catalog from Internet"
+msgstr "Обновление каталога через интернет"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
 #: plugins/Quasars/src/ui_quasarsDialog.h:252
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:252
-msgid "Update catalog from Internet"
-msgstr "Обновление каталога через интернет"
-
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:239
-#: plugins/Quasars/src/ui_quasarsDialog.h:255
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:255
 msgid "Update frequency (days):"
 msgstr "Частота обновлений (в днях):"
 
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
-#: plugins/Quasars/src/ui_quasarsDialog.h:256
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:256
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:240
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:237
+#: plugins/Quasars/src/ui_quasarsDialog.h:253
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:253
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:237
 msgid "[next update info]"
 msgstr "[следующее обновление]"
 
@@ -6114,19 +6107,19 @@ msgstr "Верон и др. 2010"
 msgid "Quasars is updated"
 msgstr "Квазары обновляются"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:249
+#: plugins/Quasars/src/ui_quasarsDialog.h:246
 msgid "Quasars Configuration"
 msgstr "Настройка квазаров"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:250
+#: plugins/Quasars/src/ui_quasarsDialog.h:247
 msgid "Quasars Plug-in Configuration"
 msgstr "Настройка плагина Квазары"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:258
+#: plugins/Quasars/src/ui_quasarsDialog.h:255
 msgid "Display mode for quasars"
 msgstr "Режим отображения квазаров"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:259
+#: plugins/Quasars/src/ui_quasarsDialog.h:256
 msgid "Enable display of distribution for quasars"
 msgstr "Включить отображение распределения квазаров"
 
@@ -6320,19 +6313,19 @@ msgstr "во Франции"
 msgid "Pulsars is updated"
 msgstr "Пульсары обновляются"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:249
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:246
 msgid "Pulsars Configuration"
 msgstr "Настройка пульсаров"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:250
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:247
 msgid "Pulsars Plug-in Configuration"
 msgstr "Настройка плагина пульсары"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:255
 msgid "Display mode for pulsars"
 msgstr "Режим отображения пульсаров"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:256
 msgid "Enable display of distribution for pulsars"
 msgstr "Включить отображение распределения пульсаров"
 
@@ -6440,15 +6433,15 @@ msgstr ""
 msgid "Exoplanets is updated"
 msgstr "Экзопланеты обновляются"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:230
 msgid "Exoplanets Configuration"
 msgstr "Настройка экзопланет"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:234
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:231
 msgid "Exoplanets Plug-in Configuration"
 msgstr "Настройка плагина Экзопланеты"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
 msgid "Update exoplanets data from Internet"
 msgstr "Обновить данные экзопланет через интернет"
 
@@ -6821,3 +6814,21 @@ msgstr "Обновить данные экзопланет через интер
 
 #~ msgid "Object's size"
 #~ msgstr "Размер объекта"
+
+#~ msgid ""
+#~ "You can choose to scale the image you see on the screen.  This is intended "
+#~ "to show you a better comparison of what one eyepiece/telescope combination "
+#~ "will be like as compared to another.  The same eyepiece in two different "
+#~ "telescopes of differing focal length will produce two different exit "
+#~ "circles, changing the view someone.  The trade-off of this is that, with the "
+#~ "image scaled, a good deal of the screen can be wasted.  Therefor I recommend "
+#~ "that you leave it off, unless you feel you have a need of it."
+#~ msgstr ""
+#~ "Вы можете масштабировать изображение, которое вы видите на экране. Это "
+#~ "сделано для того, чтобы показать вам лучший способ для сравнения сочетания "
+#~ "одного окуляра/телескопа по сравнению с другим сочетанием. Одинаковый окуляр "
+#~ "с двумя различными телескопами с различным фокусным расстоянием будет давать "
+#~ "два разных поля зрения. Компромисс в том, что при масштабировании "
+#~ "изображения много места на экране может быть потрачено впустую. Для этого я "
+#~ "рекомендую вам оставить его, если вы чувствуете, что у вас есть в этом "
+#~ "потребность."

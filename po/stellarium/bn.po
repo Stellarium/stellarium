@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-01 21:36+0700\n"
+"POT-Creation-Date: 2012-08-03 11:43+0700\n"
 "PO-Revision-Date: 2012-07-07 04:54+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-02 04:36+0000\n"
-"X-Generator: Launchpad (build 15719)\n"
+"X-Launchpad-Export-Date: 2012-08-03 05:15+0000\n"
+"X-Generator: Launchpad (build 15734)\n"
 "Language: bn\n"
 
 #: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1168
@@ -1141,7 +1141,7 @@ msgstr "স্ট্রসবুর্গ বিশ্ববিদ্যাল�
 msgid "Harvard University (USA)"
 msgstr "হার্ভাড বিশ্ববিদ্যালয় (আমেরিকা)"
 
-#: src/main.cpp:337
+#: src/main.cpp:349
 msgid "This system does not support OpenGL."
 msgstr "এই সিস্টেম OpenGL সমর্থন করে না ।"
 
@@ -2746,7 +2746,7 @@ msgid ":"
 msgstr ":"
 
 #: src/ui_helpDialogGui.h:259 src/ui_helpDialogGui.h:265
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:422
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 msgid "Help"
 msgstr "সহায়িকা"
 
@@ -2775,9 +2775,9 @@ msgstr "বর্তমান অবস্থান সম্পর্কে ত
 msgid "Use as default"
 msgstr "প্রারম্ভিক সূচনা হিসেবে ব্যবহার করুন"
 
-#: src/ui_locationDialogGui.h:390 plugins/Oculars/src/ui_ocularDialog.h:883
-#: plugins/Oculars/src/ui_ocularDialog.h:892
-#: plugins/Oculars/src/ui_ocularDialog.h:903
+#: src/ui_locationDialogGui.h:390 plugins/Oculars/src/ui_ocularDialog.h:880
+#: plugins/Oculars/src/ui_ocularDialog.h:889
+#: plugins/Oculars/src/ui_ocularDialog.h:900
 msgid "Delete"
 msgstr "মুছে ফেলুন"
 
@@ -2963,7 +2963,7 @@ msgstr "সার্ভার :"
 #: src/ui_searchDialogGui.h:589 src/ui_viewDialog.h:1184
 #: src/ui_viewDialog.h:1189 src/ui_viewDialog.h:1191
 #: src/ui_configurationDialog.h:1065 src/ui_configurationDialog.h:1076
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 msgid "Options"
 msgstr "বিকল্পসমূহ"
 
@@ -3192,7 +3192,7 @@ msgstr ""
 "সময় আপনি Stellarium শুরুতে ব্যবহার করতে পারবেন"
 
 #: src/ui_configurationDialog.h:927
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "Save settings"
 msgstr "বৈশিষ্ট্যাবলীর বিন্যাস সংরক্ষণ করুন"
 
@@ -3585,8 +3585,8 @@ msgid "Remove an installed landscape"
 msgstr "একটি ইনস্টল করা ভূমিরূপ মুছে ফেলুন"
 
 #: src/ui_addRemoveLandscapesDialog.h:275
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Remove"
 msgstr "মুছে ফেলুন"
 
@@ -3733,7 +3733,7 @@ msgid "Compass marks"
 msgstr "দিক নির্দেশ"
 
 #: plugins/Oculars/src/Oculars.cpp:84
-#: plugins/Oculars/src/ui_ocularDialog.h:868
+#: plugins/Oculars/src/ui_ocularDialog.h:865
 msgid "Oculars"
 msgstr "দূরবীন দর্শন বিন্যাস"
 
@@ -3800,7 +3800,7 @@ msgid "&Reset rotation"
 msgstr "&ঘূর্ণন পুনঃস্থাপন করুন"
 
 #: plugins/Oculars/src/Oculars.cpp:1203
-#: plugins/Oculars/src/ui_ocularDialog.h:870
+#: plugins/Oculars/src/ui_ocularDialog.h:867
 msgid "Ocular view"
 msgstr "দূরবীন দর্শন বিন্যাস দর্শণ"
 
@@ -4021,14 +4021,9 @@ msgid ""
 "will be like as compared to another.  The same eyepiece in two different "
 "telescopes of differing focal length will produce two different exit "
 "circles, changing the view someone.  The trade-off of this is that, with the "
-"image scaled, a good deal of the screen can be wasted.  Therefor I recommend "
-"that you leave it off, unless you feel you have a need of it."
+"image scaled, a good deal of the screen can be wasted.  Therefore I "
+"recommend that you leave it off, unless you feel you have a need of it."
 msgstr ""
-"স্ক্রিনে প্রদর্শিত ছবির অাকার অাপনি পরিবর্তন করতে পারেন । এছাড়াও এটি অাপনাকে "
-"নানা অভিনেত্র/দূরবীন জোড়ের মধ্যে সুচারু তুলনা করে দেখাবে । একই অভিনেত্র "
-"বিভিন্ন ফোকাসের দূরবীনে অালাদা অলাদা বৃত্তিয় দৃষ্টিক্ষেত্র ও ছবি তৈরি করে । "
-"এর ফলে স্ক্রিনের অনেকটা অংশ দৃষ্টিক্ষেত্র থেকে বাদ পড়ে যায় । তাই অামার মনে "
-"হয় যে একান্ত দরকার না হলে এটা ব্যবহারের কোন দরকার নেই ।"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:431
 msgid ""
@@ -4078,140 +4073,141 @@ msgstr "দূরবীন দর্শন বিন্যাস শুরু �
 msgid "Opens the pop-up navigation menu."
 msgstr "পপ আপ নেভিগেশন মেনু খুলুন ।"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:871
+#: plugins/Oculars/src/ui_ocularDialog.h:868
 msgid "Enable only if an object is selected"
 msgstr "কোন জ্যোতিষ্ক নির্বাচন করা থাকলে তবেই সক্রিয় হবে"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:872
+#: plugins/Oculars/src/ui_ocularDialog.h:869
 msgid "Scale image circle"
 msgstr "ছবির বৃত্তিয় দৃষ্টিক্ষেত্র মাপ করা হবে"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:873
+#: plugins/Oculars/src/ui_ocularDialog.h:870
 msgid "Key mappings"
 msgstr "বোতাম বিন্যাস"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:874
+#: plugins/Oculars/src/ui_ocularDialog.h:871
 msgid "Toggle ocular view:"
 msgstr "দূরবীন দর্শন বিন্যাস অদলবদল"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:876
+#: plugins/Oculars/src/ui_ocularDialog.h:873
 msgid "Open pop-up navigation menu:"
 msgstr "পপ আপ নেভিগেশন মেনু খুলুন :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:877
+#: plugins/Oculars/src/ui_ocularDialog.h:874
 msgid "Interface"
 msgstr "ইন্টারফেস"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:878
+#: plugins/Oculars/src/ui_ocularDialog.h:875
 msgid "On-screen control panel"
 msgstr "স্ক্রিনে নিয়ন্ত্রণ প্যানেল"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:879
+#: plugins/Oculars/src/ui_ocularDialog.h:876
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "CCD এর দৃষ্টিসীমা পরিমাপের একক হিসাবে ডিগ্রি ও মিনিট ব্যবহার করুন"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:880
+#: plugins/Oculars/src/ui_ocularDialog.h:877
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:214
 msgid "General"
 msgstr "সার্বজনীন"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:881
-#: plugins/Oculars/src/ui_ocularDialog.h:889
+#: plugins/Oculars/src/ui_ocularDialog.h:878
+#: plugins/Oculars/src/ui_ocularDialog.h:886
 msgid "Eyepieces"
 msgstr "অভিনেত্র"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:882
-#: plugins/Oculars/src/ui_ocularDialog.h:891
-#: plugins/Oculars/src/ui_ocularDialog.h:902
+#: plugins/Oculars/src/ui_ocularDialog.h:879
+#: plugins/Oculars/src/ui_ocularDialog.h:888
+#: plugins/Oculars/src/ui_ocularDialog.h:899
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:226
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
 msgid "Add"
 msgstr "যোগ করুন"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:884
-#: plugins/Oculars/src/ui_ocularDialog.h:893
-#: plugins/Oculars/src/ui_ocularDialog.h:904
+#: plugins/Oculars/src/ui_ocularDialog.h:881
+#: plugins/Oculars/src/ui_ocularDialog.h:890
+#: plugins/Oculars/src/ui_ocularDialog.h:901
 #: plugins/Satellites/src/ui_satellitesDialog.h:697
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:485
 msgid "Name:"
 msgstr "নাম"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:885
+#: plugins/Oculars/src/ui_ocularDialog.h:882
 msgid "aFOV:"
 msgstr "অাপাত দৃষ্টিসীমা :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:886
-#: plugins/Oculars/src/ui_ocularDialog.h:905
+#: plugins/Oculars/src/ui_ocularDialog.h:883
+#: plugins/Oculars/src/ui_ocularDialog.h:902
 msgid "Focal length:"
 msgstr "ফোকাস দূরত্ব :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:887
+#: plugins/Oculars/src/ui_ocularDialog.h:884
 msgid "Field stop:"
 msgstr "ক্ষেত্র বন্ধ :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:888
+#: plugins/Oculars/src/ui_ocularDialog.h:885
 msgid "Binoculars"
 msgstr "দূরবীনগুলি"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:890
-#: plugins/Oculars/src/ui_ocularDialog.h:900
+#: plugins/Oculars/src/ui_ocularDialog.h:887
+#: plugins/Oculars/src/ui_ocularDialog.h:897
 msgid "Sensors"
 msgstr "সংবেদকগুলি"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:894
+#: plugins/Oculars/src/ui_ocularDialog.h:891
 msgid "Resolution x (pixels):"
 msgstr "রেজোলিউশন X (পিক্সেল) :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:895
+#: plugins/Oculars/src/ui_ocularDialog.h:892
 msgid "Resolution y (pixels):"
 msgstr "রেজোলিউশন y (পিক্সেল) :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:896
+#: plugins/Oculars/src/ui_ocularDialog.h:893
 msgid "Chip width (mm):"
 msgstr "চীপের প্রস্থ (মিলিমিটার):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:897
+#: plugins/Oculars/src/ui_ocularDialog.h:894
 msgid "Chip height (mm):"
 msgstr "চীপের উচ্চতা (মিলিমিটার):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:898
+#: plugins/Oculars/src/ui_ocularDialog.h:895
 msgid "Pixel width (micron):"
 msgstr "পিক্সেলের প্রস্থ (মাইক্রন):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:899
+#: plugins/Oculars/src/ui_ocularDialog.h:896
 msgid "Pixel height (micron):"
 msgstr "পিক্সেলের উচ্চতা (মাইক্রন):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:901
-#: plugins/Oculars/src/ui_ocularDialog.h:909
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
+#: plugins/Oculars/src/ui_ocularDialog.h:898
+#: plugins/Oculars/src/ui_ocularDialog.h:906
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:393
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "Telescopes"
 msgstr "দূরবীন"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:906
+#: plugins/Oculars/src/ui_ocularDialog.h:903
 msgid "Diameter:"
 msgstr "ব্যাস"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:907
+#: plugins/Oculars/src/ui_ocularDialog.h:904
 msgid "Horizontal flip"
 msgstr "আনুভূমিকভাবে উল্টানো"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:908
+#: plugins/Oculars/src/ui_ocularDialog.h:905
 msgid "Vertical flip"
 msgstr "উল্লম্বভাবে উল্টানো"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:910
+#: plugins/Oculars/src/ui_ocularDialog.h:907
 #: plugins/Satellites/src/ui_satellitesDialog.h:732
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:408
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:245
-#: plugins/Quasars/src/ui_quasarsDialog.h:263
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:245
-msgid "About plugin"
-msgstr "প্লাগইন পরিচিতি"
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:242
+#: plugins/Quasars/src/ui_quasarsDialog.h:260
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:242
+msgctxt "tab in plugin windows"
+msgid "About"
+msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:65
 #: plugins/Satellites/src/ui_satellitesDialog.h:719
@@ -4550,13 +4546,13 @@ msgstr "পরবর্তী সংশোধন: %1 ঘন্টা"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:372
 #: plugins/Satellites/src/ui_satellitesDialog.h:661
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:241
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
-#: plugins/Quasars/src/ui_quasarsDialog.h:257
+#: plugins/Quasars/src/ui_quasarsDialog.h:254
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:254
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:241
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:238
 msgid "Update now"
 msgstr "এখনই সংশোধন করুন"
 
@@ -4651,23 +4647,23 @@ msgid "Update TLE lists from Internet sources"
 msgstr "ইন্টারনেট উত্সগুলি থেকে TLE তালিকা সংশোধন করুন ।"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:658
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:237
-#: plugins/Quasars/src/ui_quasarsDialog.h:253
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:253
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:237
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:234
+#: plugins/Quasars/src/ui_quasarsDialog.h:250
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:250
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:234
 msgid "Update from Internet sources"
 msgstr "ইন্টারনেট উত্সগুলি থেকে সংশোধন করুন ।"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:659
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:238
-#: plugins/Quasars/src/ui_quasarsDialog.h:254
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:254
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:238
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:235
+#: plugins/Quasars/src/ui_quasarsDialog.h:251
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:251
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:235
 msgid "Last update:"
 msgstr "সর্বশেষ সংশোধন :"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:660
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:239
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
 msgid "Update frequency (hours):"
 msgstr "পুনঃসংশোধন (ঘন্টা):"
 
@@ -4711,26 +4707,26 @@ msgid "Fade length:"
 msgstr "বিলীন হত্তয়ার সময় :"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:686
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:242
-#: plugins/Quasars/src/ui_quasarsDialog.h:260
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:242
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:239
+#: plugins/Quasars/src/ui_quasarsDialog.h:257
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:239
 msgid "Restore default settings"
 msgstr "প্রারম্ভিক সূচনার বৈশিষ্ট বিন্যাস পুনঃস্থাপন করুন"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:687
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:243
-#: plugins/Quasars/src/ui_quasarsDialog.h:261
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:261
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:243
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
+#: plugins/Quasars/src/ui_quasarsDialog.h:258
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:240
 msgid "Save settings as default"
 msgstr "বৈশিষ্ট বিন্যাস প্রারম্ভিক সূচনা বিন্যাস হিসাবে সংরক্ষন করুন"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:688
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:244
-#: plugins/Quasars/src/ui_quasarsDialog.h:262
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:262
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:244
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:241
+#: plugins/Quasars/src/ui_quasarsDialog.h:259
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:241
 msgid "Settings"
 msgstr "বিন্যাস"
 
@@ -4971,7 +4967,7 @@ msgid "virtual"
 msgstr "ফলতঃ কিন্তু বাহ্যতঃ নয়"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:744
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:396
 msgid "Start"
 msgstr "শুরু"
 
@@ -5009,7 +5005,7 @@ msgstr "একটি ডিরেক্টরি নির্বাচন কর
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:281
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 msgid "Form"
 msgstr "তৈরী করুন"
 
@@ -5197,56 +5193,56 @@ msgstr ""
 msgid "OK"
 msgstr "ঠিক আছে"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
 msgid "Telescopes Controlled"
 msgstr "দূরবীনগুলি নিয়ন্ত্রিত আছে"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:398
 msgid "Configure the selected telescope"
 msgstr "নির্বাচিত দূরবীন বিন্যাস করুন"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:400
 msgid "Configure"
 msgstr "বিন্যাস"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:402
 msgid "Add a new telescope"
 msgstr "একটি নতুন দূরবীন যোগ করুন"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:406
 msgid "Remove the selected telescope"
 msgstr "নির্বাচিত দূরবীনটি মুছে ফেলুন"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
 msgid "GUI"
 msgstr "গ্রাফিকাল ইউজার ইন্টারফেস"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
 msgid "Show telescope labels"
 msgstr "দূরবীনের নাম দেখান"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
 msgid "Show telescope reticles"
 msgstr "দূরবীনের লক্ষবৃত্তের ক্রস দেখান"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "Show field of view indicators"
 msgstr "দৃষ্টিক্ষেত্র সূচকগুলি দেখান"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Files"
 msgstr "ফাইলগুলি"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Log telescope driver messages to files"
 msgstr "দূরবীন ড্রাইভারের বার্তাগুলিকে একটি ফাইলে নথিভূক্ত করুন"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Use telescope server executables (override built-in drivers)"
 msgstr ""
 "দূরবীন সার্ভার এক্সেকিউটেবলের ব্যবহার (অন্তর্গত ড্রাইভারগুলি অগ্রাহ্য করন)"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Executables directory:"
 msgstr "এক্সেকিউটেবল ডিরেক্টরি :"
 
@@ -5381,9 +5377,9 @@ msgid "Define a time zone"
 msgstr "একটি প্রাদেশিক সময় অঞ্চল নির্ধারণ করুন"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:383
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
 msgid "Time zone"
 msgstr "প্রাদেশিক সময় অঞ্চল"
 
@@ -5392,7 +5388,7 @@ msgid "Timezone name:"
 msgstr "প্রাদেশিক সময় অঞ্চলের নাম :"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
 msgid "Offset from UTC (hours):"
 msgstr "UTC ঠিক করা (ঘন্টা):"
 
@@ -5435,7 +5431,7 @@ msgstr "দিবালোক সংরক্ষণের সময় শেষ
 msgid "Use this definition"
 msgstr "এই সংজ্ঞা ব্যবহার করুন"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:384
 msgid ""
 "By default, the time displayed in Stellarium is interpreted as the local "
 "time in the system's time zone, not in the displayed location's time zone. "
@@ -5446,68 +5442,68 @@ msgstr ""
 "অঞ্চল হিসাবে ধরা হয় । যদিও এটি Stellarium এর আন্তর্জাতিক সময় অঞ্চলের "
 "বৈশিষ্ট্যের বিন্যাস থেকে পরিবর্তন করা যায় ।"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
 msgid "Use system settings (default)"
 msgstr "সিস্টেম বৈশিষ্ট্যের বিন্যাস  (প্রারম্ভিক সূচনা বিন্যাস) ব্যবহার করুন"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
 msgid "Universal Coordinated Time (UTC)"
 msgstr "সর্বজনীন সমন্বয়িত সময় (UTC)"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "(offset = local time - UTC time)"
 msgstr "(offset = স্থানীয় সময় - UTC সময়)"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
 msgid "User-defined:"
 msgstr "ব্যবহারকারী নির্ধারিত:"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "Any changes will take effect the next time Stellarium is started."
 msgstr "সমস্ত রকম পরিবর্তন নতুন করে Stellarium চালু করার সময় প্রভাবী হবে ।"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:407
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
 msgid "Display formats"
 msgstr "বিন্যাসগুলি প্রদর্শন"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:394
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr "সময় ও তারিখ নীচের বারে প্রদর্শিত হওয়ার বিন্য়াস"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "Time display format"
 msgstr "সময় প্রদর্শনের বিন্যাস"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "System default"
 msgstr "সিস্টেমের প্রারম্ভিক সূচনা বৈশিষ্ট"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid "12-hour format"
 msgstr "১২ ঘন্টার বিন্যাস"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 msgid "24-hour format"
 msgstr "২৪ ঘন্টার বিন্যাস"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:188
 msgid "Date display format"
 msgstr "তারিখ প্রদর্শনের বিন্যাস"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "বছর-মাস-দিন (ISO 8601)"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
 msgid "dd-mm-yyyy"
 msgstr "দিন-মাস-বছর"
 
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:406
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
 msgid "mm-dd-yyyy"
 msgstr "মাস-দিন-বছর"
 
@@ -5835,16 +5831,16 @@ msgstr "শুধুমাত্র কক্ষপথজনিত উপাদ�
 msgid "Add objects"
 msgstr "জ্যোতিষ্ক যোগ করুন"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:294
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid "Solar System objects"
 msgstr "সৌরজগতিক জ্যোতিষ্ক"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:296
 msgid "Warning"
 msgstr "সতর্কতা"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
 msgid ""
 "This plug-in uses a custom Solar System configuration file. If something "
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
@@ -5854,21 +5850,21 @@ msgstr ""
 "দেখা যায় এবং Stellarium বিপর্যস্ত অথবা আরম্ভ না হয়, আপনি এখান থেকে নিজে হাতে "
 "ঐ ফাইল মুছে ফেলতে পারেন :"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
 "আপনি সমস্ত বিন্যাস মুছে দিয়ে প্রারম্ভিক সূচনা বিন্যাস প্রতিস্থাপন করতে পারেন"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Reset to defaults"
 msgstr "প্রারম্ভিক সূচনা বিন্যাস প্রতিস্থাপন করুন"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid "Copy/replace the Solar System file"
 msgstr "সৌরজগতের ফাইলটিকে নকল বা প্রতিস্থাপন করুন"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
@@ -5876,27 +5872,27 @@ msgstr ""
 "আপনি সৌরজগতের ফাইলটিকে কোন সুবিধাজনক স্থানে ব্যাকআপ কপি করতে বা একে অনুরূপ "
 "কোন ব্যাকআপ ফাইল দিয়ে প্রতিস্থাপন করতে পারেন ।"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Copy the Solar System file..."
 msgstr "সৌরজগতের ফাইলটিকে নকল করুন..."
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Replace the Solar System file..."
 msgstr "সৌরজগতের ফাইলটিকে পুনঃস্থাপন করুন..."
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Configuration file"
 msgstr "বিন্যাস ফাইল"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Add new Solar System objects"
 msgstr "নতুন সৌরজগতিক জ্যোতিষ্ক যোগ করুন"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Import orbital elements in MPC format..."
 msgstr "MPC format-এ কক্ষে ঘূর্ণায়মান জ্যোতিষ্ক আমদানি করুন"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Solar System"
 msgstr "সৌরজগত"
 
@@ -5993,30 +5989,30 @@ msgstr "পরবর্তী সংশোধন : %1 দিন"
 msgid "Historical supernovae is updated"
 msgstr "ঐতিহাসিক অতিনোভা সংশোধিত করা হয়েছে"
 
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:233
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:230
 msgid "Historical Supernovae Configuration"
 msgstr "ঐতিহাসিক অতিনোভার বৈশিষ্ট্য বিন্যাস"
 
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:234
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:231
 msgid "Historical Supernovae Plug-in Configuration"
 msgstr "ঐতিহাসিক অতিনোভা প্লাগইনের বৈশিষ্ট্য বিন্যাস"
+
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:233
+#: plugins/Quasars/src/ui_quasarsDialog.h:249
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:249
+msgid "Update catalog from Internet"
+msgstr "ইন্টারনেট থেকে তালিকা সংশোধন"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
 #: plugins/Quasars/src/ui_quasarsDialog.h:252
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:252
-msgid "Update catalog from Internet"
-msgstr "ইন্টারনেট থেকে তালিকা সংশোধন"
-
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:239
-#: plugins/Quasars/src/ui_quasarsDialog.h:255
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:255
 msgid "Update frequency (days):"
 msgstr "সংশোধনের হার (দিন):"
 
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
-#: plugins/Quasars/src/ui_quasarsDialog.h:256
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:256
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:240
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:237
+#: plugins/Quasars/src/ui_quasarsDialog.h:253
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:253
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:237
 msgid "[next update info]"
 msgstr "[পরবর্তী সংশোধন তথ্য]"
 
@@ -6069,19 +6065,19 @@ msgstr "ভেরন+ ২০১০"
 msgid "Quasars is updated"
 msgstr "কোয়াসার তথ্য সংশোধিত করা হয়েছে"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:249
+#: plugins/Quasars/src/ui_quasarsDialog.h:246
 msgid "Quasars Configuration"
 msgstr "কোয়াসার বৈশিষ্ট্য বিন্যাস"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:250
+#: plugins/Quasars/src/ui_quasarsDialog.h:247
 msgid "Quasars Plug-in Configuration"
 msgstr "কোয়াসার প্লাগইনের বৈশিষ্ট্য বিন্যাস"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:258
+#: plugins/Quasars/src/ui_quasarsDialog.h:255
 msgid "Display mode for quasars"
 msgstr "কোয়াসার প্রদর্শন মোড"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:259
+#: plugins/Quasars/src/ui_quasarsDialog.h:256
 msgid "Enable display of distribution for quasars"
 msgstr "কোয়াসারদের বণ্টন প্রদর্শন সক্রিয় করুন"
 
@@ -6270,19 +6266,19 @@ msgstr ", ফ্রান্স"
 msgid "Pulsars is updated"
 msgstr "পালসার তথ্য সংশোধিত করা হয়েছে"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:249
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:246
 msgid "Pulsars Configuration"
 msgstr "পালসার বৈশিষ্ট্য বিন্যাস"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:250
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:247
 msgid "Pulsars Plug-in Configuration"
 msgstr "পালসার প্লাগইনের বৈশিষ্ট্য বিন্যাস"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:255
 msgid "Display mode for pulsars"
 msgstr "পালসার প্রদর্শন মোড"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:259
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:256
 msgid "Enable display of distribution for pulsars"
 msgstr "পলসারদের বণ্টন প্রদর্শন সক্রিয় করুন"
 
@@ -6388,15 +6384,15 @@ msgstr ""
 msgid "Exoplanets is updated"
 msgstr "বহির্গ্রহগুলির তথ্য সংশোধিত হয়েছে"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:230
 msgid "Exoplanets Configuration"
 msgstr "বহির্গ্রহ বৈশিষ্ট্য বিন্যাস"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:234
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:231
 msgid "Exoplanets Plug-in Configuration"
 msgstr "বহির্গ্রহ প্লাগইনের বৈশিষ্ট্য বিন্যাস"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:236
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:233
 msgid "Update exoplanets data from Internet"
 msgstr "বহির্গ্রহগুলির তথ্য ইন্টারনেট থেকে সংশোধন করুন"
 
@@ -6649,6 +6645,21 @@ msgstr "বহির্গ্রহগুলির তথ্য ইন্টা�
 
 #~ msgid "Additional info (Extra 2)"
 #~ msgstr "অতিরিক্ত তথ্য ২"
+
+#~ msgid ""
+#~ "You can choose to scale the image you see on the screen.  This is intended "
+#~ "to show you a better comparison of what one eyepiece/telescope combination "
+#~ "will be like as compared to another.  The same eyepiece in two different "
+#~ "telescopes of differing focal length will produce two different exit "
+#~ "circles, changing the view someone.  The trade-off of this is that, with the "
+#~ "image scaled, a good deal of the screen can be wasted.  Therefor I recommend "
+#~ "that you leave it off, unless you feel you have a need of it."
+#~ msgstr ""
+#~ "স্ক্রিনে প্রদর্শিত ছবির অাকার অাপনি পরিবর্তন করতে পারেন । এছাড়াও এটি অাপনাকে "
+#~ "নানা অভিনেত্র/দূরবীন জোড়ের মধ্যে সুচারু তুলনা করে দেখাবে । একই অভিনেত্র "
+#~ "বিভিন্ন ফোকাসের দূরবীনে অালাদা অলাদা বৃত্তিয় দৃষ্টিক্ষেত্র ও ছবি তৈরি করে । "
+#~ "এর ফলে স্ক্রিনের অনেকটা অংশ দৃষ্টিক্ষেত্র থেকে বাদ পড়ে যায় । তাই অামার মনে "
+#~ "হয় যে একান্ত দরকার না হলে এটা ব্যবহারের কোন দরকার নেই ।"
 
 #~ msgid "Additional info (Extra 3)"
 #~ msgstr "অতিরিক্ত তথ্য ৩"
