@@ -657,6 +657,15 @@ void StelCore::setDefaultLocationID(const QString& id)
 	conf->setValue("init_location/location", id);
 }
 
+void StelCore::returnToDefaultLocation()
+{
+	StelLocationMgr& locationMgr = StelApp::getInstance().getLocationMgr();
+	bool ok = false;
+	StelLocation loc = locationMgr.locationForString(defaultLocationID, &ok);
+	if (ok)
+		moveObserverTo(loc, 0.);
+}
+
 void StelCore::setJDay(double JD)
 {
 	JDay=JD;
@@ -721,6 +730,7 @@ const StelLocation& StelCore::getCurrentLocation() const
 // Smoothly move the observer to the given location
 void StelCore::moveObserverTo(const StelLocation& target, double duration, double durationIfPlanetChange)
 {
+	emit(locationChanged(target));
 	double d = (getCurrentLocation().planetName==target.planetName) ? duration : durationIfPlanetChange;
 	if (d>0.)
 	{
@@ -740,7 +750,6 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 		delete position;
 		position = new StelObserver(target);
 	}
-	emit(locationChanged(target));
 }
 
 
