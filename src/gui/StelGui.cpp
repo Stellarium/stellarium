@@ -52,7 +52,6 @@
 #include "StelScriptMgr.hpp"
 #endif
 #include "StelAppGraphicsWidget.hpp"
-#include "StelLocationMgr.hpp"
 
 #include "ConfigurationDialog.hpp"
 #include "DateTimeDialog.hpp"
@@ -767,16 +766,13 @@ void StelGui::quit()
 void StelGui::home()
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	QString defaultLocationID = core->getDefaultLocationID();
-
-	StelLocation location = StelApp::getInstance().getLocationMgr().locationForSmallString(defaultLocationID);
-
-	core->moveObserverTo(location);	
+	core->returnToDefaultLocation();
+	
 	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
 	landscapeMgr->setCurrentLandscapeID(landscapeMgr->getDefaultLandscapeID());
 
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-	PlanetP p = ssm->searchByEnglishName(location.planetName);
+	PlanetP p = ssm->searchByEnglishName(core->getCurrentLocation().planetName);
 	landscapeMgr->setFlagAtmosphere(p->hasAtmosphere());
 	landscapeMgr->setFlagFog(p->hasAtmosphere());
 
