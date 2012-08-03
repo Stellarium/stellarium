@@ -212,6 +212,8 @@ class Translations
 		N_("Earth best views from other bodies");
 		// TRANSLATORS: Name of script
 		N_("Transit of Venus");
+		// TRANSLATORS: Name of script
+		N_("Analemma");
 
 		// Scripts description
 		N_("Look around each installed landscape.");
@@ -231,6 +233,7 @@ class Translations
 		N_("Look at Sun from big planets of Solar system and Pluto.");
 		N_("Earth best views from other Solar system bodies in the 21st Century.");
 		N_("Transit of Venus as seen from Sydney Australia 6th June 2012.");
+		N_("This script shows the analemma - the path of the Sun across the sky during the year.");
 
 		// List of countries
 		N_("Andorra");
