@@ -130,7 +130,7 @@ class Translations
 		// TRANSLATORS: Asteroid (624) Hektor
 		N_("Hektor");
 		
-		// TRANSLATORS: Name of supernova SN 1572A
+		// TRANSLATORS: Name of supernova SN 1572A and script name
 		N_("Tycho's Supernova");
 		// TRANSLATORS: Name of supernova SN 1604A
 		N_("Kepler's Supernova");
@@ -234,6 +234,7 @@ class Translations
 		N_("Earth best views from other Solar system bodies in the 21st Century.");
 		N_("Transit of Venus as seen from Sydney Australia 6th June 2012.");
 		N_("This script shows the analemma - the path of the Sun across the sky during the year.");
+		N_("Flash of supernova which was observed by Tycho Brahe in 1572 year. For demos need enable plugin for supernovae.");
 
 		// List of countries
 		N_("Andorra");
