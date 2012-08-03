@@ -17,7 +17,6 @@
  */
 
 #include "StelProjector.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
@@ -28,8 +27,9 @@
 #include "StelIniParser.hpp"
 #include "StelVertexArray.hpp"
 #include "AngleMeasure.hpp"
+#include "renderer/StelCircleArcRenderer.hpp"
+#include "renderer/StelRenderer.hpp"
 
-#include <QtOpenGL>
 #include <QDebug>
 #include <QTimer>
 #include <QAction>
@@ -152,52 +152,49 @@ void AngleMeasure::update(double deltaTime)
 }
 
 //! Draw any parts on the screen which are for our module
-void AngleMeasure::draw(StelCore* core, class StelRenderer* renderer)
+void AngleMeasure::draw(StelCore* core, StelRenderer* renderer)
 {
 	if (lineVisible.getInterstate() < 0.000001f && messageFader.getInterstate() < 0.000001f)
 		return;
 	
 	const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
-	StelPainter painter(prj);
-	painter.setFont(font);
+	renderer->setFont(font);
 
 	if (lineVisible.getInterstate() > 0.000001f)
 	{
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);
-		glEnable(GL_TEXTURE_2D);
+		renderer->setBlendMode(BlendMode_Alpha);
 		
 		Vec3d xy;
 		if (prj->project(perp1EndPoint,xy))
 		{
-			painter.setColor(textColor[0], textColor[1], textColor[2], lineVisible.getInterstate());
-			painter.drawText(xy[0], xy[1], angleText, 0, 15, 15);
+			renderer->setGlobalColor(textColor[0], textColor[1], textColor[2],
+			                         lineVisible.getInterstate());
+			renderer->drawText(TextParams(xy[0], xy[1], angleText).shift(15, 15));
 		}
 
-		glDisable(GL_TEXTURE_2D);
-		glEnable(GL_LINE_SMOOTH);
-		glEnable(GL_BLEND);
-		
-		// main line is a great circle
-		painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
-		painter.drawGreatCircleArc(startPoint, endPoint, NULL);
+		renderer->setGlobalColor(lineColor[0], lineColor[1], lineColor[2],
+		                         lineVisible.getInterstate());
 
+		// main line is a great circle
+		StelCircleArcRenderer circleArcRenderer(renderer, prj);
+		circleArcRenderer.drawGreatCircleArc(startPoint, endPoint);
 		// End lines
-		painter.drawGreatCircleArc(perp1StartPoint, perp1EndPoint, NULL);
-		painter.drawGreatCircleArc(perp2StartPoint, perp2EndPoint, NULL);
+		circleArcRenderer.drawGreatCircleArc(perp1StartPoint, perp1EndPoint);
+		circleArcRenderer.drawGreatCircleArc(perp2StartPoint, perp2EndPoint);
 	}
 
 	if (messageFader.getInterstate() > 0.000001f)
 	{
-		painter.setColor(textColor[0], textColor[1], textColor[2], messageFader.getInterstate());
+		renderer->setGlobalColor(textColor[0], textColor[1], textColor[2],
+		                         messageFader.getInterstate());
 		int x = 83;
 		int y = 120;
-		int ls = painter.getFontMetrics().lineSpacing();
-		painter.drawText(x, y, messageEnabled);
+		const int ls = QFontMetrics(font).lineSpacing();
+		renderer->drawText(TextParams(x, y, messageEnabled));
 		y -= ls;
-		painter.drawText(x, y, messageLeftButton);
+		renderer->drawText(TextParams(x, y, messageLeftButton));
 		y -= ls;
-		painter.drawText(x, y, messageRightButton);
+		renderer->drawText(TextParams(x, y, messageRightButton));
 	}
 }
 
