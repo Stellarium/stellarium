@@ -79,27 +79,23 @@ void StelGeometrySphere::draw(StelRenderer* renderer, StelProjectorP projector)
 	{
 		case SphereType_Fisheye:
 		case SphereType_Unlit:
-		{
 			for(int row = 0; row < rowIndices.size(); ++row)
 			{
 				renderer->drawVertexBuffer(unlitVertices, rowIndices[row], projector);
 			}
 			break;
-		}
 		case SphereType_Lit:
-		{
 			for(int row = 0; row < rowIndices.size(); ++row)
 			{
 				renderer->drawVertexBuffer(litVertices, rowIndices[row], projector);
 			}
 			break;
-		}
 		default:
 			Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown sphere type");
 	}
 } 
 
-void StelGeometrySphere::regenerate(class StelRenderer* renderer, StelProjectorP projector)
+void StelGeometrySphere::regenerate(StelRenderer* renderer, StelProjectorP projector)
 {
 #ifndef NDEBUG
 	switch(type)
@@ -117,9 +113,9 @@ void StelGeometrySphere::regenerate(class StelRenderer* renderer, StelProjectorP
 	// Prepare the vertex buffer
 	if(type == SphereType_Fisheye || type == SphereType_Unlit)
 	{
-		Q_ASSERT_X(litVertices == NULL, Q_FUNC_INFO,
+		Q_ASSERT_X(NULL == litVertices, Q_FUNC_INFO,
 		           "Lit vertex buffer is used for unlit sphere");
-		if(unlitVertices == NULL)
+		if(NULL == unlitVertices)
 		{
 			unlitVertices = 
 				renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleStrip);
@@ -132,9 +128,9 @@ void StelGeometrySphere::regenerate(class StelRenderer* renderer, StelProjectorP
 	}
 	else if(type == SphereType_Lit)
 	{
-		Q_ASSERT_X(unlitVertices == NULL, Q_FUNC_INFO,
+		Q_ASSERT_X(NULL == unlitVertices, Q_FUNC_INFO,
 		           "Unlit vertex buffer is used for lit sphere");
-		if(litVertices == NULL)
+		if(NULL == litVertices)
 		{
 			litVertices = 
 				renderer->createVertexBuffer<VertexP3T2C4>(PrimitiveType_TriangleStrip);
@@ -151,7 +147,7 @@ void StelGeometrySphere::regenerate(class StelRenderer* renderer, StelProjectorP
 	}
 
 	// Prepare index buffers for rows.
-	// Add/remove rows based on stacks. Clear reused rows.
+	// Add/remove rows based on loops. Clear reused rows.
 	const int rowsKept = std::min(stacks, rowIndices.size());
 	for(int row = 0; row < rowsKept; ++row)
 	{
@@ -378,6 +374,166 @@ void StelGeometrySphere::regenerate(class StelRenderer* renderer, StelProjectorP
 	updated = false;
 }
 
+void StelGeometryRing::draw(StelRenderer* renderer, StelProjectorP projector)
+{
+	if(updated)
+	{
+		regenerate(renderer);
+	}
+
+	switch(type)
+	{
+		case RingType_Textured:
+			for(int loop = 0; loop < loops; ++loop)
+			{
+				renderer->drawVertexBuffer(texturedVertices, loopIndices[loop], projector);
+			}
+			break;
+		case RingType_Plain2D:
+			for(int loop = 0; loop < loops; ++loop)
+			{
+				renderer->drawVertexBuffer(plain2DVertices, loopIndices[loop]);
+			}
+			break;
+		default:
+			Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown sphere type");
+	}
+} 
+
+void StelGeometryRing::regenerate(StelRenderer* renderer)
+{
+#ifndef NDEBUG
+	switch(type)
+	{
+		case RingType_Textured:
+		case RingType_Plain2D:
+			break;
+		default:
+			Q_ASSERT_X(false, Q_FUNC_INFO, 
+			           "New ring type - need to update StelGeometryRing::regenerate()");
+	}
+#endif
+
+	// Prepare the vertex buffer
+	if(type == RingType_Textured)
+	{
+		Q_ASSERT_X(NULL == plain2DVertices, Q_FUNC_INFO,
+		           "Plain 2D vertex buffer is used for textured 3D ring");
+		if(NULL == texturedVertices)
+		{
+			texturedVertices = 
+				renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleStrip);
+		}
+		else
+		{
+			texturedVertices->unlock();
+			texturedVertices->clear();
+		}
+	}
+	else if(type == RingType_Plain2D)
+	{
+		Q_ASSERT_X(NULL == texturedVertices, Q_FUNC_INFO,
+		           "Textured vertex buffer is used for a plain 2D ring");
+		if(NULL == plain2DVertices)
+		{
+			plain2DVertices = 
+				renderer->createVertexBuffer<VertexP2>(PrimitiveType_TriangleStrip);
+		}
+		else
+		{
+			plain2DVertices->unlock();
+			plain2DVertices->clear();
+		}
+	}
+	else
+	{
+		Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown ring type");
+	}
+
+	// Prepare index buffers for loops.
+	// Add/remove loops based on stacks. Clear reused loops.
+	const int loopsKept = std::min(loops, loopIndices.size());
+	for(int loop = 0; loop < loopsKept; ++loop)
+	{
+		loopIndices[loop]->unlock();
+		loopIndices[loop]->clear();
+	}
+
+	if(loops > loopIndices.size())
+	{
+		for(int loop = loopIndices.size(); loop < loops; ++loop)
+		{
+			loopIndices.append(renderer->createIndexBuffer(IndexType_U16));
+		}
+	}
+	else if(loops < loopIndices.size())
+	{
+		for(int loop = loops; loop < loopIndices.size(); ++loop)
+		{
+			delete loopIndices[loop];
+		}
+		loopIndices.resize(loops);
+	}
+
+	const float dr     = (outerRadius - innerRadius) / loops;
+	const float dtheta = (flipFaces ? -1.0f : 1.0f) * 2.0f * M_PI / slices;
+	computeCosSinTheta(dtheta, slices);
+
+	// Generate vertices of the ring.
+	float r = innerRadius;
+	if(type == RingType_Textured)
+	{
+		StelVertexBuffer<VertexP3T2>* const vertices = texturedVertices;
+		for(int loop = 0; loop <= loops; ++loop, r += dr)
+		{
+			const float texR = (r - innerRadius) / (outerRadius - innerRadius);
+			const float* cosSinTheta = COS_SIN_THETA;
+			for (int slice = 0; slice <= slices; ++slice, cosSinTheta += 2)
+			{
+				vertices->addVertex(
+					VertexP3T2(offset + Vec3f(r * cosSinTheta[0], r * cosSinTheta[1], 0.0f),
+					           Vec2f(texR, 0.5f)));
+			}
+		}
+		vertices->lock();
+	}
+	else if(type == RingType_Plain2D)
+	{
+		const Vec2f offset2D(offset[0], offset[1]);
+		StelVertexBuffer<VertexP2>* const vertices = plain2DVertices;
+		for(int loop = 0; loop <= loops; ++loop, r += dr)
+		{
+			const float* cosSinTheta = COS_SIN_THETA;
+			for (int slice = 0; slice <= slices; ++slice, cosSinTheta += 2)
+			{
+				vertices->addVertex(
+					VertexP2(offset2D + Vec2f(r * cosSinTheta[0], r * cosSinTheta[1])));
+			}
+		}
+		vertices->lock();
+	}
+	else
+	{
+		Q_ASSERT_X(false, Q_FUNC_INFO, "Unknown ring type");
+	}
+
+	// Generate a triangle strip index buffer for each loop.
+	uint index = 0;
+	for(int loop = 0; loop < loops; ++loop)
+	{
+		StelIndexBuffer* indices = loopIndices[loop];
+		indices->unlock();
+		for (int slice = 0; slice <= slices; ++slice)
+		{
+			indices->addIndex(index);
+			indices->addIndex(index + slices + 1);
+			++index;
+		}
+		indices->lock();
+	} 
+	updated = false;
+}
+
 void StelGeometryBuilder::buildFanDisk
 	(StelVertexBuffer<VertexP3T2>* const vertexBuffer, StelIndexBuffer* const indexBuffer,
 	 const float radius, const int innerFanSlices, const int level)
@@ -500,56 +656,4 @@ void StelGeometryBuilder::buildFanDisk
 
 	vertexBuffer->lock();
 	indexBuffer->lock();
-}
-
-void StelGeometryBuilder::buildRing
-(StelVertexBuffer<VertexP3T2>* vertices, QVector<StelIndexBuffer*>& rowIndexBuffers,
- const float rMin, const float rMax, int slices, bool flipFaces)
-{
-	const int stacks = rowIndexBuffers.size();
-	Q_ASSERT_X(stacks > 0, Q_FUNC_INFO, "Need at least 1 row buffer to build a ring");
-	Q_ASSERT_X(slices > 3, Q_FUNC_INFO, "Need at least 3 slices to build a ring");
-	Q_ASSERT_X(vertices->primitiveType() == PrimitiveType_TriangleStrip, Q_FUNC_INFO,
-	           "Need a triangle strip vertex buffer to build a ring");
-	Q_ASSERT_X(vertices->length() == 0, Q_FUNC_INFO, 
-	           "Need an empty vertex buffer to build a ring");
-	Q_ASSERT_X(rMin >= 0.0f, Q_FUNC_INFO, "Ring can't have a negative radius");
-	Q_ASSERT_X(rMax > rMin, Q_FUNC_INFO, 
-	           "Maximum ring radius must be greater than the minimum radius");
-
-	const float dr     = (rMax - rMin) / stacks;
-	const float dtheta = (flipFaces ? -1.0f : 1.0f) * 2.0f * M_PI / slices;
-	Q_ASSERT_X(slices <= MAX_SLICES, Q_FUNC_INFO, "Too many slices");
-	computeCosSinTheta(dtheta, slices);
-
-	// Generate vertices of the ring.
-	float r = rMin;
-	for(int stack = 0; stack <= stacks; ++stack, r += dr)
-	{
-		const float texR = (r - rMin) / (rMax - rMin);
-		const float* cosSinTheta = COS_SIN_THETA;
-		for (int slice = 0; slice <= slices; ++slice, cosSinTheta += 2)
-		{
-			vertices->addVertex(VertexP3T2(Vec2f(r * cosSinTheta[0], r * cosSinTheta[1]),
-			                               Vec2f(texR, 0.5f)));
-		}
-	}
-	vertices->lock();
-
-	// Generate a triangle strip index buffer for each stack.
-	uint index = 0;
-	for(int stack = 0; stack < stacks; ++stack)
-	{
-		StelIndexBuffer* indices = rowIndexBuffers[stack];
-		Q_ASSERT_X(indices->length() == 0, Q_FUNC_INFO, 
-		           "Need empty index buffers to build a ring");
-		indices->unlock();
-		for (int slice = 0; slice <= slices; ++slice)
-		{
-			indices->addIndex(index);
-			indices->addIndex(index + slices + 1);
-			++index;
-		}
-		indices->lock();
-	}
 }
