@@ -454,6 +454,7 @@ protected:
 		                            m[2], m[6], m[10], m[14], 
 		                            m[3], m[7], m[11], m[15]);
 
+
 		glFrontFace(projector->flipFrontBackFace() ? GL_CW : GL_CCW);
 
 		// Set up viewport for the projector.
