@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-04 11:49+0700\n"
+"POT-Creation-Date: 2012-08-04 21:07+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -472,7 +472,7 @@ msgstr ""
 msgid "CTRL + Left click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:236
+#: src/gui/HelpDialog.cpp:61 src/gui/StelGui.cpp:237
 msgid "Movement and Selection"
 msgstr ""
 
@@ -500,23 +500,23 @@ msgstr ""
 msgid "Stop currently running script"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:212
+#: src/gui/HelpDialog.cpp:74 src/gui/StelGui.cpp:213
 msgid "Pause script execution"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:213
+#: src/gui/HelpDialog.cpp:75 src/gui/StelGui.cpp:214
 msgid "Resume script execution"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:208
+#: src/gui/HelpDialog.cpp:76 src/gui/StelGui.cpp:209
 msgid "Slow down the script execution rate"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:77 src/gui/StelGui.cpp:209
+#: src/gui/HelpDialog.cpp:77 src/gui/StelGui.cpp:210
 msgid "Speed up the script execution rate"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:78 src/gui/StelGui.cpp:210
+#: src/gui/HelpDialog.cpp:78 src/gui/StelGui.cpp:211
 msgid "Set the normal script execution rate"
 msgstr ""
 
@@ -591,7 +591,7 @@ msgid "{Forums} - discuss Stellarium with other users."
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:242 src/gui/HelpDialog.cpp:345
-#: src/gui/HelpDialog.cpp:347 src/gui/StelGui.cpp:243
+#: src/gui/HelpDialog.cpp:347 src/gui/StelGui.cpp:244
 msgid "Miscellaneous"
 msgstr ""
 
@@ -746,210 +746,214 @@ msgid "Stars"
 msgstr ""
 
 #: src/gui/StelGui.cpp:187
+msgid "Stars labels"
+msgstr ""
+
+#: src/gui/StelGui.cpp:188
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Planet labels"
 msgstr ""
 
-#: src/gui/StelGui.cpp:188
+#: src/gui/StelGui.cpp:189
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:301
 msgid "Planet orbits"
 msgstr ""
 
-#: src/gui/StelGui.cpp:189
+#: src/gui/StelGui.cpp:190
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:305
 msgid "Planet trails"
 msgstr ""
 
-#: src/gui/StelGui.cpp:191
+#: src/gui/StelGui.cpp:192
 msgid "Night mode"
 msgstr ""
 
-#: src/gui/StelGui.cpp:192
+#: src/gui/StelGui.cpp:193
 msgid "Full-screen mode"
 msgstr ""
 
-#: src/gui/StelGui.cpp:193
+#: src/gui/StelGui.cpp:194
 msgid "Flip scene horizontally"
 msgstr ""
 
-#: src/gui/StelGui.cpp:194
+#: src/gui/StelGui.cpp:195
 msgid "Flip scene vertically"
 msgstr ""
 
-#: src/gui/StelGui.cpp:196
+#: src/gui/StelGui.cpp:197
 msgid "Windows"
 msgstr ""
 
-#: src/gui/StelGui.cpp:197
+#: src/gui/StelGui.cpp:198
 msgid "Help window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:198
+#: src/gui/StelGui.cpp:199
 msgid "Configuration window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:199
+#: src/gui/StelGui.cpp:200
 msgid "Search window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:200
+#: src/gui/StelGui.cpp:201
 msgid "Sky and viewing options window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:201
+#: src/gui/StelGui.cpp:202
 msgid "Date/time window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:202
+#: src/gui/StelGui.cpp:203
 msgid "Location window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:204
+#: src/gui/StelGui.cpp:205
 msgid "Script console window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:207 src/ui_dateTimeDialogGui.h:294
+#: src/gui/StelGui.cpp:208 src/ui_dateTimeDialogGui.h:294
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Date and Time"
 msgstr ""
 
-#: src/gui/StelGui.cpp:211
+#: src/gui/StelGui.cpp:212
 msgid "Stop script execution"
 msgstr ""
 
-#: src/gui/StelGui.cpp:214
+#: src/gui/StelGui.cpp:215
 msgid "Decrease time speed"
 msgstr ""
 
-#: src/gui/StelGui.cpp:215
+#: src/gui/StelGui.cpp:216
 msgid "Increase time speed"
 msgstr ""
 
-#: src/gui/StelGui.cpp:216
+#: src/gui/StelGui.cpp:217
 msgid "Set normal time rate"
 msgstr ""
 
-#: src/gui/StelGui.cpp:217
+#: src/gui/StelGui.cpp:218
 msgid "Decrease time speed (a little)"
 msgstr ""
 
-#: src/gui/StelGui.cpp:218
+#: src/gui/StelGui.cpp:219
 msgid "Increase time speed (a little)"
 msgstr ""
 
-#: src/gui/StelGui.cpp:219
+#: src/gui/StelGui.cpp:220
 msgid "Set time rate to zero"
 msgstr ""
 
-#: src/gui/StelGui.cpp:220
+#: src/gui/StelGui.cpp:221
 msgid "Set time to now"
 msgstr ""
 
-#: src/gui/StelGui.cpp:221
+#: src/gui/StelGui.cpp:222
 msgid "Add 1 solar hour"
 msgstr ""
 
-#: src/gui/StelGui.cpp:222
+#: src/gui/StelGui.cpp:223
 msgid "Subtract 1 solar hour"
 msgstr ""
 
-#: src/gui/StelGui.cpp:223
+#: src/gui/StelGui.cpp:224
 msgid "Add 1 solar day"
 msgstr ""
 
-#: src/gui/StelGui.cpp:224
+#: src/gui/StelGui.cpp:225
 msgid "Subtract 1 solar day"
 msgstr ""
 
-#: src/gui/StelGui.cpp:225
+#: src/gui/StelGui.cpp:226
 msgid "Add 1 solar week"
 msgstr ""
 
-#: src/gui/StelGui.cpp:226
+#: src/gui/StelGui.cpp:227
 msgid "Subtract 1 solar week"
 msgstr ""
 
-#: src/gui/StelGui.cpp:227
+#: src/gui/StelGui.cpp:228
 msgid "Add 1 sidereal day"
 msgstr ""
 
-#: src/gui/StelGui.cpp:228
+#: src/gui/StelGui.cpp:229
 msgid "Subtract 1 sidereal day"
 msgstr ""
 
-#: src/gui/StelGui.cpp:229
+#: src/gui/StelGui.cpp:230
 msgid "Add 1 sidereal week"
 msgstr ""
 
-#: src/gui/StelGui.cpp:230
+#: src/gui/StelGui.cpp:231
 msgid "Subtract 1 sidereal week"
 msgstr ""
 
-#: src/gui/StelGui.cpp:231
+#: src/gui/StelGui.cpp:232
 msgid "Add 1 sidereal month"
 msgstr ""
 
-#: src/gui/StelGui.cpp:232
+#: src/gui/StelGui.cpp:233
 msgid "Subtract 1 sidereal month"
 msgstr ""
 
-#: src/gui/StelGui.cpp:233
+#: src/gui/StelGui.cpp:234
 msgid "Add 1 sidereal year"
 msgstr ""
 
-#: src/gui/StelGui.cpp:234
+#: src/gui/StelGui.cpp:235
 msgid "Subtract 1 sidereal year"
 msgstr ""
 
-#: src/gui/StelGui.cpp:237
+#: src/gui/StelGui.cpp:238
 msgid "Center on selected object"
 msgstr ""
 
-#: src/gui/StelGui.cpp:238
+#: src/gui/StelGui.cpp:239
 msgid "Track object"
 msgstr ""
 
-#: src/gui/StelGui.cpp:239
+#: src/gui/StelGui.cpp:240
 msgid "Zoom in on selected object"
 msgstr ""
 
-#: src/gui/StelGui.cpp:240
+#: src/gui/StelGui.cpp:241
 msgid "Zoom out"
 msgstr ""
 
-#: src/gui/StelGui.cpp:241
+#: src/gui/StelGui.cpp:242
 msgid "Set home planet to selected planet"
 msgstr ""
 
-#: src/gui/StelGui.cpp:244
+#: src/gui/StelGui.cpp:245
 msgid "Switch between equatorial and azimuthal mount"
 msgstr ""
 
-#: src/gui/StelGui.cpp:245
+#: src/gui/StelGui.cpp:246
 msgid "Quit"
 msgstr ""
 
-#: src/gui/StelGui.cpp:246
+#: src/gui/StelGui.cpp:247
 msgid "Save screenshot"
 msgstr ""
 
-#: src/gui/StelGui.cpp:247
+#: src/gui/StelGui.cpp:248
 msgid "Copy selected object information to clipboard"
 msgstr ""
 
-#: src/gui/StelGui.cpp:248
+#: src/gui/StelGui.cpp:249
 msgid "Go to home"
 msgstr ""
 
-#: src/gui/StelGui.cpp:250
+#: src/gui/StelGui.cpp:251
 msgid "Auto hide horizontal button bar"
 msgstr ""
 
-#: src/gui/StelGui.cpp:251
+#: src/gui/StelGui.cpp:252
 msgid "Auto hide vertical button bar"
 msgstr ""
 
-#: src/gui/StelGui.cpp:252
+#: src/gui/StelGui.cpp:253
 msgid "Toggle visibility of GUI"
 msgstr ""
 
