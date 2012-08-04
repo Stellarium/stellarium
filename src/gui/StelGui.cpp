@@ -184,6 +184,7 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	addGuiActions("actionShow_Nebulas", N_("Nebulas"), "N", group, true, false);
 	addGuiActions("actionShow_DSS", N_("Nebulas background images"), "", group, true, false);
 	addGuiActions("actionShow_Stars", N_("Stars"), "S", group, true, false);
+	addGuiActions("actionShow_Stars_Labels", N_("Stars labels"), "Alt+S", group, true, false);
 	addGuiActions("actionShow_Planets_Labels", N_("Planet labels"), "P", group, true, false);
 	addGuiActions("actionShow_Planets_Orbits", N_("Planet orbits"), "O", group, true, false);
 	addGuiActions("actionShow_Planets_Trails", N_("Planet trails"), "Shift+T", group, true, false);
@@ -375,6 +376,9 @@ void StelGui::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidg
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
 	connect(getGuiActions("actionShow_Stars"), SIGNAL(toggled(bool)), smgr, SLOT(setFlagStars(bool)));
 	getGuiActions("actionShow_Stars")->setChecked(smgr->getFlagStars());
+
+	connect(getGuiActions("actionShow_Stars_Labels"), SIGNAL(toggled(bool)), smgr, SLOT(setFlagLabels(bool)));
+	getGuiActions("actionShow_Stars_Labels")->setChecked(smgr->getFlagLabels());
 
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	connect(getGuiActions("actionShow_Planets_Labels"), SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLabels(bool)));
