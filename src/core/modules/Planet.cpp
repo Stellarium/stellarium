@@ -1112,72 +1112,18 @@ void Planet::drawHints(const StelCore* core, StelRenderer* renderer, const QFont
 Ring::Ring(double radiusMin,double radiusMax,const QString &texname)
 	 : radiusMin(radiusMin)
 	 , radiusMax(radiusMax)
-	 , ringVertices(NULL)
-	 // Set to invalid values to force buffer update at the first draw.
-	 , cachedStacks(-1)
-	 , cachedSlices(-1)
-	 , cachedFlipFaces(true)
+	 , ring(NULL)
 {
 	tex = StelApp::getInstance().getTextureManager().createTexture("textures/"+texname);
 }
 
 Ring::~Ring(void)
 {
-	if(NULL != ringVertices)
+	if(NULL != ring)
 	{
-		delete ringVertices;
-		ringVertices = NULL;
+		delete ring;
+		ring = NULL;
 	}
-	for(int stack = 0; stack < ringRows.size(); ++stack)
-	{
-		delete ringRows[stack];
-	}
-	ringRows.clear();
-}
-
-void Ring::updateGraphics(StelRenderer* renderer, int stacks, int slices, bool flipFaces)
-{
-	if(NULL != ringVertices &&
-		stacks == cachedStacks && slices == cachedSlices && flipFaces == cachedFlipFaces)
-	{
-		return;
-	}
-
-	// At the first draw call, we don't have any vertex buffer at all.
-	// Later we only need to clear the buffer.
-	if(NULL == ringVertices)
-	{
-		Q_ASSERT_X(ringRows.size() == 0, Q_FUNC_INFO, 
-		           "Vertex buffer is not generated but index buffers are");
-		ringVertices = renderer->createVertexBuffer<VertexP3T2>(PrimitiveType_TriangleStrip);
-	}
-	else
-	{
-		Q_ASSERT_X(ringRows.size() > 0, Q_FUNC_INFO, 
-		           "Vertex buffer is generated but index buffers are not");
-		ringVertices->unlock();
-		ringVertices->clear();
-	}
-
-	// Replace row index buffer. Could be more efficient, but longer, if we
-	// reused existing buffers.
-	for(int stack = 0; stack < ringRows.size(); ++stack)
-	{
-		delete ringRows[stack];
-	}
-	ringRows.clear();
-	for(int stack = 0; stack < stacks; ++stack)
-	{
-		ringRows.append(renderer->createIndexBuffer(IndexType_U16));
-	}
-
-	StelGeometryBuilder()
-		.buildRing(ringVertices, ringRows, radiusMin, radiusMax, slices, flipFaces);
-
-	// Update cached parameters.
-	cachedStacks = stacks;
-	cachedSlices = slices;
-	cachedFlipFaces = flipFaces;
 }
 
 void Ring::draw(StelProjectorP projector, StelRenderer* renderer, 
@@ -1203,12 +1149,19 @@ void Ring::draw(StelProjectorP projector, StelRenderer* renderer,
 	               + mat.r[ 9] * mat.r[13]
 	               + mat.r[10] * mat.r[14];
 
-	// Regenerate vertex/index buffer if the parameters have changed.
-	updateGraphics(renderer, stacks, slices, h >= 0);
-	for(int s = 0; s < stacks; ++s)
+	if(NULL == ring)
 	{
-		renderer->drawVertexBuffer(ringVertices, ringRows[s], projector);
+		ring = StelGeometryBuilder()
+			.buildRingTextured(RingParams(radiusMin, radiusMax).resolution(slices, stacks));
 	}
+	else 
+	{
+		ring->setResolution(slices, stacks);
+	}
+	ring->setFlipFaces(h >= 0);
+
+	ring->draw(renderer, projector);
+	
 	renderer->setCulledFaces(CullFace_None);
 }
 

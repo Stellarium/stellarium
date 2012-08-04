@@ -18,9 +18,9 @@
 //!
 //! @code
 //! // Radius (required parameter) set to 5, optional parameters have default values
-//! (completely spherical, 20 stacks, 20 slices, oriented outside, texture not flipped)
+//! // (completely spherical, 20 stacks, 20 slices, oriented outside, texture not flipped)
 //! SphereParams a = SphereParams(5.0f);
-//! // Higher resolution sphere
+//! // Higher detail sphere
 //! SphereParams b = SphereParams(5.0f).resolution(40, 40);
 //! // Oblate "sphere" with faces oriented inside
 //! SphereParams c = SphereParams(5.0f).oneMinusOblateness(0.5f).orientInside();
@@ -29,10 +29,10 @@
 //! @see StelGeometryBuilder, StelGeometrySphere
 struct SphereParams
 {
-	//! Construct SphereParams specifying the required radius parameter and other parameters at
+	//! Construct SphereParams specifying the required radius parameter with other parameters at
 	//! default values.
 	//!
-	//! Default parameters are no oblateness, 20 stacks, 20 slices, oriented inside and texture
+	//! Default values are no oblateness, 20 stacks, 20 slices, oriented inside and texture
 	//! not flipped.
 	//!
 	//! @param radius Radius of the sphere. Must be greater than zero.
@@ -79,7 +79,7 @@ struct SphereParams
 		return *this;
 	}
 
-	//! If sphecified, texture coords will be flipped on the (texture, not global) X axis.
+	//! If specified, texture coords will be flipped on the (texture, not global) X axis.
 	SphereParams& flipTexture()
 	{
 		flipTexture_ = true;
@@ -116,7 +116,7 @@ class StelGeometrySphere
 {
 friend class StelGeometryBuilder;
 private:
-	//! Types of sphere. Affects how the sphere is generated and drawn.
+	//! Types of spheres. Affects how the sphere is generated and drawn.
 	enum SphereType
 	{
 		//! Sphere with fisheye texture coordinates.
@@ -185,11 +185,11 @@ public:
 	//!
 	//! Higher values result in more detail, but also higher resource usage.
 	//!
-	//! @param stacks Number of stacks/rows/rings, i.e. vertical resolution of the sphere.
-	//!               Must be at least 3 and at most 4096.
 	//! @param slices Number of slices/columns, i.e. horizontal resolution of the sphere.
 	//!               Must be at least 3 and at most 4096.
-	void setResolution(const int stacks, const int slices)
+	//! @param stacks Number of stacks/rows/rings, i.e. vertical resolution of the sphere.
+	//!               Must be at least 3 and at most 4096.
+	void setResolution(const int slices, const int stacks)
 	{
 		// The maximums here must match MAX_STACKS and MAX_SLICES in the cpp file.
 		Q_ASSERT_X(stacks >= 3 && stacks < 4096, Q_FUNC_INFO,
@@ -256,9 +256,9 @@ private:
 	//!
 	//! This can only be used by StelGeometryBuilder functions such as buildSphereUnlit().
 	//!
-	//! Sphere parameters are set with invalid values and have to be set by the builder functions.
+	//! Sphere parameters are set to invalid values and have to be set by the builder function.
 	//!
-	//! @param type       Type of the sphere (fisheye, unlit or lit).
+	//! @param type       Type of sphere (fisheye, unlit or lit).
 	//! @param textureFov FOV of fisheye texture coordinates. Used only with SphereType_Fisheye.
 	//! @param light      Light. Used only when type is SphereType_Lit.
 	StelGeometrySphere(const SphereType type, const float textureFov = -100.0f, 
@@ -292,10 +292,294 @@ private:
 	void regenerate(class StelRenderer* renderer, StelProjectorP projector);
 };
 
+
+//! Parameters specifying how to generate a ring.
+//!
+//! These are passed to StelGeometryBuilder to build a sphere.
+//!
+//! This is a builder-style struct. Parameters can be specified like this:
+//! 
+//! @code
+//! // Required parameters, inner and outer radius, set to 5 and 10 respectively,
+//! // optional parameters have default values
+//! // (20 loops, 20 slices, faces not flipped)
+//! RingParams a = RingParams(5.0f, 10.0f);
+//! // Higher detail ring
+//! RingParams b = RingParams(5.0f, 10.0f).resolution(40, 40);
+//! // Ring facing the opposite side
+//! RingParams c = RingParams(5.0f, 10.0f).flipFaces();
+//! @endcode
+//!
+//! @see StelGeometryBuilder, StelGeometryRing
+struct RingParams
+{
+	//! Construct RingParams specifying the required inner and outer radius parameter 
+	//! and other parameters at default values.
+	//!
+	//! Default values are 20 loops, 20 slices and faces not flipped.
+	//!
+	//! @param innerRadius Inner radius. Must be greater than zero.
+	//! @param outerRadius Outer radius. Must be greater than the inner radius.
+	RingParams(const float innerRadius, const float outerRadius)
+		: innerRadius_(innerRadius)
+		, outerRadius_(outerRadius)
+		, loops_(20)
+		, slices_(20)
+		, flipFaces_(false)
+	{
+	}
+
+	//! Set resolution (detail) of the ring.
+	//!
+	//! Higher values result in more detail, but also higher resource usage.
+	//!
+	//! @param slices Number of slices/subdivisions. E.g. 3 is a triangle, 5 a pentagon, etc.
+	//!               Must be at least 3 and at most 4096.
+	//! @param loops  Number of concentric loops in the ring.
+	//!               Must be at least 1.
+	RingParams& resolution(const int slices, const int loops)
+	{
+		slices_ = slices;
+		loops_ = loops;
+		return *this;
+	}
+
+	//! If specified, the ring will be flipped to face the opposite side.
+	RingParams& flipFaces()
+	{
+		flipFaces_ = true;
+		return *this;
+	}
+
+	//! Inner radius of the ring.
+	float innerRadius_; 
+	//! Outer radius of the ring.
+	float outerRadius_;
+	//! Number of loops in the ring.
+	int loops_;
+	//! Number of slices/subdivisions in the ring.
+	int slices_;
+	//! Should the faces in the ring be flipped to face the opposite side?
+	bool flipFaces_;
+};
+
+
+//! Drawable 2D or 3D ring.
+//!
+//! Encapsulates vertex and index buffers needed to draw the ring.
+//! These are generated as needed any time ring parameters change.
+//!
+//! The ring is a circular grid with multiple loops each composed of multiple slices.
+//!
+//! Rings are constructed by StelGeometryBuilder functions buildRingTextured(),
+//! and buildRing2D().
+//!
+//! @see StelGeometryBuilder
+class StelGeometryRing
+{
+friend class StelGeometryBuilder;
+private:
+	//! Types of rings. Affects how the ring is generated and drawn.
+	enum RingType
+	{
+		RingType_Textured,
+		RingType_Plain2D
+	};
+
+public:
+	//! Destroy the ring, freeing vertex and index buffers.
+	~StelGeometryRing()
+	{
+		if(NULL != texturedVertices)
+		{
+			Q_ASSERT_X(NULL == plain2DVertices, Q_FUNC_INFO,
+			           "Both textured and 2D vertex buffers are used");
+			delete texturedVertices;
+			texturedVertices = NULL;
+		}
+		if(NULL != plain2DVertices)
+		{
+			Q_ASSERT_X(NULL == texturedVertices, Q_FUNC_INFO,
+			           "Both textured and 2D vertex buffers are used");
+			delete plain2DVertices;
+			plain2DVertices = NULL;
+		}
+		for(int loop = 0; loop < loopIndices.size(); ++loop)
+		{
+			delete loopIndices[loop];
+		}
+		loopIndices.clear();
+	}
+
+	//! Draw the ring.
+	//!
+	//! @param renderer  Renderer to draw the ring.
+	//! @param projector Projector to project the vertices, if any.
+	//!                  Not used for 2D rings.
+	void draw(class StelRenderer* renderer, StelProjectorP projector = StelProjectorP());
+	
+	//! Set inner and outer radius of the ring.
+	//!
+	//! @param inner Inner radius. Must be greater than zero.
+	//! @param outer Outer radius. Must be greater than the inner radius.
+	void setInnerOuterRadius(const float inner, const float outer)
+	{
+		Q_ASSERT_X(inner > 0.0f, Q_FUNC_INFO, "Inner ring radius must be greater than zero");
+
+		// No need to regenerate
+		if(inner == this->innerRadius && outer == this->outerRadius) {return;}
+
+		this->innerRadius = inner;
+		this->outerRadius = outer;
+		updated = true;
+	}
+
+	//! Set resolution (detail) of the ring.
+	//!
+	//! Higher values result in more detail, but also higher resource usage.
+	//!
+	//! @param slices Number of slices/subdivisions. E.g. 3 is a triangle, 5 a pentagon, etc.
+	//!               Must be at least 3 and at most 4096.
+	//! @param loops  Number of concentric loops in the ring.
+	//!               Must be at least 1.
+	void setResolution(const int slices, const int loops)
+	{
+		Q_ASSERT_X(loops >= 1, Q_FUNC_INFO, "There must be at least 1 loop in a ring");
+		// Must correspond with MAX_SLICES in the .cpp file.
+		Q_ASSERT_X(slices >= 3 && slices <= 4096, Q_FUNC_INFO,
+		           "There must be at least 3 and at most 4096 slices in a ring.");
+
+		// No need to regenerate
+		if(slices == this->slices && loops == this->loops) {return;}
+
+		this->loops = loops;
+		this->slices = slices;
+		updated = true;
+	}
+
+	//! Should the ring be flipped to face the opposite side?
+	void setFlipFaces(const bool flipFaces)
+	{
+		// No need to regenerate
+		if(flipFaces == this->flipFaces) {return;}
+		this->flipFaces = flipFaces;
+		updated = true;
+	}
+
+	//! Set offset (position) of the ring (for 2D rings, the Z coordinate is ignored).
+	void setOffset(const Vec3f offset)
+	{
+		// No need to regenerate
+		if(offset == this->offset) {return;}
+		this->offset = offset;
+		updated = true;
+	}
+
+private:
+	//! Type of ring. Affects how the ring is generated and drawn.
+	const RingType type; 
+
+	//! Have the ring parameters been updated since the last call to regenerate() ?
+	//!
+	//! If true, the ring will be regenerated at the next draw() call.
+	bool updated;
+
+	//! Inner radius of the ring.
+	float innerRadius; 
+	//! Outer radius of the ring.
+	float outerRadius;
+	//! Number of loops in the ring.
+	int loops;
+	//! Number of slices/subdivisions in the ring.
+	int slices;
+	//! Should the faces in the ring be flipped to face the opposite side?
+	bool flipFaces;
+	//! Offset (position) of the ring.
+	Vec3f offset;
+
+	//! Vertex buffer used when ring type is RingType_Textured.
+	StelVertexBuffer<VertexP3T2>* texturedVertices;
+	//! Vertex buffer used when ring type is RingType_Textured.
+	StelVertexBuffer<VertexP2>* plain2DVertices;
+
+	//! Each index buffer is a triangle strip forming one loop of the ring pointing to the used
+	//! vertex buffer.
+	QVector<StelIndexBuffer*> loopIndices;
+
+	//! Construct a StelGeometryRing.
+	//!
+	//! This can only be used by StelGeometryRing functions such as buildRingTextured().
+	//!
+	//! Ring parameters are set to invalid value and must be set by the builder function.
+	//!
+	//! @param type Type of ring (textured or plain 2D)
+	StelGeometryRing(const RingType type)
+		: type(type)
+		, updated(true)
+		, innerRadius(0.0f)
+		, outerRadius(0.0f)
+		, loops(0)
+		, slices(0)
+		, flipFaces(0)
+		, offset(0.0f, 0.0f, 0.0f)
+		, texturedVertices(NULL)
+		, plain2DVertices(NULL)
+	{
+	}
+
+	//! Regenerate the ring.
+	//!
+	//! Called at first draw and when ring parameters change.
+	//!
+	//! @param renderer  Renderer to create vertex/index buffers.
+	void regenerate(class StelRenderer* renderer);
+};
+
+
 //! Builds various geometry primitives, storing them in vertex buffers.
 class StelGeometryBuilder
 {
 public:
+
+	//! Build a 2D circle.
+	//!
+	//! @param vertexBuffer Vertex buffer to store the circle. Must be empty,
+	//!                     and have the line strip primitive type.
+	//! @param x            X position of the center of the ring.
+	//! @param y            Y position of the center of the ring.
+	//! @param radius       Radius of the ring. Must be greater than zero.
+	//! @param segments     Number of segments to subdivide the ring into.
+	void buildCircle(StelVertexBuffer<VertexP2>* vertexBuffer, 
+	                 const float x, const float y, const float radius, 
+	                 const int segments = 128)
+	{
+		Q_ASSERT_X(radius > 0.0f, Q_FUNC_INFO, "Circle must have a radius greater than zero");
+		Q_ASSERT_X(segments > 3, Q_FUNC_INFO, "Circle must have at least 3 segments");
+		Q_ASSERT_X(vertexBuffer->length() == 0, Q_FUNC_INFO,
+		           "Need an empty vertex buffer to build a circle");
+		Q_ASSERT_X(vertexBuffer->primitiveType() == PrimitiveType_LineStrip, Q_FUNC_INFO,
+		           "Need a line loop vertex buffer to build a circle");
+
+		const Vec2f center(x,y);
+		const float phi = 2.0f * M_PI / segments;
+		const float cp = std::cos(phi);
+		const float sp = std::sin(phi);
+		float dx = radius;
+		float dy = 0;
+
+		vertexBuffer->unlock();
+
+		for (int i = 0; i < segments; i++)
+		{
+			vertexBuffer->addVertex(VertexP2(x + dx, y + dy));
+			const float dxNew = dx * cp - dy * sp;
+			dy = dx * sp + dy * cp;
+			dx = dxNew;
+		}
+		vertexBuffer->addVertex(VertexP2(x + radius, y));
+		vertexBuffer->lock();
+	}
+
 	//! Build a cylinder vertex buffer without top and bottom caps.
 	//!
 	//! @param vertexBuffer Vertex buffer (of 3D-position/2D-texcoord vertices)
@@ -378,7 +662,7 @@ public:
 			new StelGeometrySphere(StelGeometrySphere::SphereType_Fisheye, textureFov);
 		result->setRadius(params.radius_);
 		result->setOneMinusOblateness(params.oneMinusOblateness_);
-		result->setResolution(params.stacks_, params.slices_);
+		result->setResolution(params.slices_, params.stacks_);
 		result->setOrientInside(params.orientInside_);
 		result->setFlipTexture(params.flipTexture_);
 		return result;
@@ -401,7 +685,7 @@ public:
 			new StelGeometrySphere(StelGeometrySphere::SphereType_Unlit);
 		result->setRadius(params.radius_);
 		result->setOneMinusOblateness(params.oneMinusOblateness_);
-		result->setResolution(params.stacks_, params.slices_);
+		result->setResolution(params.slices_, params.stacks_);
 		result->setOrientInside(params.orientInside_);
 		result->setFlipTexture(params.flipTexture_);
 		return result;
@@ -425,38 +709,62 @@ public:
 			new StelGeometrySphere(StelGeometrySphere::SphereType_Lit, -100.0f, light);
 		result->setRadius(params.radius_);
 		result->setOneMinusOblateness(params.oneMinusOblateness_);
-		result->setResolution(params.stacks_, params.slices_);
+		result->setResolution(params.slices_, params.stacks_);
 		result->setOrientInside(params.orientInside_);
 		result->setFlipTexture(params.flipTexture_);
 		return result;
 	}
 
-	//! Build a ring (e.g. planet's rings).
+	//! Build a flat texture mapped ring with 3D coordinates (e.g. for planet's rings)
 	//!
-	//! The ring is a circular grid formed by rowIndexBuffers.size()
-	//! rows/circles (each a single triangle strip), and slices columns.
+	//! (Note that the parameters refer to RingParams parameters)
 	//!
-	//! That is, empty index buffers must be provided for each row,
-	//! and the row count depends on how many index buffers are provided.
-	//! as well as an empty vertex buffer.
+	//! The ring is a disk with a radius specified by the outerRadius parameter 
+	//! , with a circular hole in center that has radius set by
+	//! the innerRadius parameter. The ring is subdivided into multiple concentric loops,
+	//! and radially into multiple slices.
 	//!
-	//! @param vertices        Vertex buffer to store vertices of the ring.
-	//!                        Indices in rowIndexBuffers will point to 
-	//!                        vertices in this buffer.
-	//!                        Must be empty.
-	//! @param rowIndexBuffers Index buffers to store rows (circles) of the ring.
-	//!                        The number of rows generated is 
-	//!                        rowIndexBuffers.size(). At least 1 index buffer
-	//!                        must be provided, and all of them must be empty.
-	//! @param rMin            Inner radius of the ring. Must be at least zero.
-	//! @param rMax            Outer radius of the ring. Must be greater than rMin.
-	//! @param slices          Number of colums in each row, i.e. how "fine" the ring is.
-	//!                        5 will form a pentagon, 6 a hexagon, etc.
-	//!                        Must be at least 3.
-	//! @param flipFaces       Should the faces be flipped to face the other side?
-	//!                        (to avoid culling them if viewed from the wrong side).
-	void buildRing
-		(StelVertexBuffer<VertexP3T2>* vertices, QVector<StelIndexBuffer*>& rowIndexBuffers,
-		 const float rMin, const float rMax, int slices, bool flipFaces = false);
+	//! Orientation of the ring's faces can be flipped by the flipFaces parameter.
+	//!
+	//! The offset parameter is an offset that is added to positions of all vertices 
+	//! in the ring.
+	//! 
+	//! @see RingParams
+	StelGeometryRing* buildRingTextured
+		(const RingParams& params, const Vec3f offset = Vec3f(0.0f, 0.0f, 0.0f))
+	{
+		StelGeometryRing* result = new StelGeometryRing(StelGeometryRing::RingType_Textured);
+		result->setInnerOuterRadius(params.innerRadius_, params.outerRadius_);
+		result->setResolution(params.slices_, params.loops_);
+		result->setFlipFaces(params.flipFaces_);
+		result->setOffset(offset);
+		return result;
+	}
+
+	//! Build a 2D ring without texture mapping.
+	//!
+	//! (Note that the parameters refer to RingParams parameters)
+	//!
+	//! The ring is a disk with a radius specified by the outerRadius parameter 
+	//! , with a circular hole in center that has radius set by
+	//! the innerRadius parameter. The ring is subdivided into multiple concentric loops,
+	//! and radially into multiple slices.
+	//!
+	//! Orientation of the ring's faces can be flipped by the flipFaces parameter.
+	//!
+	//! The offset parameter is an offset that is added to positions of all vertices 
+	//! in the ring.
+	//! 
+	//! @see RingParams
+	StelGeometryRing* buildRing2D
+		(const RingParams& params, const Vec2f offset = Vec2f(0.0f, 0.0f))
+	{
+		StelGeometryRing* result = new StelGeometryRing(StelGeometryRing::RingType_Plain2D);
+		result->setInnerOuterRadius(params.innerRadius_, params.outerRadius_);
+		result->setResolution(params.slices_, params.loops_);
+		result->setFlipFaces(params.flipFaces_);
+		result->setOffset(Vec3f(offset[0], offset[1], 0.0f));
+		return result;
+	}
 };
 #endif // _STELGEOMETRYBUILDER_HPP_

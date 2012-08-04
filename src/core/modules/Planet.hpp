@@ -91,36 +91,8 @@ private:
 	const double radiusMax;
 	StelTextureSP tex;
 
-	//! Cached vertices of the ring.
-	StelVertexBuffer<VertexP3T2>* ringVertices;
-	//! Index buffers forming triangle strips for every "row" (circle) of the ring,
-	//! pointing to vertices in ringVertices.
-	QVector<StelIndexBuffer*> ringRows;
-
-
-	//! Value of the stacks parameter at the last updateGraphics call.
-	//! Used to cache vertex/index buffers.
-	int cachedStacks;
-
-	//! Value of the slices parameter at the last updateGraphics call.
-	//! Used to cache vertex/index buffers.
-	int cachedSlices;
-
-	//! Value of the flipFaces parameter at the last updateGraphics call.
-	//! Used to cache vertex/index buffers.
-	bool cachedFlipFaces;
-
-	//! Update ring vertex and index buffer.
-	//!
-	//! Checks if ring parameters have changed. If yes, it regenerates the buffers.
-	//! Otherwise it keeps the buffers unchanged.
-	//!
-	//! @param renderer  Renderer to construct vertex/index buffers.
-	//! @param stacks    Number of stacks/rows/circles of the ring.
-	//! @param slices    Number of slices of the ring (i.e. how "fine" the ring is).
-	//! @param flipFaces Determines if the ring's faces should be flipped to face the other side.
-	//!                  Depends on whether we're observing the ring from above or below.
-	void updateGraphics(StelRenderer* renderer, int stacks, int slices, bool flipFaces);
+	//! Graphics representation of the ring.
+	class StelGeometryRing* ring;
 };
 
 
